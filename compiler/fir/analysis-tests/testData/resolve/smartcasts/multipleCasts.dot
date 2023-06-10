@@ -61,9 +61,9 @@ digraph multipleCasts_kt {
             color=blue
             16 [label="Enter block"];
             17 [label="Function call: R|/getAny|()" style="filled" fillcolor=yellow];
-            18 [label="Variable declaration: lval a: R|kotlin/Any?|"];
+            18 [label="Variable declaration: lkonst a: R|kotlin/Any?|"];
             19 [label="Function call: R|/getAny|()" style="filled" fillcolor=yellow];
-            20 [label="Variable declaration: lval b: R|kotlin/Any?|"];
+            20 [label="Variable declaration: lkonst b: R|kotlin/Any?|"];
             21 [label="Access variable R|<local>/a|"];
             22 [label="Type operator: (R|<local>/a| as R|A|)"];
             23 [label="Access variable R|<local>/a|"];
@@ -103,9 +103,9 @@ digraph multipleCasts_kt {
             color=blue
             34 [label="Enter block"];
             35 [label="Function call: R|/getAny|()" style="filled" fillcolor=yellow];
-            36 [label="Variable declaration: lval a: R|kotlin/Any?|"];
+            36 [label="Variable declaration: lkonst a: R|kotlin/Any?|"];
             37 [label="Function call: R|/getAny|()" style="filled" fillcolor=yellow];
-            38 [label="Variable declaration: lval b: R|kotlin/Any?|"];
+            38 [label="Variable declaration: lkonst b: R|kotlin/Any?|"];
             subgraph cluster_10 {
                 color=blue
                 39 [label="Enter when"];

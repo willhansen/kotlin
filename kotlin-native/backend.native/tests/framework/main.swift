@@ -32,7 +32,7 @@ func assertEquals<T: Equatable>(actual: T, expected: T,
                                 _ message: String = "Assertion failed:",
                                 file: String = #file, line: Int = #line) throws {
     if (actual != expected) {
-        try throwAssertFailed(message: message + " Expected value: \(expected), but got: \(actual)",
+        try throwAssertFailed(message: message + " Expected konstue: \(expected), but got: \(actual)",
                 file: file, line: line)
     }
 }
@@ -41,7 +41,7 @@ func assertSame(actual: AnyObject?, expected: AnyObject?,
                 _ message: String = "Assertion failed:",
                 file: String = #file, line: Int = #line) throws {
     if (actual !== expected) {
-        try throwAssertFailed(message: message + " Expected value: \(expected), but got: \(actual)",
+        try throwAssertFailed(message: message + " Expected konstue: \(expected), but got: \(actual)",
                 file: file, line: line)
     }
 }
@@ -53,29 +53,29 @@ func assertEquals<T: Equatable>(actual: [T], expected: [T],
     try assertTrue(actual.elementsEqual(expected), "Arrays elements are not equal", file: file, line: line)
 }
 
-func assertTrue(_ value: Bool,
+func assertTrue(_ konstue: Bool,
                 _ message: String = "Assertion failed:",
                 file: String = #file, line: Int = #line) throws {
-    if (value != true) {
-        try throwAssertFailed(message: message + " Expected value to be TRUE, but got: \(value)",
+    if (konstue != true) {
+        try throwAssertFailed(message: message + " Expected konstue to be TRUE, but got: \(konstue)",
                 file: file, line: line)
     }
 }
 
-func assertFalse(_ value: Bool,
+func assertFalse(_ konstue: Bool,
                  _ message: String = "Assertion failed:",
                  file: String = #file, line: Int = #line) throws {
-    if (value != false) {
-        try throwAssertFailed(message: message + " Expected value to be FALSE, but got: \(value)",
+    if (konstue != false) {
+        try throwAssertFailed(message: message + " Expected konstue to be FALSE, but got: \(konstue)",
                 file: file, line: line)
     }
 }
 
-func assertNil(_ value: Any?,
+func assertNil(_ konstue: Any?,
                  _ message: String = "Assertion failed:",
                  file: String = #file, line: Int = #line) throws {
-    if (value != nil) {
-        try throwAssertFailed(message: message + " Expected value to be nil, but got: \(value!)",
+    if (konstue != nil) {
+        try throwAssertFailed(message: message + " Expected konstue to be nil, but got: \(konstue!)",
                 file: file, line: line)
     }
 }

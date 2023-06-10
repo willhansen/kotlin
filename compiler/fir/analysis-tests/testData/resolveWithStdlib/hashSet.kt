@@ -1,6 +1,6 @@
 import java.util.HashSet
 
-val a: MutableSet<String>? = HashSet()
+konst a: MutableSet<String>? = HashSet()
 
 var b: MutableSet<String>? = null
     set(_) {

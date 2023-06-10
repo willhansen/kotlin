@@ -13,10 +13,10 @@ package kotlinx.metadata
  * (see `KmType.annotations` and `KmTypeParameter.annotations` JVM extensions)
  *
  * @param className the fully qualified name of the annotation class
- * @param arguments explicitly specified arguments to the annotation; does not include default values for annotation parameters
+ * @param arguments explicitly specified arguments to the annotation; does not include default konstues for annotation parameters
  *                  (specified in the annotation class declaration)
  */
-class KmAnnotation(val className: ClassName, val arguments: Map<String, KmAnnotationArgument>) {
+class KmAnnotation(konst className: ClassName, konst arguments: Map<String, KmAnnotationArgument>) {
     override fun equals(other: Any?): Boolean =
         this === other || other is KmAnnotation && className == other.className && arguments == other.arguments
 
@@ -24,7 +24,7 @@ class KmAnnotation(val className: ClassName, val arguments: Map<String, KmAnnota
     override fun hashCode(): Int = 31 * className.hashCode() + arguments.hashCode()
 
     override fun toString(): String {
-        val args = arguments.toList().joinToString { (k, v) -> "$k = $v" }
+        konst args = arguments.toList().joinToString { (k, v) -> "$k = $v" }
         return "@$className($args)"
     }
 }
@@ -35,56 +35,56 @@ class KmAnnotation(val className: ClassName, val arguments: Map<String, KmAnnota
 @Suppress("IncorrectFormatting") // one-line KDoc
 sealed class KmAnnotationArgument {
     /**
-     * A kind of annotation argument, whose value is directly accessible via [value].
+     * A kind of annotation argument, whose konstue is directly accessible via [konstue].
      * This is possible for annotation arguments of primitive types, unsigned types, and strings.
      *
-     * For example, in `@Foo("bar")`, argument of `Foo` is a [StringValue] with [value] equal to `bar`.
+     * For example, in `@Foo("bar")`, argument of `Foo` is a [StringValue] with [konstue] equal to `bar`.
      *
-     * @param T the type of the value of this argument
+     * @param T the type of the konstue of this argument
      */
     sealed class LiteralValue<out T : Any> : KmAnnotationArgument() {
         /**
-         * The value of this argument.
+         * The konstue of this argument.
          */
-        abstract val value: T
+        abstract konst konstue: T
 
         // final modifier prevents generation of data class-like .toString() in inheritors
         // Java reflection instead of Kotlin reflection to avoid (probably small) overhead of mapping Kotlin/Java names
         final override fun toString(): String =
-            "${this::class.java.simpleName}(${if (this is StringValue) "\"$value\"" else value.toString()})"
+            "${this::class.java.simpleName}(${if (this is StringValue) "\"$konstue\"" else konstue.toString()})"
     }
 
-    // For all inheritors of LiteralValue: KDoc is automatically copied from base property `value`
+    // For all inheritors of LiteralValue: KDoc is automatically copied from base property `konstue`
     // to the overridden one. However, it does not do this with classes, and we do not have `@inheritdoc` :(
 
     /** An annotation argument with a [Byte] type. */
-    data class ByteValue(override val value: Byte) : LiteralValue<Byte>()
+    data class ByteValue(override konst konstue: Byte) : LiteralValue<Byte>()
     /** An annotation argument with a [Char] type. */
-    data class CharValue(override val value: Char) : LiteralValue<Char>()
+    data class CharValue(override konst konstue: Char) : LiteralValue<Char>()
     /** An annotation argument with a [Short] type. */
-    data class ShortValue(override val value: Short) : LiteralValue<Short>()
+    data class ShortValue(override konst konstue: Short) : LiteralValue<Short>()
     /** An annotation argument with a [Int] type. */
-    data class IntValue(override val value: Int) : LiteralValue<Int>()
+    data class IntValue(override konst konstue: Int) : LiteralValue<Int>()
     /** An annotation argument with a [Long] type. */
-    data class LongValue(override val value: Long) : LiteralValue<Long>()
+    data class LongValue(override konst konstue: Long) : LiteralValue<Long>()
     /** An annotation argument with a [Float] type. */
-    data class FloatValue(override val value: Float) : LiteralValue<Float>()
+    data class FloatValue(override konst konstue: Float) : LiteralValue<Float>()
     /** An annotation argument with a [Double] type. */
-    data class DoubleValue(override val value: Double) : LiteralValue<Double>()
+    data class DoubleValue(override konst konstue: Double) : LiteralValue<Double>()
     /** An annotation argument with a [Boolean] type. */
-    data class BooleanValue(override val value: Boolean) : LiteralValue<Boolean>()
+    data class BooleanValue(override konst konstue: Boolean) : LiteralValue<Boolean>()
 
     /** An annotation argument with a [UByte] type. */
-    data class UByteValue(override val value: UByte) : LiteralValue<UByte>()
+    data class UByteValue(override konst konstue: UByte) : LiteralValue<UByte>()
     /** An annotation argument with a [UShort] type. */
-    data class UShortValue(override val value: UShort) : LiteralValue<UShort>()
+    data class UShortValue(override konst konstue: UShort) : LiteralValue<UShort>()
     /** An annotation argument with a [UInt] type. */
-    data class UIntValue(override val value: UInt) : LiteralValue<UInt>()
+    data class UIntValue(override konst konstue: UInt) : LiteralValue<UInt>()
     /** An annotation argument with a [ULong] type. */
-    data class ULongValue(override val value: ULong) : LiteralValue<ULong>()
+    data class ULongValue(override konst konstue: ULong) : LiteralValue<ULong>()
 
     /** An annotation argument with a [String] type. */
-    data class StringValue(override val value: String) : LiteralValue<String>()
+    data class StringValue(override konst konstue: String) : LiteralValue<String>()
 
     /**
      * An annotation argument with an enumeration type.
@@ -95,18 +95,18 @@ sealed class KmAnnotationArgument {
      * @property enumClassName FQ name of the enum class
      * @property enumEntryName Name of the enum entry
      */
-    data class EnumValue(val enumClassName: ClassName, val enumEntryName: String) : KmAnnotationArgument() {
+    data class EnumValue(konst enumClassName: ClassName, konst enumEntryName: String) : KmAnnotationArgument() {
         override fun toString(): String = "EnumValue($enumClassName.$enumEntryName)"
     }
 
     /**
-     * An annotation argument which is another annotation value.
+     * An annotation argument which is another annotation konstue.
      *
      * For example, with the following classes:
      * ```
-     * annotation class Bar(val s: String)
+     * annotation class Bar(konst s: String)
      *
-     * annotation class Foo(val b: Bar)
+     * annotation class Foo(konst b: Bar)
      * ```
      * It is possible to apply such annotation: `@Foo(Bar("baz"))`. In this case, argument `Foo.b` is represented by
      * `AnnotationValue` which [annotation] property contains all necessary information: the fact that it is a `Bar` annotation ([KmAnnotation.className])
@@ -114,21 +114,21 @@ sealed class KmAnnotationArgument {
      *
      * @property annotation Annotation instance with all its arguments.
      */
-    data class AnnotationValue(val annotation: KmAnnotation) : KmAnnotationArgument() {
+    data class AnnotationValue(konst annotation: KmAnnotation) : KmAnnotationArgument() {
         override fun toString(): String = "AnnotationValue($annotation)"
     }
 
     /**
-     * An annotation argument with an array type, i.e. several values of one arbitrary type.
+     * An annotation argument with an array type, i.e. several konstues of one arbitrary type.
      *
      * For example, in `@Foo(["a", "b", "c"])` argument of `Foo` is an `ArrayValue` with [elements]
      * being a list of three [StringValue] elements: "a", "b", and "c" (without quotes).
      *
-     * Don't confuse with [ArrayKClassValue], which represents KClass value.
+     * Don't confuse with [ArrayKClassValue], which represents KClass konstue.
      *
      * @property elements Values of elements in the array.
      */
-    data class ArrayValue(val elements: List<KmAnnotationArgument>) : KmAnnotationArgument() {
+    data class ArrayValue(konst elements: List<KmAnnotationArgument>) : KmAnnotationArgument() {
         override fun toString(): String = "ArrayValue($elements)"
     }
 
@@ -147,11 +147,11 @@ sealed class KmAnnotationArgument {
         "Use single-argument constructor instead or ArrayKClassValue",
         level = DeprecationLevel.ERROR
     ) constructor(
-        val className: ClassName,
+        konst className: ClassName,
         @Deprecated(
             "Use ArrayKClassValue instead",
             level = DeprecationLevel.ERROR
-        ) val arrayDimensionCount: Int
+        ) konst arrayDimensionCount: Int
     ) : KmAnnotationArgument() {
         constructor(className: ClassName) : this(className, 0)
 
@@ -174,7 +174,7 @@ sealed class KmAnnotationArgument {
      * [arrayDimensionCount] is the dimension of the array — 1 for `Array<String>::class`, 2 for `Array<Array<String>>::class`, and so on.
      * It is guaranteed to be at least 1.
      *
-     * For platforms other than JVM, the value for [className] is always `kotlin/Any` and [arrayDimensionCount] is always 1.
+     * For platforms other than JVM, the konstue for [className] is always `kotlin/Any` and [arrayDimensionCount] is always 1.
      * This represents untyped `Array::class` expression.
      *
      * See also: https://youtrack.jetbrains.com/issue/KT-31230
@@ -182,12 +182,12 @@ sealed class KmAnnotationArgument {
      * @property className FQ name of the referenced array element type.
      * @property arrayDimensionCount Referenced array dimension.
      */
-    data class ArrayKClassValue(val className: ClassName, val arrayDimensionCount: Int) : KmAnnotationArgument() {
+    data class ArrayKClassValue(konst className: ClassName, konst arrayDimensionCount: Int) : KmAnnotationArgument() {
         init {
             require(arrayDimensionCount > 0) { "ArrayKClassValue must have at least one dimension. For regular X::class argument, use KClassValue." }
         }
 
-        private val stringRepresentation = buildString {
+        private konst stringRepresentation = buildString {
             append("ArrayKClassValue(")
             repeat(arrayDimensionCount) { append("kotlin/Array<") }
             append(className)

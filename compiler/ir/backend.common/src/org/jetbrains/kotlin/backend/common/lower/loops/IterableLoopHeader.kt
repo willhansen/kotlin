@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal class IterableLoopHeader(
-    private val headerInfo: IterableHeaderInfo
+    private konst headerInfo: IterableHeaderInfo
 ) : ForLoopHeader {
-    override val loopInitStatements = listOf(headerInfo.iteratorVariable)
+    override konst loopInitStatements = listOf(headerInfo.iteratorVariable)
 
-    override val consumesLoopVariableComponents = false
+    override konst consumesLoopVariableComponents = false
 
     override fun initializeIteration(
         loopVariable: IrVariable?,
@@ -34,10 +34,10 @@ internal class IterableLoopHeader(
     ): List<IrStatement> =
         with(builder) {
             // loopVariable = iteratorVar.next()
-            val iteratorClass = headerInfo.iteratorVariable.type.getClass()!!
-            val next =
+            konst iteratorClass = headerInfo.iteratorVariable.type.getClass()!!
+            konst next =
                 irCall(iteratorClass.functions.first {
-                    it.name == OperatorNameConventions.NEXT && it.valueParameters.isEmpty()
+                    it.name == OperatorNameConventions.NEXT && it.konstueParameters.isEmpty()
                 }.symbol).apply {
                     dispatchReceiver = irGet(headerInfo.iteratorVariable)
                 }
@@ -53,15 +53,15 @@ internal class IterableLoopHeader(
         //
         //   var iteratorVar = someIterable.iterator()
         //   while (iteratorVar.hasNext()) {
-        //       val loopVar = iteratorVar.next()
+        //       konst loopVar = iteratorVar.next()
         //       // Loop body
         //   }
-        val iteratorClass = headerInfo.iteratorVariable.type.getClass()!!
-        val hasNext =
-            irCall(iteratorClass.functions.first { it.name == OperatorNameConventions.HAS_NEXT && it.valueParameters.isEmpty() }).apply {
+        konst iteratorClass = headerInfo.iteratorVariable.type.getClass()!!
+        konst hasNext =
+            irCall(iteratorClass.functions.first { it.name == OperatorNameConventions.HAS_NEXT && it.konstueParameters.isEmpty() }).apply {
                 dispatchReceiver = irGet(headerInfo.iteratorVariable)
             }
-        val newLoop = IrWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
+        konst newLoop = IrWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
             label = oldLoop.label
             condition = hasNext
             body = newBody

@@ -1,7 +1,7 @@
 import kotlin.random.Random
 
 fun test(): Char {
-    val c: Char
+    konst c: Char
     if (Random.nextBoolean()) {
         c = '1'
     } else {

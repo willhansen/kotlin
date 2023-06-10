@@ -7,4 +7,4 @@ public @interface AnnInterface {
 }
 
 // FILE: Main.kt
-val prop = AnnInterface::javaMethod
+konst prop = AnnInterface::javaMethod

@@ -38,7 +38,7 @@ class FirAnonymousFunctionExpressionBuilder : FirAnnotationContainerBuilder, Fir
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirAnonymousFunctionExpressionBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation>
+    override konst annotations: MutableList<FirAnnotation>
         get() = throw IllegalStateException()
 }
 

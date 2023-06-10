@@ -1,7 +1,7 @@
-sealed class Sealed(val value: String) {
+sealed class Sealed(konst konstue: String) {
     constructor() : this("OK")
 }
 
 class Derived : Sealed()
 
-fun box() = Derived().value
+fun box() = Derived().konstue

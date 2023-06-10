@@ -17,11 +17,11 @@ import kotlin.test.Test
 import kotlin.test.fail
 
 @RunWith(Parameterized::class)
-class IdeaKotlinEntityTest(private val node: KClass<*>, private val clazzName: String) {
+class IdeaKotlinEntityTest(private konst node: KClass<*>, private konst clazzName: String) {
 
     @Test
     fun `test - node is marked as IdeaKotlinEntity`() {
-        val entityAnnotations = node.findIdeaKotlinEntityAnnotations()
+        konst entityAnnotations = node.findIdeaKotlinEntityAnnotations()
 
         if (entityAnnotations.isEmpty())
             fail("Expected class $clazzName to be marked with any ${IdeaKotlinEntity::class.java.simpleName} annotation")

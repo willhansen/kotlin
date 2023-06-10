@@ -33,22 +33,22 @@ fun IdeaKpmProjectContainer(project: IdeaKpmProject): IdeaKpmProjectInstanceCont
  * into [IdeaKpmProjectInstanceContainer].
  */
 sealed interface IdeaKpmProjectContainer<T : Any> : Serializable {
-    val project: T
-    val binaryOrNull: ByteArray?
-    val instanceOrNull: IdeaKpmProject?
+    konst project: T
+    konst binaryOrNull: ByteArray?
+    konst instanceOrNull: IdeaKpmProject?
 }
 
 interface IdeaKpmProjectBinaryContainer : IdeaKpmProjectContainer<ByteArray> {
-    override val instanceOrNull: Nothing? get() = null
-    override val binaryOrNull: ByteArray get() = project
+    override konst instanceOrNull: Nothing? get() = null
+    override konst binaryOrNull: ByteArray get() = project
 }
 
 interface IdeaKpmProjectInstanceContainer : IdeaKpmProjectContainer<IdeaKpmProject> {
-    override val instanceOrNull: IdeaKpmProject get() = project
-    override val binaryOrNull: Nothing? get() = null
+    override konst instanceOrNull: IdeaKpmProject get() = project
+    override konst binaryOrNull: Nothing? get() = null
 }
 
-private data class IdeaKpmProjectBinaryContainerImpl(override val project: ByteArray) : IdeaKpmProjectBinaryContainer {
+private data class IdeaKpmProjectBinaryContainerImpl(override konst project: ByteArray) : IdeaKpmProjectBinaryContainer {
     override fun equals(other: Any?): Boolean {
         if (other === this) return true
         if (other !is IdeaKpmProjectBinaryContainer) return false
@@ -60,14 +60,14 @@ private data class IdeaKpmProjectBinaryContainerImpl(override val project: ByteA
     }
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 private data class IdeaKpmProjectInstanceContainerImpl(
-    override val project: IdeaKpmProject
+    override konst project: IdeaKpmProject
 ) : IdeaKpmProjectInstanceContainer {
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

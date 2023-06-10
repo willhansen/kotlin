@@ -5,7 +5,7 @@ class Inv<T : Any?> {
   // CHECK:
   //   Mangled name: Inv{}x
   //   Public signature: /Inv.x|-8060530855978347579[0]
-  val x: T
+  konst x: T
     // CHECK JVM_IR:
     //   Mangled name: Inv#<get-x>(){}1:0
     //   Public signature: /Inv.x.<get-x>|-8893883356128097563[0]
@@ -25,7 +25,7 @@ class Test_1<TT : Any?> : JavaClass1<TT> {
   // CHECK:
   //   Mangled name: Test_1{}x
   //   Public signature: /Test_1.x|-8060530855978347579[0]
-  val x: TT
+  konst x: TT
     // CHECK JVM_IR:
     //   Mangled name: Test_1#<get-x>(){}1:0
     //   Public signature: /Test_1.x.<get-x>|-8893883356128097563[0]

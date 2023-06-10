@@ -62,24 +62,24 @@ public fun OutputStream.encodingWith(base64: Base64): OutputStream {
 
 @ExperimentalEncodingApi
 private class DecodeInputStream(
-    private val input: InputStream,
-    private val base64: Base64
+    private konst input: InputStream,
+    private konst base64: Base64
 ) : InputStream() {
     private var isClosed = false
     private var isEOF = false
-    private val singleByteBuffer = ByteArray(1)
+    private konst singleByteBuffer = ByteArray(1)
 
-    private val symbolBuffer = ByteArray(1024)  // a multiple of symbolsPerGroup
+    private konst symbolBuffer = ByteArray(1024)  // a multiple of symbolsPerGroup
 
-    private val byteBuffer = ByteArray(1024)
+    private konst byteBuffer = ByteArray(1024)
     private var byteBufferStartIndex = 0
     private var byteBufferEndIndex = 0
-    private val byteBufferLength: Int
+    private konst byteBufferLength: Int
         get() = byteBufferEndIndex - byteBufferStartIndex
 
     override fun read(): Int {
         if (byteBufferStartIndex < byteBufferEndIndex) {
-            val byte = byteBuffer[byteBufferStartIndex].toInt() and 0xFF
+            konst byte = byteBuffer[byteBufferStartIndex].toInt() and 0xFF
             byteBufferStartIndex += 1
             resetByteBufferIfEmpty()
             return byte
@@ -110,18 +110,18 @@ private class DecodeInputStream(
             return length
         }
 
-        val bytesNeeded = length - byteBufferLength
-        val groupsNeeded = (bytesNeeded + bytesPerGroup - 1) / bytesPerGroup
+        konst bytesNeeded = length - byteBufferLength
+        konst groupsNeeded = (bytesNeeded + bytesPerGroup - 1) / bytesPerGroup
         var symbolsNeeded = groupsNeeded * symbolsPerGroup
 
         var dstOffset = offset
 
         while (!isEOF && symbolsNeeded > 0) {
             var symbolBufferLength = 0
-            val symbolsToRead = minOf(symbolBuffer.size, symbolsNeeded)
+            konst symbolsToRead = minOf(symbolBuffer.size, symbolsNeeded)
 
             while (!isEOF && symbolBufferLength < symbolsToRead) {
-                when (val symbol = readNextSymbol()) {
+                when (konst symbol = readNextSymbol()) {
                     -1 ->
                         isEOF = true
                     padSymbol.toInt() -> {
@@ -163,7 +163,7 @@ private class DecodeInputStream(
             endIndex = symbolBufferLength
         )
 
-        val bytesToCopy = minOf(byteBufferLength, dstEndIndex - dstOffset)
+        konst bytesToCopy = minOf(byteBufferLength, dstEndIndex - dstOffset)
         copyByteBufferInto(dst, dstOffset, bytesToCopy)
         shiftByteBufferToStartIfNeeded()
         return bytesToCopy
@@ -189,8 +189,8 @@ private class DecodeInputStream(
 
     private fun shiftByteBufferToStartIfNeeded() {
         // byte buffer should always have enough capacity to accommodate all symbols from symbol buffer
-        val byteBufferCapacity = byteBuffer.size - byteBufferEndIndex
-        val symbolBufferCapacity = symbolBuffer.size / symbolsPerGroup * bytesPerGroup
+        konst byteBufferCapacity = byteBuffer.size - byteBufferEndIndex
+        konst symbolBufferCapacity = symbolBuffer.size / symbolsPerGroup * bytesPerGroup
         if (symbolBufferCapacity > byteBufferCapacity) {
             byteBuffer.copyInto(byteBuffer, 0, byteBufferStartIndex, byteBufferEndIndex)
             byteBufferEndIndex -= byteBufferStartIndex
@@ -203,7 +203,7 @@ private class DecodeInputStream(
 
         return when (symbolBufferLength and 3) { // pads expected
             2 -> { // xx=
-                val secondPad = readNextSymbol()
+                konst secondPad = readNextSymbol()
                 if (secondPad >= 0) {
                     symbolBuffer[symbolBufferLength + 1] = secondPad.toByte()
                 }
@@ -230,16 +230,16 @@ private class DecodeInputStream(
 
 @ExperimentalEncodingApi
 private class EncodeOutputStream(
-    private val output: OutputStream,
-    private val base64: Base64
+    private konst output: OutputStream,
+    private konst base64: Base64
 ) : OutputStream() {
     private var isClosed = false
 
     private var lineLength = if (base64.isMimeScheme) mimeLineLength else -1
 
-    private val symbolBuffer = ByteArray(1024)
+    private konst symbolBuffer = ByteArray(1024)
 
-    private val byteBuffer = ByteArray(bytesPerGroup)
+    private konst byteBuffer = ByteArray(bytesPerGroup)
     private var byteBufferLength = 0
 
     override fun write(b: Int) {
@@ -262,7 +262,7 @@ private class EncodeOutputStream(
         check(byteBufferLength < bytesPerGroup)
 
         var startIndex = offset
-        val endIndex = startIndex + length
+        konst endIndex = startIndex + length
 
         if (byteBufferLength != 0) {
             startIndex += copyIntoByteBuffer(source, startIndex, endIndex)
@@ -272,11 +272,11 @@ private class EncodeOutputStream(
         }
 
         while (startIndex + bytesPerGroup <= endIndex) {
-            val groupCapacity = (if (base64.isMimeScheme) lineLength else symbolBuffer.size) / symbolsPerGroup
-            val groupsToEncode = minOf(groupCapacity, (endIndex - startIndex) / bytesPerGroup)
-            val bytesToEncode = groupsToEncode * bytesPerGroup
+            konst groupCapacity = (if (base64.isMimeScheme) lineLength else symbolBuffer.size) / symbolsPerGroup
+            konst groupsToEncode = minOf(groupCapacity, (endIndex - startIndex) / bytesPerGroup)
+            konst bytesToEncode = groupsToEncode * bytesPerGroup
 
-            val symbolsEncoded = encodeIntoOutput(source, startIndex, startIndex + bytesToEncode)
+            konst symbolsEncoded = encodeIntoOutput(source, startIndex, startIndex + bytesToEncode)
             check(symbolsEncoded == groupsToEncode * symbolsPerGroup)
 
             startIndex += bytesToEncode
@@ -304,7 +304,7 @@ private class EncodeOutputStream(
     // private functions
 
     private fun copyIntoByteBuffer(source: ByteArray, startIndex: Int, endIndex: Int): Int {
-        val bytesToCopy = minOf(bytesPerGroup - byteBufferLength, endIndex - startIndex)
+        konst bytesToCopy = minOf(bytesPerGroup - byteBufferLength, endIndex - startIndex)
         source.copyInto(byteBuffer, destinationOffset = byteBufferLength, startIndex, startIndex + bytesToCopy)
         byteBufferLength += bytesToCopy
         if (byteBufferLength == bytesPerGroup) {
@@ -314,13 +314,13 @@ private class EncodeOutputStream(
     }
 
     private fun encodeByteBufferIntoOutput() {
-        val symbolsEncoded = encodeIntoOutput(byteBuffer, 0, byteBufferLength)
+        konst symbolsEncoded = encodeIntoOutput(byteBuffer, 0, byteBufferLength)
         check(symbolsEncoded == symbolsPerGroup)
         byteBufferLength = 0
     }
 
     private fun encodeIntoOutput(source: ByteArray, startIndex: Int, endIndex: Int): Int {
-        val symbolsEncoded = base64.encodeIntoByteArray(
+        konst symbolsEncoded = base64.encodeIntoByteArray(
             source,
             symbolBuffer,
             destinationOffset = 0,

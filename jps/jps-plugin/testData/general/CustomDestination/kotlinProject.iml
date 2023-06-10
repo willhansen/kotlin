@@ -5,7 +5,7 @@
       <configuration version="3" platform="JVM 1.8" useProjectSettings="false">
         <compilerSettings />
         <compilerArguments>
-          <option name="destination" value="$MODULE_DIR$/customOut/" />
+          <option name="destination" konstue="$MODULE_DIR$/customOut/" />
         </compilerArguments>
       </configuration>
     </facet>

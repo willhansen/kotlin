@@ -17,7 +17,7 @@ expect inline fun <reified T> Array<out T>?.orEmpty(): Array<out T>
 expect inline fun <reified T> Collection<T>.toTypedArray(): Array<T>
 
 @SinceKotlin("1.2")
-expect fun <T> MutableList<T>.fill(value: T): Unit
+expect fun <T> MutableList<T>.fill(konstue: T): Unit
 
 @SinceKotlin("1.2")
 expect fun <T> MutableList<T>.shuffle(): Unit
@@ -31,7 +31,7 @@ expect fun <T> MutableList<T>.sortWith(comparator: Comparator<in T>): Unit
 
 // from Grouping.kt
 public expect fun <T, K> Grouping<T, K>.eachCount(): Map<K, Int>
-// public expect inline fun <T, K> Grouping<T, K>.eachSumOf(valueSelector: (T) -> Int): Map<K, Int>
+// public expect inline fun <T, K> Grouping<T, K>.eachSumOf(konstueSelector: (T) -> Int): Map<K, Int>
 
 internal expect fun copyToArrayImpl(collection: Collection<*>): Array<Any?>
 

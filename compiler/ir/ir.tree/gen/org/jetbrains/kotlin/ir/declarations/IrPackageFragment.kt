@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.name.FqName
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.packageFragment]
  */
 abstract class IrPackageFragment : IrElementBase(), IrDeclarationContainer, IrSymbolOwner {
-    abstract override val symbol: IrPackageFragmentSymbol
+    abstract override konst symbol: IrPackageFragmentSymbol
 
     @ObsoleteDescriptorBasedAPI
-    abstract val packageFragmentDescriptor: PackageFragmentDescriptor
+    abstract konst packageFragmentDescriptor: PackageFragmentDescriptor
 
     abstract var packageFqName: FqName
 
@@ -34,7 +34,7 @@ abstract class IrPackageFragment : IrElementBase(), IrDeclarationContainer, IrSy
     )
     var fqName: FqName
         get() = packageFqName
-        set(value) {
-            packageFqName = value
+        set(konstue) {
+            packageFqName = konstue
         }
 }

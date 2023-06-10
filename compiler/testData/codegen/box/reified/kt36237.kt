@@ -1,10 +1,10 @@
-inline fun <reified P> cast(value: Any): P =
-    cast0<Int, P>(value)
+inline fun <reified P> cast(konstue: Any): P =
+    cast0<Int, P>(konstue)
 
 inline fun <reified P, reified Z> cast0(
-    value: Any,
+    konstue: Any,
     func: (Any) -> Z = { it as Z }
-): Z = func(value)
+): Z = func(konstue)
 
 fun box(): String =
     cast<String>("OK")

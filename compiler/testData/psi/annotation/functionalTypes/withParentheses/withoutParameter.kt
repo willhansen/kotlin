@@ -1,25 +1,25 @@
 // Issue: KT-31734
 
-val x: (@Foo() () -> Unit) get() = {}
+konst x: (@Foo() () -> Unit) get() = {}
 
-val x: @Foo() (() -> Unit) get() = {}
+konst x: @Foo() (() -> Unit) get() = {}
 
-val x: @Foo() () -> Unit get() = {}
+konst x: @Foo() () -> Unit get() = {}
 
-val x: Comparable<@Fo() @Bar(10) @Foo() () -> Unit> get() = {}
+konst x: Comparable<@Fo() @Bar(10) @Foo() () -> Unit> get() = {}
 
-val x: Any = {} as @Foo() () -> Unit
+konst x: Any = {} as @Foo() () -> Unit
 
 fun foo(x: (@Foo() () -> Unit)) = x
 
 fun foo(x: @Foo(10) @Bar() () -> Unit = { x: Int -> x }) {}
 
 fun foo() {
-    val x: @Foo() @Bar() () -> Unit = {}
+    konst x: @Foo() @Bar() () -> Unit = {}
 }
 
 fun foo() {
-    val x = { x: @Foo() () -> () -> Unit -> x }
+    konst x = { x: @Foo() () -> () -> Unit -> x }
 }
 
 abstract class A {
@@ -32,7 +32,7 @@ fun foo(): @Foo.Bar() () -> Unit = {}
 
 fun foo(): () -> @Foo.Bar() () -> Unit = {}
 
-val x: Any get() = fun(): @Foo() () -> Unit {}
+konst x: Any get() = fun(): @Foo() () -> Unit {}
 
 fun foo() {
     var x: (@Foo() ()->()->Unit) -> Unit = {}

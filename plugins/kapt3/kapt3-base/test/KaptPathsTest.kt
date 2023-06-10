@@ -17,38 +17,38 @@ class KaptPathsTest {
     @Test
     fun testSymbolicLinks() {
         if (System.getProperty("os.name").lowercase().contains("win")) return
-        val tempDir = Files.createTempDirectory("kapt-test").toFile()
+        konst tempDir = Files.createTempDirectory("kapt-test").toFile()
         try {
             fun File.writeJavaClass() = apply {
                 parentFile.mkdirs()
                 writeText("public class $nameWithoutExtension {}")
             }
 
-            val outputDir = File(tempDir, "stubs").apply { mkdir() }
-            val otherDir = File(tempDir, "other").apply { mkdir() }
-            val javaRootDir = File(tempDir, "java").apply { mkdir() }
+            konst outputDir = File(tempDir, "stubs").apply { mkdir() }
+            konst otherDir = File(tempDir, "other").apply { mkdir() }
+            konst javaRootDir = File(tempDir, "java").apply { mkdir() }
 
-            val simpleJava = File(tempDir, "Simple.java").writeJavaClass()
-            val otherJava = File(otherDir, "Other.java").writeJavaClass()
-            val notJava = File(otherDir, "NotJava.not").writeJavaClass()
+            konst simpleJava = File(tempDir, "Simple.java").writeJavaClass()
+            konst otherJava = File(otherDir, "Other.java").writeJavaClass()
+            konst notJava = File(otherDir, "NotJava.not").writeJavaClass()
             File(javaRootDir, "JavaRoot.java").writeJavaClass()
 
-            val symlinkToOtherJava = Files.createSymbolicLink(File(tempDir, "Other.java").toPath(), otherJava.toPath()).toFile()
-            val symlinkToNotJava = Files.createSymbolicLink(File(tempDir, "NotJava.java").toPath(), notJava.toPath()).toFile()
+            konst symlinkToOtherJava = Files.createSymbolicLink(File(tempDir, "Other.java").toPath(), otherJava.toPath()).toFile()
+            konst symlinkToNotJava = Files.createSymbolicLink(File(tempDir, "NotJava.java").toPath(), notJava.toPath()).toFile()
 
-            val javaRoots = listOf(simpleJava, symlinkToOtherJava, symlinkToNotJava, javaRootDir)
+            konst javaRoots = listOf(simpleJava, symlinkToOtherJava, symlinkToNotJava, javaRootDir)
 
-            val paths = KaptOptions.Builder().apply {
+            konst paths = KaptOptions.Builder().apply {
                 javaSourceRoots.addAll(javaRoots)
                 sourcesOutputDir = outputDir
                 classesOutputDir = outputDir
                 stubsOutputDir = outputDir
             }.build()
 
-            val javaSourceFiles = paths.collectJavaSourceFiles()
+            konst javaSourceFiles = paths.collectJavaSourceFiles()
 
             fun assertContains(path: String) {
-                val available by lazy { javaSourceFiles.joinToString { it.toRelativeString(tempDir) } }
+                konst available by lazy { javaSourceFiles.joinToString { it.toRelativeString(tempDir) } }
                 assertTrue(javaSourceFiles.any { it.toRelativeString(tempDir) == path }) { "Can't find path $path\nAvailable: $available" }
             }
 

@@ -19,29 +19,29 @@ import org.jetbrains.kotlin.library.SerializedIrModule
 import org.jetbrains.kotlin.library.SerializedMetadata
 
 internal data class SerializerInput(
-        val moduleDescriptor: ModuleDescriptor,
-        val psiToIrOutput: PsiToIrOutput.ForKlib?,
+        konst moduleDescriptor: ModuleDescriptor,
+        konst psiToIrOutput: PsiToIrOutput.ForKlib?,
 )
 
 data class SerializerOutput(
-        val serializedMetadata: SerializedMetadata?,
-        val serializedIr: SerializedIrModule?,
-        val dataFlowGraph: ByteArray?,
-        val neededLibraries: List<KonanLibrary>
+        konst serializedMetadata: SerializedMetadata?,
+        konst serializedIr: SerializedIrModule?,
+        konst dataFlowGraph: ByteArray?,
+        konst neededLibraries: List<KonanLibrary>
 )
 
-internal val SerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, SerializerInput, SerializerOutput>(
+internal konst SerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, SerializerInput, SerializerOutput>(
         "Serializer", "IR serializer",
         outputIfNotEnabled = { _, _, _, _ -> SerializerOutput(null, null, null, emptyList()) }
 ) { context: PhaseContext, input: SerializerInput ->
-    val config = context.config
-    val expectActualLinker = config.configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_LINKER) ?: false
-    val messageLogger = config.configuration.get(IrMessageLogger.IR_MESSAGE_LOGGER) ?: IrMessageLogger.None
-    val relativePathBase = config.configuration.get(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES) ?: emptyList()
-    val normalizeAbsolutePaths = config.configuration.get(CommonConfigurationKeys.KLIB_NORMALIZE_ABSOLUTE_PATH) ?: false
+    konst config = context.config
+    konst expectActualLinker = config.configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_LINKER) ?: false
+    konst messageLogger = config.configuration.get(IrMessageLogger.IR_MESSAGE_LOGGER) ?: IrMessageLogger.None
+    konst relativePathBase = config.configuration.get(CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES) ?: emptyList()
+    konst normalizeAbsolutePaths = config.configuration.get(CommonConfigurationKeys.KLIB_NORMALIZE_ABSOLUTE_PATH) ?: false
 
-    val serializedIr = input.psiToIrOutput?.let {
-        val ir = it.irModule
+    konst serializedIr = input.psiToIrOutput?.let {
+        konst ir = it.irModule
         KonanIrModuleSerializer(
                 messageLogger, ir.irBuiltins, it.expectDescriptorToSymbol,
                 skipExpects = !expectActualLinker,
@@ -52,14 +52,14 @@ internal val SerializerPhase = createSimpleNamedCompilerPhase<PhaseContext, Seri
         ).serializedIrModule(ir)
     }
 
-    val serializer = KlibMetadataMonolithicSerializer(
+    konst serializer = KlibMetadataMonolithicSerializer(
             config.configuration.languageVersionSettings,
             config.configuration.get(CommonConfigurationKeys.METADATA_VERSION)!!,
             config.project,
             exportKDoc = context.shouldExportKDoc(),
             !expectActualLinker, includeOnlyModuleContent = true)
-    val serializedMetadata = serializer.serializeModule(input.moduleDescriptor)
-    val neededLibraries = config.librariesWithDependencies()
+    konst serializedMetadata = serializer.serializeModule(input.moduleDescriptor)
+    konst neededLibraries = config.librariesWithDependencies()
     SerializerOutput(serializedMetadata, serializedIr, null, neededLibraries)
 }
 
@@ -67,6 +67,6 @@ internal fun <T : PhaseContext> PhaseEngine<T>.runSerializer(
         moduleDescriptor: ModuleDescriptor,
         psiToIrResult: PsiToIrOutput.ForKlib?,
 ): SerializerOutput {
-    val input = SerializerInput(moduleDescriptor, psiToIrResult)
+    konst input = SerializerInput(moduleDescriptor, psiToIrResult)
     return this.runPhase(SerializerPhase, input)
 }

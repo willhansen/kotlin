@@ -6,7 +6,7 @@ private object EmptyList : List<Nothing> {
     override fun indexOf(element: Nothing): Int = -2
     override fun lastIndexOf(element: Nothing): Int = -2
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
 
     override fun iterator(): Iterator<Nothing> = throw UnsupportedOperationException()
@@ -17,13 +17,13 @@ private object EmptyList : List<Nothing> {
 }
 
 fun box(): String {
-    val n = EmptyList as List<String>
+    konst n = EmptyList as List<String>
 
     if (n.contains("")) return "fail 1"
     if (n.indexOf("") != -1) return "fail 2"
     if (n.lastIndexOf("") != -1) return "fail 3"
 
-    val nullAny = EmptyList as List<Any?>
+    konst nullAny = EmptyList as List<Any?>
 
     if (nullAny.contains(null)) return "fail 4"
     if (nullAny.indexOf(null) != -1) return "fail 5"

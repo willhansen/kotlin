@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.fir.types.*
 
 object FirDefinitelyNotNullableChecker : FirTypeRefChecker() {
     override fun check(typeRef: FirTypeRef, context: CheckerContext, reporter: DiagnosticReporter) {
-        val intersection = (typeRef as? FirResolvedTypeRef)?.delegatedTypeRef as? FirIntersectionTypeRef ?: return
+        konst intersection = (typeRef as? FirResolvedTypeRef)?.delegatedTypeRef as? FirIntersectionTypeRef ?: return
 
         if (intersection.isMarkedNullable) {
             reporter.reportOn(intersection.source, FirErrors.NULLABLE_ON_DEFINITELY_NOT_NULLABLE, context)

@@ -15,5 +15,5 @@ compiler/testData/multiplatform/incorrectImplInClass/jvm.kt:4:16: error: actual 
     actual fun nonPlatformFun() {}
                ^
 compiler/testData/multiplatform/incorrectImplInClass/jvm.kt:6:16: error: actual property 'nonPlatformVal' has no corresponding expected declaration
-    actual val nonPlatformVal = ""
+    actual konst nonPlatformVal = ""
                ^

@@ -5,7 +5,7 @@ public fun foo(/*0*/ x: kotlin.collections.MutableList<kotlin.String>, /*1*/ y: 
 
 public abstract class A : kotlin.collections.MutableList<kotlin.String> {
     public constructor A()
-    public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public abstract override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: kotlin.String): kotlin.Unit
     public abstract override /*1*/ /*fake_override*/ fun add(/*0*/ element: kotlin.String): kotlin.Boolean
     public abstract override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<kotlin.String>): kotlin.Boolean

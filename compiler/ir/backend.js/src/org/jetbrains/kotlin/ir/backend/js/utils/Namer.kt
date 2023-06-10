@@ -8,36 +8,36 @@ package org.jetbrains.kotlin.ir.backend.js.utils
 import org.jetbrains.kotlin.js.backend.ast.JsNameRef
 
 object Namer {
-    val CALL_FUNCTION = "call"
-    val BIND_FUNCTION = "bind"
+    konst CALL_FUNCTION = "call"
+    konst BIND_FUNCTION = "bind"
 
-    val SLICE_FUNCTION = "slice"
+    konst SLICE_FUNCTION = "slice"
 
-    val OUTER_NAME = "\$outer"
-    val UNREACHABLE_NAME = "\$unreachable"
-    val THROWABLE_CONSTRUCTOR = "\$throwableCtor"
+    konst OUTER_NAME = "\$outer"
+    konst UNREACHABLE_NAME = "\$unreachable"
+    konst THROWABLE_CONSTRUCTOR = "\$throwableCtor"
 
-    val DELEGATE = "\$delegate"
+    konst DELEGATE = "\$delegate"
 
-    val IMPLICIT_RECEIVER_NAME = "this"
-    val SYNTHETIC_RECEIVER_NAME = "\$this"
-    val ES6_BOX_PARAMETER_NAME = "\$box"
+    konst IMPLICIT_RECEIVER_NAME = "this"
+    konst SYNTHETIC_RECEIVER_NAME = "\$this"
+    konst ES6_BOX_PARAMETER_NAME = "\$box"
 
-    val ARGUMENTS = JsNameRef("arguments")
+    konst ARGUMENTS = JsNameRef("arguments")
 
-    val PROTOTYPE_NAME = "prototype"
-    val CONSTRUCTOR_NAME = "constructor"
+    konst PROTOTYPE_NAME = "prototype"
+    konst CONSTRUCTOR_NAME = "constructor"
 
-    val JS_ERROR = JsNameRef("Error")
+    konst JS_ERROR = JsNameRef("Error")
 
-    val METADATA = "\$metadata\$"
+    konst METADATA = "\$metadata\$"
 
-    val KCALLABLE_GET_NAME = "<get-name>"
-    val KCALLABLE_NAME = "callableName"
-    val KPROPERTY_GET = "get"
-    val KPROPERTY_SET = "set"
-    val KCALLABLE_CACHE_SUFFIX = "\$cache"
-    const val KCALLABLE_ARITY = "\$arity"
+    konst KCALLABLE_GET_NAME = "<get-name>"
+    konst KCALLABLE_NAME = "callableName"
+    konst KPROPERTY_GET = "get"
+    konst KPROPERTY_SET = "set"
+    konst KCALLABLE_CACHE_SUFFIX = "\$cache"
+    const konst KCALLABLE_ARITY = "\$arity"
 
-    const val SHARED_BOX_V = "_v"
+    const konst SHARED_BOX_V = "_v"
 }

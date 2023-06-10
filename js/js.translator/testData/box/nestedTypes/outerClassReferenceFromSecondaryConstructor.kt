@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1291
 package foo
 
-class A(val x: Int) {
+class A(konst x: Int) {
     inner class B() {
         inner class C() {
             var result = 0

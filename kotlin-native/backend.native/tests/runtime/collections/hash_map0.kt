@@ -17,23 +17,23 @@ fun assertFalse(cond: Boolean) {
         println("FAIL")
 }
 
-fun assertEquals(value1: Any?, value2: Any?) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
-fun assertNotEquals(value1: Any?, value2: Any?) {
-    if (value1 == value2)
+fun assertNotEquals(konstue1: Any?, konstue2: Any?) {
+    if (konstue1 == konstue2)
         println("FAIL")
 }
 
-fun assertEquals(value1: Int, value2: Int) {
-    if (value1 != value2)
+fun assertEquals(konstue1: Int, konstue2: Int) {
+    if (konstue1 != konstue2)
         println("FAIL")
 }
 
 fun testBasic() {
-    val m = HashMap<String, String>()
+    konst m = HashMap<String, String>()
     assertTrue(m.isEmpty())
     assertEquals(0, m.size)
 
@@ -95,51 +95,51 @@ fun testBasic() {
 }
 
 fun testEquals() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
     assertTrue(m == expected)
     assertTrue(m == mapOf("b" to "2", "c" to "3", "a" to "1"))  // order does not matter
     assertFalse(m == mapOf("a" to "1", "b" to "2", "c" to "4"))
     assertFalse(m == mapOf("a" to "1", "b" to "2", "c" to "5"))
     assertFalse(m == mapOf("a" to "1", "b" to "2"))
     assertEquals(m.keys, expected.keys)
-    assertEquals(m.values.toList(), expected.values.toList())
+    assertEquals(m.konstues.toList(), expected.konstues.toList())
     assertEquals(m.entries, expected.entries)
 }
 
 fun testHashCode() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
     assertEquals(expected.hashCode(), m.hashCode())
     assertEquals(expected.entries.hashCode(), m.entries.hashCode())
     assertEquals(expected.keys.hashCode(), m.keys.hashCode())
 }
 
 fun testToString() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
     assertEquals(expected.toString(), m.toString())
     assertEquals(expected.entries.toString(), m.entries.toString())
     assertEquals(expected.keys.toString(), m.keys.toString())
-    assertEquals(expected.values.toString(), m.values.toString())
+    assertEquals(expected.konstues.toString(), m.konstues.toString())
 }
 
 fun testPutEntry() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
-    val e = expected.entries.iterator().next() as MutableMap.MutableEntry<String, String>
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
+    konst e = expected.entries.iterator().next() as MutableMap.MutableEntry<String, String>
     assertTrue(m.entries.contains(e))
     assertTrue(m.entries.remove(e))
     assertTrue(mapOf("b" to "2", "c" to "3") == m)
-    assertEquals(null, m.put(e.key, e.value))
+    assertEquals(null, m.put(e.key, e.konstue))
     assertTrue(expected == m)
-    assertEquals(e.value, m.put(e.key, e.value))
+    assertEquals(e.konstue, m.put(e.key, e.konstue))
     assertTrue(expected == m)
 }
 
 fun testRemoveAllEntries() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
     assertFalse(m.entries.removeAll(mapOf("a" to "2", "b" to "3", "c" to "4").entries))
     assertEquals(expected, m)
     assertTrue(m.entries.removeAll(mapOf("b" to "22", "c" to "3", "d" to "4").entries))
@@ -148,8 +148,8 @@ fun testRemoveAllEntries() {
 }
 
 fun testRetainAllEntries() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
     assertFalse(m.entries.retainAll(expected.entries))
     assertEquals(expected, m)
     assertTrue(m.entries.retainAll(mapOf("b" to "22", "c" to "3", "d" to "4").entries))
@@ -157,47 +157,47 @@ fun testRetainAllEntries() {
 }
 
 fun testContainsAllValues() {
-    val m = HashMap(mapOf("a" to "1", "b" to "2", "c" to "3"))
-    assertTrue(m.values.containsAll(listOf("1", "2")))
-    assertTrue(m.values.containsAll(listOf("1", "2", "3")))
-    assertFalse(m.values.containsAll(listOf("1", "2", "3", "4")))
-    assertFalse(m.values.containsAll(listOf("2", "3", "4")))
+    konst m = HashMap(mapOf("a" to "1", "b" to "2", "c" to "3"))
+    assertTrue(m.konstues.containsAll(listOf("1", "2")))
+    assertTrue(m.konstues.containsAll(listOf("1", "2", "3")))
+    assertFalse(m.konstues.containsAll(listOf("1", "2", "3", "4")))
+    assertFalse(m.konstues.containsAll(listOf("2", "3", "4")))
 }
 
 fun testRemoveValue() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
-    assertFalse(m.values.remove("b"))
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
+    assertFalse(m.konstues.remove("b"))
     assertEquals(expected, m)
-    assertTrue(m.values.remove("2"))
+    assertTrue(m.konstues.remove("2"))
     assertEquals(mapOf("a" to "1", "c" to "3"), m)
 }
 
 fun testRemoveAllValues() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
-    assertFalse(m.values.removeAll(listOf("b", "c")))
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
+    assertFalse(m.konstues.removeAll(listOf("b", "c")))
     assertEquals(expected, m)
-    assertTrue(m.values.removeAll(listOf("b", "3")))
+    assertTrue(m.konstues.removeAll(listOf("b", "3")))
     assertEquals(mapOf("a" to "1", "b" to "2"), m)
 }
 
 fun testRetainAllValues() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
-    assertFalse(m.values.retainAll(listOf("1", "2", "3")))
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
+    assertFalse(m.konstues.retainAll(listOf("1", "2", "3")))
     assertEquals(expected, m)
-    assertTrue(m.values.retainAll(listOf("1", "2", "c")))
+    assertTrue(m.konstues.retainAll(listOf("1", "2", "c")))
     assertEquals(mapOf("a" to "1", "b" to "2"), m)
 }
 
 fun testEntriesIteratorSet() {
-    val expected = mapOf("a" to "1", "b" to "2", "c" to "3")
-    val m = HashMap(expected)
-    val it = m.iterator()
+    konst expected = mapOf("a" to "1", "b" to "2", "c" to "3")
+    konst m = HashMap(expected)
+    konst it = m.iterator()
     while (it.hasNext()) {
-        val entry = it.next()
-        entry.setValue(entry.value + "!")
+        konst entry = it.next()
+        entry.setValue(entry.konstue + "!")
     }
     assertNotEquals(expected, m)
     assertEquals(mapOf("a" to "1!", "b" to "2!", "c" to "3!"), m)

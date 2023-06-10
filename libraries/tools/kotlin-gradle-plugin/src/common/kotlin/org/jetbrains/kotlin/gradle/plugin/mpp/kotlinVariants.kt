@@ -30,13 +30,13 @@ internal fun getCoordinatesFromPublicationDelegateAndProject(
     project: Project,
     target: KotlinTarget?
 ): ModuleVersionIdentifier {
-    val moduleNameProvider = project.provider { publication?.artifactId ?: dashSeparatedName(project.name, target?.name?.toLowerCase()) }
-    val moduleGroupProvider = project.provider { publication?.groupId ?: project.group.toString() }
-    val moduleVersionProvider = project.provider { publication?.version ?: project.version.toString() }
+    konst moduleNameProvider = project.provider { publication?.artifactId ?: dashSeparatedName(project.name, target?.name?.toLowerCase()) }
+    konst moduleGroupProvider = project.provider { publication?.groupId ?: project.group.toString() }
+    konst moduleVersionProvider = project.provider { publication?.version ?: project.version.toString() }
     return object : ModuleVersionIdentifier {
-        private val moduleName: String by moduleNameProvider
-        private val moduleGroup: String by moduleGroupProvider
-        private val moduleVersion: String by moduleVersionProvider
+        private konst moduleName: String by moduleNameProvider
+        private konst moduleGroup: String by moduleGroupProvider
+        private konst moduleVersion: String by moduleVersionProvider
 
         override fun getGroup() = moduleGroup
         override fun getName() = moduleName
@@ -57,14 +57,14 @@ private interface KotlinTargetComponentWithCoordinatesAndPublication :
 }
 
 open class KotlinVariant(
-    val producingCompilation: KotlinCompilation<*>,
-    private val usages: Set<DefaultKotlinUsageContext>
+    konst producingCompilation: KotlinCompilation<*>,
+    private konst usages: Set<DefaultKotlinUsageContext>
 ) : KotlinTargetComponentWithPublication, SoftwareComponentInternal {
     var componentName: String? = null
 
     var artifactTargetName: String = target.targetName
 
-    final override val target: KotlinTarget
+    final override konst target: KotlinTarget
         get() = producingCompilation.target
 
     override fun getUsages(): Set<KotlinUsageContext> = usages.publishableUsages()
@@ -72,14 +72,14 @@ open class KotlinVariant(
     override fun getName(): String = componentName ?: producingCompilation.target.targetName
 
     override var publishable: Boolean = true
-    override val publishableOnCurrentHost: Boolean
+    override konst publishableOnCurrentHost: Boolean
         get() = publishable && target.publishable
 
     @Deprecated(
         message = "Sources artifacts are now published as separate variant " +
                 "use target.sourcesElementsConfigurationName to obtain necessary information",
         replaceWith = ReplaceWith("target.sourcesElementsConfigurationName")    )
-    override val sourcesArtifacts: Set<PublishArtifact> get() = target
+    override konst sourcesArtifacts: Set<PublishArtifact> get() = target
         .project
         .configurations
         .findByName(target.sourcesElementsConfigurationName)
@@ -88,7 +88,7 @@ open class KotlinVariant(
 
     internal var defaultArtifactIdSuffix: String? = null
 
-    override val defaultArtifactId: String
+    override konst defaultArtifactId: String
         get() = dashSeparatedName(target.project.name, artifactTargetName.toLowerCaseAsciiOnly(), defaultArtifactIdSuffix)
 
     override var publicationDelegate: MavenPublication? = null
@@ -103,28 +103,28 @@ open class KotlinVariantWithCoordinates(
 class KotlinVariantWithMetadataVariant(
     producingCompilation: KotlinCompilation<*>,
     usages: Set<DefaultKotlinUsageContext>,
-    internal val metadataTarget: AbstractKotlinTarget
+    internal konst metadataTarget: AbstractKotlinTarget
 ) : KotlinVariantWithCoordinates(producingCompilation, usages), ComponentWithVariants {
     override fun getVariants() = metadataTarget.components
 }
 
 class JointAndroidKotlinTargetComponent(
-    override val target: KotlinAndroidTarget,
-    private val nestedVariants: Set<KotlinVariant>,
-    val flavorNames: List<String>
+    override konst target: KotlinAndroidTarget,
+    private konst nestedVariants: Set<KotlinVariant>,
+    konst flavorNames: List<String>
 ) : KotlinTargetComponentWithCoordinatesAndPublication, SoftwareComponentInternal {
 
     override fun getUsages(): Set<KotlinUsageContext> = nestedVariants.filter { it.publishable }.flatMap { it.usages }.toSet()
 
     override fun getName(): String = lowerCamelCaseName(target.targetName, *flavorNames.toTypedArray())
 
-    override val publishable: Boolean
+    override konst publishable: Boolean
         get() = nestedVariants.any { it.publishable }
 
-    override val publishableOnCurrentHost: Boolean
+    override konst publishableOnCurrentHost: Boolean
         get() = publishable
 
-    override val defaultArtifactId: String =
+    override konst defaultArtifactId: String =
         dashSeparatedName(
             target.project.name,
             target.targetName.toLowerCaseAsciiOnly(),
@@ -138,5 +138,5 @@ class JointAndroidKotlinTargetComponent(
                 "use target.sourcesElementsConfigurationName to obtain necessary information",
         replaceWith = ReplaceWith("target.sourcesElementsConfigurationName")
     )
-    override val sourcesArtifacts: Set<PublishArtifact> = emptySet()
+    override konst sourcesArtifacts: Set<PublishArtifact> = emptySet()
 }

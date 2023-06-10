@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.types.TypeRefinement
 import org.jetbrains.kotlin.types.typeUtil.unCapture as unCaptureKotlinType
 
 class ClassicConstraintSystemUtilContext(
-    val kotlinTypeRefiner: KotlinTypeRefiner,
-    val builtIns: KotlinBuiltIns,
+    konst kotlinTypeRefiner: KotlinTypeRefiner,
+    konst builtIns: KotlinBuiltIns,
 ) : ConstraintSystemUtilContext {
     override fun TypeVariableMarker.shouldBeFlexible(): Boolean {
         return this is TypeVariableFromCallableDescriptor && this.originalTypeParameter.shouldBeFlexible()
@@ -62,9 +62,9 @@ class ClassicConstraintSystemUtilContext(
 
     override fun extractLambdaParameterTypesFromDeclaration(declaration: PostponedAtomWithRevisableExpectedType): List<KotlinTypeMarker?>? {
         require(declaration is ResolvedAtom)
-        return when (val atom = declaration.atom) {
+        return when (konst atom = declaration.atom) {
             is FunctionExpression -> {
-                val receiverType = atom.receiverType
+                konst receiverType = atom.receiverType
                 if (receiverType != null) listOf(receiverType) + atom.parametersTypes else atom.parametersTypes.toList()
             }
             is LambdaKotlinCallArgument -> atom.parametersTypes?.toList()
@@ -79,13 +79,13 @@ class ClassicConstraintSystemUtilContext(
 
     override fun PostponedAtomWithRevisableExpectedType.isFunctionExpressionWithReceiver(): Boolean {
         require(this is ResolvedAtom)
-        val atom = this.atom
+        konst atom = this.atom
         return atom is FunctionExpression && atom.receiverType != null
     }
 
     override fun PostponedAtomWithRevisableExpectedType.isLambda(): Boolean {
         require(this is ResolvedAtom)
-        val atom = this.atom
+        konst atom = this.atom
         return atom is LambdaKotlinCallArgument && atom !is FunctionExpression
     }
 
@@ -101,7 +101,7 @@ class ClassicConstraintSystemUtilContext(
         index: Int
     ): TypeVariableMarker {
         require(argument is ResolvedAtom)
-        val atom = argument.atom as PostponableKotlinCallArgument
+        konst atom = argument.atom as PostponableKotlinCallArgument
         return TypeVariableForLambdaParameterType(
             atom,
             index,

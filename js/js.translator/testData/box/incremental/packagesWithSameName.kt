@@ -23,7 +23,7 @@ import a.p.*
 import b.p.*
 
 fun box(): String {
-    val r = foo() + bar() + baz()
+    konst r = foo() + bar() + baz()
 
     if (r != "foobarbaz") return "fail: $r"
 

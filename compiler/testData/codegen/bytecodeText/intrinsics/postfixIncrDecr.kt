@@ -8,7 +8,7 @@ fun testPostfixIncr0() {
 
 fun testPostfixIncr1() {
     var k = 0
-    val t = k++
+    konst t = k++
     use(k)
     use(t)
 }
@@ -21,7 +21,7 @@ fun testPostfixDecr0() {
 
 fun testPostfixDecr1() {
     var k = 0
-    val t = k--
+    konst t = k--
     use(k)
     use(t)
 }

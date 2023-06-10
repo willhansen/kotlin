@@ -1,8 +1,8 @@
 public annotation class Anno {
     // source: 'Anno.java'
-    public abstract method value(): java.lang.Class
+    public abstract method konstue(): java.lang.Class
 }
-@Anno(value=Outer$Middle$Inner::class)
+@Anno(konstue=Outer$Middle$Inner::class)
 @kotlin.Metadata
 public final class InAnnotation {
     // source: 'innerClasses.kt'

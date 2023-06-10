@@ -6,18 +6,18 @@ fun testUse() {
 }
 
 fun testLocalVal() {
-  val local: String = notNullString() /*!! String */
+  konst local: String = notNullString() /*!! String */
 }
 
 fun testReturnValue(): String {
   return notNullString() /*!! String */
 }
 
-val testGlobalVal: String
+konst testGlobalVal: String
   field = notNullString() /*!! String */
   get
 
-val testGlobalValGetter: String
+konst testGlobalValGetter: String
   get(): String {
     return notNullString() /*!! String */
   }
@@ -29,8 +29,8 @@ fun testJUse() {
 }
 
 fun testLocalVarUse() {
-  val ns: @FlexibleNullability String? = nullString()
+  konst ns: @FlexibleNullability String? = nullString()
   use(s = ns)
-  val nns: String = notNullString() /*!! String */
+  konst nns: String = notNullString() /*!! String */
   use(s = nns)
 }

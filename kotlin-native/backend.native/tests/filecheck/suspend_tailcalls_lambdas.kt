@@ -6,7 +6,7 @@
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
@@ -333,7 +333,7 @@ fun s23(f: Boolean) {
     // CHECK-LABEL: define internal %struct.ObjHeader* @"kfun:s23$lambda${{[0-9]*}}
     builderUnit {
         // CHECK-NOT: call void @"kfun:$s23$lambda${{[0-9]*}}COROUTINE${{[0-9]*}}.<init>
-        val x = run {
+        konst x = run {
             if (f) {
                 println("s23")
                 sUnit()

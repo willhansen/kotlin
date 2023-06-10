@@ -1,7 +1,7 @@
 // MODULE: InterfaceModule
 // FILE: MyInterface.kt
 interface MyInterface {
-    val test: Int get() = 1
+    konst test: Int get() = 1
 }
 
 interface MyInterface2 : MyInterface
@@ -17,13 +17,13 @@ open class MyOpenClass3 : MyOpenClass()
 // MODULE: OpenClassWithOverrideModule(InterfaceModule)
 // FILE: MyOpenClassWithOverrideModule.kt
 open class MyOpenClassWithOverride : MyInterface {
-    override val test = super.test + 1
+    override konst test = super.test + 1
 }
 
 open class MyOpenClassWithOverride2 : MyInterface2, MyOpenClassWithOverride()
 
 open class MyOpenClassWithOverride3 : MyOpenClassWithOverride2() {
-    override val test = super.test + 1
+    override konst test = super.test + 1
 }
 
 // MODULE: main(InterfaceModule, OpenClassModule, OpenClassWithOverrideModule)

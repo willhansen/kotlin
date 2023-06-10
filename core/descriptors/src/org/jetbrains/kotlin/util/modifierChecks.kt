@@ -57,19 +57,19 @@ import org.jetbrains.kotlin.util.ReturnsCheck.*
 import org.jetbrains.kotlin.util.ValueParameterCountCheck.NoValueParameters
 import org.jetbrains.kotlin.util.ValueParameterCountCheck.SingleValueParameter
 
-sealed class CheckResult(val isSuccess: Boolean) {
-    class IllegalSignature(val error: String) : CheckResult(false)
+sealed class CheckResult(konst isSuccess: Boolean) {
+    class IllegalSignature(konst error: String) : CheckResult(false)
     object IllegalFunctionName : CheckResult(false)
     object SuccessCheck : CheckResult(true)
 }
 
 interface Check {
-    val description: String
+    konst description: String
     fun check(functionDescriptor: FunctionDescriptor): Boolean
     operator fun invoke(functionDescriptor: FunctionDescriptor): String? = if (!check(functionDescriptor)) description else null
 }
 
-sealed class MemberKindCheck(override val description: String) : Check {
+sealed class MemberKindCheck(override konst description: String) : Check {
     object MemberOrExtension : MemberKindCheck("must be a member or an extension function") {
         override fun check(functionDescriptor: FunctionDescriptor) =
             functionDescriptor.dispatchReceiverParameter != null || functionDescriptor.extensionReceiverParameter != null
@@ -81,40 +81,40 @@ sealed class MemberKindCheck(override val description: String) : Check {
     }
 }
 
-sealed class ValueParameterCountCheck(override val description: String) : Check {
-    object NoValueParameters : ValueParameterCountCheck("must have no value parameters") {
-        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.valueParameters.isEmpty()
+sealed class ValueParameterCountCheck(override konst description: String) : Check {
+    object NoValueParameters : ValueParameterCountCheck("must have no konstue parameters") {
+        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.konstueParameters.isEmpty()
     }
 
-    object SingleValueParameter : ValueParameterCountCheck("must have a single value parameter") {
-        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.valueParameters.size == 1
+    object SingleValueParameter : ValueParameterCountCheck("must have a single konstue parameter") {
+        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.konstueParameters.size == 1
     }
 
-    class AtLeast(val n: Int) : ValueParameterCountCheck("must have at least $n value parameter" + (if (n > 1) "s" else "")) {
-        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.valueParameters.size >= n
+    class AtLeast(konst n: Int) : ValueParameterCountCheck("must have at least $n konstue parameter" + (if (n > 1) "s" else "")) {
+        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.konstueParameters.size >= n
     }
 
-    class Equals(val n: Int) : ValueParameterCountCheck("must have exactly $n value parameters") {
-        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.valueParameters.size == n
+    class Equals(konst n: Int) : ValueParameterCountCheck("must have exactly $n konstue parameters") {
+        override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.konstueParameters.size == n
     }
 }
 
 private object NoDefaultAndVarargsCheck : Check {
-    override val description = "should not have varargs or parameters with default values"
+    override konst description = "should not have varargs or parameters with default konstues"
     override fun check(functionDescriptor: FunctionDescriptor) =
-        functionDescriptor.valueParameters.all { !it.declaresOrInheritsDefaultValue() && it.varargElementType == null }
+        functionDescriptor.konstueParameters.all { !it.declaresOrInheritsDefaultValue() && it.varargElementType == null }
 }
 
 private object IsKPropertyCheck : Check {
-    override val description = "second parameter must be of type KProperty<*> or its supertype"
+    override konst description = "second parameter must be of type KProperty<*> or its supertype"
     override fun check(functionDescriptor: FunctionDescriptor): Boolean {
-        val secondParameter = functionDescriptor.valueParameters[1]
+        konst secondParameter = functionDescriptor.konstueParameters[1]
         return ReflectionTypes.createKPropertyStarType(secondParameter.module)?.isSubtypeOf(secondParameter.type.makeNotNullable()) ?: false
     }
 }
 
-sealed class ReturnsCheck(val name: String, val type: KotlinBuiltIns.() -> KotlinType) : Check {
-    override val description = "must return $name"
+sealed class ReturnsCheck(konst name: String, konst type: KotlinBuiltIns.() -> KotlinType) : Check {
+    override konst description = "must return $name"
     override fun check(functionDescriptor: FunctionDescriptor) = functionDescriptor.returnType == functionDescriptor.builtIns.type()
 
     object ReturnsBoolean : ReturnsCheck("Boolean", { booleanType })
@@ -123,11 +123,11 @@ sealed class ReturnsCheck(val name: String, val type: KotlinBuiltIns.() -> Kotli
 }
 
 internal class Checks private constructor(
-    val name: Name?,
-    val regex: Regex?,
-    val nameList: Collection<Name>?,
-    val additionalCheck: (FunctionDescriptor) -> String?,
-    vararg val checks: Check
+    konst name: Name?,
+    konst regex: Regex?,
+    konst nameList: Collection<Name>?,
+    konst additionalCheck: (FunctionDescriptor) -> String?,
+    vararg konst checks: Check
 ) {
     fun isApplicable(functionDescriptor: FunctionDescriptor): Boolean {
         if (name != null && functionDescriptor.name != name) return false
@@ -138,13 +138,13 @@ internal class Checks private constructor(
 
     fun checkAll(functionDescriptor: FunctionDescriptor): CheckResult {
         for (check in checks) {
-            val checkResult = check(functionDescriptor)
+            konst checkResult = check(functionDescriptor)
             if (checkResult != null) {
                 return CheckResult.IllegalSignature(checkResult)
             }
         }
 
-        val additionalCheckResult = additionalCheck(functionDescriptor)
+        konst additionalCheckResult = additionalCheck(functionDescriptor)
         if (additionalCheckResult != null) {
             return CheckResult.IllegalSignature(additionalCheckResult)
         }
@@ -166,7 +166,7 @@ internal class Checks private constructor(
 }
 
 abstract class AbstractModifierChecks {
-    internal abstract val checks: List<Checks>
+    internal abstract konst checks: List<Checks>
 
     inline fun ensure(cond: Boolean, msg: () -> String) = if (!cond) msg() else null
 
@@ -181,12 +181,12 @@ abstract class AbstractModifierChecks {
 }
 
 object OperatorChecks : AbstractModifierChecks() {
-    override val checks = listOf(
+    override konst checks = listOf(
         Checks(GET, MemberOrExtension, ValueParameterCountCheck.AtLeast(1)),
         Checks(SET, MemberOrExtension, ValueParameterCountCheck.AtLeast(2)) {
-            val lastIsOk =
-                valueParameters.lastOrNull()?.let { !it.declaresOrInheritsDefaultValue() && it.varargElementType == null } == true
-            ensure(lastIsOk) { "last parameter should not have a default value or be a vararg" }
+            konst lastIsOk =
+                konstueParameters.lastOrNull()?.let { !it.declaresOrInheritsDefaultValue() && it.varargElementType == null } == true
+            ensure(lastIsOk) { "last parameter should not have a default konstue or be a vararg" }
         },
         Checks(GET_VALUE, MemberOrExtension, NoDefaultAndVarargsCheck, ValueParameterCountCheck.AtLeast(2), IsKPropertyCheck),
         Checks(SET_VALUE, MemberOrExtension, NoDefaultAndVarargsCheck, ValueParameterCountCheck.AtLeast(3), IsKPropertyCheck),
@@ -204,7 +204,7 @@ object OperatorChecks : AbstractModifierChecks() {
                 buildString {
                     append("must override ''equals()'' in Any")
                     if (containingDeclaration.isValueClass()) {
-                        val expectedParameterTypeRendered = DescriptorRenderer.SHORT_NAMES_IN_TYPES.renderType(
+                        konst expectedParameterTypeRendered = DescriptorRenderer.SHORT_NAMES_IN_TYPES.renderType(
                             (containingDeclaration as ClassDescriptor).defaultType.replaceArgumentsWithStarProjections()
                         )
                         append(" or define ''equals(other: $expectedParameterTypeRendered): Boolean''")
@@ -216,7 +216,7 @@ object OperatorChecks : AbstractModifierChecks() {
         Checks(BINARY_OPERATION_NAMES, MemberOrExtension, SingleValueParameter, NoDefaultAndVarargsCheck),
         Checks(SIMPLE_UNARY_OPERATION_NAMES, MemberOrExtension, NoValueParameters),
         Checks(listOf(INC, DEC), MemberOrExtension) {
-            val receiver = dispatchReceiverParameter ?: extensionReceiverParameter
+            konst receiver = dispatchReceiverParameter ?: extensionReceiverParameter
             ensure(receiver != null && ((returnType?.isSubtypeOf(receiver.type) ?: false) || incDecCheckForExpectClass(receiver))) {
                 "receiver must be a supertype of the return type"
             }
@@ -236,14 +236,14 @@ object OperatorChecks : AbstractModifierChecks() {
      * equal, so subtyping check passes in this case despite mismatching expect/actual in the corresponding declaration descriptors.
      */
     private fun FunctionDescriptor.incDecCheckForExpectClass(receiver: ReceiverParameterDescriptor): Boolean {
-        val receiverValue = receiver.value
+        konst receiverValue = receiver.konstue
         if (receiverValue !is ImplicitClassReceiver) return false
 
-        val classDescriptor = receiverValue.classDescriptor
+        konst classDescriptor = receiverValue.classDescriptor
         if (!classDescriptor.isExpect) return false
 
-        val potentialActualAliasId = classDescriptor.classId ?: return false
-        val actualReceiverTypeAlias =
+        konst potentialActualAliasId = classDescriptor.classId ?: return false
+        konst actualReceiverTypeAlias =
             classDescriptor.module.findClassifierAcrossModuleDependencies(potentialActualAliasId) as? TypeAliasDescriptor ?: return false
 
         returnType?.let { returnType ->
@@ -255,7 +255,7 @@ object OperatorChecks : AbstractModifierChecks() {
 }
 
 object InfixChecks : AbstractModifierChecks() {
-    override val checks = listOf(
+    override konst checks = listOf(
         Checks(MemberKindCheck.MemberOrExtension, SingleValueParameter, NoDefaultAndVarargsCheck)
     )
 }

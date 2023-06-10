@@ -10,7 +10,7 @@ private fun printLog(message: String) {
 private fun printlnLog(message: String) = printLog("$message\n")
 
 class Lifetime() {
-    val attached = ArrayList<Function0<Unit>>()
+    konst attached = ArrayList<Function0<Unit>>()
 
     public fun attach(action: () -> Unit) {
         attached.add(action)
@@ -23,7 +23,7 @@ class Lifetime() {
 }
 
 public class Viewable<T>() {
-    val items = ArrayList<T>()
+    konst items = ArrayList<T>()
 
     fun add(item: T) {
         items.add(item)
@@ -41,7 +41,7 @@ public class Viewable<T>() {
 }
 
 fun lifetime(body: (Lifetime) -> Unit) {
-    val l = Lifetime()
+    konst l = Lifetime()
     body(l)
     l.close()
 }
@@ -54,8 +54,8 @@ fun<T> Dump(items: ArrayList<T>) {
 }
 
 fun box(): String {
-    val v = Viewable<Int>()
-    val x = ArrayList<Int>()
+    konst v = Viewable<Int>()
+    konst x = ArrayList<Int>()
     v.add(1)
     v.add(2)
     v.add(3)
@@ -71,7 +71,7 @@ fun box(): String {
         }
     }
 
-    val expected =
+    konst expected =
             "1, end\n" +
             "1, 2, end\n" +
             "1, 2, 3, end\n" +

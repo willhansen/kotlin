@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.types.type
 object FirPropertyTypeParametersChecker : FirPropertyChecker() {
 
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val boundsByName = declaration.typeParameters.associate { it.name to it.symbol.resolvedBounds }
-        val usedTypes = HashSet<ConeKotlinType>()
+        konst boundsByName = declaration.typeParameters.associate { it.name to it.symbol.resolvedBounds }
+        konst usedTypes = HashSet<ConeKotlinType>()
         fun collectAllTypes(type: ConeKotlinType) {
             if (usedTypes.add(type)) {
                 type.typeArguments.forEach { it.type?.let(::collectAllTypes) }
@@ -31,7 +31,7 @@ object FirPropertyTypeParametersChecker : FirPropertyChecker() {
         declaration.receiverParameter?.typeRef?.let { collectAllTypes(it.coneType) }
         declaration.contextReceivers.forEach { collectAllTypes(it.typeRef.coneType) }
 
-        val usedNames = usedTypes.filterIsInstance<ConeTypeParameterType>().map { it.lookupTag.name }
+        konst usedNames = usedTypes.filterIsInstance<ConeTypeParameterType>().map { it.lookupTag.name }
         if (!declaration.isLocal) {
             declaration.typeParameters.filterNot { usedNames.contains(it.name) }.forEach { danglingParam ->
                 reporter.reportOn(danglingParam.source, FirErrors.TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER, context)

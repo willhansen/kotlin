@@ -32,29 +32,29 @@ object CommonIdePlatformKind : IdePlatformKind() {
         return K2MetadataCompilerArguments() // TODO(dsavvinov): review that, as now MPP !== K2Metadata
     }
 
-    override val defaultPlatform get() = CommonPlatforms.defaultCommonPlatform
+    override konst defaultPlatform get() = CommonPlatforms.defaultCommonPlatform
 
-    override val argumentsClass get() = K2MetadataCompilerArguments::class.java
+    override konst argumentsClass get() = K2MetadataCompilerArguments::class.java
 
-    override val name get() = "Common (experimental)"
+    override konst name get() = "Common (experimental)"
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
         level = DeprecationLevel.ERROR
     )
     object Platform : IdePlatform<CommonIdePlatformKind, CommonCompilerArguments>() {
-        override val kind get() = CommonIdePlatformKind
-        override val version get() = TargetPlatformVersion.NoVersion
+        override konst kind get() = CommonIdePlatformKind
+        override konst version get() = TargetPlatformVersion.NoVersion
         override fun createArguments(init: CommonCompilerArguments.() -> Unit) = K2MetadataCompilerArguments().apply(init)
     }
 }
 
-val IdePlatformKind?.isCommon
+konst IdePlatformKind?.isCommon
     get() = this is CommonIdePlatformKind
 
 @Deprecated(
     message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
     level = DeprecationLevel.ERROR
 )
-val IdePlatform<*, *>.isCommon: Boolean
+konst IdePlatform<*, *>.isCommon: Boolean
     get() = this is CommonIdePlatformKind.Platform

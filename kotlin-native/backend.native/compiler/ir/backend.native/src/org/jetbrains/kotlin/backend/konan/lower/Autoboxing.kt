@@ -35,11 +35,11 @@ import org.jetbrains.kotlin.ir.visitors.*
 import org.jetbrains.kotlin.name.Name
 
 /**
- * Boxes and unboxes values of value types when necessary.
+ * Boxes and unboxes konstues of konstue types when necessary.
  */
-internal class Autoboxing(val context: Context) : FileLoweringPass {
+internal class Autoboxing(konst context: Context) : FileLoweringPass {
 
-    private val transformer = AutoboxingTransformer(context)
+    private konst transformer = AutoboxingTransformer(context)
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(transformer)
@@ -48,7 +48,7 @@ internal class Autoboxing(val context: Context) : FileLoweringPass {
 
 }
 
-private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTransformer(
+private class AutoboxingTransformer(konst context: Context) : AbstractValueUsageTransformer(
         context.ir.symbols,
         context.irBuiltIns
 ) {
@@ -70,7 +70,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
 
     override fun visitFunction(declaration: IrFunction): IrStatement {
         currentFunction = declaration
-        val result = super.visitFunction(declaration)
+        konst result = super.visitFunction(declaration)
         currentFunction = null
         return result
     }
@@ -82,7 +82,7 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
     }
 
     override fun IrExpression.useAs(type: IrType): IrExpression {
-        val actualType = when (this) {
+        konst actualType = when (this) {
             is IrCall -> {
                 if (this.symbol == symbols.reinterpret) this.getTypeArgument(1)!!
                 else this.callTarget.returnType
@@ -104,14 +104,14 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
         return this.adaptIfNecessary(actualType, type)
     }
 
-    private val IrFunctionAccessExpression.target: IrFunction get() = when (this) {
+    private konst IrFunctionAccessExpression.target: IrFunction get() = when (this) {
         is IrCall -> this.callTarget
         is IrDelegatingConstructorCall -> this.symbol.owner
         is IrConstructorCall -> this.symbol.owner
         else -> TODO(this.render())
     }
 
-    private val IrCall.callTarget: IrFunction
+    private konst IrCall.callTarget: IrFunction
         get() = if (this.isVirtualCall) {
             symbol.owner
         } else {
@@ -129,11 +129,11 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
     override fun IrExpression.useAsValueArgument(expression: IrFunctionAccessExpression,
                                                  parameter: IrValueParameter): IrExpression {
 
-        return this.useAsArgument(expression.target.valueParameters[parameter.index])
+        return this.useAsArgument(expression.target.konstueParameters[parameter.index])
     }
 
     private fun IrExpression.adaptIfNecessary(actualType: IrType, expectedType: IrType): IrExpression {
-        val conversion = context.getTypeConversion(actualType, expectedType)
+        konst conversion = context.getTypeConversion(actualType, expectedType)
         return if (conversion == null) {
             this
         } else {
@@ -146,11 +146,11 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                 it.type = expectedType
                 return it
             }
-            val parameter = conversion.owner.explicitParameters.single()
-            val argument = this.uncheckedCast(parameter.type)
+            konst parameter = conversion.owner.explicitParameters.single()
+            konst argument = this.uncheckedCast(parameter.type)
 
             IrCallImpl(startOffset, endOffset, conversion.owner.returnType, conversion,
-                    conversion.owner.typeParameters.size, conversion.owner.valueParameters.size).apply {
+                    conversion.owner.typeParameters.size, conversion.owner.konstueParameters.size).apply {
                 addArguments(mapOf(parameter to argument))
             }.uncheckedCast(this.type) // Try not to bring new type incompatibilities.
         }
@@ -177,8 +177,8 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
                 expression.transformChildrenVoid()
 
                 // TODO: check types has the same binary representation.
-                val oldType = expression.getTypeArgument(0)!!
-                val newType = expression.getTypeArgument(1)!!
+                konst oldType = expression.getTypeArgument(0)!!
+                konst newType = expression.getTypeArgument(1)!!
 
                 assert(oldType.computePrimitiveBinaryTypeOrNull() == newType.computePrimitiveBinaryTypeOrNull())
 
@@ -193,12 +193,12 @@ private class AutoboxingTransformer(val context: Context) : AbstractValueUsageTr
 
 }
 
-private class InlineClassTransformer(private val context: Context) : IrBuildingTransformer(context) {
+private class InlineClassTransformer(private konst context: Context) : IrBuildingTransformer(context) {
 
-    private val symbols = context.ir.symbols
-    private val irBuiltIns = context.irBuiltIns
+    private konst symbols = context.ir.symbols
+    private konst irBuiltIns = context.irBuiltIns
 
-    private val builtBoxUnboxFunctions = mutableListOf<IrFunction>()
+    private konst builtBoxUnboxFunctions = mutableListOf<IrFunction>()
 
     override fun visitFile(declaration: IrFile): IrFile {
         declaration.transformChildrenVoid(this)
@@ -236,8 +236,8 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     override fun visitGetField(expression: IrGetField): IrExpression {
         super.visitGetField(expression)
 
-        val field = expression.symbol.owner
-        val parentClass = field.parentClassOrNull
+        konst field = expression.symbol.owner
+        konst parentClass = field.parentClassOrNull
         return if (parentClass == null || !parentClass.isInlined() || field.isStatic)
             expression
         else {
@@ -270,7 +270,7 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
         super.visitConstructorCall(expression)
 
-        val constructor = expression.symbol.owner
+        konst constructor = expression.symbol.owner
         return if (constructor.constructedClass.isInlined()) {
             builder.lowerConstructorCallToValue(expression, constructor)
         } else {
@@ -300,7 +300,7 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     }
 
     private fun IrBuilderWithScope.irIsNull(expression: IrExpression): IrExpression {
-        val binary = expression.type.computeBinaryType()
+        konst binary = expression.type.computeBinaryType()
         return when (binary) {
             is BinaryType.Primitive -> {
                 assert(binary.type == PrimitiveBinaryType.POINTER)
@@ -317,14 +317,14 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     }
 
     private fun buildBoxFunction(irClass: IrClass, function: IrFunction) {
-        val builder = context.createIrBuilder(function.symbol)
-        val cache = BoxCache.values().toList().atMostOne { context.irBuiltIns.getKotlinClass(it) == irClass }
+        konst builder = context.createIrBuilder(function.symbol)
+        konst cache = BoxCache.konstues().toList().atMostOne { context.irBuiltIns.getKotlinClass(it) == irClass }
 
         function.body = builder.irBlockBody(function) {
-            val valueToBox = function.valueParameters[0]
-            if (valueToBox.type.isNullable()) {
+            konst konstueToBox = function.konstueParameters[0]
+            if (konstueToBox.type.isNullable()) {
                 +irIfThen(
-                        condition = irIsNull(irGet(valueToBox)),
+                        condition = irIsNull(irGet(konstueToBox)),
                         thenPart = irReturn(irNull())
                 )
             }
@@ -332,19 +332,19 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
             if (cache != null) {
                 +irIfThen(
                         condition = irCall(symbols.boxCachePredicates[cache]!!.owner).apply {
-                            putValueArgument(0, irGet(valueToBox))
+                            putValueArgument(0, irGet(konstueToBox))
                         },
                         thenPart = irReturn(irCall(symbols.boxCacheGetters[cache]!!.owner).apply {
-                            putValueArgument(0, irGet(valueToBox))
+                            putValueArgument(0, irGet(konstueToBox))
                         })
                 )
             }
 
             // Note: IR variable created below has reference type intentionally.
-            val box = irTemporary(irCall(symbols.createUninitializedInstance.owner).also {
+            konst box = irTemporary(irCall(symbols.createUninitializedInstance.owner).also {
                 it.putTypeArgument(0, irClass.defaultType)
             })
-            +irSetField(irGet(box), getInlineClassBackingField(irClass), irGet(valueToBox))
+            +irSetField(irGet(box), getInlineClassBackingField(irClass), irGet(konstueToBox))
             +irReturn(irGet(box))
         }
 
@@ -361,10 +361,10 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     private fun IrBuilderWithScope.irNullPointer(): IrExpression = irCall(symbols.getNativeNullPtr.owner)
 
     private fun buildUnboxFunction(irClass: IrClass, function: IrFunction) {
-        val builder = context.createIrBuilder(function.symbol)
+        konst builder = context.createIrBuilder(function.symbol)
 
         function.body = builder.irBlockBody(function) {
-            val boxParameter = function.valueParameters.single()
+            konst boxParameter = function.konstueParameters.single()
             if (boxParameter.type.isNullable()) {
                 +irIfThen(
                         condition = irEqeqeq(irGet(boxParameter), irNull()),
@@ -378,15 +378,15 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
     }
 
     private fun buildBoxField(declaration: IrClass) {
-        val startOffset = declaration.startOffset
-        val endOffset = declaration.endOffset
+        konst startOffset = declaration.startOffset
+        konst endOffset = declaration.endOffset
 
-        val irField = IrFieldImpl(
+        konst irField = IrFieldImpl(
                 startOffset,
                 endOffset,
                 IrDeclarationOrigin.DEFINED,
                 IrFieldSymbolImpl(),
-                Name.identifier("value"),
+                Name.identifier("konstue"),
                 declaration.defaultType,
                 DescriptorVisibilities.PRIVATE,
                 isFinal = true,
@@ -395,7 +395,7 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
         )
         irField.parent = declaration
 
-        val irProperty = IrPropertyImpl(
+        konst irProperty = IrPropertyImpl(
                 startOffset,
                 endOffset,
                 IrDeclarationOrigin.DEFINED,
@@ -419,23 +419,23 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
             callee: IrConstructor
     ): IrExpression {
         this.at(expression)
-        val loweredConstructor = this@InlineClassTransformer.context.getLoweredInlineClassConstructor(callee)
+        konst loweredConstructor = this@InlineClassTransformer.context.getLoweredInlineClassConstructor(callee)
         return if (callee.isPrimary) this.irBlock {
-            val argument = irTemporary(expression.getValueArgument(0)!!, irType = loweredConstructor.valueParameters.single().type)
+            konst argument = irTemporary(expression.getValueArgument(0)!!, irType = loweredConstructor.konstueParameters.single().type)
             +irCall(loweredConstructor).apply {
                 putValueArgument(0, irGet(argument))
             }
             +irGet(argument)
         } else this.irCall(loweredConstructor).apply {
-            (0 until expression.valueArgumentsCount).forEach {
+            (0 until expression.konstueArgumentsCount).forEach {
                 putValueArgument(it, expression.getValueArgument(it)!!)
             }
         }
     }
 
     private fun buildLoweredConstructor(irConstructor: IrConstructor) {
-        val result = context.getLoweredInlineClassConstructor(irConstructor)
-        val irClass = irConstructor.parentAsClass
+        konst result = context.getLoweredInlineClassConstructor(irConstructor)
+        konst irClass = irConstructor.parentAsClass
 
         result.body = context.createIrBuilder(result.symbol).irBlockBody(result) {
             lateinit var thisVar: IrValueDeclaration
@@ -446,8 +446,8 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
                 irGet(thisVar)
             }
 
-            val parameterMapping = result.valueParameters.associateBy {
-                irConstructor.valueParameters[it.index].symbol
+            konst parameterMapping = result.konstueParameters.associateBy {
+                irConstructor.konstueParameters[it.index].symbol
             }
 
             (irConstructor.body as IrBlockBody).statements.forEach { statement ->
@@ -459,10 +459,10 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
                         return irBlock(expression) {
                             thisVar = if (irConstructor.isPrimary) {
                                 // Note: block is empty in this case.
-                                result.valueParameters.single()
+                                result.konstueParameters.single()
                             } else {
-                                val value = lowerConstructorCallToValue(expression, expression.symbol.owner)
-                                irTemporary(value)
+                                konst konstue = lowerConstructorCallToValue(expression, expression.symbol.owner)
+                                irTemporary(konstue)
                             }
                         }
                     }
@@ -479,7 +479,7 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
 
                     override fun visitSetValue(expression: IrSetValue): IrExpression {
                         expression.transformChildrenVoid()
-                        parameterMapping[expression.symbol]?.let { return irSet(it.symbol, expression.value) }
+                        parameterMapping[expression.symbol]?.let { return irSet(it.symbol, expression.konstue) }
                         return expression
                     }
 
@@ -487,7 +487,7 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
                         expression.transformChildrenVoid()
                         if (expression.returnTargetSymbol == irConstructor.symbol) {
                             return irReturn(irBlock(expression.startOffset, expression.endOffset) {
-                                +expression.value
+                                +expression.konstue
                                 +genReturnValue()
                             })
                         }
@@ -507,8 +507,8 @@ private class InlineClassTransformer(private val context: Context) : IrBuildingT
 private fun Context.getLoweredInlineClassConstructor(irConstructor: IrConstructor): IrSimpleFunction = mapping.loweredInlineClassConstructors.getOrPut(irConstructor) {
     require(irConstructor.constructedClass.isInlined())
 
-    val returnType = if (irConstructor.isPrimary) {
-        // Optimization. When constructor is primary, the return value will be the same as the argument.
+    konst returnType = if (irConstructor.isPrimary) {
+        // Optimization. When constructor is primary, the return konstue will be the same as the argument.
         // So we can just use the argument on the call site.
         // This might be especially important for reference types,
         // to avoid redundant suboptimal "slot" machinery messing with this code.
@@ -530,8 +530,8 @@ private fun Context.getLoweredInlineClassConstructor(irConstructor: IrConstructo
         // But, technically speaking, otherwise we would have to remap types in the entire IR subtree,
         // which is an overkill here, because type parameters don't matter at this phase of compilation and later.
         // So it is just a trick to make [copyTo] happy:
-        val remapTypeMap = irConstructor.constructedClass.typeParameters.associateBy { it }
+        konst remapTypeMap = irConstructor.constructedClass.typeParameters.associateBy { it }
 
-        valueParameters = irConstructor.valueParameters.map { it.copyTo(this, remapTypeMap = remapTypeMap) }
+        konstueParameters = irConstructor.konstueParameters.map { it.copyTo(this, remapTypeMap = remapTypeMap) }
     }
 }

@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.config.languageVersionSettings
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.fir.FirAnalyzerFacade
 import org.jetbrains.kotlin.fir.FirTestSessionFactoryHelper
 import org.jetbrains.kotlin.fir.backend.Fir2IrCommonMemberStorage
@@ -81,8 +81,8 @@ object GenerationUtils {
         packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
         trace: BindingTrace = NoScopeRecordCliBindingTrace()
     ): GenerationState {
-        val project = files.first().project
-        val state = if (configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
+        konst project = files.first().project
+        konst state = if (configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
             compileFilesUsingFrontendIR(project, files, configuration, classBuilderFactory, packagePartProvider)
         } else {
             compileFilesUsingStandardMode(project, files, configuration, classBuilderFactory, packagePartProvider, trace)
@@ -108,10 +108,10 @@ object GenerationUtils {
     ): GenerationState {
         PsiElementFinder.EP.getPoint(project).unregisterExtension(JavaElementFinder::class.java)
 
-        val scope = GlobalSearchScope.filesScope(project, files.map { it.virtualFile })
+        konst scope = GlobalSearchScope.filesScope(project, files.map { it.virtualFile })
             .uniteWith(TopDownAnalyzerFacadeForJVM.AllJavaSourcesInProjectScope(project))
-        val librariesScope = ProjectScope.getLibrariesScope(project)
-        val session = FirTestSessionFactoryHelper.createSessionForTests(
+        konst librariesScope = ProjectScope.getLibrariesScope(project)
+        konst session = FirTestSessionFactoryHelper.createSessionForTests(
             project,
             scope,
             librariesScope,
@@ -120,39 +120,39 @@ object GenerationUtils {
         )
 
         // TODO: add running checkers and check that it's safe to compile
-        val firAnalyzerFacade = FirAnalyzerFacade(
+        konst firAnalyzerFacade = FirAnalyzerFacade(
             session,
             Fir2IrConfiguration(
                 languageVersionSettings = configuration.languageVersionSettings,
                 linkViaSignatures = configuration.getBoolean(JVMConfigurationKeys.LINK_VIA_SIGNATURES),
-                evaluatedConstTracker = configuration
-                    .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EvaluatedConstTracker.create()),
+                ekonstuatedConstTracker = configuration
+                    .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EkonstuatedConstTracker.create()),
             ),
             files,
             emptyList(),
             IrGenerationExtension.getInstances(project),
             FirParser.Psi,
         )
-        val fir2IrExtensions = JvmFir2IrExtensions(configuration, JvmIrDeserializerImpl(), JvmIrMangler)
+        konst fir2IrExtensions = JvmFir2IrExtensions(configuration, JvmIrDeserializerImpl(), JvmIrMangler)
 
-        val commonMemberStorage = Fir2IrCommonMemberStorage(
+        konst commonMemberStorage = Fir2IrCommonMemberStorage(
             signatureComposerForJvmFir2Ir(firAnalyzerFacade.fir2IrConfiguration.linkViaSignatures),
             FirJvmKotlinMangler(),
         )
 
-        val (moduleFragment, components, pluginContext) = firAnalyzerFacade.convertToIr(
+        konst (moduleFragment, components, pluginContext) = firAnalyzerFacade.convertToIr(
             fir2IrExtensions,
             commonMemberStorage,
             irBuiltIns = null
         )
-        val dummyBindingContext = NoScopeRecordCliBindingTrace().bindingContext
+        konst dummyBindingContext = NoScopeRecordCliBindingTrace().bindingContext
 
-        val codegenFactory = JvmIrCodegenFactory(
+        konst codegenFactory = JvmIrCodegenFactory(
             configuration,
             configuration.get(CLIConfigurationKeys.PHASE_CONFIG),
         )
 
-        val generationState = GenerationState.Builder(
+        konst generationState = GenerationState.Builder(
             project, classBuilderFactory, moduleFragment.descriptor, dummyBindingContext, configuration
         ).isIrBackend(
             true
@@ -190,13 +190,13 @@ object GenerationUtils {
         packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
         trace: BindingTrace
     ): GenerationState {
-        val logger = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)?.let { messageCollectorLogger(it) }
+        konst logger = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)?.let { messageCollectorLogger(it) }
             ?: DummyLogger
-        val resolvedKlibs = configuration.get(JVMConfigurationKeys.KLIB_PATHS)?.let { klibPaths ->
+        konst resolvedKlibs = configuration.get(JVMConfigurationKeys.KLIB_PATHS)?.let { klibPaths ->
             jvmResolveLibraries(klibPaths, logger)
         }
 
-        val analysisResult =
+        konst analysisResult =
             JvmResolveUtil.analyzeAndCheckForErrors(
                 project, files, configuration, packagePartProvider, trace,
                 klibList = resolvedKlibs?.getFullList() ?: emptyList()
@@ -214,9 +214,9 @@ object GenerationUtils {
         analysisResult: AnalysisResult,
         configureGenerationState: GenerationState.Builder.() -> Unit = {},
     ): GenerationState {
-        val isIrBackend =
+        konst isIrBackend =
             configuration.getBoolean(JVMConfigurationKeys.IR)
-        val generationState = GenerationState.Builder(
+        konst generationState = GenerationState.Builder(
             project, classBuilderFactory, analysisResult.moduleDescriptor, analysisResult.bindingContext,
             configuration
         ).isIrBackend(isIrBackend).apply(configureGenerationState).build()

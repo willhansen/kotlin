@@ -22,17 +22,17 @@ interface GradleKpmConfigurationAttributesSetup<in T : GradleKpmFragment> {
 }
 
 class GradleKpmConfigurationAttributesSetupContext<T : GradleKpmFragment> internal constructor(
-    internal val attributes: AttributeContainer,
-    val fragment: T,
+    internal konst attributes: AttributeContainer,
+    konst fragment: T,
 ) : AttributeContainer by attributes {
-    val project: Project get() = fragment.project
+    konst project: Project get() = fragment.project
 
     inline fun <reified T : Named> named(name: String): T = project.objects.named(T::class.java, name)
 
     inline fun <reified T : Named> namedAttribute(key: Attribute<T>, name: String) = apply { attribute(key, named(name)) }
 
-    override fun <K : Any> attribute(key: Attribute<K>, value: K): GradleKpmConfigurationAttributesSetupContext<T> = apply {
-        attributes.attribute(key, value)
+    override fun <K : Any> attribute(key: Attribute<K>, konstue: K): GradleKpmConfigurationAttributesSetupContext<T> = apply {
+        attributes.attribute(key, konstue)
     }
 }
 
@@ -42,7 +42,7 @@ fun <T : GradleKpmFragment> GradleKpmConfigurationAttributesSetup(
 ): GradleKpmConfigurationAttributesSetup<T> {
     return object : GradleKpmConfigurationAttributesSetup<T> {
         override fun setupAttributes(attributes: AttributeContainer, fragment: T) {
-            val context = GradleKpmConfigurationAttributesSetupContext(attributes, fragment)
+            konst context = GradleKpmConfigurationAttributesSetupContext(attributes, fragment)
             context.setAttributes()
         }
     }
@@ -73,7 +73,7 @@ operator fun <T : GradleKpmFragment> GradleKpmConfigurationAttributesSetup<T>.pl
     return GradleKpmCompositeConfigurationAttributesSetup(listOf(this, other))
 }
 
-internal class GradleKpmCompositeConfigurationAttributesSetup<in T : GradleKpmFragment>(val children: List<GradleKpmConfigurationAttributesSetup<T>>) :
+internal class GradleKpmCompositeConfigurationAttributesSetup<in T : GradleKpmFragment>(konst children: List<GradleKpmConfigurationAttributesSetup<T>>) :
     GradleKpmConfigurationAttributesSetup<T> {
     override fun setupAttributes(attributes: AttributeContainer, fragment: T) {
         children.forEach { child -> child.setupAttributes(attributes, fragment) }

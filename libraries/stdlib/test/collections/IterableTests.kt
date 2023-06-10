@@ -82,7 +82,7 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
         expect(null) { data.firstOrNull { it.startsWith("x") } }
         expect(null) { empty.firstOrNull() }
 
-        val f = data.firstOrNull { it.startsWith("f") }
+        konst f = data.firstOrNull { it.startsWith("f") }
         assertEquals("foo", f)
     }
 
@@ -108,8 +108,8 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
 
     @Test
     fun zipWithNext() {
-        val data = createFrom("", "a", "xyz")
-        val lengthDeltas = data.zipWithNext { a: String, b: String -> b.length - a.length }
+        konst data = createFrom("", "a", "xyz")
+        konst lengthDeltas = data.zipWithNext { a: String, b: String -> b.length - a.length }
         assertEquals(listOf(1, 2), lengthDeltas)
 
         assertTrue(empty.zipWithNext { a: String, b: String -> a + b }.isEmpty())
@@ -126,15 +126,15 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
 
     @Test
     fun chunked() {
-        val size = 7
-        val data = createFrom(Array(size) { "$it" })
-        val result = data.chunked(4)
+        konst size = 7
+        konst data = createFrom(Array(size) { "$it" })
+        konst result = data.chunked(4)
         assertEquals(listOf(
                 listOf("0", "1", "2", "3"),
                 listOf("4", "5", "6")
         ), result)
 
-        val result2 = data.chunked(3) { it.joinToString("") }
+        konst result2 = data.chunked(3) { it.joinToString("") }
         assertEquals(listOf("012", "345", "6"), result2)
 
         data.toList().let { expectedSingleChunk ->
@@ -157,15 +157,15 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
 
     @Test
     fun windowed() {
-        val size = 7
-        val data = createFrom(Array(size) { "$it" })
-        val result = data.windowed(4, 2)
+        konst size = 7
+        konst data = createFrom(Array(size) { "$it" })
+        konst result = data.windowed(4, 2)
         assertEquals(listOf(
                 listOf("0", "1", "2", "3"),
                 listOf("2", "3", "4", "5")
         ), result)
 
-        val resultPartial = data.windowed(4, 2, partialWindows = true)
+        konst resultPartial = data.windowed(4, 2, partialWindows = true)
         assertEquals(listOf(
                 listOf("0", "1", "2", "3"),
                 listOf("2", "3", "4", "5"),
@@ -174,10 +174,10 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
         ), resultPartial)
 
 
-        val result2 = data.windowed(2, 3) { it.joinToString("") }
+        konst result2 = data.windowed(2, 3) { it.joinToString("") }
         assertEquals(listOf("01", "34"), result2)
 
-        val result2partial = data.windowed(2, 3, partialWindows = true) { it.joinToString("") }
+        konst result2partial = data.windowed(2, 3, partialWindows = true) { it.joinToString("") }
         assertEquals(listOf("01", "34", "6"), result2partial)
 
         assertEquals(data.chunked(2), data.windowed(2, 2, partialWindows = true))
@@ -188,7 +188,7 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
         assertEquals(data.toList(), data.windowed(size, 1).single())
         assertTrue(data.windowed(size + 1, 1).isEmpty())
 
-        val result3partial = data.windowed(size, 1, partialWindows = true)
+        konst result3partial = data.windowed(size, 1, partialWindows = true)
         result3partial.forEachIndexed { index, window ->
             assertEquals(size - index, window.size, "size of window#$index")
         }
@@ -203,18 +203,18 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
         // index overflow tests
         for (partialWindows in listOf(true, false)) {
 
-            val windowed1 = data.windowed(5, Int.MAX_VALUE, partialWindows)
+            konst windowed1 = data.windowed(5, Int.MAX_VALUE, partialWindows)
             assertEquals(data.take(5), windowed1.single())
-            val windowed2 = data.windowed(Int.MAX_VALUE, 5, partialWindows)
+            konst windowed2 = data.windowed(Int.MAX_VALUE, 5, partialWindows)
             assertEquals(if (partialWindows) listOf(data.toList(), listOf("5", "6")) else listOf(), windowed2)
-            val windowed3 = data.windowed(Int.MAX_VALUE, Int.MAX_VALUE, partialWindows)
+            konst windowed3 = data.windowed(Int.MAX_VALUE, Int.MAX_VALUE, partialWindows)
             assertEquals(if (partialWindows) listOf(data.toList()) else listOf(), windowed3)
 
-            val windowedTransform1 = data.windowed(5, Int.MAX_VALUE, partialWindows) { it.joinToString("") }
+            konst windowedTransform1 = data.windowed(5, Int.MAX_VALUE, partialWindows) { it.joinToString("") }
             assertEquals("01234", windowedTransform1.single())
-            val windowedTransform2 = data.windowed(Int.MAX_VALUE, 5, partialWindows) { it.joinToString("") }
+            konst windowedTransform2 = data.windowed(Int.MAX_VALUE, 5, partialWindows) { it.joinToString("") }
             assertEquals(if (partialWindows) listOf("0123456", "56") else listOf(), windowedTransform2)
-            val windowedTransform3 = data.windowed(Int.MAX_VALUE, Int.MAX_VALUE, partialWindows) { it.joinToString("") }
+            konst windowedTransform3 = data.windowed(Int.MAX_VALUE, Int.MAX_VALUE, partialWindows) { it.joinToString("") }
             assertEquals(if (partialWindows) listOf("0123456") else listOf(), windowedTransform3)
         }
     }
@@ -222,10 +222,10 @@ abstract class OrderedIterableTests<T : Iterable<String>>(createFrom: (Array<out
 
 }
 
-abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out String>) -> T, val empty: T) {
+abstract class IterableTests<T : Iterable<String>>(konst createFrom: (Array<out String>) -> T, konst empty: T) {
     fun createFrom(vararg items: String): T = createFrom(items)
 
-    val data = createFrom("foo", "bar")
+    konst data = createFrom("foo", "bar")
 
     @Test
     fun any() {
@@ -255,7 +255,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun filter() {
-        val foo = data.filter { it.startsWith("f") }
+        konst foo = data.filter { it.startsWith("f") }
         assertStaticAndRuntimeTypeIs<List<String>>(foo)
         expect(true) { foo.all { it.startsWith("f") } }
         expect(1) { foo.size }
@@ -264,13 +264,13 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun filterIndexed() {
-        val result = data.filterIndexed { index, value -> value.first() == ('a' + index) }
+        konst result = data.filterIndexed { index, konstue -> konstue.first() == ('a' + index) }
         assertEquals(listOf("bar"), result)
     }
 
     @Test
     fun drop() {
-        val foo = data.drop(1)
+        konst foo = data.drop(1)
         assertStaticAndRuntimeTypeIs<List<String>>(foo)
         expect(true) { foo.all { it.startsWith("b") } }
         expect(1) { foo.size }
@@ -279,7 +279,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun dropWhile() {
-        val foo = data.dropWhile { it[0] == 'f' }
+        konst foo = data.dropWhile { it[0] == 'f' }
         assertStaticAndRuntimeTypeIs<List<String>>(foo)
         expect(true) { foo.all { it.startsWith("b") } }
         expect(1) { foo.size }
@@ -288,7 +288,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun filterNot() {
-        val notFoo = data.filterNot { it.startsWith("f") }
+        konst notFoo = data.filterNot { it.startsWith("f") }
         assertStaticAndRuntimeTypeIs<List<String>>(notFoo)
         expect(true) { notFoo.none { it.startsWith("f") } }
         expect(1) { notFoo.size }
@@ -305,7 +305,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
     @Test
     fun onEach() {
         var count = 0
-        val newData = data.onEach { count += it.length }
+        konst newData = data.onEach { count += it.length }
         assertEquals(6, count)
         assertTrue(data === newData)
 
@@ -316,7 +316,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
     @Test
     fun onEachIndexed() {
         var count = 0
-        val newData = data.onEachIndexed { i, e -> count += i + e.length }
+        konst newData = data.onEachIndexed { i, e -> count += i + e.length }
         assertEquals(7, count)
         assertSame(data, newData)
 
@@ -356,7 +356,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun map() {
-        val lengths = data.map { it.length }
+        konst lengths = data.map { it.length }
         assertTrue {
             lengths.all { it == 3 }
         }
@@ -371,14 +371,14 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun mapIndexed() {
-        val shortened = data.mapIndexed { index, value -> value.substring(0..index) }
+        konst shortened = data.mapIndexed { index, konstue -> konstue.substring(0..index) }
         assertEquals(2, shortened.size)
         assertEquals(listOf("f", "ba"), shortened)
     }
 
     @Test
     fun withIndex() {
-        val indexed = data.withIndex().map { it.value.substring(0..it.index) }
+        konst indexed = data.withIndex().map { it.konstue.substring(0..it.index) }
         assertEquals(2, indexed.size)
         assertEquals(listOf("f", "ba"), indexed)
     }
@@ -445,14 +445,14 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun reduce() {
-        val reduced = data.reduce { a, b -> a + b }
+        konst reduced = data.reduce { a, b -> a + b }
         assertEquals(6, reduced.length)
         assertTrue(reduced == "foobar" || reduced == "barfoo")
     }
 
     @Test
     fun scan() {
-        val accumulators = data.scan("baz") { acc, e -> acc + e }
+        konst accumulators = data.scan("baz") { acc, e -> acc + e }
         assertEquals(3, accumulators.size)
         assertEquals("baz", accumulators.first())
         assertTrue(accumulators.elementAt(1) in listOf("bazfoo", "bazbar"))
@@ -461,7 +461,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun scanIndexed() {
-        val accumulators = data.scanIndexed("baz") { i, acc, e -> acc + i + e }
+        konst accumulators = data.scanIndexed("baz") { i, acc, e -> acc + i + e }
         assertEquals(3, accumulators.size)
         assertEquals("baz", accumulators.first())
         assertTrue(accumulators.elementAt(1) in listOf("baz0foo", "baz0bar"))
@@ -470,7 +470,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun runningReduce() {
-        val accumulators = data.runningReduce { acc, e -> acc + e }
+        konst accumulators = data.runningReduce { acc, e -> acc + e }
         assertEquals(2, accumulators.size)
         assertTrue(accumulators.first() in listOf("foo", "bar"))
         assertTrue(accumulators.last() in listOf("foobar", "barfoo"))
@@ -478,7 +478,7 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun runningReduceIndexed() {
-        val accumulators = data.runningReduceIndexed { i, acc, e -> acc + i + e }
+        konst accumulators = data.runningReduceIndexed { i, acc, e -> acc + i + e }
         assertEquals(2, accumulators.size)
         assertTrue(accumulators.first() in listOf("foo", "bar"))
         assertTrue(accumulators.last() in listOf("foo1bar", "bar1foo"))
@@ -486,12 +486,12 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun mapAndJoinToString() {
-        val result = data.joinToString(separator = "-") { it.uppercase() }
+        konst result = data.joinToString(separator = "-") { it.uppercase() }
         assertEquals("FOO-BAR", result)
     }
 
     fun testPlus(doPlus: (Iterable<String>) -> List<String>) {
-        val result: List<String> = doPlus(data)
+        konst result: List<String> = doPlus(data)
         assertEquals(listOf("foo", "bar", "zoo", "g"), result)
         assertFalse(result === data)
     }
@@ -518,25 +518,25 @@ abstract class IterableTests<T : Iterable<String>>(val createFrom: (Array<out St
 
     @Test
     fun minusElement() {
-        val result = data - "foo" - "g"
+        konst result = data - "foo" - "g"
         assertEquals(listOf("bar"), result)
     }
 
     @Test
     fun minusCollection() {
-        val result = data - listOf("foo", "g")
+        konst result = data - listOf("foo", "g")
         assertEquals(listOf("bar"), result)
     }
 
     @Test
     fun minusArray() {
-        val result = data - arrayOf("foo", "g")
+        konst result = data - arrayOf("foo", "g")
         assertEquals(listOf("bar"), result)
     }
 
     @Test
     fun minusSequence() {
-        val result = data - sequenceOf("foo", "g")
+        konst result = data - sequenceOf("foo", "g")
         assertEquals(listOf("bar"), result)
     }
 
@@ -570,21 +570,21 @@ fun <T> Iterator<T>.assertSorted(isInOrder: (T, T) -> Boolean) {
     var prev = next()
     while (hasNext()) {
         index += 1
-        val next = next()
+        konst next = next()
         assertTrue(isInOrder(prev, next), "Not in order at position $index, element[${index - 1}]: $prev, element[$index]: $next")
         prev = next
     }
     return
 }
 
-data class Sortable<K : Comparable<K>>(val key: K, val index: Int) : Comparable<Sortable<K>> {
+data class Sortable<K : Comparable<K>>(konst key: K, konst index: Int) : Comparable<Sortable<K>> {
     override fun compareTo(other: Sortable<K>): Int = this.key compareTo other.key
 }
 
 
 fun <K : Comparable<K>> Iterator<Sortable<K>>.assertStableSorted(descending: Boolean = false) {
     assertSorted { a, b ->
-        val relation = a.key compareTo b.key
+        konst relation = a.key compareTo b.key
         (if (descending) relation > 0 else relation < 0) || relation == 0 && a.index < b.index
     }
 }

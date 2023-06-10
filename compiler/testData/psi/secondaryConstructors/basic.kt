@@ -1,7 +1,7 @@
 class A {
     constructor() {}
 
-    val x: Int
+    konst x: Int
 
     private @annot constructor(x: Int) {}
 

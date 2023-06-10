@@ -7,7 +7,7 @@ public class StockMarketTableModel() {
     }
 
     companion object {
-        private val COLUMN_TITLES : Array<Int?> = arrayOfNulls<Int>(10)
+        private konst COLUMN_TITLES : Array<Int?> = arrayOfNulls<Int>(10)
     }
 }
 

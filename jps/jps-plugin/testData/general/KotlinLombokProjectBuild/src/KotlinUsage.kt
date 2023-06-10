@@ -1,8 +1,8 @@
 fun main() {
-    val obj = SomePojo()
+    konst obj = SomePojo()
     obj.name = "test"
     obj.age = 12
-    val v = obj.isHuman
+    konst v = obj.isHuman
     obj.isHuman = !v
     println(obj)
 }

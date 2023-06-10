@@ -2,7 +2,7 @@ package
 
 public final class My {
     public constructor My()
-    public final val another: kotlin.String
+    public final konst another: kotlin.String
     public final var delegate: kotlin.String
     public final var delegateWithBackingField: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

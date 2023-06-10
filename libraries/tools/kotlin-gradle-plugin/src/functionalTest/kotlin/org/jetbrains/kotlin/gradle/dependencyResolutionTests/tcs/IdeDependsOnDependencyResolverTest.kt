@@ -18,15 +18,15 @@ class IdeDependsOnDependencyResolverTest {
 
     @Test
     fun `test - sample 0 - default dependsOn to commonMain and commonTest`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
 
         IdeDependsOnDependencyResolver.resolve(jvmMain)
             .filterIsInstance<IdeaKotlinSourceDependency>()
@@ -40,13 +40,13 @@ class IdeDependsOnDependencyResolverTest {
 
     @Test
     fun `test - sample 1 - custom dependsOn edge`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.jvm()
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val customMain = kotlin.sourceSets.create("customMain")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst customMain = kotlin.sourceSets.create("customMain")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
 
         jvmMain.dependsOn(customMain)
         customMain.dependsOn(commonMain)

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.resolved.PreparedKotlinCompila
 import java.io.File
 
 class Yarn : NpmApi {
-    private val yarnWorkspaces = YarnWorkspaces()
+    private konst yarnWorkspaces = YarnWorkspaces()
 
     override fun preparedFiles(nodeJs: NpmEnvironment): Collection<File> =
         yarnWorkspaces.preparedFiles(nodeJs)

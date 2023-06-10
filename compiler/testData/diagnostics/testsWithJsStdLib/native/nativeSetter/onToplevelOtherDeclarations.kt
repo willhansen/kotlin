@@ -5,7 +5,7 @@
 fun toplevelFun(): Any<!> = 0
 
 <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
-val toplevelVal = 0
+konst toplevelVal = 0
 
 <!WRONG_ANNOTATION_TARGET!>@nativeSetter<!>
 class Foo {}

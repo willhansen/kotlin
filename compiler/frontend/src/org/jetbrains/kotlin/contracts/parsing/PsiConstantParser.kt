@@ -25,18 +25,18 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
 import org.jetbrains.kotlin.types.KotlinType
 
-internal class PsiConstantParser(private val callContext: ContractCallContext) : KtVisitor<ConstantReference?, Unit>() {
+internal class PsiConstantParser(private konst callContext: ContractCallContext) : KtVisitor<ConstantReference?, Unit>() {
     override fun visitKtElement(element: KtElement, data: Unit?): ConstantReference? = null
 
     override fun visitConstantExpression(expression: KtConstantExpression, data: Unit?): ConstantReference? {
-        val type: KotlinType = callContext.bindingContext.getType(expression) ?: return null
+        konst type: KotlinType = callContext.bindingContext.getType(expression) ?: return null
 
-        val compileTimeConstant: CompileTimeConstant<*> = callContext.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expression)
+        konst compileTimeConstant: CompileTimeConstant<*> = callContext.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expression)
             ?: return null
 
-        val value: Any? = compileTimeConstant.getValue(type)
+        konst konstue: Any? = compileTimeConstant.getValue(type)
 
-        return when (value) {
+        return when (konstue) {
             true -> BooleanConstantReference.TRUE
             false -> BooleanConstantReference.FALSE
             null -> ConstantReference.NULL

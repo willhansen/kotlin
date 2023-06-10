@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.analysis.project.structure.KtModule
 import org.jetbrains.kotlin.asJava.classes.lazyPub
 import org.jetbrains.kotlin.idea.KotlinLanguage
-import org.jetbrains.kotlin.light.classes.symbol.basicIsEquivalentTo
+import org.jetbrains.kotlin.light.classes.symbol.basicIsEquikonstentTo
 import org.jetbrains.kotlin.light.classes.symbol.compareSymbolPointers
 import org.jetbrains.kotlin.light.classes.symbol.toArrayIfNotEmptyOrDefault
 import org.jetbrains.kotlin.light.classes.symbol.withSymbol
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 
 internal class SymbolLightTypeParameterList(
-    internal val owner: PsiTypeParameterListOwner,
-    private val symbolWithTypeParameterPointer: KtSymbolPointer<KtSymbolWithTypeParameters>,
-    internal val ktModule: KtModule,
-    private val ktDeclaration: KtTypeParameterListOwner?,
+    internal konst owner: PsiTypeParameterListOwner,
+    private konst symbolWithTypeParameterPointer: KtSymbolPointer<KtSymbolWithTypeParameters>,
+    internal konst ktModule: KtModule,
+    private konst ktDeclaration: KtTypeParameterListOwner?,
 ) : LightElement(owner.manager, KotlinLanguage.INSTANCE), PsiTypeParameterList {
     override fun accept(visitor: PsiElementVisitor) {
         if (visitor is JavaElementVisitor) {
@@ -40,7 +40,7 @@ internal class SymbolLightTypeParameterList(
         place: PsiElement
     ): Boolean = typeParameters.all { processor.execute(it, state) }
 
-    private val _typeParameters: Collection<PsiTypeParameter> by lazyPub {
+    private konst _typeParameters: Collection<PsiTypeParameter> by lazyPub {
         symbolWithTypeParameterPointer.withSymbol(ktModule) {
             it.typeParameters.mapIndexed { index, parameter ->
                 SymbolLightTypeParameter(
@@ -71,7 +71,7 @@ internal class SymbolLightTypeParameterList(
 
     override fun hashCode(): Int = ktDeclaration.hashCode() + 1
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean = basicIsEquivalentTo(this, another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean = basicIsEquikonstentTo(this, another)
 
     override fun getParent(): PsiElement = owner
     override fun getContainingFile(): PsiFile = parent.containingFile

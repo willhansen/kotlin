@@ -14,10 +14,10 @@ fun String.baz(): Int = this.length
 fun check(f: KFunction<Int>) {
     assert(f.javaConstructor == null) { "Fail f constructor" }
     assert(f.javaMethod != null) { "Fail f method" }
-    val m = f.javaMethod!!
+    konst m = f.javaMethod!!
 
     assert(m.kotlinFunction != null) { "Fail m function" }
-    val ff = m.kotlinFunction!!
+    konst ff = m.kotlinFunction!!
 
     assert(f == ff) { "Fail f != ff" }
 }

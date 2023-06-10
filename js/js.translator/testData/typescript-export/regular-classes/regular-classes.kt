@@ -12,24 +12,24 @@ package foo
 class A
 
 @JsExport
-class A1(val x: Int)
+class A1(konst x: Int)
 
 @JsExport
-class A2(val x: String, var y: Boolean)
+class A2(konst x: String, var y: Boolean)
 
 @JsExport
 class A3 {
-    val x: Int = 100
+    konst x: Int = 100
 }
 
 @JsExport
-class A4<T>(val value: T) {
-    fun test(): T = value
+class A4<T>(konst konstue: T) {
+    fun test(): T = konstue
 }
 @JsExport
 class A5 {
     companion object {
-        val x = 10
+        konst x = 10
     }
 }
 
@@ -40,4 +40,4 @@ open class A6 {
 }
 
 @JsExport
-class GenericClassWithConstraint<T: A6>(val test: T)
+class GenericClassWithConstraint<T: A6>(konst test: T)

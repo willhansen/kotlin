@@ -10,7 +10,7 @@ fun test() {
     }
 
     Sam {
-        val a = <!NO_THIS!>this<!>
+        konst a = <!NO_THIS!>this<!>
         System.out.<!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(a)
     }
 }

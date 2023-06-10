@@ -10,7 +10,7 @@ public open class Base {
 
 public final class Derived : Proxy, Intermediate {
     public constructor Derived()
-    public final override /*2*/ /*fake_override*/ val x: kotlin.String
+    public final override /*2*/ /*fake_override*/ konst x: kotlin.String
     public final override /*1*/ /*fake_override*/ var x: kotlin.String!
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -20,7 +20,7 @@ public final class Derived : Proxy, Intermediate {
 
 public open class Intermediate : Base {
     public constructor Intermediate()
-    public final val x: kotlin.String
+    public final konst x: kotlin.String
     public final override /*1*/ /*fake_override*/ var x: kotlin.String!
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -28,7 +28,7 @@ public open class Intermediate : Base {
 }
 
 public interface Proxy {
-    public abstract val x: kotlin.String
+    public abstract konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -33,7 +33,7 @@ open class KotlinJsPlugin: Plugin<Project> {
 
         project.enableKgpDependencyResolution(isEnabled = false)
 
-        val kotlinExtension = project.kotlinExtension as KotlinJsProjectExtension
+        konst kotlinExtension = project.kotlinExtension as KotlinJsProjectExtension
         customizeKotlinDependencies(project)
 
         kotlinExtension.apply {
@@ -41,7 +41,7 @@ open class KotlinJsPlugin: Plugin<Project> {
             legacyPreset = KotlinJsSingleTargetPreset(project)
         }
 
-        project.runProjectConfigurationHealthCheckWhenEvaluated {
+        project.runProjectConfigurationHealthCheckWhenEkonstuated {
             @Suppress("DEPRECATION")
             if (kotlinExtension._target == null) {
                 project.logger.warn(
@@ -69,7 +69,7 @@ open class KotlinJsPlugin: Plugin<Project> {
         // Explicitly create configurations for main and test
         // It is because in single platform we want to declare dependencies with methods not with strings in Kotlin DSL
         // implementation("foo") instead of "implementation"("foo")
-        val configurations = project.configurations
+        konst configurations = project.configurations
         listOf(MAIN_COMPILATION_NAME, TEST_COMPILATION_NAME)
             // in main compilation we don't need additional name
             .map { it.removeSuffix(MAIN_COMPILATION_NAME) }

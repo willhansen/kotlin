@@ -4,7 +4,7 @@
 
 fun foo(param: String = "global") = "foo before change $param"
 
-class X(val constructorParam: String = "constructor") {
+class X(konst constructorParam: String = "constructor") {
     fun bar(param: String = "member") = "bar before change $param and $constructorParam"
 }
 
@@ -13,7 +13,7 @@ class X(val constructorParam: String = "constructor") {
 
 fun foo(param: String = "in file") = "foo after change $param"
 
-class X(val constructorParam: String = "in constructor") {
+class X(konst constructorParam: String = "in constructor") {
     fun bar(param: String = "in class") = "bar after change $param and $constructorParam"
 }
 

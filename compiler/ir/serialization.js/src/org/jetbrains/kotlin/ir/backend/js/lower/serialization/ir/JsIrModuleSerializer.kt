@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.ir.util.IrMessageLogger
 class JsIrModuleSerializer(
     messageLogger: IrMessageLogger,
     irBuiltIns: IrBuiltIns,
-    private val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
+    private konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>,
     compatibilityMode: CompatibilityMode,
-    val skipExpects: Boolean,
+    konst skipExpects: Boolean,
     normalizeAbsolutePaths: Boolean,
     sourceBaseDirs: Collection<String>,
-    private val languageVersionSettings: LanguageVersionSettings,
+    private konst languageVersionSettings: LanguageVersionSettings,
     shouldCheckSignaturesOnUniqueness: Boolean = true
 ) : IrModuleSerializer<JsIrFileSerializer>(messageLogger, compatibilityMode, normalizeAbsolutePaths, sourceBaseDirs) {
 
-    private val globalDeclarationTable = JsGlobalDeclarationTable(
+    private konst globalDeclarationTable = JsGlobalDeclarationTable(
         irBuiltIns,
         if (shouldCheckSignaturesOnUniqueness) JsUniqIdClashTracker() else IdSignatureClashTracker.DEFAULT_TRACKER
     )

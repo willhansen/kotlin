@@ -1,5 +1,5 @@
 interface Canvas {
-  abstract val suffix: String
+  abstract konst suffix: String
     abstract get
 
 }
@@ -29,7 +29,7 @@ object MyCanvas : Canvas {
 
   }
 
-  override val suffix: String
+  override konst suffix: String
     field = ""
     override get
 

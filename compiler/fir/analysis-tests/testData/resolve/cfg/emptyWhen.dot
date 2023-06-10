@@ -61,7 +61,7 @@ digraph emptyWhen_kt {
                 color=blue
                 17 [label="Enter when"];
                 18 [label="Access variable R|<local>/x|"];
-                19 [label="Variable declaration: lval y: R|kotlin/Int|"];
+                19 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
                 20 [label="Synthetic else branch"];
                 21 [label="Exit when"];
             }

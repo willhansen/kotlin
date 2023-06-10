@@ -20,7 +20,7 @@ package other
 class a {}
 
 fun test(a_: a.b) {
-    val a_2 = a.<!UNRESOLVED_REFERENCE!>b<!>()
+    konst a_2 = a.<!UNRESOLVED_REFERENCE!>b<!>()
 }
 
 //FILE: c2.kt
@@ -35,7 +35,7 @@ class a {
 fun test(_ab: a.b) {
     _ab.other2_ab()
 
-    val _ab2 = a.b()
+    konst _ab2 = a.b()
     _ab2.other2_ab()
 }
 
@@ -45,7 +45,7 @@ package some
 fun test(_ab: a.b) {
     _ab.some_ab()
 
-    val _ab2 = a.b()
+    konst _ab2 = a.b()
     _ab2.some_ab()
 }
 

@@ -9,7 +9,7 @@ public final class A {
 
     public object B {
         private constructor B()
-        public final val prop: kotlin.Int = 5
+        public final konst prop: kotlin.Int = 5
         public final fun bar(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -25,8 +25,8 @@ public final class A {
 
     public companion object Companion {
         private constructor Companion()
-        public final val C: kotlin.Int = 3
-        public final val prop: kotlin.Int = 2
+        public final konst C: kotlin.Int = 3
+        public final konst prop: kotlin.Int = 2
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

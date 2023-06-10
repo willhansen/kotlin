@@ -4,12 +4,12 @@
 
 object FiveTimes
 
-class IntCell(var value: Int)
+class IntCell(var konstue: Int)
 
 interface IReceiver {
     operator fun FiveTimes.iterator() = IntCell(5)
-    operator fun IntCell.hasNext() = value > 0
-    operator fun IntCell.next() = value--
+    operator fun IntCell.hasNext() = konstue > 0
+    operator fun IntCell.next() = konstue--
 }
 
 fun IReceiver.test() {

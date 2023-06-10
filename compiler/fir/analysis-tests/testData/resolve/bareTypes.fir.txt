@@ -12,7 +12,7 @@ FILE: bareTypes.kt
         (R|<local>/a| as R|MutableA<kotlin/String>|).R|SubstitutionOverride</MutableA.add: R|kotlin/Unit|>|(String())
     }
     public final fun test2(a: R|A<kotlin/String>|): R|kotlin/Unit| {
-        lval b: R|MutableString| = (R|<local>/a| as R|MutableString|)
+        lkonst b: R|MutableString| = (R|<local>/a| as R|MutableString|)
         R|<local>/b|.R|SubstitutionOverride</MutableString.add: R|kotlin/Unit|>|(String())
     }
     public final fun test3(a: R|A<kotlin/String>|): R|kotlin/Unit| {

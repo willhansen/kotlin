@@ -14,12 +14,12 @@ fun outer(): Unit
     abstract fun afun(): Unit
 
     // CHECK:
-    //   Mangled name: #outer(){}.ALocal{}aval
-    abstract val aval: Int
+    //   Mangled name: #outer(){}.ALocal{}akonst
+    abstract konst akonst: Int
       // CHECK JVM_IR:
-      //   Mangled name: #outer(){}.ALocal#<get-aval>(){}kotlin.Int
+      //   Mangled name: #outer(){}.ALocal#<get-akonst>(){}kotlin.Int
       // CHECK JS_IR NATIVE:
-      //   Mangled name: #outer(){}.ALocal#<get-aval>(){}
+      //   Mangled name: #outer(){}.ALocal#<get-akonst>(){}
       abstract get
 
     // CHECK:
@@ -40,13 +40,13 @@ fun outer(): Unit
   //   Mangled name: #outer(){}.Local
   local class Local : ALocal {
     // CHECK:
-    //   Mangled name: #outer(){}.Local{}aval
-    override val aval: Int
+    //   Mangled name: #outer(){}.Local{}akonst
+    override konst akonst: Int
       field
       // CHECK JVM_IR:
-      //   Mangled name: #outer(){}.Local#<get-aval>(){}kotlin.Int
+      //   Mangled name: #outer(){}.Local#<get-akonst>(){}kotlin.Int
       // CHECK JS_IR NATIVE:
-      //   Mangled name: #outer(){}.Local#<get-aval>(){}
+      //   Mangled name: #outer(){}.Local#<get-akonst>(){}
       override get
 
     // CHECK:

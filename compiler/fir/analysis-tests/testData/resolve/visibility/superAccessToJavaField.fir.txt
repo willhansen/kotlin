@@ -6,7 +6,7 @@ FILE: main.kt
             super<R|Derived|>()
         }
 
-        public final val parentNode: R|kotlin/String?|
+        public final konst parentNode: R|kotlin/String?|
             public get(): R|kotlin/String?| {
                 ^ this@R|/Implementation|.super<R|Derived|>.R|/Derived.parent|
             }

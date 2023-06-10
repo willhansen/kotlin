@@ -23,15 +23,15 @@ namespace {
 
 class Node : private Pinned {
 public:
-    explicit Node(int value) : value_(value) {}
+    explicit Node(int konstue) : konstue_(konstue) {}
 
-    int& operator*() { return value_; }
-    const int& operator*() const { return value_; }
+    int& operator*() { return konstue_; }
+    const int& operator*() const { return konstue_; }
 
     void clearNext() noexcept { next_ = nullptr; }
 
-    int value() const {
-        return value_;
+    int konstue() const {
+        return konstue_;
     }
 
 private:
@@ -49,25 +49,25 @@ private:
         return true;
     }
 
-    int value_;
+    int konstue_;
     Node* next_ = nullptr;
 };
 
 using TestSubject = CooperativeIntrusiveList<Node>;
 
 std_support::vector<int> range(int first, int lastExclusive) {
-    std_support::vector<int> values;
+    std_support::vector<int> konstues;
     for (int i = first; i < lastExclusive; ++i) {
-        values.push_back(i);
+        konstues.push_back(i);
     }
-    return values;
+    return konstues;
 }
 
 template<typename Values>
-[[nodiscard]] std_support::list<typename TestSubject::value_type> fill(TestSubject& list, Values&& values) {
-    std_support::list<typename TestSubject::value_type> nodesHandle;
-    for (int value: values) {
-        auto& elem = nodesHandle.emplace_back(value);
+[[nodiscard]] std_support::list<typename TestSubject::konstue_type> fill(TestSubject& list, Values&& konstues) {
+    std_support::list<typename TestSubject::konstue_type> nodesHandle;
+    for (int konstue: konstues) {
+        auto& elem = nodesHandle.emplace_back(konstue);
         list.tryPushLocal(elem);
     }
     return nodesHandle;
@@ -75,7 +75,7 @@ template<typename Values>
 
 void drainLocalInto(TestSubject& list, std_support::vector<int>& dest) {
     while (auto elem = list.tryPopLocal()) {
-        dest.push_back(elem->value());
+        dest.push_back(elem->konstue());
     }
 }
 
@@ -96,10 +96,10 @@ TEST(CooperativeIntrusiveListTest, TryPopLocalEmpty) {
 
 TEST(CooperativeIntrusiveListTest, TryPushLocalPopLocal) {
     TestSubject list;
-    typename TestSubject::value_type value1(1);
-    typename TestSubject::value_type value2(2);
-    bool pushed1 = list.tryPushLocal(value1);
-    bool pushed2 = list.tryPushLocal(value2);
+    typename TestSubject::konstue_type konstue1(1);
+    typename TestSubject::konstue_type konstue2(2);
+    bool pushed1 = list.tryPushLocal(konstue1);
+    bool pushed2 = list.tryPushLocal(konstue2);
     EXPECT_THAT(pushed1, true);
     EXPECT_THAT(pushed2, true);
     EXPECT_THAT(list.localEmpty(), false);
@@ -115,10 +115,10 @@ TEST(CooperativeIntrusiveListTest, TryPushLocalPopLocal) {
 
 TEST(CooperativeIntrusiveListTest, TryPushLocalTwice) {
     TestSubject list;
-    typename TestSubject::value_type value(1);
-    bool pushed1 = list.tryPushLocal(value);
+    typename TestSubject::konstue_type konstue(1);
+    bool pushed1 = list.tryPushLocal(konstue);
     EXPECT_THAT(pushed1, true);
-    bool pushed2 = list.tryPushLocal(value);
+    bool pushed2 = list.tryPushLocal(konstue);
     EXPECT_THAT(pushed2, false);
     EXPECT_THAT(list.localEmpty(), false);
     EXPECT_THAT(list.localSize(), 1);
@@ -127,13 +127,13 @@ TEST(CooperativeIntrusiveListTest, TryPushLocalTwice) {
 
 TEST(CooperativeIntrusiveListTest, ShareSome) {
     TestSubject list;
-    auto values = range(0, 10);
-    auto nodeHandle = fill(list, values);
+    auto konstues = range(0, 10);
+    auto nodeHandle = fill(list, konstues);
     EXPECT_THAT(list.localEmpty(), false);
-    EXPECT_THAT(list.localSize(), values.size());
+    EXPECT_THAT(list.localSize(), konstues.size());
     EXPECT_THAT(list.sharedEmpty(), true);
     auto sharedAmount = list.shareAll();
-    EXPECT_THAT(sharedAmount, values.size());
+    EXPECT_THAT(sharedAmount, konstues.size());
     EXPECT_THAT(list.localEmpty(), true);
     EXPECT_THAT(list.sharedEmpty(), false);
 }
@@ -147,52 +147,52 @@ TEST(CooperativeIntrusiveListTest, TryTransferFromEmpty) {
 
 TEST(CooperativeIntrusiveListTest, TryTransferHalf) {
     TestSubject from;
-    auto values = range(0, 10);
-    auto nodeHandle = fill(from, values);
+    auto konstues = range(0, 10);
+    auto nodeHandle = fill(from, konstues);
     from.shareAll();
 
     TestSubject thief;
-    auto toTransfer = values.size() / 2;
+    auto toTransfer = konstues.size() / 2;
     auto stolenAmount = thief.tryTransferFrom(from, toTransfer);
     EXPECT_THAT(stolenAmount, toTransfer);
     EXPECT_THAT(thief.localSize(), stolenAmount);
 
-    from.tryTransferFrom(from, values.size());
+    from.tryTransferFrom(from, konstues.size());
     EXPECT_THAT(from.sharedEmpty(), true);
 
     std_support::vector<int> allTheElements;
     drainLocalInto(from, allTheElements);
     drainLocalInto(thief, allTheElements);
-    EXPECT_THAT(allTheElements, testing::UnorderedElementsAreArray(values));
+    EXPECT_THAT(allTheElements, testing::UnorderedElementsAreArray(konstues));
 }
 
 TEST(CooperativeIntrusiveListTest, TryTransferAllEventually) {
     TestSubject from;
-    auto values = range(0, 10);
-    auto nodeHandle = fill(from, values);
+    auto konstues = range(0, 10);
+    auto nodeHandle = fill(from, konstues);
     from.shareAll();
 
     TestSubject thief;
-    for (std::size_t i = 0; i < values.size(); ++i) {
+    for (std::size_t i = 0; i < konstues.size(); ++i) {
         auto stolenAmount = thief.tryTransferFrom(from, 1);
         EXPECT_THAT(stolenAmount, 1);
     }
     EXPECT_THAT(from.sharedEmpty(), true);
-    EXPECT_THAT(thief.localSize(), values.size());
+    EXPECT_THAT(thief.localSize(), konstues.size());
 
     std_support::vector<int> allTheElements;
     drainLocalInto(from, allTheElements);
     drainLocalInto(thief, allTheElements);
-    EXPECT_THAT(allTheElements, testing::UnorderedElementsAreArray(values));
+    EXPECT_THAT(allTheElements, testing::UnorderedElementsAreArray(konstues));
 }
 
 TEST(CooperativeIntrusiveListTest, TransferingPingPong) {
     TestSubject list1;
     TestSubject list2;
     const auto size = 100;
-    auto values = range(0, size);
-    auto nodesHandle1 = fill(list1, values);
-    auto nodesHandle2 = fill(list2, values);
+    auto konstues = range(0, size);
+    auto nodesHandle1 = fill(list1, konstues);
+    auto nodesHandle2 = fill(list2, konstues);
 
     std::atomic ready = false;
     auto kIters = 10000;
@@ -230,7 +230,7 @@ TEST(CooperativeIntrusiveListTest, TransferingPingPong) {
     drainLocalInto(list2, allTheElements);
 
     std_support::vector<int> expected;
-    expected.insert(expected.end(), values.begin(), values.end());
-    expected.insert(expected.end(), values.begin(), values.end());
+    expected.insert(expected.end(), konstues.begin(), konstues.end());
+    expected.insert(expected.end(), konstues.begin(), konstues.end());
     EXPECT_THAT(allTheElements, testing::UnorderedElementsAreArray(expected));
 }

@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.load.java.typeEnhancement
 
 data class NullabilityQualifierWithMigrationStatus(
-    val qualifier: NullabilityQualifier,
-    val isForWarningOnly: Boolean = false
+    konst qualifier: NullabilityQualifier,
+    konst isForWarningOnly: Boolean = false
 )

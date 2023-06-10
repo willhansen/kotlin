@@ -37,6 +37,6 @@ inline fun publicInline() {
 }
 
 internal inline fun internalInline() {
-    val pc = <!PRIVATE_CLASS_MEMBER_FROM_INLINE!>PrivateClass<!>()
+    konst pc = <!PRIVATE_CLASS_MEMBER_FROM_INLINE!>PrivateClass<!>()
     <!PRIVATE_CLASS_MEMBER_FROM_INLINE!>pc<!>()
 }

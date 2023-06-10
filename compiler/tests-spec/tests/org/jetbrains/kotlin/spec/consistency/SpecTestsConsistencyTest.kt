@@ -20,14 +20,14 @@ import java.util.stream.Stream
 @TestDataPath("\$PROJECT_ROOT/compiler/tests-spec/testData/")
 class SpecTestsConsistencyTest : TestCase() {
     companion object {
-        private val specSentencesStorage = SpecSentencesStorage()
+        private konst specSentencesStorage = SpecSentencesStorage()
 
         @JvmStatic
         fun getTestFiles(): Stream<String> {
-            val testFiles = mutableListOf<String>()
+            konst testFiles = mutableListOf<String>()
 
-            TestArea.values().forEach { testArea ->
-                val testDataPath =
+            TestArea.konstues().forEach { testArea ->
+                konst testDataPath =
                     "${GeneralConfiguration.SPEC_TESTDATA_PATH}/${testArea.testDataPath}/${SpecTestLinkedType.LINKED.testDataPath}"
 
                 testFiles += File(testDataPath).let { testsDir ->
@@ -44,25 +44,25 @@ class SpecTestsConsistencyTest : TestCase() {
     @ParameterizedTest
     @MethodSource("getTestFiles")
     fun doTest(testFilePath: String) {
-        val file = File("${GeneralConfiguration.SPEC_TESTDATA_PATH}/${testFilePath.replace("$", "/")}")
-        val specSentences = specSentencesStorage.getLatest() ?: return
-        val test = parseLinkedSpecTest(file.canonicalPath, mapOf("main" to file.readText()))
+        konst file = File("${GeneralConfiguration.SPEC_TESTDATA_PATH}/${testFilePath.replace("$", "/")}")
+        konst specSentences = specSentencesStorage.getLatest() ?: return
+        konst test = parseLinkedSpecTest(file.canonicalPath, mapOf("main" to file.readText()))
         if (test.mainLink == null) return  //todo add check for relevant links also
-        val sectionsPath = setOf(*test.mainLink.sections.toTypedArray(), test.mainLink.paragraphNumber).joinToString()
-        val sentenceNumber = test.mainLink.sentenceNumber
-        val paragraphSentences = specSentences[sectionsPath]
+        konst sectionsPath = setOf(*test.mainLink.sections.toTypedArray(), test.mainLink.paragraphNumber).joinToString()
+        konst sentenceNumber = test.mainLink.sentenceNumber
+        konst paragraphSentences = specSentences[sectionsPath]
 
         if (paragraphSentences != null && paragraphSentences.size >= sentenceNumber) {
-            val specSentencesForCurrentTest =
+            konst specSentencesForCurrentTest =
                 specSentencesStorage[test.specVersion] ?: throw Exception("spec ${test.specVersion} not found")
-            val paragraphForTestSentences =
+            konst paragraphForTestSentences =
                 specSentencesForCurrentTest[sectionsPath] ?: throw Exception("$sectionsPath not found")
             if (paragraphForTestSentences.size < sentenceNumber) {
                 fail("Sentence #$sentenceNumber not found (${file.path})")
             }
-            val expectedSentence = paragraphForTestSentences[sentenceNumber - 1]
-            val actualSentence = paragraphSentences[sentenceNumber - 1]
-            val locationSentenceText = "$sectionsPath paragraph, $sentenceNumber sentence"
+            konst expectedSentence = paragraphForTestSentences[sentenceNumber - 1]
+            konst actualSentence = paragraphSentences[sentenceNumber - 1]
+            konst locationSentenceText = "$sectionsPath paragraph, $sentenceNumber sentence"
 
             println("Comparing versions: ${test.specVersion} (for expected) and ${specSentencesStorage.latestSpecVersion} (for actual)")
             println("Expected location: $locationSentenceText")

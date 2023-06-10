@@ -1,9 +1,9 @@
 // WITH_STDLIB
 import kotlin.test.*
 
-class ComparablePair<T : Comparable<T>>(val first: T, val second: T) : Comparable<ComparablePair<T>> {
+class ComparablePair<T : Comparable<T>>(konst first: T, konst second: T) : Comparable<ComparablePair<T>> {
     override fun compareTo(other: ComparablePair<T>): Int {
-        val result = first.compareTo(other.first)
+        konst result = first.compareTo(other.first)
         return if (result != 0) result else second.compareTo(other.second)
     }
 }
@@ -12,22 +12,22 @@ fun <T : Comparable<T>> genericRangeTo(start: T, endInclusive: T) = start..endIn
 operator fun Double.rangeTo(other: Double) = genericRangeTo(this, other)
 // some weird inverted range
 operator fun Float.rangeTo(other: Float) = object : ClosedFloatingPointRange<Float> {
-    override val endInclusive: Float = this@rangeTo
-    override val start: Float = other
+    override konst endInclusive: Float = this@rangeTo
+    override konst start: Float = other
     override fun lessThanOrEquals(a: Float, b: Float) = a >= b
 }
 
 // assert\((.*)\) \{\s*(".*")\s*}
 fun check(x: Double, left: Double, right: Double): Boolean {
-    val result = x in left..right
-    val range = left..right
+    konst result = x in left..right
+    konst range = left..right
     assertTrue(result == x in range, "Failed: unoptimized === unoptimized for custom double $range")
     return result
 }
 
 fun check(x: Float, left: Float, right: Float): Boolean {
-    val result = x in left..right
-    val range = left..right
+    konst result = x in left..right
+    konst range = left..right
     assertTrue(result == x in range, "Failed: unoptimized === unoptimized for standard float $range")
     return result
 }

@@ -1,7 +1,7 @@
 // FILE: inlineClasses.kt
-inline class A(val x: Int)
-inline class B(val x: String)
-inline class C(val x: Any?)
+inline class A(konst x: Int)
+inline class B(konst x: String)
+inline class C(konst x: Any?)
 
 // FILE: a.kt
 

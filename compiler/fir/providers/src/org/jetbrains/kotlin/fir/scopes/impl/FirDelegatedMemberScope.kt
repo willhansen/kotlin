@@ -30,18 +30,18 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 
 class FirDelegatedMemberScope(
-    private val session: FirSession,
-    private val scopeSession: ScopeSession,
-    private val containingClass: FirClass,
-    private val declaredMemberScope: FirContainingNamesAwareScope,
-    private val delegateFields: List<FirField>,
+    private konst session: FirSession,
+    private konst scopeSession: ScopeSession,
+    private konst containingClass: FirClass,
+    private konst declaredMemberScope: FirContainingNamesAwareScope,
+    private konst delegateFields: List<FirField>,
 ) : FirContainingNamesAwareScope() {
-    private val dispatchReceiverType = containingClass.defaultType()
-    private val overrideChecker = session.firOverrideChecker
+    private konst dispatchReceiverType = containingClass.defaultType()
+    private konst overrideChecker = session.firOverrideChecker
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         declaredMemberScope.processFunctionsByName(name, processor)
-        val result = mutableListOf<FirNamedFunctionSymbol>()
+        konst result = mutableListOf<FirNamedFunctionSymbol>()
 
         for (delegateField in delegateFields) {
             collectFunctionsFromSpecificField(delegateField, name, result)
@@ -62,10 +62,10 @@ class FirDelegatedMemberScope(
         name: Name,
         result: MutableList<FirNamedFunctionSymbol>
     ) {
-        val scope = buildScope(delegateField) ?: return
+        konst scope = buildScope(delegateField) ?: return
 
         scope.processFunctionsByName(name) processor@{ functionSymbol ->
-            val original = functionSymbol.fir
+            konst original = functionSymbol.fir
             // KT-6014: If the original is abstract, we still need a delegation
             // For example,
             //   interface IBase { override fun toString(): String }
@@ -90,7 +90,7 @@ class FirDelegatedMemberScope(
                 return@processor
             }
 
-            val delegatedSymbol =
+            konst delegatedSymbol =
                 FirFakeOverrideGenerator.createCopyForFirFunction(
                     FirNamedFunctionSymbol(CallableId(containingClass.classId, functionSymbol.name)),
                     original,
@@ -110,7 +110,7 @@ class FirDelegatedMemberScope(
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
         declaredMemberScope.processPropertiesByName(name, processor)
 
-        val result = mutableListOf<FirPropertySymbol>()
+        konst result = mutableListOf<FirPropertySymbol>()
         for (delegateField in delegateFields) {
             collectPropertiesFromSpecificField(delegateField, name, result)
         }
@@ -131,7 +131,7 @@ class FirDelegatedMemberScope(
         name: Name,
         result: MutableList<FirPropertySymbol>
     ) {
-        val scope = buildScope(delegateField) ?: return
+        konst scope = buildScope(delegateField) ?: return
 
         scope.processPropertiesByName(name) processor@{ propertySymbol ->
             if (propertySymbol !is FirPropertySymbol) {
@@ -142,7 +142,7 @@ class FirDelegatedMemberScope(
                 return@processor
             }
 
-            val original = propertySymbol.fir
+            konst original = propertySymbol.fir
             var isOverriddenProperty = false
             declaredMemberScope.processPropertiesByName(name) {
                 if (it is FirPropertySymbol && overrideChecker.isOverriddenProperty(it.fir, original)) {
@@ -161,7 +161,7 @@ class FirDelegatedMemberScope(
                 return@processor
             }
 
-            val delegatedSymbol =
+            konst delegatedSymbol =
                 FirFakeOverrideGenerator.createCopyForFirProperty(
                     FirPropertySymbol(CallableId(containingClass.classId, propertySymbol.name)),
                     original,
@@ -177,7 +177,7 @@ class FirDelegatedMemberScope(
         }
     }
 
-    private val callableNamesLazy: Set<Name> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst callableNamesLazy: Set<Name> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         buildSet {
             addAll(declaredMemberScope.getCallableNames())
 
@@ -187,7 +187,7 @@ class FirDelegatedMemberScope(
         }
     }
 
-    private val classifierNamesLazy: Set<Name> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst classifierNamesLazy: Set<Name> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         buildSet {
             addAll(declaredMemberScope.getClassifierNames())
 
@@ -207,7 +207,7 @@ var FirCallableDeclaration.multipleDelegatesWithTheSameSignature: Boolean? by Fi
     MultipleDelegatesWithTheSameSignatureKey
 )
 
-val FirCallableSymbol<*>.multipleDelegatesWithTheSameSignature: Boolean?
+konst FirCallableSymbol<*>.multipleDelegatesWithTheSameSignature: Boolean?
     get() = fir.multipleDelegatesWithTheSameSignature
 
 
@@ -219,14 +219,14 @@ fun FirSimpleFunction.isPublicInAny(): Boolean {
     if (name.asString() !in PUBLIC_METHOD_NAMES_IN_ANY) return false
 
     return when (name.asString()) {
-        "hashCode", "toString" -> valueParameters.isEmpty()
-        "equals" -> valueParameters.singleOrNull()?.hasTypeOf(StandardClassIds.Any, allowNullable = true) == true
+        "hashCode", "toString" -> konstueParameters.isEmpty()
+        "equals" -> konstueParameters.singleOrNull()?.hasTypeOf(StandardClassIds.Any, allowNullable = true) == true
         else -> error("Unexpected method name: $name")
     }
 }
 
 fun FirValueParameter.hasTypeOf(classId: ClassId, allowNullable: Boolean): Boolean {
-    val classLike = when (val type = returnTypeRef.coneType) {
+    konst classLike = when (konst type = returnTypeRef.coneType) {
         is ConeClassLikeType -> type
         is ConeFlexibleType -> type.upperBound as? ConeClassLikeType ?: return false
         else -> return false
@@ -236,4 +236,4 @@ fun FirValueParameter.hasTypeOf(classId: ClassId, allowNullable: Boolean): Boole
     return classLike.lookupTag.classId == classId
 }
 
-private val PUBLIC_METHOD_NAMES_IN_ANY = setOf("equals", "hashCode", "toString")
+private konst PUBLIC_METHOD_NAMES_IN_ANY = setOf("equals", "hashCode", "toString")

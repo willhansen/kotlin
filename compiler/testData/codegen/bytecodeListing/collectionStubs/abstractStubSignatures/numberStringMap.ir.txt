@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<Ljava/lang/Object;Ljava/util/Map<Ljava/lang/Number;Ljava/lang/String;>;Lkotlin/jvm/internal/markers/KMappedMarker;>  NumberStringMap {
     // source: 'numberStringMap.kt'
-    public bridge final <()Ljava/util/Collection<Ljava/lang/String;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<Ljava/lang/String;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/lang/Number;>;> method keySet(): java.util.Set
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<Ljava/lang/Number;Ljava/lang/String;>;>;> method entrySet(): java.util.Set
     public <(Ljava/util/Map<+Ljava/lang/Number;+Ljava/lang/String;>;)V> method putAll(p0: java.util.Map): void

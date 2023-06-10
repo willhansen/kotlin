@@ -6,10 +6,10 @@
 package org.jetbrains.kotlin.commonizer.cli
 
 internal enum class TaskType(
-    val alias: String,
-    val description: String,
-    val optionTypes: List<OptionType<*>>,
-    val taskConstructor: (Collection<Option<*>>) -> Task
+    konst alias: String,
+    konst description: String,
+    konst optionTypes: List<OptionType<*>>,
+    konst taskConstructor: (Collection<Option<*>>) -> Task
 ) {
     NATIVE_DIST_COMMONIZE(
         "native-dist-commonize",
@@ -60,6 +60,6 @@ internal enum class TaskType(
     ;
 
     companion object {
-        fun getByAlias(alias: String) = values().firstOrNull { it.alias == alias }
+        fun getByAlias(alias: String) = konstues().firstOrNull { it.alias == alias }
     }
 }

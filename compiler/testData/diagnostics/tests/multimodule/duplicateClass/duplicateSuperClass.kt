@@ -8,7 +8,7 @@ package p
 public interface A
 public class B : A
 public class M1 {
-    public val b: B = B()
+    public konst b: B = B()
 }
 
 // MODULE: m2

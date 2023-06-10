@@ -1,6 +1,6 @@
-class Outer(val x: String) {
-    inner class Inner(val y: String) {
-        val z = x + y
+class Outer(konst x: String) {
+    inner class Inner(konst y: String) {
+        konst z = x + y
     }
 }
 

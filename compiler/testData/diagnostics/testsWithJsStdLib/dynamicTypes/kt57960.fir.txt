@@ -6,7 +6,7 @@ FILE: kt57960.kt
 
         public final var toDOM: R|((Baz) -> kotlin/Any)?| = Null(null)
             public get(): R|((Baz) -> kotlin/Any)?|
-            public set(value: R|((Baz) -> kotlin/Any)?|): R|kotlin/Unit|
+            public set(konstue: R|((Baz) -> kotlin/Any)?|): R|kotlin/Unit|
 
     }
     public final class Baz : R|kotlin/Any| {
@@ -16,7 +16,7 @@ FILE: kt57960.kt
 
         public final var text: R|kotlin/String| = String()
             public get(): R|kotlin/String|
-            public set(value: R|kotlin/String|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
     }
     public final object Foo : R|kotlin/Any| {

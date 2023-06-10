@@ -17,26 +17,26 @@ import kotlin.script.experimental.util.LinkedSnippet
 import kotlin.script.experimental.util.LinkedSnippetImpl
 import kotlin.script.experimental.util.add
 
-class BasicJvmReplEvaluator(val scriptEvaluator: ScriptEvaluator = BasicJvmScriptEvaluator()) :
-    ReplEvaluator<CompiledSnippet, KJvmEvaluatedSnippet> {
-    override var lastEvaluatedSnippet: LinkedSnippetImpl<KJvmEvaluatedSnippet>? = null
+class BasicJvmReplEkonstuator(konst scriptEkonstuator: ScriptEkonstuator = BasicJvmScriptEkonstuator()) :
+    ReplEkonstuator<CompiledSnippet, KJvmEkonstuatedSnippet> {
+    override var lastEkonstuatedSnippet: LinkedSnippetImpl<KJvmEkonstuatedSnippet>? = null
         private set
 
-    private val history = SnippetsHistory<KClass<*>?, Any?>()
+    private konst history = SnippetsHistory<KClass<*>?, Any?>()
 
-    override suspend fun eval(
+    override suspend fun ekonst(
         snippet: LinkedSnippet<out CompiledSnippet>,
-        configuration: ScriptEvaluationConfiguration
-    ): ResultWithDiagnostics<LinkedSnippet<KJvmEvaluatedSnippet>> {
+        configuration: ScriptEkonstuationConfiguration
+    ): ResultWithDiagnostics<LinkedSnippet<KJvmEkonstuatedSnippet>> {
 
         if (!verifyHistoryConsistency(snippet))
             return ResultWithDiagnostics.Failure(
-                ScriptDiagnostic(ScriptDiagnostic.unspecifiedError, "Snippet cannot be evaluated due to history mismatch")
+                ScriptDiagnostic(ScriptDiagnostic.unspecifiedError, "Snippet cannot be ekonstuated due to history mismatch")
             )
 
-        val lastSnippetClass = history.lastItem()?.first
-        val historyBeforeSnippet = history.items.map { it.second }
-        val currentConfiguration = ScriptEvaluationConfiguration(configuration) {
+        konst lastSnippetClass = history.lastItem()?.first
+        konst historyBeforeSnippet = history.items.map { it.second }
+        konst currentConfiguration = ScriptEkonstuationConfiguration(configuration) {
             previousSnippets.put(historyBeforeSnippet)
             if (lastSnippetClass != null) {
                 jvm {
@@ -45,50 +45,50 @@ class BasicJvmReplEvaluator(val scriptEvaluator: ScriptEvaluator = BasicJvmScrip
             }
         }
 
-        val snippetVal = snippet.get()
-        val evalRes = scriptEvaluator(snippetVal, currentConfiguration)
-        val newEvalRes = when (evalRes) {
+        konst snippetVal = snippet.get()
+        konst ekonstRes = scriptEkonstuator(snippetVal, currentConfiguration)
+        konst newEkonstRes = when (ekonstRes) {
             is ResultWithDiagnostics.Success -> {
-                val retVal = evalRes.value.returnValue
+                konst retVal = ekonstRes.konstue.returnValue
                 when (retVal) {
                     is ResultValue.Error -> history.add(retVal.scriptClass, null)
                     is ResultValue.Value, is ResultValue.Unit -> history.add(retVal.scriptClass, retVal.scriptInstance)
-                    is ResultValue.NotEvaluated -> {}
+                    is ResultValue.NotEkonstuated -> {}
                 }
-                KJvmEvaluatedSnippet(snippetVal, currentConfiguration, retVal)
+                KJvmEkonstuatedSnippet(snippetVal, currentConfiguration, retVal)
             }
             else -> {
-                val firstError = evalRes.reports.find { it.isError() }
-                KJvmEvaluatedSnippet(
+                konst firstError = ekonstRes.reports.find { it.isError() }
+                KJvmEkonstuatedSnippet(
                     snippetVal, currentConfiguration,
-                    firstError?.exception?.let { ResultValue.Error(it) } ?: ResultValue.NotEvaluated
+                    firstError?.exception?.let { ResultValue.Error(it) } ?: ResultValue.NotEkonstuated
                 )
             }
         }
 
-        val newNode = lastEvaluatedSnippet.add(newEvalRes)
-        lastEvaluatedSnippet = newNode
-        return newNode.asSuccess(evalRes.reports)
+        konst newNode = lastEkonstuatedSnippet.add(newEkonstRes)
+        lastEkonstuatedSnippet = newNode
+        return newNode.asSuccess(ekonstRes.reports)
     }
 
     private fun verifyHistoryConsistency(compiledSnippet: LinkedSnippet<out CompiledSnippet>): Boolean {
         var compiled = compiledSnippet.previous
-        var evaluated = lastEvaluatedSnippet
-        while (compiled != null && evaluated != null) {
-            val evaluatedVal = evaluated.get()
-            if (evaluatedVal.compiledSnippet !== compiled.get())
+        var ekonstuated = lastEkonstuatedSnippet
+        while (compiled != null && ekonstuated != null) {
+            konst ekonstuatedVal = ekonstuated.get()
+            if (ekonstuatedVal.compiledSnippet !== compiled.get())
                 return false
-            if (evaluatedVal.result.scriptClass == null)
+            if (ekonstuatedVal.result.scriptClass == null)
                 return false
             compiled = compiled.previous
-            evaluated = evaluated.previous
+            ekonstuated = ekonstuated.previous
         }
-        return compiled == null && evaluated == null
+        return compiled == null && ekonstuated == null
     }
 }
 
-class KJvmEvaluatedSnippet(
-    override val compiledSnippet: CompiledSnippet,
-    override val configuration: ScriptEvaluationConfiguration,
-    override val result: ResultValue
-) : EvaluatedSnippet
+class KJvmEkonstuatedSnippet(
+    override konst compiledSnippet: CompiledSnippet,
+    override konst configuration: ScriptEkonstuationConfiguration,
+    override konst result: ResultValue
+) : EkonstuatedSnippet

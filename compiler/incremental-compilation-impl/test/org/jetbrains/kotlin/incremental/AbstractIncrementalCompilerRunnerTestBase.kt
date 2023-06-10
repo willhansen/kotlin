@@ -30,7 +30,7 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
     protected lateinit var lookupsDuringTest: MutableSet<LookupSymbol>
     protected abstract fun createCompilerArguments(destinationDir: File, testDir: File): Args
 
-    protected open val moduleNames: Collection<String>? get() = null
+    protected open konst moduleNames: Collection<String>? get() = null
 
     override fun setUp() {
         lookupsDuringTest = hashSetOf()
@@ -57,8 +57,8 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         }
 
     fun doTest(path: String) {
-        val testDir = File(path)
-        val failFile = testDir.resolve(FAIL_FILE_NAME)
+        konst testDir = File(path)
+        konst failFile = testDir.resolve(FAIL_FILE_NAME)
         var testPassed = false
         try {
             doTestImpl(testDir)
@@ -77,23 +77,23 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         fun Iterable<File>.relativePaths() =
             map { it.relativeTo(workingDir).path.replace('\\', '/') }
 
-        val srcDir = File(workingDir, "src").apply { mkdirs() }
-        val cacheDir = File(workingDir, "incremental-data").apply { mkdirs() }
-        val outDir = File(workingDir, "out").apply { mkdirs() }
+        konst srcDir = File(workingDir, "src").apply { mkdirs() }
+        konst cacheDir = File(workingDir, "incremental-data").apply { mkdirs() }
+        konst outDir = File(workingDir, "out").apply { mkdirs() }
 
-        val mapWorkingToOriginalFile = HashMap(copyTestSources(testDir, srcDir, filePrefix = ""))
-        val sourceRoots = setupTest(testDir, srcDir, cacheDir, outDir)
-        val args = createCompilerArgumentsImpl(outDir, testDir)
+        konst mapWorkingToOriginalFile = HashMap(copyTestSources(testDir, srcDir, filePrefix = ""))
+        konst sourceRoots = setupTest(testDir, srcDir, cacheDir, outDir)
+        konst args = createCompilerArgumentsImpl(outDir, testDir)
 
-        val (initialExitCode, _, errors, initialCachesDump) = initialMake(cacheDir, outDir, sourceRoots, args)
+        konst (initialExitCode, _, errors, initialCachesDump) = initialMake(cacheDir, outDir, sourceRoots, args)
         var lastExitCode = initialExitCode
         var lastCachesDump = initialCachesDump
         check(errors.isEmpty()) { "Initial build failed: \n${errors.joinToString("\n")}" }
 
         // modifications
-        val buildLogFile = buildLogFinder.findBuildLog(testDir) ?: throw IllegalStateException("build log file not found in $workingDir")
-        val buildLogSteps = parseTestBuildLog(buildLogFile)
-        val modifications = getModificationsToPerform(
+        konst buildLogFile = buildLogFinder.findBuildLog(testDir) ?: throw IllegalStateException("build log file not found in $workingDir")
+        konst buildLogSteps = parseTestBuildLog(buildLogFile)
+        konst modifications = getModificationsToPerform(
             testDir,
             moduleNames = moduleNames,
             allowNoFilesWithSuffixInTestData = false,
@@ -108,14 +108,14 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         // This needs to be fixed, but it does not really matter much (e.g extra lines),
         // The workaround is to compare logs without errors, then logs with errors.
         // (if logs without errors differ then either compiled files differ or exit codes differ)
-        val expectedSB = StringBuilder()
-        val actualSB = StringBuilder()
-        val expectedSBWithoutErrors = StringBuilder()
-        val actualSBWithoutErrors = StringBuilder()
+        konst expectedSB = StringBuilder()
+        konst actualSB = StringBuilder()
+        konst expectedSBWithoutErrors = StringBuilder()
+        konst actualSBWithoutErrors = StringBuilder()
         var step = 1
         for ((modificationStep, buildLogStep) in modifications.zip(buildLogSteps)) {
             modificationStep.forEach { it.perform(workingDir, mapWorkingToOriginalFile) }
-            val (incrementalExitCode, compiledSources, compileErrors, incrementalCachesDump) = incrementalMake(
+            konst (incrementalExitCode, compiledSources, compileErrors, incrementalCachesDump) = incrementalMake(
                 cacheDir,
                 outDir,
                 sourceRoots,
@@ -168,14 +168,14 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         finalExitCode: ExitCode,
         finalMappingDump: String?
     ) {
-        val rebuildOutDir = File(workingDir, "rebuild-out").apply { mkdirs() }
-        val rebuildCacheDir = File(workingDir, "rebuild-cache").apply { mkdirs() }
+        konst rebuildOutDir = File(workingDir, "rebuild-out").apply { mkdirs() }
+        konst rebuildCacheDir = File(workingDir, "rebuild-cache").apply { mkdirs() }
         resetTest(testDir, rebuildOutDir, rebuildCacheDir)
 
-        val rebuildResult = make(rebuildCacheDir, rebuildOutDir, sourceRoots, createCompilerArgumentsImpl(rebuildOutDir, testDir))
+        konst rebuildResult = make(rebuildCacheDir, rebuildOutDir, sourceRoots, createCompilerArgumentsImpl(rebuildOutDir, testDir))
 
-        val rebuildExpectedToSucceed = buildLogSteps.last().compileSucceeded
-        val rebuildSucceeded = rebuildResult.exitCode == ExitCode.OK
+        konst rebuildExpectedToSucceed = buildLogSteps.last().compileSucceeded
+        konst rebuildSucceeded = rebuildResult.exitCode == ExitCode.OK
         Assert.assertEquals("Rebuild exit code differs from incremental exit code", rebuildExpectedToSucceed, rebuildSucceeded)
 
         Assert.assertEquals("Compilation result differs", rebuildResult.exitCode, finalExitCode)
@@ -190,13 +190,13 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         assertEquals(rebuildResult.mappingsDump, finalMappingDump)
     }
 
-    protected open val buildLogFinder: BuildLogFinder
+    protected open konst buildLogFinder: BuildLogFinder
         get() = BuildLogFinder(isGradleEnabled = true)
 
     protected abstract fun make(cacheDir: File, outDir: File, sourceRoots: Iterable<File>, args: Args): TestCompilationResult
 
     private fun stepLogAsString(step: Int, ktSources: Iterable<String>, errors: Collection<String>, includeErrors: Boolean = true): String {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
 
         sb.appendLine("================ Step #$step =================")
         sb.appendLine()
@@ -221,10 +221,10 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
 
     companion object {
         @JvmStatic
-        private val distKotlincLib: File = File("dist/kotlinc/lib")
+        private konst distKotlincLib: File = File("dist/kotlinc/lib")
 
         @JvmStatic
-        protected val kotlinStdlibJvm: File = File(distKotlincLib, "kotlin-stdlib.jar").also {
+        protected konst kotlinStdlibJvm: File = File(distKotlincLib, "kotlin-stdlib.jar").also {
             KtUsefulTestCase.assertExists(it)
         }
 
@@ -234,8 +234,8 @@ abstract class AbstractIncrementalCompilerRunnerTestBase<Args : CommonCompilerAr
         @JvmStatic
         protected fun abiSnapshotFile(cacheDir: File): File = File(cacheDir, IncrementalCompilerRunner.ABI_SNAPSHOT_FILE_NAME)
 
-        private const val ARGUMENTS_FILE_NAME = "args.txt"
-        private const val FAIL_FILE_NAME = "fail.txt"
+        private const konst ARGUMENTS_FILE_NAME = "args.txt"
+        private const konst FAIL_FILE_NAME = "fail.txt"
 
         private fun parseAdditionalArgs(testDir: File): List<String> {
             return File(testDir, ARGUMENTS_FILE_NAME)

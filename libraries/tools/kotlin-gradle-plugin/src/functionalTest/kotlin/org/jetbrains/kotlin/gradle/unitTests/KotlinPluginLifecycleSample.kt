@@ -26,57 +26,57 @@ import kotlin.test.*
 class KotlinPluginLifecycleSample {
 
     /**
-     * Launching in 'EvaluateBuildscript' will execute the launched code right away!
-     * This code will showcase that launching before any 'afterEvaluate' listeners have been invoked is possible.
+     * Launching in 'EkonstuateBuildscript' will execute the launched code right away!
+     * This code will showcase that launching before any 'afterEkonstuate' listeners have been invoked is possible.
      * However, the launched coroutines can be executed right away.
      */
     @Test
-    fun `launch in EvaluateBuildscript`() {
-        val project = buildProject()
+    fun `launch in EkonstuateBuildscript`() {
+        konst project = buildProject()
         project.startKotlinPluginLifecycle()
 
         var executed = false
 
-        /* Project is not yet in 'afterEvaluate' */
+        /* Project is not yet in 'afterEkonstuate' */
         project.launch {
             executed = true
         }
 
-        assertTrue(executed, "Expected coroutine in $EvaluateBuildscript Phase to be executed right away")
+        assertTrue(executed, "Expected coroutine in $EkonstuateBuildscript Phase to be executed right away")
     }
 
     /**
-     * Launching in code 'AfterEvaluateBuildscript' Stage:
-     * This sample shows how code can be deferred into a 'afterEvaluate' based Stage.
+     * Launching in code 'AfterEkonstuateBuildscript' Stage:
+     * This sample shows how code can be deferred into a 'afterEkonstuate' based Stage.
      * Using [launchInStage]: This code will only be executed once the stage will be reached.
      */
     @Test
-    fun `launchInStage AfterEvaluate`() {
-        val project = buildProject()
+    fun `launchInStage AfterEkonstuate`() {
+        konst project = buildProject()
         project.startKotlinPluginLifecycle()
 
         var executed = false
 
-        project.launchInStage(AfterEvaluateBuildscript) {
+        project.launchInStage(AfterEkonstuateBuildscript) {
             executed = true
         }
 
-        assertFalse(executed, "Expected coroutine in $AfterEvaluateBuildscript not to be executed right away")
+        assertFalse(executed, "Expected coroutine in $AfterEkonstuateBuildscript not to be executed right away")
 
-        /* Call to project.evaluate() will mimic buildscript evaluation and calls into all afterEvaluate listeners from Gradle */
-        project.evaluate()
+        /* Call to project.ekonstuate() will mimic buildscript ekonstuation and calls into all afterEkonstuate listeners from Gradle */
+        project.ekonstuate()
 
         /* Coroutine launch was executed now */
-        assertTrue(executed, "Expected coroutine in $AfterEvaluateBuildscript to be executed in 'afterEvaluate'")
+        assertTrue(executed, "Expected coroutine in $AfterEkonstuateBuildscript to be executed in 'afterEkonstuate'")
     }
 
     /**
-     * Similar to [launchInStage AfterEvaluate], but shows launching in a later stage ([FinaliseDsl]).
+     * Similar to [launchInStage AfterEkonstuate], but shows launching in a later stage ([FinaliseDsl]).
      * Showcases that [launchInStage] will only execute the code once the respective Stage was reached.
      */
     @Test
     fun `launchInStage FinaliseDsl`() {
-        val project = buildProject()
+        konst project = buildProject()
         project.startKotlinPluginLifecycle()
 
         project.launchInStage(FinaliseDsl) {
@@ -84,7 +84,7 @@ class KotlinPluginLifecycleSample {
             assertEquals(FinaliseDsl, project.kotlinPluginLifecycle.stage)
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     /**
@@ -94,12 +94,12 @@ class KotlinPluginLifecycleSample {
      */
     @Test
     fun `await FinaliseDsl Stage in coroutine`() {
-        val project = buildProject()
+        konst project = buildProject()
         project.startKotlinPluginLifecycle()
 
         project.launch {
-            /* The coroutine is launched within EvaluateBuildscript */
-            assertEquals(KotlinPluginLifecycle.Stage.EvaluateBuildscript, project.kotlinPluginLifecycle.stage)
+            /* The coroutine is launched within EkonstuateBuildscript */
+            assertEquals(KotlinPluginLifecycle.Stage.EkonstuateBuildscript, project.kotlinPluginLifecycle.stage)
 
             /* Suspending execution until 'FinaliseDsl' arrived */
             FinaliseDsl.await()
@@ -108,7 +108,7 @@ class KotlinPluginLifecycleSample {
             assertEquals(KotlinPluginLifecycle.Stage.FinaliseDsl, project.kotlinPluginLifecycle.stage)
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     /**
@@ -123,13 +123,13 @@ class KotlinPluginLifecycleSample {
      * ```
      */
     @Test
-    fun `exception thrown in buildscript evaluation - inside coroutine`() {
+    fun `exception thrown in buildscript ekonstuation - inside coroutine`() {
         /*
-        Example: Error thrown in a launch in 'EvaluateBuildscript'
+        Example: Error thrown in a launch in 'EkonstuateBuildscript'
          */
 
-        val project = buildProjectWithMPP()
-        val executed = mutableListOf<String>()
+        konst project = buildProjectWithMPP()
+        konst executed = mutableListOf<String>()
 
         /* TestException thrown in belows launch will be propagated here */
         assertFailsWith<TestException> {
@@ -151,12 +151,12 @@ class KotlinPluginLifecycleSample {
 
         /* Showcase of which futures will be available */
         run {
-            /* Future that only requires 'BuildscriptEvaluation' is available */
-            assertNotNull(project.future { KotlinPluginLifecycle.Stage.EvaluateBuildscript.await() }.getOrThrow())
+            /* Future that only requires 'BuildscriptEkonstuation' is available */
+            assertNotNull(project.future { KotlinPluginLifecycle.Stage.EkonstuateBuildscript.await() }.getOrThrow())
 
-            /* Future that requires 'AfterEvaluateBuildscript' is not available */
+            /* Future that requires 'AfterEkonstuateBuildscript' is not available */
             assertFailsWith<IllegalLifecycleException> {
-                project.future { KotlinPluginLifecycle.Stage.AfterEvaluateBuildscript.await() }.getOrThrow()
+                project.future { KotlinPluginLifecycle.Stage.AfterEkonstuateBuildscript.await() }.getOrThrow()
             }
         }
     }
@@ -173,16 +173,16 @@ class KotlinPluginLifecycleSample {
      * In this case, all coroutines scheduled for later execution *will not be executed*
      */
     @Test
-    fun `exception thrown in buildscript evaluation - inside user buildscript`() {
-        val project = buildProjectWithMPP()
-        val executed = mutableListOf<String>()
+    fun `exception thrown in buildscript ekonstuation - inside user buildscript`() {
+        konst project = buildProjectWithMPP()
+        konst executed = mutableListOf<String>()
 
-        project.launchInStage(AfterEvaluateBuildscript) {
+        project.launchInStage(AfterEkonstuateBuildscript) {
             /*
             Will not get executed as this Stage will never be reached.
             Lifecycle finishes in failure state before!
              */
-            executed.add("AfterEvaluateBuildscript")
+            executed.add("AfterEkonstuateBuildscript")
         }
 
         project.launchInStage(ReadyForExecution) {
@@ -194,22 +194,22 @@ class KotlinPluginLifecycleSample {
         }
 
         /*
-        Forcing project.evaluate() to throw an exception:
+        Forcing project.ekonstuate() to throw an exception:
         Trust me, this will mimic any error in users buildscripts sufficiently!
         */
         project.tasks.whenObjectAdded { throw TestException() }
-        assertFails { project.evaluate() }
+        assertFails { project.ekonstuate() }
 
         /* Project has failed: Lifecycle finished. We can still access futures! */
         run {
-            /* Failure state is still in 'EvaluateBuildscript' Stage */
-            assertEquals(EvaluateBuildscript, project.kotlinPluginLifecycle.stage)
+            /* Failure state is still in 'EkonstuateBuildscript' Stage */
+            assertEquals(EkonstuateBuildscript, project.kotlinPluginLifecycle.stage)
 
             /* None of the coroutines before was executed */
             assertEquals(emptyList(), executed)
 
             /* Access configurationResult future as .getOrThrow */
-            val result = project.configurationResult.getOrThrow()
+            konst result = project.configurationResult.getOrThrow()
             assertIsInstance<ProjectConfigurationResult.Failure>(result)
 
             /* Access configurationResult future as .future {} */
@@ -222,13 +222,13 @@ class KotlinPluginLifecycleSample {
      * In particular this sample shows how calls to `project.configurationResult` will be handled!
      *
      * In short: All coroutines that already suspended, waiting for the configurationResult will be unsuspended.
-     * Like in [exception thrown in buildscript evaluation - inside user buildscript]:
+     * Like in [exception thrown in buildscript ekonstuation - inside user buildscript]:
      * Coroutines that ware waiting for later 'Stages' will not be executed (as their requirements are unmet)
      */
     @Test
-    fun `exception thrown in buildscript evaluation - coroutines waiting for configurationResult`() {
-        val project = buildProjectWithMPP()
-        val executed = mutableListOf<String>()
+    fun `exception thrown in buildscript ekonstuation - coroutines waiting for configurationResult`() {
+        konst project = buildProjectWithMPP()
+        konst executed = mutableListOf<String>()
 
         project.launch {
             project.configurationResult.await()
@@ -241,56 +241,56 @@ class KotlinPluginLifecycleSample {
             executed.add("FinaliseDsl") // <- Will never be executed because of exception thrown 'earlier'
         }
 
-        project.launchInStage(AfterEvaluateBuildscript) {
-            executed.add("AfterEvaluateBuildscript") // <- Will never be executed befause of exception thrown 'earlier'
+        project.launchInStage(AfterEkonstuateBuildscript) {
+            executed.add("AfterEkonstuateBuildscript") // <- Will never be executed befause of exception thrown 'earlier'
         }
 
         project.tasks.whenObjectAdded { throw TestException() }
-        assertFails { project.evaluate() }
+        assertFails { project.ekonstuate() }
 
-        /* We never moved outside the EvaluateBuildscript Stage */
-        assertEquals(EvaluateBuildscript, project.kotlinPluginLifecycle.stage)
+        /* We never moved outside the EkonstuateBuildscript Stage */
+        assertEquals(EkonstuateBuildscript, project.kotlinPluginLifecycle.stage)
         assertEquals(listOf("configurationResult.await()"), executed)
     }
 
     /**
-     * Sample showcases how an exception thrown within a stage like [AfterEvaluateBuildscript] is handled:
+     * Sample showcases how an exception thrown within a stage like [AfterEkonstuateBuildscript] is handled:
      * All coroutines scheduled after the throwing coroutine will not be executed!
      * Coroutines already waiting for the projects configuration result will be unsuspended.
      *
      * Coroutines launched *after* the failure state has reached will be launched w/o suspensions.
      */
     @Test
-    fun `exception thrown in AfterEvaluateBuildscript`() {
-        val project = buildProjectWithMPP()
-        val executed = mutableListOf<String>()
+    fun `exception thrown in AfterEkonstuateBuildscript`() {
+        konst project = buildProjectWithMPP()
+        konst executed = mutableListOf<String>()
 
-        project.launchInStage(AfterEvaluateBuildscript) {
-            executed.add("AfterEvaluateBuildscript 1")
+        project.launchInStage(AfterEkonstuateBuildscript) {
+            executed.add("AfterEkonstuateBuildscript 1")
         }
 
-        project.launchInStage(AfterEvaluateBuildscript) {
-            executed.add("AfterEvaluateBuildscript 2")
+        project.launchInStage(AfterEkonstuateBuildscript) {
+            executed.add("AfterEkonstuateBuildscript 2")
             throw TestException()
         }
 
-        project.launchInStage(AfterEvaluateBuildscript) {
-            executed.add("AfterEvaluateBuildscript 3")
+        project.launchInStage(AfterEkonstuateBuildscript) {
+            executed.add("AfterEkonstuateBuildscript 3")
         }
 
         project.launchInStage(ReadyForExecution) {
             executed.add("ReadyForExecution")
         }
 
-        assertFails { project.evaluate() }
+        assertFails { project.ekonstuate() }
 
         /* Showcase of which coroutines were executed */
         run {
-            /* We failed in 'AfterEvaluateBuildscript' */
-            assertEquals(AfterEvaluateBuildscript, project.kotlinPluginLifecycle.stage)
+            /* We failed in 'AfterEkonstuateBuildscript' */
+            assertEquals(AfterEkonstuateBuildscript, project.kotlinPluginLifecycle.stage)
 
-            /* Any coroutine scheduled for 'running after 'AfterEvaluateBuildscript 2' was not executed! */
-            assertEquals(listOf("AfterEvaluateBuildscript 1", "AfterEvaluateBuildscript 2"), executed)
+            /* Any coroutine scheduled for 'running after 'AfterEkonstuateBuildscript 2' was not executed! */
+            assertEquals(listOf("AfterEkonstuateBuildscript 1", "AfterEkonstuateBuildscript 2"), executed)
 
             /* ProjectConfigurationResult is available */
             assertIsInstance<ProjectConfigurationResult.Failure>(project.configurationResult.getOrThrow())
@@ -298,18 +298,18 @@ class KotlinPluginLifecycleSample {
 
         /* Showcase of which futures will be available */
         run {
-            /* Future that only requires 'BuildscriptEvaluation' is available */
-            assertNotNull(project.future { KotlinPluginLifecycle.Stage.EvaluateBuildscript.await() }.getOrThrow())
+            /* Future that only requires 'BuildscriptEkonstuation' is available */
+            assertNotNull(project.future { KotlinPluginLifecycle.Stage.EkonstuateBuildscript.await() }.getOrThrow())
 
             /*
-            Future that requires 'AfterEvaluateBuildscript' is available
+            Future that requires 'AfterEkonstuateBuildscript' is available
             Why will this future be returning?
-            Because the semantics of 'KotlinPluginLifecycle.Stage.AfterEvaluateBuildscript.await()' is
+            Because the semantics of 'KotlinPluginLifecycle.Stage.AfterEkonstuateBuildscript.await()' is
             "I require this stage to execute" and not "I require this stage to be finished".
             So even if there formally wy an Exception thrown within the Stage, the requirement for this future
             will be met: We indeed made it into this Stage.
             */
-            assertNotNull(project.future { KotlinPluginLifecycle.Stage.AfterEvaluateBuildscript.await() }.getOrThrow())
+            assertNotNull(project.future { KotlinPluginLifecycle.Stage.AfterEkonstuateBuildscript.await() }.getOrThrow())
 
             /* Future that requires 'ReadyForExecution' is not available */
             assertFailsWith<IllegalLifecycleException> {
@@ -325,19 +325,19 @@ class KotlinPluginLifecycleSample {
      */
     @Test
     fun `awaiting Project configurationResult`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.launch {
-            /* This coroutine is executed right away in EvaluateBuildscript */
-            assertEquals(EvaluateBuildscript, project.kotlinPluginLifecycle.stage)
+            /* This coroutine is executed right away in EkonstuateBuildscript */
+            assertEquals(EkonstuateBuildscript, project.kotlinPluginLifecycle.stage)
 
             /* Suspension point: We are waiting for lifecycle/project configuration to finish fully */
-            val result = project.configurationResult.await()
+            konst result = project.configurationResult.await()
             assertIsInstance<ProjectConfigurationResult.Success>(result)
 
             /* Since no errors have been thrown: ReadyForExecution Stage has been reached */
             assertEquals(ReadyForExecution, project.kotlinPluginLifecycle.stage)
         }
-        project.evaluate()
+        project.ekonstuate()
     }
 
     /**
@@ -349,12 +349,12 @@ class KotlinPluginLifecycleSample {
      */
     @Test
     fun `awaiting Project configurationResult - with error thrown in FinaliseDsl`() {
-        val project = buildProjectWithMPP()
-        val executed = mutableListOf<String>()
+        konst project = buildProjectWithMPP()
+        konst executed = mutableListOf<String>()
 
         project.launch {
             executed.add("launch:beforeConfigurationResult")
-            val result = project.configurationResult.await()
+            konst result = project.configurationResult.await()
             assertIsInstance<ProjectConfigurationResult.Failure>(result)
             executed.add("launch:afterConfigurationResult")
         }
@@ -362,7 +362,7 @@ class KotlinPluginLifecycleSample {
         project.launchInStage(FinaliseDsl) {
             executed.add("FinaliseDsl:beforeException")
 
-            val result = project.configurationResult.await()
+            konst result = project.configurationResult.await()
             assertIsInstance<ProjectConfigurationResult.Failure>(result)
             executed.add("FinaliseDsl:beforeException:afterConfigurationResult")
         }
@@ -377,7 +377,7 @@ class KotlinPluginLifecycleSample {
             executed.add("FinaliseDsl:afterException")
         }
 
-        assertFails { project.evaluate() }
+        assertFails { project.ekonstuate() }
 
         assertEquals(
             listOf(

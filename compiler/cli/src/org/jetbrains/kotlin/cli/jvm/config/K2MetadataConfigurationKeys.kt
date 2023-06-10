@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.cli.jvm.config
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 object K2MetadataConfigurationKeys {
-    val FRIEND_PATHS = CompilerConfigurationKey.create<List<String>>("friend module paths")
-    val REFINES_PATHS = CompilerConfigurationKey.create<List<String>>("refined module paths")
+    konst FRIEND_PATHS = CompilerConfigurationKey.create<List<String>>("friend module paths")
+    konst REFINES_PATHS = CompilerConfigurationKey.create<List<String>>("refined module paths")
 }

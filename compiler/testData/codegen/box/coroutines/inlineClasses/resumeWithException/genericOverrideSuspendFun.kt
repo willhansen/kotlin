@@ -6,7 +6,7 @@ import kotlin.coroutines.*
 
 var result = "FAIL"
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 var c: Continuation<Any>? = null
 
@@ -31,7 +31,7 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     builder {
-        val base: Base<*> = Derived()
+        konst base: Base<*> = Derived()
         (base.generic() as IC).s
     }
     c?.resumeWithException(IllegalStateException("OK"))

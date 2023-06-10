@@ -1,6 +1,6 @@
 // FILE: main.kt
 fun some() {
-    val jClass = JavaTest.SomeJavaClass()
+    konst jClass = JavaTest.SomeJavaClass()
     jClass.<caret>setListener {}
 }
 

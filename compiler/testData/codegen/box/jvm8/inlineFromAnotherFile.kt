@@ -15,6 +15,6 @@ public inline fun <T, R> Iterable<T>.fold2(initial: R, operation: (R, T) -> R): 
 import test.*
 
 fun box(): String {
-    val list = listOf("O", "K")
+    konst list = listOf("O", "K")
     return list.fold2("") {a, b -> a +b}
 }

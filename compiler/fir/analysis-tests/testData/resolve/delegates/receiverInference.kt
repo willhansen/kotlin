@@ -13,5 +13,5 @@ class Prop<E, V> {
 fun <R: XEntity, V> mkProp(): Provider<Prop<R, V>> = Provider()
 
 class MyEnt: XEntity {
-    val d: String by mkProp()
+    konst d: String by mkProp()
 }

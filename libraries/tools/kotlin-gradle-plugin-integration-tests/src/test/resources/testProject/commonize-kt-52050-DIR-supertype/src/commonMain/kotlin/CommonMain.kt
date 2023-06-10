@@ -3,7 +3,7 @@
 import kotlinx.cinterop.CPointed
 import platform.posix.DIR
 
-fun requireCPointed(value: CPointed): Unit = error("Not supported")
+fun requireCPointed(konstue: CPointed): Unit = error("Not supported")
 fun DIR(): DIR = error("Not supported")
 
 fun main() {

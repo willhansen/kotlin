@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinJsCompilerType
 import org.jetbrains.kotlin.gradle.testbase.*
 import org.junit.jupiter.api.DisplayName
 
-abstract class AbstractJsConfigurationCacheIT(protected val irBackend: Boolean) : KGPBaseTest() {
+abstract class AbstractJsConfigurationCacheIT(protected konst irBackend: Boolean) : KGPBaseTest() {
     @Suppress("DEPRECATION")
-    private val defaultJsOptions = BuildOptions.JsOptions(
+    private konst defaultJsOptions = BuildOptions.JsOptions(
         useIrBackend = irBackend,
         jsCompilerType = if (irBackend) KotlinJsCompilerType.IR else KotlinJsCompilerType.LEGACY,
     )
 
-    final override val defaultBuildOptions =
+    final override konst defaultBuildOptions =
         super.defaultBuildOptions.copy(
             jsOptions = defaultJsOptions,
             configurationCache = true,
@@ -62,7 +62,7 @@ abstract class AbstractJsConfigurationCacheIT(protected val irBackend: Boolean) 
             build(":app:build") {
                 assertConfigurationCacheStored()
             }
-            // check IdeaPropertiesEvaluator for the logic
+            // check IdeaPropertiesEkonstuator for the logic
             build(":app:build", "-Didea.version=2020.1") {
                 assertConfigurationCacheReused()
                 assertTasksUpToDate(
@@ -101,10 +101,10 @@ abstract class AbstractJsConfigurationCacheIT(protected val irBackend: Boolean) 
             build(":build") {
                 assertConfigurationCacheStored()
             }
-            // check IdeaPropertiesEvaluator for the logic
+            // check IdeaPropertiesEkonstuator for the logic
             build(":build", "-Didea.version=2020.1") {
                 assertConfigurationCacheReused()
-                val upToDateTasks = listOf(
+                konst upToDateTasks = listOf(
                     ":packageJson",
                     ":publicPackageJson",
                     ":rootPackageJson",

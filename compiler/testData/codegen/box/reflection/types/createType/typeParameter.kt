@@ -14,7 +14,7 @@ class Foo<T> {
 }
 
 fun box(): String {
-    val tp = Foo::class.typeParameters.single()
+    konst tp = Foo::class.typeParameters.single()
     assertEquals(
             Foo::class.members.single { it.name == "nonNull" }.returnType,
             tp.createType()

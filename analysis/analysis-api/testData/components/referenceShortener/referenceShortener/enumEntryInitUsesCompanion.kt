@@ -1,8 +1,8 @@
-enum class C(val i: Int) {
+enum class C(konst i: Int) {
     ONE(<expr>C.K</expr>)
     ;
 
     companion object {
-        const val K = 1
+        const konst K = 1
     }
 }

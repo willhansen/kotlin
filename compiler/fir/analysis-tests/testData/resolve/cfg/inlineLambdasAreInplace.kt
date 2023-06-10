@@ -15,7 +15,7 @@ fun testInline() {
 
 fun testGeneric() {
     var x: String? = ""
-    val lambda = any { x = null }
+    konst lambda = any { x = null }
     x = ""
     lambda()
     <!SMARTCAST_IMPOSSIBLE!>x<!>.length // bad
@@ -23,7 +23,7 @@ fun testGeneric() {
 
 fun testNoinline() {
     var x: String? = ""
-    val lambda = noinline { x = null }
+    konst lambda = noinline { x = null }
     x = ""
     lambda()
     <!SMARTCAST_IMPOSSIBLE!>x<!>.length // bad
@@ -31,7 +31,7 @@ fun testNoinline() {
 
 fun testCrossinline() {
     var x: String? = ""
-    val lambda = crossinline { x = null }
+    konst lambda = crossinline { x = null }
     x = ""
     lambda()
     <!SMARTCAST_IMPOSSIBLE!>x<!>.length // bad

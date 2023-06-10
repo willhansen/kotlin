@@ -22,17 +22,17 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-val IrDeclaration.isSyntheticPrimaryConstructor: Boolean
+konst IrDeclaration.isSyntheticPrimaryConstructor: Boolean
     get() = origin == PrimaryConstructorLowering.SYNTHETIC_PRIMARY_CONSTRUCTOR
 
 // Create primary constructor if it doesn't exist
-class PrimaryConstructorLowering(val context: JsCommonBackendContext) : DeclarationTransformer {
+class PrimaryConstructorLowering(konst context: JsCommonBackendContext) : DeclarationTransformer {
 
     private var IrClass.syntheticPrimaryConstructor by context.mapping.classToSyntheticPrimaryConstructor
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrClass && declaration.kind != ClassKind.INTERFACE) {
-            val constructors = declaration.constructors
+            konst constructors = declaration.constructors
 
             if (constructors.any { it.isPrimary }) return null
 
@@ -44,10 +44,10 @@ class PrimaryConstructorLowering(val context: JsCommonBackendContext) : Declarat
 
     object SYNTHETIC_PRIMARY_CONSTRUCTOR : IrDeclarationOriginImpl("SYNTHETIC_PRIMARY_CONSTRUCTOR")
 
-    private val unitType = context.irBuiltIns.unitType
+    private konst unitType = context.irBuiltIns.unitType
 
     private fun createPrimaryConstructor(irClass: IrClass): IrConstructor {
-        val declaration = irClass.addConstructor {
+        konst declaration = irClass.addConstructor {
             origin = SYNTHETIC_PRIMARY_CONSTRUCTOR
             isPrimary = true
             visibility = DescriptorVisibilities.PRIVATE
@@ -68,14 +68,14 @@ class DelegateToSyntheticPrimaryConstructor(context: JsCommonBackendContext) : B
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (container is IrConstructor && !container.isPrimary) {
             container.parentAsClass.syntheticPrimaryConstructor?.let { primary ->
-                val initializeTransformer = object : IrElementTransformerVoid() {
+                konst initializeTransformer = object : IrElementTransformerVoid() {
                     override fun visitDeclaration(declaration: IrDeclarationBase): IrStatement = declaration // optimize visiting
 
                     override fun visitInstanceInitializerCall(expression: IrInstanceInitializerCall) = expression.run {
                         IrDelegatingConstructorCallImpl(
                             startOffset, endOffset, type,
                             primary.symbol,
-                            valueArgumentsCount = primary.valueParameters.size,
+                            konstueArgumentsCount = primary.konstueParameters.size,
                             typeArgumentsCount = primary.typeParameters.size
                         )
                     }

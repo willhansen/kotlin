@@ -7,15 +7,15 @@ package org.jetbrains.kotlin.project.model
 
 import java.io.Serializable
 
-sealed class KpmModuleIdentifier(open val moduleClassifier: String?) : Serializable
+sealed class KpmModuleIdentifier(open konst moduleClassifier: String?) : Serializable
 
 data class KpmLocalModuleIdentifier(
-    val buildId: String,
-    val projectId: String,
-    override val moduleClassifier: String?
+    konst buildId: String,
+    konst projectId: String,
+    override konst moduleClassifier: String?
 ) : KpmModuleIdentifier(moduleClassifier) {
     companion object {
-        private const val SINGLE_BUILD_ID = ":"
+        private const konst SINGLE_BUILD_ID = ":"
     }
 
     override fun toString(): String =
@@ -25,9 +25,9 @@ data class KpmLocalModuleIdentifier(
 }
 
 data class KpmMavenModuleIdentifier(
-    val group: String,
-    val name: String,
-    override val moduleClassifier: String?
+    konst group: String,
+    konst name: String,
+    override konst moduleClassifier: String?
 ) : KpmModuleIdentifier(moduleClassifier) {
     override fun toString(): String = "$group:$name" + moduleClassifier?.let { " / $it" }.orEmpty()
 }

@@ -6,13 +6,13 @@ package test
 annotation class FieldAnnotation
 
 inline fun reproduceIssue(crossinline s: () -> String): String {
-    val obj = object {
-        @field:FieldAnnotation val annotatedField = "O"
+    konst obj = object {
+        @field:FieldAnnotation konst annotatedField = "O"
         fun method(): String {
             return annotatedField + s()
         }
     }
-    val annotatedMethod = obj::class.java.declaredFields.first { it.name == "annotatedField" }
+    konst annotatedMethod = obj::class.java.declaredFields.first { it.name == "annotatedField" }
     if (annotatedMethod.annotations.isEmpty()) return "fail: can't find annotated field"
     return obj.method()
 }

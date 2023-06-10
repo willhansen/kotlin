@@ -51,16 +51,16 @@ class CityHashTest : KtUsefulTestCase() {
     }
 
     companion object {
-        val k0 = 0xc3a5c85c97cb3127UL
-        val kSeed128 = Hash128Bits(1234567UL, k0)
+        konst k0 = 0xc3a5c85c97cb3127UL
+        konst kSeed128 = Hash128Bits(1234567UL, k0)
     }
 
     private class ExpectedData(
-        val _64Bit: ULong,
-        val _128BitLow: ULong,
-        val _128BitHigh: ULong,
-        val _128BitLowSeed: ULong,
-        val _128BitHighSeed: ULong
+        konst _64Bit: ULong,
+        konst _128BitLow: ULong,
+        konst _128BitHigh: ULong,
+        konst _128BitLowSeed: ULong,
+        konst _128BitHighSeed: ULong
     ) {
         fun doTest(data: ByteArray, offset: Int, len: Int) {
             assertEquals(cityHash64(data, offset, len), _64Bit)
@@ -70,7 +70,7 @@ class CityHashTest : KtUsefulTestCase() {
     }
 
     fun testOriginal() {
-        val testData = listOf(
+        konst testData = listOf(
             ExpectedData(0x9ae16a3b2f90404fUL, 0x3df09dfc64c09a2bUL, 0x3cb540c392e51e29UL, 0x6b56343feac0663UL, 0x5b7bc50fd8e8ad92UL),
             ExpectedData(0x541150e87f415e96UL, 0xc3cdc41e1df33513UL, 0x2c138ff2596d42f6UL, 0xf58e9082aed3055fUL, 0x162e192b2957163dUL),
             ExpectedData(0xf3786a4b25827c1UL, 0x3149ba1dac77270dUL, 0x70e2e076e30703cUL, 0x59bcc9659bc5296UL, 0x9ecbc8132ae2f1d7UL),
@@ -376,7 +376,7 @@ class CityHashTest : KtUsefulTestCase() {
         var a = 9UL
         var b = 777UL
 
-        val data = ByteArray(1 shl 20) {
+        konst data = ByteArray(1 shl 20) {
             a += b
             b += a
             a = (a xor (a shr 41)) * k0

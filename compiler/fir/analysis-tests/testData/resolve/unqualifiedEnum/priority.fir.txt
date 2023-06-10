@@ -8,17 +8,17 @@ FILE: first.kt
 
         public final static enum entry ONE: R|first/First|
         public final static enum entry TWO: R|first/First|
-        public final static fun values(): R|kotlin/Array<first/First>| {
+        public final static fun konstues(): R|kotlin/Array<first/First>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|first/First| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|first/First| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<first/First>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<first/First>|
             public get(): R|kotlin/enums/EnumEntries<first/First>|
 
     }
-    public final val THREE: R|first/First| = Q|first/First|.R|first/First.ONE|
+    public final konst THREE: R|first/First| = Q|first/First|.R|first/First.ONE|
         public get(): R|first/First|
 FILE: second.kt
     package second
@@ -30,17 +30,17 @@ FILE: second.kt
 
         public final static enum entry THREE: R|second/Second|
         public final static enum entry FOUR: R|second/Second|
-        public final static fun values(): R|kotlin/Array<second/Second>| {
+        public final static fun konstues(): R|kotlin/Array<second/Second>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|second/Second| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|second/Second| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<second/Second>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<second/Second>|
             public get(): R|kotlin/enums/EnumEntries<second/Second>|
 
     }
-    public final val ONE: R|second/Second| = Q|second/Second|.R|second/Second.THREE|
+    public final konst ONE: R|second/Second| = Q|second/Second|.R|second/Second.THREE|
         public get(): R|second/Second|
     public final fun foo(f: R|first/First|): R|kotlin/Unit| {
         ^foo when (R|<local>/f|) {

@@ -1,4 +1,4 @@
 class FooImpl : Foo {
-    override val value: TypeAlias
+    override konst konstue: TypeAlias
         get() = 1
 }

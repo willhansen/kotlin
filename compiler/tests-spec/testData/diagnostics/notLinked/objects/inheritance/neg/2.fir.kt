@@ -8,7 +8,7 @@
  */
 
 // TESTCASE NUMBER: 2
-open class Foo(val prop: Int) {
+open class Foo(konst prop: Int) {
     companion object MyCompanion : Foo(Foo.prop)
 }
 

@@ -12,13 +12,13 @@ import java.io.File
 
 // It's important that this is not created per test, but rather per process.
 object IdeaSystemPropertiesForParallelRunConfigurator {
-    private val GRADLE_WORKER = System.getProperty("org.gradle.test.worker") ?: ""
+    private konst GRADLE_WORKER = System.getProperty("org.gradle.test.worker") ?: ""
     //TODO: try to remove folder on jvm shutdown (there are some flashing test with deleteOnExit = true)
-    private val PROCESS_TMP_ROOT_FOLDER =
+    private konst PROCESS_TMP_ROOT_FOLDER =
         FileUtil.createTempDirectory(File(System.getProperty("java.io.tmpdir")), "testRoot", "GW$GRADLE_WORKER", false).path
-    private val IDEA_SYSTEM = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), "idea-system", "", false).path
-    private val IDEA_CONFIG = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), "idea-config", "", false).path
-    private val ANDROID_HOME = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), ".android", "", false).path
+    private konst IDEA_SYSTEM = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), "idea-system", "", false).path
+    private konst IDEA_CONFIG = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), "idea-config", "", false).path
+    private konst ANDROID_HOME = FileUtil.createTempDirectory(File(PROCESS_TMP_ROOT_FOLDER), ".android", "", false).path
 
     init {
         // UsefulTestCase temp dir construction could cause folder clash on parallel test execution:

@@ -30,16 +30,16 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 internal class OverriddenFunctionInfo(
-        val function: IrSimpleFunction,
-        val overriddenFunction: IrSimpleFunction
+        konst function: IrSimpleFunction,
+        konst overriddenFunction: IrSimpleFunction
 ) {
-    val needBridge: Boolean
+    konst needBridge: Boolean
         get() = function.target.needBridgeTo(overriddenFunction)
 
-    val bridgeDirections: BridgeDirections
+    konst bridgeDirections: BridgeDirections
         get() = function.target.bridgeDirectionsTo(overriddenFunction)
 
-    val canBeCalledVirtually: Boolean
+    konst canBeCalledVirtually: Boolean
         get() {
             if (overriddenFunction.isObjCClassMethod()) {
                 return function.canObjCClassMethodBeCalledVirtually(overriddenFunction)
@@ -48,17 +48,17 @@ internal class OverriddenFunctionInfo(
             return overriddenFunction.isOverridable
         }
 
-    val inheritsBridge: Boolean
+    konst inheritsBridge: Boolean
         get() = !function.isReal
                 && function.target.overrides(overriddenFunction)
                 && function.bridgeDirectionsTo(overriddenFunction).allNotNeeded()
 
     fun getImplementation(context: Context): IrSimpleFunction? {
-        val target = function.target
-        val implementation = if (!needBridge)
+        konst target = function.target
+        konst implementation = if (!needBridge)
             target
         else {
-            val bridgeOwner = if (inheritsBridge) {
+            konst bridgeOwner = if (inheritsBridge) {
                 target // Bridge is inherited from superclass.
             } else {
                 function
@@ -89,18 +89,18 @@ internal class OverriddenFunctionInfo(
     }
 }
 
-internal class ClassGlobalHierarchyInfo(val classIdLo: Int, val classIdHi: Int, val interfaceId: Int) {
+internal class ClassGlobalHierarchyInfo(konst classIdLo: Int, konst classIdHi: Int, konst interfaceId: Int) {
     companion object {
-        val DUMMY = ClassGlobalHierarchyInfo(0, 0, 0)
+        konst DUMMY = ClassGlobalHierarchyInfo(0, 0, 0)
 
         // 32-items table seems like a good threshold.
-        val MAX_BITS_PER_COLOR = 5
+        konst MAX_BITS_PER_COLOR = 5
     }
 }
 
-internal class GlobalHierarchyAnalysisResult(val bitsPerColor: Int)
+internal class GlobalHierarchyAnalysisResult(konst bitsPerColor: Int)
 
-internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrModuleFragment) {
+internal class GlobalHierarchyAnalysis(konst context: Context, konst irModule: IrModuleFragment) {
     fun run() {
         /*
          * The algorithm for fast interface call and check:
@@ -122,8 +122,8 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
          *     if (size >= 0) { .. fast path .. }
          *     else binary_search(0, -size)
          */
-        val interfaceColors = assignColorsToInterfaces()
-        val maxColor = interfaceColors.values.maxOrNull() ?: 0
+        konst interfaceColors = assignColorsToInterfaces()
+        konst maxColor = interfaceColors.konstues.maxOrNull() ?: 0
         var bitsPerColor = 0
         var x = maxColor
         while (x > 0) {
@@ -131,24 +131,24 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
             x /= 2
         }
 
-        val maxInterfaceId = Int.MAX_VALUE shr bitsPerColor
-        val colorCounts = IntArray(maxColor + 1)
+        konst maxInterfaceId = Int.MAX_VALUE shr bitsPerColor
+        konst colorCounts = IntArray(maxColor + 1)
 
         /*
          * Here's the explanation of what's happening here:
          * Given a tree we can traverse it with the DFS and save for each vertex two times:
          * the enter time (the first time we saw this vertex) and the exit time (the last time we saw it).
-         * It turns out that if we assign then for each vertex the interval (enterTime, exitTime),
+         * It turns out that if we assign then for each vertex the interkonst (enterTime, exitTime),
          * then the following claim holds for any two vertices v and w:
-         * ----- v is ancestor of w iff interval(v) contains interval(w) ------
+         * ----- v is ancestor of w iff interkonst(v) contains interkonst(w) ------
          * Now apply this idea to the classes hierarchy tree and we'll get a fast type check.
          *
-         * And one more observation: for each pair of intervals they either don't intersect or
-         * one contains the other. With that in mind, we can save in a type info only one end of an interval.
+         * And one more observation: for each pair of interkonsts they either don't intersect or
+         * one contains the other. With that in mind, we can save in a type info only one end of an interkonst.
          */
-        val root = context.irBuiltIns.anyClass.owner
-        val immediateInheritors = mutableMapOf<IrClass, MutableList<IrClass>>()
-        val allClasses = mutableListOf<IrClass>()
+        konst root = context.irBuiltIns.anyClass.owner
+        konst immediateInheritors = mutableMapOf<IrClass, MutableList<IrClass>>()
+        konst allClasses = mutableListOf<IrClass>()
         irModule.acceptVoid(object: IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
                 element.acceptChildrenVoid(this)
@@ -156,9 +156,9 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
 
             override fun visitClass(declaration: IrClass) {
                 if (declaration.isInterface) {
-                    val color = interfaceColors[declaration]!!
-                    // Numerate from 1 (reserve 0 for invalid value).
-                    val interfaceId = ++colorCounts[color]
+                    konst color = interfaceColors[declaration]!!
+                    // Numerate from 1 (reserve 0 for inkonstid konstue).
+                    konst interfaceId = ++colorCounts[color]
                     assert (interfaceId <= maxInterfaceId) {
                         "Unable to assign interface id to ${declaration.name}"
                     }
@@ -167,8 +167,8 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
                 } else {
                     allClasses += declaration
                     if (declaration != root) {
-                        val superClass = declaration.getSuperClassNotAny() ?: root
-                        val inheritors = immediateInheritors.getOrPut(superClass) { mutableListOf() }
+                        konst superClass = declaration.getSuperClassNotAny() ?: root
+                        konst inheritors = immediateInheritors.getOrPut(superClass) { mutableListOf() }
                         inheritors.add(declaration)
                     }
                 }
@@ -179,10 +179,10 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
 
         fun dfs(irClass: IrClass) {
             ++time
-            // Make the Any's interval's left border -1 in order to correctly generate classes for ObjC blocks.
-            val enterTime = if (irClass == root) -1 else time
+            // Make the Any's interkonst's left border -1 in order to correctly generate classes for ObjC blocks.
+            konst enterTime = if (irClass == root) -1 else time
             immediateInheritors[irClass]?.forEach { dfs(it) }
-            val exitTime = time
+            konst exitTime = time
             context.getLayoutBuilder(irClass).hierarchyInfo = ClassGlobalHierarchyInfo(enterTime, exitTime, 0)
         }
 
@@ -191,12 +191,12 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
         context.globalHierarchyAnalysisResult = GlobalHierarchyAnalysisResult(bitsPerColor)
     }
 
-    class InterfacesForbiddennessGraph(val nodes: List<IrClass>, val forbidden: List<List<Int>>) {
+    class InterfacesForbiddennessGraph(konst nodes: List<IrClass>, konst forbidden: List<List<Int>>) {
 
         fun computeColoringGreedy(): IntArray {
-            val colors = IntArray(nodes.size) { -1 }
+            konst colors = IntArray(nodes.size) { -1 }
             var numberOfColors = 0
-            val usedColors = BooleanArray(nodes.size)
+            konst usedColors = BooleanArray(nodes.size)
             for (v in nodes.indices) {
                 for (c in 0 until numberOfColors)
                     usedColors[c] = false
@@ -218,9 +218,9 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
 
         companion object {
             fun build(irModuleFragment: IrModuleFragment): InterfacesForbiddennessGraph {
-                val interfaceIndices = mutableMapOf<IrClass, Int>()
-                val interfaces = mutableListOf<IrClass>()
-                val forbidden = mutableListOf<MutableList<Int>>()
+                konst interfaceIndices = mutableMapOf<IrClass, Int>()
+                konst interfaces = mutableListOf<IrClass>()
+                konst forbidden = mutableListOf<MutableList<Int>>()
                 irModuleFragment.acceptVoid(object : IrElementVisitorVoid {
                     override fun visitElement(element: IrElement) {
                         element.acceptChildrenVoid(this)
@@ -238,12 +238,12 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
                         if (declaration.isInterface)
                             registerInterface(declaration)
                         else {
-                            val implementedInterfaces = declaration.implementedInterfaces
+                            konst implementedInterfaces = declaration.implementedInterfaces
                             implementedInterfaces.forEach { registerInterface(it) }
                             for (i in 0 until implementedInterfaces.size)
                                 for (j in i + 1 until implementedInterfaces.size) {
-                                    val v = interfaceIndices[implementedInterfaces[i]]!!
-                                    val u = interfaceIndices[implementedInterfaces[j]]!!
+                                    konst v = interfaceIndices[implementedInterfaces[i]]!!
+                                    konst u = interfaceIndices[implementedInterfaces[j]]!!
                                     forbidden[v].add(u)
                                     forbidden[u].add(v)
                                 }
@@ -257,22 +257,22 @@ internal class GlobalHierarchyAnalysis(val context: Context, val irModule: IrMod
     }
 
     private fun assignColorsToInterfaces(): Map<IrClass, Int> {
-        val graph = InterfacesForbiddennessGraph.build(irModule)
-        val coloring = graph.computeColoringGreedy()
+        konst graph = InterfacesForbiddennessGraph.build(irModule)
+        konst coloring = graph.computeColoringGreedy()
         return graph.nodes.mapIndexed { v, irClass -> irClass to coloring[v] }.toMap()
     }
 }
 
 internal fun IrField.requiredAlignment(llvm: CodegenLlvmHelpers): Int {
-    val llvmType = type.toLLVMType(llvm)
-    val abiAlignment = if (llvmType == llvm.vector128Type) {
+    konst llvmType = type.toLLVMType(llvm)
+    konst abiAlignment = if (llvmType == llvm.vector128Type) {
         8 // over-aligned objects are not supported now, and this worked somehow, so let's keep it as it for now
     } else {
         LLVMABIAlignmentOfType(llvm.runtime.targetData, llvmType)
     }
     return if (hasAnnotation(KonanFqNames.volatile)) {
-        val size = LLVMABISizeOfType(llvm.runtime.targetData, llvmType).toInt()
-        val alignment = maxOf(size, abiAlignment)
+        konst size = LLVMABISizeOfType(llvm.runtime.targetData, llvmType).toInt()
+        konst alignment = maxOf(size, abiAlignment)
         require(alignment % size == 0) { "Bad alignment of field ${render()}: abiAlignment = ${abiAlignment}, size = ${size}"}
         require(alignment % abiAlignment == 0) { "Bad alignment of field ${render()}: abiAlignment = ${abiAlignment}, size = ${size}"}
         alignment
@@ -282,14 +282,14 @@ internal fun IrField.requiredAlignment(llvm: CodegenLlvmHelpers): Int {
 }
 
 
-internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
+internal class ClassLayoutBuilder(konst irClass: IrClass, konst context: Context) {
     private fun IrField.toFieldInfo(llvm: CodegenLlvmHelpers): FieldInfo {
-        val isConst = correspondingPropertySymbol?.owner?.isConst ?: false
-        require(!isConst || initializer?.expression is IrConst<*>) { "A const val field ${render()} must have constant initializer" }
+        konst isConst = correspondingPropertySymbol?.owner?.isConst ?: false
+        require(!isConst || initializer?.expression is IrConst<*>) { "A const konst field ${render()} must have constant initializer" }
         return FieldInfo(name.asString(), type, isConst, symbol, requiredAlignment(llvm))
     }
 
-    val vtableEntries: List<OverriddenFunctionInfo> by lazy {
+    konst vtableEntries: List<OverriddenFunctionInfo> by lazy {
         require(!irClass.isInterface)
 
         context.logMultiple {
@@ -297,16 +297,16 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
             +"BUILDING vTable for ${irClass.render()}"
         }
 
-        val superVtableEntries = if (irClass.isSpecialClassWithNoSupertypes()) {
+        konst superVtableEntries = if (irClass.isSpecialClassWithNoSupertypes()) {
             emptyList()
         } else {
-            val superClass = irClass.getSuperClassNotAny() ?: context.ir.symbols.any.owner
+            konst superClass = irClass.getSuperClassNotAny() ?: context.ir.symbols.any.owner
             context.getLayoutBuilder(superClass).vtableEntries
         }
 
-        val methods = overridableOrOverridingMethods
-        val newVtableSlots = mutableListOf<OverriddenFunctionInfo>()
-        val overridenVtableSlots = mutableMapOf<IrSimpleFunction, OverriddenFunctionInfo>()
+        konst methods = overridableOrOverridingMethods
+        konst newVtableSlots = mutableListOf<OverriddenFunctionInfo>()
+        konst overridenVtableSlots = mutableMapOf<IrSimpleFunction, OverriddenFunctionInfo>()
 
         context.logMultiple {
             +""
@@ -321,10 +321,10 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
             +"BUILDING INHERITED vTable"
         }
 
-        val superVtableMap = superVtableEntries.groupBy { it.function }
+        konst superVtableMap = superVtableEntries.groupBy { it.function }
         methods.forEach { overridingMethod ->
             overridingMethod.allOverriddenFunctions.forEach {
-                val superMethods = superVtableMap[it]
+                konst superMethods = superVtableMap[it]
                 if (superMethods?.isNotEmpty() == true) {
                     newVtableSlots.add(OverriddenFunctionInfo(overridingMethod, it))
                     superMethods.forEach { superMethod ->
@@ -334,7 +334,7 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
                 }
             }
         }
-        val inheritedVtableSlots = superVtableEntries.map { superMethod ->
+        konst inheritedVtableSlots = superVtableEntries.map { superMethod ->
             overridenVtableSlots[superMethod.overriddenFunction]?.also {
                 context.log { "Taking overridden ${superMethod.overriddenFunction.render()} -> ${it.function.render()}" }
             } ?: superMethod.also {
@@ -345,9 +345,9 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
         // Add all possible (descriptor, overriddenDescriptor) edges for now, redundant will be removed later.
         methods.mapTo(newVtableSlots) { OverriddenFunctionInfo(it, it) }
 
-        val inheritedVtableSlotsSet = inheritedVtableSlots.map { it.function to it.bridgeDirections }.toSet()
+        konst inheritedVtableSlotsSet = inheritedVtableSlots.map { it.function to it.bridgeDirections }.toSet()
 
-        val filteredNewVtableSlots = newVtableSlots
+        konst filteredNewVtableSlots = newVtableSlots
             .filterNot { inheritedVtableSlotsSet.contains(it.function to it.bridgeDirections) }
             .distinctBy { it.function to it.bridgeDirections }
             .filter { it.function.isOverridable }
@@ -367,8 +367,8 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
     }
 
     fun vtableIndex(function: IrSimpleFunction): Int {
-        val bridgeDirections = function.target.bridgeDirectionsTo(function)
-        val index = vtableEntries.indexOfFirst { it.function == function && it.bridgeDirections == bridgeDirections }
+        konst bridgeDirections = function.target.bridgeDirectionsTo(function)
+        konst index = vtableEntries.indexOfFirst { it.function == function && it.bridgeDirections == bridgeDirections }
         if (index < 0) throw Error(function.render() + " $function " + " (${function.symbol.descriptor}) not in vtable of " + irClass.render())
         return index
     }
@@ -378,7 +378,7 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
                 OverriddenFunctionInfo(it, function).getImplementation(context)
             }
 
-    val interfaceVTableEntries: List<IrSimpleFunction> by lazy {
+    konst interfaceVTableEntries: List<IrSimpleFunction> by lazy {
         require(irClass.isInterface)
         irClass.simpleFunctions()
                 .map { it.getLoweredVersion() }
@@ -389,13 +389,13 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
                 .sortedBy { it.uniqueName }
     }
 
-    data class InterfaceTablePlace(val interfaceId: Int, val itableSize: Int, val methodIndex: Int) {
+    data class InterfaceTablePlace(konst interfaceId: Int, konst itableSize: Int, konst methodIndex: Int) {
         companion object {
-            val INVALID = InterfaceTablePlace(0, -1, -1)
+            konst INVALID = InterfaceTablePlace(0, -1, -1)
         }
     }
 
-    val classId: Int get() = when {
+    konst classId: Int get() = when {
         irClass.isKotlinObjCClass() -> 0
         irClass.isInterface -> {
             if (context.ghaEnabled()) {
@@ -415,16 +415,16 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
 
     fun itablePlace(function: IrSimpleFunction): InterfaceTablePlace {
         require(irClass.isInterface) { "An interface expected but was ${irClass.name}" }
-        val interfaceVTable = interfaceVTableEntries
-        val index = interfaceVTable.indexOf(function)
+        konst interfaceVTable = interfaceVTableEntries
+        konst index = interfaceVTable.indexOf(function)
         if (index >= 0)
             return InterfaceTablePlace(classId, interfaceVTable.size, index)
-        val superFunction = function.overriddenSymbols.first().owner
+        konst superFunction = function.overriddenSymbols.first().owner
         return context.getLayoutBuilder(superFunction.parentAsClass).itablePlace(superFunction)
     }
 
-    class FieldInfo(val name: String, val type: IrType, val isConst: Boolean, val irFieldSymbol: IrFieldSymbol, val alignment: Int) {
-        val irField: IrField?
+    class FieldInfo(konst name: String, konst type: IrType, konst isConst: Boolean, konst irFieldSymbol: IrFieldSymbol, konst alignment: Int) {
+        konst irField: IrField?
             get() = if (irFieldSymbol.isBound) irFieldSymbol.owner else null
         init {
             require(alignment.countOneBits() == 1) { "Alignment should be power of 2" }
@@ -436,7 +436,7 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
      * The order respects the class hierarchy, i.e. a class [fields] contains superclass [fields] as a prefix.
      */
     fun getFields(llvm: CodegenLlvmHelpers): List<FieldInfo> = getFieldsInternal(llvm).map { fieldInfo ->
-        val mappedField = fieldInfo.irField?.let { context.mapping.lateInitFieldToNullableField[it] ?: it }
+        konst mappedField = fieldInfo.irField?.let { context.mapping.lateInitFieldToNullableField[it] ?: it }
         if (mappedField == fieldInfo.irField)
             fieldInfo
         else
@@ -448,11 +448,11 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
     private fun getFieldsInternal(llvm: CodegenLlvmHelpers): List<FieldInfo> {
         fields?.let { return it }
 
-        val superClass = irClass.getSuperClassNotAny()
-        val superFields = if (superClass != null) context.getLayoutBuilder(superClass).getFieldsInternal(llvm) else emptyList()
+        konst superClass = irClass.getSuperClassNotAny()
+        konst superFields = if (superClass != null) context.getLayoutBuilder(superClass).getFieldsInternal(llvm) else emptyList()
 
-        val declaredFields = getDeclaredFields(llvm)
-        val sortedDeclaredFields = if (irClass.hasAnnotation(KonanFqNames.noReorderFields))
+        konst declaredFields = getDeclaredFields(llvm)
+        konst sortedDeclaredFields = if (irClass.hasAnnotation(KonanFqNames.noReorderFields))
             declaredFields
         else
             declaredFields.sortedByDescending {
@@ -462,22 +462,22 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
         return (superFields + sortedDeclaredFields).also { fields = it }
     }
 
-    val associatedObjects by lazy {
-        val result = mutableMapOf<IrClass, IrClass>()
+    konst associatedObjects by lazy {
+        konst result = mutableMapOf<IrClass, IrClass>()
 
         irClass.annotations.forEach {
-            val irFile = irClass.getContainingFile()
+            konst irFile = irClass.getContainingFile()
 
-            val annotationClass = (it.symbol.owner as? IrConstructor)?.constructedClass
+            konst annotationClass = (it.symbol.owner as? IrConstructor)?.constructedClass
                     ?: error(irFile, it, "unexpected annotation")
 
             if (annotationClass.hasAnnotation(RuntimeNames.associatedObjectKey)) {
-                val argument = it.getValueArgument(0)
+                konst argument = it.getValueArgument(0)
 
-                val irClassReference = argument as? IrClassReference
+                konst irClassReference = argument as? IrClassReference
                         ?: error(irFile, argument, "unexpected annotation argument")
 
-                val associatedObject = irClassReference.symbol.owner
+                konst associatedObject = irClassReference.symbol.owner
 
                 if (associatedObject !is IrClass || !associatedObject.isObject) {
                     error(irFile, irClassReference, "argument is not a singleton")
@@ -487,7 +487,7 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
                     error(
                             irFile,
                             it,
-                            "duplicate value for ${annotationClass.name}, previous was ${result[annotationClass]?.name}"
+                            "duplicate konstue for ${annotationClass.name}, previous was ${result[annotationClass]?.name}"
                     )
                 }
 
@@ -504,14 +504,14 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
      * Fields declared in the class.
      */
     fun getDeclaredFields(llvm: CodegenLlvmHelpers): List<FieldInfo> {
-        val outerThisField = if (irClass.isInner)
+        konst outerThisField = if (irClass.isInner)
             context.innerClassesSupport.getOuterThisField(irClass)
         else null
-        val packageFragment = irClass.getPackageFragment()
+        konst packageFragment = irClass.getPackageFragment()
         if (packageFragment is IrExternalPackageFragment) {
-            val moduleDescriptor = packageFragment.packageFragmentDescriptor.containingDeclaration
+            konst moduleDescriptor = packageFragment.packageFragmentDescriptor.containingDeclaration
             if (moduleDescriptor.isFromInteropLibrary()) return emptyList()
-            val moduleDeserializer = context.irLinker.moduleDeserializers[moduleDescriptor]
+            konst moduleDeserializer = context.irLinker.moduleDeserializers[moduleDescriptor]
                     ?: error("No module deserializer for ${irClass.render()}")
             require(context.config.cachedLibraries.isLibraryCached(moduleDeserializer.klib)) {
                 "No IR and no cache for ${irClass.render()}"
@@ -519,7 +519,7 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
             return moduleDeserializer.deserializeClassFields(irClass, outerThisField?.toFieldInfo(llvm))
         }
 
-        val declarations = irClass.declarations.toMutableList()
+        konst declarations = irClass.declarations.toMutableList()
         outerThisField?.let {
             if (!declarations.contains(it))
                 declarations += it
@@ -540,10 +540,10 @@ internal class ClassLayoutBuilder(val irClass: IrClass, val context: Context) {
         isSuspend -> this.getOrCreateFunctionWithContinuationStub(context)
         else -> this
     }
-    private val overridableOrOverridingMethods: List<IrSimpleFunction>
+    private konst overridableOrOverridingMethods: List<IrSimpleFunction>
         get() = irClass.simpleFunctions()
                 .map {it.getLoweredVersion() }
                 .filter { it.isOverridableOrOverrides && it.bridgeTarget == null }
 
-    private val IrFunction.uniqueName get() = computeFunctionName()
+    private konst IrFunction.uniqueName get() = computeFunctionName()
 }

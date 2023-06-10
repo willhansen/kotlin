@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimulatorTes
 import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
-class NativeBinaryTestRunSource(val binary: TestExecutable) :
+class NativeBinaryTestRunSource(konst binary: TestExecutable) :
     CompilationExecutionSource<KotlinNativeCompilation> {
 
-    override val compilation: KotlinNativeCompilation
+    override konst compilation: KotlinNativeCompilation
         get() = binary.compilation
 }
 
@@ -49,11 +49,11 @@ abstract class AbstractKotlinNativeTestRun<T : KotlinNativeTest>(testRunName: St
 
     final override var executionSource: NativeBinaryTestRunSource
         get() = _executionSource
-        private set(value) {
+        private set(konstue) {
             executionTask.configure {
-                it.executable(value.binary.linkTask) { value.binary.outputFile }
+                it.executable(konstue.binary.linkTask) { konstue.binary.outputFile }
             }
-            _executionSource = value
+            _executionSource = konstue
         }
 
     override fun setExecutionSourceFrom(testExecutable: TestExecutable) {
@@ -76,7 +76,7 @@ open class DefaultSimulatorTestRun(testRunName: String, target: KotlinNativeTarg
 
     override var deviceId: String
         get() = executionTask.flatMap { it.device }.get()
-        set(value) {
-            executionTask.configure { it.device.set(value) }
+        set(konstue) {
+            executionTask.configure { it.device.set(konstue) }
         }
 }

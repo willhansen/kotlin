@@ -32,7 +32,7 @@ fun breakInWhileCondition(): String {
 }
 
 fun box(): String {
-    val breakInDoWhileResult = breakInDoWhileCondition()
+    konst breakInDoWhileResult = breakInDoWhileCondition()
     if (breakInDoWhileResult != "OK") return breakInDoWhileResult
     return breakInWhileCondition()
 }

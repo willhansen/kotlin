@@ -16,6 +16,6 @@ abstract class AbstractIncrementalK2JvmJpsTest(
         super.updateCommandLineArguments(arguments)
     }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = BuildLogFinder(isJpsBuild = true, isFirEnabled = true)
 }

@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirFromMissingDependenciesNamedReference : FirNamedReference() {
-    abstract override val source: KtSourceElement?
-    abstract override val name: Name
+    abstract override konst source: KtSourceElement?
+    abstract override konst name: Name
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitFromMissingDependenciesNamedReference(this, data)
 

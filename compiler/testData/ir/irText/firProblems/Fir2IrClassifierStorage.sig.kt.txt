@@ -5,7 +5,7 @@ class Fir2IrClassifierStorage : Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrClassifierStorage{}components
   //   Public signature: /Fir2IrClassifierStorage.components|4078011610978737739[0]
-  private val components: Fir2IrComponents
+  private konst components: Fir2IrComponents
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrClassifierStorage#<get-components>(){}Fir2IrComponents
     //   Public signature: /Fir2IrClassifierStorage.components.<get-components>|-8289335322148381223[0]
@@ -17,7 +17,7 @@ class Fir2IrClassifierStorage : Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrClassifierStorage{}name
   //   Public signature: /Fir2IrClassifierStorage.name|4231860309499509769[0]
-  private val name: String
+  private konst name: String
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrClassifierStorage#<get-name>(){}kotlin.String
     //   Public signature: /Fir2IrClassifierStorage.name.<get-name>|-8006111524522882650[0]
@@ -34,7 +34,7 @@ class Fir2IrClassifierStorage : Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrClassifierStorage{}classifierStorage
   //   Public signature: /Fir2IrClassifierStorage.classifierStorage|-9190759179670631614[0]
-  override val classifierStorage: Fir2IrClassifierStorage
+  override konst classifierStorage: Fir2IrClassifierStorage
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrClassifierStorage#<get-classifierStorage>(){}Fir2IrClassifierStorage
     //   Public signature: /Fir2IrClassifierStorage.classifierStorage.<get-classifierStorage>|3872686339912673063[0]
@@ -46,7 +46,7 @@ class Fir2IrClassifierStorage : Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrClassifierStorage{}session
   //   Public signature: /Fir2IrClassifierStorage.session|5876162548717009254[0]
-  override val session: FirSession
+  override konst session: FirSession
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrClassifierStorage#<get-session>(){}FirSession
     //   Public signature: /Fir2IrClassifierStorage.session.<get-session>|-987114078791317060[0]
@@ -64,7 +64,7 @@ class Fir2IrComponentsStorage : Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrComponentsStorage{}session
   //   Public signature: /Fir2IrComponentsStorage.session|5876162548717009254[0]
-  override val session: FirSession
+  override konst session: FirSession
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrComponentsStorage#<get-session>(){}FirSession
     //   Public signature: /Fir2IrComponentsStorage.session.<get-session>|-987114078791317060[0]
@@ -103,7 +103,7 @@ class FirSession {
   // CHECK:
   //   Mangled name: FirSession{}name
   //   Public signature: /FirSession.name|4231860309499509769[0]
-  val name: String
+  konst name: String
     // CHECK JVM_IR:
     //   Mangled name: FirSession#<get-name>(){}kotlin.String
     //   Public signature: /FirSession.name.<get-name>|-8006111524522882650[0]
@@ -127,7 +127,7 @@ interface Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrComponents{}classifierStorage
   //   Public signature: /Fir2IrComponents.classifierStorage|-9190759179670631614[0]
-  abstract val classifierStorage: Fir2IrClassifierStorage
+  abstract konst classifierStorage: Fir2IrClassifierStorage
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrComponents#<get-classifierStorage>(){}Fir2IrClassifierStorage
     //   Public signature: /Fir2IrComponents.classifierStorage.<get-classifierStorage>|3872686339912673063[0]
@@ -139,7 +139,7 @@ interface Fir2IrComponents {
   // CHECK:
   //   Mangled name: Fir2IrComponents{}session
   //   Public signature: /Fir2IrComponents.session|5876162548717009254[0]
-  abstract val session: FirSession
+  abstract konst session: FirSession
     // CHECK JVM_IR:
     //   Mangled name: Fir2IrComponents#<get-session>(){}FirSession
     //   Public signature: /Fir2IrComponents.session.<get-session>|-987114078791317060[0]

@@ -28,7 +28,7 @@ inline fun nonLocal(): String {
 }
 
 fun box(): String {
-    val call = call()
+    konst call = call()
     if (call != "nonLocal") return "fail $call"
     return "OK"
 }

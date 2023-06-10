@@ -17,12 +17,12 @@ kotlinx.android.synthetic.main
 
 kotlinx.android.synthetic.main.test
 
-    public val android.app.Activity.stub: android.view.ViewStub!
-    public val android.app.Dialog.stub: android.view.ViewStub!
-    public val android.app.Fragment.stub: android.view.ViewStub!
-    public val kotlinx.android.extensions.LayoutContainer.stub: android.view.ViewStub!
+    public konst android.app.Activity.stub: android.view.ViewStub!
+    public konst android.app.Dialog.stub: android.view.ViewStub!
+    public konst android.app.Fragment.stub: android.view.ViewStub!
+    public konst kotlinx.android.extensions.LayoutContainer.stub: android.view.ViewStub!
 
 
 kotlinx.android.synthetic.main.test.view
 
-    public val android.view.View.stub: android.view.ViewStub!
+    public konst android.view.View.stub: android.view.ViewStub!

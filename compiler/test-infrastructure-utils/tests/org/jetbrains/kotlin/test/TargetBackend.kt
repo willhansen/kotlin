@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.test
 
 enum class TargetBackend(
-    val isIR: Boolean,
-    private val compatibleWithTargetBackend: TargetBackend? = null
+    konst isIR: Boolean,
+    private konst compatibleWithTargetBackend: TargetBackend? = null
 ) {
     ANY(false),
     JVM(false),
@@ -28,5 +28,5 @@ enum class TargetBackend(
     JVM_WITH_IR_EVALUATOR(false),
     JVM_IR_WITH_IR_EVALUATOR(true);
 
-    val compatibleWith get() = compatibleWithTargetBackend ?: ANY
+    konst compatibleWith get() = compatibleWithTargetBackend ?: ANY
 }

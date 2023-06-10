@@ -10,10 +10,10 @@ import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmModule
 
 internal class ComputedCapability(
-    val groupProvider: Provider<String>,
-    val nameValue: String,
-    val versionProvider: Provider<String>,
-    val suffix: String?
+    konst groupProvider: Provider<String>,
+    konst nameValue: String,
+    konst versionProvider: Provider<String>,
+    konst suffix: String?
 ) : Capability {
     override fun getGroup(): String = groupProvider.get()
 
@@ -23,7 +23,7 @@ internal class ComputedCapability(
 
     companion object {
         fun fromModule(module: GradleKpmModule): ComputedCapability {
-            val project = module.project
+            konst project = module.project
             return ComputedCapability(
                 project.provider { project.group.toString() },
                 project.name,

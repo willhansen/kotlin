@@ -7,7 +7,7 @@
  * SPEC VERSION: 0.1-435
  * MAIN LINK: expressions, when-expression, exhaustive-when-expressions -> paragraph 2 -> sentence 10
  * NUMBER: 1
- * DESCRIPTION: Exhaustive when using enum values.
+ * DESCRIPTION: Exhaustive when using enum konstues.
  * HELPERS: enumClasses
  */
 
@@ -20,6 +20,6 @@ fun case_1(dir: EnumClass): String = when (dir) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: EnumClassSingle): String = when (value_1) {
+fun case_2(konstue_1: EnumClassSingle): String = when (konstue_1) {
     EnumClassSingle.EVERYTHING -> ""
 }

@@ -24,9 +24,9 @@ internal interface Complex : State {
     fun irClassFqName() = irClass.fqName
 
     private fun getIrFunctionFromGivenClass(irClass: IrClass, owner: IrFunction): IrFunction? {
-        val propertyGetters = irClass.declarations.filterIsInstance<IrProperty>().mapNotNull { it.getter }
-        val propertySetters = irClass.declarations.filterIsInstance<IrProperty>().mapNotNull { it.setter }
-        val functions = irClass.declarations.filterIsInstance<IrFunction>()
+        konst propertyGetters = irClass.declarations.filterIsInstance<IrProperty>().mapNotNull { it.getter }
+        konst propertySetters = irClass.declarations.filterIsInstance<IrProperty>().mapNotNull { it.setter }
+        konst functions = irClass.declarations.filterIsInstance<IrFunction>()
         return (propertyGetters + propertySetters + functions).firstOrNull {
             when {
                 it is IrSimpleFunction && owner is IrSimpleFunction -> it.overrides(owner) || owner.overrides(it)
@@ -40,14 +40,14 @@ internal interface Complex : State {
     }
 
     override fun getIrFunctionByIrCall(expression: IrCall): IrFunction? {
-        val receiver = expression.superQualifierSymbol?.owner ?: irClass
-        val irFunction = getIrFunctionFromGivenClass(receiver, expression.symbol.owner) ?: return null
+        konst receiver = expression.superQualifierSymbol?.owner ?: irClass
+        konst irFunction = getIrFunctionFromGivenClass(receiver, expression.symbol.owner) ?: return null
         return (irFunction as IrSimpleFunction).resolveFakeOverride()
     }
 
     fun loadOuterClassesInto(callStack: CallStack, receiver: IrValueSymbol? = null) {
         fun <T> List<T>.takeFromEndWhile(predicate: (T) -> Boolean): List<T> {
-            val list = mutableListOf<T>()
+            konst list = mutableListOf<T>()
             for (i in this.lastIndex downTo 0) {
                 if (!predicate(this[i]))
                     break

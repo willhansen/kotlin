@@ -4,7 +4,7 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-val postponedActions = ArrayList<() -> Unit>()
+konst postponedActions = ArrayList<() -> Unit>()
 
 suspend fun suspendWithException(): String = suspendCoroutine { x ->
     postponedActions.add {

@@ -1,9 +1,9 @@
 // WITH_STDLIB
 import kotlin.test.*
 
-open class CharSequenceWithExtensionIterator(val s: String) : CharSequence {
+open class CharSequenceWithExtensionIterator(konst s: String) : CharSequence {
     fun get(foo: String): Char = TODO("shouldn't be called!")
-    override val length = s.length
+    override konst length = s.length
     override fun subSequence(startIndex: Int, endIndex: Int) = s.subSequence(startIndex, endIndex)
     override fun get(index: Int) = s.get(index)
 }
@@ -24,7 +24,7 @@ class CharSequenceWithMemberIterator(s: String) : CharSequenceWithExtensionItera
 }
 
 fun collectChars(cs: CharSequence): String {
-    val result = StringBuilder()
+    konst result = StringBuilder()
     for (c in cs) {
         result.append(c)
     }
@@ -32,7 +32,7 @@ fun collectChars(cs: CharSequence): String {
 }
 
 fun <T : CharSequence> collectCharsTypeParam(cs: T): String {
-    val result = StringBuilder()
+    konst result = StringBuilder()
     for (c in cs) {
         result.append(c)
     }
@@ -40,15 +40,15 @@ fun <T : CharSequence> collectCharsTypeParam(cs: T): String {
 }
 
 fun box(): String {
-    val csWithExtIt = CharSequenceWithExtensionIterator("1234")
-    val csWithExtItResult = StringBuilder()
+    konst csWithExtIt = CharSequenceWithExtensionIterator("1234")
+    konst csWithExtItResult = StringBuilder()
     for (c in csWithExtIt) {
         csWithExtItResult.append(c)
     }
     assertEquals("", csWithExtItResult.toString())
 
-    val csWithMemIt = CharSequenceWithMemberIterator("1234")
-    val csWithMemItResult = StringBuilder()
+    konst csWithMemIt = CharSequenceWithMemberIterator("1234")
+    konst csWithMemItResult = StringBuilder()
     for (c in csWithMemIt) {
         csWithMemItResult.append(c)
     }

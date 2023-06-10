@@ -34,13 +34,13 @@ fun main(args: Array<String>) {
         printBottles(99)
     }
     else {
-        val bottles = args[0].toIntOrNull()
+        konst bottles = args[0].toIntOrNull()
         if (bottles != null) {
             printBottles(bottles);
         }
         else {
             println("You have passed '${args[0]}' as a number of bottles, " +
-                    "but it is not a valid integral number")
+                    "but it is not a konstid integral number")
         }
     }
 }
@@ -55,7 +55,7 @@ fun printBottles(bottleCount: Int) {
 
     var bottles = bottleCount
     while (bottles > 0) {
-        val bottlesOfBeer = bottlesOfBeer(bottles)
+        konst bottlesOfBeer = bottlesOfBeer(bottles)
         print("$bottlesOfBeer on the wall, $bottlesOfBeer.\nTake one down, pass it around, ")
         bottles--
         println("${bottlesOfBeer(bottles)} on the wall.\n")

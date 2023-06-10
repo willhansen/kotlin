@@ -12,9 +12,9 @@
 
 fun box(): String {
     try {
-        val city = City()
+        konst city = City()
     } catch (e: NotImplementedError) {
-        val city = City("", 1)
+        konst city = City("", 1)
 
         city.country
         try {
@@ -24,7 +24,7 @@ fun box(): String {
                 city.streetsConsumer.stream().forEach { street -> street.invoke() }
             } catch (e: IllegalArgumentException) {
                 try {
-                    val city = City("", 2) { "lake" }
+                    konst city = City("", 2) { "lake" }
                     city.streetsConsumer[3].invoke()
                 } catch (e: UnsupportedOperationException) {
                     return "OK"
@@ -35,7 +35,7 @@ fun box(): String {
     return "NOK"
 }
 
-class City(val name: String = "", val index: Any = TODO()) {
+class City(konst name: String = "", konst index: Any = TODO()) {
     var country: String = "Rus"
     var lakeConsumer: () -> String
     var streetsConsumer: MutableList<() -> String>

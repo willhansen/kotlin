@@ -39,17 +39,17 @@ public actual fun <T> lazy(lock: Any?, initializer: () -> T): Lazy<T> = UnsafeLa
 
 
 internal fun fillFrom(src: dynamic, dst: dynamic): dynamic {
-    val srcLen: Int = src.length
-    val dstLen: Int = dst.length
+    konst srcLen: Int = src.length
+    konst dstLen: Int = dst.length
     var index: Int = 0
-    val arr = dst.unsafeCast<Array<Any?>>()
+    konst arr = dst.unsafeCast<Array<Any?>>()
     while (index < srcLen && index < dstLen) arr[index] = src[index++]
     return dst
 }
 
 
 internal fun arrayCopyResize(source: dynamic, newSize: Int, defaultValue: Any?): dynamic {
-    val result = source.slice(0, newSize).unsafeCast<Array<Any?>>()
+    konst result = source.slice(0, newSize).unsafeCast<Array<Any?>>()
     copyArrayType(source, result)
     var index: Int = source.length
     if (newSize > index) {
@@ -60,7 +60,7 @@ internal fun arrayCopyResize(source: dynamic, newSize: Int, defaultValue: Any?):
 }
 
 internal fun <T> arrayPlusCollection(array: dynamic, collection: Collection<T>): dynamic {
-    val result = array.slice().unsafeCast<Array<T>>()
+    konst result = array.slice().unsafeCast<Array<T>>()
     result.asDynamic().length = result.size + collection.size
     copyArrayType(array, result)
     var index: Int = array.length

@@ -1,4 +1,4 @@
-class MyObject private constructor(private val delegate: Interface) : Interface by delegate {
+class MyObject private constructor(private konst delegate: Interface) : Interface by delegate {
     constructor() : this(Delegate())
 }
 

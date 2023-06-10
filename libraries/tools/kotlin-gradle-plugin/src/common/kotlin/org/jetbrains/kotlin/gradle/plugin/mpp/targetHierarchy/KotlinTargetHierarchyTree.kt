@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 import org.jetbrains.kotlin.tooling.core.withClosure
 
 internal data class KotlinTargetHierarchyTree(
-    val node: Node, val children: Set<KotlinTargetHierarchyTree> = emptySet()
+    konst node: Node, konst children: Set<KotlinTargetHierarchyTree> = emptySet()
 ) {
 
-    val childrenClosure: Set<KotlinTargetHierarchyTree> =
+    konst childrenClosure: Set<KotlinTargetHierarchyTree> =
         children.withClosure<KotlinTargetHierarchyTree> { it.children }
 
     sealed class Node {
@@ -24,9 +24,9 @@ internal data class KotlinTargetHierarchyTree(
             override suspend fun sharedSourceSetName(compilation: KotlinCompilation<*>): String? = null
         }
 
-        data class Group(val name: String) : Node() {
+        data class Group(konst name: String) : Node() {
             override suspend fun sharedSourceSetName(compilation: KotlinCompilation<*>): String? {
-                val sourceSetTree = KotlinTargetHierarchy.SourceSetTree.orNull(compilation)?.name ?: return null
+                konst sourceSetTree = KotlinTargetHierarchy.SourceSetTree.orNull(compilation)?.name ?: return null
                 return lowerCamelCaseName(name, sourceSetTree)
             }
         }

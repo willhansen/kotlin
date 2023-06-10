@@ -1,5 +1,5 @@
 interface A {
-    val foo: String
+    konst foo: String
 }
 
 class B : A {
@@ -12,7 +12,7 @@ class B : A {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.setOK(b)
     return b.foo
 }

@@ -19,7 +19,7 @@ fun array(): Array<out Number> = null!!
 fun list(): List<String> = null!!
 
 fun box(): String {
-    val string = ::string.returnType
+    konst string = ::string.returnType
     assertEquals(listOf(), string.arguments)
 
     assertEquals(
@@ -36,7 +36,7 @@ fun box(): String {
             ::projections.returnType.arguments.map(KTypeProjection::type)
     )
 
-    val outNumber = ::array.returnType.arguments.single()
+    konst outNumber = ::array.returnType.arguments.single()
     assertEquals(KVariance.OUT, outNumber.variance)
     assertEquals(Number::class, outNumber.type?.classifier)
 

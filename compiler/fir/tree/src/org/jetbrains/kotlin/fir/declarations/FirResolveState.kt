@@ -21,7 +21,7 @@ sealed class FirResolveState {
      * - the [org.jetbrains.kotlin.fir.FirElementWithResolveState] being is resolved to `resolvePhase + 1`, so the current state is [resolvePhase]
 
      */
-    abstract val resolvePhase: FirResolvePhase
+    abstract konst resolvePhase: FirResolvePhase
 
     abstract override fun toString(): String
 }
@@ -35,10 +35,10 @@ annotation class ResolveStateAccess
  * @see FirResolveState
  */
 class FirResolvedToPhaseState private constructor(
-    override val resolvePhase: FirResolvePhase
+    override konst resolvePhase: FirResolvePhase
 ) : FirResolveState() {
     companion object {
-        private val phases: List<FirResolvedToPhaseState> = FirResolvePhase.values().map(::FirResolvedToPhaseState)
+        private konst phases: List<FirResolvedToPhaseState> = FirResolvePhase.konstues().map(::FirResolvedToPhaseState)
 
         operator fun invoke(phase: FirResolvePhase) = phases[phase.ordinal]
     }
@@ -49,7 +49,7 @@ class FirResolvedToPhaseState private constructor(
 fun FirResolvePhase.asResolveState(): FirResolvedToPhaseState = FirResolvedToPhaseState(this)
 
 @OptIn(ResolveStateAccess::class)
-val FirElementWithResolveState.resolvePhase: FirResolvePhase
+konst FirElementWithResolveState.resolvePhase: FirResolvePhase
     get() = if (this is FirSyntheticPropertyAccessor) {
         delegate.resolvePhase
     } else {
@@ -62,8 +62,8 @@ val FirElementWithResolveState.resolvePhase: FirResolvePhase
  * @see FirResolveState
  */
 sealed class FirInProcessOfResolvingToPhaseState : FirResolveState() {
-    abstract val resolvingTo: FirResolvePhase
-    override val resolvePhase: FirResolvePhase get() = resolvingTo.previous
+    abstract konst resolvingTo: FirResolvePhase
+    override konst resolvePhase: FirResolvePhase get() = resolvingTo.previous
 }
 
 /**
@@ -72,10 +72,10 @@ sealed class FirInProcessOfResolvingToPhaseState : FirResolveState() {
  * @see FirResolveState
  */
 class FirInProcessOfResolvingToPhaseStateWithoutBarrier private constructor(
-    override val resolvingTo: FirResolvePhase
+    override konst resolvingTo: FirResolvePhase
 ) : FirInProcessOfResolvingToPhaseState() {
     companion object {
-        private val phases: List<FirInProcessOfResolvingToPhaseState> = FirResolvePhase.values()
+        private konst phases: List<FirInProcessOfResolvingToPhaseState> = FirResolvePhase.konstues()
             .drop(1) // drop FirResolvePhase.RAW_FIR phase
             .map(::FirInProcessOfResolvingToPhaseStateWithoutBarrier)
 
@@ -99,8 +99,8 @@ class FirInProcessOfResolvingToPhaseStateWithoutBarrier private constructor(
  * @see FirResolveState
  */
 class FirInProcessOfResolvingToPhaseStateWithBarrier(
-    override val resolvingTo: FirResolvePhase,
-    val barrier: CountDownLatch,
+    override konst resolvingTo: FirResolvePhase,
+    konst barrier: CountDownLatch,
 ) : FirInProcessOfResolvingToPhaseState() {
     init {
         require(resolvingTo != FirResolvePhase.RAW_FIR) {

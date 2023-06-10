@@ -18,7 +18,7 @@ inline fun doWork(noinline job: () -> String): Callable<String> {
 import test.*
 
 fun box(): String {
-    val anotherModule = doWork { "K" }
+    konst anotherModule = doWork { "K" }
 
     if (anotherModule.javaClass.name != "BKt\$inlined\$sam\$i\$java_util_concurrent_Callable\$0") return "class should be regenerated, but ${anotherModule.javaClass.name}"
 

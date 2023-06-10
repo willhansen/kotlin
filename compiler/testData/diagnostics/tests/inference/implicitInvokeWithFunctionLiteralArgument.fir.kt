@@ -5,11 +5,11 @@ class TestClass {
     inline operator fun <T> invoke(task: () -> T) = task()
 }
 
-fun <T> test(value: T, test: TestClass): T {
-    val x = test { return value }
+fun <T> test(konstue: T, test: TestClass): T {
+    konst x = test { return konstue }
     x checkType { _<Nothing>() }
 
-    return value
+    return konstue
 }
 
 // ---
@@ -21,17 +21,17 @@ interface FutureCallback<E> {
 }
 
 fun test(cb: FutureCallback<String>) {
-    val a = cb { it[0] }
+    konst a = cb { it[0] }
     a checkType { _<Future<Char>>() }
 
-    val b = cb { it }
+    konst b = cb { it }
     b checkType { _<Future<String>>() }
 
-    val c = cb {}
+    konst c = cb {}
     c checkType { _<Future<Unit>>() }
 
     cb.let { callback ->
-        val d = callback { it.length }
+        konst d = callback { it.length }
         d checkType { _<Future<Int>>() }
     }
 }

@@ -2,7 +2,7 @@ package
 
 @Ann public final class A {
     public constructor A()
-    public final val a: kotlin.Int = 1
+    public final konst a: kotlin.Int = 1
     public final fun b(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -10,7 +10,7 @@ package
 
     public companion object Companion {
         private constructor Companion()
-        public const final val CONST: kotlin.Int = 1
+        public const final konst CONST: kotlin.Int = 1
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): A.Nested
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -31,7 +31,7 @@ package
 
         public companion object Companion {
             private constructor Companion()
-            public const final val CONST: kotlin.Int = 3
+            public const final konst CONST: kotlin.Int = 3
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -46,7 +46,7 @@ package
 
         public companion object Companion {
             private constructor Companion()
-            public const final val CONST: kotlin.Int = 2
+            public const final konst CONST: kotlin.Int = 2
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -56,15 +56,15 @@ package
 
 public final annotation class Ann : kotlin.Annotation {
     public constructor Ann(/*0*/ kc1: kotlin.reflect.KClass<*>, /*1*/ kc2: kotlin.reflect.KClass<*>, /*2*/ kc3: kotlin.reflect.KClass<*>, /*3*/ c: kotlin.Int, /*4*/ cc: kotlin.Int, /*5*/ cn: kotlin.Int, /*6*/ ci: kotlin.Int, /*7*/ t1: kotlin.Int, /*8*/ t2: kotlin.Int)
-    public final val c: kotlin.Int
-    public final val cc: kotlin.Int
-    public final val ci: kotlin.Int
-    public final val cn: kotlin.Int
-    public final val kc1: kotlin.reflect.KClass<*>
-    public final val kc2: kotlin.reflect.KClass<*>
-    public final val kc3: kotlin.reflect.KClass<*>
-    public final val t1: kotlin.Int
-    public final val t2: kotlin.Int
+    public final konst c: kotlin.Int
+    public final konst cc: kotlin.Int
+    public final konst ci: kotlin.Int
+    public final konst cn: kotlin.Int
+    public final konst kc1: kotlin.reflect.KClass<*>
+    public final konst kc2: kotlin.reflect.KClass<*>
+    public final konst kc3: kotlin.reflect.KClass<*>
+    public final konst t1: kotlin.Int
+    public final konst t2: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

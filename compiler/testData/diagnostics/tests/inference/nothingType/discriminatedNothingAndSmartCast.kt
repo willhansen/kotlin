@@ -5,7 +5,7 @@ interface ExpectedType
 inline fun <reified M> parse(): M? = TODO()
 
 fun test(s: String?, silent: Boolean) {
-    val result: ExpectedType =
+    konst result: ExpectedType =
         if (s != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("ExpectedType?")!>parse()<!> ?: TODO()
         } else <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing")!>if (silent) {

@@ -11,7 +11,7 @@ import kotlin.jvm.Volatile
 class SynchronizedLazyValTest {
     @Volatile
     var result = 0
-    val a by lazy(this) {
+    konst a by lazy(this) {
         ++result
     }
 

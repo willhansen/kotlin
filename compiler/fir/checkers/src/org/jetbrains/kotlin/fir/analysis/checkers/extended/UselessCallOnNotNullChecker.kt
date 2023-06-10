@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.name.CallableId
 object UselessCallOnNotNullChecker : FirQualifiedAccessExpressionChecker() {
     // todo: add 'call may be reduced' in cases like 's?.isNullOrEmpty()' where 's: String? = ""'
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val method = expression.getCallableId() ?: return
-        val calleeOn = expression.explicitReceiver ?: return
-        val calleePackageName = calleeOn.getPackage()
-        val calleeName = method.callableName.asString()
+        konst method = expression.getCallableId() ?: return
+        konst calleeOn = expression.explicitReceiver ?: return
+        konst calleePackageName = calleeOn.getPackage()
+        konst calleeName = method.callableName.asString()
         if ("$calleePackageName.$calleeName" !in triggerOn) return
 
         if (calleeOn.getNullability() == ConeNullability.NOT_NULL) {
@@ -43,7 +43,7 @@ object UselessCallOnNotNullChecker : FirQualifiedAccessExpressionChecker() {
     private fun FirExpression.getNullability() = typeRef.coneType.nullability
 
 
-    private val triggerOn = setOf(
+    private konst triggerOn = setOf(
         "kotlin.collections.orEmpty",
         "kotlin.sequences.orEmpty",
         "kotlin.text.orEmpty",

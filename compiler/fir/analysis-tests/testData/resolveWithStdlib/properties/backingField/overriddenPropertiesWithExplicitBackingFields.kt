@@ -1,8 +1,8 @@
 open class A {
     open var it: Number
         private field = 3
-        set(value) {
-            field = value.toInt()
+        set(konstue) {
+            field = konstue.toInt()
         }
 
     fun test() {
@@ -16,5 +16,5 @@ open class A {
 open class B : A() {
     override var it: Number
         get() = 3.14
-        set(value) {}
+        set(konstue) {}
 }

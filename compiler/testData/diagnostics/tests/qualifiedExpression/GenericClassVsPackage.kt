@@ -24,10 +24,10 @@ import a.b.c
 fun test(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_c2: a.b.c = a.b.c()
+    konst ab_c2: a.b.c = a.b.c()
     ab_c2.ab_c()
 
-    val ab_c3 = a.b.c()
+    konst ab_c3 = a.b.c()
     ab_c3.ab_c()
 }
 
@@ -64,10 +64,10 @@ import a.b
 fun test(a_b: b) {
     a_b.a_b()
 
-    val _ab: a.b = a.b()
+    konst _ab: a.b = a.b()
     _ab._ab()
 
-    val _ab2 = a.b()
+    konst _ab2 = a.b()
     _ab2._ab()
 }
 

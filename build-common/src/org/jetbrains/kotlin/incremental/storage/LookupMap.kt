@@ -32,7 +32,7 @@ class LookupMap(
 
     override fun dumpKey(key: LookupSymbolKey): String = key.toString()
 
-    override fun dumpValue(value: Collection<Int>): String = value.toString()
+    override fun dumpValue(konstue: Collection<Int>): String = konstue.toString()
 
     fun add(name: String, scope: String, fileId: Int) {
         storage.append(LookupSymbolKey(name, scope), listOf(fileId))
@@ -52,6 +52,6 @@ class LookupMap(
         storage.remove(key)
     }
 
-    val keys: Collection<LookupSymbolKey>
+    konst keys: Collection<LookupSymbolKey>
         get() = storage.keys
 }

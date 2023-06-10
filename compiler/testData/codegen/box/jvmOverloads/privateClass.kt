@@ -2,9 +2,9 @@
 
 // WITH_STDLIB
 
-private data class C(val status: String = "OK")
+private data class C(konst status: String = "OK")
 
 fun box(): String {
-    val c = (C::class.java.getConstructor().newInstance())
+    konst c = (C::class.java.getConstructor().newInstance())
     return c.status
 }

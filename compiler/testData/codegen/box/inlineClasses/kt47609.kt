@@ -4,13 +4,13 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses
 
-annotation class Ann(val value: String)
+annotation class Ann(konst konstue: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class C<T>(val x: String)
+konstue class C<T>(konst x: String)
 
 @Ann("OK")
-val <T> C<T>.value: String
+konst <T> C<T>.konstue: String
     get() = x
 
-fun box() = (C<Any?>::value.annotations.singleOrNull() as? Ann)?.value ?: "null"
+fun box() = (C<Any?>::konstue.annotations.singleOrNull() as? Ann)?.konstue ?: "null"

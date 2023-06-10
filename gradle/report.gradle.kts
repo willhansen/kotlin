@@ -15,16 +15,16 @@ if (isConfigurationCacheDisabled) {
 }
 
 private class BuildTimeReporter(
-    private val kotlinCompileClass: Class<*>,
-    private val javaCompileClass: Class<*>,
-    private val jarClass: Class<*>,
-    private val proguardClass: Class<*>
+    private konst kotlinCompileClass: Class<*>,
+    private konst javaCompileClass: Class<*>,
+    private konst jarClass: Class<*>,
+    private konst proguardClass: Class<*>
 ) : TaskExecutionListener {
     companion object {
         fun configure(gradle: Gradle) {
-            val rootProject = gradle.rootProject
-            val logger = rootProject.logger
-            val classloader = rootProject.buildscript.classLoader
+            konst rootProject = gradle.rootProject
+            konst logger = rootProject.logger
+            konst classloader = rootProject.buildscript.classLoader
 
             fun findClass(name: String): Class<*>? =
                 try {
@@ -34,7 +34,7 @@ private class BuildTimeReporter(
                     null
                 }
 
-            val reporter = BuildTimeReporter(
+            konst reporter = BuildTimeReporter(
                 kotlinCompileClass = findClass("org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile") ?: return,
                 javaCompileClass = findClass("org.gradle.api.tasks.compile.JavaCompile") ?: return,
                 jarClass = findClass("org.gradle.jvm.tasks.Jar") ?: return,
@@ -60,8 +60,8 @@ private class BuildTimeReporter(
             name.replace("_", " ").toTitleCase()
     }
 
-    private val taskStartTime = HashMap<Task, Long>()
-    private val categoryTimeNs = HashMap<TaskCategory, Long>()
+    private konst taskStartTime = HashMap<Task, Long>()
+    private konst categoryTimeNs = HashMap<TaskCategory, Long>()
     private var totalTimeNs = 0L
 
     @Synchronized
@@ -71,11 +71,11 @@ private class BuildTimeReporter(
 
     @Synchronized
     override fun afterExecute(task: Task, state: TaskState) {
-        val startTimeNs = taskStartTime.remove(task) ?: return
-        val endTimeNs = System.nanoTime()
-        val timeNs = endTimeNs - startTimeNs
+        konst startTimeNs = taskStartTime.remove(task) ?: return
+        konst endTimeNs = System.nanoTime()
+        konst timeNs = endTimeNs - startTimeNs
         totalTimeNs += timeNs
-        val category = taskCategory(task)
+        konst category = taskCategory(task)
         categoryTimeNs[category] = (categoryTimeNs[category] ?: 0L) + timeNs
     }
 
@@ -92,17 +92,17 @@ private class BuildTimeReporter(
 
     @Synchronized
     private fun report(log: Logger) {
-        val secondInNs = 1000_000_000
-        val totalTimeSec = totalTimeNs.toDouble() / secondInNs
+        konst secondInNs = 1000_000_000
+        konst totalTimeSec = totalTimeNs.toDouble() / secondInNs
         if (totalTimeSec < 1) return
 
         log.info("Build time for tasks:")
-        for (category in TaskCategory.values()) {
-            val timeNs = categoryTimeNs[category] ?: 0L
-            val timeSec = timeNs.toDouble() / secondInNs
+        for (category in TaskCategory.konstues()) {
+            konst timeNs = categoryTimeNs[category] ?: 0L
+            konst timeSec = timeNs.toDouble() / secondInNs
             if (timeSec < 1) continue
 
-            val percent = timeSec / totalTimeSec * 100
+            konst percent = timeSec / totalTimeSec * 100
             log.info("${category.description()}: ${timeSec.asShortString()}s (${percent.asShortString()}% of total time)")
         }
     }

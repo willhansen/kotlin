@@ -24,14 +24,14 @@ import kotlin.test.assertTrue
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 class ReportDataTest {
-    private val kotlinTaskPath = "testKotlin"
+    private konst kotlinTaskPath = "testKotlin"
 
     @Test
     @Suppress("DEPRECATION")
     fun testTags() {
-        val buildOperationRecord =
+        konst buildOperationRecord =
             taskRecord(BuildMetrics(buildAttributes = BuildAttributes().also { it.add(BuildAttribute.CLASSPATH_SNAPSHOT_NOT_FOUND) }))
-        val statisticData = prepareData(
+        konst statisticData = prepareData(
             event = taskFinishEvent(),
             projectName = "test",
             uuid = "uuid",
@@ -65,7 +65,7 @@ class ReportDataTest {
 
     @Test
     fun testMetricFilter() {
-        val buildOperationRecord = taskRecord(
+        konst buildOperationRecord = taskRecord(
             BuildMetrics(
                 buildPerformanceMetrics = BuildPerformanceMetrics().also {
                     it.add(BuildPerformanceMetric.COMPILE_ITERATION)
@@ -82,7 +82,7 @@ class ReportDataTest {
             )
         )
 
-        val statisticData = prepareData(
+        konst statisticData = prepareData(
             event = taskFinishEvent(),
             projectName = "test",
             uuid = "uuid",
@@ -113,13 +113,13 @@ class ReportDataTest {
     @Ignore //temporary ignore flaky test
     @Test
     fun testCalculatedMetrics() {
-        val startGradleTask = 20L
-        val startTaskAction = 40L
-        val callWorker = 100L
-        val startWorker = 110L
-        val finishGradleTask = System.nanoTime()
+        konst startGradleTask = 20L
+        konst startTaskAction = 40L
+        konst callWorker = 100L
+        konst startWorker = 110L
+        konst finishGradleTask = System.nanoTime()
 
-        val buildOperationRecord = taskRecord(
+        konst buildOperationRecord = taskRecord(
             BuildMetrics(
                 buildPerformanceMetrics = BuildPerformanceMetrics().also {
                     it.add(BuildPerformanceMetric.FINISH_KOTLIN_DAEMON_EXECUTION, System.currentTimeMillis())
@@ -130,7 +130,7 @@ class ReportDataTest {
             )
         )
 
-        val statisticData = prepareData(
+        konst statisticData = prepareData(
             event = taskFinishEvent(startTime = startGradleTask, endTime = finishGradleTask),
             projectName = "test",
             uuid = "uuid",

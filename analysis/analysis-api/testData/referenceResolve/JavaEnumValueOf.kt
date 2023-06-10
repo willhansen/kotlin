@@ -1,4 +1,4 @@
 import java.lang.annotation.RetentionPolicy
 
-val values = RetentionPolicy.val<caret>ueOf("")
+konst konstues = RetentionPolicy.konst<caret>ueOf("")
 

@@ -11,14 +11,14 @@ fun renameLabels(root: JsNode) {
     // Labels in JS are in separate scope from local variables. It's only important that nested labels don't clash.
     // Adjacent labels in one function is OK
     root.accept(object : RecursiveJsVisitor() {
-        val replacements = mutableMapOf<JsName, JsName>()
+        konst replacements = mutableMapOf<JsName, JsName>()
 
         var labels = mutableSetOf<String>()
 
         override fun visitElement(node: JsNode) {
             super.visitElement(node)
             if (node is HasName) {
-                val name = node.name
+                konst name = node.name
                 if (name != null) {
                     replacements[name]?.let { node.name = it }
                 }
@@ -43,7 +43,7 @@ fun renameLabels(root: JsNode) {
         }
 
         override fun visitFunction(x: JsFunction) {
-            val oldLabels = labels
+            konst oldLabels = labels
             labels = mutableSetOf()
             super.visitFunction(x)
             labels = oldLabels

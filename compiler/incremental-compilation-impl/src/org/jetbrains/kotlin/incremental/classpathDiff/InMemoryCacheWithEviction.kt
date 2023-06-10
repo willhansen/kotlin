@@ -17,7 +17,7 @@ import javax.annotation.concurrent.NotThreadSafe
 /**
  * In-memory cache that uses a combination of strong references and [SoftReference]s so that it adapts to memory availability.
  *
- * Cache eviction is performed when a user of this cache calls [evictEntries]. Evicted cache entries' values will be converted from strong
+ * Cache eviction is performed when a user of this cache calls [evictEntries]. Evicted cache entries' konstues will be converted from strong
  * references to [SoftReference]s first. After that, they will either become strong references again if they are used again or get
  * garbage collected/removed from this cache at some point.
  *
@@ -29,28 +29,28 @@ import javax.annotation.concurrent.NotThreadSafe
 class InMemoryCacheWithEviction<KEY, VALUE>(
 
     /**
-     * Cache entries' values that were not used within [maxTimePeriodsToKeepStrongReferences] will be converted to [SoftReference]s.
+     * Cache entries' konstues that were not used within [maxTimePeriodsToKeepStrongReferences] will be converted to [SoftReference]s.
      *
      * The time period starts from 0 and will increment by 1 whenever [newTimePeriod] is called.
      */
-    private val maxTimePeriodsToKeepStrongReferences: Int,
+    private konst maxTimePeriodsToKeepStrongReferences: Int,
 
     /**
-     * Cache entries' values that were not used within [maxTimePeriodsToKeepStrongReferences] + [maxTimePeriodsToKeepSoftReferences] will be
+     * Cache entries' konstues that were not used within [maxTimePeriodsToKeepStrongReferences] + [maxTimePeriodsToKeepSoftReferences] will be
      * removed from this cache.
      */
-    private val maxTimePeriodsToKeepSoftReferences: Int,
+    private konst maxTimePeriodsToKeepSoftReferences: Int,
 
     /**
-     * If [memoryUsageRatio] > [maxMemoryUsageRatioToKeepStrongReferences], all cache entries' values will be converted to [SoftReference]s.
+     * If [memoryUsageRatio] > [maxMemoryUsageRatioToKeepStrongReferences], all cache entries' konstues will be converted to [SoftReference]s.
      */
-    private val maxMemoryUsageRatioToKeepStrongReferences: Double,
+    private konst maxMemoryUsageRatioToKeepStrongReferences: Double,
 
     /**
      * Function that returns the current memory usage ratio. NOTE: Production code should not provide this function (the default function
      * below will be used). This parameter is here only to allow writing unit tests.
      */
-    private val memoryUsageRatio: () -> Double = {
+    private konst memoryUsageRatio: () -> Double = {
         // Note: In the following formula, memory usage ratio = used memory / total memory. In practice, the JVM may be able to increase
         // total memory to Runtime.maxMemory(), which means that the effective memory usage ratio could be smaller. However, it's also
         // possible that the JVM won't be able to do that (e.g., if Runtime.maxMemory() is too high or not set), so we can't rely on that.
@@ -59,50 +59,50 @@ class InMemoryCacheWithEviction<KEY, VALUE>(
 ) {
 
     /** The current time period, which starts from 0 and will increment by 1 whenever [newTimePeriod] is called. */
-    private val currentTimePeriod = AtomicInteger(0)
+    private konst currentTimePeriod = AtomicInteger(0)
 
-    private val cache = ConcurrentHashMap<KEY, CacheEntryValue<VALUE>>()
+    private konst cache = ConcurrentHashMap<KEY, CacheEntryValue<VALUE>>()
 
     fun newTimePeriod() {
         currentTimePeriod.incrementAndGet()
     }
 
-    fun computeIfAbsent(key: KEY, valueProvider: (KEY) -> VALUE): VALUE {
+    fun computeIfAbsent(key: KEY, konstueProvider: (KEY) -> VALUE): VALUE {
         return readLock { // Read lock so that this method can be called concurrently
-            val cacheEntryValue = cache.computeIfAbsent(key) { // `cache` is thread-safe
-                CacheEntryValue(value = valueProvider(key), currentTimePeriod = currentTimePeriod.get())
+            konst cacheEntryValue = cache.computeIfAbsent(key) { // `cache` is thread-safe
+                CacheEntryValue(konstue = konstueProvider(key), currentTimePeriod = currentTimePeriod.get())
             }
             synchronized(cacheEntryValue) { // Needs synchronization as CacheEntryValue is not thread-safe
-                val value = cacheEntryValue.get() ?: valueProvider(key)
-                cacheEntryValue.setStrongReference(value, currentTimePeriod.get())
-                value
+                konst konstue = cacheEntryValue.get() ?: konstueProvider(key)
+                cacheEntryValue.setStrongReference(konstue, currentTimePeriod.get())
+                konstue
             }
         }
     }
 
     fun evictEntries() {
         writeLock { // Write lock so that other threads don't read/write the cache while this thread is updating it
-            val lowestTimePeriodToKeepStrongRefs = currentTimePeriod.get() - maxTimePeriodsToKeepStrongReferences + 1
-            val lowestTimePeriodToKeepSoftRefs = lowestTimePeriodToKeepStrongRefs - maxTimePeriodsToKeepSoftReferences
+            konst lowestTimePeriodToKeepStrongRefs = currentTimePeriod.get() - maxTimePeriodsToKeepStrongReferences + 1
+            konst lowestTimePeriodToKeepSoftRefs = lowestTimePeriodToKeepStrongRefs - maxTimePeriodsToKeepSoftReferences
 
-            // If memory is limited, convert all entries' values to `SoftReference`s
+            // If memory is limited, convert all entries' konstues to `SoftReference`s
             if (memoryUsageRatio() > maxMemoryUsageRatioToKeepStrongReferences) {
-                cache.values.forEach { it.updateToSoftReference() }
+                cache.konstues.forEach { it.updateToSoftReference() }
             } else {
-                // Otherwise, convert least-recently-used entries' values to `SoftReference`s
-                cache.filterValues { it.lastUsed() < lowestTimePeriodToKeepStrongRefs }.values.forEach {
+                // Otherwise, convert least-recently-used entries' konstues to `SoftReference`s
+                cache.filterValues { it.lastUsed() < lowestTimePeriodToKeepStrongRefs }.konstues.forEach {
                     it.updateToSoftReference()
                 }
             }
 
             // Remove soft-reference entries that are least recently used or are already garbage collected
-            cache.filterValues { it.lastUsed() < lowestTimePeriodToKeepSoftRefs || it.valueWasGarbageCollected() }.keys.forEach {
+            cache.filterValues { it.lastUsed() < lowestTimePeriodToKeepSoftRefs || it.konstueWasGarbageCollected() }.keys.forEach {
                 cache.remove(it)
             }
         }
     }
 
-    private val lock = ReentrantReadWriteLock()
+    private konst lock = ReentrantReadWriteLock()
 
     private inline fun writeLock(action: () -> Unit) {
         lock.writeLock().lock()
@@ -130,7 +130,7 @@ class InMemoryCacheWithEviction<KEY, VALUE>(
         return readLock {
             cache[key]?.let {
                 synchronized(it) {
-                    if (it.valueIsAStrongReference()) STRONG_REF else SOFT_REF
+                    if (it.konstueIsAStrongReference()) STRONG_REF else SOFT_REF
                 }
             } ?: ABSENT
         }
@@ -149,12 +149,12 @@ private class CacheEntryValue<VALUE> private constructor(
     private var lastUsed: Int
 ) {
 
-    constructor(value: VALUE, currentTimePeriod: Int) : this(strongRef = value, softRef = null, lastUsed = currentTimePeriod)
+    constructor(konstue: VALUE, currentTimePeriod: Int) : this(strongRef = konstue, softRef = null, lastUsed = currentTimePeriod)
 
     fun get(): VALUE? = strongRef ?: softRef!!.get()
 
-    fun setStrongReference(value: VALUE, currentTimePeriod: Int) {
-        strongRef = value
+    fun setStrongReference(konstue: VALUE, currentTimePeriod: Int) {
+        strongRef = konstue
         softRef = null
         lastUsed = currentTimePeriod
     }
@@ -166,9 +166,9 @@ private class CacheEntryValue<VALUE> private constructor(
         }
     }
 
-    fun valueIsAStrongReference(): Boolean = (strongRef != null)
+    fun konstueIsAStrongReference(): Boolean = (strongRef != null)
 
-    fun valueWasGarbageCollected(): Boolean = (get() == null)
+    fun konstueWasGarbageCollected(): Boolean = (get() == null)
 
     fun lastUsed() = lastUsed
 }

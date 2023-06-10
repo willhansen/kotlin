@@ -39,7 +39,7 @@ fun IrElement.dump(options: DumpIrTreeOptions = DumpIrTreeOptions()): String =
 
 fun IrFile.dumpTreesFromLineNumber(lineNumber: Int, options: DumpIrTreeOptions = DumpIrTreeOptions()): String {
     if (shouldSkipDump()) return ""
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     accept(DumpTreeFromSourceLineVisitor(fileEntry, lineNumber, sb, options), null)
     return sb.toString()
 }
@@ -47,22 +47,22 @@ fun IrFile.dumpTreesFromLineNumber(lineNumber: Int, options: DumpIrTreeOptions =
 /**
  * @property normalizeNames Rename temporary local variables using a stable naming scheme
  * @property stableOrder Print declarations in a sorted order
- * @property verboseErrorTypes Whether to dump the value of [IrErrorType.kotlinType] for [IrErrorType] nodes
+ * @property verboseErrorTypes Whether to dump the konstue of [IrErrorType.kotlinType] for [IrErrorType] nodes
  * @property printFacadeClassInFqNames Whether printed fully-qualified names of top-level declarations should include the name of
  * the file facade class (see [IrDeclarationOrigin.FILE_CLASS])
  * @property printFlagsInDeclarationReferences If `false`, flags like `fake_override`, `inline` etc. are not printed in rendered declaration
  * references.
  */
 data class DumpIrTreeOptions(
-    val normalizeNames: Boolean = false,
-    val stableOrder: Boolean = false,
-    val verboseErrorTypes: Boolean = true,
-    val printFacadeClassInFqNames: Boolean = true,
-    val printFlagsInDeclarationReferences: Boolean = true,
+    konst normalizeNames: Boolean = false,
+    konst stableOrder: Boolean = false,
+    konst verboseErrorTypes: Boolean = true,
+    konst printFacadeClassInFqNames: Boolean = true,
+    konst printFlagsInDeclarationReferences: Boolean = true,
 )
 
 private fun IrFile.shouldSkipDump(): Boolean {
-    val entry = fileEntry as? NaiveSourceBasedFileEntryImpl ?: return false
+    konst entry = fileEntry as? NaiveSourceBasedFileEntryImpl ?: return false
     return entry.lineStartOffsetsAreEmpty
 }
 
@@ -72,7 +72,7 @@ private fun IrFile.shouldSkipDump(): Boolean {
  * The exception is properties with backing fields and [IrAnonymousInitializer]s: their relative order is preserved.
  */
 internal fun List<IrDeclaration>.stableOrdered(): List<IrDeclaration> {
-    val strictOrder = hashMapOf<IrDeclaration, Int>()
+    konst strictOrder = hashMapOf<IrDeclaration, Int>()
 
     var idx = 0
 
@@ -86,12 +86,12 @@ internal fun List<IrDeclaration>.stableOrdered(): List<IrDeclaration> {
     }
 
     return sortedWith { a, b ->
-        val strictA = strictOrder[a] ?: Int.MAX_VALUE
-        val strictB = strictOrder[b] ?: Int.MAX_VALUE
+        konst strictA = strictOrder[a] ?: Int.MAX_VALUE
+        konst strictB = strictOrder[b] ?: Int.MAX_VALUE
 
         if (strictA == strictB) {
-            val rA = a.render()
-            val rB = b.render()
+            konst rA = a.render()
+            konst rB = b.render()
             rA.compareTo(rB)
         } else strictA - strictB
     }
@@ -99,11 +99,11 @@ internal fun List<IrDeclaration>.stableOrdered(): List<IrDeclaration> {
 
 class DumpIrTreeVisitor(
     out: Appendable,
-    private val options: DumpIrTreeOptions = DumpIrTreeOptions(),
+    private konst options: DumpIrTreeOptions = DumpIrTreeOptions(),
 ) : IrElementVisitor<Unit, String> {
 
-    private val printer = Printer(out, "  ")
-    private val elementRenderer = RenderIrElementVisitor(options)
+    private konst printer = Printer(out, "  ")
+    private konst elementRenderer = RenderIrElementVisitor(options)
     private fun IrType.render() = elementRenderer.renderType(this)
 
     private fun List<IrDeclaration>.ordered(): List<IrDeclaration> = if (options.stableOrder) stableOrdered() else this
@@ -167,13 +167,13 @@ class DumpIrTreeVisitor(
             declaration.typeParameters.dumpElements()
             declaration.dispatchReceiverParameter?.accept(this, "\$this")
 
-            val contextReceiverParametersCount = declaration.contextReceiverParametersCount
+            konst contextReceiverParametersCount = declaration.contextReceiverParametersCount
             if (contextReceiverParametersCount > 0) {
                 printer.println("contextReceiverParametersCount: $contextReceiverParametersCount")
             }
 
             declaration.extensionReceiverParameter?.accept(this, "\$receiver")
-            declaration.valueParameters.dumpElements()
+            declaration.konstueParameters.dumpElements()
             declaration.body?.accept(this, "")
         }
     }
@@ -196,7 +196,7 @@ class DumpIrTreeVisitor(
             dumpAnnotations(declaration)
             declaration.typeParameters.dumpElements()
             declaration.dispatchReceiverParameter?.accept(this, "\$outer")
-            declaration.valueParameters.dumpElements()
+            declaration.konstueParameters.dumpElements()
             declaration.body?.accept(this, "")
         }
     }
@@ -242,9 +242,9 @@ class DumpIrTreeVisitor(
             dumpTypeArguments(expression)
             expression.dispatchReceiver?.accept(this, "\$this")
             expression.extensionReceiver?.accept(this, "\$receiver")
-            val valueParameterNames = expression.getValueParameterNamesForDebug()
-            for (index in 0 until expression.valueArgumentsCount) {
-                expression.getValueArgument(index)?.accept(this, valueParameterNames[index])
+            konst konstueParameterNames = expression.getValueParameterNamesForDebug()
+            for (index in 0 until expression.konstueArgumentsCount) {
+                expression.getValueArgument(index)?.accept(this, konstueParameterNames[index])
             }
         }
     }
@@ -258,24 +258,24 @@ class DumpIrTreeVisitor(
     }
 
     private fun dumpConstructorValueArguments(expression: IrConstructorCall) {
-        val valueParameterNames = expression.getValueParameterNamesForDebug()
-        for (index in 0 until expression.valueArgumentsCount) {
-            expression.getValueArgument(index)?.accept(this, valueParameterNames[index])
+        konst konstueParameterNames = expression.getValueParameterNamesForDebug()
+        for (index in 0 until expression.konstueArgumentsCount) {
+            expression.getValueArgument(index)?.accept(this, konstueParameterNames[index])
         }
     }
 
     private fun dumpTypeArguments(expression: IrMemberAccessExpression<*>) {
-        val typeParameterNames = expression.getTypeParameterNames(expression.typeArgumentsCount)
+        konst typeParameterNames = expression.getTypeParameterNames(expression.typeArgumentsCount)
         for (index in 0 until expression.typeArgumentsCount) {
             printer.println("<${typeParameterNames[index]}>: ${expression.renderTypeArgument(index)}")
         }
     }
 
     private fun dumpTypeArguments(expression: IrConstructorCall) {
-        val typeParameterNames = expression.getTypeParameterNames(expression.typeArgumentsCount)
+        konst typeParameterNames = expression.getTypeParameterNames(expression.typeArgumentsCount)
         for (index in 0 until expression.typeArgumentsCount) {
-            val typeParameterName = typeParameterNames[index]
-            val parameterLabel =
+            konst typeParameterName = typeParameterNames[index]
+            konst parameterLabel =
                 if (index < expression.classTypeArgumentsCount)
                     "class: $typeParameterName"
                 else
@@ -292,7 +292,7 @@ class DumpIrTreeVisitor(
 
     private fun IrSymbolOwner.getTypeParameterNames(expectedCount: Int): List<String> =
         if (this is IrTypeParametersContainer) {
-            val typeParameters = if (this is IrConstructor) getFullTypeParametersList() else this.typeParameters
+            konst typeParameters = if (this is IrConstructor) getFullTypeParametersList() else this.typeParameters
             (0 until expectedCount).map {
                 if (it < typeParameters.size)
                     typeParameters[it].name.asString()
@@ -304,7 +304,7 @@ class DumpIrTreeVisitor(
         }
 
     private fun IrConstructor.getFullTypeParametersList(): List<IrTypeParameter> {
-        val parentClass = try {
+        konst parentClass = try {
             parent as? IrClass ?: return typeParameters
         } catch (e: Exception) {
             return typeParameters
@@ -332,7 +332,7 @@ class DumpIrTreeVisitor(
     override fun visitSetField(expression: IrSetField, data: String) {
         expression.dumpLabeledElementWith(data) {
             expression.receiver?.accept(this, "receiver")
-            expression.value.accept(this, "value")
+            expression.konstue.accept(this, "konstue")
         }
     }
 
@@ -388,16 +388,16 @@ class DumpIrTreeVisitor(
 
     override fun visitConstantArray(expression: IrConstantArray, data: String) {
         expression.dumpLabeledElementWith(data) {
-            for ((i, value) in expression.elements.withIndex()) {
-                value.accept(this, i.toString())
+            for ((i, konstue) in expression.elements.withIndex()) {
+                konstue.accept(this, i.toString())
             }
         }
     }
 
     override fun visitConstantObject(expression: IrConstantObject, data: String) {
         expression.dumpLabeledElementWith(data) {
-            for ((index, argument) in expression.valueArguments.withIndex()) {
-                argument.accept(this, expression.constructor.owner.valueParameters[index].name.toString())
+            for ((index, argument) in expression.konstueArguments.withIndex()) {
+                argument.accept(this, expression.constructor.owner.konstueParameters[index].name.toString())
             }
         }
     }
@@ -448,12 +448,12 @@ class DumpIrTreeVisitor(
 }
 
 class DumpTreeFromSourceLineVisitor(
-    val fileEntry: IrFileEntry,
-    private val lineNumber: Int,
+    konst fileEntry: IrFileEntry,
+    private konst lineNumber: Int,
     out: Appendable,
     options: DumpIrTreeOptions,
 ) : IrElementVisitorVoid {
-    private val dumper = DumpIrTreeVisitor(out, options)
+    private konst dumper = DumpIrTreeVisitor(out, options)
 
     override fun visitElement(element: IrElement) {
         if (fileEntry.getLineNumber(element.startOffset) == lineNumber) {
@@ -466,13 +466,13 @@ class DumpTreeFromSourceLineVisitor(
 }
 
 internal fun IrMemberAccessExpression<*>.getValueParameterNamesForDebug(): List<String> {
-    val expectedCount = valueArgumentsCount
+    konst expectedCount = konstueArgumentsCount
     if (symbol.isBound) {
-        val owner = symbol.owner
+        konst owner = symbol.owner
         if (owner is IrFunction) {
             return (0 until expectedCount).map {
-                if (it < owner.valueParameters.size)
-                    owner.valueParameters[it].name.asString()
+                if (it < owner.konstueParameters.size)
+                    owner.konstueParameters[it].name.asString()
                 else
                     "${it + 1}"
             }

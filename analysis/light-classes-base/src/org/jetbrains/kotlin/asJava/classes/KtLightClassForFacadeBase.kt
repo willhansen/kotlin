@@ -30,16 +30,16 @@ import org.jetbrains.kotlin.psi.psiUtil.siblings
 import javax.swing.Icon
 
 abstract class KtLightClassForFacadeBase(
-    override val facadeClassFqName: FqName,
-    final override val files: Collection<KtFile>
+    override konst facadeClassFqName: FqName,
+    final override konst files: Collection<KtFile>
 ) : KtLightClassBase(files.first().manager), KtLightClassForFacade {
-    private val firstFileInFacade by lazyPub { files.first() }
+    private konst firstFileInFacade by lazyPub { files.first() }
 
-    override val multiFileClass: Boolean by lazyPub {
+    override konst multiFileClass: Boolean by lazyPub {
         files.size > 1 || firstFileInFacade.isJvmMultifileClassFile
     }
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         if (multiFileClass)
             LightModifierList(manager, KotlinLanguage.INSTANCE, PsiModifier.PUBLIC, PsiModifier.FINAL)
         else
@@ -47,11 +47,11 @@ abstract class KtLightClassForFacadeBase(
     }
 
 
-    private val _implementsList: LightEmptyImplementsList by lazyPub {
+    private konst _implementsList: LightEmptyImplementsList by lazyPub {
         LightEmptyImplementsList(manager)
     }
 
-    private val packageClsFile by lazyPub {
+    private konst packageClsFile by lazyPub {
         FakeFileForLightClass(
             firstFileInFacade,
             lightClass = this,
@@ -59,11 +59,11 @@ abstract class KtLightClassForFacadeBase(
         )
     }
 
-    private val _ownMethods: List<KtLightMethod> by lazyPub {
+    private konst _ownMethods: List<KtLightMethod> by lazyPub {
         createOwnMethods()
     }
 
-    private val _ownFields: List<KtLightField> by lazyPub {
+    private konst _ownFields: List<KtLightField> by lazyPub {
         createOwnFields()
     }
 
@@ -74,9 +74,9 @@ abstract class KtLightClassForFacadeBase(
 
     override fun getParent(): PsiElement = containingFile
 
-    override val kotlinOrigin: KtClassOrObject? get() = null
+    override konst kotlinOrigin: KtClassOrObject? get() = null
 
-    val fqName: FqName
+    konst fqName: FqName
         get() = facadeClassFqName
 
     override fun getModifierList() = _modifierList
@@ -131,7 +131,7 @@ abstract class KtLightClassForFacadeBase(
 
     override fun setName(name: String): PsiElement? {
         for (file in files) {
-            val jvmNameEntry = JvmFileClassUtil.findAnnotationEntryOnFileNoResolve(file, JVM_NAME_SHORT)
+            konst jvmNameEntry = JvmFileClassUtil.findAnnotationEntryOnFileNoResolve(file, JVM_NAME_SHORT)
 
             if (PackagePartClassUtils.getFilePartShortName(file.name) == name) {
                 jvmNameEntry?.delete()
@@ -139,27 +139,27 @@ abstract class KtLightClassForFacadeBase(
             }
 
             if (jvmNameEntry == null) {
-                val newFileName = PackagePartClassUtils.getFileNameByFacadeName(name)
-                val facadeDir = file.parent
+                konst newFileName = PackagePartClassUtils.getFileNameByFacadeName(name)
+                konst facadeDir = file.parent
                 if (newFileName != null && facadeDir != null && facadeDir.findFile(newFileName) == null) {
                     file.name = newFileName
                     continue
                 }
 
-                val psiFactory = KtPsiFactory(project)
-                val annotationText = "${JVM_NAME_SHORT}(\"$name\")"
-                val newFileAnnotationList = psiFactory.createFileAnnotationListWithAnnotation(annotationText)
-                val annotationList = file.fileAnnotationList
+                konst psiFactory = KtPsiFactory(project)
+                konst annotationText = "${JVM_NAME_SHORT}(\"$name\")"
+                konst newFileAnnotationList = psiFactory.createFileAnnotationListWithAnnotation(annotationText)
+                konst annotationList = file.fileAnnotationList
                 if (annotationList != null) {
                     annotationList.add(newFileAnnotationList.annotationEntries.first())
                 } else {
-                    val anchor = file.firstChild.siblings().firstOrNull { it !is PsiWhiteSpace && it !is PsiComment }
+                    konst anchor = file.firstChild.siblings().firstOrNull { it !is PsiWhiteSpace && it !is PsiComment }
                     file.addBefore(newFileAnnotationList, anchor)
                 }
                 continue
             }
 
-            val jvmNameExpression = jvmNameEntry.valueArguments.firstOrNull()?.getArgumentExpression() as? KtStringTemplateExpression
+            konst jvmNameExpression = jvmNameEntry.konstueArguments.firstOrNull()?.getArgumentExpression() as? KtStringTemplateExpression
                 ?: continue
             ElementManipulators.handleContentChange(jvmNameExpression, name)
         }
@@ -177,7 +177,7 @@ abstract class KtLightClassForFacadeBase(
 
     override fun getNavigationElement() = firstFileInFacade
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
         equals(another) ||
                 (another is KtLightClassForFacade && another.facadeClassFqName == facadeClassFqName)
 
@@ -207,7 +207,7 @@ abstract class KtLightClassForFacadeBase(
             return false
         }
 
-        val lightClass = other as KtLightClassForFacadeBase
+        konst lightClass = other as KtLightClassForFacadeBase
 
         if (facadeClassFqName != lightClass.facadeClassFqName) return false
         if (files != lightClass.files) return false
@@ -217,7 +217,7 @@ abstract class KtLightClassForFacadeBase(
 
     override fun toString() = "${KtLightClassForFacadeBase::class.java.simpleName}:$facadeClassFqName"
 
-    override val originKind: LightClassOriginKind
+    override konst originKind: LightClassOriginKind
         get() = LightClassOriginKind.SOURCE
 
     override fun getText() = firstFileInFacade.text ?: ""

@@ -89,17 +89,17 @@ FILE fqName:<root> fileName:/intersectionType2.kt
           fn: FUN_EXPR type=kotlin.Function0<kotlin.Any> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:<root>.Foo
               BLOCK_BODY
-                VAR name:mm type:<root>.B [val]
+                VAR name:mm type:<root>.B [konst]
                   CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.B' type=<root>.B origin=null
-                VAR name:nn type:<root>.C [val]
+                VAR name:nn type:<root>.C [konst]
                   CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.C' type=<root>.C origin=null
-                VAR name:c type:<root>.Foo [val]
+                VAR name:c type:<root>.Foo [konst]
                   WHEN type=<root>.Foo origin=IF
                     BRANCH
-                      if: CONST Boolean type=kotlin.Boolean value=true
-                      then: GET_VAR 'val mm: <root>.B declared in <root>.foo.<anonymous>' type=<root>.B origin=null
+                      if: CONST Boolean type=kotlin.Boolean konstue=true
+                      then: GET_VAR 'konst mm: <root>.B declared in <root>.foo.<anonymous>' type=<root>.B origin=null
                     BRANCH
-                      if: CONST Boolean type=kotlin.Boolean value=true
-                      then: GET_VAR 'val nn: <root>.C declared in <root>.foo.<anonymous>' type=<root>.C origin=null
+                      if: CONST Boolean type=kotlin.Boolean konstue=true
+                      then: GET_VAR 'konst nn: <root>.C declared in <root>.foo.<anonymous>' type=<root>.C origin=null
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): <root>.Foo declared in <root>.foo'
-                  GET_VAR 'val c: <root>.Foo declared in <root>.foo.<anonymous>' type=<root>.Foo origin=null
+                  GET_VAR 'konst c: <root>.Foo declared in <root>.foo.<anonymous>' type=<root>.Foo origin=null

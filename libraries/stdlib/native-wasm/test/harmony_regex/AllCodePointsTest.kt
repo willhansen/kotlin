@@ -22,21 +22,21 @@ import kotlin.test.*
 
 class AllCodePointsTest {
 
-    fun assertTrue(msg: String, value: Boolean) = assertTrue(value, msg)
-    fun assertFalse(msg: String, value: Boolean) = assertFalse(value, msg)
+    fun assertTrue(msg: String, konstue: Boolean) = assertTrue(konstue, msg)
+    fun assertFalse(msg: String, konstue: Boolean) = assertFalse(konstue, msg)
 
     fun codePointToString(codePoint: Int): String {
-        val charArray = Char.toChars(codePoint)
+        konst charArray = Char.toChars(codePoint)
         return charArray.concatToString(0, charArray.size)
     }
 
     // TODO: Here is a performance problem: an execution of this test requires much more time than it in Kotlin/JVM.
     fun testImpl(regex: String, expectedCount: Int) {
         // Regression for HARMONY-3145
-        val p = Regex(regex)
+        konst p = Regex(regex)
         var cnt = 0
         for (i in 0..1114111) {
-            val s = codePointToString(i)
+            konst s = codePointToString(i)
             if (!s.matches(p)) {
                 cnt++
             }

@@ -11,7 +11,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.Boolean
         symbol = /D.equals(<dispatch receiver>: D, other: kotlin.Any?): kotlin.Boolean
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = other
             receiverType = null

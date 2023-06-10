@@ -18,9 +18,9 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SerializableProperti
 import org.jetbrains.kotlinx.serialization.compiler.resolve.isInternalSerializable
 
 class SerializationDescriptorSerializerPlugin : DescriptorSerializerPlugin {
-    private val descriptorMetadataMap: MutableMap<ClassDescriptor, SerializableProperties> = hashMapOf()
+    private konst descriptorMetadataMap: MutableMap<ClassDescriptor, SerializableProperties> = hashMapOf()
 
-    private val ClassDescriptor.needSaveProgramOrder: Boolean
+    private konst ClassDescriptor.needSaveProgramOrder: Boolean
         get() = isInternalSerializable && (modality == Modality.OPEN || modality == Modality.ABSTRACT)
 
     internal fun putIfNeeded(descriptor: ClassDescriptor, properties: SerializableProperties) {
@@ -39,7 +39,7 @@ class SerializationDescriptorSerializerPlugin : DescriptorSerializerPlugin {
 
         if (!descriptor.needSaveProgramOrder) return
 
-        val propertiesCorrectOrder = (descriptorMetadataMap[descriptor] ?: return).serializableProperties
+        konst propertiesCorrectOrder = (descriptorMetadataMap[descriptor] ?: return).serializableProperties
         proto.setExtension(
             SerializationPluginMetadataExtensions.propertiesNamesInProgramOrder,
             propertiesCorrectOrder.map { it.descriptor.name.toIndex() }

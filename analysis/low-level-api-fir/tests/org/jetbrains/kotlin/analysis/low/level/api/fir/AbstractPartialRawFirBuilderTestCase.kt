@@ -35,9 +35,9 @@ import kotlin.io.path.readText
 
 abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val fileText = testDataPath.readText()
-        val functionName = InTextDirectivesUtils.findStringWithPrefixes(fileText, FUNCTION_DIRECTIVE)
-        val propertyName = InTextDirectivesUtils.findStringWithPrefixes(fileText, PROPERTY_DIRECTIVE)
+        konst fileText = testDataPath.readText()
+        konst functionName = InTextDirectivesUtils.findStringWithPrefixes(fileText, FUNCTION_DIRECTIVE)
+        konst propertyName = InTextDirectivesUtils.findStringWithPrefixes(fileText, PROPERTY_DIRECTIVE)
 
         when {
             functionName != null -> testFunctionPartialBuilding(ktFile, functionName)
@@ -58,8 +58,8 @@ abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleF
         ) { file -> file.findDescendantOfType<KtProperty> { it.name == nameToFind }!! }
     }
 
-    private class DesignationBuilder(private val elementToBuild: KtDeclaration) : FirVisitorVoid() {
-        private val path = mutableListOf<FirRegularClass>()
+    private class DesignationBuilder(private konst elementToBuild: KtDeclaration) : FirVisitorVoid() {
+        private konst path = mutableListOf<FirRegularClass>()
         var resultDesignation: FirDesignation? = null
             private set
 
@@ -68,7 +68,7 @@ abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleF
             when (element) {
                 is FirSimpleFunction, is FirProperty -> {
                     if (element.psi == elementToBuild) {
-                        val originalDeclaration = element as FirDeclaration
+                        konst originalDeclaration = element as FirDeclaration
                         resultDesignation = FirDesignation(path, originalDeclaration)
                     } else {
                         element.acceptChildren(this)
@@ -93,9 +93,9 @@ abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleF
         file: KtFile,
         findPsiElement: (KtFile) -> T
     ) {
-        val elementToBuild = findPsiElement(file) as KtDeclaration
+        konst elementToBuild = findPsiElement(file) as KtDeclaration
 
-        val scopeProvider = object : FirScopeProvider() {
+        konst scopeProvider = object : FirScopeProvider() {
             override fun getUseSiteMemberScope(
                 klass: FirClass,
                 useSiteSession: FirSession,
@@ -116,16 +116,16 @@ abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleF
             ): FirContainingNamesAwareScope? = error("Should not be called")
         }
 
-        val session = FirSessionFactoryHelper.createEmptySession()
-        val firBuilder = RawFirBuilder(session, scopeProvider)
-        val original = firBuilder.buildFirFile(file)
+        konst session = FirSessionFactoryHelper.createEmptySession()
+        konst firBuilder = RawFirBuilder(session, scopeProvider)
+        konst original = firBuilder.buildFirFile(file)
 
-        val designationBuilder = DesignationBuilder(elementToBuild)
+        konst designationBuilder = DesignationBuilder(elementToBuild)
         original.accept(designationBuilder)
-        val designation = designationBuilder.resultDesignation
+        konst designation = designationBuilder.resultDesignation
         TestCase.assertTrue(designation != null)
 
-        val firElement = RawFirNonLocalDeclarationBuilder.buildWithReplacement(
+        konst firElement = RawFirNonLocalDeclarationBuilder.buildWithReplacement(
             session = session,
             scopeProvider = scopeProvider,
             designation!!,
@@ -133,20 +133,20 @@ abstract class AbstractPartialRawFirBuilderTestCase : AbstractLowLevelApiSingleF
             null
         )
 
-        val firDump = FirRenderer(idRenderer = ConeIdFullRenderer()).renderElementAsString(firElement)
+        konst firDump = FirRenderer(idRenderer = ConeIdFullRenderer()).renderElementAsString(firElement)
         JUnit5Assertions.assertEqualsToTestDataFileSibling(firDump)
     }
 
     companion object {
-        private const val FUNCTION_DIRECTIVE = "// FUNCTION: "
-        private const val PROPERTY_DIRECTIVE = "// PROPERTY: "
+        private const konst FUNCTION_DIRECTIVE = "// FUNCTION: "
+        private const konst PROPERTY_DIRECTIVE = "// PROPERTY: "
     }
 }
 
 abstract class AbstractSourcePartialRawFirBuilderTestCase : AbstractPartialRawFirBuilderTestCase() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractOutOfContentRootPartialRawFirBuilderTestCase : AbstractPartialRawFirBuilderTestCase() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

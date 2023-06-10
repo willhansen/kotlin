@@ -8,7 +8,7 @@ package runtime.text.string_builder1
 import kotlin.test.*
 
 @Test fun runTest() {
-    val a = StringBuilder()
+    konst a = StringBuilder()
     a.append("Hello").appendLine("Kotlin").appendLine(42).appendLine(0.1).appendLine(true)
     println(a.toString())	
 }

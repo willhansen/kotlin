@@ -4,7 +4,7 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, when-expression -> paragraph 2 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: 'When' without bound value and with invalid 'else' branch.
+ * DESCRIPTION: 'When' without bound konstue and with inkonstid 'else' branch.
  */
 
 fun case_1() {
@@ -16,12 +16,12 @@ fun case_1() {
         else ->
     }
     when {
-        value == 1 -> println("1")
-        value == 2 -> println("2")
+        konstue == 1 -> println("1")
+        konstue == 2 -> println("2")
         else ->
     }
     when {
-        value == 1 -> println("!")
+        konstue == 1 -> println("!")
         else ->
     }
 }

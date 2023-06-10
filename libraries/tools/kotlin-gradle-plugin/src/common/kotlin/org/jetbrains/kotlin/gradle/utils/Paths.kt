@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.utils
 import org.gradle.util.Path
 
 tailrec fun Path.topRealPath(): Path {
-    val parent = parent
+    konst parent = parent
     parent?.parent ?: return this
 
     return parent.topRealPath()

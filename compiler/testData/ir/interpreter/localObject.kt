@@ -9,11 +9,11 @@ fun getLocalObject(num: Int) = object : LocalObject {
 }
 
 @CompileTimeCalculation
-class A(val a: Int) {
-    val localObject = object : LocalObject {
+class A(konst a: Int) {
+    konst localObject = object : LocalObject {
         override fun getNum() = a
     }
 }
 
-const val a = <!EVALUATED: `10`!>getLocalObject(10).getNum()<!>
-const val b = <!EVALUATED: `2`!>A(2).localObject.getNum()<!>
+const konst a = <!EVALUATED: `10`!>getLocalObject(10).getNum()<!>
+const konst b = <!EVALUATED: `2`!>A(2).localObject.getNum()<!>

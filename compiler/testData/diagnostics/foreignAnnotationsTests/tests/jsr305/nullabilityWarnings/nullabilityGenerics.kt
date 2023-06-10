@@ -24,17 +24,17 @@ public class A<T> {
 class X<T>(t: T?) {
 
     init {
-        val a = A<T>()
+        konst a = A<T>()
         a.foo(<!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>t<!>)
 
-        val x: T = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.bam()<!>
-        val y: T = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.baz<T>()<!>
+        konst x: T = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.bam()<!>
+        konst y: T = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.baz<T>()<!>
     }
 }
 
 fun test() {
-    val a = A<String?>()
+    konst a = A<String?>()
     a.foo(<!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>null<!>)
 
-    val b: String = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.bar()<!>
+    konst b: String = <!NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS!>a.bar()<!>
 }

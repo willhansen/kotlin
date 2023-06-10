@@ -8,8 +8,8 @@ var foo = 23
 
 var bar: Int = 42
     get() = field
-    set(value) {
-        field = value
+    set(konstue) {
+        field = konstue
     }
 
 @JsName("faz") var baz = 99
@@ -21,17 +21,17 @@ package main
 import lib.*
 
 fun box(): String {
-    if (foo != 23) return "fail: simple property initial value: $foo"
+    if (foo != 23) return "fail: simple property initial konstue: $foo"
     foo = 24
-    if (foo != 24) return "fail: simple property new value: $foo"
+    if (foo != 24) return "fail: simple property new konstue: $foo"
 
-    if (bar != 42) return "fail: property with accessor initial value: $bar"
+    if (bar != 42) return "fail: property with accessor initial konstue: $bar"
     bar = 43
-    if (bar != 43) return "fail: property with accessor new value: $bar"
+    if (bar != 43) return "fail: property with accessor new konstue: $bar"
 
-    if (baz != 99) return "fail: renamed property initial value: $baz"
+    if (baz != 99) return "fail: renamed property initial konstue: $baz"
     baz = 100
-    if (baz != 100) return "fail: renamed property new value: $baz"
+    if (baz != 100) return "fail: renamed property new konstue: $baz"
 
 
     return "OK"

@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 import org.jetbrains.kotlin.types.model.TypeParameterMarker
 
 internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
-    private val resolveSession: ResolveSession
+    private konst resolveSession: ResolveSession
 ) : TypeSystemCommonBackendContextForTypeMapping, ClassicTypeSystemContext {
-    override val builtIns: KotlinBuiltIns
+    override konst builtIns: KotlinBuiltIns
         get() = resolveSession.moduleDescriptor.builtIns
 
     override fun TypeConstructorMarker.isTypeParameter(): Boolean {
@@ -48,7 +48,7 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
 
     override fun TypeConstructorMarker.defaultType(): KotlinTypeMarker {
         require(this is TypeConstructor)
-        val declaration = declarationDescriptor
+        konst declaration = declarationDescriptor
             ?: return ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_DECLARATION, this.toString())
         return declaration.defaultType
     }
@@ -60,7 +60,7 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
 
     override fun SimpleTypeMarker.isSuspendFunction(): Boolean {
         require(this is SimpleType)
-        val declaration = constructor.declarationDescriptor
+        konst declaration = constructor.declarationDescriptor
         return declaration is FunctionClassDescriptor && declaration.functionTypeKind.isSuspendOrKSuspendFunction
     }
 
@@ -71,7 +71,7 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
 
     override fun KotlinTypeMarker.isRawType(): Boolean {
         require(this is KotlinType)
-        return when (val declaration = constructor.declarationDescriptor) {
+        return when (konst declaration = constructor.declarationDescriptor) {
             is ClassifierDescriptorWithTypeParameters -> declaration.declaredTypeParameters.isNotEmpty() && arguments.isEmpty()
             else -> false
         }
@@ -84,15 +84,15 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
         require(this is TypeConstructor)
         require(parameters.size == arguments.size)
 
-        val declaration = declarationDescriptor
+        konst declaration = declarationDescriptor
         if (declaration == null) {
-            val errorArguments = arguments.map { TypeProjectionImpl(it as KotlinType) }
+            konst errorArguments = arguments.map { TypeProjectionImpl(it as KotlinType) }
             return ErrorUtils.createErrorTypeWithArguments(ErrorTypeKind.UNRESOLVED_TYPE, errorArguments, this.toString())
         }
 
-        val substitutions = LinkedHashMap<TypeConstructor, TypeProjection>(parameters.size)
+        konst substitutions = LinkedHashMap<TypeConstructor, TypeProjection>(parameters.size)
         for (index in parameters.indices) {
-            val parameterTypeConstructor = parameters[index].typeConstructor
+            konst parameterTypeConstructor = parameters[index].typeConstructor
             substitutions[parameterTypeConstructor] = TypeProjectionImpl(arguments[index] as KotlinType)
         }
 
@@ -103,7 +103,7 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
         require(this is TypeParameterDescriptor)
 
         for (upperBound in upperBounds) {
-            val declaration = upperBound.constructor.declarationDescriptor as? ClassDescriptor ?: continue
+            konst declaration = upperBound.constructor.declarationDescriptor as? ClassDescriptor ?: continue
             if (declaration.kind != ClassKind.INTERFACE && declaration.kind != ClassKind.ANNOTATION_CLASS) {
                 return upperBound
             }
@@ -113,8 +113,8 @@ internal class KtFe10TypeSystemCommonBackendContextForTypeMapping(
     }
 
     override fun continuationTypeConstructor(): TypeConstructorMarker {
-        val continuationFqName = StandardClassIds.Continuation.asSingleFqName()
-        val foundClasses = resolveSession.getTopLevelClassifierDescriptors(continuationFqName, NoLookupLocation.FROM_IDE)
+        konst continuationFqName = StandardClassIds.Continuation.asSingleFqName()
+        konst foundClasses = resolveSession.getTopLevelClassifierDescriptors(continuationFqName, NoLookupLocation.FROM_IDE)
         return foundClasses.firstOrNull()?.typeConstructor
             ?: FAKE_CONTINUATION_CLASS_DESCRIPTOR.typeConstructor
     }

@@ -5,7 +5,7 @@
 interface Test {
     fun foo(): String = "O"
 
-    val bar: String
+    konst bar: String
         get() = "K"
 
     fun test(): String {

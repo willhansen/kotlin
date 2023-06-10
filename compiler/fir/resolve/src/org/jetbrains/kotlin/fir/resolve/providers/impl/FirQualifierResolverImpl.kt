@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
 @NoMutableState
-class FirQualifierResolverImpl(val session: FirSession) : FirQualifierResolver() {
+class FirQualifierResolverImpl(konst session: FirSession) : FirQualifierResolver() {
 
     override fun resolveSymbolWithPrefix(parts: List<FirQualifierPart>, prefix: ClassId): FirClassifierSymbol<*>? {
-        val symbolProvider = session.symbolProvider
+        konst symbolProvider = session.symbolProvider
 
-        val fqName = ClassId(
+        konst fqName = ClassId(
             prefix.packageFqName,
             parts.drop(1).fold(prefix.relativeClassName) { result, suffix -> result.child(suffix.name) },
             false
@@ -34,18 +34,18 @@ class FirQualifierResolverImpl(val session: FirSession) : FirQualifierResolver()
             return resolveSymbol(parts.drop(1))
         }
 
-        val firProvider = session.symbolProvider
+        konst firProvider = session.symbolProvider
 
         if (parts.isNotEmpty()) {
-            val lastPart = mutableListOf<FirQualifierPart>()
-            val firstPart = parts.toMutableList()
+            konst lastPart = mutableListOf<FirQualifierPart>()
+            konst firstPart = parts.toMutableList()
 
             while (firstPart.isNotEmpty()) {
                 lastPart.add(0, firstPart.last())
                 firstPart.removeAt(firstPart.lastIndex)
 
-                val fqName = ClassId(firstPart.toFqName(), lastPart.toFqName(), false)
-                val foundSymbol = firProvider.getClassLikeSymbolByClassId(fqName)
+                konst fqName = ClassId(firstPart.toFqName(), lastPart.toFqName(), false)
+                konst foundSymbol = firProvider.getClassLikeSymbolByClassId(fqName)
                 if (foundSymbol != null) {
                     return foundSymbol
                 }

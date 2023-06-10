@@ -3,8 +3,8 @@
 package foo
 
 fun box(): String {
-    val byteOne = 1.toByte()
-    val shortOne = 1.toShort()
+    konst byteOne = 1.toByte()
+    konst shortOne = 1.toShort()
     var v: Int
 
     v = maxInt() + byteOne

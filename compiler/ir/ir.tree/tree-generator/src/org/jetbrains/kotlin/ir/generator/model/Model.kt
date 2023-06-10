@@ -12,42 +12,42 @@ import org.jetbrains.kotlin.ir.generator.util.*
 
 class Element(
     config: ElementConfig,
-    val name: String,
-    val packageName: String,
-    val params: List<TypeVariable>,
-    val fields: MutableList<Field>,
+    konst name: String,
+    konst packageName: String,
+    konst params: List<TypeVariable>,
+    konst fields: MutableList<Field>,
 ) {
     var elementParents: List<ElementRef> = emptyList()
     var otherParents: List<ClassRef<*>> = emptyList()
     var visitorParent: ElementRef? = null
     var transformerReturnType: Element? = null
-    val targetKind = config.typeKind
+    konst targetKind = config.typeKind
     var kind: Kind? = null
-    val typeName
+    konst typeName
         get() = elementName2typeName(name)
-    val allParents: List<ClassOrElementRef>
+    konst allParents: List<ClassOrElementRef>
         get() = elementParents + otherParents
     var isLeaf = false
-    val childrenOrderOverride: List<String>? = config.childrenOrderOverride
+    konst childrenOrderOverride: List<String>? = config.childrenOrderOverride
     var walkableChildren: List<Field> = emptyList()
-    val transformableChildren get() = walkableChildren.filter { it.transformable }
+    konst transformableChildren get() = walkableChildren.filter { it.transformable }
 
-    val visitFunName = "visit" + (config.visitorName ?: name).replaceFirstChar(Char::uppercaseChar)
-    val visitorParam = config.visitorParam ?: config.category.defaultVisitorParam
+    konst visitFunName = "visit" + (config.visitorName ?: name).replaceFirstChar(Char::uppercaseChar)
+    konst visitorParam = config.visitorParam ?: config.category.defaultVisitorParam
     var accept = config.accept
-    val transform = config.transform
-    val transformByChildren = config.transformByChildren
-    val ownsChildren = config.ownsChildren
+    konst transform = config.transform
+    konst transformByChildren = config.transformByChildren
+    konst ownsChildren = config.ownsChildren
 
-    val generationCallback = config.generationCallback
-    val suppressPrint = config.suppressPrint
-    val propertyName = config.propertyName
-    val kDoc = config.kDoc
-    val additionalImports: List<Import> = config.additionalImports
+    konst generationCallback = config.generationCallback
+    konst suppressPrint = config.suppressPrint
+    konst propertyName = config.propertyName
+    konst kDoc = config.kDoc
+    konst additionalImports: List<Import> = config.additionalImports
 
     override fun toString() = name
 
-    enum class Kind(val typeKind: TypeKind) {
+    enum class Kind(konst typeKind: TypeKind) {
         FinalClass(TypeKind.Class),
         OpenClass(TypeKind.Class),
         AbstractClass(TypeKind.Class),
@@ -62,9 +62,9 @@ class Element(
 }
 
 data class ElementRef(
-    val element: Element,
-    override val args: Map<NamedTypeParameterRef, TypeRef> = emptyMap(),
-    override val nullable: Boolean = false,
+    konst element: Element,
+    override konst args: Map<NamedTypeParameterRef, TypeRef> = emptyMap(),
+    override konst nullable: Boolean = false,
 ) : ParametrizedTypeRef<ElementRef, NamedTypeParameterRef>, ClassOrElementRef {
     override fun copy(args: Map<NamedTypeParameterRef, TypeRef>) = ElementRef(element, args, nullable)
     override fun copy(nullable: Boolean) = ElementRef(element, args, nullable)
@@ -73,22 +73,22 @@ data class ElementRef(
 
 sealed class Field(
     config: FieldConfig?,
-    val name: String,
-    val nullable: Boolean,
-    val mutable: Boolean,
-    val isChild: Boolean,
+    konst name: String,
+    konst nullable: Boolean,
+    konst mutable: Boolean,
+    konst isChild: Boolean,
 ) {
-    abstract val type: TypeRef
-    abstract val baseDefaultValue: CodeBlock?
-    abstract val baseGetter: CodeBlock?
+    abstract konst type: TypeRef
+    abstract konst baseDefaultValue: CodeBlock?
+    abstract konst baseGetter: CodeBlock?
     var isOverride = false
     var needsDescriptorApiAnnotation = false
-    abstract val transformable: Boolean
+    abstract konst transformable: Boolean
 
-    val kdoc = config?.kdoc
+    konst kdoc = config?.kdoc
 
-    val printProperty = config?.printProperty ?: true
-    val generationCallback = config?.generationCallback
+    konst printProperty = config?.printProperty ?: true
+    konst generationCallback = config?.generationCallback
 
     override fun toString() = "$name: $type"
 }
@@ -100,10 +100,10 @@ class SingleField(
     nullable: Boolean,
     mutable: Boolean,
     isChild: Boolean,
-    override val baseDefaultValue: CodeBlock?,
-    override val baseGetter: CodeBlock?,
+    override konst baseDefaultValue: CodeBlock?,
+    override konst baseGetter: CodeBlock?,
 ) : Field(config, name, nullable, mutable, isChild) {
-    override val transformable: Boolean
+    override konst transformable: Boolean
         get() = mutable
 }
 
@@ -111,14 +111,14 @@ class ListField(
     config: FieldConfig?,
     name: String,
     var elementType: TypeRef,
-    private val listType: ClassRef<PositionTypeParameterRef>,
+    private konst listType: ClassRef<PositionTypeParameterRef>,
     nullable: Boolean,
     mutable: Boolean,
     isChild: Boolean,
-    override val transformable: Boolean,
-    override val baseDefaultValue: CodeBlock?,
-    override val baseGetter: CodeBlock?,
+    override konst transformable: Boolean,
+    override konst baseDefaultValue: CodeBlock?,
+    override konst baseGetter: CodeBlock?,
 ) : Field(config, name, nullable, mutable, isChild) {
-    override val type: TypeRef
+    override konst type: TypeRef
         get() = listType.withArgs(elementType)
 }

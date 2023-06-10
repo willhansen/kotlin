@@ -8,27 +8,27 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendWithResult(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        c.resume(value)
+    suspend fun <T> suspendWithResult(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, EmptyContinuation)
     return controller.result
 }
 
 fun box(): String {
-    var value = builder {
+    var konstue = builder {
         if (suspendWithResult(true)) {
             result = "OK"
         }
     }
-    if (value != "OK") return "fail: suspend as if condition: $value"
+    if (konstue != "OK") return "fail: suspend as if condition: $konstue"
 
-    value = builder {
+    konstue = builder {
         for (x in listOf(true, false)) {
             if (x) {
                 result += suspendWithResult("O")
@@ -38,9 +38,9 @@ fun box(): String {
             }
         }
     }
-    if (value != "OK") return "fail: suspend in then branch: $value"
+    if (konstue != "OK") return "fail: suspend in then branch: $konstue"
 
-    value = builder {
+    konstue = builder {
         for (x in listOf(true, false)) {
             if (x) {
                 result += "O"
@@ -50,9 +50,9 @@ fun box(): String {
             }
         }
     }
-    if (value != "OK") return "fail: suspend in else branch: $value"
+    if (konstue != "OK") return "fail: suspend in else branch: $konstue"
 
-    value = builder {
+    konstue = builder {
         for (x in listOf(true, false)) {
             if (x) {
                 result += suspendWithResult("O")
@@ -62,9 +62,9 @@ fun box(): String {
             }
         }
     }
-    if (value != "OK") return "fail: suspend in both branches: $value"
+    if (konstue != "OK") return "fail: suspend in both branches: $konstue"
 
-    value = builder {
+    konstue = builder {
         for (x in listOf(true, false)) {
             if (x) {
                 result += suspendWithResult("O")
@@ -72,7 +72,7 @@ fun box(): String {
             result += ";"
         }
     }
-    if (value != "O;;") return "fail: suspend in then branch without else: $value"
+    if (konstue != "O;;") return "fail: suspend in then branch without else: $konstue"
 
     return "OK"
 }

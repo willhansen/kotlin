@@ -48,12 +48,12 @@ import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerial
 import java.util.concurrent.ConcurrentHashMap
 
 @OptIn(PrivateSessionConstructor::class, SessionConfiguration::class)
-class LLFirBuiltinsSessionFactory(private val project: Project) {
-    private val builtInTypes = BuiltinTypes() // TODO should be platform-specific
+class LLFirBuiltinsSessionFactory(private konst project: Project) {
+    private konst builtInTypes = BuiltinTypes() // TODO should be platform-specific
 
-    private val builtinsModules = ConcurrentHashMap<TargetPlatform, KtBuiltinsModule>()
+    private konst builtinsModules = ConcurrentHashMap<TargetPlatform, KtBuiltinsModule>()
 
-    private val builtinsAndCloneableSessions = ConcurrentHashMap<TargetPlatform, LLFirBuiltinsAndCloneableSession>()
+    private konst builtinsAndCloneableSessions = ConcurrentHashMap<TargetPlatform, LLFirBuiltinsAndCloneableSession>()
 
     /**
      * Returns the [platform]'s [KtBuiltinsModule]. [getBuiltinsModule] should be used instead of [getBuiltinsSession] when a
@@ -73,10 +73,10 @@ class LLFirBuiltinsSessionFactory(private val project: Project) {
     }
 
     private fun createBuiltinsAndCloneableSession(platform: TargetPlatform): LLFirBuiltinsAndCloneableSession {
-        val builtinsModule = getBuiltinsModule(platform)
+        konst builtinsModule = getBuiltinsModule(platform)
 
-        val session = LLFirBuiltinsAndCloneableSession(builtinsModule, ModificationTracker.NEVER_CHANGED, builtInTypes)
-        val moduleData = LLFirModuleData(builtinsModule).apply { bindSession(session) }
+        konst session = LLFirBuiltinsAndCloneableSession(builtinsModule, ModificationTracker.NEVER_CHANGED, builtInTypes)
+        konst moduleData = LLFirModuleData(builtinsModule).apply { bindSession(session) }
 
         return session.apply {
             registerIdeComponents(project)
@@ -86,11 +86,11 @@ class LLFirBuiltinsSessionFactory(private val project: Project) {
             registerCommonJavaComponents(JavaModuleResolver.getInstance(project))
             registerModuleData(moduleData)
 
-            val kotlinScopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
+            konst kotlinScopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
             register(FirKotlinScopeProvider::class, kotlinScopeProvider)
 
-            val symbolProvider = createCompositeSymbolProvider(this) {
-                val moduleDataProvider = SingleModuleDataProvider(moduleData)
+            konst symbolProvider = createCompositeSymbolProvider(this) {
+                konst moduleDataProvider = SingleModuleDataProvider(moduleData)
                 add(
                     object : JvmStubBasedFirDeserializedSymbolProvider(
                         session,
@@ -100,7 +100,7 @@ class LLFirBuiltinsSessionFactory(private val project: Project) {
                         BuiltinsGlobalSearchScope(project),
                         FirDeclarationOrigin.BuiltIns
                     ) {
-                        private val syntheticFunctionInterfaceProvider = FirBuiltinSyntheticFunctionInterfaceProvider(
+                        private konst syntheticFunctionInterfaceProvider = FirBuiltinSyntheticFunctionInterfaceProvider(
                             session,
                             moduleData,
                             kotlinScopeProvider

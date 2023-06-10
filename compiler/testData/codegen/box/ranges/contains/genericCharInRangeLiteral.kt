@@ -1,7 +1,7 @@
-class Cell<T>(val value: T)
+class Cell<T>(konst konstue: T)
 
 fun box(): String =
-    if (Cell('a').value in 'a'..'z')
+    if (Cell('a').konstue in 'a'..'z')
         "OK"
     else
         "fail"

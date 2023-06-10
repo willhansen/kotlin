@@ -8,7 +8,7 @@ interface B {
 }
 
 interface C {
-    val bar: Int
+    konst bar: Int
 }
 
 @Anno
@@ -25,9 +25,9 @@ interface E {
 interface F {
     var bar: String
         get() = "123"
-        set(value) {}
+        set(konstue) {}
 
     private var baz: String
         get() = "123"
-        set(value) {}
+        set(konstue) {}
 }

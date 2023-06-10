@@ -12,7 +12,7 @@ private class S {
 // It can be accessed outside the `test` package, which may lead to IllegalAccessError.
 // This behavior may be changed later
 internal inline fun call(s: () -> String): String {
-    val s = test()
+    konst s = test()
     return s() + test2(s)
 }
 

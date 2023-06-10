@@ -1,4 +1,4 @@
-val array = array<Any>(
+konst array = array<Any>(
         1,
         0x1,
         0X1,
@@ -29,4 +29,4 @@ val array = array<Any>(
         0xa_af_1
 )
 
-val a = 01
+konst a = 01

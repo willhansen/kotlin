@@ -1,10 +1,10 @@
 // FILE: 1.kt
 import a.*
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 abstract class B : A() {
-    fun g() = eval { f() }
+    fun g() = ekonst { f() }
 }
 
 fun box() = object : B() {

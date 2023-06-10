@@ -1,6 +1,6 @@
 // FILE: util.kt
-const val FLAG = true
-const val OTHER_FLAG = false
+const konst FLAG = true
+const konst OTHER_FLAG = false
 
 fun doStuff1() {}
 fun doStuff2() {}

@@ -13,13 +13,13 @@ import java.io.Serializable
  * Implementation of the [Kapt] interface.
  */
 data class KaptImpl(
-    override val name: String,
-    override val kaptSourceSets: Collection<KaptSourceSet>
+    override konst name: String,
+    override konst kaptSourceSets: Collection<KaptSourceSet>
 ) : Kapt, Serializable {
 
-    override val modelVersion = serialVersionUID
+    override konst modelVersion = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

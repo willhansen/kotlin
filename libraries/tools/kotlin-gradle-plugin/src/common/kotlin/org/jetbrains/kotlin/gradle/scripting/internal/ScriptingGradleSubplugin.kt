@@ -33,14 +33,14 @@ import org.jetbrains.kotlin.scripting.definitions.ScriptDefinitionsFromClasspath
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
-private const val SCRIPTING_LOG_PREFIX = "kotlin scripting plugin:"
+private const konst SCRIPTING_LOG_PREFIX = "kotlin scripting plugin:"
 
 class ScriptingGradleSubplugin : Plugin<Project> {
     companion object {
-        const val MISCONFIGURATION_MESSAGE_SUFFIX = "the plugin is probably applied by a mistake"
+        const konst MISCONFIGURATION_MESSAGE_SUFFIX = "the plugin is probably applied by a mistake"
 
         fun configureForSourceSet(project: Project, sourceSetName: String) {
-            val discoveryConfiguration = project.configurations.maybeCreate(getDiscoveryClasspathConfigurationName(sourceSetName)).apply {
+            konst discoveryConfiguration = project.configurations.maybeCreate(getDiscoveryClasspathConfigurationName(sourceSetName)).apply {
                 isVisible = false
                 isCanBeConsumed = false
                 description = "Script filename extensions discovery classpath configuration"
@@ -54,19 +54,19 @@ class ScriptingGradleSubplugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(ScriptingKotlinGradleSubplugin::class.java)
 
-        project.afterEvaluate {
-            val javaSourceSets = project
+        project.afterEkonstuate {
+            konst javaSourceSets = project
                 .variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSetsIfAvailable
             if (javaSourceSets?.isEmpty() == false) {
 
-                val configureAction: (KotlinCompile) -> (Unit) = ca@{ task ->
+                konst configureAction: (KotlinCompile) -> (Unit) = ca@{ task ->
 
                     if (task !is KaptGenerateStubsTask) {
-                        val sourceSetName = task.sourceSetName.orNull ?: return@ca
-                        val discoveryResultsConfigurationName = getDiscoveryResultsConfigurationName(sourceSetName)
-                        val discoveryResultConfiguration = project.configurations.findByName(discoveryResultsConfigurationName)
+                        konst sourceSetName = task.sourceSetName.orNull ?: return@ca
+                        konst discoveryResultsConfigurationName = getDiscoveryResultsConfigurationName(sourceSetName)
+                        konst discoveryResultConfiguration = project.configurations.findByName(discoveryResultsConfigurationName)
                         if (discoveryResultConfiguration == null) {
                             project.logger.warn(
                                 "$SCRIPTING_LOG_PREFIX $project.${task.name} - configuration not found:" +
@@ -89,8 +89,8 @@ class ScriptingGradleSubplugin : Plugin<Project> {
     }
 }
 
-private const val MAIN_CONFIGURATION_NAME = "kotlinScriptDef"
-private const val RESULTS_CONFIGURATION_SUFFIX = "Extensions"
+private const konst MAIN_CONFIGURATION_NAME = "kotlinScriptDef"
+private const konst RESULTS_CONFIGURATION_SUFFIX = "Extensions"
 
 private fun getDiscoveryClasspathConfigurationName(sourceSetName: String): String = when (sourceSetName) {
     "main" -> MAIN_CONFIGURATION_NAME
@@ -118,22 +118,22 @@ private fun configureDiscoveryTransformation(
 internal abstract class DiscoverScriptExtensionsTransformAction : TransformAction<TransformParameters.None> {
     @get:InputArtifact
     @get:NormalizeLineEndings
-    abstract val inputArtifact: Provider<FileSystemLocation>
+    abstract konst inputArtifact: Provider<FileSystemLocation>
 
     override fun transform(outputs: TransformOutputs) {
-        val input = inputArtifact.get().asFile
+        konst input = inputArtifact.get().asFile
 
-        val definitions =
+        konst definitions =
             ScriptDefinitionsFromClasspathDiscoverySource(
                 listOf(input),
                 defaultJvmScriptingHostConfiguration,
                 PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false).reporter
             ).definitions
 
-        val extensions = definitions.mapTo(arrayListOf()) { it.fileExtension }
+        konst extensions = definitions.mapTo(arrayListOf()) { it.fileExtension }
 
         if (extensions.isNotEmpty()) {
-            val outputFile = outputs.file("${input.nameWithoutExtension}.discoveredScriptsExtensions.txt")
+            konst outputFile = outputs.file("${input.nameWithoutExtension}.discoveredScriptsExtensions.txt")
             outputFile.writeText(extensions.joinToString("\n"))
         }
     }
@@ -158,9 +158,9 @@ private fun DependencyHandler.registerOnceDiscoverScriptExtensionsTransform() {
     }
 }
 
-private val artifactType = Attribute.of("artifactType", String::class.java)
+private konst artifactType = Attribute.of("artifactType", String::class.java)
 
-private const val scriptFilesExtensions = "script-files-extensions"
+private const konst scriptFilesExtensions = "script-files-extensions"
 
 private fun Configuration.discoverScriptExtensionsFiles() =
     incoming.artifactView {
@@ -172,12 +172,12 @@ private fun Configuration.discoverScriptExtensionsFiles() =
 
 class ScriptingKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
     companion object {
-        const val SCRIPTING_ARTIFACT_NAME = "kotlin-scripting-compiler-embeddable"
+        const konst SCRIPTING_ARTIFACT_NAME = "kotlin-scripting-compiler-embeddable"
 
-        val SCRIPT_DEFINITIONS_OPTION = "script-definitions"
-        val SCRIPT_DEFINITIONS_CLASSPATH_OPTION = "script-definitions-classpath"
-        val DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION = "disable-script-definitions-from-classpath"
-        val LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION = "script-resolver-environment"
+        konst SCRIPT_DEFINITIONS_OPTION = "script-definitions"
+        konst SCRIPT_DEFINITIONS_CLASSPATH_OPTION = "script-definitions-classpath"
+        konst DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION = "disable-script-definitions-from-classpath"
+        konst LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION = "script-resolver-environment"
     }
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = kotlinCompilation !is AbstractKotlinNativeCompilation
@@ -185,13 +185,13 @@ class ScriptingKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
     override fun applyToCompilation(
         kotlinCompilation: KotlinCompilation<*>
     ): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
-        val scriptingExtension = project.extensions.findByType(ScriptingExtension::class.java)
+        konst scriptingExtension = project.extensions.findByType(ScriptingExtension::class.java)
             ?: project.extensions.create("kotlinScripting", ScriptingExtension::class.java)
 
         return project.provider {
-            val options = mutableListOf<SubpluginOption>()
+            konst options = mutableListOf<SubpluginOption>()
 
             for (scriptDef in scriptingExtension.myScriptDefinitions) {
                 options += SubpluginOption(SCRIPT_DEFINITIONS_OPTION, scriptDef)
@@ -203,7 +203,7 @@ class ScriptingKotlinGradleSubplugin : KotlinCompilerPluginSupportPlugin {
                 options += SubpluginOption(DISABLE_SCRIPT_DEFINITIONS_FROM_CLSSPATH_OPTION, "true")
             }
             for (pair in scriptingExtension.myScriptResolverEnvironment) {
-                options += SubpluginOption(LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION, "${pair.key}=${pair.value}")
+                options += SubpluginOption(LEGACY_SCRIPT_RESOLVER_ENVIRONMENT_OPTION, "${pair.key}=${pair.konstue}")
             }
 
             options

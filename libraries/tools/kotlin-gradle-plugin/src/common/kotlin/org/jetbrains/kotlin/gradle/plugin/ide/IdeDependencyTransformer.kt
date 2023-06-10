@@ -52,7 +52,7 @@ fun IdeDependencyTransformer(
 ): IdeDependencyTransformer = IdeDependencyTransformer(transformers.toList())
 
 private class IdeCompositeDependencyTransformer(
-    val transformers: List<IdeDependencyTransformer>
+    konst transformers: List<IdeDependencyTransformer>
 ) : IdeDependencyTransformer {
     override fun transform(
         sourceSet: KotlinSourceSet, dependencies: Set<IdeaKotlinDependency>

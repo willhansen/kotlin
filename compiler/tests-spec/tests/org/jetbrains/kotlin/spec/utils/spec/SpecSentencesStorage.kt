@@ -7,18 +7,18 @@ package org.jetbrains.kotlin.spec.utils.spec
 
 class SpecSentencesStorage {
     lateinit var latestSpecVersion: String
-    private val specSentences = mutableMapOf<String, SentencesByLocation>()
+    private konst specSentences = mutableMapOf<String, SentencesByLocation>()
 
     operator fun get(version: String): SentencesByLocation? {
         return specSentences.getOrPut(version) {
-            val htmlSpec = HtmlSpecLoader.loadSpec(version) ?: return null
+            konst htmlSpec = HtmlSpecLoader.loadSpec(version) ?: return null
             HtmlSpecSentencesMapBuilder.build(htmlSpec)
         }
     }
 
     fun getLatest(): SentencesByLocation? {
         return specSentences.getOrPut("latest") {
-            val (version, htmlSpec) = HtmlSpecLoader.loadLatestSpec()
+            konst (version, htmlSpec) = HtmlSpecLoader.loadLatestSpec()
             if (htmlSpec == null) return null
             latestSpecVersion = version
             HtmlSpecSentencesMapBuilder.build(htmlSpec)

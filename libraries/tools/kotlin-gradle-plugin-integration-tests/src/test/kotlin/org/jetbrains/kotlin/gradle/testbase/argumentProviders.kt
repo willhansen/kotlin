@@ -18,16 +18,16 @@ import kotlin.streams.toList
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class GradleTestVersions(
-    val minVersion: String = TestVersions.Gradle.MIN_SUPPORTED,
-    val maxVersion: String = TestVersions.Gradle.MAX_SUPPORTED,
-    val additionalVersions: Array<String> = []
+    konst minVersion: String = TestVersions.Gradle.MIN_SUPPORTED,
+    konst maxVersion: String = TestVersions.Gradle.MAX_SUPPORTED,
+    konst additionalVersions: Array<String> = []
 )
 
 inline fun <reified T : Annotation> findAnnotation(context: ExtensionContext): T {
     var nextSuperclass: Class<*>? = context.testClass.get().superclass
-    val superClassSequence = if (nextSuperclass != null) {
+    konst superClassSequence = if (nextSuperclass != null) {
         generateSequence {
-            val currentSuperclass = nextSuperclass
+            konst currentSuperclass = nextSuperclass
             nextSuperclass = nextSuperclass?.superclass
             currentSuperclass
         }
@@ -56,14 +56,14 @@ open class GradleArgumentsProvider : ArgumentsProvider {
     override fun provideArguments(
         context: ExtensionContext
     ): Stream<out Arguments> {
-        val versionsAnnotation = findAnnotation<GradleTestVersions>(context)
+        konst versionsAnnotation = findAnnotation<GradleTestVersions>(context)
 
         fun max(a: GradleVersion, b: GradleVersion) = if (a >= b) a else b
-        val minGradleVersion = GradleVersion.version(versionsAnnotation.minVersion)
+        konst minGradleVersion = GradleVersion.version(versionsAnnotation.minVersion)
         // Max is used for cases when test is annotated with `@GradleTestVersions(minVersion = LATEST)` but MAX_SUPPORTED isn't latest
-        val maxGradleVersion = max(GradleVersion.version(versionsAnnotation.maxVersion), minGradleVersion)
+        konst maxGradleVersion = max(GradleVersion.version(versionsAnnotation.maxVersion), minGradleVersion)
 
-        val additionalGradleVersions = versionsAnnotation
+        konst additionalGradleVersions = versionsAnnotation
             .additionalVersions
             .map(GradleVersion::version)
         additionalGradleVersions.forEach {
@@ -82,12 +82,12 @@ open class GradleArgumentsProvider : ArgumentsProvider {
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class JdkVersions(
-    val versions: Array<JavaVersion> = [JavaVersion.VERSION_1_8, JavaVersion.VERSION_17],
-    val compatibleWithGradle: Boolean = true
+    konst versions: Array<JavaVersion> = [JavaVersion.VERSION_1_8, JavaVersion.VERSION_17],
+    konst compatibleWithGradle: Boolean = true
 ) {
     class ProvidedJdk(
-        val version: JavaVersion,
-        val location: File
+        konst version: JavaVersion,
+        konst location: File
     ) {
         override fun toString(): String {
             return "JDK $version"
@@ -99,8 +99,8 @@ class GradleAndJdkArgumentsProvider : GradleArgumentsProvider() {
     override fun provideArguments(
         context: ExtensionContext
     ): Stream<out Arguments> {
-        val jdkAnnotation = findAnnotation<JdkVersions>(context)
-        val providedJdks = jdkAnnotation
+        konst jdkAnnotation = findAnnotation<JdkVersions>(context)
+        konst providedJdks = jdkAnnotation
             .versions
             .map {
                 JdkVersions.ProvidedJdk(
@@ -109,16 +109,16 @@ class GradleAndJdkArgumentsProvider : GradleArgumentsProvider() {
                 )
             }
 
-        val gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
+        konst gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
 
         return providedJdks
             .flatMap { providedJdk ->
-                val minSupportedGradleVersion = jdkGradleCompatibilityMatrix[providedJdk.version]
+                konst minSupportedGradleVersion = jdkGradleCompatibilityMatrix[providedJdk.version]
                 gradleVersions
                     .run {
                         if (jdkAnnotation.compatibleWithGradle && minSupportedGradleVersion != null) {
-                            val initialVersionsCount = count()
-                            val filteredVersions = filter { it >= minSupportedGradleVersion }
+                            konst initialVersionsCount = count()
+                            konst filteredVersions = filter { it >= minSupportedGradleVersion }
                             if (initialVersionsCount > filteredVersions.count()) {
                                 (filteredVersions + minSupportedGradleVersion).toSet()
                             } else {
@@ -136,7 +136,7 @@ class GradleAndJdkArgumentsProvider : GradleArgumentsProvider() {
     }
 
     companion object {
-        private val jdkGradleCompatibilityMatrix = mapOf(
+        private konst jdkGradleCompatibilityMatrix = mapOf(
             JavaVersion.VERSION_15 to GradleVersion.version(TestVersions.Gradle.G_6_8),
             JavaVersion.VERSION_16 to GradleVersion.version(TestVersions.Gradle.G_7_0),
             JavaVersion.VERSION_17 to GradleVersion.version(TestVersions.Gradle.G_7_3)
@@ -147,30 +147,30 @@ class GradleAndJdkArgumentsProvider : GradleArgumentsProvider() {
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class AndroidTestVersions(
-    val minVersion: String = TestVersions.AGP.MIN_SUPPORTED,
-    val maxVersion: String = TestVersions.AGP.MAX_SUPPORTED,
-    val additionalVersions: Array<String> = []
+    konst minVersion: String = TestVersions.AGP.MIN_SUPPORTED,
+    konst maxVersion: String = TestVersions.AGP.MAX_SUPPORTED,
+    konst additionalVersions: Array<String> = []
 )
 
 class GradleAndAgpArgumentsProvider : GradleArgumentsProvider() {
     override fun provideArguments(
         context: ExtensionContext
     ): Stream<out Arguments> {
-        val agpVersionsAnnotation = findAnnotation<AndroidTestVersions>(context)
-        val agpVersions = setOfNotNull(
+        konst agpVersionsAnnotation = findAnnotation<AndroidTestVersions>(context)
+        konst agpVersions = setOfNotNull(
             agpVersionsAnnotation.minVersion,
             *agpVersionsAnnotation.additionalVersions,
             if (agpVersionsAnnotation.minVersion < agpVersionsAnnotation.maxVersion) agpVersionsAnnotation.maxVersion else null
         )
 
-        val gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
+        konst gradleVersions = super.provideArguments(context).map { it.get().first() as GradleVersion }.toList()
 
         return agpVersions
             .flatMap { version ->
-                val agpVersion = TestVersions.AgpCompatibilityMatrix.values().find { it.version == version }
+                konst agpVersion = TestVersions.AgpCompatibilityMatrix.konstues().find { it.version == version }
                     ?: throw IllegalArgumentException("AGP version $version is not defined in TestVersions.AGP!")
 
-                val providedJdk = JdkVersions.ProvidedJdk(
+                konst providedJdk = JdkVersions.ProvidedJdk(
                     agpVersion.requiredJdkVersion,
                     File(System.getProperty("jdk${agpVersion.requiredJdkVersion.majorVersion}Home"))
                 )
@@ -194,8 +194,8 @@ class GradleAndAgpArgumentsProvider : GradleArgumentsProvider() {
     }
 
     data class AgpTestArguments(
-        val gradleVersion: GradleVersion,
-        val agpVersion: String,
-        val jdkVersion: JdkVersions.ProvidedJdk
+        konst gradleVersion: GradleVersion,
+        konst agpVersion: String,
+        konst jdkVersion: JdkVersions.ProvidedJdk
     )
 }

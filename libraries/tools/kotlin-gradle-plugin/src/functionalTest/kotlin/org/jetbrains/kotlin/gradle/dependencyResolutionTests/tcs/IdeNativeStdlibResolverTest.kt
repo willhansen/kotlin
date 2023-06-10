@@ -20,17 +20,17 @@ class IdeNativeStdlibResolverTest {
 
     @Test
     fun `test single linux target`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.linuxX64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
-        val stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
+        konst stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
 
         IdeNativeStdlibDependencyResolver.resolve(commonMain).assertMatches(stdlibCoordinates)
         IdeNativeStdlibDependencyResolver.resolve(commonTest).assertMatches(stdlibCoordinates)
@@ -40,16 +40,16 @@ class IdeNativeStdlibResolverTest {
 
     @Test
     fun `test shared non native target`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.linuxX64()
         kotlin.jvm()
 
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
-        val stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
+        konst stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
 
         IdeNativeStdlibDependencyResolver.resolve(linuxX64Main).assertMatches(stdlibCoordinates)
         IdeNativeStdlibDependencyResolver.resolve(linuxX64Test).assertMatches(stdlibCoordinates)
@@ -57,31 +57,31 @@ class IdeNativeStdlibResolverTest {
 
     @Test
     fun `test shared native target`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
 
         kotlin.linuxX64()
         kotlin.linuxArm64()
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
-        val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
-        val linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
-        val linuxMain = kotlin.sourceSets.create("linuxMain") { linuxMain ->
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+        konst linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
+        konst linuxMain = kotlin.sourceSets.create("linuxMain") { linuxMain ->
             linuxMain.dependsOn(commonMain)
             linuxArm64Main.dependsOn(linuxMain)
             linuxX64Main.dependsOn(linuxMain)
         }
-        val linuxTest = kotlin.sourceSets.create("linuxTest") { linuxTest ->
+        konst linuxTest = kotlin.sourceSets.create("linuxTest") { linuxTest ->
             linuxTest.dependsOn(commonTest)
             linuxArm64Main.dependsOn(linuxTest)
             linuxX64Main.dependsOn(linuxTest)
         }
 
-        val stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
+        konst stdlibCoordinates = binaryCoordinates("org.jetbrains.kotlin.native:stdlib:${project.konanVersion}")
 
         IdeNativeStdlibDependencyResolver.resolve(linuxX64Main).assertMatches(stdlibCoordinates)
         IdeNativeStdlibDependencyResolver.resolve(linuxX64Test).assertMatches(stdlibCoordinates)

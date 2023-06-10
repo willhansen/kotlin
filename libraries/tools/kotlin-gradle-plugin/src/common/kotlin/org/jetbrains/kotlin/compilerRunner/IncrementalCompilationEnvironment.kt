@@ -12,17 +12,17 @@ import java.io.File
 import java.io.Serializable
 
 internal class IncrementalCompilationEnvironment(
-    val changedFiles: ChangedFiles,
-    val classpathChanges: ClasspathChanges,
-    val workingDir: File,
-    val usePreciseJavaTracking: Boolean = false,
-    val disableMultiModuleIC: Boolean = false,
-    val multiModuleICSettings: MultiModuleICSettings,
-    val withAbiSnapshot: Boolean = false,
-    val preciseCompilationResultsBackup: Boolean = false,
-    val keepIncrementalCompilationCachesInMemory: Boolean = false,
+    konst changedFiles: ChangedFiles,
+    konst classpathChanges: ClasspathChanges,
+    konst workingDir: File,
+    konst usePreciseJavaTracking: Boolean = false,
+    konst disableMultiModuleIC: Boolean = false,
+    konst multiModuleICSettings: MultiModuleICSettings,
+    konst withAbiSnapshot: Boolean = false,
+    konst preciseCompilationResultsBackup: Boolean = false,
+    konst keepIncrementalCompilationCachesInMemory: Boolean = false,
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 3
+        const konst serialVersionUID: Long = 3
     }
 }

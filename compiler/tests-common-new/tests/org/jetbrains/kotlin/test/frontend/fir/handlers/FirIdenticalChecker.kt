@@ -16,7 +16,7 @@ class FirIdenticalChecker(testServices: TestServices) : AbstractFirIdenticalChec
         if (testDataFile.isLLFirTestData) return
 
         if (testDataFile.isFirTestData) {
-            val classicFile = helper.getClassicFileToCompare(testDataFile)
+            konst classicFile = helper.getClassicFileToCompare(testDataFile)
             if (".reversed." in classicFile.path) return
 
             if (helper.contentsAreEquals(classicFile, testDataFile, trimLines = true)) {
@@ -29,7 +29,7 @@ class FirIdenticalChecker(testServices: TestServices) : AbstractFirIdenticalChec
     }
 
     private fun removeFirFileIfExist(testDataFile: File) {
-        val firFile = helper.getFirFileToCompare(testDataFile)
+        konst firFile = helper.getFirFileToCompare(testDataFile)
         firFile.delete()
     }
 }

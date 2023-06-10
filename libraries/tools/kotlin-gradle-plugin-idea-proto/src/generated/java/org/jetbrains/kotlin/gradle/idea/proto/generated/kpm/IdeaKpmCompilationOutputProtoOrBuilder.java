@@ -26,7 +26,7 @@ public interface IdeaKpmCompilationOutputProtoOrBuilder extends
   java.lang.String getClassesDirs(int index);
   /**
    * <code>repeated string classes_dirs = 1;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the classesDirs at the given index.
    */
   com.google.protobuf.ByteString

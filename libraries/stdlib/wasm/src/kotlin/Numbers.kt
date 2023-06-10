@@ -139,74 +139,74 @@ public actual inline fun Long.rotateRight(bitCount: Int): Long =
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 actual fun Double.isNaN(): Boolean = this != this
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 actual fun Float.isNaN(): Boolean = this != this
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 actual fun Double.isInfinite(): Boolean = (this == Double.POSITIVE_INFINITY) || (this == Double.NEGATIVE_INFINITY)
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 actual fun Float.isInfinite(): Boolean = (this == Float.POSITIVE_INFINITY) || (this == Float.NEGATIVE_INFINITY)
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 actual fun Double.isFinite(): Boolean = !isInfinite() && !isNaN()
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 actual fun Float.isFinite(): Boolean = !isInfinite() && !isNaN()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout.
  */
 @SinceKotlin("1.2")
 public actual fun Double.toBits(): Long = if (isNaN()) Double.NaN.toRawBits() else toRawBits()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 public actual fun Double.toRawBits(): Long = wasm_i64_reinterpret_f64(this)
 
 /**
- * Returns the [Double] value corresponding to a given bit representation.
+ * Returns the [Double] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 public actual fun Double.Companion.fromBits(bits: Long): Double = wasm_f64_reinterpret_i64(bits)
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout.
  */
 @SinceKotlin("1.2")
 public actual fun Float.toBits(): Int = if (isNaN()) Float.NaN.toRawBits() else toRawBits()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 public actual fun Float.toRawBits(): Int = wasm_i32_reinterpret_f32(this)
 
 /**
- * Returns the [Float] value corresponding to a given bit representation.
+ * Returns the [Float] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 public actual fun Float.Companion.fromBits(bits: Int): Float = wasm_f32_reinterpret_i32(bits)

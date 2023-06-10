@@ -1,33 +1,33 @@
 Module: lib
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class AllOpen {
     // source: 'module_lib_metaAnnotation_differentModules.kt'
 }
 
 @OtherComponent
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class AnotherComponent {
     // source: 'module_lib_metaAnnotation_differentModules.kt'
 }
 
 @java.lang.annotation.Documented
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class Documented {
     // source: 'module_lib_metaAnnotation_differentModules.kt'
 }
 
 @AllOpen
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class MyComponent {
     // source: 'module_lib_metaAnnotation_differentModules.kt'
 }
 
 @MyComponent
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class OtherComponent {
     // source: 'module_lib_metaAnnotation_differentModules.kt'

@@ -31,7 +31,7 @@ fun moveOpenClassesToSeparateFiles(moduleFragment: IrModuleFragment) {
         if (file.declarations.size <= 1)
             return@transformFlat null
 
-        val openClasses = mutableListOf<IrClass>()
+        konst openClasses = mutableListOf<IrClass>()
         fun removeAndCollectOpenClasses(container: IrDeclarationContainer) {
             container.transformDeclarationsFlat { declaration ->
                 if (declaration is IrDeclarationContainer) {

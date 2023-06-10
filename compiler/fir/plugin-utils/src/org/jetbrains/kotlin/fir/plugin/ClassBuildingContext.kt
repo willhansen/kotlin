@@ -33,10 +33,10 @@ public class ClassBuildingContext(
     session: FirSession,
     key: GeneratedDeclarationKey,
     owner: FirClassSymbol<*>?,
-    private val classId: ClassId,
-    private val classKind: ClassKind,
+    private konst classId: ClassId,
+    private konst classKind: ClassKind,
 ) : DeclarationBuildingContext<FirRegularClass>(session, key, owner) {
-    private val superTypeProviders = mutableListOf<(List<FirTypeParameterRef>) -> ConeKotlinType>()
+    private konst superTypeProviders = mutableListOf<(List<FirTypeParameterRef>) -> ConeKotlinType>()
 
     /**
      * Adds [type] as supertype for constructed class
@@ -74,7 +74,7 @@ public class ClassBuildingContext(
                 requireNotNull(owner) { "Inner class must have owner" }
                 owner.typeParameterSymbols.mapTo(typeParameters) { buildOuterClassTypeParameterRef { symbol = it } }
             }
-            val ownParameters = this@ClassBuildingContext.typeParameters.map {
+            konst ownParameters = this@ClassBuildingContext.typeParameters.map {
                 generateTypeParameter(it, symbol)
             }
             typeParameters += ownParameters
@@ -154,7 +154,7 @@ public fun FirExtension.createCompanionObject(
     key: GeneratedDeclarationKey,
     config: ClassBuildingContext.() -> Unit = {}
 ): FirRegularClass {
-    val classId = owner.classId.createNestedClassId(SpecialNames.DEFAULT_NAME_FOR_COMPANION_OBJECT)
+    konst classId = owner.classId.createNestedClassId(SpecialNames.DEFAULT_NAME_FOR_COMPANION_OBJECT)
     return ClassBuildingContext(session, key, owner, classId, ClassKind.OBJECT).apply(config).apply {
         modality = Modality.FINAL
         status {

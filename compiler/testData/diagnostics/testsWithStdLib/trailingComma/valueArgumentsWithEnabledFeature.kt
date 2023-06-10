@@ -2,10 +2,10 @@
 // !LANGUAGE: +TrailingCommas
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno1(val x: IntArray)
+annotation class Anno1(konst x: IntArray)
 
 @Target(AnnotationTarget.TYPEALIAS)
-annotation class Anno2(val x: DoubleArray)
+annotation class Anno2(konst x: DoubleArray)
 
 fun foo1(vararg x: Any) {}
 fun foo2(x: (Any, Any) -> Unit) {}
@@ -34,25 +34,25 @@ fun main1() {
     foo1({},)
     foo3(10,/**/) {}
 
-    val x1 = A1(1, 2, 3,)
-    val y1 = A1({},)
-    val z1 = A2(10,) {}
+    konst x1 = A1(1, 2, 3,)
+    konst y1 = A1({},)
+    konst z1 = A2(10,) {}
 
     foo2({ x, y -> kotlin.Unit },/**/)
 
-    val foo = listOf(
+    konst foo = listOf(
         println(1),
         "foo bar something",
     )
 
-    val x2 = x1[
+    konst x2 = x1[
         1,
         2,
     ]
 
-    val x3 = x1[{},{},/**/]
+    konst x3 = x1[{},{},/**/]
 
-    val x4: @Anno1([
+    konst x4: @Anno1([
                   1, 2,/**/
                   ]) Float = 0f
 
@@ -64,6 +64,6 @@ fun main1() {
 }
 
 fun main2(x: A1) {
-    <!UNREACHABLE_CODE!>val x1 =<!> x[object {}, return, ]
-    <!UNREACHABLE_CODE!>val x2 = x[fun () {}, throw Exception(), /**/]<!>
+    <!UNREACHABLE_CODE!>konst x1 =<!> x[object {}, return, ]
+    <!UNREACHABLE_CODE!>konst x2 = x[fun () {}, throw Exception(), /**/]<!>
 }

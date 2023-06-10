@@ -19,13 +19,13 @@ import javax.swing.Icon
 
 // Used as a placeholder when actual light class does not exist (expect-classes, for example)
 // The main purpose is to allow search of inheritors within hierarchies containing such classes
-abstract class KtFakeLightClass(override val kotlinOrigin: KtClassOrObject) :
+abstract class KtFakeLightClass(override konst kotlinOrigin: KtClassOrObject) :
     AbstractLightClass(kotlinOrigin.manager, KotlinLanguage.INSTANCE),
     KtLightClass {
 
-    private val _delegate: PsiClass by lazy { DummyJavaPsiFactory.createDummyClass(kotlinOrigin.project) }
+    private konst _delegate: PsiClass by lazy { DummyJavaPsiFactory.createDummyClass(kotlinOrigin.project) }
 
-    override val originKind get() = LightClassOriginKind.SOURCE
+    override konst originKind get() = LightClassOriginKind.SOURCE
 
     override fun getName(): String? = kotlinOrigin.name
     override fun getDelegate(): PsiClass = _delegate
@@ -40,18 +40,18 @@ abstract class KtFakeLightClass(override val kotlinOrigin: KtClassOrObject) :
 
     abstract override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean = PsiClassImplUtil.isClassEquivalentTo(this, another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean = PsiClassImplUtil.isClassEquikonstentTo(this, another)
 }
 
 object DummyJavaPsiFactory {
     fun createDummyVoidMethod(project: Project): PsiMethod {
         // Can't use PsiElementFactory.createMethod() because of formatting in PsiElementFactoryImpl.
-        val name = "dummy"
-        val returnType = PsiType.VOID
+        konst name = "dummy"
+        konst returnType = PsiType.VOID
 
-        val canonicalText = GenericsUtil.getVariableTypeByExpressionType(returnType).getCanonicalText(true)
-        val file = createDummyJavaFile(project, "class _Dummy_ { public $canonicalText $name() {\n} }")
-        val klass = file.classes.singleOrNull()
+        konst canonicalText = GenericsUtil.getVariableTypeByExpressionType(returnType).getCanonicalText(true)
+        konst file = createDummyJavaFile(project, "class _Dummy_ { public $canonicalText $name() {\n} }")
+        konst klass = file.classes.singleOrNull()
             ?: throw IncorrectOperationException("Class was not created. Method name: $name; return type: $canonicalText")
 
         return klass.methods.singleOrNull()
@@ -68,5 +68,5 @@ object DummyJavaPsiFactory {
         ) as PsiJavaFile
     }
 
-    private val DUMMY_FILE_NAME = "_Dummy_." + JavaFileType.INSTANCE.defaultExtension
+    private konst DUMMY_FILE_NAME = "_Dummy_." + JavaFileType.INSTANCE.defaultExtension
 }

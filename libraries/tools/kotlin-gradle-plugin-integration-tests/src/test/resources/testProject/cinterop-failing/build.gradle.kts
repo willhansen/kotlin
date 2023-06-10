@@ -11,7 +11,7 @@ repositories {
 
 
 kotlin {
-    val nativeTarget = when {
+    konst nativeTarget = when {
         HostManager.hostIsMac -> macosX64("native")
         HostManager.hostIsMingw -> mingwX64("native")
         HostManager.hostIsLinux -> linuxX64("native")

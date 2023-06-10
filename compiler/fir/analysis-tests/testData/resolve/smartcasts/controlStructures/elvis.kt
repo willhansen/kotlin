@@ -1,7 +1,7 @@
 // !DUMP_CFG
 interface A {
     fun foo()
-    val b: Boolean
+    konst b: Boolean
 }
 
 fun test_1(x: A?) {

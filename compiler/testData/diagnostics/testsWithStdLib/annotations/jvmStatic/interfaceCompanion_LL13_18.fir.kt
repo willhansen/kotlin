@@ -42,9 +42,9 @@ interface B {
         protected var foo5<!> = 1
 
         @JvmStatic
-        val foo6 = 1
+        konst foo6 = 1
 
-        val foo7 = 1
+        konst foo7 = 1
         @JvmStatic get
 
         private var foo8 = 1
@@ -54,9 +54,9 @@ interface B {
         <!JVM_STATIC_ON_NON_PUBLIC_MEMBER!>@JvmStatic private set<!>
 
         <!JVM_STATIC_ON_EXTERNAL_IN_INTERFACE!>@JvmStatic
-        val foo10: Int<!> external get
+        konst foo10: Int<!> external get
 
-        val foo11: Int <!JVM_STATIC_ON_EXTERNAL_IN_INTERFACE!>@JvmStatic external get<!>
+        konst foo11: Int <!JVM_STATIC_ON_EXTERNAL_IN_INTERFACE!>@JvmStatic external get<!>
     }
 
 }

@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.fir.expressions.FirAnonymousObjectExpression
 
 internal class KtFirEnumEntryInitializerSymbolPointer(
-    private val ownerPointer: KtSymbolPointer<KtEnumEntrySymbol>,
+    private konst ownerPointer: KtSymbolPointer<KtEnumEntrySymbol>,
 ) : KtSymbolPointer<KtAnonymousObjectSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtAnonymousObjectSymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val owner = with(analysisSession) {
+        konst owner = with(analysisSession) {
             ownerPointer.restoreSymbol()
         }
 
-        val initializer = owner?.firSymbol?.fir?.initializer as? FirAnonymousObjectExpression ?: return null
+        konst initializer = owner?.firSymbol?.fir?.initializer as? FirAnonymousObjectExpression ?: return null
         return analysisSession.firSymbolBuilder.classifierBuilder.buildAnonymousObjectSymbol(initializer.anonymousObject.symbol)
     }
 

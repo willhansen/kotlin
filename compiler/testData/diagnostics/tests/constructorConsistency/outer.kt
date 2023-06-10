@@ -5,8 +5,8 @@ class Outer {
 
     inner class Inner {
 
-        val x = this@Outer.foo()
+        konst x = this@Outer.foo()
 
-        val y = foo()
+        konst y = foo()
     }
 }

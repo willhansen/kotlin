@@ -22,30 +22,30 @@ inline fun <T: Any> T?.str(block: (T) -> String): String =
 // Dispatcher to create and control benchmarks indexes separated by some feature.
 // Feature can be choosen as often used as filtering entity in case there is no need in separate indexes.
 // Default behaviour of dispatcher is working with one index (case when separating isn't needed).
-class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature: String,
+class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, konst feature: String,
                                   featureValues: Iterable<String> = emptyList()) {
-    // Becnhmarks indexes to work with in case of existing feature values.
-    private val benchmarksIndexes =
+    // Becnhmarks indexes to work with in case of existing feature konstues.
+    private konst benchmarksIndexes =
             if (featureValues.isNotEmpty())
                 featureValues.map { it to BenchmarksIndex("benchmarks_${it.replace(" ", "_").lowercase()}", connector) }
                         .toMap()
             else emptyMap()
 
     // Single benchmark index.
-    private val benchmarksSingleInstance =
+    private konst benchmarksSingleInstance =
             if (featureValues.isEmpty()) BenchmarksIndex("benchmarks", connector) else null
 
     // Get right index in ES.
     private fun getIndex(featureValue: String = "") =
             benchmarksSingleInstance ?: benchmarksIndexes[featureValue]
-            ?: error("Used wrong feature value $featureValue. Indexes are separated using next values: ${benchmarksIndexes.keys}")
+            ?: error("Used wrong feature konstue $featureValue. Indexes are separated using next konstues: ${benchmarksIndexes.keys}")
 
-    // Used filter to get data with needed feature value.
+    // Used filter to get data with needed feature konstue.
     var featureFilter: ((String) -> String)? = null
 
     // Get benchmark reports corresponding to needed build number.
     fun getBenchmarksReports(buildNumber: String, featureValue: String): Promise<List<String>> {
-        val queryDescription = """
+        konst queryDescription = """
             {
                 "size": 1000,
                 "query": {
@@ -59,10 +59,10 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
             """
 
         return getIndex(featureValue).search(queryDescription, listOf("hits.hits._source")).then { responseString ->
-            val dbResponse = JsonTreeParser.parse(responseString).jsonObject
+            konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
             dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")?.let { results ->
                 results.map {
-                    val element = it as JsonObject
+                    konst element = it as JsonObject
                     element.getObject("_source").toString()
                 }
             } ?: emptyList()
@@ -73,7 +73,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
     fun getBenchmarksList(buildNumber: String, featureValue: String): Promise<List<String>> {
         return getBenchmarksReports(buildNumber, featureValue).then { reports ->
             reports.map {
-                val dbResponse = JsonTreeParser.parse(it).jsonObject
+                konst dbResponse = JsonTreeParser.parse(it).jsonObject
                 parseBenchmarksArray(dbResponse.getArray("benchmarks"))
                         .map { it.name }
             }.flatten()
@@ -83,11 +83,11 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
     // Delete benchmarks from database.
     fun deleteBenchmarks(featureValue: String, buildNumber: String? = null): Promise<String> {
         // Delete all or for choosen build number.
-        val matchQuery = buildNumber?.let {
+        konst matchQuery = buildNumber?.let {
             """"match": { "buildNumber": "$it" }"""
         } ?: """"match_all": {}"""
 
-        val queryDescription = """
+        konst queryDescription = """
             {
                 "query": {
                     $matchQuery
@@ -97,14 +97,14 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
         return getIndex(featureValue).delete(queryDescription)
     }
 
-    // Get benchmarks values of needed metric for choosen build number.
+    // Get benchmarks konstues of needed metric for choosen build number.
     fun getSamples(metricName: String, featureValue: String = "", samples: List<String>, buildsCountToShow: Int,
                    buildNumbers: Iterable<CompositeBuildNumber>? = null,
                    normalize: Boolean = false, withSuffix: String? = null): Promise<List<Pair<CompositeBuildNumber, Array<Double?>>>> {
 
-        val filteredBuilds = buildNumbers?.filter { buildNumberIsIncluded(it, withSuffix) }
+        konst filteredBuilds = buildNumbers?.filter { buildNumberIsIncluded(it, withSuffix) }
 
-        val queryDescription = """
+        konst queryDescription = """
             {
                 "_source": ["buildNumber"],
                 "size": ${samples.size * buildsCountToShow},
@@ -139,33 +139,33 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
 
         return getIndex(featureValue).search(queryDescription, listOf("hits.hits._source", "hits.hits.inner_hits"))
                 .then { responseString ->
-                    val dbResponse = JsonTreeParser.parse(responseString).jsonObject
-                    val results = dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")
+                    konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
+                    konst results = dbResponse.getObjectOrNull("hits")?.getArrayOrNull("hits")
                             ?: error("Wrong response:\n$responseString")
                     // Get indexes for provided samples.
-                    val indexesMap = samples.mapIndexed { index, it -> it to index }.toMap()
-                    val valuesMap = buildNumbers?.map {
+                    konst indexesMap = samples.mapIndexed { index, it -> it to index }.toMap()
+                    konst konstuesMap = buildNumbers?.map {
                         it to arrayOfNulls<Double?>(samples.size)
                     }?.toMap()?.toMutableMap() ?: mutableMapOf<CompositeBuildNumber, Array<Double?>>()
-                    val buildTypes = buildNumbers?.map { it.second to it.first }?.toMap() ?: emptyMap()
-                    // Parse and save values in requested order.
+                    konst buildTypes = buildNumbers?.map { it.second to it.first }?.toMap() ?: emptyMap()
+                    // Parse and save konstues in requested order.
                     results.forEach {
-                        val element = it as JsonObject
-                        val build = element.getObject("_source").getPrimitive("buildNumber").content
-                        val buildInfo = buildTypes[build] to build
-                        buildNumbers?.let { valuesMap.getOrPut(buildInfo) { arrayOfNulls<Double?>(samples.size) } }
+                        konst element = it as JsonObject
+                        konst build = element.getObject("_source").getPrimitive("buildNumber").content
+                        konst buildInfo = buildTypes[build] to build
+                        buildNumbers?.let { konstuesMap.getOrPut(buildInfo) { arrayOfNulls<Double?>(samples.size) } }
                         element
                                 .getObject("inner_hits")
                                 .getObject("benchmarks")
                                 .getObject("hits")
                                 .getArray("hits").forEach {
-                                    val source = (it as JsonObject).getObject("_source")
-                                    valuesMap[buildInfo]!![indexesMap[source.getPrimitive("name").content]!!] =
+                                    konst source = (it as JsonObject).getObject("_source")
+                                    konstuesMap[buildInfo]!![indexesMap[source.getPrimitive("name").content]!!] =
                                             source.getPrimitive(if (normalize) "normalizedScore" else "score").double
                                 }
 
                     }
-                    valuesMap.toList()
+                    konstuesMap.toList()
                 }
     }
 
@@ -177,7 +177,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
 
     // Get failures number happned during build.
     fun getFailuresNumber(featureValue: String = "", buildNumbers: Iterable<String>? = null): Promise<Map<String, Int>> {
-        val queryDescription = """ 
+        konst queryDescription = """ 
             {
                 "_source": false,
                 ${featureFilter.str {
@@ -211,7 +211,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                                     },
                                     "aggs" : {
                                         "failed_count": {
-                                            "value_count": {
+                                            "konstue_count": {
                                                 "field" : "benchmarks.score"
                                             }
                                         }
@@ -227,11 +227,11 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
 }
 """
         return getIndex(featureValue).search(queryDescription, listOf("aggregations")).then { responseString ->
-            val dbResponse = JsonTreeParser.parse(responseString).jsonObject
-            val aggregations = dbResponse.getObjectOrNull("aggregations") ?: error("Wrong response:\n$responseString")
+            konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
+            konst aggregations = dbResponse.getObjectOrNull("aggregations") ?: error("Wrong response:\n$responseString")
             buildNumbers?.let {
                 // Get failed number for each provided build.
-                val buckets = aggregations
+                konst buckets = aggregations
                         .getObjectOrNull("builds")
                         ?.getObjectOrNull("buckets")
                         ?: error("Wrong response:\n$responseString")
@@ -243,7 +243,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                             .getObject("buckets")
                             .getObject("samples")
                             .getObject("failed_count")
-                            .getPrimitive("value")
+                            .getPrimitive("konstue")
                             .int
                 }.toMap()
             } ?: listOf("golden" to aggregations
@@ -252,7 +252,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                     .getObject("buckets")
                     .getObject("samples")
                     .getObject("failed_count")
-                    .getPrimitive("value")
+                    .getPrimitive("konstue")
                     .int
             ).toMap()
         }
@@ -264,15 +264,15 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
             } ?: !build.second.contains("(")
 
 
-    // Get geometric mean for benchmarks values of needed metric.
+    // Get geometric mean for benchmarks konstues of needed metric.
     fun getGeometricMean(metricName: String, featureValue: String = "",
                          buildNumbers: Iterable<CompositeBuildNumber>? = null, normalize: Boolean = false,
                          excludeNames: List<String> = emptyList(), withSuffix: String? = null): Promise<List<Pair<CompositeBuildNumber, List<Double?>>>> {
 
-        val filteredBuilds = buildNumbers?.filter { buildNumberIsIncluded(it, withSuffix) }
+        konst filteredBuilds = buildNumbers?.filter { buildNumberIsIncluded(it, withSuffix) }
 
         // Filter only with metric or also with names.
-        val filterBenchmarks = if (excludeNames.isEmpty())
+        konst filterBenchmarks = if (excludeNames.isEmpty())
             """
             "match": { "benchmarks.metric": "$metricName" }
             """
@@ -282,7 +282,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                 "must_not": [ ${excludeNames.map { """{ "match_phrase" : { "benchmarks.name" : "$it" } }"""}.joinToString() } ]
             }
         """.trimIndent()
-        val queryDescription = """
+        konst queryDescription = """
             {
                 "_source": false,
                 ${featureFilter.str {
@@ -319,7 +319,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                                             "sum": {
                                                 "field" : "benchmarks.${if (normalize) "normalizedScore" else "score"}",
                                                 "script" : {
-                                                    "source": "if (_value == 0) { 0.0 } else { Math.log(_value) }"
+                                                    "source": "if (_konstue == 0) { 0.0 } else { Math.log(_konstue) }"
                                                 }
                                             }
                                         },
@@ -346,10 +346,10 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
         """
 
         return getIndex(featureValue).search(queryDescription, listOf("aggregations")).then { responseString ->
-            val dbResponse = JsonTreeParser.parse(responseString).jsonObject
-            val aggregations = dbResponse.getObjectOrNull("aggregations") ?: error("Wrong response:\n$responseString")
+            konst dbResponse = JsonTreeParser.parse(responseString).jsonObject
+            konst aggregations = dbResponse.getObjectOrNull("aggregations") ?: error("Wrong response:\n$responseString")
             buildNumbers?.let {
-                val buckets = aggregations
+                konst buckets = aggregations
                         .getObjectOrNull("builds")
                         ?.getObjectOrNull("buckets")
                         ?: error("Wrong response:\n$responseString")
@@ -362,7 +362,7 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                             .getObject("buckets")
                             .getObject("samples")
                             .getObjectOrNull("geom_mean")
-                            ?.getPrimitive("value")
+                            ?.getPrimitive("konstue")
                             ?.double
                         )
                     else
@@ -374,12 +374,12 @@ class BenchmarksIndexesDispatcher(connector: ElasticSearchConnector, val feature
                     .getObject("buckets")
                     .getObject("samples")
                     .getObjectOrNull("geom_mean")
-                    ?.getPrimitive("value")
+                    ?.getPrimitive("konstue")
                     ?.double
                 )
             )
         }
     }
 
-    val createMappingQueries get() = benchmarksIndexes.values.map { it.createMappingQuery }
+    konst createMappingQueries get() = benchmarksIndexes.konstues.map { it.createMappingQuery }
 }

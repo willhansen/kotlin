@@ -17,7 +17,7 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val supertypes = JavaClass.foo { a, b -> a.compareTo(b) }
+    konst supertypes = JavaClass.foo { a, b -> a.compareTo(b) }
     if (supertypes != "[interface java.util.Comparator]") return "Fail: $supertypes"
     return "OK"
 }

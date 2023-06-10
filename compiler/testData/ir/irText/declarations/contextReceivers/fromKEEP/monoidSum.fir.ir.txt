@@ -22,9 +22,9 @@ FILE fqName:<root> fileName:/monoidSum.kt
   CLASS INTERFACE name:Monoid modality:ABSTRACT visibility:public superTypes:[<root>.Semigroup<T of <root>.Monoid>]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Monoid<T of <root>.Monoid>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
-    PROPERTY name:unit visibility:public modality:ABSTRACT [val]
+    PROPERTY name:unit visibility:public modality:ABSTRACT [konst]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unit> visibility:public modality:ABSTRACT <> ($this:<root>.Monoid<T of <root>.Monoid>) returnType:T of <root>.Monoid
-        correspondingProperty: PROPERTY name:unit visibility:public modality:ABSTRACT [val]
+        correspondingProperty: PROPERTY name:unit visibility:public modality:ABSTRACT [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Monoid<T of <root>.Monoid>
     FUN FAKE_OVERRIDE name:combine visibility:public modality:ABSTRACT <> ($this:<root>.Semigroup<T of <root>.Semigroup>, $receiver:T of <root>.Monoid, other:T of <root>.Monoid) returnType:T of <root>.Monoid [fake_override,infix]
       overridden:
@@ -62,14 +62,14 @@ FILE fqName:<root> fileName:/monoidSum.kt
           CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
             $this: GET_VAR '<this>: kotlin.Int declared in <root>.IntMonoid.combine' type=kotlin.Int origin=null
             other: GET_VAR 'other: kotlin.Int declared in <root>.IntMonoid.combine' type=kotlin.Int origin=null
-    PROPERTY name:unit visibility:public modality:OPEN [val]
+    PROPERTY name:unit visibility:public modality:OPEN [konst]
       overridden:
         public abstract unit: T of <root>.Monoid
       FIELD PROPERTY_BACKING_FIELD name:unit type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=0
+          CONST Int type=kotlin.Int konstue=0
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unit> visibility:public modality:OPEN <> ($this:<root>.IntMonoid) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:unit visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:unit visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-unit> (): T of <root>.Monoid declared in <root>.Monoid
         $this: VALUE_PARAMETER name:<this> type:<root>.IntMonoid
@@ -107,14 +107,14 @@ FILE fqName:<root> fileName:/monoidSum.kt
           CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
             $this: GET_VAR '<this>: kotlin.String declared in <root>.StringMonoid.combine' type=kotlin.String origin=null
             other: GET_VAR 'other: kotlin.String declared in <root>.StringMonoid.combine' type=kotlin.String origin=null
-    PROPERTY name:unit visibility:public modality:OPEN [val]
+    PROPERTY name:unit visibility:public modality:OPEN [konst]
       overridden:
         public abstract unit: T of <root>.Monoid
       FIELD PROPERTY_BACKING_FIELD name:unit type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value=""
+          CONST String type=kotlin.String konstue=""
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-unit> visibility:public modality:OPEN <> ($this:<root>.StringMonoid) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:unit visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:unit visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-unit> (): T of <root>.Monoid declared in <root>.Monoid
         $this: VALUE_PARAMETER name:<this> type:<root>.StringMonoid
@@ -175,9 +175,9 @@ FILE fqName:<root> fileName:/monoidSum.kt
                     $receiver: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.Int> origin=null
                       <T>: kotlin.Int
                       elements: VARARG type=kotlin.Array<out kotlin.Int> varargElementType=kotlin.Int
-                        CONST Int type=kotlin.Int value=1
-                        CONST Int type=kotlin.Int value=2
-                        CONST Int type=kotlin.Int value=3
+                        CONST Int type=kotlin.Int konstue=1
+                        CONST Int type=kotlin.Int konstue=2
+                        CONST Int type=kotlin.Int konstue=3
                     $context_receiver_0: GET_VAR '$this$with: <root>.IntMonoid declared in <root>.box.<anonymous>' type=<root>.IntMonoid origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=kotlin.String origin=null
@@ -194,6 +194,6 @@ FILE fqName:<root> fileName:/monoidSum.kt
                     $receiver: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.String> origin=null
                       <T>: kotlin.String
                       elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
-                        CONST String type=kotlin.String value="O"
-                        CONST String type=kotlin.String value="K"
+                        CONST String type=kotlin.String konstue="O"
+                        CONST String type=kotlin.String konstue="K"
                     $context_receiver_0: GET_VAR '$this$with: <root>.StringMonoid declared in <root>.box.<anonymous>' type=<root>.StringMonoid origin=null

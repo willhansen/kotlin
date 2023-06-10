@@ -7,6 +7,6 @@ class Delegate {
 }
 
 fun box(): String {
-    val prop by Delegate()
+    konst prop by Delegate()
     return if (prop == 1) "OK" else "fail"
 }

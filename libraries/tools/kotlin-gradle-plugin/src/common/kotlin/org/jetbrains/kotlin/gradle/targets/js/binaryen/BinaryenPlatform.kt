@@ -6,15 +6,15 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
  * Provides platform and architecture names that is used to download Binaryen.
  */
 internal object BinaryenPlatform {
-    private val props = System.getProperties()
+    private konst props = System.getProperties()
     private fun property(name: String) = props.getProperty(name) ?: System.getProperty(name)
 
-    const val WIN = "windows"
-    const val LINUX = "linux"
-    const val DARWIN = "macos"
+    const konst WIN = "windows"
+    const konst LINUX = "linux"
+    const konst DARWIN = "macos"
 
-    val name: String = run {
-        val name = property("os.name").toLowerCaseAsciiOnly()
+    konst name: String = run {
+        konst name = property("os.name").toLowerCaseAsciiOnly()
         when {
             name.contains("windows") -> WIN
             name.contains("mac") -> DARWIN
@@ -24,13 +24,13 @@ internal object BinaryenPlatform {
         }
     }
 
-    const val ARM64 = "arm64"
-    const val X64 = "x86_64"
-    const val X86 = "x86_86"
+    const konst ARM64 = "arm64"
+    const konst X64 = "x86_64"
+    const konst X86 = "x86_86"
 
-    val architecture: String
+    konst architecture: String
         get() {
-            val arch = property("os.arch")
+            konst arch = property("os.arch")
             return when {
                 arch == "aarch64" -> ARM64
                 arch.contains("64") -> X64
@@ -38,6 +38,6 @@ internal object BinaryenPlatform {
             }
         }
 
-    val platform: String
+    konst platform: String
         get() = "$architecture-$name"
 }

@@ -5,7 +5,7 @@ class A<T> {
 class Foo<T>(i: Int)
 
 public fun <E> Foo(c: A<E>) {
-    val a = Foo<E>(c.size())       // Check no overload resolution ambiguity
-    val b: Foo<E> = Foo(c.size())  // OK
-    val c: Foo<Int> = Foo(c.size()) // OK
+    konst a = Foo<E>(c.size())       // Check no overload resolution ambiguity
+    konst b: Foo<E> = Foo(c.size())  // OK
+    konst c: Foo<Int> = Foo(c.size()) // OK
 }

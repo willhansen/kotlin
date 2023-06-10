@@ -694,8 +694,8 @@ public class JsAstMapper {
     }
 
     private static JsExpression mapIntNumber(Node numberNode) {
-        double value = numberNode.getDouble();
-        if (value <= Integer.MAX_VALUE && value >= Integer.MIN_VALUE) {
+        double konstue = numberNode.getDouble();
+        if (konstue <= Integer.MAX_VALUE && konstue >= Integer.MIN_VALUE) {
             return new JsIntLiteral((int) numberNode.getDouble());
         }
         else {
@@ -1054,9 +1054,9 @@ public class JsAstMapper {
             case TokenStream.SUB: {
                 Node operand = unOp.getFirstChild();
                 if (operand.getType() == TokenStream.NUMBER_INT) {
-                    double value = operand.getDouble();
-                    if (-value >= Integer.MIN_VALUE) {
-                        return new JsIntLiteral((int) -value);
+                    double konstue = operand.getDouble();
+                    if (-konstue >= Integer.MIN_VALUE) {
+                        return new JsIntLiteral((int) -konstue);
                     }
                 }
 

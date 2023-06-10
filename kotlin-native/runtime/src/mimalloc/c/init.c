@@ -80,7 +80,7 @@ const mi_page_t _mi_page_empty = {
 
 // --------------------------------------------------------
 // Statically allocate an empty heap as the initial
-// thread local value for the default heap,
+// thread local konstue for the default heap,
 // and statically allocate the backing heap for the main
 // thread so it can function without doing any allocation
 // itself (as accessing a thread local for the first time
@@ -293,16 +293,16 @@ static void _mi_thread_done(mi_heap_t* default_heap);
   WINBASEAPI BOOL  WINAPI FlsFree(_In_ DWORD dwFlsIndex);
   #endif
   static DWORD mi_fls_key = (DWORD)(-1);
-  static void NTAPI mi_fls_done(PVOID value) {
-    if (value!=NULL) _mi_thread_done((mi_heap_t*)value);
+  static void NTAPI mi_fls_done(PVOID konstue) {
+    if (konstue!=NULL) _mi_thread_done((mi_heap_t*)konstue);
   }
 #elif defined(MI_USE_PTHREADS)
   // use pthread local storage keys to detect thread ending
   // (and used with MI_TLS_PTHREADS for the default heap)
   #include <pthread.h>
   pthread_key_t _mi_heap_default_key = (pthread_key_t)(-1);
-  static void mi_pthread_done(void* value) {
-    if (value!=NULL) _mi_thread_done((mi_heap_t*)value);
+  static void mi_pthread_done(void* konstue) {
+    if (konstue!=NULL) _mi_thread_done((mi_heap_t*)konstue);
   }
 #elif defined(__wasi__)
 // no pthreads in the WebAssembly Standard Interface
@@ -339,7 +339,7 @@ void mi_thread_init(void) mi_attr_noexcept
   
   // initialize the thread local default heap
   // (this will call `_mi_heap_set_default_direct` and thus set the
-  //  fiber/pthread key to a non-zero value, ensuring `_mi_thread_done` is called)
+  //  fiber/pthread key to a non-zero konstue, ensuring `_mi_thread_done` is called)
   if (_mi_heap_init()) return;  // returns true if already initialized
 
   _mi_stat_increase(&_mi_stats_main.threads, 1);
@@ -373,7 +373,7 @@ void _mi_heap_set_default_direct(mi_heap_t* heap)  {
   #endif
 
   // ensure the default heap is passed to `_mi_thread_done`
-  // setting to a non-NULL value also ensures `mi_thread_done` is called.
+  // setting to a non-NULL konstue also ensures `mi_thread_done` is called.
   #if defined(_WIN32) && defined(MI_SHARED_LIB)
     // nothing to do as it is done in DllMain
   #elif defined(_WIN32) && !defined(MI_SHARED_LIB)

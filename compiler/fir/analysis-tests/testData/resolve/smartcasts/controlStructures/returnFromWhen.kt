@@ -8,7 +8,7 @@ fun test_1(name: String?) {
 }
 
 fun test_2(name: String?) {
-    when (val s = name) {
+    when (konst s = name) {
         null -> return
     }
     name.length

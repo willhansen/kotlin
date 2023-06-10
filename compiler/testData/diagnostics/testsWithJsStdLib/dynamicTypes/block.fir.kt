@@ -8,6 +8,6 @@ fun test() {
 }
 
 fun <T> dynamic(body: dynamic.() -> T): T {
-    val topLevel = null
+    konst topLevel = null
     return topLevel.body()
 }

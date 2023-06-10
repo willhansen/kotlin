@@ -25,30 +25,30 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 open class IrIntrinsicFunction(
-    val expression: IrFunctionAccessExpression,
-    val signature: JvmMethodSignature,
-    val classCodegen: ClassCodegen,
-    val argsTypes: List<Type> = expression.argTypes(classCodegen)
+    konst expression: IrFunctionAccessExpression,
+    konst signature: JvmMethodSignature,
+    konst classCodegen: ClassCodegen,
+    konst argsTypes: List<Type> = expression.argTypes(classCodegen)
 ) : Callable {
-    override val owner: Type
+    override konst owner: Type
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val dispatchReceiverType: Type?
+    override konst dispatchReceiverType: Type?
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val dispatchReceiverKotlinType: KotlinType?
+    override konst dispatchReceiverKotlinType: KotlinType?
         get() = null
-    override val extensionReceiverType: Type?
+    override konst extensionReceiverType: Type?
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val extensionReceiverKotlinType: KotlinType?
+    override konst extensionReceiverKotlinType: KotlinType?
         get() = null
-    override val generateCalleeType: Type?
+    override konst generateCalleeType: Type?
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val valueParameterTypes: List<Type>
-        get() = signature.valueParameters.map { it.asmType }
-    override val parameterTypes: Array<Type>
+    override konst konstueParameterTypes: List<Type>
+        get() = signature.konstueParameters.map { it.asmType }
+    override konst parameterTypes: Array<Type>
         get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-    override val returnType: Type
+    override konst returnType: Type
         get() = signature.returnType
-    override val returnKotlinType: KotlinType?
+    override konst returnKotlinType: KotlinType?
         get() = null
 
     override fun isStaticCall(): Boolean {
@@ -79,22 +79,22 @@ open class IrIntrinsicFunction(
         var offset = 0
         expression.dispatchReceiver?.let { genArg(it, codegen, offset++, data) }
         expression.extensionReceiver?.let { genArg(it, codegen, offset++, data) }
-        for ((i, valueParameter) in expression.symbol.owner.valueParameters.withIndex()) {
-            val argument = expression.getValueArgument(i)
+        for ((i, konstueParameter) in expression.symbol.owner.konstueParameters.withIndex()) {
+            konst argument = expression.getValueArgument(i)
             when {
                 argument != null ->
                     genArg(argument, codegen, i + offset, data)
-                valueParameter.isVararg -> {
+                konstueParameter.isVararg -> {
                     // TODO: is there an easier way to get the substituted type of an empty vararg argument?
-                    val arrayType = codegen.typeMapper.mapType(
-                        valueParameter.type.substitute(expression.symbol.owner.typeParameters, expression.typeArguments)
+                    konst arrayType = codegen.typeMapper.mapType(
+                        konstueParameter.type.substitute(expression.symbol.owner.typeParameters, expression.typeArguments)
                     )
                     StackValue.operation(arrayType) {
                         it.aconst(0)
                         it.newarray(AsmUtil.correctElementType(arrayType))
                     }.put(arrayType, codegen.mv)
                 }
-                else -> error("Unknown parameter ${valueParameter.name} in: ${expression.dump()}")
+                else -> error("Unknown parameter ${konstueParameter.name} in: ${expression.dump()}")
             }
         }
     }
@@ -103,7 +103,7 @@ open class IrIntrinsicFunction(
         codegen.gen(expression, argsTypes[index], expression.type, data)
     }
 
-    private val IrFunctionAccessExpression.typeArguments: List<IrType>
+    private konst IrFunctionAccessExpression.typeArguments: List<IrType>
         get() = (0 until typeArgumentsCount).map { getTypeArgument(it)!! }
 
     companion object {
@@ -145,8 +145,8 @@ open class IrIntrinsicFunction(
 }
 
 fun IrFunctionAccessExpression.argTypes(classCodegen: ClassCodegen): ArrayList<Type> {
-    val callee = symbol.owner
-    val signature = classCodegen.methodSignatureMapper.mapSignatureSkipGeneric(callee)
+    konst callee = symbol.owner
+    konst signature = classCodegen.methodSignatureMapper.mapSignatureSkipGeneric(callee)
     return arrayListOf<Type>().apply {
         if (dispatchReceiver != null) {
             add(classCodegen.typeMapper.mapClass(callee.parentAsClass))

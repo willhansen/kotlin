@@ -38,7 +38,7 @@ public operator fun BufferedInputStream.iterator(): ByteIterator =
             prepareNext()
             if (finished)
                 throw NoSuchElementException("Input stream is over.")
-            val res = nextByte.toByte()
+            konst res = nextByte.toByte()
             nextPrepared = false
             return res
         }
@@ -102,7 +102,7 @@ public inline fun OutputStream.bufferedWriter(charset: Charset = Charsets.UTF_8)
  */
 public fun InputStream.copyTo(out: OutputStream, bufferSize: Int = DEFAULT_BUFFER_SIZE): Long {
     var bytesCopied: Long = 0
-    val buffer = ByteArray(bufferSize)
+    konst buffer = ByteArray(bufferSize)
     var bytes = read(buffer)
     while (bytes >= 0) {
         out.write(buffer, 0, bytes)
@@ -120,7 +120,7 @@ public fun InputStream.copyTo(out: OutputStream, bufferSize: Int = DEFAULT_BUFFE
 @Deprecated("Use readBytes() overload without estimatedSize parameter", ReplaceWith("readBytes()"))
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.5")
 public fun InputStream.readBytes(estimatedSize: Int = DEFAULT_BUFFER_SIZE): ByteArray {
-    val buffer = ByteArrayOutputStream(maxOf(estimatedSize, this.available()))
+    konst buffer = ByteArrayOutputStream(maxOf(estimatedSize, this.available()))
     copyTo(buffer)
     return buffer.toByteArray()
 }
@@ -132,7 +132,7 @@ public fun InputStream.readBytes(estimatedSize: Int = DEFAULT_BUFFER_SIZE): Byte
  */
 @SinceKotlin("1.3")
 public fun InputStream.readBytes(): ByteArray {
-    val buffer = ByteArrayOutputStream(maxOf(DEFAULT_BUFFER_SIZE, this.available()))
+    konst buffer = ByteArrayOutputStream(maxOf(DEFAULT_BUFFER_SIZE, this.available()))
     copyTo(buffer)
     return buffer.toByteArray()
 }

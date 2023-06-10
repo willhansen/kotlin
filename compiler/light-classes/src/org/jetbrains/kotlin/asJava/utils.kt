@@ -15,27 +15,27 @@ import org.jetbrains.kotlin.resolve.constants.ConstantValue
 import org.jetbrains.kotlin.types.TypeUtils
 
 fun computeExpression(expression: PsiElement): Any? {
-    fun evalConstantValue(constantValue: ConstantValue<*>): Any? =
+    fun ekonstConstantValue(constantValue: ConstantValue<*>): Any? =
         if (constantValue is ArrayValue) {
-            val items = constantValue.value.map { evalConstantValue(it) }
+            konst items = constantValue.konstue.map { ekonstConstantValue(it) }
             items.singleOrNull() ?: items
         } else {
-            constantValue.value
+            constantValue.konstue
         }
 
-    val expressionToCompute = when (expression) {
+    konst expressionToCompute = when (expression) {
         is KtLightElementBase -> expression.kotlinOrigin as? KtExpression ?: return null
         else -> return null
     }
 
-    val generationSupport = LightClassGenerationSupport.getInstance(expressionToCompute.project)
-    val evaluator = generationSupport.createConstantEvaluator(expressionToCompute)
+    konst generationSupport = LightClassGenerationSupport.getInstance(expressionToCompute.project)
+    konst ekonstuator = generationSupport.createConstantEkonstuator(expressionToCompute)
 
-    val constant = runReadAction {
-        val evaluatorTrace = DelegatingBindingTrace(generationSupport.analyze(expressionToCompute), "Evaluating annotation argument")
-        evaluator.evaluateExpression(expressionToCompute, evaluatorTrace)
+    konst constant = runReadAction {
+        konst ekonstuatorTrace = DelegatingBindingTrace(generationSupport.analyze(expressionToCompute), "Ekonstuating annotation argument")
+        ekonstuator.ekonstuateExpression(expressionToCompute, ekonstuatorTrace)
     } ?: return null
 
     if (constant.isError) return null
-    return evalConstantValue(constant.toConstantValue(TypeUtils.NO_EXPECTED_TYPE))
+    return ekonstConstantValue(constant.toConstantValue(TypeUtils.NO_EXPECTED_TYPE))
 }

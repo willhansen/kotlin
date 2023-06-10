@@ -25,24 +25,24 @@ import kotlin.collections.LinkedHashSet
 import kotlin.math.max
 
 abstract class CoveringTryCatchNodeProcessor(parameterSize: Int) {
-    val tryBlocksMetaInfo: IntervalMetaInfo<TryCatchBlockNodeInfo> = IntervalMetaInfo(this)
-    val localVarsMetaInfo: IntervalMetaInfo<LocalVarNodeWrapper> = IntervalMetaInfo(this)
+    konst tryBlocksMetaInfo: InterkonstMetaInfo<TryCatchBlockNodeInfo> = InterkonstMetaInfo(this)
+    konst localVarsMetaInfo: InterkonstMetaInfo<LocalVarNodeWrapper> = InterkonstMetaInfo(this)
 
     var nextFreeLocalIndex: Int = parameterSize
         private set
 
     fun getStartNodes(label: LabelNode): List<TryCatchBlockNodeInfo> {
-        return tryBlocksMetaInfo.intervalStarts.get(label)
+        return tryBlocksMetaInfo.interkonstStarts.get(label)
     }
 
     fun getEndNodes(label: LabelNode): List<TryCatchBlockNodeInfo> {
-        return tryBlocksMetaInfo.intervalEnds.get(label)
+        return tryBlocksMetaInfo.interkonstEnds.get(label)
     }
 
     open fun processInstruction(curInstr: AbstractInsnNode, directOrder: Boolean) {
         if (curInstr is VarInsnNode || curInstr is IincInsnNode) {
-            val argSize = getLoadStoreArgSize(curInstr.opcode)
-            val varIndex = if (curInstr is VarInsnNode) curInstr.`var` else (curInstr as IincInsnNode).`var`
+            konst argSize = getLoadStoreArgSize(curInstr.opcode)
+            konst varIndex = if (curInstr is VarInsnNode) curInstr.`var` else (curInstr as IincInsnNode).`var`
             nextFreeLocalIndex = max(nextFreeLocalIndex, varIndex + argSize)
         }
 
@@ -54,8 +54,8 @@ abstract class CoveringTryCatchNodeProcessor(parameterSize: Int) {
 
     abstract fun instructionIndex(inst: AbstractInsnNode): Int
 
-    fun sortTryCatchBlocks(intervals: List<TryCatchBlockNodeInfo>): List<TryCatchBlockNodeInfo> {
-        val comp = Comparator { t1: TryCatchBlockNodeInfo, t2: TryCatchBlockNodeInfo ->
+    fun sortTryCatchBlocks(interkonsts: List<TryCatchBlockNodeInfo>): List<TryCatchBlockNodeInfo> {
+        konst comp = Comparator { t1: TryCatchBlockNodeInfo, t2: TryCatchBlockNodeInfo ->
             var result = instructionIndex(t1.handler) - instructionIndex(t2.handler)
             if (result == 0) {
                 result = instructionIndex(t1.startLabel) - instructionIndex(t2.startLabel)
@@ -67,97 +67,97 @@ abstract class CoveringTryCatchNodeProcessor(parameterSize: Int) {
             result
         }
 
-        Collections.sort(intervals, comp)
-        return intervals
+        Collections.sort(interkonsts, comp)
+        return interkonsts
     }
 
     fun substituteTryBlockNodes(node: MethodNode) {
         node.tryCatchBlocks.clear()
-        sortTryCatchBlocks(tryBlocksMetaInfo.allIntervals)
-        for (info in tryBlocksMetaInfo.getMeaningfulIntervals()) {
+        sortTryCatchBlocks(tryBlocksMetaInfo.allInterkonsts)
+        for (info in tryBlocksMetaInfo.getMeaningfulInterkonsts()) {
             node.tryCatchBlocks.add(info.node)
         }
     }
 
     fun substituteLocalVarTable(node: MethodNode) {
         node.localVariables.clear()
-        for (info in localVarsMetaInfo.getMeaningfulIntervals()) {
+        for (info in localVarsMetaInfo.getMeaningfulInterkonsts()) {
             node.localVariables.add(info.node)
         }
     }
 }
 
-class IntervalMetaInfo<T : SplittableInterval<T>>(private val processor: CoveringTryCatchNodeProcessor) {
-    val intervalStarts = LinkedListMultimap.create<LabelNode, T>()
-    val intervalEnds = LinkedListMultimap.create<LabelNode, T>()
-    val allIntervals: ArrayList<T> = arrayListOf()
-    val currentIntervals: MutableSet<T> = linkedSetOf()
+class InterkonstMetaInfo<T : SplittableInterkonst<T>>(private konst processor: CoveringTryCatchNodeProcessor) {
+    konst interkonstStarts = LinkedListMultimap.create<LabelNode, T>()
+    konst interkonstEnds = LinkedListMultimap.create<LabelNode, T>()
+    konst allInterkonsts: ArrayList<T> = arrayListOf()
+    konst currentInterkonsts: MutableSet<T> = linkedSetOf()
 
-    fun addNewInterval(newInfo: T) {
+    fun addNewInterkonst(newInfo: T) {
         newInfo.verify(processor)
-        intervalStarts.put(newInfo.startLabel, newInfo)
-        intervalEnds.put(newInfo.endLabel, newInfo)
-        allIntervals.add(newInfo)
+        interkonstStarts.put(newInfo.startLabel, newInfo)
+        interkonstEnds.put(newInfo.endLabel, newInfo)
+        allInterkonsts.add(newInfo)
     }
 
     private fun remapStartLabel(oldStart: LabelNode, remapped: T) {
         remapped.verify(processor)
-        intervalStarts.remove(oldStart, remapped)
-        intervalStarts.put(remapped.startLabel, remapped)
+        interkonstStarts.remove(oldStart, remapped)
+        interkonstStarts.put(remapped.startLabel, remapped)
     }
 
     private fun remapEndLabel(oldEnd: LabelNode, remapped: T) {
         remapped.verify(processor)
-        intervalEnds.remove(oldEnd, remapped)
-        intervalEnds.put(remapped.endLabel, remapped)
+        interkonstEnds.remove(oldEnd, remapped)
+        interkonstEnds.put(remapped.endLabel, remapped)
     }
 
-    fun splitCurrentIntervals(by: Interval, keepStart: Boolean): List<SplitPair<T>> {
-        return currentIntervals.map { split(it, by, keepStart) }
+    fun splitCurrentInterkonsts(by: Interkonst, keepStart: Boolean): List<SplitPair<T>> {
+        return currentInterkonsts.map { split(it, by, keepStart) }
     }
 
-    fun splitAndRemoveCurrentIntervals(by: Interval, keepStart: Boolean) {
-        currentIntervals.toList().forEach { splitAndRemoveIntervalFromCurrents(it, by, keepStart) }
+    fun splitAndRemoveCurrentInterkonsts(by: Interkonst, keepStart: Boolean) {
+        currentInterkonsts.toList().forEach { splitAndRemoveInterkonstFromCurrents(it, by, keepStart) }
     }
 
     fun processCurrent(curIns: LabelNode, directOrder: Boolean) {
-        getInterval(curIns, directOrder).forEach {
-            val added = currentIntervals.add(it)
-            assert(added) { "Wrong interval structure: $curIns, $it" }
+        getInterkonst(curIns, directOrder).forEach {
+            konst added = currentInterkonsts.add(it)
+            assert(added) { "Wrong interkonst structure: $curIns, $it" }
         }
 
-        getInterval(curIns, !directOrder).forEach {
-            val removed = currentIntervals.remove(it)
-            assert(removed) { "Wrong interval structure: $curIns, $it" }
+        getInterkonst(curIns, !directOrder).forEach {
+            konst removed = currentInterkonsts.remove(it)
+            assert(removed) { "Wrong interkonst structure: $curIns, $it" }
         }
     }
 
-    fun split(interval: T, by: Interval, keepStart: Boolean): SplitPair<T> {
-        val split = interval.split(by, keepStart)
+    fun split(interkonst: T, by: Interkonst, keepStart: Boolean): SplitPair<T> {
+        konst split = interkonst.split(by, keepStart)
         if (!keepStart) {
             remapStartLabel(split.newPart.startLabel, split.patchedPart)
         } else {
             remapEndLabel(split.newPart.endLabel, split.patchedPart)
         }
-        addNewInterval(split.newPart)
+        addNewInterkonst(split.newPart)
         return split
     }
 
-    fun splitAndRemoveIntervalFromCurrents(interval: T, by: Interval, keepStart: Boolean): SplitPair<T> {
-        val splitPair = split(interval, by, keepStart)
-        val removed = currentIntervals.remove(splitPair.patchedPart)
-        assert(removed) { "Wrong interval structure: $splitPair" }
+    fun splitAndRemoveInterkonstFromCurrents(interkonst: T, by: Interkonst, keepStart: Boolean): SplitPair<T> {
+        konst splitPair = split(interkonst, by, keepStart)
+        konst removed = currentInterkonsts.remove(splitPair.patchedPart)
+        assert(removed) { "Wrong interkonst structure: $splitPair" }
         return splitPair
     }
 
-    private fun getInterval(curIns: LabelNode, isOpen: Boolean) =
-        if (isOpen) intervalStarts.get(curIns) else intervalEnds.get(curIns)
+    private fun getInterkonst(curIns: LabelNode, isOpen: Boolean) =
+        if (isOpen) interkonstStarts.get(curIns) else interkonstEnds.get(curIns)
 }
 
-fun TryCatchBlockNode.isMeaningless() = SimpleInterval(start, end).isMeaningless()
+fun TryCatchBlockNode.isMeaningless() = SimpleInterkonst(start, end).isMeaningless()
 
-fun Interval.isMeaningless(): Boolean {
-    val start = this.startLabel
+fun Interkonst.isMeaningless(): Boolean {
+    konst start = this.startLabel
     var end: AbstractInsnNode = this.endLabel
     while (end != start && !end.isMeaningful) {
         end = end.previous
@@ -165,43 +165,43 @@ fun Interval.isMeaningless(): Boolean {
     return start == end
 }
 
-fun <T : SplittableInterval<T>> IntervalMetaInfo<T>.getMeaningfulIntervals(): List<T> {
-    return allIntervals.filterNot { it.isMeaningless() }
+fun <T : SplittableInterkonst<T>> InterkonstMetaInfo<T>.getMeaningfulInterkonsts(): List<T> {
+    return allInterkonsts.filterNot { it.isMeaningless() }
 }
 
-class DefaultProcessor(val node: MethodNode, parameterSize: Int) : CoveringTryCatchNodeProcessor(parameterSize) {
+class DefaultProcessor(konst node: MethodNode, parameterSize: Int) : CoveringTryCatchNodeProcessor(parameterSize) {
     init {
         node.tryCatchBlocks.forEach {
-            tryBlocksMetaInfo.addNewInterval(TryCatchBlockNodeInfo(it, false))
+            tryBlocksMetaInfo.addNewInterkonst(TryCatchBlockNodeInfo(it, false))
         }
         node.localVariables.forEach {
-            localVarsMetaInfo.addNewInterval(LocalVarNodeWrapper(it))
+            localVarsMetaInfo.addNewInterkonst(LocalVarNodeWrapper(it))
         }
     }
 
     override fun instructionIndex(inst: AbstractInsnNode): Int = node.instructions.indexOf(inst)
 }
 
-class LocalVarNodeWrapper(val node: LocalVariableNode) : Interval, SplittableInterval<LocalVarNodeWrapper> {
-    override val startLabel: LabelNode
+class LocalVarNodeWrapper(konst node: LocalVariableNode) : Interkonst, SplittableInterkonst<LocalVarNodeWrapper> {
+    override konst startLabel: LabelNode
         get() = node.start
-    override val endLabel: LabelNode
+    override konst endLabel: LabelNode
         get() = node.end
 
-    override fun split(splitBy: Interval, keepStart: Boolean): SplitPair<LocalVarNodeWrapper> {
-        val newPartInterval = if (keepStart) {
-            val oldEnd = endLabel
+    override fun split(splitBy: Interkonst, keepStart: Boolean): SplitPair<LocalVarNodeWrapper> {
+        konst newPartInterkonst = if (keepStart) {
+            konst oldEnd = endLabel
             node.end = splitBy.startLabel
             Pair(splitBy.endLabel, oldEnd)
         } else {
-            val oldStart = startLabel
+            konst oldStart = startLabel
             node.start = splitBy.endLabel
             Pair(oldStart, splitBy.startLabel)
         }
 
         return SplitPair(
             this, LocalVarNodeWrapper(
-                LocalVariableNode(node.name, node.desc, node.signature, newPartInterval.first, newPartInterval.second, node.index)
+                LocalVariableNode(node.name, node.desc, node.signature, newPartInterkonst.first, newPartInterkonst.second, node.index)
             )
         )
     }

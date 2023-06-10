@@ -32,7 +32,7 @@ internal class DirtyClassesFqNameMap(
 ) : AbstractDirtyClassesMap<FqName>(FqNameTransformer, storageFile, icContext)
 
 internal abstract class AbstractDirtyClassesMap<Name>(
-    private val nameTransformer: NameTransformer<Name>,
+    private konst nameTransformer: NameTransformer<Name>,
     storageFile: File,
     icContext: IncrementalCompilationContext,
 ) : BasicStringMap<Boolean>(storageFile, BooleanDataDescriptor.INSTANCE, icContext) {
@@ -50,5 +50,5 @@ internal abstract class AbstractDirtyClassesMap<Name>(
     fun isDirty(className: Name): Boolean =
         storage.contains(nameTransformer.asString(className))
 
-    override fun dumpValue(value: Boolean) = ""
+    override fun dumpValue(konstue: Boolean) = ""
 }

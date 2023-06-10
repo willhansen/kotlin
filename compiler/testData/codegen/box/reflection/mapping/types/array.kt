@@ -21,11 +21,11 @@ fun box(): String {
     assertEquals(Array<Int>::class.java, ::foo.parameters[1].type.javaType)
     assertEquals(Array<Array<Any>>::class.java, ::foo.parameters[2].type.javaType)
 
-    val g = ::bar.returnType.javaType
+    konst g = ::bar.returnType.javaType
     if (g !is GenericArrayType || g.genericComponentType !is ParameterizedType)
         return "Fail: should be array of parameterized type, but was $g (${g.javaClass})"
 
-    val h = A<String>::baz.returnType.javaType
+    konst h = A<String>::baz.returnType.javaType
     if (h !is GenericArrayType || h.genericComponentType !is TypeVariable<*>)
         return "Fail: should be array of type variable, but was $h (${h.javaClass})"
 

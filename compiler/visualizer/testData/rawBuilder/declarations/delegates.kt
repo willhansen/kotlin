@@ -6,12 +6,12 @@ import kotlin.reflect.KProperty
 //            │      │ fun (Int).plus(Int): Int
 //  Int       │      │ │ Int
 //  │         │      │ │ │
-val x: Int by lazy { 1 + 2 }
+konst x: Int by lazy { 1 + 2 }
 
 //  properties/ReadWriteProperty<Any?, Int>
 //  │                  properties/ReadWriteProperty<Any?, Int>
 //  │                  │
-val delegate = object: ReadWriteProperty<Any?, Int> {
+konst delegate = object: ReadWriteProperty<Any?, Int> {
 //                                                 reflect/KProperty<*>
 //                                                 │                  Int
 //                                                 │                  │ Int
@@ -19,13 +19,13 @@ val delegate = object: ReadWriteProperty<Any?, Int> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): Int = 1
 //                                                 reflect/KProperty<*>
 //                                                 │
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: Int) {}
+    override fun setValue(thisRef: Any?, property: KProperty<*>, konstue: Int) {}
 }
 
-//  Int      val delegate: properties/ReadWriteProperty<Any?, Int>
+//  Int      konst delegate: properties/ReadWriteProperty<Any?, Int>
 //  │        │
-val value by delegate
+konst konstue by delegate
 
-//  Int         val delegate: properties/ReadWriteProperty<Any?, Int>
+//  Int         konst delegate: properties/ReadWriteProperty<Any?, Int>
 //  │           │
 var variable by delegate

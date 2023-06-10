@@ -5,6 +5,6 @@
 fun <E : Enum<E>> createMap(enumClass: Class<E>) {}
 
 fun reproduce() {
-    val enumClass: Class<Enum<*>> = "any" as Class<Enum<*>>
+    konst enumClass: Class<Enum<*>> = "any" as Class<Enum<*>>
     createMap(enumClass)
 }

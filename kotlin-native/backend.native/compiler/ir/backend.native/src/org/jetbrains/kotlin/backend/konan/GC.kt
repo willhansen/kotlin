@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.backend.konan
 
-enum class GC(val shortcut: String? = null) {
+enum class GC(konst shortcut: String? = null) {
     NOOP,
     STOP_THE_WORLD_MARK_AND_SWEEP("stwms"),
     PARALLEL_MARK_CONCURRENT_SWEEP("pmcs"),

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.internal
 import java.io.File
 
 fun File.ensureParentDirsCreated() {
-    val parentFile = parentFile
+    konst parentFile = parentFile
     if (!parentFile.exists()) {
         check(parentFile.mkdirs()) {
             "Cannot create parent directories for $this"

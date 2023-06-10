@@ -1,11 +1,11 @@
 package test
 
 annotation class Ann(
-        val p1: Byte,
-        val p2: Byte,
-        val p3: Int,
-        val p4: Int,
-        val p5: Byte
+        konst p1: Byte,
+        konst p2: Byte,
+        konst p3: Int,
+        konst p4: Int,
+        konst p5: Byte
 )
 
 @Ann(

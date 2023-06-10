@@ -12,7 +12,7 @@ class B<T>(data: T) : A<T>(data)
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val tryVal: B<String> =
+    konst tryVal: B<String> =
     <!TYPE_MISMATCH, TYPE_MISMATCH!>try {
         throwExceptionA(false)
         A("")
@@ -26,7 +26,7 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val tryVal: A<String> =
+    konst tryVal: A<String> =
     <!TYPE_MISMATCH, TYPE_MISMATCH!>try {
         throwExceptionA(false)
         A("")
@@ -41,7 +41,7 @@ fun case2() {
  * ISSUES: KT-35494
  */
 fun case3() {
-    val tryVal: A<Int> =
+    konst tryVal: A<Int> =
     <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>try {
         throwExceptionA(false)
         A(2)

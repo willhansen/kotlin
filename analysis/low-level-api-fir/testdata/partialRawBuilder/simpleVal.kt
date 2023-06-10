@@ -7,6 +7,6 @@
 
 package test
 
-val bar: Int = 10
+konst bar: Int = 10
 
-val foo: Int = 0
+konst foo: Int = 0

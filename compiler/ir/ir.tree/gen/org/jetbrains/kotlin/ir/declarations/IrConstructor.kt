@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrConstructor : IrFunction() {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: ClassConstructorDescriptor
+    abstract override konst descriptor: ClassConstructorDescriptor
 
-    abstract override val symbol: IrConstructorSymbol
+    abstract override konst symbol: IrConstructorSymbol
 
     abstract var isPrimary: Boolean
 

@@ -5,8 +5,8 @@ public enum class E {
     public final static field Y: E
     inner class E/Companion
     protected method <init>(@java.lang.Synthetic p0: java.lang.String, @java.lang.Synthetic p1: int, @org.jetbrains.annotations.NotNull p2: java.lang.String): void
-    public static method valueOf(p0: java.lang.String): E
-    public static method values(): E[]
+    public static method konstueOf(p0: java.lang.String): E
+    public static method konstues(): E[]
 }
 
 @kotlin.Metadata
@@ -30,8 +30,8 @@ public enum class F {
     public final static field Y: F
     inner class F/Companion
     protected method <init>(@java.lang.Synthetic p0: java.lang.String, @java.lang.Synthetic p1: int, @org.jetbrains.annotations.NotNull p2: java.lang.String): void
-    public static method valueOf(p0: java.lang.String): F
-    public static method values(): F[]
+    public static method konstueOf(p0: java.lang.String): F
+    public static method konstues(): F[]
 }
 
 @kotlin.Metadata

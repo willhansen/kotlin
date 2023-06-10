@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirImportImpl(
-    override val source: KtSourceElement?,
-    override val importedFqName: FqName?,
-    override val isAllUnder: Boolean,
-    override val aliasName: Name?,
-    override val aliasSource: KtSourceElement?,
+    override konst source: KtSourceElement?,
+    override konst importedFqName: FqName?,
+    override konst isAllUnder: Boolean,
+    override konst aliasName: Name?,
+    override konst aliasSource: KtSourceElement?,
 ) : FirPureAbstractElement(), FirImport {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

@@ -1,11 +1,11 @@
-class First(val member: Int)
+class First(konst member: Int)
 
 class Second {
-    val list = listOf(1, 2, 3, "")
+    konst list = listOf(1, 2, 3, "")
 
-    val data = First(42)
+    konst data = First(42)
 
-    val test = with(data) {
+    konst test = with(data) {
         list.filterIsInstance<Int>().filter {
             it == member
         }

@@ -26,15 +26,15 @@ import org.jetbrains.kotlin.types.model.TypeParameterMarker
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 interface BaseExpressionCodegen {
-    val frameMap: FrameMapBase<*>
+    konst frameMap: FrameMapBase<*>
 
-    val visitor: InstructionAdapter
+    konst visitor: InstructionAdapter
 
-    val inlineNameGenerator: NameGenerator
+    konst inlineNameGenerator: NameGenerator
 
-    val typeSystem: TypeSystemCommonBackendContext
+    konst typeSystem: TypeSystemCommonBackendContext
 
-    val lastLineNumber: Int
+    konst lastLineNumber: Int
 
     fun propagateChildReifiedTypeParametersUsages(reifiedTypeParametersUsages: ReifiedTypeParametersUsages)
 
@@ -44,7 +44,7 @@ interface BaseExpressionCodegen {
 }
 
 fun BaseExpressionCodegen.putReifiedOperationMarkerIfTypeIsReifiedParameter(type: KotlinTypeMarker, operationKind: OperationKind): Boolean {
-    val (typeParameter, second) = typeSystem.extractReificationArgument(type) ?: return false
+    konst (typeParameter, second) = typeSystem.extractReificationArgument(type) ?: return false
     consumeReifiedOperationMarker(typeParameter)
     putReifiedOperationMarker(operationKind, second, visitor)
     return true

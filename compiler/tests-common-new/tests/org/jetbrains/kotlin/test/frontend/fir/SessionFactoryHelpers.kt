@@ -24,7 +24,7 @@ fun getTransitivesAndFriendsPaths(module: TestModule, testServices: TestServices
 }
 
 fun getTransitivesAndFriends(module: TestModule, testServices: TestServices): Pair<List<File>, List<File>> {
-    val transitiveLibraries = getKlibDependencies(module, testServices, DependencyRelation.RegularDependency)
-    val friendLibraries = getKlibDependencies(module, testServices, DependencyRelation.FriendDependency)
+    konst transitiveLibraries = getKlibDependencies(module, testServices, DependencyRelation.RegularDependency)
+    konst friendLibraries = getKlibDependencies(module, testServices, DependencyRelation.FriendDependency)
     return transitiveLibraries to friendLibraries
 }

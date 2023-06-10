@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.commonizer.utils.InlineSourceBuilder
 class HierarchicalCInteropCallableAnnotationCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test ObjCMethod annotation`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "b", "c", "d", "(a, b)", "(c, d)", "(a, b, c, d)") {
                 objCAnnotations()
@@ -77,7 +77,7 @@ class HierarchicalCInteropCallableAnnotationCommonizationTest : AbstractInlineSo
     }
 
     fun `test only ObjCCallable annotation`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             registerDependency("a", "b", "(a, b)") {
                 objCAnnotations()
@@ -110,7 +110,7 @@ class HierarchicalCInteropCallableAnnotationCommonizationTest : AbstractInlineSo
     }
 
     fun `test multiple objC annotations`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             registerDependency("a", "b", "b", "c", "d", "(a, b)", "(c, d)", "(a, b, c, d)") {
                 objCAnnotations()
@@ -175,7 +175,7 @@ class HierarchicalCInteropCallableAnnotationCommonizationTest : AbstractInlineSo
     }
 
     fun `test single platform not marked as objc`() {
-        val result = commonize {
+        konst result = commonize {
             registerDependency("a", "b", "c", "d", "(a, b)", "(c, d)") { objCAnnotations() }
             outputTarget("(a, b)", "(c, d)")
 
@@ -231,9 +231,9 @@ private fun InlineSourceBuilder.ModuleBuilder.objCAnnotations() {
     source(
         """
         package kotlinx.cinterop
-        annotation class ObjCMethod(val x: Int)
-        annotation class ObjCConstructor(val x: Int)
-        annotation class ObjCFactory(val x: Int)
+        annotation class ObjCMethod(konst x: Int)
+        annotation class ObjCConstructor(konst x: Int)
+        annotation class ObjCFactory(konst x: Int)
         """.trimIndent(),
         "kotlinx.kt"
     )

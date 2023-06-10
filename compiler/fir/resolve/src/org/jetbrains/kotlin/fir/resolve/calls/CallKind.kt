@@ -109,7 +109,7 @@ sealed class CallKind(vararg resolutionSequence: ResolutionStage) {
 
     internal class CustomForIde(vararg resolutionSequence: ResolutionStage) : CallKind(*resolutionSequence)
 
-    val resolutionSequence: List<ResolutionStage> = resolutionSequence.toList()
+    konst resolutionSequence: List<ResolutionStage> = resolutionSequence.toList()
 
     final override fun toString(): String {
         return this::class.simpleName ?: super.toString()
@@ -128,10 +128,10 @@ class ResolutionSequenceBuilder(
     var mapTypeArguments: Boolean = false,
     var resolveCallableReferenceArguments: Boolean = false,
     var checkCallableReferenceExpectedType: Boolean = false,
-    val checkContextReceivers: Boolean = false,
+    konst checkContextReceivers: Boolean = false,
 ) {
     fun build(): CallKind {
-        val stages = mutableListOf<ResolutionStage>().apply {
+        konst stages = mutableListOf<ResolutionStage>().apply {
             if (checkVisibility) add(CheckVisibility)
             if (discriminateSynthetics) add(DiscriminateSynthetics)
             if (checkArguments) add(MapArguments)

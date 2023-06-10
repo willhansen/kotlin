@@ -41,7 +41,7 @@ import static org.jetbrains.kotlin.descriptors.FindClassInModuleKt.findClassAcro
 public final class JsAstUtils {
     private static final JsNameRef DEFINE_PROPERTY = pureFqn("defineProperty", null);
 
-    private static final JsNameRef VALUE = new JsNameRef("value");
+    private static final JsNameRef VALUE = new JsNameRef("konstue");
     private static final JsPropertyInitializer WRITABLE = new JsPropertyInitializer(pureFqn("writable", null), new JsBooleanLiteral(true));
     private static final JsPropertyInitializer ENUMERABLE = new JsPropertyInitializer(pureFqn("enumerable", null),
                                                                                       new JsBooleanLiteral(false));
@@ -150,7 +150,7 @@ public final class JsAstUtils {
 
         if (!(binary.getArg2() instanceof JsIntLiteral)) return null;
         JsIntLiteral arg2 = (JsIntLiteral) binary.getArg2();
-        return arg2.value == 0 ? binary.getArg1() : null;
+        return arg2.konstue == 0 ? binary.getArg1() : null;
     }
 
     @NotNull
@@ -173,18 +173,18 @@ public final class JsAstUtils {
         return invokeKotlinFunction(Namer.PRIMITIVE_COMPARE_TO, left, right);
     }
 
-    public static JsExpression newLong(long value) {
+    public static JsExpression newLong(long konstue) {
         JsExpression result;
-        if (value < Integer.MIN_VALUE || value > Integer.MAX_VALUE) {
-            if (value == Long.MAX_VALUE) {
+        if (konstue < Integer.MIN_VALUE || konstue > Integer.MAX_VALUE) {
+            if (konstue == Long.MAX_VALUE) {
                 return new JsNameRef(Namer.LONG_MAX_VALUE, Namer.kotlinLong());
             }
-            else if (value == Long.MIN_VALUE) {
+            else if (konstue == Long.MIN_VALUE) {
                 return new JsNameRef(Namer.LONG_MIN_VALUE, Namer.kotlinLong());
             }
             else {
-                int low = (int) value;
-                int high = (int) (value >> 32);
+                int low = (int) konstue;
+                int high = (int) (konstue >> 32);
                 List<JsExpression> args = new SmartList<>();
                 args.add(new JsIntLiteral(low));
                 args.add(new JsIntLiteral(high));
@@ -192,17 +192,17 @@ public final class JsAstUtils {
             }
         }
         else {
-            if (value == 0) {
+            if (konstue == 0) {
                 result = new JsNameRef(Namer.LONG_ZERO, Namer.kotlinLong());
             }
-            else if (value == 1) {
+            else if (konstue == 1) {
                 result = new JsNameRef(Namer.LONG_ONE, Namer.kotlinLong());
             }
-            else if (value == -1) {
+            else if (konstue == -1) {
                 result = new JsNameRef(Namer.LONG_NEG_ONE, Namer.kotlinLong());
             }
             else {
-                result = longFromInt(new JsIntLiteral((int) value));
+                result = longFromInt(new JsIntLiteral((int) konstue));
             }
         }
         MetadataProperties.setSideEffects(result, SideEffectKind.PURE);
@@ -225,21 +225,21 @@ public final class JsAstUtils {
     }
 
     @NotNull
-    public static JsExpression byteToUByte(byte value, @NotNull TranslationContext context) {
+    public static JsExpression byteToUByte(byte konstue, @NotNull TranslationContext context) {
         // replace with external builder
-        return toUnsignedNumber(new JsIntLiteral(value), context, StandardNames.FqNames.uByte);
+        return toUnsignedNumber(new JsIntLiteral(konstue), context, StandardNames.FqNames.uByte);
     }
 
     @NotNull
-    public static JsExpression shortToUShort(short value, @NotNull TranslationContext context) {
+    public static JsExpression shortToUShort(short konstue, @NotNull TranslationContext context) {
         // replace with external builder
-        return toUnsignedNumber(new JsIntLiteral(value), context, StandardNames.FqNames.uShort);
+        return toUnsignedNumber(new JsIntLiteral(konstue), context, StandardNames.FqNames.uShort);
     }
 
     @NotNull
-    public static JsExpression intToUInt(int value, @NotNull TranslationContext context) {
+    public static JsExpression intToUInt(int konstue, @NotNull TranslationContext context) {
         // replace with external builder
-        return toUnsignedNumber(new JsIntLiteral(value), context, StandardNames.FqNames.uInt);
+        return toUnsignedNumber(new JsIntLiteral(konstue), context, StandardNames.FqNames.uInt);
     }
 
     @NotNull
@@ -477,14 +477,14 @@ public final class JsAstUtils {
     public static JsInvocation defineProperty(
             @NotNull JsExpression receiver,
             @NotNull String name,
-            @NotNull JsExpression value
+            @NotNull JsExpression konstue
     ) {
-        return new JsInvocation(DEFINE_PROPERTY.deepCopy(), receiver, new JsStringLiteral(name), value);
+        return new JsInvocation(DEFINE_PROPERTY.deepCopy(), receiver, new JsStringLiteral(name), konstue);
     }
 
     @NotNull
-    public static JsStatement defineSimpleProperty(@NotNull JsName name, @NotNull JsExpression value, @Nullable SourceElement source) {
-        JsExpression assignment = assignment(new JsNameRef(name, new JsThisRef()), value);
+    public static JsStatement defineSimpleProperty(@NotNull JsName name, @NotNull JsExpression konstue, @Nullable SourceElement source) {
+        JsExpression assignment = assignment(new JsNameRef(name, new JsThisRef()), konstue);
         if (source != null) {
             assignment.setSource(PsiSourceElementKt.getPsi(source));
         }
@@ -492,9 +492,9 @@ public final class JsAstUtils {
     }
 
     @NotNull
-    public static JsObjectLiteral createDataDescriptor(@NotNull JsExpression value, boolean writable, boolean enumerable) {
+    public static JsObjectLiteral createDataDescriptor(@NotNull JsExpression konstue, boolean writable, boolean enumerable) {
         JsObjectLiteral dataDescriptor = new JsObjectLiteral();
-        dataDescriptor.getPropertyInitializers().add(new JsPropertyInitializer(VALUE.deepCopy(), value));
+        dataDescriptor.getPropertyInitializers().add(new JsPropertyInitializer(VALUE.deepCopy(), konstue));
         if (writable) {
             dataDescriptor.getPropertyInitializers().add(WRITABLE.deepCopy());
         }
@@ -505,8 +505,8 @@ public final class JsAstUtils {
     }
 
     @NotNull
-    public static JsObjectLiteral wrapValue(@NotNull JsExpression label, @NotNull JsExpression value) {
-        return new JsObjectLiteral(Collections.singletonList(new JsPropertyInitializer(label, value)));
+    public static JsObjectLiteral wrapValue(@NotNull JsExpression label, @NotNull JsExpression konstue) {
+        return new JsObjectLiteral(Collections.singletonList(new JsPropertyInitializer(label, konstue)));
     }
 
     @NotNull

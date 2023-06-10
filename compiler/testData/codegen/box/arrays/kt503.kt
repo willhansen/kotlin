@@ -10,7 +10,7 @@ fun iarr(vararg a : Int) = a
 fun <T> array(vararg a : T) = a
 
 fun box() : String {
-    val tests = array<IntArray>(
+    konst tests = array<IntArray>(
         iarr(6, 5, 4, 3, 2, 1),
         iarr(1, 2),
         iarr(1, 2, 3),

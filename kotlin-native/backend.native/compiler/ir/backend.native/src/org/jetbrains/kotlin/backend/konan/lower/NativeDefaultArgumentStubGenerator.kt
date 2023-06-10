@@ -22,7 +22,7 @@ internal class NativeDefaultArgumentStubGenerator(context: Context) : DefaultArg
             parameter: IrValueParameter,
             default: IrExpression
     ): IrValueDeclaration {
-        val value = irIfThenElse(parameter.type, irNotEquals(defaultFlag, irInt(0)), default, irGet(parameter))
-        return createTmpVariable(value, nameHint = parameter.name.asString())
+        konst konstue = irIfThenElse(parameter.type, irNotEquals(defaultFlag, irInt(0)), default, irGet(parameter))
+        return createTmpVariable(konstue, nameHint = parameter.name.asString())
     }
 }

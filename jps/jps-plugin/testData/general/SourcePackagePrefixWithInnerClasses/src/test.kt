@@ -1,3 +1,3 @@
 package xxx
 
-val test = JavaWithInner.TextRenderer().method()
+konst test = JavaWithInner.TextRenderer().method()

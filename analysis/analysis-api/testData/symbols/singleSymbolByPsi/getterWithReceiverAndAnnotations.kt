@@ -9,5 +9,5 @@ annotation class ReceiverTypeAnnotation
 
 @property:PropertyAnnotation
 @get:GetAnnotation
-val @receiver:ReceiverAnnotation @ReceiverTypeAnnotation Long.x: Int
+konst @receiver:ReceiverAnnotation @ReceiverTypeAnnotation Long.x: Int
     @ExplicitGetAnnotation ge<caret>t() = 1

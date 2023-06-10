@@ -13,15 +13,15 @@ interface Lombok {
      * @return Return a number representing the version of this API.
      * Always increasing if changed.
      */
-    val modelVersion: Long
+    konst modelVersion: Long
 
     /**
      * @return the module (Gradle project) name
      */
-    val name: String
+    konst name: String
 
     /**
      * Lombok configuration file
      */
-    val configurationFile: File?
+    konst configurationFile: File?
 }

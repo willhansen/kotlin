@@ -19,11 +19,11 @@ public actual interface KCallable<out R> : KAnnotatedElement {
      * - property accessors: the getter for a property named "foo" will have the name "<get-foo>",
      *   the setter, similarly, will have the name "<set-foo>".
      */
-    @kotlin.internal.IntrinsicConstEvaluation
-    public actual val name: String
+    @kotlin.internal.IntrinsicConstEkonstuation
+    public actual konst name: String
 
     /**
-     * The type of values returned by this callable.
+     * The type of konstues returned by this callable.
      */
-    public val returnType: KType
+    public konst returnType: KType
 }

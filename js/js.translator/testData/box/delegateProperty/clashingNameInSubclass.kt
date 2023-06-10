@@ -1,6 +1,6 @@
 // EXPECTED_REACHABLE_NODES: 1327
 fun box(): String {
-    val b = B()
+    konst b = B()
 
     var r = b.getFooA()
     if (r != "A.foo") return "fail1: $r"
@@ -18,11 +18,11 @@ fun box(): String {
 }
 
 open class A {
-    open val foo by lazy {
+    open konst foo by lazy {
         "A.foo"
     }
 
-    private val bar by lazy {
+    private konst bar by lazy {
         "A.bar"
     }
 
@@ -30,11 +30,11 @@ open class A {
 }
 
 class B : A() {
-    override val foo by lazy {
+    override konst foo by lazy {
         "B.foo"
     }
 
-    private val bar by lazy {
+    private konst bar by lazy {
         "B.bar"
     }
 

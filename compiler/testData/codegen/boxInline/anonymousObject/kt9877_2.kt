@@ -15,10 +15,10 @@ fun box(): String {
     var gene = "g1"
 
     inlineCall {
-        val value = 10.0
+        konst konstue = 10.0
         inlineCall {
             {
-                value
+                konstue
                 gene = "OK"
             }.let { it() }
         }

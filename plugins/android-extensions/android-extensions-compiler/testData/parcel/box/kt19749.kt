@@ -9,21 +9,21 @@ import android.os.Parcelable
 import java.io.Serializable
 
 class MHelp(var m1: String): Serializable {
-    val m2 = 9
+    konst m2 = 9
 }
 
 @Parcelize
-class M(val m: @RawValue MHelp) : Parcelable
+class M(konst m: @RawValue MHelp) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = M(MHelp("A"))
+    konst test = M(MHelp("A"))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<M>(parcel)
+    konst test2 = readFromParcel<M>(parcel)
 
     assert(test.m.m1 == test2.m.m1)
 }

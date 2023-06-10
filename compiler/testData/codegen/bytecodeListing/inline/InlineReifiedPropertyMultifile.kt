@@ -7,5 +7,5 @@ fun foo() {
     "".extProp
 }
 
-inline val <reified Z> Z.extProp: String
+inline konst <reified Z> Z.extProp: String
     get() = "123"

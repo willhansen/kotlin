@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirWhenExpression : FirExpression(), FirResolvable {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val calleeReference: FirReference
-    abstract val subject: FirExpression?
-    abstract val subjectVariable: FirVariable?
-    abstract val branches: List<FirWhenBranch>
-    abstract val exhaustivenessStatus: ExhaustivenessStatus?
-    abstract val usedAsExpression: Boolean
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst calleeReference: FirReference
+    abstract konst subject: FirExpression?
+    abstract konst subjectVariable: FirVariable?
+    abstract konst branches: List<FirWhenBranch>
+    abstract konst exhaustivenessStatus: ExhaustivenessStatus?
+    abstract konst usedAsExpression: Boolean
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitWhenExpression(this, data)
 

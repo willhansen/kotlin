@@ -8,7 +8,7 @@ class N() : Tr {
 }
 
 fun box(): String {
-    val n = N()
+    konst n = N()
     if (n.extra() == "__") return "OK"
     return "fail";
 }

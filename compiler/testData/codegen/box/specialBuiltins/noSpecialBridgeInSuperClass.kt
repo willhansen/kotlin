@@ -6,7 +6,7 @@ public abstract class AbstractFoo<K, V> : Map<K, V> {
         return null
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {
@@ -17,15 +17,15 @@ public abstract class AbstractFoo<K, V> : Map<K, V> {
         throw UnsupportedOperationException()
     }
 
-    override fun containsValue(value: V): Boolean {
+    override fun containsValue(konstue: V): Boolean {
         throw UnsupportedOperationException()
     }
 
-    override val keys: Set<K>
+    override konst keys: Set<K>
         get() = throw UnsupportedOperationException()
-    override val values: Collection<V>
+    override konst konstues: Collection<V>
         get() = throw UnsupportedOperationException()
-    override val entries: Set<Map.Entry<K, V>>
+    override konst entries: Set<Map.Entry<K, V>>
         get() = throw UnsupportedOperationException()
 }
 

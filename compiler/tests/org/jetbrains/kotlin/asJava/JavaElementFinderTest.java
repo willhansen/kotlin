@@ -59,7 +59,7 @@ public class JavaElementFinderTest extends KotlinAsJavaTestBase {
     private void assertClass(String qualifiedName) {
         PsiClass psiClass = finder.findClass(qualifiedName, GlobalSearchScope.allScope(getProject()));
         TestCase.assertNotNull(String.format("Class with fqn='%s' wasn't found.", qualifiedName), psiClass);
-        TestCase.assertTrue(String.format("Class with fqn='%s' is not valid.", qualifiedName), psiClass.isValid());
+        TestCase.assertTrue(String.format("Class with fqn='%s' is not konstid.", qualifiedName), psiClass.isValid());
     }
 
     private void assertNoClass(String qualifiedName) {

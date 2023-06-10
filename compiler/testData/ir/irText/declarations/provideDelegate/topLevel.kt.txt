@@ -1,39 +1,39 @@
 class Delegate {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
   operator fun getValue(thisRef: Any?, property: Any?): String {
-    return <this>.<get-value>()
+    return <this>.<get-konstue>()
   }
 
 }
 
 class DelegateProvider {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
   operator fun provideDelegate(thisRef: Any?, property: Any?): Delegate {
-    return Delegate(value = <this>.<get-value>())
+    return Delegate(konstue = <this>.<get-konstue>())
   }
 
 }
 
-val testTopLevel: String /* by */
-  field = DelegateProvider(value = "OK").provideDelegate(thisRef = null, property = ::testTopLevel)
+konst testTopLevel: String /* by */
+  field = DelegateProvider(konstue = "OK").provideDelegate(thisRef = null, property = ::testTopLevel)
   get(): String {
     return #testTopLevel$delegate.getValue(thisRef = null, property = ::testTopLevel)
   }

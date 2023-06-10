@@ -5,12 +5,12 @@ FILE fqName:<root> fileName:/dp.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:View modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:coefficient visibility:public modality:FINAL [val]
+    PROPERTY name:coefficient visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:coefficient type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-coefficient> visibility:public modality:FINAL <> ($this:<root>.View) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:coefficient visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:coefficient visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.View
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-coefficient> (): kotlin.Int declared in <root>.View'
@@ -29,9 +29,9 @@ FILE fqName:<root> fileName:/dp.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:dp visibility:public modality:FINAL [val]
+  PROPERTY name:dp visibility:public modality:FINAL [konst]
     FUN name:<get-dp> visibility:public modality:FINAL <> ($receiver:kotlin.Int, $context_receiver_0:<root>.View) returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:dp visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:dp visibility:public modality:FINAL [konst]
       contextReceiverParametersCount: 1
       $receiver: VALUE_PARAMETER name:<this> type:kotlin.Int
       VALUE_PARAMETER name:$context_receiver_0 index:0 type:<root>.View
@@ -60,9 +60,9 @@ FILE fqName:<root> fileName:/dp.kt
                       $receiver: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.Int> origin=null
                         <T>: kotlin.Int
                         elements: VARARG type=kotlin.Array<out kotlin.Int> varargElementType=kotlin.Int
-                          CONST Int type=kotlin.Int value=1
-                          CONST Int type=kotlin.Int value=2
-                          CONST Int type=kotlin.Int value=10
+                          CONST Int type=kotlin.Int konstue=1
+                          CONST Int type=kotlin.Int konstue=2
+                          CONST Int type=kotlin.Int konstue=10
                       transform: FUN_EXPR type=kotlin.Function1<kotlin.Int, kotlin.Int> origin=LAMBDA
                         FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> (it:kotlin.Int) returnType:kotlin.Int
                           VALUE_PARAMETER name:it index:0 type:kotlin.Int
@@ -74,10 +74,10 @@ FILE fqName:<root> fileName:/dp.kt
                     arg1: CALL 'public final fun listOf <T> (vararg elements: T of kotlin.collections.listOf): kotlin.collections.List<T of kotlin.collections.listOf> declared in kotlin.collections' type=kotlin.collections.List<kotlin.Int> origin=null
                       <T>: kotlin.Int
                       elements: VARARG type=kotlin.Array<out kotlin.Int> varargElementType=kotlin.Int
-                        CONST Int type=kotlin.Int value=42
-                        CONST Int type=kotlin.Int value=84
-                        CONST Int type=kotlin.Int value=420
+                        CONST Int type=kotlin.Int konstue=42
+                        CONST Int type=kotlin.Int konstue=84
+                        CONST Int type=kotlin.Int konstue=420
                   then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-                    CONST String type=kotlin.String value="OK"
+                    CONST String type=kotlin.String konstue="OK"
               RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-                CONST String type=kotlin.String value="fail"
+                CONST String type=kotlin.String konstue="fail"

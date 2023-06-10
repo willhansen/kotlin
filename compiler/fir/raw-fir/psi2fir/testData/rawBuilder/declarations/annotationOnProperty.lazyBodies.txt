@@ -5,36 +5,36 @@ FILE: annotationOnProperty.kt
         }
 
     }
-    field:@FIELD:Ann() public? final? val x: Int = LAZY_EXPRESSION
+    field:@FIELD:Ann() public? final? konst x: Int = LAZY_EXPRESSION
         public? get(): Int
-    @PROPERTY:Ann() public? final? val y: Int = LAZY_EXPRESSION
+    @PROPERTY:Ann() public? final? konst y: Int = LAZY_EXPRESSION
         public? get(): Int
-    @Ann() public? final? val z: Int = LAZY_EXPRESSION
+    @Ann() public? final? konst z: Int = LAZY_EXPRESSION
         public? get(): Int
     public? final? class Some : R|kotlin/Any| {
         public? constructor(x: Int, y: Int, @CONSTRUCTOR_PARAMETER:Ann() z: Int, w: Int): R|Some| {
             LAZY_super<R|kotlin/Any|>
         }
 
-        field:@FIELD:Ann() public? final? val x: Int = R|<local>/x|
+        field:@FIELD:Ann() public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
-        @PROPERTY:Ann() public? final? val y: Int = R|<local>/y|
+        @PROPERTY:Ann() public? final? konst y: Int = R|<local>/y|
             public? get(): Int
 
-        public? final? val z: Int = R|<local>/z|
+        public? final? konst z: Int = R|<local>/z|
             public? get(): Int
 
-        public? final? val w: Int = R|<local>/w|
+        public? final? konst w: Int = R|<local>/w|
             public? get(): Int
 
-        field:@FIELD:Ann() public? final? val a: Int = LAZY_EXPRESSION
+        field:@FIELD:Ann() public? final? konst a: Int = LAZY_EXPRESSION
             public? get(): Int
 
-        @PROPERTY:Ann() public? final? val b: Int = LAZY_EXPRESSION
+        @PROPERTY:Ann() public? final? konst b: Int = LAZY_EXPRESSION
             public? get(): Int
 
-        @Ann() public? final? val c: Int = LAZY_EXPRESSION
+        @Ann() public? final? konst c: Int = LAZY_EXPRESSION
             public? get(): Int
 
     }

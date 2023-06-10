@@ -28,5 +28,5 @@ public abstract class Mine</*0*/ P1, /*1*/ P2> : java.util.Map<P2, P1> {
     public open /*fake_override*/ fun replace(/*0*/ P2, /*1*/ P1, /*2*/ P1): kotlin.Boolean
     public open /*fake_override*/ fun replaceAll(/*0*/ java.util.function.BiFunction<in P2, in P1, out P1>): kotlin.Unit
     public abstract /*fake_override*/ fun size(): kotlin.Int
-    public abstract /*fake_override*/ fun values(): kotlin.collections.(Mutable)Collection<P1!>!
+    public abstract /*fake_override*/ fun konstues(): kotlin.collections.(Mutable)Collection<P1!>!
 }

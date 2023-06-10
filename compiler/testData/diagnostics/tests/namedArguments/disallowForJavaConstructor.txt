@@ -1,6 +1,6 @@
 package
 
-public val test: A
+public konst test: A
 
 public open class A {
     public constructor A(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.String!)

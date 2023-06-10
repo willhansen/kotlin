@@ -2,7 +2,7 @@ package test
 
 public open class AccessorGenericSignature {
     public constructor AccessorGenericSignature()
-    private final val b: test.BadClass!
+    private final konst b: test.BadClass!
 }
 
 public final class BadClass {

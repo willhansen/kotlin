@@ -29,5 +29,5 @@ enum class AnnotationUseSiteTarget(renderName: String? = null) {
     SETTER_PARAMETER("setparam"),
     PROPERTY_DELEGATE_FIELD("delegate");
 
-    val renderName: String = renderName ?: name.toLowerCaseAsciiOnly()
+    konst renderName: String = renderName ?: name.toLowerCaseAsciiOnly()
 }

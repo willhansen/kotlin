@@ -32,23 +32,23 @@ internal fun MethodNode.acceptWithStateMachine(
     varsCountByType: Map<Type, Int>,
     obtainContinuationClassBuilder: () -> ClassBuilder,
 ) {
-    val context = classCodegen.context
-    val state = context.state
-    val languageVersionSettings = state.languageVersionSettings
+    konst context = classCodegen.context
+    konst state = context.state
+    konst languageVersionSettings = state.languageVersionSettings
     assert(languageVersionSettings.supportsFeature(LanguageFeature.ReleaseCoroutines)) { "Experimental coroutines are unsupported in JVM_IR backend" }
 
-    val lineNumber = if (irFunction.startOffset >= 0) {
+    konst lineNumber = if (irFunction.startOffset >= 0) {
         // if it suspend function like `suspend fun foo(...)`
         irFunction.file.fileEntry.getLineNumber(irFunction.startOffset) + 1
     } else {
-        val klass = classCodegen.irClass
+        konst klass = classCodegen.irClass
         if (klass.startOffset >= 0) {
             // if it suspend lambda transformed into class `runSuspend { .... }`
             irFunction.file.fileEntry.getLineNumber(klass.startOffset) + 1
         } else 1 // This lambda might be synthetic
     }
 
-    val visitor = CoroutineTransformerMethodVisitor(
+    konst visitor = CoroutineTransformerMethodVisitor(
         methodVisitor, access, name, desc, signature, exceptions.toTypedArray(),
         containingClassInternalName = classCodegen.type.internalName,
         obtainClassBuilderForCoroutineState = obtainContinuationClassBuilder,
@@ -103,8 +103,8 @@ internal fun IrExpression?.isReadOfInlineLambda(): Boolean = isReadOfCrossinline
 internal fun IrFunction.originalReturnTypeOfSuspendFunctionReturningUnboxedInlineClass(): IrType? {
     if (this !is IrSimpleFunction || !isSuspend) return null
     // Unlike `suspendFunctionOriginal()`, this also maps `$default` stubs to the original function.
-    val original = attributeOwnerId as IrSimpleFunction
-    val unboxedReturnType = InlineClassAbi.unboxType(original.returnType) ?: return null
+    konst original = attributeOwnerId as IrSimpleFunction
+    konst unboxedReturnType = InlineClassAbi.unboxType(original.returnType) ?: return null
     // 1. Can't unbox into a primitive, since suspend functions have to return a reference type.
     // 2. Force boxing if the function overrides function with different type modulo nullability ignoring type parameters
     if (unboxedReturnType.isPrimitiveType() || original.overridesReturningDifferentType(original.returnType)) return null
@@ -112,14 +112,14 @@ internal fun IrFunction.originalReturnTypeOfSuspendFunctionReturningUnboxedInlin
 }
 
 private fun IrSimpleFunction.overridesReturningDifferentType(returnType: IrType): Boolean {
-    val visited = hashSetOf<IrSimpleFunction>()
+    konst visited = hashSetOf<IrSimpleFunction>()
 
     fun dfs(function: IrSimpleFunction): Boolean {
         if (!visited.add(function)) return false
 
         for (overridden in function.overriddenSymbols) {
-            val owner = overridden.owner
-            val overriddenReturnType = owner.returnType
+            konst owner = overridden.owner
+            konst overriddenReturnType = owner.returnType
 
             if (!overriddenReturnType.erasedUpperBound.isSingleFieldValueClass) return true
 

@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheck
 
 internal object KotlinAndroidSourceSets {
 
-    private val logger = Logging.getLogger(this::class.java)
+    private konst logger = Logging.getLogger(this::class.java)
 
     fun applyKotlinAndroidSourceSetLayout(
         target: KotlinAndroidTarget,
@@ -23,10 +23,10 @@ internal object KotlinAndroidSourceSets {
     ) {
         logger.debug("Applying ${KotlinAndroidSourceSetLayout::class.java.simpleName}: ${layout.name}")
 
-        val project = target.project
-        val android = project.androidExtension
-        val diagnosticsCollector = project.kotlinToolingDiagnosticsCollector
-        val factory = KotlinAndroidSourceSetFactory(target, project.kotlinExtension, layout, diagnosticsCollector)
+        konst project = target.project
+        konst android = project.androidExtension
+        konst diagnosticsCollector = project.kotlinToolingDiagnosticsCollector
+        konst factory = KotlinAndroidSourceSetFactory(target, project.kotlinExtension, layout, diagnosticsCollector)
 
         project.runProjectConfigurationHealthCheck {
             layout.checker.checkBeforeLayoutApplied(diagnosticsCollector, target, layout)
@@ -38,7 +38,7 @@ internal object KotlinAndroidSourceSets {
         make them available in the buildscript dsl immediately.
          */
         android.sourceSets.all { androidSourceSet ->
-            val kotlinSourceSetName = layout.naming.kotlinSourceSetName(
+            konst kotlinSourceSetName = layout.naming.kotlinSourceSetName(
                 target.disambiguationClassifier, androidSourceSet.name,
                 AndroidBaseSourceSetName.byName(androidSourceSet.name)?.variantType
             ) ?: return@all
@@ -46,16 +46,16 @@ internal object KotlinAndroidSourceSets {
             factory.getOrCreateConfiguredKotlinSourceSet(kotlinSourceSetName, androidSourceSet)
         }
 
-        /* Hook into Android's variant creation: This is invoked in 'afterEvaluate' */
+        /* Hook into Android's variant creation: This is invoked in 'afterEkonstuate' */
         project.forAllAndroidVariants { variant ->
             variant.sourceSets.forEach { sourceProvider ->
-                val androidSourceSet = android.sourceSets.findByName(sourceProvider.name) ?: return@forEach
+                konst androidSourceSet = android.sourceSets.findByName(sourceProvider.name) ?: return@forEach
 
-                val kotlinSourceSetName = layout.naming.kotlinSourceSetName(
+                konst kotlinSourceSetName = layout.naming.kotlinSourceSetName(
                     target.disambiguationClassifier, sourceProvider.name, variant.type
                 ) ?: return@forEach
 
-                val kotlinSourceSet = factory.getOrCreateConfiguredKotlinSourceSet(kotlinSourceSetName, androidSourceSet)
+                konst kotlinSourceSet = factory.getOrCreateConfiguredKotlinSourceSet(kotlinSourceSetName, androidSourceSet)
                 layout.sourceSetConfigurator.configureWithVariant(target, kotlinSourceSet, variant)
             }
         }

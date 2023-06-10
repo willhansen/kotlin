@@ -31,16 +31,16 @@ class KtAnnotationUseSiteTarget : KtElementImplStub<KotlinAnnotationUseSiteTarge
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitAnnotationUseSiteTarget(this, data)
 
     fun getAnnotationUseSiteTarget(): AnnotationUseSiteTarget {
-        val targetString = stub?.getUseSiteTarget()
+        konst targetString = stub?.getUseSiteTarget()
         if (targetString != null) {
             try {
-                return AnnotationUseSiteTarget.valueOf(targetString)
+                return AnnotationUseSiteTarget.konstueOf(targetString)
             } catch (e: IllegalArgumentException) {
                 // Ok, resolve via node tree
             }
         }
 
-        val node = firstChild.node
+        konst node = firstChild.node
         return when (node.elementType) {
             KtTokens.FIELD_KEYWORD -> AnnotationUseSiteTarget.FIELD
             KtTokens.FILE_KEYWORD -> AnnotationUseSiteTarget.FILE

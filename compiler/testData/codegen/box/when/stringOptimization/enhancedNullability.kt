@@ -30,7 +30,7 @@ fun testElseOnly() {
 
 fun testSmall() {
     try {
-        val q = when (J.nullString()) {
+        konst q = when (J.nullString()) {
             "a" -> "A"
             else -> "other"
         }
@@ -41,7 +41,7 @@ fun testSmall() {
 
 fun testBigger() {
     try {
-        val q = when (J.nullString()) {
+        konst q = when (J.nullString()) {
             "a" -> "A"
             "b" -> "B"
             "c" -> "C"

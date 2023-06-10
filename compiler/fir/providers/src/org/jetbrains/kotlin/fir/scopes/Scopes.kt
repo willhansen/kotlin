@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.fir.symbols.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.fir.symbols.impl.*
 
 fun ConeClassLikeLookupTag.getNestedClassifierScope(session: FirSession, scopeSession: ScopeSession): FirContainingNamesAwareScope? {
-    val klass = toSymbol(session)?.fir as? FirRegularClass ?: return null
+    konst klass = toSymbol(session)?.fir as? FirRegularClass ?: return null
     return klass.scopeProvider.getNestedClassifierScope(klass, session, scopeSession)
 }
 
@@ -25,7 +25,7 @@ fun ConeClassLikeLookupTag.getNestedClassifierScope(session: FirSession, scopeSe
  */
 @TestOnly
 fun debugCollectOverrides(symbol: FirCallableSymbol<*>, session: FirSession, scopeSession: ScopeSession): Map<Any, Any> {
-    val scope = symbol.dispatchReceiverType?.scope(
+    konst scope = symbol.dispatchReceiverType?.scope(
         session,
         scopeSession,
         FakeOverrideTypeCalculator.DoNothing,
@@ -38,8 +38,8 @@ fun debugCollectOverrides(symbol: FirCallableSymbol<*>, session: FirSession, sco
 @TestOnly
 fun debugCollectOverrides(symbol: FirCallableSymbol<*>, scope: FirTypeScope): Map<Any, Any> {
     fun process(scope: FirTypeScope, symbol: FirCallableSymbol<*>): Map<Any, Any> {
-        val result = mutableMapOf<Any, Any>()
-        val resultList = mutableListOf<Any>()
+        konst result = mutableMapOf<Any, Any>()
+        konst resultList = mutableListOf<Any>()
         when (symbol) {
             is FirNamedFunctionSymbol -> scope.processDirectOverriddenFunctionsWithBaseScope(symbol) { baseSymbol, baseScope ->
                 resultList.add(process(baseScope, baseSymbol))
@@ -61,14 +61,14 @@ fun FirNamedFunctionSymbol.overriddenFunctions(
     session: FirSession,
     scopeSession: ScopeSession,
 ): List<FirFunctionSymbol<*>> {
-    val firTypeScope = containingClass.unsubstitutedScope(
+    konst firTypeScope = containingClass.unsubstitutedScope(
         session,
         scopeSession,
         withForcedTypeCalculator = true,
         memberRequiredPhase = FirResolvePhase.STATUS,
     )
 
-    val overriddenFunctions = mutableListOf<FirFunctionSymbol<*>>()
+    konst overriddenFunctions = mutableListOf<FirFunctionSymbol<*>>()
     firTypeScope.processFunctionsByName(callableId.callableName) { }
     firTypeScope.processOverriddenFunctions(this) {
         overriddenFunctions.add(it)

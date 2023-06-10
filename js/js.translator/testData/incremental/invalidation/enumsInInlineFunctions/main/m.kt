@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val enums = testEnums()
+    konst enums = testEnums()
     when (stepId) {
         0 -> if (enums.toString() != "[A, B, A, B]") return "Fail, got $enums"
         1 -> if (enums.toString() != "[A, B, A, B, A, B, C]") return "Fail, got $enums"

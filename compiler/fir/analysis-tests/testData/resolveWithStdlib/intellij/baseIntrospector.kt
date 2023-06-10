@@ -10,7 +10,7 @@ abstract class BaseIntrospector<D : BasicDatabase, S : BasicSchema> {
     protected abstract fun createDatabaseRetriever(database: D): AbstractDatabaseRetriever<out D>
 
     protected abstract inner class AbstractDatabaseRetriever<D : BasicDatabase>
-    protected constructor(protected val database: D)
+    protected constructor(protected konst database: D)
         : AbstractRetriever()
 
     protected abstract inner class AbstractRetriever

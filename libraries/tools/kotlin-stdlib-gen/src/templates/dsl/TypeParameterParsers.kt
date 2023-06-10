@@ -7,15 +7,15 @@ package templates
 
 import templates.TypeParameter.*
 
-data class TypeParameter(val original: String, val name: String, val constraint: TypeRef? = null) {
+data class TypeParameter(konst original: String, konst name: String, konst constraint: TypeRef? = null) {
     constructor(simpleName: String) : this(simpleName, simpleName)
 
-    data class TypeRef(val name: String, val typeArguments: List<TypeArgument> = emptyList()) {
+    data class TypeRef(konst name: String, konst typeArguments: List<TypeArgument> = emptyList()) {
         fun mentionedTypes(): List<TypeRef> =
                 if (typeArguments.isEmpty()) listOf(this) else typeArguments.flatMap { it.type.mentionedTypes() }
     }
 
-    data class TypeArgument(val type: TypeRef)
+    data class TypeArgument(konst type: TypeRef)
 
     fun mentionedTypeRefs(): List<TypeRef> = constraint?.mentionedTypes().orEmpty()
 }
@@ -24,7 +24,7 @@ data class TypeParameter(val original: String, val name: String, val constraint:
 fun parseTypeParameter(typeString: String): TypeParameter =
     removeAnnotations(typeString.trim().removePrefix("reified ")).let { trimmed ->
         if (':' in trimmed) {
-            val (name, constraint) = trimmed.split(':')
+            konst (name, constraint) = trimmed.split(':')
             TypeParameter(typeString, name.trim(), parseTypeRef(removeAnnotations(constraint.trim())))
         } else {
             TypeParameter(typeString, trimmed)
@@ -34,8 +34,8 @@ fun parseTypeParameter(typeString: String): TypeParameter =
 fun parseTypeRef(typeRef: String): TypeRef =
     typeRef.trim().run {
         if (contains('<') && (endsWith('>') || endsWith(">?"))) {
-            val name = substringBefore('<') + if (endsWith(">?")) "?" else ""
-            val params = substringAfter('<').substringBeforeLast('>')
+            konst name = substringBefore('<') + if (endsWith(">?")) "?" else ""
+            konst params = substringAfter('<').substringBeforeLast('>')
             TypeRef(name, parseArguments(params))
         }
         else
@@ -48,22 +48,22 @@ private fun parseTypeArgument(typeParam: String): TypeArgument
 
 private fun parseArguments(typeParams: String): List<TypeArgument> {
     var restParams: String = typeParams
-    val params = mutableListOf<TypeArgument>()
+    konst params = mutableListOf<TypeArgument>()
     while (true) {
-        val comma = restParams.indexOf(',')
+        konst comma = restParams.indexOf(',')
         if (comma < 0) {
             params += parseTypeArgument(restParams)
             break
         } else {
-            val open = restParams.indexOf('<')
-            val close = restParams.indexOf('>')
+            konst open = restParams.indexOf('<')
+            konst close = restParams.indexOf('>')
             if (comma !in open..close) {
                 params += parseTypeArgument(restParams.take(comma))
                 restParams = restParams.drop(comma + 1)
             }
             else {
                 params += parseTypeArgument(restParams.take(close + 1))
-                val nextComma = restParams.indexOf(',', startIndex = close)
+                konst nextComma = restParams.indexOf(',', startIndex = close)
                 if (nextComma < 0) break
                 restParams = restParams.drop(nextComma + 1)
             }

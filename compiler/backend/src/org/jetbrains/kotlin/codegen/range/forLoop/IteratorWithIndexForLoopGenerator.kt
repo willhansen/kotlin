@@ -21,14 +21,14 @@ class IteratorWithIndexForLoopGenerator(
     forExpression: KtForExpression,
     loopParameter: KtDestructuringDeclaration,
     rangeCall: ResolvedCall<out CallableDescriptor>,
-    private val iteratorOwnerType: Type
+    private konst iteratorOwnerType: Type
 ) : AbstractWithIndexForLoopGenerator(codegen, forExpression, loopParameter, rangeCall) {
     private var iteratorVar = -1
 
     private var indexVar = -1
     private var indexType = Type.INT_TYPE
 
-    private val asmTypeForIterator = Type.getType(Iterator::class.java)
+    private konst asmTypeForIterator = Type.getType(Iterator::class.java)
 
     override fun beforeLoop() {
         indexVar = indexLoopComponent?.parameterVar ?: createLoopTempVariable(Type.INT_TYPE)

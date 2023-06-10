@@ -1,12 +1,12 @@
 interface IFoo {
   @Deprecated(message = "")
-  val prop: String
+  konst prop: String
     get(): String {
       return ""
     }
 
   @Deprecated(message = "")
-  val String.extProp: String
+  konst String.extProp: String
     get(): String {
       return ""
     }
@@ -20,13 +20,13 @@ class Delegated : IFoo {
 
   }
 
-  private /* final field */ val $$delegate_0: IFoo = foo
-  override val prop: String
+  private /* final field */ konst $$delegate_0: IFoo = foo
+  override konst prop: String
     override get(): String {
       return <this>.#$$delegate_0.<get-prop>()
     }
 
-  override val String.extProp: String
+  override konst String.extProp: String
     override get(): String {
       return (<this>.#$$delegate_0, <this>).<get-extProp>()
     }
@@ -49,12 +49,12 @@ class ExplicitOverride : IFoo {
 
   }
 
-  override val prop: String
+  override konst prop: String
     override get(): String {
       return ""
     }
 
-  override val String.extProp: String
+  override konst String.extProp: String
     override get(): String {
       return ""
     }

@@ -10,8 +10,8 @@ private var _counter = 0
 object Permanent {
     var counter
         get() = _counter
-        set(value) {
-            _counter = value
+        set(konstue) {
+            _counter = konstue
         }
 }
 

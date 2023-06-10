@@ -19,7 +19,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x1')
           PsiWhiteSpace(' ')
@@ -37,7 +37,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x2t')
           PsiElement(COLON)(':')
@@ -56,7 +56,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('y2t')
           PsiElement(COLON)(':')
@@ -80,7 +80,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
@@ -105,7 +105,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
@@ -136,7 +136,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
@@ -167,7 +167,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         DESTRUCTURING_DECLARATION
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(LPAR)('(')
           DESTRUCTURING_DECLARATION_ENTRY
@@ -204,7 +204,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           TYPE_REFERENCE
             USER_TYPE
@@ -227,7 +227,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           TYPE_REFERENCE
             USER_TYPE
@@ -265,7 +265,7 @@ KtFile: WhenWithSubjectVariable.kt
                     REFERENCE_EXPRESSION
                       PsiElement(IDENTIFIER)('Ann')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x6a')
           PsiWhiteSpace(' ')
@@ -283,7 +283,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x7a')
           PsiElement(COLON)(':')
@@ -316,7 +316,7 @@ KtFile: WhenWithSubjectVariable.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PROPERTY
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x8a')
           PsiWhiteSpace(' ')

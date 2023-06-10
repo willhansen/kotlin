@@ -23,57 +23,57 @@ import org.jetbrains.kotlin.ir.util.statements
 import kotlin.reflect.*
 
 internal class KFunctionProxy(
-    override val state: KFunctionState, override val callInterceptor: CallInterceptor
+    override konst state: KFunctionState, override konst callInterceptor: CallInterceptor
 ) : ReflectionProxy, KFunction<Any?>, FunctionWithAllInvokes {
-    override val arity: Int = state.getArity() ?: BuiltInFunctionArity.BIG_ARITY
+    override konst arity: Int = state.getArity() ?: BuiltInFunctionArity.BIG_ARITY
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = state.irFunction.isInline
-    override val isExternal: Boolean
+    override konst isExternal: Boolean
         get() = state.irFunction.isExternal
-    override val isOperator: Boolean
+    override konst isOperator: Boolean
         get() = state.irFunction is IrSimpleFunction && state.irFunction.isOperator
-    override val isInfix: Boolean
+    override konst isInfix: Boolean
         get() = state.irFunction is IrSimpleFunction && state.irFunction.isInfix
-    override val name: String
+    override konst name: String
         get() = state.irFunction.name.asString()
 
 
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = TODO("Not yet implemented")
-    override val parameters: List<KParameter>
+    override konst parameters: List<KParameter>
         get() = state.getParameters(callInterceptor)
-    override val returnType: KType
+    override konst returnType: KType
         get() = state.getReturnType(callInterceptor)
-    override val typeParameters: List<KTypeParameter>
+    override konst typeParameters: List<KTypeParameter>
         get() = state.getTypeParameters(callInterceptor)
 
     override fun call(vararg args: Any?): Any? {
         // TODO check arity
         var index = 0
-        val dispatchReceiver = state.irFunction.dispatchReceiverParameter?.let { environment.convertToState(args[index++], it.type) }
-        val extensionReceiver = state.irFunction.extensionReceiverParameter?.let { environment.convertToState(args[index++], it.type) }
+        konst dispatchReceiver = state.irFunction.dispatchReceiverParameter?.let { environment.convertToState(args[index++], it.type) }
+        konst extensionReceiver = state.irFunction.extensionReceiverParameter?.let { environment.convertToState(args[index++], it.type) }
         // TODO context receivers
-        val argsVariables = state.irFunction.valueParameters.map { parameter ->
+        konst argsVariables = state.irFunction.konstueParameters.map { parameter ->
             environment.convertToState(args[index++], parameter.type)
         }
-        val valueArguments = listOfNotNull(dispatchReceiver, extensionReceiver) + argsVariables
-        return callInterceptor.interceptProxy(state.irFunction, valueArguments)
+        konst konstueArguments = listOfNotNull(dispatchReceiver, extensionReceiver) + argsVariables
+        return callInterceptor.interceptProxy(state.irFunction, konstueArguments)
     }
 
     override fun callBy(args: Map<KParameter, Any?>): Any? {
         TODO("Not yet implemented")
     }
 
-    override val visibility: KVisibility?
+    override konst visibility: KVisibility?
         get() = state.irFunction.visibility.toKVisibility()
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = state.irFunction is IrSimpleFunction && state.irFunction.modality == Modality.FINAL
-    override val isOpen: Boolean
+    override konst isOpen: Boolean
         get() = state.irFunction is IrSimpleFunction && state.irFunction.modality == Modality.OPEN
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = state.irFunction is IrSimpleFunction && state.irFunction.modality == Modality.ABSTRACT
-    override val isSuspend: Boolean
+    override konst isSuspend: Boolean
         get() = state.irFunction.isSuspend
 
     override fun equals(other: Any?): Boolean {
@@ -106,9 +106,9 @@ internal class KFunctionProxy(
     private fun IrFunction.getAdapteeCallSymbol(): IrFunctionSymbol? {
         if (!this.isAdapter()) return null
 
-        val call = when (val statement = this.body!!.statements.single()) {
+        konst call = when (konst statement = this.body!!.statements.single()) {
             is IrTypeOperatorCall -> statement.argument
-            is IrReturn -> statement.value
+            is IrReturn -> statement.konstue
             else -> statement
         }
         return (call as? IrFunctionAccessExpression)?.symbol
@@ -117,17 +117,17 @@ internal class KFunctionProxy(
     private fun IrFunction.equalsByAdapteeCall(other: IrFunction): Boolean {
         if (!this.isAdapter() || !other.isAdapter()) return false
 
-        val statement = this.body!!.statements.single()
-        val otherStatement = other.body!!.statements.single()
+        konst statement = this.body!!.statements.single()
+        konst otherStatement = other.body!!.statements.single()
 
-        val (thisArg, otherArg) = when (statement) {
+        konst (thisArg, otherArg) = when (statement) {
             is IrTypeOperatorCall -> {
                 if (otherStatement !is IrTypeOperatorCall) return false
                 Pair(statement.argument, otherStatement.argument)
             }
             is IrReturn -> {
                 if (otherStatement !is IrReturn) return false
-                Pair(statement.value, otherStatement.value)
+                Pair(statement.konstue, otherStatement.konstue)
             }
             else -> Pair(statement, otherStatement)
         }

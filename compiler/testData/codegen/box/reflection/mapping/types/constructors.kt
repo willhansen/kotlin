@@ -11,7 +11,7 @@ class A(d: Double, s: String, parent: A?) {
     inner class Inner(nested: Nested)
 }
 
-enum class E(val i: Int) { ENTRY(1) }
+enum class E(konst i: Int) { ENTRY(1) }
 
 fun box(): String {
     assertEquals(listOf(java.lang.Double.TYPE, String::class.java, A::class.java), ::A.parameters.map { it.type.javaType })

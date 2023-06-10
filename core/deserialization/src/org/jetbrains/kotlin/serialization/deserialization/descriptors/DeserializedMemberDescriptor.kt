@@ -16,24 +16,24 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.*
 
 interface DescriptorWithContainerSource : MemberDescriptor {
-    val containerSource: DeserializedContainerSource?
+    konst containerSource: DeserializedContainerSource?
 }
 
 interface DeserializedMemberDescriptor : DeserializedDescriptor, MemberDescriptor, DescriptorWithContainerSource {
-    val proto: MessageLite
+    konst proto: MessageLite
 
-    val nameResolver: NameResolver
+    konst nameResolver: NameResolver
 
-    val typeTable: TypeTable
+    konst typeTable: TypeTable
 
-    val versionRequirementTable: VersionRequirementTable
+    konst versionRequirementTable: VersionRequirementTable
 
-    val versionRequirements: List<VersionRequirement>
+    konst versionRequirements: List<VersionRequirement>
         get() = VersionRequirement.create(proto, nameResolver, versionRequirementTable)
 
     // Information about the origin of this callable's container (class or package part on JVM) or null if there's no such information.
     // TODO: merge with sourceElement of containingDeclaration
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
 }
 
 interface DeserializedCallableMemberDescriptor : DeserializedMemberDescriptor, CallableMemberDescriptor
@@ -44,11 +44,11 @@ class DeserializedSimpleFunctionDescriptor(
     annotations: Annotations,
     name: Name,
     kind: CallableMemberDescriptor.Kind,
-    override val proto: ProtoBuf.Function,
-    override val nameResolver: NameResolver,
-    override val typeTable: TypeTable,
-    override val versionRequirementTable: VersionRequirementTable,
-    override val containerSource: DeserializedContainerSource?,
+    override konst proto: ProtoBuf.Function,
+    override konst nameResolver: NameResolver,
+    override konst typeTable: TypeTable,
+    override konst versionRequirementTable: VersionRequirementTable,
+    override konst containerSource: DeserializedContainerSource?,
     source: SourceElement? = null
 ) : DeserializedCallableMemberDescriptor,
     SimpleFunctionDescriptorImpl(
@@ -87,11 +87,11 @@ class DeserializedPropertyDescriptor(
         isExternal: Boolean,
         isDelegated: Boolean,
         isExpect: Boolean,
-        override val proto: ProtoBuf.Property,
-        override val nameResolver: NameResolver,
-        override val typeTable: TypeTable,
-        override val versionRequirementTable: VersionRequirementTable,
-        override val containerSource: DeserializedContainerSource?
+        override konst proto: ProtoBuf.Property,
+        override konst nameResolver: NameResolver,
+        override konst typeTable: TypeTable,
+        override konst versionRequirementTable: VersionRequirementTable,
+        override konst containerSource: DeserializedContainerSource?
 ) : DeserializedCallableMemberDescriptor, PropertyDescriptorImpl(
     containingDeclaration, original, annotations, modality, visibility, isVar, name, kind, SourceElement.NO_SOURCE,
     isLateInit, isConst, isExpect, false, isExternal, isDelegated
@@ -120,11 +120,11 @@ class DeserializedClassConstructorDescriptor(
     annotations: Annotations,
     isPrimary: Boolean,
     kind: CallableMemberDescriptor.Kind,
-    override val proto: ProtoBuf.Constructor,
-    override val nameResolver: NameResolver,
-    override val typeTable: TypeTable,
-    override val versionRequirementTable: VersionRequirementTable,
-    override val containerSource: DeserializedContainerSource?,
+    override konst proto: ProtoBuf.Constructor,
+    override konst nameResolver: NameResolver,
+    override konst typeTable: TypeTable,
+    override konst versionRequirementTable: VersionRequirementTable,
+    override konst containerSource: DeserializedContainerSource?,
     source: SourceElement? = null
 ) : DeserializedCallableMemberDescriptor,
     ClassConstructorDescriptorImpl(containingDeclaration, original, annotations, isPrimary, kind, source ?: SourceElement.NO_SOURCE) {
@@ -160,11 +160,11 @@ class DeserializedTypeAliasDescriptor(
     annotations: Annotations,
     name: Name,
     visibility: DescriptorVisibility,
-    override val proto: ProtoBuf.TypeAlias,
-    override val nameResolver: NameResolver,
-    override val typeTable: TypeTable,
-    override val versionRequirementTable: VersionRequirementTable,
-    override val containerSource: DeserializedContainerSource?
+    override konst proto: ProtoBuf.TypeAlias,
+    override konst nameResolver: NameResolver,
+    override konst typeTable: TypeTable,
+    override konst versionRequirementTable: VersionRequirementTable,
+    override konst containerSource: DeserializedContainerSource?
 ) : AbstractTypeAliasDescriptor(storageManager, containingDeclaration, annotations, name, SourceElement.NO_SOURCE, visibility),
     DeserializedMemberDescriptor {
 
@@ -185,14 +185,14 @@ class DeserializedTypeAliasDescriptor(
         defaultTypeImpl = computeDefaultType()
     }
 
-    override val classDescriptor: ClassDescriptor?
+    override konst classDescriptor: ClassDescriptor?
         get() = if (expandedType.isError) null else expandedType.constructor.declarationDescriptor as? ClassDescriptor
 
     override fun getDefaultType(): SimpleType = defaultTypeImpl
 
     override fun substitute(substitutor: TypeSubstitutor): TypeAliasDescriptor {
         if (substitutor.isEmpty) return this
-        val substituted = DeserializedTypeAliasDescriptor(
+        konst substituted = DeserializedTypeAliasDescriptor(
             storageManager, containingDeclaration, annotations, name, visibility,
             proto, nameResolver, typeTable, versionRequirementTable, containerSource
         )

@@ -63,9 +63,9 @@ extern "C" const TypeInfo* Kotlin_ObjCExport_getAssociatedTypeInfo(Class clazz) 
 static void setAssociatedTypeInfo(Class clazz, const TypeInfo* typeInfo) {
   kotlin::NativeOrUnregisteredThreadGuard threadStateGuard(/* reentrant = */ true);
 
-  // Note: [NSValue valueWithPointer:] uses autorelease (without possibility to eliminate this at the call site),
+  // Note: [NSValue konstueWithPointer:] uses autorelease (without possibility to eliminate this at the call site),
   // so using alloc-init sequence to avoid this.
-  NSValue* value = [[NSValue alloc] initWithBytes:&typeInfo objCType:@encode(void*)];
+  NSValue* konstue = [[NSValue alloc] initWithBytes:&typeInfo objCType:@encode(void*)];
 
   // Note: OBJC_ASSOCIATION_ASSIGN below means that this NSValue will leak. On the other hand,
   // TypeInfo will "leak" anyway, and Class will likely "leak" too. So not a big deal.
@@ -77,10 +77,10 @@ static void setAssociatedTypeInfo(Class clazz, const TypeInfo* typeInfo) {
   //
   // So OBJC_ASSOCIATION_ASSIGN seems the best option here.
 
-  // Note: implementation for OBJC_ASSOCIATION_ASSIGN allows value not to be an Obj-C reference at all,
+  // Note: implementation for OBJC_ASSOCIATION_ASSIGN allows konstue not to be an Obj-C reference at all,
   // because it simply stores a pointer without any memory management operations.
   // But this is undocumented, and thus unsafe.
-  objc_setAssociatedObject(clazz, &associatedTypeInfoKey, value, OBJC_ASSOCIATION_ASSIGN);
+  objc_setAssociatedObject(clazz, &associatedTypeInfoKey, konstue, OBJC_ASSOCIATION_ASSIGN);
 }
 
 extern "C" id Kotlin_ObjCExport_GetAssociatedObject(ObjHeader* obj) {
@@ -354,7 +354,7 @@ static void Kotlin_ObjCExport_initializeImpl() {
 // Initializes ObjCExport for current process (if not initialized yet).
 // Generally this is equal to some "binary patching" (which is usually done at link time
 // but postponed until runtime here due to various reasons):
-// adds methods to Objective-C classes, initializes static memory with "constant" values etc.
+// adds methods to Objective-C classes, initializes static memory with "constant" konstues etc.
 extern "C" void Kotlin_ObjCExport_initialize() {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
@@ -371,7 +371,7 @@ static void SwiftObject_releaseAsAssociatedObjectImp(id self, SEL cmd) {
 }
 
 
-extern "C" OBJ_GETTER(Kotlin_boxBoolean, KBoolean value);
+extern "C" OBJ_GETTER(Kotlin_boxBoolean, KBoolean konstue);
 
 static OBJ_GETTER(boxedBooleanToKotlinImp, NSNumber* self, SEL cmd) {
   RETURN_RESULT_OF(Kotlin_boxBoolean, self.boolValue);
@@ -413,7 +413,7 @@ static OBJ_GETTER(blockToKotlinImp, id block, SEL cmd) {
   if (returnTypeEncoding[0] != '@') {
     kotlin::ThreadStateGuard guard(kotlin::ThreadState::kNative);
     [NSException raise:NSGenericException
-          format:@"Converting Obj-C blocks with non-reference-typed return value to kotlin.Any is not supported (%s)", returnTypeEncoding];
+          format:@"Converting Obj-C blocks with non-reference-typed return konstue to kotlin.Any is not supported (%s)", returnTypeEncoding];
   }
 
   auto converter = parameterCount < Kotlin_ObjCExport_blockToFunctionConverters_size
@@ -607,7 +607,7 @@ static void buildITable(TypeInfo* result, const std_support::map<ClassId, std_su
 
   for (int i = 0; i < itableSize; ++i) {
     auto interfaceId = itable_[i].id;
-    if (interfaceId == kInvalidInterfaceId) continue;
+    if (interfaceId == kInkonstidInterfaceId) continue;
     auto interfaceVTableIt = interfaceVTables.find(interfaceId);
     RuntimeAssert(interfaceVTableIt != interfaceVTables.end(), "");
     auto const& interfaceVTable = interfaceVTableIt->second;
@@ -802,7 +802,7 @@ static const TypeInfo* createTypeInfo(Class clazz, const TypeInfo* superType, co
     for (int i = 0; i < actualItableSize; ++i) {
       auto& record = superITable[i];
       auto interfaceId = record.id;
-      if (interfaceId == kInvalidInterfaceId) continue;
+      if (interfaceId == kInkonstidInterfaceId) continue;
       int vtableSize = record.vtableSize;
       std_support::vector<VTableElement> interfaceVTable(vtableSize);
       for (int j = 0; j < vtableSize; ++j)
@@ -825,7 +825,7 @@ static const TypeInfo* createTypeInfo(Class clazz, const TypeInfo* superType, co
   bool itableEqualsSuper = true;
 
   auto addToITable = [&interfaceVTables](ClassId interfaceId, int methodIndex, VTableElement entry) {
-    RuntimeAssert(interfaceId != kInvalidInterfaceId, "");
+    RuntimeAssert(interfaceId != kInkonstidInterfaceId, "");
     auto interfaceVTableIt = interfaceVTables.find(interfaceId);
     RuntimeAssert(interfaceVTableIt != interfaceVTables.end(), "");
     auto& interfaceVTable = interfaceVTableIt->second;

@@ -3,19 +3,19 @@
 
 fun test() {
     fun bar() {
-        val bas = fun() {
+        konst bas = fun() {
             <!RETURN_NOT_ALLOWED!>return@bar<!>
         }
     }
 
-    val bar = fun() {
+    konst bar = fun() {
         <!RETURN_NOT_ALLOWED!>return@test<!>
     }
 }
 
 fun foo() {
-    val bal = bag@ fun () {
-        val bar = fun() {
+    konst bal = bag@ fun () {
+        konst bar = fun() {
             <!RETURN_NOT_ALLOWED!>return@bag<!>
         }
         return@bag

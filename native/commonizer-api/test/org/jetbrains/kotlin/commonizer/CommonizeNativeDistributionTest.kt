@@ -19,12 +19,12 @@ import kotlin.test.assertTrue
 public class CommonizeNativeDistributionTest {
 
     @get:Rule
-    public val temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
+    public konst temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
 
     @Test
     public fun `commonize - linux platforms`() {
-        val linuxTarget1 = CommonizerTarget(LINUX_X64, LINUX_ARM64)
-        val linuxTarget2 = CommonizerTarget(LINUX_X64, LINUX_ARM64, LINUX_ARM32_HFP)
+        konst linuxTarget1 = CommonizerTarget(LINUX_X64, LINUX_ARM64)
+        konst linuxTarget2 = CommonizerTarget(LINUX_X64, LINUX_ARM64, LINUX_ARM32_HFP)
 
         CliCommonizer(this::class.java.classLoader).commonizeNativeDistribution(
             konanHome = konanHome,
@@ -46,7 +46,7 @@ public class CommonizeNativeDistributionTest {
 
     @Test
     public fun `commonize - unix platforms`() {
-        val unixTarget = CommonizerTarget(
+        konst unixTarget = CommonizerTarget(
             LINUX_X64, LINUX_ARM64,
             MACOS_X64, MACOS_ARM64,
             IOS_X64, IOS_ARM64,
@@ -70,10 +70,10 @@ public class CommonizeNativeDistributionTest {
     @Test
     public fun `commonize - apple platforms`() {
         assumeTrue("Test is only supported on macos", HostManager.hostIsMac)
-        val iosTarget = CommonizerTarget(IOS_ARM64, IOS_X64, IOS_SIMULATOR_ARM64)
-        val watchosTarget = CommonizerTarget(WATCHOS_ARM64, WATCHOS_X64, WATCHOS_SIMULATOR_ARM64, WATCHOS_DEVICE_ARM64)
-        val macosTarget = CommonizerTarget(MACOS_X64, MACOS_ARM64)
-        val appleTarget = SharedCommonizerTarget(iosTarget.konanTargets + watchosTarget.konanTargets + macosTarget.konanTargets)
+        konst iosTarget = CommonizerTarget(IOS_ARM64, IOS_X64, IOS_SIMULATOR_ARM64)
+        konst watchosTarget = CommonizerTarget(WATCHOS_ARM64, WATCHOS_X64, WATCHOS_SIMULATOR_ARM64, WATCHOS_DEVICE_ARM64)
+        konst macosTarget = CommonizerTarget(MACOS_X64, MACOS_ARM64)
+        konst appleTarget = SharedCommonizerTarget(iosTarget.konanTargets + watchosTarget.konanTargets + macosTarget.konanTargets)
 
         CliCommonizer(this::class.java.classLoader).commonizeNativeDistribution(
             konanHome = konanHome,
@@ -105,8 +105,8 @@ public class CommonizeNativeDistributionTest {
 
     @Test
     public fun `commonize - linux macos - linux macos mingw`() {
-        val unixTarget = CommonizerTarget(LINUX_X64, MACOS_X64)
-        val nativeTarget = CommonizerTarget(MINGW_X64, LINUX_X64, MACOS_X64)
+        konst unixTarget = CommonizerTarget(LINUX_X64, MACOS_X64)
+        konst nativeTarget = CommonizerTarget(MINGW_X64, LINUX_X64, MACOS_X64)
         CliCommonizer(this::class.java.classLoader).commonizeNativeDistribution(
             konanHome = konanHome,
             outputTargets = setOf(unixTarget, nativeTarget),

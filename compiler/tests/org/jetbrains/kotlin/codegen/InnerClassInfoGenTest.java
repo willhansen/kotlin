@@ -118,7 +118,7 @@ public class InnerClassInfoGenTest extends CodegenTestCase {
 
     private void checkAccess(@NotNull String outerName, @NotNull String innerName, int accessFlags) {
         String name = outerName + "$" + innerName;
-        InnerClassAttribute attribute = CollectionsKt.single(extractInnerClasses(name), value -> innerName.equals(value.innerName));
+        InnerClassAttribute attribute = CollectionsKt.single(extractInnerClasses(name), konstue -> innerName.equals(konstue.innerName));
 
         InnerClassAttribute expectedAttribute = new InnerClassAttribute(name, outerName, innerName, accessFlags);
 

@@ -3,7 +3,7 @@
 import kotlin.test.assertEquals
 
 fun test() {
-    val u = when (true) {
+    konst u = when (true) {
         true -> 42
         else -> 1.0
     }

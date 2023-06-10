@@ -6,5 +6,5 @@ class Zzz : NSAssertionHandler() {
     @ObjCOutlet
     var NSObject.x: NSObject
         get() = this
-        set(value: NSObject) { }
+        set(konstue: NSObject) { }
 }

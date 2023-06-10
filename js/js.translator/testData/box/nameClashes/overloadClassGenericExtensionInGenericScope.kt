@@ -23,7 +23,7 @@ class GenericScopeWithOverloads<E : A1>() {
     fun <T : A3> Receiver.testOverload(e: T) = "Scope A3"
 }
 
-val r = Receiver()
+konst r = Receiver()
 
 fun testGenericScope() {
     GenericScope<A1>().apply {

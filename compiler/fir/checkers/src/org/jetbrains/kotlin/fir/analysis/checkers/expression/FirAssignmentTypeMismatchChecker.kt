@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirAssignmentTypeMismatchChecker : FirVariableAssignmentChecker() {
     override fun check(expression: FirVariableAssignment, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = expression.rValue.source ?: return
-        val coneType = expression.lValue.typeRef.coneType
+        konst source = expression.rValue.source ?: return
+        konst coneType = expression.lValue.typeRef.coneType
         checkTypeMismatch(
             coneType,
             expression,

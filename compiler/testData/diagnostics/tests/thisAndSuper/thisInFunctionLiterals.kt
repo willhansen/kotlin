@@ -1,17 +1,17 @@
 // !CHECK_TYPE
 
-class A(val a:Int) {
+class A(konst a:Int) {
   inner class B() {
     fun Byte.xx() : Double.() -> Any {
       checkSubtype<Byte>(this)
-      val a: Double.() -> Unit = {
+      konst a: Double.() -> Unit = {
         checkSubtype<Double>(this)
         checkSubtype<Byte>(this@xx)
         checkSubtype<B>(this@B)
         checkSubtype<A>(this@A)
       }
-      val b: Double.() -> Unit = a@{ checkSubtype<Double>(this@a) + checkSubtype<Byte>(this@xx) }
-      val c = a@{ -> <!NO_THIS!>this@a<!> <!DEBUG_INFO_MISSING_UNRESOLVED!>+<!> checkSubtype<Byte>(this@xx) }
+      konst b: Double.() -> Unit = a@{ checkSubtype<Double>(this@a) + checkSubtype<Byte>(this@xx) }
+      konst c = a@{ -> <!NO_THIS!>this@a<!> <!DEBUG_INFO_MISSING_UNRESOLVED!>+<!> checkSubtype<Byte>(this@xx) }
       return (a@{checkSubtype<Double>(this@a) + checkSubtype<Byte>(this@xx)})
     }
   }

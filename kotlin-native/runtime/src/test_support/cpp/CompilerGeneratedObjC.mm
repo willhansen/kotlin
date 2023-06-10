@@ -22,7 +22,7 @@ void Kotlin_NSEnumeratorAsKIterator_done(KRef thiz) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-void Kotlin_NSEnumeratorAsKIterator_setNext(KRef thiz, KRef value) {
+void Kotlin_NSEnumeratorAsKIterator_setNext(KRef thiz, KRef konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 
@@ -135,7 +135,7 @@ OBJ_GETTER(Kotlin_MutableMap_createWithCapacity, KInt capacity) {
     throw std::runtime_error("Not implemented for tests");
 }
 
-void Kotlin_MutableMap_set(KRef map, KRef key, KRef value) {
+void Kotlin_MutableMap_set(KRef map, KRef key, KRef konstue) {
     throw std::runtime_error("Not implemented for tests");
 }
 

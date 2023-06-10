@@ -28,7 +28,7 @@ class KTClass : KInterface {
 
 
 fun box(): String {
-    val p = object : KInterface {
+    konst p = object : KInterface {
         fun ktest(): String {
             return super.test() + test()
         }

@@ -134,7 +134,7 @@ public class CommonSupertypes {
         Map<TypeConstructor, Set<SimpleType>> commonSupertypes = computeCommonRawSupertypes(typeSet);
         while (commonSupertypes.size() > 1) {
             Set<SimpleType> merge = new LinkedHashSet<>();
-            for (Set<SimpleType> supertypes : commonSupertypes.values()) {
+            for (Set<SimpleType> supertypes : commonSupertypes.konstues()) {
                 merge.addAll(supertypes);
             }
             commonSupertypes = computeCommonRawSupertypes(merge);

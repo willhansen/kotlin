@@ -13,12 +13,12 @@ object PlatformInfo {
     fun isLinux() = HostManager.hostIsLinux
 
     @JvmStatic
-    val hostName: String
+    konst hostName: String
         get() = HostManager.hostName
 
     @JvmStatic
     fun isAppleTarget(project: Project): Boolean {
-        val target = getTarget(project)
+        konst target = getTarget(project)
         return target.family.isAppleFamily
     }
 
@@ -36,8 +36,8 @@ object PlatformInfo {
 
     @JvmStatic
     fun getTarget(project: Project): KonanTarget {
-        val platformManager = project.project(":kotlin-native").platformManager
-        val targetName = project.project.testTarget.name
+        konst platformManager = project.project(":kotlin-native").platformManager
+        konst targetName = project.project.testTarget.name
         return platformManager.targetManager(targetName).target
     }
 
@@ -73,15 +73,15 @@ object PlatformInfo {
 
     @JvmStatic
     fun checkXcodeVersion(project: Project) {
-        val properties = PropertiesProvider(project)
-        val requiredMajorVersion = properties.xcodeMajorVersion
+        konst properties = PropertiesProvider(project)
+        konst requiredMajorVersion = properties.xcodeMajorVersion
 
         if (!DependencyProcessor.isInternalSeverAvailable
                 && properties.checkXcodeVersion
                 && requiredMajorVersion != null
         ) {
-            val currentXcodeVersion = Xcode.findCurrent().version
-            val currentMajorVersion = currentXcodeVersion.splitToSequence('.').first()
+            konst currentXcodeVersion = Xcode.findCurrent().version
+            konst currentMajorVersion = currentXcodeVersion.splitToSequence('.').first()
             if (currentMajorVersion != requiredMajorVersion) {
                 throw IllegalStateException(
                         "Incorrect Xcode version: ${currentXcodeVersion}. Required major Xcode version is ${requiredMajorVersion}."

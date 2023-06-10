@@ -1,6 +1,6 @@
 
 fun foo(): String {
-    val s = try {
+    konst s = try {
         "OK"
     } catch (e: Exception) {
         try {

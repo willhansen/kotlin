@@ -7,9 +7,9 @@ kotlin {
     linuxX64()
 
     sourceSets {
-        val commonMain by getting
+        konst commonMain by getting
         if (!hasProperty("commonSourceSetDependsOnNothing")) {
-            val grandCommonMain by creating
+            konst grandCommonMain by creating
             commonMain.dependsOn(grandCommonMain)
         }
     }

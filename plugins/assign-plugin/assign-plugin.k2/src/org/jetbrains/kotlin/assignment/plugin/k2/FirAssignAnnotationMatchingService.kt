@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.name.FqName
 
 internal class FirAssignAnnotationMatchingService(
     session: FirSession,
-    private val annotationClassIds: List<FqName>
+    private konst annotationClassIds: List<FqName>
 ) : FirExtensionSessionComponent(session) {
 
     companion object {
@@ -28,7 +28,7 @@ internal class FirAssignAnnotationMatchingService(
         }
     }
 
-    private val cache: FirCache<FirRegularClassSymbol, Boolean, Nothing?> = session.firCachesFactory.createCache { symbol, _ ->
+    private konst cache: FirCache<FirRegularClassSymbol, Boolean, Nothing?> = session.firCachesFactory.createCache { symbol, _ ->
         symbol.annotated()
     }
 
@@ -42,10 +42,10 @@ internal class FirAssignAnnotationMatchingService(
     private fun FirRegularClassSymbol.annotated(): Boolean {
         if (this.annotations.any { it.toAnnotationClassId(session)?.asSingleFqName() in annotationClassIds }) return true
         return resolvedSuperTypeRefs.any { superTypeRef ->
-            val symbol = superTypeRef.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
+            konst symbol = superTypeRef.type.fullyExpandedType(session).toRegularClassSymbol(session) ?: return@any false
             symbol.annotations.any { it.toAnnotationClassId(session)?.asSingleFqName() in annotationClassIds }
         }
     }
 }
 
-internal val FirSession.annotationMatchingService: FirAssignAnnotationMatchingService by FirSession.sessionComponentAccessor()
+internal konst FirSession.annotationMatchingService: FirAssignAnnotationMatchingService by FirSession.sessionComponentAccessor()

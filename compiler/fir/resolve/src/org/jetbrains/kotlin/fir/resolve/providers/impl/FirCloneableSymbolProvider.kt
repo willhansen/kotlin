@@ -38,7 +38,7 @@ class FirCloneableSymbolProvider(
     moduleData: FirModuleData,
     scopeProvider: FirScopeProvider
 ) : FirSymbolProvider(session) {
-    private val klass = buildRegularClass {
+    private konst klass = buildRegularClass {
         resolvePhase = FirResolvePhase.ANALYZED_DEPENDENCIES
         origin = FirDeclarationOrigin.Library
         this.moduleData = moduleData
@@ -48,7 +48,7 @@ class FirCloneableSymbolProvider(
             EffectiveVisibility.Public
         )
         classKind = ClassKind.INTERFACE
-        val classSymbol = FirRegularClassSymbol(StandardClassIds.Cloneable)
+        konst classSymbol = FirRegularClassSymbol(StandardClassIds.Cloneable)
         symbol = classSymbol
         declarations += buildSimpleFunction {
             this.moduleData = moduleData
@@ -70,7 +70,7 @@ class FirCloneableSymbolProvider(
 
     }
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
         override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String> =
             if (packageFqName == StandardClassIds.Cloneable.packageFqName) {
                 setOf(StandardClassIds.Cloneable.shortClassName.asString())

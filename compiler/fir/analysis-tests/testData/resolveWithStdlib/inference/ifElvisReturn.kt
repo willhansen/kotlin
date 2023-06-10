@@ -8,7 +8,7 @@ interface B : A {
 fun <K : A> materialize(): K? = null!!
 
 fun foo(b: B, cond: Boolean) {
-    val x = // inferred as A
+    konst x = // inferred as A
         if (cond)
             b
         else

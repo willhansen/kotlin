@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.psi.KtFunction
 import org.jetbrains.kotlin.psi.KtParameterList
 
 internal class SymbolLightParameterList(
-    private val parent: SymbolLightMethodBase,
-    private val callableWithReceiverSymbolPointer: KtSymbolPointer<KtCallableSymbol>? = null,
+    private konst parent: SymbolLightMethodBase,
+    private konst callableWithReceiverSymbolPointer: KtSymbolPointer<KtCallableSymbol>? = null,
     parameterPopulator: (LightParameterListBuilder) -> Unit = {},
 ) : KtLightElement<KtParameterList, PsiParameterList>,
     // With this, a parent chain is properly built: from SymbolLightParameter through SymbolLightParameterList to SymbolLightMethod
@@ -29,11 +29,11 @@ internal class SymbolLightParameterList(
     // NB: we can't use delegation here, which will conflict getTextRange from KtLightElementBase
     PsiParameterList {
 
-    override val kotlinOrigin: KtParameterList?
-        get() = (parent.kotlinOrigin as? KtFunction)?.valueParameterList
+    override konst kotlinOrigin: KtParameterList?
+        get() = (parent.kotlinOrigin as? KtFunction)?.konstueParameterList
 
-    private val clsDelegate: PsiParameterList by lazyPub {
-        val builder = LightParameterListBuilder(manager, language)
+    private konst clsDelegate: PsiParameterList by lazyPub {
+        konst builder = LightParameterListBuilder(manager, language)
 
         callableWithReceiverSymbolPointer?.let {
             SymbolLightParameterForReceiver.tryGet(it, parent)?.let { receiver ->

@@ -1,7 +1,7 @@
 package
 
 public external var A.bar: kotlin.String
-public external val A.baz: kotlin.String
+public external konst A.baz: kotlin.String
 public external fun A.foo(): kotlin.Unit
 
 public final class A {

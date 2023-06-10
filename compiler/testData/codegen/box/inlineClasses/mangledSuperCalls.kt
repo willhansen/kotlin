@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I(val i: Int)
+konstue class I(konst i: Int)
 
 abstract class A {
     abstract fun f(i: I): String

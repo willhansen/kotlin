@@ -4,7 +4,7 @@ package test
 
 import kotlin.test.assertEquals
 
-enum class TestEnum(val id: String? = null) {
+enum class TestEnum(konst id: String? = null) {
     ENUM1(id = "enum1_id"),
 
     ENUM2(id = "enum2_id") {

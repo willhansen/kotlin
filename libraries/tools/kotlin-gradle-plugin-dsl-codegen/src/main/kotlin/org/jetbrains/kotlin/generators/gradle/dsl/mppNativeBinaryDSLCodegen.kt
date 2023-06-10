@@ -12,13 +12,13 @@ fun main() {
 }
 
 internal data class BinaryType(
-    val description: String,
-    val className: TypeName,
-    val nativeOutputKind: TypeName,
-    val factoryMethod: String,
-    val getMethod: String,
-    val findMethod: String,
-    val defaultBaseName: String
+    konst description: String,
+    konst className: TypeName,
+    konst nativeOutputKind: TypeName,
+    konst factoryMethod: String,
+    konst getMethod: String,
+    konst findMethod: String,
+    konst defaultBaseName: String
 )
 
 private fun binaryType(
@@ -38,18 +38,18 @@ private fun binaryType(
         defaultBaseName
     )
 
-private val nativeBuildTypeClass = typeName("$MPP_PACKAGE.NativeBuildType")
-private val nativeOutputKindClass = typeName("$MPP_PACKAGE.NativeOutputKind")
-private val nativeBinaryBaseClass = typeName("$MPP_PACKAGE.NativeBinary")
+private konst nativeBuildTypeClass = typeName("$MPP_PACKAGE.NativeBuildType")
+private konst nativeOutputKindClass = typeName("$MPP_PACKAGE.NativeOutputKind")
+private konst nativeBinaryBaseClass = typeName("$MPP_PACKAGE.NativeBinary")
 
 private fun generateFactoryMethods(binaryType: BinaryType): String {
-    val className = binaryType.className.renderShort()
-    val outputKind = binaryType.nativeOutputKind.renderShort()
-    val outputKindClass = nativeOutputKindClass.renderShort()
-    val nativeBuildType = nativeBuildTypeClass.renderShort()
-    val methodName = binaryType.factoryMethod
-    val binaryDescription = binaryType.description
-    val defaultBaseName = binaryType.defaultBaseName
+    konst className = binaryType.className.renderShort()
+    konst outputKind = binaryType.nativeOutputKind.renderShort()
+    konst outputKindClass = nativeOutputKindClass.renderShort()
+    konst nativeBuildType = nativeBuildTypeClass.renderShort()
+    konst methodName = binaryType.factoryMethod
+    konst binaryDescription = binaryType.description
+    konst defaultBaseName = binaryType.defaultBaseName
 
     return """
         /** Creates $binaryDescription with the given [namePrefix] for each build type and configures it. */
@@ -85,9 +85,9 @@ private fun generateFactoryMethods(binaryType: BinaryType): String {
 }
 
 private fun generateTypedGetters(binaryType: BinaryType): String = with(binaryType) {
-    val className = className.renderShort()
-    val buildType = nativeBuildTypeClass.renderShort()
-    val nativeBuildType = nativeBuildTypeClass.renderShort()
+    konst className = className.renderShort()
+    konst buildType = nativeBuildTypeClass.renderShort()
+    konst nativeBuildType = nativeBuildTypeClass.renderShort()
 
     return """
         /** Returns $description with the given [namePrefix] and the given build type. Throws an exception if there is no such binary.*/
@@ -95,7 +95,7 @@ private fun generateTypedGetters(binaryType: BinaryType): String = with(binaryTy
 
         /** Returns $description with the given [namePrefix] and the given build type. Throws an exception if there is no such binary.*/
         fun $getMethod(namePrefix: String, buildType: String): $className =
-            $getMethod(namePrefix, $nativeBuildType.valueOf(buildType.toUpperCase()))
+            $getMethod(namePrefix, $nativeBuildType.konstueOf(buildType.toUpperCase()))
 
         /** Returns $description with the empty name prefix and the given build type. Throws an exception if there is no such binary.*/
         fun $getMethod(buildType: $buildType): $className = $getMethod("", buildType)
@@ -108,7 +108,7 @@ private fun generateTypedGetters(binaryType: BinaryType): String = with(binaryTy
 
         /** Returns $description with the given [namePrefix] and the given build type. Returns null if there is no such binary. */
         fun $findMethod(namePrefix: String, buildType: String): $className? =
-            $findMethod(namePrefix, $nativeBuildType.valueOf(buildType.toUpperCase()))
+            $findMethod(namePrefix, $nativeBuildType.konstueOf(buildType.toUpperCase()))
 
         /** Returns $description with the empty name prefix and the given build type. Returns null if there is no such binary. */
         fun $findMethod(buildType: $buildType): $className? = $findMethod("", buildType)
@@ -120,7 +120,7 @@ private fun generateTypedGetters(binaryType: BinaryType): String = with(binaryTy
 
 fun generateAbstractKotlinNativeBinaryContainer() {
 
-    val binaryTypes = listOf(
+    konst binaryTypes = listOf(
         binaryType("an executable","Executable", "EXECUTABLE", "executable"),
         binaryType("a static library","StaticLibrary", "STATIC", "staticLib"),
         binaryType("a shared library","SharedLibrary", "DYNAMIC", "sharedLib"),
@@ -134,34 +134,34 @@ fun generateAbstractKotlinNativeBinaryContainer() {
         )
     )
 
-    val className = typeName("org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer")
-    val superClassName = typeName("org.gradle.api.DomainObjectSet", nativeBinaryBaseClass.fqName)
+    konst className = typeName("org.jetbrains.kotlin.gradle.dsl.AbstractKotlinNativeBinaryContainer")
+    konst superClassName = typeName("org.gradle.api.DomainObjectSet", nativeBinaryBaseClass.fqName)
 
-    val imports = """
+    konst imports = """
         import org.gradle.api.Action
         import org.gradle.api.DomainObjectSet
         import org.gradle.api.Project
         import $MPP_PACKAGE.*
     """.trimIndent()
 
-    val generatedCodeWarning = "// DO NOT EDIT MANUALLY! Generated by ${object {}.javaClass.enclosingClass.name}"
+    konst generatedCodeWarning = "// DO NOT EDIT MANUALLY! Generated by ${object {}.javaClass.enclosingClass.name}"
 
-    val classProperties = listOf(
-        "abstract val project: Project",
-        "abstract val target: ${typeName(NativeFQNames.Targets.base).shortName()}"
+    konst classProperties = listOf(
+        "abstract konst project: Project",
+        "abstract konst target: ${typeName(NativeFQNames.Targets.base).shortName()}"
     ).joinToString(separator = "\n") { it.indented(4) }
 
-    val nativeBinary = nativeBinaryBaseClass.renderShort()
-    val nativeOutputKind = nativeOutputKindClass.renderShort()
-    val nativeBuildType = nativeBuildTypeClass.renderShort()
+    konst nativeBinary = nativeBinaryBaseClass.renderShort()
+    konst nativeOutputKind = nativeOutputKindClass.renderShort()
+    konst nativeBuildType = nativeBuildTypeClass.renderShort()
 
-    val buildTypeConstants = listOf(
+    konst buildTypeConstants = listOf(
         "// User-visible constants.",
-        "val DEBUG = $nativeBuildType.DEBUG",
-        "val RELEASE = $nativeBuildType.RELEASE"
+        "konst DEBUG = $nativeBuildType.DEBUG",
+        "konst RELEASE = $nativeBuildType.RELEASE"
     ).joinToString(separator = "\n") { it.indented(4) }
 
-    val baseFactoryFunction = """
+    konst baseFactoryFunction = """
         protected abstract fun <T : $nativeBinary> createBinaries(
             namePrefix: String,
             baseName: String,
@@ -172,7 +172,7 @@ fun generateAbstractKotlinNativeBinaryContainer() {
         )
     """.trimIndent().indented(4)
 
-    val namedGetters = """
+    konst namedGetters = """
         /** Provide an access to binaries using the [] operator in Groovy DSL. */
         fun getAt(name: String): NativeBinary = getByName(name)
 
@@ -186,7 +186,7 @@ fun generateAbstractKotlinNativeBinaryContainer() {
         abstract fun findByName(name: String): NativeBinary?
     """.trimIndent().indented(4)
 
-    val code = listOf(
+    konst code = listOf(
         "package ${className.packageName()}",
         imports,
         generatedCodeWarning,
@@ -200,6 +200,6 @@ fun generateAbstractKotlinNativeBinaryContainer() {
         "}"
     ).joinToString(separator = "\n\n")
 
-    val targetFile = File("$outputSourceRoot/${className.fqName.replace(".", "/")}.kt")
+    konst targetFile = File("$outputSourceRoot/${className.fqName.replace(".", "/")}.kt")
     targetFile.writeText(code)
 }

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibilities
 
-internal const val NO_FLAGS: Flags = 0
+internal const konst NO_FLAGS: Flags = 0
 
 internal fun CirFunction.functionFlags(isExpect: Boolean): Flags =
     flagsOfNotNull(
@@ -70,7 +70,7 @@ internal fun CirTypeParameter.typeParameterFlags(): Flags =
         Flag.TypeParameter.IS_REIFIED.takeIf { isReified }
     )
 
-internal fun CirValueParameter.valueParameterFlags(): Flags =
+internal fun CirValueParameter.konstueParameterFlags(): Flags =
     flagsOfNotNull(
         hasAnnotationsFlag,
         Flag.ValueParameter.DECLARES_DEFAULT_VALUE.takeIf { declaresDefaultValue },
@@ -99,21 +99,21 @@ internal fun CirTypeAlias.typeAliasFlags(): Flags =
         visibilityFlag
     )
 
-private inline val CirHasAnnotations.hasAnnotationsFlag: Flag?
+private inline konst CirHasAnnotations.hasAnnotationsFlag: Flag?
     get() = if (annotations.isNotEmpty()) Flag.Common.HAS_ANNOTATIONS else null
 
-// Since 1.4.30 a special @JvmInline annotation is generated to distinguish JVM-inline from value classes.
+// Since 1.4.30 a special @JvmInline annotation is generated to distinguish JVM-inline from konstue classes.
 // This has an effect on class serialization: Every class with isValue == true automatically gets HAS_ANNOTATIONS flag.
-private inline val CirClass.hasAnnotationsFlag: Flag?
+private inline konst CirClass.hasAnnotationsFlag: Flag?
     get() = if (annotations.isNotEmpty() || isValue) Flag.Common.HAS_ANNOTATIONS else null
 
-private inline val CirProperty.hasAnnotationsFlag: Flag?
+private inline konst CirProperty.hasAnnotationsFlag: Flag?
     get() = if (annotations.isNotEmpty() || !backingFieldAnnotations.isNullOrEmpty() || !delegateFieldAnnotations.isNullOrEmpty())
         Flag.Common.HAS_ANNOTATIONS
     else
         null
 
-private inline val CirHasVisibility.visibilityFlag: Flag
+private inline konst CirHasVisibility.visibilityFlag: Flag
     get() = when (visibility) {
         Visibilities.Public -> Flag.Common.IS_PUBLIC
         Visibilities.Protected -> Flag.Common.IS_PROTECTED
@@ -122,7 +122,7 @@ private inline val CirHasVisibility.visibilityFlag: Flag
         else -> error("Unexpected visibility: $this")
     }
 
-private inline val CirHasModality.modalityFlag: Flag
+private inline konst CirHasModality.modalityFlag: Flag
     get() = when (modality) {
         Modality.FINAL -> Flag.Common.IS_FINAL
         Modality.ABSTRACT -> Flag.Common.IS_ABSTRACT
@@ -130,7 +130,7 @@ private inline val CirHasModality.modalityFlag: Flag
         Modality.SEALED -> Flag.Common.IS_SEALED
     }
 
-private inline val CirFunction.memberKindFlag: Flag
+private inline konst CirFunction.memberKindFlag: Flag
     get() = when (kind) {
         CallableMemberDescriptor.Kind.DECLARATION -> Flag.Function.IS_DECLARATION
         CallableMemberDescriptor.Kind.FAKE_OVERRIDE -> Flag.Function.IS_FAKE_OVERRIDE
@@ -138,7 +138,7 @@ private inline val CirFunction.memberKindFlag: Flag
         CallableMemberDescriptor.Kind.SYNTHESIZED -> Flag.Function.IS_SYNTHESIZED
     }
 
-private inline val CirProperty.memberKindFlag: Flag
+private inline konst CirProperty.memberKindFlag: Flag
     get() = when (kind) {
         CallableMemberDescriptor.Kind.DECLARATION -> Flag.Property.IS_DECLARATION
         CallableMemberDescriptor.Kind.FAKE_OVERRIDE -> Flag.Property.IS_FAKE_OVERRIDE
@@ -146,7 +146,7 @@ private inline val CirProperty.memberKindFlag: Flag
         CallableMemberDescriptor.Kind.SYNTHESIZED -> Flag.Property.IS_SYNTHESIZED
     }
 
-private inline val CirClass.classKindFlag: Flag
+private inline konst CirClass.classKindFlag: Flag
     get() = when (kind) {
         ClassKind.CLASS -> Flag.Class.IS_CLASS
         ClassKind.INTERFACE -> Flag.Class.IS_INTERFACE
@@ -156,7 +156,7 @@ private inline val CirClass.classKindFlag: Flag
         ClassKind.OBJECT -> Flag.Class.IS_OBJECT
     }
 
-private inline val CirFunctionModifiers.modifiersFlags: Flags
+private inline konst CirFunctionModifiers.modifiersFlags: Flags
     get() = flagsOfNotNull(
         Flag.Function.IS_OPERATOR.takeIf { isOperator },
         Flag.Function.IS_INFIX.takeIf { isInfix },
@@ -164,7 +164,7 @@ private inline val CirFunctionModifiers.modifiersFlags: Flags
         Flag.Function.IS_SUSPEND.takeIf { isSuspend },
     )
 
-private inline val CirProperty.modifiersFlags: Flags
+private inline konst CirProperty.modifiersFlags: Flags
     get() = flagsOfNotNull(
         Flag.Property.IS_VAR.takeIf { isVar },
         Flag.Property.IS_CONST.takeIf { isConst },
@@ -172,9 +172,9 @@ private inline val CirProperty.modifiersFlags: Flags
         Flag.Property.IS_LATEINIT.takeIf { isLateInit },
     )
 
-private inline val CirType.nullableFlag: Flag?
+private inline konst CirType.nullableFlag: Flag?
     get() {
-        val isNullable = when (this) {
+        konst isNullable = when (this) {
             is CirSimpleType -> isMarkedNullable
             is CirFlexibleType -> lowerBound.isMarkedNullable
         }

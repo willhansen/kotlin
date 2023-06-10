@@ -18,6 +18,6 @@ public class B extends A {
 
 // FILE: main.kt
 fun test(b: B) {
-    val s = b.getScope()
+    konst s = b.getScope()
     b.setScope(s)
 }

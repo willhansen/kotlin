@@ -22,25 +22,25 @@ import kotlin.time.toKotlinDuration
 
 private abstract class RunGTestJob : WorkAction<RunGTestJob.Parameters> {
     interface Parameters : WorkParameters {
-        val testName: Property<String>
-        val executable: RegularFileProperty
-        val reportFile: RegularFileProperty
-        val reportFileUnprocessed: RegularFileProperty
-        val filter: Property<String>
-        val tsanSuppressionsFile: RegularFileProperty
-        val platformManager: Property<PlatformManager>
+        konst testName: Property<String>
+        konst executable: RegularFileProperty
+        konst reportFile: RegularFileProperty
+        konst reportFileUnprocessed: RegularFileProperty
+        konst filter: Property<String>
+        konst tsanSuppressionsFile: RegularFileProperty
+        konst platformManager: Property<PlatformManager>
         // TODO: Figure out a way to pass KonanTarget, but it is used as a key into PlatformManager,
         //       so object identity matters, and platform managers are different between project and worker sides.
-        val targetName: Property<String>
-        val executionTimeout: Property<Duration>
+        konst targetName: Property<String>
+        konst executionTimeout: Property<Duration>
     }
 
     // The `Executor` is created for every `RunGTest` task execution. It's okay, testing tasks are few-ish and big.
-    private val executor: Executor by lazy {
-        val platformManager = parameters.platformManager.get()
-        val target = platformManager.targetByName(parameters.targetName.get())
-        val configurables = platformManager.platform(target).configurables
-        val hostTarget = HostManager.host
+    private konst executor: Executor by lazy {
+        konst platformManager = parameters.platformManager.get()
+        konst target = platformManager.targetByName(parameters.targetName.get())
+        konst configurables = platformManager.platform(target).configurables
+        konst hostTarget = HostManager.host
         when {
             target == hostTarget -> HostExecutor()
             configurables is AppleConfigurables && configurables.targetTriple.isSimulator -> XcodeSimulatorExecutor(configurables)
@@ -92,25 +92,25 @@ abstract class RunGTest : DefaultTask() {
      * Useful when CI merges different test results of the same test but for different test targets.
      */
     @get:Input
-    abstract val testName: Property<String>
+    abstract konst testName: Property<String>
 
     /**
      * Test executable
      */
     @get:InputFile
-    abstract val executable: RegularFileProperty
+    abstract konst executable: RegularFileProperty
 
     /**
      * Test report with each test name decorated with [testName].
      */
     @get:OutputFile
-    abstract val reportFile: RegularFileProperty
+    abstract konst reportFile: RegularFileProperty
 
     /**
      * Undecorated test report.
      */
     @get:OutputFile
-    abstract val reportFileUnprocessed: RegularFileProperty
+    abstract konst reportFileUnprocessed: RegularFileProperty
 
     /**
      * Run a subset of tests.
@@ -125,30 +125,30 @@ abstract class RunGTest : DefaultTask() {
      */
     @get:Input
     @get:Optional
-    abstract val filter: Property<String>
+    abstract konst filter: Property<String>
 
     /**
      * Suppression rules for TSAN.
      */
     @get:InputFile
     @get:Optional
-    abstract val tsanSuppressionsFile: RegularFileProperty
+    abstract konst tsanSuppressionsFile: RegularFileProperty
 
     @get:Inject
-    protected abstract val workerExecutor: WorkerExecutor
+    protected abstract konst workerExecutor: WorkerExecutor
 
     @get:Input
-    abstract val target: Property<KonanTarget>
+    abstract konst target: Property<KonanTarget>
 
     /**
      * Timeout for the test run.
      */
     @get:Input
-    abstract val executionTimeout: Property<Duration>
+    abstract konst executionTimeout: Property<Duration>
 
     @TaskAction
     fun run() {
-        val workQueue = workerExecutor.noIsolation()
+        konst workQueue = workerExecutor.noIsolation()
 
         workQueue.submit(RunGTestJob::class.java) {
             testName.set(this@RunGTest.testName)

@@ -27,53 +27,53 @@ interface KotlinCompilation<out T : KotlinCommonOptionsDeprecated> : Named,
     HasAttributes,
     HasKotlinDependencies {
 
-    val target: KotlinTarget
+    konst target: KotlinTarget
 
-    val compilationName: String
+    konst compilationName: String
 
-    val kotlinSourceSets: Set<KotlinSourceSet>
+    konst kotlinSourceSets: Set<KotlinSourceSet>
 
-    val allKotlinSourceSets: Set<KotlinSourceSet>
+    konst allKotlinSourceSets: Set<KotlinSourceSet>
 
     @Deprecated("Use defaultSourceSet.name instead", ReplaceWith("defaultSourceSet.name"))
-    val defaultSourceSetName: String get() = defaultSourceSet.name
+    konst defaultSourceSetName: String get() = defaultSourceSet.name
 
-    val defaultSourceSet: KotlinSourceSet
+    konst defaultSourceSet: KotlinSourceSet
 
     fun defaultSourceSet(configure: KotlinSourceSet.() -> Unit)
     fun defaultSourceSet(configure: Action<KotlinSourceSet>) = defaultSourceSet { configure.execute(this) }
 
-    val compileDependencyConfigurationName: String
+    konst compileDependencyConfigurationName: String
 
     var compileDependencyFiles: FileCollection
 
-    val runtimeDependencyConfigurationName: String?
+    konst runtimeDependencyConfigurationName: String?
 
-    val runtimeDependencyFiles: FileCollection?
+    konst runtimeDependencyFiles: FileCollection?
 
-    val output: KotlinCompilationOutput
+    konst output: KotlinCompilationOutput
 
-    val platformType get() = target.platformType
+    konst platformType get() = target.platformType
 
-    val compileKotlinTaskName: String
+    konst compileKotlinTaskName: String
 
-    val compilerOptions: HasCompilerOptions<*>
+    konst compilerOptions: HasCompilerOptions<*>
 
     @Deprecated(
         message = "Accessing task instance directly is deprecated",
         replaceWith = ReplaceWith("compileTaskProvider")
     )
-    val compileKotlinTask: KotlinCompileDeprecated<T>
+    konst compileKotlinTask: KotlinCompileDeprecated<T>
 
     @Deprecated(
         message = "Replaced with compileTaskProvider",
         replaceWith = ReplaceWith("compileTaskProvider")
     )
-    val compileKotlinTaskProvider: TaskProvider<out KotlinCompileDeprecated<T>>
+    konst compileKotlinTaskProvider: TaskProvider<out KotlinCompileDeprecated<T>>
 
-    val compileTaskProvider: TaskProvider<out KotlinCompilationTask<*>>
+    konst compileTaskProvider: TaskProvider<out KotlinCompilationTask<*>>
 
-    val kotlinOptions: T
+    konst kotlinOptions: T
 
     fun kotlinOptions(configure: T.() -> Unit) {
         @Suppress("DEPRECATION")
@@ -88,16 +88,16 @@ interface KotlinCompilation<out T : KotlinCommonOptionsDeprecated> : Named,
     fun attributes(configure: AttributeContainer.() -> Unit) = attributes.configure()
     fun attributes(configure: Action<AttributeContainer>) = attributes { configure.execute(this) }
 
-    val compileAllTaskName: String
+    konst compileAllTaskName: String
 
     companion object {
-        const val MAIN_COMPILATION_NAME = "main"
-        const val TEST_COMPILATION_NAME = "test"
+        const konst MAIN_COMPILATION_NAME = "main"
+        const konst TEST_COMPILATION_NAME = "test"
     }
 
     /**
      * Will add a [KotlinSourceSet] directly into this compilation.
-     * This method is deprecated and targets Kotlin 2.0 for its removal.
+     * This method is deprecated and targets Kotlin 2.0 for its remokonst.
      * After Kotlin 2.0 there will be exactly one SourceSet associated with a given Kotlin Compilation.
      *
      * In order to include other sources into the compilation, please build a hierarchy of Source Sets instead.
@@ -117,8 +117,8 @@ interface KotlinCompilation<out T : KotlinCommonOptionsDeprecated> : Named,
      * #### Example 1: Create a new 'utils' source set and make it available to the 'main' compilation:
      * ```kotlin
      * kotlin {
-     *     val compilation = target.compilations.getByName("main")
-     *     val utilsSourceSet = sourceSets.create("utils")
+     *     konst compilation = target.compilations.getByName("main")
+     *     konst utilsSourceSet = sourceSets.create("utils")
      *     compilation.defaultSourceSet.dependsOn(utilsSourceSet)
      * }
      * ```
@@ -126,49 +126,49 @@ interface KotlinCompilation<out T : KotlinCommonOptionsDeprecated> : Named,
      * #### Example 2: Add 'src/utils/kotlin' to the main SourceSet
      * ```kotlin
      * kotlin {
-     *     val compilation = target.compilations.getByName("main")
+     *     konst compilation = target.compilations.getByName("main")
      *     compilation.defaultSourceSet.kotlin.srcDir("src/utils/kotlin")
      * }
      * ```
      * Further details:
      * https://kotl.in/compilation-source-deprecation
      */
-    @Deprecated("scheduled for removal with Kotlin 2.0")
+    @Deprecated("scheduled for remokonst with Kotlin 2.0")
     fun source(sourceSet: KotlinSourceSet)
 
     fun associateWith(other: KotlinCompilation<*>)
 
-    val associateWith: List<KotlinCompilation<*>>
+    konst associateWith: List<KotlinCompilation<*>>
 
     override fun getName(): String = compilationName
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     @Suppress("DEPRECATION")
-    override val relatedConfigurationNames: List<String>
+    override konst relatedConfigurationNames: List<String>
         get() = super.relatedConfigurationNames + compileDependencyConfigurationName
 
-    val disambiguatedName
+    konst disambiguatedName
         get() = target.disambiguationClassifier + name
 }
 
-@Deprecated("Scheduled for removal with Kotlin 2.0")
+@Deprecated("Scheduled for remokonst with Kotlin 2.0")
 interface KotlinCompilationToRunnableFiles<T : KotlinCommonOptionsDeprecated> : KotlinCompilation<T> {
-    override val runtimeDependencyConfigurationName: String
+    override konst runtimeDependencyConfigurationName: String
 
     override var runtimeDependencyFiles: FileCollection
 
     @Suppress("DEPRECATION")
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
-    override val relatedConfigurationNames: List<String>
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
+    override konst relatedConfigurationNames: List<String>
         get() = super.relatedConfigurationNames + runtimeDependencyConfigurationName
 }
 
-@Deprecated("Scheduled for removal with Kotlin 2.0")
+@Deprecated("Scheduled for remokonst with Kotlin 2.0")
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER", "deprecation") // kept for compatibility
-val <T : KotlinCommonOptionsDeprecated> KotlinCompilation<T>.runtimeDependencyConfigurationName: String?
+konst <T : KotlinCommonOptionsDeprecated> KotlinCompilation<T>.runtimeDependencyConfigurationName: String?
     get() = (this as? KotlinCompilationToRunnableFiles<T>)?.runtimeDependencyConfigurationName
 
-@Deprecated("Scheduled for removal with Kotlin 2.0")
+@Deprecated("Scheduled for remokonst with Kotlin 2.0")
 interface KotlinCompilationWithResources<T : KotlinCommonOptionsDeprecated> : KotlinCompilation<T> {
-    val processResourcesTaskName: String
+    konst processResourcesTaskName: String
 }

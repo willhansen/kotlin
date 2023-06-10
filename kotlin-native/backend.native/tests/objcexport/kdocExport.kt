@@ -19,7 +19,7 @@ class KDocExport() {
      *
      * This is multi-line KDoc. See a blank line above.
      */
-    val xyzzy: String = "String example"
+    konst xyzzy: String = "String example"
 
     /** Non-primary ctor KDoc: */
     constructor(name: String) : this() {
@@ -27,7 +27,7 @@ class KDocExport() {
     }
 
             /** @property xyzzy KDoc for foo? */
-    val foo = "foo"
+    konst foo = "foo"
     /** @property foo KDoc for yxxyz? */
     var yxxyz = 0;
 }
@@ -38,7 +38,7 @@ class KDocExport() {
  *
  * This kdoc has some additional formatting.
  * @param a keep intact and return
- * @return value of [a]
+ * @return konstue of [a]
  * Check for additional comment (note) below
  */
 @Throws(IllegalArgumentException::class)
@@ -56,7 +56,7 @@ public abstract class SomeClassWithProperty
      *
      * Example of usage:
      * ```
-     * suspend fun updateUiElement(val text: String) {
+     * suspend fun updateUiElement(konst text: String) {
      *   /*
      *    * If it is known that updateUiElement can be invoked both from the Main thread and from other threads,
      *    * `immediate` dispatcher is used as a performance optimization to avoid unnecessary dispatch.
@@ -76,5 +76,5 @@ public abstract class SomeClassWithProperty
      *
      * [Dispatchers.Main] supports immediate execution for Android, JavaFx and Swing platforms.
      */
-    public abstract val heavyFormattedKDocFoo: SomeClassWithProperty
+    public abstract konst heavyFormattedKDocFoo: SomeClassWithProperty
 }

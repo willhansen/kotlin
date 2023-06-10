@@ -5,7 +5,7 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
@@ -13,7 +13,7 @@ open annotation class TestAnn : Annotation {
 
 fun foo() {
   @TestAnn(x = "foo/testVal")
-  val testVal: String = "testVal"
+  konst testVal: String = "testVal"
   @TestAnn(x = "foo/testVar")
   var testVar: String = "testVar"
 }

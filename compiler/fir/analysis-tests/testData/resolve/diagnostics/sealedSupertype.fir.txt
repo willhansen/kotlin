@@ -61,7 +61,7 @@ FILE: sealedSupertype.kt
 
         }
 
-        public final val p: R|P| = object : R|P| {
+        public final konst p: R|P| = object : R|P| {
             private constructor(): R|<anonymous>| {
                 super<R|P|>()
             }
@@ -70,7 +70,7 @@ FILE: sealedSupertype.kt
 
             public get(): R|P|
 
-        public final val r: R|P| = object : R|P| {
+        public final konst r: R|P| = object : R|P| {
             private constructor(): R|<anonymous>| {
                 super<R|P|>()
             }
@@ -107,7 +107,7 @@ FILE: sealedSupertype.kt
 
         }
 
-        lval a: R|<anonymous>| = object : R|P| {
+        lkonst a: R|<anonymous>| = object : R|P| {
             private constructor(): R|<anonymous>| {
                 super<R|P|>()
             }

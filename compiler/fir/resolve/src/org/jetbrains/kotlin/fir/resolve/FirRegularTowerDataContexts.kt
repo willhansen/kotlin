@@ -19,10 +19,10 @@ enum class FirTowerDataMode {
 }
 
 class FirRegularTowerDataContexts private constructor(
-    private val modeMap: EnumMap<FirTowerDataMode, FirTowerDataContext>,
-    val primaryConstructorPureParametersScope: FirLocalScope?,
-    val primaryConstructorAllParametersScope: FirLocalScope?,
-    val activeMode: FirTowerDataMode,
+    private konst modeMap: EnumMap<FirTowerDataMode, FirTowerDataContext>,
+    konst primaryConstructorPureParametersScope: FirLocalScope?,
+    konst primaryConstructorAllParametersScope: FirLocalScope?,
+    konst activeMode: FirTowerDataMode,
 ) {
     constructor(
         regular: FirTowerDataContext,
@@ -40,11 +40,11 @@ class FirRegularTowerDataContexts private constructor(
         FirTowerDataMode.REGULAR
     )
 
-    val currentContext: FirTowerDataContext?
+    konst currentContext: FirTowerDataContext?
         get() = modeMap[activeMode]
 
     fun replaceCurrentlyActiveContext(newContext: FirTowerDataContext): FirRegularTowerDataContexts {
-        val modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
+        konst modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
         modeMap.putAll(this.modeMap)
         modeMap[activeMode] = newContext
         return FirRegularTowerDataContexts(modeMap, primaryConstructorPureParametersScope, primaryConstructorAllParametersScope, activeMode)
@@ -58,7 +58,7 @@ class FirRegularTowerDataContexts private constructor(
     // Effectively equal to replaceTowerDataMode(REGULAR) + replaceCurrentlyActiveContext(newContext)
     // But left just for sake of optimization
     fun replaceAndSetActiveRegularContext(newContext: FirTowerDataContext): FirRegularTowerDataContexts {
-        val modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
+        konst modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
         modeMap.putAll(this.modeMap)
         modeMap[FirTowerDataMode.REGULAR] = newContext
         return FirRegularTowerDataContexts(
@@ -75,7 +75,7 @@ class FirRegularTowerDataContexts private constructor(
             forConstructorHeaders: FirTowerDataContext?,
             forEnumEntries: FirTowerDataContext?,
         ): EnumMap<FirTowerDataMode, FirTowerDataContext> {
-            val modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
+            konst modeMap = EnumMap<FirTowerDataMode, FirTowerDataContext>(FirTowerDataMode::class.java)
             modeMap[FirTowerDataMode.REGULAR] = regular
             modeMap[FirTowerDataMode.CLASS_HEADER_ANNOTATIONS] = forClassHeaderAnnotations
             modeMap[FirTowerDataMode.NESTED_CLASS] = forNestedClasses

@@ -3,7 +3,7 @@ package foo
 
 class FromAny : Any()
 
-class FromIterable(val n: Int) : Iterable<Int> {
+class FromIterable(konst n: Int) : Iterable<Int> {
     override fun iterator() = object: Iterator<Int> {
         var i = 0
         override fun next() = i++
@@ -18,10 +18,10 @@ fun <T> Iterable<T>.stringify(): String {
 }
 
 fun box(): String {
-    val a = FromAny()
-    val it = FromIterable(3)
+    konst a = FromAny()
+    konst it = FromIterable(3)
 
-    val s = it.stringify()
+    konst s = it.stringify()
     if (s != "012") return "s /*$s*/ != 012"
 
     var ao = object : Any() {
@@ -38,7 +38,7 @@ fun box(): String {
         }
     }
 
-    val so = ito.stringify()
+    konst so = ito.stringify()
     if (so != "02468") return "so /*$so*/ != 02468"
 
     return "OK"

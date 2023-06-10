@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.types.FirTypeRefComparator
 object FirMemberDeclarationComparator : Comparator<FirMemberDeclaration> {
     // Comparing different kinds of callable members by assigning distinct priorities to those members.
     object TypeAndNameComparator : Comparator<FirMemberDeclaration> {
-        private val FirMemberDeclaration.priority: Int
+        private konst FirMemberDeclaration.priority: Int
             get() = when (this) {
                 is FirEnumEntry -> 7
                 is FirConstructor -> 6
@@ -29,7 +29,7 @@ object FirMemberDeclarationComparator : Comparator<FirMemberDeclaration> {
             }
 
         override fun compare(a: FirMemberDeclaration, b: FirMemberDeclaration): Int {
-            val priorityDiff = a.priority - b.priority
+            konst priorityDiff = a.priority - b.priority
             if (priorityDiff != 0) {
                 return priorityDiff
             }
@@ -50,7 +50,7 @@ object FirMemberDeclarationComparator : Comparator<FirMemberDeclaration> {
             return FirCallableDeclarationComparator.compare(a, b)
         }
 
-        val typeAndNameDiff = TypeAndNameComparator.compare(a, b)
+        konst typeAndNameDiff = TypeAndNameComparator.compare(a, b)
         if (typeAndNameDiff != 0) {
             return typeAndNameDiff
         }

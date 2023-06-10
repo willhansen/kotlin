@@ -2,40 +2,40 @@ package test
 
 class Test {
 
-    val test0 = 42
+    konst test0 = 42
 
 
     /**
      * comment
      */
-    val test1 = 42
+    konst test1 = 42
 
 
     @Suppress(
         "UNUSED_VARIABLE"
     )
-    val test2 = 42
+    konst test2 = 42
 
 
     private
-    val test3 = 42
+    konst test3 = 42
 
 
-    val test4 get() = 42
+    konst test4 get() = 42
 
 
-    val test5
+    konst test5
         get() = 42
 
 
-    val test6
+    konst test6
         /**
          * comment
          */
         get() = 42
 
 
-    val test7
+    konst test7
         @Suppress(
             "UNUSED_VARIABLE"
         )
@@ -53,8 +53,8 @@ class Test {
 
 
     var test11 = 42
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
 
@@ -62,8 +62,8 @@ class Test {
         /**
          * comment
          */
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
 
@@ -71,8 +71,8 @@ class Test {
         @Suppress(
             "UNUSED_VARIABLE"
         )
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
 }

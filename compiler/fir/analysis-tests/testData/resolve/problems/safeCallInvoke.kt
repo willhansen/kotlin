@@ -3,8 +3,8 @@ class A {
 }
 
 class B {
-    val bar: () -> Unit = {}
-    val foo: A = A()
+    konst bar: () -> Unit = {}
+    konst foo: A = A()
 }
 
 fun main(b: B?) {

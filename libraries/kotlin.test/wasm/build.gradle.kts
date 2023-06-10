@@ -4,7 +4,7 @@ plugins {
     kotlin("multiplatform")
 }
 
-val commonMainSources by task<Sync> {
+konst commonMainSources by task<Sync> {
     from(
         "$rootDir/libraries/kotlin.test/common/src",
         "$rootDir/libraries/kotlin.test/annotations-common/src"
@@ -19,14 +19,14 @@ kotlin {
 
     @Suppress("UNUSED_VARIABLE")
     sourceSets {
-         val commonMain by getting {
+         konst commonMain by getting {
             dependencies {
                 api(project(":kotlin-stdlib-wasm"))
             }
             kotlin.srcDir(commonMainSources.get().destinationDir)
         }
 
-        val wasmMain by getting {
+        konst wasmMain by getting {
             dependencies {
                 api(project(":kotlin-stdlib-wasm"))
             }

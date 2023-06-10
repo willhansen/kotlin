@@ -4,7 +4,7 @@
 // FILE: box.kt
 
 open class B {
-    open val s: String
+    open konst s: String
         get() = "Fail"
 }
 

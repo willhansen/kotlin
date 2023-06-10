@@ -15,7 +15,7 @@ internal open class KtFirDelegatingNamesAwareScope(
     firScope: FirContainingNamesAwareScope,
     builder: KtSymbolByFirBuilder,
 ) : KtFirBasedScope<FirContainingNamesAwareScope>(firScope, builder) {
-    private val allNamesCached by cached {
+    private konst allNamesCached by cached {
         getPossibleCallableNames() + getPossibleClassifierNames()
     }
 

@@ -164,7 +164,7 @@ public final class ClassId {
     public int hashCode() {
         int result = packageFqName.hashCode();
         result = 31 * result + relativeClassName.hashCode();
-        result = 31 * result + Boolean.valueOf(local).hashCode();
+        result = 31 * result + Boolean.konstueOf(local).hashCode();
         return result;
     }
 

@@ -13,7 +13,7 @@ class A {
 }
 
 fun box(): String {
-    val c = A().B()
+    konst c = A().B()
     if(c.prop != 1) return "fail get"
     c.prop = 2
     if (c.prop != 2) return "fail set"

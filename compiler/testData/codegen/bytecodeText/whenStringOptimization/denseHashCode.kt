@@ -1,5 +1,5 @@
 fun foo() : Int {
-    val x : String = "dsa"
+    konst x : String = "dsa"
     when (x) {
         "a" -> return 1
         "b" -> return 1

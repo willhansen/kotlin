@@ -12,9 +12,9 @@ fun applyRestrictions2() = applyRestrictions1()
 fun <K> applyRestrictions3(e: K) = applyRestrictions1()
 
 fun buildB() {
-    val a1 = applyRestrictions1()
-    val a2 = applyRestrictions2()
-    val a3 = applyRestrictions3("foo")
+    konst a1 = applyRestrictions1()
+    konst a2 = applyRestrictions2()
+    konst a3 = applyRestrictions3("foo")
 
     B.Builder().a1()
     B.Builder().a2()
@@ -32,6 +32,6 @@ fun guess(): F? = TODO()
 fun consume(f: F) {}
 
 fun problem() {
-    val p = guess()
+    konst p = guess()
     consume(p ?: {})
 }

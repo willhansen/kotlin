@@ -674,7 +674,7 @@ public final class StaticContext {
                 }
 
                 JsFunction correspondingFunction = JsAstUtils.createFunctionWithEmptyBody(fragment.getScope());
-                assert (!scopeToFunction.containsKey(correspondingFunction.getScope())) : "Scope to function value overridden for " + descriptor;
+                assert (!scopeToFunction.containsKey(correspondingFunction.getScope())) : "Scope to function konstue overridden for " + descriptor;
                 scopeToFunction.put(correspondingFunction.getScope(), correspondingFunction);
                 correspondingFunction.setSource(PsiSourceElementKt.getPsi(((CallableDescriptor) descriptor).getSource()));
                 return correspondingFunction.getScope();

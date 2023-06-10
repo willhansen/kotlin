@@ -4,7 +4,7 @@ interface A<T> {
     fun foo(a: T): String
 }
 
-inline class Foo(val x: Long) : A<Foo> {
+inline class Foo(konst x: Long) : A<Foo> {
     override fun foo(a: Foo): String = if (x != a.x) "OK" else "FAIL"
 }
 

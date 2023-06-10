@@ -1,7 +1,7 @@
 == test ==
 fun test() {
     while (true) {
-        class LocalClass(val x: Int) {
+        class LocalClass(konst x: Int) {
             init {
                 break
             }
@@ -17,17 +17,17 @@ fun test() {
 ---------------------
 L0:
   1 <START>
-  2 mark({ while (true) { class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } })
+  2 mark({ while (true) { class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } })
 L2 [loop entry point]:
 L6 [condition entry point]:
-    r(true) -> <v0>                                                                                                                      PREV:[mark({ while (true) { class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } }), jmp(L2)]
-    mark(while (true) { class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } })
+    r(true) -> <v0>                                                                                                                      PREV:[mark({ while (true) { class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } }), jmp(L2)]
+    mark(while (true) { class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } })
     magic[VALUE_CONSUMER](true|<v0>) -> <v1>
 L4 [body entry point]:
-  3 mark({ class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } })
-    jmp?(L7)                                                                                                                             NEXT:[jmp(L2), v(val x: Int)]
-    v(val x: Int)
-    magic[FAKE_INITIALIZER](val x: Int) -> <v2>
+  3 mark({ class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } })
+    jmp?(L7)                                                                                                                             NEXT:[jmp(L2), v(konst x: Int)]
+    v(konst x: Int)
+    magic[FAKE_INITIALIZER](konst x: Int) -> <v2>
     w(x|<v2>)
   4 mark({ break })
   3 jmp?(L8)                                                                                                                             NEXT:[jmp(L2), d(fun foo() { break })]

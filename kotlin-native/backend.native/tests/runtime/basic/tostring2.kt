@@ -8,8 +8,8 @@ package runtime.basic.tostring2
 import kotlin.test.*
 
 @Test fun runTest() {
-    val hello = "Hello"
-    val array = hello.toCharArray()
+    konst hello = "Hello"
+    konst array = hello.toCharArray()
     for (ch in array) {
         print(ch)
         print(" ")

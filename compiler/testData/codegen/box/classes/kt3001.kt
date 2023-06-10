@@ -1,8 +1,8 @@
 interface A {
-    val result: String
+    konst result: String
 }
 
-class Base(override val result: String) : A
+class Base(override konst result: String) : A
 
 open class Derived : A by Base("OK")
 

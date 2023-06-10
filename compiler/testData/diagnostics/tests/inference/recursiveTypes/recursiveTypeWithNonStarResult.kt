@@ -8,6 +8,6 @@ interface D<T> : A<C<T>>
 fun <S> select(vararg args: S): S = TODO()
 
 fun test(c: C<String>, d: D<String>) {
-    val v = select(c, d)
+    konst v = select(c, d)
     <!DEBUG_INFO_EXPRESSION_TYPE("A<C<kotlin.String>>")!>v<!>
 }

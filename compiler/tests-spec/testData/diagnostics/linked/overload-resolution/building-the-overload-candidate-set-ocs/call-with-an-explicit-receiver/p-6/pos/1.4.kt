@@ -24,7 +24,7 @@ package libPackage
 
 class Marker {
     fun foo() = println("non-extension member Marker.foo()")
-    val foo: String = "non-extension member Marker.foo"
+    konst foo: String = "non-extension member Marker.foo"
 }
 
 // FILE: Tests.kt

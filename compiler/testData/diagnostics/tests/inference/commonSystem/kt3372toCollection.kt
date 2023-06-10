@@ -8,6 +8,6 @@ import java.util.HashSet
 fun <T, C: MutableCollection<T>> Iterable<T>.toCollection(result: C) : C = throw Exception()
 
 fun test(list: List<Int>) {
-    val set = list.toCollection(HashSet())
+    konst set = list.toCollection(HashSet())
     set checkType { _<HashSet<Int>>() }
 }

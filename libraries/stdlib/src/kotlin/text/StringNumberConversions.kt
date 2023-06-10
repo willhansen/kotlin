@@ -11,69 +11,69 @@ package kotlin.text
 
 /**
  * Parses the string as a signed [Byte] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public fun String.toByteOrNull(): Byte? = toByteOrNull(radix = 10)
 
 /**
  * Parses the string as a signed [Byte] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 public fun String.toByteOrNull(radix: Int): Byte? {
-    val int = this.toIntOrNull(radix) ?: return null
+    konst int = this.toIntOrNull(radix) ?: return null
     if (int < Byte.MIN_VALUE || int > Byte.MAX_VALUE) return null
     return int.toByte()
 }
 
 /**
  * Parses the string as a [Short] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public fun String.toShortOrNull(): Short? = toShortOrNull(radix = 10)
 
 /**
  * Parses the string as a [Short] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 public fun String.toShortOrNull(radix: Int): Short? {
-    val int = this.toIntOrNull(radix) ?: return null
+    konst int = this.toIntOrNull(radix) ?: return null
     if (int < Short.MIN_VALUE || int > Short.MAX_VALUE) return null
     return int.toShort()
 }
 
 /**
  * Parses the string as an [Int] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public fun String.toIntOrNull(): Int? = toIntOrNull(radix = 10)
 
 /**
  * Parses the string as an [Int] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 public fun String.toIntOrNull(radix: Int): Int? {
     checkRadix(radix)
 
-    val length = this.length
+    konst length = this.length
     if (length == 0) return null
 
-    val start: Int
-    val isNegative: Boolean
-    val limit: Int
+    konst start: Int
+    konst isNegative: Boolean
+    konst limit: Int
 
-    val firstChar = this[0]
+    konst firstChar = this[0]
     if (firstChar < '0') {  // Possible leading sign
         if (length == 1) return null  // non-digit (possible sign) only, no digits after
 
@@ -94,12 +94,12 @@ public fun String.toIntOrNull(radix: Int): Int? {
     }
 
 
-    val limitForMaxRadix = (-Int.MAX_VALUE) / 36
+    konst limitForMaxRadix = (-Int.MAX_VALUE) / 36
 
     var limitBeforeMul = limitForMaxRadix
     var result = 0
     for (i in start until length) {
-        val digit = digitOf(this[i], radix)
+        konst digit = digitOf(this[i], radix)
 
         if (digit < 0) return null
         if (result < limitBeforeMul) {
@@ -126,29 +126,29 @@ public fun String.toIntOrNull(radix: Int): Int? {
 
 /**
  * Parses the string as a [Long] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  */
 @SinceKotlin("1.1")
 public fun String.toLongOrNull(): Long? = toLongOrNull(radix = 10)
 
 /**
  * Parses the string as a [Long] number and returns the result
- * or `null` if the string is not a valid representation of a number.
+ * or `null` if the string is not a konstid representation of a number.
  *
- * @throws IllegalArgumentException when [radix] is not a valid radix for string to number conversion.
+ * @throws IllegalArgumentException when [radix] is not a konstid radix for string to number conversion.
  */
 @SinceKotlin("1.1")
 public fun String.toLongOrNull(radix: Int): Long? {
     checkRadix(radix)
 
-    val length = this.length
+    konst length = this.length
     if (length == 0) return null
 
-    val start: Int
-    val isNegative: Boolean
-    val limit: Long
+    konst start: Int
+    konst isNegative: Boolean
+    konst limit: Long
 
-    val firstChar = this[0]
+    konst firstChar = this[0]
     if (firstChar < '0') {  // Possible leading sign
         if (length == 1) return null  // non-digit (possible sign) only, no digits after
 
@@ -169,12 +169,12 @@ public fun String.toLongOrNull(radix: Int): Long? {
     }
 
 
-    val limitForMaxRadix = (-Long.MAX_VALUE) / 36
+    konst limitForMaxRadix = (-Long.MAX_VALUE) / 36
 
     var limitBeforeMul = limitForMaxRadix
     var result = 0L
     for (i in start until length) {
-        val digit = digitOf(this[i], radix)
+        konst digit = digitOf(this[i], radix)
 
         if (digit < 0) return null
         if (result < limitBeforeMul) {
@@ -200,4 +200,4 @@ public fun String.toLongOrNull(radix: Int): Long? {
 }
 
 
-internal fun numberFormatError(input: String): Nothing = throw NumberFormatException("Invalid number format: '$input'")
+internal fun numberFormatError(input: String): Nothing = throw NumberFormatException("Inkonstid number format: '$input'")

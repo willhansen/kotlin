@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class KotlinVersion(val version: String) {
+enum class KotlinVersion(konst version: String) {
     @Deprecated("Unsupported", level = DeprecationLevel.ERROR) KOTLIN_1_0("1.0"),
     @Deprecated("Unsupported", level = DeprecationLevel.ERROR) KOTLIN_1_1("1.1"),
     @Deprecated("Unsupported", level = DeprecationLevel.ERROR) KOTLIN_1_2("1.2"),
@@ -22,9 +22,9 @@ enum class KotlinVersion(val version: String) {
 
     companion object {
         fun fromVersion(version: String): KotlinVersion =
-            KotlinVersion.values().firstOrNull { it.version == version }
+            KotlinVersion.konstues().firstOrNull { it.version == version }
                 ?: throw IllegalArgumentException("Unknown Kotlin version: $version")
 
-        val DEFAULT = KOTLIN_1_9
+        konst DEFAULT = KOTLIN_1_9
     }
 }

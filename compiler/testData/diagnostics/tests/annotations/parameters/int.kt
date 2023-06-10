@@ -1,10 +1,10 @@
 package test
 
 annotation class Ann(
-        val b1: Int,
-        val b2: Int,
-        val b3: Int,
-        val b4: Int
+        konst b1: Int,
+        konst b2: Int,
+        konst b3: Int,
+        konst b4: Int
 )
 
 @Ann(1, 1.toInt(), 2147483648.toInt(), <!CONSTANT_EXPECTED_TYPE_MISMATCH!>2147483648<!>) class MyClass

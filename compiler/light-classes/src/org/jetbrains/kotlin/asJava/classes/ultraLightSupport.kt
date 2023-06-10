@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 interface KtUltraLightSupport {
-    val moduleName: String
-    val deprecationResolver: DeprecationResolver
-    val typeMapper: KotlinTypeMapper
-    val moduleDescriptor: ModuleDescriptor
-    val languageVersionSettings: LanguageVersionSettings
-    val jvmTarget: JvmTarget
+    konst moduleName: String
+    konst deprecationResolver: DeprecationResolver
+    konst typeMapper: KotlinTypeMapper
+    konst moduleDescriptor: ModuleDescriptor
+    konst languageVersionSettings: LanguageVersionSettings
+    konst jvmTarget: JvmTarget
 
     fun possiblyHasAlias(file: KtFile, shortName: Name): Boolean
 }
 
-internal val KtUltraLightSupport.jvmDefaultMode: JvmDefaultMode get() = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
+internal konst KtUltraLightSupport.jvmDefaultMode: JvmDefaultMode get() = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)

@@ -36,7 +36,7 @@ fun platformType() = when (J.foo()) {
 }
 
 fun platformTypeSmartCast(): Int {
-    val e = J.foo()
+    konst e = J.foo()
     if (e == null) return -1
     return when (e) {
         E.A -> 1

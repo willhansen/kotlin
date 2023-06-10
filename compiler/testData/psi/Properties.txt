@@ -4,7 +4,7 @@ KtFile: Properties.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -22,12 +22,12 @@ KtFile: Properties.kt
         PsiElement(IDENTIFIER)('bar')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiErrorElement:Annotations are not allowed in this position
       ANNOTATION
@@ -44,7 +44,7 @@ KtFile: Properties.kt
     PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -54,7 +54,7 @@ KtFile: Properties.kt
     PsiElement(IDENTIFIER)('bar')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -66,7 +66,7 @@ KtFile: Properties.kt
           PsiElement(IDENTIFIER)('T')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiErrorElement:Annotations are not allowed in this position
       ANNOTATION
@@ -88,7 +88,7 @@ KtFile: Properties.kt
       PsiElement(IDENTIFIER)('bar')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -120,7 +120,7 @@ KtFile: Properties.kt
         PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -128,7 +128,7 @@ KtFile: Properties.kt
       PsiElement(get)('get')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -150,7 +150,7 @@ KtFile: Properties.kt
       PsiElement(set)('set')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -172,7 +172,7 @@ KtFile: Properties.kt
       PsiElement(set)('set')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -198,7 +198,7 @@ KtFile: Properties.kt
         PsiElement(IDENTIFIER)('foo')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -212,7 +212,7 @@ KtFile: Properties.kt
       PsiElement(get)('get')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace(' ')
@@ -247,7 +247,7 @@ KtFile: Properties.kt
       PsiElement(set)('set')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -274,7 +274,7 @@ KtFile: Properties.kt
       PsiElement(set)('set')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -316,7 +316,7 @@ KtFile: Properties.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')
@@ -342,7 +342,7 @@ KtFile: Properties.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       USER_TYPE
@@ -389,7 +389,7 @@ KtFile: Properties.kt
           PsiElement(INTEGER_LITERAL)('1')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       NULLABLE_TYPE
@@ -408,7 +408,7 @@ KtFile: Properties.kt
           PsiElement(IDENTIFIER)('Int')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     TYPE_REFERENCE
       NULLABLE_TYPE

@@ -21,33 +21,33 @@ class LightTreeParsingTest {
     fun testLightTreeReadLineEndings() {
 
         data class LinePos(
-            val mappingLine: Int,
-            val line: Int,
-            val col: Int,
-            val content: String?
+            konst mappingLine: Int,
+            konst line: Int,
+            konst col: Int,
+            konst content: String?
         ) {
             override fun toString(): String = "$mappingLine: \"$content\" ($line:$col)"
         }
 
         fun String.makeCodeMappingAndPositions() = run {
-            val (code, mapping) = ByteArrayInputStream(toByteArray()).reader().readSourceFileWithMapping()
-            val positionFinder = SequentialPositionFinder(ByteArrayInputStream(toByteArray()).reader())
-            val linePositions =
+            konst (code, mapping) = ByteArrayInputStream(toByteArray()).reader().readSourceFileWithMapping()
+            konst positionFinder = SequentialPositionFinder(ByteArrayInputStream(toByteArray()).reader())
+            konst linePositions =
                 LightTree2Fir.buildLightTree(code, null).getChildrenAsArray()
                     .mapNotNull { it?.startOffset }
                     .map {
-                        val nextPos = positionFinder.findNextPosition(it)
+                        konst nextPos = positionFinder.findNextPosition(it)
                         LinePos( mapping.getLineByOffset(it), nextPos.line, nextPos.column, nextPos.lineContent)
                     }
             Triple(code.toString(), mapping, linePositions)
         }
 
-        val (codeLf, mappingLf, positionsLf) = MULTILINE_SOURCE.makeCodeMappingAndPositions()
+        konst (codeLf, mappingLf, positionsLf) = MULTILINE_SOURCE.makeCodeMappingAndPositions()
 
-        val (codeCrLf, mappingCrLf, positionsCrLf) =
+        konst (codeCrLf, mappingCrLf, positionsCrLf) =
             MULTILINE_SOURCE.replace("\n", "\r\n").makeCodeMappingAndPositions()
 
-        val (codeCrLfMixed, mappingCrLfMixed, positionsCrLfMixed) =
+        konst (codeCrLfMixed, mappingCrLfMixed, positionsCrLfMixed) =
             MULTILINE_SOURCE.let {
                 var toReplace = false
                 buildString {
@@ -63,7 +63,7 @@ class LightTreeParsingTest {
             }.makeCodeMappingAndPositions()
 
         // classic MacOS line endings are probably not to be found in the wild, but checking the support nevertheless
-        val (codeCr, mappingCr, positionsCr) =
+        konst (codeCr, mappingCr, positionsCr) =
             MULTILINE_SOURCE.replace("\n", "\r").makeCodeMappingAndPositions()
 
         Assert.assertEquals(codeLf, codeCrLf)
@@ -85,15 +85,15 @@ class LightTreeParsingTest {
 }
 
 private fun FlyweightCapableTreeStructure<LighterASTNode>.getChildrenAsArray(): Array<out LighterASTNode?> {
-    val kidsRef = Ref<Array<LighterASTNode?>>()
+    konst kidsRef = Ref<Array<LighterASTNode?>>()
     getChildren(root, kidsRef)
     return kidsRef.get()
 }
 
-private const val MULTILINE_SOURCE = """
-val a = 1
- val b = 2 
-  val c = 3
-   val d = 4
-    val e = 5
+private const konst MULTILINE_SOURCE = """
+konst a = 1
+ konst b = 2 
+  konst c = 3
+   konst d = 4
+    konst e = 5
 """

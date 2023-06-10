@@ -1,4 +1,4 @@
 fun main() {
-    val v = JavaClass()
-    v.value = null //error
+    konst v = JavaClass()
+    v.konstue = null //error
 }

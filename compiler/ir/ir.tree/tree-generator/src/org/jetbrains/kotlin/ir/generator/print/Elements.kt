@@ -19,10 +19,10 @@ fun printElements(generationPath: File, model: Model) = sequence {
     for (element in model.elements) {
         if (element.suppressPrint) continue
 
-        val elementName = element.toPoet()
-        val selfParametrizedElementName = element.toPoetSelfParameterized()
+        konst elementName = element.toPoet()
+        konst selfParametrizedElementName = element.toPoetSelfParameterized()
 
-        val elementType = when (element.kind?.typeKind) {
+        konst elementType = when (element.kind?.typeKind) {
             null -> error("Element's category not configured")
             TypeKind.Class -> TypeSpec.classBuilder(elementName)
             TypeKind.Interface -> TypeSpec.interfaceBuilder(elementName)
@@ -39,7 +39,7 @@ fun printElements(generationPath: File, model: Model) = sequence {
             )
             addTypeVariables(element.params.map { it.toPoet() })
 
-            val (classes, interfaces) = element.allParents.partition { it.typeKind == TypeKind.Class }
+            konst (classes, interfaces) = element.allParents.partition { it.typeKind == TypeKind.Class }
             classes.singleOrNull()?.let {
                 superclass(it.toPoet())
             }
@@ -47,7 +47,7 @@ fun printElements(generationPath: File, model: Model) = sequence {
 
             for (field in element.fields) {
                 if (!field.printProperty) continue
-                val poetType = field.type.toPoet().copy(nullable = field.nullable)
+                konst poetType = field.type.toPoet().copy(nullable = field.nullable)
                 addProperty(PropertySpec.builder(field.name, poetType).apply {
                     mutable(field.mutable)
                     if (field.isOverride) {
@@ -76,20 +76,20 @@ fun printElements(generationPath: File, model: Model) = sequence {
                 }.build())
             }
 
-            val isRootElement = element.elementParents.isEmpty()
-            val acceptMethodName = "accept"
-            val transformMethodName = "transform"
+            konst isRootElement = element.elementParents.isEmpty()
+            konst acceptMethodName = "accept"
+            konst transformMethodName = "transform"
             if (element.accept) {
                 addFunction(FunSpec.builder(acceptMethodName).apply {
                     addModifiers(if (isRootElement) KModifier.ABSTRACT else KModifier.OVERRIDE)
-                    val r = TypeVariableName("R")
-                    val d = TypeVariableName("D")
+                    konst r = TypeVariableName("R")
+                    konst d = TypeVariableName("D")
                     addTypeVariable(r)
                     addTypeVariable(d)
-                    val visitorParam = ParameterSpec.builder("visitor", elementVisitorType.toPoet().tryParameterizedBy(r, d))
+                    konst visitorParam = ParameterSpec.builder("visitor", elementVisitorType.toPoet().tryParameterizedBy(r, d))
                         .build()
                         .also(::addParameter)
-                    val dataParam = ParameterSpec.builder("data", d)
+                    konst dataParam = ParameterSpec.builder("data", d)
                         .build()
                         .also(::addParameter)
                     returns(r)
@@ -103,7 +103,7 @@ fun printElements(generationPath: File, model: Model) = sequence {
 
                             @param %1N The visitor to accept.
                             @param %2N An arbitrary context to pass to each invocation of [%1N]'s methods.
-                            @return The value returned by the topmost `visit*` invocation.
+                            @return The konstue returned by the topmost `visit*` invocation.
                             """.trimIndent(),
                             visitorParam,
                             dataParam,
@@ -115,12 +115,12 @@ fun printElements(generationPath: File, model: Model) = sequence {
             if (element.transform) {
                 addFunction(FunSpec.builder(transformMethodName).apply {
                     addModifiers(if (isRootElement) KModifier.ABSTRACT else KModifier.OVERRIDE)
-                    val d = TypeVariableName("D")
+                    konst d = TypeVariableName("D")
                     addTypeVariable(d)
-                    val transformerParam = ParameterSpec.builder("transformer", elementTransformerType.toPoet().tryParameterizedBy(d))
+                    konst transformerParam = ParameterSpec.builder("transformer", elementTransformerType.toPoet().tryParameterizedBy(d))
                         .build()
                         .also(::addParameter)
-                    val dataParam = ParameterSpec.builder("data", d)
+                    konst dataParam = ParameterSpec.builder("data", d)
                         .build()
                         .also(::addParameter)
                     returns(selfParametrizedElementName)
@@ -146,13 +146,13 @@ fun printElements(generationPath: File, model: Model) = sequence {
             if (element.ownsChildren && (isRootElement || element.walkableChildren.isNotEmpty())) {
                 addFunction(FunSpec.builder("acceptChildren").apply {
                     addModifiers(if (isRootElement) KModifier.ABSTRACT else KModifier.OVERRIDE)
-                    val d = TypeVariableName("D")
+                    konst d = TypeVariableName("D")
                     addTypeVariable(d)
 
-                    val visitorParam = ParameterSpec
+                    konst visitorParam = ParameterSpec
                         .builder("visitor", elementVisitorType.toPoet().tryParameterizedBy(UNIT, d)).build()
                         .also(::addParameter)
-                    val dataParam = ParameterSpec
+                    konst dataParam = ParameterSpec
                         .builder("data", d).build()
                         .also(::addParameter)
 
@@ -194,16 +194,16 @@ fun printElements(generationPath: File, model: Model) = sequence {
             if (element.ownsChildren && (isRootElement || element.transformableChildren.isNotEmpty())) {
                 addFunction(FunSpec.builder("transformChildren").apply {
                     addModifiers(if (isRootElement) KModifier.ABSTRACT else KModifier.OVERRIDE)
-                    val d = TypeVariableName("D")
+                    konst d = TypeVariableName("D")
                     addTypeVariable(d)
-                    val transformerParam =
+                    konst transformerParam =
                         ParameterSpec.builder("transformer", elementTransformerType.toPoet().tryParameterizedBy(d)).build()
                             .also(::addParameter)
-                    val dataParam = ParameterSpec.builder("data", d).build().also(::addParameter)
+                    konst dataParam = ParameterSpec.builder("data", d).build().also(::addParameter)
 
                     for (child in element.transformableChildren) {
-                        val args = mutableListOf<Any>()
-                        val code = buildString {
+                        konst args = mutableListOf<Any>()
+                        konst code = buildString {
                             append("%N")
                             args.add(child.name)
                             when (child) {
@@ -229,7 +229,7 @@ fun printElements(generationPath: File, model: Model) = sequence {
                             args.add(dataParam)
 
                             if (child is SingleField) {
-                                val elRef = child.type as ElementRef
+                                konst elRef = child.type as ElementRef
                                 if (!elRef.element.transform) {
                                     append(" as %T")
                                     if (child.nullable) append("?")
@@ -284,6 +284,6 @@ private fun TypeSpec.Builder.generateElementKDoc(element: Element) {
     })
 }
 
-private val descriptorApiAnnotation = ClassName("org.jetbrains.kotlin.ir", "ObsoleteDescriptorBasedAPI")
-private val transformIfNeeded = MemberName("$BASE_PACKAGE.util", "transformIfNeeded", true)
-private val transformInPlace = MemberName("$BASE_PACKAGE.util", "transformInPlace", true)
+private konst descriptorApiAnnotation = ClassName("org.jetbrains.kotlin.ir", "ObsoleteDescriptorBasedAPI")
+private konst transformIfNeeded = MemberName("$BASE_PACKAGE.util", "transformIfNeeded", true)
+private konst transformInPlace = MemberName("$BASE_PACKAGE.util", "transformInPlace", true)

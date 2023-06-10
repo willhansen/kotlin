@@ -1,6 +1,6 @@
-var subjectEvaluated = 0
+var subjectEkonstuated = 0
 
-fun String.foo() = length.also { ++subjectEvaluated }
+fun String.foo() = length.also { ++subjectEkonstuated }
 
 fun test(s: String?) =
     when (s?.foo()) {
@@ -11,9 +11,9 @@ fun test(s: String?) =
     }
 
 fun box(): String {
-    val t = test("12")
+    konst t = test("12")
     if (t != "two") return "Fail: $t"
-    if (subjectEvaluated != 1) return "Fail: subjectEvaluated=$subjectEvaluated"
+    if (subjectEkonstuated != 1) return "Fail: subjectEkonstuated=$subjectEkonstuated"
 
     return "OK"
 }

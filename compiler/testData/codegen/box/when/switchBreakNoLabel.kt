@@ -30,6 +30,6 @@ fun test(): Boolean {
 }
 
 fun box(): String {
-    val flag = test()
+    konst flag = test()
     return if (flag) "OK" else "fail1"
 }

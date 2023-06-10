@@ -20,7 +20,7 @@ package libPackage
 
 class Marker {
     fun foo(y: () -> Int) = TODO()
-    val foo: Marker = this
+    konst foo: Marker = this
     operator fun invoke(x: () -> Int) = TODO()
 }
 

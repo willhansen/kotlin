@@ -50,9 +50,9 @@ fun setInlineCallMetadata(
         "Expected descriptor of callable, that should be inlined, but got: $descriptor"
     }
 
-    val candidateNames = setOf(context.aliasedName(descriptor), context.getInnerNameForDescriptor(descriptor))
+    konst candidateNames = setOf(context.aliasedName(descriptor), context.getInnerNameForDescriptor(descriptor))
 
-    val visitor = object : RecursiveJsVisitor() {
+    konst visitor = object : RecursiveJsVisitor() {
         override fun visitInvocation(invocation: JsInvocation) {
             super.visitInvocation(invocation)
 
@@ -91,16 +91,16 @@ fun setInlineCallMetadata(
 }
 
 fun TranslationContext.aliasedName(descriptor: CallableDescriptor): JsName {
-    val alias = getAliasForDescriptor(descriptor)
-    val aliasName = (alias as? JsNameRef)?.name
+    konst alias = getAliasForDescriptor(descriptor)
+    konst aliasName = (alias as? JsNameRef)?.name
 
     return aliasName ?: getNameForDescriptor(descriptor)
 }
 
-val JsExpression?.name: JsName?
+konst JsExpression?.name: JsName?
     get() = when (this) {
         is JsInvocation -> {
-            val qualifier = this.qualifier
+            konst qualifier = this.qualifier
 
             when {
                 isCallInvocation(this) -> (qualifier as JsNameRef).qualifier.name

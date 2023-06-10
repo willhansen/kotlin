@@ -8,10 +8,10 @@ package test
 
 import kotlin.test.assertEquals
 
-data class Box<T>(val element: T)
+data class Box<T>(konst element: T)
 
 fun box(): String {
-    val p = Box<String>::element
-    assertEquals("val test.Box<T>.element: T", p.toString())
+    konst p = Box<String>::element
+    assertEquals("konst test.Box<T>.element: T", p.toString())
     return p.call(Box("OK"))
 }

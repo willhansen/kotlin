@@ -24,21 +24,21 @@ import java.util.*
  *  Thus the inliner effectively implements a DFS. InlinerCycleReporter manages the DFS state. Also it detects and reports cycles.
  */
 class InlinerCycleReporter(
-    val trace: DiagnosticSink,
-    private val functionDefinitionLoader: FunctionDefinitionLoader
+    konst trace: DiagnosticSink,
+    private konst functionDefinitionLoader: FunctionDefinitionLoader
 ) {
 
     private enum class VisitedState { IN_PROCESS, PROCESSED }
 
-    private val functionVisitingState = mutableMapOf<JsFunction, VisitedState>()
+    private konst functionVisitingState = mutableMapOf<JsFunction, VisitedState>()
 
     // these are needed for error reporting, when inliner detects cycle
-    private val namedFunctionsStack = Stack<JsFunction>()
+    private konst namedFunctionsStack = Stack<JsFunction>()
 
-    private val currentNamedFunction: JsFunction?
+    private konst currentNamedFunction: JsFunction?
         get() = if (namedFunctionsStack.empty()) null else namedFunctionsStack.peek()
 
-    private val inlineCallInfos = LinkedList<JsCallInfo>()
+    private konst inlineCallInfos = LinkedList<JsCallInfo>()
 
     // Puts `function` on the `namedFunctionsStack` for inline call cycles reporting
     fun <T> withFunction(function: JsFunction, body: () -> T): T {
@@ -46,7 +46,7 @@ class InlinerCycleReporter(
             namedFunctionsStack.push(function)
         }
 
-        val result = body()
+        konst result = body()
 
         if (currentNamedFunction == function) {
             namedFunctionsStack.pop()
@@ -56,7 +56,7 @@ class InlinerCycleReporter(
     }
 
     fun processInlineFunction(definition: FunctionWithWrapper, call: JsInvocation?, doProcess: () -> Unit) {
-        val function = definition.function
+        konst function = definition.function
 
         if (call != null) {
             currentNamedFunction?.let {
@@ -92,13 +92,13 @@ class InlinerCycleReporter(
 
     private fun reportInlineCycle(call: JsInvocation?, calledFunction: JsFunction) {
         call?.isInline = false
-        val it = inlineCallInfos.descendingIterator()
+        konst it = inlineCallInfos.descendingIterator()
 
         while (it.hasNext()) {
-            val callInfo = it.next()
-            val psiElement = callInfo.call.psiElement
+            konst callInfo = it.next()
+            konst psiElement = callInfo.call.psiElement
 
-            val descriptor = callInfo.call.descriptor
+            konst descriptor = callInfo.call.descriptor
             if (psiElement != null && descriptor != null) {
                 trace.report(Errors.INLINE_CALL_CYCLE.on(psiElement, descriptor))
             }
@@ -110,4 +110,4 @@ class InlinerCycleReporter(
     }
 }
 
-private class JsCallInfo(val call: JsInvocation, val containingFunction: JsFunction)
+private class JsCallInfo(konst call: JsInvocation, konst containingFunction: JsFunction)

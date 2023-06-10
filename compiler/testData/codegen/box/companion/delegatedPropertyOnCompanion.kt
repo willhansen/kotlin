@@ -5,18 +5,18 @@ class Delegate {
 }
 
 class Delegate2 {
-    var value: String = "NOT OK"
+    var konstue: String = "NOT OK"
 
-    operator fun getValue(t: Any?, p: KProperty<*>): String = value
+    operator fun getValue(t: Any?, p: KProperty<*>): String = konstue
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
-        this.value = value
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
+        this.konstue = konstue
     }
 }
 
 class A {
     companion object {
-        val s: String by Delegate()
+        konst s: String by Delegate()
         var s2: String by Delegate2()
         var s3: String by Delegate2()
     }
@@ -36,7 +36,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.f() != "OK") return "FAIL0"
     if (a.g() != "OK") return "FAIL0"
     a.set2()

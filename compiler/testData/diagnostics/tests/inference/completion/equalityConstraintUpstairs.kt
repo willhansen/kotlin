@@ -2,8 +2,8 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class In<in I>(arg: I)
-class Out<out O>(val prop: O)
-class Inv<T>(val prop: T)
+class Out<out O>(konst prop: O)
+class Inv<T>(konst prop: T)
 
 interface Upper
 class Lower : Upper

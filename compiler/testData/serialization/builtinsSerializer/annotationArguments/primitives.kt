@@ -1,14 +1,14 @@
 package test
 
 annotation class Primitives(
-        val byte: Byte,
-        val char: Char,
-        val short: Short,
-        val int: Int,
-        val long: Long,
-        val float: Float,
-        val double: Double,
-        val boolean: Boolean
+        konst byte: Byte,
+        konst char: Char,
+        konst short: Short,
+        konst int: Int,
+        konst long: Long,
+        konst float: Float,
+        konst double: Double,
+        konst boolean: Boolean
 )
 
 @Primitives(

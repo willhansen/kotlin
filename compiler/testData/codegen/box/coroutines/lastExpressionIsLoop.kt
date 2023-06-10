@@ -15,7 +15,7 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.ok = true
     })
@@ -24,7 +24,7 @@ fun builder(c: suspend Controller.() -> Unit): String {
 }
 
 fun box(): String {
-    val r1 = builder {
+    konst r1 = builder {
         for (i in 5..6) {
             suspendHere(i.toString())
         }
@@ -32,7 +32,7 @@ fun box(): String {
 
     if (r1 != "56") return "fail 1: $r1"
 
-    val r2 = builder {
+    konst r2 = builder {
         var i = 7
         while (i <= 8) {
             suspendHere(i.toString())
@@ -42,7 +42,7 @@ fun box(): String {
 
     if (r2 != "78") return "fail 2: $r2"
 
-    val r3 = builder {
+    konst r3 = builder {
         var i = 9
         do {
             suspendHere(i.toString())

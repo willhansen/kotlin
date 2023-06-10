@@ -32,12 +32,12 @@ import org.jetbrains.kotlin.test.utils.withExtension
  */
 class IrPrettyKotlinDumpHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
     companion object {
-        const val DUMP_EXTENSION = "kt.txt"
+        const konst DUMP_EXTENSION = "kt.txt"
     }
 
-    private val dumper = MultiModuleInfoDumper("// MODULE: %s")
+    private konst dumper = MultiModuleInfoDumper("// MODULE: %s")
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives, FirDiagnosticsDirectives)
 
     override fun processModule(module: TestModule, info: IrBackendInput) {
@@ -53,9 +53,9 @@ class IrPrettyKotlinDumpHandler(testServices: TestServices) : AbstractIrHandler(
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val moduleStructure = testServices.moduleStructure
-        val extension = computeDumpExtension(moduleStructure.modules.first(), DUMP_EXTENSION)
-        val expectedFile = moduleStructure.originalTestDataFiles.first().withExtension(extension)
+        konst moduleStructure = testServices.moduleStructure
+        konst extension = computeDumpExtension(moduleStructure.modules.first(), DUMP_EXTENSION)
+        konst expectedFile = moduleStructure.originalTestDataFiles.first().withExtension(extension)
         assertions.assertEqualsToFile(expectedFile, dumper.generateResultingDump())
     }
 }
@@ -68,13 +68,13 @@ internal fun dumpModuleKotlinLike(
     options: KotlinLikeDumpOptions,
 ) {
     info.processAllIrModuleFragments(module) { irModuleFragment, moduleName ->
-        val irFiles = irModuleFragment.files
-        val builder = multiModuleInfoDumper.builderForModule(moduleName)
-        val filteredIrFiles = irFiles.groupWithTestFiles(module).filterNot { (testFile, _) ->
+        konst irFiles = irModuleFragment.files
+        konst builder = multiModuleInfoDumper.builderForModule(moduleName)
+        konst filteredIrFiles = irFiles.groupWithTestFiles(module).filterNot { (testFile, _) ->
             testFile?.let { EXTERNAL_FILE in it.directives || it.isAdditional } ?: false
         }.map { it.second }
-        val printFileName = filteredIrFiles.size > 1 || allModules.size > 1
-        val modifiedOptions = options.copy(printFileName = printFileName)
+        konst printFileName = filteredIrFiles.size > 1 || allModules.size > 1
+        konst modifiedOptions = options.copy(printFileName = printFileName)
         for (irFile in filteredIrFiles) {
             builder.append(irFile.dumpKotlinLike(modifiedOptions))
         }

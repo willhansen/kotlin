@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName
 @NativeGradlePluginTests
 internal class NativeEmbeddableCompilerJarIT : KGPBaseTest() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
 
     private fun String.isRegularJar() = this.endsWith("/kotlin-native.jar")
     private fun String.isEmbeddableJar() = this.endsWith("/kotlin-native-compiler-embeddable.jar")
@@ -23,7 +23,7 @@ internal class NativeEmbeddableCompilerJarIT : KGPBaseTest() {
     private fun List<String>.includesRegularJar() = any { it.isRegularJar() }
     private fun List<String>.includesEmbeddableJar() = any { it.isEmbeddableJar() }
 
-    private val String.withPrefix get() = "native-binaries/$this"
+    private konst String.withPrefix get() = "native-binaries/$this"
 
     @DisplayName("K/N with default config shouldn't contain kotlin-native.jar and should contain kotlin-native-compiler-embeddable.jar")
     @GradleTest

@@ -171,14 +171,14 @@ fun readLine(): String? = LineReader.readLine(System.`in`, Charset.defaultCharse
 
 // Singleton object lazy initializes on the first use, internal for tests
 internal object LineReader {
-    private const val BUFFER_SIZE: Int = 32
+    private const konst BUFFER_SIZE: Int = 32
     private lateinit var decoder: CharsetDecoder
     private var directEOL = false
-    private val bytes = ByteArray(BUFFER_SIZE)
-    private val chars = CharArray(BUFFER_SIZE)
-    private val byteBuf: ByteBuffer = ByteBuffer.wrap(bytes)
-    private val charBuf: CharBuffer = CharBuffer.wrap(chars)
-    private val sb = StringBuilder()
+    private konst bytes = ByteArray(BUFFER_SIZE)
+    private konst chars = CharArray(BUFFER_SIZE)
+    private konst byteBuf: ByteBuffer = ByteBuffer.wrap(bytes)
+    private konst charBuf: CharBuffer = CharBuffer.wrap(chars)
+    private konst sb = StringBuilder()
 
     /**
      * Reads line from the specified [inputStream] with the given [charset].
@@ -192,7 +192,7 @@ internal object LineReader {
         var nBytes = 0
         var nChars = 0
         while (true) {
-            val readByte = inputStream.read()
+            konst readByte = inputStream.read()
             if (readByte == -1) {
                 // The result is null only if there was absolutely nothing read
                 if (sb.isEmpty() && nBytes == 0 && nChars == 0) {
@@ -229,7 +229,7 @@ internal object LineReader {
         // Copy the rest of chars to StringBuilder
         sb.append(chars, 0, nChars)
         // Build the result
-        val result = sb.toString()
+        konst result = sb.toString()
         if (sb.length > BUFFER_SIZE) trimStringBuilder()
         sb.setLength(0)
         return result
@@ -238,12 +238,12 @@ internal object LineReader {
     // The result is the number of chars in charBuf
     private fun decode(endOfInput: Boolean): Int {
         while (true) {
-            val coderResult: CoderResult = decoder.decode(byteBuf, charBuf, endOfInput)
+            konst coderResult: CoderResult = decoder.decode(byteBuf, charBuf, endOfInput)
             if (coderResult.isError) {
                 resetAll() // so that next call to readLine starts from clean state
                 coderResult.throwException()
             }
-            val nChars = charBuf.position()
+            konst nChars = charBuf.position()
             if (!coderResult.isOverflow) return nChars // has room in buffer -- everything possible was decoded
             // overflow (charBuf is full) -- offload everything from charBuf but last char into sb
             sb.append(chars, 0, nChars - 1)

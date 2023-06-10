@@ -8,7 +8,7 @@ package test.text
 
 
 @SharedImmutable
-internal actual val surrogateCodePointDecoding: String = "\uFFFD".repeat(3)
+internal actual konst surrogateCodePointDecoding: String = "\uFFFD".repeat(3)
 
 @SharedImmutable
-internal actual val surrogateCharEncoding: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())
+internal actual konst surrogateCharEncoding: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())

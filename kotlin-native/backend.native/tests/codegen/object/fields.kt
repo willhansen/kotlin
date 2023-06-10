@@ -10,7 +10,7 @@ import kotlin.test.*
 private var globalValue = 1
 var global:Int
     get() = globalValue
-    set(value:Int) {globalValue = value}
+    set(konstue:Int) {globalValue = konstue}
 
 fun globalTest(i:Int):Int {
     global += i

@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.resolve.calls.util.getResolvedCall
 object ValueParameterUsageInDefaultArgumentChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (declaration !is KtFunction || descriptor !is FunctionDescriptor) return
-        val allParameters = descriptor.valueParameters
-        val declaredParameters = mutableListOf<ValueParameterDescriptor>()
+        konst allParameters = descriptor.konstueParameters
+        konst declaredParameters = mutableListOf<ValueParameterDescriptor>()
         // We can don't check last parameter, because all other parameters already declared
-        for ((parameter, parameterDescriptor) in declaration.valueParameters.zip(allParameters).dropLast(1)) {
+        for ((parameter, parameterDescriptor) in declaration.konstueParameters.zip(allParameters).dropLast(1)) {
             checkParameter(parameter, allParameters, declaredParameters, context)
             declaredParameters += parameterDescriptor
         }
@@ -34,26 +34,26 @@ object ValueParameterUsageInDefaultArgumentChecker : DeclarationChecker {
         declaredParameters: List<ValueParameterDescriptor>,
         context: DeclarationCheckerContext
     ) {
-        val defaultValue = parameter.defaultValue ?: return
-        val bindingContext = context.trace.bindingContext
+        konst defaultValue = parameter.defaultValue ?: return
+        konst bindingContext = context.trace.bindingContext
 
-        val visitor = object : KtVisitorVoid() {
+        konst visitor = object : KtVisitorVoid() {
             override fun visitElement(element: PsiElement) {
                 element.acceptChildren(this)
             }
 
             override fun visitSimpleNameExpression(expression: KtSimpleNameExpression) {
-                val resolvedDescriptor = expression.getResolvedCall(bindingContext)
+                konst resolvedDescriptor = expression.getResolvedCall(bindingContext)
                     ?.resultingDescriptor as? ValueParameterDescriptor
                     ?: return
                 checkParameter(expression, resolvedDescriptor)
             }
 
             override fun visitCallExpression(expression: KtCallExpression) {
-                val resolvedCall = expression.getResolvedCall(bindingContext)
+                konst resolvedCall = expression.getResolvedCall(bindingContext)
                 if (resolvedCall is NewVariableAsFunctionResolvedCallImpl) {
-                    val calleeExpression = expression.calleeExpression as? KtSimpleNameExpression
-                    val descriptor = resolvedCall.variableCall.resultingDescriptor as? ValueParameterDescriptor
+                    konst calleeExpression = expression.calleeExpression as? KtSimpleNameExpression
+                    konst descriptor = resolvedCall.variableCall.resultingDescriptor as? ValueParameterDescriptor
                     if (calleeExpression != null && descriptor != null) {
                         checkParameter(calleeExpression, descriptor)
                     }
@@ -63,7 +63,7 @@ object ValueParameterUsageInDefaultArgumentChecker : DeclarationChecker {
 
             private fun checkParameter(expression: KtSimpleNameExpression, descriptor: ValueParameterDescriptor) {
                 if (descriptor in allParameters && descriptor !in declaredParameters) {
-                    val factory =
+                    konst factory =
                         when (context.languageVersionSettings.supportsFeature(ProhibitIllegalValueParameterUsageInDefaultArguments)) {
                             true -> Errors.UNINITIALIZED_PARAMETER
                             false -> Errors.UNINITIALIZED_PARAMETER_WARNING

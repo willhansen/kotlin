@@ -7,7 +7,7 @@
 // FILE: internalRemoveFromJava.kt
 
 class Test<T> : Collection<T> {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: T): Boolean = TODO()
     override fun containsAll(elements: Collection<T>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -17,7 +17,7 @@ class Test<T> : Collection<T> {
 }
 
 fun box(): String {
-    val t = Test<String>()
+    konst t = Test<String>()
     return if (J.testRemove(t, "") == false)
         "OK"
     else

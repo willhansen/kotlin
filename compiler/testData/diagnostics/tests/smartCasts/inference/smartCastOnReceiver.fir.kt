@@ -9,5 +9,5 @@ class Test {
     }
 }
 
-class Pair<out A, out B>(val first: A, val second: B)
+class Pair<out A, out B>(konst first: A, konst second: B)
 infix fun <A, B> A.to(that: B) = Pair(this, that)

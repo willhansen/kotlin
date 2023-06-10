@@ -7,7 +7,7 @@ package codegen.innerClass.getOuterVal
 
 import kotlin.test.*
 
-class Outer(val s: String) {
+class Outer(konst s: String) {
     inner class Inner {
         fun box() = s
     }

@@ -15,30 +15,30 @@ internal class WhitespaceRangesWriter : RangesWriter {
     }
 
     private fun isWhitespaceImpl(rangeStart: List<Int>, rangeEnd: List<Int>): String {
-        val checks = rangeChecks(rangeStart, rangeEnd, "ch")
+        konst checks = rangeChecks(rangeStart, rangeEnd, "ch")
         return """
         /**
          * Returns `true` if this character is a whitespace.
          */
         internal fun Char.isWhitespaceImpl(): Boolean {
-            val ch = this.code
+            konst ch = this.code
             return $checks
         }
         """.trimIndent()
     }
 
     private fun rangeChecks(rangeStart: List<Int>, rangeEnd: List<Int>, ch: String): String {
-        val tab = "    "
+        konst tab = "    "
         var tabCount = 5
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
 
         for (i in rangeStart.indices) {
             if (i != 0) {
                 builder.append(tab.repeat(tabCount)).append("|| ")
             }
 
-            val start = rangeStart[i]
-            val end = rangeEnd[i]
+            konst start = rangeStart[i]
+            konst end = rangeEnd[i]
             if (start > 0x1000 && tabCount == 5) {
                 builder.appendLine("$ch > 0x1000 && (")
                 tabCount = 6

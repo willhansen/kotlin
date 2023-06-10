@@ -3,7 +3,7 @@
 package foo
 
 open class Foo() {
-    protected fun foo(value: Boolean = false) = if (!value) "OK" else "fail5"
+    protected fun foo(konstue: Boolean = false) = if (!konstue) "OK" else "fail5"
 }
 
 // FILE: Bar.kt

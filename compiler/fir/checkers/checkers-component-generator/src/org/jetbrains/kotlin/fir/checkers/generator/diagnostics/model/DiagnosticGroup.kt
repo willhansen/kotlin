@@ -13,13 +13,13 @@ import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.typeOf
 
-abstract class AbstractDiagnosticGroup @PrivateForInline constructor(val name: String, internal val containingObjectName: String) {
+abstract class AbstractDiagnosticGroup @PrivateForInline constructor(konst name: String, internal konst containingObjectName: String) {
     @Suppress("PropertyName")
     @PrivateForInline
-    val _diagnostics = mutableListOf<DiagnosticData>()
+    konst _diagnostics = mutableListOf<DiagnosticData>()
 
     @OptIn(PrivateForInline::class)
-    val diagnostics: List<DiagnosticData>
+    konst diagnostics: List<DiagnosticData>
         get() = _diagnostics
 
     @OptIn(PrivateForInline::class)
@@ -48,7 +48,7 @@ abstract class AbstractDiagnosticGroup @PrivateForInline constructor(val name: S
         positioningStrategy: PositioningStrategy,
         crossinline init: DiagnosticBuilder.Regular.() -> Unit = {}
     ) = PropertyDelegateProvider<Any?, ReadOnlyProperty<AbstractDiagnosticGroup, RegularDiagnosticData>> { _, property ->
-        val diagnostic = DiagnosticBuilder.Regular(
+        konst diagnostic = DiagnosticBuilder.Regular(
             containingObjectName,
             severity,
             name = property.name,
@@ -65,7 +65,7 @@ abstract class AbstractDiagnosticGroup @PrivateForInline constructor(val name: S
         positioningStrategy: PositioningStrategy,
         crossinline init: DiagnosticBuilder.Deprecation.() -> Unit = {}
     ) = PropertyDelegateProvider<Any?, ReadOnlyProperty<AbstractDiagnosticGroup, DeprecationDiagnosticData>> { _, property ->
-        val diagnostic = DiagnosticBuilder.Deprecation(
+        konst diagnostic = DiagnosticBuilder.Deprecation(
             containingObjectName,
             featureForError,
             name = property.name,
@@ -80,7 +80,7 @@ abstract class AbstractDiagnosticGroup @PrivateForInline constructor(val name: S
     operator fun plus(other: AbstractDiagnosticGroup): AbstractDiagnosticGroup {
         require(name == other.name)
 
-        val combinedDiagnostics = this.diagnostics + other.diagnostics
+        konst combinedDiagnostics = this.diagnostics + other.diagnostics
 
         return object : AbstractDiagnosticGroup(name, "#Stub") {
             init {

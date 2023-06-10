@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  */
 @Suppress("DEPRECATION")
 class KotlinJvmOptionsCompat(
-    private val task: () -> KotlinCompile,
-    override val options: KotlinJvmCompilerOptions
+    private konst task: () -> KotlinCompile,
+    override konst options: KotlinJvmCompilerOptions
 ) : KotlinJvmOptions {
     override var freeCompilerArgs: List<String>
         get() {
-            val executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
+            konst executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
             return if (isTaskExecuting && executionTimeFreeCompilerArgs != null) {
                 executionTimeFreeCompilerArgs
             } else {
@@ -27,13 +27,13 @@ class KotlinJvmOptionsCompat(
             }
         }
 
-        set(value) = if (isTaskExecuting) {
-            task().nagUserFreeArgsModifiedOnExecution(value)
-            task().executionTimeFreeCompilerArgs = value
+        set(konstue) = if (isTaskExecuting) {
+            task().nagUserFreeArgsModifiedOnExecution(konstue)
+            task().executionTimeFreeCompilerArgs = konstue
         } else {
-            options.freeCompilerArgs.set(value)
+            options.freeCompilerArgs.set(konstue)
         }
 
-    private val isTaskExecuting: Boolean
+    private konst isTaskExecuting: Boolean
         get() = task().state.executing
 }

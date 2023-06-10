@@ -9,7 +9,7 @@ import com.gradle.enterprise.gradleplugin.testretry.retry
 import org.gradle.kotlin.dsl.withType
 
 fun Project.configureTestRetriesForTestTasks() {
-    val testRetryMaxRetries = findProperty("kotlin.build.testRetry.maxRetries")
+    konst testRetryMaxRetries = findProperty("kotlin.build.testRetry.maxRetries")
         ?.toString()?.toInt()
         ?: (if (kotlinBuildProperties.isTeamcityBuild) 3 else 0)
 

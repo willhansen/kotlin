@@ -9,7 +9,7 @@ import generators.unicode.ranges.RangesWritingStrategy
 import generators.unicode.writeIntArray
 import java.io.FileWriter
 
-internal class DigitRangesWriter(private val strategy: RangesWritingStrategy) : RangesWriter {
+internal class DigitRangesWriter(private konst strategy: RangesWritingStrategy) : RangesWriter {
     override fun write(rangeStart: List<Int>, rangeEnd: List<Int>, rangeCategory: List<Int>, writer: FileWriter) {
         // digit ranges always have length equal to 10, so that the difference between the last char code in range and the first one is always 9.
         // Therefore, no need to generate ranges end
@@ -35,32 +35,32 @@ internal class DigitRangesWriter(private val strategy: RangesWritingStrategy) : 
             var bottom = 0
             var top = array.size - 1
             var middle = -1
-            var value = 0
+            var konstue = 0
             while (bottom <= top) {
                 middle = (bottom + top) / 2
-                value = array[middle]
-                if (needle > value)
+                konstue = array[middle]
+                if (needle > konstue)
                     bottom = middle + 1
-                else if (needle == value)
+                else if (needle == konstue)
                     return middle
                 else
                     top = middle - 1
             }
-            return middle - (if (needle < value) 1 else 0)
+            return middle - (if (needle < konstue) 1 else 0)
         }
         """.trimIndent()
 
     private fun digitToIntImpl(): String {
-        val rangeStart = strategy.rangeRef("rangeStart")
+        konst rangeStart = strategy.rangeRef("rangeStart")
         return """
         /**
          * Returns an integer from 0..9 indicating the digit this character represents,
          * or -1 if this character is not a digit.
          */
         internal fun Char.digitToIntImpl(): Int {
-            val ch = this.code
-            val index = binarySearchRange($rangeStart, ch)
-            val diff = ch - $rangeStart[index]
+            konst ch = this.code
+            konst index = binarySearchRange($rangeStart, ch)
+            konst diff = ch - $rangeStart[index]
             return if (diff < 10) diff else -1
         }
         """.trimIndent()

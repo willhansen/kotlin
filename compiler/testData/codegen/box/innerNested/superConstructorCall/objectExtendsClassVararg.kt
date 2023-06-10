@@ -1,4 +1,4 @@
-open class SomeClass(val some: Double, val other: Int, vararg val args: String) {
+open class SomeClass(konst some: Double, konst other: Int, vararg konst args: String) {
     fun result() = args[1]
 }
 

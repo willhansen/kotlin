@@ -14,9 +14,9 @@ class SelectInputTargetsTest {
 
     @Test
     fun `missing leaf targets`() {
-        val inputTargets = setOf(LeafCommonizerTarget("a"), LeafCommonizerTarget("b"))
+        konst inputTargets = setOf(LeafCommonizerTarget("a"), LeafCommonizerTarget("b"))
 
-        val exception = assertFailsWith<IllegalArgumentException> {
+        konst exception = assertFailsWith<IllegalArgumentException> {
             selectInputTargets(inputTargets, parseCommonizerTarget("(a, b, c)") as SharedCommonizerTarget)
         }
 
@@ -33,7 +33,7 @@ class SelectInputTargetsTest {
 
     @Test
     fun `sample 0`() {
-        val inputTargets = setOf(
+        konst inputTargets = setOf(
             LeafCommonizerTarget("a"),
             LeafCommonizerTarget("b"),
             LeafCommonizerTarget("c"),
@@ -59,7 +59,7 @@ class SelectInputTargetsTest {
 
     @Test
     fun `sample 1`() {
-        val inputTargets = setOf(
+        konst inputTargets = setOf(
             parseCommonizerTarget("(a, b)"),
             parseCommonizerTarget("(a, b, c)"),
             parseCommonizerTarget("(a, b, c, d)"),

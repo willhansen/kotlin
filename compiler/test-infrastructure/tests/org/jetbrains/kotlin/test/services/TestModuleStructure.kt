@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.test.model.TestModule
 import java.io.File
 
 abstract class TestModuleStructure : TestService {
-    abstract val modules: List<TestModule>
-    abstract val allDirectives: RegisteredDirectives
-    abstract val originalTestDataFiles: List<File>
+    abstract konst modules: List<TestModule>
+    abstract konst allDirectives: RegisteredDirectives
+    abstract konst originalTestDataFiles: List<File>
 
     abstract fun getTargetArtifactKinds(module: TestModule): List<BinaryKind<*>>
 }
 
-val TestServices.moduleStructure: TestModuleStructure by TestServices.testServiceAccessor()
+konst TestServices.moduleStructure: TestModuleStructure by TestServices.testServiceAccessor()

@@ -10,7 +10,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
-    val m = c.javaClass.getMethod("foo", Array<String>::class.java)
+    konst c = C()
+    konst m = c.javaClass.getMethod("foo", Array<String>::class.java)
     return if (m.isVarArgs) "OK" else "fail"
 }

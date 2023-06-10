@@ -1,17 +1,17 @@
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_ANONYMOUS_PARAMETER -UNUSED_VARIABLE
 
-val a = fun (x) = x
+konst a = fun (x) = x
 
-val b: (Int) -> Int = fun (x) = x + 3
+konst b: (Int) -> Int = fun (x) = x + 3
 
-val c: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x) = 3<!>
+konst c: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x) = 3<!>
 
-val d: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x) = 3<!>
+konst d: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x) = 3<!>
 
-val e: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 3<!>
+konst e: (Int, String) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 3<!>
 
-val f: (Int) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 3<!>
+konst f: (Int) -> Int = <!INITIALIZER_TYPE_MISMATCH!>fun (x: String) = 3<!>
 
 fun test1(a: (Int) -> Unit) {
     test1(fun (x) { checkSubtype<Int>(x)})

@@ -10,17 +10,17 @@ object A {
         return x
     }
 
-    operator fun set(vararg va: Int, value: Int) {
+    operator fun set(vararg va: Int, konstue: Int) {
         for (i in va) {
             sets += i
         }
-        x = value
+        x = konstue
     }
 }
 
 fun box(): String {
     A.x = 0
-    val xx = A[1, 2, 3]++
+    konst xx = A[1, 2, 3]++
     if (xx != 0) return "Failed xx: $xx"
     if (A.x != 1) return "Failed A.x: ${A.x}"
     if (A.gets != 6) return "Failed A.gets: ${A.gets}"

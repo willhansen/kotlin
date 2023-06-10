@@ -22,11 +22,11 @@ fun foo() {
     JustMod <!UNRESOLVED_REFERENCE!>%<!> 1
     JustMod.mod(1)
 
-    val r = ModAndRem
+    konst r = ModAndRem
     r %= 1
     r.remAssign(1)
 
-    val m = JustMod
+    konst m = JustMod
     m <!UNRESOLVED_REFERENCE!>%=<!> 1
     m.modAssign(1)
 }

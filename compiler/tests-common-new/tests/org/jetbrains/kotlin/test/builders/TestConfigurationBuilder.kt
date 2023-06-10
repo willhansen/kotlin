@@ -17,34 +17,34 @@ import kotlin.io.path.Path
 @DefaultsDsl
 @OptIn(TestInfrastructureInternals::class, PrivateForInline::class)
 class TestConfigurationBuilder {
-    val defaultsProviderBuilder: DefaultsProviderBuilder = DefaultsProviderBuilder()
+    konst defaultsProviderBuilder: DefaultsProviderBuilder = DefaultsProviderBuilder()
     lateinit var assertions: AssertionsService
 
     @PrivateForInline
-    val steps: MutableList<TestStepBuilder<*, *>> = mutableListOf()
+    konst steps: MutableList<TestStepBuilder<*, *>> = mutableListOf()
 
     @PrivateForInline
-    val namedSteps: MutableMap<String, TestStepBuilder<*, *>> = mutableMapOf()
+    konst namedSteps: MutableMap<String, TestStepBuilder<*, *>> = mutableMapOf()
 
-    private val sourcePreprocessors: MutableList<Constructor<SourceFilePreprocessor>> = mutableListOf()
-    private val additionalMetaInfoProcessors: MutableList<Constructor<AdditionalMetaInfoProcessor>> = mutableListOf()
-    private val environmentConfigurators: MutableList<Constructor<AbstractEnvironmentConfigurator>> = mutableListOf()
-    private val preAnalysisHandlers: MutableList<Constructor<PreAnalysisHandler>> = mutableListOf()
+    private konst sourcePreprocessors: MutableList<Constructor<SourceFilePreprocessor>> = mutableListOf()
+    private konst additionalMetaInfoProcessors: MutableList<Constructor<AdditionalMetaInfoProcessor>> = mutableListOf()
+    private konst environmentConfigurators: MutableList<Constructor<AbstractEnvironmentConfigurator>> = mutableListOf()
+    private konst preAnalysisHandlers: MutableList<Constructor<PreAnalysisHandler>> = mutableListOf()
 
-    private val additionalSourceProviders: MutableList<Constructor<AdditionalSourceProvider>> = mutableListOf()
-    private val moduleStructureTransformers: MutableList<ModuleStructureTransformer> = mutableListOf()
+    private konst additionalSourceProviders: MutableList<Constructor<AdditionalSourceProvider>> = mutableListOf()
+    private konst moduleStructureTransformers: MutableList<ModuleStructureTransformer> = mutableListOf()
 
-    private val metaTestConfigurators: MutableList<Constructor<MetaTestConfigurator>> = mutableListOf()
-    private val afterAnalysisCheckers: MutableList<Constructor<AfterAnalysisChecker>> = mutableListOf()
+    private konst metaTestConfigurators: MutableList<Constructor<MetaTestConfigurator>> = mutableListOf()
+    private konst afterAnalysisCheckers: MutableList<Constructor<AfterAnalysisChecker>> = mutableListOf()
 
     private var metaInfoHandlerEnabled: Boolean = false
 
-    private val directives: MutableList<DirectivesContainer> = mutableListOf()
-    val defaultRegisteredDirectivesBuilder: RegisteredDirectivesBuilder = RegisteredDirectivesBuilder()
+    private konst directives: MutableList<DirectivesContainer> = mutableListOf()
+    konst defaultRegisteredDirectivesBuilder: RegisteredDirectivesBuilder = RegisteredDirectivesBuilder()
 
-    private val configurationsByPositiveTestDataCondition: MutableList<Pair<Regex, TestConfigurationBuilder.() -> Unit>> = mutableListOf()
-    private val configurationsByNegativeTestDataCondition: MutableList<Pair<Regex, TestConfigurationBuilder.() -> Unit>> = mutableListOf()
-    private val additionalServices: MutableList<ServiceRegistrationData> = mutableListOf()
+    private konst configurationsByPositiveTestDataCondition: MutableList<Pair<Regex, TestConfigurationBuilder.() -> Unit>> = mutableListOf()
+    private konst configurationsByNegativeTestDataCondition: MutableList<Pair<Regex, TestConfigurationBuilder.() -> Unit>> = mutableListOf()
+    private konst additionalServices: MutableList<ServiceRegistrationData> = mutableListOf()
 
     private var compilerConfigurationProvider: ((TestServices, Disposable, List<AbstractEnvironmentConfigurator>) -> CompilerConfigurationProvider)? = null
     private var runtimeClasspathProviders: MutableList<Constructor<RuntimeClasspathProvider>> = mutableListOf()
@@ -53,8 +53,8 @@ class TestConfigurationBuilder {
 
     lateinit var startingArtifactFactory: (TestModule) -> ResultingArtifact<*>
 
-    private val globalDefaultsConfigurators: MutableList<DefaultsProviderBuilder.() -> Unit> = mutableListOf()
-    private val defaultDirectiveConfigurators: MutableList<RegisteredDirectivesBuilder.() -> Unit> = mutableListOf()
+    private konst globalDefaultsConfigurators: MutableList<DefaultsProviderBuilder.() -> Unit> = mutableListOf()
+    private konst defaultDirectiveConfigurators: MutableList<RegisteredDirectivesBuilder.() -> Unit> = mutableListOf()
 
     inline fun <reified T : TestService> useAdditionalService(noinline serviceConstructor: (TestServices) -> T) {
         useAdditionalServices(service(serviceConstructor))
@@ -65,12 +65,12 @@ class TestConfigurationBuilder {
     }
 
     fun forTestsMatching(pattern: String, configuration: TestConfigurationBuilder.() -> Unit) {
-        val regex = pattern.toMatchingRegexString().toRegex()
+        konst regex = pattern.toMatchingRegexString().toRegex()
         forTestsMatching(regex, configuration)
     }
 
     fun forTestsNotMatching(pattern: String, configuration: TestConfigurationBuilder.() -> Unit) {
-        val regex = pattern.toMatchingRegexString().toRegex()
+        konst regex = pattern.toMatchingRegexString().toRegex()
         forTestsNotMatching(regex, configuration)
     }
 
@@ -119,9 +119,9 @@ class TestConfigurationBuilder {
         artifactKind: TestArtifactKind<I>,
         init: HandlersStepBuilder<I>.() -> Unit
     ): HandlersStepBuilder<I> {
-        val previouslyContainedStep = namedStepOfType<I>(name)
+        konst previouslyContainedStep = namedStepOfType<I>(name)
         if (previouslyContainedStep == null) {
-            val step = handlersStep(artifactKind, init)
+            konst step = handlersStep(artifactKind, init)
             namedSteps[name] = step
             return step
         } else {
@@ -135,7 +135,7 @@ class TestConfigurationBuilder {
         artifactKind: TestArtifactKind<I>,
         init: HandlersStepBuilder<I>.() -> Unit
     ) {
-        val step = namedStepOfType<I>(name) ?: error { "Step \"$name\" not found" }
+        konst step = namedStepOfType<I>(name) ?: error { "Step \"$name\" not found" }
         require(step.artifactKind == artifactKind) { "Step kind: ${step.artifactKind}, passed kind is $artifactKind" }
         step.apply(init)
     }
@@ -211,7 +211,7 @@ class TestConfigurationBuilder {
 
     fun build(testDataPath: String): TestConfiguration {
         // We use URI here because we use '/' in our codebase, and URI also uses it (unlike OS-dependent `toString()`)
-        val absoluteTestDataPath = Path(testDataPath).normalize().toUri().toString()
+        konst absoluteTestDataPath = Path(testDataPath).normalize().toUri().toString()
 
         for ((regex, configuration) in configurationsByPositiveTestDataCondition) {
             if (regex.matches(absoluteTestDataPath)) {
@@ -247,52 +247,52 @@ class TestConfigurationBuilder {
         )
     }
 
-    class ReadOnlyBuilder(private val builder: TestConfigurationBuilder, val testDataPath: String) {
-        val defaultsProviderBuilder: DefaultsProviderBuilder
+    class ReadOnlyBuilder(private konst builder: TestConfigurationBuilder, konst testDataPath: String) {
+        konst defaultsProviderBuilder: DefaultsProviderBuilder
             get() = builder.defaultsProviderBuilder
-        val assertions: AssertionsService
+        konst assertions: AssertionsService
             get() = builder.assertions
-        val sourcePreprocessors: List<Constructor<SourceFilePreprocessor>>
+        konst sourcePreprocessors: List<Constructor<SourceFilePreprocessor>>
             get() = builder.sourcePreprocessors
-        val additionalMetaInfoProcessors: List<Constructor<AdditionalMetaInfoProcessor>>
+        konst additionalMetaInfoProcessors: List<Constructor<AdditionalMetaInfoProcessor>>
             get() = builder.additionalMetaInfoProcessors
-        val environmentConfigurators: List<Constructor<AbstractEnvironmentConfigurator>>
+        konst environmentConfigurators: List<Constructor<AbstractEnvironmentConfigurator>>
             get() = builder.environmentConfigurators
-        val preAnalysisHandlers: List<Constructor<PreAnalysisHandler>>
+        konst preAnalysisHandlers: List<Constructor<PreAnalysisHandler>>
             get() = builder.preAnalysisHandlers
-        val additionalSourceProviders: List<Constructor<AdditionalSourceProvider>>
+        konst additionalSourceProviders: List<Constructor<AdditionalSourceProvider>>
             get() = builder.additionalSourceProviders
-        val moduleStructureTransformers: List<ModuleStructureTransformer>
+        konst moduleStructureTransformers: List<ModuleStructureTransformer>
             get() = builder.moduleStructureTransformers
-        val metaTestConfigurators: List<Constructor<MetaTestConfigurator>>
+        konst metaTestConfigurators: List<Constructor<MetaTestConfigurator>>
             get() = builder.metaTestConfigurators
-        val afterAnalysisCheckers: List<Constructor<AfterAnalysisChecker>>
+        konst afterAnalysisCheckers: List<Constructor<AfterAnalysisChecker>>
             get() = builder.afterAnalysisCheckers
-        val metaInfoHandlerEnabled: Boolean
+        konst metaInfoHandlerEnabled: Boolean
             get() = builder.metaInfoHandlerEnabled
-        val directives: List<DirectivesContainer>
+        konst directives: List<DirectivesContainer>
             get() = builder.directives
 
-        val defaultDirectiveConfigurators: List<RegisteredDirectivesBuilder.() -> Unit>
+        konst defaultDirectiveConfigurators: List<RegisteredDirectivesBuilder.() -> Unit>
             get() = builder.defaultDirectiveConfigurators
 
-        val globalDefaultsConfigurators: List<DefaultsProviderBuilder.() -> Unit>
+        konst globalDefaultsConfigurators: List<DefaultsProviderBuilder.() -> Unit>
             get() = builder.globalDefaultsConfigurators
 
-        val configurationsByPositiveTestDataCondition: List<Pair<Regex, TestConfigurationBuilder.() -> Unit>>
+        konst configurationsByPositiveTestDataCondition: List<Pair<Regex, TestConfigurationBuilder.() -> Unit>>
             get() = builder.configurationsByPositiveTestDataCondition
-        val configurationsByNegativeTestDataCondition: List<Pair<Regex, TestConfigurationBuilder.() -> Unit>>
+        konst configurationsByNegativeTestDataCondition: List<Pair<Regex, TestConfigurationBuilder.() -> Unit>>
             get() = builder.configurationsByNegativeTestDataCondition
-        val additionalServices: List<ServiceRegistrationData>
+        konst additionalServices: List<ServiceRegistrationData>
             get() = builder.additionalServices
 
-        val compilerConfigurationProvider: ((TestServices, Disposable, List<AbstractEnvironmentConfigurator>) -> CompilerConfigurationProvider)?
+        konst compilerConfigurationProvider: ((TestServices, Disposable, List<AbstractEnvironmentConfigurator>) -> CompilerConfigurationProvider)?
             get() = builder.compilerConfigurationProvider
-        val runtimeClasspathProviders: List<Constructor<RuntimeClasspathProvider>>
+        konst runtimeClasspathProviders: List<Constructor<RuntimeClasspathProvider>>
             get() = builder.runtimeClasspathProviders
-        val testInfo: KotlinTestInfo
+        konst testInfo: KotlinTestInfo
             get() = builder.testInfo
-        val startingArtifactFactory: (TestModule) -> ResultingArtifact<*>
+        konst startingArtifactFactory: (TestModule) -> ResultingArtifact<*>
             get() = builder.startingArtifactFactory
     }
 }

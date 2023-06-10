@@ -2,10 +2,10 @@
 // WITH_STDLIB
 data class Counter(var i: Int = 0)
 
-data class CounterConfig(val max: Int = 10)
+data class CounterConfig(konst max: Int = 10)
 
 context(CounterConfig)
-class CounterIterator(private val counter: Counter) : Iterator<Int> {
+class CounterIterator(private konst counter: Counter) : Iterator<Int> {
     override fun hasNext() = counter.i < max
     override fun next() = counter.i++
 }

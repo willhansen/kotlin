@@ -13,20 +13,20 @@ class CustomDelegate {
 class C {
     @Volatile var vol = 1
     @kotlin.concurrent.Volatile var vol2 = 1
-    @Transient val tra = 1
-    @delegate:Transient val del: String by CustomDelegate()
+    @Transient konst tra = 1
+    @delegate:Transient konst del: String by CustomDelegate()
 
     @Strictfp fun str() {}
     @Synchronized fun sync() {}
 
-    @JvmSynthetic val synth = "ABC"
+    @JvmSynthetic konst synth = "ABC"
 
     var synth2 = 5
         @JvmSynthetic public get
         @JvmSynthetic public set
 
     @field:JvmSynthetic
-    val synth3 = 0
+    konst synth3 = 0
 
     @get:JvmSynthetic @set:JvmSynthetic
     var synth4 = 0
@@ -36,7 +36,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C::class.java
+    konst c = C::class.java
 
     if (c.getDeclaredField("vol").getModifiers() and Modifier.VOLATILE == 0) return "Fail: volatile"
     if (c.getDeclaredField("vol2").getModifiers() and Modifier.VOLATILE == 0) return "Fail: volatile from kotlin.concurrent"

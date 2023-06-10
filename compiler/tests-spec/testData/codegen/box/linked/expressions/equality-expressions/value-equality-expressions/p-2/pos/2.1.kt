@@ -4,9 +4,9 @@
  * KOTLIN CODEGEN BOX SPEC TEST (POSITIVE)
  *
  * SPEC VERSION: 0.1-218
- * MAIN LINK: expressions, equality-expressions, value-equality-expressions -> paragraph 2 -> sentence 2
+ * MAIN LINK: expressions, equality-expressions, konstue-equality-expressions -> paragraph 2 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: check value-equality-expression
+ * DESCRIPTION: check konstue-equality-expression
  */
 
 
@@ -14,8 +14,8 @@
 
 
 fun box():String{
-    val x = A(true)
-    val y = A(false)
+    konst x = A(true)
+    konst y = A(false)
 
     if ((x != y) == checkNotEquals(x, y)) {
         if (x.isEqualsCalled && !y.isEqualsCalled)
@@ -29,7 +29,7 @@ fun checkNotEquals(A: Any?, B: Any?): Boolean {
 }
 
 
-data class A(val a: Boolean) {
+data class A(konst a: Boolean) {
     var isEqualsCalled = false
 
     override operator fun equals(anObject: Any?): Boolean {

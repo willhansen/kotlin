@@ -2,10 +2,10 @@
 // IGNORE_BACKEND: JVM
 // !LANGUAGE: +InstantiationOfAnnotationClasses
 
-annotation class Foo(val int: Int)
+annotation class Foo(konst int: Int)
 
 annotation class Bar
 
 fun box() {
-    val foo = Foo(42)
+    konst foo = Foo(42)
 }

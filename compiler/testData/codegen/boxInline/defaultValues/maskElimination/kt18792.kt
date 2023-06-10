@@ -10,7 +10,7 @@ class SceneContainer2() {
     }
 }
 
-inline val Number.seconds: Long get() = this.toLong()
+inline konst Number.seconds: Long get() = this.toLong()
 
 // FILE: 2.kt
 

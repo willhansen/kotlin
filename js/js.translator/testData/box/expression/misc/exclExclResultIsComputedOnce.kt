@@ -2,7 +2,7 @@
 package foo
 
 var c = 0
-val a: Int?
+konst a: Int?
     get() {
         c++
         return 2

@@ -18,19 +18,19 @@ interface CompilerArguments {
      *
      * @return current arguments for the given source set.
      */
-    val currentArguments: List<String>
+    konst currentArguments: List<String>
 
     /**
      * Return default arguments for the given source set.
      *
      * @return default arguments for the given source set.
      */
-    val defaultArguments: List<String>
+    konst defaultArguments: List<String>
 
     /**
      * Return the classpath the given source set is compiled against.
      *
      * @return the classpath the given source set is compiled against.
      */
-    val compileClasspath: List<File>
+    konst compileClasspath: List<File>
 }

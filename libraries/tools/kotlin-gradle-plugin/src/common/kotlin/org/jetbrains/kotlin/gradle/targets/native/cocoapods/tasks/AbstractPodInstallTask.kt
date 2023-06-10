@@ -26,22 +26,22 @@ abstract class AbstractPodInstallTask : CocoapodsTask() {
 
     @get:Optional
     @get:InputFile
-    abstract val podfile: Property<File?>
+    abstract konst podfile: Property<File?>
 
     @get:Internal
-    protected val workingDir: Provider<File> = podfile.map { file: File? ->
+    protected konst workingDir: Provider<File> = podfile.map { file: File? ->
         requireNotNull(file) { "Task outputs shouldn't be queried if it's skipped" }.parentFile
     }
 
     @get:OutputDirectory
-    internal val podsDir: Provider<File> = workingDir.map { it.resolve("Pods") }
+    internal konst podsDir: Provider<File> = workingDir.map { it.resolve("Pods") }
 
     @get:Internal
-    internal val podsXcodeProjDirProvider: Provider<File> = podsDir.map { it.resolve("Pods.xcodeproj") }
+    internal konst podsXcodeProjDirProvider: Provider<File> = podsDir.map { it.resolve("Pods.xcodeproj") }
 
     @TaskAction
     open fun doPodInstall() {
-        val podInstallCommand = listOf("pod", "install")
+        konst podInstallCommand = listOf("pod", "install")
 
         runCommand(podInstallCommand,
                    logger,
@@ -66,7 +66,7 @@ abstract class AbstractPodInstallTask : CocoapodsTask() {
 private object CocoapodsErrorHandlingUtil {
     fun handle(e: IOException, command: List<String>) {
         if (e.message?.contains("No such file or directory") == true) {
-            val message = """ 
+            konst message = """ 
                |'${command.take(2).joinToString(" ")}' command failed with an exception:
                | ${e.message}
                |        

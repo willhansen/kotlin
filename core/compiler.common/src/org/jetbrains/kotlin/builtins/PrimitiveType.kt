@@ -19,17 +19,17 @@ enum class PrimitiveType(typeName: String) {
     DOUBLE("Double"),
     ;
 
-    val typeName: Name = Name.identifier(typeName)
+    konst typeName: Name = Name.identifier(typeName)
 
-    val arrayTypeName: Name = Name.identifier("${typeName}Array")
+    konst arrayTypeName: Name = Name.identifier("${typeName}Array")
 
-    val typeFqName: FqName by lazy(LazyThreadSafetyMode.PUBLICATION) { StandardNames.BUILT_INS_PACKAGE_FQ_NAME.child(this.typeName) }
+    konst typeFqName: FqName by lazy(LazyThreadSafetyMode.PUBLICATION) { StandardNames.BUILT_INS_PACKAGE_FQ_NAME.child(this.typeName) }
 
-    val arrayTypeFqName: FqName by lazy(LazyThreadSafetyMode.PUBLICATION) { StandardNames.BUILT_INS_PACKAGE_FQ_NAME.child(arrayTypeName) }
+    konst arrayTypeFqName: FqName by lazy(LazyThreadSafetyMode.PUBLICATION) { StandardNames.BUILT_INS_PACKAGE_FQ_NAME.child(arrayTypeName) }
 
     companion object {
         @JvmField
-        val NUMBER_TYPES = setOf(CHAR, BYTE, SHORT, INT, FLOAT, LONG, DOUBLE)
+        konst NUMBER_TYPES = setOf(CHAR, BYTE, SHORT, INT, FLOAT, LONG, DOUBLE)
 
         @JvmStatic
         fun getByShortName(name: String): PrimitiveType? = when (name) {

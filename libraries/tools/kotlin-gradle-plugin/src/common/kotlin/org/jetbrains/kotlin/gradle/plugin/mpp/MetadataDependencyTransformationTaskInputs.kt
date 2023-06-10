@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.utils.addToStdlib.applyIf
 internal class MetadataDependencyTransformationTaskInputs(
     project: Project,
     kotlinSourceSet: KotlinSourceSet,
-    private val keepProjectDependencies: Boolean = true,
+    private konst keepProjectDependencies: Boolean = true,
 ) {
     @Suppress("unused") // Gradle input
     @get:InputFiles
     @get:PathSensitive(PathSensitivity.RELATIVE)
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
-    val configurationToResolve: FileCollection = kotlinSourceSet
+    konst configurationToResolve: FileCollection = kotlinSourceSet
         .internal
         .resolvableMetadataConfiguration
         .applyIf(!keepProjectDependencies) { withoutProjectDependencies() }
@@ -33,7 +33,7 @@ internal class MetadataDependencyTransformationTaskInputs(
     @get:PathSensitive(PathSensitivity.RELATIVE)
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
-    val hostSpecificMetadataConfigurationsToResolve: FileCollection = project.filesProvider {
+    konst hostSpecificMetadataConfigurationsToResolve: FileCollection = project.filesProvider {
         kotlinSourceSet.internal.compilations
             .filter { compilation -> if (compilation is KotlinNativeCompilation) compilation.konanTarget.enabledOnCurrentHost else true }
             .mapNotNull { compilation ->
@@ -46,11 +46,11 @@ internal class MetadataDependencyTransformationTaskInputs(
     }
 
     @Transient // Only needed for configuring task inputs;
-    private val participatingSourceSets: Set<KotlinSourceSet> = kotlinSourceSet.internal.withDependsOnClosure
+    private konst participatingSourceSets: Set<KotlinSourceSet> = kotlinSourceSet.internal.withDependsOnClosure
 
     @Suppress("unused") // Gradle input
     @get:Input
-    val inputSourceSetsAndCompilations: Map<String, Iterable<String>> by lazy {
+    konst inputSourceSetsAndCompilations: Map<String, Iterable<String>> by lazy {
         participatingSourceSets.associate { sourceSet ->
             sourceSet.name to sourceSet.internal.compilations.map { it.name }.sorted()
         }
@@ -58,7 +58,7 @@ internal class MetadataDependencyTransformationTaskInputs(
 
     @Suppress("unused") // Gradle input
     @get:Input
-    val inputCompilationDependencies: Map<String, Set<List<String?>>> by lazy {
+    konst inputCompilationDependencies: Map<String, Set<List<String?>>> by lazy {
         participatingSourceSets.flatMap { it.internal.compilations }.associate {
             it.name to project.configurations.getByName(it.compileDependencyConfigurationName)
                 .allDependencies

@@ -19,7 +19,7 @@ var state = ""
 fun unit() {}
 
 class B {
-    val s = mutableListOf<Unit>()
+    konst s = mutableListOf<Unit>()
 
     init {
         s.add(JavaClass.s({ state += "O" }, ::unit))

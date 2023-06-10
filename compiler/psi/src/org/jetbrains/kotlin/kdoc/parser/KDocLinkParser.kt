@@ -31,24 +31,24 @@ class KDocLinkParser : PsiParser {
     companion object {
         @JvmStatic
         fun parseMarkdownLink(root: IElementType, chameleon: ASTNode): ASTNode {
-            val parentElement = chameleon.treeParent.psi
-            val project = parentElement.project
-            val builder = PsiBuilderFactory.getInstance().createBuilder(
+            konst parentElement = chameleon.treeParent.psi
+            konst project = parentElement.project
+            konst builder = PsiBuilderFactory.getInstance().createBuilder(
                 project,
                 chameleon,
                 KotlinLexer(),
                 root.language,
                 chameleon.text
             )
-            val parser = KDocLinkParser()
+            konst parser = KDocLinkParser()
 
             return parser.parse(root, builder).firstChildNode
         }
     }
 
     override fun parse(root: IElementType, builder: PsiBuilder): ASTNode {
-        val rootMarker = builder.mark()
-        val hasLBracket = builder.tokenType == KtTokens.LBRACKET
+        konst rootMarker = builder.mark()
+        konst hasLBracket = builder.tokenType == KtTokens.LBRACKET
         if (hasLBracket) {
             builder.advanceLexer()
         }

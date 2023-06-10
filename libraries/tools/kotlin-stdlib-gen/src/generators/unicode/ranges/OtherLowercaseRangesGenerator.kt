@@ -14,10 +14,10 @@ import java.io.File
 import java.io.FileWriter
 
 internal class OtherLowercaseRangesGenerator(
-    private val outputFile: File,
-    private val target: KotlinTarget
+    private konst outputFile: File,
+    private konst target: KotlinTarget
 ) {
-    private val otherLowerRanges = mutableListOf<IntRange>()
+    private konst otherLowerRanges = mutableListOf<IntRange>()
 
     fun appendLine(line: PropertyLine) {
         // In Native the Other_Lowercase code points are also used to perform String.lowercase()
@@ -29,7 +29,7 @@ internal class OtherLowercaseRangesGenerator(
     }
 
     fun generate() {
-        val strategy = RangesWritingStrategy.of(target, "OtherLowercase")
+        konst strategy = RangesWritingStrategy.of(target, "OtherLowercase")
 
         FileWriter(outputFile).use { writer ->
             writer.writeHeader(outputFile, "kotlin.text")
@@ -45,7 +45,7 @@ internal class OtherLowercaseRangesGenerator(
 
     fun isOtherLowercaseImpl(strategy: RangesWritingStrategy) = """
         internal fun Int.isOtherLowercase(): Boolean {
-            val index = binarySearchRange(${strategy.rangeRef("otherLowerStart")}, this)
+            konst index = binarySearchRange(${strategy.rangeRef("otherLowerStart")}, this)
             return index >= 0 && this < ${strategy.rangeRef("otherLowerStart")}[index] + ${strategy.rangeRef("otherLowerLength")}[index]
         }
     """.trimIndent()

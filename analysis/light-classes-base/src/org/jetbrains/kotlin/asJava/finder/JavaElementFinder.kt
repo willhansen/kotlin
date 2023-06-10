@@ -27,10 +27,10 @@ import org.jetbrains.kotlin.resolve.jvm.KotlinFinderMarker
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class JavaElementFinder(
-    private val project: Project,
+    private konst project: Project,
 ) : PsiElementFinder(), KotlinFinderMarker {
-    private val psiManager = PsiManager.getInstance(project)
-    private val kotlinAsJavaSupport = KotlinAsJavaSupport.getInstance(project)
+    private konst psiManager = PsiManager.getInstance(project)
+    private konst kotlinAsJavaSupport = KotlinAsJavaSupport.getInstance(project)
 
     override fun findClass(qualifiedName: String, scope: GlobalSearchScope) = findClasses(qualifiedName, scope).firstOrNull()
 
@@ -39,9 +39,9 @@ class JavaElementFinder(
             return PsiClass.EMPTY_ARRAY
         }
 
-        val answer = SmartList<PsiClass>()
+        konst answer = SmartList<PsiClass>()
 
-        val qualifiedName = FqName(qualifiedNameString)
+        konst qualifiedName = FqName(qualifiedNameString)
 
         findClassesAndObjects(qualifiedName, scope, answer)
         answer.addAll(kotlinAsJavaSupport.getFacadeClasses(qualifiedName, scope))
@@ -58,11 +58,11 @@ class JavaElementFinder(
         findInterfaceDefaultImpls(qualifiedName, scope, answer)
         findRepeatableAnnotationContainer(qualifiedName, scope, answer)
 
-        val classOrObjectDeclarations = kotlinAsJavaSupport.findClassOrObjectDeclarations(qualifiedName, scope)
+        konst classOrObjectDeclarations = kotlinAsJavaSupport.findClassOrObjectDeclarations(qualifiedName, scope)
 
         for (declaration in classOrObjectDeclarations) {
             if (declaration !is KtEnumEntry) {
-                val lightClass = kotlinAsJavaSupport.getLightClass(declaration)
+                konst lightClass = kotlinAsJavaSupport.getLightClass(declaration)
                 if (lightClass != null) {
                     answer.add(lightClass)
                 }
@@ -92,23 +92,23 @@ class JavaElementFinder(
         for (classOrObject in kotlinAsJavaSupport.findClassOrObjectDeclarations(qualifiedName.parent(), scope)) {
             ProgressIndicatorAndCompilationCanceledStatus.checkCanceled()
             if (predicate(classOrObject)) {
-                val interfaceClass = kotlinAsJavaSupport.getLightClass(classOrObject) ?: continue
-                val implsClass = interfaceClass.findInnerClassByName(syntheticName, false) ?: continue
+                konst interfaceClass = kotlinAsJavaSupport.getLightClass(classOrObject) ?: continue
+                konst implsClass = interfaceClass.findInnerClassByName(syntheticName, false) ?: continue
                 answer.add(implsClass)
             }
         }
     }
 
     override fun getClassNames(psiPackage: PsiPackage, scope: GlobalSearchScope): Set<String> {
-        val packageFQN = FqName(psiPackage.qualifiedName)
+        konst packageFQN = FqName(psiPackage.qualifiedName)
 
-        val declarations = kotlinAsJavaSupport.findClassOrObjectDeclarationsInPackage(packageFQN, scope)
+        konst declarations = kotlinAsJavaSupport.findClassOrObjectDeclarationsInPackage(packageFQN, scope)
 
-        val answer = hashSetOf<String>()
+        konst answer = hashSetOf<String>()
         answer.addAll(kotlinAsJavaSupport.getFacadeNames(packageFQN, scope))
 
         for (declaration in declarations) {
-            val name = declaration.name ?: continue
+            konst name = declaration.name ?: continue
             answer.add(name)
         }
 
@@ -120,10 +120,10 @@ class JavaElementFinder(
             return null
         }
 
-        val fqName = FqName(qualifiedNameString)
+        konst fqName = FqName(qualifiedNameString)
 
         // allScope() because the contract says that the whole project
-        val allScope = GlobalSearchScope.allScope(project)
+        konst allScope = GlobalSearchScope.allScope(project)
         return if (kotlinAsJavaSupport.packageExists(fqName, allScope)) {
             KtLightPackage(psiManager, fqName, allScope)
         } else null
@@ -131,19 +131,19 @@ class JavaElementFinder(
     }
 
     override fun getSubPackages(psiPackage: PsiPackage, scope: GlobalSearchScope): Array<PsiPackage> {
-        val subpackages = kotlinAsJavaSupport.getSubPackages(FqName(psiPackage.qualifiedName), scope)
+        konst subpackages = kotlinAsJavaSupport.getSubPackages(FqName(psiPackage.qualifiedName), scope)
         return subpackages.map { KtLightPackage(psiManager, it, scope) }.toTypedArray()
     }
 
     override fun getClasses(psiPackage: PsiPackage, scope: GlobalSearchScope): Array<PsiClass> {
-        val answer = SmartList<PsiClass>()
-        val packageFQN = FqName(psiPackage.qualifiedName)
+        konst answer = SmartList<PsiClass>()
+        konst packageFQN = FqName(psiPackage.qualifiedName)
 
         answer.addAll(kotlinAsJavaSupport.getFacadeClassesInPackage(packageFQN, scope))
 
-        val declarations = kotlinAsJavaSupport.findClassOrObjectDeclarationsInPackage(packageFQN, scope)
+        konst declarations = kotlinAsJavaSupport.findClassOrObjectDeclarationsInPackage(packageFQN, scope)
         for (declaration in declarations) {
-            val aClass = kotlinAsJavaSupport.getLightClass(declaration) ?: continue
+            konst aClass = kotlinAsJavaSupport.getLightClass(declaration) ?: continue
             answer.add(aClass)
         }
 
@@ -177,8 +177,8 @@ class JavaElementFinder(
                 ?: error(JavaElementFinder::class.java.simpleName + " is not found for project " + project)
 
         fun byClasspathComparator(searchScope: GlobalSearchScope): Comparator<PsiElement> = Comparator { o1, o2 ->
-            val f1 = PsiUtilCore.getVirtualFile(o1)
-            val f2 = PsiUtilCore.getVirtualFile(o2)
+            konst f1 = PsiUtilCore.getVirtualFile(o1)
+            konst f2 = PsiUtilCore.getVirtualFile(o2)
             when {
                 f1 === f2 -> 0
                 f1 == null -> -1

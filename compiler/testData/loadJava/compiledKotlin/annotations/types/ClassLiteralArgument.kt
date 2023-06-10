@@ -5,7 +5,7 @@ package test
 import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val klass: KClass<*>)
+annotation class Ann(konst klass: KClass<*>)
 
 class A {
     fun simple(s: @Ann(Simple::class) String) {}

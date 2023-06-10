@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-const val myPi = kotlin.math.PI
+const konst myPi = kotlin.math.PI
 
-annotation class Anno(val d: Double)
+annotation class Anno(konst d: Double)
 
 @Anno(kotlin.math.PI)
 fun f() {}

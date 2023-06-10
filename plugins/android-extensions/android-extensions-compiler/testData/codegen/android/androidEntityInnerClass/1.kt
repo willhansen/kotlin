@@ -9,20 +9,20 @@ import kotlinx.android.extensions.*
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class MyActivity(): Activity() {
-    val loginItem = Button(this)
-    val entity = MyEntity(loginItem)
+    konst loginItem = Button(this)
+    konst entity = MyEntity(loginItem)
 
     init {
         entity.login
     }
 
-    inner class MyEntity(override val containerView: View) : LayoutContainer
+    inner class MyEntity(override konst containerView: View) : LayoutContainer
 }
 
 fun box(): String {

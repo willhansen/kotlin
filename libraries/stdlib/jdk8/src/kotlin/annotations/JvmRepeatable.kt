@@ -12,7 +12,7 @@ package kotlin.jvm
  * Makes the annotation class repeatable in Java and Kotlin. A repeatable annotation can be applied more than once
  * on the same element.
  *
- * @property value the container annotation class, used to hold repeated entries of the annotation in the JVM bytecode.
+ * @property konstue the container annotation class, used to hold repeated entries of the annotation in the JVM bytecode.
  */
 @SinceKotlin("1.6")
 public typealias JvmRepeatable = java.lang.annotation.Repeatable

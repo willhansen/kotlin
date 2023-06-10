@@ -15,11 +15,11 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var result = ""
 
-    tailrec suspend fun theLoop(value: Int, string: String) {
-        if (value == 2) return
+    tailrec suspend fun theLoop(konstue: Int, string: String) {
+        if (konstue == 2) return
         result += string
         if (++iterations > 2) error("Fail: too many iterations")
-        theLoop(value + 1, "b")
+        theLoop(konstue + 1, "b")
     }
 
     builder {

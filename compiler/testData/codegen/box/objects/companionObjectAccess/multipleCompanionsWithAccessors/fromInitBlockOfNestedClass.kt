@@ -15,7 +15,7 @@ class Outer : A() {
     }
 
     class Nested {
-        val test: String
+        konst test: String
 
         init {
             test = getO() + getK()

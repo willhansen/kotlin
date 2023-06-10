@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo(val s: String) {
+konstue class Foo(konst s: String) {
     fun asResult(): String = s
 }
 
 fun box(): String {
-    val a = Foo("OK")
+    konst a = Foo("OK")
     return a.asResult()
 }

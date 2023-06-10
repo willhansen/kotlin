@@ -6,7 +6,7 @@ package test
 
 abstract class TypeToken<U>
 
-// Although V is not reified, if the object happens to be regenerated, V will be replaced with its value in signatures
+// Although V is not reified, if the object happens to be regenerated, V will be replaced with its konstue in signatures
 inline fun <V> typeTokenOf(crossinline forceRegeneration: () -> Unit = {}) =
     object : TypeToken<V>() {
         fun unused() = forceRegeneration()

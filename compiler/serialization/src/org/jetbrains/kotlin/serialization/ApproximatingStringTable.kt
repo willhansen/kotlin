@@ -19,6 +19,6 @@ class ApproximatingStringTable : StringTableImpl() {
         }
     }
 
-    override val isLocalClassIdReplacementKeptGeneric: Boolean
+    override konst isLocalClassIdReplacementKeptGeneric: Boolean
         get() = false
 }

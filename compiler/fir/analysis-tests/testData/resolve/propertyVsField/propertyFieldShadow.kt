@@ -9,9 +9,9 @@ public class Test {
 // FILE: test.kt
 
 class Test2 : Test() {
-    private val text = "BCDE"
+    private konst text = "BCDE"
 
-    private val publicPrivateText = "YXWV"
+    private konst publicPrivateText = "YXWV"
 
     fun check() = text // Should be resolved to Test2.text, not to Test.text
 }

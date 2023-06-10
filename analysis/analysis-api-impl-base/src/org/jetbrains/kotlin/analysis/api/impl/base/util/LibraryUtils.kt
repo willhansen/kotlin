@@ -44,7 +44,7 @@ object LibraryUtils {
         jarFileSystem: CoreJarFileSystem = CoreJarFileSystem(),
         includeRoot: Boolean = true,
     ): List<PsiFile> {
-        val virtualFiles = getAllVirtualFilesFromJar(jar, jarFileSystem, includeRoot)
+        konst virtualFiles = getAllVirtualFilesFromJar(jar, jarFileSystem, includeRoot)
         return virtualFiles
             .mapNotNull { virtualFile ->
                 PsiManager.getInstance(project).findFile(virtualFile)
@@ -61,7 +61,7 @@ object LibraryUtils {
         dir: Path,
         includeRoot: Boolean = true,
     ): Collection<VirtualFile> {
-        val fs = StandardFileSystems.local()
+        konst fs = StandardFileSystems.local()
         return fs.findFileByPath(dir.toString())
             ?.let { getAllVirtualFilesFromRoot(it, includeRoot) } ?: emptySet()
     }
@@ -70,7 +70,7 @@ object LibraryUtils {
         root: VirtualFile,
         includeRoot: Boolean,
     ): Collection<VirtualFile> {
-        val files = mutableSetOf<VirtualFile>()
+        konst files = mutableSetOf<VirtualFile>()
         if (includeRoot) {
             files.add(root)
         }
@@ -90,9 +90,9 @@ object LibraryUtils {
     // Copied (and adjusted) from JavaSdkImpl#readModulesFromReleaseFile
     private fun readModulesFromReleaseFile(jrtBaseDir: Path): List<String?>? {
         Files.newInputStream(jrtBaseDir.resolve("release")).use { stream ->
-            val p = Properties()
+            konst p = Properties()
             p.load(stream)
-            val modules = p.getProperty("MODULES")
+            konst modules = p.getProperty("MODULES")
             if (modules != null) {
                 return StringUtil.split(StringUtil.unquoteString(modules), " ")
             }
@@ -113,11 +113,11 @@ object LibraryUtils {
     // Copied (and adjusted) from JavaSdkImpl#findClasses
     // Currently, handle modular runtime only
     fun findClassesFromJdkHome(jdkHome: Path): List<String> {
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
 
         if (isModularRuntime(jdkHome)) {
-            val jrtBaseUrl: String = StandardFileSystems.JRT_PROTOCOL_PREFIX + jdkHome.toString() + JAR_SEPARATOR
-            val modules = readModulesFromReleaseFile(jdkHome)
+            konst jrtBaseUrl: String = StandardFileSystems.JRT_PROTOCOL_PREFIX + jdkHome.toString() + JAR_SEPARATOR
+            konst modules = readModulesFromReleaseFile(jdkHome)
             if (modules != null) {
                 for (module in modules) {
                     result.add(jrtBaseUrl + module)

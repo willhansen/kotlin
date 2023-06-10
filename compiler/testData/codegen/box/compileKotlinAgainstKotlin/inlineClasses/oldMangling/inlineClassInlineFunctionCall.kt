@@ -4,7 +4,7 @@
 // USE_OLD_INLINE_CLASSES_MANGLING_SCHEME
 // FILE: A.kt
 
-inline class A(val x: String) {
+inline class A(konst x: String) {
     inline fun f(other: A): A = other
 }
 

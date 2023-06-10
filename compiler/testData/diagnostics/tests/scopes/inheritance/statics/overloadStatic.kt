@@ -16,6 +16,6 @@ public class B extends A {
 class E: B() {
     init {
         foo()
-        val a: Long = bar()
+        konst a: Long = bar()
     }
 }

@@ -12,13 +12,13 @@ fun getNullInt(): Int? = null
 
 fun box(): String {
     if (c1 != 0) {
-        return "Start value of counter not 0, it: $c1"
+        return "Start konstue of counter not 0, it: $c1"
     }
-    val nullRes = getNullInt()?.toString()
+    konst nullRes = getNullInt()?.toString()
     if (nullRes != null) {
         return "Broken safeCall. nullRes: $nullRes"
     }
-    val res = getInt()?.toString()
+    konst res = getInt()?.toString()
     if (res != "1") {
         return "res != 1, it: $res, and c1: $c1"
     }

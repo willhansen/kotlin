@@ -15,7 +15,7 @@ fun main() {
     // CHECK-LABEL: entry
     // CHECK-NOT: call %struct.ObjHeader* @AllocInstance
     // CHECK-NOT: alloca
-    val x = foo("Fail"::id)
+    konst x = foo("Fail"::id)
     println(x)
     // CHECK-LABEL: epilogue
 }

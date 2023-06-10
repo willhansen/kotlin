@@ -11,9 +11,9 @@ expect fun foo(s: S): S
 
 expect fun foo(i: Int): Int
 
-expect val Int.k: Int
+expect konst Int.k: Int
 
-expect val String.k: String
+expect konst String.k: String
 
 expect var Int.l: Int
 
@@ -30,17 +30,17 @@ actual fun foo(i: Int) = i
 
 actual fun foo(s: String) = s
 
-actual val Int.k: Int get() = 42
+actual konst Int.k: Int get() = 42
 
-actual val String.k: String get() = this
+actual konst String.k: String get() = this
 
 actual var Int.l: Int
     get() = 48
-    set(value) {}
+    set(konstue) {}
 
 actual var String.l: String
     get() = this
-    set(value) {}
+    set(konstue) {}
 
 actual typealias S = String
 

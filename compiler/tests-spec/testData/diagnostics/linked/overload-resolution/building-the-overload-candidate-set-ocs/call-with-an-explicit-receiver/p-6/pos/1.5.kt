@@ -24,7 +24,7 @@ package libPackage
 
 class Marker {
     fun foo() = println("non-extension member Marker.foo()")
-    val foo: Marker = this
+    konst foo: Marker = this
     operator fun invoke() =  println("non-extension member Marker.invoke()")
 }
 

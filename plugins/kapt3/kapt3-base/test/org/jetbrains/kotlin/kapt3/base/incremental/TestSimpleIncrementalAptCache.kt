@@ -31,7 +31,7 @@ class TestSimpleIncrementalAptCache {
     fun testAggregatingAnnotations() {
         runProcessor(SimpleProcessor().toAggregating())
 
-        val dirtyFiles = cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles = cache.inkonstidateAndGetDirtyFiles(
             listOf(TEST_DATA_DIR.resolve("User.java").absoluteFile),
             emptyList(),
             compiledSources
@@ -48,7 +48,7 @@ class TestSimpleIncrementalAptCache {
     fun testIsolatingAnnotations() {
         runProcessor(SimpleProcessor().toIsolating())
 
-        val dirtyFiles = cache.invalidateAndGetDirtyFiles(
+        konst dirtyFiles = cache.inkonstidateAndGetDirtyFiles(
             listOf(TEST_DATA_DIR.resolve("User.java").absoluteFile),
             emptyList(),
             compiledSources
@@ -64,12 +64,12 @@ class TestSimpleIncrementalAptCache {
     fun testNonIncremental() {
         runProcessor(SimpleProcessor().toNonIncremental())
 
-        val dirtyFiles = cache.invalidateAndGetDirtyFiles(listOf(TEST_DATA_DIR.resolve("User.java").absoluteFile), emptyList(), compiledSources)
+        konst dirtyFiles = cache.inkonstidateAndGetDirtyFiles(listOf(TEST_DATA_DIR.resolve("User.java").absoluteFile), emptyList(), compiledSources)
         assertTrue(dirtyFiles is SourcesToReprocess.FullRebuild)
     }
 
     private fun runProcessor(processor: IncrementalProcessor) {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
         runAnnotationProcessing(
             srcFiles,
             listOf(processor),
@@ -86,4 +86,4 @@ class TestSimpleIncrementalAptCache {
     }
 }
 
-private const val TEST_PACKAGE_NAME = "test"
+private const konst TEST_PACKAGE_NAME = "test"

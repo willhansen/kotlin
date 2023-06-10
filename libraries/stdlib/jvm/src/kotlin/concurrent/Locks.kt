@@ -12,7 +12,7 @@ import kotlin.contracts.*
 
 /**
  * Executes the given [action] under this lock.
- * @return the return value of the action.
+ * @return the return konstue of the action.
  */
 @kotlin.internal.InlineOnly
 public inline fun <T> Lock.withLock(action: () -> T): T {
@@ -27,12 +27,12 @@ public inline fun <T> Lock.withLock(action: () -> T): T {
 
 /**
  * Executes the given [action] under the read lock of this lock.
- * @return the return value of the action.
+ * @return the return konstue of the action.
  */
 @kotlin.internal.InlineOnly
 public inline fun <T> ReentrantReadWriteLock.read(action: () -> T): T {
     contract { callsInPlace(action, InvocationKind.EXACTLY_ONCE) }
-    val rl = readLock()
+    konst rl = readLock()
     rl.lock()
     try {
         return action()
@@ -52,17 +52,17 @@ public inline fun <T> ReentrantReadWriteLock.read(action: () -> T): T {
  * Therefore if the [action] inside write lock has been initiated by checking some condition,
  * the condition must be rechecked inside the [action] to avoid possible races.
  *
- * @return the return value of the action.
+ * @return the return konstue of the action.
  */
 @kotlin.internal.InlineOnly
 public inline fun <T> ReentrantReadWriteLock.write(action: () -> T): T {
     contract { callsInPlace(action, InvocationKind.EXACTLY_ONCE) }
-    val rl = readLock()
+    konst rl = readLock()
 
-    val readCount = if (writeHoldCount == 0) readHoldCount else 0
+    konst readCount = if (writeHoldCount == 0) readHoldCount else 0
     repeat(readCount) { rl.unlock() }
 
-    val wl = writeLock()
+    konst wl = writeLock()
     wl.lock()
     try {
         return action()

@@ -10,7 +10,7 @@ fun box(): String {
 private fun testIntInIntUntilSmartcastInt() {
     var sum = 0
 
-    val a: Any = 5
+    konst a: Any = 5
     if (a is Int) {
         for (i: Int in 1 until a) {
             sum = sum * 10 + i

@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.descriptors.TypeAliasDescriptor
 import org.jetbrains.kotlin.descriptors.TypeParameterDescriptor
 
 class TypeAliasExpansion private constructor(
-    val parent: TypeAliasExpansion?,
-    val descriptor: TypeAliasDescriptor,
-    val arguments: List<TypeProjection>,
-    val mapping: Map<TypeParameterDescriptor, TypeProjection>
+    konst parent: TypeAliasExpansion?,
+    konst descriptor: TypeAliasDescriptor,
+    konst arguments: List<TypeProjection>,
+    konst mapping: Map<TypeParameterDescriptor, TypeProjection>
 ) {
     fun getReplacement(constructor: TypeConstructor): TypeProjection? {
-        val descriptor = constructor.declarationDescriptor
+        konst descriptor = constructor.declarationDescriptor
         return if (descriptor is TypeParameterDescriptor)
             mapping[descriptor]
         else
@@ -31,8 +31,8 @@ class TypeAliasExpansion private constructor(
             typeAliasDescriptor: TypeAliasDescriptor,
             arguments: List<TypeProjection>
         ): TypeAliasExpansion {
-            val typeParameters = typeAliasDescriptor.typeConstructor.parameters.map { it.original }
-            val mappedArguments = typeParameters.zip(arguments).toMap()
+            konst typeParameters = typeAliasDescriptor.typeConstructor.parameters.map { it.original }
+            konst mappedArguments = typeParameters.zip(arguments).toMap()
             return TypeAliasExpansion(parent, typeAliasDescriptor, arguments, mappedArguments)
         }
 

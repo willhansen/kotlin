@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinSourceCoordinates
 import org.junit.Test
 
 class IdeaKotlinSourceCoordinatesSerializationTest : AbstractSerializationTest<IdeaKotlinSourceCoordinates>() {
-    override fun serialize(value: IdeaKotlinSourceCoordinates): ByteArray =
-        IdeaKotlinSourceCoordinatesProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinSourceCoordinates): ByteArray =
+        IdeaKotlinSourceCoordinatesProto(konstue).toByteArray()
 
     override fun deserialize(data: ByteArray): IdeaKotlinSourceCoordinates =
         IdeaKotlinSourceCoordinates(IdeaKotlinSourceCoordinatesProto.parseFrom(data))

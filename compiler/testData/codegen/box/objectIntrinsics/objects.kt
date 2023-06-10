@@ -19,15 +19,15 @@ fun box(): String {
 }
 
 fun testCompanionObjectAccess() {
-    val i = Int
-    val d = Double
-    val f = Float
-    val l = Long
-    val sh = Short
-    val b = Byte
-    val ch = Char
-    val st = String
-    val en = Enum
+    konst i = Int
+    konst d = Double
+    konst f = Float
+    konst l = Long
+    konst sh = Short
+    konst b = Byte
+    konst ch = Char
+    konst st = String
+    konst en = Enum
 }
 
 fun testInCall() {
@@ -43,18 +43,18 @@ fun testInCall() {
 }
 
 fun testDoubleConstants() {
-    val pi = Double.POSITIVE_INFINITY
-    val ni = Double.NEGATIVE_INFINITY
-    val nan = Double.NaN
+    konst pi = Double.POSITIVE_INFINITY
+    konst ni = Double.NEGATIVE_INFINITY
+    konst nan = Double.NaN
 
     myAssertEquals(pi, Double.POSITIVE_INFINITY)
     myAssertEquals(ni, Double.NEGATIVE_INFINITY)
 }
 
 fun testFloatConstants() {
-    val pi = Float.POSITIVE_INFINITY
-    val ni = Float.NEGATIVE_INFINITY
-    val nan = Float.NaN
+    konst pi = Float.POSITIVE_INFINITY
+    konst ni = Float.NEGATIVE_INFINITY
+    konst nan = Float.NaN
 
     myAssertEquals(pi, Float.POSITIVE_INFINITY)
     myAssertEquals(ni, Float.NEGATIVE_INFINITY)
@@ -84,7 +84,7 @@ fun test(a: Any) {}
 var _field: Int = 0
 var Int.Companion.TopField : Int
     get() = _field
-    set(value) { _field = value };
+    set(konstue) { _field = konstue };
 
 fun Int.Companion.TopFun() : String = "TopFun"
 

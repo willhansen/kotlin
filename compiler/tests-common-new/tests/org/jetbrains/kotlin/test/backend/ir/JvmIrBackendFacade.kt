@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.test.services.compilerConfigurationProvider
 class JvmIrBackendFacade(
     testServices: TestServices
 ) : IrBackendFacade<BinaryArtifacts.Jvm>(testServices, ArtifactKinds.Jvm) {
-    private val javaCompilerFacade = JavaCompilerFacade(testServices)
+    private konst javaCompilerFacade = JavaCompilerFacade(testServices)
 
     override fun transform(
         module: TestModule,
@@ -44,7 +44,7 @@ class JvmIrBackendFacade(
             )
         }
 
-        val state = inputArtifact.state
+        konst state = inputArtifact.state
         try {
             inputArtifact.codegenFactory.generateModule(state, inputArtifact.backendInput)
         } catch (e: BackendException) {
@@ -54,11 +54,11 @@ class JvmIrBackendFacade(
             throw e
         }
         state.factory.done()
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
         javaCompilerFacade.compileJavaFiles(module, configuration, state.factory)
 
         fun sourceFileInfos(irFile: IrFile, allowNestedMultifileFacades: Boolean): List<SourceFileInfo> =
-            when (val fileEntry = irFile.fileEntry) {
+            when (konst fileEntry = irFile.fileEntry) {
                 is PsiIrFileEntry -> {
                     listOf(
                         SourceFileInfo(
@@ -68,7 +68,7 @@ class JvmIrBackendFacade(
                     )
                 }
                 is NaiveSourceBasedFileEntryImpl -> {
-                    val sourceFile = inputArtifact.sourceFiles.find { it.path == fileEntry.name }
+                    konst sourceFile = inputArtifact.sourceFiles.find { it.path == fileEntry.name }
                     if (sourceFile == null) emptyList() // synthetic files, like CoroutineHelpers.kt, are ignored here
                     else listOf(SourceFileInfo(sourceFile, getFileClassInfoFromIrFile(irFile, sourceFile.name)))
                 }

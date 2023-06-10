@@ -4,10 +4,10 @@ plugins {
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
+    konst hostOs = System.getProperty("os.name")
 
     // Create target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("globalState")
         hostOs == "Linux" -> linuxX64("globalState")
         hostOs.startsWith("Windows") -> mingwX64("globalState")
@@ -21,7 +21,7 @@ kotlin {
             }
         }
         compilations["main"].cinterops {
-            val global by creating
+            konst global by creating
         }
     }
 }

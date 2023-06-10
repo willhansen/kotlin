@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.fir.symbols.impl.isExtension
 import org.jetbrains.kotlin.name.Name
 
 object FirJvmFunctionDelegateMemberNameClashChecker : FirBasicDeclarationChecker() {
-    private val functionDelegateName: Name = Name.identifier("functionDelegate")
-    private val getFunctionDelegateName: Name = Name.identifier("getFunctionDelegate")
+    private konst functionDelegateName: Name = Name.identifier("functionDelegate")
+    private konst getFunctionDelegateName: Name = Name.identifier("getFunctionDelegate")
 
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration !is FirCallableDeclaration) return
-        val containingClassSymbol = declaration.getContainingClassSymbol(context.session) as? FirRegularClassSymbol ?: return
+        konst containingClassSymbol = declaration.getContainingClassSymbol(context.session) as? FirRegularClassSymbol ?: return
         if (!containingClassSymbol.isFun) return
-        if (declaration.symbol.isExtension || (declaration as? FirFunction)?.valueParameters?.isNotEmpty() == true) return
+        if (declaration.symbol.isExtension || (declaration as? FirFunction)?.konstueParameters?.isNotEmpty() == true) return
 
         if (declaration is FirSimpleFunction && declaration.name == getFunctionDelegateName ||
             declaration is FirProperty && declaration.name == functionDelegateName

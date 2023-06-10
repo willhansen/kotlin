@@ -12,7 +12,7 @@ class Outer {
 
     }
 
-    val x: Int
+    konst x: Int
       field = x
       get
 

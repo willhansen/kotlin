@@ -6,7 +6,7 @@ import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiInvalidElementAccessException
+import com.intellij.psi.PsiInkonstidElementAccessException
 import com.intellij.psi.PsiManager
 import com.intellij.psi.SingleRootFileViewProvider
 import com.intellij.psi.impl.DebugUtil
@@ -20,14 +20,14 @@ class KotlinDecompiledFileViewProvider(
     manager: PsiManager,
     file: VirtualFile,
     physical: Boolean,
-    private val factory: (KotlinDecompiledFileViewProvider) -> KtDecompiledFile?
+    private konst factory: (KotlinDecompiledFileViewProvider) -> KtDecompiledFile?
 ) : SingleRootFileViewProvider(manager, file, physical, KotlinLanguage.INSTANCE) {
-    val content: LockedClearableLazyValue<String> = LockedClearableLazyValue(Any()) {
-        val psiFile = createFile(manager.project, file, KotlinFileType.INSTANCE)
-        val text = psiFile?.text ?: ""
+    konst content: LockedClearableLazyValue<String> = LockedClearableLazyValue(Any()) {
+        konst psiFile = createFile(manager.project, file, KotlinFileType.INSTANCE)
+        konst text = psiFile?.text ?: ""
 
-        DebugUtil.performPsiModification<PsiInvalidElementAccessException>("Invalidating throw-away copy of file that was used for getting text") {
-            (psiFile as? PsiFileImpl)?.markInvalidated()
+        DebugUtil.performPsiModification<PsiInkonstidElementAccessException>("Inkonstidating throw-away copy of file that was used for getting text") {
+            (psiFile as? PsiFileImpl)?.markInkonstidated()
         }
 
         text

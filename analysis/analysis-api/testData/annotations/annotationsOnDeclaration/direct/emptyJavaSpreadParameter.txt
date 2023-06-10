@@ -1,5 +1,5 @@
 KtDeclaration: KtClass Foo
 annotations: [
-  B(a = [/A, /A(value = [], )])
+  B(a = [/A, /A(konstue = [], )])
     psi: KtAnnotationEntry
 ]

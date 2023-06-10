@@ -23,10 +23,10 @@ object FirSuperclassNotAccessibleFromInterfaceChecker : FirQualifiedAccessExpres
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.explicitReceiverIsNotSuperReference()) return
 
-        val closestClass = context.findClosest<FirClass>() ?: return
+        konst closestClass = context.findClosest<FirClass>() ?: return
 
         if (closestClass.classKind == ClassKind.INTERFACE) {
-            val containingClassSymbol =
+            konst containingClassSymbol =
                 expression.toResolvedCallableSymbol()?.getContainingClassSymbol(context.session) as? FirRegularClassSymbol ?: return
 
             if (containingClassSymbol.source != null && containingClassSymbol.classKind == ClassKind.CLASS && containingClassSymbol.classId != StandardClassIds.Any) {

@@ -2,7 +2,7 @@ package
 
 public object T3 {
     private constructor T3()
-    public final val test1: kotlin.String
+    public final konst test1: kotlin.String
     public final fun </*0*/ T> delegate(): T3.Foo<T>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -21,7 +21,7 @@ fun funWithContractExactlyOnce(block: () -> Unit) { // report about not-inline f
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val value_1: Int
-    funWithContractExactlyOnce { value_1 = 10 } // back-end exception
-    value_1.inc()
+    konst konstue_1: Int
+    funWithContractExactlyOnce { konstue_1 = 10 } // back-end exception
+    konstue_1.inc()
 }

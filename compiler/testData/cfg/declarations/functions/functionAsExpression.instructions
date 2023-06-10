@@ -1,19 +1,19 @@
 == test ==
 fun test() {
-    val f = fun(n: Int): Int { return 1 }
-    val g = fun foo(n: Int) = 2
+    konst f = fun(n: Int): Int { return 1 }
+    konst g = fun foo(n: Int) = 2
 }
 ---------------------
 L0:
   1 <START>
-  2 mark({ val f = fun(n: Int): Int { return 1 } val g = fun foo(n: Int) = 2 })
-    v(val f = fun(n: Int): Int { return 1 })
+  2 mark({ konst f = fun(n: Int): Int { return 1 } konst g = fun foo(n: Int) = 2 })
+    v(konst f = fun(n: Int): Int { return 1 })
     jmp?(L2)                                                                       NEXT:[r(fun(n: Int): Int { return 1 }) -> <v0>, d(fun(n: Int): Int { return 1 })]
     d(fun(n: Int): Int { return 1 })                                               NEXT:[<SINK>]
 L2 [after local declaration]:
     r(fun(n: Int): Int { return 1 }) -> <v0>                                       PREV:[jmp?(L2)]
     w(f|<v0>)
-    v(val g = fun foo(n: Int) = 2)
+    v(konst g = fun foo(n: Int) = 2)
     jmp?(L5)                                                                       NEXT:[r(fun foo(n: Int) = 2) -> <v1>, d(fun foo(n: Int) = 2)]
     d(fun foo(n: Int) = 2)                                                         NEXT:[<SINK>]
 L5 [after local declaration]:

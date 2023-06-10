@@ -5,7 +5,7 @@ package api {
 
     @api.ExperimentalAPI public final class C {
         public constructor C()
-        public final val property: kotlin.String = ""
+        public final konst property: kotlin.String = ""
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun function(): kotlin.String
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -26,7 +26,7 @@ package api {
         }
     }
 
-    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FUNCTION}) @kotlin.annotation.Retention(value = AnnotationRetention.BINARY) public final annotation class ExperimentalAPI : kotlin.Annotation {
+    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FUNCTION}) @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) public final annotation class ExperimentalAPI : kotlin.Annotation {
         public constructor ExperimentalAPI()
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -13,32 +13,32 @@ public class JavaClass {
 // FILE: test.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt<T: Int>(val i: T)
+konstue class IcInt<T: Int>(konst i: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong<T: Long>(val l: T)
+konstue class IcLong<T: Long>(konst l: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny<T: Any?>(val a: T)
+konstue class IcAny<T: Any?>(konst a: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny2<T: Any>(val a: T?)
+konstue class IcAny2<T: Any>(konst a: T?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverIc<T: IcInt<Int>>(val o: T)
+konstue class IcOverIc<T: IcInt<Int>>(konst o: T)
 
 fun box(): String {
-    val i = IcInt(1)
-    val l = IcLong(2)
-    val a = IcAny("string")
-    val a2 = IcAny("string2")
-    val o = IcOverIc(IcInt(3))
+    konst i = IcInt(1)
+    konst l = IcLong(2)
+    konst a = IcAny("string")
+    konst a2 = IcAny("string2")
+    konst o = IcOverIc(IcInt(3))
 
-    val ij = JavaClass.id(i)
-    val lj = JavaClass.id(l)
-    val aj = JavaClass.id(a)
-    val aj2 = JavaClass.id(a2)
-    val oj = JavaClass.id(o)
+    konst ij = JavaClass.id(i)
+    konst lj = JavaClass.id(l)
+    konst aj = JavaClass.id(a)
+    konst aj2 = JavaClass.id(a2)
+    konst oj = JavaClass.id(o)
 
     if (ij.i != 1) return "Fail 1"
     if (lj.l != 2L) return "Fail 2"

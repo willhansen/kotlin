@@ -7,7 +7,7 @@ enum class E {
 fun bar(): E = E.A
 
 fun foo(e: E): String {
-    val c = when (e) {
+    konst c = when (e) {
         E.B -> "B"
         bar() -> "OK"
         else -> "else"

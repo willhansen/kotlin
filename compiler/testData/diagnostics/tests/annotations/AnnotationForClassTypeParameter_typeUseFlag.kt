@@ -1,13 +1,13 @@
 // !LANGUAGE: +ProperCheckAnnotationsTargetInTypeUsePositions -ClassTypeParameterAnnotations
 
 annotation class A1
-annotation class A2(val some: Int = 12)
+annotation class A2(konst some: Int = 12)
 
 @Target(AnnotationTarget.TYPE)
 annotation class TA1
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
-annotation class TA2(val some: Int = 12)
+annotation class TA2(konst some: Int = 12)
 
 class TopLevelClass<<!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A1<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2(3)<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A1(12)<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2("Test")<!> T> {
     class InnerClass<<!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A1<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2(3)<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A1(12)<!> <!UNSUPPORTED_FEATURE, WRONG_ANNOTATION_TARGET!>@A2("Test")<!> T> {

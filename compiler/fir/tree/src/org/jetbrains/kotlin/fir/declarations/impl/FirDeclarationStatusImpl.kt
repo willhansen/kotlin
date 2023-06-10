@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 open class FirDeclarationStatusImpl(
-    override val visibility: Visibility,
-    override val modality: Modality?
+    override konst visibility: Visibility,
+    override konst modality: Modality?
 ) : FirPureAbstractElement(), FirDeclarationStatus {
-    override val source: KtSourceElement? get() = null
+    override konst source: KtSourceElement? get() = null
     protected var flags: Int = HAS_STABLE_PARAMETER_NAMES.mask
 
     operator fun get(modifier: Modifier): Boolean = (flags and modifier.mask) != 0
 
-    operator fun set(modifier: Modifier, value: Boolean) {
-        flags = if (value) {
+    operator fun set(modifier: Modifier, konstue: Boolean) {
+        flags = if (konstue) {
             flags or modifier.mask
         } else {
             flags and modifier.mask.inv()
@@ -34,119 +34,119 @@ open class FirDeclarationStatusImpl(
 
     override var isExpect: Boolean
         get() = this[EXPECT]
-        set(value) {
-            this[EXPECT] = value
+        set(konstue) {
+            this[EXPECT] = konstue
         }
 
     override var isActual: Boolean
         get() = this[ACTUAL]
-        set(value) {
-            this[ACTUAL] = value
+        set(konstue) {
+            this[ACTUAL] = konstue
         }
 
     override var isOverride: Boolean
         get() = this[OVERRIDE]
-        set(value) {
-            this[OVERRIDE] = value
+        set(konstue) {
+            this[OVERRIDE] = konstue
         }
 
     override var isOperator: Boolean
         get() = this[OPERATOR]
-        set(value) {
-            this[OPERATOR] = value
+        set(konstue) {
+            this[OPERATOR] = konstue
         }
 
     override var isInfix: Boolean
         get() = this[INFIX]
-        set(value) {
-            this[INFIX] = value
+        set(konstue) {
+            this[INFIX] = konstue
         }
 
     override var isInline: Boolean
         get() = this[INLINE]
-        set(value) {
-            this[INLINE] = value
+        set(konstue) {
+            this[INLINE] = konstue
         }
 
     override var isTailRec: Boolean
         get() = this[TAILREC]
-        set(value) {
-            this[TAILREC] = value
+        set(konstue) {
+            this[TAILREC] = konstue
         }
 
     override var isExternal: Boolean
         get() = this[EXTERNAL]
-        set(value) {
-            this[EXTERNAL] = value
+        set(konstue) {
+            this[EXTERNAL] = konstue
         }
 
     override var isConst: Boolean
         get() = this[CONST]
-        set(value) {
-            this[CONST] = value
+        set(konstue) {
+            this[CONST] = konstue
         }
 
     override var isLateInit: Boolean
         get() = this[LATEINIT]
-        set(value) {
-            this[LATEINIT] = value
+        set(konstue) {
+            this[LATEINIT] = konstue
         }
 
     override var isInner: Boolean
         get() = this[INNER]
-        set(value) {
-            this[INNER] = value
+        set(konstue) {
+            this[INNER] = konstue
         }
 
     override var isCompanion: Boolean
         get() = this[COMPANION]
-        set(value) {
-            this[COMPANION] = value
+        set(konstue) {
+            this[COMPANION] = konstue
         }
 
     override var isData: Boolean
         get() = this[DATA]
-        set(value) {
-            this[DATA] = value
+        set(konstue) {
+            this[DATA] = konstue
         }
 
     override var isSuspend: Boolean
         get() = this[SUSPEND]
-        set(value) {
-            this[SUSPEND] = value
+        set(konstue) {
+            this[SUSPEND] = konstue
         }
 
     override var isStatic: Boolean
         get() = this[STATIC]
-        set(value) {
-            this[STATIC] = value
+        set(konstue) {
+            this[STATIC] = konstue
         }
 
     override var isFromSealedClass: Boolean
         get() = this[FROM_SEALED]
-        set(value) {
-            this[FROM_SEALED] = value
+        set(konstue) {
+            this[FROM_SEALED] = konstue
         }
 
     override var isFromEnumClass: Boolean
         get() = this[FROM_ENUM]
-        set(value) {
-            this[FROM_ENUM] = value
+        set(konstue) {
+            this[FROM_ENUM] = konstue
         }
 
     override var isFun: Boolean
         get() = this[FUN]
-        set(value) {
-            this[FUN] = value
+        set(konstue) {
+            this[FUN] = konstue
         }
 
     override var hasStableParameterNames: Boolean
         get() = this[HAS_STABLE_PARAMETER_NAMES]
-        set(value) {
-            this[HAS_STABLE_PARAMETER_NAMES] = value
+        set(konstue) {
+            this[HAS_STABLE_PARAMETER_NAMES] = konstue
         }
 
-    enum class Modifier(val mask: Int) {
+    enum class Modifier(konst mask: Int) {
         EXPECT(0x1),
         ACTUAL(0x2),
         OVERRIDE(0x4),

@@ -11,8 +11,8 @@
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Boolean) {
-    while (value_1) {
+fun case_1(konstue_1: Boolean) {
+    while (konstue_1) {
         funWithExactlyOnceCallsInPlace {
             <!UNSUPPORTED_FEATURE!>break<!>
         }
@@ -28,7 +28,7 @@ fun case_1(value_1: Boolean) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Boolean) {
+fun case_2(konstue_1: Boolean) {
     for (i in 0..10) {
         funWithExactlyOnceCallsInPlace {
             <!UNSUPPORTED_FEATURE!>continue<!>
@@ -36,7 +36,7 @@ fun case_2(value_1: Boolean) {
         println("1")
     }
 
-    loop@ while (value_1) {
+    loop@ while (konstue_1) {
         funWithExactlyOnceCallsInPlace {
             <!UNSUPPORTED_FEATURE!>continue@loop<!>
         }

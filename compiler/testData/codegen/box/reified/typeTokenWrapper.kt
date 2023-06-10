@@ -6,7 +6,7 @@
 import kotlin.test.assertEquals
 
 open class TypeToken<T> {
-    val type = javaClass.genericSuperclass
+    konst type = javaClass.genericSuperclass
 }
 
 inline fun <reified E> myTypeOf() =

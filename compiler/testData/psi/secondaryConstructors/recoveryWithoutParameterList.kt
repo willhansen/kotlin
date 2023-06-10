@@ -1,6 +1,6 @@
 class A {
     constructor : this() {}
-    val x: Int
+    konst x: Int
 }
 
 class C {

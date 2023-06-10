@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
-internal val fakeInliningLocalVariablesAfterInlineLowering = makeIrFilePhase<JvmBackendContext>(
+internal konst fakeInliningLocalVariablesAfterInlineLowering = makeIrFilePhase<JvmBackendContext>(
     { context ->
         if (!context.irInlinerIsEnabled()) return@makeIrFilePhase FileLoweringPass.Empty
         FakeInliningLocalVariablesAfterInlineLowering(context)
@@ -39,15 +39,15 @@ internal val fakeInliningLocalVariablesAfterInlineLowering = makeIrFilePhase<Jvm
 )
 
 // TODO extract common code with FakeInliningLocalVariablesLowering
-internal class FakeInliningLocalVariablesAfterInlineLowering(val context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?>, FileLoweringPass {
-    private val inlinedStack = mutableListOf<IrInlinedFunctionBlock>()
+internal class FakeInliningLocalVariablesAfterInlineLowering(konst context: JvmBackendContext) : IrElementVisitor<Unit, IrDeclaration?>, FileLoweringPass {
+    private konst inlinedStack = mutableListOf<IrInlinedFunctionBlock>()
 
     override fun lower(irFile: IrFile) {
         irFile.accept(this, null)
     }
 
     override fun visitElement(element: IrElement, data: IrDeclaration?) {
-        val newData = if (element is IrDeclaration && element !is IrVariable) element else data
+        konst newData = if (element is IrDeclaration && element !is IrVariable) element else data
         element.acceptChildren(this, newData)
     }
 
@@ -60,18 +60,18 @@ internal class FakeInliningLocalVariablesAfterInlineLowering(val context: JvmBac
     }
 
     private fun handleInlineFunction(expression: IrInlinedFunctionBlock, data: IrDeclaration?) {
-        val declaration = expression.inlineDeclaration
+        konst declaration = expression.inlineDeclaration
 
         inlinedStack += expression
         super.visitBlock(expression, data)
         inlinedStack.removeLast()
 
         if (declaration is IrFunction && declaration.isInline && !declaration.origin.isSynthetic && declaration.body != null && !declaration.isInlineOnly()) {
-            val currentFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(declaration)
-            val localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_FUNCTION}$currentFunctionName"
+            konst currentFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(declaration)
+            konst localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_FUNCTION}$currentFunctionName"
             //declaration.addFakeLocalVariable(localName)
             with(context.createIrBuilder(data!!.symbol)) {
-                val tmpVar =
+                konst tmpVar =
                     scope.createTmpVariable(irInt(0), localName.removeSuffix(FOR_INLINE_SUFFIX), origin = IrDeclarationOrigin.DEFINED)
                 // TODO maybe add in front of inline block
                 expression.putStatementsInFrontOfInlinedFunction(listOf(tmpVar))
@@ -89,7 +89,7 @@ internal class FakeInliningLocalVariablesAfterInlineLowering(val context: JvmBac
     private fun IrInlinedFunctionBlock.processLocalDeclarations() {
         this.getAdditionalStatementsFromInlinedBlock().forEach {
             if (it is IrVariable && it.origin == IrDeclarationOrigin.IR_TEMPORARY_VARIABLE) {
-                val varName = it.name.asString().substringAfterLast("_")
+                konst varName = it.name.asString().substringAfterLast("_")
                 it.name = Name.identifier((if (varName == SpecialNames.THIS.asString()) "this_" else varName) + INLINE_FUN_VAR_SUFFIX)
                 it.origin = IrDeclarationOrigin.DEFINED
             }
@@ -102,7 +102,7 @@ internal class FakeInliningLocalVariablesAfterInlineLowering(val context: JvmBac
                 }
 
                 override fun visitVariable(declaration: IrVariable) {
-                    val varName = declaration.name.asString()
+                    konst varName = declaration.name.asString()
                     declaration.name = when {
                         varName == SpecialNames.THIS.asString() -> {
                             Name.identifier("this_$INLINE_FUN_VAR_SUFFIX")

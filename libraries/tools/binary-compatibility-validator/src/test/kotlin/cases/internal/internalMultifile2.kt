@@ -2,4 +2,4 @@
 @file:JvmMultifileClass
 package cases.internal
 
-internal val internalVal = "Internal"
+internal konst internalVal = "Internal"

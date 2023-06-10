@@ -16,8 +16,8 @@ annotation class FirContractViolation
  * And this class is used to wrap such references
  */
 class FirExpressionRef<T : FirExpression> @FirContractViolation constructor () {
-    lateinit var value: T
-    fun bind(value: T) {
-        this.value = value
+    lateinit var konstue: T
+    fun bind(konstue: T) {
+        this.konstue = konstue
     }
 }

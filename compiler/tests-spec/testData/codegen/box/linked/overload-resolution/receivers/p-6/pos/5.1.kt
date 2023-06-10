@@ -12,9 +12,9 @@
 
 
 fun box(): String {
-    val case0 =CaseBase0().case0()
-    val case1 =CaseBase1().case1()
-    val case2 =CaseBase2().case2()
+    konst case0 =CaseBase0().case0()
+    konst case1 =CaseBase1().case1()
+    konst case2 =CaseBase2().case2()
     if (case0 && case1 && case2)
         return "OK"
     return "NOK"
@@ -31,7 +31,7 @@ class CaseBase2() : CaseBase1() {
 
     fun case2(): Boolean {
         foo.foo()
-        val res = !isCaseBase0ReceiverCalled && !isCaseBaseReceiverCalled && isCaseCompanionCalled
+        konst res = !isCaseBase0ReceiverCalled && !isCaseBaseReceiverCalled && isCaseCompanionCalled
         isCaseCompanionCalled = false
         return res
     }
@@ -47,7 +47,7 @@ open class CaseBase1 : CaseBase0() {
 
     fun case1(): Boolean {
         foo.foo()
-        val res = !isCaseBase0ReceiverCalled && CaseBase1.isCaseBaseReceiverCalled && !CaseBase2.isCaseCompanionCalled
+        konst res = !isCaseBase0ReceiverCalled && CaseBase1.isCaseBaseReceiverCalled && !CaseBase2.isCaseCompanionCalled
         isCaseBaseReceiverCalled = false
         return res
     }
@@ -64,7 +64,7 @@ open class CaseBase0 {
 
     fun case0(): Boolean {
         foo.foo()
-        val res = isCaseBase0ReceiverCalled && !CaseBase1.isCaseBaseReceiverCalled && !CaseBase2.isCaseCompanionCalled
+        konst res = isCaseBase0ReceiverCalled && !CaseBase1.isCaseBaseReceiverCalled && !CaseBase2.isCaseCompanionCalled
         isCaseBase0ReceiverCalled = false
         return res
     }

@@ -44,19 +44,19 @@ import java.util.zip.CRC32
 import java.util.zip.GZIPInputStream
 
 // Set this to true if you want to dump all bytecode (test will fail in this case)
-private val DUMP_ALL = System.getProperty("comparison.dump.all") == "true"
+private konst DUMP_ALL = System.getProperty("comparison.dump.all") == "true"
 
 fun assertEqualDirectories(expected: File, actual: File, forgiveExtraFiles: Boolean) {
-    val pathsInExpected = getAllRelativePaths(expected)
-    val pathsInActual = getAllRelativePaths(actual)
+    konst pathsInExpected = getAllRelativePaths(expected)
+    konst pathsInActual = getAllRelativePaths(actual)
 
-    val commonPaths = pathsInExpected.intersect(pathsInActual)
-    val changedPaths = commonPaths
+    konst commonPaths = pathsInExpected.intersect(pathsInActual)
+    konst changedPaths = commonPaths
             .filter { DUMP_ALL || !Arrays.equals(File(expected, it).readBytes(), File(actual, it).readBytes()) }
             .sorted()
 
-    val expectedString = getDirectoryString(expected, changedPaths)
-    val actualString = getDirectoryString(actual, changedPaths)
+    konst expectedString = getDirectoryString(expected, changedPaths)
+    konst actualString = getDirectoryString(actual, changedPaths)
 
     if (DUMP_ALL) {
         Assert.assertEquals(expectedString, actualString + " ")
@@ -65,8 +65,8 @@ fun assertEqualDirectories(expected: File, actual: File, forgiveExtraFiles: Bool
     if (forgiveExtraFiles) {
         // If compilation fails, output may be different for full rebuild and partial make. Parsing output (directory string) for simplicity.
         if (changedPaths.isEmpty()) {
-            val expectedListingLines = expectedString.split('\n').toList()
-            val actualListingLines = actualString.split('\n').toList()
+            konst expectedListingLines = expectedString.split('\n').toList()
+            konst actualListingLines = actualString.split('\n').toList()
             if (actualListingLines.containsAll(expectedListingLines)) {
                 return
             }
@@ -74,7 +74,7 @@ fun assertEqualDirectories(expected: File, actual: File, forgiveExtraFiles: Bool
     }
 
     if (expectedString != actualString) {
-        val message: String? = null
+        konst message: String? = null
         throw ComparisonFailure(
             message,
             expectedString.replaceFirst(DIR_ROOT_PLACEHOLDER, expected.canonicalPath),
@@ -85,25 +85,25 @@ fun assertEqualDirectories(expected: File, actual: File, forgiveExtraFiles: Bool
 }
 
 private fun File.checksumString(): String {
-    val crc32 = CRC32()
+    konst crc32 = CRC32()
     crc32.update(this.readBytes())
-    return java.lang.Long.toHexString(crc32.value)
+    return java.lang.Long.toHexString(crc32.konstue)
 }
 
-private const val DIR_ROOT_PLACEHOLDER = "<DIR_ROOT_PLACEHOLDER>"
+private const konst DIR_ROOT_PLACEHOLDER = "<DIR_ROOT_PLACEHOLDER>"
 
 private fun getDirectoryString(dir: File, interestingPaths: List<String>): String {
-    val buf = StringBuilder()
-    val p = Printer(buf)
+    konst buf = StringBuilder()
+    konst p = Printer(buf)
 
 
     fun addDirContent(dir: File) {
         p.pushIndent()
 
-        val listFiles = dir.listFiles()
+        konst listFiles = dir.listFiles()
         assertNotNull("$dir does not exist", listFiles)
 
-        val children = listFiles!!.sortedWith(compareBy({ it.isDirectory }, { it.name }))
+        konst children = listFiles!!.sortedWith(compareBy({ it.isDirectory }, { it.name }))
         for (child in children) {
             if (child.isDirectory) {
                 if ((child.list()?.isNotEmpty() ?: false)) {
@@ -134,7 +134,7 @@ private fun getDirectoryString(dir: File, interestingPaths: List<String>): Strin
 }
 
 private fun getAllRelativePaths(dir: File): Set<String> {
-    val result = HashSet<String>()
+    konst result = HashSet<String>()
     FileUtil.processFilesRecursively(dir) {
         if (it!!.isFile) {
             result.add(FileUtil.getRelativePath(dir, it)!!)
@@ -147,12 +147,12 @@ private fun getAllRelativePaths(dir: File): Set<String> {
 }
 
 private fun classFileToString(classFile: File): String {
-    val out = StringWriter()
+    konst out = StringWriter()
 
-    val traceVisitor = TraceClassVisitor(PrintWriter(out))
+    konst traceVisitor = TraceClassVisitor(PrintWriter(out))
     ClassReader(classFile.readBytes()).accept(traceVisitor, 0)
 
-    val classHeader = LocalFileKotlinClass.create(classFile, JvmMetadataVersion.INSTANCE)?.classHeader ?: return ""
+    konst classHeader = LocalFileKotlinClass.create(classFile, JvmMetadataVersion.INSTANCE)?.classHeader ?: return ""
     if (!classHeader.metadataVersion.isCompatibleWithCurrentCompilerVersion()) {
         error("Incompatible class ($classHeader): $classFile")
     }
@@ -187,13 +187,13 @@ private fun classFileToString(classFile: File): String {
 }
 
 private fun metaJsToString(metaJsFile: File): String {
-    val out = StringWriter()
+    konst out = StringWriter()
 
-    val metadataList = arrayListOf<KotlinJavascriptMetadata>()
+    konst metadataList = arrayListOf<KotlinJavascriptMetadata>()
     KotlinJavascriptMetadataUtils.parseMetadata(metaJsFile.readText(), metadataList)
 
     for (metadata in metadataList) {
-        val (header, content) = GZIPInputStream(ByteArrayInputStream(metadata.body)).use { stream ->
+        konst (header, content) = GZIPInputStream(ByteArrayInputStream(metadata.body)).use { stream ->
             DebugJsProtoBuf.Header.parseDelimitedFrom(stream, JsSerializerProtocol.extensionRegistry) to
                     DebugJsProtoBuf.Library.parseFrom(stream, JsSerializerProtocol.extensionRegistry)
         }
@@ -205,13 +205,13 @@ private fun metaJsToString(metaJsFile: File): String {
 }
 
 private fun kjsmToString(kjsmFile: File): String {
-    val out = StringWriter()
+    konst out = StringWriter()
 
-    val stream = DataInputStream(kjsmFile.inputStream())
+    konst stream = DataInputStream(kjsmFile.inputStream())
     // Read and skip the metadata version
     repeat(stream.readInt()) { stream.readInt() }
 
-    val (header, content) =
+    konst (header, content) =
             DebugJsProtoBuf.Header.parseDelimitedFrom(stream, JsSerializerProtocol.extensionRegistry) to
                     DebugJsProtoBuf.Library.parseFrom(stream, JsSerializerProtocol.extensionRegistry)
 
@@ -222,12 +222,12 @@ private fun kjsmToString(kjsmFile: File): String {
 }
 
 private fun sourceMapFileToString(sourceMapFile: File, generatedJsFile: File): String {
-    val sourceMapParseResult = SourceMapParser.parse(sourceMapFile.readText())
+    konst sourceMapParseResult = SourceMapParser.parse(sourceMapFile.readText())
     return when (sourceMapParseResult) {
         is SourceMapSuccess -> {
-            val bytesOut = ByteArrayOutputStream()
+            konst bytesOut = ByteArrayOutputStream()
             PrintStream(bytesOut).use { printStream ->
-                sourceMapParseResult.value.debugVerbose(printStream, generatedJsFile)
+                sourceMapParseResult.konstue.debugVerbose(printStream, generatedJsFile)
             }
             bytesOut.toString()
         }
@@ -238,7 +238,7 @@ private fun sourceMapFileToString(sourceMapFile: File, generatedJsFile: File): S
 }
 
 private fun getExtensionRegistry(): ExtensionRegistry {
-    val registry = ExtensionRegistry.newInstance()!!
+    konst registry = ExtensionRegistry.newInstance()!!
     DebugJvmProtoBuf.registerAllExtensions(registry)
     return registry
 }
@@ -255,7 +255,7 @@ private fun fileToStringRepresentation(file: File): String {
             kjsmToString(file)
         }
         file.name.endsWith(".js.map") -> {
-            val generatedJsPath = file.canonicalPath.removeSuffix(".map")
+            konst generatedJsPath = file.canonicalPath.removeSuffix(".map")
             sourceMapFileToString(file, File(generatedJsPath))
         }
         else -> {

@@ -29,20 +29,20 @@ import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 import org.jetbrains.kotlin.types.typeUtil.makeNullable
 import org.jetbrains.kotlin.types.typeUtil.replaceAnnotations
 
-class BuilderProcessor(private val config: LombokConfig) : Processor {
+class BuilderProcessor(private konst config: LombokConfig) : Processor {
     companion object {
-        private const val BUILDER_DATA = "Lombok.BuilderData"
-        private const val TO_BUILDER = "toBuilder"
+        private const konst BUILDER_DATA = "Lombok.BuilderData"
+        private const konst TO_BUILDER = "toBuilder"
     }
 
     context(LazyJavaResolverContext)
     @Suppress("IncorrectFormatting") // KTIJ-22227
     override fun contribute(classDescriptor: ClassDescriptor, partsBuilder: SyntheticPartsBuilder) {
         if (classDescriptor is SyntheticJavaClassDescriptor) {
-            val builderData = classDescriptor.attributes[BUILDER_DATA] as? BuilderData ?: return
+            konst builderData = classDescriptor.attributes[BUILDER_DATA] as? BuilderData ?: return
             contributeToBuilderClass(classDescriptor, builderData.constructingClass, builderData.builder, partsBuilder)
         } else {
-            val builder = Builder.getIfAnnotated(classDescriptor, config) ?: return
+            konst builder = Builder.getIfAnnotated(classDescriptor, config) ?: return
             contributeToAnnotatedClass(classDescriptor, builder, partsBuilder)
         }
     }
@@ -50,9 +50,9 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
     context(LazyJavaResolverContext)
     @Suppress("IncorrectFormatting") // KTIJ-22227
     private fun contributeToAnnotatedClass(classDescriptor: ClassDescriptor, builder: Builder, partsBuilder: SyntheticPartsBuilder) {
-        val builderName = Name.identifier(builder.builderClassName.replace("*", classDescriptor.name.asString()))
-        val visibility = builder.visibility.toDescriptorVisibility()
-        val builderDescriptor = SyntheticJavaClassDescriptor(
+        konst builderName = Name.identifier(builder.builderClassName.replace("*", classDescriptor.name.asString()))
+        konst visibility = builder.visibility.toDescriptorVisibility()
+        konst builderDescriptor = SyntheticJavaClassDescriptor(
             outerContext = this@LazyJavaResolverContext,
             name = builderName,
             outerClass = classDescriptor,
@@ -68,9 +68,9 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
             attributes = mapOf(BUILDER_DATA to BuilderData(builder, classDescriptor))
         )
         partsBuilder.addClass(builderDescriptor)
-        val builderFunction = classDescriptor.createFunction(
+        konst builderFunction = classDescriptor.createFunction(
             Name.identifier(builder.builderMethodName),
-            valueParameters = emptyList(),
+            konstueParameters = emptyList(),
             returnType = builderDescriptor.defaultType,
             modality = Modality.FINAL,
             visibility = visibility,
@@ -79,9 +79,9 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
         partsBuilder.addStaticFunction(builderFunction)
 
         if (builder.requiresToBuilder) {
-            val toBuilderFunction = classDescriptor.createFunction(
+            konst toBuilderFunction = classDescriptor.createFunction(
                 Name.identifier(TO_BUILDER),
-                valueParameters = emptyList(),
+                konstueParameters = emptyList(),
                 returnType = builderDescriptor.defaultType,
                 modality = Modality.FINAL,
                 visibility = visibility
@@ -96,14 +96,14 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
         builder: Builder,
         partsBuilder: SyntheticPartsBuilder
     ) {
-        val constructor = builderClass.createJavaConstructor(valueParameters = emptyList(), JavaDescriptorVisibilities.PACKAGE_VISIBILITY)
+        konst constructor = builderClass.createJavaConstructor(konstueParameters = emptyList(), JavaDescriptorVisibilities.PACKAGE_VISIBILITY)
         partsBuilder.addConstructor(constructor)
 
-        val visibility = builder.visibility.toDescriptorVisibility()
+        konst visibility = builder.visibility.toDescriptorVisibility()
 
-        val buildFunction = builderClass.createFunction(
+        konst buildFunction = builderClass.createFunction(
             Name.identifier(builder.buildMethodName),
-            valueParameters = emptyList(),
+            konstueParameters = emptyList(),
             returnType = constructingClass.defaultType,
             visibility = visibility
         )
@@ -125,11 +125,11 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
             return
         }
 
-        val fieldName = field.name
-        val setterName = fieldName.toMethodName(builder)
-        val setFunction = builderClass.createFunction(
+        konst fieldName = field.name
+        konst setterName = fieldName.toMethodName(builder)
+        konst setFunction = builderClass.createFunction(
             name = setterName,
-            valueParameters = listOf(LombokValueParameter(fieldName, field.type)),
+            konstueParameters = listOf(LombokValueParameter(fieldName, field.type)),
             returnType = builderClass.defaultType,
             modality = Modality.FINAL,
             visibility = builder.visibility.toDescriptorVisibility()
@@ -144,21 +144,21 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
         builderClass: ClassDescriptor,
         partsBuilder: SyntheticPartsBuilder
     ) {
-        val nameInSingularForm = (singular.singularName ?: field.name.identifier.singularForm)?.let(Name::identifier) ?: return
-        val typeName = field.type.constructor.declarationDescriptor?.fqNameSafe?.asString() ?: return
+        konst nameInSingularForm = (singular.singularName ?: field.name.identifier.singularForm)?.let(Name::identifier) ?: return
+        konst typeName = field.type.constructor.declarationDescriptor?.fqNameSafe?.asString() ?: return
 
-        val addMultipleParameterType: KotlinType
-        val valueParameters: List<LombokValueParameter>
+        konst addMultipleParameterType: KotlinType
+        konst konstueParameters: List<LombokValueParameter>
 
         when (typeName) {
             in LombokNames.SUPPORTED_COLLECTIONS -> {
-                val parameterType = field.parameterType(0) ?: return
-                valueParameters = listOf(
+                konst parameterType = field.parameterType(0) ?: return
+                konstueParameters = listOf(
                     LombokValueParameter(nameInSingularForm, parameterType)
                 )
 
-                val builtIns = field.module.builtIns
-                val baseType = when (typeName) {
+                konst builtIns = field.module.builtIns
+                konst baseType = when (typeName) {
                     in LombokNames.SUPPORTED_GUAVA_COLLECTIONS -> builtIns.iterable.defaultType
                     else -> builtIns.collection.defaultType
                 }
@@ -168,29 +168,29 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
             }
 
             in LombokNames.SUPPORTED_MAPS -> {
-                val keyType = field.parameterType(0) ?: return
-                val valueType = field.parameterType(1) ?: return
-                valueParameters = listOf(
+                konst keyType = field.parameterType(0) ?: return
+                konst konstueType = field.parameterType(1) ?: return
+                konstueParameters = listOf(
                     LombokValueParameter(Name.identifier("key"), keyType),
-                    LombokValueParameter(Name.identifier("value"), valueType),
+                    LombokValueParameter(Name.identifier("konstue"), konstueType),
                 )
 
                 addMultipleParameterType = field.module.builtIns.map.defaultType
                     .withProperNullability(singular.allowNull)
-                    .replace(newArguments = listOf(TypeProjectionImpl(keyType), TypeProjectionImpl(valueType)))
+                    .replace(newArguments = listOf(TypeProjectionImpl(keyType), TypeProjectionImpl(konstueType)))
             }
 
             in LombokNames.SUPPORTED_TABLES -> {
-                val rowKeyType = field.parameterType(0) ?: return
-                val columnKeyType = field.parameterType(1) ?: return
-                val valueType = field.parameterType(2) ?: return
+                konst rowKeyType = field.parameterType(0) ?: return
+                konst columnKeyType = field.parameterType(1) ?: return
+                konst konstueType = field.parameterType(2) ?: return
 
-                val tableDescriptor = field.module.resolveClassByFqName(LombokNames.TABLE, NoLookupLocation.FROM_SYNTHETIC_SCOPE) ?: return
+                konst tableDescriptor = field.module.resolveClassByFqName(LombokNames.TABLE, NoLookupLocation.FROM_SYNTHETIC_SCOPE) ?: return
 
-                valueParameters = listOf(
+                konstueParameters = listOf(
                     LombokValueParameter(Name.identifier("rowKey"), rowKeyType),
                     LombokValueParameter(Name.identifier("columnKey"), columnKeyType),
-                    LombokValueParameter(Name.identifier("value"), valueType),
+                    LombokValueParameter(Name.identifier("konstue"), konstueType),
                 )
 
                 addMultipleParameterType = tableDescriptor.defaultType
@@ -199,7 +199,7 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
                         newArguments = listOf(
                             TypeProjectionImpl(rowKeyType),
                             TypeProjectionImpl(columnKeyType),
-                            TypeProjectionImpl(valueType),
+                            TypeProjectionImpl(konstueType),
                         )
                     )
             }
@@ -207,30 +207,30 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
             else -> return
         }
 
-        val builderType = builderClass.defaultType
-        val visibility = builder.visibility.toDescriptorVisibility()
+        konst builderType = builderClass.defaultType
+        konst visibility = builder.visibility.toDescriptorVisibility()
 
-        val addSingleFunction = builderClass.createFunction(
+        konst addSingleFunction = builderClass.createFunction(
             name = nameInSingularForm.toMethodName(builder),
-            valueParameters,
+            konstueParameters,
             returnType = builderType,
             modality = Modality.FINAL,
             visibility = visibility
         )
         partsBuilder.addMethod(addSingleFunction)
 
-        val addMultipleFunction = builderClass.createFunction(
+        konst addMultipleFunction = builderClass.createFunction(
             name = field.name.toMethodName(builder),
-            valueParameters = listOf(LombokValueParameter(field.name, addMultipleParameterType)),
+            konstueParameters = listOf(LombokValueParameter(field.name, addMultipleParameterType)),
             returnType = builderType,
             modality = Modality.FINAL,
             visibility = visibility
         )
         partsBuilder.addMethod(addMultipleFunction)
 
-        val clearFunction = builderClass.createFunction(
+        konst clearFunction = builderClass.createFunction(
             name = Name.identifier("clear${field.name.identifier.capitalize()}"),
-            valueParameters = listOf(),
+            konstueParameters = listOf(),
             returnType = builderType,
             modality = Modality.FINAL,
             visibility = visibility
@@ -238,13 +238,13 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
         partsBuilder.addMethod(clearFunction)
     }
 
-    private val String.singularForm: String?
+    private konst String.singularForm: String?
         get() = StringUtil.unpluralize(this)
 
-    private class BuilderData(val builder: Builder, val constructingClass: ClassDescriptor)
+    private class BuilderData(konst builder: Builder, konst constructingClass: ClassDescriptor)
 
     private fun PropertyDescriptor.parameterType(index: Int): KotlinType? {
-        val type = returnType?.arguments?.getOrNull(index)?.type ?: return null
+        konst type = returnType?.arguments?.getOrNull(index)?.type ?: return null
         return type.replaceAnnotations(
             CompositeAnnotations(
                 type.annotations,
@@ -258,7 +258,7 @@ class BuilderProcessor(private val config: LombokConfig) : Processor {
     }
 
     private fun Name.toMethodName(builder: Builder): Name {
-        val prefix = builder.setterPrefix
+        konst prefix = builder.setterPrefix
         return if (prefix.isNullOrBlank()) {
             this
         } else {

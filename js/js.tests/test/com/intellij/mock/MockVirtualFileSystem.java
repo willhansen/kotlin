@@ -114,7 +114,7 @@ public final class MockVirtualFileSystem extends DeprecatedVirtualFileSystem {
 
         @Override
         public VirtualFile[] getChildren() {
-            return myChildren == null ? EMPTY_ARRAY : VfsUtilCore.toVirtualFileArray(myChildren.values());
+            return myChildren == null ? EMPTY_ARRAY : VfsUtilCore.toVirtualFileArray(myChildren.konstues());
         }
 
         @Nullable

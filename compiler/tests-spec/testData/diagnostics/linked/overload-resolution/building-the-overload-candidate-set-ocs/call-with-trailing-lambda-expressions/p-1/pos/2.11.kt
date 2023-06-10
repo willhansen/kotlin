@@ -50,6 +50,6 @@ import testscase2.*
 
 private fun <R> run(vararg elements: R = TODO(), block: () -> R): R = TODO()
 
-private val Case2.run: A
+private konst Case2.run: A
     get() = A()
 

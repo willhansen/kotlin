@@ -227,30 +227,30 @@ class KonanProject {
      * Sets the given setting of the given project extension.
      * In other words adds the following string in the build file:
      *
-     *  $container.$section.$parameter $value
+     *  $container.$section.$parameter $konstue
      */
-    protected void addSetting(String container, String section, String parameter, String value) {
-        buildFile.append("$container.$section.$parameter $value\n")
+    protected void addSetting(String container, String section, String parameter, String konstue) {
+        buildFile.append("$container.$section.$parameter $konstue\n")
     }
 
     /**
-     * Sets the given setting of the given project extension using the path of the file as a value.
+     * Sets the given setting of the given project extension using the path of the file as a konstue.
      * In other words adds the following string in the build file:
      *
-     *  $container.$section.$parameter ${value.canonicalPath.replace(\, \\)}
+     *  $container.$section.$parameter ${konstue.canonicalPath.replace(\, \\)}
      */
-    protected void addSetting(String container, String section, String parameter, File value) {
-        addSetting(container, section, parameter, "'${escapeBackSlashes(value.canonicalPath)}'")
+    protected void addSetting(String container, String section, String parameter, File konstue) {
+        addSetting(container, section, parameter, "'${escapeBackSlashes(konstue.canonicalPath)}'")
     }
 
     /** Sets the given setting of the given konanArtifact */
-    void addSetting(String artifactName = DEFAULT_ARTIFACT_NAME, String parameter, String value) {
-        addSetting("konanArtifacts", artifactName, parameter, value)
+    void addSetting(String artifactName = DEFAULT_ARTIFACT_NAME, String parameter, String konstue) {
+        addSetting("konanArtifacts", artifactName, parameter, konstue)
     }
 
-    /** Sets the given setting of the given konanArtifact using the path of the file as a value. */
-    void addSetting(String artifactName = DEFAULT_ARTIFACT_NAME, String parameter, File value) {
-        addSetting("konanArtifacts", artifactName, parameter, value)
+    /** Sets the given setting of the given konanArtifact using the path of the file as a konstue. */
+    void addSetting(String artifactName = DEFAULT_ARTIFACT_NAME, String parameter, File konstue) {
+        addSetting("konanArtifacts", artifactName, parameter, konstue)
     }
 
     void addLibraryToArtifact(String artifactName = DEFAULT_ARTIFACT_NAME, String library = DEFAULT_INTEROP_NAME) {
@@ -362,8 +362,8 @@ class KonanProject {
         return result
     }
 
-    static String escapeBackSlashes(String value) {
-        return value.replace('\\', '\\\\')
+    static String escapeBackSlashes(String konstue) {
+        return konstue.replace('\\', '\\\\')
     }
 
     static String getKonanHome() {

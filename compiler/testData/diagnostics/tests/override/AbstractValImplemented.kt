@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
 abstract class A {
-    abstract val i: Int
+    abstract konst i: Int
 }
 
 class B() : A() {
-    override val i = 1
+    override konst i = 1
 }

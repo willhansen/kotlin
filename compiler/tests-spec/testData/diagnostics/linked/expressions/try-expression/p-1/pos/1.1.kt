@@ -28,7 +28,7 @@ fun case1() {
 
 fun case2() {
     try {
-        <!UNREACHABLE_CODE!>val a =<!> throwException()
+        <!UNREACHABLE_CODE!>konst a =<!> throwException()
     }catch (e: Exception) {
         "a"
     }

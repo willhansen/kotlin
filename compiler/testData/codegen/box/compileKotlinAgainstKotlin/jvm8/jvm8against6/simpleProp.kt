@@ -2,7 +2,7 @@
 // FILE: 1.kt
 
 interface Test {
-    val test: String
+    konst test: String
         get() = "OK"
 }
 
@@ -10,7 +10,7 @@ interface Test {
 // JVM_TARGET: 1.8
 // FILE: 2.kt
 class TestClass : Test {
-    override val test: String
+    override konst test: String
         get() = super.test
 }
 

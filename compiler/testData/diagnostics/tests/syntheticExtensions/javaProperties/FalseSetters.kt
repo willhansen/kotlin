@@ -10,17 +10,17 @@ fun foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     public int getSomething1() { return 1; }
-    public void setSomething1(int value, char c) { }
+    public void setSomething1(int konstue, char c) { }
 
     public int getSomething2() { return 1; }
-    public void setSomething2(String value) { }
+    public void setSomething2(String konstue) { }
 
     public int getSomething3() { return 1; }
-    public <T> void setSomething3(int value) { return value; }
+    public <T> void setSomething3(int konstue) { return konstue; }
 
     public int getSomething4() { return 1; }
-    public static void setSomething4(int value) { }
+    public static void setSomething4(int konstue) { }
 
     public int[] getSomething5() { return null; }
-    public void setSomething5(int... value) { }
+    public void setSomething5(int... konstue) { }
 }

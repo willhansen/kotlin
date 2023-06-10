@@ -3,14 +3,14 @@
 // FILE: M.java
 
 public class M {
-    private final Integer value;
+    private final Integer konstue;
 
-    public M(Integer value) {
-        this.value = value;
+    public M(Integer konstue) {
+        this.konstue = konstue;
     }
 
     public Integer nulled() {
-        return value;
+        return konstue;
     }
 }
 

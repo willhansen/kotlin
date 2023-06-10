@@ -36,7 +36,7 @@ interface SyntheticResolveExtension {
         "org.jetbrains.kotlin.syntheticResolveExtension", SyntheticResolveExtension::class.java
     ) {
         fun getInstance(project: Project): SyntheticResolveExtension {
-            val instances = getInstances(project)
+            konst instances = getInstances(project)
             if (instances.size == 1) return instances.single()
             // return list combiner here
             return object : SyntheticResolveExtension {

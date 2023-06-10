@@ -19,6 +19,6 @@ open class C : B2(), A {
 }
 
 fun box(): String {
-    val a: A = C()
+    konst a: A = C()
     return if (a.foo()) "OK" else "fail"
 }

@@ -18,7 +18,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 import org.jetbrains.org.objectweb.asm.tree.MethodInsnNode
 
-open class SerializationCodegenExtension @JvmOverloads constructor(val metadataPlugin: SerializationDescriptorSerializerPlugin? = null) : ExpressionCodegenExtension {
+open class SerializationCodegenExtension @JvmOverloads constructor(konst metadataPlugin: SerializationDescriptorSerializerPlugin? = null) : ExpressionCodegenExtension {
     override fun generateClassSyntheticParts(codegen: ImplementationBodyCodegen) {
         SerialInfoCodegenImpl.generateSerialInfoImplBody(codegen)
         SerializableCodegenImpl.generateSerializableExtensions(codegen)
@@ -26,6 +26,6 @@ open class SerializationCodegenExtension @JvmOverloads constructor(val metadataP
         SerializableCompanionCodegenImpl.generateSerializableExtensions(codegen)
     }
 
-    override val shouldGenerateClassSyntheticPartsInLightClassesMode: Boolean
+    override konst shouldGenerateClassSyntheticPartsInLightClassesMode: Boolean
         get() = false
 }

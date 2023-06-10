@@ -12,5 +12,5 @@ public final class Controller {
     public final suspend fun noParams(): kotlin.Unit
     public final suspend fun severalParams(/*0*/ x: kotlin.String, /*1*/ y: kotlin.Int): kotlin.Double
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
-    public final suspend fun yieldString(/*0*/ value: kotlin.String): kotlin.Unit
+    public final suspend fun yieldString(/*0*/ konstue: kotlin.String): kotlin.Unit
 }

@@ -20,7 +20,7 @@ class Case1() {
     }
 }
 fun case1() {
-    val x = Case1() .. Case1()
+    konst x = Case1() .. Case1()
     <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing?")!>x<!>
     <!DEBUG_INFO_CONSTANT!>x<!> checkType { check<Nothing?>() }
 }
@@ -33,7 +33,7 @@ class Case2() {
     }
 }
 fun case2() {
-    val x = Case2() .. Case2()
+    konst x = Case2() .. Case2()
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>x<!>
     x checkType { check<Any?>() }
 }

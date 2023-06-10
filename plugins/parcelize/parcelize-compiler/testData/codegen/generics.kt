@@ -6,4 +6,4 @@ import kotlinx.parcelize.*
 import android.os.Parcelable
 
 @Parcelize
-data class Box<T : Parcelable>(val box: T) : Parcelable
+data class Box<T : Parcelable>(konst box: T) : Parcelable

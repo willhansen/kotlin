@@ -6,7 +6,7 @@
 var removed = ""
 
 class MyCharSequenceSet1 : Set<CharSequence> {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: CharSequence): Boolean = TODO()
     override fun containsAll(elements: Collection<CharSequence>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -19,7 +19,7 @@ class MyCharSequenceSet1 : Set<CharSequence> {
 }
 
 class MyCharSequenceSet2 : Set<CharSequence> {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: CharSequence): Boolean = TODO()
     override fun containsAll(elements: Collection<CharSequence>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -32,7 +32,7 @@ class MyCharSequenceSet2 : Set<CharSequence> {
 }
 
 fun box(): String {
-    val s1 = MyCharSequenceSet1()
+    konst s1 = MyCharSequenceSet1()
     s1.remove("OK")
     if (removed != "OK") throw AssertionError()
 
@@ -46,7 +46,7 @@ fun box(): String {
 
     removed = ""
 
-    val s2 = MyCharSequenceSet2()
+    konst s2 = MyCharSequenceSet2()
     s2.remove("OK")
     if (removed != "OK") throw AssertionError()
 

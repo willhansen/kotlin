@@ -24,19 +24,19 @@ import org.jetbrains.kotlin.utils.DFS
 import kotlin.test.assertEquals
 
 class BridgeTest : TestCase() {
-    private class Fun(val text: String) : FunctionHandle {
-        override val isDeclaration: Boolean get() = text[1] == 'D'
-        override val isAbstract: Boolean get() = text[0] == '-'
-        override val mayBeUsedAsSuperImplementation: Boolean get() = true
-        val signature: Char get() = text[2]
+    private class Fun(konst text: String) : FunctionHandle {
+        override konst isDeclaration: Boolean get() = text[1] == 'D'
+        override konst isAbstract: Boolean get() = text[0] == '-'
+        override konst mayBeUsedAsSuperImplementation: Boolean get() = true
+        konst signature: Char get() = text[2]
 
-        val overriddenFunctions: MutableList<Fun> = arrayListOf()
+        konst overriddenFunctions: MutableList<Fun> = arrayListOf()
         override fun getOverridden() = overriddenFunctions
 
         override fun toString() = text
     }
 
-    private class Meth(val function: Fun) {
+    private class Meth(konst function: Fun) {
         override fun equals(other: Any?) = other is Meth && other.function.signature == function.signature
         override fun hashCode() = function.signature.hashCode()
         override fun toString() = function.toString()
@@ -63,9 +63,9 @@ class BridgeTest : TestCase() {
      * 2. Each concrete fake override should have exactly one concrete super-declaration. More accurately, for each concrete
      *    fake override F there is a concrete declaration D in supertypes such that every other concrete super-declaration of F
      *    is either reachable from D or is reachable from any abstract super-declaration of F (or both). This condition is effectively
-     *    equivalent to the compiler guarantee that each class inherits not more than one implementation of each function.
+     *    equikonstent to the compiler guarantee that each class inherits not more than one implementation of each function.
      *
-     * NOTE: the graph validation procedure probably doesn't cover all the possible cases compared to the analogous code in the compiler.
+     * NOTE: the graph konstidation procedure probably doesn't cover all the possible cases compared to the analogous code in the compiler.
      *         There may be bugs here and they should be fixed accordingly.
      *
      * TODO: also verify that no abstract fake override has a concrete super-declaration.
@@ -77,7 +77,7 @@ class BridgeTest : TestCase() {
         }
 
         fun findAllReachableDeclarations(from: Fun): MutableSet<Fun> {
-            val handler = object : DFS.NodeHandlerWithListResult<Fun, Fun>() {
+            konst handler = object : DFS.NodeHandlerWithListResult<Fun, Fun>() {
                 override fun afterChildren(current: Fun) {
                     if (current.isDeclaration) {
                         result.add(current)
@@ -85,15 +85,15 @@ class BridgeTest : TestCase() {
                 }
             }
             DFS.dfs(listOf(from), { it.getOverridden() }, handler)
-            val result = HashSet(handler.result())
+            konst result = HashSet(handler.result())
             result.remove(from)
             return result
         }
 
-        val vertices = edges.flatMapTo(HashSet()) { pair -> listOf(pair.first, pair.second) }
+        konst vertices = edges.flatMapTo(HashSet()) { pair -> listOf(pair.first, pair.second) }
 
         for (vertex in vertices) {
-            val directConcreteSuperFunctions = vertex.overriddenFunctions.filter { !it.isAbstract }
+            konst directConcreteSuperFunctions = vertex.overriddenFunctions.filter { !it.isAbstract }
             assert(directConcreteSuperFunctions.size <= 1) {
                 "Incorrect test data: function $vertex has more than one direct concrete super-function: ${vertex.overriddenFunctions}\n" +
                         "This is not allowed because only classes can contain implementations (concrete functions), and having more than " +
@@ -102,16 +102,16 @@ class BridgeTest : TestCase() {
 
             if (vertex.isDeclaration) continue
 
-            val superDeclarations = findAllReachableDeclarations(vertex)
+            konst superDeclarations = findAllReachableDeclarations(vertex)
             assert(superDeclarations.isNotEmpty()) { "Incorrect test data: fake override vertex $vertex has no super-declarations" }
 
             // Remove all declarations inherited by other declarations
-            val toRemove = HashSet<Fun>()
+            konst toRemove = HashSet<Fun>()
             for (superDeclaration in superDeclarations) {
                 toRemove.addAll(findAllReachableDeclarations(superDeclaration))
             }
             superDeclarations.removeAll(toRemove)
-            val concreteDeclarations = superDeclarations.filter { !it.isAbstract }
+            konst concreteDeclarations = superDeclarations.filter { !it.isAbstract }
 
             if (!vertex.isAbstract) {
                 assert(concreteDeclarations.isNotEmpty()) {
@@ -126,7 +126,7 @@ class BridgeTest : TestCase() {
     }
 
     private fun doTest(function: Fun, expectedBridges: Set<Bridge<Meth, Fun>>) {
-        val actualBridges = generateBridges(function, ::Meth)
+        konst actualBridges = generateBridges(function, ::Meth)
         assert(actualBridges.all { it.from != it.to }) {
             "A bridge invoking itself was generated, which makes no sense, since it will result in StackOverflowError" +
                     " once called: $actualBridges"
@@ -143,52 +143,52 @@ class BridgeTest : TestCase() {
     // Simple tests with no bridges
 
     fun testOneVertexAbstract() {
-        val a = v("-D1")
+        konst a = v("-D1")
         graph()
         doTest(a, setOf())
     }
 
     fun testOneVertexConcrete() {
-        val a = v("+D1")
+        konst a = v("+D1")
         graph()
         doTest(a, setOf())
     }
 
     fun testSimpleFakeOverrideSameSignature() {
-        val a = v("+D1")
-        val b = v("+F1")
+        konst a = v("+D1")
+        konst b = v("+F1")
         graph(b to a)
         doTest(a, setOf())
         doTest(b, setOf())
     }
 
     fun testSimpleFakeOverrideDifferentSignature() {
-        val a = v("+D1")
-        val b = v("+F2")
+        konst a = v("+D1")
+        konst b = v("+F2")
         graph(b to a)
         doTest(a, setOf())
         doTest(b, setOf())
     }
 
     fun testSimpleDeclarationSameSignature() {
-        val a = v("+D1")
-        val b = v("+D1")
+        konst a = v("+D1")
+        konst b = v("+D1")
         graph(b to a)
         doTest(a, setOf())
         doTest(b, setOf())
     }
 
     fun testSimpleAbstractDeclarationSameSignature() {
-        val a = v("-D1")
-        val b = v("-D1")
+        konst a = v("-D1")
+        konst b = v("-D1")
         graph(b to a)
         doTest(a, setOf())
         doTest(b, setOf())
     }
 
     fun testSimpleAbstractDeclarationOverridesConcreteSameSignature() {
-        val a = v("+D1")
-        val b = v("-D1")
+        konst a = v("+D1")
+        konst b = v("-D1")
         graph(b to a)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -198,29 +198,29 @@ class BridgeTest : TestCase() {
     // Note that we don't generate bridges near abstract declarations in contrast to javac
 
     fun testSimpleConcreteDeclarationDifferentSignature() {
-        val a = v("+D1")
-        val b = v("+D2")
+        konst a = v("+D1")
+        konst b = v("+D2")
         graph(b to a)
         doTest(b, setOf(bridge(a, b)))
     }
 
     fun testSimpleAbstractDeclarationDifferentSignature() {
-        val a = v("-D1")
-        val b = v("-D2")
+        konst a = v("-D1")
+        konst b = v("-D2")
         graph(b to a)
         doTest(b, setOf())
     }
 
     fun testSimpleAbstractDeclarationOverridesConcreteDifferentSignature() {
-        val a = v("+D1")
-        val b = v("-D2")
+        konst a = v("+D1")
+        konst b = v("-D2")
         graph(b to a)
         doTest(b, setOf())
     }
 
     fun testSimpleConcreteDeclarationOverridesAbstractDifferentSignature() {
-        val a = v("-D1")
-        val b = v("+D2")
+        konst a = v("-D1")
+        konst b = v("+D2")
         graph(b to a)
         doTest(b, setOf(bridge(a, b)))
     }
@@ -228,9 +228,9 @@ class BridgeTest : TestCase() {
     // Simple tests where declaration overrides declaration through a fake override in the super class, with a different signature
 
     fun testSimpleConcreteDeclarationOverridesConcreteThroughFakeOverride() {
-        val a = v("+D1")
-        val b = v("+F2")
-        val c = v("+D3")
+        konst a = v("+D1")
+        konst b = v("+F2")
+        konst c = v("+D3")
         graph(b to a, c to b)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -238,9 +238,9 @@ class BridgeTest : TestCase() {
     }
 
     fun testSimpleConcreteDeclarationOverridesAbstractThroughFakeOverride() {
-        val a = v("-D1")
-        val b = v("-F2")
-        val c = v("+D3")
+        konst a = v("-D1")
+        konst b = v("-F2")
+        konst c = v("+D3")
         graph(b to a, c to b)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -248,9 +248,9 @@ class BridgeTest : TestCase() {
     }
 
     fun testSimpleAbstractDeclarationOverridesConcreteThroughFakeOverride() {
-        val a = v("+D1")
-        val b = v("+F2")
-        val c = v("-D3")
+        konst a = v("+D1")
+        konst b = v("+F2")
+        konst c = v("-D3")
         graph(b to a, c to b)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -258,9 +258,9 @@ class BridgeTest : TestCase() {
     }
 
     fun testSimpleAbstractDeclarationOverridesAbstractThroughFakeOverride() {
-        val a = v("-D1")
-        val b = v("-F2")
-        val c = v("-D3")
+        konst a = v("-D1")
+        konst b = v("-F2")
+        konst c = v("-D3")
         graph(b to a, c to b)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -270,33 +270,33 @@ class BridgeTest : TestCase() {
     // Declaration "c" overrides two declarations "a" and "b"
 
     fun testAbstractDeclarationOverridesTwoAbstractDeclarations() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("-D3")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("-D3")
         graph(c to a, c to b)
         doTest(c, setOf())
     }
 
     fun testAbstractDeclarationOverridesAbstractAndConcreteDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("-D3")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("-D3")
         graph(c to a, c to b)
         doTest(c, setOf())
     }
 
     fun testConcreteDeclarationOverridesTwoAbstractDeclarations() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("+D3")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("+D3")
         graph(c to a, c to b)
         doTest(c, setOf(bridge(a, c), bridge(b, c)))
     }
 
     fun testConcreteDeclarationOverridesAbstractAndConcreteDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+D3")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+D3")
         graph(c to a, c to b)
         doTest(c, setOf(bridge(a, c), bridge(b, c)))
     }
@@ -305,9 +305,9 @@ class BridgeTest : TestCase() {
     // We still need to generate both bridges near "c" to avoid several consecutive bridges in a call stack
 
     fun testConcreteDeclarationOverridesTwoInheritingDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+D3")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+D3")
         graph(c to a, c to b, b to a)
         doTest(a, setOf())
         doTest(b, setOf(bridge(a, b)))
@@ -315,9 +315,9 @@ class BridgeTest : TestCase() {
     }
 
     fun testConcreteDeclarationOverridesAbstractDeclarationOverridingConcrete() {
-        val a = v("+D1")
-        val b = v("-D2")
-        val c = v("+D3")
+        konst a = v("+D1")
+        konst b = v("-D2")
+        konst c = v("+D3")
         graph(c to a, c to b, b to a)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -327,10 +327,10 @@ class BridgeTest : TestCase() {
     // Diamonds where the sink (vertex "d") is a declaration: bridges from all super-declarations to "d" should be present
 
     fun testDiamondAbstractDeclarations() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("-D3")
-        val d = v("-D4")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("-D3")
+        konst d = v("-D4")
         graph(b to a, c to a, d to b, d to c)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -339,10 +339,10 @@ class BridgeTest : TestCase() {
     }
 
     fun testDiamondMixedDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("-D3")
-        val d = v("+D4")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("-D3")
+        konst d = v("+D4")
         graph(b to a, c to a, d to b, d to c)
         doTest(a, setOf())
         doTest(b, setOf(bridge(a, b)))
@@ -351,10 +351,10 @@ class BridgeTest : TestCase() {
     }
 
     fun testDiamondAbstractFakeOverridesInTheMiddle() {
-        val a = v("-D1")
-        val b = v("-F2")
-        val c = v("-F3")
-        val d = v("+D4")
+        konst a = v("-D1")
+        konst b = v("-F2")
+        konst c = v("-F3")
+        konst d = v("+D4")
         graph(b to a, c to a, d to b, d to c)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -365,33 +365,33 @@ class BridgeTest : TestCase() {
     // Fake override "c" overrides declarations "a" and "b": a bridge is needed if signatures are different and there's an implementation
 
     fun testAbstractFakeOverride() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("-F3")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("-F3")
         graph(c to a, c to b)
         doTest(c, setOf())
     }
 
     fun testFakeOverrideSameSuperDeclarations() {
-        val a = v("-D1")
-        val b = v("+D1")
-        val c = v("+F2")
+        konst a = v("-D1")
+        konst b = v("+D1")
+        konst c = v("+F2")
         graph(c to a, c to b)
         doTest(c, setOf())
     }
 
     fun testFakeOverrideAbstractAndConcreteDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+F3")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+F3")
         graph(c to a, c to b)
         doTest(c, setOf(bridge(a, b)))
     }
 
     fun testFakeOverrideInheritingDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+F3")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+F3")
         graph(c to a, c to b, b to a)
         doTest(a, setOf())
         doTest(b, setOf(bridge(a, b)))
@@ -402,20 +402,20 @@ class BridgeTest : TestCase() {
     // Diamonds where the sink (vertex "d") is a fake override
 
     fun testDiamondFakeOverrideAbstractFakeAndConcrete() {
-        val a = v("-D1")
-        val b = v("-F2")
-        val c = v("+D3")
-        val d = v("+F4")
+        konst a = v("-D1")
+        konst b = v("-F2")
+        konst c = v("+D3")
+        konst d = v("+F4")
         graph(b to a, c to a, d to b, d to c)
         doTest(c, setOf(bridge(a, c)))
         doTest(d, setOf())
     }
 
     fun testDiamondFakeOverrideAbstractAndConcrete() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("+D3")
-        val d = v("+F4")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("+D3")
+        konst d = v("+F4")
         graph(b to a, c to a, d to b, d to c)
         doTest(b, setOf())
         doTest(c, setOf(bridge(a, c)))
@@ -423,10 +423,10 @@ class BridgeTest : TestCase() {
     }
 
     fun testDiamondFakeOverrideAbstractOverridesConcrete() {
-        val a = v("+D1")
-        val b = v("+D2")
-        val c = v("-D3")
-        val d = v("+F4")
+        konst a = v("+D1")
+        konst b = v("+D2")
+        konst c = v("-D3")
+        konst d = v("+F4")
         graph(b to a, c to a, d to b, d to c)
         doTest(b, setOf(bridge(a, b)))
         doTest(c, setOf())
@@ -436,10 +436,10 @@ class BridgeTest : TestCase() {
     // More complex tests where a fake override inherits several declarations
 
     fun testFakeOverrideInheritingDeclarationsAndAbstract() {
-        val a = v("-D1")
-        val b = v("-D2")
-        val c = v("+D3")
-        val e = v("+F4")
+        konst a = v("-D1")
+        konst b = v("-D2")
+        konst c = v("+D3")
+        konst e = v("+F4")
         graph(e to a, e to b, e to c, c to b)
         doTest(a, setOf())
         doTest(b, setOf())
@@ -448,32 +448,32 @@ class BridgeTest : TestCase() {
     }
 
     fun testFakeOverrideManyDeclarations() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("-D3")
-        val d = v("-D4")
-        val e = v("+F5")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("-D3")
+        konst d = v("-D4")
+        konst e = v("+F5")
         graph(e to a, e to b, e to c, e to d)
         doTest(e, setOf(bridge(a, b), bridge(c, b), bridge(d, b)))
     }
 
     fun testFakeOverrideTwoDeclarationsThroughFakeOverrides() {
-        val a = v("+D1")
-        val b = v("+F2")
-        val c = v("-D3")
-        val d = v("-F4")
-        val e = v("+F5")
+        konst a = v("+D1")
+        konst b = v("+F2")
+        konst c = v("-D3")
+        konst d = v("-F4")
+        konst e = v("+F5")
         graph(b to a, d to c, e to b, e to d)
         doTest(e, setOf(bridge(c, a)))
     }
 
     fun testFakeOverrideMisleadingImplementation() {
-        val a = v("+D1")
-        val b = v("-D2")
-        val c = v("-D3")
-        val d = v("+D4")
-        val e = v("+F5")
-        val f = v("+F6")
+        konst a = v("+D1")
+        konst b = v("-D2")
+        konst c = v("-D3")
+        konst d = v("+D4")
+        konst e = v("+F5")
+        konst f = v("+F6")
         graph(c to a, e to d, f to b, f to c, f to e)
         doTest(e, setOf())
         // Although "a" is a concrete declaration, it's overridden with abstract in "c" and all bridges should delegate to "d" instead
@@ -483,21 +483,21 @@ class BridgeTest : TestCase() {
     // Fake override overrides another fake override (or declaration) with some bridges already present there
 
     fun testFakeOverrideInheritsBridgeFromFakeOverride() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+F3")
-        val d = v("+F4")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+F3")
+        konst d = v("+F4")
         graph(c to a, c to b, d to c)
         doTest(c, setOf(bridge(a, b)))
         doTest(d, setOf())
     }
 
     fun testFakeOverrideInheritsBridgesAndAbstract() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+F3")
-        val d = v("-D4")
-        val e = v("+F5")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+F3")
+        konst d = v("-D4")
+        konst e = v("+F5")
         graph(c to a, c to b, e to c, e to d)
         doTest(c, setOf(bridge(a, b)))
         // It's important that "e" shouldn't have "a->b" bridge, because it's inherited from "c"
@@ -505,12 +505,12 @@ class BridgeTest : TestCase() {
     }
 
     fun testFakeOverrideInheritsBridgeFromDeclaration() {
-        val a = v("+D1")
-        val b = v("-D2")
-        val c = v("+F3")
-        val d = v("+D4")
-        val e = v("-D5")
-        val f = v("+F6")
+        konst a = v("+D1")
+        konst b = v("-D2")
+        konst c = v("+F3")
+        konst d = v("+D4")
+        konst e = v("-D5")
+        konst f = v("+F6")
         graph(c to a, c to b, d to c, f to d, f to e)
         doTest(c, setOf(bridge(b, a)))
         doTest(d, setOf(bridge(a, d), bridge(b, d)))
@@ -518,11 +518,11 @@ class BridgeTest : TestCase() {
     }
 
     fun testFakeOverrideDiamondWithExtraAbstract() {
-        val a = v("+D1")
-        val b = v("-F2")
-        val c = v("+D3")
-        val d = v("-D4")
-        val e = v("+F5")
+        konst a = v("+D1")
+        konst b = v("-F2")
+        konst c = v("+D3")
+        konst d = v("-D4")
+        konst e = v("+F5")
         graph(b to a, c to a, e to b, e to c, e to d)
         doTest(c, setOf(bridge(a, c)))
         // It's important that implementation of "e" is "c", not "a", so a bridge "d->c" should exist
@@ -530,16 +530,16 @@ class BridgeTest : TestCase() {
     }
 
     fun testLongTreeOfFakeOverrideBridgeInheritance() {
-        val a = v("+D1")
-        val b = v("-D2")
-        val c = v("-D3")
-        val d = v("+F4")
-        val e = v("-D5")
-        val f = v("-D6")
-        val g = v("+F7")
-        val h = v("-D8")
-        val i = v("-D9")
-        val j = v("+F0")
+        konst a = v("+D1")
+        konst b = v("-D2")
+        konst c = v("-D3")
+        konst d = v("+F4")
+        konst e = v("-D5")
+        konst f = v("-D6")
+        konst g = v("+F7")
+        konst h = v("-D8")
+        konst i = v("-D9")
+        konst j = v("+F0")
         graph(
             d to a, d to b, d to c,
             g to d, g to e, g to f,
@@ -551,12 +551,12 @@ class BridgeTest : TestCase() {
     }
 
     fun testFakeOverrideShouldNotInheritBridgeFromAbstractDeclaration() {
-        val a = v("-D1")
-        val b = v("+D2")
-        val c = v("+F3")
-        val d = v("-D4")
-        val e = v("+D5")
-        val f = v("+F6")
+        konst a = v("-D1")
+        konst b = v("+D2")
+        konst c = v("+F3")
+        konst d = v("-D4")
+        konst e = v("+D5")
+        konst f = v("+F6")
         graph(c to a, c to b, d to c, f to d, f to e)
         doTest(c, setOf(bridge(a, b)))
         // Although "f" has a concrete fake override "c" in its hierarchy, we should NOT silently inherit a bridge from it,
@@ -565,10 +565,10 @@ class BridgeTest : TestCase() {
     }
 
     fun testFakeOverrideShouldNotInheritBridgeFromAbstractFakeOverride() {
-        val a = v("+D1")
-        val b = v("-D2")
-        val c = v("-F3")
-        val d = v("+F4")
+        konst a = v("+D1")
+        konst b = v("-D2")
+        konst c = v("-F3")
+        konst d = v("+F4")
         graph(c to a, c to b, d to a, d to c)
         doTest(c, setOf())
         doTest(d, setOf(bridge(b, a)))

@@ -23,17 +23,17 @@ object DslMarkerUtils {
     object FunctionTypeAnnotationsKey : CallableDescriptor.UserDataKey<Annotations>
 
     data class DslMarkersFromReceiver(
-        val common: Set<FqName>,
-        val fromContainingFunctionType: Set<FqName>
+        konst common: Set<FqName>,
+        konst fromContainingFunctionType: Set<FqName>
     ) {
         fun all() = common + fromContainingFunctionType
     }
 
     fun extractDslMarkerFqNames(receiver: ReceiverValue): DslMarkersFromReceiver {
-        val errorLevel = extractDslMarkerFqNames(receiver.type)
+        konst errorLevel = extractDslMarkerFqNames(receiver.type)
 
-        val functionDescriptor = (receiver as? ExtensionReceiver)?.declarationDescriptor as? FunctionDescriptor
-        val deprecationLevel = functionDescriptor
+        konst functionDescriptor = (receiver as? ExtensionReceiver)?.declarationDescriptor as? FunctionDescriptor
+        konst deprecationLevel = functionDescriptor
             ?.getUserData(FunctionTypeAnnotationsKey)
             ?.let(Annotations::extractDslMarkerFqNames)
             ?.toSet()
@@ -43,7 +43,7 @@ object DslMarkerUtils {
     }
 
     fun extractDslMarkerFqNames(kotlinType: KotlinType): Set<FqName> {
-        val result = mutableSetOf<FqName>()
+        konst result = mutableSetOf<FqName>()
 
         result.addAll(kotlinType.annotations.extractDslMarkerFqNames())
 
@@ -60,7 +60,7 @@ object DslMarkerUtils {
         return result
     }
 
-    val DSL_MARKER_FQ_NAME = FqName("kotlin.DslMarker")
+    konst DSL_MARKER_FQ_NAME = FqName("kotlin.DslMarker")
 }
 
 
@@ -68,6 +68,6 @@ private fun Annotations.extractDslMarkerFqNames() =
     filter(AnnotationDescriptor::isDslMarker).mapNotNull { it.fqName }
 
 private fun AnnotationDescriptor.isDslMarker(): Boolean {
-    val classDescriptor = annotationClass ?: return false
+    konst classDescriptor = annotationClass ?: return false
     return classDescriptor.annotations.hasAnnotation(DslMarkerUtils.DSL_MARKER_FQ_NAME)
 }

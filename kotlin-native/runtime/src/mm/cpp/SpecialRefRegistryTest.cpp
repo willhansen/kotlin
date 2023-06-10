@@ -54,12 +54,12 @@ public:
 
     void publish() noexcept { mm::ThreadRegistry::Instance().CurrentThreadData()->specialRefRegistry().publish(); }
 
-    template <typename... Invalidated>
-    std::vector<ObjHeader*> all(Invalidated&&... invalidated) noexcept {
-        std::set<ObjHeader*> invalidatedSet({std::forward<Invalidated>(invalidated)...});
+    template <typename... Inkonstidated>
+    std::vector<ObjHeader*> all(Inkonstidated&&... inkonstidated) noexcept {
+        std::set<ObjHeader*> inkonstidatedSet({std::forward<Inkonstidated>(inkonstidated)...});
         std::vector<ObjHeader*> result;
         for (auto& obj : mm::SpecialRefRegistry::instance().lockForIter()) {
-            if (invalidatedSet.find(obj) != invalidatedSet.end()) {
+            if (inkonstidatedSet.find(obj) != inkonstidatedSet.end()) {
                 obj = nullptr;
             }
             result.push_back(obj);
@@ -280,7 +280,7 @@ TEST_F(SpecialRefRegistryTest, RegisterAllRefs) {
     });
 }
 
-TEST_F(SpecialRefRegistryTest, InvalidateWeakRef) {
+TEST_F(SpecialRefRegistryTest, InkonstidateWeakRef) {
     RunInNewThread([this] {
         ObjHeader* obj = reinterpret_cast<ObjHeader*>(1);
         ObjHolder holder(obj);
@@ -302,7 +302,7 @@ TEST_F(SpecialRefRegistryTest, InvalidateWeakRef) {
     });
 }
 
-TEST_F(SpecialRefRegistryTest, InvalidateObjCRef) {
+TEST_F(SpecialRefRegistryTest, InkonstidateObjCRef) {
     RunInNewThread([this] {
         ObjHeader* obj = reinterpret_cast<ObjHeader*>(1);
         ObjHolder holder(obj);

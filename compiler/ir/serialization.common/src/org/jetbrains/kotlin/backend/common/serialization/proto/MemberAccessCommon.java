@@ -30,7 +30,7 @@ public final class MemberAccessCommon extends
   private MemberAccessCommon(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -81,10 +81,10 @@ public final class MemberAccessCommon extends
           }
           case 26: {
             if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-              valueArgument_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression>();
+              konstueArgument_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression>();
               mutable_bitField0_ |= 0x00000004;
             }
-            valueArgument_.add(input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression.PARSER, extensionRegistry));
+            konstueArgument_.add(input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression.PARSER, extensionRegistry));
             break;
           }
           case 32: {
@@ -110,14 +110,14 @@ public final class MemberAccessCommon extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-        valueArgument_ = java.util.Collections.unmodifiableList(valueArgument_);
+        konstueArgument_ = java.util.Collections.unmodifiableList(konstueArgument_);
       }
       if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
         typeArgument_ = java.util.Collections.unmodifiableList(typeArgument_);
@@ -137,7 +137,7 @@ public final class MemberAccessCommon extends
     public MemberAccessCommon parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new MemberAccessCommon(input, extensionRegistry);
     }
   };
@@ -179,38 +179,38 @@ public final class MemberAccessCommon extends
   }
 
   public static final int VALUE_ARGUMENT_FIELD_NUMBER = 3;
-  private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> valueArgument_;
+  private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> konstueArgument_;
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   public java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> getValueArgumentList() {
-    return valueArgument_;
+    return konstueArgument_;
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   public java.util.List<? extends org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpressionOrBuilder> 
       getValueArgumentOrBuilderList() {
-    return valueArgument_;
+    return konstueArgument_;
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   public int getValueArgumentCount() {
-    return valueArgument_.size();
+    return konstueArgument_.size();
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression getValueArgument(int index) {
-    return valueArgument_.get(index);
+    return konstueArgument_.get(index);
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpressionOrBuilder getValueArgumentOrBuilder(
       int index) {
-    return valueArgument_.get(index);
+    return konstueArgument_.get(index);
   }
 
   public static final int TYPE_ARGUMENT_FIELD_NUMBER = 4;
@@ -239,7 +239,7 @@ public final class MemberAccessCommon extends
   private void initFields() {
     dispatchReceiver_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
     extensionReceiver_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
-    valueArgument_ = java.util.Collections.emptyList();
+    konstueArgument_ = java.util.Collections.emptyList();
     typeArgument_ = java.util.Collections.emptyList();
   }
   private byte memoizedIsInitialized = -1;
@@ -279,8 +279,8 @@ public final class MemberAccessCommon extends
     if (((bitField0_ & 0x00000002) == 0x00000002)) {
       output.writeMessage(2, extensionReceiver_);
     }
-    for (int i = 0; i < valueArgument_.size(); i++) {
-      output.writeMessage(3, valueArgument_.get(i));
+    for (int i = 0; i < konstueArgument_.size(); i++) {
+      output.writeMessage(3, konstueArgument_.get(i));
     }
     if (getTypeArgumentList().size() > 0) {
       output.writeRawVarint32(34);
@@ -306,9 +306,9 @@ public final class MemberAccessCommon extends
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
         .computeMessageSize(2, extensionReceiver_);
     }
-    for (int i = 0; i < valueArgument_.size(); i++) {
+    for (int i = 0; i < konstueArgument_.size(); i++) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-        .computeMessageSize(3, valueArgument_.get(i));
+        .computeMessageSize(3, konstueArgument_.get(i));
     }
     {
       int dataSize = 0;
@@ -338,23 +338,23 @@ public final class MemberAccessCommon extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parseFrom(java.io.InputStream input)
@@ -422,7 +422,7 @@ public final class MemberAccessCommon extends
       bitField0_ = (bitField0_ & ~0x00000001);
       extensionReceiver_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance();
       bitField0_ = (bitField0_ & ~0x00000002);
-      valueArgument_ = java.util.Collections.emptyList();
+      konstueArgument_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000004);
       typeArgument_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000008);
@@ -458,10 +458,10 @@ public final class MemberAccessCommon extends
       }
       result.extensionReceiver_ = extensionReceiver_;
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        valueArgument_ = java.util.Collections.unmodifiableList(valueArgument_);
+        konstueArgument_ = java.util.Collections.unmodifiableList(konstueArgument_);
         bitField0_ = (bitField0_ & ~0x00000004);
       }
-      result.valueArgument_ = valueArgument_;
+      result.konstueArgument_ = konstueArgument_;
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         typeArgument_ = java.util.Collections.unmodifiableList(typeArgument_);
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -479,13 +479,13 @@ public final class MemberAccessCommon extends
       if (other.hasExtensionReceiver()) {
         mergeExtensionReceiver(other.getExtensionReceiver());
       }
-      if (!other.valueArgument_.isEmpty()) {
-        if (valueArgument_.isEmpty()) {
-          valueArgument_ = other.valueArgument_;
+      if (!other.konstueArgument_.isEmpty()) {
+        if (konstueArgument_.isEmpty()) {
+          konstueArgument_ = other.konstueArgument_;
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           ensureValueArgumentIsMutable();
-          valueArgument_.addAll(other.valueArgument_);
+          konstueArgument_.addAll(other.konstueArgument_);
         }
         
       }
@@ -533,7 +533,7 @@ public final class MemberAccessCommon extends
       org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -561,11 +561,11 @@ public final class MemberAccessCommon extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression dispatch_receiver = 1;</code>
      */
-    public Builder setDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      dispatchReceiver_ = value;
+      dispatchReceiver_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -583,13 +583,13 @@ public final class MemberAccessCommon extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression dispatch_receiver = 1;</code>
      */
-    public Builder mergeDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           dispatchReceiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         dispatchReceiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(dispatchReceiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(dispatchReceiver_).mergeFrom(konstue).buildPartial();
       } else {
-        dispatchReceiver_ = value;
+        dispatchReceiver_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -621,11 +621,11 @@ public final class MemberAccessCommon extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression extension_receiver = 2;</code>
      */
-    public Builder setExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      extensionReceiver_ = value;
+      extensionReceiver_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -643,13 +643,13 @@ public final class MemberAccessCommon extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression extension_receiver = 2;</code>
      */
-    public Builder mergeExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           extensionReceiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         extensionReceiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(extensionReceiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(extensionReceiver_).mergeFrom(konstue).buildPartial();
       } else {
-        extensionReceiver_ = value;
+        extensionReceiver_ = konstue;
       }
 
       bitField0_ |= 0x00000002;
@@ -665,127 +665,127 @@ public final class MemberAccessCommon extends
       return this;
     }
 
-    private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> valueArgument_ =
+    private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> konstueArgument_ =
       java.util.Collections.emptyList();
     private void ensureValueArgumentIsMutable() {
       if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-        valueArgument_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression>(valueArgument_);
+        konstueArgument_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression>(konstueArgument_);
         bitField0_ |= 0x00000004;
        }
     }
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> getValueArgumentList() {
-      return java.util.Collections.unmodifiableList(valueArgument_);
+      return java.util.Collections.unmodifiableList(konstueArgument_);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public int getValueArgumentCount() {
-      return valueArgument_.size();
+      return konstueArgument_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression getValueArgument(int index) {
-      return valueArgument_.get(index);
+      return konstueArgument_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder setValueArgument(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueArgumentIsMutable();
-      valueArgument_.set(index, value);
+      konstueArgument_.set(index, konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder setValueArgument(
         int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression.Builder builderForValue) {
       ensureValueArgumentIsMutable();
-      valueArgument_.set(index, builderForValue.build());
+      konstueArgument_.set(index, builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
-    public Builder addValueArgument(org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value) {
-      if (value == null) {
+    public Builder addValueArgument(org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueArgumentIsMutable();
-      valueArgument_.add(value);
+      konstueArgument_.add(konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder addValueArgument(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueArgumentIsMutable();
-      valueArgument_.add(index, value);
+      konstueArgument_.add(index, konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder addValueArgument(
         org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression.Builder builderForValue) {
       ensureValueArgumentIsMutable();
-      valueArgument_.add(builderForValue.build());
+      konstueArgument_.add(builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder addValueArgument(
         int index, org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression.Builder builderForValue) {
       ensureValueArgumentIsMutable();
-      valueArgument_.add(index, builderForValue.build());
+      konstueArgument_.add(index, builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder addAllValueArgument(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression> konstues) {
       ensureValueArgumentIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, valueArgument_);
+          konstues, konstueArgument_);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder clearValueArgument() {
-      valueArgument_ = java.util.Collections.emptyList();
+      konstueArgument_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000004);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression value_argument = 3;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.NullableIrExpression konstue_argument = 3;</code>
      */
     public Builder removeValueArgument(int index) {
       ensureValueArgumentIsMutable();
-      valueArgument_.remove(index);
+      konstueArgument_.remove(index);
 
       return this;
     }
@@ -820,18 +820,18 @@ public final class MemberAccessCommon extends
      * <code>repeated int32 type_argument = 4 [packed = true];</code>
      */
     public Builder setTypeArgument(
-        int index, int value) {
+        int index, int konstue) {
       ensureTypeArgumentIsMutable();
-      typeArgument_.set(index, value);
+      typeArgument_.set(index, konstue);
       
       return this;
     }
     /**
      * <code>repeated int32 type_argument = 4 [packed = true];</code>
      */
-    public Builder addTypeArgument(int value) {
+    public Builder addTypeArgument(int konstue) {
       ensureTypeArgumentIsMutable();
-      typeArgument_.add(value);
+      typeArgument_.add(konstue);
       
       return this;
     }
@@ -839,10 +839,10 @@ public final class MemberAccessCommon extends
      * <code>repeated int32 type_argument = 4 [packed = true];</code>
      */
     public Builder addAllTypeArgument(
-        java.lang.Iterable<? extends java.lang.Integer> values) {
+        java.lang.Iterable<? extends java.lang.Integer> konstues) {
       ensureTypeArgumentIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, typeArgument_);
+          konstues, typeArgument_);
       
       return this;
     }

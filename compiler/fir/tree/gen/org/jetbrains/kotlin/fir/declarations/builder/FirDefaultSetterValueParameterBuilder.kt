@@ -58,7 +58,7 @@ class FirDefaultSetterValueParameterBuilder : FirAnnotationContainerBuilder {
     var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     var containerSource: DeserializedContainerSource? = null
     var dispatchReceiverType: ConeSimpleKotlinType? = null
-    val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     var initializer: FirExpression? = null
     var delegate: FirExpression? = null
     var isVar: Boolean = false
@@ -66,7 +66,7 @@ class FirDefaultSetterValueParameterBuilder : FirAnnotationContainerBuilder {
     var getter: FirPropertyAccessor? = null
     var setter: FirPropertyAccessor? = null
     var backingField: FirBackingField? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var symbol: FirValueParameterSymbol
     var defaultValue: FirExpression? = null
     lateinit var containingFunctionSymbol: FirFunctionSymbol<*>

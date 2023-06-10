@@ -1,1 +1,1 @@
-val abc: kotlin.Int
+konst abc: kotlin.Int

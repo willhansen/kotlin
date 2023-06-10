@@ -49,28 +49,28 @@ open class Car : Vehicle() {
 }
 
 fun test1() {
-    val string = Json.encodeToString(Test1.serializer(), Test1())
+    konst string = Json.encodeToString(Test1.serializer(), Test1())
     assertEquals("{}", string)
-    val reconstructed = Json.decodeFromString(Test1.serializer(), string)
+    konst reconstructed = Json.decodeFromString(Test1.serializer(), string)
     assertEquals("foo", reconstructed.optional)
 }
 
 fun test2() {
-    val string = Json.encodeToString(Test2.serializer(), Test2())
+    konst string = Json.encodeToString(Test2.serializer(), Test2())
     assertEquals("{}", string)
-    val reconstructed = Json.decodeFromString(Test2.serializer(), string)
+    konst reconstructed = Json.decodeFromString(Test2.serializer(), string)
     assertEquals("foo", reconstructed.optional)
 }
 
 fun test3() {
-    val json = Json { allowStructuredMapKeys = true; encodeDefaults = true }
+    konst json = Json { allowStructuredMapKeys = true; encodeDefaults = true }
 
-    val car = Car()
+    konst car = Car()
     car.maxSpeed = 100
     car.name = "ford"
-    val s = json.encodeToString(Car.serializer(), car)
+    konst s = json.encodeToString(Car.serializer(), car)
     assertEquals("""{"color":null,"name":"ford","maxSpeed":100}""", s)
-    val restoredCar = json.decodeFromString(Car.serializer(), s)
+    konst restoredCar = json.decodeFromString(Car.serializer(), s)
     assertEquals(100, restoredCar.maxSpeed)
     assertEquals("ford", restoredCar.name)
     assertEquals(null, restoredCar.color)

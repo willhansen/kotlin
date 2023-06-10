@@ -10,19 +10,19 @@ interface B {
 }
 
 class X: A {
-    val a: <!UNRESOLVED_REFERENCE!>A_<!> = <!UNRESOLVED_REFERENCE!>A_<!>()
-    val b: A.A_ = A.A_()
+    konst a: <!UNRESOLVED_REFERENCE!>A_<!> = <!UNRESOLVED_REFERENCE!>A_<!>()
+    konst b: A.A_ = A.A_()
 
     companion object {
-        val a: <!UNRESOLVED_REFERENCE!>A_<!> = <!UNRESOLVED_REFERENCE!>A_<!>()
+        konst a: <!UNRESOLVED_REFERENCE!>A_<!> = <!UNRESOLVED_REFERENCE!>A_<!>()
     }
 }
 
 class Y: B {
-    val a: <!UNRESOLVED_REFERENCE!>B_<!> = <!UNRESOLVED_REFERENCE!>B_<!>()
-    val b: B.B_ = B.B_()
+    konst a: <!UNRESOLVED_REFERENCE!>B_<!> = <!UNRESOLVED_REFERENCE!>B_<!>()
+    konst b: B.B_ = B.B_()
 
     companion object {
-        val b: <!UNRESOLVED_REFERENCE!>B_<!> = <!UNRESOLVED_REFERENCE!>B_<!>()
+        konst b: <!UNRESOLVED_REFERENCE!>B_<!> = <!UNRESOLVED_REFERENCE!>B_<!>()
     }
 }

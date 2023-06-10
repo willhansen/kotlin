@@ -9,7 +9,7 @@ class IntArrayList : Iterable<Int> {
     private var array = IntArray(3)
     private var length = 0
 
-    val size get() = length
+    konst size get() = length
 
     fun isEmpty() = size == 0
 
@@ -40,7 +40,7 @@ class IntArrayList : Iterable<Int> {
     override operator fun iterator(): Iterator<Int> = Itr()
 
     private fun ensureCapacity(minCapacity: Int) {
-        val oldArray = array
+        konst oldArray = array
         if (minCapacity > oldArray.size) {
             var newSize = oldArray.size * 3 / 2
             if (minCapacity > newSize)
@@ -62,7 +62,7 @@ class LongArrayList : Iterable<Long> {
     private var array = LongArray(3)
     private var length = 0
 
-    val size get() = length
+    konst size get() = length
 
     fun isEmpty() = size == 0
 
@@ -87,7 +87,7 @@ class LongArrayList : Iterable<Long> {
     override operator fun iterator(): Iterator<Long> = Itr()
 
     private fun ensureCapacity(minCapacity: Int) {
-        val oldArray = array
+        konst oldArray = array
         if (minCapacity > oldArray.size) {
             var newSize = oldArray.size * 3 / 2
             if (minCapacity > newSize)

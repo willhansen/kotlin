@@ -39,7 +39,7 @@ public actual inline fun <T> (suspend () -> T).startCoroutineUninterceptedOrRetu
 internal fun <T> (suspend () -> T).wrapWithContinuationImpl(
     completion: Continuation<T>
 ): Any? {
-    val newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
+    konst newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
     return (this as Function1<Continuation<T>, Any?>).invoke(newCompletion)
 }
 
@@ -71,7 +71,7 @@ internal fun <R, T> (suspend R.() -> T).wrapWithContinuationImpl(
     receiver: R,
     completion: Continuation<T>
 ): Any? {
-    val newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
+    konst newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
     return (this as Function2<R, Continuation<T>, Any?>).invoke(receiver, newCompletion)
 }
 
@@ -92,7 +92,7 @@ internal fun <R, P, T> (suspend R.(P) -> T).wrapWithContinuationImpl(
     param: P,
     completion: Continuation<T>
 ): Any? {
-    val newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
+    konst newCompletion = createSimpleCoroutineForSuspendFunction(probeCoroutineCreated(completion))
     return (this as Function3<R, P, Continuation<T>, Any?>).invoke(receiver, param, newCompletion)
 }
 
@@ -123,7 +123,7 @@ internal fun <R, P, T> (suspend R.(P) -> T).wrapWithContinuationImpl(
 public actual fun <T> (suspend () -> T).createCoroutineUnintercepted(
     completion: Continuation<T>
 ): Continuation<Unit> {
-    val probeCompletion = probeCoroutineCreated(completion)
+    konst probeCompletion = probeCoroutineCreated(completion)
     return if (this is BaseContinuationImpl)
         create(probeCompletion)
     else
@@ -158,7 +158,7 @@ public actual fun <R, T> (suspend R.() -> T).createCoroutineUnintercepted(
     receiver: R,
     completion: Continuation<T>
 ): Continuation<Unit> {
-    val probeCompletion = probeCoroutineCreated(completion)
+    konst probeCompletion = probeCoroutineCreated(completion)
     return if (this is BaseContinuationImpl)
         create(receiver, probeCompletion)
     else {
@@ -201,7 +201,7 @@ private inline fun <T> createCoroutineFromSuspendFunction(
     completion: Continuation<T>,
     crossinline block: (Continuation<T>) -> Any?
 ): Continuation<Unit> {
-    val context = completion.context
+    konst context = completion.context
     // label == 0 when coroutine is not started yet (initially) or label == 1 when it was
     return if (context === EmptyCoroutineContext)
         object : RestrictedContinuationImpl(completion as Continuation<Any?>) {
@@ -253,7 +253,7 @@ private inline fun <T> createCoroutineFromSuspendFunction(
 private fun <T> createSimpleCoroutineForSuspendFunction(
     completion: Continuation<T>
 ): Continuation<T> {
-    val context = completion.context
+    konst context = completion.context
     return if (context === EmptyCoroutineContext)
         object : RestrictedContinuationImpl(completion as Continuation<Any?>) {
             override fun invokeSuspend(result: Result<Any?>): Any? {

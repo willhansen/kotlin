@@ -39,16 +39,16 @@ internal sealed class KtFirVariableLikeSignature<out S : KtVariableLikeSymbol> :
 }
 
 internal class KtFirVariableLikeDummySignature<out S : KtVariableLikeSymbol>(
-    override val token: KtLifetimeToken,
-    override val firSymbol: FirVariableSymbol<*>,
-    override val firSymbolBuilder: KtSymbolByFirBuilder,
+    override konst token: KtLifetimeToken,
+    override konst firSymbol: FirVariableSymbol<*>,
+    override konst firSymbolBuilder: KtSymbolByFirBuilder,
 ) : KtFirVariableLikeSignature<S>() {
     @Suppress("UNCHECKED_CAST")
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { firSymbol.buildSymbol(firSymbolBuilder) as S }
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { symbol.returnType }
-    override val receiverType: KtType?
+    override konst receiverType: KtType?
         get() = withValidityAssertion { symbol.receiverType }
 
     override fun substitute(substitutor: KtSubstitutor): KtFirVariableLikeSignature<S> = withValidityAssertion {
@@ -60,21 +60,21 @@ internal class KtFirVariableLikeDummySignature<out S : KtVariableLikeSymbol>(
 }
 
 internal class KtFirVariableLikeSubstitutorBasedSignature<out S : KtVariableLikeSymbol>(
-    override val token: KtLifetimeToken,
-    override val firSymbol: FirVariableSymbol<*>,
-    override val firSymbolBuilder: KtSymbolByFirBuilder,
-    override val coneSubstitutor: ConeSubstitutor = ConeSubstitutor.Empty,
+    override konst token: KtLifetimeToken,
+    override konst firSymbol: FirVariableSymbol<*>,
+    override konst firSymbolBuilder: KtSymbolByFirBuilder,
+    override konst coneSubstitutor: ConeSubstitutor = ConeSubstitutor.Empty,
 ) : KtFirVariableLikeSignature<S>(), SubstitutorBasedSignature {
     @Suppress("UNCHECKED_CAST")
-    override val symbol: S
+    override konst symbol: S
         get() = withValidityAssertion { firSymbol.buildSymbol(firSymbolBuilder) as S }
-    override val returnType: KtType by cached {
-        val isVarargValueParameter = (firSymbol as? FirValueParameterSymbol)?.isVararg == true
-        val coneType = firSymbol.resolvedReturnType.applyIf(isVarargValueParameter) { arrayElementType() ?: this }
+    override konst returnType: KtType by cached {
+        konst isVarargValueParameter = (firSymbol as? FirValueParameterSymbol)?.isVararg == true
+        konst coneType = firSymbol.resolvedReturnType.applyIf(isVarargValueParameter) { arrayElementType() ?: this }
 
         firSymbolBuilder.typeBuilder.buildKtType(coneSubstitutor.substituteOrSelf(coneType))
     }
-    override val receiverType: KtType? by cached {
+    override konst receiverType: KtType? by cached {
         firSymbol.resolvedReceiverTypeRef?.let { typeRef ->
             firSymbolBuilder.typeBuilder.buildKtType(coneSubstitutor.substituteOrSelf(typeRef.coneType))
         }
@@ -83,7 +83,7 @@ internal class KtFirVariableLikeSubstitutorBasedSignature<out S : KtVariableLike
     override fun substitute(substitutor: KtSubstitutor): KtFirVariableLikeSignature<S> = withValidityAssertion {
         if (substitutor is KtSubstitutor.Empty) return@withValidityAssertion this
         require(substitutor is AbstractKtFirSubstitutor<*>)
-        val chainedSubstitutor = ChainedSubstitutor(coneSubstitutor, substitutor.substitutor)
+        konst chainedSubstitutor = ChainedSubstitutor(coneSubstitutor, substitutor.substitutor)
 
         KtFirVariableLikeSubstitutorBasedSignature(token, firSymbol, firSymbolBuilder, chainedSubstitutor)
     }

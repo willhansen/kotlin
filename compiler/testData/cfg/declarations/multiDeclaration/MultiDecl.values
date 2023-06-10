@@ -17,8 +17,8 @@ operator fun component2() = 2
 =====================
 == test ==
 fun test(c: C) {
-    val (a, b) = c
-    val d = 1
+    konst (a, b) = c
+    konst d = 1
 }
 ---------------------
     <v0>: C     NEW: magic[FAKE_INITIALIZER](c: C) -> <v0>

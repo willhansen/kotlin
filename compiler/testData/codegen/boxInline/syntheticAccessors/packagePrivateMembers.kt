@@ -2,7 +2,7 @@
 
 package test
 
-private val packageProp = "O"
+private konst packageProp = "O"
 
 private fun packageFun() = "K"
 
@@ -19,10 +19,10 @@ internal fun samePackageCall(): String {
 import test.*
 
 fun box(): String {
-    val packageResult = packageInline { a, b -> a + b }
+    konst packageResult = packageInline { a, b -> a + b }
     if (packageResult != "OK") return "package inline fail: $packageResult"
 
-    val samePackageResult = samePackageCall()
+    konst samePackageResult = samePackageCall()
     if (samePackageResult != "OK") return "same package inline fail: $samePackageResult"
 
     return "OK"

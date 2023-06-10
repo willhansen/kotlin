@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.UnwrappedType
 
 internal interface KtFe10Type : KtLifetimeOwner, KtAnnotated {
-    val fe10Type: UnwrappedType
+    konst fe10Type: UnwrappedType
 
-    val analysisContext: Fe10AnalysisContext
+    konst analysisContext: Fe10AnalysisContext
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFe10AnnotationsList.create(
                 fe10Type.annotations,
@@ -35,11 +35,11 @@ internal interface KtFe10Type : KtLifetimeOwner, KtAnnotated {
             )
         }
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisContext.token
 }
 
 internal fun KotlinType.asStringForDebugging(analysisContext: Fe10AnalysisContext): String {
-    val renderer = KtFe10DebugTypeRenderer()
+    konst renderer = KtFe10DebugTypeRenderer()
     return prettyPrint { with(analysisContext) { renderer.render(this@asStringForDebugging, this@prettyPrint) } }
 }

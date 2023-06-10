@@ -24,5 +24,5 @@ import org.jetbrains.kotlin.test.TargetBackend
 import java.io.File
 
 abstract class AbstractIrKapt3BuilderModeBytecodeShapeTest : AbstractKapt3BuilderModeBytecodeShapeTest() {
-    override val backend: TargetBackend = TargetBackend.JVM_IR
+    override konst backend: TargetBackend = TargetBackend.JVM_IR
 }

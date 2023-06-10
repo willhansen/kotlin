@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
  * Internal service for creating aggregated test tasks and registering all test tasks.
  * See [KotlinTestReport] for more details about aggregated test tasks.
  */
-class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "allTests") {
-    val allTestsTask: TaskProvider<KotlinTestReport>
+class KotlinTestsRegistry(konst project: Project, konst allTestsTaskName: String = "allTests") {
+    konst allTestsTask: TaskProvider<KotlinTestReport>
         get() = doGetOrCreateAggregatedTestTask(
             name = allTestsTaskName,
             description = "Runs the tests for all targets and create aggregated report"
@@ -41,7 +41,7 @@ class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "
     ) {
         project.tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).dependsOn(taskHolder)
         project.cleanAllTestTask.configure { it.dependsOn(cleanTaskName(taskHolder.name)) }
-        val testReportService = TestReportService.registerIfAbsent(project)
+        konst testReportService = TestReportService.registerIfAbsent(project)
         aggregate.configure {
             it.dependsOn(taskHolder.name)
             it.registerTestTask(taskHolder.get())
@@ -49,7 +49,7 @@ class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "
         taskHolder.configure { task ->
             task.usesService(testReportService)
             task.outputs.upToDateWhen {
-                val hasFailedPreviously = testReportService.get().hasTestTaskFailedPreviously(it.path)
+                konst hasFailedPreviously = testReportService.get().hasTestTaskFailedPreviously(it.path)
                 if (hasFailedPreviously) {
                     task.logger.kotlinInfo("Marking $it as not up-to-date because the task has failed previously")
                 }
@@ -78,29 +78,29 @@ class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "
         parent: TaskProvider<KotlinTestReport>? = null,
         configure: (TaskProvider<KotlinTestReport>) -> Unit = {}
     ): TaskProvider<KotlinTestReport> {
-        val existed = project.locateTask<KotlinTestReport>(name)
+        konst existed = project.locateTask<KotlinTestReport>(name)
         if (existed != null) return existed
 
-        val reportName = name
-        val testReportService = TestReportService.registerIfAbsent(project)
-        val aggregate: TaskProvider<KotlinTestReport> = project.registerTask(name) { aggregate ->
+        konst reportName = name
+        konst testReportService = TestReportService.registerIfAbsent(project)
+        konst aggregate: TaskProvider<KotlinTestReport> = project.registerTask(name) { aggregate ->
             aggregate.description = description
             aggregate.group = JavaBasePlugin.VERIFICATION_GROUP
 
-            val compatibilityHelper = project
+            konst compatibilityHelper = project
                 .variantImplementationFactory<KotlinTestReportCompatibilityHelper.KotlinTestReportCompatibilityHelperVariantFactory>()
                 .getInstance(project.objects)
 
             compatibilityHelper.setDestinationDirectory(aggregate, project.testReportsDir.resolve(reportName))
 
-            val isIdeaActive = project.readSystemPropertyAtConfigurationTime("idea.active").isPresent
+            konst isIdeaActive = project.readSystemPropertyAtConfigurationTime("idea.active").isPresent
 
             if (isIdeaActive) {
                 aggregate.extensions.extraProperties.set("idea.internal.test", true)
             }
-            aggregate.htmlReportFile.value(compatibilityHelper.getDestinationDirectory(aggregate).file("index.html")).disallowChanges()
-            aggregate.testReportServiceProvider.value(testReportService).finalizeValueOnRead()
-            aggregate.testReportCompatibilityHelper.value(compatibilityHelper).finalizeValueOnRead()
+            aggregate.htmlReportFile.konstue(compatibilityHelper.getDestinationDirectory(aggregate).file("index.html")).disallowChanges()
+            aggregate.testReportServiceProvider.konstue(testReportService).finalizeValueOnRead()
+            aggregate.testReportCompatibilityHelper.konstue(compatibilityHelper).finalizeValueOnRead()
 
             project.gradle.taskGraph.whenReady { graph ->
                 aggregate.maybeOverrideReporting(graph)
@@ -122,9 +122,9 @@ class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "
         return "clean" + taskName.capitalizeAsciiOnly()
     }
 
-    private val Project.cleanAllTestTask: TaskProvider<*>
+    private konst Project.cleanAllTestTask: TaskProvider<*>
         get() {
-            val taskName = cleanTaskName(allTestsTask.name)
+            konst taskName = cleanTaskName(allTestsTask.name)
             return project.locateOrRegisterTask<Task>(taskName) { cleanAllTest ->
                 cleanAllTest.group = BasePlugin.BUILD_GROUP
                 cleanAllTest.description = "Deletes all the test results."
@@ -134,9 +134,9 @@ class KotlinTestsRegistry(val project: Project, val allTestsTaskName: String = "
         }
 
     companion object {
-        const val PROJECT_EXTENSION_NAME = "kotlinTestRegistry"
+        const konst PROJECT_EXTENSION_NAME = "kotlinTestRegistry"
     }
 }
 
-internal val Project.kotlinTestRegistry: KotlinTestsRegistry
+internal konst Project.kotlinTestRegistry: KotlinTestsRegistry
     get() = extensions.getByName(KotlinTestsRegistry.PROJECT_EXTENSION_NAME) as KotlinTestsRegistry

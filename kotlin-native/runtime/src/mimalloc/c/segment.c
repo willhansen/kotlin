@@ -145,7 +145,7 @@ static bool mi_pages_reset_contains(const mi_page_t* page, mi_segments_tld_t* tl
 #endif
 
 #if (MI_DEBUG>=3)
-static bool mi_segment_is_valid(const mi_segment_t* segment, mi_segments_tld_t* tld) {
+static bool mi_segment_is_konstid(const mi_segment_t* segment, mi_segments_tld_t* tld) {
   mi_assert_internal(segment != NULL);
   mi_assert_internal(_mi_ptr_cookie(segment) == segment->cookie);
   mi_assert_internal(segment->used <= segment->capacity);
@@ -822,7 +822,7 @@ void _mi_segment_page_free(mi_page_t* page, bool force, mi_segments_tld_t* tld)
 {
   mi_assert(page != NULL);
   mi_segment_t* segment = _mi_page_segment(page);
-  mi_assert_expensive(mi_segment_is_valid(segment,tld));
+  mi_assert_expensive(mi_segment_is_konstid(segment,tld));
   mi_reset_delayed(tld);
 
   // mark it as free now
@@ -1027,7 +1027,7 @@ static void mi_segment_abandon(mi_segment_t* segment, mi_segments_tld_t* tld) {
   mi_assert_internal(segment->used == segment->abandoned);
   mi_assert_internal(segment->used > 0);
   mi_assert_internal(mi_atomic_load_ptr_relaxed(mi_segment_t, &segment->abandoned_next) == NULL);
-  mi_assert_expensive(mi_segment_is_valid(segment, tld));
+  mi_assert_expensive(mi_segment_is_konstid(segment, tld));
 
   // remove the segment from the free page queue if needed
   mi_reset_delayed(tld);
@@ -1050,7 +1050,7 @@ void _mi_segment_page_abandon(mi_page_t* page, mi_segments_tld_t* tld) {
   mi_assert_internal(mi_page_heap(page) == NULL);
   mi_segment_t* segment = _mi_page_segment(page);
   mi_assert_expensive(!mi_pages_reset_contains(page, tld));
-  mi_assert_expensive(mi_segment_is_valid(segment, tld));
+  mi_assert_expensive(mi_segment_is_konstid(segment, tld));
   segment->abandoned++;
   _mi_stat_increase(&tld->stats->pages_abandoned, 1);
   mi_assert_internal(segment->abandoned <= segment->used);
@@ -1111,7 +1111,7 @@ static mi_segment_t* mi_segment_reclaim(mi_segment_t* segment, mi_heap_t* heap, 
   segment->abandoned_visits = 0;
   mi_segments_track_size((long)segment->segment_size, tld);
   mi_assert_internal(segment->next == NULL && segment->prev == NULL);
-  mi_assert_expensive(mi_segment_is_valid(segment, tld));
+  mi_assert_expensive(mi_segment_is_konstid(segment, tld));
   _mi_stat_decrease(&tld->stats->segments_abandoned, 1);
 
   for (size_t i = 0; i < segment->capacity; i++) {
@@ -1242,7 +1242,7 @@ static mi_segment_t* mi_segment_reclaim_or_alloc(mi_heap_t* heap, size_t block_s
 
 static mi_page_t* mi_segment_find_free(mi_segment_t* segment, mi_segments_tld_t* tld) {
   mi_assert_internal(mi_segment_has_free(segment));
-  mi_assert_expensive(mi_segment_is_valid(segment, tld));
+  mi_assert_expensive(mi_segment_is_konstid(segment, tld));
   for (size_t i = 0; i < segment->capacity; i++) {  // TODO: use a bitmap instead of search?
     mi_page_t* page = &segment->pages[i];
     if (!page->segment_in_use) {
@@ -1362,7 +1362,7 @@ mi_page_t* _mi_segment_page_alloc(mi_heap_t* heap, size_t block_size, mi_segment
   else {
     page = mi_segment_huge_page_alloc(block_size,tld,os_tld);
   }
-  mi_assert_expensive(page == NULL || mi_segment_is_valid(_mi_page_segment(page),tld));
+  mi_assert_expensive(page == NULL || mi_segment_is_konstid(_mi_page_segment(page),tld));
   mi_assert_internal(page == NULL || (mi_segment_page_size(_mi_page_segment(page)) - (MI_SECURE == 0 ? 0 : _mi_os_page_size())) >= block_size);
   mi_reset_delayed(tld);
   mi_assert_internal(page == NULL || mi_page_not_in_queue(page, tld));

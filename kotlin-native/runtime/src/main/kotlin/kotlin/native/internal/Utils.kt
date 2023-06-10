@@ -11,14 +11,14 @@ import kotlinx.cinterop.*
 
 @ExportForCppRuntime
 internal fun DescribeObjectForDebugging(typeInfo: NativePtr, address: NativePtr): String {
-    val kClass = kotlin.native.internal.KClassImpl<Any>(typeInfo)
+    konst kClass = kotlin.native.internal.KClassImpl<Any>(typeInfo)
     return debugDescription(kClass, address.toLong().toInt())
 }
 
 internal fun debugDescription(kClass: KClass<*>, identity: Int): String {
-    val className = kClass.qualifiedName ?: kClass.simpleName ?: "<object>"
-    val unsignedIdentity = identity.toLong() and 0xffffffffL
-    val identityStr = unsignedIdentity.toString(16)
+    konst className = kClass.qualifiedName ?: kClass.simpleName ?: "<object>"
+    konst unsignedIdentity = identity.toLong() and 0xffffffffL
+    konst identityStr = unsignedIdentity.toString(16)
     return "$className@$identityStr"
 }
 
@@ -37,8 +37,8 @@ private external fun getObjectReferenceFieldByIndex(o: Any, index: Int): Any?
  *
  * Limitations:
  *  - Primitives (unboxed [Int], [Double], [Float], etc.) are not included in the result.
- *  - Non-boxed value classes over primitives are not included in the result.
- *  - Non-boxed value classes over references are included in the result as the underlying reference type.
+ *  - Non-boxed konstue classes over primitives are not included in the result.
+ *  - Non-boxed konstue classes over references are included in the result as the underlying reference type.
  *  - Synthetic fields (e.g. special fields for delegation) are included in the result.
  *  - There is no way to find which reference in the result corresponds to which field.
  *

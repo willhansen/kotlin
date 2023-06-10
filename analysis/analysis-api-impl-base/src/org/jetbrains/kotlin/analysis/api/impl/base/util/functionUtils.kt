@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-val kotlinFunctionInvokeCallableIds = (0..23).flatMapTo(hashSetOf()) { arity ->
+konst kotlinFunctionInvokeCallableIds = (0..23).flatMapTo(hashSetOf()) { arity ->
     listOf(
         CallableId(StandardNames.getFunctionClassId(arity), OperatorNameConventions.INVOKE),
         CallableId(StandardNames.getSuspendFunctionClassId(arity), OperatorNameConventions.INVOKE)

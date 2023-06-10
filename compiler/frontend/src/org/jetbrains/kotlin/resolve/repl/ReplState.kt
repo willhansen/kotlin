@@ -29,14 +29,14 @@ import org.jetbrains.kotlin.resolve.scopes.utils.replaceImportingScopes
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 
 class ReplState {
-    private val lines = hashMapOf<KtFile, LineInfo>()
-    private val successfulLines = arrayListOf<LineInfo.SuccessfulLine>()
+    private konst lines = hashMapOf<KtFile, LineInfo>()
+    private konst successfulLines = arrayListOf<LineInfo.SuccessfulLine>()
 
-    val successfulLinesCount: Int
+    konst successfulLinesCount: Int
         get() = successfulLines.size
 
     fun submitLine(ktFile: KtFile) {
-        val line = LineInfo.SubmittedLine(ktFile, successfulLines.lastOrNull())
+        konst line = LineInfo.SubmittedLine(ktFile, successfulLines.lastOrNull())
         lines[ktFile] = line
         ktFile.fileScopesCustomizer = object : FileScopesCustomizer {
             override fun createFileScopes(fileScopeFactory: FileScopeFactory): FileScopes {
@@ -46,7 +46,7 @@ class ReplState {
     }
 
     fun lineSuccess(ktFile: KtFile, scriptDescriptor: ScriptDescriptor) {
-        val successfulLine = LineInfo.SuccessfulLine(ktFile, successfulLines.lastOrNull(), scriptDescriptor)
+        konst successfulLine = LineInfo.SuccessfulLine(ktFile, successfulLines.lastOrNull(), scriptDescriptor)
         lines[ktFile] = successfulLine
         successfulLines.add(successfulLine)
     }
@@ -59,26 +59,26 @@ class ReplState {
 
     // use sealed?
     private sealed class LineInfo {
-        abstract val linePsi: KtFile
-        abstract val parentLine: SuccessfulLine?
+        abstract konst linePsi: KtFile
+        abstract konst parentLine: SuccessfulLine?
 
-        class SubmittedLine(override val linePsi: KtFile, override val parentLine: SuccessfulLine?) : LineInfo()
+        class SubmittedLine(override konst linePsi: KtFile, override konst parentLine: SuccessfulLine?) : LineInfo()
         class SuccessfulLine(
-            override val linePsi: KtFile,
-            override val parentLine: SuccessfulLine?,
-            val lineDescriptor: ScriptDescriptor
+            override konst linePsi: KtFile,
+            override konst parentLine: SuccessfulLine?,
+            konst lineDescriptor: ScriptDescriptor
         ) : LineInfo()
 
-        class FailedLine(override val linePsi: KtFile, override val parentLine: SuccessfulLine?) : LineInfo()
+        class FailedLine(override konst linePsi: KtFile, override konst parentLine: SuccessfulLine?) : LineInfo()
     }
 
     private fun computeFileScopes(lineInfo: LineInfo, fileScopeFactory: FileScopeFactory): FileScopes? {
         // create scope that wraps previous line lexical scope and adds imports from this line
-        val lexicalScopeAfterLastLine =
+        konst lexicalScopeAfterLastLine =
             (lineInfo.parentLine?.lineDescriptor as? ClassDescriptorWithResolutionScopes)?.scopeForInitializerResolution ?: return null
-        val lastLineImports = lexicalScopeAfterLastLine.parentsWithSelf.firstIsInstance<ImportingScope>()
-        val scopesForThisLine = fileScopeFactory.createScopesForFile(lineInfo.linePsi, lastLineImports)
-        val combinedLexicalScopes = lexicalScopeAfterLastLine.replaceImportingScopes(scopesForThisLine.importingScope)
+        konst lastLineImports = lexicalScopeAfterLastLine.parentsWithSelf.firstIsInstance<ImportingScope>()
+        konst scopesForThisLine = fileScopeFactory.createScopesForFile(lineInfo.linePsi, lastLineImports)
+        konst combinedLexicalScopes = lexicalScopeAfterLastLine.replaceImportingScopes(scopesForThisLine.importingScope)
         return FileScopes(combinedLexicalScopes, scopesForThisLine.importingScope, scopesForThisLine.importForceResolver)
     }
 }

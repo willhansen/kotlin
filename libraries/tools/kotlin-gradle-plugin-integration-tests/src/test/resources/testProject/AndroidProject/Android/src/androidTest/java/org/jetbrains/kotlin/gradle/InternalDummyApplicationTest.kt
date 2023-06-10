@@ -21,7 +21,7 @@ import android.test.ApplicationTestCase
 
 class InternalDummyApplicationTest : ApplicationTestCase<Application>(Application::class.java) {
     init {
-        val dummy = InternalDummy("World")
-        assert("Hello World!" == dummy.greeting) { "Expected: 'Hello World!'. Actual value: ${dummy.greeting}" }
+        konst dummy = InternalDummy("World")
+        assert("Hello World!" == dummy.greeting) { "Expected: 'Hello World!'. Actual konstue: ${dummy.greeting}" }
     }
 }

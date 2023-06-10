@@ -357,7 +357,7 @@ extern "C" OBJ_GETTER(Konan_RegularWeakReferenceImpl_get, ObjHeader*);
 class RegularWeakReferenceImpl : public Object<RegularWeakReferenceImplPayload> {
 public:
     static RegularWeakReferenceImpl& FromObjHeader(ObjHeader* obj) noexcept {
-        RuntimeAssert(obj->type_info() == theRegularWeakReferenceImplTypeInfo, "Invalid type");
+        RuntimeAssert(obj->type_info() == theRegularWeakReferenceImplTypeInfo, "Inkonstid type");
         return static_cast<RegularWeakReferenceImpl&>(Object::FromObjHeader(obj));
     }
 

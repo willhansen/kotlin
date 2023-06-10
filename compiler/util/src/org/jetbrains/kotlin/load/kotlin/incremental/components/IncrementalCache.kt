@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.load.kotlin.incremental.components
 
 import java.io.Serializable
 
-data class JvmPackagePartProto(val data: ByteArray, val strings: Array<String>) : Serializable
+data class JvmPackagePartProto(konst data: ByteArray, konst strings: Array<String>) : Serializable
 
 interface IncrementalCache {
     fun getObsoletePackageParts(): Collection<String>

@@ -16,9 +16,9 @@ import java.io.File
 
 class IrInterpreterHelpersSourceFilesProvider(testServices: TestServices) : AdditionalSourceProvider(testServices) {
     companion object {
-        private const val HELPERS_PATH = "./compiler/testData/ir/interpreter/helpers"
-        private const val UNSIGNED_PATH = "./libraries/stdlib/unsigned/src/kotlin"
-        private val RUNTIME_PATHS = arrayOf(
+        private const konst HELPERS_PATH = "./compiler/testData/ir/interpreter/helpers"
+        private const konst UNSIGNED_PATH = "./libraries/stdlib/unsigned/src/kotlin"
+        private konst RUNTIME_PATHS = arrayOf(
             "./libraries/stdlib/src/kotlin/ranges/Progressions.kt",
             "./libraries/stdlib/src/kotlin/ranges/ProgressionIterators.kt",
             "./libraries/stdlib/src/kotlin/internal/progressionUtil.kt",
@@ -29,7 +29,7 @@ class IrInterpreterHelpersSourceFilesProvider(testServices: TestServices) : Addi
             "./libraries/stdlib/src/kotlin/text/regex/MatchResult.kt",
             "./libraries/stdlib/src/kotlin/collections/Sequence.kt",
         )
-        private val ANNOTATIONS_PATHS = arrayOf(
+        private konst ANNOTATIONS_PATHS = arrayOf(
             "./libraries/stdlib/src/kotlin/annotations/WasExperimental.kt",
             "./libraries/stdlib/src/kotlin/annotations/ExperimentalStdlibApi.kt",
             "./libraries/stdlib/src/kotlin/annotations/OptIn.kt",
@@ -37,14 +37,14 @@ class IrInterpreterHelpersSourceFilesProvider(testServices: TestServices) : Addi
             "./libraries/stdlib/src/kotlin/experimental/inferenceMarker.kt",
             "./libraries/stdlib/jvm/runtime/kotlin/jvm/annotations/JvmPlatformAnnotations.kt",
         )
-        private const val REFLECT_PATH = "./libraries/stdlib/jvm/src/kotlin/reflect"
-        private val EXCLUDES = listOf(
+        private const konst REFLECT_PATH = "./libraries/stdlib/jvm/src/kotlin/reflect"
+        private konst EXCLUDES = listOf(
             "src/kotlin/UStrings.kt", "src/kotlin/UMath.kt", "src/kotlin/UNumbers.kt", "src/kotlin/reflect/TypesJVM.kt",
             "core/builtins/src/kotlin/CompileTimeAnnotations.kt"
         ).map(::File)
     }
 
-    override val directiveContainers: List<DirectivesContainer> =
+    override konst directiveContainers: List<DirectivesContainer> =
         listOf(AdditionalFilesDirectives)
 
     private fun getTestFilesForEachDirectory(vararg directories: String): List<TestFile> {

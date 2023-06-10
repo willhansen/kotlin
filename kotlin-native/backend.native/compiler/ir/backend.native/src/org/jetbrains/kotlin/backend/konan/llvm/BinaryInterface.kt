@@ -30,22 +30,22 @@ import org.jetbrains.kotlin.name.Name
 // TODO: do not serialize descriptors of non-exported declarations.
 
 object KonanBinaryInterface {
-    private val mangler = object : AbstractKonanIrMangler(withReturnType = true, allowOutOfScopeTypeParameters = true) {}
+    private konst mangler = object : AbstractKonanIrMangler(withReturnType = true, allowOutOfScopeTypeParameters = true) {}
 
-    private val exportChecker = mangler.getExportChecker(compatibleMode = true)
+    private konst exportChecker = mangler.getExportChecker(compatibleMode = true)
 
-    val IrFunction.functionName: String get() = mangler.run { signatureString(compatibleMode = true) }
+    konst IrFunction.functionName: String get() = mangler.run { signatureString(compatibleMode = true) }
 
-    val IrFunction.symbolName: String
+    konst IrFunction.symbolName: String
         get() {
             require(isExported(this)) { "Asked for symbol name for a private function ${render()}" }
 
             return funSymbolNameImpl(null)
         }
 
-    val IrField.symbolName: String get() = withPrefix(MangleConstant.FIELD_PREFIX, fieldSymbolNameImpl())
+    konst IrField.symbolName: String get() = withPrefix(MangleConstant.FIELD_PREFIX, fieldSymbolNameImpl())
 
-    val IrClass.typeInfoSymbolName: String get() = typeInfoSymbolNameImpl(null)
+    konst IrClass.typeInfoSymbolName: String get() = typeInfoSymbolNameImpl(null)
 
     fun IrFunction.privateSymbolName(containerName: String): String = funSymbolNameImpl(containerName)
 
@@ -65,34 +65,34 @@ object KonanBinaryInterface {
         }
 
         this.annotations.findAnnotation(RuntimeNames.exportForCppRuntime)?.let {
-            val name = it.getAnnotationStringValue() ?: this.name.asString()
+            konst name = it.getAnnotationStringValue() ?: this.name.asString()
             return name // no wrapping currently required
         }
 
-        val mangle = mangler.run { mangleString(compatibleMode = true) }
+        konst mangle = mangler.run { mangleString(compatibleMode = true) }
         return withPrefix(MangleConstant.FUN_PREFIX, containerName?.plus(".$mangle") ?: mangle)
     }
 
     private fun IrField.fieldSymbolNameImpl(): String {
-        val containingDeclarationPart = parent.fqNameForIrSerialization.let {
+        konst containingDeclarationPart = parent.fqNameForIrSerialization.let {
             if (it.isRoot) "" else "$it."
         }
         return "$containingDeclarationPart$name"
     }
 
     private fun IrClass.typeInfoSymbolNameImpl(containerName: String?): String {
-        val fqName = fqNameForIrSerialization.toString()
+        konst fqName = fqNameForIrSerialization.toString()
         return withPrefix(MangleConstant.CLASS_PREFIX, containerName?.plus(".$fqName") ?: fqName)
     }
 }
 
-internal val IrClass.writableTypeInfoSymbolName: String
+internal konst IrClass.writableTypeInfoSymbolName: String
     get() {
         assert (this.isExported())
         return "ktypew:" + this.fqNameForIrSerialization.toString()
     }
 
-internal val IrClass.globalObjectStorageSymbolName: String
+internal konst IrClass.globalObjectStorageSymbolName: String
     get() {
         assert (this.isExported())
         assert (this.kind.isSingleton)
@@ -101,7 +101,7 @@ internal val IrClass.globalObjectStorageSymbolName: String
         return "kobjref:$fqNameForIrSerialization"
     }
 
-internal val IrClass.threadLocalObjectStorageGetterSymbolName: String
+internal konst IrClass.threadLocalObjectStorageGetterSymbolName: String
     get() {
         assert (this.isExported())
         assert (this.kind.isSingleton)
@@ -110,7 +110,7 @@ internal val IrClass.threadLocalObjectStorageGetterSymbolName: String
         return "kobjget:$fqNameForIrSerialization"
     }
 
-internal val IrClass.kotlinObjCClassInfoSymbolName: String
+internal konst IrClass.kotlinObjCClassInfoSymbolName: String
     get() {
         assert (this.isExported())
         assert (this.isKotlinObjCClass())
@@ -145,11 +145,11 @@ internal fun ContextUtils.getLlvmFunctionType(function: IrFunction): LLVMTypeRef
         paramTypes = getLlvmFunctionParameterTypes(function).map { it.llvmType }
 )
 
-internal val IrClass.typeInfoHasVtableAttached: Boolean
+internal konst IrClass.typeInfoHasVtableAttached: Boolean
     get() = !this.isAbstract() && !this.isExternalObjCClass()
 
-internal val String.moduleConstructorName
+internal konst String.moduleConstructorName
     get() = "_Konan_init_${this}"
 
-internal val KonanLibrary.moduleConstructorName
+internal konst KonanLibrary.moduleConstructorName
     get() = uniqueName.moduleConstructorName

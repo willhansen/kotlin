@@ -7,11 +7,11 @@ import org.jetbrains.kotlin.library.metadata.PackageAccessHandler
 
 interface KotlinLibraryResolver<L: KotlinLibrary> {
 
-    val searchPathResolver: SearchPathResolver<L>
+    konst searchPathResolver: SearchPathResolver<L>
 
     /**
      * Given the list of Kotlin/Native library names, ABI version and other parameters
-     * resolves libraries and evaluates dependencies between them.
+     * resolves libraries and ekonstuates dependencies between them.
      */
     fun resolveWithDependencies(
         unresolvedLibraries: List<UnresolvedLibrary>,
@@ -49,10 +49,10 @@ interface KotlinLibraryResolveResult {
 
 typealias LibraryOrder = (Iterable<KotlinResolvedLibrary>) -> List<KotlinResolvedLibrary>
 
-val TopologicalLibraryOrder: LibraryOrder = { input ->
-    val sorted = mutableListOf<KotlinResolvedLibrary>()
-    val visited = mutableSetOf<KotlinResolvedLibrary>()
-    val tempMarks = mutableSetOf<KotlinResolvedLibrary>()
+konst TopologicalLibraryOrder: LibraryOrder = { input ->
+    konst sorted = mutableListOf<KotlinResolvedLibrary>()
+    konst visited = mutableSetOf<KotlinResolvedLibrary>()
+    konst tempMarks = mutableSetOf<KotlinResolvedLibrary>()
 
     fun visit(node: KotlinResolvedLibrary, result: MutableList<KotlinResolvedLibrary>) {
         if (visited.contains(node)) return

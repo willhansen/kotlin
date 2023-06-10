@@ -2,8 +2,8 @@ package test
 
 class Klass {
     companion object {
-        // Old and new constant values are different, but their hashes are the same
+        // Old and new constant konstues are different, but their hashes are the same
         @JvmField
-        val CONST = "BF"
+        konst CONST = "BF"
     }
 }

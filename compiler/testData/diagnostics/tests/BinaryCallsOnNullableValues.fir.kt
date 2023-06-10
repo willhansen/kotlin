@@ -24,7 +24,7 @@ fun f(): Unit {
     x..2
     x in 1..2
 
-    val y : Boolean? = true
+    konst y : Boolean? = true
     false || <!CONDITION_TYPE_MISMATCH!>y<!>
     <!CONDITION_TYPE_MISMATCH!>y<!> && true
     <!CONDITION_TYPE_MISMATCH!>y<!> && <!CONDITION_TYPE_MISMATCH!>1<!>

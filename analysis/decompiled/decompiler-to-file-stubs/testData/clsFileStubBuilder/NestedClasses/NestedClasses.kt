@@ -4,19 +4,19 @@ class NestedClasses<TOuter> {
     fun f() {
     }
 
-    val c: Int = 0
+    konst c: Int = 0
 
     private class Nested<TN> {
         fun f(p1: TN) {
         }
 
-        val c = 1
+        konst c = 1
 
         public class NN<TNN> {
             fun f(p1: TNN) {
             }
 
-            val c = 1
+            konst c = 1
         }
 
         inner class NI<TNI : TN> {

@@ -1,8 +1,8 @@
-warning: 'compiler/testData/integration/ant/js/simpleWithJsFileAsAnotherLib' is not a valid Kotlin Javascript library
+warning: 'compiler/testData/integration/ant/js/simpleWithJsFileAsAnotherLib' is not a konstid Kotlin Javascript library
 compiler/testData/cli/js/withLib.kt:2:8: error: unresolved reference: library
 import library.sample.*
        ^
 compiler/testData/cli/js/withLib.kt:6:13: error: unresolved reference: pairAdd
-    val x = pairAdd(p)
+    konst x = pairAdd(p)
             ^
 COMPILATION_ERROR

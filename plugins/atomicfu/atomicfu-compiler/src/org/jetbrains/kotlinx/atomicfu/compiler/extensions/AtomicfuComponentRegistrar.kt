@@ -25,7 +25,7 @@ class AtomicfuComponentRegistrar : CompilerPluginRegistrar() {
         Companion.registerExtensions(this)
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 
     companion object {

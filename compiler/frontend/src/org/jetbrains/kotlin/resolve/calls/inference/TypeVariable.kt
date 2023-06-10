@@ -23,14 +23,14 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.hasOnlyInputTypesAnnotation
 import org.jetbrains.kotlin.types.KotlinType
 
 class TypeVariable(
-    val call: CallHandle,
-    internal val freshTypeParameter: TypeParameterDescriptor,
-    val originalTypeParameter: TypeParameterDescriptor,
-    val isExternal: Boolean
+    konst call: CallHandle,
+    internal konst freshTypeParameter: TypeParameterDescriptor,
+    konst originalTypeParameter: TypeParameterDescriptor,
+    konst isExternal: Boolean
 ) {
-    val name: Name get() = originalTypeParameter.name
+    konst name: Name get() = originalTypeParameter.name
 
-    val type: KotlinType get() = freshTypeParameter.defaultType
+    konst type: KotlinType get() = freshTypeParameter.defaultType
 
     fun hasOnlyInputTypesAnnotation(): Boolean =
         originalTypeParameter.hasOnlyInputTypesAnnotation()
@@ -40,7 +40,7 @@ interface CallHandle {
     object NONE : CallHandle
 }
 
-class CallBasedCallHandle(val call: Call) : CallHandle {
+class CallBasedCallHandle(konst call: Call) : CallHandle {
     override fun equals(other: Any?) =
         other is CallBasedCallHandle && call === other.call
 

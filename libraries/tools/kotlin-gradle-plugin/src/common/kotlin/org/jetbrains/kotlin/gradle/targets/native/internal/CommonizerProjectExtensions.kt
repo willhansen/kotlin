@@ -9,17 +9,17 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.commonizer.*
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
 
-internal val Project.commonizerLogLevel: CommonizerLogLevel
+internal konst Project.commonizerLogLevel: CommonizerLogLevel
     get() {
         PropertiesProvider(this).commonizerLogLevel?.let { logLevelString ->
-            val matchingLevel = CommonizerLogLevel.values().firstOrNull { logLevel -> logLevel.name.equals(logLevelString, true) }
+            konst matchingLevel = CommonizerLogLevel.konstues().firstOrNull { logLevel -> logLevel.name.equals(logLevelString, true) }
             if (matchingLevel != null) return matchingLevel
         }
 
         return if (logger.isInfoEnabled) CommonizerLogLevel.Info else CommonizerLogLevel.Quiet
     }
 
-internal val Project.additionalCommonizerSettings: List<AdditionalCommonizerSetting<*>>
+internal konst Project.additionalCommonizerSettings: List<AdditionalCommonizerSetting<*>>
     get() = listOf(
         OptimisticNumberCommonizationEnabledKey setTo isOptimisticNumberCommonizationEnabled,
         PlatformIntegerCommonizationEnabledKey setTo isPlatformIntegerCommonizationEnabled,

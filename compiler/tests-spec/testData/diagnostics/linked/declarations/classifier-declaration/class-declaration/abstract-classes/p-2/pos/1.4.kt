@@ -15,20 +15,20 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val c = Case1()
+    konst c = Case1()
     c.a
     c.foo()
 }
 
 abstract class BaseCase1() {
     fun foo() = "foo"
-    val a: String
+    konst a: String
         get() = "a"
 }
 
 interface MyInterface1 {
     abstract fun foo(): String
-    abstract val a: String
+    abstract konst a: String
 }
 
 class Case1() : BaseCase1(), MyInterface1 {}
@@ -40,7 +40,7 @@ fun case2() {
 }
 
 class Case2Outer {
-    val v = "v"
+    konst v = "v"
 
     abstract class Case2Base() {
         abstract fun foo(): String
@@ -69,7 +69,7 @@ fun case3() {
 }
 
 sealed class CaseOuter {
-    val v = "v"
+    konst v = "v"
     abstract fun outerFoo();
 
     abstract class CaseBase() : CaseOuter() {

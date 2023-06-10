@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
 import org.jetbrains.kotlin.wasm.resolve.WasmPlatformAnalyzerServices
 
 object TopDownAnalyzerFacadeForWasm : AbstractTopDownAnalyzerFacadeForWeb() {
-    override val analyzerServices: PlatformDependentAnalyzerServices = WasmPlatformAnalyzerServices
-    override val platform: TargetPlatform = WasmPlatforms.Default
+    override konst analyzerServices: PlatformDependentAnalyzerServices = WasmPlatformAnalyzerServices
+    override konst platform: TargetPlatform = WasmPlatforms.Default
 
     override fun loadIncrementalCacheMetadata(
         incrementalData: IncrementalDataProvider,
@@ -29,7 +29,7 @@ object TopDownAnalyzerFacadeForWasm : AbstractTopDownAnalyzerFacadeForWeb() {
         languageVersionSettings: LanguageVersionSettings
     ): PackageFragmentProvider {
         return JsFactories.DefaultDeserializedDescriptorFactory.createCachedPackageFragmentProvider(
-            incrementalData.compiledPackageParts.values.map { it.metadata },
+            incrementalData.compiledPackageParts.konstues.map { it.metadata },
             moduleContext.storageManager,
             moduleContext.module,
             CompilerDeserializationConfiguration(languageVersionSettings),

@@ -4,7 +4,7 @@
 annotation class An
 
 @An
-data class A(@An val x: @An Int) {
+data class A(@An konst x: @An Int) {
     <!CONFLICTING_OVERLOADS("public final fun copy(x: Int): Int defined in A")!>@An
     fun copy(@An x: @An Int)<!> = x
 }

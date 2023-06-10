@@ -164,7 +164,7 @@ fun getOpenClassToDataClassImplAsAny(): Any = OpenClassToDataClassImpl()
 fun getOpenClassToInterfaceImpl() = OpenClassToInterfaceImpl()
 fun getOpenClassToInterfaceImplAsAny(): Any = OpenClassToInterfaceImpl()
 
-value class ValueClassInheritsAbstractClass(val x: Int) : InterfaceToAbstractClass
+konstue class ValueClassInheritsAbstractClass(konst x: Int) : InterfaceToAbstractClass
 enum class EnumClassInheritsAbstractClass : InterfaceToAbstractClass { ENTRY }
 
 fun getValueClassInheritsAbstractClass() = ValueClassInheritsAbstractClass(42)
@@ -222,29 +222,29 @@ inline fun referenceToInterfaceToAbstractClassAndAbstractClassImpl2Inline() = ch
 
 class RemovedInterfaceImpl1 : RemovedInterface {
     override fun abstractFun() = "RemovedInterfaceImpl1.abstractFun"
-    override val abstractVal get() = "RemovedInterfaceImpl1.abstractVal"
+    override konst abstractVal get() = "RemovedInterfaceImpl1.abstractVal"
 }
 
 class RemovedInterfaceImpl2 : RemovedInterface {
     override fun abstractFun() = abstractFunWithDefaultImpl()
-    override val abstractVal get() = abstractValWithDefaultImpl
+    override konst abstractVal get() = abstractValWithDefaultImpl
 }
 
 class RemovedAbstractClassImpl1 : RemovedAbstractClass() {
     override fun abstractFun() = "RemovedAbstractClassImpl1.abstractFun"
     override fun openFun() = "RemovedAbstractClassImpl1.openFun"
-    override val abstractVal get() = "RemovedAbstractClassImpl1.abstractVal"
-    override val openVal get() = "RemovedAbstractClassImpl1.openVal"
+    override konst abstractVal get() = "RemovedAbstractClassImpl1.abstractVal"
+    override konst openVal get() = "RemovedAbstractClassImpl1.openVal"
 }
 
 class RemovedAbstractClassImpl2 : RemovedAbstractClass() {
     override fun abstractFun() = "${openFun()}:${finalFun()}"
-    override val abstractVal get() = "$openVal: $finalVal"
+    override konst abstractVal get() = "$openVal: $finalVal"
 }
 
 class RemovedOpenClassImpl1 : RemovedOpenClass() {
     override fun openFun() = "RemovedOpenClassImpl1.openFun"
-    override val openVal get() = "RemovedOpenClassImpl1.openVal"
+    override konst openVal get() = "RemovedOpenClassImpl1.openVal"
 }
 
 class RemovedOpenClassImpl2 : RemovedOpenClass()

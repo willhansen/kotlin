@@ -13,7 +13,7 @@ fun box(): String {
 }
 
 // FILE: test.kt
-val withAssertion get() = J().nullString()
+konst withAssertion get() = J().nullString()
 
 // FILE: J.java
 import org.jetbrains.annotations.NotNull;

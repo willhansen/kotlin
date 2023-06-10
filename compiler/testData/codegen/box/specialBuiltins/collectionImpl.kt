@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 class A1 : MutableCollection<String> {
-    override val size: Int
+    override konst size: Int
         get() = 56
 
     override fun isEmpty(): Boolean {
@@ -46,7 +46,7 @@ class A1 : MutableCollection<String> {
 }
 
 class A2 : java.util.AbstractCollection<String>() {
-    override val size: Int
+    override konst size: Int
         get() = 56
 
     override fun iterator(): MutableIterator<String> {
@@ -55,16 +55,16 @@ class A2 : java.util.AbstractCollection<String>() {
 }
 
 class A3 : java.util.ArrayList<String>() {
-    override val size: Int
+    override konst size: Int
         get() = 56
 }
 
 interface Sized {
-    val size: Int
+    konst size: Int
 }
 
 class A4 : java.util.ArrayList<String>(), Sized {
-    override val size: Int
+    override konst size: Int
         get() = 56
 }
 
@@ -73,23 +73,23 @@ fun check56(x: Collection<String>) {
 }
 
 fun box(): String {
-    val a1 = A1()
+    konst a1 = A1()
     if (a1.size != 56) return "fail 1: ${a1.size}"
     check56(a1)
 
-    val a2 = A2()
+    konst a2 = A2()
     if (a2.size != 56) return "fail 2: ${a2.size}"
     check56(a2)
 
-    val a3 = A3()
+    konst a3 = A3()
     if (a3.size != 56) return "fail 3: ${a3.size}"
     check56(a3)
 
-    val a4 = A4()
+    konst a4 = A4()
     if (a4.size != 56) return "fail 4: ${a4.size}"
     check56(a4)
 
-    val sized: Sized = a4
+    konst sized: Sized = a4
     if (sized.size != 56) return "fail 5: ${a4.size}"
 
     return "OK"

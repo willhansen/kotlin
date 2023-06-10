@@ -11,7 +11,7 @@ public class A {
 fun box(): String {
     // There is a null check on both arguments of Map.getOrDefault, so we expect this code to throw an exception.
     // Which exception this is depends on the language version (it's a NullPointerException in Kotlin 1.4).
-    val m = mapOf<A, A>()
+    konst m = mapOf<A, A>()
     try {
         m.getOrDefault(A.nil(), A())
     } catch (e: Exception) {

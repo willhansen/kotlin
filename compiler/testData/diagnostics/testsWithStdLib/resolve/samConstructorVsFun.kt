@@ -23,9 +23,9 @@ import s.SamConstructor
 import a.*
 
 fun test() {
-    val a: s.SamConstructor = SamConstructor {  }
+    konst a: s.SamConstructor = SamConstructor {  }
 
-    val b: s.SamConstructor = SamConstructor(null)
+    konst b: s.SamConstructor = SamConstructor(null)
 
     SamConstructor.foo(null)
 }

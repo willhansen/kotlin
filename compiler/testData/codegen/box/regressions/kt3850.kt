@@ -1,7 +1,7 @@
 // !LANGUAGE: -PrivateInFileEffectiveVisibility
 private class One {
-    val a1 = arrayOf(
-            object { val fy = "text"}
+    konst a1 = arrayOf(
+            object { konst fy = "text"}
     )
 }
 

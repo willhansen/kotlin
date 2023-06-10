@@ -8,6 +8,6 @@ class C<T : Comparable<*>> {
 }
 
 fun box(): String {
-    val s = C<Int>().setOfT()
+    konst s = C<Int>().setOfT()
     return if (s.toString().endsWith("Set<T>")) "OK" else "Fail: $s"
 }

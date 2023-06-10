@@ -31,20 +31,20 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.toSimpleType
 
 class SerializableCompanionJsTranslator(
     declaration: ClassDescriptor,
-    val translator: DeclarationBodyVisitor,
-    val context: TranslationContext
+    konst translator: DeclarationBodyVisitor,
+    konst context: TranslationContext
 ) : SerializableCompanionCodegen(declaration, context.bindingContext()) {
 
     override fun generateSerializerGetter(methodDescriptor: FunctionDescriptor) {
-        val f = context.buildFunction(methodDescriptor) { jsFun, context ->
-            val serializer = requireNotNull(
+        konst f = context.buildFunction(methodDescriptor) { jsFun, context ->
+            konst serializer = requireNotNull(
                 findTypeSerializer(
                     serializableDescriptor.module,
                     serializableDescriptor.toSimpleType()
                 )
             )
-            val args = jsFun.parameters.map { JsNameRef(it.name) }
-            val stmt =
+            konst args = jsFun.parameters.map { JsNameRef(it.name) }
+            konst stmt =
                 requireNotNull(
                     serializerInstance(
                         context,
@@ -62,7 +62,7 @@ class SerializableCompanionJsTranslator(
 
     companion object {
         fun translate(descriptor: ClassDescriptor, translator: DeclarationBodyVisitor, context: TranslationContext) {
-            val serializableClass = getSerializableClassDescriptorByCompanion(descriptor) ?: return
+            konst serializableClass = getSerializableClassDescriptorByCompanion(descriptor) ?: return
             if (serializableClass.shouldHaveGeneratedMethodsInCompanion)
                 SerializableCompanionJsTranslator(descriptor, translator, context).generate()
         }

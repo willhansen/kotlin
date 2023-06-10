@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.name.JvmNames.SYNCHRONIZED_ANNOTATION_CLASS_ID
 
 object FirSynchronizedAnnotationChecker : FirFunctionChecker() {
     override fun check(declaration: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val session = context.session
-        val annotation = declaration.getAnnotationByClassId(SYNCHRONIZED_ANNOTATION_CLASS_ID, session) ?: return
+        konst session = context.session
+        konst annotation = declaration.getAnnotationByClassId(SYNCHRONIZED_ANNOTATION_CLASS_ID, session) ?: return
 
         if (declaration.isInline) {
             reporter.reportOn(annotation.source, FirJvmErrors.SYNCHRONIZED_ON_INLINE, context)
@@ -39,7 +39,7 @@ object FirSynchronizedAnnotationChecker : FirFunctionChecker() {
             return
         }
 
-        val containingClass = declaration.getContainingClassSymbol(session) ?: return
+        konst containingClass = declaration.getContainingClassSymbol(session) ?: return
         if (containingClass.classKind == ClassKind.INTERFACE) {
             reporter.reportOn(annotation.source, FirJvmErrors.SYNCHRONIZED_IN_INTERFACE, context)
         } else if (declaration.isAbstract) {

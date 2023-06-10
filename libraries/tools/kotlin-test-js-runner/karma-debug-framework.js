@@ -21,11 +21,11 @@ function configureTimeouts(injector) {
     if (socketServer && typeof socketServer.set === 'function') {
         // Disable socket.io heartbeat (ping) to avoid browser disconnecting when debugging tests,
         // because no ping requests are sent when test execution is suspended on a breakpoint.
-        // Default values are not enough for suspended execution:
+        // Default konstues are not enough for suspended execution:
         //    'heartbeat timeout' (pingTimeout) = 60000 ms
-        //    'heartbeat interval' (pingInterval) = 25000 ms
+        //    'heartbeat interkonst' (pingInterkonst) = 25000 ms
         socketServer.set('heartbeat timeout', 24 * 60 * 60 * 1000);
-        socketServer.set('heartbeat interval', 24 * 60 * 60 * 1000)
+        socketServer.set('heartbeat interkonst', 24 * 60 * 60 * 1000)
     }
 }
 

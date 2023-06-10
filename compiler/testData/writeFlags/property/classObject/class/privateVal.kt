@@ -1,6 +1,6 @@
 class Test {
   companion object {
-    private val prop = 0;
+    private konst prop = 0;
   }
 }
 

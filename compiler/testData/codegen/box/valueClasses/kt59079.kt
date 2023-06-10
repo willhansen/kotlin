@@ -5,9 +5,9 @@
 // FILE: a.kt
 
 @JvmInline
-value class IC(val x: String)
+konstue class IC(konst x: String)
 
-class C(val ic: IC)
+class C(konst ic: IC)
 
 // FILE: b.kt
 

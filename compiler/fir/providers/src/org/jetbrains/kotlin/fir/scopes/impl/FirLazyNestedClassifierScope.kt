@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.name.Name
 // but in this case we should make JavaSymbolProvider greedy related to nested classifiers
 // (or make possible to calculate nested classifiers on-the-fly)
 class FirLazyNestedClassifierScope(
-    val classId: ClassId,
-    private val existingNames: List<Name>,
-    private val symbolProvider: FirSymbolProvider
+    konst classId: ClassId,
+    private konst existingNames: List<Name>,
+    private konst symbolProvider: FirSymbolProvider
 ) : FirContainingNamesAwareScope() {
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
@@ -27,8 +27,8 @@ class FirLazyNestedClassifierScope(
         if (name !in existingNames) {
             return
         }
-        val child = classId.createNestedClassId(name)
-        val symbol = symbolProvider.getClassLikeSymbolByClassId(child) ?: return
+        konst child = classId.createNestedClassId(name)
+        konst symbol = symbolProvider.getClassLikeSymbolByClassId(child) ?: return
 
         processor(symbol, ConeSubstitutor.Empty)
     }

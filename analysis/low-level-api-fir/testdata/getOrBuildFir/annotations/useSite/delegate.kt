@@ -4,5 +4,5 @@ annotation class Ann
 
 class X {
     <expr>@delegate:Ann</expr>
-    val a by lazy { 1 }
+    konst a by lazy { 1 }
 }

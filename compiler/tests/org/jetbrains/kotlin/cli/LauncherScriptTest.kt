@@ -39,33 +39,33 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
         workDirectory: File? = null,
         environment: Map<String, String> = mapOf("JAVA_HOME" to KtTestUtil.getJdk8Home().absolutePath),
     ) {
-        val executableFileName = if (SystemInfo.isWindows) "$executableName.bat" else executableName
-        val launcherFile = File(PathUtil.kotlinPathsForDistDirectory.homePath, "bin/$executableFileName")
+        konst executableFileName = if (SystemInfo.isWindows) "$executableName.bat" else executableName
+        konst launcherFile = File(PathUtil.kotlinPathsForDistDirectory.homePath, "bin/$executableFileName")
         assertTrue("Launcher script not found, run dist task: ${launcherFile.absolutePath}", launcherFile.exists())
 
         // For some reason, IntelliJ's ExecUtil screws quotes up on windows.
         // So, use ProcessBuilder instead.
-        val pb = ProcessBuilder(
+        konst pb = ProcessBuilder(
             launcherFile.absolutePath,
             // In cmd, `=` is delimiter, so we need to surround parameter with quotes.
             *quoteIfNeeded(args)
         )
         pb.environment().putAll(environment)
         pb.directory(workDirectory)
-        val process = pb.start()
-        val stdout =
+        konst process = pb.start()
+        konst stdout =
             AbstractCliTest.getNormalizedCompilerOutput(
                 StringUtil.convertLineSeparators(process.inputStream.bufferedReader().use { it.readText() }),
                 null, testDataDirectory
             )
-        val stderr =
+        konst stderr =
             AbstractCliTest.getNormalizedCompilerOutput(
                 StringUtil.convertLineSeparators(process.errorStream.bufferedReader().use { it.readText() }),
                 null, testDataDirectory
             ).replace("Picked up [_A-Z]+:.*\n".toRegex(), "")
                 .replace("The system cannot find the file specified", "No such file or directory") // win -> unix
         process.waitFor(10, TimeUnit.SECONDS)
-        val exitCode = process.exitValue()
+        konst exitCode = process.exitValue()
         try {
             assertEquals(expectedStdout, stdout)
             assertEquals(expectedStderr, stderr)
@@ -90,11 +90,11 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
         else args as Array<String>
     }
 
-    private val testDataDirectory: String
+    private konst testDataDirectory: String
         get() = KtTestUtil.getTestDataPathBase() + "/launcher"
 
     private fun kotlincInProcess(vararg args: String) {
-        val (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(K2JVMCompiler(), args.toList())
+        konst (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(K2JVMCompiler(), args.toList())
         if (exitCode != ExitCode.OK) error("Failed to compile: ${args.joinToString(" ")}\nOutput:\n$output")
     }
 
@@ -124,7 +124,7 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
     }
 
     fun testKotlinJvmContextClassLoader() {
-        val kotlinTestJar = File(PathUtil.kotlinPathsForDistDirectory.homePath, "lib/kotlin-test.jar")
+        konst kotlinTestJar = File(PathUtil.kotlinPathsForDistDirectory.homePath, "lib/kotlin-test.jar")
         assertTrue("kotlin-main-kts.jar not found, run dist task: ${kotlinTestJar.absolutePath}", kotlinTestJar.exists())
         kotlincInProcess(
             "-cp", kotlinTestJar.path,
@@ -169,7 +169,7 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
 
         runProcess("kotlin", "test.HelloWorldKt", expectedStdout = "Hello!\n", workDirectory = tmpdir)
 
-        val emptyDir = KotlinTestUtils.tmpDirForTest(this)
+        konst emptyDir = KotlinTestUtils.tmpDirForTest(this)
         runProcess(
             "kotlin",
             "-cp", emptyDir.path,
@@ -184,7 +184,7 @@ class LauncherScriptTest : TestCaseWithTmpdir() {
         runProcess(
             "kotlin",
             "-e",
-            "val x = 2; (args + listOf(2,1).map { (it * x).toString() }).joinToString()",
+            "konst x = 2; (args + listOf(2,1).map { (it * x).toString() }).joinToString()",
             "--",
             "a",
             "b",
@@ -274,7 +274,7 @@ println(42)
     fun testHowToRunExpression() {
         runProcess(
             "kotlin", "-howtorun", "jar", "-e", "println(args.joinToString())", "-a", "b",
-            expectedExitCode = 1, expectedStderr = "error: expression evaluation is not compatible with -howtorun argument jar\n"
+            expectedExitCode = 1, expectedStderr = "error: expression ekonstuation is not compatible with -howtorun argument jar\n"
         )
         runProcess(
             "kotlin", "-howtorun", "script", "-e", "println(args.joinToString())", "-a", "b",
@@ -330,7 +330,7 @@ println(42)
     }
 
     fun testKotlincJdk17() {
-        val jdk17 = mapOf("JAVA_HOME" to KtTestUtil.getJdk17Home().absolutePath)
+        konst jdk17 = mapOf("JAVA_HOME" to KtTestUtil.getJdk17Home().absolutePath)
         runProcess(
             "kotlinc", "$testDataDirectory/helloWorld.kt", "-d", tmpdir.path,
             environment = jdk17,
@@ -353,7 +353,7 @@ println(42)
     }
 
     fun testNoClassDefFoundErrorWhenClassInDefaultPackage() {
-        val testDir = File("$tmpdir/test")
+        konst testDir = File("$tmpdir/test")
 
         kotlincInProcess("$testDataDirectory/defaultPackage.kt", "-d", testDir.path)
         assertExists(File("${testDir.path}/DefaultPackageKt.class"))
@@ -369,7 +369,7 @@ println(42)
     }
 
     fun testNoClassDefFoundErrorWhenClassNotInDefaultPackage() {
-        val testDir = File("$tmpdir/test")
+        konst testDir = File("$tmpdir/test")
 
         kotlincInProcess("$testDataDirectory/helloWorld.kt", "-d", tmpdir.path)
         assertExists(File("${testDir.path}/HelloWorldKt.class"))
@@ -388,8 +388,8 @@ println(42)
      * A class whose full qualified name is `DefaultPackageKt` and is located in path `$tmpdir/test/DefaultPackageKt.class`
      */
     fun testRunClassFileWithExtensionInDefaultPackage() {
-        val subDir = File("$tmpdir/test/sub").apply { mkdirs() }
-        val testDir = File("$tmpdir/test")
+        konst subDir = File("$tmpdir/test/sub").apply { mkdirs() }
+        konst testDir = File("$tmpdir/test")
 
         kotlincInProcess("$testDataDirectory/defaultPackage.kt", "-d", testDir.path)
         assertExists(File("${testDir.path}/DefaultPackageKt.class"))
@@ -416,8 +416,8 @@ println(42)
      * A class whose full qualified name is `test.HelloWorldKt` and is located in path `$tmpdir/test/HelloWorldKt.class`
      */
     fun testRunClassFileWithExtensionNotInDefaultPackage() {
-        val subDir = File("$tmpdir/test/sub").apply { mkdirs() }
-        val testDir = File("$tmpdir/test")
+        konst subDir = File("$tmpdir/test/sub").apply { mkdirs() }
+        konst testDir = File("$tmpdir/test")
 
         kotlincInProcess("$testDataDirectory/helloWorld.kt", "-d", tmpdir.path)
         assertExists(File("${testDir.path}/HelloWorldKt.class"))
@@ -453,7 +453,7 @@ println(42)
     }
 
     fun testKotlinUseJdkModuleFromMainClass() {
-        val jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
+        konst jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
         runProcess(
             "kotlinc", "$testDataDirectory/jdkModuleUsage.kt", "-d", tmpdir.path,
             environment = jdk11,
@@ -466,8 +466,8 @@ println(42)
     }
 
     fun testKotlinUseJdkModuleFromJar() {
-        val jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
-        val output = tmpdir.resolve("out.jar")
+        konst jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
+        konst output = tmpdir.resolve("out.jar")
         runProcess(
             "kotlinc", "$testDataDirectory/jdkModuleUsage.kt", "-d", output.path,
             environment = jdk11,
@@ -487,7 +487,7 @@ println(42)
 
     fun testImplicitModularJdk() {
         // see KT-54337
-        val moduleInfo = tmpdir.resolve("module-info.java").apply {
+        konst moduleInfo = tmpdir.resolve("module-info.java").apply {
             writeText(
                 """
                     module test {
@@ -496,10 +496,10 @@ println(42)
                 """.trimIndent()
             )
         }
-        val testKt = tmpdir.resolve("test.kt").apply {
+        konst testKt = tmpdir.resolve("test.kt").apply {
             writeText("fun main() {}")
         }
-        val jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
+        konst jdk11 = mapOf("JAVA_HOME" to KtTestUtil.getJdk11Home().absolutePath)
         runProcess(
             "kotlinc", moduleInfo.absolutePath, testKt.absolutePath, "-d", tmpdir.path,
             environment = jdk11,
@@ -510,12 +510,12 @@ println(42)
     }
 
     fun testK2ClassPathWithRelativeDir() {
-        val file1kt = tmpdir.resolve("file1.kt").apply {
+        konst file1kt = tmpdir.resolve("file1.kt").apply {
             writeText("class C")
         }
         CompilerTestUtil.executeCompilerAssertSuccessful(K2JVMCompiler(), listOf("-d", tmpdir.absolutePath, "-language-version", "2.0", file1kt.absolutePath))
-        val file2kt = tmpdir.resolve("file1.kt").apply {
-            writeText("val c = C()")
+        konst file2kt = tmpdir.resolve("file1.kt").apply {
+            writeText("konst c = C()")
         }
         runProcess(
             "kotlinc",

@@ -28,7 +28,7 @@ public sealed interface KtModule {
      *
      * The dependencies list is non-transitive and does not include the current module.
      */
-    public val directRegularDependencies: List<KtModule>
+    public konst directRegularDependencies: List<KtModule>
 
     /**
      * A list of `dependsOn` dependencies. (Kotlin MPP projects only.)
@@ -38,7 +38,7 @@ public sealed interface KtModule {
      *
      * `dependsOn` dependencies are transitive, but the list is not a transitive closure. The list does not include the current module.
      */
-    public val directDependsOnDependencies: List<KtModule>
+    public konst directDependsOnDependencies: List<KtModule>
 
     /**
      * A list of [directDependsOnDependencies] and all of their parents (directly and indirectly), sorted topologically with the nearest
@@ -46,42 +46,42 @@ public sealed interface KtModule {
      *
      * @see computeTransitiveDependsOnDependencies
      */
-    public val transitiveDependsOnDependencies: List<KtModule>
+    public konst transitiveDependsOnDependencies: List<KtModule>
 
     /**
      * A list of Friend dependencies. Friend dependencies express that the current module may see internal symbols of the dependent module.
      *
      * The dependencies list is non-transitive and does not include the current module.
      */
-    public val directFriendDependencies: List<KtModule>
+    public konst directFriendDependencies: List<KtModule>
 
     /**
      * A [GlobalSearchScope] which belongs to a module content.
      *
      * Contract: `module.contentScope.contains(file) <=> file belongs to this module`
      */
-    public val contentScope: GlobalSearchScope
+    public konst contentScope: GlobalSearchScope
 
     /**
      * A platform (e.g, JVM, JS, Native) which the current module represents.
      *
      * @see [TargetPlatform]
      */
-    public val platform: TargetPlatform
+    public konst platform: TargetPlatform
 
-    public val analyzerServices: PlatformDependentAnalyzerServices
+    public konst analyzerServices: PlatformDependentAnalyzerServices
 
     /**
      * [Project] to which the current module belongs.
      *
      * If the current module depends on some other modules, all those modules should have the same [Project] as the current one.
      */
-    public val project: Project
+    public konst project: Project
 
     /**
      * A human-readable description of the current module. E.g, "main sources of module 'analysis-api'".
      */
-    public val moduleDescription: String
+    public konst moduleDescription: String
 }
 
 /**
@@ -90,22 +90,22 @@ public sealed interface KtModule {
  * Generally, a main or test Source Set.
  */
 public interface KtSourceModule : KtModule {
-    public val moduleName: String
+    public konst moduleName: String
 
     /**
      * A stable binary name of module from the *Kotlin* point of view.
      * Having correct module name is critical for `internal`-visibility mangling. See [org.jetbrains.kotlin.asJava.mangleInternalName]
      */
-    public val stableModuleName: String?
+    public konst stableModuleName: String?
         get() = null
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "Sources of $moduleName"
 
     /**
      * A set of Kotlin settings, like API version, supported features and flags.
      */
-    public val languageVersionSettings: LanguageVersionSettings
+    public konst languageVersionSettings: LanguageVersionSettings
 }
 
 /**
@@ -127,14 +127,14 @@ public sealed interface KtBinaryModule : KtModule {
  * A module which represents a binary library, e.g. JAR or KLIB.
  */
 public interface KtLibraryModule : KtBinaryModule {
-    public val libraryName: String
+    public konst libraryName: String
 
     /**
      * A library source, if any. If current module is a binary JAR, then [librarySources] corresponds to the sources JAR.
      */
-    public val librarySources: KtLibrarySourceModule?
+    public konst librarySources: KtLibrarySourceModule?
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "Library $libraryName"
 }
 
@@ -142,9 +142,9 @@ public interface KtLibraryModule : KtBinaryModule {
  * A module which represent some SDK, e.g. Java JDK.
  */
 public interface KtSdkModule : KtBinaryModule {
-    public val sdkName: String
+    public konst sdkName: String
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "SDK $sdkName"
 }
 
@@ -152,15 +152,15 @@ public interface KtSdkModule : KtBinaryModule {
  * Sources for some [KtLibraryModule].
  */
 public interface KtLibrarySourceModule : KtModule {
-    public val libraryName: String
+    public konst libraryName: String
 
     /**
      * A library binary corresponding to the current library source.
      * If the current module is a source JAR, then [binaryLibrary] corresponds to the binaries JAR.
      */
-    public val binaryLibrary: KtLibraryModule
+    public konst binaryLibrary: KtLibraryModule
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "Library sources of $libraryName"
 }
 
@@ -169,17 +169,17 @@ public interface KtLibrarySourceModule : KtModule {
  * Kotlin builtins usually reside in the compiler, so [contentScope] and [getBinaryRoots] are empty.
  */
 public class KtBuiltinsModule(
-    override val platform: TargetPlatform,
-    override val analyzerServices: PlatformDependentAnalyzerServices,
-    override val project: Project
+    override konst platform: TargetPlatform,
+    override konst analyzerServices: PlatformDependentAnalyzerServices,
+    override konst project: Project
 ) : KtBinaryModule {
-    override val directRegularDependencies: List<KtModule> get() = emptyList()
-    override val directDependsOnDependencies: List<KtModule> get() = emptyList()
-    override val transitiveDependsOnDependencies: List<KtModule> get() = emptyList()
-    override val directFriendDependencies: List<KtModule> get() = emptyList()
-    override val contentScope: GlobalSearchScope get() = GlobalSearchScope.EMPTY_SCOPE
+    override konst directRegularDependencies: List<KtModule> get() = emptyList()
+    override konst directDependsOnDependencies: List<KtModule> get() = emptyList()
+    override konst transitiveDependsOnDependencies: List<KtModule> get() = emptyList()
+    override konst directFriendDependencies: List<KtModule> get() = emptyList()
+    override konst contentScope: GlobalSearchScope get() = GlobalSearchScope.EMPTY_SCOPE
     override fun getBinaryRoots(): Collection<Path> = emptyList()
-    override val moduleDescription: String get() = "Builtins for $platform"
+    override konst moduleDescription: String get() = "Builtins for $platform"
 
     override fun equals(other: Any?): Boolean = other is KtBuiltinsModule && this.platform == other.platform
     override fun hashCode(): Int = platform.hashCode()
@@ -192,14 +192,14 @@ public interface KtScriptModule : KtModule {
     /**
      * A script PSI.
      */
-    public val file: KtFile
+    public konst file: KtFile
 
     /**
      * A set of Kotlin settings, like API version, supported features and flags.
      */
-    public val languageVersionSettings: LanguageVersionSettings
+    public konst languageVersionSettings: LanguageVersionSettings
 
-    override val moduleDescription: String
+    override konst moduleDescription: String
         get() = "Script " + file.name
 }
 
@@ -211,7 +211,7 @@ public interface KtScriptDependencyModule : KtModule {
     /**
      * A `VirtualFile` that backs the dependent script PSI, or `null` if the module is for project-level dependencies.
      */
-    public val file: KtFile?
+    public konst file: KtFile?
 }
 
 /**
@@ -221,12 +221,12 @@ public interface KtNotUnderContentRootModule : KtModule {
     /**
      * Human-readable module name.
      */
-    public val name: String
+    public konst name: String
 
     /**
      * Module owner file.
      * A separate module is created for each file outside a content root.
      */
-    public val file: PsiFile?
+    public konst file: PsiFile?
         get() = null
 }

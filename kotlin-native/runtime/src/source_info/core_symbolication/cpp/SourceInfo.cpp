@@ -142,7 +142,7 @@ extern "C" int Kotlin_getSourceInfo_core_symbolication(void* addr, SourceInfo *r
      */
     CSSymbolForeachSourceInfo(symbol,
       ^(CSSourceInfoRef ref) {
-        // Expecting CSSourceInfoGetLineNumber not to overflow int32_t max value.
+        // Expecting CSSourceInfoGetLineNumber not to overflow int32_t max konstue.
         int32_t lineNumber = CSSourceInfoGetLineNumber(ref);
         if (lineNumber == 0)
           return 0;
@@ -160,7 +160,7 @@ extern "C" int Kotlin_getSourceInfo_core_symbolication(void* addr, SourceInfo *r
 
     CSSymbolForeachSourceInfo(symbol,
       ^(CSSourceInfoRef ref) {
-          // Expecting CSSourceInfoGetLineNumber not to overflow int32_t max value.
+          // Expecting CSSourceInfoGetLineNumber not to overflow int32_t max konstue.
           int32_t lineNumber = CSSourceInfoGetLineNumber(ref);
           if (lineNumber == 0)
             return 0;

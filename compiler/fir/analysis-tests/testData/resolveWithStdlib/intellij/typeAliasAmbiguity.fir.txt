@@ -3,5 +3,5 @@ FILE: typeAliasAmbiguity.kt
     public final fun ServiceId(serviceId: R|kotlin/String|): R|ServiceId| {
         ^ServiceId R|<local>/serviceId|
     }
-    public final val GaugeSpecTmsIntegrationServiceId: R|ServiceId| = R|/ServiceId|(String(Gauge))
+    public final konst GaugeSpecTmsIntegrationServiceId: R|ServiceId| = R|/ServiceId|(String(Gauge))
         public get(): R|ServiceId|

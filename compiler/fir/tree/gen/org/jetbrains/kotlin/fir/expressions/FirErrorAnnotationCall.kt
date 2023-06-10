@@ -21,17 +21,17 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirErrorAnnotationCall : FirAnnotationCall(), FirDiagnosticHolder {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val useSiteTarget: AnnotationUseSiteTarget?
-    abstract override val annotationTypeRef: FirTypeRef
-    abstract override val typeArguments: List<FirTypeProjection>
-    abstract override val argumentList: FirArgumentList
-    abstract override val calleeReference: FirReference
-    abstract override val annotationResolvePhase: FirAnnotationResolvePhase
-    abstract override val diagnostic: ConeDiagnostic
-    abstract override val argumentMapping: FirAnnotationArgumentMapping
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst useSiteTarget: AnnotationUseSiteTarget?
+    abstract override konst annotationTypeRef: FirTypeRef
+    abstract override konst typeArguments: List<FirTypeProjection>
+    abstract override konst argumentList: FirArgumentList
+    abstract override konst calleeReference: FirReference
+    abstract override konst annotationResolvePhase: FirAnnotationResolvePhase
+    abstract override konst diagnostic: ConeDiagnostic
+    abstract override konst argumentMapping: FirAnnotationArgumentMapping
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitErrorAnnotationCall(this, data)
 

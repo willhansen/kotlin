@@ -3,10 +3,10 @@
 package foo
 
 
-val d = { a: Int -> a + 1 }
-val p = { a: Int -> a * 3 }
+konst d = { a: Int -> a + 1 }
+konst p = { a: Int -> a * 3 }
 
-val list = ArrayList<Function1<Int, Int>>();
+konst list = ArrayList<Function1<Int, Int>>();
 
 fun chain(start: Int): Int {
     var res = start;

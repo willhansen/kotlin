@@ -91,7 +91,7 @@
         {
           "specVersion": "0.1-313",
           "casesNumber": 0,
-          "description": "Branch bypass val",
+          "description": "Branch bypass konst",
           "path": "compiler/testData/diagnostics/tests/when/BranchBypassVal.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -125,7 +125,7 @@
         {
           "specVersion": "0.1-313",
           "casesNumber": 0,
-          "description": "Branch bypass val",
+          "description": "Branch bypass konst",
           "path": "compiler/testData/diagnostics/tests/when/BranchBypassVal.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"

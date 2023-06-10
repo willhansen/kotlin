@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 import org.jetbrains.kotlin.diagnostics.rendering.Renderers
 
 object SerializationPluginErrorsRendering : DefaultErrorMessages.Extension {
-    private val MAP = DiagnosticFactoryToRendererMap("SerializationPlugin")
+    private konst MAP = DiagnosticFactoryToRendererMap("SerializationPlugin")
     override fun getMap() = MAP
 
     init {
@@ -156,7 +156,7 @@ object SerializationPluginErrorsRendering : DefaultErrorMessages.Extension {
 
         MAP.put(
             SerializationErrors.INCONSISTENT_INHERITABLE_SERIALINFO,
-            "Argument values for inheritable serial info annotation ''{0}'' must be the same as the values in parent type ''{1}''",
+            "Argument konstues for inheritable serial info annotation ''{0}'' must be the same as the konstues in parent type ''{1}''",
             Renderers.RENDER_TYPE,
             Renderers.RENDER_TYPE
         )

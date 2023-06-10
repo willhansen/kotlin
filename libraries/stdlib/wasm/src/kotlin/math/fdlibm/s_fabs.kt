@@ -11,7 +11,7 @@
  */
 
 /*
- * fabs(x) returns the absolute value of x.
+ * fabs(x) returns the absolute konstue of x.
  */
 
 package kotlin.math.fdlibm

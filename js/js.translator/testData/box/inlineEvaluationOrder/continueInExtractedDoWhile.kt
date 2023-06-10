@@ -3,7 +3,7 @@ package foo
 
 private inline fun bar(predicate: (Char) -> Boolean): Int {
     var i = -1
-    val str = "abc "
+    konst str = "abc "
     do {
         i++
         if (i == 1) continue

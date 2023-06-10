@@ -27,25 +27,25 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.DescriptorUtils.*
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForObject
 
-private val CAPTURED_RECEIVER_NAME_PREFIX : String = "this$"
+private konst CAPTURED_RECEIVER_NAME_PREFIX : String = "this$"
 
 class UsageTracker(
-        private val parent: UsageTracker?,
-        val containingDescriptor: MemberDescriptor,
-        val bindingContext: BindingContext
+        private konst parent: UsageTracker?,
+        konst containingDescriptor: MemberDescriptor,
+        konst bindingContext: BindingContext
 ) {
 
-    private val captured = linkedMapOf<DeclarationDescriptor, JsName>()
-    private val capturedTypesImpl = mutableMapOf<TypeParameterDescriptor, JsName>()
+    private konst captured = linkedMapOf<DeclarationDescriptor, JsName>()
+    private konst capturedTypesImpl = mutableMapOf<TypeParameterDescriptor, JsName>()
 
     // For readonly access from external places.
-    val capturedDescriptorToJsName: Map<DeclarationDescriptor, JsName>
+    konst capturedDescriptorToJsName: Map<DeclarationDescriptor, JsName>
         get() = captured
 
-    val capturedDescriptors: Set<DeclarationDescriptor>
+    konst capturedDescriptors: Set<DeclarationDescriptor>
         get() = captured.keys
 
-    val capturedTypes: Map<TypeParameterDescriptor, JsName>
+    konst capturedTypes: Map<TypeParameterDescriptor, JsName>
         get() = capturedTypesImpl
 
     fun used(descriptor: DeclarationDescriptor) {
@@ -85,13 +85,13 @@ class UsageTracker(
         captured[descriptor] = descriptor.getJsNameForCapturedDescriptor()
 
         if (descriptor is TypeParameterDescriptor && descriptor.containingDeclaration.original != containingDescriptor.original) {
-            val name = "typeClosure\$" + NameSuggestion.sanitizeName(descriptor.name.asString())
+            konst name = "typeClosure\$" + NameSuggestion.sanitizeName(descriptor.name.asString())
             capturedTypesImpl[descriptor] = JsScope.declareTemporaryName(name)
         }
     }
 
     private fun isInLocalDeclaration(): Boolean {
-        val container = containingDescriptor
+        konst container = containingDescriptor
         return isDescriptorWithLocalVisibility(if (container is ConstructorDescriptor) container.containingDeclaration else container)
     }
 
@@ -118,10 +118,10 @@ class UsageTracker(
         if (containingDescriptor !is ClassDescriptor && containingDescriptor !is ConstructorDescriptor) return false
 
         // Class in which we are trying to capture variable
-        val containingClass = getParentOfType(containingDescriptor, ClassDescriptor::class.java, false) ?: return false
+        konst containingClass = getParentOfType(containingDescriptor, ClassDescriptor::class.java, false) ?: return false
 
         // Class which instance we are trying to capture
-        val currentClass = descriptor.containingDeclaration as? ClassDescriptor ?: return false
+        konst currentClass = descriptor.containingDeclaration as? ClassDescriptor ?: return false
 
         for (outerDeclaration in generateSequence(containingClass) { it.containingDeclaration as? ClassDescriptor }) {
             if (outerDeclaration == currentClass) return true
@@ -150,7 +150,7 @@ class UsageTracker(
     private fun isSingletonReceiver(descriptor: DeclarationDescriptor): Boolean {
         if (descriptor !is ReceiverParameterDescriptor) return false
 
-        val container = descriptor.containingDeclaration
+        konst container = descriptor.containingDeclaration
         if (!DescriptorUtils.isObject(container)) return false
 
         // This code is necessary for one use case. If we don't treat `O::this` as a free variable of lambda, we'll get
@@ -159,11 +159,11 @@ class UsageTracker(
         // but to lambda function itself. We avoid it by treating `O::this` as a free variable.
         // Example is:
         //
-        // object A(val x: Int) {
+        // object A(konst x: Int) {
         //     fun foo() = { x }
         // }
         if (containingDescriptor !is ClassDescriptor) {
-            val containingClass = getParentOfType(containingDescriptor, ClassDescriptor::class.java, false)
+            konst containingClass = getParentOfType(containingDescriptor, ClassDescriptor::class.java, false)
             if (containingClass == container) return false
         }
 
@@ -171,13 +171,13 @@ class UsageTracker(
     }
 
     private fun DeclarationDescriptor.getJsNameForCapturedDescriptor(): JsName {
-        val suggestedName = when (this) {
+        konst suggestedName = when (this) {
             is ReceiverParameterDescriptor -> getNameForCapturedReceiver()
             is TypeParameterDescriptor -> Namer.isInstanceSuggestedName(this)
 
             // Append 'closure$' prefix to avoid name clash between closure and member fields in case of local classes
             else -> {
-                val mangled = NameSuggestion.sanitizeName(NameSuggestion().suggest(this, bindingContext)!!.names.last())
+                konst mangled = NameSuggestion.sanitizeName(NameSuggestion().suggest(this, bindingContext)!!.names.last())
                 "closure\$$mangled"
             }
         }
@@ -189,7 +189,7 @@ class UsageTracker(
 fun UsageTracker.getNameForCapturedDescriptor(descriptor: DeclarationDescriptor): JsName? = capturedDescriptorToJsName[descriptor]
 
 fun UsageTracker.hasCapturedExceptContaining(): Boolean {
-    val hasNotCaptured =
+    konst hasNotCaptured =
             capturedDescriptorToJsName.isEmpty() ||
             (capturedDescriptorToJsName.size == 1 && capturedDescriptorToJsName.containsKey(containingDescriptor))
 
@@ -202,13 +202,13 @@ fun UsageTracker.isCaptured(descriptor: DeclarationDescriptor): Boolean = captur
 private fun ReceiverParameterDescriptor.getNameForCapturedReceiver(): String {
 
     fun DeclarationDescriptor.getNameForCapturedDescriptor(namePostfix: String = ""): String {
-        val name = this.name
-        val nameAsString = if (name.isSpecial) "" else name.asString()
+        konst name = this.name
+        konst nameAsString = if (name.isSpecial) "" else name.asString()
 
         return CAPTURED_RECEIVER_NAME_PREFIX + nameAsString + namePostfix
     }
 
-    val containingDeclaration = this.containingDeclaration
+    konst containingDeclaration = this.containingDeclaration
 
     assert(containingDeclaration is MemberDescriptor) {
         "Unsupported descriptor type: ${containingDeclaration::class.java}, " +

@@ -8,8 +8,8 @@ class Delegate {
     }
 }
 
-val prop by Delegate()
+konst prop by Delegate()
 
-val a = prop
+konst a = prop
 
 fun box() = a

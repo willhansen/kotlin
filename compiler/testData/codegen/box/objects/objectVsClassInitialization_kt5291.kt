@@ -5,15 +5,15 @@ public inline fun <T> T.with(f: T.() -> Unit): T {
 }
 
 public class Cls {
-    val string = "Cls"
-    val buffer = StringBuilder().with {
+    konst string = "Cls"
+    konst buffer = StringBuilder().with {
         append(string)
     }
 }
 
 public object Obj {
-    val string = "Obj"
-    val buffer = StringBuilder().with {
+    konst string = "Obj"
+    konst buffer = StringBuilder().with {
         append(string)
     }
 }

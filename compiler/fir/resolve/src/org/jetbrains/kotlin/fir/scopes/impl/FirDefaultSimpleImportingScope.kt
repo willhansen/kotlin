@@ -23,10 +23,10 @@ class FirDefaultSimpleImportingScope(
     private fun FirImport.resolve(importResolveTransformer: FirImportResolveTransformer) =
         importResolveTransformer.transformImport(this, null) as FirResolvedImport
 
-    override val simpleImports = run {
-        val importResolveTransformer = FirImportResolveTransformer(session)
-        val analyzerServices = session.moduleData.analyzerServices
-        val allDefaultImports = priority.getAllDefaultImports(analyzerServices, LanguageVersionSettingsImpl.DEFAULT)
+    override konst simpleImports = run {
+        konst importResolveTransformer = FirImportResolveTransformer(session)
+        konst analyzerServices = session.moduleData.analyzerServices
+        konst allDefaultImports = priority.getAllDefaultImports(analyzerServices, LanguageVersionSettingsImpl.DEFAULT)
         allDefaultImports
             ?.filter { !it.isAllUnder }
             ?.map {

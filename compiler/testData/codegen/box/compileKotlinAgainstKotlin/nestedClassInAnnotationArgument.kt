@@ -4,12 +4,12 @@
 import kotlin.reflect.*
 
 annotation class Anno(
-    val k: KClass<*>,
-    val e: C.NestedEnum,
-    val a: C.NestedAnno,
+    konst k: KClass<*>,
+    konst e: C.NestedEnum,
+    konst a: C.NestedAnno,
 )
 
-annotation class AnnoWithDefault(val k: KClass<*> = Nested0::class) {
+annotation class AnnoWithDefault(konst k: KClass<*> = Nested0::class) {
     class Nested0
 }
 
@@ -18,7 +18,7 @@ class C {
 
     enum class NestedEnum { E }
 
-    annotation class NestedAnno(val k: KClass<*>) {
+    annotation class NestedAnno(konst k: KClass<*>) {
         class Nested2
     }
 }

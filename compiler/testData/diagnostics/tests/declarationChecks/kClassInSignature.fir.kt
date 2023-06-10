@@ -3,8 +3,8 @@
 fun <T> <!KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE!>test1<!>() = T::class
 fun <T : Any> test2() = T::class
 
-val <T> <!KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE!>test3<!> = T::class
-val <T> <!KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE!>test4<!> get() = T::class
+konst <T> <!KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE!>test3<!> = T::class
+konst <T> <!KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE!>test4<!> get() = T::class
 
 fun <T> test5() = listOf(T::class)
 
@@ -20,11 +20,11 @@ fun <L> locals() {
     fun <T> test1() = T::class
     fun <T : Any> test2() = T::class
 
-    val test3 = L::class
+    konst test3 = L::class
     fun test4() = L::class
 }
 
 class Foo<T> {
-    val p = T::class
+    konst p = T::class
     fun f() = T::class
 }

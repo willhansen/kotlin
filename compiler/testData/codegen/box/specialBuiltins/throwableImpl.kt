@@ -5,10 +5,10 @@
 
 class MyThrowable(message: String? = null, cause: Throwable? = null) : Throwable(message, cause) {
 
-    override val message: String?
+    override konst message: String?
         get() = "My message: " + super.message
 
-    override val cause: Throwable?
+    override konst cause: Throwable?
         get() = super.cause ?: this
 
 }

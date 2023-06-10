@@ -2,7 +2,7 @@
 // JVM_TARGET: 1.8
 
 interface Z {
-    val z: String
+    konst z: String
         get() = "OK"
 }
 

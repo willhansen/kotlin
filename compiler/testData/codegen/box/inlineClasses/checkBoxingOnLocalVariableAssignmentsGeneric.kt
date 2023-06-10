@@ -3,66 +3,66 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullPrimitive<T: Int>(val x: T)
+konstue class InlineNotNullPrimitive<T: Int>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNullablePrimitive<T: Int?>(val x: T)
+konstue class InlineNullablePrimitive<T: Int?>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullReference<T: Any>(val a: T)
+konstue class InlineNotNullReference<T: Any>(konst a: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNullableReference<T>(val a: T)
+konstue class InlineNullableReference<T>(konst a: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNullableReference2<T: Any>(val a: T?)
+konstue class InlineNullableReference2<T: Any>(konst a: T?)
 
 fun <T: Int> test1(a: InlineNotNullPrimitive<T>) {
-    val a0 = a
-    val a1: Any = a // box
-    val a2: Any? = a // box
-    val a3: InlineNotNullPrimitive<T> = a
-    val a4: InlineNotNullPrimitive<T>? = a // box
+    konst a0 = a
+    konst a1: Any = a // box
+    konst a2: Any? = a // box
+    konst a3: InlineNotNullPrimitive<T> = a
+    konst a4: InlineNotNullPrimitive<T>? = a // box
 }
 
 fun <T: Int?> test2(b: InlineNullablePrimitive<T>) {
-    val b0 = b
-    val b1: Any = b // box
-    val b2: Any? = b // box
-    val b3: InlineNullablePrimitive<T> = b
-    val b4: InlineNullablePrimitive<T>? = b // box
+    konst b0 = b
+    konst b1: Any = b // box
+    konst b2: Any? = b // box
+    konst b3: InlineNullablePrimitive<T> = b
+    konst b4: InlineNullablePrimitive<T>? = b // box
 }
 
 fun <T: Any> test3(c: InlineNotNullReference<T>) {
-    val c0 = c
-    val c1: Any = c // box
-    val c2: Any? = c // box
-    val c3: InlineNotNullReference<T> = c
-    val c4: InlineNotNullReference<T>? = c
+    konst c0 = c
+    konst c1: Any = c // box
+    konst c2: Any? = c // box
+    konst c3: InlineNotNullReference<T> = c
+    konst c4: InlineNotNullReference<T>? = c
 }
 
 fun <T> test4(d: InlineNullableReference<T>) {
-    val d0 = d
-    val d1: Any = d // box
-    val d2: Any? = d // box
-    val d3: InlineNullableReference<T> = d
-    val d4: InlineNullableReference<T>? = d // box
+    konst d0 = d
+    konst d1: Any = d // box
+    konst d2: Any? = d // box
+    konst d3: InlineNullableReference<T> = d
+    konst d4: InlineNullableReference<T>? = d // box
 }
 
 fun <T: Any> test5(e: InlineNullableReference2<T>) {
-    val e0 = e
-    val e1: Any = e // box
-    val e2: Any? = e // box
-    val e3: InlineNullableReference2<T> = e
-    val e4: InlineNullableReference2<T>? = e // box
+    konst e0 = e
+    konst e1: Any = e // box
+    konst e2: Any? = e // box
+    konst e3: InlineNullableReference2<T> = e
+    konst e4: InlineNullableReference2<T>? = e // box
 }
 
 fun box(): String {
-    val a = InlineNotNullPrimitive(1)
-    val b = InlineNullablePrimitive(1)
-    val c = InlineNotNullReference("some")
-    val d = InlineNullableReference("other")
-    val e = InlineNullableReference2("other2")
+    konst a = InlineNotNullPrimitive(1)
+    konst b = InlineNullablePrimitive(1)
+    konst c = InlineNotNullReference("some")
+    konst d = InlineNullableReference("other")
+    konst e = InlineNullableReference2("other2")
 
     test1(a)
     test2(b)

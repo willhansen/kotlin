@@ -4,7 +4,7 @@ package foo
 class Foo {
 
     inline fun inlineFoo(crossinline s: () -> Unit) {
-        val localObject = object {
+        konst localObject = object {
             fun run() {
                 s()
             }
@@ -25,9 +25,9 @@ class Bar {
     }
 
     fun objectInInlineLambda() {
-        val s = 1;
+        konst s = 1;
         Foo().simpleFoo {
-            val localObject = object {
+            konst localObject = object {
                 fun run() { s }
             }
 
@@ -36,9 +36,9 @@ class Bar {
     }
 
     fun objectInLambdaInlinedIntoObject() {
-        val s = 1;
+        konst s = 1;
         Foo().inlineFoo {
-            val localObject = object {
+            konst localObject = object {
                 fun run() { s }
             }
 

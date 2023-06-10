@@ -3,16 +3,16 @@ import kotlin.reflect.KProperty
 
 class CustomDelegate {
     operator fun getValue(thisRef: Any?, prop: KProperty<*>): String = prop.name
-    operator fun setValue(thisRef: Any?, prop: KProperty<*>, value: String) {}
+    operator fun setValue(thisRef: Any?, prop: KProperty<*>, konstue: String) {}
 }
 
 public abstract class A<T: Any, V: String?>(lateinit var p2: String) {
 
-    public <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> val a: String
-    <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> val b: T
+    public <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> konst a: String
+    <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> konst b: T
     private lateinit var c: CharSequence
 
-    <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> val d: String
+    <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> konst d: String
         get
 
     public lateinit var e: String
@@ -47,7 +47,7 @@ public abstract class A<T: Any, V: String?>(lateinit var p2: String) {
     lateinit var String.e12: String
 }
 
-<!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> val topLevel: String
+<!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> konst topLevel: String
 lateinit var topLevelMutable: String
 
 public interface Intf {

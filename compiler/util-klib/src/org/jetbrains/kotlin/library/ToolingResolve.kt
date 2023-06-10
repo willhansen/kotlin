@@ -32,7 +32,7 @@ object ToolingSingleFileKlibResolveStrategy : SingleFileKlibResolveStrategy {
                 // old style library
                 null
             } else {
-                val components = localRoot.listFiles.filter { it.looksLikeKlibComponent }
+                konst components = localRoot.listFiles.filter { it.looksLikeKlibComponent }
                 when (components.size) {
                     0 -> null
                     1 -> {
@@ -51,14 +51,14 @@ object ToolingSingleFileKlibResolveStrategy : SingleFileKlibResolveStrategy {
             }
         } ?: fakeLibrary(libraryFile)
 
-    private const val NONEXISTENT_COMPONENT_NAME = "__nonexistent_component_name__"
+    private const konst NONEXISTENT_COMPONENT_NAME = "__nonexistent_component_name__"
 
     private fun fakeLibrary(libraryFile: File): KotlinLibrary = createKotlinLibrary(libraryFile, NONEXISTENT_COMPONENT_NAME)
 
     private fun <T : Any> withSafeAccess(libraryFile: File, action: (localRoot: File) -> T?): T? {
-        val extension = libraryFile.extension
+        konst extension = libraryFile.extension
 
-        val wrappedAction: () -> T? = when {
+        konst wrappedAction: () -> T? = when {
             libraryFile.isDirectory -> {
                 { action(libraryFile) }
             }
@@ -75,6 +75,6 @@ object ToolingSingleFileKlibResolveStrategy : SingleFileKlibResolveStrategy {
         }
     }
 
-    private val File.looksLikeKlibComponent: Boolean
+    private konst File.looksLikeKlibComponent: Boolean
         get() = child(KLIB_MANIFEST_FILE_NAME).isFile
 }

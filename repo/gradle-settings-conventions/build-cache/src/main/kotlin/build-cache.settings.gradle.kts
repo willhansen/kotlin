@@ -1,4 +1,4 @@
-val buildProperties = getKotlinBuildPropertiesForSettings(settings)
+konst buildProperties = getKotlinBuildPropertiesForSettings(settings)
 
 buildCache {
     local {
@@ -8,7 +8,7 @@ buildCache {
         }
     }
 
-    val remoteBuildCacheUrl = buildProperties.buildCacheUrl
+    konst remoteBuildCacheUrl = buildProperties.buildCacheUrl
     if (remoteBuildCacheUrl != null) {
         remote<HttpBuildCache> {
             url = uri(remoteBuildCacheUrl)

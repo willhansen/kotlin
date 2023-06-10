@@ -22,13 +22,13 @@ internal object EmptyIterator : ListIterator<Nothing> {
 }
 
 internal object EmptyList : List<Nothing>, Serializable, RandomAccess {
-    private const val serialVersionUID: Long = -7390468764508069838L
+    private const konst serialVersionUID: Long = -7390468764508069838L
 
     override fun equals(other: Any?): Boolean = other is List<*> && other.isEmpty()
     override fun hashCode(): Int = 1
     override fun toString(): String = "[]"
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: Nothing): Boolean = false
     override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()
@@ -54,14 +54,14 @@ internal object EmptyList : List<Nothing>, Serializable, RandomAccess {
 
 internal fun <T> Array<out T>.asCollection(): Collection<T> = ArrayAsCollection(this, isVarargs = false)
 
-private class ArrayAsCollection<T>(val values: Array<out T>, val isVarargs: Boolean) : Collection<T> {
-    override val size: Int get() = values.size
-    override fun isEmpty(): Boolean = values.isEmpty()
-    override fun contains(element: T): Boolean = values.contains(element)
+private class ArrayAsCollection<T>(konst konstues: Array<out T>, konst isVarargs: Boolean) : Collection<T> {
+    override konst size: Int get() = konstues.size
+    override fun isEmpty(): Boolean = konstues.isEmpty()
+    override fun contains(element: T): Boolean = konstues.contains(element)
     override fun containsAll(elements: Collection<T>): Boolean = elements.all { contains(it) }
-    override fun iterator(): Iterator<T> = values.iterator()
-    // override hidden toArray implementation to prevent copying of values array
-    public fun toArray(): Array<out Any?> = values.copyToArrayOfAny(isVarargs)
+    override fun iterator(): Iterator<T> = konstues.iterator()
+    // override hidden toArray implementation to prevent copying of konstues array
+    public fun toArray(): Array<out Any?> = konstues.copyToArrayOfAny(isVarargs)
 }
 
 /**
@@ -140,7 +140,7 @@ public fun <T : Any> listOfNotNull(vararg elements: T?): List<T> = elements.filt
  * [init] function.
  *
  * The function [init] is called for each list element sequentially starting from the first one.
- * It should return the value for a list element given its index.
+ * It should return the konstue for a list element given its index.
  *
  * @sample samples.collections.Collections.Lists.readOnlyListFromInitializer
  */
@@ -153,14 +153,14 @@ public inline fun <T> List(size: Int, init: (index: Int) -> T): List<T> = Mutabl
  * [init] function.
  *
  * The function [init] is called for each list element sequentially starting from the first one.
- * It should return the value for a list element given its index.
+ * It should return the konstue for a list element given its index.
  *
  * @sample samples.collections.Collections.Lists.mutableListFromInitializer
  */
 @SinceKotlin("1.1")
 @kotlin.internal.InlineOnly
 public inline fun <T> MutableList(size: Int, init: (index: Int) -> T): MutableList<T> {
-    val list = ArrayList<T>(size)
+    konst list = ArrayList<T>(size)
     repeat(size) { index -> list.add(init(index)) }
     return list
 }
@@ -169,7 +169,7 @@ public inline fun <T> MutableList(size: Int, init: (index: Int) -> T): MutableLi
  * Builds a new read-only [List] by populating a [MutableList] using the given [builderAction]
  * and returning a read-only list with the same elements.
  *
- * The list passed as a receiver to the [builderAction] is valid only inside that function.
+ * The list passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * The returned list is serializable (JVM).
@@ -194,7 +194,7 @@ internal expect inline fun <E> buildListInternal(builderAction: MutableList<E>.(
  * Builds a new read-only [List] by populating a [MutableList] using the given [builderAction]
  * and returning a read-only list with the same elements.
  *
- * The list passed as a receiver to the [builderAction] is valid only inside that function.
+ * The list passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * The returned list is serializable (JVM).
@@ -220,10 +220,10 @@ public inline fun <E> buildList(capacity: Int, @BuilderInference builderAction: 
 internal expect inline fun <E> buildListInternal(capacity: Int, builderAction: MutableList<E>.() -> Unit): List<E>
 
 /**
- * Returns an [IntRange] of the valid indices for this collection.
+ * Returns an [IntRange] of the konstid indices for this collection.
  * @sample samples.collections.Collections.Collections.indicesOfCollection
  */
-public val Collection<*>.indices: IntRange
+public konst Collection<*>.indices: IntRange
     get() = 0..size - 1
 
 /**
@@ -231,7 +231,7 @@ public val Collection<*>.indices: IntRange
  *
  * @sample samples.collections.Collections.Lists.lastIndexOfList
  */
-public val <T> List<T>.lastIndex: Int
+public konst <T> List<T>.lastIndex: Int
     get() = this.size - 1
 
 /**
@@ -313,7 +313,7 @@ internal fun <T> List<T>.optimizeReadOnlyList() = when (size) {
  *
  * If the list contains multiple elements equal to the specified [element], there is no guarantee which one will be found.
  *
- * `null` value is considered to be less than any non-null value.
+ * `null` konstue is considered to be less than any non-null konstue.
  *
  * @return the index of the element, if it is contained in the list within the specified range;
  * otherwise, the inverted insertion point `(-insertion point - 1)`.
@@ -329,9 +329,9 @@ public fun <T : Comparable<T>> List<T?>.binarySearch(element: T?, fromIndex: Int
     var high = toIndex - 1
 
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = get(mid)
-        val cmp = compareValues(midVal, element)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = get(mid)
+        konst cmp = compareValues(midVal, element)
 
         if (cmp < 0)
             low = mid + 1
@@ -350,7 +350,7 @@ public fun <T : Comparable<T>> List<T?>.binarySearch(element: T?, fromIndex: Int
  *
  * If the list contains multiple elements equal to the specified [element], there is no guarantee which one will be found.
  *
- * `null` value is considered to be less than any non-null value.
+ * `null` konstue is considered to be less than any non-null konstue.
  *
  * @return the index of the element, if it is contained in the list within the specified range;
  * otherwise, the inverted insertion point `(-insertion point - 1)`.
@@ -365,9 +365,9 @@ public fun <T> List<T>.binarySearch(element: T, comparator: Comparator<in T>, fr
     var high = toIndex - 1
 
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = get(mid)
-        val cmp = comparator.compare(midVal, element)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = get(mid)
+        konst cmp = comparator.compare(midVal, element)
 
         if (cmp < 0)
             low = mid + 1
@@ -381,13 +381,13 @@ public fun <T> List<T>.binarySearch(element: T, comparator: Comparator<in T>, fr
 
 /**
  * Searches this list or its range for an element having the key returned by the specified [selector] function
- * equal to the provided [key] value using the binary search algorithm.
+ * equal to the provided [key] konstue using the binary search algorithm.
  * The list is expected to be sorted into ascending order according to the Comparable natural ordering of keys of its elements.
  * otherwise the result is undefined.
  *
  * If the list contains multiple elements with the specified [key], there is no guarantee which one will be found.
  *
- * `null` value is considered to be less than any non-null value.
+ * `null` konstue is considered to be less than any non-null konstue.
  *
  * @return the index of the element with the specified [key], if it is contained in the list within the specified range;
  * otherwise, the inverted insertion point `(-insertion point - 1)`.
@@ -411,15 +411,15 @@ public inline fun <T, K : Comparable<K>> List<T>.binarySearchBy(
 /**
  * Searches this list or its range for an element for which the given [comparison] function returns zero using the binary search algorithm.
  *
- * The list is expected to be sorted so that the signs of the [comparison] function's return values ascend on the list elements,
- * i.e. negative values come before zero and zeroes come before positive values.
+ * The list is expected to be sorted so that the signs of the [comparison] function's return konstues ascend on the list elements,
+ * i.e. negative konstues come before zero and zeroes come before positive konstues.
  * Otherwise, the result is undefined.
  *
  * If the list contains multiple elements for which [comparison] returns zero, there is no guarantee which one will be found.
  *
  * @param comparison function that returns zero when called on the list element being searched.
- * On the elements coming before the target element, the function must return negative values;
- * on the elements coming after the target element, the function must return positive values.
+ * On the elements coming before the target element, the function must return negative konstues;
+ * on the elements coming after the target element, the function must return positive konstues.
  *
  * @return the index of the found element, if it is contained in the list within the specified range;
  * otherwise, the inverted insertion point `(-insertion point - 1)`.
@@ -434,9 +434,9 @@ public fun <T> List<T>.binarySearch(fromIndex: Int = 0, toIndex: Int = size, com
     var high = toIndex - 1
 
     while (low <= high) {
-        val mid = (low + high).ushr(1) // safe from overflows
-        val midVal = get(mid)
-        val cmp = comparison(midVal)
+        konst mid = (low + high).ushr(1) // safe from overflows
+        konst midVal = get(mid)
+        konst cmp = comparison(midVal)
 
         if (cmp < 0)
             low = mid + 1

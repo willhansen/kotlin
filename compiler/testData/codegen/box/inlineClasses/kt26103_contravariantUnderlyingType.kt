@@ -4,32 +4,32 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GCmp<T>(val xc: Comparable<T>)
+konstue class GCmp<T>(konst xc: Comparable<T>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GSCmp<T>(val sc: Comparable<String>)
+konstue class GSCmp<T>(konst sc: Comparable<String>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class SCmp(val sc: Comparable<String>)
+konstue class SCmp(konst sc: Comparable<String>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ICmp(val intc: Comparable<Int>)
+konstue class ICmp(konst intc: Comparable<Int>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GICmp<T>(val intc: Comparable<Int>)
+konstue class GICmp<T>(konst intc: Comparable<Int>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class II(val i: Int) : Comparable<II> {
+konstue class II(konst i: Int) : Comparable<II> {
     override fun compareTo(other: II): Int {
         return i.compareTo(other.i)
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IICmp(val iic: Comparable<II>)
+konstue class IICmp(konst iic: Comparable<II>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GIICmp<T>(val iic: Comparable<II>)
+konstue class GIICmp<T>(konst iic: Comparable<II>)
 
 fun testGCmp(x: GCmp<String>) {
     if (x.xc.compareTo("OK") != 0) throw AssertionError()

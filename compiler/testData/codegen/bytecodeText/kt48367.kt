@@ -2,7 +2,7 @@ fun foo(block: () -> String): String = block()
 inline fun bar(crossinline f: () -> String) = foo { f() }
 
 fun flaf() {
-  val revoked = "A"
+  konst revoked = "A"
   bar {
     synchronized (revoked) {
       "B"

@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.types.TypeCheckerState.SupertypesPolicy
 
 object SimpleClassicTypeSystemContext : ClassicTypeSystemContext
 
-class ClassicTypeSystemContextImpl(override val builtIns: KotlinBuiltIns) : ClassicTypeSystemContext
+class ClassicTypeSystemContextImpl(override konst builtIns: KotlinBuiltIns) : ClassicTypeSystemContext
 
 object StrictEqualityTypeChecker {
 
@@ -60,21 +60,21 @@ object ErrorTypesAreEqualToAnything : KotlinTypeChecker {
 }
 
 interface NewKotlinTypeChecker : KotlinTypeChecker {
-    val kotlinTypeRefiner: KotlinTypeRefiner
-    val kotlinTypePreparator: KotlinTypePreparator
-    val overridingUtil: OverridingUtil
+    konst kotlinTypeRefiner: KotlinTypeRefiner
+    konst kotlinTypePreparator: KotlinTypePreparator
+    konst overridingUtil: OverridingUtil
 
     companion object {
-        val Default = NewKotlinTypeCheckerImpl(KotlinTypeRefiner.Default)
+        konst Default = NewKotlinTypeCheckerImpl(KotlinTypeRefiner.Default)
     }
 }
 
 
 class NewKotlinTypeCheckerImpl(
-    override val kotlinTypeRefiner: KotlinTypeRefiner,
-    override val kotlinTypePreparator: KotlinTypePreparator = KotlinTypePreparator.Default
+    override konst kotlinTypeRefiner: KotlinTypeRefiner,
+    override konst kotlinTypePreparator: KotlinTypePreparator = KotlinTypePreparator.Default
 ) : NewKotlinTypeChecker {
-    override val overridingUtil: OverridingUtil = OverridingUtil.createWithTypeRefiner(kotlinTypeRefiner)
+    override konst overridingUtil: OverridingUtil = OverridingUtil.createWithTypeRefiner(kotlinTypeRefiner)
 
     override fun isSubtypeOf(subtype: KotlinType, supertype: KotlinType): Boolean =
         createClassicTypeCheckerState(
@@ -117,7 +117,7 @@ fun UnwrappedType.anySuperTypeConstructor(predicate: (TypeConstructor) -> Boolea
 /**
  * ClassType means that type constructor for this type is type for real class or interface
  */
-val SimpleType.isClassType: Boolean get() = constructor.declarationDescriptor is ClassDescriptor
+konst SimpleType.isClassType: Boolean get() = constructor.declarationDescriptor is ClassDescriptor
 
 /**
  * SingleClassifierType is one of the following types:
@@ -127,13 +127,13 @@ val SimpleType.isClassType: Boolean get() = constructor.declarationDescriptor is
  *
  * Such types can contains error types in our arguments, but type constructor isn't errorTypeConstructor
  */
-val SimpleType.isSingleClassifierType: Boolean
+konst SimpleType.isSingleClassifierType: Boolean
     get() = !isError &&
             constructor.declarationDescriptor !is TypeAliasDescriptor &&
             (constructor.declarationDescriptor != null || this is CapturedType || this is NewCapturedType || this is DefinitelyNotNullType)
 
-val SimpleType.isIntersectionType: Boolean
+konst SimpleType.isIntersectionType: Boolean
     get() = constructor is IntersectionTypeConstructor
 
-val SimpleType.isIntegerLiteralType: Boolean
+konst SimpleType.isIntegerLiteralType: Boolean
     get() = constructor is IntegerLiteralTypeConstructor

@@ -8,14 +8,14 @@ operator fun MyContainer.get(index: Int): String? {
 }
 
 context(Int)
-operator fun MyContainer.set(index: Int, value: String) {
+operator fun MyContainer.set(index: Int, konstue: String) {
     if (index != 0  || this@Int != 42) return
-    s = value
+    s = konstue
 }
 
 fun box(): String {
     return with(42) {
-        val myContainer = MyContainer("fail")
+        konst myContainer = MyContainer("fail")
         myContainer[0] = "OK"
         myContainer[0] ?: "fail"
     }

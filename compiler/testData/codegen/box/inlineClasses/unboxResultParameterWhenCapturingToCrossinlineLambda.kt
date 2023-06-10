@@ -7,12 +7,12 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
-suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (value: T) -> Unit): Unit =
+suspend inline fun <T> Flow<T>.collect(crossinline action: suspend (konstue: T) -> Unit): Unit =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = action(value)
+        override suspend fun emit(konstue: T) = action(konstue)
     })
 
 fun builder(c: suspend () -> Unit) {
@@ -22,7 +22,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val flow: Flow<Result<String>> = object : Flow<Result<String>> {
+    konst flow: Flow<Result<String>> = object : Flow<Result<String>> {
         override suspend fun collect(collector: FlowCollector<Result<String>>) {
             collector.emit(Result.success("OK"))
         }

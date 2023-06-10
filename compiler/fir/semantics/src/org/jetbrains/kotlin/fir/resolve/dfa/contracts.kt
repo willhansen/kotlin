@@ -38,14 +38,14 @@ fun LogicSystem.approveContractStatement(
         is ConeLogicalNot -> arg.visit(inverted = !inverted)
         is ConeIsInstancePredicate ->
             arguments.getOrNull(arg.parameterIndex + 1)?.let {
-                val isType = inverted == isNegated
-                val substitutedType = substitutor?.substituteOrNull(type) ?: type
+                konst isType = inverted == isNegated
+                konst substitutedType = substitutor?.substituteOrNull(type) ?: type
                 when {
                     substitutedType.isAny -> it.processEqNull(!isType)
                     substitutedType.isNullableNothing -> it.processEqNull(isType)
                     else -> {
                         // x is (T & Any) || x !is T? => x != null
-                        val fromNullability = if ((isType && !type.canBeNull) || (!isType && type.isMarkedNullable))
+                        konst fromNullability = if ((isType && !type.canBeNull) || (!isType && type.isMarkedNullable))
                             it.processEqNull(false)
                         else
                             mapOf()
@@ -62,9 +62,9 @@ fun LogicSystem.approveContractStatement(
         is ConeBooleanValueParameterReference ->
             arguments.getOrNull(parameterIndex + 1)?.let { approveOperationStatement(it eq !inverted) } ?: mapOf()
         is ConeBinaryLogicExpression -> {
-            val a = left.visit(inverted)
-            val b = right.visit(inverted)
-            val isAnd = inverted != (kind == LogicOperationKind.AND)
+            konst a = left.visit(inverted)
+            konst b = right.visit(inverted)
+            konst isAnd = inverted != (kind == LogicOperationKind.AND)
             when {
                 a == null -> b.takeIf { !isAnd } // false || b == b; false && b = false
                 b == null -> a.takeIf { !isAnd } // a || false == a; a && false = false

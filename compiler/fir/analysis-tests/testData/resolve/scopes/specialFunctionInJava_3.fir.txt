@@ -4,12 +4,12 @@ FILE: main.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val x: R|kotlin/Int|
+        public open konst x: R|kotlin/Int|
             public get(): R|kotlin/Int| {
                 ^ Int(1)
             }
 
-        public open val y: R|kotlin/Int|
+        public open konst y: R|kotlin/Int|
             public get(): R|kotlin/Int| {
                 ^ Int(2)
             }

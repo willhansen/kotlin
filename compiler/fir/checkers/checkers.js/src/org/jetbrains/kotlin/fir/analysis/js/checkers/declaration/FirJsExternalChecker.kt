@@ -52,10 +52,10 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         if (declaration is FirClass) {
             // TODO: KT-55600: Stop generating diagnostic
             //  messages inside checkers
-            val classKind = when {
+            konst classKind = when {
                 declaration.status.isData -> "data class"
                 declaration.status.isInner -> "inner class"
-                declaration.status.isInline -> "value class"
+                declaration.status.isInline -> "konstue class"
                 declaration.status.isFun -> "fun interface"
                 declaration.classKind == ClassKind.ANNOTATION_CLASS -> "annotation class"
                 else -> null
@@ -80,7 +80,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
             reporter.reportOn(declaration.source, FirJsErrors.WRONG_EXTERNAL_DECLARATION, "private member of class", context)
         }
 
-        val container = context.containingDeclarations.lastOrNull()
+        konst container = context.containingDeclarations.lastOrNull()
 
         if (
             declaration is FirClass &&
@@ -91,7 +91,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         }
 
         if (declaration !is FirPropertyAccessor && declaration is FirCallableDeclaration && declaration.isExtension) {
-            val target = when (declaration) {
+            konst target = when (declaration) {
                 is FirFunction -> "extension function"
                 is FirProperty -> "extension property"
                 else -> "extension member"
@@ -100,14 +100,14 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         }
 
         if (declaration is FirClass && declaration.classKind != ClassKind.ANNOTATION_CLASS) {
-            val superClasses = declaration.superInterfaces(context.session).toMutableList()
+            konst superClasses = declaration.superInterfaces(context.session).toMutableList()
             declaration.superClassNotAny(context.session)?.let {
                 superClasses.add(it)
             }
             if (declaration.classKind == ClassKind.ENUM_CLASS || declaration.classKind == ClassKind.ENUM_ENTRY) {
                 superClasses.removeAll { it.classId?.asSingleFqName()?.toUnsafe() == StandardNames.FqNames._enum }
             }
-            val superDeclarations = superClasses.mapNotNull { it.toSymbol(context.session) }
+            konst superDeclarations = superClasses.mapNotNull { it.toSymbol(context.session) }
             if (superDeclarations.any { !it.isNativeObject(context) && it.classId.asSingleFqName() != StandardNames.FqNames.throwable }) {
                 reporter.reportOn(declaration.source, FirJsErrors.EXTERNAL_TYPE_EXTENDS_NON_EXTERNAL_TYPE, context)
             }
@@ -145,8 +145,8 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
                 return
             }
 
-            for (parameter in declaration.valueParameters) {
-                val ktParam = if (parameter.source?.psi is KtParameter) {
+            for (parameter in declaration.konstueParameters) {
+                konst ktParam = if (parameter.source?.psi is KtParameter) {
                     parameter.source
                 } else {
                     declaration.source
@@ -156,12 +156,12 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
                     continue
                 }
 
-                val typeToCheck = parameter.varargElementType ?: parameter.returnTypeRef.coneType
+                konst typeToCheck = parameter.varargElementType ?: parameter.returnTypeRef.coneType
                 checkTypeIsNotInlineClass(typeToCheck, ktParam)
             }
         }
 
-        val valueClassInExternalDiagnostic = when {
+        konst konstueClassInExternalDiagnostic = when {
             context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowValueClassesInExternals) -> {
                 FirJsErrors.INLINE_CLASS_IN_EXTERNAL_DECLARATION_WARNING
             }
@@ -171,7 +171,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
             }
         }
 
-        reportOnParametersAndReturnTypesIf(valueClassInExternalDiagnostic) { it.isValueClass(context.session) }
+        reportOnParametersAndReturnTypesIf(konstueClassInExternalDiagnostic) { it.isValueClass(context.session) }
 
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.JsEnableExtensionFunctionInExternals)) {
             reportOnParametersAndReturnTypesIf(
@@ -194,10 +194,10 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         declaration.checkConstructorPropertyParam(context, reporter)
    }
 
-    private val KtSourceElement.allowsReporting
+    private konst KtSourceElement.allowsReporting
         get() = kind !is KtFakeSourceElementKind || kind == KtFakeSourceElementKind.PropertyFromParameter
 
-    private val FirValueParameter.varargElementType
+    private konst FirValueParameter.varargElementType
         get() = when {
             !isVararg -> null
             else -> returnTypeRef.coneType.typeArguments.firstOrNull()?.type
@@ -214,13 +214,13 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
     private fun FirDeclaration.checkBody(context: CheckerContext, reporter: DiagnosticReporter) {
         if (this is FirDefaultPropertyAccessor) return
 
-        val body = when (this) {
+        konst body = when (this) {
             is FirFunction -> body
             is FirAnonymousInitializer -> body
             else -> null
         }
 
-        val initializer = when {
+        konst initializer = when {
             this is FirEnumEntry -> null
             source?.kind == KtFakeSourceElementKind.PropertyFromParameter -> null
             this is FirVariable -> initializer
@@ -234,7 +234,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
             return
         }
 
-        val isWrong = body !is FirSingleExpressionBlock && !hasValidExternalBody()
+        konst isWrong = body !is FirSingleExpressionBlock && !hasValidExternalBody()
                 || initializer != null && !initializer.isDefinedExternallyExpression()
 
         if (isWrong && body != null) {
@@ -244,7 +244,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         }
 
         if (this is FirFunction) {
-            for (defaultValue in valueParameters.mapNotNull { it.defaultValue }) {
+            for (defaultValue in konstueParameters.mapNotNull { it.defaultValue }) {
                 if (!defaultValue.isDefinedExternallyExpression()) {
                     reporter.reportOn(defaultValue.source, FirJsErrors.WRONG_DEFAULT_VALUE_FOR_EXTERNAL_FUN_PARAMETER, context)
                 }
@@ -257,7 +257,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
 
         if (this is FirClass) {
             declarations.firstIsInstanceOrNull<FirPrimaryConstructor>()?.let {
-                val constructorCall = it.delegatedConstructor
+                konst constructorCall = it.delegatedConstructor
 
                 if (constructorCall?.source?.kind is KtRealSourceElementKind) {
                     reporter.reportOn(constructorCall.source, FirJsErrors.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL, context)
@@ -272,7 +272,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
                 }
             }
         } else if (this is FirConstructor && !isPrimary) {
-            val delegationCall = delegatedConstructor
+            konst delegationCall = delegatedConstructor
 
             if (delegationCall?.source?.kind is KtRealSourceElementKind) {
                 reporter.reportOn(delegationCall.source, FirJsErrors.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL, context)
@@ -301,7 +301,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
 
     private fun FirDeclaration.checkConstructorPropertyParam(context: CheckerContext, reporter: DiagnosticReporter) {
         if (this !is FirProperty || source?.kind != KtFakeSourceElementKind.PropertyFromParameter) return
-        val containingClass = getContainingClassSymbol(context.session) as? FirClassSymbol<*> ?: return
+        konst containingClass = getContainingClassSymbol(context.session) as? FirClassSymbol<*> ?: return
         if (containingClass.isData || containingClass.classKind == ClassKind.ANNOTATION_CLASS) return
         reporter.reportOn(source, FirJsErrors.EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER, context)
     }
@@ -317,7 +317,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         if (this is FirPropertyAccessor && visibility == propertySymbol.visibility) return false
         if (this !is FirMemberDeclaration || visibility != Visibilities.Private) return false
 
-        val containingDeclaration = getContainingClassSymbol(session) ?: return false
+        konst containingDeclaration = getContainingClassSymbol(session) ?: return false
         return containingDeclaration.isNativeObject(session)
     }
 
@@ -331,7 +331,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
     private fun FirCallableDeclaration.isNullableProperty() = this is FirProperty && returnTypeRef.coneType.isNullable
 
     private fun FirDeclaration.hasValidExternalBody(): Boolean {
-        val body = when (this) {
+        konst body = when (this) {
             is FirFunction -> body
             is FirAnonymousInitializer -> body
             else -> return true
@@ -340,7 +340,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
         return when {
             body is FirSingleExpressionBlock -> body.isDefinedExternallyExpression()
             body != null -> {
-                val statement = body.statements.singleOrNull() ?: return false
+                konst statement = body.statements.singleOrNull() ?: return false
                 statement.isDefinedExternallyExpression()
             }
 
@@ -349,7 +349,7 @@ object FirJsExternalChecker : FirBasicDeclarationChecker() {
     }
 
     private fun FirElement.isDefinedExternallyExpression(): Boolean {
-        val declaration = (this as? FirPropertyAccessExpression)
+        konst declaration = (this as? FirPropertyAccessExpression)
             ?.calleeReference?.toResolvedPropertySymbol() ?: return false
         return declaration.callableId in JsStandardClassIds.Callables.definedExternallyPropertyNames
     }

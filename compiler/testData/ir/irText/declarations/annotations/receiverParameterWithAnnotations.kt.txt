@@ -18,7 +18,7 @@ class A {
     return ""
   }
 
-  val String?.p: String
+  konst String?.p: String
     get(): String {
       return ""
     }
@@ -29,7 +29,7 @@ fun String?.topLevelF(): String {
   return ""
 }
 
-val String.topLevelP: String
+konst String.topLevelP: String
   get(): String {
     return ""
   }

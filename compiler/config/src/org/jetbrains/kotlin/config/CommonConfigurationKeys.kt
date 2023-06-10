@@ -16,7 +16,7 @@
 
 package org.jetbrains.kotlin.config
 
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.incremental.components.EnumWhenTracker
 import org.jetbrains.kotlin.incremental.components.ExpectActualTracker
 import org.jetbrains.kotlin.incremental.components.InlineConstTracker
@@ -25,82 +25,82 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
 
 object CommonConfigurationKeys {
     @JvmField
-    val LANGUAGE_VERSION_SETTINGS = CompilerConfigurationKey<LanguageVersionSettings>("language version settings")
+    konst LANGUAGE_VERSION_SETTINGS = CompilerConfigurationKey<LanguageVersionSettings>("language version settings")
 
     @JvmField
-    val DISABLE_INLINE = CompilerConfigurationKey<Boolean>("disable inline")
+    konst DISABLE_INLINE = CompilerConfigurationKey<Boolean>("disable inline")
 
     @JvmField
-    val MODULE_NAME = CompilerConfigurationKey<String>("module name")
+    konst MODULE_NAME = CompilerConfigurationKey<String>("module name")
 
     @JvmField
-    val REPORT_OUTPUT_FILES = CompilerConfigurationKey<Boolean>("report output files")
+    konst REPORT_OUTPUT_FILES = CompilerConfigurationKey<Boolean>("report output files")
 
     @JvmField
-    val LOOKUP_TRACKER = CompilerConfigurationKey.create<LookupTracker>("lookup tracker")
+    konst LOOKUP_TRACKER = CompilerConfigurationKey.create<LookupTracker>("lookup tracker")
 
     @JvmField
-    val EXPECT_ACTUAL_TRACKER = CompilerConfigurationKey.create<ExpectActualTracker>("expect actual tracker")
+    konst EXPECT_ACTUAL_TRACKER = CompilerConfigurationKey.create<ExpectActualTracker>("expect actual tracker")
 
     @JvmField
-    val INLINE_CONST_TRACKER = CompilerConfigurationKey.create<InlineConstTracker>("inline constant tracker")
+    konst INLINE_CONST_TRACKER = CompilerConfigurationKey.create<InlineConstTracker>("inline constant tracker")
 
     @JvmField
-    val ENUM_WHEN_TRACKER = CompilerConfigurationKey.create<EnumWhenTracker>("enum when tracker")
+    konst ENUM_WHEN_TRACKER = CompilerConfigurationKey.create<EnumWhenTracker>("enum when tracker")
 
     @JvmField
-    val METADATA_VERSION = CompilerConfigurationKey.create<BinaryVersion>("metadata version")
+    konst METADATA_VERSION = CompilerConfigurationKey.create<BinaryVersion>("metadata version")
 
     @JvmField
-    val USE_FIR = CompilerConfigurationKey.create<Boolean>("front-end IR")
+    konst USE_FIR = CompilerConfigurationKey.create<Boolean>("front-end IR")
 
     @JvmField
-    val USE_LIGHT_TREE = CompilerConfigurationKey.create<Boolean>("light tree")
+    konst USE_LIGHT_TREE = CompilerConfigurationKey.create<Boolean>("light tree")
 
     @JvmField
-    val HMPP_MODULE_STRUCTURE = CompilerConfigurationKey.create<HmppCliModuleStructure>("HMPP module structure")
+    konst HMPP_MODULE_STRUCTURE = CompilerConfigurationKey.create<HmppCliModuleStructure>("HMPP module structure")
 
     @JvmField
-    val EXPECT_ACTUAL_LINKER = CompilerConfigurationKey.create<Boolean>("Experimental expect/actual linker")
+    konst EXPECT_ACTUAL_LINKER = CompilerConfigurationKey.create<Boolean>("Experimental expect/actual linker")
 
     @JvmField
-    val USE_FIR_EXTENDED_CHECKERS = CompilerConfigurationKey.create<Boolean>("fir extended checkers")
+    konst USE_FIR_EXTENDED_CHECKERS = CompilerConfigurationKey.create<Boolean>("fir extended checkers")
 
     @JvmField
-    val PARALLEL_BACKEND_THREADS =
+    konst PARALLEL_BACKEND_THREADS =
         CompilerConfigurationKey.create<Int>("When using the IR backend, run lowerings by file in N parallel threads")
 
     @JvmField
-    val KLIB_RELATIVE_PATH_BASES =
+    konst KLIB_RELATIVE_PATH_BASES =
         CompilerConfigurationKey.create<Collection<String>>("Provides a path from which relative paths in klib are being computed")
 
     @JvmField
-    val KLIB_NORMALIZE_ABSOLUTE_PATH =
+    konst KLIB_NORMALIZE_ABSOLUTE_PATH =
         CompilerConfigurationKey.create<Boolean>("Normalize absolute paths in klib (replace file separator with '/')")
 
     @JvmField
-    val PRODUCE_KLIB_SIGNATURES_CLASH_CHECKS =
+    konst PRODUCE_KLIB_SIGNATURES_CLASH_CHECKS =
         CompilerConfigurationKey.create<Boolean>("Turn on the checks on uniqueness of signatures")
 
     @JvmField
-    val INCREMENTAL_COMPILATION =
+    konst INCREMENTAL_COMPILATION =
         CompilerConfigurationKey.create<Boolean>("Enable incremental compilation")
 
     @JvmField
-    val ALLOW_ANY_SCRIPTS_IN_SOURCE_ROOTS =
+    konst ALLOW_ANY_SCRIPTS_IN_SOURCE_ROOTS =
         CompilerConfigurationKey.create<Boolean>("Allow to compile any scripts along with regular Kotlin sources")
 
     @JvmField
-    val IGNORE_CONST_OPTIMIZATION_ERRORS = CompilerConfigurationKey.create<Boolean>("Ignore errors from IrConstTransformer")
+    konst IGNORE_CONST_OPTIMIZATION_ERRORS = CompilerConfigurationKey.create<Boolean>("Ignore errors from IrConstTransformer")
 
     @JvmField
-    val EVALUATED_CONST_TRACKER =
-        CompilerConfigurationKey.create<EvaluatedConstTracker>("Keeps track of all evaluated by IrInterpreter constants")
+    konst EVALUATED_CONST_TRACKER =
+        CompilerConfigurationKey.create<EkonstuatedConstTracker>("Keeps track of all ekonstuated by IrInterpreter constants")
 }
 
 var CompilerConfiguration.languageVersionSettings: LanguageVersionSettings
     get() = get(CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS, LanguageVersionSettingsImpl.DEFAULT)
-    set(value) = put(CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS, value)
+    set(konstue) = put(CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS, konstue)
 
-val LanguageVersionSettings.isLibraryToSourceAnalysisEnabled: Boolean
+konst LanguageVersionSettings.isLibraryToSourceAnalysisEnabled: Boolean
     get() = getFlag(AnalysisFlags.libraryToSourceAnalysis)

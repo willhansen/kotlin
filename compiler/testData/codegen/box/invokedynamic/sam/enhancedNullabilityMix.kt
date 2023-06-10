@@ -21,7 +21,7 @@ fun interface IGetIntMix1 : IGetInt, Sam {
 }
 
 fun box(): String {
-    val t1 = IGetIntMix1 { it: Int -> it * 2 }.get(21)
+    konst t1 = IGetIntMix1 { it: Int -> it * 2 }.get(21)
     if (t1 != 42)
         return "Failed: t1=$t1"
 

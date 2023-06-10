@@ -63,9 +63,9 @@ object ConeConstraintSystemUtilContext : ConstraintSystemUtilContext {
         require(declaration is PostponedResolvedAtom)
         return when (declaration) {
             is LambdaWithTypeVariableAsExpectedTypeAtom -> {
-                val atom = declaration.atom.anonymousFunction
+                konst atom = declaration.atom.anonymousFunction
                 return if (atom.isLambda) { // lambda - must return null in case of absent parameters
-                    if (atom.valueParameters.isNotEmpty())
+                    if (atom.konstueParameters.isNotEmpty())
                         atom.collectDeclaredValueParameterTypes()
                     else null
                 } else { // function expression - all types are explicit, shouldn't return null
@@ -80,7 +80,7 @@ object ConeConstraintSystemUtilContext : ConstraintSystemUtilContext {
     }
 
     private fun FirAnonymousFunction.collectDeclaredValueParameterTypes(): List<ConeKotlinType?> =
-        valueParameters.map { it.returnTypeRef.coneTypeSafe() }
+        konstueParameters.map { it.returnTypeRef.coneTypeSafe() }
 
     override fun PostponedAtomWithRevisableExpectedType.isFunctionExpression(): Boolean {
         require(this is PostponedResolvedAtom)
@@ -126,9 +126,9 @@ object ConeConstraintSystemUtilContext : ConstraintSystemUtilContext {
         return ConeTypeVariableForPostponedAtom(PostponedArgumentInputTypesResolver.TYPE_VARIABLE_NAME_FOR_LAMBDA_RETURN_TYPE)
     }
 
-    override val isForcedConsiderExtensionReceiverFromConstrainsInLambda: Boolean
+    override konst isForcedConsiderExtensionReceiverFromConstrainsInLambda: Boolean
         get() = true
 
-    override val isForcedAllowForkingInferenceSystem: Boolean
+    override konst isForcedAllowForkingInferenceSystem: Boolean
         get() = true
 }

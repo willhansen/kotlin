@@ -1,13 +1,13 @@
 // WITH_STDLIB
 
 fun testFun1(str: String): String {
-    val local = str
+    konst local = str
 
     class Local {
         fun foo() = str
     }
 
-    val list = listOf(0).map { Local() }
+    konst list = listOf(0).map { Local() }
     return list[0].foo()
 }
 

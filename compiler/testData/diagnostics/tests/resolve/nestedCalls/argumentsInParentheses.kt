@@ -5,7 +5,7 @@ class Bar {
 }
 
 class A {
-    val bar = Bar()
+    konst bar = Bar()
 }
 
 fun fooInt(l: Foo<Int>) = l

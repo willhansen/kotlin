@@ -7,7 +7,7 @@
 import kotlin.coroutines.*
 import helpers.*
 
-class Result<T>(val x: T)
+class Result<T>(konst x: T)
 
 @JvmName("foo") // + foo$$forInline
 suspend inline fun test(c: Result<Int>) = c.x

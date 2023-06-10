@@ -8,7 +8,7 @@ open class Base {
   open fun foo() {
   }
 
-  open val bar: String
+  open konst bar: String
     field = ""
     open get
 
@@ -29,7 +29,7 @@ class Derived : Base {
     super<Base>.foo()
   }
 
-  override val bar: String
+  override konst bar: String
     override get(): String {
       return super<Base>.<get-bar>()
     }

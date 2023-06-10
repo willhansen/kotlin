@@ -6,12 +6,12 @@ FILE fqName:<root> fileName:/propertyAccessorsWithAnnotations.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:TestAnn modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.String declared in <root>.TestAnn.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.TestAnn) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.TestAnn
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.String declared in <root>.TestAnn'
@@ -30,14 +30,14 @@ FILE fqName:<root> fileName:/propertyAccessorsWithAnnotations.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Annotation
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:test1 visibility:public modality:FINAL [val]
+  PROPERTY name:test1 visibility:public modality:FINAL [konst]
     FUN name:<get-test1> visibility:public modality:FINAL <> () returnType:kotlin.String
       annotations:
         TestAnn(x = 'test1.get')
-      correspondingProperty: PROPERTY name:test1 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:test1 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test1> (): kotlin.String declared in <root>'
-          CONST String type=kotlin.String value=""
+          CONST String type=kotlin.String konstue=""
   PROPERTY name:test2 visibility:public modality:FINAL [var]
     FUN name:<get-test2> visibility:public modality:FINAL <> () returnType:kotlin.String
       annotations:
@@ -45,28 +45,28 @@ FILE fqName:<root> fileName:/propertyAccessorsWithAnnotations.kt
       correspondingProperty: PROPERTY name:test2 visibility:public modality:FINAL [var]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test2> (): kotlin.String declared in <root>'
-          CONST String type=kotlin.String value=""
-    FUN name:<set-test2> visibility:public modality:FINAL <> (value:kotlin.String) returnType:kotlin.Unit
+          CONST String type=kotlin.String konstue=""
+    FUN name:<set-test2> visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:kotlin.Unit
       annotations:
         TestAnn(x = 'test2.set')
       correspondingProperty: PROPERTY name:test2 visibility:public modality:FINAL [var]
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       BLOCK_BODY
-  PROPERTY name:test3 visibility:public modality:FINAL [val]
+  PROPERTY name:test3 visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:test3 type:kotlin.String visibility:private [final,static]
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test3> visibility:public modality:FINAL <> () returnType:kotlin.String
       annotations:
         TestAnn(x = 'test3.get')
-      correspondingProperty: PROPERTY name:test3 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:test3 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-test3> (): kotlin.String declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test3 type:kotlin.String visibility:private [final,static]' type=kotlin.String origin=null
   PROPERTY name:test4 visibility:public modality:FINAL [var]
     FIELD PROPERTY_BACKING_FIELD name:test4 type:kotlin.String visibility:private [static]
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test4> visibility:public modality:FINAL <> () returnType:kotlin.String
       annotations:
         TestAnn(x = 'test4.get')
@@ -81,4 +81,4 @@ FILE fqName:<root> fileName:/propertyAccessorsWithAnnotations.kt
       VALUE_PARAMETER name:<set-?> index:0 type:kotlin.String
       BLOCK_BODY
         SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test4 type:kotlin.String visibility:private [static]' type=kotlin.Unit origin=null
-          value: GET_VAR '<set-?>: kotlin.String declared in <root>.<set-test4>' type=kotlin.String origin=null
+          konstue: GET_VAR '<set-?>: kotlin.String declared in <root>.<set-test4>' type=kotlin.String origin=null

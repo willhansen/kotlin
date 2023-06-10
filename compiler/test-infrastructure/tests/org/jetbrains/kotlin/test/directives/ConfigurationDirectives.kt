@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.test.directives
 import org.jetbrains.kotlin.test.directives.model.SimpleDirectivesContainer
 
 object ConfigurationDirectives : SimpleDirectivesContainer() {
-    val KOTLIN_CONFIGURATION_FLAGS by stringDirective(
+    konst KOTLIN_CONFIGURATION_FLAGS by stringDirective(
         "List of kotlin configuration flags"
     )
 
-    val WITH_STDLIB by directive("Add Kotlin stdlib to classpath")
+    konst WITH_STDLIB by directive("Add Kotlin stdlib to classpath")
 }

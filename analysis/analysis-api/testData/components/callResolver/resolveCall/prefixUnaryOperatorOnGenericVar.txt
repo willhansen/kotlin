@@ -5,7 +5,7 @@ KtSuccessCallInfo:
       precedence = PREFIX
       operationPartiallyAppliedSymbol = KtPartiallyAppliedSymbol:
         dispatchReceiver = KtExplicitReceiverValue:
-          expression = foo.value
+          expression = foo.konstue
           isSafeNavigation = false
           type = kotlin.Int
         extensionReceiver = null
@@ -13,7 +13,7 @@ KtSuccessCallInfo:
           receiverType = null
           returnType = kotlin.Int
           symbol = kotlin/Int.inc(<dispatch receiver>: kotlin.Int): kotlin.Int
-          valueParameters = []
+          konstueParameters = []
           callableIdIfNonLocal = kotlin/Int.inc
     partiallyAppliedSymbol = KtPartiallyAppliedSymbol:
       dispatchReceiver = null
@@ -22,11 +22,11 @@ KtSuccessCallInfo:
         isSafeNavigation = false
         type = CInt32VarX<kotlin.Int>
       signature = KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = CInt32VarX<kotlin.Int>
         returnType = kotlin.Int
-        symbol = var value: T
-        callableIdIfNonLocal = /value
+        symbol = var konstue: T
+        callableIdIfNonLocal = /konstue
     typeArgumentsMapping = {
       T -> (kotlin.Int)
     }

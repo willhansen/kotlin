@@ -14,5 +14,5 @@ class TestInitVarInInitBlock {
 
 class TestInitVarWithCustomSetter {
     var x = 0
-        set(value) { field = value }
+        set(konstue) { field = konstue }
 }

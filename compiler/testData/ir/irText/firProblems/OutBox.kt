@@ -14,8 +14,8 @@ public class Foo {
 
 // FILE: Box.kt
 
-class Box<out T : Foo>(val foo: T) {
-    val str: String
+class Box<out T : Foo>(konst foo: T) {
+    konst str: String
         get() {
             var foo: Foo = foo
             if (foo is Foo.Buz) {

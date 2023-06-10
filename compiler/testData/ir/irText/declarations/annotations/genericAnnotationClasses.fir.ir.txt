@@ -7,12 +7,12 @@ FILE fqName:ann fileName:/genericAnnotationClasses.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:Test1 modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in ann.Test1.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:ann.Test1<T of ann.Test1>) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:ann.Test1<T of ann.Test1>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in ann.Test1'
@@ -38,16 +38,16 @@ FILE fqName:ann fileName:/genericAnnotationClasses.kt
     CONSTRUCTOR visibility:public <> (x:kotlin.Int) returnType:ann.Test2<T1 of ann.Test2, T2 of ann.Test2> [primary]
       VALUE_PARAMETER name:x index:0 type:kotlin.Int
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=0
+          CONST Int type=kotlin.Int konstue=0
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:Test2 modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Int declared in ann.Test2.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:ann.Test2<T1 of ann.Test2, T2 of ann.Test2>) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:ann.Test2<T1 of ann.Test2, T2 of ann.Test2>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Int declared in ann.Test2'
@@ -91,12 +91,12 @@ FILE fqName:ann fileName:/genericAnnotationClasses.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:Test3 modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:ann.Test1<ann.I<T2 of ann.Test3>> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: ann.Test1<ann.I<T2 of ann.Test3>> declared in ann.Test3.<init>' type=ann.Test1<ann.I<T2 of ann.Test3>> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:ann.Test3<T1 of ann.Test3, T2 of ann.Test3>) returnType:ann.Test1<ann.I<T2 of ann.Test3>>
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:ann.Test3<T1 of ann.Test3, T2 of ann.Test3>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): ann.Test1<ann.I<T2 of ann.Test3>> declared in ann.Test3'
@@ -142,12 +142,12 @@ FILE fqName:ann fileName:/genericAnnotationClasses.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:Test4 modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Array<ann.Test3<kotlin.Int, ann.C<kotlin.Int>>> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: kotlin.Array<ann.Test3<kotlin.Int, ann.C<kotlin.Int>>> declared in ann.Test4.<init>' type=kotlin.Array<ann.Test3<kotlin.Int, ann.C<kotlin.Int>>> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:ann.Test4) returnType:kotlin.Array<ann.Test3<kotlin.Int, ann.C<kotlin.Int>>>
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:ann.Test4
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): kotlin.Array<ann.Test3<kotlin.Int, ann.C<kotlin.Int>>> declared in ann.Test4'
@@ -193,12 +193,12 @@ FILE fqName:ann fileName:/genericAnnotationClasses.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:Test5 modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:xs visibility:public modality:FINAL [val]
+    PROPERTY name:xs visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:xs type:kotlin.Array<out ann.Test3<T of ann.Test5, ann.C<T of ann.Test5>>> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'xs: kotlin.Array<out ann.Test3<T of ann.Test5, ann.C<T of ann.Test5>>> declared in ann.Test5.<init>' type=kotlin.Array<out ann.Test3<T of ann.Test5, ann.C<T of ann.Test5>>> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-xs> visibility:public modality:FINAL <> ($this:ann.Test5<T of ann.Test5>) returnType:kotlin.Array<out ann.Test3<T of ann.Test5, ann.C<T of ann.Test5>>>
-        correspondingProperty: PROPERTY name:xs visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:xs visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:ann.Test5<T of ann.Test5>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-xs> (): kotlin.Array<out ann.Test3<T of ann.Test5, ann.C<T of ann.Test5>>> declared in ann.Test5'

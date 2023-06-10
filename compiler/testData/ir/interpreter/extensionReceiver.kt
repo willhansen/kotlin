@@ -4,7 +4,7 @@ fun Int.get(): Int {
 }
 
 @CompileTimeCalculation
-class A(val length: Int) {
+class A(konst length: Int) {
     fun String.hasRightLength(): Boolean {
         return this@hasRightLength.length == this@A.length
     }
@@ -14,6 +14,6 @@ class A(val length: Int) {
     }
 }
 
-const val simple = <!EVALUATED: `1`!>1.get()<!>
-const val right = <!EVALUATED: `true`!>A(3).check("123")<!>
-const val wrong = <!EVALUATED: `false`!>A(2).check("123")<!>
+const konst simple = <!EVALUATED: `1`!>1.get()<!>
+const konst right = <!EVALUATED: `true`!>A(3).check("123")<!>
+const konst wrong = <!EVALUATED: `false`!>A(2).check("123")<!>

@@ -5,7 +5,7 @@ class C {
 
   }
 
-  val test1: Int
+  konst test1: Int
     field = test1
     get
 

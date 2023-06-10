@@ -19,10 +19,10 @@ class ClassCommonizer internal constructor(
     private var isValue = false
     private var isCompanion = false
     private var hasEnumEntries = false
-    private val supertypesCommonizer = supertypesCommonizer.asCommonizer()
-    private val typeParameterListCommonizer: TypeParameterListCommonizer = TypeParameterListCommonizer(typeCommonizer)
-    private val modalityCommonizer: ModalityCommonizer = ModalityCommonizer()
-    private val visibilityCommonizer: VisibilityCommonizer = VisibilityCommonizer.equalizing()
+    private konst supertypesCommonizer = supertypesCommonizer.asCommonizer()
+    private konst typeParameterListCommonizer: TypeParameterListCommonizer = TypeParameterListCommonizer(typeCommonizer)
+    private konst modalityCommonizer: ModalityCommonizer = ModalityCommonizer()
+    private konst visibilityCommonizer: VisibilityCommonizer = VisibilityCommonizer.equalizing()
 
     override fun commonizationResult(): CirClass? {
         return CirClass.create(

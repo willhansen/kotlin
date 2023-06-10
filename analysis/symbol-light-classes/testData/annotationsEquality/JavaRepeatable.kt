@@ -4,5 +4,5 @@
 // FULL_JDK
 
 @java.lang.annotation.Repeatable(TwoContainer::class)
-annotation class Tw<caret>o(val name: String)
-annotation class TwoContainer(val value: Array<Two>)
+annotation class Tw<caret>o(konst name: String)
+annotation class TwoContainer(konst konstue: Array<Two>)

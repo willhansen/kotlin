@@ -20,9 +20,9 @@ class IrTypeSystemContextWithAdditionalAxioms(
         }
     }
 
-    private val firstTypeParameterConstructors = firstParameters.map { it.symbol }
-    private val secondTypeParameterConstructors = secondParameters.map { it.symbol }
-    private val matchingTypeConstructors = firstTypeParameterConstructors
+    private konst firstTypeParameterConstructors = firstParameters.map { it.symbol }
+    private konst secondTypeParameterConstructors = secondParameters.map { it.symbol }
+    private konst matchingTypeConstructors = firstTypeParameterConstructors
         .zip(secondTypeParameterConstructors)
         .toMap(newHashMapWithExpectedSize(firstTypeParameterConstructors.size))
 

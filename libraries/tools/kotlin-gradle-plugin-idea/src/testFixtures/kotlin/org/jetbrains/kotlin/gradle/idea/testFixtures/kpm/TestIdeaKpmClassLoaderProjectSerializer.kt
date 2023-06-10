@@ -30,7 +30,7 @@ fun TestIdeaKpmClassLoaderProjectSerializer(classLoader: ClassLoader): TestIdeaK
     Instantiates the `TestIdeaKpmProtoClassLoaderProjectSerializer` in the previous version of the classes
     (using the specified classLoader). A java proxy will be used to bridge this implementation and the return type interface
      */
-    val serializerInstance = classLoader.loadClass(TestIdeaKpmProtoClassLoaderProjectSerializer::class.java.name)
+    konst serializerInstance = classLoader.loadClass(TestIdeaKpmProtoClassLoaderProjectSerializer::class.java.name)
         .kotlin.primaryConstructor?.call(classLoader) ?: error(
         "Failed to construct ${TestIdeaKpmProtoClassLoaderProjectSerializer::class.java.name} in $classLoader"
     )
@@ -48,19 +48,19 @@ fun TestIdeaKpmClassLoaderProjectSerializer(classLoader: ClassLoader): TestIdeaK
  * might also depend on the version shipped by the specified [ClassLoader].
  */
 interface TestIdeaKpmClassLoaderProjectSerializer {
-    val classLoader: ClassLoader
-    val reports: List<TestIdeaKotlinSerializationLogger.Report>
+    konst classLoader: ClassLoader
+    konst reports: List<TestIdeaKotlinSerializationLogger.Report>
     fun serialize(project: Any): ByteArray
     fun deserialize(data: ByteArray): Any?
 }
 
 @UnsafeApi
 internal class TestIdeaKpmProtoClassLoaderProjectSerializer(
-    override val classLoader: ClassLoader
+    override konst classLoader: ClassLoader
 ) : TestIdeaKpmClassLoaderProjectSerializer {
-    private val context = TestIdeaKotlinSerializationContext()
+    private konst context = TestIdeaKotlinSerializationContext()
 
-    override val reports: List<TestIdeaKotlinSerializationLogger.Report>
+    override konst reports: List<TestIdeaKotlinSerializationLogger.Report>
         get() = context.logger.reports
 
     override fun serialize(project: Any): ByteArray {
@@ -73,16 +73,16 @@ internal class TestIdeaKpmProtoClassLoaderProjectSerializer(
 }
 
 private class ProxyInvocationHandler(
-    private val classLoader: ClassLoader,
-    private val serializerInstance: Any
+    private konst classLoader: ClassLoader,
+    private konst serializerInstance: Any
 ) : InvocationHandler {
     override fun invoke(proxy: Any, method: Method, args: Array<out Any>?): Any? {
         if (method == TestIdeaKpmClassLoaderProjectSerializer::classLoader.getter.javaMethod) {
             return classLoader
         }
 
-        val targetMethod = serializerInstance.javaClass.methods.find { it.name == method.name } ?: error("Missing $method")
-        val result = targetMethod.invoke(serializerInstance, *args.orEmpty())
+        konst targetMethod = serializerInstance.javaClass.methods.find { it.name == method.name } ?: error("Missing $method")
+        konst result = targetMethod.invoke(serializerInstance, *args.orEmpty())
 
         /*
         The result objects here are also part of the test-fixtures, which will have different classes, depending on the

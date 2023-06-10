@@ -26,33 +26,33 @@ import java.util.*
 
 internal class IntrinsicsMap {
 
-    private val intrinsicsMap = HashMap<Key, IntrinsicMethod>()
+    private konst intrinsicsMap = HashMap<Key, IntrinsicMethod>()
 
     private data class Key(
-        private val owner: FqNameUnsafe,
-        private val receiverParameter: FqNameUnsafe?,
-        private val name: String,
-        private val valueParameterCount: Int
+        private konst owner: FqNameUnsafe,
+        private konst receiverParameter: FqNameUnsafe?,
+        private konst name: String,
+        private konst konstueParameterCount: Int
     )
 
-    private fun valueParameterCountForKey(member: CallableMemberDescriptor): Int =
+    private fun konstueParameterCountForKey(member: CallableMemberDescriptor): Int =
         if (member is PropertyDescriptor)
             -1
         else
-            member.valueParameters.size
+            member.konstueParameters.size
 
 
     /**
-     * @param valueParameterCount -1 for property
+     * @param konstueParameterCount -1 for property
      */
     fun registerIntrinsic(
         owner: FqName,
         receiverParameter: FqNameUnsafe?,
         name: String,
-        valueParameterCount: Int,
+        konstueParameterCount: Int,
         impl: IntrinsicMethod
     ) {
-        intrinsicsMap[Key(owner.toUnsafe(), receiverParameter, name, valueParameterCount)] = impl
+        intrinsicsMap[Key(owner.toUnsafe(), receiverParameter, name, konstueParameterCount)] = impl
     }
 
     fun getIntrinsic(descriptor: CallableMemberDescriptor): IntrinsicMethod? =
@@ -63,12 +63,12 @@ internal class IntrinsicsMap {
             DescriptorUtils.getFqName(descriptor.containingDeclaration),
             getReceiverParameterFqName(descriptor),
             descriptor.name.asString(),
-            valueParameterCountForKey(descriptor)
+            konstueParameterCountForKey(descriptor)
         )
 
     private fun getReceiverParameterFqName(descriptor: CallableMemberDescriptor): FqNameUnsafe? {
-        val receiverParameter = descriptor.extensionReceiverParameter ?: return null
-        val classifier = receiverParameter.type.constructor.declarationDescriptor ?: return null
+        konst receiverParameter = descriptor.extensionReceiverParameter ?: return null
+        konst classifier = receiverParameter.type.constructor.declarationDescriptor ?: return null
 
         return if (classifier is TypeParameterDescriptor)
             IntrinsicMethods.RECEIVER_PARAMETER_FQ_NAME

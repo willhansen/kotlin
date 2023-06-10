@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.asJava.classes.lazyPub
 import org.jetbrains.kotlin.light.classes.symbol.NullabilityType
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames
 
-internal class NullabilityAnnotationsProvider(private val lazyNullabilityType: Lazy<NullabilityType>) : AdditionalAnnotationsProvider {
+internal class NullabilityAnnotationsProvider(private konst lazyNullabilityType: Lazy<NullabilityType>) : AdditionalAnnotationsProvider {
     constructor(initializer: () -> NullabilityType) : this(lazyPub(initializer))
 
     override fun addAllAnnotations(
@@ -19,7 +19,7 @@ internal class NullabilityAnnotationsProvider(private val lazyNullabilityType: L
         foundQualifiers: MutableSet<String>,
         owner: PsiModifierList
     ) {
-        val qualifier = lazyNullabilityType.qualifier ?: return
+        konst qualifier = lazyNullabilityType.qualifier ?: return
         addSimpleAnnotationIfMissing(qualifier, currentRawAnnotations, foundQualifiers, owner)
     }
 
@@ -32,19 +32,19 @@ internal class NullabilityAnnotationsProvider(private val lazyNullabilityType: L
             return null
         }
 
-        val expectedQualifier = lazyNullabilityType.qualifier ?: return null
+        konst expectedQualifier = lazyNullabilityType.qualifier ?: return null
         return createSimpleAnnotationIfMatches(qualifiedName, expectedQualifier, owner)
     }
 
     override fun isSpecialQualifier(qualifiedName: String): Boolean = false
 }
 
-private val String.isNullOrNotNullQualifiedName: Boolean
+private konst String.isNullOrNotNullQualifiedName: Boolean
     get() = this == JvmAnnotationNames.JETBRAINS_NOT_NULL_ANNOTATION.asString() ||
             this == JvmAnnotationNames.JETBRAINS_NULLABLE_ANNOTATION.asString()
 
-private val Lazy<NullabilityType>.qualifier: String?
-    get() = when (value) {
+private konst Lazy<NullabilityType>.qualifier: String?
+    get() = when (konstue) {
         NullabilityType.NotNull -> JvmAnnotationNames.JETBRAINS_NOT_NULL_ANNOTATION
         NullabilityType.Nullable -> JvmAnnotationNames.JETBRAINS_NULLABLE_ANNOTATION
         else -> null

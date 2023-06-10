@@ -12,9 +12,9 @@ FILE: beyoundCalls.kt
         ^foobaz R|kotlin/TODO|()
     }
     public final fun foo(): R|kotlin/Unit| {
-        lval x: R|(kotlin/String) -> kotlin/Int| = ::R|/bar|
-        lval y: R|kotlin/reflect/KFunction1<kotlin/String, kotlin/Int>| = ::R|/bar|
-        lval z: R|kotlin/reflect/KFunction1<kotlin/String, kotlin/Int>| = ::R|/baz|
-        lval w: R|(kotlin/String) -> kotlin/Int| = ::R|/foobaz<kotlin/String, kotlin/Int>|
+        lkonst x: R|(kotlin/String) -> kotlin/Int| = ::R|/bar|
+        lkonst y: R|kotlin/reflect/KFunction1<kotlin/String, kotlin/Int>| = ::R|/bar|
+        lkonst z: R|kotlin/reflect/KFunction1<kotlin/String, kotlin/Int>| = ::R|/baz|
+        lkonst w: R|(kotlin/String) -> kotlin/Int| = ::R|/foobaz<kotlin/String, kotlin/Int>|
         ::R|/baz|
     }

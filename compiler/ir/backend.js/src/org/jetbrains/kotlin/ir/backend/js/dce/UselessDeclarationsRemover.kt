@@ -25,12 +25,12 @@ import org.jetbrains.kotlin.utils.memoryOptimizedFilter
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 class UselessDeclarationsRemover(
-    private val removeUnusedAssociatedObjects: Boolean,
-    private val usefulDeclarations: Set<IrDeclaration>,
-    private val context: JsIrBackendContext,
-    private val dceRuntimeDiagnostic: RuntimeDiagnostic?,
+    private konst removeUnusedAssociatedObjects: Boolean,
+    private konst usefulDeclarations: Set<IrDeclaration>,
+    private konst context: JsIrBackendContext,
+    private konst dceRuntimeDiagnostic: RuntimeDiagnostic?,
 ) : IrElementVisitorVoid {
-    private val savedTypesCache = hashMapOf<IrClassSymbol, Set<IrClassSymbol>>()
+    private konst savedTypesCache = hashMapOf<IrClassSymbol, Set<IrClassSymbol>>()
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -108,9 +108,9 @@ class UselessDeclarationsRemover(
     }
 
     private fun IrFunction.processFunctionWithDiagnostic(dceRuntimeDiagnostic: RuntimeDiagnostic) {
-        val isRemovingBody = dceRuntimeDiagnostic.removingBody()
-        val targetMethod = dceRuntimeDiagnostic.unreachableDeclarationMethod(context)
-        val call = JsIrBuilder.buildCall(
+        konst isRemovingBody = dceRuntimeDiagnostic.removingBody()
+        konst targetMethod = dceRuntimeDiagnostic.unreachableDeclarationMethod(context)
+        konst call = JsIrBuilder.buildCall(
             target = targetMethod,
             type = targetMethod.owner.returnType
         )

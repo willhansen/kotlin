@@ -5,7 +5,7 @@ annotation class AllOpen
 
 @AllOpen
 class Test {
-    val a = object : Runnable {
+    konst a = object : Runnable {
         override fun run() {
             1
         }

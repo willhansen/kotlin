@@ -21,132 +21,132 @@
 /*∆*/ public abstract external class CSSGroupingRule : org.w3c.dom.css.CSSRule {
 /*∆*/     public constructor CSSGroupingRule()
 /*∆*/ 
-/*∆*/     public open val cssRules: org.w3c.dom.css.CSSRuleList { get; }
+/*∆*/     public open konst cssRules: org.w3c.dom.css.CSSRuleList { get; }
 /*∆*/ 
 /*∆*/     public final fun deleteRule(index: kotlin.Int): kotlin.Unit
 /*∆*/ 
 /*∆*/     public final fun insertRule(rule: kotlin.String, index: kotlin.Int): kotlin.Int
 /*∆*/ 
 /*∆*/     public companion object of CSSGroupingRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSImportRule : org.w3c.dom.css.CSSRule {
 /*∆*/     public constructor CSSImportRule()
 /*∆*/ 
-/*∆*/     public open val href: kotlin.String { get; }
+/*∆*/     public open konst href: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val media: org.w3c.dom.css.MediaList { get; }
+/*∆*/     public open konst media: org.w3c.dom.css.MediaList { get; }
 /*∆*/ 
-/*∆*/     public open val styleSheet: org.w3c.dom.css.CSSStyleSheet { get; }
+/*∆*/     public open konst styleSheet: org.w3c.dom.css.CSSStyleSheet { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSImportRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSMarginRule : org.w3c.dom.css.CSSRule {
 /*∆*/     public constructor CSSMarginRule()
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSMarginRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSMediaRule : org.w3c.dom.css.CSSGroupingRule {
 /*∆*/     public constructor CSSMediaRule()
 /*∆*/ 
-/*∆*/     public open val media: org.w3c.dom.css.MediaList { get; }
+/*∆*/     public open konst media: org.w3c.dom.css.MediaList { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSMediaRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSNamespaceRule : org.w3c.dom.css.CSSRule {
 /*∆*/     public constructor CSSNamespaceRule()
 /*∆*/ 
-/*∆*/     public open val namespaceURI: kotlin.String { get; }
+/*∆*/     public open konst namespaceURI: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val prefix: kotlin.String { get; }
+/*∆*/     public open konst prefix: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSNamespaceRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -155,24 +155,24 @@
 /*∆*/ 
 /*∆*/     public open var selectorText: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSPageRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -181,28 +181,28 @@
 /*∆*/ 
 /*∆*/     public open var cssText: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val parentRule: org.w3c.dom.css.CSSRule? { get; }
+/*∆*/     public open konst parentRule: org.w3c.dom.css.CSSRule? { get; }
 /*∆*/ 
-/*∆*/     public open val parentStyleSheet: org.w3c.dom.css.CSSStyleSheet? { get; }
+/*∆*/     public open konst parentStyleSheet: org.w3c.dom.css.CSSStyleSheet? { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.Short { get; }
+/*∆*/     public open konst type: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -565,7 +565,7 @@
 /*∆*/ 
 /*∆*/     public open var pageBreakInside: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val parentRule: org.w3c.dom.css.CSSRule? { get; }
+/*∆*/     public open konst parentRule: org.w3c.dom.css.CSSRule? { get; }
 /*∆*/ 
 /*∆*/     public open var perspective: kotlin.String { get; set; }
 /*∆*/ 
@@ -681,11 +681,11 @@
 /*∆*/ 
 /*∆*/     public final fun removeProperty(property: kotlin.String): kotlin.String
 /*∆*/ 
-/*∆*/     public final fun setProperty(property: kotlin.String, value: kotlin.String, priority: kotlin.String = ...): kotlin.Unit
+/*∆*/     public final fun setProperty(property: kotlin.String, konstue: kotlin.String, priority: kotlin.String = ...): kotlin.Unit
 /*∆*/ 
 /*∆*/     public final fun setPropertyPriority(property: kotlin.String, priority: kotlin.String): kotlin.Unit
 /*∆*/ 
-/*∆*/     public final fun setPropertyValue(property: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun setPropertyValue(property: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSStyleRule : org.w3c.dom.css.CSSRule {
@@ -693,33 +693,33 @@
 /*∆*/ 
 /*∆*/     public open var selectorText: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public companion object of CSSStyleRule {
-/*∆*/         public final val CHARSET_RULE: kotlin.Short { get; }
+/*∆*/         public final konst CHARSET_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FONT_FACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst FONT_FACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IMPORT_RULE: kotlin.Short { get; }
+/*∆*/         public final konst IMPORT_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MARGIN_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MARGIN_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_RULE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NAMESPACE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst NAMESPACE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PAGE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst PAGE_RULE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val STYLE_RULE: kotlin.Short { get; }
+/*∆*/         public final konst STYLE_RULE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class CSSStyleSheet : org.w3c.dom.css.StyleSheet {
 /*∆*/     public constructor CSSStyleSheet()
 /*∆*/ 
-/*∆*/     public open val cssRules: org.w3c.dom.css.CSSRuleList { get; }
+/*∆*/     public open konst cssRules: org.w3c.dom.css.CSSRuleList { get; }
 /*∆*/ 
-/*∆*/     public open val ownerRule: org.w3c.dom.css.CSSRule? { get; }
+/*∆*/     public open konst ownerRule: org.w3c.dom.css.CSSRule? { get; }
 /*∆*/ 
 /*∆*/     public final fun deleteRule(index: kotlin.Int): kotlin.Unit
 /*∆*/ 
@@ -727,11 +727,11 @@
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface ElementCSSInlineStyle {
-/*∆*/     public abstract val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public abstract konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface LinkStyle {
-/*∆*/     public open val sheet: org.w3c.dom.css.StyleSheet? { get; }
+/*∆*/     public open konst sheet: org.w3c.dom.css.StyleSheet? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class MediaList : org.w3c.dom.ItemArrayLike<kotlin.String> {
@@ -751,17 +751,17 @@
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val href: kotlin.String? { get; }
+/*∆*/     public open konst href: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val media: org.w3c.dom.css.MediaList { get; }
+/*∆*/     public open konst media: org.w3c.dom.css.MediaList { get; }
 /*∆*/ 
-/*∆*/     public open val ownerNode: org.w3c.dom.css.UnionElementOrProcessingInstruction? { get; }
+/*∆*/     public open konst ownerNode: org.w3c.dom.css.UnionElementOrProcessingInstruction? { get; }
 /*∆*/ 
-/*∆*/     public open val parentStyleSheet: org.w3c.dom.css.StyleSheet? { get; }
+/*∆*/     public open konst parentStyleSheet: org.w3c.dom.css.StyleSheet? { get; }
 /*∆*/ 
-/*∆*/     public open val title: kotlin.String? { get; }
+/*∆*/     public open konst title: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class StyleSheetList : org.w3c.dom.ItemArrayLike<org.w3c.dom.css.StyleSheet> {

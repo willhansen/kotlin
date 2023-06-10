@@ -43,25 +43,25 @@ fun <T> Any?.decodeOut1(typeFrom: Context<out T>): T {
 }
 
 fun <T> Any.decodeOut2(typeFrom: Context<out T>): T {
-    <!UNREACHABLE_CODE!>val x: Nothing =<!> this.decodeIn(typeFrom)
+    <!UNREACHABLE_CODE!>konst x: Nothing =<!> this.decodeIn(typeFrom)
 }
 
 fun <T> Any.decodeOut3(typeFrom: Context<out T>): T {
-    <!UNREACHABLE_CODE!>val x =<!> this.<!IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION!>decodeIn<!>(typeFrom)
+    <!UNREACHABLE_CODE!>konst x =<!> this.<!IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION!>decodeIn<!>(typeFrom)
 }
 
 fun <T> Any.decodeOut4(typeFrom: Context<out T>): T {
-    <!UNREACHABLE_CODE!>val x: Any =<!> this.<!IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION!>decodeIn<!>(typeFrom)
+    <!UNREACHABLE_CODE!>konst x: Any =<!> this.<!IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION!>decodeIn<!>(typeFrom)
 }
 
 class TrieNode<out E> {
     companion object {
-        internal val EMPTY = TrieNode<Nothing>()
+        internal konst EMPTY = TrieNode<Nothing>()
     }
 }
 class PersistentHashSet<out E>(root: TrieNode<E>) {
     companion object {
-        internal val EMPTY = PersistentHashSet(TrieNode.EMPTY)
+        internal konst EMPTY = PersistentHashSet(TrieNode.EMPTY)
     }
 }
 
@@ -69,7 +69,7 @@ interface F<in T>
 fun <T> F<T>.join() = {}
 
 fun main() {
-    val f: Any = Any()
+    konst f: Any = Any()
     (f as F<*>).join()
 }
 
@@ -89,10 +89,10 @@ interface Worker<out T>
 
 interface RenderContext<StateT, in OutputT : Any>
 
-val emptyOrNull: List<Nothing>? = null
-val x = emptyOrNull?.get(0)
+konst emptyOrNull: List<Nothing>? = null
+konst x = emptyOrNull?.get(0)
 
-val errorCompletion = { e: Throwable -> throw Exception() }
+konst errorCompletion = { e: Throwable -> throw Exception() }
 
 fun test1() {
     errorCompletion(Exception("fail"))

@@ -36,7 +36,7 @@ object FirExhaustiveWhenChecker : FirWhenExpressionChecker() {
     private fun reportNotExhaustive(whenExpression: FirWhenExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (whenExpression.isExhaustive) return
 
-        val source = whenExpression.source ?: return
+        konst source = whenExpression.source ?: return
 
         if (whenExpression.usedAsExpression) {
             if (source.isIfExpression) {
@@ -46,9 +46,9 @@ object FirExhaustiveWhenChecker : FirWhenExpressionChecker() {
                 reporter.reportOn(source, FirErrors.NO_ELSE_IN_WHEN, whenExpression.missingCases, context)
             }
         } else {
-            val subjectType = whenExpression.subject?.typeRef?.coneType?.lowerBoundIfFlexible() ?: return
-            val subjectClassSymbol = subjectType.fullyExpandedType(context.session).toRegularClassSymbol(context.session) ?: return
-            val kind = when {
+            konst subjectType = whenExpression.subject?.typeRef?.coneType?.lowerBoundIfFlexible() ?: return
+            konst subjectClassSymbol = subjectType.fullyExpandedType(context.session).toRegularClassSymbol(context.session) ?: return
+            konst kind = when {
                 subjectClassSymbol.modality == Modality.SEALED -> AlgebraicTypeKind.Sealed
                 subjectClassSymbol.classKind == ClassKind.ENUM_CLASS -> AlgebraicTypeKind.Enum
                 subjectType.isBooleanOrNullableBoolean -> AlgebraicTypeKind.Boolean
@@ -63,10 +63,10 @@ object FirExhaustiveWhenChecker : FirWhenExpressionChecker() {
         }
     }
 
-    private val FirWhenExpression.missingCases: List<WhenMissingCase>
+    private konst FirWhenExpression.missingCases: List<WhenMissingCase>
         get() = (exhaustivenessStatus as ExhaustivenessStatus.NotExhaustive).reasons
 
-    private enum class AlgebraicTypeKind(val displayName: String) {
+    private enum class AlgebraicTypeKind(konst displayName: String) {
         Sealed("sealed class/interface"),
         Enum("enum"),
         Boolean("Boolean")
@@ -77,18 +77,18 @@ object FirExhaustiveWhenChecker : FirWhenExpressionChecker() {
         reporter: DiagnosticReporter,
         context: CheckerContext
     ) {
-        val branchesCount = expression.branches.size
+        konst branchesCount = expression.branches.size
         for (indexedValue in expression.branches.withIndex()) {
-            val branch = indexedValue.value
+            konst branch = indexedValue.konstue
             if (branch.condition is FirElseIfTrueCondition && indexedValue.index < branchesCount - 1) {
                 reporter.reportOn(branch.source, FirErrors.ELSE_MISPLACED_IN_WHEN, context)
             }
         }
     }
 
-    private val KtSourceElement.isIfExpression: Boolean
+    private konst KtSourceElement.isIfExpression: Boolean
         get() = elementType == KtNodeTypes.IF
 
-    private val KtSourceElement.isWhenExpression: Boolean
+    private konst KtSourceElement.isWhenExpression: Boolean
         get() = elementType == KtNodeTypes.WHEN
 }

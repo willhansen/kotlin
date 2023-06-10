@@ -23,7 +23,7 @@ import kotlin.experimental.ExperimentalTypeInference
  * ```
  * and use it like
  * ```
- * val result = sequence { yield("result") }
+ * konst result = sequence { yield("result") }
  * ```
  * Here the type argument of the resulting sequence is inferred to `String` from
  * the argument of the [SequenceScope.yield] function, that is called inside the lambda passed to [sequence].
@@ -38,10 +38,10 @@ public annotation class BuilderInference
 
 
 /**
- * Enables overload selection based on the type of the value returned from lambda argument.
+ * Enables overload selection based on the type of the konstue returned from lambda argument.
  *
  * When two or more function overloads have otherwise the same parameter lists that differ only in the return type
- * of a functional parameter, this annotation enables overload selection by the type of the value returned from
+ * of a functional parameter, this annotation enables overload selection by the type of the konstue returned from
  * the lambda function passed to this functional parameter.
  *
  * Example:
@@ -51,10 +51,10 @@ public annotation class BuilderInference
  *
  * fun create(doubleProducer: () -> Double): Double
  *
- * val newValue = create { 3.14 }
+ * konst newValue = create { 3.14 }
  * ```
  *
- * The annotation being applied to one of overloads allows to resolve this ambiguity by analyzing what value is returned
+ * The annotation being applied to one of overloads allows to resolve this ambiguity by analyzing what konstue is returned
  * from the lambda function.
  *
  * This annotation is also used to discriminate the annotated overloads in case if overload selection still cannot

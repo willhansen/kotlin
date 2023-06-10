@@ -17,8 +17,8 @@ import java.nio.file.Path
 
 abstract class AbstractSymbolLightClassesByFqNameTest(
     configurator: AnalysisApiTestConfigurator,
-    override val currentExtension: String,
-    override val isTestAgainstCompiledCode: Boolean,
+    override konst currentExtension: String,
+    override konst isTestAgainstCompiledCode: Boolean,
 ) : AbstractSymbolLightClassesTestBase(configurator) {
     override fun getRenderResult(ktFile: KtFile, ktFiles: List<KtFile>, testDataFile: Path, module: TestModule, project: Project): String {
         return LightClassTestCommon.getActualLightClassText(

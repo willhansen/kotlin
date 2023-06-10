@@ -25,7 +25,7 @@ FILE: invokeAmbiguity.kt
         }
 
     }
-    public final val R|C|.attr: R|A|
+    public final konst R|C|.attr: R|A|
         public get(): R|A| {
             ^ R|kotlin/TODO|()
         }
@@ -35,7 +35,7 @@ FILE: invokeAmbiguity.kt
         }
 
     }
-    public final val R|D|.attr: R|B|
+    public final konst R|D|.attr: R|B|
         public get(): R|B| {
             ^ R|kotlin/TODO|()
         }

@@ -50,17 +50,17 @@ class FirEnumEntryBuilder : FirAnnotationContainerBuilder {
     lateinit var moduleData: FirModuleData
     lateinit var origin: FirDeclarationOrigin
     var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
-    val typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
+    konst typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
     lateinit var status: FirDeclarationStatus
     lateinit var returnTypeRef: FirTypeRef
     var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     var containerSource: DeserializedContainerSource? = null
     var dispatchReceiverType: ConeSimpleKotlinType? = null
-    val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     lateinit var name: Name
     var initializer: FirExpression? = null
     var backingField: FirBackingField? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var symbol: FirEnumEntrySymbol
 
     override fun build(): FirEnumEntry {

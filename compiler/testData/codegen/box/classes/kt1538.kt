@@ -1,17 +1,17 @@
 // KJS_WITH_FULL_RUNTIME
-data class Pair<First, Second>(val first: First, val second: Second)
+data class Pair<First, Second>(konst first: First, konst second: Second)
 
 fun parseCatalogs(hashMap: Any?) {
-    val r = toHasMap(hashMap)
+    konst r = toHasMap(hashMap)
     if (!r.first) {
         return
     }
-    val nodes = r.second
+    konst nodes = r.second
 }
 
-fun toHasMap(value: Any?): Pair<Boolean, HashMap<String, Any?>?> {
-    if(value is HashMap<*, *>) {
-        return Pair(true, value as HashMap<String, Any?>)
+fun toHasMap(konstue: Any?): Pair<Boolean, HashMap<String, Any?>?> {
+    if(konstue is HashMap<*, *>) {
+        return Pair(true, konstue as HashMap<String, Any?>)
     }
     return Pair(false, null as HashMap<String, Any?>?)
 }

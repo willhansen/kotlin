@@ -1,11 +1,11 @@
 class Test {
-    val simple: String = "123"
+    konst simple: String = "123"
 
-    val inferType = simple.length.toString() + "4891"
+    konst inferType = simple.length.toString() + "4891"
 
-    val getter: String = "O"
+    konst getter: String = "O"
         get() = { field }() + "K"
 
-    val constJavaClassValue: Class<*> = String::class.java
-    val constClassValue: kotlin.reflect.KClass<*> = (String::class)
+    konst constJavaClassValue: Class<*> = String::class.java
+    konst constClassValue: kotlin.reflect.KClass<*> = (String::class)
 }

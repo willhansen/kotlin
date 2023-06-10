@@ -28,11 +28,11 @@ object Bar {
 }
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
     if (foo.test()) return "Fail 1"
     if (!foo.test()) return "Fail 2"
 
-    val bar = Bar
+    konst bar = Bar
     if (bar.test()) return "Fail 3"
     if (!bar.test()) return "Fail 4"
 

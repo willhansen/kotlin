@@ -26,8 +26,8 @@ fun withVarargClassType(vararg args: A): String {
 }
 
 @CompileTimeCalculation
-class A(val i: Int)
+class A(konst i: Int)
 
-const val a = <!EVALUATED: `size = 3; sum = 6`!>withVararg(1, 2, 3)<!>
-const val b = <!EVALUATED: `size = 3; join = 1 2.0 a `!>withVarargUnknownType(1, 2.0, "a")<!>
-const val c = <!EVALUATED: `size = 3; join = 1 2 3 `!>withVarargClassType(A(1), A(2), A(3))<!>
+const konst a = <!EVALUATED: `size = 3; sum = 6`!>withVararg(1, 2, 3)<!>
+const konst b = <!EVALUATED: `size = 3; join = 1 2.0 a `!>withVarargUnknownType(1, 2.0, "a")<!>
+const konst c = <!EVALUATED: `size = 3; join = 1 2 3 `!>withVarargClassType(A(1), A(2), A(3))<!>

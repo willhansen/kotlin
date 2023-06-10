@@ -21,22 +21,22 @@ import org.jetbrains.kotlin.load.java.structure.JavaValueParameter
 import java.lang.reflect.Constructor
 import java.lang.reflect.Modifier
 
-class ReflectJavaConstructor(override val member: Constructor<*>) : ReflectJavaMember(), JavaConstructor {
+class ReflectJavaConstructor(override konst member: Constructor<*>) : ReflectJavaMember(), JavaConstructor {
     // TODO: test local/anonymous classes
-    override val valueParameters: List<JavaValueParameter>
+    override konst konstueParameters: List<JavaValueParameter>
         get() {
-            val types = member.genericParameterTypes
+            konst types = member.genericParameterTypes
             if (types.isEmpty()) return emptyList()
 
-            val klass = member.declaringClass
+            konst klass = member.declaringClass
 
-            val realTypes = when {
+            konst realTypes = when {
                 klass.declaringClass != null && !Modifier.isStatic(klass.modifiers) -> types.copyOfRange(1, types.size)
                 else -> types
             }
 
-            val annotations = member.parameterAnnotations
-            val realAnnotations = when {
+            konst annotations = member.parameterAnnotations
+            konst realAnnotations = when {
                 annotations.size < realTypes.size -> throw IllegalStateException("Illegal generic signature: $member")
                 annotations.size > realTypes.size -> annotations.copyOfRange(annotations.size - realTypes.size, annotations.size)
                 else -> annotations
@@ -45,6 +45,6 @@ class ReflectJavaConstructor(override val member: Constructor<*>) : ReflectJavaM
             return getValueParameters(realTypes, realAnnotations, member.isVarArgs)
         }
 
-    override val typeParameters: List<ReflectJavaTypeParameter>
+    override konst typeParameters: List<ReflectJavaTypeParameter>
         get() = member.typeParameters.map(::ReflectJavaTypeParameter)
 }

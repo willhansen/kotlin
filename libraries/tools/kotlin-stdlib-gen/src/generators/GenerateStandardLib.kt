@@ -17,7 +17,7 @@ import kotlin.system.exitProcess
  * at runtime.
  */
 fun main(args: Array<String>) {
-    val templateGroups = sequenceOf<TemplateGroup>(
+    konst templateGroups = sequenceOf<TemplateGroup>(
         Elements,
         Filtering,
         Ordering,
@@ -35,11 +35,11 @@ fun main(args: Array<String>) {
         ComparableOps
     )
 
-    val targetBaseDirs = mutableMapOf<KotlinTarget, File>()
+    konst targetBaseDirs = mutableMapOf<KotlinTarget, File>()
 
     when (args.size) {
         1 -> {
-            val baseDir = File(args.first())
+            konst baseDir = File(args.first())
             targetBaseDirs[KotlinTarget.Common] = baseDir.resolveExistingDir("libraries/stdlib/common/src/generated")
             targetBaseDirs[KotlinTarget.JVM] = baseDir.resolveExistingDir("libraries/stdlib/jvm/src/generated")
             targetBaseDirs[KotlinTarget.JS] = baseDir.resolveExistingDir("libraries/stdlib/js/src/generated")
@@ -56,8 +56,8 @@ fun main(args: Array<String>) {
     }
 
     templateGroups.groupByFileAndWrite(targetsToGenerate = targetBaseDirs.keys) { (target, source) ->
-        val targetDir = targetBaseDirs[target] ?: error("Target $target directory is not configured")
-        val platformSuffix = when (val platform = target.platform) {
+        konst targetDir = targetBaseDirs[target] ?: error("Target $target directory is not configured")
+        konst platformSuffix = when (konst platform = target.platform) {
             Platform.Common -> ""
             Platform.Native -> if (target.backend == Backend.Wasm) "Wasm" else "Native"
             else -> platform.name.lowercase().capitalize()

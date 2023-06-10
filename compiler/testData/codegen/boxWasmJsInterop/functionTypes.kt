@@ -97,7 +97,7 @@ external interface EI
 external fun is123Array(x: EI): Boolean
 external fun create123Array(): EI
 
-data class DC(val x: Int, val y: Int)
+data class DC(konst x: Int, konst y: Int)
 typealias JSDC = JsReference<DC>
 
 external fun extenalWithLambda(
@@ -136,11 +136,11 @@ fun complexHigherOrder(x: (SS2S, SS2S) -> SS2S): (SS2S, SS2S) -> SS2S =
     { ss2s1: SS2S, ss2s2: SS2S -> x(ss2s1, ss2s2) }
 
 fun complexHigherOrerTest() {
-    val x = { ss2s1: SS2S, ss2s2: SS2S ->
+    konst x = { ss2s1: SS2S, ss2s2: SS2S ->
         { s1: String, s2: String -> ss2s1(s1, s2) + "_" + ss2s2(s1, s2) }
     }
-    val y = complexHigherOrder(x)
-    val res = y({s1, s2 -> s1 + "+" + s2}, {s1, s2 -> s1 + "-" + s2})("abc", "xyz")
+    konst y = complexHigherOrder(x)
+    konst res = y({s1, s2 -> s1 + "+" + s2}, {s1, s2 -> s1 + "-" + s2})("abc", "xyz")
     if (res != "abc+xyz_abc-xyz") {
         error("Fail complexHigherOrderTest $res")
     }
@@ -148,7 +148,7 @@ fun complexHigherOrerTest() {
 
 
 fun box(): String {
-    val res = apply7 { s1 -> { s2 -> { s3 -> { s4 -> { s5 -> { s6 -> { s7 -> s1 + s2 + s3 + s4 + s5 + s6 + s7 } } } } } } }
+    konst res = apply7 { s1 -> { s2 -> { s3 -> { s4 -> { s5 -> { s6 -> { s7 -> s1 + s2 + s3 + s4 + s5 + s6 + s7 } } } } } } }
     if (res != "abcdefg") return "Fail"
 
     var extenalWithLambdasCount = 0
@@ -167,7 +167,7 @@ fun box(): String {
                         string: String,
                         ei: EI,
                         jsdc: JSDC ->
-            val dc = jsdc.get()
+            konst dc = jsdc.get()
             test(bool == true)
             test(byte == 1.toByte())
             test(short == 2.toShort())
@@ -184,7 +184,7 @@ fun box(): String {
 
     if (extenalWithLambdasCount != 11) return "Fail 1"
 
-    val externalWithLambdas2Count = externalWithLambdas2(
+    konst externalWithLambdas2Count = externalWithLambdas2(
         boolean = { true },
         byte = { 100.toByte() },
         short = { 200.toShort() },
@@ -200,8 +200,8 @@ fun box(): String {
     )
     if (externalWithLambdas2Count != 11) return "Fail externalWithLambdas2"
 
-    val externalWithLambdas2Ref = ::externalWithLambdas2
-    val externalWithLambdas2RefCount = externalWithLambdas2Ref.invoke(
+    konst externalWithLambdas2Ref = ::externalWithLambdas2
+    konst externalWithLambdas2RefCount = externalWithLambdas2Ref.invoke(
         { true },
         { 100.toByte() },
         { 200.toShort() },
@@ -217,9 +217,9 @@ fun box(): String {
     )
     if (externalWithLambdas2RefCount != 11) return "Fail externalWithLambdas2"
 
-    val createJsLambdaRef = ::createJsLambda
+    konst createJsLambdaRef = ::createJsLambda
     for (jsLambda in arrayOf(createJsLambda(), createJsLambdaRef.invoke())) {
-        val jsLambdaCount = jsLambda(
+        konst jsLambdaCount = jsLambda(
             true,
             100.toByte(),
             200.toShort(),

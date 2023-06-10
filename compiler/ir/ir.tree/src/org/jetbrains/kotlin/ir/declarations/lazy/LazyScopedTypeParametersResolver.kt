@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.ir.util.ReferenceSymbolTable
 import org.jetbrains.kotlin.ir.util.TypeParametersResolver
 import java.util.*
 
-class LazyScopedTypeParametersResolver(private val symbolTable: ReferenceSymbolTable) : TypeParametersResolver {
+class LazyScopedTypeParametersResolver(private konst symbolTable: ReferenceSymbolTable) : TypeParametersResolver {
 
-    private val typeParameterScopes = ArrayDeque<IrTypeParametersContainer>()
+    private konst typeParameterScopes = ArrayDeque<IrTypeParametersContainer>()
 
     override fun enterTypeParameterScope(typeParametersContainer: IrTypeParametersContainer) {
         typeParameterScopes.addFirst(

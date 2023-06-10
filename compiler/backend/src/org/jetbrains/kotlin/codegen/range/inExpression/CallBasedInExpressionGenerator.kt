@@ -19,11 +19,11 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class CallBasedInExpressionGenerator(
-    val codegen: ExpressionCodegen,
+    konst codegen: ExpressionCodegen,
     operatorReference: KtSimpleNameExpression
 ) : InExpressionGenerator {
-    private val resolvedCall = operatorReference.getResolvedCallWithAssert(codegen.bindingContext)
-    private val isInverted = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
+    private konst resolvedCall = operatorReference.getResolvedCallWithAssert(codegen.bindingContext)
+    private konst isInverted = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
 
     override fun generate(argument: StackValue): BranchedValue =
         gen(argument).let { if (isInverted) Invert(it) else it }
@@ -41,7 +41,7 @@ class CallBasedInExpressionGenerator(
             }
 
             private fun invokeFunction(v: InstructionAdapter) {
-                val result = codegen.invokeFunction(resolvedCall.call, resolvedCall, none())
+                konst result = codegen.invokeFunction(resolvedCall.call, resolvedCall, none())
                 result.put(result.type, result.kotlinType, v)
             }
         }

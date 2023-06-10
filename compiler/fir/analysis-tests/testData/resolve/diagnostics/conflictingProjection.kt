@@ -2,17 +2,17 @@ class None<T>
 class In<in T>
 class Out<out T>
 
-fun a1(value: None<Int>) {}
-fun a2(value: None<in Int>) {}
-fun a3(value: None<out Int>) {}
+fun a1(konstue: None<Int>) {}
+fun a2(konstue: None<in Int>) {}
+fun a3(konstue: None<out Int>) {}
 
-fun a4(value: In<Int>) {}
-fun a5(value: In<<!REDUNDANT_PROJECTION!>in<!> Int>) {}
-fun a6(value: In<<!CONFLICTING_PROJECTION!>out<!> Int>) {}
+fun a4(konstue: In<Int>) {}
+fun a5(konstue: In<<!REDUNDANT_PROJECTION!>in<!> Int>) {}
+fun a6(konstue: In<<!CONFLICTING_PROJECTION!>out<!> Int>) {}
 
-fun a7(value: Out<Int>) {}
-fun a8(value: Out<<!CONFLICTING_PROJECTION!>in<!> Int>) {}
-fun a9(value: Out<<!REDUNDANT_PROJECTION!>out<!> Int>) {}
+fun a7(konstue: Out<Int>) {}
+fun a8(konstue: Out<<!CONFLICTING_PROJECTION!>in<!> Int>) {}
+fun a9(konstue: Out<<!REDUNDANT_PROJECTION!>out<!> Int>) {}
 
 typealias A1<K> = None<K>
 typealias A2<K> = None<in K>

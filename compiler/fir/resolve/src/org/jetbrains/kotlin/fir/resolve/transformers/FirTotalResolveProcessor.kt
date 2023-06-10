@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.fir.resolve.transformers.mpp.FirExpectActualMatcherP
 import org.jetbrains.kotlin.fir.resolve.transformers.plugin.*
 import org.jetbrains.kotlin.fir.withFileAnalysisExceptionWrapping
 
-class FirTotalResolveProcessor(private val session: FirSession) {
-    val scopeSession: ScopeSession = ScopeSession()
+class FirTotalResolveProcessor(private konst session: FirSession) {
+    konst scopeSession: ScopeSession = ScopeSession()
 
-    private val processors: List<FirResolveProcessor> = createAllCompilerResolveProcessors(
+    private konst processors: List<FirResolveProcessor> = createAllCompilerResolveProcessors(
         session,
         scopeSession
     )
@@ -62,8 +62,8 @@ private inline fun <T : FirResolveProcessor> createAllResolveProcessors(
     creator: FirResolvePhase.(ScopeSession) -> T
 ): List<T> {
     @Suppress("NAME_SHADOWING")
-    val scopeSession = scopeSession ?: ScopeSession()
-    val phases = FirResolvePhase.values().filter {
+    konst scopeSession = scopeSession ?: ScopeSession()
+    konst phases = FirResolvePhase.konstues().filter {
         !it.noProcessor
     }
     return phases.map { it.creator(scopeSession) }

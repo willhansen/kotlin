@@ -4,8 +4,8 @@ public fun test(): kotlin.Any?
 
 public final data class P {
     public constructor P(/*0*/ a: kotlin.Int, /*1*/ b: kotlin.Int)
-    public final val a: kotlin.Int
-    public final val b: kotlin.Int
+    public final konst a: kotlin.Int
+    public final konst b: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ a: kotlin.Int = ..., /*1*/ b: kotlin.Int = ...): P

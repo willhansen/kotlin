@@ -26,26 +26,26 @@ import org.jetbrains.kotlin.descriptors.Visibility
 interface CirDeclaration
 
 interface CirHasAnnotations {
-    val annotations: List<CirAnnotation>
+    konst annotations: List<CirAnnotation>
 }
 
 interface CirHasName {
-    val name: CirName
+    konst name: CirName
 }
 
 interface CirHasVisibility {
-    val visibility: Visibility
+    konst visibility: Visibility
 }
 
 interface CirHasModality {
-    val modality: Modality
+    konst modality: Modality
 }
 
 interface CirMaybeCallableMemberOfClass {
-    val containingClass: CirContainingClass? // null assumes no containing class
+    konst containingClass: CirContainingClass? // null assumes no containing class
 
     fun withContainingClass(containingClass: CirContainingClass): CirMaybeCallableMemberOfClass = object : CirMaybeCallableMemberOfClass {
-        override val containingClass: CirContainingClass = containingClass
+        override konst containingClass: CirContainingClass = containingClass
     }
 }
 
@@ -53,16 +53,16 @@ interface CirMaybeCallableMemberOfClass {
  * A subset of containing [CirClass] visible to such class members as [CirFunction], [CirProperty] and [CirClassConstructor].
  */
 interface CirContainingClass : CirHasModality {
-    val kind: ClassKind
-    val isData: Boolean
+    konst kind: ClassKind
+    konst isData: Boolean
 }
 
 interface CirHasTypeParameters {
-    val typeParameters: List<CirTypeParameter>
+    konst typeParameters: List<CirTypeParameter>
 }
 
 interface CirCallableMemberWithParameters {
-    var valueParameters: List<CirValueParameter>
+    var konstueParameters: List<CirValueParameter>
     var hasStableParameterNames: Boolean
 }
 
@@ -71,7 +71,7 @@ interface CirCallableMemberWithParameters {
  * NOTE: Interning can't be applied to the whole lifted declaration, only to its parts!
  */
 interface CirLiftedUpDeclaration : CirDeclaration {
-    val isLiftedUp: Boolean
+    konst isLiftedUp: Boolean
 }
 
 /** Indicates presence of recursion in lazy calculations. */

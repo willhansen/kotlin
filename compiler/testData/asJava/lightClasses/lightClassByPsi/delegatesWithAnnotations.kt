@@ -1,14 +1,14 @@
 import kotlin.reflect.KClass
 
-annotation class SimpleAnn(val value: String)
+annotation class SimpleAnn(konst konstue: String)
 
 annotation class Ann(
-    val x: Int,
-    val y: String,
-    val z: KClass<*>,
-    val e: Array<KClass<*>>,
-    val depr: DeprecationLevel,
-    vararg val t: SimpleAnn
+    konst x: Int,
+    konst y: String,
+    konst z: KClass<*>,
+    konst e: Array<KClass<*>>,
+    konst depr: DeprecationLevel,
+    vararg konst t: SimpleAnn
 )
 
 interface Base {

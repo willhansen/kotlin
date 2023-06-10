@@ -22,7 +22,7 @@ import org.codehaus.plexus.component.annotations.*
 import org.codehaus.plexus.logging.*
 import org.jetbrains.kotlin.maven.*
 
-val SAM_WITH_RECEIVER_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.samWithReceiver"
+konst SAM_WITH_RECEIVER_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.samWithReceiver"
 
 @Component(role = KotlinMavenPluginExtension::class, hint = "sam-with-receiver")
 class KotlinSamWithReceiverMavenPluginExtension : KotlinMavenPluginExtension {

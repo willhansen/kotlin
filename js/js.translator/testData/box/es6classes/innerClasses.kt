@@ -3,10 +3,10 @@
 abstract class A {
     abstract fun foo(): String
 
-    val ss = foo() + "K"
+    konst ss = foo() + "K"
 }
 
-class O(val s: String) {
+class O(konst s: String) {
     inner class I() : A() {
         override fun foo() = s
     }
@@ -15,6 +15,6 @@ class O(val s: String) {
 }
 
 fun box(): String {
-    val o = O("O")
+    konst o = O("O")
     return o.result()
 }

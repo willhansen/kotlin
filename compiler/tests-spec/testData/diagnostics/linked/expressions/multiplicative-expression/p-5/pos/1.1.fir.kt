@@ -12,12 +12,12 @@ class Case1(var a: Int) {
 }
 
 fun case1() {
-    val a = Case1(1) * 1
-    val b = Case1(1) * Case1( 1)
-    val c = Case1(1) / 1
-    val d = Case1(1) / Case1( 1)
-    val e = Case1(1) % 1
-    val f = Case1(1) % Case1( 1)
+    konst a = Case1(1) * 1
+    konst b = Case1(1) * Case1( 1)
+    konst c = Case1(1) / 1
+    konst d = Case1(1) / Case1( 1)
+    konst e = Case1(1) % 1
+    konst f = Case1(1) % Case1( 1)
 
     a checkType { check<Any?>() }
     b checkType { check<Any?>() }
@@ -38,12 +38,12 @@ class Case2(var a: Int) {
 }
 
 fun case2() {
-    val a = Case2(1) * 1
-    val b = Case2(1) * Case2( 1)
-    val c = Case2(1) / 1
-    val d = Case2(1) / Case2( 1)
-    val e = Case2(1) % 1
-    val f = Case2(1) % Case2( 1)
+    konst a = Case2(1) * 1
+    konst b = Case2(1) * Case2( 1)
+    konst c = Case2(1) / 1
+    konst d = Case2(1) / Case2( 1)
+    konst e = Case2(1) % 1
+    konst f = Case2(1) % Case2( 1)
 
     a checkType { check<Nothing?>() }
     b checkType { check<Nothing?>() }

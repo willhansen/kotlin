@@ -49,10 +49,10 @@ abstract class DataClassMethodGenerator(
     private fun generateComponentFunctionsForDataClasses() {
         // primary constructor should exist for data classes
         // but when generating light-classes still need to check we have one
-        val constructor = classDescriptor.unsubstitutedPrimaryConstructor ?: return
+        konst constructor = classDescriptor.unsubstitutedPrimaryConstructor ?: return
 
-        for (parameter in constructor.valueParameters) {
-            val function = bindingContext.get(BindingContext.DATA_CLASS_COMPONENT_FUNCTION, parameter)
+        for (parameter in constructor.konstueParameters) {
+            konst function = bindingContext.get(BindingContext.DATA_CLASS_COMPONENT_FUNCTION, parameter)
             if (function != null) {
                 generateComponentFunction(function, parameter)
             }
@@ -60,7 +60,7 @@ abstract class DataClassMethodGenerator(
     }
 
     private fun generateCopyFunctionForDataClasses(constructorParameters: List<KtParameter>) {
-        val copyFunction = bindingContext.get(BindingContext.DATA_CLASS_COPY_FUNCTION, classDescriptor) ?: return
+        konst copyFunction = bindingContext.get(BindingContext.DATA_CLASS_COPY_FUNCTION, classDescriptor) ?: return
         generateCopyFunction(copyFunction, constructorParameters)
     }
 }

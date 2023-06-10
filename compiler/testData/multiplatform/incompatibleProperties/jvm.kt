@@ -1,2 +1,2 @@
-actual var pval: String = ""
-actual val pvar: String = ""
+actual var pkonst: String = ""
+actual konst pvar: String = ""

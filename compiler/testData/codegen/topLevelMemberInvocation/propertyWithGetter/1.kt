@@ -1,6 +1,6 @@
 package a
 
-val prop: Int = 0
+konst prop: Int = 0
     get() {
         return field + 1
     }

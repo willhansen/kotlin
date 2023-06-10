@@ -4,7 +4,7 @@
 
 <!JVM_RECORD_REQUIRES_JDK15!>@JvmRecord<!>
 class MyRec(
-    val x: String,
-    val y: Int,
-    vararg val z: Double,
+    konst x: String,
+    konst y: Int,
+    vararg konst z: Double,
 )

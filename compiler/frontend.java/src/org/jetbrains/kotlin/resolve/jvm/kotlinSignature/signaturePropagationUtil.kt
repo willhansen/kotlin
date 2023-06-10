@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.resolve.jvm.kotlinSignature
 
 import org.jetbrains.kotlin.descriptors.FunctionDescriptor
 
-internal fun FunctionDescriptor.containsVarargs() = valueParameters.any { it.varargElementType != null }
+internal fun FunctionDescriptor.containsVarargs() = konstueParameters.any { it.varargElementType != null }
 
 internal fun Collection<FunctionDescriptor>.containsAnyNotTrivialSignature() = any { it.hasNotTrivialSignature() }
 

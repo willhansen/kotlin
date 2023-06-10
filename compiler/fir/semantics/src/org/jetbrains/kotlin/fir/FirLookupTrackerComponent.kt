@@ -20,7 +20,7 @@ abstract class FirLookupTrackerComponent : FirSessionComponent {
 
 fun FirLookupTrackerComponent.recordCallLookup(callInfo: AbstractCallInfo, inType: ConeKotlinType) {
     if (inType.classId?.isLocal == true) return
-    val scopes = SmartList(inType.renderForDebugging().replace('/', '.'))
+    konst scopes = SmartList(inType.renderForDebugging().replace('/', '.'))
     if (inType.classId?.shortClassName?.asString() == "Companion") {
         scopes.add(inType.classId!!.outerClassId!!.asString().replace('/', '.'))
     }
@@ -59,4 +59,4 @@ fun FirLookupTrackerComponent.recordTypeResolveAsLookup(typeRef: FirTypeRef, sou
 }
 
 
-val FirSession.lookupTracker: FirLookupTrackerComponent? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.lookupTracker: FirLookupTrackerComponent? by FirSession.nullableSessionComponentAccessor()

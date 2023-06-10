@@ -25,15 +25,15 @@ import org.jetbrains.kotlin.utils.PathUtil
 import org.jetbrains.kotlinx.atomicfu.compiler.extensions.AtomicfuComponentRegistrar
 import java.io.File
 
-private val coreLibraryPath = getLibraryJar("kotlinx.atomicfu.AtomicFU")
-private val kotlinTestPath = getLibraryJar("kotlin.test.AssertionsKt")
-private val javaUtilConcurrentPath = getLibraryJar("java.util.concurrent.atomic.AtomicIntegerFieldUpdater")
-private val kotlinJvm = getLibraryJar("kotlin.jvm.JvmField")
+private konst coreLibraryPath = getLibraryJar("kotlinx.atomicfu.AtomicFU")
+private konst kotlinTestPath = getLibraryJar("kotlin.test.AssertionsKt")
+private konst javaUtilConcurrentPath = getLibraryJar("java.util.concurrent.atomic.AtomicIntegerFieldUpdater")
+private konst kotlinJvm = getLibraryJar("kotlin.jvm.JvmField")
 
 open class AbstractAtomicfuJvmIrTest : AbstractIrBlackBoxCodegenTest() {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
-        val librariesPaths = listOf(coreLibraryPath!!, kotlinTestPath!!, javaUtilConcurrentPath!!, kotlinJvm!!)
+        konst librariesPaths = listOf(coreLibraryPath!!, kotlinTestPath!!, javaUtilConcurrentPath!!, kotlinJvm!!)
         builder.configureForKotlinxAtomicfu(librariesPaths)
     }
 }

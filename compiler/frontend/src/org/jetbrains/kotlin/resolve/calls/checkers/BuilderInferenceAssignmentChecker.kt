@@ -21,19 +21,19 @@ import org.jetbrains.kotlin.types.isError
 
 object BuilderInferenceAssignmentChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
         if (resultingDescriptor !is PropertyDescriptor) return
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.NoBuilderInferenceWithoutAnnotationRestriction)) return
         if (resolvedCall.candidateDescriptor.returnType !is StubTypeForBuilderInference) return
-        val callElement = resolvedCall.call.callElement
+        konst callElement = resolvedCall.call.callElement
         if (callElement !is KtNameReferenceExpression) return
-        val binaryExpression = callElement.getParentOfType<KtBinaryExpression>(strict = true) ?: return
+        konst binaryExpression = callElement.getParentOfType<KtBinaryExpression>(strict = true) ?: return
         if (binaryExpression.operationToken != KtTokens.EQ) return
         if (!BasicExpressionTypingVisitor.isLValue(callElement, binaryExpression)) return
 
-        val leftType = resultingDescriptor.returnType?.takeIf { !it.isError } ?: return
-        val right = binaryExpression.right ?: return
-        val rightType = right.getType(context.trace.bindingContext) ?: return
+        konst leftType = resultingDescriptor.returnType?.takeIf { !it.isError } ?: return
+        konst right = binaryExpression.right ?: return
+        konst rightType = right.getType(context.trace.bindingContext) ?: return
 
         if (isAssignmentCorrectWithDataFlowInfo(leftType, right, rightType, context)) return
         context.trace.report(Errors.TYPE_MISMATCH.on(right, leftType, rightType))

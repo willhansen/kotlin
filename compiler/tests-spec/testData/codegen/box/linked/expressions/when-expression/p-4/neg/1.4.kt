@@ -17,9 +17,9 @@ sealed class SClass {
 }
 
 fun box(): String {
-    val x: SClass = SClass.B()
+    konst x: SClass = SClass.B()
 
-    val when1 = when (x){
+    konst when1 = when (x){
         is  SClass.A ->{ "NOK"}
         is  SClass.B ->{ "OK" }
         is  SClass.B ->{ "NOK" }

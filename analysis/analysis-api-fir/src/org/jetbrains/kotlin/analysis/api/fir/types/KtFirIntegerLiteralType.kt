@@ -18,26 +18,26 @@ import org.jetbrains.kotlin.fir.types.ConeIntegerLiteralConstantType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirIntegerLiteralType(
-    override val coneType: ConeIntegerLiteralConstantType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeIntegerLiteralConstantType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtIntegerLiteralType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val isUnsigned: Boolean get() = withValidityAssertion { coneType.isUnsigned }
+    override konst isUnsigned: Boolean get() = withValidityAssertion { coneType.isUnsigned }
 
-    override val value: Long get() = withValidityAssertion { coneType.value }
+    override konst konstue: Long get() = withValidityAssertion { coneType.konstue }
 
-    override val possibleTypes: List<KtClassType> by cached {
+    override konst possibleTypes: List<KtClassType> by cached {
         coneType.possibleTypes.map { possibleType ->
             builder.typeBuilder.buildKtType(possibleType) as KtClassType
         }
     }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
     override fun asStringForDebugging(): String = withValidityAssertion { coneType.renderForDebugging() }
     override fun equals(other: Any?) = typeEquals(other)

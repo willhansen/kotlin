@@ -11,7 +11,7 @@ public class A {
 package base
 
 open class B : A() {
-    private val f = "FAIL"
+    private konst f = "FAIL"
 }
 
 // FILE: C.java

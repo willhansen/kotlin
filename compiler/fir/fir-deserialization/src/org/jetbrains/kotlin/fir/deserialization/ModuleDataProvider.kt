@@ -12,19 +12,19 @@ import org.jetbrains.kotlin.utils.addToStdlib.same
 import java.nio.file.Path
 
 abstract class ModuleDataProvider {
-    abstract val platform: TargetPlatform
-    abstract val analyzerServices: PlatformDependentAnalyzerServices
-    abstract val allModuleData: Collection<FirModuleData>
+    abstract konst platform: TargetPlatform
+    abstract konst analyzerServices: PlatformDependentAnalyzerServices
+    abstract konst allModuleData: Collection<FirModuleData>
 
     abstract fun getModuleData(path: Path?): FirModuleData?
 }
 
-class SingleModuleDataProvider(private val moduleData: FirModuleData) : ModuleDataProvider() {
-    override val platform: TargetPlatform
+class SingleModuleDataProvider(private konst moduleData: FirModuleData) : ModuleDataProvider() {
+    override konst platform: TargetPlatform
         get() = moduleData.platform
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices
         get() = moduleData.analyzerServices
-    override val allModuleData: Collection<FirModuleData>
+    override konst allModuleData: Collection<FirModuleData>
         get() = listOf(moduleData)
 
     override fun getModuleData(path: Path?): FirModuleData {
@@ -32,7 +32,7 @@ class SingleModuleDataProvider(private val moduleData: FirModuleData) : ModuleDa
     }
 }
 
-class MultipleModuleDataProvider(private val moduleDataWithFilters: Map<FirModuleData, LibraryPathFilter>) : ModuleDataProvider() {
+class MultipleModuleDataProvider(private konst moduleDataWithFilters: Map<FirModuleData, LibraryPathFilter>) : ModuleDataProvider() {
     init {
         require(moduleDataWithFilters.isNotEmpty()) { "ModuleDataProvider must contain at least one module data" }
         require(moduleDataWithFilters.keys.same { it.platform }) {
@@ -43,11 +43,11 @@ class MultipleModuleDataProvider(private val moduleDataWithFilters: Map<FirModul
         }
     }
 
-    override val platform: TargetPlatform = allModuleData.first().platform
+    override konst platform: TargetPlatform = allModuleData.first().platform
 
-    override val analyzerServices: PlatformDependentAnalyzerServices = allModuleData.first().analyzerServices
+    override konst analyzerServices: PlatformDependentAnalyzerServices = allModuleData.first().analyzerServices
 
-    override val allModuleData: Collection<FirModuleData>
+    override konst allModuleData: Collection<FirModuleData>
         get() = moduleDataWithFilters.keys
 
     override fun getModuleData(path: Path?): FirModuleData? {
@@ -61,10 +61,10 @@ class MultipleModuleDataProvider(private val moduleDataWithFilters: Map<FirModul
 }
 
 class EmptyModuleDataProvider(
-    override val platform: TargetPlatform,
-    override val analyzerServices: PlatformDependentAnalyzerServices
+    override konst platform: TargetPlatform,
+    override konst analyzerServices: PlatformDependentAnalyzerServices
 ) : ModuleDataProvider() {
-    override val allModuleData: Collection<FirModuleData> get() = emptyList()
+    override konst allModuleData: Collection<FirModuleData> get() = emptyList()
 
     override fun getModuleData(path: Path?): FirModuleData? = null
 }

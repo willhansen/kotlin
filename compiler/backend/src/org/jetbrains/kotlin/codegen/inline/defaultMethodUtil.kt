@@ -28,29 +28,29 @@ import org.jetbrains.org.objectweb.asm.tree.*
 import kotlin.math.max
 
 private data class Condition(
-    val mask: Int, val constant: Int,
-    val maskInstruction: VarInsnNode,
-    val jumpInstruction: JumpInsnNode,
-    val varInsNode: VarInsnNode?
+    konst mask: Int, konst constant: Int,
+    konst maskInstruction: VarInsnNode,
+    konst jumpInstruction: JumpInsnNode,
+    konst varInsNode: VarInsnNode?
 ) {
-    val expandNotDelete = mask and constant != 0
-    val varIndex = varInsNode?.`var` ?: 0
+    konst expandNotDelete = mask and constant != 0
+    konst varIndex = varInsNode?.`var` ?: 0
 }
 
-class ExtractedDefaultLambda(val type: Type, val capturedArgs: Array<Type>, val offset: Int, val needReification: Boolean)
+class ExtractedDefaultLambda(konst type: Type, konst capturedArgs: Array<Type>, konst offset: Int, konst needReification: Boolean)
 
 fun expandMaskConditionsAndUpdateVariableNodes(
     node: MethodNode,
     maskStartIndex: Int,
     masks: List<Int>,
     methodHandlerIndex: Int,
-    validOffsets: Collection<Int>
+    konstidOffsets: Collection<Int>
 ): List<ExtractedDefaultLambda> {
     fun isMaskIndex(varIndex: Int): Boolean {
         return maskStartIndex <= varIndex && varIndex < maskStartIndex + masks.size
     }
 
-    val maskProcessingHeader = node.instructions.asSequence().takeWhile {
+    konst maskProcessingHeader = node.instructions.asSequence().takeWhile {
         if (it is VarInsnNode) {
             if (isMaskIndex(it.`var`)) {
                 /*if slot for default mask is updated than we occurred in actual function body*/
@@ -62,12 +62,12 @@ fun expandMaskConditionsAndUpdateVariableNodes(
         true
     }
 
-    val conditions = maskProcessingHeader.filterIsInstance<VarInsnNode>().mapNotNull {
+    konst conditions = maskProcessingHeader.filterIsInstance<VarInsnNode>().mapNotNull {
         if (isMaskIndex(it.`var`) &&
             it.next?.next?.opcode == Opcodes.IAND &&
             it.next.next.next?.opcode == Opcodes.IFEQ
         ) {
-            val jumpInstruction = it.next?.next?.next as JumpInsnNode
+            konst jumpInstruction = it.next?.next?.next as JumpInsnNode
             Condition(
                 masks[it.`var` - maskStartIndex],
                 getConstant(it.next),
@@ -85,15 +85,15 @@ fun expandMaskConditionsAndUpdateVariableNodes(
         } else null
     }.toList()
 
-    val toDelete = linkedSetOf<AbstractInsnNode>()
-    val toInsert = arrayListOf<Pair<AbstractInsnNode, AbstractInsnNode>>()
+    konst toDelete = linkedSetOf<AbstractInsnNode>()
+    konst toInsert = arrayListOf<Pair<AbstractInsnNode, AbstractInsnNode>>()
 
-    val extractable = conditions.filter { it.expandNotDelete && it.varIndex in validOffsets }
-    val defaultLambdasInfo = extractDefaultLambdasInfo(extractable, toDelete, toInsert)
+    konst extractable = conditions.filter { it.expandNotDelete && it.varIndex in konstidOffsets }
+    konst defaultLambdasInfo = extractDefaultLambdasInfo(extractable, toDelete, toInsert)
 
-    val indexToVarNode = node.localVariables?.filter { it.index < maskStartIndex }?.associateBy { it.index } ?: emptyMap()
+    konst indexToVarNode = node.localVariables?.filter { it.index < maskStartIndex }?.associateBy { it.index } ?: emptyMap()
     conditions.forEach {
-        val jumpInstruction = it.jumpInstruction
+        konst jumpInstruction = it.jumpInstruction
         InsnSequence(it.maskInstruction, (if (it.expandNotDelete) jumpInstruction.next else jumpInstruction.label)).forEach {
             toDelete.add(it)
         }
@@ -109,7 +109,7 @@ fun expandMaskConditionsAndUpdateVariableNodes(
     }
 
     node.localVariables.removeIf {
-        (it.start in toDelete && it.end in toDelete) || validOffsets.contains(it.index)
+        (it.start in toDelete && it.end in toDelete) || konstidOffsets.contains(it.index)
     }
 
     node.tryCatchBlocks.removeIf {
@@ -127,17 +127,17 @@ private fun extractDefaultLambdasInfo(
     toInsert: MutableList<Pair<AbstractInsnNode, AbstractInsnNode>>
 ): List<ExtractedDefaultLambda> {
     return conditions.map {
-        val varAssignmentInstruction = it.varInsNode!!
+        konst varAssignmentInstruction = it.varInsNode!!
         var instanceInstuction = varAssignmentInstruction.previous
         if (instanceInstuction is TypeInsnNode && instanceInstuction.opcode == Opcodes.CHECKCAST) {
             instanceInstuction = instanceInstuction.previous
         }
 
-        val (owner, argTypes, needReification) = when (instanceInstuction) {
+        konst (owner, argTypes, needReification) = when (instanceInstuction) {
             is MethodInsnNode -> {
                 assert(instanceInstuction.name == "<init>") { "Expected constructor call for default lambda, but $instanceInstuction" }
-                val ownerInternalName = instanceInstuction.owner
-                val instanceCreation = InsnSequence(it.jumpInstruction, it.jumpInstruction.label).filter {
+                konst ownerInternalName = instanceInstuction.owner
+                konst instanceCreation = InsnSequence(it.jumpInstruction, it.jumpInstruction.label).filter {
                     it.opcode == Opcodes.NEW && (it as TypeInsnNode).desc == ownerInternalName
                 }.single()
 
@@ -150,7 +150,7 @@ private fun extractDefaultLambdasInfo(
                     addAll(InsnSequence(instanceInstuction, varAssignmentInstruction.next).toList())
                 }
 
-                val needReification =
+                konst needReification =
                     instanceCreation.previous.takeIf { isNeedClassReificationMarker(it) }?.let { toDelete.add(it) } != null
                 Triple(Type.getObjectType(instanceInstuction.owner), Type.getArgumentTypes(instanceInstuction.desc), needReification)
             }
@@ -158,7 +158,7 @@ private fun extractDefaultLambdasInfo(
             is FieldInsnNode -> {
                 toDelete.addAll(InsnSequence(instanceInstuction, varAssignmentInstruction.next).toList())
 
-                val needReification =
+                konst needReification =
                     instanceInstuction.previous.takeIf { isNeedClassReificationMarker(it) }?.let { toDelete.add(it) } != null
 
                 Triple(Type.getObjectType(instanceInstuction.owner), emptyArray<Type>(), needReification)
@@ -189,8 +189,8 @@ fun loadDefaultLambdaBody(classBytes: ByteArray, classType: Type, isPropertyRefe
     // as the type of this object may be any subtype of the parameter's type. All we know is that Function<N>
     // has to have a `invoke` that takes `Object`s and returns an `Object`; everything else needs to be figured
     // out from its contents. TODO: for > 22 arguments, the only argument is an array. `MethodInliner` can't do that.
-    val invokeName = if (isPropertyReference) OperatorNameConventions.GET.asString() else OperatorNameConventions.INVOKE.asString()
-    val invokeNode = getMethodNode(classBytes, classType) {
+    konst invokeName = if (isPropertyReference) OperatorNameConventions.GET.asString() else OperatorNameConventions.INVOKE.asString()
+    konst invokeNode = getMethodNode(classBytes, classType) {
         it.name == invokeName && it.returnType == AsmTypes.OBJECT_TYPE && it.argumentTypes.all { arg -> arg == AsmTypes.OBJECT_TYPE }
     } ?: error("can't find erased invoke '$invokeName(Object...): Object' in default lambda '${classType.internalName}'")
     return if (invokeNode.node.access.and(Opcodes.ACC_BRIDGE) == 0)
@@ -201,17 +201,17 @@ fun loadDefaultLambdaBody(classBytes: ByteArray, classType: Type, isPropertyRefe
 
 private fun MethodNode.inlineBridge(classBytes: ByteArray, classType: Type): SMAPAndMethodNode {
     // If the erased invoke is a bridge, we need to locate the unboxed invoke and inline it. As mentioned above,
-    // we don't know what the Kotlin types of its arguments/returned value are, so we can't generate our own
+    // we don't know what the Kotlin types of its arguments/returned konstue are, so we can't generate our own
     // boxing/unboxing code; luckily, the bridge already has that.
-    val invokeInsn = instructions.singleOrNull { it is MethodInsnNode && it.owner == classType.internalName } as MethodInsnNode?
+    konst invokeInsn = instructions.singleOrNull { it is MethodInsnNode && it.owner == classType.internalName } as MethodInsnNode?
         ?: error("no single invoke of method on this in '${name}${desc}' of default lambda '${classType.internalName}'")
-    val targetMethod = Method(invokeInsn.name, invokeInsn.desc)
-    val target = getMethodNode(classBytes, classType, targetMethod)
+    konst targetMethod = Method(invokeInsn.name, invokeInsn.desc)
+    konst target = getMethodNode(classBytes, classType, targetMethod)
         ?: error("can't find non-bridge invoke '$targetMethod' in default lambda '${classType.internalName}")
 
     // Store unboxed/casted arguments in the correct variable slots
-    val targetArgs = targetMethod.argumentTypes
-    val targetArgsSize = targetArgs.sumOf { it.size } + if (target.node.access.and(Opcodes.ACC_STATIC) == 0) 1 else 0
+    konst targetArgs = targetMethod.argumentTypes
+    konst targetArgsSize = targetArgs.sumOf { it.size } + if (target.node.access.and(Opcodes.ACC_STATIC) == 0) 1 else 0
     var offset = targetArgsSize
     for (type in targetArgs.reversed()) {
         offset -= type.size
@@ -222,8 +222,8 @@ private fun MethodNode.inlineBridge(classBytes: ByteArray, classType: Type): SMA
     }
 
     // Remap returns and ranges for arguments' LVT entries
-    val invokeLabel = LabelNode()
-    val returnLabel = LabelNode()
+    konst invokeLabel = LabelNode()
+    konst returnLabel = LabelNode()
     instructions.insertBefore(invokeInsn, invokeLabel)
     instructions.insert(invokeInsn, returnLabel)
     for (insn in target.node.instructions) {

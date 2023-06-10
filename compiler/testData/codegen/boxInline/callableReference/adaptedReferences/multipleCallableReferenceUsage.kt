@@ -9,17 +9,17 @@ inline fun calcOnePlusTwo(f: (Int) -> Int): Int = f(1) + f(2)
 inline fun getFirstArg(a: Int, vararg other: Int): Int = a
 
 fun testCustomFunction(): Boolean {
-    val x = doIt { calcOnePlusTwo(::getFirstArg) }
+    konst x = doIt { calcOnePlusTwo(::getFirstArg) }
     return x == 3
 }
 
 fun testRuntimeFunctionCase1(): Boolean {
-    val x = "123".let { it.minOf(::maxOf) }
+    konst x = "123".let { it.minOf(::maxOf) }
     return x == '1'
 }
 
 fun testRuntimeFunctionCase2(): Boolean {
-    val x = "3123".minOfOrNull { a: Char -> a.titlecase().maxOf(::maxOf) }
+    konst x = "3123".minOfOrNull { a: Char -> a.titlecase().maxOf(::maxOf) }
     return x == '1'
 }
 

@@ -1,3 +1,3 @@
-val a by
+konst a by
 
-val b = 1
+konst b = 1

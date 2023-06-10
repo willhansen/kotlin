@@ -5,7 +5,7 @@ FILE: unary.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val i: Int = R|<local>/i|
+        public? final? konst i: Int = R|<local>/i|
             public? get(): Int
 
     }
@@ -16,7 +16,7 @@ FILE: unary.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val arr: Array<Int> = R|<local>/arr|
+        public? final? konst arr: Array<Int> = R|<local>/arr|
             public? get(): Array<Int>
 
     }

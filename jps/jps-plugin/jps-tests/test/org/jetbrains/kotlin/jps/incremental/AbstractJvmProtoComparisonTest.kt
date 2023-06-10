@@ -31,17 +31,17 @@ abstract class AbstractJvmProtoComparisonTest : AbstractProtoComparisonTest<Loca
     override fun compileAndGetClasses(sourceDir: File, outputDir: File): Map<ClassId, LocalFileKotlinClass> {
         MockLibraryUtil.compileKotlin(sourceDir.path, outputDir, extraOptions = listOf("-Xdisable-default-scripting-plugin"))
 
-        val classFiles = outputDir.walkMatching { it.name.endsWith(".class") }
-        val localClassFiles = classFiles.map { LocalFileKotlinClass.create(it, JvmMetadataVersion.INSTANCE)!! }
+        konst classFiles = outputDir.walkMatching { it.name.endsWith(".class") }
+        konst localClassFiles = classFiles.map { LocalFileKotlinClass.create(it, JvmMetadataVersion.INSTANCE)!! }
         return localClassFiles.associateBy { it.classId }
     }
 
     override fun LocalFileKotlinClass.toProtoData(): ProtoData? {
         assert(classHeader.metadataVersion.isCompatibleWithCurrentCompilerVersion()) { "Incompatible class ($classHeader): $location" }
 
-        val bytes by lazy { BitEncoding.decodeBytes(classHeader.data!!) }
-        val strings by lazy { classHeader.strings!! }
-        val packageFqName = classId.packageFqName
+        konst bytes by lazy { BitEncoding.decodeBytes(classHeader.data!!) }
+        konst strings by lazy { classHeader.strings!! }
+        konst packageFqName = classId.packageFqName
 
         return when (classHeader.kind) {
             KotlinClassHeader.Kind.CLASS -> {

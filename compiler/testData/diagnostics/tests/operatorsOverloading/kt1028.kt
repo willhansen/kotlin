@@ -6,21 +6,21 @@ import java.util.*
 
 class event<T>()
 {
-    val callbacks = ArrayList< Function1<T, Unit> >() // Should be ArrayList<()->Unit>, bug posted
+    konst callbacks = ArrayList< Function1<T, Unit> >() // Should be ArrayList<()->Unit>, bug posted
 
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun plusAssign(f : (T) -> Unit) = callbacks.add(f)
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun minusAssign(f : (T) -> Unit) = callbacks.remove(f)
-    fun call(value : T) { for(c in callbacks) c(value) }
+    fun call(konstue : T) { for(c in callbacks) c(konstue) }
 }
 
 class MouseMovedEventArgs()
 {
-    public val X : Int = 0
+    public konst X : Int = 0
 }
 
 class Control()
 {
-    public val MouseMoved : event<MouseMovedEventArgs> = event<MouseMovedEventArgs>()
+    public konst MouseMoved : event<MouseMovedEventArgs> = event<MouseMovedEventArgs>()
 
     fun MoveMouse() = MouseMoved.call(MouseMovedEventArgs())
 }
@@ -29,7 +29,7 @@ class Test()
 {
     fun test()
     {
-        val control = Control()
+        konst control = Control()
         control.MouseMoved <!ASSIGNMENT_OPERATOR_SHOULD_RETURN_UNIT!>+=<!> { it.X } // here
         control.MouseMoved.plusAssign( { it.X } ) // ok
     }

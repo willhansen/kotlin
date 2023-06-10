@@ -31,8 +31,8 @@ import org.jetbrains.kotlin.utils.SmartList
 // We don't need to track lookups here since this scope used only for introduce special Enum class members
 class StaticScopeForKotlinEnum(
     storageManager: StorageManager,
-    private val containingClass: ClassDescriptor,
-    private val enumEntriesCanBeUsed: Boolean,
+    private konst containingClass: ClassDescriptor,
+    private konst enumEntriesCanBeUsed: Boolean,
 ) : MemberScopeImpl() {
     init {
         assert(containingClass.kind == ClassKind.ENUM_CLASS) { "Class should be an enum: $containingClass" }
@@ -40,11 +40,11 @@ class StaticScopeForKotlinEnum(
 
     override fun getContributedClassifier(name: Name, location: LookupLocation) = null // TODO
 
-    private val functions: List<SimpleFunctionDescriptor> by storageManager.createLazyValue {
+    private konst functions: List<SimpleFunctionDescriptor> by storageManager.createLazyValue {
         listOf(createEnumValueOfMethod(containingClass), createEnumValuesMethod(containingClass))
     }
 
-    private val properties: List<PropertyDescriptor> by storageManager.createLazyValue {
+    private konst properties: List<PropertyDescriptor> by storageManager.createLazyValue {
         if (enumEntriesCanBeUsed) {
             // It still might be filtered out later in tower resolve if feature disabled
             listOfNotNull(createEnumEntriesProperty(containingClass))

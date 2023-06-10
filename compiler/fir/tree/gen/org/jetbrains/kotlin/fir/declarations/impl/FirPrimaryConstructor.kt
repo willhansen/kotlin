@@ -42,28 +42,28 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 class FirPrimaryConstructor @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
     override var status: FirDeclarationStatus,
     override var returnTypeRef: FirTypeRef,
     override var receiverParameter: FirReceiverParameter?,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val valueParameters: MutableList<FirValueParameter>,
+    override konst konstueParameters: MutableList<FirValueParameter>,
     override var contractDescription: FirContractDescription,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val symbol: FirConstructorSymbol,
+    override konst symbol: FirConstructorSymbol,
     override var delegatedConstructor: FirDelegatedConstructorCall?,
     override var body: FirBlock?,
 ) : FirConstructor() {
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
-    override val isPrimary: Boolean get() = true
+    override konst isPrimary: Boolean get() = true
 
     init {
         symbol.bind(this)
@@ -78,7 +78,7 @@ class FirPrimaryConstructor @FirImplementationDetail constructor(
         receiverParameter?.accept(visitor, data)
         contextReceivers.forEach { it.accept(visitor, data) }
         controlFlowGraphReference?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         contractDescription.accept(visitor, data)
         annotations.forEach { it.accept(visitor, data) }
         delegatedConstructor?.accept(visitor, data)
@@ -121,7 +121,7 @@ class FirPrimaryConstructor @FirImplementationDetail constructor(
     }
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirPrimaryConstructor {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -170,8 +170,8 @@ class FirPrimaryConstructor @FirImplementationDetail constructor(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters.addAll(newValueParameters)
+        konstueParameters.clear()
+        konstueParameters.addAll(newValueParameters)
     }
 
     override fun replaceContractDescription(newContractDescription: FirContractDescription) {

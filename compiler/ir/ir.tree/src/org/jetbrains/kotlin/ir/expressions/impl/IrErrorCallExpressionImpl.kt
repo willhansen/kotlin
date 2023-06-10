@@ -22,13 +22,13 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrErrorCallExpressionImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var description: String
 ) : IrErrorCallExpression() {
     override var explicitReceiver: IrExpression? = null
-    override val arguments: MutableList<IrExpression> = SmartList()
+    override konst arguments: MutableList<IrExpression> = SmartList()
 
     fun addArgument(argument: IrExpression) {
         arguments.add(argument)

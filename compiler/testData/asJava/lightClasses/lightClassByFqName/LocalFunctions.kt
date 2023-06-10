@@ -15,7 +15,7 @@ class A {
         fun localFunInMemberFun() {}
     }
 
-    val property: Int
+    konst property: Int
         get() {
             fun localFunInPropertyAccessor() {}
             return 1

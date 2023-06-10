@@ -32,7 +32,7 @@ object SignatureBuildingComponents {
     private fun escapeClassName(internalName: String): String = if (internalName.length > 1) "L$internalName;" else internalName
 }
 
-val ClassId.internalName: String
+konst ClassId.internalName: String
     get() {
         return JvmClassName.byClassId(JavaToKotlinClassMap.mapKotlinToJava(asSingleFqName().toUnsafe()) ?: this).internalName
     }

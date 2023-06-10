@@ -7,5 +7,5 @@ object B {
 }
 
 fun B.test() {
-    val (x, _, z) = A
+    konst (x, _, z) = A
 }

@@ -19,7 +19,7 @@ fun <T : Any> Provider<T>.forUseAtConfigurationTimeCompat(): Provider<T> =
         this
     }
 
-internal val Settings.cacheRedirectorEnabled: Provider<Boolean>
+internal konst Settings.cacheRedirectorEnabled: Provider<Boolean>
     get() = providers
         .gradleProperty("cacheRedirectorEnabled")
         .forUseAtConfigurationTimeCompat()
@@ -33,7 +33,7 @@ internal val Settings.cacheRedirectorEnabled: Provider<Boolean>
  *  To add a repository to the list create an issue in ADM project (example issue https://youtrack.jetbrains.com/issue/IJI-149)
  *  Or send a merge request to https://jetbrains.team/p/iji/repositories/Cache-Redirector/files/64b69490c54a2a900bb3dd21471f942270289a12/images/config-gen/src/main/kotlin/Config.kt
  */
-val cacheMap: Map<String, String> = mapOf(
+konst cacheMap: Map<String, String> = mapOf(
     "https://cache-redirector.jetbrains.com/teamcity-rest-client" to "https://cache-redirector.jetbrains.com/jetbrains.bintray.com/teamcity-rest-client",
     "https://cache-redirector.jetbrains.com/wormhole" to "https://cache-redirector.jetbrains.com/jetbrains.bintray.com/wormhole",
     "https://dl35a2bc3xf3g.cloudfront.net/rplugin" to "https://cache-redirector.jetbrains.com/jetbrains.bintray.com/rplugin",
@@ -193,18 +193,18 @@ val cacheMap: Map<String, String> = mapOf(
     "https://d2xrhe97vsfxuc.cloudfront.net" to "https://cache-redirector.jetbrains.com/jetbrains.bintray.com/intellij-jdk"
 )
 
-val aliases = mapOf(
+konst aliases = mapOf(
     "https://repo.maven.apache.org/maven2" to "https://repo1.maven.org/maven2" // Maven Central
 )
 
 fun URI.maybeRedirect(): URI {
-    val url = toString().trimEnd('/')
-    val deAliasedUrl = aliases.getOrDefault(url, url)
+    konst url = toString().trimEnd('/')
+    konst deAliasedUrl = aliases.getOrDefault(url, url)
 
-    val cacheUrlEntry = cacheMap.entries.find { (origin, _) -> deAliasedUrl.startsWith(origin) }
+    konst cacheUrlEntry = cacheMap.entries.find { (origin, _) -> deAliasedUrl.startsWith(origin) }
     return if (cacheUrlEntry != null) {
-        val cacheUrl = cacheUrlEntry.value
-        val originRestPath = deAliasedUrl.substringAfter(cacheUrlEntry.key, "")
+        konst cacheUrl = cacheUrlEntry.konstue
+        konst originRestPath = deAliasedUrl.substringAfter(cacheUrlEntry.key, "")
         URI("$cacheUrl$originRestPath")
     } else {
         this
@@ -231,23 +231,23 @@ fun Project.overrideNativeCompilerDownloadUrl() {
 // Check repositories are overriden section
 
 fun Project.addCheckRepositoriesTask() {
-    val checkRepoTask = tasks.register("checkRepositories") {
-        val isTeamcityBuildInput = providers
+    konst checkRepoTask = tasks.register("checkRepositories") {
+        konst isTeamcityBuildInput = providers
             .provider {
                 project.hasProperty("teamcity") || System.getenv("TEAMCITY_VERSION") != null
             }
             .forUseAtConfigurationTimeCompat()
 
         doLast {
-            val testName = "$name in ${project.displayName}"
-            val isTeamcityBuild = isTeamcityBuildInput.get()
+            konst testName = "$name in ${project.displayName}"
+            konst isTeamcityBuild = isTeamcityBuildInput.get()
             if (isTeamcityBuild) {
                 testStarted(testName)
             }
 
             project.repositories.filterIsInstance<IvyArtifactRepository>().forEach {
                 @Suppress("SENSELESS_COMPARISON") if (it.url == null) {
-                    logInvalidIvyRepo(testName, isTeamcityBuild)
+                    logInkonstidIvyRepo(testName, isTeamcityBuild)
                 }
             }
 
@@ -278,11 +278,11 @@ fun URI.isCachedOrLocal() = scheme == "file" ||
         host == "buildserver.labs.intellij.net"
 
 fun RepositoryHandler.findNonCachedRepositories(): List<String> {
-    val mavenNonCachedRepos = filterIsInstance<MavenArtifactRepository>()
+    konst mavenNonCachedRepos = filterIsInstance<MavenArtifactRepository>()
         .filterNot { it.url.isCachedOrLocal() }
         .map { it.url.toString() }
 
-    val ivyNonCachedRepos = filterIsInstance<IvyArtifactRepository>()
+    konst ivyNonCachedRepos = filterIsInstance<IvyArtifactRepository>()
         .filterNot { it.url.isCachedOrLocal() }
         .map { it.url.toString() }
 
@@ -310,8 +310,8 @@ fun Task.logNonCachedRepo(
     repoUrl: String,
     isTeamcityBuild: Boolean
 ) {
-    val msg = "Repository $repoUrl in ${project.displayName} should be cached with cache-redirector"
-    val details = "Using non cached repository may lead to download failures in CI builds." +
+    konst msg = "Repository $repoUrl in ${project.displayName} should be cached with cache-redirector"
+    konst details = "Using non cached repository may lead to download failures in CI builds." +
             " Check https://github.com/JetBrains/kotlin/blob/master/gradle/cacheRedirector.gradle.kts for details."
 
     if (isTeamcityBuild) {
@@ -321,12 +321,12 @@ fun Task.logNonCachedRepo(
     logger.warn("WARNING - $msg\n$details")
 }
 
-fun Task.logInvalidIvyRepo(
+fun Task.logInkonstidIvyRepo(
     testName: String,
     isTeamcityBuild: Boolean
 ) {
-    val msg = "Invalid ivy repo found in ${project.displayName}"
-    val details = "Url must be not null"
+    konst msg = "Inkonstid ivy repo found in ${project.displayName}"
+    konst details = "Url must be not null"
 
     if (isTeamcityBuild) {
         testFailed(testName, msg, details)

@@ -5,7 +5,7 @@
       @0:0..23 BLOCK_BODY
         @0:0..23 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
         @0:0..23 INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test1 modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    @0:12..22 PROPERTY name:x visibility:public modality:FINAL [val]
+    @0:12..22 PROPERTY name:x visibility:public modality:FINAL [konst]
       @0:12..22 FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         @0:12..22 EXPRESSION_BODY
           @0:12..22 GET_VAR 'x: kotlin.Int declared in <root>.Test1.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
@@ -29,7 +29,7 @@
       @2:0..3:32 BLOCK_BODY
         @2:0..3:32 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
         @2:0..3:32 INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test2 modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    @3:21..31 PROPERTY name:x visibility:public modality:FINAL [val]
+    @3:21..31 PROPERTY name:x visibility:public modality:FINAL [konst]
       @3:21..31 FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         @3:21..31 EXPRESSION_BODY
           @3:21..31 GET_VAR 'x: kotlin.Int declared in <root>.Test2.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
@@ -53,7 +53,7 @@
       @5:0..9:23 BLOCK_BODY
         @5:0..9:23 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
         @5:0..9:23 INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test3 modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    @9:12..22 PROPERTY name:x visibility:public modality:FINAL [val]
+    @9:12..22 PROPERTY name:x visibility:public modality:FINAL [konst]
       @9:12..22 FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         @9:12..22 EXPRESSION_BODY
           @9:12..22 GET_VAR 'x: kotlin.Int declared in <root>.Test3.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
@@ -76,12 +76,12 @@
       annotations:
         @12:0..28 CONSTRUCTOR_CALL 'public constructor <init> (vararg names: kotlin.String) [primary] declared in kotlin.Suppress' type=kotlin.Suppress origin=null
           @12:10..27 VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
-            @12:10..27 CONST String type=kotlin.String value="UNUSED_VARIABLE"
+            @12:10..27 CONST String type=kotlin.String konstue="UNUSED_VARIABLE"
       @13:12..22 VALUE_PARAMETER name:x index:0 type:kotlin.Int
       @11:0..13:23 BLOCK_BODY
         @11:0..13:23 DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in kotlin.Any'
         @11:0..13:23 INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test4 modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    @13:12..22 PROPERTY name:x visibility:public modality:FINAL [val]
+    @13:12..22 PROPERTY name:x visibility:public modality:FINAL [konst]
       @13:12..22 FIELD PROPERTY_BACKING_FIELD name:x type:kotlin.Int visibility:private [final]
         @13:12..22 EXPRESSION_BODY
           @13:12..22 GET_VAR 'x: kotlin.Int declared in <root>.Test4.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER

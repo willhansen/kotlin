@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirSuperReference : FirReference() {
-    abstract override val source: KtSourceElement?
-    abstract val labelName: String?
-    abstract val superTypeRef: FirTypeRef
+    abstract override konst source: KtSourceElement?
+    abstract konst labelName: String?
+    abstract konst superTypeRef: FirTypeRef
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitSuperReference(this, data)
 

@@ -5,6 +5,6 @@ interface T {
 }
 
 interface C : T {
-    val x: Int
+    konst x: Int
         <!ACCIDENTAL_OVERRIDE!>get()<!> = 1
 }

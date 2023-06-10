@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import kotlinx.serialization.internal.*
 
-const val prefix = "foo"
+const konst prefix = "foo"
 
 @Serializable
-data class Bar(@SerialName("$prefix.bar") val bar: String)
+data class Bar(@SerialName("$prefix.bar") konst bar: String)
 
 fun box(): String {
-    val expectedBar = Bar("hello")
-    val json = Json.encodeToString(Bar.serializer(), expectedBar)
+    konst expectedBar = Bar("hello")
+    konst json = Json.encodeToString(Bar.serializer(), expectedBar)
     if (json != """{"foo.bar":"hello"}""") return "Fail: $json"
-    val actualBar = Json.decodeFromString(Bar.serializer(), json)
+    konst actualBar = Json.decodeFromString(Bar.serializer(), json)
     if (expectedBar != actualBar) return "Fail: $actualBar"
     return "OK"
 }

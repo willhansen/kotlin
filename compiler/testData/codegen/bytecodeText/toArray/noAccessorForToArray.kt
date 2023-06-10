@@ -4,22 +4,22 @@
 // FILE: SingletonCollection.kt
 package test
 
-open class SingletonCollection<T>(val value: T) : AbstractCollection<T>() {
-    override val size = 1
-    override fun iterator(): Iterator<T> = listOf(value).iterator()
+open class SingletonCollection<T>(konst konstue: T) : AbstractCollection<T>() {
+    override konst size = 1
+    override fun iterator(): Iterator<T> = listOf(konstue).iterator()
 
     protected override final fun toArray(): Array<Any?> =
-        arrayOf<Any?>(value)
+        arrayOf<Any?>(konstue)
 
     protected override final fun <E> toArray(a: Array<E>): Array<E> {
-        a[0] = value as E
+        a[0] = konstue as E
         return a
     }
 }
 
-open class SingletonCollection2<T>(val value: T) : AbstractCollection<T>() {
-    override val size = 1
-    override fun iterator(): Iterator<T> = listOf(value).iterator()
+open class SingletonCollection2<T>(konst konstue: T) : AbstractCollection<T>() {
+    override konst size = 1
+    override fun iterator(): Iterator<T> = listOf(konstue).iterator()
 }
 
 // FILE: DerivedSingletonCollection.kt
@@ -27,7 +27,7 @@ package test2
 
 import test.*
 
-class DerivedSingletonCollection<T>(value: T) : SingletonCollection<T>(value) {
+class DerivedSingletonCollection<T>(konstue: T) : SingletonCollection<T>(konstue) {
     fun test() = object {
         fun test() = toArray()
     }.test()
@@ -37,7 +37,7 @@ class DerivedSingletonCollection<T>(value: T) : SingletonCollection<T>(value) {
     }.test()
 }
 
-class DerivedSingletonCollection2<T>(value: T) : SingletonCollection2<T>(value) {
+class DerivedSingletonCollection2<T>(konstue: T) : SingletonCollection2<T>(konstue) {
     fun test() = object {
         fun test() = toArray()
     }.test()

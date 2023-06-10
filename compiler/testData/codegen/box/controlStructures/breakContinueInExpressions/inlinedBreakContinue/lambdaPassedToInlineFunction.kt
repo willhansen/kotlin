@@ -15,7 +15,7 @@ public annotation class SomeAnnotation
 inline fun foo(block: () -> Unit) = block()
 
 fun box(): String {
-    val visited = mutableListOf<Pair<Int, Int>>()
+    konst visited = mutableListOf<Pair<Int, Int>>()
 
     var i = 0
     outer@ while (true) {

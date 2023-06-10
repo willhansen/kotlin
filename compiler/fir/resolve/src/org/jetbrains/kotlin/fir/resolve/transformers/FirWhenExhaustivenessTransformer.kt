@@ -26,9 +26,9 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.name.StandardClassIds
 
-class FirWhenExhaustivenessTransformer(private val bodyResolveComponents: BodyResolveComponents) : FirTransformer<Any?>() {
+class FirWhenExhaustivenessTransformer(private konst bodyResolveComponents: BodyResolveComponents) : FirTransformer<Any?>() {
     companion object {
-        private val exhaustivenessCheckers = listOf(
+        private konst exhaustivenessCheckers = listOf(
             WhenOnBooleanExhaustivenessChecker,
             WhenOnEnumExhaustivenessChecker,
             WhenOnSealedClassExhaustivenessChecker,
@@ -36,17 +36,17 @@ class FirWhenExhaustivenessTransformer(private val bodyResolveComponents: BodyRe
         )
 
         fun computeAllMissingCases(session: FirSession, whenExpression: FirWhenExpression): List<WhenMissingCase> {
-            val subjectType = getSubjectType(session, whenExpression) ?: return emptyList()
+            konst subjectType = getSubjectType(session, whenExpression) ?: return emptyList()
             return buildList {
                 for (type in subjectType.unwrapIntersectionType()) {
-                    val checkers = getCheckers(type, session)
+                    konst checkers = getCheckers(type, session)
                     collectMissingCases(checkers, whenExpression, type, session)
                 }
             }
         }
 
         private fun getSubjectType(session: FirSession, whenExpression: FirWhenExpression): ConeKotlinType? {
-            val subjectType = whenExpression.subjectVariable?.returnTypeRef?.coneType
+            konst subjectType = whenExpression.subjectVariable?.returnTypeRef?.coneType
                 ?: whenExpression.subject?.typeRef?.coneType
                 ?: return null
 
@@ -109,8 +109,8 @@ class FirWhenExhaustivenessTransformer(private val bodyResolveComponents: BodyRe
             return
         }
 
-        val session = bodyResolveComponents.session
-        val subjectType = getSubjectType(session, whenExpression) ?: run {
+        konst session = bodyResolveComponents.session
+        konst subjectType = getSubjectType(session, whenExpression) ?: run {
             whenExpression.replaceExhaustivenessStatus(ExhaustivenessStatus.NotExhaustive.NO_ELSE_BRANCH)
             return
         }
@@ -120,12 +120,12 @@ class FirWhenExhaustivenessTransformer(private val bodyResolveComponents: BodyRe
             return
         }
 
-        val unwrappedIntersectionTypes = subjectType.unwrapIntersectionType()
+        konst unwrappedIntersectionTypes = subjectType.unwrapIntersectionType()
 
         var status: ExhaustivenessStatus = ExhaustivenessStatus.NotExhaustive.NO_ELSE_BRANCH
 
         for (unwrappedSubjectType in unwrappedIntersectionTypes) {
-            val localStatus = computeStatusForNonIntersectionType(unwrappedSubjectType, session, whenExpression)
+            konst localStatus = computeStatusForNonIntersectionType(unwrappedSubjectType, session, whenExpression)
             when {
                 localStatus === ExhaustivenessStatus.ProperlyExhaustive -> {
                     status = localStatus
@@ -145,12 +145,12 @@ class FirWhenExhaustivenessTransformer(private val bodyResolveComponents: BodyRe
         session: FirSession,
         whenExpression: FirWhenExpression,
     ): ExhaustivenessStatus {
-        val checkers = getCheckers(unwrappedSubjectType, session)
+        konst checkers = getCheckers(unwrappedSubjectType, session)
         if (checkers.isEmpty()) {
             return ExhaustivenessStatus.NotExhaustive.NO_ELSE_BRANCH
         }
 
-        val whenMissingCases = mutableListOf<WhenMissingCase>()
+        konst whenMissingCases = mutableListOf<WhenMissingCase>()
         whenMissingCases.collectMissingCases(checkers, whenExpression, unwrappedSubjectType, session)
 
         return if (whenMissingCases.isEmpty()) {
@@ -200,7 +200,7 @@ private object WhenOnNullableExhaustivenessChecker : WhenExhaustivenessChecker()
         session: FirSession,
         destination: MutableCollection<WhenMissingCase>
     ) {
-        val flags = Flags()
+        konst flags = Flags()
         whenExpression.accept(ConditionChecker, flags)
         if (!flags.containsNull) {
             destination.add(WhenMissingCase.NullIsMissing)
@@ -213,7 +213,7 @@ private object WhenOnNullableExhaustivenessChecker : WhenExhaustivenessChecker()
 
     private object ConditionChecker : AbstractConditionChecker<Flags>() {
         override fun visitEqualityOperatorCall(equalityOperatorCall: FirEqualityOperatorCall, data: Flags) {
-            val argument = equalityOperatorCall.arguments[1]
+            konst argument = equalityOperatorCall.arguments[1]
             if (argument.typeRef.isNullableNothing) {
                 data.containsNull = true
             }
@@ -243,7 +243,7 @@ private object WhenOnBooleanExhaustivenessChecker : WhenExhaustivenessChecker() 
         session: FirSession,
         destination: MutableCollection<WhenMissingCase>
     ) {
-        val flags = Flags()
+        konst flags = Flags()
         whenExpression.accept(ConditionChecker, flags)
         if (!flags.containsTrue) {
             destination.add(WhenMissingCase.BooleanIsMissing.TrueIsMissing)
@@ -256,9 +256,9 @@ private object WhenOnBooleanExhaustivenessChecker : WhenExhaustivenessChecker() 
     private object ConditionChecker : AbstractConditionChecker<Flags>() {
         override fun visitEqualityOperatorCall(equalityOperatorCall: FirEqualityOperatorCall, data: Flags) {
             if (equalityOperatorCall.operation.let { it == FirOperation.EQ || it == FirOperation.IDENTITY }) {
-                val argument = equalityOperatorCall.arguments[1]
+                konst argument = equalityOperatorCall.arguments[1]
                 if (argument is FirConstExpression<*>) {
-                    when (argument.value) {
+                    when (argument.konstue) {
                         true -> data.containsTrue = true
                         false -> data.containsFalse = true
                     }
@@ -270,7 +270,7 @@ private object WhenOnBooleanExhaustivenessChecker : WhenExhaustivenessChecker() 
 
 private object WhenOnEnumExhaustivenessChecker : WhenExhaustivenessChecker() {
     override fun isApplicable(subjectType: ConeKotlinType, session: FirSession): Boolean {
-        val symbol = subjectType.toSymbol(session) as? FirRegularClassSymbol ?: return false
+        konst symbol = subjectType.toSymbol(session) as? FirRegularClassSymbol ?: return false
         return symbol.fir.classKind == ClassKind.ENUM_CLASS
     }
 
@@ -280,20 +280,20 @@ private object WhenOnEnumExhaustivenessChecker : WhenExhaustivenessChecker() {
         session: FirSession,
         destination: MutableCollection<WhenMissingCase>
     ) {
-        val enumClass = (subjectType.toSymbol(session) as FirRegularClassSymbol).fir
-        val allEntries = enumClass.declarations.mapNotNullTo(mutableSetOf()) { it as? FirEnumEntry }
-        val checkedEntries = mutableSetOf<FirEnumEntry>()
+        konst enumClass = (subjectType.toSymbol(session) as FirRegularClassSymbol).fir
+        konst allEntries = enumClass.declarations.mapNotNullTo(mutableSetOf()) { it as? FirEnumEntry }
+        konst checkedEntries = mutableSetOf<FirEnumEntry>()
         whenExpression.accept(ConditionChecker, checkedEntries)
-        val notCheckedEntries = allEntries - checkedEntries
+        konst notCheckedEntries = allEntries - checkedEntries
         notCheckedEntries.mapTo(destination) { WhenMissingCase.EnumCheckIsMissing(it.symbol.callableId) }
     }
 
     private object ConditionChecker : AbstractConditionChecker<MutableSet<FirEnumEntry>>() {
         override fun visitEqualityOperatorCall(equalityOperatorCall: FirEqualityOperatorCall, data: MutableSet<FirEnumEntry>) {
             if (!equalityOperatorCall.operation.let { it == FirOperation.EQ || it == FirOperation.IDENTITY }) return
-            val argument = equalityOperatorCall.arguments[1]
-            val symbol = argument.toResolvedCallableReference()?.resolvedSymbol as? FirVariableSymbol<*> ?: return
-            val checkedEnumEntry = symbol.fir as? FirEnumEntry ?: return
+            konst argument = equalityOperatorCall.arguments[1]
+            konst symbol = argument.toResolvedCallableReference()?.resolvedSymbol as? FirVariableSymbol<*> ?: return
+            konst checkedEnumEntry = symbol.fir as? FirEnumEntry ?: return
             data.add(checkedEnumEntry)
         }
     }
@@ -310,8 +310,8 @@ private object WhenOnSealedClassExhaustivenessChecker : WhenExhaustivenessChecke
         session: FirSession,
         destination: MutableCollection<WhenMissingCase>
     ) {
-        val allSubclasses = subjectType.toSymbol(session)?.collectAllSubclasses(session) ?: return
-        val checkedSubclasses = mutableSetOf<FirBasedSymbol<*>>()
+        konst allSubclasses = subjectType.toSymbol(session)?.collectAllSubclasses(session) ?: return
+        konst checkedSubclasses = mutableSetOf<FirBasedSymbol<*>>()
         whenExpression.accept(ConditionChecker, Flags(allSubclasses, checkedSubclasses, session))
         (allSubclasses - checkedSubclasses).mapNotNullTo(destination) {
             when (it) {
@@ -323,22 +323,22 @@ private object WhenOnSealedClassExhaustivenessChecker : WhenExhaustivenessChecke
     }
 
     private class Flags(
-        val allSubclasses: Set<FirBasedSymbol<*>>,
-        val checkedSubclasses: MutableSet<FirBasedSymbol<*>>,
-        val session: FirSession
+        konst allSubclasses: Set<FirBasedSymbol<*>>,
+        konst checkedSubclasses: MutableSet<FirBasedSymbol<*>>,
+        konst session: FirSession
     )
 
     private object ConditionChecker : AbstractConditionChecker<Flags>() {
         override fun visitEqualityOperatorCall(equalityOperatorCall: FirEqualityOperatorCall, data: Flags) {
-            val isNegated = when (equalityOperatorCall.operation) {
+            konst isNegated = when (equalityOperatorCall.operation) {
                 FirOperation.EQ, FirOperation.IDENTITY -> false
                 FirOperation.NOT_EQ, FirOperation.NOT_IDENTITY -> true
                 else -> return
             }
 
-            val symbol = when (val argument = equalityOperatorCall.arguments[1]) {
+            konst symbol = when (konst argument = equalityOperatorCall.arguments[1]) {
                 is FirResolvedQualifier -> {
-                    val firClass = (argument.symbol as? FirRegularClassSymbol)?.fir
+                    konst firClass = (argument.symbol as? FirRegularClassSymbol)?.fir
                     if (firClass?.classKind == ClassKind.OBJECT) {
                         firClass.symbol
                     } else {
@@ -353,21 +353,21 @@ private object WhenOnSealedClassExhaustivenessChecker : WhenExhaustivenessChecke
         }
 
         override fun visitTypeOperatorCall(typeOperatorCall: FirTypeOperatorCall, data: Flags) {
-            val isNegated = when (typeOperatorCall.operation) {
+            konst isNegated = when (typeOperatorCall.operation) {
                 FirOperation.IS -> false
                 FirOperation.NOT_IS -> true
                 else -> return
             }
-            val symbol = typeOperatorCall.conversionTypeRef.coneType.fullyExpandedType(data.session).toSymbol(data.session) ?: return
+            konst symbol = typeOperatorCall.conversionTypeRef.coneType.fullyExpandedType(data.session).toSymbol(data.session) ?: return
             processBranch(symbol, isNegated, data)
         }
 
         private fun processBranch(symbolToCheck: FirBasedSymbol<*>, isNegated: Boolean, flags: Flags) {
-            val subclassesOfType = symbolToCheck.collectAllSubclasses(flags.session)
+            konst subclassesOfType = symbolToCheck.collectAllSubclasses(flags.session)
             if (subclassesOfType.none { it in flags.allSubclasses }) {
                 return
             }
-            val checkedSubclasses = if (isNegated) flags.allSubclasses - subclassesOfType else subclassesOfType
+            konst checkedSubclasses = if (isNegated) flags.allSubclasses - subclassesOfType else subclassesOfType
             flags.checkedSubclasses.addAll(checkedSubclasses)
         }
     }
@@ -384,7 +384,7 @@ private object WhenOnSealedClassExhaustivenessChecker : WhenExhaustivenessChecke
         }
         when {
             fir.modality == Modality.SEALED -> fir.getSealedClassInheritors(session).forEach {
-                val symbol = session.symbolProvider.getClassLikeSymbolByClassId(it) as? FirRegularClassSymbol
+                konst symbol = session.symbolProvider.getClassLikeSymbolByClassId(it) as? FirRegularClassSymbol
                 symbol?.collectAllSubclassesTo(destination, session)
             }
             fir.classKind == ClassKind.ENUM_CLASS -> fir.collectEnumEntries().mapTo(destination) { it.symbol }

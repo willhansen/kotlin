@@ -12,22 +12,22 @@ import org.jetbrains.kotlin.test.directives.model.RegisteredDirectives
 import java.io.File
 
 data class TestModule(
-    val name: String,
-    val targetPlatform: TargetPlatform,
-    val targetBackend: TargetBackend?,
-    val frontendKind: FrontendKind<*>,
-    val backendKind: BackendKind<*>,
-    val binaryKind: BinaryKind<*>,
-    val files: List<TestFile>,
-    val allDependencies: List<DependencyDescription>,
-    val directives: RegisteredDirectives,
-    val languageVersionSettings: LanguageVersionSettings
+    konst name: String,
+    konst targetPlatform: TargetPlatform,
+    konst targetBackend: TargetBackend?,
+    konst frontendKind: FrontendKind<*>,
+    konst backendKind: BackendKind<*>,
+    konst binaryKind: BinaryKind<*>,
+    konst files: List<TestFile>,
+    konst allDependencies: List<DependencyDescription>,
+    konst directives: RegisteredDirectives,
+    konst languageVersionSettings: LanguageVersionSettings
 ) {
-    val regularDependencies: List<DependencyDescription>
+    konst regularDependencies: List<DependencyDescription>
         get() = allDependencies.filter { it.relation == DependencyRelation.RegularDependency }
-    val friendDependencies: List<DependencyDescription>
+    konst friendDependencies: List<DependencyDescription>
         get() = allDependencies.filter { it.relation == DependencyRelation.FriendDependency }
-    val dependsOnDependencies: List<DependencyDescription>
+    konst dependsOnDependencies: List<DependencyDescription>
         get() = allDependencies.filter { it.relation == DependencyRelation.DependsOnDependency }
 
     override fun equals(other: Any?): Boolean =
@@ -48,21 +48,21 @@ data class TestModule(
 }
 
 class TestFile(
-    val relativePath: String,
-    val originalContent: String,
-    val originalFile: File,
-    val startLineNumberInOriginalFile: Int, // line count starts with 0
+    konst relativePath: String,
+    konst originalContent: String,
+    konst originalFile: File,
+    konst startLineNumberInOriginalFile: Int, // line count starts with 0
     /*
      * isAdditional means that this file provided as addition to sources of testdata
      *   and there is no need to apply any handlers or preprocessors over it
      */
-    val isAdditional: Boolean,
-    val directives: RegisteredDirectives
+    konst isAdditional: Boolean,
+    konst directives: RegisteredDirectives
 ) {
-    val name: String = relativePath.split("/").last()
+    konst name: String = relativePath.split("/").last()
 }
 
-val TestFile.nameWithoutExtension: String
+konst TestFile.nameWithoutExtension: String
     get() = name.substringBeforeLast(".")
 
 enum class DependencyRelation {
@@ -78,7 +78,7 @@ enum class DependencyKind {
 }
 
 data class DependencyDescription(
-    val moduleName: String,
-    val kind: DependencyKind,
-    val relation: DependencyRelation
+    konst moduleName: String,
+    konst kind: DependencyKind,
+    konst relation: DependencyRelation
 )

@@ -12,16 +12,16 @@ import kotlin.test.*
  */
 //package defaults
 
-open class A(val a:Int) {
+open class A(konst a:Int) {
     override fun equals(other: Any?): Boolean {
         if (other == null || other as? A == null) return false
         return (other as A).a == a // Where is smart casting?
     }
 
     companion object {
-        val zero  = A(0)
-        val one   =  A(1)
-        val magic =  A(42)
+        konst zero  = A(0)
+        konst one   =  A(1)
+        konst magic =  A(42)
     }
 }
 
@@ -32,19 +32,19 @@ open class A(val a:Int) {
 //       BLOCK_BODY
 //         RETURN type=kotlin.Nothing from='foo(A = ...): Int'
 //           CALL '<get-a>(): Int' type=kotlin.Int origin=GET_PROPERTY
-//             $this: GET_VAR 'value-parameter a: A = ...' type=defaults.A origin=null
+//             $this: GET_VAR 'konstue-parameter a: A = ...' type=defaults.A origin=null
 fun foo(a: A = A.magic, b:Int = 0xdeadbeef.toInt()) = a.a
 
 //     FUN public fun bar(a: defaults.A, inc: kotlin.Int = ...): defaults.A
 //       inc: EXPRESSION_BODY
-//         CONST Int type=kotlin.Int value='0'
+//         CONST Int type=kotlin.Int konstue='0'
 //       BLOCK_BODY
 //         RETURN type=kotlin.Nothing from='bar(A, Int = ...): A'
 //           CALL 'constructor A(Int)' type=defaults.A origin=null
 //             a: CALL 'plus(Int): Int' type=kotlin.Int origin=PLUS
 //               $this: CALL '<get-a>(): Int' type=kotlin.Int origin=GET_PROPERTY
-//                 $this: GET_VAR 'value-parameter a: A' type=defaults.A origin=null
-//               other: GET_VAR 'value-parameter inc: Int = ...' type=kotlin.Int origin=null
+//                 $this: GET_VAR 'konstue-parameter a: A' type=defaults.A origin=null
+//               other: GET_VAR 'konstue-parameter inc: Int = ...' type=kotlin.Int origin=null
 fun bar(a:A, inc:Int = 0) = A(a.a + inc)
 
 
@@ -65,8 +65,8 @@ fun bar(a:A, inc:Int = 0) = A(a.a + inc)
 //    arg0: CALL 'EQEQ(Any?, Any?): Boolean' type=kotlin.Boolean origin=EXCLEQ
 //      arg0: CALL 'foo(A = ...): Int' type=kotlin.Int origin=null
 //        a: CALL 'constructor A(Int)' type=defaults.A origin=null
-//          a: CONST Int type=kotlin.Int value='1'
-//      arg1: CONST Int type=kotlin.Int value='1'
+//          a: CONST Int type=kotlin.Int konstue='1'
+//      arg1: CONST Int type=kotlin.Int konstue='1'
     if (foo(A(1)) != 1) {
         println("one failed: foo(A(1))")
         throw Error()
@@ -92,8 +92,8 @@ fun bar(a:A, inc:Int = 0) = A(a.a + inc)
 //        $this: CALL 'bar(A, Int = ...): A' type=defaults.A origin=null
 //          a: CALL '<get-one>(): A' type=defaults.A origin=GET_PROPERTY
 //            $this: GET_OBJECT 'companion object of A' type=defaults.A.Companion
-//          inc: CONST Int type=kotlin.Int value='1'
-//      arg1: CONST Int type=kotlin.Int value='2'
+//          inc: CONST Int type=kotlin.Int konstue='1'
+//      arg1: CONST Int type=kotlin.Int konstue='2'
     if (bar(A.one, 1).a != 2) {
         println("A one + 1 failed")
         throw Error()

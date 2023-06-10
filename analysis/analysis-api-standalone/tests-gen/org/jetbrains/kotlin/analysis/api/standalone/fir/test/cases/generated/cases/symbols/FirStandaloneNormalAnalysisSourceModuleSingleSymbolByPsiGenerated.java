@@ -248,9 +248,9 @@ public class FirStandaloneNormalAnalysisSourceModuleSingleSymbolByPsiGenerated e
         }
 
         @Test
-        @TestMetadata("invalidContractParameterPassedToReturns.kt")
-        public void testInvalidContractParameterPassedToReturns() throws Exception {
-            runTest("analysis/analysis-api/testData/symbols/singleSymbolByPsi/contracts/invalidContractParameterPassedToReturns.kt");
+        @TestMetadata("inkonstidContractParameterPassedToReturns.kt")
+        public void testInkonstidContractParameterPassedToReturns() throws Exception {
+            runTest("analysis/analysis-api/testData/symbols/singleSymbolByPsi/contracts/inkonstidContractParameterPassedToReturns.kt");
         }
 
         @Test
@@ -324,9 +324,9 @@ public class FirStandaloneNormalAnalysisSourceModuleSingleSymbolByPsiGenerated e
         }
 
         @Test
-        @TestMetadata("anonymousObjectInInvalidPosition.kt")
-        public void testAnonymousObjectInInvalidPosition() throws Exception {
-            runTest("analysis/analysis-api/testData/symbols/singleSymbolByPsi/errors/anonymousObjectInInvalidPosition.kt");
+        @TestMetadata("anonymousObjectInInkonstidPosition.kt")
+        public void testAnonymousObjectInInkonstidPosition() throws Exception {
+            runTest("analysis/analysis-api/testData/symbols/singleSymbolByPsi/errors/anonymousObjectInInkonstidPosition.kt");
         }
 
         @Test

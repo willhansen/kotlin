@@ -20,7 +20,7 @@ internal fun KotlinType.minValue(): Long {
         KotlinBuiltIns.isByte(this) -> Byte.MIN_VALUE.toLong()
         KotlinBuiltIns.isShort(this) -> Short.MIN_VALUE.toLong()
         KotlinBuiltIns.isInt(this) -> Int.MIN_VALUE.toLong()
-        else -> error("Can't get min value for type: $this")
+        else -> error("Can't get min konstue for type: $this")
     }
 }
 
@@ -35,28 +35,28 @@ internal fun KotlinType.maxValue(): Long {
         KotlinBuiltIns.isUShort(this) -> UShort.MAX_VALUE.toLong()
         KotlinBuiltIns.isUInt(this) -> UInt.MAX_VALUE.toLong()
 
-        else -> error("Can't get max value for type: $this")
+        else -> error("Can't get max konstue for type: $this")
     }
 }
 
 internal fun ModuleDescriptor.unsignedType(classId: ClassId): SimpleType = findClassAcrossModuleDependencies(classId)!!.defaultType
 
-internal val ModuleDescriptor.uIntType: SimpleType
+internal konst ModuleDescriptor.uIntType: SimpleType
     get() = unsignedType(StandardNames.FqNames.uInt)
 
-internal val ModuleDescriptor.uLongType: SimpleType
+internal konst ModuleDescriptor.uLongType: SimpleType
     get() = unsignedType(StandardNames.FqNames.uLong)
 
-internal val ModuleDescriptor.uByteType: SimpleType
+internal konst ModuleDescriptor.uByteType: SimpleType
     get() = unsignedType(StandardNames.FqNames.uByte)
 
-internal val ModuleDescriptor.uShortType: SimpleType
+internal konst ModuleDescriptor.uShortType: SimpleType
     get() = unsignedType(StandardNames.FqNames.uShort)
 
-internal val ModuleDescriptor.allSignedLiteralTypes: Collection<KotlinType>
+internal konst ModuleDescriptor.allSignedLiteralTypes: Collection<KotlinType>
     get() = listOf(builtIns.intType, builtIns.longType, builtIns.byteType, builtIns.shortType)
 
-internal val ModuleDescriptor.allUnsignedLiteralTypes: Collection<KotlinType>
+internal konst ModuleDescriptor.allUnsignedLiteralTypes: Collection<KotlinType>
     get() = if (hasUnsignedTypesInModuleDependencies(this)) {
         listOf(
             unsignedType(StandardNames.FqNames.uInt), unsignedType(StandardNames.FqNames.uLong),

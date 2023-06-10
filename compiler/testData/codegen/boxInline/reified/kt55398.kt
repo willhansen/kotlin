@@ -20,7 +20,7 @@ typealias ObjectContainerProvider = () -> ObjectContainer?
 internal inline fun <reified T : Base> ObjectContainerProvider.extensionFun(): ReadOnlyProperty<Any, T> {
 
     return object : ReadOnlyProperty<Any, T> {
-        val emptyProxy: T by lazy {
+        konst emptyProxy: T by lazy {
             T::class.java.getDeclaredConstructor().newInstance()
         }
 
@@ -33,7 +33,7 @@ internal inline fun <reified T : Base> ObjectContainerProvider.extensionFun(): R
 import test.*
 
 class DefaultObjectContainerProvider : ObjectContainerProvider {
-    val baseImpl: BaseImpl by extensionFun<BaseImpl>()
+    konst baseImpl: BaseImpl by extensionFun<BaseImpl>()
 
     override fun invoke(): ObjectContainer? {
         return null

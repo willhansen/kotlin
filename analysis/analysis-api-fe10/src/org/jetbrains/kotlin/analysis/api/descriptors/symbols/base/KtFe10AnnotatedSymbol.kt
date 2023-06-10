@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.analysis.api.symbols.markers.KtAnnotatedSymbol
 import org.jetbrains.kotlin.descriptors.annotations.Annotations
 
 internal interface KtFe10AnnotatedSymbol : KtAnnotatedSymbol, KtFe10Symbol {
-    val annotationsObject: Annotations
+    konst annotationsObject: Annotations
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFe10AnnotationsList.create(annotationsObject, analysisContext)
         }

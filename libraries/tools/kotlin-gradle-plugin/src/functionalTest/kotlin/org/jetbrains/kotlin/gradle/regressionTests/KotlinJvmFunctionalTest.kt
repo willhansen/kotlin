@@ -15,9 +15,9 @@ import kotlin.test.Test
 class KotlinJvmFunctionalTest {
     @Test
     fun `test setting dependencies via compilation dependency handler`() {
-        val project = buildProjectWithJvm {
+        konst project = buildProjectWithJvm {
             kotlinExtension.apply {
-                val jvmTarget = this.targets.singleOrNull() ?: error("Expected single target for Kotlin JVM extension")
+                konst jvmTarget = this.targets.singleOrNull() ?: error("Expected single target for Kotlin JVM extension")
 
                 jvmTarget.compilations.getByName("main").dependencies {
                     api(files())
@@ -35,6 +35,6 @@ class KotlinJvmFunctionalTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 }

@@ -3,7 +3,7 @@
 operator fun <T> Iterator<T>.iterator(): Iterator<T> = this
 
 fun box(): String {
-    val iterator = object : Iterator<Int> {
+    konst iterator = object : Iterator<Int> {
         var i = 0
         override fun next() = i++
         override fun hasNext() = i < 5

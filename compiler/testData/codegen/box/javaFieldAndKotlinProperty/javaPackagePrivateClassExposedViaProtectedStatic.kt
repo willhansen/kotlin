@@ -23,7 +23,7 @@ import p.JavaWrapper
 
 class KotlinWrapper : JavaWrapper() {
     protected class KotlinDerived : JavaDerived() {
-        private val foo = "FAIL"
+        private konst foo = "FAIL"
     }
 
     fun bar() = KotlinDerived().foo

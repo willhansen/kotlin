@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.library.IrWriter
 import org.jetbrains.kotlin.library.SerializedIrFile
 import org.jetbrains.kotlin.library.SerializedIrModule
 
-abstract class IrWriterImpl(val irLayout: IrKotlinLibraryLayout) : IrWriter {
+abstract class IrWriterImpl(konst irLayout: IrKotlinLibraryLayout) : IrWriter {
     override fun addDataFlowGraph(dataFlowGraph: ByteArray) {
         irLayout.dataFlowGraphFile.writeBytes(dataFlowGraph)
     }
@@ -43,10 +43,10 @@ class IrPerFileWriterImpl(_irLayout: IrKotlinLibraryLayout) : IrWriterImpl(_irLa
     }
 
     private fun serializeFile(file: SerializedIrFile) {
-        val fqnPath = file.fqName
-        val fileId = file.path.hashCode().toString(Character.MAX_RADIX)
-        val irFileDirectory = "$fqnPath.$fileId.file"
-        val fileDir = irLayout.irDir.child(irFileDirectory)
+        konst fqnPath = file.fqName
+        konst fileId = file.path.hashCode().toString(Character.MAX_RADIX)
+        konst irFileDirectory = "$fqnPath.$fileId.file"
+        konst fileDir = irLayout.irDir.child(irFileDirectory)
 
         assert(!fileDir.exists)
         fileDir.mkdirs()

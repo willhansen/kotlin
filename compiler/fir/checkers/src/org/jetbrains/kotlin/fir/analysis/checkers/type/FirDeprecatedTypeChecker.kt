@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.types.*
 
 object FirDeprecatedTypeChecker : FirTypeRefChecker() {
     override fun check(typeRef: FirTypeRef, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = typeRef.source ?: return
+        konst source = typeRef.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
 
-        val resolved = typeRef.coneTypeSafe<ConeClassLikeType>() ?: return
+        konst resolved = typeRef.coneTypeSafe<ConeClassLikeType>() ?: return
         checkType(resolved, null, source, context, reporter)
     }
 
@@ -34,11 +34,11 @@ object FirDeprecatedTypeChecker : FirTypeRefChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val symbol = type.lookupTag.toSymbol(context.session) ?: return
+        konst symbol = type.lookupTag.toSymbol(context.session) ?: return
         FirDeprecationChecker.reportApiStatusIfNeeded(source, symbol, context, reporter, typealiasSymbol = typeAliasSymbol)
 
         if (symbol is FirTypeAliasSymbol) {
-            val typeAlias = symbol.fir
+            konst typeAlias = symbol.fir
             typeAlias.lazyResolveToPhase(FirResolvePhase.TYPES)
             typeAlias.expandedTypeRef.coneType.forEachType {
                 if (it is ConeClassLikeType) checkType(it, symbol, source, context, reporter)

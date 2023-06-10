@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Id(val id: String)
+konstue class Id(konst id: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Name(val name: String)
+konstue class Name(konst name: String)
 
 interface IA {
     fun fromInterface(id: Id)

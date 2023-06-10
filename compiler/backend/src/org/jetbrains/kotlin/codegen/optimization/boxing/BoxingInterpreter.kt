@@ -39,11 +39,11 @@ import org.jetbrains.org.objectweb.asm.tree.TypeInsnNode
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 
 open class BoxingInterpreter(
-    private val insnList: InsnList,
-    private val generationState: GenerationState
+    private konst insnList: InsnList,
+    private konst generationState: GenerationState
 ) : OptimizationBasicInterpreter() {
-    private val boxingPlaces = HashMap<Int, BoxedBasicValue>()
-    private val progressionIterators = HashMap<AbstractInsnNode, ProgressionIteratorBasicValue>()
+    private konst boxingPlaces = HashMap<Int, BoxedBasicValue>()
+    private konst progressionIterators = HashMap<AbstractInsnNode, ProgressionIteratorBasicValue>()
 
     protected open fun createNewBoxing(
         insn: AbstractInsnNode,
@@ -51,77 +51,77 @@ open class BoxingInterpreter(
         progressionIterator: ProgressionIteratorBasicValue?
     ): BasicValue =
         boxingPlaces.getOrPut(insnList.indexOf(insn)) {
-            val boxedBasicValue = CleanBoxedValue(type, insn, progressionIterator, generationState)
+            konst boxedBasicValue = CleanBoxedValue(type, insn, progressionIterator, generationState)
             onNewBoxedValue(boxedBasicValue)
             boxedBasicValue
         }
 
-    protected fun checkUsedValue(value: BasicValue) {
-        if (value is TaintedBoxedValue) {
-            onMergeFail(value)
+    protected fun checkUsedValue(konstue: BasicValue) {
+        if (konstue is TaintedBoxedValue) {
+            onMergeFail(konstue)
         }
     }
 
-    override fun naryOperation(insn: AbstractInsnNode, values: List<BasicValue>): BasicValue? {
-        values.forEach {
+    override fun naryOperation(insn: AbstractInsnNode, konstues: List<BasicValue>): BasicValue? {
+        konstues.forEach {
             checkUsedValue(it)
         }
 
-        val value = super.naryOperation(insn, values)
-        val firstArg = values.firstOrNull() ?: return value
+        konst konstue = super.naryOperation(insn, konstues)
+        konst firstArg = konstues.firstOrNull() ?: return konstue
 
         return when {
             insn.isBoxing(generationState) -> {
                 /*
                 * It's possible to have chain of several boxings and it's important to retain these boxing methods, consider:
                 *
-                * inline class AsAny(val a: Any)
+                * inline class AsAny(konst a: Any)
                 *
                 * fun takeAny(a: Any)
                 *
                 * fun foo() {
-                *   takeAny(AsAny(42)) // valueOf -> AsAny$Erased.box
+                *   takeAny(AsAny(42)) // konstueOf -> AsAny$Erased.box
                 * }
                 *
                 * */
-                values.markBoxedArgumentValues()
-                createNewBoxing(insn, value.type, null)
+                konstues.markBoxedArgumentValues()
+                createNewBoxing(insn, konstue.type, null)
             }
             insn.isUnboxing(generationState) && firstArg is BoxedBasicValue -> {
-                onUnboxing(insn, firstArg, value.type)
-                value
+                onUnboxing(insn, firstArg, konstue.type)
+                konstue
             }
             insn.isIteratorMethodCall() -> {
-                values.markBoxedArgumentValues()
-                val firstArgType = firstArg.type
+                konstues.markBoxedArgumentValues()
+                konst firstArgType = firstArg.type
                 if (isProgressionClass(firstArgType)) {
                     progressionIterators.getOrPut(insn) {
                         ProgressionIteratorBasicValue.byProgressionClassType(insn, firstArgType)!!
                     }
                 } else {
                     progressionIterators[insn]?.taint()
-                    value
+                    konstue
                 }
             }
-            insn.isNextMethodCallOfProgressionIterator(values) -> {
-                val progressionIterator = firstArg as? ProgressionIteratorBasicValue
+            insn.isNextMethodCallOfProgressionIterator(konstues) -> {
+                konst progressionIterator = firstArg as? ProgressionIteratorBasicValue
                     ?: throw AssertionError("firstArg should be progression iterator")
                 createNewBoxing(insn, progressionIterator.boxedElementType, progressionIterator)
             }
-            insn.isAreEqualIntrinsicForSameTypedBoxedValues(values) && canValuesBeUnboxedForAreEqual(values, generationState) -> {
-                onAreEqual(insn, values[0] as BoxedBasicValue, values[1] as BoxedBasicValue)
-                value
+            insn.isAreEqualIntrinsicForSameTypedBoxedValues(konstues) && canValuesBeUnboxedForAreEqual(konstues, generationState) -> {
+                onAreEqual(insn, konstues[0] as BoxedBasicValue, konstues[1] as BoxedBasicValue)
+                konstue
             }
-            insn.isJavaLangComparableCompareToForSameTypedBoxedValues(values) -> {
-                onCompareTo(insn, values[0] as BoxedBasicValue, values[1] as BoxedBasicValue)
-                value
+            insn.isJavaLangComparableCompareToForSameTypedBoxedValues(konstues) -> {
+                onCompareTo(insn, konstues[0] as BoxedBasicValue, konstues[1] as BoxedBasicValue)
+                konstue
             }
             else -> {
                 // N-ary operation should be a method call or multinewarray.
                 // Arguments for multinewarray could be only numeric,
-                // so if there are boxed values in args, it's not a case of multinewarray.
-                values.markBoxedArgumentValues()
-                value
+                // so if there are boxed konstues in args, it's not a case of multinewarray.
+                konstues.markBoxedArgumentValues()
+                konstue
             }
         }
     }
@@ -134,26 +134,26 @@ open class BoxingInterpreter(
         }
     }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue? {
-        checkUsedValue(value)
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue? {
+        checkUsedValue(konstue)
 
         return if (insn.opcode == Opcodes.CHECKCAST
-            && isExactValue(value)
+            && isExactValue(konstue)
             && !isCastToProgression(insn) // operations such as cast kotlin/ranges/IntRange to kotlin/ranges/IntProgression, should be allowed
         )
-            value
+            konstue
         else
-            super.unaryOperation(insn, value)
+            super.unaryOperation(insn, konstue)
     }
 
-    protected open fun isExactValue(value: BasicValue) =
-        value is ProgressionIteratorBasicValue ||
-                value is CleanBoxedValue ||
-                value.type != null && isProgressionClass(value.type)
+    protected open fun isExactValue(konstue: BasicValue) =
+        konstue is ProgressionIteratorBasicValue ||
+                konstue is CleanBoxedValue ||
+                konstue.type != null && isProgressionClass(konstue.type)
 
     private fun isCastToProgression(insn: AbstractInsnNode): Boolean {
         assert(insn.opcode == Opcodes.CHECKCAST) { "Expected opcode Opcodes.CHECKCAST, but ${insn.opcode} found" }
-        val desc = (insn as TypeInsnNode).desc
+        konst desc = (insn as TypeInsnNode).desc
         return desc in setOf(
             "kotlin/ranges/CharProgression",
             "kotlin/ranges/IntProgression",
@@ -180,7 +180,7 @@ open class BoxingInterpreter(
                     v is TaintedBoxedValue -> v
                     w is TaintedBoxedValue -> w
                     v.type != w.type -> mergeBoxedHazardous(v, w, isLocalVariable)
-                    else -> v // two clean boxed values with the same type are equal
+                    else -> v // two clean boxed konstues with the same type are equal
                 }
             }
             v is BoxedBasicValue ->
@@ -196,7 +196,7 @@ open class BoxingInterpreter(
             return boxed.taint()
         }
 
-        // If we merge a boxed stack value with a value of a different type, mark it as merge hazard immediately:
+        // If we merge a boxed stack konstue with a konstue of a different type, mark it as merge hazard immediately:
         // its intended boxed use might be dead code (KT-49092), in which case boxing elimination would produce incompatible stacks.
         onMergeFail(boxed)
         if (other is BoxedBasicValue) {
@@ -205,21 +205,21 @@ open class BoxingInterpreter(
         return boxed
     }
 
-    protected open fun onNewBoxedValue(value: BoxedBasicValue) {}
-    protected open fun onUnboxing(insn: AbstractInsnNode, value: BoxedBasicValue, resultType: Type) {}
-    protected open fun onAreEqual(insn: AbstractInsnNode, value1: BoxedBasicValue, value2: BoxedBasicValue) {}
-    protected open fun onCompareTo(insn: AbstractInsnNode, value1: BoxedBasicValue, value2: BoxedBasicValue) {}
-    protected open fun onMethodCallWithBoxedValue(value: BoxedBasicValue) {}
-    protected open fun onMergeFail(value: BoxedBasicValue) {}
+    protected open fun onNewBoxedValue(konstue: BoxedBasicValue) {}
+    protected open fun onUnboxing(insn: AbstractInsnNode, konstue: BoxedBasicValue, resultType: Type) {}
+    protected open fun onAreEqual(insn: AbstractInsnNode, konstue1: BoxedBasicValue, konstue2: BoxedBasicValue) {}
+    protected open fun onCompareTo(insn: AbstractInsnNode, konstue1: BoxedBasicValue, konstue2: BoxedBasicValue) {}
+    protected open fun onMethodCallWithBoxedValue(konstue: BoxedBasicValue) {}
+    protected open fun onMergeFail(konstue: BoxedBasicValue) {}
     protected open fun onMergeSuccess(v: BoxedBasicValue, w: BoxedBasicValue) {}
 
 }
 
-private val UNBOXING_METHOD_NAMES =
+private konst UNBOXING_METHOD_NAMES =
     ImmutableSet.of("booleanValue", "charValue", "byteValue", "shortValue", "intValue", "floatValue", "longValue", "doubleValue")
 
-private val KCLASS_TO_JLCLASS = Type.getMethodDescriptor(AsmTypes.JAVA_CLASS_TYPE, AsmTypes.K_CLASS_TYPE)
-private val JLCLASS_TO_KCLASS = Type.getMethodDescriptor(AsmTypes.K_CLASS_TYPE, AsmTypes.JAVA_CLASS_TYPE)
+private konst KCLASS_TO_JLCLASS = Type.getMethodDescriptor(AsmTypes.JAVA_CLASS_TYPE, AsmTypes.K_CLASS_TYPE)
+private konst JLCLASS_TO_KCLASS = Type.getMethodDescriptor(AsmTypes.K_CLASS_TYPE, AsmTypes.JAVA_CLASS_TYPE)
 
 fun AbstractInsnNode.isUnboxing(state: GenerationState) =
     isPrimitiveUnboxing() || isJavaLangClassUnboxing() || isInlineClassUnboxing(state) || isMultiFieldValueClassUnboxing(state)
@@ -258,14 +258,14 @@ private fun isUnboxingMethodName(name: String) =
 fun AbstractInsnNode.isPrimitiveBoxing() =
     isMethodInsnWith(Opcodes.INVOKESTATIC) {
         isWrapperClassName(owner) &&
-                name == "valueOf" &&
+                name == "konstueOf" &&
                 isBoxingMethodDescriptor()
     }
 
-private val BOXING_CLASS_INTERNAL_NAME =
+private konst BOXING_CLASS_INTERNAL_NAME =
     StandardNames.COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME.child(Name.identifier("Boxing")).topLevelClassInternalName()
 
-private fun isJvmPrimitiveName(name: String) = JvmPrimitiveType.values().any { it.javaKeywordName == name }
+private fun isJvmPrimitiveName(name: String) = JvmPrimitiveType.konstues().any { it.javaKeywordName == name }
 
 fun AbstractInsnNode.isCoroutinePrimitiveBoxing(): Boolean {
     return isMethodInsnWith(Opcodes.INVOKESTATIC) {
@@ -276,7 +276,7 @@ fun AbstractInsnNode.isCoroutinePrimitiveBoxing(): Boolean {
 }
 
 private fun MethodInsnNode.isBoxingMethodDescriptor(): Boolean {
-    val ownerType = Type.getObjectType(owner)
+    konst ownerType = Type.getObjectType(owner)
     return desc == Type.getMethodDescriptor(ownerType, AsmUtil.unboxType(ownerType))
 }
 
@@ -310,37 +310,37 @@ private fun AbstractInsnNode.isMultiFieldValueClassUnboxing(state: GenerationSta
 private fun MethodInsnNode.isInlineClassBoxingMethodDescriptor(state: GenerationState): Boolean {
     if (name != KotlinTypeMapper.BOX_JVM_METHOD_NAME) return false
 
-    val ownerType = Type.getObjectType(owner)
-    val unboxedType = unboxedTypeOfInlineClass(ownerType, state) ?: return false
+    konst ownerType = Type.getObjectType(owner)
+    konst unboxedType = unboxedTypeOfInlineClass(ownerType, state) ?: return false
     return desc == Type.getMethodDescriptor(ownerType, unboxedType)
 }
 
 private fun MethodInsnNode.isMultiFieldValueClassBoxingMethodDescriptor(state: GenerationState): Boolean {
     if (name != KotlinTypeMapper.BOX_JVM_METHOD_NAME) return false
 
-    val ownerType = Type.getObjectType(owner)
-    val multiFieldValueClassUnboxInfo = getMultiFieldValueClassUnboxInfo(ownerType, state) ?: return false
+    konst ownerType = Type.getObjectType(owner)
+    konst multiFieldValueClassUnboxInfo = getMultiFieldValueClassUnboxInfo(ownerType, state) ?: return false
     return desc == Type.getMethodDescriptor(ownerType, *multiFieldValueClassUnboxInfo.unboxedTypes.toTypedArray())
 }
 
 private fun MethodInsnNode.isInlineClassUnboxingMethodDescriptor(state: GenerationState): Boolean {
     if (name != KotlinTypeMapper.UNBOX_JVM_METHOD_NAME) return false
 
-    val ownerType = Type.getObjectType(owner)
-    val unboxedType = unboxedTypeOfInlineClass(ownerType, state) ?: return false
+    konst ownerType = Type.getObjectType(owner)
+    konst unboxedType = unboxedTypeOfInlineClass(ownerType, state) ?: return false
     return desc == Type.getMethodDescriptor(unboxedType)
 }
 
 private fun MethodInsnNode.isMultiFieldValueClassUnboxingMethodDescriptor(state: GenerationState): Boolean {
-    val ownerType = Type.getObjectType(owner)
-    val multiFieldValueClassUnboxInfo = getMultiFieldValueClassUnboxInfo(ownerType, state) ?: return false
+    konst ownerType = Type.getObjectType(owner)
+    konst multiFieldValueClassUnboxInfo = getMultiFieldValueClassUnboxInfo(ownerType, state) ?: return false
     return multiFieldValueClassUnboxInfo.unboxedTypesAndMethodNamesAndFieldNames.any { (type, methodName) ->
         name == methodName && desc == Type.getMethodDescriptor(type)
     }
 }
 
-fun AbstractInsnNode.isNextMethodCallOfProgressionIterator(values: List<BasicValue>) =
-    values.firstOrNull() is ProgressionIteratorBasicValue &&
+fun AbstractInsnNode.isNextMethodCallOfProgressionIterator(konstues: List<BasicValue>) =
+    konstues.firstOrNull() is ProgressionIteratorBasicValue &&
             isMethodInsnWith(Opcodes.INVOKEINTERFACE) {
                 name == "next"
             }
@@ -350,14 +350,14 @@ fun AbstractInsnNode.isIteratorMethodCall() =
         name == "iterator" && desc == "()Ljava/util/Iterator;"
     }
 
-fun AbstractInsnNode.isIteratorMethodCallOfProgression(values: List<BasicValue>) =
+fun AbstractInsnNode.isIteratorMethodCallOfProgression(konstues: List<BasicValue>) =
     isMethodInsnWith(Opcodes.INVOKEINTERFACE) {
-        val firstArgType = values.firstOrNull()?.type
+        konst firstArgType = konstues.firstOrNull()?.type
         name == "iterator" && desc == "()Ljava/util/Iterator;" &&
                 firstArgType != null && isProgressionClass(firstArgType)
     }
 
-private val PROGRESSION_CLASS_FQNS = setOf(
+private konst PROGRESSION_CLASS_FQNS = setOf(
     CHAR_RANGE_FQN, CHAR_PROGRESSION_FQN,
     INT_RANGE_FQN, INT_PROGRESSION_FQN,
     LONG_RANGE_FQN, LONG_PROGRESSION_FQN
@@ -367,12 +367,12 @@ private fun isProgressionClass(type: Type) =
     type.className in PROGRESSION_CLASS_FQNS
 
 
-fun AbstractInsnNode.isAreEqualIntrinsicForSameTypedBoxedValues(values: List<BasicValue>) =
-    isAreEqualIntrinsic() && areSameTypedPrimitiveBoxedValues(values)
+fun AbstractInsnNode.isAreEqualIntrinsicForSameTypedBoxedValues(konstues: List<BasicValue>) =
+    isAreEqualIntrinsic() && areSameTypedPrimitiveBoxedValues(konstues)
 
-fun areSameTypedPrimitiveBoxedValues(values: List<BasicValue>): Boolean {
-    if (values.size != 2) return false
-    val (v1, v2) = values
+fun areSameTypedPrimitiveBoxedValues(konstues: List<BasicValue>): Boolean {
+    if (konstues.size != 2) return false
+    konst (v1, v2) = konstues
     return v1 is BoxedBasicValue &&
             v2 is BoxedBasicValue &&
             !v1.descriptor.isValueClassValue && !v2.descriptor.isValueClassValue &&
@@ -386,15 +386,15 @@ fun AbstractInsnNode.isAreEqualIntrinsic() =
                 desc == "(Ljava/lang/Object;Ljava/lang/Object;)Z"
     }
 
-private val shouldUseEqualsForWrappers = setOf(Type.DOUBLE_TYPE, Type.FLOAT_TYPE, AsmTypes.JAVA_CLASS_TYPE)
+private konst shouldUseEqualsForWrappers = setOf(Type.DOUBLE_TYPE, Type.FLOAT_TYPE, AsmTypes.JAVA_CLASS_TYPE)
 
-fun canValuesBeUnboxedForAreEqual(values: List<BasicValue>, generationState: GenerationState): Boolean = values.none {
-    val unboxedType = getUnboxedTypes(it.type, generationState, getMultiFieldValueClassUnboxInfo(it.type, generationState)).singleOrNull()
+fun canValuesBeUnboxedForAreEqual(konstues: List<BasicValue>, generationState: GenerationState): Boolean = konstues.none {
+    konst unboxedType = getUnboxedTypes(it.type, generationState, getMultiFieldValueClassUnboxInfo(it.type, generationState)).singleOrNull()
     unboxedType == null || unboxedType in shouldUseEqualsForWrappers
 }
 
-fun AbstractInsnNode.isJavaLangComparableCompareToForSameTypedBoxedValues(values: List<BasicValue>) =
-    isJavaLangComparableCompareTo() && areSameTypedPrimitiveBoxedValues(values)
+fun AbstractInsnNode.isJavaLangComparableCompareToForSameTypedBoxedValues(konstues: List<BasicValue>) =
+    isJavaLangComparableCompareTo() && areSameTypedPrimitiveBoxedValues(konstues)
 
 fun AbstractInsnNode.isJavaLangComparableCompareTo() =
     isMethodInsnWith(Opcodes.INVOKEINTERFACE) {

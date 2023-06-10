@@ -4,8 +4,8 @@
 
 package test
 
-inline fun foo(value: String, crossinline s: () -> String): String {
-    val x = { value }
+inline fun foo(konstue: String, crossinline s: () -> String): String {
+    konst x = { konstue }
     return java.util.concurrent.Callable(x).call() + { s() }.let { it() }
 }
 

@@ -1,5 +1,5 @@
 
-class Holder<T: Any>(val v: T)
+class Holder<T: Any>(konst v: T)
 
 fun <C: Any> outer(arg: C): C {
     fun <HC: Holder<C>> inner1(hh: HC): C {

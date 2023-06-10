@@ -19,7 +19,7 @@ interface SamConstructorDescriptor : SimpleFunctionDescriptor, FunctionInterface
 
 class SamConstructorDescriptorImpl(
     containingDeclaration: DeclarationDescriptor,
-    private val samInterface: ClassDescriptor
+    private konst samInterface: ClassDescriptor
 ) : SimpleFunctionDescriptorImpl(
     containingDeclaration,
     null,
@@ -28,7 +28,7 @@ class SamConstructorDescriptorImpl(
     CallableMemberDescriptor.Kind.SYNTHESIZED,
     samInterface.source
 ), SamConstructorDescriptor {
-    override val baseDescriptorForSynthetic: ClassDescriptor
+    override konst baseDescriptorForSynthetic: ClassDescriptor
         get() = samInterface
 
     override fun getSingleAbstractMethod(): CallableMemberDescriptor =
@@ -38,5 +38,5 @@ class SamConstructorDescriptorImpl(
 object SamConstructorDescriptorKindExclude : DescriptorKindExclude() {
     override fun excludes(descriptor: DeclarationDescriptor) = descriptor is SamConstructorDescriptor
 
-    override val fullyExcludedDescriptorKinds: Int get() = 0
+    override konst fullyExcludedDescriptorKinds: Int get() = 0
 }

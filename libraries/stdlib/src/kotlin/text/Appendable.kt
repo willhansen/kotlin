@@ -9,57 +9,57 @@
 package kotlin.text
 
 /**
- * An object to which char sequences and values can be appended.
+ * An object to which char sequences and konstues can be appended.
  */
 expect interface Appendable {
     /**
-     * Appends the specified character [value] to this Appendable and returns this instance.
+     * Appends the specified character [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character to append.
+     * @param konstue the character to append.
      */
-    fun append(value: Char): Appendable
+    fun append(konstue: Char): Appendable
 
     /**
-     * Appends the specified character sequence [value] to this Appendable and returns this instance.
+     * Appends the specified character sequence [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character sequence to append. If [value] is `null`, then the four characters `"null"` are appended to this Appendable.
+     * @param konstue the character sequence to append. If [konstue] is `null`, then the four characters `"null"` are appended to this Appendable.
      */
-    fun append(value: CharSequence?): Appendable
+    fun append(konstue: CharSequence?): Appendable
 
     /**
-     * Appends a subsequence of the specified character sequence [value] to this Appendable and returns this instance.
+     * Appends a subsequence of the specified character sequence [konstue] to this Appendable and returns this instance.
      *
-     * @param value the character sequence from which a subsequence is appended. If [value] is `null`,
-     *  then characters are appended as if [value] contained the four characters `"null"`.
+     * @param konstue the character sequence from which a subsequence is appended. If [konstue] is `null`,
+     *  then characters are appended as if [konstue] contained the four characters `"null"`.
      * @param startIndex the beginning (inclusive) of the subsequence to append.
      * @param endIndex the end (exclusive) of the subsequence to append.
      *
-     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+     * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
      */
-    fun append(value: CharSequence?, startIndex: Int, endIndex: Int): Appendable
+    fun append(konstue: CharSequence?, startIndex: Int, endIndex: Int): Appendable
 }
 
 /**
- * Appends a subsequence of the specified character sequence [value] to this Appendable and returns this instance.
+ * Appends a subsequence of the specified character sequence [konstue] to this Appendable and returns this instance.
  *
- * @param value the character sequence from which a subsequence is appended.
+ * @param konstue the character sequence from which a subsequence is appended.
  * @param startIndex the beginning (inclusive) of the subsequence to append.
  * @param endIndex the end (exclusive) of the subsequence to append.
  *
- * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [value] character sequence indices or when `startIndex > endIndex`.
+ * @throws IndexOutOfBoundsException or [IllegalArgumentException] when [startIndex] or [endIndex] is out of range of the [konstue] character sequence indices or when `startIndex > endIndex`.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
-public fun <T : Appendable> T.appendRange(value: CharSequence, startIndex: Int, endIndex: Int): T {
+public fun <T : Appendable> T.appendRange(konstue: CharSequence, startIndex: Int, endIndex: Int): T {
     @Suppress("UNCHECKED_CAST")
-    return append(value, startIndex, endIndex) as T
+    return append(konstue, startIndex, endIndex) as T
 }
 
 /**
  * Appends all arguments to the given [Appendable].
  */
-public fun <T : Appendable> T.append(vararg value: CharSequence?): T {
-    for (item in value)
+public fun <T : Appendable> T.append(vararg konstue: CharSequence?): T {
+    for (item in konstue)
         append(item)
     return this
 }
@@ -69,15 +69,15 @@ public fun <T : Appendable> T.append(vararg value: CharSequence?): T {
 @kotlin.internal.InlineOnly
 public inline fun Appendable.appendLine(): Appendable = append('\n')
 
-/** Appends value to the given Appendable and a line feed character (`\n`) after it. */
+/** Appends konstue to the given Appendable and a line feed character (`\n`) after it. */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun Appendable.appendLine(value: CharSequence?): Appendable = append(value).appendLine()
+public inline fun Appendable.appendLine(konstue: CharSequence?): Appendable = append(konstue).appendLine()
 
-/** Appends value to the given Appendable and a line feed character (`\n`) after it. */
+/** Appends konstue to the given Appendable and a line feed character (`\n`) after it. */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun Appendable.appendLine(value: Char): Appendable = append(value).appendLine()
+public inline fun Appendable.appendLine(konstue: Char): Appendable = append(konstue).appendLine()
 
 
 internal fun <T> Appendable.appendElement(element: T, transform: ((T) -> CharSequence)?) {

@@ -36,4 +36,4 @@ package kotlin.jvm
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
-public annotation class PurelyImplements(val value: String)
+public annotation class PurelyImplements(konst konstue: String)

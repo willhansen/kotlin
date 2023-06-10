@@ -4,7 +4,7 @@
 // FULL_JDK
 
 fun box() : String {
-    val vector = java.util.Vector<Int>()
+    konst vector = java.util.Vector<Int>()
     vector.add(1)
     vector.add(2)
     vector.add(3)

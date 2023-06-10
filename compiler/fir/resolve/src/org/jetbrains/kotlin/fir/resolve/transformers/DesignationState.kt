@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.fir.resolve.providers.firProvider
 import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 
 class DesignationState private constructor(
-    val firstDeclaration: FirDeclaration,
-    private val designation: Iterator<FirDeclaration>,
-    val targetClass: FirClassLikeDeclaration
+    konst firstDeclaration: FirDeclaration,
+    private konst designation: Iterator<FirDeclaration>,
+    konst targetClass: FirClassLikeDeclaration
 ) {
     companion object {
         fun create(
@@ -24,8 +24,8 @@ class DesignationState private constructor(
             designationMapForLocalClasses: Map<FirClassLikeDeclaration, FirClassLikeDeclaration?>,
             includeFile: Boolean
         ): DesignationState? {
-            val regularClass = symbol.fir
-            val designation = if (regularClass.isLocal) buildList {
+            konst regularClass = symbol.fir
+            konst designation = if (regularClass.isLocal) buildList {
                 var klass: FirClassLikeDeclaration = regularClass
                 while (true) {
                     this.add(klass)
@@ -33,11 +33,11 @@ class DesignationState private constructor(
                 }
                 reverse()
             } else buildList<FirDeclaration> {
-                val firProvider = regularClass.moduleData.session.firProvider
-                val outerClasses = generateSequence(symbol.classId) { classId ->
+                konst firProvider = regularClass.moduleData.session.firProvider
+                konst outerClasses = generateSequence(symbol.classId) { classId ->
                     classId.outerClassId
                 }.mapTo(mutableListOf()) { firProvider.getFirClassifierByFqName(it) }
-                val file = firProvider.getFirClassifierContainerFileIfAny(regularClass.symbol)
+                konst file = firProvider.getFirClassifierContainerFileIfAny(regularClass.symbol)
                 requireNotNull(file) { "Containing file was not found for\n${regularClass.render()}" }
                 if (includeFile) {
                     this += file
@@ -58,7 +58,7 @@ class DesignationState private constructor(
         if (currentElement == null && designation.hasNext()) {
             currentElement = designation.next()
         }
-        val result = currentElement == declaration
+        konst result = currentElement == declaration
         if (result) {
             if (currentElement == targetClass) {
                 classLocated = true

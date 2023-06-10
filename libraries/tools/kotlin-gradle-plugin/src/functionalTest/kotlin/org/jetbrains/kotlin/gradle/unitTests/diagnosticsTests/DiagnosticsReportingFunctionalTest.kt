@@ -25,7 +25,7 @@ class DiagnosticsReportingFunctionalTest {
     fun testNonDuplicatedReporting() {
         buildProjectWithMockedCheckers {
             applyKotlinJvmPlugin()
-            evaluate()
+            ekonstuate()
             reportTestDiagnostic()
             reportTestDiagnostic()
             checkDiagnostics("nonDuplicatedReporting")
@@ -37,7 +37,7 @@ class DiagnosticsReportingFunctionalTest {
     fun testOncePerProjectReporting() {
         buildProjectWithMockedCheckers {
             applyKotlinJvmPlugin()
-            evaluate()
+            ekonstuate()
 
             reportOnePerProjectTestDiagnostic()
             reportOnePerProjectTestDiagnostic()
@@ -48,21 +48,21 @@ class DiagnosticsReportingFunctionalTest {
 
     @Test
     fun testOncePerBuildReporting() {
-        val root = buildProjectWithMockedCheckers()
+        konst root = buildProjectWithMockedCheckers()
 
         root.applyKotlinJvmPlugin()
-        root.evaluate()
+        root.ekonstuate()
 
         buildProjectWithMockedCheckers("subproject-a", root) {
             applyKotlinJvmPlugin()
-            evaluate()
+            ekonstuate()
             reportOnePerBuildTestDiagnostic()
             reportOnePerBuildTestDiagnostic()
         }
 
         buildProjectWithMockedCheckers("subproject-b", root) {
             applyKotlinJvmPlugin()
-            evaluate()
+            ekonstuate()
             reportOnePerBuildTestDiagnostic()
             reportOnePerBuildTestDiagnostic()
         }
@@ -75,10 +75,10 @@ class DiagnosticsReportingFunctionalTest {
     // they have different message/severity
     @Test
     fun testOncePerBuildWithDifferentSeverities() {
-        val root = buildProject()
+        konst root = buildProject()
 
         root.applyKotlinJvmPlugin()
-        root.evaluate()
+        root.ekonstuate()
 
         buildProject(
             {
@@ -87,7 +87,7 @@ class DiagnosticsReportingFunctionalTest {
             }
         ).run {
             applyKotlinJvmPlugin()
-            evaluate()
+            ekonstuate()
             reportOnePerBuildTestDiagnostic()
             reportOnePerBuildTestDiagnostic(severity = ERROR) // NB: will be lost!
         }
@@ -96,8 +96,8 @@ class DiagnosticsReportingFunctionalTest {
     }
 
     @Test
-    fun testOncePerProjectAndPerBuildAreEquivalentForRoot() {
-        val root = buildProject()
+    fun testOncePerProjectAndPerBuildAreEquikonstentForRoot() {
+        konst root = buildProject()
 
         root.applyKotlinJvmPlugin()
         root.reportOnePerProjectTestDiagnostic()
@@ -110,9 +110,9 @@ class DiagnosticsReportingFunctionalTest {
                 WARNING
             )
         )
-        root.evaluate()
+        root.ekonstuate()
 
-        root.checkDiagnostics("oncePerProjectAndOncePerBuildAreEquivalentForRoot")
+        root.checkDiagnostics("oncePerProjectAndOncePerBuildAreEquikonstentForRoot")
     }
 
     @Test
@@ -121,7 +121,7 @@ class DiagnosticsReportingFunctionalTest {
             applyKotlinJvmPlugin()
             extraProperties.set(PropertiesProvider.PropertyNames.KOTLIN_SUPPRESS_GRADLE_PLUGIN_WARNINGS, "TEST_DIAGNOSTIC")
             reportTestDiagnostic()
-            evaluate()
+            ekonstuate()
             checkDiagnostics("suppressedWarnings")
         }
     }
@@ -132,7 +132,7 @@ class DiagnosticsReportingFunctionalTest {
             applyKotlinJvmPlugin()
             extraProperties.set(PropertiesProvider.PropertyNames.KOTLIN_SUPPRESS_GRADLE_PLUGIN_ERRORS, "TEST_DIAGNOSTIC")
             reportTestDiagnostic(severity = ERROR)
-            evaluate()
+            ekonstuate()
             checkDiagnostics("suppressedErrors")
         }
     }
@@ -143,7 +143,7 @@ class DiagnosticsReportingFunctionalTest {
             applyKotlinJvmPlugin()
             extraProperties.set(PropertiesProvider.PropertyNames.KOTLIN_SUPPRESS_GRADLE_PLUGIN_WARNINGS, "TEST_DIAGNOSTIC")
             reportTestDiagnostic(severity = ERROR)
-            evaluate()
+            ekonstuate()
             checkDiagnostics("suppressForWarningsDoesntWorkForErrors")
         }
     }
@@ -154,7 +154,7 @@ private fun buildProjectWithMockedCheckers(
     parent: ProjectInternal? = null,
     block: ProjectInternal.() -> Unit = { },
 ): ProjectInternal {
-    val project = buildProject(
+    konst project = buildProject(
         {
             if (name != null) withName(name)
             if (parent != null) withParent(parent)

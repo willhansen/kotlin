@@ -24,16 +24,16 @@ object FirOuterClassArgumentsRequiredChecker : FirRegularClassChecker() {
     @OptIn(ResolveStateAccess::class)
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         // Checking the rest super types that weren't resolved on the first OUTER_CLASS_ARGUMENTS_REQUIRED check in FirTypeResolver
-        val oldResolveState = declaration.resolveState
-        val oldList = declaration.superTypeRefs.toList()
+        konst oldResolveState = declaration.resolveState
+        konst oldList = declaration.superTypeRefs.toList()
 
         try {
             for (superTypeRef in declaration.superTypeRefs) {
                 checkOuterClassArgumentsRequired(superTypeRef, declaration, context, reporter)
             }
         } catch (e: ConcurrentModificationException) {
-            val newResolveState = declaration.resolveState
-            val newList = declaration.superTypeRefs.toList()
+            konst newResolveState = declaration.resolveState
+            konst newList = declaration.superTypeRefs.toList()
 
             throw IllegalStateException(
                 """
@@ -56,20 +56,20 @@ object FirOuterClassArgumentsRequiredChecker : FirRegularClassChecker() {
             return
         }
 
-        val type: ConeKotlinType = typeRef.type
-        val delegatedTypeRef = typeRef.delegatedTypeRef
+        konst type: ConeKotlinType = typeRef.type
+        konst delegatedTypeRef = typeRef.delegatedTypeRef
 
         if (delegatedTypeRef is FirUserTypeRef && type is ConeClassLikeType) {
-            val symbol = type.lookupTag.toSymbol(context.session)
+            konst symbol = type.lookupTag.toSymbol(context.session)
 
             if (symbol is FirRegularClassSymbol) {
-                val typeArguments = delegatedTypeRef.qualifier.toTypeProjections()
-                val typeParameters = symbol.typeParameterSymbols
+                konst typeArguments = delegatedTypeRef.qualifier.toTypeProjections()
+                konst typeParameters = symbol.typeParameterSymbols
 
                 for (index in typeArguments.size until typeParameters.size) {
-                    val typeParameter = typeParameters[index]
+                    konst typeParameter = typeParameters[index]
                     if (!isValidTypeParameterFromOuterDeclaration(typeParameter, declaration, context.session)) {
-                        val outerClass = typeParameter.containingDeclarationSymbol as? FirRegularClassSymbol ?: break
+                        konst outerClass = typeParameter.containingDeclarationSymbol as? FirRegularClassSymbol ?: break
                         reporter.reportOn(typeRef.source, FirErrors.OUTER_CLASS_ARGUMENTS_REQUIRED, outerClass, context)
                         break
                     }
@@ -77,7 +77,7 @@ object FirOuterClassArgumentsRequiredChecker : FirRegularClassChecker() {
             }
         }
 
-        val typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef) ?: return
+        konst typeRefAndSourcesForArguments = extractArgumentsTypeRefAndSource(typeRef) ?: return
         for (firTypeRefSource in typeRefAndSourcesForArguments) {
             firTypeRefSource.typeRef?.let { checkOuterClassArgumentsRequired(it, declaration, context, reporter) }
         }

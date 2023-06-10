@@ -4,8 +4,8 @@
 // MODULE: lib
 // FILE: A.kt
 
-inline class A<T> private constructor(private val value: T) {
-    val publicValue: String get() = value.toString()
+inline class A<T> private constructor(private konst konstue: T) {
+    konst publicValue: String get() = konstue.toString()
 
     companion object {
         fun create(c: Char): A<String> = A(c + "K")

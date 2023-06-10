@@ -67,7 +67,7 @@ import org.jetbrains.kotlin.psi.KtWhenExpression
  * DO NOT MODIFY IT MANUALLY
  */
 
-internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConverter {
+internal konst KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConverter {
     add(FirErrors.UNSUPPORTED) { firDiagnostic ->
         UnsupportedImpl(
             firDiagnostic.a,
@@ -774,7 +774,7 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
         )
     }
     add(FirErrors.INVALID_TYPE_OF_ANNOTATION_MEMBER) { firDiagnostic ->
-        InvalidTypeOfAnnotationMemberImpl(
+        InkonstidTypeOfAnnotationMemberImpl(
             firDiagnostic as KtPsiDiagnostic,
             token,
         )
@@ -3743,7 +3743,7 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
         )
     }
     add(FirErrors.INVALID_IF_AS_EXPRESSION) { firDiagnostic ->
-        InvalidIfAsExpressionImpl(
+        InkonstidIfAsExpressionImpl(
             firDiagnostic as KtPsiDiagnostic,
             token,
         )
@@ -3931,7 +3931,7 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
         )
     }
     add(FirErrors.INVALID_CHARACTERS) { firDiagnostic ->
-        InvalidCharactersImpl(
+        InkonstidCharactersImpl(
             firDiagnostic.a,
             firDiagnostic as KtPsiDiagnostic,
             token,
@@ -4291,7 +4291,7 @@ internal val KT_DIAGNOSTIC_CONVERTER = KtDiagnosticConverterBuilder.buildConvert
         )
     }
     add(FirErrors.INVALID_DEFAULT_FUNCTIONAL_PARAMETER_FOR_INLINE) { firDiagnostic ->
-        InvalidDefaultFunctionalParameterForInlineImpl(
+        InkonstidDefaultFunctionalParameterForInlineImpl(
             firDiagnostic.a.source!!.psi as KtExpression,
             firSymbolBuilder.buildSymbol(firDiagnostic.b),
             firDiagnostic as KtPsiDiagnostic,

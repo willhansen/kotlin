@@ -14,17 +14,17 @@ annotation class Anno2
 
 @Repeatable
 @Target(AnnotationTarget.TYPE)
-annotation class Anno3(val x: String)
+annotation class Anno3(konst x: String)
 
 fun box(): String {
-    val x = foo<@Anno Int, <!UNSUPPORTED("annotations on an underscored type argument")!>@Anno<!> _> { it.toFloat() }
-    val y: Pair<Int, Float> = foo<@[<!UNSUPPORTED!>Anno<!> <!UNSUPPORTED!>Anno2<!>] _, <!UNSUPPORTED!>@Anno<!> _> { it.toFloat() }
-    val z1: Pair<Int, Float> = foo<<!UNSUPPORTED!>@Anno<!> <!UNSUPPORTED!>@Anno2<!> /**/ _, @[/**/ <!UNSUPPORTED!>Anno<!>    /**/ ] _> { it.toFloat() }
-    val z2: Pair<Int, Float> = foo<<!UNSUPPORTED!>@Anno3("")<!> /**/ _, @[/**/ <!UNSUPPORTED!>Anno<!>    /**/ <!UNSUPPORTED!>Anno3("")<!> /**/] _,> { it.toFloat() }
+    konst x = foo<@Anno Int, <!UNSUPPORTED("annotations on an underscored type argument")!>@Anno<!> _> { it.toFloat() }
+    konst y: Pair<Int, Float> = foo<@[<!UNSUPPORTED!>Anno<!> <!UNSUPPORTED!>Anno2<!>] _, <!UNSUPPORTED!>@Anno<!> _> { it.toFloat() }
+    konst z1: Pair<Int, Float> = foo<<!UNSUPPORTED!>@Anno<!> <!UNSUPPORTED!>@Anno2<!> /**/ _, @[/**/ <!UNSUPPORTED!>Anno<!>    /**/ ] _> { it.toFloat() }
+    konst z2: Pair<Int, Float> = foo<<!UNSUPPORTED!>@Anno3("")<!> /**/ _, @[/**/ <!UNSUPPORTED!>Anno<!>    /**/ <!UNSUPPORTED!>Anno3("")<!> /**/] _,> { it.toFloat() }
 
-    val z31: Pair<<!UNRESOLVED_REFERENCE!>@Anno3("") _<!>, Float> = 1 to 1f
-    val z33: Pair<<!UNRESOLVED_REFERENCE!>@Anno3("") (_)<!>, Float> = 1 to 1f
-    val z35: Pair<<!UNRESOLVED_REFERENCE!>(@Anno3("") (_))<!>, Float> = 1 to 1f
+    konst z31: Pair<<!UNRESOLVED_REFERENCE!>@Anno3("") _<!>, Float> = 1 to 1f
+    konst z33: Pair<<!UNRESOLVED_REFERENCE!>@Anno3("") (_)<!>, Float> = 1 to 1f
+    konst z35: Pair<<!UNRESOLVED_REFERENCE!>(@Anno3("") (_))<!>, Float> = 1 to 1f
 
     return "OK"
 }

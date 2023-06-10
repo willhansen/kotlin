@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.name.FqName
 
 /** Builds a [HeaderInfo] for progressions built using the `indices` extension property. */
-internal abstract class IndicesHandler(protected val context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
-    private val preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
+internal abstract class IndicesHandler(protected konst context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
+    private konst preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
 
     override fun build(expression: IrCall, data: ProgressionType, scopeOwner: IrSymbol): HeaderInfo? =
         with(context.createIrBuilder(scopeOwner, expression.startOffset, expression.endOffset)) {
-            val last: IrExpression
-            val lastInclusive: IrExpression?
-            val isLastInclusive: Boolean
+            konst last: IrExpression
+            konst lastInclusive: IrExpression?
+            konst isLastInclusive: Boolean
 
             if (preferJavaLikeCounterLoop) {
                 // Convert range with inclusive upper bound to exclusive upper bound if possible.
@@ -58,45 +58,45 @@ internal abstract class IndicesHandler(protected val context: CommonBackendConte
             )
         }
 
-    abstract val IrType.sizePropertyGetter: IrSimpleFunction
+    abstract konst IrType.sizePropertyGetter: IrSimpleFunction
 }
 
 internal class CollectionIndicesHandler(context: CommonBackendContext) : IndicesHandler(context) {
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.isEmpty() &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.isEmpty() &&
                 callee.extensionReceiverParameter?.type?.isCollection() == true &&
                 callee.kotlinFqName == FqName("kotlin.collections.<get-indices>")
     }
 
-    override val IrType.sizePropertyGetter: IrSimpleFunction
+    override konst IrType.sizePropertyGetter: IrSimpleFunction
         get() = context.ir.symbols.collection.getPropertyGetter("size")!!.owner
 }
 
 internal class ArrayIndicesHandler(context: CommonBackendContext) : IndicesHandler(context) {
-    private val supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
+    private konst supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
 
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.isEmpty() &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.isEmpty() &&
                 callee.extensionReceiverParameter?.type?.let {
                     it.isArray() || it.isPrimitiveArray() || (supportsUnsignedArrays && it.isUnsignedArray())
                 } == true &&
                 callee.kotlinFqName == FqName("kotlin.collections.<get-indices>")
     }
 
-    override val IrType.sizePropertyGetter: IrSimpleFunction
+    override konst IrType.sizePropertyGetter: IrSimpleFunction
         get() = getClass()!!.getPropertyGetter("size")!!.owner
 }
 
 internal class CharSequenceIndicesHandler(context: CommonBackendContext) : IndicesHandler(context) {
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.isEmpty() &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.isEmpty() &&
                 callee.extensionReceiverParameter?.type?.isCharSequence() == true &&
                 callee.kotlinFqName == FqName("kotlin.text.<get-indices>")
     }
 
-    override val IrType.sizePropertyGetter: IrSimpleFunction
+    override konst IrType.sizePropertyGetter: IrSimpleFunction
         get() = context.ir.symbols.charSequence.getPropertyGetter("length")!!.owner
 }

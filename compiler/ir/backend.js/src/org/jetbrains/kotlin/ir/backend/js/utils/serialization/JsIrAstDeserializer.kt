@@ -18,15 +18,15 @@ fun deserializeJsIrProgramFragment(input: ByteArray): JsIrProgramFragment {
     return JsIrAstDeserializer(input).readFragment()
 }
 
-private class JsIrAstDeserializer(private val source: ByteArray) {
+private class JsIrAstDeserializer(private konst source: ByteArray) {
 
-    private val buffer = ByteBuffer.wrap(source)
+    private konst buffer = ByteBuffer.wrap(source)
 
-    private val scope = emptyScope
-    private val fileStack: Deque<String> = ArrayDeque()
+    private konst scope = emptyScope
+    private konst fileStack: Deque<String> = ArrayDeque()
 
-    private val stringTable = readArray { readString() }
-    private val nameTable = readArray { readName() }
+    private konst stringTable = readArray { readString() }
+    private konst nameTable = readArray { readName() }
 
     private fun readByte(): Byte {
         return buffer.get()
@@ -45,9 +45,9 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
     }
 
     private fun readString(): String {
-        val length = readInt()
-        val offset = buffer.position()
-        val result = String(source, offset, length, SerializationCharset)
+        konst length = readInt()
+        konst offset = buffer.position()
+        konst result = String(source, offset, length, SerializationCharset)
         buffer.position(offset + length)
         return result
     }
@@ -64,8 +64,8 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
     }
 
     private inline fun <T> readList(readElement: () -> T): List<T> {
-        val length = readInt()
-        val result = ArrayList<T>(length)
+        konst length = readInt()
+        konst result = ArrayList<T>(length)
         for (i in 0 until length) {
             result.add(readElement())
         }
@@ -117,7 +117,7 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
         return withComments {
             withLocation {
                 with(StatementIds) {
-                    when (val id = readByte().toInt()) {
+                    when (konst id = readByte().toInt()) {
                         RETURN -> {
                             JsReturn(ifTrue { readExpression() })
                         }
@@ -178,9 +178,9 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
                             JsDoWhile(readExpression(), readStatement())
                         }
                         FOR -> {
-                            val condition = ifTrue { readExpression() }
-                            val incrementExpression = ifTrue { readExpression() }
-                            val body = ifTrue { readStatement() }
+                            konst condition = ifTrue { readExpression() }
+                            konst incrementExpression = ifTrue { readExpression() }
+                            konst body = ifTrue { readStatement() }
 
                             ifTrue {
                                 JsFor(
@@ -217,7 +217,7 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
                         }
                         EXPORT -> {
                             JsExport(
-                                when (val type = readByte().toInt()) {
+                                when (konst type = readByte().toInt()) {
                                     ExportType.ALL -> JsExport.Subject.All
                                     ExportType.ITEMS -> JsExport.Subject.Elements(readList {
                                         JsExport.Element(
@@ -233,7 +233,7 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
                         IMPORT -> {
                             JsImport(
                                 readString(),
-                                when (val type = readByte().toInt()) {
+                                when (konst type = readByte().toInt()) {
                                     ImportType.ALL -> JsImport.Target.All(nameTable[readInt()].makeRef())
                                     ImportType.DEFAULT -> JsImport.Target.Default(nameTable[readInt()].makeRef())
                                     ImportType.ITEMS -> JsImport.Target.Elements(readList {
@@ -265,16 +265,16 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
         }
     }
 
-    private val sideEffectKindValues = SideEffectKind.values()
-    private val jsBinaryOperatorValues = JsBinaryOperator.values()
-    private val jsUnaryOperatorValues = JsUnaryOperator.values()
-    private val jsFunctionModifiersValues = JsFunction.Modifier.values()
+    private konst sideEffectKindValues = SideEffectKind.konstues()
+    private konst jsBinaryOperatorValues = JsBinaryOperator.konstues()
+    private konst jsUnaryOperatorValues = JsUnaryOperator.konstues()
+    private konst jsFunctionModifiersValues = JsFunction.Modifier.konstues()
 
     private fun readExpression(): JsExpression {
         return withComments {
             withLocation {
                 with(ExpressionIds) {
-                    when (val id = readByte().toInt()) {
+                    when (konst id = readByte().toInt()) {
                         THIS_REF -> {
                             JsThisRef()
                         }
@@ -327,7 +327,7 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
                             }
                         }
                         DOC_COMMENT -> {
-                            val tags = hashMapOf<String, Any>()
+                            konst tags = hashMapOf<String, Any>()
                             readRepeated {
                                 tags[stringTable[readInt()]] = ifTrue { readExpression() } ?: stringTable[readInt()]
                             }
@@ -436,11 +436,11 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
         }
     }
 
-    private val specialFunctionValues = SpecialFunction.values()
+    private konst specialFunctionValues = SpecialFunction.konstues()
 
     private fun readName(): JsName {
-        val identifier = stringTable[readInt()]
-        val name = ifTrue {
+        konst identifier = stringTable[readInt()]
+        konst name = ifTrue {
             JsScope.declareTemporaryName(identifier)
         } ?: JsDynamicScope.declareName(identifier)
         ifTrue { name.localAlias = readLocalAlias() }
@@ -457,25 +457,25 @@ private class JsIrAstDeserializer(private val source: ByteArray) {
     }
 
     private fun readComment(): JsComment {
-        val text = readString()
+        konst text = readString()
         return ifTrue { JsMultiLineComment(text) } ?: JsSingleLineComment(text)
     }
 
     private inline fun <T : JsNode> withLocation(action: () -> T): T {
         return ifTrue {
-            val deserializedFile = ifTrue { stringTable[readInt()] }
-            val file = deserializedFile ?: fileStack.peek()
+            konst deserializedFile = ifTrue { stringTable[readInt()] }
+            konst file = deserializedFile ?: fileStack.peek()
 
-            val startLine = readInt()
-            val startChar = readInt()
-            val deserializedLocation = file?.let { JsLocation(it, startLine, startChar) }
+            konst startLine = readInt()
+            konst startChar = readInt()
+            konst deserializedLocation = file?.let { JsLocation(it, startLine, startChar) }
 
-            val shouldUpdateFile = deserializedFile != null && deserializedFile != fileStack.peek()
+            konst shouldUpdateFile = deserializedFile != null && deserializedFile != fileStack.peek()
 
             if (shouldUpdateFile) {
                 fileStack.push(deserializedFile)
             }
-            val node = action()
+            konst node = action()
             if (deserializedLocation != null) {
                 node.source = deserializedLocation
             }

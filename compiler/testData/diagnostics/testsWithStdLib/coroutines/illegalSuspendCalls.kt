@@ -19,5 +19,5 @@ class A {
     }
 }
 
-val x = <!ILLEGAL_SUSPEND_FUNCTION_CALL!>foo<!>()
-val y = <!ILLEGAL_SUSPEND_FUNCTION_CALL!>bar<!>()
+konst x = <!ILLEGAL_SUSPEND_FUNCTION_CALL!>foo<!>()
+konst y = <!ILLEGAL_SUSPEND_FUNCTION_CALL!>bar<!>()

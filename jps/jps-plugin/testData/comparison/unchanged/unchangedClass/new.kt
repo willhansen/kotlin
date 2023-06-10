@@ -8,10 +8,10 @@ class UnchangedClassWithFunOnly {
 }
 
 class UnchangedClassWithValOnly {
-    public val unchangedPublicVal = 10
-    protected val unchangedProtectedVal = 10
-    internal val unchangedInternalVal = 10
-    private val unchangedPrivateVal = 10
+    public konst unchangedPublicVal = 10
+    protected konst unchangedProtectedVal = 10
+    internal konst unchangedInternalVal = 10
+    private konst unchangedPrivateVal = 10
 }
 
 class UnchangedClassWithVarOnly {
@@ -22,10 +22,10 @@ class UnchangedClassWithVarOnly {
 }
 
 class UnchangedClass {
-    public val unchangedPublicVal = 10
-    protected val unchangedProtectedVal = 10
-    internal val unchangedInternalVal = 10
-    private val unchangedPrivateVal = 10
+    public konst unchangedPublicVal = 10
+    protected konst unchangedProtectedVal = 10
+    internal konst unchangedInternalVal = 10
+    private konst unchangedPrivateVal = 10
 
     public var unchangedPublicVar = 20
     protected var unchangedProtectedVar = 20

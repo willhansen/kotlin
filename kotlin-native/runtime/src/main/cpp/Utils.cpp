@@ -19,8 +19,8 @@ constexpr auto rotl32(X x, R r) noexcept { return (x << r) | (x >> (32 - r)); }
 template<size_t Bits>
 struct HashCompineImpl {
     template <typename SizeT>
-    constexpr static SizeT fn(SizeT seed, SizeT value) {
-        seed ^= value + 0x9e3779b9 + (seed<<6) + (seed>>2);
+    constexpr static SizeT fn(SizeT seed, SizeT konstue) {
+        seed ^= konstue + 0x9e3779b9 + (seed<<6) + (seed>>2);
         return seed;
     }
 };
@@ -66,6 +66,6 @@ struct HashCompineImpl<64> {
 
 } // namespace
 
-size_t kotlin::CombineHash(size_t seed, size_t value) {
-    return HashCompineImpl<sizeof(std::size_t) * CHAR_BIT>::fn(seed, value);
+size_t kotlin::CombineHash(size_t seed, size_t konstue) {
+    return HashCompineImpl<sizeof(std::size_t) * CHAR_BIT>::fn(seed, konstue);
 }

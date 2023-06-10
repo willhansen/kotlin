@@ -29,16 +29,16 @@ class SymbolBasedField(
         javac: JavacWrapper
 ) : SymbolBasedMember<VariableElement>(element, containingClass, javac), JavaField {
 
-    override val isEnumEntry: Boolean
+    override konst isEnumEntry: Boolean
         get() = element.kind == ElementKind.ENUM_CONSTANT
 
-    override val type: JavaType
+    override konst type: JavaType
         get() = SymbolBasedType.create(element.asType(), javac)
 
-    override val initializerValue: Any?
+    override konst initializerValue: Any?
         by lazy { element.constantValue }
 
-    override val hasConstantNotNullInitializer: Boolean
+    override konst hasConstantNotNullInitializer: Boolean
         get() = initializerValue != null
 
 }

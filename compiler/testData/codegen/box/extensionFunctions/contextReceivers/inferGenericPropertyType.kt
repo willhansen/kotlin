@@ -1,10 +1,10 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-class Result<T>(val x: T)
+class Result<T>(konst x: T)
 
 context(Result<T>)
-val <T> result: Result<T> get() = this@Result
+konst <T> result: Result<T> get() = this@Result
 
 fun <T> Result<T>.x(): T {
     with(result) {

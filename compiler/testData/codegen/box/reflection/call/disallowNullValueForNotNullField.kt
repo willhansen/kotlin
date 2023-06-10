@@ -29,7 +29,7 @@ class C {
 }
 
 fun box(): String {
-    val p = A::class.memberProperties.single() as KMutableProperty1<A, String?>
+    konst p = A::class.memberProperties.single() as KMutableProperty1<A, String?>
     p.isAccessible = true
     try {
         p.setter.call(A(), null)
@@ -37,7 +37,7 @@ fun box(): String {
     } catch (e: IllegalArgumentException) {}
 
 
-    val o = O::class.memberProperties.single() as KMutableProperty1<O, String?>
+    konst o = O::class.memberProperties.single() as KMutableProperty1<O, String?>
     o.isAccessible = true
     try {
         o.setter.call(O, null)
@@ -45,21 +45,21 @@ fun box(): String {
     } catch (e: IllegalArgumentException) {}
 
 
-    val c = CounterTest::class.memberProperties.single { it.name == "baz" } as KMutableProperty1<CounterTest<*>, String?>
+    konst c = CounterTest::class.memberProperties.single { it.name == "baz" } as KMutableProperty1<CounterTest<*>, String?>
     c.isAccessible = true
     c.setter.call(CounterTest(""), null) // Should not fail, because CounterTest::baz is nullable
-    val d = CounterTest::class.memberProperties.single { it.name == "generic" } as KMutableProperty1<CounterTest<*>, String?>
+    konst d = CounterTest::class.memberProperties.single { it.name == "generic" } as KMutableProperty1<CounterTest<*>, String?>
     d.isAccessible = true
     d.setter.call(CounterTest(""), null) // Also should not fail, because we can't be sure about nullability of 'generic'
 
-    val z = C.Companion::class.memberProperties.single { it.name == "z" } as KMutableProperty1<C.Companion, String?>
+    konst z = C.Companion::class.memberProperties.single { it.name == "z" } as KMutableProperty1<C.Companion, String?>
     z.isAccessible = true
     try {
         z.setter.call(C, null)
         return "Fail: exception should have been thrown"
     } catch (e: IllegalArgumentException) {}
 
-    val zz = C.getBoundZ() as KMutableProperty0<String?>
+    konst zz = C.getBoundZ() as KMutableProperty0<String?>
     zz.isAccessible = true
     try {
         zz.setter.call(null)

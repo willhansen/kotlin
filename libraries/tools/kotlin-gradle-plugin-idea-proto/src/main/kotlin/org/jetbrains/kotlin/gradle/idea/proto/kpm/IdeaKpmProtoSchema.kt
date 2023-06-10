@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoPro
 import org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.ideaKpmSchemaInfoProto
 
 internal object IdeaKpmProtoSchema {
-    const val versionMajor = 1
-    const val versionMinor = 0
-    const val versionPatch = 0
+    const konst versionMajor = 1
+    const konst versionMinor = 0
+    const konst versionPatch = 0
 
-    internal val infos = listOf(
+    internal konst infos = listOf(
         ideaKpmSchemaInfoProto {
             sinceSchemaVersionMajor = 1
             sinceSchemaVersionMinor = 0

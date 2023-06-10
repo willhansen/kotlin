@@ -7,7 +7,7 @@ class B : A {
 }
 
 fun box(): String {
-    val result = B().visit("K", "O")
+    konst result = B().visit("K", "O")
     if (result != "OK") return "fail $result"
 
     return B().visit("OK")

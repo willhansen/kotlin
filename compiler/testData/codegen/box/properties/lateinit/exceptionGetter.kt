@@ -4,7 +4,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     try {
         a.str
     } catch (e: RuntimeException) {

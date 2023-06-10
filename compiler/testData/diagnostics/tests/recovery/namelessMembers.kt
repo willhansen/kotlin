@@ -6,7 +6,7 @@ class C {
 
     }
 
-    val<!SYNTAX!><!> : Int = 1
+    konst<!SYNTAX!><!> : Int = 1
 
     class<!SYNTAX!><!> {}
 
@@ -15,4 +15,4 @@ class C {
 
 class C1<<!SYNTAX!>in<!>> {}
 
-class C2(val<!SYNTAX!><!>) {}
+class C2(konst<!SYNTAX!><!>) {}

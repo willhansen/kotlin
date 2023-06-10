@@ -14,7 +14,7 @@ public class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.setMyStr()
     return a.getMyStr()
 }

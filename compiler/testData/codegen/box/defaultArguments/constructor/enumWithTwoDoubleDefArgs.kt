@@ -1,4 +1,4 @@
-enum class Foo(val a: Double = 1.0, val b: Double = 1.0) {
+enum class Foo(konst a: Double = 1.0, konst b: Double = 1.0) {
     A(),
     B(2.0, 2.0),
     C(b = 2.0),

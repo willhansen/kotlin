@@ -1,16 +1,16 @@
 enum class X {
     B {
-        val value2 = "K"
+        konst konstue2 = "K"
 
-        val anonObject = object {
+        konst anonObject = object {
             override fun toString(): String =
-                    "O" + value2
+                    "O" + konstue2
         }
 
-        override val value = anonObject.toString()
+        override konst konstue = anonObject.toString()
     };
 
-    abstract val value: String
+    abstract konst konstue: String
 }
 
-fun box() = X.B.value
+fun box() = X.B.konstue

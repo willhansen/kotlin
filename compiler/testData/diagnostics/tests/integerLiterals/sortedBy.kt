@@ -13,9 +13,9 @@ enum class Cause {
 }
 
 class Some {
-    internal val register = mutableListOf<Pair<Cause, ChallengeFunction>>()
+    internal konst register = mutableListOf<Pair<Cause, ChallengeFunction>>()
 
-    internal val challenges: List<ChallengeFunction>
+    internal konst challenges: List<ChallengeFunction>
         get() = register.filter { it.first != ERROR }.sortedBy {
             when (it.first) {
                 FIRST -> 1

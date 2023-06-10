@@ -20,13 +20,13 @@ import kotlin.coroutines.suspendCoroutine
 
 /**
  * See [KotlinPluginLifecycle]:
- * This [Future] represents a value that will be available in some 'future' time.
+ * This [Future] represents a konstue that will be available in some 'future' time.
  *
  *
- * #### Simple use case example: Deferring the value of a property to a given [KotlinPluginLifecycle.Stage]:
+ * #### Simple use case example: Deferring the konstue of a property to a given [KotlinPluginLifecycle.Stage]:
  *
  * ```kotlin
- * val myFutureProperty: Future<Int> = project.future {
+ * konst myFutureProperty: Future<Int> = project.future {
  *     await(FinaliseDsl) // <- suspends
  *     42
  * }
@@ -36,7 +36,7 @@ import kotlin.coroutines.suspendCoroutine
  * #### Example Usage: Extending KotlinSourceSet with a property that relies on the final refines edges.
  *
  * ```kotlin
- * internal val KotlinSourceSet.dependsOnCommonMain: Future<Boolean> by lazyFuture("dependsOnCommonMain") {
+ * internal konst KotlinSourceSet.dependsOnCommonMain: Future<Boolean> by lazyFuture("dependsOnCommonMain") {
  *    await(AfterFinaliseRefinesEdges)
  *    return dependsOn.contains { it.name == "commonMain") }
  * }
@@ -52,7 +52,7 @@ internal interface LenientFuture<T> : Future<T> {
 }
 
 internal interface CompletableFuture<T> : Future<T> {
-    fun complete(value: T)
+    fun complete(konstue: T)
 }
 
 internal fun CompletableFuture<Unit>.complete() = complete(Unit)
@@ -73,7 +73,7 @@ internal inline fun <Receiver, reified T> futureExtension(
 
 internal fun <T> Project.future(block: suspend Project.() -> T): Future<T> = kotlinPluginLifecycle.future { block() }
 
-internal val <T> Future<T>.lenient: LenientFuture<T> get() = LenientFutureImpl(this)
+internal konst <T> Future<T>.lenient: LenientFuture<T> get() = LenientFutureImpl(this)
 
 /**
  * Shortcut for
@@ -96,13 +96,13 @@ internal fun <T> CompletableFuture(): CompletableFuture<T> {
 }
 
 private class FutureImpl<T>(
-    private val deferred: Completable<T> = Completable(),
-    private val lifecycle: KotlinPluginLifecycle? = null
+    private konst deferred: Completable<T> = Completable(),
+    private konst lifecycle: KotlinPluginLifecycle? = null
 ) : CompletableFuture<T>, Serializable {
     fun completeWith(result: Result<T>) = deferred.completeWith(result)
 
-    override fun complete(value: T) {
-        deferred.complete(value)
+    override fun complete(konstue: T) {
+        deferred.complete(konstue)
     }
 
     override suspend fun await(): T {
@@ -120,15 +120,15 @@ private class FutureImpl<T>(
         return Surrogate(getOrThrow())
     }
 
-    private class Surrogate<T>(private val value: T) : Serializable {
+    private class Surrogate<T>(private konst konstue: T) : Serializable {
         private fun readResolve(): Any {
-            return FutureImpl(Completable(value))
+            return FutureImpl(Completable(konstue))
         }
     }
 }
 
 private class LenientFutureImpl<T>(
-    private val future: Future<T>
+    private konst future: Future<T>
 ) : LenientFuture<T>, Serializable {
     override suspend fun await(): T {
         return future.await()
@@ -150,29 +150,29 @@ private class LenientFutureImpl<T>(
         return Surrogate(getOrNull())
     }
 
-    private class Surrogate<T>(private val value: T) : Serializable {
+    private class Surrogate<T>(private konst konstue: T) : Serializable {
         private fun readResolve(): Any {
-            return LenientFutureImpl(FutureImpl(Completable(value)))
+            return LenientFutureImpl(FutureImpl(Completable(konstue)))
         }
     }
 }
 
-private class LazyFutureImpl<T>(private val future: Lazy<Future<T>>) : Future<T>, Serializable {
+private class LazyFutureImpl<T>(private konst future: Lazy<Future<T>>) : Future<T>, Serializable {
     override suspend fun await(): T {
-        return future.value.await()
+        return future.konstue.await()
     }
 
     override fun getOrThrow(): T {
-        return future.value.getOrThrow()
+        return future.konstue.getOrThrow()
     }
 
     private fun writeReplace(): Any {
         return Surrogate(getOrThrow())
     }
 
-    private class Surrogate<T>(private val value: T) : Serializable {
+    private class Surrogate<T>(private konst konstue: T) : Serializable {
         private fun readResolve(): Any {
-            return FutureImpl(Completable(value))
+            return FutureImpl(Completable(konstue))
         }
     }
 }
@@ -181,20 +181,20 @@ private class LazyFutureImpl<T>(private val future: Lazy<Future<T>>) : Future<T>
  * Simple, Single Threaded, replacement for kotlinx.coroutines.CompletableDeferred.
  */
 private class Completable<T>(
-    private var value: Result<T>? = null
+    private var konstue: Result<T>? = null
 ) {
-    constructor(value: T) : this(Result.success(value))
+    constructor(konstue: T) : this(Result.success(konstue))
 
-    val isCompleted: Boolean get() = value != null
+    konst isCompleted: Boolean get() = konstue != null
 
-    private val waitingContinuations = mutableListOf<Continuation<Result<T>>>()
+    private konst waitingContinuations = mutableListOf<Continuation<Result<T>>>()
 
     fun completeWith(result: Result<T>) {
-        check(value == null) { "Already completed with $value" }
-        value = result
+        check(konstue == null) { "Already completed with $konstue" }
+        konstue = result
 
         /* Capture and clear current waiting continuations */
-        val continuations = waitingContinuations.toList()
+        konst continuations = waitingContinuations.toList()
         waitingContinuations.clear()
 
         continuations.forEach { continuation ->
@@ -205,26 +205,26 @@ private class Completable<T>(
         Safety check:
         We do not expect any coroutines waiting:
         Any continuation that, during its above .resume, calls into '.await()' shall
-        directly resume and receive the value currently set.
+        directly resume and receive the konstue currently set.
 
         If the waiting continuations are not empty, then those would be leaking.
          */
         assert(waitingContinuations.isEmpty())
     }
 
-    fun complete(value: T) {
-        completeWith(Result.success(value))
+    fun complete(konstue: T) {
+        completeWith(Result.success(konstue))
     }
 
     fun getCompleted(): T {
-        val value = this.value ?: throw IllegalStateException("Not completed yet")
-        return value.getOrThrow()
+        konst konstue = this.konstue ?: throw IllegalStateException("Not completed yet")
+        return konstue.getOrThrow()
     }
 
     suspend fun await(): T {
-        val value = this.value
-        if (value != null) {
-            return value.getOrThrow()
+        konst konstue = this.konstue
+        if (konstue != null) {
+            return konstue.getOrThrow()
         }
 
         return suspendCoroutine<Result<T>> { continuation ->

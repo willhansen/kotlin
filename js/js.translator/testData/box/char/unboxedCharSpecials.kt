@@ -4,7 +4,7 @@
 private inline fun typeOf(x: dynamic): String = js("typeof x").unsafeCast<String>()
 
 fun box(): String {
-    val arr = charArrayOf('A')
+    konst arr = charArrayOf('A')
 
     var r = typeOf(arr.iterator().asDynamic().nextChar())
     if (r != "number") return "fail1: $r"

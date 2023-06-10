@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test simple type alias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             simpleSingleSourceTarget("a", "typealias X = Int")
             simpleSingleSourceTarget("b", "typealias X = Int")
@@ -28,7 +28,7 @@ class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizatio
      * See: https://youtrack.jetbrains.com/issue/KT-45992
      */
     fun `test typealias and class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a,b)")
             simpleSingleSourceTarget("a", """class X """)
             simpleSingleSourceTarget(
@@ -43,7 +43,7 @@ class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test typealias to different classes`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(e, f)", "(a, b, c, d)", "(a, b, c, d, e, f)")
             simpleSingleSourceTarget(
                 "a", """
@@ -104,7 +104,7 @@ class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizatio
 
 
     fun `test typealias chain`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -131,7 +131,7 @@ class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test long typealias chain`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -164,7 +164,7 @@ class HierarchicalTypeAliasCommonizationTest : AbstractInlineSourcesCommonizatio
     }
 
     fun `test typealias with phantom type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(

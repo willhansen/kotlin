@@ -14,7 +14,7 @@ import kotlin.io.path.*
 
 @JsGradlePluginTests
 open class IncrementalCompilationJsMultiProjectIT : BaseIncrementalCompilationMultiProjectIT() {
-    override val defaultProjectName: String = "incrementalMultiproject"
+    override konst defaultProjectName: String = "incrementalMultiproject"
 
     override fun defaultProject(
         gradleVersion: GradleVersion,
@@ -22,22 +22,22 @@ open class IncrementalCompilationJsMultiProjectIT : BaseIncrementalCompilationMu
         test: TestProject.() -> Unit
     ): TestProject = project(defaultProjectName, gradleVersion) {
         listOf("app", "lib").forEach {
-            val subProject = subProject(it)
+            konst subProject = subProject(it)
             subProject.javaSourcesDir().deleteRecursively()
-            val buildGradleJs = subProject.projectPath.resolve("build-js.gradle")
+            konst buildGradleJs = subProject.projectPath.resolve("build-js.gradle")
             subProject.buildGradle.writeText(buildGradleJs.readText())
             buildGradleJs.deleteExisting()
         }
         test()
     }
 
-    override val additionalLibDependencies: String =
+    override konst additionalLibDependencies: String =
         "implementation \"org.jetbrains.kotlin:kotlin-test-js:${'$'}kotlin_version\""
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = "compileKotlinJs"
 
-    override val compileCacheFolderName: String
+    override konst compileCacheFolderName: String
         get() = "caches-js"
 
     @Disabled("compileKotlinJs's modification does not work")
@@ -152,21 +152,21 @@ open class IncrementalCompilationJsMultiProjectIT : BaseIncrementalCompilationMu
 }
 
 class IncrementalCompilationJsMultiProjectWithPreciseBackupIT : IncrementalCompilationJsMultiProjectIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
 @JvmGradlePluginTests
 open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationMultiProjectIT() {
-    override val additionalLibDependencies: String =
+    override konst additionalLibDependencies: String =
         "implementation \"org.jetbrains.kotlin:kotlin-test:${'$'}kotlin_version\""
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = "compileKotlin"
 
-    override val compileCacheFolderName: String
+    override konst compileCacheFolderName: String
         get() = "caches-jvm"
 
-    override val defaultProjectName: String = "incrementalMultiproject"
+    override konst defaultProjectName: String = "incrementalMultiproject"
 
     @DisplayName("'inspectClassesForKotlinIC' task is added to execution plan")
     open fun testInspectClassesForKotlinICTask(gradleVersion: GradleVersion) {
@@ -187,7 +187,7 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
         project("duplicatedClass", gradleVersion) {
             build("assemble")
 
-            val usagesFiles = listOf("useBuzz.kt", "useA.kt").map {
+            konst usagesFiles = listOf("useBuzz.kt", "useA.kt").map {
                 subProject("app").kotlinSourcesDir().resolve(it)
             }
             usagesFiles.forEach { file -> file.modify { "$it\n " } }
@@ -219,7 +219,7 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
     @DisplayName("Imncremental compilation with source set update")
     @GradleTest
     open fun testSourceSetAdjustment(gradleVersion: GradleVersion) {
-        val setUpExternalSource = "sourceSets[\"main\"].kotlin.srcDir(\"../external/src\")"
+        konst setUpExternalSource = "sourceSets[\"main\"].kotlin.srcDir(\"../external/src\")"
         defaultProject(gradleVersion) {
             subProject("lib").buildGradle.appendText("\n$setUpExternalSource")
             subProject("lib")
@@ -252,11 +252,11 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
                 """.trimIndent()
             }
 
-            val libGroovySrcBar = subProject("lib")
+            konst libGroovySrcBar = subProject("lib")
                 .projectPath
                 .resolve("src/main/groovy/bar")
                 .apply { createDirectories() }
-            val groovyClass = libGroovySrcBar.resolve("GroovyClass.groovy")
+            konst groovyClass = libGroovySrcBar.resolve("GroovyClass.groovy")
             groovyClass.writeText(
                 """
                 package bar
@@ -289,7 +289,7 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
 
             build("assemble")
 
-            val aKt = subProject("lib").kotlinSourcesDir().resolve("bar/A.kt")
+            konst aKt = subProject("lib").kotlinSourcesDir().resolve("bar/A.kt")
             aKt.writeText(
                 """
                 package bar
@@ -302,7 +302,7 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
             )
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     libSources = listOf("bar/A.kt", "bar/B.kt"),
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt")
                 )
@@ -313,16 +313,16 @@ open class IncrementalCompilationJvmMultiProjectIT : BaseIncrementalCompilationM
 }
 
 class IncrementalCompilationJvmMultiProjectWithPreciseBackupIT : IncrementalCompilationJvmMultiProjectIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
 class IncrementalCompilationFirJvmMultiProjectIT : IncrementalCompilationJvmMultiProjectIT() {
-    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
+    override konst defaultBuildOptions: BuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
 }
 
 open class IncrementalCompilationOldICJvmMultiProjectIT : IncrementalCompilationJvmMultiProjectIT() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
 
     @DisplayName("'inspectClassesForKotlinIC' task is added to execution plan")
     @GradleTest
@@ -411,7 +411,7 @@ open class IncrementalCompilationOldICJvmMultiProjectIT : IncrementalCompilation
     @GradleTest
     override fun testCompileLibWithGroovy(gradleVersion: GradleVersion) {
         testCompileLibWithGroovy_doTest(gradleVersion) { project, result ->
-            val expectedSources = project.subProject("app").projectPath.resolve("src").allKotlinSources +
+            konst expectedSources = project.subProject("app").projectPath.resolve("src").allKotlinSources +
                     listOf(project.subProject("lib").kotlinSourcesDir().resolve("bar/A.kt"))
 
             assertCompiledKotlinSources(
@@ -467,16 +467,16 @@ open class IncrementalCompilationOldICJvmMultiProjectIT : IncrementalCompilation
 }
 
 class IncrementalCompilationOldICJvmMultiProjectWithPreciseBackupIT : IncrementalCompilationOldICJvmMultiProjectIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }
 
 abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilationBaseIT() {
 
-    protected abstract val compileKotlinTaskName: String
+    protected abstract konst compileKotlinTaskName: String
 
-    protected abstract val compileCacheFolderName: String
+    protected abstract konst compileCacheFolderName: String
 
-    protected abstract val additionalLibDependencies: String
+    protected abstract konst additionalLibDependencies: String
 
     protected fun TestProject.changeMethodSignatureInLib() {
         subProject("lib").kotlinSourcesDir().resolve("bar/A.kt").modify {
@@ -494,7 +494,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
         libSources: List<String> = emptyList(),
         appSources: List<String> = emptyList()
     ): Iterable<Path> {
-        val expectedLibSources = if (libSources.isNotEmpty()) {
+        konst expectedLibSources = if (libSources.isNotEmpty()) {
             sourceFilesRelativeToProject(
                 libSources,
                 sourcesDir = { kotlinSourcesDir() },
@@ -504,7 +504,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             emptyList()
         }
 
-        val expectedAppSources = if (appSources.isNotEmpty()) {
+        konst expectedAppSources = if (appSources.isNotEmpty()) {
             sourceFilesRelativeToProject(
                 appSources,
                 sourcesDir = { kotlinSourcesDir() },
@@ -526,7 +526,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             changeMethodSignatureInLib()
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     libSources = listOf("bar/A.kt", "bar/B.kt", "bar/barUseA.kt"),
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt", "foo/fooUseA.kt")
                 )
@@ -547,7 +547,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             }
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     libSources = listOf("bar/A.kt", "bar/B.kt"),
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt")
                 )
@@ -614,7 +614,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             changeMethodSignatureInLib()
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt", "foo/fooUseA.kt")
                 ) + subProject("lib").projectPath.resolve("src").allKotlinSources.map { it.relativeTo(projectPath) }
 
@@ -629,7 +629,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
         defaultProject(gradleVersion) {
             build("assemble")
 
-            val origFile = subProject("lib").kotlinSourcesDir().resolve("bar/barUseAB.kt")
+            konst origFile = subProject("lib").kotlinSourcesDir().resolve("bar/barUseAB.kt")
             subProject("app").kotlinSourcesDir().run {
                 resolve("bar").createDirectory()
                 origFile.copyTo(resolve("bar/barUseAB.kt"))
@@ -662,7 +662,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             }
 
             buildAndFail("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     libSources = listOf("bar/B.kt", "bar/barUseAB.kt", "bar/barUseB.kt"),
                     appSources = listOfNotNull(
                         "foo/BB.kt", "foo/fooUseB.kt", "foo/fooCallUseAB.kt",
@@ -680,9 +680,9 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
         defaultProject(gradleVersion) {
             build("assemble")
 
-            val appBuildGradleContent = subProject("app").buildGradle.readText()
+            konst appBuildGradleContent = subProject("app").buildGradle.readText()
             subProject("app").buildGradle.modify { it.checkedReplace("implementation project(':lib')", "") }
-            val aaKt = subProject("app").kotlinSourcesDir().resolve("foo/AA.kt")
+            konst aaKt = subProject("app").kotlinSourcesDir().resolve("foo/AA.kt")
             aaKt.modify {
                 """
                 $it
@@ -724,7 +724,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
 
             build("assemble")
 
-            val barUseABKt = subProject("lib").kotlinSourcesDir().resolve("bar/barUseAB.kt")
+            konst barUseABKt = subProject("lib").kotlinSourcesDir().resolve("bar/barUseAB.kt")
             subProject("app").kotlinSourcesDir().run {
                 resolve("bar").createDirectory()
                 barUseABKt.copyTo(resolve("bar/barUseAB.kt"))
@@ -756,9 +756,9 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             }
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     libSources = listOf("bar/A.kt", "bar/B.kt"),
-                    // TODO(valtman): for abi-snapshot "BB.kt" should not be recompiled
+                    // TODO(konsttman): for abi-snapshot "BB.kt" should not be recompiled
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt")
                 )
 
@@ -777,7 +777,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             changeMethodSignatureInLib()
 
             build("assemble") {
-                val expectedSources = getExpectedKotlinSourcesForDefaultProject(
+                konst expectedSources = getExpectedKotlinSourcesForDefaultProject(
                     appSources = listOf("foo/AA.kt", "foo/AAA.kt", "foo/BB.kt", "foo/fooUseA.kt")
                 ) + subProject("lib").projectPath.resolve("src").allKotlinSources.map { it.relativeTo(projectPath) }
 
@@ -933,14 +933,14 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
     open fun testFailureHandling_ToolError(gradleVersion: GradleVersion) {
         defaultProject(gradleVersion) {
             // Simulate a tool error by registering a doLast that breaks caches in the KotlinCompile task
-            val lookupFile =
+            konst lookupFile =
                 projectPath.resolve("lib/build/kotlin/${compileKotlinTaskName}/cacheable/${compileCacheFolderName}/lookups/file-to-id.tab")
             breakCachesAfterKotlinCompile(subProject("lib"), lookupFile)
 
             // Perform the first non-incremental build
             build(":lib:compileKotlin") {
                 // Caches should be in a corrupted state, which will ensure the next build will fail
-                assertFileContains(lookupFile, "Invalid contents")
+                assertFileContains(lookupFile, "Inkonstid contents")
             }
 
             // Make a change in the source code
@@ -960,7 +960,7 @@ abstract class BaseIncrementalCompilationMultiProjectIT : IncrementalCompilation
             """
             $compileKotlinTaskName {
                 doLast {
-                    new File("${lookupFile.toFile().invariantSeparatorsPath}").write("Invalid contents")
+                    new File("${lookupFile.toFile().invariantSeparatorsPath}").write("Inkonstid contents")
                 }
             }
             """.trimIndent()

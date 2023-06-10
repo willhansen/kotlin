@@ -1,3 +1,3 @@
 package
 
-public val z: kotlin.Int
+public konst z: kotlin.Int

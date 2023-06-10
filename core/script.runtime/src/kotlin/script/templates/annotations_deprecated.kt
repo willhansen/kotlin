@@ -10,7 +10,7 @@ import kotlin.script.dependencies.Environment
 
 @Deprecated("temporary workaround for missing functionality, will be replaced by the new API soon")
 // Note: all subclasses should provide the same constructor
-open class ScriptTemplateAdditionalCompilerArgumentsProvider(val arguments: Iterable<String> = emptyList()) {
+open class ScriptTemplateAdditionalCompilerArgumentsProvider(konst arguments: Iterable<String> = emptyList()) {
     open fun getAdditionalCompilerArguments(@Suppress("UNUSED_PARAMETER") environment: Environment?): Iterable<String> = arguments
 }
 
@@ -18,6 +18,6 @@ open class ScriptTemplateAdditionalCompilerArgumentsProvider(val arguments: Iter
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ScriptTemplateAdditionalCompilerArguments(
-    val arguments: Array<String> = [],
-    @Suppress("DEPRECATION") val provider: KClass<out ScriptTemplateAdditionalCompilerArgumentsProvider> = ScriptTemplateAdditionalCompilerArgumentsProvider::class
+    konst arguments: Array<String> = [],
+    @Suppress("DEPRECATION") konst provider: KClass<out ScriptTemplateAdditionalCompilerArgumentsProvider> = ScriptTemplateAdditionalCompilerArgumentsProvider::class
 )

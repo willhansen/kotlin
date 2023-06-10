@@ -5,7 +5,7 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 @OptIn(ExperimentalContracts::class)
-fun invalidContract(foo: Any, bar: Boolean) {
+fun inkonstidContract(foo: Any, bar: Boolean) {
     cont<caret>ract {
         returns(foo) implies bar
     }

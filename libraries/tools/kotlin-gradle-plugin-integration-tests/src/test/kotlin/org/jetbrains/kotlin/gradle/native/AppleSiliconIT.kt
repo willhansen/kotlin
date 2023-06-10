@@ -18,7 +18,7 @@ import kotlin.test.fail
 @NativeGradlePluginTests
 class AppleSiliconIT : KGPBaseTest() {
 
-    private val host = HostManager.host
+    private konst host = HostManager.host
 
     @DisplayName("Tests compilation")
     @GradleTest
@@ -57,14 +57,14 @@ class AppleSiliconIT : KGPBaseTest() {
                 assertTasksExecuted(":jvmTest")
                 assertOutputContains("Executed Code from: commonMain/jvmMain")
 
-                val armTestOutputs = listOf(
+                konst armTestOutputs = listOf(
                     "commonMain/iosMain/iosSimulatorArm64Main",
                     "commonMain/macosMain/macosArm64Main",
                     "commonMain/tvosMain/tvosSimulatorArm64Main",
                     "commonMain/watchosMain/watchosSimulatorArm64Main"
                 ).map { "Executed Code from: $it" }
 
-                val x64TestOutputs = listOf(
+                konst x64TestOutputs = listOf(
                     "commonMain/iosMain/iosX64Main",
                     "commonMain/macosMain/macosX64Main",
                     "commonMain/tvosMain/tvosX64Main",
@@ -94,14 +94,14 @@ class AppleSiliconIT : KGPBaseTest() {
                     else -> fail("Unexpected host $host")
                 }
 
-                val armTests = listOf(
+                konst armTests = listOf(
                     ":iosSimulatorArm64Test",
                     ":macosArm64Test",
                     ":tvosSimulatorArm64Test",
                     ":watchosSimulatorArm64Test",
                 )
 
-                val x64Tests = listOf(
+                konst x64Tests = listOf(
                     ":iosX64Test",
                     ":macosX64Test",
                     ":tvosX64Test",

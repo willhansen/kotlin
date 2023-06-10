@@ -1,6 +1,6 @@
 import java.util.*
 fun foo() {
-    val al = ArrayList<String>()
+    konst al = ArrayList<String>()
     al.size
     al.contains(<!CONSTANT_EXPECTED_TYPE_MISMATCH!>1<!>)
     al.contains("")
@@ -8,7 +8,7 @@ fun foo() {
     al.remove("")
     al.removeAt(1)
 
-    val hs = HashSet<String>()
+    konst hs = HashSet<String>()
     hs.size
     hs.contains(<!CONSTANT_EXPECTED_TYPE_MISMATCH!>1<!>)
     hs.contains("")
@@ -16,7 +16,7 @@ fun foo() {
     hs.remove("")
 
 
-    val hm = HashMap<String, Int>()
+    konst hm = HashMap<String, Int>()
     hm.size
     hm.containsKey(<!CONSTANT_EXPECTED_TYPE_MISMATCH!>1<!>)
     hm.containsKey("")

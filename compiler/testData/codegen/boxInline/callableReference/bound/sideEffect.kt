@@ -2,7 +2,7 @@
 
 package test
 
-class Foo(val a: String) {
+class Foo(konst a: String) {
 
     fun test() = a
 }
@@ -23,7 +23,7 @@ fun create(a: String): Foo {
 }
 
 fun box(): String {
-    val result = test(create("A").a, create("B")::a, create("C")::test, create("D").a)
+    konst result = test(create("A").a, create("B")::a, create("C")::test, create("D").a)
     if (result != effects) return "fail 1: $effects != $result"
 
     return if (result == "ABCD") "OK" else "fail 2: $result"

@@ -3,9 +3,9 @@ plugins {
     id("com.gradle.common-custom-user-data-gradle-plugin") apply false
 }
 
-val buildProperties = getKotlinBuildPropertiesForSettings(settings)
+konst buildProperties = getKotlinBuildPropertiesForSettings(settings)
 
-val buildScanServer = buildProperties.buildScanServer
+konst buildScanServer = buildProperties.buildScanServer
 
 if (buildProperties.buildScanServer != null) {
     plugins.apply("com.gradle.common-custom-user-data-gradle-plugin")
@@ -28,8 +28,8 @@ gradleEnterprise {
             termsOfServiceAgree = "yes"
         }
 
-        val overridenName = (buildProperties.getOrNull("kotlin.build.scan.username") as? String)?.trim()
-        val isTeamCity = buildProperties.isTeamcityBuild
+        konst overridenName = (buildProperties.getOrNull("kotlin.build.scan.username") as? String)?.trim()
+        konst isTeamCity = buildProperties.isTeamcityBuild
         obfuscation {
             ipAddresses { _ -> listOf("0.0.0.0") }
             hostname { _ -> "concealed" }

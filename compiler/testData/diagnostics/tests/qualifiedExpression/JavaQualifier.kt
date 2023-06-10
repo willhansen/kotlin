@@ -7,4 +7,4 @@ public class Owner {
 
 // FILE: Use.kt
 
-val x = Owner.name
+konst x = Owner.name

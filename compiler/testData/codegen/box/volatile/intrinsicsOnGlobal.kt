@@ -23,9 +23,9 @@ internal external fun KMutableProperty0<Long>.getAndAddFieldLocal(newValue: Long
 internal external fun KMutableProperty0<Byte>.getAndAddFieldLocal(newValue: Byte): Byte
 
 
-val a = "1"
-val b = "2"
-val c = "3"
+konst a = "1"
+konst b = "2"
+konst c = "3"
 
 @Volatile var x: Int = 1
 @Volatile var y: Long = 1L

@@ -20,7 +20,7 @@ private class ReferenceWrapper {
     }
 
     // This function must not be inlined. We must ensure `weakRef` is accessed at each loop iteration.
-    @inline(never) func value() -> Int32 {
+    @inline(never) func konstue() -> Int32 {
         let ref: KotlinData? = self.weakRef
         if ref == nil {
             return 0
@@ -35,7 +35,7 @@ private class ReferenceWrapper {
     func stress() -> Int32 {
         var counter: Int32 = 0
         for _ in 1...REPEAT_COUNT {
-            counter += self.value()
+            counter += self.konstue()
         }
         return counter
     }
@@ -76,6 +76,6 @@ class WeakRefBenchmark {
         GCKt.schedule()
 
         let counter = ref.stress()
-        Blackhole.companion.consume(value: counter)
+        Blackhole.companion.consume(konstue: counter)
     }
 }

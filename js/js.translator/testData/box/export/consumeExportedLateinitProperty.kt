@@ -3,17 +3,17 @@
 
 @JsExport
 class LateinitContainer {
-    lateinit var value: String;
+    lateinit var konstue: String;
 }
 
 fun box(): String {
-    val container = LateinitContainer()
+    konst container = LateinitContainer()
     try {
-        container.value
+        container.konstue
         return "Fail: problem with lateinit getter."
     } catch (e: Exception) {}
 
-    container.value = "Test"
-    assertEquals(container.value, "Test")
+    container.konstue = "Test"
+    assertEquals(container.konstue, "Test")
     return "OK"
 }

@@ -6,7 +6,7 @@ open class A {
 
 class E : B1() {
     fun baz() {
-        val x: String? = ""
+        konst x: String? = ""
 
         x<!UNSAFE_CALL!>.<!>foo(x)
         x<!UNSAFE_CALL!>.<!>foo("")

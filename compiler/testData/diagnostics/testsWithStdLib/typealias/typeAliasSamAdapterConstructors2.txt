@@ -1,10 +1,10 @@
 package
 
-public val test1: JHost.Runnable
-public val test2: JHost.Consumer<kotlin.String>
-public val test3: JHost.Consumer<kotlin.String>
-public val test4: JHost.Consumer<kotlin.collections.List<kotlin.String>>
-public val test5: JHost.Consumer2<kotlin.Int, kotlin.Int>
+public konst test1: JHost.Runnable
+public konst test2: JHost.Consumer<kotlin.String>
+public konst test3: JHost.Consumer<kotlin.String>
+public konst test4: JHost.Consumer<kotlin.collections.List<kotlin.String>>
+public konst test5: JHost.Consumer2<kotlin.Int, kotlin.Int>
 
 public open class JHost {
     public constructor JHost()

@@ -6,5 +6,5 @@
 package org.jetbrains.kotlin.js.backend.ast
 
 interface JsComment : JsStatement {
-    val text: String
+    konst text: String
 }

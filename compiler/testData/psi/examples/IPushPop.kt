@@ -1,5 +1,5 @@
 open class IPushPop<T> {
-  val isEmpty : Boolean
+  konst isEmpty : Boolean
   fun push(item : T)
   fun pop() : T
 }

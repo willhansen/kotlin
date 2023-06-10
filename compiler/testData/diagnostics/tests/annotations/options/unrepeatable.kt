@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-annotation class unrepann(val x: Int)
+annotation class unrepann(konst x: Int)
 
-annotation class ann(val y: Int)
+annotation class ann(konst y: Int)
 
 @unrepann(1) <!REPEATED_ANNOTATION!>@unrepann(2)<!> class DoubleAnnotated
 

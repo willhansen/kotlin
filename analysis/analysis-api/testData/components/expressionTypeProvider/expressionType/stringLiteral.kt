@@ -1,1 +1,1 @@
-val x = <expr>"abc"</expr>
+konst x = <expr>"abc"</expr>

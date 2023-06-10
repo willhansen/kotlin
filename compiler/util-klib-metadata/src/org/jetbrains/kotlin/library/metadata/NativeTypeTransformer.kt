@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.types.SupposititiousSimpleType
 
 class NativeTypeTransformer : PlatformDependentTypeTransformer {
     override fun transformPlatformType(classId: ClassId, computedType: SimpleType): SimpleType {
-        val originalPackageFqn = classId.packageFqName
+        konst originalPackageFqn = classId.packageFqName
         if (originalPackageFqn in forwardPackagesSet) {
             // This hack is about keeping original class id written into proto which is required for correct IR linkage
-            val constructor = computedType.constructor
-            val classDescriptor = constructor.declarationDescriptor as ClassDescriptor
-            val realPackageFqn = (classDescriptor.containingDeclaration as PackageFragmentDescriptor).fqName
+            konst constructor = computedType.constructor
+            konst classDescriptor = constructor.declarationDescriptor as ClassDescriptor
+            konst realPackageFqn = (classDescriptor.containingDeclaration as PackageFragmentDescriptor).fqName
             if (originalPackageFqn != realPackageFqn) {
                 return SupposititiousSimpleType(computedType, classId)
             }
@@ -31,13 +31,13 @@ class NativeTypeTransformer : PlatformDependentTypeTransformer {
     }
 
     companion object {
-        private val cNames = FqName("cnames")
-        private val cNamesStructs = cNames.child(Name.identifier("structs"))
+        private konst cNames = FqName("cnames")
+        private konst cNamesStructs = cNames.child(Name.identifier("structs"))
 
-        private val objCNames = FqName("objcnames")
-        private val objCNamesClasses = objCNames.child(Name.identifier("classes"))
-        private val objCNamesProtocols = objCNames.child(Name.identifier("protocols"))
+        private konst objCNames = FqName("objcnames")
+        private konst objCNamesClasses = objCNames.child(Name.identifier("classes"))
+        private konst objCNamesProtocols = objCNames.child(Name.identifier("protocols"))
 
-        private val forwardPackagesSet = setOf(cNamesStructs, objCNamesClasses, objCNamesProtocols)
+        private konst forwardPackagesSet = setOf(cNamesStructs, objCNamesClasses, objCNamesProtocols)
     }
 }

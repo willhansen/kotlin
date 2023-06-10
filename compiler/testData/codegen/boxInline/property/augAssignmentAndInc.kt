@@ -5,8 +5,8 @@ var result = 1
 
 inline var z: Int
     get() = result
-    set(value)  {
-        result = value
+    set(konstue)  {
+        result = konstue
     }
 
 // FILE: 2.kt

@@ -31,36 +31,36 @@ class JvmReplIdeTest : TestCase() {
     fun testReplScriptClassFileDecompilation() {
         JvmTestRepl()
             .use { repl ->
-                val compiledSnippet = checkCompile(repl, "10 + 10")
-                val snippetValue = compiledSnippet.get()!!
+                konst compiledSnippet = checkCompile(repl, "10 + 10")
+                konst snippetValue = compiledSnippet.get()!!
 
-                val compiledModule = snippetValue.getCompiledModule() as KJvmCompiledModuleInMemoryImpl
-                val folder = saveCompiledOutput("repl-script-decompilation", compiledModule)
+                konst compiledModule = snippetValue.getCompiledModule() as KJvmCompiledModuleInMemoryImpl
+                konst folder = saveCompiledOutput("repl-script-decompilation", compiledModule)
 
-                val scriptClassName = "Line_0_simplescript"
-                val fileUrl = "file://" + folder.resolve("$scriptClassName.class").invariantSeparatorsPath
-                val vFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl)!!
-                val fileContent = FileContentImpl.createByContent(vFile, vFile.contentsToByteArray(false))
+                konst scriptClassName = "Line_0_simplescript"
+                konst fileUrl = "file://" + folder.resolve("$scriptClassName.class").invariantSeparatorsPath
+                konst vFile = VirtualFileManager.getInstance().findFileByUrl(fileUrl)!!
+                konst fileContent = FileContentImpl.createByContent(vFile, vFile.contentsToByteArray(false))
 
-                val application = ApplicationManager.getApplication() as MockApplication
+                konst application = ApplicationManager.getApplication() as MockApplication
                 KotlinCoreEnvironment.underApplicationLock {
                     registerDecompilerServices(application)
                 }
 
-                val fileStub = KotlinClassFileDecompiler().stubBuilder.buildFileStub(fileContent)!!
-                val childrenStubs = fileStub.childrenStubs
+                konst fileStub = KotlinClassFileDecompiler().stubBuilder.buildFileStub(fileContent)!!
+                konst childrenStubs = fileStub.childrenStubs
                 assertTrue(childrenStubs.any { it is KotlinClassStub && it.name == scriptClassName })
             }
     }
 
     @OptIn(ExperimentalPathApi::class)
     companion object {
-        private val outputJarDir = createTempDirectory("temp-ide-services-ide-test")
+        private konst outputJarDir = createTempDirectory("temp-ide-services-ide-test")
 
         private fun saveCompiledOutput(subfolder: String, module: KJvmCompiledModuleInMemory): File {
-            val folder = outputJarDir.resolve(subfolder).toFile()
+            konst folder = outputJarDir.resolve(subfolder).toFile()
             module.compilerOutputFiles.forEach { (name, contents) ->
-                val file = folder.resolve(name)
+                konst file = folder.resolve(name)
                 file.parentFile.mkdirs()
                 file.writeBytes(contents)
             }

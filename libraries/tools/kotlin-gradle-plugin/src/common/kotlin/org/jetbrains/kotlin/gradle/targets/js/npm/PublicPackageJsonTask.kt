@@ -20,35 +20,35 @@ abstract class PublicPackageJsonTask :
     UsesKotlinNpmResolutionManager {
 
     @get:Internal
-    abstract val compilationDisambiguatedName: Property<String>
+    abstract konst compilationDisambiguatedName: Property<String>
 
-    private val projectPath = project.path
-
-    @get:Input
-    val projectVersion = project.version.toString()
+    private konst projectPath = project.path
 
     @get:Input
-    abstract val jsIrCompilation: Property<Boolean>
+    konst projectVersion = project.version.toString()
 
     @get:Input
-    abstract val npmProjectName: Property<String>
+    abstract konst jsIrCompilation: Property<Boolean>
+
+    @get:Input
+    abstract konst npmProjectName: Property<String>
 
     @get:Internal
-    abstract val npmProjectMain: Property<String>
+    abstract konst npmProjectMain: Property<String>
 
-    private val packageJsonHandlers: List<PackageJson.() -> Unit>
+    private konst packageJsonHandlers: List<PackageJson.() -> Unit>
         get() = npmResolutionManager.get().parameters.packageJsonHandlers.get()
             .getValue("$projectPath:${compilationDisambiguatedName.get()}")
 
 
     @get:Input
-    val packageJsonCustomFields: Map<String, Any?>
+    konst packageJsonCustomFields: Map<String, Any?>
         get() = PackageJson(fakePackageJsonValue, fakePackageJsonValue)
             .apply {
                 packageJsonHandlers.forEach { it() }
             }.customFields
 
-    private val compilationResolution
+    private konst compilationResolution
         get() = npmResolutionManager.get().resolution.get()[projectPath][compilationDisambiguatedName.get()]
             .getResolutionOrPrepare(
                 npmResolutionManager.get(),
@@ -56,10 +56,10 @@ abstract class PublicPackageJsonTask :
             )
 
     @get:Input
-    val externalDependencies: Collection<NpmDependencyDeclaration>
+    konst externalDependencies: Collection<NpmDependencyDeclaration>
         get() = compilationResolution.externalNpmDependencies
 
-    private val defaultPackageJsonFile by lazy {
+    private konst defaultPackageJsonFile by lazy {
         project.buildDir
             .resolve("tmp")
             .resolve(name)
@@ -106,6 +106,6 @@ abstract class PublicPackageJsonTask :
     }
 
     companion object {
-        const val NAME = "publicPackageJson"
+        const konst NAME = "publicPackageJson"
     }
 }

@@ -13,13 +13,13 @@ fun invoker(gen : () -> Int) : Int  = 0
 
 //more tests
 fun t1() {
-    val v = l@{
+    konst v = l@{
         return@l 111
     }
 }
 
 fun t2() : String {
-    val g : ()-> Int = l@{
+    konst g : ()-> Int = l@{
         if (true) {
             return@l 1
         }
@@ -54,10 +54,10 @@ fun t3() : String {
 }
 
 fun t4() : Int {
-    val h :  ()-> String = l@{
+    konst h :  ()-> String = l@{
         return@l "a"
     }
-    val g :  ()-> String = l@{
+    konst g :  ()-> String = l@{
         return@l "a"
     }
 

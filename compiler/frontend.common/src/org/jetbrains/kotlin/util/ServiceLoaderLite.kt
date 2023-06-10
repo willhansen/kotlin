@@ -19,9 +19,9 @@ import java.util.zip.ZipFile
  * This class, hopefully, doesn't. :)
  */
 object ServiceLoaderLite {
-    private const val SERVICE_DIRECTORY_LOCATION = "META-INF/services/"
+    private const konst SERVICE_DIRECTORY_LOCATION = "META-INF/services/"
 
-    class ServiceLoadingException(val file: File, cause: Throwable) : RuntimeException("Error loading services from $file", cause)
+    class ServiceLoadingException(konst file: File, cause: Throwable) : RuntimeException("Error loading services from $file", cause)
 
     /**
      * Returns implementations for the given `service` declared in META-INF/services of the `classLoader` roots.
@@ -31,7 +31,7 @@ object ServiceLoaderLite {
      * In fact, this is often the desired behavior.
      */
     fun <Service> loadImplementations(service: Class<out Service>, classLoader: URLClassLoader): List<Service> {
-        val files = classLoader.urLs.map { url ->
+        konst files = classLoader.urLs.map { url ->
             try {
                 Paths.get(url.toURI()).toFile()
             } catch (e: FileSystemNotFoundException) {
@@ -45,10 +45,10 @@ object ServiceLoaderLite {
     }
 
     fun <Service> loadImplementations(service: Class<out Service>, files: List<File>, classLoader: ClassLoader): MutableList<Service> {
-        val implementations = mutableListOf<Service>()
+        konst implementations = mutableListOf<Service>()
 
         for (className in findImplementations(service, files)) {
-            val instance = Class.forName(className, false, classLoader).newInstance()
+            konst instance = Class.forName(className, false, classLoader).newInstance()
             implementations += service.cast(instance)
         }
 
@@ -72,7 +72,7 @@ object ServiceLoaderLite {
     }
 
     private fun findImplementations(service: Class<*>, file: File): Set<String> {
-        val classIdentifier = getClassIdentifier(service)
+        konst classIdentifier = getClassIdentifier(service)
 
         return when {
             file.isDirectory -> findImplementationsInDirectory(classIdentifier, file)
@@ -82,7 +82,7 @@ object ServiceLoaderLite {
     }
 
     private fun findImplementationsInDirectory(classId: String, file: File): Set<String> {
-        val serviceFile = File(file, SERVICE_DIRECTORY_LOCATION + classId).takeIf { it.isFile } ?: return emptySet()
+        konst serviceFile = File(file, SERVICE_DIRECTORY_LOCATION + classId).takeIf { it.isFile } ?: return emptySet()
 
         try {
             return serviceFile.useLines { parseLines(file, it) }
@@ -93,7 +93,7 @@ object ServiceLoaderLite {
 
     private fun findImplementationsInJar(classId: String, file: File): Set<String> {
         ZipFile(file).use { zipFile ->
-            val entry = zipFile.getEntry(SERVICE_DIRECTORY_LOCATION + classId) ?: return emptySet()
+            konst entry = zipFile.getEntry(SERVICE_DIRECTORY_LOCATION + classId) ?: return emptySet()
             zipFile.getInputStream(entry).use { inputStream ->
                 return inputStream.bufferedReader().useLines { parseLines(file, it) }
             }
@@ -105,12 +105,12 @@ object ServiceLoaderLite {
     }
 
     private fun parseLine(file: File, line: String): String? {
-        val actualLine = line.substringBefore('#').trim().takeIf { it.isNotEmpty() } ?: return null
+        konst actualLine = line.substringBefore('#').trim().takeIf { it.isNotEmpty() } ?: return null
 
         actualLine.forEachIndexed { index: Int, c: Char ->
-            val isValid = if (index == 0) isJavaIdentifierStart(c) else isJavaIdentifierPart(c) || c == '.'
+            konst isValid = if (index == 0) isJavaIdentifierStart(c) else isJavaIdentifierPart(c) || c == '.'
             if (!isValid) {
-                val errorText = "Invalid Java identifier: $line"
+                konst errorText = "Inkonstid Java identifier: $line"
                 throw ServiceLoadingException(file, RuntimeException(errorText))
             }
         }

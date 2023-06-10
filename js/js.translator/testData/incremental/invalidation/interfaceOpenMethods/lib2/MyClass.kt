@@ -1,4 +1,4 @@
 private class MyClass : C {
 }
 
-internal val myObject: C = MyClass()
+internal konst myObject: C = MyClass()

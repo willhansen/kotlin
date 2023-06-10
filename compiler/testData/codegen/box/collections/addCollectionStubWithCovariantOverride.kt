@@ -7,7 +7,7 @@ abstract class AbstractStringCollection : AbstractAdd(), Collection<String>
 class StringCollection : AbstractStringCollection() {
     override fun add(s: String) = s
 
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: String): Boolean = TODO()
     override fun containsAll(elements: Collection<String>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()

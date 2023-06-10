@@ -17,7 +17,7 @@ import kotlin.contracts.contract
 @FirBuilderDsl
 class FirArgumentListBuilder {
     var source: KtSourceElement? = null
-    val arguments: MutableList<FirExpression> = mutableListOf()
+    konst arguments: MutableList<FirExpression> = mutableListOf()
 
     fun build(): FirArgumentList {
         return FirArgumentListImpl(

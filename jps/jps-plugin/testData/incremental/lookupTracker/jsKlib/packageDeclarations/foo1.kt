@@ -3,7 +3,7 @@ package foo
 import bar.*
 /*p:baz(C)*/import baz.C
 
-/*p:foo*/val a = /*p:bar p:foo*/A()
+/*p:foo*/konst a = /*p:bar p:foo*/A()
 /*p:foo*/var b: /*p:bar p:foo p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.js p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/baz./*p:baz*/B = /*p:bar p:baz(B) p:foo p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.js p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/baz./*p:baz*/B()
 
 /*p:foo*/fun function(p: /*p:bar p:foo*/B): /*p:bar p:foo*/B /*p:kotlin(Nothing)*/{

@@ -37,7 +37,7 @@ KtFile: Stack.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('data')
         PsiWhiteSpace(' ')
@@ -128,7 +128,7 @@ KtFile: Stack.kt
         MODIFIER_LIST
           PsiElement(override)('override')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('isEmpty')
         PsiWhiteSpace('\n    ')

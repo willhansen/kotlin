@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 open class A<T1, T2, T3>
 
 inline fun <reified T, reified R> foo(): Array<A<*,*,*>> {
-    val x = object {
+    konst x = object {
         inline fun <reified T1, reified T> bar(): A<*,*,*> = object : A<T1,T,R>() {}
         fun f1() = bar<T, R>()
         fun f2() = bar<R, T>()
@@ -21,9 +21,9 @@ inline fun <reified T, reified R> foo(): Array<A<*,*,*>> {
 }
 
 fun box(): String {
-    val result = foo<Double, Int>()
+    konst result = foo<Double, Int>()
 
-    val expected = arrayOf(
+    konst expected = arrayOf(
             Triple("java.lang.Double", "java.lang.Integer", "java.lang.Integer"),
             Triple("java.lang.Integer", "java.lang.Double", "java.lang.Integer"),
             Triple("java.lang.Boolean", "java.lang.Double", "java.lang.Integer"),

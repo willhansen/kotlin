@@ -11,16 +11,16 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.contains
 
 fun FunctionDescriptor.isFunctionForExpectTypeFromCastFeature(): Boolean {
-    val typeParameter = typeParameters.singleOrNull() ?: return false
+    konst typeParameter = typeParameters.singleOrNull() ?: return false
 
-    val returnType = returnType ?: return false
+    konst returnType = returnType ?: return false
     if (returnType is DeferredType && returnType.isComputing) return false
 
     if (returnType.constructor != typeParameter.typeConstructor) return false
 
     fun KotlinType.isBadType() = contains { it.constructor == typeParameter.typeConstructor }
 
-    if (valueParameters.any { it.type.isBadType() } || extensionReceiverParameter?.type?.isBadType() == true) return false
+    if (konstueParameters.any { it.type.isBadType() } || extensionReceiverParameter?.type?.isBadType() == true) return false
 
     return true
 }
@@ -36,5 +36,5 @@ fun ParameterDescriptor.indexOrMinusOne(): Int =
     when (this) {
         is ReceiverParameterDescriptor -> -1
         is ValueParameterDescriptor -> index
-        else -> error("expected either receiver or value parameter, but got: $this")
+        else -> error("expected either receiver or konstue parameter, but got: $this")
     }

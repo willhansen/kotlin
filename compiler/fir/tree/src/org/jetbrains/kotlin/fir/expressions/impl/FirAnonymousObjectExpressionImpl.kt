@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
  */
 
 internal class FirAnonymousObjectExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var anonymousObject: FirAnonymousObject,
 ) : FirAnonymousObjectExpression() {
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = anonymousObject.annotations
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

@@ -22,10 +22,10 @@ class Case1(var a: Int) {
 }
 
 fun case1() {
-    val a = Case1(1) + 1
-    val b = Case1(1) + Case1( 1)
-    val c = Case1(1) - 1
-    val d = Case1(1) - Case1( 1)
+    konst a = Case1(1) + 1
+    konst b = Case1(1) + Case1( 1)
+    konst c = Case1(1) - 1
+    konst d = Case1(1) - Case1( 1)
 
     a checkType { check<Case1>() }
     b checkType { check<Case1>() }
@@ -43,10 +43,10 @@ class Case2(var a: Int) {
 }
 
 fun case2() {
-    val a = Case2(1) + 1
-    val b = Case2(1) + Case2( 1)
-    val c = Case2(1) - 1
-    val d = Case2(1) - Case2( 1)
+    konst a = Case2(1) + 1
+    konst b = Case2(1) + Case2( 1)
+    konst c = Case2(1) - 1
+    konst d = Case2(1) - Case2( 1)
 
     <!DEBUG_INFO_CONSTANT!>a<!> checkType { check<Nothing?>() }
     <!DEBUG_INFO_CONSTANT!>b<!> checkType { check<Nothing?>() }
@@ -63,10 +63,10 @@ class Case3(var a: Int) {
 }
 
 fun case3() {
-    val a = Case3(1) + 1
-    val b = Case3(1) + Case3( 1)
-    val c = Case3(1) - 1
-    val d = Case3(1) - Case3( 1)
+    konst a = Case3(1) + 1
+    konst b = Case3(1) + Case3( 1)
+    konst c = Case3(1) - 1
+    konst d = Case3(1) - Case3( 1)
 
     a checkType { check<Any?>() }
     b checkType { check<Any?>() }

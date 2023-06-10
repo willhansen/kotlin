@@ -30,7 +30,7 @@ public final class CompositeSignature extends
   private CompositeSignature(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -65,10 +65,10 @@ public final class CompositeSignature extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -86,7 +86,7 @@ public final class CompositeSignature extends
     public CompositeSignature parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new CompositeSignature(input, extensionRegistry);
     }
   };
@@ -189,23 +189,23 @@ public final class CompositeSignature extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parseFrom(java.io.InputStream input)
@@ -340,7 +340,7 @@ public final class CompositeSignature extends
       org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -368,9 +368,9 @@ public final class CompositeSignature extends
     /**
      * <code>required int32 container_sig = 1;</code>
      */
-    public Builder setContainerSig(int value) {
+    public Builder setContainerSig(int konstue) {
       bitField0_ |= 0x00000001;
-      containerSig_ = value;
+      containerSig_ = konstue;
       
       return this;
     }
@@ -400,9 +400,9 @@ public final class CompositeSignature extends
     /**
      * <code>required int32 inner_sig = 2;</code>
      */
-    public Builder setInnerSig(int value) {
+    public Builder setInnerSig(int konstue) {
       bitField0_ |= 0x00000002;
-      innerSig_ = value;
+      innerSig_ = konstue;
       
       return this;
     }

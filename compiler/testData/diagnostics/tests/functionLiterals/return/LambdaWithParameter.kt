@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-val flag = true
+konst flag = true
 
-val a /*: (Int) -> String */ = l@ {
+konst a /*: (Int) -> String */ = l@ {
     i: Int ->
     if (i == 0) return@l i.toString()
 
@@ -10,7 +10,7 @@ val a /*: (Int) -> String */ = l@ {
 
 fun <T> foo(f: (Int) -> T): T = f(0)
 
-val b /*:String */ = foo {
+konst b /*:String */ = foo {
     i ->
     if (i == 0) return@foo i.toString()
 

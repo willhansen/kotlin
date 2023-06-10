@@ -15,13 +15,13 @@ import java.io.File
 
 internal class FirOutputHandler(testServices: TestServices) : FirAnalysisHandler(testServices) {
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
-        val renderer = info.mainFirFiles.values.firstOrNull()?.let { FirVisualizer(it) } ?: return
-        val firRenderResult = renderer.render().trim()
+        konst renderer = info.mainFirFiles.konstues.firstOrNull()?.let { FirVisualizer(it) } ?: return
+        konst firRenderResult = renderer.render().trim()
 
-        val replaceFrom = module.directives[VisualizerDirectives.TEST_FILE_PATH].first()
-        val replaceTo = module.directives[VisualizerDirectives.EXPECTED_FILE_PATH].first()
-        val path = module.files.first().originalFile.absolutePath.replace(replaceFrom, replaceTo)
-        val expectedText = File(path).readLines()
+        konst replaceFrom = module.directives[VisualizerDirectives.TEST_FILE_PATH].first()
+        konst replaceTo = module.directives[VisualizerDirectives.EXPECTED_FILE_PATH].first()
+        konst path = module.files.first().originalFile.absolutePath.replace(replaceFrom, replaceTo)
+        konst expectedText = File(path).readLines()
         if (expectedText[0].startsWith("// FIR_IGNORE")) {
             assertions.assertFalse(expectedText.drop(1).joinToString("\n") == firRenderResult.trim()) {
                 "Files are identical, please delete ignore directive"

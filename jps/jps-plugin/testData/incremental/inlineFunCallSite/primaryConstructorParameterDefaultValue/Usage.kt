@@ -1,3 +1,3 @@
 package usage
 
-class Usage(val x: Int = inline.f())
+class Usage(konst x: Int = inline.f())

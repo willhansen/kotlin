@@ -11,15 +11,15 @@ open class A<T> : J() {
     init {
         foo()
         bar()
-        val a: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>baz()<!>
-        val b: T = baz()
+        konst a: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>baz()<!>
+        konst b: T = baz()
     }
 
     fun test1() {
         foo()
         bar()
-        val a: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>baz()<!>
-        val b: T = baz()
+        konst a: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>baz()<!>
+        konst b: T = baz()
     }
 
     fun baz(): T = null!!
@@ -28,8 +28,8 @@ open class A<T> : J() {
         fun test() {
             foo()
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
     }
 
@@ -37,15 +37,15 @@ open class A<T> : J() {
         init {
             foo()
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
 
         fun test() {
             foo()
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
 
         fun bar() {}

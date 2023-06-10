@@ -17,7 +17,7 @@ import org.jetbrains.dukat.model.commonLowerings.*
 import org.jetbrains.dukat.ownerContext.NodeOwner
 
 fun translateIdlToSourceSet(fileName: String): SourceSetModel {
-    val translationContext = TranslationContext()
+    konst translationContext = TranslationContext()
     return parseIDL(fileName, DirectoryReferencesResolver())
         .resolvePartials()
         .addConstructors()
@@ -48,29 +48,29 @@ fun translateIdlToSourceSet(fileName: String): SourceSetModel {
 
 class WasmPostProcessingHacks : TopLevelModelLowering {
     private fun fineItemMethodThatOverridersItemArrayLikeOrNull(klass: ClassLikeModel): MethodModel? {
-        if (klass.parentEntities.none { it.value.value == IdentifierEntity("ItemArrayLike") })
+        if (klass.parentEntities.none { it.konstue.konstue == IdentifierEntity("ItemArrayLike") })
             return null
 
         return klass.members.filterIsInstance<MethodModel>().find { member ->
             member.name == IdentifierEntity("item") &&
-                    (member.parameters.firstOrNull()?.type as? TypeValueModel)?.value == IdentifierEntity("Int")
+                    (member.parameters.firstOrNull()?.type as? TypeValueModel)?.konstue == IdentifierEntity("Int")
         }
     }
 
     override fun lowerClassLikeModel(ownerContext: NodeOwner<ClassLikeModel>, parentModule: ModuleModel): ClassLikeModel {
-        val klass: ClassLikeModel = super.lowerClassLikeModel(ownerContext, parentModule)
-        val itemMethodThatOverridesAny: MethodModel = fineItemMethodThatOverridersItemArrayLikeOrNull(klass)
+        konst klass: ClassLikeModel = super.lowerClassLikeModel(ownerContext, parentModule)
+        konst itemMethodThatOverridesAny: MethodModel = fineItemMethodThatOverridersItemArrayLikeOrNull(klass)
             ?: return klass
 
         fun translateMember(member: MemberModel): MemberModel {
             if (member !== itemMethodThatOverridesAny) return member
 
-            val newTypeIdentifier = when ((member.type as? TypeValueModel)?.value) {
+            konst newTypeIdentifier = when ((member.type as? TypeValueModel)?.konstue) {
                 IdentifierEntity("String") -> IdentifierEntity("JsString")
                 else -> null
             }
 
-            val newType = if (newTypeIdentifier != null) {
+            konst newType = if (newTypeIdentifier != null) {
                 TypeValueModel(
                     IdentifierEntity("JsString"),
                     fqName = null,

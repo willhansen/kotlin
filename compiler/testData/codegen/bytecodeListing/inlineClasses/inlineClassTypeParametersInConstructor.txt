@@ -36,8 +36,8 @@ public final enum class TestEnum {
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int, p2: int): void
     public final method getZ-a_XrcN0(): int
-    public static method valueOf(p0: java.lang.String): TestEnum
-    public static method values(): TestEnum[]
+    public static method konstueOf(p0: java.lang.String): TestEnum
+    public static method konstues(): TestEnum[]
 }
 
 @kotlin.Metadata

@@ -4,29 +4,29 @@ package foo
 // CHECK_CONTAINS_NO_CALLS: testImplicitThis except=Unit_getInstance
 // CHECK_CONTAINS_NO_CALLS: testExplicitThis except=Unit_getInstance
 
-internal class A(var value: Int)
+internal class A(var konstue: Int)
 
 internal fun testImplicitThis(a: A, newValue: Int) {
     with (a) {
-        value = newValue
+        konstue = newValue
     }
 }
 
 internal fun testExplicitThis(a: A, newValue: Int) {
     with (a) {
-        this.value = newValue
+        this.konstue = newValue
     }
 }
 
 fun box(): String {
-    val a = A(0)
-    assertEquals(0, a.value)
+    konst a = A(0)
+    assertEquals(0, a.konstue)
 
     testImplicitThis(a, 10)
-    assertEquals(10, a.value)
+    assertEquals(10, a.konstue)
 
     testExplicitThis(a, 20)
-    assertEquals(20, a.value)
+    assertEquals(20, a.konstue)
 
     return "OK"
 }

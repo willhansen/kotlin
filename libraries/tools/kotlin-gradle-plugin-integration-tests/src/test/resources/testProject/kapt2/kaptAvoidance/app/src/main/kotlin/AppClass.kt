@@ -10,7 +10,7 @@ import lib.*
 @example.ExampleAnnotation
 class AppClass {
     @example.ExampleAnnotation
-    val testVal: String = "text"
+    konst testVal: String = "text"
 
     @example.ExampleAnnotation
     fun testFunction(): AppClassGenerated = AppClassGenerated()

@@ -10,12 +10,12 @@ interface A {
     fun Any.toString(): String = "hello"
 }
 
-data class B(val x: Int) : A {
+data class B(konst x: Int) : A {
     fun Any.hi() = "hi"
 }
 
 fun box(): String {
-    val b = B(1)
+    konst b = B(1)
     assertEquals("B(x=1)", b.toString())
     assertTrue(b == B(1))
     assertTrue(1.hashCode() == b.hashCode())

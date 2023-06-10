@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 interface KotlinCompilationFactory<T : KotlinCompilation<*>> : NamedDomainObjectFactory<T> {
-    val project: Project get() = target.project
-    val target: KotlinTarget
-    val itemClass: Class<T>
+    konst project: Project get() = target.project
+    konst target: KotlinTarget
+    konst itemClass: Class<T>
 
     fun defaultSourceSetName(compilationName: String): String = lowerCamelCaseName(
         target.disambiguationClassifier.takeIf { target !is KotlinMetadataTarget },

@@ -6,7 +6,7 @@ class A {
     }
 }
 
-val A.B.bar : Int get() = 1
+konst A.B.bar : Int get() = 1
 
 fun test() {
     <caret>A.bar

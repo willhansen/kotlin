@@ -10,11 +10,11 @@ import java.io.Serializable
 
 data class NpmDependencyDeclaration(
     @Input
-    val scope: NpmDependency.Scope,
+    konst scope: NpmDependency.Scope,
     @Input
-    val name: String,
+    konst name: String,
     @Input
-    val version: String
+    konst version: String
 ) : Serializable
 
 fun NpmDependencyDeclaration.uniqueRepresentation() =

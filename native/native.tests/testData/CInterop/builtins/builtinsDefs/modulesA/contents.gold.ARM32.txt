@@ -14,7 +14,7 @@ package pod1 {
     var A: Int
         @CCall(id = "knifunptr_pod10_A_getter") get
         @CCall(id = "knifunptr_pod11_A_setter") set
-    val A_va_list: __builtin_va_list /* = __va_list */
+    konst A_va_list: __builtin_va_list /* = __va_list */
         @CCall(id = "knifunptr_pod12_A_va_list_getter") get
     typealias __builtin_va_list = __va_list
 }

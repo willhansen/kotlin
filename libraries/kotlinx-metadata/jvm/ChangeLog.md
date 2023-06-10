@@ -50,14 +50,14 @@ This release features several significant API changes. To help with migration, w
 - Update to Kotlin 1.5 with metadata version 1.5.
   Note: metadata of version 1.5 is readable by Kotlin compiler/reflection of versions 1.4 and later.
 - Breaking change: improve API of annotation arguments.
-  `KmAnnotationArgument` doesn't have `val value: T` anymore, it was moved to a subclass named `KmAnnotationArgument.LiteralValue<T>`.
-  The property `value` is:
+  `KmAnnotationArgument` doesn't have `konst konstue: T` anymore, it was moved to a subclass named `KmAnnotationArgument.LiteralValue<T>`.
+  The property `konstue` is:
   - renamed to `annotation` in `AnnotationValue`
   - renamed to `elements` in `ArrayValue`
   - removed in favor of `enumClassName`/`enumEntryName` in `EnumValue`
   - removed in favor of `className`/`arrayDimensionCount` in `KClassValue`
   - changed type from signed to unsigned integer types in `UByteValue`, `UShortValue`, `UIntValue`, `ULongValue`
-- [`KT-44783`](https://youtrack.jetbrains.com/issue/KT-44783) Add Flag.IS_VALUE for value classes
+- [`KT-44783`](https://youtrack.jetbrains.com/issue/KT-44783) Add Flag.IS_VALUE for konstue classes
   - Breaking change: `Flag.IS_INLINE` is deprecated, use `Flag.IS_VALUE` instead
 - Breaking change: deprecate `KotlinClassHeader.bytecodeVersion` and `KotlinClassHeader`'s constructor that takes a bytecode version array.
   Related to ['KT-41758`](https://youtrack.jetbrains.com/issue/KT-41758).
@@ -77,14 +77,14 @@ This release features several significant API changes. To help with migration, w
 
 ## 0.1.0
 
-- [`KT-26602`](https://youtrack.jetbrains.com/issue/KT-26602) Provide a value-based API
+- [`KT-26602`](https://youtrack.jetbrains.com/issue/KT-26602) Provide a konstue-based API
 
 ## 0.0.6
 
 - [`KT-31308`](https://youtrack.jetbrains.com/issue/KT-31308) Add module name extensions to kotlinx-metadata-jvm
 - [`KT-31338`](https://youtrack.jetbrains.com/issue/KT-31338) Retain "is moved from interface companion" property flag in kotlinx-metadata-jvm
     - Breaking change: JvmPropertyExtensionVisitor.visit has a new parameter `jvmFlags: Flags`
-- Correctly write "null" constant value in effect expression of a contract
+- Correctly write "null" constant konstue in effect expression of a contract
 - Rename `desc` parameters to `signature` in JvmFunctionExtensionVisitor, JvmPropertyExtensionVisitor, JvmConstructorExtensionVisitor
 - Do not expose KmExtensionType internals
 - Add KmExtensionVisitor.type to get dynamic type of an extension visitor

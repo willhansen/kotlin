@@ -82,7 +82,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
         manager = manager,
     )
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             modifiersBox = GranularModifiersBox(computer = ::computeModifiers),
@@ -96,13 +96,13 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
     override fun getExtendsList(): PsiReferenceList? = _extendsList
     override fun getImplementsList(): PsiReferenceList? = _implementsList
 
-    private val _extendsList by lazyPub {
+    private konst _extendsList by lazyPub {
         withClassOrObjectSymbol { classOrObjectSymbol ->
             createInheritanceList(forExtendsList = true, classOrObjectSymbol.superTypes)
         }
     }
 
-    private val _implementsList by lazyPub {
+    private konst _implementsList by lazyPub {
         withClassOrObjectSymbol { classOrObjectSymbol ->
             createInheritanceList(forExtendsList = false, classOrObjectSymbol.superTypes)
         }
@@ -110,11 +110,11 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValue {
         withClassOrObjectSymbol { classOrObjectSymbol ->
-            val result = mutableListOf<KtLightMethod>()
+            konst result = mutableListOf<KtLightMethod>()
 
-            val declaredMemberScope = classOrObjectSymbol.getDeclaredMemberScope()
+            konst declaredMemberScope = classOrObjectSymbol.getDeclaredMemberScope()
 
-            val visibleDeclarations = declaredMemberScope.getCallableSymbols()
+            konst visibleDeclarations = declaredMemberScope.getCallableSymbols()
                 .applyIf(classKind().isObject) {
                     filterNot {
                         it is KtKotlinPropertySymbol && it.isConst
@@ -134,7 +134,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
                     it.hasTypeForValueClassInSignature()
                 }
 
-            val suppressStatic = classKind() == KtClassKind.COMPANION_OBJECT
+            konst suppressStatic = classKind() == KtClassKind.COMPANION_OBJECT
             createMethods(visibleDeclarations, result, suppressStatic = suppressStatic)
 
             createConstructors(declaredMemberScope.getConstructors(), result)
@@ -161,7 +161,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
 
         fun createMethodFromAny(ktFunctionSymbol: KtFunctionSymbol) {
             // Similar to `copy`, synthetic members from `Any` should refer to `data` class as origin, not the function in `Any`.
-            val lightMemberOrigin = classOrObjectDeclaration?.let { LightMemberOriginForDeclaration(it, JvmDeclarationOriginKind.OTHER) }
+            konst lightMemberOrigin = classOrObjectDeclaration?.let { LightMemberOriginForDeclaration(it, JvmDeclarationOriginKind.OTHER) }
             result.add(
                 SymbolLightSimpleMethod(
                     ktAnalysisSession = this@KtAnalysisSession,
@@ -187,7 +187,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
 
         // NB: componentN and copy are added during RAW FIR, but synthetic members from `Any` are not.
         // That's why we use declared scope for 'component*' and 'copy', and member scope for 'equals/hashCode/toString'
-        val componentAndCopyFunctions = classOrObjectSymbol.getDeclaredMemberScope()
+        konst componentAndCopyFunctions = classOrObjectSymbol.getDeclaredMemberScope()
             .getCallableSymbols { name -> DataClassResolver.isCopy(name) || DataClassResolver.isComponentLike(name) }
             .filter { it.origin == KtSymbolOrigin.SOURCE_MEMBER_GENERATED }
             .filterIsInstance<KtFunctionSymbol>()
@@ -196,14 +196,14 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
 
         // Compiler will generate 'equals/hashCode/toString' for data class if they are not final.
         // We want to mimic that.
-        val nonFinalFunctionsFromAny = classOrObjectSymbol.getMemberScope()
+        konst nonFinalFunctionsFromAny = classOrObjectSymbol.getMemberScope()
             .getCallableSymbols(EQUALS, HASHCODE_NAME, TO_STRING)
             .filterIsInstance<KtFunctionSymbol>()
             .filterNot {
                 it.modality == Modality.FINAL || (it.getContainingSymbol() as? KtNamedClassOrObjectSymbol)?.modality == Modality.FINAL
             }.filter { actuallyComesFromAny(it) }
 
-        val functionsFromAnyByName = nonFinalFunctionsFromAny.associateBy { it.name }
+        konst functionsFromAnyByName = nonFinalFunctionsFromAny.associateBy { it.name }
 
         // NB: functions from `Any` are not in an alphabetic order.
         functionsFromAnyByName[TO_STRING]?.let { createMethodFromAny(it) }
@@ -211,14 +211,14 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
         functionsFromAnyByName[EQUALS]?.let { createMethodFromAny(it) }
     }
 
-    private val Name.isFromAny: Boolean
+    private konst Name.isFromAny: Boolean
         get() = this == EQUALS || this == HASHCODE_NAME || this == TO_STRING
 
     context(KtAnalysisSession)
     private fun addDelegatesToInterfaceMethods(result: MutableList<KtLightMethod>, classOrObjectSymbol: KtNamedClassOrObjectSymbol) {
         fun createDelegateMethod(ktFunctionSymbol: KtFunctionSymbol) {
-            val kotlinOrigin = ktFunctionSymbol.psiSafe<KtDeclaration>() ?: classOrObjectDeclaration
-            val lightMemberOrigin = kotlinOrigin?.let { LightMemberOriginForDeclaration(it, JvmDeclarationOriginKind.DELEGATION) }
+            konst kotlinOrigin = ktFunctionSymbol.psiSafe<KtDeclaration>() ?: classOrObjectDeclaration
+            konst lightMemberOrigin = kotlinOrigin?.let { LightMemberOriginForDeclaration(it, JvmDeclarationOriginKind.DELEGATION) }
             result.add(
                 SymbolLightSimpleMethod(
                     ktAnalysisSession = this@KtAnalysisSession,
@@ -242,7 +242,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
 
     override fun getOwnFields(): List<KtLightField> = cachedValue {
         withClassOrObjectSymbol { classOrObjectSymbol ->
-            val result = mutableListOf<KtLightField>()
+            konst result = mutableListOf<KtLightField>()
 
             // First, add static fields: companion object and fields from companion object
             addCompanionObjectFieldIfNeeded(result, classOrObjectSymbol)
@@ -284,8 +284,8 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
         classOrObjectSymbol.getDeclaredMemberScope().getCallableSymbols()
             .filterIsInstance<KtEnumEntrySymbol>()
             .mapNotNullTo(result) {
-                val enumEntry = it.psiSafe<KtEnumEntry>()
-                val name = enumEntry?.name ?: return@mapNotNullTo null
+                konst enumEntry = it.psiSafe<KtEnumEntry>()
+                konst name = enumEntry?.name ?: return@mapNotNullTo null
                 SymbolLightFieldForEnumEntry(
                     enumEntry = enumEntry,
                     enumEntryName = name,
@@ -298,7 +298,7 @@ internal open class SymbolLightClassForClassOrObject : SymbolLightClassForNamedC
     override fun isAnnotationType(): Boolean = false
     override fun classKind(): KtClassKind = _classKind
 
-    private val _classKind: KtClassKind by lazyPub {
+    private konst _classKind: KtClassKind by lazyPub {
         when (classOrObjectDeclaration) {
             is KtObjectDeclaration -> {
                 if (classOrObjectDeclaration.isCompanion()) KtClassKind.COMPANION_OBJECT else KtClassKind.OBJECT

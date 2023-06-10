@@ -18,14 +18,14 @@ package test
 
 import lib.*
 
-fun <T> Property<T>.assign(value: T) {
-    this.set(value)
+fun <T> Property<T>.assign(konstue: T) {
+    this.set(konstue)
 }
 
-data class Task(val prop: Property<String>) {}
+data class Task(konst prop: Property<String>) {}
 
 fun test() {
-    val task = Task(Property<String>())
+    konst task = Task(Property<String>())
     task.prop = "alma"
     println(task.prop.get())
 }

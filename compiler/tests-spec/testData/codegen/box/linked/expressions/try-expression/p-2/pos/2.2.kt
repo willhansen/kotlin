@@ -7,7 +7,7 @@
  * MAIN LINK: expressions, try-expression -> paragraph 2 -> sentence 2
  * PRIMARY LINKS: expressions, try-expression -> paragraph 2 -> sentence 1
  * NUMBER: 2
- * DESCRIPTION: catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.
+ * DESCRIPTION: catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.
  */
 
 fun throwExceptionB(b: Boolean) = run { if (b) throw ExcB() }

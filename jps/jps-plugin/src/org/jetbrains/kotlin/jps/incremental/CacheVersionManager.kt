@@ -20,10 +20,10 @@ import java.nio.file.Path
  * Based on that status system may perform required actions (i.e. rebuild something, clearing caches, etc...).
  */
 class CacheVersionManager(
-    private val versionFile: Path,
+    private konst versionFile: Path,
     expectedOwnVersion: Int?
 ) : CacheAttributesManager<CacheVersion> {
-    override val expected: CacheVersion? =
+    override konst expected: CacheVersion? =
         if (expectedOwnVersion == null) null
         else CacheVersion(expectedOwnVersion, JvmBytecodeBinaryVersion.INSTANCE, JvmMetadataVersion.INSTANCE)
 
@@ -37,16 +37,16 @@ class CacheVersionManager(
             null
         }
 
-    override fun writeVersion(values: CacheVersion?) {
-        if (values == null) Files.deleteIfExists(versionFile)
+    override fun writeVersion(konstues: CacheVersion?) {
+        if (konstues == null) Files.deleteIfExists(versionFile)
         else {
             Files.createDirectories(versionFile.parent)
-            Files.newOutputStream(versionFile).bufferedWriter().use { it.append(values.intValue.toString()) }
+            Files.newOutputStream(versionFile).bufferedWriter().use { it.append(konstues.intValue.toString()) }
         }
     }
 
     @get:TestOnly
-    val versionFileForTesting: File
+    konst versionFileForTesting: File
         get() = versionFile.toFile()
 }
 
@@ -64,17 +64,17 @@ fun CacheVersion(own: Int, bytecode: JvmBytecodeBinaryVersion, metadata: JvmMeta
     )
 }
 
-data class CacheVersion(val intValue: Int) {
-    val own: Int
+data class CacheVersion(konst intValue: Int) {
+    konst own: Int
         get() = intValue / 1000000
 
-    val bytecode: JvmBytecodeBinaryVersion
+    konst bytecode: JvmBytecodeBinaryVersion
         get() = JvmBytecodeBinaryVersion(
             intValue / 10000 % 10,
             intValue / 100 % 10
         )
 
-    val metadata: JvmMetadataVersion
+    konst metadata: JvmMetadataVersion
         get() = JvmMetadataVersion(
             intValue / 1000 % 10,
             intValue / 1 % 100

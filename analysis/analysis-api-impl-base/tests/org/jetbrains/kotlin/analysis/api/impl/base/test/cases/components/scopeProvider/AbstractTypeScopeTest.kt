@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expression = testServices.expressionMarkerProvider.getSelectedElementOfType<KtExpression>(ktFile)
+        konst expression = testServices.expressionMarkerProvider.getSelectedElementOfType<KtExpression>(ktFile)
         analyseForTest(expression) {
-            val type = expression.getKtType()
+            konst type = expression.getKtType()
                 ?: error("expression $expression is not typable")
-            val typeScope = type.getTypeScope()
-            val declaredScopeByTypeScope = typeScope?.getDeclarationScope()
+            konst typeScope = type.getTypeScope()
+            konst declaredScopeByTypeScope = typeScope?.getDeclarationScope()
 
-            val scopeStringRepresentation = prettyPrint {
+            konst scopeStringRepresentation = prettyPrint {
                 appendLine("expression: ${expression.text}")
                 appendLine("KtType: ${type.render(position = Variance.INVARIANT)}")
                 appendLine()
@@ -45,7 +45,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
 
             }
 
-            val signaturePretty = prettyPrint {
+            konst signaturePretty = prettyPrint {
                 appendLine("KtTypeScope:")
                 appendLine(typeScope?.let { prettyPrintForTests(it) } ?: "NO_SCOPE")
                 appendLine()
@@ -60,7 +60,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
     }
 
     private fun KtAnalysisSession.renderForTests(typeScope: KtTypeScope): String {
-        val callables = typeScope.getCallableSignatures().toList()
+        konst callables = typeScope.getCallableSignatures().toList()
         return prettyPrint {
             callables.forEach {
                 appendLine(stringRepresentation(it))
@@ -69,7 +69,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
     }
 
     private fun KtAnalysisSession.prettyPrintForTests(typeScope: KtTypeScope): String {
-        val callables = typeScope.getCallableSignatures().toList()
+        konst callables = typeScope.getCallableSignatures().toList()
         return prettyPrint {
             callables.forEach {
                 appendLine(prettyPrintSignature(it))
@@ -79,7 +79,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
 
     @Suppress("unused")
     private fun KtAnalysisSession.renderForTests(scope: KtScope): String {
-        val callables = scope.getCallableSymbols().toList()
+        konst callables = scope.getCallableSymbols().toList()
         return prettyPrint {
             callables.forEach {
                 appendLine(DebugSymbolRenderer().render(it))
@@ -88,7 +88,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
     }
 
     private fun KtAnalysisSession.prettyPrintForTests(scope: KtScope): String {
-        val callables = scope.getCallableSymbols().toList()
+        konst callables = scope.getCallableSymbols().toList()
         return prettyPrint {
             callables.forEach {
                 appendLine(it.render(renderer))
@@ -97,7 +97,7 @@ abstract class AbstractTypeScopeTest : AbstractAnalysisApiSingleFileTest() {
     }
 
     companion object {
-        private val renderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
+        private konst renderer = KtDeclarationRendererForSource.WITH_QUALIFIED_NAMES.with {
             modifiersRenderer = modifiersRenderer.with { modifierFilter = KtRendererModifierFilter.NONE }
         }
     }

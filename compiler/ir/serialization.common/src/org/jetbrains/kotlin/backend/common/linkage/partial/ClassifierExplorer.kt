@@ -31,36 +31,36 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.Module as PLModule
 
 internal class ClassifierExplorer(
-    private val builtIns: IrBuiltIns,
-    private val stubGenerator: MissingDeclarationStubGenerator,
-    private val allowErrorTypes: Boolean
+    private konst builtIns: IrBuiltIns,
+    private konst stubGenerator: MissingDeclarationStubGenerator,
+    private konst allowErrorTypes: Boolean
 ) {
-    private val exploredSymbols = ExploredClassifiers()
+    private konst exploredSymbols = ExploredClassifiers()
 
-    private val permittedAnnotationArrayParameterSymbols: Set<IrClassSymbol> by lazy {
+    private konst permittedAnnotationArrayParameterSymbols: Set<IrClassSymbol> by lazy {
         setOf(
             builtIns.stringClass, // kotlin.String
             builtIns.kClassClass // kotlin.reflect.KClass
         )
     }
 
-    private val permittedAnnotationParameterSymbols: Set<IrClassSymbol> by lazy {
+    private konst permittedAnnotationParameterSymbols: Set<IrClassSymbol> by lazy {
         buildSet {
             this += permittedAnnotationArrayParameterSymbols
 
-            PrimitiveType.values().forEach {
+            PrimitiveType.konstues().forEach {
                 addIfNotNull(builtIns.findClass(it.typeName, BUILT_INS_PACKAGE_FQ_NAME)) // kotlin.<primitive>
                 addIfNotNull(builtIns.findClass(it.arrayTypeName, BUILT_INS_PACKAGE_FQ_NAME)) // kotlin.<primitive>Array
             }
 
-            UnsignedType.values().forEach {
+            UnsignedType.konstues().forEach {
                 addIfNotNull(builtIns.findClass(it.typeName, BUILT_INS_PACKAGE_FQ_NAME)) // kotlin.U<signed>
                 addIfNotNull(builtIns.findClass(it.arrayClassId.shortClassName, BUILT_INS_PACKAGE_FQ_NAME)) // kotlin.U<signed>Array
             }
         }
     }
 
-    private val stdlibModule by lazy { PLModule.determineModuleFor(builtIns.anyClass.owner) }
+    private konst stdlibModule by lazy { PLModule.determineModuleFor(builtIns.anyClass.owner) }
 
     fun exploreType(type: IrType): Unusable? = type.exploreType(visitedSymbols = hashSetOf()).asUnusable()
     fun exploreSymbol(symbol: IrClassifierSymbol): Unusable? = symbol.exploreSymbol(visitedSymbols = hashSetOf()).asUnusable()
@@ -98,7 +98,7 @@ internal class ClassifierExplorer(
         }
 
         (owner as? IrLazyClass)?.let { lazyIrClass ->
-            val isEffectivelyMissingClassifier =
+            konst isEffectivelyMissingClassifier =
                 /* Lazy IR declaration is present but wraps a special "not found" class descriptor. */
                 lazyIrClass.descriptor is NotFoundClasses.MockClassDescriptor
                         /* The outermost class containing the lazy IR declaration is private, which normally should not happen
@@ -113,7 +113,7 @@ internal class ClassifierExplorer(
             return Usable // Recursion avoidance.
         }
 
-        val cause: Unusable? = when (val classifier = owner) {
+        konst cause: Unusable? = when (konst classifier = owner) {
             is IrClass -> when (PLModule.determineModuleFor(owner as IrClass)) {
                 is PLModule.MissingDeclarations -> return exploredSymbols.registerUnusable(this, MissingClassifier(this))
                 stdlibModule, PLModule.SyntheticBuiltInFunctions -> {
@@ -122,7 +122,7 @@ internal class ClassifierExplorer(
                 }
                 else -> {
                     // Class from non-stdlib module.
-                    val directSuperTypeSymbols = hashSetOf<IrClassSymbol>()
+                    konst directSuperTypeSymbols = hashSetOf<IrClassSymbol>()
 
                     classifier.annotationConstructorsIfApplicable?.firstUnusable { it.exploreAnnotationConstructor(visitedSymbols) }
                         ?: classifier.outerClassSymbolIfApplicable?.exploreSymbol(visitedSymbols).asUnusable()
@@ -140,7 +140,7 @@ internal class ClassifierExplorer(
             else -> null
         }
 
-        val rootCause = when {
+        konst rootCause = when {
             cause == null -> return exploredSymbols.registerUsable(this)
             cause.symbol == this -> return exploredSymbols.registerUnusable(this, cause)
             else -> when (cause) {
@@ -153,9 +153,9 @@ internal class ClassifierExplorer(
     }
 
     private fun IrConstructor.exploreAnnotationConstructor(visitedSymbols: MutableSet<IrClassifierSymbol>): Unusable? {
-        return valueParameters.firstUnusable { valueParameter ->
-            valueParameter.type.exploreType(visitedSymbols).asUnusable()
-                ?: valueParameter.exploreAnnotationConstructorParameter(visitedSymbols, annotationClass = parentAsClass)
+        return konstueParameters.firstUnusable { konstueParameter ->
+            konstueParameter.type.exploreType(visitedSymbols).asUnusable()
+                ?: konstueParameter.exploreAnnotationConstructorParameter(visitedSymbols, annotationClass = parentAsClass)
         }
     }
 
@@ -164,9 +164,9 @@ internal class ClassifierExplorer(
         visitedSymbols: MutableSet<IrClassifierSymbol>,
         annotationClass: IrClass
     ): Unusable? {
-        val parameterType = type.asSimpleType() ?: return null
-        val parameterClassSymbol = parameterType.classifier as IrClassSymbol
-        val parameterClass = parameterClassSymbol.owner
+        konst parameterType = type.asSimpleType() ?: return null
+        konst parameterClassSymbol = parameterType.classifier as IrClassSymbol
+        konst parameterClass = parameterClassSymbol.owner
 
         when {
             parameterClass.isAnnotationClass -> {
@@ -179,8 +179,8 @@ internal class ClassifierExplorer(
             parameterClassSymbol == builtIns.arrayClass -> {
                 // Additional checks for array element type.
                 for (argument in parameterType.arguments) {
-                    val argumentClassSymbol = (argument.typeOrNull?.asSimpleType() ?: continue).classifier as IrClassSymbol
-                    val argumentClass = argumentClassSymbol.owner
+                    konst argumentClassSymbol = (argument.typeOrNull?.asSimpleType() ?: continue).classifier as IrClassSymbol
+                    konst argumentClass = argumentClassSymbol.owner
 
                     when {
                         argumentClass.isAnnotationClass -> {
@@ -205,7 +205,7 @@ internal class ClassifierExplorer(
         if (isInterface) {
             // Regular interface can inherit only from other regular interfaces.
             // External interface can inherit from external interfaces and external class, but not regular ones.
-            val illegalSuperClassSymbols = if (isExternal)
+            konst illegalSuperClassSymbols = if (isExternal)
                 superTypeSymbols.filter { superTypeSymbol ->
                     superTypeSymbol != builtIns.anyClass && superTypeSymbol.owner.let { superClass ->
                         !superClass.isExternal || !(superClass.isInterface || superClass.isClass)
@@ -215,24 +215,24 @@ internal class ClassifierExplorer(
                 superTypeSymbols.filter { it != builtIns.anyClass && !it.owner.isInterface }
 
             if (illegalSuperClassSymbols.isNotEmpty())
-                return InvalidInheritance(symbol, illegalSuperClassSymbols)
+                return InkonstidInheritance(symbol, illegalSuperClassSymbols)
         } else {
             // Check the number of non-interface supertypes.
-            val superClassSymbols = superTypeSymbols.filter { !it.owner.isInterface }
-            val superClassSymbol = when (superClassSymbols.size) {
+            konst superClassSymbols = superTypeSymbols.filter { !it.owner.isInterface }
+            konst superClassSymbol = when (superClassSymbols.size) {
                 0 -> return null // It can be only Any.
                 1 -> superClassSymbols.first()
-                else -> return InvalidInheritance(symbol, superClassSymbols) // Class inherits from multiple classes.
+                else -> return InkonstidInheritance(symbol, superClassSymbols) // Class inherits from multiple classes.
             }
 
             // Super class can not be final or of illegal kind.
             if (superClassSymbol != builtIns.anyClass
-                && superClassSymbol != builtIns.enumClass // Enum class can't be explicitly inherited, only valid enum class can inherit it.
+                && superClassSymbol != builtIns.enumClass // Enum class can't be explicitly inherited, only konstid enum class can inherit it.
             ) {
-                val superClass = superClassSymbol.owner
+                konst superClass = superClassSymbol.owner
 
                 // Note: Super-interfaces are already filtered out above.
-                val isInvalidInheritance = when (kind) {
+                konst isInkonstidInheritance = when (kind) {
                     ClassKind.INTERFACE,
                     ClassKind.ENUM_CLASS,
                     ClassKind.ANNOTATION_CLASS -> true
@@ -243,8 +243,8 @@ internal class ClassifierExplorer(
                     }
                 }
 
-                if (isInvalidInheritance)
-                    return InvalidInheritance(symbol, superClassSymbols) // Invalid inheritance.
+                if (isInkonstidInheritance)
+                    return InkonstidInheritance(symbol, superClassSymbols) // Inkonstid inheritance.
             }
         }
 
@@ -252,14 +252,14 @@ internal class ClassifierExplorer(
     }
 
     companion object {
-        private val IrClass.annotationConstructorsIfApplicable: Sequence<IrConstructor>?
+        private konst IrClass.annotationConstructorsIfApplicable: Sequence<IrConstructor>?
             get() = if (isAnnotationClass) constructors else null
 
         // Note: Don't consider any nested class automatically as unlinked if enclosing class is unlinked.
-        private val IrClass.outerClassSymbolIfApplicable: IrClassSymbol?
+        private konst IrClass.outerClassSymbolIfApplicable: IrClassSymbol?
             get() = if (isInner || isEnumEntry) (parent as? IrClass)?.symbol else null
 
-        private val IrTypeArgument.typeOrNull: IrType?
+        private konst IrTypeArgument.typeOrNull: IrType?
             get() = (this as? IrTypeProjection)?.type
 
         private fun IrType.asSimpleType() = this as? IrSimpleType
@@ -275,7 +275,7 @@ internal class ClassifierExplorer(
     }
 }
 
-private class IrElementExplorer(private val visitType: (IrType) -> Unit) : IrElementVisitorVoid {
+private class IrElementExplorer(private konst visitType: (IrType) -> Unit) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
     }

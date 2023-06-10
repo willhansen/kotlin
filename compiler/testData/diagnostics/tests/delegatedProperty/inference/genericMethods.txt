@@ -4,7 +4,7 @@ public var a: kotlin.Int
 public var a1: [ERROR : Type from delegate]
 public var b: kotlin.Int
 public var c: kotlin.String
-public val cObj: C
+public konst cObj: C
 public operator fun </*0*/ T> B.getValue(/*0*/ t: kotlin.Any?, /*1*/ p: kotlin.reflect.KProperty<*>): T
 public inline operator fun </*0*/ reified T> C.getValue(/*0*/ t: kotlin.Any?, /*1*/ p: kotlin.reflect.KProperty<*>): T
 public operator fun </*0*/ T> B.setValue(/*0*/ t: kotlin.Any?, /*1*/ p: kotlin.reflect.KProperty<*>, /*2*/ x: T): kotlin.Unit

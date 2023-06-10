@@ -6,20 +6,20 @@ class TestSome<P> {
 
 class Test {
     object Some : <!DEBUG_INFO_UNRESOLVED_WITH_TARGET, UNRESOLVED_REFERENCE!>InnerClass<!>() {
-        val a = object: <!DEBUG_INFO_UNRESOLVED_WITH_TARGET, UNRESOLVED_REFERENCE!>InnerClass<!>() {
+        konst a = object: <!DEBUG_INFO_UNRESOLVED_WITH_TARGET, UNRESOLVED_REFERENCE!>InnerClass<!>() {
         }
 
         fun more(): InnerClass {
-            val b = <!RESOLUTION_TO_CLASSIFIER!>InnerClass<!>()
+            konst b = <!RESOLUTION_TO_CLASSIFIER!>InnerClass<!>()
 
-            val testVal = <!UNRESOLVED_REFERENCE!>inClass<!>
+            konst testVal = <!UNRESOLVED_REFERENCE!>inClass<!>
             <!UNRESOLVED_REFERENCE!>foo<!>()
 
             return <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>b<!>
         }
     }
 
-    val inClass = 12
+    konst inClass = 12
     fun foo() {
     }
 

@@ -18,33 +18,33 @@ internal class Pre232IdeaKotlinBuildStatsService internal constructor(
     beanName: ObjectName
 ) : AbstractKotlinBuildStatsService(gradle, beanName), Pre232IdeaKotlinBuildStatsMXBean {
 
-    override fun report(metric: BooleanMetrics, value: Boolean, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: BooleanMetrics, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun report(metric: NumericalMetrics, value: Long, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: NumericalMetrics, konstue: Long, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun report(metric: StringMetrics, value: String, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: StringMetrics, konstue: String, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun reportBoolean(name: String, value: Boolean, subprojectName: String?, weight: Long?): Boolean =
-        report(BooleanMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean =
+        report(BooleanMetrics.konstueOf(name), konstue, subprojectName, weight)
 
-    override fun reportNumber(name: String, value: Long, subprojectName: String?, weight: Long?): Boolean =
-        report(NumericalMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportNumber(name: String, konstue: Long, subprojectName: String?, weight: Long?): Boolean =
+        report(NumericalMetrics.konstueOf(name), konstue, subprojectName, weight)
 
-    override fun reportString(name: String, value: String, subprojectName: String?, weight: Long?): Boolean =
-        report(StringMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportString(name: String, konstue: String, subprojectName: String?, weight: Long?): Boolean =
+        report(StringMetrics.konstueOf(name), konstue, subprojectName, weight)
 
-    override fun reportBoolean(name: String, value: Boolean, subprojectName: String?): Boolean =
-        report(BooleanMetrics.valueOf(name), value, subprojectName, null)
-
-
-    override fun reportNumber(name: String, value: Long, subprojectName: String?): Boolean =
-        report(NumericalMetrics.valueOf(name), value, subprojectName, null)
+    override fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?): Boolean =
+        report(BooleanMetrics.konstueOf(name), konstue, subprojectName, null)
 
 
-    override fun reportString(name: String, value: String, subprojectName: String?): Boolean =
-        report(StringMetrics.valueOf(name), value, subprojectName, null)
+    override fun reportNumber(name: String, konstue: Long, subprojectName: String?): Boolean =
+        report(NumericalMetrics.konstueOf(name), konstue, subprojectName, null)
+
+
+    override fun reportString(name: String, konstue: String, subprojectName: String?): Boolean =
+        report(StringMetrics.konstueOf(name), konstue, subprojectName, null)
 
 }

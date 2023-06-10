@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 abstract class KtForLoopInReference(element: KtForExpression) : KtMultiReference<KtForExpression>(element) {
     override fun getRangeInElement(): TextRange {
-        val inKeyword = expression.inKeyword ?: return TextRange.EMPTY_RANGE
+        konst inKeyword = expression.inKeyword ?: return TextRange.EMPTY_RANGE
 
-        val offset = inKeyword.startOffsetInParent
+        konst offset = inKeyword.startOffsetInParent
         return TextRange(offset, offset + inKeyword.textLength)
     }
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = NAMES
 
     companion object {
-        private val NAMES = listOf(
+        private konst NAMES = listOf(
             OperatorNameConventions.ITERATOR,
             OperatorNameConventions.NEXT,
             OperatorNameConventions.HAS_NEXT

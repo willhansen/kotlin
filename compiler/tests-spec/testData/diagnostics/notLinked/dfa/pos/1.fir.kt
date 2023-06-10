@@ -88,7 +88,7 @@ fun case_4(x: Char?) {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Unit? = null
+    konst x: Unit? = null
 
     if (x !== null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit? & kotlin.Unit")!>x<!>
     if (x !== null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit? & kotlin.Unit")!>x<!>.equals(null)
@@ -104,7 +104,7 @@ fun case_5() {
 
 // TESTCASE NUMBER: 6
 fun case_6(x: EmptyClass?) {
-    val y = true
+    konst y = true
 
     if (x != null && !y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyClass? & EmptyClass")!>x<!>
@@ -170,7 +170,7 @@ fun case_9(x: TypealiasNullableString?) {
 
 // TESTCASE NUMBER: 10
 fun case_10() {
-    val a = Class()
+    konst a = Class()
 
     if (<!FORBIDDEN_IDENTITY_EQUALS_WARNING!>a.prop_4 === null<!> || true) {
         if (a.prop_4 != null) {
@@ -190,7 +190,7 @@ fun case_10() {
 
 // TESTCASE NUMBER: 11
 fun case_11(x: TypealiasNullableStringIndirect?, y: TypealiasNullableStringIndirect) {
-    val t: TypealiasNullableStringIndirect = null
+    konst t: TypealiasNullableStringIndirect = null
 
     if (x == null) {
 
@@ -248,14 +248,14 @@ fun case_13(x: otherpackage.Case13?) =
 
 // TESTCASE NUMBER: 14
 class Case14 {
-    val x: otherpackage.Case14?
+    konst x: otherpackage.Case14?
     init {
         x = otherpackage.Case14()
     }
 }
 
 fun case_14() {
-    val a = Case14()
+    konst a = Case14()
 
     if (a.x != null) {
         if (<!SENSELESS_COMPARISON!>a.x != null<!>) {
@@ -303,7 +303,7 @@ fun case_14() {
 
 // TESTCASE NUMBER: 15
 fun case_15(x: EmptyObject) {
-    val t = if (<!SENSELESS_COMPARISON!>x === null<!>) "" else {
+    konst t = if (<!SENSELESS_COMPARISON!>x === null<!>) "" else {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyObject")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyObject")!>x<!>.equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyObject")!>x<!>.propT
@@ -319,7 +319,7 @@ fun case_15(x: EmptyObject) {
 
 // TESTCASE NUMBER: 16
 fun case_16() {
-    val x: TypealiasNullableNothing = null
+    konst x: TypealiasNullableNothing = null
 
     if (<!SENSELESS_COMPARISON!>x != null<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableNothing & kotlin.Nothing")!>x<!>
@@ -327,7 +327,7 @@ fun case_16() {
 }
 
 // TESTCASE NUMBER: 17
-val case_17 = if (nullableIntProperty == null) 0 else {
+konst case_17 = if (nullableIntProperty == null) 0 else {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>nullableIntProperty<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>nullableIntProperty<!>.equals(null)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>nullableIntProperty<!>.propT
@@ -358,15 +358,15 @@ fun case_18(a: DeepObject.A.B.C.D.E.F.G.J?) {
 
 // TESTCASE NUMBER: 19
 fun case_19(b: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
-            val B19 = if (b) {
+            konst B19 = if (b) {
                 object {
-                    val C19 = if (b) {
+                    konst C19 = if (b) {
                         object {
-                            val D19 = if (b) {
+                            konst D19 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else null
                         }
@@ -392,10 +392,10 @@ fun case_19(b: Boolean) {
 
 // TESTCASE NUMBER: 20
 fun case_20(b: Boolean) {
-    val a = object {
-        val B19 = object {
-            val C19 = object {
-                val D19 =  if (b) {
+    konst a = object {
+        konst B19 = object {
+            konst C19 = object {
+                konst D19 =  if (b) {
                     object {}
                 } else null
             }
@@ -451,7 +451,7 @@ fun case_22(a: (() -> Unit)?) {
 // TESTCASE NUMBER: 23
 fun case_23(a: ((Float) -> Int?)?, b: Float?) {
     if (a != null && <!FORBIDDEN_IDENTITY_EQUALS_WARNING!>b !== null<!>) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
         if (x != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>.equals(null)
@@ -485,16 +485,16 @@ fun case_24(a: ((() -> Unit) -> Unit)?, b: (() -> Unit)?) =
 
 // TESTCASE NUMBER: 25
 fun case_25(b: Boolean) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else null
     }
 
-    val y = if (b) x else null
+    konst y = if (b) x else null
 
     if (y !== null) {
-        val z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!>y()<!>
+        konst z = <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>?")!>y()<!>
 
         if (z != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("<anonymous>? & <anonymous>")!>z<!>.a
@@ -514,7 +514,7 @@ fun case_25(b: Boolean) {
 // TESTCASE NUMBER: 26
 fun case_26(a: ((Float) -> Int?)?, b: Float?) {
     if (a != null == true && b != null == true) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!>a(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float? & kotlin.Float")!>b<!>)<!>
         if (x != null == true) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>.equals(null)
@@ -563,15 +563,15 @@ fun case_28(a: DeepObject.A.B.C.D.E.F.G.J?) =
     } else -1
 
 // TESTCASE NUMBER: 29
-open class Case29(a: Int?, val b: Float?, private val c: Unit?, protected val d: String?, internal val e: Char?, public val f: Any?) {
-    val x: Char? = '.'
-    private val y: Unit? = kotlin.Unit
-    protected val z: Int? = 12
-    public val u: String? = "..."
-    val s: Any?
-    val v: Int?
-    val w: Number?
-    val t: String? = if (u != null) this.u else null
+open class Case29(a: Int?, konst b: Float?, private konst c: Unit?, protected konst d: String?, internal konst e: Char?, public konst f: Any?) {
+    konst x: Char? = '.'
+    private konst y: Unit? = kotlin.Unit
+    protected konst z: Int? = 12
+    public konst u: String? = "..."
+    konst s: Any?
+    konst v: Int?
+    konst w: Number?
+    konst t: String? = if (u != null) this.u else null
 
     init {
         if (a != null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>a<!>.equals(null)
@@ -1607,15 +1607,15 @@ fun case_29(a: Case29) {
 }
 
 // TESTCASE NUMBER: 30
-sealed class Case30(a: Int?, val b: Float?, private val c: Unit?, protected val d: String?, internal val e: Char?, public val f: Any?) {
-    val x: Char? = '.'
-    private val y: Unit? = kotlin.Unit
-    protected val z: Int? = 12
-    public val u: String? = "..."
-    val s: Any?
-    val v: Int?
-    val w: Number?
-    val t: String? = if (u != null) this.u else null
+sealed class Case30(a: Int?, konst b: Float?, private konst c: Unit?, protected konst d: String?, internal konst e: Char?, public konst f: Any?) {
+    konst x: Char? = '.'
+    private konst y: Unit? = kotlin.Unit
+    protected konst z: Int? = 12
+    public konst u: String? = "..."
+    konst s: Any?
+    konst v: Int?
+    konst w: Number?
+    konst t: String? = if (u != null) this.u else null
 
     init {
         if (a != null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>a<!>.equals(null)
@@ -2651,17 +2651,17 @@ fun case_30(a: Case30) {
 }
 
 // TESTCASE NUMBER: 31
-enum class Case31(a: Int?, val b: Float?, private val c: Unit?, protected val d: String?, internal val e: Char?, public val f: Any?) {
+enum class Case31(a: Int?, konst b: Float?, private konst c: Unit?, protected konst d: String?, internal konst e: Char?, public konst f: Any?) {
     A(1, 2f, kotlin.Unit, "", ',', null), B(1, 2f, kotlin.Unit, "", ',', null), C(1, 2f, kotlin.Unit, "", ',', null);
 
-    val x: Char? = '.'
-    private val y: Unit? = kotlin.Unit
-    protected val z: Int? = 12
-    public val u: String? = "..."
-    val s: Any?
-    val v: Int?
-    val w: Number?
-    val t: String? = if (u != null) this.u else null
+    konst x: Char? = '.'
+    private konst y: Unit? = kotlin.Unit
+    protected konst z: Int? = 12
+    public konst u: String? = "..."
+    konst s: Any?
+    konst v: Int?
+    konst w: Number?
+    konst t: String? = if (u != null) this.u else null
 
     init {
         if (a != null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>a<!>.equals(null)
@@ -3736,13 +3736,13 @@ fun case_31(a: Case31) {
 
 // TESTCASE NUMBER: 32
 object Case32 {
-    val x: Char? = '.'
-    private val y: Unit? = kotlin.Unit
-    public val u: String? = "..."
-    val s: Any?
-    val v: Int?
-    val w: Number?
-    val t: String? = if (u != null) this.u else null
+    konst x: Char? = '.'
+    private konst y: Unit? = kotlin.Unit
+    public konst u: String? = "..."
+    konst s: Any?
+    konst v: Int?
+    konst w: Number?
+    konst t: String? = if (u != null) this.u else null
 
     init {
         if (x != null) <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Char? & kotlin.Char")!>x<!>.equals(null)

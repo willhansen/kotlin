@@ -4,11 +4,11 @@
 
 import java.util.function.Supplier
 
-open class Base(val supplier: Supplier<Number>)
+open class Base(konst supplier: Supplier<Number>)
 
 object Extended : Base(Supplier { 32 })
 
 fun box(): String {
-    val blam = Extended
+    konst blam = Extended
     return if (blam.supplier.get() == 32) "OK" else "Fail"
 }

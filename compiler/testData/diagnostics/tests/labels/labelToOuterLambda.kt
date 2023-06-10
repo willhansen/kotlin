@@ -21,8 +21,8 @@ fun main() {
     }
 
     lateinit var c: Int.() -> Unit
-    val a = "hello".apply {
-        val b: Int.() -> Unit = {
+    konst a = "hello".apply {
+        konst b: Int.() -> Unit = {
             this@apply.hello()
         }
         c = {

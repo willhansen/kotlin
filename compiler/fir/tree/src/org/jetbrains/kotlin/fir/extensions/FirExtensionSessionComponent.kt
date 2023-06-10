@@ -11,19 +11,19 @@ import kotlin.reflect.KClass
 
 abstract class FirExtensionSessionComponent(session: FirSession) : FirExtension(session), FirSessionComponent {
     companion object {
-        val NAME = FirExtensionPointName("ExtensionSessionComponent")
+        konst NAME = FirExtensionPointName("ExtensionSessionComponent")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension>
+    final override konst extensionType: KClass<out FirExtension>
         get() = FirExtensionSessionComponent::class
 
-    open val componentClass: KClass<out FirExtensionSessionComponent>
+    open konst componentClass: KClass<out FirExtensionSessionComponent>
         get() = this::class
 
     fun interface Factory : FirExtension.Factory<FirExtensionSessionComponent>
 }
 
-val FirExtensionService.extensionSessionComponents: List<FirExtensionSessionComponent> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.extensionSessionComponents: List<FirExtensionSessionComponent> by FirExtensionService.registeredExtensions()

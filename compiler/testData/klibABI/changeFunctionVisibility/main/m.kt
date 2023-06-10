@@ -3,8 +3,8 @@ import abitestutils.TestBuilder
 import abitestutils.TestMode.NATIVE_CACHE_STATIC_EVERYWHERE
 
 fun box() = abiTest {
-    val c = Container()
-    val ci = ContainerImpl()
+    konst c = Container()
+    konst ci = ContainerImpl()
 
     success("publicToInternalTopLevelFunction.v2") { publicToInternalTopLevelFunction() } // Signature remains the same.
     success("publicToInternalPATopLevelFunction.v2") { publicToInternalPATopLevelFunction() } // Signature remains the same.
@@ -56,13 +56,13 @@ private inline fun TestBuilder.success(expectedOutcome: String, noinline block: 
     expectSuccess(expectedOutcome, block)
 
 private inline fun TestBuilder.unlinkedSymbol(signature: String, noinline block: () -> Unit) {
-    val functionName = signature.removePrefix("/").substringAfterLast(".")
+    konst functionName = signature.removePrefix("/").substringAfterLast(".")
     expectFailure(linkage("Function '$functionName' can not be called: No function found for symbol '$signature'"), block)
 }
 
 private inline fun TestBuilder.unlinkedTopLevelPrivateSymbol(signature: String, noinline block: () -> Unit) {
     if (testMode == NATIVE_CACHE_STATIC_EVERYWHERE) {
-        val functionName = signature.removePrefix("/").substringAfterLast(".")
+        konst functionName = signature.removePrefix("/").substringAfterLast(".")
         expectFailure(linkage("Function '$functionName' can not be called: Private function declared in module <lib1> can not be accessed in module <main>"), block)
     } else
         unlinkedSymbol(signature, block)

@@ -4,7 +4,7 @@
 package lib
 
 abstract class BaseRoot<TNested : BaseRoot.BaseNested<*>> {
-    open class BaseNested<V>(val box: V)
+    open class BaseNested<V>(konst box: V)
 }
 
 // MODULE: main(lib)
@@ -12,7 +12,7 @@ abstract class BaseRoot<TNested : BaseRoot.BaseNested<*>> {
 package main
 import lib.BaseRoot
 
-class Foo(val v: String)
+class Foo(konst v: String)
 
 class ImplRoot : BaseRoot<ImplRoot.ImplNested>() {
 

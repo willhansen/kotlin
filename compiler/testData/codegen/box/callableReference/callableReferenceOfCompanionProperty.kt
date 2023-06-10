@@ -2,7 +2,7 @@ import kotlin.reflect.KProperty0
 
 class Sample {
     companion object {
-        val maxValue = 1
+        konst maxValue = 1
     }
 }
 

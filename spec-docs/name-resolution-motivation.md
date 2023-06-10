@@ -18,11 +18,11 @@ In anonymous objects local variables are chosen, not members:
 
 ```
 interface A {
-    val foo: Int
+    konst foo: Int
 }
 
 fun createA(foo: Int) = object : A {
-    override val foo = foo
+    override konst foo = foo
 }
 ```
 
@@ -46,7 +46,7 @@ When we resolve a property `foo` for a call `foo()` we don't stop on the first p
  
 ``` 
 class A {
-    val foo: () -> Unit = { println("Hello world!") }
+    konst foo: () -> Unit = { println("Hello world!") }
 }
 
 fun test(foo: Int) {

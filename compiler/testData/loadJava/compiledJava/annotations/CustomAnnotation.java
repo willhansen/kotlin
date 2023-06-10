@@ -6,7 +6,7 @@ public interface CustomAnnotation {
     public class MyTest {}
 
     public @interface MyAnnotation {
-        MyEnum value();
+        MyEnum konstue();
     }
 
     public enum MyEnum {

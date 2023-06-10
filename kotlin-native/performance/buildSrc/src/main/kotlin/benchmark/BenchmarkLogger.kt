@@ -5,7 +5,7 @@ import java.util.*
 
 enum class LogLevel { DEBUG, OFF }
 
-class Logger(val level: LogLevel = LogLevel.OFF) {
+class Logger(konst level: LogLevel = LogLevel.OFF) {
     private fun printStderr(message: String) {
         System.err.print(message)
     }

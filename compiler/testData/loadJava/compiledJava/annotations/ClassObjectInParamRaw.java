@@ -2,10 +2,10 @@ package test;
 
 public class ClassObjectInParamRaw {
     public @interface Anno {
-        Class value();
+        Class konstue();
         Class[] arg();
     }
 
-    @Anno(value = ClassObjectInParamRaw.class, arg = {})
+    @Anno(konstue = ClassObjectInParamRaw.class, arg = {})
     public static class Nested {}
 }

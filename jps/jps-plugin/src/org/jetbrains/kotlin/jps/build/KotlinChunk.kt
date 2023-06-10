@@ -23,8 +23,8 @@ import java.nio.file.Path
 /**
  * Chunk of cyclically dependent [KotlinModuleBuildTarget]s
  */
-class KotlinChunk internal constructor(val context: KotlinCompileContext, val targets: List<KotlinModuleBuildTarget<*>>) {
-    val containsTests = targets.any { it.isTests }
+class KotlinChunk internal constructor(konst context: KotlinCompileContext, konst targets: List<KotlinModuleBuildTarget<*>>) {
+    konst containsTests = targets.any { it.isTests }
 
     private var areChunkDependenciesCalculated: Boolean = false
 
@@ -35,8 +35,8 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
      * It would be more correct to say [KotlinModuleBuildTarget] instead of "module"
      * but word "module" makes it easier to understand this doc
      */
-    private val _dependencies: MutableList<KotlinModuleBuildTarget.Dependency> = mutableListOf()
-    val dependencies: List<KotlinModuleBuildTarget.Dependency>
+    private konst _dependencies: MutableList<KotlinModuleBuildTarget.Dependency> = mutableListOf()
+    konst dependencies: List<KotlinModuleBuildTarget.Dependency>
         get() = _dependencies.takeIf { areChunkDependenciesCalculated } ?: error("Chunk dependencies are not calculated yet")
 
     /**
@@ -46,8 +46,8 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
      * It would be more correct to say [KotlinModuleBuildTarget] instead of "module"
      * but word "module" makes it easier to understand this doc
      */
-    private val _dependents: MutableList<KotlinModuleBuildTarget.Dependency> = mutableListOf()
-    val dependents: List<KotlinModuleBuildTarget.Dependency>
+    private konst _dependents: MutableList<KotlinModuleBuildTarget.Dependency> = mutableListOf()
+    konst dependents: List<KotlinModuleBuildTarget.Dependency>
         get() = _dependents.takeIf { areChunkDependenciesCalculated } ?: error("Chunk dependents are not calculated yet")
 
     companion object {
@@ -77,13 +77,13 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
             srcTarget: KotlinModuleBuildTarget<*>,
             byJpsModuleBuildTarget: MutableMap<ModuleBuildTarget, KotlinModuleBuildTarget<*>>
         ): List<KotlinModuleBuildTarget.Dependency> {
-            val compileClasspathKind = JpsJavaClasspathKind.compile(srcTarget.isTests)
+            konst compileClasspathKind = JpsJavaClasspathKind.compile(srcTarget.isTests)
 
-            val jpsJavaExtensionService = JpsJavaExtensionService.getInstance()
-            val dependencies = srcTarget.module.dependenciesList.dependencies.asSequence()
+            konst jpsJavaExtensionService = JpsJavaExtensionService.getInstance()
+            konst dependencies = srcTarget.module.dependenciesList.dependencies.asSequence()
                 .filterIsInstance<JpsModuleDependency>()
                 .mapNotNull { dep ->
-                    val extension = jpsJavaExtensionService.getDependencyExtension(dep)
+                    konst extension = jpsJavaExtensionService.getDependencyExtension(dep)
                         ?.takeIf { it.scope.isIncludedIn(compileClasspathKind) }
                         ?: return@mapNotNull null
                     dep.module
@@ -93,7 +93,7 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
                 .toMutableList()
 
             if (srcTarget.isTests) {
-                val srcProductionTarget = byJpsModuleBuildTarget[ModuleBuildTarget(srcTarget.module, isTests = false)]
+                konst srcProductionTarget = byJpsModuleBuildTarget[ModuleBuildTarget(srcTarget.module, isTests = false)]
                 if (srcProductionTarget != null) {
                     dependencies.add(KotlinModuleBuildTarget.Dependency(srcTarget, srcProductionTarget, exported = true))
                 }
@@ -103,17 +103,17 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
         }
     }
 
-    val representativeTarget
+    konst representativeTarget
         get() = targets.first()
 
-    val presentableModulesToCompilersList: String
+    konst presentableModulesToCompilersList: String
         get() = targets.joinToString { "${it.module.name} (${it.globalLookupCacheId})" }
 
-    val haveSameCompiler = targets.all { it.javaClass == representativeTarget.javaClass }
+    konst haveSameCompiler = targets.all { it.javaClass == representativeTarget.javaClass }
 
-    private val defaultLanguageVersion = LanguageVersion.LATEST_STABLE
+    private konst defaultLanguageVersion = LanguageVersion.LATEST_STABLE
 
-    val compilerArguments by lazy {
+    konst compilerArguments by lazy {
         representativeTarget.jpsModuleBuildTarget.module.kotlinCompilerArguments.also {
             it.reportOutputFiles = true
 
@@ -124,17 +124,17 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
         }
     }
 
-    val langVersion by lazy {
+    konst langVersion by lazy {
         compilerArguments.languageVersion?.let { LanguageVersion.fromVersionString(it) }
-            ?: defaultLanguageVersion // use default language version when version string is invalid (todo: report warning?)
+            ?: defaultLanguageVersion // use default language version when version string is inkonstid (todo: report warning?)
     }
 
-    val apiVersion by lazy {
+    konst apiVersion by lazy {
         compilerArguments.apiVersion?.let { ApiVersion.parse(it) }
             ?: ApiVersion.createByLanguageVersion(langVersion) // todo: report version parse error?
     }
 
-    val isEnabled: Boolean by lazy {
+    konst isEnabled: Boolean by lazy {
         representativeTarget.isEnabled(lazy { compilerArguments })
     }
 
@@ -146,8 +146,8 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
             }
 
             if (target.initialLocalCacheAttributesDiff.status == CacheStatus.INVALID) {
-                context.testingLogger?.invalidOrUnusedCache(this, null, target.initialLocalCacheAttributesDiff)
-                KotlinBuilder.LOG.info("$target cache is invalid ${target.initialLocalCacheAttributesDiff}, rebuilding $this")
+                context.testingLogger?.inkonstidOrUnusedCache(this, null, target.initialLocalCacheAttributesDiff)
+                KotlinBuilder.LOG.info("$target cache is inkonstid ${target.initialLocalCacheAttributesDiff}, rebuilding $this")
                 return true
             }
         }
@@ -167,7 +167,7 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
             it.initialLocalCacheAttributesDiff.manager.writeVersion()
         }
 
-        val serializedCompilerArguments = representativeTarget.buildMetaInfo.serializeArgsToString(compilerArguments)
+        konst serializedCompilerArguments = representativeTarget.buildMetaInfo.serializeArgsToString(compilerArguments)
         targets.forEach { target ->
             Files.newOutputStream(compilerArgumentsFile(target.jpsModuleBuildTarget)).bufferedWriter()
                 .use { it.append(serializedCompilerArguments) }
@@ -185,28 +185,28 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
     }
 
     fun loadCaches(loadDependent: Boolean = true): Map<KotlinModuleBuildTarget<*>, JpsIncrementalCache> {
-        val dataManager = context.dataManager
+        konst dataManager = context.dataManager
 
-        val cacheByChunkTarget = targets.keysToMapExceptNulls {
+        konst cacheByChunkTarget = targets.keysToMapExceptNulls {
             dataManager.getKotlinCache(it)
         }
 
         if (loadDependent) {
-            addDependentCaches(cacheByChunkTarget.values)
+            addDependentCaches(cacheByChunkTarget.konstues)
         }
 
         return cacheByChunkTarget
     }
 
     private fun addDependentCaches(targetsCaches: Collection<JpsIncrementalCache>) {
-        val dependentChunks = mutableSetOf<KotlinChunk>()
+        konst dependentChunks = mutableSetOf<KotlinChunk>()
 
         collectDependentChunksRecursivelyExportedOnly(dependentChunks)
 
-        val dataManager = context.dataManager
+        konst dataManager = context.dataManager
         dependentChunks.forEach { decedentChunk ->
             decedentChunk.targets.forEach {
-                val dependentCache = dataManager.getKotlinCache(it)
+                konst dependentCache = dataManager.getKotlinCache(it)
                 if (dependentCache != null) {
 
                     for (chunkCache in targetsCaches) {
@@ -220,13 +220,13 @@ class KotlinChunk internal constructor(val context: KotlinCompileContext, val ta
     /**
      * The same as [org.jetbrains.jps.ModuleChunk.getPresentableShortName]
      */
-    val presentableShortName: String
+    konst presentableShortName: String
         get() = buildString {
             if (containsTests) append("tests of ")
             append(targets.first().module.name)
             if (targets.size > 1) {
-                val andXMore = " and ${targets.size - 1} more"
-                val other = ", " + targets.asSequence().drop(1).joinToString()
+                konst andXMore = " and ${targets.size - 1} more"
+                konst other = ", " + targets.asSequence().drop(1).joinToString()
                 append(if (other.length < andXMore.length) other else andXMore)
             }
         }

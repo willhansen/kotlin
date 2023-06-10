@@ -3,7 +3,7 @@
 
 package foo
 
-public class Foo(val trigger: () -> Any) {
+public class Foo(konst trigger: () -> Any) {
     fun test() = myRun { trigger() };
 }
 

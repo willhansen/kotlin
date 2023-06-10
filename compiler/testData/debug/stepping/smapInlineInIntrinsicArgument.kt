@@ -17,7 +17,7 @@ fun fail() : String {
 }
 
 // The JVM backend does not go back to line 4 and 7 for the
-// addition. Instead it treats the addition of the evaluated
+// addition. Instead it treats the addition of the ekonstuated
 // arguments as being on line 5 and 8. That seems incorrect
 // and the JVM_IR stepping is more correct.
 

@@ -29,7 +29,7 @@ package test
 
 interface IFoo {
     interface IBar {
-        annotation class Anno(vararg val value: kotlin.reflect.KClass<*>)
+        annotation class Anno(vararg konst konstue: kotlin.reflect.KClass<*>)
 
         @Anno(IZoo::class)
         interface IZoo
@@ -40,7 +40,7 @@ class Experiment {
     annotation class Type
 
     @Type
-    data class Group(val s: String)
+    data class Group(konst s: String)
 }
 
 class Foo {
@@ -80,7 +80,7 @@ class `A$B` {
 }
 
 @IFoo.IBar.Anno(IFoo.IBar.IZoo::class, Foo.Bar::class)
-class Test1(val zoo: Foo.Bar.Zoo) : Foo.Bar(), IFoo.IBar, IFoo.IBar.IZoo {
+class Test1(konst zoo: Foo.Bar.Zoo) : Foo.Bar(), IFoo.IBar, IFoo.IBar.IZoo {
     fun a(): Thread.State = Thread.State.NEW
     fun b(foo: JavaClass.Foo, bar: JavaClass.Foo.Bar) {}
 }

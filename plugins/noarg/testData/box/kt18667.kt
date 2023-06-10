@@ -3,12 +3,12 @@
 annotation class NoArg
 
 @NoArg
-class Foo(val s1: String) {
-    val s2: String = ""
-    val l: List<String> = listOf()
+class Foo(konst s1: String) {
+    konst s2: String = ""
+    konst l: List<String> = listOf()
 }
 
 fun box(): String {
-    val instance = Foo::class.java.newInstance()
+    konst instance = Foo::class.java.newInstance()
     return "OK"
 }

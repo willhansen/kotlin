@@ -2,23 +2,23 @@ package
 
 public final class C : O.B {
     public constructor C()
-    public final val a: [Error type: Not found recorded type for A::foo]
-    public final val b: [Error type: Not found recorded type for A::foo]
-    public final val c: kotlin.reflect.KFunction1<O.A.FromA, kotlin.Int>
-    public final val d: kotlin.reflect.KFunction1<O.B.FromB, kotlin.Int>
-    public final val e: kotlin.reflect.KFunction1<O.A.Companion.FromCompanionA, kotlin.Int>
-    public final val f: kotlin.reflect.KFunction1<O.B.Companion.FromCompanionB, kotlin.Int>
-    public final val g: [Error type: Not found recorded type for Alpha::foo]
-    public final val h: [Error type: Not found recorded type for Beta::foo]
-    public final val i: [Error type: Not found recorded type for Gamma::foo]
-    public final val k: kotlin.reflect.KFunction1<O.Alpha.FromAlpha, kotlin.Int>
-    public final val l: kotlin.reflect.KFunction1<O.Beta.FromBeta, kotlin.Int>
-    public final val m: kotlin.reflect.KFunction1<O.Gamma.FromGamma, kotlin.Int>
-    public final val n: kotlin.reflect.KFunction1<C.Companion.FromCompanionC, kotlin.Int>
-    public final val o: [Error type: Not found recorded type for FromCompanionAlpha::foo]
-    public final val p: [Error type: Not found recorded type for FromCompanionBeta::foo]
-    public final val q: [Error type: Not found recorded type for FromCompanionGamma::foo]
-    public final val r: kotlin.reflect.KFunction1<Delta.FromDelta, kotlin.Int>
+    public final konst a: [Error type: Not found recorded type for A::foo]
+    public final konst b: [Error type: Not found recorded type for A::foo]
+    public final konst c: kotlin.reflect.KFunction1<O.A.FromA, kotlin.Int>
+    public final konst d: kotlin.reflect.KFunction1<O.B.FromB, kotlin.Int>
+    public final konst e: kotlin.reflect.KFunction1<O.A.Companion.FromCompanionA, kotlin.Int>
+    public final konst f: kotlin.reflect.KFunction1<O.B.Companion.FromCompanionB, kotlin.Int>
+    public final konst g: [Error type: Not found recorded type for Alpha::foo]
+    public final konst h: [Error type: Not found recorded type for Beta::foo]
+    public final konst i: [Error type: Not found recorded type for Gamma::foo]
+    public final konst k: kotlin.reflect.KFunction1<O.Alpha.FromAlpha, kotlin.Int>
+    public final konst l: kotlin.reflect.KFunction1<O.Beta.FromBeta, kotlin.Int>
+    public final konst m: kotlin.reflect.KFunction1<O.Gamma.FromGamma, kotlin.Int>
+    public final konst n: kotlin.reflect.KFunction1<C.Companion.FromCompanionC, kotlin.Int>
+    public final konst o: [Error type: Not found recorded type for FromCompanionAlpha::foo]
+    public final konst p: [Error type: Not found recorded type for FromCompanionBeta::foo]
+    public final konst q: [Error type: Not found recorded type for FromCompanionGamma::foo]
+    public final konst r: kotlin.reflect.KFunction1<Delta.FromDelta, kotlin.Int>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun foo(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

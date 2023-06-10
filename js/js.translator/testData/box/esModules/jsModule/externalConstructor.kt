@@ -12,7 +12,7 @@ open external class A(data: String) {
     constructor(data: Int)
     constructor(data: Boolean)
 
-    val data: Any
+    konst data: Any
 }
 
 class B(data: String) : A(data)

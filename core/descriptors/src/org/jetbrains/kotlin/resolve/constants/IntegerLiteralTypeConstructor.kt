@@ -42,8 +42,8 @@ class IntegerLiteralTypeConstructor : TypeConstructor {
 
         private fun fold(left: SimpleType?, right: SimpleType?, mode: Mode): SimpleType? {
             if (left == null || right == null) return null
-            val leftConstructor = left.constructor
-            val rightConstructor = right.constructor
+            konst leftConstructor = left.constructor
+            konst rightConstructor = right.constructor
             return when {
                 leftConstructor is IntegerLiteralTypeConstructor && rightConstructor is IntegerLiteralTypeConstructor ->
                     fold(leftConstructor, rightConstructor, mode)
@@ -55,11 +55,11 @@ class IntegerLiteralTypeConstructor : TypeConstructor {
         }
 
         private fun fold(left: IntegerLiteralTypeConstructor, right: IntegerLiteralTypeConstructor, mode: Mode): SimpleType? {
-            val possibleTypes = when (mode) {
+            konst possibleTypes = when (mode) {
                 Mode.COMMON_SUPER_TYPE -> left.possibleTypes intersect right.possibleTypes
                 Mode.INTERSECTION_TYPE -> left.possibleTypes union right.possibleTypes
             }
-            val constructor = IntegerLiteralTypeConstructor(left.value, left.module, possibleTypes)
+            konst constructor = IntegerLiteralTypeConstructor(left.konstue, left.module, possibleTypes)
             return KotlinTypeFactory.integerLiteralType(TypeAttributes.Empty, constructor, false)
         }
 
@@ -68,38 +68,38 @@ class IntegerLiteralTypeConstructor : TypeConstructor {
 
     }
 
-    private val value: Long
-    private val module: ModuleDescriptor
-    val possibleTypes: Set<KotlinType>
+    private konst konstue: Long
+    private konst module: ModuleDescriptor
+    konst possibleTypes: Set<KotlinType>
 
-    constructor(value: Long, module: ModuleDescriptor, parameters: CompileTimeConstant.Parameters) {
-        this.value = value
+    constructor(konstue: Long, module: ModuleDescriptor, parameters: CompileTimeConstant.Parameters) {
+        this.konstue = konstue
         this.module = module
 
-        val possibleTypes = mutableSetOf<KotlinType>()
+        konst possibleTypes = mutableSetOf<KotlinType>()
 
-        fun checkBoundsAndAddPossibleType(value: Long, kotlinType: KotlinType) {
-            if (value in kotlinType.minValue()..kotlinType.maxValue()) {
+        fun checkBoundsAndAddPossibleType(konstue: Long, kotlinType: KotlinType) {
+            if (konstue in kotlinType.minValue()..kotlinType.maxValue()) {
                 possibleTypes.add(kotlinType)
             }
         }
 
         fun addSignedPossibleTypes() {
-            checkBoundsAndAddPossibleType(value, builtIns.intType)
+            checkBoundsAndAddPossibleType(konstue, builtIns.intType)
             possibleTypes.add(builtIns.longType)
-            checkBoundsAndAddPossibleType(value, builtIns.byteType)
-            checkBoundsAndAddPossibleType(value, builtIns.shortType)
+            checkBoundsAndAddPossibleType(konstue, builtIns.byteType)
+            checkBoundsAndAddPossibleType(konstue, builtIns.shortType)
         }
 
         fun addUnsignedPossibleTypes() {
-            checkBoundsAndAddPossibleType(value, module.uIntType)
+            checkBoundsAndAddPossibleType(konstue, module.uIntType)
             possibleTypes.add(module.uLongType)
-            checkBoundsAndAddPossibleType(value, module.uByteType)
-            checkBoundsAndAddPossibleType(value, module.uShortType)
+            checkBoundsAndAddPossibleType(konstue, module.uByteType)
+            checkBoundsAndAddPossibleType(konstue, module.uShortType)
         }
 
-        val isUnsigned = parameters.isUnsignedNumberLiteral
-        val isConvertable = parameters.isConvertableConstVal
+        konst isUnsigned = parameters.isUnsignedNumberLiteral
+        konst isConvertable = parameters.isConvertableConstVal
 
         if (isUnsigned || isConvertable) {
             assert(hasUnsignedTypesInModuleDependencies(module)) {
@@ -121,18 +121,18 @@ class IntegerLiteralTypeConstructor : TypeConstructor {
         this.possibleTypes = possibleTypes
     }
 
-    private constructor(value: Long, module: ModuleDescriptor, possibleTypes: Set<KotlinType>) {
-        this.value = value
+    private constructor(konstue: Long, module: ModuleDescriptor, possibleTypes: Set<KotlinType>) {
+        this.konstue = konstue
         this.module = module
         this.possibleTypes = possibleTypes
     }
 
-    private val type = KotlinTypeFactory.integerLiteralType(TypeAttributes.Empty, this, false)
+    private konst type = KotlinTypeFactory.integerLiteralType(TypeAttributes.Empty, this, false)
 
     private fun isContainsOnlyUnsignedTypes(): Boolean = module.allSignedLiteralTypes.all { it !in possibleTypes }
 
-    private val supertypes: List<KotlinType> by lazy {
-        val result = mutableListOf(builtIns.comparable.defaultType.replace(listOf(TypeProjectionImpl(Variance.IN_VARIANCE, type))))
+    private konst supertypes: List<KotlinType> by lazy {
+        konst result = mutableListOf(builtIns.comparable.defaultType.replace(listOf(TypeProjectionImpl(Variance.IN_VARIANCE, type))))
         if (!isContainsOnlyUnsignedTypes()) {
             result += builtIns.numberType
         }
@@ -170,11 +170,11 @@ class IntegerLiteralTypeConstructor : TypeConstructor {
     override fun refine(kotlinTypeRefiner: KotlinTypeRefiner): TypeConstructor = this
 
     override fun toString(): String {
-        return "IntegerLiteralType${valueToString()}"
+        return "IntegerLiteralType${konstueToString()}"
     }
 
     fun checkConstructor(constructor: TypeConstructor): Boolean = possibleTypes.any { it.constructor == constructor }
 
-    private fun valueToString(): String = "[${possibleTypes.joinToString(",") { it.toString() }}]"
+    private fun konstueToString(): String = "[${possibleTypes.joinToString(",") { it.toString() }}]"
 
 }

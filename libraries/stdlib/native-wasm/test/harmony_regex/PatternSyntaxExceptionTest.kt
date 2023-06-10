@@ -22,7 +22,7 @@ import kotlin.test.*
 class PatternSyntaxExceptionTest {
 
     @Test fun testCase() {
-        val regex = "("
+        konst regex = "("
         try {
             Regex(regex)
             fail("IllegalArgumentException expected")
@@ -33,7 +33,7 @@ class PatternSyntaxExceptionTest {
     }
 
     @Test fun testCase2() {
-        val regex = "[4-"
+        konst regex = "[4-"
         try {
             Regex(regex)
             fail("IllegalArgumentException expected")

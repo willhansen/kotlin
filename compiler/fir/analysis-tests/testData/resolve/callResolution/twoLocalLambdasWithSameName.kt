@@ -4,9 +4,9 @@ interface R
 fun takeInt(x: Int) {}
 
 fun test(fn: R.() -> String) { // (1)
-    val renderer = object : R {
+    konst renderer = object : R {
         fun render(fn: R.() -> Int) { // (2)
-            val result = fn()
+            konst result = fn()
             takeInt(result)
         }
     }

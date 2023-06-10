@@ -1,6 +1,6 @@
 interface I
-data class Foo(val i: Int) : I
-data class Bar(val s: String)
+data class Foo(konst i: Int) : I
+data class Bar(konst s: String)
 
 fun test(f1: Foo, f2: Foo, f3: Foo?, b1: Bar, b2: Bar?, i: I) {
     typesHaveCommonSubtype(f1, f2)

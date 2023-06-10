@@ -4,7 +4,7 @@
 // WITH_STDLIB
 
 interface Test {
-    private val foo: String
+    private konst foo: String
         get() = "O"
 
     private fun bar(): String {

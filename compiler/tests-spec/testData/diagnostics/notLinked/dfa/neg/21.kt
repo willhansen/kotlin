@@ -16,9 +16,9 @@
  * ISSUES: KT-28508
  */
 class Case1 {
-    val x: Int?
+    konst x: Int?
     init {
-        val y = this
+        konst y = this
         if (y.x != null) {
             x = null
             <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!>
@@ -37,9 +37,9 @@ class Case1 {
  * ISSUES: KT-28508
  */
 class Case2 {
-    val x: Int
+    konst x: Int
     init {
-        val y = this
+        konst y = this
         if (<!SENSELESS_COMPARISON!>y.x == null<!>) {
             x = 11
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>x<!>

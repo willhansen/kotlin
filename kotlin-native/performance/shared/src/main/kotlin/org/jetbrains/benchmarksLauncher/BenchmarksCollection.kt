@@ -19,34 +19,34 @@ package org.jetbrains.benchmarksLauncher
 import org.jetbrains.report.BenchmarkResult
 
 interface AbstractBenchmarkEntry {
-    open val useAutoEvaluatedNumberOfMeasure: Boolean
+    open konst useAutoEkonstuatedNumberOfMeasure: Boolean
 }
 
-open class BenchmarkEntryWithInit(val ctor: ()->Any, val lambda: (Any) -> Any?): AbstractBenchmarkEntry {
+open class BenchmarkEntryWithInit(konst ctor: ()->Any, konst lambda: (Any) -> Any?): AbstractBenchmarkEntry {
     companion object {
         inline fun <T: Any> create(noinline ctor: ()->T, crossinline lambda: T.() -> Any?) = BenchmarkEntryWithInit(ctor) { (it as T).lambda() }
     }
 
-    override val useAutoEvaluatedNumberOfMeasure: Boolean = true
+    override konst useAutoEkonstuatedNumberOfMeasure: Boolean = true
 }
 
-class BenchmarkEntryWithInitAndValidation(ctor: () -> Any, benchmark: (Any) -> Any?, val validation: (Any) -> Any?)
+class BenchmarkEntryWithInitAndValidation(ctor: () -> Any, benchmark: (Any) -> Any?, konst konstidation: (Any) -> Any?)
     : BenchmarkEntryWithInit(ctor, benchmark) {
     companion object {
-        inline fun <T: Any> create(noinline ctor: ()->T, crossinline benchmark: T.() -> Any?, crossinline validation: T.() -> Any?)
-                = BenchmarkEntryWithInitAndValidation(ctor, { (it as T).benchmark() }, { (it as T).validation() })
+        inline fun <T: Any> create(noinline ctor: ()->T, crossinline benchmark: T.() -> Any?, crossinline konstidation: T.() -> Any?)
+                = BenchmarkEntryWithInitAndValidation(ctor, { (it as T).benchmark() }, { (it as T).konstidation() })
     }
 
-    override val useAutoEvaluatedNumberOfMeasure: Boolean = true
+    override konst useAutoEkonstuatedNumberOfMeasure: Boolean = true
 }
 
-open class BenchmarkEntry(val lambda: () -> Any?) : AbstractBenchmarkEntry {
-    override val useAutoEvaluatedNumberOfMeasure: Boolean = true
+open class BenchmarkEntry(konst lambda: () -> Any?) : AbstractBenchmarkEntry {
+    override konst useAutoEkonstuatedNumberOfMeasure: Boolean = true
 }
 
 class BenchmarkEntryManual(lambda: () -> Any?) : BenchmarkEntry(lambda) {
-    override val useAutoEvaluatedNumberOfMeasure: Boolean = false
+    override konst useAutoEkonstuatedNumberOfMeasure: Boolean = false
 }
 
-class BenchmarksCollection(private val benchmarks: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf()) :
+class BenchmarksCollection(private konst benchmarks: MutableMap<String, AbstractBenchmarkEntry> = mutableMapOf()) :
         MutableMap<String, AbstractBenchmarkEntry> by benchmarks

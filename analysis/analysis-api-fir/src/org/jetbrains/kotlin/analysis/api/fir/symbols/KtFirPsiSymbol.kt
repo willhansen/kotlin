@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
  * calculated without the need to build a [firSymbol].
  */
 internal interface KtFirPsiSymbol<P : PsiElement, out S : FirBasedSymbol<*>> : KtFirSymbol<S> {
-    override val psi: P
+    override konst psi: P
 
     /**
      * The origin should be provided without using [firSymbol], if possible.
      */
-    abstract override val origin: KtSymbolOrigin
+    abstract override konst origin: KtSymbolOrigin
 }

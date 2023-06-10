@@ -31,42 +31,42 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiLiteralAnonymousFunctionSymbol(
-    override val psi: KtFunctionLiteral,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtFunctionLiteral,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtAnonymousFunctionSymbol(), KtFe10PsiSymbol<KtFunctionLiteral, FunctionDescriptor> {
-    override val descriptor: FunctionDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi)
+    override konst descriptor: FunctionDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi)
         bindingContext[BindingContext.FUNCTION, psi]
     }
 
-    override val valueParameters: List<KtValueParameterSymbol>
+    override konst konstueParameters: List<KtValueParameterSymbol>
         get() = withValidityAssertion {
-            return if (psi.valueParameters.isNotEmpty()) {
-                psi.valueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) }
+            return if (psi.konstueParameters.isNotEmpty()) {
+                psi.konstueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) }
             } else {
                 // There might be implicit 'it'
-                descriptor?.valueParameters.orEmpty().map { KtFe10DescValueParameterSymbol(it, analysisContext) }
+                descriptor?.konstueParameters.orEmpty().map { KtFe10DescValueParameterSymbol(it, analysisContext) }
             }
         }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
             descriptor?.returnType?.toKtType(analysisContext) ?: createErrorType()
         }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion {
             descriptor?.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext)
         }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor?.createContextReceivers(analysisContext) ?: emptyList() }
 
 
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { psi.isExtensionDeclaration() }
 
     context(KtAnalysisSession)

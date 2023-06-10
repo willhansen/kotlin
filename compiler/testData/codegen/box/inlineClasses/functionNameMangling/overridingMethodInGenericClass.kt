@@ -7,7 +7,7 @@ abstract class GenericBase<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str(val str: String)
+konstue class Str(konst str: String)
 
 class Derived : GenericBase<Str>() {
     override fun foo(x: Str): Str = x

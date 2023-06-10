@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.konan.file.File
 import kotlin.system.measureTimeMillis
 
 private fun printMilliseconds(message: String, body: () -> Unit) {
-    val time = measureTimeMillis(body)
+    konst time = measureTimeMillis(body)
     println("$message: $time ms")
 }
 
@@ -29,9 +29,9 @@ fun String.prefixIfNot(prefix: String) =
     if (this.startsWith(prefix)) this else "$prefix$this"
 
 fun String.prefixBaseNameIfNot(prefix: String): String {
-    val file = File(this).absoluteFile
-    val name = file.name
-    val directory = file.parent
+    konst file = File(this).absoluteFile
+    konst name = file.name
+    konst directory = file.parent
     return "$directory/${name.prefixIfNot(prefix)}"
 }
 
@@ -41,10 +41,10 @@ fun String.suffixIfNot(suffix: String) =
 fun String.removeSuffixIfPresent(suffix: String) =
     if (this.endsWith(suffix)) this.dropLast(suffix.length) else this
 
-fun <T> Lazy<T>.getValueOrNull(): T? = if (isInitialized()) value else null
+fun <T> Lazy<T>.getValueOrNull(): T? = if (isInitialized()) konstue else null
 
 fun parseSpaceSeparatedArgs(argsString: String): List<String> {
-    val parsedArgs = mutableListOf<String>()
+    konst parsedArgs = mutableListOf<String>()
     var inQuotes = false
     var currentCharSequence = StringBuilder()
     fun saveArg(wasInQuotes: Boolean) {
@@ -56,7 +56,7 @@ fun parseSpaceSeparatedArgs(argsString: String): List<String> {
     argsString.forEach { char ->
         if (char == '"') {
             inQuotes = !inQuotes
-            // Save value which was in quotes.
+            // Save konstue which was in quotes.
             if (!inQuotes) {
                 saveArg(true)
             }

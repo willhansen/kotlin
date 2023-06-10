@@ -18,7 +18,7 @@ public class Array<T> {
      * [init] function.
      *
      * The function [init] is called for each array element sequentially starting from the first one.
-     * It should return the value for an array element given its index.
+     * It should return the konstue for an array element given its index.
      */
     public inline constructor(size: Int, init: (Int) -> T)
 
@@ -26,7 +26,7 @@ public class Array<T> {
      * Returns the array element at the specified [index]. This method can be called using the
      * index operator.
      * ```
-     * value = arr[index]
+     * konstue = arr[index]
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
@@ -35,21 +35,21 @@ public class Array<T> {
     public operator fun get(index: Int): T
 
     /**
-     * Sets the array element at the specified [index] to the specified [value]. This method can
+     * Sets the array element at the specified [index] to the specified [konstue]. This method can
      * be called using the index operator.
      * ```
-     * arr[index] = value
+     * arr[index] = konstue
      * ```
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
      * where the behavior is unspecified.
      */
-    public operator fun set(index: Int, value: T): Unit
+    public operator fun set(index: Int, konstue: T): Unit
 
     /**
      * Returns the number of elements in the array.
      */
-    public val size: Int
+    public konst size: Int
 
     /**
      * Creates an [Iterator] for iterating over the elements of the array.

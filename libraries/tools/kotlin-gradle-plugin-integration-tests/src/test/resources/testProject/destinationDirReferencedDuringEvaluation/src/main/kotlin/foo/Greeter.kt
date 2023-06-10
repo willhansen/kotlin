@@ -1,6 +1,6 @@
 package foo
 
-class Greeter(private val name: String) {
-    val greeting: String
+class Greeter(private konst name: String) {
+    konst greeting: String
             get() = "Hello $name!"
 }

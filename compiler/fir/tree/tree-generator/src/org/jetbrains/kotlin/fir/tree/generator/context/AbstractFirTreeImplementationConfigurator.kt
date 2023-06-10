@@ -10,19 +10,19 @@ import org.jetbrains.kotlin.fir.tree.generator.noReceiverExpressionType
 import org.jetbrains.kotlin.fir.tree.generator.printer.call
 
 abstract class AbstractFirTreeImplementationConfigurator {
-    private val elementsWithImpl = mutableSetOf<Element>()
+    private konst elementsWithImpl = mutableSetOf<Element>()
 
     fun noImpl(element: Element) {
         element.doesNotNeedImplementation = true
     }
 
     fun impl(element: Element, name: String? = null, config: ImplementationContext.() -> Unit = {}): Implementation {
-        val implementation = if (name == null) {
+        konst implementation = if (name == null) {
             element.defaultImplementation
         } else {
             element.customImplementations.firstOrNull { it.name == name }
         } ?: Implementation(element, name)
-        val context = ImplementationContext(implementation)
+        konst context = ImplementationContext(implementation)
         context.apply(config)
         implementation.updateMutabilityAccordingParents()
         elementsWithImpl += element
@@ -52,7 +52,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
     }
 
     private fun collectLeafsWithoutImplementation(builder: AbstractFirTreeBuilder): Set<Element> {
-        val elements = builder.elements.toMutableSet()
+        konst elements = builder.elements.toMutableSet()
         builder.elements.forEach {
             elements.removeAll(it.parents)
         }
@@ -61,7 +61,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
     }
 
     private fun Implementation.getField(name: String): FieldWithDefault {
-        val result = allFields.firstOrNull { it.name == name }
+        konst result = allFields.firstOrNull { it.name == name }
         requireNotNull(result) {
             "Field \"$name\" not found in fields of ${element}\nExisting fields:\n" +
                     allFields.joinToString(separator = "\n  ", prefix = "  ") { it.name }
@@ -69,7 +69,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
         return result
     }
 
-    inner class ImplementationContext(private val implementation: Implementation) {
+    inner class ImplementationContext(private konst implementation: Implementation) {
         private fun getField(name: String): FieldWithDefault {
             return implementation.getField(name)
         }
@@ -85,7 +85,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
             }
         }
 
-        val parents = ParentsHolder()
+        konst parents = ParentsHolder()
 
         fun Implementation.withArg(argument: Importable): ImplementationWithArg = ImplementationWithArg(this, argument)
 
@@ -103,7 +103,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
 
         fun isMutable(vararg fields: String) {
             fields.forEach {
-                val field = getField(it)
+                konst field = getField(it)
                 field.isMutable = true
             }
         }
@@ -115,9 +115,9 @@ abstract class AbstractFirTreeImplementationConfigurator {
             useTypes(noReceiverExpressionType)
         }
 
-        fun default(field: String, value: String) {
+        fun default(field: String, konstue: String) {
             default(field) {
-                this.value = value
+                this.konstue = konstue
             }
         }
 
@@ -129,7 +129,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
 
         fun defaultTrue(field: String, withGetter: Boolean = false) {
             default(field) {
-                value = "true"
+                konstue = "true"
                 this.withGetter = withGetter
             }
         }
@@ -137,7 +137,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
         fun defaultFalse(vararg fields: String, withGetter: Boolean = false) {
             for (field in fields) {
                 default(field) {
-                    value = "false"
+                    konstue = "false"
                     this.withGetter = withGetter
                 }
             }
@@ -146,7 +146,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
         fun defaultNull(vararg fields: String, withGetter: Boolean = false) {
             for (field in fields) {
                 default(field) {
-                    value = "null"
+                    konstue = "null"
                     this.withGetter = withGetter
                 }
                 require(getField(field).nullable) {
@@ -164,7 +164,7 @@ abstract class AbstractFirTreeImplementationConfigurator {
                 "$field is list field"
             }
             default(field) {
-                value = "emptyList()"
+                konstue = "emptyList()"
                 withGetter = true
             }
         }
@@ -183,17 +183,17 @@ abstract class AbstractFirTreeImplementationConfigurator {
 
         var kind: Implementation.Kind?
             get() = implementation.kind
-            set(value) {
-                implementation.kind = value
+            set(konstue) {
+                implementation.kind = konstue
             }
 
-        inner class DefaultValueContext(private val field: FieldWithDefault) {
-            var value: String? = null
+        inner class DefaultValueContext(private konst field: FieldWithDefault) {
+            var konstue: String? = null
 
             var delegate: String? = null
-                set(value) {
-                    field = value
-                    if (value != null) {
+                set(konstue) {
+                    field = konstue
+                    if (konstue != null) {
                         withGetter = true
                     }
                 }
@@ -201,16 +201,16 @@ abstract class AbstractFirTreeImplementationConfigurator {
 
             var isMutable: Boolean? = null
             var withGetter: Boolean = false
-                set(value) {
-                    field = value
-                    if (value) {
+                set(konstue) {
+                    field = konstue
+                    if (konstue) {
                         isMutable = customSetter != null
                     }
                 }
 
             var customSetter: String? = null
-                set(value) {
-                    field = value
+                set(konstue) {
+                    field = konstue
                     isMutable = true
                     withGetter = true
                 }
@@ -229,10 +229,10 @@ abstract class AbstractFirTreeImplementationConfigurator {
                     field.notNull = true
                 }
                 when {
-                    value != null -> field.defaultValueInImplementation = value
+                    konstue != null -> field.defaultValueInImplementation = konstue
                     delegate != null -> {
-                        val actualDelegateField = getField(delegate!!)
-                        val name = delegateCall ?: field.name
+                        konst actualDelegateField = getField(delegate!!)
+                        konst name = delegateCall ?: field.name
                         field.defaultValueInImplementation = "${actualDelegateField.name}${actualDelegateField.call()}$name"
                     }
                 }

@@ -18,26 +18,26 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
-abstract class FirClassDeclaredMemberScope(val classId: ClassId) : FirContainingNamesAwareScope()
+abstract class FirClassDeclaredMemberScope(konst classId: ClassId) : FirContainingNamesAwareScope()
 
 class FirClassDeclaredMemberScopeImpl(
-    val useSiteSession: FirSession,
+    konst useSiteSession: FirSession,
     klass: FirClass,
     useLazyNestedClassifierScope: Boolean = false,
     existingNames: List<Name>? = null,
     symbolProvider: FirSymbolProvider? = null
 ) : FirClassDeclaredMemberScope(klass.classId) {
-    private val nestedClassifierScope: FirContainingNamesAwareScope? = if (useLazyNestedClassifierScope) {
+    private konst nestedClassifierScope: FirContainingNamesAwareScope? = if (useLazyNestedClassifierScope) {
         lazyNestedClassifierScope(klass.symbol.classId, existingNames!!, symbolProvider!!)
     } else {
         useSiteSession.nestedClassifierScope(klass)
     }
 
-    private val callablesIndex: Map<Name, List<FirCallableSymbol<*>>> = run {
-        val result = mutableMapOf<Name, MutableList<FirCallableSymbol<*>>>()
+    private konst callablesIndex: Map<Name, List<FirCallableSymbol<*>>> = run {
+        konst result = mutableMapOf<Name, MutableList<FirCallableSymbol<*>>>()
         loop@ for (declaration in klass.declarations) {
             if (declaration is FirCallableDeclaration) {
-                val name = when (declaration) {
+                konst name = when (declaration) {
                     is FirConstructor -> SpecialNames.INIT
                     is FirVariable -> when {
                         declaration.isSynthetic || declaration.isEnumEntries(klass) && !klass.supportsEnumEntries -> continue@loop
@@ -52,7 +52,7 @@ class FirClassDeclaredMemberScopeImpl(
         result
     }
 
-    private val FirClass.supportsEnumEntries get() = useSiteSession.enumEntriesSupport.canSynthesizeEnumEntriesFor(this)
+    private konst FirClass.supportsEnumEntries get() = useSiteSession.enumEntriesSupport.canSynthesizeEnumEntriesFor(this)
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         if (name == SpecialNames.INIT) return
@@ -71,7 +71,7 @@ class FirClassDeclaredMemberScopeImpl(
         name: Name,
         processor: (D) -> Unit
     ) {
-        val symbols = callablesIndex[name] ?: emptyList()
+        konst symbols = callablesIndex[name] ?: emptyList()
         for (symbol in symbols) {
             if (symbol is D) {
                 processor(symbol)

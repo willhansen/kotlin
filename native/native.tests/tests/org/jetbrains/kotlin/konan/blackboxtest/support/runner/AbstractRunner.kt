@@ -16,9 +16,9 @@ internal abstract class AbstractRunner<R> : Runner<R> {
     protected abstract fun handleUnexpectedFailure(t: Throwable): Nothing
 
     final override fun run(): R = try {
-        val run = buildRun()
-        val runResult = run.run()
-        val resultHandler = buildResultHandler(runResult)
+        konst run = buildRun()
+        konst runResult = run.run()
+        konst resultHandler = buildResultHandler(runResult)
         resultHandler.handle()
     } catch (t: Throwable) {
         when (t) {
@@ -35,7 +35,7 @@ internal abstract class AbstractRunner<R> : Runner<R> {
     }
 }
 
-internal abstract class AbstractResultHandler<R>(protected val runResult: RunResult) {
+internal abstract class AbstractResultHandler<R>(protected konst runResult: RunResult) {
     abstract fun getLoggedRun(): LoggedData
     abstract fun handle(): R
 

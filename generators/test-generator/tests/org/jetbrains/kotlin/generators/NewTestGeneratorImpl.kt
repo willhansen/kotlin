@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test
 import java.io.File
 import java.io.IOException
 
-private val METHOD_GENERATORS = listOf(
+private konst METHOD_GENERATORS = listOf(
     SimpleTestClassModelTestAllFilesPresentMethodGenerator,
     SimpleTestMethodGenerator,
     SingleClassTestModelAllFilesPresentedMethodGenerator,
@@ -32,10 +32,10 @@ class NewTestGeneratorImpl(
     additionalMethodGenerators: List<MethodGenerator<Nothing>>
 ) : TestGenerator(METHOD_GENERATORS + additionalMethodGenerators) {
 
-    private val GENERATED_FILES = HashSet<String>()
+    private konst GENERATED_FILES = HashSet<String>()
 
     private fun Printer.generateMetadata(testDataSource: TestEntityModel) {
-        val dataString = testDataSource.dataString
+        konst dataString = testDataSource.dataString
         if (dataString != null) {
             println("@TestMetadata(\"", dataString, "\")")
         }
@@ -52,7 +52,7 @@ class NewTestGeneratorImpl(
     }
 
     private fun Printer.generateTestDataPath(testClassModel: TestClassModel) {
-        val dataPathRoot = testClassModel.dataPathRoot
+        konst dataPathRoot = testClassModel.dataPathRoot
         if (dataPathRoot != null) {
             println("@TestDataPath(\"", dataPathRoot, "\")")
         }
@@ -76,7 +76,7 @@ class NewTestGeneratorImpl(
     }
 
     override fun generateAndSave(testClass: TestGroup.TestClass, dryRun: Boolean): GenerationResult {
-        val generatorInstance = TestGeneratorInstance(
+        konst generatorInstance = TestGeneratorInstance(
             testClass.baseDir,
             testClass.suiteTestClassName,
             testClass.baseTestClassName,
@@ -90,14 +90,14 @@ class NewTestGeneratorImpl(
         baseDir: String,
         suiteTestClassFqName: String,
         baseTestClassFqName: String,
-        private val testClassModels: Collection<TestClassModel>,
-        private val methodGenerators: Map<MethodModel.Kind, MethodGenerator<*>>
+        private konst testClassModels: Collection<TestClassModel>,
+        private konst methodGenerators: Map<MethodModel.Kind, MethodGenerator<*>>
     ) {
-        private val baseTestClassPackage: String = baseTestClassFqName.substringBeforeLast('.', "")
-        private val baseTestClassName: String = baseTestClassFqName.substringAfterLast('.', baseTestClassFqName)
-        private val suiteClassPackage: String = suiteTestClassFqName.substringBeforeLast('.', baseTestClassPackage)
-        private val suiteClassName: String = suiteTestClassFqName.substringAfterLast('.', suiteTestClassFqName)
-        private val testSourceFilePath: String =
+        private konst baseTestClassPackage: String = baseTestClassFqName.substringBeforeLast('.', "")
+        private konst baseTestClassName: String = baseTestClassFqName.substringAfterLast('.', baseTestClassFqName)
+        private konst suiteClassPackage: String = suiteTestClassFqName.substringBeforeLast('.', baseTestClassPackage)
+        private konst suiteClassName: String = suiteTestClassFqName.substringAfterLast('.', suiteTestClassFqName)
+        private konst testSourceFilePath: String =
             baseDir + "/" + this.suiteClassPackage.replace(".", "/") + "/" + this.suiteClassName + ".java"
 
         init {
@@ -108,10 +108,10 @@ class NewTestGeneratorImpl(
 
         @Throws(IOException::class)
         fun generateAndSave(dryRun: Boolean): GenerationResult {
-            val generatedCode = generate()
+            konst generatedCode = generate()
 
-            val testSourceFile = File(testSourceFilePath)
-            val changed =
+            konst testSourceFile = File(testSourceFilePath)
+            konst changed =
                 GeneratorsFileUtil.isFileContentChangedIgnoringLineSeparators(testSourceFile, generatedCode)
             if (!dryRun) {
                 GeneratorsFileUtil.writeFileIfContentChanged(testSourceFile, generatedCode, false)
@@ -120,10 +120,10 @@ class NewTestGeneratorImpl(
         }
 
         private fun generate(): String {
-            val out = StringBuilder()
-            val p = Printer(out)
+            konst out = StringBuilder()
+            konst p = Printer(out)
 
-            val copyright = File("license/COPYRIGHT_HEADER.txt").takeIf { it.exists() }?.readText() ?: ""
+            konst copyright = File("license/COPYRIGHT_HEADER.txt").takeIf { it.exists() }?.readText() ?: ""
             p.println(copyright)
             p.println()
             p.println("package $suiteClassPackage;")
@@ -132,7 +132,7 @@ class NewTestGeneratorImpl(
             p.println("import ${KtTestUtil::class.java.canonicalName};")
 
             for (clazz in testClassModels.flatMapTo(mutableSetOf()) { classModel -> classModel.imports }) {
-                val realName = when (clazz) {
+                konst realName = when (clazz) {
                     TransformingTestMethodModel.TransformerFunctionsClassPlaceHolder::class.java ->
                         "org.jetbrains.kotlin.test.utils.TransformersFunctions"
                     else -> clazz.canonicalName
@@ -158,39 +158,39 @@ class NewTestGeneratorImpl(
 
             p.generateSuppressAllWarnings()
 
-            val model: TestClassModel
+            konst model: TestClassModel
             if (testClassModels.size == 1) {
                 model = object : DelegatingTestClassModel(testClassModels.single()) {
-                    override val name: String
+                    override konst name: String
                         get() = suiteClassName
                 }
             } else {
                 model = object : TestClassModel() {
-                    override val innerTestClasses: Collection<TestClassModel>
+                    override konst innerTestClasses: Collection<TestClassModel>
                         get() = testClassModels
 
-                    override val methods: Collection<MethodModel>
+                    override konst methods: Collection<MethodModel>
                         get() = emptyList()
 
-                    override val isEmpty: Boolean
+                    override konst isEmpty: Boolean
                         get() = false
 
-                    override val name: String
+                    override konst name: String
                         get() = suiteClassName
 
-                    override val dataString: String?
+                    override konst dataString: String?
                         get() = null
 
-                    override val dataPathRoot: String?
+                    override konst dataPathRoot: String?
                         get() = null
 
-                    override val annotations: Collection<AnnotationModel>
+                    override konst annotations: Collection<AnnotationModel>
                         get() = emptyList()
 
-                    override val imports: Set<Class<*>>
+                    override konst imports: Set<Class<*>>
                         get() = super.imports
 
-                    override val tags: List<String>
+                    override konst tags: List<String>
                         get() = emptyList()
                 }
             }
@@ -206,17 +206,17 @@ class NewTestGeneratorImpl(
             p.generateTestDataPath(testClassModel)
             p.generateParameterAnnotations(testClassModel)
 
-            val extendsClause = if (!isNested) " extends $baseTestClassName" else ""
+            konst extendsClause = if (!isNested) " extends $baseTestClassName" else ""
 
             p.println("public class ${testClassModel.name}$extendsClause {")
             p.pushIndent()
 
-            val testMethods = testClassModel.methods
-            val innerTestClasses = testClassModel.innerTestClasses
+            konst testMethods = testClassModel.methods
+            konst innerTestClasses = testClassModel.innerTestClasses
 
             var first = true
 
-            val transformers = testClassModel.predefinedNativeTransformers(false)
+            konst transformers = testClassModel.predefinedNativeTransformers(false)
 
             if (transformers.isNotEmpty()) {
                 p.println("public ${testClassModel.name}() {")
@@ -257,7 +257,7 @@ class NewTestGeneratorImpl(
         }
 
         private fun generateTestMethod(p: Printer, methodModel: MethodModel) {
-            val generator = methodGenerators.getValue(methodModel.kind)
+            konst generator = methodGenerators.getValue(methodModel.kind)
 
             if (methodModel.isTestMethod()) {
                 p.generateTestAnnotation()

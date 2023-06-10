@@ -44,13 +44,13 @@ internal class SymbolLightAccessorMethod private constructor(
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
     methodIndex: Int,
-    private val isGetter: Boolean,
-    private val propertyAccessorDeclaration: KtPropertyAccessor?,
-    private val propertyAccessorSymbolPointer: KtSymbolPointer<KtPropertyAccessorSymbol>,
-    private val containingPropertyDeclaration: KtCallableDeclaration?,
-    private val containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
-    private val isTopLevel: Boolean,
-    private val suppressStatic: Boolean,
+    private konst isGetter: Boolean,
+    private konst propertyAccessorDeclaration: KtPropertyAccessor?,
+    private konst propertyAccessorSymbolPointer: KtSymbolPointer<KtPropertyAccessorSymbol>,
+    private konst containingPropertyDeclaration: KtCallableDeclaration?,
+    private konst containingPropertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
+    private konst isTopLevel: Boolean,
+    private konst suppressStatic: Boolean,
 ) : SymbolLightMethodBase(
     lightMemberOrigin,
     containingClass,
@@ -78,7 +78,7 @@ internal class SymbolLightAccessorMethod private constructor(
     )
 
     context(KtAnalysisSession)
-    private val KtPropertySymbol.accessorSymbol: KtPropertyAccessorSymbol
+    private konst KtPropertySymbol.accessorSymbol: KtPropertyAccessorSymbol
         get() = if (isGetter) getter!! else setter!!
 
     private inline fun <T> withPropertySymbol(crossinline action: KtAnalysisSession.(KtPropertySymbol) -> T): T =
@@ -89,15 +89,15 @@ internal class SymbolLightAccessorMethod private constructor(
 
     private fun String.abiName() = if (isGetter) getterName(this) else setterName(this)
 
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         withPropertySymbol { propertySymbol ->
-            val accessorSymbol = propertySymbol.accessorSymbol
+            konst accessorSymbol = propertySymbol.accessorSymbol
             accessorSymbol.getJvmNameFromAnnotation(accessorSite.toOptionalFilter()) ?: run {
-                val defaultName = propertySymbol.name.identifier.let {
+                konst defaultName = propertySymbol.name.identifier.let {
                     if (this@SymbolLightAccessorMethod.containingClass.isAnnotationType) it else it.abiName()
                 }
 
-                val visibility = if (!isGetter && propertySymbol.canHaveNonPrivateField)
+                konst visibility = if (!isGetter && propertySymbol.canHaveNonPrivateField)
                     accessorSymbol.visibility
                 else
                     propertySymbol.visibility
@@ -109,7 +109,7 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun getName(): String = _name
 
-    private val _typeParameterList: PsiTypeParameterList? by lazyPub {
+    private konst _typeParameterList: PsiTypeParameterList? by lazyPub {
         hasTypeParameters().ifTrue {
             SymbolLightTypeParameterList(
                 owner = this,
@@ -127,13 +127,13 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun isVarArgs(): Boolean = false
 
-    override val kotlinOrigin: KtDeclaration? get() = containingPropertyDeclaration
+    override konst kotlinOrigin: KtDeclaration? get() = containingPropertyDeclaration
 
-    private val accessorSite
+    private konst accessorSite
         get() = if (isGetter) AnnotationUseSiteTarget.PROPERTY_GETTER else AnnotationUseSiteTarget.PROPERTY_SETTER
 
     //TODO Fix it when SymbolConstructorValueParameter be ready
-    private val isParameter: Boolean get() = containingPropertyDeclaration == null || containingPropertyDeclaration is KtParameter
+    private konst isParameter: Boolean get() = containingPropertyDeclaration == null || containingPropertyDeclaration is KtParameter
 
     override fun computeThrowsList(builder: LightReferenceListBuilder) {
         withAccessorSymbol { accessorSymbol ->
@@ -153,7 +153,7 @@ internal class SymbolLightAccessorMethod private constructor(
         )
 
         in GranularModifiersBox.MODALITY_MODIFIERS -> {
-            val modality = if (containingClass.isInterface) {
+            konst modality = if (containingClass.isInterface) {
                 PsiModifier.ABSTRACT
             } else {
                 withPropertySymbol { propertySymbol ->
@@ -165,7 +165,7 @@ internal class SymbolLightAccessorMethod private constructor(
         }
 
         PsiModifier.STATIC -> {
-            val isStatic = if (suppressStatic) {
+            konst isStatic = if (suppressStatic) {
                 false
             } else {
                 isTopLevel || isStatic()
@@ -182,11 +182,11 @@ internal class SymbolLightAccessorMethod private constructor(
             return@withPropertySymbol true
         }
 
-        val filter = accessorSite.toOptionalFilter()
+        konst filter = accessorSite.toOptionalFilter()
         propertySymbol.hasJvmStaticAnnotation(filter) || propertySymbol.accessorSymbol.hasJvmStaticAnnotation(filter)
     }
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = GranularModifiersBox(computer = ::computeModifiers),
@@ -205,7 +205,7 @@ internal class SymbolLightAccessorMethod private constructor(
                 ),
                 additionalAnnotationsProvider = CompositeAdditionalAnnotationsProvider(
                     NullabilityAnnotationsProvider {
-                        val nullabilityApplicable = isGetter &&
+                        konst nullabilityApplicable = isGetter &&
                                 !(isParameter && this.containingClass.isAnnotationType) &&
                                 !modifierList.hasModifierProperty(PsiModifier.PRIVATE)
 
@@ -227,9 +227,9 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun isConstructor(): Boolean = false
 
-    private val _isDeprecated: Boolean by lazyPub {
+    private konst _isDeprecated: Boolean by lazyPub {
         withPropertySymbol { propertySymbol ->
-            val filter = accessorSite.toOptionalFilter()
+            konst filter = accessorSite.toOptionalFilter()
             propertySymbol.hasDeprecatedAnnotation(filter) || propertySymbol.accessorSymbol.hasDeprecatedAnnotation(filter)
         }
     }
@@ -238,18 +238,18 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun getNameIdentifier(): PsiIdentifier = KtLightIdentifier(this, containingPropertyDeclaration)
 
-    private val _returnedType: PsiType by lazyPub {
+    private konst _returnedType: PsiType by lazyPub {
         if (!isGetter) return@lazyPub PsiType.VOID
 
         withPropertySymbol { propertySymbol ->
-            val ktType = propertySymbol.returnType
+            konst ktType = propertySymbol.returnType
 
-            val forceBoxedReturnType = ktType.isPrimitive &&
+            konst forceBoxedReturnType = ktType.isPrimitive &&
                     propertySymbol.getAllOverriddenSymbols().any { overriddenSymbol ->
                         !overriddenSymbol.returnType.isPrimitive
                     }
 
-            val typeMappingMode = if (forceBoxedReturnType) KtTypeMappingMode.RETURN_TYPE_BOXED else KtTypeMappingMode.RETURN_TYPE
+            konst typeMappingMode = if (forceBoxedReturnType) KtTypeMappingMode.RETURN_TYPE_BOXED else KtTypeMappingMode.RETURN_TYPE
 
             ktType.asPsiType(
                 this@SymbolLightAccessorMethod,
@@ -284,11 +284,11 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun hashCode(): Int = propertyAccessorDeclaration?.hashCode() ?: containingPropertyDeclaration.hashCode()
 
-    private val _parametersList by lazyPub {
-        val parameterPopulator: (LightParameterListBuilder) -> Unit = if (!isGetter) {
+    private konst _parametersList by lazyPub {
+        konst parameterPopulator: (LightParameterListBuilder) -> Unit = if (!isGetter) {
             { builder ->
                 withAccessorSymbol { accessorSymbol ->
-                    val setterParameter = (accessorSymbol as? KtPropertySetterSymbol)?.parameter ?: return@withAccessorSymbol
+                    konst setterParameter = (accessorSymbol as? KtPropertySetterSymbol)?.parameter ?: return@withAccessorSymbol
                     builder.addParameter(
                         SymbolLightSetterParameter(
                             ktAnalysisSession = this,
@@ -317,7 +317,7 @@ internal class SymbolLightAccessorMethod private constructor(
                 ?: containingPropertyDeclaration?.isValid
                 ?: propertyAccessorSymbolPointer.isValid(ktModule)
 
-    private val _isOverride: Boolean by lazyPub {
+    private konst _isOverride: Boolean by lazyPub {
         if (isTopLevel) {
             false
         } else {
@@ -329,11 +329,11 @@ internal class SymbolLightAccessorMethod private constructor(
 
     override fun isOverride(): Boolean = _isOverride
 
-    private val _defaultValue: PsiAnnotationMemberValue? by lazyPub {
+    private konst _defaultValue: PsiAnnotationMemberValue? by lazyPub {
         if (!containingClass.isAnnotationType) return@lazyPub null
 
         withPropertySymbol { propertySymbol ->
-            when (val initializer = propertySymbol.initializer) {
+            when (konst initializer = propertySymbol.initializer) {
                 is KtConstantInitializerValue -> initializer.constant.createPsiExpression(this@SymbolLightAccessorMethod)
                 is KtConstantValueForAnnotation -> initializer.annotationValue.toAnnotationMemberValue(this@SymbolLightAccessorMethod)
                 is KtNonConstantInitializerValue -> null

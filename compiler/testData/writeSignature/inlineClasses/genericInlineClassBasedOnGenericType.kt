@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 // IGNORE_BACKEND: JVM_IR
 
-inline class Foo<T>(val x: List<T>)
+inline class Foo<T>(konst x: List<T>)
 
 object Test {
     fun nonNullTypeArgument(f: Foo<Int>) {}

@@ -2,7 +2,7 @@
 
 class Outer {
     protected companion object {
-        val result = "OK"
+        konst result = "OK"
     }
 
     class Nested {

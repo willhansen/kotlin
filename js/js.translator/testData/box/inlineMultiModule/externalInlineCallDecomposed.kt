@@ -8,7 +8,7 @@ var global = ""
 
 inline fun baz(x: () -> Int) = A(1).bar(x())
 
-class A(val y: Int) {
+class A(konst y: Int) {
     fun bar(x: Int) = x + y
 }
 
@@ -28,7 +28,7 @@ fun qqq(): Int {
 fun box(): String {
     assertEquals(24, baz {
         global += "before;"
-        val result = qqq()
+        konst result = qqq()
         global += "after;"
         result
     })

@@ -2,8 +2,8 @@
 package foo
 
 fun box(): String {
-    val c = 3
-    val d = 5
+    konst c = 3
+    konst d = 5
     var z = 0
     when(c) {
         5, 3 -> z++;

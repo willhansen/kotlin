@@ -11,11 +11,11 @@ class TestClass2 {
 }
 
 inline fun foo1(): List<Enum<*>> {
-    return TestClass1.TestEnum.values().toList()
+    return TestClass1.TestEnum.konstues().toList()
 }
 
 inline fun foo2(): List<Enum<*>> {
-    return TestClass2.TestEnum.values().toList()
+    return TestClass2.TestEnum.konstues().toList()
 }
 
 inline fun foo3(): List<Enum<*>> {

@@ -1,9 +1,9 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class My {
     companion object {
-        private val my: String = "O"
-            get() = eval { field } + "K"
+        private konst my: String = "O"
+            get() = ekonst { field } + "K"
 
         fun getValue() = my
     }

@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Int>(private val r: T) {
+konstue class R<T: Int>(private konst r: T) {
     fun test() = pv
 
     companion object {
-        private val pv = "OK"
+        private konst pv = "OK"
     }
 }
 

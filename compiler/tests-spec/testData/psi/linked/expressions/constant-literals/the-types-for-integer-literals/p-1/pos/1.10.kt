@@ -7,7 +7,7 @@
  * DESCRIPTION: Long literal mark in not allowed places (it's considered as identifiers).
  */
 
-val value = l1234
-val value = L0xA0Al
-val value = _l
-val value = _L
+konst konstue = l1234
+konst konstue = L0xA0Al
+konst konstue = _l
+konst konstue = _L

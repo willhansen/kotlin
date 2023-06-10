@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.konan.properties.keepOnlyDefaultProfiles
 import org.jetbrains.kotlin.konan.properties.loadProperties
 import org.jetbrains.kotlin.konan.util.DependencyDirectories
 
-class Distribution private constructor(private val serialized: Serialized) : java.io.Serializable {
+class Distribution private constructor(private konst serialized: Serialized) : java.io.Serializable {
     constructor(
         konanHome: String,
         onlyDefaultProfiles: Boolean = false,
@@ -19,21 +19,21 @@ class Distribution private constructor(private val serialized: Serialized) : jav
         propertyOverrides: Map<String, String>? = null
     ) : this(Serialized(konanHome, onlyDefaultProfiles, runtimeFileOverride, propertyOverrides))
 
-    val konanHome by serialized::konanHome
-    private val onlyDefaultProfiles by serialized::onlyDefaultProfiles
-    private val runtimeFileOverride by serialized::runtimeFileOverride
-    private val propertyOverrides by serialized::propertyOverrides
+    konst konanHome by serialized::konanHome
+    private konst onlyDefaultProfiles by serialized::onlyDefaultProfiles
+    private konst runtimeFileOverride by serialized::runtimeFileOverride
+    private konst propertyOverrides by serialized::propertyOverrides
 
-    val localKonanDir = DependencyDirectories.localKonanDir
+    konst localKonanDir = DependencyDirectories.localKonanDir
 
-    val konanSubdir = "$konanHome/konan"
-    val mainPropertyFileName = "$konanSubdir/konan.properties"
-    val experimentalEnabled by lazy {
+    konst konanSubdir = "$konanHome/konan"
+    konst mainPropertyFileName = "$konanSubdir/konan.properties"
+    konst experimentalEnabled by lazy {
         File("$konanSubdir/experimentalTargetsEnabled").exists
     }
 
     private fun propertyFilesFromConfigDir(configDir: String, genericName: String): List<File> {
-        val directory = File(configDir, "platforms/$genericName")
+        konst directory = File(configDir, "platforms/$genericName")
         return if (directory.isDirectory)
             directory.listFiles
         else
@@ -53,8 +53,8 @@ class Distribution private constructor(private val serialized: Serialized) : jav
      * Please note that konan.properties uses simple resolving mechanism.
      * See [org.jetbrains.kotlin.konan.properties.resolveValue].
      */
-    val properties by lazy {
-        val result = Properties()
+    konst properties by lazy {
+        konst result = Properties()
 
         fun loadPropertiesSafely(source: File) {
             if (source.isFile) result.putAll(source.loadProperties())
@@ -78,13 +78,13 @@ class Distribution private constructor(private val serialized: Serialized) : jav
     /**
      * Consider using [org.jetbrains.kotlin.gradle.targets.native.KonanPropertiesBuildService] in case of Gradle.
      */
-    val compilerVersion by lazy {
+    konst compilerVersion by lazy {
         getCompilerVersion(properties["compilerVersion"]?.toString(), konanHome)
     }
 
-    val klib = "$konanHome/klib"
-    val stdlib = "$klib/common/stdlib"
-    val stdlibDefaultComponent = "$stdlib/default"
+    konst klib = "$konanHome/klib"
+    konst stdlib = "$klib/common/stdlib"
+    konst stdlibDefaultComponent = "$stdlib/default"
 
     fun defaultNatives(target: KonanTarget) = "$konanHome/konan/targets/${target.visibleName}/native"
 
@@ -97,11 +97,11 @@ class Distribution private constructor(private val serialized: Serialized) : jav
 
     fun platformLibs(target: KonanTarget) = "$klib/platform/${target.visibleName}"
 
-    val launcherFiles = listOf("launcher.bc")
+    konst launcherFiles = listOf("launcher.bc")
 
-    val dependenciesDir = DependencyDirectories.defaultDependenciesRoot.absolutePath
+    konst dependenciesDir = DependencyDirectories.defaultDependenciesRoot.absolutePath
 
-    val subTargetProvider = object: SubTargetProvider {
+    konst subTargetProvider = object: SubTargetProvider {
         override fun availableSubTarget(genericName: String) =
                 additionalPropertyFiles(genericName).map { it.name }
     }
@@ -123,13 +123,13 @@ class Distribution private constructor(private val serialized: Serialized) : jav
     private fun writeReplace(): Any = serialized
 
     private data class Serialized(
-        val konanHome: String,
-        val onlyDefaultProfiles: Boolean,
-        val runtimeFileOverride: String?,
-        val propertyOverrides: Map<String, String>?,
+        konst konanHome: String,
+        konst onlyDefaultProfiles: Boolean,
+        konst runtimeFileOverride: String?,
+        konst propertyOverrides: Map<String, String>?,
     ) : java.io.Serializable {
         companion object {
-            private const val serialVersionUID: Long = 0L
+            private const konst serialVersionUID: Long = 0L
         }
 
         private fun readResolve(): Any = Distribution(this)

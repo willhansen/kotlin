@@ -1,8 +1,8 @@
-var value = "OK";
+var konstue = "OK";
 
 function foo(newValue) {
-    var $tmp = value;
-    value = newValue;
+    var $tmp = konstue;
+    konstue = newValue;
     return $tmp;
 }
 

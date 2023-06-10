@@ -32,14 +32,14 @@ object FirFunInterfaceDeclarationChecker : FirRegularClassChecker() {
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.isInterface || !declaration.isFun) return
 
-        val scope = declaration.unsubstitutedScope(context)
-        val classSymbol = declaration.symbol
+        konst scope = declaration.unsubstitutedScope(context)
+        konst classSymbol = declaration.symbol
 
         var abstractFunctionSymbol: FirNamedFunctionSymbol? = null
 
         for (name in scope.getCallableNames()) {
-            val functions = scope.getFunctions(name)
-            val properties = scope.getProperties(name)
+            konst functions = scope.getFunctions(name)
+            konst properties = scope.getProperties(name)
 
             for (function in functions) {
                 if (function.isAbstract) {
@@ -52,9 +52,9 @@ object FirFunInterfaceDeclarationChecker : FirRegularClassChecker() {
             }
 
             for (property in properties) {
-                val firProperty = property as? FirPropertySymbol ?: continue
+                konst firProperty = property as? FirPropertySymbol ?: continue
                 if (firProperty.isAbstract) {
-                    val source =
+                    konst source =
                         if (firProperty.getContainingClassSymbol(context.session) != classSymbol)
                             declaration.source
                         else
@@ -70,7 +70,7 @@ object FirFunInterfaceDeclarationChecker : FirRegularClassChecker() {
             return
         }
 
-        val inFunInterface = abstractFunctionSymbol.getContainingClassSymbol(context.session) === classSymbol
+        konst inFunInterface = abstractFunctionSymbol.getContainingClassSymbol(context.session) === classSymbol
 
         when {
             abstractFunctionSymbol.typeParameterSymbols.isNotEmpty() ->
@@ -90,7 +90,7 @@ object FirFunInterfaceDeclarationChecker : FirRegularClassChecker() {
                 }
         }
 
-        abstractFunctionSymbol.valueParameterSymbols.forEach {
+        abstractFunctionSymbol.konstueParameterSymbols.forEach {
             if (it.hasDefaultValue) {
                 reporter.reportOn(
                     if (inFunInterface) it.source else declaration.source,

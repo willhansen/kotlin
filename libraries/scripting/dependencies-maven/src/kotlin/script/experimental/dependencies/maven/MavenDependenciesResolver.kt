@@ -26,10 +26,10 @@ import kotlin.script.experimental.dependencies.maven.impl.mavenCentral
 )
 class MavenRepositoryCoordinates(
     url: String,
-    val username: String?,
-    val password: String?,
-    val privateKeyFile: String?,
-    val passPhrase: String?
+    konst username: String?,
+    konst password: String?,
+    konst privateKeyFile: String?,
+    konst passPhrase: String?
 ) : RepositoryCoordinates(url)
 
 class MavenDependenciesResolver : ExternalDependenciesResolver {
@@ -41,7 +41,7 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
         return repositoryCoordinates.toRepositoryUrlOrNull() != null
     }
 
-    val repos: ArrayList<RemoteRepository> = arrayListOf()
+    konst repos: ArrayList<RemoteRepository> = arrayListOf()
 
     private fun remoteRepositories() = if (repos.isEmpty()) arrayListOf(mavenCentral) else repos.toList() // copy to avoid sharing problems
 
@@ -55,19 +55,19 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
         sourceCodeLocation: SourceCode.LocationWithId?
     ): ResultWithDiagnostics<List<File>> {
 
-        val artifactId = artifactCoordinates.toMavenArtifact()!!
+        konst artifactId = artifactCoordinates.toMavenArtifact()!!
 
         return try {
-            val dependencyScopes = options.dependencyScopes ?: listOf(JavaScopes.COMPILE, JavaScopes.RUNTIME)
-            val kind = when (options.partialResolution) {
+            konst dependencyScopes = options.dependencyScopes ?: listOf(JavaScopes.COMPILE, JavaScopes.RUNTIME)
+            konst kind = when (options.partialResolution) {
                 true -> ResolutionKind.TRANSITIVE_PARTIAL
                 false, null -> when(options.transitive) {
                     true, null -> ResolutionKind.TRANSITIVE
                     false -> ResolutionKind.NON_TRANSITIVE
                 }
             }
-            val classifier = options.classifier
-            val extension = options.extension
+            konst classifier = options.classifier
+            konst extension = options.extension
             AetherResolveSession(
                 null, remoteRepositories()
             ).resolve(
@@ -85,8 +85,8 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
     ): ResultWithDiagnostics<String?> {
         if (str == null) return null.asSuccess()
         if (!str.startsWith("$")) return str.asSuccess()
-        val envName = str.substring(1)
-        val envValue: String? = System.getenv(envName)
+        konst envName = str.substring(1)
+        konst envValue: String? = System.getenv(envName)
         if (envValue.isNullOrEmpty()) return ResultWithDiagnostics.Failure(
             ScriptDiagnostic(
                 ScriptDiagnostic.unspecifiedError,
@@ -104,26 +104,26 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
         options: ExternalDependenciesResolver.Options,
         sourceCodeLocation: SourceCode.LocationWithId?
     ): ResultWithDiagnostics<Boolean> {
-        val url = repositoryCoordinates.toRepositoryUrlOrNull()
+        konst url = repositoryCoordinates.toRepositoryUrlOrNull()
             ?: return false.asSuccess()
-        val repoId = repositoryCoordinates.string.replace(FORBIDDEN_CHARS, "_")
+        konst repoId = repositoryCoordinates.string.replace(FORBIDDEN_CHARS, "_")
 
         @Suppress("DEPRECATION")
-        val mavenRepo = repositoryCoordinates as? MavenRepositoryCoordinates
-        val usernameRaw = options.username ?: mavenRepo?.username
-        val passwordRaw = options.password ?: mavenRepo?.password
+        konst mavenRepo = repositoryCoordinates as? MavenRepositoryCoordinates
+        konst usernameRaw = options.username ?: mavenRepo?.username
+        konst passwordRaw = options.password ?: mavenRepo?.password
 
-        val reports = mutableListOf<ScriptDiagnostic>()
+        konst reports = mutableListOf<ScriptDiagnostic>()
         fun getFinalValue(optionName: String, rawValue: String?): String? {
             return tryResolveEnvironmentVariable(rawValue, optionName, sourceCodeLocation)
                 .onFailure { reports.addAll(it.reports) }
-                .valueOrNull()
+                .konstueOrNull()
         }
 
-        val username = getFinalValue("username", usernameRaw)
-        val password = getFinalValue("password", passwordRaw)
-        val privateKeyFile = getFinalValue("private key file", options.privateKeyFile)
-        val privateKeyPassphrase = getFinalValue("private key passphrase", options.privateKeyPassphrase)
+        konst username = getFinalValue("username", usernameRaw)
+        konst password = getFinalValue("password", passwordRaw)
+        konst privateKeyFile = getFinalValue("private key file", options.privateKeyFile)
+        konst privateKeyPassphrase = getFinalValue("private key passphrase", options.privateKeyPassphrase)
 
         if (reports.isNotEmpty()) {
             return ResultWithDiagnostics.Failure(reports)
@@ -137,7 +137,7 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
          * @see org.eclipse.aether.transport.wagon.WagonTransporter.getProxy
          * @see org.apache.maven.wagon.shared.http.AbstractHttpClientWagon.openConnectionInternal
          */
-        val auth = AuthenticationBuilder()
+        konst auth = AuthenticationBuilder()
             .addUsername(username)
             .addPassword(password)
             .addPrivateKey(
@@ -146,7 +146,7 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
             )
             .build()
 
-        val repo = RemoteRepository.Builder(repoId, "default", url.toString())
+        konst repo = RemoteRepository.Builder(repoId, "default", url.toString())
             .setAuthentication(auth)
             .build()
 
@@ -161,16 +161,16 @@ class MavenDependenciesResolver : ExternalDependenciesResolver {
          * (see [org.eclipse.aether.internal.impl.SimpleLocalRepositoryManager.getRepositoryKey]),
          * they should be replaced with an allowed character.
          */
-        private val FORBIDDEN_CHARS = Regex("[/\\\\:<>\"|?*]")
+        private konst FORBIDDEN_CHARS = Regex("[/\\\\:<>\"|?*]")
 
         private fun makeResolveFailureResult(
             exception: Throwable,
             location: SourceCode.LocationWithId?
         ): ResultWithDiagnostics.Failure {
-            val allCauses = generateSequence(exception) { e: Throwable -> e.cause }.toList()
-            val primaryCause = allCauses.firstOrNull { it is ArtifactResolutionException } ?: exception
+            konst allCauses = generateSequence(exception) { e: Throwable -> e.cause }.toList()
+            konst primaryCause = allCauses.firstOrNull { it is ArtifactResolutionException } ?: exception
 
-            val message = buildString {
+            konst message = buildString {
                 append(primaryCause::class.simpleName)
                 if (primaryCause.message != null) {
                     append(": ")

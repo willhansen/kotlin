@@ -1,7 +1,7 @@
 fun bar(x: Int): Int = x + 1
 
 fun foo() {
-    val x: Int? = null
+    konst x: Int? = null
 
     if (x != null) {
         when (x) {

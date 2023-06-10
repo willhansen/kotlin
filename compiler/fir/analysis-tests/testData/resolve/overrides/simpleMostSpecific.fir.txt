@@ -1,6 +1,6 @@
 FILE: simpleMostSpecific.kt
     public abstract interface A : R|kotlin/Any| {
-        public abstract val x: R|kotlin/CharSequence|
+        public abstract konst x: R|kotlin/CharSequence|
             public get(): R|kotlin/CharSequence|
 
         public abstract fun foo(): R|kotlin/String?|
@@ -11,7 +11,7 @@ FILE: simpleMostSpecific.kt
     public abstract interface B : R|kotlin/Any| {
         public abstract var x: R|kotlin/String|
             public get(): R|kotlin/String|
-            public set(value: R|kotlin/String|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
         public abstract fun foo(): R|kotlin/String|
 
@@ -19,7 +19,7 @@ FILE: simpleMostSpecific.kt
 
     }
     public abstract interface C : R|kotlin/Any| {
-        public abstract val x: R|kotlin/String|
+        public abstract konst x: R|kotlin/String|
             public get(): R|kotlin/String|
 
     }

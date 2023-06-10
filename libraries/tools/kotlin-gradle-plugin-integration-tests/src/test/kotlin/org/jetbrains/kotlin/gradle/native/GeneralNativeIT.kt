@@ -36,21 +36,21 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 internal object MPPNativeTargets {
-    val current = when {
+    konst current = when {
         HostManager.hostIsMingw -> "mingw64"
         HostManager.hostIsLinux -> "linux64"
         HostManager.hostIsMac -> "macos64"
         else -> error("Unknown host")
     }
 
-    val unsupported = when {
+    konst unsupported = when {
         HostManager.hostIsMingw -> listOf("macos64")
         HostManager.hostIsLinux -> listOf("macos64", "mingw64")
         HostManager.hostIsMac -> listOf("linuxMipsel32")
         else -> error("Unknown host")
     }
 
-    val supported = listOf("linux64", "macos64", "mingw64").filter { !unsupported.contains(it) }
+    konst supported = listOf("linux64", "macos64", "mingw64").filter { !unsupported.contains(it) }
 }
 
 internal fun BaseGradleIT.transformNativeTestProject(
@@ -58,7 +58,7 @@ internal fun BaseGradleIT.transformNativeTestProject(
     wrapperVersion: GradleVersionRequired = defaultGradleVersion,
     directoryPrefix: String? = null
 ): BaseGradleIT.Project {
-    val project = Project(projectName, wrapperVersion, directoryPrefix = directoryPrefix)
+    konst project = Project(projectName, wrapperVersion, directoryPrefix = directoryPrefix)
     project.setupWorkingDir()
     project.configureSingleNativeTarget()
     project.gradleProperties().apply {
@@ -73,7 +73,7 @@ internal fun BaseGradleIT.transformNativeTestProjectWithPluginDsl(
     wrapperVersion: GradleVersionRequired = defaultGradleVersion,
     directoryPrefix: String? = null
 ): BaseGradleIT.Project {
-    val project = transformProjectWithPluginsDsl(projectName, wrapperVersion, directoryPrefix = directoryPrefix)
+    konst project = transformProjectWithPluginsDsl(projectName, wrapperVersion, directoryPrefix = directoryPrefix)
     project.configureSingleNativeTarget()
     project.gradleProperties().apply {
         configureJvmMemory()
@@ -90,7 +90,7 @@ internal fun File.disableKotlinNativeCaches() {
     appendText("\nkotlin.native.cacheKind=none\n")
 }
 
-private const val SINGLE_NATIVE_TARGET_PLACEHOLDER = "<SingleNativeTarget>"
+private const konst SINGLE_NATIVE_TARGET_PLACEHOLDER = "<SingleNativeTarget>"
 
 private fun BaseGradleIT.Project.configureSingleNativeTarget(preset: String = HostManager.host.presetName) {
     projectDir.walk()
@@ -105,12 +105,12 @@ private fun BaseGradleIT.Project.configureSingleNativeTarget(preset: String = Ho
 @OptIn(InternalKotlinGradlePluginApi::class)
 class GeneralNativeIT : BaseGradleIT() {
 
-    val nativeHostTargetName = MPPNativeTargets.current
+    konst nativeHostTargetName = MPPNativeTargets.current
 
     private fun Project.targetClassesDir(targetName: String, sourceSetName: String = "main") =
         classesDir(sourceSet = "$targetName/$sourceSetName")
 
-    override val defaultGradleVersion: GradleVersionRequired
+    override konst defaultGradleVersion: GradleVersionRequired
         get() = GradleVersionRequired.FOR_MPP_SUPPORT
 
     @Test
@@ -142,41 +142,41 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testCanProduceNativeLibraries() = with(transformNativeTestProjectWithPluginDsl("libraries", directoryPrefix = "native-binaries")) {
-        val baseName = "native_library"
+        konst baseName = "native_library"
 
-        val sharedPrefix = CompilerOutputKind.DYNAMIC.prefix(HostManager.host)
-        val sharedSuffix = CompilerOutputKind.DYNAMIC.suffix(HostManager.host)
-        val sharedPaths = listOf(
+        konst sharedPrefix = CompilerOutputKind.DYNAMIC.prefix(HostManager.host)
+        konst sharedSuffix = CompilerOutputKind.DYNAMIC.suffix(HostManager.host)
+        konst sharedPaths = listOf(
             "build/bin/host/debugShared/$sharedPrefix$baseName$sharedSuffix",
             "build/bin/host/releaseShared/$sharedPrefix$baseName$sharedSuffix",
         )
 
-        val staticPrefix = CompilerOutputKind.STATIC.prefix(HostManager.host)
-        val staticSuffix = CompilerOutputKind.STATIC.suffix(HostManager.host)
-        val staticPaths = listOf(
+        konst staticPrefix = CompilerOutputKind.STATIC.prefix(HostManager.host)
+        konst staticSuffix = CompilerOutputKind.STATIC.suffix(HostManager.host)
+        konst staticPaths = listOf(
             "build/bin/host/debugStatic/$staticPrefix$baseName$staticSuffix",
             "build/bin/host/releaseStatic/$staticPrefix$baseName$staticSuffix",
         )
 
-        val headerPaths = listOf(
+        konst headerPaths = listOf(
             "build/bin/host/debugShared/$sharedPrefix${baseName}_api.h",
             "build/bin/host/debugStatic/$staticPrefix${baseName}_api.h",
             "build/bin/host/releaseShared/$sharedPrefix${baseName}_api.h",
             "build/bin/host/releaseStatic/$staticPrefix${baseName}_api.h",
         )
 
-        val klibPrefix = CompilerOutputKind.LIBRARY.prefix(HostManager.host)
-        val klibSuffix = CompilerOutputKind.LIBRARY.suffix(HostManager.host)
-        val klibPath = "${targetClassesDir("host")}${klibPrefix}/klib/native-library$klibSuffix"
+        konst klibPrefix = CompilerOutputKind.LIBRARY.prefix(HostManager.host)
+        konst klibSuffix = CompilerOutputKind.LIBRARY.suffix(HostManager.host)
+        konst klibPath = "${targetClassesDir("host")}${klibPrefix}/klib/native-library$klibSuffix"
 
-        val linkTasks = listOf(
+        konst linkTasks = listOf(
             ":linkDebugSharedHost",
             ":linkDebugStaticHost",
             ":linkReleaseSharedHost",
             ":linkReleaseStaticHost",
         )
 
-        val klibTask = ":compileKotlinHost"
+        konst klibTask = ":compileKotlinHost"
 
         build(":assemble") {
             assertSuccessful()
@@ -216,21 +216,21 @@ class GeneralNativeIT : BaseGradleIT() {
 
         gradleBuildScript().appendText(
             """
-            val frameworkTargets = Attribute.of(
+            konst frameworkTargets = Attribute.of(
                 "org.jetbrains.kotlin.native.framework.targets",
                 Set::class.java
             )
-            val kotlinNativeBuildTypeAttribute = Attribute.of(
+            konst kotlinNativeBuildTypeAttribute = Attribute.of(
                 "org.jetbrains.kotlin.native.build.type",
                 String::class.java
             )
                  
-            fun validateConfiguration(conf: Configuration, targets: Set<String>, expectedBuildType: String) {
+            fun konstidateConfiguration(conf: Configuration, targets: Set<String>, expectedBuildType: String) {
                 if (conf.artifacts.files.count() != 1 || conf.artifacts.files.singleFile.name != "main.framework") {
                     throw IllegalStateException("No single artifact with proper name \"main.framework\"")
                 }
-                val confTargets = conf.attributes.getAttribute(frameworkTargets)!!
-                val buildType = conf.attributes.getAttribute(kotlinNativeBuildTypeAttribute)!!
+                konst confTargets = conf.attributes.getAttribute(frameworkTargets)!!
+                konst buildType = conf.attributes.getAttribute(kotlinNativeBuildTypeAttribute)!!
                 if (confTargets.size != targets.size || !confTargets.containsAll(targets)) {
                     throw IllegalStateException("Framework has incorrect attributes. Expected targets: \"${'$'}targets\", actual: \"${'$'}confTargets\"")
                 }
@@ -239,54 +239,54 @@ class GeneralNativeIT : BaseGradleIT() {
                 }
             }
             
-            tasks.register("validateThinArtifacts") {
+            tasks.register("konstidateThinArtifacts") {
                 doLast {
-                    val targets = listOf("ios" to "ios_arm64", "iosSim" to "ios_x64")
-                    val buildTypes = listOf("release", "debug")
+                    konst targets = listOf("ios" to "ios_arm64", "iosSim" to "ios_x64")
+                    konst buildTypes = listOf("release", "debug")
                     targets.forEach { (name, target) ->
                         buildTypes.forEach { buildType ->
-                            val conf = project.configurations.getByName("main${'$'}{buildType.capitalize()}Framework${'$'}{name.capitalize()}")
-                            validateConfiguration(conf, setOf(target), buildType.toUpperCase())
+                            konst conf = project.configurations.getByName("main${'$'}{buildType.capitalize()}Framework${'$'}{name.capitalize()}")
+                            konstidateConfiguration(conf, setOf(target), buildType.toUpperCase())
                         }
                     }
                 }
             }
             
-            tasks.register("validateFatArtifacts") {
+            tasks.register("konstidateFatArtifacts") {
                 doLast {
-                    val buildTypes = listOf("release", "debug")
+                    konst buildTypes = listOf("release", "debug")
                     buildTypes.forEach { buildType ->
-                        val conf = project.configurations.getByName("main${'$'}{buildType.capitalize()}FrameworkIosFat")
-                        validateConfiguration(conf, setOf("ios_x64", "ios_arm64"), buildType.toUpperCase())
+                        konst conf = project.configurations.getByName("main${'$'}{buildType.capitalize()}FrameworkIosFat")
+                        konstidateConfiguration(conf, setOf("ios_x64", "ios_arm64"), buildType.toUpperCase())
                     }
                 }
             }
             
-            tasks.register("validateCustomAttributesSetting") {
+            tasks.register("konstidateCustomAttributesSetting") {
                 doLast {
-                    val conf = project.configurations.getByName("customReleaseFrameworkIos")
-                    val attr1Value = conf.attributes.getAttribute(disambiguation1Attribute)
+                    konst conf = project.configurations.getByName("customReleaseFrameworkIos")
+                    konst attr1Value = conf.attributes.getAttribute(disambiguation1Attribute)
                     if (attr1Value != "someValue") {
-                        throw IllegalStateException("myDisambiguation1Attribute has incorrect value. Expected: \"someValue\", actual: \"${'$'}attr1Value\"")
+                        throw IllegalStateException("myDisambiguation1Attribute has incorrect konstue. Expected: \"someValue\", actual: \"${'$'}attr1Value\"")
                     }
-                    val attr2Value = conf.attributes.getAttribute(disambiguation2Attribute)
+                    konst attr2Value = conf.attributes.getAttribute(disambiguation2Attribute)
                     if (attr2Value != "someValue2") {
-                       throw IllegalStateException("myDisambiguation2Attribute has incorrect value. Expected: \"someValue2\", actual: \"${'$'}attr2Value\"")
+                       throw IllegalStateException("myDisambiguation2Attribute has incorrect konstue. Expected: \"someValue2\", actual: \"${'$'}attr2Value\"")
                     }
                 }
             }
         """.trimIndent()
         )
 
-        build(":validateThinArtifacts") {
+        build(":konstidateThinArtifacts") {
             assertSuccessful()
         }
 
-        build(":validateFatArtifacts") {
+        build(":konstidateFatArtifacts") {
             assertSuccessful()
         }
 
-        build(":validateCustomAttributesSetting") {
+        build(":konstidateCustomAttributesSetting") {
             assertSuccessful()
         }
     }
@@ -304,18 +304,18 @@ class GeneralNativeIT : BaseGradleIT() {
 
         Assume.assumeTrue(HostManager.hostIsMac)
 
-        data class BinaryMeta(val name: String, val isStatic: Boolean = false)
+        data class BinaryMeta(konst name: String, konst isStatic: Boolean = false)
 
-        val frameworkPrefix = CompilerOutputKind.FRAMEWORK.prefix(HostManager.host)
-        val frameworkSuffix = CompilerOutputKind.FRAMEWORK.suffix(HostManager.host)
-        val targets = listOf("ios", "iosSim")
-        val binaries = mapOf(
+        konst frameworkPrefix = CompilerOutputKind.FRAMEWORK.prefix(HostManager.host)
+        konst frameworkSuffix = CompilerOutputKind.FRAMEWORK.suffix(HostManager.host)
+        konst targets = listOf("ios", "iosSim")
+        konst binaries = mapOf(
             "ios" to listOf(BinaryMeta("main"), BinaryMeta("custom", true)),
             "iosSim" to listOf(BinaryMeta("main"))
         )
-        val frameworkPaths = targets.flatMap { target ->
+        konst frameworkPaths = targets.flatMap { target ->
             binaries.getValue(target).flatMap {
-                val list = listOf(
+                konst list = listOf(
                     "build/bin/$target/${it.name}DebugFramework/$frameworkPrefix${it.name}$frameworkSuffix",
                     "build/bin/$target/${it.name}ReleaseFramework/$frameworkPrefix${it.name}$frameworkSuffix",
                 )
@@ -327,7 +327,7 @@ class GeneralNativeIT : BaseGradleIT() {
             }
         }
 
-        val headerPaths = targets.flatMap { target ->
+        konst headerPaths = targets.flatMap { target ->
             binaries.getValue(target).flatMap {
                 listOf(
                     "build/bin/$target/${it.name}DebugFramework/$frameworkPrefix${it.name}$frameworkSuffix/headers/${it.name}.h",
@@ -336,7 +336,7 @@ class GeneralNativeIT : BaseGradleIT() {
             }
         }
 
-        val frameworkTasks = targets.flatMap { target ->
+        konst frameworkTasks = targets.flatMap { target ->
             binaries.getValue(target).flatMap {
                 listOf(
                     ":link${it.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}DebugFramework${
@@ -365,7 +365,7 @@ class GeneralNativeIT : BaseGradleIT() {
             frameworkPaths.forEach { assertFileExists(it) }
 
             assertTrue(fileInWorkingDir(headerPaths[0]).readText().contains("+ (int32_t)exported"))
-            val xcodeMajorVersion = Xcode!!.currentVersion.major
+            konst xcodeMajorVersion = Xcode!!.currentVersion.major
 
             // Check that by default release frameworks have bitcode embedded.
             withNativeCommandLineArguments(":linkMainReleaseFrameworkIos") { arguments ->
@@ -415,7 +415,7 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testExportApiOnlyToLibraries() {
-        val project = transformNativeTestProjectWithPluginDsl("libraries", directoryPrefix = "native-binaries")
+        konst project = transformNativeTestProjectWithPluginDsl("libraries", directoryPrefix = "native-binaries")
 
         testExportApi(
             project, listOf(
@@ -428,7 +428,7 @@ class GeneralNativeIT : BaseGradleIT() {
     @Test
     fun testExportApiOnlyToFrameworks() {
         Assume.assumeTrue(HostManager.hostIsMac)
-        val project = transformNativeTestProjectWithPluginDsl("frameworks", directoryPrefix = "native-binaries")
+        konst project = transformNativeTestProjectWithPluginDsl("frameworks", directoryPrefix = "native-binaries")
 
         testExportApi(
             project, listOf(
@@ -437,7 +437,7 @@ class GeneralNativeIT : BaseGradleIT() {
         )
     }
 
-    private data class ExportApiTestData(val taskName: String, val binaryName: String)
+    private data class ExportApiTestData(konst taskName: String, konst binaryName: String)
 
     private fun testExportApi(project: Project, testData: List<ExportApiTestData>) = with(project) {
         // Check that plugin doesn't allow exporting dependencies not added in the API configuration.
@@ -464,9 +464,9 @@ class GeneralNativeIT : BaseGradleIT() {
             directoryPrefix = "native-binaries"
         )
     ) {
-        val binaryName = "shared"
-        val headerPath = "shared/build/bin/linuxX64/debugStatic/lib${binaryName}_api.h"
-        val binaryBuildTask = "linkDebugStaticLinuxX64"
+        konst binaryName = "shared"
+        konst headerPath = "shared/build/bin/linuxX64/debugStatic/lib${binaryName}_api.h"
+        konst binaryBuildTask = "linkDebugStaticLinuxX64"
 
         build(":lib:publish") {
             assertSuccessful()
@@ -475,7 +475,7 @@ class GeneralNativeIT : BaseGradleIT() {
         build(":shared:$binaryBuildTask") {
             assertSuccessful()
             assertFileExists(headerPath)
-            val headerContents = fileInWorkingDir(headerPath).readText()
+            konst headerContents = fileInWorkingDir(headerPath).readText()
 
             assertTrue(headerContents.contains("funInShared"))
 
@@ -486,21 +486,21 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testNativeExecutables() = with(transformNativeTestProjectWithPluginDsl("executables", directoryPrefix = "native-binaries")) {
-        val binaries = mutableListOf(
+        konst binaries = mutableListOf(
             "debugExecutable" to "native-binary",
             "releaseExecutable" to "native-binary",
             "bazDebugExecutable" to "my-baz",
         )
-        val linkTasks =
+        konst linkTasks =
             binaries.map { (name, _) -> "link${name.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}Host" }
-        val outputFiles = binaries.map { (name, fileBaseName) ->
-            val outputKind = NativeOutputKind.values().single { name.endsWith(it.taskNameClassifier, true) }.compilerOutputKind
-            val prefix = outputKind.prefix(HostManager.host)
-            val suffix = outputKind.suffix(HostManager.host)
-            val fileName = "$prefix$fileBaseName$suffix"
+        konst outputFiles = binaries.map { (name, fileBaseName) ->
+            konst outputKind = NativeOutputKind.konstues().single { name.endsWith(it.taskNameClassifier, true) }.compilerOutputKind
+            konst prefix = outputKind.prefix(HostManager.host)
+            konst suffix = outputKind.suffix(HostManager.host)
+            konst fileName = "$prefix$fileBaseName$suffix"
             name to "build/bin/host/$name/$fileName"
         }.toMap()
-        val runTasks = listOf(
+        konst runTasks = listOf(
             "runDebugExecutable",
             "runReleaseExecutable",
             "runBazDebugExecutable",
@@ -539,7 +539,7 @@ class GeneralNativeIT : BaseGradleIT() {
     private fun testNativeBinaryDsl(project: String) = with(
         transformNativeTestProjectWithPluginDsl(project, directoryPrefix = "native-binaries")
     ) {
-        val hostSuffix =
+        konst hostSuffix =
             nativeHostTargetName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
         build("tasks") {
@@ -623,7 +623,7 @@ class GeneralNativeIT : BaseGradleIT() {
 
     private fun getBootedSimulators(workingDirectory: File): Set<String>? =
         if (HostManager.hostIsMac) {
-            val simulators = runProcess(listOf("xcrun", "simctl", "list"), workingDirectory, System.getenv()).also {
+            konst simulators = runProcess(listOf("xcrun", "simctl", "list"), workingDirectory, System.getenv()).also {
                 assertTrue(it.isSuccessful, "xcrun exection failed")
             }.output
 
@@ -634,20 +634,20 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testNativeTests() = with(transformNativeTestProject("native-tests")) {
-        val hostTestTask = "hostTest"
-        val testTasks = listOf(hostTestTask, "iosTest", "iosArm64Test")
+        konst hostTestTask = "hostTest"
+        konst testTasks = listOf(hostTestTask, "iosTest", "iosArm64Test")
 
-        val testsToExecute = mutableListOf(":$hostTestTask")
+        konst testsToExecute = mutableListOf(":$hostTestTask")
         when (HostManager.host) {
             KonanTarget.MACOS_X64 -> testsToExecute.add(":iosTest")
             KonanTarget.MACOS_ARM64 -> testsToExecute.add(":iosArm64Test")
             else -> {}
         }
-        val testsToSkip = testTasks.map { ":$it" } - testsToExecute
+        konst testsToSkip = testTasks.map { ":$it" } - testsToExecute
 
-        val suffix = HostManager.host.family.exeSuffix
-        val defaultOutputFile = "build/bin/host/debugTest/test.$suffix"
-        val anotherOutputFile = "build/bin/host/anotherDebugTest/another.$suffix"
+        konst suffix = HostManager.host.family.exeSuffix
+        konst defaultOutputFile = "build/bin/host/debugTest/test.$suffix"
+        konst anotherOutputFile = "build/bin/host/anotherDebugTest/another.$suffix"
 
         build("tasks") {
             assertSuccessful()
@@ -666,7 +666,7 @@ class GeneralNativeIT : BaseGradleIT() {
         }
 
         // Store currently booted simulators to check that they don't leak (MacOS only).
-        val bootedSimulatorsBefore = getBootedSimulators(projectDir)
+        konst bootedSimulatorsBefore = getBootedSimulators(projectDir)
 
         // Check the case when all tests pass.
         build("check") {
@@ -684,7 +684,7 @@ class GeneralNativeIT : BaseGradleIT() {
         checkTestsUpToDate(testsToExecute, testsToSkip)
 
         // Check simulator process leaking.
-        val bootedSimulatorsAfter = getBootedSimulators(projectDir)
+        konst bootedSimulatorsAfter = getBootedSimulators(projectDir)
         assertEquals(bootedSimulatorsBefore, bootedSimulatorsAfter)
 
         // Check the case with failed tests.
@@ -705,7 +705,7 @@ class GeneralNativeIT : BaseGradleIT() {
             assertTasksSkipped(*testsToSkip.toTypedArray())
         }
 
-        // Check that setting new value to tracked environment variable triggers tests rerun
+        // Check that setting new konstue to tracked environment variable triggers tests rerun
         build("check", options = defaultBuildOptions().copy(androidHome = projectDir)) {
             assertSuccessful()
 
@@ -753,10 +753,10 @@ class GeneralNativeIT : BaseGradleIT() {
 
 
             fun assertStacktrace(taskName: String, targetName: String) {
-                val testReport = projectDir.resolve("build/test-results/$taskName/TEST-org.foo.test.TestKt.xml")
-                val stacktrace = SAXBuilder().build(testReport).rootElement
+                konst testReport = projectDir.resolve("build/test-results/$taskName/TEST-org.foo.test.TestKt.xml")
+                konst stacktrace = SAXBuilder().build(testReport).rootElement
                     .getChildren("testcase")
-                    .single { it.getAttribute("name").value == "fail" || it.getAttribute("name").value == "fail[$targetName]" }
+                    .single { it.getAttribute("name").konstue == "fail" || it.getAttribute("name").konstue == "fail[$targetName]" }
                     .getChild("failure")
                     .text
                 assertTrue(stacktrace.contains("""at org\.foo\.test#fail\(.*test\.kt:29\)""".toRegex()))
@@ -774,8 +774,8 @@ class GeneralNativeIT : BaseGradleIT() {
                 }
             }
 
-            val expectedHostTestResult = "testProject/native-tests/TEST-TestKt.xml"
-            val expectedIOSTestResults = listOf(
+            konst expectedHostTestResult = "testProject/native-tests/TEST-TestKt.xml"
+            konst expectedIOSTestResults = listOf(
                 "testProject/native-tests/TEST-TestKt-iOSsim.xml",
                 "testProject/native-tests/TEST-TestKt-iOSArm64sim.xml",
             )
@@ -785,12 +785,12 @@ class GeneralNativeIT : BaseGradleIT() {
             // TODO: Move assertStacktrace(hostTestTask, "host") out of if clause
             if (HostManager.hostIsMac) {
                 assertStacktrace(hostTestTask, "host")
-                val testTarget = when (HostManager.host) {
+                konst testTarget = when (HostManager.host) {
                     KonanTarget.MACOS_ARM64 -> "iosArm64"
                     KonanTarget.MACOS_X64 -> "ios"
                     else -> throw IllegalStateException("Unsupported host: ${HostManager.host}")
                 }
-                val testTask = "${testTarget}Test"
+                konst testTask = "${testTarget}Test"
                 assertTestResultsAnyOf(
                     expectedIOSTestResults[0],
                     expectedIOSTestResults[1],
@@ -806,9 +806,9 @@ class GeneralNativeIT : BaseGradleIT() {
         // Check that test binaries can be accessed in a buildscript.
         build("checkNewGetters") {
             assertSuccessful()
-            val suffix = if (HostManager.hostIsMingw) "exe" else "kexe"
-            val names = listOf("test", "another")
-            val files = names.map { "$it.$suffix" }
+            konst suffix = if (HostManager.hostIsMingw) "exe" else "kexe"
+            konst names = listOf("test", "another")
+            konst files = names.map { "$it.$suffix" }
 
             files.forEach {
                 assertContains("Get test: $it")
@@ -847,7 +847,7 @@ class GeneralNativeIT : BaseGradleIT() {
     fun kt33750() {
         // Check that build fails if a test executable crashes.
         with(transformNativeTestProject("native-tests")) {
-            projectDir.resolve("src/commonTest/kotlin/test.kt").appendText("\nval fail: Int = error(\"\")\n")
+            projectDir.resolve("src/commonTest/kotlin/test.kt").appendText("\nkonst fail: Int = error(\"\")\n")
             build("check") {
                 assertFailed()
                 output.contains("exited with errors \\(exit code: \\d+\\)".toRegex())
@@ -886,8 +886,8 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testCompilerVersionChange() = with(transformNativeTestProjectWithPluginDsl("native-compiler-version")) {
-        val compileTasks = listOf(":compileKotlinHost")
-        val compileTasksArray = compileTasks.toTypedArray()
+        konst compileTasks = listOf(":compileKotlinHost")
+        konst compileTasksArray = compileTasks.toTypedArray()
 
         build(*compileTasksArray) {
             assertSuccessful()
@@ -925,7 +925,7 @@ class GeneralNativeIT : BaseGradleIT() {
 
             // This directory actually doesn't contain a K/N distribution
             // but we still can run a project configuration and check logs.
-            val currentDir = projectDir.absolutePath
+            konst currentDir = projectDir.absolutePath
             build("tasks", "-Pkotlin.native.home=$currentDir") {
                 assertSuccessful()
                 assertContains("User-provided Kotlin/Native distribution: $currentDir")
@@ -942,9 +942,9 @@ class GeneralNativeIT : BaseGradleIT() {
             }
 
 
-            val platform = HostManager.platformName()
-            val version = NATIVE_STABLE_RELEASE
-            val escapedRegexVersion = Regex.escape(NATIVE_STABLE_RELEASE)
+            konst platform = HostManager.platformName()
+            konst version = NATIVE_STABLE_RELEASE
+            konst escapedRegexVersion = Regex.escape(NATIVE_STABLE_RELEASE)
             build("tasks", "-Pkotlin.native.version=$version") {
                 assertSuccessful()
                 assertContainsRegex("Kotlin/Native distribution: .*kotlin-native-prebuilt-$platform-$escapedRegexVersion".toRegex())
@@ -985,14 +985,14 @@ class GeneralNativeIT : BaseGradleIT() {
 
     @Test
     fun testNativeArgsWithSpaces() = with(transformNativeTestProject("sample-lib", directoryPrefix = "new-mpp-lib-and-app")) {
-        val complicatedDirectoryName = if (HostManager.hostIsMingw) {
+        konst complicatedDirectoryName = if (HostManager.hostIsMingw) {
             // Windows doesn't allow creating a file with " in its name.
             "path with spaces"
         } else {
             "path with spaces and \""
         }
 
-        val fileWithSpacesInPath = projectDir.resolve("src/commonMain/kotlin/$complicatedDirectoryName")
+        konst fileWithSpacesInPath = projectDir.resolve("src/commonMain/kotlin/$complicatedDirectoryName")
             .apply { mkdirs() }
             .resolve("B.kt")
         fileWithSpacesInPath.writeText("fun foo() = 42")
@@ -1007,7 +1007,7 @@ class GeneralNativeIT : BaseGradleIT() {
                         ) else it.toString()
                     }
                 }") { arguments ->
-                val escapedQuotedPath =
+                konst escapedQuotedPath =
                     "\"${fileWithSpacesInPath.absolutePath.replace("\\", "\\\\").replace("\"", "\\\"")}\""
                 assertTrue(
                     escapedQuotedPath in arguments,
@@ -1074,8 +1074,8 @@ class GeneralNativeIT : BaseGradleIT() {
         }
 
         fun CompiledProject.assertVariantInDependencyInsight(variantName: String) {
-            val testGradleVersion = chooseWrapperVersionOrFinishTest()
-            val isAtLeastGradle75 = GradleVersion.version(testGradleVersion) >= GradleVersion.version("7.5")
+            konst testGradleVersion = chooseWrapperVersionOrFinishTest()
+            konst isAtLeastGradle75 = GradleVersion.version(testGradleVersion) >= GradleVersion.version("7.5")
             try {
                 if (isAtLeastGradle75) {
                     assertContains("Variant $variantName")
@@ -1083,12 +1083,12 @@ class GeneralNativeIT : BaseGradleIT() {
                     assertContains("variant \"$variantName\" [")
                 }
             } catch (originalError: AssertionError) {
-                val regexPattern = if (isAtLeastGradle75) {
+                konst regexPattern = if (isAtLeastGradle75) {
                     "Variant (.*?):"
                 } else {
                     "variant \"(.*?)\" \\["
                 }
-                val matchedVariants = Regex(regexPattern).findAll(output).toList()
+                konst matchedVariants = Regex(regexPattern).findAll(output).toList()
                 throw AssertionError(
                     "Expected variant $variantName. " +
                             if (matchedVariants.isNotEmpty())
@@ -1217,8 +1217,8 @@ class GeneralNativeIT : BaseGradleIT() {
             extractNativeToolSettings(taskPath?.let { getOutputForTask(taskPath) } ?: output,
                                       toolName,
                                       NativeToolSettingsKind.CUSTOM_ENV_VARIABLES).map {
-                val (key, value) = it.split("=")
-                key.trim() to value.trim()
+                konst (key, konstue) = it.split("=")
+                key.trim() to konstue.trim()
             }.toMap()
 
         fun CompiledProject.withNativeCommandLineArguments(

@@ -24,7 +24,7 @@ class Inv<S>
 fun <R> Inv<R>.asOut(): Out<R> = TODO()
 
 fun test() {
-    val o: Out<Int> = Tasks.call {
+    konst o: Out<Int> = Tasks.call {
         withLock { TODO() }
     }.asOut()
 

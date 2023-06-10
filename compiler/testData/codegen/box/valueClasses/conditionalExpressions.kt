@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double) {
+konstue class DPoint(konst x: Double, konst y: Double) {
     init {
         counter++
     }
@@ -25,7 +25,7 @@ fun whenExpr() = when {
 
 fun ifBody() {
     if (DPoint(0.0, 1.0).x > 0.0) DPoint(2.0, 3.0) else DPoint(4.0, 5.0)
-    val x = if (DPoint(0.0, 1.0).x > 0.0) DPoint(2.0, 3.0) else DPoint(4.0, 5.0)
+    konst x = if (DPoint(0.0, 1.0).x > 0.0) DPoint(2.0, 3.0) else DPoint(4.0, 5.0)
     require(x == DPoint(4.0, 5.0))
 }
 
@@ -35,7 +35,7 @@ fun whenBody() {
         DPoint(10.0, 11.0).x > 0.0 -> DPoint(12.0, 13.0)
         else -> DPoint(14.0, 15.0)
     }
-    val x = when {
+    konst x = when {
         DPoint(6.0, 7.0).x > 0.0 -> DPoint(8.0, 9.0)
         DPoint(10.0, 11.0).x > 0.0 -> DPoint(12.0, 13.0)
         else -> DPoint(14.0, 15.0)

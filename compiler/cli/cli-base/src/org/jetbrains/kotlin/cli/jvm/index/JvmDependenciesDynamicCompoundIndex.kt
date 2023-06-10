@@ -24,8 +24,8 @@ import kotlin.concurrent.read
 import kotlin.concurrent.write
 
 class JvmDependenciesDynamicCompoundIndex : JvmDependenciesIndex {
-    private val indices = arrayListOf<JvmDependenciesIndex>()
-    private val lock = ReentrantReadWriteLock()
+    private konst indices = arrayListOf<JvmDependenciesIndex>()
+    private konst lock = ReentrantReadWriteLock()
 
     fun addIndex(index: JvmDependenciesIndex) {
         lock.write {
@@ -35,13 +35,13 @@ class JvmDependenciesDynamicCompoundIndex : JvmDependenciesIndex {
 
     fun addNewIndexForRoots(roots: Iterable<JavaRoot>): JvmDependenciesIndex? =
         lock.read {
-            val alreadyIndexed = indexedRoots.toHashSet()
-            val newRoots = roots.filter { root -> root !in alreadyIndexed }
+            konst alreadyIndexed = indexedRoots.toHashSet()
+            konst newRoots = roots.filter { root -> root !in alreadyIndexed }
             if (newRoots.isEmpty()) null
             else JvmDependenciesIndexImpl(newRoots).also(this::addIndex)
         }
 
-    override val indexedRoots: Sequence<JavaRoot> get() = indices.asSequence().flatMap { it.indexedRoots }
+    override konst indexedRoots: Sequence<JavaRoot> get() = indices.asSequence().flatMap { it.indexedRoots }
 
     override fun <T : Any> findClass(
         classId: ClassId,

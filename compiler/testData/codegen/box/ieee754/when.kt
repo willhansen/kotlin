@@ -5,9 +5,9 @@
 // DONT_TARGET_EXACT_BACKEND: JS_IR_ES6
 
 fun box(): String {
-    val plusZero: Any = 0.0
-    val minusZero: Any = -0.0
-    val nullDouble: Double? = null
+    konst plusZero: Any = 0.0
+    konst minusZero: Any = -0.0
+    konst nullDouble: Double? = null
     if (plusZero is Double) {
         // Smart casts behavior in 1.2
         when (plusZero) {

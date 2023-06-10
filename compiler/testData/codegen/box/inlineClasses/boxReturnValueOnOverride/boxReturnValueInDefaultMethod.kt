@@ -9,11 +9,11 @@ interface X<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val value: Int) : X<A> {
-    override operator fun plus(n: Int) = A(value + n)
+konstue class A(konst konstue: Int) : X<A> {
+    override operator fun plus(n: Int) = A(konstue + n)
 }
 
 fun box(): String {
-    val res = A(1).next()
-    return if (res.value == 2) "OK" else "FAIL $res"
+    konst res = A(1).next()
+    return if (res.konstue == 2) "OK" else "FAIL $res"
 }

@@ -26,12 +26,12 @@ import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.name.StandardClassIds
 
 class JavaOverrideChecker internal constructor(
-    private val session: FirSession,
-    private val javaTypeParameterStack: JavaTypeParameterStack,
-    private val baseScopes: List<FirTypeScope>?,
-    private val considerReturnTypeKinds: Boolean,
+    private konst session: FirSession,
+    private konst javaTypeParameterStack: JavaTypeParameterStack,
+    private konst baseScopes: List<FirTypeScope>?,
+    private konst considerReturnTypeKinds: Boolean,
 ) : FirAbstractOverrideChecker() {
-    private val context: ConeTypeContext = session.typeContext
+    private konst context: ConeTypeContext = session.typeContext
 
     private fun isEqualTypes(
         candidateType: ConeKotlinType,
@@ -45,8 +45,8 @@ class JavaOverrideChecker internal constructor(
         if (candidateType is ConeFlexibleType) return isEqualTypes(candidateType.lowerBound, baseType, substitutor)
         if (baseType is ConeFlexibleType) return isEqualTypes(candidateType, baseType.lowerBound, substitutor)
         if (candidateType is ConeClassLikeType && baseType is ConeClassLikeType) {
-            val candidateTypeClassId = candidateType.fullyExpandedType(session).lookupTag.classId.let { it.readOnlyToMutable() ?: it }
-            val baseTypeClassId = baseType.fullyExpandedType(session).lookupTag.classId.let { it.readOnlyToMutable() ?: it }
+            konst candidateTypeClassId = candidateType.fullyExpandedType(session).lookupTag.classId.let { it.readOnlyToMutable() ?: it }
+            konst baseTypeClassId = baseType.fullyExpandedType(session).lookupTag.classId.let { it.readOnlyToMutable() ?: it }
             if (candidateTypeClassId != baseTypeClassId) return false
             if (candidateTypeClassId == StandardClassIds.Array) {
                 assert(candidateType.typeArguments.size == 1) {
@@ -76,8 +76,8 @@ class JavaOverrideChecker internal constructor(
         baseTypeRef: FirTypeRef,
         substitutor: ConeSubstitutor
     ): Boolean {
-        val candidateType = candidateTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
-        val baseType = baseTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
+        konst candidateType = candidateTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
+        konst baseType = baseTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
 
         if (candidateType.isPrimitiveInJava(isReturnType = false) != baseType.isPrimitiveInJava(isReturnType = false)) return false
 
@@ -88,19 +88,19 @@ class JavaOverrideChecker internal constructor(
         )
     }
 
-    // In most cases checking erasure of value parameters should be enough, but in some cases there might be semi-valid Java hierarchies
-    // with same value parameters, but different return type kinds, so it's worth distinguishing them as different non-overridable members
+    // In most cases checking erasure of konstue parameters should be enough, but in some cases there might be semi-konstid Java hierarchies
+    // with same konstue parameters, but different return type kinds, so it's worth distinguishing them as different non-overridable members
     fun doesReturnTypesHaveSameKind(
         candidate: FirSimpleFunction,
         base: FirSimpleFunction,
     ): Boolean {
-        val candidateTypeRef = candidate.returnTypeRef
-        val baseTypeRef = base.returnTypeRef
+        konst candidateTypeRef = candidate.returnTypeRef
+        konst baseTypeRef = base.returnTypeRef
 
-        val candidateType = candidateTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
-        val baseType = baseTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
+        konst candidateType = candidateTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
+        konst baseType = baseTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
 
-        val candidateHasPrimitiveReturnType = candidate.hasPrimitiveReturnTypeInJvm(candidateType)
+        konst candidateHasPrimitiveReturnType = candidate.hasPrimitiveReturnTypeInJvm(candidateType)
         if (candidateHasPrimitiveReturnType != base.hasPrimitiveReturnTypeInJvm(baseType)) return false
 
         // Both candidate and base are not primitive
@@ -112,7 +112,7 @@ class JavaOverrideChecker internal constructor(
     private fun ConeKotlinType.isPrimitiveInJava(isReturnType: Boolean): Boolean = with(context) {
         if (isNullableType() || CompilerConeAttributes.EnhancedNullability in attributes) return false
 
-        val isVoid = isReturnType && isUnit
+        konst isVoid = isReturnType && isUnit
         return isPrimitiveOrNullablePrimitive || isVoid
     }
 
@@ -122,7 +122,7 @@ class JavaOverrideChecker internal constructor(
         var foundNonPrimitiveOverridden = false
 
         baseScopes?.processOverriddenFunctions(symbol) {
-            val type = it.fir.returnTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
+            konst type = it.fir.returnTypeRef.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
             if (!type.isPrimitiveInJava(isReturnType = true)) {
                 foundNonPrimitiveOverridden = true
                 ProcessorAction.STOP
@@ -147,8 +147,8 @@ class JavaOverrideChecker internal constructor(
         }
 
     private fun Collection<FirTypeParameterRef>.buildErasure() = associate {
-        val symbol = it.symbol
-        val firstBound = symbol.fir.bounds.first() // Note that in Java type parameter typed arguments always erased to first bound
+        konst symbol = it.symbol
+        konst firstBound = symbol.fir.bounds.first() // Note that in Java type parameter typed arguments always erased to first bound
         symbol to firstBound.toConeKotlinTypeProbablyFlexible(session, javaTypeParameterStack)
     }
 
@@ -167,7 +167,7 @@ class JavaOverrideChecker internal constructor(
     private fun FirCallableDeclaration.isTypeParameterDependent(): Boolean =
         typeParameters.isNotEmpty() || returnTypeRef.isTypeParameterDependent() ||
                 receiverParameter?.typeRef.isTypeParameterDependent() ||
-                this is FirSimpleFunction && valueParameters.any { it.returnTypeRef.isTypeParameterDependent() }
+                this is FirSimpleFunction && konstueParameters.any { it.returnTypeRef.isTypeParameterDependent() }
 
     private fun FirTypeRef.extractTypeParametersTo(result: MutableCollection<FirTypeParameterRef>) {
         if (this is FirResolvedTypeRef) {
@@ -197,7 +197,7 @@ class JavaOverrideChecker internal constructor(
         returnTypeRef.extractTypeParametersTo(result)
         receiverParameter?.typeRef?.extractTypeParametersTo(result)
         if (this is FirSimpleFunction) {
-            this.valueParameters.forEach { it.returnTypeRef.extractTypeParametersTo(result) }
+            this.konstueParameters.forEach { it.returnTypeRef.extractTypeParametersTo(result) }
         }
     }
 
@@ -211,7 +211,7 @@ class JavaOverrideChecker internal constructor(
         if (!overrideCandidate.isTypeParameterDependent() && !baseDeclaration.isTypeParameterDependent()) {
             return ConeSubstitutor.Empty
         }
-        val typeParameters = linkedSetOf<FirTypeParameterRef>()
+        konst typeParameters = linkedSetOf<FirTypeParameterRef>()
         overrideCandidate.extractTypeParametersTo(typeParameters)
         baseDeclaration.extractTypeParametersTo(typeParameters)
         return substitutorByMap(typeParameters.buildErasure(), session)
@@ -224,13 +224,13 @@ class JavaOverrideChecker internal constructor(
         baseDeclaration.lazyResolveToPhase(FirResolvePhase.TYPES)
 
         // NB: overrideCandidate is from Java and has no receiver
-        val receiverTypeRef = baseDeclaration.receiverParameter?.typeRef
-        val baseParameterTypes = listOfNotNull(receiverTypeRef) + baseDeclaration.valueParameters.map { it.returnTypeRef }
+        konst receiverTypeRef = baseDeclaration.receiverParameter?.typeRef
+        konst baseParameterTypes = listOfNotNull(receiverTypeRef) + baseDeclaration.konstueParameters.map { it.returnTypeRef }
 
-        if (overrideCandidate.valueParameters.size != baseParameterTypes.size) return false
-        val substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration)
+        if (overrideCandidate.konstueParameters.size != baseParameterTypes.size) return false
+        konst substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration)
 
-        if (!overrideCandidate.valueParameters.zip(baseParameterTypes).all { (paramFromJava, baseType) ->
+        if (!overrideCandidate.konstueParameters.zip(baseParameterTypes).all { (paramFromJava, baseType) ->
                 isEqualTypes(paramFromJava.returnTypeRef, baseType, substitutor)
             }) {
             return false
@@ -247,19 +247,19 @@ class JavaOverrideChecker internal constructor(
         overrideCandidate.lazyResolveToPhase(FirResolvePhase.TYPES)
         baseDeclaration.lazyResolveToPhase(FirResolvePhase.TYPES)
 
-        val receiverTypeRef = baseDeclaration.receiverParameter?.typeRef
+        konst receiverTypeRef = baseDeclaration.receiverParameter?.typeRef
         return when (overrideCandidate) {
             is FirSimpleFunction -> {
                 if (receiverTypeRef == null) {
                     // TODO: setters
-                    return overrideCandidate.valueParameters.isEmpty()
+                    return overrideCandidate.konstueParameters.isEmpty()
                 } else {
-                    if (overrideCandidate.valueParameters.size != 1) return false
-                    return isEqualTypes(receiverTypeRef, overrideCandidate.valueParameters.single().returnTypeRef, ConeSubstitutor.Empty)
+                    if (overrideCandidate.konstueParameters.size != 1) return false
+                    return isEqualTypes(receiverTypeRef, overrideCandidate.konstueParameters.single().returnTypeRef, ConeSubstitutor.Empty)
                 }
             }
             is FirProperty -> {
-                val overrideReceiverTypeRef = overrideCandidate.receiverParameter?.typeRef
+                konst overrideReceiverTypeRef = overrideCandidate.receiverParameter?.typeRef
                 return when {
                     receiverTypeRef == null -> overrideReceiverTypeRef == null
                     overrideReceiverTypeRef == null -> false

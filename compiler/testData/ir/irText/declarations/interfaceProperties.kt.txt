@@ -1,8 +1,8 @@
 interface C {
-  abstract val test1: Int
+  abstract konst test1: Int
     abstract get
 
-  val test2: Int
+  konst test2: Int
     get(): Int {
       return 0
     }
@@ -15,7 +15,7 @@ interface C {
     get(): Int {
       return 0
     }
-    set(value: Int) {
+    set(konstue: Int) {
     }
 
 }

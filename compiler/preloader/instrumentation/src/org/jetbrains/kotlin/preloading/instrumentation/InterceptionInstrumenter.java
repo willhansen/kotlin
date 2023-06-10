@@ -393,7 +393,7 @@ public class InterceptionInstrumenter {
             private int stackDepth(MethodData methodData, org.jetbrains.org.objectweb.asm.commons.Method methodBeingInstrumented) {
                 org.jetbrains.org.objectweb.asm.commons.Method method = getAsmMethod(methodData);
 
-                // array * 2 (dup) + index + value (may be long/double)
+                // array * 2 (dup) + index + konstue (may be long/double)
                 int allArgsStackDepth = methodData.getAllArgsParameterIndex() >= 0 ? 5 : 0;
 
                 int argsSize = 0;
@@ -402,7 +402,7 @@ public class InterceptionInstrumenter {
                 }
 
                 int receiverSize = 1;
-                // return value must be kept on the stack OR exception, so we have to reserve at least 1
+                // return konstue must be kept on the stack OR exception, so we have to reserve at least 1
                 int exceptionSize = 1;
                 int returnValueSize = methodBeingInstrumented.getReturnType().getSize();
                 return argsSize + allArgsStackDepth + receiverSize + Math.max(returnValueSize, exceptionSize);
@@ -570,7 +570,7 @@ public class InterceptionInstrumenter {
 
     private static void box(InstructionAdapter ia, Type from, Class<?> boxedClass) {
         Type boxedType = Type.getType(boxedClass);
-        ia.invokestatic(boxedType.getInternalName(), "valueOf", "(" + from.getDescriptor() + ")" + boxedType.getDescriptor(), false);
+        ia.invokestatic(boxedType.getInternalName(), "konstueOf", "(" + from.getDescriptor() + ")" + boxedType.getDescriptor(), false);
     }
 
     public void dump(PrintStream out) {

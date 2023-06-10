@@ -16,7 +16,7 @@ fun test1() {
 fun test2() {
     var x: String? = "..."
     if (x != null) {
-        val lambda = { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // bad
+        konst lambda = { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // bad
         while (false) return
         x = null
         lambda()

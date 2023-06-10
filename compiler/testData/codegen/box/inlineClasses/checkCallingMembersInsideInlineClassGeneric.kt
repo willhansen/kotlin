@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Int>(val x: T) {
+konstue class Foo<T: Int>(konst x: T) {
     fun empty() = ""
     fun withParam(a: String) = a
     fun withInlineClassParam(f: Foo<T>) = f.toString()
 
     fun test(): String {
-        val a = empty()
-        val b = withParam("hello")
-        val c = withInlineClassParam(this)
+        konst a = empty()
+        konst b = withParam("hello")
+        konst c = withInlineClassParam(this)
         return a + b + c
     }
 
@@ -21,7 +21,7 @@ value class Foo<T: Int>(val x: T) {
 }
 
 fun box(): String {
-    val f = Foo(12)
+    konst f = Foo(12)
     return if (f.test() != "hello12") "fail" else "OK"
     return "OK"
 }

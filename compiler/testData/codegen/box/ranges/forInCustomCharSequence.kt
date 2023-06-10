@@ -2,12 +2,12 @@
 
 class C : CharSequence {
     // Unused declarations, which are here only to confuse the backend who might lookup symbols by name
-    private val List<String>.length: Int
+    private konst List<String>.length: Int
         get() = size
     private operator fun List<String>.get(i: Int) =
         this.get(i)
 
-    override val length: Int
+    override konst length: Int
         get() = 2
 
     override fun get(index: Int): Char =
@@ -19,7 +19,7 @@ class C : CharSequence {
 
 fun box(): String {
     var result = ""
-    val c = C()
+    konst c = C()
     for (i in c.indices) {
         if (i == 0) {
             result += c[i]

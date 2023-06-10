@@ -6,22 +6,22 @@ var x: Int = 1
 // No backing field!
 var y: Int
     get() = x
-    set(value): <!WRONG_SETTER_RETURN_TYPE!>Any<!> {
-        x = value
+    set(konstue): <!WRONG_SETTER_RETURN_TYPE!>Any<!> {
+        x = konstue
     }
 
 var z: Int
     get() = x
-    set(value): Unit {
-        x = value
+    set(konstue): Unit {
+        x = konstue
     }
 
 var u: String = ""
-    set(value): Unit {
-        field = value
+    set(konstue): Unit {
+        field = konstue
     }
 
 var v: String = ""
-    set(value): <!WRONG_SETTER_RETURN_TYPE!>String<!> {
-        field = value
+    set(konstue): <!WRONG_SETTER_RETURN_TYPE!>String<!> {
+        field = konstue
     }

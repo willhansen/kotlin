@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.serialization.deserialization
 
-const val DYNAMIC_TYPE_DESERIALIZER_ID = "kotlin.DynamicType"
+const konst DYNAMIC_TYPE_DESERIALIZER_ID = "kotlin.DynamicType"

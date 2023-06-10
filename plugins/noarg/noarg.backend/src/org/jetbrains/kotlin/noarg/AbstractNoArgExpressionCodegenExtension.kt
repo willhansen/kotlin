@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature
 import org.jetbrains.org.objectweb.asm.Opcodes
 
 
-class CliNoArgExpressionCodegenExtension(private val annotations: List<String>, invokeInitializers: Boolean = false) :
+class CliNoArgExpressionCodegenExtension(private konst annotations: List<String>, invokeInitializers: Boolean = false) :
     AbstractNoArgExpressionCodegenExtension(invokeInitializers) {
 
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?): List<String> = annotations
 }
 
-abstract class AbstractNoArgExpressionCodegenExtension(val invokeInitializers: Boolean) : ExpressionCodegenExtension,
+abstract class AbstractNoArgExpressionCodegenExtension(konst invokeInitializers: Boolean) : ExpressionCodegenExtension,
     AnnotationBasedExtension {
 
     override fun generateClassSyntheticParts(codegen: ImplementationBodyCodegen) = with(codegen) {
@@ -40,15 +40,15 @@ abstract class AbstractNoArgExpressionCodegenExtension(val invokeInitializers: B
     }
 
     private fun ImplementationBodyCodegen.generateNoArgConstructor() {
-        val superClassInternalName = typeMapper.mapClass(descriptor.getSuperClassOrAny()).internalName
+        konst superClassInternalName = typeMapper.mapClass(descriptor.getSuperClassOrAny()).internalName
 
-        val constructorDescriptor = createNoArgConstructorDescriptor(descriptor)
+        konst constructorDescriptor = createNoArgConstructorDescriptor(descriptor)
 
-        val superClass = descriptor.getSuperClassOrAny()
+        konst superClass = descriptor.getSuperClassOrAny()
 
         // If a parent sealed class has not a zero-parameter constructor, user must write @NoArg annotation for the parent class as well,
         // and then we generate <init>()V
-        val isParentASealedClassWithDefaultConstructor =
+        konst isParentASealedClassWithDefaultConstructor =
             superClass.modality == Modality.SEALED && superClass.constructors.any { isZeroParameterConstructor(it) }
 
         functionCodegen.generateMethod(JvmDeclarationOrigin.NO_ORIGIN, constructorDescriptor, object : CodegenBased(state) {
@@ -74,7 +74,7 @@ abstract class AbstractNoArgExpressionCodegenExtension(val invokeInitializers: B
     }
 
     private fun ImplementationBodyCodegen.shouldGenerateNoArgConstructor(): Boolean {
-        val origin = myClass as? KtClass ?: return false
+        konst origin = myClass as? KtClass ?: return false
 
         if (descriptor.kind != ClassKind.CLASS || !descriptor.hasSpecialAnnotation(origin)) {
             return false
@@ -83,12 +83,12 @@ abstract class AbstractNoArgExpressionCodegenExtension(val invokeInitializers: B
         return descriptor.constructors.none { isZeroParameterConstructor(it) }
     }
 
-    override val shouldGenerateClassSyntheticPartsInLightClassesMode = true
+    override konst shouldGenerateClassSyntheticPartsInLightClassesMode = true
 
     companion object {
 
         fun isZeroParameterConstructor(constructor: ClassConstructorDescriptor): Boolean {
-            val parameters = constructor.valueParameters
+            konst parameters = constructor.konstueParameters
             return parameters.isEmpty() ||
                     (parameters.all { it.declaresDefaultValue() } && (constructor.isPrimary || constructor.findJvmOverloadsAnnotation() != null))
         }

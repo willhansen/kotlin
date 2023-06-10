@@ -1,19 +1,19 @@
 import kotlin.reflect.KProperty
 
-class Delegate<T>(var value: T) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = value
+class Delegate<T>(var konstue: T) {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): T = konstue
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, newValue: T) {
-        value = newValue
+        konstue = newValue
     }
 }
 
-class DelegateProvider<T>(val value: T) {
-    operator fun provideDelegate(thisRef: Any?, property: KProperty<*>): Delegate<T> = Delegate(value)
+class DelegateProvider<T>(konst konstue: T) {
+    operator fun provideDelegate(thisRef: Any?, property: KProperty<*>): Delegate<T> = Delegate(konstue)
 }
 
-fun <T> delegate(value: T): DelegateProvider<T> = DelegateProvider(value)
+fun <T> delegate(konstue: T): DelegateProvider<T> = DelegateProvider(konstue)
 
 class A {
-    val x by delegate(1)
+    konst x by delegate(1)
 }

@@ -4,7 +4,7 @@
 
 // FILE: VeryBase.kt
 open class VeryBase {
-    val some = "FAIL"
+    konst some = "FAIL"
 }
 
 // FILE: Base.java
@@ -20,9 +20,9 @@ public class Base extends VeryBase {
 class Derived : Base()
 
 fun box(): String {
-    val first = Derived().some
+    konst first = Derived().some
     if (first != "OK") return first
-    val d = Derived()
+    konst d = Derived()
     if (d::some.get() != "OK") return d::some.get()
     d.some = "12"
     if (d.foo() != "12") return "Error writing: ${d.foo()}"

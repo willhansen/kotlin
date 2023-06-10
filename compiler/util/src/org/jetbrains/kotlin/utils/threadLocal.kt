@@ -11,8 +11,8 @@ import kotlin.reflect.KProperty
 
 fun <T> threadLocal(initializer: () -> T): ReadWriteProperty<Any?, T> = ThreadLocalDelegate(initializer)
 
-private class ThreadLocalDelegate<T>(private val initializer: () -> T) : ReadWriteProperty<Any?, T> {
-    private val map = ConcurrentHashMap<Thread, T>()
+private class ThreadLocalDelegate<T>(private konst initializer: () -> T) : ReadWriteProperty<Any?, T> {
+    private konst map = ConcurrentHashMap<Thread, T>()
 
     override operator fun getValue(thisRef: Any?, property: KProperty<*>): T {
         return map.getOrPut(Thread.currentThread()) {
@@ -20,10 +20,10 @@ private class ThreadLocalDelegate<T>(private val initializer: () -> T) : ReadWri
         }
     }
 
-    override operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        map[Thread.currentThread()] = value
+    override operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: T) {
+        map[Thread.currentThread()] = konstue
     }
 
     override fun toString(): String =
-        "ThreadLocalDelegate(${map.entries.joinToString { "#${it.key.id}=>${it.value}" }})"
+        "ThreadLocalDelegate(${map.entries.joinToString { "#${it.key.id}=>${it.konstue}" }})"
 }

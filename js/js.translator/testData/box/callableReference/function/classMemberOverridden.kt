@@ -10,8 +10,8 @@ class B : A() {
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     var ref = A::foo
-    val result = ref(b, "1", "2")
+    konst result = ref(b, "1", "2")
     return (if (result == "fooB:12") "OK" else result)
 }

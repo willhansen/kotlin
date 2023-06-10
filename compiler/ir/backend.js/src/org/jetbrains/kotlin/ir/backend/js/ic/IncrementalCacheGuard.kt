@@ -10,11 +10,11 @@ import java.io.File
 class IncrementalCacheGuard(cacheDir: String) {
     enum class AcquireStatus { OK, CACHE_CLEARED }
 
-    private val cacheRoot = File(cacheDir)
-    private val guardFile = cacheRoot.resolve("cache.guard")
+    private konst cacheRoot = File(cacheDir)
+    private konst guardFile = cacheRoot.resolve("cache.guard")
 
     fun acquire(): AcquireStatus {
-        val cacheCleared = guardFile.exists()
+        konst cacheCleared = guardFile.exists()
         if (cacheCleared) {
             cacheRoot.deleteRecursively()
         }

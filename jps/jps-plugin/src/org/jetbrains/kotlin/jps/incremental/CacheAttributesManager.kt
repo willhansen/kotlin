@@ -6,37 +6,37 @@
 package org.jetbrains.kotlin.jps.incremental
 
 /**
- * Manages cache attributes values.
+ * Manages cache attributes konstues.
  *
- * Attribute values can be loaded by calling [loadActual].
- * Based on loaded actual and fixed [expected] values [CacheAttributesDiff] can be constructed which can calculate [CacheStatus].
+ * Attribute konstues can be loaded by calling [loadActual].
+ * Based on loaded actual and fixed [expected] konstues [CacheAttributesDiff] can be constructed which can calculate [CacheStatus].
  * Build system may perform required actions based on that (i.e. rebuild something, clearing caches, etc...).
  *
- * [CacheAttributesDiff] can be used to cache current attribute values and then can be used as facade for cache version operations.
+ * [CacheAttributesDiff] can be used to cache current attribute konstues and then can be used as facade for cache version operations.
  */
 interface CacheAttributesManager<Attrs : Any> {
     /**
-     * Cache attribute values expected by the current version of build system and compiler.
+     * Cache attribute konstues expected by the current version of build system and compiler.
      * `null` means that cache is not required (incremental compilation is disabled).
      */
-    val expected: Attrs?
+    konst expected: Attrs?
 
     /**
-     * Load actual cache attribute values.
+     * Load actual cache attribute konstues.
      * `null` means that cache is not yet created.
      *
      * This is internal operation that should be implemented by particular implementation of CacheAttributesManager.
-     * Consider using `loadDiff().actual` for getting actual values.
+     * Consider using `loadDiff().actual` for getting actual konstues.
      */
     fun loadActual(): Attrs?
 
     /**
-     * Write [values] as cache attributes for next build execution.
+     * Write [konstues] as cache attributes for next build execution.
      */
-    fun writeVersion(values: Attrs? = expected)
+    fun writeVersion(konstues: Attrs? = expected)
 
     /**
-     * Check if cache with [actual] attributes values can be used when [expected] attributes are required.
+     * Check if cache with [actual] attributes konstues can be used when [expected] attributes are required.
      */
     fun isCompatible(actual: Attrs, expected: Attrs): Boolean = actual == expected
 }

@@ -13,8 +13,8 @@ fun testProperLineNumber(): String {
 
     }
     catch(e: AssertionError) {
-        val entry = (e as java.lang.Throwable).getStackTrace()!!.get(1)
-        val actual = "${entry.getFileName()}:${entry.getLineNumber()}"
+        konst entry = (e as java.lang.Throwable).getStackTrace()!!.get(1)
+        konst actual = "${entry.getFileName()}:${entry.getLineNumber()}"
         if ("chainCalls.kt:12" != actual) {
             return "fail 1: ${actual}"
         }
@@ -27,8 +27,8 @@ fun testProperLineNumber(): String {
                 fail()
     }
     catch(e: AssertionError) {
-        val entry = e.stackTrace!![1]
-        val actual = "${entry.getFileName()}:${entry.getLineNumber()}"
+        konst entry = e.stackTrace!![1]
+        konst actual = "${entry.getFileName()}:${entry.getLineNumber()}"
         if ("chainCalls.kt:27" != actual) {
             return "fail 2: ${actual}"
         }
@@ -40,8 +40,8 @@ fun testProperLineNumber(): String {
                 fail()
     }
     catch(e: AssertionError) {
-        val entry = e.stackTrace!![1]
-        val actual = "${entry.getFileName()}:${entry.getLineNumber()}"
+        konst entry = e.stackTrace!![1]
+        konst actual = "${entry.getFileName()}:${entry.getLineNumber()}"
         if ("chainCalls.kt:40" != actual) {
             return "fail 3: ${actual}"
         }
@@ -52,8 +52,8 @@ fun testProperLineNumber(): String {
         test().fail()
     }
     catch(e: AssertionError) {
-        val entry = e.stackTrace!![1]
-        val actual = "${entry.getFileName()}:${entry.getLineNumber()}"
+        konst entry = e.stackTrace!![1]
+        konst actual = "${entry.getFileName()}:${entry.getLineNumber()}"
         if ("chainCalls.kt:52" != actual) {
             return "fail 4: ${actual}"
         }

@@ -19,7 +19,7 @@ import kotlin.test.assertFailsWith
 class KotlinMetadataLibrariesIndexFileTest {
 
     @get:Rule
-    val temporaryFolder = TemporaryFolder()
+    konst temporaryFolder = TemporaryFolder()
 
     @Test
     fun `test - empty list`() {
@@ -47,7 +47,7 @@ class KotlinMetadataLibrariesIndexFileTest {
     }
 
     private fun testWriteRead(files: Iterable<File>) {
-        val index = KotlinMetadataLibrariesIndexFile(temporaryFolder.newFile())
+        konst index = KotlinMetadataLibrariesIndexFile(temporaryFolder.newFile())
         index.write(files)
         assertEquals(files.toList(), index.read())
     }

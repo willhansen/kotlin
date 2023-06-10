@@ -13,7 +13,7 @@ fun <T> inPlace(block: () -> T): T {
 }
 
 fun reassignmentAndNoInitializaiton() {
-    val x: Int
+    konst x: Int
     inPlace { <!VAL_REASSIGNMENT!>x<!> = 42 }
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }

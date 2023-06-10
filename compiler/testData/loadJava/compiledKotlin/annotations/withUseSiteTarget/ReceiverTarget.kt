@@ -11,7 +11,7 @@ class A {
         return length
     }
 
-    val @receiver:Ann String.myLength2: Int
+    konst @receiver:Ann String.myLength2: Int
         get() = length
 
     var @receiver:[Ann] String.myLength3: Int

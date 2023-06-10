@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Wrapper(val id: Int)
+konstue class Wrapper(konst id: Int)
 
-class DMap(private val map: Map<Wrapper, String>) :
+class DMap(private konst map: Map<Wrapper, String>) :
         Map<Wrapper, String> by map
 
 fun box(): String {
-    val dmap = DMap(mutableMapOf(Wrapper(42) to "OK"))
+    konst dmap = DMap(mutableMapOf(Wrapper(42) to "OK"))
     return dmap[Wrapper(42)] ?: "Fail"
 }

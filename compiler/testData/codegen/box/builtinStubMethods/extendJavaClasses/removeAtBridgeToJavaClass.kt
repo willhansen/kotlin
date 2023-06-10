@@ -7,7 +7,7 @@
 class Test : IntArrayList()
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     t.add(1)
     try {
         t.removeAt(0)

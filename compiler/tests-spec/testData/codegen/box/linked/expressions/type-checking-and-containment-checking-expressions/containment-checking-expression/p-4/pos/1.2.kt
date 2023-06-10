@@ -12,8 +12,8 @@
  * DESCRIPTION:  A in B is exactly the same as B.contains(A);
  */
 
-class A(val a: Set<Any>) {
-    var isEvaluated: Boolean = false
+class A(konst a: Set<Any>) {
+    var isEkonstuated: Boolean = false
     var isChecked = false
     operator fun contains(other: Any): Boolean = run {
         isChecked = true
@@ -21,7 +21,7 @@ class A(val a: Set<Any>) {
     }
 
     fun foo(): A {
-        this.isEvaluated = true
+        this.isEkonstuated = true
         return this
     }
 }
@@ -32,11 +32,11 @@ fun throwException(b: Boolean): Boolean {
 }
 
 fun box(): String {
-    val b = A(mutableSetOf(1, 3, false, 2, "azaza"))
+    konst b = A(mutableSetOf(1, 3, false, 2, "azaza"))
     try {
-       val k = (throwException(true) !in b.foo())
+       konst k = (throwException(true) !in b.foo())
     } catch (e: Exception) {
-        if (!b.isChecked && b.isEvaluated)
+        if (!b.isChecked && b.isEkonstuated)
             return "OK"
     }
     return "NOK"

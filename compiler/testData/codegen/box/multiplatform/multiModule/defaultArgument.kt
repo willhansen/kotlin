@@ -41,7 +41,7 @@ actual class Test {
 // FILE: u.kt
 
 fun foo(): String {
-    val t = Test()
+    konst t = Test()
     t.lastIndex(0)
     return t.result()
 }

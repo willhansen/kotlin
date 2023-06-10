@@ -62,28 +62,28 @@ class ContainerBuilderTest {
         "entries.iterator().next().setValue(v)" to { entries.iterator().next().setValue(v) }
     )
 
-    private fun <E> emptyCollectionOperations(value: E) = listOf<Pair<String, MutableCollection<E>.() -> Unit>> (
-        "add(value)"               to { add(value) },
+    private fun <E> emptyCollectionOperations(konstue: E) = listOf<Pair<String, MutableCollection<E>.() -> Unit>> (
+        "add(konstue)"               to { add(konstue) },
 
-        "addAll(listOf(value))"    to { addAll(listOf(value)) },
+        "addAll(listOf(konstue))"    to { addAll(listOf(konstue)) },
         "addAll(emptyList())"      to { addAll(emptyList()) },
 
-        "remove(value)"            to { remove(value) },
+        "remove(konstue)"            to { remove(konstue) },
 
-        "removeAll(listOf(value))" to { removeAll(listOf(value)) },
+        "removeAll(listOf(konstue))" to { removeAll(listOf(konstue)) },
         "removeAll(emptyList())"   to { removeAll(emptyList()) },
 
-        "retainAll(listOf(value))" to { retainAll(listOf(value)) },
+        "retainAll(listOf(konstue))" to { retainAll(listOf(konstue)) },
         "retailAll(emptyList())"   to { retainAll(emptyList()) },
 
         "clear()"                  to { clear() }
     )
 
-    private fun <E> emptyListOperations(value: E) = emptyCollectionOperations(value) + listOf<Pair<String, MutableList<E>.() -> Unit>>(
-        "add(0, value)"             to { add(0, value) },
-        "addAll(0, listOf(value))"  to { addAll(0, listOf(value)) },
+    private fun <E> emptyListOperations(konstue: E) = emptyCollectionOperations(konstue) + listOf<Pair<String, MutableList<E>.() -> Unit>>(
+        "add(0, konstue)"             to { add(0, konstue) },
+        "addAll(0, listOf(konstue))"  to { addAll(0, listOf(konstue)) },
         "addAll(0, emptyList())"    to { addAll(0, emptyList()) },
-        "listIterator().add(value)" to { listIterator().add(value) }
+        "listIterator().add(konstue)" to { listIterator().add(konstue) }
     )
 
     private fun <K, V> emptyMapOperations(k: K, v: V) = listOf<Pair<String, MutableMap<K, V>.() -> Unit>>(
@@ -96,14 +96,14 @@ class ContainerBuilderTest {
 
     @Test
     fun buildList() {
-        val x = buildList {
+        konst x = buildList {
             add('b')
             add('c')
         }
 
-        val subList: MutableList<Char>
+        konst subList: MutableList<Char>
 
-        val y = buildList<Char>(4) {
+        konst y = buildList<Char>(4) {
             add('a')
             addAll(x)
             add('d')
@@ -130,7 +130,7 @@ class ContainerBuilderTest {
 
     @Test
     fun buildEmptyList() {
-        val empty = buildList<Int> {}
+        konst empty = buildList<Int> {}
         assertSame(empty, buildList {})
         assertTrue(empty is MutableList<Int>)
         for ((fName, operation) in emptyListOperations(0)) {
@@ -149,7 +149,7 @@ class ContainerBuilderTest {
         buildList<Char> {
             addAll(listOf('a', 'b', 'c', 'd', 'e'))
 
-            val subList = subList(1, 4)
+            konst subList = subList(1, 4)
             compare(listOf('a', 'b', 'c', 'd', 'e'), this) { listBehavior() }
             compare(listOf('b', 'c', 'd'), subList) { listBehavior() }
 
@@ -165,12 +165,12 @@ class ContainerBuilderTest {
             compare(listOf('a', 'b', '1', '2', '3', 'e'), this) { listBehavior() }
             compare(listOf('b', '1', '2', '3'), subList) { listBehavior() }
 
-            val subSubList = subList.subList(2, 4)
+            konst subSubList = subList.subList(2, 4)
             // buffer reallocation should happen
             repeat(20) { subSubList.add('x') }
             repeat(20) { subSubList.add(subSubList.size - 2 * it, 'y') }
 
-            val addedChars = "xy".repeat(20)
+            konst addedChars = "xy".repeat(20)
             compare("ab123${addedChars}e".toList(), this) { listBehavior() }
             compare("b123$addedChars".toList(), subList) { listBehavior() }
             compare("23$addedChars".toList(), subSubList) { listBehavior() }
@@ -179,12 +179,12 @@ class ContainerBuilderTest {
 
     @Test
     fun buildSet() {
-        val x = buildSet {
+        konst x = buildSet {
             add('b')
             add('c')
         }
 
-        val y = buildSet(4) {
+        konst y = buildSet(4) {
             add('c')
             addAll(x)
             add('d')
@@ -205,7 +205,7 @@ class ContainerBuilderTest {
 
     @Test
     fun buildEmptySet() {
-        val empty = buildSet<Int> {}
+        konst empty = buildSet<Int> {}
         assertSame(empty, buildSet {})
         assertTrue(empty is MutableSet<Int>)
         for ((fName, operation) in emptyCollectionOperations(0)) {
@@ -221,12 +221,12 @@ class ContainerBuilderTest {
 
     @Test
     fun buildMap() {
-        val x = buildMap<Char, Int> {
+        konst x = buildMap<Char, Int> {
             put('b', 2)
             put('c', 3)
         }
 
-        val y = buildMap<Char, Int>(4) {
+        konst y = buildMap<Char, Int>(4) {
             put('a', 1)
             put('c', 0)
             putAll(x)
@@ -248,12 +248,12 @@ class ContainerBuilderTest {
             assertFailsWith<UnsupportedOperationException>("y.keys.$fName") { y.keys.operation() }
         }
         for ((fName, operation) in mutableCollectionOperations(1, 10)) {
-            assertFailsWith<UnsupportedOperationException>("y.values.$fName") { y.values.operation() }
+            assertFailsWith<UnsupportedOperationException>("y.konstues.$fName") { y.konstues.operation() }
         }
-        val presentEntry = y.entries.first()
-        val absentEntry: MutableMap.MutableEntry<Char, Int> = object : MutableMap.MutableEntry<Char, Int> {
-            override val key: Char get() = 'x'
-            override val value: Int get() = 10
+        konst presentEntry = y.entries.first()
+        konst absentEntry: MutableMap.MutableEntry<Char, Int> = object : MutableMap.MutableEntry<Char, Int> {
+            override konst key: Char get() = 'x'
+            override konst konstue: Int get() = 10
             override fun setValue(newValue: Int): Int = fail("Unreachable")
         }
         for ((fName, operation) in mutableSetOperations(presentEntry, absentEntry)) {
@@ -263,7 +263,7 @@ class ContainerBuilderTest {
 
     @Test
     fun testBuildEmptyMap() {
-        val empty = buildMap<Char, Int> {}
+        konst empty = buildMap<Char, Int> {}
         assertSame(empty, buildMap {})
         assertTrue(empty is MutableMap<Char, Int>)
         for ((fName, operation) in emptyMapOperations('0', 0)) {

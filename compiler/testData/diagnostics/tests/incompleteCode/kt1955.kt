@@ -4,4 +4,4 @@
 package b
 
 fun foo() {
-    val a = 1<!SYNTAX!><!>
+    konst a = 1<!SYNTAX!><!>

@@ -13,7 +13,7 @@ object ResultOperation : Operation<Result<Int>> {
 
 // FILE: main.kt
 fun box(): String {
-    val x = ResultOperation.performOperation()
+    konst x = ResultOperation.performOperation()
     if ("$x" != "Success(1)") return "$x"
     return "OK"
 }

@@ -5,23 +5,23 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(private val x: T) {
+konstue class Z<T: Int>(private konst x: T) {
     companion object {
-        val xref = Z<Int>::x
+        konst xref = Z<Int>::x
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(private val x: T) {
+konstue class L<T: Long>(private konst x: T) {
     companion object {
-        val xref = L<Long>::x
+        konst xref = L<Long>::x
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(private val x: T) {
+konstue class S<T: String>(private konst x: T) {
     companion object {
-        val xref = S<String>::x
+        konst xref = S<String>::x
     }
 }
 

@@ -11,7 +11,7 @@ expect class Foo(a: String, b: Int = 0, c: Double? = null)
 import kotlin.test.assertEquals
 
 actual class Foo actual constructor(a: String, b: Int, c: Double?) {
-    val result: String = a + "," + b + "," + c
+    konst result: String = a + "," + b + "," + c
 }
 
 fun box(): String {

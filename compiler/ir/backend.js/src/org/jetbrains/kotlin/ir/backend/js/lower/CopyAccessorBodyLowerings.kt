@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.ir.util.deepCopyWithSymbols
 
 // Copies property accessors and initializers so that the PropertyAccessorInilineLowering may access them safely.
-class CopyAccessorBodyLowerings(private val context: CommonBackendContext) : DeclarationTransformer {
+class CopyAccessorBodyLowerings(private konst context: CommonBackendContext) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration is IrSimpleFunction && declaration.correspondingPropertySymbol != null) {
             declaration.body?.let { originalBody ->

@@ -7,7 +7,7 @@ inline fun bar(): Int {
     return 10
 }
 
-val x: Int
+konst x: Int
     get() {
         log("x")
         return 1

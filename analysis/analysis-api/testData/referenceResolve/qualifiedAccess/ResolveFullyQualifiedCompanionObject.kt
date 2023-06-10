@@ -8,6 +8,6 @@ class AA {
 }
 
 fun test() {
-    val b = foo.bar.baz.AA.B<caret>B
+    konst b = foo.bar.baz.AA.B<caret>B
 }
 

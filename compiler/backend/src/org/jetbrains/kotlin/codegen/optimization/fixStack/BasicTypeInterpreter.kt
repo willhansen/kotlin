@@ -68,7 +68,7 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
             BIPUSH, SIPUSH ->
                 intValue()
             LDC -> {
-                when (val cst = (insn as LdcInsnNode).cst) {
+                when (konst cst = (insn as LdcInsnNode).cst) {
                     is Int -> intValue()
                     is Float -> floatValue()
                     is Long -> longValue()
@@ -87,7 +87,7 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
                 throw IllegalArgumentException("Unexpected instruction: " + insn.insnOpcodeText)
         }
 
-    override fun binaryOperation(insn: AbstractInsnNode, value1: V, value2: V): V? =
+    override fun binaryOperation(insn: AbstractInsnNode, konstue1: V, konstue2: V): V? =
         when (insn.opcode) {
             IALOAD, BALOAD, CALOAD, SALOAD, IADD, ISUB, IMUL, IDIV, IREM, ISHL, ISHR, IUSHR, IAND, IOR, IXOR ->
                 intValue()
@@ -98,7 +98,7 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
             DALOAD, DADD, DSUB, DMUL, DDIV, DREM ->
                 doubleValue()
             AALOAD ->
-                aaLoadValue(value1)
+                aaLoadValue(konstue1)
             LCMP, FCMPL, FCMPG, DCMPL, DCMPG ->
                 intValue()
             IF_ICMPEQ, IF_ICMPNE, IF_ICMPLT, IF_ICMPGE, IF_ICMPGT, IF_ICMPLE, IF_ACMPEQ, IF_ACMPNE, PUTFIELD ->
@@ -107,10 +107,10 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
                 throw IllegalArgumentException("Unexpected instruction: " + insn.insnOpcodeText)
         }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, value1: V, value2: V, value3: V): V? =
+    override fun ternaryOperation(insn: AbstractInsnNode, konstue1: V, konstue2: V, konstue3: V): V? =
         null
 
-    override fun naryOperation(insn: AbstractInsnNode, values: List<V>): V? =
+    override fun naryOperation(insn: AbstractInsnNode, konstues: List<V>): V? =
         when (insn.opcode) {
             MULTIANEWARRAY ->
                 newValue(Type.getType((insn as MultiANewArrayInsnNode).desc))
@@ -120,10 +120,10 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
                 newValue(Type.getReturnType((insn as MethodInsnNode).desc))
         }
 
-    override fun returnOperation(insn: AbstractInsnNode, value: V?, expected: V?) {
+    override fun returnOperation(insn: AbstractInsnNode, konstue: V?, expected: V?) {
     }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: V): V? =
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: V): V? =
         when (insn.opcode) {
             INEG, IINC, L2I, F2I, D2I, I2B, I2C, I2S ->
                 intValue()
@@ -147,7 +147,7 @@ abstract class BasicTypeInterpreter<V : Value> : Interpreter<V>(API_VERSION) {
                     T_FLOAT -> newValue(Type.getType("[F"))
                     T_DOUBLE -> newValue(Type.getType("[D"))
                     T_LONG -> newValue(Type.getType("[J"))
-                    else -> throw AnalyzerException(insn, "Invalid array type")
+                    else -> throw AnalyzerException(insn, "Inkonstid array type")
                 }
             ANEWARRAY ->
                 newValue(Type.getType("[" + Type.getObjectType((insn as TypeInsnNode).desc)))

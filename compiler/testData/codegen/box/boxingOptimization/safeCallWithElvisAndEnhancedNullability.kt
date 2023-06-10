@@ -14,9 +14,9 @@ fun checkLeftAssoc(a : A?) : Int {
 }
 
 fun box() : String {
-    val a1 = A(2, A(1, null))
-    val a2 = A(2, null)
-    val a3 = null
+    konst a1 = A(2, A(1, null))
+    konst a2 = A(2, null)
+    konst a3 = null
 
     assertEquals(1, check(a1))
     assertEquals(2, check(a2))

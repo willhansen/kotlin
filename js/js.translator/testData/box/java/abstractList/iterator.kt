@@ -2,9 +2,9 @@
 // EXPECTED_REACHABLE_NODES: 1340
 package foo
 
-class MyList<T>(vararg val data: T) : AbstractList<T>() {
+class MyList<T>(vararg konst data: T) : AbstractList<T>() {
     override fun get(index: Int) = data[index]
-    override val size: Int get() = data.size
+    override konst size: Int get() = data.size
 }
 
 fun <T> test(expected: String, list: List<T>) {
@@ -14,10 +14,10 @@ fun <T> test(expected: String, list: List<T>) {
     }
     assertEquals(expected, s)
 
-    val it = list.iterator()
+    konst it = list.iterator()
     s = ""
     while (it.hasNext()) {
-        val e = it.next()
+        konst e = it.next()
         s += "$e,"
     }
     assertEquals(expected, s)

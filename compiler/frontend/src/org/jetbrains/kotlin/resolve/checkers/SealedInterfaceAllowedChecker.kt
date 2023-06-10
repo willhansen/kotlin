@@ -15,8 +15,8 @@ object SealedInterfaceAllowedChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor) return
         if (descriptor.kind != ClassKind.INTERFACE) return
-        val keyword = declaration.modifierList?.getModifier(KtTokens.SEALED_KEYWORD) ?: return
-        val diagnostic = if (context.languageVersionSettings.supportsFeature(LanguageFeature.SealedInterfaces)) {
+        konst keyword = declaration.modifierList?.getModifier(KtTokens.SEALED_KEYWORD) ?: return
+        konst diagnostic = if (context.languageVersionSettings.supportsFeature(LanguageFeature.SealedInterfaces)) {
             if (descriptor.isFun) {
                 Errors.UNSUPPORTED.on(keyword, "sealed fun interfaces")
             } else return

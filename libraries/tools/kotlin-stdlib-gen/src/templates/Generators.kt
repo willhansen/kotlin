@@ -19,7 +19,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_plusElement = fn("plusElement(element: T)") {
+    konst f_plusElement = fn("plusElement(element: T)") {
         include(Iterables, Collections, Sets, Sequences)
     } builder {
         inlineOnly()
@@ -44,7 +44,7 @@ object Generators : TemplateGroupBase() {
         body { "return plus(element)" }
     }
 
-    val f_plus = fn("plus(element: T)") {
+    konst f_plus = fn("plus(element: T)") {
         include(Iterables, Collections, Sets, Sequences)
     } builder {
         operator(true)
@@ -55,7 +55,7 @@ object Generators : TemplateGroupBase() {
         body {
             """
             if (this is Collection) return this.plus(element)
-            val result = ArrayList<T>()
+            konst result = ArrayList<T>()
             result.addAll(this)
             result.add(element)
             return result
@@ -63,7 +63,7 @@ object Generators : TemplateGroupBase() {
         }
         body(Collections) {
             """
-            val result = ArrayList<T>(size + 1)
+            konst result = ArrayList<T>(size + 1)
             result.addAll(this)
             result.add(element)
             return result
@@ -81,7 +81,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(mapCapacity(size + 1))
+                konst result = LinkedHashSet<T>(mapCapacity(size + 1))
                 result.addAll(this)
                 result.add(element)
                 return result
@@ -99,7 +99,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_plus_iterable = fn("plus(elements: Iterable<T>)") {
+    konst f_plus_iterable = fn("plus(elements: Iterable<T>)") {
         include(Iterables, Collections, Sets, Sequences)
     } builder {
         operator(true)
@@ -110,7 +110,7 @@ object Generators : TemplateGroupBase() {
         body {
             """
             if (this is Collection) return this.plus(elements)
-            val result = ArrayList<T>()
+            konst result = ArrayList<T>()
             result.addAll(this)
             result.addAll(elements)
             return result
@@ -119,12 +119,12 @@ object Generators : TemplateGroupBase() {
         body(Collections) {
             """
             if (elements is Collection) {
-                val result = ArrayList<T>(this.size + elements.size)
+                konst result = ArrayList<T>(this.size + elements.size)
                 result.addAll(this)
                 result.addAll(elements)
                 return result
             } else {
-                val result = ArrayList<T>(this)
+                konst result = ArrayList<T>(this)
                 result.addAll(elements)
                 return result
             }
@@ -141,7 +141,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(mapCapacity(elements.collectionSizeOrNull()?.let { this.size + it } ?: this.size * 2))
+                konst result = LinkedHashSet<T>(mapCapacity(elements.collectionSizeOrNull()?.let { this.size + it } ?: this.size * 2))
                 result.addAll(this)
                 result.addAll(elements)
                 return result
@@ -167,7 +167,7 @@ object Generators : TemplateGroupBase() {
 
     }
 
-    val f_plus_array = fn("plus(elements: Array<out T>)") {
+    konst f_plus_array = fn("plus(elements: Array<out T>)") {
         include(Iterables, Collections, Sets, Sequences)
     } builder {
         operator(true)
@@ -178,7 +178,7 @@ object Generators : TemplateGroupBase() {
         body {
             """
             if (this is Collection) return this.plus(elements)
-            val result = ArrayList<T>()
+            konst result = ArrayList<T>()
             result.addAll(this)
             result.addAll(elements)
             return result
@@ -186,7 +186,7 @@ object Generators : TemplateGroupBase() {
         }
         body(Collections) {
             """
-            val result = ArrayList<T>(this.size + elements.size)
+            konst result = ArrayList<T>(this.size + elements.size)
             result.addAll(this)
             result.addAll(elements)
             return result
@@ -203,7 +203,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(mapCapacity(this.size + elements.size))
+                konst result = LinkedHashSet<T>(mapCapacity(this.size + elements.size))
                 result.addAll(this)
                 result.addAll(elements)
                 return result
@@ -229,7 +229,7 @@ object Generators : TemplateGroupBase() {
     }
 
 
-    val f_plus_sequence = fn("plus(elements: Sequence<T>)") {
+    konst f_plus_sequence = fn("plus(elements: Sequence<T>)") {
         include(Iterables, Sets, Sequences, Collections)
     } builder {
         operator(true)
@@ -239,7 +239,7 @@ object Generators : TemplateGroupBase() {
         specialFor(Sets, Sequences) { returns("SELF") }
         body {
             """
-            val result = ArrayList<T>()
+            konst result = ArrayList<T>()
             result.addAll(this)
             result.addAll(elements)
             return result
@@ -247,7 +247,7 @@ object Generators : TemplateGroupBase() {
         }
         body(Collections) {
             """
-            val result = ArrayList<T>(this.size + 10)
+            konst result = ArrayList<T>(this.size + 10)
             result.addAll(this)
             result.addAll(elements)
             return result
@@ -266,7 +266,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(mapCapacity(this.size * 2))
+                konst result = LinkedHashSet<T>(mapCapacity(this.size * 2))
                 result.addAll(this)
                 result.addAll(elements)
                 return result
@@ -292,7 +292,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_minusElement = fn("minusElement(element: T)") {
+    konst f_minusElement = fn("minusElement(element: T)") {
         include(Iterables, Sets, Sequences)
     } builder {
         inline(Inline.Only)
@@ -317,7 +317,7 @@ object Generators : TemplateGroupBase() {
         body { "return minus(element)" }
     }
 
-    val f_minus = fn("minus(element: T)") {
+    konst f_minus = fn("minus(element: T)") {
         include(Iterables, Sets, Sequences)
     } builder {
         operator(true)
@@ -326,7 +326,7 @@ object Generators : TemplateGroupBase() {
         returns("List<T>")
         body {
             """
-            val result = ArrayList<T>(collectionSizeOrDefault(10))
+            konst result = ArrayList<T>(collectionSizeOrDefault(10))
             var removed = false
             return this.filterTo(result) { if (!removed && it == element) { removed = true; false } else true }
             """
@@ -343,7 +343,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(mapCapacity(size))
+                konst result = LinkedHashSet<T>(mapCapacity(size))
                 var removed = false
                 return this.filterTo(result) { if (!removed && it == element) { removed = true; false } else true }
                 """
@@ -367,7 +367,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_minus_iterable = fn("minus(elements: Iterable<T>)") {
+    konst f_minus_iterable = fn("minus(elements: Iterable<T>)") {
         include(Iterables, Sets, Sequences)
     } builder {
         operator(true)
@@ -377,7 +377,7 @@ object Generators : TemplateGroupBase() {
         specialFor(Sets, Sequences) { returns("SELF") }
         body {
             """
-            val other = elements.convertToListIfNotCollection()
+            konst other = elements.convertToListIfNotCollection()
             if (other.isEmpty())
                 return this.toList()
 
@@ -395,13 +395,13 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val other = elements.convertToListIfNotCollection()
+                konst other = elements.convertToListIfNotCollection()
                 if (other.isEmpty())
                     return this.toSet()
                 if (other is Set)
                     return this.filterNotTo(LinkedHashSet<T>()) { it in other }
 
-                val result = LinkedHashSet<T>(this)
+                konst result = LinkedHashSet<T>(this)
                 result.removeAll(other)
                 return result
                 """
@@ -422,7 +422,7 @@ object Generators : TemplateGroupBase() {
                 """
                 return object: Sequence<T> {
                     override fun iterator(): Iterator<T> {
-                        val other = elements.convertToListIfNotCollection()
+                        konst other = elements.convertToListIfNotCollection()
                         if (other.isEmpty())
                             return this@minus.iterator()
                         else
@@ -435,7 +435,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_minus_array = fn("minus(elements: Array<out T>)") {
+    konst f_minus_array = fn("minus(elements: Array<out T>)") {
         include(Iterables, Sets, Sequences)
     } builder {
         operator(true)
@@ -459,7 +459,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(this)
+                konst result = LinkedHashSet<T>(this)
                 result.removeAll(elements)
                 return result
                 """
@@ -489,7 +489,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_minus_sequence = fn("minus(elements: Sequence<T>)") {
+    konst f_minus_sequence = fn("minus(elements: Sequence<T>)") {
         include(Iterables, Sets, Sequences)
     } builder {
         operator(true)
@@ -499,7 +499,7 @@ object Generators : TemplateGroupBase() {
         specialFor(Sets, Sequences) { returns("SELF") }
         body {
             """
-            val other = elements.toList()
+            konst other = elements.toList()
             if (other.isEmpty())
                 return this.toList()
 
@@ -516,7 +516,7 @@ object Generators : TemplateGroupBase() {
             }
             body {
                 """
-                val result = LinkedHashSet<T>(this)
+                konst result = LinkedHashSet<T>(this)
                 result.removeAll(elements)
                 return result
                 """
@@ -538,7 +538,7 @@ object Generators : TemplateGroupBase() {
                 """
                 return object: Sequence<T> {
                     override fun iterator(): Iterator<T> {
-                        val other = elements.toList()
+                        konst other = elements.toList()
                         if (other.isEmpty())
                             return this@minus.iterator()
                         else
@@ -550,7 +550,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_partition = fn("partition(predicate: (T) -> Boolean)") {
+    konst f_partition = fn("partition(predicate: (T) -> Boolean)") {
         includeDefault()
         include(CharSequences, Strings)
     } builder {
@@ -573,8 +573,8 @@ object Generators : TemplateGroupBase() {
         returns("Pair<List<T>, List<T>>")
         body {
             """
-            val first = ArrayList<T>()
-            val second = ArrayList<T>()
+            konst first = ArrayList<T>()
+            konst second = ArrayList<T>()
             for (element in this) {
                 if (predicate(element)) {
                     first.add(element)
@@ -597,10 +597,10 @@ object Generators : TemplateGroupBase() {
             returns("Pair<SELF, SELF>")
         }
         body(CharSequences, Strings) {
-            val toString = if (f == Strings) ".toString()" else ""
+            konst toString = if (f == Strings) ".toString()" else ""
             """
-            val first = StringBuilder()
-            val second = StringBuilder()
+            konst first = StringBuilder()
+            konst second = StringBuilder()
             for (element in this) {
                 if (predicate(element)) {
                     first.append(element)
@@ -613,7 +613,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_windowed_transform = fn("windowed(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (List<T>) -> R)") {
+    konst f_windowed_transform = fn("windowed(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (List<T>) -> R)") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -623,7 +623,7 @@ object Generators : TemplateGroupBase() {
             an each ${f.viewResult} representing a view over the window of the given [size]
             sliding along this ${f.collection} with the given [step].
 
-            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is valid only inside that function.
+            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is konstid only inside that function.
             You should not store it or allow it to escape in some way, unless you made a snapshot of it.
             Several last ${f.viewResult.pluralize()} may have fewer ${f.element.pluralize()} than the given [size].
 
@@ -643,13 +643,13 @@ object Generators : TemplateGroupBase() {
             """
             checkWindowSizeStep(size, step)
             if (this is RandomAccess && this is List) {
-                val thisSize = this.size
-                val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-                val result = ArrayList<R>(resultCapacity)
-                val window = MovingSubList(this)
+                konst thisSize = this.size
+                konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+                konst result = ArrayList<R>(resultCapacity)
+                konst window = MovingSubList(this)
                 var index = 0
                 while (index in 0 until thisSize) {
-                    val windowSize = size.coerceAtMost(thisSize - index)
+                    konst windowSize = size.coerceAtMost(thisSize - index)
                     if (!partialWindows && windowSize < size) break
                     window.move(index, index + windowSize)
                     result.add(transform(window))
@@ -657,7 +657,7 @@ object Generators : TemplateGroupBase() {
                 }
                 return result
             }
-            val result = ArrayList<R>()
+            konst result = ArrayList<R>()
             windowedIterator(iterator(), size, step, partialWindows, reuseBuffer = true).forEach {
                 result.add(transform(it))
             }
@@ -671,13 +671,13 @@ object Generators : TemplateGroupBase() {
         body(CharSequences) {
             """
             checkWindowSizeStep(size, step)
-            val thisSize = this.length
-            val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-            val result = ArrayList<R>(resultCapacity)
+            konst thisSize = this.length
+            konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+            konst result = ArrayList<R>(resultCapacity)
             var index = 0
             while (index in 0 until thisSize) {
-                val end = index + size
-                val coercedEnd = if (end < 0 || end > thisSize) { if (partialWindows) thisSize else break } else end
+                konst end = index + size
+                konst coercedEnd = if (end < 0 || end > thisSize) { if (partialWindows) thisSize else break } else end
                 result.add(transform(subSequence(index, coercedEnd)))
                 index += step
             }
@@ -693,7 +693,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_windowed = fn("windowed(size: Int, step: Int = 1, partialWindows: Boolean = false)") {
+    konst f_windowed = fn("windowed(size: Int, step: Int = 1, partialWindows: Boolean = false)") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -722,19 +722,19 @@ object Generators : TemplateGroupBase() {
             """
             checkWindowSizeStep(size, step)
             if (this is RandomAccess && this is List) {
-                val thisSize = this.size
-                val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-                val result = ArrayList<List<T>>(resultCapacity)
+                konst thisSize = this.size
+                konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+                konst result = ArrayList<List<T>>(resultCapacity)
                 var index = 0
                 while (index in 0 until thisSize) {
-                    val windowSize = size.coerceAtMost(thisSize - index)
+                    konst windowSize = size.coerceAtMost(thisSize - index)
                     if (windowSize < size && !partialWindows) break
                     result.add(List(windowSize) { this[it + index] })
                     index += step
                 }
                 return result
             }
-            val result = ArrayList<List<T>>()
+            konst result = ArrayList<List<T>>()
             windowedIterator(iterator(), size, step, partialWindows, reuseBuffer = false).forEach {
                 result.add(it)
             }
@@ -749,7 +749,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_windowedSequence_transform = fn("windowedSequence(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (CharSequence) -> R)") {
+    konst f_windowedSequence_transform = fn("windowedSequence(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (CharSequence) -> R)") {
         include(CharSequences)
     } builder {
         since("1.2")
@@ -759,7 +759,7 @@ object Generators : TemplateGroupBase() {
             an each ${f.viewResult} representing a view over the window of the given [size]
             sliding along this ${f.collection} with the given [step].
 
-            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is valid only inside that function.
+            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is konstid only inside that function.
             You should not store it or allow it to escape in some way, unless you made a snapshot of it.
             Several last ${f.viewResult.pluralize()} may have fewer ${f.element.pluralize()} than the given [size].
 
@@ -777,17 +777,17 @@ object Generators : TemplateGroupBase() {
         body {
             """
             checkWindowSizeStep(size, step)
-            val windows = (if (partialWindows) indices else 0 until length - size + 1) step step
+            konst windows = (if (partialWindows) indices else 0 until length - size + 1) step step
             return windows.asSequence().map { index ->
-                val end = index + size
-                val coercedEnd = if (end < 0 || end > length) length else end
+                konst end = index + size
+                konst coercedEnd = if (end < 0 || end > length) length else end
                 transform(subSequence(index, coercedEnd))
             }
             """
         }
     }
 
-    val f_windowedSequence = fn("windowedSequence(size: Int, step: Int = 1, partialWindows: Boolean = false)") {
+    konst f_windowedSequence = fn("windowedSequence(size: Int, step: Int = 1, partialWindows: Boolean = false)") {
         include(CharSequences)
     } builder {
         since("1.2")
@@ -812,7 +812,7 @@ object Generators : TemplateGroupBase() {
         body(CharSequences) { "return windowedSequence(size, step, partialWindows) { it.toString() }" }
     }
 
-    val f_chunked_transform = fn("chunked(size: Int, transform: (List<T>) -> R)") {
+    konst f_chunked_transform = fn("chunked(size: Int, transform: (List<T>) -> R)") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -823,7 +823,7 @@ object Generators : TemplateGroupBase() {
 
             @return ${f.mapResult} of results of the [transform] applied to an each ${f.viewResult}.
 
-            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is valid only inside that function.
+            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is konstid only inside that function.
             You should not store it or allow it to escape in some way, unless you made a snapshot of it.
             The last ${f.viewResult} may have fewer ${f.element.pluralize()} than the given [size].
 
@@ -844,7 +844,7 @@ object Generators : TemplateGroupBase() {
         body { "return windowed(size, size, partialWindows = true, transform = transform)" }
     }
 
-    val f_chunked = fn("chunked(size: Int)") {
+    konst f_chunked = fn("chunked(size: Int)") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -868,7 +868,7 @@ object Generators : TemplateGroupBase() {
         body { "return windowed(size, size, partialWindows = true)" }
     }
 
-    val f_chunkedSequence_transform = fn("chunkedSequence(size: Int, transform: (CharSequence) -> R)") {
+    konst f_chunkedSequence_transform = fn("chunkedSequence(size: Int, transform: (CharSequence) -> R)") {
         include(CharSequences)
     } builder {
         since("1.2")
@@ -879,7 +879,7 @@ object Generators : TemplateGroupBase() {
 
             @return sequence of results of the [transform] applied to an each ${f.viewResult}.
 
-            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is valid only inside that function.
+            Note that the ${f.viewResult} passed to the [transform] function is ephemeral and is konstid only inside that function.
             You should not store it or allow it to escape in some way, unless you made a snapshot of it.
             The last ${f.viewResult} may have fewer ${f.element.pluralize()} than the given [size].
 
@@ -898,7 +898,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_chunkedSequence = fn("chunkedSequence(size: Int)") {
+    konst f_chunkedSequence = fn("chunkedSequence(size: Int)") {
         include(CharSequences)
     } builder {
         since("1.2")
@@ -917,7 +917,7 @@ object Generators : TemplateGroupBase() {
         body(CharSequences) { "return chunkedSequence(size) { it.toString() }" }
     }
 
-    val f_zipWithNext_transform = fn("zipWithNext(transform: (a: T, b: T) -> R)") {
+    konst f_zipWithNext_transform = fn("zipWithNext(transform: (a: T, b: T) -> R)") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -935,12 +935,12 @@ object Generators : TemplateGroupBase() {
         inline()
         body {
             """
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext()) return emptyList()
-            val result = mutableListOf<R>()
+            konst result = mutableListOf<R>()
             var current = iterator.next()
             while (iterator.hasNext()) {
-                val next = iterator.next()
+                konst next = iterator.next()
                 result.add(transform(current, next))
                 current = next
             }
@@ -949,9 +949,9 @@ object Generators : TemplateGroupBase() {
         }
         body(CharSequences) {
             """
-            val size = ${f.code.size} - 1
+            konst size = ${f.code.size} - 1
             if (size < 1) return emptyList()
-            val result = ArrayList<R>(size)
+            konst result = ArrayList<R>(size)
             for (index in 0 until size) {
                 result.add(transform(this[index], this[index + 1]))
             }
@@ -966,11 +966,11 @@ object Generators : TemplateGroupBase() {
         body(Sequences) {
             """
             return sequence result@ {
-                val iterator = iterator()
+                konst iterator = iterator()
                 if (!iterator.hasNext()) return@result
                 var current = iterator.next()
                 while (iterator.hasNext()) {
-                    val next = iterator.next()
+                    konst next = iterator.next()
                     yield(transform(current, next))
                     current = next
                 }
@@ -979,7 +979,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zipWithNext = fn("zipWithNext()") {
+    konst f_zipWithNext = fn("zipWithNext()") {
         include(Iterables, Sequences, CharSequences)
     } builder {
         since("1.2")
@@ -999,7 +999,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_transform = fn("zip(other: Iterable<R>, transform: (a: T, b: R) -> V)") {
+    konst f_zip_transform = fn("zip(other: Iterable<R>, transform: (a: T, b: R) -> V)") {
         include(Iterables, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -1007,7 +1007,7 @@ object Generators : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list of values built from the elements of `this` ${f.collection} and the [other] collection with the same index
+            Returns a list of konstues built from the elements of `this` ${f.collection} and the [other] collection with the same index
             using the provided [transform] function applied to each pair of elements.
             The returned list has length of the shortest collection.
             """
@@ -1018,9 +1018,9 @@ object Generators : TemplateGroupBase() {
         returns("List<V>")
         body {
             """
-            val first = iterator()
-            val second = other.iterator()
-            val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
+            konst first = iterator()
+            konst second = other.iterator()
+            konst list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
             while (first.hasNext() && second.hasNext()) {
                 list.add(transform(first.next(), second.next()))
             }
@@ -1029,8 +1029,8 @@ object Generators : TemplateGroupBase() {
         }
         body(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned) {
             """
-            val arraySize = size
-            val list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
+            konst arraySize = size
+            konst list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
             var i = 0
             for (element in other) {
                 if (i >= arraySize) break
@@ -1041,7 +1041,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_array_transform = fn("zip(other: Array<out R>, transform: (a: T, b: R) -> V)") {
+    konst f_zip_array_transform = fn("zip(other: Array<out R>, transform: (a: T, b: R) -> V)") {
         include(Iterables, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -1049,7 +1049,7 @@ object Generators : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list of values built from the elements of `this` ${f.collection} and the [other] array with the same index
+            Returns a list of konstues built from the elements of `this` ${f.collection} and the [other] array with the same index
             using the provided [transform] function applied to each pair of elements.
             The returned list has length of the shortest collection.
             """
@@ -1060,8 +1060,8 @@ object Generators : TemplateGroupBase() {
         returns("List<V>")
         body {
             """
-            val arraySize = other.size
-            val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), arraySize))
+            konst arraySize = other.size
+            konst list = ArrayList<V>(minOf(collectionSizeOrDefault(10), arraySize))
             var i = 0
             for (element in this) {
                 if (i >= arraySize) break
@@ -1072,8 +1072,8 @@ object Generators : TemplateGroupBase() {
         }
         body(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned) {
             """
-            val size = minOf(size, other.size)
-            val list = ArrayList<V>(size)
+            konst size = minOf(size, other.size)
+            konst list = ArrayList<V>(size)
             for (i in 0 until size) {
                 list.add(transform(this[i], other[i]))
             }
@@ -1083,7 +1083,7 @@ object Generators : TemplateGroupBase() {
 
     }
 
-    val f_zip_sameArray_transform = fn("zip(other: SELF, transform: (a: T, b: T) -> V)") {
+    konst f_zip_sameArray_transform = fn("zip(other: SELF, transform: (a: T, b: T) -> V)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -1091,7 +1091,7 @@ object Generators : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list of values built from the elements of `this` array and the [other] array with the same index
+            Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
             using the provided [transform] function applied to each pair of elements.
             The returned list has length of the shortest array.
             """
@@ -1101,8 +1101,8 @@ object Generators : TemplateGroupBase() {
         returns("List<V>")
         body {
             """
-            val size = minOf(size, other.size)
-            val list = ArrayList<V>(size)
+            konst size = minOf(size, other.size)
+            konst list = ArrayList<V>(size)
             for (i in 0 until size) {
                 list.add(transform(this[i], other[i]))
             }
@@ -1111,12 +1111,12 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_sequence_transform = fn("zip(other: Sequence<R>, transform: (a: T, b: R) -> V)") {
+    konst f_zip_sequence_transform = fn("zip(other: Sequence<R>, transform: (a: T, b: R) -> V)") {
         include(Sequences)
     } builder {
         doc {
             """
-            Returns a sequence of values built from the elements of `this` sequence and the [other] sequence with the same index
+            Returns a sequence of konstues built from the elements of `this` sequence and the [other] sequence with the same index
             using the provided [transform] function applied to each pair of elements.
             The resulting sequence ends as soon as the shortest input sequence ends.
             """
@@ -1133,12 +1133,12 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_charSequence_transform = fn("zip(other: CharSequence, transform: (a: Char, b: Char) -> V)") {
+    konst f_zip_charSequence_transform = fn("zip(other: CharSequence, transform: (a: Char, b: Char) -> V)") {
         include(CharSequences)
     } builder {
         doc {
             """
-            Returns a list of values built from the characters of `this` and the [other] char sequences with the same index
+            Returns a list of konstues built from the characters of `this` and the [other] char sequences with the same index
             using the provided [transform] function applied to each pair of characters.
             The returned list has length of the shortest char sequence.
             """
@@ -1149,9 +1149,9 @@ object Generators : TemplateGroupBase() {
         inline()
         body {
             """
-            val length = minOf(this.length, other.length)
+            konst length = minOf(this.length, other.length)
 
-            val list = ArrayList<V>(length)
+            konst list = ArrayList<V>(length)
             for (i in 0 until length) {
                 list.add(transform(this[i], other[i]))
             }
@@ -1161,7 +1161,7 @@ object Generators : TemplateGroupBase() {
     }
 
 
-    val f_zip = fn("zip(other: Iterable<R>)") {
+    konst f_zip = fn("zip(other: Iterable<R>)") {
         include(Iterables, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         infix(true)
@@ -1181,7 +1181,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_charSequence = fn("zip(other: CharSequence)") {
+    konst f_zip_charSequence = fn("zip(other: CharSequence)") {
         include(CharSequences)
     } builder {
         infix(true)
@@ -1200,7 +1200,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_array = fn("zip(other: Array<out R>)") {
+    konst f_zip_array = fn("zip(other: Array<out R>)") {
         include(Iterables, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         infix(true)
@@ -1220,7 +1220,7 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_sameArray = fn("zip(other: SELF)") {
+    konst f_zip_sameArray = fn("zip(other: SELF)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         infix(true)
@@ -1239,13 +1239,13 @@ object Generators : TemplateGroupBase() {
         }
     }
 
-    val f_zip_sequence = fn("zip(other: Sequence<R>)") {
+    konst f_zip_sequence = fn("zip(other: Sequence<R>)") {
         include(Sequences)
     } builder {
         infix(true)
         doc {
             """
-            Returns a sequence of values built from the elements of `this` sequence and the [other] sequence with the same index.
+            Returns a sequence of konstues built from the elements of `this` sequence and the [other] sequence with the same index.
             The resulting sequence ends as soon as the shortest input sequence ends.
             """
         }
@@ -1262,13 +1262,13 @@ object Generators : TemplateGroupBase() {
 
     // documentation helpers
 
-    private val Family.snapshotResult: String
+    private konst Family.snapshotResult: String
         get() = when (this) {
             CharSequences, Strings -> "string"
             else -> "list"
         }
 
-    private val Family.viewResult: String
+    private konst Family.viewResult: String
         get() = when (this) {
             CharSequences, Strings -> "char sequence"
             else -> "list"

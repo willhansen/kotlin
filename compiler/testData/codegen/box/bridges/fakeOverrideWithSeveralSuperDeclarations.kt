@@ -15,12 +15,12 @@ open class D4 {
 class F5 : F3, D4()
 
 fun box(): String {
-    val z = F5()
+    konst z = F5()
     var result = z.foo()
-    val d4: D4 = z
-    val f3: F3 = z
-    val d2: D2 = z
-    val d1: D1 = z
+    konst d4: D4 = z
+    konst f3: F3 = z
+    konst d2: D2 = z
+    konst d1: D1 = z
 
     result += d4.foo()
     result += f3.foo() as Int

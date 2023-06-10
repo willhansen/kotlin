@@ -9,7 +9,7 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 42
+        public const final konst I: kotlin.Int = 42
     }
 
     public open class y {
@@ -19,7 +19,7 @@ package a {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val I: kotlin.Int = 42
+        public const final konst I: kotlin.Int = 42
     }
 }
 
@@ -32,7 +32,7 @@ package b {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val CONST: kotlin.Int
+        public const final konst CONST: kotlin.Int
     }
 
     public open class t1 {
@@ -42,6 +42,6 @@ package b {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val CONST: kotlin.Int = 42
+        public const final konst CONST: kotlin.Int = 42
     }
 }

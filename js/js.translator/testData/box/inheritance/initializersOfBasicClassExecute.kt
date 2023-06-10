@@ -10,6 +10,6 @@ class B() : A() {
 }
 
 fun box(): String {
-    val a = B().a
+    konst a = B().a
     return if (a == 3) "OK" else "Fail, a = $a"
 }

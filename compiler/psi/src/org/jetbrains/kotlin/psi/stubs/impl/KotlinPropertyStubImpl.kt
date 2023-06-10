@@ -27,16 +27,16 @@ import org.jetbrains.kotlin.constant.ConstantValue
 
 class KotlinPropertyStubImpl(
     parent: StubElement<out PsiElement>?,
-    private val name: StringRef?,
-    private val isVar: Boolean,
-    private val isTopLevel: Boolean,
-    private val hasDelegate: Boolean,
-    private val hasDelegateExpression: Boolean,
-    private val hasInitializer: Boolean,
-    private val isExtension: Boolean,
-    private val hasReturnTypeRef: Boolean,
-    private val fqName: FqName?,
-    val constantInitializer: ConstantValue<*>?
+    private konst name: StringRef?,
+    private konst isVar: Boolean,
+    private konst isTopLevel: Boolean,
+    private konst hasDelegate: Boolean,
+    private konst hasDelegateExpression: Boolean,
+    private konst hasInitializer: Boolean,
+    private konst isExtension: Boolean,
+    private konst hasReturnTypeRef: Boolean,
+    private konst fqName: FqName?,
+    konst constantInitializer: ConstantValue<*>?
 ) : KotlinStubBaseImpl<KtProperty>(parent, KtStubElementTypes.PROPERTY), KotlinPropertyStub {
 
     init {

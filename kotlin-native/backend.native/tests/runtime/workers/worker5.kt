@@ -9,8 +9,8 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 fun runTest0() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { "zzz" }) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { "zzz" }) {
         input -> input.length
     }
     future.consume {
@@ -23,7 +23,7 @@ fun runTest0() {
 var done = false
 
 fun runTest1() {
-    val worker = Worker.current
+    konst worker = Worker.current
     done = false
     // Here we request execution of the operation on the current worker.
     worker.executeAfter(0, {
@@ -35,8 +35,8 @@ fun runTest1() {
 
 // Ensure that termination of current worker on main thread doesn't lead to problems.
 fun runTest2() {
-    val worker = Worker.current
-    val future = worker.requestTermination(false)
+    konst worker = Worker.current
+    konst future = worker.requestTermination(false)
     worker.processQueue()
     assertEquals(future.state, FutureState.COMPUTED)
     future.consume {}

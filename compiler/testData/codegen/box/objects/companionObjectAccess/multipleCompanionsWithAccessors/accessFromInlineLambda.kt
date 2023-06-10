@@ -32,5 +32,5 @@ import b.B
 inline fun runStr(fn: () -> String) = fn()
 
 class C : B() {
-    val test = { runStr { getO() + getK() } }
+    konst test = { runStr { getO() + getK() } }
 }

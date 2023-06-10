@@ -26,7 +26,7 @@ public fun Any?.toString(): String = this?.toString() ?: "null"
 public operator fun String?.plus(other: Any?): String = (this ?: "null") + other.toString()
 
 /**
- * Returns an array of objects of the given type with the given [size], initialized with null values.
+ * Returns an array of objects of the given type with the given [size], initialized with null konstues.
  */
 // TODO: Should T be reified?
 @Suppress("REIFIED_TYPE_PARAMETER_NO_INLINE")
@@ -74,7 +74,7 @@ public inline fun shortArrayOf(vararg elements: Short): ShortArray = elements
 public inline fun byteArrayOf(vararg elements: Byte): ByteArray = elements
 
 /**
- * Returns an array containing the specified boolean values.
+ * Returns an array containing the specified boolean konstues.
  */
 public inline fun booleanArrayOf(vararg elements: Boolean): BooleanArray = elements
 

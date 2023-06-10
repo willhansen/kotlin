@@ -48,19 +48,19 @@ interface Fe10AnalysisFacade {
 
 class Fe10AnalysisContext(
     facade: Fe10AnalysisFacade,
-    val contextElement: KtElement,
-    val token: KtLifetimeToken
+    konst contextElement: KtElement,
+    konst token: KtLifetimeToken
 ) : Fe10AnalysisFacade by facade {
-    val resolveSession: ResolveSession = getResolveSession(contextElement)
-    val deprecationResolver: DeprecationResolver = getDeprecationResolver(contextElement)
-    val callResolver: CallResolver = getCallResolver(contextElement)
-    val kotlinToResolvedCallTransformer: KotlinToResolvedCallTransformer = getKotlinToResolvedCallTransformer(contextElement)
-    val overloadingConflictResolver: OverloadingConflictResolver<ResolvedCall<*>> = getOverloadingConflictResolver(contextElement)
-    val kotlinTypeRefiner: KotlinTypeRefiner = getKotlinTypeRefiner(contextElement)
+    konst resolveSession: ResolveSession = getResolveSession(contextElement)
+    konst deprecationResolver: DeprecationResolver = getDeprecationResolver(contextElement)
+    konst callResolver: CallResolver = getCallResolver(contextElement)
+    konst kotlinToResolvedCallTransformer: KotlinToResolvedCallTransformer = getKotlinToResolvedCallTransformer(contextElement)
+    konst overloadingConflictResolver: OverloadingConflictResolver<ResolvedCall<*>> = getOverloadingConflictResolver(contextElement)
+    konst kotlinTypeRefiner: KotlinTypeRefiner = getKotlinTypeRefiner(contextElement)
 
-    val builtIns: KotlinBuiltIns
+    konst builtIns: KotlinBuiltIns
         get() = resolveSession.moduleDescriptor.builtIns
 
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
         get() = resolveSession.languageVersionSettings
 }

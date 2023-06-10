@@ -14,7 +14,7 @@ fun builder(c: suspend () -> Unit) {
 
 suspend fun runS(fn: suspend (String) -> String) = fn("O")
 
-val lambda: (String) -> String = { it + "K" }
+konst lambda: (String) -> String = { it + "K" }
 
 fun box(): String {
     var test = "Failed"

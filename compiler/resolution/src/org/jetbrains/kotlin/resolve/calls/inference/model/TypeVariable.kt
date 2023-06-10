@@ -31,9 +31,9 @@ import org.jetbrains.kotlin.types.model.TypeVariableTypeConstructorMarker
 
 
 class TypeVariableTypeConstructor(
-    private val builtIns: KotlinBuiltIns,
-    val debugName: String,
-    override val originalTypeParameter: TypeParameterDescriptor?
+    private konst builtIns: KotlinBuiltIns,
+    konst debugName: String,
+    override konst originalTypeParameter: TypeParameterDescriptor?
 ) : NewTypeVariableConstructor, TypeVariableTypeConstructorMarker {
     override fun getParameters(): List<TypeParameterDescriptor> = emptyList()
     override fun getSupertypes(): Collection<KotlinType> = emptyList()
@@ -56,11 +56,11 @@ sealed class NewTypeVariable(
     name: String,
     originalTypeParameter: TypeParameterDescriptor? = null
 ) : TypeVariableMarker {
-    val freshTypeConstructor = TypeVariableTypeConstructor(builtIns, name, originalTypeParameter)
+    konst freshTypeConstructor = TypeVariableTypeConstructor(builtIns, name, originalTypeParameter)
 
     // member scope is used if we have receiver with type TypeVariable(T)
     // todo add to member scope methods from supertypes for type variable
-    val defaultType: SimpleType = freshTypeConstructor.typeForTypeVariable()
+    konst defaultType: SimpleType = freshTypeConstructor.typeForTypeVariable()
     abstract fun hasOnlyInputTypesAnnotation(): Boolean
 
     override fun toString() = freshTypeConstructor.toString()
@@ -75,7 +75,7 @@ fun TypeConstructor.typeForTypeVariable(): SimpleType {
 }
 
 class TypeVariableFromCallableDescriptor(
-    val originalTypeParameter: TypeParameterDescriptor
+    konst originalTypeParameter: TypeParameterDescriptor
 ) : NewTypeVariable(originalTypeParameter.builtIns, originalTypeParameter.name.identifier, originalTypeParameter) {
     override fun hasOnlyInputTypesAnnotation(): Boolean = originalTypeParameter.hasOnlyInputTypesAnnotation()
 }
@@ -88,8 +88,8 @@ class TypeVariableForLambdaReturnType(
 }
 
 class TypeVariableForLambdaParameterType(
-    val atom: PostponableKotlinCallArgument,
-    val index: Int,
+    konst atom: PostponableKotlinCallArgument,
+    konst index: Int,
     builtIns: KotlinBuiltIns,
     name: String
 ) : NewTypeVariable(builtIns, name) {

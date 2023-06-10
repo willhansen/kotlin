@@ -26,7 +26,7 @@ KtFile: simple.kt
                     REFERENCE_EXPRESSION
                       PsiElement(IDENTIFIER)('Ann')
           PsiWhiteSpace(' ')
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
           PsiElement(COLON)(':')
           PsiWhiteSpace(' ')
           TYPE_REFERENCE
@@ -68,7 +68,7 @@ KtFile: simple.kt
                         PsiElement(IDENTIFIER)('Ann2')
               PsiElement(RBRACKET)(']')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('n')
           PsiElement(COLON)(':')

@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 
 public sealed class DeclarationBuildingContext<T : FirDeclaration>(
-    protected val session: FirSession,
-    protected val key: GeneratedDeclarationKey,
-    protected val owner: FirClassSymbol<*>?
+    protected konst session: FirSession,
+    protected konst key: GeneratedDeclarationKey,
+    protected konst owner: FirClassSymbol<*>?
 ) {
     /**
      * Allows to set visibility of the declaration
@@ -89,11 +89,11 @@ public sealed class DeclarationBuildingContext<T : FirDeclaration>(
             boundProviders += typeProvider
         }
 
-        internal val boundProviders: MutableList<(List<FirTypeParameterRef>) -> ConeKotlinType> = mutableListOf()
+        internal konst boundProviders: MutableList<(List<FirTypeParameterRef>) -> ConeKotlinType> = mutableListOf()
     }
 
 
-    private val contextReceiverTypeProviders: MutableList<(List<FirTypeParameterRef>) -> ConeKotlinType> = mutableListOf()
+    private konst contextReceiverTypeProviders: MutableList<(List<FirTypeParameterRef>) -> ConeKotlinType> = mutableListOf()
 
     /**
      * Adds context receiver with [type] type to declaration
@@ -117,16 +117,16 @@ public sealed class DeclarationBuildingContext<T : FirDeclaration>(
     }
 
     protected data class TypeParameterData(
-        val name: Name,
-        val variance: Variance,
-        val isReified: Boolean,
-        val boundProviders: List<(List<FirTypeParameterRef>) -> ConeKotlinType>,
-        val key: GeneratedDeclarationKey
+        konst name: Name,
+        konst variance: Variance,
+        konst isReified: Boolean,
+        konst boundProviders: List<(List<FirTypeParameterRef>) -> ConeKotlinType>,
+        konst key: GeneratedDeclarationKey
     )
 
-    protected val typeParameters: MutableList<TypeParameterData> = mutableListOf()
+    protected konst typeParameters: MutableList<TypeParameterData> = mutableListOf()
 
-    private val statusConfigs: MutableList<FirResolvedDeclarationStatusImpl.() -> Unit> = mutableListOf()
+    private konst statusConfigs: MutableList<FirResolvedDeclarationStatusImpl.() -> Unit> = mutableListOf()
 
     public abstract fun build(): T
 
@@ -160,8 +160,8 @@ public sealed class DeclarationBuildingContext<T : FirDeclaration>(
 
     protected fun initTypeParameterBounds(allParameters: List<FirTypeParameterRef>, ownTypeParameters: List<FirTypeParameter>) {
         for ((typeParameter, data) in ownTypeParameters.zip(typeParameters)) {
-            val coneBounds = data.boundProviders.map { it.invoke(allParameters) }
-            val bounds = if (coneBounds.isEmpty()) {
+            konst coneBounds = data.boundProviders.map { it.invoke(allParameters) }
+            konst bounds = if (coneBounds.isEmpty()) {
                 listOf(session.builtinTypes.nullableAnyType)
             } else {
                 coneBounds.map { it.toFirResolvedTypeRef() }

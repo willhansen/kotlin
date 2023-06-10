@@ -1,5 +1,5 @@
 package b
 
 class B {
-    val x = a.X
+    konst x = a.X
 }

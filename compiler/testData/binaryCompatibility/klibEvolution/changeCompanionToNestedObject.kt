@@ -10,7 +10,7 @@ class X {
     fun foo() = "with companion"
 
     companion object : N() {
-        val qux = "this is in companion object"
+        konst qux = "this is in companion object"
     }
 }
 
@@ -25,7 +25,7 @@ class X {
     fun foo() = "without companion"
 
     object Companion : N() {
-        val qux = "this is in object"
+        konst qux = "this is in object"
     }
 
 }

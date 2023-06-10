@@ -12,17 +12,17 @@ kotlin {
     @Suppress("DEPRECATION_ERROR")
     mingwX86("windowsX86")
 
-    val commonMain by sourceSets.getting
-    val iosMain by sourceSets.creating
-    val linuxMain by sourceSets.creating
-    val windowsMain by sourceSets.creating
+    konst commonMain by sourceSets.getting
+    konst iosMain by sourceSets.creating
+    konst linuxMain by sourceSets.creating
+    konst windowsMain by sourceSets.creating
 
-    val iosX64Main by sourceSets.getting
-    val iosArm32Main by sourceSets.getting
-    val linuxX64Main by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
-    val windowsX64Main by sourceSets.getting
-    val windowsX86Main by sourceSets.getting
+    konst iosX64Main by sourceSets.getting
+    konst iosArm32Main by sourceSets.getting
+    konst linuxX64Main by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
+    konst windowsX64Main by sourceSets.getting
+    konst windowsX86Main by sourceSets.getting
 
     iosMain.dependsOn(commonMain)
     linuxMain.dependsOn(commonMain)

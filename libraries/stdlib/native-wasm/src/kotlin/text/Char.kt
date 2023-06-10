@@ -16,7 +16,7 @@ public actual fun Char.isDefined(): Boolean {
     if (this < '\u0080') {
         return true
     }
-    return getCategoryValue() != CharCategory.UNASSIGNED.value
+    return getCategoryValue() != CharCategory.UNASSIGNED.konstue
 }
 
 /**
@@ -129,7 +129,7 @@ public actual fun Char.isTitleCase(): Boolean {
     if (this < '\u0080') {
         return false
     }
-    return getCategoryValue() == CharCategory.TITLECASE_LETTER.value
+    return getCategoryValue() == CharCategory.TITLECASE_LETTER.konstue
 }
 
 /**
@@ -144,7 +144,7 @@ public actual fun Char.toUpperCase(): Char = uppercaseCharImpl()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [uppercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.uppercase
  */
@@ -178,7 +178,7 @@ public actual fun Char.toLowerCase(): Char = lowercaseCharImpl()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [lowercase] function.
- * If this character has no mapping equivalent, the character itself is returned.
+ * If this character has no mapping equikonstent, the character itself is returned.
  *
  * @sample samples.text.Chars.lowercase
  */
@@ -205,7 +205,7 @@ public actual fun Char.lowercase(): String = lowercaseImpl()
  *
  * This function performs one-to-one character mapping.
  * To support one-to-many character mapping use the [titlecase] function.
- * If this character has no mapping equivalent, the result of calling [uppercaseChar] is returned.
+ * If this character has no mapping equikonstent, the result of calling [uppercaseChar] is returned.
  *
  * @sample samples.text.Chars.titlecase
  */
@@ -215,17 +215,17 @@ public actual fun Char.titlecaseChar(): Char = titlecaseCharImpl()
 /**
  * Returns the Unicode general category of this character.
  */
-public actual val Char.category: CharCategory
-    get() = CharCategory.valueOf(getCategoryValue())
+public actual konst Char.category: CharCategory
+    get() = CharCategory.konstueOf(getCategoryValue())
 
 /**
- * Checks whether the given [radix] is valid radix for string to number and number to string conversion.
+ * Checks whether the given [radix] is konstid radix for string to number and number to string conversion.
  */
 @PublishedApi
 @Suppress("DEPRECATION")
 internal actual fun checkRadix(radix: Int): Int {
     if(radix !in Char.MIN_RADIX..Char.MAX_RADIX) {
-        throw IllegalArgumentException("radix $radix was not in valid range ${Char.MIN_RADIX..Char.MAX_RADIX}")
+        throw IllegalArgumentException("radix $radix was not in konstid range ${Char.MIN_RADIX..Char.MAX_RADIX}")
     }
     return radix
 }

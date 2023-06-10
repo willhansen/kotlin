@@ -8,18 +8,18 @@ package org.jetbrains.kotlin.fir.scopes.impl
 import org.jetbrains.kotlin.name.Name
 
 object ConvertibleIntegerOperators {
-    val binaryOperatorsNames: Set<Name> = listOf(
+    konst binaryOperatorsNames: Set<Name> = listOf(
         "plus", "minus", "times", "div", "rem",
         "and", "or", "xor",
         "shl", "shr", "ushr"
     ).toNameSet()
 
     // Constant conversion for those unary operators works only for signed integers
-    val unaryOperatorNames: Set<Name> = listOf(
+    konst unaryOperatorNames: Set<Name> = listOf(
         "inv", "unaryPlus", "unaryMinus"
     ).toNameSet()
 
-    val binaryOperatorsWithSignedArgument: Set<Name> = listOf(
+    konst binaryOperatorsWithSignedArgument: Set<Name> = listOf(
         "shl", "shr", "ushr",
     ).toNameSet()
 

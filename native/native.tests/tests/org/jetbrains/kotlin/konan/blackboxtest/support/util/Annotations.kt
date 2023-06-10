@@ -8,11 +8,11 @@ package org.jetbrains.kotlin.konan.blackboxtest.support.util
 /**
  * Since Kotlin annotations are not inherited (see KT-22265), we need a utility to collect all of them.
  */
-internal val Class<*>.allInheritedAnnotations: List<Annotation>
+internal konst Class<*>.allInheritedAnnotations: List<Annotation>
     get() {
-        val annotations = mutableListOf<Annotation>()
+        konst annotations = mutableListOf<Annotation>()
 
-        val processedClasses = hashSetOf<Class<*>>()
+        konst processedClasses = hashSetOf<Class<*>>()
         fun process(clazz: Class<*>) {
             if (processedClasses.add(clazz)) {
                 clazz.declaredAnnotations.mapNotNullTo(annotations) { annotation ->

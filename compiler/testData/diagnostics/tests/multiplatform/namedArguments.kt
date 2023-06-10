@@ -12,7 +12,7 @@ expect fun f2(xxx: Int)
 
 fun testCommon() {
     Foo(zzz = 0)
-    val f = Foo(aaa = true)
+    konst f = Foo(aaa = true)
     f.f1(xxx = "")
     f2(xxx = 42)
 }
@@ -20,7 +20,7 @@ fun testCommon() {
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt
 
-actual class Foo actual constructor(val aaa: Boolean) {
+actual class Foo actual constructor(konst aaa: Boolean) {
     actual constructor(zzz: Int) : this(zzz == 0)
 
     actual fun f1(xxx: String) = xxx
@@ -30,7 +30,7 @@ actual fun f2(xxx: Int) {}
 
 fun testPlatform() {
     Foo(zzz = 0)
-    val f = Foo(aaa = true)
+    konst f = Foo(aaa = true)
     f.f1(xxx = "")
     f2(xxx = 42)
 }

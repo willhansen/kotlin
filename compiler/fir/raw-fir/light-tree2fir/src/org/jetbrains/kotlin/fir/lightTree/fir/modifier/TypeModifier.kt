@@ -5,6 +5,6 @@
 
 package org.jetbrains.kotlin.fir.lightTree.fir.modifier
 
-class TypeModifier(suspendModifier: Long = ModifierFlag.NONE.value) : Modifier(suspendModifier) {
+class TypeModifier(suspendModifier: Long = ModifierFlag.NONE.konstue) : Modifier(suspendModifier) {
     fun hasNoAnnotations(): Boolean = annotations.isEmpty()
 }

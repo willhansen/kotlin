@@ -7,12 +7,12 @@ FILE fqName:<root> fileName:/primaryCtorProperties.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:test1 visibility:public modality:FINAL [val]
+    PROPERTY name:test1 visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:test1 type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'test1: kotlin.Int declared in <root>.C.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test1> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:test1 visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:test1 visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-test1> (): kotlin.Int declared in <root>.C'
@@ -36,7 +36,7 @@ FILE fqName:<root> fileName:/primaryCtorProperties.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test2 type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.C declared in <root>.C.<set-test2>' type=<root>.C origin=null
-            value: GET_VAR '<set-?>: kotlin.Int declared in <root>.C.<set-test2>' type=kotlin.Int origin=null
+            konstue: GET_VAR '<set-?>: kotlin.Int declared in <root>.C.<set-test2>' type=kotlin.Int origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

@@ -16,15 +16,15 @@ import kotlin.test.assertEquals
 class KT57023CompileTaskDescriptionsTest {
     @Test
     fun `test - description of compile tasks`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.linuxX64()
         kotlin.linuxArm64()
         kotlin.jvm()
         kotlin.js(KotlinJsCompilerType.IR)
         kotlin.targetHierarchy.default()
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             "Compiles the kotlin sources in compilation 'commonMain' in target 'metadata' to Metadata.",

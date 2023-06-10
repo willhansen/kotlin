@@ -15,8 +15,8 @@ abstract class GradleKpmVariantWithRuntimeInternal(
     dependencyConfigurations: GradleKpmFragmentDependencyConfigurations,
     compileDependencyConfiguration: Configuration,
     apiElementsConfiguration: Configuration,
-    final override val runtimeDependenciesConfiguration: Configuration,
-    final override val runtimeElementsConfiguration: Configuration
+    final override konst runtimeDependenciesConfiguration: Configuration,
+    final override konst runtimeElementsConfiguration: Configuration
 ) : GradleKpmVariantInternal(
     containingModule = containingModule,
     fragmentName = fragmentName,
@@ -28,6 +28,6 @@ abstract class GradleKpmVariantWithRuntimeInternal(
 
     override var runtimeDependencyFiles: FileCollection = project.files(runtimeDependenciesConfiguration)
 
-    override val runtimeFiles: ConfigurableFileCollection =
+    override konst runtimeFiles: ConfigurableFileCollection =
         project.files(listOf({ compilationOutputs.allOutputs }, { runtimeDependencyFiles }))
 }

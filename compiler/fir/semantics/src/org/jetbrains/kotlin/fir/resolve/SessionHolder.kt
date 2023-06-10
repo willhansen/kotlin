@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.fir.resolve
 import org.jetbrains.kotlin.fir.FirSession
 
 interface SessionHolder {
-    val session: FirSession
-    val scopeSession: ScopeSession
+    konst session: FirSession
+    konst scopeSession: ScopeSession
 }

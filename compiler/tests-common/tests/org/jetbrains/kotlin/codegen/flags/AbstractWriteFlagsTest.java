@@ -88,7 +88,7 @@ public abstract class AbstractWriteFlagsTest extends CodegenTestCase {
                 cr.accept(classVisitor, ClassReader.SKIP_CODE);
             }
 
-            boolean isObjectExists = !Boolean.valueOf(findStringWithPrefixes(testedObject.textData, "// ABSENT: "));
+            boolean isObjectExists = !Boolean.konstueOf(findStringWithPrefixes(testedObject.textData, "// ABSENT: "));
             assertEquals("Wrong object existence state: " + testedObject, isObjectExists, classVisitor.isExists());
 
             if (isObjectExists) {
@@ -128,7 +128,7 @@ public abstract class AbstractWriteFlagsTest extends CodegenTestCase {
             }
             else {
                 throw new IllegalArgumentException(
-                        "TESTED_OBJECTS instruction must contain one (for class), two or three (for function and property) values");
+                        "TESTED_OBJECTS instruction must contain one (for class), two or three (for function and property) konstues");
             }
 
             testObject.kind = findStringWithPrefixes(testData, "// TESTED_OBJECT_KIND: ");
@@ -222,9 +222,9 @@ public abstract class AbstractWriteFlagsTest extends CodegenTestCase {
             for (Field field : Opcodes.class.getDeclaredFields()) {
                 String name = field.getName();
                 if (Modifier.isStatic(field.getModifiers()) && name.startsWith("ACC_")) {
-                    int value = field.getInt(null);
-                    String previous = flagToString.get(value);
-                    flagToString.put(value, previous == null ? name : previous + "/" + name);
+                    int konstue = field.getInt(null);
+                    String previous = flagToString.get(konstue);
+                    flagToString.put(konstue, previous == null ? name : previous + "/" + name);
                 }
             }
         } catch (IllegalAccessException e) {
@@ -287,7 +287,7 @@ public abstract class AbstractWriteFlagsTest extends CodegenTestCase {
         }
 
         @Override
-        public FieldVisitor visitField(int access, @NotNull String name, @NotNull String desc, String signature, Object value) {
+        public FieldVisitor visitField(int access, @NotNull String name, @NotNull String desc, String signature, Object konstue) {
             if (name.equals(propertyName) && (propertySignature == null || propertySignature.equals(desc))) {
                 this.access = access;
                 isExists = true;

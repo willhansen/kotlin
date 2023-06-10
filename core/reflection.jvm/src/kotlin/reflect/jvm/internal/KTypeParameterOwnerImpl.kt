@@ -8,5 +8,5 @@ package kotlin.reflect.jvm.internal
 import kotlin.reflect.KTypeParameter
 
 interface KTypeParameterOwnerImpl {
-    val typeParameters: List<KTypeParameter>
+    konst typeParameters: List<KTypeParameter>
 }

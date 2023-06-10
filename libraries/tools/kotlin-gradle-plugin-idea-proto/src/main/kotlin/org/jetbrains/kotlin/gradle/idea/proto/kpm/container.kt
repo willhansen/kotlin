@@ -8,7 +8,7 @@
 
 package org.jetbrains.kotlin.gradle.idea.proto.kpm
 
-import com.google.protobuf.InvalidProtocolBufferException
+import com.google.protobuf.InkonstidProtocolBufferException
 import org.jetbrains.kotlin.gradle.idea.kpm.IdeaKpmProject
 import org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProto
 import org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto
@@ -32,9 +32,9 @@ fun IdeaKotlinSerializationContext.IdeaKpmProject(stream: InputStream): IdeaKpmP
 }
 
 internal fun <T> IdeaKotlinSerializationContext.IdeaKpmProject(data: T, proto: (T) -> IdeaKpmContainerProto): IdeaKpmProject? {
-    val container = try {
+    konst container = try {
         proto(data)
-    } catch (e: InvalidProtocolBufferException) {
+    } catch (e: InkonstidProtocolBufferException) {
         logger.error("Failed to deserialize IdeaKpmProject", e)
         return null
     }
@@ -75,10 +75,10 @@ internal fun IdeaKotlinSerializationContext.IdeaKpmProject(proto: IdeaKpmContain
         logger.warn("Missing 'schema_version_patch", Throwable())
     }
 
-    val messagesFromFuture = proto.schemaInfosList.filter { schemaInfo ->
-        val sinceMajor = schemaInfo.sinceSchemaVersionMajor
-        val sinceMinor = schemaInfo.sinceSchemaVersionMinor
-        val sincePatch = schemaInfo.sinceSchemaVersionPatch
+    konst messagesFromFuture = proto.schemaInfosList.filter { schemaInfo ->
+        konst sinceMajor = schemaInfo.sinceSchemaVersionMajor
+        konst sinceMinor = schemaInfo.sinceSchemaVersionMinor
+        konst sincePatch = schemaInfo.sinceSchemaVersionPatch
 
         sinceMajor > IdeaKpmProtoSchema.versionMajor ||
                 (sinceMajor == IdeaKpmProtoSchema.versionMajor && IdeaKpmProtoSchema.versionMinor > IdeaKpmProtoSchema.versionMinor) ||
@@ -87,7 +87,7 @@ internal fun IdeaKotlinSerializationContext.IdeaKpmProject(proto: IdeaKpmContain
     }
 
     messagesFromFuture.forEach { messageFromFuture ->
-        val userMessage = "Since: " +
+        konst userMessage = "Since: " +
                 "${messageFromFuture.sinceSchemaVersionMajor}." +
                 "${messageFromFuture.sinceSchemaVersionMinor}." +
                 "${messageFromFuture.sinceSchemaVersionPatch}: " +
@@ -103,9 +103,9 @@ internal fun IdeaKotlinSerializationContext.IdeaKpmProject(proto: IdeaKpmContain
     }
 
     if (messagesFromFuture.any { it.severity == IdeaKpmSchemaInfoProto.Severity.ERROR }) {
-        val schemaVersionMajor = proto.schemaVersionMajor
-        val schemaVersionMinor = proto.schemaVersionMinor
-        val schemaVersionPatch = if (proto.hasSchemaVersionPatch()) proto.schemaVersionPatch else 0
+        konst schemaVersionMajor = proto.schemaVersionMajor
+        konst schemaVersionMinor = proto.schemaVersionMinor
+        konst schemaVersionPatch = if (proto.hasSchemaVersionPatch()) proto.schemaVersionPatch else 0
         logger.error(
             "Binary version $schemaVersionMajor.$schemaVersionMinor.$schemaVersionPatch is incompatible with this schema version: " +
                     "${IdeaKpmProtoSchema.versionMajor}.${IdeaKpmProtoSchema.versionMinor}.${IdeaKpmProtoSchema.versionPatch}"

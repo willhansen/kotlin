@@ -44,18 +44,18 @@ int binarySearchRange(const T* array, int arrayLength, T needle) {
   int bottom = 0;
   int top = arrayLength - 1;
   int middle = -1;
-  T value = 0;
+  T konstue = 0;
   while (bottom <= top) {
     middle = (bottom + top) / 2;
-    value = array[middle];
-    if (needle > value)
+    konstue = array[middle];
+    if (needle > konstue)
       bottom = middle + 1;
-    else if (needle == value)
+    else if (needle == konstue)
       return middle;
     else
       top = middle - 1;
   }
-  return middle - (needle < value ? 1 : 0);
+  return middle - (needle < konstue ? 1 : 0);
 }
 
 #endif // RUNTIME_KSTRING_H

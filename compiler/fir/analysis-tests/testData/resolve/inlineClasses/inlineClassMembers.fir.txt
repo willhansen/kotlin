@@ -4,17 +4,17 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/Int| = Int(0)
+        public final konst y: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
         public final var z: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String()
             }
-            public set(value: R|kotlin/String|): R|kotlin/Unit| {
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit| {
             }
 
     }
@@ -33,10 +33,10 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val testVal: R|kotlin/Int|by R|/Val.Val|()
+        public final konst testVal: R|kotlin/Int|by R|/Val.Val|()
             public get(): R|kotlin/Int| {
                 ^ this@R|/DelegatedProp|.D|/DelegatedProp.testVal|.R|/Val.getValue|(this@R|/DelegatedProp|, ::R|/DelegatedProp.testVal|)
             }
@@ -47,7 +47,7 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
         public final fun box(): R|kotlin/Unit| {
@@ -70,10 +70,10 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/Int| = R|<local>/y|
+        public final konst y: R|kotlin/Int| = R|<local>/y|
             public get(): R|kotlin/Int|
 
         public final fun box(): R|kotlin/Unit| {
@@ -96,7 +96,7 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
         public constructor(y: R|kotlin/String|): R|SecondaryConstructors| {
@@ -113,7 +113,7 @@ FILE: inlineClassMembers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/String| = R|<local>/x|
+        public final konst x: R|kotlin/String| = R|<local>/x|
             public get(): R|kotlin/String|
 
         public final inner class Inner : R|kotlin/Any| {

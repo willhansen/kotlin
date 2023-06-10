@@ -14,19 +14,19 @@ class B(var a: Int) {
     var plus = false
     var plusAssign = false
 
-    operator fun plus(value: Int): B {
+    operator fun plus(konstue: Int): B {
         plus = true
-        return B(a + value)
+        return B(a + konstue)
     }
 
-    operator fun plusAssign(value: Int) {
+    operator fun plusAssign(konstue: Int) {
         plusAssign = true
-        a = a + value
+        a = a + konstue
     }
 }
 
 fun box(): String {
-    val b = B(1)
+    konst b = B(1)
     b += 1
 
     if (!b.plus && b.plusAssign && b.a == 2)

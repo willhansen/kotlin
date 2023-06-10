@@ -9,26 +9,26 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class Foo<T>(val x: T)
+konstue class Foo<T>(konst x: T)
 @JvmInline
-value class FooNullable<T>(val x: T?)
+konstue class FooNullable<T>(konst x: T?)
 
 @JvmInline
-value class FooGenericArray<T>(val x: Array<T>)
+konstue class FooGenericArray<T>(konst x: Array<T>)
 @JvmInline
-value class FooGenericArray2<T>(val x: Array<Array<T>>)
+konstue class FooGenericArray2<T>(konst x: Array<Array<T>>)
 
 @JvmInline
-value class FooStarProjectedArray(val x: Array<*>)
+konstue class FooStarProjectedArray(konst x: Array<*>)
 @JvmInline
-value class FooStarProjectedArray2(val x: Array<Array<*>>)
+konstue class FooStarProjectedArray2(konst x: Array<Array<*>>)
 
 @JvmInline
-value class Bar(val u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>)
+konstue class Bar(konst u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>)
 @JvmInline
-value class BarNullable(val u: Unit?)
+konstue class BarNullable(konst u: Unit?)
 
 @JvmInline
-value class Baz(val u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
+konstue class Baz(konst u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
 @JvmInline
-value class BazNullable(val u: Nothing?)
+konstue class BazNullable(konst u: Nothing?)

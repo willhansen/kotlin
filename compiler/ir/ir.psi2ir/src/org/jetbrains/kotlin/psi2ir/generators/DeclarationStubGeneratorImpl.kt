@@ -20,10 +20,10 @@ class DeclarationStubGeneratorImpl(
     moduleDescriptor: ModuleDescriptor,
     symbolTable: SymbolTable,
     irBuiltins: IrBuiltIns,
-    override val descriptorFinder: DescriptorByIdSignatureFinder,
+    override konst descriptorFinder: DescriptorByIdSignatureFinder,
     extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY,
 ) : DeclarationStubGenerator(moduleDescriptor, symbolTable, irBuiltins, extensions) {
-    override val typeTranslator: TypeTranslator =
+    override konst typeTranslator: TypeTranslator =
         TypeTranslatorImpl(
             lazyTable,
             irBuiltins.languageVersionSettings,
@@ -43,7 +43,7 @@ fun generateTypicalIrProviderList(
     deserializer: IrDeserializer? = null,
     extensions: StubGeneratorExtensions = StubGeneratorExtensions.EMPTY
 ): List<IrProvider> {
-    val stubGenerator = DeclarationStubGeneratorImpl(
+    konst stubGenerator = DeclarationStubGeneratorImpl(
         moduleDescriptor, symbolTable, irBuiltins, descriptorFinder, extensions
     )
     return listOfNotNull(deserializer, stubGenerator)
@@ -52,13 +52,13 @@ fun generateTypicalIrProviderList(
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class DeclarationStubGeneratorForNotFoundClasses(
-    private val stubGenerator: DeclarationStubGeneratorImpl
+    private konst stubGenerator: DeclarationStubGeneratorImpl
 ) : IrProvider {
 
     override fun getDeclaration(symbol: IrSymbol): IrDeclaration? {
         if (symbol.isBound) return null
 
-        val classDescriptor = symbol.descriptor as? NotFoundClasses.MockClassDescriptor
+        konst classDescriptor = symbol.descriptor as? NotFoundClasses.MockClassDescriptor
             ?: return null
         return stubGenerator.generateClassStub(classDescriptor)
     }

@@ -24,29 +24,29 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import java.io.File
 
 class InlineCallSiteInfo(
-    val ownerClassName: String,
-    val method: Method,
-    val inlineScopeVisibility: DescriptorVisibility?,
-    val file: File?,
-    val lineNumber: Int
+    konst ownerClassName: String,
+    konst method: Method,
+    konst inlineScopeVisibility: DescriptorVisibility?,
+    konst file: File?,
+    konst lineNumber: Int
 ) {
-    val isInlineOrInsideInline: Boolean
+    konst isInlineOrInsideInline: Boolean
         get() = inlineScopeVisibility != null
 
-    val isInPublicInlineScope: Boolean
+    konst isInPublicInlineScope: Boolean
         get() = inlineScopeVisibility != null && !DescriptorVisibilities.isPrivate(inlineScopeVisibility)
 }
 
 interface SourceCompilerForInline {
-    val state: GenerationState
+    konst state: GenerationState
 
-    val callElement: Any
+    konst callElement: Any
 
-    val callElementText: String
+    konst callElementText: String
 
-    val inlineCallSiteInfo: InlineCallSiteInfo
+    konst inlineCallSiteInfo: InlineCallSiteInfo
 
-    val sourceMapper: SourceMapper
+    konst sourceMapper: SourceMapper
 
     fun generateLambdaBody(lambdaInfo: ExpressionLambda, reifiedTypeParameters: ReifiedTypeParametersUsages): SMAPAndMethodNode
 
@@ -56,9 +56,9 @@ interface SourceCompilerForInline {
 
     fun generateFinallyBlocks(finallyNode: MethodNode, curFinallyDepth: Int, returnType: Type, afterReturnLabel: Label, target: Label?)
 
-    val isCallInsideSameModuleAsCallee: Boolean
+    konst isCallInsideSameModuleAsCallee: Boolean
 
-    val isFinallyMarkerRequired: Boolean
+    konst isFinallyMarkerRequired: Boolean
 
     fun isSuspendLambdaCapturedByOuterObjectOrLambda(name: String): Boolean
 
@@ -68,7 +68,7 @@ interface SourceCompilerForInline {
 }
 
 fun GenerationState.trackLookup(container: FqName, functionName: String, location: LocationInfo) {
-    val lookupTracker = configuration.get(CommonConfigurationKeys.LOOKUP_TRACKER) ?: return
+    konst lookupTracker = configuration.get(CommonConfigurationKeys.LOOKUP_TRACKER) ?: return
     synchronized(lookupTracker) {
         lookupTracker.record(
             location.filePath,
@@ -87,9 +87,9 @@ fun loadCompiledInlineFunction(
     isMangled: Boolean,
     state: GenerationState
 ): SMAPAndMethodNode {
-    val containerType = AsmUtil.asmTypeByClassId(containerId)
-    val resultInCache = state.inlineCache.methodNodeById.getOrPut(MethodId(containerType.descriptor, asmMethod)) {
-        val bytes = state.inlineCache.classBytes.getOrPut(containerType.internalName) {
+    konst containerType = AsmUtil.asmTypeByClassId(containerId)
+    konst resultInCache = state.inlineCache.methodNodeById.getOrPut(MethodId(containerType.descriptor, asmMethod)) {
+        konst bytes = state.inlineCache.classBytes.getOrPut(containerType.internalName) {
             findVirtualFile(state, containerId)?.contentsToByteArray()
                 ?: throw IllegalStateException("Couldn't find declaration file for $containerId")
         }
@@ -108,8 +108,8 @@ private fun getMethodNode(
     getMethodNode(owner, bytes, method, isSuspend)?.let { return it }
     if (isMangled) {
         // Compatibility with old inline class ABI versions.
-        val dashIndex = method.name.indexOf('-')
-        val nameWithoutManglingSuffix = if (dashIndex > 0) method.name.substring(0, dashIndex) else method.name
+        konst dashIndex = method.name.indexOf('-')
+        konst nameWithoutManglingSuffix = if (dashIndex > 0) method.name.substring(0, dashIndex) else method.name
         if (nameWithoutManglingSuffix != method.name) {
             getMethodNode(owner, bytes, Method(nameWithoutManglingSuffix, method.descriptor), isSuspend)?.let { return it }
         }

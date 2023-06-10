@@ -28,19 +28,19 @@ internal open class KProperty1Impl<T, out V> : KProperty1<T, V>, KPropertyImpl<V
 
     constructor(container: KDeclarationContainerImpl, descriptor: PropertyDescriptor) : super(container, descriptor)
 
-    private val _getter = lazy(PUBLICATION) { Getter(this) }
+    private konst _getter = lazy(PUBLICATION) { Getter(this) }
 
-    override val getter: Getter<T, V> get() = _getter.value
+    override konst getter: Getter<T, V> get() = _getter.konstue
 
     override fun get(receiver: T): V = getter.call(receiver)
 
-    private val delegateSource = lazy(PUBLICATION) { computeDelegateSource() }
+    private konst delegateSource = lazy(PUBLICATION) { computeDelegateSource() }
 
-    override fun getDelegate(receiver: T): Any? = getDelegateImpl(delegateSource.value, receiver, null)
+    override fun getDelegate(receiver: T): Any? = getDelegateImpl(delegateSource.konstue, receiver, null)
 
     override fun invoke(receiver: T): V = get(receiver)
 
-    class Getter<T, out V>(override val property: KProperty1Impl<T, V>) : KPropertyImpl.Getter<V>(), KProperty1.Getter<T, V> {
+    class Getter<T, out V>(override konst property: KProperty1Impl<T, V>) : KPropertyImpl.Getter<V>(), KProperty1.Getter<T, V> {
         override fun invoke(receiver: T): V = property.get(receiver)
     }
 }
@@ -52,13 +52,13 @@ internal class KMutableProperty1Impl<T, V> : KProperty1Impl<T, V>, KMutablePrope
 
     constructor(container: KDeclarationContainerImpl, descriptor: PropertyDescriptor) : super(container, descriptor)
 
-    private val _setter = lazy(PUBLICATION) { Setter(this) }
+    private konst _setter = lazy(PUBLICATION) { Setter(this) }
 
-    override val setter: Setter<T, V> get() = _setter.value
+    override konst setter: Setter<T, V> get() = _setter.konstue
 
-    override fun set(receiver: T, value: V) = setter.call(receiver, value)
+    override fun set(receiver: T, konstue: V) = setter.call(receiver, konstue)
 
-    class Setter<T, V>(override val property: KMutableProperty1Impl<T, V>) : KPropertyImpl.Setter<V>(), KMutableProperty1.Setter<T, V> {
-        override fun invoke(receiver: T, value: V): Unit = property.set(receiver, value)
+    class Setter<T, V>(override konst property: KMutableProperty1Impl<T, V>) : KPropertyImpl.Setter<V>(), KMutableProperty1.Setter<T, V> {
+        override fun invoke(receiver: T, konstue: V): Unit = property.set(receiver, konstue)
     }
 }

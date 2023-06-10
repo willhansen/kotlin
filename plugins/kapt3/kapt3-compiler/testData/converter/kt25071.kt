@@ -37,8 +37,8 @@ import kapt.StaticMethod.of2
 import my.lib.func
 
 class StaticImport {
-    val x = unmodifiableCollection(listOf(""))
-    val l = of("hello", "world")
-    val m = of2("hello")
-    val y = "1".func()
+    konst x = unmodifiableCollection(listOf(""))
+    konst l = of("hello", "world")
+    konst m = of2("hello")
+    konst y = "1".func()
 }

@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.gradle.idea.serialize
 import java.nio.ByteBuffer
 
 object IdeaKotlinIntExtrasSerializer : IdeaKotlinExtrasSerializer<Int> {
-    override fun serialize(context: IdeaKotlinSerializationContext, value: Int): ByteArray {
-        return ByteBuffer.allocate(Int.SIZE_BYTES).putInt(value).array()
+    override fun serialize(context: IdeaKotlinSerializationContext, konstue: Int): ByteArray {
+        return ByteBuffer.allocate(Int.SIZE_BYTES).putInt(konstue).array()
     }
 
     override fun deserialize(context: IdeaKotlinSerializationContext, data: ByteArray): Int {

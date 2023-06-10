@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.test.backend.handlers
 import org.jetbrains.kotlin.codeMetaInfo.model.CodeMetaInfo
 import org.jetbrains.kotlin.codeMetaInfo.renderConfigurations.AbstractCodeMetaInfoRenderConfiguration
 
-class IrInterpreterCodeMetaInfo(override val start: Int, override val end: Int, val description: String, isError: Boolean) : CodeMetaInfo {
+class IrInterpreterCodeMetaInfo(override konst start: Int, override konst end: Int, konst description: String, isError: Boolean) : CodeMetaInfo {
     override var renderConfiguration = RenderConfiguration()
 
-    override val tag: String = if (isError) "WAS_NOT_EVALUATED" else "EVALUATED"
+    override konst tag: String = if (isError) "WAS_NOT_EVALUATED" else "EVALUATED"
 
-    override val attributes: MutableList<String> = mutableListOf()
+    override konst attributes: MutableList<String> = mutableListOf()
 
     override fun asString(): String = renderConfiguration.asString(this)
 

@@ -25,13 +25,13 @@ class PatternErrorTest {
         // empty regex string - no exception should be thrown
         Regex("")
 
-        // note: invalid regex syntax checked in PatternSyntaxExceptionTest
+        // note: inkonstid regex syntax checked in PatternSyntaxExceptionTest
 
         // flags = 0 should raise no exception
         Regex("foo", emptySet())
 
-        // check that all valid flags accepted without exception
-        val options = setOf(
+        // check that all konstid flags accepted without exception
+        konst options = setOf(
                 RegexOption.UNIX_LINES,
                 RegexOption.IGNORE_CASE,
                 RegexOption.MULTILINE,

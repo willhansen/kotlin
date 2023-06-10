@@ -25,14 +25,14 @@ class C // no body
 
 class D {
     // This is v1
-    val v1 = 1 // use 1
+    konst v1 = 1 // use 1
     /** v2 doc comment */
-    val v2 = 2
+    konst v2 = 2
 
     // Function foo()
-    fun foo(/* parameters */ p1: Int/* p1 */, p2: Int /* p2 */, p3: String = a.b(c)/*parameter with default value*/) {
+    fun foo(/* parameters */ p1: Int/* p1 */, p2: Int /* p2 */, p3: String = a.b(c)/*parameter with default konstue*/) {
         // before local var
-        val local = 1 // local var
+        konst local = 1 // local var
         // before local fun
         fun localFun() = 1 // local fun
         // before local class
@@ -47,13 +47,13 @@ class D {
 }
 
 // This is v
-val v = 1 // one
+konst v = 1 // one
 
 // This is fun
 public fun foo() {
-    val local = 1 // this is local
+    konst local = 1 // this is local
     // declare another local
-    val local2 = 2
+    konst local2 = 2
 } // end
 
 enum class E {
@@ -68,12 +68,12 @@ enum class E {
 
 var prop: Int // Int
   get() = 1 // this is getter
-  set(value) {} // this is setter
+  set(konstue) {} // this is setter
 
-val prop2: Int get = 1 // prop2
+konst prop2: Int get = 1 // prop2
 
 var prop3: Int // Int
     // this comment is for getter
     get() = 1
     // this comment is for setter
-    set(value) {}
+    set(konstue) {}

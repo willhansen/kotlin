@@ -9,13 +9,13 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.A
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun f (): kotlin.Int declared in <root>.A'
-          CONST Int type=kotlin.Int value=1
-    PROPERTY name:aVal visibility:public modality:FINAL [val]
+          CONST Int type=kotlin.Int konstue=1
+    PROPERTY name:aVal visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:aVal type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aVal> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:aVal visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:aVal visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-aVal> (): kotlin.Int declared in <root>.A'
@@ -34,8 +34,8 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
                 $this: TYPE_OP type=<root>.B origin=IMPLICIT_CAST typeOperand=<root>.B
                   GET_VAR 'x: kotlin.Any declared in <root>.A.testA1' type=kotlin.Any origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Null type=kotlin.Nothing? value=null
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Null type=kotlin.Nothing? konstue=null
     FUN name:testA2 visibility:public modality:FINAL <> ($this:<root>.A, x:kotlin.Any) returnType:kotlin.Int?
       $this: VALUE_PARAMETER name:<this> type:<root>.A
       VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -49,8 +49,8 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
                 $this: TYPE_OP type=<root>.B origin=IMPLICIT_CAST typeOperand=<root>.B
                   GET_VAR 'x: kotlin.Any declared in <root>.A.testA2' type=kotlin.Any origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Null type=kotlin.Nothing? value=null
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Null type=kotlin.Nothing? konstue=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -83,8 +83,8 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
                 $this: TYPE_OP type=<root>.B origin=IMPLICIT_CAST typeOperand=<root>.B
                   GET_VAR 'x: kotlin.Any declared in <root>.B.testB1' type=kotlin.Any origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Null type=kotlin.Nothing? value=null
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Null type=kotlin.Nothing? konstue=null
     FUN name:testB2 visibility:public modality:FINAL <> ($this:<root>.B, x:kotlin.Any) returnType:kotlin.Int?
       $this: VALUE_PARAMETER name:<this> type:<root>.B
       VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -98,17 +98,17 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
                 $this: TYPE_OP type=<root>.B origin=IMPLICIT_CAST typeOperand=<root>.B
                   GET_VAR 'x: kotlin.Any declared in <root>.B.testB2' type=kotlin.Any origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Null type=kotlin.Nothing? value=null
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Null type=kotlin.Nothing? konstue=null
     FUN FAKE_OVERRIDE name:f visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
       overridden:
         public final fun f (): kotlin.Int declared in <root>.A
       $this: VALUE_PARAMETER name:<this> type:<root>.A
-    PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final aVal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-aVal> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-aVal> (): kotlin.Int declared in <root>.A
         $this: VALUE_PARAMETER name:<this> type:<root>.A
@@ -146,13 +146,13 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.GA<T of <root>.GA>
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun f (): kotlin.Int declared in <root>.GA'
-          CONST Int type=kotlin.Int value=1
-    PROPERTY name:aVal visibility:public modality:FINAL [val]
+          CONST Int type=kotlin.Int konstue=1
+    PROPERTY name:aVal visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:aVal type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aVal> visibility:public modality:FINAL <> ($this:<root>.GA<T of <root>.GA>) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:aVal visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:aVal visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.GA<T of <root>.GA>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-aVal> (): kotlin.Int declared in <root>.GA'
@@ -199,11 +199,11 @@ FILE fqName:<root> fileName:/smartCastOnFakeOverrideReceiver.kt
       overridden:
         public final fun f (): kotlin.Int declared in <root>.GA
       $this: VALUE_PARAMETER name:<this> type:<root>.GA<T of <root>.GA>
-    PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final aVal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-aVal> visibility:public modality:FINAL <> ($this:<root>.GA<T of <root>.GA>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:aVal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-aVal> (): kotlin.Int declared in <root>.GA
         $this: VALUE_PARAMETER name:<this> type:<root>.GA<T of <root>.GA>

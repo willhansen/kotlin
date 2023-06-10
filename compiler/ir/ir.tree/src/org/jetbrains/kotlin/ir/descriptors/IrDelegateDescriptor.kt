@@ -29,19 +29,19 @@ import org.jetbrains.kotlin.types.TypeSubstitutor
 interface IrDelegateDescriptor : PropertyDescriptor
 
 interface IrPropertyDelegateDescriptor : IrDelegateDescriptor {
-    val correspondingProperty: PropertyDescriptor
-    val kPropertyType: KotlinType
+    konst correspondingProperty: PropertyDescriptor
+    konst kPropertyType: KotlinType
 }
 
 interface IrLocalDelegateDescriptor : VariableDescriptor
 
 interface IrLocalDelegatedPropertyDelegateDescriptor : IrLocalDelegateDescriptor {
-    val correspondingLocalProperty: VariableDescriptorWithAccessors
-    val kPropertyType: KotlinType
+    konst correspondingLocalProperty: VariableDescriptorWithAccessors
+    konst kPropertyType: KotlinType
 }
 
 interface IrImplementingDelegateDescriptor : IrDelegateDescriptor {
-    val correspondingSuperType: KotlinType
+    konst correspondingSuperType: KotlinType
 }
 
 abstract class IrDelegateDescriptorBase(
@@ -92,9 +92,9 @@ abstract class IrDelegateDescriptorBase(
 }
 
 class IrPropertyDelegateDescriptorImpl(
-    override val correspondingProperty: PropertyDescriptor,
+    override konst correspondingProperty: PropertyDescriptor,
     delegateType: KotlinType,
-    override val kPropertyType: KotlinType
+    override konst kPropertyType: KotlinType
 ) :
     IrDelegateDescriptorBase(
         correspondingProperty.containingDeclaration,
@@ -107,7 +107,7 @@ class IrPropertyDelegateDescriptorImpl(
 class IrImplementingDelegateDescriptorImpl(
     containingDeclaration: ClassDescriptor,
     delegateType: KotlinType,
-    override val correspondingSuperType: KotlinType,
+    override konst correspondingSuperType: KotlinType,
     number: Int
 ) :
     IrDelegateDescriptorBase(
@@ -118,9 +118,9 @@ class IrImplementingDelegateDescriptorImpl(
     IrImplementingDelegateDescriptor
 
 class IrLocalDelegatedPropertyDelegateDescriptorImpl(
-    override val correspondingLocalProperty: VariableDescriptorWithAccessors,
+    override konst correspondingLocalProperty: VariableDescriptorWithAccessors,
     delegateType: KotlinType,
-    override val kPropertyType: KotlinType
+    override konst kPropertyType: KotlinType
 ) : IrLocalDelegatedPropertyDelegateDescriptor,
     VariableDescriptorImpl(
         correspondingLocalProperty.containingDeclaration,

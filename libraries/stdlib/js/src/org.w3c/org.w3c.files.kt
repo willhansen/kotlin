@@ -18,9 +18,9 @@ import org.w3c.xhr.*
  * Exposes the JavaScript [Blob](https://developer.mozilla.org/en/docs/Web/API/Blob) to Kotlin
  */
 public external open class Blob(blobParts: Array<dynamic> = definedExternally, options: BlobPropertyBag = definedExternally) : MediaProvider, ImageBitmapSource {
-    open val size: Number
-    open val type: String
-    open val isClosed: Boolean
+    open konst size: Number
+    open konst type: String
+    open konst isClosed: Boolean
     fun slice(start: Int = definedExternally, end: Int = definedExternally, contentType: String = definedExternally): Blob
     fun close()
 }
@@ -28,13 +28,13 @@ public external open class Blob(blobParts: Array<dynamic> = definedExternally, o
 public external interface BlobPropertyBag {
     var type: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun BlobPropertyBag(type: String? = ""): BlobPropertyBag {
-    val o = js("({})")
+    konst o = js("({})")
     o["type"] = type
     return o
 }
@@ -43,20 +43,20 @@ public inline fun BlobPropertyBag(type: String? = ""): BlobPropertyBag {
  * Exposes the JavaScript [File](https://developer.mozilla.org/en/docs/Web/API/File) to Kotlin
  */
 public external open class File(fileBits: Array<dynamic>, fileName: String, options: FilePropertyBag = definedExternally) : Blob {
-    open val name: String
-    open val lastModified: Int
+    open konst name: String
+    open konst lastModified: Int
 }
 
 public external interface FilePropertyBag : BlobPropertyBag {
     var lastModified: Int?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun FilePropertyBag(lastModified: Int? = undefined, type: String? = ""): FilePropertyBag {
-    val o = js("({})")
+    konst o = js("({})")
     o["lastModified"] = lastModified
     o["type"] = type
     return o
@@ -77,9 +77,9 @@ public inline operator fun FileList.get(index: Int): File? = asDynamic()[index]
  * Exposes the JavaScript [FileReader](https://developer.mozilla.org/en/docs/Web/API/FileReader) to Kotlin
  */
 public external open class FileReader : EventTarget {
-    open val readyState: Short
-    open val result: dynamic
-    open val error: dynamic
+    open konst readyState: Short
+    open konst result: dynamic
+    open konst error: dynamic
     var onloadstart: ((ProgressEvent) -> dynamic)?
     var onprogress: ((ProgressEvent) -> dynamic)?
     var onload: ((Event) -> dynamic)?
@@ -93,9 +93,9 @@ public external open class FileReader : EventTarget {
     fun abort()
 
     companion object {
-        val EMPTY: Short
-        val LOADING: Short
-        val DONE: Short
+        konst EMPTY: Short
+        konst LOADING: Short
+        konst DONE: Short
     }
 }
 

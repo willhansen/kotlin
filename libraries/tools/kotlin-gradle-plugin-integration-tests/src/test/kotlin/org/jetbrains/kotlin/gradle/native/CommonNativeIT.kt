@@ -17,7 +17,7 @@ import java.util.*
 @NativeGradlePluginTests
 class CommonNativeIT : KGPBaseTest() {
 
-    private val String.withPrefix get() = "native-apple-devices-common/$this"
+    private konst String.withPrefix get() = "native-apple-devices-common/$this"
 
     @DisplayName("Common ios")
     @GradleTest
@@ -62,10 +62,10 @@ class CommonNativeIT : KGPBaseTest() {
 
             configureJvmMemory()
 
-            val libCompileTasks = libTargets.map { ":lib:compileKotlin${it.capitalize()}" }
-            val appCompileTasks = appTargets.map { ":app:compileKotlin${it.capitalize()}" }
-            val appLinkFrameworkTasks = appTargets.map { ":app:linkDebugFramework${it.capitalize()}" }
-            val appLinkTestTasks = appTargets.map { ":app:linkDebugTest${it.capitalize()}" }
+            konst libCompileTasks = libTargets.map { ":lib:compileKotlin${it.capitalize()}" }
+            konst appCompileTasks = appTargets.map { ":app:compileKotlin${it.capitalize()}" }
+            konst appLinkFrameworkTasks = appTargets.map { ":app:linkDebugFramework${it.capitalize()}" }
+            konst appLinkTestTasks = appTargets.map { ":app:linkDebugTest${it.capitalize()}" }
             build(":lib:publish") {
                 assertTasksExecuted(libCompileTasks)
                 libTargets.forEach {

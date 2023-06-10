@@ -1,25 +1,25 @@
 // FILE: 1.kt
 package test
 
-var value: Int = 0
+var konstue: Int = 0
 
 inline var z: Int
-    get() = ++value
-    set(p: Int) { value = p }
+    get() = ++konstue
+    set(p: Int) { konstue = p }
 
 // FILE: 2.kt
 import test.*
 
 fun box(): String {
-    val v = z
-    if (value != 1) return "fail 1: $value"
+    konst v = z
+    if (konstue != 1) return "fail 1: $konstue"
 
     z = v + 2
 
-    if (value != 3) return "fail 2: $value"
+    if (konstue != 3) return "fail 2: $konstue"
     var p = z
 
-    if (value != 4)  return "fail 3: $value"
+    if (konstue != 4)  return "fail 3: $konstue"
 
     return "OK"
 }

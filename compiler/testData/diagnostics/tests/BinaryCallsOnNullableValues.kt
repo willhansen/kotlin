@@ -24,7 +24,7 @@ fun f(): Unit {
     x<!UNSAFE_OPERATOR_CALL!>..<!>2
     <!DEBUG_INFO_CONSTANT, TYPE_MISMATCH!>x<!> in 1..2
 
-    val y : Boolean? = true
+    konst y : Boolean? = true
     false || <!TYPE_MISMATCH!>y<!>
     <!TYPE_MISMATCH!>y<!> && true
     <!TYPE_MISMATCH!>y<!> && <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1<!>

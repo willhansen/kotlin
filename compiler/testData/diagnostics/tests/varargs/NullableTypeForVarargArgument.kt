@@ -1,6 +1,6 @@
 // !DIAGNOSTICS:-UNUSED_PARAMETER
 
-// KT-9883 prohibit using spread operator for nullable value
+// KT-9883 prohibit using spread operator for nullable konstue
 
 // FILE: A.java
 
@@ -20,7 +20,7 @@ public class J {
 }
 
 // FILE: 1.kt
-val args: Array<String>? = null
+konst args: Array<String>? = null
 
 fun bar(x: Int, vararg s: String) {}
 

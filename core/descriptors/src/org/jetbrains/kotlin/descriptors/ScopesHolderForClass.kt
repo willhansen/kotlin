@@ -13,12 +13,12 @@ import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 import org.jetbrains.kotlin.types.TypeRefinement
 
 class ScopesHolderForClass<T : MemberScope> private constructor(
-    private val classDescriptor: ClassDescriptor,
+    private konst classDescriptor: ClassDescriptor,
     storageManager: StorageManager,
-    private val scopeFactory: (KotlinTypeRefiner) -> T,
-    private val kotlinTypeRefinerForOwnerModule: KotlinTypeRefiner
+    private konst scopeFactory: (KotlinTypeRefiner) -> T,
+    private konst kotlinTypeRefinerForOwnerModule: KotlinTypeRefiner
 ) {
-    private val scopeForOwnerModule by storageManager.createLazyValue {
+    private konst scopeForOwnerModule by storageManager.createLazyValue {
         scopeFactory(kotlinTypeRefinerForOwnerModule)
     }
 

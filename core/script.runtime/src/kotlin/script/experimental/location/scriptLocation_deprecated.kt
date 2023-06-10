@@ -21,5 +21,5 @@ enum class ScriptExpectedLocation {
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ScriptExpectedLocations(
-    @Suppress("DEPRECATION") val value: Array<ScriptExpectedLocation> = [ScriptExpectedLocation.SourcesOnly, ScriptExpectedLocation.TestsOnly]
+    @Suppress("DEPRECATION") konst konstue: Array<ScriptExpectedLocation> = [ScriptExpectedLocation.SourcesOnly, ScriptExpectedLocation.TestsOnly]
 )

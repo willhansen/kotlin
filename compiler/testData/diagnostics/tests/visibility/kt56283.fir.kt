@@ -3,7 +3,7 @@
 open class Base
 class Derived : Base()
 
-open class A(protected open val foo: Base) {
+open class A(protected open konst foo: Base) {
 
     protected open fun bar(): Base = Base()
 
@@ -21,6 +21,6 @@ open class A(protected open val foo: Base) {
     }
 }
 
-class B(override val foo: Derived): A(foo) {
+class B(override konst foo: Derived): A(foo) {
     override fun bar(): Derived = Derived()
 }

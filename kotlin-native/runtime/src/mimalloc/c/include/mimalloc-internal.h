@@ -130,7 +130,7 @@ bool        _mi_free_delayed_block(mi_block_t* block);
 void        _mi_block_zero_init(const mi_page_t* page, void* p, size_t size);
 
 #if MI_DEBUG>1
-bool        _mi_page_is_valid(mi_page_t* page);
+bool        _mi_page_is_konstid(mi_page_t* page);
 #endif
 
 
@@ -167,7 +167,7 @@ bool        _mi_page_is_valid(mi_page_t* page);
 #ifndef EFAULT         // corrupted free-list or meta-data
 #define EFAULT (14)
 #endif
-#ifndef EINVAL         // trying to free an invalid pointer
+#ifndef EINVAL         // trying to free an inkonstid pointer
 #define EINVAL (22)
 #endif
 #ifndef EOVERFLOW      // count*size overflow
@@ -301,7 +301,7 @@ We try to circumvent this in an efficient way:
 - DragonFly: the uniqueid use is buggy but kept for reference.
 ------------------------------------------------------------------------------------------- */
 
-extern const mi_heap_t _mi_heap_empty;  // read-only empty heap, initial value of the thread local default heap
+extern const mi_heap_t _mi_heap_empty;  // read-only empty heap, initial konstue of the thread local default heap
 extern bool _mi_process_is_initialized;
 mi_heap_t*  _mi_heap_main_get(void);    // statically allocated main backing heap
 
@@ -555,7 +555,7 @@ Encoding/Decoding the free list next pointers
 This is to protect against buffer overflow exploits where the
 free list is mutated. Many hardened allocators xor the next pointer `p`
 with a secret key `k1`, as `p^k1`. This prevents overwriting with known
-values but might be still too weak: if the attacker can guess
+konstues but might be still too weak: if the attacker can guess
 the pointer `p` this  can reveal `k1` (since `p^k1^p == k1`).
 Moreover, if multiple blocks can be read as well, the attacker can
 xor both as `(p1^k1) ^ (p2^k1) == p1^p2` which may reveal a lot
@@ -570,8 +570,8 @@ We include the left-rotation since xor and addition are otherwise linear
 in the lowest bit. Finally, both keys are unique per page which reduces
 the re-use of keys by a large factor.
 
-We also pass a separate `null` value to be used as `NULL` or otherwise
-`(k2<<<k1)+k1` would appear (too) often as a sentinel value.
+We also pass a separate `null` konstue to be used as `NULL` or otherwise
+`(k2<<<k1)+k1` would appear (too) often as a sentinel konstue.
 ------------------------------------------------------------------- */
 
 static inline bool mi_is_in_same_segment(const void* p, const void* q) {
@@ -630,7 +630,7 @@ static inline mi_block_t* mi_block_next(const mi_page_t* page, const mi_block_t*
   // check for free list corruption: is `next` at least in the same page?
   // TODO: check if `next` is `page->block_size` aligned?
   if (mi_unlikely(next!=NULL && !mi_is_in_same_page(block, next))) {
-    _mi_error_message(EFAULT, "corrupted free list entry of size %zub at %p: value 0x%zx\n", mi_page_block_size(page), block, (uintptr_t)next);
+    _mi_error_message(EFAULT, "corrupted free list entry of size %zub at %p: konstue 0x%zx\n", mi_page_block_size(page), block, (uintptr_t)next);
     next = NULL;
   }
   return next;
@@ -742,20 +742,20 @@ static inline void* mi_tls_slot(size_t slot) mi_attr_noexcept {
 }
 
 // setting is only used on macOSX for now
-static inline void mi_tls_slot_set(size_t slot, void* value) mi_attr_noexcept {
+static inline void mi_tls_slot_set(size_t slot, void* konstue) mi_attr_noexcept {
   const size_t ofs = (slot*sizeof(void*));
 #if defined(__i386__)
-  __asm__("movl %1,%%gs:%0" : "=m" (*((void**)ofs)) : "rn" (value) : );  // 32-bit always uses GS
+  __asm__("movl %1,%%gs:%0" : "=m" (*((void**)ofs)) : "rn" (konstue) : );  // 32-bit always uses GS
 #elif defined(__APPLE__) && defined(__x86_64__)
-  __asm__("movq %1,%%gs:%0" : "=m" (*((void**)ofs)) : "rn" (value) : );  // x86_64 macOSX uses GS
+  __asm__("movq %1,%%gs:%0" : "=m" (*((void**)ofs)) : "rn" (konstue) : );  // x86_64 macOSX uses GS
 #elif defined(__x86_64__) && (MI_INTPTR_SIZE==4)
-  __asm__("movl %1,%%fs:%1" : "=m" (*((void**)ofs)) : "rn" (value) : );  // x32 ABI
+  __asm__("movl %1,%%fs:%1" : "=m" (*((void**)ofs)) : "rn" (konstue) : );  // x32 ABI
 #elif defined(__x86_64__)
-  __asm__("movq %1,%%fs:%1" : "=m" (*((void**)ofs)) : "rn" (value) : );  // x86_64 Linux, BSD uses FS
+  __asm__("movq %1,%%fs:%1" : "=m" (*((void**)ofs)) : "rn" (konstue) : );  // x86_64 Linux, BSD uses FS
 #elif defined(__arm__)
   void** tcb; UNUSED(ofs);
   __asm__ volatile ("mrc p15, 0, %0, c13, c0, 3\nbic %0, %0, #3" : "=r" (tcb));
-  tcb[slot] = value;
+  tcb[slot] = konstue;
 #elif defined(__aarch64__)
   void** tcb; UNUSED(ofs);
 #if defined(__APPLE__) // M1, issue #343
@@ -764,7 +764,7 @@ static inline void mi_tls_slot_set(size_t slot, void* value) mi_attr_noexcept {
 #else
   __asm__ volatile ("mrs %0, tpidr_el0" : "=r" (tcb));
 #endif
-  tcb[slot] = value;
+  tcb[slot] = konstue;
 #endif
 }
 

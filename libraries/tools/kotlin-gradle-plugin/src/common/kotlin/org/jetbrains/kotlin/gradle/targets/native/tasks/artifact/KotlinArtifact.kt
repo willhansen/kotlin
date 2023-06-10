@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import org.jetbrains.kotlin.konan.target.presetName
 
 abstract class KotlinArtifactConfigImpl(
-    override val artifactName: String
+    override konst artifactName: String
 ) : KotlinArtifactConfig {
-    override val modules = mutableSetOf<Any>()
+    override konst modules = mutableSetOf<Any>()
     override fun setModules(vararg project: Any) {
         modules.clear()
         modules.addAll(project)
@@ -30,7 +30,7 @@ abstract class KotlinArtifactConfigImpl(
         modules.add(project)
     }
 
-    protected open fun validate() {
+    protected open fun konstidate() {
         check(modules.isNotEmpty()) {
             "Native artifact '$artifactName' wasn't configured because it requires at least one module for linking"
         }
@@ -57,13 +57,13 @@ abstract class KotlinNativeArtifactConfigImpl(artifactName: String) : KotlinArti
         kotlinOptionsFn = fn::execute
     }
 
-    internal val binaryOptions: MutableMap<String, String> = mutableMapOf()
-    override fun binaryOption(name: String, value: String) {
-        binaryOptions[name] = value
+    internal konst binaryOptions: MutableMap<String, String> = mutableMapOf()
+    override fun binaryOption(name: String, konstue: String) {
+        binaryOptions[name] = konstue
     }
 
-    override fun validate() {
-        super.validate()
+    override fun konstidate() {
+        super.konstidate()
         check(modes.isNotEmpty()) {
             "Native artifact '$artifactName' wasn't configured because it requires at least one build type in modes"
         }
@@ -71,7 +71,7 @@ abstract class KotlinNativeArtifactConfigImpl(artifactName: String) : KotlinArti
 }
 
 internal fun Project.registerLibsDependencies(target: KonanTarget, artifactName: String, deps: Set<Any>): String {
-    val librariesConfigurationName = lowerCamelCaseName(target.presetName, artifactName, "linkLibrary")
+    konst librariesConfigurationName = lowerCamelCaseName(target.presetName, artifactName, "linkLibrary")
     configurations.maybeCreate(librariesConfigurationName).apply {
         isVisible = false
         isCanBeConsumed = false
@@ -86,7 +86,7 @@ internal fun Project.registerLibsDependencies(target: KonanTarget, artifactName:
 }
 
 internal fun Project.registerExportDependencies(target: KonanTarget, artifactName: String, deps: Set<Any>): String {
-    val exportConfigurationName = lowerCamelCaseName(target.presetName, artifactName, "linkExport")
+    konst exportConfigurationName = lowerCamelCaseName(target.presetName, artifactName, "linkExport")
     configurations.maybeCreate(exportConfigurationName).apply {
         isVisible = false
         isCanBeConsumed = false

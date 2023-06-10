@@ -1,4 +1,4 @@
-class A<T>(val x: String, val y: String, val z: T)
+class A<T>(konst x: String, konst y: String, konst z: T)
 
 fun <T> foo(a: A<T>, block: (A<T>) -> String): String = block(a)
 
@@ -12,7 +12,7 @@ fun B.bar(): String {
 
     operator fun <R> A<R>.component3() = z
 
-    val x = foo(A("O", "K", 123)) { (x, y, z) -> x + y + z.toString() }
+    konst x = foo(A("O", "K", 123)) { (x, y, z) -> x + y + z.toString() }
     if (x != "OK123") return "fail 1: $x"
 
     return "OK"

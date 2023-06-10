@@ -19,10 +19,10 @@ package main
 import lib.*
 
 fun box(): String {
-    val a = O()
+    konst a = O()
     if (a != "OK") return "fail: simple: $a"
 
-    val b = callO()
+    konst b = callO()
     if (b != "OK") return "fail: inline: $a"
 
     return "OK"

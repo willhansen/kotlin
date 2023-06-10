@@ -3,14 +3,14 @@
 annotation class Foo
 
 fun box(): String? {
-    val lambda_1 = <!ELEMENT(1)!>@ {
+    konst lambda_1 = <!ELEMENT(1)!>@ {
         return@<!ELEMENT(1)!> false
     }
-    val lambda_2 = @Foo <!ELEMENT(2)!>@ { Boolean
+    konst lambda_2 = @Foo <!ELEMENT(2)!>@ { Boolean
         return@<!ELEMENT(2)!> false
     }
 
-    val x1 = <!ELEMENT(1)!>@ true
+    konst x1 = <!ELEMENT(1)!>@ true
 
     var i = 0
 

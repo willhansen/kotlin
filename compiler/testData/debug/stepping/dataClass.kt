@@ -1,8 +1,8 @@
 // FILE: test.kt
 
-data class D(val i: Int, val s: String)
+data class D(konst i: Int, konst s: String)
 
-data class E(val i: Int, val s: String) {
+data class E(konst i: Int, konst s: String) {
     override fun toString() = "OK"
     override fun equals(other: Any?) = false
     override fun hashCode() = 42
@@ -10,17 +10,17 @@ data class E(val i: Int, val s: String) {
 }
 
 fun box() {
-    val d = D(1, "a")
+    konst d = D(1, "a")
     d.equals(D(1, "a"))
     d.hashCode()
     d.toString()
-    val (i, s) = d
+    konst (i, s) = d
     d.copy()
-    val e = E(1, "a")
+    konst e = E(1, "a")
     e.equals(E(1, "a"))
     e.hashCode()
     e.toString()
-    val (s2, i2) = e
+    konst (s2, i2) = e
     e.copy()
 }
 

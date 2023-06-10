@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirFunctionTypeRefBuilder : FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     var isMarkedNullable: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
     var receiverTypeRef: FirTypeRef? = null
-    val parameters: MutableList<FirFunctionTypeParameter> = mutableListOf()
+    konst parameters: MutableList<FirFunctionTypeParameter> = mutableListOf()
     lateinit var returnTypeRef: FirTypeRef
     var isSuspend: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
-    val contextReceiverTypeRefs: MutableList<FirTypeRef> = mutableListOf()
+    konst contextReceiverTypeRefs: MutableList<FirTypeRef> = mutableListOf()
 
     override fun build(): FirFunctionTypeRef {
         return FirFunctionTypeRefImpl(
@@ -63,7 +63,7 @@ inline fun buildFunctionTypeRefCopy(original: FirFunctionTypeRef, init: FirFunct
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirFunctionTypeRefBuilder()
+    konst copyBuilder = FirFunctionTypeRefBuilder()
     copyBuilder.source = original.source
     copyBuilder.annotations.addAll(original.annotations)
     copyBuilder.isMarkedNullable = original.isMarkedNullable

@@ -21,13 +21,13 @@ class C2 : C() {
 }
 
 fun box(): String {
-    val x: I = C2()
+    konst x: I = C2()
 
-    val o = x.foo(object : I1 {
+    konst o = x.foo(object : I1 {
         override fun o(): String = "O"
     }).o()
 
-    val k = x.foo(object : I2 {
+    konst k = x.foo(object : I2 {
         override fun k(): String = "K"
     }).k()
 

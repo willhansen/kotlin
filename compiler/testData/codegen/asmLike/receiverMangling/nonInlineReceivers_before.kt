@@ -4,7 +4,7 @@
 // LAMBDAS: CLASS
 
 fun String.foo(count: Int) {
-    val x = false
+    konst x = false
 
     block {
         this@foo + this@block.toString() + x.toString() + count.toString()

@@ -18,10 +18,10 @@ fun main() {
     """.trimIndent())
 
     repeat(23) { count ->
-        val typeParameterNames = (1 .. count).map { "P$it" }
-        val typeParameters = (typeParameterNames + "R").joinToString { "reified $it" }
+        konst typeParameterNames = (1 .. count).map { "P$it" }
+        konst typeParameters = (typeParameterNames + "R").joinToString { "reified $it" }
 
-        val functionType = buildString {
+        konst functionType = buildString {
             append('(')
             typeParameterNames.joinTo(this)
             append(") -> R")

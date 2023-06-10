@@ -24,17 +24,17 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 import java.io.IOException
 
 abstract class KotlinMetadataDecompiler<out V : BinaryVersion>(
-    private val fileType: FileType,
-    private val serializerProtocol: () -> SerializerExtensionProtocol,
-    private val flexibleTypeDeserializer: FlexibleTypeDeserializer,
-    private val expectedBinaryVersion: () -> V,
-    private val invalidBinaryVersion: () -> V,
+    private konst fileType: FileType,
+    private konst serializerProtocol: () -> SerializerExtensionProtocol,
+    private konst flexibleTypeDeserializer: FlexibleTypeDeserializer,
+    private konst expectedBinaryVersion: () -> V,
+    private konst inkonstidBinaryVersion: () -> V,
     stubVersion: Int
 ) : ClassFileDecompilers.Full() {
-    private val metadataStubBuilder: KotlinMetadataStubBuilder =
+    private konst metadataStubBuilder: KotlinMetadataStubBuilder =
         KotlinMetadataStubBuilder(stubVersion, fileType, serializerProtocol, ::readFileSafely)
 
-    private val renderer: DescriptorRenderer by lazy {
+    private konst renderer: DescriptorRenderer by lazy {
         DescriptorRenderer.withOptions { defaultDecompilerRendererOptions() }
     }
 
@@ -46,7 +46,7 @@ abstract class KotlinMetadataDecompiler<out V : BinaryVersion>(
 
     override fun createFileViewProvider(file: VirtualFile, manager: PsiManager, physical: Boolean): FileViewProvider {
         return KotlinDecompiledFileViewProvider(manager, file, physical) { provider ->
-            val virtualFile = provider.virtualFile
+            konst virtualFile = provider.virtualFile
             readFileSafely(virtualFile)?.let { fileWithMetadata ->
                 KtDecompiledFile(provider) {
                     check(it == virtualFile) {
@@ -68,7 +68,7 @@ abstract class KotlinMetadataDecompiler<out V : BinaryVersion>(
             readFile(content ?: file.contentsToByteArray(false), file)
         } catch (e: IOException) {
             // This is needed because sometimes we're given VirtualFile instances that point to non-existent .jar entries.
-            // Such files are valid (isValid() returns true), but an attempt to read their contents results in a FileNotFoundException.
+            // Such files are konstid (isValid() returns true), but an attempt to read their contents results in a FileNotFoundException.
             // Note that although calling "refresh()" instead of catching an exception would seem more correct here,
             // it's not always allowed and also is likely to degrade performance
             null
@@ -81,15 +81,15 @@ abstract class KotlinMetadataDecompiler<out V : BinaryVersion>(
                 createIncompatibleAbiVersionDecompiledText(expectedBinaryVersion(), file.version)
             }
             is KotlinMetadataStubBuilder.FileWithMetadata.Compatible -> {
-                val packageFqName = file.packageFqName
-                val resolver = KotlinMetadataDeserializerForDecompiler(
+                konst packageFqName = file.packageFqName
+                konst resolver = KotlinMetadataDeserializerForDecompiler(
                     packageFqName, file.proto, file.nameResolver, file.version,
                     serializerProtocol(), flexibleTypeDeserializer
                 )
-                val declarations = arrayListOf<DeclarationDescriptor>()
+                konst declarations = arrayListOf<DeclarationDescriptor>()
                 declarations.addAll(resolver.resolveDeclarationsInFacade(packageFqName))
                 for (classProto in file.classesToDecompile) {
-                    val classId = file.nameResolver.getClassId(classProto.fqName)
+                    konst classId = file.nameResolver.getClassId(classProto.fqName)
                     declarations.addIfNotNull(resolver.resolveTopLevelClass(classId))
                 }
                 buildDecompiledText(packageFqName, declarations, renderer)

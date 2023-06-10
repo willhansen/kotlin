@@ -3,15 +3,15 @@
 // Ignore reason: KT-58786
 
 interface Diagnostic {
-    val name: String
+    konst name: String
 }
 
 fun foo(conflicting: List<Diagnostic>) {
-    val filtered = arrayListOf<Diagnostic>()
+    konst filtered = arrayListOf<Diagnostic>()
     conflicting.groupBy {
         it.name
     }.forEach {
-        val diagnostics = it.value
+        konst diagnostics = it.konstue
         filtered.addAll(
             diagnostics.filter { me ->
                 diagnostics.none { other ->

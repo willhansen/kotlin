@@ -17,7 +17,7 @@ fun test() {
         this.member()
         this.extension()
 
-        val foo = this
+        konst foo = this
         foo.<!ILLEGAL_RESTRICTED_SUSPENDING_FUNCTION_CALL!>member<!>()
         foo.<!ILLEGAL_RESTRICTED_SUSPENDING_FUNCTION_CALL!>extension<!>()
 
@@ -38,7 +38,7 @@ suspend fun RestrictedController.l() {
     this.member()
     this.extension()
 
-    val foo = this
+    konst foo = this
     foo.<!ILLEGAL_RESTRICTED_SUSPENDING_FUNCTION_CALL!>member<!>()
     foo.<!ILLEGAL_RESTRICTED_SUSPENDING_FUNCTION_CALL!>extension<!>()
 

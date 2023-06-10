@@ -22,17 +22,17 @@ import org.jetbrains.org.objectweb.asm.tree.*
 import kotlin.math.max
 
 abstract class InlineCodegen<out T : BaseExpressionCodegen>(
-    protected val codegen: T,
-    protected val state: GenerationState,
-    protected val jvmSignature: JvmMethodSignature,
-    private val typeParameterMappings: TypeParameterMappings<*>,
-    protected val sourceCompiler: SourceCompilerForInline,
-    private val reifiedTypeInliner: ReifiedTypeInliner<*>
+    protected konst codegen: T,
+    protected konst state: GenerationState,
+    protected konst jvmSignature: JvmMethodSignature,
+    private konst typeParameterMappings: TypeParameterMappings<*>,
+    protected konst sourceCompiler: SourceCompilerForInline,
+    private konst reifiedTypeInliner: ReifiedTypeInliner<*>
 ) {
-    private val initialFrameSize = codegen.frameMap.currentSize
+    private konst initialFrameSize = codegen.frameMap.currentSize
 
-    protected val invocationParamBuilder = ParametersBuilder.newBuilder()
-    private val maskValues = ArrayList<Int>()
+    protected konst invocationParamBuilder = ParametersBuilder.newBuilder()
+    private konst maskValues = ArrayList<Int>()
     private var maskStartIndex = -1
     private var methodHandleInDefaultMethodIndex = -1
 
@@ -51,7 +51,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
         var nodeAndSmap: SMAPAndMethodNode? = null
         try {
             nodeAndSmap = compileInline()
-            val result = inlineCall(nodeAndSmap, isInlineOnly)
+            konst result = inlineCall(nodeAndSmap, isInlineOnly)
             leaveTemps()
             codegen.propagateChildReifiedTypeParametersUsages(result.reifiedTypeParametersUsages)
             codegen.markLineNumberAfterInlineIfNeeded(registerLineNumberAfterwards)
@@ -72,59 +72,59 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
     }
 
     private fun inlineCall(nodeAndSmap: SMAPAndMethodNode, isInlineOnly: Boolean): InlineResult {
-        val node = nodeAndSmap.node
+        konst node = nodeAndSmap.node
         if (maskStartIndex != -1) {
-            val parameters = invocationParamBuilder.buildParameters()
-            val infos = expandMaskConditionsAndUpdateVariableNodes(
+            konst parameters = invocationParamBuilder.buildParameters()
+            konst infos = expandMaskConditionsAndUpdateVariableNodes(
                 node, maskStartIndex, maskValues, methodHandleInDefaultMethodIndex,
                 parameters.parameters.filter { it.functionalArgument === DefaultValueOfInlineParameter }
                     .mapTo<_, _, MutableCollection<Int>>(mutableSetOf()) { parameters.getDeclarationSlot(it) }
             )
             for (info in infos) {
-                val lambda = DefaultLambda(info, sourceCompiler, node.name.substringBeforeLast("\$default"))
+                konst lambda = DefaultLambda(info, sourceCompiler, node.name.substringBeforeLast("\$default"))
                 parameters.getParameterByDeclarationSlot(info.offset).functionalArgument = lambda
                 if (info.needReification) {
                     lambda.reifiedTypeParametersUsages.mergeAll(reifiedTypeInliner.reifyInstructions(lambda.node.node))
                 }
                 for (captured in lambda.capturedVars) {
-                    val param = invocationParamBuilder.addCapturedParam(captured, captured.fieldName, false)
+                    konst param = invocationParamBuilder.addCapturedParam(captured, captured.fieldName, false)
                     param.remapValue = StackValue.local(codegen.frameMap.enterTemp(param.type), param.type)
                     param.isSynthetic = true
                 }
             }
         }
 
-        val reificationResult = reifiedTypeInliner.reifyInstructions(node)
+        konst reificationResult = reifiedTypeInliner.reifyInstructions(node)
 
-        val parameters = invocationParamBuilder.buildParameters()
+        konst parameters = invocationParamBuilder.buildParameters()
 
-        val info = RootInliningContext(
+        konst info = RootInliningContext(
             state, codegen.inlineNameGenerator.subGenerator(jvmSignature.asmMethod.name),
             sourceCompiler, sourceCompiler.inlineCallSiteInfo, reifiedTypeInliner, typeParameterMappings
         )
 
-        val sourceMapper = sourceCompiler.sourceMapper
-        val sourceInfo = sourceMapper.sourceInfo!!
-        val callSite = SourcePosition(codegen.lastLineNumber, sourceInfo.sourceFileName!!, sourceInfo.pathOrCleanFQN)
-        val inliner = MethodInliner(
+        konst sourceMapper = sourceCompiler.sourceMapper
+        konst sourceInfo = sourceMapper.sourceInfo!!
+        konst callSite = SourcePosition(codegen.lastLineNumber, sourceInfo.sourceFileName!!, sourceInfo.pathOrCleanFQN)
+        konst inliner = MethodInliner(
             node, parameters, info, FieldRemapper(null, null, parameters), sourceCompiler.isCallInsideSameModuleAsCallee,
             "Method inlining " + sourceCompiler.callElementText,
             SourceMapCopier(sourceMapper, nodeAndSmap.classSMAP, callSite),
             info.callSiteInfo, isInlineOnly, !isInlinedToInlineFunInKotlinRuntime(), maskStartIndex, maskStartIndex + maskValues.size,
         ) //with captured
 
-        val remapper = LocalVarRemapper(parameters, initialFrameSize)
+        konst remapper = LocalVarRemapper(parameters, initialFrameSize)
 
-        val adapter = createEmptyMethodNode()
+        konst adapter = createEmptyMethodNode()
         //hack to keep linenumber info, otherwise jdi will skip begin of linenumber chain
         adapter.visitInsn(Opcodes.NOP)
 
-        val result = inliner.doInline(adapter, remapper, true, mapOf())
+        konst result = inliner.doInline(adapter, remapper, true, mapOf())
         result.reifiedTypeParametersUsages.mergeAll(reificationResult)
 
-        val infos = MethodInliner.processReturns(adapter, sourceCompiler.getContextLabels(), null)
+        konst infos = MethodInliner.processReturns(adapter, sourceCompiler.getContextLabels(), null)
         generateAndInsertFinallyBlocks(
-            adapter, infos, (remapper.remap(parameters.argsSizeOnStack).value as StackValue.Local).index
+            adapter, infos, (remapper.remap(parameters.argsSizeOnStack).konstue as StackValue.Local).index
         )
         if (!sourceCompiler.isFinallyMarkerRequired) {
             removeFinallyMarkers(adapter)
@@ -136,7 +136,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
             generateAssertField()
         }
 
-        val shouldSpillStack = node.requiresEmptyStackOnEntry()
+        konst shouldSpillStack = node.requiresEmptyStackOnEntry()
         if (shouldSpillStack) {
             addInlineMarker(codegen.visitor, true)
         }
@@ -154,8 +154,8 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
     ) {
         if (!sourceCompiler.hasFinallyBlocks()) return
 
-        val extensionPoints = insertPoints.associateBy { it.beforeIns }
-        val processor = DefaultProcessor(intoNode, offsetForFinallyLocalVar)
+        konst extensionPoints = insertPoints.associateBy { it.beforeIns }
+        konst processor = DefaultProcessor(intoNode, offsetForFinallyLocalVar)
 
         var curFinallyDepth = 0
         var curInstr: AbstractInsnNode? = intoNode.instructions.first
@@ -166,29 +166,29 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
                 curFinallyDepth = getConstant(curInstr.previous)
             }
 
-            val extension = extensionPoints[curInstr]
+            konst extension = extensionPoints[curInstr]
             if (extension != null) {
                 var nextFreeLocalIndex = processor.nextFreeLocalIndex
-                for (local in processor.localVarsMetaInfo.currentIntervals) {
-                    val size = Type.getType(local.node.desc).size
+                for (local in processor.localVarsMetaInfo.currentInterkonsts) {
+                    konst size = Type.getType(local.node.desc).size
                     nextFreeLocalIndex = max(offsetForFinallyLocalVar + local.node.index + size, nextFreeLocalIndex)
                 }
 
-                val start = Label()
-                val finallyNode = createEmptyMethodNode()
+                konst start = Label()
+                konst finallyNode = createEmptyMethodNode()
                 finallyNode.visitLabel(start)
-                val mark = codegen.frameMap.skipTo(nextFreeLocalIndex)
+                konst mark = codegen.frameMap.skipTo(nextFreeLocalIndex)
                 sourceCompiler.generateFinallyBlocks(
-                    finallyNode, curFinallyDepth, extension.returnType, extension.finallyIntervalEnd.label, extension.jumpTarget
+                    finallyNode, curFinallyDepth, extension.returnType, extension.finallyInterkonstEnd.label, extension.jumpTarget
                 )
                 mark.dropTo()
                 insertNodeBefore(finallyNode, intoNode, curInstr)
 
-                val splitBy = SimpleInterval(start.info as LabelNode, extension.finallyIntervalEnd)
-                processor.tryBlocksMetaInfo.splitAndRemoveCurrentIntervals(splitBy, true)
-                processor.localVarsMetaInfo.splitAndRemoveCurrentIntervals(splitBy, true)
+                konst splitBy = SimpleInterkonst(start.info as LabelNode, extension.finallyInterkonstEnd)
+                processor.tryBlocksMetaInfo.splitAndRemoveCurrentInterkonsts(splitBy, true)
+                processor.localVarsMetaInfo.splitAndRemoveCurrentInterkonsts(splitBy, true)
                 finallyNode.localVariables.forEach {
-                    processor.localVarsMetaInfo.addNewInterval(LocalVarNodeWrapper(it))
+                    processor.localVarsMetaInfo.addNewInterkonst(LocalVarNodeWrapper(it))
                 }
             }
 
@@ -202,10 +202,10 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
     protected abstract fun generateAssertField()
 
     private fun isInlinedToInlineFunInKotlinRuntime(): Boolean {
-        val codegen = this.codegen as? ExpressionCodegen ?: return false
-        val caller = codegen.context.functionDescriptor
+        konst codegen = this.codegen as? ExpressionCodegen ?: return false
+        konst caller = codegen.context.functionDescriptor
         if (!caller.isInline) return false
-        val callerPackage = DescriptorUtils.getParentOfType(caller, PackageFragmentDescriptor::class.java) ?: return false
+        konst callerPackage = DescriptorUtils.getParentOfType(caller, PackageFragmentDescriptor::class.java) ?: return false
         return callerPackage.fqName.asString().let {
             // package either equals to 'kotlin' or starts with 'kotlin.'
             it.startsWith("kotlin") && (it.length <= 6 || it[6] == '.')
@@ -217,12 +217,12 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
     }
 
     protected fun putCapturedToLocalVal(stackValue: StackValue, capturedParam: CapturedParamDesc, kotlinType: KotlinType?) {
-        val info = invocationParamBuilder.addCapturedParam(capturedParam, capturedParam.fieldName, false)
+        konst info = invocationParamBuilder.addCapturedParam(capturedParam, capturedParam.fieldName, false)
         if (stackValue.isLocalWithNoBoxing(JvmKotlinType(info.type, kotlinType))) {
             info.remapValue = stackValue
         } else {
             stackValue.put(info.type, kotlinType, codegen.visitor)
-            val local = StackValue.local(codegen.frameMap.enterTemp(info.type), info.type)
+            konst local = StackValue.local(codegen.frameMap.enterTemp(info.type), info.type)
             local.store(StackValue.onStack(info.type), codegen.visitor)
             info.remapValue = local
             info.isSynthetic = true
@@ -234,7 +234,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
             return processDefaultMaskOrMethodHandler(stackValue, kind)
         }
 
-        val info = when (parameterIndex) {
+        konst info = when (parameterIndex) {
             -1 -> invocationParamBuilder.addNextParameter(jvmKotlinType.type, false)
             else -> invocationParamBuilder.addNextValueParameter(jvmKotlinType.type, false, null, parameterIndex)
         }
@@ -249,7 +249,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
         }
         when {
             kind === ValueKind.DEFAULT_PARAMETER || kind === ValueKind.DEFAULT_INLINE_PARAMETER ->
-                codegen.frameMap.enterTemp(info.type) // the inline function will put the value into this slot
+                codegen.frameMap.enterTemp(info.type) // the inline function will put the konstue into this slot
             stackValue.isLocalWithNoBoxing(jvmKotlinType) ->
                 info.remapValue = stackValue
             else -> {
@@ -267,9 +267,9 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
         }
     }
 
-    private fun processDefaultMaskOrMethodHandler(value: StackValue, kind: ValueKind) {
-        assert(value is StackValue.Constant) { "Additional default method argument should be constant, but $value" }
-        val constantValue = (value as StackValue.Constant).value
+    private fun processDefaultMaskOrMethodHandler(konstue: StackValue, kind: ValueKind) {
+        assert(konstue is StackValue.Constant) { "Additional default method argument should be constant, but $konstue" }
+        konst constantValue = (konstue as StackValue.Constant).konstue
         if (kind === ValueKind.DEFAULT_MASK) {
             assert(constantValue is Int) { "Mask should be of Integer type, but $constantValue" }
             maskValues.add(constantValue as Int)
@@ -291,7 +291,7 @@ abstract class InlineCodegen<out T : BaseExpressionCodegen>(
                     (this is StackValue.Local || isCapturedInlineParameter())
 
         private fun StackValue.isCapturedInlineParameter(): Boolean {
-            val field = if (this is StackValue.FieldForSharedVar) receiver else this
+            konst field = if (this is StackValue.FieldForSharedVar) receiver else this
             return field is StackValue.Field && field.descriptor is ParameterDescriptor &&
                     InlineUtil.isInlineParameter(field.descriptor) &&
                     InlineUtil.isInline(field.descriptor.containingDeclaration)

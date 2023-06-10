@@ -1,7 +1,7 @@
 
 fun <T> materialize(): T = TODO()
 
-val a: () -> Unit = l@{
+konst a: () -> Unit = l@{
     // Expected type 'Unit' is used here for inference
     if (true) return@l materialize()
 
@@ -10,7 +10,7 @@ val a: () -> Unit = l@{
     if (true) 42
 }
 
-val b: () -> Unit = l@{
+konst b: () -> Unit = l@{
     // Error, coercion can't be applied at this position!
     if (true) return@l <!TYPE_MISMATCH!>"hello"<!>
 
@@ -18,7 +18,7 @@ val b: () -> Unit = l@{
     "hello"
 }
 
-val c: () -> Unit = {
+konst c: () -> Unit = {
     // Interesting enough, for such expessions we use expected type Unit
     // (compare that with the previous case, where we didn't used expected type Unit for "hello")
     materialize()

@@ -10,25 +10,25 @@ import org.jetbrains.kotlin.test.model.AnalysisHandler
 
 sealed class WrappedException(
     cause: Throwable,
-    val priority: Int,
-    val additionalPriority: Int
+    konst priority: Int,
+    konst additionalPriority: Int
 ) : Exception(cause), Comparable<WrappedException> {
     /**
      * If [failureDisablesNextSteps] is `true`,
      * then the following test steps might not be run considering this exception as critical.
      * If false, the next steps will ignore this exception and continue running.
      */
-    open val failureDisablesNextSteps: Boolean get() = true
+    open konst failureDisablesNextSteps: Boolean get() = true
 
-    class FromFacade(cause: Throwable, val facade: AbstractTestFacade<*, *>) : WrappedException(cause, 0, 1) {
-        override val message: String
+    class FromFacade(cause: Throwable, konst facade: AbstractTestFacade<*, *>) : WrappedException(cause, 0, 1) {
+        override konst message: String
             get() = "Exception was thrown"
     }
 
     class FromMetaInfoHandler(cause: Throwable) : WrappedException(cause, 1, 1)
 
-    class FromHandler(cause: Throwable, val handler: AnalysisHandler<*>) : WrappedException(cause, 1, 2) {
-        override val failureDisablesNextSteps: Boolean
+    class FromHandler(cause: Throwable, konst handler: AnalysisHandler<*>) : WrappedException(cause, 1, 2) {
+        override konst failureDisablesNextSteps: Boolean
             get() = handler.failureDisablesNextSteps
     }
 
@@ -36,7 +36,7 @@ sealed class WrappedException(
 
     class FromModuleStructureTransformer(cause: Throwable) : WrappedException(cause, 2, 1)
 
-    override val cause: Throwable
+    override konst cause: Throwable
         get() = super.cause!!
 
     override fun compareTo(other: WrappedException): Int {

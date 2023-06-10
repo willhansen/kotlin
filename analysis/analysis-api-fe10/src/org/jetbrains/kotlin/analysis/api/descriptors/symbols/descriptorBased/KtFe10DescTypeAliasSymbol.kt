@@ -24,25 +24,25 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFe10DescTypeAliasSymbol(
-    override val descriptor: TypeAliasDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: TypeAliasDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtTypeAliasSymbol(), KtFe10DescSymbol<TypeAliasDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { descriptor.declaredTypeParameters.map { KtFe10DescTypeParameterSymbol(it, analysisContext) } }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { descriptor.ktVisibility }
 
-    override val expandedType: KtType
+    override konst expandedType: KtType
         get() = withValidityAssertion { descriptor.expandedType.toKtType(analysisContext) }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { descriptor.ktSymbolKind }
 
-    override val classIdIfNonLocal: ClassId?
+    override konst classIdIfNonLocal: ClassId?
         get() = withValidityAssertion { descriptor.classId }
 
     context(KtAnalysisSession)

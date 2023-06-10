@@ -8,7 +8,7 @@
  * MAIN LINK: expressions, try-expression -> paragraph 5 -> sentence 2
  * PRIMARY LINKS: expressions, try-expression -> paragraph 4 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack.
+ * DESCRIPTION: If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack.
  */
 
 /*
@@ -19,7 +19,7 @@
 fun case1(): Int {
     var a = 1
     try {
-        <!UNREACHABLE_CODE!>throw<!> Exception() //invalid UNREACHABLE_CODE diagnostic
+        <!UNREACHABLE_CODE!>throw<!> Exception() //inkonstid UNREACHABLE_CODE diagnostic
     } catch (e: Exception) {
         a = 5
         <!UNREACHABLE_CODE!>return<!>++a

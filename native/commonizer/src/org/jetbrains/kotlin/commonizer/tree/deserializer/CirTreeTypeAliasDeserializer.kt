@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.commonizer.tree.CirTreeTypeAlias
 
 internal object CirTreeTypeAliasDeserializer {
     operator fun invoke(typeAlias: KmTypeAlias, packageName: CirPackageName, typeResolver: CirTypeResolver): CirTreeTypeAlias {
-        val typeAliasTypeResolver = typeResolver.create(typeAlias.typeParameters)
-        val typeAliasName = CirName.create(typeAlias.name)
+        konst typeAliasTypeResolver = typeResolver.create(typeAlias.typeParameters)
+        konst typeAliasName = CirName.create(typeAlias.name)
         return CirTreeTypeAlias(
             id = CirEntityId.create(packageName, typeAliasName),
             typeAlias = CirDeserializers.typeAlias(

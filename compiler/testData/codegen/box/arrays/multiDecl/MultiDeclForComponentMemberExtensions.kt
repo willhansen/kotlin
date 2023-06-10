@@ -1,4 +1,4 @@
-class C(val i: Int) {
+class C(konst i: Int) {
 }
 
 class M {
@@ -15,7 +15,7 @@ class M {
 }
 
 fun box(): String {
-  val l = Array<C>(3, {x -> C(x)})
-  val s = M().doTest(l)
+  konst l = Array<C>(3, {x -> C(x)})
+  konst s = M().doTest(l)
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

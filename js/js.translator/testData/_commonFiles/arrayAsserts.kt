@@ -2,7 +2,7 @@ package kotlin
 
 fun <T> assertArrayEquals(expected: Array<out T>, actual: Array<out T>, message: String? = null) {
     if (!arraysEqual(expected, actual)) {
-        val msg = if (message == null) "" else ", message = '$message'"
+        konst msg = if (message == null) "" else ", message = '$message'"
         fail("Unexpected array: expected = '$expected', actual = '$actual'$msg")
     }
 }

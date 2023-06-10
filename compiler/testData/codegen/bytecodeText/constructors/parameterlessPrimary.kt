@@ -1,4 +1,4 @@
-class A(val x: Int = 0)
+class A(konst x: Int = 0)
 
 // 1 public <init>\(\)V
 // 1 public <init>\(I\)V

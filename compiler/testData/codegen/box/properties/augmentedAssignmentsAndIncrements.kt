@@ -35,8 +35,8 @@ object SimpleDelegate {
         return a
     }
 
-    operator fun setValue(thisRef: Any?, desc: KProperty<*>, value: Int) {
-        a = value
+    operator fun setValue(thisRef: Any?, desc: KProperty<*>, konstue: Int) {
+        a = konstue
     }
 }
 

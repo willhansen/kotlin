@@ -10,5 +10,5 @@ class C2<T3> {
 
 class A<T> {
     private inner class Inner
-    private val test = ArrayList<Inner>()
+    private konst test = ArrayList<Inner>()
 }

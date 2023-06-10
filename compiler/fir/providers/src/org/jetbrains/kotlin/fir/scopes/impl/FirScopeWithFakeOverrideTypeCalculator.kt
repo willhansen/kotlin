@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.symbols.impl.*
 import org.jetbrains.kotlin.name.Name
 
 class FirScopeWithFakeOverrideTypeCalculator(
-    private val delegate: FirTypeScope,
-    private val fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
+    private konst delegate: FirTypeScope,
+    private konst fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
 ) : FirTypeScope() {
     override fun processClassifiersByNameWithSubstitution(name: Name, processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit) {
         delegate.processClassifiersByNameWithSubstitution(name, processor)
@@ -79,7 +79,7 @@ class FirScopeWithFakeOverrideTypeCalculator(
         }
     }
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = delegate.scopeOwnerLookupNames
 
     override fun toString(): String {

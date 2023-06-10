@@ -9,7 +9,7 @@ enum class SomeEnum {
 
 // Doesn't work
 fun Iterable<Int>.some() {
-    this.fold(SomeEnum.FIRST, {res : SomeEnum, value ->
+    this.fold(SomeEnum.FIRST, {res : SomeEnum, konstue ->
         if (res == SomeEnum.FIRST) SomeEnum.FIRST else SomeEnum.SECOND
     })
 }
@@ -20,7 +20,7 @@ fun tempFun() : SomeEnum {
 
 // Doesn't work
 fun Iterable<Int>.someSimpleWithFun() {
-    this.fold(SomeEnum.FIRST, {res : SomeEnum, value ->
+    this.fold(SomeEnum.FIRST, {res : SomeEnum, konstue ->
         tempFun()
     })
 }
@@ -28,14 +28,14 @@ fun Iterable<Int>.someSimpleWithFun() {
 
 // Works
 fun Iterable<Int>.someSimple() {
-    this.fold(SomeEnum.FIRST, {res : SomeEnum, value ->
+    this.fold(SomeEnum.FIRST, {res : SomeEnum, konstue ->
         SomeEnum.FIRST
     })
 }
 
 // Works
 fun Iterable<Int>.someInt() {
-    this.fold(0, {res : Int, value ->
+    this.fold(0, {res : Int, konstue ->
         if (res == 0) 1 else 0
     })
 }

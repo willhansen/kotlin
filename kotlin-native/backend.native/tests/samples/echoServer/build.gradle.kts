@@ -4,16 +4,16 @@ plugins {
     kotlin("multiplatform")
 }
 
-val additionalPresets: List<KotlinNativeTargetPreset> = listOf("linuxArm64").map {
+konst additionalPresets: List<KotlinNativeTargetPreset> = listOf("linuxArm64").map {
     kotlin.presets[it] as KotlinNativeTargetPreset
 }
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
+    konst hostOs = System.getProperty("os.name")
 
     // Create a target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("echoServer")
         hostOs == "Linux" -> linuxX64("echoServer")
         hostOs.startsWith("Windows") -> mingwX64("echoServer")
@@ -21,8 +21,8 @@ kotlin {
     }
 
     // Create cross-targets.
-    val additionalTargets = additionalPresets.map { preset ->
-        val targetName = "echoServer${preset.name.capitalize()}"
+    konst additionalTargets = additionalPresets.map { preset ->
+        konst targetName = "echoServer${preset.name.capitalize()}"
         targetFromPreset(preset, targetName) {}
     }
 
@@ -37,9 +37,9 @@ kotlin {
     }
 
     sourceSets {
-        val echoServerMain by getting
+        konst echoServerMain by getting
         additionalPresets.forEach { preset ->
-            val mainSourceSetName = "echoServer${preset.name.capitalize()}Main"
+            konst mainSourceSetName = "echoServer${preset.name.capitalize()}Main"
             getByName(mainSourceSetName).dependsOn(echoServerMain)
         }
     }

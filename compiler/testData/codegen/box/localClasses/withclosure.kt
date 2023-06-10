@@ -1,7 +1,7 @@
 fun box(): String {
-    val x = "OK"
+    konst x = "OK"
     class Aaa {
-        val y = x
+        konst y = x
     }
 
     return Aaa().y

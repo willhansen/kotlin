@@ -34,14 +34,14 @@ public:
     public:
         template <typename... Args>
         explicit Node(const Allocator& allocator, Args&&... args) noexcept :
-            value_(std::forward<Args>(args)...), next_(std_support::nullptr_unique<Node>(allocator)) {}
+            konstue_(std::forward<Args>(args)...), next_(std_support::nullptr_unique<Node>(allocator)) {}
 
-        Value* Get() noexcept { return &value_; }
+        Value* Get() noexcept { return &konstue_; }
 
     private:
         friend class SingleLockList;
 
-        Value value_;
+        Value konstue_;
         NodeOwner next_;
         Node* previous_ = nullptr; // weak
     };
@@ -49,14 +49,14 @@ public:
     class Iterator {
     public:
         using difference_type = void;
-        using value_type = Value;
+        using konstue_type = Value;
         using pointer = Value*;
         using reference = Value&;
         using iterator_category = std::forward_iterator_tag;
 
         explicit Iterator(Node* node) noexcept : node_(node) {}
 
-        Value& operator*() noexcept { return node_->value_; }
+        Value& operator*() noexcept { return node_->konstue_; }
 
         Iterator& operator++() noexcept {
             node_ = node_->next_.get();
@@ -142,10 +142,10 @@ public:
         AssertCorrectUnsafe();
     }
 
-    // Returned value locks `this` to perform safe iteration. `this` unlocks when
+    // Returned konstue locks `this` to perform safe iteration. `this` unlocks when
     // `Iterable` gets out of scope. Example usage:
-    // for (auto& value: list.LockForIter()) {
-    //    // Do something with `value`, there's a guarantee that it'll not be
+    // for (auto& konstue: list.LockForIter()) {
+    //    // Do something with `konstue`, there's a guarantee that it'll not be
     //    // destroyed mid-iteration.
     // }
     // // At this point `list` is unlocked.

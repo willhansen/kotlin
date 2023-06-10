@@ -24,7 +24,7 @@ object FirNativeObjCNameOverridesChecker : FirClassChecker() {
 
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
         // We just need to check intersection overrides, all other declarations are checked by FirNativeObjCNameChecker
-        val firTypeScope = declaration.unsubstitutedScope(context)
+        konst firTypeScope = declaration.unsubstitutedScope(context)
         firTypeScope.processAllFunctions { symbol ->
             if (!symbol.isIntersectionOverride) return@processAllFunctions
             check(firTypeScope, symbol, declaration, context, reporter)
@@ -42,11 +42,11 @@ object FirNativeObjCNameOverridesChecker : FirClassChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val overriddenSymbols = firTypeScope.retrieveDirectOverriddenOf(memberSymbol)
+        konst overriddenSymbols = firTypeScope.retrieveDirectOverriddenOf(memberSymbol)
         if (overriddenSymbols.isEmpty()) return
-        val objCNames = overriddenSymbols.map { it.getFirstBaseSymbol(firTypeScope).getObjCNames(context.session) }
+        konst objCNames = overriddenSymbols.map { it.getFirstBaseSymbol(firTypeScope).getObjCNames(context.session) }
         if (!objCNames.allNamesEquals()) {
-            val containingDeclarations = overriddenSymbols.mapNotNull {
+            konst containingDeclarations = overriddenSymbols.mapNotNull {
                 it.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
             }
             reporter.reportOn(
@@ -60,12 +60,12 @@ object FirNativeObjCNameOverridesChecker : FirClassChecker() {
     }
 
     private fun FirCallableSymbol<*>.getFirstBaseSymbol(firTypeScope: FirTypeScope): FirCallableSymbol<*> {
-        val overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(this)
+        konst overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(this)
         return if (overriddenMemberSymbols.isEmpty()) this else overriddenMemberSymbols.first().getFirstBaseSymbol(firTypeScope)
     }
 
     private fun List<List<FirNativeObjCNameChecker.ObjCName?>>.allNamesEquals(): Boolean {
-        val first = this[0]
+        konst first = this[0]
         for (i in 1 until size) {
             if (first != this[i]) return false
         }

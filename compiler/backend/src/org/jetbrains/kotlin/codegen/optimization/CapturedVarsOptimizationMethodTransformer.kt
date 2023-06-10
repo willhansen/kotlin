@@ -43,15 +43,15 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
     // Note that for code that doesn't create Ref objects explicitly these conditions are true,
     // unless the Ref object escapes to a local class constructor (including local classes for lambdas).
     //
-    private class CapturedVarDescriptor(val newInsn: TypeInsnNode, val refType: Type, val valueType: Type) : ReferenceValueDescriptor {
+    private class CapturedVarDescriptor(konst newInsn: TypeInsnNode, konst refType: Type, konst konstueType: Type) : ReferenceValueDescriptor {
         var hazard = false
 
         var initCallInsn: MethodInsnNode? = null
         var localVar: LocalVariableNode? = null
         var localVarIndex = -1
-        val wrapperInsns: MutableCollection<AbstractInsnNode> = LinkedHashSet()
-        val getFieldInsns: MutableCollection<FieldInsnNode> = LinkedHashSet()
-        val putFieldInsns: MutableCollection<FieldInsnNode> = LinkedHashSet()
+        konst wrapperInsns: MutableCollection<AbstractInsnNode> = LinkedHashSet()
+        konst getFieldInsns: MutableCollection<FieldInsnNode> = LinkedHashSet()
+        konst putFieldInsns: MutableCollection<FieldInsnNode> = LinkedHashSet()
 
         override fun onUseAsTainted() {
             hazard = true
@@ -60,15 +60,15 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
         fun canRewrite() = !hazard && initCallInsn != null
     }
 
-    private class Transformer(private val internalClassName: String, private val methodNode: MethodNode) {
-        private val refValues = ArrayList<CapturedVarDescriptor>()
-        private val refValuesByNewInsn = LinkedHashMap<TypeInsnNode, CapturedVarDescriptor>()
+    private class Transformer(private konst internalClassName: String, private konst methodNode: MethodNode) {
+        private konst refValues = ArrayList<CapturedVarDescriptor>()
+        private konst refValuesByNewInsn = LinkedHashMap<TypeInsnNode, CapturedVarDescriptor>()
 
         fun run() {
             createRefValues()
             if (refValues.isEmpty()) return
 
-            val frames = analyze(internalClassName, methodNode, Interpreter())
+            konst frames = analyze(internalClassName, methodNode, Interpreter())
             trackPops(frames)
             assignLocalVars(frames)
 
@@ -87,10 +87,10 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
         private fun createRefValues() {
             for (insn in methodNode.instructions.asSequence()) {
                 if (insn.opcode == Opcodes.NEW && insn is TypeInsnNode) {
-                    val type = Type.getObjectType(insn.desc)
+                    konst type = Type.getObjectType(insn.desc)
                     if (AsmTypes.isSharedVarType(type)) {
-                        val valueType = REF_TYPE_TO_ELEMENT_TYPE[type.internalName] ?: continue
-                        val refValue = CapturedVarDescriptor(insn, type, valueType)
+                        konst konstueType = REF_TYPE_TO_ELEMENT_TYPE[type.internalName] ?: continue
+                        konst refValue = CapturedVarDescriptor(insn, type, konstueType)
                         refValues.add(refValue)
                         refValuesByNewInsn[insn] = refValue
                     }
@@ -102,8 +102,8 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
             override fun newOperation(insn: AbstractInsnNode): BasicValue =
                 refValuesByNewInsn[insn]?.let { ProperTrackedReferenceValue(it.refType, it) } ?: super.newOperation(insn)
 
-            override fun processRefValueUsage(value: TrackedReferenceValue, insn: AbstractInsnNode, position: Int) {
-                for (descriptor in value.descriptors) {
+            override fun processRefValueUsage(konstue: TrackedReferenceValue, insn: AbstractInsnNode, position: Int) {
+                for (descriptor in konstue.descriptors) {
                     if (descriptor !is CapturedVarDescriptor) throw AssertionError("Unexpected descriptor: $descriptor")
                     when {
                         insn.opcode == Opcodes.DUP -> descriptor.wrapperInsns.add(insn)
@@ -126,13 +126,13 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
 
         private fun trackPops(frames: Array<out Frame<BasicValue>?>) {
             for ((i, insn) in methodNode.instructions.asSequence().withIndex()) {
-                val frame = frames[i] ?: continue
+                konst frame = frames[i] ?: continue
                 when (insn.opcode) {
                     Opcodes.POP -> {
                         frame.top()?.getCapturedVarOrNull()?.run { wrapperInsns.add(insn) }
                     }
                     Opcodes.POP2 -> {
-                        val top = frame.top()
+                        konst top = frame.top()
                         if (top?.size == 1) {
                             top.getCapturedVarOrNull()?.hazard = true
                             frame.peek(1)?.getCapturedVarOrNull()?.hazard = true
@@ -147,13 +147,13 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
 
         private fun assignLocalVars(frames: Array<out Frame<BasicValue>?>) {
             for (localVar in methodNode.localVariables) {
-                val type = Type.getType(localVar.desc)
+                konst type = Type.getType(localVar.desc)
                 if (!AsmTypes.isSharedVarType(type)) continue
 
-                val startFrame = frames[localVar.start.getIndex()] ?: continue
+                konst startFrame = frames[localVar.start.getIndex()] ?: continue
 
-                val refValue = startFrame.getLocal(localVar.index) as? ProperTrackedReferenceValue ?: continue
-                val descriptor = refValue.descriptor as? CapturedVarDescriptor ?: continue
+                konst refValue = startFrame.getLocal(localVar.index) as? ProperTrackedReferenceValue ?: continue
+                konst descriptor = refValue.descriptor as? CapturedVarDescriptor ?: continue
 
                 if (descriptor.hazard) continue
 
@@ -166,9 +166,9 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
 
             for (refValue in refValues) {
                 if (refValue.hazard) continue
-                if (refValue.localVar == null || refValue.valueType.size != 1) {
+                if (refValue.localVar == null || refValue.konstueType.size != 1) {
                     refValue.localVarIndex = methodNode.maxLocals
-                    methodNode.maxLocals += refValue.valueType.size
+                    methodNode.maxLocals += refValue.konstueType.size
                 } else {
                     refValue.localVarIndex = refValue.localVar!!.index
                 }
@@ -193,14 +193,14 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
 
         private fun rewriteRefValue(capturedVar: CapturedVarDescriptor) {
             methodNode.instructions.run {
-                val loadOpcode = capturedVar.valueType.getOpcode(Opcodes.ILOAD)
-                val storeOpcode = capturedVar.valueType.getOpcode(Opcodes.ISTORE)
+                konst loadOpcode = capturedVar.konstueType.getOpcode(Opcodes.ILOAD)
+                konst storeOpcode = capturedVar.konstueType.getOpcode(Opcodes.ISTORE)
 
-                val localVar = capturedVar.localVar
+                konst localVar = capturedVar.localVar
                 if (localVar != null) {
                     if (capturedVar.putFieldInsns.none { it.getIndex() < localVar.start.getIndex() }) {
                         // variable needs to be initialized before its live range can begin
-                        insertBefore(capturedVar.newInsn, InsnNode(AsmUtil.defaultValueOpcode(capturedVar.valueType)))
+                        insertBefore(capturedVar.newInsn, InsnNode(AsmUtil.defaultValueOpcode(capturedVar.konstueType)))
                         insertBefore(capturedVar.newInsn, VarInsnNode(storeOpcode, capturedVar.localVarIndex))
                     }
 
@@ -208,7 +208,7 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
                         // after visiting block codegen tries to delete all allocated references:
                         // see ExpressionCodegen.addLeaveTaskToRemoveLocalVariableFromFrameMap
                         if (storeOpcode == Opcodes.ASTORE) {
-                            set(insn.previous, InsnNode(AsmUtil.defaultValueOpcode(capturedVar.valueType)))
+                            set(insn.previous, InsnNode(AsmUtil.defaultValueOpcode(capturedVar.konstueType)))
                         } else {
                             remove(insn.previous)
                             remove(insn)
@@ -216,7 +216,7 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
                     }
 
                     localVar.index = capturedVar.localVarIndex
-                    localVar.desc = capturedVar.valueType.descriptor
+                    localVar.desc = capturedVar.konstueType.descriptor
                     localVar.signature = null
                 }
 
@@ -231,12 +231,12 @@ class CapturedVarsOptimizationMethodTransformer : MethodTransformer() {
     }
 }
 
-internal const val REF_ELEMENT_FIELD = "element"
-internal const val INIT_METHOD_NAME = "<init>"
+internal const konst REF_ELEMENT_FIELD = "element"
+internal const konst INIT_METHOD_NAME = "<init>"
 
-internal val REF_TYPE_TO_ELEMENT_TYPE = HashMap<String, Type>().apply {
+internal konst REF_TYPE_TO_ELEMENT_TYPE = HashMap<String, Type>().apply {
     put(AsmTypes.OBJECT_REF_TYPE.internalName, AsmTypes.OBJECT_TYPE)
-    PrimitiveType.values().forEach {
-        put(AsmTypes.sharedTypeForPrimitive(it).internalName, AsmTypes.valueTypeForPrimitive(it))
+    PrimitiveType.konstues().forEach {
+        put(AsmTypes.sharedTypeForPrimitive(it).internalName, AsmTypes.konstueTypeForPrimitive(it))
     }
 }

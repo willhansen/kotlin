@@ -186,14 +186,14 @@ private fun convertArgument(argument: KtSourceElement, firSymbolBuilder: KtSymbo
 private fun convertArgument(argument: Map<*, *>, firSymbolBuilder: KtSymbolByFirBuilder): Any? {
     return argument.mapKeys { (key, _) ->
         convertArgument(key, firSymbolBuilder)
-    }.mapValues { (_, value) -> 
-        convertArgument(value, firSymbolBuilder)
+    }.mapValues { (_, konstue) -> 
+        convertArgument(konstue, firSymbolBuilder)
     }
 }
 
 private fun convertArgument(argument: Collection<*>, firSymbolBuilder: KtSymbolByFirBuilder): Any? {
-    return argument.map { value ->
-        convertArgument(value, firSymbolBuilder)
+    return argument.map { konstue ->
+        convertArgument(konstue, firSymbolBuilder)
     }
 }
 

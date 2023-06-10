@@ -12,11 +12,11 @@ class Foo {
 }
 
 fun testConstructor() {
-    val generatedClass: AllOpenGenerated = AllOpenGenerated()
+    konst generatedClass: AllOpenGenerated = AllOpenGenerated()
 }
 
 fun testNestedClasses(): String {
-    val nestedFoo = AllOpenGenerated.NestedFoo()
+    konst nestedFoo = AllOpenGenerated.NestedFoo()
     return nestedFoo.materialize().box()
 }
 

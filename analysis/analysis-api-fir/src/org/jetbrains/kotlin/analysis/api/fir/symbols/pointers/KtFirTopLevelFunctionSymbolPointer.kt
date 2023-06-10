@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.name.CallableId
 
 internal class KtFirTopLevelFunctionSymbolPointer(
     callableId: CallableId,
-    private val signature: FirCallableSignature,
+    private konst signature: FirCallableSignature,
 ) : KtTopLevelCallableSymbolPointer<KtFunctionSymbol>(callableId) {
     override fun KtFirAnalysisSession.chooseCandidateAndCreateSymbol(
         candidates: Collection<FirCallableSymbol<*>>,
         firSession: FirSession
     ): KtFunctionSymbol? {
-        val firFunction = candidates.findDeclarationWithSignatureBySymbols<FirSimpleFunction>(signature) ?: return null
+        konst firFunction = candidates.findDeclarationWithSignatureBySymbols<FirSimpleFunction>(signature) ?: return null
         return firSymbolBuilder.functionLikeBuilder.buildFunctionSymbol(firFunction.symbol)
     }
 

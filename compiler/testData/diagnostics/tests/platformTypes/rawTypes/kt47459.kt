@@ -19,6 +19,6 @@ public class MarkerManager extends MapObjectManager<MarkerManager.Collection> {
 
 // FILE: main.kt
 fun foo(markerManager: MarkerManager) {
-    val test: MarkerManager.Collection = markerManager.getCollection("FOO")!!
+    konst test: MarkerManager.Collection = markerManager.getCollection("FOO")!!
     test.setOnMarkerClickListener()
 }

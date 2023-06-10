@@ -8,6 +8,6 @@ fun foo(): Int {
 }
 
 fun box(): String {
-    val f = foo()
+    konst f = foo()
     return if (f == 14) "OK" else "Fail $f"
 }

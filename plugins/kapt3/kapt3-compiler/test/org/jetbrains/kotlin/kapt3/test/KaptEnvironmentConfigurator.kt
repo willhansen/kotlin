@@ -25,22 +25,22 @@ import java.io.File
 
 class KaptEnvironmentConfigurator(
     testServices: TestServices,
-    private val processorOptions: Map<String, String> = emptyMap()
+    private konst processorOptions: Map<String, String> = emptyMap()
 ) : EnvironmentConfigurator(testServices) {
     companion object {
-        const val KAPT_RUNNER_DIRECTORY_NAME = "kaptRunner"
+        const konst KAPT_RUNNER_DIRECTORY_NAME = "kaptRunner"
     }
 
-    override val directiveContainers: List<DirectivesContainer> = listOf(
+    override konst directiveContainers: List<DirectivesContainer> = listOf(
         CodegenTestDirectives,
         KaptTestDirectives
     )
 
-    override val additionalServices: List<ServiceRegistrationData> = listOf(service(::KaptOptionsProvider))
+    override konst additionalServices: List<ServiceRegistrationData> = listOf(service(::KaptOptionsProvider))
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
         testServices.kaptOptionsProvider.registerKaptOptions(module) {
-            val temporaryDirectoryManager = testServices.temporaryDirectoryManager
+            konst temporaryDirectoryManager = testServices.temporaryDirectoryManager
             projectBaseDir = temporaryDirectoryManager.rootDir
             compileClasspath.addAll(PathUtil.getJdkClassesRootsFromCurrentJre() + PathUtil.kotlinPathsForIdeaPlugin.stdlibPath)
 
@@ -49,15 +49,15 @@ class KaptEnvironmentConfigurator(
             stubsOutputDir = sourcesOutputDir
             incrementalDataOutputDir = sourcesOutputDir
 
-            val javacOptions = module.directives[CodegenTestDirectives.JAVAC_OPTIONS].associate { opt ->
-                val (key, value) = opt.split('=').map { it.trim() }.also { assert(it.size == 2) }
-                key to value
+            konst javacOptions = module.directives[CodegenTestDirectives.JAVAC_OPTIONS].associate { opt ->
+                konst (key, konstue) = opt.split('=').map { it.trim() }.also { assert(it.size == 2) }
+                key to konstue
             }
 
             this.javacOptions.putAll(javacOptions)
-            val kaptFlagsToAdd = KaptTestDirectives.flagDirectives.mapNotNull {
+            konst kaptFlagsToAdd = KaptTestDirectives.flagDirectives.mapNotNull {
                 runIf(it in module.directives) {
-                    KaptFlag.valueOf(it.name)
+                    KaptFlag.konstueOf(it.name)
                 }
             }
             flags.addAll(kaptFlagsToAdd)
@@ -67,7 +67,7 @@ class KaptEnvironmentConfigurator(
             detectMemoryLeaks = DetectMemoryLeaksMode.NONE
         }
 
-        val runtimeLibrary = File(PathUtil.kotlinPathsForCompiler.libPath, "kotlin-annotation-processing-runtime.jar")
+        konst runtimeLibrary = File(PathUtil.kotlinPathsForCompiler.libPath, "kotlin-annotation-processing-runtime.jar")
         configuration.addJvmClasspathRoot(runtimeLibrary)
         configuration.put(JVMConfigurationKeys.DO_NOT_CLEAR_BINDING_CONTEXT, true)
     }
@@ -75,8 +75,8 @@ class KaptEnvironmentConfigurator(
 
 class KaptRegularExtensionForTestConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     override fun legacyRegisterCompilerExtensions(project: Project, module: TestModule, configuration: CompilerConfiguration) {
-        val analysisExtension = object : PartialAnalysisHandlerExtension() {
-            override val analyzeDefaultParameterValues: Boolean
+        konst analysisExtension = object : PartialAnalysisHandlerExtension() {
+            override konst analyzeDefaultParameterValues: Boolean
                 get() = testServices.kaptOptionsProvider[module][KaptFlag.DUMP_DEFAULT_PARAMETER_VALUES]
         }
         AnalysisHandlerExtension.registerExtension(project, analysisExtension)

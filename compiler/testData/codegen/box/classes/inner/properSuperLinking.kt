@@ -1,6 +1,6 @@
-open class A(val s: String) {
+open class A(konst s: String) {
 
-    val z = s
+    konst z = s
 
     fun test() = s
 
@@ -10,6 +10,6 @@ open class A(val s: String) {
 }
 
 fun box(): String {
-    val res = A("Fail").B("OK").testB()
+    konst res = A("Fail").B("OK").testB()
     return if (res == "OKOK") "OK" else res;
 }

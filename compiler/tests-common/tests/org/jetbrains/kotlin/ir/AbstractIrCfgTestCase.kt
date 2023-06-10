@@ -28,11 +28,11 @@ import java.io.File
 abstract class AbstractIrCfgTestCase : AbstractIrGeneratorTestCase() {
 
     private fun IrFile.cfgDump(): String {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         for (declaration in this.declarations) {
             if (declaration is IrFunction) {
                 builder.appendLine("// FUN: ${declaration.name}")
-                val cfg = FunctionGenerator(declaration).generate()
+                konst cfg = FunctionGenerator(declaration).generate()
                 builder.appendLine(cfg.dump())
                 builder.appendLine("// END FUN: ${declaration.name}")
             }
@@ -41,7 +41,7 @@ abstract class AbstractIrCfgTestCase : AbstractIrGeneratorTestCase() {
     }
 
     private fun IrModuleFragment.cfgDump(): String {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         for (file in this.files) {
             builder.appendLine("// FILE: ${file.path}")
             builder.appendLine(file.cfgDump())
@@ -52,10 +52,10 @@ abstract class AbstractIrCfgTestCase : AbstractIrGeneratorTestCase() {
     }
 
     override fun doTest(wholeFile: File, testFiles: List<TestFile>) {
-        val irModule = generateIrModule(false)
-        val irModuleDump = irModule.cfgDump()
-        val expectedPath = wholeFile.canonicalPath.replace(".kt", ".txt")
-        val expectedFile = File(expectedPath)
+        konst irModule = generateIrModule(false)
+        konst irModuleDump = irModule.cfgDump()
+        konst expectedPath = wholeFile.canonicalPath.replace(".kt", ".txt")
+        konst expectedFile = File(expectedPath)
         KotlinTestUtils.assertEqualsToFile(expectedFile, irModuleDump)
     }
 }

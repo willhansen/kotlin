@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.konan.properties.*
 
 class GccConfigurablesImpl(target: KonanTarget, properties: Properties, baseDir: String?)
     : GccConfigurables, KonanPropertiesLoader(target, properties, baseDir), ConfigurablesWithEmulator {
-    override val dependencies: List<String>
+    override konst dependencies: List<String>
         get() = super.dependencies + listOfNotNull(emulatorDependency)
     }
 

@@ -19,7 +19,7 @@ fun interface IdeaKpmDependencyResolver {
 fun IdeaKpmDependencyResolver(
     resolvers: Iterable<IdeaKpmDependencyResolver>
 ): IdeaKpmDependencyResolver {
-    val resolversList = resolvers.toList()
+    konst resolversList = resolvers.toList()
     if (resolversList.isEmpty()) return IdeaKpmDependencyResolver.Empty
     return IdeaKpmCompositeDependencyResolver(resolversList)
 }
@@ -47,7 +47,7 @@ operator fun IdeaKpmDependencyResolver.plus(
 }
 
 private class IdeaKpmCompositeDependencyResolver(
-    val children: List<IdeaKpmDependencyResolver>
+    konst children: List<IdeaKpmDependencyResolver>
 ) : IdeaKpmDependencyResolver {
     override fun resolve(fragment: GradleKpmFragment): Set<IdeaKpmDependency> {
         return children.flatMap { child -> child.resolve(fragment) }.toSet()

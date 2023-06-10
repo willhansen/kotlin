@@ -7,7 +7,7 @@ interface ArgumentValueDelegate<T> {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): T = listOf("OK") as T
 }
 
-abstract class CLIEntity<TResult> constructor(val delegate: ArgumentValueDelegate<TResult>) {
+abstract class CLIEntity<TResult> constructor(konst delegate: ArgumentValueDelegate<TResult>) {
     operator fun provideDelegate(thisRef: Any?, prop: KProperty<*>): ArgumentValueDelegate<TResult> = delegate
 }
 
@@ -16,6 +16,6 @@ class ArgumentSingleNullableValue<T : Any>(descriptor: OptionDescriptor<T>): Arg
 class SingleNullableOption<T : Any> constructor(descriptor: OptionDescriptor<T>) : AbstractSingleOption<T, T?>(ArgumentSingleNullableValue(descriptor))
 
 fun box(): String {
-    val x: List<Any>? by SingleNullableOption(OptionDescriptor())
+    konst x: List<Any>? by SingleNullableOption(OptionDescriptor())
     return x?.get(0).toString()
 }

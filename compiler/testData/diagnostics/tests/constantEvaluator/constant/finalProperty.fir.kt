@@ -1,53 +1,53 @@
 package test
 
-// val prop1: 1
-val prop1 = A().a
+// konst prop1: 1
+konst prop1 = A().a
 
-// val prop2: 2
-val prop2 = A().a + 1
+// konst prop2: 2
+konst prop2 = A().a + 1
 
 class A() {
-    val a = 1
+    konst a = 1
 
-    // val prop3: 1
-    val prop3 = a
+    // konst prop3: 1
+    konst prop3 = a
 
-    // val prop4: 2
-    val prop4 = a + 1
+    // konst prop4: 2
+    konst prop4 = a + 1
 
     fun foo() {
-        // val prop5: 1
-        val prop5 = A().a
+        // konst prop5: 1
+        konst prop5 = A().a
 
-        // val prop6: 2
-        val prop6 = A().a + 1
+        // konst prop6: 2
+        konst prop6 = A().a + 1
 
-        val b = {
-            // val prop11: 1
-            val prop11 = A().a
+        konst b = {
+            // konst prop11: 1
+            konst prop11 = A().a
 
-            // val prop12: 2
-            val prop12 = A().a + 1
+            // konst prop12: 2
+            konst prop12 = A().a + 1
         }
 
-        val c = object: Foo {
+        konst c = object: Foo {
             override fun f() {
-                // val prop9: 1
-                val prop9 = A().a
+                // konst prop9: 1
+                konst prop9 = A().a
 
-                // val prop10: 2
-                val prop10 = A().a + 1
+                // konst prop10: 2
+                konst prop10 = A().a + 1
             }
         }
     }
 }
 
 fun foo() {
-    // val prop7: 1
-    val prop7 = A().a
+    // konst prop7: 1
+    konst prop7 = A().a
 
-    // val prop8: 2
-    val prop8 = A().a + 1
+    // konst prop8: 2
+    konst prop8 = A().a + 1
 }
 
 interface Foo {

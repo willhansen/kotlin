@@ -2,13 +2,13 @@ interface T {
     fun result(): String
 }
 
-abstract class A<Z>(val x: Z)
+abstract class A<Z>(konst x: Z)
 
 open class B : A<String>("OK")
 
 class C : B() {
     fun foo() = object : T {
-        val bar = x
+        konst bar = x
 
         override fun result() = bar
     }

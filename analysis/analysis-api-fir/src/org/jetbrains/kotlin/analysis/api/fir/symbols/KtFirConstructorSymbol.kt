@@ -30,23 +30,23 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirConstructorSymbol
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFirConstructorSymbol(
-    override val firSymbol: FirConstructorSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirConstructorSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtConstructorSymbol(), KtFirSymbol<FirConstructorSymbol> {
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
 
-    override val valueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
+    override konst konstueParameters: List<KtValueParameterSymbol> by cached { firSymbol.createKtValueParameters(builder) }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion {
             firSymbol.fir.hasStableParameterNames
         }
 
-    override val visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
+    override konst visibility: Visibility get() = withValidityAssertion { firSymbol.visibility }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,
@@ -54,12 +54,12 @@ internal class KtFirConstructorSymbol(
         )
     }
 
-    override val containingClassIdIfNonLocal: ClassId?
+    override konst containingClassIdIfNonLocal: ClassId?
         get() = withValidityAssertion { firSymbol.containingClassLookupTag()?.classId?.takeUnless { it.isLocal } }
 
-    override val isPrimary: Boolean get() = withValidityAssertion { firSymbol.isPrimary }
+    override konst isPrimary: Boolean get() = withValidityAssertion { firSymbol.isPrimary }
 
-    override val typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
+    override konst typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
 
 
     context(KtAnalysisSession)

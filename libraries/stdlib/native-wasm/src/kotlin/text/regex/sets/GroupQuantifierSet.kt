@@ -28,11 +28,11 @@ package kotlin.text.regex
  * consume.
  */
 open internal class GroupQuantifierSet(
-        val quantifier: Quantifier,
+        konst quantifier: Quantifier,
         innerSet: AbstractSet,
         next: AbstractSet,
         type: Int,
-        val groupQuantifierIndex: Int // It's used to remember a number of the innerSet occurrences during the recursive search.
+        konst groupQuantifierIndex: Int // It's used to remember a number of the innerSet occurrences during the recursive search.
 ) : QuantifierSet(innerSet, next, type) {
 
     init {
@@ -40,8 +40,8 @@ open internal class GroupQuantifierSet(
         innerSet.next = this
     }
 
-    val max: Int get() = quantifier.max
-    val min: Int get() = quantifier.min
+    konst max: Int get() = quantifier.max
+    konst min: Int get() = quantifier.min
 
     // We call innerSet.matches here, if it succeeds it call next.matches where next is this QuantifierSet.
     // So we have a recursive searching procedure.
@@ -50,7 +50,7 @@ open internal class GroupQuantifierSet(
 
         fun matchNext(): Int {
             matchResult.enterCounters[groupQuantifierIndex] = 0
-            val result = next.matches(startIndex, testString, matchResult)
+            konst result = next.matches(startIndex, testString, matchResult)
             matchResult.enterCounters[groupQuantifierIndex] = enterCount
             return result
         }
@@ -61,7 +61,7 @@ open internal class GroupQuantifierSet(
 
         // Fast case: '*' or {0, } - no need to count occurrences.
         if (min == 0 && max == Quantifier.INF) {
-            val nextIndex = innerSet.matches(startIndex, testString, matchResult)
+            konst nextIndex = innerSet.matches(startIndex, testString, matchResult)
             return if (nextIndex < 0) {
                 matchNext()
             } else {
@@ -76,7 +76,7 @@ open internal class GroupQuantifierSet(
 
         // go inner set;
         matchResult.enterCounters[groupQuantifierIndex] = ++enterCount
-        val nextIndex = innerSet.matches(startIndex, testString, matchResult)
+        konst nextIndex = innerSet.matches(startIndex, testString, matchResult)
 
         return if (nextIndex < 0) {
             matchResult.enterCounters[groupQuantifierIndex] = --enterCount
@@ -91,6 +91,6 @@ open internal class GroupQuantifierSet(
 
     }
 
-    override val name: String
+    override konst name: String
             get() = quantifier.toString()
 }

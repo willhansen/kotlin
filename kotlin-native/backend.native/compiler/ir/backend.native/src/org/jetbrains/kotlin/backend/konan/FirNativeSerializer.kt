@@ -42,9 +42,9 @@ internal fun PhaseContext.firSerializerBase(
         firResult: FirResult,
         fir2IrInput: Fir2IrOutput?,
 ): SerializerOutput {
-    val configuration = config.configuration
-    val sourceFiles = mutableListOf<KtSourceFile>()
-    val firFilesAndSessionsBySourceFile = mutableMapOf<KtSourceFile, Triple<FirFile, FirSession, ScopeSession>>()
+    konst configuration = config.configuration
+    konst sourceFiles = mutableListOf<KtSourceFile>()
+    konst firFilesAndSessionsBySourceFile = mutableMapOf<KtSourceFile, Triple<FirFile, FirSession, ScopeSession>>()
 
     for (firOutput in firResult.outputs) {
         for (firFile in firOutput.fir) {
@@ -53,17 +53,17 @@ internal fun PhaseContext.firSerializerBase(
         }
     }
 
-    val metadataVersion =
+    konst metadataVersion =
             configuration.get(CommonConfigurationKeys.METADATA_VERSION)
                     ?: configuration.languageVersionSettings.languageVersion.toMetadataVersion()
 
-    val usedResolvedLibraries = fir2IrInput?.let {
+    konst usedResolvedLibraries = fir2IrInput?.let {
         config.resolvedLibraries.getFullResolvedList(TopologicalLibraryOrder).filter {
             (!it.isDefault && !configuration.getBoolean(KonanConfigKeys.PURGE_USER_LIBS)) || it in fir2IrInput.usedLibraries
         }
     }
 
-    val actualizedFirDeclarations = fir2IrInput?.irActualizedResult?.extractFirDeclarations()
+    konst actualizedFirDeclarations = fir2IrInput?.irActualizedResult?.extractFirDeclarations()
     return serializeNativeModule(
             configuration = configuration,
             messageLogger = configuration.get(IrMessageLogger.IR_MESSAGE_LOGGER) ?: IrMessageLogger.None,
@@ -93,13 +93,13 @@ internal fun PhaseContext.firSerializerBase(
 }
 
 class KotlinFileSerializedData(
-        val source: KtSourceFile,
-        val firFile: FirFile,
-        val metadata: ByteArray,
-        val irData: SerializedIrFile?,
+        konst source: KtSourceFile,
+        konst firFile: FirFile,
+        konst metadata: ByteArray,
+        konst irData: SerializedIrFile?,
 ) {
-    val fqName: String get() = irData?.fqName ?: firFile.packageFqName.asString()
-    val path: String? get() = irData?.path ?: source.path
+    konst fqName: String get() = irData?.fqName ?: firFile.packageFqName.asString()
+    konst path: String? get() = irData?.path ?: source.path
 }
 
 internal fun PhaseContext.serializeNativeModule(
@@ -117,11 +117,11 @@ internal fun PhaseContext.serializeNativeModule(
         assert(files.size == moduleFragment.files.size)
     }
 
-    val sourceBaseDirs = configuration[CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES] ?: emptyList()
-    val absolutePathNormalization = configuration[CommonConfigurationKeys.KLIB_NORMALIZE_ABSOLUTE_PATH] ?: false
-    val expectActualLinker = config.configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_LINKER) ?: false
+    konst sourceBaseDirs = configuration[CommonConfigurationKeys.KLIB_RELATIVE_PATH_BASES] ?: emptyList()
+    konst absolutePathNormalization = configuration[CommonConfigurationKeys.KLIB_NORMALIZE_ABSOLUTE_PATH] ?: false
+    konst expectActualLinker = config.configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_LINKER) ?: false
 
-    val serializedIr = moduleFragment?.let {
+    konst serializedIr = moduleFragment?.let {
         KonanIrModuleSerializer(
                 messageLogger,
                 moduleFragment.irBuiltins,
@@ -134,10 +134,10 @@ internal fun PhaseContext.serializeNativeModule(
         ).serializedIrModule(moduleFragment)
     }
 
-    val serializedFiles = serializedIr?.files?.toList()
+    konst serializedFiles = serializedIr?.files?.toList()
 
-    val compiledKotlinFiles = files.mapIndexed { index, ktSourceFile ->
-        val binaryFile = serializedFiles?.get(index)?.also {
+    konst compiledKotlinFiles = files.mapIndexed { index, ktSourceFile ->
+        konst binaryFile = serializedFiles?.get(index)?.also {
             assert(ktSourceFile.path == it.path) {
                 """The Kt and Ir files are put in different order
                 Kt: ${ktSourceFile.path}
@@ -145,19 +145,19 @@ internal fun PhaseContext.serializeNativeModule(
             """.trimMargin()
             }
         }
-        val (firFile, session, scopeSession) = firFilesAndSessionsBySourceFile[ktSourceFile]
+        konst (firFile, session, scopeSession) = firFilesAndSessionsBySourceFile[ktSourceFile]
                 ?: error("cannot find FIR file by source file ${ktSourceFile.name} (${ktSourceFile.path})")
-        val packageFragment = serializeSingleFile(firFile, session, scopeSession)
+        konst packageFragment = serializeSingleFile(firFile, session, scopeSession)
         KotlinFileSerializedData(ktSourceFile, firFile, packageFragment.toByteArray(), binaryFile)
     }
 
-    val header = serializeKlibHeader(
+    konst header = serializeKlibHeader(
             configuration.languageVersionSettings, moduleName,
             compiledKotlinFiles.map { it.fqName }.distinct().sorted(),
             emptyList()
     ).toByteArray()
 
-    val serializedMetadata =
+    konst serializedMetadata =
             makeSerializedKlibMetadata(
                     compiledKotlinFiles.groupBy { it.fqName }
                             .map { (fqn, data) -> fqn to data.sortedBy { it.path }.map { it.metadata } }.toMap(),

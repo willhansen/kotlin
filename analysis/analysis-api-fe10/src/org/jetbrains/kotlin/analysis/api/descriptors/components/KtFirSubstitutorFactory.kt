@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.descriptors.components.base.Fe10KtAnaly
 import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
 
 internal class KtFe10SubstitutorFactory(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSubstitutorFactory(), Fe10KtAnalysisSessionComponent {
 
     override fun buildSubstitutor(builder: KtSubstitutorBuilder): KtSubstitutor {

@@ -1,6 +1,6 @@
 @kotlin.ExperimentalStdlibApi
 fun testEnumEntries(stepId: Int): Boolean {
-    val entries = TestEnum.entries
+    konst entries = TestEnum.entries
 
     if (entries.contains((object {}) as Any?)) return false
 

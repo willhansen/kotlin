@@ -1,4 +1,4 @@
-open class A(private val s: String = "") {
+open class A(private konst s: String = "") {
     fun foo() = s
 }
 

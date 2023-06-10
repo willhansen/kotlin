@@ -13,7 +13,7 @@ import kotlin.reflect.full.createType
 sealed class HLParameterConversion {
     abstract fun convertExpression(expression: String, context: ConversionContext): String
     abstract fun convertType(type: KType): KType
-    open val importsToAdd: List<String> get() = emptyList()
+    open konst importsToAdd: List<String> get() = emptyList()
 }
 
 object HLIdParameterConversion : HLParameterConversion() {
@@ -22,11 +22,11 @@ object HLIdParameterConversion : HLParameterConversion() {
 }
 
 class HLCollectionParameterConversion(
-    private val parameterName: String,
-    private val mappingConversion: HLParameterConversion,
+    private konst parameterName: String,
+    private konst mappingConversion: HLParameterConversion,
 ) : HLParameterConversion() {
     override fun convertExpression(expression: String, context: ConversionContext): String {
-        val innerExpression = mappingConversion.convertExpression(parameterName, context.increaseIndent())
+        konst innerExpression = mappingConversion.convertExpression(parameterName, context.increaseIndent())
         return buildString {
             appendLine("$expression.map { $parameterName ->")
             appendLine(innerExpression.withIndent(context.increaseIndent()))
@@ -44,30 +44,30 @@ class HLCollectionParameterConversion(
             )
         )
 
-    override val importsToAdd get() = mappingConversion.importsToAdd
+    override konst importsToAdd get() = mappingConversion.importsToAdd
 }
 
 class HLMapParameterConversion(
-    private val keyName: String,
-    private val valueName: String,
-    private val mappingConversionForKeys: HLParameterConversion,
-    private val mappingConversionForValues: HLParameterConversion,
+    private konst keyName: String,
+    private konst konstueName: String,
+    private konst mappingConversionForKeys: HLParameterConversion,
+    private konst mappingConversionForValues: HLParameterConversion,
 ) : HLParameterConversion() {
     override fun convertExpression(expression: String, context: ConversionContext): String {
-        val keyTransformation = mappingConversionForKeys.convertExpression(keyName, context.increaseIndent())
-        val valueTransformation = mappingConversionForValues.convertExpression(valueName, context.increaseIndent())
+        konst keyTransformation = mappingConversionForKeys.convertExpression(keyName, context.increaseIndent())
+        konst konstueTransformation = mappingConversionForValues.convertExpression(konstueName, context.increaseIndent())
         return buildString {
             appendLine("$expression.mapKeys { ($keyName, _) ->")
             appendLine(keyTransformation.withIndent(context.increaseIndent()))
-            appendLine("}.mapValues { (_, $valueName) -> ".withIndent(context))
-            appendLine(valueTransformation.withIndent(context.increaseIndent()))
+            appendLine("}.mapValues { (_, $konstueName) -> ".withIndent(context))
+            appendLine(konstueTransformation.withIndent(context.increaseIndent()))
             append("}".withIndent(context))
         }
     }
 
     override fun convertType(type: KType): KType {
-        val keyArgument = type.arguments[0]
-        val valueArgument = type.arguments[1]
+        konst keyArgument = type.arguments[0]
+        konst konstueArgument = type.arguments[1]
         return Map::class.createType(
             arguments = listOf(
                 KTypeProjection(
@@ -76,32 +76,32 @@ class HLMapParameterConversion(
                 ),
                 KTypeProjection(
                     variance = KVariance.INVARIANT,
-                    type = valueArgument.type?.let(mappingConversionForValues::convertType)
+                    type = konstueArgument.type?.let(mappingConversionForValues::convertType)
                 )
             )
         )
     }
 
-    override val importsToAdd: List<String>
+    override konst importsToAdd: List<String>
         get() = (mappingConversionForKeys.importsToAdd + mappingConversionForValues.importsToAdd).distinct()
 }
 
 class HLPairParameterConversion(
-    private val mappingConversionFirst: HLParameterConversion,
-    private val mappingConversionSecond: HLParameterConversion,
+    private konst mappingConversionFirst: HLParameterConversion,
+    private konst mappingConversionSecond: HLParameterConversion,
 ) : HLParameterConversion() {
     override fun convertExpression(expression: String, context: ConversionContext): String {
         if (mappingConversionFirst.isTrivial && mappingConversionSecond.isTrivial) {
             return expression
         }
-        val first = mappingConversionFirst.convertExpression("$expression.first", context)
-        val second = mappingConversionSecond.convertExpression("$expression.second", context)
+        konst first = mappingConversionFirst.convertExpression("$expression.first", context)
+        konst second = mappingConversionSecond.convertExpression("$expression.second", context)
         return "$first to $second"
     }
 
     override fun convertType(type: KType): KType {
-        val first = type.arguments.getOrNull(0)?.type ?: return type
-        val second = type.arguments.getOrNull(1)?.type ?: return type
+        konst first = type.arguments.getOrNull(0)?.type ?: return type
+        konst second = type.arguments.getOrNull(1)?.type ?: return type
         return Pair::class.createType(
             arguments = listOf(
                 KTypeProjection(
@@ -116,14 +116,14 @@ class HLPairParameterConversion(
         )
     }
 
-    override val importsToAdd
+    override konst importsToAdd
         get() = mappingConversionFirst.importsToAdd + mappingConversionSecond.importsToAdd
 }
 
 class HLFunctionCallConversion(
-    private val callTemplate: String,
-    private val callType: KType,
-    override val importsToAdd: List<String> = emptyList()
+    private konst callTemplate: String,
+    private konst callType: KType,
+    override konst importsToAdd: List<String> = emptyList()
 ) : HLParameterConversion() {
     override fun convertExpression(expression: String, context: ConversionContext) =
         callTemplate.replace("{0}", expression)
@@ -131,14 +131,14 @@ class HLFunctionCallConversion(
     override fun convertType(type: KType): KType = callType
 }
 
-data class ConversionContext(val currentIndent: Int, val indentUnitValue: Int) {
+data class ConversionContext(konst currentIndent: Int, konst indentUnitValue: Int) {
     fun increaseIndent() = copy(currentIndent = currentIndent + 1)
 }
 
 private fun String.withIndent(context: ConversionContext): String {
-    val newIndent = " ".repeat(context.currentIndent * context.indentUnitValue)
+    konst newIndent = " ".repeat(context.currentIndent * context.indentUnitValue)
     return replaceIndent(newIndent)
 }
 
-val HLParameterConversion.isTrivial: Boolean
+konst HLParameterConversion.isTrivial: Boolean
     get() = this is HLIdParameterConversion

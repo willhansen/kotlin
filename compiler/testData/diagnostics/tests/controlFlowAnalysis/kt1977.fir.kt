@@ -38,7 +38,7 @@ fun test2(s : String) : Int? {
 
 //KT-2015 False "Expression is unused" warnings
 fun foo() {
-    val i : Int = try{
+    konst i : Int = try{
         bar()
         1
     }

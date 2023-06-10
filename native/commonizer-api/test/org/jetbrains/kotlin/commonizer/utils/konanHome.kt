@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.utils.NativeCompilerDownloader
 import java.io.File
 
-internal val konanHome: File by lazy {
-    val project = ProjectBuilder
+internal konst konanHome: File by lazy {
+    konst project = ProjectBuilder
         .builder()
         .build()
         .run {
@@ -27,6 +27,6 @@ internal val konanHome: File by lazy {
             }
             this
         } as ProjectInternal
-    project.evaluate()
+    project.ekonstuate()
     NativeCompilerDownloader(project).compilerDirectory
 }

@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.ir.interpreter.preprocessor
 
 import org.jetbrains.kotlin.ir.IrBuiltIns
 import org.jetbrains.kotlin.ir.declarations.IrFile
-import org.jetbrains.kotlin.ir.interpreter.checker.EvaluationMode
+import org.jetbrains.kotlin.ir.interpreter.checker.EkonstuationMode
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
 interface IrInterpreterPreprocessor: IrElementTransformer<IrInterpreterPreprocessorData> {
@@ -17,6 +17,6 @@ interface IrInterpreterPreprocessor: IrElementTransformer<IrInterpreterPreproces
 }
 
 class IrInterpreterPreprocessorData(
-    val mode: EvaluationMode,
-    val irBuiltIns: IrBuiltIns
+    konst mode: EkonstuationMode,
+    konst irBuiltIns: IrBuiltIns
 )

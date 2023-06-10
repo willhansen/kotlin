@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.AbstractKtSourceElement
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 
 interface DiagnosticContext {
-    val containingFilePath: String?
+    konst containingFilePath: String?
 
     fun isDiagnosticSuppressed(diagnostic: KtDiagnostic): Boolean
 
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
 }
 
 abstract class DiagnosticReporter {
@@ -24,8 +24,8 @@ abstract class DiagnosticReporter {
 }
 
 open class KtDiagnosticReporterWithContext(
-    val diagnosticReporter: DiagnosticReporter,
-    val languageVersionSettings: LanguageVersionSettings
+    konst diagnosticReporter: DiagnosticReporter,
+    konst languageVersionSettings: LanguageVersionSettings
 ) : DiagnosticReporter() {
     override fun report(diagnostic: KtDiagnostic?, context: DiagnosticContext) = diagnosticReporter.report(diagnostic, context)
 
@@ -37,8 +37,8 @@ open class KtDiagnosticReporterWithContext(
         DiagnosticContextImpl(sourceElement, containingFilePath)
 
     open inner class DiagnosticContextImpl(
-        val sourceElement: AbstractKtSourceElement?,
-        override val containingFilePath: String
+        konst sourceElement: AbstractKtSourceElement?,
+        override konst containingFilePath: String
     ) : DiagnosticContext {
 
         override fun isDiagnosticSuppressed(diagnostic: KtDiagnostic): Boolean {
@@ -46,7 +46,7 @@ open class KtDiagnosticReporterWithContext(
 //            TODO("Not yet implemented")
         }
 
-        override val languageVersionSettings: LanguageVersionSettings
+        override konst languageVersionSettings: LanguageVersionSettings
             get() = this@KtDiagnosticReporterWithContext.languageVersionSettings
 
         fun report(factory: KtDiagnosticFactory0) {

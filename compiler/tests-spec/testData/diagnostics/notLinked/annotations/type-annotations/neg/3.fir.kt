@@ -2,7 +2,7 @@
 
 // TESTCASE NUMBER: 1, 2, 3
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 // TESTCASE NUMBER: 1
 fun foo(i: Inv<@Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) String>) {}

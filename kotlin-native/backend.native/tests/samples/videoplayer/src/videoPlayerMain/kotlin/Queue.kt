@@ -5,8 +5,8 @@
 
 package sample.videoplayer
 
-class Queue<T>(val maxSize: Int) {
-    private val array = arrayOfNulls<Any>(maxSize)
+class Queue<T>(konst maxSize: Int) {
+    private konst array = arrayOfNulls<Any>(maxSize)
     private var head = 0
     private var tail = 0
 
@@ -21,7 +21,7 @@ class Queue<T>(val maxSize: Int) {
     fun pop(): T {
         if (tail == head)
             throw Error("queue underflow")
-        val result = array[head] as T
+        konst result = array[head] as T
         array[head] = null
         head = (head + 1) % maxSize
         return result

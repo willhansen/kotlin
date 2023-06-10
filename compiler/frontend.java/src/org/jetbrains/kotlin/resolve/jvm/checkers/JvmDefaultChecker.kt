@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.resolve.jvm.annotations.isCompiledToJvmDefault
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 import org.jetbrains.kotlin.util.getNonPrivateTraitMembersForDelegation
 
-class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : DeclarationChecker {
+class JvmDefaultChecker(private konst jvmTarget: JvmTarget, project: Project) : DeclarationChecker {
 
-    private val ideService = LanguageVersionSettingsProvider.getInstance(project)
+    private konst ideService = LanguageVersionSettingsProvider.getInstance(project)
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val jvmDefaultMode = context.languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
+        konst jvmDefaultMode = context.languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
 
         if (checkJvmCompatibilityAnnotations(descriptor, declaration, context, jvmDefaultMode)) return
 
@@ -44,7 +44,7 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         // report error because absent of it's can affect library ABI
         // 2. If it's mixed hierarchy with implicit override in base class and override one in inherited derived interface report error.
         // Otherwise the implicit class override would be used for dispatching method calls (but not more specialized)
-        val performSpecializationCheck = jvmDefaultMode.isCompatibility && !descriptor.hasJvmDefaultNoCompatibilityAnnotation() &&
+        konst performSpecializationCheck = jvmDefaultMode.isCompatibility && !descriptor.hasJvmDefaultNoCompatibilityAnnotation() &&
                 //TODO: maybe remove this check for JVM compatibility
                 !(descriptor.modality !== Modality.OPEN && descriptor.modality !== Modality.ABSTRACT || descriptor.isEffectivelyPrivateApi)
 
@@ -69,8 +69,8 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
                         checkPossibleClashMember(inheritedMember, actualImplementation, jvmDefaultMode, context, declaration)
                     }
                 } else if (actualImplementation is PropertyDescriptor && inheritedMember is PropertyDescriptor) {
-                    val getterImpl = actualImplementation.getter
-                    val getterInherited = inheritedMember.getter
+                    konst getterImpl = actualImplementation.getter
+                    konst getterInherited = inheritedMember.getter
                     if (getterImpl == null || getterInherited == null || !jvmDefaultMode.isCompatibility ||
                         checkSpecializationInCompatibilityMode(
                             getterInherited,
@@ -81,8 +81,8 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
                         )
                     ) {
                         if (actualImplementation.isVar && inheritedMember.isVar) {
-                            val setterImpl = actualImplementation.setter
-                            val setterInherited = inheritedMember.setter
+                            konst setterImpl = actualImplementation.setter
+                            konst setterInherited = inheritedMember.setter
                             if (setterImpl != null && setterInherited != null) {
                                 if (!checkSpecializationInCompatibilityMode(
                                         setterInherited,
@@ -108,7 +108,7 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         jvmDefaultMode: JvmDefaultMode
     ): Boolean {
         descriptor.annotations.findAnnotation(JVM_DEFAULT_NO_COMPATIBILITY_FQ_NAME)?.let { annotationDescriptor ->
-            val reportOn = DescriptorToSourceUtils.getSourceFromAnnotation(annotationDescriptor) ?: declaration
+            konst reportOn = DescriptorToSourceUtils.getSourceFromAnnotation(annotationDescriptor) ?: declaration
             if (!jvmDefaultMode.isEnabled) {
                 context.trace.report(ErrorsJvm.JVM_DEFAULT_IN_DECLARATION.on(reportOn, "JvmDefaultWithoutCompatibility"))
                 return true
@@ -116,7 +116,7 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         }
 
         descriptor.annotations.findAnnotation(JVM_DEFAULT_WITH_COMPATIBILITY_FQ_NAME)?.let { annotationDescriptor ->
-            val reportOn = DescriptorToSourceUtils.getSourceFromAnnotation(annotationDescriptor) ?: declaration
+            konst reportOn = DescriptorToSourceUtils.getSourceFromAnnotation(annotationDescriptor) ?: declaration
             if (jvmDefaultMode != JvmDefaultMode.ALL_INCOMPATIBLE) {
                 context.trace.report(ErrorsJvm.JVM_DEFAULT_WITH_COMPATIBILITY_IN_DECLARATION.on(reportOn))
                 return true
@@ -137,9 +137,9 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         performSpecializationCheck: Boolean
     ): Boolean {
         if (!performSpecializationCheck || actualImplementation is JavaMethodDescriptor) return true
-        val inheritedSignature = inheritedFun.computeJvmDescriptor(withReturnType = true, withName = false)
-        val originalImplementation = actualImplementation.original
-        val actualSignature = originalImplementation.computeJvmDescriptor(withReturnType = true, withName = false)
+        konst inheritedSignature = inheritedFun.computeJvmDescriptor(withReturnType = true, withName = false)
+        konst originalImplementation = actualImplementation.original
+        konst actualSignature = originalImplementation.computeJvmDescriptor(withReturnType = true, withName = false)
         if (inheritedSignature != actualSignature) {
             //NB: this diagnostics should be a bit tuned, see box/jvm8/defaults/allCompatibility/kt14243_2.kt for details
             context.trace.report(
@@ -161,7 +161,7 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         context: DeclarationCheckerContext,
         declaration: KtDeclaration
     ) {
-        val clashMember = findPossibleClashMember(inheritedFun, jvmDefaultMode)
+        konst clashMember = findPossibleClashMember(inheritedFun, jvmDefaultMode)
         if (clashMember != null) {
             context.trace.report(
                 ErrorsJvm.EXPLICIT_OVERRIDE_REQUIRED_IN_MIXED_MODE.on(
@@ -178,11 +178,11 @@ class JvmDefaultChecker(private val jvmTarget: JvmTarget, project: Project) : De
         inheritedFun: CallableMemberDescriptor,
         jvmDefaultMode: JvmDefaultMode
     ): CallableMemberDescriptor? {
-        val classDescriptor = inheritedFun.containingDeclaration
+        konst classDescriptor = inheritedFun.containingDeclaration
         if (classDescriptor !is ClassDescriptor || classDescriptor.getSuperClassNotAny() == null) return null
-        val classMembers =
+        konst classMembers =
             inheritedFun.overriddenDescriptors.filter { !isInterface(it.containingDeclaration) && !isAnnotationClass(it.containingDeclaration) }
-        val implicitDefaultImplsDelegate =
+        konst implicitDefaultImplsDelegate =
             classMembers.firstOrNull {
                 //TODO: additional processing for platform dependent method is required (https://youtrack.jetbrains.com/issue/KT-42697)
                 it !is JavaCallableMemberDescriptor &&
@@ -201,7 +201,7 @@ internal fun CallableMemberDescriptor.isCompiledToJvmDefaultWithProperMode(
     ideService: LanguageVersionSettingsProvider?,
     compilationDefaultMode: JvmDefaultMode
 ): Boolean {
-    val jvmDefault =
+    konst jvmDefault =
         if (this is DeserializedDescriptor) compilationDefaultMode/*doesn't matter*/ else ideService?.getModuleLanguageVersionSettings(module)
             ?.getFlag(JvmAnalysisFlags.jvmDefaultMode) ?: compilationDefaultMode
     return isCompiledToJvmDefault(jvmDefault)

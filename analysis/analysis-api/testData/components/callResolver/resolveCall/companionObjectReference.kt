@@ -1,9 +1,9 @@
 open class Server() {
     companion object {
-        val NAME = "Server"
+        konst NAME = "Server"
     }
 }
 
 class Client: Server() {
-    val name = <expr>Server</expr>.NAME
+    konst name = <expr>Server</expr>.NAME
 }

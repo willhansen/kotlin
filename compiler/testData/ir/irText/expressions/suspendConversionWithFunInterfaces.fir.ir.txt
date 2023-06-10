@@ -24,19 +24,19 @@ FILE fqName:<root> fileName:/suspendConversionWithFunInterfaces.kt
   FUN name:bar2 visibility:public modality:FINAL <> (s:kotlin.String) returnType:kotlin.Int
     VALUE_PARAMETER name:s index:0 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun bar2 (s: kotlin.String): kotlin.Int declared in <root>'
-        CONST Int type=kotlin.Int value=0
+        CONST Int type=kotlin.Int konstue=0
   FUN name:bar3 visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY
   FUN name:bar3 visibility:public modality:FINAL <> (s:kotlin.String) returnType:kotlin.Int [suspend]
     VALUE_PARAMETER name:s index:0 type:kotlin.String
       EXPRESSION_BODY
-        CONST String type=kotlin.String value=""
+        CONST String type=kotlin.String konstue=""
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun bar3 (s: kotlin.String): kotlin.Int declared in <root>'
-        CONST Int type=kotlin.Int value=0
+        CONST Int type=kotlin.Int konstue=0
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY
       CALL 'public final fun foo1 (s: <root>.SuspendRunnable): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null

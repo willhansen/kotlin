@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty
 
 abstract class MainActivity : DIAware1() {
-    val bar: Bar by <!DEBUG_INFO_LEAKING_THIS!>instance1<!>()
+    konst bar: Bar by <!DEBUG_INFO_LEAKING_THIS!>instance1<!>()
 }
 
 class Bar

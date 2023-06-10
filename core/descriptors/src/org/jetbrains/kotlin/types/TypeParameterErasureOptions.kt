@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.types
 
 class TypeParameterErasureOptions(
-    val leaveNonTypeParameterTypes: Boolean,
-    val intersectUpperBounds: Boolean,
+    konst leaveNonTypeParameterTypes: Boolean,
+    konst intersectUpperBounds: Boolean,
 )

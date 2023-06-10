@@ -37,7 +37,7 @@ public class c3 {
 package some
 
 fun test() {
-    val a_b = c1().test()
+    konst a_b = c1().test()
     a_b.a_b()
 }
 
@@ -45,12 +45,12 @@ fun test() {
 package a
 
 fun test() {
-    val a_b = c2().test()
+    konst a_b = c2().test()
     a_b.a_b()
 }
 
 // FILE: c3.kt
 fun test() {
-    val _ab = c3().test()
+    konst _ab = c3().test()
     _ab._ab()
 }

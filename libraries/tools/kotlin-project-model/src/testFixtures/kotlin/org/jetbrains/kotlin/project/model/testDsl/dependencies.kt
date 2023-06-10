@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.project.model.infra.KpmTestEntity
 
 fun KpmTestEntity.project(projectId: String): KpmLocalModuleIdentifier = KpmLocalModuleIdentifier("", projectId, null)
 
-val KpmLocalModuleIdentifier.test: KpmLocalModuleIdentifier
+konst KpmLocalModuleIdentifier.test: KpmLocalModuleIdentifier
     get() = KpmLocalModuleIdentifier(buildId, projectId, "test")
 
 // TODO: custom aux modules

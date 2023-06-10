@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 fun box(): String {
-    val k = tryOrNull { "K" }
+    konst k = tryOrNull { "K" }
     return "O$k"
 }
 

@@ -1,6 +1,6 @@
 
 var longWords = 0
-val smallWords = hashSetOf<String>()
+konst smallWords = hashSetOf<String>()
 
 fun test1(word: String) =
         run {

@@ -5,4 +5,4 @@ fun Runnable(f: () -> Unit): Runnable = object : Runnable {
     }
 }
 
-val x = Runnable {  }
+konst x = Runnable {  }

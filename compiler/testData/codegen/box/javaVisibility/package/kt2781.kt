@@ -5,14 +5,14 @@
 import java.lang.String;
 
 class J {
-    String value;
+    String konstue;
 
-    J(String value) {
-        this.value = value;
+    J(String konstue) {
+        this.konstue = konstue;
     }
 }
 
 // MODULE: main(lib)
 // FILE: 1.kt
 
-fun box() = J("OK").value
+fun box() = J("OK").konstue

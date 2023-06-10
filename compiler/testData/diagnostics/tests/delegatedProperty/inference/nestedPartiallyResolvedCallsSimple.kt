@@ -8,7 +8,7 @@ class KotlinVal<T>(initializer: () -> T) {
 class A(
     myType: (() -> Int)?
 ) {
-    val arguments: A by KotlinVal {
+    konst arguments: A by KotlinVal {
         A(select(null, fun(): Int { return 1 }))
     }
 }

@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.test.directives.model.SimpleDirectivesContainer
 import org.jetbrains.kotlin.test.frontend.classic.handlers.ConstantValuesHandler
 
 object DiagnosticsDirectives : SimpleDirectivesContainer() {
-    val WITH_NEW_INFERENCE by directive(
+    konst WITH_NEW_INFERENCE by directive(
         description = "Enables rendering different diagnostics for old and new inference"
     )
 
-    val DIAGNOSTICS by stringDirective(
+    konst DIAGNOSTICS by stringDirective(
         description = """
             Enables or disables rendering of specific diagnostics. 
             Syntax:
@@ -32,29 +32,29 @@ object DiagnosticsDirectives : SimpleDirectivesContainer() {
         """.trimIndent()
     )
 
-    val SKIP_TXT by directive(
+    konst SKIP_TXT by directive(
         description = "Disables handler which dumps declarations to testName.txt"
     )
 
-    val NI_EXPECTED_FILE by directive(
+    konst NI_EXPECTED_FILE by directive(
         description = "Create separate .ni.txt file for declarations dump with new inference enabled"
     )
 
-    val SKIP_JAVAC by directive(
+    konst SKIP_JAVAC by directive(
         description = "Skip this test if $USE_JAVAC enabled"
     )
 
-    val JAVAC_EXPECTED_FILE by directive(
+    konst JAVAC_EXPECTED_FILE by directive(
         description = "Dump descriptors to .javac.txt file if $USE_JAVAC enabled"
     )
 
-    val MARK_DYNAMIC_CALLS by directive(
+    konst MARK_DYNAMIC_CALLS by directive(
         description = """
             Render debug info about dynamic calls
         """.trimIndent()
     )
 
-    val REPORT_JVM_DIAGNOSTICS_ON_FRONTEND by directive(
+    konst REPORT_JVM_DIAGNOSTICS_ON_FRONTEND by directive(
         description = """
             Collect additional jvm specific diagnostics on frontend
             Note that this directive is not needed if ${JvmBackendDiagnosticsHandler::class} 
@@ -62,30 +62,30 @@ object DiagnosticsDirectives : SimpleDirectivesContainer() {
         """.trimIndent()
     )
 
-    val RENDER_PACKAGE by stringDirective(
+    konst RENDER_PACKAGE by stringDirective(
         description = """
             Dump declaration from packages listed in directive
               (additional to root package)
         """.trimIndent()
     )
 
-    val REPORT_ONLY_EXPLICITLY_DEFINED_DEBUG_INFO by directive(
+    konst REPORT_ONLY_EXPLICITLY_DEFINED_DEBUG_INFO by directive(
         description = """
             If this directive enabled then `DEBUG_INFO_...` diagnostics will be reported
               only if they are defined in testdata.
         """.trimIndent()
     )
 
-    val CHECK_COMPILE_TIME_VALUES by enumDirective<ConstantValuesHandler.Mode>(
+    konst CHECK_COMPILE_TIME_VALUES by enumDirective<ConstantValuesHandler.Mode>(
         description = """
-            Enables ${ConstantValuesHandler::class} which renders values from constant
-              evaluator in <!DEBUG_INFO_CONSTANT_VALUE!> meta infos.
+            Enables ${ConstantValuesHandler::class} which renders konstues from constant
+              ekonstuator in <!DEBUG_INFO_CONSTANT_VALUE!> meta infos.
               
             Value determines which context slice should be checked
         """.trimIndent()
     )
 
-    val RENDER_DIAGNOSTICS_FULL_TEXT by directive(
+    konst RENDER_DIAGNOSTICS_FULL_TEXT by directive(
         description = "Render diagnostic texts to .diag.txt"
     )
 }

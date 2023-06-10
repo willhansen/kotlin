@@ -1,12 +1,12 @@
 == foo ==
 fun foo() {
     "before"
-    val bar = object {
+    konst bar = object {
         init {
-            val x = 1
+            konst x = 1
         }
         fun foo() {
-            val a = 2
+            konst a = 2
         }
     }
     "after"
@@ -14,13 +14,13 @@ fun foo() {
 ---------------------
 "before"                                                                               <v0>: *                      NEW: r("before") -> <v0>
 1                                                                                      <v1>: Int                    NEW: r(1) -> <v1>
-object { init { val x = 1 } fun foo() { val a = 2 } }                                  <v2>: `<no name provided>`   NEW: r(object { init { val x = 1 } fun foo() { val a = 2 } }) -> <v2>
+object { init { konst x = 1 } fun foo() { konst a = 2 } }                                  <v2>: `<no name provided>`   NEW: r(object { init { konst x = 1 } fun foo() { konst a = 2 } }) -> <v2>
 "after"                                                                                <v3>: *                      NEW: r("after") -> <v3>
-{ "before" val bar = object { init { val x = 1 } fun foo() { val a = 2 } } "after" }   <v3>: *                      COPY
+{ "before" konst bar = object { init { konst x = 1 } fun foo() { konst a = 2 } } "after" }   <v3>: *                      COPY
 =====================
 == foo ==
 fun foo() {
-            val a = 2
+            konst a = 2
         }
 ---------------------
 2   <v0>: Int   NEW: r(2) -> <v0>

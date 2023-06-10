@@ -49,7 +49,7 @@ callsInPlace(block, InvocationKind.EXACTLY_ONCE) returns(true) implies (!b) retu
 =====================
 == smartcastAndInitialization ==
 fun smartcastAndInitialization(x: Any?) {
-    val y: Int
+    konst y: Int
 
     if (callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -80,7 +80,7 @@ x.<                                                                             
 if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> }                             <v13>: *                NEW: merge(if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> }|<v8>, <v12>) -> <v13>
 y                                                                                                                                                                                    <v14>: Int              NEW: r(y) -> <v14>
 println(y)                                                                                                                                                                           <v15>: *                NEW: call(println(y), println|<v14>) -> <v15>
-{ val y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) }   <v15>: *                COPY
+{ konst y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) }   <v15>: *                COPY
 =====================
 == inlined anonymous_1 ==
 { y = 42 }
@@ -91,7 +91,7 @@ y = 42   !<v1>: *    COPY
 =====================
 == inPresenceOfLazy ==
 fun inPresenceOfLazy(x: Any?, unknownBoolean: Boolean) {
-    val y: Int
+    konst y: Int
 
     if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -125,7 +125,7 @@ x.<                                                                             
 if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> }                             <v16>: *                NEW: merge(if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> }|<v11>, <v15>) -> <v16>
 y                                                                                                                                                                                                      <v17>: Int              NEW: r(y) -> <v17>
 println(y)                                                                                                                                                                                             <v18>: *                NEW: call(println(y), println|<v17>) -> <v18>
-{ val y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) }   <v18>: *                COPY
+{ konst y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) }   <v18>: *                COPY
 =====================
 == inlined anonymous_2 ==
 { y = 42 }

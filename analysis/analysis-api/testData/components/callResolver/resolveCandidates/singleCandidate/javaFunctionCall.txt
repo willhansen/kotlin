@@ -11,7 +11,7 @@ KtApplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /JavaClass.javaMethod(<dispatch receiver>: JavaClass): kotlin.Unit
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /JavaClass.javaMethod
     typeArgumentsMapping = {}
     argumentMapping = {}

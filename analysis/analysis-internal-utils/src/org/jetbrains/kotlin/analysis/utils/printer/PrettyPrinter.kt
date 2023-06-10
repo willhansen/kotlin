@@ -13,9 +13,9 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 @OptIn(ExperimentalContracts::class)
-public class PrettyPrinter(public val indentSize: Int = 2) : Appendable {
+public class PrettyPrinter(public konst indentSize: Int = 2) : Appendable {
     @PublishedApi
-    internal val builder: StringBuilder = StringBuilder()
+    internal konst builder: StringBuilder = StringBuilder()
 
     @PublishedApi
     internal var prefixesToPrint: PersistentList<String> = persistentListOf()
@@ -85,7 +85,7 @@ public class PrettyPrinter(public val indentSize: Int = 2) : Appendable {
         renderItem: PrettyPrinter.(T) -> Unit
     ) {
         append(prefix)
-        val iterator = collection.iterator()
+        konst iterator = collection.iterator()
         while (iterator.hasNext()) {
             renderItem(iterator.next())
             if (iterator.hasNext()) {
@@ -124,7 +124,7 @@ public class PrettyPrinter(public val indentSize: Int = 2) : Appendable {
     }
 
     public inline fun checkIfPrinted(render: () -> Unit): Boolean {
-        val initialSize = builder.length
+        konst initialSize = builder.length
         render()
         return initialSize != builder.length
     }
@@ -138,7 +138,7 @@ public class PrettyPrinter(public val indentSize: Int = 2) : Appendable {
             callsInPlace(p1, InvocationKind.EXACTLY_ONCE)
             callsInPlace(p2, InvocationKind.EXACTLY_ONCE)
         }
-        val firstRendered = checkIfPrinted { p1() }
+        konst firstRendered = checkIfPrinted { p1() }
         if (firstRendered) {
             withPrefix(this, p2)
         } else {
@@ -179,7 +179,7 @@ public class PrettyPrinter(public val indentSize: Int = 2) : Appendable {
         contract {
             callsInPlace(print, InvocationKind.EXACTLY_ONCE)
         }
-        val currentPrefixes = prefixesToPrint
+        konst currentPrefixes = prefixesToPrint
         prefixesToPrint = prefixesToPrint.add(prefix)
         try {
             print()

@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.descriptors.PackageFragmentProvider
 import org.jetbrains.kotlin.descriptors.packageFragments
 import org.jetbrains.kotlin.name.ClassId
 
-class DeserializedClassDataFinder(private val packageFragmentProvider: PackageFragmentProvider) : ClassDataFinder {
+class DeserializedClassDataFinder(private konst packageFragmentProvider: PackageFragmentProvider) : ClassDataFinder {
     override fun findClassData(classId: ClassId): ClassData? {
-        val packageFragments = packageFragmentProvider.packageFragments(classId.packageFqName)
+        konst packageFragments = packageFragmentProvider.packageFragments(classId.packageFqName)
         for (fragment in packageFragments) {
             if (fragment !is DeserializedPackageFragment) continue
 

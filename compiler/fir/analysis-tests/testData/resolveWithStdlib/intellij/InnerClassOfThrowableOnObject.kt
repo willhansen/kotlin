@@ -3,17 +3,17 @@
 class Generic<T> {
     companion object {
         fun foo() {
-            val x = object : Exception() {}
+            konst x = object : Exception() {}
         }
     }
     class Nested {
         fun foo() {
-            val x = object : Exception() {}
+            konst x = object : Exception() {}
         }
     }
     inner class Inner {
         fun foo() {
-            val x = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
+            konst x = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
         }
     }
 }

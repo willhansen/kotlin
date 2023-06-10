@@ -8,7 +8,7 @@ inline fun stub() {
 }
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 @kotlin.internal.InlineOnly
-inline val prop: String
+inline konst prop: String
     get() = "OK"
 
 // FILE: 2.kt

@@ -13,13 +13,13 @@ public class BaseJava {
 
 // FILE: Derived.kt
 class Derived : BaseJava() {
-    private val a get() = "FAIL"
+    private konst a get() = "FAIL"
 }
 
 fun box(): String {
-    val first = Derived().a
+    konst first = Derived().a
     if (first != "OK") return first
-    val d = Derived()
+    konst d = Derived()
     if (d::a.get() != "OK") return d::a.get()
     d.a = "12"
     if (d.foo() != "12") return "Error writing: ${d.foo()}"

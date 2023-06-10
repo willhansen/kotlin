@@ -17,7 +17,7 @@ import java.util.concurrent.Executors
 fun box() : String {
     var result = "fail"
     doWork {
-        val job = { result = "OK" }
+        konst job = { result = "OK" }
         Executors.callable(job).call()
     }
 

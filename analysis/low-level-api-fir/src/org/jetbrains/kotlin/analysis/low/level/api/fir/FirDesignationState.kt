@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.api.FirDesignation
 import org.jetbrains.kotlin.analysis.low.level.api.fir.util.errorWithFirSpecificEntries
 import org.jetbrains.kotlin.fir.FirElementWithResolveState
 
-abstract class ContextByDesignationCollector<C : Any>(private val designation: FirDesignation) {
+abstract class ContextByDesignationCollector<C : Any>(private konst designation: FirDesignation) {
     private var context: C? = null
-    private val designationState = FirDesignationState(designation)
+    private konst designationState = FirDesignationState(designation)
 
     protected abstract fun getCurrentContext(): C
     protected abstract fun goToNestedDeclaration(target: FirElementWithResolveState)
@@ -37,7 +37,7 @@ abstract class ContextByDesignationCollector<C : Any>(private val designation: F
     }
 }
 
-private class FirDesignationState(val designation: FirDesignation) {
+private class FirDesignationState(konst designation: FirDesignation) {
     /**
      * Holds current declaration index
      * if `currentIndex in [0, designation.path.lastIndex]` then current declaration is in path
@@ -48,14 +48,14 @@ private class FirDesignationState(val designation: FirDesignation) {
 
     fun canGoNext(): Boolean = currentIndex < designation.path.size
 
-    val currentDeclarationIfPresent: FirElementWithResolveState?
+    konst currentDeclarationIfPresent: FirElementWithResolveState?
         get() = when (currentIndex) {
             in designation.path.indices -> designation.path[currentIndex]
             designation.path.size -> designation.target
             else -> null
         }
 
-    val currentDeclaration: FirElementWithResolveState
+    konst currentDeclaration: FirElementWithResolveState
         get() = currentDeclarationIfPresent
             ?: errorWithFirSpecificEntries("Went inside target declaration")
 

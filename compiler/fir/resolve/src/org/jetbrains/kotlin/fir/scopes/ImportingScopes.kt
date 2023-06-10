@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.fir.scopes.impl.*
 import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhase
 import org.jetbrains.kotlin.name.FqName
 
-private val ALL_IMPORTS = scopeSessionKey<FirFile, ListStorageFirScope>()
-private val DEFAULT_STAR_IMPORT = scopeSessionKey<DefaultStarImportKey, FirDefaultStarImportingScope>()
-private val DEFAULT_SIMPLE_IMPORT = scopeSessionKey<DefaultImportPriority, FirDefaultSimpleImportingScope>()
+private konst ALL_IMPORTS = scopeSessionKey<FirFile, ListStorageFirScope>()
+private konst DEFAULT_STAR_IMPORT = scopeSessionKey<DefaultStarImportKey, FirDefaultStarImportingScope>()
+private konst DEFAULT_SIMPLE_IMPORT = scopeSessionKey<DefaultImportPriority, FirDefaultSimpleImportingScope>()
 
-private data class DefaultStarImportKey(val priority: DefaultImportPriority, val excludedImportNames: Set<FqName>)
+private data class DefaultStarImportKey(konst priority: DefaultImportPriority, konst excludedImportNames: Set<FqName>)
 
 fun createImportingScopes(
     file: FirFile,
@@ -40,7 +40,7 @@ private fun doCreateImportingScopes(
     scopeSession: ScopeSession
 ): List<FirScope> {
     file.lazyResolveToPhase(FirResolvePhase.IMPORTS)
-    val excludedImportNames =
+    konst excludedImportNames =
         file.imports.filter { it.aliasName != null }.mapNotNullTo(hashSetOf()) { it.importedFqName }.ifEmpty { emptySet() }
     return listOf(
         scopeSession.getOrBuild(DefaultStarImportKey(DefaultImportPriority.LOW, excludedImportNames), DEFAULT_STAR_IMPORT) {
@@ -68,4 +68,4 @@ private fun doCreateImportingScopes(
     )
 }
 
-private class ListStorageFirScope(val result: List<FirScope>) : FirScope()
+private class ListStorageFirScope(konst result: List<FirScope>) : FirScope()

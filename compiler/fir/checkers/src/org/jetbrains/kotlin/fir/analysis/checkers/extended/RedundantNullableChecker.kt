@@ -22,7 +22,7 @@ object RedundantNullableChecker : FirTypeRefChecker() {
         var symbol = typeRef.toClassLikeSymbol(context.session)
         if (symbol is FirTypeAliasSymbol) {
             while (symbol is FirTypeAliasSymbol) {
-                val resolvedExpandedTypeRef = symbol.resolvedExpandedTypeRef
+                konst resolvedExpandedTypeRef = symbol.resolvedExpandedTypeRef
                 if (resolvedExpandedTypeRef.type.isMarkedNullable) {
                     reporter.reportOn(typeRef.source, REDUNDANT_NULLABLE, context)
                     break

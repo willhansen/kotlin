@@ -22,10 +22,10 @@ import javax.script.*
 import kotlin.script.experimental.jvmhost.jsr223.KotlinJsr223ScriptEngineImpl
 
 // duplicating it here to avoid dependency on the implementation - it may interfere with tests
-private const val KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY = "kotlin.jsr223.experimental.resolve.dependencies.from.context.classloader"
+private const konst KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY = "kotlin.jsr223.experimental.resolve.dependencies.from.context.classloader"
 
 @Suppress("unused") // accessed from the tests below
-val shouldBeVisibleFromRepl = 7
+konst shouldBeVisibleFromRepl = 7
 
 @Suppress("unused") // accessed from the tests below
 fun callLambda(x: Int, aFunction: (Int) -> Int): Int = aFunction.invoke(x)
@@ -41,7 +41,7 @@ class KotlinJsr223ScriptEngineIT {
 
     @Test
     fun testEngineFactory() {
-        val factory = ScriptEngineManager().getEngineByExtension("kts").factory
+        konst factory = ScriptEngineManager().getEngineByExtension("kts").factory
         Assert.assertNotNull(factory)
         factory!!.apply {
             Assert.assertEquals("kotlin", languageName)
@@ -54,46 +54,46 @@ class KotlinJsr223ScriptEngineIT {
             Assert.assertEquals("obj.method(arg1, arg2, arg3)", getMethodCallSyntax("obj", "method", "arg1", "arg2", "arg3"))
             Assert.assertEquals("print(\"Hello, world!\")", getOutputStatement("Hello, world!"))
             Assert.assertEquals(KotlinCompilerVersion.VERSION, getParameter(ScriptEngine.LANGUAGE_VERSION))
-            val sep = System.getProperty("line.separator")
-            val prog = arrayOf("val x: Int = 3", "var y = x + 2")
+            konst sep = System.getProperty("line.separator")
+            konst prog = arrayOf("konst x: Int = 3", "var y = x + 2")
             Assert.assertEquals(prog.joinToString(sep) + sep, getProgram(*prog))
         }
     }
 
     @Test
     fun testEngine() {
-        val factory = ScriptEngineManager().getEngineByExtension("kts").factory
+        konst factory = ScriptEngineManager().getEngineByExtension("kts").factory
         Assert.assertNotNull(factory)
-        val engine = factory!!.scriptEngine
+        konst engine = factory!!.scriptEngine
         Assert.assertNotNull(engine as? KotlinJsr223ScriptEngineImpl)
         Assert.assertSame(factory, engine!!.factory)
-        val bindings = engine.createBindings()
+        konst bindings = engine.createBindings()
         Assert.assertTrue(bindings is SimpleBindings)
     }
 
     @Test
-    fun testSimpleEval() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
-        val res1 = engine.eval("val x = 3")
+    fun testSimpleEkonst() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst res1 = engine.ekonst("konst x = 3")
         Assert.assertNull(res1)
-        val res2 = engine.eval("x + 2")
+        konst res2 = engine.ekonst("x + 2")
         Assert.assertEquals(5, res2)
     }
 
     @Test
     @Ignore // Probably not possible to make it sensible on CI and with parallel run, so leaving it here for manual testing only
     fun testMemory() {
-        val memoryMXBean = ManagementFactory.getMemoryMXBean()!!
+        konst memoryMXBean = ManagementFactory.getMemoryMXBean()!!
         var prevMem = memoryMXBean.getHeapMemoryUsage().getUsed()
         for (i in 1..10) {
             with(ScriptEngineManager().getEngineByExtension("kts")) {
-                val res1 = eval("val x = 3")
+                konst res1 = ekonst("konst x = 3")
                 Assert.assertNull(res1)
-                val res2 = eval("x + 2")
+                konst res2 = ekonst("x + 2")
                 Assert.assertEquals(5, res2)
             }
             System.gc()
-            val curMem = memoryMXBean.getHeapMemoryUsage().getUsed()
+            konst curMem = memoryMXBean.getHeapMemoryUsage().getUsed()
             if (i > 3 && curMem > prevMem) {
                 Assert.assertTrue("Memory leak: iter: $i prev: $prevMem, cur: $curMem", (curMem - prevMem) < 1024*1024 )
             }
@@ -105,9 +105,9 @@ class KotlinJsr223ScriptEngineIT {
 
     @Test
     fun testIncomplete() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
-        val res0 = try {
-            engine.eval("val x =")
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst res0 = try {
+            engine.ekonst("konst x =")
         } catch (e: ScriptException) {
             e
         }
@@ -115,19 +115,19 @@ class KotlinJsr223ScriptEngineIT {
     }
 
     @Test
-    fun testEvalWithError() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun testEkonstWithError() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
 
         try {
-            engine.eval("java.lang.fish")
+            engine.ekonst("java.lang.fish")
             Assert.fail("Script error expected")
         } catch (_: ScriptException) {}
 
-        val res1 = engine.eval("val x = 3")
+        konst res1 = engine.ekonst("konst x = 3")
         Assert.assertNull(res1)
 
         try {
-            engine.eval("y")
+            engine.ekonst("y")
             Assert.fail("Script error expected")
         } catch (e: ScriptException) {
             Assert.assertTrue(
@@ -136,169 +136,169 @@ class KotlinJsr223ScriptEngineIT {
             )
         }
 
-        val res3 = engine.eval("x + 2")
+        konst res3 = engine.ekonst("x + 2")
         Assert.assertEquals(5, res3)
     }
 
     @Test
-    fun testEvalWithException() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun testEkonstWithException() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
         try {
-            engine.eval("throw Exception(\"!!\")")
+            engine.ekonst("throw Exception(\"!!\")")
             Assert.fail("Expecting exception to propagate")
         } catch (e: ScriptException) {
             Assert.assertEquals("!!", e.cause?.message)
         }
         // engine should remain operational
-        val res1 = engine.eval("val x = 3")
+        konst res1 = engine.ekonst("konst x = 3")
         Assert.assertNull(res1)
-        val res2 = engine.eval("x + 4")
+        konst res2 = engine.ekonst("x + 4")
         Assert.assertEquals(7, res2)
     }
 
 
     @Test
     fun testEngineRepeatWithReset() {
-        val code = "open class A {}\n" +
+        konst code = "open class A {}\n" +
                     "class B : A() {}"
-        val engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
+        konst engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
 
-        val res1 = engine.eval(code)
+        konst res1 = engine.ekonst(code)
         Assert.assertNull(res1)
 
         engine.state.history.reset()
 
-        engine.eval(code)
+        engine.ekonst(code)
     }
 
     @Test
     fun testInvocable() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
-        val res0 = engine.eval("""
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst res0 = engine.ekonst("""
 fun fn(x: Int) = x + 2
-val obj = object {
+konst obj = object {
     fun fn1(x: Int) = x + 3
 }
 obj
 """)
         Assert.assertNotNull(res0)
-        val invocator = engine as? Invocable
+        konst invocator = engine as? Invocable
         Assert.assertNotNull(invocator)
-        val res1 = invocator!!.invokeFunction("fn", 6)
+        konst res1 = invocator!!.invokeFunction("fn", 6)
         Assert.assertEquals(8, res1)
         assertThrows(NoSuchMethodException::class.java) {
             invocator.invokeFunction("fn1", 3)
         }
-        val res2 = invocator.invokeFunction("fn", 3)
+        konst res2 = invocator.invokeFunction("fn", 3)
         Assert.assertEquals(5, res2)
         assertThrows(NoSuchMethodException::class.java) {
             invocator.invokeMethod(res0, "fn", 3)
         }
-        val res3 = invocator.invokeMethod(res0, "fn1", 3)
+        konst res3 = invocator.invokeMethod(res0, "fn1", 3)
         Assert.assertEquals(6, res3)
     }
 
     @Test
     fun testSimpleCompilable() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
-        val comp1 = engine.compile("val x = 3")
-        val comp2 = engine.compile("x + 2")
-        val res1 = comp1.eval()
+        konst engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
+        konst comp1 = engine.compile("konst x = 3")
+        konst comp2 = engine.compile("x + 2")
+        konst res1 = comp1.ekonst()
         Assert.assertNull(res1)
-        val res2 = comp2.eval()
+        konst res2 = comp2.ekonst()
         Assert.assertEquals(5, res2)
     }
 
     @Test
     fun testSimpleCompilableWithBindings() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")
         engine.put("z", 33)
-        val comp1 = (engine as Compilable).compile("val x = 10 + bindings[\"z\"] as Int\nx + 20")
-        val comp2 = (engine as Compilable).compile("val x = 10 + z\nx + 20")
-        val res1 = comp1.eval()
+        konst comp1 = (engine as Compilable).compile("konst x = 10 + bindings[\"z\"] as Int\nx + 20")
+        konst comp2 = (engine as Compilable).compile("konst x = 10 + z\nx + 20")
+        konst res1 = comp1.ekonst()
         Assert.assertEquals(63, res1)
-        val res12 = comp2.eval()
+        konst res12 = comp2.ekonst()
         Assert.assertEquals(63, res12)
         engine.put("z", 44)
-        val res2 = comp1.eval()
+        konst res2 = comp1.ekonst()
         Assert.assertEquals(74, res2)
-        val res22 = comp2.eval()
+        konst res22 = comp2.ekonst()
         Assert.assertEquals(74, res22)
     }
 
     @Test
     fun testMultipleCompilable() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
-        val compiled1 = engine.compile("""listOf(1,2,3).joinToString(",")""")
-        val compiled2 = engine.compile("""val x = bindings["boundValue"] as Int + bindings["z"] as Int""")
-        val compiled3 = engine.compile("""x""")
+        konst engine = ScriptEngineManager().getEngineByExtension("kts") as KotlinJsr223ScriptEngineImpl
+        konst compiled1 = engine.compile("""listOf(1,2,3).joinToString(",")""")
+        konst compiled2 = engine.compile("""konst x = bindings["boundValue"] as Int + bindings["z"] as Int""")
+        konst compiled3 = engine.compile("""x""")
 
-        Assert.assertEquals("1,2,3", compiled1.eval())
-        Assert.assertEquals("1,2,3", compiled1.eval())
-        Assert.assertEquals("1,2,3", compiled1.eval())
-        Assert.assertEquals("1,2,3", compiled1.eval())
+        Assert.assertEquals("1,2,3", compiled1.ekonst())
+        Assert.assertEquals("1,2,3", compiled1.ekonst())
+        Assert.assertEquals("1,2,3", compiled1.ekonst())
+        Assert.assertEquals("1,2,3", compiled1.ekonst())
 
         engine.getBindings(ScriptContext.ENGINE_SCOPE).apply {
             put("boundValue", 100)
             put("z", 33)
         }
 
-        compiled2.eval()
+        compiled2.ekonst()
 
-        Assert.assertEquals(133, compiled3.eval())
-        Assert.assertEquals(133, compiled3.eval())
-        Assert.assertEquals(133, compiled3.eval())
+        Assert.assertEquals(133, compiled3.ekonst())
+        Assert.assertEquals(133, compiled3.ekonst())
+        Assert.assertEquals(133, compiled3.ekonst())
     }
 
     @Test
-    fun testEvalWithContext() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun testEkonstWithContext() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
 
         engine.put("z", 33)
 
-        engine.eval("""val x = 10 + bindings["z"] as Int""")
+        engine.ekonst("""konst x = 10 + bindings["z"] as Int""")
 
-        val result = engine.eval("""x + 20""")
+        konst result = engine.ekonst("""x + 20""")
         Assert.assertEquals(63, result)
 
         // in the current implementation the history is shared between contexts, so "x" could also be used in this line,
         // but this behaviour probably will not be preserved in the future, since contexts may become completely isolated
-        val result2 = engine.eval("""11 + bindings["boundValue"] as Int""", engine.createBindings().apply {
+        konst result2 = engine.ekonst("""11 + bindings["boundValue"] as Int""", engine.createBindings().apply {
             put("boundValue", 100)
         })
         Assert.assertEquals(111, result2)
 
         engine.put("nullable", null)
-        val result3 = engine.eval("bindings[\"nullable\"]?.let { it as Int } ?: -1")
+        konst result3 = engine.ekonst("bindings[\"nullable\"]?.let { it as Int } ?: -1")
         Assert.assertEquals(-1, result3)
     }
 
     @Test
-    fun testEvalWithContextDirect() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun testEkonstWithContextDirect() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
 
         engine.put("z", 33)
 
-        engine.eval("val x = 10 + z")
+        engine.ekonst("konst x = 10 + z")
 
-        val result = engine.eval("x + 20")
+        konst result = engine.ekonst("x + 20")
         Assert.assertEquals(63, result)
 
         // in the current implementation the history is shared between contexts, so "x" could also be used in this line,
         // but this behaviour probably will not be preserved in the future, since contexts may become completely isolated
-        val result2 = engine.eval("11 + boundValue", engine.createBindings().apply {
+        konst result2 = engine.ekonst("11 + boundValue", engine.createBindings().apply {
             put("boundValue", 100)
         })
         Assert.assertEquals(111, result2)
 
         engine.put("nullable", null)
-        val result3 = engine.eval("nullable?.let { it as Int } ?: -1")
+        konst result3 = engine.ekonst("nullable?.let { it as Int } ?: -1")
         Assert.assertEquals(-1, result3)
     }
 
     @Test
-    fun testEvalWithContextNamesWithSymbols() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun testEkonstWithContextNamesWithSymbols() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
 
         engine.put("\u263a", 2)
         engine.put("a.b", 3)
@@ -315,40 +315,40 @@ obj
         engine.put(" ", 41)
         engine.put("    ", 43)
 
-        Assert.assertEquals(4, engine.eval("`\u263a` * 2"))
-        Assert.assertEquals(5, engine.eval("2 + `a\\,b`"))
-        Assert.assertEquals(2, engine.eval("`a\\,b` - 1"))
-        Assert.assertEquals(6, engine.eval("1 + `c\\!d`"))
-        Assert.assertEquals(7, engine.eval("`e\\?f`"))
-        Assert.assertEquals(11, engine.eval("`g\\%h`"))
-        Assert.assertEquals(13, engine.eval("`i\\^j`"))
-        Assert.assertEquals(17, engine.eval("`k\\_l`"))
-        Assert.assertEquals(19, engine.eval("`m\\{n`"))
-        Assert.assertEquals(23, engine.eval("`o\\}p`"))
-        Assert.assertEquals(29, engine.eval("`q\\|r`"))
-        Assert.assertEquals(31, engine.eval("`s\\-t`"))
-        Assert.assertEquals(37, engine.eval("`u v`"))
-        Assert.assertEquals(41, engine.eval("`_`"))
-        Assert.assertEquals(43, engine.eval("`____`"))
+        Assert.assertEquals(4, engine.ekonst("`\u263a` * 2"))
+        Assert.assertEquals(5, engine.ekonst("2 + `a\\,b`"))
+        Assert.assertEquals(2, engine.ekonst("`a\\,b` - 1"))
+        Assert.assertEquals(6, engine.ekonst("1 + `c\\!d`"))
+        Assert.assertEquals(7, engine.ekonst("`e\\?f`"))
+        Assert.assertEquals(11, engine.ekonst("`g\\%h`"))
+        Assert.assertEquals(13, engine.ekonst("`i\\^j`"))
+        Assert.assertEquals(17, engine.ekonst("`k\\_l`"))
+        Assert.assertEquals(19, engine.ekonst("`m\\{n`"))
+        Assert.assertEquals(23, engine.ekonst("`o\\}p`"))
+        Assert.assertEquals(29, engine.ekonst("`q\\|r`"))
+        Assert.assertEquals(31, engine.ekonst("`s\\-t`"))
+        Assert.assertEquals(37, engine.ekonst("`u v`"))
+        Assert.assertEquals(41, engine.ekonst("`_`"))
+        Assert.assertEquals(43, engine.ekonst("`____`"))
     }
 
     @Test
-    fun testSimpleEvalInEval() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")!!
-        val res1 = engine.eval("val x = 3")
+    fun testSimpleEkonstInEkonst() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst res1 = engine.ekonst("konst x = 3")
         Assert.assertNull(res1)
-        val res2 = engine.eval("val y = eval(\"\$x + 2\") as Int\ny")
+        konst res2 = engine.ekonst("konst y = ekonst(\"\$x + 2\") as Int\ny")
         Assert.assertEquals(5, res2)
-        val res3 = engine.eval("y + 2")
+        konst res3 = engine.ekonst("y + 2")
         Assert.assertEquals(7, res3)
     }
 
     @Test
-    fun `kotlin script evaluation should support functional return types`() {
-        val scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
+    fun `kotlin script ekonstuation should support functional return types`() {
+        konst scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
 
-        val script = "{1 + 2}"
-        val result = scriptEngine.eval(script)
+        konst script = "{1 + 2}"
+        konst result = scriptEngine.ekonst(script)
 
         Assert.assertTrue(result is Function0<*>)
         Assert.assertEquals(3, (result as Function0<*>).invoke())
@@ -356,22 +356,22 @@ obj
 
     @Test
     fun testResolveFromContextStandard() {
-        val scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
-        val result = scriptEngine.eval("kotlin.script.experimental.jsr223.test.shouldBeVisibleFromRepl * 6")
+        konst scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst result = scriptEngine.ekonst("kotlin.script.experimental.jsr223.test.shouldBeVisibleFromRepl * 6")
         Assert.assertEquals(42, result)
     }
 
     @Test
     fun testResolveFromContextLambda() {
-        val scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
+        konst scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
 
-        val script1 = """
+        konst script1 = """
             kotlin.script.experimental.jsr223.test.callLambda(4) { x -> 
                 x % aValue
             }
         """
 
-        val script2 = """
+        konst script2 = """
             kotlin.script.experimental.jsr223.test.inlineCallLambda(5) { x ->
                 x % aValue
             }
@@ -379,18 +379,18 @@ obj
 
         scriptEngine.put("aValue", 3)
 
-        val res1 = scriptEngine.eval(script1)
+        konst res1 = scriptEngine.ekonst(script1)
         Assert.assertEquals(1, res1)
-        val res2 = scriptEngine.eval(script2)
+        konst res2 = scriptEngine.ekonst(script2)
         Assert.assertEquals(2, res2)
     }
 
     @Test
     fun testResolveFromContextDirectExperimental() {
-        val prevProp = System.setProperty(KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY, "true")
+        konst prevProp = System.setProperty(KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY, "true")
         try {
-            val scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
-            val result = scriptEngine.eval("kotlin.script.experimental.jsr223.test.shouldBeVisibleFromRepl * 6")
+            konst scriptEngine = ScriptEngineManager().getEngineByExtension("kts")!!
+            konst result = scriptEngine.ekonst("kotlin.script.experimental.jsr223.test.shouldBeVisibleFromRepl * 6")
             Assert.assertEquals(42, result)
         } finally {
             if (prevProp == null) System.clearProperty(KOTLIN_JSR223_RESOLVE_FROM_CLASSLOADER_PROPERTY)
@@ -400,24 +400,24 @@ obj
 
     @Test
     fun testInliningInJdk171() {
-        val jdk17 = try {
+        konst jdk17 = try {
             KtTestUtil.getJdk17Home()
         } catch (_: NoClassDefFoundError) {
             println("IGNORED: Test infrastructure doesn't work yet with embeddable compiler")
             return
         }
-        val javaExe = if (System.getProperty("os.name").contains("windows", ignoreCase = true)) "java.exe" else "java"
-        val runtime = File(jdk17, "bin" + File.separator + javaExe)
+        konst javaExe = if (System.getProperty("os.name").contains("windows", ignoreCase = true)) "java.exe" else "java"
+        konst runtime = File(jdk17, "bin" + File.separator + javaExe)
 
-        val tempDir = createTempDirectory(KotlinJsr223ScriptEngineIT::class.simpleName!!)
+        konst tempDir = createTempDirectory(KotlinJsr223ScriptEngineIT::class.simpleName!!)
         try {
-            val outJar = createTempFile(tempDir, "inlining17", ".jar").toFile()
-            val compileCp = System.getProperty("testCompilationClasspath")!!.split(File.pathSeparator).map(::File)
+            konst outJar = createTempFile(tempDir, "inlining17", ".jar").toFile()
+            konst compileCp = System.getProperty("testCompilationClasspath")!!.split(File.pathSeparator).map(::File)
             Assert.assertTrue(
                 "Expecting \"testCompilationClasspath\" property to contain stdlib jar:\n$compileCp",
                 compileCp.any { it.name.startsWith("kotlin-stdlib") }
             )
-            val paths = PathUtil.kotlinPathsForDistDirectory
+            konst paths = PathUtil.kotlinPathsForDistDirectory
             runAndCheckResults(
                 listOf(
                     runtime.absolutePath,
@@ -432,7 +432,7 @@ obj
                 additionalEnvVars = listOf("JAVA_HOME" to jdk17.absolutePath)
             )
 
-            val runtimeCp = System.getProperty("testJsr223RuntimeClasspath")!!.split(File.pathSeparator).map(::File) + outJar
+            konst runtimeCp = System.getProperty("testJsr223RuntimeClasspath")!!.split(File.pathSeparator).map(::File) + outJar
             Assert.assertTrue(
                 "Expecting \"testJsr223RuntimeClasspath\" property to contain JSR223 jar:\n$runtimeCp",
                 runtimeCp.any { it.name.startsWith("kotlin-scripting-jsr223") }
@@ -448,14 +448,14 @@ obj
     }
 
     @Test
-    fun testEvalWithCompilationError() {
-        val engine = ScriptEngineManager().getEngineByExtension("kts")
-        val compilable: Compilable = engine as Compilable
+    fun testEkonstWithCompilationError() {
+        konst engine = ScriptEngineManager().getEngineByExtension("kts")
+        konst compilable: Compilable = engine as Compilable
         assertThrows(ScriptException::class.java) {
             compilable.compile("foo")
         }
         compilable.compile("true")
-        engine.eval("val x = 3")
+        engine.ekonst("konst x = 3")
         compilable.compile("x")
     }
 }

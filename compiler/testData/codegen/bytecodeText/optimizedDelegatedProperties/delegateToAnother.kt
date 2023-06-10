@@ -1,28 +1,28 @@
 // WITH_STDLIB
 class C(var x: Int) {
-    val y by C::x
+    konst y by C::x
     var ym by C::x
-    val z by ::x
+    konst z by ::x
     var zm by ::x
 }
 
-class D(val c: C) {
-    val y by c::x
+class D(konst c: C) {
+    konst y by c::x
     var ym by c::x
-    val C.z by C::x
+    konst C.z by C::x
     var C.zm by C::x
 }
 
 var x = 1
-val y by ::x
+konst y by ::x
 var ym by ::x
-val z by C(1)::x
+konst z by C(1)::x
 var zm by C(1)::x
 
 fun local() {
-    val y by ::x
+    konst y by ::x
     var ym by ::x
-    val z by C(1)::x
+    konst z by C(1)::x
     var zm by C(1)::x
 }
 

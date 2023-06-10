@@ -9,9 +9,9 @@ import java.util.regex.Pattern
 
 class C{
     public fun foo(){
-        val items : Collection<Item> = listOf(Item())
-        val result = ArrayList<Item>()
-        val pattern: Pattern? = Pattern.compile("...")
+        konst items : Collection<Item> = listOf(Item())
+        konst result = ArrayList<Item>()
+        konst pattern: Pattern? = Pattern.compile("...")
         items.filterTo(result) {
             pattern!!.matcher(it.name())!!.matches()
         }

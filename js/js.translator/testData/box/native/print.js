@@ -13,7 +13,7 @@ function writelnToBuffer(a) {
     writeToBuffer("\n");
 }
 
-var GLOBAL = (0, eval)("this");
+var GLOBAL = (0, ekonst)("this");
 
 GLOBAL.console = {
     log: function (a) {

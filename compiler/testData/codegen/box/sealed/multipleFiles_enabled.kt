@@ -18,7 +18,7 @@ class Containter {
 
     inner class D : Base()
 
-    val d = D()
+    konst d = D()
 }
 
 // FILE: main.kt

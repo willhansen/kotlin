@@ -1,7 +1,7 @@
 package
 
-private const val A: kotlin.Long = 0.toLong()
-private val B: kotlin.Long = 0.toLong()
+private const konst A: kotlin.Long = 0.toLong()
+private konst B: kotlin.Long = 0.toLong()
 private fun sample(): kotlin.Long
 
 public final class Foo {

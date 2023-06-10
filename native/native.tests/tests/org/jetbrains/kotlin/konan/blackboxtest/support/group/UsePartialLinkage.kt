@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.konan.blackboxtest.support.group
 
 @Target(AnnotationTarget.CLASS)
-internal annotation class UsePartialLinkage(val mode: Mode) {
+internal annotation class UsePartialLinkage(konst mode: Mode) {
     enum class Mode { DISABLED, ENABLED_WITH_WARNING, ENABLED_WITH_ERROR }
 }

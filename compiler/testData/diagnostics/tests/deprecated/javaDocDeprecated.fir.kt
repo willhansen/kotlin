@@ -15,6 +15,6 @@ public class A {
 
 // FILE: B.kt
 
-class B(private val foo: String) : A() {
+class B(private konst foo: String) : A() {
     override fun getFoo(text: String): String = super.getFoo(text + foo)
 }

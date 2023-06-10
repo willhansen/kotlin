@@ -21,36 +21,36 @@ import javax.tools.FileObject
 import javax.tools.JavaFileManager
 import javax.tools.JavaFileObject
 
-private val ALLOWED_RUNTIME_TYPES = setOf(RuntimeProcType.AGGREGATING.name, RuntimeProcType.ISOLATING.name)
+private konst ALLOWED_RUNTIME_TYPES = setOf(RuntimeProcType.AGGREGATING.name, RuntimeProcType.ISOLATING.name)
 
-class IncrementalProcessor(private val processor: Processor, private val kind: DeclaredProcType, private val logger: KaptLogger) :
+class IncrementalProcessor(private konst processor: Processor, private konst kind: DeclaredProcType, private konst logger: KaptLogger) :
     Processor by processor {
 
     private var dependencyCollector = lazy { createDependencyCollector() }
 
-    val processorName: String = processor.javaClass.name
-    val incrementalSupportType: String = kind.name
+    konst processorName: String = processor.javaClass.name
+    konst incrementalSupportType: String = kind.name
 
     override fun init(processingEnv: ProcessingEnvironment) {
         if (!kind.canRunIncrementally) {
             processor.init(processingEnv)
         } else {
-            val originalFiler = processingEnv.filer
-            val incrementalFiler = IncrementalFiler(originalFiler)
-            val incProcEnvironment = IncrementalProcessingEnvironment(processingEnv, incrementalFiler)
+            konst originalFiler = processingEnv.filer
+            konst incrementalFiler = IncrementalFiler(originalFiler)
+            konst incProcEnvironment = IncrementalProcessingEnvironment(processingEnv, incrementalFiler)
             processor.init(incProcEnvironment)
-            incrementalFiler.dependencyCollector = dependencyCollector.value
+            incrementalFiler.dependencyCollector = dependencyCollector.konstue
         }
     }
 
     /** This has to invoked only once the processors has been initialized, because this accesses Processor.getSupportedOptions(). */
     private fun createDependencyCollector(): AnnotationProcessorDependencyCollector {
-        val type = if (kind == DeclaredProcType.DYNAMIC) {
-            val fromOptions = supportedOptions.singleOrNull { it.startsWith("org.gradle.annotation.processing.") }
+        konst type = if (kind == DeclaredProcType.DYNAMIC) {
+            konst fromOptions = supportedOptions.singleOrNull { it.startsWith("org.gradle.annotation.processing.") }
             if (fromOptions == null) {
                 RuntimeProcType.NON_INCREMENTAL
             } else {
-                val declaredType = fromOptions.drop("org.gradle.annotation.processing.".length).uppercase()
+                konst declaredType = fromOptions.drop("org.gradle.annotation.processing.".length).uppercase()
                 if (ALLOWED_RUNTIME_TYPES.contains(declaredType)) {
                     enumValueOf(declaredType)
                 } else {
@@ -73,41 +73,41 @@ class IncrementalProcessor(private val processor: Processor, private val kind: D
     fun isUnableToRunIncrementally() = !kind.canRunIncrementally
 
     /** Mapping from generated file to type that were used as originating elements. For aggregating APs types will be [null]. */
-    fun getGeneratedToSources(): Map<File, String?> = dependencyCollector.value.getGeneratedToSources()
+    fun getGeneratedToSources(): Map<File, String?> = dependencyCollector.konstue.getGeneratedToSources()
 
     /** All top-level types that were processed by aggregating APs. */
-    fun getAggregatedTypes() = dependencyCollector.value.getAggregatedTypes()
+    fun getAggregatedTypes() = dependencyCollector.konstue.getAggregatedTypes()
 
     /** Mapping from generated class file to type defined in that file. */
-    fun getGeneratedClassFilesToTypes(): Map<File, String> = dependencyCollector.value.getGeneratedClassFilesToTypes()
+    fun getGeneratedClassFilesToTypes(): Map<File, String> = dependencyCollector.konstue.getGeneratedClassFilesToTypes()
 
-    fun getRuntimeType(): RuntimeProcType = dependencyCollector.value.getRuntimeType()
+    fun getRuntimeType(): RuntimeProcType = dependencyCollector.konstue.getRuntimeType()
 
     override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         if (getRuntimeType() == RuntimeProcType.AGGREGATING) {
-            dependencyCollector.value.recordProcessingInputs(processor.supportedAnnotationTypes, annotations, roundEnv)
+            dependencyCollector.konstue.recordProcessingInputs(processor.supportedAnnotationTypes, annotations, roundEnv)
         }
         return processor.process(annotations, roundEnv)
     }
 }
 
-internal class IncrementalProcessingEnvironment(private val processingEnv: ProcessingEnvironment, private val incFiler: IncrementalFiler) :
+internal class IncrementalProcessingEnvironment(private konst processingEnv: ProcessingEnvironment, private konst incFiler: IncrementalFiler) :
     ProcessingEnvironment by processingEnv {
     override fun getFiler(): Filer = incFiler
 }
 
-internal class IncrementalFiler(private val filer: Filer) : Filer by filer {
+internal class IncrementalFiler(private konst filer: Filer) : Filer by filer {
 
     internal var dependencyCollector: AnnotationProcessorDependencyCollector? = null
 
     override fun createSourceFile(name: CharSequence, vararg originatingElements: Element?): JavaFileObject {
-        val createdSourceFile = filer.createSourceFile(name, *originatingElements)
+        konst createdSourceFile = filer.createSourceFile(name, *originatingElements)
         dependencyCollector!!.add(createdSourceFile.toUri(), originatingElements, name.toString())
         return createdSourceFile
     }
 
     override fun createClassFile(name: CharSequence, vararg originatingElements: Element?): JavaFileObject {
-        val createdClassFile = filer.createClassFile(name, *originatingElements)
+        konst createdClassFile = filer.createClassFile(name, *originatingElements)
         dependencyCollector!!.add(createdClassFile.toUri(), originatingElements, name.toString())
         return createdClassFile
     }
@@ -118,7 +118,7 @@ internal class IncrementalFiler(private val filer: Filer) : Filer by filer {
         relativeName: CharSequence?,
         vararg originatingElements: Element?
     ): FileObject {
-        val createdResource = filer.createResource(location, pkg, relativeName, *originatingElements)
+        konst createdResource = filer.createResource(location, pkg, relativeName, *originatingElements)
         dependencyCollector!!.add(createdResource.toUri(), originatingElements, null)
 
         return createdResource
@@ -126,12 +126,12 @@ internal class IncrementalFiler(private val filer: Filer) : Filer by filer {
 }
 
 internal class AnnotationProcessorDependencyCollector(
-    private val runtimeProcType: RuntimeProcType,
-    private val warningCollector: (String) -> Unit
+    private konst runtimeProcType: RuntimeProcType,
+    private konst warningCollector: (String) -> Unit
 ) {
-    private val generatedToSource = mutableMapOf<File, String?>()
-    private val aggregatedTypes = mutableSetOf<String>()
-    private val generatedClassFilesToTypes = mutableMapOf<File, String>()
+    private konst generatedToSource = mutableMapOf<File, String?>()
+    private konst aggregatedTypes = mutableSetOf<String>()
+    private konst generatedClassFilesToTypes = mutableMapOf<File, String>()
 
     private var isFullRebuild = !runtimeProcType.isIncremental
 
@@ -156,7 +156,7 @@ internal class AnnotationProcessorDependencyCollector(
     internal fun add(createdFile: URI, originatingElements: Array<out Element?>, classId: String?) {
         if (isFullRebuild) return
 
-        val generatedFile = File(createdFile)
+        konst generatedFile = File(createdFile)
         if (generatedFile.extension == "class") {
             if (classId == null) {
                 isFullRebuild = true
@@ -171,7 +171,7 @@ internal class AnnotationProcessorDependencyCollector(
         if (runtimeProcType == RuntimeProcType.AGGREGATING) {
             generatedToSource[generatedFile] = null
         } else {
-            val srcClasses = getTopLevelClassNames(originatingElements.filterNotNull())
+            konst srcClasses = getTopLevelClassNames(originatingElements.filterNotNull())
             if (srcClasses.size != 1) {
                 isFullRebuild = true
                 warningCollector.invoke(
@@ -200,11 +200,11 @@ internal class AnnotationProcessorDependencyCollector(
     }
 }
 
-private const val PACKAGE_TYPE_NAME = "package-info"
+private const konst PACKAGE_TYPE_NAME = "package-info"
 
 fun getElementName(current: Element?): String? {
     if (current is PackageElement) {
-        val packageName = current.qualifiedName.toString()
+        konst packageName = current.qualifiedName.toString()
         return if (packageName.isEmpty()) {
             PACKAGE_TYPE_NAME
         } else {
@@ -227,7 +227,7 @@ private fun getTopLevelClassNames(elements: Collection<Element>): Set<String> {
     }
 }
 
-enum class DeclaredProcType(val canRunIncrementally: Boolean) {
+enum class DeclaredProcType(konst canRunIncrementally: Boolean) {
     AGGREGATING(true) {
         override fun toRuntimeType() = RuntimeProcType.AGGREGATING
     },
@@ -248,7 +248,7 @@ enum class DeclaredProcType(val canRunIncrementally: Boolean) {
     abstract fun toRuntimeType(): RuntimeProcType
 }
 
-enum class RuntimeProcType(val isIncremental: Boolean) {
+enum class RuntimeProcType(konst isIncremental: Boolean) {
     AGGREGATING(true),
     ISOLATING(true),
     NON_INCREMENTAL(false),

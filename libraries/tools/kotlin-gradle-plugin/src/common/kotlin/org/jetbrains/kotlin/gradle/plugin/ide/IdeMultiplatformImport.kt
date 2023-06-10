@@ -48,12 +48,12 @@ interface IdeMultiplatformImport {
     fun serialize(dependencies: Iterable<IdeaKotlinDependency>): List<ByteArray>
 
     /**
-     * Will try to serialise the [value] for IDE import.
+     * Will try to serialise the [konstue] for IDE import.
      * Returns `null` if there is no [IdeaKotlinExtrasSerializationExtension] provided that can handle the particular [key],
      * or if the registered serializer fails with an exception.
-     * See [registerExtrasSerializationExtension] for 'how to register a serializer for extra values'
+     * See [registerExtrasSerializationExtension] for 'how to register a serializer for extra konstues'
      */
-    fun <T : Any> serialize(key: Extras.Key<T>, value: T): ByteArray?
+    fun <T : Any> serialize(key: Extras.Key<T>, konstue: T): ByteArray?
 
     /**
      * Registers a given [resolver] to run during Gradle import:
@@ -164,18 +164,18 @@ interface IdeMultiplatformImport {
      * from the Kotlin Gradle plugin.
      */
     @ExternalKotlinTargetApi
-    class Priority(val value: Int) : Comparable<Priority> {
+    class Priority(konst konstue: Int) : Comparable<Priority> {
         override fun equals(other: Any?): Boolean {
             if (other !is Priority) return false
-            return other.value == value
+            return other.konstue == konstue
         }
 
         override fun hashCode(): Int {
-            return value.hashCode()
+            return konstue.hashCode()
         }
 
         override fun compareTo(other: Priority): Int {
-            return this.value.compareTo(other.value)
+            return this.konstue.compareTo(other.konstue)
         }
 
         @ExternalKotlinTargetApi
@@ -184,24 +184,24 @@ interface IdeMultiplatformImport {
              * Not used by the Kotlin Gradle plugin: Can be used by external Kotlin Target maintainers to
              * provide resolvers only if KGP does not offer any out of the box.
              */
-            val low = Priority(-10)
+            konst low = Priority(-10)
 
             /**
              * Default [Priority] used to register resolvers.
              * Used by the Kotlin Gradle plugin.
              */
-            val normal = Priority(0)
+            konst normal = Priority(0)
 
             /**
              * Used by the Kotlin Gradle plugin for special cases (like android, jvmAndAndroid, ...)
              */
-            val high = Priority(10)
+            konst high = Priority(10)
 
             /**
              * Not used by the Kotlin Gradle plugin: Can be used by external Kotlin Target maintainers to
              * overwrite the Kotlin Gradle plugin
              */
-            val veryHigh = Priority(100)
+            konst veryHigh = Priority(100)
         }
     }
 
@@ -255,18 +255,18 @@ interface IdeMultiplatformImport {
             /**
              * Indicating that all SourceSets will *always* match this constraint
              */
-            val unconstrained = SourceSetConstraint { true }
+            konst unconstrained = SourceSetConstraint { true }
 
             /**
              * Will only match SourceSets that will be compiled by the Native compiler
              * Note: this includes shared native SourceSets, sharing code between multiple native targets
              */
-            val isNative = SourceSetConstraint { it.isNativeSourceSet.getOrThrow() }
+            konst isNative = SourceSetConstraint { it.isNativeSourceSet.getOrThrow() }
 
             /**
              * Only matches SourceSets that share code between at least two native targets, but no non-native target
              */
-            val isSharedNative = isNative and SourceSetConstraint { sourceSet ->
+            konst isSharedNative = isNative and SourceSetConstraint { sourceSet ->
                 sourceSet.internal.compilations.filterIsInstance<KotlinNativeCompilation>()
                     .map { compilation -> compilation.konanTarget }
                     .toSet().size > 1
@@ -275,17 +275,17 @@ interface IdeMultiplatformImport {
             /**
              * Matches SourceSets which only have a single [KotlinPlatformType] associated.
              */
-            val isSinglePlatformType = SourceSetConstraint { isSinglePlatformTypeSourceSet(it) }
+            konst isSinglePlatformType = SourceSetConstraint { isSinglePlatformTypeSourceSet(it) }
 
             /**
              * Matches SourceSets which only participate in compilations of a single [KotlinTarget]
              */
-            val isSingleKotlinTarget = SourceSetConstraint { isSingleKotlinTargetSourceSet(it) }
+            konst isSingleKotlinTarget = SourceSetConstraint { isSingleKotlinTargetSourceSet(it) }
 
             /**
              * Matches SourceSets that do not have any other SourceSets that declare a 'dependsOn' this SourceSet
              */
-            val isLeaf = SourceSetConstraint { sourceSet ->
+            konst isLeaf = SourceSetConstraint { sourceSet ->
                 (sourceSet.project.multiplatformExtensionOrNull ?: return@SourceSetConstraint true).sourceSets
                     .none { otherSourceSet -> sourceSet in otherSourceSet.dependsOn }
             }
@@ -296,7 +296,7 @@ interface IdeMultiplatformImport {
              * NB: The external Android target maintained by Google will likely also use the [KotlinPlatformType.jvm]
              * and therefore will not match this constraint.
              */
-            val isJvmAndAndroid = SourceSetConstraint { sourceSet ->
+            konst isJvmAndAndroid = SourceSetConstraint { sourceSet ->
                 sourceSet.internal.compilations.map { it.platformType }.filter { it != common }.toSet() == setOf(jvm, androidJvm)
             }
 
@@ -305,7 +305,7 @@ interface IdeMultiplatformImport {
              * NB: The external Android target maintained by Google will likely also use the [KotlinPlatformType.jvm]
              * and therefore will not match this constraint.
              */
-            val isAndroid = SourceSetConstraint { sourceSet ->
+            konst isAndroid = SourceSetConstraint { sourceSet ->
                 sourceSet.internal.compilations.map { it.platformType }.toSet() == setOf(androidJvm)
             }
         }
@@ -313,7 +313,7 @@ interface IdeMultiplatformImport {
 
     @ExternalKotlinTargetApi
     companion object {
-        internal val logger: Logger = Logging.getLogger(IdeMultiplatformImport::class.java)
+        internal konst logger: Logger = Logging.getLogger(IdeMultiplatformImport::class.java)
 
         @JvmStatic
         fun instance(project: Project): IdeMultiplatformImport {
@@ -324,7 +324,7 @@ interface IdeMultiplatformImport {
     }
 }
 
-internal val Project.kotlinIdeMultiplatformImport: IdeMultiplatformImport get() = IdeMultiplatformImport.instance(project)
+internal konst Project.kotlinIdeMultiplatformImport: IdeMultiplatformImport get() = IdeMultiplatformImport.instance(project)
 
 /**
  * Convenience shortcut method for

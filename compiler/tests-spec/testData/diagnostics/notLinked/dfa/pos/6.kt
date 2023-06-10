@@ -23,7 +23,7 @@ import othertypes.*
 
 // TESTCASE NUMBER: 1
 fun case_1(x: Any?) {
-    val y = null
+    konst y = null
     if (x != <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any?"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -44,7 +44,7 @@ fun case_1(x: Any?) {
  * ISSUES: KT-28159
  */
 fun case_2(x: Nothing?) {
-    val y = null
+    konst y = null
     if (<!DEBUG_INFO_CONSTANT!>x<!> !== <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing?")!>x<!>.hashCode()
@@ -53,7 +53,7 @@ fun case_2(x: Nothing?) {
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val y = null
+    konst y = null
 
     if (Object.prop_1 == <!DEBUG_INFO_CONSTANT!>y<!>)
     else {
@@ -88,8 +88,8 @@ fun case_4(x: Char?, y: Nothing?) {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x: Unit? = null
-    val y: Nothing? = null
+    konst x: Unit? = null
+    konst y: Nothing? = null
 
     if (x !== <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit & kotlin.Unit?")!>x<!>
@@ -107,7 +107,7 @@ fun case_5() {
 
 // TESTCASE NUMBER: 6
 fun case_6(x: EmptyClass?, z: Nothing?) {
-    val y = true
+    konst y = true
 
     if (x != <!DEBUG_INFO_CONSTANT!>z<!> && !y) {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyClass & EmptyClass?")!>x<!>
@@ -125,7 +125,7 @@ fun case_6(x: EmptyClass?, z: Nothing?) {
 
 // TESTCASE NUMBER: 7
 fun case_7(x: EmptyObject?) {
-    val y = null
+    konst y = null
 
     if (x != <!DEBUG_INFO_CONSTANT!>y<!> || <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("EmptyObject? & kotlin.Nothing?")!>x<!> != <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("EmptyObject & EmptyObject?")!>x<!>
@@ -143,7 +143,7 @@ fun case_7(x: EmptyObject?) {
 
 // TESTCASE NUMBER: 8
 fun case_8(x: TypealiasNullableString) {
-    val y = null
+    konst y = null
 
     if (x !== <!DEBUG_INFO_CONSTANT!>y<!> && <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString /* = kotlin.String? */")!>x<!> != <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString /* = kotlin.String? */")!>x<!>
@@ -179,8 +179,8 @@ fun case_9(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>, y: Nothing?) {
 
 // TESTCASE NUMBER: 10
 fun case_10() {
-    val a = Class()
-    val b = null
+    konst a = Class()
+    konst b = null
 
     if (a.prop_4 === <!DEBUG_INFO_CONSTANT!>b<!> || true) {
         if (a.prop_4 != null) {
@@ -200,9 +200,9 @@ fun case_10() {
 
 // TESTCASE NUMBER: 11
 fun case_11(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>, y: TypealiasNullableString) {
-    val z = null
-    val u: TypealiasNullableString = null
-    val v = null
+    konst z = null
+    konst u: TypealiasNullableString = null
+    konst v = null
 
     if (x == <!DEBUG_INFO_CONSTANT!>z<!> && <!DEBUG_INFO_CONSTANT!>x<!> == <!DEBUG_INFO_CONSTANT!>v<!>) {
 
@@ -260,16 +260,16 @@ fun case_13(x: EmptyClass12_48?, z: Nothing?) =
 
 // TESTCASE NUMBER: 14
 class Case14 {
-    val x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>
+    konst x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>
     init {
         x = TypealiasNullableString()
     }
 }
 
 fun case_14() {
-    val a = Case14()
-    val x = null
-    val y = <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>
+    konst a = Case14()
+    konst x = null
+    konst y = <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>
 
     if (a.x != <!DEBUG_INFO_CONSTANT!>x<!> && a.x != <!DEBUG_INFO_CONSTANT!>y<!> || a.x != <!DEBUG_INFO_CONSTANT!>y<!> && <!SENSELESS_COMPARISON!>a.x !== null<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString? /* = kotlin.String? */")!>a.x<!>
@@ -287,8 +287,8 @@ fun case_14() {
 
 // TESTCASE NUMBER: 15
 fun case_15(x: TypealiasNullableString) {
-    val y = null
-    val <!UNUSED_VARIABLE!>z<!> = if (x === null || <!DEBUG_INFO_CONSTANT!>y<!> == x && x === <!DEBUG_INFO_CONSTANT!>y<!> || <!SENSELESS_COMPARISON!>null === x<!>) "" else {
+    konst y = null
+    konst <!UNUSED_VARIABLE!>z<!> = if (x === null || <!DEBUG_INFO_CONSTANT!>y<!> == x && x === <!DEBUG_INFO_CONSTANT!>y<!> || <!SENSELESS_COMPARISON!>null === x<!>) "" else {
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString /* = kotlin.String? */")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString /* = kotlin.String? */"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String */ & TypealiasNullableString /* = kotlin.String? */"), DEBUG_INFO_SMARTCAST!>x<!>.propT
@@ -304,8 +304,8 @@ fun case_15(x: TypealiasNullableString) {
 
 // TESTCASE NUMBER: 16
 fun case_16() {
-    val x: TypealiasNullableNothing = null
-    val y: Nothing? = null
+    konst x: TypealiasNullableNothing = null
+    konst y: Nothing? = null
 
     if (<!DEBUG_INFO_CONSTANT!>x<!> !== <!DEBUG_INFO_CONSTANT!>y<!>) {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableNothing /* = kotlin.Nothing? */")!>x<!>
@@ -314,7 +314,7 @@ fun case_16() {
 }
 
 // TESTCASE NUMBER: 17
-val case_17 = if (nullableIntProperty === <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>) 0 else {
+konst case_17 = if (nullableIntProperty === <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>) 0 else {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>nullableIntProperty<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>nullableIntProperty<!>.equals(null)
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>nullableIntProperty<!>.propT
@@ -332,8 +332,8 @@ val case_17 = if (nullableIntProperty === <!DEBUG_INFO_CONSTANT!>implicitNullabl
  * ISSUES: KT-35668
  */
 fun case_18(a: DeepObject.A.B.C.D.E.F.G.J?, b: Boolean) {
-    val x = null
-    val y = null
+    konst x = null
+    konst y = null
 
     if (a != (if (b) <!DEBUG_INFO_CONSTANT!>x<!> else <!DEBUG_INFO_CONSTANT!>y<!>) || <!DEBUG_INFO_CONSTANT!>x<!> !== <!DEBUG_INFO_CONSTANT!>a<!>) {
         <!DEBUG_INFO_EXPRESSION_TYPE("DeepObject.A.B.C.D.E.F.G.J & DeepObject.A.B.C.D.E.F.G.J?")!>a<!>
@@ -351,16 +351,16 @@ fun case_18(a: DeepObject.A.B.C.D.E.F.G.J?, b: Boolean) {
 
 // TESTCASE NUMBER: 19
 fun case_19(b: Boolean) {
-    val z = null
-    val a = if (b) {
+    konst z = null
+    konst a = if (b) {
         object {
-            val B19 = if (b) {
+            konst B19 = if (b) {
                 object {
-                    val C19 = if (b) {
+                    konst C19 = if (b) {
                         object {
-                            val D19 = if (b) {
+                            konst D19 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else <!DEBUG_INFO_CONSTANT!>z<!>
                         }
@@ -386,10 +386,10 @@ fun case_19(b: Boolean) {
 
 // TESTCASE NUMBER: 20
 fun case_20(x: Boolean, y: Nothing?) {
-    val z = object {
-        val B19 = object {
-            val C19 = object {
-                val D19 =  if (x) {
+    konst z = object {
+        konst B19 = object {
+            konst C19 = object {
+                konst D19 =  if (x) {
                     object {}
                 } else <!DEBUG_INFO_CONSTANT!>y<!>
             }
@@ -445,7 +445,7 @@ fun case_22(a: (() -> Unit)?) {
 // TESTCASE NUMBER: 23
 fun case_23(a: ((Float) -> Int?)?, b: Float?, z: Nothing?) {
     if (a != <!DEBUG_INFO_CONSTANT!>z<!> && b !== <!DEBUG_INFO_CONSTANT!>z<!> && b !== <!DEBUG_INFO_CONSTANT!>z<!>) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
         if (x != <!DEBUG_INFO_CONSTANT!>z<!> || <!DEBUG_INFO_CONSTANT!>x<!> !== <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -487,16 +487,16 @@ fun case_24(a: ((() -> Unit) -> Unit)?, b: (() -> Unit)?, z: Nothing?) =
 
 // TESTCASE NUMBER: 25
 fun case_25(b: Boolean, z: Nothing?) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else <!DEBUG_INFO_CONSTANT!>z<!>
     }
 
-    val y = if (b) x else <!DEBUG_INFO_CONSTANT!>z<!>
+    konst y = if (b) x else <!DEBUG_INFO_CONSTANT!>z<!>
 
     if (y !== <!DEBUG_INFO_CONSTANT!>z<!> || <!DEBUG_INFO_CONSTANT!>y<!> != <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!>) {
-        val z1 = <!DEBUG_INFO_EXPRESSION_TYPE("case_25.`<anonymous>`.`<no name provided>`?")!><!DEBUG_INFO_EXPRESSION_TYPE("(() -> case_25.`<anonymous>`.`<no name provided>`?)? & () -> case_25.`<anonymous>`.`<no name provided>`?"), DEBUG_INFO_SMARTCAST!>y<!>()<!>
+        konst z1 = <!DEBUG_INFO_EXPRESSION_TYPE("case_25.`<anonymous>`.`<no name provided>`?")!><!DEBUG_INFO_EXPRESSION_TYPE("(() -> case_25.`<anonymous>`.`<no name provided>`?)? & () -> case_25.`<anonymous>`.`<no name provided>`?"), DEBUG_INFO_SMARTCAST!>y<!>()<!>
 
         if (z1 != <!DEBUG_INFO_CONSTANT!>z<!> && <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> !== z1) {
             <!DEBUG_INFO_EXPRESSION_TYPE("case_25.`<anonymous>`.`<no name provided>` & case_25.`<anonymous>`.`<no name provided>`?"), DEBUG_INFO_SMARTCAST!>z1<!>.a
@@ -518,7 +518,7 @@ fun case_26(a: ((Float) -> Int?)?, b: Float?) {
     var z = null
 
     if (a != <!DEBUG_INFO_CONSTANT!>z<!> == true && b != <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> == true) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
         if (x != <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> == true || <!DEBUG_INFO_CONSTANT!>z<!> !== <!DEBUG_INFO_CONSTANT!>x<!>) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -572,17 +572,17 @@ fun case_28(a: DeepObject.A.B.C.D.E.F.G.J?) =
  * ISSUES: KT-28328, KT-28329
  */
 fun case_29(x: Boolean) {
-    val v = null
-    val z = {
+    konst v = null
+    konst z = {
         if (x) object {
-            val a = 10
+            konst a = 10
         } else null
     }
 
-    val y = if (x) z else null
+    konst y = if (x) z else null
 
     if (false || false || false || false || y !== <!DEBUG_INFO_CONSTANT!>v<!>) {
-        val t = <!DEBUG_INFO_EXPRESSION_TYPE("case_29.`<anonymous>`.`<no name provided>`?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
+        konst t = <!DEBUG_INFO_EXPRESSION_TYPE("case_29.`<anonymous>`.`<no name provided>`?")!><!UNSAFE_IMPLICIT_INVOKE_CALL!>y<!>()<!>
 
         if (<!EQUALITY_NOT_APPLICABLE!>z !== t<!> || false) {
             <!DEBUG_INFO_EXPRESSION_TYPE("case_29.`<anonymous>`.`<no name provided>`?")!>t<!><!UNSAFE_CALL!>.<!>a
@@ -602,7 +602,7 @@ fun case_29(x: Boolean) {
 // TESTCASE NUMBER: 30
 fun case_30(a: ((Float) -> Int?)?, b: Float?) {
     if (<!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> != a == true && b != <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> == true || false || false || false || false || false || false || false || false || false) {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
         if (false || <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> != x == true) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.equals(null)
@@ -658,7 +658,7 @@ fun case_33(a: ((Float) -> Int?)?, b: Float?, c: Boolean?) {
     if (true && a == <!DEBUG_INFO_CONSTANT!>z<!> == true || b == null == true) {
 
     } else {
-        val x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
+        konst x = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int?")!><!DEBUG_INFO_EXPRESSION_TYPE("((kotlin.Float) -> kotlin.Int?)? & (kotlin.Float) -> kotlin.Int?"), DEBUG_INFO_SMARTCAST!>a<!>(<!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Float & kotlin.Float?"), DEBUG_INFO_SMARTCAST!>b<!>)<!>
         if (x == <!DEBUG_INFO_CONSTANT!>z<!> == true && <!DEBUG_INFO_CONSTANT!>x<!> === <!DEBUG_INFO_CONSTANT!>z<!> || (c != <!DEBUG_INFO_CONSTANT!>z<!> && !<!DEBUG_INFO_SMARTCAST!>c<!>)) {
 
         } else {
@@ -702,7 +702,7 @@ fun case_34(z1: Boolean?) {
 
 // TESTCASE NUMBER: 35
 fun case_35(a: DeepObject.A.B.C.D.E.F.G.J?) {
-    val itest = false
+    konst itest = false
 
     if (true && a != <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> && a !== <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> || itest || !itest || true || !true) {
 
@@ -738,7 +738,7 @@ fun case_37(x: Nothing?, y: Nothing?) {
  * UNEXPECTED BEHAVIOUR
  */
 fun case_38() {
-    val z = null
+    konst z = null
 
     if (Object.prop_2 != <!DEBUG_INFO_CONSTANT!>z<!>)
     else {
@@ -757,7 +757,7 @@ fun case_39(x: Char?) {
 
 // TESTCASE NUMBER: 40
 fun case_40() {
-    val x: Unit? = null
+    konst x: Unit? = null
     var z = null
 
     if (x == <!DEBUG_INFO_CONSTANT!>implicitNullableNothingProperty<!> || <!DEBUG_INFO_CONSTANT!>z<!> === x) {
@@ -768,7 +768,7 @@ fun case_40() {
 
 // TESTCASE NUMBER: 41
 fun case_41(x: EmptyClass?, z: Nothing?) {
-    val y = true
+    konst y = true
 
     if (x === <!DEBUG_INFO_CONSTANT!>z<!> && !y) {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("EmptyClass? & kotlin.Nothing?")!>x<!>
@@ -794,7 +794,7 @@ fun case_42() {
 
 // TESTCASE NUMBER: 43
 fun case_43(x: TypealiasNullableString) {
-    val z = null
+    konst z = null
 
     if (x == <!DEBUG_INFO_CONSTANT!>z<!> && <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String? */ & kotlin.Nothing?")!>x<!> == <!DEBUG_INFO_CONSTANT!>z<!>) {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String? */ & kotlin.Nothing?")!>x<!>
@@ -826,7 +826,7 @@ fun case_44(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>, z1: Nothing?) 
 
 // TESTCASE NUMBER: 45
 fun case_45() {
-    val a = Class()
+    konst a = Class()
     var z: Nothing? = null
 
     if (a.prop_4 != <!DEBUG_INFO_CONSTANT!>z<!> || true) {
@@ -839,7 +839,7 @@ fun case_45() {
 
 // TESTCASE NUMBER: 46
 fun case_46(x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>, y: TypealiasNullableString) {
-    val t: TypealiasNullableString = null
+    konst t: TypealiasNullableString = null
     var z: Nothing? = null
 
     if (x != <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>) {
@@ -886,14 +886,14 @@ fun case_48(x: EmptyClass12_48?, z: Nothing?) =
 
 // TESTCASE NUMBER: 49
 class Case49 {
-    val x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>
+    konst x: TypealiasNullableString<!REDUNDANT_NULLABLE!>?<!>
     init {
         x = TypealiasNullableString()
     }
 }
 
 fun case_49() {
-    val a = Case49()
+    konst a = Case49()
     var z = null
 
     if (a.x === <!DEBUG_INFO_CONSTANT!>z<!>) {
@@ -904,9 +904,9 @@ fun case_49() {
 
 // TESTCASE NUMBER: 50
 fun case_50(x: TypealiasNullableString) {
-    val z1 = null
-    val z2 = null
-    val <!UNUSED_VARIABLE!>t<!> = if (x != <!DEBUG_INFO_CONSTANT!>z1<!> && <!DEBUG_INFO_CONSTANT!>z2<!> !== x) "" else {
+    konst z1 = null
+    konst z2 = null
+    konst <!UNUSED_VARIABLE!>t<!> = if (x != <!DEBUG_INFO_CONSTANT!>z1<!> && <!DEBUG_INFO_CONSTANT!>z2<!> !== x) "" else {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String? */ & kotlin.Nothing?")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableString /* = kotlin.String? */ & kotlin.Nothing?")!>x<!>.hashCode()
     }
@@ -914,8 +914,8 @@ fun case_50(x: TypealiasNullableString) {
 
 // TESTCASE NUMBER: 51
 fun case_51() {
-    val x: TypealiasNullableNothing = null
-    val z: Nothing? = null
+    konst x: TypealiasNullableNothing = null
+    konst z: Nothing? = null
 
     if (<!DEBUG_INFO_CONSTANT!>x<!> === <!DEBUG_INFO_CONSTANT!>z<!> || <!DEBUG_INFO_CONSTANT!>z<!> == <!DEBUG_INFO_CONSTANT!>x<!> && <!DEBUG_INFO_CONSTANT!>x<!> == <!DEBUG_INFO_CONSTANT!>z<!> || false || false || false) {
         <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("TypealiasNullableNothing /* = kotlin.Nothing? */")!>x<!>
@@ -924,7 +924,7 @@ fun case_51() {
 }
 
 // TESTCASE NUMBER: 52
-val case_52 = if (nullableIntProperty !== <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!> && <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!> != nullableIntProperty) 0 else {
+konst case_52 = if (nullableIntProperty !== <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!> && <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!> != nullableIntProperty) 0 else {
     <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>nullableIntProperty<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>nullableIntProperty<!>.hashCode()
 }
@@ -939,16 +939,16 @@ fun case_53(a: DeepObject.A.B.C.D.E.F.G.J?) {
 
 // TESTCASE NUMBER: 54
 fun case_54(b: Boolean) {
-    val a = if (b) {
+    konst a = if (b) {
         object {
             var z = null
-            val B54 = if (b) {
+            konst B54 = if (b) {
                 object {
-                    val C54 = if (b) {
+                    konst C54 = if (b) {
                         object {
-                            val D54 = if (b) {
+                            konst D54 = if (b) {
                                 object {
-                                    val x: Number? = 10
+                                    konst x: Number? = 10
                                 }
                             } else null
                         }
@@ -958,7 +958,7 @@ fun case_54(b: Boolean) {
         }
     } else null
 
-    val z = null
+    konst z = null
 
     if (a != <!DEBUG_INFO_CONSTANT!>z<!> && <!DEBUG_INFO_SMARTCAST!>a<!>.B54 !== <!DEBUG_INFO_SMARTCAST!>a<!>.z && <!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!>a<!>.B54<!>.C54 != <!DEBUG_INFO_SMARTCAST!>a<!>.z && <!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!>a<!>.B54<!>.C54<!>.D54 != <!DEBUG_INFO_SMARTCAST!>a<!>.z && <!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!>a<!>.B54<!>.C54<!>.D54<!>.x === <!DEBUG_INFO_SMARTCAST!>a<!>.z) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing? & kotlin.Number?")!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!><!DEBUG_INFO_SMARTCAST!>a<!>.B54<!>.C54<!>.D54<!>.x<!>
@@ -968,11 +968,11 @@ fun case_54(b: Boolean) {
 
 // TESTCASE NUMBER: 55
 fun case_55(b: Boolean) {
-    val a = object {
-        val B19 = object {
-            val C19 = object {
+    konst a = object {
+        konst B19 = object {
+            konst C19 = object {
                 var z = null
-                val D19 =  if (b) {
+                konst D19 =  if (b) {
                     object {}
                 } else null
             }
@@ -1052,16 +1052,16 @@ fun case_59(a: ((() -> Unit) -> Unit)?, b: (() -> Unit)?, z: Nothing?) {
 
 // TESTCASE NUMBER: 60
 fun case_60(b: Boolean) {
-    val x = {
+    konst x = {
         if (b) object {
-            val a = 10
+            konst a = 10
         } else <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>
     }
 
-    val y = if (b) x else <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>
+    konst y = if (b) x else <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>
 
     if (y != <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>) {
-        val z = <!DEBUG_INFO_EXPRESSION_TYPE("case_60.`<anonymous>`.`<no name provided>`?")!><!DEBUG_INFO_EXPRESSION_TYPE("(() -> case_60.`<anonymous>`.`<no name provided>`?)? & () -> case_60.`<anonymous>`.`<no name provided>`?"), DEBUG_INFO_SMARTCAST!>y<!>()<!>
+        konst z = <!DEBUG_INFO_EXPRESSION_TYPE("case_60.`<anonymous>`.`<no name provided>`?")!><!DEBUG_INFO_EXPRESSION_TYPE("(() -> case_60.`<anonymous>`.`<no name provided>`?)? & () -> case_60.`<anonymous>`.`<no name provided>`?"), DEBUG_INFO_SMARTCAST!>y<!>()<!>
 
         if (z == <!DEBUG_INFO_CONSTANT!>nullableNothingProperty<!>) {
             <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("case_60.`<anonymous>`.`<no name provided>`? & kotlin.Nothing?")!>z<!>
@@ -1106,9 +1106,9 @@ fun case_62(x: Any?) {
 
 // TESTCASE NUMBER: 63
 fun case_63(x: Any?, b: Boolean) {
-    val z1 = null
-    val z2 = null
-    val z3 = null
+    konst z1 = null
+    konst z2 = null
+    konst z3 = null
 
     if (x is Number?) {
         if (x !== when (b) { true -> <!DEBUG_INFO_CONSTANT!>z1<!>; false -> <!DEBUG_INFO_CONSTANT!>z2<!>; <!REDUNDANT_ELSE_IN_WHEN!>else<!> -> <!DEBUG_INFO_CONSTANT!>z3<!> }) {
@@ -1296,7 +1296,7 @@ fun case_70(x: Any?) {
  * ISSUES: KT-28362
  */
 fun case_71(t: Any?) {
-    val z1 = null
+    konst z1 = null
     var z2 = <!DEBUG_INFO_CONSTANT!>z1<!>
 
     if (t is Interface1?) {
@@ -1341,7 +1341,7 @@ fun case_72(t: Any?, z1: Nothing?) {
  * ISSUES: KT-28362
  */
 fun case_73(t: Any?) {
-    val `null` = null
+    konst `null` = null
 
     if (t is Interface2?) {
         if (t is ClassLevel1?) {

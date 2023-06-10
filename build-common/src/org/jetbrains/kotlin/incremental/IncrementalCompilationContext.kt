@@ -14,20 +14,20 @@ import java.io.File
 private fun createDefaultPathConverter(rootProjectDir: File?) = IncrementalFileToPathConverter(rootProjectDir)
 
 class IncrementalCompilationContext(
-    val pathConverter: FileToPathConverter,
-    val storeFullFqNamesInLookupCache: Boolean = false,
-    val transaction: CompilationTransaction = NonRecoverableCompilationTransaction(),
-    val reporter: ICReporter = DoNothingICReporter,
+    konst pathConverter: FileToPathConverter,
+    konst storeFullFqNamesInLookupCache: Boolean = false,
+    konst transaction: CompilationTransaction = NonRecoverableCompilationTransaction(),
+    konst reporter: ICReporter = DoNothingICReporter,
     /**
      * Controls whether changes in lookup cache should be tracked. Required for the classpath snapshots based IC approach
      */
-    val trackChangesInLookupCache: Boolean = false,
+    konst trackChangesInLookupCache: Boolean = false,
     /**
      * Controls whether any changes should be propagated to FS until we decide that the compilation is successful or not
      *
      * Required for optimizing Gradle side outputs backup
      */
-    val keepIncrementalCompilationCachesInMemory: Boolean = false,
+    konst keepIncrementalCompilationCachesInMemory: Boolean = false,
 ) {
     constructor(
         rootProjectDir: File?,

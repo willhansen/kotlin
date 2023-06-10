@@ -11,14 +11,14 @@ class ModalityCommonizer : Commonizer<Modality, Modality> {
     private var temp: Modality? = null
     private var error = false
 
-    override val result: Modality
+    override konst result: Modality
         get() = checkState(temp, error)
 
     override fun commonizeWith(next: Modality): Boolean {
         if (error)
             return false
 
-        val temp = temp
+        konst temp = temp
         this.temp = if (temp != null) getNext(temp, next) else next
         error = this.temp == null
 

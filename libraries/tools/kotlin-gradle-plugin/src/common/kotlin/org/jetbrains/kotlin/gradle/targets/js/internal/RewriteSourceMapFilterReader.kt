@@ -9,7 +9,7 @@ import java.io.*
 import kotlin.math.min
 
 open class RewriteSourceMapFilterReader(
-    val input: Reader
+    konst input: Reader
 ) : FilterReader(input) {
     // This implementation works only when source map contents starts
     // with prolog `{"version":3,"file":"...","sources":[...],"sourcesContent":...`
@@ -24,22 +24,22 @@ open class RewriteSourceMapFilterReader(
     // All rest contents will be passed directly from [input].
 
     companion object {
-        internal const val PROLOG_END = "],\"sourcesContent\":"
-        const val UNSUPPORTED_FORMAT_MESSAGE =
+        internal const konst PROLOG_END = "],\"sourcesContent\":"
+        const konst UNSUPPORTED_FORMAT_MESSAGE =
             "Unsupported format. Contents should starts with `{\"version\":3,\"file\":\"...\",\"sources\":[...],\"sourcesContent\":...`"
 
-        private val log = LoggerFactory.getLogger("kotlin")
+        private konst log = LoggerFactory.getLogger("kotlin")
     }
 
     private var wasReadFirst = false
-    private val prologLimit = 0xfffff
+    private konst prologLimit = 0xfffff
 
     // buffer with transformed prolog, that wil be emitted first
     private lateinit var bufferWriter: StringWriter
     private lateinit var bufferJsonWriter: JsonWriter
-    private val buffer: StringBuffer get() = bufferWriter.buffer
+    private konst buffer: StringBuffer get() = bufferWriter.buffer
     private var bufferReadPos = 0
-    private val bufferAvailable get() = buffer.length - bufferReadPos
+    private konst bufferAvailable get() = buffer.length - bufferReadPos
 
     private var inputEof = false
 
@@ -55,8 +55,8 @@ open class RewriteSourceMapFilterReader(
 
     private fun readFirst() {
         // read 1Kb chunks from [input] until [PROLOG_END] will be found
-        val jsonString = StringBuilder()
-        val readBuffer = CharArray(1024)
+        konst jsonString = StringBuilder()
+        konst readBuffer = CharArray(1024)
         var lastRead: Int
         var jsonPrologPos: Int
         while (true) {
@@ -69,7 +69,7 @@ open class RewriteSourceMapFilterReader(
 
             // Try find PROLOG_END. Note the case when prolog contents is splitted between reads.
             // Like, one buffer ends with `],"sourc`, and the other starts with `esContent"`
-            val prevEnd = jsonString.length
+            konst prevEnd = jsonString.length
             jsonString.append(readBuffer, 0, lastRead)
             jsonPrologPos = jsonString.indexOf(PROLOG_END, prevEnd - PROLOG_END.length)
             if (jsonPrologPos == -1) {
@@ -85,27 +85,27 @@ open class RewriteSourceMapFilterReader(
         bufferJsonWriter = JsonWriter(bufferWriter)
 
         // parse json in prolog and write it back to bufferJsonWriter with transformed source paths
-        val json = JsonReader(StringReader(jsonString.toString()))
+        konst json = JsonReader(StringReader(jsonString.toString()))
         try {
             json.beginObject()
             bufferJsonWriter.beginObject()
 
             reading@ while (true) {
-                val token = json.peek()
+                konst token = json.peek()
                 check(token == JsonToken.NAME) { "JSON key expected, but $token found" }
-                val key = json.nextName()
+                konst key = json.nextName()
                 when (key) {
                     "sources" -> {
                         json.beginArray()
                         bufferJsonWriter.name("sources").beginArray()
                         while (json.peek() != JsonToken.END_ARRAY) {
-                            val path = json.nextString()
-                            bufferJsonWriter.value(transformString(path))
+                            konst path = json.nextString()
+                            bufferJsonWriter.konstue(transformString(path))
                         }
                         json.endArray()
                     }
-                    "version" -> bufferJsonWriter.name(key).value(json.nextInt())
-                    "file" -> bufferJsonWriter.name(key).value(json.nextString())
+                    "version" -> bufferJsonWriter.name(key).konstue(json.nextInt())
+                    "file" -> bufferJsonWriter.name(key).konstue(json.nextString())
                     "sourcesContent" -> break@reading
                     else -> throw IllegalStateException("Unknown key \"$key\"")
                 }
@@ -141,12 +141,12 @@ open class RewriteSourceMapFilterReader(
         log.warn("Cannot rewrite paths in JavaScript source maps: $reason")
     }
 
-    protected open fun transformString(value: String): String {
-        val sourceFileResolved = File(srcSourceRoot)
-            .resolve(value)
+    protected open fun transformString(konstue: String): String {
+        konst sourceFileResolved = File(srcSourceRoot)
+            .resolve(konstue)
             .normalize().absoluteFile
 
-        val transformedPath = sourceFileResolved.relativeToOrNull(File(targetSourceRoot))?.path ?: return sourceFileResolved.path
+        konst transformedPath = sourceFileResolved.relativeToOrNull(File(targetSourceRoot))?.path ?: return sourceFileResolved.path
 
         return if (File.separatorChar == '\\') {
             transformedPath.replace('\\', '/')
@@ -160,7 +160,7 @@ open class RewriteSourceMapFilterReader(
         maybeReadFirst()
         if (bufferAvailable == 0) {
             if (inputEof) return -1
-            val read = input.read()
+            konst read = input.read()
             if (read == -1) {
                 inputEof = true
                 return -1
@@ -179,7 +179,7 @@ open class RewriteSourceMapFilterReader(
         while (todo > 0) {
             if (bufferAvailable == 0) {
                 if (inputEof) return if (n == todo) -1 else n - todo
-                val read = input.read(dest, destOffset, todo)
+                konst read = input.read(dest, destOffset, todo)
                 if (read == -1) {
                     inputEof = true
                     return n - todo
@@ -188,7 +188,7 @@ open class RewriteSourceMapFilterReader(
                 }
             }
 
-            val toRead = min(todo, bufferAvailable)
+            konst toRead = min(todo, bufferAvailable)
             buffer.getChars(bufferReadPos, bufferReadPos + toRead, dest, destOffset)
             bufferReadPos += toRead
             destOffset += toRead
@@ -205,7 +205,7 @@ open class RewriteSourceMapFilterReader(
         while (todo > 0) {
             if (bufferAvailable == 0) {
                 if (inputEof) return n - todo
-                val read = input.skip(todo.toLong())
+                konst read = input.skip(todo.toLong())
                 if (read == 0L && todo != 0) {
                     inputEof = true
                     return n - todo
@@ -214,7 +214,7 @@ open class RewriteSourceMapFilterReader(
                 }
             }
 
-            val toRead = min(todo, bufferAvailable)
+            konst toRead = min(todo, bufferAvailable)
             bufferReadPos += toRead
             todo -= toRead
         }

@@ -4,7 +4,7 @@
 
 package test
 
-class Foo(@JvmField val a: String)
+class Foo(@JvmField konst a: String)
 
 inline fun test(s: (Foo) -> String): String {
     return s(Foo("OK"))

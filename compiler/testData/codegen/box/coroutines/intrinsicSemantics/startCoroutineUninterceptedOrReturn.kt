@@ -18,14 +18,14 @@ suspend fun suspendWithException(): String = suspendCoroutineUninterceptedOrRetu
 fun builder(shouldSuspend: Boolean, c: suspend () -> String): String {
     var fromSuspension: String? = null
 
-    val result = try {
+    konst result = try {
         c.startCoroutineUninterceptedOrReturn(object: Continuation<String> {
-            override val context: CoroutineContext
+            override konst context: CoroutineContext
                 get() =  EmptyCoroutineContext
 
-            override fun resumeWith(value: Result<String>) {
+            override fun resumeWith(konstue: Result<String>) {
                 fromSuspension = try {
-                    value.getOrThrow()
+                    konstue.getOrThrow()
                 } catch (exception: Throwable) {
                     "Exception: " + exception.message!!
                 }

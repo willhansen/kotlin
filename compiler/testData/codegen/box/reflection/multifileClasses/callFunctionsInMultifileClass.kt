@@ -30,4 +30,4 @@ package test
 
 fun getY() = 239
 
-fun getZ(value: Int = 42) = value
+fun getZ(konstue: Int = 42) = konstue

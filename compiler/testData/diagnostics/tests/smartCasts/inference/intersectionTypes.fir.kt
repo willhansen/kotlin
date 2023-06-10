@@ -16,21 +16,21 @@ interface C: A
 
 fun test(a: A, b: B, c: C) {
     if (a is B && a is C) {
-        val d: C = id(a)
-        val e: Any = id(a)
-        val f = id(a)
+        konst d: C = id(a)
+        konst e: Any = id(a)
+        konst f = id(a)
         checkSubtype<A>(f)
-        val g = two(a, b)
+        konst g = two(a, b)
         checkSubtype<B>(g)
         checkSubtype<A>(g)
 
         // smart cast isn't needed, but is reported due to KT-4294
-        val h: Any = two(a, b)
+        konst h: Any = two(a, b)
 
-        val k = three(a, b, c)
+        konst k = three(a, b, c)
         checkSubtype<A>(k)
         checkSubtype<B>(<!ARGUMENT_TYPE_MISMATCH!>k<!>)
-        val l: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>three(a, b, c)<!>
+        konst l: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>three(a, b, c)<!>
 
         use(d, e, f, g, h, k, l)
     }
@@ -50,13 +50,13 @@ fun testErrorMessages(a: A, ml: MutableList<String>) {
 
 fun rr(s: String?) {
     if (s != null) {
-        val l = arrayListOf("", s)
+        konst l = arrayListOf("", s)
         checkSubtype<MutableList<String>>(l)
         checkSubtype<MutableList<String?>>(<!ARGUMENT_TYPE_MISMATCH!>l<!>)
     }
 }
 
 //from library
-fun <T> arrayListOf(vararg values: T): MutableList<T> = throw Exception()
+fun <T> arrayListOf(vararg konstues: T): MutableList<T> = throw Exception()
 
 fun use(vararg a: Any) = a

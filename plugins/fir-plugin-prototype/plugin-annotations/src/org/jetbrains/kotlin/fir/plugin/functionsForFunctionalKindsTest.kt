@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.fir.plugin
 
-class Box<T>(val value: T)
+class Box<T>(konst konstue: T)
 
 fun produceComposableFunction(): @MyComposable () -> Unit = null!!
 fun consumeComposableFunction(@Suppress("UNUSED_PARAMETER") block: @MyComposable () -> Unit) {}

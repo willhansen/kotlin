@@ -5,7 +5,7 @@ open class A {
   // CHECK:
   //   Mangled name: A{}aVal
   //   Public signature: /A.aVal|-4026160909590410018[0]
-  val aVal: Int
+  konst aVal: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-aVal>(){}kotlin.Int
     //   Public signature: /A.aVal.<get-aVal>|-1703021672602726383[0]
@@ -97,7 +97,7 @@ class B : A {
   // CHECK:
   //   Mangled name: B{}aVal
   //   Public signature: /B.aVal|-4026160909590410018[0]
-  /* fake */ override val aVal: Int
+  /* fake */ override konst aVal: Int
     // CHECK JVM_IR:
     //   Mangled name: B#<get-aVal>(){}kotlin.Int
     //   Public signature: /B.aVal.<get-aVal>|-1703021672602726383[0]
@@ -115,7 +115,7 @@ open class GA<T : Any?> {
   // CHECK:
   //   Mangled name: GA{}aVal
   //   Public signature: /GA.aVal|-4026160909590410018[0]
-  val aVal: Int
+  konst aVal: Int
     // CHECK JVM_IR:
     //   Mangled name: GA#<get-aVal>(){}kotlin.Int
     //   Public signature: /GA.aVal.<get-aVal>|-1703021672602726383[0]
@@ -164,7 +164,7 @@ class GB<T : Any?, S : Any?> : GA<T> {
   // CHECK:
   //   Mangled name: GB{}aVal
   //   Public signature: /GB.aVal|-4026160909590410018[0]
-  /* fake */ override val aVal: Int
+  /* fake */ override konst aVal: Int
     // CHECK JVM_IR:
     //   Mangled name: GB#<get-aVal>(){}kotlin.Int
     //   Public signature: /GB.aVal.<get-aVal>|-1703021672602726383[0]

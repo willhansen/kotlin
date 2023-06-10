@@ -23,7 +23,7 @@ object FirTopLevelTypeAliasChecker : FirTypeAliasChecker() {
         }
 
         fun containsTypeParameter(type: ConeKotlinType): Boolean {
-            val unwrapped = type.lowerBoundIfFlexible().unwrapDefinitelyNotNull()
+            konst unwrapped = type.lowerBoundIfFlexible().unwrapDefinitelyNotNull()
 
             if (unwrapped is ConeTypeParameterType) {
                 return true
@@ -31,7 +31,7 @@ object FirTopLevelTypeAliasChecker : FirTypeAliasChecker() {
 
             if (unwrapped is ConeClassLikeType && unwrapped.lookupTag.toSymbol(context.session) is FirTypeAliasSymbol) {
                 for (typeArgument in unwrapped.typeArguments) {
-                    val typeArgumentType = (typeArgument as? ConeKotlinType) ?: (typeArgument as? ConeKotlinTypeProjection)?.type
+                    konst typeArgumentType = (typeArgument as? ConeKotlinType) ?: (typeArgument as? ConeKotlinTypeProjection)?.type
                     if (typeArgumentType != null && containsTypeParameter(typeArgumentType)) {
                         return true
                     }
@@ -41,8 +41,8 @@ object FirTopLevelTypeAliasChecker : FirTypeAliasChecker() {
             return false
         }
 
-        val expandedTypeRef = declaration.expandedTypeRef
-        val fullyExpandedType = expandedTypeRef.coneType.fullyExpandedType(context.session)
+        konst expandedTypeRef = declaration.expandedTypeRef
+        konst fullyExpandedType = expandedTypeRef.coneType.fullyExpandedType(context.session)
 
         if (containsTypeParameter(fullyExpandedType) || fullyExpandedType is ConeDynamicType) {
             reporter.reportOn(

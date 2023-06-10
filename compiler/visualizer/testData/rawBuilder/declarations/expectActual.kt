@@ -4,7 +4,7 @@ expect fun foo(): String
 
 //         Int
 //         │
-expect val x: Int
+expect konst x: Int
 
 actual class MyClass
 
@@ -14,4 +14,4 @@ actual fun foo() = "Hello"
 
 //         Int Int
 //         │   │
-actual val x = 42
+actual konst x = 42

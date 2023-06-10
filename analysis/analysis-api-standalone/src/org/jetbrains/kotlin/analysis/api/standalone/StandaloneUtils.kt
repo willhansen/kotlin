@@ -95,7 +95,7 @@ public fun configureProjectEnvironment(
     compilerConfig: CompilerConfiguration,
     packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
 ) {
-    val ktFiles = getPsiFilesFromPaths<KtFile>(project, getSourceFilePaths(compilerConfig))
+    konst ktFiles = getPsiFilesFromPaths<KtFile>(project, getSourceFilePaths(compilerConfig))
     configureProjectEnvironment(project, compilerConfig, ktFiles, packagePartProvider)
 }
 

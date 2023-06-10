@@ -43,7 +43,7 @@ digraph boundSmartcastsInBranches_kt {
                 12 [label="Enter block"];
                 13 [label="Access variable R|<local>/list|"];
                 14 [label="Function call: R|<local>/list|.R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<A>|>|()" style="filled" fillcolor=yellow];
-                15 [label="Variable declaration: lval <iterator>: R|kotlin/collections/Iterator<A>|"];
+                15 [label="Variable declaration: lkonst <iterator>: R|kotlin/collections/Iterator<A>|"];
                 subgraph cluster_6 {
                     color=blue
                     16 [label="Enter while loop"];
@@ -62,7 +62,7 @@ digraph boundSmartcastsInBranches_kt {
                             22 [label="Enter block"];
                             23 [label="Access variable R|<local>/<iterator>|"];
                             24 [label="Function call: R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|A|>|()" style="filled" fillcolor=yellow];
-                            25 [label="Variable declaration: lval a: R|A|"];
+                            25 [label="Variable declaration: lkonst a: R|A|"];
                             subgraph cluster_10 {
                                 color=blue
                                 26 [label="Enter block"];
@@ -160,7 +160,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_15 {
             color=blue
             54 [label="Enter block"];
-            55 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            55 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             subgraph cluster_16 {
                 color=blue
                 56 [label="Enter when"];
@@ -235,7 +235,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_22 {
             color=blue
             81 [label="Enter block"];
-            82 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            82 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             subgraph cluster_23 {
                 color=blue
                 83 [label="Enter when"];
@@ -314,7 +314,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_29 {
             color=blue
             110 [label="Enter block"];
-            111 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            111 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             subgraph cluster_30 {
                 color=blue
                 112 [label="Enter when"];
@@ -395,7 +395,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_36 {
             color=blue
             140 [label="Enter block"];
-            141 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            141 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             subgraph cluster_37 {
                 color=blue
                 142 [label="Enter when"];
@@ -480,7 +480,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_43 {
             color=blue
             172 [label="Enter block"];
-            173 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            173 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             subgraph cluster_44 {
                 color=blue
                 174 [label="Enter when"];
@@ -565,7 +565,7 @@ digraph boundSmartcastsInBranches_kt {
         subgraph cluster_50 {
             color=blue
             204 [label="Enter block"];
-            205 [label="Variable declaration: lval x: R|kotlin/Any|"];
+            205 [label="Variable declaration: lkonst x: R|kotlin/Any|"];
             206 [label="Access variable R|<local>/a|"];
             207 [label="Assignment: R|<local>/x|"];
             208 [label="Access variable R|<local>/x|"];
@@ -592,11 +592,11 @@ digraph boundSmartcastsInBranches_kt {
             color=blue
             214 [label="Enter block"];
             215 [label="Const: Null(null)"];
-            216 [label="Variable declaration: lval z: R|kotlin/String?|"];
+            216 [label="Variable declaration: lkonst z: R|kotlin/String?|"];
             217 [label="Access variable R|<local>/z|"];
             218 [label="Variable declaration: lvar y: R|kotlin/String?|"];
             219 [label="Access variable R|<local>/y|"];
-            220 [label="Variable declaration: lval x: R|kotlin/String?|"];
+            220 [label="Variable declaration: lkonst x: R|kotlin/String?|"];
             subgraph cluster_53 {
                 color=blue
                 221 [label="Enter when"];
@@ -912,11 +912,11 @@ digraph boundSmartcastsInBranches_kt {
             color=blue
             344 [label="Enter block"];
             345 [label="Const: Null(null)"];
-            346 [label="Variable declaration: lval z: R|kotlin/String?|"];
+            346 [label="Variable declaration: lkonst z: R|kotlin/String?|"];
             347 [label="Access variable R|<local>/z|"];
             348 [label="Variable declaration: lvar y: R|kotlin/String?|"];
             349 [label="Access variable R|<local>/y|"];
-            350 [label="Variable declaration: lval x: R|kotlin/String?|"];
+            350 [label="Variable declaration: lkonst x: R|kotlin/String?|"];
             subgraph cluster_73 {
                 color=blue
                 351 [label="Enter when"];
@@ -1249,7 +1249,7 @@ digraph boundSmartcastsInBranches_kt {
             482 [label="Enter block"];
             483 [label="Const: Null(null)"];
             484 [label="Variable declaration: lvar a: R|kotlin/String?|"];
-            485 [label="Variable declaration: lval b: R|kotlin/String?|"];
+            485 [label="Variable declaration: lkonst b: R|kotlin/String?|"];
             subgraph cluster_93 {
                 color=blue
                 486 [label="Enter when"];

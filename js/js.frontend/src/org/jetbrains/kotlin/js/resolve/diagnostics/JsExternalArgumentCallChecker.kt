@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 
 object JsExternalArgumentCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        for (argument in resolvedCall.call.valueArguments) {
-            val parameter = resolvedCall.getParameterForArgument(argument) ?: continue
+        for (argument in resolvedCall.call.konstueArguments) {
+            konst parameter = resolvedCall.getParameterForArgument(argument) ?: continue
             if (AnnotationsUtils.isJsExternalArgument(parameter)) {
-                val argExpression = argument.getArgumentExpression() ?: continue
-                val argumentType = context.trace.bindingContext.getType(argExpression) ?: continue
-                val declaration = argumentType.makeNotNullable().constructor.declarationDescriptor as? ClassDescriptor ?: continue
+                konst argExpression = argument.getArgumentExpression() ?: continue
+                konst argumentType = context.trace.bindingContext.getType(argExpression) ?: continue
+                konst declaration = argumentType.makeNotNullable().constructor.declarationDescriptor as? ClassDescriptor ?: continue
                 if (!declaration.isEffectivelyExternal()) {
                     context.trace.report(ErrorsJs.JS_EXTERNAL_ARGUMENT.on(argExpression, argumentType))
                 }

@@ -1,4 +1,4 @@
 package topLevelManglingB
 
 fun foo() = "b1"
-val bar = "b2"
+konst bar = "b2"

@@ -47,7 +47,7 @@ abstract class KotlinJsIrLink @Inject constructor(
     }
 
     @get:Internal
-    override val sources: FileCollection = super.sources
+    override konst sources: FileCollection = super.sources
 
     override fun skipCondition(): Boolean {
         return !entryModule.get().asFile.exists()
@@ -55,40 +55,40 @@ abstract class KotlinJsIrLink @Inject constructor(
 
     @Transient
     @get:Internal
-    internal val propertiesProvider = PropertiesProvider(project)
+    internal konst propertiesProvider = PropertiesProvider(project)
 
     @get:Input
-    internal val incrementalJsIr: Boolean = propertiesProvider.incrementalJsIr
+    internal konst incrementalJsIr: Boolean = propertiesProvider.incrementalJsIr
 
     @get:Input
-    val outputGranularity: KotlinJsIrOutputGranularity = propertiesProvider.jsIrOutputGranularity
+    konst outputGranularity: KotlinJsIrOutputGranularity = propertiesProvider.jsIrOutputGranularity
 
     // Incremental stuff of link task is inside compiler
     @get:Internal
-    override val taskBuildCacheableOutputDirectory: DirectoryProperty
+    override konst taskBuildCacheableOutputDirectory: DirectoryProperty
         get() = super.taskBuildCacheableOutputDirectory
 
     @get:Internal
     @get:Deprecated("Please use modeProperty instead.")
     var mode: KotlinJsBinaryMode
         get() = modeProperty.get()
-        set(value) {
-            modeProperty.set(value)
+        set(konstue) {
+            modeProperty.set(konstue)
         }
 
     @get:Input
-    internal abstract val modeProperty: Property<KotlinJsBinaryMode>
+    internal abstract konst modeProperty: Property<KotlinJsBinaryMode>
 
     @get:SkipWhenEmpty
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputDirectory
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    internal abstract val entryModule: DirectoryProperty
+    internal abstract konst entryModule: DirectoryProperty
 
     // Do not change the visibility - the property could be used outside
     @get:Internal
-    abstract val rootCacheDirectory: DirectoryProperty
+    abstract konst rootCacheDirectory: DirectoryProperty
 
     override fun cleanOutputsAndLocalState(reason: String?) {
         if (!usingCacheDirectory()) {
@@ -119,7 +119,7 @@ abstract class KotlinJsIrLink @Inject constructor(
     override fun processArgsBeforeCompile(args: K2JSCompilerArguments) {
         KotlinBuildStatsService.applyIfInitialised {
             it.report(BooleanMetrics.JS_IR_INCREMENTAL, incrementalJsIr)
-            val newArgs = K2JSCompilerArguments()
+            konst newArgs = K2JSCompilerArguments()
             parseCommandLineArguments(ArgumentUtils.convertArgumentsToStringList(args), newArgs)
             it.report(
                 StringMetrics.JS_OUTPUT_GRANULARITY,
@@ -135,7 +135,7 @@ abstract class KotlinJsIrLink @Inject constructor(
         incrementalJsIr && modeProperty.get() == DEVELOPMENT
 }
 
-val KotlinPlatformType.fileExtension
+konst KotlinPlatformType.fileExtension
     get() = when (this) {
         KotlinPlatformType.wasm -> {
             ".mjs"

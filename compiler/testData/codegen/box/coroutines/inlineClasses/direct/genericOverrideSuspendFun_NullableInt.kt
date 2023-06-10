@@ -4,7 +4,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-inline class IC(val s: Int?)
+inline class IC(konst s: Int?)
 
 fun Int?.toResultString() =
     if (this == 42) "OK" else "!! $this"
@@ -24,7 +24,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     var res: String? = null
     builder {
-        val base: Base<*> = Derived()
+        konst base: Base<*> = Derived()
         res = (base.generic() as IC).s.toResultString()
     }
     return res!!

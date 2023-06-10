@@ -54,10 +54,10 @@ abstract class FirSymbolNamesProvider {
      * generated on demand.
      *
      * [mayHaveSyntheticFunctionTypes] only needs to be overridden together with [mayHaveSyntheticFunctionType] if the supported
-     * [FirSymbolProvider] can provide generated function types. The value should be constant, which allows composite symbol providers to
+     * [FirSymbolProvider] can provide generated function types. The konstue should be constant, which allows composite symbol providers to
      * cache the result and achieve acceptable performance.
      */
-    open val mayHaveSyntheticFunctionTypes: Boolean = false
+    open konst mayHaveSyntheticFunctionTypes: Boolean = false
 
     /**
      * Whether [classId] is considered a generated function type within the provider's scope and session.
@@ -71,7 +71,7 @@ abstract class FirSymbolNamesProvider {
     open fun mayHaveTopLevelClassifier(classId: ClassId): Boolean {
         if (mayHaveSyntheticFunctionTypes && mayHaveSyntheticFunctionType(classId)) return true
 
-        val names = getTopLevelClassifierNamesInPackage(classId.packageFqName) ?: return true
+        konst names = getTopLevelClassifierNamesInPackage(classId.packageFqName) ?: return true
         if (classId.outerClassId == null) {
             if (!names.mayContainTopLevelClassifier(classId.shortClassName)) return false
         } else {
@@ -91,7 +91,7 @@ abstract class FirSymbolNamesProvider {
         // The `packageNamesWithTopLevelCallables` check is implemented in `FirCachedSymbolNamesProvider` via
         // `getTopLevelCallableNamesInPackage`. It is probably not worth checking it in uncached situations, since building the set of
         // package names with top-level callables is likely as expensive as just calling an uncached `getTopLevelCallableNamesInPackage`.
-        val names = getTopLevelCallableNamesInPackage(packageFqName) ?: return true
+        konst names = getTopLevelCallableNamesInPackage(packageFqName) ?: return true
         return name in names
     }
 }
@@ -129,7 +129,7 @@ abstract class FirSymbolNamesProviderWithoutCallables : FirSymbolNamesProvider()
     override fun mayHaveTopLevelCallable(packageFqName: FqName, name: Name): Boolean = false
 }
 
-open class FirCompositeSymbolNamesProvider(val providers: List<FirSymbolNamesProvider>) : FirSymbolNamesProvider() {
+open class FirCompositeSymbolNamesProvider(konst providers: List<FirSymbolNamesProvider>) : FirSymbolNamesProvider() {
     override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String>? {
         return providers.flatMapToNullableSet { it.getTopLevelClassifierNamesInPackage(packageFqName) }
     }
@@ -142,7 +142,7 @@ open class FirCompositeSymbolNamesProvider(val providers: List<FirSymbolNamesPro
         return providers.flatMapToNullableSet { it.getTopLevelCallableNamesInPackage(packageFqName) }
     }
 
-    override val mayHaveSyntheticFunctionTypes: Boolean = providers.any { it.mayHaveSyntheticFunctionTypes }
+    override konst mayHaveSyntheticFunctionTypes: Boolean = providers.any { it.mayHaveSyntheticFunctionTypes }
 
     override fun mayHaveSyntheticFunctionType(classId: ClassId): Boolean = providers.any { it.mayHaveSyntheticFunctionType(classId) }
 

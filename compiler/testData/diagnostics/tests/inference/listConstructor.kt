@@ -11,9 +11,9 @@ fun <A> cons(x: A, xs: List<A>): List<A> = xs
 fun <B> nil(): List<B> = arrayList()
 
 fun test() {
-    val xs = cons(1, nil())
-    val xs1 = cons("", nil())
-    val xs2 = cons(1, nil<Any>())
+    konst xs = cons(1, nil())
+    konst xs1 = cons("", nil())
+    konst xs2 = cons(1, nil<Any>())
 
     checkSubtype<List<Int>>(xs)
     checkSubtype<List<String>>(xs1)
@@ -24,7 +24,7 @@ fun test() {
 // ---------------------
 // copy from kotlin util
 
-fun <T> arrayList(vararg values: T) : ArrayList<T> = values.toCollection(ArrayList<T>(values.size))
+fun <T> arrayList(vararg konstues: T) : ArrayList<T> = konstues.toCollection(ArrayList<T>(konstues.size))
 
 fun <T, C: MutableCollection<in T>> Array<T>.toCollection(result: C) : C {
     for (element in this) result.add(element)

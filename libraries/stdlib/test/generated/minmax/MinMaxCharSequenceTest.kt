@@ -35,7 +35,7 @@ class MinMaxCharSequenceTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = StringBuilder()
+        konst empty = StringBuilder()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -61,7 +61,7 @@ class MinMaxCharSequenceTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = StringBuilder()
+        konst empty = StringBuilder()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -86,7 +86,7 @@ class MinMaxCharSequenceTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = StringBuilder()
+        konst empty = StringBuilder()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -94,8 +94,8 @@ class MinMaxCharSequenceTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).concatToString())
+    fun minBySelectorEkonstuateOnce() {
+        konst source = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).concatToString())
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -105,8 +105,8 @@ class MinMaxCharSequenceTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).concatToString())
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).concatToString())
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -133,8 +133,8 @@ class MinMaxCharSequenceTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = 'b'
-        val items = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).apply { shuffle() }.concatToString())
+        konst middle = 'b'
+        konst items = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).apply { shuffle() }.concatToString())
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -148,8 +148,8 @@ class MinMaxCharSequenceTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = 'b'
-        val items = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).apply { shuffle() }.concatToString())
+        konst middle = 'b'
+        konst items = StringBuilder(charArrayOf('a', 'b', Char.MAX_VALUE).apply { shuffle() }.concatToString())
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -163,7 +163,7 @@ class MinMaxCharSequenceTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = StringBuilder()
+        konst empty = StringBuilder()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -203,7 +203,7 @@ class MinMaxCharSequenceTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = StringBuilder()
+        konst empty = StringBuilder()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

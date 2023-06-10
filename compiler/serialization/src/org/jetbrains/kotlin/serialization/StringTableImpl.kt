@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.name.FqName
 
 open class SerializableStringTable : StringTable {
 
-    private class FqNameProto(val fqName: ProtoBuf.QualifiedNameTable.QualifiedName.Builder) {
+    private class FqNameProto(konst fqName: ProtoBuf.QualifiedNameTable.QualifiedName.Builder) {
         override fun hashCode(): Int {
             var result = 13
             result = 31 * result + fqName.parentQualifiedName
@@ -36,15 +36,15 @@ open class SerializableStringTable : StringTable {
         override fun equals(other: Any?): Boolean {
             if (other == null || other !is FqNameProto) return false
 
-            val otherFqName = other.fqName
+            konst otherFqName = other.fqName
             return fqName.parentQualifiedName == otherFqName.parentQualifiedName
                     && fqName.shortName == otherFqName.shortName
                     && fqName.kind == otherFqName.kind
         }
     }
 
-    private val strings = Interner<String>()
-    private val qualifiedNames = Interner<FqNameProto>()
+    private konst strings = Interner<String>()
+    private konst qualifiedNames = Interner<FqNameProto>()
 
     override fun getStringIndex(string: String): Int = strings.intern(string)
 
@@ -52,7 +52,7 @@ open class SerializableStringTable : StringTable {
         getClassIdIndex(ClassId.fromString(className, isLocal))
 
     fun getClassIdIndex(classId: ClassId): Int {
-        val builder = ProtoBuf.QualifiedNameTable.QualifiedName.newBuilder()
+        konst builder = ProtoBuf.QualifiedNameTable.QualifiedName.newBuilder()
         builder.kind = ProtoBuf.QualifiedNameTable.QualifiedName.Kind.CLASS
 
         builder.parentQualifiedName =
@@ -67,7 +67,7 @@ open class SerializableStringTable : StringTable {
     fun getPackageFqNameIndex(fqName: FqName): Int {
         var result = -1
         for (segment in fqName.pathSegments()) {
-            val builder = ProtoBuf.QualifiedNameTable.QualifiedName.newBuilder()
+            konst builder = ProtoBuf.QualifiedNameTable.QualifiedName.newBuilder()
             builder.shortName = getStringIndex(segment.asString())
             if (result != -1) {
                 builder.parentQualifiedName = result
@@ -78,12 +78,12 @@ open class SerializableStringTable : StringTable {
     }
 
     fun buildProto(): Pair<ProtoBuf.StringTable, ProtoBuf.QualifiedNameTable> {
-        val strings = ProtoBuf.StringTable.newBuilder()
+        konst strings = ProtoBuf.StringTable.newBuilder()
         for (simpleName in this.strings.allInternedObjects) {
             strings.addString(simpleName)
         }
 
-        val qualifiedNames = ProtoBuf.QualifiedNameTable.newBuilder()
+        konst qualifiedNames = ProtoBuf.QualifiedNameTable.newBuilder()
         for (fqName in this.qualifiedNames.allInternedObjects) {
             qualifiedNames.addQualifiedName(fqName.fqName)
         }
@@ -96,6 +96,6 @@ open class StringTableImpl : DescriptorAwareStringTable, SerializableStringTable
 
     override fun getQualifiedClassNameIndex(classId: ClassId): Int = getClassIdIndex(classId)
 
-    override val isLocalClassIdReplacementKeptGeneric: Boolean
+    override konst isLocalClassIdReplacementKeptGeneric: Boolean
         get() = false
 }

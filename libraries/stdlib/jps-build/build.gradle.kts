@@ -1,14 +1,14 @@
 description = "Stdlib configuration for JPS build (to be interpreted during IDEA project import)"
 
-val stdlibMinimal by configurations.creating
-val stdlibJS by configurations.creating
-val stdlibSources by configurations.creating
-val compilerLib by configurations.creating
+konst stdlibMinimal by configurations.creating
+konst stdlibJS by configurations.creating
+konst stdlibSources by configurations.creating
+konst compilerLib by configurations.creating
 
-val commonStdlib by configurations.creating
-val commonStdlibSources by configurations.creating
+konst commonStdlib by configurations.creating
+konst commonStdlibSources by configurations.creating
 
-val builtins by configurations.creating
+konst builtins by configurations.creating
 
 dependencies {
     stdlibMinimal("org.jetbrains.kotlin:kotlin-stdlib-jvm-minimal-for-test:$bootstrapKotlinVersion")

@@ -10,28 +10,28 @@ interface K2 : J {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class K<T: String>(val k: T) : K2 {
+konstue class K<T: String>(konst k: T) : K2 {
     override fun get2() = k
 }
 
 fun box(): String {
-    val k = K("K")
+    konst k = K("K")
 
-    val test1 = k.get1() + k.get2()
+    konst test1 = k.get1() + k.get2()
     if (test1 != "OK") throw AssertionError("test1: $test1")
 
-    val j: J = k
-    val test2 = j.get1() + j.get2()
+    konst j: J = k
+    konst test2 = j.get1() + j.get2()
     if (test2 != "OK") throw AssertionError("test2: $test2")
 
-    val test3 = JT.test(k)
+    konst test3 = JT.test(k)
     if (test3 != "OK") throw AssertionError("test3: $test3")
 
-    val k2: K2 = k
-    val test4 = k2.get1() + k2.get2()
+    konst k2: K2 = k
+    konst test4 = k2.get1() + k2.get2()
     if (test4 != "OK") throw AssertionError("test4: $test4")
 
-    val test5 = JT.test(k2)
+    konst test5 = JT.test(k2)
     if (test5 != "OK") throw AssertionError("test5: $test5")
 
     return "OK"

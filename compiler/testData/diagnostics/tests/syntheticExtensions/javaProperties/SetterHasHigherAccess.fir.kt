@@ -4,7 +4,7 @@ package k
 import JavaClass
 
 fun foo(javaClass: JavaClass) {
-    val v = javaClass.<!INVISIBLE_REFERENCE!>something<!>
+    konst v = javaClass.<!INVISIBLE_REFERENCE!>something<!>
     javaClass.<!INVISIBLE_REFERENCE!>something<!> = 1
     javaClass.<!INVISIBLE_REFERENCE!>something<!>++
 }
@@ -12,5 +12,5 @@ fun foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     protected int getSomething() { return 1; }
-    public void setSomething(int value) {}
+    public void setSomething(int konstue) {}
 }

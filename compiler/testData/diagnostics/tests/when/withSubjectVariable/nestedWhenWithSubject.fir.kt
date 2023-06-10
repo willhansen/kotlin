@@ -7,34 +7,34 @@ fun <T> bar(x: T, y: T) {}
 fun test1() {
     when (1) {
         1 ->
-            when (val y = 2) {
+            when (konst y = 2) {
                 2 -> foo()
             }
     }
 }
 
 fun test2() {
-    when (val x = 1) {
+    when (konst x = 1) {
         1 ->
-            when (val y = 2) {
+            when (konst y = 2) {
                 2 -> foo()
             }
     }
 }
 
 fun test3() {
-    when (val x = 1) {
+    when (konst x = 1) {
         1 ->
-            when (val x = 2) {
+            when (konst x = 2) {
                 2 -> foo()
             }
     }
 }
 
 fun test4() {
-    when (val x = 1) {
+    when (konst x = 1) {
         1 ->
-            when (val y = 2) {
+            when (konst y = 2) {
                 2 -> bar(x, y)
             }
     }

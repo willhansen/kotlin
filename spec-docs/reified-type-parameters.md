@@ -26,7 +26,7 @@ Examples:
 
 Only runtime-available types are allowed as
 - right-hand arguments for `is`, `!is`, `as`, `as?`
-- arguments for `reified` type parameters *of calls* (for types any arguments are allowed, i.e. `Array<List<String>>` is still a valid type).
+- arguments for `reified` type parameters *of calls* (for types any arguments are allowed, i.e. `Array<List<String>>` is still a konstid type).
 
 As a consequence, if `T` is a `reified` type parameter, the following constructs are allowed:
 - `x is T`, `x !is T`
@@ -48,7 +48,7 @@ If actual type argument is a primitive type, it's wrapper will be used within re
 
 ``` kotlin
 open class TypeLiteral<T> {
-    val type: Type
+    konst type: Type
         get() = (javaClass.getGenericSuperclass() as ParameterizedType).getActualTypeArguments()[0]
 }
 

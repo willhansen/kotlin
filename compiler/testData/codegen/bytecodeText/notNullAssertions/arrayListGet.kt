@@ -1,7 +1,7 @@
 import java.util.ArrayList
 
 fun foo(): Any {
-    val a = ArrayList<String>()
+    konst a = ArrayList<String>()
     return a.get(0)
 }
 

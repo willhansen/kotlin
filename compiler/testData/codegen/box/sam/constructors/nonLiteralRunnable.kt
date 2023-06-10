@@ -2,8 +2,8 @@
 
 fun box(): String {
     var result = "FAIL"
-    val f = { result = "OK" }
-    val r = Runnable(f)
+    konst f = { result = "OK" }
+    konst r = Runnable(f)
     r.run()
     return result
 }

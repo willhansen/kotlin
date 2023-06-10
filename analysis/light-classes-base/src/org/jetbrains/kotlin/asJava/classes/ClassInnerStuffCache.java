@@ -182,8 +182,8 @@ public final class ClassInnerStuffCache {
         return myGenerateEnumMethods && myClass.isEnum();
     }
 
-    private static <T> T[] copy(T[] value) {
-        return value.length == 0 ? value : value.clone();
+    private static <T> T[] copy(T[] konstue) {
+        return konstue.length == 0 ? konstue : konstue.clone();
     }
 
     @NotNull
@@ -252,8 +252,8 @@ public final class ClassInnerStuffCache {
         return ConcurrentFactoryMap.createMap(name -> JBIterable
                 .from(ownMethods)
                 .filter(m -> name.equals(m.getName()))
-                .append("values".equals(name) ? getValuesMethod() : null)
-                .append("valueOf".equals(name) ? getValueOfMethod() : null)
+                .append("konstues".equals(name) ? getValuesMethod() : null)
+                .append("konstueOf".equals(name) ? getValueOfMethod() : null)
                 .append(internMembers(PsiAugmentProvider.collectAugments(myClass, PsiMethod.class, name)))
                 .toArray(PsiMethod.EMPTY_ARRAY));
     }
@@ -516,9 +516,9 @@ public final class ClassInnerStuffCache {
         @Override
         public @NotNull String getName() {
             if (myKind == EnumMethodKind.ValueOf) {
-                return "valueOf";
+                return "konstueOf";
             }
-            return "values";
+            return "konstues";
         }
 
         @Override

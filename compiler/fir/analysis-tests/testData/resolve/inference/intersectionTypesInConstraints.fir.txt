@@ -19,6 +19,6 @@ FILE: main.kt
     public final fun test(): R|kotlin/Unit| {
         R|/elemAndList|<R|ft<it(kotlin/Comparable<it(A & B)> & I), it(kotlin/Comparable<it(A & B)>? & I?)>|>(R|/A.A|(), R|/list|<R|ft<it(kotlin/Comparable<it(A & B)> & I), it(kotlin/Comparable<it(A & B)>? & I?)>|>(R|/B.B|()))
     }
-    public final fun <T> list(value: R|T|): R|MyList<T>| {
+    public final fun <T> list(konstue: R|T|): R|MyList<T>| {
         ^list R|kotlin/TODO|()
     }

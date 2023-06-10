@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.library.uniqueName
 internal fun determineLinkerOutput(context: PhaseContext): LinkerOutputKind =
         when (context.config.produce) {
             CompilerOutputKind.FRAMEWORK -> {
-                val staticFramework = context.config.produceStaticFramework
+                konst staticFramework = context.config.produceStaticFramework
                 if (staticFramework) LinkerOutputKind.STATIC_LIBRARY else LinkerOutputKind.DYNAMIC_LIBRARY
             }
             CompilerOutputKind.DYNAMIC_CACHE,
@@ -24,8 +24,8 @@ internal fun determineLinkerOutput(context: PhaseContext): LinkerOutputKind =
             CompilerOutputKind.STATIC -> LinkerOutputKind.STATIC_LIBRARY
             CompilerOutputKind.PROGRAM -> run {
                 if (context.config.target.family == Family.ANDROID) {
-                    val configuration = context.config.configuration
-                    val androidProgramType = configuration.get(BinaryOptions.androidProgramType) ?: AndroidProgramType.Default
+                    konst configuration = context.config.configuration
+                    konst androidProgramType = configuration.get(BinaryOptions.androidProgramType) ?: AndroidProgramType.Default
                     if (androidProgramType.linkerOutputKindOverride != null) {
                         return@run androidProgramType.linkerOutputKindOverride
                     }
@@ -37,16 +37,16 @@ internal fun determineLinkerOutput(context: PhaseContext): LinkerOutputKind =
 
 // TODO: We have a Linker.kt file in the shared module.
 internal class Linker(
-        private val config: KonanConfig,
-        private val linkerOutput: LinkerOutputKind,
-        private val isCoverageEnabled: Boolean = false,
-        private val outputFiles: OutputFiles,
+        private konst config: KonanConfig,
+        private konst linkerOutput: LinkerOutputKind,
+        private konst isCoverageEnabled: Boolean = false,
+        private konst outputFiles: OutputFiles,
 ) {
-    private val platform = config.platform
-    private val linker = platform.linker
-    private val target = config.target
-    private val optimize = config.optimizationsEnabled
-    private val debug = config.debug || config.lightDebug
+    private konst platform = config.platform
+    private konst linker = platform.linker
+    private konst target = config.target
+    private konst optimize = config.optimizationsEnabled
+    private konst debug = config.debug || config.lightDebug
 
     fun linkCommands(
             outputFile: String,
@@ -54,13 +54,13 @@ internal class Linker(
             dependenciesTrackingResult: DependenciesTrackingResult,
             caches: ResolvedCacheBinaries,
     ): List<Command> {
-        val nativeDependencies = dependenciesTrackingResult.nativeDependenciesToLink
+        konst nativeDependencies = dependenciesTrackingResult.nativeDependenciesToLink
 
-        val includedBinariesLibraries = config.libraryToCache?.let { listOf(it.klib) }
+        konst includedBinariesLibraries = config.libraryToCache?.let { listOf(it.klib) }
                 ?: nativeDependencies.filterNot { config.cachedLibraries.isLibraryCached(it) }
-        val includedBinaries = includedBinariesLibraries.map { (it as? KonanLibrary)?.includedPaths.orEmpty() }.flatten()
+        konst includedBinaries = includedBinariesLibraries.map { (it as? KonanLibrary)?.includedPaths.orEmpty() }.flatten()
 
-        val libraryProvidedLinkerFlags = dependenciesTrackingResult.allNativeDependencies.map { it.linkerOpts }.flatten()
+        konst libraryProvidedLinkerFlags = dependenciesTrackingResult.allNativeDependencies.map { it.linkerOpts }.flatten()
         return runLinker(outputFile, objectFiles, includedBinaries, libraryProvidedLinkerFlags, caches)
     }
 
@@ -69,7 +69,7 @@ internal class Linker(
             return args
         }
 
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         for (arg in args) {
             // If user passes compiler arguments to us - transform them to linker ones.
             if (arg.startsWith("-Wl,")) {
@@ -88,8 +88,8 @@ internal class Linker(
             libraryProvidedLinkerFlags: List<String>,
             caches: ResolvedCacheBinaries,
     ): List<Command> {
-        val additionalLinkerArgs: List<String>
-        val executable: String
+        konst additionalLinkerArgs: List<String>
+        konst executable: String
 
         if (config.produce != CompilerOutputKind.FRAMEWORK) {
             additionalLinkerArgs = if (target.family.isAppleFamily) {
@@ -103,9 +103,9 @@ internal class Linker(
             }
             executable = outputFiles.nativeBinaryFile
         } else {
-            val framework = File(outputFile)
-            val dylibName = framework.name.removeSuffix(".framework")
-            val dylibRelativePath = when (target.family) {
+            konst framework = File(outputFile)
+            konst dylibName = framework.name.removeSuffix(".framework")
+            konst dylibRelativePath = when (target.family) {
                 Family.IOS,
                 Family.TVOS,
                 Family.WATCHOS -> dylibName
@@ -113,13 +113,13 @@ internal class Linker(
                 else -> error(target)
             }
             additionalLinkerArgs = listOf("-dead_strip", "-install_name", "@rpath/${framework.name}/$dylibRelativePath")
-            val dylibPath = framework.child(dylibRelativePath)
+            konst dylibPath = framework.child(dylibRelativePath)
             dylibPath.parentFile.mkdirs()
             executable = dylibPath.absolutePath
         }
         File(executable).delete()
 
-        val linkerArgs = asLinkerArgs(config.configuration.getNotNull(KonanConfigKeys.LINKER_ARGS)) +
+        konst linkerArgs = asLinkerArgs(config.configuration.getNotNull(KonanConfigKeys.LINKER_ARGS)) +
                 BitcodeEmbedding.getLinkerOptions(config) +
                 caches.dynamic +
                 libraryProvidedLinkerFlags + additionalLinkerArgs
@@ -146,7 +146,7 @@ internal fun runLinkerCommands(context: PhaseContext, commands: List<Command>, c
         it.execute()
     }
 } catch (e: KonanExternalToolFailure) {
-    val extraUserInfo = if (cachingInvolved)
+    konst extraUserInfo = if (cachingInvolved)
         """
                     Please try to disable compiler caches and rerun the build. To disable compiler caches, add the following line to the gradle.properties file in the project's root directory:
                         
@@ -156,7 +156,7 @@ internal fun runLinkerCommands(context: PhaseContext, commands: List<Command>, c
                     """.trimIndent()
     else null
 
-    val extraUserSetupInfo = run {
+    konst extraUserSetupInfo = run {
         context.config.resolvedLibraries.getFullResolvedList()
                 .filter { it.library.isInterop }
                 .mapNotNull { library ->
@@ -172,7 +172,7 @@ internal fun runLinkerCommands(context: PhaseContext, commands: List<Command>, c
                 }
     }
 
-    val extraInfo = listOfNotNull(extraUserInfo, extraUserSetupInfo).joinToString(separator = "\n")
+    konst extraInfo = listOfNotNull(extraUserInfo, extraUserSetupInfo).joinToString(separator = "\n")
 
     context.reportCompilationError("${e.toolName} invocation reported errors\n$extraInfo\n${e.message}")
 }

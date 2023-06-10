@@ -23,8 +23,8 @@ object WasmIdePlatformKind : IdePlatformKind() {
             null
     }
 
-    val platforms get() = listOf(WasmPlatforms.Default)
-    override val defaultPlatform get() = WasmPlatforms.Default
+    konst platforms get() = listOf(WasmPlatforms.Default)
+    override konst defaultPlatform get() = WasmPlatforms.Default
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
@@ -36,20 +36,20 @@ object WasmIdePlatformKind : IdePlatformKind() {
         return K2JSCompilerArguments()
     }
 
-    override val argumentsClass get() = K2JSCompilerArguments::class.java
+    override konst argumentsClass get() = K2JSCompilerArguments::class.java
 
-    override val name get() = "WebAssembly"
+    override konst name get() = "WebAssembly"
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
         level = DeprecationLevel.ERROR
     )
     object Platform : IdePlatform<WasmIdePlatformKind, K2JSCompilerArguments>() {
-        override val kind get() = WasmIdePlatformKind
-        override val version get() = TargetPlatformVersion.NoVersion
+        override konst kind get() = WasmIdePlatformKind
+        override konst version get() = TargetPlatformVersion.NoVersion
         override fun createArguments(init: K2JSCompilerArguments.() -> Unit) = K2JSCompilerArguments().apply(init)
     }
 }
 
-val IdePlatformKind?.isWasm
+konst IdePlatformKind?.isWasm
     get() = this is WasmIdePlatformKind

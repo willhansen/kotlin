@@ -3,7 +3,7 @@
 // FILE: javaCollectionWithRemovePrimitiveInt.kt
 
 fun box(): String {
-    val j = JIntCollection(arrayListOf(1, 2, 3))
+    konst j = JIntCollection(arrayListOf(1, 2, 3))
     j.remove(1) // remove(int)
     if (j.removed != 1) throw AssertionError("${j.removed}")
     return "OK"

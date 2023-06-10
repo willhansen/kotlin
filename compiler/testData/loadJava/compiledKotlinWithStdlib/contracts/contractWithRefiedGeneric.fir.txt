@@ -1,12 +1,12 @@
-public final inline fun <reified T, reified U> cast(value: R|kotlin/Any?|, z: R|U|): R|T|
+public final inline fun <reified T, reified U> cast(konstue: R|kotlin/Any?|, z: R|U|): R|T|
     [R|Contract description]
      <
-        Returns(WILDCARD) -> value is T
+        Returns(WILDCARD) -> konstue is T
     >
 
 
-public final inline fun <reified T> requireIsInstance(value: R|kotlin/Any?|): R|kotlin/Unit|
+public final inline fun <reified T> requireIsInstance(konstue: R|kotlin/Any?|): R|kotlin/Unit|
     [R|Contract description]
      <
-        Returns(WILDCARD) -> value is T
+        Returns(WILDCARD) -> konstue is T
     >

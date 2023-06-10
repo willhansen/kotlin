@@ -7,10 +7,10 @@
  * ISSUES: KT-19446
  */
 fun case_1() {
-    val list = mutableListOf<String>()
-    val ints = list <!UNCHECKED_CAST!>as MutableList<Int><!>
-    val strs = list as MutableList<String>
+    konst list = mutableListOf<String>()
+    konst ints = list <!UNCHECKED_CAST!>as MutableList<Int><!>
+    konst strs = list as MutableList<String>
     strs.add("two")
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.MutableList<kotlin.String> & kotlin.collections.MutableList<kotlin.Int> & kotlin.collections.MutableList<kotlin.String>")!>list<!>
-    val s: String = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.MutableList<kotlin.String> & kotlin.collections.MutableList<kotlin.Int> & kotlin.collections.MutableList<kotlin.String>")!>list<!>[0]
+    konst s: String = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.MutableList<kotlin.String> & kotlin.collections.MutableList<kotlin.Int> & kotlin.collections.MutableList<kotlin.String>")!>list<!>[0]
 }

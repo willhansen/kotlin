@@ -6,7 +6,7 @@ fun next(): Int {
 
 
 fun box(): String {
-    val task: String
+    konst task: String
 
     do {
         if (next() % 2 == 0) {

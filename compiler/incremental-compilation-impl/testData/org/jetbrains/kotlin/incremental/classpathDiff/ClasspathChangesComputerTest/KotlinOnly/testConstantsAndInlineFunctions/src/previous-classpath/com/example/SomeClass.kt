@@ -6,10 +6,10 @@ class SomeClass {
     // Constants are not allowed in a class, only allowed at the top level or in an object.
 
     companion object CompanionObject {
-        const val constantChangedType: Int = 0
-        const val constantChangedValue: Int = 0
-        const val constantUnchanged: Int = 0
-        private const val privateConstantChangedType: Int = 0
+        const konst constantChangedType: Int = 0
+        const konst constantChangedValue: Int = 0
+        const konst constantUnchanged: Int = 0
+        private const konst privateConstantChangedType: Int = 0
     }
 
     inline fun inlineFunctionChangedSignature(): Int = 0

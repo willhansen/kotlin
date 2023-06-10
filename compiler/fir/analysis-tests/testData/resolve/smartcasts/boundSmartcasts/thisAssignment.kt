@@ -4,7 +4,7 @@ interface A {
 
 fun Any.test() {
     if (this is A) {
-        val a = this
+        konst a = this
         a.foo()
     }
 }

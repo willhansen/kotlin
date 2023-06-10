@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.test.utils.withExtension
 import java.io.File
 
 class FirIrDumpIdenticalChecker(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
-    private val simpleDumpChecker = object : FirIdenticalCheckerHelper(testServices) {
+    private konst simpleDumpChecker = object : FirIdenticalCheckerHelper(testServices) {
         override fun getClassicFileToCompare(testDataFile: File): File? {
             return testDataFile.withExtension(IrTextDumpHandler.DUMP_EXTENSION).takeIf { it.exists() }
         }
@@ -30,7 +30,7 @@ class FirIrDumpIdenticalChecker(testServices: TestServices) : AfterAnalysisCheck
         }
     }
 
-    private val prettyDumpChecker = object : FirIdenticalCheckerHelper(testServices) {
+    private konst prettyDumpChecker = object : FirIdenticalCheckerHelper(testServices) {
         override fun getClassicFileToCompare(testDataFile: File): File? {
             return testDataFile.withExtension(IrPrettyKotlinDumpHandler.DUMP_EXTENSION).takeIf { it.exists() }
         }
@@ -42,7 +42,7 @@ class FirIrDumpIdenticalChecker(testServices: TestServices) : AfterAnalysisCheck
 
     override fun check(failedAssertions: List<WrappedException>) {
         if (failedAssertions.isNotEmpty()) return
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
         if (FIR_IDENTICAL in testServices.moduleStructure.allDirectives) {
             simpleDumpChecker.deleteFirFile(testDataFile)
             prettyDumpChecker.deleteFirFile(testDataFile)

@@ -6,14 +6,14 @@ interface IBar {
     fun bar(): String
 }
 
-abstract class Base(val x: IFoo)
+abstract class Base(konst x: IFoo)
 
 enum class Test : IFoo, IBar {
     FOO {
         // FOO referenced from inner class constructor with uninitialized 'this'
         inner class Inner : Base(FOO)
 
-        val z = Inner()
+        konst z = Inner()
 
         override fun foo() = "OK"
 

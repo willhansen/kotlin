@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.name.FqName
 
 interface JavaClassFinder {
     data class Request(
-        val classId: ClassId,
+        konst classId: ClassId,
         @Suppress("ArrayInDataClass")
-        val previouslyFoundClassFileContent: ByteArray? = null,
-        val outerClass: JavaClass? = null
+        konst previouslyFoundClassFileContent: ByteArray? = null,
+        konst outerClass: JavaClass? = null
     )
 
     fun findClass(request: Request): JavaClass?
@@ -24,7 +24,7 @@ interface JavaClassFinder {
     /**
      * Finds all classes with the specified [ClassId]. This function should be used if the search space permits such ambiguities and if
      * [findClass] is not guaranteed to disambiguate by itself. For example, in an IDE context, a broad search scope might lead to multiple
-     * valid candidates, which need to be disambiguated according to classpath order.
+     * konstid candidates, which need to be disambiguated according to classpath order.
      *
      * [findClasses] may return a single [JavaClass], even if more could be found, if the resulting [JavaClass] is guaranteed to be the
      * first in the dependency order.

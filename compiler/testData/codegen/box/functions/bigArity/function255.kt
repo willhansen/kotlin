@@ -1,6 +1,6 @@
 // !LANGUAGE: +FunctionTypesWithBigArity
 
-class A(val value: Int) {
+class A(konst konstue: Int) {
     // for (i in 1..254) { print("p${"%03d".format(i)}: A, "); if (i % 10 == 0) println() }; println()
 
     fun lmao(
@@ -80,15 +80,15 @@ class A(val value: Int) {
         check(p253, 253); check(p254, 254)
     }
 
-    private fun check(a: A, value: Int) {
-        if (a.value != value) {
-            throw AssertionError("Expected $value, actual ${a.value}")
+    private fun check(a: A, konstue: Int) {
+        if (a.konstue != konstue) {
+            throw AssertionError("Expected $konstue, actual ${a.konstue}")
         }
     }
 }
 
 fun box(): String {
-    val ref = A(0)::lmao
+    konst ref = A(0)::lmao
 
     // for (i in 1..254) { print("A($i), "); if (i % 12 == 0) println() }; println()
     ref(

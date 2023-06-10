@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.fir.references.FirResolvedNamedReference
 open class FirAnnotationRenderer {
 
     internal lateinit var components: FirRendererComponents
-    protected val visitor get() = components.visitor
-    protected val printer get() = components.printer
-    protected val callArgumentsRenderer get() = components.callArgumentsRenderer
+    protected konst visitor get() = components.visitor
+    protected konst printer get() = components.printer
+    protected konst callArgumentsRenderer get() = components.callArgumentsRenderer
 
     fun render(annotationContainer: FirAnnotationContainer, explicitAnnotationUseSiteTarget: AnnotationUseSiteTarget? = null) {
         renderAnnotations(annotationContainer.annotations, explicitAnnotationUseSiteTarget)

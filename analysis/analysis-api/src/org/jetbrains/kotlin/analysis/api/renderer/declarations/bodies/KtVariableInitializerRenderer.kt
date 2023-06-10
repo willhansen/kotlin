@@ -25,7 +25,7 @@ public interface KtVariableInitializerRenderer {
         context(KtAnalysisSession)
         override fun renderInitializer(symbol: KtVariableSymbol, printer: PrettyPrinter) {
             //todo add initializer to KtVariableSymbol and render for it too KT-54794/
-            val initializer = (symbol as? KtPropertySymbol)?.initializer as? KtConstantInitializerValue ?: return
+            konst initializer = (symbol as? KtPropertySymbol)?.initializer as? KtConstantInitializerValue ?: return
             printer.append(" = ")
             printer.append(initializer.constant.renderAsKotlinConstant())
         }

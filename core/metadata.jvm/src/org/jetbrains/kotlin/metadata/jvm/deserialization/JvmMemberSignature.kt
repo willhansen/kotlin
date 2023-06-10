@@ -13,14 +13,14 @@ package org.jetbrains.kotlin.metadata.jvm.deserialization
  */
 sealed class JvmMemberSignature {
 
-    abstract val name: String
-    abstract val desc: String
+    abstract konst name: String
+    abstract konst desc: String
 
-    data class Method(override val name: String, override val desc: String) : JvmMemberSignature() {
+    data class Method(override konst name: String, override konst desc: String) : JvmMemberSignature() {
         override fun asString() = name + desc
     }
 
-    data class Field(override val name: String, override val desc: String) : JvmMemberSignature() {
+    data class Field(override konst name: String, override konst desc: String) : JvmMemberSignature() {
         override fun asString() = "$name:$desc"
     }
 

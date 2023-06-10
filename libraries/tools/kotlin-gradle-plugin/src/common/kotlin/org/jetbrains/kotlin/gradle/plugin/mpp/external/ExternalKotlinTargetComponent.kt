@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.gradle.utils.dashSeparatedName
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 internal class ExternalKotlinTargetComponent(
-    val targetProvider: TargetProvider
+    konst targetProvider: TargetProvider
 ) : KotlinTargetComponentWithPublication, ComponentWithCoordinates {
 
     /*
@@ -37,15 +37,15 @@ internal class ExternalKotlinTargetComponent(
     /* Required for getting correct coordinates */
     override var publicationDelegate: MavenPublication? = null
 
-    override val target: KotlinTarget by lazy { targetProvider() }
+    override konst target: KotlinTarget by lazy { targetProvider() }
 
-    override val publishable: Boolean
+    override konst publishable: Boolean
         get() = target.publishable
 
-    override val publishableOnCurrentHost: Boolean
+    override konst publishableOnCurrentHost: Boolean
         get() = true
 
-    override val defaultArtifactId: String
+    override konst defaultArtifactId: String
         get() = dashSeparatedName(target.project.name, target.name.toLowerCaseAsciiOnly())
 
     @Deprecated(
@@ -53,7 +53,7 @@ internal class ExternalKotlinTargetComponent(
                 "use target.sourcesElementsConfigurationName to obtain necessary information",
         replaceWith = ReplaceWith("target.sourcesElementsConfigurationName")
     )
-    override val sourcesArtifacts: Set<PublishArtifact>
+    override konst sourcesArtifacts: Set<PublishArtifact>
         get() = emptySet()
 
     override fun getName(): String = target.name

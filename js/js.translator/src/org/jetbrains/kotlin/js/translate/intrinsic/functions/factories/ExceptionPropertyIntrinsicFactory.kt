@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.types.typeUtil.isNotNullThrowable
 object ExceptionPropertyIntrinsicFactory : FunctionIntrinsicFactory {
     override fun getIntrinsic(descriptor: FunctionDescriptor, context: TranslationContext): FunctionIntrinsic? {
         if (descriptor !is PropertyGetterDescriptor) return null
-        val classDescriptor = descriptor.correspondingProperty.containingDeclaration as? ClassDescriptor ?: return null
+        konst classDescriptor = descriptor.correspondingProperty.containingDeclaration as? ClassDescriptor ?: return null
         if (!classDescriptor.defaultType.isNotNullThrowable()) return null
 
         return Intrinsic
@@ -41,13 +41,13 @@ object ExceptionPropertyIntrinsicFactory : FunctionIntrinsicFactory {
 
     object Intrinsic : FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val property = callInfo.resolvedCall.resultingDescriptor as PropertyDescriptor
+            konst property = callInfo.resolvedCall.resultingDescriptor as PropertyDescriptor
             if (callInfo.resolvedCall.call.explicitReceiver !is SuperCallReceiverValue) {
-                val name = context.getNameForDescriptor(property)
+                konst name = context.getNameForDescriptor(property)
                 return JsNameRef(name, callInfo.dispatchReceiver!!)
             }
 
-            val currentClassProperty = context.classDescriptor!!.unsubstitutedMemberScope
+            konst currentClassProperty = context.classDescriptor!!.unsubstitutedMemberScope
                     .getContributedDescriptors(DescriptorKindFilter.CALLABLES)
                     .filterIsInstance<PropertyDescriptor>()
                     .first { it.overriddenDescriptors.any { it == property } }

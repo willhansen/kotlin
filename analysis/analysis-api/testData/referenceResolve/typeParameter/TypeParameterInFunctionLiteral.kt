@@ -1,4 +1,4 @@
 package testing
 
-class TestClass(val test: (<caret>String) -> Int)
+class TestClass(konst test: (<caret>String) -> Int)
 

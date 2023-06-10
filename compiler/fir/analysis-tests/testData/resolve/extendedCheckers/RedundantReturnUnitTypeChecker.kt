@@ -1,7 +1,7 @@
-data class My(val x: Unit)
+data class My(konst x: Unit)
 
 interface I {
-    val x: Unit
+    konst x: Unit
 }
 
 class A {

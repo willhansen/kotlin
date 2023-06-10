@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.ir.util.render
 /**
  * LLVM function's parameter type with its attributes.
  */
-class LlvmParamType(val llvmType: LLVMTypeRef, val attributes: List<LlvmParameterAttribute> = emptyList())
+class LlvmParamType(konst llvmType: LLVMTypeRef, konst attributes: List<LlvmParameterAttribute> = emptyList())
 
 /**
  * A bit better readability for cases when [LlvmParamType] represents return type.
@@ -23,8 +23,8 @@ class LlvmParamType(val llvmType: LLVMTypeRef, val attributes: List<LlvmParamete
 typealias LlvmRetType = LlvmParamType
 
 internal fun ContextUtils.getLlvmFunctionParameterTypes(function: IrFunction): List<LlvmParamType> {
-    val returnType = getLlvmFunctionReturnType(function).llvmType
-    val paramTypes = ArrayList(function.allParameters.map {
+    konst returnType = getLlvmFunctionReturnType(function).llvmType
+    konst paramTypes = ArrayList(function.allParameters.map {
         LlvmParamType(it.type.toLLVMType(llvm), argumentAbiInfo.defaultParameterAttributesForIrType(it.type))
     })
     require(!function.isSuspend) { "Suspend functions should be lowered out at this point"}
@@ -35,7 +35,7 @@ internal fun ContextUtils.getLlvmFunctionParameterTypes(function: IrFunction): L
 }
 
 internal fun ContextUtils.getLlvmFunctionReturnType(function: IrFunction): LlvmRetType {
-    val returnType = when {
+    konst returnType = when {
         function is IrConstructor -> LlvmParamType(llvm.voidType)
         function.isSuspend -> error("Suspend functions should be lowered out at this point, but ${function.render()} is still here")
         else -> LlvmParamType(

@@ -15,7 +15,7 @@ private func testIntType() throws {
 }
 
 private func testVal() throws {
-    try assertEquals(actual: KT38641.Val().description_, expected: "val")
+    try assertEquals(actual: KT38641.Val().description_, expected: "konst")
 }
 
 private func testVar() throws {

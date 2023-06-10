@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.DefaultErrorMessages
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticFactoryToRendererMap
 
 object DefaultErrorMessagesNoArg : DefaultErrorMessages.Extension {
-    private val MAP = DiagnosticFactoryToRendererMap("AnnotationProcessing")
+    private konst MAP = DiagnosticFactoryToRendererMap("AnnotationProcessing")
     override fun getMap() = MAP
 
     init {

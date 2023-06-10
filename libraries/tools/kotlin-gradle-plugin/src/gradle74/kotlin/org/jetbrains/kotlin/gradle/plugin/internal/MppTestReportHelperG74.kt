@@ -32,7 +32,7 @@ internal class MppTestReportHelperG74 : MppTestReportHelper {
     override fun createDelegatingTestReportProcessor(origin: TestResultProcessor, targetName: String) =
         object : TestResultProcessor by origin {
             override fun started(test: TestDescriptorInternal, event: TestStartEvent) {
-                val myTest = object : TestDescriptorInternal by test {
+                konst myTest = object : TestDescriptorInternal by test {
                     override fun getDisplayName(): String = "${test.displayName}[$targetName]"
                     override fun getClassName(): String? = test.className?.replace('$', '.')
                     override fun getClassDisplayName(): String? = test.classDisplayName?.replace('$', '.')

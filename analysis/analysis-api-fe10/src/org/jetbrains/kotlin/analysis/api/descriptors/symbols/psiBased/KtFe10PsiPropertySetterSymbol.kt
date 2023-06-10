@@ -37,54 +37,54 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiPropertySetterSymbol(
-    override val psi: KtPropertyAccessor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtPropertyAccessor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtPropertySetterSymbol(), KtFe10PsiSymbol<KtPropertyAccessor, PropertySetterDescriptor> {
-    override val descriptor: PropertySetterDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: PropertySetterDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.PROPERTY_ACCESSOR, psi] as? PropertySetterDescriptor
     }
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion { psi.property.ktModality ?: descriptor?.ktModality ?: Modality.FINAL }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { psi.ktVisibility ?: descriptor?.ktVisibility ?: psi.property.ktVisibility ?: Visibilities.Public }
 
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = withValidityAssertion { false }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.INLINE_KEYWORD) || psi.property.hasModifier(KtTokens.INLINE_KEYWORD) }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { psi.property.hasModifier(KtTokens.OVERRIDE_KEYWORD) }
 
-    override val hasBody: Boolean
+    override konst hasBody: Boolean
         get() = withValidityAssertion { psi.hasBody() }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { psi.valueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { psi.konstueParameters.map { KtFe10PsiValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { true }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { null }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
             descriptor?.returnType?.toKtType(analysisContext) ?: createErrorType()
         }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion {
             descriptor?.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext)
         }
 
-    override val parameter: KtValueParameterSymbol
+    override konst parameter: KtValueParameterSymbol
         get() = withValidityAssertion {
-            val parameter = psi.parameter
+            konst parameter = psi.parameter
             return if (parameter != null) {
                 KtFe10PsiValueParameterSymbol(parameter, analysisContext)
             } else {

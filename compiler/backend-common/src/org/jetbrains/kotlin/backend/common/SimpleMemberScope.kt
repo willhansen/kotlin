@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScopeImpl
 import org.jetbrains.kotlin.utils.Printer
 
-class SimpleMemberScope(val members: List<DeclarationDescriptor>) : MemberScopeImpl() {
+class SimpleMemberScope(konst members: List<DeclarationDescriptor>) : MemberScopeImpl() {
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? =
         members.filterIsInstance<ClassifierDescriptor>()

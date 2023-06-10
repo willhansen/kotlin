@@ -20,8 +20,8 @@ public final class B {
 
 public final class C</*0*/ T : D, /*1*/ T2> {
     public constructor C</*0*/ T : D, /*1*/ T2>(/*0*/ x: T, /*1*/ y: T2)
-    public final val x: T
-    public final val y: T2
+    public final konst x: T
+    public final konst y: T2
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public final fun test(): kotlin.Unit

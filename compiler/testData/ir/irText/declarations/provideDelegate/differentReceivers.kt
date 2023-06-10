@@ -1,14 +1,14 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
 
-class MyClass(val value: String)
+class MyClass(konst konstue: String)
 
 operator fun MyClass.provideDelegate(host: Any?, p: Any): String =
-        this.value
+        this.konstue
 
 operator fun String.getValue(receiver: Any?, p: Any): String =
         this
 
-val testO by MyClass("O")
-val testK by "K"
-val testOK = testO + testK
+konst testO by MyClass("O")
+konst testK by "K"
+konst testOK = testO + testK

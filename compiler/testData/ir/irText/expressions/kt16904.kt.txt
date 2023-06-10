@@ -5,7 +5,7 @@ abstract class A {
 
   }
 
-  val x: B
+  konst x: B
     field = B()
     get
 
@@ -34,11 +34,11 @@ class Test1 : A {
     /* <init>() */
 
     { // BLOCK
-      val tmp0_this: Test1 = <this>
+      konst tmp0_this: Test1 = <this>
       tmp0_this.<get-x>().plusAssign(x = 42)
     }
     { // BLOCK
-      val tmp1_this: Test1 = <this>
+      konst tmp1_this: Test1 = <this>
       tmp1_this.<set-y>(<set-?> = tmp1_this.<get-y>().plus(other = 42))
     }
   }

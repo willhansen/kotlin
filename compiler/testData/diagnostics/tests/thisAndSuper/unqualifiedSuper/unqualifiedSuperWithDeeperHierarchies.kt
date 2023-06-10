@@ -12,7 +12,7 @@
 open class DeeperBase {
     open fun deeperBaseFun() {}
 
-    open val deeperBaseProp: Int
+    open konst deeperBaseProp: Int
         get() = 333
 }
 
@@ -30,7 +30,7 @@ interface DeepInterface : DeeperInterface {
 class DeepDerived : DeepBase(), DeepInterface {
     override fun deeperBaseFun() {}
 
-    override val deeperBaseProp: Int
+    override konst deeperBaseProp: Int
         get() = 444
 
     override fun deeperInterfaceFun() {}

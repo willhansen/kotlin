@@ -17,10 +17,10 @@ import kotlin.random.Random
 /**
  * Creates and stores terminal compiler outputs.
  */
-class OutputFiles(val outputName: String, target: KonanTarget, val produce: CompilerOutputKind) {
+class OutputFiles(konst outputName: String, target: KonanTarget, konst produce: CompilerOutputKind) {
 
-    private val prefix = produce.prefix(target)
-    private val suffix = produce.suffix(target)
+    private konst prefix = produce.prefix(target)
+    private konst suffix = produce.suffix(target)
 
     fun klibOutputFileName(isPacked: Boolean): String =
             if (isPacked) "$outputName$suffix" else outputName
@@ -28,31 +28,31 @@ class OutputFiles(val outputName: String, target: KonanTarget, val produce: Comp
     /**
      * Header file for dynamic library.
      */
-    val cAdapterHeader by lazy { File("${outputName}_api.h") }
-    val cAdapterDef    by lazy { File("${outputName}.def") }
+    konst cAdapterHeader by lazy { File("${outputName}_api.h") }
+    konst cAdapterDef    by lazy { File("${outputName}.def") }
 
     /**
      * Compiler's main output file.
      */
-    val mainFileName =
+    konst mainFileName =
             if (produce.isCache)
                 outputName
             else
                 outputName.fullOutputName()
 
-    val mainFile = File(mainFileName)
+    konst mainFile = File(mainFileName)
 
-    val perFileCacheFileName = File(outputName).absoluteFile.name
+    konst perFileCacheFileName = File(outputName).absoluteFile.name
 
-    val cacheFileName = File((outputName).fullOutputName()).absoluteFile.name
+    konst cacheFileName = File((outputName).fullOutputName()).absoluteFile.name
 
     private fun File.cacheBinaryPart() = this.child(CachedLibraries.PER_FILE_CACHE_BINARY_LEVEL_DIR_NAME)
 
     private fun File.cacheIrPart() = this.child(CachedLibraries.PER_FILE_CACHE_IR_LEVEL_DIR_NAME)
 
-    val dynamicCacheInstallName = File(outputName).cacheBinaryPart().child(cacheFileName).absolutePath
+    konst dynamicCacheInstallName = File(outputName).cacheBinaryPart().child(cacheFileName).absolutePath
 
-    val tempCacheDirectory =
+    konst tempCacheDirectory =
             if (produce.isCache)
                 File(outputName + Random.nextLong().toString())
             else null
@@ -63,19 +63,19 @@ class OutputFiles(val outputName: String, target: KonanTarget, val produce: Comp
         tempCacheDirectory?.cacheIrPart()?.mkdirs()
     }
 
-    val nativeBinaryFile = tempCacheDirectory?.cacheBinaryPart()?.child(cacheFileName)?.absolutePath ?: mainFileName
+    konst nativeBinaryFile = tempCacheDirectory?.cacheBinaryPart()?.child(cacheFileName)?.absolutePath ?: mainFileName
 
-    val symbolicInfoFile = "$nativeBinaryFile.dSYM"
+    konst symbolicInfoFile = "$nativeBinaryFile.dSYM"
 
-    val hashFile = tempCacheDirectory?.child(CachedLibraries.HASH_FILE_NAME)
+    konst hashFile = tempCacheDirectory?.child(CachedLibraries.HASH_FILE_NAME)
 
-    val bitcodeDependenciesFile = tempCacheDirectory?.cacheBinaryPart()?.child(CachedLibraries.BITCODE_DEPENDENCIES_FILE_NAME)
+    konst bitcodeDependenciesFile = tempCacheDirectory?.cacheBinaryPart()?.child(CachedLibraries.BITCODE_DEPENDENCIES_FILE_NAME)
 
-    val inlineFunctionBodiesFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.INLINE_FUNCTION_BODIES_FILE_NAME)
+    konst inlineFunctionBodiesFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.INLINE_FUNCTION_BODIES_FILE_NAME)
 
-    val classFieldsFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.CLASS_FIELDS_FILE_NAME)
+    konst classFieldsFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.CLASS_FIELDS_FILE_NAME)
 
-    val eagerInitializedPropertiesFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.EAGER_INITIALIZED_PROPERTIES_FILE_NAME)
+    konst eagerInitializedPropertiesFile = tempCacheDirectory?.cacheIrPart()?.child(CachedLibraries.EAGER_INITIALIZED_PROPERTIES_FILE_NAME)
 
     private fun String.fullOutputName() = prefixBaseNameIfNeeded(prefix).suffixIfNeeded(suffix)
 
@@ -90,9 +90,9 @@ class OutputFiles(val outputName: String, target: KonanTarget, val produce: Comp
             else suffixIfNot(prefix)
 
     private fun String.prefixBaseNameAlways(prefix: String): String {
-        val file = File(this).absoluteFile
-        val name = file.name
-        val directory = file.parent
+        konst file = File(this).absoluteFile
+        konst name = file.name
+        konst directory = file.parent
         return "$directory/$prefix$name"
     }
 

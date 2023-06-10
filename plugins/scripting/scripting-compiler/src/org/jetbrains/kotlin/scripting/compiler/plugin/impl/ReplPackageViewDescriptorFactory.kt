@@ -28,10 +28,10 @@ class ReplPackageViewDescriptor(
 ) : LazyPackageViewDescriptorImpl(module, fqName, storageManager) {
     private var cachedFragments: List<PackageFragmentDescriptor>? = null
 
-    override val fragments: List<PackageFragmentDescriptor>
+    override konst fragments: List<PackageFragmentDescriptor>
         get() {
             cachedFragments?.let { return it }
-            val calculatedFragments = module.packageFragmentProvider.packageFragments(fqName)
+            konst calculatedFragments = module.packageFragmentProvider.packageFragments(fqName)
             if (calculatedFragments.isNotEmpty()) cachedFragments = calculatedFragments
             return calculatedFragments
         }

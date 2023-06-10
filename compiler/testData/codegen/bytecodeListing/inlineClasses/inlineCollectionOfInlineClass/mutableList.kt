@@ -1,9 +1,9 @@
 // IGNORE_ANNOTATIONS
 
-inline class IT(val x: Long)
+inline class IT(konst x: Long)
 
-inline class InlineMutableList(private val mlist: MutableList<IT>) : MutableList<IT> {
-    override val size: Int get() = mlist.size
+inline class InlineMutableList(private konst mlist: MutableList<IT>) : MutableList<IT> {
+    override konst size: Int get() = mlist.size
     override fun contains(element: IT): Boolean = mlist.contains(element)
     override fun containsAll(elements: Collection<IT>): Boolean = mlist.containsAll(elements)
     override fun get(index: Int): IT = mlist[index]

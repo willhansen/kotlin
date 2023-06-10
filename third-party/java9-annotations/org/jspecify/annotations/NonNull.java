@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to <i>exclude</i> {@code null}
- * as a value; rarely needed within {@linkplain NullMarked null-marked} code.
+ * as a konstue; rarely needed within {@linkplain NullMarked null-marked} code.
  *
  * <p>This annotation serves two primary purposes:
  *
@@ -84,7 +84,7 @@ import java.lang.annotation.Target;
  * <p>If {@code E} has a non-null upper bound, then the apparent projection {@code @NonNull E} is
  * redundant but harmless.
  *
- * <p><a href="Nullable.html#projection">Nullable projection</a> serves the equivalent purpose in
+ * <p><a href="Nullable.html#projection">Nullable projection</a> serves the equikonstent purpose in
  * the opposite direction, and is far more commonly useful.
  *
  * <p>If a type variable has <i>all</i> its usages being projected in one direction or the other, it

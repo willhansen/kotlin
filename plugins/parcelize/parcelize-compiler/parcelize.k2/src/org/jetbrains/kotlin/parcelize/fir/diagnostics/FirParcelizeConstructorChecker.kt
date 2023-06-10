@@ -20,25 +20,25 @@ import org.jetbrains.kotlin.parcelize.ParcelizeNames
 object FirParcelizeConstructorChecker : FirConstructorChecker() {
     override fun check(declaration: FirConstructor, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.isPrimary) return
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (source.kind == KtFakeSourceElementKind.ImplicitConstructor) return
-        val containingClass = context.containingDeclarations.last() as? FirRegularClass ?: return
-        val containingClassSymbol = containingClass.symbol
+        konst containingClass = context.containingDeclarations.last() as? FirRegularClass ?: return
+        konst containingClassSymbol = containingClass.symbol
         if (!containingClassSymbol.isParcelize(context.session) || containingClass.hasCustomParceler(context.session)) return
 
-        if (declaration.valueParameters.isEmpty()) {
+        if (declaration.konstueParameters.isEmpty()) {
             reporter.reportOn(containingClass.source, KtErrorsParcelize.PARCELABLE_PRIMARY_CONSTRUCTOR_IS_EMPTY, context)
         } else {
-            for (valueParameter in declaration.valueParameters) {
-                if (valueParameter.source?.hasValOrVar() != true) {
+            for (konstueParameter in declaration.konstueParameters) {
+                if (konstueParameter.source?.hasValOrVar() != true) {
                     reporter.reportOn(
-                        valueParameter.source,
+                        konstueParameter.source,
                         KtErrorsParcelize.PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR,
                         context
                     )
                 }
-                if (valueParameter.defaultValue == null) {
-                    val illegalAnnotation = valueParameter.correspondingProperty?.annotations?.firstOrNull {
+                if (konstueParameter.defaultValue == null) {
+                    konst illegalAnnotation = konstueParameter.correspondingProperty?.annotations?.firstOrNull {
                         it.toAnnotationClassId(context.session) in ParcelizeNames.IGNORED_ON_PARCEL_CLASS_IDS
                     }
                     if (illegalAnnotation != null) {

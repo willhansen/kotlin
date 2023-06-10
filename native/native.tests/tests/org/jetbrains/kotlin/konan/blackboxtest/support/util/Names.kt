@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.konan.blackboxtest.support.util
 
-internal val Class<*>.sanitizedName: String get() = sanitize(name)
+internal konst Class<*>.sanitizedName: String get() = sanitize(name)
 
 internal fun getSanitizedFileName(fileName: String): String = sanitize(fileName, allowDots = true)
 
@@ -21,17 +21,17 @@ private fun sanitize(s: String, allowDots: Boolean = false) = buildString {
     }
 }
 
-internal const val DEFAULT_FILE_NAME = "main.kt"
-internal const val LAUNCHER_FILE_NAME = "__launcher__.kt"
+internal const konst DEFAULT_FILE_NAME = "main.kt"
+internal const konst LAUNCHER_FILE_NAME = "__launcher__.kt"
 
-internal const val DEFAULT_MODULE_NAME = "default"
-internal const val SUPPORT_MODULE_NAME = "support"
-internal const val LAUNCHER_MODULE_NAME = "__launcher__" // Used only in KLIB tests.
+internal const konst DEFAULT_MODULE_NAME = "default"
+internal const konst SUPPORT_MODULE_NAME = "support"
+internal const konst LAUNCHER_MODULE_NAME = "__launcher__" // Used only in KLIB tests.
 
-internal const val SHARED_MODULES_DIR_NAME = "__shared_modules__"
-internal const val GIVEN_MODULES_DIR_NAME = "__given_modules__"
+internal const konst SHARED_MODULES_DIR_NAME = "__shared_modules__"
+internal const konst GIVEN_MODULES_DIR_NAME = "__given_modules__"
 
-internal const val STATIC_CACHE_DIR_NAME = "__static_cache__"
+internal const konst STATIC_CACHE_DIR_NAME = "__static_cache__"
 
 internal fun prettyHash(hash: Int): String = hash.toUInt().toString(16).padStart(8, '0')
 
@@ -53,7 +53,7 @@ internal fun String.quoteAsKotlinStringLiteral(): String = buildString {
     append('"')
 }
 
-private val charactersAllowedInKotlinStringLiterals: Set<Char> = mutableSetOf<Char>().apply {
+private konst charactersAllowedInKotlinStringLiterals: Set<Char> = mutableSetOf<Char>().apply {
     addAll('a' .. 'z')
     addAll('A' .. 'Z')
     addAll('0' .. '9')

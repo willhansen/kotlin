@@ -16,55 +16,55 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibility
 
 class FunctionOrPropertyBaseCommonizer(
-    private val classifiers: CirKnownClassifiers,
-    private val settings: CommonizerSettings,
-    private val typeCommonizer: TypeCommonizer,
-    private val extensionReceiverCommonizer: ExtensionReceiverCommonizer = ExtensionReceiverCommonizer(typeCommonizer),
-    private val returnTypeCommonizer: ReturnTypeCommonizer = ReturnTypeCommonizer(typeCommonizer),
+    private konst classifiers: CirKnownClassifiers,
+    private konst settings: CommonizerSettings,
+    private konst typeCommonizer: TypeCommonizer,
+    private konst extensionReceiverCommonizer: ExtensionReceiverCommonizer = ExtensionReceiverCommonizer(typeCommonizer),
+    private konst returnTypeCommonizer: ReturnTypeCommonizer = ReturnTypeCommonizer(typeCommonizer),
 ) : NullableContextualSingleInvocationCommonizer<CirFunctionOrProperty, FunctionOrPropertyBaseCommonizer.FunctionOrProperty> {
 
     data class FunctionOrProperty(
-        val name: CirName,
-        val kind: CallableMemberDescriptor.Kind,
-        val modality: Modality,
-        val visibility: Visibility,
-        val extensionReceiver: CirExtensionReceiver?,
-        val returnType: CirType,
-        val typeParameters: List<CirTypeParameter>,
-        val additionalAnnotations: List<CirAnnotation>,
+        konst name: CirName,
+        konst kind: CallableMemberDescriptor.Kind,
+        konst modality: Modality,
+        konst visibility: Visibility,
+        konst extensionReceiver: CirExtensionReceiver?,
+        konst returnType: CirType,
+        konst typeParameters: List<CirTypeParameter>,
+        konst additionalAnnotations: List<CirAnnotation>,
     )
 
-    override fun invoke(values: List<CirFunctionOrProperty>): FunctionOrProperty? {
+    override fun invoke(konstues: List<CirFunctionOrProperty>): FunctionOrProperty? {
         /* Preconditions */
-        if (values.isEmpty()) return null
+        if (konstues.isEmpty()) return null
 
         // delegated members should not be commonized
-        if (values.any { value -> value.kind == DELEGATION }) {
+        if (konstues.any { konstue -> konstue.kind == DELEGATION }) {
             return null
         }
 
         // synthesized members of data classes should not be commonized
-        if (values.any { value -> value.kind == SYNTHESIZED && value.containingClass?.isData == true }) {
+        if (konstues.any { konstue -> konstue.kind == SYNTHESIZED && konstue.containingClass?.isData == true }) {
             return null
         }
 
-        val returnType = returnTypeCommonizer(values) ?: return null
+        konst returnType = returnTypeCommonizer(konstues) ?: return null
 
-        val unsafeNumberAnnotation = createUnsafeNumberAnnotationIfNecessary(
+        konst unsafeNumberAnnotation = createUnsafeNumberAnnotationIfNecessary(
             classifiers.classifierIndices.targets, settings,
-            inputDeclarations = values,
-            inputTypes = values.map { it.returnType },
+            inputDeclarations = konstues,
+            inputTypes = konstues.map { it.returnType },
             commonizedType = returnType,
         )
 
         return FunctionOrProperty(
-            name = values.first().name,
-            kind = values.singleDistinctValueOrNull { it.kind } ?: return null,
-            modality = ModalityCommonizer().commonize(values.map { it.modality }) ?: return null,
-            visibility = VisibilityCommonizer.lowering().commonize(values) ?: return null,
-            extensionReceiver = (extensionReceiverCommonizer(values.map { it.extensionReceiver }) ?: return null).receiver,
-            returnType = returnTypeCommonizer(values) ?: return null,
-            typeParameters = TypeParameterListCommonizer(typeCommonizer).commonize(values.map { it.typeParameters }) ?: return null,
+            name = konstues.first().name,
+            kind = konstues.singleDistinctValueOrNull { it.kind } ?: return null,
+            modality = ModalityCommonizer().commonize(konstues.map { it.modality }) ?: return null,
+            visibility = VisibilityCommonizer.lowering().commonize(konstues) ?: return null,
+            extensionReceiver = (extensionReceiverCommonizer(konstues.map { it.extensionReceiver }) ?: return null).receiver,
+            returnType = returnTypeCommonizer(konstues) ?: return null,
+            typeParameters = TypeParameterListCommonizer(typeCommonizer).commonize(konstues.map { it.typeParameters }) ?: return null,
             additionalAnnotations = listOfNotNull(unsafeNumberAnnotation)
         )
     }

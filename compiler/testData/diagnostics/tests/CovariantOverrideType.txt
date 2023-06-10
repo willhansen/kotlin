@@ -1,9 +1,9 @@
 package
 
 public interface A</*0*/ H> {
-    public abstract val a: kotlin.Int
-    public abstract val a1: kotlin.Int
-    public abstract val g: kotlin.collections.Iterator<H>
+    public abstract konst a: kotlin.Int
+    public abstract konst a1: kotlin.Int
+    public abstract konst g: kotlin.collections.Iterator<H>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open fun foo(): kotlin.Int
     public open fun foo1(): kotlin.Int
@@ -16,9 +16,9 @@ public interface A</*0*/ H> {
 
 public abstract class B</*0*/ H> : A<H> {
     public constructor B</*0*/ H>()
-    public open override /*1*/ val a: kotlin.Double = 1.0.toDouble()
-    public open override /*1*/ val a1: kotlin.Double = 1.0.toDouble()
-    public abstract override /*1*/ val g: kotlin.collections.Iterator<kotlin.Int>
+    public open override /*1*/ konst a: kotlin.Double = 1.0.toDouble()
+    public open override /*1*/ konst a1: kotlin.Double = 1.0.toDouble()
+    public abstract override /*1*/ konst g: kotlin.collections.Iterator<kotlin.Int>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun foo1(): kotlin.Int

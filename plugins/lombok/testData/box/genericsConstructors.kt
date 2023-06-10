@@ -13,8 +13,8 @@ public class ConstructorExample<A, B> {
     private B otherField;
 
     static void javaUsage() {
-        val generated = new ConstructorExample<Long, Boolean>(12, 42L, true);
-        val generatedReq = new ConstructorExample<String, Boolean>("234");
+        konst generated = new ConstructorExample<Long, Boolean>(12, 42L, true);
+        konst generatedReq = new ConstructorExample<String, Boolean>("234");
     }
 }
 
@@ -22,7 +22,7 @@ public class ConstructorExample<A, B> {
 // FILE: test.kt
 
 fun box(): String {
-    val generated = ConstructorExample<Long, Boolean>(12, 42L, true)
-    val generatedReq = ConstructorExample<String, Boolean>("234");
+    konst generated = ConstructorExample<Long, Boolean>(12, 42L, true)
+    konst generatedReq = ConstructorExample<String, Boolean>("234");
     return "OK"
 }

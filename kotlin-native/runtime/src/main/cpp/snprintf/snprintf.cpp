@@ -23,7 +23,7 @@
  *
  * 2008-01-20 Holger Weiss <holger@jhweiss.de> for C99-snprintf 1.1:
  *
- * 	Fixed the detection of infinite floating point values on IRIX (and
+ * 	Fixed the detection of infinite floating point konstues on IRIX (and
  * 	possibly other systems) and applied another few minor cleanups.
  *
  * 2008-01-06 Holger Weiss <holger@jhweiss.de> for C99-snprintf 1.0:
@@ -40,10 +40,10 @@
  * 	locale's decimal point character and the separator between groups of
  * 	digits; fix the handling of various corner cases of field width and
  * 	precision specifications; fix various floating point conversion bugs;
- * 	handle infinite and NaN floating point values; don't attempt to write to
+ * 	handle infinite and NaN floating point konstues; don't attempt to write to
  * 	the output buffer (which may be NULL) if a size of zero was specified;
  * 	check for integer overflow of the field width, precision, and return
- * 	values and during the floating point conversion; use the OUTCHAR() macro
+ * 	konstues and during the floating point conversion; use the OUTCHAR() macro
  * 	instead of a function for better performance; provide asprintf(3) and
  * 	vasprintf(3) functions; add new test cases.  The replacement functions
  * 	have been renamed to use an "rpl_" prefix, the function calls in the
@@ -308,11 +308,11 @@ extern "C" int rpl_vsnprintf(char *, size_t, const char *, va_list);
 #if HAVE_STDARG_H
 #include <stdarg.h>
 #define VA_START(ap, last) va_start(ap, last)
-#define VA_SHIFT(ap, value, type) /* No-op for ANSI C. */
+#define VA_SHIFT(ap, konstue, type) /* No-op for ANSI C. */
 #else	/* Assume <varargs.h> is available. */
 #include <varargs.h>
 #define VA_START(ap, last) va_start(ap)	/* "last" is ignored. */
-#define VA_SHIFT(ap, value, type) value = va_arg(ap, type)
+#define VA_SHIFT(ap, konstue, type) konstue = va_arg(ap, type)
 #endif	/* HAVE_STDARG_H */
 
 #if !HAVE_VASPRINTF
@@ -556,10 +556,10 @@ extern int errno;
 int
 rpl_vsnprintf(char *str, size_t size, const char *format, va_list args)
 {
-	LDOUBLE fvalue;
-	INTMAX_T value;
-	unsigned char cvalue;
-	const char *strvalue;
+	LDOUBLE fkonstue;
+	INTMAX_T konstue;
+	unsigned char ckonstue;
+	const char *strkonstue;
 	INTMAX_T *intmaxptr;
 	PTRDIFF_T *ptrdiffptr;
 	SSIZE_T *sizeptr;
@@ -728,31 +728,31 @@ rpl_vsnprintf(char *str, size_t size, const char *format, va_list args)
 			case 'i':
 				switch (cflags) {
 				case PRINT_C_CHAR:
-					value = (signed char)va_arg(args, int);
+					konstue = (signed char)va_arg(args, int);
 					break;
 				case PRINT_C_SHORT:
-					value = (short int)va_arg(args, int);
+					konstue = (short int)va_arg(args, int);
 					break;
 				case PRINT_C_LONG:
-					value = va_arg(args, long int);
+					konstue = va_arg(args, long int);
 					break;
 				case PRINT_C_LLONG:
-					value = va_arg(args, LLONG);
+					konstue = va_arg(args, LLONG);
 					break;
 				case PRINT_C_SIZE:
-					value = va_arg(args, SSIZE_T);
+					konstue = va_arg(args, SSIZE_T);
 					break;
 				case PRINT_C_INTMAX:
-					value = va_arg(args, INTMAX_T);
+					konstue = va_arg(args, INTMAX_T);
 					break;
 				case PRINT_C_PTRDIFF:
-					value = va_arg(args, PTRDIFF_T);
+					konstue = va_arg(args, PTRDIFF_T);
 					break;
 				default:
-					value = va_arg(args, int);
+					konstue = va_arg(args, int);
 					break;
 				}
-				fmtint(str, &len, size, value, 10, width,
+				fmtint(str, &len, size, konstue, 10, width,
 				    precision, flags);
 				break;
 			case 'X':
@@ -771,33 +771,33 @@ rpl_vsnprintf(char *str, size_t size, const char *format, va_list args)
 				flags |= PRINT_F_UNSIGNED;
 				switch (cflags) {
 				case PRINT_C_CHAR:
-					value = (unsigned char)va_arg(args,
+					konstue = (unsigned char)va_arg(args,
 					    unsigned int);
 					break;
 				case PRINT_C_SHORT:
-					value = (unsigned short int)va_arg(args,
+					konstue = (unsigned short int)va_arg(args,
 					    unsigned int);
 					break;
 				case PRINT_C_LONG:
-					value = va_arg(args, unsigned long int);
+					konstue = va_arg(args, unsigned long int);
 					break;
 				case PRINT_C_LLONG:
-					value = va_arg(args, ULLONG);
+					konstue = va_arg(args, ULLONG);
 					break;
 				case PRINT_C_SIZE:
-					value = va_arg(args, size_t);
+					konstue = va_arg(args, size_t);
 					break;
 				case PRINT_C_INTMAX:
-					value = va_arg(args, UINTMAX_T);
+					konstue = va_arg(args, UINTMAX_T);
 					break;
 				case PRINT_C_PTRDIFF:
-					value = va_arg(args, UPTRDIFF_T);
+					konstue = va_arg(args, UPTRDIFF_T);
 					break;
 				default:
-					value = va_arg(args, unsigned int);
+					konstue = va_arg(args, unsigned int);
 					break;
 				}
-				fmtint(str, &len, size, value, base, width,
+				fmtint(str, &len, size, konstue, base, width,
 				    precision, flags);
 				break;
 			case 'A':
@@ -827,31 +827,31 @@ rpl_vsnprintf(char *str, size_t size, const char *format, va_list args)
 				/* FALLTHROUGH */
 			case 'f':
 				if (cflags == PRINT_C_LDOUBLE)
-					fvalue = va_arg(args, LDOUBLE);
+					fkonstue = va_arg(args, LDOUBLE);
 				else
-					fvalue = va_arg(args, double);
-				fmtflt(str, &len, size, fvalue, width,
+					fkonstue = va_arg(args, double);
+				fmtflt(str, &len, size, fkonstue, width,
 				    precision, flags, &overflow);
 				if (overflow)
 					goto out;
 				break;
 			case 'c':
-				cvalue = va_arg(args, int);
-				OUTCHAR(str, len, size, cvalue);
+				ckonstue = va_arg(args, int);
+				OUTCHAR(str, len, size, ckonstue);
 				break;
 			case 's':
-				strvalue = va_arg(args, char *);
-				fmtstr(str, &len, size, strvalue, width,
+				strkonstue = va_arg(args, char *);
+				fmtstr(str, &len, size, strkonstue, width,
 				    precision, flags);
 				break;
 			case 'p':
 				/*
-				 * C99 says: "The value of the pointer is
+				 * C99 says: "The konstue of the pointer is
 				 * converted to a sequence of printing
 				 * characters, in an implementation-defined
 				 * manner." (C99: 7.19.6.1, 8)
 				 */
-				if ((strvalue = (char*)va_arg(args, void *)) == NULL)
+				if ((strkonstue = (char*)va_arg(args, void *)) == NULL)
 					/*
 					 * We use the glibc format.  BSD prints
 					 * "0x0", SysV "0".
@@ -867,7 +867,7 @@ rpl_vsnprintf(char *str, size_t size, const char *format, va_list args)
 					flags |= PRINT_F_NUM;
 					flags |= PRINT_F_UNSIGNED;
 					fmtint(str, &len, size,
-					    (UINTPTR_T)strvalue, 16, width,
+					    (UINTPTR_T)strkonstue, 16, width,
 					    precision, flags);
 				}
 				break;
@@ -940,17 +940,17 @@ out:
 }
 
 static void
-fmtstr(char *str, size_t *len, size_t size, const char *value, int width,
+fmtstr(char *str, size_t *len, size_t size, const char *konstue, int width,
        int precision, int flags)
 {
 	int padlen, strln;	/* Amount to pad. */
 	int noprecision = (precision == -1);
 
-	if (value == NULL)	/* We're forgiving. */
-		value = "(null)";
+	if (konstue == NULL)	/* We're forgiving. */
+		konstue = "(null)";
 
 	/* If a precision was specified, don't read the string past it. */
-	for (strln = 0; value[strln] != '\0' &&
+	for (strln = 0; konstue[strln] != '\0' &&
 	    (noprecision || strln < precision); strln++)
 		continue;
 
@@ -963,9 +963,9 @@ fmtstr(char *str, size_t *len, size_t size, const char *value, int width,
 		OUTCHAR(str, *len, size, ' ');
 		padlen--;
 	}
-	while (*value != '\0' && (noprecision || precision-- > 0)) {
-		OUTCHAR(str, *len, size, *value);
-		value++;
+	while (*konstue != '\0' && (noprecision || precision-- > 0)) {
+		OUTCHAR(str, *len, size, *konstue);
+		konstue++;
 	}
 	while (padlen < 0) {	/* Trailing spaces. */
 		OUTCHAR(str, *len, size, ' ');
@@ -974,10 +974,10 @@ fmtstr(char *str, size_t *len, size_t size, const char *value, int width,
 }
 
 static void
-fmtint(char *str, size_t *len, size_t size, INTMAX_T value, int base, int width,
+fmtint(char *str, size_t *len, size_t size, INTMAX_T konstue, int base, int width,
        int precision, int flags)
 {
-	UINTMAX_T uvalue;
+	UINTMAX_T ukonstue;
 	char iconvert[MAX_CONVERT_LENGTH];
 	char sign = 0;
 	char hexprefix = 0;
@@ -988,10 +988,10 @@ fmtint(char *str, size_t *len, size_t size, INTMAX_T value, int base, int width,
 	int noprecision = (precision == -1);
 
 	if (flags & PRINT_F_UNSIGNED)
-		uvalue = value;
+		ukonstue = konstue;
 	else {
-		uvalue = (value >= 0) ? value : -value;
-		if (value < 0)
+		ukonstue = (konstue >= 0) ? konstue : -konstue;
+		if (konstue < 0)
 			sign = '-';
 		else if (flags & PRINT_F_PLUS)	/* Do a sign. */
 			sign = '+';
@@ -999,15 +999,15 @@ fmtint(char *str, size_t *len, size_t size, INTMAX_T value, int base, int width,
 			sign = ' ';
 	}
 
-	pos = convert(uvalue, iconvert, sizeof(iconvert), base,
+	pos = convert(ukonstue, iconvert, sizeof(iconvert), base,
 	    flags & PRINT_F_UP);
 
-	if (flags & PRINT_F_NUM && uvalue != 0) {
+	if (flags & PRINT_F_NUM && ukonstue != 0) {
 		/*
 		 * C99 says: "The result is converted to an `alternative form'.
 		 * For `o' conversion, it increases the precision, if and only
 		 * if necessary, to force the first digit of the result to be a
-		 * zero (if the value and precision are both 0, a single 0 is
+		 * zero (if the konstue and precision are both 0, a single 0 is
 		 * printed).  For `x' (or `X') conversion, a nonzero result has
 		 * `0x' (or `0X') prefixed to it." (7.19.6.1, 6)
 		 */
@@ -1075,10 +1075,10 @@ fmtint(char *str, size_t *len, size_t size, INTMAX_T value, int base, int width,
 }
 
 static void
-fmtflt(char *str, size_t *len, size_t size, LDOUBLE fvalue, int width,
+fmtflt(char *str, size_t *len, size_t size, LDOUBLE fkonstue, int width,
        int precision, int flags, int *overflow)
 {
-	LDOUBLE ufvalue;
+	LDOUBLE ufkonstue;
 	UINTMAX_T intpart;
 	UINTMAX_T fracpart;
 	UINTMAX_T mask;
@@ -1111,16 +1111,16 @@ fmtflt(char *str, size_t *len, size_t size, LDOUBLE fvalue, int width,
 	if (precision == -1)
 		precision = 6;
 
-	if (fvalue < 0.0)
+	if (fkonstue < 0.0)
 		sign = '-';
 	else if (flags & PRINT_F_PLUS)	/* Do a sign. */
 		sign = '+';
 	else if (flags & PRINT_F_SPACE)
 		sign = ' ';
 
-	if (ISNAN(fvalue))
+	if (ISNAN(fkonstue))
 		infnan = (flags & PRINT_F_UP) ? "NAN" : "nan";
-	else if (ISINF(fvalue))
+	else if (ISINF(fkonstue))
 		infnan = (flags & PRINT_F_UP) ? "INF" : "inf";
 
 	if (infnan != NULL) {
@@ -1148,7 +1148,7 @@ fmtflt(char *str, size_t *len, size_t size, LDOUBLE fvalue, int width,
 			 * conversion will or will not be using "e-style" (like
 			 * "%e" or "%E" conversions) depending on the precision
 			 * and on the exponent.  However, the exponent can be
-			 * affected by rounding the converted value, so we'll
+			 * affected by rounding the converted konstue, so we'll
 			 * leave this decision for later.  Until then, we'll
 			 * assume that we're going to do an "e-style" conversion
 			 * (in order to get the exponent calculated).  For
@@ -1163,14 +1163,14 @@ fmtflt(char *str, size_t *len, size_t size, LDOUBLE fvalue, int width,
 			if (!(flags & PRINT_F_NUM))
 				omitzeros = 1;
 		}
-		exponent = getexponent(fvalue);
+		exponent = getexponent(fkonstue);
 		estyle = 1;
 	}
 
 again:
 	/*
 	 * Sorry, we only support 9, 19, or 38 digits (that is, the number of
-	 * digits of the 32-bit, the 64-bit, or the 128-bit UINTMAX_MAX value
+	 * digits of the 32-bit, the 64-bit, or the 128-bit UINTMAX_MAX konstue
 	 * minus one) past the decimal point due to our conversion method.
 	 */
 	switch (sizeof(UINTMAX_T)) {
@@ -1188,11 +1188,11 @@ again:
 		break;
 	}
 
-	ufvalue = (fvalue >= 0.0) ? fvalue : -fvalue;
+	ufkonstue = (fkonstue >= 0.0) ? fkonstue : -fkonstue;
 	if (estyle)	/* We want exactly one integer digit. */
-		ufvalue /= mypow10(exponent);
+		ufkonstue /= mypow10(exponent);
 
-	if ((intpart = cast(ufvalue)) == UINTMAX_MAX) {
+	if ((intpart = cast(ufkonstue)) == UINTMAX_MAX) {
 		*overflow = 1;
 		return;
 	}
@@ -1206,9 +1206,9 @@ again:
 	 * We "cheat" by converting the fractional part to integer by
 	 * multiplying by a factor of ten.
 	 */
-	if ((fracpart = myround(mask * (ufvalue - intpart))) >= mask) {
+	if ((fracpart = myround(mask * (ufkonstue - intpart))) >= mask) {
 		/*
-		 * For example, ufvalue = 2.99962, intpart = 2, and mask = 1000
+		 * For example, ufkonstue = 2.99962, intpart = 2, and mask = 1000
 		 * (because precision = 3).  Now, myround(1000 * 0.99962) will
 		 * return 1000.  So, the integer part must be incremented by one
 		 * and the fractional part must be set to zero.
@@ -1217,7 +1217,7 @@ again:
 		fracpart = 0;
 		if (estyle && intpart == 10) {
 			/*
-			 * The value was rounded up to ten, but we only want one
+			 * The konstue was rounded up to ten, but we only want one
 			 * integer digit if using "e-style".  So, the integer
 			 * part must be set to one and the exponent must be
 			 * incremented by one.
@@ -1231,7 +1231,7 @@ again:
 	 * Now that we know the real exponent, we can check whether or not to
 	 * use "e-style" for "%g" (and "%G") conversions.  If we don't need
 	 * "e-style", the precision must be adjusted and the integer and
-	 * fractional parts must be recalculated from the original value.
+	 * fractional parts must be recalculated from the original konstue.
 	 *
 	 * C99 says: "Let P equal the precision if nonzero, 6 if the precision
 	 * is omitted, or 1 if the precision is zero.  Then, if a conversion
@@ -1403,16 +1403,16 @@ getnumsep(int digits)
 }
 
 static int
-getexponent(LDOUBLE value)
+getexponent(LDOUBLE konstue)
 {
-	LDOUBLE tmp = (value >= 0.0) ? value : -value;
+	LDOUBLE tmp = (konstue >= 0.0) ? konstue : -konstue;
 	int exponent = 0;
 
 	/*
 	 * We check for LDOUBLE_MAX_10_EXP >= exponent >= LDOUBLE_MIN_10_EXP in
 	 * order to work around possible endless loops which could happen (at
 	 * least) in the second loop (at least) if we're called with an infinite
-	 * value.  However, we checked for infinity before calling this function
+	 * konstue.  However, we checked for infinity before calling this function
 	 * using our ISINF() macro, so this might be somewhat paranoid.
 	 */
 	while (tmp < 1.0 && tmp > 0.0 && --exponent >= LDOUBLE_MIN_10_EXP)
@@ -1424,50 +1424,50 @@ getexponent(LDOUBLE value)
 }
 
 static int
-convert(UINTMAX_T value, char *buf, size_t size, int base, int caps)
+convert(UINTMAX_T konstue, char *buf, size_t size, int base, int caps)
 {
 	const char *digits = caps ? "0123456789ABCDEF" : "0123456789abcdef";
 	size_t pos = 0;
 
 	/* We return an unterminated buffer with the digits in reverse order. */
 	do {
-		buf[pos++] = digits[value % base];
-		value /= base;
-	} while (value != 0 && pos < size);
+		buf[pos++] = digits[konstue % base];
+		konstue /= base;
+	} while (konstue != 0 && pos < size);
 
 	return (int)pos;
 }
 
 static UINTMAX_T
-cast(LDOUBLE value)
+cast(LDOUBLE konstue)
 {
 	UINTMAX_T result;
 
 	/*
 	 * We check for ">=" and not for ">" because if UINTMAX_MAX cannot be
-	 * represented exactly as an LDOUBLE value (but is less than LDBL_MAX),
-	 * it may be increased to the nearest higher representable value for the
+	 * represented exactly as an LDOUBLE konstue (but is less than LDBL_MAX),
+	 * it may be increased to the nearest higher representable konstue for the
 	 * comparison (cf. C99: 6.3.1.4, 2).  It might then equal the LDOUBLE
-	 * value although converting the latter to UINTMAX_T would overflow.
+	 * konstue although converting the latter to UINTMAX_T would overflow.
 	 */
-	if (value >= static_cast<LDOUBLE>(UINTMAX_MAX))
+	if (konstue >= static_cast<LDOUBLE>(UINTMAX_MAX))
 		return UINTMAX_MAX;
 
-	result = value;
+	result = konstue;
 	/*
 	 * At least on NetBSD/sparc64 3.0.2 and 4.99.30, casting long double to
 	 * an integer type converts e.g. 1.9 to 2 instead of 1 (which violates
 	 * the standard).  Sigh.
 	 */
-	return (result <= value) ? result : result - 1;
+	return (result <= konstue) ? result : result - 1;
 }
 
 static UINTMAX_T
-myround(LDOUBLE value)
+myround(LDOUBLE konstue)
 {
-	UINTMAX_T intpart = cast(value);
+	UINTMAX_T intpart = cast(konstue);
 
-	return ((value -= intpart) < 0.5) ? intpart : intpart + 1;
+	return ((konstue -= intpart) < 0.5) ? intpart : intpart + 1;
 }
 
 static LDOUBLE
@@ -1734,7 +1734,7 @@ main(void)
 #endif	/* !OS_LINUX */
 		NULL
 	};
-	double float_val[] = {
+	double float_konst[] = {
 		-4.136,
 		-134.52,
 		-5.04030201,
@@ -1849,7 +1849,7 @@ main(void)
 		"%ld",
 		NULL
 	};
-	long int long_val[] = {
+	long int long_konst[] = {
 #ifdef LONG_MAX
 		LONG_MAX,
 #endif	/* LONG_MAX */
@@ -1957,7 +1957,7 @@ main(void)
 		"%lX",
 		NULL
 	};
-	unsigned long int ulong_val[] = {
+	unsigned long int ulong_konst[] = {
 #ifdef ULONG_MAX
 		ULONG_MAX,
 #endif	/* ULONG_MAX */
@@ -1987,7 +1987,7 @@ main(void)
 		"%lld",
 		NULL
 	};
-	LLONG llong_val[] = {
+	LLONG llong_konst[] = {
 #ifdef LLONG_MAX
 		LLONG_MAX,
 #endif	/* LLONG_MAX */
@@ -2023,7 +2023,7 @@ main(void)
 		"%s",
 		NULL
 	};
-	const char *string_val[] = {
+	const char *string_konst[] = {
 		"Hello",
 		"Hello, world!",
 		"Sound check: One, two, three.",
@@ -2039,19 +2039,19 @@ main(void)
 		"%p",
 		NULL
 	};
-	const char *pointer_val[] = {
+	const char *pointer_konst[] = {
 		*pointer_fmt,
 		*string_fmt,
-		*string_val,
+		*string_konst,
 		NULL
 	};
 #endif	/* !OS_SYSV */
 	char buf1[1024], buf2[1024];
-	double value, digits = 9.123456789012345678901234567890123456789;
+	double konstue, digits = 9.123456789012345678901234567890123456789;
 	int i, j, r1, r2, failed = 0, num = 0;
 
 /*
- * Use -DTEST_NILS in order to also test the conversion of nil values.  Might
+ * Use -DTEST_NILS in order to also test the conversion of nil konstues.  Might
  * segfault on systems which don't support converting a NULL pointer with "%s"
  * and lets some test cases fail against BSD and glibc due to bugs in their
  * implementations.
@@ -2065,12 +2065,12 @@ main(void)
 #ifdef TEST
 #undef TEST
 #endif	/* defined(TEST) */
-#define TEST(fmt, val)                                                         \
+#define TEST(fmt, konst)                                                         \
 do {                                                                           \
 	for (i = 0; fmt[i] != NULL; i++)                                       \
-		for (j = 0; j == 0 || val[j - TEST_NILS] != 0; j++) {          \
-			r1 = sprintf(buf1, fmt[i], val[j]);                    \
-			r2 = snprintf(buf2, sizeof(buf2), fmt[i], val[j]);     \
+		for (j = 0; j == 0 || konst[j - TEST_NILS] != 0; j++) {          \
+			r1 = sprintf(buf1, fmt[i], konst[j]);                    \
+			r2 = snprintf(buf2, sizeof(buf2), fmt[i], konst[j]);     \
 			if (strcmp(buf1, buf2) != 0 || r1 != r2) {             \
 				(void)printf("Results don't match, "           \
 				    "format string: %s\n"                      \
@@ -2088,21 +2088,21 @@ do {                                                                           \
 #endif	/* HAVE_LOCALE_H */
 
 	(void)puts("Testing our snprintf(3) against your system's sprintf(3).");
-	TEST(float_fmt, float_val);
-	TEST(long_fmt, long_val);
-	TEST(ulong_fmt, ulong_val);
-	TEST(llong_fmt, llong_val);
-	TEST(string_fmt, string_val);
+	TEST(float_fmt, float_konst);
+	TEST(long_fmt, long_konst);
+	TEST(ulong_fmt, ulong_konst);
+	TEST(llong_fmt, llong_konst);
+	TEST(string_fmt, string_konst);
 #if !OS_SYSV	/* SysV uses a different format than we do. */
-	TEST(pointer_fmt, pointer_val);
+	TEST(pointer_fmt, pointer_konst);
 #endif	/* !OS_SYSV */
 	(void)printf("Result: %d out of %d tests failed.\n", failed, num);
 
 	(void)fputs("Checking how many digits we support: ", stdout);
 	for (i = 0; i < 100; i++) {
-		value = pow(10, i) * digits;
-		(void)sprintf(buf1, "%.1f", value);
-		(void)snprintf(buf2, sizeof(buf2), "%.1f", value);
+		konstue = pow(10, i) * digits;
+		(void)sprintf(buf1, "%.1f", konstue);
+		(void)snprintf(buf2, sizeof(buf2), "%.1f", konstue);
 		if (strcmp(buf1, buf2) != 0) {
 			(void)printf("apparently %d.\n", i);
 			break;

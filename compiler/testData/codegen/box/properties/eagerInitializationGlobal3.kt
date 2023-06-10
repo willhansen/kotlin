@@ -9,9 +9,9 @@ var z1 = false
 
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
-val x = run { z1 = !z1; 42 }
+konst x = run { z1 = !z1; 42 }
 
-val y = run { 73 }
+konst y = run { 73 }
 
 fun box(): String {
     return if (z1) "OK" else "fail"

@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.gradle.targets.js.internal.parseNodeJsStackTraceAsJv
 import org.jetbrains.kotlin.gradle.targets.js.writeWasmUnitTestRunner
 import org.jetbrains.kotlin.gradle.utils.doNotTrackStateCompat
 
-internal class KotlinWasmNode(private val kotlinJsTest: KotlinJsTest) : KotlinJsTestFramework {
-    override val settingsState: String = "KotlinWasmNode"
+internal class KotlinWasmNode(private konst kotlinJsTest: KotlinJsTest) : KotlinJsTestFramework {
+    override konst settingsState: String = "KotlinWasmNode"
     @Transient
-    override val compilation: KotlinJsCompilation = kotlinJsTest.compilation
-    private val isTeamCity = compilation.target.project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
+    override konst compilation: KotlinJsCompilation = kotlinJsTest.compilation
+    private konst isTeamCity = compilation.target.project.providers.gradleProperty(TCServiceMessagesTestExecutor.TC_PROJECT_PROPERTY)
 
     init {
         kotlinJsTest.doNotTrackStateCompat("Should always re-run for WASM")
@@ -32,9 +32,9 @@ internal class KotlinWasmNode(private val kotlinJsTest: KotlinJsTest) : KotlinJs
         nodeJsArgs: MutableList<String>,
         debug: Boolean
     ): TCServiceMessagesTestExecutionSpec {
-        val testRunnerFile = writeWasmUnitTestRunner(task.inputFileProperty.get().asFile)
+        konst testRunnerFile = writeWasmUnitTestRunner(task.inputFileProperty.get().asFile)
 
-        val clientSettings = TCServiceMessagesClientSettings(
+        konst clientSettings = TCServiceMessagesClientSettings(
             task.name,
             testNameSuffix = task.targetName,
             prependSuiteName = true,
@@ -43,12 +43,12 @@ internal class KotlinWasmNode(private val kotlinJsTest: KotlinJsTest) : KotlinJs
             escapeTCMessagesInLog = isTeamCity.isPresent
         )
 
-        val cliArgs = KotlinTestRunnerCliArgs(
+        konst cliArgs = KotlinTestRunnerCliArgs(
             include = task.includePatterns,
             exclude = task.excludePatterns
         )
 
-        val args = mutableListOf<String>()
+        konst args = mutableListOf<String>()
         with(args) {
             addAll(nodeJsArgs)
             addWasmExperimentalArguments()
@@ -64,7 +64,7 @@ internal class KotlinWasmNode(private val kotlinJsTest: KotlinJsTest) : KotlinJs
         )
     }
 
-    override val requiredNpmDependencies: Set<RequiredKotlinJsDependency> = emptySet()
+    override konst requiredNpmDependencies: Set<RequiredKotlinJsDependency> = emptySet()
 
     override fun getPath(): String = "${kotlinJsTest.path}:kotlinTestFrameworkStub"
 }

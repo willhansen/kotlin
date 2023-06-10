@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 import org.jetbrains.kotlin.ir.util.render
 
 class JsUniqIdClashTracker() : IdSignatureClashTracker {
-    private val committedIdSignatures = mutableMapOf<IdSignature, IrDeclaration>()
+    private konst committedIdSignatures = mutableMapOf<IdSignature, IrDeclaration>()
 
     override fun commit(declaration: IrDeclaration, signature: IdSignature) {
         if (!signature.isPubliclyVisible) return // don't track local ids
 
         if (signature in committedIdSignatures) {
-            val clashedDeclaration = committedIdSignatures[signature]!!
-            val parent = declaration.parent
-            val clashedParent = clashedDeclaration.parent
+            konst clashedDeclaration = committedIdSignatures[signature]!!
+            konst parent = declaration.parent
+            konst clashedParent = clashedDeclaration.parent
             if (declaration !is IrTypeParameter || parent !is IrSimpleFunction || clashedParent !is IrSimpleFunction || parent.correspondingPropertySymbol !== clashedParent.correspondingPropertySymbol) {
                 // TODO: handle clashes properly
                 error("IdSignature clash: $signature; Existed declaration ${clashedDeclaration.render()} clashed with new ${declaration.render()}")

@@ -32,16 +32,16 @@ var FirProperty.componentFunctionSymbol: FirNamedFunctionSymbol? by FirDeclarati
 var FirClassLikeDeclaration.sourceElement: SourceElement? by FirDeclarationDataRegistry.data(SourceElementKey)
 var FirRegularClass.moduleName: String? by FirDeclarationDataRegistry.data(ModuleNameKey)
 
-val FirClassLikeSymbol<*>.sourceElement: SourceElement?
+konst FirClassLikeSymbol<*>.sourceElement: SourceElement?
     get() = fir.sourceElement
 
-val FirPropertySymbol.fromPrimaryConstructor: Boolean
+konst FirPropertySymbol.fromPrimaryConstructor: Boolean
     get() = fir.fromPrimaryConstructor ?: false
 
 /**
  * Constraint without corresponding type argument
  */
-data class DanglingTypeConstraint(val name: Name, val source: KtSourceElement)
+data class DanglingTypeConstraint(konst name: Name, konst source: KtSourceElement)
 
 var <T> T.danglingTypeConstraints: List<DanglingTypeConstraint>?
         where T : FirDeclaration, T : FirTypeParameterRefsOwner
@@ -49,16 +49,16 @@ var <T> T.danglingTypeConstraints: List<DanglingTypeConstraint>?
 
 // ----------------------------------- Utils -----------------------------------
 
-val FirMemberDeclaration.containerSource: SourceElement?
+konst FirMemberDeclaration.containerSource: SourceElement?
     get() = when (this) {
         is FirCallableDeclaration -> containerSource
         is FirClassLikeDeclaration -> sourceElement
     }
 
-val FirProperty.hasExplicitBackingField: Boolean
+konst FirProperty.hasExplicitBackingField: Boolean
     get() = backingField != null && backingField !is FirDefaultPropertyBackingField
 
-val FirPropertySymbol.hasExplicitBackingField: Boolean
+konst FirPropertySymbol.hasExplicitBackingField: Boolean
     get() = fir.hasExplicitBackingField
 
 fun FirProperty.getExplicitBackingField(): FirBackingField? {
@@ -73,17 +73,17 @@ fun FirPropertySymbol.getExplicitBackingField(): FirBackingField? {
     return fir.getExplicitBackingField()
 }
 
-val FirProperty.canNarrowDownGetterType: Boolean
+konst FirProperty.canNarrowDownGetterType: Boolean
     get() {
-        val backingFieldHasDifferentType = backingField != null && backingField?.returnTypeRef?.coneType != returnTypeRef.coneType
+        konst backingFieldHasDifferentType = backingField != null && backingField?.returnTypeRef?.coneType != returnTypeRef.coneType
         return backingFieldHasDifferentType && getter is FirDefaultPropertyGetter
     }
 
-val FirPropertySymbol.canNarrowDownGetterType: Boolean
+konst FirPropertySymbol.canNarrowDownGetterType: Boolean
     get() = fir.canNarrowDownGetterType
 
 // See [BindingContext.BACKING_FIELD_REQUIRED]
-val FirProperty.hasBackingField: Boolean
+konst FirProperty.hasBackingField: Boolean
     get() {
         if (isAbstract) return false
         if (delegate != null) return false
@@ -95,7 +95,7 @@ val FirProperty.hasBackingField: Boolean
             FirDeclarationOrigin.IntersectionOverride -> return false
             FirDeclarationOrigin.Delegated -> return false
             else -> {
-                val getter = getter ?: return true
+                konst getter = getter ?: return true
                 if (isVar && setter == null) return true
                 if (setter?.hasBody == false && setter?.isAbstract == false) return true
                 if (!getter.hasBody && !getter.isAbstract) return true
@@ -105,7 +105,7 @@ val FirProperty.hasBackingField: Boolean
         }
     }
 
-val FirPropertySymbol.hasBackingField: Boolean
+konst FirPropertySymbol.hasBackingField: Boolean
     get() {
         lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
         return fir.hasBackingField
@@ -120,13 +120,13 @@ fun FirDeclaration.getDanglingTypeConstraintsOrEmpty(): List<DanglingTypeConstra
     } ?: emptyList()
 }
 
-val FirPropertySymbol.correspondingValueParameterFromPrimaryConstructor: FirValueParameterSymbol?
+konst FirPropertySymbol.correspondingValueParameterFromPrimaryConstructor: FirValueParameterSymbol?
     get() = fir.correspondingValueParameterFromPrimaryConstructor
 
-val FirProperty.correspondingValueParameterFromPrimaryConstructor: FirValueParameterSymbol?
+konst FirProperty.correspondingValueParameterFromPrimaryConstructor: FirValueParameterSymbol?
     get() {
         if (fromPrimaryConstructor != true) return null
-        val initializer = initializer as? FirPropertyAccessExpression ?: return null
-        val reference = initializer.calleeReference as? FirPropertyFromParameterResolvedNamedReference ?: return null
+        konst initializer = initializer as? FirPropertyAccessExpression ?: return null
+        konst reference = initializer.calleeReference as? FirPropertyFromParameterResolvedNamedReference ?: return null
         return reference.resolvedSymbol as? FirValueParameterSymbol
     }

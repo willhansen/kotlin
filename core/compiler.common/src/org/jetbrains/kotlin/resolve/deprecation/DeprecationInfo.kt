@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.resolve.deprecation
 
 abstract class DeprecationInfo : Comparable<DeprecationInfo> {
-    abstract val deprecationLevel: DeprecationLevelValue
-    abstract val propagatesToOverrides: Boolean
-    abstract val message: String?
+    abstract konst deprecationLevel: DeprecationLevelValue
+    abstract konst propagatesToOverrides: Boolean
+    abstract konst message: String?
 
     override fun compareTo(other: DeprecationInfo): Int {
-        val lr = deprecationLevel.compareTo(other.deprecationLevel)
+        konst lr = deprecationLevel.compareTo(other.deprecationLevel)
         //to prefer inheritable deprecation
         return if (lr == 0 && !propagatesToOverrides && other.propagatesToOverrides) 1
         else lr
@@ -19,9 +19,9 @@ abstract class DeprecationInfo : Comparable<DeprecationInfo> {
 }
 
 data class SimpleDeprecationInfo(
-    override val deprecationLevel: DeprecationLevelValue,
-    override val propagatesToOverrides: Boolean,
-    override val message: String?
+    override konst deprecationLevel: DeprecationLevelValue,
+    override konst propagatesToOverrides: Boolean,
+    override konst message: String?
 ) : DeprecationInfo()
 
 /**

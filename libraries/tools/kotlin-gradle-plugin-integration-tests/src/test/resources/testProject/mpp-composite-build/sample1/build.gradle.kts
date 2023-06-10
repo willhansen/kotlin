@@ -19,12 +19,12 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("included-build:included")
             }
         }
-        val commonTest by getting {
+        konst commonTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test")
             }

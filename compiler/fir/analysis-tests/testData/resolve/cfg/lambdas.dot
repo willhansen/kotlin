@@ -114,7 +114,7 @@ digraph lambdas_kt {
                     color=blue
                     39 [label="Enter block"];
                     40 [label="Exit anonymous function expression"];
-                    41 [label="Variable declaration: lval lambda: R|() -> kotlin/Int|"];
+                    41 [label="Variable declaration: lkonst lambda: R|() -> kotlin/Int|"];
                     42 [label="Exit block"];
                 }
                 43 [label="Exit when branch result"];

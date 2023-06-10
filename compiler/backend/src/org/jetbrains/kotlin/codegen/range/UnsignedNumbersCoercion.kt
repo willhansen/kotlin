@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.isNothing
 import org.jetbrains.org.objectweb.asm.Type
 
-val StackValue.unsignedType: UnsignedType?
+konst StackValue.unsignedType: UnsignedType?
     get() = kotlinType?.let { UnsignedTypes.toUnsignedType(it) }
 
 fun coerceUnsignedToUInt(stackValue: StackValue, uIntKotlinType: KotlinType): StackValue =
@@ -20,21 +20,21 @@ fun coerceUnsignedToUInt(stackValue: StackValue, uIntKotlinType: KotlinType): St
 
 fun coerceUnsignedToUInt(
     stackValue: StackValue,
-    valueKotlinType: KotlinType?,
+    konstueKotlinType: KotlinType?,
     uIntKotlinType: KotlinType
 ): StackValue {
     stackValue.kotlinType?.let {
         if (it.isNothing()) return stackValue
     }
 
-    val valueUnsignedType = stackValue.unsignedType
+    konst konstueUnsignedType = stackValue.unsignedType
         ?: throw AssertionError("Unsigned type expected: ${stackValue.kotlinType}")
 
-    if (valueUnsignedType == UnsignedType.UINT) return stackValue
+    if (konstueUnsignedType == UnsignedType.UINT) return stackValue
 
     return StackValue.operation(Type.INT_TYPE, uIntKotlinType) { v ->
-        stackValue.put(stackValue.type, valueKotlinType, v)
-        when (valueUnsignedType) {
+        stackValue.put(stackValue.type, konstueKotlinType, v)
+        when (konstueUnsignedType) {
             UnsignedType.UBYTE -> {
                 v.iconst(0xFF)
                 v.and(Type.INT_TYPE)
@@ -49,7 +49,7 @@ fun coerceUnsignedToUInt(
                 v.cast(Type.LONG_TYPE, Type.INT_TYPE)
             }
 
-            else -> throw AssertionError("Unexpected value type: $valueKotlinType")
+            else -> throw AssertionError("Unexpected konstue type: $konstueKotlinType")
         }
     }
 }
@@ -59,17 +59,17 @@ fun coerceUnsignedToULong(stackValue: StackValue, uLongKotlinType: KotlinType): 
 
 fun coerceUnsignedToULong(
     stackValue: StackValue,
-    valueKotlinType: KotlinType?,
+    konstueKotlinType: KotlinType?,
     uLongKotlinType: KotlinType
 ): StackValue {
-    val valueUnsignedType = stackValue.unsignedType
-        ?: throw AssertionError("Unsigned type expected: $valueKotlinType")
+    konst konstueUnsignedType = stackValue.unsignedType
+        ?: throw AssertionError("Unsigned type expected: $konstueKotlinType")
 
-    if (valueUnsignedType == UnsignedType.ULONG) return stackValue
+    if (konstueUnsignedType == UnsignedType.ULONG) return stackValue
 
     return StackValue.operation(Type.LONG_TYPE, uLongKotlinType) { v ->
-        stackValue.put(stackValue.type, valueKotlinType, v)
-        when (valueUnsignedType) {
+        stackValue.put(stackValue.type, konstueKotlinType, v)
+        when (konstueUnsignedType) {
             UnsignedType.UBYTE -> {
                 v.cast(Type.INT_TYPE, Type.LONG_TYPE)
                 v.lconst(0xFF)
@@ -88,7 +88,7 @@ fun coerceUnsignedToULong(
                 v.and(Type.LONG_TYPE)
             }
 
-            else -> throw AssertionError("Unexpected value type: $valueKotlinType")
+            else -> throw AssertionError("Unexpected konstue type: $konstueKotlinType")
         }
     }
 }

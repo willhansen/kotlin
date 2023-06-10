@@ -12,16 +12,16 @@ enum class E { VALUE }
 fun <K> id(x: K): K = x
 
 class SomeClass {
-    val e = E.VALUE
+    konst e = E.VALUE
 
-    val withoutType: LambdaWithReceiver
+    konst withoutType: LambdaWithReceiver
         get() = when (e) {
             E.VALUE -> { param ->
                 method(param)
             }
         }
 
-    val withExplicitType: LambdaWithReceiver
+    konst withExplicitType: LambdaWithReceiver
         get() = when (e) {
             E.VALUE -> { param: Parameter ->
                 method(param)
@@ -30,14 +30,14 @@ class SomeClass {
 }
 
 class OtherClass {
-    val ok: LambdaWithReceiver
+    konst ok: LambdaWithReceiver
         get() = { param: Parameter ->
             method(param)
         }
 }
 
-val e2 = E.VALUE
-val staticWithExplicitType: LambdaWithReceiver
+konst e2 = E.VALUE
+konst staticWithExplicitType: LambdaWithReceiver
     get() = when (e2) {
         E.VALUE -> { param: Parameter ->
             method(param)

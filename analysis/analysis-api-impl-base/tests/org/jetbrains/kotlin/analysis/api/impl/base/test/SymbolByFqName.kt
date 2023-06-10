@@ -18,8 +18,8 @@ import java.nio.file.Path
 
 object SymbolByFqName {
     fun getSymbolDataFromFile(filePath: Path): SymbolData {
-        val testFileText = FileUtil.loadFile(filePath.toFile())
-        val identifier = testFileText.lineSequence().first { line ->
+        konst testFileText = FileUtil.loadFile(filePath.toFile())
+        konst identifier = testFileText.lineSequence().first { line ->
             SymbolData.identifiers.any { identifier ->
                 line.startsWith(identifier) || line.startsWith("// $identifier")
             }
@@ -28,8 +28,8 @@ object SymbolByFqName {
     }
 
     fun textWithRenderedSymbolData(filePath: String, rendered: String): String = buildString {
-        val testFileText = FileUtil.loadFile(File(filePath))
-        val fileTextWithoutSymbolsData = testFileText.substringBeforeLast(SYMBOLS_TAG).trimEnd()
+        konst testFileText = FileUtil.loadFile(File(filePath))
+        konst fileTextWithoutSymbolsData = testFileText.substringBeforeLast(SYMBOLS_TAG).trimEnd()
         appendLine(fileTextWithoutSymbolsData)
         appendLine()
         appendLine(SYMBOLS_TAG)
@@ -37,33 +37,33 @@ object SymbolByFqName {
     }
 
 
-    private const val SYMBOLS_TAG = "// SYMBOLS:"
+    private const konst SYMBOLS_TAG = "// SYMBOLS:"
 }
 
 sealed class SymbolData {
     abstract fun KtAnalysisSession.toSymbols(): List<KtSymbol>
 
-    data class ClassData(val classId: ClassId) : SymbolData() {
+    data class ClassData(konst classId: ClassId) : SymbolData() {
         override fun KtAnalysisSession.toSymbols(): List<KtSymbol> {
-            val symbol = getClassOrObjectSymbolByClassId(classId) ?: error("Class $classId is not found")
+            konst symbol = getClassOrObjectSymbolByClassId(classId) ?: error("Class $classId is not found")
             return listOf(symbol)
         }
     }
 
-    data class TypeAliasData(val classId: ClassId) : SymbolData() {
+    data class TypeAliasData(konst classId: ClassId) : SymbolData() {
         override fun KtAnalysisSession.toSymbols(): List<KtSymbol> {
-            val symbol = getTypeAliasByClassId(classId) ?: error("Type alias $classId is not found")
+            konst symbol = getTypeAliasByClassId(classId) ?: error("Type alias $classId is not found")
             return listOf(symbol)
         }
     }
 
-    data class CallableData(val callableId: CallableId) : SymbolData() {
+    data class CallableData(konst callableId: CallableId) : SymbolData() {
         override fun KtAnalysisSession.toSymbols(): List<KtSymbol> {
-            val classId = callableId.classId
-            val symbols = if (classId == null) {
+            konst classId = callableId.classId
+            konst symbols = if (classId == null) {
                 getTopLevelCallableSymbols(callableId.packageName, callableId.callableName).toList()
             } else {
-                val classSymbol =
+                konst classSymbol =
                     getClassOrObjectSymbolByClassId(classId)
                         ?: error("Class $classId is not found")
                 classSymbol.getDeclaredMemberScope().getCallableSymbols(callableId.callableName)
@@ -77,16 +77,16 @@ sealed class SymbolData {
     }
 
     companion object {
-        val identifiers = arrayOf("callable:", "class:", "typealias:")
+        konst identifiers = arrayOf("callable:", "class:", "typealias:")
 
         fun create(data: String): SymbolData = when {
             data.startsWith("class:") -> ClassData(ClassId.fromString(data.removePrefix("class:").trim()))
             data.startsWith("typealias:") -> TypeAliasData(ClassId.fromString(data.removePrefix("typealias:").trim()))
             data.startsWith("callable:") -> {
-                val fullName = data.removePrefix("callable:").trim()
-                val name = if ('.' in fullName) fullName.substringAfterLast(".") else fullName.substringAfterLast('/')
-                val (packageName, className) = run {
-                    val packageNameWithClassName = fullName.dropLast(name.length + 1)
+                konst fullName = data.removePrefix("callable:").trim()
+                konst name = if ('.' in fullName) fullName.substringAfterLast(".") else fullName.substringAfterLast('/')
+                konst (packageName, className) = run {
+                    konst packageNameWithClassName = fullName.dropLast(name.length + 1)
                     when {
                         '.' in fullName ->
                             packageNameWithClassName.substringBeforeLast('/') to packageNameWithClassName.substringAfterLast('/')
@@ -95,7 +95,7 @@ sealed class SymbolData {
                 }
                 CallableData(CallableId(FqName(packageName.replace('/', '.')), className?.let { FqName(it) }, Name.identifier(name)))
             }
-            else -> error("Invalid symbol")
+            else -> error("Inkonstid symbol")
         }
     }
 }

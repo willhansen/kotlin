@@ -1,9 +1,9 @@
-data class A1(val <!REDECLARATION, REDECLARATION!>x<!>: Int, val y: String, val <!REDECLARATION, REDECLARATION!>x<!>: Int) {
-    val z = ""
+data class A1(konst <!REDECLARATION, REDECLARATION!>x<!>: Int, konst y: String, konst <!REDECLARATION, REDECLARATION!>x<!>: Int) {
+    konst z = ""
 }
 
-data class A2(val <!REDECLARATION!>x<!>: Int, val y: String) {
-    val <!REDECLARATION!>x<!> = ""
+data class A2(konst <!REDECLARATION!>x<!>: Int, konst y: String) {
+    konst <!REDECLARATION!>x<!> = ""
 }
 
-data class A3(<!REDECLARATION!>val<!SYNTAX!><!> :Int<!>, <!REDECLARATION!>val<!SYNTAX!><!> : Int<!>)
+data class A3(<!REDECLARATION!>konst<!SYNTAX!><!> :Int<!>, <!REDECLARATION!>konst<!SYNTAX!><!> : Int<!>)

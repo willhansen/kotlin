@@ -33,11 +33,11 @@ import org.jetbrains.kotlin.parcelize.ParcelizeNames.PARCELER_ID
 
 object FirParcelizePropertyChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val session = context.session
-        val containingClassSymbol = declaration.dispatchReceiverType?.toRegularClassSymbol(session) ?: return
+        konst session = context.session
+        konst containingClassSymbol = declaration.dispatchReceiverType?.toRegularClassSymbol(session) ?: return
 
         if (containingClassSymbol.isParcelize(session)) {
-            val fromPrimaryConstructor = declaration.fromPrimaryConstructor ?: false
+            konst fromPrimaryConstructor = declaration.fromPrimaryConstructor ?: false
             if (
                 !fromPrimaryConstructor &&
                 (declaration.hasBackingField || declaration.delegate != null) &&
@@ -52,7 +52,7 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
         }
 
         if (declaration.name == CREATOR_NAME && containingClassSymbol.isCompanion && declaration.hasJvmFieldAnnotation(session)) {
-            val outerClass = context.containingDeclarations.asReversed().getOrNull(1) as? FirRegularClass
+            konst outerClass = context.containingDeclarations.asReversed().getOrNull(1) as? FirRegularClass
             if (outerClass != null && outerClass.symbol.isParcelize(session)) {
                 reporter.reportOn(declaration.source, KtErrorsParcelize.CREATOR_DEFINITION_IS_NOT_ALLOWED, context)
             }
@@ -65,13 +65,13 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val type = property.returnTypeRef.coneType
+        konst type = property.returnTypeRef.coneType
         if (type is ConeErrorType || containingClassSymbol.hasCustomParceler(context.session) || property.hasIgnoredOnParcel()) {
             return
         }
 
-        val session = context.session
-        val customParcelerTypes = getCustomParcelerTypes(property.annotations + containingClassSymbol.annotations, session)
+        konst session = context.session
+        konst customParcelerTypes = getCustomParcelerTypes(property.annotations + containingClassSymbol.annotations, session)
         if (!checkParcelableType(type, customParcelerTypes, session)) {
             reporter.reportOn(property.returnTypeRef.source, KtErrorsParcelize.PARCELABLE_TYPE_NOT_SUPPORTED, context)
         }
@@ -91,15 +91,15 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
             return true
         }
 
-        val upperBound = type.getErasedUpperBound(session)
-        val symbol = upperBound?.toRegularClassSymbol(session)
+        konst upperBound = type.getErasedUpperBound(session)
+        konst symbol = upperBound?.toRegularClassSymbol(session)
             ?: return false
 
         if (symbol.classKind.isSingleton || symbol.classKind.isEnumClass) {
             return true
         }
 
-        val fqName = symbol.classId.asFqNameString()
+        konst fqName = symbol.classId.asFqNameString()
         if (fqName in BuiltinParcelableTypes.PARCELABLE_BASE_TYPE_FQNAMES) {
             return true
         }
@@ -125,9 +125,9 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
                 fullyExpandedType(session)
 
             is ConeTypeParameterType -> {
-                val bounds = lookupTag.typeParameterSymbol.resolvedBounds
-                val representativeBound = bounds.firstOrNull {
-                    val kind = it.coneType.toRegularClassSymbol(session)?.classKind
+                konst bounds = lookupTag.typeParameterSymbol.resolvedBounds
+                konst representativeBound = bounds.firstOrNull {
+                    konst kind = it.coneType.toRegularClassSymbol(session)?.classKind
                         ?: return@firstOrNull false
                     kind != ClassKind.INTERFACE && kind != ClassKind.ANNOTATION_CLASS
                 } ?: bounds.first()
@@ -140,7 +140,7 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
 
     private fun ConeKotlinType.hasParcelerAnnotation(session: FirSession): Boolean {
         for (annotation in customAnnotations) {
-            val fqName = annotation.fqName(session)
+            konst fqName = annotation.fqName(session)
             if (fqName in ParcelizeNames.RAW_VALUE_ANNOTATION_FQ_NAMES || fqName in ParcelizeNames.WRITE_WITH_FQ_NAMES) {
                 return true
             }
@@ -155,13 +155,13 @@ object FirParcelizePropertyChecker : FirPropertyChecker() {
     private fun List<FirAnnotation>.hasIgnoredOnParcel(): Boolean {
         return this.any {
             if (it.annotationTypeRef.coneType.classId !in IGNORED_ON_PARCEL_CLASS_IDS) return@any false
-            val target = it.useSiteTarget
+            konst target = it.useSiteTarget
             target == null || target == AnnotationUseSiteTarget.PROPERTY || target == AnnotationUseSiteTarget.PROPERTY_GETTER
         }
     }
 
     private fun FirRegularClassSymbol.hasCustomParceler(session: FirSession): Boolean {
-        val companionObjectSymbol = this.companionObjectSymbol ?: return false
+        konst companionObjectSymbol = this.companionObjectSymbol ?: return false
         return lookupSuperTypes(companionObjectSymbol, lookupInterfaces = true, deep = true, session).any {
             it.classId == PARCELER_ID
         }

@@ -1,6 +1,6 @@
 package
 
-private val FOO: FOO.`<no name provided>`
+private konst FOO: FOO.`<no name provided>`
 
 @org.jspecify.annotations.NullMarked public open class BaseClass {
     public constructor BaseClass()

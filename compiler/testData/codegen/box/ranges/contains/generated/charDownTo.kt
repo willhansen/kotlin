@@ -3,14 +3,14 @@
 
 
 
-val range0 = '1' downTo '3'
-val range1 = '3' downTo '1'
+konst range0 = '1' downTo '3'
+konst range1 = '3' downTo '1'
 
-val element0 = '0'
-val element1 = '1'
-val element2 = '2'
-val element3 = '3'
-val element4 = '4'
+konst element0 = '0'
+konst element1 = '1'
+konst element2 = '2'
+konst element3 = '3'
+konst element4 = '4'
 
 fun box(): String {
     testR0xE0()

@@ -2,7 +2,7 @@ package test
 
 public final class Impl : test.Trait {
     public constructor Impl()
-    public open val bar: kotlin.Int
+    public open konst bar: kotlin.Int
     public open fun foo(): kotlin.Unit
 }
 
@@ -15,11 +15,11 @@ public/*package*/ open class JavaClass {
 
 public final class Test : test.Trait {
     public constructor Test()
-    public open /*delegation*/ val bar: kotlin.Int
+    public open /*delegation*/ konst bar: kotlin.Int
     public open /*delegation*/ fun foo(): kotlin.Unit
 }
 
 public interface Trait {
-    public abstract val bar: kotlin.Int
+    public abstract konst bar: kotlin.Int
     public abstract fun foo(): kotlin.Unit
 }

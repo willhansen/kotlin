@@ -4,12 +4,12 @@
 // FILE: J.java
 
 public class J<T> {
-    private final T value;
-    public J(T value) {
-        this.value = value;
+    private final T konstue;
+    public J(T konstue) {
+        this.konstue = konstue;
     }
     public T getValue() {
-        return value;
+        return konstue;
     }
 }
 
@@ -17,10 +17,10 @@ public class J<T> {
 // FILE: test.kt
 
 fun box(): String {
-    val j = J("OK")
-    if (j.value != "OK") return "FAIL"
-    if (run(j::value) != "OK") return "FAIL"
-    if (j.let(J<String>::value) != "OK") return "FAIL"
+    konst j = J("OK")
+    if (j.konstue != "OK") return "FAIL"
+    if (run(j::konstue) != "OK") return "FAIL"
+    if (j.let(J<String>::konstue) != "OK") return "FAIL"
 
     return "OK"
 }

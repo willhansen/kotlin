@@ -7,7 +7,7 @@ interface IFoo<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T) : IFoo<Z<Int>> {
+konstue class Z<T: Int>(konst x: T) : IFoo<Z<Int>> {
     override fun foo(x: Z<Int>) = "OK"
 }
 

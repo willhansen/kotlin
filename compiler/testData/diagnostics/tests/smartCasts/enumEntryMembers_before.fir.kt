@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 // SKIP_TXT
 
-enum class Message(val text: String?) {
+enum class Message(konst text: String?) {
     HELLO("hello"),
     WORLD("world"),
     NOTHING(null)

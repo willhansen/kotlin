@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.js.backend.ast.JsExpression
 import org.jetbrains.kotlin.descriptors.ConstructorDescriptor
 
 class DeferredCallSite(
-        val constructor: ConstructorDescriptor,
-        val invocationArgs: MutableList<JsExpression>,
-        val context: TranslationContext
+        konst constructor: ConstructorDescriptor,
+        konst invocationArgs: MutableList<JsExpression>,
+        konst context: TranslationContext
 )

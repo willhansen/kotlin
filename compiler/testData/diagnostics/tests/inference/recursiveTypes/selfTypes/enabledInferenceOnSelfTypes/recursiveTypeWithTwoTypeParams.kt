@@ -13,11 +13,11 @@ interface BodySpec<B, S : BodySpec<B, S>> {
 }
 
 fun test(b: BodySpec<String, *>) {
-    val x = b.isEqualTo("")
+    konst x = b.isEqualTo("")
     <!DEBUG_INFO_EXPRESSION_TYPE("BodySpec<*, *>")!>x<!>
 }
 
 fun testJava(b: JavaBodySpec<String, *>) {
-    val x = b.isEqualTo("")
+    konst x = b.isEqualTo("")
     <!DEBUG_INFO_EXPRESSION_TYPE("(JavaBodySpec<*, *>..JavaBodySpec<*, *>?)")!>x<!>
 }

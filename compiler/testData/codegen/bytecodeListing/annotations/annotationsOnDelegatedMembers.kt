@@ -1,9 +1,9 @@
 annotation class Ann
 
 interface IFoo {
-    @Ann val testVal: String
+    @Ann konst testVal: String
     @Ann fun testFun()
-    @Ann val String.testExtVal: String
+    @Ann konst String.testExtVal: String
     @Ann fun String.testExtFun()
 }
 

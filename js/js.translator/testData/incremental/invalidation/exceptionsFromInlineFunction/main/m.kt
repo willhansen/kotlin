@@ -3,7 +3,7 @@ fun box(stepId: Int): String {
         0, 2, 4, 6, 7 -> if (qux() != stepId) return "Fail"
         1, 3, 5, 8 -> {
             try {
-                val r = qux()
+                konst r = qux()
                 return "Fail, got $r"
             } catch (e: Exception) {
             }

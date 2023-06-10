@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.util.TypeRegistry
 import kotlin.reflect.KClass
 
 abstract class FirModuleCapability {
-    abstract val key: KClass<out FirModuleCapability>
+    abstract konst key: KClass<out FirModuleCapability>
 }
 
 class FirModuleCapabilities private constructor(
@@ -20,7 +20,7 @@ class FirModuleCapabilities private constructor(
 
     companion object : ConeTypeRegistry<FirModuleCapability, FirModuleCapability>() {
 
-        val Empty: FirModuleCapabilities = FirModuleCapabilities(emptyList())
+        konst Empty: FirModuleCapabilities = FirModuleCapabilities(emptyList())
 
         fun create(attributes: List<FirModuleCapability>): FirModuleCapabilities {
             return if (attributes.isEmpty()) {
@@ -38,6 +38,6 @@ class FirModuleCapabilities private constructor(
     }
 
 
-    override val typeRegistry: TypeRegistry<FirModuleCapability, FirModuleCapability>
+    override konst typeRegistry: TypeRegistry<FirModuleCapability, FirModuleCapability>
         get() = Companion
 }

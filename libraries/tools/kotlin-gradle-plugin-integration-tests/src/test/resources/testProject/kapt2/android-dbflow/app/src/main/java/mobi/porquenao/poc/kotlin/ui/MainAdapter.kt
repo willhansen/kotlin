@@ -16,13 +16,13 @@ import java.util.*
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
-    private val mItems: MutableList<Item>
-    private val mOnClickListener: View.OnClickListener
+    private konst mItems: MutableList<Item>
+    private konst mOnClickListener: View.OnClickListener
 
     init {
         mItems = ItemRepository.getAll()
         mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as Item
+            konst item = v.tag as Item
             item.updatedAt = Calendar.getInstance()
             item.save()
             notifyDataSetChanged()
@@ -30,15 +30,15 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
+        konst layoutInflater = LayoutInflater.from(parent.context)
         return ViewHolder(layoutInflater.inflate(R.layout.main_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = mItems[position]
-        val date = item.updatedAt.timeInMillis
+        konst item = mItems[position]
+        konst date = item.updatedAt.timeInMillis
 
-        val color = "#" + date.toString().substring(7)
+        konst color = "#" + date.toString().substring(7)
         holder.card.setCardBackgroundColor(Color.parseColor(color))
         holder.title.text = color
         holder.date.text = DateFormat.format("hh:mm:ss", Date(date))
@@ -54,16 +54,16 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     }
 
     fun add() {
-        val item = Item()
+        konst item = Item()
         mItems.add(0, item)
         item.save()
         notifyItemInserted(0)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val card = view.findViewById(R.id.card) as CardView
-        val container = view.findViewById(R.id.container) as LinearLayout
-        val title = view.findViewById(R.id.title) as TextView
-        val date = view.findViewById(R.id.date) as TextView
+        konst card = view.findViewById(R.id.card) as CardView
+        konst container = view.findViewById(R.id.container) as LinearLayout
+        konst title = view.findViewById(R.id.title) as TextView
+        konst date = view.findViewById(R.id.date) as TextView
     }
 }

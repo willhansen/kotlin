@@ -25,27 +25,27 @@ open class KotlinJsIrTargetConfigurator :
     KotlinOnlyTargetConfigurator<KotlinJsIrCompilation, KotlinJsIrTarget>(true),
     KotlinTargetWithTestsConfigurator<KotlinJsReportAggregatingTestRun, KotlinJsIrTarget> {
 
-    override val runtimeIncludesCompilationOutputs: Boolean = false
+    override konst runtimeIncludesCompilationOutputs: Boolean = false
 
-    override val testRunClass: Class<KotlinJsReportAggregatingTestRun> get() = KotlinJsReportAggregatingTestRun::class.java
+    override konst testRunClass: Class<KotlinJsReportAggregatingTestRun> get() = KotlinJsReportAggregatingTestRun::class.java
 
-    override val archiveType: String
+    override konst archiveType: String
         get() = KLIB_TYPE
 
-    override val archiveTaskType: Class<out Zip>
+    override konst archiveTaskType: Class<out Zip>
         get() = Jar::class.java
 
     override fun createTestRun(
         name: String,
         target: KotlinJsIrTarget
     ): KotlinJsReportAggregatingTestRun {
-        val result = target.project.objects.newInstance(
+        konst result = target.project.objects.newInstance(
             KotlinJsReportAggregatingTestRun::class.java,
             name,
             target
         )
 
-        val testTask = target.project.kotlinTestRegistry.getOrCreateAggregatedTestTask(
+        konst testTask = target.project.kotlinTestRegistry.getOrCreateAggregatedTestTask(
             name = result.testTaskName,
             description = "Run JS tests for all platforms"
         )
@@ -63,12 +63,12 @@ open class KotlinJsIrTargetConfigurator :
     }
 
     override fun buildCompilationProcessor(compilation: KotlinJsIrCompilation): KotlinSourceSetProcessor<*> {
-        val tasksProvider = KotlinTasksProvider()
+        konst tasksProvider = KotlinTasksProvider()
         return KotlinJsIrSourceSetProcessor(tasksProvider, KotlinCompilationInfo(compilation))
     }
 
     override fun createArchiveTasks(target: KotlinJsIrTarget): TaskProvider<out Zip> {
-        val libsDirectory = target.project.libsDirectory
+        konst libsDirectory = target.project.libsDirectory
         return super.createArchiveTasks(target).apply {
             configure {
                 it.archiveExtension.set(KLIB_TYPE)

@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.name.Name
  * Describes an implicit "this" receiver
  */
 interface ImplicitReceiver : ReceiverValue {
-    val declarationDescriptor: DeclarationDescriptor
+    konst declarationDescriptor: DeclarationDescriptor
 }
 
 
 interface ImplicitContextReceiver : ImplicitReceiver {
-    val customLabelName: Name?
+    konst customLabelName: Name?
 }

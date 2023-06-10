@@ -1,6 +1,6 @@
 == foo ==
 fun foo(a: Number) {
-    val t = when (a) {
+    konst t = when (a) {
         1 -> "1"
         in Collections.singleton(2) -> "2"
         is Int -> "Int"
@@ -15,8 +15,8 @@ L0:
     v(a: Number)
     magic[FAKE_INITIALIZER](a: Number) -> <v0>
     w(a|<v0>)
-  2 mark({ val t = when (a) { 1 -> "1" in Collections.singleton(2) -> "2" is Int -> "Int" !in Collections.singleton(3) -> "!3" !is Number -> "!Number" else -> null } })
-    v(val t = when (a) { 1 -> "1" in Collections.singleton(2) -> "2" is Int -> "Int" !in Collections.singleton(3) -> "!3" !is Number -> "!Number" else -> null })
+  2 mark({ konst t = when (a) { 1 -> "1" in Collections.singleton(2) -> "2" is Int -> "Int" !in Collections.singleton(3) -> "!3" !is Number -> "!Number" else -> null } })
+    v(konst t = when (a) { 1 -> "1" in Collections.singleton(2) -> "2" is Int -> "Int" !in Collections.singleton(3) -> "!3" !is Number -> "!Number" else -> null })
     mark(when (a) { 1 -> "1" in Collections.singleton(2) -> "2" is Int -> "Int" !in Collections.singleton(3) -> "!3" !is Number -> "!Number" else -> null })
     r(a) -> <v1>
     mark(1 -> "1")

@@ -17,7 +17,7 @@ internal class LLFirJavaSymbolProvider(
     firSession: FirSession,
     moduleData: LLFirModuleData,
     project: Project,
-    val searchScope: GlobalSearchScope
+    konst searchScope: GlobalSearchScope
 ) : JavaSymbolProvider(
     firSession,
     FirJavaFacadeForSource(firSession, moduleData, project.createJavaClassFinder(searchScope))

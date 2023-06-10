@@ -3,11 +3,11 @@
 
 // MODULE: lib
 interface Base {
-    val x: String
+    konst x: String
 }
 
-internal class Some(override val x: String) : Base
-internal class Other(override val x: String) : Base
+internal class Some(override konst x: String) : Base
+internal class Other(override konst x: String) : Base
 
 // MODULE: main(lib)
 @file:Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")

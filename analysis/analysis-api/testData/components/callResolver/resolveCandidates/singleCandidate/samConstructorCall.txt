@@ -8,7 +8,7 @@ KtApplicableCallCandidateInfo:
         receiverType = null
         returnType = java.util.Comparator<kotlin.Int!>
         symbol = kotlin/Comparator(function: kotlin.Function2<ft<T & Any, T?>, ft<T & Any, T?>, kotlin.Int>): java.util.Comparator<T>
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = function
             receiverType = null

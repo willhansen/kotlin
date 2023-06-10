@@ -12,15 +12,15 @@ import org.eclipse.aether.resolution.ArtifactRequest
 import org.eclipse.aether.util.artifact.DelegatingArtifact
 
 internal class ArtifactRequestBuilder(
-    private val classifier: String?,
-    private val extension: String?,
+    private konst classifier: String?,
+    private konst extension: String?,
 ) : DependencyVisitor {
-    private val result: MutableList<ArtifactRequest> = ArrayList()
+    private konst result: MutableList<ArtifactRequest> = ArrayList()
 
     override fun visitEnter(node: DependencyNode): Boolean {
-        val dep = node.dependency
+        konst dep = node.dependency
         if (dep != null) {
-            val artifact = dep.artifact
+            konst artifact = dep.artifact
             result.add(
                 ArtifactRequest(
                     ArtifactWithAnotherKind(artifact, classifier, extension),
@@ -36,14 +36,14 @@ internal class ArtifactRequestBuilder(
         return true
     }
 
-    val requests: List<ArtifactRequest>
+    konst requests: List<ArtifactRequest>
         get() = result
 }
 
 private class ArtifactWithAnotherKind(
     artifact: Artifact,
-    private val myClassifier: String?,
-    private val myExtension: String?,
+    private konst myClassifier: String?,
+    private konst myExtension: String?,
 ) : DelegatingArtifact(artifact) {
     override fun newInstance(artifact: Artifact): DelegatingArtifact {
         return ArtifactWithAnotherKind(artifact, myClassifier, myExtension)

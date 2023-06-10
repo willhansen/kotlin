@@ -10,29 +10,29 @@ package testsCase1
 class Case() {
     fun case(v: V) {
         // InitializertTypeCheckerMismatch bug
-        val va: () -> String = (V)::a
+        konst va: () -> String = (V)::a
 
-        val vb: () -> String = (V)::b
+        konst vb: () -> String = (V)::b
 
-        val va1: () -> String = v::a
-        val vb1: () -> String = (V)::b
+        konst va1: () -> String = v::a
+        konst vb1: () -> String = (V)::b
 
     }
 
-    val V.Companion.b: String // (3)
+    konst V.Companion.b: String // (3)
         get() = "1"
 
 }
 
-val V.a: String
+konst V.a: String
     get() = "1"
 
-val V.Companion.a: String
+konst V.Companion.a: String
     get() = "1"
 
 
 class V {
     companion object {
-        const val b: String = "1"
+        const konst b: String = "1"
     }
 }

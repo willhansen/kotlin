@@ -4,7 +4,7 @@
 // TARGET_BACKEND: NATIVE
 package test
 
-open class A(val value: String)
+open class A(konst konstue: String)
 
 var invokeOrder = ""
 
@@ -13,7 +13,7 @@ inline fun inlineFun(
         receiver: String = { invokeOrder += " default receiver"; "DEFAULT" }(),
         init: String
 ): String {
-    return constraints.map { it.value }.joinToString() + ", " + receiver + ", " + init
+    return constraints.map { it.konstue }.joinToString() + ", " + receiver + ", " + init
 }
 
 // FILE: 2.kt

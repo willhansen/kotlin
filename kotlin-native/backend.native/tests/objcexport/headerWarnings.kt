@@ -8,20 +8,20 @@ package headerWarnings
 // Note: the test parses the generated header with -Werror to detect warnings.
 
 class TestIncompatiblePropertyTypeWarning {
-    class Generic<T>(val value: T)
+    class Generic<T>(konst konstue: T)
 
     interface InterfaceWithGenericProperty<T> {
-        val p: Generic<T>
+        konst p: Generic<T>
     }
 
-    class ClassOverridingInterfaceWithGenericProperty(override val p: Generic<String>) : InterfaceWithGenericProperty<String>
+    class ClassOverridingInterfaceWithGenericProperty(override konst p: Generic<String>) : InterfaceWithGenericProperty<String>
 }
 
 // https://github.com/JetBrains/kotlin-native/issues/3992
 class TestGH3992 {
-    abstract class C(open val a: A)
+    abstract class C(open konst a: A)
 
-    class D(override val a: B) : C(a)
+    class D(override konst a: B) : C(a)
 
     abstract class A
 

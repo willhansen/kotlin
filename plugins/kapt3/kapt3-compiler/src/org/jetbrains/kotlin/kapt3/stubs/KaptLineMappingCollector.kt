@@ -30,11 +30,11 @@ import org.jetbrains.org.objectweb.asm.tree.FieldNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import java.io.*
 
-class KaptLineMappingCollector(private val kaptContext: KaptContextForStubGeneration) {
-    private val lineInfo: LineInfoMap = mutableMapOf()
-    private val signatureInfo = mutableMapOf<String, String>()
+class KaptLineMappingCollector(private konst kaptContext: KaptContextForStubGeneration) {
+    private konst lineInfo: LineInfoMap = mutableMapOf()
+    private konst signatureInfo = mutableMapOf<String, String>()
 
-    private val filePaths = mutableMapOf<PsiFile, Pair<String, Boolean>>()
+    private konst filePaths = mutableMapOf<PsiFile, Pair<String, Boolean>>()
 
     fun registerClass(clazz: ClassNode) {
         register(clazz, clazz.name)
@@ -57,30 +57,30 @@ class KaptLineMappingCollector(private val kaptContext: KaptContextForStubGenera
     fun getPosition(clazz: ClassNode, field: FieldNode): KotlinPosition? = lineInfo[clazz.name + "#" + field.name]
 
     private fun register(asmNode: Any, fqName: String) {
-        val psiElement = kaptContext.origins[asmNode]?.element ?: return
+        konst psiElement = kaptContext.origins[asmNode]?.element ?: return
         register(fqName, psiElement)
     }
 
     private fun register(fqName: String, psiElement: PsiElement) {
-        val containingVirtualFile = psiElement.containingFile.virtualFile
+        konst containingVirtualFile = psiElement.containingFile.virtualFile
         if (containingVirtualFile == null || FileDocumentManager.getInstance().getDocument(containingVirtualFile) == null) {
             return
         }
 
-        val textRange = psiElement.textRange ?: return
+        konst textRange = psiElement.textRange ?: return
 
-        val (path, isRelative) = getFilePathRelativePreferred(psiElement.containingFile)
+        konst (path, isRelative) = getFilePathRelativePreferred(psiElement.containingFile)
         lineInfo[fqName] = KotlinPosition(path, isRelative, textRange.startOffset)
     }
 
     private fun getFilePathRelativePreferred(file: PsiFile): Pair<String, Boolean> {
         return filePaths.getOrPut(file) {
-            val absolutePath = file.virtualFile.canonicalPath ?: file.virtualFile.path
-            val absoluteFile = File(absolutePath)
-            val baseFile = file.project.basePath?.let { File(it) }
+            konst absolutePath = file.virtualFile.canonicalPath ?: file.virtualFile.path
+            konst absoluteFile = File(absolutePath)
+            konst baseFile = file.project.basePath?.let { File(it) }
 
             if (absoluteFile.exists() && baseFile != null && baseFile.exists()) {
-                val relativePath = absoluteFile.relativeToOrNull(baseFile)?.path
+                konst relativePath = absoluteFile.relativeToOrNull(baseFile)?.path
                 if (relativePath != null) {
                     return@getOrPut Pair(relativePath, true)
                 }
@@ -91,8 +91,8 @@ class KaptLineMappingCollector(private val kaptContext: KaptContextForStubGenera
     }
 
     fun serialize(): ByteArray {
-        val os = ByteArrayOutputStream()
-        val oos = ObjectOutputStream(os)
+        konst os = ByteArrayOutputStream()
+        konst oos = ObjectOutputStream(os)
 
         oos.writeInt(KaptStubLineInformation.METADATA_VERSION)
 

@@ -3,6 +3,6 @@ fun <T: Any?> nullableFun(): T {
 }
 
 fun box(): String {
-    val t = nullableFun<String>()
+    konst t = nullableFun<String>()
     return if (t?.length == null) "OK" else "Fail"
 }

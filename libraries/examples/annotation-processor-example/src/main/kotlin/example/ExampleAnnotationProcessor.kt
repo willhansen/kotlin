@@ -12,15 +12,15 @@ import kotlin.reflect.KClass
 class ExampleAnnotationProcessor : AbstractProcessor() {
 
     private companion object {
-        val ANNOTATION_TO_PREFIX = mapOf(ExampleAnnotation::class to "",
+        konst ANNOTATION_TO_PREFIX = mapOf(ExampleAnnotation::class to "",
                                          ExampleSourceAnnotation::class to "SourceAnnotated",
                                          ExampleRuntimeAnnotation::class to "RuntimeAnnotated",
                                          ExampleBinaryAnnotation::class to "BinaryAnnotated")
 
-        val SUFFIX_OPTION = "suffix"
-        val GENERATE_KOTLIN_CODE_OPTION = "generate.kotlin.code"
-        val GENERATE_ERROR = "generate.error"
-        val KAPT_KOTLIN_GENERATED_OPTION = "kapt.kotlin.generated"
+        konst SUFFIX_OPTION = "suffix"
+        konst GENERATE_KOTLIN_CODE_OPTION = "generate.kotlin.code"
+        konst GENERATE_ERROR = "generate.error"
+        konst KAPT_KOTLIN_GENERATED_OPTION = "kapt.kotlin.generated"
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
@@ -36,20 +36,20 @@ class ExampleAnnotationProcessor : AbstractProcessor() {
     }
 
     private fun <T : Annotation> processAnnotation(roundEnv: RoundEnvironment, annotationClass: KClass<T>, generatedFilePrefix: String) {
-        val elements = roundEnv.getElementsAnnotatedWith(annotationClass.java)
+        konst elements = roundEnv.getElementsAnnotatedWith(annotationClass.java)
 
-        val elementUtils = processingEnv.elementUtils
-        val filer = processingEnv.filer
+        konst elementUtils = processingEnv.elementUtils
+        konst filer = processingEnv.filer
 
-        val options = processingEnv.options
-        val generatedFileSuffix = options[SUFFIX_OPTION] ?: "Generated"
-        val generateKotlinCode = "true" == options[GENERATE_KOTLIN_CODE_OPTION]
-        val kotlinGenerated = options[KAPT_KOTLIN_GENERATED_OPTION]
+        konst options = processingEnv.options
+        konst generatedFileSuffix = options[SUFFIX_OPTION] ?: "Generated"
+        konst generateKotlinCode = "true" == options[GENERATE_KOTLIN_CODE_OPTION]
+        konst kotlinGenerated = options[KAPT_KOTLIN_GENERATED_OPTION]
 
         for (element in elements) {
-            val packageName = elementUtils.getPackageOf(element).qualifiedName.toString()
-            val simpleName = element.simpleName.toString()
-            val generatedJavaClassName =
+            konst packageName = elementUtils.getPackageOf(element).qualifiedName.toString()
+            konst simpleName = element.simpleName.toString()
+            konst generatedJavaClassName =
                 generatedFilePrefix.replaceFirstChar(Char::uppercaseChar) +
                         simpleName.replaceFirstChar(Char::uppercaseChar) +
                         generatedFileSuffix

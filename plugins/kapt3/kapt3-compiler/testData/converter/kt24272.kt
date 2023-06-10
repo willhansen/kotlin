@@ -1,12 +1,12 @@
 // STRICT
 
-class Foo(private val string: String) {
-    val bar = Bar("bar")
+class Foo(private konst string: String) {
+    konst bar = Bar("bar")
 
-    class Bar(val string: String) {
-        class Bar(val nested: String)
+    class Bar(konst string: String) {
+        class Bar(konst nested: String)
 
-        val bars: ArrayList<Bar> = ArrayList()
+        konst bars: ArrayList<Bar> = ArrayList()
     }
 }
 

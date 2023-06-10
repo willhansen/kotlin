@@ -3,10 +3,10 @@
 
 import java.io.*
 
-val InputStream.buffered : BufferedInputStream
+konst InputStream.buffered : BufferedInputStream
     get() = if(this is BufferedInputStream) this else BufferedInputStream(this)
 
-val Reader.buffered : BufferedReader
+konst Reader.buffered : BufferedReader
     get() = if(this is BufferedReader) this else BufferedReader(this)
 
 
@@ -15,9 +15,9 @@ open class A() {
     open fun String.foo() {}
     open fun Int.foo() {}
 
-    open val String.foo: Int
+    open konst String.foo: Int
         get() = 0
-    open val Int.foo: Int
+    open konst Int.foo: Int
         get() = 1
 }
 
@@ -25,9 +25,9 @@ class B() : A() {
     override fun String.foo() {}
     override fun Int.foo() {}
 
-    override val String.foo: Int
+    override konst String.foo: Int
         get() = 0
-    override val Int.foo: Int
+    override konst Int.foo: Int
         get() = 0
 
     fun use(s: String) {

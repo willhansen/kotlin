@@ -8,9 +8,9 @@ inline fun myRun(x: () -> String) = x()
 import test.*
 
 class C {
-    val x: String
+    konst x: String
     init {
-        val y = myRun { { "OK" }.let { it() } }
+        konst y = myRun { { "OK" }.let { it() } }
         x = y
     }
 

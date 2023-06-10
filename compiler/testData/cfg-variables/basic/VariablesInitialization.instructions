@@ -1,18 +1,18 @@
 == foo ==
 fun foo() {
-    val a = 1
-    val b: Int
+    konst a = 1
+    konst b: Int
     b = 2
     42
 }
 ---------------------
 L0:
   1 <START>                                    INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val a = 1 val b: Int b = 2 42 })
-    v(val a = 1)                               INIT: in: {} out: {}
+  2 mark({ konst a = 1 konst b: Int b = 2 42 })
+    v(konst a = 1)                               INIT: in: {} out: {}
     r(1) -> <v0>                               INIT: in: {} out: {}
     w(a|<v0>)                                  INIT: in: {} out: {}
-    v(val b: Int)                              INIT: in: {} out: {b=D}
+    v(konst b: Int)                              INIT: in: {} out: {b=D}
     r(2) -> <v1>                               INIT: in: {b=D} out: {b=D}      USE: in: {b=ONLY_WRITTEN_NEVER_READ} out: {b=ONLY_WRITTEN_NEVER_READ}
     w(b|<v1>)                                  INIT: in: {b=D} out: {b=ID}     USE: in: {} out: {b=ONLY_WRITTEN_NEVER_READ}
     r(42) -> <v2>                              INIT: in: {b=ID} out: {b=ID}

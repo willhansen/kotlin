@@ -2,8 +2,8 @@ package Package
 
 class Outer {
     class Nested {
-        val O = "O"
-        val K = "K"
+        konst O = "O"
+        konst K = "K"
     }
 }
 

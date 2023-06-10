@@ -15,7 +15,7 @@ import kotlin.reflect.jvm.javaMethod
 import kotlin.test.fail
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
 annotation class TypeParameterAnn
@@ -52,7 +52,7 @@ fun box(): String {
     )
 
     //interfaceBound
-    val interfaceBound = InterfaceBound::class.java
+    konst interfaceBound = InterfaceBound::class.java
     checkTypeParameterAnnotation(
         interfaceBound.typeParameters.single(),
         "T",
@@ -68,7 +68,7 @@ fun box(): String {
     )
 
     //classBound
-    val classBound = ClassBound::class.java
+    konst classBound = ClassBound::class.java
     checkTypeParameterAnnotation(
         classBound.typeParameters.single(),
         "T",
@@ -85,7 +85,7 @@ fun box(): String {
 
 
     //interfaceBoundGeneric
-    val interfaceBoundGeneric = InterfaceBoundGeneric::class.java
+    konst interfaceBoundGeneric = InterfaceBoundGeneric::class.java
     checkTypeAnnotation(
         interfaceBoundGeneric.typeParameters.single().annotatedBounds.single(),
         "foo.Generic<foo.Simple>",
@@ -101,7 +101,7 @@ fun box(): String {
     )
 
     //classBoundGeneric
-    val classBoundGeneric = ClassBoundGeneric::class.java
+    konst classBoundGeneric = ClassBoundGeneric::class.java
     // Works on JDK 15
 //    checkTypeAnnotation(
 //        classBoundGeneric.typeParameters.single().annotatedBounds.single(),
@@ -118,7 +118,7 @@ fun box(): String {
     )
 
     //typeParameterTypeParameterBound
-    val typeParameterTypeParameterBound = TypeParameterAsBound::class.java
+    konst typeParameterTypeParameterBound = TypeParameterAsBound::class.java
     checkTypeParameterAnnotation(
         typeParameterTypeParameterBound.typeParameters[1]!!,
         "T",

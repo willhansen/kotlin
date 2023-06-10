@@ -408,9 +408,9 @@ if (attachedIntellijVersion == "212") { // Latest available platform in scope of
     intellij "platform/external-system-impl/intellij.platform.externalSystem.tests.iml"
     intellij "jvm-debugger/core/kotlin.jvm-debugger.core.iml"
     intellij "jvm-debugger/util/kotlin.jvm-debugger.util.iml"
-    intellij "jvm-debugger/eval4j/kotlin.eval4j.iml"
+    intellij "jvm-debugger/ekonst4j/kotlin.ekonst4j.iml"
     intellij "jvm-debugger/test/kotlin.jvm-debugger.test.iml"
-    intellij "jvm-debugger/evaluation/kotlin.jvm-debugger.evaluation.iml"
+    intellij "jvm-debugger/ekonstuation/kotlin.jvm-debugger.ekonstuation.iml"
     intellij "jvm-debugger/coroutines/kotlin.jvm-debugger.coroutines.iml"
     intellij "jvm-debugger/sequence/kotlin.jvm-debugger.sequence.iml"
     intellij "jvm/kotlin.jvm.iml"
@@ -579,7 +579,7 @@ if (buildProperties.inJpsBuildIdeaSync) {
             ":kotlin-stdlib-jdk8",
             ":kotlin-stdlib:samples",
             ":kotlin-stdlib-jvm-minimal-for-test",
-            ":tools:binary-compatibility-validator",
+            ":tools:binary-compatibility-konstidator",
             ":tools:kotlin-stdlib-gen",
 
             ":kotlin-test",
@@ -602,7 +602,7 @@ if (buildProperties.inJpsBuildIdeaSync) {
     project(':kotlin-stdlib:samples').projectDir = "$rootDir/libraries/stdlib/samples" as File
     project(":kotlin-stdlib-jvm-minimal-for-test").projectDir = "$rootDir/libraries/stdlib/jvm-minimal-for-test" as File
 
-    project(':tools:binary-compatibility-validator').projectDir = "$rootDir/libraries/tools/binary-compatibility-validator" as File
+    project(':tools:binary-compatibility-konstidator').projectDir = "$rootDir/libraries/tools/binary-compatibility-konstidator" as File
     project(':tools:kotlin-stdlib-gen').projectDir = "$rootDir/libraries/tools/kotlin-stdlib-gen" as File
 
     project(':kotlin-test').projectDir = "$rootDir/libraries/kotlin.test" as File

@@ -34,26 +34,26 @@ import java.nio.file.Paths
 
 abstract class AbstractMultiPlatformIntegrationTest : KtUsefulTestCase() {
     fun doTest(directoryPath: String) {
-        val root = File(directoryPath).apply { assert(exists()) }
-        val commonSrc = File(root, "common.kt").apply { assert(exists()) }
-        val jsSrc = File(root, "js.kt").takeIf(File::exists)
-        val jvmSrc = File(root, "jvm.kt").takeIf(File::exists)
+        konst root = File(directoryPath).apply { assert(exists()) }
+        konst commonSrc = File(root, "common.kt").apply { assert(exists()) }
+        konst jsSrc = File(root, "js.kt").takeIf(File::exists)
+        konst jvmSrc = File(root, "jvm.kt").takeIf(File::exists)
         // TODO: consider inventing a more clever scheme
-        val common2Src = File(root, "common2.kt").takeIf(File::exists)
-        val jvm2Src = File(root, "jvm2.kt").takeIf(File::exists)
+        konst common2Src = File(root, "common2.kt").takeIf(File::exists)
+        konst jvm2Src = File(root, "jvm2.kt").takeIf(File::exists)
 
-        val tmpdir = KtTestUtil.tmpDir(getTestName(true))
+        konst tmpdir = KtTestUtil.tmpDir(getTestName(true))
 
-        val withStdlib = InTextDirectivesUtils.isDirectiveDefined(commonSrc.readText(), "WITH_STDLIB")
-        val optionalStdlibCommon = if (withStdlib) arrayOf("-cp", findStdlibCommon().absolutePath) else emptyArray()
+        konst withStdlib = InTextDirectivesUtils.isDirectiveDefined(commonSrc.readText(), "WITH_STDLIB")
+        konst optionalStdlibCommon = if (withStdlib) arrayOf("-cp", findStdlibCommon().absolutePath) else emptyArray()
 
-        val commonDest = File(tmpdir, "common").absolutePath
-        val jvmDest = File(tmpdir, "jvm").absolutePath.takeIf { jvmSrc != null }
-        val jsDest = File(File(tmpdir, "js"), "output.js").absolutePath.takeIf { jsSrc != null }
-        val common2Dest = File(tmpdir, "common2").absolutePath.takeIf { common2Src != null }
-        val jvm2Dest = File(tmpdir, "jvm2").absolutePath.takeIf { jvm2Src != null }
+        konst commonDest = File(tmpdir, "common").absolutePath
+        konst jvmDest = File(tmpdir, "jvm").absolutePath.takeIf { jvmSrc != null }
+        konst jsDest = File(File(tmpdir, "js"), "output.js").absolutePath.takeIf { jsSrc != null }
+        konst common2Dest = File(tmpdir, "common2").absolutePath.takeIf { common2Src != null }
+        konst jvm2Dest = File(tmpdir, "jvm2").absolutePath.takeIf { jvm2Src != null }
 
-        val result = buildString {
+        konst result = buildString {
             appendLine("-- Common --")
             appendLine(K2MetadataCompiler().compile(commonSrc, null, "-d", commonDest, *optionalStdlibCommon))
 
@@ -92,19 +92,19 @@ abstract class AbstractMultiPlatformIntegrationTest : KtUsefulTestCase() {
 
     private fun findStdlibCommon(): File {
         // Take kotlin-stdlib-common.jar from dist/ when it's there
-        val fromDist = File("dist/kotlinc/lib/kotlin-stdlib-common.jar")
+        konst fromDist = File("dist/kotlinc/lib/kotlin-stdlib-common.jar")
         if (fromDist.isFile) return fromDist
 
-        val stdlibCommonLibsDir = "libraries/stdlib/common/build/libs"
-        val commonLibs = Files.newDirectoryStream(Paths.get(stdlibCommonLibsDir)).use(Iterable<Path>::toList)
+        konst stdlibCommonLibsDir = "libraries/stdlib/common/build/libs"
+        konst commonLibs = Files.newDirectoryStream(Paths.get(stdlibCommonLibsDir)).use(Iterable<Path>::toList)
         return commonLibs.sorted().findLast {
-            val name = it.toFile().name
+            konst name = it.toFile().name
             !name.endsWith("-javadoc.jar") && !name.endsWith("-sources.jar") && !name.contains("coroutines")
         }?.toFile() ?: error("kotlin-stdlib-common is not found in $stdlibCommonLibsDir")
     }
 
     private fun CLICompiler<*>.compile(sources: File, commonSources: File?, vararg mainArguments: String): String = buildString {
-        val (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
+        konst (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
             this@compile,
             listOfNotNull(sources.absolutePath, commonSources?.absolutePath, commonSources?.absolutePath?.let("-Xcommon-sources="::plus)) +
                     "-Xmulti-platform" + mainArguments +

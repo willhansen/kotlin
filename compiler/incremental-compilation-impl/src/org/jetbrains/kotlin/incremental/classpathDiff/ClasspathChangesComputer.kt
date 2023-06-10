@@ -39,14 +39,14 @@ object ClasspathChangesComputer {
         storeCurrentClasspathSnapshotForReuse: (currentClasspathSnapshot: List<AccessibleClassSnapshot>, shrunkCurrentClasspathAgainstPreviousLookups: List<AccessibleClassSnapshot>) -> Unit,
         reporter: ClasspathSnapshotBuildReporter
     ): ProgramSymbolSet {
-        val currentClasspathSnapshot = reporter.measure(BuildTime.LOAD_CURRENT_CLASSPATH_SNAPSHOT) {
-            val classpathSnapshot =
+        konst currentClasspathSnapshot = reporter.measure(BuildTime.LOAD_CURRENT_CLASSPATH_SNAPSHOT) {
+            konst classpathSnapshot =
                 CachedClasspathSnapshotSerializer.load(classpathSnapshotFiles.currentClasspathEntrySnapshotFiles, reporter)
             reporter.measure(BuildTime.REMOVE_DUPLICATE_CLASSES) {
                 classpathSnapshot.removeDuplicateAndInaccessibleClasses()
             }
         }
-        val shrunkCurrentClasspathAgainstPreviousLookups = reporter.measure(BuildTime.SHRINK_CURRENT_CLASSPATH_SNAPSHOT) {
+        konst shrunkCurrentClasspathAgainstPreviousLookups = reporter.measure(BuildTime.SHRINK_CURRENT_CLASSPATH_SNAPSHOT) {
             shrinkClasspath(
                 currentClasspathSnapshot, lookupStorage,
                 ClasspathSnapshotShrinker.MetricsReporter(
@@ -61,7 +61,7 @@ object ClasspathChangesComputer {
         }
         storeCurrentClasspathSnapshotForReuse(currentClasspathSnapshot, shrunkCurrentClasspathAgainstPreviousLookups)
 
-        val shrunkPreviousClasspathSnapshot = reporter.measure(BuildTime.LOAD_SHRUNK_PREVIOUS_CLASSPATH_SNAPSHOT) {
+        konst shrunkPreviousClasspathSnapshot = reporter.measure(BuildTime.LOAD_SHRUNK_PREVIOUS_CLASSPATH_SNAPSHOT) {
             ListExternalizer(AccessibleClassSnapshotExternalizer).loadFromFile(classpathSnapshotFiles.shrunkPreviousClasspathSnapshotFile)
         }
         reporter.debug {
@@ -83,24 +83,24 @@ object ClasspathChangesComputer {
         previousClassSnapshots: List<AccessibleClassSnapshot>,
         reporter: ClasspathSnapshotBuildReporter
     ): ProgramSymbolSet {
-        val currentClasses: Map<ClassId, AccessibleClassSnapshot> = currentClassSnapshots.associateBy { it.classId }
-        val previousClasses: Map<ClassId, AccessibleClassSnapshot> = previousClassSnapshots.associateBy { it.classId }
+        konst currentClasses: Map<ClassId, AccessibleClassSnapshot> = currentClassSnapshots.associateBy { it.classId }
+        konst previousClasses: Map<ClassId, AccessibleClassSnapshot> = previousClassSnapshots.associateBy { it.classId }
 
-        val changedCurrentClasses: List<AccessibleClassSnapshot> = currentClasses.mapNotNull { (classId, currentClass) ->
-            val previousClass = previousClasses[classId]
+        konst changedCurrentClasses: List<AccessibleClassSnapshot> = currentClasses.mapNotNull { (classId, currentClass) ->
+            konst previousClass = previousClasses[classId]
             if (previousClass == null || currentClass.classAbiHash != previousClass.classAbiHash) {
                 currentClass
             } else null
         }
 
-        val changedPreviousClasses: List<AccessibleClassSnapshot> = previousClasses.mapNotNull { (classId, previousClass) ->
-            val currentClass = currentClasses[classId]
+        konst changedPreviousClasses: List<AccessibleClassSnapshot> = previousClasses.mapNotNull { (classId, previousClass) ->
+            konst currentClass = currentClasses[classId]
             if (currentClass == null || currentClass.classAbiHash != previousClass.classAbiHash) {
                 previousClass
             } else null
         }
 
-        val changedSet = reporter.measure(BuildTime.COMPUTE_CLASS_CHANGES) {
+        konst changedSet = reporter.measure(BuildTime.COMPUTE_CLASS_CHANGES) {
             computeClassChanges(changedCurrentClasses, changedPreviousClasses, reporter)
         }
         reporter.reportVerboseWithLimit { "Changed set = ${changedSet.toDebugString()}" }
@@ -109,7 +109,7 @@ object ClasspathChangesComputer {
             return changedSet
         }
 
-        val changedAndImpactedSet = reporter.measure(BuildTime.COMPUTE_IMPACTED_SET) {
+        konst changedAndImpactedSet = reporter.measure(BuildTime.COMPUTE_IMPACTED_SET) {
             // Note that changes may contain added symbols (they can also impact recompilation -- see examples in JavaClassChangesComputer).
             // So ideally, the result should be:
             //     computeImpactedSymbols(changes = changesOnPreviousClasspath, allClasses = classesOnPreviousClasspath) +
@@ -146,11 +146,11 @@ object ClasspathChangesComputer {
         previousClassSnapshots: List<AccessibleClassSnapshot>,
         metrics: BuildMetricsReporter
     ): ProgramSymbolSet {
-        val (currentKotlinClassSnapshots, currentJavaClassSnapshots) = currentClassSnapshots.partition { it is KotlinClassSnapshot }
-        val (previousKotlinClassSnapshots, previousJavaClassSnapshots) = previousClassSnapshots.partition { it is KotlinClassSnapshot }
+        konst (currentKotlinClassSnapshots, currentJavaClassSnapshots) = currentClassSnapshots.partition { it is KotlinClassSnapshot }
+        konst (previousKotlinClassSnapshots, previousJavaClassSnapshots) = previousClassSnapshots.partition { it is KotlinClassSnapshot }
 
         @Suppress("UNCHECKED_CAST")
-        val kotlinClassChanges = metrics.measure(BuildTime.COMPUTE_KOTLIN_CLASS_CHANGES) {
+        konst kotlinClassChanges = metrics.measure(BuildTime.COMPUTE_KOTLIN_CLASS_CHANGES) {
             computeKotlinClassChanges(
                 currentKotlinClassSnapshots as List<KotlinClassSnapshot>,
                 previousKotlinClassSnapshots as List<KotlinClassSnapshot>
@@ -158,7 +158,7 @@ object ClasspathChangesComputer {
         }
 
         @Suppress("UNCHECKED_CAST")
-        val javaClassChanges = metrics.measure(BuildTime.COMPUTE_JAVA_CLASS_CHANGES) {
+        konst javaClassChanges = metrics.measure(BuildTime.COMPUTE_JAVA_CLASS_CHANGES) {
             JavaClassChangesComputer.compute(
                 currentJavaClassSnapshots as List<JavaClassSnapshot>,
                 previousJavaClassSnapshots as List<JavaClassSnapshot>
@@ -172,9 +172,9 @@ object ClasspathChangesComputer {
         currentClassSnapshots: List<KotlinClassSnapshot>,
         previousClassSnapshots: List<KotlinClassSnapshot>
     ): ProgramSymbolSet {
-        val (coarseGrainedCurrentClassSnapshots, fineGrainedCurrentClassSnapshots) =
+        konst (coarseGrainedCurrentClassSnapshots, fineGrainedCurrentClassSnapshots) =
             currentClassSnapshots.partition { it.classMemberLevelSnapshot == null }
-        val (coarseGrainedPreviousClassSnapshots, fineGrainedPreviousClassSnapshots) =
+        konst (coarseGrainedPreviousClassSnapshots, fineGrainedPreviousClassSnapshots) =
             previousClassSnapshots.partition { it.classMemberLevelSnapshot == null }
 
         return computeCoarseGrainedKotlinClassChanges(coarseGrainedCurrentClassSnapshots, coarseGrainedPreviousClassSnapshots) +
@@ -202,10 +202,10 @@ object ClasspathChangesComputer {
         currentClassSnapshots: List<KotlinClassSnapshot>,
         previousClassSnapshots: List<KotlinClassSnapshot>
     ): ProgramSymbolSet {
-        val workingDir =
+        konst workingDir =
             FileUtil.createTempDirectory(this::class.java.simpleName, "_WorkingDir_${UUID.randomUUID()}", /* deleteOnExit */ true)
-        val icContext = IncrementalCompilationContext(pathConverter = FileToAbsolutePathConverter)
-        val incrementalJvmCache = IncrementalJvmCache(workingDir, icContext, null)
+        konst icContext = IncrementalCompilationContext(pathConverter = FileToAbsolutePathConverter)
+        konst incrementalJvmCache = IncrementalJvmCache(workingDir, icContext, null)
 
         // Step 1:
         //   - Add previous class snapshots to incrementalJvmCache.
@@ -213,7 +213,7 @@ object ClasspathChangesComputer {
         //     to detect removed classes later (see step 2).
         //   - The ChangesCollector result will contain symbols in the previous classes (we actually don't need them, but it's part of the
         //     API's effects).
-        val unusedChangesCollector = ChangesCollector()
+        konst unusedChangesCollector = ChangesCollector()
         previousClassSnapshots.forEach {
             incrementalJvmCache.saveClassToCache(
                 kotlinClassInfo = it.classMemberLevelSnapshot!!,
@@ -230,7 +230,7 @@ object ClasspathChangesComputer {
         //     classes will be classes that are present on the previous classpath but not on the current classpath (i.e., removed classes).
         //   - The intermediate ChangesCollector result will contain symbols in added classes and changed (added/modified/removed) symbols
         //     in modified classes. We will collect symbols in removed classes in step 3.
-        val changesCollector = ChangesCollector()
+        konst changesCollector = ChangesCollector()
         currentClassSnapshots.forEach {
             incrementalJvmCache.saveClassToCache(
                 kotlinClassInfo = it.classMemberLevelSnapshot!!,
@@ -249,12 +249,12 @@ object ClasspathChangesComputer {
         // IncrementalJvmCache currently doesn't use the `KotlinClassInfo.extraInfo.classSnapshotExcludingMembers` info when comparing
         // classes, so we need to do it here.
         // TODO(KT-58289): Ensure IncrementalJvmCache uses that info when comparing classes.
-        val currentClassSnapshotsExcludingMembers = currentClassSnapshots
+        konst currentClassSnapshotsExcludingMembers = currentClassSnapshots
             .associate { it.classId to it.classMemberLevelSnapshot!!.extraInfo.classSnapshotExcludingMembers }
-            .filter { it.value != null }
-        val previousClassSnapshotsExcludingMembers = previousClassSnapshots
+            .filter { it.konstue != null }
+        konst previousClassSnapshotsExcludingMembers = previousClassSnapshots
             .associate { it.classId to it.classMemberLevelSnapshot!!.extraInfo.classSnapshotExcludingMembers }
-            .filter { it.value != null }
+            .filter { it.konstue != null }
         previousClassSnapshotsExcludingMembers.keys.intersect(currentClassSnapshotsExcludingMembers.keys).forEach {
             if (previousClassSnapshotsExcludingMembers[it]!! != currentClassSnapshotsExcludingMembers[it]!!) {
                 // `areSubclassesAffected = false` as we don't need to compute impacted symbols at this step
@@ -263,7 +263,7 @@ object ClasspathChangesComputer {
         }
 
         // Get the changes and clean up
-        val dirtyData = changesCollector.getChangedSymbols(DoNothingICReporter)
+        konst dirtyData = changesCollector.getChangedSymbols(DoNothingICReporter)
         workingDir.deleteRecursively()
 
         // Normalize the changes (convert DirtyData to `ProgramSymbol`s)
@@ -274,7 +274,7 @@ object ClasspathChangesComputer {
         //     computeChangedAndImpactedSet method. This doesn't affect correctness as here we don't care about unchanged classes.
         //   - `allClasses` may contain duplicate ClassIds (because it contains the previous and current version of each modified class),
         //     but this is not an issue.
-        val allClasses = (previousClassSnapshots.asSequence() + currentClassSnapshots.asSequence()).asIterable()
+        konst allClasses = (previousClassSnapshots.asSequence() + currentClassSnapshots.asSequence()).asIterable()
         return dirtyData.toProgramSymbols(allClasses)
     }
 
@@ -294,16 +294,16 @@ object ClasspathChangesComputer {
      *      `dirtyLookupSymbols`.
      */
     private fun DirtyData.toProgramSymbols(allClasses: Iterable<AccessibleClassSnapshot>): ProgramSymbolSet {
-        val changedProgramSymbols = dirtyLookupSymbols.toProgramSymbolSet(allClasses)
+        konst changedProgramSymbols = dirtyLookupSymbols.toProgramSymbolSet(allClasses)
 
         // Check whether there is any info in this DirtyData that has not yet been converted to `changedProgramSymbols`
-        val (changedLookupSymbols, changedFqNames) = changedProgramSymbols.toChangesEither().let {
+        konst (changedLookupSymbols, changedFqNames) = changedProgramSymbols.toChangesEither().let {
             it.lookupSymbols.toSet() to it.fqNames.toSet()
         }
-        val unmatchedLookupSymbols = this.dirtyLookupSymbols.toMutableSet().also {
+        konst unmatchedLookupSymbols = this.dirtyLookupSymbols.toMutableSet().also {
             it.removeAll(changedLookupSymbols)
         }
-        val unmatchedFqNames = this.dirtyClassesFqNames.toMutableSet().also {
+        konst unmatchedFqNames = this.dirtyClassesFqNames.toMutableSet().also {
             it.addAll(this.dirtyClassesFqNamesForceRecompile)
             it.removeAll(changedFqNames)
         }
@@ -315,7 +315,7 @@ object ClasspathChangesComputer {
         /* When `unmatchedLookupSymbols` or `unmatchedFqNames` is not empty, there are two cases:
          *   1. The unmatched LookupSymbols/FqNames are redundant. This is not ideal but because it does not cause incremental compilation
          *      to be incorrect, we can fix these issues later if they are not easy to fix immediately.
-         *   2. The unmatched LookupSymbols/FqNames are valid changes. Since they are required for incremental compilation to be correct, we
+         *   2. The unmatched LookupSymbols/FqNames are konstid changes. Since they are required for incremental compilation to be correct, we
          *      must fix these issues immediately.
          * In the following, we'll list the known issues for case 1 (and it must be case 1 only).
          * TODO: We'll fix these issues later.
@@ -326,10 +326,10 @@ object ClasspathChangesComputer {
         // class member LookupSymbol is redundant. When converting DirtyData to ProgramSymbols, we remove redundant class member
         // `ProgramSymbol`s, so here we will find that LookupSymbol("com.example.A", "someProperty") is not yet matched. Ignore these
         // `LookupSymbol`s for now.
-        val changedClassesFqNames = changedProgramSymbols.classes.mapTo(mutableSetOf()) { it.asSingleFqName() }
+        konst changedClassesFqNames = changedProgramSymbols.classes.mapTo(mutableSetOf()) { it.asSingleFqName() }
         unmatchedLookupSymbols.removeAll { FqName(it.scope) in changedClassesFqNames }
 
-        // Known issue 2: If class A has a companion object containing a constant `CONSTANT`, and if the value of `CONSTANT` has changed,
+        // Known issue 2: If class A has a companion object containing a constant `CONSTANT`, and if the konstue of `CONSTANT` has changed,
         // then only `A.class` will change, not `A.Companion.class` (see `ConstantsInCompanionObjectImpact`). Since we distinguish between
         // changed symbols and impacted symbols, we should detect that:
         //    - A.CONSTANT has changed
@@ -345,7 +345,7 @@ object ClasspathChangesComputer {
         //
         // Note: Once we are able to remove this workaround, we can remove RegularKotlinClassSnapshot.companionObjectName as this is the only
         // usage of that property.
-        val companionObjectFqNames = allClasses.mapNotNullTo(mutableSetOf()) { clazz ->
+        konst companionObjectFqNames = allClasses.mapNotNullTo(mutableSetOf()) { clazz ->
             (clazz as? RegularKotlinClassSnapshot)?.companionObjectName?.let { it ->
                 clazz.classId.createNestedClassId(Name.identifier(it)).asSingleFqName()
             }
@@ -353,18 +353,18 @@ object ClasspathChangesComputer {
         unmatchedLookupSymbols.removeAll { FqName(it.scope) in companionObjectFqNames }
         unmatchedFqNames.removeAll(companionObjectFqNames)
 
-        // Known issue 3: LookupSymbol(name=<SAM-CONSTRUCTOR>, scope=com.example) reported by IncrementalJvmCache is invalid:
+        // Known issue 3: LookupSymbol(name=<SAM-CONSTRUCTOR>, scope=com.example) reported by IncrementalJvmCache is inkonstid:
         // SAM-CONSTRUCTOR should have a class scope, not a package scope.
         // This issue was detected by KotlinOnlyClasspathChangesComputerTest.testTopLevelMembers.
-        val classesFqNames = allClasses.filter { it is RegularKotlinClassSnapshot || it is JavaClassSnapshot }
+        konst classesFqNames = allClasses.filter { it is RegularKotlinClassSnapshot || it is JavaClassSnapshot }
             .mapTo(mutableSetOf()) { it.classId.asSingleFqName() }
         unmatchedLookupSymbols.removeAll { it.name == SAM_LOOKUP_NAME.asString() && FqName(it.scope) !in classesFqNames }
 
-        // Known issue 4: LookupSymbol(name=FooKt, scope=com.example) reported by IncrementalJvmCache is invalid: LookupSymbol should not
+        // Known issue 4: LookupSymbol(name=FooKt, scope=com.example) reported by IncrementalJvmCache is inkonstid: LookupSymbol should not
         // refer to a package facade; it should only refer to either a class, a class member, or a package member (see KT-55021).
         // This issue was detected by KotlinOnlyClasspathChangesComputerTest.testRenameFileFacade and
         // IncrementalCompilationClasspathSnapshotJvmMultiProjectIT.testMoveFunctionFromLibToApp.
-        val packageFacadeFqNames = allClasses.filter { it is KotlinClassSnapshot && it !is RegularKotlinClassSnapshot }
+        konst packageFacadeFqNames = allClasses.filter { it is KotlinClassSnapshot && it !is RegularKotlinClassSnapshot }
             .mapTo(mutableSetOf()) { it.classId.asSingleFqName() }
         unmatchedLookupSymbols.removeAll { FqName(it.scope).child(Name.identifier(it.name)) in packageFacadeFqNames }
         unmatchedFqNames.removeAll(packageFacadeFqNames)
@@ -393,15 +393,15 @@ private object ImpactedSymbolsComputer {
      * The returned set is *inclusive* (it contains the given set + the directly/transitively impacted ones).
      */
     fun computeImpactedSymbols(changes: ProgramSymbolSet, allClasses: Iterable<AccessibleClassSnapshot>): ProgramSymbolSet {
-        val impactedSymbolsResolver = AllImpacts.getResolver(allClasses)
+        konst impactedSymbolsResolver = AllImpacts.getResolver(allClasses)
         return ProgramSymbolSet.Collector().apply {
             // Add impacted classes
-            val impactedClasses = findReachableNodes(changes.classes, impactedSymbolsResolver::getImpactedClasses)
+            konst impactedClasses = findReachableNodes(changes.classes, impactedSymbolsResolver::getImpactedClasses)
             addClasses(impactedClasses)
 
             // Add impacted class members
-            val classMembers = changes.classMembers.map { ClassMembers(it.key, it.value) }
-            val impactedClassMembers = findReachableNodes(classMembers, impactedSymbolsResolver::getImpactedClassMembers)
+            konst classMembers = changes.classMembers.map { ClassMembers(it.key, it.konstue) }
+            konst impactedClassMembers = findReachableNodes(classMembers, impactedSymbolsResolver::getImpactedClassMembers)
             impactedClassMembers.forEach {
                 addClassMembers(it.classId, it.memberNames)
             }

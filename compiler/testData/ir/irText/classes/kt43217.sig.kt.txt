@@ -5,7 +5,7 @@ class A {
   // CHECK:
   //   Mangled name: A{}b
   //   Public signature: /A.b|772347207915745207[0]
-  private val b: <no name provided>
+  private konst b: <no name provided>
     field
       // CHECK JVM_IR:
       //   Mangled name (compatible mode: false): A{}b.<no name provided>
@@ -20,12 +20,12 @@ class A {
         //   Mangled name (compatible mode: false): A{}b.<no name provided>#isEqualTo(kotlin.Double){}kotlin.Any{EnhancedNullability}
         //   Mangled name (compatible mode: true):  A.b.<no name provided>#isEqualTo(kotlin.Double){}kotlin.Any{EnhancedNullability}
         @Override
-        /* fake */ override fun isEqualTo(value: Double): @EnhancedNullability Any
+        /* fake */ override fun isEqualTo(konstue: Double): @EnhancedNullability Any
 
         // CHECK JVM_IR:
         //   Mangled name (compatible mode: false): A{}b.<no name provided>#isEqualTo(kotlin.Double{EnhancedNullability}){}kotlin.Any{EnhancedNullability}
         //   Mangled name (compatible mode: true):  A.b.<no name provided>#isEqualTo(kotlin.Double{EnhancedNullability}){}kotlin.Any{EnhancedNullability}
-        /* fake */ override fun isEqualTo(value: @EnhancedNullability Double): @EnhancedNullability Any
+        /* fake */ override fun isEqualTo(konstue: @EnhancedNullability Double): @EnhancedNullability Any
 
         // CHECK JVM_IR:
         //   Mangled name (compatible mode: false): A{}b.<no name provided>#get(){}kotlin.Double
@@ -60,12 +60,12 @@ class C : DoubleExpression {
   //   Mangled name: C#isEqualTo(kotlin.Double){}kotlin.Any{EnhancedNullability}
   //   Public signature: /C.isEqualTo|6549516741996743028[0]
   @Override
-  /* fake */ override fun isEqualTo(value: Double): @EnhancedNullability Any
+  /* fake */ override fun isEqualTo(konstue: Double): @EnhancedNullability Any
 
   // CHECK JVM_IR:
   //   Mangled name: C#isEqualTo(kotlin.Double{EnhancedNullability}){}kotlin.Any{EnhancedNullability}
   //   Public signature: /C.isEqualTo|3976283770497294654[0]
-  /* fake */ override fun isEqualTo(value: @EnhancedNullability Double): @EnhancedNullability Any
+  /* fake */ override fun isEqualTo(konstue: @EnhancedNullability Double): @EnhancedNullability Any
 
   // CHECK JVM_IR:
   //   Mangled name: C#get(){}kotlin.Double

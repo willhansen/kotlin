@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingContext
 
 @OptIn(InternalNonStableExtensionPoints::class)
 class TypeResolutionInterceptor(project: Project) {
-    private val extensions = getInstances(project)
+    private konst extensions = getInstances(project)
 
     fun interceptFunctionLiteralDescriptor(
         expression: KtLambdaExpression,

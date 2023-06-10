@@ -10,12 +10,12 @@ import org.jetbrains.kotlin.tooling.core.extrasKeyOf
 
 class AndroidKotlinSourceSet {
     companion object {
-        private val extrasKey = extrasKeyOf<AndroidKotlinSourceSet>()
+        private konst extrasKey = extrasKeyOf<AndroidKotlinSourceSet>()
 
         var KotlinSourceSet.android: AndroidKotlinSourceSet?
             get() = extras[extrasKey]
-            internal set(value) {
-                if (value != null) extras[extrasKey] = value
+            internal set(konstue) {
+                if (konstue != null) extras[extrasKey] = konstue
                 else extras.remove(extrasKey)
             }
     }

@@ -33,19 +33,19 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.types.typeUtil.isSubtypeOf
 
-internal abstract class AbstractNativeAnnotationsChecker(private val requiredAnnotation: PredefinedAnnotation) : DeclarationChecker {
+internal abstract class AbstractNativeAnnotationsChecker(private konst requiredAnnotation: PredefinedAnnotation) : DeclarationChecker {
 
     open fun additionalCheck(declaration: KtNamedFunction, descriptor: FunctionDescriptor, diagnosticHolder: DiagnosticSink) {}
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val annotationDescriptor = descriptor.annotations.findAnnotation(requiredAnnotation.fqName) ?: return
+        konst annotationDescriptor = descriptor.annotations.findAnnotation(requiredAnnotation.fqName) ?: return
 
         if (declaration !is KtNamedFunction || descriptor !is FunctionDescriptor) {
             return
         }
 
-        val isMember = !DescriptorUtils.isTopLevelDeclaration(descriptor) && descriptor.visibility != DescriptorVisibilities.LOCAL
-        val isExtension = DescriptorUtils.isExtension(descriptor)
+        konst isMember = !DescriptorUtils.isTopLevelDeclaration(descriptor) && descriptor.visibility != DescriptorVisibilities.LOCAL
+        konst isExtension = DescriptorUtils.isExtension(descriptor)
 
         if (isMember && (isExtension || !AnnotationsUtils.isNativeObject(descriptor)) ||
             !isMember && !isExtension
@@ -61,18 +61,18 @@ internal class NativeInvokeChecker : AbstractNativeAnnotationsChecker(Predefined
 
 internal abstract class AbstractNativeIndexerChecker(
         requiredAnnotation: PredefinedAnnotation,
-        private val indexerKind: String,
-        private val requiredParametersCount: Int
+        private konst indexerKind: String,
+        private konst requiredParametersCount: Int
 ) : AbstractNativeAnnotationsChecker(requiredAnnotation) {
 
     override fun additionalCheck(declaration: KtNamedFunction, descriptor: FunctionDescriptor, diagnosticHolder: DiagnosticSink) {
-        val parameters = descriptor.valueParameters
-        val builtIns = descriptor.builtIns
+        konst parameters = descriptor.konstueParameters
+        konst builtIns = descriptor.builtIns
         if (parameters.isNotEmpty()) {
-            val firstParamType = parameters.first().type
+            konst firstParamType = parameters.first().type
             if (!KotlinBuiltIns.isString(firstParamType) && !firstParamType.isSubtypeOf(builtIns.number.defaultType)) {
                 diagnosticHolder.report(
-                    ErrorsJs.NATIVE_INDEXER_KEY_SHOULD_BE_STRING_OR_NUMBER.on(declaration.valueParameters.first(), indexerKind)
+                    ErrorsJs.NATIVE_INDEXER_KEY_SHOULD_BE_STRING_OR_NUMBER.on(declaration.konstueParameters.first(), indexerKind)
                 )
             }
         }
@@ -81,7 +81,7 @@ internal abstract class AbstractNativeIndexerChecker(
             diagnosticHolder.report(ErrorsJs.NATIVE_INDEXER_WRONG_PARAMETER_COUNT.on(declaration, requiredParametersCount, indexerKind))
         }
 
-        for (parameter in declaration.valueParameters) {
+        for (parameter in declaration.konstueParameters) {
             if (parameter.hasDefaultValue()) {
                 diagnosticHolder.report(ErrorsJs.NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS.on(parameter, indexerKind))
             }
@@ -93,7 +93,7 @@ internal class NativeGetterChecker : AbstractNativeIndexerChecker(PredefinedAnno
     override fun additionalCheck(declaration: KtNamedFunction, descriptor: FunctionDescriptor, diagnosticHolder: DiagnosticSink) {
         super.additionalCheck(declaration, descriptor, diagnosticHolder)
 
-        val returnType = descriptor.returnType
+        konst returnType = descriptor.returnType
         if (returnType != null && !TypeUtils.isNullableType(returnType)) {
             diagnosticHolder.report(ErrorsJs.NATIVE_GETTER_RETURN_TYPE_SHOULD_BE_NULLABLE.on(declaration))
         }
@@ -104,13 +104,13 @@ internal class NativeSetterChecker : AbstractNativeIndexerChecker(PredefinedAnno
     override fun additionalCheck(declaration: KtNamedFunction, descriptor: FunctionDescriptor, diagnosticHolder: DiagnosticSink) {
         super.additionalCheck(declaration, descriptor, diagnosticHolder)
 
-        val returnType = descriptor.returnType
+        konst returnType = descriptor.returnType
         if (returnType == null || KotlinBuiltIns.isUnit(returnType)) return
 
-        val parameters = descriptor.valueParameters
+        konst parameters = descriptor.konstueParameters
         if (parameters.size < 2) return
 
-        val secondParameterType = parameters.get(1).type
+        konst secondParameterType = parameters.get(1).type
         if (secondParameterType.isSubtypeOf(returnType)) return
 
         diagnosticHolder.report(ErrorsJs.NATIVE_SETTER_WRONG_RETURN_TYPE.on(declaration))

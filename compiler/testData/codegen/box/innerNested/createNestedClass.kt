@@ -1,14 +1,14 @@
 
 class A {
     class B1
-    class B2(val x: Int)
-    class B3(val x: Long, val y: Int)
-    class B4(val str: String)
+    class B2(konst x: Int)
+    class B3(konst x: Long, konst y: Int)
+    class B4(konst str: String)
 }
 
 
 fun box(): String {
     A.B1()
-    val b2 = A.B2(A.B3(42, 42).y)
+    konst b2 = A.B2(A.B3(42, 42).y)
     return A.B4("OK").str
 }

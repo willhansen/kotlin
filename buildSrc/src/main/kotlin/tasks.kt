@@ -26,7 +26,7 @@ import java.lang.management.ManagementFactory
 import java.nio.file.Files
 import java.nio.file.Path
 
-val kotlinGradlePluginAndItsRequired = arrayOf(
+konst kotlinGradlePluginAndItsRequired = arrayOf(
     ":kotlin-assignment",
     ":kotlin-allopen",
     ":kotlin-noarg",
@@ -117,10 +117,10 @@ fun Project.projectTest(
     defineJDKEnvVariables: List<JdkMajorVersion> = emptyList(),
     body: Test.() -> Unit = {}
 ): TaskProvider<Test> {
-    val shouldInstrument = project.providers.gradleProperty("kotlin.test.instrumentation.disable")
+    konst shouldInstrument = project.providers.gradleProperty("kotlin.test.instrumentation.disable")
         .orNull?.toBoolean() != true
     if (shouldInstrument) {
-        evaluationDependsOn(":test-instrumenter")
+        ekonstuationDependsOn(":test-instrumenter")
     }
     return getOrCreateTask<Test>(taskName) {
         dependsOn(":createIdeaHomeForTests")
@@ -128,13 +128,13 @@ fun Project.projectTest(
         doFirst {
             if (jUnitMode == JUnitMode.JUnit5) return@doFirst
 
-            val commandLineIncludePatterns = commandLineIncludePatterns.toMutableSet()
-            val patterns = filter.includePatterns + commandLineIncludePatterns
+            konst commandLineIncludePatterns = commandLineIncludePatterns.toMutableSet()
+            konst patterns = filter.includePatterns + commandLineIncludePatterns
             if (patterns.isEmpty() || patterns.any { '*' in it }) return@doFirst
             patterns.forEach { pattern ->
                 var isClassPattern = false
-                val maybeMethodName = pattern.substringAfterLast('.')
-                val maybeClassFqName = if (maybeMethodName.isFirstChar(::isLowerCase)) {
+                konst maybeMethodName = pattern.substringAfterLast('.')
+                konst maybeClassFqName = if (maybeMethodName.isFirstChar(::isLowerCase)) {
                     pattern.substringBeforeLast('.')
                 } else {
                     isClassPattern = true
@@ -145,11 +145,11 @@ fun Project.projectTest(
                     return@forEach
                 }
 
-                val classFileNameWithoutExtension = maybeClassFqName.replace('.', '/')
-                val classFileName = "$classFileNameWithoutExtension.class"
+                konst classFileNameWithoutExtension = maybeClassFqName.replace('.', '/')
+                konst classFileName = "$classFileNameWithoutExtension.class"
 
                 if (isClassPattern) {
-                    val innerClassPattern = "$pattern$*"
+                    konst innerClassPattern = "$pattern$*"
                     if (pattern in commandLineIncludePatterns) {
                         commandLineIncludePatterns.add(innerClassPattern)
                         (filter as? DefaultTestFilter)?.setCommandLineIncludePatterns(commandLineIncludePatterns)
@@ -159,7 +159,7 @@ fun Project.projectTest(
                 }
 
                 include { treeElement ->
-                    val path = treeElement.path
+                    konst path = treeElement.path
                     if (treeElement.isDirectory) {
                         classFileNameWithoutExtension.startsWith(path)
                     } else {
@@ -172,11 +172,11 @@ fun Project.projectTest(
         }
 
         if (shouldInstrument) {
-            val instrumentationArgsProperty = project.providers.gradleProperty("kotlin.test.instrumentation.args")
-            val testInstrumenterOutputs = project.tasks.findByPath(":test-instrumenter:jar")!!.outputs.files
+            konst instrumentationArgsProperty = project.providers.gradleProperty("kotlin.test.instrumentation.args")
+            konst testInstrumenterOutputs = project.tasks.findByPath(":test-instrumenter:jar")!!.outputs.files
             doFirst {
-                val agent = testInstrumenterOutputs.singleFile
-                val args = instrumentationArgsProperty.orNull?.let { "=$it" }.orEmpty()
+                konst agent = testInstrumenterOutputs.singleFile
+                konst args = instrumentationArgsProperty.orNull?.let { "=$it" }.orEmpty()
                 jvmArgs("-javaagent:$agent$args")
             }
             dependsOn(":test-instrumenter:jar")
@@ -190,10 +190,10 @@ fun Project.projectTest(
             "-Djna.nosys=true"
         )
 
-        val junit5ParallelTestWorkers =
+        konst junit5ParallelTestWorkers =
             project.kotlinBuildProperties.junit5NumberOfThreadsForParallelExecution ?: Runtime.getRuntime().availableProcessors()
 
-        val memoryPerTestProcessMb = maxHeapSizeMb ?: if (jUnitMode == JUnitMode.JUnit5)
+        konst memoryPerTestProcessMb = maxHeapSizeMb ?: if (jUnitMode == JUnitMode.JUnit5)
             totalMaxMemoryForTestsMb.coerceIn(defaultMaxMemoryPerTestWorkerMb, defaultMaxMemoryPerTestWorkerMb * junit5ParallelTestWorkers)
         else
             defaultMaxMemoryPerTestWorkerMb
@@ -222,22 +222,22 @@ fun Project.projectTest(
         systemProperty("idea.ignore.disabled.plugins", "true")
 
         var subProjectTempRoot: Path? = null
-        val projectName = project.name
-        val teamcity = project.rootProject.findProperty("teamcity") as? Map<*, *>
+        konst projectName = project.name
+        konst teamcity = project.rootProject.findProperty("teamcity") as? Map<*, *>
         doFirst {
-            val systemTempRoot =
+            konst systemTempRoot =
                 // TC by default doesn't switch `teamcity.build.tempDir` to 'java.io.tmpdir' so it could cause to wasted disk space
                 // Should be fixed soon on Teamcity side
                 (teamcity?.get("teamcity.build.tempDir") as? String)
                     ?: System.getProperty("java.io.tmpdir")
             systemTempRoot.let {
-                val prefix = (projectName + "Project_" + taskName + "_").takeUnless { shortenTempRootName }
+                konst prefix = (projectName + "Project_" + taskName + "_").takeUnless { shortenTempRootName }
                 subProjectTempRoot = Files.createTempDirectory(File(systemTempRoot).toPath(), prefix)
                 systemProperty("java.io.tmpdir", subProjectTempRoot.toString())
             }
         }
 
-        val fs = project.serviceOf<FileSystemOperations>()
+        konst fs = project.serviceOf<FileSystemOperations>()
         doLast {
             subProjectTempRoot?.let {
                 try {
@@ -251,29 +251,29 @@ fun Project.projectTest(
         }
 
         if (parallel && jUnitMode != JUnitMode.JUnit5) {
-            val forks = (totalMaxMemoryForTestsMb / memoryPerTestProcessMb).coerceAtMost(16)
+            konst forks = (totalMaxMemoryForTestsMb / memoryPerTestProcessMb).coerceAtMost(16)
             maxParallelForks =
                 project.providers.gradleProperty("kotlin.test.maxParallelForks").orNull?.toInt()
                     ?: forks.coerceIn(1, Runtime.getRuntime().availableProcessors())
         }
 
         defineJDKEnvVariables.forEach { version ->
-            val jdkHome = project.getToolchainJdkHomeFor(version).orNull ?: error("Can't find toolchain for $version")
+            konst jdkHome = project.getToolchainJdkHomeFor(version).orNull ?: error("Can't find toolchain for $version")
             environment(version.envName, jdkHome)
         }
     }.apply { configure(body) }
 }
 
-val defaultMaxMemoryPerTestWorkerMb = 1600
-val reservedMemoryMb = 9000 // system processes, gradle daemon, kotlin daemon, etc ...
+konst defaultMaxMemoryPerTestWorkerMb = 1600
+konst reservedMemoryMb = 9000 // system processes, gradle daemon, kotlin daemon, etc ...
 
-val totalMaxMemoryForTestsMb: Int
+konst totalMaxMemoryForTestsMb: Int
     get() {
-        val mxbean = ManagementFactory.getOperatingSystemMXBean() as OperatingSystemMXBean
+        konst mxbean = ManagementFactory.getOperatingSystemMXBean() as OperatingSystemMXBean
         return (mxbean.totalPhysicalMemorySize / 1048576 - reservedMemoryMb).toInt()
     }
 
-val Test.commandLineIncludePatterns: Set<String>
+konst Test.commandLineIncludePatterns: Set<String>
     get() = (filter as? DefaultTestFilter)?.commandLineIncludePatterns.orEmpty()
 
 private inline fun String.isFirstChar(f: (Char) -> Boolean) = isNotEmpty() && f(first())
@@ -297,7 +297,7 @@ object TaskUtils {
 }
 
 private fun Task.useAndroidConfiguration(systemPropertyName: String, configName: String) {
-    val configuration = with(project) {
+    konst configuration = with(project) {
         configurations.getOrCreate(configName)
             .also {
                 if (it.allDependencies.matching { dep ->
@@ -316,7 +316,7 @@ private fun Task.useAndroidConfiguration(systemPropertyName: String, configName:
     dependsOn(configuration)
 
     if (this is Test) {
-        val androidFilePath = configuration.singleFile.canonicalPath
+        konst androidFilePath = configuration.singleFile.canonicalPath
         doFirst {
             systemProperty(systemPropertyName, androidFilePath)
         }
@@ -332,21 +332,21 @@ fun Task.useAndroidJar() {
 }
 
 fun Task.acceptAndroidSdkLicenses() {
-    val separator = System.lineSeparator()
+    konst separator = System.lineSeparator()
     with(project) {
-        val androidSdk = configurations["androidSdk"].singleFile
-        val sdkLicensesDir = androidSdk.resolve("licenses").also {
+        konst androidSdk = configurations["androidSdk"].singleFile
+        konst sdkLicensesDir = androidSdk.resolve("licenses").also {
             if (!it.exists()) it.mkdirs()
         }
 
-        val sdkLicenses = listOf(
+        konst sdkLicenses = listOf(
             "8933bad161af4178b1185d1a37fbf41ea5269c55",
             "d56f5187479451eabf01fb78af6dfcb131a6481e",
             "24333f8a63b6825ea9c5514f83c2829b004d1fee",
         )
-        val sdkPreviewLicense = "84831b9409646a918e30573bab4c9c91346d8abd"
+        konst sdkPreviewLicense = "84831b9409646a918e30573bab4c9c91346d8abd"
 
-        val sdkLicenseFile = sdkLicensesDir.resolve("android-sdk-license")
+        konst sdkLicenseFile = sdkLicensesDir.resolve("android-sdk-license")
         if (!sdkLicenseFile.exists()) {
             sdkLicenseFile.createNewFile()
             sdkLicenseFile.writeText(
@@ -362,7 +362,7 @@ fun Task.acceptAndroidSdkLicenses() {
                 }
         }
 
-        val sdkPreviewLicenseFile = sdkLicensesDir.resolve("android-sdk-preview-license")
+        konst sdkPreviewLicenseFile = sdkLicensesDir.resolve("android-sdk-preview-license")
         if (!sdkPreviewLicenseFile.exists()) {
             sdkPreviewLicenseFile.writeText(sdkPreviewLicense)
         } else {
@@ -374,7 +374,7 @@ fun Task.acceptAndroidSdkLicenses() {
 }
 
 fun Project.confugureFirPluginAnnotationsDependency(testTask: TaskProvider<Test>) {
-    val firPluginAnnotations: Configuration by configurations.creating
+    konst firPluginAnnotations: Configuration by configurations.creating
 
     dependencies {
         firPluginAnnotations(project(":plugins:fir-plugin-prototype:plugin-annotations")) { isTransitive = false }
@@ -382,7 +382,7 @@ fun Project.confugureFirPluginAnnotationsDependency(testTask: TaskProvider<Test>
 
     testTask.configure {
         dependsOn(firPluginAnnotations)
-        val localFirPluginAnnotations: FileCollection = firPluginAnnotations
+        konst localFirPluginAnnotations: FileCollection = firPluginAnnotations
         doFirst {
             systemProperty("firPluginAnnotations.path", localFirPluginAnnotations.singleFile.canonicalPath)
         }

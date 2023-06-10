@@ -15,15 +15,15 @@ scopes:
     classifiers: 1
       companion object
     callables: 11
-      val x: kotlin.String
+      konst x: kotlin.String
       fun foo()
       fun clone(): kotlin.Any
       fun compareTo(other: E): kotlin.Int
       fun equals(other: kotlin.Any?): kotlin.Boolean
       fun hashCode(): kotlin.Int
       fun toString(): kotlin.String
-      val name: kotlin.String
-      val ordinal: kotlin.Int
+      konst name: kotlin.String
+      konst ordinal: kotlin.Int
       fun getDeclaringClass(): java.lang.Class<E?>?
       fun finalize()
 
@@ -31,9 +31,9 @@ scopes:
     classifiers: 0
     callables: 4
       A
-      fun values(): kotlin.Array<E>
-      fun valueOf(value: kotlin.String): E
-      val entries: kotlin.enums.EnumEntries<E>
+      fun konstues(): kotlin.Array<E>
+      fun konstueOf(konstue: kotlin.String): E
+      konst entries: kotlin.enums.EnumEntries<E>
 
   StaticMemberScope, index = 4
     classifiers: 1

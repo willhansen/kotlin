@@ -3,13 +3,13 @@ interface Base {
     fun printMessageLine()
 }
 
-class BaseImpl(val x: Int) : Base {
+class BaseImpl(konst x: Int) : Base {
 //                                fun io/print(Int): Unit
-//                                │     val (BaseImpl).x: Int
+//                                │     konst (BaseImpl).x: Int
 //                                │     │
     override fun printMessage() { print(x) }
 //                                    fun io/println(Int): Unit
-//                                    │       val (BaseImpl).x: Int
+//                                    │       konst (BaseImpl).x: Int
 //                                    │       │
     override fun printMessageLine() { println(x) }
 }
@@ -27,14 +27,14 @@ fun main() {
 //      │   constructor BaseImpl(Int)
 //      │   │        Int
 //      │   │        │
-    val b = BaseImpl(10)
+    konst b = BaseImpl(10)
 //  constructor Derived(Base)
-//  │       val main.b: BaseImpl
+//  │       konst main.b: BaseImpl
 //  │       │  fun (Derived).printMessage(): Unit
 //  │       │  │
     Derived(b).printMessage()
 //  constructor Derived(Base)
-//  │       val main.b: BaseImpl
+//  │       konst main.b: BaseImpl
 //  │       │  fun (Base).printMessageLine(): Unit
 //  │       │  │
     Derived(b).printMessageLine()

@@ -10,13 +10,13 @@ import java.util.jar.JarFile
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-private val CONSTANT_TIME_FOR_ZIP_ENTRIES = GregorianCalendar(1980, 1, 1, 0, 0, 0).timeInMillis
+private konst CONSTANT_TIME_FOR_ZIP_ENTRIES = GregorianCalendar(1980, 1, 1, 0, 0, 0).timeInMillis
 
 /**
  * Removes @kotlin.Metadata annotations from compiled Kotlin classes
  */
 fun stripMetadata(logger: Logger, classNamePattern: String, inFile: File, outFile: File, preserveFileTimestamps: Boolean = true) {
-    val classRegex = classNamePattern.toRegex()
+    konst classRegex = classNamePattern.toRegex()
 
     assert(inFile.exists()) { "Input file not found at $inFile" }
 
@@ -25,8 +25,8 @@ fun stripMetadata(logger: Logger, classNamePattern: String, inFile: File, outFil
         if (!classRegex.matches(entryName.removeSuffix(".class"))) return bytes
 
         var changed = false
-        val classWriter = ClassWriter(0)
-        val classVisitor = object : ClassVisitor(Opcodes.API_VERSION, classWriter) {
+        konst classWriter = ClassWriter(0)
+        konst classVisitor = object : ClassVisitor(Opcodes.API_VERSION, classWriter) {
             override fun visitAnnotation(desc: String, visible: Boolean): AnnotationVisitor? {
                 if (Type.getType(desc).internalName == "kotlin/Metadata") {
                     changed = true
@@ -44,14 +44,14 @@ fun stripMetadata(logger: Logger, classNamePattern: String, inFile: File, outFil
     ZipOutputStream(BufferedOutputStream(FileOutputStream(outFile))).use { outJar ->
         JarFile(inFile).use { inJar ->
             for (entry in inJar.entries()) {
-                val inBytes = inJar.getInputStream(entry).readBytes()
-                val outBytes = transform(entry.name, inBytes)
+                konst inBytes = inJar.getInputStream(entry).readBytes()
+                konst outBytes = transform(entry.name, inBytes)
 
                 if (inBytes.size < outBytes.size) {
                     error("Size increased for ${entry.name}: was ${inBytes.size} bytes, became ${outBytes.size} bytes")
                 }
 
-                val newEntry = ZipEntry(entry.name)
+                konst newEntry = ZipEntry(entry.name)
                 if (!preserveFileTimestamps) {
                     newEntry.time = CONSTANT_TIME_FOR_ZIP_ENTRIES
                 }

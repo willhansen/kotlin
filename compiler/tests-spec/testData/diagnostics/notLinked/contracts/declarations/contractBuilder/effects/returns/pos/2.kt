@@ -20,15 +20,15 @@ fun case_1(cond1: Boolean, cond2: Boolean, cond3: Boolean) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Any?, value_2: Any?, value_3: Any?) {
-    contract { returns() implies (value_1 is String? || value_2 !is Int && value_3 !is Nothing?) }
-    if (!(value_1 is String? || value_2 !is Int && value_3 !is Nothing?)) throw Exception()
+fun case_2(konstue_1: Any?, konstue_2: Any?, konstue_3: Any?) {
+    contract { returns() implies (konstue_1 is String? || konstue_2 !is Int && konstue_3 !is Nothing?) }
+    if (!(konstue_1 is String? || konstue_2 !is Int && konstue_3 !is Nothing?)) throw Exception()
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: Any?, value_2: Any?, value_3: Any?) {
-    contract { returns() implies (value_1 == null || value_2 != null && value_3 == null) }
-    if (!(value_1 == null || value_2 != null && value_3 == null)) throw Exception()
+fun case_3(konstue_1: Any?, konstue_2: Any?, konstue_3: Any?) {
+    contract { returns() implies (konstue_1 == null || konstue_2 != null && konstue_3 == null) }
+    if (!(konstue_1 == null || konstue_2 != null && konstue_3 == null)) throw Exception()
 }
 
 // TESTCASE NUMBER: 4

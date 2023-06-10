@@ -20,15 +20,15 @@ class Test {
     protected fun protectedFoo() {}
     private fun privateFoo() {}
 
-    public val publicVal = 42
-    internal val internalVal = 42
-    protected val protectedVal = 42
-    private val privateVal = 42
+    public konst publicVal = 42
+    internal konst internalVal = 42
+    protected konst protectedVal = 42
+    private konst privateVal = 42
 
-    public val withPublicInvoke = WithPublicInvoke()
-    public val withInternalInvoke = WithInternalInvoke()
-    public val withProtectedInvoke = WithProtectedInvoke()
-    public val withPrivateInvoke = WithPrivateInvoke()
+    public konst withPublicInvoke = WithPublicInvoke()
+    public konst withInternalInvoke = WithInternalInvoke()
+    public konst withProtectedInvoke = WithProtectedInvoke()
+    public konst withPrivateInvoke = WithPrivateInvoke()
 }
 
 private fun Test.publicFoo() {}
@@ -36,10 +36,10 @@ fun Test.internalFoo() {}
 fun Test.protectedFoo() {}
 fun Test.privateFoo() {}
 
-val Test.publicVal: Int get() = 42
-val Test.internalVal: Int get() = 42
-val Test.protectedVal: Int get() = 42
-val Test.privateVal: Int get() = 42
+konst Test.publicVal: Int get() = 42
+konst Test.internalVal: Int get() = 42
+konst Test.protectedVal: Int get() = 42
+konst Test.privateVal: Int get() = 42
 
 fun Test.withPublicInvoke() {}
 fun Test.wihtInternalInvoke() {}

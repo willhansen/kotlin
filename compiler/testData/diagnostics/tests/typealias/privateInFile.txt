@@ -1,13 +1,13 @@
 package
 
-private val test1: C
-private val test1: C
-private val test1co: C.Companion
-private val test1co: C.Companion
-private val test2: TA /* = C */
-private val test2: TA /* = C */
-private val test2co: C.Companion
-private val test2co: C.Companion
+private konst test1: C
+private konst test1: C
+private konst test1co: C.Companion
+private konst test1co: C.Companion
+private konst test2: TA /* = C */
+private konst test2: TA /* = C */
+private konst test2co: C.Companion
+private konst test2co: C.Companion
 
 private final class C {
     public constructor C()

@@ -5,5 +5,5 @@ interface T {
 }
 
 class C : T {
-    <!ACCIDENTAL_OVERRIDE!>val x<!> = 1
+    <!ACCIDENTAL_OVERRIDE!>konst x<!> = 1
 }

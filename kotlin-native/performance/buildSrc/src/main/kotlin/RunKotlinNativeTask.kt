@@ -19,9 +19,9 @@ import java.io.File
 import javax.inject.Inject
 import kotlin.collections.HashMap
 
-open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
-                                                   private val executable: String,
-                                                   private val outputFileName: String
+open class RunKotlinNativeTask @Inject constructor(private konst linkTask: Task,
+                                                   private konst executable: String,
+                                                   private konst outputFileName: String
 ) : DefaultTask() {
 
     @Input
@@ -43,7 +43,7 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
     @Input
     var repeatingType = BenchmarkRepeatingType.INTERNAL
 
-    private val argumentsList = mutableListOf<String>()
+    private konst argumentsList = mutableListOf<String>()
 
     init {
         this.dependsOn += linkTask.name
@@ -59,13 +59,13 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
     }
 
     @Internal
-    val remoteHost = project.findProperty("remoteHost")?.toString()
+    konst remoteHost = project.findProperty("remoteHost")?.toString()
     @Internal
-    val remoteHostFolder = project.findProperty("remoteHostFolder")?.toString()
+    konst remoteHostFolder = project.findProperty("remoteHostFolder")?.toString()
 
     private fun execBenchmarkOnce(benchmark: String, warmupCount: Int, repeatCount: Int) : String {
-        val output = ByteArrayOutputStream()
-        val useCset = project.findProperty("useCset")?.toString()?.toBoolean() ?: false
+        konst output = ByteArrayOutputStream()
+        konst useCset = project.findProperty("useCset")?.toString()?.toBoolean() ?: false
 
         project.exec {
             when {
@@ -75,7 +75,7 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
                 }
                 remoteHost != null -> {
                     executable = "ssh"
-                    val remoteExecutable = this@RunKotlinNativeTask.executable.split("/").last()
+                    konst remoteExecutable = this@RunKotlinNativeTask.executable.split("/").last()
                     args (remoteHost, "$remoteHostFolder/$remoteExecutable")
                 }
                 else -> executable = this@RunKotlinNativeTask.executable
@@ -96,17 +96,17 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
     }
 
     private fun execBenchmarkRepeatedly(benchmark: String, warmupCount: Int, repeatCount: Int) : List<String> {
-        val logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
+        konst logger = if (verbose) Logger(LogLevel.DEBUG) else Logger()
         logger.log("Warm up iterations for benchmark $benchmark\n")
         for (i in 0.until(warmupCount)) {
             execBenchmarkOnce(benchmark, 0, 1)
         }
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
         logger.log("Running benchmark $benchmark ")
         for (i in 0.until(repeatCount)) {
             logger.log(".", usePrefix = false)
-            val benchmarkReport = JsonTreeParser.parse(execBenchmarkOnce(benchmark, 0, 1)).jsonObject
-            val modifiedBenchmarkReport = JsonObject(HashMap(benchmarkReport.content).apply {
+            konst benchmarkReport = JsonTreeParser.parse(execBenchmarkOnce(benchmark, 0, 1)).jsonObject
+            konst modifiedBenchmarkReport = JsonObject(HashMap(benchmarkReport.content).apply {
                 put("repeat", JsonLiteral(i))
                 put("warmup", JsonLiteral(warmupCount))
             })
@@ -118,7 +118,7 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
 
     @TaskAction
     fun run() {
-        val output = ByteArrayOutputStream()
+        konst output = ByteArrayOutputStream()
         remoteHost?.let {
             requireNotNull(remoteHostFolder) {"Please provide folder on remote host with -PremoteHostFolder=<folder>"}
             project.exec {
@@ -129,7 +129,7 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
         project.exec {
             if (remoteHost != null) {
                 executable = "ssh"
-                val remoteExecutable = this@RunKotlinNativeTask.executable.split("/").last()
+                konst remoteExecutable = this@RunKotlinNativeTask.executable.split("/").last()
                 args (remoteHost, "$remoteHostFolder/$remoteExecutable")
             } else {
                 executable = this@RunKotlinNativeTask.executable
@@ -141,15 +141,15 @@ open class RunKotlinNativeTask @Inject constructor(private val linkTask: Task,
             }
             standardOutput = output
         }
-        val benchmarks = output.toString().lines()
-        val filterArgs = filter.splitCommaSeparatedOption("-f")
-        val filterRegexArgs = filterRegex.splitCommaSeparatedOption("-fr")
-        val regexes = filterRegexArgs.map { it.toRegex() }
-        val benchmarksToRun = if (filterArgs.isNotEmpty() || regexes.isNotEmpty()) {
+        konst benchmarks = output.toString().lines()
+        konst filterArgs = filter.splitCommaSeparatedOption("-f")
+        konst filterRegexArgs = filterRegex.splitCommaSeparatedOption("-fr")
+        konst regexes = filterRegexArgs.map { it.toRegex() }
+        konst benchmarksToRun = if (filterArgs.isNotEmpty() || regexes.isNotEmpty()) {
             benchmarks.filter { benchmark -> benchmark in filterArgs || regexes.any { it.matches(benchmark) } }.filter { it.isNotEmpty() }
         } else benchmarks.filter { !it.isEmpty() }
 
-        val results = benchmarksToRun.flatMap { benchmark ->
+        konst results = benchmarksToRun.flatMap { benchmark ->
             when (repeatingType) {
                 BenchmarkRepeatingType.INTERNAL -> listOf(execBenchmarkOnce(benchmark, warmupCount, repeatCount))
                 BenchmarkRepeatingType.EXTERNAL -> execBenchmarkRepeatedly(benchmark, warmupCount, repeatCount)

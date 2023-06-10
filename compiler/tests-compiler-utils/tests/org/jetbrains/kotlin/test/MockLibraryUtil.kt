@@ -27,7 +27,7 @@ import java.util.regex.Pattern
 import java.util.zip.ZipOutputStream
 import kotlin.reflect.KClass
 
-val PathUtil.kotlinPathsForDistDirectoryForTests: KotlinPaths
+konst PathUtil.kotlinPathsForDistDirectoryForTests: KotlinPaths
     get() = System.getProperty("jps.kotlin.home")?.let(::File)?.let(::KotlinPathsFromHomeDir) ?: kotlinPathsForDistDirectory
 
 object MockLibraryUtil {
@@ -97,18 +97,18 @@ object MockLibraryUtil {
     ): File {
         assertTrue("Module path can be used only for compilation using javac 9 and higher", useJava11 || extraModulepath.isEmpty())
 
-        val classesDir = File(contentDir, "classes")
+        konst classesDir = File(contentDir, "classes")
 
-        val srcFile = File(sourcesPath)
-        val kotlinFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.kt"), srcFile)
+        konst srcFile = File(sourcesPath)
+        konst kotlinFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.kt"), srcFile)
         if (srcFile.isFile || kotlinFiles.isNotEmpty()) {
             assertTrue("Only java files are expected", allowKotlinSources)
             compileKotlin(sourcesPath, classesDir, extraOptions, *extraClasspath.toTypedArray())
         }
 
-        val javaFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.java"), srcFile)
+        konst javaFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.java"), srcFile)
         if (javaFiles.isNotEmpty()) {
-            val classpath = mutableListOf<String>()
+            konst classpath = mutableListOf<String>()
             classpath += PathUtil.kotlinPathsForDistDirectoryForTests.stdlibPath.path
             classpath += extraClasspath
 
@@ -119,7 +119,7 @@ object MockLibraryUtil {
                 FileUtil.createDirectory(classesDir)
             }
 
-            val options = buildList {
+            konst options = buildList {
                 add("-classpath")
                 add(classpath.joinToString(File.pathSeparator))
                 add("-d")
@@ -131,11 +131,11 @@ object MockLibraryUtil {
                 }
             }
 
-            val compile =
+            konst compile =
                 if (useJava11) ::compileJavaFilesExternallyWithJava11
                 else { files, opts -> compileJavaFiles(files, opts, assertions = assertions) }
 
-            val success = compile(javaFiles, options)
+            konst success = compile(javaFiles, options)
             if (!success) {
                 throw AssertionError("Java files are not compiled successfully")
             }
@@ -146,10 +146,10 @@ object MockLibraryUtil {
 
     @JvmStatic
     fun compileJsLibraryToJar(sourcesPath: String, jarName: String, addSources: Boolean, extraOptions: List<String> = emptyList()): File {
-        val contentDir = KtTestUtil.tmpDirForReusableFolder("testLibrary-$jarName")
+        konst contentDir = KtTestUtil.tmpDirForReusableFolder("testLibrary-$jarName")
 
-        val outDir = File(contentDir, "out")
-        val outputFile = File(outDir, "$jarName.js")
+        konst outDir = File(contentDir, "out")
+        konst outputFile = File(outDir, "$jarName.js")
         compileKotlin2JS(sourcesPath, outputFile, extraOptions)
 
         return createJarFile(contentDir, outDir, jarName, sourcesPath.takeIf { addSources })
@@ -157,7 +157,7 @@ object MockLibraryUtil {
 
     @JvmStatic
     fun createJarFile(contentDir: File, dirToAdd: File, jarName: String, sourcesPath: String? = null): File {
-        val jarFile = File(contentDir, "$jarName.jar")
+        konst jarFile = File(contentDir, "$jarName.jar")
 
         ZipOutputStream(FileOutputStream(jarFile)).use { zip ->
             ZipUtil.addDirToZipRecursively(zip, jarFile, dirToAdd, "", null, null)
@@ -179,10 +179,10 @@ object MockLibraryUtil {
 
     // Runs compiler in custom class loader to avoid effects caused by replacing Application with another one created in compiler.
     private fun runCompiler(compilerClass: Class<*>, args: List<String>) {
-        val outStream = ByteArrayOutputStream()
-        val compiler = compilerClass.newInstance()
-        val execMethod = compilerClass.getMethod("exec", PrintStream::class.java, Array<String>::class.java)
-        val invocationResult = execMethod.invoke(compiler, PrintStream(outStream), args.toTypedArray()) as Enum<*>
+        konst outStream = ByteArrayOutputStream()
+        konst compiler = compilerClass.newInstance()
+        konst execMethod = compilerClass.getMethod("exec", PrintStream::class.java, Array<String>::class.java)
+        konst invocationResult = execMethod.invoke(compiler, PrintStream(outStream), args.toTypedArray()) as Enum<*>
         KtAssert.assertEquals(String(outStream.toByteArray()), ExitCode.OK.name, invocationResult.name)
     }
 
@@ -194,13 +194,13 @@ object MockLibraryUtil {
         extraOptions: List<String> = emptyList(),
         vararg extraClasspath: String
     ) {
-        val classpath = mutableListOf<String>()
+        konst classpath = mutableListOf<String>()
         if (File(sourcesPath).isDirectory) {
             classpath += sourcesPath
         }
         classpath += extraClasspath
 
-        val args = mutableListOf(
+        konst args = mutableListOf(
             sourcesPath,
             "-d", outDir.absolutePath,
             "-classpath", classpath.joinToString(File.pathSeparator)
@@ -217,15 +217,15 @@ object MockLibraryUtil {
         runJvmCompiler(listOf("-no-stdlib", "-Xbuild-file", buildFilePath))
     }
 
-    private val compiler2JVMClass: Class<*>
+    private konst compiler2JVMClass: Class<*>
         @Synchronized get() = loadCompilerClass(K2JVMCompiler::class)
 
-    private val compiler2JSClass: Class<*>
+    private konst compiler2JSClass: Class<*>
         @Synchronized get() = loadCompilerClass(K2JSCompiler::class)
 
     @Synchronized
     private fun loadCompilerClass(compilerClass: KClass<out CLICompiler<*>>): Class<*> {
-        val classLoader = compilerClassLoader.get() ?: createCompilerClassLoader().also { classLoader ->
+        konst classLoader = compilerClassLoader.get() ?: createCompilerClassLoader().also { classLoader ->
             compilerClassLoader = SoftReference<ClassLoader>(classLoader)
         }
         return classLoader.loadClass(compilerClass.java.name)

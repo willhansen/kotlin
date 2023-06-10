@@ -19,29 +19,29 @@ import org.w3c.workers.*
 public external open class Notification(title: String, options: NotificationOptions = definedExternally) : EventTarget, JsAny {
     var onclick: ((MouseEvent) -> JsAny?)?
     var onerror: ((Event) -> JsAny?)?
-    open val title: String
-    open val dir: NotificationDirection
-    open val lang: String
-    open val body: String
-    open val tag: String
-    open val image: String
-    open val icon: String
-    open val badge: String
-    open val sound: String
-    open val vibrate: JsArray<out JsNumber>
-    open val timestamp: JsNumber
-    open val renotify: Boolean
-    open val silent: Boolean
-    open val noscreen: Boolean
-    open val requireInteraction: Boolean
-    open val sticky: Boolean
-    open val data: JsAny?
-    open val actions: JsArray<out NotificationAction>
+    open konst title: String
+    open konst dir: NotificationDirection
+    open konst lang: String
+    open konst body: String
+    open konst tag: String
+    open konst image: String
+    open konst icon: String
+    open konst badge: String
+    open konst sound: String
+    open konst vibrate: JsArray<out JsNumber>
+    open konst timestamp: JsNumber
+    open konst renotify: Boolean
+    open konst silent: Boolean
+    open konst noscreen: Boolean
+    open konst requireInteraction: Boolean
+    open konst sticky: Boolean
+    open konst data: JsAny?
+    open konst actions: JsArray<out NotificationAction>
     fun close()
 
     companion object {
-        val permission: NotificationPermission
-        val maxActions: Int
+        konst permission: NotificationPermission
+        konst maxActions: Int
         fun requestPermission(deprecatedCallback: (NotificationPermission) -> Unit = definedExternally): Promise<NotificationPermission>
     }
 }
@@ -49,55 +49,55 @@ public external open class Notification(title: String, options: NotificationOpti
 public external interface NotificationOptions : JsAny {
     var dir: NotificationDirection? /* = NotificationDirection.AUTO */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lang: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var body: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var tag: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var image: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var icon: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var badge: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var sound: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var vibrate: JsAny?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var timestamp: JsNumber?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var renotify: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var silent: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var noscreen: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var requireInteraction: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var sticky: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var data: JsAny? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var actions: JsArray<NotificationAction>? /* = arrayOf() */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -108,7 +108,7 @@ public external interface NotificationAction : JsAny {
     var title: String?
     var icon: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -117,7 +117,7 @@ public fun NotificationAction(action: String?, title: String?, icon: String? = u
 public external interface GetNotificationOptions : JsAny {
     var tag: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -127,14 +127,14 @@ public fun GetNotificationOptions(tag: String? = ""): GetNotificationOptions { j
  * Exposes the JavaScript [NotificationEvent](https://developer.mozilla.org/en/docs/Web/API/NotificationEvent) to Kotlin
  */
 public external open class NotificationEvent(type: String, eventInitDict: NotificationEventInit) : ExtendableEvent, JsAny {
-    open val notification: Notification
-    open val action: String
+    open konst notification: Notification
+    open konst action: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -142,7 +142,7 @@ public external interface NotificationEventInit : ExtendableEventInit, JsAny {
     var notification: Notification?
     var action: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -155,11 +155,11 @@ public external interface NotificationPermission : JsAny {
     companion object
 }
 
-public inline val NotificationPermission.Companion.DEFAULT: NotificationPermission get() = "default".toJsString().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.DEFAULT: NotificationPermission get() = "default".toJsString().unsafeCast<NotificationPermission>()
 
-public inline val NotificationPermission.Companion.DENIED: NotificationPermission get() = "denied".toJsString().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.DENIED: NotificationPermission get() = "denied".toJsString().unsafeCast<NotificationPermission>()
 
-public inline val NotificationPermission.Companion.GRANTED: NotificationPermission get() = "granted".toJsString().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.GRANTED: NotificationPermission get() = "granted".toJsString().unsafeCast<NotificationPermission>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -168,8 +168,8 @@ public external interface NotificationDirection : JsAny {
     companion object
 }
 
-public inline val NotificationDirection.Companion.AUTO: NotificationDirection get() = "auto".toJsString().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.AUTO: NotificationDirection get() = "auto".toJsString().unsafeCast<NotificationDirection>()
 
-public inline val NotificationDirection.Companion.LTR: NotificationDirection get() = "ltr".toJsString().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.LTR: NotificationDirection get() = "ltr".toJsString().unsafeCast<NotificationDirection>()
 
-public inline val NotificationDirection.Companion.RTL: NotificationDirection get() = "rtl".toJsString().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.RTL: NotificationDirection get() = "rtl".toJsString().unsafeCast<NotificationDirection>()

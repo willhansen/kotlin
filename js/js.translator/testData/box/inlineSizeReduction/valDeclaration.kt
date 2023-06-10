@@ -11,7 +11,7 @@ internal inline fun sum(x: Int, y: Int): Int {
 }
 
 internal fun test(x: Int, y: Int): Int {
-    val sum = sum(x, y)
+    konst sum = sum(x, y)
     return sum
 }
 

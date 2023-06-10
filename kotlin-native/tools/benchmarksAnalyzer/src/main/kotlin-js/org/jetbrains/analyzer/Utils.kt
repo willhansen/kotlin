@@ -19,16 +19,16 @@ actual fun Double.format(decimalNumber: Int): String =
 actual fun writeToFile(fileName: String, text: String) {
     if (fileName != "html")
         error("Writing to local file for JS isn't supported")
-    val bodyPart = text.substringAfter("<body>").substringBefore("</body>")
+    konst bodyPart = text.substringAfter("<body>").substringBefore("</body>")
     document.body?.innerHTML = bodyPart
 }
 
-actual fun assert(value: Boolean, lazyMessage: () -> Any) {
-    if (!value) error(lazyMessage)
+actual fun assert(konstue: Boolean, lazyMessage: () -> Any) {
+    if (!konstue) error(lazyMessage)
 }
 
 actual fun sendGetRequest(url: String, user: String?, password: String?, followLocation: Boolean) : String {
-    val request = XMLHttpRequest()
+    konst request = XMLHttpRequest()
 
     request.open("GET", url, false, user, password)
     request.send()

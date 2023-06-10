@@ -15,7 +15,7 @@ fun KpmTestCase.project(
     applyDefaults: Boolean = true,
     configure: TestKpmModuleContainer.() -> Unit = { }
 ): TestKpmModuleContainer {
-    val project = projects.getOrPut(name) { TestKpmModuleContainer(this, name) }
+    konst project = projects.getOrPut(name) { TestKpmModuleContainer(this, name) }
     if (applyDefaults) project.applyDefaults()
     project.configure()
     return project

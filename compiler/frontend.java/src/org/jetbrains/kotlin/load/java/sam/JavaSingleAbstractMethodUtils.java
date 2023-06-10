@@ -72,13 +72,13 @@ public class JavaSingleAbstractMethodUtils {
             @Override
             public void initialize(
                     @NotNull List<TypeParameterDescriptor> typeParameters,
-                    @NotNull List<ValueParameterDescriptor> valueParameters,
+                    @NotNull List<ValueParameterDescriptor> konstueParameters,
                     @NotNull KotlinType returnType
             ) {
                 result.initialize(
                         null, original.getDispatchReceiverParameter(), CollectionsKt.emptyList(),
                         typeParameters,
-                        valueParameters,
+                        konstueParameters,
                         returnType,
                         Modality.FINAL,
                         original.getVisibility()
@@ -99,10 +99,10 @@ public class JavaSingleAbstractMethodUtils {
             @Override
             public void initialize(
                     @NotNull List<TypeParameterDescriptor> typeParameters,
-                    @NotNull List<ValueParameterDescriptor> valueParameters,
+                    @NotNull List<ValueParameterDescriptor> konstueParameters,
                     @NotNull KotlinType returnType
             ) {
-                result.initialize(valueParameters, original.getVisibility());
+                result.initialize(konstueParameters, original.getVisibility());
                 result.setReturnType(returnType);
             }
         }, samResolver, samConversionOracle, allowNonSpreadArraysForVarargAfterSam);
@@ -133,10 +133,10 @@ public class JavaSingleAbstractMethodUtils {
                                         ", substitutor = " + substitutor;
 
 
-        List<ValueParameterDescriptor> valueParameters =
+        List<ValueParameterDescriptor> konstueParameters =
                 createValueParametersForSamAdapter(original, adapter, substitutor, samResolver, samConversionOracle, allowNonSpreadArraysForVarargAfterSam);
 
-        initializer.initialize(typeParameters.getDescriptors(), valueParameters, returnType);
+        initializer.initialize(typeParameters.getDescriptors(), konstueParameters, returnType);
 
         return adapter;
     }
@@ -150,7 +150,7 @@ public class JavaSingleAbstractMethodUtils {
             boolean allowNonSpreadArraysForVarargAfterSam
     ) {
         List<ValueParameterDescriptor> originalValueParameters = original.getValueParameters();
-        List<ValueParameterDescriptor> valueParameters = new ArrayList<>(originalValueParameters.size());
+        List<ValueParameterDescriptor> konstueParameters = new ArrayList<>(originalValueParameters.size());
         for (ValueParameterDescriptor originalParam : originalValueParameters) {
             KotlinType originalType = originalParam.getType();
             KotlinType functionType = SamConversionResolverImplKt.getFunctionTypeForSamType(originalType, samResolver, samConversionOracle);
@@ -175,15 +175,15 @@ public class JavaSingleAbstractMethodUtils {
                     /* isNoinline = */ false,
                     varargElementType, SourceElement.NO_SOURCE
             );
-            valueParameters.add(newParam);
+            konstueParameters.add(newParam);
         }
-        return valueParameters;
+        return konstueParameters;
     }
 
     private static abstract class FunctionInitializer {
         public abstract void initialize(
                 @NotNull List<TypeParameterDescriptor> typeParameters,
-                @NotNull List<ValueParameterDescriptor> valueParameters,
+                @NotNull List<ValueParameterDescriptor> konstueParameters,
                 @NotNull KotlinType returnType
         );
     }

@@ -6,7 +6,7 @@ package p
 
 public class A
 public class M1 {
-    public val a: A = A()
+    public konst a: A = A()
 }
 
 // MODULE: m2

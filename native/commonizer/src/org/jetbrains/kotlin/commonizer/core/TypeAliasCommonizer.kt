@@ -10,30 +10,30 @@ import org.jetbrains.kotlin.commonizer.cir.*
 import org.jetbrains.kotlin.commonizer.mergedtree.CirKnownClassifiers
 
 class TypeAliasCommonizer(
-    private val classifiers: CirKnownClassifiers,
-    private val settings: CommonizerSettings,
+    private konst classifiers: CirKnownClassifiers,
+    private konst settings: CommonizerSettings,
     typeCommonizer: TypeCommonizer,
 ) : NullableSingleInvocationCommonizer<CirTypeAlias> {
 
-    private val typeCommonizer = typeCommonizer.withContext {
+    private konst typeCommonizer = typeCommonizer.withContext {
         withBackwardsTypeAliasSubstitutionEnabled(false)
     }
 
-    override fun invoke(values: List<CirTypeAlias>): CirTypeAlias? {
-        if (values.isEmpty()) return null
+    override fun invoke(konstues: List<CirTypeAlias>): CirTypeAlias? {
+        if (konstues.isEmpty()) return null
 
-        val name = values.map { it.name }.distinct().singleOrNull() ?: return null
+        konst name = konstues.map { it.name }.distinct().singleOrNull() ?: return null
 
-        val typeParameters = TypeParameterListCommonizer(typeCommonizer).commonize(values.map { it.typeParameters }) ?: return null
+        konst typeParameters = TypeParameterListCommonizer(typeCommonizer).commonize(konstues.map { it.typeParameters }) ?: return null
 
-        val underlyingType = typeCommonizer.invoke(values.map { it.underlyingType }) as? CirClassOrTypeAliasType ?: return null
+        konst underlyingType = typeCommonizer.invoke(konstues.map { it.underlyingType }) as? CirClassOrTypeAliasType ?: return null
 
-        val visibility = VisibilityCommonizer.lowering().commonize(values) ?: return null
+        konst visibility = VisibilityCommonizer.lowering().commonize(konstues) ?: return null
 
-        val unsafeNumberAnnotation = createUnsafeNumberAnnotationIfNecessary(
+        konst unsafeNumberAnnotation = createUnsafeNumberAnnotationIfNecessary(
             classifiers.classifierIndices.targets, settings,
-            inputDeclarations = values,
-            inputTypes = values.map { it.underlyingType },
+            inputDeclarations = konstues,
+            inputTypes = konstues.map { it.underlyingType },
             commonizedType = underlyingType,
         )
 

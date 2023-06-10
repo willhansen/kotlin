@@ -1,7 +1,7 @@
 package
 
-public val testProperty1: @A AInt /* = @A @A kotlin.Int */ = 0
-public val testProperty2: @A AI /* = @A @A kotlin.Int */ = 0
+public konst testProperty1: @A AInt /* = @A @A kotlin.Int */ = 0
+public konst testProperty2: @A AI /* = @A @A kotlin.Int */ = 0
 public fun testFunction1(/*0*/ x: @A AInt /* = @A @A kotlin.Int */): @A AInt /* = @A @A kotlin.Int */
 public fun testFunction2(/*0*/ x: @A AI /* = @A @A kotlin.Int */): @A AI /* = @A @A kotlin.Int */
 

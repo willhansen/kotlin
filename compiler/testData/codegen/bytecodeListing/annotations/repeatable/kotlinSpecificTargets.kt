@@ -10,7 +10,7 @@ package test
 
 @Repeatable
 @Target(AnnotationTarget.FILE, AnnotationTarget.TYPEALIAS)
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 @A("typealias1")
 @A("typealias2")

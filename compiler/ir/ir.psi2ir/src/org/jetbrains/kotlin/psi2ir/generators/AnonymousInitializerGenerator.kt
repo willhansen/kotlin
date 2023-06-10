@@ -37,10 +37,10 @@ internal class AnonymousInitializerGenerator(
             IrDeclarationOrigin.DEFINED, irClass.descriptor
         ).buildWithScope { irAnonymousInitializer ->
             irAnonymousInitializer.parent = irClass
-            val bodyGenerator = createBodyGenerator(irAnonymousInitializer.symbol)
-            val statementGenerator = bodyGenerator.createStatementGenerator()
-            val ktBody = ktAnonymousInitializer.body!!
-            val irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
+            konst bodyGenerator = createBodyGenerator(irAnonymousInitializer.symbol)
+            konst statementGenerator = bodyGenerator.createStatementGenerator()
+            konst ktBody = ktAnonymousInitializer.body!!
+            konst irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
             if (context.configuration.generateBodies) {
                 if (ktBody is KtBlockExpression) {
                     statementGenerator.generateStatements(ktBody.statements, irBlockBody)

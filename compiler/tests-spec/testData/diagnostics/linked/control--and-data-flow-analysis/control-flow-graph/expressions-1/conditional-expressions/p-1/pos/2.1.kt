@@ -15,11 +15,11 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
+    konst b = true
 
     if (!b) { 123 } //statement
 
-    val expression: Any = if (!b) {  } else kotlin.Unit
+    konst expression: Any = if (!b) {  } else kotlin.Unit
 
     expression checkType { check<Any>() }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>expression<!>
@@ -31,10 +31,10 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val a = 1
-    val b = 2
+    konst a = 1
+    konst b = 2
     if (a > b) { a } //statement
-    val expression: Any = if (a > b) { a } else { }
+    konst expression: Any = if (a > b) { a } else { }
 
     expression checkType { check<Any>() }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>expression<!>

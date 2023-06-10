@@ -4,7 +4,7 @@ operator fun HashMap<String, Int?>.set(index: String, elem: Int?) {
 }
 
 fun box(): String {
-    val s = HashMap<String, Int?>()
+    konst s = HashMap<String, Int?>()
     s["239"] = 239
     return if (s["239"] == 239) "OK" else "Fail"
 }

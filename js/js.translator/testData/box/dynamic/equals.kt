@@ -12,13 +12,13 @@ object f {
 }
 
 fun box(): String {
-    val a: dynamic = 12
+    konst a: dynamic = 12
     var b: dynamic = 33.4
     var c: dynamic = "text"
-    val d: dynamic = true
+    konst d: dynamic = true
 
-    val v: dynamic = 42
-    val tt: dynamic = "object t {}"
+    konst v: dynamic = 42
+    konst tt: dynamic = "object t {}"
 
     testFalse { a == 34 }
     testFalse { a == "34" }
@@ -40,7 +40,7 @@ fun box(): String {
     testTrue { a.equals(12) }
     testFalse { a.equals("12") }
 
-    val ff: dynamic = f
+    konst ff: dynamic = f
     testFalse { ff.equals(v) }
     assertEquals(1, f.equalsCalled)
 

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 import org.jetbrains.kotlin.name.NameUtils
 
-internal val removeDuplicatedInlinedLocalClasses = makeIrFilePhase(
+internal konst removeDuplicatedInlinedLocalClasses = makeIrFilePhase(
     { context ->
         if (!context.irInlinerIsEnabled()) return@makeIrFilePhase FileLoweringPass.Empty
         RemoveDuplicatedInlinedLocalClassesLowering(context)
@@ -48,9 +48,9 @@ data class Data(
 // This lambda will not exist after inline, so we copy declaration into new temporary inline call `singleArgumentInlineFunction`.
 // 3. MUST NOT BE created at all because will be created at callee site.
 // This lowering drops declarations that correspond to second and third type.
-class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext) : IrElementTransformer<Data>, FileLoweringPass {
-    private val visited = mutableSetOf<IrElement>()
-    private val capturedConstructors = context.mapping.capturedConstructors
+class RemoveDuplicatedInlinedLocalClassesLowering(konst context: JvmBackendContext) : IrElementTransformer<Data>, FileLoweringPass {
+    private konst visited = mutableSetOf<IrElement>()
+    private konst capturedConstructors = context.mapping.capturedConstructors
 
     private fun removeUselessDeclarationsFromCapturedConstructors(irClass: IrClass, data: Data) {
         irClass.parents.first { it !is IrFunction || it.origin != JvmLoweredDeclarationOrigin.INLINE_LAMBDA }
@@ -68,7 +68,7 @@ class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext
 
     override fun visitBlock(expression: IrBlock, data: Data): IrExpression {
         if (expression is IrInlinedFunctionBlock) {
-            val newData = data.copy(insideInlineBlock = true)
+            konst newData = data.copy(insideInlineBlock = true)
             expression.getNonDefaultAdditionalStatementsFromInlinedBlock()
                 .forEach { it.transform(this, newData.copy(classDeclaredOnCallSiteOrIsDefaultLambda = false)) }
             expression.getDefaultAdditionalStatementsFromInlinedBlock()
@@ -78,8 +78,8 @@ class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext
             return expression
         }
 
-        val anonymousClass = expression.statements.firstOrNull()
-        val result = super.visitBlock(expression, data)
+        konst anonymousClass = expression.statements.firstOrNull()
+        konst result = super.visitBlock(expression, data)
         if (anonymousClass is IrClass && result is IrBlock && result.statements.firstOrNull() is IrComposite) {
             reuseConstructorFromOriginalClass(result, anonymousClass, data)
         }
@@ -87,14 +87,14 @@ class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext
     }
 
     private fun reuseConstructorFromOriginalClass(block: IrBlock, anonymousClass: IrClass, data: Data) {
-        val lastStatement = block.statements.last()
-        val constructorCall = (lastStatement as? IrConstructorCall)
+        konst lastStatement = block.statements.last()
+        konst constructorCall = (lastStatement as? IrConstructorCall)
             ?: (lastStatement as IrBlock).statements.last() as IrConstructorCall
-        val constructorParent = constructorCall.symbol.owner.parentAsClass
+        konst constructorParent = constructorCall.symbol.owner.parentAsClass
 
         // It is possible that inlined class will be lowered before original. In that case we must launch `LocalDeclarationsLowering` and
         // lower original declaration to get correct captured constructor.
-        val container = anonymousClass.attributeOwnerId.extractRelatedDeclaration()?.parents
+        konst container = anonymousClass.attributeOwnerId.extractRelatedDeclaration()?.parents
             ?.filterIsInstance<IrFunction>()?.firstOrNull()?.takeIf { it.body != null }
         container?.let {
             LocalDeclarationsLowering(
@@ -108,12 +108,12 @@ class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext
             RemoveDuplicatedInlinedLocalClassesLowering(context).removeUselessDeclarationsFromCapturedConstructors(it.parentAsClass, data)
         }
 
-        val originalConstructor = capturedConstructors.keys.single {
+        konst originalConstructor = capturedConstructors.keys.single {
             it.parentAsClass.attributeOwnerId == constructorParent.attributeOwnerId && it.parentAsClass != constructorParent
         }
 
-        val loweredConstructor = capturedConstructors[originalConstructor]!!
-        val newConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
+        konst loweredConstructor = capturedConstructors[originalConstructor]!!
+        konst newConstructorCall = IrConstructorCallImpl.fromSymbolOwner(
             constructorCall.startOffset, constructorCall.endOffset,
             loweredConstructor.parentAsClass.defaultType, loweredConstructor.symbol, constructorCall.origin
         )
@@ -134,9 +134,9 @@ class RemoveDuplicatedInlinedLocalClassesLowering(val context: JvmBackendContext
             return super.visitClass(declaration, data)
         }
 
-        val constructor = declaration.primaryConstructor!!
+        konst constructor = declaration.primaryConstructor!!
         capturedConstructors[constructor] = null // this action will do actual `remove`
-        capturedConstructors.keys.map { key -> // for each value in map
+        capturedConstructors.keys.map { key -> // for each konstue in map
             capturedConstructors[key]?.let {
                 if (it == constructor) {
                     capturedConstructors[key] = null

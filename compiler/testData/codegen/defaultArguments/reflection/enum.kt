@@ -1,4 +1,4 @@
-enum class Foo(val a: Int = 1) {
+enum class Foo(konst a: Int = 1) {
     A()
 }
 

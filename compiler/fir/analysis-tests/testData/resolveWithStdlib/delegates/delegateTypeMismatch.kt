@@ -7,7 +7,7 @@ interface ClassifierNamePolicy {
 
 interface KotlinType
 
-class A(val isLocked: Boolean) {
+class A(konst isLocked: Boolean) {
     private fun <T> property(initialValue: T): ReadWriteProperty<A, T> {
         return Delegates.vetoable(initialValue) { _, _, _ ->
             if (isLocked) {

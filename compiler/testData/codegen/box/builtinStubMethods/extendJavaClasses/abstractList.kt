@@ -4,12 +4,12 @@ import java.util.AbstractList
 
 class A : AbstractList<String>() {
     override fun get(index: Int): String = ""
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
 }
 
 fun box(): String {
-    val a = A()
-    val b = A()
+    konst a = A()
+    konst b = A()
 
     a.addAll(b)
     a.addAll(0, b)

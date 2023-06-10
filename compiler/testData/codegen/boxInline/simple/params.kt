@@ -18,22 +18,22 @@ class Inline() {
 // FILE: 2.kt
 
 fun test1(): Int {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     return inlineX.foo1Int({ z: Int -> z}, 25)
 }
 
 fun test2(): Double {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     return inlineX.foo1Double(25.0, { z: Double -> z})
 }
 
 fun test3(): Double {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     return inlineX.foo2Param(15.0, { z1: Int, z2: Double -> z1 + z2}, 10)
 }
 
 fun test3WithCaptured(): Double {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     var c = 11.0;
     return inlineX.foo2Param(15.0, { z1: Int, z2: Double -> z1 + z2 + c}, 10)
 }

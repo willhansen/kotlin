@@ -1,1 +1,1 @@
-val prop ge<caret>t() = 42
+konst prop ge<caret>t() = 42

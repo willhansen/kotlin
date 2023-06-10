@@ -19,11 +19,11 @@ abstract class FirAbstractStarImportingScope(
     session: FirSession,
     scopeSession: ScopeSession,
     lookupInFir: Boolean,
-    val excludedImportNames: Set<FqName>
+    konst excludedImportNames: Set<FqName>
 ) : FirAbstractImportingScope(session, scopeSession, lookupInFir) {
 
     // TODO try to hide this
-    abstract val starImports: List<FirResolvedImport>
+    abstract konst starImports: List<FirResolvedImport>
 
     override fun isExcluded(import: FirResolvedImport, name: Name): Boolean {
         if (excludedImportNames.isNotEmpty()) {
@@ -32,7 +32,7 @@ abstract class FirAbstractStarImportingScope(
         return false
     }
 
-    private val absentClassifierNames = mutableSetOf<Name>()
+    private konst absentClassifierNames = mutableSetOf<Name>()
 
     override fun processClassifiersByNameWithSubstitution(name: Name, processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit) {
         if ((!name.isSpecial && name.identifier.isEmpty()) || starImports.isEmpty() || name in absentClassifierNames) {

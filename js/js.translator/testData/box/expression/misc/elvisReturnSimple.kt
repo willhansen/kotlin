@@ -2,18 +2,18 @@
 /*
  * Issue: KT-4159 Kotlin to JS compiler crashes on code with ?: return
  *
- * Expression like "val s1 : String = s ?: return null" causes compiler to crash
+ * Expression like "konst s1 : String = s ?: return null" causes compiler to crash
  */
 
 package foo
 
 fun stringLen(s : String?) : Int {
-    val s1 : String = s ?: return 0
+    konst s1 : String = s ?: return 0
     return s1.length
 }
 
 fun stringReturnInLeftLen(s : String?) : Int {
-    val s1 = (if (s != null) { return s.length } else { null }) ?: return 0
+    konst s1 = (if (s != null) { return s.length } else { null }) ?: return 0
 }
 
 fun box(): String {

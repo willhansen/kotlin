@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     fun member() {}
 }
 
@@ -21,5 +21,5 @@ fun test(f: Foo?) {
 // 0 INVOKESTATIC Foo\$Erased.box
 // 2 INVOKEVIRTUAL Foo.unbox
 
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

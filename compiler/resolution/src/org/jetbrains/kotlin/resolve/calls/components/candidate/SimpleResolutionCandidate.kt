@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.types.TypeSubstitutor
  * Also by convention we suppose that baseSystem has no contradiction
  */
 open class SimpleResolutionCandidate(
-    override val callComponents: KotlinCallComponents,
-    override val resolutionCallbacks: KotlinResolutionCallbacks,
-    override val scopeTower: ImplicitScopeTower,
-    override val baseSystem: ConstraintStorage,
-    override val resolvedCall: MutableResolvedCallAtom,
-    override val knownTypeParametersResultingSubstitutor: TypeSubstitutor? = null,
+    override konst callComponents: KotlinCallComponents,
+    override konst resolutionCallbacks: KotlinResolutionCallbacks,
+    override konst scopeTower: ImplicitScopeTower,
+    override konst baseSystem: ConstraintStorage,
+    override konst resolvedCall: MutableResolvedCallAtom,
+    override konst knownTypeParametersResultingSubstitutor: TypeSubstitutor? = null,
 ) : ResolutionCandidate() {
-    override val variableCandidateIfInvoke: ResolutionCandidate?
+    override konst variableCandidateIfInvoke: ResolutionCandidate?
         get() = callComponents.statelessCallbacks.getVariableCandidateIfInvoke(resolvedCall.atom)
 
     override fun getSubResolvedAtoms(): List<ResolvedAtom> = subResolvedAtoms

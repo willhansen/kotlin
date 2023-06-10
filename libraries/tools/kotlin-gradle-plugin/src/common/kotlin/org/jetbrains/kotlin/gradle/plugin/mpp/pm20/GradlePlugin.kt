@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.gradle.utils.checkGradleCompatibility
 import javax.inject.Inject
 
 abstract class KotlinPm20GradlePlugin @Inject constructor(
-    @Inject private val softwareComponentFactory: SoftwareComponentFactory,
-    @Inject private val toolingModelBuilderRegistry: ToolingModelBuilderRegistry
+    @Inject private konst softwareComponentFactory: SoftwareComponentFactory,
+    @Inject private konst toolingModelBuilderRegistry: ToolingModelBuilderRegistry
 ) : Plugin<Project> {
     override fun apply(project: Project) {
         checkGradleCompatibility("the Kotlin Multiplatform plugin", GradleVersion.version("6.1"))
@@ -53,20 +53,20 @@ abstract class KotlinPm20GradlePlugin @Inject constructor(
     }
 
     private fun setupPublicationForModule(module: GradleKpmModule) {
-        val project = module.project
+        konst project = module.project
 
-        val metadataElements = project.configurations.getByName(metadataElementsConfigurationName(module))
-        val sourceElements = project.configurations.getByName(sourceElementsConfigurationName(module))
+        konst metadataElements = project.configurations.getByName(metadataElementsConfigurationName(module))
+        konst sourceElements = project.configurations.getByName(sourceElementsConfigurationName(module))
 
-        val componentName = rootPublicationComponentName(module)
-        val rootSoftwareComponent = softwareComponentFactory.adhoc(componentName).also {
+        konst componentName = rootPublicationComponentName(module)
+        konst rootSoftwareComponent = softwareComponentFactory.adhoc(componentName).also {
             project.components.add(it)
             it.addVariantsFromConfiguration(metadataElements) { }
             it.addVariantsFromConfiguration(sourceElements) { }
         }
 
         module.ifMadePublic {
-            val metadataDependencyConfiguration = resolvableMetadataConfiguration(module)
+            konst metadataDependencyConfiguration = resolvableMetadataConfiguration(module)
             project.pluginManager.withPlugin("maven-publish") {
                 project.extensions.getByType(PublishingExtension::class.java).publications.create(
                     componentName,
@@ -105,15 +105,15 @@ fun rootPublicationComponentName(module: GradleKpmModule) =
 open class KotlinPm20ProjectExtension(project: Project) : KotlinProjectExtension(project) {
     override var sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
         get() = super.sourceSets
-        set(value) {
-            super.sourceSets = value
+        set(konstue) {
+            super.sourceSets = konstue
         }
 
-    internal val kpmModelContainer = GradleKpmDefaultProjectModelContainer.create(project)
+    internal konst kpmModelContainer = GradleKpmDefaultProjectModelContainer.create(project)
 
-    internal val ideaKpmProjectModelBuilder by lazy { IdeaKpmProjectModelBuilder.default(this) }
+    internal konst ideaKpmProjectModelBuilder by lazy { IdeaKpmProjectModelBuilder.default(this) }
 
-    val modules: NamedDomainObjectContainer<GradleKpmModule>
+    konst modules: NamedDomainObjectContainer<GradleKpmModule>
         get() = kpmModelContainer.modules
 
     @Suppress("unused") // DSL function
@@ -122,10 +122,10 @@ open class KotlinPm20ProjectExtension(project: Project) : KotlinProjectExtension
         test(configure)
     }
 
-    val main: GradleKpmModule
+    konst main: GradleKpmModule
         get() = modules.getByName(GradleKpmModule.MAIN_MODULE_NAME)
 
-    val test: GradleKpmModule
+    konst test: GradleKpmModule
         get() = modules.getByName(GradleKpmModule.TEST_MODULE_NAME)
 
     fun main(configure: GradleKpmModule.() -> Unit = { }) = main.apply(configure)
@@ -136,21 +136,21 @@ open class KotlinPm20ProjectExtension(project: Project) : KotlinProjectExtension
     internal fun isAllowCommonizerForIde(@Suppress("UNUSED_PARAMETER") project: Project): Boolean = false
 }
 
-val GradleKpmModule.jvm: GradleKpmJvmVariant
+konst GradleKpmModule.jvm: GradleKpmJvmVariant
     get() = fragments.maybeCreate("jvm", GradleKpmJvmVariant::class.java)
 
 fun GradleKpmModule.jvm(configure: GradleKpmJvmVariant.() -> Unit): GradleKpmJvmVariant = jvm.apply(configure)
 
 fun KotlinPm20ProjectExtension.jvm(configure: KotlinFragmentSlice<GradleKpmJvmVariant>.() -> Unit) {
-    val getOrCreateVariant: GradleKpmModule.() -> GradleKpmJvmVariant = { jvm }
+    konst getOrCreateVariant: GradleKpmModule.() -> GradleKpmJvmVariant = { jvm }
     mainAndTest { getOrCreateVariant(this) }
-    val slice = KotlinFragmentSlice(this, getOrCreateVariant)
+    konst slice = KotlinFragmentSlice(this, getOrCreateVariant)
     configure(slice)
 }
 
 open class KotlinFragmentSlice<T : GradleKpmFragment>(
-    val pm20ProjectExtension: KotlinPm20ProjectExtension,
-    val getOrCreateFragment: (GradleKpmModule) -> T
+    konst pm20ProjectExtension: KotlinPm20ProjectExtension,
+    konst getOrCreateFragment: (GradleKpmModule) -> T
 ) {
     fun inMain(configure: T.() -> Unit) {
         pm20ProjectExtension.modules.getByName(GradleKpmModule.MAIN_MODULE_NAME).apply {

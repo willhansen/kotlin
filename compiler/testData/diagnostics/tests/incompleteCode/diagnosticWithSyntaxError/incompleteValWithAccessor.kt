@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
 package c
 
-val i : String get() =<!SYNTAX!><!>
+konst i : String get() =<!SYNTAX!><!>

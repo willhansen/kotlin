@@ -27,6 +27,6 @@ fun b() {}
 // FILE: test.kt
 
 fun box(): String {
-    val names = Class.forName("test.Facade").getAnnotation(Metadata::class.java).data1.toList()
+    konst names = Class.forName("test.Facade").getAnnotation(Metadata::class.java).data1.toList()
     return if (names == listOf("test/Facade__AaaKt", "test/Facade__CccKt", "test/Facade___bKt")) "OK" else "Fail: $names"
 }

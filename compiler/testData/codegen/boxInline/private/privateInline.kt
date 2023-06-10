@@ -2,7 +2,7 @@
 
 package test
 
-private val prop = "O"
+private konst prop = "O"
 
 private fun test() = "K"
 

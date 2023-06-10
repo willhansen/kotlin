@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrCallImpl
 import org.jetbrains.kotlin.ir.util.getArgumentsWithIr
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-internal val createSeparateCallForInlinedLambdas = makeIrModulePhase(
+internal konst createSeparateCallForInlinedLambdas = makeIrModulePhase(
     { context ->
         if (!context.irInlinerIsEnabled()) return@makeIrModulePhase FileLoweringPass.Empty
         CreateSeparateCallForInlinedLambdasLowering(context)
@@ -32,14 +32,14 @@ internal val createSeparateCallForInlinedLambdas = makeIrModulePhase(
     prerequisite = setOf(functionInliningPhase)
 )
 
-class CreateSeparateCallForInlinedLambdasLowering(val context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
+class CreateSeparateCallForInlinedLambdasLowering(konst context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid()
     }
 
     override fun visitContainerExpression(expression: IrContainerExpression): IrExpression {
         if (expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
-            val newCalls = expression.getOnlyInlinableArguments().map { arg ->
+            konst newCalls = expression.getOnlyInlinableArguments().map { arg ->
                 IrCallImpl.fromSymbolOwner(UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.ir.symbols.singleArgumentInlineFunction)
                     .also { it.putValueArgument(0, arg.transform(this, null)) }
             }

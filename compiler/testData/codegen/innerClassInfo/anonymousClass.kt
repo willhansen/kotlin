@@ -1,7 +1,7 @@
 class A {
-    val B = object { }
+    konst B = object { }
     
     fun foo() {
-        val C = object { }
+        konst C = object { }
     }
 }

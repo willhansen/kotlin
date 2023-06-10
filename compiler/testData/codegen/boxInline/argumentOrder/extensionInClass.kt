@@ -16,8 +16,8 @@ import test.*
 fun box(): String {
     with (Z()) {
         var invokeOrder = "";
-        val expectedResult = "1.9_0_1_L"
-        val expectedInvokeOrder = "1_0_L"
+        konst expectedResult = "1.9_0_1_L"
+        konst expectedInvokeOrder = "1_0_L"
         var l = 1L
         var i = 0
 

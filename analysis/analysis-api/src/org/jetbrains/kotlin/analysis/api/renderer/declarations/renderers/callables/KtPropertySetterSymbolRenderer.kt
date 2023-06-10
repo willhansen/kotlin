@@ -22,7 +22,7 @@ public interface KtPropertySetterSymbolRenderer {
             " ".separated(
                 {
                     renderAnnotationsModifiersAndContextReceivers(symbol, printer, KtTokens.SET_KEYWORD)
-                    valueParametersRenderer.renderValueParameters(symbol, printer)
+                    konstueParametersRenderer.renderValueParameters(symbol, printer)
                 },
                 { accessorBodyRenderer.renderBody(symbol, printer) },
             )

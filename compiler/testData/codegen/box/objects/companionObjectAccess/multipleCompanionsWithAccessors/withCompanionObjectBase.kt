@@ -20,6 +20,6 @@ import a.*
 
 class B {
     companion object : A() {
-        val ok = getOK()
+        konst ok = getOK()
     }
 }

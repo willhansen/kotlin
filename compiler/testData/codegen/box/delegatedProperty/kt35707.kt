@@ -4,10 +4,10 @@ import kotlin.reflect.KProperty
 
 interface PropertyDelegate {
     operator fun getValue(thisRef: A, property: KProperty<*>): Boolean = true
-    operator fun setValue(thisRef: A, property: KProperty<*>, value: Boolean) {}
+    operator fun setValue(thisRef: A, property: KProperty<*>, konstue: Boolean) {}
 }
 class A {
-    val b by object : PropertyDelegate {}
+    konst b by object : PropertyDelegate {}
 }
 
 fun box(): String {

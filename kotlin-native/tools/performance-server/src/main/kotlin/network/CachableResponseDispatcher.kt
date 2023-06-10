@@ -10,20 +10,20 @@ import kotlin.js.Promise            // TODO - migrate to multiplatform.
 import kotlin.time.*
 
 // Response saved in cache.
-data class CachedResponse(val cachedResult: Any, val time: TimeMark)
+data class CachedResponse(konst cachedResult: Any, konst time: TimeMark)
 
 // Dispatcher for work with cachable responses.
 object CachableResponseDispatcher {
     // Storage of cached responses.
-    private val cachedResponses = mutableMapOf<String, CachedResponse>()
+    private konst cachedResponses = mutableMapOf<String, CachedResponse>()
 
-    private val cacheMaxSize = 200
+    private konst cacheMaxSize = 200
 
     // Get response. If response isn't cached, use provided action to get response.
     fun getResponse(request: dynamic, response: dynamic,
                     action: (success: (result: Any) -> Unit, reject: () -> Unit) -> Unit) {
         cachedResponses[request.url]?.let {
-            // Update cache value if needed. Update only if last result was get later than 2 minutes.
+            // Update cache konstue if needed. Update only if last result was get later than 2 minutes.
             if (it.time.elapsedNow().inWholeMinutes >= 2.0) {
                 println("Cache update for ${request.url}...")
                 action({ result: Any ->

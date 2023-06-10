@@ -2,7 +2,7 @@ package test;
 
 public class AnnotatedField {
     public static @interface Anno {
-        String value();
+        String konstue();
     }
 
     @Anno("static")

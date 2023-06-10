@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.jvm.abi
 import org.jetbrains.kotlin.config.CompilerConfigurationKey
 
 object JvmAbiConfigurationKeys {
-    val OUTPUT_PATH: CompilerConfigurationKey<String> =
+    konst OUTPUT_PATH: CompilerConfigurationKey<String> =
         CompilerConfigurationKey.create(JvmAbiCommandLineProcessor.OUTPUT_PATH_OPTION.description)
 }

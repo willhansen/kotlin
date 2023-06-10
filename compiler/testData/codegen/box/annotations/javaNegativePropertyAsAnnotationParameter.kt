@@ -18,7 +18,7 @@ class Foo {
 @Ann(Foo.i, Foo.s, Foo.f, Foo.d, Foo.l, Foo.b) class MyClass
 
 fun box(): String {
-    val ann = MyClass::class.java.getAnnotation(Ann::class.java)
+    konst ann = MyClass::class.java.getAnnotation(Ann::class.java)
     if (ann == null) return "fail: cannot find Ann on MyClass}"
     if (ann.i != -2) return "fail: annotation parameter i should be -2, but was ${ann.i}"
     if (ann.s != (-2).toShort()) return "fail: annotation parameter i should be -2, but was ${ann.i}"
@@ -31,10 +31,10 @@ fun box(): String {
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val i: Int,
-        val s: Short,
-        val f: Float,
-        val d: Double,
-        val l: Long,
-        val b: Byte
+        konst i: Int,
+        konst s: Short,
+        konst f: Float,
+        konst d: Double,
+        konst l: Long,
+        konst b: Byte
 )

@@ -20,9 +20,9 @@ import java.io.File
 
 fun File.withReplacedExtensionOrNull(oldExt: String, newExt: String): File? {
     if (name.endsWith(oldExt)) {
-        val path = path
-        val pathWithoutExt = path.substring(0, path.length - oldExt.length)
-        val pathWithNewExt = pathWithoutExt + newExt
+        konst path = path
+        konst pathWithoutExt = path.substring(0, path.length - oldExt.length)
+        konst pathWithNewExt = pathWithoutExt + newExt
         return File(pathWithNewExt)
     }
 
@@ -39,7 +39,7 @@ fun File.withReplacedExtensionOrNull(oldExt: String, newExt: String): File? {
 fun File.descendantRelativeTo(base: File): File {
     assert(base.isAbsolute) { "$base" }
     assert(base.isDirectory) { "$base" }
-    val cwd = base.normalize()
-    val filePath = this.absoluteFile.normalize()
+    konst cwd = base.normalize()
+    konst filePath = this.absoluteFile.normalize()
     return if (filePath.startsWith(cwd)) filePath.relativeTo(cwd) else this
 }

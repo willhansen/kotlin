@@ -24,7 +24,7 @@ public class OverridingUtil {
 // FILE: main.kt
 
 interface TypeConstructor {
-    val x: String
+    konst x: String
 }
 
 fun main() {

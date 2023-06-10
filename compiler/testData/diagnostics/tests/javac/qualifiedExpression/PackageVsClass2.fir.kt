@@ -26,7 +26,7 @@ public class d {
 // FILE: b.kt
 package test
 
-val x = d().getB()
+konst x = d().getB()
 
 // FILE: test/c.java
 package test;
@@ -41,7 +41,7 @@ public class c {
 package test
 
 fun foo() {
-    val a = c.getA()
+    konst a = c.getA()
     a.<!UNRESOLVED_REFERENCE!>a<!>
     a.<!UNRESOLVED_REFERENCE!>a<!>()
 }

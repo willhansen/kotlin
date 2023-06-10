@@ -28,9 +28,9 @@ import org.jetbrains.kotlin.name.Name
  */
 class SupertypeWithArgumentGenerator(session: FirSession) : FirSupertypeGenerationExtension(session) {
     companion object {
-        private val supertypeClassId = ClassId(FqName("foo"), Name.identifier("InterfaceWithArgument"))
-        private val annotationClassId = ClassId.topLevel("SupertypeWithTypeArgument".fqn())
-        private val PREDICATE = DeclarationPredicate.create { annotated(annotationClassId.asSingleFqName()) }
+        private konst supertypeClassId = ClassId(FqName("foo"), Name.identifier("InterfaceWithArgument"))
+        private konst annotationClassId = ClassId.topLevel("SupertypeWithTypeArgument".fqn())
+        private konst PREDICATE = DeclarationPredicate.create { annotated(annotationClassId.asSingleFqName()) }
 
     }
 
@@ -42,10 +42,10 @@ class SupertypeWithArgumentGenerator(session: FirSession) : FirSupertypeGenerati
     ): List<FirResolvedTypeRef> {
         if (resolvedSupertypes.any { it.type.classId == supertypeClassId }) return emptyList()
 
-        val annotation = classLikeDeclaration.getAnnotationByClassId(annotationClassId, session) ?: return emptyList()
-        val getClassArgument = (annotation as? FirAnnotationCall)?.argument as? FirGetClassCall ?: return emptyList()
+        konst annotation = classLikeDeclaration.getAnnotationByClassId(annotationClassId, session) ?: return emptyList()
+        konst getClassArgument = (annotation as? FirAnnotationCall)?.argument as? FirGetClassCall ?: return emptyList()
 
-        val typeToResolve = buildUserTypeFromQualifierParts(isMarkedNullable = false) {
+        konst typeToResolve = buildUserTypeFromQualifierParts(isMarkedNullable = false) {
             fun visitQualifiers(expression: FirExpression) {
                 if (expression !is FirPropertyAccessExpression) return
                 expression.explicitReceiver?.let { visitQualifiers(it) }
@@ -54,7 +54,7 @@ class SupertypeWithArgumentGenerator(session: FirSession) : FirSupertypeGenerati
             visitQualifiers(getClassArgument.argument)
         }
 
-        val resolvedArgument = typeResolver.resolveUserType(typeToResolve).type
+        konst resolvedArgument = typeResolver.resolveUserType(typeToResolve).type
 
         return listOf(
             buildResolvedTypeRef {
@@ -63,7 +63,7 @@ class SupertypeWithArgumentGenerator(session: FirSession) : FirSupertypeGenerati
         )
     }
 
-    private val FirPropertyAccessExpression.qualifierName: Name?
+    private konst FirPropertyAccessExpression.qualifierName: Name?
         get() = (calleeReference as? FirSimpleNamedReference)?.name
 
     override fun needTransformSupertypes(declaration: FirClassLikeDeclaration): Boolean {

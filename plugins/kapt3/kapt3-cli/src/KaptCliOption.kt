@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.kapt.cli
 import org.jetbrains.kotlin.compiler.plugin.AbstractCliOption
 import org.jetbrains.kotlin.kapt.cli.CliToolOption.Format.*
 
-class CliToolOption(val name: String, val format: Format) {
+class CliToolOption(konst name: String, konst format: Format) {
     enum class Format {
         /**
          * A boolean flag.
@@ -17,25 +17,25 @@ class CliToolOption(val name: String, val format: Format) {
         FLAG,
 
         /**
-         * An option with value.
+         * An option with konstue.
          * Example: '-option=some/path'
          */
         VALUE,
 
         /**
-         * A key-value pair option.
-         * Example: '-option:key=value'
+         * A key-konstue pair option.
+         * Example: '-option:key=konstue'
          */
         KEY_VALUE
     }
 }
 
 enum class KaptCliOption(
-    override val optionName: String,
-    override val valueDescription: String,
-    override val description: String,
-    override val allowMultipleOccurrences: Boolean = false,
-    val cliToolOption: CliToolOption? = null
+    override konst optionName: String,
+    override konst konstueDescription: String,
+    override konst description: String,
+    override konst allowMultipleOccurrences: Boolean = false,
+    konst cliToolOption: CliToolOption? = null
 ) : AbstractCliOption {
     APT_MODE_OPTION(
         "aptMode", "<apt|stubs|stubsAndApt|compile>",
@@ -119,14 +119,14 @@ enum class KaptCliOption(
 
     APT_OPTION_OPTION(
         "apOption",
-        ":<key>=<value>",
+        ":<key>=<konstue>",
         "Annotation processor options",
         cliToolOption = CliToolOption("-Kapt-option", KEY_VALUE)
     ),
 
     JAVAC_OPTION_OPTION(
         "javacOption",
-        ":<key>=<value>",
+        ":<key>=<konstue>",
         "Javac options",
         cliToolOption = CliToolOption("-Kapt-javac-option", KEY_VALUE)
     ),
@@ -155,8 +155,8 @@ enum class KaptCliOption(
     DUMP_DEFAULT_PARAMETER_VALUES(
         "dumpDefaultParameterValues",
         "true | false",
-        "Put initializers on fields when corresponding primary constructor parameters have a default value specified",
-        cliToolOption = CliToolOption("-Kapt-dump-default-parameter-values", FLAG)
+        "Put initializers on fields when corresponding primary constructor parameters have a default konstue specified",
+        cliToolOption = CliToolOption("-Kapt-dump-default-parameter-konstues", FLAG)
     ),
 
     MAP_DIAGNOSTIC_LOCATIONS_OPTION(
@@ -229,9 +229,9 @@ enum class KaptCliOption(
     @Deprecated("Do not use in CLI")
     JAVAC_CLI_OPTIONS_OPTION("javacArguments", "javac CLI options map", "Encoded javac CLI options", false);
 
-    override val required: Boolean = false
+    override konst required: Boolean = false
 
     companion object {
-        const val ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.kapt3"
+        const konst ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.kapt3"
     }
 }

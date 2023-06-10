@@ -27,7 +27,7 @@ sourceSets {
     "test" { none() }
 }
 
-val compileKotlin by tasks
+konst compileKotlin by tasks
 compileKotlin.dependsOn(":compiler:fir:checkers:generateCheckersComponents")
 
 if (kotlinBuildProperties.isInJpsBuildIdeaSync) {

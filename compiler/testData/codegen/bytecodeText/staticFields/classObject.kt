@@ -1,6 +1,6 @@
 class A {
     companion object {
-        val r: Int = 1;
+        konst r: Int = 1;
     }
 }
 // A and companion object constructor call

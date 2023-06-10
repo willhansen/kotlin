@@ -23,14 +23,14 @@ import java.io.File
 
 abstract class AbstractClassicJsKlibEvolutionTest : AbstractJsKlibEvolutionTest(CompilerType.K1)
 abstract class AbstractFirJsKlibEvolutionTest : AbstractJsKlibEvolutionTest(CompilerType.K2) {
-    // Const evaluation tests muted for FIR because FIR does const propagation.
+    // Const ekonstuation tests muted for FIR because FIR does const propagation.
     override fun isIgnoredTest(filePath: String): Boolean {
-        val fileName = filePath.substringAfterLast('/')
+        konst fileName = filePath.substringAfterLast('/')
         return fileName == "addOrRemoveConst.kt" || fileName == "changeConstInitialization.kt"
     }
 }
 
-abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : AbstractKlibBinaryCompatibilityTest() {
+abstract class AbstractJsKlibEvolutionTest(konst compilerType: CompilerType) : AbstractKlibBinaryCompatibilityTest() {
     enum class CompilerType {
         K1,
         K2 {
@@ -48,8 +48,8 @@ abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : Abs
     private fun TestModule.name(version: Int) = if (this.hasVersions) "version$version/${this.name}" else this.name
 
     private fun List<TestModule>.toLibrariesArg(version: Int): String {
-        val fileNames = this.map { it.name(version) }
-        val allDependencies = fileNames.map { File(workingDir, it.klib).absolutePath } + STDLIB_DEPENDENCY
+        konst fileNames = this.map { it.name(version) }
+        konst allDependencies = fileNames.map { File(workingDir, it.klib).absolutePath } + STDLIB_DEPENDENCY
         return allDependencies.joinToString(File.pathSeparator)
     }
 
@@ -60,10 +60,10 @@ abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : Abs
             .toLibrariesArg(version)
 
     private fun KotlinBaseTest.TestModule.transitiveDependencies(): Set<KotlinBaseTest.TestModule> {
-        val uniqueDependencies = mutableSetOf(this)
+        konst uniqueDependencies = mutableSetOf(this)
         dependencies.forEach { testModule ->
             if (testModule !in uniqueDependencies) {
-                val transitiveDependencies = testModule.transitiveDependencies()
+                konst transitiveDependencies = testModule.transitiveDependencies()
                 uniqueDependencies.addAll(transitiveDependencies)
             }
         }
@@ -71,26 +71,26 @@ abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : Abs
         return uniqueDependencies
     }
 
-    private val jsOutDir get() = workingDir.resolve("out")
+    private konst jsOutDir get() = workingDir.resolve("out")
 
-    private val TestModule.jsPath get() = File(jsOutDir, "${this.name}.js").absolutePath
+    private konst TestModule.jsPath get() = File(jsOutDir, "${this.name}.js").absolutePath
 
     private fun createFiles(files: List<TestFile>): List<String> =
         files.map {
-            val file = File(workingDir, it.name)
+            konst file = File(workingDir, it.name)
             file.writeText(it.content)
             file.absolutePath
         }
 
     private fun runnerFunctionFile(): Pair<String, File> {
-        val file = File(workingDir, RUNNER_FUNCTION_FILE)
-        val text = runnerFileText
+        konst file = File(workingDir, RUNNER_FUNCTION_FILE)
+        konst text = runnerFileText
         file.writeText(runnerFileText)
         return text to file
     }
 
     override fun produceKlib(module: TestModule, version: Int) {
-        val args = K2JSCompilerArguments().apply {
+        konst args = K2JSCompilerArguments().apply {
             freeArgs = createFiles(module.versionFiles(version))
             libraries = module.dependenciesToLibrariesArg(version = version)
             outputDir = workingDir.normalize().absolutePath
@@ -106,12 +106,12 @@ abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : Abs
     override fun produceProgram(module: TestModule) {
         assert(!module.hasVersions)
 
-        val (text, file) = runnerFunctionFile()
+        konst (text, file) = runnerFunctionFile()
         TestFile(module, file.name, text, Directives())
 
         produceKlib(module, version = 2)
 
-        val args = K2JSCompilerArguments().apply {
+        konst args = K2JSCompilerArguments().apply {
             libraries = module.dependenciesToLibrariesArg(version = 2)
             includes = File(workingDir, module.name(version = 2).klib).absolutePath
             outputDir = jsOutDir.normalize().absolutePath
@@ -130,19 +130,19 @@ abstract class AbstractJsKlibEvolutionTest(val compilerType: CompilerType) : Abs
     }
 
     // TODO: ask js folks what to use here.
-    protected open val testChecker get() = V8JsTestChecker
+    protected open konst testChecker get() = V8JsTestChecker
 
     companion object {
-        private val String.klib: String get() = "$this.$KLIB_FILE_EXTENSION"
-        private val String.js: String get() = "$this.js"
+        private konst String.klib: String get() = "$this.$KLIB_FILE_EXTENSION"
+        private konst String.js: String get() = "$this.js"
 
-        private val STDLIB_DEPENDENCY = System.getProperty("kotlin.js.full.stdlib.path")
+        private konst STDLIB_DEPENDENCY = System.getProperty("kotlin.js.full.stdlib.path")
 
         // A @JsExport wrapper for box().
         // Otherwise box() is not available in js.
-        private const val RUNNER_FUNCTION = "__js_exported_wrapper_function"
-        private const val RUNNER_FUNCTION_FILE = "js_exported_wrapper_function.kt"
-        private val runnerFileText = """
+        private const konst RUNNER_FUNCTION = "__js_exported_wrapper_function"
+        private const konst RUNNER_FUNCTION_FILE = "js_exported_wrapper_function.kt"
+        private konst runnerFileText = """
             @JsExport
             fun $RUNNER_FUNCTION() = $TEST_FUNCTION()
         """

@@ -106,18 +106,18 @@ public class CallMaker {
         private final Receiver explicitReceiver;
         private final ASTNode callOperationNode;
         private final KtExpression calleeExpression;
-        private final List<? extends ValueArgument> valueArguments;
+        private final List<? extends ValueArgument> konstueArguments;
         private final Call.CallType callType;
-        private final boolean isSemanticallyEquivalentToSafeCall;
+        private final boolean isSemanticallyEquikonstentToSafeCall;
 
         protected CallImpl(
                 @NotNull KtElement callElement,
                 @NotNull Receiver explicitReceiver,
                 @Nullable ASTNode callOperationNode,
                 @Nullable KtExpression calleeExpression,
-                @NotNull List<? extends ValueArgument> valueArguments
+                @NotNull List<? extends ValueArgument> konstueArguments
         ) {
-            this(callElement, explicitReceiver, callOperationNode, calleeExpression, valueArguments, CallType.DEFAULT, false);
+            this(callElement, explicitReceiver, callOperationNode, calleeExpression, konstueArguments, CallType.DEFAULT, false);
         }
 
         protected CallImpl(
@@ -125,17 +125,17 @@ public class CallMaker {
                 @Nullable Receiver explicitReceiver,
                 @Nullable ASTNode callOperationNode,
                 @Nullable KtExpression calleeExpression,
-                @NotNull List<? extends ValueArgument> valueArguments,
+                @NotNull List<? extends ValueArgument> konstueArguments,
                 @NotNull CallType callType,
-                boolean isSemanticallyEquivalentToSafeCall
+                boolean isSemanticallyEquikonstentToSafeCall
         ) {
             this.callElement = callElement;
             this.explicitReceiver = explicitReceiver;
             this.callOperationNode = callOperationNode;
             this.calleeExpression = calleeExpression;
-            this.valueArguments = valueArguments;
+            this.konstueArguments = konstueArguments;
             this.callType = callType;
-            this.isSemanticallyEquivalentToSafeCall = isSemanticallyEquivalentToSafeCall;
+            this.isSemanticallyEquikonstentToSafeCall = isSemanticallyEquikonstentToSafeCall;
         }
 
         @Override
@@ -144,8 +144,8 @@ public class CallMaker {
         }
 
         @Override
-        public boolean isSemanticallyEquivalentToSafeCall() {
-            return isSemanticallyEquivalentToSafeCall || Call.super.isSemanticallyEquivalentToSafeCall();
+        public boolean isSemanticallyEquikonstentToSafeCall() {
+            return isSemanticallyEquikonstentToSafeCall || Call.super.isSemanticallyEquikonstentToSafeCall();
         }
 
         @Nullable
@@ -168,7 +168,7 @@ public class CallMaker {
         @NotNull
         @Override
         public List<? extends ValueArgument> getValueArguments() {
-            return valueArguments;
+            return konstueArguments;
         }
 
         @NotNull
@@ -232,7 +232,7 @@ public class CallMaker {
             @NotNull KtElement callElement, @Nullable Receiver explicitReceiver,
             @Nullable ASTNode callOperationNode, @NotNull KtExpression calleeExpression,
             @NotNull List<KtExpression> argumentExpressions, @NotNull CallType callType,
-            boolean isSemanticallyEquivalentToSafeCall
+            boolean isSemanticallyEquikonstentToSafeCall
     ) {
         List<ValueArgument> arguments;
         if (argumentExpressions.isEmpty()) {
@@ -245,7 +245,7 @@ public class CallMaker {
             }
         }
         return makeCall(
-                callElement, explicitReceiver, callOperationNode, calleeExpression, arguments, callType, isSemanticallyEquivalentToSafeCall
+                callElement, explicitReceiver, callOperationNode, calleeExpression, arguments, callType, isSemanticallyEquikonstentToSafeCall
         );
     }
 
@@ -270,9 +270,9 @@ public class CallMaker {
             KtExpression calleeExpression,
             List<? extends ValueArgument> arguments,
             CallType callType,
-            boolean isSemanticallyEquivalentToSafeCall
+            boolean isSemanticallyEquikonstentToSafeCall
     ) {
-        return new CallImpl(callElement, explicitReceiver, callOperationNode, calleeExpression, arguments, callType, isSemanticallyEquivalentToSafeCall);
+        return new CallImpl(callElement, explicitReceiver, callOperationNode, calleeExpression, arguments, callType, isSemanticallyEquikonstentToSafeCall);
     }
 
     @NotNull

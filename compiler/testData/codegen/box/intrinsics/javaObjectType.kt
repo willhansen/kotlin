@@ -37,12 +37,12 @@ fun getJavaObjectType7():Class<*> {
 }
 
 fun getJavaObjectType8():Class<*> {
-    val i: Int? = 1
+    konst i: Int? = 1
     return i!!::class.javaObjectType
 }
 
 fun getJavaObjectType9():Class<*> {
-    val i: Int = 1
+    konst i: Int = 1
     return i::class.javaObjectType
 }
 

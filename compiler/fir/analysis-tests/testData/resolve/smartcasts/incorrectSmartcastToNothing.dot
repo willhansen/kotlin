@@ -91,7 +91,7 @@ digraph incorrectSmartcastToNothing_kt {
                 48 [label="Merge postponed lambda exits"];
                 49 [label="Exit when"];
             }
-            50 [label="Variable declaration: lval cacheBaseDir: R|java/io/File?|"];
+            50 [label="Variable declaration: lkonst cacheBaseDir: R|java/io/File?|"];
             51 [label="Exit block"];
         }
         52 [label="Exit function test" style="filled" fillcolor=red];

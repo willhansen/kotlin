@@ -44,28 +44,28 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
             analyze(subGraph, reporter, context)
         }
 
-        val session = context.session
-        val function = (graph.declaration as? FirFunction) ?: return
+        konst session = context.session
+        konst function = (graph.declaration as? FirFunction) ?: return
         if (function !is FirContractDescriptionOwner) return
         if (function.contractDescription.effects?.any { it.effect is ConeCallsEffectDeclaration } != true) return
 
-        val functionalTypeEffects = mutableMapOf<FirBasedSymbol<*>, ConeCallsEffectDeclaration>()
+        konst functionalTypeEffects = mutableMapOf<FirBasedSymbol<*>, ConeCallsEffectDeclaration>()
 
-        function.valueParameters.forEachIndexed { index, parameter ->
+        function.konstueParameters.forEachIndexed { index, parameter ->
             if (parameter.returnTypeRef.isFunctionTypeRef(session)) {
-                val effectDeclaration = function.contractDescription.getParameterCallsEffectDeclaration(index)
+                konst effectDeclaration = function.contractDescription.getParameterCallsEffectDeclaration(index)
                 if (effectDeclaration != null) functionalTypeEffects[parameter.symbol] = effectDeclaration
             }
         }
 
         if (function.receiverParameter?.typeRef.isFunctionTypeRef(session)) {
-            val effectDeclaration = function.contractDescription.getParameterCallsEffectDeclaration(-1)
+            konst effectDeclaration = function.contractDescription.getParameterCallsEffectDeclaration(-1)
             if (effectDeclaration != null) functionalTypeEffects[function.symbol] = effectDeclaration
         }
 
         if (functionalTypeEffects.isEmpty()) return
 
-        val leakedSymbols = mutableMapOf<FirBasedSymbol<*>, MutableList<KtSourceElement>>()
+        konst leakedSymbols = mutableMapOf<FirBasedSymbol<*>, MutableList<KtSourceElement>>()
         graph.traverse(
             CapturedLambdaFinder(function),
             IllegalScopeContext(functionalTypeEffects.keys, leakedSymbols)
@@ -78,16 +78,16 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
             }
         }
 
-        val invocationData = graph.collectDataForNode(
+        konst invocationData = graph.collectDataForNode(
             TraverseDirection.Forward,
             InvocationDataCollector(functionalTypeEffects.keys.filterTo(mutableSetOf()) { it !in leakedSymbols })
         )
 
         for ((symbol, effectDeclaration) in functionalTypeEffects) {
             graph.exitNode.previousCfgNodes.forEach { node ->
-                val requiredRange = effectDeclaration.kind
-                val pathAwareInfo = invocationData.getValue(node)
-                for (info in pathAwareInfo.values) {
+                konst requiredRange = effectDeclaration.kind
+                konst pathAwareInfo = invocationData.getValue(node)
+                for (info in pathAwareInfo.konstues) {
                     if (investigate(info, symbol, requiredRange, function, reporter, context)) {
                         // To avoid duplicate reports, stop investigating remaining paths once reported.
                         break
@@ -105,7 +105,7 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
         reporter: DiagnosticReporter,
         context: CheckerContext
     ): Boolean {
-        val foundRange = info[symbol] ?: EventOccurrencesRange.ZERO
+        konst foundRange = info[symbol] ?: EventOccurrencesRange.ZERO
         if (foundRange !in requiredRange) {
             reporter.reportOn(
                 function.contractDescription.source,
@@ -121,13 +121,13 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
     }
 
     private class IllegalScopeContext(
-        private val functionalTypeSymbols: Set<FirBasedSymbol<*>>,
-        private val leakedSymbols: MutableMap<FirBasedSymbol<*>, MutableList<KtSourceElement>>,
+        private konst functionalTypeSymbols: Set<FirBasedSymbol<*>>,
+        private konst leakedSymbols: MutableMap<FirBasedSymbol<*>, MutableList<KtSourceElement>>,
     ) {
         private var scopeDepth: Int = 0
         private var illegalScopeDepth: Int? = null
 
-        val inIllegalScope: Boolean get() = illegalScopeDepth != null
+        konst inIllegalScope: Boolean get() = illegalScopeDepth != null
 
         fun enterScope(legal: Boolean) {
             scopeDepth++
@@ -144,14 +144,14 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
             source: KtSourceElement? = fir?.source,
             illegalUsage: () -> Boolean = { false }
         ) {
-            val symbol = referenceToSymbol(fir.toQualifiedReference())
+            konst symbol = referenceToSymbol(fir.toQualifiedReference())
             if (symbol != null && symbol in functionalTypeSymbols && (inIllegalScope || illegalUsage())) {
                 leakedSymbols.getOrPut(symbol, ::mutableListOf).addIfNotNull(source)
             }
         }
     }
 
-    private class CapturedLambdaFinder(val rootFunction: FirFunction) : ControlFlowGraphVisitor<Unit, IllegalScopeContext>() {
+    private class CapturedLambdaFinder(konst rootFunction: FirFunction) : ControlFlowGraphVisitor<Unit, IllegalScopeContext>() {
 
         override fun visitNode(node: CFGNode<*>, data: IllegalScopeContext) {}
 
@@ -191,10 +191,10 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
         }
 
         override fun visitFunctionCallNode(node: FunctionCallNode, data: IllegalScopeContext) {
-            val functionSymbol = node.fir.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?
-            val contractDescription = functionSymbol?.resolvedContractDescription
+            konst functionSymbol = node.fir.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?
+            konst contractDescription = functionSymbol?.resolvedContractDescription
 
-            val callSource = node.fir.explicitReceiver?.source ?: node.fir.source
+            konst callSource = node.fir.explicitReceiver?.source ?: node.fir.source
             data.checkExpressionForLeakedSymbols(node.fir.explicitReceiver, callSource) {
                 functionSymbol?.callableId?.isInvoke() != true && contractDescription?.getParameterCallsEffect(-1) == null
             }
@@ -211,21 +211,21 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
         map: PersistentMap<FirBasedSymbol<*>, EventOccurrencesRange> = persistentMapOf(),
     ) : EventOccurrencesRangeInfo<LambdaInvocationInfo, FirBasedSymbol<*>>(map) {
         companion object {
-            val EMPTY = LambdaInvocationInfo()
+            konst EMPTY = LambdaInvocationInfo()
         }
 
-        override val constructor: (PersistentMap<FirBasedSymbol<*>, EventOccurrencesRange>) -> LambdaInvocationInfo =
+        override konst constructor: (PersistentMap<FirBasedSymbol<*>, EventOccurrencesRange>) -> LambdaInvocationInfo =
             ::LambdaInvocationInfo
     }
 
     private class InvocationDataCollector(
-        val functionalTypeSymbols: Set<FirBasedSymbol<*>>
+        konst functionalTypeSymbols: Set<FirBasedSymbol<*>>
     ) : PathAwareControlFlowGraphVisitor<LambdaInvocationInfo>() {
         companion object {
-            private val EMPTY_INFO: PathAwareLambdaInvocationInfo = persistentMapOf(NormalPath to LambdaInvocationInfo.EMPTY)
+            private konst EMPTY_INFO: PathAwareLambdaInvocationInfo = persistentMapOf(NormalPath to LambdaInvocationInfo.EMPTY)
         }
 
-        override val emptyInfo: PathAwareLambdaInvocationInfo
+        override konst emptyInfo: PathAwareLambdaInvocationInfo
             get() = EMPTY_INFO
 
         override fun visitFunctionCallNode(
@@ -234,8 +234,8 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
         ): PathAwareLambdaInvocationInfo {
             var dataForNode = visitNode(node, data)
 
-            val functionSymbol = node.fir.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?
-            val contractDescription = functionSymbol?.resolvedContractDescription
+            konst functionSymbol = node.fir.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?
+            konst contractDescription = functionSymbol?.resolvedContractDescription
 
             dataForNode = dataForNode.checkReference(node.fir.explicitReceiver.toQualifiedReference()) {
                 when {
@@ -272,7 +272,7 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
             reference: FirReference,
             range: EventOccurrencesRange
         ): PathAwareLambdaInvocationInfo {
-            val symbol = referenceToSymbol(reference)
+            konst symbol = referenceToSymbol(reference)
             return if (symbol != null) addRange(this, symbol, range) else this
         }
     }
@@ -282,19 +282,19 @@ object FirCallsEffectAnalyzer : FirControlFlowChecker() {
     }
 
     private fun FirContractDescription?.getParameterCallsEffectDeclaration(index: Int): ConeCallsEffectDeclaration? {
-        val effects = this?.effects?.map { it.effect }
-        val callsEffect = effects?.find { it is ConeCallsEffectDeclaration && it.valueParameterReference.parameterIndex == index }
+        konst effects = this?.effects?.map { it.effect }
+        konst callsEffect = effects?.find { it is ConeCallsEffectDeclaration && it.konstueParameterReference.parameterIndex == index }
         return callsEffect as? ConeCallsEffectDeclaration?
     }
 
     private fun FirFunctionCall.getArgumentCallsEffect(arg: FirExpression): EventOccurrencesRange? {
-        val functionSymbol = (this.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?)
-        val contractDescription = functionSymbol?.resolvedContractDescription
-        val resolvedArguments = argumentList as? FirResolvedArgumentList
+        konst functionSymbol = (this.toResolvedCallableSymbol() as? FirFunctionSymbol<*>?)
+        konst contractDescription = functionSymbol?.resolvedContractDescription
+        konst resolvedArguments = argumentList as? FirResolvedArgumentList
 
         return if (functionSymbol != null && resolvedArguments != null) {
-            val parameter = resolvedArguments.mapping[arg]
-            contractDescription.getParameterCallsEffect(functionSymbol.valueParameterSymbols.indexOf(parameter?.symbol))
+            konst parameter = resolvedArguments.mapping[arg]
+            contractDescription.getParameterCallsEffect(functionSymbol.konstueParameterSymbols.indexOf(parameter?.symbol))
         } else null
     }
 

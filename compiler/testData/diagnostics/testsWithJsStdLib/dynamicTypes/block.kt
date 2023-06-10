@@ -8,6 +8,6 @@ fun test() {
 }
 
 fun <T> dynamic(<!UNUSED_PARAMETER!>body<!>: dynamic.() -> T): T {
-    val topLevel = null
+    konst topLevel = null
     return topLevel.<!UNRESOLVED_REFERENCE!>body<!>()
 }

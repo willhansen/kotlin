@@ -10,7 +10,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val result = B().foo()
+    konst result = B().foo()
     if (result != 2) return "fail: $result"
     return "OK"
 }

@@ -14,7 +14,7 @@ import kotlin.internal.LowPriorityInOverloadResolution
 )
 @LowPriorityInOverloadResolution
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public external val window: Window
+public external konst window: Window
 
 @Deprecated(
     message = "This API is moved to another package, use 'kotlinx.browser.document' instead.",
@@ -22,7 +22,7 @@ public external val window: Window
 )
 @LowPriorityInOverloadResolution
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public external val document: Document
+public external konst document: Document
 
 @Deprecated(
     message = "This API is moved to another package, use 'kotlinx.browser.localStorage' instead.",
@@ -30,7 +30,7 @@ public external val document: Document
 )
 @LowPriorityInOverloadResolution
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public external val localStorage: Storage
+public external konst localStorage: Storage
 
 @Deprecated(
     message = "This API is moved to another package, use 'kotlinx.browser.sessionStorage' instead.",
@@ -38,5 +38,5 @@ public external val localStorage: Storage
 )
 @LowPriorityInOverloadResolution
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public external val sessionStorage: Storage
+public external konst sessionStorage: Storage
 

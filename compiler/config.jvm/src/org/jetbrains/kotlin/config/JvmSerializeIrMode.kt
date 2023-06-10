@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.config
 
-enum class JvmSerializeIrMode(val description: String) {
+enum class JvmSerializeIrMode(konst description: String) {
     NONE("none"),
     INLINE("inline"),
     ALL("all");
 
     companion object {
         @JvmStatic
-        fun fromStringOrNull(string: String) = values().find { it.description == string }
+        fun fromStringOrNull(string: String) = konstues().find { it.description == string }
 
         @JvmStatic
         fun fromString(string: String) = fromStringOrNull(string) ?: NONE

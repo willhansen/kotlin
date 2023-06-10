@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.tooling.core.extrasFactoryProperty
 import java.util.concurrent.Callable
 
 internal class KotlinCompilationSourceSetInclusion(
-    private val addSourcesToCompileTask: AddSourcesToCompileTask = DefaultAddSourcesToCompileTask
+    private konst addSourcesToCompileTask: AddSourcesToCompileTask = DefaultAddSourcesToCompileTask
 ) {
 
     fun include(compilation: InternalKotlinCompilation<*>, sourceSet: KotlinSourceSet) {
@@ -73,7 +73,7 @@ internal class KotlinCompilationSourceSetInclusion(
          *  Used to store already processed source sets on the compilation instance itself
          * to avoid re-processing of unnecessary source sets!
          */
-        val InternalKotlinCompilation<*>.includedSourceSets: MutableSet<KotlinSourceSet>
+        konst InternalKotlinCompilation<*>.includedSourceSets: MutableSet<KotlinSourceSet>
                 by extrasFactoryProperty(KotlinCompilationSourceSetInclusion::class.java.name, { hashSetOf() })
     }
 
@@ -96,13 +96,13 @@ internal class KotlinCompilationSourceSetInclusion(
 
     object NativeAddSourcesToCompileTask : AddSourcesToCompileTask {
         override fun addSources(compilation: KotlinCompilation<*>, sourceSet: KotlinSourceSet, addAsCommonSources: Lazy<Boolean>) {
-            val sourceFiles = { sourceSet.kotlin }
+            konst sourceFiles = { sourceSet.kotlin }
             compilation.project.tasks.withType(KotlinNativeCompile::class.java)
                 .matching { it.name == compilation.compileKotlinTaskName }
                 .configureEach { task ->
                     task.setSource(sourceFiles)
                     task.commonSources.from(
-                        compilation.project.files(Callable { if (addAsCommonSources.value) sourceFiles() else emptyList() })
+                        compilation.project.files(Callable { if (addAsCommonSources.konstue) sourceFiles() else emptyList() })
                     )
                 }
         }
@@ -117,7 +117,7 @@ internal class KotlinCompilationSourceSetInclusion(
      * and compiles them together.
      */
     class AddSourcesWithoutDependsOnClosure(
-        private val delegate: AddSourcesToCompileTask = DefaultAddSourcesToCompileTask
+        private konst delegate: AddSourcesToCompileTask = DefaultAddSourcesToCompileTask
     ) : AddSourcesToCompileTask {
         override fun addSources(compilation: KotlinCompilation<*>, sourceSet: KotlinSourceSet, addAsCommonSources: Lazy<Boolean>) {
             if (sourceSet !in compilation.kotlinSourceSets) return

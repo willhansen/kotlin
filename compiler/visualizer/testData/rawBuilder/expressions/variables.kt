@@ -1,8 +1,8 @@
 fun foo() {
 //      Int Int
 //      │   │
-    val x = 1
-//          val foo.x: Int
+    konst x = 1
+//          konst foo.x: Int
 //          │ fun (Int).plus(Int): Int
 //      Int │ │ Int
 //      │   │ │ │
@@ -11,19 +11,19 @@ fun foo() {
 //          │ fun (Int).times(Int): Int
 //      Int │ │ Int
 //      │   │ │ │
-    val z = y * 2
+    konst z = y * 2
 //  var foo.y: Int
 //  │   var foo.y: Int
 //  │   │ fun (Int).plus(Int): Int
-//  │   │ │ val foo.z: Int
+//  │   │ │ konst foo.z: Int
 //  │   │ │ │
     y = y + z
 //          var foo.y: Int
 //          │ fun (Int).minus(Int): Int
-//      Int │ │ val foo.x: Int
+//      Int │ │ konst foo.x: Int
 //      │   │ │ │
-    val w = y - x
-//         val foo.w: Int
+    konst w = y - x
+//         konst foo.w: Int
 //         │
     return w
 }

@@ -26,19 +26,19 @@ import org.jetbrains.kotlin.ir.types.makeNotNull
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-val varargPhase = makeIrFilePhase(
+konst varargPhase = makeIrFilePhase(
     ::VarargLowering,
     name = "VarargLowering",
     description = "Replace varargs with array arguments and lower arrayOf and emptyArray calls",
     prerequisite = setOf(polymorphicSignaturePhase)
 )
 
-internal class VarargLowering(val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
+internal class VarargLowering(konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
     // Ignore annotations
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
-        val constructor = expression.symbol.owner
+        konst constructor = expression.symbol.owner
         if (constructor.constructedClass.isAnnotationClass)
             return expression
         return super.visitConstructorCall(expression)
@@ -46,17 +46,17 @@ internal class VarargLowering(val context: JvmBackendContext) : FileLoweringPass
 
     override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
         expression.transformChildrenVoid()
-        val function = expression.symbol
+        konst function = expression.symbol
 
         // Replace empty varargs with empty arrays
-        for (i in 0 until expression.valueArgumentsCount) {
+        for (i in 0 until expression.konstueArgumentsCount) {
             if (expression.getValueArgument(i) != null)
                 continue
 
-            val parameter = function.owner.valueParameters[i]
+            konst parameter = function.owner.konstueParameters[i]
             if (parameter.varargElementType != null && !parameter.hasDefaultValue()) {
                 // Compute the correct type for the array argument.
-                val arrayType = parameter.type.substitute(expression.typeSubstitutionMap).makeNotNull()
+                konst arrayType = parameter.type.substitute(expression.typeSubstitutionMap).makeNotNull()
                 expression.putValueArgument(i, createBuilder().irArrayOf(arrayType))
             }
         }
@@ -72,10 +72,10 @@ internal class VarargLowering(val context: JvmBackendContext) : FileLoweringPass
             when (element) {
                 is IrExpression -> +element.transform(this@VarargLowering, null)
                 is IrSpreadElement -> {
-                    val spread = element.expression
+                    konst spread = element.expression
                     if (spread is IrFunctionAccessExpression && spread.symbol.owner.isArrayOf()) {
                         // Skip empty arrays and don't copy immediately created arrays
-                        val argument = spread.getValueArgument(0) ?: continue@loop
+                        konst argument = spread.getValueArgument(0) ?: continue@loop
                         if (argument is IrVararg) {
                             addVararg(argument)
                             continue@loop
@@ -93,14 +93,14 @@ internal class VarargLowering(val context: JvmBackendContext) : FileLoweringPass
 
 }
 
-internal val PRIMITIVE_ARRAY_OF_NAMES: Set<String> =
-    (PrimitiveType.values().map { type -> type.name } + UnsignedType.values().map { type -> type.typeName.asString() })
+internal konst PRIMITIVE_ARRAY_OF_NAMES: Set<String> =
+    (PrimitiveType.konstues().map { type -> type.name } + UnsignedType.konstues().map { type -> type.typeName.asString() })
         .map { name -> name.toLowerCaseAsciiOnly() + "ArrayOf" }.toSet()
 
-internal const val ARRAY_OF_NAME = "arrayOf"
+internal const konst ARRAY_OF_NAME = "arrayOf"
 
 internal fun IrFunction.isArrayOf(): Boolean {
-    val parent = when (val directParent = parent) {
+    konst parent = when (konst directParent = parent) {
         is IrClass -> directParent.getPackageFragment()
         is IrPackageFragment -> directParent
         else -> return false
@@ -109,8 +109,8 @@ internal fun IrFunction.isArrayOf(): Boolean {
             name.asString().let { it in PRIMITIVE_ARRAY_OF_NAMES || it == ARRAY_OF_NAME } &&
             extensionReceiverParameter == null &&
             dispatchReceiverParameter == null &&
-            valueParameters.size == 1 &&
-            valueParameters[0].isVararg
+            konstueParameters.size == 1 &&
+            konstueParameters[0].isVararg
 }
 
 internal fun IrFunction.isEmptyArray(): Boolean =

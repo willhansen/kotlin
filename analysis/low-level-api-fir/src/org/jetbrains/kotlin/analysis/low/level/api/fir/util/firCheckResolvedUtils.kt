@@ -47,7 +47,7 @@ internal inline fun checkTypeRefIsResolved(
 }
 
 internal fun checkBodyIsResolved(function: FirFunction) {
-    val block = function.body ?: return
+    konst block = function.body ?: return
     checkTypeRefIsResolved(block.typeRef, "block type", function) {
         withFirEntry("block", block)
     }
@@ -65,8 +65,8 @@ internal fun checkExpectForActualIsResolved(memberDeclaration: FirMemberDeclarat
 }
 
 internal fun checkDelegatedConstructorIsResolved(constructor: FirConstructor) {
-    val delegatedConstructorCall = constructor.delegatedConstructor ?: return
-    val calleeReference = delegatedConstructorCall.calleeReference
+    konst delegatedConstructorCall = constructor.delegatedConstructor ?: return
+    konst calleeReference = delegatedConstructorCall.calleeReference
     checkReferenceIsResolved(reference = calleeReference, owner = delegatedConstructorCall) {
         withFirEntry("constructor", constructor)
     }
@@ -92,15 +92,15 @@ internal fun checkReferenceIsResolved(
 }
 
 internal fun checkInitializerIsResolved(variable: FirVariable) {
-    val initializer = variable.initializer ?: return
+    konst initializer = variable.initializer ?: return
     checkTypeRefIsResolved(initializer.typeRef, "initializer type", variable) {
         withFirEntry("initializer", initializer)
     }
 }
 
 internal fun checkDefaultValueIsResolved(parameter: FirValueParameter) {
-    val defaultValue = parameter.defaultValue ?: return
-    checkTypeRefIsResolved(defaultValue.typeRef, "default value type", parameter) {
+    konst defaultValue = parameter.defaultValue ?: return
+    checkTypeRefIsResolved(defaultValue.typeRef, "default konstue type", parameter) {
         withFirEntry("defaultValue", defaultValue)
     }
 }
@@ -119,13 +119,13 @@ internal fun checkReturnTypeRefIsResolved(declaration: FirCallableDeclaration, a
 }
 
 internal fun checkReceiverTypeRefIsResolved(declaration: FirCallableDeclaration, acceptImplicitTypeRef: Boolean = false) {
-    val receiverTypeRef = declaration.receiverParameter?.typeRef ?: return
+    konst receiverTypeRef = declaration.receiverParameter?.typeRef ?: return
     checkTypeRefIsResolved(receiverTypeRef, typeRefName = "receiver type", declaration, acceptImplicitTypeRef)
 }
 
 
 internal fun checkContractDescriptionIsResolved(declaration: FirContractDescriptionOwner) {
-    val contractDescription = declaration.contractDescription
+    konst contractDescription = declaration.contractDescription
     checkWithAttachmentBuilder(
         condition = contractDescription is FirResolvedContractDescription || contractDescription is FirEmptyContractDescription,
         message = { "Expected ${FirResolvedContractDescription::class.simpleName} or ${FirEmptyContractDescription::class.simpleName} but ${contractDescription::class.simpleName} found for ${declaration::class.simpleName}" }
@@ -135,7 +135,7 @@ internal fun checkContractDescriptionIsResolved(declaration: FirContractDescript
 }
 
 internal fun checkDeclarationStatusIsResolved(declaration: FirMemberDeclaration) {
-    val status = declaration.status
+    konst status = declaration.status
     checkWithAttachmentBuilder(
         condition = status is FirResolvedDeclarationStatus,
         message = { "Expected ${FirResolvedDeclarationStatus::class.simpleName} but ${status::class.simpleName} found for ${declaration::class.simpleName}" }

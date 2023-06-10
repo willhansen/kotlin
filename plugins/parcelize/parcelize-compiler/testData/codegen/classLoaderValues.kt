@@ -12,4 +12,4 @@ import android.os.Parcelable
 import android.os.PersistableBundle
 
 @Parcelize
-class A<T>(val a: @RawValue T, val b: Bundle, val c: PersistableBundle) : Parcelable
+class A<T>(konst a: @RawValue T, konst b: Bundle, konst c: PersistableBundle) : Parcelable

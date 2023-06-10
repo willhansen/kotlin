@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.AbstractEnvironmentConfigurator
 
 private object CompilerPluginsDirectives : SimpleDirectivesContainer() {
-    val WITH_FIR_TEST_COMPILER_PLUGIN by directive(
+    konst WITH_FIR_TEST_COMPILER_PLUGIN by directive(
         description = "Configure test compiler plugin from :plugins:fir-plugin-prototype module",
         applicability = DirectiveApplicability.Global
     )
@@ -41,13 +41,13 @@ internal fun TestConfigurationBuilder.configureOptionalTestCompilerPlugin() {
 private fun Constructor<AbstractEnvironmentConfigurator>.enabledByDirective(
     directive: Directive
 ): Constructor<AbstractEnvironmentConfigurator> {
-    val originalConstructor = this
+    konst originalConstructor = this
     return { testServices -> EnabledByDirectiveConfiguratorDecorator(originalConstructor(testServices), directive) }
 }
 
 private class EnabledByDirectiveConfiguratorDecorator(
-    private val original: AbstractEnvironmentConfigurator,
-    private val directive: Directive
+    private konst original: AbstractEnvironmentConfigurator,
+    private konst directive: Directive
 ) : AbstractEnvironmentConfigurator() {
     override fun configureCompileConfigurationWithAdditionalConfigurationKeys(configuration: CompilerConfiguration, module: TestModule) {
         if (directive !in module.directives) return

@@ -3,7 +3,7 @@
 // 0 invoke\(
 
 class C(x: String, y: String) {
-    val yx = y + x
+    konst yx = y + x
 }
 
 fun box() =

@@ -15,7 +15,7 @@ import org.gradle.api.services.BuildServiceParameters
 internal abstract class GradleWarningsReporter : BuildService<BuildServiceParameters.None>, AutoCloseable {
     internal var hasWarnings = false
 
-    private val logger: Logger = Logging.getLogger(this.javaClass)
+    private konst logger: Logger = Logging.getLogger(this.javaClass)
     internal var executeAtBuildFinish: (() -> Unit)? = null
 
     override fun close() {
@@ -26,7 +26,7 @@ internal abstract class GradleWarningsReporter : BuildService<BuildServiceParame
     }
 
     internal companion object {
-        private val serviceName =
+        private konst serviceName =
             "${GradleWarningsReporter::class.java.canonicalName}_${GradleWarningsReporter::class.java.classLoader.hashCode()}"
 
         fun registerIfAbsent(gradle: Gradle): Provider<GradleWarningsReporter> =

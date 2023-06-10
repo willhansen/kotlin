@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.ir.expressions
 
-abstract class IrStatementOriginImpl(val debugName: String) : IrStatementOrigin {
+abstract class IrStatementOriginImpl(konst debugName: String) : IrStatementOrigin {
     override fun toString(): String = debugName
 }
 
@@ -94,9 +94,9 @@ interface IrStatementOrigin {
 
     object PARTIAL_LINKAGE_RUNTIME_ERROR : IrStatementOriginImpl("PARTIAL_LINKAGE_RUNTIME_ERROR")
 
-    data class COMPONENT_N private constructor(val index: Int) : IrStatementOriginImpl("COMPONENT_$index") {
+    data class COMPONENT_N private constructor(konst index: Int) : IrStatementOriginImpl("COMPONENT_$index") {
         companion object {
-            private val precreatedComponents = Array(32) { i -> COMPONENT_N(i + 1) }
+            private konst precreatedComponents = Array(32) { i -> COMPONENT_N(i + 1) }
 
             fun withIndex(index: Int) =
                 if (index < precreatedComponents.size)

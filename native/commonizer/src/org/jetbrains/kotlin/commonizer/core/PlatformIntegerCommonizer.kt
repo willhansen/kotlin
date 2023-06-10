@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.utils.SmartList
 
 class PlatformIntegerCommonizer(
-    private val typeCommonizer: TypeCommonizer,
-    private val classifiers: CirKnownClassifiers,
+    private konst typeCommonizer: TypeCommonizer,
+    private konst classifiers: CirKnownClassifiers,
 ) : NullableSingleInvocationCommonizer<CirClassOrTypeAliasType> {
 
-    override fun invoke(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
+    override fun invoke(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
         return platformDependentTypeCommonizers.firstNotNullOfOrNull { commonizer ->
-            commonizer.invoke(values)
+            commonizer.invoke(konstues)
         }
     }
 
-    private val platformDependentTypeCommonizers: List<PlatformDependentTypeCommonizer>
+    private konst platformDependentTypeCommonizers: List<PlatformDependentTypeCommonizer>
         get() = listOf(
             PlatformIntCommonizer(classifiers),
             PlatformUIntCommonizer(classifiers),
@@ -44,19 +44,19 @@ class PlatformIntegerCommonizer(
 }
 
 private sealed class PlatformDependentTypeCommonizer(
-    private val classifiers: CirKnownClassifiers,
-    private val intPlatformId: CirEntityId,
-    private val longPlatformId: CirEntityId,
-    private val mixedPlatformId: CirEntityId,
+    private konst classifiers: CirKnownClassifiers,
+    private konst intPlatformId: CirEntityId,
+    private konst longPlatformId: CirEntityId,
+    private konst mixedPlatformId: CirEntityId,
 ) : NullableSingleInvocationCommonizer<CirClassOrTypeAliasType> {
 
-    protected abstract fun doCommonize(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType?
+    protected abstract fun doCommonize(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType?
 
-    override fun invoke(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
-        val typesToCommonizeWithTargets = values.zip(classifiers.classifierIndices.targets)
+    override fun invoke(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
+        konst typesToCommonizeWithTargets = konstues.zip(classifiers.classifierIndices.targets)
         if (typesToCommonizeWithTargets.any { (type, target) -> !inputTypeIsKnownAndMatchesPlatformBitWidth(type, target) }) return null
 
-        return doCommonize(values)
+        return doCommonize(konstues)
     }
 
     private fun inputTypeIsKnownAndMatchesPlatformBitWidth(type: CirClassOrTypeAliasType, target: CommonizerTarget): Boolean =
@@ -73,23 +73,23 @@ private abstract class PlatformDependentTypeWithoutTypeArgumentCommonizer(
     intPlatformId: CirEntityId,
     longPlatformId: CirEntityId,
     mixedPlatformId: CirEntityId,
-    private val resultingType: CirClassType,
+    private konst resultingType: CirClassType,
 ) : PlatformDependentTypeCommonizer(classifiers, intPlatformId, longPlatformId, mixedPlatformId) {
 
-    override fun doCommonize(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? =
+    override fun doCommonize(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? =
         resultingType
 }
 
 private abstract class PlatformDependentTypeWithSingleArgumentCommonizer(
     classifiers: CirKnownClassifiers,
-    private val typeArgumentListCommonizer: TypeArgumentListCommonizer,
+    private konst typeArgumentListCommonizer: TypeArgumentListCommonizer,
     intPlatformId: CirEntityId,
     longPlatformId: CirEntityId,
-    private val mixedPlatformId: CirEntityId,
+    private konst mixedPlatformId: CirEntityId,
 ) : PlatformDependentTypeCommonizer(classifiers, intPlatformId, longPlatformId, mixedPlatformId) {
 
-    override fun doCommonize(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
-        val commonTypeArgument = typeArgumentListCommonizer.commonize(values.map { it.arguments })?.singleOrNull()
+    override fun doCommonize(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
+        konst commonTypeArgument = typeArgumentListCommonizer.commonize(konstues.map { it.arguments })?.singleOrNull()
             ?: return null
 
         return createCirTypeWithOneArgument(entityId = mixedPlatformId, argument = commonTypeArgument)
@@ -201,17 +201,17 @@ private class PlatformUIntVarOfCommonizer(
 private fun ClassId.toCirEntityId(): CirEntityId =
     CirEntityId.create(this)
 
-private val platformIntType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_ID.toCirEntityId())
-private val platformUIntType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_ID.toCirEntityId())
+private konst platformIntType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_ID.toCirEntityId())
+private konst platformUIntType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_ID.toCirEntityId())
 
-private val platformIntArrayType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_ARRAY_ID.toCirEntityId())
-private val platformUIntArrayType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_ARRAY_ID.toCirEntityId())
+private konst platformIntArrayType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_ARRAY_ID.toCirEntityId())
+private konst platformUIntArrayType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_ARRAY_ID.toCirEntityId())
 
-private val platformIntRangeType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_RANGE_ID.toCirEntityId())
-private val platformUIntRangeType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_RANGE_ID.toCirEntityId())
+private konst platformIntRangeType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_RANGE_ID.toCirEntityId())
+private konst platformUIntRangeType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_RANGE_ID.toCirEntityId())
 
-private val platformIntProgressionType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_PROGRESSION_ID.toCirEntityId())
-private val platformUIntProgressionType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_PROGRESSION_ID.toCirEntityId())
+private konst platformIntProgressionType: CirClassType = createCirTypeWithoutArguments(PLATFORM_INT_PROGRESSION_ID.toCirEntityId())
+private konst platformUIntProgressionType: CirClassType = createCirTypeWithoutArguments(PLATFORM_UINT_PROGRESSION_ID.toCirEntityId())
 
 private fun createCirTypeWithoutArguments(id: CirEntityId): CirClassType =
     CirClassType.createInterned(

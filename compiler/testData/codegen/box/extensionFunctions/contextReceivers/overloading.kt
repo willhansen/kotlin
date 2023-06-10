@@ -8,12 +8,12 @@ context(Int)
 fun foo(): String = "K"
 
 fun box(): String {
-    val o = with ("") {
+    konst o = with ("") {
         with(42) {
             foo()
         }
     }
-    val k = with(42) {
+    konst k = with(42) {
         foo()
     }
     return o + k

@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 fun `1`() = 1.0
 fun `2`() = 2.0

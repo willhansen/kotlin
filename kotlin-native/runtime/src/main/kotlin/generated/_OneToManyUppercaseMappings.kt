@@ -12,7 +12,7 @@ package kotlin.text
 
 // 102 mappings totally
 @SharedImmutable
-private val keys = intArrayOf(
+private konst keys = intArrayOf(
     0x00df, 0x0149, 0x01f0, 0x0390, 0x03b0, 0x0587, 0x1e96, 0x1e97, 0x1e98, 0x1e99, 0x1e9a, 0x1f50, 0x1f52, 0x1f54, 0x1f56, 0x1f80, 0x1f81, 0x1f82, 0x1f83, 0x1f84, 
     0x1f85, 0x1f86, 0x1f87, 0x1f88, 0x1f89, 0x1f8a, 0x1f8b, 0x1f8c, 0x1f8d, 0x1f8e, 0x1f8f, 0x1f90, 0x1f91, 0x1f92, 0x1f93, 0x1f94, 0x1f95, 0x1f96, 0x1f97, 0x1f98, 
     0x1f99, 0x1f9a, 0x1f9b, 0x1f9c, 0x1f9d, 0x1f9e, 0x1f9f, 0x1fa0, 0x1fa1, 0x1fa2, 0x1fa3, 0x1fa4, 0x1fa5, 0x1fa6, 0x1fa7, 0x1fa8, 0x1fa9, 0x1faa, 0x1fab, 0x1fac, 
@@ -21,7 +21,7 @@ private val keys = intArrayOf(
     0xfb16, 0xfb17, 
 )
 @SharedImmutable
-private val values = arrayOf(
+private konst konstues = arrayOf(
     "\u0053\u0053", "\u02BC\u004E", "\u004A\u030C", "\u0399\u0308\u0301", "\u03A5\u0308\u0301", "\u0535\u0552", "\u0048\u0331", "\u0054\u0308", "\u0057\u030A", "\u0059\u030A", "\u0041\u02BE", "\u03A5\u0313", "\u03A5\u0313\u0300", "\u03A5\u0313\u0301", "\u03A5\u0313\u0342", "\u1F08\u0399", "\u1F09\u0399", "\u1F0A\u0399", "\u1F0B\u0399", "\u1F0C\u0399", 
     "\u1F0D\u0399", "\u1F0E\u0399", "\u1F0F\u0399", "\u1F08\u0399", "\u1F09\u0399", "\u1F0A\u0399", "\u1F0B\u0399", "\u1F0C\u0399", "\u1F0D\u0399", "\u1F0E\u0399", "\u1F0F\u0399", "\u1F28\u0399", "\u1F29\u0399", "\u1F2A\u0399", "\u1F2B\u0399", "\u1F2C\u0399", "\u1F2D\u0399", "\u1F2E\u0399", "\u1F2F\u0399", "\u1F28\u0399", 
     "\u1F29\u0399", "\u1F2A\u0399", "\u1F2B\u0399", "\u1F2C\u0399", "\u1F2D\u0399", "\u1F2E\u0399", "\u1F2F\u0399", "\u1F68\u0399", "\u1F69\u0399", "\u1F6A\u0399", "\u1F6B\u0399", "\u1F6C\u0399", "\u1F6D\u0399", "\u1F6E\u0399", "\u1F6F\u0399", "\u1F68\u0399", "\u1F69\u0399", "\u1F6A\u0399", "\u1F6B\u0399", "\u1F6C\u0399", 
@@ -35,10 +35,10 @@ internal fun Char.oneToManyUppercase(): String? {
         return null
     }
 
-    val code = this.code
-    val index = binarySearchRange(keys, code)
+    konst code = this.code
+    konst index = binarySearchRange(keys, code)
     if (keys[index] == code) {
-        return values[index]
+        return konstues[index]
     }
     return null
 }

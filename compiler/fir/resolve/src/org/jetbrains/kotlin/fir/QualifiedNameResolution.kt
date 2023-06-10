@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-const val ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE = "_root_ide_package_"
+const konst ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE = "_root_ide_package_"
 
 fun BodyResolveComponents.resolveRootPartOfQualifier(
     namedReference: FirSimpleNamedReference,
@@ -37,7 +37,7 @@ fun BodyResolveComponents.resolveRootPartOfQualifier(
     typeArguments: List<FirTypeProjection>,
     nonFatalDiagnosticsFromExpression: List<ConeDiagnostic>?,
 ): FirResolvedQualifier? {
-    val name = namedReference.name
+    konst name = namedReference.name
     if (name.asString() == ROOT_PREFIX_FOR_IDE_RESOLUTION_MODE) {
         return buildResolvedQualifier {
             this.source = source
@@ -50,10 +50,10 @@ fun BodyResolveComponents.resolveRootPartOfQualifier(
 
     for (scope in createCurrentScopeList()) {
         scope.getSingleVisibleClassifier(session, this, name)?.let {
-            val klass = (it as? FirClassLikeSymbol<*>)?.fullyExpandedClass(session)
+            konst klass = (it as? FirClassLikeSymbol<*>)?.fullyExpandedClass(session)
                 ?: return@let
 
-            val isVisible = session.visibilityChecker.isClassLikeVisible(
+            konst isVisible = session.visibilityChecker.isClassLikeVisible(
                 klass.fir,
                 session,
                 file,
@@ -62,7 +62,7 @@ fun BodyResolveComponents.resolveRootPartOfQualifier(
             if (!isVisible) {
                 return@let
             }
-            val classId = it.classId
+            konst classId = it.classId
             return buildResolvedQualifier {
                 this.source = source
                 packageFqName = classId.packageFqName
@@ -102,9 +102,9 @@ fun FirResolvedQualifier.continueQualifier(
     session: FirSession,
     components: BodyResolveComponents,
 ): FirResolvedQualifier? {
-    val name = namedReference.name
+    konst name = namedReference.name
     symbol?.let { outerClassSymbol ->
-        val firClass = outerClassSymbol.fir
+        konst firClass = outerClassSymbol.fir
         if (firClass !is FirClass) return null
         return firClass.scopeProvider.getNestedClassifierScope(firClass, components.session, components.scopeSession)
             ?.getSingleVisibleClassifier(session, components, name)
@@ -117,7 +117,7 @@ fun FirResolvedQualifier.continueQualifier(
                     symbol = nestedClassSymbol as FirClassLikeSymbol<*>
                     isFullyQualified = true
 
-                    val outerTypeArguments = this.typeArguments.toList()
+                    konst outerTypeArguments = this.typeArguments.toList()
                     this.typeArguments.clear()
                     this.typeArguments.addAll(typeArguments)
                     this.typeArguments.addAll(outerTypeArguments)
@@ -155,7 +155,7 @@ private fun FqName.continueQualifierInPackage(
     source: KtSourceElement?,
     apiVersion: ApiVersion
 ): FirResolvedQualifier? {
-    val childFqName = this.child(name)
+    konst childFqName = this.child(name)
     if (components.symbolProvider.getPackage(childFqName) != null) {
         return buildResolvedQualifier {
             this.source = source
@@ -167,8 +167,8 @@ private fun FqName.continueQualifierInPackage(
         }
     }
 
-    val classId = ClassId.topLevel(childFqName)
-    val symbol = components.symbolProvider.getClassLikeSymbolByClassId(classId) ?: return null
+    konst classId = ClassId.topLevel(childFqName)
+    konst symbol = components.symbolProvider.getClassLikeSymbolByClassId(classId) ?: return null
 
     return buildResolvedQualifier {
         this.source = source
@@ -198,10 +198,10 @@ internal fun extractNonFatalDiagnostics(
     extraNotFatalDiagnostics: List<ConeDiagnostic>?,
     apiVersion: ApiVersion
 ): List<ConeDiagnostic> {
-    val prevDiagnostics = (explicitReceiver as? FirResolvedQualifier)?.nonFatalDiagnostics ?: emptyList()
+    konst prevDiagnostics = (explicitReceiver as? FirResolvedQualifier)?.nonFatalDiagnostics ?: emptyList()
     var result: MutableList<ConeDiagnostic>? = null
 
-    val deprecation = symbol.getDeprecation(apiVersion)?.forUseSite()
+    konst deprecation = symbol.getDeprecation(apiVersion)?.forUseSite()
     if (deprecation != null) {
         result = mutableListOf()
         result.addAll(prevDiagnostics)

@@ -1,4 +1,4 @@
->>> val x = ""
->>> val y = x
+>>> konst x = ""
+>>> konst y = x
 >>> x == y
 true

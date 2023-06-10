@@ -58,7 +58,7 @@ class StringNumberConversionJVMTest {
 
         compareConversionWithRadix(String::toBigInteger, String::toBigIntegerOrNull) {
             assertProduces(16, "ABCDEF90ABCDEF9012345678", java.math.BigInteger("ABCDEF90ABCDEF9012345678", 16))
-            assertProduces(36, "HazelnutHazelnut", java.math.BigInteger.valueOf(1356099454469L).let { it.multiply(java.math.BigInteger.valueOf(36).pow(8)).add(it) })
+            assertProduces(36, "HazelnutHazelnut", java.math.BigInteger.konstueOf(1356099454469L).let { it.multiply(java.math.BigInteger.konstueOf(36).pow(8)).add(it) })
 
             assertFailsOrNull(16, "EFG")
             assertFailsOrNull(10, "-1A")
@@ -71,7 +71,7 @@ class StringNumberConversionJVMTest {
     }
 
     @Test fun toBigDecimal() {
-        fun bd(value: String) = java.math.BigDecimal(value)
+        fun bd(konstue: String) = java.math.BigDecimal(konstue)
         compareConversion(String::toBigDecimal, String::toBigDecimalOrNull) {
 
             assertProduces("-77", bd("-77"))

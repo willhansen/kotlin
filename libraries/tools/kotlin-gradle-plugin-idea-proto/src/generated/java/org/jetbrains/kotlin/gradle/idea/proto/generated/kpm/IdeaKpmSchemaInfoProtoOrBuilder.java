@@ -47,7 +47,7 @@ public interface IdeaKpmSchemaInfoProtoOrBuilder extends
   boolean hasSeverity();
   /**
    * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
-   * @return The enum numeric value on the wire for severity.
+   * @return The enum numeric konstue on the wire for severity.
    */
   int getSeverityValue();
   /**

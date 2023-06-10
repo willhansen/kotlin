@@ -2,7 +2,7 @@ class A {
     class B
 }
 
-val a: /*PLACE*/A.B.C
+konst a: /*PLACE*/A.B.C
 
-val b: /*ONAIR*/A.B
+konst b: /*ONAIR*/A.B
 

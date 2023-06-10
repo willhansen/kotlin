@@ -10,14 +10,14 @@ import kotlin.reflect.*
 @OptIn(ExperimentalAssociatedObjects::class)
 @AssociatedObjectKey
 @Retention(AnnotationRetention.BINARY)
-annotation class Associated(val kClass: KClass<*>)
+annotation class Associated(konst kClass: KClass<*>)
 
 private interface I1 {
-    val s: String
+    konst s: String
 }
 
 private class I1Impl : I1 {
-    override val s = "zzz"
+    override konst s = "zzz"
 }
 
 private class C(var i1: I1?)
@@ -37,8 +37,8 @@ private class I2ImplHolder
 
 @OptIn(ExperimentalAssociatedObjects::class)
 fun testKt35940(): String {
-    val i2 = I2ImplHolder::class.findAssociatedObject<Associated>()!! as I2
-    val c = C(null)
+    konst i2 = I2ImplHolder::class.findAssociatedObject<Associated>()!! as I2
+    konst c = C(null)
     i2.bar(c)
     return c.i1!!.s
 }

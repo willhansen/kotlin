@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.ir.interpreter.Instruction
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterEnvironment
 import org.jetbrains.kotlin.ir.interpreter.fqName
 
-internal object IntrinsicEvaluator {
-    private val fqNameToHandler: Map<String, IntrinsicBase> = buildMap {
+internal object IntrinsicEkonstuator {
+    private konst fqNameToHandler: Map<String, IntrinsicBase> = buildMap {
         listOf(
             EmptyArray, ArrayOf, ArrayOfNulls, ArrayConstructor, EnumValues, EnumValueOf,
             JsPrimitives, SourceLocation, AssertIntrinsic, DataClassArrayToString, Indent
@@ -19,7 +19,7 @@ internal object IntrinsicEvaluator {
     }
 
     fun unwindInstructions(irFunction: IrFunction, environment: IrInterpreterEnvironment): List<Instruction>? {
-        val fqName = irFunction.fqName
+        konst fqName = irFunction.fqName
         return fqNameToHandler[fqName]?.unwind(irFunction, environment) ?: when {
             EnumIntrinsics.canHandleFunctionWithName(fqName, irFunction.origin) -> EnumIntrinsics.unwind(irFunction, environment)
             else -> null

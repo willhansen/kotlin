@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.types.Variance
 
 @KtAnalysisApiInternals
 open class KtRendererProviderImpl(
-    override val analysisSession: KtAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtSymbolDeclarationRendererProvider() {
 
     override fun renderType(type: KtType, renderer: KtTypeRenderer, position: Variance): String {
         return with(analysisSession) {
-            val approximatedType = KtRendererTypeApproximator.TO_DENOTABLE.approximateType(type, position)
+            konst approximatedType = KtRendererTypeApproximator.TO_DENOTABLE.approximateType(type, position)
             prettyPrint { renderer.renderType(approximatedType, this) }
         }
     }

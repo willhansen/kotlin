@@ -3,21 +3,21 @@
 //   Public signature: /Box|null[0]
 class Box<T : Any?> {
   // CHECK:
-  //   Mangled name: Box{}value
-  //   Public signature: /Box.value|1987073854177347439[0]
-  val value: T
+  //   Mangled name: Box{}konstue
+  //   Public signature: /Box.konstue|1987073854177347439[0]
+  konst konstue: T
     // CHECK JVM_IR:
-    //   Mangled name: Box#<get-value>(){}1:0
-    //   Public signature: /Box.value.<get-value>|3167862337988859752[0]
+    //   Mangled name: Box#<get-konstue>(){}1:0
+    //   Public signature: /Box.konstue.<get-konstue>|3167862337988859752[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: Box#<get-value>(){}
-    //   Public signature: /Box.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: Box#<get-konstue>(){}
+    //   Public signature: /Box.konstue.<get-konstue>|3260093555963109437[0]
     get
 
   // CHECK:
   //   Mangled name: Box#<init>(1:0){}
   //   Public signature: /Box.<init>|-8731461708390519279[0]
-  constructor(value: T) /* primary */
+  constructor(konstue: T) /* primary */
 
 }
 

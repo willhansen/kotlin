@@ -1,13 +1,13 @@
 // See also KT-7800
 
 fun foo(): Int {
-    val x: Int = 1.let {
-        val value: Int? = null
-        if (value == null) {
+    konst x: Int = 1.let {
+        konst konstue: Int? = null
+        if (konstue == null) {
             return@let 1
         }
 
-        value // smart-cast should be here
+        konstue // smart-cast should be here
     }
     return x
 }

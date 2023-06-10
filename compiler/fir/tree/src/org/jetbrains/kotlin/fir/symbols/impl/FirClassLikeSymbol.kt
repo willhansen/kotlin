@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.SpecialNames
 
 sealed class FirClassLikeSymbol<D : FirClassLikeDeclaration>(
-    val classId: ClassId,
+    konst classId: ClassId,
 ) : FirClassifierSymbol<D>(), ClassLikeSymbolMarker {
     abstract override fun toLookupTag(): ConeClassLikeLookupTag
 
-    val name get() = classId.shortClassName
+    konst name get() = classId.shortClassName
 
     fun getDeprecation(apiVersion: ApiVersion): DeprecationsPerUseSite? {
         if (annotations.isEmpty()) return null
@@ -35,47 +35,47 @@ sealed class FirClassLikeSymbol<D : FirClassLikeDeclaration>(
         return fir.deprecationsProvider.getDeprecationsInfo(apiVersion)
     }
 
-    val rawStatus: FirDeclarationStatus
+    konst rawStatus: FirDeclarationStatus
         get() = fir.status
 
-    val resolvedStatus: FirResolvedDeclarationStatus
+    konst resolvedStatus: FirResolvedDeclarationStatus
         get() = fir.resolvedStatus()
 
-    val typeParameterSymbols: List<FirTypeParameterSymbol>
+    konst typeParameterSymbols: List<FirTypeParameterSymbol>
         get() = fir.typeParameters.map { it.symbol }
 
     override fun toString(): String = "${this::class.simpleName} ${classId.asString()}"
 }
 
 sealed class FirClassSymbol<C : FirClass>(classId: ClassId) : FirClassLikeSymbol<C>(classId) {
-    private val lookupTag: ConeClassLikeLookupTag =
+    private konst lookupTag: ConeClassLikeLookupTag =
         if (classId.isLocal) ConeClassLookupTagWithFixedSymbol(classId, this)
         else classId.toLookupTag()
 
     override fun toLookupTag(): ConeClassLikeLookupTag = lookupTag
 
-    val resolvedSuperTypeRefs: List<FirResolvedTypeRef>
+    konst resolvedSuperTypeRefs: List<FirResolvedTypeRef>
         get() {
             lazyResolveToPhase(FirResolvePhase.SUPER_TYPES)
             @Suppress("UNCHECKED_CAST")
             return fir.superTypeRefs as List<FirResolvedTypeRef>
         }
 
-    val resolvedSuperTypes: List<ConeKotlinType>
+    konst resolvedSuperTypes: List<ConeKotlinType>
         get() = resolvedSuperTypeRefs.map { it.coneType }
 
-    val declarationSymbols: List<FirBasedSymbol<*>>
+    konst declarationSymbols: List<FirBasedSymbol<*>>
         get() = fir.declarations.map { it.symbol }
 
-    val classKind: ClassKind
+    konst classKind: ClassKind
         get() = fir.classKind
 }
 
 class FirRegularClassSymbol(classId: ClassId) : FirClassSymbol<FirRegularClass>(classId), RegularClassSymbolMarker {
-    val companionObjectSymbol: FirRegularClassSymbol?
+    konst companionObjectSymbol: FirRegularClassSymbol?
         get() = fir.companionObjectSymbol
 
-    val resolvedContextReceivers: List<FirContextReceiver>
+    konst resolvedContextReceivers: List<FirContextReceiver>
         get() {
             if (fir.contextReceivers.isEmpty()) return emptyList()
             lazyResolveToPhase(FirResolvePhase.TYPES)
@@ -83,14 +83,14 @@ class FirRegularClassSymbol(classId: ClassId) : FirClassSymbol<FirRegularClass>(
         }
 }
 
-val ANONYMOUS_CLASS_ID = ClassId(FqName.ROOT, FqName.topLevel(SpecialNames.ANONYMOUS), true)
+konst ANONYMOUS_CLASS_ID = ClassId(FqName.ROOT, FqName.topLevel(SpecialNames.ANONYMOUS), true)
 
 class FirAnonymousObjectSymbol : FirClassSymbol<FirAnonymousObject>(ANONYMOUS_CLASS_ID)
 
 class FirTypeAliasSymbol(classId: ClassId) : FirClassLikeSymbol<FirTypeAlias>(classId), TypeAliasSymbolMarker {
     override fun toLookupTag(): ConeClassLikeLookupTag = classId.toLookupTag()
 
-    val resolvedExpandedTypeRef: FirResolvedTypeRef
+    konst resolvedExpandedTypeRef: FirResolvedTypeRef
         get() {
             lazyResolveToPhase(FirResolvePhase.SUPER_TYPES)
             return fir.expandedTypeRef as FirResolvedTypeRef

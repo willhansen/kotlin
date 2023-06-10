@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.org.objectweb.asm.Type
 
-class FirJvmBackendClassResolver(val components: Fir2IrComponents) : JvmBackendClassResolver {
+class FirJvmBackendClassResolver(konst components: Fir2IrComponents) : JvmBackendClassResolver {
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     override fun resolveToClassDescriptors(type: Type): List<ClassDescriptor> {
         if (type.sort != Type.OBJECT) return emptyList()
 
-        val symbol = components.session.symbolProvider.getClassLikeSymbolByClassId(type.classId) ?: return emptyList()
+        konst symbol = components.session.symbolProvider.getClassLikeSymbolByClassId(type.classId) ?: return emptyList()
         require(symbol is FirClassSymbol<*>)
         return listOf(components.classifierStorage.getIrClassSymbol(symbol).descriptor)
     }

@@ -19,14 +19,14 @@ var v: Int = 1
 fun consumeInt(x: Int) {}
 
 open class A {
-    val OK: String = "OK"
+    konst OK: String = "OK"
         @JvmName("OK") get
 
     @JvmName("g")
     fun <T> f(x: T, y: Int = 1) = x
 }
 
-annotation class Anno(@get:JvmName("uglyJvmName") val value: String)
+annotation class Anno(@get:JvmName("uglyJvmName") konst konstue: String)
 
 // MODULE: main(lib)
 // FILE: B.kt
@@ -43,10 +43,10 @@ fun box(): String {
     v = 1
     consumeInt(v)
 
-    val annoValue = (::annotated.annotations.single() as Anno).value
-    if (annoValue != "OK") return "Fail annotation value: $annoValue"
+    konst annoValue = (::annotated.annotations.single() as Anno).konstue
+    if (annoValue != "OK") return "Fail annotation konstue: $annoValue"
 
-    val b = B()
+    konst b = B()
     if (b.f("OK") != "OK") return "Fail call of annotated method"
 
     return A().OK

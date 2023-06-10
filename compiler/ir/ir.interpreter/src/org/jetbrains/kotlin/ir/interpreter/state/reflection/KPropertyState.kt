@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.ir.types.classOrNull
 import kotlin.reflect.KParameter
 import kotlin.reflect.KType
 
-internal class KPropertyState(val property: IrProperty, override val irClass: IrClass, val receiver: State? = null) : ReflectionState() {
+internal class KPropertyState(konst property: IrProperty, override konst irClass: IrClass, konst receiver: State? = null) : ReflectionState() {
     constructor(propertyReference: IrPropertyReference, receiver: State?)
             : this(propertyReference.symbol.owner, propertyReference.type.classOrNull!!.owner, receiver)
 
@@ -30,11 +30,11 @@ internal class KPropertyState(val property: IrProperty, override val irClass: Ir
 
     fun getParameters(callInterceptor: CallInterceptor): List<KParameter> {
         if (_parameters != null) return _parameters!!
-        val kParameterIrClass = callInterceptor.environment.kParameterClass.owner
+        konst kParameterIrClass = callInterceptor.environment.kParameterClass.owner
         var index = 0
-        val instanceParameter = property.getter?.dispatchReceiverParameter?.takeIf { receiver == null }
+        konst instanceParameter = property.getter?.dispatchReceiverParameter?.takeIf { receiver == null }
             ?.let { KParameterProxy(KParameterState(kParameterIrClass, it, index++, KParameter.Kind.INSTANCE), callInterceptor) }
-        val extensionParameter = property.getter?.extensionReceiverParameter
+        konst extensionParameter = property.getter?.extensionReceiverParameter
             ?.let { KParameterProxy(KParameterState(kParameterIrClass, it, index++, KParameter.Kind.EXTENSION_RECEIVER), callInterceptor) }
         _parameters = listOfNotNull(instanceParameter, extensionParameter)
         return _parameters!!
@@ -42,7 +42,7 @@ internal class KPropertyState(val property: IrProperty, override val irClass: Ir
 
     fun getReturnType(callInterceptor: CallInterceptor): KType {
         if (_returnType != null) return _returnType!!
-        val kTypeIrClass = callInterceptor.environment.kTypeClass.owner
+        konst kTypeIrClass = callInterceptor.environment.kTypeClass.owner
         _returnType = KTypeProxy(KTypeState(property.getter!!.returnType, kTypeIrClass), callInterceptor)
         return _returnType!!
     }

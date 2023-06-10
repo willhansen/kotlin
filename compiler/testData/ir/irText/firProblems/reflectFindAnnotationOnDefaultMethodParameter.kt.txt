@@ -1,5 +1,5 @@
 fun box(): String {
-  val impl: <no name provided> = { // BLOCK
+  konst impl: <no name provided> = { // BLOCK
     local class <no name provided> : I {
       constructor() /* primary */ {
         super/*Any*/()
@@ -11,9 +11,9 @@ fun box(): String {
 
     <no name provided>()
   }
-  val method: @FlexibleNullability Method? = impl.<get-javaClass><<no name provided>>().getMethod(p0 = "m", p1 = [String::class.<get-java><String>()])
-  val parameter: @FlexibleNullability Parameter? = method /*!! Method */.getParameters() /*!! Array<out @FlexibleNullability Parameter?> */ /*as Array<@FlexibleNullability Parameter?> */.get(index = 0)
-  val size: Int = parameter /*!! Parameter */.getAnnotations() /*!! Array<out @FlexibleNullability Annotation?> */ /*as Array<@FlexibleNullability Annotation?> */.<get-size>()
+  konst method: @FlexibleNullability Method? = impl.<get-javaClass><<no name provided>>().getMethod(p0 = "m", p1 = [String::class.<get-java><String>()])
+  konst parameter: @FlexibleNullability Parameter? = method /*!! Method */.getParameters() /*!! Array<out @FlexibleNullability Parameter?> */ /*as Array<@FlexibleNullability Parameter?> */.get(index = 0)
+  konst size: Int = parameter /*!! Parameter */.getAnnotations() /*!! Array<out @FlexibleNullability Annotation?> */ /*as Array<@FlexibleNullability Annotation?> */.<get-size>()
   when {
     EQEQ(arg0 = size, arg1 = 1) -> return "OK"
   }

@@ -36,8 +36,8 @@ abstract class ClassNameCollectionClassBuilderFactory(
     }
 
     private inner class ClassNameCollectionClassBuilder(
-            private val classCreatedFor: JvmDeclarationOrigin,
-            internal val _delegate: ClassBuilder
+            private konst classCreatedFor: JvmDeclarationOrigin,
+            internal konst _delegate: ClassBuilder
     ) : DelegatingClassBuilder() {
 
         override fun getDelegate() = _delegate

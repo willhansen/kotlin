@@ -11,10 +11,10 @@ import kotlin.test.assertNotEquals
 class Container<T>
 
 class C<X, Y> {
-    val x1 = createX()
-    val x2 = createXFromOtherFunction()
-    val xFun = createIrrelevantX<Any>()
-    val y = createY()
+    konst x1 = createX()
+    konst x2 = createXFromOtherFunction()
+    konst xFun = createIrrelevantX<Any>()
+    konst y = createY()
 
     fun createX(): KTypeParameter =
         typeOf<Container<X>>().arguments.single().type!!.classifier as KTypeParameter
@@ -30,7 +30,7 @@ class C<X, Y> {
 }
 
 fun box(): String {
-    val c = C<Any, Any>()
+    konst c = C<Any, Any>()
     assertEquals(c.x1, c.x2)
     assertEquals(c.x1.hashCode(), c.x2.hashCode())
 

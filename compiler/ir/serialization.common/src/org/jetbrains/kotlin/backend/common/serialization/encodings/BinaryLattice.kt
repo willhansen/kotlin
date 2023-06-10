@@ -6,16 +6,16 @@
 package org.jetbrains.kotlin.backend.common.serialization.encodings
 
 /**
- * The idea of encoding is is mixing bits of 2 int values between each other to benefit VLQ encoding in proto.
+ * The idea of encoding is is mixing bits of 2 int konstues between each other to benefit VLQ encoding in proto.
  * i = i1.i2.i3.i4
  * j = j1.j2.j3.j4
  * ij -> i1.j1.i2.j2.i3.j3.i4.j4
  */
 @JvmInline
-value class BinaryLattice(private val code: Long) {
+konstue class BinaryLattice(private konst code: Long) {
 
-    val first: Int get() = decodeInt(code)
-    val second: Int get() = decodeInt(code ushr 1)
+    konst first: Int get() = decodeInt(code)
+    konst second: Int get() = decodeInt(code ushr 1)
 
     companion object {
 

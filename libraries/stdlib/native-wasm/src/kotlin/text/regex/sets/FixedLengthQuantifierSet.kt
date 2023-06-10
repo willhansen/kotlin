@@ -9,7 +9,7 @@ package kotlin.text.regex
  * Greedy quantifier over constructions that consume a fixed number of characters.
  */
 open internal class FixedLengthQuantifierSet(
-    val quantifier: Quantifier,
+    konst quantifier: Quantifier,
     innerSet: AbstractSet,
     next: AbstractSet,
     type: Int
@@ -20,19 +20,19 @@ open internal class FixedLengthQuantifierSet(
         innerSet.next = FSet.possessiveFSet
     }
 
-    val min: Int get() = quantifier.min
-    val max: Int get() = quantifier.max
+    konst min: Int get() = quantifier.min
+    konst max: Int get() = quantifier.max
 
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = (min == max)
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
         var index = startIndex
-        val matches = mutableListOf<Int>()
+        konst matches = mutableListOf<Int>()
 
         // Process occurrences between 0 and max.
         while (max == Quantifier.INF || matches.size < max) {
-            val nextIndex = innerSet.matches(index, testString, matchResult)
+            konst nextIndex = innerSet.matches(index, testString, matchResult)
             if (nextIndex < 0) {
                 if (matches.size < min) {
                     return -1
@@ -46,7 +46,7 @@ open internal class FixedLengthQuantifierSet(
 
         // Roll back if the next node doesn't match the remaining string.
         while (matches.size > min) {
-            val nextIndex = next.matches(index, testString, matchResult)
+            konst nextIndex = next.matches(index, testString, matchResult)
             if (nextIndex >= 0) {
                 return nextIndex
             }

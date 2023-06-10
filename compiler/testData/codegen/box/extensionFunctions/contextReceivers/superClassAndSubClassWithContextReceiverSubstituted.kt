@@ -1,10 +1,10 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-class Components(val x: String)
+class Components(konst x: String)
 
 context(Components)
-abstract class A<F : CharSequence>(val y: F) {
+abstract class A<F : CharSequence>(konst y: F) {
     fun foo(): String = x + y
 }
 

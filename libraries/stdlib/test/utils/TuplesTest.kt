@@ -8,7 +8,7 @@ package test.utils
 import kotlin.test.*
 
 class PairTest {
-    val p = Pair(1, "a")
+    konst p = Pair(1, "a")
 
     @Test fun pairFirstAndSecond() {
         assertEquals(1, p.first)
@@ -16,7 +16,7 @@ class PairTest {
     }
 
     @Test fun pairMultiAssignment() {
-        val (a, b) = p
+        konst (a, b) = p
         assertEquals(1, a)
         assertEquals("a", b)
     }
@@ -42,7 +42,7 @@ class PairTest {
     }
 
     @Test fun pairHashSet() {
-        val s = hashSetOf(Pair(1, "a"), Pair(1, "b"), Pair(1, "a"))
+        konst s = hashSetOf(Pair(1, "a"), Pair(1, "b"), Pair(1, "a"))
         assertEquals(2, s.size)
         assertTrue(s.contains(p))
     }
@@ -55,7 +55,7 @@ class PairTest {
 }
 
 class TripleTest {
-    val t = Triple(1, "a", 0.07)
+    konst t = Triple(1, "a", 0.07)
 
     @Test fun tripleFirstAndSecond() {
         assertEquals(1, t.first)
@@ -64,7 +64,7 @@ class TripleTest {
     }
 
     @Test fun tripleMultiAssignment() {
-        val (a, b, c) = t
+        konst (a, b, c) = t
         assertEquals(1, a)
         assertEquals("a", b)
         assertEquals(0.07, c)
@@ -93,7 +93,7 @@ class TripleTest {
     }
 
     @Test fun tripleHashSet() {
-        val s = hashSetOf(Triple(1, "a", 0.07), Triple(1, "b", 0.07), Triple(1, "a", 0.07))
+        konst s = hashSetOf(Triple(1, "a", 0.07), Triple(1, "b", 0.07), Triple(1, "a", 0.07))
         assertEquals(2, s.size)
         assertTrue(s.contains(t))
     }

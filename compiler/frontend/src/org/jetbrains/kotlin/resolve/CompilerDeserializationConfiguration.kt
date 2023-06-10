@@ -9,22 +9,22 @@ import org.jetbrains.kotlin.config.*
 import org.jetbrains.kotlin.serialization.deserialization.DeserializationConfiguration
 
 open class CompilerDeserializationConfiguration(
-    protected val languageVersionSettings: LanguageVersionSettings
+    protected konst languageVersionSettings: LanguageVersionSettings
 ) : DeserializationConfiguration {
 
-    final override val skipMetadataVersionCheck = languageVersionSettings.getFlag(AnalysisFlags.skipMetadataVersionCheck)
+    final override konst skipMetadataVersionCheck = languageVersionSettings.getFlag(AnalysisFlags.skipMetadataVersionCheck)
 
-    final override val skipPrereleaseCheck = languageVersionSettings.getFlag(AnalysisFlags.skipPrereleaseCheck)
+    final override konst skipPrereleaseCheck = languageVersionSettings.getFlag(AnalysisFlags.skipPrereleaseCheck)
 
-    final override val reportErrorsOnPreReleaseDependencies =
+    final override konst reportErrorsOnPreReleaseDependencies =
         !skipPrereleaseCheck && !languageVersionSettings.isPreRelease()
 
-    final override val allowUnstableDependencies = languageVersionSettings.getFlag(AnalysisFlags.allowUnstableDependencies)
+    final override konst allowUnstableDependencies = languageVersionSettings.getFlag(AnalysisFlags.allowUnstableDependencies)
 
-    final override val typeAliasesAllowed = languageVersionSettings.supportsFeature(LanguageFeature.TypeAliases)
+    final override konst typeAliasesAllowed = languageVersionSettings.supportsFeature(LanguageFeature.TypeAliases)
 
-    final override val isJvmPackageNameSupported = languageVersionSettings.supportsFeature(LanguageFeature.JvmPackageName)
+    final override konst isJvmPackageNameSupported = languageVersionSettings.supportsFeature(LanguageFeature.JvmPackageName)
 
-    final override val readDeserializedContracts: Boolean =
+    final override konst readDeserializedContracts: Boolean =
         languageVersionSettings.supportsFeature(LanguageFeature.ReadDeserializedContracts)
 }

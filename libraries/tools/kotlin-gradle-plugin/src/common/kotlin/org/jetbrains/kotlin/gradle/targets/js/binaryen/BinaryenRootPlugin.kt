@@ -25,10 +25,10 @@ open class BinaryenRootPlugin : Plugin<Project> {
             "BinaryenRootPlugin can be applied only to root project"
         }
 
-        val settings = project.extensions.create(EXTENSION_NAME, BinaryenRootExtension::class.java, project)
+        konst settings = project.extensions.create(EXTENSION_NAME, BinaryenRootExtension::class.java, project)
 
-        val downloadTask = project.registerTask<Download>("${TASKS_GROUP_NAME}Download") {
-            val env = settings.requireConfigured()
+        konst downloadTask = project.registerTask<Download>("${TASKS_GROUP_NAME}Download") {
+            konst env = settings.requireConfigured()
             it.group = TASKS_GROUP_NAME
             it.src(env.downloadUrl)
             it.dest(env.zipPath)
@@ -37,7 +37,7 @@ open class BinaryenRootPlugin : Plugin<Project> {
         }
 
         project.registerTask<Copy>(INSTALL_TASK_NAME) {
-            val env = settings.requireConfigured()
+            konst env = settings.requireConfigured()
             it.onlyIf { env.zipPath.exists() && !env.executablePath.exists() }
             it.group = TASKS_GROUP_NAME
             it.from(project.tarTree(env.zipPath))
@@ -54,8 +54,8 @@ open class BinaryenRootPlugin : Plugin<Project> {
     }
 
     companion object {
-        const val TASKS_GROUP_NAME: String = "binaryen"
-        const val INSTALL_TASK_NAME: String = "${TASKS_GROUP_NAME}Install"
+        const konst TASKS_GROUP_NAME: String = "binaryen"
+        const konst INSTALL_TASK_NAME: String = "${TASKS_GROUP_NAME}Install"
 
         fun apply(rootProject: Project): BinaryenRootExtension {
             check(rootProject == rootProject.rootProject)

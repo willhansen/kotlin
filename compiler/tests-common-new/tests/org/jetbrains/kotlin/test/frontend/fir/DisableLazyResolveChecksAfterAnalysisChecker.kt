@@ -20,13 +20,13 @@ class DisableLazyResolveChecksAfterAnalysisChecker(
     testServices: TestServices
 ) : AfterAnalysisChecker(testServices) {
     companion object {
-        private val isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
+        private konst isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
     }
 
     override fun check(failedAssertions: List<WrappedException>) {
         if (!isDisableLazyResolveDirectivePresent()) return
         if (failedAssertions.isNotEmpty()) return
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
 
         if (!isTeamCityBuild) {
             setOf(
@@ -37,7 +37,7 @@ class DisableLazyResolveChecksAfterAnalysisChecker(
             }
         }
 
-        val message = if (isTeamCityBuild) {
+        konst message = if (isTeamCityBuild) {
             "Please remove // ${FirDiagnosticsDirectives.FIR_DISABLE_LAZY_RESOLVE_CHECKS} from the test source"
         } else {
             "Removed // ${FirDiagnosticsDirectives.FIR_DISABLE_LAZY_RESOLVE_CHECKS} from the test source"
@@ -61,9 +61,9 @@ class DisableLazyResolveChecksAfterAnalysisChecker(
     }
 
     private fun isDisableLazyResolveDirectivePresent(): Boolean {
-        val moduleStructure = testServices.moduleStructure
+        konst moduleStructure = testServices.moduleStructure
         return FirDiagnosticsDirectives.FIR_DISABLE_LAZY_RESOLVE_CHECKS in moduleStructure.allDirectives
     }
 }
 
-private class TestWithDisableLazyResolveDirectivePassesException(override val message: String) : IllegalStateException()
+private class TestWithDisableLazyResolveDirectivePassesException(override konst message: String) : IllegalStateException()

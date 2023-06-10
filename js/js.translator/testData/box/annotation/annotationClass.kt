@@ -3,7 +3,7 @@ package foo
 
 annotation class bar
 
-public annotation class Baz(val a: String)
+public annotation class Baz(konst a: String)
 
 fun box(): String {
     return "OK"

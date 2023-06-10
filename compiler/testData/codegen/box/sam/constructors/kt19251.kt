@@ -4,8 +4,8 @@
 // FULL_JDK
 // FILE: test.kt
 fun box(): String {
-    val map = mutableMapOf<Fun, String>()
-    val fn = Fun { TODO() }
+    konst map = mutableMapOf<Fun, String>()
+    konst fn = Fun { TODO() }
     return map.computeIfAbsent(fn, { "OK" })
 }
 

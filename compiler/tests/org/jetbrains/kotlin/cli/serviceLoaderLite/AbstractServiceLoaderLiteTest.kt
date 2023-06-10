@@ -13,15 +13,15 @@ import javax.annotation.processing.Processor
 
 abstract class AbstractServiceLoaderLiteTest : TestCaseWithTmpdir() {
     protected fun applyForDirAndJar(name: String, vararg entries: Entry, block: (File) -> Unit) {
-        val zip = writeJar("$name.jar", *entries)
+        konst zip = writeJar("$name.jar", *entries)
         block(zip)
 
-        val dir = writeDir(name, *entries)
+        konst dir = writeDir(name, *entries)
         block(dir)
     }
 
     protected fun writeDir(dirName: String, vararg entries: Entry): File {
-        val dir = File(tmpdir, dirName)
+        konst dir = File(tmpdir, dirName)
         if (dir.exists()) {
             throw IllegalStateException("Directory $dirName already exists")
         }
@@ -29,7 +29,7 @@ abstract class AbstractServiceLoaderLiteTest : TestCaseWithTmpdir() {
         dir.mkdir()
 
         for ((name, content) in entries) {
-            val file = File(dir, name).also { it.parentFile.mkdirs() }
+            konst file = File(dir, name).also { it.parentFile.mkdirs() }
             file.writeBytes(content)
         }
 
@@ -37,7 +37,7 @@ abstract class AbstractServiceLoaderLiteTest : TestCaseWithTmpdir() {
     }
 
     protected fun writeJar(fileName: String, vararg entries: Entry): File {
-        val file = File(tmpdir, "$fileName.jar")
+        konst file = File(tmpdir, "$fileName.jar")
         if (file.exists()) {
             throw IllegalStateException("File $fileName already exists")
         }
@@ -67,7 +67,7 @@ abstract class AbstractServiceLoaderLiteTest : TestCaseWithTmpdir() {
         fail(E::class.java.name + " exception expected, got nothing")
     }
 
-    protected data class Entry(val name: String, val content: ByteArray) {
+    protected data class Entry(konst name: String, konst content: ByteArray) {
         constructor(name: String, content: String) : this(name, content.toByteArray())
     }
 

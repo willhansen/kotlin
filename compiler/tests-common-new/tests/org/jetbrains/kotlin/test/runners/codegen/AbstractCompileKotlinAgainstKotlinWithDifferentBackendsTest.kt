@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.test.services.ModuleTransformerForSwitchingBackend
 @OptIn(TestInfrastructureInternals::class)
 abstract class AbstractBoxWithDifferentBackendsTest(
     targetBackend: TargetBackend,
-    val backendForLib: TargetBackend,
-    val backendForMain: TargetBackend
+    konst backendForLib: TargetBackend,
+    konst backendForMain: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
     override fun TestConfigurationBuilder.configuration() {
         commonServicesConfigurationForCodegenTest(FrontendKinds.ClassicFrontend)

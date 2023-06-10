@@ -1,11 +1,11 @@
 FILE: test.kt
     public final fun box(): R|kotlin/String| {
-        lval x: R|<anonymous>| = object : R|base/Jaba| {
+        lkonst x: R|<anonymous>| = object : R|base/Jaba| {
             private constructor(): R|<anonymous>| {
                 super<R|base/Jaba|>()
             }
 
-            private final val a: R|kotlin/String| = String(OK)
+            private final konst a: R|kotlin/String| = String(OK)
                 private get(): R|kotlin/String|
 
             local final inner class S : R|kotlin/Any| {

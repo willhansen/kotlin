@@ -1,5 +1,5 @@
 class C {
     <expr>object {
-        val x = 4
+        konst x = 4
     }</expr>
 }

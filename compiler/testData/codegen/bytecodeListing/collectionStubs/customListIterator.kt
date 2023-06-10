@@ -1,12 +1,12 @@
 // Ensure the proper collection stubs are added, in
 // particular *not* when specialized implementations are provided.
 class MyList<E> : List<E> {
-    val elements = ArrayList<E>()
+    konst elements = ArrayList<E>()
 
     class MyListIterator<E>(
-        val list: ArrayList<E>,
+        konst list: ArrayList<E>,
         start: Int,
-        private val end: Int
+        private konst end: Int
     ) : ListIterator<E> {
         var index = start
         override fun hasNext() = index < end
@@ -22,7 +22,7 @@ class MyList<E> : List<E> {
     override fun listIterator() = listIterator(0)
     override fun iterator() = listIterator()
 
-    override val size get() = elements.size
+    override konst size get() = elements.size
     override fun contains(element: E) = elements.contains(element)
     override fun containsAll(elements: Collection<E>) = this.elements.containsAll(elements)
     override operator fun get(index: Int) = elements[index]

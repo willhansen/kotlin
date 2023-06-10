@@ -1,9 +1,9 @@
 var testSimple: Int = 0
-    set(value) {
-        field = value
+    set(konstue) {
+        field = konstue
     }
 
 var testAugmented: Int = 0
-    set(value) {
-        field += value
+    set(konstue) {
+        field += konstue
     }

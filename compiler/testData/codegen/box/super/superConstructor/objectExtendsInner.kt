@@ -1,11 +1,11 @@
-open class Foo(val value: String) {
+open class Foo(konst konstue: String) {
 
-    open inner class Inner(val d: Double = -1.0, val s: String, vararg val y: Int) {
+    open inner class Inner(konst d: Double = -1.0, konst s: String, vararg konst y: Int) {
         open fun result() = "Fail"
     }
 
-    val obj = object : Inner(s = "O") {
-        override fun result() = s + value
+    konst obj = object : Inner(s = "O") {
+        override fun result() = s + konstue
     }
 }
 

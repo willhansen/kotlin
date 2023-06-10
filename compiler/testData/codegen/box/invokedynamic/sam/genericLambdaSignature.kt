@@ -14,8 +14,8 @@ fun interface FunIFace<T0, R> {
     fun call(arg: T0): R
 }
 
-fun <T1, R> call(value: T1, f: FunIFace<T1, R>): R {
-    return f.call(value)
+fun <T1, R> call(konstue: T1, f: FunIFace<T1, R>): R {
+    return f.call(konstue)
 }
 
 fun <T2> test(x: T2) = call(x) { it }

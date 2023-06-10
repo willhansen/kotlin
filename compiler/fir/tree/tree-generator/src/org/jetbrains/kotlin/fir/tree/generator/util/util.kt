@@ -15,10 +15,10 @@ fun Element.traverseParents(block: (Element) -> Unit) {
     parents.forEach { it.traverseParents(block) }
 }
 
-operator fun <K, V, U> MutableMap<K, MutableMap<V, U>>.set(k1: K, k2: V, value: U) {
+operator fun <K, V, U> MutableMap<K, MutableMap<V, U>>.set(k1: K, k2: V, konstue: U) {
     this.putIfAbsent(k1, mutableMapOf())
-    val map = getValue(k1)
-    map[k2] = value
+    konst map = getValue(k1)
+    map[k2] = konstue
 }
 
 operator fun <K, V, U> Map<K, Map<V, U>>.get(k1: K, k2: V): U {
@@ -26,6 +26,6 @@ operator fun <K, V, U> Map<K, Map<V, U>>.get(k1: K, k2: V): U {
 }
 
 inline fun File.writeToFileUsingSmartPrinterIfFileContentChanged(block: SmartPrinter.() -> Unit) {
-    val newText = buildString { SmartPrinter(this).block() }
+    konst newText = buildString { SmartPrinter(this).block() }
     GeneratorsFileUtil.writeFileIfContentChanged(this, newText, logNotChanged = false)
 }

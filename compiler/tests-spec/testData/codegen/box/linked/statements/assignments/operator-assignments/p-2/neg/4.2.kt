@@ -18,14 +18,14 @@ class B(var a: Int) {
     var minus = false
     var minusAssign = false
 
-    operator fun minus(value: Int): B {
+    operator fun minus(konstue: Int): B {
         minus = true
-        return B(a + value)
+        return B(a + konstue)
     }
 
 }
 
 fun box(){
-    val b = B(1)
+    konst b = B(1)
     b -= 1 //error
 }

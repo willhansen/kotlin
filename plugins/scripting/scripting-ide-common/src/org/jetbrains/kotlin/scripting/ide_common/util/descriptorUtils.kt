@@ -26,10 +26,10 @@ fun descriptorsEqualWithSubstitution(
     if (descriptor1 !is CallableDescriptor) return true
     descriptor2 as CallableDescriptor
 
-    val typeChecker = KotlinTypeCheckerImpl.withAxioms(object : KotlinTypeChecker.TypeConstructorEquality {
+    konst typeChecker = KotlinTypeCheckerImpl.withAxioms(object : KotlinTypeChecker.TypeConstructorEquality {
         override fun equals(a: TypeConstructor, b: TypeConstructor): Boolean {
-            val typeParam1 = a.declarationDescriptor as? TypeParameterDescriptor
-            val typeParam2 = b.declarationDescriptor as? TypeParameterDescriptor
+            konst typeParam1 = a.declarationDescriptor as? TypeParameterDescriptor
+            konst typeParam2 = b.declarationDescriptor as? TypeParameterDescriptor
             if (typeParam1 != null
                 && typeParam2 != null
                 && typeParam1.containingDeclaration == descriptor1
@@ -44,8 +44,8 @@ fun descriptorsEqualWithSubstitution(
 
     if (!typeChecker.equalTypesOrNulls(descriptor1.returnType, descriptor2.returnType)) return false
 
-    val parameters1 = descriptor1.valueParameters
-    val parameters2 = descriptor2.valueParameters
+    konst parameters1 = descriptor1.konstueParameters
+    konst parameters2 = descriptor2.konstueParameters
     if (parameters1.size != parameters2.size) return false
     for ((param1, param2) in parameters1.zip(parameters2)) {
         if (!typeChecker.equalTypes(param1.type, param2.type)) return false
@@ -54,26 +54,26 @@ fun descriptorsEqualWithSubstitution(
 }
 
 fun TypeConstructor.supertypesWithAny(): Collection<KotlinType> {
-    val supertypes = supertypes
-    val noSuperClass = supertypes.map { it.constructor.declarationDescriptor as? ClassDescriptor }.all {
+    konst supertypes = supertypes
+    konst noSuperClass = supertypes.map { it.constructor.declarationDescriptor as? ClassDescriptor }.all {
         it == null || it.kind == ClassKind.INTERFACE
     }
     return if (noSuperClass) supertypes + builtIns.anyType else supertypes
 }
 
-val ClassifierDescriptorWithTypeParameters.constructors: Collection<ConstructorDescriptor>
+konst ClassifierDescriptorWithTypeParameters.constructors: Collection<ConstructorDescriptor>
     get() = when (this) {
         is TypeAliasDescriptor -> this.constructors
         is ClassDescriptor -> this.constructors
         else -> emptyList()
     }
 
-val ClassifierDescriptorWithTypeParameters.kind: ClassKind?
+konst ClassifierDescriptorWithTypeParameters.kind: ClassKind?
     get() = when (this) {
         is TypeAliasDescriptor -> classDescriptor?.kind
         is ClassDescriptor -> kind
         else -> null
     }
 
-val DeclarationDescriptor.isJavaDescriptor
+konst DeclarationDescriptor.isJavaDescriptor
     get() = this is JavaClassDescriptor || this is JavaCallableMemberDescriptor

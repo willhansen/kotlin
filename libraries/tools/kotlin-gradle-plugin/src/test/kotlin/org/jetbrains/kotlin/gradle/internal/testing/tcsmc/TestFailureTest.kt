@@ -19,7 +19,7 @@ class TestFailureTest : TCServiceMessagesClientTest() {
 STARTED SUITE root // root
   STARTED SUITE  // root/
     STARTED TEST displayName: Test, classDisplayName: , className: , name: Test // root//Test
-      FAILURE AssertionError: Expected value to be true.
+      FAILURE AssertionError: Expected konstue to be true.
     at AssertionError_init_0 (mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt:102:37)
     at DefaultJsAsserter.failWithMessage_0 (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:19)
     at DefaultJsAsserter.assertTrue_o10pc4${'$'} (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:13)
@@ -41,8 +41,8 @@ COMPLETED FAILURE // root
                 "testFailed",
                 mapOf(
                     "name" to "Test",
-                    "message" to "Expected value to be true",
-                    "details" to """AssertionError: Expected value to be true.
+                    "message" to "Expected konstue to be true",
+                    "details" to """AssertionError: Expected konstue to be true.
     at AssertionError_init_0 (mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt:102:37)
     at DefaultJsAsserter.failWithMessage_0 (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:19)
     at DefaultJsAsserter.assertTrue_o10pc4$ (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:13)
@@ -70,7 +70,7 @@ STARTED SUITE root // root
   STARTED SUITE  // root/
     STARTED TEST displayName: Test, classDisplayName: , className: , name: Test // root//Test
       FAILURE Expected <7>, actual <42>
-AssertionError: Expected value to be true.
+AssertionError: Expected konstue to be true.
     at AssertionError_init_0 (mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt:102:37)
     at DefaultJsAsserter.failWithMessage_0 (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:19)
     at DefaultJsAsserter.assertTrue_o10pc4${'$'} (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:13)
@@ -89,7 +89,7 @@ COMPLETED FAILURE // root
             serviceMessage(TestSuiteStarted(""))
             serviceMessage(TestStarted("Test", false, null))
             regularText(
-                """AssertionError: Expected value to be true.
+                """AssertionError: Expected konstue to be true.
     at AssertionError_init_0 (mpplib2/build/tmp/expandedArchives/kotlin-stdlib-js-1.3-SNAPSHOT.jar_730a1b227513cf16a9b639e009a985fc/kotlin/exceptions.kt:102:37)
     at DefaultJsAsserter.failWithMessage_0 (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:80:19)
     at DefaultJsAsserter.assertTrue_o10pc4$ (mpplib2/build/tmp/expandedArchives/kotlin-test-js-1.3-SNAPSHOT.jar_d60f1e6d0dd94843a03bf98a569bbb73/src/main/kotlin/kotlin/test/DefaultJsAsserter.kt:60:13)

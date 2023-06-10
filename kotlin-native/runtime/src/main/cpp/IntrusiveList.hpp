@@ -17,11 +17,11 @@ namespace kotlin {
 
 template <typename T>
 struct DefaultIntrusiveForwardListTraits {
-    static T* next(const T& value) noexcept { return value.next(); }
+    static T* next(const T& konstue) noexcept { return konstue.next(); }
 
-    static void setNext(T& value, T* next) noexcept { value.setNext(next); }
+    static void setNext(T& konstue, T* next) noexcept { konstue.setNext(next); }
 
-    static bool trySetNext(T& value, T* next) noexcept { return value.trySetNext(next); }
+    static bool trySetNext(T& konstue, T* next) noexcept { return konstue.trySetNext(next); }
 };
 
 // Intrusive variant of `std::forward_list`.
@@ -29,9 +29,9 @@ struct DefaultIntrusiveForwardListTraits {
 // The container does not own nodes. The list structure is maintained by `T` itself via
 // `Traits`. `Traits` must provide 3 operations:
 //
-// static T* next(const T& value); // obtain the next pointer
-// static void setNext(T& value, T* next); // set the next pointer
-// static bool trySetNext(T& value, T* next); // try to set the next pointer or return `false` if it's not possible. Used by `try_push_front`.
+// static T* next(const T& konstue); // obtain the next pointer
+// static void setNext(T& konstue, T* next); // set the next pointer
+// static bool trySetNext(T& konstue, T* next); // try to set the next pointer or return `false` if it's not possible. Used by `try_push_front`.
 // The default `Traits` implementation expects `T` to provide all operations as member functions.
 //
 // Notable differences from regular containers:
@@ -39,7 +39,7 @@ struct DefaultIntrusiveForwardListTraits {
 //   provide custom `Traits` implementation to regulate which next pointer is used
 //   by which list.
 // * It's not possible to keep the same `T` twice in the same list.
-// * The container is move-only and moving invalidates `before_begin` iterator.
+// * The container is move-only and moving inkonstidates `before_begin` iterator.
 // * `insert_after`, `erase_after` take `iterator` instead of `const_iterator`,
 //   because they require mutability.
 // * When the node is inserted into the container its next pointer is set
@@ -49,18 +49,18 @@ struct DefaultIntrusiveForwardListTraits {
 template <typename T, typename Traits = DefaultIntrusiveForwardListTraits<T>>
 class intrusive_forward_list : private MoveOnly {
 public:
-    using value_type = T;
+    using konstue_type = T;
     using size_type = size_t;
     using difference_type = ptrdiff_t;
-    using reference = value_type&;
-    using const_reference = const value_type&;
-    using pointer = value_type*;
-    using const_pointer = const value_type*;
+    using reference = konstue_type&;
+    using const_reference = const konstue_type&;
+    using pointer = konstue_type*;
+    using const_pointer = const konstue_type*;
 
     class iterator {
     public:
         using difference_type = intrusive_forward_list::difference_type;
-        using value_type = intrusive_forward_list::value_type;
+        using konstue_type = intrusive_forward_list::konstue_type;
         using pointer = intrusive_forward_list::pointer;
         using reference = intrusive_forward_list::reference;
         using iterator_category = std::forward_iterator_tag;
@@ -98,7 +98,7 @@ public:
     class const_iterator {
     public:
         using difference_type = intrusive_forward_list::difference_type;
-        using value_type = const intrusive_forward_list::value_type;
+        using konstue_type = const intrusive_forward_list::konstue_type;
         using pointer = intrusive_forward_list::const_pointer;
         using reference = intrusive_forward_list::const_reference;
         using iterator_category = std::forward_iterator_tag;
@@ -221,15 +221,15 @@ public:
     // Complexity: O(1)
     void clear() noexcept { setNext(head(), tail()); }
 
-    // Insert `value` after `pos`. `pos` can be in range `[before_begin(), end())`.
+    // Insert `konstue` after `pos`. `pos` can be in range `[before_begin(), end())`.
     // Returns iterator to the newly inserted element
     // Complexity: O(1)
-    iterator insert_after(iterator pos, reference value) noexcept {
+    iterator insert_after(iterator pos, reference konstue) noexcept {
         RuntimeAssert(pos != end(), "Attempted to insert_after end()");
         RuntimeAssert(pos != iterator(), "Attempted to insert_after empty iterator");
-        setNext(&value, next(pos.node_));
-        setNext(pos.node_, &value);
-        return iterator(&value);
+        setNext(&konstue, next(pos.node_));
+        setNext(pos.node_, &konstue);
+        return iterator(&konstue);
     }
 
     // Insert `[first, last)` after `pos`. `pos` can be in range `[before_begin(), end())`.
@@ -280,16 +280,16 @@ public:
     }
 
     // Insert a new node to the front.
-    // Equivalent to `insert_after(before_begin(), value)`.
+    // Equikonstent to `insert_after(before_begin(), konstue)`.
     // Complexity: O(1)
-    void push_front(reference value) noexcept { insert_after(before_begin(), value); }
+    void push_front(reference konstue) noexcept { insert_after(before_begin(), konstue); }
 
     // Try to insert a new node to the front.
-    // When setting the next node of `value` uses `Traits::trySetNext`.
+    // When setting the next node of `konstue` uses `Traits::trySetNext`.
     // If `Traits::trySetNext` returns `true`, this operates like `push_front` and returns `true`.
     // If `Traits::trySetNext` returns `false`, this doesn't change anything else and returns `false`.
     // Complexity: O(1)
-    bool try_push_front(reference value) noexcept { return try_insert_after(before_begin(), value) != std::nullopt; }
+    bool try_push_front(reference konstue) noexcept { return try_insert_after(before_begin(), konstue) != std::nullopt; }
 
     // Erase a node at the front.
     // This does not destroy the erased node and does not change its next pointer.
@@ -310,20 +310,20 @@ public:
         return top;
     }
 
-    // Erase node `value`.
-    // If the `value` is not in the list, does nothing.
+    // Erase node `konstue`.
+    // If the `konstue` is not in the list, does nothing.
     // This does not destroy the erased node and does not change its next pointer.
     // Complexity: O(n)
-    void remove(reference value) noexcept {
+    void remove(reference konstue) noexcept {
         // TODO: no need to move on after finding the first match.
-        return remove_if([&value](const_reference x) noexcept { return &x == &value; });
+        return remove_if([&konstue](const_reference x) noexcept { return &x == &konstue; });
     }
 
     // Erase all nodes satisfying predicate `P`.
     // This does not destroy erased nodes and does not change their next pointer.
     // Complexity: O(n)
     template <typename P>
-    void remove_if(P p) noexcept(noexcept(p(std::declval<const_reference>()))) {
+    void remove_if(P p) noexcept(noexcept(p(std::declkonst<const_reference>()))) {
         pointer prev = head();
         pointer node = next(prev);
         while (node != tail()) {
@@ -373,24 +373,24 @@ private:
     static pointer tail() noexcept { return reinterpret_cast<pointer>(tailStorage_); }
 
     // TODO: Consider making public.
-    std::optional<iterator> try_insert_after(iterator pos, reference value) noexcept {
+    std::optional<iterator> try_insert_after(iterator pos, reference konstue) noexcept {
         RuntimeAssert(pos != end(), "Attempted to try_insert_after end()");
         RuntimeAssert(pos != iterator(), "Attempted to try_insert_after empty iterator");
-        if (!trySetNext(&value, next(pos.node_))) {
+        if (!trySetNext(&konstue, next(pos.node_))) {
             return std::nullopt;
         }
-        setNext(pos.node_, &value);
-        return iterator(&value);
+        setNext(pos.node_, &konstue);
+        return iterator(&konstue);
     }
 
     union {
-        value_type head_; // for debugger
-        alignas(value_type) char headStorage_[sizeof(value_type)] = {0};
+        konstue_type head_; // for debugger
+        alignas(konstue_type) char headStorage_[sizeof(konstue_type)] = {0};
     };
-    alignas(value_type) static inline char tailStorage_[sizeof(value_type)] = {0};
+    alignas(konstue_type) static inline char tailStorage_[sizeof(konstue_type)] = {0};
 };
 
 template <typename InputIt>
-intrusive_forward_list(InputIt, InputIt) -> intrusive_forward_list<typename std::iterator_traits<InputIt>::value_type>;
+intrusive_forward_list(InputIt, InputIt) -> intrusive_forward_list<typename std::iterator_traits<InputIt>::konstue_type>;
 
 } // namespace kotlin

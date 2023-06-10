@@ -1,9 +1,9 @@
 package
 
-public val test1: [ERROR : Type for generate {
+public konst test1: [ERROR : Type for generate {
     yield(A)
 }]
-public val test2: kotlin.Int
+public konst test2: kotlin.Int
 public fun </*0*/ S> generate(/*0*/ g: suspend Controller<S>.() -> kotlin.Unit): S
 
 public final class A {

@@ -9,13 +9,13 @@ sealed class Sealed {
 fun functionReturningSealed(): Sealed = null!!
 
 fun test_1() {
-    <!NO_ELSE_IN_WHEN!>when<!> (val result = functionReturningSealed()) {
+    <!NO_ELSE_IN_WHEN!>when<!> (konst result = functionReturningSealed()) {
         is Sealed.A -> {}
     }
 }
 
 fun test_2() {
-    val result2 = functionReturningSealed()
+    konst result2 = functionReturningSealed()
     <!NO_ELSE_IN_WHEN!>when<!> (result2) {
         is Sealed.A -> {}
     }

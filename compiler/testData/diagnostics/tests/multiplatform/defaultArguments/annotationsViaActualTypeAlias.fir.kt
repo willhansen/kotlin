@@ -1,15 +1,15 @@
 // MODULE: m1-common
 // FILE: common.kt
 
-expect annotation class A1(val x: Int, val y: String = "OK")
+expect annotation class A1(konst x: Int, konst y: String = "OK")
 
-expect annotation class A2(val x: Int = 42, val y: String = "OK")
+expect annotation class A2(konst x: Int = 42, konst y: String = "OK")
 
-expect annotation class A3(val x: Int, val y: String)
+expect annotation class A3(konst x: Int, konst y: String)
 
-expect annotation class A4(val x: Int = 42, val y: String)
+expect annotation class A4(konst x: Int = 42, konst y: String)
 
-expect annotation class A5(val x: Int = 42, val y: String)
+expect annotation class A5(konst x: Int = 42, konst y: String)
 
 @A1(0)
 @A2

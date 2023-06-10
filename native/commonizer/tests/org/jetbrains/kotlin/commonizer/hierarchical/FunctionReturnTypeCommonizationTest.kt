@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class FunctionReturnTypeCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test non-commonized return type of top level function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a,b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -45,7 +45,7 @@ class FunctionReturnTypeCommonizationTest : AbstractInlineSourcesCommonizationTe
 
 
     fun `test commonized return type of top level function`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a,b)")
             simpleSingleSourceTarget(
                 "a", """

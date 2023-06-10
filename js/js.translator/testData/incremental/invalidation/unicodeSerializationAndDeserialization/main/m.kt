@@ -8,8 +8,8 @@ fun box(step: Int): String {
 }
 
 fun checkStep(step: Int, qux: String, quz: String): String {
-    val a = qux()
-    val b = quz()
+    konst a = qux()
+    konst b = quz()
 
     if (a != qux || a == "?") {
         return "Fail(qux): Step $step"

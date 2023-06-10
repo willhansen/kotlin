@@ -1,3 +1,3 @@
 package test
 
-const val x = 1
+const konst x = 1

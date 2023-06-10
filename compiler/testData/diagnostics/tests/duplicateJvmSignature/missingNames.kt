@@ -7,7 +7,7 @@
 
 }
 
-<!REDECLARATION!>val<!SYNTAX!><!> : Int = 1<!>
+<!REDECLARATION!>konst<!SYNTAX!><!> : Int = 1<!>
 
 <!REDECLARATION!>class<!SYNTAX!><!> {
 
@@ -34,7 +34,7 @@ class Outer {
 
     }
 
-    <!REDECLARATION!>val<!SYNTAX!><!> : Int = 1<!>
+    <!REDECLARATION!>konst<!SYNTAX!><!> : Int = 1<!>
 
     <!REDECLARATION!>class<!SYNTAX!><!> {
 

@@ -19,7 +19,7 @@ class Child : Test<String> {
     }
 }
 fun box(): String {
-    val res = Child().call()
+    konst res = Child().call()
     if (res != "OK") return "fail $res"
 
     return Child().testDefault("OK")

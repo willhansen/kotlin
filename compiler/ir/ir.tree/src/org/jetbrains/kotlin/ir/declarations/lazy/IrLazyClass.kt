@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassDescriptor
 
 class IrLazyClass(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrClassSymbol,
+    override konst symbol: IrClassSymbol,
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val descriptor: ClassDescriptor,
+    override konst descriptor: ClassDescriptor,
     override var name: Name,
     override var kind: ClassKind,
     override var visibility: DescriptorVisibility,
@@ -37,8 +37,8 @@ class IrLazyClass(
     override var isValue: Boolean,
     override var isExpect: Boolean,
     override var isFun: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator
 ) : IrClass(), IrLazyDeclarationBase, DeserializableClass {
     init {
         symbol.bind(this)
@@ -55,7 +55,7 @@ class IrLazyClass(
     }
 
 
-    override val declarations: MutableList<IrDeclaration> by lazyVar(stubGenerator.lock) {
+    override konst declarations: MutableList<IrDeclaration> by lazyVar(stubGenerator.lock) {
         ArrayList<IrDeclaration>().also {
             typeTranslator.buildWithScope(this) {
                 generateChildStubs(descriptor.constructors, it)
@@ -101,8 +101,8 @@ class IrLazyClass(
         }
     }
 
-    override var valueClassRepresentation: ValueClassRepresentation<IrSimpleType>? by lazyVar(stubGenerator.lock) {
-        descriptor.valueClassRepresentation?.mapUnderlyingType {
+    override var konstueClassRepresentation: ValueClassRepresentation<IrSimpleType>? by lazyVar(stubGenerator.lock) {
+        descriptor.konstueClassRepresentation?.mapUnderlyingType {
             it.toIrType() as? IrSimpleType ?: error("Value class underlying type is not a simple type: ${render()}")
         }
     }
@@ -110,9 +110,9 @@ class IrLazyClass(
     override var attributeOwnerId: IrAttributeContainer = this
     override var originalBeforeInline: IrAttributeContainer? = null
 
-    val classProto: ProtoBuf.Class? get() = (descriptor as? DeserializedClassDescriptor)?.classProto
-    val nameResolver: NameResolver? get() = (descriptor as? DeserializedClassDescriptor)?.c?.nameResolver
-    override val source: SourceElement get() = descriptor.source
+    konst classProto: ProtoBuf.Class? get() = (descriptor as? DeserializedClassDescriptor)?.classProto
+    konst nameResolver: NameResolver? get() = (descriptor as? DeserializedClassDescriptor)?.c?.nameResolver
+    override konst source: SourceElement get() = descriptor.source
 
     override var metadata: MetadataSource?
         get() = null

@@ -10,7 +10,7 @@ FILE: Derived.kt
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval d: R|Derived| = R|/Derived.Derived|()
-        lval res1: R|kotlin/String| = R|<local>/d|.R|/Derived.something|
-        lval res2: R|kotlin/String| = R|<local>/d|.R|/Derived.getSomething|()
+        lkonst d: R|Derived| = R|/Derived.Derived|()
+        lkonst res1: R|kotlin/String| = R|<local>/d|.R|/Derived.something|
+        lkonst res2: R|kotlin/String| = R|<local>/d|.R|/Derived.getSomething|()
     }

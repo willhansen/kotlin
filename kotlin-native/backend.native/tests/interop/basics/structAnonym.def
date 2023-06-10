@@ -1,7 +1,7 @@
 ---
 
 /*
- *  Test of return/send-by-value for aggregate type (struct or union) with anonymous inner struct or union member.
+ *  Test of return/send-by-konstue for aggregate type (struct or union) with anonymous inner struct or union member.
  *  Specific issues: alignment, packed, nested named and anon struct/union, other anon types (named field  of anon struct type; anon bitfield)
  */
 

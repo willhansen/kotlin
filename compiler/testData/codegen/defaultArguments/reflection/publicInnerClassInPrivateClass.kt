@@ -1,5 +1,5 @@
 private class A {
-  public inner class Foo(val a: Int = 1) {}
+  public inner class Foo(konst a: Int = 1) {}
 }
 
 // CLASS: A$Foo

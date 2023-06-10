@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
  */
 public abstract class KtFunctionLikeSignature<out S : KtFunctionLikeSymbol> : KtCallableSignature<S>() {
     /**
-     * The use-site-substituted value parameters.
+     * The use-site-substituted konstue parameters.
      */
-    public abstract val valueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>
+    public abstract konst konstueParameters: List<KtVariableLikeSignature<KtValueParameterSymbol>>
 
     abstract override fun substitute(substitutor: KtSubstitutor): KtFunctionLikeSignature<S>
 }

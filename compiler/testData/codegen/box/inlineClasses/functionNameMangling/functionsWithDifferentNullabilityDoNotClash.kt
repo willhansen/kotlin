@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Id(val id: String)
+konstue class Id(konst id: String)
 
 fun test(id: Id) {
     if (id.id != "OK") throw AssertionError()

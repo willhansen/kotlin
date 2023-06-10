@@ -9,17 +9,17 @@ package kotlin.collections
  * The common interface of [InternalStringMap] and [InternalHashCodeMap].
  */
 internal interface InternalMap<K, V> : MutableIterable<MutableMap.MutableEntry<K, V>> {
-    val equality: EqualityComparator
-    val size: Int
+    konst equality: EqualityComparator
+    konst size: Int
     operator fun contains(key: K): Boolean
     operator fun get(key: K): V?
 
-    fun put(key: K, value: V): V?
+    fun put(key: K, konstue: V): V?
     fun remove(key: K): V?
     fun clear(): Unit
 
     fun createJsMap(): dynamic {
-        val result = js("Object.create(null)")
+        konst result = js("Object.create(null)")
         // force to switch object representation to dictionary mode
         result["foo"] = 1
         jsDeleteProperty(result, "foo")

@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * TODO: consider making this visitor non-recursive to make it more general.
  */
 abstract class AbstractValueUsageTransformer(
-    protected val irBuiltIns: IrBuiltIns
+    protected konst irBuiltIns: IrBuiltIns
 ) : IrElementTransformerVoid() {
 
     protected open fun IrExpression.useAs(type: IrType): IrExpression = this
@@ -44,7 +44,7 @@ abstract class AbstractValueUsageTransformer(
     protected open fun IrExpression.useInTypeOperator(operator: IrTypeOperator, typeOperand: IrType): IrExpression =
         this
 
-    protected open fun IrExpression.useAsValue(value: IrValueDeclaration): IrExpression = this.useAs(value.type)
+    protected open fun IrExpression.useAsValue(konstue: IrValueDeclaration): IrExpression = this.useAs(konstue.type)
 
     protected open fun IrExpression.useAsArgument(parameter: IrValueParameter): IrExpression =
         this.useAsValue(parameter)
@@ -97,9 +97,9 @@ abstract class AbstractValueUsageTransformer(
         with(expression) {
             dispatchReceiver = dispatchReceiver?.useAsDispatchReceiver(expression)
             extensionReceiver = extensionReceiver?.useAsExtensionReceiver(expression)
-            for (index in 0 until valueArgumentsCount) {
-                val argument = getValueArgument(index) ?: continue
-                val parameter = symbol.owner.valueParameters[index]
+            for (index in 0 until konstueArgumentsCount) {
+                konst argument = getValueArgument(index) ?: continue
+                konst parameter = symbol.owner.konstueParameters[index]
                 putValueArgument(index, argument.useAsValueArgument(expression, parameter))
             }
         }
@@ -131,8 +131,8 @@ abstract class AbstractValueUsageTransformer(
             return expression
         }
 
-        val container = expression.innerInlinedBlockOrThis
-        val lastIndex = container.statements.lastIndex
+        konst container = expression.innerInlinedBlockOrThis
+        konst lastIndex = container.statements.lastIndex
         container.statements.forEachIndexed { i, irStatement ->
             if (irStatement is IrExpression) {
                 container.statements[i] = when (i) {
@@ -148,7 +148,7 @@ abstract class AbstractValueUsageTransformer(
     override fun visitReturn(expression: IrReturn): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useAsReturnValue(expression.returnTargetSymbol)
+        expression.konstue = expression.konstue.useAsReturnValue(expression.returnTargetSymbol)
 
         return expression
     }
@@ -156,7 +156,7 @@ abstract class AbstractValueUsageTransformer(
     override fun visitSetValue(expression: IrSetValue): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useAsValue(expression.symbol.owner)
+        expression.konstue = expression.konstue.useAsValue(expression.symbol.owner)
 
         return expression
     }
@@ -164,7 +164,7 @@ abstract class AbstractValueUsageTransformer(
     override fun visitSetField(expression: IrSetField): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useForField(expression.symbol.owner)
+        expression.konstue = expression.konstue.useForField(expression.symbol.owner)
 
         return expression
     }
@@ -211,7 +211,7 @@ abstract class AbstractValueUsageTransformer(
     override fun visitThrow(expression: IrThrow): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useAs(irBuiltIns.throwableType)
+        expression.konstue = expression.konstue.useAs(irBuiltIns.throwableType)
 
         return expression
     }
@@ -257,8 +257,8 @@ abstract class AbstractValueUsageTransformer(
     override fun visitFunction(declaration: IrFunction): IrStatement {
         declaration.transformChildrenVoid(this)
 
-        declaration.valueParameters.forEach { parameter ->
-            val defaultValue = parameter.defaultValue
+        declaration.konstueParameters.forEach { parameter ->
+            konst defaultValue = parameter.defaultValue
             if (defaultValue is IrExpressionBody) {
                 defaultValue.expression = defaultValue.expression.useAsArgument(parameter)
             }

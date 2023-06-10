@@ -6,4 +6,4 @@
 package kotlin.js
 
 @PublishedApi
-internal val undefined: Nothing? = null
+internal konst undefined: Nothing? = null

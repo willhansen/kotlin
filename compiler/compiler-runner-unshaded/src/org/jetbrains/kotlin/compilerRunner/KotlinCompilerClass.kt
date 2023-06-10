@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.compilerRunner
 
 object KotlinCompilerClass {
-    const val JVM = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
-    const val JS = "org.jetbrains.kotlin.cli.js.K2JSCompiler"
-    const val METADATA = "org.jetbrains.kotlin.cli.metadata.K2MetadataCompiler"
+    const konst JVM = "org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"
+    const konst JS = "org.jetbrains.kotlin.cli.js.K2JSCompiler"
+    const konst METADATA = "org.jetbrains.kotlin.cli.metadata.K2MetadataCompiler"
 }

@@ -13,29 +13,29 @@ import org.jetbrains.kotlin.js.facade.TranslationResult
 import java.io.File
 
 class SourceFileInfo(
-    val sourceFile: KtSourceFile,
-    val info: JvmFileClassInfo
+    konst sourceFile: KtSourceFile,
+    konst info: JvmFileClassInfo
 )
 
 object BinaryArtifacts {
-    class Jvm(val classFileFactory: ClassFileFactory, val fileInfos: Collection<SourceFileInfo>) : ResultingArtifact.Binary<Jvm>() {
-        override val kind: BinaryKind<Jvm>
+    class Jvm(konst classFileFactory: ClassFileFactory, konst fileInfos: Collection<SourceFileInfo>) : ResultingArtifact.Binary<Jvm>() {
+        override konst kind: BinaryKind<Jvm>
             get() = ArtifactKinds.Jvm
     }
 
     sealed class Js : ResultingArtifact.Binary<Js>() {
-        abstract val outputFile: File
-        override val kind: BinaryKind<Js>
+        abstract konst outputFile: File
+        override konst kind: BinaryKind<Js>
             get() = ArtifactKinds.Js
 
         open fun unwrap(): Js = this
 
-        class OldJsArtifact(override val outputFile: File, val translationResult: TranslationResult) : Js()
+        class OldJsArtifact(override konst outputFile: File, konst translationResult: TranslationResult) : Js()
 
-        class JsIrArtifact(override val outputFile: File, val compilerResult: CompilerResult, val icCache: Map<String, ByteArray>? = null) : Js()
+        class JsIrArtifact(override konst outputFile: File, konst compilerResult: CompilerResult, konst icCache: Map<String, ByteArray>? = null) : Js()
 
-        data class IncrementalJsArtifact(val originalArtifact: Js, val recompiledArtifact: Js) : Js() {
-            override val outputFile: File
+        data class IncrementalJsArtifact(konst originalArtifact: Js, konst recompiledArtifact: Js) : Js() {
+            override konst outputFile: File
                 get() = unwrap().outputFile
 
             override fun unwrap(): Js {
@@ -45,12 +45,12 @@ object BinaryArtifacts {
     }
 
     class Native : ResultingArtifact.Binary<Native>() {
-        override val kind: BinaryKind<Native>
+        override konst kind: BinaryKind<Native>
             get() = ArtifactKinds.Native
     }
 
-    class KLib(val outputFile: File) : ResultingArtifact.Binary<KLib>() {
-        override val kind: BinaryKind<KLib>
+    class KLib(konst outputFile: File) : ResultingArtifact.Binary<KLib>() {
+        override konst kind: BinaryKind<KLib>
             get() = ArtifactKinds.KLib
     }
 }

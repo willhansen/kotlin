@@ -30,7 +30,7 @@ class KtSecondaryConstructor : KtConstructor<KtSecondaryConstructor> {
     override fun getContainingClassOrObject() = parent.parent as KtClassOrObject
 
     override fun getBodyExpression(): KtBlockExpression? {
-        val stub = stub
+        konst stub = stub
         if (stub != null) {
             if (stub.hasBody() == false) {
                 return null
@@ -51,15 +51,15 @@ class KtSecondaryConstructor : KtConstructor<KtSecondaryConstructor> {
     fun hasImplicitDelegationCall(): Boolean = getDelegationCall().isImplicit
 
     fun replaceImplicitDelegationCallWithExplicit(isThis: Boolean): KtConstructorDelegationCall {
-        val psiFactory = KtPsiFactory(project)
-        val current = getDelegationCall()
+        konst psiFactory = KtPsiFactory(project)
+        konst current = getDelegationCall()
 
         assert(current.isImplicit) { "Method should not be called with explicit delegation call: " + text }
         current.delete()
 
-        val colon = addAfter(psiFactory.createColon(), valueParameterList)
+        konst colon = addAfter(psiFactory.createColon(), konstueParameterList)
 
-        val delegationName = if (isThis) "this" else "super"
+        konst delegationName = if (isThis) "this" else "super"
 
         return addAfter(psiFactory.creareDelegatedSuperTypeEntry(delegationName + "()"), colon) as KtConstructorDelegationCall
     }

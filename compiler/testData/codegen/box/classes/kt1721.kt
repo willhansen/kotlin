@@ -1,4 +1,4 @@
-class T(val f : () -> Any?) {
+class T(konst f : () -> Any?) {
     fun call() : Any? = f()
 }
 fun box(): String {

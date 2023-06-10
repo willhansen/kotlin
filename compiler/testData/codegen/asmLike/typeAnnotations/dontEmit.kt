@@ -5,10 +5,10 @@
 package foo
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
-annotation class TypeParameterAnn(val name: String)
+annotation class TypeParameterAnn(konst name: String)
 
 
 class Kotlin {

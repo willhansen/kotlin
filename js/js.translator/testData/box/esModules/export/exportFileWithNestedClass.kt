@@ -25,13 +25,13 @@ class B {
 
 object MyObject {
     class A {
-        fun valueA() = "OK"
+        fun konstueA() = "OK"
     }
     class B {
-        fun valueB() = "OK"
+        fun konstueB() = "OK"
     }
     class C {
-        fun valueC() = "OK"
+        fun konstueC() = "OK"
     }
 }
 
@@ -43,9 +43,9 @@ export function box() {
     if (new B.Foo().bar("K") != "OK") return "fail 1";
 
     const myObject = MyObject.getInstance()
-    if (new myObject.A().valueA() != "OK") return "fail 2";
-    if (new myObject.B().valueB() != "OK") return "fail 3";
-    if (new myObject.C().valueC() != "OK") return "fail 4";
+    if (new myObject.A().konstueA() != "OK") return "fail 2";
+    if (new myObject.B().konstueB() != "OK") return "fail 3";
+    if (new myObject.C().konstueC() != "OK") return "fail 4";
 
     return "OK"
 }

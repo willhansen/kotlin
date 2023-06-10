@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.gradle.targets.js.yarn.toVersionString
 import java.io.Serializable
 
 class KotlinRootNpmResolution(
-    val projects: Map<String, KotlinProjectNpmResolution>,
-    val rootProjectName: String,
-    val rootProjectVersion: String
+    konst projects: Map<String, KotlinProjectNpmResolution>,
+    konst rootProjectName: String,
+    konst rootProjectVersion: String
 ) : Serializable {
     operator fun get(project: String) = projects[project] ?: KotlinProjectNpmResolution.empty()
 
@@ -32,7 +32,7 @@ class KotlinRootNpmResolution(
         synchronized(projects) {
             npmResolutionManager.parameters.gradleNodeModulesProvider.get().close()
 
-            val projectResolutions: List<PreparedKotlinCompilationNpmResolution> = projects.values.flatMap { it.npmProjects }.map { it.close(npmResolutionManager, logger) }
+            konst projectResolutions: List<PreparedKotlinCompilationNpmResolution> = projects.konstues.flatMap { it.npmProjects }.map { it.close(npmResolutionManager, logger) }
             npmEnvironment.packageManager.prepareRootProject(
                 npmEnvironment,
                 rootProjectName,
@@ -50,7 +50,7 @@ class KotlinRootNpmResolution(
     }
 }
 
-class Installation(val compilationResolutions: Collection<PreparedKotlinCompilationNpmResolution>) {
+class Installation(konst compilationResolutions: Collection<PreparedKotlinCompilationNpmResolution>) {
     internal fun install(
         args: List<String>,
         services: ServiceRegistry,

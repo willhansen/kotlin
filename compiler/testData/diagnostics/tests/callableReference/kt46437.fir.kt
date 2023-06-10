@@ -4,5 +4,5 @@ fun box(): String {
 }
 
 object X {
-    private val y = null
+    private konst y = null
 }

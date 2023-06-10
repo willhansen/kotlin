@@ -3,9 +3,9 @@
 
 object A {
     @JvmStatic fun main(args: Array<String>) {
-        val b = arrayOf(arrayOf(""))
+        konst b = arrayOf(arrayOf(""))
         object {
-            val c = b[0]
+            konst c = b[0]
         }
     }
 }

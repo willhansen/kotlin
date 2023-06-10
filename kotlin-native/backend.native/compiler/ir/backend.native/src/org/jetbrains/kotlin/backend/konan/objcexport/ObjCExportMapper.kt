@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.types.typeUtil.isNothing
 import org.jetbrains.kotlin.types.typeUtil.isUnit
 
 internal class ObjCExportMapper(
-        internal val deprecationResolver: DeprecationResolver? = null,
-        private val local: Boolean = false,
-        internal val unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
+        internal konst deprecationResolver: DeprecationResolver? = null,
+        private konst local: Boolean = false,
+        internal konst unitSuspendFunctionExport: UnitSuspendFunctionObjCExport
 ) {
     fun getCustomTypeMapper(descriptor: ClassDescriptor): CustomTypeMapper? = CustomTypeMappers.getMapper(descriptor)
 
-    val hiddenTypes: Set<ClassId> get() = CustomTypeMappers.hiddenTypes
+    konst hiddenTypes: Set<ClassId> get() = CustomTypeMappers.hiddenTypes
 
     fun isSpecialMapped(descriptor: ClassDescriptor): Boolean {
         // TODO: this method duplicates some of the [ObjCExportTranslatorImpl.mapReferenceType] logic.
@@ -39,7 +39,7 @@ internal class ObjCExportMapper(
                 descriptor.getAllSuperClassifiers().any { it is ClassDescriptor && CustomTypeMappers.hasMapper(it) }
     }
 
-    private val methodBridgeCache = mutableMapOf<FunctionDescriptor, MethodBridge>()
+    private konst methodBridgeCache = mutableMapOf<FunctionDescriptor, MethodBridge>()
 
     fun bridgeMethod(descriptor: FunctionDescriptor): MethodBridge = if (local) {
         bridgeMethodImpl(descriptor)
@@ -53,7 +53,7 @@ internal class ObjCExportMapper(
 internal fun ObjCExportMapper.getClassIfCategory(descriptor: CallableMemberDescriptor): ClassDescriptor? {
     if (descriptor.dispatchReceiverParameter != null) return null
 
-    val extensionReceiverType = descriptor.extensionReceiverParameter?.type ?: return null
+    konst extensionReceiverType = descriptor.extensionReceiverParameter?.type ?: return null
 
     return getClassIfCategory(extensionReceiverType)
 }
@@ -63,7 +63,7 @@ internal fun ObjCExportMapper.getClassIfCategory(extensionReceiverType: KotlinTy
 
     if (extensionReceiverType.isObjCObjectType()) return null
 
-    val erasedClass = extensionReceiverType.getErasedTypeClass()
+    konst erasedClass = extensionReceiverType.getErasedTypeClass()
     return if (!erasedClass.isInterface && !erasedClass.isInlined() && !this.isSpecialMapped(erasedClass)) {
         erasedClass
     } else {
@@ -79,7 +79,7 @@ private fun isSealedClassConstructor(descriptor: ConstructorDescriptor) = descri
  */
 private fun isComponentNMethod(method: CallableMemberDescriptor): Boolean {
     if ((method as? FunctionDescriptor)?.isOperator != true) return false
-    val parent = method.containingDeclaration
+    konst parent = method.containingDeclaration
     if (parent is ClassDescriptor && parent.isData && DataClassResolver.isComponentLike(method.name)) {
         // componentN method of data class.
         return true
@@ -131,7 +131,7 @@ private fun ObjCExportMapper.isHiddenByDeprecation(descriptor: CallableMemberDes
 
     // Note: ObjCExport expects members of unexposed classes to be unexposed too.
     // So hide a declaration if it is from a hidden class:
-    val containingDeclaration = descriptor.containingDeclaration
+    konst containingDeclaration = descriptor.containingDeclaration
     if (containingDeclaration is ClassDescriptor && isHiddenByDeprecation(containingDeclaration)) {
         return true
     }
@@ -164,7 +164,7 @@ private fun ObjCExportMapper.isHiddenByDeprecation(descriptor: ClassDescriptor):
 
     // Note: ObjCExport requires super class of exposed class to be exposed.
     // So hide a class if its super class is hidden:
-    val superClass = descriptor.getSuperClassNotAny()
+    konst superClass = descriptor.getSuperClassNotAny()
     if (superClass != null && isHiddenByDeprecation(superClass)) {
         return true
     }
@@ -172,7 +172,7 @@ private fun ObjCExportMapper.isHiddenByDeprecation(descriptor: ClassDescriptor):
     // Note: ObjCExport requires enclosing class of exposed class to be exposed.
     // Also in Kotlin hidden class members (including other classes) aren't directly accessible.
     // So hide a class if its enclosing class is hidden:
-    val containingDeclaration = descriptor.containingDeclaration
+    konst containingDeclaration = descriptor.containingDeclaration
     if (containingDeclaration is ClassDescriptor && isHiddenByDeprecation(containingDeclaration)) {
         return true
     }
@@ -246,7 +246,7 @@ internal fun ClassDescriptor.getEnumValuesFunctionDescriptor(): SimpleFunctionDe
     return this.staticScope.getContributedFunctions(
             StandardNames.ENUM_VALUES,
             NoLookupLocation.FROM_BACKEND
-    ).singleOrNull { it.extensionReceiverParameter == null && it.valueParameters.size == 0 }
+    ).singleOrNull { it.extensionReceiverParameter == null && it.konstueParameters.size == 0 }
 }
 
 internal fun ClassDescriptor.getEnumEntriesPropertyDescriptor(): PropertyDescriptor? {
@@ -274,7 +274,7 @@ private fun ObjCExportMapper.bridgeType(
             }
         },
         ifPrimitive = { primitiveType, _ ->
-            val objCValueType = when (primitiveType) {
+            konst objCValueType = when (primitiveType) {
                 KonanPrimitiveType.BOOLEAN -> ObjCValueType.BOOL
                 KonanPrimitiveType.CHAR -> ObjCValueType.UNICHAR
                 KonanPrimitiveType.BYTE -> ObjCValueType.CHAR
@@ -299,10 +299,10 @@ private fun ObjCExportMapper.bridgeType(
 
 private fun ObjCExportMapper.bridgeFunctionType(kotlinType: KotlinType): TypeBridge {
     // kotlinType.arguments include return type: <P1, P2, ..., Pn, R>
-    val numberOfParameters = kotlinType.arguments.size - 1
+    konst numberOfParameters = kotlinType.arguments.size - 1
 
-    val returnType = kotlinType.getReturnTypeFromFunctionType()
-    val returnsVoid = returnType.isUnit() || returnType.isNothing()
+    konst returnType = kotlinType.getReturnTypeFromFunctionType()
+    konst returnsVoid = returnType.isUnit() || returnType.isNothing()
     // Note: this is correct because overriding method can't turn this into false
     // neither for a parameter nor for a return type.
 
@@ -316,7 +316,7 @@ private fun ObjCExportMapper.bridgeReturnType(
         descriptor: FunctionDescriptor,
         convertExceptionsToErrors: Boolean
 ): MethodBridge.ReturnValue {
-    val returnType = descriptor.returnType!!
+    konst returnType = descriptor.returnType!!
     return when {
         descriptor.isSuspend -> MethodBridge.ReturnValue.Suspend
 
@@ -350,10 +350,10 @@ private fun ObjCExportMapper.bridgeReturnType(
         }
 
         else -> {
-            val returnTypeBridge = bridgeType(returnType)
-            val successReturnValueBridge = MethodBridge.ReturnValue.Mapped(returnTypeBridge)
+            konst returnTypeBridge = bridgeType(returnType)
+            konst successReturnValueBridge = MethodBridge.ReturnValue.Mapped(returnTypeBridge)
             if (convertExceptionsToErrors) {
-                val canReturnZero = !returnTypeBridge.isReferenceOrPointer() || TypeUtils.isNullableType(returnType)
+                konst canReturnZero = !returnTypeBridge.isReferenceOrPointer() || TypeUtils.isNullableType(returnType)
                 MethodBridge.ReturnValue.WithError.ZeroForError(
                         successReturnValueBridge,
                         successMayBeZero = canReturnZero
@@ -373,13 +373,13 @@ private fun TypeBridge.isReferenceOrPointer(): Boolean = when (this) {
 private fun ObjCExportMapper.bridgeMethodImpl(descriptor: FunctionDescriptor): MethodBridge {
     assert(isBaseMethod(descriptor))
 
-    val convertExceptionsToErrors = this.doesThrow(descriptor)
+    konst convertExceptionsToErrors = this.doesThrow(descriptor)
 
-    val kotlinParameters = descriptor.allParameters.iterator()
+    konst kotlinParameters = descriptor.allParameters.iterator()
 
-    val isTopLevel = isTopLevel(descriptor)
+    konst isTopLevel = isTopLevel(descriptor)
 
-    val receiver = if (descriptor is ConstructorDescriptor && descriptor.constructedClass.isArray) {
+    konst receiver = if (descriptor is ConstructorDescriptor && descriptor.constructedClass.isArray) {
         kotlinParameters.next()
         MethodBridgeReceiver.Factory
     } else if (isTopLevel) {
@@ -389,25 +389,25 @@ private fun ObjCExportMapper.bridgeMethodImpl(descriptor: FunctionDescriptor): M
         MethodBridgeReceiver.Instance
     }
 
-    val valueParameters = mutableListOf<MethodBridgeValueParameter>()
+    konst konstueParameters = mutableListOf<MethodBridgeValueParameter>()
     kotlinParameters.forEach {
-        valueParameters += bridgeParameter(it)
+        konstueParameters += bridgeParameter(it)
     }
 
-    val returnBridge = bridgeReturnType(descriptor, convertExceptionsToErrors)
+    konst returnBridge = bridgeReturnType(descriptor, convertExceptionsToErrors)
 
     if (descriptor.isSuspend) {
-        val useUnitCompletion = (unitSuspendFunctionExport == UnitSuspendFunctionObjCExport.PROPER) && (descriptor.returnType!!.isUnit())
-        valueParameters += MethodBridgeValueParameter.SuspendCompletion(useUnitCompletion)
+        konst useUnitCompletion = (unitSuspendFunctionExport == UnitSuspendFunctionObjCExport.PROPER) && (descriptor.returnType!!.isUnit())
+        konstueParameters += MethodBridgeValueParameter.SuspendCompletion(useUnitCompletion)
     } else if (convertExceptionsToErrors) {
         // Add error out parameter before tail block parameters. The convention allows this.
         // Placing it after would trigger https://bugs.swift.org/browse/SR-12201
         // (see also https://github.com/JetBrains/kotlin-native/issues/3825).
-        val tailBlocksCount = valueParameters.reversed().takeWhile { it.isBlockPointer() }.count()
-        valueParameters.add(valueParameters.size - tailBlocksCount, MethodBridgeValueParameter.ErrorOutParameter)
+        konst tailBlocksCount = konstueParameters.reversed().takeWhile { it.isBlockPointer() }.count()
+        konstueParameters.add(konstueParameters.size - tailBlocksCount, MethodBridgeValueParameter.ErrorOutParameter)
     }
 
-    return MethodBridge(returnBridge, receiver, valueParameters)
+    return MethodBridge(returnBridge, receiver, konstueParameters)
 }
 
 private fun MethodBridgeValueParameter.isBlockPointer(): Boolean = when (this) {
@@ -425,7 +425,7 @@ internal fun ObjCExportMapper.bridgePropertyType(descriptor: PropertyDescriptor)
     return bridgeType(descriptor.type)
 }
 
-internal enum class NSNumberKind(val mappedKotlinClassId: ClassId?, val objCType: ObjCType) {
+internal enum class NSNumberKind(konst mappedKotlinClassId: ClassId?, konst objCType: ObjCType) {
     CHAR(PrimitiveType.BYTE, ObjCPrimitiveType.char),
     UNSIGNED_CHAR(UnsignedType.UBYTE, ObjCPrimitiveType.unsigned_char),
     SHORT(PrimitiveType.SHORT, ObjCPrimitiveType.short),
@@ -445,13 +445,13 @@ internal enum class NSNumberKind(val mappedKotlinClassId: ClassId?, val objCType
     ;
 
     // UNSIGNED_SHORT -> unsignedShort
-    private val kindName = this.name.split('_')
+    private konst kindName = this.name.split('_')
             .joinToString("") { it.lowercase().replaceFirstChar(Char::uppercaseChar) }.replaceFirstChar(Char::lowercaseChar)
 
 
-    val valueSelector = kindName // unsignedShort
-    val initSelector = "initWith${kindName.replaceFirstChar(Char::uppercaseChar)}:" // initWithUnsignedShort:
-    val factorySelector = "numberWith${kindName.replaceFirstChar(Char::uppercaseChar)}:" // numberWithUnsignedShort:
+    konst konstueSelector = kindName // unsignedShort
+    konst initSelector = "initWith${kindName.replaceFirstChar(Char::uppercaseChar)}:" // initWithUnsignedShort:
+    konst factorySelector = "numberWith${kindName.replaceFirstChar(Char::uppercaseChar)}:" // numberWithUnsignedShort:
 
     constructor(
             primitiveType: PrimitiveType,

@@ -4,7 +4,7 @@ public fun list(/*0*/ start: SomeObject): kotlin.Unit
 
 public final data class SomeObject {
     public constructor SomeObject(/*0*/ n: SomeObject?)
-    public final val n: SomeObject?
+    public final konst n: SomeObject?
     public final operator /*synthesized*/ fun component1(): SomeObject?
     public final /*synthesized*/ fun copy(/*0*/ n: SomeObject? = ...): SomeObject
     public final fun doSomething(): kotlin.Boolean

@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 sealed class IrInlinable
-class IrInvokable(val invokable: IrValueDeclaration) : IrInlinable()
-class IrInlinableLambda(val function: IrSimpleFunction, val boundReceiver: IrValueDeclaration?) : IrInlinable()
+class IrInvokable(konst invokable: IrValueDeclaration) : IrInlinable()
+class IrInlinableLambda(konst function: IrSimpleFunction, konst boundReceiver: IrValueDeclaration?) : IrInlinable()
 
 // Return the underlying function for a lambda argument without bound or default parameters or varargs.
 fun IrExpression.asInlinableFunctionReference(): IrFunctionReference? {
@@ -34,21 +34,21 @@ fun IrExpression.asInlinableFunctionReference(): IrFunctionReference? {
     // Inlinable function references are also a kind of lambda; bound receivers are represented as extension receivers.
     if (this !is IrBlock || statements.size != 2)
         return null
-    val (function, reference) = statements
+    konst (function, reference) = statements
     if (function !is IrSimpleFunction || reference !is IrFunctionReference || function.symbol != reference.symbol)
         return null
     if (function.dispatchReceiverParameter != null)
         return null
-    if ((0 until reference.valueArgumentsCount).any { reference.getValueArgument(it) != null })
+    if ((0 until reference.konstueArgumentsCount).any { reference.getValueArgument(it) != null })
         return null
-    if (function.valueParameters.any { it.isVararg || it.defaultValue != null })
+    if (function.konstueParameters.any { it.isVararg || it.defaultValue != null })
         return null
     return reference
 }
 
 private fun IrExpression.asInlinableLambda(builder: IrStatementsBuilder<*>): IrInlinableLambda? {
     if (this is IrFunctionExpression) {
-        if (function.valueParameters.any { it.isVararg || it.defaultValue != null })
+        if (function.konstueParameters.any { it.isVararg || it.defaultValue != null })
             return null
         return IrInlinableLambda(function, null)
     }
@@ -61,8 +61,8 @@ fun IrExpression.asInlinable(builder: IrStatementsBuilder<*>): IrInlinable =
     asInlinableLambda(builder) ?: IrInvokable(builder.irTemporary(this))
 
 private fun createParameterMapping(source: IrFunction, target: IrFunction): Map<IrValueParameter, IrValueParameter> {
-    val sourceParameters = source.explicitParameters
-    val targetParameters = target.explicitParameters
+    konst sourceParameters = source.explicitParameters
+    konst targetParameters = target.explicitParameters
     assert(sourceParameters.size == targetParameters.size)
     return sourceParameters.zip(targetParameters).toMap()
 }
@@ -81,7 +81,7 @@ private fun IrBody.move(
 ): IrBody = transform(object : VariableRemapper(arguments) {
     override fun visitReturn(expression: IrReturn): IrExpression = super.visitReturn(
         if (expression.returnTargetSymbol == source.symbol)
-            IrReturnImpl(expression.startOffset, expression.endOffset, expression.type, targetSymbol, expression.value)
+            IrReturnImpl(expression.startOffset, expression.endOffset, expression.type, targetSymbol, expression.konstue)
         else
             expression
     )
@@ -114,10 +114,10 @@ fun IrInlinable.inline(target: IrDeclarationParent, arguments: List<IrValueDecla
             function.inline(target, listOfNotNull(boundReceiver) + arguments)
 
         is IrInvokable -> {
-            val invoke = invokable.type.getClass()!!.functions.single { it.name == OperatorNameConventions.INVOKE }
+            konst invoke = invokable.type.getClass()!!.functions.single { it.name == OperatorNameConventions.INVOKE }
             IrCallImpl(
                 UNDEFINED_OFFSET, UNDEFINED_OFFSET, invoke.returnType, invoke.symbol,
-                typeArgumentsCount = 0, valueArgumentsCount = arguments.size,
+                typeArgumentsCount = 0, konstueArgumentsCount = arguments.size,
             ).apply {
                 dispatchReceiver = IrGetValueImpl(UNDEFINED_OFFSET, UNDEFINED_OFFSET, invokable.symbol)
                 for ((index, argument) in arguments.withIndex()) {
@@ -127,8 +127,8 @@ fun IrInlinable.inline(target: IrDeclarationParent, arguments: List<IrValueDecla
         }
     }
 
-val IrInlinedFunctionBlock.inlineDeclaration: IrDeclaration
-    get() = when (val element = inlinedElement) {
+konst IrInlinedFunctionBlock.inlineDeclaration: IrDeclaration
+    get() = when (konst element = inlinedElement) {
         is IrFunction -> element
         is IrFunctionExpression -> element.function
         is IrFunctionReference -> element.symbol.owner
@@ -136,8 +136,8 @@ val IrInlinedFunctionBlock.inlineDeclaration: IrDeclaration
         else -> throw AssertionError("Not supported ir element for inlining ${element.dump()}")
     }
 
-private val IrInlinedFunctionBlock.inlineFunction: IrFunction?
-    get() = when (val element = inlinedElement) {
+private konst IrInlinedFunctionBlock.inlineFunction: IrFunction?
+    get() = when (konst element = inlinedElement) {
         is IrFunction -> element
         is IrFunctionExpression -> element.function
         is IrFunctionReference -> element.symbol.owner.takeIf { it.isInline }
@@ -177,32 +177,32 @@ fun IrInlinedFunctionBlock.getOriginalStatementsFromInlinedBlock(): List<IrState
 }
 
 fun IrInlinedFunctionBlock.putStatementBeforeActualInline(builder: IrBuilderWithScope, statement: IrStatement) {
-    val evaluateStatements = this.statements
+    konst ekonstuateStatements = this.statements
         .filterIsInstance<IrComposite>()
         .singleOrNull { it.origin == INLINED_FUNCTION_ARGUMENTS }?.statements
 
-    if (evaluateStatements != null) {
-        evaluateStatements.add(0, statement)
+    if (ekonstuateStatements != null) {
+        ekonstuateStatements.add(0, statement)
         return
     }
 
-    val newInlinedArgumentsBlock = builder
+    konst newInlinedArgumentsBlock = builder
         .irComposite(UNDEFINED_OFFSET, UNDEFINED_OFFSET, INLINED_FUNCTION_ARGUMENTS, builder.context.irBuiltIns.unitType) { +statement }
     this.statements.add(0, newInlinedArgumentsBlock)
 }
 
 fun IrInlinedFunctionBlock.putStatementsInFrontOfInlinedFunction(statements: List<IrStatement>) {
-    val insertAfter = this.statements
+    konst insertAfter = this.statements
         .indexOfLast { it is IrComposite && (it.origin == INLINED_FUNCTION_ARGUMENTS || it.origin == INLINED_FUNCTION_DEFAULT_ARGUMENTS) }
 
     this.statements.addAll(if (insertAfter == -1) 0 else insertAfter + 1, statements)
 }
 
-val IrContainerExpression.innerInlinedBlockOrThis: IrContainerExpression
+konst IrContainerExpression.innerInlinedBlockOrThis: IrContainerExpression
     get() = (this as? IrReturnableBlock)?.statements?.singleOrNull() as? IrInlinedFunctionBlock ?: this
 
-val IrReturnableBlock.inlineFunction: IrFunction?
+konst IrReturnableBlock.inlineFunction: IrFunction?
     get() = (this.statements.singleOrNull() as? IrInlinedFunctionBlock)?.inlineFunction
 
-val IrReturnableBlock.sourceFileSymbol: IrFileSymbol?
+konst IrReturnableBlock.sourceFileSymbol: IrFileSymbol?
     get() = inlineFunction?.fileOrNull?.symbol

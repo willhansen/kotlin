@@ -15,7 +15,7 @@ class CalcAbsoluteTest {
 
     @Test
     fun testMultiline() {
-        val source = """
+        konst source = """
             abcdefg
             hij
             klmnopqrst
@@ -23,9 +23,9 @@ class CalcAbsoluteTest {
             uv
         """.trimIndent().toSource()
 
-        val pos = SourceCode.Position(4, 6)
+        konst pos = SourceCode.Position(4, 6)
 
-        val absPos = pos.calcAbsolute(source)
+        konst absPos = pos.calcAbsolute(source)
 
         Assert.assertEquals('1', source.text[absPos])
         Assert.assertEquals(17, 17.toSourceCodePosition(source).calcAbsolute(source))
@@ -33,8 +33,8 @@ class CalcAbsoluteTest {
 
     fun String.toSource() = SourceCodeTestImpl(this)
 
-    class SourceCodeTestImpl(override val text: String) : SourceCode {
-        override val name: String? = null
-        override val locationId: String? = null
+    class SourceCodeTestImpl(override konst text: String) : SourceCode {
+        override konst name: String? = null
+        override konst locationId: String? = null
     }
 }

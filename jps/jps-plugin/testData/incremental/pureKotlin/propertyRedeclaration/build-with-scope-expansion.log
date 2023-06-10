@@ -7,4 +7,4 @@ End of files
 Exit code: ABORT
 ------------------------------------------
 COMPILATION FAILED
-Conflicting declarations: public val prop1: Int, public val prop1: Int
+Conflicting declarations: public konst prop1: Int, public konst prop1: Int

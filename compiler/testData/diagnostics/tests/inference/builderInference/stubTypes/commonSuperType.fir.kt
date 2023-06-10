@@ -29,7 +29,7 @@ fun <U> id(x: U) = x
 fun <E> select(vararg x: E) = x[0]
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         Test.foo(get())
         Test.foo(getInv())

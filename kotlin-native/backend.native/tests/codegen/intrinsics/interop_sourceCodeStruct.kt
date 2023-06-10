@@ -17,21 +17,21 @@ class S(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(8, 4)
 
     var x: Int
-        get() = memberAt<IntVar>(0).value
-        set(value) {
-            memberAt<IntVar>(0).value = value
+        get() = memberAt<IntVar>(0).konstue
+        set(konstue) {
+            memberAt<IntVar>(0).konstue = konstue
         }
 
     var y: Int
-        get() = memberAt<IntVar>(4).value
-        set(value) {
-            memberAt<IntVar>(4).value = value
+        get() = memberAt<IntVar>(4).konstue
+        set(konstue) {
+            memberAt<IntVar>(4).konstue = konstue
         }
 }
 
 @Test
 fun test() = memScoped {
-    val s = alloc<S>()
+    konst s = alloc<S>()
 
     s.x = 123
     assertEquals(123, s.x)

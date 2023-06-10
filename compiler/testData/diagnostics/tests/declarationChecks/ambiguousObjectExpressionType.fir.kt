@@ -13,13 +13,13 @@ open class MyClass {
 }
 
 
-class Foo(val myTrait: MyTrait) {
+class Foo(konst myTrait: MyTrait) {
 
-    private val privateProperty = object : MyClass(), MyTrait {}
-    val publicPropertyWithSingleSuperType = object : MyClass() {
+    private konst privateProperty = object : MyClass(), MyTrait {}
+    konst publicPropertyWithSingleSuperType = object : MyClass() {
         fun onlyFromAnonymousObject() {}
     }
-    private val privatePropertyWithSingleSuperType = object : MyClass() {
+    private konst privatePropertyWithSingleSuperType = object : MyClass() {
         fun onlyFromAnonymousObject() {}
     }
 
@@ -30,24 +30,24 @@ class Foo(val myTrait: MyTrait) {
         privatePropertyWithSingleSuperType.onlyFromAnonymousObject() // resolvable since private
     }
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected val protectedProperty<!> = object : MyClass(), MyTrait {}
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected konst protectedProperty<!> = object : MyClass(), MyTrait {}
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val internalProperty<!> = object : MyClass(), MyTrait {}
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst internalProperty<!> = object : MyClass(), MyTrait {}
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal val internal2Property<!> = object : MyClass(), MyTrait {}
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal konst internal2Property<!> = object : MyClass(), MyTrait {}
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public val publicProperty<!> = object : MyClass(), MyTrait {}
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public konst publicProperty<!> = object : MyClass(), MyTrait {}
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val propertyWithGetter<!>
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst propertyWithGetter<!>
     get() = object: MyClass(), MyTrait {}
 
-    private val privateDelegateProperty by lazy { object : MyClass(), MyTrait {} }
-    val publicDelegatePropertyWithSingleSuperType by lazy {
+    private konst privateDelegateProperty by lazy { object : MyClass(), MyTrait {} }
+    konst publicDelegatePropertyWithSingleSuperType by lazy {
         object : MyClass() {
             fun onlyFromAnonymousObject() {}
         }
     }
-    private val privateDelegatePropertyWithSingleSuperType by lazy {
+    private konst privateDelegatePropertyWithSingleSuperType by lazy {
         object : MyClass() {
             fun onlyFromAnonymousObject() {}
         }
@@ -60,18 +60,18 @@ class Foo(val myTrait: MyTrait) {
         privateDelegatePropertyWithSingleSuperType.onlyFromAnonymousObject() // resolvable since private
     }
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected val protectedDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected konst protectedDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val internalDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst internalDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal val internal2DelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal konst internal2DelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
 
-    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public val publicDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
+    <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public konst publicDelegateProperty<!> by lazy { object : MyClass(), MyTrait {} }
 
-    private val privateDelegate = object : MyTrait by myTrait {
+    private konst privateDelegate = object : MyTrait by myTrait {
         fun f2() {}
     }
-    val delegate = object : MyTrait by myTrait {
+    konst delegate = object : MyTrait by myTrait {
         fun f2() {}
     }
 
@@ -100,20 +100,20 @@ class Foo(val myTrait: MyTrait) {
 
 
     class FooInner {
-        private val privatePropertyInner = object : MyClass(), MyTrait {}
+        private konst privatePropertyInner = object : MyClass(), MyTrait {}
 
         init {
             privatePropertyInner.f1()
             privatePropertyInner.f2()
         }
 
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected val protectedProperty<!> = object : MyClass(), MyTrait {}
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>protected konst protectedProperty<!> = object : MyClass(), MyTrait {}
 
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val internalProperty<!> = object : MyClass(), MyTrait {}
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst internalProperty<!> = object : MyClass(), MyTrait {}
 
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal val internal2Property<!> = object : MyClass(), MyTrait {}
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal konst internal2Property<!> = object : MyClass(), MyTrait {}
 
-        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public val publicProperty<!> = object : MyClass(), MyTrait {}
+        <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public konst publicProperty<!> = object : MyClass(), MyTrait {}
 
 
         private fun privateFunctionInner() = object : MyClass(), MyTrait {}
@@ -134,7 +134,7 @@ class Foo(val myTrait: MyTrait) {
     }
 
     fun foo() {
-        val localVar = object : MyClass(), MyTrait {}
+        konst localVar = object : MyClass(), MyTrait {}
         localVar.f1()
         localVar.f2()
 
@@ -145,15 +145,15 @@ class Foo(val myTrait: MyTrait) {
 
 }
 
-private val packagePrivateProperty = object : MyClass(), MyTrait {}
+private konst packagePrivateProperty = object : MyClass(), MyTrait {}
 
-<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!><!WRONG_MODIFIER_TARGET!>protected<!> val packageProtectedProperty<!> = object : MyClass(), MyTrait {}
+<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!><!WRONG_MODIFIER_TARGET!>protected<!> konst packageProtectedProperty<!> = object : MyClass(), MyTrait {}
 
-<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>val packageInternalProperty<!> = object : MyClass(), MyTrait {}
+<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>konst packageInternalProperty<!> = object : MyClass(), MyTrait {}
 
-<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal val packageInternal2Property<!> = object : MyClass(), MyTrait {}
+<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>internal konst packageInternal2Property<!> = object : MyClass(), MyTrait {}
 
-<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public val packagePublicProperty<!> = object : MyClass(), MyTrait {}
+<!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public konst packagePublicProperty<!> = object : MyClass(), MyTrait {}
 
 <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!><!WRONG_MODIFIER_TARGET!>protected<!> fun packageProtectedFunction()<!> = object : MyClass(), MyTrait {}
 
@@ -164,7 +164,7 @@ private val packagePrivateProperty = object : MyClass(), MyTrait {}
 <!AMBIGUOUS_ANONYMOUS_TYPE_INFERRED!>public fun packagePublicFunction()<!> = object : MyClass(), MyTrait {}
 
 fun fooPackage() {
-    val packageLocalVar = object : MyClass(), MyTrait {}
+    konst packageLocalVar = object : MyClass(), MyTrait {}
     packageLocalVar.f1()
     packageLocalVar.f2()
 

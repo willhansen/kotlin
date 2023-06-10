@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.gradle.unitTests.sources.android
 
 fun <T> Set<T>.generatePairs(): Sequence<Pair<T, T>> {
-    val values = this.toList()
+    konst konstues = this.toList()
     return sequence {
-        for (index in values.indices) {
-            val first = values[index]
-            for (remainingIndex in (index + 1)..values.lastIndex) {
-                val second = values[remainingIndex]
+        for (index in konstues.indices) {
+            konst first = konstues[index]
+            for (remainingIndex in (index + 1)..konstues.lastIndex) {
+                konst second = konstues[remainingIndex]
                 yield(first to second)
             }
         }

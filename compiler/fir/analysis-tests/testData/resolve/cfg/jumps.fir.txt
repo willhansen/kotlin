@@ -1,6 +1,6 @@
 FILE: jumps.kt
     public final fun test_1(x: R|kotlin/Int?|): R|kotlin/Unit| {
-        lval y: R|kotlin/Int| = when () {
+        lkonst y: R|kotlin/Int| = when () {
             ==(R|<local>/x|, Null(null)) ->  {
                 throw R|java/lang/Exception.Exception|()
             }
@@ -13,7 +13,7 @@ FILE: jumps.kt
         R|<local>/x|.R|kotlin/Int.inc|()
     }
     public final fun test_2(x: R|kotlin/Int?|): R|kotlin/Unit| {
-        lval y: R|kotlin/Int?| = when () {
+        lkonst y: R|kotlin/Int?| = when () {
             ==(R|<local>/x|, Null(null)) ->  {
                 R|<local>/x|
             }

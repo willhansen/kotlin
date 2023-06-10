@@ -6,7 +6,7 @@ package test
 object ContentTypeByExtension {
     inline fun processRecords(crossinline operation: (String) -> String) =
             listOf("O", "K").map {
-                val ext = B(it)
+                konst ext = B(it)
                 operation(ext.toLowerCase())
             }.joinToString("")
 }
@@ -14,11 +14,11 @@ object ContentTypeByExtension {
 
 
 
-inline fun A.toLowerCase(): String = (this as B).value
+inline fun A.toLowerCase(): String = (this as B).konstue
 
 open class A
 
-open class B(val value: String) : A()
+open class B(konst konstue: String) : A()
 
 // FILE: 2.kt
 

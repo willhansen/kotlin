@@ -7,18 +7,18 @@ interface A {
 }
 
 interface MyData{
-    val s: Int
+    konst s: Int
 
     fun fs(): Int
 }
 
 interface Q {
-    val data: MyData?
+    konst data: MyData?
 
     fun fdata(): MyData?
 }
 
-class QImpl(override val data: MyData?) : Q {
+class QImpl(override konst data: MyData?) : Q {
     override fun fdata(): MyData? = null
 }
 
@@ -27,7 +27,7 @@ class QImplMutable(override var data: MyData?) : Q {
 }
 
 class QImplWithCustomGetter : Q {
-    override val data: MyData?
+    override konst data: MyData?
         get() = null
 
     override fun fdata(): MyData? = null

@@ -26,22 +26,22 @@ object Parceler2 : Parceler<Long> {
 
 @Parcelize
 data class Test(
-        val a: Int,
-        @TypeParceler<Int, Parceler1> val b: Int,
-        @TypeParceler<Long, Parceler2> val c: Long,
-        @TypeParceler<Int, Parceler1> val d: List<Int>,
-        @TypeParceler<Long, Parceler2> val e: LongArray
+        konst a: Int,
+        @TypeParceler<Int, Parceler1> konst b: Int,
+        @TypeParceler<Long, Parceler2> konst c: Long,
+        @TypeParceler<Int, Parceler1> konst d: List<Int>,
+        @TypeParceler<Long, Parceler2> konst e: LongArray
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = Test(5, 5, 50L, listOf(1, 2, 3), longArrayOf(3, 2, 1))
+    konst test = Test(5, 5, 50L, listOf(1, 2, 3), longArrayOf(3, 2, 1))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<Test>().createFromParcel(parcel)
 
     println(test.toString())
     println(test2.toString())

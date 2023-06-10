@@ -1,8 +1,8 @@
 // FILE: 1.kt
 fun foo2(x: Int, xx: Long, y: Any?) = null
 
-inline fun test2(value: Any?): String? {
-    return foo2(0, 0L, value ?: return null)
+inline fun test2(konstue: Any?): String? {
+    return foo2(0, 0L, konstue ?: return null)
 }
 
 // FILE: 2.kt

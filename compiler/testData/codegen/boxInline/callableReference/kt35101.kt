@@ -9,6 +9,6 @@ inline fun <T, R> T.let2(block: (T) -> R): R {
 import test.*
 
 fun box(): String {
-    val result = true.let2(Boolean::not)
+    konst result = true.let2(Boolean::not)
     return if (!result) "OK" else "fail"
 }

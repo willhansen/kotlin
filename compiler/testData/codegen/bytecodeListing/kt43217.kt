@@ -1,7 +1,7 @@
 // JVM_TARGET: 1.8
 // FILE: kt43217.kt
 class A {
-    private val b =
+    private konst b =
         object : DoubleExpression() {
             override fun get(): Double {
                 return 0.0
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class DoubleExpression implements ObservableDouble {
     @NotNull
     @Override
-    public Object isEqualTo(double value) {
+    public Object isEqualTo(double konstue) {
         return null;
     }
 }
@@ -32,7 +32,7 @@ public interface ObservableValue<T> {
     T get();
 
     @NotNull
-    default Object isEqualTo(@NotNull T value) {
+    default Object isEqualTo(@NotNull T konstue) {
         return null;
     }
 }
@@ -42,5 +42,5 @@ import org.jetbrains.annotations.NotNull;
 
 public interface ObservableDouble extends ObservableValue<Double> {
     @NotNull
-    Object isEqualTo(double value);
+    Object isEqualTo(double konstue);
 }

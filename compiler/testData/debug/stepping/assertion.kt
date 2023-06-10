@@ -1,21 +1,21 @@
 // IGNORE_INLINER: IR
 // FILE: test.kt
 
-public val MASSERTIONS_ENABLED: Boolean = true
+public konst MASSERTIONS_ENABLED: Boolean = true
 
-public inline fun massert(value: Boolean, lazyMessage: () -> String) {
+public inline fun massert(konstue: Boolean, lazyMessage: () -> String) {
     if (MASSERTIONS_ENABLED) {
-        if (!value) {
-            val message = lazyMessage()
+        if (!konstue) {
+            konst message = lazyMessage()
             throw AssertionError(message)
         }
     }
 }
 
 
-public inline fun massert(value: Boolean, message: Any = "Assertion failed") {
+public inline fun massert(konstue: Boolean, message: Any = "Assertion failed") {
     if (MASSERTIONS_ENABLED) {
-        if (!value) {
+        if (!konstue) {
             throw AssertionError(message)
         }
     }

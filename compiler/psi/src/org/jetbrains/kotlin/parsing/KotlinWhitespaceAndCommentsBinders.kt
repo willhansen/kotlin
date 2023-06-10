@@ -35,7 +35,7 @@ object PrecedingCommentsBinder : WhitespacesAndCommentsBinder {
         // 2. bind plain comments
         var result = tokens.size
         tokens@ for (idx in tokens.indices.reversed()) {
-            val tokenType = tokens[idx]
+            konst tokenType = tokens[idx]
             when (tokenType) {
                 KtTokens.WHITE_SPACE -> if (StringUtil.getLineBreakCount(getter[idx]) > 1) break@tokens
 
@@ -76,7 +76,7 @@ object TrailingCommentsBinder : WhitespacesAndCommentsBinder {
 
         var result = 0
         tokens@ for (idx in tokens.indices) {
-            val tokenType = tokens[idx]
+            konst tokenType = tokens[idx]
             when (tokenType) {
                 KtTokens.WHITE_SPACE -> if (StringUtil.containsLineBreak(getter[idx])) break@tokens
 
@@ -90,27 +90,27 @@ object TrailingCommentsBinder : WhitespacesAndCommentsBinder {
     }
 }
 
-private class AllCommentsBinder(val isTrailing: Boolean) : WhitespacesAndCommentsBinder {
+private class AllCommentsBinder(konst isTrailing: Boolean) : WhitespacesAndCommentsBinder {
     override fun getEdgePosition(
         tokens: List<IElementType>, atStreamEdge: Boolean, getter: WhitespacesAndCommentsBinder.TokenTextGetter
     ): Int {
         if (tokens.isEmpty()) return 0
 
-        val size = tokens.size
+        konst size = tokens.size
 
         // Skip one whitespace if needed. Expect that there can't be several consecutive whitespaces
-        val endToken = tokens[if (isTrailing) size - 1 else 0]
-        val shift = if (endToken == KtTokens.WHITE_SPACE) 1 else 0
+        konst endToken = tokens[if (isTrailing) size - 1 else 0]
+        konst shift = if (endToken == KtTokens.WHITE_SPACE) 1 else 0
 
         return if (isTrailing) size - shift else shift
     }
 }
 
 @JvmField
-val PRECEDING_ALL_COMMENTS_BINDER: WhitespacesAndCommentsBinder = AllCommentsBinder(false)
+konst PRECEDING_ALL_COMMENTS_BINDER: WhitespacesAndCommentsBinder = AllCommentsBinder(false)
 
 @JvmField
-val TRAILING_ALL_COMMENTS_BINDER: WhitespacesAndCommentsBinder = AllCommentsBinder(true)
+konst TRAILING_ALL_COMMENTS_BINDER: WhitespacesAndCommentsBinder = AllCommentsBinder(true)
 
 object DoNotBindAnything : WhitespacesAndCommentsBinder {
     override fun getEdgePosition(
@@ -132,7 +132,7 @@ object BindFirstShebangWithWhitespaceOnly : WhitespacesAndCommentsBinder {
     }
 }
 
-class BindAll(val isTrailing: Boolean) : WhitespacesAndCommentsBinder {
+class BindAll(konst isTrailing: Boolean) : WhitespacesAndCommentsBinder {
     override fun getEdgePosition(
         tokens: List<IElementType>, atStreamEdge: Boolean, getter: WhitespacesAndCommentsBinder.TokenTextGetter
     ): Int {
@@ -141,7 +141,7 @@ class BindAll(val isTrailing: Boolean) : WhitespacesAndCommentsBinder {
 }
 
 @JvmField
-val PRECEDING_ALL_BINDER: WhitespacesAndCommentsBinder = BindAll(false)
+konst PRECEDING_ALL_BINDER: WhitespacesAndCommentsBinder = BindAll(false)
 
 @JvmField
-val TRAILING_ALL_BINDER: WhitespacesAndCommentsBinder = BindAll(true)
+konst TRAILING_ALL_BINDER: WhitespacesAndCommentsBinder = BindAll(true)

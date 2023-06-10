@@ -8,26 +8,26 @@
 package kotlin.script.experimental.jvm
 
 import kotlin.reflect.KClass
-import kotlin.script.experimental.api.EvaluationResult
-import kotlin.script.experimental.api.ScriptEvaluationConfiguration
-import kotlin.script.experimental.api.ScriptEvaluationConfigurationKeys
+import kotlin.script.experimental.api.EkonstuationResult
+import kotlin.script.experimental.api.ScriptEkonstuationConfiguration
+import kotlin.script.experimental.api.ScriptEkonstuationConfigurationKeys
 import kotlin.script.experimental.api.hostConfiguration
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.util.PropertiesCollection
 
-interface JvmScriptEvaluationConfigurationKeys
+interface JvmScriptEkonstuationConfigurationKeys
 
-open class JvmScriptEvaluationConfigurationBuilder : PropertiesCollection.Builder(), JvmScriptEvaluationConfigurationKeys {
+open class JvmScriptEkonstuationConfigurationBuilder : PropertiesCollection.Builder(), JvmScriptEkonstuationConfigurationKeys {
 
-    companion object : JvmScriptEvaluationConfigurationBuilder()
+    companion object : JvmScriptEkonstuationConfigurationBuilder()
 }
 
 /**
  * The base classloader to use for script classes loading
  */
-val JvmScriptEvaluationConfigurationKeys.baseClassLoader by PropertiesCollection.key<ClassLoader?>(
+konst JvmScriptEkonstuationConfigurationKeys.baseClassLoader by PropertiesCollection.key<ClassLoader?>(
     {
-        get(ScriptEvaluationConfiguration.hostConfiguration)?.get(ScriptingHostConfiguration.jvm.baseClassLoader)
+        get(ScriptEkonstuationConfiguration.hostConfiguration)?.get(ScriptingHostConfiguration.jvm.baseClassLoader)
             ?: Thread.currentThread().contextClassLoader
     },
     isTransient = true
@@ -36,23 +36,23 @@ val JvmScriptEvaluationConfigurationKeys.baseClassLoader by PropertiesCollection
 /**
  * Classloader of the last snippet (supposed to be used in REPL)
  */
-val JvmScriptEvaluationConfigurationKeys.lastSnippetClassLoader by PropertiesCollection.key<ClassLoader?>(isTransient = true)
+konst JvmScriptEkonstuationConfigurationKeys.lastSnippetClassLoader by PropertiesCollection.key<ClassLoader?>(isTransient = true)
 
 /**
- * Load script dependencies before evaluation, true by default
+ * Load script dependencies before ekonstuation, true by default
  * If false, it is assumed that the all dependencies will be provided via baseClassLoader
  */
-val JvmScriptEvaluationConfigurationKeys.loadDependencies by PropertiesCollection.key<Boolean>(true)
+konst JvmScriptEkonstuationConfigurationKeys.loadDependencies by PropertiesCollection.key<Boolean>(true)
 
 /**
  * Arguments of the main call, if script is executed via its main method
  */
-val JvmScriptEvaluationConfigurationKeys.mainArguments by PropertiesCollection.key<Array<out String>>()
+konst JvmScriptEkonstuationConfigurationKeys.mainArguments by PropertiesCollection.key<Array<out String>>()
 
-internal val JvmScriptEvaluationConfigurationKeys.actualClassLoader by PropertiesCollection.key<ClassLoader?>(isTransient = true)
+internal konst JvmScriptEkonstuationConfigurationKeys.actualClassLoader by PropertiesCollection.key<ClassLoader?>(isTransient = true)
 
-internal val JvmScriptEvaluationConfigurationKeys.scriptsInstancesSharingMap by PropertiesCollection.key<MutableMap<KClass<*>, EvaluationResult>>(
+internal konst JvmScriptEkonstuationConfigurationKeys.scriptsInstancesSharingMap by PropertiesCollection.key<MutableMap<KClass<*>, EkonstuationResult>>(
     isTransient = true
 )
 
-val ScriptEvaluationConfigurationKeys.jvm get() = JvmScriptEvaluationConfigurationBuilder()
+konst ScriptEkonstuationConfigurationKeys.jvm get() = JvmScriptEkonstuationConfigurationBuilder()

@@ -1,15 +1,15 @@
 // !LANGUAGE: +SafeCastCheckBoundSmartCasts
 interface SomeClass {
-    val data: Any?
+    konst data: Any?
 }
 
 interface SomeSubClass : SomeClass {
-    val foo: Any?
+    konst foo: Any?
 }
 
 object Impl : SomeSubClass {
-    override val data = ""
-    override val foo = 42
+    override konst data = ""
+    override konst foo = 42
 }
 
 fun g(a: SomeClass?) {
@@ -45,7 +45,7 @@ fun f(a: SomeClass?) {
         (<!DEBUG_INFO_CONSTANT!>aa<!> as? SomeSubClass)<!UNSAFE_CALL!>.<!>foo
         (<!ALWAYS_NULL!>aa<!> as SomeSubClass).foo
     }
-    val b = (aa as? SomeSubClass)?.foo
+    konst b = (aa as? SomeSubClass)?.foo
     aa = null
     if (b != null) {
         // 'aa' cannot be cast to SomeSubClass
@@ -55,7 +55,7 @@ fun f(a: SomeClass?) {
         (<!ALWAYS_NULL!>aa<!> as SomeSubClass).foo
     }
     aa = a
-    val c = aa as? SomeSubClass
+    konst c = aa as? SomeSubClass
     if (c != null) {
         // 'c' can be cast to SomeSubClass
         aa<!UNSAFE_CALL!>.<!>hashCode()

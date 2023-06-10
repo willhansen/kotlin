@@ -1,4 +1,4 @@
-enum class Color(val rgb: Int) {
+enum class Color(konst rgb: Int) {
     RED(0xff0000),
     GREEN(0x00ff00),
     BLUE(0x0000ff);

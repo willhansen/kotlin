@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 public object SomeObject {
-    private val workerThread = object : Thread() {
+    private konst workerThread = object : Thread() {
         override fun run() {
             foo()
         }
@@ -17,12 +17,12 @@ public object SomeObject {
 
 public class SomeClass() {
     inner class Inner {
-        val copy = list
+        konst copy = list
     }
 
-    private val list = ArrayList<String>()
+    private konst list = ArrayList<String>()
     var status : Throwable? = null
-    private val workerThread = object : Thread() {
+    private konst workerThread = object : Thread() {
         public override fun run() {
             try {
                 list.add("123")

@@ -1,6 +1,6 @@
 class Test {
     private fun test(x: Int, y: Int) {
-        val (_, _) = invert(x, y)
+        konst (_, _) = invert(x, y)
     }
 
     private fun invert(x: Int, y: Int): Point {
@@ -8,4 +8,4 @@ class Test {
     }
 }
 
-data class Point(val x: Int, val y: Int)
+data class Point(konst x: Int, konst y: Int)

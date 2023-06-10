@@ -7,5 +7,5 @@ class X {
 }
 
 class E {
-    val x = foo.bar.baz.X.CO<caret>MP
+    konst x = foo.bar.baz.X.CO<caret>MP
 }

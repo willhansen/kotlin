@@ -6,11 +6,11 @@
 // JVM_IR_TEMPLATES
 // 1 java/lang/invoke/LambdaMetafactory
 
-class C(val x: String)
+class C(konst x: String)
 
 fun boxLambda(lambda: C.() -> String) = lambda
 
 fun box(): String {
-    val ext = boxLambda { x }
+    konst ext = boxLambda { x }
     return C("OK").ext()
 }

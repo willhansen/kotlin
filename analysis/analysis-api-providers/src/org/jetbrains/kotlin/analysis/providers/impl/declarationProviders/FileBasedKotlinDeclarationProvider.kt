@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.utils.addIfNotNull
 import org.jetbrains.kotlin.utils.yieldIfNotNull
 
-public class FileBasedKotlinDeclarationProvider(public val kotlinFile: KtFile) : KotlinDeclarationProvider() {
-    private val topLevelDeclarations: Sequence<KtDeclaration>
+public class FileBasedKotlinDeclarationProvider(public konst kotlinFile: KtFile) : KotlinDeclarationProvider() {
+    private konst topLevelDeclarations: Sequence<KtDeclaration>
         get() {
             return sequence {
                 for (child in kotlinFile.declarations) {
@@ -46,12 +46,12 @@ public class FileBasedKotlinDeclarationProvider(public val kotlinFile: KtFile) :
             return emptySequence()
         }
 
-        data class Task(val chunks: List<Name>, val element: KtElement)
+        data class Task(konst chunks: List<Name>, konst element: KtElement)
 
         return sequence {
-            val tasks = ArrayDeque<Task>()
+            konst tasks = ArrayDeque<Task>()
 
-            val startingChunks = classId.relativeClassName.pathSegments()
+            konst startingChunks = classId.relativeClassName.pathSegments()
             for (declaration in topLevelDeclarations) {
                 tasks.addLast(Task(startingChunks, declaration))
             }
@@ -59,7 +59,7 @@ public class FileBasedKotlinDeclarationProvider(public val kotlinFile: KtFile) :
             tasks += Task(startingChunks, kotlinFile)
 
             while (!tasks.isEmpty()) {
-                val (chunks, element) = tasks.removeFirst()
+                konst (chunks, element) = tasks.removeFirst()
                 assert(chunks.isNotEmpty())
 
                 if (element !is KtNamedDeclaration || element.nameAsName != chunks[0]) {
@@ -72,7 +72,7 @@ public class FileBasedKotlinDeclarationProvider(public val kotlinFile: KtFile) :
                 }
 
                 if (element is KtDeclarationContainer) {
-                    val newChunks = chunks.subList(1, chunks.size)
+                    konst newChunks = chunks.subList(1, chunks.size)
                     for (child in element.declarations) {
                         tasks.addLast(Task(newChunks, child))
                     }

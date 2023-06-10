@@ -11,10 +11,10 @@ fun <T> Wrapper.fooTakeInt(x: Int): T = TODO()
 fun <T, R, S> bar(f: T.(R) -> S): Tripple<T, R, S> = TODO()
 fun <T, R, S> baz(x: T, y: R, z: S, f: T.(R) -> S): Tripple<T, R, S> = TODO()
 
-class Tripple<A, B, C>(val a: A, val b: B, val c: C)
+class Tripple<A, B, C>(konst a: A, konst b: B, konst c: C)
 
 fun test1() {
-    val x: Wrapper.(String) -> Boolean = Wrapper::foo
+    konst x: Wrapper.(String) -> Boolean = Wrapper::foo
     bar<Wrapper, Double, Float>(Wrapper::foo).checkType { _<Tripple<Wrapper, Double, Float>>() }
     bar(Wrapper::fooIntString).checkType { _<Tripple<Wrapper, Int, String>>() }
 }

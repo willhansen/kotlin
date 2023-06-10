@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
-class MyList<T>(val v: T): List<T> {
-    override val size: Int get() = 0
+class MyList<T>(konst v: T): List<T> {
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: T): Boolean = false
     override fun iterator(): Iterator<T> = throw Error()
@@ -28,7 +28,7 @@ class MyList<T>(val v: T): List<T> {
 }
 
 fun box(): String {
-    val list = MyList<String>("") as java.util.List<String>
+    konst list = MyList<String>("") as java.util.List<String>
 
     list.add("")
     list.remove("")

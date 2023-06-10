@@ -4,10 +4,10 @@ package test
 
 enum class E { ENTRY }
 
-annotation class StringOptions(vararg val option: String)
-annotation class EnumOption(val option: E)
+annotation class StringOptions(vararg konst option: String)
+annotation class EnumOption(konst option: E)
 
-annotation class OptionGroups(val o1: StringOptions, val o2: EnumOption)
+annotation class OptionGroups(konst o1: StringOptions, konst o2: EnumOption)
 
 @OptionGroups(StringOptions("abc", "d", "ef"), EnumOption(E.ENTRY))
 public class AnnotationInAnnotationArguments

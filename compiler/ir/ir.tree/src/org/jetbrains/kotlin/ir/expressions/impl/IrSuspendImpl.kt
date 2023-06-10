@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.ir.expressions.IrSuspensionPoint
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrSuspensionPointImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var suspensionPointIdParameter: IrVariable,
     override var result: IrExpression,
@@ -21,8 +21,8 @@ class IrSuspensionPointImpl(
 ) : IrSuspensionPoint()
 
 class IrSuspendableExpressionImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var suspensionPointId: IrExpression,
     override var result: IrExpression

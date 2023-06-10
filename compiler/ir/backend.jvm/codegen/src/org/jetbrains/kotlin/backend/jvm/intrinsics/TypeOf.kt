@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 
 object TypeOf : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo) = with(codegen) {
-        val type = expression.getTypeArgument(0)!!
-        val support = IrInlineIntrinsicsSupport(codegen.classCodegen, expression, codegen.irFunction.fileParent)
+        konst type = expression.getTypeArgument(0)!!
+        konst support = IrInlineIntrinsicsSupport(codegen.classCodegen, expression, codegen.irFunction.fileParent)
         typeMapper.typeSystem.generateTypeOf(mv, type, support)
         codegen.propagateChildReifiedTypeParametersUsages(codegen.typeMapper.typeSystem.extractUsedReifiedParameters(type))
         expression.onStack

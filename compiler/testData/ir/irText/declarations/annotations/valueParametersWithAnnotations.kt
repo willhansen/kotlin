@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
 fun testFun(@TestAnn("testFun.x") x: Int) {}
 
 class TestClassConstructor1(@TestAnn("TestClassConstructor1.x")x: Int) {
-    val xx = x
+    konst xx = x
 }

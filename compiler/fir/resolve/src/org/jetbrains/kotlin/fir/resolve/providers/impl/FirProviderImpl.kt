@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.visitors.FirDefaultVisitor
 import org.jetbrains.kotlin.name.*
 
 @ThreadSafeMutableState
-class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotlinScopeProvider) : FirProvider() {
-    override val symbolProvider: FirSymbolProvider = SymbolProvider()
+class FirProviderImpl(konst session: FirSession, konst kotlinScopeProvider: FirKotlinScopeProvider) : FirProvider() {
+    override konst symbolProvider: FirSymbolProvider = SymbolProvider()
 
     override fun getFirCallableContainerFile(symbol: FirCallableSymbol<*>): FirFile? {
         symbol.originalIfFakeOverride()?.let { originalSymbol ->
@@ -27,7 +27,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             return getFirCallableContainerFile(symbol.fir.propertySymbol)
         }
         if (symbol is FirSyntheticPropertySymbol) {
-            val fir = symbol.fir
+            konst fir = symbol.fir
             if (fir is FirSyntheticProperty) {
                 return getFirCallableContainerFile(fir.getter.delegate.symbol)
             }
@@ -77,7 +77,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             return null
         }
 
-        override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
+        override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
             override fun getPackageNamesWithTopLevelCallables(): Set<String> =
                 state.allSubPackages.mapTo(mutableSetOf()) { it.asString() }
 
@@ -100,7 +100,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
         }
     }
 
-    private val FirDeclaration.file: FirFile
+    private konst FirDeclaration.file: FirFile
         get() = when (this) {
             is FirFile -> this
             is FirRegularClass -> getFirClassifierContainerFile(this.symbol.classId)
@@ -108,24 +108,24 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
         }
 
     private fun recordFile(file: FirFile, state: State) {
-        val packageName = file.packageFqName
+        konst packageName = file.packageFqName
         state.fileMap.merge(packageName, listOf(file)) { a, b -> a + b }
         generateSequence(packageName) { it.parentOrNull() }.forEach(state.allSubPackages::add)
         file.acceptChildren(FirRecorder, FirRecorderData(state, file, session.nameConflictsTracker))
     }
 
     private class FirRecorderData(
-        val state: State,
-        val file: FirFile,
-        val nameConflictsTracker: FirNameConflictsTrackerComponent?
+        konst state: State,
+        konst file: FirFile,
+        konst nameConflictsTracker: FirNameConflictsTrackerComponent?
     )
 
     private object FirRecorder : FirDefaultVisitor<Unit, FirRecorderData>() {
         override fun visitElement(element: FirElement, data: FirRecorderData) {}
 
         override fun visitRegularClass(regularClass: FirRegularClass, data: FirRecorderData) {
-            val classId = regularClass.symbol.classId
-            val prevFile = data.state.classifierContainerFileMap.put(classId, data.file)
+            konst classId = regularClass.symbol.classId
+            konst prevFile = data.state.classifierContainerFileMap.put(classId, data.file)
             data.state.classifierMap.put(classId, regularClass)?.let {
                 data.nameConflictsTracker?.registerClassifierRedeclaration(classId, regularClass.symbol, data.file, it.symbol, prevFile)
             }
@@ -139,8 +139,8 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
         }
 
         override fun visitTypeAlias(typeAlias: FirTypeAlias, data: FirRecorderData) {
-            val classId = typeAlias.symbol.classId
-            val prevFile = data.state.classifierContainerFileMap.put(classId, data.file)
+            konst classId = typeAlias.symbol.classId
+            konst prevFile = data.state.classifierContainerFileMap.put(classId, data.file)
             data.state.classifierMap.put(classId, typeAlias)?.let {
                 data.nameConflictsTracker?.registerClassifierRedeclaration(classId, typeAlias.symbol, data.file, it.symbol, prevFile)
             }
@@ -152,7 +152,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             propertyAccessor: FirPropertyAccessor,
             data: FirRecorderData
         ) {
-            val symbol = propertyAccessor.symbol
+            konst symbol = propertyAccessor.symbol
             data.state.callableContainerMap[symbol] = data.file
         }
 
@@ -161,53 +161,53 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             data: FirRecorderData,
             map: MutableMap<CallableId, List<S>>
         ) {
-            val callableId = symbol.callableId
+            konst callableId = symbol.callableId
             map.merge(callableId, listOf(symbol)) { a, b -> a + b }
             data.state.callableContainerMap[symbol] = data.file
         }
 
         override fun visitConstructor(constructor: FirConstructor, data: FirRecorderData) {
-            val symbol = constructor.symbol
+            konst symbol = constructor.symbol
             registerCallable(symbol, data, data.state.constructorMap)
         }
 
         override fun visitSimpleFunction(simpleFunction: FirSimpleFunction, data: FirRecorderData) {
-            val symbol = simpleFunction.symbol
+            konst symbol = simpleFunction.symbol
             registerCallable(symbol, data, data.state.functionMap)
         }
 
         override fun visitProperty(property: FirProperty, data: FirRecorderData) {
-            val symbol = property.symbol
+            konst symbol = property.symbol
             registerCallable(symbol, data, data.state.propertyMap)
             property.getter?.let { visitPropertyAccessor(it, data) }
             property.setter?.let { visitPropertyAccessor(it, data) }
         }
 
         override fun visitEnumEntry(enumEntry: FirEnumEntry, data: FirRecorderData) {
-            val symbol = enumEntry.symbol
+            konst symbol = enumEntry.symbol
             data.state.callableContainerMap[symbol] = data.file
         }
 
         override fun visitScript(script: FirScript, data: FirRecorderData) {
-            val symbol = script.symbol
+            konst symbol = script.symbol
             data.state.scriptContainerMap[symbol] = data.file
         }
     }
 
-    private val state = State()
+    private konst state = State()
 
     private class State {
-        val fileMap: MutableMap<FqName, List<FirFile>> = mutableMapOf<FqName, List<FirFile>>()
-        val allSubPackages = mutableSetOf<FqName>()
-        val classifierMap = mutableMapOf<ClassId, FirClassLikeDeclaration>()
-        val classifierContainerFileMap = mutableMapOf<ClassId, FirFile>()
-        val classifierInPackage = mutableMapOf<FqName, MutableSet<Name>>()
-        val classesInPackage = mutableMapOf<FqName, MutableSet<Name>>()
-        val functionMap = mutableMapOf<CallableId, List<FirNamedFunctionSymbol>>()
-        val propertyMap = mutableMapOf<CallableId, List<FirPropertySymbol>>()
-        val constructorMap = mutableMapOf<CallableId, List<FirConstructorSymbol>>()
-        val callableContainerMap = mutableMapOf<FirCallableSymbol<*>, FirFile>()
-        val scriptContainerMap = mutableMapOf<FirScriptSymbol, FirFile>()
+        konst fileMap: MutableMap<FqName, List<FirFile>> = mutableMapOf<FqName, List<FirFile>>()
+        konst allSubPackages = mutableSetOf<FqName>()
+        konst classifierMap = mutableMapOf<ClassId, FirClassLikeDeclaration>()
+        konst classifierContainerFileMap = mutableMapOf<ClassId, FirFile>()
+        konst classifierInPackage = mutableMapOf<FqName, MutableSet<Name>>()
+        konst classesInPackage = mutableMapOf<FqName, MutableSet<Name>>()
+        konst functionMap = mutableMapOf<CallableId, List<FirNamedFunctionSymbol>>()
+        konst propertyMap = mutableMapOf<CallableId, List<FirPropertySymbol>>()
+        konst constructorMap = mutableMapOf<CallableId, List<FirConstructorSymbol>>()
+        konst callableContainerMap = mutableMapOf<FirCallableSymbol<*>, FirFile>()
+        konst scriptContainerMap = mutableMapOf<FirScriptSymbol, FirFile>()
 
         fun setFrom(other: State) {
             fileMap.clear()
@@ -247,10 +247,10 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
 
     @TestOnly
     fun ensureConsistent(files: List<FirFile>) {
-        val newState = State()
+        konst newState = State()
         files.forEach { recordFile(it, newState) }
 
-        val failures = mutableListOf<String>()
+        konst failures = mutableListOf<String>()
 
         fun <K, V> checkMapDiff(
             title: String,
@@ -259,7 +259,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
             equal: (old: V?, new: V?) -> Boolean = { old, new -> old === new }
         ) {
             var hasTitle = false
-            val unionKeys = a.keys + b.keys
+            konst unionKeys = a.keys + b.keys
 
             for ((key, aValue, bValue) in unionKeys.map { Triple(it, a[it], b[it]) }) {
                 if (!equal(aValue, bValue)) {
@@ -274,7 +274,7 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
 
         fun <K, V> checkMMapDiff(title: String, a: Map<K, List<V>>, b: Map<K, List<V>>) {
             var hasTitle = false
-            val unionKeys = a.keys + b.keys
+            konst unionKeys = a.keys + b.keys
             for ((key, aValue, bValue) in unionKeys.map { Triple(it, a[it], b[it]) }) {
                 if (aValue == null || bValue == null) {
                     if (!hasTitle) {
@@ -283,11 +283,11 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
                     }
                     failures += "diff at key = '$key': was: $aValue, become: $bValue"
                 } else {
-                    val aSet = aValue.toSet()
-                    val bSet = bValue.toSet()
+                    konst aSet = aValue.toSet()
+                    konst bSet = bValue.toSet()
 
-                    val aLost = aSet - bSet
-                    val bNew = bSet - aSet
+                    konst aLost = aSet - bSet
+                    konst bNew = bSet - aSet
                     if (aLost.isNotEmpty() || bNew.isNotEmpty()) {
                         failures += "diff at key = '$key':"
                         failures += "    Lost:"
@@ -322,8 +322,8 @@ class FirProviderImpl(val session: FirSession, val kotlinScopeProvider: FirKotli
     }
 
     fun getAllFirFiles(): List<FirFile> {
-        return state.fileMap.values.flatten()
+        return state.fileMap.konstues.flatten()
     }
 }
 
-private const val rebuildIndex = true
+private const konst rebuildIndex = true

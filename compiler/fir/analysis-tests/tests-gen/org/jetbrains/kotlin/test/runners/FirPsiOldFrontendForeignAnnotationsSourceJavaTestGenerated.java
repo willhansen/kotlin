@@ -1226,15 +1226,15 @@ public class FirPsiOldFrontendForeignAnnotationsSourceJavaTestGenerated extends 
             }
 
             @Test
-            @TestMetadata("valueParameter.kt")
+            @TestMetadata("konstueParameter.kt")
             public void testValueParameter() throws Exception {
-                runTest("compiler/testData/diagnostics/foreignAnnotationsTests/java8Tests/misc/valueParameter.kt");
+                runTest("compiler/testData/diagnostics/foreignAnnotationsTests/java8Tests/misc/konstueParameter.kt");
             }
 
             @Test
-            @TestMetadata("valueParameterWithWarnings.kt")
+            @TestMetadata("konstueParameterWithWarnings.kt")
             public void testValueParameterWithWarnings() throws Exception {
-                runTest("compiler/testData/diagnostics/foreignAnnotationsTests/java8Tests/misc/valueParameterWithWarnings.kt");
+                runTest("compiler/testData/diagnostics/foreignAnnotationsTests/java8Tests/misc/konstueParameterWithWarnings.kt");
             }
 
             @Test

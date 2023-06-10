@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * <p/>
  * Scopes are associated with
  * {@link JsFunction}s, but the two are
- * not equivalent. Functions <i>have</i> scopes, but a scope does not
+ * not equikonstent. Functions <i>have</i> scopes, but a scope does not
  * necessarily have an associated Function. Examples of this include the
  * {@link JsRootScope} and synthetic
  * scopes that might be created by a client.
@@ -204,7 +204,7 @@ public abstract class JsScope {
             String group = matcher.group();
             baseName = matcher.replaceAll("");
             sep = group.charAt(0);
-            counter = Integer.valueOf(group.substring(1));
+            counter = Integer.konstueOf(group.substring(1));
         }
 
         String freshName = suggestedIdent;

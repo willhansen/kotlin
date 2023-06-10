@@ -18,13 +18,13 @@ internal object MultiplatformLayoutV1DependsOnConfigurator : KotlinAndroidSource
         kotlinSourceSet: KotlinSourceSet,
         androidSourceSet: AndroidSourceSet
     ) {
-        val commonSourceSetName = when (androidSourceSet.name) {
+        konst commonSourceSetName = when (androidSourceSet.name) {
             "main" -> COMMON_MAIN_SOURCE_SET_NAME
             "test" -> COMMON_TEST_SOURCE_SET_NAME
             "androidTest" -> COMMON_TEST_SOURCE_SET_NAME
             else -> return
         }
-        val commonSourceSet = target.project.kotlinExtension.sourceSets.findByName(commonSourceSetName) ?: return
+        konst commonSourceSet = target.project.kotlinExtension.sourceSets.findByName(commonSourceSetName) ?: return
         kotlinSourceSet.dependsOn(commonSourceSet)
     }
 }

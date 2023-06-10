@@ -20,34 +20,34 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 enum class LinkedSpecTestFileInfoElementType(
-    override val valuePattern: Pattern? = null,
-    override val required: Boolean = false
+    override konst konstuePattern: Pattern? = null,
+    override konst required: Boolean = false
 ) : SpecTestInfoElementType {
     SPEC_VERSION(required = true),
-    MAIN_LINK(valuePattern = mainLinkPattern),
-    PRIMARY_LINKS(valuePattern = relevantLinksPattern),
-    SECONDARY_LINKS(valuePattern = relevantLinksPattern),
+    MAIN_LINK(konstuePattern = mainLinkPattern),
+    PRIMARY_LINKS(konstuePattern = relevantLinksPattern),
+    SECONDARY_LINKS(konstuePattern = relevantLinksPattern),
     UNSPECIFIED_BEHAVIOR;
 }
 
 data class SpecPlace(
-    val sections: List<String>,
-    val paragraphNumber: Int,
-    val sentenceNumber: Int
+    konst sections: List<String>,
+    konst paragraphNumber: Int,
+    konst sentenceNumber: Int
 )
 
 class LinkedSpecTest(
-    val specVersion: String,
+    konst specVersion: String,
     testArea: TestArea,
     testType: TestType,
-    val mainLink: SpecPlace?,
-    val primaryLinks: Set<SpecPlace>?,
-    val secondaryLinks: Set<SpecPlace>?,
+    konst mainLink: SpecPlace?,
+    konst primaryLinks: Set<SpecPlace>?,
+    konst secondaryLinks: Set<SpecPlace>?,
     testNumber: Int,
     description: String,
     cases: SpecTestCasesSet,
     unexpectedBehavior: Boolean,
-    private val unspecifiedBehavior: Boolean,
+    private konst unspecifiedBehavior: Boolean,
     issues: Set<String>,
     helpers: Set<String>?,
     exception: TestsExceptionType?
@@ -65,7 +65,7 @@ class LinkedSpecTest(
 ) {
 
     override fun checkPathConsistency(pathMatcher: Matcher) =
-        testArea == TestArea.valueOf(pathMatcher.group("testArea").withUnderscores())
+        testArea == TestArea.konstueOf(pathMatcher.group("testArea").withUnderscores())
                 && testType == TestType.fromValue(pathMatcher.group("testType"))!!
                 && sections == pathMatcher.group("sections").splitByPathSeparator()
                 && mainLink?.paragraphNumber == pathMatcher.group("paragraphNumber").toInt()
@@ -73,8 +73,8 @@ class LinkedSpecTest(
                 && testNumber == pathMatcher.group("testNumber").toInt()
 
     private fun getUnspecifiedBehaviourText(): String? {
-        val separatedTestCasesUnspecifiedBehaviorNumber = cases.byNumbers.count { it.value.unspecifiedBehavior }
-        val testCasesUnspecifiedBehaviorNumber = when {
+        konst separatedTestCasesUnspecifiedBehaviorNumber = cases.byNumbers.count { it.konstue.unspecifiedBehavior }
+        konst testCasesUnspecifiedBehaviorNumber = when {
             unspecifiedBehavior -> cases.byNumbers.size
             separatedTestCasesUnspecifiedBehaviorNumber != 0 -> separatedTestCasesUnspecifiedBehaviorNumber
             else -> 0

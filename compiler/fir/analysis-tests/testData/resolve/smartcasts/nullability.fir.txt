@@ -6,14 +6,14 @@ FILE: nullability.kt
 
     }
     public abstract interface MyData : R|kotlin/Any| {
-        public abstract val s: R|kotlin/Int|
+        public abstract konst s: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
         public abstract fun fs(): R|kotlin/Int|
 
     }
     public abstract interface Q : R|kotlin/Any| {
-        public abstract val data: R|MyData?|
+        public abstract konst data: R|MyData?|
             public get(): R|MyData?|
 
         public abstract fun fdata(): R|MyData?|
@@ -24,7 +24,7 @@ FILE: nullability.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val data: R|MyData?| = R|<local>/data|
+        public open override konst data: R|MyData?| = R|<local>/data|
             public get(): R|MyData?|
 
         public open override fun fdata(): R|MyData?| {
@@ -39,7 +39,7 @@ FILE: nullability.kt
 
         public open override var data: R|MyData?| = R|<local>/data|
             public get(): R|MyData?|
-            public set(value: R|MyData?|): R|kotlin/Unit|
+            public set(konstue: R|MyData?|): R|kotlin/Unit|
 
         public open override fun fdata(): R|MyData?| {
             ^fdata Null(null)
@@ -51,7 +51,7 @@ FILE: nullability.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val data: R|MyData?|
+        public open override konst data: R|MyData?|
             public get(): R|MyData?| {
                 ^ Null(null)
             }

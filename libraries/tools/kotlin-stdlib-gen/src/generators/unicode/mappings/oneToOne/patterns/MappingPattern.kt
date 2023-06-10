@@ -12,12 +12,12 @@ internal interface MappingPattern {
     /**
      * Char code of the first char in this range.
      */
-    val start: Int
+    konst start: Int
 
     /**
      * Char code of the last char in this range.
      */
-    val end: Int
+    konst end: Int
 
     /**
      * Appends the [charCode] to this range pattern.
@@ -29,4 +29,4 @@ internal interface MappingPattern {
     fun append(charCode: Int, categoryCode: String, mapping: Int): Boolean
 }
 
-internal val MappingPattern.length: Int get() = end - start + 1
+internal konst MappingPattern.length: Int get() = end - start + 1

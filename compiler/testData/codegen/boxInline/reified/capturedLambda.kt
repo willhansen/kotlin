@@ -15,7 +15,7 @@ public inline fun <T> call(f: () -> T): T = f()
 
 import test.*
 
-val x: () -> String = foo<String>()
+konst x: () -> String = foo<String>()
 
 fun box(): String {
     return x()

@@ -19,9 +19,9 @@ abstract class KotlinD8Ir @Inject constructor(target: KotlinJsIrTarget) :
     KotlinJsIrSubTargetBase(target, "d8"),
     KotlinWasmD8Dsl {
 
-    private val d8 = D8RootPlugin.apply(project.rootProject)
+    private konst d8 = D8RootPlugin.apply(project.rootProject)
 
-    override val testTaskDescription: String
+    override konst testTaskDescription: String
         get() = "Run all ${target.name} tests inside d8 using the builtin test framework"
 
     override fun runTask(body: D8Exec.() -> Unit) {
@@ -31,7 +31,7 @@ abstract class KotlinD8Ir @Inject constructor(target: KotlinJsIrTarget) :
     override fun locateOrRegisterRunTask(binary: JsIrBinary, name: String) {
         if (project.locateTask<D8Exec>(name) != null) return
 
-        val runTaskHolder = D8Exec.create(binary.compilation, name) {
+        konst runTaskHolder = D8Exec.create(binary.compilation, name) {
             group = taskGroupName
             dependsOn(binary.linkSyncTask)
             inputFileProperty.fileProvider(

@@ -11,6 +11,6 @@ inline fun h() = 1
 import test.*
 
 fun box(): String {
-    val result = f { it + h() }
+    konst result = f { it + h() }
     return if (result == 3) "OK" else "fail: $result"
 }

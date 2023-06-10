@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.types.TypeCheckerState
 
 object ConeNullabilityChecker {
     fun isSubtypeOfAny(context: ConeTypeContext, type: ConeKotlinType): Boolean {
-        val actualType = with(context) { type.lowerBoundIfFlexible() }
+        konst actualType = with(context) { type.lowerBoundIfFlexible() }
         return with(AbstractNullabilityChecker) {
             context.newTypeCheckerState(errorTypesEqualToAnything = false, stubTypesEqualToAnything = true)
                 .hasNotNullSupertype(actualType, TypeCheckerState.SupertypesPolicy.LowerIfFlexible)

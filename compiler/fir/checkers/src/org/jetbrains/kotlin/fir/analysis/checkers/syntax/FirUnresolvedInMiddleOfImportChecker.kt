@@ -30,12 +30,12 @@ object FirUnresolvedInMiddleOfImportChecker : FirDeclarationSyntaxChecker<FirFil
     }
 
     private fun processErrorImport(import: FirErrorImport, context: CheckerContext, reporter: DiagnosticReporter) {
-        when (val diagnostic = import.diagnostic) {
+        when (konst diagnostic = import.diagnostic) {
             is ConeUnresolvedParentInImport -> {
-                val source = import.source ?: return
+                konst source = import.source ?: return
 
-                val symbolProvider = context.session.symbolProvider
-                val parentClassId = diagnostic.parentClassId
+                konst symbolProvider = context.session.symbolProvider
+                konst parentClassId = diagnostic.parentClassId
 
                 if (import.isAllUnder && isClassIdPointingToEnumEntry(parentClassId, symbolProvider)) {
                     // Enum entries cannot be resolved as class so star import of enum falls in here and we treat it as
@@ -61,7 +61,7 @@ object FirUnresolvedInMiddleOfImportChecker : FirDeclarationSyntaxChecker<FirFil
                 // Finds the right segment from the last that causes resolution to fail. Note that FirImportResolveTransformer always create
                 // an error import with resolvable package segments. That is, the segment corresponding to the outermost class name is where
                 // resolution failed.
-                val unresolvedSource = import.getSourceForImportSegment(errorSegmentIndexFromLast) ?: return
+                konst unresolvedSource = import.getSourceForImportSegment(errorSegmentIndexFromLast) ?: return
 
                 reporter.reportOn(
                     unresolvedSource,
@@ -81,8 +81,8 @@ object FirUnresolvedInMiddleOfImportChecker : FirDeclarationSyntaxChecker<FirFil
     private fun ClassId.getOutermostClassName() = relativeClassName.pathSegments().first().asString()
 
     private fun isClassIdPointingToEnumEntry(classId: ClassId, symbolProvider: FirSymbolProvider): Boolean {
-        val enumClassId = classId.parentClassId ?: return false
-        val enumClass =
+        konst enumClassId = classId.parentClassId ?: return false
+        konst enumClass =
             (symbolProvider.getClassLikeSymbolByClassId(enumClassId) as? FirRegularClassSymbol)?.takeIf { it.isEnumClass } ?: return false
         return enumClass.collectEnumEntries().any { it.callableId.callableName == classId.shortClassName }
     }

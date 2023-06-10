@@ -41,12 +41,12 @@ fun foo(arg: Int): Int {
     return 42
 }
 
-data class Two(val x: Int, val y: Int)
+data class Two(konst x: Int, konst y: Int)
 
 fun bar(two: Two) {
 //        constructor Ann()
 //        │       constructor Ann()
 //        │   Int │   Int  bar.two: Two
 //        │   │   │   │    │
-    val (@Ann x, @Ann y) = two
+    konst (@Ann x, @Ann y) = two
 }

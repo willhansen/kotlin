@@ -9,15 +9,15 @@ import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.diagnostic.Logger
 
 object IdeaStandaloneExecutionSetup {
-    private val LOG: Logger = Logger.getInstance(IdeaStandaloneExecutionSetup::class.java)
+    private konst LOG: Logger = Logger.getInstance(IdeaStandaloneExecutionSetup::class.java)
     // Copy-pasted from com.intellij.openapi.util.BuildNumber#FALLBACK_VERSION
-    private const val FALLBACK_IDEA_BUILD_NUMBER = "999.SNAPSHOT"
+    private const konst FALLBACK_IDEA_BUILD_NUMBER = "999.SNAPSHOT"
 
     fun doSetup() {
         checkInHeadlessMode()
 
         System.getProperties().setProperty("project.structure.add.tools.jar.to.new.jdk", "false")
-        System.getProperties().setProperty("psi.track.invalidation", "true")
+        System.getProperties().setProperty("psi.track.inkonstidation", "true")
         System.getProperties().setProperty("psi.incremental.reparse.depth.limit", "1000")
         System.getProperties().setProperty("ide.hide.excluded.files", "false")
         System.getProperties().setProperty("ast.loading.filter", "false")
@@ -30,7 +30,7 @@ object IdeaStandaloneExecutionSetup {
 
     private fun checkInHeadlessMode() {
         // if  application is null it means that we are in progress of set-up application environment i.e. we are not in the running IDEA
-        val application = ApplicationManager.getApplication() ?: return
+        konst application = ApplicationManager.getApplication() ?: return
         if (!application.isHeadlessEnvironment) {
             LOG.error(Throwable("IdeaStandaloneExecutionSetup should be called only in headless environment"))
         }

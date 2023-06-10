@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.load.kotlin.KotlinJvmBinaryClass
 import org.jetbrains.kotlin.name.ClassId
 
 object SpecialJvmAnnotations {
-    val SPECIAL_ANNOTATIONS: Set<ClassId> = listOf(
+    konst SPECIAL_ANNOTATIONS: Set<ClassId> = listOf(
         JvmAnnotationNames.METADATA_FQ_NAME,
         JvmAnnotationNames.JETBRAINS_NOT_NULL_ANNOTATION,
         JvmAnnotationNames.JETBRAINS_NULLABLE_ANNOTATION,
@@ -21,7 +21,7 @@ object SpecialJvmAnnotations {
         JvmAnnotationNames.DOCUMENTED_ANNOTATION
     ).mapTo(mutableSetOf(), ClassId::topLevel)
 
-    val JAVA_LANG_ANNOTATION_REPEATABLE = ClassId.topLevel(JvmAnnotationNames.REPEATABLE_ANNOTATION)
+    konst JAVA_LANG_ANNOTATION_REPEATABLE = ClassId.topLevel(JvmAnnotationNames.REPEATABLE_ANNOTATION)
 
     fun isAnnotatedWithContainerMetaAnnotation(klass: KotlinJvmBinaryClass): Boolean {
         var result = false

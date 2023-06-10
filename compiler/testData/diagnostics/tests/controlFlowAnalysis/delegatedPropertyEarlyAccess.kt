@@ -14,19 +14,19 @@ class Kaboom() {
         <!DEBUG_INFO_LEAKING_THIS!>withGetter<!>.hashCode()
     }
 
-    val other = <!DEBUG_INFO_LEAKING_THIS, UNINITIALIZED_VARIABLE!>delegated<!>
+    konst other = <!DEBUG_INFO_LEAKING_THIS, UNINITIALIZED_VARIABLE!>delegated<!>
 
-    val another = <!UNINITIALIZED_VARIABLE!>simple<!>
+    konst another = <!UNINITIALIZED_VARIABLE!>simple<!>
 
-    val something = <!DEBUG_INFO_LEAKING_THIS!>withGetter<!>
+    konst something = <!DEBUG_INFO_LEAKING_THIS!>withGetter<!>
     
-    val delegated: String by CustomDelegate()
+    konst delegated: String by CustomDelegate()
 
-    val simple = "xyz"
+    konst simple = "xyz"
 
-    val withGetter: String
+    konst withGetter: String
         get() = "abc"
 
     // No error should be here
-    val after = <!DEBUG_INFO_LEAKING_THIS!>delegated<!>
+    konst after = <!DEBUG_INFO_LEAKING_THIS!>delegated<!>
 }

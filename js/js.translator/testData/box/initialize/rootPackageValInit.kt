@@ -1,8 +1,8 @@
 // EXPECTED_REACHABLE_NODES: 1285
-class A(val a: Int)
+class A(konst a: Int)
 
-val x = 1
-val a = A(2)
+konst x = 1
+konst a = A(2)
 
 fun box(): String {
     if (x != 1) return "x != 1, it: $x"

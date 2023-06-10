@@ -25,11 +25,11 @@ interface ValueDescriptor {
 internal interface ComponentDescriptor : ValueDescriptor {
     fun getRegistrations(): Iterable<Type>
     fun getDependencies(context: ValueResolveContext): Collection<Type>
-    val shouldInjectProperties: Boolean
+    konst shouldInjectProperties: Boolean
         get() = false
 }
 
-class IterableDescriptor(val descriptors: Iterable<ValueDescriptor>) : ValueDescriptor {
+class IterableDescriptor(konst descriptors: Iterable<ValueDescriptor>) : ValueDescriptor {
     override fun getValue(): Any {
         return descriptors.map { it.getValue() }
     }

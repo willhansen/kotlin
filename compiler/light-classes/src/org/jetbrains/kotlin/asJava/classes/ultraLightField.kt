@@ -35,9 +35,9 @@ import org.jetbrains.kotlin.types.KotlinType
 
 private class KtUltraLightFieldModifierList(
     support: KtUltraLightSupport,
-    private val declaration: KtNamedDeclaration,
+    private konst declaration: KtNamedDeclaration,
     owner: KtLightElement<KtModifierListOwner, PsiModifierListOwner>,
-    private val modifiers: Set<String>,
+    private konst modifiers: Set<String>,
 ) : KtUltraLightModifierList<KtLightElement<KtModifierListOwner, PsiModifierListOwner>>(owner, support) {
 
     override fun hasModifierProperty(name: String): Boolean = when (name) {
@@ -47,9 +47,9 @@ private class KtUltraLightFieldModifierList(
     }
 
     private fun hasFieldAnnotation(fqName: FqName): Boolean {
-        val annotation = support.findAnnotation(declaration, fqName)?.first ?: return false
-        val target = annotation.useSiteTarget?.getAnnotationUseSiteTarget() ?: return true
-        val expectedTarget =
+        konst annotation = support.findAnnotation(declaration, fqName)?.first ?: return false
+        konst target = annotation.useSiteTarget?.getAnnotationUseSiteTarget() ?: return true
+        konst expectedTarget =
             if (declaration is KtProperty && declaration.hasDelegate()) AnnotationUseSiteTarget.PROPERTY_DELEGATE_FIELD
             else AnnotationUseSiteTarget.FIELD
         return target == expectedTarget
@@ -76,23 +76,23 @@ internal class KtUltraLightFieldForSourceDeclaration(
     override fun findElementAt(offset: Int): PsiElement? = kotlinOrigin.findElementAt(offset)
 
     // Workaround for KT-42137 until we update the bootstrap compiler.
-    override val kotlinOrigin: KtNamedDeclaration get() = super.kotlinOrigin
+    override konst kotlinOrigin: KtNamedDeclaration get() = super.kotlinOrigin
 }
 
 internal open class KtUltraLightFieldImpl protected constructor(
-    protected val declaration: KtNamedDeclaration,
+    protected konst declaration: KtNamedDeclaration,
     name: String,
-    private val containingClass: KtLightClass,
-    private val support: KtUltraLightSupport,
+    private konst containingClass: KtLightClass,
+    private konst support: KtUltraLightSupport,
     modifiers: Set<String>,
 ) : LightFieldBuilder(name, PsiType.NULL, declaration), KtLightField,
     KtUltraLightElementWithNullabilityAnnotationDescriptorBased<KtDeclaration, PsiField> {
 
-    private val modifierList by lazyPub {
+    private konst modifierList by lazyPub {
         KtUltraLightFieldModifierList(support, declaration, this, modifiers)
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean =
+    override fun isEquikonstentTo(another: PsiElement?): Boolean =
         kotlinOrigin == another || (another as? KtLightField)?.kotlinOrigin == kotlinOrigin
 
     override fun getModifierList(): PsiModifierList = modifierList
@@ -106,11 +106,11 @@ internal open class KtUltraLightFieldImpl protected constructor(
     override fun getTextRange(): TextRange? = kotlinOrigin.textRange
     override fun getTextOffset(): Int = kotlinOrigin.textOffset
 
-    private val variableDescriptor: VariableDescriptor?
+    private konst variableDescriptor: VariableDescriptor?
         get() = declaration.resolve()
             ?.let { it as? PropertyDescriptor ?: it as? ValueParameterDescriptor }
 
-    private val kotlinType: KotlinType?
+    private konst kotlinType: KotlinType?
         get() = when {
             declaration is KtProperty && declaration.hasDelegate() ->
                 declaration.delegateExpression?.let {
@@ -129,7 +129,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
             }
         }
 
-    override val qualifiedNameForNullabilityAnnotation: String?
+    override konst qualifiedNameForNullabilityAnnotation: String?
         get() =
             when (declaration) {
                 is KtObjectDeclaration -> NotNull::class.java.name
@@ -137,10 +137,10 @@ internal open class KtUltraLightFieldImpl protected constructor(
                 else -> computeQualifiedNameForNullabilityAnnotation(kotlinType)
             }
 
-    override val psiTypeForNullabilityAnnotation: PsiType?
+    override konst psiTypeForNullabilityAnnotation: PsiType?
         get() = type
 
-    private val _type: PsiType by lazyPub {
+    private konst _type: PsiType by lazyPub {
         fun nonExistent() = JavaPsiFacade.getElementFactory(project).createTypeFromText(
             StandardNames.NON_EXISTENT_CLASS.asString(), declaration
         )
@@ -152,8 +152,8 @@ internal open class KtUltraLightFieldImpl protected constructor(
                     ?: nonExistent()
 
             else -> {
-                val kotlinType = declaration.getKotlinType() ?: return@lazyPub PsiType.NULL
-                val descriptor = variableDescriptor ?: return@lazyPub PsiType.NULL
+                konst kotlinType = declaration.getKotlinType() ?: return@lazyPub PsiType.NULL
+                konst descriptor = variableDescriptor ?: return@lazyPub PsiType.NULL
 
                 support.mapType(kotlinType, this) { typeMapper, sw ->
                     typeMapper.writeFieldSignature(kotlinType, descriptor, sw)
@@ -167,7 +167,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
     override fun getContainingClass() = containingClass
     override fun getContainingFile(): PsiFile? = containingClass.containingFile
 
-    private val _initializer by lazyPub {
+    private konst _initializer by lazyPub {
         _constantInitializer?.createPsiLiteral(declaration)
     }
 
@@ -175,7 +175,7 @@ internal open class KtUltraLightFieldImpl protected constructor(
 
     override fun hasInitializer(): Boolean = initializer !== null
 
-    private val _constantInitializer by lazyPub {
+    private konst _constantInitializer by lazyPub {
         if (declaration !is KtProperty) return@lazyPub null
         if (!declaration.hasModifier(KtTokens.CONST_KEYWORD)) return@lazyPub null
         if (!declaration.hasInitializer()) return@lazyPub null
@@ -184,13 +184,13 @@ internal open class KtUltraLightFieldImpl protected constructor(
         variableDescriptor?.compileTimeInitializer
     }
 
-    override fun computeConstantValue(): Any? = _constantInitializer?.value
+    override fun computeConstantValue(): Any? = _constantInitializer?.konstue
 
     override fun computeConstantValue(visitedVars: MutableSet<PsiVariable>?): Any? = computeConstantValue()
 
-    override val kotlinOrigin = declaration
+    override konst kotlinOrigin = declaration
 
-    override val lightMemberOrigin = LightMemberOriginForDeclaration(declaration, JvmDeclarationOriginKind.OTHER)
+    override konst lightMemberOrigin = LightMemberOriginForDeclaration(declaration, JvmDeclarationOriginKind.OTHER)
 
     override fun setName(@NonNls name: String): PsiElement {
         (kotlinOrigin as? KtNamedDeclaration)?.setName(name)

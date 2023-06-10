@@ -4,7 +4,7 @@
 package test
 
 class A {
-    val param = "start"
+    konst param = "start"
     var result = "fail"
     var addParam = "_additional_"
 

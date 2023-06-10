@@ -147,17 +147,17 @@ interface CompilerCallbackServicesFacade : Remote {
 }
 
 class CompiledPackagePart(
-    val filePath: String,
-    val metadata: ByteArray, val binaryAst: ByteArray, val inlineData: ByteArray
+    konst filePath: String,
+    konst metadata: ByteArray, konst binaryAst: ByteArray, konst inlineData: ByteArray
 ) : Serializable
 
 class PackageMetadata(
-    val packageName: String,
-    val metadata: ByteArray
+    konst packageName: String,
+    konst metadata: ByteArray
 ) : Serializable {
     companion object {
         // just a random number, but should never be changed to avoid deserialization problems
-        private val serialVersionUID: Long = 54021986502349756L
+        private konst serialVersionUID: Long = 54021986502349756L
     }
 }
 
@@ -165,6 +165,6 @@ class PackageMetadata(
 class RmiFriendlyCompilationCanceledException : Exception(), Serializable {
     companion object {
         // just a random number, but should never be changed to avoid deserialization problems
-        private val serialVersionUID: Long = 8228357578L
+        private konst serialVersionUID: Long = 8228357578L
     }
 }

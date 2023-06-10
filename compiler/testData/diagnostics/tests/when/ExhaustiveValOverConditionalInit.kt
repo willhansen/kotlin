@@ -12,7 +12,7 @@
  */
 
 fun foo(a: Boolean, b: Boolean): Int {
-    val x: Int
+    konst x: Int
     if (a) {
         x = 1
     }
@@ -24,7 +24,7 @@ fun foo(a: Boolean, b: Boolean): Int {
 }
 
 fun bar(a: Boolean, b: Boolean): Int {
-    val x: Int
+    konst x: Int
     if (a) {
         x = 1
     }

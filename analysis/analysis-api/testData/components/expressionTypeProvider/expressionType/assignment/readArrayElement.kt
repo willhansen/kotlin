@@ -6,7 +6,7 @@ class FOO {
 }
 
 fun main(args: Array<String?>) {
-    val foo: FOO = FOO()
+    konst foo: FOO = FOO()
     if (args.size > 2)
         foo += <expr>args[2]</expr>
     else

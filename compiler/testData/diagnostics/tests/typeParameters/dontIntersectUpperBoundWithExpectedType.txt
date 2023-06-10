@@ -1,6 +1,6 @@
 package
 
-public val bar: kotlin.Int
+public konst bar: kotlin.Int
 public fun </*0*/ T : Foo> foo(): T?
 public fun main(): kotlin.Unit
 public fun </*0*/ T : kotlin.text.Appendable /* = java.lang.Appendable */> wtf(): T

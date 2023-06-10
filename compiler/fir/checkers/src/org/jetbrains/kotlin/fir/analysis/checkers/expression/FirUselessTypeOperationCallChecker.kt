@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.fir.types.*
 object FirUselessTypeOperationCallChecker : FirTypeOperatorCallChecker() {
     override fun check(expression: FirTypeOperatorCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.operation !in FirOperation.TYPES) return
-        val arg = expression.argument
+        konst arg = expression.argument
 
-        val candidateType = arg.typeRef.coneType.upperBoundIfFlexible().fullyExpandedType(context.session)
+        konst candidateType = arg.typeRef.coneType.upperBoundIfFlexible().fullyExpandedType(context.session)
         if (candidateType is ConeErrorType) return
 
-        val targetType = expression.conversionTypeRef.coneType.fullyExpandedType(context.session)
+        konst targetType = expression.conversionTypeRef.coneType.fullyExpandedType(context.session)
         if (targetType is ConeErrorType) return
 
         // x as? Type <=> x as Type?
-        val refinedTargetType =
+        konst refinedTargetType =
             if (expression.operation == FirOperation.SAFE_AS) {
                 targetType.withNullability(ConeNullability.NULLABLE, context.session.typeContext)
             } else {

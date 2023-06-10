@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 /**
  * Create internal representation of Objective-C wrapper.
  */
-internal val ProduceObjCExportInterfacePhase = createSimpleNamedCompilerPhase<PhaseContext, FrontendPhaseOutput.Full, ObjCExportedInterface>(
+internal konst ProduceObjCExportInterfacePhase = createSimpleNamedCompilerPhase<PhaseContext, FrontendPhaseOutput.Full, ObjCExportedInterface>(
         "ObjCExportInterface",
         "Objective-C header generation",
         outputIfNotEnabled = { _, _, _, _ -> error("Cannot disable `ObjCExportInterface` phase when producing ObjC framework") }
@@ -26,27 +26,27 @@ internal val ProduceObjCExportInterfacePhase = createSimpleNamedCompilerPhase<Ph
 }
 
 internal data class CreateObjCFrameworkInput(
-        val moduleDescriptor: ModuleDescriptor,
-        val exportedInterface: ObjCExportedInterface,
+        konst moduleDescriptor: ModuleDescriptor,
+        konst exportedInterface: ObjCExportedInterface,
 )
 
 /**
  * Create Objective-C framework in the given directory without binary.
  */
-internal val CreateObjCFrameworkPhase = createSimpleNamedCompilerPhase<PhaseContext, CreateObjCFrameworkInput>(
+internal konst CreateObjCFrameworkPhase = createSimpleNamedCompilerPhase<PhaseContext, CreateObjCFrameworkInput>(
         "CreateObjCFramework",
         "Create Objective-C framework"
 ) { context, input ->
-    val config = context.config
+    konst config = context.config
     // TODO: Share this instance between multiple contexts (including NativeGenerationState)?
-    val outputFiles = OutputFiles(config.outputPath, config.target, config.produce)
+    konst outputFiles = OutputFiles(config.outputPath, config.target, config.produce)
     createObjCFramework(config, input.moduleDescriptor, input.exportedInterface, outputFiles.mainFile)
 }
 
 /**
  * Create specification for bridges between exported Objective-C interfaces and their Kotlin origins.
  */
-internal val CreateObjCExportCodeSpecPhase = createSimpleNamedCompilerPhase<PsiToIrContext, ObjCExportedInterface, ObjCExportCodeSpec>(
+internal konst CreateObjCExportCodeSpecPhase = createSimpleNamedCompilerPhase<PsiToIrContext, ObjCExportedInterface, ObjCExportCodeSpec>(
         "ObjCExportCodeCodeSpec",
         "Objective-C IR symbols",
         outputIfNotEnabled = { _, _, _, _, -> ObjCExportCodeSpec(emptyList(), emptyList()) }

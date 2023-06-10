@@ -20,8 +20,8 @@ class SuspendIntString: suspend (Int) -> String {
 
 fun suspendNoneUnit(): String? {
     failure = "FAIL INHERITED 2"
-    val a = suspend {
-        val snu = SuspendNoneUnit()
+    konst a = suspend {
+        konst snu = SuspendNoneUnit()
         snu()
     }
     a.startCoroutine(Continuation(EmptyCoroutineContext) { it.getOrThrow() })
@@ -30,8 +30,8 @@ fun suspendNoneUnit(): String? {
 
 fun suspendIntString(): String? {
     failure = "FAIL INHERITED 3"
-    val a = suspend {
-        val sis = SuspendIntString()
+    konst a = suspend {
+        konst sis = SuspendIntString()
         sis(7)
     }
     a.startCoroutine(Continuation(EmptyCoroutineContext) { it.getOrThrow() })
@@ -39,7 +39,7 @@ fun suspendIntString(): String? {
 }
 
 fun box(): String {
-    val failures = listOfNotNull(
+    konst failures = listOfNotNull(
         suspendNoneUnit(),
         suspendIntString()
     )

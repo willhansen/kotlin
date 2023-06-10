@@ -29,26 +29,26 @@ import org.jetbrains.kotlin.utils.SmartList
 class AllUnderImportScope private constructor(
     descriptor: DeclarationDescriptor,
     excludedImportNames: Collection<FqName>,
-    private val scope1: MemberScope,
-    private val scope2: MemberScope?
+    private konst scope1: MemberScope,
+    private konst scope2: MemberScope?
 ) : BaseImportingScope(null) {
 
 
-    private val excludedNames: Set<Name> = if (excludedImportNames.isEmpty()) { // optimization
+    private konst excludedNames: Set<Name> = if (excludedImportNames.isEmpty()) { // optimization
         emptySet<Name>()
     } else {
-        val fqName = DescriptorUtils.getFqNameSafe(descriptor)
+        konst fqName = DescriptorUtils.getFqNameSafe(descriptor)
         // toSet() is used here instead mapNotNullTo(hashSetOf()) because it results in not keeping empty sets as separate instances
         excludedImportNames.mapNotNull { if (it.parent() == fqName) it.shortName() else null }.toSet()
     }
 
     override fun computeImportedNames(): Set<Name>? {
-        val names1 = scope1.computeAllNames()
+        konst names1 = scope1.computeAllNames()
         return when {
             scope2 == null -> names1
             names1 == null -> null
             else -> {
-                val names2 = scope2.computeAllNames()
+                konst names2 = scope2.computeAllNames()
                 when {
                     names2 == null -> null
                     names1.isEmpty() -> names2
@@ -65,14 +65,14 @@ class AllUnderImportScope private constructor(
         nameFilter: (Name) -> Boolean,
         changeNamesForAliased: Boolean
     ): Collection<DeclarationDescriptor> {
-        val nameFilterToUse = if (excludedNames.isEmpty()) { // optimization
+        konst nameFilterToUse = if (excludedNames.isEmpty()) { // optimization
             nameFilter
         } else {
             { it !in excludedNames && nameFilter(it) }
         }
 
-        val noPackagesKindFilter = kindFilter.withoutKinds(DescriptorKindFilter.PACKAGES_MASK)
-        val result = SmartList<DeclarationDescriptor>()
+        konst noPackagesKindFilter = kindFilter.withoutKinds(DescriptorKindFilter.PACKAGES_MASK)
+        konst result = SmartList<DeclarationDescriptor>()
         forEachScope(scope1, scope2) { scope ->
             scope.getContributedDescriptors(noPackagesKindFilter, nameFilterToUse)
                 .filterTo(result) { it !is PackageViewDescriptor }
@@ -82,8 +82,8 @@ class AllUnderImportScope private constructor(
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? {
         if (name in excludedNames) return null
-        val classifier1 = scope1.getContributedClassifier(name, location)
-        val classifier2 = scope2?.getContributedClassifier(name, location)
+        konst classifier1 = scope1.getContributedClassifier(name, location)
+        konst classifier2 = scope2?.getContributedClassifier(name, location)
         return if (classifier1 != null && classifier2 != null) null else (classifier1 ?: classifier2)
     }
 
@@ -108,7 +108,7 @@ class AllUnderImportScope private constructor(
 
     companion object {
         fun create(descriptor: DeclarationDescriptor, excludedImportNames: Collection<FqName>): ImportingScope {
-            val scope1 =
+            konst scope1 =
                 if (descriptor is ClassDescriptor) {
                     descriptor.staticScope
                 } else {
@@ -118,7 +118,7 @@ class AllUnderImportScope private constructor(
                     (descriptor as PackageViewDescriptor).memberScope
                 }
 
-            val scope2 =
+            konst scope2 =
                 if (descriptor is ClassDescriptor) {
                     descriptor.unsubstitutedInnerClassesScope.takeIf { it !== MemberScope.Empty }
                 } else null

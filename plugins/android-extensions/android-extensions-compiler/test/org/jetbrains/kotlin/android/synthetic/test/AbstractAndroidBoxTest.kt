@@ -33,7 +33,7 @@ abstract class AbstractAndroidBoxTest : AbstractBlackBoxCodegenTest() {
 
     private fun createEnvironmentForConfiguration(configuration: CompilerConfiguration, path: String) {
         configuration.put(JVMConfigurationKeys.IR, backend.isIR);
-        val layoutPaths = File(path)
+        konst layoutPaths = File(path)
             .listFiles { file -> file.name.startsWith("layout") && file.isDirectory }!!
             .map { "$path${it.name}/" }
         myEnvironment = createTestEnvironment(configuration, layoutPaths)
@@ -69,7 +69,7 @@ abstract class AbstractAndroidBoxTest : AbstractBlackBoxCodegenTest() {
     }
 
     private fun doMultiFileTest(path: String, additionalFiles: Collection<String>? = null) {
-        val files = mutableListOf<String>()
+        konst files = mutableListOf<String>()
         FileUtil.processFilesRecursively(File(path)) { file ->
             when (file!!.name) {
                 "1.kt" -> {

@@ -16,10 +16,10 @@
 
 - [`KT-48659`](https://youtrack.jetbrains.com/issue/KT-48659) JVM / IR: Referential equality returns true for different instances
 - [`KT-48613`](https://youtrack.jetbrains.com/issue/KT-48613) Kotlin/Native fails to compile debug binaries for watchosArm64 target
-- [`KT-48316`](https://youtrack.jetbrains.com/issue/KT-48316) "No value passed for parameter" regression with Java annotation default values with JSR-305
+- [`KT-48316`](https://youtrack.jetbrains.com/issue/KT-48316) "No konstue passed for parameter" regression with Java annotation default konstues with JSR-305
 - [`KT-48343`](https://youtrack.jetbrains.com/issue/KT-48343) Mistake in an error message for uninferred type variable without unrestricted builder inference
 - [`KT-48543`](https://youtrack.jetbrains.com/issue/KT-48543) Native compiler crashes because of bridges for $default stubs
-- [`KT-48349`](https://youtrack.jetbrains.com/issue/KT-48349) OptIn markers are forbidden on local variable / value parameter / property getter only in presence of explicit Target annotation
+- [`KT-48349`](https://youtrack.jetbrains.com/issue/KT-48349) OptIn markers are forbidden on local variable / konstue parameter / property getter only in presence of explicit Target annotation
 - [`KT-48295`](https://youtrack.jetbrains.com/issue/KT-48295) JVM / IR: VerifyError: Bad access to protected data in getfield
 - [`KT-48551`](https://youtrack.jetbrains.com/issue/KT-48551) JVM / IR: "IllegalStateException: Inline class has no primary constructor" caused by inline class from one module and `fun interface` from another
 - [`KT-47917`](https://youtrack.jetbrains.com/issue/KT-47917) JVM: "UTF8 string too large" caused by a big string
@@ -31,7 +31,7 @@
 
 - [`KTIJ-15744`](https://youtrack.jetbrains.com/issue/KTIJ-15744) Reopening build.gradle.kts-based project reports MISSING_SCRIPT_BASE_CLASS KotlinBuildScript until re-import
 - [`KTIJ-19005`](https://youtrack.jetbrains.com/issue/KTIJ-19005) JDK 17: "PermittedSubclasses requires ASM9" exception multiple times per second during analysis
-- [`KTIJ-19504`](https://youtrack.jetbrains.com/issue/KTIJ-19504) IDE highlighting: Kotlin plugin 1.5.30 started showing some valid classes from multiplatform libraries as not existing
+- [`KTIJ-19504`](https://youtrack.jetbrains.com/issue/KTIJ-19504) IDE highlighting: Kotlin plugin 1.5.30 started showing some konstid classes from multiplatform libraries as not existing
 
 ### Native
 
@@ -56,7 +56,7 @@
 - [`KT-45845`](https://youtrack.jetbrains.com/issue/KT-45845) Forbid using experimental markers on getter
 - [`KT-46644`](https://youtrack.jetbrains.com/issue/KT-46644) Resolve overrides for IrProperty on deserialization
 - [`KT-46967`](https://youtrack.jetbrains.com/issue/KT-46967) Support class type parameters annotations in FIR
-- [`KT-47402`](https://youtrack.jetbrains.com/issue/KT-47402) Native: optimize access to object declarations that have only const vals and no init blocks
+- [`KT-47402`](https://youtrack.jetbrains.com/issue/KT-47402) Native: optimize access to object declarations that have only const konsts and no init blocks
 - [`KT-47709`](https://youtrack.jetbrains.com/issue/KT-47709) Make when statements with enum, sealed, and Boolean subjects exhaustive by default
 - [`KT-47699`](https://youtrack.jetbrains.com/issue/KT-47699) Support programmatic creation of class annotations and corresponding feature flag on JVM
 
@@ -78,7 +78,7 @@
 - [`KT-48163`](https://youtrack.jetbrains.com/issue/KT-48163) JVM / IR: "VerifyError: Bad type on operand stack" when throwing result of smartcast
 - [`KT-47833`](https://youtrack.jetbrains.com/issue/KT-47833) False positive "Type argument is not within its bounds " with upcasting in 1.5.30-M1
 - [`KT-47830`](https://youtrack.jetbrains.com/issue/KT-47830) Some code doesn't compile with unrestricted builder inference
-- [`KT-39883`](https://youtrack.jetbrains.com/issue/KT-39883) Deprecate computing constant values if complex boolean expressions in when condition branches and conditions of loops
+- [`KT-39883`](https://youtrack.jetbrains.com/issue/KT-39883) Deprecate computing constant konstues if complex boolean expressions in when condition branches and conditions of loops
 - [`KT-47037`](https://youtrack.jetbrains.com/issue/KT-47037) Eliminate builder inference restrictions
 - [`KT-46726`](https://youtrack.jetbrains.com/issue/KT-46726) IR + BuilderInference: AssertionError: Unbound private symbol <ERROR CLASS> on usage of this in a BuilderInference lambda
 - [`KT-43855`](https://youtrack.jetbrains.com/issue/KT-43855) Support gradual introduction of new nullability annotations
@@ -103,7 +103,7 @@
 - [`KT-46393`](https://youtrack.jetbrains.com/issue/KT-46393) AE: "1 trailing arguments were found in Any<T> type" for private function with implicit anonymous return type inside generic class
 - [`KT-46661`](https://youtrack.jetbrains.com/issue/KT-46661) FIR: Investigate inference issue with self-types and star projection
 - [`KT-46775`](https://youtrack.jetbrains.com/issue/KT-46775) [Native] [IR] Support multiple suspend lambdas as class supertypes
-- [`KT-46836`](https://youtrack.jetbrains.com/issue/KT-46836) Error: Invalid LLVM module on inlineClasses external tests
+- [`KT-46836`](https://youtrack.jetbrains.com/issue/KT-46836) Error: Inkonstid LLVM module on inlineClasses external tests
 - [`KT-46838`](https://youtrack.jetbrains.com/issue/KT-46838) NullPointerException: Parameter specified as non-null is null in CollectionsKt.joinToString()
 - [`KT-46896`](https://youtrack.jetbrains.com/issue/KT-46896) Native IR: NPE when using irBuiltIns.suspendFunction
 - [`KT-46996`](https://youtrack.jetbrains.com/issue/KT-46996) FIR: INFERENCE_NO_INFORMATION_FOR_PARAMETER on type aliases with non-trivial expansions
@@ -112,7 +112,7 @@
 - [`KT-47082`](https://youtrack.jetbrains.com/issue/KT-47082) Stub type variable is leaked (reproduces with K/N during deserialization)
 - [`KT-47143`](https://youtrack.jetbrains.com/issue/KT-47143) ClassicTypeSystemContext couldn't handle: Captured(*) in Kotlin 1.5.0
 - [`KT-47148`](https://youtrack.jetbrains.com/issue/KT-47148) Type mismatch: inferred type is Any? but T? was expected
-- [`KT-47180`](https://youtrack.jetbrains.com/issue/KT-47180) Forbid using OptIn markers on local variable, value parameter or field
+- [`KT-47180`](https://youtrack.jetbrains.com/issue/KT-47180) Forbid using OptIn markers on local variable, konstue parameter or field
 - [`KT-47181`](https://youtrack.jetbrains.com/issue/KT-47181) Forbid using OptIn markers on types or type parameters
 - [`KT-47183`](https://youtrack.jetbrains.com/issue/KT-47183) Segfault on int unboxing
 - [`KT-47208`](https://youtrack.jetbrains.com/issue/KT-47208) Backend Internal error: Exception during IR lowering: assert at IrOverridingUtilKt.buildFakeOverrideMember
@@ -177,13 +177,13 @@
 
 ### Native
 
-- [`KT-35001`](https://youtrack.jetbrains.com/issue/KT-35001) warning: linking module flags 'SDK Version': IDs have conflicting values ('[2 x i32] [i32 13, i32 2]'
+- [`KT-35001`](https://youtrack.jetbrains.com/issue/KT-35001) warning: linking module flags 'SDK Version': IDs have conflicting konstues ('[2 x i32] [i32 13, i32 2]'
 - [`KT-43475`](https://youtrack.jetbrains.com/issue/KT-43475) Kotlin/Native compiler: Including a static C library increased cross-compilation time from 3.5minutes to 1 hour 40 minutes
 - [`KT-44148`](https://youtrack.jetbrains.com/issue/KT-44148) Escape analysis failure: Heap space out of memory
 
 ### Native. C and ObjC Import
 
-- [`KT-46711`](https://youtrack.jetbrains.com/issue/KT-46711) platform.windows._LARGE_INTEGER cannot be passed by value
+- [`KT-46711`](https://youtrack.jetbrains.com/issue/KT-46711) platform.windows._LARGE_INTEGER cannot be passed by konstue
 
 ### Native. ObjC Export
 
@@ -201,7 +201,7 @@
 
 ### Reflection
 
-- [`KT-18277`](https://youtrack.jetbrains.com/issue/KT-18277) InvalidProtocolBufferException: Stream closed on multithreaded access to built-ins data in reflection
+- [`KT-18277`](https://youtrack.jetbrains.com/issue/KT-18277) InkonstidProtocolBufferException: Stream closed on multithreaded access to built-ins data in reflection
 - [`KT-44977`](https://youtrack.jetbrains.com/issue/KT-44977) Reflection: ClassCastException caused by annotations with "AnnotationTarget.TYPE" usage on array attributes access
 - [`KT-47650`](https://youtrack.jetbrains.com/issue/KT-47650) KClass::nestedClasses throws ClassCastException for script classes with type aliases
 
@@ -216,7 +216,7 @@
 ### Tools. Commonizer
 
 - [`KT-47433`](https://youtrack.jetbrains.com/issue/KT-47433) [Commonizer] Commonize functions/properties with TA/Class types in signature
-- [`KT-47691`](https://youtrack.jetbrains.com/issue/KT-47691) [Commonizer] Commonize `var` and `val`  properties
+- [`KT-47691`](https://youtrack.jetbrains.com/issue/KT-47691) [Commonizer] Commonize `var` and `konst`  properties
 - [`KT-47434`](https://youtrack.jetbrains.com/issue/KT-47434) [Commonizer] Commonize parameterized (type-alias + class) types
 - [`KT-47432`](https://youtrack.jetbrains.com/issue/KT-47432) [Commonizer] Commonize (type-alias + class) types used in functions
 - [`KT-45992`](https://youtrack.jetbrains.com/issue/KT-45992) [Commonizer] Allow commonization of TypeAlias and Class with same name
@@ -268,7 +268,7 @@
 - [`KT-47176`](https://youtrack.jetbrains.com/issue/KT-47176) KJS: Actualize NPM dependencies
 - [`KT-47154`](https://youtrack.jetbrains.com/issue/KT-47154) KJS / Gradle: Compile task reads dependencies metadata from filesystem too long on large projects
 - [`KT-47114`](https://youtrack.jetbrains.com/issue/KT-47114) KJS / IR: Could not resolve `coroutines-core-js`
-- [`KT-43379`](https://youtrack.jetbrains.com/issue/KT-43379) KJS / Gradle: On windows, an invalid regex is generated for Webpack ProgressPlugin
+- [`KT-43379`](https://youtrack.jetbrains.com/issue/KT-43379) KJS / Gradle: On windows, an inkonstid regex is generated for Webpack ProgressPlugin
 
 ### Tools. Gradle. Multiplatform
 
@@ -385,7 +385,7 @@
 ### Tools. Commonizer
 
 - [`KT-47433`](https://youtrack.jetbrains.com/issue/KT-47433) [Commonizer] Commonize functions/properties with TA/Class types in signature
-- [`KT-47691`](https://youtrack.jetbrains.com/issue/KT-47691) [Commonizer] Commonize `var` and `val`  properties
+- [`KT-47691`](https://youtrack.jetbrains.com/issue/KT-47691) [Commonizer] Commonize `var` and `konst`  properties
 - [`KT-47434`](https://youtrack.jetbrains.com/issue/KT-47434) [Commonizer] Commonize parameterized (type-alias + class) types
 - [`KT-47432`](https://youtrack.jetbrains.com/issue/KT-47432) [Commonizer] Commonize (type-alias + class) types used in functions
 
@@ -448,7 +448,7 @@
 - [`KT-45845`](https://youtrack.jetbrains.com/issue/KT-45845) Forbid using experimental markers on getter
 - [`KT-46644`](https://youtrack.jetbrains.com/issue/KT-46644) Resolve overrides for IrProperty on deserialization
 - [`KT-46967`](https://youtrack.jetbrains.com/issue/KT-46967) Support class type parameters annotations in FIR
-- [`KT-47402`](https://youtrack.jetbrains.com/issue/KT-47402) Native: optimize access to object declarations that have only const vals and no init blocks
+- [`KT-47402`](https://youtrack.jetbrains.com/issue/KT-47402) Native: optimize access to object declarations that have only const konsts and no init blocks
 
 #### Fixes
 
@@ -467,7 +467,7 @@
 - [`KT-46393`](https://youtrack.jetbrains.com/issue/KT-46393) AE: "1 trailing arguments were found in Any<T> type" for private function with implicit anonymous return type inside generic class
 - [`KT-46661`](https://youtrack.jetbrains.com/issue/KT-46661) FIR: Investigate inference issue with self-types and star projection
 - [`KT-46775`](https://youtrack.jetbrains.com/issue/KT-46775) [Native] [IR] Support multiple suspend lambdas as class supertypes
-- [`KT-46836`](https://youtrack.jetbrains.com/issue/KT-46836) Error: Invalid LLVM module on inlineClasses external tests
+- [`KT-46836`](https://youtrack.jetbrains.com/issue/KT-46836) Error: Inkonstid LLVM module on inlineClasses external tests
 - [`KT-46838`](https://youtrack.jetbrains.com/issue/KT-46838) NullPointerException: Parameter specified as non-null is null in CollectionsKt.joinToString()
 - [`KT-46896`](https://youtrack.jetbrains.com/issue/KT-46896) Native IR: NPE when using irBuiltIns.suspendFunction
 - [`KT-46996`](https://youtrack.jetbrains.com/issue/KT-46996) FIR: INFERENCE_NO_INFORMATION_FOR_PARAMETER on type aliases with non-trivial expansions
@@ -476,7 +476,7 @@
 - [`KT-47082`](https://youtrack.jetbrains.com/issue/KT-47082) Stub type variable is leaked (reproduces with K/N during deserialization)
 - [`KT-47143`](https://youtrack.jetbrains.com/issue/KT-47143) ClassicTypeSystemContext couldn't handle: Captured(*) in Kotlin 1.5.0
 - [`KT-47148`](https://youtrack.jetbrains.com/issue/KT-47148) Type mismatch: inferred type is Any? but T? was expected
-- [`KT-47180`](https://youtrack.jetbrains.com/issue/KT-47180) Forbid using OptIn markers on local variable, value parameter or field
+- [`KT-47180`](https://youtrack.jetbrains.com/issue/KT-47180) Forbid using OptIn markers on local variable, konstue parameter or field
 - [`KT-47181`](https://youtrack.jetbrains.com/issue/KT-47181) Forbid using OptIn markers on types or type parameters
 - [`KT-47183`](https://youtrack.jetbrains.com/issue/KT-47183) Segfault on int unboxing
 - [`KT-47208`](https://youtrack.jetbrains.com/issue/KT-47208) Backend Internal error: Exception during IR lowering: assert at IrOverridingUtilKt.buildFakeOverrideMember
@@ -509,13 +509,13 @@
 
 ### Native
 
-- [`KT-35001`](https://youtrack.jetbrains.com/issue/KT-35001) warning: linking module flags 'SDK Version': IDs have conflicting values ('[2 x i32] [i32 13, i32 2]'
+- [`KT-35001`](https://youtrack.jetbrains.com/issue/KT-35001) warning: linking module flags 'SDK Version': IDs have conflicting konstues ('[2 x i32] [i32 13, i32 2]'
 - [`KT-43475`](https://youtrack.jetbrains.com/issue/KT-43475) Kotlin/Native compiler: Including a static C library increased cross-compilation time from 3.5minutes to 1 hour 40 minutes
 - [`KT-44148`](https://youtrack.jetbrains.com/issue/KT-44148) Escape analysis failure: Heap space out of memory
 
 ### Native. C and ObjC Import
 
-- [`KT-46711`](https://youtrack.jetbrains.com/issue/KT-46711) platform.windows._LARGE_INTEGER cannot be passed by value
+- [`KT-46711`](https://youtrack.jetbrains.com/issue/KT-46711) platform.windows._LARGE_INTEGER cannot be passed by konstue
 
 ### Native. ObjC Export
 
@@ -529,7 +529,7 @@
 
 ### Reflection
 
-- [`KT-18277`](https://youtrack.jetbrains.com/issue/KT-18277) InvalidProtocolBufferException: Stream closed on multithreaded access to built-ins data in reflection
+- [`KT-18277`](https://youtrack.jetbrains.com/issue/KT-18277) InkonstidProtocolBufferException: Stream closed on multithreaded access to built-ins data in reflection
 - [`KT-44977`](https://youtrack.jetbrains.com/issue/KT-44977) Reflection: ClassCastException caused by annotations with "AnnotationTarget.TYPE" usage on array attributes access
 
 ### Tools. CLI
@@ -563,7 +563,7 @@
 - [`KT-47176`](https://youtrack.jetbrains.com/issue/KT-47176) KJS: Actualize NPM dependencies
 - [`KT-47154`](https://youtrack.jetbrains.com/issue/KT-47154) KJS / Gradle: Compile task reads dependencies metadata from filesystem too long on large projects
 - [`KT-47114`](https://youtrack.jetbrains.com/issue/KT-47114) KJS / IR: Could not resolve `coroutines-core-js`
-- [`KT-43379`](https://youtrack.jetbrains.com/issue/KT-43379) KJS / Gradle: On windows, an invalid regex is generated for Webpack ProgressPlugin
+- [`KT-43379`](https://youtrack.jetbrains.com/issue/KT-43379) KJS / Gradle: On windows, an inkonstid regex is generated for Webpack ProgressPlugin
 
 ### Tools. Gradle. Multiplatform
 
@@ -602,7 +602,7 @@
 
 - [`KT-47161`](https://youtrack.jetbrains.com/issue/KT-47161) Serializable class can't be inherited from serializable class in other module with: e: org.jetbrains.kotlin.codegen.CompilationException: Back-end (JVM) Internal error: Couldn't transform method node: write$Self
 - [`KT-47455`](https://youtrack.jetbrains.com/issue/KT-47455) Kotlin lombok plugin NullPointerException
-- [`KT-47513`](https://youtrack.jetbrains.com/issue/KT-47513) Lombok compiler plugin failed with 'Recursion detected in a lazy value under LockBasedStorageManager@1c21db60 (TopDownAnalyzer for JVM)'
+- [`KT-47513`](https://youtrack.jetbrains.com/issue/KT-47513) Lombok compiler plugin failed with 'Recursion detected in a lazy konstue under LockBasedStorageManager@1c21db60 (TopDownAnalyzer for JVM)'
 
 ### Tools. Gradle
 
@@ -622,12 +622,12 @@
 - [`KT-44373`](https://youtrack.jetbrains.com/issue/KT-44373) FIR: support error / warning suppression
 - [`KT-45189`](https://youtrack.jetbrains.com/issue/KT-45189) Support nullability annotations at module level
 - [`KT-45284`](https://youtrack.jetbrains.com/issue/KT-45284) Emit warnings based on jspecify annotations
-- [`KT-45525`](https://youtrack.jetbrains.com/issue/KT-45525) Allow to omit JvmInline annotation for expect value classes
+- [`KT-45525`](https://youtrack.jetbrains.com/issue/KT-45525) Allow to omit JvmInline annotation for expect konstue classes
 - [`KT-46545`](https://youtrack.jetbrains.com/issue/KT-46545) Emit annotations on function type parameters into bytecode for -jvm-target 1.8 and above
 
 #### Performance Improvements
 
-- [`KT-36646`](https://youtrack.jetbrains.com/issue/KT-36646) Don't box primitive values in equality comparison with objects in JVM_IR
+- [`KT-36646`](https://youtrack.jetbrains.com/issue/KT-36646) Don't box primitive konstues in equality comparison with objects in JVM_IR
 
 #### Fixes
 
@@ -765,8 +765,8 @@
 
 - [`KT-43701`](https://youtrack.jetbrains.com/issue/KT-43701) Stdlib: Expand KDoc of inc() and dec() for operators
 - [`KT-46002`](https://youtrack.jetbrains.com/issue/KT-46002) Support all Unicode digit chars in digitToInt (JS and Native)
-- [`KT-46183`](https://youtrack.jetbrains.com/issue/KT-46183) Add default value for ignoreCase in K/N String.replace/replaceFirst
-- [`KT-46184`](https://youtrack.jetbrains.com/issue/KT-46184) Equivalize isLowerCase and isUpperCase behavior in all platforms
+- [`KT-46183`](https://youtrack.jetbrains.com/issue/KT-46183) Add default konstue for ignoreCase in K/N String.replace/replaceFirst
+- [`KT-46184`](https://youtrack.jetbrains.com/issue/KT-46184) Equikonstize isLowerCase and isUpperCase behavior in all platforms
 
 ### Native
 
@@ -794,7 +794,7 @@
 ### Tools. CLI
 
 - [`KT-14772`](https://youtrack.jetbrains.com/issue/KT-14772) ISE (FNFE "Not a directory") on compilation with destination argument clashing with an existing file which is not a directory
-- [`KT-18184`](https://youtrack.jetbrains.com/issue/KT-18184) CompileEnvironmentException: Invalid jar path on "-d" with .jar in non-existing directory
+- [`KT-18184`](https://youtrack.jetbrains.com/issue/KT-18184) CompileEnvironmentException: Inkonstid jar path on "-d" with .jar in non-existing directory
 - [`KT-40977`](https://youtrack.jetbrains.com/issue/KT-40977) Report a readable diagnostic on empty -J argument in CLI
 
 ### Tools. Commonizer
@@ -818,7 +818,7 @@
 ### Tools. Gradle
 
 - [`KT-24533`](https://youtrack.jetbrains.com/issue/KT-24533) Kapt should not run when annotation processors are not configured
-- [`KT-43988`](https://youtrack.jetbrains.com/issue/KT-43988) Enable plugin validation during build
+- [`KT-43988`](https://youtrack.jetbrains.com/issue/KT-43988) Enable plugin konstidation during build
 - [`KT-45301`](https://youtrack.jetbrains.com/issue/KT-45301) Gradle: Empty `build/kotlin` dir with custom build directory
 - [`KT-45519`](https://youtrack.jetbrains.com/issue/KT-45519) loadAndroidPluginVersion() impacts performance negatively and noticeably in multimodule Android build
 - [`KT-45744`](https://youtrack.jetbrains.com/issue/KT-45744) Create Kotlin Gradle Plugin JUnit5 basic test setup
@@ -872,7 +872,7 @@
 #### Fixes
 
 - [`KT-27123`](https://youtrack.jetbrains.com/issue/KT-27123) kapt: missing space in error log makes location non-clickable
-- [`KT-29929`](https://youtrack.jetbrains.com/issue/KT-29929) [Kapt] Stub generator uses constant value in method annotation instead of constant name 2.
+- [`KT-29929`](https://youtrack.jetbrains.com/issue/KT-29929) [Kapt] Stub generator uses constant konstue in method annotation instead of constant name 2.
 - [`KT-31146`](https://youtrack.jetbrains.com/issue/KT-31146) kapt: executableElement.getAnnotation(JvmOverloads::class.java) returns null
 - [`KT-32202`](https://youtrack.jetbrains.com/issue/KT-32202) Gradle task kaptKotlin fails: "module not found" in Java 11 modular application
 - [`KT-34838`](https://youtrack.jetbrains.com/issue/KT-34838) Kapt: 'cannot find symbol' for a top-level property with anonymous delegate
@@ -900,7 +900,7 @@
 - [`KT-45779`](https://youtrack.jetbrains.com/issue/KT-45779) JVM / IR: java.lang.NoSuchMethodError: 'int java.lang.Integer.plus(int)' caused by function reference
 - [`KT-45941`](https://youtrack.jetbrains.com/issue/KT-45941) JVM IR: local functions use generic type parameters of the outer class in the bytecode, which breaks Bytebuddy and MockK
 - [`KT-46149`](https://youtrack.jetbrains.com/issue/KT-46149) Generate synthetic classes for SAM adapters with erased instead of generic supertype
-- [`KT-46189`](https://youtrack.jetbrains.com/issue/KT-46189) JVM IR: tailrec function with capturing lambda in default parameter value leads to NoSuchMethodError at runtime
+- [`KT-46189`](https://youtrack.jetbrains.com/issue/KT-46189) JVM IR: tailrec function with capturing lambda in default parameter konstue leads to NoSuchMethodError at runtime
 - [`KT-46214`](https://youtrack.jetbrains.com/issue/KT-46214) JVM / IR: "IllegalStateException: No mapping for symbol: VALUE_PARAMETER INSTANCE_RECEIVER" on a suspend function in an inner class
 - [`KT-46238`](https://youtrack.jetbrains.com/issue/KT-46238) JVM IR: BootstrapMethodError in JDK 11+ on intersection type passed in arguments of SAM adapter where SAM interface's type parameter has a non-trivial upper bound
 - [`KT-46259`](https://youtrack.jetbrains.com/issue/KT-46259) JVM IR: local function for adapted function reference is not declared as ACC_SYNTHETIC
@@ -908,21 +908,21 @@
 - [`KT-46402`](https://youtrack.jetbrains.com/issue/KT-46402) IllegalAccessError: "CapturedLambdaInterpreter (in unnamed module @0x71b06418) cannot access class jdk.internal.org.objectweb.asm.Type" caused by inline function with a suspend parameter in Maven project
 - [`KT-46408`](https://youtrack.jetbrains.com/issue/KT-46408) JVM IR: BootstrapMethodError due to missing bridge for subclass of generic Java interface
 - [`KT-46426`](https://youtrack.jetbrains.com/issue/KT-46426) JVM IR: Corrupted .class file when passing Array constructor reference as (inline) lambda
-- [`KT-46455`](https://youtrack.jetbrains.com/issue/KT-46455) OOM on parsing invalid code with string interpolation
+- [`KT-46455`](https://youtrack.jetbrains.com/issue/KT-46455) OOM on parsing inkonstid code with string interpolation
 - [`KT-46503`](https://youtrack.jetbrains.com/issue/KT-46503) JVM IR: "AssertionError: Unexpected variance in super type argument: out @1"
-- [`KT-46505`](https://youtrack.jetbrains.com/issue/KT-46505) JVM IR: NullPointerException caused by a callable reference with nullable inline value class parameter
+- [`KT-46505`](https://youtrack.jetbrains.com/issue/KT-46505) JVM IR: NullPointerException caused by a callable reference with nullable inline konstue class parameter
 - [`KT-46512`](https://youtrack.jetbrains.com/issue/KT-46512) JVM / IR: NoSuchMethodError on SAM conversion of a function reference
 - [`KT-46515`](https://youtrack.jetbrains.com/issue/KT-46515) IndexOutOfBoundsException: "Empty list doesn't contain element at index 0." on bad variable name in 1.5.0
 - [`KT-46516`](https://youtrack.jetbrains.com/issue/KT-46516) JVM IR: "AnalyzerException: Expected I, but found R" on subclassing AbstractMutableList<Int>
 - [`KT-46524`](https://youtrack.jetbrains.com/issue/KT-46524) Cannot use unsigned literals with api-version < 1.5 even with opt-in
 - [`KT-46537`](https://youtrack.jetbrains.com/issue/KT-46537) JVM / IR: "IllegalStateException: No noarg super constructor for CLASS" caused by "No-arg" plugin with annotation on child class
 - [`KT-46540`](https://youtrack.jetbrains.com/issue/KT-46540) JVM / IR: AnalyzerException: Expected an object reference, but found J caused by java.function.Supplier
-- [`KT-46554`](https://youtrack.jetbrains.com/issue/KT-46554) JVM IR: "IllegalStateException: No mapping for symbol: VAR IR_TEMPORARY_VARIABLE" with value class constructor delegation call
+- [`KT-46554`](https://youtrack.jetbrains.com/issue/KT-46554) JVM IR: "IllegalStateException: No mapping for symbol: VAR IR_TEMPORARY_VARIABLE" with konstue class constructor delegation call
 - [`KT-46555`](https://youtrack.jetbrains.com/issue/KT-46555) JVM IR: IllegalAccessError when using Java method reference
 - [`KT-46562`](https://youtrack.jetbrains.com/issue/KT-46562) Kotlin 1.5.0 generates non-serializable lambdas when they should be serializable
 - [`KT-46568`](https://youtrack.jetbrains.com/issue/KT-46568) JVM IR: "AssertionError: IrCall expected inside JvmStatic wrapper" on compiling protected static function with return type Nothing inside companion object of abstract class
 - [`KT-46574`](https://youtrack.jetbrains.com/issue/KT-46574) JVM / IR: ClassCastException caused by runBlocking awaiting call while returning Kotlin.Result type.
-- [`KT-46579`](https://youtrack.jetbrains.com/issue/KT-46579) JVM IR: "IllegalArgumentException: Sequence contains more than one matching element" for Java enum with overloaded values() static method
+- [`KT-46579`](https://youtrack.jetbrains.com/issue/KT-46579) JVM IR: "IllegalArgumentException: Sequence contains more than one matching element" for Java enum with overloaded konstues() static method
 - [`KT-46584`](https://youtrack.jetbrains.com/issue/KT-46584) JVM IR: Intrinsics.needClassReification (UnsupportedOperationException thrown). Property delegate provider crossinline lambda inlining/reification issue
 - [`KT-46751`](https://youtrack.jetbrains.com/issue/KT-46751) JVM / IR:"ClassCastException: java.lang.String cannot be cast to java.lang.Void" in extension function in Kotlin 1.5
 
@@ -1010,8 +1010,8 @@
 - [`KT-26590`](https://youtrack.jetbrains.com/issue/KT-26590) Do not generate create method for suspend lambdas if its arity >= 2
 - [`KT-27427`](https://youtrack.jetbrains.com/issue/KT-27427) Optimize nullable check introduced with 'as' cast
 - [`KT-28246`](https://youtrack.jetbrains.com/issue/KT-28246) Redundant boxing/unboxing isn't eliminated by the compiler in case of inline classes and javaClass intrinsic
-- [`KT-30605`](https://youtrack.jetbrains.com/issue/KT-30605) Constant folding doesn't evaluate inv() function
-- [`KT-36845`](https://youtrack.jetbrains.com/issue/KT-36845) Generate enum-based TABLESWITCH/LOOKUPSWITCH on a value with smart cast to enum in JVM_IR
+- [`KT-30605`](https://youtrack.jetbrains.com/issue/KT-30605) Constant folding doesn't ekonstuate inv() function
+- [`KT-36845`](https://youtrack.jetbrains.com/issue/KT-36845) Generate enum-based TABLESWITCH/LOOKUPSWITCH on a konstue with smart cast to enum in JVM_IR
 - [`KT-39585`](https://youtrack.jetbrains.com/issue/KT-39585) JVM BE generates redundant accessor calls when accessing static final field lifted from companion
 - [`KT-40886`](https://youtrack.jetbrains.com/issue/KT-40886) Old JVM BE unspills ACONST_NULL from continuation
 - [`KT-42621`](https://youtrack.jetbrains.com/issue/KT-42621) Kotlin binary size considerably larger for code extensively using stream API
@@ -1024,7 +1024,7 @@
 - [`KT-6055`](https://youtrack.jetbrains.com/issue/KT-6055) Failed invoke plus assign on array element accessed via several args through local get/set convention extensions
 - [`KT-6879`](https://youtrack.jetbrains.com/issue/KT-6879) CompilationException when local classes hierarchy is placed within other local or inner declaration
 - [`KT-8120`](https://youtrack.jetbrains.com/issue/KT-8120) NoSuchMethodError on local class constructor call inside a local class
-- [`KT-8199`](https://youtrack.jetbrains.com/issue/KT-8199) "Cannot pop operand off an empty stack" for local class using a captured variable as default value for constructor parameter
+- [`KT-8199`](https://youtrack.jetbrains.com/issue/KT-8199) "Cannot pop operand off an empty stack" for local class using a captured variable as default konstue for constructor parameter
 - [`KT-10835`](https://youtrack.jetbrains.com/issue/KT-10835) "AssertionError: Non-outer parameter incorrectly mapped to outer" when inlining object literal extending inner class
 - [`KT-12790`](https://youtrack.jetbrains.com/issue/KT-12790) Don't generate synthetic accessors for private inline function/properties
 - [`KT-13213`](https://youtrack.jetbrains.com/issue/KT-13213) IllegalArgumentException in ByteVector.putUTF8 on attempt to compile file with moderately long string literal
@@ -1037,13 +1037,13 @@
 - [`KT-16221`](https://youtrack.jetbrains.com/issue/KT-16221) Support in/!in suspend operators
 - [`KT-16282`](https://youtrack.jetbrains.com/issue/KT-16282) "Cannot pop operand off an empty stack" for plusAssign with default parameters in setter operator
 - [`KT-16445`](https://youtrack.jetbrains.com/issue/KT-16445) `java.lang.VerifyError: Bad type on operand stack` when delegating an interface through a private reified function inside an object
-- [`KT-16520`](https://youtrack.jetbrains.com/issue/KT-16520) Invalid bytecode semantics for set call by convention with default parameters
+- [`KT-16520`](https://youtrack.jetbrains.com/issue/KT-16520) Inkonstid bytecode semantics for set call by convention with default parameters
 - [`KT-16567`](https://youtrack.jetbrains.com/issue/KT-16567) Inliner creates redundant objects on source inlining
 - [`KT-16752`](https://youtrack.jetbrains.com/issue/KT-16752) Delegating function interface to function reference does not work
 - [`KT-17554`](https://youtrack.jetbrains.com/issue/KT-17554) Incorrect cast to Unit generated on annotated when-expression with a single-branch if inside
 - [`KT-17738`](https://youtrack.jetbrains.com/issue/KT-17738) Java cannot extend class implementing kotlin.collections.Map
 - [`KT-17753`](https://youtrack.jetbrains.com/issue/KT-17753) Strange behavior of if and return statements
-- [`KT-18583`](https://youtrack.jetbrains.com/issue/KT-18583) "ISE: Recursive call in a lazy value" for generic sealed class with nested subclass in a `when(this)` with inferred return type
+- [`KT-18583`](https://youtrack.jetbrains.com/issue/KT-18583) "ISE: Recursive call in a lazy konstue" for generic sealed class with nested subclass in a `when(this)` with inferred return type
 - [`KT-19861`](https://youtrack.jetbrains.com/issue/KT-19861) "IllegalStateException: Label wasn't found during iterating through instructions" for `plusAssign` with safe call
 - [`KT-20306`](https://youtrack.jetbrains.com/issue/KT-20306) Make 'when' over an 'expect' enum class non-exhaustive
 - [`KT-20869`](https://youtrack.jetbrains.com/issue/KT-20869) kotlin.jvm.internal.DefaultConstructorMarker should be public
@@ -1067,7 +1067,7 @@
 - [`KT-26473`](https://youtrack.jetbrains.com/issue/KT-26473) Error on compiling inline class with calls of super methods equals(), hashCode(), toString()
 - [`KT-26474`](https://youtrack.jetbrains.com/issue/KT-26474) VE “Bad type on operand stack” at runtime on calling toString() method of inline class with calls of super methods (toString(), equals(), hashCode()) inside
 - [`KT-26592`](https://youtrack.jetbrains.com/issue/KT-26592) Do not generate private suspend functions as synthetic package-private
-- [`KT-27449`](https://youtrack.jetbrains.com/issue/KT-27449) NoSuchMethodError for local suspend function with suspend lambda parameter with default value
+- [`KT-27449`](https://youtrack.jetbrains.com/issue/KT-27449) NoSuchMethodError for local suspend function with suspend lambda parameter with default konstue
 - [`KT-27469`](https://youtrack.jetbrains.com/issue/KT-27469) "Cannot pop operand off an empty stack" for compound assignment (plusAssign) with a `vararg` operator get
 - [`KT-27825`](https://youtrack.jetbrains.com/issue/KT-27825) Gradually prohibit non-abstract classes containing abstract members invisible from that classes (internal/package-private)
 - [`KT-27830`](https://youtrack.jetbrains.com/issue/KT-27830) "Incompatible stack heights" with suspend inline function in do while loop that executes suspend lambda
@@ -1135,7 +1135,7 @@
 - [`KT-38100`](https://youtrack.jetbrains.com/issue/KT-38100) Support local delegated properties (not inlined) in new JVM default modes
 - [`KT-38833`](https://youtrack.jetbrains.com/issue/KT-38833) JVM: java.lang.ClassCastException when loop variable is nullable in for loop over unsigned progression
 - [`KT-38849`](https://youtrack.jetbrains.com/issue/KT-38849) Read-only variable initialized in non-inline lambda using contract callsInPlace EXACTLY_ONCE is not captured correctly in nested lambdas
-- [`KT-38869`](https://youtrack.jetbrains.com/issue/KT-38869) JVM BE produces invalid bytecode when inheriting from AbstractList and declaring methods that look like MutableList implementors (but they aren't)
+- [`KT-38869`](https://youtrack.jetbrains.com/issue/KT-38869) JVM BE produces inkonstid bytecode when inheriting from AbstractList and declaring methods that look like MutableList implementors (but they aren't)
 - [`KT-38965`](https://youtrack.jetbrains.com/issue/KT-38965) "UnsupportedOperationException: Don't know how to generate outer expression: Closure" with reference to local variable in block argument of anonymous object `by` delegation
 - [`KT-39289`](https://youtrack.jetbrains.com/issue/KT-39289) CCE in if-else inside annotated 'if' statement
 - [`KT-39425`](https://youtrack.jetbrains.com/issue/KT-39425) AbstractMethodError: "Receiver class does not define or inherit an implementation of the resolved method" using classes with complex Java and Kotlin inheritance hierarchies.
@@ -1155,7 +1155,7 @@
 - [`KT-41056`](https://youtrack.jetbrains.com/issue/KT-41056) Increase stub version due to new "contract" keyword
 - [`KT-41105`](https://youtrack.jetbrains.com/issue/KT-41105) IllegalStateException: 'Couldn't find declaration file <class name>' with inline delegate declared in another file
 - [`KT-41165`](https://youtrack.jetbrains.com/issue/KT-41165) "IllegalStateException: Concrete fake override public final fun" when an enum class inherits an interface with a variable 'name' or 'ordinal'
-- [`KT-41222`](https://youtrack.jetbrains.com/issue/KT-41222) "IllegalStateException: Concrete fake override public final fun" when a class property is inherited as merged 'var' from 'val' and 'var' from parent abstract class and interface properties
+- [`KT-41222`](https://youtrack.jetbrains.com/issue/KT-41222) "IllegalStateException: Concrete fake override public final fun" when a class property is inherited as merged 'var' from 'konst' and 'var' from parent abstract class and interface properties
 - [`KT-41255`](https://youtrack.jetbrains.com/issue/KT-41255) JDK 11: "VerifyError: Bad type on operand stack" with long function body with annotated `when` expression
 - [`KT-41427`](https://youtrack.jetbrains.com/issue/KT-41427) NoSuchMethodError caused by implementation by delegation to function reference
 - [`KT-41508`](https://youtrack.jetbrains.com/issue/KT-41508) ClassNotFoundException caused by object with overridden function inside a lambda with safe cast receiver
@@ -1168,19 +1168,19 @@
 - [`KT-42017`](https://youtrack.jetbrains.com/issue/KT-42017) "AssertionError: Unsigned type expected: UInt?" during codegen when a variable of nullable unsigned type is checking for presence in the range
 - [`KT-42032`](https://youtrack.jetbrains.com/issue/KT-42032) "AnalyzerException: Expected I, but found R" while using Flow.reduce() with suspend function reference
 - [`KT-42034`](https://youtrack.jetbrains.com/issue/KT-42034) ArrayIndexOutOfBoundsException in PopBackwardPropagationTransformer on external override of function in inline class
-- [`KT-42064`](https://youtrack.jetbrains.com/issue/KT-42064) "Parameter specified as non-null is null" with default value of the parameter in operator fun
+- [`KT-42064`](https://youtrack.jetbrains.com/issue/KT-42064) "Parameter specified as non-null is null" with default konstue of the parameter in operator fun
 - [`KT-42069`](https://youtrack.jetbrains.com/issue/KT-42069) JVM IR: -Xreport-output-files doesn't report any source files for META-INF/*.kotlin_module files
 - [`KT-42083`](https://youtrack.jetbrains.com/issue/KT-42083) AbstractMethodError when 'remove' with irrelevant generic parameter but matching JVM signature is present in Kotlin collection class
 - [`KT-42092`](https://youtrack.jetbrains.com/issue/KT-42092) JVM / IR: "AnalyzerException: Argument 1: expected R, but found J" when trying to add to ArrayList the result of a function applied to int
 - [`KT-42175`](https://youtrack.jetbrains.com/issue/KT-42175) Psi2ir: "AssertionError: Undefined parameter referenced: <this>" on augmented assignment on this in a BuilderInference lambda
 - [`KT-42179`](https://youtrack.jetbrains.com/issue/KT-42179) Platform declaration clash when extending abstract Java class implementing 'java.util.Collection' by abstract Kotlin class implementing Kotlin Set or List
-- [`KT-42321`](https://youtrack.jetbrains.com/issue/KT-42321) JVM IR: do not cast integer value based on the type of a literal receiver of an operator call
+- [`KT-42321`](https://youtrack.jetbrains.com/issue/KT-42321) JVM IR: do not cast integer konstue based on the type of a literal receiver of an operator call
 - [`KT-42337`](https://youtrack.jetbrains.com/issue/KT-42337) NoSuchMethodError in JVM backend with inheritance of private functions in the interface
 - [`KT-42404`](https://youtrack.jetbrains.com/issue/KT-42404) "Supertypes of the following classes cannot be resolved" in Rider project
 - [`KT-42472`](https://youtrack.jetbrains.com/issue/KT-42472) No TYPE_INFERENCE_UPPER_BOUND_VIOLATED for Delegated Properties do not check types (in Kotlin 1.4.10)
 - [`KT-42487`](https://youtrack.jetbrains.com/issue/KT-42487) "IndexOutOfBoundsException: Cannot pop operand off an empty stack" caused by USELESS_IS_CHECK of Double type
 - [`KT-42533`](https://youtrack.jetbrains.com/issue/KT-42533) `(N until MIN_VALUE).reversed()` should be an empty progression in for loops
-- [`KT-42588`](https://youtrack.jetbrains.com/issue/KT-42588) "IllegalStateException: Concrete fake override public open fun" caused by `val` override with `var` with delegation.
+- [`KT-42588`](https://youtrack.jetbrains.com/issue/KT-42588) "IllegalStateException: Concrete fake override public open fun" caused by `konst` override with `var` with delegation.
 - [`KT-42634`](https://youtrack.jetbrains.com/issue/KT-42634) Different bridges and abstract stubs behavior in abstract class implementing Map<K, String> in JVM and JVM_IR
 - [`KT-42635`](https://youtrack.jetbrains.com/issue/KT-42635) ClassCastException with inline class in for loop
 - [`KT-42662`](https://youtrack.jetbrains.com/issue/KT-42662) AbstractMethodError when using partially specialized generic Map class
@@ -1190,7 +1190,7 @@
 - [`KT-42900`](https://youtrack.jetbrains.com/issue/KT-42900) "VerifyError: Bad return type" incorrect bytecode when a property and an extension property in inline class have the same names
 - [`KT-42946`](https://youtrack.jetbrains.com/issue/KT-42946) FIR2IR:  Fix super-calls to Java overrides of special built-in
 - [`KT-42971`](https://youtrack.jetbrains.com/issue/KT-42971) JVM: "AssertionError: Unsigned type expected: T" with UInt loop range
-- [`KT-42990`](https://youtrack.jetbrains.com/issue/KT-42990) "AssertionError: Next value after NEW should be one generated by DUP" caused by extension properties with accessors annotataed as @JvmStatic
+- [`KT-42990`](https://youtrack.jetbrains.com/issue/KT-42990) "AssertionError: Next konstue after NEW should be one generated by DUP" caused by extension properties with accessors annotataed as @JvmStatic
 - [`KT-43034`](https://youtrack.jetbrains.com/issue/KT-43034) AssertionError: Compiler fails with complicated tailrec + inline case
 - [`KT-43048`](https://youtrack.jetbrains.com/issue/KT-43048) JVM_IR: Implement coroutines state clearing
 - [`KT-43050`](https://youtrack.jetbrains.com/issue/KT-43050) JVM IR: incorrect mangling for method with type parameter with inline class bound in the signature
@@ -1239,7 +1239,7 @@
 - [`KT-44054`](https://youtrack.jetbrains.com/issue/KT-44054) FIR2IR: incorrect IR origin for substituted override function
 - [`KT-44058`](https://youtrack.jetbrains.com/issue/KT-44058) CompilationException: open suspend fun with @JvmStatic in open class companion
 - [`KT-44069`](https://youtrack.jetbrains.com/issue/KT-44069) please remove deprecated usages
-- [`KT-44066`](https://youtrack.jetbrains.com/issue/KT-44066) FIR Java: override ambiguity with vararg value type
+- [`KT-44066`](https://youtrack.jetbrains.com/issue/KT-44066) FIR Java: override ambiguity with vararg konstue type
 - [`KT-44114`](https://youtrack.jetbrains.com/issue/KT-44114) CompilationException when inlining a extension suspend function declared in interface companion with 'this' reference to extension receiver
 - [`KT-44131`](https://youtrack.jetbrains.com/issue/KT-44131) "UnsupportedOperationException: Don't know how to generate outer expression: Closure" when using suspend lambda and a function reference
 - [`KT-44140`](https://youtrack.jetbrains.com/issue/KT-44140) JVM IR: compilation of kotlin.Result crashes with IOOBE while generating toString-impl
@@ -1248,7 +1248,7 @@
 - [`KT-44202`](https://youtrack.jetbrains.com/issue/KT-44202) "ClassCastException" when getting delegated property with inline class and Any/Any? type
 - [`KT-44210`](https://youtrack.jetbrains.com/issue/KT-44210) KJS / IR: "AssertionError: Undefined parameter referenced: <this> defined" caused by plus assign operators in build blocks
 - [`KT-44233`](https://youtrack.jetbrains.com/issue/KT-44233) [IR] Collection Stub generation not correctly considering java.util Collection iterators
-- [`KT-44234`](https://youtrack.jetbrains.com/issue/KT-44234) Private companion property with explicit setter generates invalid bytecode
+- [`KT-44234`](https://youtrack.jetbrains.com/issue/KT-44234) Private companion property with explicit setter generates inkonstid bytecode
 - [`KT-44269`](https://youtrack.jetbrains.com/issue/KT-44269) "[TAILREC_ON_VIRTUAL_MEMBER_ERROR] Tailrec is not allowed on open members" with Spring annotation and private tailrec function
 - [`KT-44284`](https://youtrack.jetbrains.com/issue/KT-44284) Make Kotlin binaries publicly unavailable (set KotlinCompilerVersion.IS_PRE_RELEASE = true)
 - [`KT-44316`](https://youtrack.jetbrains.com/issue/KT-44316) ReenteringLazyValueComputationException when analyzing complex lazy delegate
@@ -1312,7 +1312,7 @@
 - [`KT-45721`](https://youtrack.jetbrains.com/issue/KT-45721) JVM / IR: "Unbound symbols not allowed" caused by class reference in sequence lambda
 - [`KT-45853`](https://youtrack.jetbrains.com/issue/KT-45853) JVM / IR: "Accidental override" caused by inheriting Throwable.getCause from Java interface
 - [`KT-45861`](https://youtrack.jetbrains.com/issue/KT-45861) Turning warnings into errors for calls with type parameters annotated by @OnlyInputTypes
-- [`KT-45865`](https://youtrack.jetbrains.com/issue/KT-45865) JVM IR: "VerifyError: Bad type on operand stack" with `enumValueOf` on a value from a list of strings
+- [`KT-45865`](https://youtrack.jetbrains.com/issue/KT-45865) JVM IR: "VerifyError: Bad type on operand stack" with `enumValueOf` on a konstue from a list of strings
 - [`KT-45868`](https://youtrack.jetbrains.com/issue/KT-45868) JVM IR: ClassCastException with SAM function in init block when SAM is generated via invokedynamic
 - [`KT-45920`](https://youtrack.jetbrains.com/issue/KT-45920) JVM IR: "Accidental override" on redefining `get()` in custom Map class
 - [`KT-45934`](https://youtrack.jetbrains.com/issue/KT-45934) JVM IR: "java.lang.IllegalStateException: Function has no body" for class implementing interface by delegation
@@ -1324,7 +1324,7 @@
 - [`KT-46060`](https://youtrack.jetbrains.com/issue/KT-46060) JVM IR: NullPointerException from RangeContainsLowering when `contains` is a @JvmStatic function in object
 - [`KT-46069`](https://youtrack.jetbrains.com/issue/KT-46069) JVM IR: unbound type parameter on generic bound adapted function reference
 - [`KT-46092`](https://youtrack.jetbrains.com/issue/KT-46092) JVM IR: AssertionError "Array type expected: @[FlexibleNullability] kotlin.CharArray?" on super call to Java constructor with primitive vararg
-- [`KT-46104`](https://youtrack.jetbrains.com/issue/KT-46104) The message on inline -> value class migration should not say that inline classes are deprecated
+- [`KT-46104`](https://youtrack.jetbrains.com/issue/KT-46104) The message on inline -> konstue class migration should not say that inline classes are deprecated
 - [`KT-46131`](https://youtrack.jetbrains.com/issue/KT-46131) Kotlin 1.5.0-RC errors when reading class file
 - [`KT-46160`](https://youtrack.jetbrains.com/issue/KT-46160) JVM IR: IllegalAccessException at runtime for member reference to JvmMultifileClass member from stdlib
 - [`KT-46186`](https://youtrack.jetbrains.com/issue/KT-46186) Type inference regression in Kotlin 1.5 with constrained generic return types
@@ -1366,7 +1366,7 @@
 - [`KT-23824`](https://youtrack.jetbrains.com/issue/KT-23824) Return lifted out of if condition causes suspend tail call optimization to no longer apply
 - [`KT-38155`](https://youtrack.jetbrains.com/issue/KT-38155) Lift assignment out of 'if' produces type mismatch without manually adding a semicolon
 - [`KT-44821`](https://youtrack.jetbrains.com/issue/KT-44821) IDE: False positive NO_ELSE_IN_WHEN caused by sealed class and when in another module
-- [`KT-46088`](https://youtrack.jetbrains.com/issue/KT-46088) [IDEA] Incorrect behavior of replace inline class with value class intention
+- [`KT-46088`](https://youtrack.jetbrains.com/issue/KT-46088) [IDEA] Incorrect behavior of replace inline class with konstue class intention
 
 ### IDE. Misc
 
@@ -1409,7 +1409,7 @@
 - [`KT-43772`](https://youtrack.jetbrains.com/issue/KT-43772) Kotlin/Native unfinished workers detected.
 - [`KT-44168`](https://youtrack.jetbrains.com/issue/KT-44168) Prevent storing NaN and negative zero in kotlin.time.Duration
 - [`KT-44369`](https://youtrack.jetbrains.com/issue/KT-44369) Commonize Char.titlecaseChar() and Char.titlecase() that are currently JVM-only
-- [`KT-44783`](https://youtrack.jetbrains.com/issue/KT-44783) Add IS_VALUE flag for value classes to kotlinx-metadata-jvm
+- [`KT-44783`](https://youtrack.jetbrains.com/issue/KT-44783) Add IS_VALUE flag for konstue classes to kotlinx-metadata-jvm
 - [`KT-44815`](https://youtrack.jetbrains.com/issue/KT-44815) Remove kotlin-annotations-android and JVM compiler support for @ParameterName/@DefaultValue/@DefaultNull
 - [`KT-45213`](https://youtrack.jetbrains.com/issue/KT-45213) Update Unicode version used in K/N for Char and String case conversion functions
 
@@ -1417,7 +1417,7 @@
 
 - [`KT-43831`](https://youtrack.jetbrains.com/issue/KT-43831) Compilation failed, IrSimpleFunctionPublicSymbolImpl is already bound
 - [`KT-44100`](https://youtrack.jetbrains.com/issue/KT-44100) KJS / IR: Top level declarations added in IR plugin are not referenceable from other modules
-- [`KT-45170`](https://youtrack.jetbrains.com/issue/KT-45170) IR: "AssertionError: Single expression value for GET_OBJECT" caused by inc operator of field inside scope function inside object
+- [`KT-45170`](https://youtrack.jetbrains.com/issue/KT-45170) IR: "AssertionError: Single expression konstue for GET_OBJECT" caused by inc operator of field inside scope function inside object
 
 ### Native
 

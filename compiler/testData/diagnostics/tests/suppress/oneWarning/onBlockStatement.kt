@@ -46,7 +46,7 @@ fun <T : CharSequence> foo(x: Array<Any>, y: IntArray, block: (T, Int) -> Int) {
             i += block(x[0] as T, "" <!CAST_NEVER_SUCCEEDS!>as<!> Int).toInt()
     }
 
-    val l: () -> Unit = {
+    konst l: () -> Unit = {
         @Suppress("UNCHECKED_CAST")
         i += block(x[0] as T, "" <!CAST_NEVER_SUCCEEDS!>as<!> Int).toInt()
     }

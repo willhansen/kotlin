@@ -1,6 +1,6 @@
 class A {
     constructor(): thi()
-    val x: Int
+    konst x: Int
 
     constructor():
 

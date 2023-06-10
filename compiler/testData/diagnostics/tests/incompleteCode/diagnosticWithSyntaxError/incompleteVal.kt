@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
 package c
 
-val i =<!SYNTAX!><!>
+konst i =<!SYNTAX!><!>

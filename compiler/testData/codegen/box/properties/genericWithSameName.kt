@@ -4,15 +4,15 @@
 
 package foo
 
-class C<T>(val pp: T)
+class C<T>(konst pp: T)
 
-val <T: Any?> C<T>.p: String get() = pp?.toString() ?: "O"
+konst <T: Any?> C<T>.p: String get() = pp?.toString() ?: "O"
 
-val <T: Any> C<T>.p: String get() = pp.toString()
+konst <T: Any> C<T>.p: String get() = pp.toString()
 
 fun box(): String {
-    val c1 = C<String?>(null)
-    val c2 = C<String>("K")
+    konst c1 = C<String?>(null)
+    konst c2 = C<String>("K")
 
     return c1.p + c2.p
 

@@ -2,10 +2,10 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class A(
-    val l: MutableList<Int>,
-    val ll: MutableList<MutableList<Int>>,
+    konst l: MutableList<Int>,
+    konst ll: MutableList<MutableList<Int>>,
     var w: Int,
-    val q: () -> Unit
+    konst q: () -> Unit
 )
 
 operator fun <T> MutableList<in T>?.plusAssign(t: Any?) {}
@@ -25,7 +25,7 @@ fun foo(a: A?) {
     <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>a?.ll[0]<!>[0] = 1
     // No warning is reported because
     // 1. All kinds of green code with safe+call + invoke we identified fails with CCE if `a != null`, anyway
-    // 2. In case of null value, the behavior is intended (no call performed)
+    // 2. In case of null konstue, the behavior is intended (no call performed)
     a?.q()
     a?.w<!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>++<!>
 
@@ -62,7 +62,7 @@ fun foo(a: A?) {
         <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>a<!UNNECESSARY_SAFE_CALL!>?.<!>ll[0]<!>[0] = 1
         // No warning is reported because
         // 1. All kinds of green code with safe+call + invoke we identified fails with CCE if `a != null`, anyway
-        // 2. In case of null value, the behavior is intended (no call performed)
+        // 2. In case of null konstue, the behavior is intended (no call performed)
         a<!UNNECESSARY_SAFE_CALL!>?.<!>q()
         a<!UNNECESSARY_SAFE_CALL!>?.<!>w<!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>++<!>
 

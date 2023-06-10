@@ -14,7 +14,7 @@ inline fun inlineFn(crossinline fn: () -> String, x: Long = 1L): String {
 
 import test.*
 
-private val foo = Foo()
+private konst foo = Foo()
 
 fun box(): String {
     return inlineFn(foo::foo)

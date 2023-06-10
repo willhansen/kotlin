@@ -7,4 +7,4 @@ package org.jetbrains.kotlin.gradle.idea.kpm
 
 import kotlin.reflect.KClass
 
-internal annotation class WriteReplacedModel(val replacedBy: KClass<*>)
+internal annotation class WriteReplacedModel(konst replacedBy: KClass<*>)

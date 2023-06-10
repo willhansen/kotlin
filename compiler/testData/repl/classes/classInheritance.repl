@@ -1,4 +1,4 @@
->>> open class A(val result: String) {
+>>> open class A(konst result: String) {
 ...     fun foo() = result
 ... }
 >>> class B : A("OK")

@@ -4,7 +4,7 @@
 import java.util.*
 
 fun bar(): String? = null
-val nullableInt: Int? = null
+konst nullableInt: Int? = null
 
 fun hashMapTest() {
     var x: HashMap<String, Int?> = HashMap<String, Int?>()
@@ -18,16 +18,16 @@ fun hashMapTest() {
     x[""] = nullableInt
     x[""] = 1
 
-    val b1: MutableMap<String, Int> = <!TYPE_MISMATCH!>x<!>
-    val b2: MutableMap<String, Int?> = x
-    val b3: Map<String, Int> = <!TYPE_MISMATCH!>x<!>
-    val b4: Map<String, Int?> = x
-    val b5: Map<String?, Int?> = <!TYPE_MISMATCH!>x<!>
+    konst b1: MutableMap<String, Int> = <!TYPE_MISMATCH!>x<!>
+    konst b2: MutableMap<String, Int?> = x
+    konst b3: Map<String, Int> = <!TYPE_MISMATCH!>x<!>
+    konst b4: Map<String, Int?> = x
+    konst b5: Map<String?, Int?> = <!TYPE_MISMATCH!>x<!>
 
-    val b6: Int = <!TYPE_MISMATCH!>x[""]<!>
-    val b7: Int = <!TYPE_MISMATCH!>x.get("")<!>
+    konst b6: Int = <!TYPE_MISMATCH!>x[""]<!>
+    konst b7: Int = <!TYPE_MISMATCH!>x.get("")<!>
 
-    val b8: Int? = x.get("")
+    konst b8: Int? = x.get("")
 }
 
 fun treeMapTest() {
@@ -42,14 +42,14 @@ fun treeMapTest() {
     x[""] = nullableInt
     x[""] = 1
 
-    val b1: MutableMap<String, Int> = <!TYPE_MISMATCH!>x<!>
-    val b2: MutableMap<String, Int?> = x
-    val b3: Map<String, Int> = <!TYPE_MISMATCH!>x<!>
-    val b4: Map<String, Int?> = x
-    val b5: Map<String?, Int?> = <!TYPE_MISMATCH!>x<!>
+    konst b1: MutableMap<String, Int> = <!TYPE_MISMATCH!>x<!>
+    konst b2: MutableMap<String, Int?> = x
+    konst b3: Map<String, Int> = <!TYPE_MISMATCH!>x<!>
+    konst b4: Map<String, Int?> = x
+    konst b5: Map<String?, Int?> = <!TYPE_MISMATCH!>x<!>
 
-    val b6: Int = <!TYPE_MISMATCH!>x[""]<!>
-    val b7: Int = <!TYPE_MISMATCH!>x.get("")<!>
+    konst b6: Int = <!TYPE_MISMATCH!>x[""]<!>
+    konst b7: Int = <!TYPE_MISMATCH!>x.get("")<!>
 
-    val b8: Int? = x.get("")
+    konst b8: Int? = x.get("")
 }

@@ -3,13 +3,13 @@ package foo
 
 interface Named {
     companion object Bar {
-        val g = "a";
+        konst g = "a";
     }
 }
 
 class Foo {
     companion object {
-        val g = "b";
+        konst g = "b";
     }
 }
 

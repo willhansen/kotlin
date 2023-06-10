@@ -1,5 +1,5 @@
 package foo
 
 open class A {
-    val x: Any = object {}
+    konst x: Any = object {}
 }

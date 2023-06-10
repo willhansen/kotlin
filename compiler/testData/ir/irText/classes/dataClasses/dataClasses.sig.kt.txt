@@ -5,7 +5,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}x
   //   Public signature: /Test1.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-x>(){}kotlin.Int
     //   Public signature: /Test1.x.<get-x>|4966956098150895696[0]
@@ -17,7 +17,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}y
   //   Public signature: /Test1.y|3625903257357557171[0]
-  val y: String
+  konst y: String
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-y>(){}kotlin.String
     //   Public signature: /Test1.y.<get-y>|1760775372995524147[0]
@@ -29,7 +29,7 @@ data class Test1 {
   // CHECK:
   //   Mangled name: Test1{}z
   //   Public signature: /Test1.z|7549650372729116193[0]
-  val z: Any
+  konst z: Any
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-z>(){}kotlin.Any
     //   Public signature: /Test1.z.<get-z>|3264772919715209875[0]
@@ -107,7 +107,7 @@ data class Test2 {
   // CHECK:
   //   Mangled name: Test2{}x
   //   Public signature: /Test2.x|-8060530855978347579[0]
-  val x: Any?
+  konst x: Any?
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-x>(){}kotlin.Any?
     //   Public signature: /Test2.x.<get-x>|4529939993405876842[0]
@@ -169,7 +169,7 @@ data class Test3 {
   // CHECK:
   //   Mangled name: Test3{}d
   //   Public signature: /Test3.d|5174763769109925331[0]
-  val d: Double
+  konst d: Double
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-d>(){}kotlin.Double
     //   Public signature: /Test3.d.<get-d>|-5403877192080381201[0]
@@ -181,7 +181,7 @@ data class Test3 {
   // CHECK:
   //   Mangled name: Test3{}dn
   //   Public signature: /Test3.dn|-2746901618144580958[0]
-  val dn: Double?
+  konst dn: Double?
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-dn>(){}kotlin.Double?
     //   Public signature: /Test3.dn.<get-dn>|-6168917619305056925[0]
@@ -193,7 +193,7 @@ data class Test3 {
   // CHECK:
   //   Mangled name: Test3{}f
   //   Public signature: /Test3.f|4026638760133205152[0]
-  val f: Float
+  konst f: Float
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-f>(){}kotlin.Float
     //   Public signature: /Test3.f.<get-f>|6014982203170860581[0]
@@ -205,7 +205,7 @@ data class Test3 {
   // CHECK:
   //   Mangled name: Test3{}df
   //   Public signature: /Test3.df|8501496894035980235[0]
-  val df: Float?
+  konst df: Float?
     // CHECK JVM_IR:
     //   Mangled name: Test3#<get-df>(){}kotlin.Float?
     //   Public signature: /Test3.df.<get-df>|-3259181884204926150[0]

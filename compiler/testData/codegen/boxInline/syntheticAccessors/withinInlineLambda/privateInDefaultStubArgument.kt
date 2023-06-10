@@ -10,7 +10,7 @@ import test.*
 class A {
     private fun method() = "O"
 
-    private val prop = "K"
+    private konst prop = "K"
 
     fun test(): String = call { method() + prop }
 }

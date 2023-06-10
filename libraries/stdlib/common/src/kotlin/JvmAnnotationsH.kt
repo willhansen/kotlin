@@ -8,10 +8,10 @@ package kotlin.jvm
 import kotlin.annotation.AnnotationTarget.*
 
 /**
- * Instructs the Kotlin compiler to generate overloads for this function that substitute default parameter values.
+ * Instructs the Kotlin compiler to generate overloads for this function that substitute default parameter konstues.
  *
- * If a method has N parameters and M of which have default values, M overloads are generated: the first one
- * takes N-1 parameters (all but the last one that takes a default value), the second takes N-2 parameters, and so on.
+ * If a method has N parameters and M of which have default konstues, M overloads are generated: the first one
+ * takes N-1 parameters (all but the last one that takes a default konstue), the second takes N-2 parameters, and so on.
  */
 @Target(FUNCTION, CONSTRUCTOR)
 @MustBeDocumented
@@ -40,7 +40,7 @@ public expect annotation class JvmStatic()
 @Target(FILE, FUNCTION, PROPERTY_GETTER, PROPERTY_SETTER)
 @MustBeDocumented
 @OptionalExpectation
-public expect annotation class JvmName(val name: String)
+public expect annotation class JvmName(konst name: String)
 
 /**
  * Instructs the Kotlin compiler to generate a multifile class with top-level functions and properties declared in this file as one of its parts.
@@ -88,7 +88,7 @@ public expect annotation class JvmSynthetic()
 @Target(CLASS, FUNCTION, PROPERTY, TYPE)
 @MustBeDocumented
 @OptionalExpectation
-public expect annotation class JvmSuppressWildcards(val suppress: Boolean = true)
+public expect annotation class JvmSuppressWildcards(konst suppress: Boolean = true)
 
 /**
  * Instructs compiler to generate wildcard for annotated type arguments corresponding to parameters with declaration-site variance.
@@ -101,7 +101,7 @@ public expect annotation class JvmSuppressWildcards(val suppress: Boolean = true
 public expect annotation class JvmWildcard()
 
 /**
- * Specifies that given value class is inline class.
+ * Specifies that given konstue class is inline class.
  *
  * Adding and removing the annotation is binary incompatible change, since inline classes' methods and functions with inline classes
  * in their signature are mangled.
@@ -123,8 +123,8 @@ public expect annotation class JvmRecord()
 
 /**
  * Marks the JVM backing field of the annotated `var` property as `volatile`, meaning that reads and writes to this field
- * are atomic and writes are always made visible to other threads. If another thread reads the value of this field (e.g. through its accessor),
- * it sees not only that value, but all side effects that led to writing that value.
+ * are atomic and writes are always made visible to other threads. If another thread reads the konstue of this field (e.g. through its accessor),
+ * it sees not only that konstue, but all side effects that led to writing that konstue.
  *
  * This annotation has effect only in Kotlin/JVM. It's recommended to use [kotlin.concurrent.Volatile] annotation instead
  * in multiplatform projects.
@@ -180,7 +180,7 @@ public expect annotation class Synchronized()
 @MustBeDocumented
 @SinceKotlin("1.2")
 @OptionalExpectation
-internal expect annotation class JvmPackageName(val name: String)
+internal expect annotation class JvmPackageName(konst name: String)
 
 
 /**

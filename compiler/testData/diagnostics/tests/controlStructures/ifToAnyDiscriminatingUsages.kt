@@ -53,9 +53,9 @@ fun testUsage2() =
 fun testUsage2Generic() =
         fooGeneric(if (true) 42 else println())
 
-val testUsage3 =
+konst testUsage3 =
         if (true) <!IMPLICIT_CAST_TO_ANY!>42<!>
         else <!IMPLICIT_CAST_TO_ANY!>println()<!>
 
-val testUsage4: Any get() =
+konst testUsage4: Any get() =
         if (true) 42 else println()

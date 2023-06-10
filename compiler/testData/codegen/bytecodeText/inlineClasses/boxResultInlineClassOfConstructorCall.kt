@@ -2,16 +2,16 @@
 
 // FILE: utils.kt
 
-inline class Result<T>(val a: Any?)
+inline class Result<T>(konst a: Any?)
 
 // FILE: test.kt
 
 fun test() {
-    val a = Result<Int>(1) // valueOf
-    val b = Result<String>("sample")
+    konst a = Result<Int>(1) // konstueOf
+    konst b = Result<String>("sample")
 
-    val c = Result<Result<Int>>(a)
-    val d = Result<Result<Int>>(Result<Int>(1)) // valueOf
+    konst c = Result<Result<Int>>(a)
+    konst d = Result<Result<Int>>(Result<Int>(1)) // konstueOf
 }
 
 // @TestKt.class:
@@ -19,5 +19,5 @@ fun test() {
 // 2 INVOKESTATIC Result\.box
 // 0 INVOKEVIRTUAL Result.unbox
 
-// 2 valueOf
+// 2 konstueOf
 // 0 intValue

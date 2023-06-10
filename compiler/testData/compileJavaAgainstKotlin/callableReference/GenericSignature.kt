@@ -1,8 +1,8 @@
-// KT-15473 Invalid KFunction byte code signature for callable references
+// KT-15473 Inkonstid KFunction byte code signature for callable references
 
 package test
 
-class Request(val id: Long)
+class Request(konst id: Long)
 
 open class Foo {
     open fun request() = ::Request

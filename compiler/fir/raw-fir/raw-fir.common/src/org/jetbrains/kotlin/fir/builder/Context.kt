@@ -24,17 +24,17 @@ class Context<T> {
     lateinit var packageFqName: FqName
     var className: FqName = FqName.ROOT
     var forcedLocalContext: Boolean = false
-    val inLocalContext get() = forcedLocalContext || firFunctionTargets.isNotEmpty()
-    val currentClassId get() = ClassId(packageFqName, className, inLocalContext)
+    konst inLocalContext get() = forcedLocalContext || firFunctionTargets.isNotEmpty()
+    konst currentClassId get() = ClassId(packageFqName, className, inLocalContext)
 
-    val firFunctionTargets = mutableListOf<FirFunctionTarget>()
-    val calleeNamesForLambda = mutableListOf<Name?>()
+    konst firFunctionTargets = mutableListOf<FirFunctionTarget>()
+    konst calleeNamesForLambda = mutableListOf<Name?>()
 
     @PrivateForInline
-    val _firLabels = mutableListOf<FirLabel>()
+    konst _firLabels = mutableListOf<FirLabel>()
 
     @OptIn(PrivateForInline::class)
-    val firLabels: List<FirLabel>
+    konst firLabels: List<FirLabel>
         get() = _firLabels
 
     /**
@@ -42,12 +42,12 @@ class Context<T> {
      */
     @PrivateForInline
     var firLabelUserNode: Any? = null
-    val firLoopTargets = mutableListOf<FirLoopTarget>()
-    val capturedTypeParameters = mutableListOf<StatusFirTypeParameterSymbolList>()
-    val arraySetArgument = mutableMapOf<T, FirExpression>()
+    konst firLoopTargets = mutableListOf<FirLoopTarget>()
+    konst capturedTypeParameters = mutableListOf<StatusFirTypeParameterSymbolList>()
+    konst arraySetArgument = mutableMapOf<T, FirExpression>()
 
     var forcedElementSourceKind: KtSourceElementKind? = null
-    val dispatchReceiverTypesStack = mutableListOf<ConeClassLikeType>()
+    konst dispatchReceiverTypesStack = mutableListOf<ConeClassLikeType>()
     var containerIsExpect: Boolean = false
     var containingFileSymbol: FirFileSymbol? = null
 
@@ -56,13 +56,13 @@ class Context<T> {
     }
 
     fun popFirTypeParameters() {
-        val list = capturedTypeParameters
+        konst list = capturedTypeParameters
         list.removeAt(list.lastIndex)
     }
 
     fun appendOuterTypeParameters(ignoreLastLevel: Boolean, typeParameters: MutableList<FirTypeParameterRef>) {
         for (index in capturedTypeParameters.lastIndex downTo 0) {
-            val element = capturedTypeParameters[index]
+            konst element = capturedTypeParameters[index]
 
             if (index < capturedTypeParameters.lastIndex || !ignoreLastLevel) {
                 for (capturedTypeParameter in element.list) {
@@ -121,5 +121,5 @@ class Context<T> {
         }
     }
 
-    data class StatusFirTypeParameterSymbolList(val isInnerOrLocal: Boolean, val list: List<FirTypeParameterSymbol> = listOf())
+    data class StatusFirTypeParameterSymbolList(konst isInnerOrLocal: Boolean, konst list: List<FirTypeParameterSymbol> = listOf())
 }

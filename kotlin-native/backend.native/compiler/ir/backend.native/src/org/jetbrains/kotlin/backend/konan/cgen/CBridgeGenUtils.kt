@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.konan.ForeignExceptionMode
 import org.jetbrains.kotlin.name.Name
 
 internal class CFunctionBuilder {
-    private val parameters = mutableListOf<CVariable>()
+    private konst parameters = mutableListOf<CVariable>()
     private lateinit var returnType: CType
 
     var variadic: Boolean = false
@@ -36,12 +36,12 @@ internal class CFunctionBuilder {
     }
 
     fun addParameter(type: CType): CVariable {
-        val result = CVariable(type, "p${counter++}")
+        konst result = CVariable(type, "p${counter++}")
         parameters += result
         return result
     }
 
-    val numberOfParameters: Int get() = parameters.size
+    konst numberOfParameters: Int get() = parameters.size
 
     private var counter = 1
 
@@ -73,11 +73,11 @@ internal class KotlinBridgeBuilder(
         origin: IrDeclarationOrigin
 ) {
     private var counter = 0
-    private val bridge: IrFunction = createKotlinBridge(startOffset, endOffset, cName, stubs, isExternal, foreignExceptionMode, origin)
-    val irBuilder: IrBuilderWithScope = irBuilder(stubs.irBuiltIns, bridge.symbol).at(startOffset, endOffset)
+    private konst bridge: IrFunction = createKotlinBridge(startOffset, endOffset, cName, stubs, isExternal, foreignExceptionMode, origin)
+    konst irBuilder: IrBuilderWithScope = irBuilder(stubs.irBuiltIns, bridge.symbol).at(startOffset, endOffset)
 
     fun addParameter(type: IrType): IrValueParameter {
-        val index = counter++
+        konst index = counter++
 
         return IrValueParameterImpl(
                 bridge.startOffset, bridge.endOffset, bridge.origin,
@@ -90,7 +90,7 @@ internal class KotlinBridgeBuilder(
                 isAssignable = false
         ).apply {
             parent = bridge
-            bridge.valueParameters += this
+            bridge.konstueParameters += this
         }
     }
 
@@ -110,7 +110,7 @@ private fun createKotlinBridge(
         foreignExceptionMode: ForeignExceptionMode.Mode,
         origin: IrDeclarationOrigin
 ): IrFunction {
-    val bridge = IrFunctionImpl(
+    konst bridge = IrFunctionImpl(
             startOffset,
             endOffset,
             origin,
@@ -133,7 +133,7 @@ private fun createKotlinBridge(
                 stubs.symbols.symbolName.owner, cBridgeName)
         bridge.annotations += buildSimpleAnnotation(stubs.irBuiltIns, startOffset, endOffset,
                 stubs.symbols.filterExceptions.owner,
-                foreignExceptionMode.value)
+                foreignExceptionMode.konstue)
     } else {
         bridge.annotations += buildSimpleAnnotation(stubs.irBuiltIns, startOffset, endOffset,
                 stubs.symbols.exportForCppRuntime.owner, cBridgeName)
@@ -145,16 +145,16 @@ internal class KotlinCBridgeBuilder(
         startOffset: Int,
         endOffset: Int,
         cName: String,
-        val stubs: KotlinStubs,
+        konst stubs: KotlinStubs,
         isKotlinToC: Boolean,
         foreignExceptionMode: ForeignExceptionMode.Mode = ForeignExceptionMode.default
 ) {
-    private val origin: CBridgeOrigin = if (isKotlinToC) CBridgeOrigin.KOTLIN_TO_C_BRIDGE else CBridgeOrigin.C_TO_KOTLIN_BRIDGE
+    private konst origin: CBridgeOrigin = if (isKotlinToC) CBridgeOrigin.KOTLIN_TO_C_BRIDGE else CBridgeOrigin.C_TO_KOTLIN_BRIDGE
 
-    private val kotlinBridgeBuilder = KotlinBridgeBuilder(startOffset, endOffset, cName, stubs, isExternal = isKotlinToC, foreignExceptionMode, origin)
-    private val cBridgeBuilder = CFunctionBuilder()
+    private konst kotlinBridgeBuilder = KotlinBridgeBuilder(startOffset, endOffset, cName, stubs, isExternal = isKotlinToC, foreignExceptionMode, origin)
+    private konst cBridgeBuilder = CFunctionBuilder()
 
-    val kotlinIrBuilder: IrBuilderWithScope get() = kotlinBridgeBuilder.irBuilder
+    konst kotlinIrBuilder: IrBuilderWithScope get() = kotlinBridgeBuilder.irBuilder
 
     fun addParameter(kotlinType: IrType, cType: CType): Pair<IrValueParameter, CVariable> {
         return kotlinBridgeBuilder.addParameter(kotlinType) to cBridgeBuilder.addParameter(cType)
@@ -170,22 +170,22 @@ internal class KotlinCBridgeBuilder(
     fun buildKotlinBridge() = kotlinBridgeBuilder.build()
 }
 
-internal class KotlinCallBuilder(private val irBuilder: IrBuilderWithScope, private val symbols: KonanSymbols) {
-    val prepare = mutableListOf<IrStatement>()
-    val arguments = mutableListOf<IrExpression>()
-    val cleanup = mutableListOf<IrBuilderWithScope.() -> IrStatement>()
+internal class KotlinCallBuilder(private konst irBuilder: IrBuilderWithScope, private konst symbols: KonanSymbols) {
+    konst prepare = mutableListOf<IrStatement>()
+    konst arguments = mutableListOf<IrExpression>()
+    konst cleanup = mutableListOf<IrBuilderWithScope.() -> IrStatement>()
 
     private var memScope: IrVariable? = null
 
     fun getMemScope(): IrExpression = with(irBuilder) {
         memScope?.let { return irGet(it) }
 
-        val newMemScope = scope.createTemporaryVariable(irCall(symbols.interopMemScope.owner.constructors.single()))
+        konst newMemScope = scope.createTemporaryVariable(irCall(symbols.interopMemScope.owner.constructors.single()))
         memScope = newMemScope
 
         prepare += newMemScope
 
-        val clearImpl = symbols.interopMemScope.owner.simpleFunctions().single { it.name.asString() == "clearImpl" }
+        konst clearImpl = symbols.interopMemScope.owner.simpleFunctions().single { it.name.asString() == "clearImpl" }
         cleanup += {
             irCall(clearImpl).apply {
                 dispatchReceiver = irGet(memScope!!)
@@ -199,16 +199,16 @@ internal class KotlinCallBuilder(private val irBuilder: IrBuilderWithScope, priv
             function: IrFunction,
             transformCall: (IrMemberAccessExpression<*>) -> IrExpression = { it }
     ): IrExpression {
-        val arguments = this.arguments.toMutableList()
+        konst arguments = this.arguments.toMutableList()
 
-        val kotlinCall = irBuilder.irCall(function).run {
+        konst kotlinCall = irBuilder.irCall(function).run {
             if (function.dispatchReceiverParameter != null) {
                 dispatchReceiver = arguments.removeAt(0)
             }
             if (function.extensionReceiverParameter != null) {
                 extensionReceiver = arguments.removeAt(0)
             }
-            assert(arguments.size == function.valueParameters.size)
+            assert(arguments.size == function.konstueParameters.size)
             arguments.forEachIndexed { index, it -> putValueArgument(index, it) }
 
             transformCall(this)
@@ -223,7 +223,7 @@ internal class KotlinCallBuilder(private val irBuilder: IrBuilderWithScope, priv
                     +kotlinCall
                 } else {
                     // Note: generating try-catch as finally blocks are already lowered.
-                    val result = irTemporary(IrTryImpl(startOffset, endOffset, kotlinCall.type).apply {
+                    konst result = irTemporary(IrTryImpl(startOffset, endOffset, kotlinCall.type).apply {
                         tryResult = kotlinCall
                         catches += irCatch(context.irBuiltIns.throwableType).apply {
                             result = irBlock(kotlinCall) {
@@ -242,7 +242,7 @@ internal class KotlinCallBuilder(private val irBuilder: IrBuilderWithScope, priv
 }
 
 internal class CCallBuilder {
-    val arguments = mutableListOf<String>()
+    konst arguments = mutableListOf<String>()
 
     fun build(function: String) = buildString {
         append(function)

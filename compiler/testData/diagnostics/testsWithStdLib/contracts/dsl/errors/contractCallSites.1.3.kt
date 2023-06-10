@@ -48,11 +48,11 @@ operator fun Boolean.plus(x: Boolean): Boolean {
     return x
 }
 
-val topLevelLambda: (Boolean) -> Unit = { x: Boolean ->
+konst topLevelLambda: (Boolean) -> Unit = { x: Boolean ->
     <!CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (x) }
 }
 
-val topLevelAnonymousFunction = fun (x: Boolean) {
+konst topLevelAnonymousFunction = fun (x: Boolean) {
     <!CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (x) }
 }
 
@@ -61,7 +61,7 @@ var topLevelPropertyAccessors: Int? = 42
         <!CONTRACT_NOT_ALLOWED, CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (field != null) }
         return 42
     }
-    set(value) {
+    set(konstue) {
         <!CONTRACT_NOT_ALLOWED, CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (field != null) }
     }
 
@@ -76,11 +76,11 @@ fun test() {
         <!CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (x) }
     }
 
-    val localAnonymousFunction = fun (x: Boolean) {
+    konst localAnonymousFunction = fun (x: Boolean) {
         <!CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (x) }
     }
 
-    val localLambda: (Boolean) -> Unit = { x: Boolean ->
+    konst localLambda: (Boolean) -> Unit = { x: Boolean ->
         <!CONTRACT_NOT_ALLOWED!>contract<!> { returns() implies (x) }
     }
 }

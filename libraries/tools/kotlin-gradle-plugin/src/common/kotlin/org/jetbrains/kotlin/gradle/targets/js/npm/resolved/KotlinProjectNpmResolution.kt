@@ -9,10 +9,10 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.resolver.KotlinCompilationNpmR
 import java.io.Serializable
 
 class KotlinProjectNpmResolution(
-    val byCompilation: Map<String, KotlinCompilationNpmResolution>,
+    konst byCompilation: Map<String, KotlinCompilationNpmResolution>,
 ) : Serializable {
-    val npmProjects: Collection<KotlinCompilationNpmResolution>
-        get() = byCompilation.values
+    konst npmProjects: Collection<KotlinCompilationNpmResolution>
+        get() = byCompilation.konstues
 
     operator fun get(compilationName: String): KotlinCompilationNpmResolution {
         return byCompilation.getValue(compilationName)

@@ -6,7 +6,7 @@ fun unusedExpression(s: String) {
 }
 
 fun noUnusedParameter(s: String): Int {
-    val f = s::hashCode
+    konst f = s::hashCode
     return f()
 }
 

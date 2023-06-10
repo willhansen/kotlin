@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val array = booleanArrayOf(true, false, true)
+    konst array = booleanArrayOf(true, false, true)
     var optimized = ""
     for (i in 0..array.size - 1) optimized += array[i]
 }

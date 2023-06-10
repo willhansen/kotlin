@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 internal object MultiplatformLayoutV2KotlinAndroidSourceSetNaming : KotlinAndroidSourceSetNaming {
-    private val logger = Logging.getLogger(this::class.java)
+    private konst logger = Logging.getLogger(this::class.java)
 
-    private val AndroidBaseSourceSetName.kotlinName
+    private konst AndroidBaseSourceSetName.kotlinName
         get() = when (this) {
             AndroidBaseSourceSetName.Main -> "main"
             AndroidBaseSourceSetName.Test -> "unitTest"
@@ -25,19 +25,19 @@ internal object MultiplatformLayoutV2KotlinAndroidSourceSetNaming : KotlinAndroi
         androidSourceSetName: String,
         type: AndroidVariantType?
     ): String? {
-        val knownType = type ?: AndroidBaseSourceSetName.byName(androidSourceSetName)?.variantType ?: return null
+        konst knownType = type ?: AndroidBaseSourceSetName.byName(androidSourceSetName)?.variantType ?: return null
         return lowerCamelCaseName(disambiguationClassifier, replaceAndroidBaseSourceSetName(androidSourceSetName, knownType))
     }
 
     override fun defaultKotlinSourceSetName(target: KotlinAndroidTarget, variant: BaseVariant): String? {
-        val kotlinSourceSetName: String? = run {
-            val baseSourceSetName = variant.type.androidBaseSourceSetName ?: return@run null
-            val androidSourceSetName = lowerCamelCaseName(
+        konst kotlinSourceSetName: String? = run {
+            konst baseSourceSetName = variant.type.androidBaseSourceSetName ?: return@run null
+            konst androidSourceSetName = lowerCamelCaseName(
                 baseSourceSetName.takeIf { it != AndroidBaseSourceSetName.Main }?.name,
                 variant.flavorName,
                 variant.buildType.name
             )
-            val androidSourceSet = variant.sourceSets.find { it.name == androidSourceSetName } ?: return@run null
+            konst androidSourceSet = variant.sourceSets.find { it.name == androidSourceSetName } ?: return@run null
             target.project.findKotlinSourceSet(androidSourceSet)?.name
         }
 
@@ -52,7 +52,7 @@ internal object MultiplatformLayoutV2KotlinAndroidSourceSetNaming : KotlinAndroi
         type: AndroidVariantType
     ): String {
         if (type == AndroidVariantType.Main) return androidSourceSetName
-        val androidBaseSourceSetName = type.androidBaseSourceSetName ?: return androidSourceSetName
+        konst androidBaseSourceSetName = type.androidBaseSourceSetName ?: return androidSourceSetName
         return lowerCamelCaseName(androidBaseSourceSetName.kotlinName, androidSourceSetName.removePrefix(androidBaseSourceSetName.name))
     }
 }

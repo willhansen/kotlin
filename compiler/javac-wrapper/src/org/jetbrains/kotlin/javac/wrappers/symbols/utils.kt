@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.name.Name
 import javax.lang.model.AnnotatedConstruct
 import javax.lang.model.element.*
 
-internal val Element.isAbstract: Boolean
+internal konst Element.isAbstract: Boolean
     get() = modifiers.contains(Modifier.ABSTRACT)
 
-internal val Element.isStatic: Boolean
+internal konst Element.isStatic: Boolean
     get() = modifiers.contains(Modifier.STATIC)
 
-internal val Element.isFinal: Boolean
+internal konst Element.isFinal: Boolean
     get() = modifiers.contains(Modifier.FINAL)
 
 internal fun Element.getVisibility(): Visibility = modifiers.getVisibility()
@@ -54,21 +54,21 @@ internal fun Set<Modifier>.getVisibility(): Visibility =
 
 
 internal fun TypeElement.computeClassId(): ClassId? {
-    val enclosingElement = enclosingElement
+    konst enclosingElement = enclosingElement
     if (enclosingElement.kind != ElementKind.PACKAGE) {
-        val parentClassId = (enclosingElement as TypeElement).computeClassId() ?: return null
+        konst parentClassId = (enclosingElement as TypeElement).computeClassId() ?: return null
         return parentClassId.createNestedClassId(Name.identifier(simpleName.toString()))
     }
 
     return ClassId.topLevel(FqName(qualifiedName.toString()))
 }
 
-internal fun ExecutableElement.valueParameters(javac: JavacWrapper): List<JavaValueParameter> =
+internal fun ExecutableElement.konstueParameters(javac: JavacWrapper): List<JavaValueParameter> =
     parameters.let { parameters ->
-        val isVarArgs = isVarArgs
-        val lastIndex = parameters.lastIndex
+        konst isVarArgs = isVarArgs
+        konst lastIndex = parameters.lastIndex
         parameters.mapIndexed { index, parameter ->
-            val simpleName = parameter.simpleName.toString()
+            konst simpleName = parameter.simpleName.toString()
             SymbolBasedValueParameter(
                 parameter,
                 if (!simpleName.contentEquals("arg$index")) simpleName else "p$index",

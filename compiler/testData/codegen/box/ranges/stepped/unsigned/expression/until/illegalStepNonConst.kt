@@ -6,13 +6,13 @@ fun zero() = 0
 
 fun box(): String {
     assertFailsWith<IllegalArgumentException> {
-        val uintProgression = 1u until 7u
+        konst uintProgression = 1u until 7u
         for (i in uintProgression step zero()) {
         }
     }
 
     assertFailsWith<IllegalArgumentException> {
-        val ulongProgression = 1uL until 7uL
+        konst ulongProgression = 1uL until 7uL
         for (i in ulongProgression step zero().toLong()) {
         }
     }

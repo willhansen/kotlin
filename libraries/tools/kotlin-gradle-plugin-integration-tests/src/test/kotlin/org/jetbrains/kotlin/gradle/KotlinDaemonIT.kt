@@ -33,7 +33,7 @@ import kotlin.test.assertTrue
 @DisplayName("Kotlin daemon base behaviour")
 class KotlinDaemonIT : KGPDaemonsBaseTest() {
 
-    override val defaultBuildOptions: BuildOptions = super.defaultBuildOptions
+    override konst defaultBuildOptions: BuildOptions = super.defaultBuildOptions
         .copy(
             logLevel = LogLevel.DEBUG
         )
@@ -77,8 +77,8 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
     fun testClientFileIsDeletedOnExit(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
             build("assemble") {
-                val regex = "(?m)($CREATED_CLIENT_FILE_PREFIX|$EXISTING_CLIENT_FILE_PREFIX)(.+)$".toRegex()
-                val clientFiles = regex.findAll(output).map { Paths.get(it.groupValues[2]) }.toList()
+                konst regex = "(?m)($CREATED_CLIENT_FILE_PREFIX|$EXISTING_CLIENT_FILE_PREFIX)(.+)$".toRegex()
+                konst clientFiles = regex.findAll(output).map { Paths.get(it.groupValues[2]) }.toList()
                 assert(clientFiles.isNotEmpty()) { "No client files in log" }
 
                 // Stop daemons
@@ -166,7 +166,7 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.INFO)
         ) {
             build("compileKotlin") {
-                val startOptions = output.findAllStringsPrefixed("starting the daemon as: ").single()
+                konst startOptions = output.findAllStringsPrefixed("starting the daemon as: ").single()
                 // ensure that new daemon was started and that specified JDK is used as runtime JDK for it
                 assert(startOptions.startsWith(jdkVersion.location.absolutePath)) {
                     printBuildOutput()
@@ -179,7 +179,7 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
 
     private fun BuildResult.assertGradleClasspathNotLeaked() {
         assertOutputContains("Kotlin compiler classpath:")
-        val daemonClasspath = output
+        konst daemonClasspath = output
             .lineSequence()
             .first {
                 it.contains("Kotlin compiler classpath:")
@@ -190,7 +190,7 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
     }
 
     private fun BuildResult.assertKotlinDaemonReusesOnlyOneSession() {
-        val createdSessions = output.findAllStringsPrefixed(CREATED_SESSION_FILE_PREFIX)
+        konst createdSessions = output.findAllStringsPrefixed(CREATED_SESSION_FILE_PREFIX)
         assert(createdSessions.size == 1) {
             """
             |${printBuildOutput()}
@@ -199,7 +199,7 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
             """.trimMargin()
         }
 
-        val existingSessions = output.findAllStringsPrefixed(EXISTING_SESSION_FILE_PREFIX)
+        konst existingSessions = output.findAllStringsPrefixed(EXISTING_SESSION_FILE_PREFIX)
         assert(createdSessions == createdSessions) {
             """
             |${printBuildOutput()}
@@ -212,7 +212,7 @@ class KotlinDaemonIT : KGPDaemonsBaseTest() {
             """.trimMargin()
         }
 
-        val deletedSessions = output.findAllStringsPrefixed(DELETED_SESSION_FILE_PREFIX)
+        konst deletedSessions = output.findAllStringsPrefixed(DELETED_SESSION_FILE_PREFIX)
         assert(createdSessions == deletedSessions) {
             """
             |${printBuildOutput()}

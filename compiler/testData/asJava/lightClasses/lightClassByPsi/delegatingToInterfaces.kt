@@ -3,13 +3,13 @@ interface Base {
     fun printMessage()
     fun printMessageLine()
 
-    val x: Int
+    konst x: Int
     var y: Int
 
     fun String.foo(y: Any?): Int
 }
 
-class BaseImpl(val x: Int) : Base {
+class BaseImpl(konst x: Int) : Base {
     override fun printMessage() { print(x) }
     override fun printMessageLine() { println(x) }
 }

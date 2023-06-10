@@ -7,7 +7,7 @@ inline fun <R> startFlow(
 }
 
 object Foo {
-    class Requester(val dealToBeOffered: String)
+    class Requester(konst dealToBeOffered: String)
 }
 
 // FILE: 2.kt

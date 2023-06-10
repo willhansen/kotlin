@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 
 class KotlinDeclarationInCompiledFileSearcherFE10Impl : KotlinDeclarationInCompiledFileSearcher() {
     override fun findDeclarationInCompiledFile(file: KtClsFile, member: PsiMember, signature: MemberSignature): KtDeclaration? {
-        val relativeClassName = generateSequence(member.containingClass) { it.containingClass }.toList().dropLast(1).reversed()
+        konst relativeClassName = generateSequence(member.containingClass) { it.containingClass }.toList().dropLast(1).reversed()
             .map { Name.identifier(it.name!!) }
 
-        val memberName = member.name ?: return null
+        konst memberName = member.name ?: return null
         return findByStubs(file, relativeClassName, member, memberName)
     }
 }

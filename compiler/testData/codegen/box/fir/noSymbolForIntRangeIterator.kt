@@ -11,12 +11,12 @@ fun takeString(s: String) {
 }
 
 fun test() {
-    val x = 10
-    val y = 10
+    konst x = 10
+    konst y = 10
 
     fun localFunc() {
         for (i in 0..x) {
-            val s = buildString {
+            konst s = buildString {
                 for (j in 0..y) {
                     appendLine("${i * j}")
                 }

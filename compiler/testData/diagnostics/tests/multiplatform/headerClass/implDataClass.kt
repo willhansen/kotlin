@@ -3,14 +3,14 @@
 // FILE: common.kt
 
 expect class Foo(x: Int, y: String) {
-    val x: Int
-    val y: String
+    konst x: Int
+    konst y: String
 }
 
 expect class Bar(z: Double)
 
 expect class Baz(w: List<String>) {
-    val w: List<String>
+    konst w: List<String>
 
     operator fun component1(): List<String>
 
@@ -25,8 +25,8 @@ expect class Baz(w: List<String>) {
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt
 
-actual data class Foo actual constructor(actual val x: Int, actual val y: String)
+actual data class Foo actual constructor(actual konst x: Int, actual konst y: String)
 
-actual data class Bar actual constructor(val z: Double)
+actual data class Bar actual constructor(konst z: Double)
 
-actual data class Baz actual constructor(actual val w: List<String>)
+actual data class Baz actual constructor(actual konst w: List<String>)

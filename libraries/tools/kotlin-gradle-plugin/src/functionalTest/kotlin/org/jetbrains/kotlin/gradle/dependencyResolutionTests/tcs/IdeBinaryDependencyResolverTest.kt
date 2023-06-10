@@ -26,24 +26,24 @@ class IdeBinaryDependencyResolverTest {
 
     @Test
     fun `test - MVIKotlin - on jvm and linux platform source sets`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
 
         kotlin.jvm()
         kotlin.linuxX64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val jvmTest = kotlin.sourceSets.getByName("jvmTest")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst jvmTest = kotlin.sourceSets.getByName("jvmTest")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
         commonMain.dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
@@ -52,7 +52,7 @@ class IdeBinaryDependencyResolverTest {
         /* This resolver shall refuse to resolve for dependencies for metadata based dependencies */
         IdeBinaryDependencyResolver().resolve(commonMain).assertMatches()
 
-        val jvmDependencies = listOf(
+        konst jvmDependencies = listOf(
             binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin-jvm:3.0.2"),
             binaryCoordinates("com.arkivanov.essenty:lifecycle-jvm:0.4.2"),
             binaryCoordinates("com.arkivanov.essenty:instance-keeper-jvm:0.4.2"),
@@ -62,7 +62,7 @@ class IdeBinaryDependencyResolverTest {
             binaryCoordinates("org.jetbrains:annotations:13.0")
         )
 
-        val linuxDependencies = listOf(
+        konst linuxDependencies = listOf(
             binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin-linuxx64:3.0.2"),
             binaryCoordinates("com.arkivanov.essenty:lifecycle-linuxx64:0.4.2"),
             binaryCoordinates("com.arkivanov.essenty:instance-keeper-linuxx64:0.4.2"),
@@ -87,7 +87,7 @@ class IdeBinaryDependencyResolverTest {
         assertAndroidSdkAvailable()
 
         /* Setup simple project that can resolve MVIKotlin */
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
@@ -97,21 +97,21 @@ class IdeBinaryDependencyResolverTest {
         }
 
         /* Setup android target and add MVIKotlin dependency */
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.androidTarget()
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
         commonMain.dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         /*
         Resolve dependencies on commonMain with platform attributes from Android,
         then find the mvikotlin-android dependency (aar)
         */
-        val resolvedDependency = IdeBinaryDependencyResolver(
+        konst resolvedDependency = IdeBinaryDependencyResolver(
             artifactResolutionStrategy = IdeBinaryDependencyResolver.ArtifactResolutionStrategy.PlatformLikeSourceSet(
                 setupPlatformResolutionAttributes = {
                     attribute(KotlinPlatformType.attribute, KotlinPlatformType.androidJvm)

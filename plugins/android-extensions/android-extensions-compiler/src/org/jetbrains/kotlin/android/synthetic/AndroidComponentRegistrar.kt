@@ -47,52 +47,52 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.PackageFragmentProviderExtens
 import org.jetbrains.kotlin.utils.decodePluginOptions
 
 object AndroidConfigurationKeys {
-    val VARIANT = CompilerConfigurationKey.create<List<String>>("Android build variant")
-    val PACKAGE = CompilerConfigurationKey.create<String>("application package fq name")
-    val EXPERIMENTAL = CompilerConfigurationKey.create<String>("enable experimental features")
-    val DEFAULT_CACHE_IMPL = CompilerConfigurationKey.create<String>("default cache implementation")
-    val FEATURES = CompilerConfigurationKey.create<Set<AndroidExtensionsFeature>>("enabled features")
+    konst VARIANT = CompilerConfigurationKey.create<List<String>>("Android build variant")
+    konst PACKAGE = CompilerConfigurationKey.create<String>("application package fq name")
+    konst EXPERIMENTAL = CompilerConfigurationKey.create<String>("enable experimental features")
+    konst DEFAULT_CACHE_IMPL = CompilerConfigurationKey.create<String>("default cache implementation")
+    konst FEATURES = CompilerConfigurationKey.create<Set<AndroidExtensionsFeature>>("enabled features")
 }
 
-enum class AndroidExtensionsFeature(val featureName: String) {
+enum class AndroidExtensionsFeature(konst featureName: String) {
     VIEWS("views"),
     PARCELIZE("parcelize")
 }
 
 class AndroidCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val ANDROID_COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.android"
+        konst ANDROID_COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.android"
 
-        val CONFIGURATION = CliOption("configuration", "<encoded>", "Encoded configuration", required = false)
+        konst CONFIGURATION = CliOption("configuration", "<encoded>", "Encoded configuration", required = false)
 
-        val VARIANT_OPTION = CliOption("variant", "<name;path>", "Android build variant", allowMultipleOccurrences = true, required = false)
-        val PACKAGE_OPTION = CliOption("package", "<fq name>", "Application package", required = false)
-        val EXPERIMENTAL_OPTION = CliOption("experimental", "true/false", "Enable experimental features", required = false)
-        val DEFAULT_CACHE_IMPL_OPTION = CliOption(
+        konst VARIANT_OPTION = CliOption("variant", "<name;path>", "Android build variant", allowMultipleOccurrences = true, required = false)
+        konst PACKAGE_OPTION = CliOption("package", "<fq name>", "Application package", required = false)
+        konst EXPERIMENTAL_OPTION = CliOption("experimental", "true/false", "Enable experimental features", required = false)
+        konst DEFAULT_CACHE_IMPL_OPTION = CliOption(
                 "defaultCacheImplementation", "hashMap/sparseArray/none", "Default cache implementation for module", required = false)
 
-        val FEATURES_OPTION = CliOption(
-                "features", AndroidExtensionsFeature.values().joinToString(" | "), "Enabled features", required = false)
+        konst FEATURES_OPTION = CliOption(
+                "features", AndroidExtensionsFeature.konstues().joinToString(" | "), "Enabled features", required = false)
 
         /* This option is just for saving Android Extensions status in Kotlin facet. It should not be supported from CLI. */
-        val ENABLED_OPTION: CliOption = CliOption("enabled", "true/false", "Enable Android Extensions", required = false)
+        konst ENABLED_OPTION: CliOption = CliOption("enabled", "true/false", "Enable Android Extensions", required = false)
     }
 
-    override val pluginId: String = ANDROID_COMPILER_PLUGIN_ID
+    override konst pluginId: String = ANDROID_COMPILER_PLUGIN_ID
 
-    override val pluginOptions: Collection<AbstractCliOption>
+    override konst pluginOptions: Collection<AbstractCliOption>
             = listOf(VARIANT_OPTION, PACKAGE_OPTION, EXPERIMENTAL_OPTION, DEFAULT_CACHE_IMPL_OPTION, CONFIGURATION, FEATURES_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         when (option) {
-            VARIANT_OPTION -> configuration.appendList(AndroidConfigurationKeys.VARIANT, value)
-            PACKAGE_OPTION -> configuration.put(AndroidConfigurationKeys.PACKAGE, value)
-            EXPERIMENTAL_OPTION -> configuration.put(AndroidConfigurationKeys.EXPERIMENTAL, value)
-            DEFAULT_CACHE_IMPL_OPTION -> configuration.put(AndroidConfigurationKeys.DEFAULT_CACHE_IMPL, value)
-            CONFIGURATION -> configuration.applyOptionsFrom(decodePluginOptions(value), pluginOptions)
+            VARIANT_OPTION -> configuration.appendList(AndroidConfigurationKeys.VARIANT, konstue)
+            PACKAGE_OPTION -> configuration.put(AndroidConfigurationKeys.PACKAGE, konstue)
+            EXPERIMENTAL_OPTION -> configuration.put(AndroidConfigurationKeys.EXPERIMENTAL, konstue)
+            DEFAULT_CACHE_IMPL_OPTION -> configuration.put(AndroidConfigurationKeys.DEFAULT_CACHE_IMPL, konstue)
+            CONFIGURATION -> configuration.applyOptionsFrom(decodePluginOptions(konstue), pluginOptions)
             FEATURES_OPTION -> {
-                val features = value.split(',').mapNotNullTo(mutableSetOf()) {
-                    name -> AndroidExtensionsFeature.values().firstOrNull { it.featureName == name }
+                konst features = konstue.split(',').mapNotNullTo(mutableSetOf()) {
+                    name -> AndroidExtensionsFeature.konstues().firstOrNull { it.featureName == name }
                 }
                 configuration.put(AndroidConfigurationKeys.FEATURES, features)
             }
@@ -105,7 +105,7 @@ class AndroidCommandLineProcessor : CommandLineProcessor {
 class AndroidComponentRegistrar : ComponentRegistrar {
     companion object {
         fun reportRemovedError(configuration: CompilerConfiguration) {
-            val errorMessage =
+            konst errorMessage =
                 "The Android extensions ('kotlin-android-extensions') compiler plugin is no longer supported. " +
                         "Please use kotlin parcelize and view binding. " +
                         "More information: https://goo.gle/kotlin-android-extensions-deprecation"
@@ -126,21 +126,21 @@ class AndroidComponentRegistrar : ComponentRegistrar {
         }
 
         private fun parseVariant(s: String): AndroidVariant? {
-            val parts = s.split(';')
+            konst parts = s.split(';')
             if (parts.size < 2) return null
             return AndroidVariant(parts[0], parts.drop(1))
         }
 
         fun registerViewExtensions(configuration: CompilerConfiguration, isExperimental: Boolean, project: MockProject) {
-            val applicationPackage = configuration.get(AndroidConfigurationKeys.PACKAGE) ?: return
-            val variants = configuration.get(AndroidConfigurationKeys.VARIANT)?.mapNotNull { parseVariant(it) } ?: return
-            val globalCacheImpl = parseCacheImplementationType(configuration.get(AndroidConfigurationKeys.DEFAULT_CACHE_IMPL))
+            konst applicationPackage = configuration.get(AndroidConfigurationKeys.PACKAGE) ?: return
+            konst variants = configuration.get(AndroidConfigurationKeys.VARIANT)?.mapNotNull { parseVariant(it) } ?: return
+            konst globalCacheImpl = parseCacheImplementationType(configuration.get(AndroidConfigurationKeys.DEFAULT_CACHE_IMPL))
 
             if (variants.isEmpty() || applicationPackage.isEmpty()) {
                 return
             }
 
-            val layoutXmlFileManager = CliAndroidLayoutXmlFileManager(project, applicationPackage, variants)
+            konst layoutXmlFileManager = CliAndroidLayoutXmlFileManager(project, applicationPackage, variants)
             project.registerService(AndroidLayoutXmlFileManager::class.java, layoutXmlFileManager)
 
             ExpressionCodegenExtension.registerExtension(project,
@@ -171,8 +171,8 @@ class AndroidComponentRegistrar : ComponentRegistrar {
     override fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration) {
         reportRemovedError(configuration)
 
-        val features = configuration.get(AndroidConfigurationKeys.FEATURES) ?: AndroidExtensionsFeature.values().toSet()
-        val isExperimental = configuration.get(AndroidConfigurationKeys.EXPERIMENTAL) == "true"
+        konst features = configuration.get(AndroidConfigurationKeys.FEATURES) ?: AndroidExtensionsFeature.konstues().toSet()
+        konst isExperimental = configuration.get(AndroidConfigurationKeys.EXPERIMENTAL) == "true"
 
         if (AndroidExtensionsFeature.PARCELIZE in features) {
             registerParcelExtensions(project)

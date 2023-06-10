@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result<T>(val isSuccess: T)
+konstue class Result<T>(konst isSuccess: T)
 
 fun interface ResultHandler<T> {
     fun onResult(): Result<T>

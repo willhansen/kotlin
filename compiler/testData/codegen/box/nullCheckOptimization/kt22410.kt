@@ -12,7 +12,7 @@ var testedEquals = false
 
 inline fun <reified T> defineFunc() {
     func = {
-        val nullable = it as? T
+        konst nullable = it as? T
 
         if (nullable == null)
             testedEquals = true

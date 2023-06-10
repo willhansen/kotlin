@@ -29,11 +29,11 @@ import org.jetbrains.kotlin.resolve.scopes.getDescriptorsFiltered
 import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.Type
 
-class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClass: ClassDescriptor, val bindingContext: BindingContext) {
-    val thisAsmType = codegen.typeMapper.mapClass(thisClass)
+class SerialInfoCodegenImpl(konst codegen: ImplementationBodyCodegen, konst thisClass: ClassDescriptor, konst bindingContext: BindingContext) {
+    konst thisAsmType = codegen.typeMapper.mapClass(thisClass)
 
     fun generate() {
-        val props = thisClass.unsubstitutedMemberScope.getDescriptorsFiltered().filterIsInstance<PropertyDescriptor>()
+        konst props = thisClass.unsubstitutedMemberScope.getDescriptorsFiltered().filterIsInstance<PropertyDescriptor>()
         if (props.isEmpty()) return
 
         generateFieldsAndSetters(props)
@@ -42,11 +42,11 @@ class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClas
 
     private fun generateFieldsAndSetters(props: List<PropertyDescriptor>) {
         props.forEach { prop ->
-            val propType = codegen.typeMapper.mapType(prop.type)
-            val propFieldName = "_" + prop.name.identifier
+            konst propType = codegen.typeMapper.mapType(prop.type)
+            konst propFieldName = "_" + prop.name.identifier
             codegen.v.newField(OtherOrigin(codegen.myClass.psiOrParent), Opcodes.ACC_PRIVATE or Opcodes.ACC_FINAL or Opcodes.ACC_SYNTHETIC,
                                propFieldName, propType.descriptor, null, null)
-            val f = SimpleFunctionDescriptorImpl.create(thisClass, Annotations.EMPTY, prop.name, CallableMemberDescriptor.Kind.SYNTHESIZED, thisClass.source)
+            konst f = SimpleFunctionDescriptorImpl.create(thisClass, Annotations.EMPTY, prop.name, CallableMemberDescriptor.Kind.SYNTHESIZED, thisClass.source)
             f.initialize(null, thisClass.thisAsReceiverParameter, emptyList(), emptyList(), emptyList(), prop.type, Modality.FINAL, DescriptorVisibilities.PUBLIC)
             codegen.generateMethod(f, { _, _ ->
                 load(0, thisAsmType)
@@ -57,13 +57,13 @@ class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClas
     }
 
     private fun generateConstructor(props: List<PropertyDescriptor>) {
-        val constr = ClassConstructorDescriptorImpl.createSynthesized(
+        konst constr = ClassConstructorDescriptorImpl.createSynthesized(
                 thisClass,
                 Annotations.EMPTY,
                 false,
                 thisClass.source
         )
-        val args = mutableListOf<ValueParameterDescriptor>()
+        konst args = mutableListOf<ValueParameterDescriptor>()
         var i = 0
         props.forEach { prop ->
             args.add(ValueParameterDescriptorImpl(constr, null, i++, Annotations.EMPTY, prop.name, prop.type, false, false, false, null, constr.source))
@@ -80,8 +80,8 @@ class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClas
             invokespecial("java/lang/Object", "<init>", "()V", false)
             var varOffset = 1
             props.forEach { prop ->
-                val propType = codegen.typeMapper.mapType(prop.type)
-                val propFieldName = "_" + prop.name.identifier
+                konst propType = codegen.typeMapper.mapType(prop.type)
+                konst propFieldName = "_" + prop.name.identifier
                 load(0, thisAsmType)
                 load(varOffset, propType)
                 putfield(thisAsmType.internalName, propFieldName, propType.descriptor)
@@ -93,7 +93,7 @@ class SerialInfoCodegenImpl(val codegen: ImplementationBodyCodegen, val thisClas
 
     companion object {
         fun generateSerialInfoImplBody(codegen: ImplementationBodyCodegen) {
-            val thisClass = codegen.descriptor
+            konst thisClass = codegen.descriptor
             if (KSerializerDescriptorResolver.isSerialInfoImpl(thisClass))
                 SerialInfoCodegenImpl(codegen, thisClass, codegen.bindingContext).generate()
         }

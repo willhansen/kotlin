@@ -9,7 +9,7 @@ class A {
 operator fun A.component2(): String = "n"
 
 fun box(): String {
-    val list = mutableListOf<A>()
+    konst list = mutableListOf<A>()
     list.add(A())
 
     var i = 0;

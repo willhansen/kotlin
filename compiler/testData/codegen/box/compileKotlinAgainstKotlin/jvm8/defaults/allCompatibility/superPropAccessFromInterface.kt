@@ -4,14 +4,14 @@
 // MODULE: lib
 // FILE: 1.kt
 interface Test {
-    val prop: String
+    konst prop: String
         get() =  "OK"
 }
 
 // MODULE: main(lib)
 // FILE: 2.kt
 interface Test2 : Test {
-    override val prop: String
+    override konst prop: String
         get() = super.prop
 }
 

@@ -30,8 +30,8 @@ object FirUnderscoredTypeArgumentSyntaxChecker : FirExpressionSyntaxChecker<FirF
         reporter: DiagnosticReporter
     ) {
         for (typeProjection in element.typeArguments) {
-            val psiTypeArgument = typeProjection.source?.psi as? KtTypeProjection ?: continue
-            val typeReference = psiTypeArgument.typeReference ?: continue
+            konst psiTypeArgument = typeProjection.source?.psi as? KtTypeProjection ?: continue
+            konst typeReference = psiTypeArgument.typeReference ?: continue
 
             if (!typeReference.isPlaceholder) continue
 
@@ -51,11 +51,11 @@ object FirUnderscoredTypeArgumentSyntaxChecker : FirExpressionSyntaxChecker<FirF
         reporter: DiagnosticReporter,
     ) {
         for (typeProjection in element.typeArguments) {
-            val lightTreeTypeArgument = typeProjection.source?.lighterASTNode ?: continue
+            konst lightTreeTypeArgument = typeProjection.source?.lighterASTNode ?: continue
 
             if (!source.treeStructure.userType(lightTreeTypeArgument).toString().isUnderscore) continue
 
-            val annotations = source.treeStructure.annotations(lightTreeTypeArgument) ?: continue
+            konst annotations = source.treeStructure.annotations(lightTreeTypeArgument) ?: continue
 
             for (annotation in annotations) {
                 reporter.reportOn(

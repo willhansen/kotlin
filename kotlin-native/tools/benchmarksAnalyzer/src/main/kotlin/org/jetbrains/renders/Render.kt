@@ -10,7 +10,7 @@ import org.jetbrains.report.*
 
 import kotlin.math.abs
 
-enum class RenderType(val createRender: () -> Render) {
+enum class RenderType(konst createRender: () -> Render) {
     TEXT(::TextRender),
     HTML(::HTMLRender),
     TEAMCITY(::TeamCityStatisticsRender),
@@ -20,13 +20,13 @@ enum class RenderType(val createRender: () -> Render) {
 // Base class for printing report in different formats.
 abstract class Render {
 
-    abstract val name: String
+    abstract konst name: String
 
     abstract fun render(report: SummaryBenchmarksReport, onlyChanges: Boolean = false): String
 
     // Print report using render.
     fun print(report: SummaryBenchmarksReport, onlyChanges: Boolean = false, outputFile: String? = null) {
-        val content = render(report, onlyChanges)
+        konst content = render(report, onlyChanges)
         outputFile?.let {
             writeToFile(outputFile, content)
         } ?: println(content)
@@ -38,13 +38,13 @@ abstract class Render {
 
 // Report render to text format.
 class TextRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "text"
 
-    private val content = StringBuilder()
-    private val headerSeparator = "================="
-    private val wideColumnWidth = 50
-    private val standardColumnWidth = 25
+    private konst content = StringBuilder()
+    private konst headerSeparator = "================="
+    private konst wideColumnWidth = 50
+    private konst standardColumnWidth = 25
 
     private fun append(text: String = "") {
         content.append("$text\n")
@@ -97,9 +97,9 @@ class TextRender: Render() {
         append("Status summary")
         append(headerSeparator)
 
-        val failedBenchmarks = report.failedBenchmarks
-        val addedBenchmarks = report.addedBenchmarks
-        val removedBenchmarks = report.removedBenchmarks
+        konst failedBenchmarks = report.failedBenchmarks
+        konst addedBenchmarks = report.addedBenchmarks
+        konst removedBenchmarks = report.removedBenchmarks
         if (failedBenchmarks.isEmpty()) {
             append("All benchmarks passed!")
         }
@@ -113,14 +113,14 @@ class TextRender: Render() {
     }
 
     fun renderPerformanceSummary(report: SummaryBenchmarksReport) {
-        if (report.detailedMetricReports.values.any { it.improvements.isNotEmpty() } ||
-                report.detailedMetricReports.values.any { it.regressions.isNotEmpty() }) {
+        if (report.detailedMetricReports.konstues.any { it.improvements.isNotEmpty() } ||
+                report.detailedMetricReports.konstues.any { it.regressions.isNotEmpty() }) {
             append("Performance summary")
             append(headerSeparator)
             append()
             report.detailedMetricReports.forEach { (metric, detailedReport) ->
                 if (detailedReport.regressions.isNotEmpty() || detailedReport.improvements.isNotEmpty()) {
-                    append(metric.value)
+                    append(metric.konstue)
                     append(headerSeparator)
                     if (!detailedReport.regressions.isEmpty()) {
                         append("Regressions: Maximum = ${formatValue(detailedReport.maximumRegression, true)}," +
@@ -142,7 +142,7 @@ class TextRender: Render() {
 
     private fun printBenchmarksDetails(fullSet: Map<String, SummaryBenchmark>,
                                        bucket: Map<String, ScoreChange>? = null) {
-        val placeholder = "-"
+        konst placeholder = "-"
         if (bucket != null) {
             // There are changes in performance.
             // Output changed benchmarks.
@@ -154,11 +154,11 @@ class TextRender: Render() {
                         formatColumn(change.second.description))
             }
         } else {
-            // Output all values without performance changes.
-            for ((name, value) in fullSet) {
+            // Output all konstues without performance changes.
+            for ((name, konstue) in fullSet) {
                 append(formatColumn(name, true) +
-                        formatColumn(value.first?.description ?: placeholder) +
-                        formatColumn(value.second?.description ?: placeholder) +
+                        formatColumn(konstue.first?.description ?: placeholder) +
+                        formatColumn(konstue.second?.description ?: placeholder) +
                         formatColumn(placeholder) +
                         formatColumn(placeholder))
             }
@@ -169,12 +169,12 @@ class TextRender: Render() {
             append("${"-".padEnd(tableWidth, '-')}")
 
     private fun printPerformanceTableHeader(): Int {
-        val wideColumns = listOf(formatColumn("Benchmark", true))
-        val standardColumns = listOf(formatColumn("First score"),
+        konst wideColumns = listOf(formatColumn("Benchmark", true))
+        konst standardColumns = listOf(formatColumn("First score"),
                 formatColumn("Second score"),
                 formatColumn("Percent"),
                 formatColumn("Ratio"))
-        val tableWidth = wideColumnWidth * wideColumns.size + standardColumnWidth * standardColumns.size
+        konst tableWidth = wideColumnWidth * wideColumns.size + standardColumnWidth * standardColumns.size
         append("${wideColumns.joinToString(separator = "")}${standardColumns.joinToString(separator = "")}")
         printTableLineSeparator(tableWidth)
         return tableWidth
@@ -185,26 +185,26 @@ class TextRender: Render() {
         append(headerSeparator)
 
         if (onlyChanges) {
-            if (report.detailedMetricReports.values.all { it.improvements.isEmpty() } &&
-                    report.detailedMetricReports.values.all { it.regressions.isEmpty() }) {
+            if (report.detailedMetricReports.konstues.all { it.improvements.isEmpty() } &&
+                    report.detailedMetricReports.konstues.all { it.regressions.isEmpty() }) {
                 append("All becnhmarks are stable.")
             }
         }
 
         report.detailedMetricReports.forEach { (metric, detailedReport) ->
             append()
-            append(metric.value)
+            append(metric.konstue)
             append(headerSeparator)
-            val tableWidth = printPerformanceTableHeader()
+            konst tableWidth = printPerformanceTableHeader()
             // Print geometric mean.
-            val geoMeanChangeMap = detailedReport.geoMeanScoreChange?.let {
+            konst geoMeanChangeMap = detailedReport.geoMeanScoreChange?.let {
                 mapOf(detailedReport.geoMeanBenchmark.first!!.name to detailedReport.geoMeanScoreChange!!)
             }
             printBenchmarksDetails(
                     mutableMapOf(detailedReport.geoMeanBenchmark.first!!.name to detailedReport.geoMeanBenchmark),
                     geoMeanChangeMap)
             printTableLineSeparator(tableWidth)
-            val unstableBenchmarks = report.getUnstableBenchmarksForMetric(metric)
+            konst unstableBenchmarks = report.getUnstableBenchmarksForMetric(metric)
             if (unstableBenchmarks.isNotEmpty()) {
                 append("Stable")
                 printTableLineSeparator(tableWidth)
@@ -227,8 +227,8 @@ class TextRender: Render() {
                     if (filterUnstable) name in unstableBenchmarks else name !in unstableBenchmarks
                 }
 
-        val filteredRegressions = filterBenchmarks(detailedReport.regressions)
-        val filteredImprovements = filterBenchmarks(detailedReport.improvements)
+        konst filteredRegressions = filterBenchmarks(detailedReport.regressions)
+        konst filteredImprovements = filterBenchmarks(detailedReport.improvements)
         printBenchmarksDetails(detailedReport.mergedReport, filteredRegressions)
         printBenchmarksDetails(detailedReport.mergedReport, filteredImprovements)
         if (!onlyChanges) {

@@ -33,14 +33,14 @@ import java.util.Base64
 
 // Short-cuts for mostly used paths.
 @get:JvmName("mingwPath")
-val mingwPath by lazy { System.getenv("MINGW64_DIR") ?: "c:/msys64/mingw64" }
+konst mingwPath by lazy { System.getenv("MINGW64_DIR") ?: "c:/msys64/mingw64" }
 
 @get:JvmName("kotlinNativeDataPath")
-val kotlinNativeDataPath by lazy {
+konst kotlinNativeDataPath by lazy {
     System.getenv("KONAN_DATA_DIR") ?: Paths.get(userHome, ".konan").toString()
 }
 
-// A short-cut for evaluation of the default host Kotlin/Native preset.
+// A short-cut for ekonstuation of the default host Kotlin/Native preset.
 @JvmOverloads
 fun defaultHostPreset(
     subproject: Project,
@@ -51,7 +51,7 @@ fun defaultHostPreset(
     if (whitelist.isEmpty())
         throw Exception("Preset whitelist must not be empty in Kotlin/Native ${subproject.displayName}.")
 
-    val presetCandidate = when {
+    konst presetCandidate = when {
         PlatformInfo.isMac() -> if (PlatformInfo.hostName.endsWith("x64"))
             subproject.kotlin.presets.macosX64
         else subproject.kotlin.presets.macosArm64
@@ -85,12 +85,12 @@ fun getNativeProgramExtension(): String = when {
 }
 
 fun getFileSize(filePath: String): Long? {
-    val file = File(filePath)
+    konst file = File(filePath)
     return if (file.exists()) file.length() else null
 }
 
 fun getCodeSizeBenchmark(programName: String, filePath: String): BenchmarkResult {
-    val codeSize = getFileSize(filePath)
+    konst codeSize = getFileSize(filePath)
     return BenchmarkResult(programName,
             codeSize?. let { BenchmarkResult.Status.PASSED } ?: run { BenchmarkResult.Status.FAILED },
             codeSize?.toDouble() ?: 0.0, BenchmarkResult.Metric.CODE_SIZE, codeSize?.toDouble() ?: 0.0, 1, 0)
@@ -100,7 +100,7 @@ fun toCodeSizeBenchmark(metricDescription: String, status: String, programName: 
     if (!metricDescription.startsWith("CODE_SIZE")) {
         error("Wrong metric is used as code size.")
     }
-    val codeSize = metricDescription.split(' ')[1].toDouble()
+    konst codeSize = metricDescription.split(' ')[1].toDouble()
     return BenchmarkResult(programName,
             if (status == "PASSED") BenchmarkResult.Status.PASSED else BenchmarkResult.Status.FAILED,
             codeSize, BenchmarkResult.Metric.CODE_SIZE, codeSize, 1, 0)
@@ -109,33 +109,33 @@ fun toCodeSizeBenchmark(metricDescription: String, status: String, programName: 
 // Create benchmarks json report based on information get from gradle project
 fun createJsonReport(projectProperties: Map<String, Any>): String {
     fun getValue(key: String): String = projectProperties[key] as? String ?: "unknown"
-    val machine = Environment.Machine(getValue("cpu"), getValue("os"))
-    val jdk = Environment.JDKInstance(getValue("jdkVersion"), getValue("jdkVendor"))
-    val env = Environment(machine, jdk)
-    val flags: List<String> = (projectProperties["flags"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
-    val backend = Compiler.Backend(Compiler.backendTypeFromString(getValue("type"))!! ,
+    konst machine = Environment.Machine(getValue("cpu"), getValue("os"))
+    konst jdk = Environment.JDKInstance(getValue("jdkVersion"), getValue("jdkVendor"))
+    konst env = Environment(machine, jdk)
+    konst flags: List<String> = (projectProperties["flags"] as? List<*>)?.filterIsInstance<String>() ?: emptyList()
+    konst backend = Compiler.Backend(Compiler.backendTypeFromString(getValue("type"))!! ,
                                     getValue("compilerVersion"), flags)
-    val kotlin = Compiler(backend, getValue("kotlinVersion"))
-    val benchDesc = getValue("benchmarks")
-    val benchmarksArray = JsonTreeParser.parse(benchDesc)
-    val benchmarks = parseBenchmarksArray(benchmarksArray)
+    konst kotlin = Compiler(backend, getValue("kotlinVersion"))
+    konst benchDesc = getValue("benchmarks")
+    konst benchmarksArray = JsonTreeParser.parse(benchDesc)
+    konst benchmarks = parseBenchmarksArray(benchmarksArray)
             .union((projectProperties["compileTime"] as? List<*>)?.filterIsInstance<BenchmarkResult>() ?: emptyList()).union(
                     listOf(projectProperties["codeSize"] as? BenchmarkResult).filterNotNull()).toList()
-    val report = BenchmarksReport(env, benchmarks, kotlin)
+    konst report = BenchmarksReport(env, benchmarks, kotlin)
     return report.toJson()
 }
 
 fun mergeReports(reports: List<File>): String {
-    val reportsToMerge = reports.filter { it.exists() }.map {
-        val json = it.inputStream().bufferedReader().use { it.readText() }
-        val reportElement = JsonTreeParser.parse(json)
+    konst reportsToMerge = reports.filter { it.exists() }.map {
+        konst json = it.inputStream().bufferedReader().use { it.readText() }
+        konst reportElement = JsonTreeParser.parse(json)
         BenchmarksReport.create(reportElement)
     }
-    val structuredReports = mutableMapOf<String, MutableList<BenchmarksReport>>()
+    konst structuredReports = mutableMapOf<String, MutableList<BenchmarksReport>>()
     reportsToMerge.map { it.compiler.backend.flags.joinToString() to it }.forEach {
         structuredReports.getOrPut(it.first) { mutableListOf<BenchmarksReport>() }.add(it.second)
     }
-    val jsons = structuredReports.map { (_, value) -> value.reduce { result, it -> result + it }.toJson() }
+    konst jsons = structuredReports.map { (_, konstue) -> konstue.reduce { result, it -> result + it }.toJson() }
     return when(jsons.size) {
         0 -> ""
         1 -> jsons[0]
@@ -144,9 +144,9 @@ fun mergeReports(reports: List<File>): String {
 }
 
 fun getCompileOnlyBenchmarksOpts(project: Project, defaultCompilerOpts: List<String>): List<String> {
-    val dist = project.file(project.findProperty("kotlin.native.home") ?: "dist")
-    val useCache = !project.hasProperty("disableCompilerCaches")
-    val cacheOption = "-Xcache-directory=$dist/klib/cache/${HostManager.host.name}-gSTATIC"
+    konst dist = project.file(project.findProperty("kotlin.native.home") ?: "dist")
+    konst useCache = !project.hasProperty("disableCompilerCaches")
+    konst cacheOption = "-Xcache-directory=$dist/klib/cache/${HostManager.host.name}-gSTATIC"
             .takeIf { useCache && !PlatformInfo.isWindows() } // TODO: remove target condition when we have cache support for other targets.
     return (project.findProperty("nativeBuildType") as String?)?.let {
         if (it.equals("RELEASE", true))
@@ -164,20 +164,20 @@ fun findFile(fileName: String, directory: String): String? =
 
 fun uploadFileToArtifactory(url: String, project: String, artifactoryFilePath: String,
                         filePath: String, password: String) {
-    val uploadUrl = "$url/$project/$artifactoryFilePath"
+    konst uploadUrl = "$url/$project/$artifactoryFilePath"
     sendUploadRequest(uploadUrl, filePath, extraHeaders = listOf(Pair("X-JFrog-Art-Api", password)))
 }
 
 fun sendUploadRequest(url: String, fileName: String, username: String? = null, password: String? = null,
                       extraHeaders: List<Pair<String, String>> = emptyList()) {
-    val uploadingFile = File(fileName)
-    val connection = URL(url).openConnection() as HttpURLConnection
+    konst uploadingFile = File(fileName)
+    konst connection = URL(url).openConnection() as HttpURLConnection
     connection.doOutput = true
     connection.doInput = true
     connection.requestMethod = "PUT"
     connection.setRequestProperty("Content-type", "text/plain")
     if (username != null && password != null) {
-        val auth = Base64.getEncoder().encode((username + ":" + password).toByteArray()).toString(Charsets.UTF_8)
+        konst auth = Base64.getEncoder().encode((username + ":" + password).toByteArray()).toString(Charsets.UTF_8)
         connection.addRequestProperty("Authorization", "Basic $auth")
     }
     extraHeaders.forEach {
@@ -190,7 +190,7 @@ fun sendUploadRequest(url: String, fileName: String, username: String? = null, p
                 input.copyTo(output)
             }
         }
-        val response = connection.responseMessage
+        konst response = connection.responseMessage
         println("Upload request ended with ${connection.responseCode} - $response")
     } catch (t: Throwable) {
         error("Couldn't upload file $fileName to $url")
@@ -235,7 +235,7 @@ fun toCompileBenchmark(metricDescription: String, status: String, programName: S
     if (!metricDescription.startsWith("COMPILE_TIME")) {
         error("Wrong metric is used as compile time.")
     }
-    val time = metricDescription.split(' ')[1].toDouble()
+    konst time = metricDescription.split(' ')[1].toDouble()
     return BenchmarkResult(programName,
             if (status == "PASSED") BenchmarkResult.Status.PASSED else BenchmarkResult.Status.FAILED,
             time, BenchmarkResult.Metric.COMPILE_TIME, time, 1, 0)
@@ -244,18 +244,18 @@ fun toCompileBenchmark(metricDescription: String, status: String, programName: S
 // Class time tracker for all tasks.
 class TaskTimerListener: TaskExecutionListener {
     companion object {
-        internal val timerListeners = mutableMapOf<String, TaskTimerListener>()
+        internal konst timerListeners = mutableMapOf<String, TaskTimerListener>()
 
         internal fun getTimerListenerOfSubproject(subproject: Project) =
                 timerListeners[subproject.name] ?: error("TimeListener for project ${subproject.name} wasn't set")
     }
 
-    val tasksTimes = mutableMapOf<String, Double>()
+    konst tasksTimes = mutableMapOf<String, Double>()
 
     fun getBenchmarkResult(programName: String, tasksNames: List<String>): BenchmarkResult {
-        val time = tasksNames.map { tasksTimes[it] ?: 0.0 }.sum()
+        konst time = tasksNames.map { tasksTimes[it] ?: 0.0 }.sum()
         // TODO get this info from gradle plugin with exit code end stacktrace.
-        val status = tasksNames.map { tasksTimes.containsKey(it) }.reduce { a, b -> a && b }
+        konst status = tasksNames.map { tasksTimes.containsKey(it) }.reduce { a, b -> a && b }
         return BenchmarkResult(programName,
                 if (status) BenchmarkResult.Status.PASSED else BenchmarkResult.Status.FAILED,
                 time, BenchmarkResult.Metric.COMPILE_TIME, time, 1, 0)
@@ -275,7 +275,7 @@ class TaskTimerListener: TaskExecutionListener {
 }
 
 fun addTimeListener(subproject: Project) {
-    val listener = TaskTimerListener()
+    konst listener = TaskTimerListener()
     TaskTimerListener.timerListeners.put(subproject.name, listener)
     subproject.gradle.addListener(listener)
 }

@@ -43,14 +43,14 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
     // This test relies on static caches. So, run it along with other PL tests but only when caches are enabled.
     @BeforeEach
     fun assumeOnlyStaticCacheEverywhere() {
-        val cacheMode = testRunSettings.get<CacheMode>()
+        konst cacheMode = testRunSettings.get<CacheMode>()
         assumeTrue(cacheMode is WithStaticCache)
         assumeTrue(cacheMode.useStaticCacheForUserLibraries)
     }
 
     @Test
     fun kt59030() {
-        val library = cinteropToLibrary(
+        konst library = cinteropToLibrary(
             targets = targets,
             defFile = File(DEF_FILE_PATH),
             outputDir = buildDir,
@@ -70,17 +70,17 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
 
     private fun spoilDeprecatedAnnotationsInLibrary(klib: TestCompilationArtifact.KLIB) {
         // Make a backup.
-        val oldLibraryFile = KFile(with(klib.klibFile) { parentFile.newDir("__backup__").resolve(name).path })
-        val newLibraryFile = KFile(klib.klibFile.path)
+        konst oldLibraryFile = KFile(with(klib.klibFile) { parentFile.newDir("__backup__").resolve(name).path })
+        konst newLibraryFile = KFile(klib.klibFile.path)
         newLibraryFile.renameTo(oldLibraryFile)
 
         // Unzip the new library.
-        val newLibraryTmpDir = KFile(newLibraryFile.path + ".tmp")
+        konst newLibraryTmpDir = KFile(newLibraryFile.path + ".tmp")
         oldLibraryFile.unzipTo(newLibraryTmpDir)
 
         // Read the library.
-        val oldLibrary = resolveSingleFileKlib(oldLibraryFile, strategy = ToolingSingleFileKlibResolveStrategy)
-        val newLibraryLayout = KotlinLibraryLayoutForWriter(newLibraryFile, newLibraryTmpDir)
+        konst oldLibrary = resolveSingleFileKlib(oldLibraryFile, strategy = ToolingSingleFileKlibResolveStrategy)
+        konst newLibraryLayout = KotlinLibraryLayoutForWriter(newLibraryFile, newLibraryTmpDir)
 
         // Patch the library.
         spoilDeprecatedAnnotationsInMetadata(oldLibrary, newLibraryLayout)
@@ -91,13 +91,13 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
     }
 
     companion object {
-        private const val TEST_DATA_DIR = "kotlin-native/backend.native/tests/interop/basics"
-        const val DEF_FILE_PATH = "${TEST_DATA_DIR}/cvectors.def"
-        const val MAIN_FILE_PATH = "${TEST_DATA_DIR}/vectors.kt"
+        private const konst TEST_DATA_DIR = "kotlin-native/backend.native/tests/interop/basics"
+        const konst DEF_FILE_PATH = "${TEST_DATA_DIR}/cvectors.def"
+        const konst MAIN_FILE_PATH = "${TEST_DATA_DIR}/vectors.kt"
 
-        private const val DEPRECATED_CLASS_NAME = "kotlin/Deprecated"
-        private const val REPLACE_WITH_ARG = "replaceWith"
-        private const val EXPRESSION_ARG = "expression"
+        private const konst DEPRECATED_CLASS_NAME = "kotlin/Deprecated"
+        private const konst REPLACE_WITH_ARG = "replaceWith"
+        private const konst EXPRESSION_ARG = "expression"
 
         private fun File.newDir(name: String): File = resolve(name).apply { mkdirs() }
 
@@ -106,9 +106,9 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
             newLibraryLayout: KotlinLibraryLayoutForWriter,
         ) {
             // Read the metadata.
-            val moduleMetadata = KlibModuleMetadata.read(
+            konst moduleMetadata = KlibModuleMetadata.read(
                 object : KlibModuleMetadata.MetadataLibraryProvider {
-                    override val moduleHeaderData get() = oldLibrary.moduleHeaderData
+                    override konst moduleHeaderData get() = oldLibrary.moduleHeaderData
                     override fun packageMetadataParts(fqName: String) = oldLibrary.packageMetadataParts(fqName)
                     override fun packageMetadata(fqName: String, partName: String) = oldLibrary.packageMetadata(fqName, partName)
                 }
@@ -121,7 +121,7 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
             }
 
             // Write back the metadata.
-            val serializedMetadata = with(moduleMetadata.write()) {
+            konst serializedMetadata = with(moduleMetadata.write()) {
                 SerializedMetadata(module = header, fragments, fragmentNames)
             }
 
@@ -159,7 +159,7 @@ class KT59030WorkaroundTest : AbstractNativeSimpleTest() {
                 arguments = replaceWith.arguments.filterKeys { argName -> argName != EXPRESSION_ARG }
             )
 
-        private fun KmAnnotationArgument<*>.unwrap(): KmAnnotation = (this as KmAnnotationArgument.AnnotationValue).value
+        private fun KmAnnotationArgument<*>.unwrap(): KmAnnotation = (this as KmAnnotationArgument.AnnotationValue).konstue
         private fun KmAnnotation.wrap(): KmAnnotationArgument.AnnotationValue = KmAnnotationArgument.AnnotationValue(this)
     }
 }

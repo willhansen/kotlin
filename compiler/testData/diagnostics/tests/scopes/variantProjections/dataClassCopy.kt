@@ -1,6 +1,6 @@
 // ISSUE: KT-54764
 
-data class Out<out T>(val prop: T)
+data class Out<out T>(konst prop: T)
 
 fun foo(b: Out<*>) {
     b.copy(<!TYPE_MISMATCH!>""<!>) // error in K1, OK in K2

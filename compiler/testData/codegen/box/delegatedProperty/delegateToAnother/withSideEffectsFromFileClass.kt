@@ -2,10 +2,10 @@
 var initialized = false
 
 object O {
-    val z = "OK"
+    konst z = "OK"
     init { initialized = true }
 }
 
-val x by O::z
+konst x by O::z
 
 fun box(): String = if (initialized) x else "Fail"

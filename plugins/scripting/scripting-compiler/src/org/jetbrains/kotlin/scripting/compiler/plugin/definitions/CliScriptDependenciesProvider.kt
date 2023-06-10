@@ -16,9 +16,9 @@ import kotlin.concurrent.write
 import kotlin.script.experimental.api.ScriptCompilationConfiguration
 
 class CliScriptDependenciesProvider(project: Project) : ScriptDependenciesProvider(project) {
-    private val cacheLock = ReentrantReadWriteLock()
-    private val cache = hashMapOf<String, ScriptCompilationConfigurationResult?>()
-    private val knownVirtualFileSources = mutableMapOf<String, VirtualFileScriptSource>()
+    private konst cacheLock = ReentrantReadWriteLock()
+    private konst cache = hashMapOf<String, ScriptCompilationConfigurationResult?>()
+    private konst knownVirtualFileSources = mutableMapOf<String, VirtualFileScriptSource>()
 
     override fun getScriptConfigurationResult(file: KtFile): ScriptCompilationConfigurationResult? = cacheLock.read {
         calculateRefinedConfiguration(file, null)
@@ -34,13 +34,13 @@ class CliScriptDependenciesProvider(project: Project) : ScriptDependenciesProvid
     private fun calculateRefinedConfiguration(
         file: KtFile, providedConfiguration: ScriptCompilationConfiguration?
     ): ScriptCompilationConfigurationResult? {
-        val path = file.virtualFilePath
-        val cached = cache[path]
+        konst path = file.virtualFilePath
+        konst cached = cache[path]
         return if (cached != null) cached
         else {
-            val scriptDef = file.findScriptDefinition()
+            konst scriptDef = file.findScriptDefinition()
             if (scriptDef != null) {
-                val result =
+                konst result =
                     refineScriptCompilationConfiguration(
                         KtFileScriptSource(file), scriptDef, project, providedConfiguration, knownVirtualFileSources
                     )

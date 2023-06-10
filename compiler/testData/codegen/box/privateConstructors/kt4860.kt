@@ -6,7 +6,7 @@ open class A private constructor() {
 }
 
 fun box(): String {
-    val a = A
-    val b = A.B()
+    konst a = A
+    konst b = A.B()
     return "OK"
 }

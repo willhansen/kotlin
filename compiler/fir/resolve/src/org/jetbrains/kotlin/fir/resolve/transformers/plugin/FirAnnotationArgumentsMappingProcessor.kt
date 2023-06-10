@@ -21,12 +21,12 @@ class FirAnnotationArgumentsMappingProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS) {
-    override val transformer: FirTransformer<Any?> = FirAnnotationArgumentsMappingTransformerAdapter(session, scopeSession)
+    override konst transformer: FirTransformer<Any?> = FirAnnotationArgumentsMappingTransformerAdapter(session, scopeSession)
 }
 
 @AdapterForResolveProcessor
 class FirAnnotationArgumentsMappingTransformerAdapter(session: FirSession, scopeSession: ScopeSession) : FirTransformer<Any?>() {
-    private val transformer = FirAnnotationArgumentsMappingTransformer(session, scopeSession, FirResolvePhase.ANNOTATIONS_ARGUMENTS_MAPPING)
+    private konst transformer = FirAnnotationArgumentsMappingTransformer(session, scopeSession, FirResolvePhase.ANNOTATIONS_ARGUMENTS_MAPPING)
 
     override fun <E : FirElement> transformElement(element: E, data: Any?): E {
         error("Should only be called via transformFile()")

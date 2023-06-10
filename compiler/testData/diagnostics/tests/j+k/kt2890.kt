@@ -16,6 +16,6 @@ package _03_collections
 import java.util.ArrayList
 
 fun test() {
-  val c = CollectionTest()
+  konst c = CollectionTest()
   CollectionTest.add(ArrayList())
 }

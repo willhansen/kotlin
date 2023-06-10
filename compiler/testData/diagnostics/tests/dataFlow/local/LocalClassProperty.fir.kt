@@ -2,11 +2,11 @@ fun test(x: Any?) {
   if (x !is String) return
 
   class C {
-    val v = x.length
+    konst v = x.length
 
-    val vGet: Int
+    konst vGet: Int
       get() = x.length
 
-    val s: String = x
+    konst s: String = x
   }
 }

@@ -55,7 +55,7 @@ fun box(): String {
     expectOrder("x(2) !in low(1) until 3", "LX") { assertFalse(x(2) !in low(1) until 3) }
 
     // For IR backend, there is an additional condition for checking the upper bound == MIN_VALUE (empty range).
-    // These tests ensure all expressions are evaluated and in the correct order.
+    // These tests ensure all expressions are ekonstuated and in the correct order.
     expectOrder("0 in (low(1) until Int.MIN_VALUE).reversed()", "L") { assertFalse(0 in (low(1) until Int.MIN_VALUE).reversed()) }
     expectOrder("0 in (low(1) until minValue()).reversed()", "L") { assertFalse(0 in (low(1) until minValue()).reversed()) }
     expectOrder("x(0) in (1 until Int.MIN_VALUE).reversed()", "X") { assertFalse(x(0) in (1 until Int.MIN_VALUE).reversed()) }

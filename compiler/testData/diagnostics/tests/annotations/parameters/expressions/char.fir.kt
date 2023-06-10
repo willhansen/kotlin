@@ -1,6 +1,6 @@
 package test
 
-annotation class Ann(val c1: Char)
+annotation class Ann(konst c1: Char)
 
 @Ann(<!ARGUMENT_TYPE_MISMATCH!>'a' - 'a'<!>) class MyClass
 

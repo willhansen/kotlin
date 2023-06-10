@@ -2,7 +2,7 @@
 // ^ KT-57754
 
 interface I {
-    val <T> T.id: T
+    konst <T> T.id: T
         get() = this
 }
 

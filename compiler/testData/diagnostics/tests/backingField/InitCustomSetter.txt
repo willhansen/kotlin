@@ -4,7 +4,7 @@ public final class My {
     public constructor My()
     public constructor My(/*0*/ v: kotlin.Int)
     public final var u: kotlin.Int
-    public final val v: kotlin.Int
+    public final konst v: kotlin.Int
     public final var w: kotlin.Int
     public final var x: kotlin.Int
     public final var y: kotlin.Int

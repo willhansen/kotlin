@@ -14,15 +14,15 @@ import org.jetbrains.kotlin.backend.konan.driver.utilities.getDefaultIrActions
 import org.jetbrains.kotlin.backend.konan.lower.CacheInfoBuilder
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
-internal val BuildAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
+internal konst BuildAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
         name = "BuildAdditionalCacheInfo",
         description = "Build additional cache info (inline functions bodies and fields of classes)",
         preactions = getDefaultIrActions(),
         postactions = getDefaultIrActions(),
 ) { context, module ->
     // TODO: Use explicit parameter
-    val parent = context.context
-    val moduleDeserializer = parent.irLinker.moduleDeserializers[module.descriptor]
+    konst parent = context.context
+    konst moduleDeserializer = parent.irLinker.moduleDeserializers[module.descriptor]
     if (moduleDeserializer == null) {
         require(module.descriptor.isFromInteropLibrary()) { "No module deserializer for ${module.descriptor}" }
     } else {
@@ -33,7 +33,7 @@ internal val BuildAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<Nati
 /**
  * It is naturally a part of "produce LLVM module", so using NativeGenerationState context should be OK.
  */
-internal val SaveAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
+internal konst SaveAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<NativeGenerationState, Unit>(
         name = "SaveAdditionalCacheInfo",
         description = "Save additional cache info (inline functions bodies and fields of classes)"
 ) { context, _ ->
@@ -41,7 +41,7 @@ internal val SaveAdditionalCacheInfoPhase = createSimpleNamedCompilerPhase<Nativ
     CacheStorage(context).saveAdditionalCacheInfo()
 }
 
-internal val FinalizeCachePhase = createSimpleNamedCompilerPhase<PhaseContext, OutputFiles>(
+internal konst FinalizeCachePhase = createSimpleNamedCompilerPhase<PhaseContext, OutputFiles>(
         name = "FinalizeCache",
         description = "Finalize cache (rename temp to the final dist)"
 ) { _, outputFiles ->

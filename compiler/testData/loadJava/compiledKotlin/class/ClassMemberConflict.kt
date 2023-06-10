@@ -6,40 +6,40 @@ class ConstructorTypeParamClassObjectTypeConflict<test> {
         interface test
     }
 
-    val some: test? = throw Exception()
+    konst some: test? = throw Exception()
 }
 
 class ConstructorTypeParamClassObjectConflict<test> {
     companion object {
-        val test = { 12 }()
+        konst test = { 12 }()
     }
 
-    val some = test
+    konst some = test
 }
 
 class TestConstructorParamClassObjectConflict(test: String) {
     companion object {
-        val test = { 12 }()
+        konst test = { 12 }()
     }
 
-    val some = test
+    konst some = test
 }
 
 
-class TestConstructorValClassObjectConflict(val test: String) {
+class TestConstructorValClassObjectConflict(konst test: String) {
     companion object {
-        val test = { 12 }()
+        konst test = { 12 }()
     }
 
-    val some = test
+    konst some = test
 }
 
 class TestClassObjectAndClassConflict {
     companion object {
-        val bla = { 12 }()
+        konst bla = { 12 }()
     }
 
-    val bla = { "More" }()
+    konst bla = { "More" }()
 
-    val some = bla
+    konst some = bla
 }

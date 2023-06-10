@@ -7,7 +7,7 @@ class MyInt() {
     var b = 0
 
     operator fun inc(): MyInt {
-        val res = MyInt();
+        konst res = MyInt();
         res.b = b;
         res.b++;
         return res;

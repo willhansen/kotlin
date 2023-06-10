@@ -1,7 +1,7 @@
 // FILE: test.kt
 fun box() {
-    val n = 3
-    val k = foo(n)
+    konst n = 3
+    konst k = foo(n)
 }
 
 fun foo(n :Int ) : Int {

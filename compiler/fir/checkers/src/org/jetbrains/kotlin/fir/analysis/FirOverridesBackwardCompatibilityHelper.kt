@@ -32,14 +32,14 @@ import org.jetbrains.kotlin.name.ClassId
  * Note that, in case of multi-override, if any super member requires `override`, then the `override` keyword cannot be omitted.
  */
 abstract class FirOverridesBackwardCompatibilityHelper : FirSessionComponent {
-    private val platformDependentAnnotation = ClassId.fromString("kotlin/internal/PlatformDependent")
+    private konst platformDependentAnnotation = ClassId.fromString("kotlin/internal/PlatformDependent")
 
     open fun overrideCanBeOmitted(
         overriddenMemberSymbols: List<FirCallableSymbol<*>>,
         context: CheckerContext
     ): Boolean {
         // Members could share the same common interface up in the hierarchy. Hence, we track the visited members to avoid redundant work.
-        val visitedSymbols = hashSetOf<FirCallableSymbol<*>>()
+        konst visitedSymbols = hashSetOf<FirCallableSymbol<*>>()
         return overriddenMemberSymbols.all { isPlatformSpecificSymbolThatCanBeImplicitlyOverridden(it, visitedSymbols, context) }
     }
 
@@ -52,10 +52,10 @@ abstract class FirOverridesBackwardCompatibilityHelper : FirSessionComponent {
 
         if (!visitedSymbols.add(symbol)) return true
 
-        val originalMemberSymbol = symbol.originalOrSelf()
+        konst originalMemberSymbol = symbol.originalOrSelf()
         originalMemberSymbol.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
         @OptIn(SymbolInternals::class)
-        val originalMember = originalMemberSymbol.fir
+        konst originalMember = originalMemberSymbol.fir
         if (originalMember.hasAnnotation(platformDependentAnnotation, context.session)) {
             return true
         }
@@ -63,15 +63,15 @@ abstract class FirOverridesBackwardCompatibilityHelper : FirSessionComponent {
         additionalCheck(originalMember)?.let { return it }
 
         if (!originalMember.isAbstract) {
-            val containingClass = originalMember.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
+            konst containingClass = originalMember.containingClassLookupTag()?.toFirRegularClassSymbol(context.session)
             if (containingClass?.isInterface == false) {
                 return false
             }
         }
 
-        val scope =
+        konst scope =
             symbol.dispatchReceiverClassTypeOrNull()?.toRegularClassSymbol(context.session)?.unsubstitutedScope(context) ?: return false
-        val overriddenSymbols = when (originalMember) {
+        konst overriddenSymbols = when (originalMember) {
             is FirSimpleFunction -> scope.getDirectOverriddenFunctions(originalMember.symbol)
             is FirProperty -> scope.getDirectOverriddenProperties(originalMember.symbol)
             else -> return false
@@ -83,4 +83,4 @@ abstract class FirOverridesBackwardCompatibilityHelper : FirSessionComponent {
     protected open fun additionalCheck(member: FirCallableDeclaration): Boolean? = null
 }
 
-val FirSession.overridesBackwardCompatibilityHelper: FirOverridesBackwardCompatibilityHelper by FirSession.sessionComponentAccessor()
+konst FirSession.overridesBackwardCompatibilityHelper: FirOverridesBackwardCompatibilityHelper by FirSession.sessionComponentAccessor()

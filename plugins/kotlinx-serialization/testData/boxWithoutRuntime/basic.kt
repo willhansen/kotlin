@@ -11,13 +11,13 @@
  * e.g. only in `testImplementation` configuration (see :wasm:wasm-ir module). In such setup, production sources have plugin applied, but no runtime in classpath.
  */
 
-data class X(val i: Int) {
+data class X(konst i: Int) {
     companion object {
         fun x(): X = X(42)
     }
 }
 
 fun box(): String {
-    val i = X.x().i
+    konst i = X.x().i
     return if (i == 42) "OK" else i.toString()
 }

@@ -7,7 +7,7 @@ class SomeClass {
     @JvmName("changedFunctionJvmName")
     fun changedFunction(): Long = 0
 
-    val changedPropertyAccessor: Long
+    konst changedPropertyAccessor: Long
         @JvmName("changedPropertyAccessorJvmName")
         get() = 0
 }
@@ -15,6 +15,6 @@ class SomeClass {
 @JvmName("changedInlineFunctionJvmName")
 inline fun changedInlineFunction(): Long = 0
 
-inline val changedInlinePropertyAccessor: Long
+inline konst changedInlinePropertyAccessor: Long
     @JvmName("changedInlinePropertyAccessorJvmName")
     get() = 0

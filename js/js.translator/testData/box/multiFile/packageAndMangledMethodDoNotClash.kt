@@ -13,4 +13,4 @@ fun box(): String {
 // FILE: foobar.kt
 package foo.bar
 
-val x = 42
+konst x = 42

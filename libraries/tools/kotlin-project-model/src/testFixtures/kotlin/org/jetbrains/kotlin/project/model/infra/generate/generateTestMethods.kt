@@ -14,12 +14,12 @@ fun generateKpmTestCases(
     dryRun: Boolean = false,
     init: TestGroupSuite.() -> Unit
 ) {
-    val suite = TestGroupSuite(DefaultTargetBackendComputer).apply {
+    konst suite = TestGroupSuite(DefaultTargetBackendComputer).apply {
         init()
     }
     for (testGroup in suite.testGroups) {
         for (testClass in testGroup.testClasses) {
-            val (changed, testSourceFilePath) = NewTestGeneratorImpl(
+            konst (changed, testSourceFilePath) = NewTestGeneratorImpl(
                 listOf(KpmCoreCaseTestMethodGenerator)
             ).generateAndSave(testClass, dryRun)
             if (changed) {

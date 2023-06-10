@@ -13,7 +13,7 @@ package kotlin.collections
  */
 public interface Set<out E> : Collection<E> {
     // Query Operations
-    override val size: Int
+    override konst size: Int
 
     override fun isEmpty(): Boolean
     override fun contains(element: @UnsafeVariance E): Boolean

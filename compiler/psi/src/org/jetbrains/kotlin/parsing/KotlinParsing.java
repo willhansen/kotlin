@@ -919,7 +919,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
      *   ;
      *
      * unescapedAnnotation
-     *   : SimpleName{"."} typeArguments? valueArguments?
+     *   : SimpleName{"."} typeArguments? konstueArguments?
      *   ;
      */
     private boolean parseAnnotation(AnnotationParsingMode mode) {
@@ -927,7 +927,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
                // We have "@ann" or "@:ann" or "@ :ann", but not "@ ann"
                // (it's guaranteed that call sites do not allow the latter case)
                (_at(AT) && (!isNextRawTokenCommentOrWhitespace() || lookahead(1) == COLON))
-                : "Invalid annotation prefix";
+                : "Inkonstid annotation prefix";
 
         PsiBuilder.Marker annotation = mark();
 
@@ -1339,10 +1339,10 @@ public class KotlinParsing extends AbstractKotlinParsing {
 
     /*
      * secondaryConstructor
-     *   : modifiers "constructor" valueParameters (":" constructorDelegationCall)? block
+     *   : modifiers "constructor" konstueParameters (":" constructorDelegationCall)? block
      * constructorDelegationCall
-     *   : "this" valueArguments
-     *   : "super" valueArguments
+     *   : "this" konstueArguments
+     *   : "super" konstueArguments
      */
     private void parseSecondaryConstructor() {
         assert _at(CONSTRUCTOR_KEYWORD);
@@ -1458,7 +1458,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
      *   ;
      *
      * property
-     *   : modifiers ("val" | "var")
+     *   : modifiers ("konst" | "var")
      *       typeParameters?
      *       (type ".")?
      *       ("(" variableDeclarationEntry{","} ")" | variableDeclarationEntry)
@@ -1488,7 +1488,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
         if (multiDeclaration) {
             PsiBuilder.Marker multiDecl = mark();
             parseMultiDeclarationName(PROPERTY_NAME_FOLLOW_SET, PROPERTY_NAME_FOLLOW_MULTI_DECLARATION_RECOVERY_SET);
-            errorIf(multiDecl, !mode.destructuringAllowed, "Destructuring declarations are only allowed for local variables/values");
+            errorIf(multiDecl, !mode.destructuringAllowed, "Destructuring declarations are only allowed for local variables/konstues");
         }
         else {
             parseFunctionOrPropertyName(receiverTypeDeclared, "property", PROPERTY_NAME_FOLLOW_SET, PROPERTY_NAME_FOLLOW_FUNCTION_OR_PROPERTY_RECOVERY_SET, /*nameRequired = */ true);
@@ -1508,7 +1508,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
         parseTypeConstraintsGuarded(typeParametersDeclared);
 
         if (!parsePropertyDelegateOrAssignment() && isNameOnTheNextLine && noTypeReference && !receiverTypeDeclared) {
-            // Do not parse property identifier on the next line if declaration is invalid
+            // Do not parse property identifier on the next line if declaration is inkonstid
             // In most cases this identifier relates to next statement/declaration
             beforeName.rollbackTo();
             error("Expecting property name or receiver type");
@@ -1519,7 +1519,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
 
         if (mode.accessorsAllowed) {
             // It's only needed for non-local properties, because in local ones:
-            // "val a = 1; b" must not be an infix call of b on "val ...;"
+            // "konst a = 1; b" must not be an infix call of b on "konst ...;"
 
             myBuilder.enableNewlines();
             boolean hasNewLineWithSemicolon = consumeIf(SEMICOLON) && myBuilder.newlineBeforeCurrentToken();
@@ -1582,7 +1582,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
      */
     public void parseMultiDeclarationName(TokenSet follow, TokenSet recoverySet) {
         // Parsing multi-name, e.g.
-        //   val (a, b) = foo()
+        //   konst (a, b) = foo()
         myBuilder.disableNewlines();
         advance(); // LPAR
 
@@ -1591,7 +1591,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
                 if (at(COMMA)) {
                     errorAndAdvance("Expecting a name");
                 }
-                else if (at(RPAR)) { // For declaration similar to `val () = somethingCall()`
+                else if (at(RPAR)) { // For declaration similar to `konst () = somethingCall()`
                     error("Expecting a name");
                     break;
                 }
@@ -1676,7 +1676,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
         advance(); // GET_KEYWORD, SET_KEYWORD or FIELD_KEYWORD
 
         if (!at(LPAR) && propertyComponentKind != PropertyComponentKind.FIELD) {
-            // Account for Jet-114 (val a : int get {...})
+            // Account for Jet-114 (konst a : int get {...})
             if (!atSet(ACCESSOR_FIRST_OR_PROPERTY_END)) {
                 errorUntil("Accessor body expected", TokenSet.orSet(ACCESSOR_FIRST_OR_PROPERTY_END, TokenSet.create(LBRACE, LPAR, EQ)));
             }
@@ -2514,10 +2514,10 @@ public class KotlinParsing extends AbstractKotlinParsing {
 
                 if (isFunctionTypeContents) {
                     if (!tryParseValueParameter(typeRequired)) {
-                        PsiBuilder.Marker valueParameter = mark();
+                        PsiBuilder.Marker konstueParameter = mark();
                         parseFunctionTypeValueParameterModifierList();
                         parseTypeRef();
-                        closeDeclarationWithCommentBinders(valueParameter, VALUE_PARAMETER, false);
+                        closeDeclarationWithCommentBinders(konstueParameter, VALUE_PARAMETER, false);
                     }
                 }
                 else {
@@ -2548,7 +2548,7 @@ public class KotlinParsing extends AbstractKotlinParsing {
 
     /*
      * functionParameter
-     *   : modifiers ("val" | "var")? parameter ("=" element)?
+     *   : modifiers ("konst" | "var")? parameter ("=" element)?
      *   ;
      */
     private boolean tryParseValueParameter(boolean typeRequired) {

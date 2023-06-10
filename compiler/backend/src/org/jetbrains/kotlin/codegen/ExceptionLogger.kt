@@ -17,5 +17,5 @@ object ExceptionLogger {
         throw AssertionError(problemDescription)
     }
 
-    private val LOG = Logger.getInstance(ExceptionLogger::class.java)
+    private konst LOG = Logger.getInstance(ExceptionLogger::class.java)
 }

@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.measureTimeMillisWithResult
 import kotlin.system.measureTimeMillis
 
 internal class IdeMultiplatformImportImpl(
-    private val extension: KotlinProjectExtension
+    private konst extension: KotlinProjectExtension
 ) : IdeMultiplatformImport {
 
     override fun resolveDependencies(sourceSetName: String): Set<IdeaKotlinDependency> {
@@ -43,20 +43,20 @@ internal class IdeMultiplatformImportImpl(
     }
 
     override fun serialize(dependencies: Iterable<IdeaKotlinDependency>): List<ByteArray> {
-        val context = createSerializationContext()
+        konst context = createSerializationContext()
         return dependencies.map { dependency -> dependency.toByteArray(context) }
     }
 
-    override fun <T : Any> serialize(key: Extras.Key<T>, value: T): ByteArray? {
-        val context = createSerializationContext()
-        return context.extrasSerializationExtension.serializer(key)?.serialize(context, value)
+    override fun <T : Any> serialize(key: Extras.Key<T>, konstue: T): ByteArray? {
+        konst context = createSerializationContext()
+        return context.extrasSerializationExtension.serializer(key)?.serialize(context, konstue)
     }
 
-    private val registeredDependencyResolvers = mutableListOf<RegisteredDependencyResolver>()
-    private val registeredAdditionalArtifactResolvers = mutableListOf<RegisteredAdditionalArtifactResolver>()
-    private val registeredDependencyTransformers = mutableListOf<RegisteredDependencyTransformer>()
-    private val registeredDependencyEffects = mutableListOf<RegisteredDependencyEffect>()
-    private val registeredExtrasSerializationExtensions = mutableListOf<IdeaKotlinExtrasSerializationExtension>()
+    private konst registeredDependencyResolvers = mutableListOf<RegisteredDependencyResolver>()
+    private konst registeredAdditionalArtifactResolvers = mutableListOf<RegisteredAdditionalArtifactResolver>()
+    private konst registeredDependencyTransformers = mutableListOf<RegisteredDependencyTransformer>()
+    private konst registeredDependencyEffects = mutableListOf<RegisteredDependencyEffect>()
+    private konst registeredExtrasSerializationExtensions = mutableListOf<IdeaKotlinExtrasSerializationExtension>()
 
     @OptIn(Idea222Api::class)
     override fun registerDependencyResolver(
@@ -70,8 +70,8 @@ internal class IdeMultiplatformImportImpl(
         )
 
         if (resolver is IdeDependencyResolver.WithBuildDependencies) {
-            val project = extension.project
-            val dependencies = project.provider { resolver.dependencies(project) }
+            konst project = extension.project
+            konst dependencies = project.provider { resolver.dependencies(project) }
             extension.project.locateOrRegisterIdeResolveDependenciesTask().configure { it.dependsOn(dependencies) }
             extension.project.prepareKotlinIdeaImportTask.configure { it.dependsOn(dependencies) }
         }
@@ -112,7 +112,7 @@ internal class IdeMultiplatformImportImpl(
 
     private fun createDependencyResolver(): IdeDependencyResolver {
         return IdeDependencyResolver(
-            DependencyResolutionPhase.values().map { phase -> createDependencyResolver(phase) }
+            DependencyResolutionPhase.konstues().map { phase -> createDependencyResolver(phase) }
         )
             .withAdditionalArtifactResolver(createAdditionalArtifactsResolver())
             .withTransformer(createDependencyTransformer())
@@ -120,14 +120,14 @@ internal class IdeMultiplatformImportImpl(
     }
 
     private fun createDependencyResolver(phase: DependencyResolutionPhase) = IdeDependencyResolver resolve@{ sourceSet ->
-        val applicableResolvers = registeredDependencyResolvers
+        konst applicableResolvers = registeredDependencyResolvers
             .filter { it.phase == phase }
             .filter { it.constraint(sourceSet) }
             .groupBy { it.priority }
 
         /* Find resolvers in the highest resolution level and only consider those */
         applicableResolvers.keys.sortedDescending().forEach { priority ->
-            val resolvers = applicableResolvers[priority].orEmpty()
+            konst resolvers = applicableResolvers[priority].orEmpty()
             if (resolvers.isNotEmpty()) {
                 return@resolve IdeDependencyResolver(resolvers).resolve(sourceSet)
             }
@@ -138,17 +138,17 @@ internal class IdeMultiplatformImportImpl(
     }
 
     private fun createAdditionalArtifactsResolver() = IdeAdditionalArtifactResolver(
-        AdditionalArtifactResolutionPhase.values().map { phase -> createAdditionalArtifactsResolver(phase) })
+        AdditionalArtifactResolutionPhase.konstues().map { phase -> createAdditionalArtifactsResolver(phase) })
 
     private fun createAdditionalArtifactsResolver(phase: AdditionalArtifactResolutionPhase) =
         IdeAdditionalArtifactResolver resolve@{ sourceSet, dependencies ->
-            val applicableResolvers = registeredAdditionalArtifactResolvers
+            konst applicableResolvers = registeredAdditionalArtifactResolvers
                 .filter { it.phase == phase }
                 .filter { it.constraint(sourceSet) }
                 .groupBy { it.priority }
 
             applicableResolvers.keys.sortedDescending().forEach { priority ->
-                val resolvers = applicableResolvers[priority].orEmpty()
+                konst resolvers = applicableResolvers[priority].orEmpty()
                 if (resolvers.isNotEmpty()) {
                     resolvers.forEach { resolver -> resolver.resolve(sourceSet, dependencies) }
                     return@resolve
@@ -157,7 +157,7 @@ internal class IdeMultiplatformImportImpl(
         }
 
     private fun createDependencyTransformer(): IdeDependencyTransformer {
-        return IdeDependencyTransformer(DependencyTransformationPhase.values().map { phase ->
+        return IdeDependencyTransformer(DependencyTransformationPhase.konstues().map { phase ->
             createDependencyTransformer(phase)
         })
     }
@@ -187,25 +187,25 @@ internal class IdeMultiplatformImportImpl(
     }
 
     private data class RegisteredDependencyTransformer(
-        val transformer: IdeDependencyTransformer,
-        val constraint: SourceSetConstraint,
-        val phase: DependencyTransformationPhase
+        konst transformer: IdeDependencyTransformer,
+        konst constraint: SourceSetConstraint,
+        konst phase: DependencyTransformationPhase
     )
 
     private data class RegisteredDependencyEffect(
-        val effect: IdeDependencyEffect,
-        val constraint: SourceSetConstraint,
+        konst effect: IdeDependencyEffect,
+        konst constraint: SourceSetConstraint,
     )
 
     private data class RegisteredDependencyResolver(
-        private val statistics: IdeMultiplatformImportStatistics,
-        private val resolver: IdeDependencyResolver,
-        val constraint: SourceSetConstraint,
-        val phase: DependencyResolutionPhase,
-        val priority: Priority,
+        private konst statistics: IdeMultiplatformImportStatistics,
+        private konst resolver: IdeDependencyResolver,
+        konst constraint: SourceSetConstraint,
+        konst phase: DependencyResolutionPhase,
+        konst priority: Priority,
     ) : IdeDependencyResolver {
 
-        private class TimeMeasuredResult(val timeInMillis: Long, val dependencies: Set<IdeaKotlinDependency>)
+        private class TimeMeasuredResult(konst timeInMillis: Long, konst dependencies: Set<IdeaKotlinDependency>)
 
         override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
             return runCatching { resolveTimed(sourceSet) }
@@ -216,7 +216,7 @@ internal class IdeMultiplatformImportImpl(
         }
 
         private fun resolveTimed(sourceSet: KotlinSourceSet): TimeMeasuredResult {
-            val (time, result) = measureTimeMillisWithResult { resolver.resolve(sourceSet) }
+            konst (time, result) = measureTimeMillisWithResult { resolver.resolve(sourceSet) }
             statistics.addExecutionTime(resolver::class.java, time)
             return TimeMeasuredResult(time, result)
         }
@@ -241,11 +241,11 @@ internal class IdeMultiplatformImportImpl(
     }
 
     private class RegisteredAdditionalArtifactResolver(
-        private val statistics: IdeMultiplatformImportStatistics,
-        private val resolver: IdeAdditionalArtifactResolver,
-        val constraint: SourceSetConstraint,
-        val phase: AdditionalArtifactResolutionPhase,
-        val priority: Priority,
+        private konst statistics: IdeMultiplatformImportStatistics,
+        private konst resolver: IdeAdditionalArtifactResolver,
+        konst constraint: SourceSetConstraint,
+        konst phase: AdditionalArtifactResolutionPhase,
+        konst priority: Priority,
     ) : IdeAdditionalArtifactResolver {
         override fun resolve(sourceSet: KotlinSourceSet, dependencies: Set<IdeaKotlinDependency>) {
             runCatching { measureTimeMillis { resolver.resolve(sourceSet, dependencies) } }

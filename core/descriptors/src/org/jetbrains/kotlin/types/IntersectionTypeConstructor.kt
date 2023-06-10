@@ -40,8 +40,8 @@ class IntersectionTypeConstructor(typesToIntersect: Collection<KotlinType>) : Ty
         assert(!typesToIntersect.isEmpty()) { "Attempt to create an empty intersection" }
     }
 
-    private val intersectedTypes = LinkedHashSet(typesToIntersect)
-    private val hashCode = intersectedTypes.hashCode()
+    private konst intersectedTypes = LinkedHashSet(typesToIntersect)
+    private konst hashCode = intersectedTypes.hashCode()
 
     override fun getParameters(): List<TypeParameterDescriptor> = emptyList()
 
@@ -100,7 +100,7 @@ inline fun IntersectionTypeConstructor.transformComponents(
     transform: (KotlinType) -> KotlinType
 ): IntersectionTypeConstructor? {
     var changed = false
-    val newSupertypes = supertypes.map {
+    konst newSupertypes = supertypes.map {
         if (predicate(it)) {
             changed = true
             transform(it)
@@ -111,7 +111,7 @@ inline fun IntersectionTypeConstructor.transformComponents(
 
     if (!changed) return null
 
-    val updatedAlternative = getAlternativeType()?.let { alternative ->
+    konst updatedAlternative = getAlternativeType()?.let { alternative ->
         if (predicate(alternative)) transform(alternative) else alternative
     }
 

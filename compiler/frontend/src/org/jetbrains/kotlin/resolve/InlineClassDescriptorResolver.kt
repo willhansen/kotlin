@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.types.KotlinType
 
 object InlineClassDescriptorResolver {
     @JvmField
-    val BOX_METHOD_NAME = Name.identifier("box")
+    konst BOX_METHOD_NAME = Name.identifier("box")
 
     @JvmField
-    val UNBOX_METHOD_NAME = Name.identifier("unbox")
+    konst UNBOX_METHOD_NAME = Name.identifier("unbox")
 
     @JvmField
-    val SPECIALIZED_EQUALS_NAME = Name.identifier("equals-impl0")
+    konst SPECIALIZED_EQUALS_NAME = Name.identifier("equals-impl0")
 
-    val BOXING_VALUE_PARAMETER_NAME = Name.identifier("v")
+    konst BOXING_VALUE_PARAMETER_NAME = Name.identifier("v")
 
-    val SPECIALIZED_EQUALS_FIRST_PARAMETER_NAME = Name.identifier("p1")
-    val SPECIALIZED_EQUALS_SECOND_PARAMETER_NAME = Name.identifier("p2")
+    konst SPECIALIZED_EQUALS_FIRST_PARAMETER_NAME = Name.identifier("p1")
+    konst SPECIALIZED_EQUALS_SECOND_PARAMETER_NAME = Name.identifier("p2")
 
     @JvmStatic
     fun createBoxFunctionDescriptor(owner: ClassDescriptor): SimpleFunctionDescriptor =
@@ -60,7 +60,7 @@ object InlineClassDescriptorResolver {
         descriptor.kind == CallableMemberDescriptor.Kind.SYNTHESIZED && descriptor.containingDeclaration.isInlineClass()
 
     fun createSpecializedEqualsDescriptor(owner: ClassDescriptor): SimpleFunctionDescriptor {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             owner,
             Annotations.EMPTY,
             SPECIALIZED_EQUALS_NAME,
@@ -83,7 +83,7 @@ object InlineClassDescriptorResolver {
     }
 
     private fun createConversionFunctionDescriptor(isBoxMethod: Boolean, owner: ClassDescriptor): SimpleFunctionDescriptor {
-        val functionDescriptor = SimpleFunctionDescriptorImpl.create(
+        konst functionDescriptor = SimpleFunctionDescriptorImpl.create(
             owner,
             Annotations.EMPTY,
             if (isBoxMethod) BOX_METHOD_NAME else UNBOX_METHOD_NAME,
@@ -91,7 +91,7 @@ object InlineClassDescriptorResolver {
             SourceElement.NO_SOURCE
         )
 
-        val underlyingType = owner.inlineClassRepresentation!!.underlyingType
+        konst underlyingType = owner.inlineClassRepresentation!!.underlyingType
         functionDescriptor.initialize(
             null,
             if (isBoxMethod) null else owner.thisAsReceiverParameter,

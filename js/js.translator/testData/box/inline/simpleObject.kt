@@ -6,11 +6,11 @@
 
 package foo
 
-class InlineString(val res : String) {
+class InlineString(konst res : String) {
 
     inline fun foo(s : () -> String) : String {
-        val f = "fooStart"
-        val z = s()
+        konst f = "fooStart"
+        konst z = s()
         return z
     }
 
@@ -19,13 +19,13 @@ class InlineString(val res : String) {
     }
 
     inline fun fooRes(s : (l: String) -> String) : String {
-        val z =  s(res)
+        konst z =  s(res)
         return z
     }
 
     inline fun fooRes2(s : (l: String, t: String) -> String) : String {
-        val f = "fooRes2Start"
-        val z = s("1", "11")
+        konst f = "fooRes2Start"
+        konst z = s("1", "11")
         return z
     }
 }
@@ -33,51 +33,51 @@ class InlineString(val res : String) {
 // CHECK_BREAKS_COUNT: function=test0Param count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test0Param name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test0Param(): String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo({ -> "1"})
 }
 
 // CHECK_BREAKS_COUNT: function=test1Param count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1Param name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1Param(): String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> z})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamCaptured count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamCaptured name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamCaptured(): String {
-    val s = "100"
-    val inlineX = InlineString("10")
+    konst s = "100"
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> s})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamMissed count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamMissed name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamMissed() : String {
-    val inlineX = InlineString("10")
+    konst inlineX = InlineString("10")
     return inlineX.foo11({ z: String -> "111"})
 }
 
 // CHECK_BREAKS_COUNT: function=test1ParamFromCallContext count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test1ParamFromCallContext name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test1ParamFromCallContext() : String {
-    val inlineX = InlineString("1000")
+    konst inlineX = InlineString("1000")
     return inlineX.fooRes({ z: String -> z})
 }
 
 // CHECK_BREAKS_COUNT: function=test2Params count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test2Params name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test2Params() : String {
-    val inlineX = InlineString("1000")
+    konst inlineX = InlineString("1000")
     return inlineX.fooRes2({ y: String, z: String -> y + "0" + z})
 }
 
 // CHECK_BREAKS_COUNT: function=test2ParamsWithCaptured count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=test2ParamsWithCaptured name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun test2ParamsWithCaptured() : String {
-    val inlineX = InlineString("1000")
-    val s = "9"
+    konst inlineX = InlineString("1000")
+    konst s = "9"
     var t = "1"
     return inlineX.fooRes2({ y: String, z: String -> s + t})
 }

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.fir.declarations.FirTypeParameter
 import org.jetbrains.kotlin.ir.declarations.IrTypeParametersContainer
 
 interface Fir2IrTypeParametersContainer : IrTypeParametersContainer, Fir2IrComponents {
-    val fir: FirMemberDeclaration
+    konst fir: FirMemberDeclaration
 
     fun prepareTypeParameters() {
         typeParameters = fir.typeParameters.mapIndexedNotNull { index, typeParameter ->

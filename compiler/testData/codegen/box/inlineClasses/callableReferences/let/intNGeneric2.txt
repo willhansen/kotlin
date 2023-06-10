@@ -22,7 +22,7 @@ public final class IntNGeneric2Kt {
 @kotlin.Metadata
 public final class Value {
     // source: 'intNGeneric2.kt'
-    private final @org.jetbrains.annotations.Nullable field value: java.lang.Integer
+    private final @org.jetbrains.annotations.Nullable field konstue: java.lang.Integer
     private synthetic method <init>(p0: java.lang.Integer): void
     public synthetic final static method box-impl(p0: java.lang.Integer): Value
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.Nullable p0: java.lang.Integer): java.lang.Integer

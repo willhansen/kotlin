@@ -1,13 +1,13 @@
 // EXPECTED_REACHABLE_NODES: 1373
 object Foo {
-    val value = "O"
+    konst konstue = "O"
 }
-class Bar(val anotherValue: String)
+class Bar(konst anotherValue: String)
 
-val Foo.prop: String
-    get() = value
+konst Foo.prop: String
+    get() = konstue
 
-val Bar.prop: String
+konst Bar.prop: String
     get() = anotherValue
 
 fun box() = Foo.prop + Bar("K").prop

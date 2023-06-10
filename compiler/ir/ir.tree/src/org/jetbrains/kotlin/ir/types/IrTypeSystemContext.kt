@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.ir.types.isPrimitiveType as irTypePredicates_isPrimi
 
 interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesContext, TypeSystemCommonBackendContext {
 
-    val irBuiltIns: IrBuiltIns
+    konst irBuiltIns: IrBuiltIns
 
     override fun KotlinTypeMarker.asSimpleType() = this as? SimpleTypeMarker
 
@@ -82,7 +82,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
     override fun KotlinTypeMarker.isMarkedNullable(): Boolean = this is IrSimpleType && this.irIsMarkedNullable()
 
     override fun SimpleTypeMarker.withNullability(nullable: Boolean): SimpleTypeMarker {
-        val simpleType = this as IrSimpleType
+        konst simpleType = this as IrSimpleType
         return (if (nullable) simpleType.irMakeNullable() else simpleType.irMakeNotNull()) as IrSimpleType
     }
 
@@ -194,7 +194,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         if (this.typeConstructor() == constructor) return true
 
         for (i in 0 until this.argumentsCount()) {
-            val typeArgument = this.getArgument(i).takeIf { !it.isStarProjection() } ?: continue
+            konst typeArgument = this.getArgument(i).takeIf { !it.isStarProjection() } ?: continue
             if (typeArgument.getType().containsTypeConstructor(constructor)) return true
         }
 
@@ -203,7 +203,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
 
     override fun TypeParameterMarker.hasRecursiveBounds(selfConstructor: TypeConstructorMarker?): Boolean {
         for (i in 0 until this.upperBoundCount()) {
-            val upperBound = this.getUpperBound(i)
+            konst upperBound = this.getUpperBound(i)
             if (upperBound.containsTypeConstructor(this.getTypeConstructor()) && (selfConstructor == null || upperBound.typeConstructor() == selfConstructor)) {
                 return true
             }
@@ -220,7 +220,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
     override fun TypeConstructorMarker.isDenotable() = this !is IrCapturedType.Constructor
 
     override fun TypeConstructorMarker.isCommonFinalClassConstructor(): Boolean {
-        val classSymbol = this as? IrClassSymbol ?: return false
+        konst classSymbol = this as? IrClassSymbol ?: return false
         return classSymbol.owner.run { modality == Modality.FINAL && kind != ClassKind.ENUM_CLASS && kind != ClassKind.ANNOTATION_CLASS }
     }
 
@@ -241,27 +241,27 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
 
         if (type is IrCapturedType) return null
 
-        val classifier = type.classifier as? IrClassSymbol ?: return null
-        val typeArguments = type.arguments
+        konst classifier = type.classifier as? IrClassSymbol ?: return null
+        konst typeArguments = type.arguments
 
         if (!classifier.isBound) return null
 
-        val typeParameters = extractTypeParameters(classifier.owner)
+        konst typeParameters = extractTypeParameters(classifier.owner)
 
         require(typeArguments.size == typeParameters.size)
 
         if (typeArguments.all { it is IrTypeProjection && it.variance == Variance.INVARIANT }) return type
 
-        val capturedTypes = ArrayList<IrCapturedType?>(typeArguments.size)
+        konst capturedTypes = ArrayList<IrCapturedType?>(typeArguments.size)
 
         for (index in typeArguments.indices) {
-            val parameter = typeParameters[index]
-            val argument = typeArguments[index]
+            konst parameter = typeParameters[index]
+            konst argument = typeArguments[index]
 
             if (argument is IrTypeProjection && argument.variance == Variance.INVARIANT) {
                 capturedTypes.add(null)
             } else {
-                val lowerType = if (argument is IrTypeProjection && argument.variance == Variance.IN_VARIANCE) {
+                konst lowerType = if (argument is IrTypeProjection && argument.variance == Variance.IN_VARIANCE) {
                     argument.type
                 } else null
 
@@ -269,20 +269,20 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
             }
         }
 
-        val newArguments = ArrayList<IrTypeArgument>(typeArguments.size)
+        konst newArguments = ArrayList<IrTypeArgument>(typeArguments.size)
 
-        val typeSubstitutor = IrCapturedTypeSubstitutor(typeParameters.memoryOptimizedMap { it.symbol }, typeArguments, capturedTypes, irBuiltIns)
+        konst typeSubstitutor = IrCapturedTypeSubstitutor(typeParameters.memoryOptimizedMap { it.symbol }, typeArguments, capturedTypes, irBuiltIns)
 
         for (index in typeArguments.indices) {
-            val oldArgument = typeArguments[index]
-            val parameter = typeParameters[index]
-            val capturedType = capturedTypes[index]
+            konst oldArgument = typeArguments[index]
+            konst parameter = typeParameters[index]
+            konst capturedType = capturedTypes[index]
 
             if (capturedType == null) {
                 assert(oldArgument is IrTypeProjection && oldArgument.variance == Variance.INVARIANT)
                 newArguments.add(oldArgument)
             } else {
-                val capturedSuperTypes = mutableListOf<IrType>()
+                konst capturedSuperTypes = mutableListOf<IrType>()
                 parameter.superTypes.mapTo(capturedSuperTypes) {
                     typeSubstitutor.substitute(it)
                 }
@@ -328,7 +328,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         return this.owner.classId?.shortClassName == SpecialNames.ANONYMOUS
     }
 
-    override val TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
+    override konst TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
         get() = error("Type variables is unsupported in IR")
 
     override fun createFlexibleType(lowerBound: SimpleTypeMarker, upperBound: SimpleTypeMarker): KotlinTypeMarker {
@@ -344,7 +344,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         isExtensionFunction: Boolean,
         attributes: List<AnnotationMarker>?
     ): SimpleTypeMarker {
-        val ourAnnotations = attributes?.memoryOptimizedFilterIsInstance<IrConstructorCall>()
+        konst ourAnnotations = attributes?.memoryOptimizedFilterIsInstance<IrConstructorCall>()
         require(ourAnnotations?.size == attributes?.size)
         return IrSimpleTypeImpl(
             constructor as IrClassifierSymbol,
@@ -375,7 +375,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
     }
 
     override fun SimpleTypeMarker.typeDepth(): Int {
-        val maxInArguments = (this as IrSimpleType).arguments.maxOfOrNull {
+        konst maxInArguments = (this as IrSimpleType).arguments.maxOfOrNull {
             if (it is IrStarProjection) 1 else it.getType().typeDepth()
         } ?: 0
 
@@ -447,7 +447,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         (this as IrType).isArray() || isNullableArray()
 
     override fun TypeConstructorMarker.isFinalClassOrEnumEntryOrAnnotationClassConstructor(): Boolean {
-        val symbol = this as IrClassifierSymbol
+        konst symbol = this as IrClassifierSymbol
         return symbol is IrClassSymbol && symbol.owner.let {
             it.modality == Modality.FINAL && !it.isEnumClass
         }
@@ -460,7 +460,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         (this as? IrType)?.annotations?.firstOrNull { annotation ->
             annotation.symbol.owner.parentAsClass.hasEqualFqName(fqName)
         }?.run {
-            if (valueArgumentsCount > 0) (getValueArgument(0) as? IrConst<*>)?.value else null
+            if (konstueArgumentsCount > 0) (getValueArgument(0) as? IrConst<*>)?.konstue else null
         }
 
     override fun TypeConstructorMarker.getTypeParameterClassifier(): TypeParameterMarker? =
@@ -473,14 +473,14 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         (this as? IrClassSymbol)?.owner?.isMultiFieldValueClass == true
 
     override fun TypeConstructorMarker.getValueClassProperties(): List<Pair<Name, SimpleTypeMarker>>? =
-        (this as? IrClassSymbol)?.owner?.valueClassRepresentation?.underlyingPropertyNamesToTypes
+        (this as? IrClassSymbol)?.owner?.konstueClassRepresentation?.underlyingPropertyNamesToTypes
 
     override fun TypeConstructorMarker.isInnerClass(): Boolean =
         (this as? IrClassSymbol)?.owner?.isInner == true
 
     override fun TypeParameterMarker.getRepresentativeUpperBound(): KotlinTypeMarker =
         (this as IrTypeParameterSymbol).owner.superTypes.firstOrNull {
-            val irClass = it.classOrNull?.owner ?: return@firstOrNull false
+            konst irClass = it.classOrNull?.owner ?: return@firstOrNull false
             irClass.kind != ClassKind.INTERFACE && irClass.kind != ClassKind.ANNOTATION_CLASS
         } ?: owner.superTypes.first()
 
@@ -506,13 +506,13 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
     private fun TypeConstructorMarker.getNameForClassUnderKotlinPackage(): String? {
         if (this !is IrClassSymbol) return null
 
-        val signature = signature?.asPublic()
+        konst signature = signature?.asPublic()
         return if (signature != null) {
             if (signature.packageFqName == StandardNames.BUILT_INS_PACKAGE_NAME.asString())
                 signature.declarationFqName
             else null
         } else {
-            val parent = owner.parent
+            konst parent = owner.parent
             if (parent is IrPackageFragment && parent.packageFqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME)
                 owner.name.asString()
             else null
@@ -522,7 +522,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
     override fun TypeConstructorMarker.isUnderKotlinPackage(): Boolean {
         var declaration: IrDeclaration = (this as? IrClassifierSymbol)?.owner as? IrClass ?: return false
         while (true) {
-            val parent = declaration.parent
+            konst parent = declaration.parent
             if (parent is IrPackageFragment) {
                 return parent.packageFqName.startsWith(StandardNames.BUILT_INS_PACKAGE_NAME)
             }
@@ -540,7 +540,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
         (this as IrTypeParameterSymbol).owner.isReified
 
     override fun KotlinTypeMarker.isInterfaceOrAnnotationClass(): Boolean {
-        val irClass = (this as IrType).classOrNull?.owner
+        konst irClass = (this as IrType).classOrNull?.owner
         return irClass != null && (irClass.isInterface || irClass.isAnnotationClass)
     }
 
@@ -575,8 +575,8 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
 
     override fun substitutionSupertypePolicy(type: SimpleTypeMarker): TypeCheckerState.SupertypesPolicy {
         require(type is IrSimpleType)
-        val parameters = extractTypeParameters((type.classifier as IrClassSymbol).owner).memoryOptimizedMap { it.symbol }
-        val typeSubstitutor = IrTypeSubstitutor(parameters, type.arguments, irBuiltIns)
+        konst parameters = extractTypeParameters((type.classifier as IrClassSymbol).owner).memoryOptimizedMap { it.symbol }
+        konst typeSubstitutor = IrTypeSubstitutor(parameters, type.arguments, irBuiltIns)
 
         return object : TypeCheckerState.SupertypesPolicy.DoCustomTransform() {
             override fun transformType(state: TypeCheckerState, type: KotlinTypeMarker): SimpleTypeMarker {
@@ -592,7 +592,7 @@ interface IrTypeSystemContext : TypeSystemContext, TypeSystemCommonSuperTypesCon
 }
 
 fun extractTypeParameters(parent: IrDeclarationParent): List<IrTypeParameter> {
-    val result = mutableListOf<IrTypeParameter>()
+    konst result = mutableListOf<IrTypeParameter>()
     var current: IrDeclarationParent? = parent
     while (current != null) {
         (current as? IrTypeParametersContainer)?.let { result += it.typeParameters }
@@ -617,4 +617,4 @@ fun extractTypeParameters(parent: IrDeclarationParent): List<IrTypeParameter> {
 }
 
 
-class IrTypeSystemContextImpl(override val irBuiltIns: IrBuiltIns) : IrTypeSystemContext
+class IrTypeSystemContextImpl(override konst irBuiltIns: IrBuiltIns) : IrTypeSystemContext

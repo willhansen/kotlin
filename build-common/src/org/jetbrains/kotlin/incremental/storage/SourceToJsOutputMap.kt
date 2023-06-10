@@ -13,11 +13,11 @@ class SourceToJsOutputMap(
     storageFile: File,
     icContext: IncrementalCompilationContext,
 ) : AppendableBasicStringMap<Collection<String>>(storageFile, StringCollectionExternalizer, icContext) {
-    override fun dumpValue(value: Collection<String>): String = value.dumpCollection()
+    override fun dumpValue(konstue: Collection<String>): String = konstue.dumpCollection()
 
     @Synchronized
-    fun add(key: File, value: File) {
-        storage.append(pathConverter.toPath(key), listOf(pathConverter.toPath(value)))
+    fun add(key: File, konstue: File) {
+        storage.append(pathConverter.toPath(key), listOf(pathConverter.toPath(konstue)))
     }
 
     operator fun get(sourceFile: File): Collection<File> =
@@ -25,13 +25,13 @@ class SourceToJsOutputMap(
 
 
     @Synchronized
-    operator fun set(key: File, values: Collection<File>) {
-        if (values.isEmpty()) {
+    operator fun set(key: File, konstues: Collection<File>) {
+        if (konstues.isEmpty()) {
             remove(key)
             return
         }
 
-        storage[pathConverter.toPath(key)] = values.map { pathConverter.toPath(it) }
+        storage[pathConverter.toPath(key)] = konstues.map { pathConverter.toPath(it) }
     }
 
     @Synchronized
@@ -41,7 +41,7 @@ class SourceToJsOutputMap(
 
     @Synchronized
     fun removeValues(key: File, removed: Set<File>) {
-        val notRemoved = this[key].filter { it !in removed }
+        konst notRemoved = this[key].filter { it !in removed }
         this[key] = notRemoved
     }
 }

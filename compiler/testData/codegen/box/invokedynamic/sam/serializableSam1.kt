@@ -14,10 +14,10 @@ import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
 fun roundtrip(r: Ok): String {
-    val output = ByteArrayOutputStream()
+    konst output = ByteArrayOutputStream()
     ObjectOutputStream(output).writeObject(r)
-    val input = ByteArrayInputStream(output.toByteArray())
-    val rr = ObjectInputStream(input).readObject() as Ok
+    konst input = ByteArrayInputStream(output.toByteArray())
+    konst rr = ObjectInputStream(input).readObject() as Ok
     return rr.ok()
 }
 

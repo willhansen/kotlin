@@ -13,8 +13,8 @@ class A<T> {
 }
 
 fun box(): String {
-    val typeParameterType = A<*>::typeParameterType.returnType
-    val classType = A<*>::nestedClassType.returnType
+    konst typeParameterType = A<*>::typeParameterType.returnType
+    konst classType = A<*>::nestedClassType.returnType
 
     if (typeParameterType == classType)
         return "Fail 1: type parameter's type constructor shouldn't be equal to the class with the same FQ name"

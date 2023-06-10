@@ -8,26 +8,26 @@ package org.jetbrains.kotlin.gradle.internal.build.metrics
 import java.io.Serializable
 
 class GradleBuildMetricsData : Serializable {
-    val parentMetric: MutableMap<String, String?> = LinkedHashMap()
-    val buildAttributeKind: MutableMap<String, String> = LinkedHashMap()
-    val buildOperationData: MutableMap<String, BuildOperationData> = LinkedHashMap()
+    konst parentMetric: MutableMap<String, String?> = LinkedHashMap()
+    konst buildAttributeKind: MutableMap<String, String> = LinkedHashMap()
+    konst buildOperationData: MutableMap<String, BuildOperationData> = LinkedHashMap()
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 /** Data for a build operation (e.g., task or transform). */
 data class BuildOperationData(
-    val path: String,
-    val typeFqName: String,
-    val buildTimesMs: Map<String, Long>,
-    val performanceMetrics: Map<String, Long>,
-    val buildAttributes: Map<String, Int>,
-    val didWork: Boolean
+    konst path: String,
+    konst typeFqName: String,
+    konst buildTimesMs: Map<String, Long>,
+    konst performanceMetrics: Map<String, Long>,
+    konst buildAttributes: Map<String, Int>,
+    konst didWork: Boolean
 ) : Serializable {
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

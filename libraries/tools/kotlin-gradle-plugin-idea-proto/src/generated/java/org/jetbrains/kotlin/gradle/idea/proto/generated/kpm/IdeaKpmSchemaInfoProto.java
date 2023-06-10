@@ -82,27 +82,27 @@ private static final long serialVersionUID = 0L;
     public final int getNumber() {
       if (this == UNRECOGNIZED) {
         throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
+            "Can't get the number of an unknown enum konstue.");
       }
-      return value;
+      return konstue;
     }
 
     /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
+     * @param konstue The numeric wire konstue of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire konstue.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
-    public static Severity valueOf(int value) {
-      return forNumber(value);
+    public static Severity konstueOf(int konstue) {
+      return forNumber(konstue);
     }
 
     /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
+     * @param konstue The numeric wire konstue of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire konstue.
      */
-    public static Severity forNumber(int value) {
-      switch (value) {
+    public static Severity forNumber(int konstue) {
+      switch (konstue) {
         case 0: return INFO;
         case 1: return WARNING;
         case 2: return ERROR;
@@ -126,7 +126,7 @@ private static final long serialVersionUID = 0L;
         getValueDescriptor() {
       if (this == UNRECOGNIZED) {
         throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
+            "Can't get the descriptor of an unrecognized enum konstue.");
       }
       return getDescriptor().getValues().get(ordinal());
     }
@@ -139,9 +139,9 @@ private static final long serialVersionUID = 0L;
       return org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.getDescriptor().getEnumTypes().get(0);
     }
 
-    private static final Severity[] VALUES = values();
+    private static final Severity[] VALUES = konstues();
 
-    public static Severity valueOf(
+    public static Severity konstueOf(
         com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -153,10 +153,10 @@ private static final long serialVersionUID = 0L;
       return VALUES[desc.getIndex()];
     }
 
-    private final int value;
+    private final int konstue;
 
-    private Severity(int value) {
-      this.value = value;
+    private Severity(int konstue) {
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity)
@@ -231,7 +231,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
-   * @return The enum numeric value on the wire for severity.
+   * @return The enum numeric konstue on the wire for severity.
    */
   @java.lang.Override public int getSeverityValue() {
     return severity_;
@@ -242,7 +242,7 @@ private static final long serialVersionUID = 0L;
    */
   @java.lang.Override public org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity getSeverity() {
     @SuppressWarnings("deprecation")
-    org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity result = org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.valueOf(severity_);
+    org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity result = org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.konstueOf(severity_);
     return result == null ? org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.UNRECOGNIZED : result;
   }
 
@@ -426,34 +426,34 @@ private static final long serialVersionUID = 0L;
 
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(
       java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(
       com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto parseFrom(java.io.InputStream input)
@@ -617,8 +617,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.setField(field, value);
+        java.lang.Object konstue) {
+      return super.setField(field, konstue);
     }
     @java.lang.Override
     public Builder clearField(
@@ -633,14 +633,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        int index, java.lang.Object konstue) {
+      return super.setRepeatedField(field, index, konstue);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        java.lang.Object konstue) {
+      return super.addRepeatedField(field, konstue);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -730,7 +730,7 @@ private static final long serialVersionUID = 0L;
             } // default:
           } // switch (tag)
         } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.unwrapIOException();
       } finally {
         onChanged();
@@ -758,12 +758,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional uint32 since_schema_version_major = 1;</code>
-     * @param value The sinceSchemaVersionMajor to set.
+     * @param konstue The sinceSchemaVersionMajor to set.
      * @return This builder for chaining.
      */
-    public Builder setSinceSchemaVersionMajor(int value) {
+    public Builder setSinceSchemaVersionMajor(int konstue) {
       bitField0_ |= 0x00000001;
-      sinceSchemaVersionMajor_ = value;
+      sinceSchemaVersionMajor_ = konstue;
       onChanged();
       return this;
     }
@@ -797,12 +797,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional uint32 since_schema_version_minor = 2;</code>
-     * @param value The sinceSchemaVersionMinor to set.
+     * @param konstue The sinceSchemaVersionMinor to set.
      * @return This builder for chaining.
      */
-    public Builder setSinceSchemaVersionMinor(int value) {
+    public Builder setSinceSchemaVersionMinor(int konstue) {
       bitField0_ |= 0x00000002;
-      sinceSchemaVersionMinor_ = value;
+      sinceSchemaVersionMinor_ = konstue;
       onChanged();
       return this;
     }
@@ -836,12 +836,12 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional uint32 since_schema_version_patch = 3;</code>
-     * @param value The sinceSchemaVersionPatch to set.
+     * @param konstue The sinceSchemaVersionPatch to set.
      * @return This builder for chaining.
      */
-    public Builder setSinceSchemaVersionPatch(int value) {
+    public Builder setSinceSchemaVersionPatch(int konstue) {
       bitField0_ |= 0x00000004;
-      sinceSchemaVersionPatch_ = value;
+      sinceSchemaVersionPatch_ = konstue;
       onChanged();
       return this;
     }
@@ -866,19 +866,19 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
-     * @return The enum numeric value on the wire for severity.
+     * @return The enum numeric konstue on the wire for severity.
      */
     @java.lang.Override public int getSeverityValue() {
       return severity_;
     }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
-     * @param value The enum numeric value on the wire for severity to set.
+     * @param konstue The enum numeric konstue on the wire for severity to set.
      * @return This builder for chaining.
      */
-    public Builder setSeverityValue(int value) {
+    public Builder setSeverityValue(int konstue) {
       bitField0_ |= 0x00000008;
-      severity_ = value;
+      severity_ = konstue;
       onChanged();
       return this;
     }
@@ -889,20 +889,20 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity getSeverity() {
       @SuppressWarnings("deprecation")
-      org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity result = org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.valueOf(severity_);
+      org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity result = org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.konstueOf(severity_);
       return result == null ? org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity.UNRECOGNIZED : result;
     }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
-     * @param value The severity to set.
+     * @param konstue The severity to set.
      * @return This builder for chaining.
      */
-    public Builder setSeverity(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity value) {
-      if (value == null) {
+    public Builder setSeverity(org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       bitField0_ |= 0x00000008;
-      severity_ = value.getNumber();
+      severity_ = konstue.getNumber();
       onChanged();
       return this;
     }
@@ -960,16 +960,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string message = 5;</code>
-     * @param value The message to set.
+     * @param konstue The message to set.
      * @return This builder for chaining.
      */
     public Builder setMessage(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000010;
-      message_ = value;
+      message_ = konstue;
       onChanged();
       return this;
     }
@@ -985,17 +985,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string message = 5;</code>
-     * @param value The bytes for message to set.
+     * @param konstue The bytes for message to set.
      * @return This builder for chaining.
      */
     public Builder setMessageBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000010;
-      message_ = value;
+      message_ = konstue;
       onChanged();
       return this;
     }
@@ -1031,16 +1031,16 @@ private static final long serialVersionUID = 0L;
     public IdeaKpmSchemaInfoProto parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf.InkonstidProtocolBufferException {
       Builder builder = newBuilder();
       try {
         builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
       } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        throw e.asInkonstidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+        throw new com.google.protobuf.InkonstidProtocolBufferException(e)
             .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();

@@ -7,7 +7,7 @@ class B<T>(t: T)
 typealias BB<U> = B<U>
 
 fun main() {
-    val x = AA(1)
-    val y = BB<String>("bb")
+    konst x = AA(1)
+    konst y = BB<String>("bb")
 }
 

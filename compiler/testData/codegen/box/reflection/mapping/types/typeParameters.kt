@@ -12,14 +12,14 @@ class A<T : CharSequence> {
 }
 
 fun box(): String {
-    val f = A<String>::foo
-    val t = f.parameters.last().type.javaType
+    konst f = A<String>::foo
+    konst t = f.parameters.last().type.javaType
     if (t !is TypeVariable<*>) return "Fail, t should be a type variable: $t"
 
     assertEquals("T", t.name)
     assertEquals(A::class.java, (t.genericDeclaration as Class<*>))
 
-    val tp = A::class.typeParameters
+    konst tp = A::class.typeParameters
     assertEquals(CharSequence::class.java, tp.single().upperBounds.single().javaType)
 
     return "OK"

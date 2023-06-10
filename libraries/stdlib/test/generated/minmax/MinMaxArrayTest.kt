@@ -39,7 +39,7 @@ class MinMaxArrayTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = arrayOf<Int>()
+        konst empty = arrayOf<Int>()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -49,8 +49,8 @@ class MinMaxArrayTest {
 
     @Test
     fun minMaxDouble() {
-        val zeroes = arrayOf(0.0, -0.0).apply { shuffle() }
-        val NaNs = arrayOf(0.0, Double.NaN).apply { shuffle() }
+        konst zeroes = arrayOf(0.0, -0.0).apply { shuffle() }
+        konst NaNs = arrayOf(0.0, Double.NaN).apply { shuffle() }
 
         assertIsNegativeZero(zeroes.min().toDouble())
         assertIsNegativeZero(zeroes.minOrNull()!!.toDouble())
@@ -67,8 +67,8 @@ class MinMaxArrayTest {
 
     @Test
     fun minMaxFloat() {
-        val zeroes = arrayOf(0.0F, -0.0F).apply { shuffle() }
-        val NaNs = arrayOf(0.0F, Float.NaN).apply { shuffle() }
+        konst zeroes = arrayOf(0.0F, -0.0F).apply { shuffle() }
+        konst NaNs = arrayOf(0.0F, Float.NaN).apply { shuffle() }
 
         assertIsNegativeZero(zeroes.min().toDouble())
         assertIsNegativeZero(zeroes.minOrNull()!!.toDouble())
@@ -102,7 +102,7 @@ class MinMaxArrayTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = arrayOf<Int>()
+        konst empty = arrayOf<Int>()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -128,7 +128,7 @@ class MinMaxArrayTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = arrayOf<Int>()
+        konst empty = arrayOf<Int>()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -136,8 +136,8 @@ class MinMaxArrayTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = arrayOf("a", "bcd", "e")
+    fun minBySelectorEkonstuateOnce() {
+        konst source = arrayOf("a", "bcd", "e")
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -147,8 +147,8 @@ class MinMaxArrayTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = arrayOf("a", "bcd", "e")
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = arrayOf("a", "bcd", "e")
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -175,8 +175,8 @@ class MinMaxArrayTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = "bcd"
-        val items = arrayOf("a", "bcd", "e").apply { shuffle() }
+        konst middle = "bcd"
+        konst items = arrayOf("a", "bcd", "e").apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -190,8 +190,8 @@ class MinMaxArrayTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = "bcd"
-        val items = arrayOf("a", "bcd", "e").apply { shuffle() }
+        konst middle = "bcd"
+        konst items = arrayOf("a", "bcd", "e").apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -205,7 +205,7 @@ class MinMaxArrayTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = arrayOf<Int>()
+        konst empty = arrayOf<Int>()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -245,7 +245,7 @@ class MinMaxArrayTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = arrayOf<Int>()
+        konst empty = arrayOf<Int>()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

@@ -25,7 +25,7 @@ fun compute(): String {
 // FILE: 2.kt
 
 fun box(): String {
-    val result = compute()
+    konst result = compute()
     if (result == "FAIL") return result
     return x ?: "FAIL"
 }

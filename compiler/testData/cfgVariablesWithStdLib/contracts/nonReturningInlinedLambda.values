@@ -33,7 +33,7 @@ false   <v0>: Boolean   NEW: r(false) -> <v0>
 =====================
 == withLabeledReturn ==
 fun withLabeledReturn(y: Int) {
-    val x = myRun outer@ {
+    konst x = myRun outer@ {
         myRun { return@outer Unit }
         println(y)
     }
@@ -50,7 +50,7 @@ y                                                                               
 println(y)                                                                                  <v4>: *                 NEW: call(println(y), println|<v3>) -> <v4>
 x                                                                                           <v5>: *                 NEW: r(x) -> <v5>
 println(x)                                                                                  <v6>: *                 NEW: call(println(x), println|<v5>) -> <v6>
-{ val x = myRun outer@ { myRun { return@outer Unit } println(y) } println(y) println(x) }   <v6>: *                 COPY
+{ konst x = myRun outer@ { myRun { return@outer Unit } println(y) } println(y) println(x) }   <v6>: *                 COPY
 =====================
 == inlined anonymous_1 ==
 {

@@ -47,10 +47,10 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
                         .filter { it.isNativeDistribution }
                         .filter { it.binaryType == IdeaKotlinBinaryDependency.KOTLIN_COMPILE_BINARY_TYPE }
 
-                val nativeMainDependencies = dependencies["nativeMain"].filterNativePlatformDependencies()
-                val nativeTestDependencies = dependencies["nativeTest"].filterNativePlatformDependencies()
-                val linuxMainDependencies = dependencies["linuxMain"].filterNativePlatformDependencies()
-                val linuxTestDependencies = dependencies["linuxTest"].filterNativePlatformDependencies()
+                konst nativeMainDependencies = dependencies["nativeMain"].filterNativePlatformDependencies()
+                konst nativeTestDependencies = dependencies["nativeTest"].filterNativePlatformDependencies()
+                konst linuxMainDependencies = dependencies["linuxMain"].filterNativePlatformDependencies()
+                konst linuxTestDependencies = dependencies["linuxTest"].filterNativePlatformDependencies()
 
                 /* Check test and main receive the same dependencies */
                 run {
@@ -64,7 +64,7 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
                         if (!dependency.isCommonized) fail("$dependency is not marked as 'isCommonized'")
                     }
 
-                    val nativeMainTarget = CommonizerTarget(
+                    konst nativeMainTarget = CommonizerTarget(
                         LINUX_X64, LINUX_ARM64, MACOS_X64, MACOS_ARM64, IOS_X64, IOS_ARM64, IOS_SIMULATOR_ARM64, MINGW_X64, MINGW_X86
                     )
 
@@ -72,7 +72,7 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
                         assertEquals(nativeMainTarget.identityString, dependency.klibExtra?.commonizerTarget)
                     }
 
-                    val linuxMainTarget = CommonizerTarget(LINUX_X64, LINUX_ARM64)
+                    konst linuxMainTarget = CommonizerTarget(LINUX_X64, LINUX_ARM64)
                     linuxMainDependencies.forEach { dependency ->
                         assertEquals(linuxMainTarget.identityString, dependency.klibExtra?.commonizerTarget)
                     }
@@ -119,10 +119,10 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
                 // CInterops are currently imported as extra roots of a platform publication, not as separate libraries
                 // This is a bit inconsistent with other CInterop dependencies, but correctly represents the published artifacts
                 fun assertDependencyOnPublishedProjectCInterop(sourceSetName: String) {
-                    val publishedProjectDependencies = dependencies[sourceSetName].filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
+                    konst publishedProjectDependencies = dependencies[sourceSetName].filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
                         .filter { it.coordinates?.module?.contains("dep-with-cinterop") == true }
 
-                    val fileNames = publishedProjectDependencies
+                    konst fileNames = publishedProjectDependencies
                         .flatMap { dependency -> dependency.classpath }
                         .map { file -> file.name }
                         .toSet()
@@ -197,7 +197,7 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
             resolveIdeDependencies("dep-with-cinterop") { dependencies ->
 
                 /* Check behaviour of platform cinterops on linuxX64Main */
-                val cinterops = dependencies["linuxX64Main"].filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
+                konst cinterops = dependencies["linuxX64Main"].filterIsInstance<IdeaKotlinResolvedBinaryDependency>()
                     .filter { !it.isNativeDistribution && it.klibExtra?.isInterop == true }
                     .ifEmpty { fail("Expected at least one cinterop on linuxX64Main") }
 
@@ -205,14 +205,14 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
                     if (cinterop.classpath.isEmpty()) fail("Missing classpath for $cinterop")
                     cinterop.classpath.forEach { cinteropFile ->
                         /* Check file was copied into root .gradle folder */
-                        val expectedParent = projectPath.toFile().resolve(".gradle/kotlin/kotlinCInteropLibraries").canonicalFile
+                        konst expectedParent = projectPath.toFile().resolve(".gradle/kotlin/kotlinCInteropLibraries").canonicalFile
                         assertEquals(expectedParent, cinteropFile.parentFile.canonicalFile)
 
                         /* Check crc in file name */
-                        val crc = CRC32()
+                        konst crc = CRC32()
                         crc.update(cinteropFile.readBytes())
-                        val crcValue = crc.value.toInt()
-                        val crcString = Base64.getUrlEncoder().withoutPadding().encodeToString(
+                        konst crcValue = crc.konstue.toInt()
+                        konst crcString = Base64.getUrlEncoder().withoutPadding().encodeToString(
                             ByteBuffer.allocate(4).putInt(crcValue).array()
                         )
 
@@ -263,7 +263,7 @@ class MppIdeDependencyResolutionIT : KGPBaseTest() {
 
     @GradleTest
     fun `test dependency on composite build with commonized cinterops`(gradleVersion: GradleVersion, @TempDir tempDir: Path) {
-        val includedLib = project("composite-build-with-cinterop-commonization/includedLib", gradleVersion, localRepoDir = tempDir)
+        konst includedLib = project("composite-build-with-cinterop-commonization/includedLib", gradleVersion, localRepoDir = tempDir)
         project("composite-build-with-cinterop-commonization", gradleVersion, localRepoDir = tempDir) {
             settingsGradleKts.replaceText("<includedLib_path>", includedLib.projectPath.toUri().toString())
             // Quick fix for: KT-58815

@@ -2,7 +2,7 @@
 // FILE: removeOverriddenInJava.kt
 
 open class A : Collection<String> {
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: String): Boolean = TODO()
     override fun containsAll(elements: Collection<String>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()

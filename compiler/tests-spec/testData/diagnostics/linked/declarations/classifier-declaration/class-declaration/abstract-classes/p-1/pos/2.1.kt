@@ -16,7 +16,7 @@
 abstract class Base() {
     abstract fun foo()
 
-    abstract val a: String
+    abstract konst a: String
 }
 
 class Impl : Base() {
@@ -24,13 +24,13 @@ class Impl : Base() {
         TODO("not implemented")
     }
 
-    override val a: String
+    override konst a: String
         get() = TODO("not implemented")
 
 }
 
 fun case1() {
-    val impl = Impl()
+    konst impl = Impl()
 }
 
 // TESTCASE NUMBER: 2
@@ -40,7 +40,7 @@ abstract class Case2() : BaseCase2() {
 }
 
 abstract class BaseCase2() {
-    abstract val a: String
+    abstract konst a: String
     protected abstract fun foo()
 }
 
@@ -48,7 +48,7 @@ abstract class BaseCase2() {
 
 interface MyInterfaceCase3 {
     abstract fun foo(): String
-    abstract val a: String
+    abstract konst a: String
 }
 
 abstract class MyImplCase3() : MyInterfaceCase3 {

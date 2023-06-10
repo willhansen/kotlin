@@ -28,18 +28,18 @@ import java.util.*
 
 
 interface ESReceiver : ESValue {
-    val receiverValue: ReceiverValue
+    konst receiverValue: ReceiverValue
 
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitReceiver(this)
 }
 
 
-abstract class AbstractESValue(override val type: ESType?) : ESValue {
-    override val effects: List<ESEffect> = listOf()
+abstract class AbstractESValue(override konst type: ESType?) : ESValue {
+    override konst effects: List<ESEffect> = listOf()
 }
 
 
-open class ESReceiverValue(override val receiverValue: ReceiverValue) : AbstractESValue(null), ESReceiver
+open class ESReceiverValue(override konst receiverValue: ReceiverValue) : AbstractESValue(null), ESReceiver
 
 
 /**
@@ -49,13 +49,13 @@ open class ESReceiverValue(override val receiverValue: ReceiverValue) : Abstract
  *   of function). @see [org.jetbrains.kotlin.contracts.interpretation.ContractInterpretationDispatcher.interpretVariable].
  * 2. [ESVariable] is wrapper around argument passed to function in process of substitution.
  *   @see [org.jetbrains.kotlin.contracts.EffectsExtractingVisitor.visitKtElement].
- * 3. [ESVariable] is a key in [Substitutor], that maps values from function signature to
- *   real values from call-site. That keys are equal to variables from point 1.
+ * 3. [ESVariable] is a key in [Substitutor], that maps konstues from function signature to
+ *   real konstues from call-site. That keys are equal to variables from point 1.
  *   @see [org.jetbrains.kotlin.contracts.model.functors.SubstitutingFunctor.doInvocation].
  *
  * [ESVariable] at points 2 and 3 must has consistent equality according to using them as keys
  */
-open class ESVariable(val descriptor: ValueDescriptor) : AbstractESValue(descriptor.type.toESType()) {
+open class ESVariable(konst descriptor: ValueDescriptor) : AbstractESValue(descriptor.type.toESType()) {
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitVariable(this)
 
     override fun equals(other: Any?): Boolean {
@@ -80,7 +80,7 @@ open class ESVariable(val descriptor: ValueDescriptor) : AbstractESValue(descrip
  *
  * There is only few constants are supported (@see [ESConstant.Companion])
  */
-class ESConstant internal constructor(val constantReference: ConstantReference, override val type: ESType) : AbstractESValue(type) {
+class ESConstant internal constructor(konst constantReference: ConstantReference, override konst type: ESType) : AbstractESValue(type) {
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitConstant(this)
 
     override fun equals(other: Any?): Boolean = other is ESConstant && constantReference == other.constantReference
@@ -94,21 +94,21 @@ class ESConstant internal constructor(val constantReference: ConstantReference, 
 }
 
 object ESConstants {
-    val trueValue = ESConstant(BooleanConstantReference.TRUE, ESBooleanType)
-    val falseValue = ESConstant(BooleanConstantReference.FALSE, ESBooleanType)
-    val nullValue = ESConstant(ConstantReference.NULL, ESNullableNothingType)
-    val notNullValue = ESConstant(ConstantReference.NOT_NULL, ESAnyType)
-    val wildcard = ESConstant(ConstantReference.WILDCARD, ESNullableAnyType)
+    konst trueValue = ESConstant(BooleanConstantReference.TRUE, ESBooleanType)
+    konst falseValue = ESConstant(BooleanConstantReference.FALSE, ESBooleanType)
+    konst nullValue = ESConstant(ConstantReference.NULL, ESNullableNothingType)
+    konst notNullValue = ESConstant(ConstantReference.NOT_NULL, ESAnyType)
+    konst wildcard = ESConstant(ConstantReference.WILDCARD, ESNullableAnyType)
 
-    fun booleanValue(value: Boolean) =
-        if (value) trueValue else falseValue
+    fun booleanValue(konstue: Boolean) =
+        if (konstue) trueValue else falseValue
 }
 
-internal val ESExpression.isTrue: Boolean
+internal konst ESExpression.isTrue: Boolean
     get() = this is ESConstant && constantReference == BooleanConstantReference.TRUE
 
-internal val ESExpression.isFalse: Boolean
+internal konst ESExpression.isFalse: Boolean
     get() = this is ESConstant && constantReference == BooleanConstantReference.FALSE
 
-internal val ESValue.isWildcard: Boolean
+internal konst ESValue.isWildcard: Boolean
     get() = this is ESConstant && constantReference == ConstantReference.WILDCARD

@@ -15,10 +15,10 @@ import java.io.Serializable
  * Project unique identifier for all cinterops
  */
 internal data class CInteropIdentifier internal constructor(
-    val scope: Scope,
-    val interopName: String
+    konst scope: Scope,
+    konst interopName: String
 ) : Serializable {
-    class Scope @UnsafeApi internal constructor(val name: String) : Serializable {
+    class Scope @UnsafeApi internal constructor(konst name: String) : Serializable {
         companion object {
             @OptIn(UnsafeApi::class)
             fun create(compilation: KotlinCompilation<*>): Scope {
@@ -40,6 +40,6 @@ internal data class CInteropIdentifier internal constructor(
     }
 
     @get:Input
-    val uniqueName: String = "cinterop:${scope.name}/$interopName"
+    konst uniqueName: String = "cinterop:${scope.name}/$interopName"
     override fun toString(): String = uniqueName
 }

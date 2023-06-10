@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.types.TypeAttributes
 
 fun ClassConstructorDescriptor.isSerializationCtor(): Boolean {
     /*kind == CallableMemberDescriptor.Kind.SYNTHESIZED does not work because DeserializedClassConstructorDescriptor loses its kind*/
-    return valueParameters.lastOrNull()?.run {
+    return konstueParameters.lastOrNull()?.run {
         name == SerialEntityNames.dummyParamName && type.constructor.declarationDescriptor?.classId == ClassId(
             SerializationPackages.internalPackageFqName,
             SerialEntityNames.SERIAL_CTOR_MARKER_NAME
@@ -37,13 +37,13 @@ fun findSerializerConstructorForTypeArgumentsSerializers(
     serializerDescriptor: ClassDescriptor,
     onlyIfSynthetic: Boolean = false
 ): ClassConstructorDescriptor? {
-    val serializableImplementationTypeArguments = extractKSerializerArgumentFromImplementation(serializerDescriptor)?.arguments
+    konst serializableImplementationTypeArguments = extractKSerializerArgumentFromImplementation(serializerDescriptor)?.arguments
         ?: throw AssertionError("Serializer does not implement KSerializer??")
 
-    val typeParamsCount = serializableImplementationTypeArguments.size
+    konst typeParamsCount = serializableImplementationTypeArguments.size
     if (typeParamsCount == 0) return null //don't need it
-    val ctor = serializerDescriptor.constructors.find { ctor ->
-        ctor.valueParameters.size == typeParamsCount && ctor.valueParameters.all { isKSerializer(it.type) }
+    konst ctor = serializerDescriptor.constructors.find { ctor ->
+        ctor.konstueParameters.size == typeParamsCount && ctor.konstueParameters.all { isKSerializer(it.type) }
     }
     return if (!onlyIfSynthetic) ctor else ctor?.takeIf { it.kind == CallableMemberDescriptor.Kind.SYNTHESIZED }
 }
@@ -54,7 +54,7 @@ inline fun <reified R> Annotations.findAnnotationConstantValue(annotationFqName:
     findAnnotation(annotationFqName)?.findConstantValue(property)
 
 inline fun <reified R> AnnotationDescriptor.findConstantValue(property: String): R? =
-    allValueArguments.entries.singleOrNull { it.key.asString() == property }?.value?.value as? R
+    allValueArguments.entries.singleOrNull { it.key.asString() == property }?.konstue?.konstue as? R
 
 fun Annotations.findAnnotationKotlinTypeValue(
     annotationFqName: FqName,
@@ -62,7 +62,7 @@ fun Annotations.findAnnotationKotlinTypeValue(
     property: String
 ): KotlinType? =
     findAnnotation(annotationFqName)?.let { annotation ->
-        val maybeKClass = annotation.allValueArguments.entries.singleOrNull { it.key.asString() == property }?.value as? KClassValue
+        konst maybeKClass = annotation.allValueArguments.entries.singleOrNull { it.key.asString() == property }?.konstue as? KClassValue
         maybeKClass?.getArgumentType(moduleForResolve)
     }
 
@@ -134,7 +134,7 @@ fun Annotated.annotationsWithArguments(): List<Triple<ClassDescriptor, List<Valu
         .filterIsInstance<LazyAnnotationDescriptor>()
         .mapNotNull { annDesc ->
             annDesc.type.toClassDescriptor?.let {
-                Triple(it, annDesc.annotationEntry.valueArguments, it.unsubstitutedPrimaryConstructor?.valueParameters.orEmpty())
+                Triple(it, annDesc.annotationEntry.konstueArguments, it.unsubstitutedPrimaryConstructor?.konstueParameters.orEmpty())
             }
         }
         .toList()

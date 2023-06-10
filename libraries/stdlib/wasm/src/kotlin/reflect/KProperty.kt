@@ -7,7 +7,7 @@
 package kotlin.reflect
 
 /**
- * Represents a property, such as a named `val` or `var` declaration.
+ * Represents a property, such as a named `konst` or `var` declaration.
  * Instances of this class are obtainable by the `::` operator.
  * 
  * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/reflection.html)
@@ -32,7 +32,7 @@ public actual interface KMutableProperty<R> : KProperty<R> {
  */
 public actual interface KProperty0<out R> : KProperty<R>, () -> R {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      */
     public actual fun get(): R
 }
@@ -42,25 +42,25 @@ public actual interface KProperty0<out R> : KProperty<R>, () -> R {
  */
 public actual interface KMutableProperty0<R> : KProperty0<R>, KMutableProperty<R> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(value: R)
+    public actual fun set(konstue: R)
 }
 
 
 /**
  * Represents a property, operations on which take one receiver as a parameter.
  *
- * @param T the type of the receiver which should be used to obtain the value of the property.
+ * @param T the type of the receiver which should be used to obtain the konstue of the property.
  * @param R the type of the property.
  */
 public actual interface KProperty1<T, out R> : KProperty<R>, (T) -> R {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      *
-     * @param receiver the receiver which is used to obtain the value of the property.
+     * @param receiver the receiver which is used to obtain the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
      */
@@ -72,14 +72,14 @@ public actual interface KProperty1<T, out R> : KProperty<R>, (T) -> R {
  */
 public actual interface KMutableProperty1<T, R> : KProperty1<T, R>, KMutableProperty<R> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param receiver the receiver which is used to modify the value of the property.
+     * @param receiver the receiver which is used to modify the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver: T, value: R)
+    public actual fun set(receiver: T, konstue: R)
 }
 
 
@@ -95,7 +95,7 @@ public actual interface KMutableProperty1<T, R> : KProperty1<T, R>, KMutableProp
  */
 public actual interface KProperty2<D, E, out R> : KProperty<R>, (D, E) -> R {
     /**
-     * Returns the current value of the property. In case of the extension property in a class,
+     * Returns the current konstue of the property. In case of the extension property in a class,
      * the instance of the class should be passed first and the instance of the extension receiver second.
      *
      * @param receiver1 the instance of the first receiver.
@@ -109,11 +109,11 @@ public actual interface KProperty2<D, E, out R> : KProperty<R>, (D, E) -> R {
  */
 public actual interface KMutableProperty2<D, E, R> : KProperty2<D, E, R>, KMutableProperty<R> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
      * @param receiver1 the instance of the first receiver.
      * @param receiver2 the instance of the second receiver.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver1: D, receiver2: E, value: R)
+    public actual fun set(receiver1: D, receiver2: E, konstue: R)
 }

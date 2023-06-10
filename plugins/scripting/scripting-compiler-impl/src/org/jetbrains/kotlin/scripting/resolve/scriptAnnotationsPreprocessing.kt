@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.resolve.ArrayFqNames.PRIMITIVE_TYPE_TO_ARRAY
 import org.jetbrains.kotlin.resolve.constants.ArrayValue
 import org.jetbrains.kotlin.resolve.constants.ConstantValue
 import org.jetbrains.kotlin.resolve.constants.ConstantValueFactory
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
@@ -30,79 +30,79 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KParameter
 import kotlin.reflect.full.primaryConstructor
 
-private val ARRAY_OF_METHODS = setOf(ARRAY_OF_FUNCTION, EMPTY_ARRAY) + PRIMITIVE_TYPE_TO_ARRAY.values.toSet()
+private konst ARRAY_OF_METHODS = setOf(ARRAY_OF_FUNCTION, EMPTY_ARRAY) + PRIMITIVE_TYPE_TO_ARRAY.konstues.toSet()
 
 // basic text comparison of function name, todo: better handling?
-private val KtCallExpression.isArrayCall: Boolean get() = Name.identifier(calleeExpression!!.text) in ARRAY_OF_METHODS
+private konst KtCallExpression.isArrayCall: Boolean get() = Name.identifier(calleeExpression!!.text) in ARRAY_OF_METHODS
 
-internal val KtAnnotationEntry.typeName: String get() = (typeReference?.typeElement as? KtUserType)?.referencedName.orAnonymous()
+internal konst KtAnnotationEntry.typeName: String get() = (typeReference?.typeElement as? KtUserType)?.referencedName.orAnonymous()
 
 internal fun String?.orAnonymous(kind: String = ""): String =
         this ?: "<anonymous" + (if (kind.isNotBlank()) " $kind" else "") + ">"
 
 internal fun constructAnnotation(psi: KtAnnotationEntry, targetClass: KClass<out Annotation>, project: Project): Annotation {
-    val module = ModuleDescriptorImpl(
+    konst module = ModuleDescriptorImpl(
         Name.special("<script-annotations-preprocessing>"),
         LockBasedStorageManager("scriptAnnotationsPreprocessing", {
             ProgressManager.checkCanceled()
         }, { throw ProcessCanceledException(it) }),
         DefaultBuiltIns.Instance
     )
-    val evaluator = ConstantExpressionEvaluator(module, LanguageVersionSettingsImpl.DEFAULT, project)
-    val trace = BindingTraceContext()
+    konst ekonstuator = ConstantExpressionEkonstuator(module, LanguageVersionSettingsImpl.DEFAULT, project)
+    konst trace = BindingTraceContext()
 
-    val valueArguments = psi.valueArguments.map { arg ->
-        val expression = arg.getArgumentExpression()!!
+    konst konstueArguments = psi.konstueArguments.map { arg ->
+        konst expression = arg.getArgumentExpression()!!
 
-        val result = when {
+        konst result = when {
             expression is KtCollectionLiteralExpression ->
-                evaluator.evaluateToConstantArrayValue(expression.getInnerExpressions(), trace, TypeUtils.NO_EXPECTED_TYPE)
+                ekonstuator.ekonstuateToConstantArrayValue(expression.getInnerExpressions(), trace, TypeUtils.NO_EXPECTED_TYPE)
 
             expression is KtCallExpression && expression.isArrayCall -> {
-                evaluator.evaluateToConstantArrayValue(
-                    expression.valueArguments.mapNotNull { it.getArgumentExpression() },
+                ekonstuator.ekonstuateToConstantArrayValue(
+                    expression.konstueArguments.mapNotNull { it.getArgumentExpression() },
                     trace,
                     TypeUtils.NO_EXPECTED_TYPE
                 )
             }
 
-            else -> evaluator.evaluateToConstantValue(arg.getArgumentExpression()!!, trace, TypeUtils.NO_EXPECTED_TYPE)
+            else -> ekonstuator.ekonstuateToConstantValue(arg.getArgumentExpression()!!, trace, TypeUtils.NO_EXPECTED_TYPE)
         }
 
-        // TODO: consider inspecting `trace` to find diagnostics reported during the computation (such as division by zero, integer overflow, invalid annotation parameters etc.)
-        val argName = arg.getArgumentName()?.asName?.toString()
+        // TODO: consider inspecting `trace` to find diagnostics reported during the computation (such as division by zero, integer overflow, inkonstid annotation parameters etc.)
+        konst argName = arg.getArgumentName()?.asName?.toString()
         argName to result?.toRuntimeValue()
     }
-    val mappedArguments: Map<KParameter, Any?> =
-        tryCreateCallableMappingFromNamedArgs(targetClass.constructors.first(), valueArguments)
-        ?: return InvalidScriptResolverAnnotation(psi.typeName, valueArguments)
+    konst mappedArguments: Map<KParameter, Any?> =
+        tryCreateCallableMappingFromNamedArgs(targetClass.constructors.first(), konstueArguments)
+        ?: return InkonstidScriptResolverAnnotation(psi.typeName, konstueArguments)
 
     try {
         return targetClass.primaryConstructor!!.callBy(mappedArguments)
     }
     catch (ex: Exception) {
-        return InvalidScriptResolverAnnotation(psi.typeName, valueArguments, ex)
+        return InkonstidScriptResolverAnnotation(psi.typeName, konstueArguments, ex)
     }
 }
 
-internal fun ConstantExpressionEvaluator.evaluateToConstantArrayValue(
+internal fun ConstantExpressionEkonstuator.ekonstuateToConstantArrayValue(
     elementExpressions: List<KtExpression>,
     trace: BindingTrace,
     expectedElementType: KotlinType
 ): ArrayValue {
-    val constants = elementExpressions.mapNotNull { evaluateExpression(it, trace, expectedElementType)?.toConstantValue(expectedElementType) }
+    konst constants = elementExpressions.mapNotNull { ekonstuateExpression(it, trace, expectedElementType)?.toConstantValue(expectedElementType) }
     return ConstantValueFactory.createArrayValue(constants, TypeUtils.NO_EXPECTED_TYPE)
 }
 
 private fun ConstantValue<*>.toRuntimeValue(): Any? = when (this) {
-    is ArrayValue -> value.map { it.toRuntimeValue() }.toTypedArray()
-    else -> value
+    is ArrayValue -> konstue.map { it.toRuntimeValue() }.toTypedArray()
+    else -> konstue
 }
 
 // NOTE: this class is used for error reporting. But in order to pass plugin verification, it should derive directly from java's Annotation
 // and implement annotationType method (see #KT-16621 for details).
 // TODO: instead of the workaround described above, consider using a sum-type for returning errors from constructAnnotation
 @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
-class InvalidScriptResolverAnnotation(val name: String, val annParams: List<Pair<String?, Any?>>?, val error: Exception? = null) : Annotation, java.lang.annotation.Annotation {
-    override fun annotationType(): Class<out Annotation> = InvalidScriptResolverAnnotation::class.java
+class InkonstidScriptResolverAnnotation(konst name: String, konst annParams: List<Pair<String?, Any?>>?, konst error: Exception? = null) : Annotation, java.lang.annotation.Annotation {
+    override fun annotationType(): Class<out Annotation> = InkonstidScriptResolverAnnotation::class.java
 }

@@ -20,21 +20,21 @@ import org.jetbrains.kotlin.ir.util.ir2string
  * Besides the obvious [file] and line/column borders, it has [RegionKind] which is described later.
  */
 class Region(
-        val startOffset: Int,
-        val endOffset: Int,
-        val file: IrFile,
-        val kind: RegionKind
+        konst startOffset: Int,
+        konst endOffset: Int,
+        konst file: IrFile,
+        konst kind: RegionKind
 ) {
-    val startLine: Int
+    konst startLine: Int
         get() = file.fileEntry.line(startOffset)
 
-    val startColumn: Int
+    konst startColumn: Int
         get() = file.fileEntry.column(startOffset)
 
-    val endLine: Int
+    konst endLine: Int
         get() = file.fileEntry.line(endOffset)
 
-    val endColumn: Int
+    konst endColumn: Int
         get() = file.fileEntry.column(endOffset)
 
     companion object {
@@ -47,7 +47,7 @@ class Region(
     }
 
     override fun toString(): String {
-        val expansion = (kind as? RegionKind.Expansion)?.let { " expand to " + it.expandedFile.name } ?: ""
+        konst expansion = (kind as? RegionKind.Expansion)?.let { " expand to " + it.expandedFile.name } ?: ""
         return "${file.name}$expansion: ${kind::class.simpleName} $startLine, $startColumn -> $endLine, $endColumn"
     }
 }
@@ -70,21 +70,21 @@ sealed class RegionKind {
      * Region of code that is an expansion of another source file.
      * Used for inline function.
      */
-    class Expansion(val expandedFile: IrFile) : RegionKind()
+    class Expansion(konst expandedFile: IrFile) : RegionKind()
 }
 
 /**
  * "Regional" description of the [function].
  */
 class FunctionRegions(
-        val function: IrFunction,
-        val regions: Map<IrElement, Region>
+        konst function: IrFunction,
+        konst regions: Map<IrElement, Region>
 ) {
     // Enumeration is required for serialization and instrumentation calls.
-    val regionEnumeration = regions.values.mapIndexed { index, region -> region to index }.toMap()
+    konst regionEnumeration = regions.konstues.mapIndexed { index, region -> region to index }.toMap()
     // Actually, it should be computed.
     // But since we don't support PGO structural hash doesn't really matter for now.
-    val structuralHash: Long = 0
+    konst structuralHash: Long = 0
 
     override fun toString(): String = buildString {
         appendLine("${function.computeSymbolName()} regions:")
@@ -97,6 +97,6 @@ class FunctionRegions(
  * we aggregate [FunctionRegions] per [file].
  */
 class FileRegionInfo(
-        val file: IrFile,
-        val functions: List<FunctionRegions>
+        konst file: IrFile,
+        konst functions: List<FunctionRegions>
 )

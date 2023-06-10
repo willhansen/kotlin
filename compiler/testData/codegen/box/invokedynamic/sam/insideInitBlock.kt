@@ -5,22 +5,22 @@
 // FILE: insideInitBlock.kt
 class Outer {
     class Nested {
-        class PredicateSource(val condition: Boolean)
+        class PredicateSource(konst condition: Boolean)
 
-        val value: String
+        konst konstue: String
 
         init {
-            value = Test.test(PredicateSource::condition, PredicateSource(true))
+            konstue = Test.test(PredicateSource::condition, PredicateSource(true))
         }
     }
 }
 
-fun box() = Outer.Nested().value
+fun box() = Outer.Nested().konstue
 
 // FILE: Test.java
 public class Test {
-    public static <T> String test(Predicate<T> predicate, T value) {
-        if (predicate.getResult(value) == true)
+    public static <T> String test(Predicate<T> predicate, T konstue) {
+        if (predicate.getResult(konstue) == true)
             return "OK";
         else
             return "Failed";
@@ -29,5 +29,5 @@ public class Test {
 
 // FILE: Predicate.java
 public interface Predicate<T> {
-    Boolean getResult(T value);
+    Boolean getResult(T konstue);
 }

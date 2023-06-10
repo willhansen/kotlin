@@ -21,9 +21,9 @@ import kotlin.script.experimental.jvm.compat.mapToLegacyScriptReportPosition
 import kotlin.script.experimental.jvm.compat.mapToLegacyScriptReportSeverity
 
 class BridgeDependenciesResolver(
-    val scriptCompilationConfiguration: ScriptCompilationConfiguration,
-    val onConfigurationUpdated: (SourceCode, ScriptCompilationConfiguration) -> Unit = { _, _ -> },
-    val getScriptSource: (ScriptContents) -> SourceCode? = { null }
+    konst scriptCompilationConfiguration: ScriptCompilationConfiguration,
+    konst onConfigurationUpdated: (SourceCode, ScriptCompilationConfiguration) -> Unit = { _, _ -> },
+    konst getScriptSource: (ScriptContents) -> SourceCode? = { null }
 ) : AsyncDependenciesResolver {
 
     override fun resolve(scriptContents: ScriptContents, environment: Environment): DependenciesResolver.ResolveResult =
@@ -35,26 +35,26 @@ class BridgeDependenciesResolver(
     override suspend fun resolveAsync(scriptContents: ScriptContents, environment: Environment): DependenciesResolver.ResolveResult {
         try {
 
-            val diagnostics = arrayListOf<ScriptReport>()
-            val processedScriptData = ScriptCollectedData(
+            konst diagnostics = arrayListOf<ScriptReport>()
+            konst processedScriptData = ScriptCollectedData(
                 mapOf(
                     ScriptCollectedData.foundAnnotations to scriptContents.annotations
                 )
             )
 
-            val script = getScriptSource(scriptContents) ?: scriptContents.toScriptSource()
+            konst script = getScriptSource(scriptContents) ?: scriptContents.toScriptSource()
 
-            val refineResults =
+            konst refineResults =
                 scriptCompilationConfiguration.refineOnAnnotations(script, processedScriptData).onSuccess {
                     it.refineBeforeCompiling(script, processedScriptData)
                 }
 
-            val refinedConfiguration = when (refineResults) {
+            konst refinedConfiguration = when (refineResults) {
                 is ResultWithDiagnostics.Failure ->
                     return DependenciesResolver.ResolveResult.Failure(refineResults.reports.mapScriptReportsToDiagnostics())
                 is ResultWithDiagnostics.Success -> {
                     diagnostics.addAll(refineResults.reports.mapScriptReportsToDiagnostics())
-                    refineResults.value
+                    refineResults.konstue
                 }
             }
 
@@ -62,7 +62,7 @@ class BridgeDependenciesResolver(
                 onConfigurationUpdated(script, refinedConfiguration)
             }
 
-            val newClasspath = refinedConfiguration[ScriptCompilationConfiguration.dependencies]
+            konst newClasspath = refinedConfiguration[ScriptCompilationConfiguration.dependencies]
                 ?.flatMap { (it as JvmDependency).classpath } ?: emptyList()
 
             return DependenciesResolver.ResolveResult.Success(
@@ -79,7 +79,7 @@ class BridgeDependenciesResolver(
 }
 
 fun ScriptCompilationConfiguration.toDependencies(classpath: List<File>): ScriptDependencies {
-    val defaultImports = this[ScriptCompilationConfiguration.defaultImports]?.toList() ?: emptyList()
+    konst defaultImports = this[ScriptCompilationConfiguration.defaultImports]?.toList() ?: emptyList()
 
     return ScriptDependencies(
         classpath = classpath,
@@ -101,7 +101,7 @@ internal fun ScriptContents.toScriptSource(): SourceCode = when {
 fun List<ScriptDependency>?.toClassPathOrEmpty() = this?.flatMap { (it as? JvmDependency)?.classpath ?: emptyList() } ?: emptyList()
 
 internal fun List<SourceCode>?.toFilesOrEmpty() = this?.map {
-    val externalSource = it as? ExternalSourceCode
+    konst externalSource = it as? ExternalSourceCode
     externalSource?.externalLocation?.toFileOrNull()
         ?: throw RuntimeException("Unsupported source in requireSources parameter - only local files are supported now (${externalSource?.externalLocation})")
 } ?: emptyList()

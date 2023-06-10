@@ -9,14 +9,14 @@ fun testUse() {
 }
 
 fun testLocalVal() {
-    val local = J.notNullString()
+    konst local = J.notNullString()
 }
 
 fun testReturnValue() = J.notNullString()
 
-val testGlobalVal = J.notNullString()
+konst testGlobalVal = J.notNullString()
 
-val testGlobalValGetter get() = J.notNullString()
+konst testGlobalValGetter get() = J.notNullString()
 
 fun testJUse() {
     J.use(J.nullString())
@@ -25,10 +25,10 @@ fun testJUse() {
 }
 
 fun testLocalVarUse() {
-    val ns = J.nullString()
+    konst ns = J.nullString()
     J.use(ns)
 
-    val nns = J.notNullString()
+    konst nns = J.notNullString()
     J.use(nns)
 }
 

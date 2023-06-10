@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 private object SCRIPT_FUNCTION : IrDeclarationOriginImpl("SCRIPT_FUNCTION")
 
-class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweringPass {
+class CreateScriptFunctionsPhase(konst context: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.declarations.transformFlat { declaration ->
             if (declaration is IrScript) lower(declaration)
@@ -35,9 +35,9 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
     }
 
     private fun lower(irScript: IrScript): List<IrDeclaration> {
-        val (startOffset, endOffset) = getFunctionBodyOffsets(irScript)
+        konst (startOffset, endOffset) = getFunctionBodyOffsets(irScript)
 
-        val initializeStatements = irScript.statements
+        konst initializeStatements = irScript.statements
             .asSequence()
             .filterIsInstance<IrProperty>()
             .mapNotNull { it.backingField }
@@ -46,7 +46,7 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
             .onEach { it.first.initializer = null }
             .toList()
 
-        val initializeScriptFunction = createFunction(irScript, "\$initializeScript\$", context.irBuiltIns.unitType).also {
+        konst initializeScriptFunction = createFunction(irScript, "\$initializeScript\$", context.irBuiltIns.unitType).also {
             it.body = it.factory.createBlockBody(
                 startOffset,
                 endOffset,
@@ -57,20 +57,20 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
             )
         }
 
-        val evaluateScriptFunction = createFunction(irScript, "\$evaluateScript\$", getReturnType(irScript)).also {
+        konst ekonstuateScriptFunction = createFunction(irScript, "\$ekonstuateScript\$", getReturnType(irScript)).also {
             it.body = it.factory.createBlockBody(
                 startOffset,
                 endOffset,
                 irScript.statements.filter { it !is IrDeclaration }
                     .let {
-                        val lastInitializer = initializeStatements.lastOrNull()
+                        konst lastInitializer = initializeStatements.lastOrNull()
                         if (lastInitializer == null || irScript.resultProperty == null
                             || lastInitializer.first.correspondingPropertySymbol != irScript.resultProperty) {
                             it
                         } else {
                             it + lastInitializer.second
                         }
-                    }.prepareForEvaluateScriptFunction(it)
+                    }.prepareForEkonstuateScriptFunction(it)
             )
         }
 
@@ -78,10 +78,10 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
             statements.removeIf { it !is IrDeclaration }
             statements += initializeScriptFunction
             initializeScriptFunction.patchDeclarationParents(this)
-            statements += evaluateScriptFunction
-            evaluateScriptFunction.patchDeclarationParents(this)
+            statements += ekonstuateScriptFunction
+            ekonstuateScriptFunction.patchDeclarationParents(this)
             statements += createCall(initializeScriptFunction)
-            statements += createCall(evaluateScriptFunction)
+            statements += createCall(ekonstuateScriptFunction)
         }
 
         return listOf(irScript)
@@ -103,7 +103,7 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
 
     private fun createFunction(irScript: IrScript, name: String, returnType: IrType): IrSimpleFunction =
         context.irFactory.buildFun {
-            val (startOffset, endOffset) = getFunctionBodyOffsets(irScript)
+            konst (startOffset, endOffset) = getFunctionBodyOffsets(irScript)
             this.startOffset = startOffset
             this.endOffset = endOffset
             this.origin = SCRIPT_FUNCTION
@@ -114,13 +114,13 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
             it.parent = irScript
         }
 
-    private fun List<IrStatement>.prepareForEvaluateScriptFunction(evaluateScriptFunction: IrFunction): List<IrStatement> {
+    private fun List<IrStatement>.prepareForEkonstuateScriptFunction(ekonstuateScriptFunction: IrFunction): List<IrStatement> {
         return if (isNotEmpty()) {
-            val returnStatement = IrReturnImpl(
+            konst returnStatement = IrReturnImpl(
                 last().startOffset,
                 last().endOffset,
                 context.irBuiltIns.nothingType,
-                evaluateScriptFunction.symbol,
+                ekonstuateScriptFunction.symbol,
                 last() as IrExpression
             )
             dropLast(1) + returnStatement
@@ -142,7 +142,7 @@ class CreateScriptFunctionsPhase(val context: CommonBackendContext) : FileLoweri
         return IrCallImpl(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET, function.returnType,
             function.symbol,
-            valueArgumentsCount = function.valueParameters.size,
+            konstueArgumentsCount = function.konstueParameters.size,
             typeArgumentsCount = function.typeParameters.size
         )
     }

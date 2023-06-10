@@ -30,7 +30,7 @@ public final class Maps {
 // FILE: main.kt
 
 fun foo() {
-    val x = Maps.newHashMap<String, Int>()
+    konst x = Maps.newHashMap<String, Int>()
     x.put("", 1)
     // If there were no @ElementTypesAreNonnullByDefault on the Maps class, there would be an error on `null` argument because the type of `x`
     // would be `HashMap<String, Int>!`, i.e. with non-flexible type arguments, thus not allowing nulls.

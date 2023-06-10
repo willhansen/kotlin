@@ -11,12 +11,12 @@ class OuterGeneric<T> {
 
     class OkNestedExn : Exception()
 
-    val errorAnonymousObjectExn = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
+    konst errorAnonymousObjectExn = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
 
     fun foo() {
         <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>class OkLocalExn<!> : Exception()
 
-        val errorAnonymousObjectExn = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
+        konst errorAnonymousObjectExn = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
     }
 
     fun <X> genericFoo() {
@@ -37,5 +37,5 @@ class Outer {
 fun <T> genericFoo() {
     <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>class ErrorLocalExnInGenericFun<!> : Exception()
 
-    val errorkAnonymousObjectExnInGenericFun = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
+    konst errorkAnonymousObjectExnInGenericFun = <!INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS!>object<!> : Exception() {}
 }

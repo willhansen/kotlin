@@ -30,22 +30,22 @@ class Test {
 
 class Klass {
     companion object {
-        const val NAME = "Klass"
-        @JvmField val JVM_NAME = "JvmKlass"
+        const konst NAME = "Klass"
+        @JvmField konst JVM_NAME = "JvmKlass"
     }
 }
 
 interface Trait {
     companion object {
-        const val NAME = "Trait"
+        const konst NAME = "Trait"
     }
 }
 
 enum class Enoom {
     ;
     companion object {
-        const val NAME = "Enum"
-        @JvmField val JVM_NAME = "JvmEnum"
+        const konst NAME = "Enum"
+        @JvmField konst JVM_NAME = "JvmEnum"
     }
 }
 

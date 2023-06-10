@@ -8,12 +8,12 @@
 class A
 
 context(A)
-inline class B1(val x: Int)
+inline class B1(konst x: Int)
 
 context(A)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class B2(val x: Int)
+konstue class B2(konst x: Int)
 
 context(A)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class C(val x: Int, val y: Int)
+konstue class C(konst x: Int, konst y: Int)

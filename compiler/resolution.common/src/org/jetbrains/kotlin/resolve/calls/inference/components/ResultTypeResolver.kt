@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.types.TypeApproximatorConfiguration
 import org.jetbrains.kotlin.types.model.*
 
 class ResultTypeResolver(
-    val typeApproximator: AbstractTypeApproximator,
-    val trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
-    private val languageVersionSettings: LanguageVersionSettings
+    konst typeApproximator: AbstractTypeApproximator,
+    konst trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
+    private konst languageVersionSettings: LanguageVersionSettings
 ) {
     interface Context : TypeSystemInferenceExtensionContext {
         fun isProperType(type: KotlinTypeMarker): Boolean
@@ -27,17 +27,17 @@ class ResultTypeResolver(
         fun isReified(variable: TypeVariableMarker): Boolean
     }
 
-    private val isTypeInferenceForSelfTypesSupported: Boolean
+    private konst isTypeInferenceForSelfTypesSupported: Boolean
         get() = languageVersionSettings.supportsFeature(LanguageFeature.TypeInferenceOnCallsWithSelfTypes)
 
     private fun Context.getDefaultTypeForSelfType(
         constraints: List<Constraint>,
         typeVariable: TypeVariableMarker
     ): KotlinTypeMarker? {
-        val typeVariableConstructor = typeVariable.freshTypeConstructor() as TypeVariableTypeConstructorMarker
-        val typesForRecursiveTypeParameters = constraints.mapNotNull { constraint ->
+        konst typeVariableConstructor = typeVariable.freshTypeConstructor() as TypeVariableTypeConstructorMarker
+        konst typesForRecursiveTypeParameters = constraints.mapNotNull { constraint ->
             if (constraint.position.from !is DeclaredUpperBoundConstraintPosition<*>) return@mapNotNull null
-            val typeParameter = typeVariableConstructor.typeParameter ?: return@mapNotNull null
+            konst typeParameter = typeVariableConstructor.typeParameter ?: return@mapNotNull null
             extractTypeForGivenRecursiveTypeParameter(constraint.type, typeParameter)
         }.takeIf { it.isNotEmpty() } ?: return null
 
@@ -68,7 +68,7 @@ class ResultTypeResolver(
         variableWithConstraints: VariableWithConstraints,
         direction: ResolveDirection
     ): KotlinTypeMarker? {
-        val resultTypeFromEqualConstraint = findResultIfThereIsEqualsConstraint(c, variableWithConstraints)
+        konst resultTypeFromEqualConstraint = findResultIfThereIsEqualsConstraint(c, variableWithConstraints)
         if (resultTypeFromEqualConstraint != null) {
             with(c) {
                 if (!isK2 || !resultTypeFromEqualConstraint.contains { type ->
@@ -81,11 +81,11 @@ class ResultTypeResolver(
             }
         }
 
-        val subType = c.findSubType(variableWithConstraints)
+        konst subType = c.findSubType(variableWithConstraints)
         // Super type should be the most flexible, sub type should be the least one
-        val superType = c.findSuperType(variableWithConstraints).makeFlexibleIfNecessary(c, variableWithConstraints.constraints)
+        konst superType = c.findSuperType(variableWithConstraints).makeFlexibleIfNecessary(c, variableWithConstraints.constraints)
 
-        val resultTypeFromDirection = if (direction == ResolveDirection.TO_SUBTYPE || direction == ResolveDirection.UNKNOWN) {
+        konst resultTypeFromDirection = if (direction == ResolveDirection.TO_SUBTYPE || direction == ResolveDirection.UNKNOWN) {
             c.resultType(subType, superType, variableWithConstraints)
         } else {
             c.resultType(superType, subType, variableWithConstraints)
@@ -119,7 +119,7 @@ class ResultTypeResolver(
      * But: CST(Foo, Foo!) = CST(Foo!, Foo) = Foo!
      */
     private fun KotlinTypeMarker?.makeFlexibleIfNecessary(c: Context, constraints: List<Constraint>) = with(c) {
-        when (val type = this@makeFlexibleIfNecessary) {
+        when (konst type = this@makeFlexibleIfNecessary) {
             is SimpleTypeMarker -> {
                 if (constraints.any { it.type.typeConstructor().isTypeVariable() && it.type.hasFlexibleNullability() }) {
                     createFlexibleType(type.makeSimpleTypeDefinitelyNotNullOrNotNull(), type.withNullability(true))
@@ -166,7 +166,7 @@ class ResultTypeResolver(
         typeApproximator.approximateToSuperType(this, TypeApproximatorConfiguration.PublicDeclaration.SaveAnonymousTypes) ?: this
 
     private fun Context.isSuitableType(resultType: KotlinTypeMarker, variableWithConstraints: VariableWithConstraints): Boolean {
-        val filteredConstraints = variableWithConstraints.constraints.filter { isProperTypeForFixation(it.type) }
+        konst filteredConstraints = variableWithConstraints.constraints.filter { isProperTypeForFixation(it.type) }
         for (constraint in filteredConstraints) {
             if (!checkConstraint(this, constraint.type, constraint.kind, resultType)) return false
         }
@@ -207,14 +207,14 @@ class ResultTypeResolver(
     }
 
     private fun Context.findSubType(variableWithConstraints: VariableWithConstraints): KotlinTypeMarker? {
-        val lowerConstraintTypes = prepareLowerConstraints(variableWithConstraints.constraints)
+        konst lowerConstraintTypes = prepareLowerConstraints(variableWithConstraints.constraints)
 
         if (lowerConstraintTypes.isNotEmpty()) {
-            val types = sinkIntegerLiteralTypes(lowerConstraintTypes)
+            konst types = sinkIntegerLiteralTypes(lowerConstraintTypes)
             var commonSuperType = computeCommonSuperType(types)
 
             if (commonSuperType.contains { it.asSimpleType()?.isStubTypeForVariableInSubtyping() == true }) {
-                val typesWithoutStubs = types.filter { lowerType ->
+                konst typesWithoutStubs = types.filter { lowerType ->
                     !lowerType.contains { it.asSimpleType()?.isStubTypeForVariableInSubtyping() == true }
                 }
 
@@ -226,7 +226,7 @@ class ResultTypeResolver(
             /**
              *
              * fun <T> Array<out T>.intersect(other: Iterable<T>) {
-             *      val set = toMutableSet()
+             *      konst set = toMutableSet()
              *      set.retainAll(other)
              * }
              * fun <X> Array<out X>.toMutableSet(): MutableSet<X> = ...
@@ -257,12 +257,12 @@ class ResultTypeResolver(
         var atLeastOneProper = false
         var atLeastOneNonProper = false
 
-        val lowerConstraintTypes = mutableListOf<KotlinTypeMarker>()
+        konst lowerConstraintTypes = mutableListOf<KotlinTypeMarker>()
 
         for (constraint in constraints) {
             if (constraint.kind != ConstraintKind.LOWER) continue
 
-            val type = constraint.type
+            konst type = constraint.type
             lowerConstraintTypes.add(type)
 
             if (isProperTypeForFixation(type)) {
@@ -275,7 +275,7 @@ class ResultTypeResolver(
         if (!atLeastOneProper) return emptyList()
         if (!atLeastOneNonProper) return lowerConstraintTypes
 
-        val notFixedToStubTypesSubstitutor = buildNotFixedVariablesToStubTypesSubstitutor()
+        konst notFixedToStubTypesSubstitutor = buildNotFixedVariablesToStubTypesSubstitutor()
 
         return lowerConstraintTypes.map { if (isProperTypeForFixation(it)) it else notFixedToStubTypesSubstitutor.safeSubstitute(it) }
     }
@@ -283,7 +283,7 @@ class ResultTypeResolver(
     private fun Context.sinkIntegerLiteralTypes(types: List<KotlinTypeMarker>): List<KotlinTypeMarker> {
         return types.sortedBy { type ->
 
-            val containsILT = type.contains { it.asSimpleType()?.isIntegerLiteralType() ?: false }
+            konst containsILT = type.contains { it.asSimpleType()?.isIntegerLiteralType() ?: false }
             if (containsILT) 1 else 0
         }
     }
@@ -292,27 +292,27 @@ class ResultTypeResolver(
         return if (languageVersionSettings.supportsFeature(LanguageFeature.AllowEmptyIntersectionsInResultTypeResolver)) {
             intersectTypes(upperConstraints.map { it.type })
         } else {
-            val intersectionUpperType = intersectTypes(upperConstraints.map { it.type })
-            val resultIsActuallyIntersection = intersectionUpperType.typeConstructor().isIntersection()
+            konst intersectionUpperType = intersectTypes(upperConstraints.map { it.type })
+            konst resultIsActuallyIntersection = intersectionUpperType.typeConstructor().isIntersection()
 
-            val isThereUnwantedIntersectedTypes = if (resultIsActuallyIntersection) {
-                val intersectionSupertypes = intersectionUpperType.typeConstructor().supertypes()
-                val intersectionClasses = intersectionSupertypes.count {
+            konst isThereUnwantedIntersectedTypes = if (resultIsActuallyIntersection) {
+                konst intersectionSupertypes = intersectionUpperType.typeConstructor().supertypes()
+                konst intersectionClasses = intersectionSupertypes.count {
                     it.typeConstructor().isClassTypeConstructor() && !it.typeConstructor().isInterface()
                 }
-                val areThereIntersectionFinalClasses = intersectionSupertypes.any { it.typeConstructor().isCommonFinalClassConstructor() }
+                konst areThereIntersectionFinalClasses = intersectionSupertypes.any { it.typeConstructor().isCommonFinalClassConstructor() }
                 intersectionClasses > 1 || areThereIntersectionFinalClasses
             } else false
 
-            val upperType = if (isThereUnwantedIntersectedTypes) {
+            konst upperType = if (isThereUnwantedIntersectedTypes) {
                 /*
                  * We shouldn't infer a type variable into the intersection type if there is an explicit expected type,
                  * otherwise it can lead to something like this:
                  *
                  * fun <T : String> materialize(): T = null as T
-                 * val bar: Int = materialize() // no errors, T is inferred into String & Int
+                 * konst bar: Int = materialize() // no errors, T is inferred into String & Int
                  */
-                val filteredUpperConstraints = upperConstraints.filterNot { it.isExpectedTypePosition() }.map { it.type }
+                konst filteredUpperConstraints = upperConstraints.filterNot { it.isExpectedTypePosition() }.map { it.type }
                 if (filteredUpperConstraints.isNotEmpty()) intersectTypes(filteredUpperConstraints) else intersectionUpperType
             } else intersectionUpperType
             upperType
@@ -320,11 +320,11 @@ class ResultTypeResolver(
     }
 
     private fun Context.findSuperType(variableWithConstraints: VariableWithConstraints): KotlinTypeMarker? {
-        val upperConstraints =
+        konst upperConstraints =
             variableWithConstraints.constraints.filter { it.kind == ConstraintKind.UPPER && this@findSuperType.isProperTypeForFixation(it.type) }
 
         if (upperConstraints.isNotEmpty()) {
-            val upperType = computeUpperType(upperConstraints)
+            konst upperType = computeUpperType(upperConstraints)
 
             return typeApproximator.approximateToSubType(
                 upperType,
@@ -340,7 +340,7 @@ class ResultTypeResolver(
 
     private fun findResultIfThereIsEqualsConstraint(c: Context, variableWithConstraints: VariableWithConstraints): KotlinTypeMarker? =
         with(c) {
-            val properEqualityConstraints = variableWithConstraints.constraints.filter {
+            konst properEqualityConstraints = variableWithConstraints.constraints.filter {
                 it.kind == ConstraintKind.EQUALITY && c.isProperTypeForFixation(it.type)
             }
 
@@ -351,8 +351,8 @@ class ResultTypeResolver(
     private fun Context.representativeFromEqualityConstraints(constraints: List<Constraint>): KotlinTypeMarker? {
         if (constraints.isEmpty()) return null
 
-        val constraintTypes = constraints.map { it.type }
-        val nonLiteralTypes = constraintTypes.filter { !it.typeConstructor().isIntegerLiteralTypeConstructor() }
+        konst constraintTypes = constraints.map { it.type }
+        konst nonLiteralTypes = constraintTypes.filter { !it.typeConstructor().isIntegerLiteralTypeConstructor() }
         return nonLiteralTypes.singleBestRepresentative()
             ?: constraintTypes.singleBestRepresentative()
             ?: constraintTypes.first() // seems like constraint system has contradiction

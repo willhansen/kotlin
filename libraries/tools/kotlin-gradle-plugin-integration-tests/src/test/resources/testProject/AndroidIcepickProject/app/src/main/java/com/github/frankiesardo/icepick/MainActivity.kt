@@ -21,7 +21,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun updateText() {
-        val defaultText = if (message == null || baseMessage == null) {
+        konst defaultText = if (message == null || baseMessage == null) {
             "Use the menu to add some state"
         } else {
             baseMessage + message

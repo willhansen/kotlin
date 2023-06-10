@@ -45,11 +45,11 @@ import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 open class ParcelizeAnnotationChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val constructorDescriptor = resolvedCall.resultingDescriptor as? ClassConstructorDescriptor ?: return
-        val annotationClass = constructorDescriptor.constructedClass.takeIf { it.kind == ClassKind.ANNOTATION_CLASS } ?: return
+        konst constructorDescriptor = resolvedCall.resultingDescriptor as? ClassConstructorDescriptor ?: return
+        konst annotationClass = constructorDescriptor.constructedClass.takeIf { it.kind == ClassKind.ANNOTATION_CLASS } ?: return
 
-        val annotationEntry = resolvedCall.call.callElement.getNonStrictParentOfType<KtAnnotationEntry>() ?: return
-        val annotationOwner = annotationEntry.getStrictParentOfType<KtModifierListOwner>() ?: return
+        konst annotationEntry = resolvedCall.call.callElement.getNonStrictParentOfType<KtAnnotationEntry>() ?: return
+        konst annotationOwner = annotationEntry.getStrictParentOfType<KtModifierListOwner>() ?: return
 
         if (annotationClass.fqNameSafe in TYPE_PARCELER_FQ_NAMES) {
             checkTypeParcelerUsage(resolvedCall, annotationEntry, context, annotationOwner)
@@ -77,9 +77,9 @@ open class ParcelizeAnnotationChecker : CallChecker {
         context: CallCheckerContext,
         isForbidden: Boolean
     ) {
-        val descriptorPackage = resolvedCall.resultingDescriptor.containingPackage()
+        konst descriptorPackage = resolvedCall.resultingDescriptor.containingPackage()
         if (descriptorPackage == DEPRECATED_RUNTIME_PACKAGE) {
-            val factory = if (isForbidden) ErrorsParcelize.FORBIDDEN_DEPRECATED_ANNOTATION else ErrorsParcelize.DEPRECATED_ANNOTATION
+            konst factory = if (isForbidden) ErrorsParcelize.FORBIDDEN_DEPRECATED_ANNOTATION else ErrorsParcelize.DEPRECATED_ANNOTATION
             context.trace.report(factory.on(annotationEntry))
         }
     }
@@ -100,21 +100,21 @@ open class ParcelizeAnnotationChecker : CallChecker {
         context: CallCheckerContext,
         element: KtModifierListOwner
     ) {
-        val descriptor = context.trace[BindingContext.DECLARATION_TO_DESCRIPTOR, element] ?: return
-        val thisMappedType = resolvedCall.typeArguments.values.takeIf { it.size == 2 }?.first() ?: return
+        konst descriptor = context.trace[BindingContext.DECLARATION_TO_DESCRIPTOR, element] ?: return
+        konst thisMappedType = resolvedCall.typeArguments.konstues.takeIf { it.size == 2 }?.first() ?: return
 
-        val duplicatingAnnotationCount = descriptor.annotations
+        konst duplicatingAnnotationCount = descriptor.annotations
             .filter { it.fqName in TYPE_PARCELER_FQ_NAMES }
             .mapNotNull { it.type.arguments.takeIf { args -> args.size == 2 }?.first()?.type }
             .count { it == thisMappedType }
 
         if (duplicatingAnnotationCount > 1) {
-            val reportElement = annotationEntry.typeArguments.firstOrNull() ?: annotationEntry
+            konst reportElement = annotationEntry.typeArguments.firstOrNull() ?: annotationEntry
             context.trace.report(ErrorsParcelize.DUPLICATING_TYPE_PARCELERS.on(reportElement))
             return
         }
 
-        val containingClass = when (element) {
+        konst containingClass = when (element) {
             is KtClassOrObject -> element
             is KtParameter -> element.containingClassOrObject
             else -> null
@@ -123,13 +123,13 @@ open class ParcelizeAnnotationChecker : CallChecker {
         checkIfTheContainingClassIsParcelize(containingClass, annotationEntry, context)
 
         if (element is KtParameter && element.getStrictParentOfType<KtDeclaration>() is KtPrimaryConstructor) {
-            val containingClassDescriptor = context.trace[BindingContext.CLASS, containingClass]
-            val thisAnnotationDescriptor = context.trace[BindingContext.ANNOTATION, annotationEntry]
+            konst containingClassDescriptor = context.trace[BindingContext.CLASS, containingClass]
+            konst thisAnnotationDescriptor = context.trace[BindingContext.ANNOTATION, annotationEntry]
 
             if (containingClass != null && containingClassDescriptor != null && thisAnnotationDescriptor != null) {
-                // We can ignore value arguments here cause @TypeParceler is a zero-parameter annotation
+                // We can ignore konstue arguments here cause @TypeParceler is a zero-parameter annotation
                 if (containingClassDescriptor.annotations.any { it.type == thisAnnotationDescriptor.type }) {
-                    val reportElement = (annotationEntry.typeReference?.typeElement as? KtUserType)?.referenceExpression ?: annotationEntry
+                    konst reportElement = (annotationEntry.typeReference?.typeElement as? KtUserType)?.referenceExpression ?: annotationEntry
                     context.trace.report(ErrorsParcelize.REDUNDANT_TYPE_PARCELER.on(reportElement, containingClass))
                 }
             }
@@ -146,12 +146,12 @@ open class ParcelizeAnnotationChecker : CallChecker {
             return
         }
 
-        val actualType = context.trace[BindingContext.TYPE, element]?.replaceAnnotations(Annotations.EMPTY) ?: return
+        konst actualType = context.trace[BindingContext.TYPE, element]?.replaceAnnotations(Annotations.EMPTY) ?: return
 
-        val parcelerType = resolvedCall.typeArguments.values.singleOrNull() ?: return
-        val parcelerClass = parcelerType.constructor.declarationDescriptor as? ClassDescriptor ?: return
+        konst parcelerType = resolvedCall.typeArguments.konstues.singleOrNull() ?: return
+        konst parcelerClass = parcelerType.constructor.declarationDescriptor as? ClassDescriptor ?: return
 
-        val containingClass = element.getStrictParentOfType<KtClassOrObject>()
+        konst containingClass = element.getStrictParentOfType<KtClassOrObject>()
         checkIfTheContainingClassIsParcelize(containingClass, annotationEntry, context)
 
         fun reportElement() = annotationEntry.typeArguments.singleOrNull() ?: annotationEntry
@@ -162,8 +162,8 @@ open class ParcelizeAnnotationChecker : CallChecker {
         }
 
         fun KotlinType.fqName() = constructor.declarationDescriptor?.fqNameSafe
-        val parcelerSuperType = parcelerClass.defaultType.supertypes().firstOrNull { it.fqName() == PARCELER_FQN } ?: return
-        val expectedType = parcelerSuperType.arguments.singleOrNull()?.type ?: return
+        konst parcelerSuperType = parcelerClass.defaultType.supertypes().firstOrNull { it.fqName() == PARCELER_FQN } ?: return
+        konst expectedType = parcelerSuperType.arguments.singleOrNull()?.type ?: return
 
         if (!actualType.isSubtypeOf(expectedType)) {
             context.trace.report(ErrorsParcelize.PARCELER_TYPE_INCOMPATIBLE.on(reportElement(), expectedType, actualType))
@@ -176,9 +176,9 @@ open class ParcelizeAnnotationChecker : CallChecker {
         context: CallCheckerContext
     ) {
         if (containingClass != null) {
-            val containingClassDescriptor = context.trace[BindingContext.CLASS, containingClass]
+            konst containingClassDescriptor = context.trace[BindingContext.CLASS, containingClass]
             if (containingClassDescriptor != null && !containingClassDescriptor.isParcelize) {
-                val reportElement = (annotationEntry.typeReference?.typeElement as? KtUserType)?.referenceExpression ?: annotationEntry
+                konst reportElement = (annotationEntry.typeReference?.typeElement as? KtUserType)?.referenceExpression ?: annotationEntry
                 context.trace.report(ErrorsParcelize.CLASS_SHOULD_BE_PARCELIZE.on(reportElement, containingClass))
             }
         }

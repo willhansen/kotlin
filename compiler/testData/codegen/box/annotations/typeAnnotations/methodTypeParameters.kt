@@ -14,7 +14,7 @@ import kotlin.reflect.jvm.javaMethod
 import kotlin.test.fail
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
 annotation class TypeParameterAnn
@@ -66,7 +66,7 @@ fun box(): String {
     )
 
     //interfaceBound
-    val interfaceBound = Kotlin::class.java.methods.single { it.name == "interfaceBound" }
+    konst interfaceBound = Kotlin::class.java.methods.single { it.name == "interfaceBound" }
     checkTypeParameterAnnotation(
         interfaceBound.typeParameters.single(),
         "T",
@@ -82,7 +82,7 @@ fun box(): String {
     )
 
     //classBound
-    val classBound = Kotlin::class.java.methods.single { it.name == "classBound" }
+    konst classBound = Kotlin::class.java.methods.single { it.name == "classBound" }
     checkTypeParameterAnnotation(
         classBound.typeParameters.single(),
         "T",
@@ -99,7 +99,7 @@ fun box(): String {
 
 
     //interfaceBoundGeneric
-    val interfaceBoundGeneric = Kotlin::class.java.methods.single { it.name == "interfaceBoundGeneric" }
+    konst interfaceBoundGeneric = Kotlin::class.java.methods.single { it.name == "interfaceBoundGeneric" }
     checkTypeAnnotation(
         interfaceBoundGeneric.typeParameters.single().annotatedBounds.single(),
         "foo.Generic<foo.Simple>",
@@ -115,7 +115,7 @@ fun box(): String {
     )
 
     //classBoundGeneric
-    val classBoundGeneric = Kotlin::class.java.methods.single { it.name == "classBoundGeneric" }
+    konst classBoundGeneric = Kotlin::class.java.methods.single { it.name == "classBoundGeneric" }
     // Works on JDK 15
 //    checkTypeAnnotation(
 //        classBoundGeneric.typeParameters.single().annotatedBounds.single(),
@@ -132,7 +132,7 @@ fun box(): String {
     )
 
     //typeParameterTypeParameterBound
-    val typeParameterTypeParameterBound = Kotlin::class.java.methods.single { it.name == "typeParameterTypeParameterBound" }
+    konst typeParameterTypeParameterBound = Kotlin::class.java.methods.single { it.name == "typeParameterTypeParameterBound" }
     checkTypeParameterAnnotation(
         typeParameterTypeParameterBound.typeParameters[1]!!,
         "T",

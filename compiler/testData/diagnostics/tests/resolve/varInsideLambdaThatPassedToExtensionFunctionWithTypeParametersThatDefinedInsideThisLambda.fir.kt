@@ -7,7 +7,7 @@ fun <K, V> helper(builderAction: MutableMap<K, V>.() -> Unit) {
 
 fun test(){
     helper {
-        val x = put("key", "value")
+        konst x = put("key", "konstue")
         if (x != null) {
             "Error: $x"
             x.<!UNRESOLVED_REFERENCE!>length<!>

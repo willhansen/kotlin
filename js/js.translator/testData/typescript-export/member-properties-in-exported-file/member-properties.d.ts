@@ -3,15 +3,15 @@ declare namespace JS_TESTS {
     namespace foo {
         class Test {
             constructor();
-            get _val(): number;
+            get _konst(): number;
             get _var(): number;
-            set _var(value: number);
-            get _valCustom(): number;
-            get _valCustomWithField(): number;
+            set _var(konstue: number);
+            get _konstCustom(): number;
+            get _konstCustomWithField(): number;
             get _varCustom(): number;
-            set _varCustom(value: number);
+            set _varCustom(konstue: number);
             get _varCustomWithField(): number;
-            set _varCustomWithField(value: number);
+            set _varCustomWithField(konstue: number);
         }
     }
 }

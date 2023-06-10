@@ -19,15 +19,15 @@ object Numeric : TemplateGroupBase() {
         }
     }
 
-    private val numericPrimitivesDefaultOrder = PrimitiveType.defaultPrimitives intersect PrimitiveType.numericPrimitives
-    private val summablePrimitives = numericPrimitivesDefaultOrder + PrimitiveType.unsignedPrimitives
+    private konst numericPrimitivesDefaultOrder = PrimitiveType.defaultPrimitives intersect PrimitiveType.numericPrimitives
+    private konst summablePrimitives = numericPrimitivesDefaultOrder + PrimitiveType.unsignedPrimitives
 
-    val f_sum = fn("sum()") {
+    konst f_sum = fn("sum()") {
         listOf(Iterables, Sequences, ArraysOfObjects).forEach { include(it, summablePrimitives) }
         include(ArraysOfPrimitives, numericPrimitivesDefaultOrder)
         include(ArraysOfUnsigned)
     } builder {
-        val p = primitive!!
+        konst p = primitive!!
 
         doc { "Returns the sum of all elements in the ${f.collection}." }
         returns(p.sumType().name)
@@ -67,14 +67,14 @@ object Numeric : TemplateGroupBase() {
         }
     }
 
-    val f_average = fn("average()") {
+    konst f_average = fn("average()") {
         Family.defaultFamilies.forEach { family -> include(family, numericPrimitivesDefaultOrder) }
     } builder {
-        doc { "Returns an average value of elements in the ${f.collection}."}
+        doc { "Returns an average konstue of elements in the ${f.collection}."}
         returns("Double")
         platformName("averageOf<T>")
         body {
-            fun checkOverflow(value: String) = if (f == Family.Sequences || f == Family.Iterables) "checkCountOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Family.Sequences || f == Family.Iterables) "checkCountOverflow($konstue)" else konstue
             """
             var sum: Double = 0.0
             var count: Int = 0

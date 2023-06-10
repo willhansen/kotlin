@@ -15,58 +15,58 @@ import kotlin.test.assertSame
 
 class ClassLoadersCacheTest {
 
-    private val rootClassLoader = this.javaClass.classLoader.rootOrSelf()
+    private konst rootClassLoader = this.javaClass.classLoader.rootOrSelf()
 
-    private val someClass = Test::class.java
-    private val someJar = findJarByClass(someClass)!!
+    private konst someClass = Test::class.java
+    private konst someJar = findJarByClass(someClass)!!
 
-    private val otherClass = Gson::class.java
-    private val otherJar = findJarByClass(otherClass)!!
+    private konst otherClass = Gson::class.java
+    private konst otherJar = findJarByClass(otherClass)!!
 
     @Test
     fun testNewClassLoader() {
-        val cache = ClassLoadersCache(10, rootClassLoader)
-        val cl = cache.getForClassPath(listOf(someJar))
-        val loaded = cl.loadClass(someClass.name)
+        konst cache = ClassLoadersCache(10, rootClassLoader)
+        konst cl = cache.getForClassPath(listOf(someJar))
+        konst loaded = cl.loadClass(someClass.name)
         assertNotSame(someClass, loaded, "Class should be from different ClassLoader")
     }
 
     @Test
     fun testCacheClassLoader() {
-        val cache = ClassLoadersCache(10, rootClassLoader)
-        val cp = listOf(someJar)
+        konst cache = ClassLoadersCache(10, rootClassLoader)
+        konst cp = listOf(someJar)
 
-        val cl1 = cache.getForClassPath(cp)
-        val loaded1 = cl1.loadClass(someClass.name)
+        konst cl1 = cache.getForClassPath(cp)
+        konst loaded1 = cl1.loadClass(someClass.name)
 
-        val cl2 = cache.getForClassPath(cp)
-        val loaded2 = cl2.loadClass(someClass.name)
+        konst cl2 = cache.getForClassPath(cp)
+        konst loaded2 = cl2.loadClass(someClass.name)
 
         assertSame(loaded2, loaded1, "Should return the same ClassLoader for same class path")
     }
 
     @Test
     fun testDifferentClassPath() {
-        val cache = ClassLoadersCache(10, rootClassLoader)
+        konst cache = ClassLoadersCache(10, rootClassLoader)
 
-        val cl1 = cache.getForClassPath(listOf(someJar))
-        val loaded1 = cl1.loadClass(someClass.name)
+        konst cl1 = cache.getForClassPath(listOf(someJar))
+        konst loaded1 = cl1.loadClass(someClass.name)
 
-        val cl2 = cache.getForClassPath(listOf(someJar, otherJar))
-        val loaded2 = cl2.loadClass(someClass.name)
+        konst cl2 = cache.getForClassPath(listOf(someJar, otherJar))
+        konst loaded2 = cl2.loadClass(someClass.name)
 
         assertNotSame(loaded2, loaded1, "Should create different ClassLoaders for different class paths")
     }
 
     @Test
     fun testSplitClassPath() {
-        val cache = ClassLoadersCache(10, rootClassLoader)
-        val topCp = listOf(someJar)
-        val bottomCp1 = listOf(otherJar)
-        val bottomCp2 = listOf(otherJar, findJarByClass(JvmField::class.java)!!)
+        konst cache = ClassLoadersCache(10, rootClassLoader)
+        konst topCp = listOf(someJar)
+        konst bottomCp1 = listOf(otherJar)
+        konst bottomCp2 = listOf(otherJar, findJarByClass(JvmField::class.java)!!)
 
-        val cl1 = cache.getForSplitPaths(bottomCp1, topCp)
-        val cl2 = cache.getForSplitPaths(bottomCp2, topCp)
+        konst cl1 = cache.getForSplitPaths(bottomCp1, topCp)
+        konst cl2 = cache.getForSplitPaths(bottomCp2, topCp)
 
         assertSame(
             cl1.loadClass(someClass.name),
@@ -81,12 +81,12 @@ class ClassLoadersCacheTest {
     }
 
     private fun findJarByClass(klass: Class<*>): File? {
-        val classFileName = klass.name.substringAfterLast(".") + ".class"
-        val resource = klass.getResource(classFileName) ?: return null
-        val uri = resource.toString()
+        konst classFileName = klass.name.substringAfterLast(".") + ".class"
+        konst resource = klass.getResource(classFileName) ?: return null
+        konst uri = resource.toString()
         if (!uri.startsWith("jar:file:")) return null
 
-        val fileName = URLDecoder.decode(
+        konst fileName = URLDecoder.decode(
             uri.removePrefix("jar:file:").substringBefore("!"),
             Charset.defaultCharset().name()
         )

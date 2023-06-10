@@ -4,7 +4,7 @@ FILE: notUselessCast_2.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val foo: R|kotlin/String| = R|<local>/foo|
+        public final konst foo: R|kotlin/String| = R|<local>/foo|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|
@@ -17,7 +17,7 @@ FILE: notUselessCast_2.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val bar: R|kotlin/String| = R|<local>/bar|
+        public final konst bar: R|kotlin/String| = R|<local>/bar|
             public get(): R|kotlin/String|
 
     }
@@ -29,7 +29,7 @@ FILE: notUselessCast_2.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val wrapped: R|T| = R|<local>/wrapped|
+        public final konst wrapped: R|T| = R|<local>/wrapped|
             public get(): R|T|
 
         public final fun <A> map(f: R|(T) -> A|): R|Wrapper<A>| {

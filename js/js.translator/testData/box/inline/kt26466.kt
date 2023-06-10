@@ -4,7 +4,7 @@
 // FILE: lib.kt
 
 class A(k: String) {
-    val ok = "O" + k
+    konst ok = "O" + k
 }
 
 inline fun o(k: String) = A(k).ok
@@ -13,7 +13,7 @@ inline fun o(k: String) = A(k).ok
 // FILE: main.kt
 
 class B {
-    val ok = run { o("K") }
+    konst ok = run { o("K") }
 }
 
 fun box() = B().ok

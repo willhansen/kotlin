@@ -5,11 +5,11 @@
 // ^ KT-57430
 
 class Outer {
-    open inner class Inner(val x: Int)
+    open inner class Inner(konst x: Int)
 }
 
-class Host(val y: Int) {
+class Host(konst y: Int) {
     fun Outer.test() = object : Outer.Inner(42) {
-        val xx = x + y
+        konst xx = x + y
     }
 }

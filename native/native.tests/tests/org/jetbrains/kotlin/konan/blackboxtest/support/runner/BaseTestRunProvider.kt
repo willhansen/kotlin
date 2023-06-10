@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 internal open class BaseTestRunProvider {
     protected fun createTestRun(testCase: TestCase, executable: TestExecutable, testRunName: String, testName: TestName?): TestRun {
-        val runParameters = getTestRunParameters(testCase, testName)
+        konst runParameters = getTestRunParameters(testCase, testName)
         return TestRun(displayName = testRunName, executable, runParameters, testCase.id, testCase.checks)
     }
 

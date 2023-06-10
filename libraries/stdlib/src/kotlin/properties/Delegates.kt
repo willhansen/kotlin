@@ -12,8 +12,8 @@ import kotlin.reflect.KProperty
  */
 public object Delegates {
     /**
-     * Returns a property delegate for a read/write property with a non-`null` value that is initialized not during
-     * object construction time but at a later time. Trying to read the property before the initial value has been
+     * Returns a property delegate for a read/write property with a non-`null` konstue that is initialized not during
+     * object construction time but at a later time. Trying to read the property before the initial konstue has been
      * assigned results in an exception.
      *
      * @sample samples.properties.Delegates.notNullDelegate
@@ -22,8 +22,8 @@ public object Delegates {
 
     /**
      * Returns a property delegate for a read/write property that calls a specified callback function when changed.
-     * @param initialValue the initial value of the property.
-     * @param onChange the callback which is called after the change of the property is made. The value of the property
+     * @param initialValue the initial konstue of the property.
+     * @param onChange the callback which is called after the change of the property is made. The konstue of the property
      *  has already been changed when this callback is invoked.
      *
      *  @sample samples.properties.Delegates.observableDelegate
@@ -37,11 +37,11 @@ public object Delegates {
     /**
      * Returns a property delegate for a read/write property that calls a specified callback function when changed,
      * allowing the callback to veto the modification.
-     * @param initialValue the initial value of the property.
-     * @param onChange the callback which is called before a change to the property value is attempted.
-     *  The value of the property hasn't been changed yet, when this callback is invoked.
-     *  If the callback returns `true` the value of the property is being set to the new value,
-     *  and if the callback returns `false` the new value is discarded and the property remains its old value.
+     * @param initialValue the initial konstue of the property.
+     * @param onChange the callback which is called before a change to the property konstue is attempted.
+     *  The konstue of the property hasn't been changed yet, when this callback is invoked.
+     *  If the callback returns `true` the konstue of the property is being set to the new konstue,
+     *  and if the callback returns `false` the new konstue is discarded and the property remains its old konstue.
      *
      *  @sample samples.properties.Delegates.vetoableDelegate
      *  @sample samples.properties.Delegates.throwVetoableDelegate
@@ -56,17 +56,17 @@ public object Delegates {
 
 
 private class NotNullVar<T : Any>() : ReadWriteProperty<Any?, T> {
-    private var value: T? = null
+    private var konstue: T? = null
 
     public override fun getValue(thisRef: Any?, property: KProperty<*>): T {
-        return value ?: throw IllegalStateException("Property ${property.name} should be initialized before get.")
+        return konstue ?: throw IllegalStateException("Property ${property.name} should be initialized before get.")
     }
 
-    public override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        this.value = value
+    public override fun setValue(thisRef: Any?, property: KProperty<*>, konstue: T) {
+        this.konstue = konstue
     }
 
     public override fun toString(): String =
-        "NotNullProperty(${if (value != null) "value=$value" else "value not initialized yet"})"
+        "NotNullProperty(${if (konstue != null) "konstue=$konstue" else "konstue not initialized yet"})"
 }
 

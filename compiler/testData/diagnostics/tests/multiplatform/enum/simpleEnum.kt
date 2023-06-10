@@ -11,7 +11,7 @@ expect enum class Foo {
 // MODULE: m2-jvm()()(m1-common)
 // FILE: jvm.kt
 
-actual enum class Foo(val x: String) {
+actual enum class Foo(konst x: String) {
     ENTRY1("1"),
     ENTRY2("2"),
     ENTRY3("3");

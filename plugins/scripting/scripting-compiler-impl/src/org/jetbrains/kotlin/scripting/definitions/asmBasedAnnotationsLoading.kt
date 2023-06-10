@@ -8,24 +8,24 @@ package org.jetbrains.kotlin.scripting.definitions
 import org.jetbrains.org.objectweb.asm.*
 
 internal class BinAnnArgData(
-    val name: String?,
-    val value: String
+    konst name: String?,
+    konst konstue: String
 )
 
 internal class BinAnnData(
-    val name: String,
-    val args: ArrayList<BinAnnArgData> = arrayListOf()
+    konst name: String,
+    konst args: ArrayList<BinAnnArgData> = arrayListOf()
 )
 
-private class TemplateAnnotationVisitor(val anns: ArrayList<BinAnnData> = arrayListOf()) : AnnotationVisitor(Opcodes.API_VERSION) {
-    override fun visit(name: String?, value: Any?) {
-        anns.last().args.add(BinAnnArgData(name, value.toString()))
+private class TemplateAnnotationVisitor(konst anns: ArrayList<BinAnnData> = arrayListOf()) : AnnotationVisitor(Opcodes.API_VERSION) {
+    override fun visit(name: String?, konstue: Any?) {
+        anns.last().args.add(BinAnnArgData(name, konstue.toString()))
     }
 }
 
-private class TemplateClassVisitor(val annVisitor: TemplateAnnotationVisitor) : ClassVisitor(Opcodes.API_VERSION) {
+private class TemplateClassVisitor(konst annVisitor: TemplateAnnotationVisitor) : ClassVisitor(Opcodes.API_VERSION) {
     override fun visitAnnotation(desc: String, visible: Boolean): AnnotationVisitor? {
-        val shortName = Type.getType(desc).internalName.substringAfterLast("/")
+        konst shortName = Type.getType(desc).internalName.substringAfterLast("/")
         if (shortName.startsWith("KotlinScript") || shortName.startsWith("ScriptTemplate")) {
             annVisitor.anns.add(BinAnnData(shortName))
             return annVisitor
@@ -36,7 +36,7 @@ private class TemplateClassVisitor(val annVisitor: TemplateAnnotationVisitor) : 
 
 internal fun loadAnnotationsFromClass(fileContents: ByteArray): ArrayList<BinAnnData> {
 
-    val visitor =
+    konst visitor =
         TemplateClassVisitor(TemplateAnnotationVisitor())
 
     ClassReader(fileContents).accept(visitor, ClassReader.SKIP_CODE or ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)

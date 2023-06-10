@@ -19,4 +19,4 @@ abstract class Observer : List<IEntity>
 package com.winterbe.observer
 import com.winterbe.domain.IEntity
 
-class ObserverSupport<T : IEntity>(private val observers: List<Observer>)
+class ObserverSupport<T : IEntity>(private konst observers: List<Observer>)

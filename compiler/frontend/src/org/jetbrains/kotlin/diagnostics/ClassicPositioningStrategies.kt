@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 
 object ClassicPositioningStrategies {
     @JvmField
-    val ACTUAL_DECLARATION_NAME: PositioningStrategy<KtNamedDeclaration> =
+    konst ACTUAL_DECLARATION_NAME: PositioningStrategy<KtNamedDeclaration> =
         object : PositioningStrategies.DeclarationHeader<KtNamedDeclaration>() {
             override fun mark(element: KtNamedDeclaration): List<TextRange> {
-                val nameIdentifier = element.nameIdentifier
+                konst nameIdentifier = element.nameIdentifier
                 return when {
                     nameIdentifier != null -> markElement(nameIdentifier)
                     element is KtNamedFunction -> PositioningStrategies.DECLARATION_SIGNATURE.mark(element)
@@ -30,10 +30,10 @@ object ClassicPositioningStrategies {
         }
 
     // TODO: move to specific strategies
-    private val DiagnosticMarker.firstIncompatibility: ExpectActualCompatibility.Incompatible<MemberDescriptor>?
+    private konst DiagnosticMarker.firstIncompatibility: ExpectActualCompatibility.Incompatible<MemberDescriptor>?
         get() {
             @Suppress("UNCHECKED_CAST")
-            val map = when (factoryName) {
+            konst map = when (factoryName) {
                 Errors.NO_ACTUAL_FOR_EXPECT.name -> (this as DiagnosticWithParameters3Marker<*, *, *>).c
                 Errors.ACTUAL_WITHOUT_EXPECT.name -> (this as DiagnosticWithParameters2Marker<*, *>).b
                 else -> null
@@ -42,20 +42,20 @@ object ClassicPositioningStrategies {
         }
 
     @JvmField
-    val INCOMPATIBLE_DECLARATION: PositioningStrategy<KtNamedDeclaration> =
+    konst INCOMPATIBLE_DECLARATION: PositioningStrategy<KtNamedDeclaration> =
         object : PositioningStrategies.DeclarationHeader<KtNamedDeclaration>() {
             override fun markDiagnostic(diagnostic: DiagnosticMarker): List<TextRange> {
-                val element = diagnostic.psiElement as KtNamedDeclaration
-                val callableDeclaration = element as? KtCallableDeclaration
-                val incompatibility = diagnostic.firstIncompatibility
+                konst element = diagnostic.psiElement as KtNamedDeclaration
+                konst callableDeclaration = element as? KtCallableDeclaration
+                konst incompatibility = diagnostic.firstIncompatibility
                 return when (incompatibility) {
                     null, ExpectActualCompatibility.Incompatible.Unknown, is ExpectActualCompatibility.Incompatible.ClassScopes,
                     ExpectActualCompatibility.Incompatible.EnumEntries -> null
                     ExpectActualCompatibility.Incompatible.ClassKind -> {
-                        val startElement =
+                        konst startElement =
                             element.modifierList?.getModifier(KtTokens.ENUM_KEYWORD)
                                 ?: element.modifierList?.getModifier(KtTokens.ANNOTATION_KEYWORD)
-                        val endElement =
+                        konst endElement =
                             element.node.findChildByType(PositioningStrategies.classKindTokens)?.psi
                                 ?: element.nameIdentifier
                         if (startElement != null && endElement != null) {
@@ -72,16 +72,16 @@ object ClassicPositioningStrategies {
                     }
                     ExpectActualCompatibility.Incompatible.CallableKind -> {
                         (callableDeclaration as? KtNamedFunction)?.funKeyword
-                            ?: (callableDeclaration as? KtProperty)?.valOrVarKeyword
+                            ?: (callableDeclaration as? KtProperty)?.konstOrVarKeyword
                     }
                     ExpectActualCompatibility.Incompatible.ParameterShape -> {
-                        callableDeclaration?.let { it.receiverTypeReference ?: it.valueParameterList }
+                        callableDeclaration?.let { it.receiverTypeReference ?: it.konstueParameterList }
                     }
                     ExpectActualCompatibility.Incompatible.ParameterCount, ExpectActualCompatibility.Incompatible.ParameterTypes,
                     ExpectActualCompatibility.Incompatible.ParameterNames, ExpectActualCompatibility.Incompatible.ValueParameterVararg,
                     ExpectActualCompatibility.Incompatible.ValueParameterNoinline,
                     ExpectActualCompatibility.Incompatible.ValueParameterCrossinline -> {
-                        callableDeclaration?.valueParameterList
+                        callableDeclaration?.konstueParameterList
                     }
                     ExpectActualCompatibility.Incompatible.ReturnType -> {
                         callableDeclaration?.typeReference
@@ -114,10 +114,10 @@ object ClassicPositioningStrategies {
         }
 
     @JvmField
-    val UNREACHABLE_CODE: PositioningStrategy<PsiElement> = object : PositioningStrategy<PsiElement>() {
+    konst UNREACHABLE_CODE: PositioningStrategy<PsiElement> = object : PositioningStrategy<PsiElement>() {
         override fun markDiagnostic(diagnostic: DiagnosticMarker): List<TextRange> {
             @Suppress("UNCHECKED_CAST")
-            val unreachableCode = diagnostic as DiagnosticWithParameters2Marker<Set<KtElement>, Set<KtElement>>
+            konst unreachableCode = diagnostic as DiagnosticWithParameters2Marker<Set<KtElement>, Set<KtElement>>
             return UnreachableCode.getUnreachableTextRanges(unreachableCode.psiElement as KtElement, unreachableCode.a, unreachableCode.b)
         }
     }

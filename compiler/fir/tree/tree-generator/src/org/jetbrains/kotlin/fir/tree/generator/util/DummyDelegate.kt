@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.fir.tree.generator.util
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class DummyDelegate<T>(val value: T) : ReadOnlyProperty<Any?, T> {
+class DummyDelegate<T>(konst konstue: T) : ReadOnlyProperty<Any?, T> {
     override fun getValue(thisRef: Any?, property: KProperty<*>): T {
-        return value
+        return konstue
     }
 }

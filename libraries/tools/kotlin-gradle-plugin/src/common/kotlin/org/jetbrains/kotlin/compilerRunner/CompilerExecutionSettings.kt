@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompilerExecutionStrategy
 import java.io.Serializable
 
 internal data class CompilerExecutionSettings(
-    val daemonJvmArgs: List<String>?,
-    val strategy: KotlinCompilerExecutionStrategy,
-    val useDaemonFallbackStrategy: Boolean,
+    konst daemonJvmArgs: List<String>?,
+    konst strategy: KotlinCompilerExecutionStrategy,
+    konst useDaemonFallbackStrategy: Boolean,
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 }

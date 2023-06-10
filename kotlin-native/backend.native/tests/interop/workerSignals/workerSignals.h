@@ -5,7 +5,7 @@ extern "C" {
 #endif
 
 void setupSignalHandler(void);
-void signalThread(uint64_t thread, int value);
+void signalThread(uint64_t thread, int konstue);
 int getValue(void);
 
 #ifdef __cplusplus

@@ -12,56 +12,56 @@ interface SMSS : GM<String, String>
 class Test_MapStringString_AbstractMapStringString :
     Map<String, String>, java.util.AbstractMap<String, String>()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_MapStringString_JMapFinalRemove :
     Map<String, String>, JMapFinalRemove()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_MSS_AbstractMapStringString :
     MSS, java.util.AbstractMap<String, String>()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_MSS_JMapFinalRemove :
     MSS, JMapFinalRemove()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_GMStringString_AbstractMapStringString :
     GM<String, String>, java.util.AbstractMap<String, String>()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_GMStringString_JMapFinalRemove :
     GM<String, String>, JMapFinalRemove()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_SMSS_AbstractMapStringString :
     SMSS, java.util.AbstractMap<String, String>()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 
 class Test_SMSS_JMapFinalRemove :
     SMSS, JMapFinalRemove()
 {
-    override val entries: MutableSet<MutableMap.MutableEntry<String, String>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<String, String>>
         get() = TODO()
 }
 

@@ -13,28 +13,28 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnostic
 import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
 
 object FirMetaInfoUtils {
-    val renderDiagnosticNoArgs = FirDiagnosticCodeMetaRenderConfiguration().apply { renderParams = false }
-    val renderDiagnosticWithArgs = FirDiagnosticCodeMetaRenderConfiguration().apply { renderParams = true }
+    konst renderDiagnosticNoArgs = FirDiagnosticCodeMetaRenderConfiguration().apply { renderParams = false }
+    konst renderDiagnosticWithArgs = FirDiagnosticCodeMetaRenderConfiguration().apply { renderParams = true }
 }
 
 class FirDiagnosticCodeMetaInfo(
-    val diagnostic: KtDiagnostic,
+    konst diagnostic: KtDiagnostic,
     renderConfiguration: FirDiagnosticCodeMetaRenderConfiguration,
-    private val range: TextRange
+    private konst range: TextRange
 ) : CodeMetaInfo {
     override var renderConfiguration: FirDiagnosticCodeMetaRenderConfiguration = renderConfiguration
         private set
 
-    override val start: Int
+    override konst start: Int
         get() = range.startOffset
 
-    override val end: Int
+    override konst end: Int
         get() = range.endOffset
 
-    override val tag: String
+    override konst tag: String
         get() = renderConfiguration.getTag(this)
 
-    override val attributes: MutableList<String> = mutableListOf()
+    override konst attributes: MutableList<String> = mutableListOf()
 
     override fun asString(): String = renderConfiguration.asString(this)
 
@@ -44,9 +44,9 @@ class FirDiagnosticCodeMetaInfo(
 }
 
 class FirDiagnosticCodeMetaRenderConfiguration(
-    val renderSeverity: Boolean = false,
+    konst renderSeverity: Boolean = false,
 ) : AbstractCodeMetaInfoRenderConfiguration(renderParams = false) {
-    private val crossPlatformLineBreak = """\r?\n""".toRegex()
+    private konst crossPlatformLineBreak = """\r?\n""".toRegex()
 
     override fun asString(codeMetaInfo: CodeMetaInfo): String {
         if (codeMetaInfo !is FirDiagnosticCodeMetaInfo) return ""
@@ -58,11 +58,11 @@ class FirDiagnosticCodeMetaRenderConfiguration(
 
     private fun getParamsString(codeMetaInfo: FirDiagnosticCodeMetaInfo): String {
         if (!renderParams) return ""
-        val params = mutableListOf<String>()
+        konst params = mutableListOf<String>()
 
-        val diagnostic = codeMetaInfo.diagnostic
+        konst diagnostic = codeMetaInfo.diagnostic
 
-        val renderer = RootDiagnosticRendererFactory(diagnostic)
+        konst renderer = RootDiagnosticRendererFactory(diagnostic)
         if (renderer is AbstractKtDiagnosticWithParametersRenderer) {
             renderer.renderParameters(diagnostic).mapTo(params, Any?::toString)
         }
@@ -71,7 +71,7 @@ class FirDiagnosticCodeMetaRenderConfiguration(
             params.add("severity='${diagnostic.severity}'")
 
         params.add(getAdditionalParams(codeMetaInfo))
-        val nonEmptyParams = params.filter { it.isNotEmpty() }
+        konst nonEmptyParams = params.filter { it.isNotEmpty() }
 
         return if (nonEmptyParams.isNotEmpty()) {
             "(\"${params.filter { it.isNotEmpty() }.joinToString("; ")}\")"

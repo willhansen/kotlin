@@ -81,7 +81,7 @@ KtFile: EOLsOnRollback.kt
                   REFERENCE_EXPRESSION
                     PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('f')
       PsiWhiteSpace('\n')

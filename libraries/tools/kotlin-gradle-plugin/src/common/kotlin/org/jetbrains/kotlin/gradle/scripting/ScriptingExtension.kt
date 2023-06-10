@@ -6,10 +6,10 @@
 package org.jetbrains.kotlin.gradle.scripting
 
 open class ScriptingExtension {
-    internal val myScriptDefinitions = mutableListOf<String>()
-    internal val myScriptDefinitionsClasspath = mutableListOf<String>()
+    internal konst myScriptDefinitions = mutableListOf<String>()
+    internal konst myScriptDefinitionsClasspath = mutableListOf<String>()
     internal var myDisableScriptDefinitionsFromClasspath = false
-    internal val myScriptResolverEnvironment = mutableMapOf<String, String?>()
+    internal konst myScriptResolverEnvironment = mutableMapOf<String, String?>()
 
     open fun scriptDefinition(fqName: String) {
         myScriptDefinitions.add(fqName)

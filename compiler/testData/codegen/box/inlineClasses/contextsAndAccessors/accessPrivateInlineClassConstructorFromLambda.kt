@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Composed(val s: String) {
+konstue class Composed(konst s: String) {
 
     constructor(s: String, x: Int) : this(s.subSequence(0, x).toString())
 

@@ -1,2 +1,2 @@
-val c = javax.swing.SwingUtilities.<caret>invokeLater {  }
+konst c = javax.swing.SwingUtilities.<caret>invokeLater {  }
 

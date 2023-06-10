@@ -32,11 +32,11 @@ import org.jetbrains.kotlin.utils.keysToMap
 import java.lang.invoke.MethodType
 import kotlin.math.floor
 
-val intrinsicConstEvaluationAnnotation = FqName("kotlin.internal.IntrinsicConstEvaluation")
-val compileTimeAnnotation = FqName("kotlin.CompileTimeCalculation")
-val evaluateIntrinsicAnnotation = FqName("kotlin.EvaluateIntrinsic")
+konst intrinsicConstEkonstuationAnnotation = FqName("kotlin.internal.IntrinsicConstEkonstuation")
+konst compileTimeAnnotation = FqName("kotlin.CompileTimeCalculation")
+konst ekonstuateIntrinsicAnnotation = FqName("kotlin.EkonstuateIntrinsic")
 
-internal val IrElement.fqName: String
+internal konst IrElement.fqName: String
     get() = (this as? IrDeclarationWithName)?.fqNameWhenAvailable?.asString() ?: ""
 
 internal fun IrFunction.getDispatchReceiver(): IrValueParameterSymbol? = this.dispatchReceiverParameter?.symbol
@@ -49,9 +49,9 @@ internal fun IrFunctionAccessExpression.getThisReceiver(): IrValueSymbol = this.
 
 @Suppress("UNCHECKED_CAST")
 internal fun <T> IrConst<T>.toPrimitive(): Primitive<T> = when {
-    type.isByte() -> Primitive((value as Number).toByte() as T, type)
-    type.isShort() -> Primitive((value as Number).toShort() as T, type)
-    else -> Primitive(value, type)
+    type.isByte() -> Primitive((konstue as Number).toByte() as T, type)
+    type.isShort() -> Primitive((konstue as Number).toShort() as T, type)
+    else -> Primitive(konstue, type)
 }
 
 fun IrAnnotationContainer?.hasAnnotation(annotation: FqName): Boolean {
@@ -67,10 +67,10 @@ fun IrAnnotationContainer.getAnnotation(annotation: FqName): IrConstructorCall {
         ?: ((this as IrFunction).parent as IrClass).annotations.first { it.symbol.owner.parentAsClass.fqNameWhenAvailable == annotation }
 }
 
-internal fun IrAnnotationContainer.getEvaluateIntrinsicValue(): String? {
+internal fun IrAnnotationContainer.getEkonstuateIntrinsicValue(): String? {
     if (this is IrClass && this.fqName.startsWith("java")) return this.fqName
-    if (!this.hasAnnotation(evaluateIntrinsicAnnotation)) return null
-    return (this.getAnnotation(evaluateIntrinsicAnnotation).getValueArgument(0) as IrConst<*>).value.toString()
+    if (!this.hasAnnotation(ekonstuateIntrinsicAnnotation)) return null
+    return (this.getAnnotation(ekonstuateIntrinsicAnnotation).getValueArgument(0) as IrConst<*>).konstue.toString()
 }
 
 internal fun getPrimitiveClass(irType: IrType, asObject: Boolean = false): Class<*>? =
@@ -96,7 +96,7 @@ fun IrFunction.getFirstNonInterfaceOverridden(): IrFunction {
         it.firstOrNull()?.overriddenSymbols?.map { overriddenSymbol -> overriddenSymbol.owner }
     }.flatten().first { overriddenFunction ->
         if (overriddenFunction.isFakeOverride) return@first false
-        val kind = overriddenFunction.parentClassOrNull?.kind
+        konst kind = overriddenFunction.parentClassOrNull?.kind
         kind != ClassKind.INTERFACE
     }
 }
@@ -122,11 +122,11 @@ internal fun List<Any?>.toPrimitiveStateArray(type: IrType): Primitive<*> {
 }
 
 fun IrFunctionAccessExpression.getVarargType(index: Int): IrType? {
-    val varargType = this.symbol.owner.valueParameters[index].varargElementType ?: return null
-    varargType.classOrNull?.let { return this.symbol.owner.valueParameters[index].type }
-    val type = this.symbol.owner.valueParameters[index].type as? IrSimpleType ?: return null
+    konst varargType = this.symbol.owner.konstueParameters[index].varargElementType ?: return null
+    varargType.classOrNull?.let { return this.symbol.owner.konstueParameters[index].type }
+    konst type = this.symbol.owner.konstueParameters[index].type as? IrSimpleType ?: return null
     return type.buildSimpleType {
-        val typeParameter = varargType.classifierOrFail.owner as IrTypeParameter
+        konst typeParameter = varargType.classifierOrFail.owner as IrTypeParameter
         arguments = listOf(makeTypeProjection(this@getVarargType.getTypeArgument(typeParameter.index)!!, Variance.OUT_VARIANCE))
     }
 }
@@ -152,7 +152,7 @@ internal fun IrType.isPrimitiveArray(): Boolean {
 }
 
 internal fun IrClass.internalName(): String {
-    val internalName = StringBuilder(this.name.asString())
+    konst internalName = StringBuilder(this.name.asString())
     generateSequence(this as? IrDeclarationParent) { (it as? IrDeclaration)?.parent }
         .drop(1)
         .forEach {
@@ -169,18 +169,18 @@ internal fun IrClass.internalName(): String {
  */
 internal fun IrFunction?.checkCast(environment: IrInterpreterEnvironment): Boolean {
     this ?: return true
-    val actualType = this.returnType
+    konst actualType = this.returnType
     if (actualType.classifierOrNull !is IrTypeParameterSymbol) return true
 
     // TODO expectedType can be missing for functions called as proxy
-    val expectedType = (environment.callStack.loadState(this.symbol) as? KTypeState)?.irType ?: return true
+    konst expectedType = (environment.callStack.loadState(this.symbol) as? KTypeState)?.irType ?: return true
     if (expectedType.classifierOrFail is IrTypeParameterSymbol) return true
 
-    val actualState = environment.callStack.peekState() ?: return true
-    if (actualState is Primitive<*> && actualState.value == null) return true // this is handled in checkNullability
+    konst actualState = environment.callStack.peekState() ?: return true
+    if (actualState is Primitive<*> && actualState.konstue == null) return true // this is handled in checkNullability
 
     if (!actualState.isSubtypeOf(expectedType)) {
-        val convertibleClassName = environment.callStack.popState().irClass.fqName
+        konst convertibleClassName = environment.callStack.popState().irClass.fqName
         environment.callStack.dropFrame() // current frame is pointing on function and is redundant
         ClassCastException("$convertibleClassName cannot be cast to ${expectedType.render()}").handleUserException(environment)
         return false
@@ -191,12 +191,12 @@ internal fun IrFunction?.checkCast(environment: IrInterpreterEnvironment): Boole
 internal fun IrFunction.getArgsForMethodInvocation(
     callInterceptor: CallInterceptor, methodType: MethodType, args: List<State>
 ): List<Any?> {
-    val argsValues = args.wrap(callInterceptor, this, methodType).toMutableList()
+    konst argsValues = args.wrap(callInterceptor, this, methodType).toMutableList()
 
     // TODO if vararg isn't last parameter
     // must convert vararg array into separated elements for correct invoke
-    if (this.valueParameters.lastOrNull()?.varargElementType != null) {
-        val varargValue = argsValues.last()
+    if (this.konstueParameters.lastOrNull()?.varargElementType != null) {
+        konst varargValue = argsValues.last()
         argsValues.removeAt(argsValues.size - 1)
         argsValues.addAll(varargValue as Array<out Any?>)
     }
@@ -205,10 +205,10 @@ internal fun IrFunction.getArgsForMethodInvocation(
 }
 
 internal fun IrType.fqNameWithNullability(): String {
-    val fqName = classFqName?.toString()
+    konst fqName = classFqName?.toString()
         ?: (this.classifierOrNull?.owner as? IrDeclarationWithName)?.name?.asString()
         ?: render()
-    val nullability = if (this is IrSimpleType && this.nullability == SimpleTypeNullability.MARKED_NULLABLE) "?" else ""
+    konst nullability = if (this is IrSimpleType && this.nullability == SimpleTypeNullability.MARKED_NULLABLE) "?" else ""
     return fqName + nullability
 }
 
@@ -226,36 +226,36 @@ internal fun IrFieldAccessExpression.accessesTopLevelOrObjectField(): Boolean {
 }
 
 internal fun IrClass.getOriginalPropertyByName(name: String): IrProperty {
-    val property = this.properties.single { it.name.asString() == name }
+    konst property = this.properties.single { it.name.asString() == name }
     return property.getter!!.getLastOverridden().property!!
 }
 
 internal fun IrFunctionAccessExpression.getFunctionThatContainsDefaults(): IrFunction {
-    val irFunction = this.symbol.owner
+    konst irFunction = this.symbol.owner
     fun IrValueParameter.lookup(): IrFunction? {
         return defaultValue?.let { this.parent as IrFunction }
             ?: (this.parent as? IrSimpleFunction)?.overriddenSymbols
-                ?.map { it.owner.valueParameters[this.index] }
+                ?.map { it.owner.konstueParameters[this.index] }
                 ?.firstNotNullOfOrNull { it.lookup() }
     }
 
-    return (0 until this.valueArgumentsCount)
+    return (0 until this.konstueArgumentsCount)
         .first { this.getValueArgument(it) == null }
-        .let { irFunction.valueParameters[it].lookup() ?: irFunction }
+        .let { irFunction.konstueParameters[it].lookup() ?: irFunction }
 }
 
 internal fun IrValueParameter.getDefaultWithActualParameters(
     newParent: IrFunction, actualParameters: List<IrValueDeclaration?>
 ): IrExpression? {
-    val expression = this.defaultValue?.expression
+    konst expression = this.defaultValue?.expression
     if (expression is IrConst<*>) return expression
 
-    val parameterOwner = this.parent as IrFunction
-    val transformer = object : IrElementTransformerVoid() {
+    konst parameterOwner = this.parent as IrFunction
+    konst transformer = object : IrElementTransformerVoid() {
         override fun visitGetValue(expression: IrGetValue): IrExpression {
-            val parameter = expression.symbol.owner as? IrValueParameter ?: return super.visitGetValue(expression)
+            konst parameter = expression.symbol.owner as? IrValueParameter ?: return super.visitGetValue(expression)
             if (parameter.parent != parameterOwner) return super.visitGetValue(expression)
-            val newParameter = when (parameter.index) {
+            konst newParameter = when (parameter.index) {
                 -1 -> newParent.dispatchReceiverParameter ?: newParent.extensionReceiverParameter
                 else -> actualParameters[parameter.index]
             }
@@ -272,15 +272,15 @@ internal fun IrType.getTypeIfReified(callStack: CallStack): IrType {
 internal fun IrType.getTypeIfReified(getType: (IrClassifierSymbol) -> IrType): IrType {
     if (this !is IrSimpleType) return this
 
-    val owner = this.classifierOrNull?.owner
+    konst owner = this.classifierOrNull?.owner
     if (owner is IrTypeParameter && owner.isReified) {
         return (getType(owner.symbol) as IrSimpleType)
             .mergeNullability(this)
     }
 
-    val newArguments = this.arguments.map {
-        val type = it.typeOrNull ?: return@map it
-        val typeOwner = type.classifierOrNull?.owner
+    konst newArguments = this.arguments.map {
+        konst type = it.typeOrNull ?: return@map it
+        konst typeOwner = type.classifierOrNull?.owner
         if (typeOwner is IrTypeParameter && !typeOwner.isReified) return@map it
         type.getTypeIfReified(getType) as IrTypeArgument
     }
@@ -291,7 +291,7 @@ internal fun IrType.getTypeIfReified(getType: (IrClassifierSymbol) -> IrType): I
 
 internal fun IrInterpreterEnvironment.loadReifiedTypeArguments(expression: IrFunctionAccessExpression): Map<IrTypeParameterSymbol, KTypeState> {
     return expression.symbol.owner.typeParameters.filter { it.isReified }.map { it.symbol }.keysToMap {
-        val reifiedType = expression.getTypeArgument(it.owner.index)!!.getTypeIfReified(callStack)
+        konst reifiedType = expression.getTypeArgument(it.owner.index)!!.getTypeIfReified(callStack)
         KTypeState(reifiedType, this.kTypeClass.owner)
     }
 }
@@ -306,8 +306,8 @@ internal fun IrClass.getSingleAbstractMethod(): IrFunction {
 
 internal fun IrExpression?.isAccessToNotNullableObject(): Boolean {
     if (this !is IrGetValue) return false
-    val owner = this.symbol.owner
-    val expectedClass = this.type.classOrNull?.owner
+    konst owner = this.symbol.owner
+    konst expectedClass = this.type.classOrNull?.owner
     if (expectedClass == null || !expectedClass.isObject || this.type.isNullable()) return false
     return owner.origin == IrDeclarationOrigin.INSTANCE_RECEIVER || owner.name.asString() == "<this>"
 }
@@ -317,11 +317,11 @@ internal fun IrFunction.isAccessorOfPropertyWithBackingField(): Boolean {
 }
 
 internal fun State.unsignedToString(): String {
-    return when (val value = (this.fields.values.single() as Primitive<*>).value) {
-        is Byte -> value.toUByte().toString()
-        is Short -> value.toUShort().toString()
-        is Int -> value.toUInt().toString()
-        else -> (value as Number).toLong().toULong().toString()
+    return when (konst konstue = (this.fields.konstues.single() as Primitive<*>).konstue) {
+        is Byte -> konstue.toUByte().toString()
+        is Short -> konstue.toUShort().toString()
+        is Int -> konstue.toUInt().toString()
+        else -> (konstue as Number).toLong().toULong().toString()
     }
 }
 
@@ -334,16 +334,16 @@ internal fun Any?.specialToStringForJs(): String {
 }
 
 internal fun IrEnumEntry.toState(irBuiltIns: IrBuiltIns): Common {
-    val enumClass = this.symbol.owner.parentAsClass
-    val enumEntries = enumClass.declarations.filterIsInstance<IrEnumEntry>()
-    val enumClassObject = Common(this.correspondingClass ?: enumClass)
+    konst enumClass = this.symbol.owner.parentAsClass
+    konst enumEntries = enumClass.declarations.filterIsInstance<IrEnumEntry>()
+    konst enumClassObject = Common(this.correspondingClass ?: enumClass)
 
     if (enumEntries.isNotEmpty()) {
-        val valueArguments = listOf(
+        konst konstueArguments = listOf(
             Primitive(this.name.asString(), irBuiltIns.stringType),
             Primitive(enumEntries.indexOf(this), irBuiltIns.intType)
         )
-        irBuiltIns.enumClass.owner.declarations.filterIsInstance<IrProperty>().zip(valueArguments).forEach { (property, argument) ->
+        irBuiltIns.enumClass.owner.declarations.filterIsInstance<IrProperty>().zip(konstueArguments).forEach { (property, argument) ->
             enumClassObject.setField(property.symbol, argument)
         }
     }
@@ -351,6 +351,6 @@ internal fun IrEnumEntry.toState(irBuiltIns: IrBuiltIns): Common {
     return enumClassObject
 }
 
-internal val IrFunction.property: IrProperty?
+internal konst IrFunction.property: IrProperty?
     get() = (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner
 

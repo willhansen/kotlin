@@ -9,15 +9,15 @@ import org.jetbrains.kotlin.commonizer.stats.StatsType
 
 internal object StatsTypeOptionType : OptionType<StatsType>(STATS_TYPE_ALIAS, DESCRIPTION, mandatory = false) {
     override fun parse(rawValue: String, onError: (reason: String) -> Nothing): Option<StatsType> {
-        val value = StatsType.values().firstOrNull { it.name.equals(rawValue, ignoreCase = true) }
-            ?: onError("Invalid stats type: $rawValue")
-        return Option(this, value)
+        konst konstue = StatsType.konstues().firstOrNull { it.name.equals(rawValue, ignoreCase = true) }
+            ?: onError("Inkonstid stats type: $rawValue")
+        return Option(this, konstue)
     }
 }
 
-private val DESCRIPTION = buildString {
-    StatsType.values().joinTo(this) {
-        val item = "\"${it.name.lowercase()}\""
+private konst DESCRIPTION = buildString {
+    StatsType.konstues().joinTo(this) {
+        konst item = "\"${it.name.lowercase()}\""
         if (it == StatsType.NONE) "$item (default)" else item
     }
     append(";\nlog commonization stats")

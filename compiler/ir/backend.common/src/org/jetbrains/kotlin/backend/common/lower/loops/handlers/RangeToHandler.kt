@@ -16,28 +16,28 @@ import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /** Builds a [HeaderInfo] for progressions built using the `rangeTo` function. */
-internal class RangeToHandler(private val context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
-    private val preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
-    private val progressionElementTypes = context.ir.symbols.progressionElementTypes
+internal class RangeToHandler(private konst context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
+    private konst preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
+    private konst progressionElementTypes = context.ir.symbols.progressionElementTypes
 
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.singleOrNull()?.type in progressionElementTypes &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.singleOrNull()?.type in progressionElementTypes &&
                 callee.dispatchReceiverParameter?.type in progressionElementTypes &&
                 callee.name == OperatorNameConventions.RANGE_TO
     }
 
     override fun build(expression: IrCall, data: ProgressionType, scopeOwner: IrSymbol) =
         with(context.createIrBuilder(scopeOwner, expression.startOffset, expression.endOffset)) {
-            val first = expression.dispatchReceiver!!
-            val last = expression.getValueArgument(0)!!
-            val step = irInt(1)
-            val direction = ProgressionDirection.INCREASING
+            konst first = expression.dispatchReceiver!!
+            konst last = expression.getValueArgument(0)!!
+            konst step = irInt(1)
+            konst direction = ProgressionDirection.INCREASING
 
             if (preferJavaLikeCounterLoop) {
                 // Convert range with inclusive upper bound to exclusive upper bound if possible.
                 // This affects loop code performance on JVM.
-                val lastExclusive = last.convertToExclusiveUpperBound(data)
+                konst lastExclusive = last.convertToExclusiveUpperBound(data)
                 if (lastExclusive != null) {
                     return@with ProgressionHeaderInfo(
                         data,
@@ -68,7 +68,7 @@ internal class RangeToHandler(private val context: CommonBackendContext) : Heade
         }
     }
 
-    private val allowedMethods = listOf(
+    private konst allowedMethods = listOf(
         "kotlin.ByteArray.<get-size>",
         "kotlin.CharArray.<get-size>",
         "kotlin.String.<get-length>",
@@ -91,47 +91,47 @@ internal class RangeToHandler(private val context: CommonBackendContext) : Heade
         fun IrCall.dispatchReceiverName() = (dispatchReceiver as? IrCall)?.symbol?.owner?.fqNameWhenAvailable.toString()
 
         return if (irCall.origin == IrStatementOrigin.MINUS
-            && (irCall.getValueArgument(0) as? IrConst<*>)?.value == 1
+            && (irCall.getValueArgument(0) as? IrConst<*>)?.konstue == 1
             && irCall.dispatchReceiverName() in allowedMethods // to avoid possible underflow
         ) irCall.dispatchReceiver
         else null
     }
 
     private fun convertIrConst(irConst: IrConst<*>): IrExpression? {
-        val startOffset = irConst.startOffset
-        val endOffset = irConst.endOffset
-        val type = irConst.type
+        konst startOffset = irConst.startOffset
+        konst endOffset = irConst.endOffset
+        konst type = irConst.type
         return when (irConst.kind) {
             IrConstKind.Char -> {
-                val charValue = IrConstKind.Char.valueOf(irConst)
+                konst charValue = IrConstKind.Char.konstueOf(irConst)
                 if (charValue != Char.MAX_VALUE)
                     IrConstImpl.char(startOffset, endOffset, type, charValue.inc())
                 else
                     null
             }
             IrConstKind.Byte -> {
-                val byteValue = IrConstKind.Byte.valueOf(irConst)
+                konst byteValue = IrConstKind.Byte.konstueOf(irConst)
                 if (byteValue != Byte.MAX_VALUE)
                     IrConstImpl.byte(startOffset, endOffset, type, byteValue.inc())
                 else
                     null
             }
             IrConstKind.Short -> {
-                val shortValue = IrConstKind.Short.valueOf(irConst)
+                konst shortValue = IrConstKind.Short.konstueOf(irConst)
                 if (shortValue != Short.MAX_VALUE)
                     IrConstImpl.short(startOffset, endOffset, type, shortValue.inc())
                 else
                     null
             }
             IrConstKind.Int -> {
-                val intValue = IrConstKind.Int.valueOf(irConst)
+                konst intValue = IrConstKind.Int.konstueOf(irConst)
                 if (intValue != Int.MAX_VALUE)
                     IrConstImpl.int(startOffset, endOffset, type, intValue.inc())
                 else
                     null
             }
             IrConstKind.Long -> {
-                val longValue = IrConstKind.Long.valueOf(irConst)
+                konst longValue = IrConstKind.Long.konstueOf(irConst)
                 if (longValue != Long.MAX_VALUE)
                     IrConstImpl.long(startOffset, endOffset, type, longValue.inc())
                 else

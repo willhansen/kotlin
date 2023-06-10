@@ -20,25 +20,25 @@ import org.jetbrains.kotlin.analysis.project.structure.KtModule
 import org.jetbrains.kotlin.fir.scopes.FirScopeProvider
 
 internal class LLFirModuleResolveComponents(
-    val module: KtModule,
-    val globalResolveComponents: LLFirGlobalResolveComponents,
-    val scopeProvider: FirScopeProvider
+    konst module: KtModule,
+    konst globalResolveComponents: LLFirGlobalResolveComponents,
+    konst scopeProvider: FirScopeProvider
 ) {
-    val cache: ModuleFileCache = ModuleFileCacheImpl(this)
-    val firFileBuilder: LLFirFileBuilder = LLFirFileBuilder(this)
-    val firModuleLazyDeclarationResolver = LLFirModuleLazyDeclarationResolver(this)
+    konst cache: ModuleFileCache = ModuleFileCacheImpl(this)
+    konst firFileBuilder: LLFirFileBuilder = LLFirFileBuilder(this)
+    konst firModuleLazyDeclarationResolver = LLFirModuleLazyDeclarationResolver(this)
 
-    val scopeSessionProvider: LLFirScopeSessionProvider = LLFirScopeSessionProvider.create(
+    konst scopeSessionProvider: LLFirScopeSessionProvider = LLFirScopeSessionProvider.create(
         globalResolveComponents.project,
-        invalidationTrackers = listOf(
+        inkonstidationTrackers = listOf(
             PsiModificationTracker.MODIFICATION_COUNT,
             ProjectRootModificationTracker.getInstance(globalResolveComponents.project),
         )
     )
 
-    val fileStructureCache: FileStructureCache = FileStructureCache(this)
-    val elementsBuilder = FirElementBuilder(this)
-    val diagnosticsCollector = DiagnosticsCollector(fileStructureCache)
+    konst fileStructureCache: FileStructureCache = FileStructureCache(this)
+    konst elementsBuilder = FirElementBuilder(this)
+    konst diagnosticsCollector = DiagnosticsCollector(fileStructureCache)
 
     lateinit var session: LLFirResolvableModuleSession
 }

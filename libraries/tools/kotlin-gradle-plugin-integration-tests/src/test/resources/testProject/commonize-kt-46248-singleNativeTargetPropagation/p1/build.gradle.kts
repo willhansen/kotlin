@@ -6,7 +6,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -16,7 +16,7 @@ plugins {
 
 fun registerListDependenciesTask(sourceSet: KotlinSourceSet) {
     tasks.register("list${sourceSet.name.capitalize()}Dependencies") {
-        val dependencyConfiguration = project.configurations.getByName(
+        konst dependencyConfiguration = project.configurations.getByName(
             "${sourceSet.name}IntransitiveDependenciesMetadata"
         )
 
@@ -24,7 +24,7 @@ fun registerListDependenciesTask(sourceSet: KotlinSourceSet) {
         dependsOn(dependencyConfiguration)
 
         doLast {
-            val dependencies = dependencyConfiguration.files.orEmpty()
+            konst dependencies = dependencyConfiguration.files.orEmpty()
             logger.quiet("${sourceSet.name} Dependencies | Count: ${dependencies.size}")
             dependencies.forEach { dependencyFile ->
                 logger.quiet("Dependency: ${dependencyFile.path}")
@@ -34,14 +34,14 @@ fun registerListDependenciesTask(sourceSet: KotlinSourceSet) {
 }
 
 kotlin {
-    val nativePlatform = when {
+    konst nativePlatform = when {
         isMac -> macosX64("nativePlatform")
         isLinux -> linuxX64("nativePlatform")
         isWindows -> mingwX64("nativePlatform")
         else -> throw IllegalStateException("Unsupported host")
     }
 
-    val unsupportedNativePlatform = when {
+    konst unsupportedNativePlatform = when {
         isMac -> mingwX64("unsupportedNativePlatform")
         else -> macosX64("unsupportedNativePlatform")
     }
@@ -49,12 +49,12 @@ kotlin {
     jvm()
 
 
-    val commonMain by sourceSets.getting
-    val jvmMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val nativeMainParent by sourceSets.creating
-    val nativePlatformMain by sourceSets.getting
-    val unsupportedNativePlatformMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst jvmMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst nativeMainParent by sourceSets.creating
+    konst nativePlatformMain by sourceSets.getting
+    konst unsupportedNativePlatformMain by sourceSets.getting
 
     commonMain {
         -jvmMain

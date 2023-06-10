@@ -11,7 +11,7 @@ fun main() {
     assertEquals(15, globalArray[0])
 
     memScoped {
-        val struct = alloc<StructWithArrayPtr>()
+        konst struct = alloc<StructWithArrayPtr>()
         struct.arrayPointer = globalArray
         assertEquals(globalArray[0], struct.arrayPointer!![0])
     }

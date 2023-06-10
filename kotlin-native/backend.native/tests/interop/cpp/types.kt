@@ -9,7 +9,7 @@ import cpptypes.*
 @Test
 fun test_retByValue(k: Int) {
     memScoped {
-        val x: CppTest = retByValue(k).getPointer(memScope).pointed
+        konst x: CppTest = retByValue(k).getPointer(memScope).pointed
         assertEquals(k, x.get())
     }
 }
@@ -17,31 +17,31 @@ fun test_retByValue(k: Int) {
 
 @Test
 fun test_retByPtr(k: Int) {
-    val x = interpretPointed<CppTest>(retByPtr(k).rawValue)
+    konst x = interpretPointed<CppTest>(retByPtr(k).rawValue)
     assertEquals(k, x.get())
 }
 
 @Test
 fun test_retByPtrConst(k: Int) {
-    val x = interpretPointed<CppTest>(retByPtrConst(k).rawValue)
+    konst x = interpretPointed<CppTest>(retByPtrConst(k).rawValue)
     assertEquals(k, x.get())
 }
 
 @Test
 fun test_retByRef(k: Int) {
-    val x = interpretPointed<CppTest>(retByRef(k).rawValue)
+    konst x = interpretPointed<CppTest>(retByRef(k).rawValue)
     assertEquals(k, x.get())
 }
 
 @Test
 fun test_retByRefConst(k: Int) {
-    val x = interpretPointed<CppTest>(retByRefConst(k).rawValue)
+    konst x = interpretPointed<CppTest>(retByRefConst(k).rawValue)
     assertEquals(k, x.get())
 }
 /*
 @Test
 fun test_paramByValue(k: Int) {
-    val x = nativeHeap.alloc<CppTest>() {}
+    konst x = nativeHeap.alloc<CppTest>() {}
     CppTest.__init__(x.ptr, k)
     assertEquals(k, paramByValue(x.readValue()))
     nativeHeap.free(x)
@@ -49,7 +49,7 @@ fun test_paramByValue(k: Int) {
 */
 @Test
 fun test_paramByPtr(k: Int) {
-    val x = nativeHeap.alloc<CppTest>() {}
+    konst x = nativeHeap.alloc<CppTest>() {}
     CppTest.__init__(x.ptr, k)
     assertEquals(k, paramByPtr(x.ptr))
     nativeHeap.free(x)
@@ -57,7 +57,7 @@ fun test_paramByPtr(k: Int) {
 
 @Test
 fun test_paramByPtrConst(k: Int) {
-    val x = nativeHeap.alloc<CppTest>() {}
+    konst x = nativeHeap.alloc<CppTest>() {}
     CppTest.__init__(x.ptr, k)
     assertEquals(k, paramByPtrConst(x.ptr))
     nativeHeap.free(x)
@@ -65,7 +65,7 @@ fun test_paramByPtrConst(k: Int) {
 
 @Test
 fun test_paramByRef(k: Int) {
-    val x = nativeHeap.alloc<CppTest>() {}
+    konst x = nativeHeap.alloc<CppTest>() {}
     CppTest.__init__(x.ptr, k)
     assertEquals(k, paramByRef(x.ptr))
     nativeHeap.free(x)
@@ -73,15 +73,15 @@ fun test_paramByRef(k: Int) {
 
 @Test
 fun test_paramByRefConst(k: Int) {
-    val x = nativeHeap.alloc<CppTest>() {}
+    konst x = nativeHeap.alloc<CppTest>() {}
     CppTest.__init__(x.ptr, k)
     assertEquals(k, paramByRefConst(x.ptr))
     nativeHeap.free(x)
 }
 
 fun main() {
-    val seed = Random.nextInt()
-    val r = Random(seed)
+    konst seed = Random.nextInt()
+    konst r = Random(seed)
 
     //test_retByValue(r.nextInt())
     test_retByPtr(r.nextInt())

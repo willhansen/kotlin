@@ -2,11 +2,11 @@ buildscript {
     repositories {
         mavenCentral()
 
-        val kotlinCompilerRepo: String? by rootProject
+        konst kotlinCompilerRepo: String? by rootProject
         kotlinCompilerRepo?.let { maven(it) }
     }
 
-    val kotlin_version: String by rootProject
+    konst kotlin_version: String by rootProject
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
@@ -16,7 +16,7 @@ allprojects {
     repositories {
         mavenCentral()
 
-        val kotlinCompilerRepo: String? by rootProject
+        konst kotlinCompilerRepo: String? by rootProject
         kotlinCompilerRepo?.let { maven(it) }
     }
 
@@ -28,18 +28,18 @@ allprojects {
     }
 }
 
-val hostOs = System.getProperty("os.name")
-val isMacos = hostOs == "Mac OS X"
-val isLinux = hostOs == "Linux"
-val isWindows = hostOs.startsWith("Windows")
+konst hostOs = System.getProperty("os.name")
+konst isMacos = hostOs == "Mac OS X"
+konst isLinux = hostOs == "Linux"
+konst isWindows = hostOs.startsWith("Windows")
 
-val localRepo = rootProject.file("build/.m2-local")
+konst localRepo = rootProject.file("build/.m2-local")
 
-val clean by tasks.creating(Delete::class) {
+konst clean by tasks.creating(Delete::class) {
     delete(localRepo)
 }
 
-val buildSamplesWithPlatformLibs by tasks.creating {
+konst buildSamplesWithPlatformLibs by tasks.creating {
     dependsOn(":csvparser:assemble")
     if (!isWindows) {
         dependsOn(":curl:assemble")

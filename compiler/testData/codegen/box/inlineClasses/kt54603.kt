@@ -5,42 +5,42 @@
 class A(x: Int)
 
 @JvmInline
-value class B(val a: A) {
+konstue class B(konst a: A) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class C<T>(val t: T) {
+konstue class C<T>(konst t: T) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class D<T : Int>(val t: T) {
+konstue class D<T : Int>(konst t: T) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class E(val d: Double) {
+konstue class E(konst d: Double) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class F(val e: E) {
+konstue class F(konst e: E) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class G(val e: Int?) {
+konstue class G(konst e: Int?) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class H(val e: Any?) {
+konstue class H(konst e: Any?) {
     override fun equals(other: Any?) = true
 }
 
 @JvmInline
-value class I(val e: E?) {
+konstue class I(konst e: E?) {
     override fun equals(other: Any?) = true
 }
 

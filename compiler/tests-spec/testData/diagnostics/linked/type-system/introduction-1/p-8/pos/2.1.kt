@@ -22,10 +22,10 @@ fun case_2(x: Nothing) {
 }
 
 // TESTCASE NUMBER: 3
-class Case3(val x: Any? = checkSubtype<Nothing?>(throw Exception()))
+class Case3(konst x: Any? = checkSubtype<Nothing?>(throw Exception()))
 
 // TESTCASE NUMBER: 4
-class Case4(val x: Nothing, val y: Any? = checkSubtype<Int>(x))
+class Case4(konst x: Nothing, konst y: Any? = checkSubtype<Int>(x))
 
 // TESTCASE NUMBER: 5
 fun case_5() {

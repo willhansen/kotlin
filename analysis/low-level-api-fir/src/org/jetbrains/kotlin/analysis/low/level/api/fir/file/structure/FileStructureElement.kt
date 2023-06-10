@@ -31,14 +31,14 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirPropertySymbol
 import org.jetbrains.kotlin.psi.*
 import java.util.concurrent.ConcurrentHashMap
 
-internal sealed class FileStructureElement(val firFile: FirFile, protected val moduleComponents: LLFirModuleResolveComponents) {
-    abstract val psi: KtAnnotated
-    abstract val mappings: KtToFirMapping
-    abstract val diagnostics: FileStructureElementDiagnostics
+internal sealed class FileStructureElement(konst firFile: FirFile, protected konst moduleComponents: LLFirModuleResolveComponents) {
+    abstract konst psi: KtAnnotated
+    abstract konst mappings: KtToFirMapping
+    abstract konst diagnostics: FileStructureElementDiagnostics
 }
 
 internal class KtToFirMapping(firElement: FirElement, recorder: FirElementsRecorder) {
-    private val mapping = FirElementsRecorder.recordElementsFrom(firElement, recorder)
+    private konst mapping = FirElementsRecorder.recordElementsFrom(firElement, recorder)
 
     fun getElement(ktElement: KtElement): FirElement? {
         return mapping[ktElement]
@@ -58,11 +58,11 @@ internal class KtToFirMapping(firElement: FirElement, recorder: FirElementsRecor
 
 internal sealed class ReanalyzableStructureElement<KT : KtDeclaration, S : FirBasedSymbol<*>>(
     firFile: FirFile,
-    val firSymbol: S,
+    konst firSymbol: S,
     moduleComponents: LLFirModuleResolveComponents,
 ) : FileStructureElement(firFile, moduleComponents) {
-    abstract override val psi: KtDeclaration
-    abstract val timestamp: Long
+    abstract override konst psi: KtDeclaration
+    abstract konst timestamp: Long
 
     /**
      * Creates new declaration by [newKtDeclaration] which will serve as replacement of [firSymbol]
@@ -74,31 +74,31 @@ internal sealed class ReanalyzableStructureElement<KT : KtDeclaration, S : FirBa
 
     fun isUpToDate(): Boolean = psi.getModificationStamp() == timestamp
 
-    override val diagnostics = FileStructureElementDiagnostics(
+    override konst diagnostics = FileStructureElementDiagnostics(
         firFile,
         SingleNonLocalDeclarationDiagnosticRetriever(firSymbol.fir),
         moduleComponents,
     )
 
     companion object {
-        val recorder = FirElementsRecorder()
+        konst recorder = FirElementsRecorder()
     }
 }
 
 internal class ReanalyzableFunctionStructureElement(
     firFile: FirFile,
-    override val psi: KtNamedFunction,
+    override konst psi: KtNamedFunction,
     firSymbol: FirFunctionSymbol<*>,
-    override val timestamp: Long,
+    override konst timestamp: Long,
     moduleComponents: LLFirModuleResolveComponents,
 ) : ReanalyzableStructureElement<KtNamedFunction, FirFunctionSymbol<*>>(firFile, firSymbol, moduleComponents) {
-    override val mappings = KtToFirMapping(firSymbol.fir, recorder)
+    override konst mappings = KtToFirMapping(firSymbol.fir, recorder)
 
     override fun reanalyze(newKtDeclaration: KtNamedFunction): ReanalyzableFunctionStructureElement {
-        val originalFunction = firSymbol.fir as FirSimpleFunction
-        val originalDesignation = originalFunction.collectDesignation()
+        konst originalFunction = firSymbol.fir as FirSimpleFunction
+        konst originalDesignation = originalFunction.collectDesignation()
 
-        val newFunction = RawFirNonLocalDeclarationBuilder.buildNewSimpleFunction(
+        konst newFunction = RawFirNonLocalDeclarationBuilder.buildNewSimpleFunction(
             session = originalFunction.moduleData.session,
             scopeProvider = originalFunction.moduleData.session.kotlinScopeProvider,
             designation = originalDesignation,
@@ -128,18 +128,18 @@ internal class ReanalyzableFunctionStructureElement(
 
 internal class ReanalyzablePropertyStructureElement(
     firFile: FirFile,
-    override val psi: KtProperty,
+    override konst psi: KtProperty,
     firSymbol: FirPropertySymbol,
-    override val timestamp: Long,
+    override konst timestamp: Long,
     moduleComponents: LLFirModuleResolveComponents,
 ) : ReanalyzableStructureElement<KtProperty, FirPropertySymbol>(firFile, firSymbol, moduleComponents) {
-    override val mappings = KtToFirMapping(firSymbol.fir, recorder)
+    override konst mappings = KtToFirMapping(firSymbol.fir, recorder)
 
     override fun reanalyze(newKtDeclaration: KtProperty): ReanalyzablePropertyStructureElement {
-        val originalProperty = firSymbol.fir
-        val originalDesignation = originalProperty.collectDesignation()
+        konst originalProperty = firSymbol.fir
+        konst originalDesignation = originalProperty.collectDesignation()
 
-        val newProperty = RawFirNonLocalDeclarationBuilder.buildNewProperty(
+        konst newProperty = RawFirNonLocalDeclarationBuilder.buildNewProperty(
             session = originalProperty.moduleData.session,
             scopeProvider = originalProperty.moduleData.session.kotlinScopeProvider,
             designation = originalDesignation,
@@ -208,14 +208,14 @@ internal sealed class NonReanalyzableDeclarationStructureElement(
 
 internal class NonReanalyzableClassDeclarationStructureElement(
     firFile: FirFile,
-    val fir: FirRegularClass,
-    override val psi: KtClassOrObject,
+    konst fir: FirRegularClass,
+    override konst psi: KtClassOrObject,
     moduleComponents: LLFirModuleResolveComponents,
 ) : NonReanalyzableDeclarationStructureElement(firFile, moduleComponents) {
 
-    override val mappings = KtToFirMapping(fir, Recorder())
+    override konst mappings = KtToFirMapping(fir, Recorder())
 
-    override val diagnostics = FileStructureElementDiagnostics(
+    override konst diagnostics = FileStructureElementDiagnostics(
         firFile,
         ClassDiagnosticRetriever(fir),
         moduleComponents,
@@ -252,14 +252,14 @@ internal class NonReanalyzableClassDeclarationStructureElement(
 
 internal class NonReanalyzableNonClassDeclarationStructureElement(
     firFile: FirFile,
-    val fir: FirDeclaration,
-    override val psi: KtDeclaration,
+    konst fir: FirDeclaration,
+    override konst psi: KtDeclaration,
     moduleComponents: LLFirModuleResolveComponents,
 ) : NonReanalyzableDeclarationStructureElement(firFile, moduleComponents) {
 
-    override val mappings = KtToFirMapping(fir, Recorder)
+    override konst mappings = KtToFirMapping(fir, Recorder)
 
-    override val diagnostics = FileStructureElementDiagnostics(
+    override konst diagnostics = FileStructureElementDiagnostics(
         firFile,
         SingleNonLocalDeclarationDiagnosticRetriever(fir),
         moduleComponents,
@@ -268,7 +268,7 @@ internal class NonReanalyzableNonClassDeclarationStructureElement(
     internal object Recorder : FirElementsRecorder() {
         override fun visitConstructor(constructor: FirConstructor, data: MutableMap<KtElement, FirElement>) {
             if (constructor is FirPrimaryConstructor) {
-                constructor.valueParameters.forEach { parameter ->
+                constructor.konstueParameters.forEach { parameter ->
                     parameter.correspondingProperty?.let { property ->
                         visitProperty(property, data)
                     }
@@ -282,28 +282,28 @@ internal class NonReanalyzableNonClassDeclarationStructureElement(
 
 internal class DanglingTopLevelModifierListStructureElement(
     firFile: FirFile,
-    val fir: FirDeclaration,
+    konst fir: FirDeclaration,
     moduleComponents: LLFirModuleResolveComponents,
-    override val psi: KtAnnotated
+    override konst psi: KtAnnotated
 ) :
     FileStructureElement(firFile, moduleComponents) {
-    override val mappings = KtToFirMapping(fir, FirElementsRecorder())
+    override konst mappings = KtToFirMapping(fir, FirElementsRecorder())
 
-    override val diagnostics = FileStructureElementDiagnostics(firFile, SingleNonLocalDeclarationDiagnosticRetriever(fir), moduleComponents)
+    override konst diagnostics = FileStructureElementDiagnostics(firFile, SingleNonLocalDeclarationDiagnosticRetriever(fir), moduleComponents)
 }
 
 internal class RootStructureElement(
     firFile: FirFile,
-    override val psi: KtFile,
+    override konst psi: KtFile,
     moduleComponents: LLFirModuleResolveComponents,
 ) : FileStructureElement(firFile, moduleComponents) {
-    override val mappings = KtToFirMapping(firFile, recorder)
+    override konst mappings = KtToFirMapping(firFile, recorder)
 
-    override val diagnostics =
+    override konst diagnostics =
         FileStructureElementDiagnostics(firFile, FileDiagnosticRetriever, moduleComponents)
 
     companion object {
-        private val recorder = object : FirElementsRecorder() {
+        private konst recorder = object : FirElementsRecorder() {
             override fun visitElement(element: FirElement, data: MutableMap<KtElement, FirElement>) {
                 if (element !is FirDeclaration || element is FirFile) {
                     super.visitElement(element, data)
@@ -318,7 +318,7 @@ private fun <C : FirCallableDeclaration> C.bodyResolveOnAir(
     firFile: FirFile,
     moduleComponents: LLFirModuleResolveComponents
 ) {
-    val designationToResolveOnAir = FirDesignationWithFile(originalDesignation.path, this, firFile)
+    konst designationToResolveOnAir = FirDesignationWithFile(originalDesignation.path, this, firFile)
     moduleComponents.firModuleLazyDeclarationResolver.runLazyDesignatedOnAirResolveToBodyWithoutLock(
         designationToResolveOnAir,
         onAirCreatedDeclaration = false,
@@ -343,7 +343,7 @@ private fun FirBackingFieldBuilder.copyUnmodifiableFieldsForBackingField(prototy
 
 private fun <F : FirFunction> F.copyAllExceptBodyForFunction(prototype: F) {
     this.copyAllExceptBodyFromCallable(prototype)
-    this.replaceValueParameters(prototype.valueParameters)
+    this.replaceValueParameters(prototype.konstueParameters)
 
     if (this is FirContractDescriptionOwner) {
         this.replaceContractDescription((prototype as FirContractDescriptionOwner).contractDescription)

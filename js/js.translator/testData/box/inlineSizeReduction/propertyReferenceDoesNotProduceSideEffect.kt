@@ -25,7 +25,7 @@ inline fun test(a: Int, b: Int) {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     test(sideEffect(), a.x)
     assertEquals("sideEffect();bar(23, 42);", log)
     return "OK"

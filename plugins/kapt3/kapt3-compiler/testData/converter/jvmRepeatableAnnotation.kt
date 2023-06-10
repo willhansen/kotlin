@@ -3,8 +3,8 @@
 //import kotlin.jvm.JvmRepeatable
 
 //@JvmRepeatable
-annotation class Condition(val condition: String)
+annotation class Condition(konst condition: String)
 
-@Condition(condition = "value1")
-@Condition(condition = "value2")
+@Condition(condition = "konstue1")
+@Condition(condition = "konstue2")
 class A

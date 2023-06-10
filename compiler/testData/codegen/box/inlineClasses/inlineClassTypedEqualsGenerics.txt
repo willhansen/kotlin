@@ -32,7 +32,7 @@ public final class IC1 {
 @kotlin.Metadata
 public final class IC2 {
     // source: 'inlineClassTypedEqualsGenerics.kt'
-    private final @org.jetbrains.annotations.NotNull field value: Generic
+    private final @org.jetbrains.annotations.NotNull field konstue: Generic
     private synthetic method <init>(p0: Generic): void
     public synthetic final static method box-impl(p0: Generic): IC2
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: Generic): Generic
@@ -52,7 +52,7 @@ public final class IC2 {
 @kotlin.Metadata
 public final class IC3 {
     // source: 'inlineClassTypedEqualsGenerics.kt'
-    private final field value: java.lang.Object
+    private final field konstue: java.lang.Object
     private synthetic method <init>(p0: java.lang.Object): void
     public synthetic final static method box-impl(p0: java.lang.Object): IC3
     public static @org.jetbrains.annotations.NotNull method constructor-impl(p0: java.lang.Object): java.lang.Object
@@ -72,7 +72,7 @@ public final class IC3 {
 @kotlin.Metadata
 public final class IC4 {
     // source: 'inlineClassTypedEqualsGenerics.kt'
-    private final field value: java.lang.Object
+    private final field konstue: java.lang.Object
     private synthetic method <init>(p0: java.lang.Object): void
     public synthetic final static method box-impl(p0: java.lang.Object): IC4
     public static @org.jetbrains.annotations.NotNull method constructor-impl(p0: java.lang.Object): java.lang.Object

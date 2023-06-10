@@ -10,7 +10,7 @@ if (!file.exists() || !file.isFile()) {
 String basePath = basedir.getPath();
 ScriptEngine engine = new NashornScriptEngineFactory().getScriptEngine();
 
-engine.eval(new FileReader(basePath + "/amd.js"));
-engine.eval(new FileReader(basePath + "/target/js/kotlin.js"));
-engine.eval(new FileReader(basePath + "/target/js/test-js-moduleKind.js"));
-engine.eval(new FileReader(basePath + "/check.js"));
+engine.ekonst(new FileReader(basePath + "/amd.js"));
+engine.ekonst(new FileReader(basePath + "/target/js/kotlin.js"));
+engine.ekonst(new FileReader(basePath + "/target/js/test-js-moduleKind.js"));
+engine.ekonst(new FileReader(basePath + "/check.js"));

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
+    <option name="DEFAULT_COMPILER" konstue="Javac" />
   </component>
   <component name="Kotlin2JsCompilerArguments">
-    <option name="sourceMap" value="true" />
-    <option name="sourceMapPrefix" value="prefix-dir/" />
+    <option name="sourceMap" konstue="true" />
+    <option name="sourceMapPrefix" konstue="prefix-dir/" />
   </component>
   <component name="ProjectModuleManager">
     <modules>

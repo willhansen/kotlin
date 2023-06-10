@@ -6,7 +6,7 @@
 package test
 
 class M(size: Int) {
-    val m = IntArray(size) { 0 }
+    konst m = IntArray(size) { 0 }
 }
 
 inline operator fun M.get(a: Any, b: Any, ifn: () -> Int) =
@@ -22,7 +22,7 @@ inline operator fun <reified T> M.set(a: T, b: Any, ifn: () -> Int, v: Int) {
 import test.*
 
 fun box(): String {
-    val m = M(4)
+    konst m = M(4)
     m["a", "b", { 1 }] += 10
     return if (m.m[1] == 10) "OK" else "Fail"
 }

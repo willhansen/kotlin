@@ -26,13 +26,13 @@ fun PropertyDescriptor.asImportedFromObject(descriptor: PropertyImportedFromObje
     PropertyImportedFromObject(this, descriptor?.original)
 
 abstract class ImportedFromObjectCallableDescriptor<out TCallable : CallableMemberDescriptor>(
-    val callableFromObject: TCallable,
-    private val originalOrNull: TCallable?
+    konst callableFromObject: TCallable,
+    private konst originalOrNull: TCallable?
 ) : CallableDescriptor {
 
-    val containingObject = callableFromObject.containingDeclaration as ClassDescriptor
+    konst containingObject = callableFromObject.containingDeclaration as ClassDescriptor
 
-    protected val _original
+    protected konst _original
         get() = originalOrNull ?: this
 }
 

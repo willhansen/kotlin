@@ -12,7 +12,7 @@ import kotlinx.dom.isElement as newIsElement
 import kotlinx.dom.isText as newIsText
 
 /**
- * Gets a value indicating whether this node is a TEXT_NODE or a CDATA_SECTION_NODE.
+ * Gets a konstue indicating whether this node is a TEXT_NODE or a CDATA_SECTION_NODE.
  */
 @LowPriorityInOverloadResolution
 @Deprecated(
@@ -20,11 +20,11 @@ import kotlinx.dom.isText as newIsText
     replaceWith = ReplaceWith("this.isText", "kotlinx.dom.isText")
 )
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public val Node.isText: Boolean
+public konst Node.isText: Boolean
     inline get() = this.newIsText
 
 /**
- * Gets a value indicating whether this node is an [Element].
+ * Gets a konstue indicating whether this node is an [Element].
  */
 @LowPriorityInOverloadResolution
 @Deprecated(
@@ -32,5 +32,5 @@ public val Node.isText: Boolean
     replaceWith = ReplaceWith("this.isElement", "kotlinx.dom.isElement")
 )
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
-public val Node.isElement: Boolean
+public konst Node.isElement: Boolean
     inline get() = this.newIsElement

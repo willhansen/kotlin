@@ -4,4 +4,4 @@
  */
 package kotlin.js
 
-internal val VOID: Nothing? = js("void 0")
+internal konst VOID: Nothing? = js("void 0")

@@ -5,23 +5,23 @@ import kotlin.reflect.*
 import kotlin.reflect.full.*
 import kotlin.test.assertEquals
 
-val p0 = 1
-val Int.p1: Int get() = this
+konst p0 = 1
+konst Int.p1: Int get() = this
 class A {
-    val Int.p2: Int get() = this
+    konst Int.p2: Int get() = this
 }
 
 var globalCounter = 0
 
 var mp0 = 1
-    set(value) { globalCounter += value }
+    set(konstue) { globalCounter += konstue }
 var Int.mp1: Int
     get() = this
-    set(value) { globalCounter += value }
+    set(konstue) { globalCounter += konstue }
 class B {
     var Int.mp2: Int
         get() = this
-        set(value) { globalCounter += value }
+        set(konstue) { globalCounter += konstue }
 }
 
 
@@ -30,7 +30,7 @@ fun box(): String {
     assertEquals(1, (::p0).getter.call())
     assertEquals(2, (Int::p1).call(2))
     assertEquals(2, (Int::p1).getter.call(2))
-    val p2 = A::class.memberExtensionProperties.single()
+    konst p2 = A::class.memberExtensionProperties.single()
     assertEquals(3, p2.call(A(), 3))
     assertEquals(3, p2.getter.call(A(), 3))
 
@@ -38,7 +38,7 @@ fun box(): String {
     assertEquals(1, (::mp0).getter.call())
     assertEquals(2, (Int::mp1).call(2))
     assertEquals(2, (Int::mp1).getter.call(2))
-    val mp2 = B::class.memberExtensionProperties.single() as KMutableProperty2
+    konst mp2 = B::class.memberExtensionProperties.single() as KMutableProperty2
     assertEquals(3, mp2.call(B(), 3))
     assertEquals(3, mp2.getter.call(B(), 3))
 

@@ -5,10 +5,10 @@
 
 package org.jetbrains.kotlin.ir.expressions
 
-sealed class IrConstKind<T>(val asString: kotlin.String) {
+sealed class IrConstKind<T>(konst asString: kotlin.String) {
     @Suppress("UNCHECKED_CAST")
-    fun valueOf(aConst: IrConst<*>) =
-        (aConst as IrConst<T>).value
+    fun konstueOf(aConst: IrConst<*>) =
+        (aConst as IrConst<T>).konstue
 
     object Null : IrConstKind<Nothing?>("Null")
     object Boolean : IrConstKind<kotlin.Boolean>("Boolean")

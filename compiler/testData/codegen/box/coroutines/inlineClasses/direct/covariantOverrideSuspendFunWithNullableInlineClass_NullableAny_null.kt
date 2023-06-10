@@ -9,7 +9,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: Any?)
+inline class IC(konst s: Any?)
 
 interface IBar {
     suspend fun bar(): IC?
@@ -21,7 +21,7 @@ class Test1() : IBar {
     }
 
     suspend fun test(): Any? {
-        val b: IBar = this
+        konst b: IBar = this
         return b.bar()!!.s
     }
 }
@@ -32,7 +32,7 @@ class Test2() : IBar {
     }
 
     suspend fun test(): IC {
-        val b: IBar = this
+        konst b: IBar = this
         return b.bar()!!
     }
 }

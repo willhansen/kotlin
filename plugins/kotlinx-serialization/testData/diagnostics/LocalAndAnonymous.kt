@@ -11,7 +11,7 @@ fun container() {
     @Serializable
     class X // local classes are allowed
 
-    val y = <!ANONYMOUS_OBJECTS_NOT_SUPPORTED!>@Serializable<!> object {
+    konst y = <!ANONYMOUS_OBJECTS_NOT_SUPPORTED!>@Serializable<!> object {
         fun inObjectFun() {
             <!ANONYMOUS_OBJECTS_NOT_SUPPORTED!>@Serializable<!>
             class X // local classes in anonymous object functions are not allowed
@@ -20,8 +20,8 @@ fun container() {
 
 
     class LocalSerializer : KSerializer<Any?> {
-        override val descriptor: SerialDescriptor = buildSerialDescriptor("tmp", PrimitiveKind.INT)
-        override fun serialize(encoder: Encoder, value: Any?) {
+        override konst descriptor: SerialDescriptor = buildSerialDescriptor("tmp", PrimitiveKind.INT)
+        override fun serialize(encoder: Encoder, konstue: Any?) {
             encoder.encodeNull()
         }
 
@@ -31,13 +31,13 @@ fun container() {
     }
 
     @Serializable
-    class WithLocalSerializerInProperty(<!LOCAL_SERIALIZER_USAGE!>@Serializable(with = LocalSerializer::class)<!> val x: Any?)
+    class WithLocalSerializerInProperty(<!LOCAL_SERIALIZER_USAGE!>@Serializable(with = LocalSerializer::class)<!> konst x: Any?)
 
     <!LOCAL_SERIALIZER_USAGE, SERIALIZER_TYPE_INCOMPATIBLE!>@Serializable(with = LocalSerializer::class)<!>
-    data class WithLocalSerializer(val i: Int)
+    data class WithLocalSerializer(konst i: Int)
 }
 
-val topLevelAnon = <!ANONYMOUS_OBJECTS_NOT_SUPPORTED!>@Serializable<!> object {}
+konst topLevelAnon = <!ANONYMOUS_OBJECTS_NOT_SUPPORTED!>@Serializable<!> object {}
 
 @Serializable class A {
     @Serializable class B // nested classes are allowed

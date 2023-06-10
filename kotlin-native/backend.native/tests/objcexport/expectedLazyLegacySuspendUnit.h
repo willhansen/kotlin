@@ -22,102 +22,102 @@ __attribute__((swift_name("KotlinMutableDictionary")))
 
 __attribute__((swift_name("KotlinNumber")))
 @interface KtNumber : NSNumber
-- (instancetype)initWithChar:(char)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedChar:(unsigned char)value __attribute__((unavailable));
-- (instancetype)initWithShort:(short)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedShort:(unsigned short)value __attribute__((unavailable));
-- (instancetype)initWithInt:(int)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedInt:(unsigned int)value __attribute__((unavailable));
-- (instancetype)initWithLong:(long)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedLong:(unsigned long)value __attribute__((unavailable));
-- (instancetype)initWithLongLong:(long long)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedLongLong:(unsigned long long)value __attribute__((unavailable));
-- (instancetype)initWithFloat:(float)value __attribute__((unavailable));
-- (instancetype)initWithDouble:(double)value __attribute__((unavailable));
-- (instancetype)initWithBool:(BOOL)value __attribute__((unavailable));
-- (instancetype)initWithInteger:(NSInteger)value __attribute__((unavailable));
-- (instancetype)initWithUnsignedInteger:(NSUInteger)value __attribute__((unavailable));
-+ (instancetype)numberWithChar:(char)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedChar:(unsigned char)value __attribute__((unavailable));
-+ (instancetype)numberWithShort:(short)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedShort:(unsigned short)value __attribute__((unavailable));
-+ (instancetype)numberWithInt:(int)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedInt:(unsigned int)value __attribute__((unavailable));
-+ (instancetype)numberWithLong:(long)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedLong:(unsigned long)value __attribute__((unavailable));
-+ (instancetype)numberWithLongLong:(long long)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedLongLong:(unsigned long long)value __attribute__((unavailable));
-+ (instancetype)numberWithFloat:(float)value __attribute__((unavailable));
-+ (instancetype)numberWithDouble:(double)value __attribute__((unavailable));
-+ (instancetype)numberWithBool:(BOOL)value __attribute__((unavailable));
-+ (instancetype)numberWithInteger:(NSInteger)value __attribute__((unavailable));
-+ (instancetype)numberWithUnsignedInteger:(NSUInteger)value __attribute__((unavailable));
+- (instancetype)initWithChar:(char)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedChar:(unsigned char)konstue __attribute__((unavailable));
+- (instancetype)initWithShort:(short)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedShort:(unsigned short)konstue __attribute__((unavailable));
+- (instancetype)initWithInt:(int)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedInt:(unsigned int)konstue __attribute__((unavailable));
+- (instancetype)initWithLong:(long)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedLong:(unsigned long)konstue __attribute__((unavailable));
+- (instancetype)initWithLongLong:(long long)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedLongLong:(unsigned long long)konstue __attribute__((unavailable));
+- (instancetype)initWithFloat:(float)konstue __attribute__((unavailable));
+- (instancetype)initWithDouble:(double)konstue __attribute__((unavailable));
+- (instancetype)initWithBool:(BOOL)konstue __attribute__((unavailable));
+- (instancetype)initWithInteger:(NSInteger)konstue __attribute__((unavailable));
+- (instancetype)initWithUnsignedInteger:(NSUInteger)konstue __attribute__((unavailable));
++ (instancetype)numberWithChar:(char)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedChar:(unsigned char)konstue __attribute__((unavailable));
++ (instancetype)numberWithShort:(short)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedShort:(unsigned short)konstue __attribute__((unavailable));
++ (instancetype)numberWithInt:(int)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedInt:(unsigned int)konstue __attribute__((unavailable));
++ (instancetype)numberWithLong:(long)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedLong:(unsigned long)konstue __attribute__((unavailable));
++ (instancetype)numberWithLongLong:(long long)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedLongLong:(unsigned long long)konstue __attribute__((unavailable));
++ (instancetype)numberWithFloat:(float)konstue __attribute__((unavailable));
++ (instancetype)numberWithDouble:(double)konstue __attribute__((unavailable));
++ (instancetype)numberWithBool:(BOOL)konstue __attribute__((unavailable));
++ (instancetype)numberWithInteger:(NSInteger)konstue __attribute__((unavailable));
++ (instancetype)numberWithUnsignedInteger:(NSUInteger)konstue __attribute__((unavailable));
 @end
 
 __attribute__((swift_name("KotlinByte")))
 @interface KtByte : KtNumber
-- (instancetype)initWithChar:(char)value;
-+ (instancetype)numberWithChar:(char)value;
+- (instancetype)initWithChar:(char)konstue;
++ (instancetype)numberWithChar:(char)konstue;
 @end
 
 __attribute__((swift_name("KotlinUByte")))
 @interface KtUByte : KtNumber
-- (instancetype)initWithUnsignedChar:(unsigned char)value;
-+ (instancetype)numberWithUnsignedChar:(unsigned char)value;
+- (instancetype)initWithUnsignedChar:(unsigned char)konstue;
++ (instancetype)numberWithUnsignedChar:(unsigned char)konstue;
 @end
 
 __attribute__((swift_name("KotlinShort")))
 @interface KtShort : KtNumber
-- (instancetype)initWithShort:(short)value;
-+ (instancetype)numberWithShort:(short)value;
+- (instancetype)initWithShort:(short)konstue;
++ (instancetype)numberWithShort:(short)konstue;
 @end
 
 __attribute__((swift_name("KotlinUShort")))
 @interface KtUShort : KtNumber
-- (instancetype)initWithUnsignedShort:(unsigned short)value;
-+ (instancetype)numberWithUnsignedShort:(unsigned short)value;
+- (instancetype)initWithUnsignedShort:(unsigned short)konstue;
++ (instancetype)numberWithUnsignedShort:(unsigned short)konstue;
 @end
 
 __attribute__((swift_name("KotlinInt")))
 @interface KtInt : KtNumber
-- (instancetype)initWithInt:(int)value;
-+ (instancetype)numberWithInt:(int)value;
+- (instancetype)initWithInt:(int)konstue;
++ (instancetype)numberWithInt:(int)konstue;
 @end
 
 __attribute__((swift_name("KotlinUInt")))
 @interface KtUInt : KtNumber
-- (instancetype)initWithUnsignedInt:(unsigned int)value;
-+ (instancetype)numberWithUnsignedInt:(unsigned int)value;
+- (instancetype)initWithUnsignedInt:(unsigned int)konstue;
++ (instancetype)numberWithUnsignedInt:(unsigned int)konstue;
 @end
 
 __attribute__((swift_name("KotlinLong")))
 @interface KtLong : KtNumber
-- (instancetype)initWithLongLong:(long long)value;
-+ (instancetype)numberWithLongLong:(long long)value;
+- (instancetype)initWithLongLong:(long long)konstue;
++ (instancetype)numberWithLongLong:(long long)konstue;
 @end
 
 __attribute__((swift_name("KotlinULong")))
 @interface KtULong : KtNumber
-- (instancetype)initWithUnsignedLongLong:(unsigned long long)value;
-+ (instancetype)numberWithUnsignedLongLong:(unsigned long long)value;
+- (instancetype)initWithUnsignedLongLong:(unsigned long long)konstue;
++ (instancetype)numberWithUnsignedLongLong:(unsigned long long)konstue;
 @end
 
 __attribute__((swift_name("KotlinFloat")))
 @interface KtFloat : KtNumber
-- (instancetype)initWithFloat:(float)value;
-+ (instancetype)numberWithFloat:(float)value;
+- (instancetype)initWithFloat:(float)konstue;
++ (instancetype)numberWithFloat:(float)konstue;
 @end
 
 __attribute__((swift_name("KotlinDouble")))
 @interface KtDouble : KtNumber
-- (instancetype)initWithDouble:(double)value;
-+ (instancetype)numberWithDouble:(double)value;
+- (instancetype)initWithDouble:(double)konstue;
++ (instancetype)numberWithDouble:(double)konstue;
 @end
 
 __attribute__((swift_name("KotlinBoolean")))
 @interface KtBoolean : KtNumber
-- (instancetype)initWithBool:(BOOL)value;
-+ (instancetype)numberWithBool:(BOOL)value;
+- (instancetype)initWithBool:(BOOL)konstue;
++ (instancetype)numberWithBool:(BOOL)konstue;
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -135,7 +135,7 @@ __attribute__((swift_name("ContinuationHolder")))
 @interface KtContinuationHolder<T> : KtBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (void)resumeValue:(T _Nullable)value __attribute__((swift_name("resume(value:)")));
+- (void)resumeValue:(T _Nullable)konstue __attribute__((swift_name("resume(konstue:)")));
 - (void)resumeWithExceptionException:(KtKotlinThrowable *)exception __attribute__((swift_name("resumeWithException(exception:)")));
 @end
 
@@ -168,51 +168,51 @@ __attribute__((swift_name("SuspendBridge")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)intValue:(id _Nullable)value completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("int(value:completionHandler:)")));
+- (void)intValue:(id _Nullable)konstue completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("int(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)intAsAnyValue:(id _Nullable)value completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("intAsAny(value:completionHandler:)")));
+- (void)intAsAnyValue:(id _Nullable)konstue completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("intAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)unitValue:(id _Nullable)value completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unit(value:completionHandler:)")));
+- (void)unitValue:(id _Nullable)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unit(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)unitAsAnyValue:(id _Nullable)value completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("unitAsAny(value:completionHandler:)")));
+- (void)unitAsAnyValue:(id _Nullable)konstue completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("unitAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)nullableUnitValue:(id _Nullable)value completionHandler:(void (^)(KtKotlinUnit * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nullableUnit(value:completionHandler:)")));
+- (void)nullableUnitValue:(id _Nullable)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nullableUnit(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingValue:(id _Nullable)value completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothing(value:completionHandler:)")));
+- (void)nothingValue:(id _Nullable)konstue completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothing(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsIntValue:(id _Nullable)value completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsInt(value:completionHandler:)")));
+- (void)nothingAsIntValue:(id _Nullable)konstue completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsInt(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsAnyValue:(id _Nullable)value completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsAny(value:completionHandler:)")));
+- (void)nothingAsAnyValue:(id _Nullable)konstue completionHandler:(void (^)(id _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsUnitValue:(id _Nullable)value completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsUnit(value:completionHandler:)")));
+- (void)nothingAsUnitValue:(id _Nullable)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsUnit(konstue:completionHandler:)")));
 @end
 
 __attribute__((swift_name("AbstractSuspendBridge")))
@@ -224,40 +224,40 @@ __attribute__((swift_name("AbstractSuspendBridge")))
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)intAsAnyValue:(KtInt *)value completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("intAsAny(value:completionHandler:)")));
+- (void)intAsAnyValue:(KtInt *)konstue completionHandler:(void (^)(KtInt * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("intAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)unitValue:(KtInt *)value completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unit(value:completionHandler:)")));
+- (void)unitValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unit(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)unitAsAnyValue:(KtInt *)value completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unitAsAny(value:completionHandler:)")));
+- (void)unitAsAnyValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("unitAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts instances of CancellationException to errors.
  * Other uncaught Kotlin exceptions are fatal.
 */
-- (void)nullableUnitValue:(KtInt *)value completionHandler:(void (^)(KtKotlinUnit * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nullableUnit(value:completionHandler:)")));
+- (void)nullableUnitValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinUnit * _Nullable_result, NSError * _Nullable))completionHandler __attribute__((swift_name("nullableUnit(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsIntValue:(KtInt *)value completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsInt(value:completionHandler:)")));
+- (void)nothingAsIntValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsInt(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsAnyValue:(KtInt *)value completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsAny(value:completionHandler:)")));
+- (void)nothingAsAnyValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsAny(konstue:completionHandler:)")));
 
 /**
  * @note This method converts all Kotlin exceptions to errors.
 */
-- (void)nothingAsUnitValue:(KtInt *)value completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsUnit(value:completionHandler:)")));
+- (void)nothingAsUnitValue:(KtInt *)konstue completionHandler:(void (^)(KtKotlinNothing * _Nullable, NSError * _Nullable))completionHandler __attribute__((swift_name("nothingAsUnit(konstue:completionHandler:)")));
 @end
 
 __attribute__((swift_name("ThrowCancellationException")))
@@ -480,8 +480,8 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("DeallocRetainKt")))
 @interface KtDeallocRetainKt : KtBase
 + (void)garbageCollect __attribute__((swift_name("garbageCollect()")));
-+ (KtKotlinWeakReference<id> *)createWeakReferenceValue:(id)value __attribute__((swift_name("createWeakReference(value:)")));
-+ (void)assertNullValue:(id _Nullable)value __attribute__((swift_name("assertNull(value:)")));
++ (KtKotlinWeakReference<id> *)createWeakReferenceValue:(id)konstue __attribute__((swift_name("createWeakReference(konstue:)")));
++ (void)assertNullValue:(id _Nullable)konstue __attribute__((swift_name("assertNull(konstue:)")));
 + (BOOL)isExperimentalMM __attribute__((swift_name("isExperimentalMM()")));
 @end
 
@@ -495,7 +495,7 @@ __attribute__((swift_name("EnumLeftRightUpDown")))
 @property (class, readonly) KtEnumLeftRightUpDown *right __attribute__((swift_name("right")));
 @property (class, readonly) KtEnumLeftRightUpDown *up __attribute__((swift_name("up")));
 @property (class, readonly) KtEnumLeftRightUpDown *down __attribute__((swift_name("down")));
-+ (KtKotlinArray<KtEnumLeftRightUpDown *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtEnumLeftRightUpDown *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtEnumLeftRightUpDown *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -508,9 +508,9 @@ __attribute__((swift_name("EnumOneTwoThreeValues")))
 @property (class, readonly) KtEnumOneTwoThreeValues *one __attribute__((swift_name("one")));
 @property (class, readonly) KtEnumOneTwoThreeValues *two __attribute__((swift_name("two")));
 @property (class, readonly) KtEnumOneTwoThreeValues *three __attribute__((swift_name("three")));
-@property (class, readonly) KtEnumOneTwoThreeValues *values __attribute__((swift_name("values")));
+@property (class, readonly) KtEnumOneTwoThreeValues *konstues __attribute__((swift_name("konstues")));
 @property (class, readonly) KtEnumOneTwoThreeValues *entries __attribute__((swift_name("entries")));
-+ (KtKotlinArray<KtEnumOneTwoThreeValues *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtEnumOneTwoThreeValues *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtEnumOneTwoThreeValues *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -520,11 +520,11 @@ __attribute__((swift_name("EnumValuesValues_")))
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly) KtEnumValuesValues_ *values __attribute__((swift_name("values")));
-@property (class, readonly) KtEnumValuesValues_ *values __attribute__((swift_name("values")));
+@property (class, readonly) KtEnumValuesValues_ *konstues __attribute__((swift_name("konstues")));
+@property (class, readonly) KtEnumValuesValues_ *konstues __attribute__((swift_name("konstues")));
 @property (class, readonly) KtEnumValuesValues_ *entries __attribute__((swift_name("entries")));
 @property (class, readonly) KtEnumValuesValues_ *entries __attribute__((swift_name("entries")));
-+ (KtKotlinArray<KtEnumValuesValues_ *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtEnumValuesValues_ *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtEnumValuesValues_ *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -534,7 +534,7 @@ __attribute__((swift_name("EmptyEnum")))
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-+ (KtKotlinArray<KtEmptyEnum *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtEmptyEnum *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtEmptyEnum *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -561,34 +561,34 @@ __attribute__((swift_name("FHolder")))
 @interface KtFHolder : KtBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property (readonly) id _Nullable value __attribute__((swift_name("value")));
+@property (readonly) id _Nullable konstue __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("F2Holder")))
 @interface KtF2Holder : KtFHolder
-- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable))value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable))konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)new __attribute__((unavailable));
-@property (readonly) id _Nullable (^value)(id _Nullable, id _Nullable) __attribute__((swift_name("value")));
+@property (readonly) id _Nullable (^konstue)(id _Nullable, id _Nullable) __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("F32Holder")))
 @interface KtF32Holder : KtFHolder
-- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable))value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable))konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)new __attribute__((unavailable));
-@property (readonly) id _Nullable (^value)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable) __attribute__((swift_name("value")));
+@property (readonly) id _Nullable (^konstue)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable) __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("F33Holder")))
 @interface KtF33Holder : KtFHolder
-- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable))value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
+- (instancetype)initWithValue:(id _Nullable (^)(id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable, id _Nullable))konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 + (instancetype)new __attribute__((unavailable));
-@property (readonly) id<KtKotlinFunction33> value __attribute__((swift_name("value")));
+@property (readonly) id<KtKotlinFunction33> konstue __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -635,8 +635,8 @@ __attribute__((swift_name("TestIncompatiblePropertyTypeWarning")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("TestIncompatiblePropertyTypeWarningGeneric")))
 @interface KtTestIncompatiblePropertyTypeWarningGeneric<T> : KtBase
-- (instancetype)initWithValue:(T _Nullable)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) T _Nullable value __attribute__((swift_name("value")));
+- (instancetype)initWithValue:(T _Nullable)konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) T _Nullable konstue __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((swift_name("TestIncompatiblePropertyTypeWarningInterfaceWithGenericProperty")))
@@ -866,7 +866,7 @@ __attribute__((swift_name("SomeClassWithProperty")))
  *
  * Example of usage:
  * ```
- * suspend fun updateUiElement(val text: String) {
+ * suspend fun updateUiElement(konst text: String) {
  *   **
  *    * If it is known that updateUiElement can be invoked both from the Main thread and from other threads,
  *    * `immediate` dispatcher is used as a performance optimization to avoid unnecessary dispatch.
@@ -898,7 +898,7 @@ __attribute__((swift_name("KdocExportKt")))
  *
  * This kdoc has some additional formatting.
  * @param a keep intact and return
- * @return value of [a]
+ * @return konstue of [a]
  * Check for additional comment (note) below
  *
  * @note This method converts instances of IllegalArgumentException to errors.
@@ -1021,7 +1021,7 @@ __attribute__((swift_name("Kt38641Kt")))
 
 __attribute__((swift_name("JsonConfiguration")))
 @interface KtJsonConfiguration : KtBase
-- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable("This class is deprecated for removal during serialization 1.0 API stabilization.\nFor configuring Json instances, the corresponding builder function can be used instead, e.g. instead of'Json(JsonConfiguration.Stable.copy(isLenient = true))' 'Json { isLenient = true }' should be used.\nInstead of storing JsonConfiguration instances of the code, Json instances can be used directly:'Json(MyJsonConfiguration.copy(prettyPrint = true))' can be replaced with 'Json(from = MyApplicationJson) { prettyPrint = true }'")));
+- (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable("This class is deprecated for remokonst during serialization 1.0 API stabilization.\nFor configuring Json instances, the corresponding builder function can be used instead, e.g. instead of'Json(JsonConfiguration.Stable.copy(isLenient = true))' 'Json { isLenient = true }' should be used.\nInstead of storing JsonConfiguration instances of the code, Json instances can be used directly:'Json(MyJsonConfiguration.copy(prettyPrint = true))' can be replaced with 'Json(from = MyApplicationJson) { prettyPrint = true }'")));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 @end
 
@@ -1073,7 +1073,7 @@ __attribute__((swift_name("KT43599")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("Kt43599Kt")))
 @interface KtKt43599Kt : KtBase
-+ (void)setTopLevelLateinitPropertyValue:(NSString *)value __attribute__((swift_name("setTopLevelLateinitProperty(value:)")));
++ (void)setTopLevelLateinitPropertyValue:(NSString *)konstue __attribute__((swift_name("setTopLevelLateinitProperty(konstue:)")));
 @property (class, readonly) NSString *topLevelProperty __attribute__((swift_name("topLevelProperty")));
 @property (class, readonly) NSString *topLevelLateinitProperty __attribute__((swift_name("topLevelLateinitProperty")));
 @end
@@ -1146,7 +1146,7 @@ __attribute__((swift_name("KT43780Enum")))
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly) KtKT43780Enum *otherEntry __attribute__((swift_name("otherEntry")));
 @property (class, readonly) KtKT43780Enum *companion __attribute__((swift_name("companion")));
-+ (KtKotlinArray<KtKT43780Enum *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtKT43780Enum *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtKT43780Enum *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -1485,7 +1485,7 @@ __attribute__((swift_name("NoAutoreleaseEnum")))
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
 @property (class, readonly) KtNoAutoreleaseEnum *entry __attribute__((swift_name("entry")));
-+ (KtKotlinArray<KtNoAutoreleaseEnum *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtNoAutoreleaseEnum *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtNoAutoreleaseEnum *> *entries __attribute__((swift_name("entries")));
 @property (readonly) int32_t x __attribute__((swift_name("x")));
 @end
@@ -1621,7 +1621,7 @@ __attribute__((swift_name("ObjCNameSwiftEnum")))
 @property (class, readonly) KtObjCNameObjCEnum *objcOne __attribute__((swift_name("swiftOne")));
 @property (class, readonly) KtObjCNameObjCEnum *objcTwo __attribute__((swift_name("companion")));
 @property (class, readonly) KtObjCNameObjCEnum *objcThree __attribute__((swift_name("swiftThree")));
-+ (KtKotlinArray<KtObjCNameObjCEnum *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtObjCNameObjCEnum *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtObjCNameObjCEnum *> *entries __attribute__((swift_name("entries")));
 @end
 
@@ -1731,15 +1731,15 @@ __attribute__((swift_name("OverrideMethodsOfAnyKt")))
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("RecList")))
 @interface KtRecList<T> : KtBase
-- (instancetype)initWithValue:(NSArray<id> *)value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) NSArray<id> *value __attribute__((swift_name("value")));
+- (instancetype)initWithValue:(NSArray<id> *)konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) NSArray<id> *konstue __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("RecFunc")))
 @interface KtRecFunc<T> : KtBase
-- (instancetype)initWithValue:(id (^)(void))value __attribute__((swift_name("init(value:)"))) __attribute__((objc_designated_initializer));
-@property (readonly) id (^value)(void) __attribute__((swift_name("value")));
+- (instancetype)initWithValue:(id (^)(void))konstue __attribute__((swift_name("init(konstue:)"))) __attribute__((objc_designated_initializer));
+@property (readonly) id (^konstue)(void) __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((swift_name("RefinedClassA")))
@@ -1902,8 +1902,8 @@ __attribute__((objc_subclassing_restricted))
 __attribute__((swift_name("TopLevelManglingAKt")))
 @interface KtTopLevelManglingAKt : KtBase
 + (NSString *)foo __attribute__((swift_name("foo()")));
-+ (int32_t)sameNumberValue:(int32_t)value __attribute__((swift_name("sameNumber(value:)")));
-+ (int64_t)sameNumberValue:(int64_t)value __attribute__((swift_name("sameNumber(value:)")));
++ (int32_t)sameNumberValue:(int32_t)konstue __attribute__((swift_name("sameNumber(konstue:)")));
++ (int64_t)sameNumberValue:(int64_t)konstue __attribute__((swift_name("sameNumber(konstue:)")));
 @property (class, readonly) NSString *bar __attribute__((swift_name("bar")));
 @end
 
@@ -1920,7 +1920,7 @@ __attribute__((swift_name("DelegateClass")))
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
 - (KtKotlinArray<NSString *> *)getValueThisRef:(KtKotlinNothing * _Nullable)thisRef property:(id<KtKotlinKProperty>)property __attribute__((swift_name("getValue(thisRef:property:)")));
-- (void)setValueThisRef:(KtKotlinNothing * _Nullable)thisRef property:(id<KtKotlinKProperty>)property value:(KtKotlinArray<NSString *> *)value __attribute__((swift_name("setValue(thisRef:property:value:)")));
+- (void)setValueThisRef:(KtKotlinNothing * _Nullable)thisRef property:(id<KtKotlinKProperty>)property konstue:(KtKotlinArray<NSString *> *)konstue __attribute__((swift_name("setValue(thisRef:property:konstue:)")));
 @end
 
 __attribute__((swift_name("I")))
@@ -1987,7 +1987,7 @@ __attribute__((swift_name("Enumeration")))
 @property (class, readonly) KtEnumeration *answer __attribute__((swift_name("answer")));
 @property (class, readonly) KtEnumeration *year __attribute__((swift_name("year")));
 @property (class, readonly) KtEnumeration *temperature __attribute__((swift_name("temperature")));
-+ (KtKotlinArray<KtEnumeration *> *)values __attribute__((swift_name("values()")));
++ (KtKotlinArray<KtEnumeration *> *)konstues __attribute__((swift_name("konstues()")));
 @property (class, readonly) NSArray<KtEnumeration *> *entries __attribute__((swift_name("entries")));
 @property (readonly) int32_t enumValue __attribute__((swift_name("enumValue")));
 @end
@@ -2429,7 +2429,7 @@ __attribute__((swift_name("CKeywords")))
 __attribute__((swift_name("Base1")))
 @protocol KtBase1
 @required
-- (KtInt * _Nullable)sameValue:(KtInt * _Nullable)value __attribute__((swift_name("same(value:)")));
+- (KtInt * _Nullable)sameValue:(KtInt * _Nullable)konstue __attribute__((swift_name("same(konstue:)")));
 @end
 
 __attribute__((swift_name("ExtendedBase1")))
@@ -2440,20 +2440,20 @@ __attribute__((swift_name("ExtendedBase1")))
 __attribute__((swift_name("Base2")))
 @protocol KtBase2
 @required
-- (KtInt * _Nullable)sameValue:(KtInt * _Nullable)value __attribute__((swift_name("same(value:)")));
+- (KtInt * _Nullable)sameValue:(KtInt * _Nullable)konstue __attribute__((swift_name("same(konstue:)")));
 @end
 
 __attribute__((swift_name("Base23")))
 @interface KtBase23 : KtBase <KtBase2>
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (KtInt *)sameValue:(KtInt * _Nullable)value __attribute__((swift_name("same(value:)")));
+- (KtInt *)sameValue:(KtInt * _Nullable)konstue __attribute__((swift_name("same(konstue:)")));
 @end
 
 __attribute__((swift_name("Transform")))
 @protocol KtTransform
 @required
-- (id _Nullable)mapValue:(id _Nullable)value __attribute__((swift_name("map(value:)")));
+- (id _Nullable)mapValue:(id _Nullable)konstue __attribute__((swift_name("map(konstue:)")));
 @end
 
 __attribute__((swift_name("TransformWithDefault")))
@@ -2478,23 +2478,23 @@ __attribute__((swift_name("TransformIntToString")))
 @interface KtTransformIntToString : KtBase <KtTransform, KtTransformIntString>
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (NSString *)mapValue:(KtInt *)value __attribute__((swift_name("map(value:)")));
-- (NSString *)mapIntValue:(int32_t)value __attribute__((swift_name("map(intValue:)")));
+- (NSString *)mapValue:(KtInt *)konstue __attribute__((swift_name("map(konstue:)")));
+- (NSString *)mapIntValue:(int32_t)konstue __attribute__((swift_name("map(intValue:)")));
 @end
 
 __attribute__((swift_name("TransformIntToDecimalString")))
 @interface KtTransformIntToDecimalString : KtTransformIntToString
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (NSString *)mapValue:(KtInt *)value __attribute__((swift_name("map(value:)")));
-- (NSString *)mapIntValue:(int32_t)value __attribute__((swift_name("map(intValue:)")));
+- (NSString *)mapValue:(KtInt *)konstue __attribute__((swift_name("map(konstue:)")));
+- (NSString *)mapIntValue:(int32_t)konstue __attribute__((swift_name("map(intValue:)")));
 @end
 
 __attribute__((swift_name("TransformIntToLong")))
 @interface KtTransformIntToLong : KtBase <KtTransform>
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-- (KtLong *)mapValue:(KtInt *)value __attribute__((swift_name("map(value:)")));
+- (KtLong *)mapValue:(KtInt *)konstue __attribute__((swift_name("map(konstue:)")));
 @end
 
 __attribute__((objc_subclassing_restricted))
@@ -2662,38 +2662,38 @@ __attribute__((swift_name("TestClashesImpl")))
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("TestInvalidIdentifiers")))
-@interface KtTestInvalidIdentifiers : KtBase
+__attribute__((swift_name("TestInkonstidIdentifiers")))
+@interface KtTestInkonstidIdentifiers : KtBase
 - (instancetype)init __attribute__((swift_name("init()"))) __attribute__((objc_designated_initializer));
 + (instancetype)new __attribute__((availability(swift, unavailable, message="use object initializers instead")));
-@property (class, readonly, getter=companion) KtTestInvalidIdentifiersCompanionS *companion __attribute__((swift_name("companion")));
+@property (class, readonly, getter=companion) KtTestInkonstidIdentifiersCompanionS *companion __attribute__((swift_name("companion")));
 - (int32_t)aSdSdS1:(int32_t)S1 _2:(int32_t)_2 _3:(int32_t)_3 __attribute__((swift_name("aSdSd(S1:_2:_3:)")));
 @property (readonly) unichar __ __attribute__((swift_name("__")));
 @property (readonly) unichar __ __attribute__((swift_name("__")));
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("TestInvalidIdentifiers.E")))
-@interface KtTestInvalidIdentifiersE : KtKotlinEnum<KtTestInvalidIdentifiersE *>
+__attribute__((swift_name("TestInkonstidIdentifiers.E")))
+@interface KtTestInkonstidIdentifiersE : KtKotlinEnum<KtTestInkonstidIdentifiersE *>
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 - (instancetype)initWithName:(NSString *)name ordinal:(int32_t)ordinal __attribute__((swift_name("init(name:ordinal:)"))) __attribute__((objc_designated_initializer)) __attribute__((unavailable));
-@property (class, readonly) KtTestInvalidIdentifiersE *_4s __attribute__((swift_name("_4s")));
-@property (class, readonly) KtTestInvalidIdentifiersE *_5s __attribute__((swift_name("_5s")));
-@property (class, readonly) KtTestInvalidIdentifiersE *__ __attribute__((swift_name("__")));
-@property (class, readonly) KtTestInvalidIdentifiersE *__ __attribute__((swift_name("__")));
-+ (KtKotlinArray<KtTestInvalidIdentifiersE *> *)values __attribute__((swift_name("values()")));
-@property (class, readonly) NSArray<KtTestInvalidIdentifiersE *> *entries __attribute__((swift_name("entries")));
-@property (readonly) int32_t value __attribute__((swift_name("value")));
+@property (class, readonly) KtTestInkonstidIdentifiersE *_4s __attribute__((swift_name("_4s")));
+@property (class, readonly) KtTestInkonstidIdentifiersE *_5s __attribute__((swift_name("_5s")));
+@property (class, readonly) KtTestInkonstidIdentifiersE *__ __attribute__((swift_name("__")));
+@property (class, readonly) KtTestInkonstidIdentifiersE *__ __attribute__((swift_name("__")));
++ (KtKotlinArray<KtTestInkonstidIdentifiersE *> *)konstues __attribute__((swift_name("konstues()")));
+@property (class, readonly) NSArray<KtTestInkonstidIdentifiersE *> *entries __attribute__((swift_name("entries")));
+@property (readonly) int32_t konstue __attribute__((swift_name("konstue")));
 @end
 
 __attribute__((objc_subclassing_restricted))
-__attribute__((swift_name("TestInvalidIdentifiers.CompanionS")))
-@interface KtTestInvalidIdentifiersCompanionS : KtBase
+__attribute__((swift_name("TestInkonstidIdentifiers.CompanionS")))
+@interface KtTestInkonstidIdentifiersCompanionS : KtBase
 + (instancetype)alloc __attribute__((unavailable));
 + (instancetype)allocWithZone:(struct _NSZone *)zone __attribute__((unavailable));
 + (instancetype)companionS __attribute__((swift_name("init()")));
-@property (class, readonly, getter=shared) KtTestInvalidIdentifiersCompanionS *shared __attribute__((swift_name("shared")));
+@property (class, readonly, getter=shared) KtTestInkonstidIdentifiersCompanionS *shared __attribute__((swift_name("shared")));
 @property (readonly) int32_t _42 __attribute__((swift_name("_42")));
 @end
 
@@ -3213,7 +3213,7 @@ __attribute__((swift_name("ValuesKt")))
 + (NSString *)iFunExt:(id<KtI>)receiver __attribute__((swift_name("iFunExt(_:)")));
 + (KtEnumeration *)passEnum __attribute__((swift_name("passEnum()")));
 + (void)receiveEnumE:(int32_t)e __attribute__((swift_name("receiveEnum(e:)")));
-+ (KtEnumeration *)getValue:(int32_t)value __attribute__((swift_name("get(value:)")));
++ (KtEnumeration *)getValue:(int32_t)konstue __attribute__((swift_name("get(konstue:)")));
 + (KtWithCompanionAndObjectCompanion *)getCompanionObject __attribute__((swift_name("getCompanionObject()")));
 + (KtWithCompanionAndObjectNamed *)getNamedObject __attribute__((swift_name("getNamedObject()")));
 + (KtOpenClassI *)getNamedObjectInterface __attribute__((swift_name("getNamedObjectInterface()")));
@@ -3269,11 +3269,11 @@ __attribute__((swift_name("ValuesKt")))
 */
 + (BOOL)testSwiftNotThrowingTest:(id<KtThrowsWithBridgeBase>)test error:(NSError * _Nullable * _Nullable)error __attribute__((swift_name("testSwiftNotThrowing(test:)")));
 + (id)same:(id)receiver __attribute__((swift_name("same(_:)")));
-+ (KtInt * _Nullable)callBase1:(id<KtBase1>)base1 value:(KtInt * _Nullable)value __attribute__((swift_name("call(base1:value:)")));
-+ (KtInt * _Nullable)callExtendedBase1:(id<KtExtendedBase1>)extendedBase1 value:(KtInt * _Nullable)value __attribute__((swift_name("call(extendedBase1:value:)")));
-+ (KtInt * _Nullable)callBase2:(id<KtBase2>)base2 value:(KtInt * _Nullable)value __attribute__((swift_name("call(base2:value:)")));
-+ (int32_t)callBase3:(id)base3 value:(KtInt * _Nullable)value __attribute__((swift_name("call(base3:value:)")));
-+ (int32_t)callBase23:(KtBase23 *)base23 value:(KtInt * _Nullable)value __attribute__((swift_name("call(base23:value:)")));
++ (KtInt * _Nullable)callBase1:(id<KtBase1>)base1 konstue:(KtInt * _Nullable)konstue __attribute__((swift_name("call(base1:konstue:)")));
++ (KtInt * _Nullable)callExtendedBase1:(id<KtExtendedBase1>)extendedBase1 konstue:(KtInt * _Nullable)konstue __attribute__((swift_name("call(extendedBase1:konstue:)")));
++ (KtInt * _Nullable)callBase2:(id<KtBase2>)base2 konstue:(KtInt * _Nullable)konstue __attribute__((swift_name("call(base2:konstue:)")));
++ (int32_t)callBase3:(id)base3 konstue:(KtInt * _Nullable)konstue __attribute__((swift_name("call(base3:konstue:)")));
++ (int32_t)callBase23:(KtBase23 *)base23 konstue:(KtInt * _Nullable)konstue __attribute__((swift_name("call(base23:konstue:)")));
 + (id<KtTransform>)createTransformDecimalStringToInt __attribute__((swift_name("createTransformDecimalStringToInt()")));
 + (BOOL)runUnitBlockBlock:(void (^)(void))block __attribute__((swift_name("runUnitBlock(block:)")));
 + (void (^)(void))asUnitBlockBlock:(id _Nullable (^)(void))block __attribute__((swift_name("asUnitBlock(block:)")));

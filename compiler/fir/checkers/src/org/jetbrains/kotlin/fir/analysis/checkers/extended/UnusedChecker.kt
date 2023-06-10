@@ -32,25 +32,25 @@ import org.jetbrains.kotlin.fir.types.isBasicFunctionType
 
 object UnusedChecker : AbstractFirPropertyInitializationChecker() {
     override fun analyze(data: PropertyInitializationInfoData, reporter: DiagnosticReporter, context: CheckerContext) {
-        val ownData = ValueWritesWithoutReading(context.session, data.properties).getData(data.graph)
+        konst ownData = ValueWritesWithoutReading(context.session, data.properties).getData(data.graph)
         data.graph.traverse(CfaVisitor(ownData, reporter, context))
     }
 
     class CfaVisitor(
-        val data: Map<CFGNode<*>, PathAwareVariableStatusInfo>,
-        val reporter: DiagnosticReporter,
-        val context: CheckerContext
+        konst data: Map<CFGNode<*>, PathAwareVariableStatusInfo>,
+        konst reporter: DiagnosticReporter,
+        konst context: CheckerContext
     ) : ControlFlowGraphVisitorVoid() {
         override fun visitNode(node: CFGNode<*>) {}
 
         override fun visitVariableAssignmentNode(node: VariableAssignmentNode) {
-            val variableSymbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return
-            val dataPerNode = data[node] ?: return
-            for (dataPerLabel in dataPerNode.values) {
-                val data = dataPerLabel[variableSymbol] ?: continue
+            konst variableSymbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return
+            konst dataPerNode = data[node] ?: return
+            for (dataPerLabel in dataPerNode.konstues) {
+                konst data = dataPerLabel[variableSymbol] ?: continue
                 if (data == VariableStatus.ONLY_WRITTEN_NEVER_READ) {
                     // todo: report case like "a += 1" where `a` `doesn't writes` different way (special for Idea)
-                    val source = node.fir.lValue.source
+                    konst source = node.fir.lValue.source
                     reporter.reportOn(source, FirErrors.ASSIGNED_VALUE_IS_NEVER_READ, context)
                     // To avoid duplicate reports, stop investigating remaining paths once reported.
                     break
@@ -59,18 +59,18 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
         }
 
         override fun visitVariableDeclarationNode(node: VariableDeclarationNode) {
-            val variableSymbol = node.fir.symbol
+            konst variableSymbol = node.fir.symbol
             if (node.fir.source == null) return
             if (variableSymbol.isLoopIterator) return
-            val dataPerNode = data[node] ?: return
-            // TODO: merge values for labels, otherwise diagnostics are inconsistent
-            for (dataPerLabel in dataPerNode.values) {
-                val data = dataPerLabel[variableSymbol] ?: continue
+            konst dataPerNode = data[node] ?: return
+            // TODO: merge konstues for labels, otherwise diagnostics are inconsistent
+            for (dataPerLabel in dataPerNode.konstues) {
+                konst data = dataPerLabel[variableSymbol] ?: continue
 
                 variableSymbol.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
                 @OptIn(SymbolInternals::class)
-                val variable = variableSymbol.fir
-                val variableSource = variable.source
+                konst variable = variableSymbol.fir
+                konst variableSource = variable.source
 
                 if (variableSource?.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION) {
                     continue
@@ -88,7 +88,7 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
                         }
                     }
                     data.isRedundantInit -> {
-                        val source = variable.initializer?.source
+                        konst source = variable.initializer?.source
                         reporter.reportOn(source, FirErrors.VARIABLE_INITIALIZER_IS_REDUNDANT, context)
                         break
                     }
@@ -103,7 +103,7 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
         }
     }
 
-    enum class VariableStatus(private val priority: Int) {
+    enum class VariableStatus(private konst priority: Int) {
         READ(3),
         WRITTEN_AFTER_READ(2),
         ONLY_WRITTEN_NEVER_READ(1),
@@ -113,11 +113,11 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
         var isRedundantInit = false
 
         fun merge(variableUseState: VariableStatus?): VariableStatus {
-            val base = if (variableUseState == null || priority > variableUseState.priority) this
+            konst base = if (variableUseState == null || priority > variableUseState.priority) this
             else variableUseState
 
             return base.also {
-                // TODO: is this modifying constant enum values???
+                // TODO: is this modifying constant enum konstues???
                 it.isRead = this.isRead || variableUseState?.isRead == true
                 it.isRedundantInit = this.isRedundantInit && variableUseState?.isRedundantInit == true
             }
@@ -128,18 +128,18 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
         map: PersistentMap<FirPropertySymbol, VariableStatus> = persistentMapOf()
     ) : ControlFlowInfo<VariableStatusInfo, FirPropertySymbol, VariableStatus>(map) {
         companion object {
-            val EMPTY = VariableStatusInfo()
+            konst EMPTY = VariableStatusInfo()
         }
 
-        override val constructor: (PersistentMap<FirPropertySymbol, VariableStatus>) -> VariableStatusInfo =
+        override konst constructor: (PersistentMap<FirPropertySymbol, VariableStatus>) -> VariableStatusInfo =
             ::VariableStatusInfo
 
         override fun merge(other: VariableStatusInfo): VariableStatusInfo {
             var result = this
             for (symbol in keys.union(other.keys)) {
-                val kind1 = this[symbol] ?: VariableStatus.UNUSED
-                val kind2 = other[symbol] ?: VariableStatus.UNUSED
-                val new = kind1.merge(kind2)
+                konst kind1 = this[symbol] ?: VariableStatus.UNUSED
+                konst kind2 = other[symbol] ?: VariableStatus.UNUSED
+                konst new = kind1.merge(kind2)
                 result = result.put(symbol, new)
             }
             return result
@@ -150,14 +150,14 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
     }
 
     private class ValueWritesWithoutReading(
-        private val session: FirSession,
-        private val localProperties: Set<FirPropertySymbol>
+        private konst session: FirSession,
+        private konst localProperties: Set<FirPropertySymbol>
     ) : PathAwareControlFlowGraphVisitor<VariableStatusInfo>() {
         companion object {
-            private val EMPTY_INFO: PathAwareVariableStatusInfo = persistentMapOf(NormalPath to VariableStatusInfo.EMPTY)
+            private konst EMPTY_INFO: PathAwareVariableStatusInfo = persistentMapOf(NormalPath to VariableStatusInfo.EMPTY)
         }
 
-        override val emptyInfo: PathAwareVariableStatusInfo
+        override konst emptyInfo: PathAwareVariableStatusInfo
             get() = EMPTY_INFO
 
         fun getData(graph: ControlFlowGraph): Map<CFGNode<*>, PathAwareVariableStatusInfo> {
@@ -177,9 +177,9 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
             node: VariableDeclarationNode,
             data: PathAwareVariableStatusInfo
         ): PathAwareVariableStatusInfo {
-            val dataForNode = visitNode(node, data)
+            konst dataForNode = visitNode(node, data)
             if (node.fir.source?.kind is KtFakeSourceElementKind) return dataForNode
-            val symbol = node.fir.symbol
+            konst symbol = node.fir.symbol
             return update(dataForNode, symbol) { prev ->
                 when (prev) {
                     null -> {
@@ -209,10 +209,10 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
             node: VariableAssignmentNode,
             data: PathAwareVariableStatusInfo
         ): PathAwareVariableStatusInfo {
-            val dataForNode = visitNode(node, data)
-            val symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return dataForNode
+            konst dataForNode = visitNode(node, data)
+            konst symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: return dataForNode
             return update(dataForNode, symbol) update@{ prev ->
-                val toPut = when {
+                konst toPut = when {
                     symbol !in localProperties -> {
                         null
                     }
@@ -238,7 +238,7 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
             node: QualifiedAccessNode,
             data: PathAwareVariableStatusInfo
         ): PathAwareVariableStatusInfo {
-            val dataForNode = visitNode(node, data)
+            konst dataForNode = visitNode(node, data)
             return visitQualifiedAccesses(dataForNode, node.fir)
         }
 
@@ -247,7 +247,7 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
             annotation: FirAnnotation,
         ): PathAwareVariableStatusInfo {
             return if (annotation is FirAnnotationCall) {
-                val qualifiedAccesses = annotation.argumentList.arguments.mapNotNull { it as? FirQualifiedAccessExpression }.toTypedArray()
+                konst qualifiedAccesses = annotation.argumentList.arguments.mapNotNull { it as? FirQualifiedAccessExpression }.toTypedArray()
                 visitQualifiedAccesses(dataForNode, *qualifiedAccesses)
             } else {
                 dataForNode
@@ -262,9 +262,9 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
                 return qualifiedAccess.calleeReference.toResolvedPropertySymbol()?.takeIf { it in localProperties }
             }
 
-            val symbols = qualifiedAccesses.mapNotNull { retrieveSymbol(it) }.toTypedArray()
+            konst symbols = qualifiedAccesses.mapNotNull { retrieveSymbol(it) }.toTypedArray()
 
-            val status = VariableStatus.READ
+            konst status = VariableStatus.READ
             status.isRead = true
 
             return update(dataForNode, *symbols) { status }
@@ -274,15 +274,15 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
             node: FunctionCallNode,
             data: PathAwareVariableStatusInfo
         ): PathAwareVariableStatusInfo {
-            val dataForNode = visitNode(node, data)
-            val reference = node.fir.calleeReference.resolved ?: return dataForNode
-            val functionSymbol = reference.resolvedSymbol as? FirFunctionSymbol<*> ?: return dataForNode
-            val symbol = if (functionSymbol.callableId.callableName.identifier == "invoke") {
+            konst dataForNode = visitNode(node, data)
+            konst reference = node.fir.calleeReference.resolved ?: return dataForNode
+            konst functionSymbol = reference.resolvedSymbol as? FirFunctionSymbol<*> ?: return dataForNode
+            konst symbol = if (functionSymbol.callableId.callableName.identifier == "invoke") {
                 localProperties.find { it.name == reference.name && it.resolvedReturnTypeRef.coneType.isBasicFunctionType(session) }
             } else null
             symbol ?: return dataForNode
 
-            val status = VariableStatus.READ
+            konst status = VariableStatus.READ
             status.isRead = true
             return update(dataForNode, symbol) { status }
         }
@@ -294,14 +294,14 @@ object UnusedChecker : AbstractFirPropertyInitializationChecker() {
         ): PathAwareVariableStatusInfo = pathAwareInfo.mutate {
             for ((label, dataPerLabel) in pathAwareInfo) {
                 for (symbol in symbols) {
-                    val v = updater.invoke(dataPerLabel[symbol]) ?: continue
+                    konst v = updater.invoke(dataPerLabel[symbol]) ?: continue
                     it[label] = dataPerLabel.put(symbol, v)
                 }
             }
         }
     }
 
-    private val FirPropertySymbol.isLoopIterator: Boolean
+    private konst FirPropertySymbol.isLoopIterator: Boolean
         get() {
             @OptIn(SymbolInternals::class)
             return fir.initializer?.source?.kind == KtFakeSourceElementKind.DesugaredForLoop

@@ -1,20 +1,20 @@
 // FILE: AliasFor.java
 
 public @interface AliasFor {
-    @AliasFor(value = "attribute")
-    String value() default "";
+    @AliasFor(konstue = "attribute")
+    String konstue() default "";
 
-    @AliasFor(value = "value")
+    @AliasFor(konstue = "konstue")
     String attribute() default "";
 }
 
 // FILE: Service.java
 public @interface Service {
-    @AliasFor(value = "component")
-    String value() default "";
+    @AliasFor(konstue = "component")
+    String konstue() default "";
 }
 
 // FILE: Annotated.kt
 
-@Service(value = "Your")
+@Service(konstue = "Your")
 class My

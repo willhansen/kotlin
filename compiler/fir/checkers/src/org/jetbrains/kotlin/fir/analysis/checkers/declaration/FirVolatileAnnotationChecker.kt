@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.fir.symbols.SymbolInternals
 import org.jetbrains.kotlin.name.StandardClassIds
 
 object FirVolatileAnnotationChecker : FirPropertyChecker() {
-    private val VOLATILE_CLASS_IDS = listOf(StandardClassIds.Annotations.Volatile, StandardClassIds.Annotations.JvmVolatile)
+    private konst VOLATILE_CLASS_IDS = listOf(StandardClassIds.Annotations.Volatile, StandardClassIds.Annotations.JvmVolatile)
 
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration.source?.kind != KtRealSourceElementKind) return
 
-        val fieldAnnotation = declaration.backingField?.annotations?.getAnnotationByClassIds(VOLATILE_CLASS_IDS, context.session)
+        konst fieldAnnotation = declaration.backingField?.annotations?.getAnnotationByClassIds(VOLATILE_CLASS_IDS, context.session)
             ?: return
 
         if (!declaration.isVar) {

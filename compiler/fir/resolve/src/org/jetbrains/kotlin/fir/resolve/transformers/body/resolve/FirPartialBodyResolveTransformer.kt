@@ -11,25 +11,25 @@ import org.jetbrains.kotlin.fir.resolve.ResolutionMode
 import org.jetbrains.kotlin.fir.resolve.calls.ResolutionContext
 
 abstract class FirPartialBodyResolveTransformer(
-    val transformer: FirAbstractBodyResolveTransformerDispatcher
+    konst transformer: FirAbstractBodyResolveTransformerDispatcher
 ) : FirAbstractBodyResolveTransformer(transformer.transformerPhase) {
     @Suppress("OVERRIDE_BY_INLINE")
-    final override inline val context: BodyResolveContext
+    final override inline konst context: BodyResolveContext
         get() = transformer.context
 
     @Suppress("OVERRIDE_BY_INLINE")
-    final override inline val components: BodyResolveTransformerComponents
+    final override inline konst components: BodyResolveTransformerComponents
         get() = transformer.components
 
     @Suppress("OVERRIDE_BY_INLINE")
-    final override inline val resolutionContext: ResolutionContext
+    final override inline konst resolutionContext: ResolutionContext
         get() = transformer.resolutionContext
 
     @set:PrivateForInline
     override var implicitTypeOnly: Boolean
         get() = transformer.implicitTypeOnly
-        set(value) {
-            transformer.implicitTypeOnly = value
+        set(konstue) {
+            transformer.implicitTypeOnly = konstue
         }
 
     override fun <E : FirElement> transformElement(element: E, data: ResolutionMode): E {

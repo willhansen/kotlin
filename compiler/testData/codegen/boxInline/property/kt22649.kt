@@ -3,7 +3,7 @@ var result = ""
 
 inline var apx:Int
     get() = 0
-    set(value) { result = if (value == 1) "OK" else "fail" }
+    set(konstue) { result = if (konstue == 1) "OK" else "fail" }
 
 
 // FILE: 2.kt

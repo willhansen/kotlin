@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.fir.symbols.ConeClassLikeLookupTag
 import org.jetbrains.kotlin.ir.util.IdSignature
 
 interface Fir2IrSignatureComposer {
-    val mangler: FirMangler
+    konst mangler: FirMangler
     fun composeSignature(
         declaration: FirDeclaration,
         containingClass: ConeClassLikeLookupTag? = null,

@@ -31,17 +31,17 @@ import org.jetbrains.kotlin.utils.addToStdlib.lastIsInstanceOrNull
 
 object FirEnumCompanionInEnumConstructorCallChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val enumClass = when (declaration.classKind) {
+        konst enumClass = when (declaration.classKind) {
             ClassKind.ENUM_CLASS -> declaration as FirRegularClass
             ClassKind.ENUM_ENTRY -> context.containingDeclarations.lastIsInstanceOrNull()
             else -> null
         } ?: return
-        val companionOfEnum = enumClass.companionObjectSymbol ?: return
-        val graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
+        konst companionOfEnum = enumClass.companionObjectSymbol ?: return
+        konst graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
         analyzeGraph(graph, companionOfEnum, context, reporter)
         if (declaration.classKind.isEnumEntry) {
-            val constructor = declaration.declarations.firstIsInstanceOrNull<FirPrimaryConstructor>()
-            val constructorGraph = constructor?.controlFlowGraphReference?.controlFlowGraph
+            konst constructor = declaration.declarations.firstIsInstanceOrNull<FirPrimaryConstructor>()
+            konst constructorGraph = constructor?.controlFlowGraphReference?.controlFlowGraph
             if (constructorGraph != null) {
                 analyzeGraph(constructorGraph, companionOfEnum, context, reporter)
             }
@@ -70,12 +70,12 @@ object FirEnumCompanionInEnumConstructorCallChecker : FirClassChecker() {
                     }
                 }
             }
-            val qualifiedAccess = when (node) {
+            konst qualifiedAccess = when (node) {
                 is QualifiedAccessNode -> node.fir
                 is FunctionCallNode -> node.fir
                 else -> continue
             }
-            val matchingReceiver = qualifiedAccess.allReceiverExpressions
+            konst matchingReceiver = qualifiedAccess.allReceiverExpressions
                 .firstOrNull { it.getClassSymbol(context.session) == companionSymbol }
             if (matchingReceiver != null) {
                 reporter.reportOn(

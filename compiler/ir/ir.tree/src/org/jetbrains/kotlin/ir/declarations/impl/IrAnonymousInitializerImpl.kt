@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
 import org.jetbrains.kotlin.ir.symbols.IrAnonymousInitializerSymbol
 
 class IrAnonymousInitializerImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrAnonymousInitializerSymbol,
+    override konst symbol: IrAnonymousInitializerSymbol,
     override var isStatic: Boolean = false,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrAnonymousInitializer() {
     init {
         symbol.bind(this)
@@ -31,7 +31,7 @@ class IrAnonymousInitializerImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassDescriptor
+    override konst descriptor: ClassDescriptor
         get() = symbol.descriptor
 
     override lateinit var body: IrBlockBody

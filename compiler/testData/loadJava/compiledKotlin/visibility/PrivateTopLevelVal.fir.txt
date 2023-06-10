@@ -1,3 +1,3 @@
-private final val topLevelVal: R|kotlin/Int|
+private final konst topLevelVal: R|kotlin/Int|
     private get(): R|kotlin/Int|
 

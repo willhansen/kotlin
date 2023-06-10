@@ -10,14 +10,14 @@ import kotlinx.serialization.internal.*
 
 
 @Serializable(BruhSerializerA::class)
-class Bruh(val s: String)
+class Bruh(konst s: String)
 
 object BruhSerializerA : KSerializer<Bruh> {
-    override val descriptor: SerialDescriptor
+    override konst descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("Bruh", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: Bruh) {
-        encoder.encodeString(value.s)
+    override fun serialize(encoder: Encoder, konstue: Bruh) {
+        encoder.encodeString(konstue.s)
     }
 
     override fun deserialize(decoder: Decoder): Bruh {
@@ -26,11 +26,11 @@ object BruhSerializerA : KSerializer<Bruh> {
 }
 
 object BruhSerializerB : KSerializer<Bruh> {
-    override val descriptor: SerialDescriptor
+    override konst descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("Bruh", PrimitiveKind.STRING)
 
-    override fun serialize(encoder: Encoder, value: Bruh) {
-        encoder.encodeString(value.s + "#")
+    override fun serialize(encoder: Encoder, konstue: Bruh) {
+        encoder.encodeString(konstue.s + "#")
     }
 
     override fun deserialize(decoder: Decoder): Bruh {
@@ -42,15 +42,15 @@ typealias BruhAlias = @Serializable(BruhSerializerB::class) Bruh
 
 @Serializable
 class Tester(
-    val b1: Bruh,
-    @Serializable(BruhSerializerB::class) val b2: Bruh,
-    val b3: @Serializable(BruhSerializerB::class) Bruh,
-    val b4: BruhAlias
+    konst b1: Bruh,
+    @Serializable(BruhSerializerB::class) konst b2: Bruh,
+    konst b3: @Serializable(BruhSerializerB::class) Bruh,
+    konst b4: BruhAlias
 )
 
 fun box(): String {
-    val t = Tester(Bruh("a"), Bruh("b"), Bruh("c"), Bruh("d"))
-    val s = Json.encodeToString(t)
+    konst t = Tester(Bruh("a"), Bruh("b"), Bruh("c"), Bruh("d"))
+    konst s = Json.encodeToString(t)
     if (s != """{"b1":"a","b2":"b#","b3":"c#","b4":"d#"}""") return s
     return "OK"
 }

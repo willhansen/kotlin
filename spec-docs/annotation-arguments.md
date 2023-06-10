@@ -10,9 +10,9 @@ Goals:
 
 Related issues:
 * [KT-6652 Prohibit using java annotations with positional arguments](https://youtrack.jetbrains.com/issue/KT-6652)
-* [KT-6220 Annotations: handling of "value" members](https://youtrack.jetbrains.com/issue/KT-6220)
-* [KT-6641 Annotations with multiple array values](https://youtrack.jetbrains.com/issue/KT-6641)
-* [KT-2576 Shortcut notation for annotations with single-value array elements](https://youtrack.jetbrains.com/issue/KT-2576)
+* [KT-6220 Annotations: handling of "konstue" members](https://youtrack.jetbrains.com/issue/KT-6220)
+* [KT-6641 Annotations with multiple array konstues](https://youtrack.jetbrains.com/issue/KT-6641)
+* [KT-2576 Shortcut notation for annotations with single-konstue array elements](https://youtrack.jetbrains.com/issue/KT-2576)
 
 ## Problem Statement
 
@@ -52,16 +52,16 @@ Also, we now load all array arguments as varargs, which may break for the same r
 ## Loading Java Annotations
 
 Fictitious constructors for Java annotations could be built as follows:
-* if there is an element named `value`, it is put first on the parameter list
-* if all other elements have default values, and `value` has an array type, it is marked `vararg` and has the type of the elements of the array
-* parameters corresponding to all elements but `value` can not be used positionally, only named arguments are allowed for them (this requires adding a platform-specific check to `frontend.java`)
-* note that elements with default values should be transformed to parameters with default values
+* if there is an element named `konstue`, it is put first on the parameter list
+* if all other elements have default konstues, and `konstue` has an array type, it is marked `vararg` and has the type of the elements of the array
+* parameters corresponding to all elements but `konstue` can not be used positionally, only named arguments are allowed for them (this requires adding a platform-specific check to `frontend.java`)
+* note that elements with default konstues should be transformed to parameters with default konstues
 
->**NOTE**: when `value` parameter is marked `vararg` and no arguments are passed, behavior will depend on presence of parameter's default value:
-* if it has no default value, an empty array is emitted in the byte code
-* if it has a default value, then no value is emitted in the byte code, so the default value will be used
+>**NOTE**: when `konstue` parameter is marked `vararg` and no arguments are passed, behavior will depend on presence of parameter's default konstue:
+* if it has no default konstue, an empty array is emitted in the byte code
+* if it has a default konstue, then no konstue is emitted in the byte code, so the default konstue will be used
 
-> Thus, **behavior of the same code can change after adding a default value to parameter and recompiling kotlin
+> Thus, **behavior of the same code can change after adding a default konstue to parameter and recompiling kotlin
 sources**
 
 ## \[TBD later] Array Syntax Examples

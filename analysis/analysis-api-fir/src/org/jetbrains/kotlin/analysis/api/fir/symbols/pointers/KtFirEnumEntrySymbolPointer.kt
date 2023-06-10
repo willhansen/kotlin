@@ -18,19 +18,19 @@ import org.jetbrains.kotlin.fir.declarations.FirRegularClass
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirEnumEntrySymbolPointer(
-    private val ownerPointer: KtSymbolPointer<KtClassOrObjectSymbol>,
-    private val name: Name,
+    private konst ownerPointer: KtSymbolPointer<KtClassOrObjectSymbol>,
+    private konst name: Name,
 ) : KtSymbolPointer<KtEnumEntrySymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtEnumEntrySymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val owner = with(analysisSession) {
+        konst owner = with(analysisSession) {
             ownerPointer.restoreSymbol()
         }
 
-        val enumClass = owner?.firSymbol?.fir as? FirRegularClass ?: return null
+        konst enumClass = owner?.firSymbol?.fir as? FirRegularClass ?: return null
         if (enumClass.classKind != ClassKind.ENUM_CLASS) return null
-        val enumEntry = enumClass.enumEntryByName(name) ?: return null
+        konst enumEntry = enumClass.enumEntryByName(name) ?: return null
         return analysisSession.firSymbolBuilder.buildEnumEntrySymbol(enumEntry.symbol)
     }
 

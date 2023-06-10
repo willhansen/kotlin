@@ -2,7 +2,7 @@
 // FILE: derivedEmptyStringListAdd.kt
 
 open class EmptyListBase<T : CharSequence> : List<T>, RandomAccess {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: T): Boolean = false
     override fun containsAll(elements: Collection<T>): Boolean = elements.isEmpty()

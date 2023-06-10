@@ -34,11 +34,11 @@ private fun KotlinType.approximateNonDynamicFlexibleTypes(
     if (this is ErrorType) return this
 
     if (isFlexible()) {
-        val flexible = asFlexibleType()
-        val lowerBound = flexible.lowerBound
-        val upperBound = flexible.upperBound
-        val lowerClass = lowerBound.constructor.declarationDescriptor as? ClassDescriptor?
-        val isCollection = lowerClass != null && JavaToKotlinClassMapper.isMutable(lowerClass)
+        konst flexible = asFlexibleType()
+        konst lowerBound = flexible.lowerBound
+        konst upperBound = flexible.upperBound
+        konst lowerClass = lowerBound.constructor.declarationDescriptor as? ClassDescriptor?
+        konst isCollection = lowerClass != null && JavaToKotlinClassMapper.isMutable(lowerClass)
         // (Mutable)Collection<T>! -> MutableCollection<T>?
         // Foo<(Mutable)Collection<T>!>! -> Foo<Collection<T>>?
         // Foo! -> Foo?

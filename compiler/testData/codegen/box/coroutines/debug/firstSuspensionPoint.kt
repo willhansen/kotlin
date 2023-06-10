@@ -21,7 +21,7 @@ suspend fun foo() {
     suspendHere()
 }
 
-val lambda: suspend () -> Unit = {
+konst lambda: suspend () -> Unit = {
     /*
     A
     LOT

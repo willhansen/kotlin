@@ -35,7 +35,7 @@ class MockExternalAnnotationsManager : ExternalAnnotationsManager() {
         listOwner: PsiModifierListOwner,
         annotationFQName: String,
         fromFile: PsiFile,
-        value: Array<out PsiNameValuePair>?
+        konstue: Array<out PsiNameValuePair>?
     ) {
         throw UnsupportedOperationException("not implemented")
     }
@@ -47,7 +47,7 @@ class MockExternalAnnotationsManager : ExternalAnnotationsManager() {
     override fun editExternalAnnotation(
         listOwner: PsiModifierListOwner,
         annotationFQN: String,
-        value: Array<out PsiNameValuePair>?
+        konstue: Array<out PsiNameValuePair>?
     ): Boolean {
         throw UnsupportedOperationException("not implemented")
     }

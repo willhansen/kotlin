@@ -21,32 +21,32 @@ import org.jetbrains.kotlin.load.java.structure.*
 import org.jetbrains.kotlin.utils.SmartList
 
 internal abstract class JavaPlainType : ListBasedJavaAnnotationOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
-    override val isDeprecatedInJavaDoc = false
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst isDeprecatedInJavaDoc = false
 }
 
 // They are only used for java class files, but potentially may be used in other cases
 // It would be better to call them like JavaSomeTypeImpl, but these names are already occupied by the PSI based types
-internal class PlainJavaArrayType(override val componentType: JavaType) : JavaPlainType(), JavaArrayType
-internal class PlainJavaWildcardType(override val bound: JavaType?, override val isExtends: Boolean) : JavaPlainType(), JavaWildcardType
-internal class PlainJavaPrimitiveType(override val type: PrimitiveType?) : JavaPlainType(), JavaPrimitiveType
+internal class PlainJavaArrayType(override konst componentType: JavaType) : JavaPlainType(), JavaArrayType
+internal class PlainJavaWildcardType(override konst bound: JavaType?, override konst isExtends: Boolean) : JavaPlainType(), JavaWildcardType
+internal class PlainJavaPrimitiveType(override konst type: PrimitiveType?) : JavaPlainType(), JavaPrimitiveType
 
 internal class PlainJavaClassifierType(
     // calculation of classifier and canonicalText
     classifierComputation: () -> ClassifierResolutionContext.Result,
-    override val typeArguments: List<JavaType>
+    override konst typeArguments: List<JavaType>
 ) : JavaPlainType(), JavaClassifierType {
-    private val classifierResolverResult by lazy(LazyThreadSafetyMode.NONE, classifierComputation)
+    private konst classifierResolverResult by lazy(LazyThreadSafetyMode.NONE, classifierComputation)
 
-    override val classifier get() = classifierResolverResult.classifier
-    override val isRaw
+    override konst classifier get() = classifierResolverResult.classifier
+    override konst isRaw
         get() = typeArguments.isEmpty() &&
                 (classifierResolverResult.classifier as? JavaClass)?.typeParameters?.isNotEmpty() == true
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = classifierResolverResult.qualifiedName
 
     // TODO: render arguments for presentable text
-    override val presentableText: String
+    override konst presentableText: String
         get() = classifierQualifiedName
 }

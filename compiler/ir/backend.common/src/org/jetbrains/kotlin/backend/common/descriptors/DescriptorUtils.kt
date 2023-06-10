@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.descriptors.explicitParameters as _explicitParameters
 
-val String.synthesizedName: Name get() = Name.identifier(this.synthesizedString)
+konst String.synthesizedName: Name get() = Name.identifier(this.synthesizedString)
 
-val String.synthesizedString: String get() = "\$$this"
+konst String.synthesizedString: String get() = "\$$this"
 
-val CallableDescriptor.isSuspend: Boolean
+konst CallableDescriptor.isSuspend: Boolean
     get() = this is FunctionDescriptor && isSuspend
 
 /**
@@ -32,7 +32,7 @@ val CallableDescriptor.isSuspend: Boolean
  */
 // Used in Kotlin/Native
 @Suppress("unused")
-val CallableDescriptor.allParameters: List<ParameterDescriptor>
+konst CallableDescriptor.allParameters: List<ParameterDescriptor>
     get() = if (this is ConstructorDescriptor) {
         listOf(this.constructedClass.thisAsReceiverParameter) + _explicitParameters
     } else {
@@ -43,5 +43,5 @@ val CallableDescriptor.allParameters: List<ParameterDescriptor>
     message = "Please use org.jetbrains.kotlin.descriptors.explicitParameters",
     ReplaceWith("explicitParameters", "org.jetbrains.kotlin.descriptors.explicitParameters")
 )
-val CallableDescriptor.explicitParameters: List<ParameterDescriptor>
+konst CallableDescriptor.explicitParameters: List<ParameterDescriptor>
     get() = _explicitParameters

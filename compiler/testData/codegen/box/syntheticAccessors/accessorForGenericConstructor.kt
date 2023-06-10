@@ -5,7 +5,7 @@ fun box(): String {
     return "OK"
 }
 
-class A<T> private constructor(val x: T, val y: Int = 0) {
+class A<T> private constructor(konst x: T, konst y: Int = 0) {
     class Nested {
         fun nestedA() = A<Long>(1L)
 

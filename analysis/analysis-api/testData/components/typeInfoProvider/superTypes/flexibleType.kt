@@ -9,4 +9,4 @@ class Java {
 
 // FILE: test.kt
 
-val i = <expr>Java.getNames()</expr>
+konst i = <expr>Java.getNames()</expr>

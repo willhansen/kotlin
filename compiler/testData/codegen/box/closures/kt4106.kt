@@ -1,13 +1,13 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
-class Foo(private val s: String) {
+class Foo(private konst s: String) {
     inner class Inner {
-        private val x = eval {
+        private konst x = ekonst {
             this@Foo.s
         }
     }
 
-    val f = Inner()
+    konst f = Inner()
 
 }
 

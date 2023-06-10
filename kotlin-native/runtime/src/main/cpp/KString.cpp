@@ -175,7 +175,7 @@ OBJ_GETTER(Kotlin_String_plusImpl, KString thiz, KString other) {
   RuntimeAssert(other->type_info() == theStringTypeInfo, "Must be a string");
   RuntimeAssert(thiz->count_ <= static_cast<uint32_t>(std::numeric_limits<int32_t>::max()), "this cannot be this large");
   RuntimeAssert(other->count_ <= static_cast<uint32_t>(std::numeric_limits<int32_t>::max()), "other cannot be this large");
-  // Since thiz and other sizes are bounded by int32_t max value, their sum cannot exceed uint32_t max value - 1.
+  // Since thiz and other sizes are bounded by int32_t max konstue, their sum cannot exceed uint32_t max konstue - 1.
   uint32_t result_length = thiz->count_ + other->count_;
   if (result_length > static_cast<uint32_t>(std::numeric_limits<int32_t>::max())) {
     ThrowOutOfMemoryError();
@@ -243,8 +243,8 @@ KInt Kotlin_String_compareTo(KString thiz, KString other) {
 }
 
 KChar Kotlin_String_get(KString thiz, KInt index) {
-  // We couldn't have created a string bigger than max KInt value.
-  // So if index is < 0, conversion to an unsigned value would make it bigger
+  // We couldn't have created a string bigger than max KInt konstue.
+  // So if index is < 0, conversion to an unsigned konstue would make it bigger
   // than the array size.
   if (static_cast<uint32_t>(index) >= thiz->count_) {
     ThrowArrayIndexOutOfBoundsException();
@@ -303,13 +303,13 @@ KInt Kotlin_StringBuilder_insertString(KRef builder, KInt distIndex, KString fro
   return count;
 }
 
-KInt Kotlin_StringBuilder_insertInt(KRef builder, KInt position, KInt value) {
+KInt Kotlin_StringBuilder_insertInt(KRef builder, KInt position, KInt konstue) {
   auto toArray = builder->array();
   RuntimeAssert(toArray->count_ >= static_cast<uint32_t>(11 + position), "must be true");
   char cstring[12];
-  auto length = konan::snprintf(cstring, sizeof(cstring), "%d", value);
+  auto length = konan::snprintf(cstring, sizeof(cstring), "%d", konstue);
   RuntimeAssert(length >= 0, "This should never happen"); // may be overkill
-  RuntimeAssert(static_cast<size_t>(length) < sizeof(cstring), "Unexpectedly large value"); // Can't be, but this is what sNprintf for
+  RuntimeAssert(static_cast<size_t>(length) < sizeof(cstring), "Unexpectedly large konstue"); // Can't be, but this is what sNprintf for
   auto* from = &cstring[0];
   auto* to = CharArrayAddressOfElementAt(toArray, position);
   while (*from) {

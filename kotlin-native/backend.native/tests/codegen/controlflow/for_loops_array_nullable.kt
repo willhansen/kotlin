@@ -7,7 +7,7 @@ private fun nullableArray(a: Array<Int>): Array<Int>? {
 }
 
 @Test fun nullable() {
-    val array = arrayOf(1, 2, 3)
+    konst array = arrayOf(1, 2, 3)
     nullableArray(array)?.let {
         for (elem in it) {
             print(elem)

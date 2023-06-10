@@ -17,7 +17,7 @@ declare namespace JS_TESTS {
         abstract class AC implements foo.I2 {
             constructor();
             get x(): string;
-            set x(value: string);
+            set x(konstue: string);
             abstract get y(): boolean;
             abstract z(z: number): void;
             get acProp(): string;
@@ -54,7 +54,7 @@ declare namespace JS_TESTS {
             constructor();
             abstract get foo(): string;
             abstract get bar(): string;
-            abstract set bar(value: string);
+            abstract set bar(konstue: string);
             abstract get baz(): string;
             abstract bay(): string;
             readonly __doNotUseOrImplementIt: foo.I3["__doNotUseOrImplementIt"];
@@ -63,7 +63,7 @@ declare namespace JS_TESTS {
             constructor();
             get foo(): string;
             get bar(): string;
-            set bar(value: string);
+            set bar(konstue: string);
             get baz(): string;
             bay(): string;
         }
@@ -71,9 +71,9 @@ declare namespace JS_TESTS {
             constructor();
             get foo(): string;
             get bar(): string;
-            set bar(value: string);
+            set bar(konstue: string);
             get baz(): string;
-            set baz(value: string);
+            set baz(konstue: string);
             bay(): string;
         }
         abstract class EC implements foo.I3 {
@@ -92,10 +92,10 @@ declare namespace JS_TESTS {
             };
             get foo(): string;
             get bar(): string;
-            set bar(value: string);
+            set bar(konstue: string);
             bay(): string;
-            static values(): Array<foo.EC>;
-            static valueOf(value: string): foo.EC;
+            static konstues(): Array<foo.EC>;
+            static konstueOf(konstue: string): foo.EC;
             get name(): "EC1" | "EC2" | "EC3";
             get ordinal(): 0 | 1 | 2;
             abstract get baz(): string;
@@ -108,7 +108,7 @@ declare namespace JS_TESTS {
             };
         }
         interface IG<T> {
-            process(value: T): void;
+            process(konstue: T): void;
             readonly __doNotUseOrImplementIt: {
                 readonly "foo.IG": unique symbol;
             };
@@ -118,7 +118,7 @@ declare namespace JS_TESTS {
         }
         class Sixth extends /* foo.Fifth<number> */ foo.Third<number> implements foo.IA, foo.IG<number>/*, foo.IC */ {
             constructor();
-            process(value: number): void;
+            process(konstue: number): void;
             get foo(): number;
             readonly __doNotUseOrImplementIt: foo.IA["__doNotUseOrImplementIt"] & foo.IG<number>["__doNotUseOrImplementIt"];
         }

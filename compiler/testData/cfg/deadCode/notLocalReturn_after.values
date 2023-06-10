@@ -7,7 +7,7 @@ f()   <v2>: Unit              NEW: call(f(), invoke|<v1>) -> <v2>
 =====================
 == test1 ==
 fun test1(nonLocal: String): String {
-    val localResult = doCall {
+    konst localResult = doCall {
         return nonLocal  //unreachable
     }
     return "NON_LOCAL_FAILED $localResult"  //unreachable
@@ -19,7 +19,7 @@ doCall { return nonLocal //unreachable }                                        
 localResult                                                                                                           <v3>: *                 NEW: r(localResult) -> <v3>
 "NON_LOCAL_FAILED $localResult"                                                                                       <v4>: String            NEW: magic[STRING_TEMPLATE]("NON_LOCAL_FAILED $localResult"|<v3>) -> <v4>
 return "NON_LOCAL_FAILED $localResult"                                                                                !<v5>: *
-{ val localResult = doCall { return nonLocal //unreachable } return "NON_LOCAL_FAILED $localResult" //unreachable }   !<v5>: *                COPY
+{ konst localResult = doCall { return nonLocal //unreachable } return "NON_LOCAL_FAILED $localResult" //unreachable }   !<v5>: *                COPY
 =====================
 == anonymous_0 ==
 {

@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.name.Name
 
 open class FirNamedReferenceWithCandidate(
-    override val source: KtSourceElement?,
-    override val name: Name,
-    val candidate: Candidate
+    override konst source: KtSourceElement?,
+    override konst name: Name,
+    konst candidate: Candidate
 ) : FirNamedReferenceWithCandidateBase() {
-    override val candidateSymbol: FirBasedSymbol<*>
+    override konst candidateSymbol: FirBasedSymbol<*>
         get() = candidate.symbol
 
-    open val isError: Boolean get() = false
+    open konst isError: Boolean get() = false
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 
@@ -36,16 +36,16 @@ class FirErrorReferenceWithCandidate(
     source: KtSourceElement?,
     name: Name,
     candidate: Candidate,
-    val diagnostic: ConeDiagnostic
+    konst diagnostic: ConeDiagnostic
 ) : FirNamedReferenceWithCandidate(source, name, candidate) {
-    override val isError: Boolean get() = true
+    override konst isError: Boolean get() = true
 }
 
 class FirPropertyWithExplicitBackingFieldResolvedNamedReference(
-    override val source: KtSourceElement?,
-    override val name: Name,
-    override val resolvedSymbol: FirBasedSymbol<*>,
-    val hasVisibleBackingField: Boolean,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
+    override konst resolvedSymbol: FirBasedSymbol<*>,
+    konst hasVisibleBackingField: Boolean,
 ) : FirResolvedNamedReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

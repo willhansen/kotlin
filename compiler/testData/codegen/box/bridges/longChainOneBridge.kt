@@ -16,11 +16,11 @@ class Z : D() {
 
 
 fun box(): String {
-    val z = Z()
-    val d: D = z
-    val c: C = z
-    val b: B<String> = z
-    val a: A<String> = z
+    konst z = Z()
+    konst d: D = z
+    konst c: C = z
+    konst b: B<String> = z
+    konst a: A<String> = z
     return when {
         z.foo("") != "Z" -> "Fail #1"
         d.foo("") != "Z" -> "Fail #2"

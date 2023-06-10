@@ -24,11 +24,11 @@ digraph simple_kt {
             color=blue
             5 [label="Enter block"];
             6 [label="Const: Int(1)"];
-            7 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            7 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             8 [label="Access variable R|<local>/x|"];
             9 [label="Const: Int(1)"];
             10 [label="Function call: R|<local>/x|.R|kotlin/Int.plus|(...)" style="filled" fillcolor=yellow];
-            11 [label="Variable declaration: lval y: R|kotlin/Int|"];
+            11 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
             12 [label="Function call: R|/foo|()" style="filled" fillcolor=yellow];
             13 [label="Exit block"];
         }

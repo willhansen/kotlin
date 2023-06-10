@@ -18,9 +18,9 @@ open class AbstractSymbolLightClassesEqualityByFqNameTest(
     stopIfCompilationErrorDirectivePresent: Boolean
 ) : AbstractSymbolLightClassesEqualityTestBase(configurator, currentExtension, stopIfCompilationErrorDirectivePresent) {
     override fun lightClassesToCheck(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices): Collection<PsiClass> {
-        val fqName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
+        konst fqName = LightClassTestCommon.fqNameInTestDataFile(testDataPath.toFile())
 
-        val ktFile = ktFiles.first()
+        konst ktFile = ktFiles.first()
         return listOfNotNull(findLightClass(fqName, ktFile.project))
     }
 }

@@ -4,7 +4,7 @@ fun interface MyRunnable {
 
 fun box(): String {
     var result = "failed"
-    val r = MyRunnable { result += "K" }
+    konst r = MyRunnable { result += "K" }
     foo({ result = "O" }, r)
     return result
 }

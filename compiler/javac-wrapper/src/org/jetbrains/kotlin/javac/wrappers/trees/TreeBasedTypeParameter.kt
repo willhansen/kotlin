@@ -30,26 +30,26 @@ class TreeBasedTypeParameter(
         tree: JCTree.JCTypeParameter,
         compilationUnit: CompilationUnitTree,
         javac: JavacWrapper,
-        private val containingElement: JavaElement
+        private konst containingElement: JavaElement
 ) : TreeBasedElement<JCTree.JCTypeParameter>(tree, compilationUnit, javac), JavaTypeParameter {
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.name.toString())
 
-    override val annotations: Collection<JavaAnnotation> by lazy {
+    override konst annotations: Collection<JavaAnnotation> by lazy {
         tree.annotations().map { TreeBasedAnnotation(it, compilationUnit, javac, containingElement) }
     }
 
     override fun findAnnotation(fqName: FqName) =
             annotations.firstOrNull { it.classId?.asSingleFqName() == fqName }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecatedInJavaDoc(tree, compilationUnit)
 
-    override val upperBounds: Collection<JavaClassifierType>
+    override konst upperBounds: Collection<JavaClassifierType>
         get() = tree.bounds.mapNotNull {
             TreeBasedType.create(it, compilationUnit, javac, emptyList(), containingElement) as? JavaClassifierType
         }

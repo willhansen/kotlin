@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentMap
 class MemoizedValueClassLoweringDispatcherSharedData {
     enum class Access { Header, Body }
 
-    val functionResults: ConcurrentMap<Pair<Access, IrFunction>, Boolean> = ConcurrentHashMap()
-    val classResults: ConcurrentMap<Pair<Access, IrClass>, Boolean> = ConcurrentHashMap()
-    val fieldResults: ConcurrentMap<Pair<Access, IrField>, Boolean> = ConcurrentHashMap()
+    konst functionResults: ConcurrentMap<Pair<Access, IrFunction>, Boolean> = ConcurrentHashMap()
+    konst classResults: ConcurrentMap<Pair<Access, IrClass>, Boolean> = ConcurrentHashMap()
+    konst fieldResults: ConcurrentMap<Pair<Access, IrField>, Boolean> = ConcurrentHashMap()
 }

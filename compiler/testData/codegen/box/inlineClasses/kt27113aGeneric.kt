@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Any>(val a: T)
+konstue class A<T: Any>(konst a: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class NA<T>(val b: T)
+konstue class NA<T>(konst b: T)
 
 fun box(): String {
-    val ns1 = NA(A("abc"))
-    val ns2 = NA(null)
-    val t = "-$ns1-$ns2-"
+    konst ns1 = NA(A("abc"))
+    konst ns2 = NA(null)
+    konst t = "-$ns1-$ns2-"
     if (t != "-NA(b=A(a=abc))-NA(b=null)-") return throw AssertionError(t)
     return "OK"
 }

@@ -3,7 +3,7 @@ package foo
 
 var sideEffect: Int = 0;
 
-fun id(value: Boolean): Boolean = value
+fun id(konstue: Boolean): Boolean = konstue
 
 fun box(): String {
 

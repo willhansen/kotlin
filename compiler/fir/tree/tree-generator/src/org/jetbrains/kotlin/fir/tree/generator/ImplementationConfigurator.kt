@@ -81,7 +81,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         fun ImplementationContext.commonAnnotationConfig() {
             defaultEmptyList("annotations")
             default("typeRef") {
-                value = "annotationTypeRef"
+                konstue = "annotationTypeRef"
                 withGetter = true
             }
         }
@@ -103,7 +103,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
                 needAcceptAndTransform = false
             }
             default("annotationResolvePhase") {
-                value = "FirAnnotationResolvePhase.Types"
+                konstue = "FirAnnotationResolvePhase.Types"
             }
         }
 
@@ -123,7 +123,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(delegatedConstructorCall) {
             default("isSuper") {
-                value = "!isThis"
+                konstue = "!isThis"
                 withGetter = true
             }
             useTypes(explicitThisReferenceType, explicitSuperReferenceType)
@@ -131,68 +131,68 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(multiDelegatedConstructorCall) {
             default("source") {
-                value = "delegatedConstructorCalls.last().source"
+                konstue = "delegatedConstructorCalls.last().source"
                 withGetter = true
             }
             default("annotations") {
-                value = "delegatedConstructorCalls.last().annotations"
+                konstue = "delegatedConstructorCalls.last().annotations"
                 withGetter = true
             }
             default("argumentList") {
-                value = "delegatedConstructorCalls.last().argumentList"
+                konstue = "delegatedConstructorCalls.last().argumentList"
                 withGetter = true
             }
             default("contextReceiverArguments") {
-                value = "delegatedConstructorCalls.last().contextReceiverArguments"
+                konstue = "delegatedConstructorCalls.last().contextReceiverArguments"
                 withGetter = true
             }
             default("constructedTypeRef") {
-                value = "delegatedConstructorCalls.last().constructedTypeRef"
+                konstue = "delegatedConstructorCalls.last().constructedTypeRef"
                 withGetter = true
             }
             default("dispatchReceiver") {
-                value = "delegatedConstructorCalls.last().dispatchReceiver"
+                konstue = "delegatedConstructorCalls.last().dispatchReceiver"
                 withGetter = true
             }
             default("calleeReference") {
-                value = "delegatedConstructorCalls.last().calleeReference"
+                konstue = "delegatedConstructorCalls.last().calleeReference"
                 withGetter = true
             }
             default("isThis") {
-                value = "delegatedConstructorCalls.last().isThis"
+                konstue = "delegatedConstructorCalls.last().isThis"
                 withGetter = true
             }
             default("isSuper") {
-                value = "!isThis"
+                konstue = "!isThis"
                 withGetter = true
             }
             publicImplementation()
         }
 
         impl(delegatedConstructorCall, "FirLazyDelegatedConstructorCall") {
-            val error = """error("FirLazyDelegatedConstructorCall should be calculated before accessing")"""
+            konst error = """error("FirLazyDelegatedConstructorCall should be calculated before accessing")"""
             default("source") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("annotations") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("argumentList") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("contextReceiverArguments") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("dispatchReceiver") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("isSuper") {
-                value = "!isThis"
+                konstue = "!isThis"
                 withGetter = true
             }
             publicImplementation()
@@ -206,7 +206,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(block)
 
-        val emptyExpressionBlock = impl(block, "FirEmptyExpressionBlock") {
+        konst emptyExpressionBlock = impl(block, "FirEmptyExpressionBlock") {
             noSource()
             defaultEmptyList("statements")
             defaultEmptyList("annotations")
@@ -214,21 +214,21 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         }
 
         impl(lazyBlock) {
-            val error = """error("FirLazyBlock should be calculated before accessing")"""
+            konst error = """error("FirLazyBlock should be calculated before accessing")"""
             default("source") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("statements") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("annotations") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("typeRef") {
-                value = error
+                konstue = error
                 withGetter = true
             }
         }
@@ -244,13 +244,13 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         }
 
         impl(lazyExpression) {
-            val error = """error("FirLazyExpression should be calculated before accessing")"""
+            konst error = """error("FirLazyExpression should be calculated before accessing")"""
             default("typeRef") {
-                value = error
+                konstue = error
                 withGetter = true
             }
             default("annotations") {
-                value = error
+                konstue = error
                 withGetter = true
             }
         }
@@ -273,7 +273,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(getClassCall) {
             default("argument") {
-                value = "argumentList.arguments.first()"
+                konstue = "argumentList.arguments.first()"
                 withGetter = true
             }
         }
@@ -282,7 +282,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(property) {
             default("isVal") {
-                value = "!isVar"
+                konstue = "!isVar"
                 withGetter = true
             }
 
@@ -306,7 +306,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(field) {
             default("isVal") {
-                value = "!isVar"
+                konstue = "!isVar"
                 withGetter = true
             }
             publicImplementation()
@@ -328,7 +328,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(lambdaArgumentExpression) {
             default("isSpread") {
-                value = "false"
+                konstue = "false"
                 withGetter = true
             }
             default("typeRef") {
@@ -338,7 +338,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(spreadArgumentExpression) {
             default("isSpread") {
-                value = "true"
+                konstue = "true"
                 withGetter = true
             }
             default("typeRef") {
@@ -401,11 +401,11 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(propertyAccessor) {
             default("receiverParameter") {
-                value = "null"
+                konstue = "null"
                 withGetter = true
             }
             default("isSetter") {
-                value = "!isGetter"
+                konstue = "!isGetter"
                 withGetter = true
             }
             useTypes(modalityType)
@@ -418,7 +418,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(whenSubjectExpression) {
             default("typeRef") {
-                value = "whenRef.value.subject!!.typeRef"
+                konstue = "whenRef.konstue.subject!!.typeRef"
                 withGetter = true
             }
             useTypes(whenExpression)
@@ -437,14 +437,14 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         impl(enumEntryDeserializedAccessExpression) {
             noSource()
             default("typeRef") {
-                value = "buildResolvedTypeRef { type = enumClassId.toLookupTag().constructClassType(emptyArray(), false) }"
+                konstue = "buildResolvedTypeRef { type = enumClassId.toLookupTag().constructClassType(emptyArray(), false) }"
                 useTypes(buildResolvedTypeRefImport, toLookupTagImport, constructClassTypeImport)
             }
         }
 
         impl(smartCastExpression) {
             default("isStable") {
-                value = "smartcastStability == SmartcastStability.STABLE_VALUE"
+                konstue = "smartcastStability == SmartcastStability.STABLE_VALUE"
                 withGetter = true
             }
         }
@@ -467,21 +467,21 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(delegateFieldReference) {
             default("name") {
-                value = "Name.identifier(\"\\\$delegate\")"
+                konstue = "Name.identifier(\"\\\$delegate\")"
                 withGetter = true
             }
         }
 
         impl(backingFieldReference) {
             default("name") {
-                value = "Name.identifier(\"\\\$field\")"
+                konstue = "Name.identifier(\"\\\$field\")"
                 withGetter = true
             }
         }
 
         impl(thisReference, "FirExplicitThisReference") {
             default("boundSymbol") {
-                value = "null"
+                konstue = "null"
                 isMutable = true
             }
         }
@@ -489,7 +489,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         impl(thisReference, "FirImplicitThisReference") {
             noSource()
             default("labelName") {
-                value = "null"
+                konstue = "null"
                 withGetter = true
             }
             default("boundSymbol") {
@@ -534,7 +534,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(reference, "FirStubReference") {
             default("source") {
-                value = "null"
+                konstue = "null"
                 withGetter = true
             }
             kind = Object
@@ -556,14 +556,14 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
             useTypes(implicitNothingTypeRefType)
         }
 
-        impl(valueParameter) {
+        impl(konstueParameter) {
             defaultTrue("isVal", withGetter = true)
             defaultFalse("isVar", withGetter = true)
             defaultNull("getter", "setter", "initializer", "delegate", "receiverParameter", withGetter = true)
         }
 
-        impl(valueParameter, "FirDefaultSetterValueParameter") {
-            default("name", "Name.identifier(\"value\")")
+        impl(konstueParameter, "FirDefaultSetterValueParameter") {
+            default("name", "Name.identifier(\"konstue\")")
         }
 
         impl(simpleFunction)
@@ -577,17 +577,17 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
         }
 
         impl(resolvedQualifier) {
-            // Initialize the value to true if only the companion object is present. This makes a standalone class reference expression
+            // Initialize the konstue to true if only the companion object is present. This makes a standalone class reference expression
             // correctly resolve to the companion object. For example
             // ```
             // class A {
             //   companion object
             // }
             //
-            // val companionOfA = A // This standalone class reference `A` here should resolve to the companion object.
+            // konst companionOfA = A // This standalone class reference `A` here should resolve to the companion object.
             // ```
             //
-            // If this `FirResolvedQualifier` is a receiver expression of some other qualified access, the value is updated in
+            // If this `FirResolvedQualifier` is a receiver expression of some other qualified access, the konstue is updated in
             // `FirCallResolver` according to the resolution result.
             default("resolvedToCompanionObject", "(symbol?.fir as? FirRegularClass)?.companionObjectSymbol != null")
             useTypes(regularClass)
@@ -602,7 +602,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(file) {
             default("annotations") {
-                value = "annotationsContainer.annotations"
+                konstue = "annotationsContainer.annotations"
                 withGetter = true
             }
         }
@@ -612,7 +612,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
         impl(contractElementDeclaration)
 
-        val implementationsWithoutStatusAndTypeParameters = listOf(
+        konst implementationsWithoutStatusAndTypeParameters = listOf(
             "FirValueParameterImpl",
             "FirDefaultSetterValueParameter",
             "FirErrorPropertyImpl",
@@ -644,7 +644,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
             defaultNull(it)
         }
 
-        val implementationWithConfigurableTypeRef = listOf(
+        konst implementationWithConfigurableTypeRef = listOf(
             "FirTypeProjectionWithVarianceImpl",
             "FirCallableReferenceAccessImpl",
             "FirThisReceiverExpressionImpl",
@@ -690,7 +690,7 @@ object ImplementationConfigurator : AbstractFirTreeImplementationConfigurator() 
 
     private fun ImplementationContext.defaultClassIdFromRelativeClassName() {
         default("classId") {
-            value = """
+            konstue = """
                 |relativeClassFqName?.let {
                 |    ClassId(packageFqName, it, false)
                 |}

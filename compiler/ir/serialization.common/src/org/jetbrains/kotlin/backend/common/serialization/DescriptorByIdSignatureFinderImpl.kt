@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class DescriptorByIdSignatureFinderImpl(
-    private val moduleDescriptor: ModuleDescriptor,
-    private val mangler: KotlinMangler.DescriptorMangler,
-    private val lookupMode: LookupMode = LookupMode.MODULE_WITH_DEPENDENCIES,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst mangler: KotlinMangler.DescriptorMangler,
+    private konst lookupMode: LookupMode = LookupMode.MODULE_WITH_DEPENDENCIES,
 ) : DescriptorByIdSignatureFinder {
     init {
         assert(lookupMode != LookupMode.MODULE_ONLY || moduleDescriptor is ModuleDescriptorImpl) {
@@ -45,7 +45,7 @@ class DescriptorByIdSignatureFinderImpl(
     }
 
     override fun findDescriptorBySignature(signature: IdSignature): DeclarationDescriptor? {
-        val descriptor = when (signature) {
+        konst descriptor = when (signature) {
             is IdSignature.AccessorSignature -> resolveAccessorSignature(signature)
             is IdSignature.CommonSignature -> resolveCommonSignature(signature)
             is IdSignature.CompositeSignature -> resolveCompositeSignature(signature)
@@ -61,14 +61,14 @@ class DescriptorByIdSignatureFinderImpl(
     }
 
     private fun resolveCompositeSignature(signature: IdSignature.CompositeSignature): DeclarationDescriptor? {
-        val container = findDescriptorBySignature(signature.nearestPublicSig()) ?: return null
+        konst container = findDescriptorBySignature(signature.nearestPublicSig()) ?: return null
 
         (signature.inner as? IdSignature.LocalSignature)?.let { inner ->
             fun isTypeParameterSig(fqn: String): Boolean =
                 fqn == MangleConstant.TYPE_PARAMETER_MARKER_NAME || fqn == MangleConstant.TYPE_PARAMETER_MARKER_NAME_SETTER
 
             if (isTypeParameterSig(inner.localFqn)) {
-                val tpIndex = inner.index()
+                konst tpIndex = inner.index()
                 if (container is CallableDescriptor) {
                     return container.typeParameters[tpIndex]
                 }
@@ -82,7 +82,7 @@ class DescriptorByIdSignatureFinderImpl(
     }
 
     private fun resolveAccessorSignature(signature: IdSignature.AccessorSignature): DeclarationDescriptor? {
-        val propertyDescriptor = findDescriptorBySignature(signature.propertySignature) as? PropertyDescriptor ?: return null
+        konst propertyDescriptor = findDescriptorBySignature(signature.propertySignature) as? PropertyDescriptor ?: return null
         return when (signature.accessorSignature.shortName) {
             propertyDescriptor.getter?.name?.asString() -> propertyDescriptor.getter
             propertyDescriptor.setter?.name?.asString() -> propertyDescriptor.setter
@@ -93,13 +93,13 @@ class DescriptorByIdSignatureFinderImpl(
     private fun isConstructorName(n: Name) = n.isSpecial && n.asString() == "<init>"
 
     private fun MemberScope.loadDescriptors(name: String, isLeaf: Boolean): Collection<DeclarationDescriptor> {
-        val descriptorName = Name.guessByFirstCharacter(name)
-        val classifier = getContributedClassifier(descriptorName, NoLookupLocation.FROM_BACKEND)
+        konst descriptorName = Name.guessByFirstCharacter(name)
+        konst classifier = getContributedClassifier(descriptorName, NoLookupLocation.FROM_BACKEND)
         if (!isLeaf) {
             return listOfNotNull(classifier)
         }
 
-        val result = mutableListOf<DeclarationDescriptor>()
+        konst result = mutableListOf<DeclarationDescriptor>()
         classifier?.let { result.add(it) }
 
         result.addAll(getContributedFunctions(descriptorName, NoLookupLocation.FROM_BACKEND))
@@ -109,8 +109,8 @@ class DescriptorByIdSignatureFinderImpl(
     }
 
     private fun lookupTopLevelDescriptors(nameSegments: List<String>, packageFqName: FqName): Collection<DeclarationDescriptor> {
-        val declarationName = nameSegments[0]
-        val isLeaf = nameSegments.size == 1
+        konst declarationName = nameSegments[0]
+        konst isLeaf = nameSegments.size == 1
         return when (lookupMode) {
             LookupMode.MODULE_WITH_DEPENDENCIES -> {
                 moduleDescriptor
@@ -128,24 +128,24 @@ class DescriptorByIdSignatureFinderImpl(
     }
 
     private fun resolveCommonSignature(signature: IdSignature.CommonSignature): DeclarationDescriptor? {
-        val nameSegments = signature.nameSegments
-        val toplevelDescriptors = lookupTopLevelDescriptors(nameSegments, signature.packageFqName())
+        konst nameSegments = signature.nameSegments
+        konst toplevelDescriptors = lookupTopLevelDescriptors(nameSegments, signature.packageFqName())
             .ifEmpty { return null }
 
         var acc = toplevelDescriptors
-        val lastIndex = nameSegments.lastIndex
+        konst lastIndex = nameSegments.lastIndex
 
         // The code bellow could look tricky because of it is bottle neck so here is put some attempt including
         // 1. Minimize amount of descriptors is loaded on each step
         // 2. Reduce memory pollution
         for (i in 1 until nameSegments.size) {
-            val current = Name.guessByFirstCharacter(nameSegments[i])
+            konst current = Name.guessByFirstCharacter(nameSegments[i])
             acc = acc.flatMap { container ->
-                val classDescriptor = container as? ClassDescriptor ?: return@flatMap emptyList<DeclarationDescriptor>()
-                val isLeaf = i == lastIndex
-                val memberScope = classDescriptor.unsubstitutedMemberScope
+                konst classDescriptor = container as? ClassDescriptor ?: return@flatMap emptyList<DeclarationDescriptor>()
+                konst isLeaf = i == lastIndex
+                konst memberScope = classDescriptor.unsubstitutedMemberScope
 
-                val classifier = memberScope.getContributedClassifier(current, NoLookupLocation.FROM_BACKEND)
+                konst classifier = memberScope.getContributedClassifier(current, NoLookupLocation.FROM_BACKEND)
                 if (!isLeaf) {
                     classifier?.let { listOf(it) } ?: emptyList()
                 } else {
@@ -161,7 +161,7 @@ class DescriptorByIdSignatureFinderImpl(
                 }
             }
         }
-        val candidates = acc
+        konst candidates = acc
 
         return findDescriptorByHash(candidates, signature.id)
     }
@@ -172,7 +172,7 @@ class DescriptorByIdSignatureFinderImpl(
                 // We don't compute id for typealiases and classes.
                 candidate is ClassDescriptor || candidate is TypeAliasDescriptor
             } else {
-                val candidateHash = with(mangler) { candidate.signatureMangle(compatibleMode = false) }
+                konst candidateHash = with(mangler) { candidate.signatureMangle(compatibleMode = false) }
                 candidateHash == id
             }
         }

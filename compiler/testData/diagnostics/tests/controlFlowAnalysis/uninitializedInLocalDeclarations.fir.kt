@@ -7,7 +7,7 @@ fun test1() {
 
 fun test2() {
     fun foo() {
-        val s: String?
+        konst s: String?
 
         try {
             s = ""
@@ -21,15 +21,15 @@ fun test2() {
 }
 
 fun test3() {
-    val f = {
-        val a : Int
+    konst f = {
+        konst a : Int
         doSmth(<!UNINITIALIZED_VARIABLE!>a<!>)
     }
 }
 
 fun test4() {
     doSmth {
-        val a : Int
+        konst a : Int
         doSmth(<!UNINITIALIZED_VARIABLE!>a<!>)
     }
 }
@@ -39,7 +39,7 @@ fun test5() {
         fun inner2() {
             fun inner3() {
                 fun inner4() {
-                    val a : Int
+                    konst a : Int
                     doSmth(<!UNINITIALIZED_VARIABLE!>a<!>)
                 }
             }

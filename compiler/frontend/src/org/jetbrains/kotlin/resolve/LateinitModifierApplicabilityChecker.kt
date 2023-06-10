@@ -44,13 +44,13 @@ object LateinitModifierApplicabilityChecker {
     ) {
         if (!ktDeclaration.hasModifier(KtTokens.LATEINIT_KEYWORD)) return
 
-        val variables = when (descriptor) {
+        konst variables = when (descriptor) {
             is PropertyDescriptor -> "properties"
             is LocalVariableDescriptor -> "local variables"
             else -> throw AssertionError("Should be a property or a local variable: $descriptor")
         }
 
-        val type = descriptor.type
+        konst type = descriptor.type
 
         if (!descriptor.isVar) {
             trace.report(Errors.INAPPLICABLE_LATEINIT_MODIFIER.on(ktDeclaration, "is allowed only on mutable $variables"))
@@ -105,10 +105,10 @@ object LateinitModifierApplicabilityChecker {
         }
 
         if (descriptor is PropertyDescriptor) {
-            val isAbstract = descriptor.modality == Modality.ABSTRACT
-            val hasDelegateExpressionOrInitializer = ktDeclaration is KtProperty && ktDeclaration.hasDelegateExpressionOrInitializer()
-            val hasAccessorImplementation = descriptor.hasAnyAccessorImplementation()
-            val hasBackingField = trace.bindingContext.get(BindingContext.BACKING_FIELD_REQUIRED, descriptor) ?: false
+            konst isAbstract = descriptor.modality == Modality.ABSTRACT
+            konst hasDelegateExpressionOrInitializer = ktDeclaration is KtProperty && ktDeclaration.hasDelegateExpressionOrInitializer()
+            konst hasAccessorImplementation = descriptor.hasAnyAccessorImplementation()
+            konst hasBackingField = trace.bindingContext.get(BindingContext.BACKING_FIELD_REQUIRED, descriptor) ?: false
 
             if (ktDeclaration is KtParameter) {
                 trace.report(Errors.INAPPLICABLE_LATEINIT_MODIFIER.on(ktDeclaration, "is not allowed on primary constructor parameters"))

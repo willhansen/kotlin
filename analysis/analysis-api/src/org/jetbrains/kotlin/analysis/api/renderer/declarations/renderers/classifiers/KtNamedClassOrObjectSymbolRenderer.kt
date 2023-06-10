@@ -21,7 +21,7 @@ public interface KtNamedClassOrObjectSymbolRenderer {
     public object AS_SOURCE : KtNamedClassOrObjectSymbolRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderSymbol(symbol: KtNamedClassOrObjectSymbol, printer: PrettyPrinter): Unit = printer {
-            val keywords = when (symbol.classKind) {
+            konst keywords = when (symbol.classKind) {
                 KtClassKind.CLASS -> listOf(KtTokens.CLASS_KEYWORD)
                 KtClassKind.ENUM_CLASS -> listOf(KtTokens.ENUM_KEYWORD, KtTokens.CLASS_KEYWORD)
                 KtClassKind.ANNOTATION_CLASS -> listOf(KtTokens.ANNOTATION_KEYWORD, KtTokens.CLASS_KEYWORD)
@@ -34,21 +34,21 @@ public interface KtNamedClassOrObjectSymbolRenderer {
             " ".separated(
                 { renderAnnotationsModifiersAndContextReceivers(symbol, printer, keywords) },
                 {
-                    val primaryConstructor =
+                    konst primaryConstructor =
                         bodyMemberScopeProvider.getMemberScope(symbol).filterIsInstance<KtConstructorSymbol>()
                             .firstOrNull { it.isPrimary }
 
                     nameRenderer.renderName(symbol, printer)
                     typeParametersRenderer.renderTypeParameters(symbol, printer)
                     if (primaryConstructor != null) {
-                        val annotationsPrinted = checkIfPrinted { renderAnnotationsModifiersAndContextReceivers(primaryConstructor, printer) }
+                        konst annotationsPrinted = checkIfPrinted { renderAnnotationsModifiersAndContextReceivers(primaryConstructor, printer) }
                         if (annotationsPrinted) {
                             withPrefix(" ") {
                                 keywordRenderer.renderKeyword(KtTokens.CONSTRUCTOR_KEYWORD, primaryConstructor, printer)
                             }
                         }
-                        if (primaryConstructor.valueParameters.isNotEmpty()) {
-                            valueParametersRenderer.renderValueParameters(primaryConstructor, printer)
+                        if (primaryConstructor.konstueParameters.isNotEmpty()) {
+                            konstueParametersRenderer.renderValueParameters(primaryConstructor, printer)
                         }
                     }
                 },

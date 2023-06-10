@@ -12,34 +12,34 @@ import org.jetbrains.kotlin.platform.toTargetPlatform
 import org.jetbrains.kotlin.platform.TargetPlatformVersion
 
 abstract class JvmPlatform : SimplePlatform("JVM") {
-    override val oldFashionedDescription: String
+    override konst oldFashionedDescription: String
         get() = "JVM "
 }
 
 @Suppress("DEPRECATION_ERROR")
 object JvmPlatforms {
-    private val UNSPECIFIED_SIMPLE_JVM_PLATFORM = JdkPlatform(JvmTarget.DEFAULT)
-    private val jvmTargetToJdkPlatform: Map<JvmTarget, TargetPlatform> =
-        JvmTarget.values().map { it to JdkPlatform(it).toTargetPlatform() }.toMap()
+    private konst UNSPECIFIED_SIMPLE_JVM_PLATFORM = JdkPlatform(JvmTarget.DEFAULT)
+    private konst jvmTargetToJdkPlatform: Map<JvmTarget, TargetPlatform> =
+        JvmTarget.konstues().map { it to JdkPlatform(it).toTargetPlatform() }.toMap()
 
     // This platform is needed mostly for compatibility and migration of code base,
     // as previously some clients used TargetPlatform just as platform-marker
     // and didn't care about particular jvmTarget.
     // TODO(dsavvinov): review all usages and choose proper JvmTarget
-    val unspecifiedJvmPlatform: TargetPlatform
+    konst unspecifiedJvmPlatform: TargetPlatform
         get() = CompatJvmPlatform
 
-    val defaultJvmPlatform: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.DEFAULT]!!
+    konst defaultJvmPlatform: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.DEFAULT]!!
 
-    val jvm6: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_1_6]!!
-    val jvm8: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_1_8]!!
-    val jvm11: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_11]!!
-    val jvm17: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_17]!!
+    konst jvm6: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_1_6]!!
+    konst jvm8: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_1_8]!!
+    konst jvm11: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_11]!!
+    konst jvm17: TargetPlatform = jvmTargetToJdkPlatform[JvmTarget.JVM_17]!!
 
     fun jvmPlatformByTargetVersion(targetVersion: JvmTarget): TargetPlatform =
         jvmTargetToJdkPlatform[targetVersion]!!
 
-    val allJvmPlatforms: List<TargetPlatform> = jvmTargetToJdkPlatform.values.toList()
+    konst allJvmPlatforms: List<TargetPlatform> = jvmTargetToJdkPlatform.konstues.toList()
 
     @Deprecated(
         message = "Should be accessed only by compatibility layer, other clients should use 'unspecifiedJvmPlatform'",
@@ -48,18 +48,18 @@ object JvmPlatforms {
     object CompatJvmPlatform : TargetPlatform(setOf(UNSPECIFIED_SIMPLE_JVM_PLATFORM)),
         // Needed for backward compatibility, because old code uses INSTANCEOF checks instead of calling extensions
         org.jetbrains.kotlin.resolve.jvm.platform.JvmPlatform {
-        override val platformName: String
+        override konst platformName: String
             get() = "JVM"
     }
 }
 
-class JdkPlatform(val targetVersion: JvmTarget) : JvmPlatform() {
+class JdkPlatform(konst targetVersion: JvmTarget) : JvmPlatform() {
     override fun toString(): String = "$platformName ($targetVersion)"
 
-    override val oldFashionedDescription: String
+    override konst oldFashionedDescription: String
         get() = "JVM " + targetVersion.description
 
-    override val targetPlatformVersion: TargetPlatformVersion
+    override konst targetPlatformVersion: TargetPlatformVersion
         get() = targetVersion
 
     // TODO(dsavvinov): temporarily conservative measure; make JdkPlatform data class later

@@ -20,7 +20,7 @@ public interface KtCallableReturnTypeRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderReturnType(symbol: KtCallableSymbol, printer: PrettyPrinter) {
             if (symbol is KtConstructorSymbol) return
-            val type = declarationTypeApproximator.approximateType(symbol.returnType, Variance.OUT_VARIANCE)
+            konst type = declarationTypeApproximator.approximateType(symbol.returnType, Variance.OUT_VARIANCE)
             if (!returnTypeFilter.shouldRenderReturnType(type, symbol)) return
             typeRenderer.renderType(type, printer)
         }

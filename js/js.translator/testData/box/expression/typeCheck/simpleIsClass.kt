@@ -14,7 +14,7 @@ class E : D()
 
 class F : C()
 
-val dyn: dynamic = js("({})")
+konst dyn: dynamic = js("({})")
 
 fun nullToNull(a: Any?) = a is B?
 fun notNullToNull(a: Any) = a is B?

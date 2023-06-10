@@ -38,10 +38,10 @@ import a.b.c
 fun test(a_b: b) {
     a_b.a_b()
 
-    val a_bc: b.c = b.c()
+    konst a_bc: b.c = b.c()
     a_bc.a_bc()
 
-    val a_bc2 = b.c()
+    konst a_bc2 = b.c()
     a_bc2.a_bc()
 
     a_fun()
@@ -50,10 +50,10 @@ fun test(a_b: b) {
 fun test2(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_cd: c.d = c.d()
+    konst ab_cd: c.d = c.d()
     ab_cd.ab_cd()
 
-    val ab_cd2 = c.d()
+    konst ab_cd2 = c.d()
     ab_cd2.ab_cd()
 
     ab_fun()
@@ -68,10 +68,10 @@ import a.b.c
 fun test(a_b: b) {
     a_b.a_b()
 
-    val a_bc: b.c = b.c()
+    konst a_bc: b.c = b.c()
     a_bc.a_bc()
 
-    val a_bc2 = b.c()
+    konst a_bc2 = b.c()
     a_bc2.a_bc()
 
     a_fun()
@@ -80,10 +80,10 @@ fun test(a_b: b) {
 fun test2(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_cd: c.d = c.d()
+    konst ab_cd: c.d = c.d()
     ab_cd.ab_cd()
 
-    val ab_cd2 = c.d()
+    konst ab_cd2 = c.d()
     ab_cd2.ab_cd()
 
     ab_fun()
@@ -101,10 +101,10 @@ import a.b.c
 fun test(a_b: b) {
     a_b.a_b()
 
-    val a_bc: b.c = b.c()
+    konst a_bc: b.c = b.c()
     a_bc.a_bc()
 
-    val a_bc2 = b.c()
+    konst a_bc2 = b.c()
     a_bc2.a_bc()
 
     a_fun()
@@ -113,10 +113,10 @@ fun test(a_b: b) {
 fun test2(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_cd: c.d = c.d()
+    konst ab_cd: c.d = c.d()
     ab_cd.ab_cd()
 
-    val ab_cd2 = c.d()
+    konst ab_cd2 = c.d()
     ab_cd2.ab_cd()
 
     ab_fun()
@@ -131,10 +131,10 @@ import a.b.c
 fun test(a_b: b) {
     a_b.a_b()
 
-    val a_bc: b.c = b.c()
+    konst a_bc: b.c = b.c()
     a_bc.a_bc()
 
-    val a_bc2 = b.c()
+    konst a_bc2 = b.c()
     a_bc2.a_bc()
 
     a_fun()
@@ -143,10 +143,10 @@ fun test(a_b: b) {
 fun test2(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_cd: c.d = c.d()
+    konst ab_cd: c.d = c.d()
     ab_cd.ab_cd()
 
-    val ab_cd2 = c.d()
+    konst ab_cd2 = c.d()
     ab_cd2.ab_cd()
 
     ab_fun()

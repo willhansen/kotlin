@@ -29,13 +29,13 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 
 object JsExternalChecker : DeclarationChecker {
-    val DEFINED_EXTERNALLY_PROPERTY_NAMES = JsStandardClassIds.Callables.definedExternallyPropertyNames
+    konst DEFINED_EXTERNALLY_PROPERTY_NAMES = JsStandardClassIds.Callables.definedExternallyPropertyNames
         .map { it.asSingleFqName().toUnsafe() }
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (!AnnotationsUtils.isNativeObject(descriptor)) return
 
-        val trace = context.trace
+        konst trace = context.trace
         if (!DescriptorUtils.isTopLevelDeclaration(descriptor)) {
             if (isDirectlyExternal(declaration, descriptor) && descriptor !is PropertyAccessorDescriptor) {
                 trace.report(ErrorsJs.NESTED_EXTERNAL_DECLARATION.on(declaration))
@@ -43,11 +43,11 @@ object JsExternalChecker : DeclarationChecker {
         }
 
         if (descriptor is ClassDescriptor) {
-            val classKind = when {
+            konst classKind = when {
                 descriptor.isData -> "data class"
                 descriptor.isInner -> "inner class"
                 descriptor.isInline -> "inline class"
-                descriptor.isValue -> "value class"
+                descriptor.isValue -> "konstue class"
                 descriptor.isFun -> "fun interface"
                 DescriptorUtils.isAnnotationClass(descriptor) -> "annotation class"
                 else -> null
@@ -75,7 +75,7 @@ object JsExternalChecker : DeclarationChecker {
         }
 
         if (descriptor !is PropertyAccessorDescriptor && descriptor.isExtension) {
-            val target = when (descriptor) {
+            konst target = when (descriptor) {
                 is FunctionDescriptor -> "extension function"
                 is PropertyDescriptor -> "extension property"
                 else -> "extension member"
@@ -84,7 +84,7 @@ object JsExternalChecker : DeclarationChecker {
         }
 
         if (descriptor is ClassDescriptor && descriptor.kind != ClassKind.ANNOTATION_CLASS) {
-            val superClasses = (listOfNotNull(descriptor.getSuperClassNotAny()) + descriptor.getSuperInterfaces()).toMutableSet()
+            konst superClasses = (listOfNotNull(descriptor.getSuperClassNotAny()) + descriptor.getSuperInterfaces()).toMutableSet()
             if (descriptor.kind == ClassKind.ENUM_CLASS || descriptor.kind == ClassKind.ENUM_ENTRY) {
                 superClasses.removeAll { it.fqNameUnsafe == StandardNames.FqNames._enum }
             }
@@ -108,12 +108,12 @@ object JsExternalChecker : DeclarationChecker {
                     }
                 }
 
-                for (p in descriptor.valueParameters) {
-                    val ktParam = p.source.getPsi() as? KtParameter ?: declaration
+                for (p in descriptor.konstueParameters) {
+                    konst ktParam = p.source.getPsi() as? KtParameter ?: declaration
                     checkTypeIsNotInlineClass(p.varargElementType ?: p.type, ktParam)
                 }
 
-                val elementToReport = when (declaration) {
+                konst elementToReport = when (declaration) {
                     is KtCallableDeclaration -> declaration.typeReference
                     is KtPropertyAccessor -> declaration.returnTypeReference
                     else -> declaration
@@ -125,13 +125,13 @@ object JsExternalChecker : DeclarationChecker {
             }
         }
 
-        val valueClassInExternalDiagnostic =
+        konst konstueClassInExternalDiagnostic =
             if (context.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowValueClassesInExternals))
                 ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION_WARNING
             else
                 ErrorsJs.INLINE_CLASS_IN_EXTERNAL_DECLARATION
 
-        reportOnParametersAndReturnTypesIf(valueClassInExternalDiagnostic, KotlinType::isInlineClassType)
+        reportOnParametersAndReturnTypesIf(konstueClassInExternalDiagnostic, KotlinType::isInlineClassType)
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.JsEnableExtensionFunctionInExternals)) {
             reportOnParametersAndReturnTypesIf(ErrorsJs.EXTENSION_FUNCTION_IN_EXTERNAL_DECLARATION, KotlinType::isExtensionFunctionType)
         }
@@ -163,7 +163,7 @@ object JsExternalChecker : DeclarationChecker {
             diagnosticHolder.report(ErrorsJs.WRONG_INITIALIZER_OF_EXTERNAL_DECLARATION.on(declaration.initializer!!))
         }
         if (declaration is KtCallableDeclaration) {
-            for (defaultValue in declaration.valueParameters.mapNotNull { it.defaultValue }) {
+            for (defaultValue in declaration.konstueParameters.mapNotNull { it.defaultValue }) {
                 if (!defaultValue.isDefinedExternallyExpression(bindingContext)) {
                     diagnosticHolder.report(ErrorsJs.WRONG_DEFAULT_VALUE_FOR_EXTERNAL_FUN_PARAMETER.on(defaultValue))
                 }
@@ -178,7 +178,7 @@ object JsExternalChecker : DeclarationChecker {
             for (superTypeEntry in declaration.superTypeListEntries) {
                 when (superTypeEntry) {
                     is KtSuperTypeCallEntry -> {
-                        diagnosticHolder.report(ErrorsJs.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL.on(superTypeEntry.valueArgumentList!!))
+                        diagnosticHolder.report(ErrorsJs.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL.on(superTypeEntry.konstueArgumentList!!))
                     }
                     is KtDelegatedSuperTypeEntry -> {
                         diagnosticHolder.report(ErrorsJs.EXTERNAL_DELEGATION.on(superTypeEntry))
@@ -186,7 +186,7 @@ object JsExternalChecker : DeclarationChecker {
                 }
             }
         } else if (declaration is KtSecondaryConstructor) {
-            val delegationCall = declaration.getDelegationCall()
+            konst delegationCall = declaration.getDelegationCall()
             if (!delegationCall.isImplicit) {
                 diagnosticHolder.report(ErrorsJs.EXTERNAL_DELEGATED_CONSTRUCTOR_CALL.on(delegationCall))
             }
@@ -218,7 +218,7 @@ object JsExternalChecker : DeclarationChecker {
         diagnosticHolder: DiagnosticSink
     ) {
         if (descriptor !is PropertyDescriptor || declaration !is KtParameter) return
-        val containingClass = descriptor.containingDeclaration as ClassDescriptor
+        konst containingClass = descriptor.containingDeclaration as ClassDescriptor
         if (containingClass.isData || DescriptorUtils.isAnnotationClass(containingClass)) return
         diagnosticHolder.report(ErrorsJs.EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER.on(declaration))
     }
@@ -234,7 +234,7 @@ object JsExternalChecker : DeclarationChecker {
         if (descriptor is PropertyAccessorDescriptor && descriptor.visibility == descriptor.correspondingProperty.visibility) return false
         if (descriptor !is MemberDescriptor || descriptor.visibility != DescriptorVisibilities.PRIVATE) return false
 
-        val containingDeclaration = descriptor.containingDeclaration as? ClassDescriptor ?: return false
+        konst containingDeclaration = descriptor.containingDeclaration as? ClassDescriptor ?: return false
         return AnnotationsUtils.isNativeObject(containingDeclaration)
     }
 
@@ -247,11 +247,11 @@ object JsExternalChecker : DeclarationChecker {
 
     private fun KtDeclarationWithBody.hasValidExternalBody(bindingContext: BindingContext): Boolean {
         if (!hasBody()) return true
-        val body = bodyExpression!!
+        konst body = bodyExpression!!
         return when {
             !hasBlockBody() -> body.isDefinedExternallyExpression(bindingContext)
             body is KtBlockExpression -> {
-                val statement = body.statements.singleOrNull() ?: return false
+                konst statement = body.statements.singleOrNull() ?: return false
                 statement.isDefinedExternallyExpression(bindingContext)
             }
             else -> false
@@ -259,8 +259,8 @@ object JsExternalChecker : DeclarationChecker {
     }
 
     private fun KtExpression.isDefinedExternallyExpression(bindingContext: BindingContext): Boolean {
-        val descriptor = getResolvedCall(bindingContext)?.resultingDescriptor as? PropertyDescriptor ?: return false
-        val container = descriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
+        konst descriptor = getResolvedCall(bindingContext)?.resultingDescriptor as? PropertyDescriptor ?: return false
+        konst container = descriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
         return DEFINED_EXTERNALLY_PROPERTY_NAMES.any { container.fqNameUnsafe == it.parent() && descriptor.name == it.shortName() }
     }
 }

@@ -1,5 +1,5 @@
 // WITH_STDLIB
-class A<T>(val x: String, val y: String, val z: T)
+class A<T>(konst x: String, konst y: String, konst z: T)
 
 suspend fun <T> foo(a: A<T>, block: suspend (A<T>) -> String): String = block(a)
 

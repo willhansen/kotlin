@@ -13,7 +13,7 @@ suspend fun main() {
 fun <K> iFlow(block: suspend iFlowCollector<in K>.() -> Unit): iFlow<K> = TODO()
 
 interface iFlowCollector<S> {
-    suspend fun emit(value: S)
+    suspend fun emit(konstue: S)
 }
 
 interface iFlow<out V>

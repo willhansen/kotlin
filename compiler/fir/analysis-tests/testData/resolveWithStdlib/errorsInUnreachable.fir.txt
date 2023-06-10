@@ -1,12 +1,12 @@
 FILE: errorsInUnreachable.kt
     public final fun case(): R|kotlin/String| {
-        lval x0: R|kotlin/Boolean| = Boolean(false)
-        lval x1: R|kotlin/String|
-        lval x: R|kotlin/Boolean|
+        lkonst x0: R|kotlin/Boolean| = Boolean(false)
+        lkonst x1: R|kotlin/String|
+        lkonst x: R|kotlin/Boolean|
         try {
             R|<local>/x0| = throw R|java/lang/Exception.Exception|() || Boolean(true)
             R|<local>/x|.R|kotlin/Boolean.not|()
-            lval a: R|kotlin/Int| = R|<local>/x1|.R|kotlin/text/toInt|()
+            lkonst a: R|kotlin/Int| = R|<local>/x1|.R|kotlin/text/toInt|()
         }
         catch (e: R|kotlin/Exception|) {
             ^case String(OK)

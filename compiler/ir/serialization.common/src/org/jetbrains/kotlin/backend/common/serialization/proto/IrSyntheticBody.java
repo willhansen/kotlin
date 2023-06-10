@@ -30,7 +30,7 @@ public final class IrSyntheticBody extends
   private IrSyntheticBody(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -55,22 +55,22 @@ public final class IrSyntheticBody extends
           }
           case 8: {
             int rawValue = input.readEnum();
-            org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind value = org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind.valueOf(rawValue);
-            if (value == null) {
+            org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind konstue = org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind.konstueOf(rawValue);
+            if (konstue == null) {
               unknownFieldsCodedOutput.writeRawVarint32(tag);
               unknownFieldsCodedOutput.writeRawVarint32(rawValue);
             } else {
               bitField0_ |= 0x00000001;
-              kind_ = value;
+              kind_ = konstue;
             }
             break;
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -88,7 +88,7 @@ public final class IrSyntheticBody extends
     public IrSyntheticBody parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrSyntheticBody(input, extensionRegistry);
     }
   };
@@ -164,23 +164,23 @@ public final class IrSyntheticBody extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parseFrom(java.io.InputStream input)
@@ -302,7 +302,7 @@ public final class IrSyntheticBody extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -330,12 +330,12 @@ public final class IrSyntheticBody extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind kind = 1;</code>
      */
-    public Builder setKind(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind value) {
-      if (value == null) {
+    public Builder setKind(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       bitField0_ |= 0x00000001;
-      kind_ = value;
+      kind_ = konstue;
       
       return this;
     }

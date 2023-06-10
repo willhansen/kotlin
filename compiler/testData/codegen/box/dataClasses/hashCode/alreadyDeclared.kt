@@ -1,4 +1,4 @@
-data class A(val x: Int) {
+data class A(konst x: Int) {
   override fun hashCode(): Int = -3
 }
 

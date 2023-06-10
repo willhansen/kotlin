@@ -4,13 +4,13 @@
 operator fun ClosedRange<Float>.iterator() =
     object : Iterator<Float> {
         private var current = this@iterator.start
-        private val end = this@iterator.endInclusive
+        private konst end = this@iterator.endInclusive
 
         override fun hasNext(): Boolean =
             current <= end
 
         override fun next(): Float {
-            val next = current
+            konst next = current
             current += 0.125f
             return next
         }

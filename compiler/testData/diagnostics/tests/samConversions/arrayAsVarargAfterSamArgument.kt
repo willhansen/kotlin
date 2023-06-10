@@ -17,8 +17,8 @@ public class Test {
 
 // FILE: main.kt
 fun main(x2: Runnable) {
-    val x1 = {}
-    val x3 = arrayOf<String>()
+    konst x1 = {}
+    konst x3 = arrayOf<String>()
 
     Test.foo1({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
     Test.foo1({}, *arrayOf())
@@ -35,12 +35,12 @@ fun main(x2: Runnable) {
     Test.foo1(x2, <!TYPE_MISMATCH!>arrayOf("")<!>)
     Test.foo1(x2, *arrayOf(""))
 
-    val i1 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
-    val i2 = Test({}, *arrayOf())
-    val i3 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>x3<!>)
-    val i4 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf("")<!>)
-    val i5 = Test({}, {}, *arrayOf(""))
-    val i6 = Test({}, {}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
+    konst i1 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
+    konst i2 = Test({}, *arrayOf())
+    konst i3 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>x3<!>)
+    konst i4 = Test({}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf("")<!>)
+    konst i5 = Test({}, {}, *arrayOf(""))
+    konst i6 = Test({}, {}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
 
     i2.foo2({}, {}, <!TYPE_INFERENCE_CANDIDATE_WITH_SAM_AND_VARARG!>arrayOf()<!>)
     i2.foo2({}, {}, *arrayOf())

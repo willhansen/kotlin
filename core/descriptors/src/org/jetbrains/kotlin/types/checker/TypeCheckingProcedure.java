@@ -68,10 +68,10 @@ public class TypeCheckingProcedure {
                 return !KotlinTypeKt.isError(type1) && !KotlinTypeKt.isError(type2) &&
                        isSubtypeOf(type1, type2) && isSubtypeOf(type2, type1);
             }
-            return heterogeneousEquivalence(type2, type1);
+            return heterogeneousEquikonstence(type2, type1);
         }
         else if (FlexibleTypesKt.isFlexible(type2)) {
-            return heterogeneousEquivalence(type1, type2);
+            return heterogeneousEquikonstence(type1, type2);
         }
 
         if (type1.isMarkedNullable() != type2.isMarkedNullable()) {
@@ -119,7 +119,7 @@ public class TypeCheckingProcedure {
         return true;
     }
 
-    protected boolean heterogeneousEquivalence(KotlinType inflexibleType, KotlinType flexibleType) {
+    protected boolean heterogeneousEquikonstence(KotlinType inflexibleType, KotlinType flexibleType) {
         // This is to account for the case when we have Collection<X> vs (Mutable)Collection<X>! or K(java.util.Collection<? extends X>)
         assert !FlexibleTypesKt.isFlexible(inflexibleType) : "Only inflexible types are allowed here: " + inflexibleType;
         return isSubtypeOf(FlexibleTypesKt.asFlexibleType(flexibleType).getLowerBound(), inflexibleType)

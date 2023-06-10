@@ -14,7 +14,7 @@ suspend inline fun test1(crossinline c: suspend () -> Unit) {
 }
 
 suspend inline fun test2(crossinline c: suspend () -> Unit) {
-    val l: suspend () -> Unit = { c() }
+    konst l: suspend () -> Unit = { c() }
     l()
 }
 
@@ -23,7 +23,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun test3(crossinline c: suspend () -> Unit) {
-    val sr = object : SuspendRunnable {
+    konst sr = object : SuspendRunnable {
         override suspend fun run() {
             c()
         }

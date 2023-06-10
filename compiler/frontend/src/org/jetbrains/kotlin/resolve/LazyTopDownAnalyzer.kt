@@ -37,23 +37,23 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingContext
 import java.util.*
 
 class LazyTopDownAnalyzer(
-    private val trace: BindingTrace,
-    private val declarationResolver: DeclarationResolver,
-    private val overrideResolver: OverrideResolver,
-    private val overloadResolver: OverloadResolver,
-    private val varianceChecker: VarianceChecker,
-    private val moduleDescriptor: ModuleDescriptor,
-    private val lazyDeclarationResolver: LazyDeclarationResolver,
-    private val bodyResolver: BodyResolver,
-    private val topLevelDescriptorProvider: TopLevelDescriptorProvider,
-    private val fileScopeProvider: FileScopeProvider,
-    private val declarationScopeProvider: DeclarationScopeProvider,
-    private val qualifiedExpressionResolver: QualifiedExpressionResolver,
-    private val identifierChecker: IdentifierChecker,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val deprecationResolver: DeprecationResolver,
-    private val classifierUsageCheckers: Iterable<ClassifierUsageChecker>,
-    private val filePreprocessor: FilePreprocessor
+    private konst trace: BindingTrace,
+    private konst declarationResolver: DeclarationResolver,
+    private konst overrideResolver: OverrideResolver,
+    private konst overloadResolver: OverloadResolver,
+    private konst varianceChecker: VarianceChecker,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst lazyDeclarationResolver: LazyDeclarationResolver,
+    private konst bodyResolver: BodyResolver,
+    private konst topLevelDescriptorProvider: TopLevelDescriptorProvider,
+    private konst fileScopeProvider: FileScopeProvider,
+    private konst declarationScopeProvider: DeclarationScopeProvider,
+    private konst qualifiedExpressionResolver: QualifiedExpressionResolver,
+    private konst identifierChecker: IdentifierChecker,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst deprecationResolver: DeprecationResolver,
+    private konst classifierUsageCheckers: Iterable<ClassifierUsageChecker>,
+    private konst filePreprocessor: FilePreprocessor
 ) {
     fun analyzeDeclarations(
         topDownAnalysisMode: TopDownAnalysisMode,
@@ -61,14 +61,14 @@ class LazyTopDownAnalyzer(
         outerDataFlowInfo: DataFlowInfo = DataFlowInfo.EMPTY,
         localContext: ExpressionTypingContext? = null
     ): TopDownAnalysisContext {
-        val c = TopDownAnalysisContext(topDownAnalysisMode, outerDataFlowInfo, declarationScopeProvider, localContext)
+        konst c = TopDownAnalysisContext(topDownAnalysisMode, outerDataFlowInfo, declarationScopeProvider, localContext)
 
-        val topLevelFqNames = HashMultimap.create<FqName, KtElement>()
+        konst topLevelFqNames = HashMultimap.create<FqName, KtElement>()
 
-        val properties = ArrayList<KtProperty>()
-        val functions = ArrayList<KtNamedFunction>()
-        val typeAliases = ArrayList<KtTypeAlias>()
-        val destructuringDeclarations = ArrayList<KtDestructuringDeclaration>()
+        konst properties = ArrayList<KtProperty>()
+        konst functions = ArrayList<KtNamedFunction>()
+        konst typeAliases = ArrayList<KtTypeAlias>()
+        konst destructuringDeclarations = ArrayList<KtDestructuringDeclaration>()
 
         // fill in the context
         for (declaration in declarations) {
@@ -96,7 +96,7 @@ class LazyTopDownAnalyzer(
                 override fun visitKtFile(file: KtFile) {
                     filePreprocessor.preprocessFile(file)
                     registerDeclarations(file.declarations)
-                    val packageDirective = file.packageDirective
+                    konst packageDirective = file.packageDirective
                     assert(file.isScript() || packageDirective != null) { "No package in a non-script file: " + file }
                     packageDirective?.accept(this)
                     c.addFile(file)
@@ -109,14 +109,14 @@ class LazyTopDownAnalyzer(
                 }
 
                 override fun visitImportDirective(importDirective: KtImportDirective) {
-                    val importResolver = fileScopeProvider.getImportResolver(importDirective.containingKtFile)
+                    konst importResolver = fileScopeProvider.getImportResolver(importDirective.containingKtFile)
                     importResolver.forceResolveImport(importDirective)
                 }
 
                 override fun visitClassOrObject(classOrObject: KtClassOrObject) {
-                    val location =
+                    konst location =
                         if (classOrObject.isTopLevel()) KotlinLookupLocation(classOrObject) else NoLookupLocation.WHEN_RESOLVE_DECLARATION
-                    val descriptor =
+                    konst descriptor =
                         lazyDeclarationResolver.getClassDescriptor(classOrObject, location) as ClassDescriptorWithResolutionScopes
 
                     c.declaredClasses.put(classOrObject, descriptor)
@@ -176,7 +176,7 @@ class LazyTopDownAnalyzer(
                 }
 
                 override fun visitAnonymousInitializer(initializer: KtAnonymousInitializer) {
-                    val containerDescriptor =
+                    konst containerDescriptor =
                         lazyDeclarationResolver.resolveToDescriptor(initializer.containingDeclaration) as ClassDescriptorWithResolutionScopes
                     c.anonymousInitializers.put(initializer, containerDescriptor)
                 }
@@ -258,7 +258,7 @@ class LazyTopDownAnalyzer(
         typeAliases: List<KtTypeAlias>
     ) {
         for (typeAlias in typeAliases) {
-            val descriptor = lazyDeclarationResolver.resolveToDescriptor(typeAlias) as TypeAliasDescriptor
+            konst descriptor = lazyDeclarationResolver.resolveToDescriptor(typeAlias) as TypeAliasDescriptor
 
             c.typeAliases[typeAlias] = descriptor
             ForceResolveUtil.forceResolveAllContents(descriptor.annotations)
@@ -272,7 +272,7 @@ class LazyTopDownAnalyzer(
         properties: List<KtProperty>
     ) {
         for (property in properties) {
-            val descriptor = lazyDeclarationResolver.resolveToDescriptor(property) as PropertyDescriptor
+            konst descriptor = lazyDeclarationResolver.resolveToDescriptor(property) as PropertyDescriptor
 
             c.properties.put(property, descriptor)
             registerTopLevelFqName(topLevelFqNames, property, descriptor)
@@ -281,10 +281,10 @@ class LazyTopDownAnalyzer(
 
     private fun createFunctionDescriptors(c: TopDownAnalysisContext, functions: List<KtNamedFunction>) {
         for (function in functions) {
-            val simpleFunctionDescriptor = lazyDeclarationResolver.resolveToDescriptor(function) as SimpleFunctionDescriptor
+            konst simpleFunctionDescriptor = lazyDeclarationResolver.resolveToDescriptor(function) as SimpleFunctionDescriptor
             c.functions.put(function, simpleFunctionDescriptor)
             ForceResolveUtil.forceResolveAllContents(simpleFunctionDescriptor.annotations)
-            for (parameterDescriptor in simpleFunctionDescriptor.valueParameters) {
+            for (parameterDescriptor in simpleFunctionDescriptor.konstueParameters) {
                 ForceResolveUtil.forceResolveAllContents(parameterDescriptor.annotations)
             }
         }
@@ -297,7 +297,7 @@ class LazyTopDownAnalyzer(
     ) {
         for (destructuringDeclaration in destructuringDeclarations) {
             for (entry in destructuringDeclaration.entries) {
-                val descriptor = lazyDeclarationResolver.resolveToDescriptor(entry) as PropertyDescriptor
+                konst descriptor = lazyDeclarationResolver.resolveToDescriptor(entry) as PropertyDescriptor
 
                 c.destructuringDeclarationEntries[entry] = descriptor
                 ForceResolveUtil.forceResolveAllContents(descriptor.annotations)
@@ -312,7 +312,7 @@ class LazyTopDownAnalyzer(
         descriptor: DeclarationDescriptor
     ) {
         if (DescriptorUtils.isTopLevelDeclaration(descriptor)) {
-            val fqName = declaration.fqName
+            konst fqName = declaration.fqName
             if (fqName != null) {
                 topLevelFqNames.put(fqName, declaration)
             }

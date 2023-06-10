@@ -28,15 +28,15 @@ import kotlin.io.path.createDirectory
 @DisplayName("Build cache relocation")
 class BuildCacheRelocationIT : KGPBaseTest() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(buildCacheEnabled = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(buildCacheEnabled = true)
 
-    private val localBuildCacheDir get() = workingDir.resolve("remote-jdk-build-cache")
+    private konst localBuildCacheDir get() = workingDir.resolve("remote-jdk-build-cache")
 
     @JvmGradlePluginTests
     @DisplayName("works for Kotlin simple project")
     @GradleTest
     fun testRelocationSimpleProject(gradleVersion: GradleVersion) {
-        val (firstProject, secondProject) = prepareTestProjects("simpleProject", gradleVersion)
+        konst (firstProject, secondProject) = prepareTestProjects("simpleProject", gradleVersion)
 
         checkBuildCacheRelocation(
             firstProject,
@@ -50,7 +50,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("works for Kotlin with Kapt simple project")
     @GradleTest
     fun testRelocationSimpleKapt(gradleVersion: GradleVersion) {
-        val (firstProject, secondProject) = prepareTestProjects(
+        konst (firstProject, secondProject) = prepareTestProjects(
             "kapt2/simple",
             gradleVersion
         ) {
@@ -74,7 +74,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("works with JS/DCE project")
     @GradleTest
     fun testRelocationKotlinJs(gradleVersion: GradleVersion) {
-        val (firstProject, secondProject) = prepareTestProjects("kotlin-js-dce", gradleVersion)
+        konst (firstProject, secondProject) = prepareTestProjects("kotlin-js-dce", gradleVersion)
 
         checkBuildCacheRelocation(
             firstProject,
@@ -93,7 +93,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("works with Multiplatform")
     @GradleTest
     fun testRelocationMultiplatform(gradleVersion: GradleVersion) {
-        val (firstProject, secondProject) = prepareTestProjects("new-mpp-lib-with-tests", gradleVersion)
+        konst (firstProject, secondProject) = prepareTestProjects("new-mpp-lib-with-tests", gradleVersion)
 
         checkBuildCacheRelocation(
             firstProject,
@@ -118,7 +118,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk
     ) {
-        val (firstProject, secondProject) = prepareTestProjects(
+        konst (firstProject, secondProject) = prepareTestProjects(
             "AndroidProject",
             gradleVersion,
             defaultBuildOptions.copy(androidVersion = agpVersion),
@@ -148,7 +148,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk
     ) {
-        val (firstProject, secondProject) = prepareTestProjects(
+        konst (firstProject, secondProject) = prepareTestProjects(
             "kapt2/android-dagger",
             gradleVersion,
             defaultBuildOptions.copy(androidVersion = agpVersion),
@@ -179,7 +179,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         agpVersion: String,
         jdkProvider: JdkVersions.ProvidedJdk
     ) {
-        val (firstProject, secondProject) = prepareTestProjects(
+        konst (firstProject, secondProject) = prepareTestProjects(
             "kapt2/android-dagger",
             gradleVersion,
             defaultBuildOptions.copy(androidVersion = agpVersion),
@@ -207,11 +207,11 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("with native project")
     @GradleTest
     fun testRelocationNative(gradleVersion: GradleVersion) {
-        val (firstProject, secondProject) = prepareTestProjects(
+        konst (firstProject, secondProject) = prepareTestProjects(
             "native-build-cache",
             gradleVersion
         ) {
-            val localRepoUri = it.projectPath.resolve("repo").toUri()
+            konst localRepoUri = it.projectPath.resolve("repo").toUri()
             it.subProject("build-cache-app").buildGradleKts.append(
                 """
                 
@@ -261,11 +261,11 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("Kapt incremental compilation build does not break relocated build cache")
     @GradleTest
     fun testKaptCachingIncrementalBuildWithRelocation(gradleVersion: GradleVersion) {
-        val firstProject = project("kapt2/kaptAvoidance", gradleVersion) {
+        konst firstProject = project("kapt2/kaptAvoidance", gradleVersion) {
             enableLocalBuildCache(localBuildCacheDir)
         }
 
-        val secondProject = project("kapt2/kaptAvoidance", gradleVersion) {
+        konst secondProject = project("kapt2/kaptAvoidance", gradleVersion) {
             enableLocalBuildCache(localBuildCacheDir)
         }
 
@@ -279,12 +279,12 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         buildJdk: File? = null,
         additionalConfiguration: (TestProject) -> Unit = {}
     ): Pair<TestProject, TestProject> {
-        val firstProject = project(projectName, gradleVersion, buildOptions, buildJdk = buildJdk) {
+        konst firstProject = project(projectName, gradleVersion, buildOptions, buildJdk = buildJdk) {
             enableLocalBuildCache(localBuildCacheDir)
             additionalConfiguration(this)
         }
 
-        val secondProject = project(projectName, gradleVersion, buildOptions, buildJdk = buildJdk) {
+        konst secondProject = project(projectName, gradleVersion, buildOptions, buildJdk = buildJdk) {
             enableLocalBuildCache(localBuildCacheDir)
             additionalConfiguration(this)
         }
@@ -313,7 +313,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
     @DisplayName("Kotlin incremental compilation should work correctly after cache hint")
     @GradleTest
     fun testKotlinIncrementalCompilation(gradleVersion: GradleVersion) {
-        val options = defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
+        konst options = defaultBuildOptions.copy(useGradleClasspathSnapshot = false)
         checkKotlinIncrementalCompilationAfterCacheHit(gradleVersion, options) {
             assertNonIncrementalCompilation()
         }
@@ -342,7 +342,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         buildOptions: BuildOptions = defaultBuildOptions,
         assertions: BuildResult.() -> Unit
     ) {
-        val (firstProject, secondProject) = prepareTestProjects("buildCacheSimple", gradleVersion, buildOptions)
+        konst (firstProject, secondProject) = prepareTestProjects("buildCacheSimple", gradleVersion, buildOptions)
 
         // First build, should be stored into the build cache:
         firstProject.build("assemble") {
@@ -355,7 +355,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         }
 
         // Check whether compilation after a cache hit is incremental (KT-34862)
-        val fooKtSourceFile = secondProject.kotlinSourcesDir().resolve("foo.kt")
+        konst fooKtSourceFile = secondProject.kotlinSourcesDir().resolve("foo.kt")
         fooKtSourceFile.modify { it.replace("Int = 1", "String = \"abc\"") }
         secondProject.build("assemble", buildOptions = buildOptions.copy(logLevel = LogLevel.DEBUG), assertions = assertions)
         // Revert the change to the return type of foo(), and check if we get a cache hit
@@ -369,7 +369,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         firstProject: TestProject,
         secondProject: TestProject
     ) {
-        val options = defaultBuildOptions.copy(
+        konst options = defaultBuildOptions.copy(
             kaptOptions = BuildOptions.KaptOptions(
                 verbose = true,
                 incrementalKapt = true,
@@ -388,9 +388,9 @@ class BuildCacheRelocationIT : KGPBaseTest() {
         }
 
         // Make changes to annotated class and check kapt tasks are re-executed
-        val appClassKtSourceFile = secondProject.subProject("app").kotlinSourcesDir().resolve("AppClass.kt")
+        konst appClassKtSourceFile = secondProject.subProject("app").kotlinSourcesDir().resolve("AppClass.kt")
         appClassKtSourceFile.modify {
-            it.replace("val testVal: String = \"text\"", "val testVal: Int = 1")
+            it.replace("konst testVal: String = \"text\"", "konst testVal: Int = 1")
         }
         secondProject.build("build", buildOptions = options) {
             assertTasksExecuted(":app:kaptGenerateStubsKotlin", ":app:kaptKotlin")
@@ -398,7 +398,7 @@ class BuildCacheRelocationIT : KGPBaseTest() {
 
         // Revert changes and check kapt tasks are from cache
         appClassKtSourceFile.modify {
-            it.replace("val testVal: Int = 1", "val testVal: String = \"text\"")
+            it.replace("konst testVal: Int = 1", "konst testVal: String = \"text\"")
         }
         secondProject.build("clean", "build", buildOptions = options) {
             assertTasksFromCache(":app:kaptGenerateStubsKotlin", ":app:kaptKotlin")

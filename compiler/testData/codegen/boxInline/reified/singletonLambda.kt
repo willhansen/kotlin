@@ -8,7 +8,7 @@ package test
 inline fun <reified U> bar() = U::class.simpleName!!
 
 inline fun <reified T> foo(): String {
-    val x = { bar<Array<T>>() }
+    konst x = { bar<Array<T>>() }
     return x()
 }
 
@@ -16,6 +16,6 @@ inline fun <reified T> foo(): String {
 import test.*
 
 fun box(): String {
-    val result = foo<Int>()
+    konst result = foo<Int>()
     return if (result == "Array") "OK" else result
 }

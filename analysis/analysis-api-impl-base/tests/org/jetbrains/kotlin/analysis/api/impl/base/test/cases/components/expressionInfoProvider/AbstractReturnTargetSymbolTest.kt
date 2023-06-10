@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractReturnTargetSymbolTest : AbstractAnalysisApiSingleFileTest() {
-    val commentRegex = Regex("""/\* (.+@\(.+\)|null) \*/""")
+    konst commentRegex = Regex("""/\* (.+@\(.+\)|null) \*/""")
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val original = ktFile.text
-        val actual = buildString {
+        konst original = ktFile.text
+        konst actual = buildString {
             ktFile.accept(object : KtTreeVisitorVoid() {
                 override fun visitElement(element: PsiElement) {
                     if (element is LeafPsiElement) {
@@ -34,7 +34,7 @@ abstract class AbstractReturnTargetSymbolTest : AbstractAnalysisApiSingleFileTes
                     expression.returnKeyword.accept(this)
                     expression.labeledExpression?.accept(this)
                     analyseForTest(expression) {
-                        val target = expression.getReturnTargetSymbol()
+                        konst target = expression.getReturnTargetSymbol()
                         append("/* " + target?.getNameWithPositionString() + " */")
                     }
                     expression.returnedExpression?.accept(this)

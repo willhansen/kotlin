@@ -8,6 +8,6 @@ public class JavaClass {
 // FILE: test.kt
 
 fun test() {
-    val staticReference = JavaClass::staticField
-    val nonStaticReference = JavaClass::nonStaticField
+    konst staticReference = JavaClass::staticField
+    konst nonStaticReference = JavaClass::nonStaticField
 }

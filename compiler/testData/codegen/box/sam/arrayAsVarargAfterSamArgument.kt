@@ -17,9 +17,9 @@ public class Test {
 
 // FILE: main.kt
 fun box(): String {
-    val x1 = {}
-    val x2: Runnable = Runnable { }
-    val x3 = arrayOf<String>()
+    konst x1 = {}
+    konst x2: Runnable = Runnable { }
+    konst x3 = arrayOf<String>()
 
     Test.foo1({}, arrayOf())
     Test.foo1({}, *arrayOf())
@@ -34,12 +34,12 @@ fun box(): String {
     Test.foo1(x1, *x3)
     Test.foo1(x2, *arrayOf(""))
 
-    val i1 = Test({}, arrayOf())
-    val i2 = Test({}, *arrayOf())
-    val i3 = Test({}, x3)
-    val i4 = Test({}, arrayOf(""))
-    val i5 = Test({}, {}, *arrayOf(""))
-    val i6 = Test({}, {}, arrayOf())
+    konst i1 = Test({}, arrayOf())
+    konst i2 = Test({}, *arrayOf())
+    konst i3 = Test({}, x3)
+    konst i4 = Test({}, arrayOf(""))
+    konst i5 = Test({}, {}, *arrayOf(""))
+    konst i6 = Test({}, {}, arrayOf())
 
     i1.foo2({}, {}, arrayOf())
     i2.foo2({}, {}, *arrayOf())

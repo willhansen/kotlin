@@ -16,10 +16,10 @@ package derived
 import base.BaseJava
 
 class Derived : BaseJava() {
-    val a = "OK"
+    konst a = "OK"
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     return d::a.get()
 }

@@ -1,4 +1,4 @@
-open class X(val s: String)
+open class X(konst s: String)
 
 fun f(a: String?) {
     if (a != null) {

@@ -26,7 +26,7 @@ class ReturnNoValueInstruction(
     element: KtElement,
     blockScope: BlockScope,
     targetLabel: Label,
-    val subroutine: KtElement
+    konst subroutine: KtElement
 ) : AbstractJumpInstruction(element, targetLabel, blockScope) {
     override fun accept(visitor: InstructionVisitor) {
         visitor.visitReturnNoValue(this)

@@ -13,6 +13,6 @@ class FirBuiltInsPackageFragment(
     fqName: FqName,
     moduleDescriptor: ModuleDescriptor
 ) : FirPackageFragmentDescriptor(fqName, moduleDescriptor), BuiltInsPackageFragment {
-    override val isFallback: Boolean
+    override konst isFallback: Boolean
         get() = false
 }

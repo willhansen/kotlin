@@ -16,16 +16,16 @@ import java.io.File
 import java.util.*
 
 class StubIrContext(
-        val log: (String) -> Unit,
-        val configuration: InteropConfiguration,
-        val nativeIndex: NativeIndex,
-        val imports: Imports,
-        val platform: KotlinPlatform,
-        val generationMode: GenerationMode,
-        val libName: String,
-        val plugin: Plugin
+        konst log: (String) -> Unit,
+        konst configuration: InteropConfiguration,
+        konst nativeIndex: NativeIndex,
+        konst imports: Imports,
+        konst platform: KotlinPlatform,
+        konst generationMode: GenerationMode,
+        konst libName: String,
+        konst plugin: Plugin
 ) {
-    val libraryForCStubs = configuration.library.copy(
+    konst libraryForCStubs = configuration.library.copy(
             includes = mutableListOf<IncludeInfo>().apply {
                 add(IncludeInfo("stdint.h", null))
                 add(IncludeInfo("string.h", null))
@@ -46,20 +46,20 @@ class StubIrContext(
     ).precompileHeaders()
 
     // TODO: Used only for JVM.
-    val jvmFileClassName = if (configuration.pkgName.isEmpty()) {
+    konst jvmFileClassName = if (configuration.pkgName.isEmpty()) {
         libName
     } else {
         configuration.pkgName.substringAfterLast('.')
     }
 
-    val validPackageName = configuration.pkgName.split(".").joinToString(".") {
+    konst konstidPackageName = configuration.pkgName.split(".").joinToString(".") {
         if (it.matches(VALID_PACKAGE_NAME_REGEX)) it else "`$it`"
     }
 
-    private val anonymousStructKotlinNames = mutableMapOf<StructDecl, String>()
+    private konst anonymousStructKotlinNames = mutableMapOf<StructDecl, String>()
 
-    private val forbiddenStructNames = run {
-        val typedefNames = nativeIndex.typedefs.map { it.name }
+    private konst forbiddenStructNames = run {
+        konst typedefNames = nativeIndex.typedefs.map { it.name }
         typedefNames.toSet()
     }
 
@@ -67,15 +67,15 @@ class StubIrContext(
      * The name to be used for this struct in Kotlin
      */
     fun getKotlinName(decl: StructDecl): String {
-        val spelling = decl.spelling
+        konst spelling = decl.spelling
         if (decl.isAnonymous) {
-            val names = anonymousStructKotlinNames
+            konst names = anonymousStructKotlinNames
             return names.getOrPut(decl) {
                 "anonymousStruct${names.size + 1}"
             }
         }
 
-        val strippedCName = if (spelling.startsWith("struct ") || spelling.startsWith("union ")) {
+        konst strippedCName = if (spelling.startsWith("struct ") || spelling.startsWith("union ")) {
             spelling.substringAfter(' ')
         } else {
             spelling
@@ -87,7 +87,7 @@ class StubIrContext(
     }
 
     fun addManifestProperties(properties: Properties) {
-        val exportForwardDeclarations = configuration.exportForwardDeclarations.toMutableList()
+        konst exportForwardDeclarations = configuration.exportForwardDeclarations.toMutableList()
 
         nativeIndex.structs
                 .filter { it.def == null }
@@ -98,11 +98,11 @@ class StubIrContext(
         // Note: includedForwardDeclarations is somewhat similar to exportForwardDeclarations. But reusing the latter
         // instead is undesirable: exportForwardDeclarations makes the compiler enable importing the listed declarations
         // through interop library package. E.g., if `cnames.structs.Foo` is in exportForwardDeclarations of a cinterop
-        // klib bar with package bar, then `import bar.Foo` is valid. This is an arguable feature and a candidate for
+        // klib bar with package bar, then `import bar.Foo` is konstid. This is an arguable feature and a candidate for
         // deprecation, so enabling it for new declarations instead is undesirable.
         // That's why, to make the included Obj-C forward declarations known to the compiler, we have to create a new
         // manifest property for that.
-        val includedForwardDeclarations = mutableListOf<String>()
+        konst includedForwardDeclarations = mutableListOf<String>()
         includedForwardDeclarations.addAll(exportForwardDeclarations)
 
         // TODO: should we add meta classes?
@@ -125,33 +125,33 @@ class StubIrContext(
     }
 
     companion object {
-        private val VALID_PACKAGE_NAME_REGEX = "[a-zA-Z0-9_.]+".toRegex()
+        private konst VALID_PACKAGE_NAME_REGEX = "[a-zA-Z0-9_.]+".toRegex()
     }
 }
 
 class StubIrDriver(
-        private val context: StubIrContext,
-        private val options: DriverOptions
+        private konst context: StubIrContext,
+        private konst options: DriverOptions
 ) {
     data class DriverOptions(
-            val entryPoint: String?,
-            val moduleName: String,
-            val outCFile: File,
-            val outKtFileCreator: () -> File,
-            val dumpBridges: Boolean
+            konst entryPoint: String?,
+            konst moduleName: String,
+            konst outCFile: File,
+            konst outKtFileCreator: () -> File,
+            konst dumpBridges: Boolean
     )
 
     sealed class Result {
         object SourceCode : Result()
 
-        class Metadata(val metadata: KlibModuleMetadata): Result()
+        class Metadata(konst metadata: KlibModuleMetadata): Result()
     }
 
     fun run(): Result {
-        val (entryPoint, moduleName, outCFile, outKtFile) = options
+        konst (entryPoint, moduleName, outCFile, outKtFile) = options
 
-        val builderResult = StubIrBuilder(context).build()
-        val bridgeBuilderResult = StubIrBridgeBuilder(context, builderResult).build()
+        konst builderResult = StubIrBuilder(context).build()
+        konst bridgeBuilderResult = StubIrBridgeBuilder(context, builderResult).build()
 
         outCFile.bufferedWriter().use {
             emitCFile(context, it, entryPoint, bridgeBuilderResult.nativeBridges)
@@ -186,7 +186,7 @@ class StubIrDriver(
     ) = Result.Metadata(StubIrMetadataEmitter(context, builderResult, moduleName, bridgeBuilderResult).emit())
 
     private fun emitCFile(context: StubIrContext, cFile: Appendable, entryPoint: String?, nativeBridges: NativeBridges) {
-        val out = { it: String -> cFile.appendLine(it) }
+        konst out = { it: String -> cFile.appendLine(it) }
 
         context.libraryForCStubs.preambleLines.forEach {
             out(it)

@@ -11,17 +11,17 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
- * Lazy value that guaranties safe publication and checks validity on every access
+ * Lazy konstue that guaranties safe publication and checks konstidity on every access
  */
 @JvmInline
-value class ValidityAwareCachedValue<T>(
-    private val lazyValue: Lazy<T>,
+konstue class ValidityAwareCachedValue<T>(
+    private konst lazyValue: Lazy<T>,
 ) : ReadOnlyProperty<Any, T> {
 
     override fun getValue(thisRef: Any, property: KProperty<*>): T {
         require(thisRef is KtLifetimeOwner)
         thisRef.token.assertIsValidAndAccessible()
-        return lazyValue.value
+        return lazyValue.konstue
     }
 }
 

@@ -51,18 +51,18 @@ open class FirRegularClassBuilder : FirClassBuilder, FirTypeParameterRefsOwnerBu
     override lateinit var moduleData: FirModuleData
     override lateinit var origin: FirDeclarationOrigin
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
-    override val typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
     override lateinit var status: FirDeclarationStatus
     override var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     override lateinit var classKind: ClassKind
-    override val declarations: MutableList<FirDeclaration> = mutableListOf()
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst declarations: MutableList<FirDeclaration> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var scopeProvider: FirScopeProvider
     open lateinit var name: Name
     open lateinit var symbol: FirRegularClassSymbol
     open var companionObjectSymbol: FirRegularClassSymbol? = null
-    override val superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
-    open val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    override konst superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
+    open konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
 
     override fun build(): FirRegularClass {
         return FirRegularClassImpl(
@@ -101,7 +101,7 @@ inline fun buildRegularClassCopy(original: FirRegularClass, init: FirRegularClas
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirRegularClassBuilder()
+    konst copyBuilder = FirRegularClassBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData

@@ -5,7 +5,7 @@ class Generic<T> {
 }
 
 class C {
-    val prop: Generic<<caret>Foo>.Nested? = null
+    konst prop: Generic<<caret>Foo>.Nested? = null
 }
 
 class Foo

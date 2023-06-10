@@ -12,25 +12,25 @@ import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 
 // Note 1: can be combined with org.jetbrains.kotlin.resolve.constants.ConstantValue but where is some questions to `AnnotationValue`.
 // Note 2: if we are not going to implement previous idea, then this class can be moved to `fir` module.
-// The problem here is that `ConstantValue` somehow must be accessible to `EvaluatedConstTracker`
+// The problem here is that `ConstantValue` somehow must be accessible to `EkonstuatedConstTracker`
 // which in turn must be accessible to `CommonConfigurationKeys`.
-sealed class ConstantValue<out T>(open val value: T) {
+sealed class ConstantValue<out T>(open konst konstue: T) {
     abstract fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R
 
-    override fun equals(other: Any?): Boolean = this === other || value == (other as? ConstantValue<*>)?.value
+    override fun equals(other: Any?): Boolean = this === other || konstue == (other as? ConstantValue<*>)?.konstue
 
-    override fun hashCode(): Int = value?.hashCode() ?: 0
+    override fun hashCode(): Int = konstue?.hashCode() ?: 0
 
-    override fun toString(): String = value.toString()
+    override fun toString(): String = konstue.toString()
 
-    open fun stringTemplateValue(): String = value.toString()
+    open fun stringTemplateValue(): String = konstue.toString()
 }
 
-abstract class IntegerValueConstant<out T> protected constructor(value: T) : ConstantValue<T>(value)
-abstract class UnsignedValueConstant<out T> protected constructor(value: T) : ConstantValue<T>(value)
+abstract class IntegerValueConstant<out T> protected constructor(konstue: T) : ConstantValue<T>(konstue)
+abstract class UnsignedValueConstant<out T> protected constructor(konstue: T) : ConstantValue<T>(konstue)
 
-class AnnotationValue private constructor(value: Value) : ConstantValue<AnnotationValue.Value>(value) {
-    class Value(val type: KotlinTypeMarker, val argumentsMapping: Map<Name, ConstantValue<*>>) {
+class AnnotationValue private constructor(konstue: Value) : ConstantValue<AnnotationValue.Value>(konstue) {
+    class Value(konst type: KotlinTypeMarker, konst argumentsMapping: Map<Name, ConstantValue<*>>) {
         override fun toString(): String {
             return "Value(type=$type, argumentsMapping=$argumentsMapping)"
         }
@@ -48,25 +48,25 @@ class AnnotationValue private constructor(value: Value) : ConstantValue<Annotati
 }
 
 class ArrayValue(
-    value: List<ConstantValue<*>>,
-) : ConstantValue<List<ConstantValue<*>>>(value) {
+    konstue: List<ConstantValue<*>>,
+) : ConstantValue<List<ConstantValue<*>>>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitArrayValue(this, data)
 }
 
-class BooleanValue(value: Boolean) : ConstantValue<Boolean>(value) {
+class BooleanValue(konstue: Boolean) : ConstantValue<Boolean>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitBooleanValue(this, data)
 }
 
-class ByteValue(value: Byte) : IntegerValueConstant<Byte>(value) {
+class ByteValue(konstue: Byte) : IntegerValueConstant<Byte>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitByteValue(this, data)
 
-    override fun toString(): String = "$value.toByte()"
+    override fun toString(): String = "$konstue.toByte()"
 }
 
-class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
+class CharValue(konstue: Char) : IntegerValueConstant<Char>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitCharValue(this, data)
 
-    override fun toString(): String = "\\u%04X ('%s')".format(value.code, getPrintablePart(value))
+    override fun toString(): String = "\\u%04X ('%s')".format(konstue.code, getPrintablePart(konstue))
 
     private fun getPrintablePart(c: Char): String = when (c) {
         '\b' -> "\\b"
@@ -78,7 +78,7 @@ class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
     }
 
     private fun isPrintableUnicode(c: Char): Boolean {
-        val t = Character.getType(c).toByte()
+        konst t = Character.getType(c).toByte()
         return t != Character.UNASSIGNED &&
                 t != Character.LINE_SEPARATOR &&
                 t != Character.PARAGRAPH_SEPARATOR &&
@@ -89,15 +89,15 @@ class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
     }
 }
 
-class DoubleValue(value: Double) : ConstantValue<Double>(value) {
+class DoubleValue(konstue: Double) : ConstantValue<Double>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitDoubleValue(this, data)
 
-    override fun toString(): String = "$value.toDouble()"
+    override fun toString(): String = "$konstue.toDouble()"
 }
 
 class EnumValue(
-    val enumClassId: ClassId,
-    val enumEntryName: Name
+    konst enumClassId: ClassId,
+    konst enumEntryName: Name
 ) : ConstantValue<Pair<ClassId, Name>>(enumClassId to enumEntryName) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitEnumValue(this, data)
 
@@ -105,13 +105,13 @@ class EnumValue(
 }
 
 abstract class ErrorValue : ConstantValue<Unit>(Unit) {
-    @Deprecated("Should not be called, for this is not a real value, but a indication of an error", level = DeprecationLevel.HIDDEN)
-    override val value: Unit
+    @Deprecated("Should not be called, for this is not a real konstue, but a indication of an error", level = DeprecationLevel.HIDDEN)
+    override konst konstue: Unit
         get() = throw UnsupportedOperationException()
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitErrorValue(this, data)
 
-    class ErrorValueWithMessage(val message: String) : ErrorValue() {
+    class ErrorValueWithMessage(konst message: String) : ErrorValue() {
         override fun toString(): String = message
     }
 
@@ -122,89 +122,89 @@ abstract class ErrorValue : ConstantValue<Unit>(Unit) {
     }
 }
 
-class FloatValue(value: Float) : ConstantValue<Float>(value) {
+class FloatValue(konstue: Float) : ConstantValue<Float>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitFloatValue(this, data)
 
-    override fun toString(): String = "$value.toFloat()"
+    override fun toString(): String = "$konstue.toFloat()"
 }
 
-class IntValue(value: Int) : IntegerValueConstant<Int>(value) {
+class IntValue(konstue: Int) : IntegerValueConstant<Int>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitIntValue(this, data)
 }
 
-class KClassValue private constructor(value: Value) : ConstantValue<KClassValue.Value>(value) {
+class KClassValue private constructor(konstue: Value) : ConstantValue<KClassValue.Value>(konstue) {
     sealed class Value {
-        data class NormalClass(val value: ClassLiteralValue) : Value() {
-            val classId: ClassId get() = value.classId
-            val arrayDimensions: Int get() = value.arrayNestedness
+        data class NormalClass(konst konstue: ClassLiteralValue) : Value() {
+            konst classId: ClassId get() = konstue.classId
+            konst arrayDimensions: Int get() = konstue.arrayNestedness
         }
 
-        data class LocalClass(val type: KotlinTypeMarker) : Value()
+        data class LocalClass(konst type: KotlinTypeMarker) : Value()
     }
 
-    constructor(value: ClassLiteralValue) : this(Value.NormalClass(value))
+    constructor(konstue: ClassLiteralValue) : this(Value.NormalClass(konstue))
 
     constructor(classId: ClassId, arrayDimensions: Int) : this(ClassLiteralValue(classId, arrayDimensions))
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitKClassValue(this, data)
 }
 
-class LongValue(value: Long) : IntegerValueConstant<Long>(value) {
+class LongValue(konstue: Long) : IntegerValueConstant<Long>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitLongValue(this, data)
 
-    override fun toString(): String = "$value.toLong()"
+    override fun toString(): String = "$konstue.toLong()"
 }
 
 object NullValue : ConstantValue<Nothing?>(null) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitNullValue(this, data)
 }
 
-class ShortValue(value: Short) : IntegerValueConstant<Short>(value) {
+class ShortValue(konstue: Short) : IntegerValueConstant<Short>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitShortValue(this, data)
 
-    override fun toString(): String = "$value.toShort()"
+    override fun toString(): String = "$konstue.toShort()"
 }
 
-class StringValue(value: String) : ConstantValue<String>(value) {
+class StringValue(konstue: String) : ConstantValue<String>(konstue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitStringValue(this, data)
 
-    override fun toString(): String = "\"$value\""
+    override fun toString(): String = "\"$konstue\""
 }
 
 class UByteValue(byteValue: Byte) : UnsignedValueConstant<Byte>(byteValue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitUByteValue(this, data)
 
-    override fun toString(): String = "$value.toUByte()"
+    override fun toString(): String = "$konstue.toUByte()"
 
-    override fun stringTemplateValue(): String = (value.toInt() and 0xFF).toString()
+    override fun stringTemplateValue(): String = (konstue.toInt() and 0xFF).toString()
 }
 
 class UShortValue(shortValue: Short) : UnsignedValueConstant<Short>(shortValue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitUShortValue(this, data)
 
-    override fun toString(): String = "$value.toUShort()"
+    override fun toString(): String = "$konstue.toUShort()"
 
-    override fun stringTemplateValue(): String = (value.toInt() and 0xFFFF).toString()
+    override fun stringTemplateValue(): String = (konstue.toInt() and 0xFFFF).toString()
 }
 
 class UIntValue(intValue: Int) : UnsignedValueConstant<Int>(intValue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitUIntValue(this, data)
 
-    override fun toString(): String = "$value.toUInt()"
+    override fun toString(): String = "$konstue.toUInt()"
 
-    override fun stringTemplateValue(): String = (value.toLong() and 0xFFFFFFFFL).toString()
+    override fun stringTemplateValue(): String = (konstue.toLong() and 0xFFFFFFFFL).toString()
 }
 
 class ULongValue(longValue: Long) : UnsignedValueConstant<Long>(longValue) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitULongValue(this, data)
 
-    override fun toString(): String = "$value.toULong()"
+    override fun toString(): String = "$konstue.toULong()"
 
     override fun stringTemplateValue(): String {
-        if (value >= 0) return value.toString()
+        if (konstue >= 0) return konstue.toString()
 
-        val div10 = (value ushr 1) / 5
-        val mod10 = value - 10 * div10
+        konst div10 = (konstue ushr 1) / 5
+        konst mod10 = konstue - 10 * div10
 
         return "$div10$mod10"
     }

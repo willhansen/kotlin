@@ -7,13 +7,13 @@
 package kotlin.reflect
 
 /**
- * Represents a property, such as a named `val` or `var` declaration.
+ * Represents a property, such as a named `konst` or `var` declaration.
  * Instances of this class are obtainable by the `::` operator.
  * 
  * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/reflection.html)
  * for more information.
  *
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty<out V> : KCallable<V> {
     /**
@@ -22,7 +22,7 @@ public actual interface KProperty<out V> : KCallable<V> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isLateinit: Boolean
+    public konst isLateinit: Boolean
 
     /**
      * `true` if this property is `const`.
@@ -30,10 +30,10 @@ public actual interface KProperty<out V> : KCallable<V> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isConst: Boolean
+    public konst isConst: Boolean
 
-    /** The getter of this property, used to obtain the value of the property. */
-    public val getter: Getter<V>
+    /** The getter of this property, used to obtain the konstue of the property. */
+    public konst getter: Getter<V>
 
     /**
      * Represents a property accessor, which is a `get` or `set` method declared alongside the property.
@@ -44,7 +44,7 @@ public actual interface KProperty<out V> : KCallable<V> {
      */
     public interface Accessor<out V> {
         /** The property which this accessor is originated from. */
-        public val property: KProperty<V>
+        public konst property: KProperty<V>
     }
 
     /**
@@ -57,8 +57,8 @@ public actual interface KProperty<out V> : KCallable<V> {
  * Represents a property declared as a `var`.
  */
 public actual interface KMutableProperty<V> : KProperty<V> {
-    /** The setter of this mutable property, used to change the value of the property. */
-    public val setter: Setter<V>
+    /** The setter of this mutable property, used to change the konstue of the property. */
+    public konst setter: Setter<V>
 
     /**
      * Setter of the property is a `set` method declared alongside the property.
@@ -74,24 +74,24 @@ public actual interface KMutableProperty<V> : KProperty<V> {
  */
 public actual interface KProperty0<out V> : KProperty<V>, () -> V {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      */
     public actual fun get(): V
 
     /**
-     * Returns the value of the delegate if this is a delegated property, or `null` if this property is not delegated.
+     * Returns the konstue of the delegate if this is a delegated property, or `null` if this property is not delegated.
      * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/delegated-properties.html)
      * for more information.
      */
     @SinceKotlin("1.1")
     public fun getDelegate(): Any?
 
-    override val getter: Getter<V>
+    override konst getter: Getter<V>
 
     /**
      * Getter of the property is a `get` method declared alongside the property.
      *
-     * Can be used as a function that takes 0 arguments and returns the value of the property type [V].
+     * Can be used as a function that takes 0 arguments and returns the konstue of the property type [V].
      */
     public interface Getter<out V> : KProperty.Getter<V>, () -> V
 }
@@ -101,18 +101,18 @@ public actual interface KProperty0<out V> : KProperty<V>, () -> V {
  */
 public actual interface KMutableProperty0<V> : KProperty0<V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(value: V)
+    public actual fun set(konstue: V)
 
-    override val setter: Setter<V>
+    override konst setter: Setter<V>
 
     /**
      * Setter of the property is a `set` method declared alongside the property.
      *
-     * Can be used as a function that takes new property value as an argument and returns [Unit].
+     * Can be used as a function that takes new property konstue as an argument and returns [Unit].
      */
     public interface Setter<V> : KMutableProperty.Setter<V>, (V) -> Unit
 }
@@ -121,28 +121,28 @@ public actual interface KMutableProperty0<V> : KProperty0<V>, KMutableProperty<V
 /**
  * Represents a property, operations on which take one receiver as a parameter.
  *
- * @param T the type of the receiver which should be used to obtain the value of the property.
- * @param V the type of the property value.
+ * @param T the type of the receiver which should be used to obtain the konstue of the property.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty1<T, out V> : KProperty<V>, (T) -> V {
     /**
-     * Returns the current value of the property.
+     * Returns the current konstue of the property.
      *
-     * @param receiver the receiver which is used to obtain the value of the property.
+     * @param receiver the receiver which is used to obtain the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
      */
     public actual fun get(receiver: T): V
 
     /**
-     * Returns the value of the delegate if this is a delegated property, or `null` if this property is not delegated.
+     * Returns the konstue of the delegate if this is a delegated property, or `null` if this property is not delegated.
      * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/delegated-properties.html)
      * for more information.
      *
      * Note that for a top level **extension** property, the delegate is the same for all extension receivers,
-     * so the actual [receiver] instance passed in is not going to make any difference, it must only be a value of [T].
+     * so the actual [receiver] instance passed in is not going to make any difference, it must only be a konstue of [T].
      *
-     * @param receiver the receiver which is used to obtain the value of the property delegate.
+     * @param receiver the receiver which is used to obtain the konstue of the property delegate.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
      *
@@ -151,12 +151,12 @@ public actual interface KProperty1<T, out V> : KProperty<V>, (T) -> V {
     @SinceKotlin("1.1")
     public fun getDelegate(receiver: T): Any?
 
-    override val getter: Getter<T, V>
+    override konst getter: Getter<T, V>
 
     /**
      * Getter of the property is a `get` method declared alongside the property.
      *
-     * Can be used as a function that takes an argument of type [T] (the receiver) and returns the value of the property type [V].
+     * Can be used as a function that takes an argument of type [T] (the receiver) and returns the konstue of the property type [V].
      */
     public interface Getter<T, out V> : KProperty.Getter<V>, (T) -> V
 }
@@ -166,21 +166,21 @@ public actual interface KProperty1<T, out V> : KProperty<V>, (T) -> V {
  */
 public actual interface KMutableProperty1<T, V> : KProperty1<T, V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
-     * @param receiver the receiver which is used to modify the value of the property.
+     * @param receiver the receiver which is used to modify the konstue of the property.
      *                 For example, it should be a class instance if this is a member property of that class,
      *                 or an extension receiver if this is a top level extension property.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver: T, value: V)
+    public actual fun set(receiver: T, konstue: V)
 
-    override val setter: Setter<T, V>
+    override konst setter: Setter<T, V>
 
     /**
      * Setter of the property is a `set` method declared alongside the property.
      *
-     * Can be used as a function that takes the receiver and the new property value as arguments and returns [Unit].
+     * Can be used as a function that takes the receiver and the new property konstue as arguments and returns [Unit].
      */
     public interface Setter<T, V> : KMutableProperty.Setter<V>, (T, V) -> Unit
 }
@@ -194,11 +194,11 @@ public actual interface KMutableProperty1<T, V> : KProperty1<T, V>, KMutableProp
  *        the type of the declaring class of the property, or any subclass of that class.
  * @param E the type of the second receiver. In case of the extension property in a class this is
  *        the type of the extension receiver.
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
     /**
-     * Returns the current value of the property. In case of the extension property in a class,
+     * Returns the current konstue of the property. In case of the extension property in a class,
      * the instance of the class should be passed first and the instance of the extension receiver second.
      *
      * @param receiver1 the instance of the first receiver.
@@ -207,7 +207,7 @@ public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
     public actual fun get(receiver1: D, receiver2: E): V
 
     /**
-     * Returns the value of the delegate if this is a delegated property, or `null` if this property is not delegated.
+     * Returns the konstue of the delegate if this is a delegated property, or `null` if this property is not delegated.
      * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/delegated-properties.html)
      * for more information.
      *
@@ -222,13 +222,13 @@ public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
     @SinceKotlin("1.1")
     public fun getDelegate(receiver1: D, receiver2: E): Any?
 
-    override val getter: Getter<D, E, V>
+    override konst getter: Getter<D, E, V>
 
     /**
      * Getter of the property is a `get` method declared alongside the property.
      *
      * Can be used as a function that takes an argument of type [D] (the first receiver), an argument of type [E] (the second receiver)
-     * and returns the value of the property type [V].
+     * and returns the konstue of the property type [V].
      */
     public interface Getter<D, E, out V> : KProperty.Getter<V>, (D, E) -> V
 }
@@ -238,21 +238,21 @@ public actual interface KProperty2<D, E, out V> : KProperty<V>, (D, E) -> V {
  */
 public actual interface KMutableProperty2<D, E, V> : KProperty2<D, E, V>, KMutableProperty<V> {
     /**
-     * Modifies the value of the property.
+     * Modifies the konstue of the property.
      *
      * @param receiver1 the instance of the first receiver.
      * @param receiver2 the instance of the second receiver.
-     * @param value the new value to be assigned to this property.
+     * @param konstue the new konstue to be assigned to this property.
      */
-    public actual fun set(receiver1: D, receiver2: E, value: V)
+    public actual fun set(receiver1: D, receiver2: E, konstue: V)
 
-    override val setter: Setter<D, E, V>
+    override konst setter: Setter<D, E, V>
 
     /**
      * Setter of the property is a `set` method declared alongside the property.
      *
      * Can be used as a function that takes an argument of type [D] (the first receiver), an argument of type [E] (the second receiver),
-     * and the new property value and returns [Unit].
+     * and the new property konstue and returns [Unit].
      */
     public interface Setter<D, E, V> : KMutableProperty.Setter<V>, (D, E, V) -> Unit
 }

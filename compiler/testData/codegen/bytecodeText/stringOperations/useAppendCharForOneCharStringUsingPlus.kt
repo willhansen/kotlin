@@ -1,6 +1,6 @@
 fun test(s: String, i: Int) = "x" + s + " " + i + "y"
 
-// The IR is equivalent for this test and "useAppendCharForOneCharStringInTemplate*.kt" because there is an optimization for 1-length
+// The IR is equikonstent for this test and "useAppendCharForOneCharStringInTemplate*.kt" because there is an optimization for 1-length
 // string literals in any string concatenation, whether using templates or + operator (see JvmStringConcatenationLowering).
 // However, for the non-IR backend, `append(String)` will still be used for these 1-length strings.
 

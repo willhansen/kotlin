@@ -12,17 +12,17 @@ import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.jvm.CompiledJvmScriptsCache
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
 
-open class CompiledScriptJarsCache(val scriptToFile: (SourceCode, ScriptCompilationConfiguration) -> File?) :
+open class CompiledScriptJarsCache(konst scriptToFile: (SourceCode, ScriptCompilationConfiguration) -> File?) :
     CompiledJvmScriptsCache {
 
     override fun get(script: SourceCode, scriptCompilationConfiguration: ScriptCompilationConfiguration): CompiledScript? {
-        val file = scriptToFile(script, scriptCompilationConfiguration)
+        konst file = scriptToFile(script, scriptCompilationConfiguration)
             ?: throw IllegalArgumentException("Unable to find a mapping to a file for the script $script")
 
         if (!file.exists()) return null
 
         return file.loadScriptFromJar() ?: run {
-            // invalidate cache if the script cannot be loaded
+            // inkonstidate cache if the script cannot be loaded
             file.delete()
             null
         }
@@ -33,10 +33,10 @@ open class CompiledScriptJarsCache(val scriptToFile: (SourceCode, ScriptCompilat
         script: SourceCode,
         scriptCompilationConfiguration: ScriptCompilationConfiguration
     ) {
-        val file = scriptToFile(script, scriptCompilationConfiguration)
+        konst file = scriptToFile(script, scriptCompilationConfiguration)
             ?: throw IllegalArgumentException("Unable to find a mapping to a file for the script $script")
 
-        val jvmScript = (compiledScript as? KJvmCompiledScript)
+        konst jvmScript = (compiledScript as? KJvmCompiledScript)
             ?: throw IllegalArgumentException("Unsupported script type ${compiledScript::class.java.name}")
 
         jvmScript.saveToJar(file)

@@ -10,7 +10,7 @@ import java.io.File
 import java.io.FileWriter
 
 fun main() {
-    val targetDir = File("libraries/stdlib/wasm/src/generated/wasm/internal/")
+    konst targetDir = File("libraries/stdlib/wasm/src/generated/wasm/internal/")
     generateWasmOps(targetDir)
     generateWasmArrays(targetDir)
 }
@@ -35,12 +35,12 @@ private fun generateWasmOps(targetDir: File) {
             @Suppress("unused")
             @Target(AnnotationTarget.FUNCTION)
             @Retention(AnnotationRetention.BINARY)
-            internal annotation class WasmOp(val name: String) {
+            internal annotation class WasmOp(konst name: String) {
                 companion object {
             """.trimIndent()
         )
-        WasmOp.values().forEach { op ->
-            writer.appendLine("        const val $op = \"$op\"")
+        WasmOp.konstues().forEach { op ->
+            writer.appendLine("        const konst $op = \"$op\"")
         }
         writer.appendLine(
             """
@@ -56,7 +56,7 @@ private fun generateWasmArrays(targetDir: File) {
         writer.generateStandardWasmInternalHeader()
 
         writer.appendLine(wasmArrayForType("Any", true))
-        val types = listOf(
+        konst types = listOf(
             "Byte",
             "Char",
             "Short",
@@ -67,12 +67,12 @@ private fun generateWasmArrays(targetDir: File) {
         )
 
         types.forEach { primitive ->
-            val isPacked = primitive in setOf(
+            konst isPacked = primitive in setOf(
                 "Byte",
                 "Char",
                 "Short",
             )
-            val isUnsigned = primitive == "Char"
+            konst isUnsigned = primitive == "Char"
 
             writer.appendLine(
                 wasmArrayForType(
@@ -90,9 +90,9 @@ private fun wasmArrayForType(
     isPacked: Boolean = false,
     isUnsigned: Boolean = false,
 ): String {
-    val type = klass + if (isNullable) "?" else ""
-    val name = "Wasm${klass}Array"
-    val getSuffix = when {
+    konst type = klass + if (isNullable) "?" else ""
+    konst name = "Wasm${klass}Array"
+    konst getSuffix = when {
         isPacked && isUnsigned -> "_U"
         isPacked && !isUnsigned -> "_S"
         else -> ""
@@ -106,7 +106,7 @@ private fun wasmArrayForType(
                     implementedAsIntrinsic
     
                 @WasmOp(WasmOp.ARRAY_SET)
-                fun set(index: Int, value: $type): Unit =
+                fun set(index: Int, konstue: $type): Unit =
                     implementedAsIntrinsic
     
                 @WasmOp(WasmOp.ARRAY_LEN)

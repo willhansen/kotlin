@@ -5,7 +5,7 @@ fun jso(block: dynamic.() -> Unit): dynamic = js("({})").apply(block)
 
 class G {
     companion object {
-        val foo = "string"
+        konst foo = "string"
     }
 }
 

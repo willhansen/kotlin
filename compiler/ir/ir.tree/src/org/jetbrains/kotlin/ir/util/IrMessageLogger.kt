@@ -14,7 +14,7 @@ interface IrMessageLogger {
         INFO, WARNING, ERROR
     }
 
-    data class Location(val filePath: String, val line: Int, val column: Int)
+    data class Location(konst filePath: String, konst line: Int, konst column: Int)
 
     fun report(severity: Severity, message: String, location: Location?)
 
@@ -24,9 +24,9 @@ interface IrMessageLogger {
 
     companion object {
         @JvmStatic
-        val IR_MESSAGE_LOGGER = CompilerConfigurationKey<IrMessageLogger>("ir message logger")
+        konst IR_MESSAGE_LOGGER = CompilerConfigurationKey<IrMessageLogger>("ir message logger")
     }
 }
 
-val CompilerConfiguration.irMessageLogger: IrMessageLogger
+konst CompilerConfiguration.irMessageLogger: IrMessageLogger
     get() = this[IrMessageLogger.IR_MESSAGE_LOGGER] ?: IrMessageLogger.None

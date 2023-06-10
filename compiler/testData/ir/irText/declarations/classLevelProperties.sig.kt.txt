@@ -5,7 +5,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test1
   //   Public signature: /C.test1|6005685442305498193[0]
-  val test1: Int
+  konst test1: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test1>(){}kotlin.Int
     //   Public signature: /C.test1.<get-test1>|3978508226793108919[0]
@@ -44,7 +44,7 @@ class C {
     // CHECK:
     //   Mangled name: C#<set-test4>(kotlin.Int){}
     //   Public signature: /C.test4.<set-test4>|8105340104867729538[0]
-    set(value: Int): Unit
+    set(konstue: Int): Unit
 
   // CHECK:
   //   Mangled name: C{}test5
@@ -65,7 +65,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test6
   //   Public signature: /C.test6|-2606527149405855403[0]
-  val test6: Int
+  konst test6: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test6>(){}kotlin.Int
     //   Public signature: /C.test6.<get-test6>|-7378740493776144578[0]
@@ -77,7 +77,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test7
   //   Public signature: /C.test7|1362036650170262859[0]
-  val test7: Int /* by */
+  konst test7: Int /* by */
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test7>(){}kotlin.Int
     //   Public signature: /C.test7.<get-test7>|-7305979124924885797[0]
@@ -110,7 +110,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test2
   //   Public signature: /C.test2|2517758057000911509[0]
-  val test2: Int
+  konst test2: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test2>(){}kotlin.Int
     //   Public signature: /C.test2.<get-test2>|-8779933517717592707[0]

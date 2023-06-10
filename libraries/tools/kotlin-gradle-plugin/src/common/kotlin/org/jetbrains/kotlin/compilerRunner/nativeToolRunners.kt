@@ -23,23 +23,23 @@ import java.io.File
 import java.nio.file.Files
 import java.util.*
 
-private val Project.jvmArgs
+private konst Project.jvmArgs
     get() = PropertiesProvider(this).nativeJvmArgs?.split("\\s+".toRegex()).orEmpty()
 
-internal val Project.konanHome: String
+internal konst Project.konanHome: String
     get() = PropertiesProvider(this).nativeHome?.let { file(it).absolutePath }
         ?: NativeCompilerDownloader(project).compilerDirectory.absolutePath
 
-internal val Project.disableKonanDaemon: Boolean
+internal konst Project.disableKonanDaemon: Boolean
     get() = PropertiesProvider(this).nativeDisableCompilerDaemon == true
 
-internal val Project.konanVersion: String
+internal konst Project.konanVersion: String
     get() = PropertiesProvider(this).nativeVersion
         ?: NativeCompilerDownloader.DEFAULT_KONAN_VERSION
 
 internal fun Project.getKonanCacheKind(target: KonanTarget): NativeCacheKind {
-    val commonCacheKind = PropertiesProvider(this).nativeCacheKind
-    val targetCacheKind = PropertiesProvider(this).nativeCacheKindForTarget(target)
+    konst commonCacheKind = PropertiesProvider(this).nativeCacheKind
+    konst targetCacheKind = PropertiesProvider(this).nativeCacheKindForTarget(target)
     return when {
         targetCacheKind != null -> targetCacheKind
         commonCacheKind != null -> commonCacheKind
@@ -59,7 +59,7 @@ internal fun Project.getKonanParallelThreads(): Int {
     return PropertiesProvider(this).nativeParallelThreads ?: 4
 }
 
-private val Project.kotlinNativeCompilerJar: String
+private konst Project.kotlinNativeCompilerJar: String
     get() = if (nativeUseEmbeddableCompilerJar)
         "$konanHome/konan/lib/kotlin-native-compiler-embeddable.jar"
     else
@@ -67,18 +67,18 @@ private val Project.kotlinNativeCompilerJar: String
 
 
 internal abstract class KotlinNativeToolRunner(
-    protected val toolName: String,
-    private val settings: Settings,
+    protected konst toolName: String,
+    private konst settings: Settings,
     executionContext: GradleExecutionContext
 ) : KotlinToolRunner(executionContext) {
 
     class Settings(
-        val konanVersion: String,
-        val konanHome: String,
-        val konanPropertiesFile: File,
-        val useXcodeMessageStyle: Boolean,
-        val jvmArgs: List<String>,
-        val classpath: FileCollection
+        konst konanVersion: String,
+        konst konanHome: String,
+        konst konanPropertiesFile: File,
+        konst useXcodeMessageStyle: Boolean,
+        konst jvmArgs: List<String>,
+        konst classpath: FileCollection
     ) {
         companion object {
             fun fromProject(project: Project) = Settings(
@@ -92,14 +92,14 @@ internal abstract class KotlinNativeToolRunner(
         }
     }
 
-    final override val displayName get() = toolName
+    final override konst displayName get() = toolName
 
-    final override val mainClass get() = "org.jetbrains.kotlin.cli.utilities.MainKt"
-    final override val daemonEntryPoint
+    final override konst mainClass get() = "org.jetbrains.kotlin.cli.utilities.MainKt"
+    final override konst daemonEntryPoint
         get() = if (!settings.useXcodeMessageStyle) "daemonMain" else "daemonMainWithXcodeRenderer"
 
     // We need to unset some environment variables which are set by XCode and may potentially affect the tool executed.
-    final override val execEnvironmentBlacklist: Set<String> by lazy {
+    final override konst execEnvironmentBlacklist: Set<String> by lazy {
         HashSet<String>().also { collector ->
             KotlinNativeToolRunner::class.java.getResourceAsStream("/env_blacklist")?.let { stream ->
                 stream.reader().use { r -> r.forEachLine { collector.add(it) } }
@@ -107,12 +107,12 @@ internal abstract class KotlinNativeToolRunner(
         }
     }
 
-    final override val execSystemProperties by lazy {
-        val messageRenderer = if (settings.useXcodeMessageStyle) MessageRenderer.XCODE_STYLE else MessageRenderer.GRADLE_STYLE
+    final override konst execSystemProperties by lazy {
+        konst messageRenderer = if (settings.useXcodeMessageStyle) MessageRenderer.XCODE_STYLE else MessageRenderer.GRADLE_STYLE
         mapOf(MessageRenderer.PROPERTY_KEY to messageRenderer.name)
     }
 
-    final override val classpath get() = settings.classpath.files
+    final override konst classpath get() = settings.classpath.files
 
     final override fun checkClasspath() =
         check(classpath.isNotEmpty()) {
@@ -123,10 +123,10 @@ internal abstract class KotlinNativeToolRunner(
             """.trimIndent()
         }
 
-    data class IsolatedClassLoaderCacheKey(val classpath: Set<File>)
+    data class IsolatedClassLoaderCacheKey(konst classpath: Set<File>)
 
     // TODO: can't we use this for other implementations too?
-    final override val isolatedClassLoaderCacheKey get() = IsolatedClassLoaderCacheKey(classpath)
+    final override konst isolatedClassLoaderCacheKey get() = IsolatedClassLoaderCacheKey(classpath)
 
     override fun transformArgs(args: List<String>) = listOf(toolName) + args
 
@@ -140,10 +140,10 @@ internal abstract class AbstractKotlinNativeCInteropRunner(
     executionContext: GradleExecutionContext
 ) : KotlinNativeToolRunner(toolName, settings, executionContext) {
 
-    override val mustRunViaExec get() = true
+    override konst mustRunViaExec get() = true
 
-    override val execEnvironment by lazy {
-        val result = mutableMapOf<String, String>()
+    override konst execEnvironment by lazy {
+        konst result = mutableMapOf<String, String>()
         result.putAll(super.execEnvironment)
         result["LIBCLANG_DISABLE_CRASH_RECOVERY"] = "1"
         llvmExecutablesPath?.let {
@@ -152,10 +152,10 @@ internal abstract class AbstractKotlinNativeCInteropRunner(
         result
     }
 
-    private val llvmExecutablesPath: String? by lazy {
+    private konst llvmExecutablesPath: String? by lazy {
         if (HostManager.host == KonanTarget.MINGW_X64) {
             // TODO: Read it from Platform properties when it is accessible.
-            val konanProperties = Properties().apply {
+            konst konanProperties = Properties().apply {
                 settings.konanPropertiesFile.inputStream().use(::load)
             }
 
@@ -172,19 +172,19 @@ internal abstract class AbstractKotlinNativeCInteropRunner(
 /** Kotlin/Native C-interop tool runner */
 internal class KotlinNativeCInteropRunner
 private constructor(
-    private val settings: Settings,
+    private konst settings: Settings,
     gradleExecutionContext: GradleExecutionContext,
 ) : AbstractKotlinNativeCInteropRunner("cinterop", settings, gradleExecutionContext) {
 
     interface ExecutionContext {
-        val runnerSettings: Settings
-        val gradleExecutionContext: GradleExecutionContext
+        konst runnerSettings: Settings
+        konst gradleExecutionContext: GradleExecutionContext
         fun runWithContext(action: () -> Unit)
     }
 
     companion object {
         fun ExecutionContext.run(args: List<String>) {
-            val runner = KotlinNativeCInteropRunner(runnerSettings, gradleExecutionContext)
+            konst runner = KotlinNativeCInteropRunner(runnerSettings, gradleExecutionContext)
             runWithContext { runner.run(args) }
         }
     }
@@ -192,12 +192,12 @@ private constructor(
 
 /** Kotlin/Native compiler runner */
 internal class KotlinNativeCompilerRunner(
-    private val settings: Settings,
+    private konst settings: Settings,
     executionContext: GradleExecutionContext
 ) : KotlinNativeToolRunner("konanc", settings.parent, executionContext) {
     class Settings(
-        val parent: KotlinNativeToolRunner.Settings,
-        val disableKonanDaemon: Boolean,
+        konst parent: KotlinNativeToolRunner.Settings,
+        konst disableKonanDaemon: Boolean,
     ) {
         companion object {
             fun fromProject(project: Project) = Settings(
@@ -207,17 +207,17 @@ internal class KotlinNativeCompilerRunner(
         }
     }
 
-    private val useArgFile get() = settings.disableKonanDaemon
+    private konst useArgFile get() = settings.disableKonanDaemon
 
-    override val mustRunViaExec get() = settings.disableKonanDaemon
+    override konst mustRunViaExec get() = settings.disableKonanDaemon
 
     override fun transformArgs(args: List<String>): List<String> {
         if (!useArgFile) return super.transformArgs(args)
 
-        val argFile = Files.createTempFile(/* prefix = */ "kotlinc-native-args", /* suffix = */ ".lst").toFile().apply { deleteOnExit() }
+        konst argFile = Files.createTempFile(/* prefix = */ "kotlinc-native-args", /* suffix = */ ".lst").toFile().apply { deleteOnExit() }
         argFile.printWriter().use { w ->
             args.forEach { arg ->
-                val escapedArg = arg
+                konst escapedArg = arg
                     .replace("\\", "\\\\")
                     .replace("\"", "\\\"")
                 w.println("\"$escapedArg\"")
@@ -230,7 +230,7 @@ internal class KotlinNativeCompilerRunner(
 
 /** Platform libraries generation tool. Runs the cinterop tool under the hood. */
 internal class KotlinNativeLibraryGenerationRunner(
-    private val settings: Settings,
+    private konst settings: Settings,
     executionContext: GradleExecutionContext
 ) :
     AbstractKotlinNativeCInteropRunner("generatePlatformLibraries", settings, executionContext) {
@@ -243,5 +243,5 @@ internal class KotlinNativeLibraryGenerationRunner(
     }
 
     // The library generator works for a long time so enabling C2 can improve performance.
-    override val disableC2: Boolean = false
+    override konst disableC2: Boolean = false
 }

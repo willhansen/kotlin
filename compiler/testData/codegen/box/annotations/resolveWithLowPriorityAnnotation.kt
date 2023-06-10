@@ -12,13 +12,13 @@ fun bar(a: String?) = 3
 
 fun bar(a: Any) = 4
 
-class MyString(val value: String)
+class MyString(konst konstue: String)
 
 class Baz
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 @kotlin.internal.LowPriorityInOverloadResolution
-constructor(val s: String) {
-    constructor(s: MyString): this(s.value)
+constructor(konst s: String) {
+    constructor(s: MyString): this(s.konstue)
 }
 
 fun Baz(s: String) = Baz(MyString(s + "!"))

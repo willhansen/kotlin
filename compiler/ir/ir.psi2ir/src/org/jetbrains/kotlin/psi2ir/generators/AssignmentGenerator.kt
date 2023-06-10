@@ -47,20 +47,20 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
         return if (getResolvedCall(ktExpression) != null) {
             generateAugmentedAssignment(ktExpression, origin)
         } else {
-            val ktLeft = ktExpression.left!!
-            val irRhs = ktExpression.right!!.genExpr()
-            val irAssignmentReceiver = generateAssignmentReceiver(ktLeft, IrStatementOrigin.EQ)
+            konst ktLeft = ktExpression.left!!
+            konst irRhs = ktExpression.right!!.genExpr()
+            konst irAssignmentReceiver = generateAssignmentReceiver(ktLeft, IrStatementOrigin.EQ)
             irAssignmentReceiver.assign(irRhs)
         }
     }
 
     fun generateAugmentedAssignment(ktExpression: KtBinaryExpression, origin: IrStatementOrigin): IrExpression {
-        val opResolvedCall = getResolvedCall(ktExpression)!!
-        val isSimpleAssignment = get(BindingContext.VARIABLE_REASSIGNMENT, ktExpression) ?: false
-        val ktLeft = ktExpression.left!!
-        val ktRight = ktExpression.right!!
-        val irAssignmentReceiver = generateAssignmentReceiver(ktLeft, origin, isAugmentedAssignment = true)
-        val isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
+        konst opResolvedCall = getResolvedCall(ktExpression)!!
+        konst isSimpleAssignment = get(BindingContext.VARIABLE_REASSIGNMENT, ktExpression) ?: false
+        konst ktLeft = ktExpression.left!!
+        konst ktRight = ktExpression.right!!
+        konst irAssignmentReceiver = generateAssignmentReceiver(ktLeft, origin, isAugmentedAssignment = true)
+        konst isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
 
         return irAssignmentReceiver.assign { irLValue ->
             if (isDynamicCall) {
@@ -73,11 +73,11 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                     right = ktRight.genExpr()
                 }
             } else {
-                val opCall = statementGenerator.pregenerateCallReceivers(opResolvedCall)
+                konst opCall = statementGenerator.pregenerateCallReceivers(opResolvedCall)
                 opCall.setExplicitReceiverValue(irLValue)
                 opCall.irValueArgumentsByIndex[0] = ktRight.genExpr()
                 statementGenerator.generateSamConversionForValueArgumentsIfRequired(opCall, opResolvedCall)
-                val irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
+                konst irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
 
                 if (isSimpleAssignment) {
                     // Set( Op( Get(), RHS ) )
@@ -101,14 +101,14 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
         }
 
     fun generatePrefixIncrementDecrement(ktExpression: KtPrefixExpression, origin: IrStatementOrigin): IrExpression {
-        val opResolvedCall = getResolvedCall(ktExpression)!!
-        val ktBaseExpression = ktExpression.baseExpression!!
-        val irAssignmentReceiver = generateAssignmentReceiver(ktBaseExpression, origin, isAssignmentStatement = false)
-        val isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
+        konst opResolvedCall = getResolvedCall(ktExpression)!!
+        konst ktBaseExpression = ktExpression.baseExpression!!
+        konst irAssignmentReceiver = generateAssignmentReceiver(ktBaseExpression, origin, isAssignmentStatement = false)
+        konst isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
 
         return irAssignmentReceiver.assign { irLValue ->
-            val startOffset = ktExpression.startOffsetSkippingComments
-            val endOffset = ktExpression.endOffset
+            konst startOffset = ktExpression.startOffsetSkippingComments
+            konst endOffset = ktExpression.endOffset
 
             if (isDynamicCall) {
                 IrDynamicOperatorExpressionImpl(
@@ -123,9 +123,9 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                 }
             } else {
                 irBlock(startOffset, endOffset, origin, irLValue.type) {
-                    val opCall = statementGenerator.pregenerateCall(opResolvedCall)
+                    konst opCall = statementGenerator.pregenerateCall(opResolvedCall)
                     opCall.setExplicitReceiverValue(irLValue)
-                    val irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
+                    konst irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
                     +irLValue.store(irOpCall)
                     +irLValue.load()
                 }
@@ -134,12 +134,12 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
     }
 
     fun generatePostfixIncrementDecrement(ktExpression: KtPostfixExpression, origin: IrStatementOrigin): IrExpression {
-        val opResolvedCall = getResolvedCall(ktExpression)!!
-        val ktBaseExpression = ktExpression.baseExpression!!
-        val irAssignmentReceiver = generateAssignmentReceiver(ktBaseExpression, origin, isAssignmentStatement = false)
-        val isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
-        val startOffset = ktExpression.startOffsetSkippingComments
-        val endOffset = ktExpression.endOffset
+        konst opResolvedCall = getResolvedCall(ktExpression)!!
+        konst ktBaseExpression = ktExpression.baseExpression!!
+        konst irAssignmentReceiver = generateAssignmentReceiver(ktBaseExpression, origin, isAssignmentStatement = false)
+        konst isDynamicCall = opResolvedCall.resultingDescriptor.isDynamic()
+        konst startOffset = ktExpression.startOffsetSkippingComments
+        konst endOffset = ktExpression.endOffset
 
         return irAssignmentReceiver.assign { irLValue ->
             if (isDynamicCall) {
@@ -155,12 +155,12 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                 }
             } else {
                 irBlock(startOffset, endOffset, origin, irLValue.type) {
-                    val temporary = irTemporary(irLValue.load())
-                    val opCall = statementGenerator.pregenerateCall(opResolvedCall)
+                    konst temporary = irTemporary(irLValue.load())
+                    konst opCall = statementGenerator.pregenerateCall(opResolvedCall)
                     opCall.setExplicitReceiverValue(
                         VariableLValue(context, startOffset, endOffset, temporary.symbol, temporary.type)
                     )
-                    val irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
+                    konst irOpCall = CallGenerator(statementGenerator).generateCall(ktExpression, opCall, origin)
                     +irLValue.store(irOpCall)
                     +irGet(temporary.type, temporary.symbol)
                 }
@@ -174,20 +174,20 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
         isAssignmentStatement: Boolean = true,
         isAugmentedAssignment: Boolean = false
     ): AssignmentReceiver {
-        val ktExpr = KtPsiUtil.safeDeparenthesize(ktLeft)
+        konst ktExpr = KtPsiUtil.safeDeparenthesize(ktLeft)
         if (ktExpr is KtArrayAccessExpression) {
             return generateArrayAccessAssignmentReceiver(ktExpr, origin)
         }
 
-        val resolvedCall = getResolvedCall(ktExpr)
+        konst resolvedCall = getResolvedCall(ktExpr)
             ?: return generateExpressionAssignmentReceiver(ktExpr, origin, isAssignmentStatement)
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
 
-        val startOffset = ktExpr.startOffsetSkippingComments
-        val endOffset = ktExpr.endOffset
+        konst startOffset = ktExpr.startOffsetSkippingComments
+        konst endOffset = ktExpr.endOffset
         return when (descriptor) {
             is SyntheticFieldDescriptor -> {
-                val receiverValue =
+                konst receiverValue =
                     statementGenerator.generateBackingFieldReceiver(
                         startOffset, endOffset,
                         resolvedCall,
@@ -294,12 +294,12 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                     )
                 )
             origin == IrStatementOrigin.EQ && !descriptor.isVar && !isAugmentedAssignment -> {
-                // An assignment to a val property can only be its initialization in the constructor or an augmented assignment.
-                val receiver = resolvedCall.dispatchReceiver ?: descriptor.dispatchReceiverParameter?.value
+                // An assignment to a konst property can only be its initialization in the constructor or an augmented assignment.
+                konst receiver = resolvedCall.dispatchReceiver ?: descriptor.dispatchReceiverParameter?.konstue
                 createBackingFieldLValue(ktLeft, descriptor, statementGenerator.generateReceiverOrNull(ktLeft, receiver), null)
             }
             else -> {
-                val propertyReceiver = statementGenerator.generateCallReceiver(
+                konst propertyReceiver = statementGenerator.generateCallReceiver(
                     ktLeft, descriptor, resolvedCall.dispatchReceiver,
                     resolvedCall.extensionReceiver,
                     resolvedCall.contextReceivers,
@@ -307,8 +307,8 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                     isAssignmentReceiver = isAssignmentStatement
                 )
 
-                val superQualifier = getSuperQualifier(resolvedCall)
-                val candidateDescriptor = resolvedCall.candidateDescriptor as PropertyDescriptor
+                konst superQualifier = getSuperQualifier(resolvedCall)
+                konst candidateDescriptor = resolvedCall.candidateDescriptor as PropertyDescriptor
 
                 // TODO property imported from an object
                 createPropertyLValue(
@@ -333,18 +333,18 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
         superQualifier: ClassDescriptor?
     ): PropertyLValueBase {
 
-        val unwrappedPropertyDescriptor = resultingDescriptor.unwrapPropertyDescriptor()
-        val getterDescriptor = unwrappedPropertyDescriptor.unwrappedGetMethod
-        val setterDescriptor = unwrappedPropertyDescriptor.unwrappedSetMethod
+        konst unwrappedPropertyDescriptor = resultingDescriptor.unwrapPropertyDescriptor()
+        konst getterDescriptor = unwrappedPropertyDescriptor.unwrappedGetMethod
+        konst setterDescriptor = unwrappedPropertyDescriptor.unwrappedSetMethod
             ?.takeUnless { it.visibility == DescriptorVisibilities.INVISIBLE_FAKE }
 
-        val getterSymbol = getterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it.original) }
-        val setterSymbol = setterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it.original) }
+        konst getterSymbol = getterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it.original) }
+        konst setterSymbol = setterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it.original) }
 
-        val propertyIrType = resultingDescriptor.type.toIrType()
+        konst propertyIrType = resultingDescriptor.type.toIrType()
         return if (getterSymbol != null || setterSymbol != null) {
-            val superQualifierSymbol = superQualifier?.let { context.symbolTable.referenceClass(it) }
-            val typeArgumentsList =
+            konst superQualifierSymbol = superQualifier?.let { context.symbolTable.referenceClass(it) }
+            konst typeArgumentsList =
                 typeArgumentsMap?.let { typeArguments ->
                     candidateDescriptor.typeParameters.map {
                         typeArguments[it]!!.toIrType()
@@ -368,7 +368,7 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
                 superQualifierSymbol
             )
         } else {
-            val superQualifierSymbol = (superQualifier
+            konst superQualifierSymbol = (superQualifier
                 ?: unwrappedPropertyDescriptor.containingDeclaration as? ClassDescriptor)?.let { context.symbolTable.referenceClass(it) }
             FieldPropertyLValue(
                 context,
@@ -387,8 +387,8 @@ internal class AssignmentGenerator(statementGenerator: StatementGenerator) : Sta
         ktArrayExpr: KtArrayAccessExpression,
         origin: IrStatementOrigin
     ): ArrayAccessAssignmentReceiver {
-        val indexedGetResolvedCall = get(BindingContext.INDEXED_LVALUE_GET, ktArrayExpr)
-        val indexedSetResolvedCall = get(BindingContext.INDEXED_LVALUE_SET, ktArrayExpr)
+        konst indexedGetResolvedCall = get(BindingContext.INDEXED_LVALUE_GET, ktArrayExpr)
+        konst indexedSetResolvedCall = get(BindingContext.INDEXED_LVALUE_SET, ktArrayExpr)
 
         return ArrayAccessAssignmentReceiver(
             ktArrayExpr.arrayExpression!!.genExpr(),

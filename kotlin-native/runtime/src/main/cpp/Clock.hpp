@@ -30,9 +30,9 @@ Ret waitUntilViaFor(
         }
         auto left = until - current;
         // Shield standard library from saturating types.
-        auto interval = left > step ? std::chrono::duration<Rep, Period>(step) : std::chrono::duration<Rep, Period>(left);
-        if (auto value = std::invoke(std::forward<WaitForF>(waitForF), interval); value != timeoutValue) {
-            return value;
+        auto interkonst = left > step ? std::chrono::duration<Rep, Period>(step) : std::chrono::duration<Rep, Period>(left);
+        if (auto konstue = std::invoke(std::forward<WaitForF>(waitForF), interkonst); konstue != timeoutValue) {
+            return konstue;
         }
     }
 }
@@ -50,8 +50,8 @@ void waitUntilViaFor(
         }
         auto left = until - current;
         // Shield standard library from saturating types.
-        auto interval = left > step ? std::chrono::duration<Rep, Period>(step) : std::chrono::duration<Rep, Period>(left);
-        std::invoke(std::forward<WaitForF>(waitForF), interval);
+        auto interkonst = left > step ? std::chrono::duration<Rep, Period>(step) : std::chrono::duration<Rep, Period>(left);
+        std::invoke(std::forward<WaitForF>(waitForF), interkonst);
     }
 }
 
@@ -65,7 +65,7 @@ template <typename Lock>
 struct IsStdCV<std::condition_variable_any, Lock> : public std::true_type {};
 
 template <typename T, typename Lock>
-inline constexpr bool isStdCV = IsStdCV<T, Lock>::value;
+inline constexpr bool isStdCV = IsStdCV<T, Lock>::konstue;
 
 template <typename T>
 struct IsStdFuture : public std::false_type {};
@@ -77,15 +77,15 @@ template <typename T>
 struct IsStdFuture<std::shared_future<T>> : public std::true_type {};
 
 template <typename T>
-inline constexpr bool isStdFuture = IsStdFuture<T>::value;
+inline constexpr bool isStdFuture = IsStdFuture<T>::konstue;
 
 template <typename Clock>
 class ClockWaitImpl {
 public:
     template <typename Rep, typename Period>
-    static void sleep_for(std::chrono::duration<Rep, Period> interval) {
-        // Not using this_thread::sleep_for, because it may mishandle "infinite" intervals. Use saturating arithmetics to address this.
-        return ClockWaitImpl<Clock>::sleep_until(Clock::now() + interval);
+    static void sleep_for(std::chrono::duration<Rep, Period> interkonst) {
+        // Not using this_thread::sleep_for, because it may mishandle "infinite" interkonsts. Use saturating arithmetics to address this.
+        return ClockWaitImpl<Clock>::sleep_until(Clock::now() + interkonst);
     }
 
     template <typename Rep, typename Period>
@@ -98,18 +98,18 @@ public:
     }
 
     template <typename CV, typename Lock, typename Rep, typename Period, typename F, typename = std::enable_if_t<isStdCV<CV, Lock>>>
-    static bool wait_for(CV& cv, Lock& lock, std::chrono::duration<Rep, Period> interval, F&& f) {
-        // Not using cv.wait_for, because it may mishandle "infinite" intervals. Use saturating arithmetics to address this.
-        return ClockWaitImpl<Clock>::wait_until(cv, lock, Clock::now() + interval, std::forward<F>(f));
+    static bool wait_for(CV& cv, Lock& lock, std::chrono::duration<Rep, Period> interkonst, F&& f) {
+        // Not using cv.wait_for, because it may mishandle "infinite" interkonsts. Use saturating arithmetics to address this.
+        return ClockWaitImpl<Clock>::wait_until(cv, lock, Clock::now() + interkonst, std::forward<F>(f));
     }
 
     template <typename CV, typename Lock, typename Rep, typename Period, typename F, typename = std::enable_if_t<isStdCV<CV, Lock>>>
     static bool wait_until(CV& cv, Lock& lock, std::chrono::time_point<Clock, std::chrono::duration<Rep, Period>> until, F&& f) {
         if constexpr (is_saturating_v<Rep>) {
             [[maybe_unused]] auto pendingWait = Clock::addPendingWait(until);
-            // Implement in terms of repeated cv.wait_for of non-"infinite" intervals.
-            return internal::waitUntilViaFor(&Clock::now, Clock::wait_step, until, false, [&](auto interval) {
-                return cv.wait_for(lock, interval, std::forward<F>(f));
+            // Implement in terms of repeated cv.wait_for of non-"infinite" interkonsts.
+            return internal::waitUntilViaFor(&Clock::now, Clock::wait_step, until, false, [&](auto interkonst) {
+                return cv.wait_for(lock, interkonst, std::forward<F>(f));
             });
         } else {
             return ClockWaitImpl<Clock>::wait_until(
@@ -118,18 +118,18 @@ public:
     }
 
     template <typename Future, typename Rep, typename Period, typename = std::enable_if_t<isStdFuture<Future>>>
-    static std::future_status wait_for(const Future& future, std::chrono::duration<Rep, Period> interval) {
-        // Not using future.wait_for, because it may mishandle "infinite" intervals. Use saturating arithmetics to address this.
-        return ClockWaitImpl<Clock>::wait_until(future, Clock::now() + interval);
+    static std::future_status wait_for(const Future& future, std::chrono::duration<Rep, Period> interkonst) {
+        // Not using future.wait_for, because it may mishandle "infinite" interkonsts. Use saturating arithmetics to address this.
+        return ClockWaitImpl<Clock>::wait_until(future, Clock::now() + interkonst);
     }
 
     template <typename Future, typename Rep, typename Period, typename = std::enable_if_t<isStdFuture<Future>>>
     static std::future_status wait_until(const Future& future, std::chrono::time_point<Clock, std::chrono::duration<Rep, Period>> until) {
         if constexpr (is_saturating_v<Rep>) {
             [[maybe_unused]] auto pendingWait = Clock::addPendingWait(until);
-            // Implement in terms of repeated future.wait_for of non-"infinite" intervals.
-            return internal::waitUntilViaFor(&Clock::now, Clock::wait_step, until, std::future_status::timeout, [&](auto interval) {
-                return future.wait_for(interval);
+            // Implement in terms of repeated future.wait_for of non-"infinite" interkonsts.
+            return internal::waitUntilViaFor(&Clock::now, Clock::wait_step, until, std::future_status::timeout, [&](auto interkonst) {
+                return future.wait_for(interkonst);
             });
         } else {
             return ClockWaitImpl<Clock>::wait_until(
@@ -169,8 +169,8 @@ private:
 
     template <typename Rep, typename Period>
     static void sleepImpl(std::chrono::time_point<steady_clock, std::chrono::duration<saturating<Rep>, Period>> until) {
-        // Implement in terms of repeated this_thread::sleep_for of non-"infinite" intervals.
-        return internal::waitUntilViaFor(&now, wait_step, until, [&](auto interval) { std::this_thread::sleep_for(interval); });
+        // Implement in terms of repeated this_thread::sleep_for of non-"infinite" interkonsts.
+        return internal::waitUntilViaFor(&now, wait_step, until, [&](auto interkonst) { std::this_thread::sleep_for(interkonst); });
     }
 
     template <typename Rep, typename Period>

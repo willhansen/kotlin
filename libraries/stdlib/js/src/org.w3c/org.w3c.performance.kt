@@ -16,53 +16,53 @@ import org.w3c.dom.events.*
  * Exposes the JavaScript [Performance](https://developer.mozilla.org/en/docs/Web/API/Performance) to Kotlin
  */
 public external abstract class Performance : EventTarget {
-    open val timing: PerformanceTiming
-    open val navigation: PerformanceNavigation
+    open konst timing: PerformanceTiming
+    open konst navigation: PerformanceNavigation
     fun now(): Double
 }
 
 public external interface GlobalPerformance {
-    val performance: Performance
+    konst performance: Performance
 }
 
 /**
  * Exposes the JavaScript [PerformanceTiming](https://developer.mozilla.org/en/docs/Web/API/PerformanceTiming) to Kotlin
  */
 public external abstract class PerformanceTiming {
-    open val navigationStart: Number
-    open val unloadEventStart: Number
-    open val unloadEventEnd: Number
-    open val redirectStart: Number
-    open val redirectEnd: Number
-    open val fetchStart: Number
-    open val domainLookupStart: Number
-    open val domainLookupEnd: Number
-    open val connectStart: Number
-    open val connectEnd: Number
-    open val secureConnectionStart: Number
-    open val requestStart: Number
-    open val responseStart: Number
-    open val responseEnd: Number
-    open val domLoading: Number
-    open val domInteractive: Number
-    open val domContentLoadedEventStart: Number
-    open val domContentLoadedEventEnd: Number
-    open val domComplete: Number
-    open val loadEventStart: Number
-    open val loadEventEnd: Number
+    open konst navigationStart: Number
+    open konst unloadEventStart: Number
+    open konst unloadEventEnd: Number
+    open konst redirectStart: Number
+    open konst redirectEnd: Number
+    open konst fetchStart: Number
+    open konst domainLookupStart: Number
+    open konst domainLookupEnd: Number
+    open konst connectStart: Number
+    open konst connectEnd: Number
+    open konst secureConnectionStart: Number
+    open konst requestStart: Number
+    open konst responseStart: Number
+    open konst responseEnd: Number
+    open konst domLoading: Number
+    open konst domInteractive: Number
+    open konst domContentLoadedEventStart: Number
+    open konst domContentLoadedEventEnd: Number
+    open konst domComplete: Number
+    open konst loadEventStart: Number
+    open konst loadEventEnd: Number
 }
 
 /**
  * Exposes the JavaScript [PerformanceNavigation](https://developer.mozilla.org/en/docs/Web/API/PerformanceNavigation) to Kotlin
  */
 public external abstract class PerformanceNavigation {
-    open val type: Short
-    open val redirectCount: Short
+    open konst type: Short
+    open konst redirectCount: Short
 
     companion object {
-        val TYPE_NAVIGATE: Short
-        val TYPE_RELOAD: Short
-        val TYPE_BACK_FORWARD: Short
-        val TYPE_RESERVED: Short
+        konst TYPE_NAVIGATE: Short
+        konst TYPE_RELOAD: Short
+        konst TYPE_BACK_FORWARD: Short
+        konst TYPE_RESERVED: Short
     }
 }

@@ -4,7 +4,7 @@ package foo
 
 
 fun box(): String {
-    val data = myArrayList("foo", "bar")
+    konst data = myArrayList("foo", "bar")
     if (data.myHead != "foo") {
         return "fail: ${data.myHead}"
     }
@@ -12,15 +12,15 @@ fun box(): String {
 }
 
 
-inline public fun <T> myArrayList(vararg values: T): ArrayList<T> {
-    val c = ArrayList<T>()
-    for (v in values) {
+inline public fun <T> myArrayList(vararg konstues: T): ArrayList<T> {
+    konst c = ArrayList<T>()
+    for (v in konstues) {
         c.add(v)
     }
     return c
 }
 
-public val <T> ArrayList<T>.myHead: T
+public konst <T> ArrayList<T>.myHead: T
     get() {
         return get(0)
     }

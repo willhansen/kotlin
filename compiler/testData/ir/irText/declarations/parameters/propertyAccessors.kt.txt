@@ -1,4 +1,4 @@
-val test1: Int
+konst test1: Int
   get(): Int {
     return 42
   }
@@ -7,10 +7,10 @@ var test2: Int
   get(): Int {
     return 42
   }
-  set(value: Int) {
+  set(konstue: Int) {
   }
 
-val String.testExt1: Int
+konst String.testExt1: Int
   get(): Int {
     return 42
   }
@@ -19,10 +19,10 @@ var String.testExt2: Int
   get(): Int {
     return 42
   }
-  set(value: Int) {
+  set(konstue: Int) {
   }
 
-val <T : Any?> T.testExt3: Int
+konst <T : Any?> T.testExt3: Int
   get(): Int {
     return 42
   }
@@ -31,7 +31,7 @@ var <T : Any?> T.testExt4: Int
   get(): Int {
     return 42
   }
-  set(value: Int) {
+  set(konstue: Int) {
   }
 
 class Host<T : Any?> {
@@ -41,7 +41,7 @@ class Host<T : Any?> {
 
   }
 
-  val testMem1: Int
+  konst testMem1: Int
     get(): Int {
       return 42
     }
@@ -50,10 +50,10 @@ class Host<T : Any?> {
     get(): Int {
       return 42
     }
-    set(value: Int) {
+    set(konstue: Int) {
     }
 
-  val String.testMemExt1: Int
+  konst String.testMemExt1: Int
     get(): Int {
       return 42
     }
@@ -62,10 +62,10 @@ class Host<T : Any?> {
     get(): Int {
       return 42
     }
-    set(value: Int) {
+    set(konstue: Int) {
     }
 
-  val <TT : Any?> TT.testMemExt3: Int
+  konst <TT : Any?> TT.testMemExt3: Int
     get(): Int {
       return 42
     }
@@ -74,7 +74,7 @@ class Host<T : Any?> {
     get(): Int {
       return 42
     }
-    set(value: Int) {
+    set(konstue: Int) {
     }
 
 }

@@ -14,9 +14,9 @@ interface ExtendedTest : Test {
 }
 
 class A() : ExtendedTest {
-    fun eval(): String {
+    fun ekonst(): String {
         return addFoo(hooray());
     }
 }
 
-fun box() = if (A().eval() == "hoorayFOO") "OK" else "fail"
+fun box() = if (A().ekonst() == "hoorayFOO") "OK" else "fail"

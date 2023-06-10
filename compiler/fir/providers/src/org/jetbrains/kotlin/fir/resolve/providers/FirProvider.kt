@@ -22,9 +22,9 @@ abstract class FirProvider : FirSessionComponent {
     /**
      * [symbolProvider] for [FirProvider] may provide only symbols from sources of current module
      */
-    abstract val symbolProvider: FirSymbolProvider
+    abstract konst symbolProvider: FirSymbolProvider
 
-    open val isPhasedFirAllowed: Boolean get() = false
+    open konst isPhasedFirAllowed: Boolean get() = false
 
     abstract fun getFirClassifierByFqName(classId: ClassId): FirClassLikeDeclaration?
 
@@ -47,4 +47,4 @@ abstract class FirProvider : FirSessionComponent {
     abstract fun getClassNamesInPackage(fqName: FqName): Set<Name>
 }
 
-val FirSession.firProvider: FirProvider by FirSession.sessionComponentAccessor()
+konst FirSession.firProvider: FirProvider by FirSession.sessionComponentAccessor()

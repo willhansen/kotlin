@@ -7,7 +7,7 @@ open class Foo {
     private lateinit var baz: String
 
     fun test(): String {
-        val isBarInitialized: () -> Boolean = { this::bar.isInitialized }
+        konst isBarInitialized: () -> Boolean = { this::bar.isInitialized }
         if (isBarInitialized()) return "Fail 1"
         bar = "bar"
         if (!isBarInitialized()) return "Fail 2"

@@ -27,10 +27,10 @@ import java.io.File
 import java.util.*
 
 fun classesFqNames(files: Set<File>): Set<String> {
-    val existingKotlinFiles = files.filter { it.name.endsWith(".kt", ignoreCase = true) && it.isFile }
+    konst existingKotlinFiles = files.filter { it.name.endsWith(".kt", ignoreCase = true) && it.isFile }
     if (existingKotlinFiles.isEmpty()) return emptySet()
 
-    val disposable = Disposer.newDisposable()
+    konst disposable = Disposer.newDisposable()
 
     return try {
         classesFqNames(existingKotlinFiles, disposable)
@@ -40,28 +40,28 @@ fun classesFqNames(files: Set<File>): Set<String> {
 }
 
 private fun classesFqNames(kotlinFiles: Collection<File>, disposable: Disposable): Set<String> {
-    val config = CompilerConfiguration()
+    konst config = CompilerConfiguration()
     config.put(JVMConfigurationKeys.NO_JDK, true)
     config.put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
     config.configureJdkClasspathRoots()
-    val configFiles = EnvironmentConfigFiles.JVM_CONFIG_FILES
-    val environment = KotlinCoreEnvironment.createForProduction(disposable, config, configFiles)
-    val psiManager = PsiManager.getInstance(environment.project)
-    val fileManager = VirtualFileManager.getInstance()
-    val localFS = fileManager.getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
+    konst configFiles = EnvironmentConfigFiles.JVM_CONFIG_FILES
+    konst environment = KotlinCoreEnvironment.createForProduction(disposable, config, configFiles)
+    konst psiManager = PsiManager.getInstance(environment.project)
+    konst fileManager = VirtualFileManager.getInstance()
+    konst localFS = fileManager.getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
 
-    val result = HashSet<String>()
+    konst result = HashSet<String>()
 
     for (file in kotlinFiles) {
-        val virtualFile = localFS.findFileByIoFile(file)!!
+        konst virtualFile = localFS.findFileByIoFile(file)!!
 
         for (psiFile in SingleRootFileViewProvider(psiManager, virtualFile).allFiles) {
             if (psiFile !is KtFile) continue
 
-            val classes = ArrayDeque<KtClassOrObject>()
+            konst classes = ArrayDeque<KtClassOrObject>()
             psiFile.declarations.filterClassesTo(classes)
             while (classes.isNotEmpty()) {
-                val klass = classes.pollFirst()
+                konst klass = classes.pollFirst()
                 klass.fqName?.let {
                     result.add(it.asString())
                 }

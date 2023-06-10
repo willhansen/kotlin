@@ -8,7 +8,7 @@ package kotlin.time
 import kotlin.jvm.JvmInline
 
 /**
- * A source of time for measuring time intervals.
+ * A source of time for measuring time interkonsts.
  *
  * The only operation provided by the time source is [markNow]. It returns a [TimeMark], which can be used to query the elapsed time later.
  *
@@ -22,7 +22,7 @@ public interface TimeSource {
      * Marks a point in time on this time source.
      *
      * The returned [TimeMark] instance encapsulates the captured time point and allows querying
-     * the duration of time interval [elapsed][TimeMark.elapsedNow] from that point.
+     * the duration of time interkonst [elapsed][TimeMark.elapsedNow] from that point.
      */
     public fun markNow(): TimeMark
 
@@ -41,8 +41,8 @@ public interface TimeSource {
      * This time source returns its readings from a source of monotonic time when it is available in a target platform,
      * and resorts to a non-monotonic time source otherwise.
      *
-     * The function [markNow] of this time source returns the specialized [ValueTimeMark] that is an inline value class
-     * wrapping a platform-dependent time reading value.
+     * The function [markNow] of this time source returns the specialized [ValueTimeMark] that is an inline konstue class
+     * wrapping a platform-dependent time reading konstue.
      */
     public object Monotonic : TimeSource.WithComparableMarks {
         override fun markNow(): ValueTimeMark = MonotonicTimeSource.markNow()
@@ -51,9 +51,9 @@ public interface TimeSource {
         /**
          * A specialized [kotlin.time.TimeMark] returned by [TimeSource.Monotonic] time source.
          *
-         * This time mark is implemented as an inline value class wrapping a platform-dependent
-         * time reading value of the default monotonic time source, thus allowing to avoid additional boxing
-         * of that value.
+         * This time mark is implemented as an inline konstue class wrapping a platform-dependent
+         * time reading konstue of the default monotonic time source, thus allowing to avoid additional boxing
+         * of that konstue.
          *
          * The operations [plus] and [minus] are also specialized to return [ValueTimeMark] type.
          *
@@ -63,7 +63,7 @@ public interface TimeSource {
         @SinceKotlin("1.9")
         @WasExperimental(ExperimentalTime::class)
         @JvmInline
-        public value class ValueTimeMark internal constructor(internal val reading: ValueTimeMarkReading) : ComparableTimeMark {
+        public konstue class ValueTimeMark internal constructor(internal konst reading: ValueTimeMarkReading) : ComparableTimeMark {
             override fun elapsedNow(): Duration = MonotonicTimeSource.elapsedFrom(this)
             override fun plus(duration: Duration): ValueTimeMark = MonotonicTimeSource.adjustReading(this, duration)
             override fun minus(duration: Duration): ValueTimeMark = MonotonicTimeSource.adjustReading(this, -duration)
@@ -120,7 +120,7 @@ public interface TimeMark {
     /**
      * Returns the amount of time passed from this mark measured with the time source from which this mark was taken.
      *
-     * Note that the value returned by this function can change on subsequent invocations.
+     * Note that the konstue returned by this function can change on subsequent invocations.
      *
      * @throws IllegalArgumentException an implementation may throw if calculating the elapsed time involves
      * adding a positive infinite duration to an infinitely distant past time mark or
@@ -158,7 +158,7 @@ public interface TimeMark {
     /**
      * Returns true if this time mark has passed according to the time source from which this mark was taken.
      *
-     * Note that the value returned by this function can change on subsequent invocations.
+     * Note that the konstue returned by this function can change on subsequent invocations.
      * If the time source is monotonic, it can change only from `false` to `true`, namely, when the time mark becomes behind the current point of the time source.
      */
     public fun hasPassedNow(): Boolean = !elapsedNow().isNegative()
@@ -166,7 +166,7 @@ public interface TimeMark {
     /**
      * Returns false if this time mark has not passed according to the time source from which this mark was taken.
      *
-     * Note that the value returned by this function can change on subsequent invocations.
+     * Note that the konstue returned by this function can change on subsequent invocations.
      * If the time source is monotonic, it can change only from `true` to `false`, namely, when the time mark becomes behind the current point of the time source.
      */
     public fun hasNotPassedNow(): Boolean = elapsedNow().isNegative()
@@ -221,7 +221,7 @@ public interface ComparableTimeMark : TimeMark, Comparable<ComparableTimeMark> {
 }
 
 
-private class AdjustedTimeMark(val mark: TimeMark, val adjustment: Duration) : TimeMark {
+private class AdjustedTimeMark(konst mark: TimeMark, konst adjustment: Duration) : TimeMark {
     override fun elapsedNow(): Duration = mark.elapsedNow() - adjustment
 
     override fun plus(duration: Duration): TimeMark = AdjustedTimeMark(mark, adjustment + duration)

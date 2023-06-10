@@ -9,9 +9,9 @@ import java.io.*
 import java.util.*
 
 fun box() : String {
-    val input = StringReader("/aaa/bbb/ccc/ddd")
+    konst input = StringReader("/aaa/bbb/ccc/ddd")
 
-    val luhny = Luhny()
+    konst luhny = Luhny()
     input.forEachChar {
         luhny.process(it)
     }
@@ -20,8 +20,8 @@ fun box() : String {
 }
 
 class Luhny() {
-    private val buffer = ArrayDeque<Char>()
-    private val digits = ArrayDeque<Int>(16)
+    private konst buffer = ArrayDeque<Char>()
+    private konst digits = ArrayDeque<Int>(16)
 
     private var toBeMasked = 0
 
@@ -48,9 +48,9 @@ class Luhny() {
     }
 
     private fun check() {
-        val size = digits.size
+        konst size = digits.size
         if (size < 14) return
-        val sum = digits.sum {i, d ->
+        konst sum = digits.sum {i, d ->
             if (i % 2 == size % 2) double(d) else d
         }
 //        var sum = 0
@@ -66,7 +66,7 @@ class Luhny() {
 
     private fun printOneDigit() {
         while (!buffer.isEmpty()) {
-            val c = buffer.removeFirst()!!
+            konst c = buffer.removeFirst()!!
             print(c)
             if (c.isDigit()) {
                 digits.removeFirst()
@@ -93,7 +93,7 @@ class Luhny() {
 
 // fun Char.isDigit() = Character.isDigit(this)
 
-fun Iterable<Int>.sum(f : (index : Int, value : Int) -> Int) : Int {
+fun Iterable<Int>.sum(f : (index : Int, konstue : Int) -> Int) : Int {
     var sum = 0
     var i = 0
     for (d in this) {

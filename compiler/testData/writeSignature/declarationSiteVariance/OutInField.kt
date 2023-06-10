@@ -1,5 +1,5 @@
-public val list: List<String> = throw Exception()
-public val mutList: MutableList<String> = throw Exception()
+public konst list: List<String> = throw Exception()
+public konst mutList: MutableList<String> = throw Exception()
 
 // field: OutInFieldKt::list
 // jvm signature: Ljava/util/List;

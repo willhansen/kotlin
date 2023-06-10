@@ -29,10 +29,10 @@ import kotlin.test.Test
 @RunWith(Spockito::class)
 open class PropertiesAsEnvVariablesTest {
 
-    val tmpFolder = TemporaryFolder()
+    konst tmpFolder = TemporaryFolder()
         @Rule get
 
-    val projectDirectory: File
+    konst projectDirectory: File
         get() = tmpFolder.root
 
     private fun artifactFileName(baseName: String, type: ArtifactType, target: KonanTarget = HostManager.host): String {
@@ -63,7 +63,7 @@ open class PropertiesAsEnvVariablesTest {
 
     @Test
     @Spockito.Unroll(
-        "|property                   |value |assertion               |message                  |",
+        "|property                   |konstue |assertion               |message                  |",
         "|konan.debugging.symbols    |YES   |it.enableDebug          |Debug should be enabled  |",
         "|konan.debugging.symbols    |true  |it.enableDebug          |Debug should be enabled  |",
         "|konan.debugging.symbols    |NO    |!it.enableDebug         |Debug should be disabled |",
@@ -73,14 +73,14 @@ open class PropertiesAsEnvVariablesTest {
         "|konan.optimizations.enable |NO    |!it.enableOptimizations |Opts should be disabled  |",
         "|konan.optimizations.enable |false |!it.enableOptimizations |Opts should be disabled  |"
     )
-    @Spockito.Name("[{row}]: {variable}={value}")
+    @Spockito.Name("[{row}]: {variable}={konstue}")
     fun `Plugin should support enabling and disabling debug and opt options via a project property`(
             property: String,
-            value: String,
+            konstue: String,
             assertion: String,
             message: String
     ) {
-        val project = KonanProject.createEmpty(projectDirectory)
+        konst project = KonanProject.createEmpty(projectDirectory)
         project.buildFile.appendText("""
 
             apply plugin: 'konan'
@@ -97,15 +97,15 @@ open class PropertiesAsEnvVariablesTest {
             }
         """.trimIndent())
         project.createRunner()
-                .withArguments("assertEnableDebug", "-P${property}=${value}")
+                .withArguments("assertEnableDebug", "-P${property}=${konstue}")
                 .build()
     }
 
     @Test
     fun `Plugin should support setting destination directory via a project property`() {
-        val project = KonanProject.createEmpty(projectDirectory)
-        val newDestinationDir = project.createSubDir("newDestination")
-        val newDestinationPath = newDestinationDir.absolutePath
+        konst project = KonanProject.createEmpty(projectDirectory)
+        konst newDestinationDir = project.createSubDir("newDestination")
+        konst newDestinationPath = newDestinationDir.absolutePath
         project.buildFile.appendText("""
             apply plugin: 'konan'
             konanArtifacts {
@@ -144,9 +144,9 @@ open class PropertiesAsEnvVariablesTest {
 
     @Test
     fun `Plugin should rerun tasks if konan_configuration_build_dir has been changed`() {
-        val project = KonanProject.createEmpty(projectDirectory)
-        val destination1 = project.createSubDir("destination1", "subdir")
-        val destination2 = project.createSubDir("destination2", "subdir")
+        konst project = KonanProject.createEmpty(projectDirectory)
+        konst destination1 = project.createSubDir("destination1", "subdir")
+        konst destination2 = project.createSubDir("destination2", "subdir")
 
         project.buildFile.appendText("""
             apply plugin: 'konan'
@@ -169,9 +169,9 @@ open class PropertiesAsEnvVariablesTest {
 
     @Test
     fun `Up-to-date checks should work with different directories for different targets`() {
-        val project = KonanProject.createEmpty(projectDirectory)
-        val fooDir = project.createSubDir("foo")
-        val barDir = project.createSubDir("bar")
+        konst project = KonanProject.createEmpty(projectDirectory)
+        konst fooDir = project.createSubDir("foo")
+        konst barDir = project.createSubDir("bar")
         project.buildFile.appendText("""
             apply plugin: 'konan'
 

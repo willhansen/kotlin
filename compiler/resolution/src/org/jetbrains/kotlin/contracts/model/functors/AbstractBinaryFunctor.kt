@@ -33,17 +33,17 @@ abstract class AbstractBinaryFunctor : AbstractFunctor() {
         if (left is ESConstant) return invokeWithConstant(right, left)
         if (right is ESConstant) return invokeWithConstant(left, right)
 
-        val leftValueReturning =
-            left.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !value.isWildcard } }
-        val rightValueReturning =
-            right.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !value.isWildcard } }
+        konst leftValueReturning =
+            left.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !konstue.isWildcard } }
+        konst rightValueReturning =
+            right.effects.filterIsInstance<ConditionalEffect>().filter { it.simpleEffect.isReturns { !konstue.isWildcard } }
 
-        val nonInterestingEffects =
+        konst nonInterestingEffects =
             left.effects - leftValueReturning + right.effects - rightValueReturning
 
-        val evaluatedByFunctor = invokeWithReturningEffects(leftValueReturning, rightValueReturning)
+        konst ekonstuatedByFunctor = invokeWithReturningEffects(leftValueReturning, rightValueReturning)
 
-        return nonInterestingEffects + evaluatedByFunctor
+        return nonInterestingEffects + ekonstuatedByFunctor
     }
 
     protected fun foldConditionsWithOr(list: List<ConditionalEffect>): ESExpression? =

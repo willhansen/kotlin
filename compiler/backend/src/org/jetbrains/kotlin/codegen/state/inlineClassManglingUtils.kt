@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.types.typeUtil.representativeUpperBound
 import java.security.MessageDigest
 import java.util.*
 
-const val NOT_INLINE_CLASS_PARAMETER_PLACEHOLDER = "_"
+const konst NOT_INLINE_CLASS_PARAMETER_PLACEHOLDER = "_"
 
 class InfoForMangling(
-    val fqName: FqNameUnsafe,
-    val isValue: Boolean,
-    val isNullable: Boolean
+    konst fqName: FqNameUnsafe,
+    konst isValue: Boolean,
+    konst isNullable: Boolean
 )
 
 fun collectFunctionSignatureForManglingSuffix(
@@ -56,7 +56,7 @@ fun collectFunctionSignatureForManglingSuffix(
             return collectSignatureForMangling()
         }
 
-        // If a class member function returns inline class value, mangle its name.
+        // If a class member function returns inline class konstue, mangle its name.
         // NB here function can be a suspend function JVM view with return type replaced with 'Any',
         // should unwrap it and take original return type instead.
         if (returnTypeInfo != null) {
@@ -65,10 +65,10 @@ fun collectFunctionSignatureForManglingSuffix(
     } else {
         // If a function accepts inline class parameters, mangle its name.
         if (requiresFunctionNameManglingForParameterTypes || returnTypeInfo != null) {
-            // If a class member function returns inline class value, mangle its name.
+            // If a class member function returns inline class konstue, mangle its name.
             // NB here function can be a suspend function JVM view with return type replaced with 'Any',
             // should unwrap it and take original return type instead.
-            val signature = collectSignatureForMangling() +
+            konst signature = collectSignatureForMangling() +
                     if (returnTypeInfo != null)
                         ":" + getSignatureElementForMangling(returnTypeInfo)
                     else ""
@@ -92,13 +92,13 @@ fun getManglingSuffixBasedOnKotlinSignature(
     // Some stdlib functions ('Result.success', 'Result.failure') are annotated with '@JvmName' as a workaround for forward compatibility.
     if (DescriptorUtils.hasJvmNameAnnotation(descriptor)) return null
 
-    val unwrappedDescriptor = descriptor.unwrapInitialDescriptorForSuspendFunction()
+    konst unwrappedDescriptor = descriptor.unwrapInitialDescriptorForSuspendFunction()
 
-    val resultNew = collectFunctionSignatureForManglingSuffix(
+    konst resultNew = collectFunctionSignatureForManglingSuffix(
         useOldManglingRules = useOldManglingRules,
         requiresFunctionNameManglingForParameterTypes = requiresFunctionNameManglingForParameterTypes(descriptor),
         fqNamesForMangling =
-        (listOfNotNull(descriptor.extensionReceiverParameter?.type) + descriptor.valueParameters.map { it.type })
+        (listOfNotNull(descriptor.extensionReceiverParameter?.type) + descriptor.konstueParameters.map { it.type })
             .map { getInfoForMangling(it) },
         returnTypeInfo =
         if (shouldMangleByReturnType && requiresFunctionNameManglingForReturnType(unwrappedDescriptor))
@@ -110,7 +110,7 @@ fun getManglingSuffixBasedOnKotlinSignature(
 }
 
 private fun getInfoForMangling(type: KotlinType): InfoForMangling? {
-    val descriptor = type.constructor.declarationDescriptor ?: return null
+    konst descriptor = type.constructor.declarationDescriptor ?: return null
     return when (descriptor) {
         is ClassDescriptor -> InfoForMangling(descriptor.fqNameUnsafe, descriptor.isValueClass(), type.isMarkedNullable)
 
@@ -123,7 +123,7 @@ private fun getInfoForMangling(type: KotlinType): InfoForMangling? {
 }
 
 fun md5base64(signatureForMangling: String): String {
-    val d = MessageDigest.getInstance("MD5").digest(signatureForMangling.toByteArray()).copyOfRange(0, 5)
+    konst d = MessageDigest.getInstance("MD5").digest(signatureForMangling.toByteArray()).copyOfRange(0, 5)
     // base64 URL encoder without padding uses exactly the characters allowed in both JVM bytecode and Dalvik bytecode names
     return Base64.getUrlEncoder().withoutPadding().encodeToString(d)
 }

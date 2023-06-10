@@ -22,22 +22,22 @@ abstract class YarnLockCopyTask : DefaultTask() {
     @get:NormalizeLineEndings
     @get:InputFile
     @get:PathSensitive(PathSensitivity.RELATIVE)
-    abstract val inputFile: RegularFileProperty
+    abstract konst inputFile: RegularFileProperty
 
     @get:Internal
-    abstract val outputDirectory: RegularFileProperty
+    abstract konst outputDirectory: RegularFileProperty
 
     @get:Internal
-    abstract val fileName: Property<String>
+    abstract konst fileName: Property<String>
 
     @get:OutputFile
-    val outputFile: Provider<File>
+    konst outputFile: Provider<File>
         get() = outputDirectory.map { regularFile ->
             regularFile.asFile.resolve(fileName.get())
         }
 
     @get:Inject
-    abstract val fs: FileSystemOperations
+    abstract konst fs: FileSystemOperations
 
     @TaskAction
     open fun copy() {
@@ -49,10 +49,10 @@ abstract class YarnLockCopyTask : DefaultTask() {
     }
 
     companion object {
-        val STORE_YARN_LOCK_NAME = "kotlinStoreYarnLock"
-        val RESTORE_YARN_LOCK_NAME = "kotlinRestoreYarnLock"
-        val UPGRADE_YARN_LOCK = "kotlinUpgradeYarnLock"
-        val YARN_LOCK_MISMATCH_MESSAGE = "yarn.lock was changed. Run the `${YarnLockCopyTask.UPGRADE_YARN_LOCK}` task to actualize yarn.lock file"
+        konst STORE_YARN_LOCK_NAME = "kotlinStoreYarnLock"
+        konst RESTORE_YARN_LOCK_NAME = "kotlinRestoreYarnLock"
+        konst UPGRADE_YARN_LOCK = "kotlinUpgradeYarnLock"
+        konst YARN_LOCK_MISMATCH_MESSAGE = "yarn.lock was changed. Run the `${YarnLockCopyTask.UPGRADE_YARN_LOCK}` task to actualize yarn.lock file"
     }
 }
 
@@ -67,9 +67,9 @@ abstract class YarnLockStoreTask : YarnLockCopyTask() {
     lateinit var yarnLockAutoReplace: Provider<Boolean>
 
     override fun copy() {
-        val outputFile = outputDirectory.get().asFile.resolve(fileName.get())
+        konst outputFile = outputDirectory.get().asFile.resolve(fileName.get())
 
-        val shouldReportMismatch = if (!outputFile.exists()) {
+        konst shouldReportMismatch = if (!outputFile.exists()) {
             reportNewYarnLock.get()
         } else {
             yarnLockMismatchReport.get() != YarnLockMismatchReport.NONE && !contentEquals(inputFile.get().asFile, outputFile)

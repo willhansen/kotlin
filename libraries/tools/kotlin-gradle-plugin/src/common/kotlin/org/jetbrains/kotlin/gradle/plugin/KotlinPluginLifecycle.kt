@@ -25,8 +25,8 @@ Util functions
  * ```kotlin
  * project.launch {
  *     // code
- *     await(Stage.AfterEvaluate) // <- suspends
- *     assertEquals(Stage.AfterEvaluate, stage)
+ *     await(Stage.AfterEkonstuate) // <- suspends
+ *     assertEquals(Stage.AfterEkonstuate, stage)
  *
  *     await(Stage.FinaliseDsl) // suspends
  *     assertEquals(Stage.FinaliseDsl, stage)
@@ -34,11 +34,11 @@ Util functions
  * }
  * ```
  *
- * #### Waiting for some Gradle property to return a final value
+ * #### Waiting for some Gradle property to return a final konstue
  *
  * ```kotlin
  * project.launch {
- *     val value = myProperty.awaitFinalValue() // <- suspends until final value is available!
+ *     konst konstue = myProperty.awaitFinalValue() // <- suspends until final konstue is available!
  * }
  * ```
  *
@@ -53,7 +53,7 @@ Util functions
  *
  * When launching a coroutine, the execution start of the [block] is not guaranteed.
  * It can be executed right away, effectively executing the [block] before this launch function returns
- * However, when called inside an already existing coroutine (or once Gradle has started executing afterEvaluate listeners),
+ * However, when called inside an already existing coroutine (or once Gradle has started executing afterEkonstuate listeners),
  * then this block executed after this launch function returns and put at the end of the execution queue
  *
  * If the lifecycle already finished and Gradle moved to its execution phase, then the block will be invoked right away.
@@ -103,7 +103,7 @@ internal fun Project.launchInRequiredStage(stage: Stage, block: suspend KotlinPl
  * Universal way of retrieving the current lifecycle
  * Also: See [currentKotlinPluginLifecycle]
  */
-internal val Project.kotlinPluginLifecycle: KotlinPluginLifecycle
+internal konst Project.kotlinPluginLifecycle: KotlinPluginLifecycle
     get() = extraProperties.getOrPut(KotlinPluginLifecycle::class.java.name) {
         KotlinPluginLifecycleImpl(project)
     }
@@ -113,7 +113,7 @@ internal val Project.kotlinPluginLifecycle: KotlinPluginLifecycle
  * ### Happy Path
  * If the project configuration is successful (no exceptions thrown), then this Future will complete
  * **after** [KotlinPluginLifecycle.Stage.ReadyForExecution] was fully executed. All coroutines within the regular lifecycle .
- * In this case the value of this future will be [ProjectConfigurationResult.Success]
+ * In this case the konstue of this future will be [ProjectConfigurationResult.Success]
  *
  * ### Unhappy Path (Project configuration failed via exception)
  * If the project configuration is unsuccessful (exception thrown) then this future will complete with
@@ -129,9 +129,9 @@ internal val Project.kotlinPluginLifecycle: KotlinPluginLifecycle
  * will lead to:
  * ```kotlin
  * project.launch {
- *     val result = project.configurationResult.await()
- *     val result as Failure
- *     val exception = result.failures.first()
+ *     konst result = project.configurationResult.await()
+ *     konst result as Failure
+ *     konst exception = result.failures.first()
  *     println(exception.message) // 'My Error'
  *     println(stage) // 'Stage.FinaliseCompilations'
  * }
@@ -141,16 +141,16 @@ internal val Project.kotlinPluginLifecycle: KotlinPluginLifecycle
  * Even in case of failure it is still okay to further launch a new coroutine
  * ```kotlin
  * project.launch {
- *    val result = project.configurationResult.await() as Failure
- *    val anotherJob = project.launch { ... } // <- executed right away
- *    val someFutureEvaluation = project.someFuture.getOrThrow() // <- will return value if all 'requirements' have been met.
+ *    konst result = project.configurationResult.await() as Failure
+ *    konst anotherJob = project.launch { ... } // <- executed right away
+ *    konst someFutureEkonstuation = project.someFuture.getOrThrow() // <- will return konstue if all 'requirements' have been met.
  * }
  * ```
  *
  * Note: [Future.getOrThrow] will throw if e.g. the lifecycle fails in a very early stage, but the Future requires
  * some later data to be available. In this case, the Future still will only return 'sane' data.
  */
-internal val Project.configurationResult: Future<ProjectConfigurationResult>
+internal konst Project.configurationResult: Future<ProjectConfigurationResult>
     get() = (kotlinPluginLifecycle as KotlinPluginLifecycleImpl).configurationResult
 
 
@@ -178,8 +178,8 @@ internal suspend fun Stage.await() {
 }
 
 /**
- * Will suspend until [Stage.FinaliseDsl], finalise the value using [Property.finalizeValue] and return the
- * final value.
+ * Will suspend until [Stage.FinaliseDsl], finalise the konstue using [Property.finalizeValue] and return the
+ * final konstue.
  */
 internal suspend fun <T : Any> Property<T>.awaitFinalValue(): T? {
     Stage.AfterFinaliseDsl.await()
@@ -222,11 +222,11 @@ Definition of the Lifecycle and its stages
 internal interface KotlinPluginLifecycle {
     enum class Stage {
         /**
-         * Configure Phase of Gradle: No .afterEvaluate {} listeners have been called yet,
-         * the buildscript is still evaluated!
+         * Configure Phase of Gradle: No .afterEkonstuate {} listeners have been called yet,
+         * the buildscript is still ekonstuated!
          */
-        EvaluateBuildscript,
-        AfterEvaluateBuildscript,
+        EkonstuateBuildscript,
+        AfterEkonstuateBuildscript,
 
         /**
          * Last changes are allowed to be done to the DSL.
@@ -257,30 +257,30 @@ internal interface KotlinPluginLifecycle {
          */
         ReadyForExecution;
 
-        val previousOrFirst: Stage get() = previousOrNull ?: values.first()
+        konst previousOrFirst: Stage get() = previousOrNull ?: konstues.first()
 
-        val previousOrNull: Stage? get() = values.getOrNull(ordinal - 1)
+        konst previousOrNull: Stage? get() = konstues.getOrNull(ordinal - 1)
 
-        val previousOrThrow: Stage
+        konst previousOrThrow: Stage
             get() = previousOrNull ?: throw IllegalArgumentException("'$this' does not have a next ${Stage::class.simpleName}")
 
-        val nextOrNull: Stage? get() = values.getOrNull(ordinal + 1)
+        konst nextOrNull: Stage? get() = konstues.getOrNull(ordinal + 1)
 
-        val nextOrLast: Stage get() = nextOrNull ?: values.last()
+        konst nextOrLast: Stage get() = nextOrNull ?: konstues.last()
 
-        val nextOrThrow: Stage
+        konst nextOrThrow: Stage
             get() = nextOrNull ?: throw IllegalArgumentException("'$this' does not have a next ${Stage::class.simpleName}")
 
         operator fun rangeTo(other: Stage): Set<Stage> {
             if (this.ordinal > other.ordinal) return emptySet()
-            return values.subList(this.ordinal, other.ordinal + 1).toSet()
+            return konstues.subList(this.ordinal, other.ordinal + 1).toSet()
         }
 
         companion object {
-            val values = values().toList()
-            val first = values.first()
-            val last = values.last()
-            fun upTo(stage: Stage): Set<Stage> = values.first()..stage
+            konst konstues = konstues().toList()
+            konst first = konstues.first()
+            konst last = konstues.last()
+            fun upTo(stage: Stage): Set<Stage> = konstues.first()..stage
             fun until(stage: Stage): Set<Stage> {
                 return upTo(stage.previousOrNull ?: return emptySet())
             }
@@ -289,12 +289,12 @@ internal interface KotlinPluginLifecycle {
 
     sealed class ProjectConfigurationResult {
         object Success : ProjectConfigurationResult()
-        data class Failure(val failures: List<Throwable>) : ProjectConfigurationResult()
+        data class Failure(konst failures: List<Throwable>) : ProjectConfigurationResult()
     }
 
-    val project: Project
+    konst project: Project
 
-    val stage: Stage
+    konst stage: Stage
 
     fun launch(block: suspend KotlinPluginLifecycle.() -> Unit)
 

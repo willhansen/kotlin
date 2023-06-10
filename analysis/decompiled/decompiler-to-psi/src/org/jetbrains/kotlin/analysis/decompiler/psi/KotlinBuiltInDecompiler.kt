@@ -29,10 +29,10 @@ class KotlinBuiltInDecompiler : KotlinMetadataDecompiler<BuiltInsBinaryVersion>(
 class BuiltInDefinitionFile(
     proto: ProtoBuf.PackageFragment,
     version: BuiltInsBinaryVersion,
-    val packageDirectory: VirtualFile,
-    val isMetadata: Boolean
+    konst packageDirectory: VirtualFile,
+    konst isMetadata: Boolean
 ) : KotlinMetadataStubBuilder.FileWithMetadata.Compatible(proto, version, BuiltInSerializerProtocol) {
-    override val classesToDecompile: List<ProtoBuf.Class>
+    override konst classesToDecompile: List<ProtoBuf.Class>
         get() = super.classesToDecompile.let { classes ->
             if (isMetadata || !FILTER_OUT_CLASSES_EXISTING_AS_JVM_CLASS_FILES) classes
             else classes.filter { classProto ->
@@ -41,7 +41,7 @@ class BuiltInDefinitionFile(
         }
 
     private fun shouldDecompileBuiltInClass(classId: ClassId): Boolean {
-        val realJvmClassFileName = classId.shortClassName.asString() + "." + JavaClassFileType.INSTANCE.defaultExtension
+        konst realJvmClassFileName = classId.shortClassName.asString() + "." + JavaClassFileType.INSTANCE.defaultExtension
         return packageDirectory.findChild(realJvmClassFileName) == null
     }
 
@@ -50,17 +50,17 @@ class BuiltInDefinitionFile(
             @TestOnly set
 
         fun read(contents: ByteArray, file: VirtualFile): KotlinMetadataStubBuilder.FileWithMetadata? {
-            val stream = ByteArrayInputStream(contents)
+            konst stream = ByteArrayInputStream(contents)
 
-            val version = BuiltInsBinaryVersion.readFrom(stream)
+            konst version = BuiltInsBinaryVersion.readFrom(stream)
             if (!version.isCompatibleWithCurrentCompilerVersion()) {
                 return Incompatible(version)
             }
 
-            val proto = ProtoBuf.PackageFragment.parseFrom(stream, BuiltInSerializerProtocol.extensionRegistry)
-            val result =
+            konst proto = ProtoBuf.PackageFragment.parseFrom(stream, BuiltInSerializerProtocol.extensionRegistry)
+            konst result =
                 BuiltInDefinitionFile(proto, version, file.parent, file.extension == MetadataPackageFragment.METADATA_FILE_EXTENSION)
-            val packageProto = result.proto.`package`
+            konst packageProto = result.proto.`package`
             if (result.classesToDecompile.isEmpty() &&
                 packageProto.typeAliasCount == 0 && packageProto.functionCount == 0 && packageProto.propertyCount == 0
             ) {

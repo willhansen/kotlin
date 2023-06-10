@@ -10,7 +10,7 @@ import java.util.*
 
 @Serializer(forClass = Date::class)
 object DateSerializer : KSerializer<Date> {
-    override fun serialize(encoder: Encoder, value: Date) {
+    override fun serialize(encoder: Encoder, konstue: Date) {
         TODO()
     }
 

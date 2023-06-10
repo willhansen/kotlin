@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.resolve.calls.checkers.CallCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.storage.StorageManager
 
-private val ADDITIONAL_ALLOWED_CLASSES = setOf(
+private konst ADDITIONAL_ALLOWED_CLASSES = setOf(
     FqName("kotlin.reflect.AssociatedObjectKey"),
     FqName("kotlin.reflect.ExperimentalAssociatedObjects")
 )
@@ -36,7 +36,7 @@ class JsReflectionAPICallChecker(
     reflectionTypes: ReflectionTypes,
     storageManager: StorageManager
 ) : AbstractReflectionApiCallChecker(reflectionTypes, storageManager) {
-    override val isWholeReflectionApiAvailable: Boolean
+    override konst isWholeReflectionApiAvailable: Boolean
         get() = false
 
     override fun isAllowedReflectionApi(

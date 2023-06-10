@@ -12,8 +12,8 @@ import java.net.URL
 import java.util.Base64
 
 actual fun readFile(fileName: String): String {
-    val inputStream = File(fileName).inputStream()
-    val inputString = inputStream.bufferedReader().use { it.readText() }
+    konst inputStream = File(fileName).inputStream()
+    konst inputString = inputStream.bufferedReader().use { it.readText() }
     return inputString
 }
 
@@ -26,14 +26,14 @@ actual fun writeToFile(fileName: String, text: String) {
     }
 }
 
-actual fun assert(value: Boolean, lazyMessage: () -> Any) =
-    kotlin.assert(value, lazyMessage)
+actual fun assert(konstue: Boolean, lazyMessage: () -> Any) =
+    kotlin.assert(konstue, lazyMessage)
 
 // Create http(-s) request.
 fun getHttpRequest(url: String, user: String?, password: String?): HttpURLConnection {
-    val connection = URL(url).openConnection() as HttpURLConnection
+    konst connection = URL(url).openConnection() as HttpURLConnection
     if (user != null && password != null) {
-        val auth = Base64.getEncoder().encode((user + ":" + password).toByteArray()).toString(Charsets.UTF_8)
+        konst auth = Base64.getEncoder().encode((user + ":" + password).toByteArray()).toString(Charsets.UTF_8)
         connection.addRequestProperty("Authorization", "Basic $auth")
     }
     connection.setRequestProperty("Accept", "application/json")
@@ -41,9 +41,9 @@ fun getHttpRequest(url: String, user: String?, password: String?): HttpURLConnec
 }
 
 actual fun sendGetRequest(url: String, user: String?, password: String?, followLocation: Boolean) : String {
-    val connection = getHttpRequest(url, user, password)
+    konst connection = getHttpRequest(url, user, password)
     connection.connect()
-    val responseCode = connection.responseCode
+    konst responseCode = connection.responseCode
     if (!followLocation) {
         connection.connect()
         return connection.inputStream.use { it.reader().use { reader -> reader.readText() } }
@@ -55,9 +55,9 @@ actual fun sendGetRequest(url: String, user: String?, password: String?, followL
             responseCode != HttpURLConnection.HTTP_SEE_OTHER) {
         error("No opportunity to redirect, but flag for redirecting to location was provided!")
     }
-    val newUrl = connection.getHeaderField("Location")
-    val cookies = connection.getHeaderField("Set-Cookie")
-    val redirect = getHttpRequest(newUrl, user, password)
+    konst newUrl = connection.getHeaderField("Location")
+    konst cookies = connection.getHeaderField("Set-Cookie")
+    konst redirect = getHttpRequest(newUrl, user, password)
     redirect.setRequestProperty("Cookie", cookies)
     redirect.connect()
     return redirect.inputStream.use { it.reader().use { reader -> reader.readText() } }

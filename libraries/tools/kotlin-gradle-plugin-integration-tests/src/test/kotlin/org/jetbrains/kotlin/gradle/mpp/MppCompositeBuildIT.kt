@@ -20,7 +20,7 @@ import org.junit.jupiter.api.condition.OS
 class MppCompositeBuildIT : KGPBaseTest() {
     @GradleTest
     fun `test - sample0 - ide dependencies`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample0/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -57,7 +57,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample0 - assemble`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample0/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -83,7 +83,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample0 - assemble - enableCInteropCommonization=true`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample0/producerBuild", gradleVersion)
 
         project(
             "mpp-composite-build/sample0/consumerBuild", gradleVersion, defaultBuildOptions.copy(
@@ -185,7 +185,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
     @OsCondition(enabledOnCI = [OS.MAC], supportedOn = [OS.MAC])
     @GradleTest
     fun `test - sample2-withHostSpecificTargets - assemble`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample2-withHostSpecificTargets/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample2-withHostSpecificTargets/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample2-withHostSpecificTargets/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -211,7 +211,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample3-KT-56198-singleTargetMpp-includingJvm - ide dependencies`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample3-KT-56198-singleTargetMpp-includingJvm/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample3-KT-56198-singleTargetMpp-includingJvm/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample3-KT-56198-singleTargetMpp-includingJvm/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -239,7 +239,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample4-KT-37051-withCInterop`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample4-KT-37051-withCInterop/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample4-KT-37051-withCInterop/producerBuild", gradleVersion)
 
         project(
             "mpp-composite-build/sample4-KT-37051-withCInterop/consumerBuild", gradleVersion,
@@ -256,7 +256,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample5-KT-56536-rootProject_name - assemble`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample5-KT-56536-rootProject.name/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample5-KT-56536-rootProject.name/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample5-KT-56536-rootProject.name/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -282,7 +282,7 @@ class MppCompositeBuildIT : KGPBaseTest() {
 
     @GradleTest
     fun `test - sample5-KT-56536-rootProject_name - ide dependencies`(gradleVersion: GradleVersion) {
-        val producer = project("mpp-composite-build/sample5-KT-56536-rootProject.name/producerBuild", gradleVersion)
+        konst producer = project("mpp-composite-build/sample5-KT-56536-rootProject.name/producerBuild", gradleVersion)
 
         project("mpp-composite-build/sample5-KT-56536-rootProject.name/consumerBuild", gradleVersion) {
             settingsGradleKts.toFile().replaceText("<producer_path>", producer.projectPath.toUri().path)
@@ -323,9 +323,9 @@ class MppCompositeBuildIT : KGPBaseTest() {
     fun `test - sample6-KT-56712-umbrella-composite`(
         gradleVersion: GradleVersion, agpVersion: String, jdkVersion: JdkVersions.ProvidedJdk,
     ) {
-        val producer = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/producer", gradleVersion)
-        val consumerA = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/consumerA", gradleVersion)
-        val consumerB = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/consumerB", gradleVersion)
+        konst producer = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/producer", gradleVersion)
+        konst consumerA = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/consumerA", gradleVersion)
+        konst consumerB = project("mpp-composite-build/sample6-KT-56712-umbrella-composite/consumerB", gradleVersion)
 
         project(
             "mpp-composite-build/sample6-KT-56712-umbrella-composite/composite", gradleVersion,

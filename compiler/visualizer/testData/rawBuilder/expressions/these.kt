@@ -12,13 +12,13 @@ class Some {
 
 //      Some
 //      │
-    val instance: Some
+    konst instance: Some
         get() = this@Some
 
     fun String.extension(): Int {
 //                       fun (Some).bar(): Int
 //                       │     fun (Int).plus(Int): Int
-//                       │     │      val (String).length: Int
+//                       │     │      konst (String).length: Int
 //                       │     │      │
         return this@Some.bar() + this.length
     }

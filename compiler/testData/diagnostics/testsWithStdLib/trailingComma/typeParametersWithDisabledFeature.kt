@@ -28,13 +28,13 @@ fun <T1,
         T2<!UNSUPPORTED_FEATURE!>,<!>
         > T2?.foo2() {}
 
-val <T<!UNSUPPORTED_FEATURE!>,<!>> T.bar1 get() = null
+konst <T<!UNSUPPORTED_FEATURE!>,<!>> T.bar1 get() = null
 
 var <
         T4<!UNSUPPORTED_FEATURE!>,<!>
         > T4?.bar2
     get() = null
-    set(value) {
+    set(konstue) {
 
     }
 

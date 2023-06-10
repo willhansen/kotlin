@@ -1,16 +1,16 @@
-/*∆*/ public val org.w3c.dom.mediasource.ReadyState.Companion.CLOSED: org.w3c.dom.mediasource.ReadyState { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.ReadyState.Companion.CLOSED: org.w3c.dom.mediasource.ReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.EndOfStreamError.Companion.DECODE: org.w3c.dom.mediasource.EndOfStreamError { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.EndOfStreamError.Companion.DECODE: org.w3c.dom.mediasource.EndOfStreamError { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.ReadyState.Companion.ENDED: org.w3c.dom.mediasource.ReadyState { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.ReadyState.Companion.ENDED: org.w3c.dom.mediasource.ReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.EndOfStreamError.Companion.NETWORK: org.w3c.dom.mediasource.EndOfStreamError { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.EndOfStreamError.Companion.NETWORK: org.w3c.dom.mediasource.EndOfStreamError { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.ReadyState.Companion.OPEN: org.w3c.dom.mediasource.ReadyState { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.ReadyState.Companion.OPEN: org.w3c.dom.mediasource.ReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.AppendMode.Companion.SEGMENTS: org.w3c.dom.mediasource.AppendMode { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.AppendMode.Companion.SEGMENTS: org.w3c.dom.mediasource.AppendMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.mediasource.AppendMode.Companion.SEQUENCE: org.w3c.dom.mediasource.AppendMode { get; }
+/*∆*/ public konst org.w3c.dom.mediasource.AppendMode.Companion.SEQUENCE: org.w3c.dom.mediasource.AppendMode { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
 /*∆*/ public inline operator fun org.w3c.dom.mediasource.SourceBufferList.get(index: kotlin.Int): org.w3c.dom.mediasource.SourceBuffer?
@@ -30,7 +30,7 @@
 /*∆*/ public open external class MediaSource : org.w3c.dom.events.EventTarget, org.w3c.dom.MediaProvider {
 /*∆*/     public constructor MediaSource()
 /*∆*/ 
-/*∆*/     public open val activeSourceBuffers: org.w3c.dom.mediasource.SourceBufferList { get; }
+/*∆*/     public open konst activeSourceBuffers: org.w3c.dom.mediasource.SourceBufferList { get; }
 /*∆*/ 
 /*∆*/     public final var duration: kotlin.Double { get; set; }
 /*∆*/ 
@@ -40,9 +40,9 @@
 /*∆*/ 
 /*∆*/     public final var onsourceopen: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val readyState: org.w3c.dom.mediasource.ReadyState { get; }
+/*∆*/     public open konst readyState: org.w3c.dom.mediasource.ReadyState { get; }
 /*∆*/ 
-/*∆*/     public open val sourceBuffers: org.w3c.dom.mediasource.SourceBufferList { get; }
+/*∆*/     public open konst sourceBuffers: org.w3c.dom.mediasource.SourceBufferList { get; }
 /*∆*/ 
 /*∆*/     public final fun addSourceBuffer(type: kotlin.String): org.w3c.dom.mediasource.SourceBuffer
 /*∆*/ 
@@ -72,9 +72,9 @@
 /*∆*/ 
 /*∆*/     public open var appendWindowStart: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val audioTracks: org.w3c.dom.AudioTrackList { get; }
+/*∆*/     public open konst audioTracks: org.w3c.dom.AudioTrackList { get; }
 /*∆*/ 
-/*∆*/     public open val buffered: org.w3c.dom.TimeRanges { get; }
+/*∆*/     public open konst buffered: org.w3c.dom.TimeRanges { get; }
 /*∆*/ 
 /*∆*/     public open var mode: org.w3c.dom.mediasource.AppendMode { get; set; }
 /*∆*/ 
@@ -88,13 +88,13 @@
 /*∆*/ 
 /*∆*/     public open var onupdatestart: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val textTracks: org.w3c.dom.TextTrackList { get; }
+/*∆*/     public open konst textTracks: org.w3c.dom.TextTrackList { get; }
 /*∆*/ 
 /*∆*/     public open var timestampOffset: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val updating: kotlin.Boolean { get; }
+/*∆*/     public open konst updating: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val videoTracks: org.w3c.dom.VideoTrackList { get; }
+/*∆*/     public open konst videoTracks: org.w3c.dom.VideoTrackList { get; }
 /*∆*/ 
 /*∆*/     public final fun abort(): kotlin.Unit
 /*∆*/ 
@@ -106,7 +106,7 @@
 /*∆*/ public abstract external class SourceBufferList : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor SourceBufferList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var onaddsourcebuffer: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 

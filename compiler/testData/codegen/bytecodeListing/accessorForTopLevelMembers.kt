@@ -1,4 +1,4 @@
-private val x: String = "OK"
+private konst x: String = "OK"
 private fun f(y: String) = y
 
 class A {

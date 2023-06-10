@@ -11,14 +11,14 @@ package foo
 @JsExport
 @JsName("Object")
 external interface WeirdInterface {
-    val constructor: dynamic
+    konst constructor: dynamic
 }
 
 @JsExport
 @JsName("JsNameTest")
 class __JsNameTest private constructor() {
-    @JsName("value")
-    val __value = 4
+    @JsName("konstue")
+    konst __konstue = 4
 
     @JsName("runTest")
     fun __runTest(): String {
@@ -38,11 +38,11 @@ class __JsNameTest private constructor() {
         }
 
         @JsName("createChild")
-        fun __createChild(value: Int): __NestJsNameTest {
-           return  __NestJsNameTest(value)
+        fun __createChild(konstue: Int): __NestJsNameTest {
+           return  __NestJsNameTest(konstue)
         }
     }
 
     @JsName("NestedJsName")
-    class __NestJsNameTest(@JsName("value") val __value: Int)
+    class __NestJsNameTest(@JsName("konstue") konst __konstue: Int)
 }

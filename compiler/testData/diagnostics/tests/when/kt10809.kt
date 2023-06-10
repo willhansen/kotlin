@@ -20,8 +20,8 @@
 
 interface Data
 interface Item
-class FlagData(val value: Boolean) : Data
-class ListData<T : Item>(val list: List<T>) : Data
+class FlagData(konst konstue: Boolean) : Data
+class ListData<T : Item>(konst list: List<T>) : Data
 
 fun <T> listOf(vararg items: T): List<T> = null!!
 

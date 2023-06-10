@@ -1,5 +1,5 @@
 package lib
 
-inline class J(val value: Int)
+inline class J(konst konstue: Int)
 
-inline fun J.toString(ignored: Int) = "J$value"
+inline fun J.toString(ignored: Int) = "J$konstue"

@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 
 fun foo(bar: String): Int = bar.length
 
-class A(val c: String) {
+class A(konst c: String) {
     fun foz(baz: Int) {}
 
     fun Double.mext(mez: Long) {}
@@ -20,7 +20,7 @@ class A(val c: String) {
 fun Int.qux(zux: String) {}
 
 fun checkParameters(f: KFunction<*>, names: List<String?>) {
-    val params = f.parameters
+    konst params = f.parameters
     assertEquals(names, params.map { it.name })
     assertEquals(params.indices.toList(), params.map { it.index })
 }

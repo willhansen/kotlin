@@ -1,1 +1,1 @@
-val x: Int <caret>by lazy {1}
+konst x: Int <caret>by lazy {1}

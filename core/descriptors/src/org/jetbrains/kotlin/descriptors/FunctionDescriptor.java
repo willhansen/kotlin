@@ -147,7 +147,7 @@ public interface FunctionDescriptor extends CallableMemberDescriptor, FunctionSy
         CopyBuilder<D> setSubstitution(@NotNull TypeSubstitution substitution);
 
         @NotNull
-        <V> CopyBuilder<D> putUserData(@NotNull UserDataKey<V> userDataKey, V value);
+        <V> CopyBuilder<D> putUserData(@NotNull UserDataKey<V> userDataKey, V konstue);
 
         @Nullable
         @Override

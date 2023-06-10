@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.build.report
 
 import java.io.File
 
-abstract class ICReporterBase(private val pathsBase: File? = null) : ICReporter {
+abstract class ICReporterBase(private konst pathsBase: File? = null) : ICReporter {
     override fun reportMarkDirtyClass(affectedFiles: Iterable<File>, classFqName: String) {
         reportMarkDirty(affectedFiles, "dirty class $classFqName")
     }

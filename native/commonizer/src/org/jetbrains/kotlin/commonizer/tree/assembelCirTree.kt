@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.mergedtree.*
 
 internal fun CirRootNode.assembleCirTree(): CirTreeRoot {
     return CirTreeRoot(
-        modules = modules.values.mapNotNull { it.assembleCirTree() },
+        modules = modules.konstues.mapNotNull { it.assembleCirTree() },
         dependencies = dependencies
     )
 }
@@ -19,13 +19,13 @@ internal fun CirRootNode.assembleCirTree(): CirTreeRoot {
 internal fun CirModuleNode.assembleCirTree(): CirTreeModule? {
     return CirTreeModule(
         module = commonDeclaration() ?: return null,
-        packages = packages.values.mapNotNull { it.assembleCirTree() }
+        packages = packages.konstues.mapNotNull { it.assembleCirTree() }
     )
 }
 
 internal fun CirPackageNode.assembleCirTree(): CirTreePackage? {
-    val commonizedPackage = commonDeclaration() ?: return null
-    val commonizedTypeAliases = typeAliases.mapNotNull { (_, typeAlias) -> typeAlias.assembleCirTree() }
+    konst commonizedPackage = commonDeclaration() ?: return null
+    konst commonizedTypeAliases = typeAliases.mapNotNull { (_, typeAlias) -> typeAlias.assembleCirTree() }
 
     return CirTreePackage(
         pkg = commonizedPackage,
@@ -48,7 +48,7 @@ internal fun CirClassNode.assembleCirTree(): CirTreeClass? {
 }
 
 internal fun CirTypeAliasNode.assembleCirTree(): CirTreeClassifier? {
-    return when (val commonDeclaration = commonDeclaration()) {
+    return when (konst commonDeclaration = commonDeclaration()) {
         is CirTypeAlias -> CirTreeTypeAlias(id, commonDeclaration)
         is CirClass -> CirTreeClass(id, commonDeclaration)
         else -> null

@@ -9,13 +9,13 @@
  */
 
 // TESTCASE NUMBER: 1
-val value_1 = 0<!WRONG_LONG_SUFFIX!>l<!>
+konst konstue_1 = 0<!WRONG_LONG_SUFFIX!>l<!>
 
 // TESTCASE NUMBER: 2
-val value_2 = 1000000000000000<!WRONG_LONG_SUFFIX!>l<!>
+konst konstue_2 = 1000000000000000<!WRONG_LONG_SUFFIX!>l<!>
 
 // TESTCASE NUMBER: 3
-val value_3 = 0X0<!WRONG_LONG_SUFFIX!>l<!>
+konst konstue_3 = 0X0<!WRONG_LONG_SUFFIX!>l<!>
 
 // TESTCASE NUMBER: 4
-val value_4 = 0b101<!WRONG_LONG_SUFFIX!>l<!>
+konst konstue_4 = 0b101<!WRONG_LONG_SUFFIX!>l<!>

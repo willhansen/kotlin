@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Int>(val x: T)
+konstue class A<T: Int>(konst x: T)
 
 fun <T: Int> isNotNullVacuousLeft(s: A<T>) = s != null
 fun <T: Int> isNotNullVacuousRight(s: A<T>) = null != s

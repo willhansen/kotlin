@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
  */
 interface IrDeclaration : IrStatement, IrSymbolOwner, IrMutableAnnotationContainer {
     @ObsoleteDescriptorBasedAPI
-    val descriptor: DeclarationDescriptor
+    konst descriptor: DeclarationDescriptor
 
     var origin: IrDeclarationOrigin
 
     var parent: IrDeclarationParent
 
-    val factory: IrFactory
+    konst factory: IrFactory
 }

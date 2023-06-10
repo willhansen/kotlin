@@ -12,16 +12,16 @@ import org.jetbrains.kotlin.resolve.calls.tower.VisibilityError
 import org.jetbrains.kotlin.resolve.calls.tower.VisibilityErrorOnArgument
 import org.jetbrains.kotlin.resolve.calls.tower.isInapplicable
 
-class CallableReferenceArgumentResolver(val callableReferenceOverloadConflictResolver: CallableReferenceOverloadConflictResolver) {
+class CallableReferenceArgumentResolver(konst callableReferenceOverloadConflictResolver: CallableReferenceOverloadConflictResolver) {
     fun processCallableReferenceArgument(
         csBuilder: ConstraintSystemBuilder,
         resolvedAtom: ResolvedCallableReferenceArgumentAtom,
         diagnosticsHolder: KotlinDiagnosticsHolder,
         resolutionCallbacks: KotlinResolutionCallbacks
     ) {
-        val argument = resolvedAtom.atom
-        val expectedType = resolvedAtom.expectedType?.let { (csBuilder.buildCurrentSubstitutor() as NewTypeSubstitutor).safeSubstitute(it) }
-        val candidates = resolutionCallbacks.resolveCallableReferenceArgument(resolvedAtom.atom, expectedType, csBuilder.currentStorage())
+        konst argument = resolvedAtom.atom
+        konst expectedType = resolvedAtom.expectedType?.let { (csBuilder.buildCurrentSubstitutor() as NewTypeSubstitutor).safeSubstitute(it) }
+        konst candidates = resolutionCallbacks.resolveCallableReferenceArgument(resolvedAtom.atom, expectedType, csBuilder.currentStorage())
 
         if (candidates.size > 1 && resolvedAtom is EagerCallableReferenceAtom) {
             if (candidates.all { it.resultingApplicability.isInapplicable }) {
@@ -35,16 +35,16 @@ class CallableReferenceArgumentResolver(val callableReferenceOverloadConflictRes
             return
         }
 
-        val chosenCandidate = candidates.singleOrNull()
+        konst chosenCandidate = candidates.singleOrNull()
         if (chosenCandidate != null) {
-            val toFreshSubstitutor = CreateFreshVariablesSubstitutor.createToFreshVariableSubstitutorAndAddInitialConstraints(
+            konst toFreshSubstitutor = CreateFreshVariablesSubstitutor.createToFreshVariableSubstitutorAndAddInitialConstraints(
                 chosenCandidate.candidate,
                 resolvedAtom.atom.call,
                 csBuilder
             )
             chosenCandidate.addConstraints(csBuilder, toFreshSubstitutor, callableReference = argument)
             chosenCandidate.diagnostics.forEach {
-                val transformedDiagnostic = when (it) {
+                konst transformedDiagnostic = when (it) {
                     is CompatibilityWarning -> CompatibilityWarningOnArgument(argument, it.candidate)
                     is VisibilityError -> VisibilityErrorOnArgument(argument, it.invisibleMember)
                     else -> it
@@ -61,14 +61,14 @@ class CallableReferenceArgumentResolver(val callableReferenceOverloadConflictRes
         }
 
         // todo -- create this inside CallableReferencesCandidateFactory
-        val subKtArguments = listOfNotNull(buildResolvedKtArgument(argument.lhsResult))
+        konst subKtArguments = listOfNotNull(buildResolvedKtArgument(argument.lhsResult))
 
         resolvedAtom.setAnalyzedResults(chosenCandidate, subKtArguments)
     }
 
     private fun buildResolvedKtArgument(lhsResult: LHSResult): ResolvedAtom? {
         if (lhsResult !is LHSResult.Expression) return null
-        return when (val lshCallArgument = lhsResult.lshCallArgument) {
+        return when (konst lshCallArgument = lhsResult.lshCallArgument) {
             is SubKotlinCallArgument -> lshCallArgument.callResult
             is ExpressionKotlinCallArgument -> ResolvedExpressionAtom(lshCallArgument)
             else -> unexpectedArgument(lshCallArgument)

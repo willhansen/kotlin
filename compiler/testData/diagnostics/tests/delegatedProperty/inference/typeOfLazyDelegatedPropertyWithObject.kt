@@ -3,20 +3,20 @@
 
 import kotlin.reflect.KProperty
 
-val b: First by lazy {
+konst b: First by lazy {
     object : First {   }
 }
 
-private val withoutType by lazy {
+private konst withoutType by lazy {
     object : First { }
 }
 
-private val withTwoSupertypes by lazy {
+private konst withTwoSupertypes by lazy {
     object : First, Second { }
 }
 
 class A<T> {
-    val a: First by lazy {
+    konst a: First by lazy {
         object : First { }
     }
 }

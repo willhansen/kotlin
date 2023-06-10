@@ -26,8 +26,8 @@ interface KotlinAggregatingTestRun<S : ExecutionSource, A : KotlinAggregateExecu
 }
 
 abstract class KotlinTaskTestRun<S : ExecutionSource, T : AbstractTestTask>(
-    private val testRunName: String,
-    override val target: KotlinTarget
+    private konst testRunName: String,
+    override konst target: KotlinTarget
 ) : KotlinTargetTestRun<S>, ExecutionTaskHolder<T> {
 
     override fun getName(): String =
@@ -43,7 +43,7 @@ abstract class KotlinTaskTestRun<S : ExecutionSource, T : AbstractTestTask>(
     override fun filter(configureFilter: Closure<*>) = filter { target.project.configure(this, configureFilter) }
 }
 
-internal val KotlinTargetTestRun<*>.testTaskName: String
+internal konst KotlinTargetTestRun<*>.testTaskName: String
     get() = lowerCamelCaseName(
         target.disambiguationClassifier,
         name.takeIf { it != KotlinTargetWithTests.DEFAULT_TEST_RUN_NAME }?.removeSuffix("Test"),
@@ -58,7 +58,7 @@ internal fun requireCompilationOfTarget(compilation: KotlinCompilation<*>, targe
 }
 
 abstract class KotlinReportAggregatingTestRun<E : ExecutionSource, A : KotlinAggregateExecutionSource<E>, T : KotlinTestRun<E>>(
-    val testRunName: String
+    konst testRunName: String
 ) : KotlinAggregatingTestRun<E, A, T>,
     ExecutionTaskHolder<KotlinTestReport> {
 

@@ -14,14 +14,14 @@ class Bar {
 }
 
 fun testConstructor() {
-    val generatedClass: AllOpenGenerated = AllOpenGenerated()
+    konst generatedClass: AllOpenGenerated = AllOpenGenerated()
 }
 
 fun testNestedClasses() {
-    val nestedFoo = AllOpenGenerated.NestedFoo()
+    konst nestedFoo = AllOpenGenerated.NestedFoo()
     nestedFoo.materialize().foo()
 
-    val nestedBar = AllOpenGenerated.NestedBar()
+    konst nestedBar = AllOpenGenerated.NestedBar()
     nestedBar.materialize().bar()
 }
 

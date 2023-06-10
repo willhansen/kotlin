@@ -14,7 +14,7 @@ KtFile: MissingCommaInConstructorValueParameterList.kt
           MODIFIER_LIST
             PsiElement(private)('private')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('a')
           PsiElement(COLON)(':')
@@ -41,7 +41,7 @@ KtFile: MissingCommaInConstructorValueParameterList.kt
           MODIFIER_LIST
             PsiElement(private)('private')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('c')
           PsiElement(COLON)(':')

@@ -5,7 +5,7 @@ package test
 import testOther.*
 
 class B: A()
-val inferTypeFromImportedFun = testFun()
+konst inferTypeFromImportedFun = testFun()
 
 // FILE: importFunctionWithAllUnderImportOther.kt
 package testOther

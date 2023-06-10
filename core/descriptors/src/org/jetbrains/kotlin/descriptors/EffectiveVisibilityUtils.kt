@@ -36,7 +36,7 @@ private fun DescriptorVisibility.forVisibility(descriptor: DeclarationDescriptor
         else -> throw AssertionError("Visibility $name is not allowed in forVisibility")
     }
 
-data class DescriptorWithRelation(val descriptor: ClassifierDescriptor, private val relation: RelationToType) {
+data class DescriptorWithRelation(konst descriptor: ClassifierDescriptor, private konst relation: RelationToType) {
     fun effectiveVisibility() =
         (descriptor as? ClassDescriptor)?.visibility?.effectiveVisibility(descriptor, false) ?: EffectiveVisibility.Public
 
@@ -63,14 +63,14 @@ private fun KotlinType.dependentDescriptors() = dependentDescriptors(emptySet(),
 
 private fun KotlinType.dependentDescriptors(types: Set<KotlinType>, ownRelation: RelationToType): Set<DescriptorWithRelation> {
     if (this in types) return emptySet()
-    val ownDependent = constructor.declarationDescriptor?.dependentDescriptors(ownRelation) ?: emptySet()
-    val argumentDependent = arguments.map { it.type.dependentDescriptors(types + this, RelationToType.ARGUMENT) }.flatten()
+    konst ownDependent = constructor.declarationDescriptor?.dependentDescriptors(ownRelation) ?: emptySet()
+    konst argumentDependent = arguments.map { it.type.dependentDescriptors(types + this, RelationToType.ARGUMENT) }.flatten()
     return ownDependent + argumentDependent
 }
 
 private fun Set<DescriptorWithRelation>.leastPermissive(base: EffectiveVisibility): DescriptorWithRelation? {
     for (descriptorWithRelation in this) {
-        val currentVisibility = descriptorWithRelation.effectiveVisibility()
+        konst currentVisibility = descriptorWithRelation.effectiveVisibility()
         when (currentVisibility.relation(base, SimpleClassicTypeSystemContext)) {
             EffectiveVisibility.Permissiveness.LESS, EffectiveVisibility.Permissiveness.UNKNOWN -> {
                 return descriptorWithRelation

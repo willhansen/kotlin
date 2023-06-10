@@ -4,17 +4,17 @@
  */
 
 object A {
-    const val x = 5
+    const konst x = 5
 }
 
-class B(val z:Int) {
+class B(konst z:Int) {
     companion object {
-        const val y = 7
+        const konst y = 7
     }
 }
 
 object C {
-    val x = listOf(1, 2, 3)
+    konst x = listOf(1, 2, 3)
 }
 
 // CHECK-LABEL: define i32 @"kfun:#f(){}kotlin.Int"()
@@ -26,7 +26,7 @@ fun f() = A.x + B.y
 // CHECK-LABEL: define void @"kfun:#g(){}"()
 // CHECK: EnterFrame
 fun g() {
-    val x = C.x
+    konst x = C.x
 }
 // CHECK: {{^}}epilogue:
 

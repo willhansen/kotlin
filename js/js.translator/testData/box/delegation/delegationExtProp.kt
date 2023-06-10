@@ -6,20 +6,20 @@ interface Base {
     var Int.foo: String
 }
 
-open class BaseImpl(val s: String) : Base {
+open class BaseImpl(konst s: String) : Base {
     override var prop: String = "init"
     override var Int.foo: String
         get() = "get Int.foo:${s}:${this}"
-        set(value) {
-            prop = "set Int.foo:${s}:${this}:${value}"
+        set(konstue) {
+            prop = "set Int.foo:${s}:${this}:${konstue}"
         }
 
 }
 
 class Derived() : Base by BaseImpl("test") {
     fun getFooValue(x: Int): String = x.foo
-    fun setFooValue(x: Int, value: String) {
-        x.foo = value
+    fun setFooValue(x: Int, konstue: String) {
+        x.foo = konstue
     }
 }
 

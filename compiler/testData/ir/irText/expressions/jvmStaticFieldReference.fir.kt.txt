@@ -7,7 +7,7 @@ var testProp: Any
     #out.println(p0 = "testProp/get")
     return 42
   }
-  set(value: Any) {
+  set(konstue: Any) {
     #out.println(p0 = "testProp/set")
   }
 
@@ -18,7 +18,7 @@ class TestClass {
 
   }
 
-  val test: Int
+  konst test: Int
     field = when {
       else -> { // BLOCK
         #out.println(p0 = "TestClass/test")

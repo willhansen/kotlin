@@ -1,12 +1,12 @@
 == foo ==
 fun foo() {
     "before"
-    val bar = object {
+    konst bar = object {
         init {
-            val x = 1
+            konst x = 1
         }
         fun foo() {
-            val a = 2
+            konst a = 2
         }
     }
     "after"
@@ -14,19 +14,19 @@ fun foo() {
 ---------------------
 L0:
   1 <START>                                                                                       INIT: in: {} out: {}
-  2 mark({ "before" val bar = object { init { val x = 1 } fun foo() { val a = 2 } } "after" })
+  2 mark({ "before" konst bar = object { init { konst x = 1 } fun foo() { konst a = 2 } } "after" })
     mark("before")
     r("before") -> <v0>
-    v(val bar = object { init { val x = 1 } fun foo() { val a = 2 } })                            INIT: in: {} out: {}
-    mark(object { init { val x = 1 } fun foo() { val a = 2 } })                                   INIT: in: {} out: {}
-  3 mark({ val x = 1 })
-    v(val x = 1)                                                                                  INIT: in: {} out: {}
+    v(konst bar = object { init { konst x = 1 } fun foo() { konst a = 2 } })                            INIT: in: {} out: {}
+    mark(object { init { konst x = 1 } fun foo() { konst a = 2 } })                                   INIT: in: {} out: {}
+  3 mark({ konst x = 1 })
+    v(konst x = 1)                                                                                  INIT: in: {} out: {}
     r(1) -> <v1>                                                                                  INIT: in: {} out: {}
     w(x|<v1>)                                                                                     INIT: in: {} out: {}
   2 jmp?(L2)                                                                                      INIT: in: {} out: {}
-    d(fun foo() { val a = 2 })                                                                    INIT: in: {} out: {}
+    d(fun foo() { konst a = 2 })                                                                    INIT: in: {} out: {}
 L2 [after local declaration]:
-    r(object { init { val x = 1 } fun foo() { val a = 2 } }) -> <v2>
+    r(object { init { konst x = 1 } fun foo() { konst a = 2 } }) -> <v2>
     w(bar|<v2>)                                                                                   INIT: in: {} out: {}
     mark("after")                                                                                 INIT: in: {} out: {}
     r("after") -> <v3>
@@ -39,13 +39,13 @@ sink:
 =====================
 == foo ==
 fun foo() {
-            val a = 2
+            konst a = 2
         }
 ---------------------
 L3:
   3 <START>                INIT: in: {} out: {}
-  4 mark({ val a = 2 })
-    v(val a = 2)           INIT: in: {} out: {}
+  4 mark({ konst a = 2 })
+    v(konst a = 2)           INIT: in: {} out: {}
     r(2) -> <v0>           INIT: in: {} out: {}
     w(a|<v0>)              INIT: in: {} out: {}
 L4:

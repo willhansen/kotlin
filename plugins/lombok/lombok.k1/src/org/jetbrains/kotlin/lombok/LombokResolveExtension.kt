@@ -12,9 +12,9 @@ import java.io.File
 
 class LombokResolveExtension(pluginConfig: LombokPluginConfig) : SyntheticJavaResolveExtension {
 
-    private val config = pluginConfig.configFile?.let(LombokConfig::parse) ?: LombokConfig.Empty
+    private konst config = pluginConfig.configFile?.let(LombokConfig::parse) ?: LombokConfig.Empty
 
     override fun buildProvider(): SyntheticJavaPartsProvider = LombokSyntheticJavaPartsProvider(config)
 }
 
-data class LombokPluginConfig(val configFile: File?)
+data class LombokPluginConfig(konst configFile: File?)

@@ -16,6 +16,6 @@ fun <T> inferred(e: In<T>?, l: () -> T): T = l()
 
 fun box(): String {
     // coercion to Unit for T!
-    val inferred = (inferred(TestJ.materialize<Unit>(), { null })).toString()
+    konst inferred = (inferred(TestJ.materialize<Unit>(), { null })).toString()
     return if (inferred == "kotlin.Unit") "OK" else "fail : $inferred"
 }

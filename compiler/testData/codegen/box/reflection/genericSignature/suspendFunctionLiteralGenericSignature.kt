@@ -9,13 +9,13 @@ fun assertEquals(expected: String, actual: Any) {
 }
 
 fun assertGenericSuper(expected: String, function: Any?) {
-    val clazz = (function as java.lang.Object).getClass()!!
-    val genericSuper = clazz.getGenericInterfaces()[0]!!
+    konst clazz = (function as java.lang.Object).getClass()!!
+    konst genericSuper = clazz.getGenericInterfaces()[0]!!
     assertEquals(expected, genericSuper)
 }
 
-val unitFun = suspend { }
-val intFun = suspend { 42 }
+konst unitFun = suspend { }
+konst intFun = suspend { 42 }
 
 fun assertStringParamFun(lambda: suspend (String) -> Unit) {
     assertEquals(

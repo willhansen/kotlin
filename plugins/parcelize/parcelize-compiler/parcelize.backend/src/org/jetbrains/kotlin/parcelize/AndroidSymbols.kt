@@ -32,142 +32,142 @@ import org.jetbrains.kotlin.parcelize.ParcelizeNames.WRITE_TO_PARCEL_NAME
 // hence contain just enough information to produce correct JVM bytecode for *calls*. In particular, we omit generic types and
 // supertypes, which are not needed to produce correct bytecode.
 class AndroidSymbols(
-    val irBuiltIns: IrBuiltIns,
-    private val moduleFragment: IrModuleFragment
+    konst irBuiltIns: IrBuiltIns,
+    private konst moduleFragment: IrModuleFragment
 ) {
-    private val irFactory: IrFactory = IrFactoryImpl
+    private konst irFactory: IrFactory = IrFactoryImpl
 
-    private val javaIo: IrPackageFragment = createPackage("java.io")
-    private val javaLang: IrPackageFragment = createPackage("java.lang")
-    private val javaUtil: IrPackageFragment = createPackage("java.util")
+    private konst javaIo: IrPackageFragment = createPackage("java.io")
+    private konst javaLang: IrPackageFragment = createPackage("java.lang")
+    private konst javaUtil: IrPackageFragment = createPackage("java.util")
 
-    private val kotlin: IrPackageFragment = createPackage("kotlin")
-    private val kotlinJvm: IrPackageFragment = createPackage("kotlin.jvm")
-    private val kotlinJvmInternalPackage: IrPackageFragment = createPackage("kotlin.jvm.internal")
+    private konst kotlin: IrPackageFragment = createPackage("kotlin")
+    private konst kotlinJvm: IrPackageFragment = createPackage("kotlin.jvm")
+    private konst kotlinJvmInternalPackage: IrPackageFragment = createPackage("kotlin.jvm.internal")
 
-    private val androidOs: IrPackageFragment = createPackage("android.os")
-    private val androidUtil: IrPackageFragment = createPackage("android.util")
-    private val androidText: IrPackageFragment = createPackage("android.text")
+    private konst androidOs: IrPackageFragment = createPackage("android.os")
+    private konst androidUtil: IrPackageFragment = createPackage("android.util")
+    private konst androidText: IrPackageFragment = createPackage("android.text")
 
-    private val androidOsBundle: IrClassSymbol =
+    private konst androidOsBundle: IrClassSymbol =
         createClass(androidOs, "Bundle", ClassKind.CLASS, Modality.FINAL)
 
-    private val androidOsIBinder: IrClassSymbol =
+    private konst androidOsIBinder: IrClassSymbol =
         createClass(androidOs, "IBinder", ClassKind.INTERFACE, Modality.ABSTRACT)
 
-    val androidOsParcel: IrClassSymbol =
+    konst androidOsParcel: IrClassSymbol =
         createClass(androidOs, "Parcel", ClassKind.CLASS, Modality.FINAL)
 
-    private val androidOsParcelFileDescriptor: IrClassSymbol =
+    private konst androidOsParcelFileDescriptor: IrClassSymbol =
         createClass(androidOs, "ParcelFileDescriptor", ClassKind.CLASS, Modality.OPEN)
 
-    private val androidOsParcelable: IrClassSymbol =
+    private konst androidOsParcelable: IrClassSymbol =
         createClass(androidOs, "Parcelable", ClassKind.INTERFACE, Modality.ABSTRACT)
 
-    private val androidOsPersistableBundle: IrClassSymbol =
+    private konst androidOsPersistableBundle: IrClassSymbol =
         createClass(androidOs, "PersistableBundle", ClassKind.CLASS, Modality.FINAL)
 
-    private val androidTextTextUtils: IrClassSymbol =
+    private konst androidTextTextUtils: IrClassSymbol =
         createClass(androidText, "TextUtils", ClassKind.CLASS, Modality.OPEN)
 
-    private val androidUtilSize: IrClassSymbol =
+    private konst androidUtilSize: IrClassSymbol =
         createClass(androidUtil, "Size", ClassKind.CLASS, Modality.FINAL)
 
-    private val androidUtilSizeF: IrClassSymbol =
+    private konst androidUtilSizeF: IrClassSymbol =
         createClass(androidUtil, "SizeF", ClassKind.CLASS, Modality.FINAL)
 
-    private val androidUtilSparseBooleanArray: IrClassSymbol =
+    private konst androidUtilSparseBooleanArray: IrClassSymbol =
         createClass(androidUtil, "SparseBooleanArray", ClassKind.CLASS, Modality.OPEN)
 
-    private val javaIoFileDescriptor: IrClassSymbol =
+    private konst javaIoFileDescriptor: IrClassSymbol =
         createClass(javaIo, "FileDescriptor", ClassKind.CLASS, Modality.FINAL)
 
-    private val javaIoSerializable: IrClassSymbol =
+    private konst javaIoSerializable: IrClassSymbol =
         createClass(javaIo, "Serializable", ClassKind.INTERFACE, Modality.ABSTRACT)
 
-    val javaLangClass: IrClassSymbol =
+    konst javaLangClass: IrClassSymbol =
         createClass(javaLang, "Class", ClassKind.CLASS, Modality.FINAL)
 
-    private val javaLangClassLoader: IrClassSymbol =
+    private konst javaLangClassLoader: IrClassSymbol =
         createClass(javaLang, "ClassLoader", ClassKind.CLASS, Modality.ABSTRACT)
 
-    private val javaUtilArrayList: IrClassSymbol =
+    private konst javaUtilArrayList: IrClassSymbol =
         createClass(javaUtil, "ArrayList", ClassKind.CLASS, Modality.OPEN)
 
-    private val javaUtilLinkedHashMap: IrClassSymbol =
+    private konst javaUtilLinkedHashMap: IrClassSymbol =
         createClass(javaUtil, "LinkedHashMap", ClassKind.CLASS, Modality.OPEN)
 
-    private val javaUtilLinkedHashSet: IrClassSymbol =
+    private konst javaUtilLinkedHashSet: IrClassSymbol =
         createClass(javaUtil, "LinkedHashSet", ClassKind.CLASS, Modality.OPEN)
 
-    private val javaUtilList: IrClassSymbol =
+    private konst javaUtilList: IrClassSymbol =
         createClass(javaUtil, "List", ClassKind.INTERFACE, Modality.ABSTRACT)
 
-    private val javaUtilTreeMap: IrClassSymbol =
+    private konst javaUtilTreeMap: IrClassSymbol =
         createClass(javaUtil, "TreeMap", ClassKind.CLASS, Modality.OPEN)
 
-    private val javaUtilTreeSet: IrClassSymbol =
+    private konst javaUtilTreeSet: IrClassSymbol =
         createClass(javaUtil, "TreeSet", ClassKind.CLASS, Modality.OPEN)
 
-    val kotlinUByte: IrClassSymbol =
+    konst kotlinUByte: IrClassSymbol =
         createClass(kotlin, "UByte", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.byteType as IrSimpleType)
+            owner.konstueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.byteType as IrSimpleType)
         }
 
-    val kotlinUShort: IrClassSymbol =
+    konst kotlinUShort: IrClassSymbol =
         createClass(kotlin, "UShort", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.shortType as IrSimpleType)
+            owner.konstueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.shortType as IrSimpleType)
         }
 
-    val kotlinUInt: IrClassSymbol =
+    konst kotlinUInt: IrClassSymbol =
         createClass(kotlin, "UInt", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.intType as IrSimpleType)
+            owner.konstueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.intType as IrSimpleType)
         }
 
-    val kotlinULong: IrClassSymbol =
+    konst kotlinULong: IrClassSymbol =
         createClass(kotlin, "ULong", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.longType as IrSimpleType)
+            owner.konstueClassRepresentation = InlineClassRepresentation(Name.identifier("data"), irBuiltIns.longType as IrSimpleType)
         }
 
-    val kotlinUByteArray: IrClassSymbol =
+    konst kotlinUByteArray: IrClassSymbol =
         createClass(kotlin, "UByteArray", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(
+            owner.konstueClassRepresentation = InlineClassRepresentation(
                 Name.identifier("storage"),
                 irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.byteType).owner.defaultType
             )
         }
 
-    val kotlinUShortArray: IrClassSymbol =
+    konst kotlinUShortArray: IrClassSymbol =
         createClass(kotlin, "UShortArray", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(
+            owner.konstueClassRepresentation = InlineClassRepresentation(
                 Name.identifier("storage"),
                 irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.shortType).owner.defaultType
             )
         }
 
-    val kotlinUIntArray: IrClassSymbol =
+    konst kotlinUIntArray: IrClassSymbol =
         createClass(kotlin, "UIntArray", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(
+            owner.konstueClassRepresentation = InlineClassRepresentation(
                 Name.identifier("storage"),
                 irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.intType).owner.defaultType
             )
         }
 
-    val kotlinULongArray: IrClassSymbol =
+    konst kotlinULongArray: IrClassSymbol =
         createClass(kotlin, "ULongArray", ClassKind.CLASS, Modality.FINAL, true).apply {
-            owner.valueClassRepresentation = InlineClassRepresentation(
+            owner.konstueClassRepresentation = InlineClassRepresentation(
                 Name.identifier("storage"),
                 irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.longType).owner.defaultType
             )
         }
 
-    val androidOsParcelableCreator: IrClassSymbol = irFactory.buildClass {
+    konst androidOsParcelableCreator: IrClassSymbol = irFactory.buildClass {
         name = Name.identifier("Creator")
         kind = ClassKind.INTERFACE
         modality = Modality.ABSTRACT
     }.apply {
         createImplicitParameterDeclarationWithWrappedDescriptor()
-        val t = addTypeParameter("T", irBuiltIns.anyNType)
+        konst t = addTypeParameter("T", irBuiltIns.anyNType)
         parent = androidOsParcelable.owner
 
         addFunction(CREATE_FROM_PARCEL_NAME.identifier, t.defaultType, Modality.ABSTRACT).apply {
@@ -182,7 +182,7 @@ class AndroidSymbols(
         }
     }.symbol
 
-    val kotlinKClassJava: IrPropertySymbol = irFactory.buildProperty {
+    konst kotlinKClassJava: IrPropertySymbol = irFactory.buildProperty {
         name = Name.identifier("java")
     }.apply {
         parent = kotlinJvm
@@ -192,321 +192,321 @@ class AndroidSymbols(
         }
     }.symbol
 
-    val parcelCreateBinderArray: IrSimpleFunctionSymbol =
+    konst parcelCreateBinderArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("createBinderArray", irBuiltIns.arrayClass.typeWith(androidOsIBinder.defaultType)).symbol
 
-    val parcelCreateBinderArrayList: IrSimpleFunctionSymbol =
+    konst parcelCreateBinderArrayList: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("createBinderArrayList", javaUtilArrayList.defaultType).symbol
 
-    val parcelCreateBooleanArray: IrSimpleFunctionSymbol =
+    konst parcelCreateBooleanArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createBooleanArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.booleanType).defaultType
         ).symbol
 
-    val parcelCreateByteArray: IrSimpleFunctionSymbol =
+    konst parcelCreateByteArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createByteArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.byteType).defaultType
         ).symbol
 
-    val parcelCreateCharArray: IrSimpleFunctionSymbol =
+    konst parcelCreateCharArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createCharArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.charType).defaultType
         ).symbol
 
-    val parcelCreateDoubleArray: IrSimpleFunctionSymbol =
+    konst parcelCreateDoubleArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createDoubleArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.doubleType).defaultType
         ).symbol
 
-    val parcelCreateFloatArray: IrSimpleFunctionSymbol =
+    konst parcelCreateFloatArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createFloatArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.floatType).defaultType
         ).symbol
 
-    val parcelCreateIntArray: IrSimpleFunctionSymbol =
+    konst parcelCreateIntArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createIntArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.intType).defaultType
         ).symbol
 
-    val parcelCreateLongArray: IrSimpleFunctionSymbol =
+    konst parcelCreateLongArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction(
             "createLongArray",
             irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.longType).defaultType
         ).symbol
 
-    val parcelCreateStringArray: IrSimpleFunctionSymbol =
+    konst parcelCreateStringArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("createStringArray", irBuiltIns.arrayClass.typeWith(irBuiltIns.stringType)).symbol
 
-    val parcelCreateStringArrayList: IrSimpleFunctionSymbol =
+    konst parcelCreateStringArrayList: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("createStringArrayList", javaUtilArrayList.defaultType).symbol
 
-    val parcelReadBundle: IrSimpleFunctionSymbol =
+    konst parcelReadBundle: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readBundle", androidOsBundle.defaultType).apply {
             addValueParameter("loader", javaLangClassLoader.defaultType)
         }.symbol
 
-    val parcelReadByte: IrSimpleFunctionSymbol =
+    konst parcelReadByte: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readByte", irBuiltIns.byteType).symbol
 
-    val parcelReadDouble: IrSimpleFunctionSymbol =
+    konst parcelReadDouble: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readDouble", irBuiltIns.doubleType).symbol
 
-    val parcelReadFileDescriptor: IrSimpleFunctionSymbol =
+    konst parcelReadFileDescriptor: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readFileDescriptor", androidOsParcelFileDescriptor.defaultType).symbol
 
-    val parcelReadFloat: IrSimpleFunctionSymbol =
+    konst parcelReadFloat: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readFloat", irBuiltIns.floatType).symbol
 
-    val parcelReadInt: IrSimpleFunctionSymbol =
+    konst parcelReadInt: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readInt", irBuiltIns.intType).symbol
 
-    val parcelReadLong: IrSimpleFunctionSymbol =
+    konst parcelReadLong: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readLong", irBuiltIns.longType).symbol
 
-    val parcelReadParcelable: IrSimpleFunctionSymbol =
+    konst parcelReadParcelable: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readParcelable", androidOsParcelable.defaultType).apply {
             addValueParameter("loader", javaLangClassLoader.defaultType)
         }.symbol
 
-    val parcelReadPersistableBundle: IrSimpleFunctionSymbol =
+    konst parcelReadPersistableBundle: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readPersistableBundle", androidOsPersistableBundle.defaultType).apply {
             addValueParameter("loader", javaLangClassLoader.defaultType)
         }.symbol
 
-    val parcelReadSerializable: IrSimpleFunctionSymbol =
+    konst parcelReadSerializable: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readSerializable", javaIoSerializable.defaultType).symbol
 
-    val parcelReadSize: IrSimpleFunctionSymbol =
+    konst parcelReadSize: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readSize", androidUtilSize.defaultType).symbol
 
-    val parcelReadSizeF: IrSimpleFunctionSymbol =
+    konst parcelReadSizeF: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readSizeF", androidUtilSizeF.defaultType).symbol
 
-    val parcelReadSparseBooleanArray: IrSimpleFunctionSymbol =
+    konst parcelReadSparseBooleanArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readSparseBooleanArray", androidUtilSparseBooleanArray.defaultType).symbol
 
-    val parcelReadString: IrSimpleFunctionSymbol =
+    konst parcelReadString: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readString", irBuiltIns.stringType).symbol
 
-    val parcelReadStrongBinder: IrSimpleFunctionSymbol =
+    konst parcelReadStrongBinder: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readStrongBinder", androidOsIBinder.defaultType).symbol
 
-    val parcelReadValue: IrSimpleFunctionSymbol =
+    konst parcelReadValue: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("readValue", irBuiltIns.anyNType).apply {
             addValueParameter("loader", javaLangClassLoader.defaultType)
         }.symbol
 
-    val parcelWriteBinderArray: IrSimpleFunctionSymbol =
+    konst parcelWriteBinderArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeBinderArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.arrayClass.typeWith(androidOsIBinder.defaultType))
+            addValueParameter("konst", irBuiltIns.arrayClass.typeWith(androidOsIBinder.defaultType))
         }.symbol
 
-    val parcelWriteBinderList: IrSimpleFunctionSymbol =
+    konst parcelWriteBinderList: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeBinderList", irBuiltIns.unitType).apply {
-            addValueParameter("val", javaUtilList.defaultType)
+            addValueParameter("konst", javaUtilList.defaultType)
         }.symbol
 
-    val parcelWriteBooleanArray: IrSimpleFunctionSymbol =
+    konst parcelWriteBooleanArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeBooleanArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.booleanType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.booleanType).defaultType)
         }.symbol
 
-    val parcelWriteBundle: IrSimpleFunctionSymbol =
+    konst parcelWriteBundle: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeBundle", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidOsBundle.defaultType)
+            addValueParameter("konst", androidOsBundle.defaultType)
         }.symbol
 
-    val parcelWriteByte: IrSimpleFunctionSymbol =
+    konst parcelWriteByte: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeByte", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.byteType)
+            addValueParameter("konst", irBuiltIns.byteType)
         }.symbol
 
-    val parcelWriteByteArray: IrSimpleFunctionSymbol =
+    konst parcelWriteByteArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeByteArray", irBuiltIns.unitType).apply {
             addValueParameter("b", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.byteType).defaultType)
         }.symbol
 
-    val parcelWriteCharArray: IrSimpleFunctionSymbol =
+    konst parcelWriteCharArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeCharArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.charType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.charType).defaultType)
         }.symbol
 
-    val parcelWriteDouble: IrSimpleFunctionSymbol =
+    konst parcelWriteDouble: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeDouble", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.doubleType)
+            addValueParameter("konst", irBuiltIns.doubleType)
         }.symbol
 
-    val parcelWriteDoubleArray: IrSimpleFunctionSymbol =
+    konst parcelWriteDoubleArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeDoubleArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.doubleType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.doubleType).defaultType)
         }.symbol
 
-    val parcelWriteFileDescriptor: IrSimpleFunctionSymbol =
+    konst parcelWriteFileDescriptor: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeFileDescriptor", irBuiltIns.unitType).apply {
-            addValueParameter("val", javaIoFileDescriptor.defaultType)
+            addValueParameter("konst", javaIoFileDescriptor.defaultType)
         }.symbol
 
-    val parcelWriteFloat: IrSimpleFunctionSymbol =
+    konst parcelWriteFloat: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeFloat", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.floatType)
+            addValueParameter("konst", irBuiltIns.floatType)
         }.symbol
 
-    val parcelWriteFloatArray: IrSimpleFunctionSymbol =
+    konst parcelWriteFloatArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeFloatArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.floatType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.floatType).defaultType)
         }.symbol
 
-    val parcelWriteInt: IrSimpleFunctionSymbol =
+    konst parcelWriteInt: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeInt", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.intType)
+            addValueParameter("konst", irBuiltIns.intType)
         }.symbol
 
-    val parcelWriteIntArray: IrSimpleFunctionSymbol =
+    konst parcelWriteIntArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeIntArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.intType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.intType).defaultType)
         }.symbol
 
-    val parcelWriteLong: IrSimpleFunctionSymbol =
+    konst parcelWriteLong: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeLong", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.longType)
+            addValueParameter("konst", irBuiltIns.longType)
         }.symbol
 
-    val parcelWriteLongArray: IrSimpleFunctionSymbol =
+    konst parcelWriteLongArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeLongArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.longType).defaultType)
+            addValueParameter("konst", irBuiltIns.primitiveArrayForType.getValue(irBuiltIns.longType).defaultType)
         }.symbol
 
-    val parcelWriteParcelable: IrSimpleFunctionSymbol =
+    konst parcelWriteParcelable: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeParcelable", irBuiltIns.unitType).apply {
             addValueParameter("p", androidOsParcelable.defaultType)
             addValueParameter("parcelableFlags", irBuiltIns.intType)
         }.symbol
 
-    val parcelWritePersistableBundle: IrSimpleFunctionSymbol =
+    konst parcelWritePersistableBundle: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writePersistableBundle", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidOsPersistableBundle.defaultType)
+            addValueParameter("konst", androidOsPersistableBundle.defaultType)
         }.symbol
 
-    val parcelWriteSerializable: IrSimpleFunctionSymbol =
+    konst parcelWriteSerializable: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeSerializable", irBuiltIns.unitType).apply {
             addValueParameter("s", javaIoSerializable.defaultType)
         }.symbol
 
-    val parcelWriteSize: IrSimpleFunctionSymbol =
+    konst parcelWriteSize: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeSize", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidUtilSize.defaultType)
+            addValueParameter("konst", androidUtilSize.defaultType)
         }.symbol
 
-    val parcelWriteSizeF: IrSimpleFunctionSymbol =
+    konst parcelWriteSizeF: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeSizeF", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidUtilSizeF.defaultType)
+            addValueParameter("konst", androidUtilSizeF.defaultType)
         }.symbol
 
-    val parcelWriteSparseBooleanArray: IrSimpleFunctionSymbol =
+    konst parcelWriteSparseBooleanArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeSparseBooleanArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidUtilSparseBooleanArray.defaultType)
+            addValueParameter("konst", androidUtilSparseBooleanArray.defaultType)
         }.symbol
 
-    val parcelWriteString: IrSimpleFunctionSymbol =
+    konst parcelWriteString: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeString", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.stringType)
+            addValueParameter("konst", irBuiltIns.stringType)
         }.symbol
 
-    val parcelWriteStringArray: IrSimpleFunctionSymbol =
+    konst parcelWriteStringArray: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeStringArray", irBuiltIns.unitType).apply {
-            addValueParameter("val", irBuiltIns.arrayClass.typeWith(irBuiltIns.stringType))
+            addValueParameter("konst", irBuiltIns.arrayClass.typeWith(irBuiltIns.stringType))
         }.symbol
 
-    val parcelWriteStringList: IrSimpleFunctionSymbol =
+    konst parcelWriteStringList: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeStringList", irBuiltIns.unitType).apply {
-            addValueParameter("val", javaUtilList.defaultType)
+            addValueParameter("konst", javaUtilList.defaultType)
         }.symbol
 
-    val parcelWriteStrongBinder: IrSimpleFunctionSymbol =
+    konst parcelWriteStrongBinder: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeStrongBinder", irBuiltIns.unitType).apply {
-            addValueParameter("val", androidOsIBinder.defaultType)
+            addValueParameter("konst", androidOsIBinder.defaultType)
         }.symbol
 
-    val parcelWriteValue: IrSimpleFunctionSymbol =
+    konst parcelWriteValue: IrSimpleFunctionSymbol =
         androidOsParcel.owner.addFunction("writeValue", irBuiltIns.unitType).apply {
             addValueParameter("v", irBuiltIns.anyNType)
         }.symbol
 
-    val textUtilsWriteToParcel: IrSimpleFunctionSymbol =
+    konst textUtilsWriteToParcel: IrSimpleFunctionSymbol =
         androidTextTextUtils.owner.addFunction(WRITE_TO_PARCEL_NAME.identifier, irBuiltIns.unitType, isStatic = true).apply {
             addValueParameter("cs", irBuiltIns.charSequenceClass.defaultType)
             addValueParameter("p", androidOsParcel.defaultType)
             addValueParameter("parcelableFlags", irBuiltIns.intType)
         }.symbol
 
-    val classGetClassLoader: IrSimpleFunctionSymbol =
+    konst classGetClassLoader: IrSimpleFunctionSymbol =
         javaLangClass.owner.addFunction("getClassLoader", javaLangClassLoader.defaultType).symbol
 
-    val arrayListConstructor: IrConstructorSymbol = javaUtilArrayList.owner.addConstructor().apply {
+    konst arrayListConstructor: IrConstructorSymbol = javaUtilArrayList.owner.addConstructor().apply {
         addValueParameter("p_0", irBuiltIns.intType)
     }.symbol
 
-    val arrayListAdd: IrSimpleFunctionSymbol =
+    konst arrayListAdd: IrSimpleFunctionSymbol =
         javaUtilArrayList.owner.addFunction("add", irBuiltIns.booleanType).apply {
             addValueParameter("p_0", irBuiltIns.anyNType)
         }.symbol
 
-    val linkedHashMapConstructor: IrConstructorSymbol =
+    konst linkedHashMapConstructor: IrConstructorSymbol =
         javaUtilLinkedHashMap.owner.addConstructor().apply {
             addValueParameter("p_0", irBuiltIns.intType)
         }.symbol
 
-    val linkedHashMapPut: IrSimpleFunctionSymbol =
+    konst linkedHashMapPut: IrSimpleFunctionSymbol =
         javaUtilLinkedHashMap.owner.addFunction("put", irBuiltIns.anyNType).apply {
             addValueParameter("p_0", irBuiltIns.anyNType)
             addValueParameter("p_1", irBuiltIns.anyNType)
         }.symbol
 
-    val linkedHashSetConstructor: IrConstructorSymbol =
+    konst linkedHashSetConstructor: IrConstructorSymbol =
         javaUtilLinkedHashSet.owner.addConstructor().apply {
             addValueParameter("p_0", irBuiltIns.intType)
         }.symbol
 
-    val linkedHashSetAdd: IrSimpleFunctionSymbol =
+    konst linkedHashSetAdd: IrSimpleFunctionSymbol =
         javaUtilLinkedHashSet.owner.addFunction("add", irBuiltIns.booleanType).apply {
             addValueParameter("p_0", irBuiltIns.anyNType)
         }.symbol
 
-    val treeMapConstructor: IrConstructorSymbol = javaUtilTreeMap.owner.addConstructor().symbol
+    konst treeMapConstructor: IrConstructorSymbol = javaUtilTreeMap.owner.addConstructor().symbol
 
-    val treeMapPut: IrSimpleFunctionSymbol =
+    konst treeMapPut: IrSimpleFunctionSymbol =
         javaUtilTreeMap.owner.addFunction("put", irBuiltIns.anyNType).apply {
             addValueParameter("p_0", irBuiltIns.anyNType)
             addValueParameter("p_1", irBuiltIns.anyNType)
         }.symbol
 
-    val treeSetConstructor: IrConstructorSymbol = javaUtilTreeSet.owner.addConstructor().symbol
+    konst treeSetConstructor: IrConstructorSymbol = javaUtilTreeSet.owner.addConstructor().symbol
 
-    val treeSetAdd: IrSimpleFunctionSymbol =
+    konst treeSetAdd: IrSimpleFunctionSymbol =
         javaUtilTreeSet.owner.addFunction("add", irBuiltIns.booleanType).apply {
             addValueParameter("p_0", irBuiltIns.anyNType)
         }.symbol
 
-    val textUtilsCharSequenceCreator: IrFieldSymbol = androidTextTextUtils.owner.addField {
+    konst textUtilsCharSequenceCreator: IrFieldSymbol = androidTextTextUtils.owner.addField {
         name = Name.identifier("CHAR_SEQUENCE_CREATOR")
         type = androidOsParcelableCreator.defaultType
         isStatic = true
     }.symbol
 
-    val unsafeCoerceIntrinsic: IrSimpleFunctionSymbol =
+    konst unsafeCoerceIntrinsic: IrSimpleFunctionSymbol =
         irFactory.buildFun {
             name = Name.special("<unsafe-coerce>")
             origin = IrDeclarationOrigin.IR_BUILTINS_STUB
         }.apply {
             parent = kotlinJvmInternalPackage
-            val src = addTypeParameter("T", irBuiltIns.anyNType)
-            val dst = addTypeParameter("R", irBuiltIns.anyNType)
+            konst src = addTypeParameter("T", irBuiltIns.anyNType)
+            konst dst = addTypeParameter("R", irBuiltIns.anyNType)
             addValueParameter("v", src.defaultType)
             returnType = dst.defaultType
         }.symbol

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.analysis.checkers.declaration.*
 import org.jetbrains.kotlin.fir.analysis.jvm.checkers.declaration.*
 
 object JvmDeclarationCheckers : DeclarationCheckers() {
-    override val basicDeclarationCheckers: Set<FirBasicDeclarationChecker>
+    override konst basicDeclarationCheckers: Set<FirBasicDeclarationChecker>
         get() = setOf(
             FirJvmExternalDeclarationChecker,
             FirJvmNameChecker,
@@ -17,35 +17,35 @@ object JvmDeclarationCheckers : DeclarationCheckers() {
             FirJvmFunctionDelegateMemberNameClashChecker,
             FirJvmStaticChecker,
             FirRepeatableAnnotationChecker,
-            FirJvmInvalidAndDangerousCharactersChecker,
+            FirJvmInkonstidAndDangerousCharactersChecker,
             FirJvmRedundantRepeatableChecker,
         )
 
-    override val classCheckers: Set<FirClassChecker>
+    override konst classCheckers: Set<FirClassChecker>
         get() = setOf(
             FirStrictfpApplicabilityChecker
         )
 
-    override val regularClassCheckers: Set<FirRegularClassChecker>
+    override konst regularClassCheckers: Set<FirRegularClassChecker>
         get() = setOf(
             FirJvmRecordChecker,
             FirJvmInlineApplicabilityChecker,
             FirJvmConflictsChecker,
         )
 
-    override val propertyCheckers: Set<FirPropertyChecker>
+    override konst propertyCheckers: Set<FirPropertyChecker>
         get() = setOf(
             FirJvmFieldApplicabilityChecker,
             FirJvmSyntheticApplicabilityChecker,
         )
 
-    override val functionCheckers: Set<FirFunctionChecker>
+    override konst functionCheckers: Set<FirFunctionChecker>
         get() = setOf(
             FirSynchronizedAnnotationChecker,
             FirOverloadsChecker,
         )
 
-    override val typeParameterCheckers: Set<FirTypeParameterChecker>
+    override konst typeParameterCheckers: Set<FirTypeParameterChecker>
         get() = setOf(
             FirUpperBoundsChecker,
         )

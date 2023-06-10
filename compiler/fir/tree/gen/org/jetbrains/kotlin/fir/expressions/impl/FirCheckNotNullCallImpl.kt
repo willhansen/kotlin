@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirCheckNotNullCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var argumentList: FirArgumentList,

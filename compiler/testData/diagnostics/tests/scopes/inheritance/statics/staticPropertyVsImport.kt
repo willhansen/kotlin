@@ -37,7 +37,7 @@ import C.bar
 
 class Z: A() {
     init {
-        val a: Int = bar
+        konst a: Int = bar
     }
 }
 
@@ -46,15 +46,15 @@ import C.*
 
 class Q: A() {
     init {
-        val a: Int = bar
+        konst a: Int = bar
     }
 }
 
 // FILE: 4.kt
-val bar = ""
+konst bar = ""
 
 class W: A() {
     init {
-        val a: Int = bar
+        konst a: Int = bar
     }
 }

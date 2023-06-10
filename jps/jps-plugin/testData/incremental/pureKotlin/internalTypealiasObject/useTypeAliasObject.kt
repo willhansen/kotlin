@@ -1,4 +1,4 @@
 package test
 
-val cc = CAlias
-val cc2 = CAlias2
+konst cc = CAlias
+konst cc2 = CAlias2

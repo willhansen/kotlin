@@ -43,30 +43,30 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirAnonymousFunctionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var status: FirDeclarationStatus,
     override var returnTypeRef: FirTypeRef,
     override var receiverParameter: FirReceiverParameter?,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
     override var controlFlowGraphReference: FirControlFlowGraphReference?,
-    override val valueParameters: MutableList<FirValueParameter>,
+    override konst konstueParameters: MutableList<FirValueParameter>,
     override var body: FirBlock?,
     override var contractDescription: FirContractDescription,
-    override val symbol: FirAnonymousFunctionSymbol,
+    override konst symbol: FirAnonymousFunctionSymbol,
     override var label: FirLabel?,
     override var invocationKind: EventOccurrencesRange?,
     override var inlineStatus: InlineStatus,
-    override val isLambda: Boolean,
-    override val hasExplicitParameterList: Boolean,
-    override val typeParameters: MutableList<FirTypeParameter>,
+    override konst isLambda: Boolean,
+    override konst hasExplicitParameterList: Boolean,
+    override konst typeParameters: MutableList<FirTypeParameter>,
     override var typeRef: FirTypeRef,
 ) : FirAnonymousFunction() {
     init {
@@ -82,7 +82,7 @@ internal class FirAnonymousFunctionImpl(
         receiverParameter?.accept(visitor, data)
         contextReceivers.forEach { it.accept(visitor, data) }
         controlFlowGraphReference?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         body?.accept(visitor, data)
         contractDescription.accept(visitor, data)
         label?.accept(visitor, data)
@@ -127,7 +127,7 @@ internal class FirAnonymousFunctionImpl(
     }
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirAnonymousFunctionImpl {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -175,8 +175,8 @@ internal class FirAnonymousFunctionImpl(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters.addAll(newValueParameters)
+        konstueParameters.clear()
+        konstueParameters.addAll(newValueParameters)
     }
 
     override fun replaceBody(newBody: FirBlock?) {

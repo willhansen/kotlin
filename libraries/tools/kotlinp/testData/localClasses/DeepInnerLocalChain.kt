@@ -3,7 +3,7 @@
 fun test() {
     class Local {
         inner class Inner {
-            val prop = object {
+            konst prop = object {
                 fun foo() {
                     fun bar() {
                         class DeepLocal {

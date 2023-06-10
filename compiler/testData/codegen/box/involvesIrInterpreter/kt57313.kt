@@ -9,13 +9,13 @@ class AsyncLifetime
 class DateTime
 class JobContext
 
-class OrgBootstrapTriggerJob(val orgId: Long, val bootstrap: OrgBootstrapRequest, val jetSalesSync: Boolean?) : AsyncJob() {
+class OrgBootstrapTriggerJob(konst orgId: Long, konst bootstrap: OrgBootstrapRequest, konst jetSalesSync: Boolean?) : AsyncJob() {
     override suspend fun execute(lifetime: AsyncLifetime, attempt: Int, due: DateTime, context: JobContext): JobContext {
         return JobContext()
     }
 }
 
-val name = "${OrgBootstrapTriggerJob::class.simpleName}<!EVALUATED(".")!>.<!>${OrgBootstrapTriggerJob::execute.<!EVALUATED("execute")!>name<!>}"
+konst name = "${OrgBootstrapTriggerJob::class.simpleName}<!EVALUATED(".")!>.<!>${OrgBootstrapTriggerJob::execute.<!EVALUATED("execute")!>name<!>}"
 
 fun box(): String {
     return "OK"

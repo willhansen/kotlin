@@ -1,41 +1,41 @@
 fun foo() {
-    val
+    konst
     println("abc")
 
-    val
+    konst
     lambdaCall {
 
     }
 
-    val
+    konst
     if (1 == 1) {
 
     }
 
-    val
+    konst
     (1 + 2)
 
     // `propertyNameOnTheNextLine` parsed as simple name expression
-    val
+    konst
     propertyNameOnTheNextLine
 
-    val
+    konst
     // comment
     propertyNameOnTheNextLine
 
-    val /* comment */
+    konst /* comment */
     propertyNameOnTheNextLine
 
     // Correct properties
-    val
+    konst
     property1 = 1
 
-    val
+    konst
     propertyWithBy by lazy { 1 }
 
-    val
+    konst
     propertyWithType: Int
 
-    val
+    konst
     (a, b) = 1
 }

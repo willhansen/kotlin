@@ -9,7 +9,7 @@ open class A {
     }
 }
 
-class B(val a: Int = 3) : A() {
+class B(konst a: Int = 3) : A() {
 
 }
 

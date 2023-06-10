@@ -6,7 +6,7 @@ public interface A {
 
 // FILE: B.kt
 abstract class B : A {
-    private val foo: Int = 1
+    private konst foo: Int = 1
 
     override fun getFoo(): String = "foo"
 }

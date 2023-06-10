@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.fir.types.isUnit
 object RedundantReturnUnitType : FirSimpleFunctionChecker() {
     override fun check(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration.body is FirSingleExpressionBlock) return
-        val returnType = declaration.returnTypeRef
+        konst returnType = declaration.returnTypeRef
         if (returnType.source == null) return
         if (declaration.source?.kind is KtFakeSourceElementKind) return
         if (returnType.annotations.isNotEmpty()) return

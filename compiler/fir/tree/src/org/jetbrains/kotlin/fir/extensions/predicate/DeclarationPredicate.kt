@@ -14,17 +14,17 @@ import org.jetbrains.kotlin.fir.extensions.AnnotationFqn
  * @see [AbstractPredicate]
  */
 sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
-    abstract override val annotations: Set<AnnotationFqn>
-    abstract override val metaAnnotations: Set<AnnotationFqn>
+    abstract override konst annotations: Set<AnnotationFqn>
+    abstract override konst metaAnnotations: Set<AnnotationFqn>
 
     abstract override fun <R, D> accept(visitor: PredicateVisitor<DeclarationPredicate, R, D>, data: D): R
 
     class Or(
-        override val a: DeclarationPredicate,
-        override val b: DeclarationPredicate
+        override konst a: DeclarationPredicate,
+        override konst b: DeclarationPredicate
     ) : DeclarationPredicate(), AbstractPredicate.Or<DeclarationPredicate> {
-        override val annotations: Set<AnnotationFqn> = a.annotations + b.annotations
-        override val metaAnnotations: Set<AnnotationFqn> = a.metaAnnotations + b.metaAnnotations
+        override konst annotations: Set<AnnotationFqn> = a.annotations + b.annotations
+        override konst metaAnnotations: Set<AnnotationFqn> = a.metaAnnotations + b.metaAnnotations
 
         override fun <R, D> accept(visitor: PredicateVisitor<DeclarationPredicate, R, D>, data: D): R {
             return visitor.visitOr(this, data)
@@ -32,11 +32,11 @@ sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
     }
 
     class And(
-        override val a: DeclarationPredicate,
-        override val b: DeclarationPredicate
+        override konst a: DeclarationPredicate,
+        override konst b: DeclarationPredicate
     ) : DeclarationPredicate(), AbstractPredicate.And<DeclarationPredicate> {
-        override val annotations: Set<AnnotationFqn> = a.annotations + b.annotations
-        override val metaAnnotations: Set<AnnotationFqn> = a.metaAnnotations + b.metaAnnotations
+        override konst annotations: Set<AnnotationFqn> = a.annotations + b.annotations
+        override konst metaAnnotations: Set<AnnotationFqn> = a.metaAnnotations + b.metaAnnotations
 
         override fun <R, D> accept(visitor: PredicateVisitor<DeclarationPredicate, R, D>, data: D): R {
             return visitor.visitAnd(this, data)
@@ -45,7 +45,7 @@ sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
 
     // ------------------------------------ Annotated ------------------------------------
 
-    sealed class Annotated(final override val annotations: Set<AnnotationFqn>) : DeclarationPredicate(),
+    sealed class Annotated(final override konst annotations: Set<AnnotationFqn>) : DeclarationPredicate(),
         AbstractPredicate.Annotated<DeclarationPredicate> {
         init {
             require(annotations.isNotEmpty()) {
@@ -53,7 +53,7 @@ sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
             }
         }
 
-        final override val metaAnnotations: Set<AnnotationFqn>
+        final override konst metaAnnotations: Set<AnnotationFqn>
             get() = emptySet()
 
         override fun <R, D> accept(visitor: PredicateVisitor<DeclarationPredicate, R, D>, data: D): R {
@@ -91,8 +91,8 @@ sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
     // ------------------------------------ MetaAnnotated ------------------------------------
 
     class MetaAnnotatedWith(
-        override val metaAnnotations: Set<AnnotationFqn>,
-        override val includeItself: Boolean
+        override konst metaAnnotations: Set<AnnotationFqn>,
+        override konst includeItself: Boolean
     ) : DeclarationPredicate(), AbstractPredicate.MetaAnnotatedWith<DeclarationPredicate> {
         init {
             require(metaAnnotations.isNotEmpty()) {
@@ -100,7 +100,7 @@ sealed class DeclarationPredicate : AbstractPredicate<DeclarationPredicate> {
             }
         }
 
-        override val annotations: Set<AnnotationFqn>
+        override konst annotations: Set<AnnotationFqn>
             get() = emptySet()
 
         override fun <R, D> accept(visitor: PredicateVisitor<DeclarationPredicate, R, D>, data: D): R {

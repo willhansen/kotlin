@@ -12,8 +12,8 @@ class Outer {
         fun bar()
 
         fun foo() {
-            val outer = Outer()
-            val inner = outer.Inner()
+            konst outer = Outer()
+            konst inner = outer.Inner()
             inner.bar()
         }
     }

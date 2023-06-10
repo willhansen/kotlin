@@ -1,4 +1,4 @@
-FILE fqName:<root> fileName:/values.kt
+FILE fqName:<root> fileName:/konstues.kt
   CLASS ENUM_CLASS name:Enum modality:FINAL visibility:public superTypes:[kotlin.Enum<<root>.Enum>]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Enum
     CONSTRUCTOR visibility:private <> () returnType:<root>.Enum [primary]
@@ -9,21 +9,21 @@ FILE fqName:<root> fileName:/values.kt
     ENUM_ENTRY name:A
       init: EXPRESSION_BODY
         ENUM_CONSTRUCTOR_CALL 'private constructor <init> () declared in <root>.Enum'
-    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
       annotations:
-        IntrinsicConstEvaluation
+        IntrinsicConstEkonstuation
       overridden:
         public final name: kotlin.String
       FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Enum>) returnType:kotlin.String [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-name> (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Enum>
-    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final ordinal: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<<root>.Enum>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Enum>
@@ -57,14 +57,14 @@ FILE fqName:<root> fileName:/values.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Enum
       $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<<root>.Enum>
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.Enum>
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<<root>.Enum>
       SYNTHETIC_BODY kind=ENUM_VALUES
-    FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:<root>.Enum
-      VALUE_PARAMETER name:value index:0 type:kotlin.String
+    FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:<root>.Enum
+      VALUE_PARAMETER name:konstue index:0 type:kotlin.String
       SYNTHETIC_BODY kind=ENUM_VALUEOF
-    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+    PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
       FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<<root>.Enum>
-        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [konst]
         SYNTHETIC_BODY kind=ENUM_ENTRIES
   CLASS OBJECT name:A modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.A
@@ -85,12 +85,12 @@ FILE fqName:<root> fileName:/values.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  PROPERTY name:a visibility:public modality:FINAL [val]
+  PROPERTY name:a visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private [final,static]
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=0
+        CONST Int type=kotlin.Int konstue=0
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:public modality:FINAL <> () returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:a visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-a> (): kotlin.Int declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.Int visibility:private [final,static]' type=kotlin.Int origin=null

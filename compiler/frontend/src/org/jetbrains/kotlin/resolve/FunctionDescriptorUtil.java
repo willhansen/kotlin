@@ -72,17 +72,17 @@ public class FunctionDescriptorUtil {
                     for (TypeParameterDescriptor typeParameter : descriptor.getTypeParameters()) {
                         handler.addClassifierDescriptor(typeParameter);
                     }
-                    for (ValueParameterDescriptor valueParameterDescriptor : descriptor.getValueParameters()) {
-                        if (valueParameterDescriptor instanceof ValueParameterDescriptorImpl.WithDestructuringDeclaration) {
+                    for (ValueParameterDescriptor konstueParameterDescriptor : descriptor.getValueParameters()) {
+                        if (konstueParameterDescriptor instanceof ValueParameterDescriptorImpl.WithDestructuringDeclaration) {
                             List<VariableDescriptor> entries =
-                                    ((ValueParameterDescriptorImpl.WithDestructuringDeclaration) valueParameterDescriptor)
+                                    ((ValueParameterDescriptorImpl.WithDestructuringDeclaration) konstueParameterDescriptor)
                                             .getDestructuringVariables();
                             for (VariableDescriptor entry : entries) {
                                 handler.addVariableDescriptor(entry);
                             }
                         }
                         else {
-                            handler.addVariableDescriptor(valueParameterDescriptor);
+                            handler.addVariableDescriptor(konstueParameterDescriptor);
                         }
                     }
                     return Unit.INSTANCE;

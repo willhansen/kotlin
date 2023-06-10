@@ -5,7 +5,7 @@
 inline fun runInline(fn: () -> String) = fn()
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(private val r: Int) {
+konstue class R(private konst r: Int) {
     fun test() = runInline { "OK" }
 }
 

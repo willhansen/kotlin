@@ -5,8 +5,8 @@ import kotlin.reflect.KProperty
 
 class State(var realValue: Int)
 
-fun format(event: String, property: String, value: Int): String
-    = "${event}: ${property} = ${value}; "
+fun format(event: String, property: String, konstue: Int): String
+    = "${event}: ${property} = ${konstue}; "
 
 object LoggerDelegate {
     var log = ""
@@ -16,26 +16,26 @@ object LoggerDelegate {
         return state.realValue
     }
 
-    operator fun setValue(state: State, desc: KProperty<*>, value: Int) {
-        log += format("set", desc.name, value)
-        state.realValue = value
+    operator fun setValue(state: State, desc: KProperty<*>, konstue: Int) {
+        log += format("set", desc.name, konstue)
+        state.realValue = konstue
     }
 }
 
-var State.value by LoggerDelegate
+var State.konstue by LoggerDelegate
 
 fun box(): String {
-    val state = State(1)
+    konst state = State(1)
     var expectedLog = ""
 
-    assertEquals(1, state.value)
-    expectedLog += format("get", "value", 1)
+    assertEquals(1, state.konstue)
+    expectedLog += format("get", "konstue", 1)
 
-    state.value = 3
-    expectedLog += format("set", "value", 3)
+    state.konstue = 3
+    expectedLog += format("set", "konstue", 3)
 
-    assertEquals(3, state.value)
-    expectedLog += format("get", "value", 3)
+    assertEquals(3, state.konstue)
+    expectedLog += format("get", "konstue", 3)
 
     assertEquals(expectedLog, LoggerDelegate.log)
     return "OK"

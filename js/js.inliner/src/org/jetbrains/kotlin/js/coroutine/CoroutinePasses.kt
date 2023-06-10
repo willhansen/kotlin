@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils.pureFqn
 import org.jetbrains.kotlin.js.translate.utils.splitToRanges
 
 fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement>): Set<JsNode> {
-    val root = this
-    val nodes = mutableSetOf<JsNode>()
+    konst root = this
+    konst nodes = mutableSetOf<JsNode>()
 
-    val visitor = object : RecursiveJsVisitor() {
+    konst visitor = object : RecursiveJsVisitor() {
         var childrenInSet = false
         var finallyLevel = 0
 
@@ -39,7 +39,7 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
                 childrenInSet = true
             }
             else {
-                val assignment = JsAstUtils.decomposeAssignment(x.expression)
+                konst assignment = JsAstUtils.decomposeAssignment(x.expression)
                 if (assignment != null && assignment.second.isSuspend) {
                     nodes += assignment.second
                     childrenInSet = true
@@ -63,7 +63,7 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
         override fun visitBreak(x: JsBreak) {
             super.visitBreak(x)
 
-            val breakTarget = breakContinueTargets[x]!!
+            konst breakTarget = breakContinueTargets[x]!!
             if (breakTarget in nodes) {
                 nodes += x
                 childrenInSet = true
@@ -73,7 +73,7 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
         override fun visitContinue(x: JsContinue) {
             super.visitContinue(x)
 
-            val continueTarget = breakContinueTargets[x]!!
+            konst continueTarget = breakContinueTargets[x]!!
             if (continueTarget in nodes) {
                 nodes += x
                 childrenInSet = true
@@ -91,7 +91,7 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
         }
 
         override fun visitElement(node: JsNode) {
-            val oldChildrenInSet = childrenInSet
+            konst oldChildrenInSet = childrenInSet
             childrenInSet = false
 
             node.acceptChildren(this)
@@ -106,9 +106,9 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
     }
 
     while (true) {
-        val countBefore = nodes.size
+        konst countBefore = nodes.size
         visitor.accept(this)
-        val countAfter = nodes.size
+        konst countAfter = nodes.size
         if (countAfter == countBefore) break
     }
 
@@ -116,33 +116,33 @@ fun JsNode.collectNodesToSplit(breakContinueTargets: Map<JsContinue, JsStatement
 }
 
 fun List<CoroutineBlock>.replaceCoroutineFlowStatements(context: CoroutineTransformationContext) {
-    val blockIndexes = withIndex().associate { (index, block) -> Pair(block, index) }
+    konst blockIndexes = withIndex().associate { (index, block) -> Pair(block, index) }
 
-    val blockReplacementVisitor = object : JsVisitorWithContextImpl() {
+    konst blockReplacementVisitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(x: JsDebugger, ctx: JsContext<in JsStatement>) {
-            val target = x.targetBlock
+            konst target = x.targetBlock
             if (target != null) {
-                val lhs = JsNameRef(context.metadata.stateName, JsAstUtils.stateMachineReceiver())
-                val rhs = JsIntLiteral(blockIndexes[target]!!)
+                konst lhs = JsNameRef(context.metadata.stateName, JsAstUtils.stateMachineReceiver())
+                konst rhs = JsIntLiteral(blockIndexes[target]!!)
                 ctx.replaceMe(JsExpressionStatement(JsAstUtils.assignment(lhs, rhs).source(x.source)).apply {
                     targetBlock = true
                 })
             }
 
-            val exceptionTarget = x.targetExceptionBlock
+            konst exceptionTarget = x.targetExceptionBlock
             if (exceptionTarget != null) {
-                val lhs = JsNameRef(context.metadata.exceptionStateName, JsAstUtils.stateMachineReceiver())
-                val rhs = JsIntLiteral(blockIndexes[exceptionTarget]!!)
+                konst lhs = JsNameRef(context.metadata.exceptionStateName, JsAstUtils.stateMachineReceiver())
+                konst rhs = JsIntLiteral(blockIndexes[exceptionTarget]!!)
                 ctx.replaceMe(JsExpressionStatement(JsAstUtils.assignment(lhs, rhs).source(x.source)).apply {
                     targetExceptionBlock = true
                 })
             }
 
-            val finallyPath = x.finallyPath
+            konst finallyPath = x.finallyPath
             if (finallyPath != null) {
                 if (finallyPath.isNotEmpty()) {
-                    val lhs = JsNameRef(context.metadata.finallyPathName, JsAstUtils.stateMachineReceiver())
-                    val rhs = JsArrayLiteral(finallyPath.map { JsIntLiteral(blockIndexes[it]!!) })
+                    konst lhs = JsNameRef(context.metadata.finallyPathName, JsAstUtils.stateMachineReceiver())
+                    konst rhs = JsArrayLiteral(finallyPath.map { JsIntLiteral(blockIndexes[it]!!) })
                     ctx.replaceMe(JsExpressionStatement(JsAstUtils.assignment(lhs, rhs).source(x.source)).apply {
                         this.finallyPath = true
                     })
@@ -159,8 +159,8 @@ fun List<CoroutineBlock>.replaceCoroutineFlowStatements(context: CoroutineTransf
 fun CoroutineBlock.buildGraph(globalCatchBlock: CoroutineBlock?): Map<CoroutineBlock, Set<CoroutineBlock>> {
     // That's a little more than DFS due to need of tracking finally paths
 
-    val visitedBlocks = mutableSetOf<CoroutineBlock>()
-    val graph = mutableMapOf<CoroutineBlock, MutableSet<CoroutineBlock>>()
+    konst visitedBlocks = mutableSetOf<CoroutineBlock>()
+    konst graph = mutableMapOf<CoroutineBlock, MutableSet<CoroutineBlock>>()
 
     fun visitBlock(block: CoroutineBlock) {
         if (block in visitedBlocks) return
@@ -175,7 +175,7 @@ fun CoroutineBlock.buildGraph(globalCatchBlock: CoroutineBlock?): Map<CoroutineB
 
         visitedBlocks += block
 
-        val successors = graph.getOrPut(block) { mutableSetOf() }
+        konst successors = graph.getOrPut(block) { mutableSetOf() }
         successors += block.collectTargetBlocks()
         if (block == this && globalCatchBlock != null) {
             successors += globalCatchBlock
@@ -189,7 +189,7 @@ fun CoroutineBlock.buildGraph(globalCatchBlock: CoroutineBlock?): Map<CoroutineB
 }
 
 private fun CoroutineBlock.collectTargetBlocks(): Set<CoroutineBlock> {
-    val targetBlocks = mutableSetOf<CoroutineBlock>()
+    konst targetBlocks = mutableSetOf<CoroutineBlock>()
     jsBlock.accept(object : RecursiveJsVisitor() {
         override fun visitDebugger(x: JsDebugger) {
             targetBlocks += listOfNotNull(x.targetExceptionBlock) + listOfNotNull(x.targetBlock)
@@ -199,7 +199,7 @@ private fun CoroutineBlock.collectTargetBlocks(): Set<CoroutineBlock> {
 }
 
 private fun CoroutineBlock.collectFinallyPaths(): List<List<CoroutineBlock>> {
-    val finallyPaths = mutableListOf<List<CoroutineBlock>>()
+    konst finallyPaths = mutableListOf<List<CoroutineBlock>>()
     jsBlock.accept(object : RecursiveJsVisitor() {
         override fun visitDebugger(x: JsDebugger) {
             x.finallyPath?.let { finallyPaths += it }
@@ -209,7 +209,7 @@ private fun CoroutineBlock.collectFinallyPaths(): List<List<CoroutineBlock>> {
 }
 
 fun JsBlock.replaceSpecialReferences(context: CoroutineTransformationContext) {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(x: JsThisRef, ctx: JsContext<in JsNode>) {
             ctx.replaceMe(JsNameRef(context.receiverFieldName, JsThisRef()))
         }
@@ -242,7 +242,7 @@ fun JsBlock.replaceSpecialReferences(context: CoroutineTransformationContext) {
 }
 
 fun JsBlock.replaceSpecialReferencesInSimpleFunction(continuationParam: JsParameter, resultVar: JsName) {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun visit(x: JsFunction, ctx: JsContext<*>) = false
 
         override fun endVisit(x: JsNameRef, ctx: JsContext<in JsNode>) {
@@ -267,9 +267,9 @@ fun JsBlock.replaceSpecialReferencesInSimpleFunction(continuationParam: JsParame
 }
 
 fun List<CoroutineBlock>.collectVariablesSurvivingBetweenBlocks(localVariables: Set<JsName>, parameters: Set<JsName>): Set<JsName> {
-    val varDefinedIn = localVariables.associate { it to mutableSetOf<Int>() }
-    val varDeclaredIn = localVariables.associate { it to mutableSetOf<Int>() }
-    val varUsedIn = localVariables.associate { it to mutableSetOf<Int>() }
+    konst varDefinedIn = localVariables.associate { it to mutableSetOf<Int>() }
+    konst varDeclaredIn = localVariables.associate { it to mutableSetOf<Int>() }
+    konst varUsedIn = localVariables.associate { it to mutableSetOf<Int>() }
 
     for ((blockIndex, block) in withIndex()) {
         for (statement in block.statements) {
@@ -295,7 +295,7 @@ fun List<CoroutineBlock>.collectVariablesSurvivingBetweenBlocks(localVariables: 
                 }
 
                 override fun visitBinaryExpression(x: JsBinaryOperation) {
-                    val lhs = x.arg1
+                    konst lhs = x.arg1
                     if (x.operator.isAssignment && lhs is JsNameRef) {
                         varDefinedIn[lhs.name]?.add(blockIndex)?.let {
                             accept(x.arg2)
@@ -323,12 +323,12 @@ fun List<CoroutineBlock>.collectVariablesSurvivingBetweenBlocks(localVariables: 
     }
 
     fun JsName.isLocalInBlock(): Boolean {
-        val def = varDefinedIn[this]!!
-        val use = varUsedIn[this]!!
-        val decl = varDeclaredIn[this]!!
+        konst def = varDefinedIn[this]!!
+        konst use = varUsedIn[this]!!
+        konst decl = varDeclaredIn[this]!!
         if (def.size == 1 && use.size == 1) {
-            val singleDef = def.single()
-            val singleUse = use.single()
+            konst singleDef = def.single()
+            konst singleUse = use.single()
             return singleDef == singleUse && decl.isNotEmpty()
         }
         return use.isEmpty()
@@ -348,28 +348,28 @@ fun List<CoroutineBlock>.collectVariablesSurvivingBetweenBlocks(localVariables: 
 fun JsBlock.replaceLocalVariables(context: CoroutineTransformationContext, localVariables: Set<JsName>) {
     replaceSpecialReferences(context)
 
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun visit(x: JsFunction, ctx: JsContext<*>): Boolean = false
 
         override fun endVisit(x: JsFunction, ctx: JsContext<in JsNode>) {
-            val freeVars = x.collectFreeVariables().intersect(localVariables)
+            konst freeVars = x.collectFreeVariables().intersect(localVariables)
             if (freeVars.isNotEmpty()) {
-                val wrapperFunction = JsFunction(x.scope.parent, JsBlock(), "")
-                val wrapperInvocation = JsInvocation(wrapperFunction)
+                konst wrapperFunction = JsFunction(x.scope.parent, JsBlock(), "")
+                konst wrapperInvocation = JsInvocation(wrapperFunction)
                 wrapperFunction.body.statements += JsReturn(x)
-                val nameMap = freeVars.associate { it to JsScope.declareTemporaryName(it.ident) }
+                konst nameMap = freeVars.associate { it to JsScope.declareTemporaryName(it.ident) }
                 for (freeVar in freeVars) {
                     wrapperFunction.parameters += JsParameter(nameMap[freeVar]!!)
                     wrapperInvocation.arguments += JsNameRef(context.getFieldName(freeVar), JsThisRef())
                 }
-                x.body = replaceNames(x.body, nameMap.mapValues { it.value.makeRef() })
+                x.body = replaceNames(x.body, nameMap.mapValues { it.konstue.makeRef() })
                 ctx.replaceMe(wrapperInvocation)
             }
         }
 
         override fun endVisit(x: JsNameRef, ctx: JsContext<in JsNode>) {
             if (x.qualifier == null && x.name in localVariables) {
-                val fieldName = context.getFieldName(x.name!!)
+                konst fieldName = context.getFieldName(x.name!!)
                 ctx.replaceMe(JsNameRef(fieldName, JsThisRef()).source(x.source))
             }
         }
@@ -377,12 +377,12 @@ fun JsBlock.replaceLocalVariables(context: CoroutineTransformationContext, local
         override fun endVisit(x: JsVars, ctx: JsContext<in JsStatement>) {
             if (x.vars.none { it.name in localVariables }) return
 
-            val statements = mutableListOf<JsStatement>()
+            konst statements = mutableListOf<JsStatement>()
             for ((range, shouldReplace) in x.vars.splitToRanges { it.name in localVariables }) {
                 if (shouldReplace) {
-                    val assignments = x.vars.mapNotNull {
-                        val fieldName = context.getFieldName(it.name)
-                        val initExpression = it.initExpression
+                    konst assignments = x.vars.mapNotNull {
+                        konst fieldName = context.getFieldName(it.name)
+                        konst initExpression = it.initExpression
                         if (initExpression != null) {
                             JsAstUtils.assignment(JsNameRef(fieldName, JsThisRef()), it.initExpression)
                         }

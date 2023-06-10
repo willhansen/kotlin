@@ -39,7 +39,7 @@ class A {
 }
 
 fun box() : String {
-    val a = A()
+    konst a = A()
 
     assertEquals("winter_spring", a.bar1(Season.WINTER))
     assertEquals("winter_spring", a.bar1(Season.SPRING))

@@ -14,13 +14,13 @@ fun fooTest() {
 
 @Test
 fun request() {
-    val response = memScoped {
-        val request = NSURLRequest(NSURL(string = "https://cache-redirector.jetbrains.com/"))
-        val responseRef = alloc<ObjCObjectVar<NSURLResponse?>>()
-        val errorRef = alloc<ObjCObjectVar<NSError?>>()
+    konst response = memScoped {
+        konst request = NSURLRequest(NSURL(string = "https://cache-redirector.jetbrains.com/"))
+        konst responseRef = alloc<ObjCObjectVar<NSURLResponse?>>()
+        konst errorRef = alloc<ObjCObjectVar<NSError?>>()
         NSURLConnection.sendSynchronousRequest(request, responseRef.ptr, errorRef.ptr) ?:
-        throw Error(errorRef.value?.toString() ?: "")
-        responseRef.value!! as NSHTTPURLResponse
+        throw Error(errorRef.konstue?.toString() ?: "")
+        responseRef.konstue!! as NSHTTPURLResponse
     }
     kotlin.test.assertEquals(200, response.statusCode)
 }

@@ -1,10 +1,10 @@
-class A(val value: String)
+class A(konst konstue: String)
 
 fun A.test(): String {
-    val o = object  {
-        val z: String
+    konst o = object  {
+        konst z: String
         init {
-            val x = value + "K"
+            konst x = konstue + "K"
             z = x
         }
     }

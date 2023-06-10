@@ -18,10 +18,10 @@ import kotlin.test.Test
 
 class ResolvedBinaryDependencyTest : AbstractSerializationTest<IdeaKpmResolvedBinaryDependency>() {
 
-    override fun serialize(value: IdeaKpmResolvedBinaryDependency) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmResolvedBinaryDependency) = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray) = IdeaKpmResolvedBinaryDependency(data)
-    override fun normalize(value: IdeaKpmResolvedBinaryDependency) =
-        value.run { this as IdeaKpmResolvedBinaryDependencyImpl }.copy(binaryFile = value.binaryFile.absoluteFile)
+    override fun normalize(konstue: IdeaKpmResolvedBinaryDependency) =
+        konstue.run { this as IdeaKpmResolvedBinaryDependencyImpl }.copy(binaryFile = konstue.binaryFile.absoluteFile)
 
     @Test
     fun `serialize - deserialize - sample 0`() = testSerialization(

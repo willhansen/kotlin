@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1293
 package foo
 
-class RangeIterator(val start: Int, var count: Int, val reversed: Boolean) {
+class RangeIterator(konst start: Int, var count: Int, konst reversed: Boolean) {
 
     var i = start
 
@@ -21,9 +21,9 @@ class RangeIterator(val start: Int, var count: Int, val reversed: Boolean) {
     operator fun hasNext() = (count > 0);
 }
 
-class NumberRange(val start: Int, val size: Int, val reversed: Boolean) {
+class NumberRange(konst start: Int, konst size: Int, konst reversed: Boolean) {
 
-    val end: Int
+    konst end: Int
         get() = if (reversed) start - size + 1 else start + size - 1
 
     fun contains(number: Int): Boolean {
@@ -45,7 +45,7 @@ fun box(): String {
 
 fun testRange(): Boolean {
 
-    val oneToFive = NumberRange(1, 4, false);
+    konst oneToFive = NumberRange(1, 4, false);
     if (oneToFive.contains(5)) return false;
     if (oneToFive.contains(0)) return false;
     if (oneToFive.contains(-100)) return false;
@@ -71,7 +71,7 @@ fun testRange(): Boolean {
 
 fun testReversedRange(): Boolean {
 
-    val tenToFive = NumberRange(10, 5, true);
+    konst tenToFive = NumberRange(10, 5, true);
 
     if (tenToFive.contains(5)) return false;
     if (tenToFive.contains(11)) return false;

@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
 class CoroutineTransformer : JsVisitorWithContextImpl() {
 
-    val functionName = mutableMapOf<JsFunction, String?>()
+    konst functionName = mutableMapOf<JsFunction, String?>()
 
     override fun visit(x: JsExpressionStatement, ctx: JsContext<*>): Boolean {
-        val expression = x.expression
-        val assignment = JsAstUtils.decomposeAssignment(expression)
+        konst expression = x.expression
+        konst assignment = JsAstUtils.decomposeAssignment(expression)
         if (assignment != null) {
-            val (lhs, rhs) = assignment
+            konst (lhs, rhs) = assignment
             InlineMetadata.tryExtractFunction(rhs)?.let { wrapper ->
-                val function = wrapper.function
-                val name = ((lhs as? JsNameRef)?.name ?: function.name)?.ident
+                konst function = wrapper.function
+                konst name = ((lhs as? JsNameRef)?.name ?: function.name)?.ident
                 functionName[function] = name
             }
         } else if (expression is JsFunction) {
@@ -55,7 +55,7 @@ class CoroutineTransformer : JsVisitorWithContextImpl() {
     }
 
     override fun visit(x: JsVars.JsVar, ctx: JsContext<*>): Boolean {
-        val initExpression = x.initExpression
+        konst initExpression = x.initExpression
         if (initExpression != null) {
             InlineMetadata.tryExtractFunction(initExpression)?.let { wrapper ->
                 functionName[wrapper.function] = x.name.ident
@@ -66,7 +66,7 @@ class CoroutineTransformer : JsVisitorWithContextImpl() {
 }
 
 fun transformCoroutines(fragments: Iterable<JsProgramFragment>) {
-    val coroutineTransformer = CoroutineTransformer()
+    konst coroutineTransformer = CoroutineTransformer()
     for (fragment in fragments) {
         ImportIntoFragmentInliningScope.process(fragment) { scope ->
             coroutineTransformer.accept(scope.allCode)

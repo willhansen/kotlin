@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtConstructorElementType
 class KotlinConstructorStubImpl<T : KtConstructor<T>>(
     parent: StubElement<out PsiElement>?,
     elementType: KtConstructorElementType<T>,
-    private val containingClassName: StringRef?,
-    private val hasBody: Boolean,
-    private val isDelegatedCallToThis: Boolean,
+    private konst containingClassName: StringRef?,
+    private konst hasBody: Boolean,
+    private konst isDelegatedCallToThis: Boolean,
 ) : KotlinStubBaseImpl<T>(parent, elementType), KotlinConstructorStub<T> {
     override fun getFqName() = null
     override fun getName() = StringRef.toString(containingClassName)

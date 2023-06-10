@@ -1,9 +1,9 @@
-val two = 2
+konst two = 2
 
 fun test2() {
-    val p = 1 < two
+    konst p = 1 < two
     if (!p) {
-        val p = 1
+        konst p = 1
     }
 }
 // 2 IF

@@ -41,19 +41,19 @@ interface CodegenFactory {
     fun invokeCodegen(input: CodegenInput)
 
     fun generateModule(state: GenerationState, input: BackendInput) {
-        val result = invokeLowerings(state, input)
+        konst result = invokeLowerings(state, input)
         invokeCodegen(result)
     }
 
     class IrConversionInput(
-        val project: Project,
-        val files: Collection<KtFile>,
-        val configuration: CompilerConfiguration,
-        val module: ModuleDescriptor,
-        val bindingContext: BindingContext,
-        val languageVersionSettings: LanguageVersionSettings,
-        val ignoreErrors: Boolean,
-        val skipBodies: Boolean,
+        konst project: Project,
+        konst files: Collection<KtFile>,
+        konst configuration: CompilerConfiguration,
+        konst module: ModuleDescriptor,
+        konst bindingContext: BindingContext,
+        konst languageVersionSettings: LanguageVersionSettings,
+        konst ignoreErrors: Boolean,
+        konst skipBodies: Boolean,
     ) {
         companion object {
             fun fromGenerationStateAndFiles(state: GenerationState, files: Collection<KtFile>): IrConversionInput =
@@ -71,7 +71,7 @@ interface CodegenFactory {
     interface BackendInput
 
     interface CodegenInput {
-        val state: GenerationState
+        konst state: GenerationState
     }
 
     companion object {
@@ -84,9 +84,9 @@ interface CodegenFactory {
 }
 
 object DefaultCodegenFactory : CodegenFactory {
-    private class OldBackendInput(val ktFiles: Collection<KtFile>) : CodegenFactory.BackendInput
+    private class OldBackendInput(konst ktFiles: Collection<KtFile>) : CodegenFactory.BackendInput
 
-    private class DummyOldCodegenInput(override val state: GenerationState) : CodegenFactory.CodegenInput
+    private class DummyOldCodegenInput(override konst state: GenerationState) : CodegenFactory.CodegenInput
 
     override fun convertToIr(input: CodegenFactory.IrConversionInput): CodegenFactory.BackendInput = OldBackendInput(input.files)
 
@@ -97,11 +97,11 @@ object DefaultCodegenFactory : CodegenFactory {
 
     override fun invokeLowerings(state: GenerationState, input: CodegenFactory.BackendInput): CodegenFactory.CodegenInput {
         input as OldBackendInput
-        val filesInPackages = MultiMap<FqName, KtFile>()
-        val filesInMultifileClasses = MultiMap<FqName, KtFile>()
+        konst filesInPackages = MultiMap<FqName, KtFile>()
+        konst filesInMultifileClasses = MultiMap<FqName, KtFile>()
 
         for (file in input.ktFiles) {
-            val fileClassInfo = JvmFileClassUtil.getFileClassInfoNoResolve(file)
+            konst fileClassInfo = JvmFileClassUtil.getFileClassInfoNoResolve(file)
 
             if (fileClassInfo.withJvmMultifileClass) {
                 filesInMultifileClasses.putValue(fileClassInfo.facadeClassFqName, file)
@@ -110,13 +110,13 @@ object DefaultCodegenFactory : CodegenFactory {
             }
         }
 
-        val obsoleteMultifileClasses = HashSet(state.obsoleteMultifileClasses)
+        konst obsoleteMultifileClasses = HashSet(state.obsoleteMultifileClasses)
         for (multifileClassFqName in filesInMultifileClasses.keySet() + obsoleteMultifileClasses) {
             CodegenFactory.doCheckCancelled(state)
             generateMultifileClass(state, multifileClassFqName, filesInMultifileClasses.get(multifileClassFqName))
         }
 
-        val packagesWithObsoleteParts = HashSet(state.packagesWithObsoleteParts)
+        konst packagesWithObsoleteParts = HashSet(state.packagesWithObsoleteParts)
         for (packageFqName in packagesWithObsoleteParts + filesInPackages.keySet()) {
             CodegenFactory.doCheckCancelled(state)
             generatePackage(state, packageFqName, filesInPackages.get(packageFqName))

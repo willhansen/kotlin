@@ -50,14 +50,14 @@ private object CheckersFactory {
         reporter: DiagnosticReporter,
         useExtendedCheckers: Boolean
     ): DiagnosticCollectorComponents {
-        val module = session.llFirModuleData.ktModule
-        val platform = module.platform.componentPlatforms.first()
-        val extensionCheckers = session.extensionService.additionalCheckers
-        val declarationCheckers = createDeclarationCheckers(useExtendedCheckers, platform, extensionCheckers)
-        val expressionCheckers = createExpressionCheckers(useExtendedCheckers, platform, extensionCheckers)
-        val typeCheckers = createTypeCheckers(useExtendedCheckers, platform, extensionCheckers)
+        konst module = session.llFirModuleData.ktModule
+        konst platform = module.platform.componentPlatforms.first()
+        konst extensionCheckers = session.extensionService.additionalCheckers
+        konst declarationCheckers = createDeclarationCheckers(useExtendedCheckers, platform, extensionCheckers)
+        konst expressionCheckers = createExpressionCheckers(useExtendedCheckers, platform, extensionCheckers)
+        konst typeCheckers = createTypeCheckers(useExtendedCheckers, platform, extensionCheckers)
 
-        val regularComponents = buildList {
+        konst regularComponents = buildList {
             if (!useExtendedCheckers) {
                 add(ErrorNodeDiagnosticCollectorComponent(session, reporter))
             }

@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinSharedNativeCompilation
 
 internal fun KotlinSharedNativeCompilation.getImplicitlyDependingNativeCompilations(): Set<KotlinNativeCompilation> {
-    val multiplatformExtension = project.multiplatformExtensionOrNull ?: return emptySet()
-    val thisAllKotlinSourceSets = allKotlinSourceSets
+    konst multiplatformExtension = project.multiplatformExtensionOrNull ?: return emptySet()
+    konst thisAllKotlinSourceSets = allKotlinSourceSets
 
     return multiplatformExtension.targets
         .flatMap { target -> target.compilations }

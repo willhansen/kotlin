@@ -1,5 +1,5 @@
 package producer
 
 actual class Producer {
-    actual fun foo(value: String, optionalParameter: Boolean) = Unit
+    actual fun foo(konstue: String, optionalParameter: Boolean) = Unit
 }

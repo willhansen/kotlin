@@ -3,14 +3,14 @@ package p
 class A {
 //      Int     Int
 //      │       │
-    val aProp = 10
+    konst aProp = 10
     fun call() {}
 }
 
 class B {
 //      Int     Int
 //      │       │
-    val bProp = 1
+    konst bProp = 1
 }
 
 fun foo(a: Int, b: Int): Int {
@@ -19,7 +19,7 @@ fun foo(a: Int, b: Int): Int {
 //  │    │    with@0
 //  │    │    │
     with(A()) {
-//      val (A).aProp: Int
+//      konst (A).aProp: Int
 //      this@0
 //      │
         aProp
@@ -33,15 +33,15 @@ fun foo(a: Int, b: Int): Int {
 //      │    │    with@1
 //      │    │    │
         with(B()) {
-//          val (A).aProp: Int
+//          konst (A).aProp: Int
 //          this@0
 //          │
             aProp
-//          val (B).bProp: Int
+//          konst (B).bProp: Int
 //          this@1
 //          │
             bProp
-//          val (A).aProp: Int
+//          konst (A).aProp: Int
 //          this@0
 //          │
             aProp
@@ -53,7 +53,7 @@ fun foo(a: Int, b: Int): Int {
 //  │    │    with@0
 //  │    │    │
     with(A()) {
-//      val (A).aProp: Int
+//      konst (A).aProp: Int
 //      this@0
 //      │
         aProp
@@ -63,11 +63,11 @@ fun foo(a: Int, b: Int): Int {
 //      │    │    with@1
 //      │    │    │
         with(B()) {
-//          val (A).aProp: Int
+//          konst (A).aProp: Int
 //          this@0
 //          │
             aProp
-//          val (B).bProp: Int
+//          konst (B).bProp: Int
 //          this@1
 //          │
             bProp
@@ -78,11 +78,11 @@ fun foo(a: Int, b: Int): Int {
 //      │    │    with@1
 //      │    │    │
         with(B()) {
-//          val (A).aProp: Int
+//          konst (A).aProp: Int
 //          this@0
 //          │
             aProp
-//          val (B).bProp: Int
+//          konst (B).bProp: Int
 //          this@1
 //          │
             bProp

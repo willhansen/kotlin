@@ -1,4 +1,4 @@
 interface A
 interface B
-val o = object: A, B {}
-val o2 = <expr>o</expr>
+konst o = object: A, B {}
+konst o2 = <expr>o</expr>

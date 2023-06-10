@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
-abstract class AbstractDestructuredPairRangeValue(protected val rangeCall: ResolvedCall<out CallableDescriptor>) :
+abstract class AbstractDestructuredPairRangeValue(protected konst rangeCall: ResolvedCall<out CallableDescriptor>) :
     RangeValue {
 
     override fun createForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression): ForLoopGenerator {
-        val loopParameter = forExpression.destructuringDeclaration
+        konst loopParameter = forExpression.destructuringDeclaration
         return if (loopParameter != null)
             createDestructuredPairForLoopGenerator(codegen, forExpression, loopParameter, rangeCall)
         else

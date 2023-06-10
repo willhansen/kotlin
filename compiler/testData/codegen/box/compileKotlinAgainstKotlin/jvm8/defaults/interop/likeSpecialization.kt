@@ -6,7 +6,7 @@
 
 interface Foo<T> {
     fun test(p: T) = p
-    val T.prop: String
+    konst T.prop: String
         get() = "K"
 }
 
@@ -18,6 +18,6 @@ interface FooDerived: Foo<String>
 open class UnspecializedFromDerived : FooDerived
 
 fun box(): String {
-    val foo = UnspecializedFromDerived()
+    konst foo = UnspecializedFromDerived()
     return foo.test("O") + with(foo) { "K".prop }
 }

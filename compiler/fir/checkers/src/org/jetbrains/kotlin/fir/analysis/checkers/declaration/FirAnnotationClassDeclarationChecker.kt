@@ -44,11 +44,11 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
             checkAnnotationClassMember(member, context, reporter)
         }
 
-        val session = context.session
+        konst session = context.session
         if (declaration.getRetention(session) != AnnotationRetention.SOURCE &&
             KotlinTarget.EXPRESSION in declaration.getAllowedAnnotationTargets(session)
         ) {
-            val target = declaration.getRetentionAnnotation(session) ?: declaration.getTargetAnnotation(session) ?: declaration
+            konst target = declaration.getRetentionAnnotation(session) ?: declaration.getTargetAnnotation(session) ?: declaration
             reporter.reportOn(target.source, FirErrors.RESTRICTED_RETENTION_FOR_EXPRESSION_ANNOTATION, context)
         }
 
@@ -58,22 +58,22 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
     private fun checkAnnotationClassMember(member: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         when {
             member is FirConstructor && member.isPrimary -> {
-                for (parameter in member.valueParameters) {
-                    val source = parameter.source ?: continue
+                for (parameter in member.konstueParameters) {
+                    konst source = parameter.source ?: continue
                     if (!source.hasValOrVar()) {
                         reporter.reportOn(source, FirErrors.MISSING_VAL_ON_ANNOTATION_PARAMETER, context)
                     } else if (source.hasVar()) {
                         reporter.reportOn(source, FirErrors.VAR_ANNOTATION_PARAMETER, context)
                     }
-                    val defaultValue = parameter.defaultValue
+                    konst defaultValue = parameter.defaultValue
                     if (defaultValue != null && checkConstantArguments(defaultValue, context.session) != null) {
                         reporter.reportOn(defaultValue.source, FirErrors.ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT, context)
                     }
 
-                    val typeRef = parameter.returnTypeRef
-                    val coneType = typeRef.coneTypeSafe<ConeLookupTagBasedType>()
+                    konst typeRef = parameter.returnTypeRef
+                    konst coneType = typeRef.coneTypeSafe<ConeLookupTagBasedType>()
                         ?.fullyExpandedType(context.session) as? ConeLookupTagBasedType
-                    val classId = coneType?.classId
+                    konst classId = coneType?.classId
 
                     if (coneType != null) when {
                         classId == ClassId.fromString("<error>") -> {
@@ -94,10 +94,10 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
                         classId == StandardClassIds.String -> {
                             // DO NOTHING: String is allowed
                         }
-                        classId in primitiveArrayTypeByElementType.values -> {
+                        classId in primitiveArrayTypeByElementType.konstues -> {
                             // DO NOTHING: primitive arrays are allowed
                         }
-                        classId in unsignedArrayTypeByElementType.values -> {
+                        classId in unsignedArrayTypeByElementType.konstues -> {
                             // DO NOTHING: arrays of unsigned types are allowed
                         }
                         classId == StandardClassIds.Array -> {
@@ -130,7 +130,7 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
     }
 
     private fun isAllowedClassKind(cone: ConeLookupTagBasedType, session: FirSession): Boolean {
-        val typeRefClassKind = (cone.lookupTag.toSymbol(session) as? FirRegularClassSymbol)
+        konst typeRefClassKind = (cone.lookupTag.toSymbol(session) as? FirRegularClassSymbol)
             ?.classKind
             ?: return false
 
@@ -138,16 +138,16 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
     }
 
     private fun isAllowedArray(type: ConeKotlinType, session: FirSession): Boolean {
-        val typeArguments = type.typeArguments
+        konst typeArguments = type.typeArguments
 
         if (typeArguments.size != 1) return false
 
-        val arrayType = (typeArguments[0] as? ConeKotlinTypeProjection)?.type?.fullyExpandedType(session)
+        konst arrayType = (typeArguments[0] as? ConeKotlinTypeProjection)?.type?.fullyExpandedType(session)
             ?: return false
 
         if (arrayType.isNullable) return false
 
-        val arrayTypeClassId = arrayType.classId
+        konst arrayTypeClassId = arrayType.classId
 
         when {
             arrayTypeClassId == StandardClassIds.KClass -> {
@@ -168,29 +168,29 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
     }
 
     private fun checkCyclesInParameters(annotation: FirRegularClassSymbol, context: CheckerContext, reporter: DiagnosticReporter) {
-        val primaryConstructor = annotation.primaryConstructorSymbol() ?: return
-        val checker = CycleChecker(annotation, context.session)
-        for (valueParameter in primaryConstructor.valueParameterSymbols) {
-            if (checker.parameterHasCycle(annotation, valueParameter)) {
-                reporter.reportOn(valueParameter.source, CYCLE_IN_ANNOTATION_PARAMETER, context)
+        konst primaryConstructor = annotation.primaryConstructorSymbol() ?: return
+        konst checker = CycleChecker(annotation, context.session)
+        for (konstueParameter in primaryConstructor.konstueParameterSymbols) {
+            if (checker.parameterHasCycle(annotation, konstueParameter)) {
+                reporter.reportOn(konstueParameter.source, CYCLE_IN_ANNOTATION_PARAMETER, context)
             }
         }
     }
 
-    private class CycleChecker(val targetAnnotation: FirRegularClassSymbol, val session: FirSession) {
-        private val visitedAnnotations = mutableSetOf(targetAnnotation)
-        private val annotationsWithCycle = mutableSetOf(targetAnnotation)
+    private class CycleChecker(konst targetAnnotation: FirRegularClassSymbol, konst session: FirSession) {
+        private konst visitedAnnotations = mutableSetOf(targetAnnotation)
+        private konst annotationsWithCycle = mutableSetOf(targetAnnotation)
 
         fun annotationHasCycle(annotation: FirRegularClassSymbol): Boolean {
-            val primaryConstructor = annotation.primaryConstructorSymbol() ?: return false
-            for (valueParameter in primaryConstructor.valueParameterSymbols) {
-                if (parameterHasCycle(annotation, valueParameter)) return true
+            konst primaryConstructor = annotation.primaryConstructorSymbol() ?: return false
+            for (konstueParameter in primaryConstructor.konstueParameterSymbols) {
+                if (parameterHasCycle(annotation, konstueParameter)) return true
             }
             return false
         }
 
         fun parameterHasCycle(ownedAnnotation: FirRegularClassSymbol, parameter: FirValueParameterSymbol): Boolean {
-            val returnType = parameter.resolvedReturnTypeRef.coneType
+            konst returnType = parameter.resolvedReturnTypeRef.coneType
             return when {
                 parameter.isVararg || returnType.isNonPrimitiveArray -> false
                 returnType.typeArguments.isNotEmpty() -> {
@@ -205,7 +205,7 @@ object FirAnnotationClassDeclarationChecker : FirRegularClassChecker() {
         }
 
         fun typeHasCycle(ownedAnnotation: FirRegularClassSymbol, type: ConeKotlinType): Boolean {
-            val referencedAnnotation = type.fullyExpandedType(session)
+            konst referencedAnnotation = type.fullyExpandedType(session)
                 .toRegularClassSymbol(session)
                 ?.takeIf { it.classKind == ANNOTATION_CLASS }
                 ?: return false

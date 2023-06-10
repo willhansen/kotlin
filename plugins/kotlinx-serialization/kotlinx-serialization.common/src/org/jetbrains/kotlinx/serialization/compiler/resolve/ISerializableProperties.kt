@@ -6,13 +6,13 @@
 package org.jetbrains.kotlinx.serialization.compiler.resolve
 
 interface ISerializableProperties<S : ISerializableProperty> {
-    val serializableProperties: List<S>
-    val isExternallySerializable: Boolean
-    val serializableConstructorProperties: List<S>
-    val serializableStandaloneProperties: List<S>
+    konst serializableProperties: List<S>
+    konst isExternallySerializable: Boolean
+    konst serializableConstructorProperties: List<S>
+    konst serializableStandaloneProperties: List<S>
 }
 
-val ISerializableProperties<*>.goldenMask: Int
+konst ISerializableProperties<*>.goldenMask: Int
     get() {
         var goldenMask = 0
         var requiredBit = 1
@@ -25,15 +25,15 @@ val ISerializableProperties<*>.goldenMask: Int
         return goldenMask
     }
 
-val ISerializableProperties<*>.goldenMaskList: List<Int>
+konst ISerializableProperties<*>.goldenMaskList: List<Int>
     get() {
-        val maskSlotCount = serializableProperties.bitMaskSlotCount()
-        val goldenMaskList = MutableList(maskSlotCount) { 0 }
+        konst maskSlotCount = serializableProperties.bitMaskSlotCount()
+        konst goldenMaskList = MutableList(maskSlotCount) { 0 }
 
         for (i in serializableProperties.indices) {
             if (!serializableProperties[i].optional) {
-                val slotNumber = i / 32
-                val bitInSlot = i % 32
+                konst slotNumber = i / 32
+                konst bitInSlot = i % 32
                 goldenMaskList[slotNumber] = goldenMaskList[slotNumber] or (1 shl bitInSlot)
             }
         }

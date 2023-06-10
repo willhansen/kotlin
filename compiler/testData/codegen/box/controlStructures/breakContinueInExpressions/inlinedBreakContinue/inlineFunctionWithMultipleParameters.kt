@@ -19,7 +19,7 @@ inline fun foo(
 }
 
 fun box(): String {
-    val visited = mutableListOf<Int>()
+    konst visited = mutableListOf<Int>()
 
     for (i in 1..3) {
         foo(

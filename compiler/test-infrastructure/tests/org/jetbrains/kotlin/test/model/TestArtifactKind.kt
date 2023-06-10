@@ -5,8 +5,8 @@
 
 package org.jetbrains.kotlin.test.model
 
-abstract class TestArtifactKind<R : ResultingArtifact<R>>(private val representation: String) {
-    open val shouldRunAnalysis: Boolean
+abstract class TestArtifactKind<R : ResultingArtifact<R>>(private konst representation: String) {
+    open konst shouldRunAnalysis: Boolean
         get() = true
 
     override fun toString(): String {
@@ -18,21 +18,21 @@ object SourcesKind : TestArtifactKind<ResultingArtifact.Source>("Sources")
 
 abstract class FrontendKind<R : ResultingArtifact.FrontendOutput<R>>(representation: String) : TestArtifactKind<R>(representation) {
     object NoFrontend : FrontendKind<ResultingArtifact.FrontendOutput.Empty>("NoFrontend") {
-        override val shouldRunAnalysis: Boolean
+        override konst shouldRunAnalysis: Boolean
             get() = false
     }
 }
 
 abstract class BackendKind<I : ResultingArtifact.BackendInput<I>>(representation: String) : TestArtifactKind<I>(representation) {
     object NoBackend : BackendKind<ResultingArtifact.BackendInput.Empty>("NoBackend") {
-        override val shouldRunAnalysis: Boolean
+        override konst shouldRunAnalysis: Boolean
             get() = false
     }
 }
 
 abstract class BinaryKind<A : ResultingArtifact.Binary<A>>(representation: String) : TestArtifactKind<A>(representation) {
     object NoArtifact : BinaryKind<ResultingArtifact.Binary.Empty>("NoArtifact") {
-        override val shouldRunAnalysis: Boolean
+        override konst shouldRunAnalysis: Boolean
             get() = false
     }
 }

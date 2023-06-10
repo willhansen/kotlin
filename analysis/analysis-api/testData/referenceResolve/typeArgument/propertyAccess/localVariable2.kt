@@ -1,5 +1,5 @@
 // COMPILATION_ERRORS
 fun foo() {
-    val variable = "hello"
+    konst variable = "hello"
     variable<String, <caret>Int>
 }

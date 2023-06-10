@@ -1,6 +1,6 @@
 // TARGET_BACKEND: JVM_IR
 
-val x = createImpl<List<String>>()
+konst x = createImpl<List<String>>()
 
 interface IfaceWithGenericFun<A> {
     fun <B : A> doStuff(x: B)

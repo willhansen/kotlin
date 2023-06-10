@@ -14,7 +14,7 @@ fun runs(f: suspend () -> String): String {
 
 suspend fun suspendListOf(s: String) = listOf(s)
 
-val strings: MutableCollection<String> = ArrayList()
+konst strings: MutableCollection<String> = ArrayList()
 
 fun box(): String {
     return runs {

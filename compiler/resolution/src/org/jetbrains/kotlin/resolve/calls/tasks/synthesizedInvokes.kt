@@ -34,22 +34,22 @@ import java.util.*
 // Creates a descriptor denoting an extension function for a collection of non-extension "invoke"s from function types.
 // For example, `fun invoke(param: P): R` becomes `fun P.invoke(): R`
 fun createSynthesizedInvokes(functions: Collection<FunctionDescriptor>): Collection<FunctionDescriptor> {
-    val result = ArrayList<FunctionDescriptor>(1)
+    konst result = ArrayList<FunctionDescriptor>(1)
 
     for (invoke in functions) {
         if (invoke.name != OperatorNameConventions.INVOKE) continue
 
         // "invoke" must have at least one parameter, which will become the receiver parameter of the synthesized "invoke"
-        if (invoke.valueParameters.isEmpty()) continue
+        if (invoke.konstueParameters.isEmpty()) continue
 
-        val containerClassId = (invoke.containingDeclaration as ClassDescriptor).classId
-        val synthesized = if (containerClassId != null && isBuiltinFunctionClass(containerClassId)) {
+        konst containerClassId = (invoke.containingDeclaration as ClassDescriptor).classId
+        konst synthesized = if (containerClassId != null && isBuiltinFunctionClass(containerClassId)) {
             createSynthesizedFunctionWithFirstParameterAsReceiver(invoke)
         } else {
-            val invokeDeclaration = invoke.overriddenDescriptors.singleOrNull()
+            konst invokeDeclaration = invoke.overriddenDescriptors.singleOrNull()
                     ?: error("No single overridden invoke for $invoke: ${invoke.overriddenDescriptors}")
-            val synthesizedSuperFun = createSynthesizedFunctionWithFirstParameterAsReceiver(invokeDeclaration)
-            val fakeOverride = synthesizedSuperFun.copy(
+            konst synthesizedSuperFun = createSynthesizedFunctionWithFirstParameterAsReceiver(invokeDeclaration)
+            konst fakeOverride = synthesizedSuperFun.copy(
                 invoke.containingDeclaration,
                 synthesizedSuperFun.modality,
                 synthesizedSuperFun.visibility,
@@ -70,11 +70,11 @@ private fun createSynthesizedFunctionWithFirstParameterAsReceiver(descriptor: Fu
     descriptor.original.newCopyBuilder().apply {
         setExtensionReceiverParameter(
             DescriptorFactory.createExtensionReceiverParameterForCallable(
-                descriptor.original, descriptor.original.valueParameters.first().type, Annotations.EMPTY
+                descriptor.original, descriptor.original.konstueParameters.first().type, Annotations.EMPTY
             )
         )
         setValueParameters(
-            descriptor.original.valueParameters
+            descriptor.original.konstueParameters
                 .drop(1)
                 .map { p -> p.copy(descriptor.original, Name.identifier("p${p.index + 1}"), p.index - 1) }
         )

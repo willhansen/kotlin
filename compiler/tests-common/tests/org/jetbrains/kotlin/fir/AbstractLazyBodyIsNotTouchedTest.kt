@@ -12,16 +12,16 @@ import org.jetbrains.kotlin.fir.resolve.transformers.createCompilerProcessorByPh
 import java.io.File
 
 abstract class AbstractLazyBodyIsNotTouchedTest : AbstractFirBaseDiagnosticsTest() {
-    override val useLazyBodiesModeForRawFir: Boolean get() = true
+    override konst useLazyBodiesModeForRawFir: Boolean get() = true
 
     override fun runAnalysis(testDataFile: File, testFiles: List<TestFile>, firFilesPerSession: Map<FirSession, List<FirFile>>) {
-        val phases = FirResolvePhase.values()
+        konst phases = FirResolvePhase.konstues()
             .dropWhile { it <= FirResolvePhase.RAW_FIR }
             .filterNot { it == FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS }
             .takeWhile { it < FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS }
 
         for ((session, firFiles) in firFilesPerSession) {
-            val scopeSession = ScopeSession()
+            konst scopeSession = ScopeSession()
             /*
              Test that we are not touching lazy bodies & lazy expressions during phases < ARGUMENTS_OF_ANNOTATIONS
              If we try to access them, the exception will be thrown and test will fail

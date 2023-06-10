@@ -1,7 +1,7 @@
 package
 
-public val topLevelAnonymousFunction: (kotlin.Boolean) -> kotlin.Unit
-public val topLevelLambda: (kotlin.Boolean) -> kotlin.Unit
+public konst topLevelAnonymousFunction: (kotlin.Boolean) -> kotlin.Unit
+public konst topLevelLambda: (kotlin.Boolean) -> kotlin.Unit
 public var topLevelPropertyAccessors: kotlin.Int?
 public inline fun inlineTopLevel(/*0*/ x: kotlin.Boolean): kotlin.Unit
     Returns(WILDCARD) -> x

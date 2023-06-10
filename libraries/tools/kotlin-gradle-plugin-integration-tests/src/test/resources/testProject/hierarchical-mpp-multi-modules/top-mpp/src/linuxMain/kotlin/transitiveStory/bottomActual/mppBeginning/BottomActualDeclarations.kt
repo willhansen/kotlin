@@ -1,12 +1,12 @@
 package transitiveStory.bottomActual.mppBeginning
 
 actual open class BottomActualDeclarations {
-    actual val simpleVal: Int = commonInt
+    actual konst simpleVal: Int = commonInt
 
     actual companion object Compainon {
-        actual val inTheCompanionOfBottomActualDeclarations: String =
+        actual konst inTheCompanionOfBottomActualDeclarations: String =
             "I'm a string from the companion object of `$this` in `$sourceSetName` module `$moduleName`"
     }
 }
 
-actual val sourceSetName: String = "linuxMain"
+actual konst sourceSetName: String = "linuxMain"

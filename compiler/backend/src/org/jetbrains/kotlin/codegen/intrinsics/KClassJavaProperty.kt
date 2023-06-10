@@ -15,11 +15,11 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class KClassJavaProperty : IntrinsicPropertyGetter() {
     override fun generate(resolvedCall: ResolvedCall<*>?, codegen: ExpressionCodegen, returnType: Type, receiver: StackValue): StackValue? {
-        val receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
-        val classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
-        val receiverExpression = classLiteralExpression.receiverExpression ?: return null
-        val lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
-        val value = codegen.generateClassLiteralReference(lhs, receiverExpression, /* wrapIntoKClass = */ false)
-        return StackValue.coercion(value, returnType, null)
+        konst receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
+        konst classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
+        konst receiverExpression = classLiteralExpression.receiverExpression ?: return null
+        konst lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
+        konst konstue = codegen.generateClassLiteralReference(lhs, receiverExpression, /* wrapIntoKClass = */ false)
+        return StackValue.coercion(konstue, returnType, null)
     }
 }

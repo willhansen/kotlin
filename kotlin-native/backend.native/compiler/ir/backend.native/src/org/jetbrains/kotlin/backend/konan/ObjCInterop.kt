@@ -27,16 +27,16 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-internal val interopPackageName = InteropFqNames.packageName
-internal val objCObjectFqName = interopPackageName.child(Name.identifier("ObjCObject"))
-private val objCClassFqName = interopPackageName.child(Name.identifier("ObjCClass"))
-private val objCProtocolFqName = interopPackageName.child(Name.identifier("ObjCProtocol"))
-internal val externalObjCClassFqName = interopPackageName.child(Name.identifier("ExternalObjCClass"))
-internal val objCDirectFqName = interopPackageName.child(Name.identifier("ObjCDirect"))
-internal val objCMethodFqName = interopPackageName.child(Name.identifier("ObjCMethod"))
-internal val objCConstructorFqName = FqName("kotlinx.cinterop.ObjCConstructor")
-internal val objCFactoryFqName = interopPackageName.child(Name.identifier("ObjCFactory"))
-private val objcnamesForwardDeclarationsPackageName = Name.identifier("objcnames")
+internal konst interopPackageName = InteropFqNames.packageName
+internal konst objCObjectFqName = interopPackageName.child(Name.identifier("ObjCObject"))
+private konst objCClassFqName = interopPackageName.child(Name.identifier("ObjCClass"))
+private konst objCProtocolFqName = interopPackageName.child(Name.identifier("ObjCProtocol"))
+internal konst externalObjCClassFqName = interopPackageName.child(Name.identifier("ExternalObjCClass"))
+internal konst objCDirectFqName = interopPackageName.child(Name.identifier("ObjCDirect"))
+internal konst objCMethodFqName = interopPackageName.child(Name.identifier("ObjCMethod"))
+internal konst objCConstructorFqName = FqName("kotlinx.cinterop.ObjCConstructor")
+internal konst objCFactoryFqName = interopPackageName.child(Name.identifier("ObjCFactory"))
+private konst objcnamesForwardDeclarationsPackageName = Name.identifier("objcnames")
 
 fun ClassDescriptor.isObjCClass(): Boolean =
                 this.containingDeclaration.fqNameSafe != interopPackageName &&
@@ -103,15 +103,15 @@ fun ClassDescriptor.isKotlinObjCClass(): Boolean = this.isObjCClass() && !this.i
 fun IrClass.isKotlinObjCClass(): Boolean = this.isObjCClass() && !this.isExternalObjCClass()
 
 
-data class ObjCMethodInfo(val selector: String,
-                          val encoding: String,
-                          val isStret: Boolean,
-                          val directSymbol: String?)
+data class ObjCMethodInfo(konst selector: String,
+                          konst encoding: String,
+                          konst isStret: Boolean,
+                          konst directSymbol: String?)
 
 private fun FunctionDescriptor.decodeObjCMethodAnnotation(): ObjCMethodInfo? {
     assert (this.kind.isReal)
 
-    val methodInfo = this.annotations.findAnnotation(objCMethodFqName)?.let {
+    konst methodInfo = this.annotations.findAnnotation(objCMethodFqName)?.let {
         ObjCMethodInfo(
                 selector = it.getStringValue("selector"),
                 encoding = it.getStringValue("encoding"),
@@ -126,7 +126,7 @@ private fun FunctionDescriptor.decodeObjCMethodAnnotation(): ObjCMethodInfo? {
 private fun IrFunction.decodeObjCMethodAnnotation(): ObjCMethodInfo? {
     assert (this.isReal)
 
-    val methodInfo = this.annotations.findAnnotation(objCMethodFqName)?.let {
+    konst methodInfo = this.annotations.findAnnotation(objCMethodFqName)?.let {
         ObjCMethodInfo(
                 selector = it.getAnnotationStringValue("selector"),
                 encoding = it.getAnnotationStringValue("encoding"),
@@ -219,7 +219,7 @@ class ObjCOverridabilityCondition : ExternalOverridabilityCondition {
         if (superDescriptor.name == subDescriptor.name) { // Slow path:
             if (superDescriptor is FunctionDescriptor && subDescriptor is FunctionDescriptor) {
                 superDescriptor.getExternalObjCMethodInfo()?.let { superInfo ->
-                    val subInfo = subDescriptor.getExternalObjCMethodInfo()
+                    konst subInfo = subDescriptor.getExternalObjCMethodInfo()
                     if (subInfo != null) {
                         // Overriding Objective-C method by Objective-C method in interop stubs.
                         // Don't even check method signatures:
@@ -250,12 +250,12 @@ class ObjCOverridabilityCondition : ExternalOverridabilityCondition {
         // The original Objective-C method selector is represented as
         // function name and parameter names (except first).
 
-        if (first.valueParameters.size != second.valueParameters.size) {
+        if (first.konstueParameters.size != second.konstueParameters.size) {
             return false
         }
 
-        first.valueParameters.forEachIndexed { index, parameter ->
-            if (index > 0 && parameter.name != second.valueParameters[index].name) {
+        first.konstueParameters.forEachIndexed { index, parameter ->
+            if (index > 0 && parameter.name != second.konstueParameters[index].name) {
                 return false
             }
         }
@@ -270,20 +270,20 @@ fun IrConstructor.objCConstructorIsDesignated(): Boolean =
         ?: error("Could not find 'designated' argument")
 
 fun ConstructorDescriptor.objCConstructorIsDesignated(): Boolean {
-    val annotation = this.annotations.findAnnotation(objCConstructorFqName)!!
-    val value = annotation.allValueArguments[Name.identifier("designated")]!!
+    konst annotation = this.annotations.findAnnotation(objCConstructorFqName)!!
+    konst konstue = annotation.allValueArguments[Name.identifier("designated")]!!
 
-    return (value as BooleanValue).value
+    return (konstue as BooleanValue).konstue
 }
 
 
-val IrConstructor.isObjCConstructor get() = this.annotations.hasAnnotation(objCConstructorFqName)
-val ConstructorDescriptor.isObjCConstructor get() = this.annotations.hasAnnotation(objCConstructorFqName)
+konst IrConstructor.isObjCConstructor get() = this.annotations.hasAnnotation(objCConstructorFqName)
+konst ConstructorDescriptor.isObjCConstructor get() = this.annotations.hasAnnotation(objCConstructorFqName)
 
 // TODO-DCE-OBJC-INIT: Selector should be preserved by DCE.
 fun IrConstructor.getObjCInitMethod(): IrSimpleFunction? {
     return this.annotations.findAnnotation(objCConstructorFqName)?.let {
-        val initSelector = it.getAnnotationStringValue("initSelector")
+        konst initSelector = it.getAnnotationStringValue("initSelector")
         this.constructedClass.declarations.asSequence()
                 .filterIsInstance<IrSimpleFunction>()
                 .single { it.getExternalObjCMethodInfo()?.selector == initSelector }
@@ -298,13 +298,13 @@ fun ConstructorDescriptor.getObjCInitMethod(): FunctionDescriptor? {
     }
 
     return this.annotations.findAnnotation(objCConstructorFqName)?.let {
-        val initSelector = it.getAnnotationStringValue("initSelector")
-        val memberScope = constructedClass.unsubstitutedMemberScope
-        val functionNames = memberScope.getFunctionNames()
+        konst initSelector = it.getAnnotationStringValue("initSelector")
+        konst memberScope = constructedClass.unsubstitutedMemberScope
+        konst functionNames = memberScope.getFunctionNames()
         for (name in functionNames) {
-            val functions = memberScope.getContributedFunctions(name, NoLookupLocation.FROM_BACKEND)
+            konst functions = memberScope.getContributedFunctions(name, NoLookupLocation.FROM_BACKEND)
             for (function in functions) {
-                val objectInfo = function.getExternalObjCMethodInfo() ?: continue
+                konst objectInfo = function.getExternalObjCMethodInfo() ?: continue
                 if (objectInfo.selector == initSelector) return function
             }
         }
@@ -312,29 +312,29 @@ fun ConstructorDescriptor.getObjCInitMethod(): FunctionDescriptor? {
     }
 }
 
-val IrFunction.hasObjCFactoryAnnotation get() = this.annotations.hasAnnotation(objCFactoryFqName)
-val FunctionDescriptor.hasObjCFactoryAnnotation get() = this.annotations.hasAnnotation(objCFactoryFqName)
+konst IrFunction.hasObjCFactoryAnnotation get() = this.annotations.hasAnnotation(objCFactoryFqName)
+konst FunctionDescriptor.hasObjCFactoryAnnotation get() = this.annotations.hasAnnotation(objCFactoryFqName)
 
-val IrFunction.hasObjCMethodAnnotation get() = this.annotations.hasAnnotation(objCMethodFqName)
-val FunctionDescriptor.hasObjCMethodAnnotation get() = this.annotations.hasAnnotation(objCMethodFqName)
+konst IrFunction.hasObjCMethodAnnotation get() = this.annotations.hasAnnotation(objCMethodFqName)
+konst FunctionDescriptor.hasObjCMethodAnnotation get() = this.annotations.hasAnnotation(objCMethodFqName)
 
 fun FunctionDescriptor.getObjCFactoryInitMethodInfo(): ObjCMethodInfo? {
-    val factoryAnnotation = this.annotations.findAnnotation(objCFactoryFqName) ?: return null
+    konst factoryAnnotation = this.annotations.findAnnotation(objCFactoryFqName) ?: return null
     return objCMethodInfo(factoryAnnotation)
 }
 
 fun IrFunction.getObjCFactoryInitMethodInfo(): ObjCMethodInfo? {
-    val factoryAnnotation = this.annotations.findAnnotation(objCFactoryFqName) ?: return null
+    konst factoryAnnotation = this.annotations.findAnnotation(objCFactoryFqName) ?: return null
     return objCMethodInfo(factoryAnnotation)
 }
 
-fun inferObjCSelector(descriptor: FunctionDescriptor): String = if (descriptor.valueParameters.isEmpty()) {
+fun inferObjCSelector(descriptor: FunctionDescriptor): String = if (descriptor.konstueParameters.isEmpty()) {
     descriptor.name.asString()
 } else {
     buildString {
         append(descriptor.name)
         append(':')
-        descriptor.valueParameters.drop(1).forEach {
+        descriptor.konstueParameters.drop(1).forEach {
             append(it.name)
             append(':')
         }

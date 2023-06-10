@@ -21,28 +21,28 @@ import org.jetbrains.kotlin.ir.symbols.IrVariableSymbol
 
 class JsSharedVariablesManager(context: JsIrBackendContext) : SharedVariablesManager {
 
-    private val builtIns: IrBuiltIns = context.irBuiltIns
-    private val createBox: IrSimpleFunctionSymbol = context.intrinsics.createSharedBox
-    private val readBox: IrSimpleFunctionSymbol = context.intrinsics.readSharedBox
-    private val writeBox: IrSimpleFunctionSymbol = context.intrinsics.writeSharedBox
-    private val dynamicType = context.dynamicType
+    private konst builtIns: IrBuiltIns = context.irBuiltIns
+    private konst createBox: IrSimpleFunctionSymbol = context.intrinsics.createSharedBox
+    private konst readBox: IrSimpleFunctionSymbol = context.intrinsics.readSharedBox
+    private konst writeBox: IrSimpleFunctionSymbol = context.intrinsics.writeSharedBox
+    private konst dynamicType = context.dynamicType
 
     override fun declareSharedVariable(originalDeclaration: IrVariable): IrVariable {
-        val valueType = originalDeclaration.type
-        val initializer = originalDeclaration.initializer ?: IrConstImpl.constNull(
+        konst konstueType = originalDeclaration.type
+        konst initializer = originalDeclaration.initializer ?: IrConstImpl.constNull(
             originalDeclaration.startOffset,
             originalDeclaration.endOffset,
-            valueType
+            konstueType
         )
 
-        val irCall =
+        konst irCall =
             IrCallImpl(
                 initializer.startOffset, initializer.endOffset,
                 dynamicType, createBox,
-                valueArgumentsCount = 1,
+                konstueArgumentsCount = 1,
                 typeArgumentsCount = 1
             ).apply {
-                putTypeArgument(0, valueType)
+                putTypeArgument(0, konstueType)
                 putValueArgument(0, initializer)
             }
 
@@ -68,7 +68,7 @@ class JsSharedVariablesManager(context: JsIrBackendContext) : SharedVariablesMan
             originalGet.type,
             readBox,
             typeArgumentsCount = 1,
-            valueArgumentsCount = 1,
+            konstueArgumentsCount = 1,
             originalGet.origin
         ).apply {
             putTypeArgument(0, originalGet.type)
@@ -91,10 +91,10 @@ class JsSharedVariablesManager(context: JsIrBackendContext) : SharedVariablesMan
             builtIns.unitType,
             writeBox,
             typeArgumentsCount = 1,
-            valueArgumentsCount = 2,
+            konstueArgumentsCount = 2,
             originalSet.origin
         ).apply {
-            putTypeArgument(0, originalSet.value.type)
+            putTypeArgument(0, originalSet.konstue.type)
             putValueArgument(
                 0, IrGetValueImpl(
                     originalSet.startOffset,
@@ -104,7 +104,7 @@ class JsSharedVariablesManager(context: JsIrBackendContext) : SharedVariablesMan
                     originalSet.origin
                 )
             )
-            putValueArgument(1, originalSet.value)
+            putValueArgument(1, originalSet.konstue)
         }
     }
 }

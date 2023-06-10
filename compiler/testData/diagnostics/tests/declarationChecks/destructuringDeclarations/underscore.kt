@@ -29,22 +29,22 @@ fun test() {
         foo(<!UNRESOLVED_REFERENCE!>_<!>, <!UNRESOLVED_REFERENCE!>_<!>)
     }
 
-    val (x, _) = A()
-    val (_, y) = A()
+    konst (x, _) = A()
+    konst (_, y) = A()
 
     foo(x, y)
     foo(x, <!UNRESOLVED_REFERENCE!>_<!>)
     foo(<!UNRESOLVED_REFERENCE!>_<!>, y)
 
-    val (<!REDECLARATION!>`_`<!>, z) = A()
+    konst (<!REDECLARATION!>`_`<!>, z) = A()
 
     foo(<!UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!>, z)
 
-    val (_, <!NAME_SHADOWING, REDECLARATION!>`_`<!>) = A()
+    konst (_, <!NAME_SHADOWING, REDECLARATION!>`_`<!>) = A()
 
     foo(<!TYPE_MISMATCH, UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!>, y)
 
-    val (unused, _) = A()
+    konst (unused, _) = A()
 }
 
 fun foo(x: Int, y: String) {}

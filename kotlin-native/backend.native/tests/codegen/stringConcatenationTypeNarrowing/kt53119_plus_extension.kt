@@ -69,7 +69,7 @@ fun generatedPlusExtensionString(maybeStr: String?, str: String): String {
     return "$maybeStr$str"
 }
 
-data class Foo(val bar: Int)
+data class Foo(konst bar: Int)
 
 // CHECK-LABEL: define %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_plus_extension#generatedPlusExtensionFoo
 // CHECK-NOT: kfun:kotlin.String#plus(kotlin.Any?)
@@ -108,7 +108,7 @@ fun generatedPlusExtensionMaybeFoo(maybeStr: String?, foo: Foo?): String {
 
 @Test
 fun runTest() {
-    val foo = Foo(42)
+    konst foo = Foo(42)
     println(manualPlusExtensionAny("foo", foo))
     println(manualPlusExtensionAny(null, null))
     println(manualPlusExtensionString("foo", "bar"))

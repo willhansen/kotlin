@@ -1,9 +1,9 @@
 var x = 2
-    set(value) {
-        /*PLACE*/val inside = ""
+    set(konstue) {
+        /*PLACE*/konst inside = ""
     }
 
 var y = 2
-    set(value) {
-        /*ONAIR*/val inSetter = value
+    set(konstue) {
+        /*ONAIR*/konst inSetter = konstue
     }

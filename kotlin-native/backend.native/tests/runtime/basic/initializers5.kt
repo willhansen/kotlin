@@ -8,8 +8,8 @@ package runtime.basic.initializers5
 import kotlin.test.*
 
 object A {
-    val a = 42
-    val b = A.a
+    konst a = 42
+    konst b = A.a
 }
 
 @Test fun runTest() {

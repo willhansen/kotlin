@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.storage.getValue
 import org.jetbrains.kotlin.utils.sure
 
-class JvmBuiltIns(storageManager: StorageManager, val kind: Kind) : KotlinBuiltIns(storageManager) {
+class JvmBuiltIns(storageManager: StorageManager, konst kind: Kind) : KotlinBuiltIns(storageManager) {
     /**
      * Where built-ins should be loaded from.
      */
@@ -55,8 +55,8 @@ class JvmBuiltIns(storageManager: StorageManager, val kind: Kind) : KotlinBuiltI
 
     class Settings(
         // Module containing JDK classes or having them among dependencies
-        val ownerModuleDescriptor: ModuleDescriptor,
-        val isAdditionalBuiltInsFeatureSupported: Boolean,
+        konst ownerModuleDescriptor: ModuleDescriptor,
+        konst isAdditionalBuiltInsFeatureSupported: Boolean,
     )
 
     private var settingsComputation: (() -> Settings)? = null
@@ -72,7 +72,7 @@ class JvmBuiltIns(storageManager: StorageManager, val kind: Kind) : KotlinBuiltI
         }
     }
 
-    val customizer: JvmBuiltInsCustomizer by storageManager.createLazyValue {
+    konst customizer: JvmBuiltInsCustomizer by storageManager.createLazyValue {
         JvmBuiltInsCustomizer(
             builtInsModule, storageManager
         ) {

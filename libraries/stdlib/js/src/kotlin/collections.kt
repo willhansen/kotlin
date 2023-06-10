@@ -37,8 +37,8 @@ internal fun <T> copyToArray(collection: Collection<T>): Array<T> {
 
 @JsName("copyToArrayImpl")
 internal actual fun copyToArrayImpl(collection: Collection<*>): Array<Any?> {
-    val array = emptyArray<Any?>()
-    val iterator = collection.iterator()
+    konst array = emptyArray<Any?>()
+    konst iterator = collection.iterator()
     while (iterator.hasNext())
         array.asDynamic().push(iterator.next())
     return array
@@ -49,7 +49,7 @@ internal actual fun <T> copyToArrayImpl(collection: Collection<*>, array: Array<
     if (array.size < collection.size)
         return copyToArrayImpl(collection).unsafeCast<Array<T>>()
 
-    val iterator = collection.iterator()
+    konst iterator = collection.iterator()
     var index = 0
     while (iterator.hasNext()) {
         array[index++] = iterator.next().unsafeCast<T>()
@@ -119,14 +119,14 @@ internal actual inline fun <K, V> buildMapInternal(capacity: Int, builderAction:
 
 
 /**
- * Fills the list with the provided [value].
+ * Fills the list with the provided [konstue].
  *
- * Each element in the list gets replaced with the [value].
+ * Each element in the list gets replaced with the [konstue].
  */
 @SinceKotlin("1.2")
-public actual fun <T> MutableList<T>.fill(value: T): Unit {
+public actual fun <T> MutableList<T>.fill(konstue: T): Unit {
     for (index in 0..lastIndex) {
-        this[index] = value
+        this[index] = konstue
     }
 }
 
@@ -169,7 +169,7 @@ public actual fun <T> MutableList<T>.sortWith(comparator: Comparator<in T>): Uni
 private fun <T> collectionsSort(list: MutableList<T>, comparator: Comparator<in T>) {
     if (list.size <= 1) return
 
-    val array = copyToArray(list)
+    konst array = copyToArray(list)
     sortArrayWith(array, comparator)
 
     for (i in 0 until array.size) {
@@ -186,11 +186,11 @@ internal actual fun <T> arrayOfNulls(reference: Array<T>, size: Int): Array<T> {
 @JsName("arrayCopy")
 internal fun <T> arrayCopy(source: Array<out T>, destination: Array<in T>, destinationOffset: Int, startIndex: Int, endIndex: Int) {
     AbstractList.checkRangeIndexes(startIndex, endIndex, source.size)
-    val rangeSize = endIndex - startIndex
+    konst rangeSize = endIndex - startIndex
     AbstractList.checkRangeIndexes(destinationOffset, destinationOffset + rangeSize, destination.size)
 
     if (arrayBufferIsView(destination) && arrayBufferIsView(source)) {
-        val subrange = source.asDynamic().subarray(startIndex, endIndex)
+        konst subrange = source.asDynamic().subarray(startIndex, endIndex)
         destination.asDynamic().set(subrange, destinationOffset)
     } else {
         if (source !== destination || destinationOffset <= startIndex) {
@@ -248,7 +248,7 @@ internal actual fun mapCapacity(expectedSize: Int) = expectedSize
 
 /**
  * Checks a collection builder function capacity argument.
- * In JS no validation is made in Map/Set constructor yet.
+ * In JS no konstidation is made in Map/Set constructor yet.
  */
 @SinceKotlin("1.3")
 @PublishedApi
@@ -258,7 +258,7 @@ internal fun checkBuilderCapacity(capacity: Int) {
 
 /**
  * Returns a new read-only map, mapping only the specified key to the
- * specified value.
+ * specified konstue.
  *
  * @sample samples.collections.Maps.Instantiation.mapFromPairs
  */

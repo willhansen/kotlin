@@ -51,7 +51,7 @@ fun main() {
         }
     }
     memScoped {
-        val packed = alloc<Packed>()
+        konst packed = alloc<Packed>()
         packed.i = -1
         assertEquals(-1, packed.i)
         packed.e = E.R
@@ -67,8 +67,8 @@ fun main() {
     checkIntSubTyping(630090)
 
     memScoped {
-        val SIZE = 10
-        val flex = alloc(sizeOf<WithFlexibleArray>() + sizeOf<IntVar>() * SIZE, alignOf<WithFlexibleArray>()).reinterpret<WithFlexibleArray>()
+        konst SIZE = 10
+        konst flex = alloc(sizeOf<WithFlexibleArray>() + sizeOf<IntVar>() * SIZE, alignOf<WithFlexibleArray>()).reinterpret<WithFlexibleArray>()
         flex.size = SIZE
         for (i in 0 until SIZE) {
             flex.data[i] = i
@@ -80,8 +80,8 @@ fun main() {
     }
 
     memScoped {
-        val SIZE = 10
-        val flex = alloc(sizeOf<WithZeroSizedArray>() + sizeOf<IntVar>() * SIZE, alignOf<WithZeroSizedArray>()).reinterpret<WithZeroSizedArray>()
+        konst SIZE = 10
+        konst flex = alloc(sizeOf<WithZeroSizedArray>() + sizeOf<IntVar>() * SIZE, alignOf<WithZeroSizedArray>()).reinterpret<WithZeroSizedArray>()
         assertEquals(4, sizeOf<WithZeroSizedArray>())
         assertEquals(4, alignOf<WithZeroSizedArray>())
         flex.size = SIZE
@@ -95,10 +95,10 @@ fun main() {
     }
 
     memScoped {
-        val SIZE = 10
+        konst SIZE = 10
         assertEquals(8, sizeOf<WithFlexibleArrayWithPadding>())
         assertEquals(8, alignOf<WithFlexibleArrayWithPadding>())
-        val flex = alloc(sizeOf<WithFlexibleArrayWithPadding>() + sizeOf<LongVar>() * SIZE, alignOf<WithFlexibleArrayWithPadding>())
+        konst flex = alloc(sizeOf<WithFlexibleArrayWithPadding>() + sizeOf<LongVar>() * SIZE, alignOf<WithFlexibleArrayWithPadding>())
                 .reinterpret<WithFlexibleArrayWithPadding>()
         fillArray(flex.ptr, SIZE)
         assertEquals(SIZE, flex.size)
@@ -111,11 +111,11 @@ fun main() {
 }
 
 fun <T : E> checkEnumSubTyping(e: T) = memScoped {
-    val s = alloc<Complex>()
+    konst s = alloc<Complex>()
     s.e = e
 }
 
 fun <T : Int> checkIntSubTyping(x: T) = memScoped {
-    val s = alloc<Trivial>()
+    konst s = alloc<Trivial>()
     s.i = x
 }

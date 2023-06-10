@@ -1,4 +1,4 @@
-enum class Foo(val a: Int = 1, val b: String) {
+enum class Foo(konst a: Int = 1, konst b: String) {
   B(2, "b"),
   C(b = "b")
 }

@@ -3,7 +3,7 @@
 // SKIP_TXT
 import kotlin.concurrent.withLock
 
-val lock = java.util.concurrent.locks.ReentrantLock()
+konst lock = java.util.concurrent.locks.ReentrantLock()
 
 fun builder(c: suspend () -> Unit) {}
 

@@ -1,10 +1,10 @@
-const val x = "123"
+const konst x = "123"
     @Suppress("CONST_VAL_WITH_GETTER")
     get() = field
 
-val y = "789"
+konst y = "789"
 
-const val z = @Suppress("CONST_VAL_WITH_NON_CONST_INITIALIZER") y
+const konst z = @Suppress("CONST_VAL_WITH_NON_CONST_INITIALIZER") y
 
 @Target(AnnotationTarget.TYPE)
 annotation class Ann
@@ -17,4 +17,4 @@ interface A
 
 interface B : @Suppress("SUPERTYPE_INITIALIZED_IN_INTERFACE") A()
 
-data class D @Suppress("DATA_CLASS_VARARG_PARAMETER") constructor(vararg val x: String)
+data class D @Suppress("DATA_CLASS_VARARG_PARAMETER") constructor(vararg konst x: String)

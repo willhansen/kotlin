@@ -30,7 +30,7 @@ fun <T, R> Iterable<T>.fooMap(t: (T) -> Sequence<R>): List<R> {
 }
 
 fun test() {
-    val list = ubyteArrayOf(0u).fooMap { listOf(it) }
+    konst list = ubyteArrayOf(0u).fooMap { listOf(it) }
     takeUByteList(list)
 }
 

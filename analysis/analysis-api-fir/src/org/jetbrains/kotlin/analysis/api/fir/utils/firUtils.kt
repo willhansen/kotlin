@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.analysis.api.KtConstantInitializerValue
 import org.jetbrains.kotlin.analysis.api.KtConstantValueForAnnotation
 import org.jetbrains.kotlin.analysis.api.KtInitializerValue
 import org.jetbrains.kotlin.analysis.api.KtNonConstantInitializerValue
-import org.jetbrains.kotlin.analysis.api.components.KtConstantEvaluationMode
-import org.jetbrains.kotlin.analysis.api.fir.evaluate.FirAnnotationValueConverter
-import org.jetbrains.kotlin.analysis.api.fir.evaluate.FirCompileTimeConstantEvaluator
+import org.jetbrains.kotlin.analysis.api.components.KtConstantEkonstuationMode
+import org.jetbrains.kotlin.analysis.api.fir.ekonstuate.FirAnnotationValueConverter
+import org.jetbrains.kotlin.analysis.api.fir.ekonstuate.FirCompileTimeConstantEkonstuator
 import org.jetbrains.kotlin.analysis.api.fir.getCandidateSymbols
 import org.jetbrains.kotlin.analysis.api.types.KtTypeNullability
 import org.jetbrains.kotlin.descriptors.ClassKind
@@ -51,12 +51,12 @@ internal fun KtExpression.unwrap(): KtExpression {
 }
 
 internal fun FirNamedReference.getReferencedElementType(): ConeKotlinType {
-    val symbols = when (this) {
+    konst symbols = when (this) {
         is FirResolvedNamedReference -> listOf(resolvedSymbol)
         is FirErrorNamedReference -> getCandidateSymbols()
         else -> error("Unexpected ${this::class}")
     }
-    val firCallableDeclaration = symbols.singleOrNull()?.fir as? FirCallableDeclaration
+    konst firCallableDeclaration = symbols.singleOrNull()?.fir as? FirCallableDeclaration
         ?: return ConeErrorType(ConeUnresolvedNameError(name))
 
     return firCallableDeclaration.symbol.resolvedReturnType
@@ -75,15 +75,15 @@ internal fun KtTypeNullability.toConeNullability() = when (this) {
  */
 internal fun FirCallableSymbol<*>.computeImportableName(useSiteSession: FirSession): FqName? {
     // if classId == null, callable is topLevel
-    val containingClassId = callableId.classId
+    konst containingClassId = callableId.classId
         ?: return callableId.asSingleFqName()
 
     if (this is FirConstructorSymbol) return containingClassId.asSingleFqName()
 
-    val containingClass = getContainingClassSymbol(useSiteSession) ?: return null
+    konst containingClass = getContainingClassSymbol(useSiteSession) ?: return null
 
     // Java static members, enums, and object members can be imported
-    val canBeImported = containingClass.origin is FirDeclarationOrigin.Java ||
+    konst canBeImported = containingClass.origin is FirDeclarationOrigin.Java ||
             containingClass.classKind == ClassKind.ENUM_CLASS ||
             containingClass.classKind == ClassKind.OBJECT
 
@@ -94,12 +94,12 @@ internal fun FirExpression.asKtInitializerValue(
     session: FirSession,
     forAnnotationDefaultValue: Boolean
 ): KtInitializerValue {
-    val ktExpression = psi as? KtExpression
-    val evaluated =
-        FirCompileTimeConstantEvaluator.evaluateAsKtConstantValue(this, KtConstantEvaluationMode.CONSTANT_EXPRESSION_EVALUATION)
-    return when (evaluated) {
+    konst ktExpression = psi as? KtExpression
+    konst ekonstuated =
+        FirCompileTimeConstantEkonstuator.ekonstuateAsKtConstantValue(this, KtConstantEkonstuationMode.CONSTANT_EXPRESSION_EVALUATION)
+    return when (ekonstuated) {
         null -> if (forAnnotationDefaultValue) {
-            val annotationConstantValue = FirAnnotationValueConverter.toConstantValue(this, session)
+            konst annotationConstantValue = FirAnnotationValueConverter.toConstantValue(this, session)
             if (annotationConstantValue != null) {
                 KtConstantValueForAnnotation(annotationConstantValue, ktExpression)
             } else {
@@ -108,6 +108,6 @@ internal fun FirExpression.asKtInitializerValue(
         } else {
             KtNonConstantInitializerValue(ktExpression)
         }
-        else -> KtConstantInitializerValue(evaluated, ktExpression)
+        else -> KtConstantInitializerValue(ekonstuated, ktExpression)
     }
 }

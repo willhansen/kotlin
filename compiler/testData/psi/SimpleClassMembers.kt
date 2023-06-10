@@ -9,7 +9,7 @@ class foo {
 
         fun foo()
 
-        val x
+        konst x
 
         var f
 
@@ -41,7 +41,7 @@ class foo {
 
         fun foo()
 
-        val x
+        konst x
 
         var f
 
@@ -50,7 +50,7 @@ class foo {
 
     fun foo()
 
-    val x
+    konst x
 
     var f
 

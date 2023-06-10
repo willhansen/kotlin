@@ -2,7 +2,7 @@
 interface I
 
 open class Some {
-    val x: Int
+    konst x: Int
 
     init {
         this as I

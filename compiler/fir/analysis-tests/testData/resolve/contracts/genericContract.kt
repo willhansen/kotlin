@@ -3,10 +3,10 @@
 
 import kotlin.contracts.*
 
-inline fun <reified T> requreIsInstance(value: Any) contract [
-    returns() implies (value is T)
+inline fun <reified T> requreIsInstance(konstue: Any) contract [
+    returns() implies (konstue is T)
 ] {
-    if (value !is T) throw IllegalArgumentException()
+    if (konstue !is T) throw IllegalArgumentException()
 }
 
 fun test_1(s: Any) {
@@ -14,10 +14,10 @@ fun test_1(s: Any) {
     s.length
 }
 
-inline fun <reified T> requreIsInstanceOf(value: Any, requiredValue: T) contract [
-    returns() implies (value is T)
+inline fun <reified T> requreIsInstanceOf(konstue: Any, requiredValue: T) contract [
+    returns() implies (konstue is T)
 ] {
-    if (value !is T) throw IllegalArgumentException()
+    if (konstue !is T) throw IllegalArgumentException()
 }
 
 fun test_2(x: Any, s: String) {

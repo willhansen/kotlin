@@ -1,5 +1,5 @@
 fun test(b: Boolean) {
-  val x: Int = when {
+  konst x: Int = when {
     b -> { // BLOCK
       3
     }

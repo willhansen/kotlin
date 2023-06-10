@@ -3,5 +3,5 @@ package transitiveStory.midActual.sourceCalls.intemediateInheritorCall
 import transitiveStory.midActual.sourceCalls.intemediateCall.BottomActualCommonInheritor
 import transitiveStory.midActual.sourceCalls.intemediateCall.BottomActualMPPInheritor
 
-val t123 = BottomActualCommonInheritor()
-val t122 = BottomActualMPPInheritor()
+konst t123 = BottomActualCommonInheritor()
+konst t122 = BottomActualMPPInheritor()

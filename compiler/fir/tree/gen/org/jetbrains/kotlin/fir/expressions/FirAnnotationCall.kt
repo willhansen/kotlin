@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirAnnotationCall : FirAnnotation(), FirCall, FirResolvable {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val useSiteTarget: AnnotationUseSiteTarget?
-    abstract override val annotationTypeRef: FirTypeRef
-    abstract override val typeArguments: List<FirTypeProjection>
-    abstract override val argumentList: FirArgumentList
-    abstract override val calleeReference: FirReference
-    abstract override val argumentMapping: FirAnnotationArgumentMapping
-    abstract val annotationResolvePhase: FirAnnotationResolvePhase
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst useSiteTarget: AnnotationUseSiteTarget?
+    abstract override konst annotationTypeRef: FirTypeRef
+    abstract override konst typeArguments: List<FirTypeProjection>
+    abstract override konst argumentList: FirArgumentList
+    abstract override konst calleeReference: FirReference
+    abstract override konst argumentMapping: FirAnnotationArgumentMapping
+    abstract konst annotationResolvePhase: FirAnnotationResolvePhase
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAnnotationCall(this, data)
 

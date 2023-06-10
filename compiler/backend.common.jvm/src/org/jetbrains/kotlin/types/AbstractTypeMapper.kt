@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.types.model.*
 import org.jetbrains.org.objectweb.asm.Type
 
 interface TypeMappingContext<Writer : JvmDescriptorTypeWriter<Type>> {
-    val typeContext: TypeSystemCommonBackendContextForTypeMapping
+    konst typeContext: TypeSystemCommonBackendContextForTypeMapping
 
     fun getClassInternalName(typeConstructor: TypeConstructorMarker): String
     fun getScriptInternalName(typeConstructor: TypeConstructorMarker): String
@@ -61,18 +61,18 @@ object AbstractTypeMapper {
         materialized: Boolean,
     ): Type {
         if (type.isError()) {
-            val name = type.getNameForErrorType() ?: NON_EXISTENT_CLASS_NAME
-            val jvmType = Type.getObjectType(name)
+            konst name = type.getNameForErrorType() ?: NON_EXISTENT_CLASS_NAME
+            konst jvmType = Type.getObjectType(name)
             with(context) { sw?.writeGenericType(type, jvmType, mode) }
             return jvmType
         }
 
-        val typeConstructor = type.typeConstructor()
+        konst typeConstructor = type.typeConstructor()
 
         if (type is SimpleTypeMarker) {
-            val builtInType = mapBuiltInType(type, AsmTypeFactory, mode)
+            konst builtInType = mapBuiltInType(type, AsmTypeFactory, mode)
             if (builtInType != null) {
-                val asmType = boxTypeIfNeeded(builtInType, mode.needPrimitiveBoxing)
+                konst asmType = boxTypeIfNeeded(builtInType, mode.needPrimitiveBoxing)
                 with(context) { sw?.writeGenericType(type, asmType, mode) }
                 return asmType
             }
@@ -92,15 +92,15 @@ object AbstractTypeMapper {
 
         return when {
             typeConstructor.isTypeParameter() -> {
-                val typeParameter = typeConstructor.asTypeParameter()
-                val upperBound = typeParameter.representativeUpperBound()
-                val upperBoundIsPrimitiveOrInlineClass =
+                konst typeParameter = typeConstructor.asTypeParameter()
+                konst upperBound = typeParameter.representativeUpperBound()
+                konst upperBoundIsPrimitiveOrInlineClass =
                     upperBound.typeConstructor().isInlineClass() || upperBound is SimpleTypeMarker && upperBound.isPrimitiveType()
-                val newType = if (upperBoundIsPrimitiveOrInlineClass && type.isNullableType())
+                konst newType = if (upperBoundIsPrimitiveOrInlineClass && type.isNullableType())
                     upperBound.makeNullable()
                 else upperBound
 
-                val asmType = mapType(context, newType, mode, null, materialized)
+                konst asmType = mapType(context, newType, mode, null, materialized)
                 sw?.writeTypeVariable(typeParameter.getName(), asmType)
                 asmType
             }
@@ -130,16 +130,16 @@ object AbstractTypeMapper {
         sw: Writer?,
         materialized: Boolean,
     ): Type {
-        val argumentsCount = type.argumentsCount()
-        val argumentsList = type.asArgumentList()
-        val arguments = buildList {
+        konst argumentsCount = type.argumentsCount()
+        konst argumentsList = type.asArgumentList()
+        konst arguments = buildList {
             for (i in 0 until (argumentsCount - 1)) {
                 this += argumentsList[i].adjustedType()
             }
             this += continuationTypeConstructor().typeWithArguments(argumentsList[argumentsCount - 1].adjustedType())
             this += nullableAnyType()
         }
-        val runtimeFunctionType = functionNTypeConstructor(arguments.size - 1).typeWithArguments(arguments)
+        konst runtimeFunctionType = functionNTypeConstructor(arguments.size - 1).typeWithArguments(arguments)
         return mapType(context, runtimeFunctionType, mode, sw, materialized)
     }
 
@@ -150,13 +150,13 @@ object AbstractTypeMapper {
         mode: TypeMappingMode,
         materialized: Boolean
     ): Type {
-        val typeArgument = type.asArgumentList()[0]
-        val (variance, memberType) = when {
+        konst typeArgument = type.asArgumentList()[0]
+        konst (variance, memberType) = when {
             typeArgument.isStarProjection() -> Variance.OUT_VARIANCE to nullableAnyType()
             else -> typeArgument.getVariance().toVariance() to typeArgument.getType()
         }
 
-        val arrayElementType: Type
+        konst arrayElementType: Type
         sw?.writeArrayType()
         if (variance == Variance.IN_VARIANCE) {
             arrayElementType = AsmTypes.OBJECT_TYPE
@@ -177,14 +177,14 @@ object AbstractTypeMapper {
         materialized: Boolean
     ): Type {
         if (typeConstructor.isInlineClass() && !mode.needInlineClassWrapping) {
-            val expandedType = computeExpandedTypeForInlineClass(type)
+            konst expandedType = computeExpandedTypeForInlineClass(type)
             require(expandedType is SimpleTypeMarker?)
             if (expandedType != null) {
                 return mapType(context, expandedType, mode.wrapInlineClassesMode(), sw, materialized)
             }
         }
 
-        val asmType = if (mode.isForAnnotationParameter && type.isKClass())
+        konst asmType = if (mode.isForAnnotationParameter && type.isKClass())
             AsmTypes.JAVA_CLASS_TYPE
         else
             Type.getObjectType(context.getClassInternalName(typeConstructor))

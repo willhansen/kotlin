@@ -234,7 +234,7 @@ KtFile: IOSamples.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('stream')
         PsiWhiteSpace(' ')
@@ -345,7 +345,7 @@ KtFile: IOSamples.kt
         MODIFIER_LIST
           PsiElement(override)('override')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('hasNext')
         PsiWhiteSpace('\n    ')
@@ -477,7 +477,7 @@ KtFile: IOSamples.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('stream')
         PsiWhiteSpace(' ')
@@ -549,7 +549,7 @@ KtFile: IOSamples.kt
       PsiComment(EOL_COMMENT)('// this does not rethrow, no appropriate parameters given')
       PsiWhiteSpace('\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('f1')
         PsiWhiteSpace(' ')
@@ -563,7 +563,7 @@ KtFile: IOSamples.kt
         PsiComment(EOL_COMMENT)('//= ...')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('f2')
         PsiWhiteSpace(' ')

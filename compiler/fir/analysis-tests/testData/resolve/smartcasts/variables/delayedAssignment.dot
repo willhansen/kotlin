@@ -42,7 +42,7 @@ digraph delayedAssignment_kt {
         subgraph cluster_5 {
             color=blue
             10 [label="Enter block"];
-            11 [label="Variable declaration: lval a: R|A?|"];
+            11 [label="Variable declaration: lkonst a: R|A?|"];
             subgraph cluster_6 {
                 color=blue
                 12 [label="Enter when"];

@@ -38,7 +38,7 @@ internal object LLFirSupertypeLazyResolver : LLFirLazyResolver(FirResolvePhase.S
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirSuperTypeTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirSuperTypeTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -67,12 +67,12 @@ internal object LLFirSupertypeLazyResolver : LLFirLazyResolver(FirResolvePhase.S
 private class LLFirSuperTypeTargetResolver(
     target: LLFirResolveTarget,
     lockProvider: LLFirLockProvider,
-    private val session: FirSession,
-    private val scopeSession: ScopeSession,
-    private val supertypeComputationSession: LLFirSupertypeComputationSession = LLFirSupertypeComputationSession(session),
-    private val visitedElements: MutableSet<FirElementWithResolveState> = hashSetOf(),
+    private konst session: FirSession,
+    private konst scopeSession: ScopeSession,
+    private konst supertypeComputationSession: LLFirSupertypeComputationSession = LLFirSupertypeComputationSession(session),
+    private konst visitedElements: MutableSet<FirElementWithResolveState> = hashSetOf(),
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.SUPER_TYPES, isJumpingPhase = false) {
-    private val supertypeResolver = object : FirSupertypeResolverVisitor(
+    private konst supertypeResolver = object : FirSupertypeResolverVisitor(
         session = session,
         supertypeComputationSession = supertypeComputationSession,
         scopeSession = scopeSession,
@@ -109,7 +109,7 @@ private class LLFirSuperTypeTargetResolver(
     }
 
     override fun doResolveWithoutLock(target: FirElementWithResolveState): Boolean {
-        val isVisited = !visitedElements.add(target)
+        konst isVisited = !visitedElements.add(target)
         if (isVisited) return true
 
         when (target) {
@@ -164,10 +164,10 @@ private class LLFirSuperTypeTargetResolver(
 
         // 1. Resolve declaration super type refs
         @Suppress("UNCHECKED_CAST")
-        val resolvedSuperTypeRefs = resolver(superTypeRefs as S)
+        konst resolvedSuperTypeRefs = resolver(superTypeRefs as S)
 
         // 2. Resolve super declarations
-        val status = supertypeComputationSession.getSupertypesComputationStatus(declaration)
+        konst status = supertypeComputationSession.getSupertypesComputationStatus(declaration)
         if (status is SupertypeComputationStatus.Computed) {
             for (computedType in status.supertypeRefs) {
                 crawlSupertype(computedType.type)
@@ -175,10 +175,10 @@ private class LLFirSuperTypeTargetResolver(
         }
 
         // 3. Find loops
-        val loopedSuperTypeRefs = supertypeComputationSession.findLoopFor(declaration)
+        konst loopedSuperTypeRefs = supertypeComputationSession.findLoopFor(declaration)
 
         // 4. Get error type refs or already resolved
-        val resultedTypeRefs = loopedSuperTypeRefs ?: resolvedSuperTypeRefs
+        konst resultedTypeRefs = loopedSuperTypeRefs ?: resolvedSuperTypeRefs
 
         // 5. Publish the result
         performCustomResolveUnderLock(declaration) {
@@ -210,14 +210,14 @@ private class LLFirSuperTypeTargetResolver(
      * So we crawl the resolved supertypes of visited designations to find more designations to collect.
      */
     private fun crawlSupertype(type: ConeKotlinType) {
-        val classLikeDeclaration = type.toSymbol(session)?.fir
+        konst classLikeDeclaration = type.toSymbol(session)?.fir
         if (classLikeDeclaration !is FirClassLikeDeclaration) return
         if (classLikeDeclaration in visitedElements) return
         if (classLikeDeclaration is FirJavaClass) {
             if (!classLikeDeclaration.canHaveLoopInSupertypesHierarchy(session)) return
 
             visitedElements += classLikeDeclaration
-            val parentClass = classLikeDeclaration.outerClass(session)
+            konst parentClass = classLikeDeclaration.outerClass(session)
             if (parentClass != null) {
                 crawlSupertype(parentClass.defaultType())
             }
@@ -229,7 +229,7 @@ private class LLFirSuperTypeTargetResolver(
             return
         }
 
-        val resolveTarget = classLikeDeclaration.asResolveTarget()
+        konst resolveTarget = classLikeDeclaration.asResolveTarget()
         if (resolveTarget != null) {
             resolveToSupertypePhase(resolveTarget)
         } else if (type is ConeClassLikeType) {
@@ -266,29 +266,29 @@ private fun FirClassLikeDeclaration.outerClass(session: FirSession): FirRegularC
     session.symbolProvider.getClassLikeSymbolByClassId(parentClassId)?.fir as? FirRegularClass
 }
 
-private val FirTypeRef.isLoopedSupertypeRef: Boolean
+private konst FirTypeRef.isLoopedSupertypeRef: Boolean
     get() {
         if (this !is FirErrorTypeRef) return false
-        val diagnostic = diagnostic
+        konst diagnostic = diagnostic
         return diagnostic is ConeSimpleDiagnostic && diagnostic.kind == DiagnosticKind.LoopInSupertype
     }
 
-private class LLFirSupertypeComputationSession(private val session: FirSession) : SupertypeComputationSession() {
+private class LLFirSupertypeComputationSession(private konst session: FirSession) : SupertypeComputationSession() {
     /**
      * These collections exist to reuse a collection for each search to avoid repeated memory allocation.
      * Can be replaced with a new collection on each invocation of [findLoopFor]
      */
-    private val visited: MutableSet<FirClassLikeDeclaration> = hashSetOf()
-    private val looped: MutableSet<FirClassLikeDeclaration> = hashSetOf()
-    private val pathSet: MutableSet<FirClassLikeDeclaration> = hashSetOf()
-    private val path: MutableList<FirClassLikeDeclaration> = mutableListOf()
+    private konst visited: MutableSet<FirClassLikeDeclaration> = hashSetOf()
+    private konst looped: MutableSet<FirClassLikeDeclaration> = hashSetOf()
+    private konst pathSet: MutableSet<FirClassLikeDeclaration> = hashSetOf()
+    private konst path: MutableList<FirClassLikeDeclaration> = mutableListOf()
     // ---------------
 
     /**
      * Map from [FirClassLikeDeclaration] to [List<FirResolvedTypeRef>>],
      * where the list contains at least one [FirErrorTypeRef] for looped references
      */
-    private val updatedTypesForDeclarationsWithLoop: MutableMap<FirClassLikeDeclaration, List<FirResolvedTypeRef>> = hashMapOf()
+    private konst updatedTypesForDeclarationsWithLoop: MutableMap<FirClassLikeDeclaration, List<FirResolvedTypeRef>> = hashMapOf()
 
     /**
      * @param declaration declaration to be checked for loops

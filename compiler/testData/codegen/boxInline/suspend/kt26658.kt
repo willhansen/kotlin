@@ -3,7 +3,7 @@
 // FILE: inlined.kt
 import kotlin.coroutines.*
 
-class Controller(val s: String)
+class Controller(konst s: String)
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object : Continuation<Unit>{
@@ -11,7 +11,7 @@ fun builder(c: suspend () -> Unit) {
             result.getOrThrow()
         }
 
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
     })
@@ -27,7 +27,7 @@ fun builder(controller: Controller, c: suspend Controller.() -> Unit) {
             result.getOrThrow()
         }
 
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
     })
 }
@@ -126,7 +126,7 @@ fun box(): String {
     }
     if (res != "OK") return "FAIL 10: $res"
 
-    val controller = Controller("A")
+    konst controller = Controller("A")
     execute(controller) {
         res = withDefaultParameter("OK")
     }

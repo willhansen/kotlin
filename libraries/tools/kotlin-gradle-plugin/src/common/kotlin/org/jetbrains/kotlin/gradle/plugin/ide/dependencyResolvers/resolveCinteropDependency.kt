@@ -27,7 +27,7 @@ private fun Project.createCinteropLibraryDependency(libraryFile: java.io.File): 
         )
     }
 
-    val library = try {
+    konst library = try {
         resolveSingleFileKlib(
             libraryFile = File(libraryFile.absolutePath),
             strategy = ToolingSingleFileKlibResolveStrategy
@@ -37,8 +37,8 @@ private fun Project.createCinteropLibraryDependency(libraryFile: java.io.File): 
         return null
     }
 
-    val (group, module) = cinteropGroupAndModule(library)
-    val libraryTargets = library.commonizerNativeTargets ?: library.nativeTargets
+    konst (group, module) = cinteropGroupAndModule(library)
+    konst libraryTargets = library.commonizerNativeTargets ?: library.nativeTargets
 
     return IdeaKotlinResolvedBinaryDependency(
         binaryType = IdeaKotlinBinaryDependency.KOTLIN_COMPILE_BINARY_TYPE,
@@ -55,7 +55,7 @@ private fun Project.createCinteropLibraryDependency(libraryFile: java.io.File): 
 }
 
 private fun cinteropGroupAndModule(library: KotlinLibrary): Pair<String, String> {
-    val nameParts = library.uniqueName.split(":")
+    konst nameParts = library.uniqueName.split(":")
 
     return when (nameParts.size) {
         0 -> "<unknown>" to "<unknown>"

@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.tooling.core.UnsafeApi
 internal fun ExternalKotlinTargetSoftwareComponent(
     target: ExternalKotlinTargetImpl,
 ): ExternalKotlinTargetSoftwareComponent {
-    val softwareComponentFactory = (target.project as ProjectInternal).services.get(SoftwareComponentFactory::class.java)
-    val adhocSoftwareComponent = softwareComponentFactory.adhoc(target.targetName)
+    konst softwareComponentFactory = (target.project as ProjectInternal).services.get(SoftwareComponentFactory::class.java)
+    konst adhocSoftwareComponent = softwareComponentFactory.adhoc(target.targetName)
 
     adhocSoftwareComponent.addVariantsFromConfiguration(target.apiElementsPublishedConfiguration) { details ->
         details.mapToMavenScope("compile")
@@ -40,9 +40,9 @@ internal fun ExternalKotlinTargetSoftwareComponent(
 }
 
 internal class ExternalKotlinTargetSoftwareComponent @UnsafeApi constructor(
-    private val multiplatformExtension: KotlinMultiplatformExtension,
-    private val adhocSoftwareComponent: SoftwareComponentInternal,
-    private val kotlinTargetComponent: ExternalKotlinTargetComponent
+    private konst multiplatformExtension: KotlinMultiplatformExtension,
+    private konst adhocSoftwareComponent: SoftwareComponentInternal,
+    private konst kotlinTargetComponent: ExternalKotlinTargetComponent
 ) : ComponentWithCoordinates, ComponentWithVariants, SoftwareComponentInternal {
     override fun getName(): String = adhocSoftwareComponent.name
     override fun getUsages(): Set<UsageContext> = adhocSoftwareComponent.usages

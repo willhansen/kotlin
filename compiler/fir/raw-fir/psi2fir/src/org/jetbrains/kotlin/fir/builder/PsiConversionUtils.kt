@@ -28,8 +28,8 @@ internal fun KtWhenCondition.toFirWhenCondition(
     convert: KtExpression?.(String) -> FirExpression,
     toFirOrErrorTypeRef: KtTypeReference?.() -> FirTypeRef,
 ): FirExpression {
-    val firSubjectSource = this.toKtPsiSourceElement(KtFakeSourceElementKind.WhenGeneratedSubject)
-    val firSubjectExpression = buildWhenSubjectExpression {
+    konst firSubjectSource = this.toKtPsiSourceElement(KtFakeSourceElementKind.WhenGeneratedSubject)
+    konst firSubjectExpression = buildWhenSubjectExpression {
         source = firSubjectSource
         whenRef = whenRefWithSubject
     }
@@ -44,7 +44,7 @@ internal fun KtWhenCondition.toFirWhenCondition(
             }
         }
         is KtWhenConditionInRange -> {
-            val firRange = rangeExpression.convert("No range in condition with range")
+            konst firRange = rangeExpression.convert("No range in condition with range")
             firRange.generateContainsOperation(
                 firSubjectExpression,
                 isNegated,
@@ -71,7 +71,7 @@ internal fun Array<KtWhenCondition>.toFirWhenCondition(
     convert: KtExpression?.(String) -> FirExpression,
     toFirOrErrorTypeRef: KtTypeReference?.() -> FirTypeRef,
 ): FirExpression {
-    val conditions = this.map { condition ->
+    konst conditions = this.map { condition ->
         condition.toFirWhenCondition(subject, convert, toFirOrErrorTypeRef)
     }
 
@@ -132,11 +132,11 @@ internal fun generateDestructuringBlock(
         if (tmpVariable) {
             statements += container
         }
-        val isVar = multiDeclaration.isVar
+        konst isVar = multiDeclaration.isVar
         for ((index, entry) in multiDeclaration.entries.withIndex()) {
             if (entry.nameIdentifier?.text == "_") continue
-            val entrySource = entry.toKtPsiSourceElement()
-            val name = entry.nameAsSafeName
+            konst entrySource = entry.toKtPsiSourceElement()
+            konst name = entry.nameAsSafeName
             statements += buildProperty {
                 source = entrySource
                 this.moduleData = moduleData
@@ -144,7 +144,7 @@ internal fun generateDestructuringBlock(
                 returnTypeRef = entry.typeReference.toFirOrImplicitTypeRef()
                 this.name = name
                 initializer = buildComponentCall {
-                    val componentCallSource = entrySource.fakeElement(KtFakeSourceElementKind.DesugaredComponentFunctionCall)
+                    konst componentCallSource = entrySource.fakeElement(KtFakeSourceElementKind.DesugaredComponentFunctionCall)
                     source = componentCallSource
                     explicitReceiver = generateResolvedAccessExpression(componentCallSource, container)
                     componentIndex = index + 1

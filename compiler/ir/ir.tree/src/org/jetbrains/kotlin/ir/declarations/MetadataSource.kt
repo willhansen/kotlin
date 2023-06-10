@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.name.Name
 
 interface MetadataSource {
-    val name: Name?
+    konst name: Name?
 
     interface File : MetadataSource {
         var serializedIr: ByteArray?
@@ -20,35 +20,35 @@ interface MetadataSource {
     interface Script : MetadataSource
     interface Function : MetadataSource
     interface Property : MetadataSource {
-        val isConst: Boolean
+        konst isConst: Boolean
     }
 }
 
 sealed class DescriptorMetadataSource : MetadataSource {
-    open val descriptor: Named?
+    open konst descriptor: Named?
         get() = null
 
-    override val name: Name?
+    override konst name: Name?
         get() = descriptor?.name
 
-    class File(val descriptors: List<DeclarationDescriptor>) : DescriptorMetadataSource(), MetadataSource.File {
+    class File(konst descriptors: List<DeclarationDescriptor>) : DescriptorMetadataSource(), MetadataSource.File {
         override var serializedIr: ByteArray? = null
     }
 
-    class Class(override val descriptor: ClassDescriptor) : DescriptorMetadataSource(), MetadataSource.Class {
+    class Class(override konst descriptor: ClassDescriptor) : DescriptorMetadataSource(), MetadataSource.Class {
         override var serializedIr: ByteArray? = null
     }
 
-    class Script(override val descriptor: ScriptDescriptor) : DescriptorMetadataSource(), MetadataSource.Script
+    class Script(override konst descriptor: ScriptDescriptor) : DescriptorMetadataSource(), MetadataSource.Script
 
-    class Function(override val descriptor: FunctionDescriptor) : DescriptorMetadataSource(), MetadataSource.Function
+    class Function(override konst descriptor: FunctionDescriptor) : DescriptorMetadataSource(), MetadataSource.Function
 
-    class Property(override val descriptor: PropertyDescriptor) : DescriptorMetadataSource(), MetadataSource.Property {
-        override val isConst: Boolean get() = descriptor.isConst
+    class Property(override konst descriptor: PropertyDescriptor) : DescriptorMetadataSource(), MetadataSource.Property {
+        override konst isConst: Boolean get() = descriptor.isConst
     }
 
-    class LocalDelegatedProperty(override val descriptor: VariableDescriptorWithAccessors) : DescriptorMetadataSource(),
+    class LocalDelegatedProperty(override konst descriptor: VariableDescriptorWithAccessors) : DescriptorMetadataSource(),
         MetadataSource.Property {
-        override val isConst: Boolean get() = descriptor.isConst
+        override konst isConst: Boolean get() = descriptor.isConst
     }
 }

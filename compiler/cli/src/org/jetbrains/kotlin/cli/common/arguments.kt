@@ -24,7 +24,7 @@ fun CompilerConfiguration.setupCommonArguments(
     arguments: CommonCompilerArguments,
     createMetadataVersion: ((IntArray) -> BinaryVersion)? = null
 ) {
-    val messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
     put(CommonConfigurationKeys.DISABLE_INLINE, arguments.noInline)
     put(CommonConfigurationKeys.USE_FIR_EXTENDED_CHECKERS, arguments.useFirExtendedCheckers)
@@ -35,12 +35,12 @@ fun CompilerConfiguration.setupCommonArguments(
     put(CommonConfigurationKeys.ALLOW_ANY_SCRIPTS_IN_SOURCE_ROOTS, arguments.allowAnyScriptsInSourceRoots)
     put(CommonConfigurationKeys.IGNORE_CONST_OPTIMIZATION_ERRORS, arguments.ignoreConstOptimizationErrors)
 
-    val metadataVersionString = arguments.metadataVersion
+    konst metadataVersionString = arguments.metadataVersion
     if (metadataVersionString != null) {
-        val versionArray = BinaryVersion.parseVersionArray(metadataVersionString)
+        konst versionArray = BinaryVersion.parseVersionArray(metadataVersionString)
         when {
             versionArray == null -> messageCollector.report(
-                CompilerMessageSeverity.ERROR, "Invalid metadata version: $metadataVersionString", null
+                CompilerMessageSeverity.ERROR, "Inkonstid metadata version: $metadataVersionString", null
             )
             createMetadataVersion == null -> throw IllegalStateException("Unable to create metadata version: missing argument")
             else -> put(CommonConfigurationKeys.METADATA_VERSION, createMetadataVersion(versionArray))
@@ -50,16 +50,16 @@ fun CompilerConfiguration.setupCommonArguments(
     switchToFallbackModeIfNecessary(arguments, messageCollector)
     setupLanguageVersionSettings(arguments)
 
-    val usesK2 = arguments.useK2 || languageVersionSettings.languageVersion.usesK2
+    konst usesK2 = arguments.useK2 || languageVersionSettings.languageVersion.usesK2
     put(CommonConfigurationKeys.USE_FIR, usesK2)
     put(CommonConfigurationKeys.USE_LIGHT_TREE, arguments.useFirLT)
     buildHmppModuleStructure(arguments)?.let { put(CommonConfigurationKeys.HMPP_MODULE_STRUCTURE, it) }
 }
 
 fun switchToFallbackModeIfNecessary(arguments: CommonCompilerArguments, messageCollector: MessageCollector) {
-    val isK2 = arguments.useK2 || (arguments.languageVersion?.startsWith('2') ?: (LanguageVersion.LATEST_STABLE >= LanguageVersion.KOTLIN_2_0))
+    konst isK2 = arguments.useK2 || (arguments.languageVersion?.startsWith('2') ?: (LanguageVersion.LATEST_STABLE >= LanguageVersion.KOTLIN_2_0))
     if (isK2) {
-        val isKaptUsed = arguments.pluginOptions?.any { it.startsWith("plugin:org.jetbrains.kotlin.kapt3") } == true
+        konst isKaptUsed = arguments.pluginOptions?.any { it.startsWith("plugin:org.jetbrains.kotlin.kapt3") } == true
         if (isKaptUsed) {
             if (!arguments.suppressVersionWarnings) {
                 messageCollector.report(
@@ -83,11 +83,11 @@ fun CompilerConfiguration.setupLanguageVersionSettings(arguments: CommonCompiler
     languageVersionSettings = arguments.toLanguageVersionSettings(getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY))
 }
 
-const val KOTLIN_HOME_PROPERTY = "kotlin.home"
+const konst KOTLIN_HOME_PROPERTY = "kotlin.home"
 
 fun computeKotlinPaths(messageCollector: MessageCollector, arguments: CommonCompilerArguments): KotlinPaths? {
-    val kotlinHomeProperty = System.getProperty(KOTLIN_HOME_PROPERTY)
-    val kotlinHome = when {
+    konst kotlinHomeProperty = System.getProperty(KOTLIN_HOME_PROPERTY)
+    konst kotlinHome = when {
         arguments.kotlinHome != null -> File(arguments.kotlinHome!!)
         kotlinHomeProperty != null -> File(kotlinHomeProperty)
         else -> null
@@ -106,18 +106,18 @@ fun computeKotlinPaths(messageCollector: MessageCollector, arguments: CommonComp
 }
 
 fun MessageCollector.reportArgumentParseProblems(arguments: CommonToolArguments) {
-    val errors = arguments.errors ?: return
+    konst errors = arguments.errors ?: return
     for (flag in errors.unknownExtraFlags) {
         report(CompilerMessageSeverity.STRONG_WARNING, "Flag is not supported by this version of the compiler: $flag")
     }
     for (argument in errors.extraArgumentsPassedInObsoleteForm) {
         report(
             CompilerMessageSeverity.STRONG_WARNING,
-            "Advanced option value is passed in an obsolete form. Please use the '=' character to specify the value: $argument=..."
+            "Advanced option konstue is passed in an obsolete form. Please use the '=' character to specify the konstue: $argument=..."
         )
     }
-    for ((key, value) in errors.duplicateArguments) {
-        report(CompilerMessageSeverity.STRONG_WARNING, "Argument $key is passed multiple times. Only the last value will be used: $value")
+    for ((key, konstue) in errors.duplicateArguments) {
+        report(CompilerMessageSeverity.STRONG_WARNING, "Argument $key is passed multiple times. Only the last konstue will be used: $konstue")
     }
     for ((deprecatedName, newName) in errors.deprecatedArguments) {
         report(CompilerMessageSeverity.STRONG_WARNING, "Argument $deprecatedName is deprecated. Please use $newName instead")
@@ -134,13 +134,13 @@ fun MessageCollector.reportArgumentParseProblems(arguments: CommonToolArguments)
 }
 
 private fun MessageCollector.reportUnsafeInternalArgumentsIfAny(arguments: CommonToolArguments) {
-    val unsafeArguments = arguments.internalArguments.filterNot {
+    konst unsafeArguments = arguments.internalArguments.filterNot {
         // -XXLanguage which turns on BUG_FIX considered safe
         it is ManualLanguageFeatureSetting && it.languageFeature.kind == LanguageFeature.Kind.BUG_FIX && it.state == LanguageFeature.State.ENABLED
     }
 
     if (unsafeArguments.isNotEmpty()) {
-        val unsafeArgumentsString = unsafeArguments.joinToString(prefix = "\n", postfix = "\n\n", separator = "\n") {
+        konst unsafeArgumentsString = unsafeArguments.joinToString(prefix = "\n", postfix = "\n\n", separator = "\n") {
             it.stringRepresentation
         }
 
@@ -157,11 +157,11 @@ private fun MessageCollector.reportUnsafeInternalArgumentsIfAny(arguments: Commo
 }
 
 private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonCompilerArguments): HmppCliModuleStructure? {
-    val rawFragments = arguments.fragments
-    val rawFragmentSources = arguments.fragmentSources
-    val rawFragmentRefines = arguments.fragmentRefines
+    konst rawFragments = arguments.fragments
+    konst rawFragmentSources = arguments.fragmentSources
+    konst rawFragmentRefines = arguments.fragmentRefines
 
-    val messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
     fun reportError(message: String) {
         messageCollector.report(CompilerMessageSeverity.ERROR, message)
@@ -184,9 +184,9 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
     }
 
 
-    val sourcesByFragmentName: Map<String, Set<String>> = rawFragments.associateWith { mutableSetOf<String>() }.apply {
+    konst sourcesByFragmentName: Map<String, Set<String>> = rawFragments.associateWith { mutableSetOf<String>() }.apply {
         rawFragmentSources.orEmpty().forEach { rawFragmentSourceArg ->
-            val split = rawFragmentSourceArg.split(":", limit = 2)
+            konst split = rawFragmentSourceArg.split(":", limit = 2)
             if (split.size < 2) {
                 reportError(
                     "Incorrect syntax for -Xfragment-sources argument. " +
@@ -194,8 +194,8 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
                 )
                 return@forEach
             }
-            val fragmentName = split[0]
-            val fragmentSource = split[1]
+            konst fragmentName = split[0]
+            konst fragmentSource = split[1]
 
             getOrElse(fragmentName) {
                 reportError(
@@ -212,12 +212,12 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
     var wasError = false
     // check sources mapping
     for (i in modules.indices) {
-        val m1 = modules[i]
+        konst m1 = modules[i]
         for (j in (i + 1) until modules.size) {
-            val m2 = modules[j]
-            val commonFiles = m1.sources.intersect(m2.sources)
+            konst m2 = modules[j]
+            konst commonFiles = m1.sources.intersect(m2.sources)
             if (commonFiles.isNotEmpty()) {
-                val message = buildString {
+                konst message = buildString {
                     if (commonFiles.size == 1) {
                         append("File '${commonFiles.single()}'")
                     } else {
@@ -254,17 +254,17 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
         return HmppCliModuleStructure(modules, emptyMap())
     }
 
-    val duplicatedModules = modules.filter { module -> modules.count { it.name == module.name } > 1 }
+    konst duplicatedModules = modules.filter { module -> modules.count { it.name == module.name } > 1 }
 
     if (duplicatedModules.isNotEmpty()) {
         reportError("There are multiple modules with same name(s): ${duplicatedModules.distinct().joinToString(", ") { it.name }}")
         return null
     }
 
-    val moduleByName = modules.associateBy { it.name }
+    konst moduleByName = modules.associateBy { it.name }
 
-    val dependenciesMap = rawFragmentRefines.orEmpty().mapNotNull { rawFragmentRefinesEdge ->
-        val split = rawFragmentRefinesEdge.split(":")
+    konst dependenciesMap = rawFragmentRefines.orEmpty().mapNotNull { rawFragmentRefinesEdge ->
+        konst split = rawFragmentRefinesEdge.split(":")
         if (split.size != 2) {
             reportError(
                 "Incorrect syntax for -Xfragment-refines argument. " +
@@ -272,8 +272,8 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
             )
             return@mapNotNull null
         }
-        val moduleName1 = split[0]
-        val moduleName2 = split[1]
+        konst moduleName1 = split[0]
+        konst moduleName2 = split[1]
 
         fun findModule(name: String): HmppCliModule? {
             return moduleByName[name].also { module ->
@@ -283,20 +283,20 @@ private fun CompilerConfiguration.buildHmppModuleStructure(arguments: CommonComp
             }
         }
 
-        val module1 = findModule(moduleName1)
-        val module2 = findModule(moduleName2)
+        konst module1 = findModule(moduleName1)
+        konst module2 = findModule(moduleName2)
         if (module1 == null || module2 == null) return@mapNotNull null
         module1 to module2
     }.groupBy(
         keySelector = { it.first },
-        valueTransform = { it.second }
+        konstueTransform = { it.second }
     )
 
     modules = DFS.topologicalOrder(modules) { dependenciesMap[it].orEmpty() }.asReversed()
 
     modules.forEachIndexed { i, module ->
-        val dependencies = dependenciesMap[module].orEmpty()
-        val previousModules = modules.subList(0, i)
+        konst dependencies = dependenciesMap[module].orEmpty()
+        konst previousModules = modules.subList(0, i)
         if (dependencies.any { it !in previousModules }) {
             reportError("There is a cycle in dependencies of module `${module.name}`")
         }

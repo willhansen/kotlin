@@ -10,6 +10,6 @@ import org.gradle.api.publish.maven.MavenPublication
 interface GradleKpmSingleMavenPublishedModuleHolder {
     fun assignMavenPublication(publication: MavenPublication)
     fun whenPublicationAssigned(handlePublication: (MavenPublication) -> Unit)
-    val defaultPublishedModuleSuffix: String?
-    val publishedMavenModuleCoordinates: PublishedModuleCoordinatesProvider
+    konst defaultPublishedModuleSuffix: String?
+    konst publishedMavenModuleCoordinates: PublishedModuleCoordinatesProvider
 }

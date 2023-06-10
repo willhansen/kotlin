@@ -10,13 +10,13 @@ package foo
 import test.*
 
 fun box() : String {
-    val o = "O"
-    val p = "GOOD"
-    val result = doWork {
-        val k = "K"
-        val s = object : A<String>() {
+    konst o = "O"
+    konst p = "GOOD"
+    konst result = doWork {
+        konst k = "K"
+        konst s = object : A<String>() {
 
-            val param = p;
+            konst param = p;
 
             override fun getO(): String {
                 return o;

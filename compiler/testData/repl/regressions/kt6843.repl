@@ -1,5 +1,5 @@
->>> data class Person(val name: String)
+>>> data class Person(konst name: String)
 >>> var x: String? = "hello"
->>> val y = x?.let { Person(it) }
+>>> konst y = x?.let { Person(it) }
 >>> y
 Person(name=hello)

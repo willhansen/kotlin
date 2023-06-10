@@ -24,7 +24,7 @@ sealed class TypeArgumentMapping {
         override fun get(typeParameterIndex: Int): FirTypeProjection = buildPlaceholderProjection()
     }
 
-    class Mapped(private val ordered: List<FirTypeProjection>) : TypeArgumentMapping() {
+    class Mapped(private konst ordered: List<FirTypeProjection>) : TypeArgumentMapping() {
         override fun get(typeParameterIndex: Int): FirTypeProjection {
             return ordered.getOrElse(typeParameterIndex) { buildPlaceholderProjection() }
         }
@@ -33,8 +33,8 @@ sealed class TypeArgumentMapping {
 
 internal object MapTypeArguments : ResolutionStage() {
     override suspend fun check(candidate: Candidate, callInfo: CallInfo, sink: CheckerSink, context: ResolutionContext) {
-        val typeArguments = callInfo.typeArguments
-        val owner = candidate.symbol.fir as FirTypeParameterRefsOwner
+        konst typeArguments = callInfo.typeArguments
+        konst owner = candidate.symbol.fir as FirTypeParameterRefsOwner
 
         if (typeArguments.isEmpty()) {
             if (owner is FirCallableDeclaration && owner.dispatchReceiverType?.isRaw() == true) {
@@ -70,7 +70,7 @@ internal object MapTypeArguments : ResolutionStage() {
         // Also, it might be a separate feature of K2, because even in cases where both compilers had a raw type, it's convenient not to
         // require explicit type arguments for the places where it doesn't make sense
         // (See `generic1.foo(w)` call in testData/diagnostics/tests/platformTypes/rawTypes/noTypeArgumentsForRawScopedMembers.fir.kt)
-        val resultArguments = owner.typeParameters.map { typeParameterRef ->
+        konst resultArguments = owner.typeParameters.map { typeParameterRef ->
             buildTypeProjectionWithVariance {
                 typeRef =
                     ConeTypeIntersector.intersectTypes(

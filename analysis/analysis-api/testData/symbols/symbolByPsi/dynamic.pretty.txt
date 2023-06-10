@@ -1,5 +1,5 @@
 class Foo {
-  val p: dynamic
+  konst p: dynamic
 
   fun f(p: dynamic): dynamic
 }

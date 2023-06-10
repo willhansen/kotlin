@@ -12,10 +12,10 @@ external class A {
     fun f()
 
     @X
-    val p: Int
+    konst p: Int
 
     @get:X
-    val r: Int
+    konst r: Int
 }
 
 <!RUNTIME_ANNOTATION_ON_EXTERNAL_DECLARATION!>@Y<!>
@@ -24,10 +24,10 @@ external class B {
     fun f()
 
     <!RUNTIME_ANNOTATION_ON_EXTERNAL_DECLARATION!>@Y<!>
-    val p: Int
+    konst p: Int
 
     <!RUNTIME_ANNOTATION_ON_EXTERNAL_DECLARATION!>@get:Y<!>
-    val r: Int
+    konst r: Int
 }
 
 typealias TY = Y
@@ -41,13 +41,13 @@ class C {
     fun f() {}
 
     @X
-    val p: Int = 0
+    konst p: Int = 0
 
-    val q: Int
+    konst q: Int
         @X get() = 0
 
     @get:X
-    val r: Int = 0
+    konst r: Int = 0
 }
 
 <!RUNTIME_ANNOTATION_NOT_SUPPORTED!>@Y<!>
@@ -56,11 +56,11 @@ class D {
     fun f() {}
 
     <!RUNTIME_ANNOTATION_NOT_SUPPORTED!>@Y<!>
-    val p: Int = 0
+    konst p: Int = 0
 
-    val q: Int
+    konst q: Int
       <!RUNTIME_ANNOTATION_NOT_SUPPORTED!>@Y<!> get() = 0
 
     <!RUNTIME_ANNOTATION_NOT_SUPPORTED!>@get:Y<!>
-    val r: Int = 0
+    konst r: Int = 0
 }

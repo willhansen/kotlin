@@ -1,9 +1,9 @@
 interface IFoo {
     @Deprecated("")
-    val prop: String get() = ""
+    konst prop: String get() = ""
 
     @Deprecated("")
-    val String.extProp: String get() = ""
+    konst String.extProp: String get() = ""
 }
 
 interface IFoo2 : IFoo
@@ -17,11 +17,11 @@ class DefaultImpl : IFoo
 class DefaultImpl2 : IFoo2
 
 class ExplicitOverride : IFoo {
-    override val prop: String get() = ""
-    override val String.extProp: String get() = ""
+    override konst prop: String get() = ""
+    override konst String.extProp: String get() = ""
 }
 
 class ExplicitOverride2 : IFoo2 {
-    override val prop: String get() = ""
-    override val String.extProp: String get() = ""
+    override konst prop: String get() = ""
+    override konst String.extProp: String get() = ""
 }

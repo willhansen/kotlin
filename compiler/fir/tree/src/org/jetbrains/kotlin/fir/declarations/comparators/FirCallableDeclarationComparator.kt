@@ -12,18 +12,18 @@ import org.jetbrains.kotlin.fir.types.FirTypeRefComparator
 
 object FirCallableDeclarationComparator : Comparator<FirCallableDeclaration> {
     override fun compare(a: FirCallableDeclaration, b: FirCallableDeclaration): Int {
-        val typeAndNameDiff = FirMemberDeclarationComparator.TypeAndNameComparator.compare(a, b)
+        konst typeAndNameDiff = FirMemberDeclarationComparator.TypeAndNameComparator.compare(a, b)
         if (typeAndNameDiff != 0) {
             return typeAndNameDiff
         }
 
         // Compare the receiver type if any.
-        val aReceiver = a.receiverParameter
-        val bReceiver = b.receiverParameter
+        konst aReceiver = a.receiverParameter
+        konst bReceiver = b.receiverParameter
         if (aReceiver != null || bReceiver != null) {
-            val aHasReceiverType = if (aReceiver != null) 1 else 0
-            val bHasReceiverType = if (bReceiver != null) 1 else 0
-            val receiverTypePresenceDiff = aHasReceiverType - bHasReceiverType
+            konst aHasReceiverType = if (aReceiver != null) 1 else 0
+            konst bHasReceiverType = if (bReceiver != null) 1 else 0
+            konst receiverTypePresenceDiff = aHasReceiverType - bHasReceiverType
             if (receiverTypePresenceDiff != 0) {
                 return receiverTypePresenceDiff
             }
@@ -31,35 +31,35 @@ object FirCallableDeclarationComparator : Comparator<FirCallableDeclaration> {
         }
 
         // Compare the return type.
-        val returnTypeDiff = FirTypeRefComparator.compare(a.returnTypeRef, b.returnTypeRef)
+        konst returnTypeDiff = FirTypeRefComparator.compare(a.returnTypeRef, b.returnTypeRef)
         if (returnTypeDiff != 0) {
             return returnTypeDiff
         }
 
-        // Compare the value parameters for functions.
+        // Compare the konstue parameters for functions.
         if (a is FirFunction) {
             require(b is FirFunction) {
                 "TypeAndNameComparator is inconsistent: ${a.render()} v.s. ${b.render()}"
             }
-            val valueParameterSizeDiff = a.valueParameters.size - b.valueParameters.size
-            if (valueParameterSizeDiff != 0) {
-                return valueParameterSizeDiff
+            konst konstueParameterSizeDiff = a.konstueParameters.size - b.konstueParameters.size
+            if (konstueParameterSizeDiff != 0) {
+                return konstueParameterSizeDiff
             }
-            for ((aValueParameter, bValueParameter) in a.valueParameters.zip(b.valueParameters)) {
-                val valueParameterDiff = FirValueParameterComparator.compare(aValueParameter, bValueParameter)
-                if (valueParameterDiff != 0) {
-                    return valueParameterDiff
+            for ((aValueParameter, bValueParameter) in a.konstueParameters.zip(b.konstueParameters)) {
+                konst konstueParameterDiff = FirValueParameterComparator.compare(aValueParameter, bValueParameter)
+                if (konstueParameterDiff != 0) {
+                    return konstueParameterDiff
                 }
             }
         }
 
         // Compare the type parameters.
-        val typeParameterSizeDiff = a.typeParameters.size - b.typeParameters.size
+        konst typeParameterSizeDiff = a.typeParameters.size - b.typeParameters.size
         if (typeParameterSizeDiff != 0) {
             return typeParameterSizeDiff
         }
         for ((aTypeParameter, bTypeParameter) in a.typeParameters.zip(b.typeParameters)) {
-            val typeParameterDiff = FirTypeParameterRefComparator.compare(aTypeParameter, bTypeParameter)
+            konst typeParameterDiff = FirTypeParameterRefComparator.compare(aTypeParameter, bTypeParameter)
             if (typeParameterDiff != 0) {
                 return typeParameterDiff
             }

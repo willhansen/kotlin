@@ -27,8 +27,8 @@ abstract class FirTypeResolver : FirSessionComponent {
 }
 
 data class FirTypeResolutionResult(
-    val type: ConeKotlinType,
-    val diagnostic: ConeDiagnostic?,
+    konst type: ConeKotlinType,
+    konst diagnostic: ConeDiagnostic?,
 )
 
-val FirSession.typeResolver: FirTypeResolver by FirSession.sessionComponentAccessor()
+konst FirSession.typeResolver: FirTypeResolver by FirSession.sessionComponentAccessor()

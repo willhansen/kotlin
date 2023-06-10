@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 
 internal class KtFirSubtypingComponent(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtSubtypingComponent(), KtFirAnalysisSessionComponent {
     override fun isEqualTo(first: KtType, second: KtType): Boolean {
         second.assertIsValidAndAccessible()

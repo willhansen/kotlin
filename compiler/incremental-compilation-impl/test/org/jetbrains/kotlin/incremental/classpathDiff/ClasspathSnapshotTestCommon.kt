@@ -22,18 +22,18 @@ import java.lang.ProcessBuilder.Redirect
 abstract class ClasspathSnapshotTestCommon {
 
     @get:Rule
-    val tmpDir = TemporaryFolder()
+    konst tmpDir = TemporaryFolder()
 
     // Use Gson to compare objects
-    private val gson by lazy { GsonBuilder().setPrettyPrinting().create() }
+    private konst gson by lazy { GsonBuilder().setPrettyPrinting().create() }
     protected fun ClassSnapshot.toGson(): String = gson.toJson(
-        // Serialize and deserialize the object to unset lazy properties' values as they are not essential and can add noise when comparing
+        // Serialize and deserialize the object to unset lazy properties' konstues as they are not essential and can add noise when comparing
         // objects
         ClassSnapshotExternalizer.fromByteArray(ClassSnapshotExternalizer.toByteArray(this))
     )
 
-    sealed class SourceFile(val baseDir: File, relativePath: String) {
-        val unixStyleRelativePath: String
+    sealed class SourceFile(konst baseDir: File, relativePath: String) {
+        konst unixStyleRelativePath: String
 
         init {
             unixStyleRelativePath = relativePath.replace('\\', '/')
@@ -41,7 +41,7 @@ abstract class ClasspathSnapshotTestCommon {
 
         fun asFile() = File(baseDir, unixStyleRelativePath)
 
-        class KotlinSourceFile(baseDir: File, relativePath: String, val preCompiledClassFiles: List<ClassFile>) :
+        class KotlinSourceFile(baseDir: File, relativePath: String, konst preCompiledClassFiles: List<ClassFile>) :
             SourceFile(baseDir, relativePath) {
 
             constructor(baseDir: File, relativePath: String, preCompiledClassFile: ClassFile) :
@@ -52,7 +52,7 @@ abstract class ClasspathSnapshotTestCommon {
     }
 
     /** Same as [SourceFile] but with a [TemporaryFolder] to store the results of operations on the [SourceFile]. */
-    open class TestSourceFile(val sourceFile: SourceFile, private val tmpDir: TemporaryFolder) {
+    open class TestSourceFile(konst sourceFile: SourceFile, private konst tmpDir: TemporaryFolder) {
 
         fun asFile() = sourceFile.asFile()
 
@@ -74,7 +74,7 @@ abstract class ClasspathSnapshotTestCommon {
                 }
                 preCompiledClassFiles
             } else {
-                val srcDir = tmpDir.newFolder()
+                konst srcDir = tmpDir.newFolder()
                 asFile().copyTo(File(srcDir, unixStyleRelativePath))
                 compileAll(srcDir, tmpDir)
             }
@@ -82,28 +82,28 @@ abstract class ClasspathSnapshotTestCommon {
 
         /** Compiles the source files in the given directory and returns all generated .class files. */
         fun compileAll(srcDir: File, tmpDir: TemporaryFolder, classpath: List<File> = emptyList()): List<ClassFile> {
-            val classesDir = srcDir.path.let {
+            konst classesDir = srcDir.path.let {
                 File(it.substringBeforeLast("src") + "classes" + it.substringAfterLast("src"))
             }
-            val kotlinClasses = compileKotlin(srcDir, classesDir, classpath)
+            konst kotlinClasses = compileKotlin(srcDir, classesDir, classpath)
 
-            val javaClasspath = classpath + listOfNotNull(kotlinClasses.firstOrNull()?.classRoot)
-            val javaClasses = compileJava(srcDir, classesDir = tmpDir.newFolder(), javaClasspath)
+            konst javaClasspath = classpath + listOfNotNull(kotlinClasses.firstOrNull()?.classRoot)
+            konst javaClasses = compileJava(srcDir, classesDir = tmpDir.newFolder(), javaClasspath)
 
             return kotlinClasses + javaClasses
         }
 
         /**
-         * Set to `true` to (re)generate Kotlin .class files locally which can then be checked in (remember to set this value back to
-         * `false` afterwards, DO NOT check in this code when this value = `true`).
+         * Set to `true` to (re)generate Kotlin .class files locally which can then be checked in (remember to set this konstue back to
+         * `false` afterwards, DO NOT check in this code when this konstue = `true`).
          *
          * Reason for this flag: If <kotlin-repo>/dist/kotlinc/lib/kotlin-compiler.jar is available (e.g., by running ./gradlew dist), we
          * will be able to call the Kotlin compiler to generate classes. However, kotlin-compiler.jar is currently not available in CI
          * builds, so we need to pre-compile the classes locally and put them in the test data to check in.
          */
-        private const val GENERATE_KOTLIN_CLASS_FILES = false
+        private const konst GENERATE_KOTLIN_CLASS_FILES = false
 
-        private val alreadyCompiledKotlinSrcDirs = mutableSetOf<File>()
+        private konst alreadyCompiledKotlinSrcDirs = mutableSetOf<File>()
 
         private fun compileKotlin(srcDir: File, classesDir: File, classpath: List<File>): List<ClassFile> {
             if (GENERATE_KOTLIN_CLASS_FILES) {
@@ -129,9 +129,9 @@ abstract class ClasspathSnapshotTestCommon {
             //     org.jetbrains.kotlin.test.MockLibraryUtil.compileKotlin(
             //         srcDir.path, classesDir, extraClasspath = classpath.map { it.path }.toTypedArray())
             // However, it currently fails with UnsupportedClassVersionError, so we have to launch a new kotlinc process instead.
-            val kotlincBinary = if (isWindows) "dist/kotlinc/bin/kotlinc.bat" else "dist/kotlinc/bin/kotlinc"
+            konst kotlincBinary = if (isWindows) "dist/kotlinc/bin/kotlinc.bat" else "dist/kotlinc/bin/kotlinc"
             check(File(kotlincBinary).exists()) { "'${File(kotlincBinary).absolutePath}' not found. Run ./gradlew dist first." }
-            val commandAndArgs = listOf(
+            konst commandAndArgs = listOf(
                 kotlincBinary,
                 srcDir.path,
                 "-d", classesDir.path,
@@ -148,12 +148,12 @@ abstract class ClasspathSnapshotTestCommon {
         private fun doCompileJava(srcDir: File, classesDir: File, classpath: List<File>) {
             classesDir.deleteRecursively()
             classesDir.mkdirs()
-            val javaFiles = srcDir.walk().toList().filter { it.path.endsWith(".java") }
+            konst javaFiles = srcDir.walk().toList().filter { it.path.endsWith(".java") }
             if (javaFiles.isEmpty()) {
                 return
             }
 
-            val classpathOption =
+            konst classpathOption =
                 if (classpath.isNotEmpty()) listOf("-classpath", classpath.joinToString(File.pathSeparator)) else emptyList()
             KotlinTestUtils.compileJavaFiles(javaFiles, listOf("-d", classesDir.path) + classpathOption)
         }
@@ -177,7 +177,7 @@ abstract class ClasspathSnapshotTestCommon {
         fun ClassFile.snapshot(granularity: ClassSnapshotGranularity? = null): ClassSnapshot = listOf(this).snapshot(granularity).single()
 
         fun List<ClassFile>.snapshot(granularity: ClassSnapshotGranularity? = null): List<ClassSnapshot> {
-            val classes = map { ClassFileWithContentsProvider(it) { it.readBytes() } }
+            konst classes = map { ClassFileWithContentsProvider(it) { it.readBytes() } }
             return ClassSnapshotter.snapshot(classes, granularity ?: ClassSnapshotGranularity.CLASS_MEMBER_LEVEL)
         }
     }
@@ -188,18 +188,18 @@ internal fun snapshotClasspath(
     tmpDir: TemporaryFolder,
     granularity: ClassSnapshotGranularity? = null
 ): ClasspathSnapshot {
-    val classpath = mutableListOf<File>()
-    val classpathEntrySourceDirs = if (classpathSourceDir.listFiles()!!.size == 1) {
+    konst classpath = mutableListOf<File>()
+    konst classpathEntrySourceDirs = if (classpathSourceDir.listFiles()!!.size == 1) {
         listOf(classpathSourceDir)
     } else {
         classpathSourceDir.listFiles()!!.sortedBy { it.name }
     }
-    val classpathEntrySnapshots = classpathEntrySourceDirs.map { classpathEntrySourceDir ->
-        val classFiles = compileAll(classpathEntrySourceDir, tmpDir, classpath)
+    konst classpathEntrySnapshots = classpathEntrySourceDirs.map { classpathEntrySourceDir ->
+        konst classFiles = compileAll(classpathEntrySourceDir, tmpDir, classpath)
         classpath.addAll(listOfNotNull(classFiles.firstOrNull()?.classRoot))
 
-        val relativePaths = classFiles.map { it.unixStyleRelativePath }
-        val classSnapshots = classFiles.snapshot(granularity)
+        konst relativePaths = classFiles.map { it.unixStyleRelativePath }
+        konst classSnapshots = classFiles.snapshot(granularity)
         ClasspathEntrySnapshot(
             classSnapshots = relativePaths.zip(classSnapshots).toMap(LinkedHashMap())
         )
@@ -208,13 +208,13 @@ internal fun snapshotClasspath(
 }
 
 private fun runCommandInNewProcess(commandAndArgs: List<String>) {
-    val processBuilder = ProcessBuilder(commandAndArgs)
+    konst processBuilder = ProcessBuilder(commandAndArgs)
     processBuilder.redirectInput(Redirect.INHERIT)
     processBuilder.redirectOutput(Redirect.INHERIT)
     processBuilder.redirectErrorStream(true)
-    val process = processBuilder.start()
+    konst process = processBuilder.start()
 
-    val exitCode = try {
+    konst exitCode = try {
         process.waitFor()
     } finally {
         process.destroyForcibly()

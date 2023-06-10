@@ -27,26 +27,26 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.types.typeUtil.isNullableAny
 
 internal class KtFe10PsiTypeParameterSymbol(
-    override val psi: KtTypeParameter,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtTypeParameter,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtTypeParameterSymbol(), KtFe10PsiSymbol<KtTypeParameter, TypeParameterDescriptor> {
-    override val descriptor: TypeParameterDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi)
+    override konst descriptor: TypeParameterDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi)
         bindingContext[BindingContext.TYPE_PARAMETER, psi]
     }
 
-    override val variance: Variance
+    override konst variance: Variance
         get() = withValidityAssertion { psi.variance }
 
-    override val upperBounds: List<KtType>
+    override konst upperBounds: List<KtType>
         get() = withValidityAssertion {
             descriptor?.upperBounds?.filterNot { it.isNullableAny() }?.map { it.toKtType(analysisContext) } ?: emptyList()
         }
 
-    override val isReified: Boolean
+    override konst isReified: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.REIFIED_KEYWORD) }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { psi.nameAsSafeName }
 
     context(KtAnalysisSession)

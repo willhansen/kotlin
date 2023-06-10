@@ -26,7 +26,7 @@ internal object LLFirExpectActualMatcherLazyResolver : LLFirLazyResolver(FirReso
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirExpectActualMatchingTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirExpectActualMatchingTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -50,7 +50,7 @@ private class LLFirExpectActualMatchingTargetResolver(
     session: FirSession,
     scopeSession: ScopeSession,
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
-    private val transformer = object : FirExpectActualMatcherTransformer(session, scopeSession) {
+    private konst transformer = object : FirExpectActualMatcherTransformer(session, scopeSession) {
         override fun transformRegularClass(regularClass: FirRegularClass, data: Nothing?): FirStatement {
             transformMemberDeclaration(regularClass)
             return regularClass

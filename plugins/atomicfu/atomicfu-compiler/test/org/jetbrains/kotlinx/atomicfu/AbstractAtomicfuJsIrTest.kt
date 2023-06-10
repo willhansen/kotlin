@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlinx.atomicfu.compiler.extensions.AtomicfuLoweringExtension
 import java.io.File
 
-private val atomicfuJsCompileDependency = System.getProperty("atomicfuJs.classpath")
-private val atomicfuJsIrRuntime = System.getProperty("atomicfuJsIrRuntimeForTests.classpath")
+private konst atomicfuJsCompileDependency = System.getProperty("atomicfuJs.classpath")
+private konst atomicfuJsIrRuntime = System.getProperty("atomicfuJsIrRuntimeForTests.classpath")
 
 open class AbstractAtomicfuJsIrTest : AbstractJsIrTest(
     pathToTestDir = "plugins/atomicfu/atomicfu-compiler/testData/box/",

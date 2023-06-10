@@ -1,5 +1,5 @@
 fun test() {
-    val string = <expr>(String)</expr>::class
+    konst string = <expr>(String)</expr>::class
 }
 
 // IGNORE_FE10

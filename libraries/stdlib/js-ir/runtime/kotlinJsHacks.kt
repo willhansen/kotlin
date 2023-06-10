@@ -19,19 +19,19 @@ internal fun <T : Enum<T>> enumValueOfIntrinsic(@Suppress("UNUSED_PARAMETER") na
 // (when these methods are removed) compiler will fail with Internal error
 @Deprecated("This is an intrinsic for removed functionality", level = DeprecationLevel.HIDDEN)
 internal fun safePropertyGet(self: dynamic, getterName: String, propName: String): dynamic {
-    val getter = self[getterName]
+    konst getter = self[getterName]
     return if (getter != null) getter.call(self) else self[propName]
 }
 
 @Deprecated("This is an intrinsic for removed functionality", level = DeprecationLevel.HIDDEN)
-internal fun safePropertySet(self: dynamic, setterName: String, propName: String, value: dynamic) {
-    val setter = self[setterName]
-    if (setter != null) setter.call(self, value) else self[propName] = value
+internal fun safePropertySet(self: dynamic, setterName: String, propName: String, konstue: dynamic) {
+    konst setter = self[setterName]
+    if (setter != null) setter.call(self, konstue) else self[propName] = konstue
 }
 
 /**
  * Implements annotated function in JavaScript.
- * [code] string must contain JS expression that evaluates to JS function with signature that matches annotated kotlin function
+ * [code] string must contain JS expression that ekonstuates to JS function with signature that matches annotated kotlin function
  *
  * For example, a function that adds two Doubles:
  *
@@ -42,7 +42,7 @@ internal fun safePropertySet(self: dynamic, setterName: String, propName: String
  * Code gets inserted as is without syntax verification.
  */
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
-internal annotation class JsFun(val code: String)
+internal annotation class JsFun(konst code: String)
 
 /**
  * The annotation is needed for annotating class declarations and type alias which are used inside exported declarations, but

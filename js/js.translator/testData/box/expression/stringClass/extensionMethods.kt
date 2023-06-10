@@ -2,13 +2,13 @@
 // EXPECTED_REACHABLE_NODES: 1439
 package foo
 
-val testString = "foobarbaz"
-val testStringSize = 9
-val testIndexOfB = 3
-val emptyString = ""
-val startsWithParam = "foo"
-val endsWithParam = "az"
-val containsParam = "ar"
+konst testString = "foobarbaz"
+konst testStringSize = 9
+konst testIndexOfB = 3
+konst emptyString = ""
+konst startsWithParam = "foo"
+konst endsWithParam = "az"
+konst containsParam = "ar"
 
 fun assertEquals(expected: Any, actual: Any, s: CharSequence, type: String, whatTested: String) {
     assertEquals(expected, actual, "$type.$whatTested fails on \"$s\"")

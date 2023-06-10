@@ -10,7 +10,7 @@
 // FILE: serializableClassMemberFunRef.kt
 import java.io.*
 
-class C(val s: String) {
+class C(konst s: String) {
     fun plus(ss: String) = ss + s
 }
 
@@ -20,7 +20,7 @@ fun box(): String {
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

@@ -117,7 +117,7 @@ typedef unsigned long long U_64;
 #endif
 
 #if defined(HYPPC32) && defined(LINUX)
-#define VA_PTR(valist) (&valist[0])
+#define VA_PTR(konstist) (&konstist[0])
 #endif
 
 typedef double SYS_FLOAT;
@@ -224,7 +224,7 @@ typedef double				SYS_FLOAT;
 #define PATH_SEPARATOR_STR ":"
 #define LIBPATH_ENV_VAR "LIBPATH"
 
-#define VA_PTR(valist) (&valist[0])
+#define VA_PTR(konstist) (&konstist[0])
 
 typedef struct {
 #if !defined(HYS390X)
@@ -477,7 +477,7 @@ typedef float ESSINGLE;
  */
 
 #if !defined(VA_PTR)
-#define VA_PTR(valist) (&valist)
+#define VA_PTR(konstist) (&konstist)
 #endif
 #if !defined(TOC_UNWRAP_ADDRESS)
 #define TOC_UNWRAP_ADDRESS(wrappedPointer) (wrappedPointer)
@@ -487,7 +487,7 @@ typedef float ESSINGLE;
 #define TOC_STORE_TOC(dest,wrappedPointer)
 #endif
 /**
- * Macros for accessing I_64 values.
+ * Macros for accessing I_64 konstues.
  */
 
 #if defined(ATOMIC_LONG_ACCESS)

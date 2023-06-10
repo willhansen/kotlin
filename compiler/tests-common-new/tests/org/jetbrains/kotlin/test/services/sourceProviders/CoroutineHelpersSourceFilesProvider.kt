@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.test.services.TestServices
 import java.io.File
 
 class CoroutineHelpersSourceFilesProvider(testServices: TestServices, testDataPath: String = ".") : AdditionalSourceProvider(testServices) {
-    private val helpersPath = "$testDataPath/compiler/testData/diagnostics/helpers/coroutines"
+    private konst helpersPath = "$testDataPath/compiler/testData/diagnostics/helpers/coroutines"
 
-    private val coroutineHelpersPath = "$helpersPath/CoroutineHelpers.kt"
-    private val coroutineUtilPath = "$helpersPath/CoroutineUtil.kt"
-    private val stateMachineCheckerPath = "$helpersPath/StateMachineChecker.kt"
-    private val tailCallOptimizationCheckerPath = "$helpersPath/TailCallOptimizationChecker.kt"
+    private konst coroutineHelpersPath = "$helpersPath/CoroutineHelpers.kt"
+    private konst coroutineUtilPath = "$helpersPath/CoroutineUtil.kt"
+    private konst stateMachineCheckerPath = "$helpersPath/StateMachineChecker.kt"
+    private konst tailCallOptimizationCheckerPath = "$helpersPath/TailCallOptimizationChecker.kt"
 
-    override val directiveContainers: List<DirectivesContainer> =
+    override konst directiveContainers: List<DirectivesContainer> =
         listOf(AdditionalFilesDirectives)
 
     @OptIn(ExperimentalStdlibApi::class)

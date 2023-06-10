@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.test.services.jsLibraryProvider
 import java.io.File
 
 fun getKlibDependencies(module: TestModule, testServices: TestServices, kind: DependencyRelation): List<File> {
-    val visited = mutableSetOf<TestModule>()
+    konst visited = mutableSetOf<TestModule>()
     fun getRecursive(module: TestModule, relation: DependencyRelation) {
-        val dependencies = if (relation == DependencyRelation.FriendDependency) {
+        konst dependencies = if (relation == DependencyRelation.FriendDependency) {
             module.friendDependencies
         } else {
             module.regularDependencies

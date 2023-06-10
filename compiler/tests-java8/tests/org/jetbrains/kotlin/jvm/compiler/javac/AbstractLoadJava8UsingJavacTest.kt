@@ -31,7 +31,7 @@ abstract class AbstractLoadJava8UsingJavacTest : AbstractLoadJava8Test() {
     override fun useJavacWrapper() = true
 
     override fun getExpectedFile(expectedFileName: String): File {
-        val differentResultFile = KotlinTestUtils.replaceExtension(File(expectedFileName), "javac.txt")
+        konst differentResultFile = KotlinTestUtils.replaceExtension(File(expectedFileName), "javac.txt")
         if (differentResultFile.exists()) return differentResultFile
         return super.getExpectedFile(expectedFileName)
     }

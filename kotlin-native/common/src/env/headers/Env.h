@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-void setEnv(const char* name, const char* value);
+void setEnv(const char* name, const char* konstue);
 
 #ifdef __cplusplus
 }

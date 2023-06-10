@@ -350,7 +350,7 @@ struct backtrace_call_full
 
 extern void backtrace_syminfo_to_full_callback (void *data, uintptr_t pc,
 						const char *symname,
-						uintptr_t symval,
+						uintptr_t symkonst,
 						uintptr_t symsize);
 
 /* An error callback that corresponds to

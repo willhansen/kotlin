@@ -16,8 +16,8 @@ class KpmCoreCasesJunitParameterResolver : ParameterResolver {
 
     override fun resolveParameter(parameterContext: ParameterContext, extensionContext: ExtensionContext): Any {
         require(parameterContext.parameter.type == KpmTestCaseDescriptor::class.java)
-        val kpmCaseName = extensionContext.requiredTestMethod.kpmCaseName
-        val caseDescriptor = KpmTestCaseDescriptor.allCaseDescriptorsByNames[kpmCaseName]
+        konst kpmCaseName = extensionContext.requiredTestMethod.kpmCaseName
+        konst caseDescriptor = KpmTestCaseDescriptor.allCaseDescriptorsByNames[kpmCaseName]
         requireNotNull(caseDescriptor) {
             "Can't find KpmCoreCase for name $kpmCaseName while " +
                     "\n injecting parameter ${parameterContext.parameter} into \n" +
@@ -27,9 +27,9 @@ class KpmCoreCasesJunitParameterResolver : ParameterResolver {
     }
 }
 
-private val Method.kpmCaseName: String
+private konst Method.kpmCaseName: String
     get() {
-        val testCaseName = this.name.substringAfter("test")
+        konst testCaseName = this.name.substringAfter("test")
         require(testCaseName in KpmTestCaseDescriptor.allCasesNames) {
             "Can't find matching core case for name ${testCaseName}.\n" +
                     "Please check that the test method follow pattern 'test\$caseName', \n" +

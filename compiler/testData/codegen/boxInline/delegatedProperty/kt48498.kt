@@ -8,7 +8,7 @@ operator fun String.provideDelegate(thisRef: Any?, prop: Any?) = this
 operator fun String.getValue(thisRef: Any?, prop: Any?) = this
 
 inline fun foo(): String {
-    val x by "OK"
+    konst x by "OK"
     return x
 }
 

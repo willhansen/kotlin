@@ -1,11 +1,11 @@
 // ISSUE: KT-49045
 
-data class Foo(val foo: String)
-class Bar(val bar: String)
+data class Foo(konst foo: String)
+class Bar(konst bar: String)
 
 fun Bar.toFoo() = Foo(bar)
 
-class Wrapper<T>(val wrapped: T) {
+class Wrapper<T>(konst wrapped: T) {
     fun <A> map(f: (T) -> A): Wrapper<A> = Wrapper(f(wrapped))
     fun swapWrappedValue(f: (T) -> Wrapper<T>): Wrapper<T> = f(wrapped)
 }

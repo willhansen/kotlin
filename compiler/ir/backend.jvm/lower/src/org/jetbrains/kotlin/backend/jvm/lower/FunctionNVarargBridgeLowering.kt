@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 
-internal val functionNVarargBridgePhase = makeIrFilePhase(
+internal konst functionNVarargBridgePhase = makeIrFilePhase(
     ::FunctionNVarargBridgeLowering,
     name = "FunctionBridgePhase",
     description = "Add bridges for invoke functions with a large number of arguments"
@@ -41,13 +41,13 @@ internal val functionNVarargBridgePhase = makeIrFilePhase(
 // inherit from the generic FunctionN class which has a vararg invoke method. This phase
 // adds a bridge method for such large arity functions, which checks the number of arguments
 // dynamically.
-private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
+private class FunctionNVarargBridgeLowering(konst context: JvmBackendContext) :
     FileLoweringPass, IrElementTransformerVoidWithContext() {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid(this)
 
     // Change calls to big arity invoke functions to vararg calls.
     override fun visitFunctionAccess(expression: IrFunctionAccessExpression): IrExpression {
-        if (expression.valueArgumentsCount < BuiltInFunctionArity.BIG_ARITY ||
+        if (expression.konstueArgumentsCount < BuiltInFunctionArity.BIG_ARITY ||
             !(expression.symbol.owner.parentAsClass.defaultType.isFunctionOrKFunction() ||
                     expression.symbol.owner.parentAsClass.defaultType.isSuspendFunctionOrKFunction()) ||
             expression.symbol.owner.name.asString() != "invoke"
@@ -61,7 +61,7 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
                     this@FunctionNVarargBridgeLowering.context.ir.symbols.functionN.defaultType
                 )
                 putValueArgument(0, irArray(irSymbols.array.typeWith(context.irBuiltIns.anyNType)) {
-                    (0 until expression.valueArgumentsCount).forEach {
+                    (0 until expression.konstueArgumentsCount).forEach {
                         +expression.getValueArgument(it)!!.transformVoid()
                     }
                 })
@@ -73,7 +73,7 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
         transform(this@FunctionNVarargBridgeLowering, null)
 
     override fun visitClassNew(declaration: IrClass): IrStatement {
-        val bigArityFunctionSuperTypes = declaration.superTypes.filterIsInstance<IrSimpleType>().filter {
+        konst bigArityFunctionSuperTypes = declaration.superTypes.filterIsInstance<IrSimpleType>().filter {
             it.isFunctionType && it.arguments.size > BuiltInFunctionArity.BIG_ARITY
         }
 
@@ -91,11 +91,11 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
             )
 
             // Add vararg invoke bridge
-            val invokeFunction = declaration.functions.single { function ->
-                val overridesInvoke = function.overriddenSymbols.any { symbol ->
+            konst invokeFunction = declaration.functions.single { function ->
+                konst overridesInvoke = function.overriddenSymbols.any { symbol ->
                     symbol.owner.name.asString() == "invoke"
                 }
-                overridesInvoke && function.valueParameters.size == superType.arguments.sumOf {
+                overridesInvoke && function.konstueParameters.size == superType.arguments.sumOf {
                     if (it.typeOrNull?.needsMfvcFlattening() != true) 1
                     else context.multiFieldValueClassReplacements.getRootMfvcNode(it.typeOrNull!!.erasedUpperBound).leavesCount
                 } - if (function.isSuspend) 0 else 1
@@ -117,15 +117,15 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
         }.apply {
             overriddenSymbols += superFunction.symbol
             dispatchReceiverParameter = thisReceiver!!.copyTo(this)
-            valueParameters += superFunction.valueParameters.single().copyTo(this)
+            konstueParameters += superFunction.konstueParameters.single().copyTo(this)
 
             body = context.createIrBuilder(symbol).irBlockBody(startOffset, endOffset) {
                 // Check the number of arguments
-                val argumentCount = invoke.valueParameters.size
+                konst argumentCount = invoke.konstueParameters.size
                 +irIfThen(
                     irNotEquals(
                         irCall(arraySizePropertyGetter).apply {
-                            dispatchReceiver = irGet(valueParameters.single())
+                            dispatchReceiver = irGet(konstueParameters.single())
                         },
                         irInt(argumentCount)
                     ),
@@ -137,11 +137,11 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
                 +irReturn(irCall(invoke).apply {
                     dispatchReceiver = irGet(dispatchReceiverParameter!!)
 
-                    for (parameter in invoke.valueParameters) {
-                        val index = parameter.index
-                        val argArray = irGet(valueParameters.single())
-                        val argument = irCallOp(arrayGetFun, context.irBuiltIns.anyNType, argArray, irInt(index))
-                        putValueArgument(index, irImplicitCast(argument, invoke.valueParameters[index].type))
+                    for (parameter in invoke.konstueParameters) {
+                        konst index = parameter.index
+                        konst argArray = irGet(konstueParameters.single())
+                        konst argument = irCallOp(arrayGetFun, context.irBuiltIns.anyNType, argArray, irInt(index))
+                        putValueArgument(index, irImplicitCast(argument, invoke.konstueParameters[index].type))
                     }
                 })
             }
@@ -150,11 +150,11 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
     // Check if a type is an instance of kotlin.Function*, kotlin.jvm.functions.Function*
     // or kotlin.reflect.KFunction*. Note that `IrType.isFunctionOrKFunction()` in IrTypeUtils
     // does not check for the jvm specific kotlin.jvm.functions package and can't be used here.
-    private val IrType.isFunctionType: Boolean
+    private konst IrType.isFunctionType: Boolean
         get() {
-            val clazz = classOrNull?.owner ?: return false
-            val name = clazz.name.asString()
-            val fqName = (clazz.parent as? IrPackageFragment)?.packageFqName ?: return false
+            konst clazz = classOrNull?.owner ?: return false
+            konst name = clazz.name.asString()
+            konst fqName = (clazz.parent as? IrPackageFragment)?.packageFqName ?: return false
             return when {
                 name.startsWith("Function") ->
                     fqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME || fqName == FUNCTIONS_PACKAGE_FQ_NAME
@@ -164,23 +164,23 @@ private class FunctionNVarargBridgeLowering(val context: JvmBackendContext) :
             }
         }
 
-    private val functionNInvokeFun =
+    private konst functionNInvokeFun =
         context.ir.symbols.functionN.functions.single { it.owner.name.toString() == "invoke" }
 
-    private val arraySizePropertyGetter by lazy {
+    private konst arraySizePropertyGetter by lazy {
         context.irBuiltIns.arrayClass.owner.properties.single { it.name.toString() == "size" }.getter!!
     }
 
-    private val arrayGetFun by lazy {
+    private konst arrayGetFun by lazy {
         context.irBuiltIns.arrayClass.functions.single { it.owner.name.toString() == "get" }
     }
 
-    private val FUNCTIONS_PACKAGE_FQ_NAME =
+    private konst FUNCTIONS_PACKAGE_FQ_NAME =
         StandardNames.BUILT_INS_PACKAGE_FQ_NAME
             .child(Name.identifier("jvm"))
             .child(Name.identifier("functions"))
 
-    private val REFLECT_PACKAGE_FQ_NAME =
+    private konst REFLECT_PACKAGE_FQ_NAME =
         StandardNames.BUILT_INS_PACKAGE_FQ_NAME
             .child(Name.identifier("reflect"))
 }

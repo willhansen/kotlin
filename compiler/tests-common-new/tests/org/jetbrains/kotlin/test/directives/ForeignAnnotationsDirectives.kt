@@ -12,39 +12,39 @@ import org.jetbrains.kotlin.load.java.ReportLevel
 import org.jetbrains.kotlin.name.FqName
 
 object ForeignAnnotationsDirectives : SimpleDirectivesContainer() {
-    val JSR305_GLOBAL_REPORT by enumDirective(
+    konst JSR305_GLOBAL_REPORT by enumDirective(
         description = "Global report level",
         additionalParser = ReportLevel.Companion::findByDescription
     )
 
-    val JSR305_MIGRATION_REPORT by enumDirective(
+    konst JSR305_MIGRATION_REPORT by enumDirective(
         description = "Migration report level",
         additionalParser = ReportLevel.Companion::findByDescription
     )
 
-    val JSR305_SPECIAL_REPORT by stringDirective(
+    konst JSR305_SPECIAL_REPORT by stringDirective(
         description = "Report level for specific annotations"
     )
 
-    val JSPECIFY_STATE by enumDirective(
+    konst JSPECIFY_STATE by enumDirective(
         description = "Report level for jSpecify annotations",
         additionalParser = ReportLevel.Companion::findByDescription
     )
 
-    val NULLABILITY_ANNOTATIONS by valueDirective<Pair<FqName, ReportLevel>>(
+    konst NULLABILITY_ANNOTATIONS by konstueDirective<Pair<FqName, ReportLevel>>(
         description = "List of annotations with their report levels",
         parser = JavaTypeEnhancementStateParser.Companion::parsePlainNullabilityAnnotationReportLevels
     )
 
-    val ANNOTATIONS_PATH by enumDirective<JavaForeignAnnotationType>(
+    konst ANNOTATIONS_PATH by enumDirective<JavaForeignAnnotationType>(
         description = "Path to foreign annotations"
     )
 
-    val SOURCE_RETENTION_ANNOTATIONS by directive(
+    konst SOURCE_RETENTION_ANNOTATIONS by directive(
         description = "Skip test against compiled annotation because of their Source retention"
     )
 
-    val MUTE_FOR_PSI_CLASS_FILES_READING by directive(
+    konst MUTE_FOR_PSI_CLASS_FILES_READING by directive(
         description = "Skip test if psi class files reading is used"
     )
 }

@@ -37,7 +37,7 @@ class JvmAndAndroidIntermediateSourceSetTest {
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         /* Kotlin Setup */
@@ -59,11 +59,11 @@ class JvmAndAndroidIntermediateSourceSetTest {
 
     @Test
     fun `metadata compilation is created and disabled`() {
-        /* evaluate */
-        project.evaluate()
+        /* ekonstuate */
+        project.ekonstuate()
 
         /* Check if compilation is created correctly */
-        val jvmAndAndroidMainMetadataCompilations = kotlin.targets.flatMap { it.compilations }
+        konst jvmAndAndroidMainMetadataCompilations = kotlin.targets.flatMap { it.compilations }
             .filterIsInstance<KotlinMetadataCompilation<*>>()
             .filter { it.name == jvmAndAndroidMain.name }
 
@@ -72,7 +72,7 @@ class JvmAndAndroidIntermediateSourceSetTest {
             "Expected exactly one metadata compilation created for jvmAndAndroidMain source set"
         )
 
-        val compilation = jvmAndAndroidMainMetadataCompilations.single()
+        konst compilation = jvmAndAndroidMainMetadataCompilations.single()
         assertFalse(
             compilation.compileTaskProvider.get().enabled,
             "Expected compilation task to be disabled, because not supported yet"
@@ -81,16 +81,16 @@ class JvmAndAndroidIntermediateSourceSetTest {
 
     @Test
     fun `KotlinProjectStructureMetadata jvmAndAndroidMain exists in jvm variants`() {
-        project.evaluate()
-        val metadata = kotlin.kotlinProjectStructureMetadata
+        project.ekonstuate()
+        konst metadata = kotlin.kotlinProjectStructureMetadata
         assertTrue("jvmAndAndroidMain" in metadata.sourceSetNamesByVariantName["jvmApiElements"].orEmpty())
         assertTrue("jvmAndAndroidMain" in metadata.sourceSetNamesByVariantName["jvmRuntimeElements"].orEmpty())
     }
 
     @Test
     fun `KotlinProjectStructureMetadata jvmAndAndroidMain exists in android variants`() {
-        project.evaluate()
-        val metadata = kotlin.kotlinProjectStructureMetadata
+        project.ekonstuate()
+        konst metadata = kotlin.kotlinProjectStructureMetadata
         assertTrue("jvmAndAndroidMain" in metadata.sourceSetNamesByVariantName["debugApiElements"].orEmpty())
         assertTrue("jvmAndAndroidMain" in metadata.sourceSetNamesByVariantName["debugRuntimeElements"].orEmpty())
         assertTrue("jvmAndAndroidMain" in metadata.sourceSetNamesByVariantName["releaseApiElements"].orEmpty())
@@ -99,10 +99,10 @@ class JvmAndAndroidIntermediateSourceSetTest {
 
     @Test
     fun `Android Kotlin Components are marked as not publishable when variant is not published`() {
-        val target = kotlin.targets.getByName("android") as KotlinAndroidTarget
+        konst target = kotlin.targets.getByName("android") as KotlinAndroidTarget
         target.publishLibraryVariants = emptyList()
-        project.evaluate()
-        val kotlinComponents = target.kotlinComponents
+        project.ekonstuate()
+        konst kotlinComponents = target.kotlinComponents
         assertTrue(kotlinComponents.isNotEmpty(), "Expected at least one KotlinComponent to be present")
 
         kotlinComponents.forEach { component ->
@@ -112,14 +112,14 @@ class JvmAndAndroidIntermediateSourceSetTest {
 
     @Test
     fun `Android Kotlin Components are marked as publishable when variant is published`() {
-        val target = kotlin.targets.getByName("android") as KotlinAndroidTarget
+        konst target = kotlin.targets.getByName("android") as KotlinAndroidTarget
         target.publishLibraryVariants = listOf("release")
-        project.evaluate()
-        val kotlinComponents = target.kotlinComponents
+        project.ekonstuate()
+        konst kotlinComponents = target.kotlinComponents
         assertTrue(kotlinComponents.isNotEmpty(), "Expected at least one KotlinComponent to be present")
 
         kotlinComponents.forEach { component ->
-            val isReleaseComponent = "release" in component.name.toLowerCaseAsciiOnly()
+            konst isReleaseComponent = "release" in component.name.toLowerCaseAsciiOnly()
             if (isReleaseComponent) {
                 assertTrue(component.publishable, "Expected release component to be marked as publishable")
             } else {

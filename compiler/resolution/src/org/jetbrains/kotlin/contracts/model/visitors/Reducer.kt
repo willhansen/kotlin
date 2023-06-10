@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.contracts.model.structure.*
 import org.jetbrains.kotlin.types.typeUtil.isSubtypeOf
 
 /**
- * Reduces given list of effects by evaluating constant expressions,
+ * Reduces given list of effects by ekonstuating constant expressions,
  * throwing away senseless checks and infeasible clauses, etc.
  */
-class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpression?> {
+class Reducer(private konst builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpression?> {
     fun reduceEffects(schema: List<ESEffect>): List<ESEffect> =
         schema.mapNotNull { reduceEffect(it) }
 
@@ -33,7 +33,7 @@ class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpr
         when (effect) {
             is ConditionalEffect -> {
                 // Reduce condition
-                val reducedCondition = effect.condition.accept(this) ?: return null
+                konst reducedCondition = effect.condition.accept(this) ?: return null
 
                 // Filter never executed conditions
                 if (reducedCondition.isFalse) return null
@@ -49,26 +49,26 @@ class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpr
     }
 
     override fun visitIs(isOperator: ESIs): ESExpression {
-        val reducedArg = isOperator.left.accept(this) as ESValue
+        konst reducedArg = isOperator.left.accept(this) as ESValue
 
-        val argType = reducedArg.type?.toKotlinType(builtIns)
-        val isType = isOperator.functor.type.toKotlinType(builtIns)
+        konst argType = reducedArg.type?.toKotlinType(builtIns)
+        konst isType = isOperator.functor.type.toKotlinType(builtIns)
 
-        val result = when (reducedArg) {
+        konst result = when (reducedArg) {
             is ESConstant -> argType!!.isSubtypeOf(isType)
             is ESVariable, is ESReceiver -> if (argType?.isSubtypeOf(isType) == true) true else null
             else -> throw IllegalStateException("Unknown ESValue: $reducedArg")
         }
 
-        // Result is unknown, do not evaluate
+        // Result is unknown, do not ekonstuate
         result ?: return ESIs(reducedArg, isOperator.functor)
 
         return ESConstants.booleanValue(result.xor(isOperator.functor.isNegated))
     }
 
     override fun visitEqual(equal: ESEqual): ESExpression? {
-        val reducedLeft = equal.left.accept(this) as ESValue? ?: return null
-        val reducedRight = equal.right
+        konst reducedLeft = equal.left.accept(this) as ESValue? ?: return null
+        konst reducedRight = equal.right
 
         if (reducedLeft is ESConstant) return ESConstants.booleanValue((reducedLeft == reducedRight).xor(equal.functor.isNegated))
 
@@ -76,8 +76,8 @@ class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpr
     }
 
     override fun visitAnd(and: ESAnd): ESExpression? {
-        val reducedLeft = and.left.accept(this) ?: return null
-        val reducedRight = and.right.accept(this) ?: return null
+        konst reducedLeft = and.left.accept(this) ?: return null
+        konst reducedRight = and.right.accept(this) ?: return null
 
         return when {
             reducedLeft.isFalse || reducedRight.isFalse -> reducedLeft
@@ -88,8 +88,8 @@ class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpr
     }
 
     override fun visitOr(or: ESOr): ESExpression? {
-        val reducedLeft = or.left.accept(this) ?: return null
-        val reducedRight = or.right.accept(this) ?: return null
+        konst reducedLeft = or.left.accept(this) ?: return null
+        konst reducedRight = or.right.accept(this) ?: return null
 
         return when {
             reducedLeft.isTrue || reducedRight.isTrue -> reducedLeft
@@ -100,7 +100,7 @@ class Reducer(private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<ESExpr
     }
 
     override fun visitNot(not: ESNot): ESExpression? {
-        val reducedArg = not.arg.accept(this) ?: return null
+        konst reducedArg = not.arg.accept(this) ?: return null
 
         return when {
             reducedArg.isTrue -> ESConstants.falseValue

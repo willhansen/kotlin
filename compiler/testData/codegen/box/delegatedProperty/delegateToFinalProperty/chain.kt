@@ -2,26 +2,26 @@
 // FIR_IDENTICAL
 
 class A {
-    val b = B()
+    konst b = B()
 }
 
 class B {
-    val c = C()
+    konst c = C()
 }
 
 class C {
-    val d = D()
+    konst d = D()
 }
 
 class D {
-    val e = 1
+    konst e = 1
 }
 
-val a = A()
+konst a = A()
 
 operator fun Int.getValue(thisRef: Any?, property: Any?) =
     if (this == 1 && thisRef == null) "OK" else "Failed"
 
-val x by a.b.c.d.e
+konst x by a.b.c.d.e
 
 fun box() = x

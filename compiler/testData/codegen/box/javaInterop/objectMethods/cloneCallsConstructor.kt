@@ -10,8 +10,8 @@ data class A(var x: Int) : Cloneable {
 }
 
 fun box(): String {
-    val a = A(42)
-    val b = a.clone()
+    konst a = A(42)
+    konst b = a.clone()
     if (b != a) return "Fail equals"
     if (b === a) return "Fail identity"
     return "OK"

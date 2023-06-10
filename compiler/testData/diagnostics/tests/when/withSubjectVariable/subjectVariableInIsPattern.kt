@@ -3,7 +3,7 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE -UNUSED_PARAMETER
 
 fun test(x: Any) {
-    when (val y = x) {
+    when (konst y = x) {
         is String -> {}
     }
 }

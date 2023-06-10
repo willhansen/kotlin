@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.test.fixes.android.fixes.applyDebugKeystoreFi
 
 class AndroidTestFixesPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        val testFixesProperties = TestFixesProperties(target)
+        konst testFixesProperties = TestFixesProperties(target)
         target.applyDebugKeystoreFix(testFixesProperties)
     }
 }

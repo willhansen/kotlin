@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.ir2cfg.graph
 
 interface CfgNode {
 
-    val predecessors: List<CfgNode>
+    konst predecessors: List<CfgNode>
 
-    val successors: List<CfgNode>
+    konst successors: List<CfgNode>
 }

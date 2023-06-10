@@ -26,7 +26,7 @@ object Delegate {
 package test
 
 fun foo() {
-    val x by Delegate
+    konst x by Delegate
     x
 }
 
@@ -37,6 +37,6 @@ import kotlin.test.assertEquals
 
 fun box(): String {
     foo()
-    assertEquals("val x: kotlin.collections.List<kotlin.String?>", Delegate.property.toString())
+    assertEquals("konst x: kotlin.collections.List<kotlin.String?>", Delegate.property.toString())
     return "OK"
 }

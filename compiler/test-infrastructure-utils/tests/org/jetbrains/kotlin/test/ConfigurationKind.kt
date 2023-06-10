@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.test
 
 enum class ConfigurationKind(
-        val withRuntime: Boolean = false,
-        val withMockRuntime: Boolean = false,
-        val withReflection: Boolean = false
+        konst withRuntime: Boolean = false,
+        konst withMockRuntime: Boolean = false,
+        konst withReflection: Boolean = false
 ) {
     /** JDK without any kotlin runtime */
     JDK_NO_RUNTIME(),

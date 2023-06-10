@@ -19,32 +19,32 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCommonOptionsDeprecated
 import org.jetbrains.kotlin.tooling.core.HasMutableExtras
 
 interface KotlinTarget : Named, HasAttributes, HasProject, HasMutableExtras {
-    val targetName: String
-    val disambiguationClassifier: String? get() = targetName
+    konst targetName: String
+    konst disambiguationClassifier: String? get() = targetName
 
     /* Long deprecation cycle, because IDE might be calling into this via reflection */
-    @Deprecated("Scheduled for removal with Kotlin 2.2")
-    val useDisambiguationClassifierAsSourceSetNamePrefix: Boolean
+    @Deprecated("Scheduled for remokonst with Kotlin 2.2")
+    konst useDisambiguationClassifierAsSourceSetNamePrefix: Boolean
 
     /* Long deprecation cycle, because IDE might be calling into this via reflection */
-    @Deprecated("Scheduled for removal with Kotlin 2.2")
-    val overrideDisambiguationClassifierOnIdeImport: String?
+    @Deprecated("Scheduled for remokonst with Kotlin 2.2")
+    konst overrideDisambiguationClassifierOnIdeImport: String?
 
-    val platformType: KotlinPlatformType
+    konst platformType: KotlinPlatformType
 
-    val compilations: NamedDomainObjectContainer<out KotlinCompilation<KotlinCommonOptionsDeprecated>>
+    konst compilations: NamedDomainObjectContainer<out KotlinCompilation<KotlinCommonOptionsDeprecated>>
 
-    val artifactsTaskName: String
+    konst artifactsTaskName: String
 
-    val apiElementsConfigurationName: String
-    val runtimeElementsConfigurationName: String
-    val sourcesElementsConfigurationName: String
+    konst apiElementsConfigurationName: String
+    konst runtimeElementsConfigurationName: String
+    konst sourcesElementsConfigurationName: String
 
-    val publishable: Boolean
+    konst publishable: Boolean
 
     fun withSourcesJar(publish: Boolean = true)
 
-    val components: Set<SoftwareComponent>
+    konst components: Set<SoftwareComponent>
 
     fun mavenPublication(action: MavenPublication.() -> Unit) = mavenPublication(Action { action(it) })
     fun mavenPublication(action: Action<MavenPublication>)
@@ -52,7 +52,7 @@ interface KotlinTarget : Named, HasAttributes, HasProject, HasMutableExtras {
     fun attributes(configure: AttributeContainer.() -> Unit) = attributes.configure()
     fun attributes(configure: Action<AttributeContainer>) = attributes { configure.execute(this) }
 
-    val preset: KotlinTargetPreset<out KotlinTarget>?
+    konst preset: KotlinTargetPreset<out KotlinTarget>?
 
     override fun getName(): String = targetName
 }
@@ -60,9 +60,9 @@ interface KotlinTarget : Named, HasAttributes, HasProject, HasMutableExtras {
 interface KotlinTargetWithTests<E : KotlinExecution.ExecutionSource, T : KotlinTargetTestRun<E>> : KotlinTarget {
     /** The container with the test run executions.
      * A target may automatically create and configure a test run by the name [DEFAULT_TEST_RUN_NAME]. */
-    val testRuns: NamedDomainObjectContainer<T>
+    konst testRuns: NamedDomainObjectContainer<T>
 
     companion object {
-        const val DEFAULT_TEST_RUN_NAME = "test"
+        const konst DEFAULT_TEST_RUN_NAME = "test"
     }
 }

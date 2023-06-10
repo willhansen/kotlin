@@ -32,4 +32,4 @@ import kotlin.reflect.KClass
  *
  * If you need more fine-grained control of clashes resolution, consider using [PlatformExtensionsClashResolver]
  **/
-annotation class DefaultImplementation(val impl: KClass<*>)
+annotation class DefaultImplementation(konst impl: KClass<*>)

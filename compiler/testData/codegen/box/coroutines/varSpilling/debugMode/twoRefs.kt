@@ -8,7 +8,7 @@ import kotlin.coroutines.intrinsics.*
 
 fun blackhole(vararg a: Any?) {}
 
-val spilledVariables = mutableSetOf<Pair<String, String>>()
+konst spilledVariables = mutableSetOf<Pair<String, String>>()
 
 var c: Continuation<Unit>? = null
 
@@ -17,7 +17,7 @@ suspend fun saveSpilledVariables() = suspendCoroutineUninterceptedOrReturn<Unit>
     for (field in continuation.javaClass.declaredFields) {
         if (field.name != "label" && (field.name.length != 3 || field.name[1] != '$')) continue
         field.isAccessible = true
-        val fieldValue = when (val obj = field.get(continuation)) {
+        konst fieldValue = when (konst obj = field.get(continuation)) {
             is Array<*> -> obj.joinToString(prefix = "[", postfix = "]")
             else -> obj
         }
@@ -46,7 +46,7 @@ fun box(): String {
         test("a", "b")
     }
 
-    val continuationName = "Continuation at TwoRefsKt\$box\$1.invokeSuspend(twoRefs.kt:46)"
+    konst continuationName = "Continuation at TwoRefsKt\$box\$1.invokeSuspend(twoRefs.kt:46)"
     if (spilledVariables != setOf("label" to "1", "L$0" to "a", "L$1" to "b", "L$2" to continuationName, "L$3" to "null")) return "FAIL 1: $spilledVariables"
     c?.resume(Unit)
     if (spilledVariables != setOf("label" to "2", "L$0" to "a", "L$1" to "b", "L$2" to continuationName, "L$3" to "[a]")) return "FAIL 2: $spilledVariables"

@@ -54,7 +54,7 @@ private fun createValidClassifierId(classifierId: String): CirEntityId {
     return CirEntityId.create(classifierId)
 }
 
-internal val MOCK_CLASSIFIERS = CirKnownClassifiers(
+internal konst MOCK_CLASSIFIERS = CirKnownClassifiers(
     classifierIndices = TargetDependent.empty(),
     targetDependencies = TargetDependent.empty(),
     commonizedNodes = object : CirCommonizedClassifierNodes {
@@ -88,12 +88,12 @@ internal val MOCK_CLASSIFIERS = CirKnownClassifiers(
 )
 
 internal class MockModulesProvider private constructor(
-    private val modules: Map<String, ModuleDescriptor>,
+    private konst modules: Map<String, ModuleDescriptor>,
 ) : ModulesProvider {
-    override val moduleInfos = modules.keys.map { name -> fakeModuleInfo(name) }
+    override konst moduleInfos = modules.keys.map { name -> fakeModuleInfo(name) }
 
     override fun loadModuleMetadata(name: String): SerializedMetadata {
-        val module = modules[name] ?: error("No such module: $name")
+        konst module = modules[name] ?: error("No such module: $name")
         return SERIALIZER.serializeModule(module)
     }
 
@@ -104,7 +104,7 @@ internal class MockModulesProvider private constructor(
         fun create(moduleNames: List<String>) = MockModulesProvider(
             moduleNames.associateWith { name ->
                 // expected special name for module
-                val module = KotlinTestUtils.createEmptyModule("<$name>")
+                konst module = KotlinTestUtils.createEmptyModule("<$name>")
                 module.initialize(PackageFragmentProvider.Empty)
                 module.setDependencies(module)
                 module
@@ -121,7 +121,7 @@ internal class MockModulesProvider private constructor(
             mapOf(module.name.strip() to module)
         )
 
-        val SERIALIZER = KlibMetadataMonolithicSerializer(
+        konst SERIALIZER = KlibMetadataMonolithicSerializer(
             languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT,
             metadataVersion = KlibMetadataVersion.INSTANCE,
             exportKDoc = false,
@@ -139,22 +139,22 @@ private typealias ModuleName = String
 private typealias ModuleResults = HashMap<ModuleName, ModuleResult>
 
 internal class MockResultsConsumer : ResultsConsumer {
-    private val _modulesByTargets = LinkedHashMap<CommonizerTarget, ModuleResults>() // use linked hash map to preserve order
-    val modulesByTargets: Map<CommonizerTarget, Collection<ModuleResult>>
-        get() = _modulesByTargets.mapValues { it.value.values }
+    private konst _modulesByTargets = LinkedHashMap<CommonizerTarget, ModuleResults>() // use linked hash map to preserve order
+    konst modulesByTargets: Map<CommonizerTarget, Collection<ModuleResult>>
+        get() = _modulesByTargets.mapValues { it.konstue.konstues }
 
-    val sharedTarget: SharedCommonizerTarget by lazy { modulesByTargets.keys.filterIsInstance<SharedCommonizerTarget>().single() }
-    val leafTargets: Set<LeafCommonizerTarget> by lazy { modulesByTargets.keys.filterIsInstance<LeafCommonizerTarget>().toSet() }
+    konst sharedTarget: SharedCommonizerTarget by lazy { modulesByTargets.keys.filterIsInstance<SharedCommonizerTarget>().single() }
+    konst leafTargets: Set<LeafCommonizerTarget> by lazy { modulesByTargets.keys.filterIsInstance<LeafCommonizerTarget>().toSet() }
 
-    private val finishedTargets = mutableSetOf<CommonizerTarget>()
+    private konst finishedTargets = mutableSetOf<CommonizerTarget>()
 
     lateinit var status: ResultsConsumer.Status
 
     override fun consume(parameters: CommonizerParameters, target: CommonizerTarget, moduleResult: ModuleResult) {
         check(!this::status.isInitialized)
         check(target !in finishedTargets) { "$target already finished" }
-        val moduleResults: ModuleResults = _modulesByTargets.getOrPut(target) { ModuleResults() }
-        val oldResult = moduleResults.put(moduleResult.libraryName, moduleResult)
+        konst moduleResults: ModuleResults = _modulesByTargets.getOrPut(target) { ModuleResults() }
+        konst oldResult = moduleResults.put(moduleResult.libraryName, moduleResult)
         check(oldResult == null) // to avoid accidental overwriting
     }
 

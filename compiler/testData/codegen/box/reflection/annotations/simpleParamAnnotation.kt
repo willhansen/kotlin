@@ -2,10 +2,10 @@
 // WITH_REFLECT
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Simple(val value: String)
+annotation class Simple(konst konstue: String)
 
 fun test(@Simple("OK") x: Int) {}
 
 fun box(): String {
-    return (::test.parameters.single().annotations.single() as Simple).value
+    return (::test.parameters.single().annotations.single() as Simple).konstue
 }

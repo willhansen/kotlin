@@ -1,9 +1,9 @@
-const val string = "2"
-const val int = 3
-const val long = 4L
-const val double = 5.0
-const val float = 6F
-const val char = '7'
+const konst string = "2"
+const konst int = 3
+const konst long = 4L
+const konst double = 5.0
+const konst float = 6F
+const konst char = '7'
 
 fun s() = "1" + string + int + long + double + float + char
 fun c() = "1$string$int$long$double$float$char"

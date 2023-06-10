@@ -4,7 +4,7 @@ fun interface P {
     fun get(): String
 }
 
-class G(val p: P)
+class G(konst p: P)
 
 fun f(): String = "OK"
 

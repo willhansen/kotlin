@@ -15,7 +15,7 @@ public class A {
 fun bar(): Int {
     return object {
         fun baz(): Int {
-            val strings = A.foo()
+            konst strings = A.foo()
             strings.forEach {
                 if (it.length == 0) return 1
             }

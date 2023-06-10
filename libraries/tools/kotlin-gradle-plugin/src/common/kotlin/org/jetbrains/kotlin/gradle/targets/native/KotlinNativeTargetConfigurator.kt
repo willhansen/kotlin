@@ -59,22 +59,22 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     // region Task creation.
     private fun Project.createLinkTask(binary: NativeBinary) {
         // workaround for too late compilation compilerOptions creation
-        // which leads to not able run project.afterEvaluate because of wrong context
-        // this afterEvaluate comes from NativeCompilerOptions
-        val compilationCompilerOptions = binary.compilation.compilerOptions
-        val konanPropertiesBuildService = KonanPropertiesBuildService.registerIfAbsent(project)
-        val linkTask = registerTask<KotlinNativeLink>(
+        // which leads to not able run project.afterEkonstuate because of wrong context
+        // this afterEkonstuate comes from NativeCompilerOptions
+        konst compilationCompilerOptions = binary.compilation.compilerOptions
+        konst konanPropertiesBuildService = KonanPropertiesBuildService.registerIfAbsent(project)
+        konst linkTask = registerTask<KotlinNativeLink>(
             binary.linkTaskName, listOf(binary)
         ) {
-            val target = binary.target
+            konst target = binary.target
             it.group = BasePlugin.BUILD_GROUP
             it.description = "Links ${binary.outputKind.description} '${binary.name}' for a target '${target.name}'."
             it.enabled = binary.konanTarget.enabledOnCurrentHost
             it.konanPropertiesService.set(konanPropertiesBuildService)
             it.usesService(konanPropertiesBuildService)
-            it.toolOptions.freeCompilerArgs.value(compilationCompilerOptions.options.freeCompilerArgs)
+            it.toolOptions.freeCompilerArgs.konstue(compilationCompilerOptions.options.freeCompilerArgs)
             it.toolOptions.freeCompilerArgs.addAll(providers.provider { PropertiesProvider(project).nativeLinkArgs })
-            it.runViaBuildToolsApi.value(false).disallowChanges() // K/N is not yet supported
+            it.runViaBuildToolsApi.konstue(false).disallowChanges() // K/N is not yet supported
         }
 
 
@@ -91,7 +91,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     private fun Project.syncLanguageSettingsToLinkTask(binary: NativeBinary) {
         tasks.named(binary.linkTaskName, KotlinNativeLink::class.java).configure {
             // We propagate compilation free args to the link task for now (see KT-33717).
-            val defaultLanguageSettings = binary.compilation.defaultSourceSet.languageSettings as? DefaultLanguageSettingsBuilder
+            konst defaultLanguageSettings = binary.compilation.defaultSourceSet.languageSettings as? DefaultLanguageSettingsBuilder
             if (defaultLanguageSettings != null && defaultLanguageSettings.freeCompilerArgsForNonImport.isNotEmpty()) {
                 it.toolOptions.freeCompilerArgs.addAll(
                     defaultLanguageSettings.freeCompilerArgsForNonImport
@@ -101,7 +101,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     }
 
     private fun Project.createRunTask(binary: Executable) {
-        val taskName = binary.runTaskName ?: return
+        konst taskName = binary.runTaskName ?: return
         registerTask<Exec>(taskName) { exec ->
             exec.group = RUN_GROUP
             exec.description = "Executes Kotlin/Native executable ${binary.name} for target ${binary.target.name}"
@@ -121,22 +121,22 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
         compilation: KotlinNativeCompilation,
         cinterops: NamedDomainObjectCollection<DefaultCInteropSettings>
     ) {
-        val compilationInfo = KotlinCompilationInfo(compilation)
+        konst compilationInfo = KotlinCompilationInfo(compilation)
         cinterops.all { interop ->
 
-            val params = CInteropProcess.Params(
+            konst params = CInteropProcess.Params(
                 settings = interop,
                 targetName = compilation.target.name,
                 compilationName = compilation.name,
                 konanTarget = compilation.konanTarget,
                 baseKlibName = run {
-                    val compilationPrefix = if (compilation.isMain()) project.name else compilation.name
+                    konst compilationPrefix = if (compilation.isMain()) project.name else compilation.name
                     "$compilationPrefix-cinterop-${interop.name}"
                 },
                 services = objects.newInstance()
             )
 
-            val interopTask = registerTask<CInteropProcess>(interop.interopProcessingTaskName, listOf(params)) {
+            konst interopTask = registerTask<CInteropProcess>(interop.interopProcessingTaskName, listOf(params)) {
                 it.destinationDir = provider { klibOutputDirectory(compilationInfo).resolve("cinterop") }
                 it.group = INTEROP_GROUP
                 it.description = "Generates Kotlin/Native interop library '${interop.name}' " +
@@ -149,7 +149,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
                 commonizeCInteropTask.from((interopTask.get()))
             }
 
-            val interopOutput = project.files(interopTask.map { it.outputFileProvider })
+            konst interopOutput = project.files(interopTask.map { it.outputFileProvider })
             with(compilation) {
                 // Register the interop library as a dependency of the compilation to make IDE happy.
                 project.dependencies.add(compileDependencyConfigurationName, interopOutput)
@@ -203,7 +203,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
         }
         target.compilations.all { createKlibCompilationTask(KotlinCompilationInfo(it), it.konanTarget) }
 
-        val apiElements = configurations.getByName(target.apiElementsConfigurationName)
+        konst apiElements = configurations.getByName(target.apiElementsConfigurationName)
 
         apiElements.outgoing.attributes.attribute(artifactTypeAttribute, NativeArtifactFormat.KLIB)
 
@@ -231,17 +231,17 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     }
 
     protected fun configureBinaries(target: KotlinNativeTarget) {
-        val project = target.project
+        konst project = target.project
         // Create link and run tasks.
         target.binaries.all {
             project.createLinkTask(it)
         }
-        project.runOnceAfterEvaluated("Sync language settings for NativeLinkTask") {
+        project.runOnceAfterEkonstuated("Sync language settings for NativeLinkTask") {
             target.binaries.all { binary ->
                 project.syncLanguageSettingsToLinkTask(binary)
             }
         }
-        project.runOnceAfterEvaluated("Sync native compilation language settings to compiler options") {
+        project.runOnceAfterEkonstuated("Sync native compilation language settings to compiler options") {
             target.compilations.all { compilation ->
                 compilation.compilerOptions.syncLanguageSettings(compilation.defaultSourceSet.languageSettings)
             }
@@ -252,7 +252,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
         }
 
         target.binaries.prefixGroups.all { prefixGroup ->
-            val linkGroupTask = project.locateOrRegisterTask<Task>(prefixGroup.linkTaskName) {
+            konst linkGroupTask = project.locateOrRegisterTask<Task>(prefixGroup.linkTaskName) {
                 it.group = BasePlugin.BUILD_GROUP
                 it.description = "Links all binaries for target '${target.name}'."
             }
@@ -269,7 +269,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
             }
         }
 
-        project.whenEvaluated {
+        project.whenEkonstuated {
             target.binaries.forEach { binary ->
                 project.tasks.named(binary.compilation.binariesTaskName).configure { binariesTask ->
                     binariesTask.dependsOn(binary.linkTaskName)
@@ -287,7 +287,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     }
 
     fun configureFrameworkExport(target: KotlinNativeTarget) {
-        val project = target.project
+        konst project = target.project
 
         target.compilations.all {
             // Allow resolving api configurations directly to be able to check that
@@ -316,7 +316,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     }
 
     private fun registerEmbedAndSignAppleFrameworkTasks(target: KotlinNativeTarget) {
-        val project = target.project
+        konst project = target.project
         target.binaries.withType(Framework::class.java).all { framework ->
             project.registerEmbedAndSignAppleFrameworkTask(framework)
         }
@@ -329,8 +329,8 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
 
     private fun warnAboutIncorrectDependencies(target: KotlinNativeTarget) = target.project.launchInStage(ReadyForExecution) {
 
-        val compileOnlyDependencies = target.compilations.mapNotNull {
-            val dependencies = project.configurations.getByName(it.compileOnlyConfigurationName).allDependencies
+        konst compileOnlyDependencies = target.compilations.mapNotNull {
+            konst dependencies = project.configurations.getByName(it.compileOnlyConfigurationName).allDependencies
             if (dependencies.isNotEmpty()) {
                 it to dependencies
             } else null
@@ -368,21 +368,21 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
     // endregion.
 
     object NativeArtifactFormat {
-        const val KLIB = "org.jetbrains.kotlin.klib"
-        const val FRAMEWORK = "org.jetbrains.kotlin.framework"
+        const konst KLIB = "org.jetbrains.kotlin.klib"
+        const konst FRAMEWORK = "org.jetbrains.kotlin.framework"
     }
 
     companion object {
-        const val INTEROP_GROUP = "interop"
-        const val RUN_GROUP = "run"
+        const konst INTEROP_GROUP = "interop"
+        const konst RUN_GROUP = "run"
 
         internal fun createKlibCompilationTask(
             compilationInfo: KotlinCompilationInfo,
             konanTarget: KonanTarget
         ): TaskProvider<KotlinNativeCompile> {
-            val project = compilationInfo.project
-            val ext = project.topLevelExtension
-            val compileTaskProvider = project.registerTask<KotlinNativeCompile>(
+            konst project = compilationInfo.project
+            konst ext = project.topLevelExtension
+            konst compileTaskProvider = project.registerTask<KotlinNativeCompile>(
                 compilationInfo.compileKotlinTaskName,
                 listOf(
                     compilationInfo,
@@ -395,15 +395,15 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
                 it.enabled = konanTarget.enabledOnCurrentHost
 
                 it.destinationDirectory.set(project.klibOutputDirectory(compilationInfo).resolve("klib"))
-                val propertiesProvider = PropertiesProvider(project)
+                konst propertiesProvider = PropertiesProvider(project)
                 if (propertiesProvider.useK2 == true) {
                     it.compilerOptions.useK2.set(true)
                 }
                 it.compilerOptions.useK2.disallowChanges()
-                it.runViaBuildToolsApi.value(false).disallowChanges() // K/N is not yet supported
+                it.runViaBuildToolsApi.konstue(false).disallowChanges() // K/N is not yet supported
 
                 it.explicitApiMode
-                    .value(
+                    .konstue(
                         project.providers.provider {
                             // Plugin explicitly does not configures 'explicitApi' mode for test sources
                             // compilation, as test sources are not published
@@ -428,7 +428,7 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
 
                 project.project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME).dependsOn(compileTaskProvider)
             }
-            val shouldAddCompileOutputsToElements =
+            konst shouldAddCompileOutputsToElements =
                 (compilationInfo is KPM && compilationInfo.compilationData.owner is GradleKpmVariant) ||
                         compilationInfo.isMain
 
@@ -448,14 +448,14 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
         private fun Project.klibOutputDirectory(
             compilation: KotlinCompilationInfo
         ): File {
-            val targetSubDirectory = compilation.targetDisambiguationClassifier?.let { "$it/" }.orEmpty()
+            konst targetSubDirectory = compilation.targetDisambiguationClassifier?.let { "$it/" }.orEmpty()
             return buildDir.resolve("classes/kotlin/$targetSubDirectory${compilation.compilationName}")
         }
 
         private fun addCompilerPlugins(compilation: AbstractKotlinNativeCompilation) {
-            val project = compilation.target.project
+            konst project = compilation.target.project
 
-            project.whenEvaluated {
+            project.whenEkonstuated {
                 SubpluginEnvironment
                     .loadSubplugins(project)
                     .addSubpluginOptions(project, compilation)
@@ -479,18 +479,18 @@ open class KotlinNativeTargetConfigurator<T : KotlinNativeTarget> : AbstractKotl
             classifier: String?,
             producingTask: TaskProvider<*>,
         ) {
-            val project = compilationInfo.project
+            konst project = compilationInfo.project
             if (!konanTarget.enabledOnCurrentHost) {
                 return
             }
 
-            val apiElementsName = when (compilationInfo) {
+            konst apiElementsName = when (compilationInfo) {
                 is KPM -> (compilationInfo.compilationData.owner as GradleKpmVariant).apiElementsConfiguration.name
                 is KotlinCompilationInfo.TCS -> compilationInfo.compilation.target.apiElementsConfigurationName
             }
 
             with(project.configurations.getByName(apiElementsName)) {
-                val klibArtifact = project.project.artifacts.add(name, artifactFile) { artifact ->
+                konst klibArtifact = project.project.artifacts.add(name, artifactFile) { artifact ->
                     artifact.name = compilationInfo.compilationName
                     artifact.extension = "klib"
                     artifact.type = "klib"
@@ -512,7 +512,7 @@ abstract class KotlinNativeTargetWithTestsConfigurator<
 ) : KotlinNativeTargetConfigurator<TargetType>(),
     KotlinTargetWithTestsConfigurator<TestRunType, TargetType> {
 
-    abstract val testTaskClass: Class<TaskType>
+    abstract konst testTaskClass: Class<TaskType>
 
     abstract fun isTestTaskEnabled(target: TargetType): Boolean
 
@@ -530,9 +530,9 @@ abstract class KotlinNativeTargetWithTestsConfigurator<
 
     protected open fun configureTestRun(target: TargetType, testRun: AbstractKotlinNativeTestRun<TaskType>) {
         with(testRun) {
-            val project = target.project
+            konst project = target.project
 
-            val testTaskOrProvider = project.registerTask(testTaskName, testTaskClass) { testTask ->
+            konst testTaskOrProvider = project.registerTask(testTaskName, testTaskClass) { testTask ->
                 configureTestTask(target, testTask)
             }
 
@@ -551,10 +551,10 @@ class KotlinNativeTargetWithHostTestsConfigurator() :
             KotlinNativeHostTestRun,
             KotlinNativeHostTest>() {
 
-    override val testTaskClass: Class<KotlinNativeHostTest>
+    override konst testTaskClass: Class<KotlinNativeHostTest>
         get() = KotlinNativeHostTest::class.java
 
-    override val testRunClass: Class<KotlinNativeHostTestRun>
+    override konst testRunClass: Class<KotlinNativeHostTestRun>
         get() = KotlinNativeHostTestRun::class.java
 
     override fun isTestTaskEnabled(target: KotlinNativeTargetWithHostTests): Boolean =
@@ -573,10 +573,10 @@ class KotlinNativeTargetWithSimulatorTestsConfigurator :
             KotlinNativeSimulatorTestRun,
             KotlinNativeSimulatorTest>() {
 
-    override val testTaskClass: Class<KotlinNativeSimulatorTest>
+    override konst testTaskClass: Class<KotlinNativeSimulatorTest>
         get() = KotlinNativeSimulatorTest::class.java
 
-    override val testRunClass: Class<KotlinNativeSimulatorTestRun>
+    override konst testRunClass: Class<KotlinNativeSimulatorTestRun>
         get() = KotlinNativeSimulatorTestRun::class.java
 
     override fun isTestTaskEnabled(target: KotlinNativeTargetWithSimulatorTests): Boolean =
@@ -585,7 +585,7 @@ class KotlinNativeTargetWithSimulatorTestsConfigurator :
     override fun configureTestTask(target: KotlinNativeTargetWithSimulatorTests, testTask: KotlinNativeSimulatorTest) {
         super.configureTestTask(target, testTask)
         if (Xcode != null) {
-            val deviceIdProvider = testTask.project.provider {
+            konst deviceIdProvider = testTask.project.provider {
                 Xcode.getDefaultTestDeviceId(target.konanTarget)
                     ?: error("Xcode does not support simulator tests for ${target.konanTarget.name}. Check that requested SDK is installed.")
             }

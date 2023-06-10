@@ -17,10 +17,10 @@ class Secondary {
 fun check(f: KFunction<Any>) {
     assert(f.javaMethod == null) { "Fail f method" }
     assert(f.javaConstructor != null) { "Fail f constructor" }
-    val c = f.javaConstructor!!
+    konst c = f.javaConstructor!!
 
     assert(c.kotlinFunction != null) { "Fail m function" }
-    val ff = c.kotlinFunction!!
+    konst ff = c.kotlinFunction!!
 
     assert(f == ff) { "Fail f != ff" }
 }

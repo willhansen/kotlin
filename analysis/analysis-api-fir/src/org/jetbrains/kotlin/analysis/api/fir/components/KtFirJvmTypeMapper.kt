@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.load.kotlin.TypeMappingMode
 import org.jetbrains.org.objectweb.asm.Type
 
 internal class KtFirJvmTypeMapper(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtJvmTypeMapper(), KtFirAnalysisSessionComponent {
 
     override fun mapTypeToJvmType(type: KtType, mode: TypeMappingMode): Type {

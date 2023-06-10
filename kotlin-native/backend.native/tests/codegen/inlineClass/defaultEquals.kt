@@ -7,16 +7,16 @@ package codegen.inlineClass.defaultEquals
 
 import kotlin.test.*
 
-inline class A(val x: Int)
-inline class B(val a: A)
-inline class C(val s: String)
-inline class D(val c: C)
+inline class A(konst x: Int)
+inline class B(konst a: A)
+inline class C(konst s: String)
+inline class D(konst c: C)
 
 @Test fun runTest() {
-    val a = A(42)
-    val b = B(a)
-    val c = C("zzz")
-    val d = D(c)
+    konst a = A(42)
+    konst b = B(a)
+    konst c = C("zzz")
+    konst d = D(c)
     assertTrue(a.equals(a))
     assertTrue(b.equals(b))
     assertTrue(c.equals(c))

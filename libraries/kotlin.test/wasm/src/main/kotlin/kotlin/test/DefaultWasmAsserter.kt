@@ -9,10 +9,10 @@ package kotlin.test
  * Describes the result of an assertion execution.
  */
 public interface AssertionResult {
-    val result: Boolean
-    val expected: Any?
-    val actual: Any?
-    val lazyMessage: () -> String?
+    konst result: Boolean
+    konst expected: Any?
+    konst actual: Any?
+    konst lazyMessage: () -> String?
 }
 
 internal var assertHook: (AssertionResult) -> Unit = { _ -> }
@@ -77,7 +77,7 @@ internal object DefaultWasmAsserter : Asserter {
     }
 
     private inline fun failWithMessage(lazyMessage: () -> String?, cause: Throwable?): Nothing {
-        val message = lazyMessage()
+        konst message = lazyMessage()
         invokeHook(false) { message }
         throw AssertionErrorWithCause(message, cause)
     }
@@ -85,10 +85,10 @@ internal object DefaultWasmAsserter : Asserter {
     private fun invokeHook(result: Boolean, lazyMessage: () -> String?) {
         try {
             assertHook(object : AssertionResult {
-                override val result: Boolean = result
-                override val expected: Any? = e
-                override val actual: Any? = a
-                override val lazyMessage: () -> String? = lazyMessage
+                override konst result: Boolean = result
+                override konst expected: Any? = e
+                override konst actual: Any? = a
+                override konst lazyMessage: () -> String? = lazyMessage
             })
         } finally {
             e = null

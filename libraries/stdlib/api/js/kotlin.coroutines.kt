@@ -1,6 +1,6 @@
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
-public val coroutineContext: kotlin.coroutines.CoroutineContext { get; }
+public konst coroutineContext: kotlin.coroutines.CoroutineContext { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
@@ -26,7 +26,7 @@ public fun kotlin.coroutines.CoroutineContext.Element.minusPolymorphicKey(key: k
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
-public inline fun <T> kotlin.coroutines.Continuation<T>.resume(value: T): kotlin.Unit
+public inline fun <T> kotlin.coroutines.Continuation<T>.resume(konstue: T): kotlin.Unit
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
@@ -42,7 +42,7 @@ public fun <R, T> (suspend R.() -> T).startCoroutine(receiver: R, completion: ko
 public abstract class AbstractCoroutineContextElement : kotlin.coroutines.CoroutineContext.Element {
     public constructor AbstractCoroutineContextElement(key: kotlin.coroutines.CoroutineContext.Key<*>)
 
-    public open override val key: kotlin.coroutines.CoroutineContext.Key<*> { get; }
+    public open override konst key: kotlin.coroutines.CoroutineContext.Key<*> { get; }
 }
 
 @kotlin.SinceKotlin(version = "1.3")
@@ -53,7 +53,7 @@ public abstract class AbstractCoroutineContextKey<B : kotlin.coroutines.Coroutin
 
 @kotlin.SinceKotlin(version = "1.3")
 public interface Continuation<in T> {
-    public abstract val context: kotlin.coroutines.CoroutineContext { get; }
+    public abstract konst context: kotlin.coroutines.CoroutineContext { get; }
 
     public abstract fun resumeWith(result: kotlin.Result<T>): kotlin.Unit
 }
@@ -83,7 +83,7 @@ public interface CoroutineContext {
     public open operator fun plus(context: kotlin.coroutines.CoroutineContext): kotlin.coroutines.CoroutineContext
 
     public interface Element : kotlin.coroutines.CoroutineContext {
-        public abstract val key: kotlin.coroutines.CoroutineContext.Key<*> { get; }
+        public abstract konst key: kotlin.coroutines.CoroutineContext.Key<*> { get; }
 
         public open override fun <R> fold(initial: R, operation: (R, kotlin.coroutines.CoroutineContext.Element) -> R): R
 
@@ -113,7 +113,7 @@ public object EmptyCoroutineContext : kotlin.coroutines.CoroutineContext, kotlin
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS})
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 public final annotation class RestrictsSuspension : kotlin.Annotation {
     public constructor RestrictsSuspension()
 }

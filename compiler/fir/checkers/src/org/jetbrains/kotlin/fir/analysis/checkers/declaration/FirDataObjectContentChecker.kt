@@ -21,16 +21,16 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 object FirDataObjectContentChecker : FirSimpleFunctionChecker() {
     override fun check(declaration: FirSimpleFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.hasModifier(KtTokens.OVERRIDE_KEYWORD)) return
-        val source = declaration.source
+        konst source = declaration.source
         if (source == null || source.kind is KtFakeSourceElementKind) return
 
-        val containingClass = context.containingDeclarations.lastOrNull() as? FirClass ?: return
+        konst containingClass = context.containingDeclarations.lastOrNull() as? FirClass ?: return
         if (containingClass.classKind != ClassKind.OBJECT || !containingClass.hasModifier(KtTokens.DATA_KEYWORD)) return
 
         if (
-            (declaration.name == OperatorNameConventions.HASH_CODE && declaration.valueParameters.isEmpty()) ||
+            (declaration.name == OperatorNameConventions.HASH_CODE && declaration.konstueParameters.isEmpty()) ||
             (declaration.name == OperatorNameConventions.EQUALS &&
-                    declaration.valueParameters.singleOrNull()?.returnTypeRef?.isNullableAny == true)
+                    declaration.konstueParameters.singleOrNull()?.returnTypeRef?.isNullableAny == true)
         ) {
             reporter.reportOn(source, FirErrors.DATA_OBJECT_CUSTOM_EQUALS_OR_HASH_CODE, context)
         }

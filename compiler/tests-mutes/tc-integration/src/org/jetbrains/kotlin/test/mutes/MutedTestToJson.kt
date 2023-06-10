@@ -8,21 +8,21 @@ package org.jetbrains.kotlin.test.mutes
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
-internal val jsonObjectMapper = jacksonObjectMapper()
+internal konst jsonObjectMapper = jacksonObjectMapper()
 
 data class MuteTestJson(
-    val id: Int,
-    val assignment: JsonNode,
-    val scope: JsonNode,
-    val target: JsonNode,
-    val resolution: JsonNode
+    konst id: Int,
+    konst assignment: JsonNode,
+    konst scope: JsonNode,
+    konst target: JsonNode,
+    konst resolution: JsonNode
 )
 
 internal fun createMuteTestJson(testName: String, description: String, scopeId: String): MuteTestJson {
-    val assignmentJson = """{ "text" : "$TAG $description" }"""
-    val scopeJson = """{"project":{"id":"$scopeId"}}"""
-    val targetJson = """{ "tests" : { "test" : [ { "name" : "$testName" } ] } }"""
-    val resolutionJson = """{ "type" : "manually" }"""
+    konst assignmentJson = """{ "text" : "$TAG $description" }"""
+    konst scopeJson = """{"project":{"id":"$scopeId"}}"""
+    konst targetJson = """{ "tests" : { "test" : [ { "name" : "$testName" } ] } }"""
+    konst resolutionJson = """{ "type" : "manually" }"""
 
     return MuteTestJson(
         0,
@@ -34,13 +34,13 @@ internal fun createMuteTestJson(testName: String, description: String, scopeId: 
 }
 
 internal fun filterMutedTestsByScope(muteTestJson: List<MuteTestJson>, scopeId: String): Map<String, MuteTestJson> {
-    val filterCondition = { testJson: MuteTestJson ->
+    konst filterCondition = { testJson: MuteTestJson ->
         testJson.scope.get("project")?.get("id")?.textValue() == scopeId
     }
 
     return muteTestJson.filter(filterCondition)
         .flatMap { mutedTestJson ->
-            val testNames = mutedTestJson.target.get("tests").get("test").toList().map { it.get("name").textValue() }
+            konst testNames = mutedTestJson.target.get("tests").get("test").toList().map { it.get("name").textValue() }
             testNames.map { testName ->
                 testName to mutedTestJson
             }
@@ -49,10 +49,10 @@ internal fun filterMutedTestsByScope(muteTestJson: List<MuteTestJson>, scopeId: 
 }
 
 internal fun transformMutedTestsToJson(flakyTests: List<MutedTest>?, scopeId: String): Map<String, MuteTestJson> {
-    val mutedMap = mutableMapOf<String, MuteTestJson>()
+    konst mutedMap = mutableMapOf<String, MuteTestJson>()
     if (flakyTests != null) {
         for (muted in flakyTests) {
-            val testName = formatClassnameWithInnerClasses(muted.key)
+            konst testName = formatClassnameWithInnerClasses(muted.key)
             mutedMap[testName] = createMuteTestJson(testName, muted.issue ?: "", scopeId)
         }
     }
@@ -60,7 +60,7 @@ internal fun transformMutedTestsToJson(flakyTests: List<MutedTest>?, scopeId: St
 }
 
 private fun formatClassnameWithInnerClasses(classname: String): String {
-    val classFindRegex = "\\.(?=[A-Z])".toRegex()
-    val (pkg, name) = classname.split(classFindRegex, limit = 2)
+    konst classFindRegex = "\\.(?=[A-Z])".toRegex()
+    konst (pkg, name) = classname.split(classFindRegex, limit = 2)
     return "$pkg.${name.replace(classFindRegex, "\\$")}"
 }

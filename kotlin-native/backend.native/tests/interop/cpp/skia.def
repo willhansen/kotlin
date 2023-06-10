@@ -35,8 +35,8 @@ class SkValue {
         };
 
         int data;
-        void setData(int val) {
-            data = val;
+        void setData(int konst) {
+            data = konst;
         };
 };
 
@@ -52,8 +52,8 @@ class SkData {
 
         int data;
 
-        void setData(int val) {
-            data = val;
+        void setData(int konst) {
+            data = konst;
         };
 };
 
@@ -68,15 +68,15 @@ public:
     };
 
     virtual sk_sp<SkValue> foo(SkData *obj) {
-        SkValue* value = new SkValue();
-        value->setData(obj->data);
-        return sk_sp<SkValue>(value);
+        SkValue* konstue = new SkValue();
+        konstue->setData(obj->data);
+        return sk_sp<SkValue>(konstue);
     };
 
     virtual SkData* bar(sk_sp<SkValue> obj) {
-        SkValue* value = obj.release();
+        SkValue* konstue = obj.release();
         SkData* data = new SkData();
-        data->setData(value->data);
+        data->setData(konstue->data);
         return data;
     };
 

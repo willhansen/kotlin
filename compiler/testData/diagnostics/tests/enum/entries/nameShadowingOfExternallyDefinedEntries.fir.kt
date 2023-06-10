@@ -3,7 +3,7 @@
 
 package pckg
 
-val entries = "E"
+konst entries = "E"
 
 enum class E {
     ;
@@ -26,7 +26,7 @@ class A {
         }
 
         class C {
-            val entries = 0
+            konst entries = 0
 
             fun foo() {
                 // technically, this warning is incorrect but I believe it's OK to report anyway

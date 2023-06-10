@@ -1,9 +1,9 @@
 class A {
     fun foo() {}
-    val bar = 42
+    konst bar = 42
 }
 
-val aFoo = A()::foo
-val aBar = A()::bar
-val A_foo = A::foo
-val A_bar = A::bar
+konst aFoo = A()::foo
+konst aBar = A()::bar
+konst A_foo = A::foo
+konst A_bar = A::bar

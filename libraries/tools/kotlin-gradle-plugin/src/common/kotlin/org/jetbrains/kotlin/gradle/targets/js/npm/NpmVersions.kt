@@ -9,12 +9,12 @@ import com.github.gundy.hidden.antlr.v4.runtime.ANTLRInputStream
 import com.github.gundy.hidden.antlr.v4.runtime.CommonTokenStream
 import com.github.gundy.semver4j.generated.grammar.NodeSemverExpressionLexer
 import com.github.gundy.semver4j.generated.grammar.NodeSemverExpressionParser
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 
 fun versionToNpmRanges(version: String): Set<NpmRange> {
-    val lexer = NodeSemverExpressionLexer(ANTLRInputStream(version))
-    val tokens = CommonTokenStream(lexer)
-    val parser = NodeSemverExpressionParser(tokens)
+    konst lexer = NodeSemverExpressionLexer(ANTLRInputStream(version))
+    konst tokens = CommonTokenStream(lexer)
+    konst parser = NodeSemverExpressionParser(tokens)
     return NpmRangeVisitor()
         .visit(parser.rangeSet())!!
 }
@@ -37,14 +37,14 @@ fun includedRange(
             .flatMap { versionToNpmRanges(it) }
             .map { if (includedWithCaret) it.caretizeSingleVersion() else it }
             .reduce { acc: NpmRange, next: NpmRange ->
-                val intersection = acc intersect next
+                konst intersection = acc intersect next
                 requireNotNull(intersection) {
                     "Included versions have no intersection $includedVersions"
                 }
                 intersection
             }
     } catch (e: UnsupportedOperationException) {
-        throw InvalidUserDataException("No ranges for included versions $includedVersions")
+        throw InkonstidUserDataException("No ranges for included versions $includedVersions")
     }
 
 fun buildNpmVersion(
@@ -52,17 +52,17 @@ fun buildNpmVersion(
     excludedVersions: List<String>,
     includedWithCaret: Boolean = false
 ): String {
-    val includedRange: NpmRange = includedRange(includedVersions, includedWithCaret)
+    konst includedRange: NpmRange = includedRange(includedVersions, includedWithCaret)
 
     if (excludedVersions.isEmpty()) return includedRange.toString()
 
-    val excludedRanges: Set<NpmRange> = try {
+    konst excludedRanges: Set<NpmRange> = try {
         excludedVersions
             .flatMap { versionToNpmRanges(it) }
             .map { it.invert() }
             .reduce { acc, next -> acc intersect next }
     } catch (e: UnsupportedOperationException) {
-        throw InvalidUserDataException("No ranges for excluded versions $excludedVersions")
+        throw InkonstidUserDataException("No ranges for excluded versions $excludedVersions")
     }
 
     return if (excludedRanges.isEmpty()) {

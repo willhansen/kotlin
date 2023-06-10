@@ -20,5 +20,5 @@ class SimpleErrorResolutionCandidate(
     baseSystem: ConstraintStorage,
     resolvedCall: MutableResolvedCallAtom
 ) : SimpleResolutionCandidate(callComponents, resolutionCallbacks, scopeTower, baseSystem, resolvedCall) {
-    override val resolutionSequence: List<ResolutionPart> = listOf(ErrorDescriptorResolutionPart)
+    override konst resolutionSequence: List<ResolutionPart> = listOf(ErrorDescriptorResolutionPart)
 }

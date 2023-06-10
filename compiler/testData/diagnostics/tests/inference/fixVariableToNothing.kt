@@ -9,6 +9,6 @@ fun <Y> emptyList(): List<Y> = TODO()
 
 
 fun test(l: List<String>): List<String> {
-    val foo = l.optimizeReadOnlyList()
+    konst foo = l.optimizeReadOnlyList()
     return foo
 }

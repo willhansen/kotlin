@@ -1,8 +1,8 @@
-class KeySpan(val left: String) {
+class KeySpan(konst left: String) {
 
-    public fun matches(value : String) : Boolean {
+    public fun matches(konstue : String) : Boolean {
 
-        return left > value && left > value
+        return left > konstue && left > konstue
     }
 
 }

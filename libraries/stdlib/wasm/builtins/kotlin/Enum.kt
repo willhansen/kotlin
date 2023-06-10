@@ -6,9 +6,9 @@
 package kotlin
 
 public abstract class Enum<E : Enum<E>>(
-    @kotlin.internal.IntrinsicConstEvaluation
-    public val name: String,
-    public val ordinal: Int
+    @kotlin.internal.IntrinsicConstEkonstuation
+    public konst name: String,
+    public konst ordinal: Int
 ) : Comparable<E> {
 
     override fun compareTo(other: E): Int =

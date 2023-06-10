@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.test.services.TestService
 import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class TestDisposableProvider : TestService {
-    abstract val testServices: TestServices
+    abstract konst testServices: TestServices
     abstract fun registerDisposables(projectDisposable: Disposable, applicationDisposable: Disposable)
 
     abstract fun getProjectDisposable(): Disposable
@@ -18,7 +18,7 @@ abstract class TestDisposableProvider : TestService {
     abstract fun getApplicationDisposable(): Disposable
 }
 
-class TestDisposableProviderImpl(override val testServices: TestServices) : TestDisposableProvider() {
+class TestDisposableProviderImpl(override konst testServices: TestServices) : TestDisposableProvider() {
     private lateinit var _projectDisposable: Disposable
     private lateinit var _applicationDisposable: Disposable
 
@@ -34,4 +34,4 @@ class TestDisposableProviderImpl(override val testServices: TestServices) : Test
     override fun getApplicationDisposable(): Disposable = _applicationDisposable
 }
 
-val TestServices.disposableProvider: TestDisposableProvider by TestServices.testServiceAccessor()
+konst TestServices.disposableProvider: TestDisposableProvider by TestServices.testServiceAccessor()

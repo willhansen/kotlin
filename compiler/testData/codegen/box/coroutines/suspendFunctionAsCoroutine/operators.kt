@@ -10,7 +10,7 @@ suspend fun suspendThere(v: String): String = suspendCoroutineUninterceptedOrRet
     COROUTINE_SUSPENDED
 }
 
-class A(val x: String) {
+class A(konst x: String) {
     var isSetValueCalled = false
     var isProvideDelegateCalled = false
     var isMinusAssignCalled = false
@@ -18,8 +18,8 @@ class A(val x: String) {
     operator suspend fun component1() = suspendThere(x + "K")
     // There is no reason to support these operators until suspend properties are supported
 //    operator suspend fun getValue(thisRef: Any?, property: KProperty<*>) = suspendThere(x + "K")
-//    operator suspend fun setValue(thisRef: Any?, property: KProperty<*>, value: String): Unit = suspendCoroutineUninterceptedOrReturn { x ->
-//        if (value != "56") return@suspendCoroutineUninterceptedOrReturn Unit
+//    operator suspend fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String): Unit = suspendCoroutineUninterceptedOrReturn { x ->
+//        if (konstue != "56") return@suspendCoroutineUninterceptedOrReturn Unit
 //        isSetValueCalled = true
 //        x.resume(Unit)
 //        COROUTINE_SUSPENDED
@@ -75,17 +75,17 @@ var a = A("O")
 //}
 
 suspend fun foo2() {
-    val (y) = a
+    konst (y) = a
     if (y != "OK") throw RuntimeException("fail 3")
 }
 
 suspend fun foo3() {
-    val y = a + "K"
+    konst y = a + "K"
     if (y != "OK") throw RuntimeException("fail 4")
 }
 
 suspend fun foo4() {
-    val y = + a
+    konst y = + a
     if (y != "OK") throw RuntimeException("fail 5")
 }
 
@@ -101,7 +101,7 @@ suspend fun foo6() {
 
 suspend fun foo7() {
     a.isIncCalled = false
-    val y = ++a
+    konst y = ++a
     if (!y.isIncCalled) throw RuntimeException("fail 8")
 }
 

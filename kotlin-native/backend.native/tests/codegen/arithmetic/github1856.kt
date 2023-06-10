@@ -11,16 +11,16 @@ object RGBA {
     fun getFastA(v: Int): Int = (v ushr 24) and 0xFF
 
     fun premultiplyFastInt(v: Int): Int {
-        val A = getFastA(v) + 1
-        val RB = (((v and 0x00FF00FF) * A) ushr 8) and 0x00FF00FF
-        val G = (((v and 0x0000FF00) * A) ushr 8) and 0x0000FF00
+        konst A = getFastA(v) + 1
+        konst RB = (((v and 0x00FF00FF) * A) ushr 8) and 0x00FF00FF
+        konst G = (((v and 0x0000FF00) * A) ushr 8) and 0x0000FF00
         return (v and 0x00FFFFFF.inv()) or RB or G
     }
 }
 
 @Test
 fun main() {
-    val source = listOf(0xFFFFFFFF.toInt(), 0xFFFFFF77.toInt(), 0x777777FF.toInt(), 0x77777777.toInt())
-    val expect = listOf(-1, -137, 2000107383, 2000107319)
+    konst source = listOf(0xFFFFFFFF.toInt(), 0xFFFFFF77.toInt(), 0x777777FF.toInt(), 0x77777777.toInt())
+    konst expect = listOf(-1, -137, 2000107383, 2000107319)
     assertEquals(expect, source.map { RGBA.premultiplyFastInt(it) })
 }

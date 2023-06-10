@@ -14,7 +14,7 @@ import kotlin.io.path.exists
 
 internal fun Path.applyAndroidTestFixes() {
     // Path relative to the current gradle module project dir
-    val keystoreFile = Paths.get("src/test/resources/common/debug.keystore")
+    konst keystoreFile = Paths.get("src/test/resources/common/debug.keystore")
     assert(keystoreFile.exists()) {
         "Common 'debug.keystore' file does not exists in ${keystoreFile.toAbsolutePath()} location!"
     }
@@ -25,7 +25,7 @@ internal fun Path.applyAndroidTestFixes() {
         """.trimMargin()
     )
 
-    val pathFile = toFile()
+    konst pathFile = toFile()
 
     pathFile.walkTopDown()
         .filter { it.name == "build.gradle" || it.name == "build.gradle.kts" }
@@ -64,7 +64,7 @@ private fun String.modifyBuildScript(isKts: Boolean = false): String =
     if (contains("buildscript {") &&
         contains("classpath")
     ) {
-        val kotlinVersionStr = if (isKts) "${'$'}{property(\"test_fixes_version\")}" else "${'$'}test_fixes_version"
+        konst kotlinVersionStr = if (isKts) "${'$'}{property(\"test_fixes_version\")}" else "${'$'}test_fixes_version"
         """
         |${substringBefore("classpath")}
         |classpath("org.jetbrains.kotlin:android-test-fixes:$kotlinVersionStr")

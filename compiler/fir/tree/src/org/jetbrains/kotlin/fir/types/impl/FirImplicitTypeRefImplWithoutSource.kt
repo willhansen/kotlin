@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 object FirImplicitTypeRefImplWithoutSource : FirImplicitTypeRef() {
-    override val source: KtSourceElement? get() = null
-    override val annotations: List<FirAnnotation> get() = emptyList()
+    override konst source: KtSourceElement? get() = null
+    override konst annotations: List<FirAnnotation> get() = emptyList()
 
     override fun replaceAnnotations(newAnnotations: List<FirAnnotation>) {
     }

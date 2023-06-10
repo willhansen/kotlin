@@ -5,8 +5,8 @@ class Foo {
 }
 
 fun box(): String {
-    val x = Foo().getX()
-    val foo = Foo()
+    konst x = Foo().getX()
+    konst foo = Foo()
     x.set(foo, 42)
     return if (x.get(foo) == 42) "OK" else "Fail"
 }

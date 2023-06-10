@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionReference
 import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.load.java.JvmAbi
 
-internal val fakeInliningLocalVariablesLowering = makeIrFilePhase(
+internal konst fakeInliningLocalVariablesLowering = makeIrFilePhase(
     ::FakeInliningLocalVariablesLowering,
     name = "FakeInliningLocalVariablesLowering",
     description = "Add fake locals to identify the range of inlined functions and lambdas"
 )
 
-internal class FakeInliningLocalVariablesLowering(val context: JvmBackendContext) : IrInlineReferenceLocator(context), FileLoweringPass {
+internal class FakeInliningLocalVariablesLowering(konst context: JvmBackendContext) : IrInlineReferenceLocator(context), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.accept(this, null)
     }
@@ -37,17 +37,17 @@ internal class FakeInliningLocalVariablesLowering(val context: JvmBackendContext
     override fun visitFunction(declaration: IrFunction, data: IrDeclaration?) {
         super.visitFunction(declaration, data)
         if (declaration.isInline && !declaration.origin.isSynthetic && declaration.body != null && !declaration.isInlineOnly()) {
-            val currentFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(declaration)
-            val localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_FUNCTION}$currentFunctionName"
+            konst currentFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(declaration)
+            konst localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_FUNCTION}$currentFunctionName"
             declaration.addFakeLocalVariable(localName)
         }
     }
 
     override fun visitInlineLambda(argument: IrFunctionReference, callee: IrFunction, parameter: IrValueParameter, scope: IrDeclaration) {
-        val lambda = argument.symbol.owner
-        val argumentToFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(callee)
-        val lambdaReferenceName = context.getLocalClassType(argument)!!.internalName.substringAfterLast("/")
-        val localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_ARGUMENT}-$argumentToFunctionName-$lambdaReferenceName"
+        konst lambda = argument.symbol.owner
+        konst argumentToFunctionName = context.defaultMethodSignatureMapper.mapFunctionName(callee)
+        konst lambdaReferenceName = context.getLocalClassType(argument)!!.internalName.substringAfterLast("/")
+        konst localName = "${JvmAbi.LOCAL_VARIABLE_NAME_PREFIX_INLINE_ARGUMENT}-$argumentToFunctionName-$lambdaReferenceName"
         lambda.addFakeLocalVariable(localName)
     }
 
@@ -57,7 +57,7 @@ internal class FakeInliningLocalVariablesLowering(val context: JvmBackendContext
             // it will materialize in the code.
             // Also, do not forget to remove $$forInline suffix, otherwise, IDE will not be able to navigate to inline function.
             createTmpVariable(irInt(0), name.removeSuffix(FOR_INLINE_SUFFIX), origin = IrDeclarationOrigin.DEFINED)
-            when (val oldBody = body) {
+            when (konst oldBody = body) {
                 is IrExpressionBody -> +irReturn(oldBody.expression)
                 is IrBlockBody -> oldBody.statements.forEach { +it }
                 else -> throw AssertionError("Unexpected body:\n${this@addFakeLocalVariable.dump()}")

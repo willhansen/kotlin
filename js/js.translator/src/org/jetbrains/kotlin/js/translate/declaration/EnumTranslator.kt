@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 class EnumTranslator(
         context: TranslationContext,
-        val descriptor: ClassDescriptor,
-        val entries: List<ClassDescriptor>,
-        private val psi: PsiElement
+        konst descriptor: ClassDescriptor,
+        konst entries: List<ClassDescriptor>,
+        private konst psi: PsiElement
 ) : AbstractTranslator(context) {
     fun generateStandardMethods() {
         generateValuesFunction()
@@ -40,21 +40,21 @@ class EnumTranslator(
     }
 
     private fun generateValuesFunction() {
-        val function = createFunction(DescriptorUtils.getFunctionByName(descriptor.staticScope, StandardNames.ENUM_VALUES))
+        konst function = createFunction(DescriptorUtils.getFunctionByName(descriptor.staticScope, StandardNames.ENUM_VALUES))
 
-        val values = entries.map {
+        konst konstues = entries.map {
             JsInvocation(JsAstUtils.pureFqn(context().getNameForObjectInstance(it), null)).source(psi)
         }
-        function.body.statements += JsReturn(JsArrayLiteral(values).source(psi)).apply { source = psi }
+        function.body.statements += JsReturn(JsArrayLiteral(konstues).source(psi)).apply { source = psi }
     }
 
     private fun generateValueOfFunction() {
-        val function = createFunction(DescriptorUtils.getFunctionByName(descriptor.staticScope, StandardNames.ENUM_VALUE_OF))
+        konst function = createFunction(DescriptorUtils.getFunctionByName(descriptor.staticScope, StandardNames.ENUM_VALUE_OF))
 
-        val nameParam = JsScope.declareTemporaryName("name")
+        konst nameParam = JsScope.declareTemporaryName("name")
         function.parameters += JsParameter(nameParam)
 
-        val clauses = entries.map { entry ->
+        konst clauses = entries.map { entry ->
             JsCase().apply {
                 caseExpression = JsStringLiteral(entry.name.asString()).source(psi)
                 statements += JsReturn(JsInvocation(JsAstUtils.pureFqn(context().getNameForObjectInstance(entry), null)).source(psi))
@@ -63,14 +63,14 @@ class EnumTranslator(
             }
         }
 
-        val message = JsBinaryOperation(JsBinaryOperator.ADD,
+        konst message = JsBinaryOperation(JsBinaryOperator.ADD,
                                         JsStringLiteral("No enum constant ${descriptor.fqNameSafe}."),
                                         nameParam.makeRef())
-        val throwFunction = context().getReferenceToIntrinsic(Namer.THROW_ILLEGAL_STATE_EXCEPTION_FUN_NAME)
-        val throwStatement = JsExpressionStatement(JsInvocation(throwFunction, message).source(psi))
+        konst throwFunction = context().getReferenceToIntrinsic(Namer.THROW_ILLEGAL_STATE_EXCEPTION_FUN_NAME)
+        konst throwStatement = JsExpressionStatement(JsInvocation(throwFunction, message).source(psi))
 
         if (clauses.isNotEmpty()) {
-            val defaultCase = JsDefault().apply {
+            konst defaultCase = JsDefault().apply {
                 statements += throwStatement
                 source = psi
             }
@@ -82,14 +82,14 @@ class EnumTranslator(
     }
 
     private fun createFunction(functionDescriptor: FunctionDescriptor): JsFunction {
-        val function = context().getFunctionObject(functionDescriptor)
+        konst function = context().getFunctionObject(functionDescriptor)
         function.name = context().getInnerNameForDescriptor(functionDescriptor)
         function.source = psi
         context().addDeclarationStatement(function.makeStmt())
 
-        val classRef = context().getInnerReference(descriptor)
-        val functionRef = function.name.makeRef()
-        val assignment = JsAstUtils.assignment(JsNameRef(context().getNameForDescriptor(functionDescriptor), classRef), functionRef)
+        konst classRef = context().getInnerReference(descriptor)
+        konst functionRef = function.name.makeRef()
+        konst assignment = JsAstUtils.assignment(JsNameRef(context().getNameForDescriptor(functionDescriptor), classRef), functionRef)
         context().addDeclarationStatement(assignment.makeStmt())
 
         return function

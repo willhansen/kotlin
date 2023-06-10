@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirBlockImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val statements: MutableList<FirStatement>,
+    override konst statements: MutableList<FirStatement>,
 ) : FirBlock() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 

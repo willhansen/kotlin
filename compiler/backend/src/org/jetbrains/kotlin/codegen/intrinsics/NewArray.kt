@@ -25,8 +25,8 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class NewArray : IntrinsicMethod() {
     override fun toCallable(fd: FunctionDescriptor, isSuper: Boolean, resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable {
-        val kotlinType = resolvedCall.resultingDescriptor.returnType!!
-        val type = codegen.state.typeMapper.mapType(kotlinType)
+        konst kotlinType = resolvedCall.resultingDescriptor.returnType!!
+        konst type = codegen.state.typeMapper.mapType(kotlinType)
         return object : IntrinsicCallable(type, listOf(Type.INT_TYPE), null, null) {
             override fun invokeIntrinsic(v: InstructionAdapter) {
                 codegen.newArrayInstruction(kotlinType)

@@ -3,7 +3,7 @@ expect suspend fun suspendFunction1(): Int
 expect class Qux()
 
 expect operator fun Qux.get(index: Int): String
-expect fun Qux.set(index: Int, value: String)
+expect fun Qux.set(index: Int, konstue: String)
 
 expect infix fun Qux.infixFunction1(another: Qux)
 expect fun Qux.infixFunction2(another: Qux)

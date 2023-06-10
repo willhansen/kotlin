@@ -1,8 +1,8 @@
-public val publicProperty = 1
-internal val publicOrInternalProperty = 1
-internal val internalProperty = 1
-private val internalOrPrivateProperty = 1
-private val privateProperty = 1
+public konst publicProperty = 1
+internal konst publicOrInternalProperty = 1
+internal konst internalProperty = 1
+private konst internalOrPrivateProperty = 1
+private konst privateProperty = 1
 
 public fun publicFunction() = 1
 internal fun publicOrInternalFunction() = 1
@@ -11,11 +11,11 @@ private fun internalOrPrivateFunction() = 1
 private fun privateFunction() = 1
 
 open class Outer1 {
-    public val publicProperty = 1
-    internal val publicOrInternalProperty = 1
-    internal val internalProperty = 1
-    private val internalOrPrivateProperty = 1
-    private val privateProperty = 1
+    public konst publicProperty = 1
+    internal konst publicOrInternalProperty = 1
+    internal konst internalProperty = 1
+    private konst internalOrPrivateProperty = 1
+    private konst privateProperty = 1
 
     public fun publicFunction() = 1
     internal fun publicOrInternalFunction() = 1
@@ -24,11 +24,11 @@ open class Outer1 {
     private fun privateFunction() = 1
 
     open class Inner1 {
-        public val publicProperty = 1
-        internal val publicOrInternalProperty = 1
-        internal val internalProperty = 1
-        private val internalOrPrivateProperty = 1
-        private val privateProperty = 1
+        public konst publicProperty = 1
+        internal konst publicOrInternalProperty = 1
+        internal konst internalProperty = 1
+        private konst internalOrPrivateProperty = 1
+        private konst privateProperty = 1
 
         public fun publicFunction() = 1
         internal fun publicOrInternalFunction() = 1
@@ -39,11 +39,11 @@ open class Outer1 {
 }
 
 open class Outer2 {
-    public open val publicProperty = 1
-    internal open val publicOrInternalProperty = 1
-    internal open val internalProperty = 1
-    private val internalOrPrivateProperty = 1
-    private val privateProperty = 1
+    public open konst publicProperty = 1
+    internal open konst publicOrInternalProperty = 1
+    internal open konst internalProperty = 1
+    private konst internalOrPrivateProperty = 1
+    private konst privateProperty = 1
 
     public open fun publicFunction() = 1
     internal open fun publicOrInternalFunction() = 1
@@ -52,11 +52,11 @@ open class Outer2 {
     private fun privateFunction() = 1
 
     open class Inner2 {
-        public open val publicProperty = 1
-        internal open val publicOrInternalProperty = 1
-        internal open val internalProperty = 1
-        private val internalOrPrivateProperty = 1
-        private val privateProperty = 1
+        public open konst publicProperty = 1
+        internal open konst publicOrInternalProperty = 1
+        internal open konst internalProperty = 1
+        private konst internalOrPrivateProperty = 1
+        private konst privateProperty = 1
 
         public open fun publicFunction() = 1
         internal open fun publicOrInternalFunction() = 1

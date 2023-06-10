@@ -1,1 +1,1 @@
-expect val foo: Int
+expect konst foo: Int

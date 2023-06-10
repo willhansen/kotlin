@@ -4,7 +4,7 @@ class Outer {
     }
 
     companion object {
-        private val s = "OK"
+        private konst s = "OK"
     }
 }
 

@@ -8,11 +8,11 @@ public abstract class B implements A {
 // FILE: main.kt
 
 interface A {
-    val size: Int
+    konst size: Int
 }
 
 class C : B() {
-    override val size: Int get() = 1
+    override konst size: Int get() = 1
 }
 
 fun foo() {

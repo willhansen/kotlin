@@ -36,26 +36,26 @@ import org.jetbrains.kotlin.util.withIndent
 
 @OptIn(SymbolInternals::class)
 class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testServices) {
-    private val dumper = MultiModuleInfoDumper()
+    private konst dumper = MultiModuleInfoDumper()
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         for (part in info.partsForDependsOnModules) {
-            val currentModule = part.module
-            val fqNamesWithNames = currentModule.directives[FirDiagnosticsDirectives.SCOPE_DUMP]
+            konst currentModule = part.module
+            konst fqNamesWithNames = currentModule.directives[FirDiagnosticsDirectives.SCOPE_DUMP]
             if (fqNamesWithNames.isEmpty()) return
-            val printer = SmartPrinter(dumper.builderForModule(currentModule), indent = "  ")
+            konst printer = SmartPrinter(dumper.builderForModule(currentModule), indent = "  ")
             for (fqNameWithNames in fqNamesWithNames) {
-                val (fqName, names) = extractFqNameAndMemberNames(fqNameWithNames)
+                konst (fqName, names) = extractFqNameAndMemberNames(fqNameWithNames)
                 printer.processClass(fqName, names, part.session, part.firAnalyzerFacade.scopeSession, currentModule)
             }
         }
     }
 
     private fun extractFqNameAndMemberNames(fqNameWithNames: String): Pair<String, List<String>> {
-        val (fqName, namesString) = fqNameWithNames.split(":").takeIf { it.size > 1 } ?: return fqNameWithNames to emptyList()
+        konst (fqName, namesString) = fqNameWithNames.split(":").takeIf { it.size > 1 } ?: return fqNameWithNames to emptyList()
         return fqName to namesString.split(";")
     }
 
@@ -66,27 +66,27 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
         scopeSession: ScopeSession,
         module: TestModule
     ) {
-        val (packageFqName, className) = fqName.split(".").let {
-            val packageName = FqName.fromSegments(it.dropLast(1))
+        konst (packageFqName, className) = fqName.split(".").let {
+            konst packageName = FqName.fromSegments(it.dropLast(1))
             packageName to it.last()
         }
-        val classId = className.let {
-            val names = it.split("$")
+        konst classId = className.let {
+            konst names = it.split("$")
             var classId = ClassId(packageFqName, Name.identifier(names.first()))
             for (name in names.drop(1)) {
                 classId = classId.createNestedClassId(Name.identifier(name))
             }
             classId
         }
-        val symbol = session.symbolProvider.getClassLikeSymbolByClassId(classId) ?: assertions.fail {
+        konst symbol = session.symbolProvider.getClassLikeSymbolByClassId(classId) ?: assertions.fail {
             "Class $fqName not found in module ${module.name}"
         }
-        val firClass = symbol.fir as? FirRegularClass ?: assertions.fail { "$fqName is not a class but ${symbol.fir.render()}" }
+        konst firClass = symbol.fir as? FirRegularClass ?: assertions.fail { "$fqName is not a class but ${symbol.fir.render()}" }
         println("$fqName: ")
 
         session.lazyDeclarationResolver.disableLazyResolveContractChecksInside {
-            val scope = firClass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = true, memberRequiredPhase = null)
-            val names = namesFromDirective.takeIf { it.isNotEmpty() }?.map { Name.identifier(it) } ?: scope.getCallableNames()
+            konst scope = firClass.unsubstitutedScope(session, scopeSession, withForcedTypeCalculator = true, memberRequiredPhase = null)
+            konst names = namesFromDirective.takeIf { it.isNotEmpty() }?.map { Name.identifier(it) } ?: scope.getCallableNames()
             withIndent {
                 for (name in names) {
                     processFunctions(name, scope)
@@ -98,7 +98,7 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
     }
 
     private class SymbolCounter {
-        private val map = mutableMapOf<FirBasedSymbol<*>, Int>()
+        private konst map = mutableMapOf<FirBasedSymbol<*>, Int>()
         private var counter = 0
 
         fun getIndex(symbol: FirBasedSymbol<*>): Int {
@@ -107,7 +107,7 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
     }
 
     private fun SmartPrinter.processFunctions(name: Name, scope: FirTypeScope) {
-        val functions = scope.getFunctions(name)
+        konst functions = scope.getFunctions(name)
         for (function in functions) {
             processFunction(function, scope, SymbolCounter())
         }
@@ -124,7 +124,7 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
     }
 
     private fun SmartPrinter.processProperties(name: Name, scope: FirTypeScope) {
-        val properties = scope.getProperties(name)
+        konst properties = scope.getProperties(name)
         for (property in properties) {
             processProperty(property, scope, SymbolCounter())
         }
@@ -142,9 +142,9 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
     }
 
     private fun SmartPrinter.printInfo(declaration: FirCallableDeclaration, scope: FirTypeScope, counter: SymbolCounter) {
-        val origin = declaration.origin.takeUnless { it == FirDeclarationOrigin.BuiltIns } ?: FirDeclarationOrigin.Library
+        konst origin = declaration.origin.takeUnless { it == FirDeclarationOrigin.BuiltIns } ?: FirDeclarationOrigin.Library
         print("[$origin]: ")
-        val renderedDeclaration = FirRenderer.noAnnotationBodiesAccessorAndArguments().renderElementAsString(declaration).trim()
+        konst renderedDeclaration = FirRenderer.noAnnotationBodiesAccessorAndArguments().renderElementAsString(declaration).trim()
         print(renderedDeclaration)
         print(" from $scope")
         println(" [id: ${counter.getIndex(declaration.symbol)}]")
@@ -152,8 +152,8 @@ class FirScopeDumpHandler(testServices: TestServices) : FirAnalysisHandler(testS
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(".overrides.txt")
-        val actualDump = dumper.generateResultingDump()
+        konst expectedFile = testServices.moduleStructure.originalTestDataFiles.first().withExtension(".overrides.txt")
+        konst actualDump = dumper.generateResultingDump()
         assertions.assertEqualsToFile(expectedFile, actualDump)
     }
 }

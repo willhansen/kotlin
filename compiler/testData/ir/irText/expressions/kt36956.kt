@@ -1,8 +1,8 @@
-class A<T>(private val value: T) {
-    operator fun get(i: Int) = value
+class A<T>(private konst konstue: T) {
+    operator fun get(i: Int) = konstue
     operator fun set(i: Int, v: T) {}
 }
 
-val aFloat = A<Float>(0.0f)
+konst aFloat = A<Float>(0.0f)
 
-val aInt = (aFloat[1])--
+konst aInt = (aFloat[1])--

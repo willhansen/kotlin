@@ -9,7 +9,7 @@ public class J<T> {
         return null;
     }
 
-    public void setValue1(T value) {
+    public void setValue1(T konstue) {
     }
 
     @NotNull
@@ -17,28 +17,28 @@ public class J<T> {
         return null;
     }
 
-    public void setValue2(T value) {
+    public void setValue2(T konstue) {
     }
 
     public T getValue3() {
         return null;
     }
 
-    public void setValue3(T value) {
+    public void setValue3(T konstue) {
     }
 }
 // FILE: main.kt
 
 fun test(j: J<Unit>) {
-    j.value1 = Unit
-    j.value2 = Unit
-    j.value3 = Unit
+    j.konstue1 = Unit
+    j.konstue2 = Unit
+    j.konstue3 = Unit
 
-    j.value1 = null
-    j.value2 = <!NULL_FOR_NONNULL_TYPE!>null<!>
-    j.value3 = null
+    j.konstue1 = null
+    j.konstue2 = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    j.konstue3 = null
 
-    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit?")!>j.value1<!>
-    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>j.value2<!>
-    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit..kotlin.Unit?!")!>j.value3<!>
+    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit?")!>j.konstue1<!>
+    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit")!>j.konstue2<!>
+    <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Unit..kotlin.Unit?!")!>j.konstue3<!>
 }

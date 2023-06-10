@@ -171,13 +171,13 @@ public final class MutableClosure implements CalculatedClosure {
         recordedFields.add(new Pair<>(name, type));
     }
 
-    public void captureVariable(EnclosedValueDescriptor value) {
-        recordField(value.getFieldName(), value.getType());
+    public void captureVariable(EnclosedValueDescriptor konstue) {
+        recordField(konstue.getFieldName(), konstue.getType());
 
         if (captureVariables == null) {
             captureVariables = new LinkedHashMap<>();
         }
-        captureVariables.put(value.getDescriptor(), value);
+        captureVariables.put(konstue.getDescriptor(), konstue);
     }
 
     public void setCapturedParameterOffsetInConstructor(DeclarationDescriptor descriptor, int offset) {

@@ -9,6 +9,6 @@ fun <T, S> S.bip(): String where S : Foo<T>, S: Bar<T> {
 }
 
 fun box(): String {
-    val baz = Baz<String>()
+    konst baz = Baz<String>()
     return baz.bip()
 }

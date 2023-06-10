@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 class FirCompilerLazyDeclarationResolverWithPhaseChecking : FirLazyDeclarationResolver() {
     private var currentTransformerPhase: FirResolvePhase? = null
 
-    private val exceptions = mutableListOf<FirLazyResolveContractViolationException>()
+    private konst exceptions = mutableListOf<FirLazyResolveContractViolationException>()
 
     fun getContractViolationExceptions(): List<FirLazyResolveContractViolationException> =
         exceptions
@@ -41,7 +41,7 @@ class FirCompilerLazyDeclarationResolverWithPhaseChecking : FirLazyDeclarationRe
     private fun checkIfCanLazyResolveToPhase(requestedPhase: FirResolvePhase) {
         if (!lazyResolveContractChecksEnabled) return
 
-        val currentPhase = currentTransformerPhase
+        konst currentPhase = currentTransformerPhase
             ?: error("Current phase is not set, please call ${this::startResolvingPhase.name} before starting transforming the file")
 
         // TODO: symbol current phase can already be requestedPhase or more.

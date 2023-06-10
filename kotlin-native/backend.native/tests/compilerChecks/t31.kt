@@ -6,5 +6,5 @@ class Zzz : NSAssertionHandler() {
     @ObjCOutlet
     var x: String 
         get() = "zzz"
-        set(value: String) { }
+        set(konstue: String) { }
 }

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.library.uniqueName
 import org.jetbrains.kotlin.protobuf.ExtensionRegistryLite
 
 // Extracted from KonanTarget class to avoid problems with kotlin-native-shared.
-private val deprecatedTargets = setOf(
+private konst deprecatedTargets = setOf(
         KonanTarget.WATCHOS_X86,
         KonanTarget.IOS_ARM32,
         KonanTarget.MINGW_X86,
@@ -29,27 +29,27 @@ private val deprecatedTargets = setOf(
         KonanTarget.WASM32
 )
 
-private val softDeprecatedTargets = setOf(
+private konst softDeprecatedTargets = setOf(
         KonanTarget.LINUX_ARM32_HFP,
 )
 
-private const val DEPRECATION_LINK = "https://kotl.in/native-targets-tiers"
+private const konst DEPRECATION_LINK = "https://kotl.in/native-targets-tiers"
 
 class KonanDriver(
-        val project: Project,
-        val environment: KotlinCoreEnvironment,
-        val configuration: CompilerConfiguration,
-        val spawnCompilation: (List<String>, CompilerConfiguration.() -> Unit) -> Unit
+        konst project: Project,
+        konst environment: KotlinCoreEnvironment,
+        konst configuration: CompilerConfiguration,
+        konst spawnCompilation: (List<String>, CompilerConfiguration.() -> Unit) -> Unit
 ) {
     fun run() {
-        val fileNames = configuration.get(KonanConfigKeys.LIBRARY_TO_ADD_TO_CACHE)?.let { libPath ->
-            val filesToCache = configuration.get(KonanConfigKeys.FILES_TO_CACHE)
+        konst fileNames = configuration.get(KonanConfigKeys.LIBRARY_TO_ADD_TO_CACHE)?.let { libPath ->
+            konst filesToCache = configuration.get(KonanConfigKeys.FILES_TO_CACHE)
             when {
                 !filesToCache.isNullOrEmpty() -> filesToCache
                 configuration.get(KonanConfigKeys.MAKE_PER_FILE_CACHE) == true -> {
-                    val lib = createKonanLibrary(File(libPath), "default", null, true)
+                    konst lib = createKonanLibrary(File(libPath), "default", null, true)
                     (0 until lib.fileCount()).map { fileIndex ->
-                        val proto = IrFile.parseFrom(lib.file(fileIndex).codedInputStream, ExtensionRegistryLite.newInstance())
+                        konst proto = IrFile.parseFrom(lib.file(fileIndex).codedInputStream, ExtensionRegistryLite.newInstance())
                         proto.fileEntry.name
                     }
                 }
@@ -80,7 +80,7 @@ class KonanDriver(
 
         ensureModuleName(konanConfig)
 
-        val cacheBuilder = CacheBuilder(konanConfig, spawnCompilation)
+        konst cacheBuilder = CacheBuilder(konanConfig, spawnCompilation)
         if (cacheBuilder.needToBuild()) {
             cacheBuilder.build()
             konanConfig = KonanConfig(project, configuration) // TODO: Just set freshly built caches.
@@ -93,10 +93,10 @@ class KonanDriver(
 
     private fun ensureModuleName(config: KonanConfig) {
         if (environment.getSourceFiles().isEmpty()) {
-            val libraries = config.resolvedLibraries.getFullList()
-            val moduleName = config.moduleId
+            konst libraries = config.resolvedLibraries.getFullList()
+            konst moduleName = config.moduleId
             if (libraries.any { it.uniqueName == moduleName }) {
-                val kexeModuleName = "${moduleName}_kexe"
+                konst kexeModuleName = "${moduleName}_kexe"
                 config.configuration.put(KonanConfigKeys.MODULE_NAME, kexeModuleName)
                 assert(libraries.none { it.uniqueName == kexeModuleName })
             }

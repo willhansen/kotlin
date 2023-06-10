@@ -10,7 +10,7 @@ fun foo() = ""
 
 class B: A() {
     init {
-        val a: Int = foo()
+        konst a: Int = foo()
     }
 }
 
@@ -20,7 +20,7 @@ fun test() {
 
     class B: A() {
         init {
-            val a: Int = <!TYPE_MISMATCH!>foo()<!> // todo
+            konst a: Int = <!TYPE_MISMATCH!>foo()<!> // todo
         }
     }
 }

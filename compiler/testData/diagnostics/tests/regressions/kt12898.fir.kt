@@ -1,12 +1,12 @@
 
 interface B<T : S?, S : Any> {
-    val t: T
+    konst t: T
 }
 
-class C(override val t: Any?) : B<Any?, Any>
+class C(override konst t: Any?) : B<Any?, Any>
 
 fun f(b: B<*, Any>) {
-    val y = b.t
+    konst y = b.t
     if (y is String?) {
         y<!UNSAFE_CALL!>.<!>length
     }

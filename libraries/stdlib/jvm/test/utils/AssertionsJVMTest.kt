@@ -19,7 +19,7 @@ class AssertionsJVMTest() {
 
 
     @Test fun failingAssert() {
-        val error = assertFailsWith<AssertionError> {
+        konst error = assertFailsWith<AssertionError> {
             assert(false)
         }
         assertEquals("Assertion failed", error.message)
@@ -27,7 +27,7 @@ class AssertionsJVMTest() {
 
 
     @Test fun failingAssertWithMessage() {
-        val error = assertFailsWith<AssertionError> {
+        konst error = assertFailsWith<AssertionError> {
             assert(false) { "Hello" }
         }
         assertEquals("Hello", error.message)

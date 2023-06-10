@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.gradle.util
 import org.gradle.api.NamedDomainObjectCollection
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 
-val <T: KotlinCompilation<*>> NamedDomainObjectCollection<out T>.main: T get() = getByName("main")
-val <T: KotlinCompilation<*>> NamedDomainObjectCollection<out T>.test: T get() = getByName("test")
+konst <T: KotlinCompilation<*>> NamedDomainObjectCollection<out T>.main: T get() = getByName("main")
+konst <T: KotlinCompilation<*>> NamedDomainObjectCollection<out T>.test: T get() = getByName("test")

@@ -1,10 +1,10 @@
 == foo ==
-val foo: Int by throw NullPointerException()
+konst foo: Int by throw NullPointerException()
 ---------------------
 L0:
   1 <START>
-    v(val foo: Int by throw NullPointerException())
-    magic[UNRECOGNIZED_WRITE_RHS](val foo: Int by throw NullPointerException()) -> <v0>
+    v(konst foo: Int by throw NullPointerException())
+    magic[UNRECOGNIZED_WRITE_RHS](konst foo: Int by throw NullPointerException()) -> <v0>
     w(foo|<v0>)
     mark(throw NullPointerException())
     mark(NullPointerException())

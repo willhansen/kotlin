@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.resolve.calls.tasks.ExplicitReceiverKind
 import org.jetbrains.kotlin.types.AbstractTypeChecker
 
 class FirTowerResolver(
-    private val components: BodyResolveComponents,
+    private konst components: BodyResolveComponents,
     resolutionStageRunner: ResolutionStageRunner,
-    private val collector: CandidateCollector = CandidateCollector(components, resolutionStageRunner)
+    private konst collector: CandidateCollector = CandidateCollector(components, resolutionStageRunner)
 ) {
-    private val manager = TowerResolveManager(collector)
+    private konst manager = TowerResolveManager(collector)
 
     fun runResolver(
         info: CallInfo,
@@ -38,7 +38,7 @@ class FirTowerResolver(
         collector: CandidateCollector,
         manager: TowerResolveManager
     ): CandidateCollector {
-        val candidateFactoriesAndCollectors = buildCandidateFactoriesAndCollectors(info, collector, context)
+        konst candidateFactoriesAndCollectors = buildCandidateFactoriesAndCollectors(info, collector, context)
 
         enqueueResolutionTasks(context, manager, candidateFactoriesAndCollectors, info)
 
@@ -52,16 +52,16 @@ class FirTowerResolver(
         candidateFactoriesAndCollectors: CandidateFactoriesAndCollectors,
         info: CallInfo
     ) {
-        val invokeResolveTowerExtension = FirInvokeResolveTowerExtension(context, manager, candidateFactoriesAndCollectors)
+        konst invokeResolveTowerExtension = FirInvokeResolveTowerExtension(context, manager, candidateFactoriesAndCollectors)
 
-        val mainTask = FirTowerResolveTask(
+        konst mainTask = FirTowerResolveTask(
             components,
             manager,
             TowerDataElementsForName(info.name, components.towerDataContext),
             candidateFactoriesAndCollectors.resultCollector,
             candidateFactoriesAndCollectors.candidateFactory,
         )
-        when (val receiver = info.explicitReceiver) {
+        when (konst receiver = info.explicitReceiver) {
             is FirResolvedQualifier -> {
                 manager.enqueueResolverTask { mainTask.runResolverForQualifierReceiver(info, receiver) }
                 invokeResolveTowerExtension.enqueueResolveTasksForQualifier(info, receiver)
@@ -94,11 +94,11 @@ class FirTowerResolver(
         derivedClassLookupTag: ConeClassLikeLookupTag,
         context: ResolutionContext
     ): CandidateCollector {
-        val outerType = components.outerClassManager.outerType(constructedType)
-        val scope = constructedType.delegatingConstructorScope(components.session, components.scopeSession, derivedClassLookupTag)
+        konst outerType = components.outerClassManager.outerType(constructedType)
+        konst scope = constructedType.delegatingConstructorScope(components.session, components.scopeSession, derivedClassLookupTag)
             ?: return collector
 
-        val dispatchReceiver =
+        konst dispatchReceiver =
             if (outerType != null)
                 components.implicitReceiverStack.receiversAsReversed().drop(1).firstOrNull {
                     AbstractTypeChecker.isSubtypeOf(components.session.typeContext, it.type, outerType)
@@ -106,8 +106,8 @@ class FirTowerResolver(
             else
                 null
 
-        val candidateFactory = CandidateFactory(context, info)
-        val resultCollector = collector
+        konst candidateFactory = CandidateFactory(context, info)
+        konst resultCollector = collector
 
         scope.processDeclaredConstructors {
             resultCollector.consumeCandidate(
@@ -132,7 +132,7 @@ class FirTowerResolver(
         collector: CandidateCollector,
         context: ResolutionContext
     ): CandidateFactoriesAndCollectors {
-        val candidateFactory = CandidateFactory(context, info)
+        konst candidateFactory = CandidateFactory(context, info)
 
         return CandidateFactoriesAndCollectors(
             candidateFactory,

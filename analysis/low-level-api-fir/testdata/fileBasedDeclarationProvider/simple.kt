@@ -19,4 +19,4 @@ typealias MyString = String
 
 fun foo() {}
 
-val bar: String = "bar"
+konst bar: String = "bar"

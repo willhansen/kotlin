@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 
 inline fun <reified T : Any> foo(b: Boolean = false): () -> KClass<T> {
     if (b) {
-        val T = 1
+        konst T = 1
     }
     return { T::class }
 }

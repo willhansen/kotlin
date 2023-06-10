@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 
 class SuspensionPointInsideMutexLockChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.candidateDescriptor
+        konst descriptor = resolvedCall.candidateDescriptor
         if (descriptor !is FunctionDescriptor || !descriptor.isSuspend) return
 
-        val enclosingSuspendFunctionSource =
+        konst enclosingSuspendFunctionSource =
             findEnclosingSuspendFunction(context)?.source?.getPsi() ?: return
 
         // Search for `synchronized` call
@@ -56,18 +56,18 @@ class SuspensionPointInsideMutexLockChecker : CallChecker {
         reportOn: PsiElement,
         resolvedCall: ResolvedCall<*>
     ): Boolean {
-        val call = context.trace[BindingContext.CALL, parent.calleeExpression] ?: return false
-        val resolved = context.trace[BindingContext.RESOLVED_CALL, call] ?: return false
-        val isSynchronized = resolved.resultingDescriptor.isTopLevelInPackage("synchronized", "kotlin")
+        konst call = context.trace[BindingContext.CALL, parent.calleeExpression] ?: return false
+        konst resolved = context.trace[BindingContext.RESOLVED_CALL, call] ?: return false
+        konst isSynchronized = resolved.resultingDescriptor.isTopLevelInPackage("synchronized", "kotlin")
         if (isSynchronized) {
-            val isSecondArgument = (resolved.valueArgumentsByIndex?.get(1) as? ExpressionValueArgument)?.valueArgument == child
+            konst isSecondArgument = (resolved.konstueArgumentsByIndex?.get(1) as? ExpressionValueArgument)?.konstueArgument == child
             if (insideLambda && isSecondArgument) {
                 reportProblem(context, reportOn, resolvedCall)
             }
             return true
         }
 
-        val isWithLock = resolved.resultingDescriptor.isTopLevelInPackage("withLock", "kotlin.concurrent")
+        konst isWithLock = resolved.resultingDescriptor.isTopLevelInPackage("withLock", "kotlin.concurrent")
         if (isWithLock) {
             reportProblem(context, reportOn, resolvedCall)
             return true

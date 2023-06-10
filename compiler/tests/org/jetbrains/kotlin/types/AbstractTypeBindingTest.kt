@@ -35,14 +35,14 @@ abstract class AbstractTypeBindingTest : KotlinTestWithEnvironment() {
     override fun createEnvironment() = createEnvironmentWithMockJdk(ConfigurationKind.ALL)
 
     protected fun doTest(path: String) {
-        val testFile = File(path)
-        val testKtFile = loadKtFile(project, testFile)
+        konst testFile = File(path)
+        konst testKtFile = loadKtFile(project, testFile)
 
-        val analyzeResult = JvmResolveUtil.analyze(testKtFile, environment)
+        konst analyzeResult = JvmResolveUtil.analyze(testKtFile, environment)
 
-        val testDeclaration = testKtFile.declarations.last() as KtCallableDeclaration
+        konst testDeclaration = testKtFile.declarations.last() as KtCallableDeclaration
 
-        val typeBinding = testDeclaration.createTypeBindingForReturnType(analyzeResult.bindingContext)
+        konst typeBinding = testDeclaration.createTypeBindingForReturnType(analyzeResult.bindingContext)
 
         assertEqualsToFile(
                 testFile,
@@ -58,8 +58,8 @@ abstract class AbstractTypeBindingTest : KotlinTestWithEnvironment() {
     }
 
     private fun removeLastComment(file: KtFile): String {
-        val fileText = file.text
-        val lastIndex = fileText.indexOf("/*")
+        konst fileText = file.text
+        konst lastIndex = fileText.indexOf("/*")
         return if (lastIndex > 0) {
             fileText.substring(0, lastIndex)
         }
@@ -77,7 +77,7 @@ abstract class AbstractTypeBindingTest : KotlinTestWithEnvironment() {
             }
             println("typeParameter: ${argument.typeParameter.render()}")
 
-            val projection = argument.projection.projectionKind.label.let {
+            konst projection = argument.projection.projectionKind.label.let {
                 if (it.isNotEmpty())
                     "$it "
                 else

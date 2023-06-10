@@ -43,7 +43,7 @@ import kotlin.script.experimental.api.ResultWithDiagnostics
 import kotlin.script.experimental.api.ScriptDiagnostic
 import kotlin.script.experimental.api.asSuccess
 
-val mavenCentral: RemoteRepository = RemoteRepository.Builder("maven central", "default", "https://repo.maven.apache.org/maven2/").build()
+konst mavenCentral: RemoteRepository = RemoteRepository.Builder("maven central", "default", "https://repo.maven.apache.org/maven2/").build()
 
 internal enum class ResolutionKind {
     NON_TRANSITIVE,
@@ -61,14 +61,14 @@ internal class AetherResolveSession(
     remoteRepos: List<RemoteRepository> = listOf(mavenCentral)
 ) {
 
-    private val localRepoPath by lazy {
+    private konst localRepoPath by lazy {
         localRepoDirectory?.absolutePath ?: settings.localRepository
     }
 
-    private val remotes by lazy {
-        val proxySelector = settings.activeProxy?.let { proxy ->
-            val selector = DefaultProxySelector()
-            val auth = with(AuthenticationBuilder()) {
+    private konst remotes by lazy {
+        konst proxySelector = settings.activeProxy?.let { proxy ->
+            konst selector = DefaultProxySelector()
+            konst auth = with(AuthenticationBuilder()) {
                 addUsername(proxy.username)
                 addPassword(proxy.password)
                 build()
@@ -83,13 +83,13 @@ internal class AetherResolveSession(
             )
             selector
         }
-        val mirrorSelector = getMirrorSelector()
+        konst mirrorSelector = getMirrorSelector()
         remoteRepos.mapNotNull {
-            val builder = RemoteRepository.Builder(it)
+            konst builder = RemoteRepository.Builder(it)
             if (proxySelector != null) {
                 builder.setProxy(proxySelector.getProxy(builder.build()))
             }
-            val built = builder.build()
+            konst built = builder.build()
             if (!built.protocol.matches(Regex("https?|file"))) {
                 //Logger.warn(
                 //        this,
@@ -103,8 +103,8 @@ internal class AetherResolveSession(
         }
     }
 
-    private val repositorySystem: RepositorySystem by lazy {
-        val locator = MavenRepositorySystemUtils.newServiceLocator()
+    private konst repositorySystem: RepositorySystem by lazy {
+        konst locator = MavenRepositorySystemUtils.newServiceLocator()
         locator.addService(
             RepositoryConnectorFactory::class.java,
             BasicRepositoryConnectorFactory::class.java
@@ -118,8 +118,8 @@ internal class AetherResolveSession(
             WagonTransporterFactory::class.java
         )
 
-        val container = DefaultPlexusContainer(DefaultContainerConfiguration().apply {
-            val realmId = "wagon"
+        konst container = DefaultPlexusContainer(DefaultContainerConfiguration().apply {
+            konst realmId = "wagon"
             classWorld = ClassWorld(realmId, Wagon::class.java.classLoader)
             realm = classWorld.getRealm(realmId)
         })
@@ -136,8 +136,8 @@ internal class AetherResolveSession(
         locator.getService(RepositorySystem::class.java)
     }
 
-    private val repositorySystemSession: RepositorySystemSession by lazy {
-        val localRepo = LocalRepository(localRepoPath)
+    private konst repositorySystemSession: RepositorySystemSession by lazy {
+        konst localRepo = LocalRepository(localRepoPath)
         MavenRepositorySystemUtils.newSession().also {
             it.localRepositoryManager = repositorySystem.newLocalRepositoryManager(it, localRepo)
         }
@@ -153,7 +153,7 @@ internal class AetherResolveSession(
     ): ResultWithDiagnostics<List<File>> {
         if (kind == ResolutionKind.NON_TRANSITIVE) return resolveArtifact(root).asSuccess()
 
-        val requests = resolveTree(root, scope, filter, classifier, extension)
+        konst requests = resolveTree(root, scope, filter, classifier, extension)
 
         @Suppress("KotlinConstantConditions")
         return when (kind) {
@@ -165,8 +165,8 @@ internal class AetherResolveSession(
             }
 
             ResolutionKind.TRANSITIVE_PARTIAL -> resolveDependencies(requests) {
-                val reports = mutableListOf<ScriptDiagnostic>()
-                val results = mutableListOf<File>()
+                konst reports = mutableListOf<ScriptDiagnostic>()
+                konst results = mutableListOf<File>()
                 for (req in requests) {
                     try {
                         results.add(
@@ -206,8 +206,8 @@ internal class AetherResolveSession(
         return fetch(
             request(Dependency(root, scope)),
             { req ->
-                val requestsBuilder = ArtifactRequestBuilder(classifier, extension)
-                val collectionResult = repositorySystem.collectDependencies(repositorySystemSession, req)
+                konst requestsBuilder = ArtifactRequestBuilder(classifier, extension)
+                konst collectionResult = repositorySystem.collectDependencies(repositorySystemSession, req)
                 collectionResult.root.accept(
                     TreeDependencyVisitor(
                         FilteringDependencyVisitor(
@@ -248,7 +248,7 @@ internal class AetherResolveSession(
     }
 
     private fun resolveArtifact(artifact: Artifact): List<File> {
-        val request = ArtifactRequest()
+        konst request = ArtifactRequest()
         request.artifact = artifact
         for (repo in remotes) {
             request.addRepository(repo)
@@ -262,7 +262,7 @@ internal class AetherResolveSession(
     }
 
     private fun request(root: Dependency): CollectRequest {
-        val request = CollectRequest()
+        konst request = CollectRequest()
         request.root = root
         for (repo in remotes) {
             request.addRepository(repo)
@@ -286,8 +286,8 @@ internal class AetherResolveSession(
     }
 
     private fun getMirrorSelector(): DefaultMirrorSelector {
-        val selector = DefaultMirrorSelector()
-        val mirrors = settings.mirrors
+        konst selector = DefaultMirrorSelector()
+        konst mirrors = settings.mirrors
         if (mirrors != null) {
             for (mirror in mirrors) {
                 selector.add(
@@ -299,7 +299,7 @@ internal class AetherResolveSession(
         return selector
     }
 
-    private val settings: Settings by lazy {
+    private konst settings: Settings by lazy {
         createMavenSettings()
     }
 }

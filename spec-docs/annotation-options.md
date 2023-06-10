@@ -131,7 +131,7 @@ enum class AnnotationTarget {
 annotation class target(vararg allowedTargets: AnnotationTarget)
 ```
 
-When loading an annotation, we only read `kotlin.annotation.Target`. When `kotlin.annotation.Target` is missing, on the JVM, we read `j.l.a.Target` and map its values to Kotlin ones according to the table above. This implies that we can load pure Java annotations that know nothing about Kotlin, and that an annotation written in Java can be targeted, e.g. for Kotlin expressions, because one can simply manually specify `kotlin.annotation.Target` for it.
+When loading an annotation, we only read `kotlin.annotation.Target`. When `kotlin.annotation.Target` is missing, on the JVM, we read `j.l.a.Target` and map its konstues to Kotlin ones according to the table above. This implies that we can load pure Java annotations that know nothing about Kotlin, and that an annotation written in Java can be targeted, e.g. for Kotlin expressions, because one can simply manually specify `kotlin.annotation.Target` for it.
 
 ### Syntax
 
@@ -193,5 +193,5 @@ We make `kotlin.annotation.MustBeDocumented` a separate annotation. This annotat
 
 ## Inherited
 
-This one is of rather unclear value, and we do not support it in Kotlin. One can use platform-specific annotation to express it.
+This one is of rather unclear konstue, and we do not support it in Kotlin. One can use platform-specific annotation to express it.
 

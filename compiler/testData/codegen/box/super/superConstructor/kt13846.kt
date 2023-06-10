@@ -1,4 +1,4 @@
-open class SuperClass(val arg: () -> String)
+open class SuperClass(konst arg: () -> String)
 
 object obj {
 

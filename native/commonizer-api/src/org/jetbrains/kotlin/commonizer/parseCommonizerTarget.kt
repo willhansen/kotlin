@@ -19,10 +19,10 @@ public fun parseCommonizerTargetOrNull(identityString: String): CommonizerTarget
 
 public fun parseCommonizerTarget(identityString: String): CommonizerTarget {
     try {
-        val tokens = tokenizeIdentityString(identityString)
-        val syntaxTree = parser(tokens) ?: error("Failed building syntax tree. $identityString")
+        konst tokens = tokenizeIdentityString(identityString)
+        konst syntaxTree = parser(tokens) ?: error("Failed building syntax tree. $identityString")
         check(syntaxTree.remaining.isEmpty()) { "Failed building syntax tree. Unexpected remaining tokens ${syntaxTree.remaining}" }
-        return buildCommonizerTarget(syntaxTree.value)
+        return buildCommonizerTarget(syntaxTree.konstue)
     } catch (e: Throwable) {
         throw IllegalArgumentException("Failed parsing CommonizerTarget from \"$identityString\"", e)
     }
@@ -32,10 +32,10 @@ public fun parseCommonizerTarget(identityString: String): CommonizerTarget {
 
 private fun tokenizeIdentityString(identityString: String): List<IdentityStringToken> {
     var remainingString = identityString
-    val tokenizer = sharedTargetStartTokenizer + sharedTargetEndTokenizer + separatorTokenizer + wordTokenizer
+    konst tokenizer = sharedTargetStartTokenizer + sharedTargetEndTokenizer + separatorTokenizer + wordTokenizer
     return mutableListOf<IdentityStringToken>().apply {
         while (remainingString.isNotEmpty()) {
-            val generatedToken = tokenizer.nextToken(remainingString)
+            konst generatedToken = tokenizer.nextToken(remainingString)
                 ?: error("Unexpected token at $remainingString")
 
             remainingString = generatedToken.remaining
@@ -45,14 +45,14 @@ private fun tokenizeIdentityString(identityString: String): List<IdentityStringT
 }
 
 private sealed class IdentityStringToken {
-    data class Word(val value: String) : IdentityStringToken()
+    data class Word(konst konstue: String) : IdentityStringToken()
     object Separator : IdentityStringToken()
     object SharedTargetStart : IdentityStringToken()
     object SharedTargetEnd : IdentityStringToken()
 
     final override fun toString(): String {
         return when (this) {
-            is Word -> value
+            is Word -> konstue
             is Separator -> ", "
             is SharedTargetStart -> "("
             is SharedTargetEnd -> ")"
@@ -60,10 +60,10 @@ private sealed class IdentityStringToken {
     }
 }
 
-private data class GeneratedToken(val token: IdentityStringToken, val remaining: String)
+private data class GeneratedToken(konst token: IdentityStringToken, konst remaining: String)
 
 private interface IdentityStringTokenizer {
-    fun nextToken(value: String): GeneratedToken?
+    fun nextToken(konstue: String): GeneratedToken?
 }
 
 private operator fun IdentityStringTokenizer.plus(other: IdentityStringTokenizer): IdentityStringTokenizer {
@@ -71,45 +71,45 @@ private operator fun IdentityStringTokenizer.plus(other: IdentityStringTokenizer
 }
 
 private data class CompositeIdentityStringTokenizer(
-    val first: IdentityStringTokenizer,
-    val second: IdentityStringTokenizer
+    konst first: IdentityStringTokenizer,
+    konst second: IdentityStringTokenizer
 ) : IdentityStringTokenizer {
-    override fun nextToken(value: String): GeneratedToken? {
-        return first.nextToken(value) ?: second.nextToken(value)
+    override fun nextToken(konstue: String): GeneratedToken? {
+        return first.nextToken(konstue) ?: second.nextToken(konstue)
     }
 }
 
 private data class RegexIdentityStringTokenizer(
-    val regex: Regex,
-    val token: (String) -> IdentityStringToken
+    konst regex: Regex,
+    konst token: (String) -> IdentityStringToken
 ) : IdentityStringTokenizer {
-    override fun nextToken(value: String): GeneratedToken? {
-        val firstMatchResult = regex.findAll(value, 0).firstOrNull() ?: return null
-        val range = firstMatchResult.range
+    override fun nextToken(konstue: String): GeneratedToken? {
+        konst firstMatchResult = regex.findAll(konstue, 0).firstOrNull() ?: return null
+        konst range = firstMatchResult.range
         if (range.first != 0) return null
-        return GeneratedToken(token(firstMatchResult.value), value.drop(firstMatchResult.value.length))
+        return GeneratedToken(token(firstMatchResult.konstue), konstue.drop(firstMatchResult.konstue.length))
     }
 }
 
-private val sharedTargetStartTokenizer =
+private konst sharedTargetStartTokenizer =
     RegexIdentityStringTokenizer(Regex.fromLiteral("(")) { SharedTargetStart }
 
-private val sharedTargetEndTokenizer =
+private konst sharedTargetEndTokenizer =
     RegexIdentityStringTokenizer(Regex.fromLiteral(")")) { SharedTargetEnd }
 
-private val separatorTokenizer =
+private konst separatorTokenizer =
     RegexIdentityStringTokenizer(Regex("""\s*,\s*""")) { Separator }
 
-private val wordTokenizer =
+private konst wordTokenizer =
     RegexIdentityStringTokenizer(Regex("\\w+"), IdentityStringToken::Word)
 
 //endregion
 
 //region Syntax Tree
 
-private val parser = anyOf(SharedTargetParser, LeafTargetParser)
+private konst parser = anyOf(SharedTargetParser, LeafTargetParser)
 
-private data class ParserOutput<out T : Any>(val value: T, val remaining: List<IdentityStringToken>)
+private data class ParserOutput<out T : Any>(konst konstue: T, konst remaining: List<IdentityStringToken>)
 
 private interface Parser<out T : Any> {
     operator fun invoke(tokens: List<IdentityStringToken>): ParserOutput<T>?
@@ -120,7 +120,7 @@ private fun <T : Any> anyOf(vararg parser: Parser<T>): Parser<T> {
     return AnyOfParser(parser.toList())
 }
 
-private data class AnyOfParser<T : Any>(val parsers: List<Parser<T>>) : Parser<T> {
+private data class AnyOfParser<T : Any>(konst parsers: List<Parser<T>>) : Parser<T> {
     override fun invoke(tokens: List<IdentityStringToken>): ParserOutput<T>? {
         return parsers.mapNotNull { parser -> parser(tokens) }.firstOrNull()
     }
@@ -130,14 +130,14 @@ private fun <T : Any> Parser<T>.zeroOrMore(): Parser<List<T>> {
     return ZeroOrMoreParser(this)
 }
 
-private data class ZeroOrMoreParser<T : Any>(val parser: Parser<T>) : Parser<List<T>> {
+private data class ZeroOrMoreParser<T : Any>(konst parser: Parser<T>) : Parser<List<T>> {
     override fun invoke(tokens: List<IdentityStringToken>): ParserOutput<List<T>>? {
-        val outputs = mutableListOf<T>()
+        konst outputs = mutableListOf<T>()
         var remainingTokens = tokens
         while (true) {
-            val output = parser(remainingTokens) ?: break
+            konst output = parser(remainingTokens) ?: break
             if (output.remaining == remainingTokens) break
-            outputs.add(output.value)
+            outputs.add(output.konstue)
             remainingTokens = output.remaining
         }
         return ParserOutput(outputs.toList(), remainingTokens)
@@ -148,7 +148,7 @@ private fun <T : Any> Parser<T>.ignore(token: IdentityStringToken): Parser<T> {
     return IgnoreTokensParser(this, token)
 }
 
-private data class IgnoreTokensParser<T : Any>(val parser: Parser<T>, val ignoredToken: IdentityStringToken) : Parser<T> {
+private data class IgnoreTokensParser<T : Any>(konst parser: Parser<T>, konst ignoredToken: IdentityStringToken) : Parser<T> {
     override fun invoke(tokens: List<IdentityStringToken>): ParserOutput<T>? {
         return parser(
             if (tokens.firstOrNull() == ignoredToken) tokens.drop(1) else tokens
@@ -158,7 +158,7 @@ private data class IgnoreTokensParser<T : Any>(val parser: Parser<T>, val ignore
 
 private object LeafTargetParser : Parser<LeafTargetSyntaxNode> {
     override fun invoke(tokens: List<IdentityStringToken>): ParserOutput<LeafTargetSyntaxNode>? {
-        val nextToken = tokens.firstOrNull() as? Word ?: return null
+        konst nextToken = tokens.firstOrNull() as? Word ?: return null
         return ParserOutput(LeafTargetSyntaxNode(nextToken), tokens.drop(1))
     }
 }
@@ -167,22 +167,22 @@ private object SharedTargetParser : Parser<SharedTargetSyntaxNode> {
     override fun invoke(tokens: List<IdentityStringToken>): ParserOutput<SharedTargetSyntaxNode>? {
         if (tokens.firstOrNull() !is SharedTargetStart) return null
 
-        val innerParser = anyOf(LeafTargetParser, SharedTargetParser).ignore(Separator).zeroOrMore()
-        val innerParserOutput = innerParser(tokens.drop(1)) ?: return null
+        konst innerParser = anyOf(LeafTargetParser, SharedTargetParser).ignore(Separator).zeroOrMore()
+        konst innerParserOutput = innerParser(tokens.drop(1)) ?: return null
 
-        val closingToken = innerParserOutput.remaining.firstOrNull()
+        konst closingToken = innerParserOutput.remaining.firstOrNull()
         if (closingToken != SharedTargetEnd) {
             error("Missing '${SharedTargetEnd}' at ${tokens.joinToString("")}")
         }
 
-        return ParserOutput(SharedTargetSyntaxNode(innerParserOutput.value), innerParserOutput.remaining.drop(1))
+        return ParserOutput(SharedTargetSyntaxNode(innerParserOutput.konstue), innerParserOutput.remaining.drop(1))
     }
 
 }
 
 private sealed class IdentityStringSyntaxNode {
-    data class LeafTargetSyntaxNode(val token: Word) : IdentityStringSyntaxNode()
-    data class SharedTargetSyntaxNode(val children: List<IdentityStringSyntaxNode>) : IdentityStringSyntaxNode()
+    data class LeafTargetSyntaxNode(konst token: Word) : IdentityStringSyntaxNode()
+    data class SharedTargetSyntaxNode(konst children: List<IdentityStringSyntaxNode>) : IdentityStringSyntaxNode()
 }
 
 //endregion Tree
@@ -191,8 +191,8 @@ private sealed class IdentityStringSyntaxNode {
 
 private fun buildCommonizerTarget(node: IdentityStringSyntaxNode): CommonizerTarget {
     return when (node) {
-        is LeafTargetSyntaxNode -> LeafCommonizerTarget(node.token.value)
-        // Previous nested ((a, b), c) notation is still valid and will be flattened to (a, b, c)
+        is LeafTargetSyntaxNode -> LeafCommonizerTarget(node.token.konstue)
+        // Previous nested ((a, b), c) notation is still konstid and will be flattened to (a, b, c)
         is SharedTargetSyntaxNode -> SharedCommonizerTarget(
             node.children.flatMap { child -> buildCommonizerTarget(child).allLeaves() }.toSet()
         )

@@ -24,9 +24,9 @@ fun sym(r: Rainbow) = when (r) {
 }
 
 fun box(): String {
-    val s = buildString {
-        for (value in Rainbow.values()) {
-            append(sym(value))
+    konst s = buildString {
+        for (konstue in Rainbow.konstues()) {
+            append(sym(konstue))
         }
     }
     return if (s == "roygcbv") "OK" else s

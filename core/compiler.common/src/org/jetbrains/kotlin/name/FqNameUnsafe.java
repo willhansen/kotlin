@@ -63,7 +63,7 @@ public final class FqNameUnsafe {
     }
 
     public static boolean isValid(@Nullable String qualifiedName) {
-        // TODO: There's a valid name with escape char ``
+        // TODO: There's a konstid name with escape char ``
         return qualifiedName != null && qualifiedName.indexOf('/') < 0 && qualifiedName.indexOf('*') < 0;
     }
 

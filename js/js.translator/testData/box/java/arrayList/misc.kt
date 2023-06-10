@@ -5,7 +5,7 @@ package foo
 
 fun box(): String {
     var i = 0
-    val list = ArrayList<Int>()
+    konst list = ArrayList<Int>()
     while (i++ < 3) {
         list.add(i)
     }
@@ -19,10 +19,10 @@ fun box(): String {
         return "fail1"
     }
 
-    val a = ArrayList<Int>()
+    konst a = ArrayList<Int>()
     a.add(3)
 
-    val b = ArrayList<Int>()
+    konst b = ArrayList<Int>()
     b.add(4)
     a.addAll(b)
     if (a[0] != 3 || a[1] != 4) {

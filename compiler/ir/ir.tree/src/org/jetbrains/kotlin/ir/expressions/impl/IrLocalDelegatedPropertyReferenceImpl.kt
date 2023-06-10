@@ -27,16 +27,16 @@ import org.jetbrains.kotlin.ir.util.initializeParameterArguments
 import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 
 class IrLocalDelegatedPropertyReferenceImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrLocalDelegatedPropertySymbol,
+    override konst symbol: IrLocalDelegatedPropertySymbol,
     override var delegate: IrVariableSymbol,
     override var getter: IrSimpleFunctionSymbol,
     override var setter: IrSimpleFunctionSymbol?,
     override var origin: IrStatementOrigin? = null,
 ) : IrLocalDelegatedPropertyReference() {
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(0)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(0)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(0)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(0)
 }

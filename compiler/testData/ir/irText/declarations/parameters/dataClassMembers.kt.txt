@@ -5,11 +5,11 @@ data class Test<T : Any?> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
-  val y: String
+  konst y: String
     field = y
     get
 
@@ -45,7 +45,7 @@ data class Test<T : Any?> {
     when {
       other !is Test<T> -> return false
     }
-    val tmp0_other_with_cast: Test<T> = other as Test<T>
+    konst tmp0_other_with_cast: Test<T> = other as Test<T>
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }

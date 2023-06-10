@@ -16,7 +16,7 @@
 
 fun cc() : C = C()
 fun box(): String {
-    val a: A? = A(B())
+    konst a: A? = A(B())
 
     a!!.b += ::cc
     if (!f3 && f1 && !f2 && !f4) {
@@ -28,7 +28,7 @@ fun box(): String {
     return "NOK"
 }
 
-class A(val b: B)
+class A(konst b: B)
 
 var f1 = false
 var f2 = false

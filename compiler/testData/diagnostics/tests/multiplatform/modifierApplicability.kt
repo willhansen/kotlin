@@ -10,7 +10,7 @@ class Outer <!WRONG_MODIFIER_TARGET!>expect<!> constructor() {
     <!WRONG_MODIFIER_TARGET!>expect<!> init {}
 
     <!NON_ABSTRACT_FUNCTION_WITH_NO_BODY!><!WRONG_MODIFIER_TARGET!>expect<!> fun foo()<!>
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!><!WRONG_MODIFIER_TARGET!>expect<!> val bar: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!><!WRONG_MODIFIER_TARGET!>expect<!> konst bar: Int<!>
 }
 
 fun foo() {

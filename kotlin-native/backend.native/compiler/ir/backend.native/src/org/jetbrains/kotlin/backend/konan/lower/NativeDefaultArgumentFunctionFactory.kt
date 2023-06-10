@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.types.IrType
 
 internal class NativeDefaultArgumentFunctionFactory(context: CommonBackendContext) : MaskedDefaultArgumentFunctionFactory(context) {
     override fun IrType.hasNullAsUndefinedValue(): Boolean {
-        val binaryType = computePrimitiveBinaryTypeOrNull() ?: return true
+        konst binaryType = computePrimitiveBinaryTypeOrNull() ?: return true
         return binaryType == PrimitiveBinaryType.POINTER || binaryType == PrimitiveBinaryType.VECTOR128
     }
 }

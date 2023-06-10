@@ -2,7 +2,7 @@ FILE: complexIfWithOr.kt
     public abstract interface State : R|kotlin/Any| {
     }
     public abstract interface Complex : R|kotlin/Any| {
-        public abstract val superClass: R|Complex?|
+        public abstract konst superClass: R|Complex?|
             public get(): R|Complex?|
 
     }

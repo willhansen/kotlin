@@ -5,11 +5,11 @@
 import kotlin.test.*
 
 object Foo {
-    val bar = Bar()
+    konst bar = Bar()
 }
 
 class Bar {
-    val f by lazy {
+    konst f by lazy {
         foo()
     }
 

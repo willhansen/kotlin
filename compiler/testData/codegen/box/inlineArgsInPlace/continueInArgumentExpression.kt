@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 fun test(xs: List<String>, flag: Boolean = false): Map<String, String> {
-    val result = linkedMapOf<String, String>()
+    konst result = linkedMapOf<String, String>()
     for (x in xs) {
         if (x.length > 3) continue
         result[x] = x.zap("OK", flag) ?: continue

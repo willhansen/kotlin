@@ -10,4 +10,4 @@ public class GenericContainer<SELF extends GenericContainer<SELF>> {
 
 // FILE: test.kt
 
-val container = GenericContainer("nginx")
+konst container = GenericContainer("nginx")

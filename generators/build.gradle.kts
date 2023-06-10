@@ -9,10 +9,10 @@ sourceSets {
 }
 
 fun extraSourceSet(name: String, extendMain: Boolean = true, jpsKind: String? = null): Pair<SourceSet, Configuration> {
-    val sourceSet = sourceSets.create(name) {
+    konst sourceSet = sourceSets.create(name) {
         java.srcDir(name)
     }
-    val api = configurations[sourceSet.apiConfigurationName]
+    konst api = configurations[sourceSet.apiConfigurationName]
     if (extendMain) {
         dependencies { api(mainSourceSet.output) }
         configurations[sourceSet.runtimeOnlyConfigurationName]
@@ -25,13 +25,13 @@ fun extraSourceSet(name: String, extendMain: Boolean = true, jpsKind: String? = 
     return sourceSet to api
 }
 
-val (builtinsSourceSet, builtinsApi) = extraSourceSet("builtins", extendMain = false)
-val (evaluateSourceSet, evaluateApi) = extraSourceSet("evaluate")
-val (interpreterSourceSet, interpreterApi) = extraSourceSet("interpreter")
-val (protobufSourceSet, protobufApi) = extraSourceSet("protobuf")
-val (protobufCompareSourceSet, protobufCompareApi) = extraSourceSet("protobufCompare", jpsKind = SourceSet.TEST_SOURCE_SET_NAME)
-val (wasmSourceSet, wasmApi) = extraSourceSet("wasm")
-val (nativeInteropRuntimeSourceSet, nativeInteropRuntimeApi) = extraSourceSet("nativeInteropRuntime")
+konst (builtinsSourceSet, builtinsApi) = extraSourceSet("builtins", extendMain = false)
+konst (ekonstuateSourceSet, ekonstuateApi) = extraSourceSet("ekonstuate")
+konst (interpreterSourceSet, interpreterApi) = extraSourceSet("interpreter")
+konst (protobufSourceSet, protobufApi) = extraSourceSet("protobuf")
+konst (protobufCompareSourceSet, protobufCompareApi) = extraSourceSet("protobufCompare", jpsKind = SourceSet.TEST_SOURCE_SET_NAME)
+konst (wasmSourceSet, wasmApi) = extraSourceSet("wasm")
+konst (nativeInteropRuntimeSourceSet, nativeInteropRuntimeApi) = extraSourceSet("nativeInteropRuntime")
 
 dependencies {
     api(kotlinStdlib("jdk8"))
@@ -40,7 +40,7 @@ dependencies {
     }
 
     builtinsApi("org.jetbrains.kotlin:kotlin-stdlib:$bootstrapKotlinVersion") { isTransitive = false }
-    evaluateApi(project(":core:deserialization"))
+    ekonstuateApi(project(":core:deserialization"))
     wasmApi(project(":wasm:wasm.ir"))
     wasmApi(kotlinStdlib())
     interpreterApi(project(":compiler:ir.tree"))
@@ -49,7 +49,7 @@ dependencies {
     nativeInteropRuntimeApi(kotlinStdlib())
 
     testApi(builtinsSourceSet.output)
-    testApi(evaluateSourceSet.output)
+    testApi(ekonstuateSourceSet.output)
     testApi(interpreterSourceSet.output)
     testApi(protobufSourceSet.output)
     testApi(protobufCompareSourceSet.output)
@@ -91,30 +91,30 @@ projectTest(parallel = true) {
     workingDir = rootDir
 }
 
-val generateCompilerArgumentsCopy by generator("org.jetbrains.kotlin.generators.arguments.GenerateCompilerArgumentsCopyKt")
+konst generateCompilerArgumentsCopy by generator("org.jetbrains.kotlin.generators.arguments.GenerateCompilerArgumentsCopyKt")
 
-val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateTestsKt") {
+konst generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateTestsKt") {
     dependsOn(":generators:analysis-api-generator:generateFrontendApiTests")
 }
 
-val generateProtoBuf by generator("org.jetbrains.kotlin.generators.protobuf.GenerateProtoBufKt", protobufSourceSet)
-val generateProtoBufCompare by generator("org.jetbrains.kotlin.generators.protobuf.GenerateProtoBufCompare", protobufCompareSourceSet)
+konst generateProtoBuf by generator("org.jetbrains.kotlin.generators.protobuf.GenerateProtoBufKt", protobufSourceSet)
+konst generateProtoBufCompare by generator("org.jetbrains.kotlin.generators.protobuf.GenerateProtoBufCompare", protobufCompareSourceSet)
 
-val generateGradleCompilerTypes by generator("org.jetbrains.kotlin.generators.arguments.GenerateGradleCompilerTypesKt") {
+konst generateGradleCompilerTypes by generator("org.jetbrains.kotlin.generators.arguments.GenerateGradleCompilerTypesKt") {
     description = "Generate Kotlin compiler arguments types Gradle representation"
 }
-val generateGradleOptions by generator("org.jetbrains.kotlin.generators.arguments.GenerateGradleOptionsKt") {
+konst generateGradleOptions by generator("org.jetbrains.kotlin.generators.arguments.GenerateGradleOptionsKt") {
     dependsOn(generateGradleCompilerTypes)
     description = "Generate Gradle plugin compiler options"
 }
-val generateKeywordStrings by generator("org.jetbrains.kotlin.generators.frontend.GenerateKeywordStrings")
+konst generateKeywordStrings by generator("org.jetbrains.kotlin.generators.frontend.GenerateKeywordStrings")
 
-val generateBuiltins by generator("org.jetbrains.kotlin.generators.builtins.generateBuiltIns.GenerateBuiltInsKt", builtinsSourceSet)
-val generateOperationsMap by generator("org.jetbrains.kotlin.generators.evaluate.GenerateOperationsMapKt", evaluateSourceSet)
-val generateInterpreterMap by generator("org.jetbrains.kotlin.generators.interpreter.GenerateInterpreterMapKt", interpreterSourceSet)
-val generateWasmIntrinsics by generator("org.jetbrains.kotlin.generators.wasm.WasmIntrinsicGeneratorKt", wasmSourceSet)
+konst generateBuiltins by generator("org.jetbrains.kotlin.generators.builtins.generateBuiltIns.GenerateBuiltInsKt", builtinsSourceSet)
+konst generateOperationsMap by generator("org.jetbrains.kotlin.generators.ekonstuate.GenerateOperationsMapKt", ekonstuateSourceSet)
+konst generateInterpreterMap by generator("org.jetbrains.kotlin.generators.interpreter.GenerateInterpreterMapKt", interpreterSourceSet)
+konst generateWasmIntrinsics by generator("org.jetbrains.kotlin.generators.wasm.WasmIntrinsicGeneratorKt", wasmSourceSet)
 
-val generateNativeInteropRuntime by generator(
+konst generateNativeInteropRuntime by generator(
     "org.jetbrains.kotlin.generators.native.interopRuntime.NativeInteropRuntimeGeneratorKt",
     nativeInteropRuntimeSourceSet
 )

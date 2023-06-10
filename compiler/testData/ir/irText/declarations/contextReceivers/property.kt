@@ -9,4 +9,4 @@ interface B {
 }
 
 context(A, B)
-val c get() = a() + b()
+konst c get() = a() + b()

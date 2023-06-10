@@ -12,7 +12,7 @@ private fun String.shift(): String {
 }
 
 internal fun file(init: FileBuilder.() -> Unit): FileBuilder {
-    val file = FileBuilder()
+    konst file = FileBuilder()
     file.init()
     return file
 }
@@ -28,7 +28,7 @@ internal interface PrimitiveBuilder {
 
     fun throwIfWasNotInitialized(arg: Any?, propertyName: String, className: String) {
         if (arg == null) {
-            throw AssertionError("Property '$propertyName' for '$className' wasn't set to its value")
+            throw AssertionError("Property '$propertyName' for '$className' wasn't set to its konstue")
         }
     }
 
@@ -39,7 +39,7 @@ internal interface PrimitiveBuilder {
 
 internal abstract class AnnotatedAndDocumented {
     private var doc: String? = null
-    val annotations: MutableList<String> = mutableListOf()
+    konst annotations: MutableList<String> = mutableListOf()
     var additionalDoc: String? = null
 
     fun appendDoc(doc: String) {
@@ -75,9 +75,9 @@ internal abstract class AnnotatedAndDocumented {
 }
 
 internal class FileBuilder : PrimitiveBuilder {
-    private val suppresses: MutableList<String> = mutableListOf()
-    private val imports: MutableList<String> = mutableListOf()
-    private val classes: MutableList<ClassBuilder> = mutableListOf()
+    private konst suppresses: MutableList<String> = mutableListOf()
+    private konst imports: MutableList<String> = mutableListOf()
+    private konst classes: MutableList<ClassBuilder> = mutableListOf()
 
     fun suppress(suppress: String) {
         suppresses += suppress
@@ -88,7 +88,7 @@ internal class FileBuilder : PrimitiveBuilder {
     }
 
     fun klass(init: ClassBuilder.() -> Unit): ClassBuilder {
-        val classBuilder = ClassBuilder()
+        konst classBuilder = ClassBuilder()
         classes += classBuilder.apply(init)
         return classBuilder
     }
@@ -123,7 +123,7 @@ internal class ClassBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
     var name: String = ""
     private var constructorParam: MethodParameterBuilder? = null
     private var companionObject: CompanionObjectBuilder? = null
-    private val methods: MutableList<MethodBuilder> = mutableListOf()
+    private konst methods: MutableList<MethodBuilder> = mutableListOf()
 
     fun constructorParam(init: MethodParameterBuilder.() -> Unit) {
         throwIfAlreadyInitialized(constructorParam, "constructorParam", "ClassBuilder")
@@ -132,13 +132,13 @@ internal class ClassBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
 
     fun companionObject(init: CompanionObjectBuilder.() -> Unit): CompanionObjectBuilder {
         throwIfAlreadyInitialized(companionObject, "companionObject", "ClassBuilder")
-        val companionObjectBuilder = CompanionObjectBuilder()
+        konst companionObjectBuilder = CompanionObjectBuilder()
         companionObject = companionObjectBuilder.apply(init)
         return companionObjectBuilder
     }
 
     fun method(init: MethodBuilder.() -> Unit): MethodBuilder {
-        val methodBuilder = MethodBuilder()
+        konst methodBuilder = MethodBuilder()
         methods += methodBuilder.apply(init)
         return methodBuilder
     }
@@ -160,10 +160,10 @@ internal class ClassBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
 
 internal class CompanionObjectBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
     var isPublic: Boolean = false
-    private val properties: MutableList<PropertyBuilder> = mutableListOf()
+    private konst properties: MutableList<PropertyBuilder> = mutableListOf()
 
     fun property(init: PropertyBuilder.() -> Unit): PropertyBuilder {
-        val propertyBuilder = PropertyBuilder()
+        konst propertyBuilder = PropertyBuilder()
         properties += propertyBuilder.apply(init)
         return propertyBuilder
     }
@@ -191,15 +191,15 @@ internal class MethodSignatureBuilder : PrimitiveBuilder {
     private var parameter: MethodParameterBuilder? = null
     var returnType: String? = null
 
-    val parameterName: String
+    konst parameterName: String
         get() = parameter?.name ?: throwNotInitialized("name", "MethodParameterBuilder")
 
-    val parameterType: String
+    konst parameterType: String
         get() = parameter?.type ?: throwNotInitialized("type", "MethodParameterBuilder")
 
     fun parameter(init: MethodParameterBuilder.() -> Unit): MethodParameterBuilder {
         throwIfAlreadyInitialized(parameter, "parameter", "MethodSignatureBuilder")
-        val argBuilder = MethodParameterBuilder()
+        konst argBuilder = MethodParameterBuilder()
         parameter = argBuilder.apply(init)
         return argBuilder
     }
@@ -239,21 +239,21 @@ internal class MethodBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
     private var signature: MethodSignatureBuilder? = null
     private var body: String? = null
 
-    val methodName: String
+    konst methodName: String
         get() = signature?.methodName ?: throwNotInitialized("methodName", "MethodSignatureBuilder")
 
-    val returnType: String
+    konst returnType: String
         get() = signature?.returnType ?: throwNotInitialized("returnType", "MethodSignatureBuilder")
 
-    val parameterName: String
+    konst parameterName: String
         get() = signature?.parameterName ?: throwNotInitialized("name", "MethodParameterBuilder")
 
-    val parameterType: String
+    konst parameterType: String
         get() = signature?.parameterType ?: throwNotInitialized("type", "MethodParameterBuilder")
 
     fun signature(init: MethodSignatureBuilder.() -> Unit): MethodSignatureBuilder {
         throwIfAlreadyInitialized(signature, "signature", "MethodBuilder")
-        val signatureBuilder = MethodSignatureBuilder()
+        konst signatureBuilder = MethodSignatureBuilder()
         signature = signatureBuilder.apply(init)
         return signatureBuilder
     }
@@ -274,7 +274,7 @@ internal class MethodBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
     }
 
     fun String.addAsSingleLineBody(bodyOnNewLine: Boolean = false) {
-        val skip = if (bodyOnNewLine) "$END_LINE    " else " "
+        konst skip = if (bodyOnNewLine) "$END_LINE    " else " "
         body = " =$skip$this"
     }
 
@@ -286,16 +286,16 @@ internal class MethodBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
 internal class PropertyBuilder : AnnotatedAndDocumented(), PrimitiveBuilder {
     var name: String? = null
     var type: String? = null
-    var value: String? = null
+    var konstue: String? = null
 
     override fun build(): String {
         throwIfWasNotInitialized(name, "name", "PropertyBuilder")
         throwIfWasNotInitialized(type, "type", "PropertyBuilder")
-        throwIfWasNotInitialized(value, "value", "PropertyBuilder")
+        throwIfWasNotInitialized(konstue, "konstue", "PropertyBuilder")
 
         return buildString {
             printDocumentationAndAnnotations(forceMultiLineDoc = true)
-            append("public const val $name: $type = $value")
+            append("public const konst $name: $type = $konstue")
         }
     }
 }

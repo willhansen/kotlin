@@ -4,7 +4,7 @@
 
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
+    konst list1 = ArrayList<Int>()
     for (i in 5 downTo 10) {
         list1.add(i)
         if (list1.size > 23) break
@@ -13,7 +13,7 @@ fun box(): String {
         return "Wrong elements for 5 downTo 10: $list1"
     }
 
-    val list2 = ArrayList<Int>()
+    konst list2 = ArrayList<Int>()
     for (i in 5.toByte() downTo 10.toByte()) {
         list2.add(i)
         if (list2.size > 23) break
@@ -22,7 +22,7 @@ fun box(): String {
         return "Wrong elements for 5.toByte() downTo 10.toByte(): $list2"
     }
 
-    val list3 = ArrayList<Int>()
+    konst list3 = ArrayList<Int>()
     for (i in 5.toShort() downTo 10.toShort()) {
         list3.add(i)
         if (list3.size > 23) break
@@ -31,7 +31,7 @@ fun box(): String {
         return "Wrong elements for 5.toShort() downTo 10.toShort(): $list3"
     }
 
-    val list4 = ArrayList<Long>()
+    konst list4 = ArrayList<Long>()
     for (i in 5L downTo 10L) {
         list4.add(i)
         if (list4.size > 23) break
@@ -40,7 +40,7 @@ fun box(): String {
         return "Wrong elements for 5L downTo 10L: $list4"
     }
 
-    val list5 = ArrayList<Char>()
+    konst list5 = ArrayList<Char>()
     for (i in 'a' downTo 'z') {
         list5.add(i)
         if (list5.size > 23) break

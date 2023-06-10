@@ -6,9 +6,9 @@ open class C<T>(v: T) {
 
 class A {
     @Suppress("UNRESOLVED_REFERENCE")
-    val x by lazy { Unresolved }
-    val z by C<String>("z")
-    val y by object: C<String>("y") {}
-    val a by lazy { C<String>("a") }
-    val b by lazy { object: C<String>("b") {} }
+    konst x by lazy { Unresolved }
+    konst z by C<String>("z")
+    konst y by object: C<String>("y") {}
+    konst a by lazy { C<String>("a") }
+    konst b by lazy { object: C<String>("b") {} }
 }

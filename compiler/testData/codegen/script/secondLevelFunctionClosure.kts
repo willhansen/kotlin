@@ -1,4 +1,4 @@
-val z = 30
+konst z = 30
 var x: Int = 0
 
 if (true) {
@@ -6,6 +6,6 @@ if (true) {
     x = foo()
 }
 
-val rv = x
+konst rv = x
 
 // expected: rv: 50

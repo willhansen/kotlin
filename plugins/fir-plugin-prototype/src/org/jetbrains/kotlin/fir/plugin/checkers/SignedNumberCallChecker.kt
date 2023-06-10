@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.types.coneType
 object SignedNumberCallChecker : FirFunctionCallChecker() {
     @OptIn(InternalDiagnosticFactoryMethod::class)
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val argumentMapping = expression.resolvedArgumentMapping ?: return
+        konst argumentMapping = expression.resolvedArgumentMapping ?: return
         for ((argument, parameter) in argumentMapping.entries) {
-            val expectedSign = parameter.returnTypeRef.coneType.attributes.numberSign ?: continue
-            val actualSign = argument.typeRef.coneType.attributes.numberSign
+            konst expectedSign = parameter.returnTypeRef.coneType.attributes.numberSign ?: continue
+            konst actualSign = argument.typeRef.coneType.attributes.numberSign
             if (expectedSign != actualSign) {
                 reporter.reportOn(
                     argument.source, PluginErrors.ILLEGAL_NUMBER_SIGN, expectedSign.asString(), actualSign.asString(), context

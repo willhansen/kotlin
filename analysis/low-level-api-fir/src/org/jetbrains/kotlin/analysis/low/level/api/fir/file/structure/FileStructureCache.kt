@@ -12,8 +12,8 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * Belongs to a [org.jetbrains.kotlin.analysis.low.level.api.fir.api.LLFirResolveSession]
  */
-internal class FileStructureCache(private val moduleResolveComponents: LLFirModuleResolveComponents) {
-    private val cache = ConcurrentHashMap<KtFile, FileStructure>()
+internal class FileStructureCache(private konst moduleResolveComponents: LLFirModuleResolveComponents) {
+    private konst cache = ConcurrentHashMap<KtFile, FileStructure>()
 
     fun getFileStructure(ktFile: KtFile): FileStructure = cache.computeIfAbsent(ktFile) {
         FileStructure.build(ktFile, moduleResolveComponents)

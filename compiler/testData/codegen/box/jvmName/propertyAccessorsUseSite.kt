@@ -16,7 +16,7 @@ class TestIt {
 
 object Delegate {
     operator fun getValue(thiz: Any?, metadata: Any?) = true
-    operator fun setValue(thiz: Any?, metadata: Any?, value: Boolean) {}
+    operator fun setValue(thiz: Any?, metadata: Any?, konstue: Boolean) {}
 }
 
 fun box(): String {

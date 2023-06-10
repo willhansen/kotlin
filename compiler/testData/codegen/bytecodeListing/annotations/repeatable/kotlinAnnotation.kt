@@ -7,7 +7,7 @@
 package test
 
 @Repeatable
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 @A("class1") @A("class2")
 class Z @A("constructor1") @A("constructor2") constructor() {
@@ -22,7 +22,7 @@ class Z @A("constructor1") @A("constructor2") constructor() {
         @A("propertyGetter1") @A("propertyGetter2")
         get() = 0
         @A("propertySetter1") @A("propertySetter2")
-        set(value) {}
+        set(konstue) {}
 }
 
 @A("topLevelFunction1") @A("topLevelFunction2")
@@ -36,10 +36,10 @@ var String.z: Z
     @A("propertyGetter1") @A("propertyGetter2")
     get() = Z()
     @A("propertySetter1") @A("propertySetter2")
-    set(value) {}
+    set(konstue) {}
 
 @get:A("useSitePropertyGetter1")
 @get:A("useSitePropertyGetter2")
 @field:A("field1")
 @field:A("field2")
-val o: String = ""
+konst o: String = ""

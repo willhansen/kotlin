@@ -5,9 +5,9 @@ fun <T> magic(): T = null!!
 class Q {
     private fun <E, F> foo() = {
         class C<G> {
-            val e: E = magic()
-            val f: F = magic()
-            val g: G = magic()
+            konst e: E = magic()
+            konst f: F = magic()
+            konst g: G = magic()
         }
         C<F>()
     }

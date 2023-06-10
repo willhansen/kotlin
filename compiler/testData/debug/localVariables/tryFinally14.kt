@@ -4,7 +4,7 @@ fun box(): String {
     try {
         for (i in 0 until 1) {
             try {
-                val x = "x"
+                konst x = "x"
                 var y = "y"
             } finally {
                 break

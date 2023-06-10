@@ -7,11 +7,11 @@ compilerOpts = -framework WebKit
 linkerOpts = -framework WebKit
 
 excludedFunctions = NPN_Construct NPN_ConvertPoint NPN_CreateObject NPN_DestroyStream NPN_Enumerate \
-                    NPN_Evaluate NPN_ForceRedraw NPN_GetAuthenticationInfo NPN_GetIntIdentifier \
+                    NPN_Ekonstuate NPN_ForceRedraw NPN_GetAuthenticationInfo NPN_GetIntIdentifier \
                     NPN_GetJavaEnv NPN_GetJavaPeer NPN_GetProperty NPN_GetStringIdentifier \
                     NPN_GetStringIdentifiers NPN_GetURL NPN_GetURLNotify NPN_GetValue NPN_GetValueForURL \
                     NPN_HandleEvent NPN_HasMethod NPN_HasProperty NPN_IdentifierIsString NPN_IntFromIdentifier \
-                    NPN_InvalidateRect NPN_InvalidateRegion NPN_Invoke NPN_InvokeDefault NPN_MemAlloc \
+                    NPN_InkonstidateRect NPN_InkonstidateRegion NPN_Invoke NPN_InvokeDefault NPN_MemAlloc \
                     NPN_MemFlush NPN_MemFree NPN_NewStream NPN_PluginThreadAsyncCall NPN_PopPopupsEnabledState \
                     NPN_PopUpContextMenu NPN_PostURL NPN_PostURLNotify NPN_PushPopupsEnabledState NPN_ReleaseObject \
                     NPN_ReleaseVariantValue NPN_ReloadPlugins NPN_RemoveProperty NPN_RequestRead NPN_RetainObject \

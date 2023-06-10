@@ -1,14 +1,14 @@
-// KT-443 Write allowed to super.val
+// KT-443 Write allowed to super.konst
 
 open class M() {
-    open val b: Int = 5
+    open konst b: Int = 5
 }
 
 class N() : M() {
-    val a : Int
+    konst a : Int
         get() {
             super.<!VAL_REASSIGNMENT!>b<!> = super.b + 1
             return super.b + 1
         }
-    override val b: Int = a + 1
+    override konst b: Int = a + 1
 }

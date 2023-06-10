@@ -5,7 +5,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "Check Elvis evaluation",
+          "description": "Check Elvis ekonstuation",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/elvis-operator-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -15,7 +15,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "Check Elvis evaluation",
+          "description": "Check Elvis ekonstuation",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/elvis-operator-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -29,7 +29,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "Check Elvis evaluation",
+          "description": "Check Elvis ekonstuation",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/elvis-operator-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"

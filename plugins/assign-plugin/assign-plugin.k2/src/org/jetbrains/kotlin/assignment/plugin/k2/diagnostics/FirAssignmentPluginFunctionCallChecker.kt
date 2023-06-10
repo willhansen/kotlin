@@ -31,7 +31,7 @@ object FirAssignmentPluginFunctionCallChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!expression.isOverloadAssignCallCandidate()) return
 
-        val calleeReference = expression.calleeReference
+        konst calleeReference = expression.calleeReference
         if (calleeReference.isError()) {
             if (expression.isOverloadedAssignCallError(context.session, calleeReference.diagnostic)) {
                 reporter.reportOn(expression.source, NO_APPLICABLE_ASSIGN_METHOD, context)
@@ -45,7 +45,7 @@ object FirAssignmentPluginFunctionCallChecker : FirFunctionCallChecker() {
         arguments.size == 1 && source?.kind == KtFakeSourceElementKind.DesugaredCompoundAssignment
 
     private fun FirFunctionCall.isOverloadedAssignCallError(session: FirSession, diagnostic: ConeDiagnostic): Boolean {
-        val functionName = when (diagnostic) {
+        konst functionName = when (diagnostic) {
             is ConeAmbiguityError -> diagnostic.name
             is ConeDiagnosticWithSingleCandidate -> diagnostic.candidate.callInfo.name
             is ConeUnresolvedNameError -> diagnostic.name

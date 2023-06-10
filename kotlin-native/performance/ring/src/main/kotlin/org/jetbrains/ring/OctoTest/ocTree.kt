@@ -1,5 +1,5 @@
 
-open class OctoTree<T>(val depth: Int) {
+open class OctoTree<T>(konst depth: Int) {
 
     private var root: Node<T>? = null
     private var actual = false
@@ -11,7 +11,7 @@ open class OctoTree<T>(val depth: Int) {
         var iter = root
         while (true) {
             if (iter == null)           return null
-            else if (iter is Node.Leaf) return iter.value
+            else if (iter is Node.Leaf) return iter.konstue
 
             iter = (iter as Node.Branch<T>).nodes[number(x, y, z, --dep)]
         }
@@ -19,10 +19,10 @@ open class OctoTree<T>(val depth: Int) {
 
     //-------------------------------------------------------------------------//
 
-    fun set(x: Int, y: Int, z: Int, value: T) {
+    fun set(x: Int, y: Int, z: Int, konstue: T) {
         if (root == null) root = Node.Branch()
-        if (root!!.set(x, y, z, value, depth - 1)) {
-            root = Node.Leaf(value)
+        if (root!!.set(x, y, z, konstue, depth - 1)) {
+            root = Node.Leaf(konstue)
         }
         actual = false
     }
@@ -35,39 +35,39 @@ open class OctoTree<T>(val depth: Int) {
 
     sealed class Node<T> {
 
-        abstract fun set(x: Int, y: Int, z: Int, value: T, depth: Int): Boolean
+        abstract fun set(x: Int, y: Int, z: Int, konstue: T, depth: Int): Boolean
 
         //---------------------------------------------------------------------//
 
-        class Leaf<T>(var value: T) : Node<T>() {
+        class Leaf<T>(var konstue: T) : Node<T>() {
 
-            override fun set(x: Int, y: Int, z: Int, value: T, depth: Int): Boolean {
+            override fun set(x: Int, y: Int, z: Int, konstue: T, depth: Int): Boolean {
                 throw UnsupportedOperationException("set on Leaf element")
             }
 
-            override fun toString(): String = "L{$value}"
+            override fun toString(): String = "L{$konstue}"
         }
 
         //---------------------------------------------------------------------//
 
         class Branch<T>() : Node<T>() {
 
-            constructor(value: T, exclude: Int) : this() {
+            constructor(konstue: T, exclude: Int) : this() {
 
                 var i = 0
                 while (i < 8) {
                     if (i != exclude) {
-                        nodes[i] = Leaf(value)
+                        nodes[i] = Leaf(konstue)
                     }
                     i++
                 }
             }
 
-            private fun canClusterize(value: T): Boolean {
+            private fun canClusterize(konstue: T): Boolean {
                 var i = 0
                 while (i < 8) {
-                    val w = nodes[i]
-                    if (w == null || w !is Leaf || value != w.value) {
+                    konst w = nodes[i]
+                    if (w == null || w !is Leaf || konstue != w.konstue) {
                         return false
                     }
                     i++
@@ -75,38 +75,38 @@ open class OctoTree<T>(val depth: Int) {
                 return true
             }
 
-            override fun set(x: Int, y: Int, z: Int, value: T, depth: Int): Boolean {
-                val branchIndex = number(x, y, z, depth)
-                val node = nodes[branchIndex]
+            override fun set(x: Int, y: Int, z: Int, konstue: T, depth: Int): Boolean {
+                konst branchIndex = number(x, y, z, depth)
+                konst node = nodes[branchIndex]
                 when (node) {
                     null -> {
                         if (depth == 0) {
-                            nodes[branchIndex] = Leaf(value)
-                            return canClusterize(value)
+                            nodes[branchIndex] = Leaf(konstue)
+                            return canClusterize(konstue)
                         } else {
                             nodes[branchIndex] = Branch()
                         }
                     }
                     is Leaf<T> -> {
-                        if (node.value == value) {
+                        if (node.konstue == konstue) {
                             return false
                         } else if (depth == 0) {
-                            node.value = value
-                            return canClusterize(value)
+                            node.konstue = konstue
+                            return canClusterize(konstue)
                         }
-                        nodes[branchIndex] = Branch(node.value, number(x, y, z, depth - 1))
+                        nodes[branchIndex] = Branch(node.konstue, number(x, y, z, depth - 1))
                     }
                     else -> {}
                 }
 
-                if (nodes[branchIndex]!!.set(x, y, z, value, depth - 1)) {
-                    nodes[branchIndex] = Leaf(value)
-                    return canClusterize(value)
+                if (nodes[branchIndex]!!.set(x, y, z, konstue, depth - 1)) {
+                    nodes[branchIndex] = Leaf(konstue)
+                    return canClusterize(konstue)
                 }
                 return false
             }
 
-            val nodes = arrayOfNulls<Node<T>>(8)
+            konst nodes = arrayOfNulls<Node<T>>(8)
             override fun toString(): String = nodes.joinToString(prefix = "[", postfix = "]")
         }
     }
@@ -115,7 +115,7 @@ open class OctoTree<T>(val depth: Int) {
 
     companion object {
         fun number(x: Int, y: Int, z: Int, depth: Int): Int {
-            val mask = 1 shl depth
+            konst mask = 1 shl depth
             if (x and mask != 0) {
                 if (y and mask != 0) {
                     if (z and mask != 0)

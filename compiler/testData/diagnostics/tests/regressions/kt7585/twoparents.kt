@@ -9,9 +9,9 @@ class A: X, Y
 
 class B: X, Y
 
-class Out<out T: X>(val x: T)
+class Out<out T: X>(konst x: T)
 
 fun bar(a: Out<A>, b: Out<B>, f: Boolean): Int {
-    val x = if (f) a else b
+    konst x = if (f) a else b
     return x.x.foo()    
 }

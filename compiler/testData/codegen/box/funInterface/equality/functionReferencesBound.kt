@@ -27,7 +27,7 @@ class C {
 }
 
 fun box(): String {
-    val c0 = C()
+    konst c0 = C()
 
     checkEqual(id(c0::target1), id(c0::target1))
     checkEqual(id(c0::target1), target1FromOtherFile(c0))
@@ -40,7 +40,7 @@ fun box(): String {
     checkEqual(id(c0::adapted2), adapted2FromOtherFile(c0))
     checkNotEqual(id(c0::adapted1), id(c0::adapted2))
 
-    val c1 = C()
+    konst c1 = C()
     checkNotEqual(id(c0::target1), id(c1::target1))
     checkNotEqual(id(c0::target1), id(c1::target2))
     checkNotEqual(id(c0::adapted1), id(c1::adapted1))

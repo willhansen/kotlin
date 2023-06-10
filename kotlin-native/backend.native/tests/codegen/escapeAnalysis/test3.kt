@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test3
 
-class A(val s: String)
+class A(konst s: String)
 class B {
     var s: String? = null
 }

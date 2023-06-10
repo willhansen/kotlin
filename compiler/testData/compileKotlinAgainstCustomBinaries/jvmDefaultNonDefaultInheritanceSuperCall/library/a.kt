@@ -1,5 +1,5 @@
 package base
 
 interface UExpression {
-    fun evaluate(): Any? = "fail"
+    fun ekonstuate(): Any? = "fail"
 }

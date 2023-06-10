@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-// KT-128 Support passing only the last closure if all the other parameters have default values
+// KT-128 Support passing only the last closure if all the other parameters have default konstues
 
 fun div(c : String = "", f : () -> Unit) {}
 fun f() {

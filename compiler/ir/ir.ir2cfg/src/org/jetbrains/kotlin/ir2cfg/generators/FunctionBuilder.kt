@@ -25,18 +25,18 @@ import org.jetbrains.kotlin.ir2cfg.graph.BasicBlock
 import org.jetbrains.kotlin.ir2cfg.graph.BlockConnector
 import org.jetbrains.kotlin.ir2cfg.graph.ControlFlowGraph
 
-class FunctionBuilder(val function: IrFunction)  : ControlFlowGraphBuilder {
+class FunctionBuilder(konst function: IrFunction)  : ControlFlowGraphBuilder {
 
-    private val blockBuilderMap = mutableMapOf<IrStatement, BasicBlockBuilder>()
+    private konst blockBuilderMap = mutableMapOf<IrStatement, BasicBlockBuilder>()
 
     private var currentBlockBuilder: BasicBlockBuilder? = null
 
-    private val blocks = mutableListOf<BasicBlock>()
+    private konst blocks = mutableListOf<BasicBlock>()
 
-    private val connectorBuilderMap = mutableMapOf<IrStatement, BlockConnectorBuilder>()
+    private konst connectorBuilderMap = mutableMapOf<IrStatement, BlockConnectorBuilder>()
 
     private fun createBlockBuilder(after: BlockConnectorBuilder?): BasicBlockBuilder {
-        val result = GeneralBlockBuilder(after)
+        konst result = GeneralBlockBuilder(after)
         currentBlockBuilder = result
         return result
     }
@@ -48,27 +48,27 @@ class FunctionBuilder(val function: IrFunction)  : ControlFlowGraphBuilder {
     }
 
     override fun add(element: IrStatement) {
-        val blockBuilder = currentBlockBuilder ?: createBlockBuilder(connectorBuilderMap[element])
+        konst blockBuilder = currentBlockBuilder ?: createBlockBuilder(connectorBuilderMap[element])
         blockBuilder.shiftTo(element)
     }
 
     override fun move(to: IrStatement) {
-        val blockBuilder = blockBuilderMap[to]
+        konst blockBuilder = blockBuilderMap[to]
                            ?: connectorBuilderMap[to]?.let { createBlockBuilder(it) }
                            ?: throw AssertionError("Function generator may move to an element only to the end of a block or to connector")
         currentBlockBuilder = blockBuilder
     }
 
     override fun jump(to: IrStatement) {
-        val blockBuilder = currentBlockBuilder
+        konst blockBuilder = currentBlockBuilder
                            ?: throw AssertionError("Function generator: no default block builder for jump")
-        val block = blockBuilder.build()
+        konst block = blockBuilder.build()
         blocks.add(block)
-        blockBuilderMap.values.remove(blockBuilder)
+        blockBuilderMap.konstues.remove(blockBuilder)
         currentBlockBuilder = null
-        val nextConnectorBuilder = connectorBuilderMap[to] ?: GeneralConnectorBuilder(to)
+        konst nextConnectorBuilder = connectorBuilderMap[to] ?: GeneralConnectorBuilder(to)
         nextConnectorBuilder.addPrevious(block)
-        val previousConnectorBuilder = blockBuilder.incoming
+        konst previousConnectorBuilder = blockBuilder.incoming
         previousConnectorBuilder?.addNext(block)
         connectorBuilderMap[to] = nextConnectorBuilder
         move(to)
@@ -77,7 +77,7 @@ class FunctionBuilder(val function: IrFunction)  : ControlFlowGraphBuilder {
     override fun jump(to: IrStatement, from: IrStatement) {
         currentBlockBuilder = blockBuilderMap[from]
         if (currentBlockBuilder == null) {
-            val blockBuilder = connectorBuilderMap[from]?.let { createBlockBuilder(it) }
+            konst blockBuilder = connectorBuilderMap[from]?.let { createBlockBuilder(it) }
                                ?: throw AssertionError("Function generator may jump after an element only to the end of a block or to connector")
             currentBlockBuilder = blockBuilder
         }
@@ -85,16 +85,16 @@ class FunctionBuilder(val function: IrFunction)  : ControlFlowGraphBuilder {
     }
 
     override fun build(): ControlFlowGraph {
-        for (blockBuilder in blockBuilderMap.values) {
+        for (blockBuilder in blockBuilderMap.konstues) {
             if (currentBlockBuilder == blockBuilder) {
                 currentBlockBuilder = null
             }
-            val block = blockBuilder.build()
+            konst block = blockBuilder.build()
             blocks.add(block)
             blockBuilder.incoming?.addNext(block)
         }
-        val connectors = mutableListOf<BlockConnector>()
-        for (connectorBuilder in connectorBuilderMap.values) {
+        konst connectors = mutableListOf<BlockConnector>()
+        for (connectorBuilder in connectorBuilderMap.konstues) {
             connectors.add(connectorBuilder.build())
         }
         for (connector in connectors) {

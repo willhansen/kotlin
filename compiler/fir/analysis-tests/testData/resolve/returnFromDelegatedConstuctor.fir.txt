@@ -4,10 +4,10 @@ FILE: returnFromDelegatedConstuctor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/String| = R|<local>/a|
+        public final konst a: R|kotlin/String| = R|<local>/a|
             public get(): R|kotlin/String|
 
-        public final val b: R|kotlin/String| = R|<local>/b|
+        public final konst b: R|kotlin/String| = R|<local>/b|
             public get(): R|kotlin/String|
 
         public constructor(): R|StringPair| {
@@ -26,7 +26,7 @@ FILE: returnFromDelegatedConstuctor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/String| = R|<local>/a|
+        public final konst a: R|kotlin/String| = R|<local>/a|
             public get(): R|kotlin/String|
 
     }

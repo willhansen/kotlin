@@ -38,7 +38,7 @@ object JavaClassProperty : IntrinsicPropertyGetter() {
             receiver: StackValue
     ): StackValue? =
             StackValue.operation(returnType) {
-                val actualType = generateImpl(it, receiver)
+                konst actualType = generateImpl(it, receiver)
                 StackValue.coerce(actualType, returnType, it)
             }
 
@@ -47,8 +47,8 @@ object JavaClassProperty : IntrinsicPropertyGetter() {
             v.invokevirtual("java/lang/Object", "getClass", "()Ljava/lang/Class;", false)
         }
 
-        val type = receiver.type
-        val kotlinType = receiver.kotlinType
+        konst type = receiver.type
+        konst kotlinType = receiver.kotlinType
         when {
             type == Type.VOID_TYPE -> {
                 receiver.put(Type.VOID_TYPE, v)
@@ -84,7 +84,7 @@ object JavaClassProperty : IntrinsicPropertyGetter() {
     }
 
     override fun toCallable(fd: FunctionDescriptor, isSuper: Boolean, resolvedCall: ResolvedCall<*>, codegen: ExpressionCodegen): Callable {
-        val classType = codegen.state.typeMapper.mapType(resolvedCall.call.dispatchReceiver!!.type)
+        konst classType = codegen.state.typeMapper.mapType(resolvedCall.call.dispatchReceiver!!.type)
         return object : IntrinsicCallable(getType(Class::class.java), listOf(), classType, null) {
             override fun invokeIntrinsic(v: InstructionAdapter) {
                 generateImpl(v, StackValue.none())

@@ -382,7 +382,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaType')
     PsiElement(COLON)(':')
@@ -417,7 +417,7 @@ KtFile: TypeModifiersParenthesized.kt
       PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaTypeN')
     PsiElement(COLON)(':')
@@ -454,7 +454,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaParameter')
     PsiElement(COLON)(':')
@@ -489,7 +489,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaParameterN')
     PsiElement(COLON)(':')
@@ -520,7 +520,7 @@ KtFile: TypeModifiersParenthesized.kt
       PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReturnValue')
     PsiElement(COLON)(':')
@@ -550,7 +550,7 @@ KtFile: TypeModifiersParenthesized.kt
           PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReturnValueN')
     PsiElement(COLON)(':')
@@ -582,7 +582,7 @@ KtFile: TypeModifiersParenthesized.kt
             PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReceiver')
     PsiElement(COLON)(':')
@@ -618,7 +618,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReceiverN')
     PsiElement(COLON)(':')
@@ -656,7 +656,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendT')
     PsiElement(COLON)(':')
@@ -670,7 +670,7 @@ KtFile: TypeModifiersParenthesized.kt
           PsiElement(IDENTIFIER)('T')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendTN')
     PsiElement(COLON)(':')
@@ -686,7 +686,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFun')
     PsiElement(COLON)(':')
@@ -708,7 +708,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('Unit')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFunN')
     PsiElement(COLON)(':')
@@ -734,7 +734,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFun')
     PsiElement(COLON)(':')
@@ -762,7 +762,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('Unit')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFunN')
     PsiElement(COLON)(':')
@@ -794,7 +794,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFunReturnValueN')
     PsiElement(COLON)(':')
@@ -818,7 +818,7 @@ KtFile: TypeModifiersParenthesized.kt
             PsiElement(QUEST)('?')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFunNReturnValueN')
     PsiElement(COLON)(':')
@@ -846,7 +846,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFunReceiverN')
     PsiElement(COLON)(':')
@@ -876,7 +876,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('Unit')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFunNReceiverN')
     PsiElement(COLON)(':')
@@ -910,7 +910,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFunReturnValueN')
     PsiElement(COLON)(':')
@@ -934,7 +934,7 @@ KtFile: TypeModifiersParenthesized.kt
             PsiElement(QUEST)('?')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendFunNReturnValueN')
     PsiElement(COLON)(':')
@@ -962,7 +962,7 @@ KtFile: TypeModifiersParenthesized.kt
         PsiElement(QUEST)('?')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFunReceiverN')
     PsiElement(COLON)(':')
@@ -992,7 +992,7 @@ KtFile: TypeModifiersParenthesized.kt
               PsiElement(IDENTIFIER)('Unit')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('suspendExtFunNReceiverN')
     PsiElement(COLON)(':')

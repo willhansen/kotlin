@@ -1,6 +1,6 @@
 package localObjects {
   object ~A~A {
-    ~x~val x : Int
+    ~x~konst x : Int
   }
 
   open class Foo {
@@ -9,7 +9,7 @@ package localObjects {
 
   fun test() {
     `A`A.`x`x
-    val b = object : Foo {
+    konst b = object : Foo {
     }
     b.`foo()`foo()
 
@@ -19,5 +19,5 @@ package localObjects {
     `B`B.`B.foo()`foo()
   }
 
-  val bb = `!`B.foo()
+  konst bb = `!`B.foo()
 }

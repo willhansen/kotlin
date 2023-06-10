@@ -18,7 +18,7 @@ FILE: enums2.kt
             super<R|kotlin/Enum<SomeEnum>|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val x: Some = R|<local>/x|
+        public? final? [IsFromPrimaryConstructor=true] konst x: Some = R|<local>/x|
             public? [ContainingClassKey=SomeEnum] get(): Some
 
         public final static [ContainingClassKey=SomeEnum] enum entry FIRST: R|SomeEnum| = object : R|SomeEnum| {
@@ -45,13 +45,13 @@ FILE: enums2.kt
 
         public? abstract fun check(y: Some): Boolean
 
-        public final static [ContainingClassKey=SomeEnum] fun values(): R|kotlin/Array<SomeEnum>| {
+        public final static [ContainingClassKey=SomeEnum] fun konstues(): R|kotlin/Array<SomeEnum>| {
         }
 
-        public final static [ContainingClassKey=SomeEnum] fun valueOf(value: R|kotlin/String|): R|SomeEnum| {
+        public final static [ContainingClassKey=SomeEnum] fun konstueOf(konstue: R|kotlin/String|): R|SomeEnum| {
         }
 
-        public final static [ContainingClassKey=SomeEnum] val entries: R|kotlin/enums/EnumEntries<SomeEnum>|
+        public final static [ContainingClassKey=SomeEnum] konst entries: R|kotlin/enums/EnumEntries<SomeEnum>|
             public get(): R|kotlin/enums/EnumEntries<SomeEnum>|
 
     }

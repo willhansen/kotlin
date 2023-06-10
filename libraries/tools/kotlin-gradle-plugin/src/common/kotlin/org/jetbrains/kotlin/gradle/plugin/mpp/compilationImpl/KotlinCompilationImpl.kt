@@ -26,24 +26,24 @@ import org.jetbrains.kotlin.tooling.core.MutableExtras
 import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 
 internal class KotlinCompilationImpl constructor(
-    private val params: Params
+    private konst params: Params
 ) : InternalKotlinCompilation<KotlinCommonOptions> {
 
     //region Params
 
     data class Params(
-        val target: KotlinTarget,
-        val compilationName: String,
-        val sourceSets: KotlinCompilationSourceSetsContainer,
-        val dependencyConfigurations: KotlinCompilationConfigurationsContainer,
-        val compilationTaskNames: KotlinCompilationTaskNamesContainer,
-        val processResourcesTaskName: String?,
-        val output: KotlinCompilationOutput,
-        val compilerOptions: HasCompilerOptions<*>,
-        val kotlinOptions: KotlinCommonOptions,
-        val compilationAssociator: KotlinCompilationAssociator,
-        val compilationFriendPathsResolver: KotlinCompilationFriendPathsResolver,
-        val compilationSourceSetInclusion: KotlinCompilationSourceSetInclusion
+        konst target: KotlinTarget,
+        konst compilationName: String,
+        konst sourceSets: KotlinCompilationSourceSetsContainer,
+        konst dependencyConfigurations: KotlinCompilationConfigurationsContainer,
+        konst compilationTaskNames: KotlinCompilationTaskNamesContainer,
+        konst processResourcesTaskName: String?,
+        konst output: KotlinCompilationOutput,
+        konst compilerOptions: HasCompilerOptions<*>,
+        konst kotlinOptions: KotlinCommonOptions,
+        konst compilationAssociator: KotlinCompilationAssociator,
+        konst compilationFriendPathsResolver: KotlinCompilationFriendPathsResolver,
+        konst compilationSourceSetInclusion: KotlinCompilationSourceSetInclusion
     )
 
     //endregion
@@ -51,28 +51,28 @@ internal class KotlinCompilationImpl constructor(
 
     //region direct access / convenience properties
 
-    override val project get() = params.target.project
+    override konst project get() = params.target.project
 
-    override val target: KotlinTarget
+    override konst target: KotlinTarget
         get() = params.target
 
-    override val extras: MutableExtras = mutableExtrasOf()
+    override konst extras: MutableExtras = mutableExtrasOf()
 
-    val sourceSets get() = params.sourceSets
+    konst sourceSets get() = params.sourceSets
 
-    override val configurations: KotlinCompilationConfigurationsContainer
+    override konst configurations: KotlinCompilationConfigurationsContainer
         get() = params.dependencyConfigurations
 
-    override val compilationName: String
+    override konst compilationName: String
         get() = params.compilationName
 
-    override val output: KotlinCompilationOutput
+    override konst output: KotlinCompilationOutput
         get() = params.output
 
-    override val processResourcesTaskName: String?
+    override konst processResourcesTaskName: String?
         get() = params.processResourcesTaskName
 
-    override val friendPaths: Iterable<FileCollection>
+    override konst friendPaths: Iterable<FileCollection>
         get() = params.compilationFriendPathsResolver.resolveFriendPaths(this)
 
     //endregion
@@ -81,16 +81,16 @@ internal class KotlinCompilationImpl constructor(
     //region Implement Source Set Management
 
 
-    override val defaultSourceSet: KotlinSourceSet
+    override konst defaultSourceSet: KotlinSourceSet
         get() = sourceSets.defaultSourceSet
 
-    override val allKotlinSourceSets: ObservableSet<KotlinSourceSet>
+    override konst allKotlinSourceSets: ObservableSet<KotlinSourceSet>
         get() = sourceSets.allKotlinSourceSets
 
-    override val kotlinSourceSets: ObservableSet<KotlinSourceSet>
+    override konst kotlinSourceSets: ObservableSet<KotlinSourceSet>
         get() = sourceSets.kotlinSourceSets
 
-    @Deprecated("scheduled for removal with Kotlin 2.0")
+    @Deprecated("scheduled for remokonst with Kotlin 2.0")
     override fun source(sourceSet: KotlinSourceSet) {
         sourceSets.source(sourceSet)
     }
@@ -105,30 +105,30 @@ internal class KotlinCompilationImpl constructor(
 
     //region Dependency Configuration Management
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = configurations.apiConfiguration.name
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = configurations.implementationConfiguration.name
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = configurations.compileOnlyConfiguration.name
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = configurations.runtimeOnlyConfiguration.name
 
-    override val compileDependencyConfigurationName: String
+    override konst compileDependencyConfigurationName: String
         get() = configurations.compileDependencyConfiguration.name
 
-    override val runtimeDependencyConfigurationName: String?
+    override konst runtimeDependencyConfigurationName: String?
         get() = configurations.runtimeDependencyConfiguration?.name
 
     override var compileDependencyFiles: FileCollection = configurations.compileDependencyConfiguration
 
     override var runtimeDependencyFiles: FileCollection? = configurations.runtimeDependencyConfiguration
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
-    override val relatedConfigurationNames: List<String> = listOfNotNull(
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
+    override konst relatedConfigurationNames: List<String> = listOfNotNull(
         apiConfigurationName,
         implementationConfigurationName,
         compileOnlyConfigurationName,
@@ -149,24 +149,24 @@ internal class KotlinCompilationImpl constructor(
 
     //region Compile Tasks
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = params.compilationTaskNames.compileTaskName
 
 
-    override val compileAllTaskName: String
+    override konst compileAllTaskName: String
         get() = params.compilationTaskNames.compileAllTaskName
 
     @Suppress("deprecation")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: KotlinCompile<KotlinCommonOptions>
+    override konst compileKotlinTask: KotlinCompile<KotlinCommonOptions>
         get() = compileKotlinTaskProvider.get()
 
     @Suppress("deprecation")
     @Deprecated("Replaced with compileTaskProvider", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTaskProvider: TaskProvider<out KotlinCompile<KotlinCommonOptions>>
+    override konst compileKotlinTaskProvider: TaskProvider<out KotlinCompile<KotlinCommonOptions>>
         get() = target.project.locateTask(compileKotlinTaskName) ?: throw GradleException("Couldn't locate  task $compileKotlinTaskName")
 
-    override val compileTaskProvider: TaskProvider<out KotlinCompilationTask<*>>
+    override konst compileTaskProvider: TaskProvider<out KotlinCompilationTask<*>>
         get() = target.project.locateTask(compileKotlinTaskName) ?: throw GradleException("Couldn't locate task $compileKotlinTaskName")
 
     //endregion
@@ -174,25 +174,25 @@ internal class KotlinCompilationImpl constructor(
 
     //region CompilerOptions & KotlinOptions
 
-    override val kotlinOptions: KotlinCommonOptions
+    override konst kotlinOptions: KotlinCommonOptions
         get() = params.kotlinOptions
 
-    override val compilerOptions: HasCompilerOptions<*>
+    override konst compilerOptions: HasCompilerOptions<*>
         get() = params.compilerOptions
 
     //endregion
 
     //region Attributes
 
-    private val attributes by lazy { HierarchyAttributeContainer(target.attributes) }
+    private konst attributes by lazy { HierarchyAttributeContainer(target.attributes) }
 
     override fun getAttributes(): AttributeContainer = attributes
 
     // endregion
 
-    private val associateWithImpl = mutableSetOf<KotlinCompilation<*>>()
+    private konst associateWithImpl = mutableSetOf<KotlinCompilation<*>>()
 
-    override val associateWith: List<KotlinCompilation<*>>
+    override konst associateWith: List<KotlinCompilation<*>>
         get() = associateWithImpl.toList()
 
     override fun associateWith(other: KotlinCompilation<*>) {

@@ -9,7 +9,7 @@ class Kt1619Test {
     }
 
     fun testCollectionNotNullCanBeUsedForNullables(): Int {
-        val list: List<String> = arrayListOf("foo", "bar")
+        konst list: List<String> = arrayListOf("foo", "bar")
         return doSomething(list)
     }
 }

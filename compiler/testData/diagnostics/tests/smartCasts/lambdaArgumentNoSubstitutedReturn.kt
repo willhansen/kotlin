@@ -1,20 +1,20 @@
 // FIR_IDENTICAL
-class Indexed<T>(val x: T, val y: Int)
+class Indexed<T>(konst x: T, konst y: Int)
 
-class Value<out T>(val x: T)
+class Value<out T>(konst x: T)
 
 interface WithValue<out T> {
-    fun value(): Value<T>
+    fun konstue(): Value<T>
 }
 
-class Singleton<T>(val x: T) : WithValue<T> {
-    override fun value() = Value(x)
+class Singleton<T>(konst x: T) : WithValue<T> {
+    override fun konstue() = Value(x)
 }
 
-class WithValueIndexed<T>(val f: () -> Value<T>) : WithValue<Indexed<T>> {
-    override fun value() = Value(Indexed(f().x, 0))
+class WithValueIndexed<T>(konst f: () -> Value<T>) : WithValue<Indexed<T>> {
+    override fun konstue() = Value(Indexed(f().x, 0))
 }
 
 fun <T> Singleton<out T>.indexed(): WithValue<Indexed<T>> {
-    return WithValueIndexed { value() }
+    return WithValueIndexed { konstue() }
 }

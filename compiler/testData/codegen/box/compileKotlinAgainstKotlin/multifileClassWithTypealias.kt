@@ -15,6 +15,6 @@ typealias LS = List<S>
 import java.util.Arrays
 
 fun box(): S {
-    val l: LS = Arrays.asList("OK")
+    konst l: LS = Arrays.asList("OK")
     return l[0]
 }

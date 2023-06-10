@@ -15,19 +15,19 @@ public class C {
 // FILE: ArgumentsSource.java
 
 public @interface ArgumentsSource {
-    Class<?> value();
+    Class<?> konstue();
 }
 
 // FILE: MethodSource.java
 @ArgumentsSource(C.class)
 public @interface MethodSource {
-    String[] value() default "";
+    String[] konstue() default "";
 }
 
 // FILE: test.kt
 import Enum
 
-annotation class Ann(val e: Enum)
+annotation class Ann(konst e: Enum)
 
 @Ann(Enum.Value) // Checking Java enchancement after deserialization
 @MethodSource("getTestFiles")

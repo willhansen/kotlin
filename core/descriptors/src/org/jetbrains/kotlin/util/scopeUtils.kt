@@ -38,7 +38,7 @@ fun <T> Collection<T>?.concat(collection: Collection<T>): Collection<T>? {
         return this
     }
 
-    val result = LinkedHashSet(this)
+    konst result = LinkedHashSet(this)
     result.addAll(collection)
     return result
 }
@@ -65,10 +65,10 @@ inline fun <Scope, T> getFromAllScopes(firstScope: Scope, restScopes: Array<Scop
 }
 
 inline fun <Scope, R> flatMapScopes(scope1: Scope?, scope2: Scope?, transform: (Scope) -> Collection<R>): Collection<R> {
-    val results1 = if (scope1 != null) transform(scope1) else emptyList()
+    konst results1 = if (scope1 != null) transform(scope1) else emptyList()
     if (scope2 == null) return results1
     else {
-        val results2 = transform(scope2)
+        konst results2 = transform(scope2)
         if (results1.isEmpty()) return results2
         else return results1.toMutableList().also {
             it.addAll(results2)
@@ -91,7 +91,7 @@ inline fun <Scope, T : ClassifierDescriptor> getFirstClassifierDiscriminateHeade
     // NOTE: This is performance-sensitive; please don't replace with map().firstOrNull()
     var result: T? = null
     for (scope in scopes) {
-        val newResult = callback(scope)
+        konst newResult = callback(scope)
         if (newResult != null) {
             if (newResult is ClassifierDescriptorWithTypeParameters && newResult.isExpect) {
                 if (result == null) result = newResult

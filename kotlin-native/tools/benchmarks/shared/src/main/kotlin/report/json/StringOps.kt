@@ -17,17 +17,17 @@
 package org.jetbrains.report.json
 
 private fun toHexChar(i: Int) : Char {
-    val d = i and 0xf
+    konst d = i and 0xf
     return if (d < 10) (d + '0'.code).toChar()
     else (d - 10 + 'a'.code).toChar()
 }
 
-private val ESCAPE_CHARS: Array<String?> = arrayOfNulls<String>(128).apply {
+private konst ESCAPE_CHARS: Array<String?> = arrayOfNulls<String>(128).apply {
     for (c in 0..0x1f) {
-        val c1 = toHexChar(c shr 12)
-        val c2 = toHexChar(c shr 8)
-        val c3 = toHexChar(c shr 4)
-        val c4 = toHexChar(c)
+        konst c1 = toHexChar(c shr 12)
+        konst c2 = toHexChar(c shr 8)
+        konst c3 = toHexChar(c shr 4)
+        konst c4 = toHexChar(c)
         this[c] = "\\u$c1$c2$c3$c4"
     }
     this['"'.code] = "\\\""
@@ -39,21 +39,21 @@ private val ESCAPE_CHARS: Array<String?> = arrayOfNulls<String>(128).apply {
     this[0x0c] = "\\f"
 }
 
-internal fun StringBuilder.printQuoted(value: String)  {
+internal fun StringBuilder.printQuoted(konstue: String)  {
     append(STRING)
     var lastPos = 0
-    val length = value.length
+    konst length = konstue.length
     for (i in 0 until length) {
-        val c = value[i].code
+        konst c = konstue[i].code
         // Do not replace this constant with C2ESC_MAX (which is smaller than ESCAPE_CHARS size),
         // otherwise JIT won't eliminate range check and won't vectorize this loop
         if (c >= ESCAPE_CHARS.size) continue // no need to escape
-        val esc = ESCAPE_CHARS[c] ?: continue
-        append(value, lastPos, i) // flush prev
+        konst esc = ESCAPE_CHARS[c] ?: continue
+        append(konstue, lastPos, i) // flush prev
         append(esc)
         lastPos = i + 1
     }
-    append(value, lastPos, length)
+    append(konstue, lastPos, length)
     append(STRING)
 }
 

@@ -8,7 +8,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = Annotation
         symbol = <constructor>(vararg strings: kotlin.String): Annotation
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = strings
             receiverType = null

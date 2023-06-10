@@ -24,8 +24,8 @@ class ExampleInstrumentedTest {
     @Test
     fun createAndAddView() {
 
-        val container = activityTestRule.activity.findViewById<ViewGroup>(android.R.id.content)
-        val testView = TestView(activityTestRule.activity)
+        konst container = activityTestRule.activity.findViewById<ViewGroup>(android.R.id.content)
+        konst testView = TestView(activityTestRule.activity)
 
         container.addView(testView)
 

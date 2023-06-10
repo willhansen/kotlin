@@ -17,8 +17,8 @@
 -keep class * implements kotlin.reflect.jvm.internal.impl.builtins.BuiltInsLoader { public protected *; }
 
 -keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
+    public static **[] konstues();
+    public static ** konstueOf(java.lang.String);
 }
 
 -keepclassmembers class * {

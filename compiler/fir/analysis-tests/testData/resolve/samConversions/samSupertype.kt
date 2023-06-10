@@ -26,7 +26,7 @@ fun main() {
 
     JavaUsage.foo({ it > 1 })
 
-    val x = { x: Int -> x > 1 }
+    konst x = { x: Int -> x > 1 }
 
     JavaUsage.foo(x)
 }

@@ -14,10 +14,10 @@ import java.lang.AssertionError
 fun Project.runLifecycleAwareTest(block: suspend Project.() -> Unit) {
     kotlinPluginLifecycle.launch { block() }
     try {
-        (this as ProjectInternal).evaluate()
+        (this as ProjectInternal).ekonstuate()
     } catch (t: Throwable) {
         /* Prefer throwing AssertionError directly, if possible */
-        val allCauses = t.withLinearClosure { it.cause }
+        konst allCauses = t.withLinearClosure { it.cause }
         allCauses.find { it is AssertionError }?.let { throw it }
         throw t
     }

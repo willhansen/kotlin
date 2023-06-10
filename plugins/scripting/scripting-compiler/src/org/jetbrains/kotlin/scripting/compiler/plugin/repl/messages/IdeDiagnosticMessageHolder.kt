@@ -13,24 +13,24 @@ import org.w3c.dom.ls.DOMImplementationLS
 import javax.xml.parsers.DocumentBuilderFactory
 
 class IdeDiagnosticMessageHolder : DiagnosticMessageHolder {
-    private val diagnostics = arrayListOf<Pair<Diagnostic, String>>()
+    private konst diagnostics = arrayListOf<Pair<Diagnostic, String>>()
 
     override fun report(diagnostic: Diagnostic, file: PsiFile, render: String) {
         diagnostics.add(Pair(diagnostic, render))
     }
 
     override fun renderMessage(): String {
-        val docFactory = DocumentBuilderFactory.newInstance()
-        val docBuilder = docFactory.newDocumentBuilder()
-        val errorReport = docBuilder.newDocument()
+        konst docFactory = DocumentBuilderFactory.newInstance()
+        konst docBuilder = docFactory.newDocumentBuilder()
+        konst errorReport = docBuilder.newDocument()
 
-        val rootElement = errorReport.createElement("report")
+        konst rootElement = errorReport.createElement("report")
         errorReport.appendChild(rootElement)
 
         for ((diagnostic, message) in diagnostics) {
-            val errorRange = DiagnosticUtils.firstRange(diagnostic.textRanges)
+            konst errorRange = DiagnosticUtils.firstRange(diagnostic.textRanges)
 
-            val reportEntry = errorReport.createElement("reportEntry")
+            konst reportEntry = errorReport.createElement("reportEntry")
             reportEntry.setAttribute("severity", diagnostic.severity.toString())
             reportEntry.setAttribute("rangeStart", errorRange.startOffset.toString())
             reportEntry.setAttribute("rangeEnd", errorRange.endOffset.toString())
@@ -39,8 +39,8 @@ class IdeDiagnosticMessageHolder : DiagnosticMessageHolder {
             rootElement.appendChild(reportEntry)
         }
 
-        val domImplementation = errorReport.implementation as DOMImplementationLS
-        val lsSerializer = domImplementation.createLSSerializer()
+        konst domImplementation = errorReport.implementation as DOMImplementationLS
+        konst lsSerializer = domImplementation.createLSSerializer()
         return lsSerializer.writeToString(errorReport)
     }
 }

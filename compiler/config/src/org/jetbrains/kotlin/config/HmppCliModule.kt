@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.config
 
-class HmppCliModule(val name: String, val sources: Set<String>) {
+class HmppCliModule(konst name: String, konst sources: Set<String>) {
     override fun toString(): String {
         return "Module $name"
     }
@@ -16,8 +16,8 @@ class HmppCliModule(val name: String, val sources: Set<String>) {
  *   (module without dependencies will be the first)
  */
 class HmppCliModuleStructure(
-    val modules: List<HmppCliModule>,
-    val dependenciesMap: Map<HmppCliModule, List<HmppCliModule>>
+    konst modules: List<HmppCliModule>,
+    konst dependenciesMap: Map<HmppCliModule, List<HmppCliModule>>
 )
 
 fun HmppCliModuleStructure.getModuleNameForSource(source: String): String? {

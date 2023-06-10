@@ -3,7 +3,7 @@
 import kotlin.test.*
 
 fun box(): String {
-    val m = HashMap<String, String>()
+    konst m = HashMap<String, String>()
     m["a"] = "A"
     m["a"] += "B"
 

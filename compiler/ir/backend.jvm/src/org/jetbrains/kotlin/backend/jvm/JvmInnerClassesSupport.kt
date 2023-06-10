@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.name.Name
 import java.util.concurrent.ConcurrentHashMap
 
-class JvmInnerClassesSupport(private val irFactory: IrFactory) : InnerClassesSupport {
-    private val outerThisDeclarations = ConcurrentHashMap<IrClass, IrField>()
-    private val innerClassConstructors = ConcurrentHashMap<IrConstructor, IrConstructor>()
-    private val originalInnerClassPrimaryConstructorByClass = ConcurrentHashMap<IrClass, IrConstructor>()
+class JvmInnerClassesSupport(private konst irFactory: IrFactory) : InnerClassesSupport {
+    private konst outerThisDeclarations = ConcurrentHashMap<IrClass, IrField>()
+    private konst innerClassConstructors = ConcurrentHashMap<IrConstructor, IrConstructor>()
+    private konst originalInnerClassPrimaryConstructorByClass = ConcurrentHashMap<IrClass, IrConstructor>()
 
     override fun getOuterThisField(innerClass: IrClass): IrField =
         outerThisDeclarations.getOrPut(innerClass) {
@@ -36,7 +36,7 @@ class JvmInnerClassesSupport(private val irFactory: IrFactory) : InnerClassesSup
         }
 
     override fun getInnerClassConstructorWithOuterThisParameter(innerClassConstructor: IrConstructor): IrConstructor {
-        val innerClass = innerClassConstructor.parent as IrClass
+        konst innerClass = innerClassConstructor.parent as IrClass
         assert(innerClass.isInner) { "Class is not inner: ${(innerClassConstructor.parent as IrClass).dump()}" }
 
         return innerClassConstructors.getOrPut(innerClassConstructor) {
@@ -64,13 +64,13 @@ class JvmInnerClassesSupport(private val irFactory: IrFactory) : InnerClassesSup
             copyAnnotationsFrom(oldConstructor)
             copyTypeParametersFrom(oldConstructor)
 
-            val outerThisValueParameter = buildValueParameter(this) {
+            konst outerThisValueParameter = buildValueParameter(this) {
                 origin = JvmLoweredDeclarationOrigin.FIELD_FOR_OUTER_THIS
                 name = Name.identifier(AsmUtil.CAPTURED_THIS_FIELD)
                 index = 0
                 type = oldConstructor.parentAsClass.parentAsClass.defaultType
             }
-            valueParameters = listOf(outerThisValueParameter) + oldConstructor.valueParameters.map { it.copyTo(this, index = it.index + 1) }
+            konstueParameters = listOf(outerThisValueParameter) + oldConstructor.konstueParameters.map { it.copyTo(this, index = it.index + 1) }
             metadata = oldConstructor.metadata
         }
 }

@@ -17,27 +17,27 @@ import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 import org.jetbrains.kotlin.project.model.KpmVariantResolution
 
 interface GradleKpmVariantCompilationDataInternal<T : KotlinCommonOptions> : GradleKpmVariantCompilationData<T> {
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = lowerCamelCaseName("compile", compilationPurpose.takeIf { it != "main" }, "Kotlin", compilationClassifier)
 
-    override val compileAllTaskName: String
+    override konst compileAllTaskName: String
         get() = owner.disambiguateName("classes")
 
-    override val kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
+    override konst kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
         get() = owner.withRefinesClosure.filterIsInstance<GradleKpmVariant>().associate { it.disambiguateName("") to it.kotlinSourceRoots }
 
-    override val friendPaths: Iterable<FileCollection>
+    override konst friendPaths: Iterable<FileCollection>
         get() {
             // TODO note for Android: see the friend artifacts code in KotlinAndroidCompilation; should we port it here?
             return listOf(
                 project.filesProvider {
-                    val friendVariants = resolveFriendVariants()
-                    val friendModuleClassifiers = friendVariants.map { it.containingModule.moduleClassifier }.toSet()
+                    konst friendVariants = resolveFriendVariants()
+                    konst friendModuleClassifiers = friendVariants.map { it.containingModule.moduleClassifier }.toSet()
                     owner.compileDependenciesConfiguration
                         .incoming.artifactView { view ->
                             view.componentFilter { id ->
                                 // FIXME rewrite using the proper module resolution after those changes are merged
-                                val asProject = id as? ProjectComponentIdentifier
+                                konst asProject = id as? ProjectComponentIdentifier
                                 asProject?.build?.isCurrentBuild == true &&
                                         asProject.projectPath == owner.project.path
                             }
@@ -49,15 +49,15 @@ interface GradleKpmVariantCompilationDataInternal<T : KotlinCommonOptions> : Gra
             )
         }
 
-    override val moduleName: String
+    override konst moduleName: String
         get() = owner.ownModuleName()
 
     private fun resolveFriendVariants(): Iterable<GradleKpmVariant> {
-        val moduleResolver = GradleKpmModuleDependencyResolver.getForCurrentBuild(project)
-        val variantResolver = KpmGradleModuleVariantResolver.getForCurrentBuild(project)
-        val dependencyGraphResolver = GradleKpmDependencyGraphResolver(moduleResolver)
+        konst moduleResolver = GradleKpmModuleDependencyResolver.getForCurrentBuild(project)
+        konst variantResolver = KpmGradleModuleVariantResolver.getForCurrentBuild(project)
+        konst dependencyGraphResolver = GradleKpmDependencyGraphResolver(moduleResolver)
 
-        val friendModules =
+        konst friendModules =
             ((dependencyGraphResolver.resolveDependencyGraph(owner.containingModule) as? GradleKpmDependencyGraph)
                 ?: error("Failed to resolve dependencies of ${owner.containingModule}"))
                 .allDependencyModules

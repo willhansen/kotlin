@@ -151,7 +151,7 @@ INSTANTIATE_NAMED_TEST(
         std::make_tuple("4_2", 4, 2, 4));
 
 TEST(AlignmentTest, ObjectAlignment) {
-    static_assert(IsValidAlignment(kObjectAlignment), "kObjectAlignment must be a valid alignment");
+    static_assert(IsValidAlignment(kObjectAlignment), "kObjectAlignment must be a konstid alignment");
     static_assert(kObjectAlignment % alignof(KLong) == 0, "");
     static_assert(kObjectAlignment % alignof(KDouble) == 0, "");
 }

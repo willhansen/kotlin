@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 class A {
-    val prop = 1
+    konst prop = 1
 
     fun foo() {
         prop
@@ -9,14 +9,14 @@ class A {
 }
 
 fun box() {
-    val a = A()
+    konst a = A()
     a.prop
     a.foo()
 }
 
 // TODO: The JVM_IR backend has an extra line number on the return. This causes line
 // three to be hit both on entry to the constructor and on exit after storing the
-// value of prop.
+// konstue of prop.
 
 // EXPECTATIONS JVM JVM_IR
 // test.kt:12 box

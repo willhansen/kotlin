@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.linkage.partial.PartialLinkageUtils.File as PLFile
 
 interface PartialLinkageSupportForLowerings {
-    val isEnabled: Boolean
+    konst isEnabled: Boolean
 
     fun throwLinkageError(
         partialLinkageCase: PartialLinkageCase,
@@ -20,8 +20,8 @@ interface PartialLinkageSupportForLowerings {
     ): IrCall
 
     companion object {
-        val DISABLED = object : PartialLinkageSupportForLowerings {
-            override val isEnabled get() = false
+        konst DISABLED = object : PartialLinkageSupportForLowerings {
+            override konst isEnabled get() = false
             override fun throwLinkageError(
                 partialLinkageCase: PartialLinkageCase,
                 element: IrElement,

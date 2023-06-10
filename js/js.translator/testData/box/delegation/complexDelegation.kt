@@ -5,15 +5,15 @@ interface C {
     fun f(): String
 }
 
-class B(val value: String) : C {
-    override fun f() = value
+class B(konst konstue: String) : C {
+    override fun f() = konstue
 }
 
-val b: Any = B("O")
+konst b: Any = B("O")
 
-val x = B("failure1")
-val y = B("K")
-val z = B("failure2")
+konst x = B("failure1")
+konst y = B("K")
+konst z = B("failure2")
 
 fun selector() = 2
 

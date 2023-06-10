@@ -12,7 +12,7 @@ class Foo {
 var setterInvoked = 0
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Delegate<T: Int>(val ignored: T) {
+konstue class Delegate<T: Int>(konst ignored: T) {
 
     operator fun getValue(thisRef: Any?, prop: Any?) = Foo.a
 

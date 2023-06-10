@@ -41,22 +41,22 @@ class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfigurat
         configuration: ScriptCompilationConfiguration
     ): ResultWithDiagnostics<ReplCompletionResult> =
         withMessageCollector(snippet) { messageCollector ->
-            val analyzeResult = analyzeWithCursor(
+            konst analyzeResult = analyzeWithCursor(
                 messageCollector, snippet, configuration, cursor
             ) { snippet, cursorAbs ->
-                val newText =
+                konst newText =
                     prepareCodeForCompletion(snippet.text, cursorAbs)
                 object : SourceCode {
-                    override val text: String
+                    override konst text: String
                         get() = newText
-                    override val name: String?
+                    override konst name: String?
                         get() = snippet.name
-                    override val locationId: String?
+                    override konst locationId: String?
                         get() = snippet.locationId
                 }
             }
 
-            with(analyzeResult.valueOr { return it }) {
+            with(analyzeResult.konstueOr { return it }) {
                 return getKJvmCompletion(
                     ktScript,
                     bindingContext,
@@ -84,12 +84,12 @@ class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfigurat
         configuration: ScriptCompilationConfiguration
     ): ResultWithDiagnostics<ReplAnalyzerResult> {
         return withMessageCollector(snippet) { messageCollector ->
-            val analyzeResult = analyzeWithCursor(
+            konst analyzeResult = analyzeWithCursor(
                 messageCollector, snippet, configuration
             )
 
-            with(analyzeResult.valueOr { return it }) {
-                val resultRenderedType = resultProperty?.let {
+            with(analyzeResult.konstueOr { return it }) {
+                konst resultRenderedType = resultProperty?.let {
                     DescriptorRenderer.SHORT_NAMES_IN_TYPES.renderType(it.type)
                 }
                 return ReplAnalyzerResult {
@@ -108,30 +108,30 @@ class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfigurat
         getNewSnippet: (SourceCode, Int) -> SourceCode = { code, _ -> code }
     ): ResultWithDiagnostics<AnalyzeWithCursorResult> {
 
-        val initialConfiguration = configuration.refineBeforeParsing(snippet).valueOr {
+        konst initialConfiguration = configuration.refineBeforeParsing(snippet).konstueOr {
             return it
         }
 
-        val cursorAbs = cursor?.calcAbsolute(snippet) ?: -1
-        val newSnippet = if (cursorAbs == -1) snippet else getNewSnippet(snippet, cursorAbs)
+        konst cursorAbs = cursor?.calcAbsolute(snippet) ?: -1
+        konst newSnippet = if (cursorAbs == -1) snippet else getNewSnippet(snippet, cursorAbs)
 
-        val compilationState = state.getCompilationState(initialConfiguration) as ReplCompilationState<*>
+        konst compilationState = state.getCompilationState(initialConfiguration) as ReplCompilationState<*>
 
         updateResolutionFilterWithHistory(configuration)
 
-        val (_, errorHolder, snippetKtFile) = prepareForAnalyze(
+        konst (_, errorHolder, snippetKtFile) = prepareForAnalyze(
             newSnippet,
             messageCollector,
             compilationState,
             failOnSyntaxErrors = false
-        ).valueOr { return it }
+        ).konstueOr { return it }
 
-        val analyzerEngine = compilationState.analyzerEngine as IdeLikeReplCodeAnalyzer
-        val analysisResult =
+        konst analyzerEngine = compilationState.analyzerEngine as IdeLikeReplCodeAnalyzer
+        konst analysisResult =
             analyzerEngine.statelessAnalyzeWithImportedScripts(snippetKtFile, emptyList(), state.getNextLineNo() + 1)
         AnalyzerWithCompilerReport.reportDiagnostics(analysisResult.diagnostics, errorHolder, renderDiagnosticName = false)
 
-        val (_, bindingContext, resolutionFacade, moduleDescriptor, resultProperty) = when (analysisResult) {
+        konst (_, bindingContext, resolutionFacade, moduleDescriptor, resultProperty) = when (analysisResult) {
             is IdeLikeReplCodeAnalyzer.ReplLineAnalysisResultWithStateless.Stateless -> {
                 analysisResult
             }
@@ -149,12 +149,12 @@ class KJvmReplCompilerWithIdeServices(hostConfiguration: ScriptingHostConfigurat
 
     companion object {
         data class AnalyzeWithCursorResult(
-            val ktScript: KtFile,
-            val bindingContext: BindingContext,
-            val resolutionFacade: KotlinResolutionFacadeForRepl,
-            val moduleDescriptor: ModuleDescriptor,
-            val cursorAbs: Int,
-            val resultProperty: PropertyDescriptor?,
+            konst ktScript: KtFile,
+            konst bindingContext: BindingContext,
+            konst resolutionFacade: KotlinResolutionFacadeForRepl,
+            konst moduleDescriptor: ModuleDescriptor,
+            konst cursorAbs: Int,
+            konst resultProperty: PropertyDescriptor?,
         )
     }
 }

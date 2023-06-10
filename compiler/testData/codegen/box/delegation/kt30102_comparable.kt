@@ -2,8 +2,8 @@
 // IGNORE_BACKEND: JVM
 
 fun box(): String {
-    val a = BooleanWrap(false)
+    konst a = BooleanWrap(false)
     return if (a < true) "OK" else "Fail"
 }
 
-class BooleanWrap(private val value: Boolean): Comparable<Boolean> by value
+class BooleanWrap(private konst konstue: Boolean): Comparable<Boolean> by konstue

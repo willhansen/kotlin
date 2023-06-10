@@ -23,7 +23,7 @@ fun test_1(foo: Foo, x: Any) {
 }
 
 fun test_2(foo: Foo): Int {
-    val x: Int
+    konst x: Int
     foo.myRun {
         x = 1
     }

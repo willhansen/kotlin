@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.buildNpmVersion
 import java.io.Serializable
 
 class YarnResolution(
-    val path: String
+    konst path: String
 ) : Serializable {
     var includedVersions = mutableListOf<String>()
     var excludedVersions = mutableListOf<String>()

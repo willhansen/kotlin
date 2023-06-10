@@ -36,5 +36,5 @@ public abstract class IntIntMap {
     public synthetic method replace(p0: java.lang.Object, p1: java.lang.Object, p2: java.lang.Object): boolean
     public method replaceAll(p0: java.util.function.BiFunction): void
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }

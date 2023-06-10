@@ -12,7 +12,7 @@ using namespace kotlin;
 
 // What follows are some sanity tests on saturating usage, then an extensive test of allowed conversions
 // and resulting types of sanity<T> operations, then an extensive test of saturating_* operations using
-// values MIN, MIN + 1, -1, 0, 1, MAX - 1, MAX.
+// konstues MIN, MIN + 1, -1, 0, 1, MAX - 1, MAX.
 
 TEST(SaturatingSanityTest, SaturatingCast) {
     EXPECT_THAT(saturating_cast<int8_t>(129), 127);
@@ -90,28 +90,28 @@ TEST(SaturatingSanityTest, SaturatingOutOfPlace) {
 }
 
 TEST(SaturatingSanityTest, SaturatingInPlace) {
-    saturating value(int8_t(13));
-    EXPECT_THAT(int8_t(value), 13);
-    value += saturating(int8_t(15));
-    EXPECT_THAT(int8_t(value), 28);
-    value += saturating(int16_t(1000));
-    EXPECT_THAT(int8_t(value), 127);
-    value -= saturating(int16_t(200));
-    EXPECT_THAT(int8_t(value), -73);
-    value -= saturating(int8_t(100));
-    EXPECT_THAT(int8_t(value), -128);
-    value *= saturating(0);
-    EXPECT_THAT(int8_t(value), 0);
-    value += saturating(2);
-    EXPECT_THAT(int8_t(value), 2);
-    value *= saturating(int8_t(10));
-    EXPECT_THAT(int8_t(value), 20);
-    value *= saturating(int16_t(1000));
-    EXPECT_THAT(int8_t(value), 127);
-    value *= saturating(int8_t(-1));
-    EXPECT_THAT(int8_t(value), -127);
-    value *= saturating(int16_t(1000));
-    EXPECT_THAT(int8_t(value), -128);
+    saturating konstue(int8_t(13));
+    EXPECT_THAT(int8_t(konstue), 13);
+    konstue += saturating(int8_t(15));
+    EXPECT_THAT(int8_t(konstue), 28);
+    konstue += saturating(int16_t(1000));
+    EXPECT_THAT(int8_t(konstue), 127);
+    konstue -= saturating(int16_t(200));
+    EXPECT_THAT(int8_t(konstue), -73);
+    konstue -= saturating(int8_t(100));
+    EXPECT_THAT(int8_t(konstue), -128);
+    konstue *= saturating(0);
+    EXPECT_THAT(int8_t(konstue), 0);
+    konstue += saturating(2);
+    EXPECT_THAT(int8_t(konstue), 2);
+    konstue *= saturating(int8_t(10));
+    EXPECT_THAT(int8_t(konstue), 20);
+    konstue *= saturating(int16_t(1000));
+    EXPECT_THAT(int8_t(konstue), 127);
+    konstue *= saturating(int8_t(-1));
+    EXPECT_THAT(int8_t(konstue), -127);
+    konstue *= saturating(int16_t(1000));
+    EXPECT_THAT(int8_t(konstue), -128);
 }
 
 TEST(SaturatingSanityTest, CustomBuiltinMullOverflow) {

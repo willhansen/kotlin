@@ -1,12 +1,12 @@
 open annotation class Storage : Annotation {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
 }
@@ -18,17 +18,17 @@ open annotation class State : Annotation {
 
   }
 
-  val name: String
+  konst name: String
     field = name
     get
 
-  val storages: Array<Storage>
+  konst storages: Array<Storage>
     field = storages
     get
 
 }
 
-@State(name = "1", storages = [Storage(value = "HELLO")])
+@State(name = "1", storages = [Storage(konstue = "HELLO")])
 class Test {
   constructor() /* primary */ {
     super/*Any*/()

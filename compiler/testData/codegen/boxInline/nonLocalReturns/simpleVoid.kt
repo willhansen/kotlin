@@ -10,31 +10,31 @@ public inline fun <R> doCall(block: ()-> R) : R {
 
 import test.*
 
-class Holder(var value: Int)
+class Holder(var konstue: Int)
 
 fun test1(holder: Holder, doNonLocal: Boolean) {
-    holder.value = -1;
+    holder.konstue = -1;
 
-    val localResult = doCall {
+    konst localResult = doCall {
         if (doNonLocal) {
-            holder.value = 1000
+            holder.konstue = 1000
             return
         }
         10
     }
 
-    holder.value = localResult
+    holder.konstue = localResult
 }
 
 
 fun box(): String {
-    val h = Holder(-1)
+    konst h = Holder(-1)
 
     test1(h, false)
-    if (h.value != 10) return "test1: ${h.value}"
+    if (h.konstue != 10) return "test1: ${h.konstue}"
 
     test1(h, true)
-    if (h.value != 1000) return "test2: ${h.value}"
+    if (h.konstue != 1000) return "test2: ${h.konstue}"
 
     return "OK"
 }

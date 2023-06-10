@@ -4,7 +4,7 @@ internal interface CType {
     fun render(name: String): String
 }
 
-internal class CVariable(val type: CType, val name: String) {
+internal class CVariable(konst type: CType, konst name: String) {
     override fun toString() = type.render(name)
 }
 
@@ -18,38 +18,38 @@ internal object CTypes {
         override fun render(name: String): String = pointee.render("^$name")
     }
 
-    val void = simple("void")
-    val voidPtr = pointer(void)
-    val signedChar = simple("signed char")
-    val unsignedChar = simple("unsigned char")
-    val short = simple("short")
-    val unsignedShort = simple("unsigned short")
-    val int = simple("int")
-    val unsignedInt = simple("unsigned int")
-    val longLong = simple("long long")
-    val unsignedLongLong = simple("unsigned long long")
-    val float = simple("float")
-    val double = simple("double")
-    val C99Bool = simple("_Bool")
-    val char = simple("char")
+    konst void = simple("void")
+    konst voidPtr = pointer(void)
+    konst signedChar = simple("signed char")
+    konst unsignedChar = simple("unsigned char")
+    konst short = simple("short")
+    konst unsignedShort = simple("unsigned short")
+    konst int = simple("int")
+    konst unsignedInt = simple("unsigned int")
+    konst longLong = simple("long long")
+    konst unsignedLongLong = simple("unsigned long long")
+    konst float = simple("float")
+    konst double = simple("double")
+    konst C99Bool = simple("_Bool")
+    konst char = simple("char")
 
-    val vector128 = simple("float __attribute__ ((__vector_size__ (16)))")
+    konst vector128 = simple("float __attribute__ ((__vector_size__ (16)))")
 
-    val id = simple("id")
+    konst id = simple("id")
 }
 
-private class SimpleCType(private val type: String) : CType {
+private class SimpleCType(private konst type: String) : CType {
     override fun render(name: String): String = if (name.isEmpty()) type else "$type $name"
 }
 
-private class PointerCType(private val pointee: CType) : CType {
+private class PointerCType(private konst pointee: CType) : CType {
     override fun render(name: String): String = pointee.render("*$name")
 }
 
 private class FunctionCType(
-        private val returnType: CType,
-        private val parameterTypes: List<CType>,
-        private val variadic: Boolean
+        private konst returnType: CType,
+        private konst parameterTypes: List<CType>,
+        private konst variadic: Boolean
 ) : CType {
     override fun render(name: String): String = returnType.render(buildString {
         append("(")

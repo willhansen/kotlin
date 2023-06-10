@@ -1,7 +1,7 @@
 // JVM_TARGET: 1.8
 
 fun test(): Int {
-    val d: Any?
+    konst d: Any?
     d = true
     return d.compareTo(false)
 }

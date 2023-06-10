@@ -20,15 +20,15 @@ class FeaturesTest : TestCase() {
     fun testSamWithReceiver() {
         withTempDir { tempDir ->
             runBlocking {
-                val srcDir = File(TEST_DATA_DIR, "samWithReceiver")
-                val destDir = File(tempDir, "dest").also { it.mkdir() }
-                val javaRes = KotlinTestUtils.compileJavaFiles(
+                konst srcDir = File(TEST_DATA_DIR, "samWithReceiver")
+                konst destDir = File(tempDir, "dest").also { it.mkdir() }
+                konst javaRes = KotlinTestUtils.compileJavaFiles(
                     srcDir.listFiles { file: File -> file.extension == "java" }!!.toMutableList(),
                     mutableListOf("-d", destDir.absolutePath)
                 )
                 assertTrue(javaRes)
 
-                val baseConfig = ScriptCompilationConfiguration {
+                konst baseConfig = ScriptCompilationConfiguration {
                     fileExtension("samwr.kts")
                     dependencies(JvmDependency(destDir))
                 }
@@ -42,7 +42,7 @@ class FeaturesTest : TestCase() {
                             }
                     }
                 }
-                val configWithSwr = baseConfig.with {
+                konst configWithSwr = baseConfig.with {
                     annotationsForSamWithReceivers("SamWithReceiver1")
                 }
                 JvmScriptCompiler()(File(srcDir, "test.samwr.kts").toScriptSource(), configWithSwr).onFailure { res ->

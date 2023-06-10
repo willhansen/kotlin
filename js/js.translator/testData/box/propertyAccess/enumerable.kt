@@ -5,21 +5,21 @@
 package foo
 
 class P {
-    val simpleProp: Int = 100
-    val anotherProp: Int = 100
-    val propWithGetter: Int
+    konst simpleProp: Int = 100
+    konst anotherProp: Int = 100
+    konst propWithGetter: Int
         get() = 1
     fun func() = "2"
 }
 
 fun box(): String {
-    val expectedKeys = setOf("simpleProp", "anotherProp")
+    konst expectedKeys = setOf("simpleProp", "anotherProp")
     assertEquals(expectedKeys, P().keys())
 
     assertEquals(expectedKeys, object {
-        val simpleProp: Int = 100
-        val anotherProp: Int = 100
-        val propWithGetter: Int
+        konst simpleProp: Int = 100
+        konst anotherProp: Int = 100
+        konst propWithGetter: Int
             get() = 1
         fun func() = "2"
     }.keys())

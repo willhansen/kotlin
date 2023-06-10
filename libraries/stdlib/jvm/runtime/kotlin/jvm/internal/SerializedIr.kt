@@ -13,5 +13,5 @@ package kotlin.jvm.internal
 @SinceKotlin("1.6")
 annotation class SerializedIr(
     @get:JvmName("b")
-    val bytes: Array<String> = []
+    konst bytes: Array<String> = []
 )

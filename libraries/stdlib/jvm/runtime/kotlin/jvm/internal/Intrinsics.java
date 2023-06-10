@@ -82,52 +82,52 @@ public class Intrinsics {
         throw sanitizeStackTrace(new IllegalStateException(message));
     }
 
-    public static void checkExpressionValueIsNotNull(Object value, String expression) {
-        if (value == null) {
+    public static void checkExpressionValueIsNotNull(Object konstue, String expression) {
+        if (konstue == null) {
             throw sanitizeStackTrace(new IllegalStateException(expression + " must not be null"));
         }
     }
 
-    public static void checkNotNullExpressionValue(Object value, String expression) {
-        if (value == null) {
+    public static void checkNotNullExpressionValue(Object konstue, String expression) {
+        if (konstue == null) {
             throw sanitizeStackTrace(new NullPointerException(expression + " must not be null"));
         }
     }
 
-    public static void checkReturnedValueIsNotNull(Object value, String className, String methodName) {
-        if (value == null) {
+    public static void checkReturnedValueIsNotNull(Object konstue, String className, String methodName) {
+        if (konstue == null) {
             throw sanitizeStackTrace(
                     new IllegalStateException("Method specified as non-null returned null: " + className + "." + methodName)
             );
         }
     }
 
-    public static void checkReturnedValueIsNotNull(Object value, String message) {
-        if (value == null) {
+    public static void checkReturnedValueIsNotNull(Object konstue, String message) {
+        if (konstue == null) {
             throw sanitizeStackTrace(new IllegalStateException(message));
         }
     }
 
-    public static void checkFieldIsNotNull(Object value, String className, String fieldName) {
-        if (value == null) {
+    public static void checkFieldIsNotNull(Object konstue, String className, String fieldName) {
+        if (konstue == null) {
             throw sanitizeStackTrace(new IllegalStateException("Field specified as non-null is null: " + className + "." + fieldName));
         }
     }
 
-    public static void checkFieldIsNotNull(Object value, String message) {
-        if (value == null) {
+    public static void checkFieldIsNotNull(Object konstue, String message) {
+        if (konstue == null) {
             throw sanitizeStackTrace(new IllegalStateException(message));
         }
     }
 
-    public static void checkParameterIsNotNull(Object value, String paramName) {
-        if (value == null) {
+    public static void checkParameterIsNotNull(Object konstue, String paramName) {
+        if (konstue == null) {
             throwParameterIsNullIAE(paramName);
         }
     }
 
-    public static void checkNotNullParameter(Object value, String paramName) {
-        if (value == null) {
+    public static void checkNotNullParameter(Object konstue, String paramName) {
+        if (konstue == null) {
             throwParameterIsNullNPE(paramName);
         }
     }

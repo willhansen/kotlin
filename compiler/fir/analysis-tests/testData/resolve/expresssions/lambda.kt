@@ -9,11 +9,11 @@ fun main() {
     itIs { "this is $it test" }
     multipleArgs { a, b -> "This is test of $a, $b" }
 
-    val s = { "OK" }()
+    konst s = { "OK" }()
 
-    val f = { "OK" }
-    val ss = f.invoke()
+    konst f = { "OK" }
+    konst ss = f.invoke()
 
-    val empty: () -> Unit = { }
+    konst empty: () -> Unit = { }
 }
 

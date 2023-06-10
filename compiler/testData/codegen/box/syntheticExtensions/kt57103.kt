@@ -4,22 +4,22 @@
 // FILE: J.java
 
 public class J<T> {
-    private final T value;
-    public J(T value) {
-        this.value = value;
+    private final T konstue;
+    public J(T konstue) {
+        this.konstue = konstue;
     }
     public T getValue() {
-        return value;
+        return konstue;
     }
 
     public T foo() {
-        return value;
+        return konstue;
     }
 }
 
 // FILE: test.kt
 
 fun box(): String {
-    val j = J("OK")
-    return run(j::value)
+    konst j = J("OK")
+    return run(j::konstue)
 }

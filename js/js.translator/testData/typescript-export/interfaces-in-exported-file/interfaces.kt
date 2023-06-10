@@ -16,7 +16,7 @@ package foo
 
 
 interface TestInterface {
-    val value: String
+    konst konstue: String
     fun getOwnerName(): String
 }
 
@@ -24,7 +24,7 @@ interface TestInterface {
 interface AnotherExportedInterface
 
 
-open class TestInterfaceImpl(override val value: String) : TestInterface {
+open class TestInterfaceImpl(override konst konstue: String) : TestInterface {
     override fun getOwnerName() = "TestInterfaceImpl"
 }
 
@@ -33,13 +33,13 @@ class ChildTestInterfaceImpl(): TestInterfaceImpl("Test"), AnotherExportedInterf
 
 
 fun processInterface(test: TestInterface): String {
-    return "Owner ${test.getOwnerName()} has value '${test.value}'"
+    return "Owner ${test.getOwnerName()} has konstue '${test.konstue}'"
 }
 
 
 external interface OptionalFieldsInterface {
-    val required: Int
-    val notRequired: Int?
+    konst required: Int
+    konst notRequired: Int?
 }
 
 

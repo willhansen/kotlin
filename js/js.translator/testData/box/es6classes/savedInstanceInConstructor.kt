@@ -1,23 +1,23 @@
 @JsName("Set")
 external class JsSet<T> {
-    fun has(value: T): Boolean
+    fun has(konstue: T): Boolean
 }
 
-external open class JsFoo(value: String) {
-    val value: String
+external open class JsFoo(konstue: String) {
+    konst konstue: String
     companion object {
-        val instances: JsSet<JsFoo>
+        konst instances: JsSet<JsFoo>
     }
 }
 
-class KotlinFoo(value: String) : JsFoo(value) {
+class KotlinFoo(konstue: String) : JsFoo(konstue) {
     fun existsInJs(): Boolean = JsFoo.instances.has(this)
 }
 
 fun box(): String {
-    val foo = KotlinFoo("TEST")
+    konst foo = KotlinFoo("TEST")
 
-    assertEquals("TEST", foo.value)
+    assertEquals("TEST", foo.konstue)
     assertEquals(true, foo.existsInJs())
 
     return "OK"

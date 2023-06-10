@@ -1,4 +1,4 @@
-inline class ICInt(val x: Int) // unbox-impl in generated 'equals'
+inline class ICInt(konst x: Int) // unbox-impl in generated 'equals'
 
 suspend fun suspendICInt(): ICInt = ICInt(1) // box-impl
 suspend fun suspendAny(): Any = ICInt(1) // box-impl

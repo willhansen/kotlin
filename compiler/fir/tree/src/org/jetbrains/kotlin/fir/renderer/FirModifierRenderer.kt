@@ -16,21 +16,21 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 abstract class FirModifierRenderer {
     internal lateinit var components: FirRendererComponents
-    protected val printer get() = components.printer
+    protected konst printer get() = components.printer
 
     abstract fun renderModifiers(memberDeclaration: FirMemberDeclaration)
     abstract fun renderModifiers(backingField: FirBackingField)
     abstract fun renderModifiers(constructor: FirConstructor)
     abstract fun renderModifiers(propertyAccessor: FirPropertyAccessor)
     abstract fun renderModifiers(anonymousFunction: FirAnonymousFunction)
-    open fun renderModifiers(valueParameter: FirValueParameter) {
-        if (valueParameter.isCrossinline) {
+    open fun renderModifiers(konstueParameter: FirValueParameter) {
+        if (konstueParameter.isCrossinline) {
             renderModifier("crossinline")
         }
-        if (valueParameter.isNoinline) {
+        if (konstueParameter.isNoinline) {
             renderModifier("noinline")
         }
-        if (valueParameter.isVararg) {
+        if (konstueParameter.isVararg) {
             renderModifier("vararg")
         }
     }
@@ -52,12 +52,12 @@ abstract class FirModifierRenderer {
     }
 
     protected open fun Visibility.asString(effectiveVisibility: EffectiveVisibility? = null): String {
-        val itself = when (this) {
+        konst itself = when (this) {
             Visibilities.Unknown -> return "public?"
             else -> toString()
         }
         if (effectiveVisibility == null) return itself
-        val effectiveAsVisibility = effectiveVisibility.toVisibility()
+        konst effectiveAsVisibility = effectiveVisibility.toVisibility()
         if (effectiveAsVisibility == this) return itself
         if (effectiveAsVisibility == Visibilities.Private && this == Visibilities.PrivateToThis) return itself
         if (this !in visibilitiesToRenderEffectiveSet) return itself
@@ -75,7 +75,7 @@ abstract class FirModifierRenderer {
     }
 
     companion object {
-        private val visibilitiesToRenderEffectiveSet = setOf(
+        private konst visibilitiesToRenderEffectiveSet = setOf(
             Visibilities.Private, Visibilities.PrivateToThis, Visibilities.Internal,
             Visibilities.Protected, Visibilities.Public, Visibilities.Local
         )

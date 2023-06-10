@@ -1,6 +1,6 @@
 package foo
 
-class A(val x: String) {
+class A(konst x: String) {
     @JsName("aa") constructor(x: Int) : this("int $x")
 }
 

@@ -4,7 +4,7 @@
 
 package utils
 
-public class A(public val x: Int) {
+public class A(public konst x: Int) {
     inline
     public fun plus(y: Int): Int = x + y
 }

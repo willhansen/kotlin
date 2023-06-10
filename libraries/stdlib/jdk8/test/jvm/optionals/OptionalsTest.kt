@@ -38,7 +38,7 @@ class OptionalsTest {
 
     @Test
     fun getOrElse_propagatesException() {
-        val e = assertFailsWith<IllegalStateException> {
+        konst e = assertFailsWith<IllegalStateException> {
             Optional.empty<String>().getOrElse { throw IllegalStateException("ran") }
         }
         assertEquals("ran", e.message)
@@ -46,14 +46,14 @@ class OptionalsTest {
 
     @Test
     fun optionalToCollection_presentAddsValue() {
-        val dest = mutableListOf<CharSequence>()
+        konst dest = mutableListOf<CharSequence>()
         Optional.of("foo").toCollection(dest)
         assertEquals(listOf<CharSequence>("foo"), dest)
     }
 
     @Test
     fun optionalToCollection_emptyAddsNothing() {
-        val dest = mutableListOf<String>()
+        konst dest = mutableListOf<String>()
         Optional.empty<String>().toCollection(dest)
         assertEquals(emptyList(), dest)
     }

@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.fir.scopes.FirScope
 import org.jetbrains.kotlin.name.Name
 
 internal abstract class KtFirBasedScope<S : FirScope>(
-    internal val firScope: S,
-    protected val builder: KtSymbolByFirBuilder,
+    internal konst firScope: S,
+    protected konst builder: KtSymbolByFirBuilder,
 ) : KtScope {
-    final override val token: KtLifetimeToken get() = builder.token
+    final override konst token: KtLifetimeToken get() = builder.token
 
     override fun getCallableSymbols(nameFilter: KtScopeNameFilter): Sequence<KtCallableSymbol> = withValidityAssertion {
         firScope.getCallableSymbols(getPossibleCallableNames().filter(nameFilter), builder)

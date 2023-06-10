@@ -1,10 +1,10 @@
-class T(val value: Int) {
+class T(konst konstue: Int) {
 }
 
 fun local() : Int {
 
     operator fun T.get(s: Int): Int {
-        return s * this.value
+        return s * this.konstue
     }
 
     var t  = T(11)

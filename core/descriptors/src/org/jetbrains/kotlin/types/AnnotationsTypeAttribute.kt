@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.descriptors.annotations.composeAnnotations
 import kotlin.reflect.KClass
 
-class AnnotationsTypeAttribute(val annotations: Annotations) : TypeAttribute<AnnotationsTypeAttribute>() {
+class AnnotationsTypeAttribute(konst annotations: Annotations) : TypeAttribute<AnnotationsTypeAttribute>() {
     override fun union(other: AnnotationsTypeAttribute?): AnnotationsTypeAttribute? =
         if (other == this) this else null
 
@@ -23,7 +23,7 @@ class AnnotationsTypeAttribute(val annotations: Annotations) : TypeAttribute<Ann
 
     override fun isSubtypeOf(other: AnnotationsTypeAttribute?): Boolean = true
 
-    override val key: KClass<out AnnotationsTypeAttribute>
+    override konst key: KClass<out AnnotationsTypeAttribute>
         get() = AnnotationsTypeAttribute::class
 
     override fun equals(other: Any?): Boolean {
@@ -34,6 +34,6 @@ class AnnotationsTypeAttribute(val annotations: Annotations) : TypeAttribute<Ann
     override fun hashCode(): Int = annotations.hashCode()
 }
 
-val TypeAttributes.annotationsAttribute: AnnotationsTypeAttribute? by TypeAttributes.attributeAccessor<AnnotationsTypeAttribute>()
+konst TypeAttributes.annotationsAttribute: AnnotationsTypeAttribute? by TypeAttributes.attributeAccessor<AnnotationsTypeAttribute>()
 
-val TypeAttributes.annotations: Annotations get() = annotationsAttribute?.annotations ?: Annotations.EMPTY
+konst TypeAttributes.annotations: Annotations get() = annotationsAttribute?.annotations ?: Annotations.EMPTY

@@ -9,7 +9,7 @@ class Delegate {
 }
 
 inline fun test(): String {
-    val prop: String by Delegate()
+    konst prop: String by Delegate()
     return prop
 }
 

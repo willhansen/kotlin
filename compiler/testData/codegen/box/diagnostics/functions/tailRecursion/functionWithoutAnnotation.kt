@@ -8,7 +8,7 @@ fun withoutAnnotation(x : Int) : Int {
 }
 
 fun box(): String {
-    val r = withoutAnnotation(10)
+    konst r = withoutAnnotation(10)
     if (r == 10) return "OK"
     return "Fail $r"
 }

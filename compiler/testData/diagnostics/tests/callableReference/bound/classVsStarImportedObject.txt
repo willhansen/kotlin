@@ -1,8 +1,8 @@
 package
 
 package a {
-    public val f: kotlin.reflect.KClass<a.A>
-    public val g: kotlin.reflect.KClass<a.B>
+    public konst f: kotlin.reflect.KClass<a.A>
+    public konst g: kotlin.reflect.KClass<a.B>
 
     public final class A {
         public constructor A()

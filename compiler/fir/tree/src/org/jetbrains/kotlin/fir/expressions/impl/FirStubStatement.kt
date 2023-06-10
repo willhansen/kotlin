@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 object FirStubStatement : FirPureAbstractElement(), FirStatement {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
 
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = emptyList()
 
     override fun replaceAnnotations(newAnnotations: List<FirAnnotation>) {

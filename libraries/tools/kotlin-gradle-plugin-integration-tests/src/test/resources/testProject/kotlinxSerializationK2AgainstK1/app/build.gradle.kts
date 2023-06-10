@@ -9,7 +9,7 @@ dependencies {
     implementation(project(":lib"))
 }
 
-val compileKotlin: KotlinCompile by tasks
+konst compileKotlin: KotlinCompile by tasks
 
 compileKotlin.compilerOptions {
     languageVersion.set(KotlinVersion.KOTLIN_2_0)

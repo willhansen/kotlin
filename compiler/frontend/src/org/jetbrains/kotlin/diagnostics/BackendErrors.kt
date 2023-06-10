@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
 
 object BackendErrors {
 
-    val NON_LOCAL_RETURN_IN_DISABLED_INLINE by error0<PsiElement>(SourceElementPositioningStrategies.DEFAULT) // need to reference SourceElementPositioningStrategies at least once to initialize properly
+    konst NON_LOCAL_RETURN_IN_DISABLED_INLINE by error0<PsiElement>(SourceElementPositioningStrategies.DEFAULT) // need to reference SourceElementPositioningStrategies at least once to initialize properly
 
     init {
         RootDiagnosticRendererFactory.registerFactory(KtDefaultErrorMessages)

@@ -10,7 +10,7 @@ fun <S : Bound1> intersect(vararg elements: S): S = TODO()
 fun <R> run(fn: () -> R): R = TODO()
 
 fun topLevel() = run {
-    val local = intersect(First, Second)
+    konst local = intersect(First, Second)
     local
 }
 

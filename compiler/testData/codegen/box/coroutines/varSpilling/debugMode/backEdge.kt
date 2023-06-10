@@ -8,7 +8,7 @@ import kotlin.coroutines.intrinsics.*
 
 fun blackhole(vararg a: Any?) {}
 
-val spilledVariables = mutableSetOf<Pair<String, String>>()
+konst spilledVariables = mutableSetOf<Pair<String, String>>()
 
 var c: Continuation<Unit>? = null
 
@@ -26,7 +26,7 @@ suspend fun saveSpilledVariables() = suspendCoroutineUninterceptedOrReturn<Unit>
 suspend fun test() {
     for (i in 0..1) {
         saveSpilledVariables()
-        val a = "a"
+        konst a = "a"
         saveSpilledVariables()
         blackhole(a)
     }
@@ -43,7 +43,7 @@ fun box(): String {
         test()
     }
 
-    val continuationName = "Continuation at BackEdgeKt\$box\$1.invokeSuspend(backEdge.kt:43)"
+    konst continuationName = "Continuation at BackEdgeKt\$box\$1.invokeSuspend(backEdge.kt:43)"
     if (spilledVariables != setOf("label" to "1", "I$0" to "0", "L$0" to continuationName, "L$1" to "null")) return "FAIL 1: $spilledVariables"
     c?.resume(Unit)
     if (spilledVariables != setOf("label" to "2", "I$0" to "0", "L$0" to continuationName, "L$1" to "a")) return "FAIL 2: $spilledVariables"

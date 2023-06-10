@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
         level = RequiresOptIn.Level.ERROR
 )
 @Target(AnnotationTarget.ANNOTATION_CLASS)
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 internal annotation class SymbolNameIsInternal
 
 /**
@@ -33,7 +33,7 @@ internal annotation class SymbolNameIsInternal
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @SymbolNameIsInternal
-public annotation class SymbolName(val name: String)
+public annotation class SymbolName(konst name: String)
 
 /**
  * Preserve the function entry point during global optimizations.
@@ -49,7 +49,7 @@ public annotation class Retain
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 @Deprecated("This annotation will be removed in a future release")
-public annotation class RetainForTarget(val target: String)
+public annotation class RetainForTarget(konst target: String)
 
 
 /** @suppress */
@@ -87,7 +87,7 @@ public annotation class EagerInitialization
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
-public actual annotation class CName(actual val externName: String = "", actual val shortName: String = "")
+public actual annotation class CName(actual konst externName: String = "", actual konst shortName: String = "")
 
 /**
  * Instructs the Kotlin compiler to use a custom Objective-C and/or Swift name for this class, property, parameter or function.
@@ -104,7 +104,7 @@ public actual annotation class CName(actual val externName: String = "", actual 
 @MustBeDocumented
 @ExperimentalObjCName
 @SinceKotlin("1.8")
-public actual annotation class ObjCName(actual val name: String = "", actual val swiftName: String = "", actual val exact: Boolean = false)
+public actual annotation class ObjCName(actual konst name: String = "", actual konst swiftName: String = "", actual konst exact: Boolean = false)
 
 /**
  * Meta-annotation that instructs the Kotlin compiler to remove the annotated class, function or property from the public Objective-C API.

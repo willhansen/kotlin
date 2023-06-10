@@ -8,6 +8,6 @@ object Assertions {
 }
 
 fun <T : Any> T?.assertNotNull(description: String? = null) {
-    val assert = Assertions.assertThat(this)
+    konst assert = Assertions.assertThat(this)
     description?.let(assert::describedAs)
 }

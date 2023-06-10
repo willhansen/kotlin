@@ -5,7 +5,7 @@ class C {
 
   }
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
@@ -18,11 +18,11 @@ class C {
     this/*C*/(x = 0, y = 0, z = 0)
   }
 
-  val property: Int
+  konst property: Int
     field = 0
     get
 
-  val propertyWithGet: Int
+  konst propertyWithGet: Int
     get(): Int {
       return 42
     }
@@ -31,8 +31,8 @@ class C {
     get(): Int {
       return <this>.<get-z>()
     }
-    set(value: Int) {
-      <this>.<set-z>(<set-?> = value)
+    set(konstue: Int) {
+      <this>.<set-z>(<set-?> = konstue)
     }
 
   fun function() {

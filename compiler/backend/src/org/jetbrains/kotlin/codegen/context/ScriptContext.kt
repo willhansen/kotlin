@@ -35,18 +35,18 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class ScriptContext(
     typeMapper: KotlinTypeMapper,
-    val scriptDescriptor: ScriptDescriptor,
-    val earlierScripts: List<ScriptDescriptor>,
+    konst scriptDescriptor: ScriptDescriptor,
+    konst earlierScripts: List<ScriptDescriptor>,
     contextDescriptor: ClassDescriptor,
     parentContext: CodegenContext<*>?
 ) : ScriptLikeContext(typeMapper, contextDescriptor, parentContext) {
-    val lastStatement: KtExpression?
+    konst lastStatement: KtExpression?
 
-    val resultFieldInfo: FieldInfo?
+    konst resultFieldInfo: FieldInfo?
         get() {
-            val resultValue = scriptDescriptor.resultValue ?: return null
-            val scriptResultFieldName = resultValue.name.identifier
-            val fieldType = resultValue.returnType?.let { state.typeMapper.mapType(it) } ?: AsmTypes.OBJECT_TYPE
+            konst resultValue = scriptDescriptor.resultValue ?: return null
+            konst scriptResultFieldName = resultValue.name.identifier
+            konst fieldType = resultValue.returnType?.let { state.typeMapper.mapType(it) } ?: AsmTypes.OBJECT_TYPE
             return FieldInfo.createForHiddenField(
                 state.typeMapper.mapClass(scriptDescriptor),
                 fieldType,
@@ -55,11 +55,11 @@ class ScriptContext(
             )
         }
 
-    val script = DescriptorToSourceUtils.getSourceFromDescriptor(scriptDescriptor) as KtScript?
+    konst script = DescriptorToSourceUtils.getSourceFromDescriptor(scriptDescriptor) as KtScript?
         ?: error("Declaration should be present for script: $scriptDescriptor")
 
     init {
-        val lastDeclaration = script.declarations.lastOrNull()
+        konst lastDeclaration = script.declarations.lastOrNull()
         if (lastDeclaration is KtAnonymousInitializer) {
             this.lastStatement = lastDeclaration.body
         } else {
@@ -67,24 +67,24 @@ class ScriptContext(
         }
     }
 
-    private val ctorExplicitParametersStart = if (scriptDescriptor.earlierScriptsConstructorParameter == null) 0 else 1
+    private konst ctorExplicitParametersStart = if (scriptDescriptor.earlierScriptsConstructorParameter == null) 0 else 1
 
-    private val ctorImplicitReceiversParametersStart =
-        ctorExplicitParametersStart + (scriptDescriptor.getSuperClassNotAny()?.unsubstitutedPrimaryConstructor?.valueParameters?.size ?: 0)
+    private konst ctorImplicitReceiversParametersStart =
+        ctorExplicitParametersStart + (scriptDescriptor.getSuperClassNotAny()?.unsubstitutedPrimaryConstructor?.konstueParameters?.size ?: 0)
 
-    private val ctorProvidedPropertiesParametersStart =
+    private konst ctorProvidedPropertiesParametersStart =
         ctorImplicitReceiversParametersStart + scriptDescriptor.implicitReceivers.size
 
     fun getImplicitReceiverName(index: Int): String =
-        scriptDescriptor.unsubstitutedPrimaryConstructor.valueParameters[ctorImplicitReceiversParametersStart + index].name.identifier
+        scriptDescriptor.unsubstitutedPrimaryConstructor.konstueParameters[ctorImplicitReceiversParametersStart + index].name.identifier
 
     fun getImplicitReceiverType(index: Int): Type? {
-        val receiverParam = scriptDescriptor.unsubstitutedPrimaryConstructor.valueParameters[ctorImplicitReceiversParametersStart + index]
+        konst receiverParam = scriptDescriptor.unsubstitutedPrimaryConstructor.konstueParameters[ctorImplicitReceiversParametersStart + index]
         return state.typeMapper.mapType(receiverParam.type)
     }
 
     fun getProvidedPropertyName(index: Int): String =
-        scriptDescriptor.unsubstitutedPrimaryConstructor.valueParameters[ctorProvidedPropertiesParametersStart + index].name.identifier
+        scriptDescriptor.unsubstitutedPrimaryConstructor.konstueParameters[ctorProvidedPropertiesParametersStart + index].name.identifier
 
     fun getProvidedPropertyType(index: Int): Type = typeMapper.mapType(scriptDescriptor.scriptProvidedProperties[index].type)
 
@@ -95,19 +95,19 @@ class ScriptContext(
         receiverDescriptors.forEachIndexed { index, outerReceiver ->
             if (outerReceiver == thisOrOuterClass) {
                 return getImplicitReceiverType(index)?.let { type ->
-                    val owner = typeMapper.mapType(scriptDescriptor)
+                    konst owner = typeMapper.mapType(scriptDescriptor)
                     StackValue.field(type, owner, getImplicitReceiverName(index), false, prefix ?: StackValue.LOCAL_0)
-                } ?: error("Invalid script receiver: ${thisOrOuterClass.fqNameSafe}")
+                } ?: error("Inkonstid script receiver: ${thisOrOuterClass.fqNameSafe}")
             }
         }
         error("Script receiver not found: ${thisOrOuterClass.fqNameSafe}")
     }
 
-    val receiverDescriptors: List<ClassDescriptor>
+    konst receiverDescriptors: List<ClassDescriptor>
         get() = scriptDescriptor.implicitReceivers
 
     fun getScriptFieldName(scriptDescriptor: ScriptDescriptor): String {
-        val index = earlierScripts.indexOf(scriptDescriptor)
+        konst index = earlierScripts.indexOf(scriptDescriptor)
         return if (index >= 0) "script$" + (index + 1)
         else "\$\$importedScript${scriptDescriptor.name.identifier}"
     }
@@ -117,5 +117,5 @@ class ScriptContext(
     }
 }
 
-private val Class<*>.classId: ClassId
+private konst Class<*>.classId: ClassId
     get() = enclosingClass?.classId?.createNestedClassId(Name.identifier(simpleName)) ?: ClassId.topLevel(FqName(name))

@@ -37,21 +37,21 @@ import org.jetbrains.kotlin.types.upperIfFlexible
 
 class MemoryOptimizationsTest : KtUsefulTestCase() {
     fun testBasicFlexibleTypeCase() {
-        val moduleDescriptor = JvmResolveUtil.analyze(
+        konst moduleDescriptor = JvmResolveUtil.analyze(
                 KotlinTestUtils.createEnvironmentWithJdkAndNullabilityAnnotationsFromIdea(testRootDisposable, ConfigurationKind.ALL, TestJdkKind.FULL_JDK)
         ).moduleDescriptor
 
-        val appendableClass =
+        konst appendableClass =
                 moduleDescriptor.findClassAcrossModuleDependencies(ClassId.topLevel(FqName("java.lang.Appendable")))!!
 
-        val append = appendableClass
+        konst append = appendableClass
                 .unsubstitutedMemberScope
-                .findFirstFunction("append") { it.valueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isChar) == false }
+                .findFirstFunction("append") { it.konstueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isChar) == false }
 
-        val parameterType = append.valueParameters.single().type
+        konst parameterType = append.konstueParameters.single().type
 
         assertTrue(parameterType is FlexibleType)
-        val upperBound = parameterType.upperIfFlexible()
+        konst upperBound = parameterType.upperIfFlexible()
 
         assertTrue(upperBound.javaClass.simpleName == "NullableSimpleType")
         // NullableSimpleType should store and return the same instance as lower bound of flexible type
@@ -59,7 +59,7 @@ class MemoryOptimizationsTest : KtUsefulTestCase() {
     }
 
     fun testSubstitutorDoNotRecreateUnchangedDescriptor() {
-        val text =
+        konst text =
                 """
                 |package test
                 |interface A<T> : java.lang.Appendable {
@@ -67,35 +67,35 @@ class MemoryOptimizationsTest : KtUsefulTestCase() {
                 |}
                 """.trimMargin()
 
-        val environment =
+        konst environment =
                 KotlinTestUtils
                         .createEnvironmentWithJdkAndNullabilityAnnotationsFromIdea(
                             testRootDisposable, ConfigurationKind.ALL, TestJdkKind.FULL_JDK
                         )
-        val moduleDescriptor =
+        konst moduleDescriptor =
                 JvmResolveUtil.analyze(
                     KtTestUtil.createFile("main.kt", text, environment.project),
                     environment
                 ).moduleDescriptor
 
-        val aClass =
+        konst aClass =
                 moduleDescriptor.findClassAcrossModuleDependencies(ClassId.topLevel(FqName("test.A")))!!
 
-        val memberScope =
+        konst memberScope =
                 aClass.getMemberScope(
                         TypeConstructorSubstitution.create(
                                 aClass.typeConstructor, listOf(moduleDescriptor.builtIns.stringType.asTypeProjection())
                         )
                 )
 
-        val append =
+        konst append =
                 memberScope.findFirstFunction("append") {
-                    it.valueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isChar) == false
+                    it.konstueParameters.singleOrNull()?.type?.let(KotlinBuiltIns::isChar) == false
                 }
 
         assertTrue(append.original === append)
 
-        val foo = memberScope.findSingleFunction(Name.identifier("foo"))
+        konst foo = memberScope.findSingleFunction(Name.identifier("foo"))
 
         assertTrue(foo.original !== foo)
     }

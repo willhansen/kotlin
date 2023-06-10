@@ -31,42 +31,42 @@ import org.jetbrains.kotlin.js.translate.utils.jsAstUtils.*
 /**
  * If inline function consists of multiple statements,
  * its statements will be extracted before last visited statement.
- * This action can potentially break evaluation order.
+ * This action can potentially break ekonstuation order.
  *
  * An example:
  *      var x = foo() + inlineBox();
  * Inliner could extract statements from inlineBox():
  *      // inlineBox body..
  *      var x = foo() + inlineBox$result;
- * So foo is evaluated before inlineBox() after inline.
+ * So foo is ekonstuated before inlineBox() after inline.
  *
- * So we need to extract all nodes, that evaluate before inline call,
- * to temporary vars (preserving evaluation order).
+ * So we need to extract all nodes, that ekonstuate before inline call,
+ * to temporary vars (preserving ekonstuation order).
  *
- * For the example, defined before, evaluation order could be preserved this way:
+ * For the example, defined before, ekonstuation order could be preserved this way:
  *      var tmp = foo();
  *      // inlineBox body..
  *      var x = tmp + inlineBox$result;
  *
  * It's desirable to create temporary var only if node can have side effect,
- * and precedes inline call (in JavaScript evaluation order).
+ * and precedes inline call (in JavaScript ekonstuation order).
  */
 internal class ExpressionDecomposer private constructor(
-        private val containsExtractable: Set<JsNode>,
-        private val containsNodeWithSideEffect: Set<JsNode>
+        private konst containsExtractable: Set<JsNode>,
+        private konst containsNodeWithSideEffect: Set<JsNode>
 ) : JsExpressionVisitor() {
 
     private var additionalStatements: MutableList<JsStatement> = SmartList()
 
     companion object {
-        @JvmStatic fun preserveEvaluationOrder(statement: JsStatement, canBeExtractedByInliner: (JsNode) -> Boolean): List<JsStatement> {
-            val decomposer = with (statement) {
-                val extractable = match(canBeExtractedByInliner)
-                val containsExtractable = withParentsOfNodes(extractable)
-                val nodesWithSideEffect = match {
+        @JvmStatic fun preserveEkonstuationOrder(statement: JsStatement, canBeExtractedByInliner: (JsNode) -> Boolean): List<JsStatement> {
+            konst decomposer = with (statement) {
+                konst extractable = match(canBeExtractedByInliner)
+                konst containsExtractable = withParentsOfNodes(extractable)
+                konst nodesWithSideEffect = match {
                     !(it is JsLiteral.JsValueLiteral || (it is JsExpression && it.sideEffects == SideEffectKind.PURE))
                 }
-                val containsNodeWithSideEffect = withParentsOfNodes(nodesWithSideEffect)
+                konst containsNodeWithSideEffect = withParentsOfNodes(nodesWithSideEffect)
 
                 ExpressionDecomposer(containsExtractable, containsNodeWithSideEffect)
             }
@@ -78,7 +78,7 @@ internal class ExpressionDecomposer private constructor(
 
     // TODO: add test case (after KT-7371 fix): var a = foo(), b = foo() + inlineBar()
     override fun visit(x: JsVars, ctx: JsContext<JsNode>): Boolean {
-        val vars = x.vars
+        konst vars = x.vars
         var prevVars = SmartList<JsVars.JsVar>()
 
         for (jsVar in vars) {
@@ -100,7 +100,7 @@ internal class ExpressionDecomposer private constructor(
     }
 
     override fun visit(x: JsLabel, ctx: JsContext<JsNode>): Boolean {
-        val statement = x.statement
+        konst statement = x.statement
         when (statement) {
             is JsDoWhile -> statement.process(false, x.name)
             is JsWhile -> statement.process(true, x.name)
@@ -123,10 +123,10 @@ internal class ExpressionDecomposer private constructor(
 
         withNewAdditionalStatements {
             test = accept(test)
-            val breakIfNotTest = JsIf(not(test), JsBreak())
+            konst breakIfNotTest = JsIf(not(test), JsBreak())
             // Body can be JsBlock or other JsStatement.
             // Convert to statements list to avoid nested block.
-            val bodyStatements = flattenStatement(body)
+            konst bodyStatements = flattenStatement(body)
 
             if (addBreakToBegin) {
                 addStatement(breakIfNotTest)
@@ -134,8 +134,8 @@ internal class ExpressionDecomposer private constructor(
             }
             else {
                 // See KT-12275
-                val guardName = JsScope.declareTemporaryName("guard\$${(loopLabel?.ident.orEmpty())}")
-                val label = JsLabel(guardName).apply { synthetic = true }
+                konst guardName = JsScope.declareTemporaryName("guard\$${(loopLabel?.ident.orEmpty())}")
+                konst label = JsLabel(guardName).apply { synthetic = true }
                 label.statement = JsBlock(bodyStatements)
                 addStatements(0, listOf(label))
                 ContinueReplacingVisitor(loopLabel, guardName).acceptList(bodyStatements)
@@ -164,16 +164,16 @@ internal class ExpressionDecomposer private constructor(
     private fun JsBinaryOperation.processOrAnd(ctx: JsContext<JsNode>) {
         if (arg2 !in containsExtractable) return
 
-        val tmp = Temporary(arg1)
+        konst tmp = Temporary(arg1)
         addStatement(tmp.variable)
-        val test = if (operator == JsBinaryOperator.OR) not(tmp.nameRef) else tmp.nameRef
-        val arg2Eval = withNewAdditionalStatements {
+        konst test = if (operator == JsBinaryOperator.OR) not(tmp.nameRef) else tmp.nameRef
+        konst arg2Ekonst = withNewAdditionalStatements {
             arg2 = accept(arg2)
             addStatement(tmp.assign(arg2))
             additionalStatements.toStatement()
         }
 
-        addStatement(JsIf(test, arg2Eval).also { it.source = source })
+        addStatement(JsIf(test, arg2Ekonst).also { it.source = source })
         ctx.replaceMe(tmp.nameRef)
     }
 
@@ -187,7 +187,7 @@ internal class ExpressionDecomposer private constructor(
         }
 
         if (operator.isAssignment) {
-            val lhs = arg1
+            konst lhs = arg1
             when (lhs) {
                 is JsNameRef -> {
                     lhs.qualifier = lhs.qualifier?.extractToTemporary()
@@ -208,7 +208,7 @@ internal class ExpressionDecomposer private constructor(
     }
 
     override fun visit(x: JsArrayLiteral, ctx: JsContext<JsNode>): Boolean {
-        val elements = x.expressions
+        konst elements = x.expressions
         processByIndices(elements, elements.indicesOfExtractable)
         return false
     }
@@ -237,25 +237,25 @@ internal class ExpressionDecomposer private constructor(
         test = accept(test)
         if (then !in containsExtractable && otherwise !in containsExtractable) return
 
-        val tmp = Temporary(sourceInfo = source)
+        konst tmp = Temporary(sourceInfo = source)
         addStatement(tmp.variable)
 
-        val thenBlock = withNewAdditionalStatements {
+        konst thenBlock = withNewAdditionalStatements {
             then = accept(then)
             addStatement(tmp.assign(then))
             additionalStatements.toStatement()
         }
 
-        val elseBlock = withNewAdditionalStatements {
+        konst elseBlock = withNewAdditionalStatements {
             otherwise = accept(otherwise)
             addStatement(tmp.assign(otherwise))
             additionalStatements.toStatement()
         }
 
-        val lazyEval = JsIf(test, thenBlock, elseBlock)
-        lazyEval.source = source
-        lazyEval.synthetic = true
-        addStatement(lazyEval)
+        konst lazyEkonst = JsIf(test, thenBlock, elseBlock)
+        lazyEkonst.source = source
+        lazyEkonst.synthetic = true
+        addStatement(lazyEkonst)
         ctx.replaceMe(tmp.nameRef)
     }
 
@@ -271,22 +271,22 @@ internal class ExpressionDecomposer private constructor(
 
     private abstract class Callable(hasArguments: HasArguments) {
         abstract var qualifier: JsExpression
-        abstract val applyBindIfNecessary: Boolean
-        val arguments = hasArguments.arguments
+        abstract konst applyBindIfNecessary: Boolean
+        konst arguments = hasArguments.arguments
     }
 
-    private class CallableInvocationAdapter(val invocation: JsInvocation) : Callable(invocation) {
+    private class CallableInvocationAdapter(konst invocation: JsInvocation) : Callable(invocation) {
         override var qualifier: JsExpression
             get() = invocation.qualifier
-            set(value) { invocation.qualifier = value }
-        override val applyBindIfNecessary = true
+            set(konstue) { invocation.qualifier = konstue }
+        override konst applyBindIfNecessary = true
     }
 
-    private class CallableNewAdapter(val jsnew: JsNew) : Callable(jsnew) {
+    private class CallableNewAdapter(konst jsnew: JsNew) : Callable(jsnew) {
         override var qualifier: JsExpression
             get() = jsnew.constructorExpression
-            set(value) { jsnew.constructorExpression = value }
-        override val applyBindIfNecessary = false
+            set(konstue) { jsnew.constructorExpression = konstue }
+        override konst applyBindIfNecessary = false
     }
 
     private fun Callable.process() {
@@ -295,8 +295,8 @@ internal class ExpressionDecomposer private constructor(
         if (matchedIndices.isEmpty()) return
 
         if (qualifier in containsNodeWithSideEffect) {
-            val callee = qualifier as? JsNameRef
-            val receiver = callee?.qualifier
+            konst callee = qualifier as? JsNameRef
+            konst receiver = callee?.qualifier
 
             // Qualifier might be a reference to lambda property. See KT-7674
             // An exception here is `fn.call()`, which are marked as side effect free. Further recognition of such
@@ -304,13 +304,13 @@ internal class ExpressionDecomposer private constructor(
             if (qualifier.sideEffects == SideEffectKind.PURE && callee != null && receiver != null &&
                 receiver in containsNodeWithSideEffect
             ) {
-                val receiverTmp = receiver.extractToTemporary()
+                konst receiverTmp = receiver.extractToTemporary()
                 callee.qualifier = receiverTmp
             }
             else {
                 if (receiver != null && applyBindIfNecessary) {
-                    val receiverTmp = receiver.extractToTemporary()
-                    val fqn = JsNameRef(callee.ident, receiverTmp).apply {
+                    konst receiverTmp = receiver.extractToTemporary()
+                    konst fqn = JsNameRef(callee.ident, receiverTmp).apply {
                         synthetic = true
                         callee.name?.let { sideEffects = it.sideEffects }
                     }
@@ -332,7 +332,7 @@ internal class ExpressionDecomposer private constructor(
         var prev = 0
         for (curr in matchedIndices) {
             for (i in prev..curr-1) {
-                val arg = elements[i]
+                konst arg = elements[i]
                 if (arg !in containsNodeWithSideEffect) continue
 
                 elements[i] = arg.extractToTemporary()
@@ -345,9 +345,9 @@ internal class ExpressionDecomposer private constructor(
 
     inline
     private fun <T> withNewAdditionalStatements(fn: ()->T): T {
-        val backup = additionalStatements
+        konst backup = additionalStatements
         additionalStatements = SmartList<JsStatement>()
-        val result = fn()
+        konst result = fn()
         additionalStatements = backup
         return result
     }
@@ -362,32 +362,32 @@ internal class ExpressionDecomposer private constructor(
             additionalStatements.addAll(index, statements)
 
     private fun JsExpression.extractToTemporary(): JsExpression {
-        val tmp = Temporary(this)
+        konst tmp = Temporary(this)
         addStatement(tmp.variable)
         return tmp.nameRef
     }
 
-    private inner class Temporary(val value: JsExpression? = null, val sourceInfo: Any? = null) {
-        val name: JsName = JsScope.declareTemporary()
+    private inner class Temporary(konst konstue: JsExpression? = null, konst sourceInfo: Any? = null) {
+        konst name: JsName = JsScope.declareTemporary()
 
-        val variable: JsVars = newVar(name, value).apply {
+        konst variable: JsVars = newVar(name, konstue).apply {
             synthetic = true
-            name.staticRef = value
-            source = sourceInfo ?: value?.source
+            name.staticRef = konstue
+            source = sourceInfo ?: konstue?.source
         }
 
-        val nameRef: JsExpression
+        konst nameRef: JsExpression
             get() = name.makeRef()
 
-        fun assign(value: JsExpression): JsStatement {
-            return JsExpressionStatement(assignment(nameRef, value)).apply {
+        fun assign(konstue: JsExpression): JsStatement {
+            return JsExpressionStatement(assignment(nameRef, konstue)).apply {
                 synthetic = true
-                expression.source = sourceInfo ?: value.source
+                expression.source = sourceInfo ?: konstue.source
             }
         }
     }
 
-    private val List<JsNode>.indicesOfExtractable: List<Int>
+    private konst List<JsNode>.indicesOfExtractable: List<Int>
         get() = indices.filter { get(it) in containsExtractable }
 }
 
@@ -431,7 +431,7 @@ internal open class JsExpressionVisitor() : JsVisitorWithContextImpl() {
     override fun visit(x: JsFor, ctx: JsContext<JsNode>): Boolean = false
 
     override fun visit(x: JsIf, ctx: JsContext<JsNode>): Boolean {
-        val test = x.ifExpression
+        konst test = x.ifExpression
         x.ifExpression = accept(test)
         return false
     }
@@ -471,8 +471,8 @@ internal open class JsExpressionVisitor() : JsVisitorWithContextImpl() {
  * Returns descendants of receiver, matched by [predicate].
  */
 private fun JsNode.match(predicate: (JsNode) -> Boolean): Set<JsNode> {
-    val visitor = object : JsExpressionVisitor() {
-        val matched = IdentitySet<JsNode>()
+    konst visitor = object : JsExpressionVisitor() {
+        konst matched = IdentitySet<JsNode>()
 
         override fun <R : JsNode> doTraverse(node: R, ctx: JsContext<JsNode>?) {
             super.doTraverse(node, ctx)
@@ -491,9 +491,9 @@ private fun JsNode.match(predicate: (JsNode) -> Boolean): Set<JsNode> {
  * Returns set of nodes, that satisfy transitive closure of `is parent` relation, starting from [nodes].
  */
 private fun JsNode.withParentsOfNodes(nodes: Set<JsNode>): Set<JsNode> {
-    val visitor = object : JsExpressionVisitor() {
-        private val stack = SmartList<JsNode>()
-        val matched = IdentitySet<JsNode>()
+    konst visitor = object : JsExpressionVisitor() {
+        private konst stack = SmartList<JsNode>()
+        konst matched = IdentitySet<JsNode>()
 
         override fun <R : JsNode> doTraverse(node: R, ctx: JsContext<JsNode>?) {
             stack.add(node)
@@ -508,7 +508,7 @@ private fun JsNode.withParentsOfNodes(nodes: Set<JsNode>): Set<JsNode> {
 
         fun addAllUntilMatchedOrStatement(nodesOnStack: List<JsNode>) {
             for (i in nodesOnStack.lastIndex downTo 0) {
-                val currentNode = nodesOnStack[i]
+                konst currentNode = nodesOnStack[i]
                 if (currentNode in matched) break
 
                 matched.add(currentNode)

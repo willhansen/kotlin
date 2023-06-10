@@ -1,27 +1,27 @@
 == foo ==
 fun foo() {
     "before"
-    class A(val x: Int) {
+    class A(konst x: Int) {
         init {
-            val a = x
+            konst a = x
         }
         fun foo() {
-            val b = x
+            konst b = x
         }
     }
     "after"
 }
 ---------------------
-                                                                                          <v1>: Int   NEW: magic[FAKE_INITIALIZER](val x: Int) -> <v1>
+                                                                                          <v1>: Int   NEW: magic[FAKE_INITIALIZER](konst x: Int) -> <v1>
                                                                                           <v2>: A     NEW: magic[IMPLICIT_RECEIVER](x) -> <v2>
 "before"                                                                                  <v0>: *     NEW: r("before") -> <v0>
 x                                                                                         <v3>: Int   NEW: r(x|<v2>) -> <v3>
 "after"                                                                                   <v4>: *     NEW: r("after") -> <v4>
-{ "before" class A(val x: Int) { init { val a = x } fun foo() { val b = x } } "after" }   <v4>: *     COPY
+{ "before" class A(konst x: Int) { init { konst a = x } fun foo() { konst b = x } } "after" }   <v4>: *     COPY
 =====================
 == foo ==
 fun foo() {
-            val b = x
+            konst b = x
         }
 ---------------------
     <v0>: A     NEW: magic[IMPLICIT_RECEIVER](x) -> <v0>

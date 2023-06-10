@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmFragment
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.resolvableMetadataConfigurationName
 
 internal class IdeaKpmOriginalMetadataDependencyResolver(
-    private val fragmentGranularMetadataResolverFactory: GradleKpmFragmentGranularMetadataResolverFactory
+    private konst fragmentGranularMetadataResolverFactory: GradleKpmFragmentGranularMetadataResolverFactory
 ) : IdeaKpmDependencyResolver {
     override fun resolve(fragment: GradleKpmFragment): Set<IdeaKpmDependency> {
-        val dependencyIdentifiers = fragmentGranularMetadataResolverFactory.getOrCreate(fragment).resolutions
+        konst dependencyIdentifiers = fragmentGranularMetadataResolverFactory.getOrCreate(fragment).resolutions
             .filterIsInstance<KeepOriginalDependency>()
             .mapNotNull { resolution -> resolution.dependency.id as? ModuleComponentIdentifier }
             .toSet()
 
-        val allModuleCompileDependenciesConfiguration = fragment.project.configurations
+        konst allModuleCompileDependenciesConfiguration = fragment.project.configurations
             .getByName(fragment.containingModule.resolvableMetadataConfigurationName)
 
         return allModuleCompileDependenciesConfiguration.incoming.artifactView { view ->
@@ -31,7 +31,7 @@ internal class IdeaKpmOriginalMetadataDependencyResolver(
             view.isLenient = true
         }.artifacts
             .map { artifact ->
-                val artifactId = artifact.variant.owner as ModuleComponentIdentifier
+                konst artifactId = artifact.variant.owner as ModuleComponentIdentifier
                 IdeaKpmResolvedBinaryDependencyImpl(
                     binaryType = IdeaKpmDependency.CLASSPATH_BINARY_TYPE,
                     binaryFile = artifact.file,

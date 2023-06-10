@@ -21,13 +21,13 @@ FILE: companionAccessInEnum.kt
             ^foo Q|A.Companion|.R|/A.Companion.foo|()
         }
 
-        public final static fun values(): R|kotlin/Array<A>| {
+        public final static fun konstues(): R|kotlin/Array<A>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|A| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|A| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<A>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<A>|
             public get(): R|kotlin/enums/EnumEntries<A>|
 
     }

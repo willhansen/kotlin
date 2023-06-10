@@ -1,7 +1,7 @@
 #import <Foundation/NSObject.h>
 
 @interface CreateAutoreleaseDeallocated : NSObject
-@property BOOL value;
+@property BOOL konstue;
 @end
 
 @interface CreateAutorelease : NSObject

@@ -19,9 +19,9 @@ fun builder(c: suspend () -> Unit) {
 }
 
 var varWithCustomSetter: String = ""
-    set(value) {
+    set(konstue) {
         if (field != "") throw RuntimeException("fail 2")
-        field = value
+        field = konstue
     }
 
 fun box(): String {

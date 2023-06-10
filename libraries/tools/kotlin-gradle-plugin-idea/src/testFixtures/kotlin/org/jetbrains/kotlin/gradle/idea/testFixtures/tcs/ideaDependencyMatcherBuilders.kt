@@ -29,11 +29,11 @@ fun ideSourceDependency(type: IdeaKotlinSourceDependency.Type, project: Project,
 }
 
 fun ideSourceDependency(type: IdeaKotlinSourceDependency.Type, path: String): IdeaKotlinDependencyMatcher {
-    val segments = path.split("/")
-    val buildAndProjectPath = segments.dropLast(1).joinToString(":").split("::", limit = 2)
-    val buildId = if (buildAndProjectPath.size == 2) buildAndProjectPath.first() else ":"
-    val projectPath = if (buildAndProjectPath.size == 2) ":" + buildAndProjectPath.last() else buildAndProjectPath.last()
-    val sourceSetName = segments.last()
+    konst segments = path.split("/")
+    konst buildAndProjectPath = segments.dropLast(1).joinToString(":").split("::", limit = 2)
+    konst buildId = if (buildAndProjectPath.size == 2) buildAndProjectPath.first() else ":"
+    konst projectPath = if (buildAndProjectPath.size == 2) ":" + buildAndProjectPath.last() else buildAndProjectPath.last()
+    konst sourceSetName = segments.last()
     return IdeaKotlinSourceDependencyMatcher(type, buildId, projectPath, sourceSetName)
 }
 
@@ -50,9 +50,9 @@ fun projectArtifactDependency(
     type: IdeaKotlinSourceDependency.Type = IdeaKotlinSourceDependency.Type.Regular,
     buildIdAndProjectPath: String, artifactFilePath: FilePathRegex
 ): IdeaKotlinDependencyMatcher {
-    val slicedProjectPath = buildIdAndProjectPath.split("::", limit = 2)
-    val buildId = if (slicedProjectPath.size == 2) slicedProjectPath.first() else ":"
-    val projectPath = if (slicedProjectPath.size == 2) ":" + slicedProjectPath.last() else slicedProjectPath.last()
+    konst slicedProjectPath = buildIdAndProjectPath.split("::", limit = 2)
+    konst buildId = if (slicedProjectPath.size == 2) slicedProjectPath.first() else ":"
+    konst projectPath = if (slicedProjectPath.size == 2) ":" + slicedProjectPath.last() else slicedProjectPath.last()
 
     return IdeaKotlinProjectArtifactDependencyMatcher(
         type = type,
@@ -71,7 +71,7 @@ fun binaryCoordinates(literal: String): IdeaKotlinDependencyMatcher {
 }
 
 fun anyDependency(): IdeaKotlinDependencyMatcher = object : IdeaKotlinDependencyMatcher {
-    override val description: String get() = "any"
+    override konst description: String get() = "any"
     override fun matches(dependency: IdeaKotlinDependency): Boolean = true
 }
 

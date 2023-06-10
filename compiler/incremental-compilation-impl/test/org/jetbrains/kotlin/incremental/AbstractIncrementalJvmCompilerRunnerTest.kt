@@ -30,9 +30,9 @@ import javax.tools.ToolProvider
 
 abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCompilerRunnerTestBase<K2JVMCompilerArguments>() {
     override fun make(cacheDir: File, outDir: File, sourceRoots: Iterable<File>, args: K2JVMCompilerArguments): TestCompilationResult {
-        val reporter = TestICReporter()
-        val messageCollector = TestMessageCollector()
-        val testLookupTracker = TestLookupTracker(lookupsDuringTest)
+        konst reporter = TestICReporter()
+        konst messageCollector = TestMessageCollector()
+        konst testLookupTracker = TestLookupTracker(lookupsDuringTest)
 
         makeIncrementallyForTests(
             cacheDir,
@@ -43,10 +43,10 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
             testLookupTracker = testLookupTracker
         )
 
-        val kotlinCompileResult = TestCompilationResult(reporter, messageCollector)
+        konst kotlinCompileResult = TestCompilationResult(reporter, messageCollector)
         if (kotlinCompileResult.exitCode != ExitCode.OK) return kotlinCompileResult
 
-        val (javaExitCode, _, javaErrors) = compileJava(sourceRoots, args.destination!!)
+        konst (javaExitCode, _, javaErrors) = compileJava(sourceRoots, args.destination!!)
         return when (javaExitCode) {
             ExitCode.OK -> kotlinCompileResult
             else -> kotlinCompileResult.copy(exitCode = javaExitCode, compileErrors = javaErrors)
@@ -62,17 +62,17 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
         reporter: TestICReporter,
         testLookupTracker: TestLookupTracker
     ) {
-        val kotlinExtensions = DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS
-        val allExtensions = kotlinExtensions + "java"
-        val rootsWalk = sourceRoots.asSequence().flatMap { it.walk() }
-        val files = rootsWalk.filter(File::isFile)
-        val sourceFiles = files.filter { it.extension.lowercase() in allExtensions }.toList()
-        val buildHistoryFile = File(cachesDir, "build-history.bin")
+        konst kotlinExtensions = DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS
+        konst allExtensions = kotlinExtensions + "java"
+        konst rootsWalk = sourceRoots.asSequence().flatMap { it.walk() }
+        konst files = rootsWalk.filter(File::isFile)
+        konst sourceFiles = files.filter { it.extension.lowercase() in allExtensions }.toList()
+        konst buildHistoryFile = File(cachesDir, "build-history.bin")
         args.javaSourceRoots = sourceRoots.map { it.absolutePath }.toTypedArray()
-        val buildReporter = TestBuildReporter(testICReporter = reporter, buildMetricsReporter = DoNothingBuildMetricsReporter)
+        konst buildReporter = TestBuildReporter(testICReporter = reporter, buildMetricsReporter = DoNothingBuildMetricsReporter)
 
         withIncrementalCompilation(args) {
-            val compiler =
+            konst compiler =
                 if (args.useK2 && args.useFirIC && args.useFirLT /* TODO by @Ilya.Chernikov: move LT check into runner */)
                     IncrementalFirJvmCompilerTestRunner(
                         cachesDir,
@@ -103,31 +103,31 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
     }
 
     private fun compileJava(sourceRoots: Iterable<File>, kotlinClassesPath: String): TestCompilationResult {
-        val javaSources = arrayListOf<File>()
+        konst javaSources = arrayListOf<File>()
         for (root in sourceRoots) {
             javaSources.addAll(root.walk().filter { it.isFile && it.extension == "java" })
         }
         if (javaSources.isEmpty()) return TestCompilationResult(ExitCode.OK, emptyList(), emptyList(), "")
 
-        val javaClasspath = compileClasspath + File.pathSeparator + kotlinClassesPath
-        val javaDestinationDir = File(workingDir, "java-classes").apply {
+        konst javaClasspath = compileClasspath + File.pathSeparator + kotlinClassesPath
+        konst javaDestinationDir = File(workingDir, "java-classes").apply {
             if (exists()) {
                 deleteRecursively()
             }
             mkdirs()
         }
-        val args = arrayOf(
+        konst args = arrayOf(
             "-cp", javaClasspath,
             "-d", javaDestinationDir.canonicalPath,
             *javaSources.map { it.canonicalPath }.toTypedArray()
         )
 
-        val err = ByteArrayOutputStream()
-        val javac = ToolProvider.getSystemJavaCompiler()
-        val rc = javac.run(null, null, err, *args)
+        konst err = ByteArrayOutputStream()
+        konst javac = ToolProvider.getSystemJavaCompiler()
+        konst rc = javac.run(null, null, err, *args)
 
-        val exitCode = if (rc == 0) ExitCode.OK else ExitCode.COMPILATION_ERROR
-        val errors = err.toString().split("\n")
+        konst exitCode = if (rc == 0) ExitCode.OK else ExitCode.COMPILATION_ERROR
+        konst errors = err.toString().split("\n")
         return TestCompilationResult(exitCode, javaSources, errors, "")
     }
 
@@ -138,7 +138,7 @@ abstract class AbstractIncrementalJvmCompilerRunnerTest : AbstractIncrementalCom
             classpath = compileClasspath
         }
 
-    private val compileClasspath =
+    private konst compileClasspath =
         listOf(
             kotlinStdlibJvm,
             KtTestUtil.getAnnotationsJar()

@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import java.util.*
 
 internal class LocationReportingTestMessageCollector : MessageCollector {
-    val errors = ArrayList<String>()
+    konst errors = ArrayList<String>()
 
     override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
         if (severity.isError) {

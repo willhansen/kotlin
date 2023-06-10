@@ -7,7 +7,7 @@
 
 import kotlin.reflect.full.*
 
-open class A(private val p: Int)
+open class A(private konst p: Int)
 class B : A(42)
 
 fun box() =

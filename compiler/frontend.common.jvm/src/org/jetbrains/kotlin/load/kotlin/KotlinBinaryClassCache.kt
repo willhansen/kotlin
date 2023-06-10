@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference
 import java.util.concurrent.CopyOnWriteArrayList
 
 class KotlinBinaryClassCache : Disposable {
-    private val requestCaches = CopyOnWriteArrayList<WeakReference<RequestCache>>()
+    private konst requestCaches = CopyOnWriteArrayList<WeakReference<RequestCache>>()
 
     private class RequestCache {
         var virtualFile: VirtualFile? = null
@@ -35,7 +35,7 @@ class KotlinBinaryClassCache : Disposable {
         }
     }
 
-    private val cache = object : ThreadLocal<RequestCache>() {
+    private konst cache = object : ThreadLocal<RequestCache>() {
         override fun initialValue(): RequestCache {
             return RequestCache().also {
                 requestCaches.add(WeakReference(it))
@@ -78,14 +78,14 @@ class KotlinBinaryClassCache : Disposable {
 
             if (file.name == PsiJavaModule.MODULE_INFO_CLS_FILE) return null
 
-            val service = ApplicationManager.getApplication().getService(KotlinBinaryClassCache::class.java)
-            val requestCache = service.cache.get()
+            konst service = ApplicationManager.getApplication().getService(KotlinBinaryClassCache::class.java)
+            konst requestCache = service.cache.get()
 
             if (file.modificationStamp == requestCache.modificationStamp && file == requestCache.virtualFile) {
                 return requestCache.result
             }
 
-            val aClass = ApplicationManager.getApplication().runReadAction(Computable {
+            konst aClass = ApplicationManager.getApplication().runReadAction(Computable {
                 VirtualFileKotlinClass.create(file, jvmMetadataVersion, fileContent)
             })
 

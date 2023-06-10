@@ -19,7 +19,7 @@ class B<T> {
 
 @Test
 fun test1() {
-    val b = B<Any>()
+    konst b = B<Any>()
     assertEquals(b, b) // Just to ensure B is not deleted by DCE
 }
 
@@ -31,6 +31,6 @@ fun getSame(obj: A<out Any>, foo: Foo<A<out Any>>) = foo.same(obj)
 
 @Test
 fun test2() {
-    val obj = object : A<Any> {}
+    konst obj = object : A<Any> {}
     assertSame(obj, getSame(obj) { it })
 }

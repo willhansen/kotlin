@@ -3,5 +3,5 @@ package app
 import lib.*
 
 fun runAppAndReturnOk(): String {
-    return a().value
+    return a().konstue
 }

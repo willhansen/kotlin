@@ -8,75 +8,75 @@ package test.comparisons
 import kotlin.native.concurrent.SharedImmutable
 import kotlin.test.*
 
-data class Item(val name: String, val rating: Int) : Comparable<Item> {
+data class Item(konst name: String, konst rating: Int) : Comparable<Item> {
     public override fun compareTo(other: Item): Int {
         return compareValuesBy(this, other, { it.rating }, { it.name })
     }
 }
 
 @SharedImmutable
-val STRING_CASE_INSENSITIVE_ORDER: Comparator<String> =
+konst STRING_CASE_INSENSITIVE_ORDER: Comparator<String> =
     compareBy { it: String -> it.uppercase() }.thenBy { it.lowercase() }.thenBy { it }
 
 class OrderingTest {
-    val v1 = Item("wine", 9)
-    val v2 = Item("beer", 10)
-    val v3 = Item("apple", 20)
-    val v4 = Item("grape", 22)
+    konst v1 = Item("wine", 9)
+    konst v2 = Item("beer", 10)
+    konst v3 = Item("apple", 20)
+    konst v4 = Item("grape", 22)
 
     @Test
     fun compareByCompareTo() {
-        val diff = v1.compareTo(v2)
+        konst diff = v1.compareTo(v2)
         assertTrue(diff < 0)
-        val infixDiff = v1 compareTo v2
+        konst infixDiff = v1 compareTo v2
         assertEquals(diff, infixDiff)
     }
 
     @Test
     fun compareByNameFirst() {
-        val diff = compareValuesBy(v1, v2, { it.name }, { it.rating })
+        konst diff = compareValuesBy(v1, v2, { it.name }, { it.rating })
         assertTrue(diff > 0)
     }
 
     @Test
     fun compareByRatingFirst() {
-        val diff = compareValuesBy(v1, v2, { it.rating }, { it.name })
+        konst diff = compareValuesBy(v1, v2, { it.rating }, { it.name })
         assertTrue(diff < 0)
     }
 
     @Test
     fun compareSameObjectsByRatingFirst() {
-        val diff = compareValuesBy(v1, v1, { it.rating }, { it.name })
+        konst diff = compareValuesBy(v1, v1, { it.rating }, { it.name })
         assertTrue(diff == 0)
     }
 
     @Test
     fun compareNullables() {
-        val v1: Item? = this.v1
-        val v2: Item? = null
-        val diff = compareValuesBy(v1, v2) { it?.rating }
+        konst v1: Item? = this.v1
+        konst v2: Item? = null
+        konst diff = compareValuesBy(v1, v2) { it?.rating }
         assertTrue(diff > 0)
-        val diff2 = nullsLast(compareBy<Item> { it.rating }.thenBy { it.name }).compare(v1, v2)
+        konst diff2 = nullsLast(compareBy<Item> { it.rating }.thenBy { it.name }).compare(v1, v2)
         assertTrue(diff2 < 0)
     }
 
     @Test
     fun sortComparatorThenComparator() {
-        val comparator = Comparator<Item> { a, b -> a.name compareTo b.name }.thenComparator { a, b -> a.rating compareTo b.rating }
+        konst comparator = Comparator<Item> { a, b -> a.name compareTo b.name }.thenComparator { a, b -> a.rating compareTo b.rating }
 
-        val diff = comparator.compare(v1, v2)
+        konst diff = comparator.compare(v1, v2)
         assertTrue(diff > 0)
-        val items = arrayListOf(v1, v2).sortedWith(comparator)
+        konst items = arrayListOf(v1, v2).sortedWith(comparator)
         assertEquals(v2, items[0])
         assertEquals(v1, items[1])
     }
 
     @Test
     fun combineComparators() {
-        val byName = compareBy<Item> { it.name }
-        val byRating = compareBy<Item> { it.rating }
-        val v3 = Item(v1.name, v1.rating + 1)
-        val v4 = Item(v2.name + "_", v2.rating)
+        konst byName = compareBy<Item> { it.name }
+        konst byRating = compareBy<Item> { it.rating }
+        konst v3 = Item(v1.name, v1.rating + 1)
+        konst v4 = Item(v2.name + "_", v2.rating)
         assertTrue((byName then byRating).compare(v1, v2) > 0)
         assertTrue((byName then byRating).compare(v1, v3) < 0)
         assertTrue((byName thenDescending byRating).compare(v1, v3) > 0)
@@ -88,16 +88,16 @@ class OrderingTest {
 
     @Test
     fun reversedComparator() {
-        val comparator = compareBy<Item> { it.name }
-        val reversed = comparator.reversed()
+        konst comparator = compareBy<Item> { it.name }
+        konst reversed = comparator.reversed()
         assertEquals(comparator.compare(v2, v1), reversed.compare(v1, v2))
         assertEquals(comparator, reversed.reversed())
     }
 
     @Test
     fun naturalOrderComparator() {
-        val v1 = "a"
-        val v2 = "beta"
+        konst v1 = "a"
+        konst v2 = "beta"
 
         assertTrue(naturalOrder<String>().compare(v1, v2) < 0)
         assertTrue(reverseOrder<String>().compare(v1, v2) > 0)
@@ -107,39 +107,39 @@ class OrderingTest {
 
     @Test
     fun sortByThenBy() {
-        val comparator = compareBy<Item> { it.rating }.thenBy { it.name }
+        konst comparator = compareBy<Item> { it.rating }.thenBy { it.name }
 
-        val diff = comparator.compare(v1, v2)
+        konst diff = comparator.compare(v1, v2)
         assertTrue(diff < 0)
-        val items = arrayListOf(v1, v2).sortedWith(comparator)
+        konst items = arrayListOf(v1, v2).sortedWith(comparator)
         assertEquals(v1, items[0])
         assertEquals(v2, items[1])
     }
 
     @Test
     fun sortByThenByDescending() {
-        val comparator = compareBy<Item> { it.rating }.thenByDescending { it.name }
+        konst comparator = compareBy<Item> { it.rating }.thenByDescending { it.name }
 
-        val diff = comparator.compare(v1, v2)
+        konst diff = comparator.compare(v1, v2)
         assertTrue(diff < 0)
-        val items = arrayListOf(v1, v2).sortedWith(comparator)
+        konst items = arrayListOf(v1, v2).sortedWith(comparator)
         assertEquals(v1, items[0])
         assertEquals(v2, items[1])
     }
 
     @Test
     fun sortUsingFunctionalComparator() {
-        val comparator = compareBy<Item>({ it.name }, { it.rating })
-        val diff = comparator.compare(v1, v2)
+        konst comparator = compareBy<Item>({ it.name }, { it.rating })
+        konst diff = comparator.compare(v1, v2)
         assertTrue(diff > 0)
-        val items = arrayListOf(v1, v2).sortedWith(comparator)
+        konst items = arrayListOf(v1, v2).sortedWith(comparator)
         assertEquals(v2, items[0])
         assertEquals(v1, items[1])
     }
 
     @Test
     fun sortUsingCustomComparator() {
-        val comparator = object : Comparator<Item> {
+        konst comparator = object : Comparator<Item> {
             override fun compare(a: Item, b: Item): Int {
                 return compareValuesBy(a, b, { it.name }, { it.rating })
             }
@@ -148,9 +148,9 @@ class OrderingTest {
                 return this == other
             }
         }
-        val diff = comparator.compare(v1, v2)
+        konst diff = comparator.compare(v1, v2)
         assertTrue(diff > 0)
-        val items = arrayListOf(v1, v2).sortedWith(comparator)
+        konst items = arrayListOf(v1, v2).sortedWith(comparator)
         assertEquals(v2, items[0])
         assertEquals(v1, items[1])
     }

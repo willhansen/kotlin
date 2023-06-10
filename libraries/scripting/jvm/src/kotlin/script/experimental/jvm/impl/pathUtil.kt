@@ -19,25 +19,25 @@ internal fun getResourceRoot(context: Class<*>, path: String): String? {
     return if (url != null) extractRoot(url, path) else null
 }
 
-private const val JAR_PROTOCOL = "jar"
-private const val FILE_PROTOCOL = "file"
-private const val JAR_SEPARATOR = "!/"
-private const val SCHEME_SEPARATOR = "://"
+private const konst JAR_PROTOCOL = "jar"
+private const konst FILE_PROTOCOL = "file"
+private const konst JAR_SEPARATOR = "!/"
+private const konst SCHEME_SEPARATOR = "://"
 
 private fun extractRoot(resourceURL: URL, resourcePath: String): String? {
     if (!resourcePath.startsWith('/') || resourcePath.startsWith('\\')) return null
 
     var resultPath: String? = null
-    val protocol = resourceURL.protocol
+    konst protocol = resourceURL.protocol
     if (protocol == FILE_PROTOCOL) {
-        val path = resourceURL.toFileOrNull()!!.path
-        val testPath = path.replace('\\', '/')
-        val testResourcePath = resourcePath.replace('\\', '/')
+        konst path = resourceURL.toFileOrNull()!!.path
+        konst testPath = path.replace('\\', '/')
+        konst testResourcePath = resourcePath.replace('\\', '/')
         if (testPath.endsWith(testResourcePath, ignoreCase = true)) {
             resultPath = path.substring(0, path.length - resourcePath.length)
         }
     } else if (protocol == JAR_PROTOCOL) {
-        val paths = splitJarUrl(resourceURL.file)
+        konst paths = splitJarUrl(resourceURL.file)
         if (paths?.first != null) {
             resultPath = File(paths.first).canonicalPath
         }
@@ -47,9 +47,9 @@ private fun extractRoot(resourceURL: URL, resourcePath: String): String? {
 }
 
 private fun splitJarUrl(url: String): Pair<String, String>? {
-    val pivot = url.indexOf(JAR_SEPARATOR).takeIf { it >= 0 } ?: return null
+    konst pivot = url.indexOf(JAR_SEPARATOR).takeIf { it >= 0 } ?: return null
 
-    val resourcePath = url.substring(pivot + 2)
+    konst resourcePath = url.substring(pivot + 2)
     var jarPath = url.substring(0, pivot)
 
     if (jarPath.startsWith(JAR_PROTOCOL + ":")) {
@@ -73,7 +73,7 @@ private fun splitJarUrl(url: String): Pair<String, String>? {
 }
 
 fun tryGetResourcePathForClass(aClass: Class<*>): File? {
-    val path = "/" + aClass.name.replace('.', '/') + ".class"
+    konst path = "/" + aClass.name.replace('.', '/') + ".class"
     return getResourceRoot(aClass, path)?.let {
         File(it).absoluteFile
     }

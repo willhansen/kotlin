@@ -1,5 +1,5 @@
-class My(val x: Int?) {
-    val y: Int? by lazy {
+class My(konst x: Int?) {
+    konst y: Int? by lazy {
         var z = x
         while (z != null) {
             z = <!DEBUG_INFO_SMARTCAST!>z<!>.hashCode()

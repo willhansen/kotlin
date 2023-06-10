@@ -9,8 +9,8 @@ interface Test {
 
     private var foo: String
         get() = storage
-        set(value) {
-            storage = value
+        set(konstue) {
+            storage = konstue
         }
 
     private fun bar(): String {

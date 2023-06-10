@@ -2,10 +2,10 @@ open var kotlin.Int.zoo: kotlin.Unit
 
 open fun foo()
 
-open val foo: kotlin.Int
+open konst foo: kotlin.Int
 
 open fun kotlin.Int.smth(): kotlin.Short
 
 open var bar: kotlin.Long
 
-open val kotlin.Int.doo: kotlin.String
+open konst kotlin.Int.doo: kotlin.String

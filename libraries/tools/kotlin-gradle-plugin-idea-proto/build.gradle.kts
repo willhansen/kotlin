@@ -4,7 +4,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     kotlin("jvm")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator")
 }
 
 kotlin {
@@ -13,7 +13,7 @@ kotlin {
     }
 }
 
-val embedded by configurations.getting {
+konst embedded by configurations.getting {
     isTransitive = false
     configurations.getByName("compileOnly").extendsFrom(this)
     configurations.getByName("testImplementation").extendsFrom(this)
@@ -47,7 +47,7 @@ runtimeJar(tasks.register<ShadowJar>("embeddable")) {
 
 /* Setup configuration for binary compatibility tests */
 run {
-    val binaryValidationApiJar = tasks.register<Jar>("binaryValidationApiJar") {
+    konst binaryValidationApiJar = tasks.register<Jar>("binaryValidationApiJar") {
         this.archiveBaseName.set(project.name + "-api")
         from(mainSourceSet.output)
     }
@@ -59,16 +59,16 @@ run {
 
     tasks {
         apiBuild {
-            inputJar.value(binaryValidationApiJar.flatMap { it.archiveFile })
+            inputJar.konstue(binaryValidationApiJar.flatMap { it.archiveFile })
         }
     }
 }
 
 /* Setup protoc */
 tasks.register<Exec>("protoc") {
-    val protoSources = file("src/main/proto")
-    val javaOutput = file("src/generated/java/")
-    val kotlinOutput = file("src/generated/kotlin/")
+    konst protoSources = file("src/main/proto")
+    konst javaOutput = file("src/generated/java/")
+    konst kotlinOutput = file("src/generated/kotlin/")
 
     inputs.dir(protoSources)
     outputs.dir(javaOutput)
@@ -98,7 +98,7 @@ tasks.register<Exec>("protoc") {
 
 /* Setup backwards compatibility tests */
 run {
-    val compatibilityTestClasspath by configurations.creating {
+    konst compatibilityTestClasspath by configurations.creating {
         isCanBeResolved = true
         isCanBeConsumed = false
         attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
@@ -110,7 +110,7 @@ run {
     }
 
     tasks.test {
-        val capturedCompatibilityTestClasspath: FileCollection = compatibilityTestClasspath
+        konst capturedCompatibilityTestClasspath: FileCollection = compatibilityTestClasspath
         dependsOn(capturedCompatibilityTestClasspath)
         inputs.files(capturedCompatibilityTestClasspath)
         doFirst {

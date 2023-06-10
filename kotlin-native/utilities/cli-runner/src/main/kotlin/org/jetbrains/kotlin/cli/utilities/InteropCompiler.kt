@@ -20,29 +20,29 @@ import org.jetbrains.kotlin.native.interop.tool.*
  * Otherwise returns array of compiler args.
  */
 fun invokeInterop(flavor: String, args: Array<String>, runFromDaemon: Boolean): Array<String>? {
-    val arguments = if (flavor == "native") CInteropArguments() else JSInteropArguments()
+    konst arguments = if (flavor == "native") CInteropArguments() else JSInteropArguments()
     arguments.argParser.parse(args)
-    val outputFileName = arguments.output
-    val noDefaultLibs = arguments.nodefaultlibs || arguments.nodefaultlibsDeprecated
-    val noEndorsedLibs = arguments.noendorsedlibs
-    val purgeUserLibs = arguments.purgeUserLibs
-    val nopack = arguments.nopack
-    val temporaryFilesDir = arguments.tempDir
-    val moduleName = (arguments as? CInteropArguments)?.moduleName
-    val shortModuleName = (arguments as? CInteropArguments)?.shortModuleName
+    konst outputFileName = arguments.output
+    konst noDefaultLibs = arguments.nodefaultlibs || arguments.nodefaultlibsDeprecated
+    konst noEndorsedLibs = arguments.noendorsedlibs
+    konst purgeUserLibs = arguments.purgeUserLibs
+    konst nopack = arguments.nopack
+    konst temporaryFilesDir = arguments.tempDir
+    konst moduleName = (arguments as? CInteropArguments)?.moduleName
+    konst shortModuleName = (arguments as? CInteropArguments)?.shortModuleName
 
-    val buildDir = File("$outputFileName-build")
-    val generatedDir = File(buildDir, "kotlin")
-    val nativesDir = File(buildDir,"natives")
-    val manifest = File(buildDir, "manifest.properties")
-    val cstubsName ="cstubs"
-    val libraries = arguments.library
-    val repos = arguments.repo
-    val targetRequest = if (arguments is CInteropArguments) arguments.target
+    konst buildDir = File("$outputFileName-build")
+    konst generatedDir = File(buildDir, "kotlin")
+    konst nativesDir = File(buildDir,"natives")
+    konst manifest = File(buildDir, "manifest.properties")
+    konst cstubsName ="cstubs"
+    konst libraries = arguments.library
+    konst repos = arguments.repo
+    konst targetRequest = if (arguments is CInteropArguments) arguments.target
         else (arguments as JSInteropArguments).target.toString()
-    val target = PlatformManager(KonanHomeProvider.determineKonanHome()).targetManager(targetRequest).target
+    konst target = PlatformManager(KonanHomeProvider.determineKonanHome()).targetManager(targetRequest).target
 
-    val cinteropArgsToCompiler = Interop().interop(flavor, args,
+    konst cinteropArgsToCompiler = Interop().interop(flavor, args,
             InternalInteropOptions(generatedDir.absolutePath,
                     nativesDir.absolutePath,manifest.path,
                     cstubsName.takeIf { flavor == "native" }
@@ -50,7 +50,7 @@ fun invokeInterop(flavor: String, args: Array<String>, runFromDaemon: Boolean): 
             runFromDaemon
     ) ?: return null // There is no need in compiler invocation if we're generating only metadata.
 
-    val nativeStubs =
+    konst nativeStubs =
         if (flavor == "wasm")
             arrayOf("-include-binary", File(nativesDir, "js_stubs.js").path)
         else

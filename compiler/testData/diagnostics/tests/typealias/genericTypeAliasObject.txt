@@ -1,17 +1,17 @@
 package
 
-public val test11: AnObject
-public val test12: GenericTestObject<*> /* = AnObject */
-public val test13: kotlin.String = "OK"
-public val test14: kotlin.String
-public val test25: GenericClassWithCompanion.Companion
-public val test26: GenericClassWithCompanion.Companion
-public val test27: kotlin.String = "OK"
-public val test28: kotlin.String
+public konst test11: AnObject
+public konst test12: GenericTestObject<*> /* = AnObject */
+public konst test13: kotlin.String = "OK"
+public konst test14: kotlin.String
+public konst test25: GenericClassWithCompanion.Companion
+public konst test26: GenericClassWithCompanion.Companion
+public konst test27: kotlin.String = "OK"
+public konst test28: kotlin.String
 
 public object AnObject {
     private constructor AnObject()
-    public final val ok: kotlin.String = "OK"
+    public final konst ok: kotlin.String = "OK"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.String
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -26,7 +26,7 @@ public final class GenericClassWithCompanion</*0*/ T> {
 
     public companion object Companion {
         private constructor Companion()
-        public final val ok: kotlin.String = "OK"
+        public final konst ok: kotlin.String = "OK"
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.String
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

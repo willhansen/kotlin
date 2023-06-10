@@ -7,5 +7,5 @@ public class KInnerClass {
     @Retention(RetentionPolicy.RUNTIME)
     annotation class Foo
 
-    inner class Inner(@Foo val foo: String){}
+    inner class Inner(@Foo konst foo: String){}
 }

@@ -1,6 +1,6 @@
 package sample
 
-val dasda
+konst dasda
 
 sdax = {
     println("Ha")

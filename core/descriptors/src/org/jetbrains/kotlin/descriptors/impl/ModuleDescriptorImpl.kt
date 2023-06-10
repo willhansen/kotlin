@@ -27,15 +27,15 @@ import org.jetbrains.kotlin.utils.sure
 
 class ModuleDescriptorImpl @JvmOverloads constructor(
     moduleName: Name,
-    private val storageManager: StorageManager,
-    override val builtIns: KotlinBuiltIns,
+    private konst storageManager: StorageManager,
+    override konst builtIns: KotlinBuiltIns,
     // May be null in compiler context, should be not-null in IDE context
-    override val platform: TargetPlatform? = null,
+    override konst platform: TargetPlatform? = null,
     capabilities: Map<ModuleCapability<*>, Any?> = emptyMap(),
-    override val stableName: Name? = null,
+    override konst stableName: Name? = null,
 ) : DeclarationDescriptorImpl(Annotations.EMPTY, moduleName), ModuleDescriptor {
-    private val capabilities: Map<ModuleCapability<*>, Any?>
-    private val packageViewDescriptorFactory: PackageViewDescriptorFactory
+    private konst capabilities: Map<ModuleCapability<*>, Any?>
+    private konst packageViewDescriptorFactory: PackageViewDescriptorFactory
 
     init {
         if (!moduleName.isSpecial) {
@@ -48,7 +48,7 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
     private var dependencies: ModuleDependencies? = null
     private var packageFragmentProviderForModuleContent: PackageFragmentProvider? = null
 
-    val packageFragmentProviderForModuleContentWithoutDependencies: PackageFragmentProvider
+    konst packageFragmentProviderForModuleContentWithoutDependencies: PackageFragmentProvider
         get() = packageFragmentProviderForModuleContent
             ?: throw IllegalStateException("Module $id was not initialized by the time it's content without dependencies was queried")
 
@@ -56,25 +56,25 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
 
     override fun assertValid() {
         if (!isValid) {
-            moduleInvalidated()
+            moduleInkonstidated()
         }
     }
 
-    private val packages = storageManager.createMemoizedFunction { fqName: FqName ->
+    private konst packages = storageManager.createMemoizedFunction { fqName: FqName ->
         packageViewDescriptorFactory.compute(this, fqName, storageManager)
     }
 
     @Deprecated("This method is not going to be supported. Please do not use it")
-    val testOnly_AllDependentModules: List<ModuleDescriptorImpl>
+    konst testOnly_AllDependentModules: List<ModuleDescriptorImpl>
         get() = this.dependencies!!.allDependencies
 
-    override val allDependencyModules: List<ModuleDescriptor>
+    override konst allDependencyModules: List<ModuleDescriptor>
         get() = this.dependencies.sure { "Dependencies of module $id were not set" }.allDependencies.filter { it != this }
 
-    override val expectedByModules: List<ModuleDescriptor>
+    override konst expectedByModules: List<ModuleDescriptor>
         get() = this.dependencies.sure { "Dependencies of module $id were not set" }.directExpectedByDependencies
 
-    override val allExpectedByModules: Set<ModuleDescriptor>
+    override konst allExpectedByModules: Set<ModuleDescriptor>
         get() = this.dependencies.sure { "Dependencies of module $id were not set" }.allExpectedByDependencies
 
     override fun getPackage(fqName: FqName): PackageViewDescriptor {
@@ -87,9 +87,9 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
         return packageFragmentProvider.getSubPackagesOf(fqName, nameFilter)
     }
 
-    private val packageFragmentProviderForWholeModuleWithDependencies by lazy {
-        val moduleDependencies = dependencies.sure { "Dependencies of module $id were not set before querying module content" }
-        val dependenciesDescriptors = moduleDependencies.allDependencies
+    private konst packageFragmentProviderForWholeModuleWithDependencies by lazy {
+        konst moduleDependencies = dependencies.sure { "Dependencies of module $id were not set before querying module content" }
+        konst dependenciesDescriptors = moduleDependencies.allDependencies
         assertValid()
         assert(this in dependenciesDescriptors) { "Module $id is not contained in its own dependencies, this is probably a misconfiguration" }
         dependenciesDescriptors.forEach { dependency ->
@@ -105,7 +105,7 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
         )
     }
 
-    private val isInitialized: Boolean
+    private konst isInitialized: Boolean
         get() = packageFragmentProviderForModuleContent != null
 
     fun setDependencies(dependencies: ModuleDependencies) {
@@ -134,7 +134,7 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
         return false
     }
 
-    private val id: String
+    private konst id: String
         get() = name.toString()
 
     /*
@@ -145,7 +145,7 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
         this.packageFragmentProviderForModuleContent = providerForModuleContent
     }
 
-    val packageFragmentProvider: PackageFragmentProvider
+    konst packageFragmentProvider: PackageFragmentProvider
         get() {
             assertValid()
             return packageFragmentProviderForWholeModuleWithDependencies
@@ -165,15 +165,15 @@ class ModuleDescriptorImpl @JvmOverloads constructor(
 }
 
 interface ModuleDependencies {
-    val allDependencies: List<ModuleDescriptorImpl>
-    val modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>
-    val directExpectedByDependencies: List<ModuleDescriptorImpl>
-    val allExpectedByDependencies: Set<ModuleDescriptorImpl>
+    konst allDependencies: List<ModuleDescriptorImpl>
+    konst modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>
+    konst directExpectedByDependencies: List<ModuleDescriptorImpl>
+    konst allExpectedByDependencies: Set<ModuleDescriptorImpl>
 }
 
 class ModuleDependenciesImpl(
-    override val allDependencies: List<ModuleDescriptorImpl>,
-    override val modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>,
-    override val directExpectedByDependencies: List<ModuleDescriptorImpl>,
-    override val allExpectedByDependencies: Set<ModuleDescriptorImpl>,
+    override konst allDependencies: List<ModuleDescriptorImpl>,
+    override konst modulesWhoseInternalsAreVisible: Set<ModuleDescriptorImpl>,
+    override konst directExpectedByDependencies: List<ModuleDescriptorImpl>,
+    override konst allExpectedByDependencies: Set<ModuleDescriptorImpl>,
 ) : ModuleDependencies

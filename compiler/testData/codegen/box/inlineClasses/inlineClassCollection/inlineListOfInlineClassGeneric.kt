@@ -3,11 +3,11 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T)
+konstue class Z<T: Int>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZArray(val storage: IntArray) : List<Z<Int>> {
-    override val size: Int
+konstue class ZArray(konst storage: IntArray) : List<Z<Int>> {
+    override konst size: Int
         get() = storage.size
 
     override fun contains(element: Z<Int>): Boolean {
@@ -34,7 +34,7 @@ value class ZArray(val storage: IntArray) : List<Z<Int>> {
 
     override fun subList(fromIndex: Int, toIndex: Int): List<Z<Int>> = TODO()
 
-    private class ZArrayIterator(val storage: IntArray, var index: Int = 0): ListIterator<Z<Int>> {
+    private class ZArrayIterator(konst storage: IntArray, var index: Int = 0): ListIterator<Z<Int>> {
         override fun hasNext(): Boolean = index < storage.size
         override fun next(): Z<Int> = Z(storage[index++])
         override fun nextIndex(): Int = index + 1
@@ -49,9 +49,9 @@ value class ZArray(val storage: IntArray) : List<Z<Int>> {
 
 
 fun box(): String {
-    val zs = ZArray(IntArray(5))
+    konst zs = ZArray(IntArray(5))
 
-    val testElement = object {} as Any
+    konst testElement = object {} as Any
     zs.contains(testElement)
     zs.indexOf(testElement)
     zs.lastIndexOf(testElement)

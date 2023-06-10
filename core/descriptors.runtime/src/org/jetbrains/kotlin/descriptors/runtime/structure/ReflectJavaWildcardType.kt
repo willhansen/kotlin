@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.load.java.structure.JavaAnnotation
 import org.jetbrains.kotlin.load.java.structure.JavaWildcardType
 import java.lang.reflect.WildcardType
 
-class ReflectJavaWildcardType(override val reflectType: WildcardType) : ReflectJavaType(), JavaWildcardType {
-    override val bound: ReflectJavaType?
+class ReflectJavaWildcardType(override konst reflectType: WildcardType) : ReflectJavaType(), JavaWildcardType {
+    override konst bound: ReflectJavaType?
         get() {
-            val upperBounds = reflectType.upperBounds
-            val lowerBounds = reflectType.lowerBounds
+            konst upperBounds = reflectType.upperBounds
+            konst lowerBounds = reflectType.lowerBounds
             if (upperBounds.size > 1 || lowerBounds.size > 1) {
                 throw UnsupportedOperationException("Wildcard types with many bounds are not yet supported: $reflectType")
             }
@@ -35,10 +35,10 @@ class ReflectJavaWildcardType(override val reflectType: WildcardType) : ReflectJ
             }
         }
 
-    override val isExtends: Boolean
+    override konst isExtends: Boolean
         get() = reflectType.upperBounds.firstOrNull() != Any::class.java
 
     // TODO: support type use annotations in reflection
-    override val annotations: Collection<JavaAnnotation> = emptyList()
-    override val isDeprecatedInJavaDoc = false
+    override konst annotations: Collection<JavaAnnotation> = emptyList()
+    override konst isDeprecatedInJavaDoc = false
 }

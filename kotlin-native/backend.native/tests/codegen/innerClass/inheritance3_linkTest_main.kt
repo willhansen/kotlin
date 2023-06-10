@@ -4,7 +4,7 @@
  */
 
 fun main() {
-    val o = Outer().Middle().Inner2()
+    konst o = Outer().Middle().Inner2()
     println(o.getOuter() != Outer())
     println(o.getMiddle() != Outer().Middle())
 }

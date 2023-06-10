@@ -10,8 +10,8 @@ suspend fun suspendThere(v: A): A = suspendCoroutineUninterceptedOrReturn { x ->
     COROUTINE_SUSPENDED
 }
 
-class A(var value: String) {
-    operator suspend fun plus(other: A) = suspendThere(A(value + other.value))
+class A(var konstue: String) {
+    operator suspend fun plus(other: A) = suspendThere(A(konstue + other.konstue))
 }
 
 fun builder(c: suspend () -> Unit) {
@@ -27,5 +27,5 @@ suspend fun usePlusAssign(): A {
 fun box(): String {
     var a = A("")
     builder { a = usePlusAssign() }
-    return a.value
+    return a.konstue
 }

@@ -14,13 +14,13 @@ import kotlin.native.ref.*
 @Test fun runTest() {
     // TODO: make it work in relaxed model as well.
     if (Platform.memoryModel == MemoryModel.RELAXED) return
-    val weakRefToTrashCycle = createLoop()
+    konst weakRefToTrashCycle = createLoop()
     kotlin.native.runtime.GC.collect()
     assertNull(weakRefToTrashCycle.get())
 }
 
 private fun createLoop(): WeakReference<Any> {
-    val loop = Array<Any?>(1, { null })
+    konst loop = Array<Any?>(1, { null })
     loop[0] = loop
 
     return WeakReference(loop)

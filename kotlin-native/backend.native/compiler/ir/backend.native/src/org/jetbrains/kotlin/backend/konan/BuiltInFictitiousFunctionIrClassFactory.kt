@@ -34,15 +34,15 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal object DECLARATION_ORIGIN_FUNCTION_CLASS : IrDeclarationOriginImpl("DECLARATION_ORIGIN_FUNCTION_CLASS")
 
-val IrPackageFragment.isFunctionInterfaceFile get() = packageFragmentDescriptor is FunctionInterfacePackageFragment
+konst IrPackageFragment.isFunctionInterfaceFile get() = packageFragmentDescriptor is FunctionInterfacePackageFragment
 
 abstract class KonanIrAbstractDescriptorBasedFunctionFactory : IrProvider, IrAbstractDescriptorBasedFunctionFactory()
 
 internal class LazyIrFunctionFactory(
-        private val symbolTable: SymbolTable,
-        private val stubGenerator: DeclarationStubGenerator,
-        private val irBuiltIns: IrBuiltInsOverDescriptors,
-        private val reflectionTypes: KonanReflectionTypes
+        private konst symbolTable: SymbolTable,
+        private konst stubGenerator: DeclarationStubGenerator,
+        private konst irBuiltIns: IrBuiltInsOverDescriptors,
+        private konst reflectionTypes: KonanReflectionTypes
 ) : KonanIrAbstractDescriptorBasedFunctionFactory() {
 
     override fun getDeclaration(symbol: IrSymbol) =
@@ -78,7 +78,7 @@ internal class LazyIrFunctionFactory(
     override fun kSuspendFunctionN(arity: Int, declarator: SymbolTable.((IrClassSymbol) -> IrClass) -> IrClass): IrClass =
             buildClass(reflectionTypes.getKSuspendFunction(arity) as FunctionClassDescriptor, declarator)
 
-    private val builtClassesMap = mutableMapOf<FunctionClassDescriptor, IrClass>()
+    private konst builtClassesMap = mutableMapOf<FunctionClassDescriptor, IrClass>()
 
     private fun createIrClass(descriptor: ClassDescriptor): IrClass =
             stubGenerator.generateClassStub(descriptor)
@@ -91,9 +91,9 @@ internal class LazyIrFunctionFactory(
 }
 
 internal class BuiltInFictitiousFunctionIrClassFactory(
-        private val symbolTable: SymbolTable,
-        private val irBuiltIns: IrBuiltInsOverDescriptors,
-        private val reflectionTypes: KonanReflectionTypes
+        private konst symbolTable: SymbolTable,
+        private konst irBuiltIns: IrBuiltInsOverDescriptors,
+        private konst reflectionTypes: KonanReflectionTypes
 ) : KonanIrAbstractDescriptorBasedFunctionFactory() {
 
     override fun getDeclaration(symbol: IrSymbol) =
@@ -106,20 +106,20 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
             }
 
     var module: IrModuleFragment? = null
-        set(value) {
-            if (value == null)
-                error("Provide a valid non-null module")
+        set(konstue) {
+            if (konstue == null)
+                error("Provide a konstid non-null module")
             if (field != null)
                 error("Module has already been set")
-            field = value
-            value.files += filesMap.values
+            field = konstue
+            konstue.files += filesMap.konstues
 //            builtClasses.forEach { it.addFakeOverrides() }
         }
 
-    class FunctionalInterface(val irClass: IrClass, val descriptor: FunctionClassDescriptor, val arity: Int)
+    class FunctionalInterface(konst irClass: IrClass, konst descriptor: FunctionClassDescriptor, konst arity: Int)
 
     fun buildAllClasses() {
-        val maxArity = 255 // See [BuiltInFictitiousFunctionClassFactory].
+        konst maxArity = 255 // See [BuiltInFictitiousFunctionClassFactory].
         (0 .. maxArity).forEach { arity ->
             functionN(arity)
             kFunctionN(arity)
@@ -152,21 +152,21 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
     override fun kSuspendFunctionN(arity: Int, declarator: SymbolTable.((IrClassSymbol) -> IrClass) -> IrClass): IrClass =
             buildClass(reflectionTypes.getKSuspendFunction(arity) as FunctionClassDescriptor, declarator)
 
-    private val functionSymbol = symbolTable.referenceClass(
+    private konst functionSymbol = symbolTable.referenceClass(
             irBuiltIns.builtIns.builtInsModule.findClassAcrossModuleDependencies(
                     ClassId.topLevel(KonanFqNames.function))!!)
 
-    private val kFunctionSymbol = symbolTable.referenceClass(
+    private konst kFunctionSymbol = symbolTable.referenceClass(
             irBuiltIns.builtIns.builtInsModule.findClassAcrossModuleDependencies(
                     ClassId.topLevel(KonanFqNames.kFunction))!!)
 
-    private val filesMap = mutableMapOf<PackageFragmentDescriptor, IrFile>()
+    private konst filesMap = mutableMapOf<PackageFragmentDescriptor, IrFile>()
 
-    private val builtClassesMap = mutableMapOf<FunctionClassDescriptor, IrClass>()
+    private konst builtClassesMap = mutableMapOf<FunctionClassDescriptor, IrClass>()
 
-    val builtClasses get() = builtClassesMap.values
+    konst builtClasses get() = builtClassesMap.konstues
 
-    val builtFunctionNClasses get() = builtClassesMap.entries.mapNotNull { (descriptor, irClass) ->
+    konst builtFunctionNClasses get() = builtClassesMap.entries.mapNotNull { (descriptor, irClass) ->
         with(descriptor) {
             if (functionTypeKind == FunctionTypeKind.Function)
                 FunctionalInterface(irClass, descriptor, arity)
@@ -186,7 +186,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
         returnType: IrType,
         isFakeOverride: Boolean
     ): IrSimpleFunction {
-        val functionFactory: (IrSimpleFunctionSymbol) -> IrSimpleFunction = {
+        konst functionFactory: (IrSimpleFunctionSymbol) -> IrSimpleFunction = {
             with(descriptor) {
                 IrFunctionImpl(
                     SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, origin, it, name, visibility, modality, returnType,
@@ -206,7 +206,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
     private fun buildClass(descriptor: FunctionClassDescriptor, declarator: SymbolTable.((IrClassSymbol) -> IrClass) -> IrClass): IrClass =
             builtClassesMap.getOrPut(descriptor) {
                 createClass(descriptor, declarator).apply {
-                    val functionClass = this
+                    konst functionClass = this
                     typeParameters += descriptor.declaredTypeParameters.map { typeParameterDescriptor ->
                         createTypeParameter(typeParameterDescriptor).also {
                             it.parent = this
@@ -214,15 +214,15 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
                         }
                     }
 
-                    val descriptorToIrParametersMap = typeParameters.map { it.descriptor to it }.toMap()
+                    konst descriptorToIrParametersMap = typeParameters.map { it.descriptor to it }.toMap()
                     superTypes += descriptor.typeConstructor.supertypes.map { superType ->
-                        val arguments = superType.arguments.map { argument ->
-                            val argumentClassifierDescriptor = argument.type.constructor.declarationDescriptor
-                            val argumentClassifierSymbol = argumentClassifierDescriptor?.let { descriptorToIrParametersMap[it] }
+                        konst arguments = superType.arguments.map { argument ->
+                            konst argumentClassifierDescriptor = argument.type.constructor.declarationDescriptor
+                            konst argumentClassifierSymbol = argumentClassifierDescriptor?.let { descriptorToIrParametersMap[it] }
                                     ?: error("Unexpected super type argument: $argumentClassifierDescriptor")
                             makeTypeProjection(argumentClassifierSymbol.defaultType, argument.projectionKind)
                         }
-                        val superTypeSymbol = when (val superTypeDescriptor = superType.constructor.declarationDescriptor) {
+                        konst superTypeSymbol = when (konst superTypeDescriptor = superType.constructor.declarationDescriptor) {
                             is FunctionClassDescriptor -> buildClass(superTypeDescriptor) {
                                 declareClass(superTypeDescriptor) {
                                     createIrClass(it, superTypeDescriptor)
@@ -237,9 +237,9 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
 
                     createParameterDeclarations()
 
-                    val invokeFunctionDescriptor = descriptor.unsubstitutedMemberScope.getContributedFunctions(
+                    konst invokeFunctionDescriptor = descriptor.unsubstitutedMemberScope.getContributedFunctions(
                             OperatorNameConventions.INVOKE, NoLookupLocation.FROM_BACKEND).single()
-                    val isFakeOverride = invokeFunctionDescriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE
+                    konst isFakeOverride = invokeFunctionDescriptor.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE
                     if (!isFakeOverride) {
                         declarations += createSimpleFunction(
                                 invokeFunctionDescriptor, DECLARATION_ORIGIN_FUNCTION_CLASS,
@@ -247,7 +247,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
                                 isFakeOverride
                         ).apply {
                             parent = functionClass
-                            valueParameters += invokeFunctionDescriptor.valueParameters.map {
+                            konstueParameters += invokeFunctionDescriptor.konstueParameters.map {
                                 IrValueParameterImpl(
                                         SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, DECLARATION_ORIGIN_FUNCTION_CLASS,
                                         IrValueParameterSymbolImpl(it), it.name, it.index,
@@ -259,7 +259,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
                             if (!isFakeOverride)
                                 createDispatchReceiverParameter(DECLARATION_ORIGIN_FUNCTION_CLASS)
                             else {
-                                val overriddenFunction = superTypes
+                                konst overriddenFunction = superTypes
                                         .mapNotNull { it.classOrNull?.owner }
                                         .single { it.descriptor is FunctionClassDescriptor }
                                         .simpleFunctions()
@@ -274,8 +274,8 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
 //                    if (this@BuiltInFictitiousFunctionIrClassFactory.module != null)
                         addFakeOverrides()
 
-                    val packageFragmentDescriptor = descriptor.findPackage()
-                    val file = filesMap.getOrPut(packageFragmentDescriptor) {
+                    konst packageFragmentDescriptor = descriptor.findPackage()
+                    konst file = filesMap.getOrPut(packageFragmentDescriptor) {
                         IrFileImpl(NaiveSourceBasedFileEntryImpl("[K][Suspend]Functions"), packageFragmentDescriptor).also {
                             this@BuiltInFictitiousFunctionIrClassFactory.module?.files?.add(it)
                         }
@@ -286,7 +286,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
             }
 
     private fun toIrType(wrapped: KotlinType): IrType {
-        val kotlinType = wrapped.unwrap()
+        konst kotlinType = wrapped.unwrap()
         return with(IrSimpleTypeBuilder()) {
             classifier = symbolTable.referenceClassifier(kotlinType.constructor.declarationDescriptor ?: error("No classifier for type $kotlinType"))
             nullability = SimpleTypeNullability.fromHasQuestionMark(kotlinType.isMarkedNullable)
@@ -299,7 +299,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
     }
 
     private fun IrFunction.createValueParameter(descriptor: ParameterDescriptor): IrValueParameter {
-        val varargType = if (descriptor is ValueParameterDescriptor) descriptor.varargElementType else null
+        konst varargType = if (descriptor is ValueParameterDescriptor) descriptor.varargElementType else null
         return IrValueParameterImpl(
                 offset,
                 offset,
@@ -320,14 +320,14 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
 
     private fun IrClass.addFakeOverrides() {
 
-        val fakeOverrideDescriptors = descriptor.unsubstitutedMemberScope.getContributedDescriptors(DescriptorKindFilter.CALLABLES)
+        konst fakeOverrideDescriptors = descriptor.unsubstitutedMemberScope.getContributedDescriptors(DescriptorKindFilter.CALLABLES)
                 .filterIsInstance<CallableMemberDescriptor>().filter { it.kind === CallableMemberDescriptor.Kind.FAKE_OVERRIDE }
 
         fun createFakeOverrideFunction(descriptor: FunctionDescriptor, property: IrPropertySymbol?): IrSimpleFunction {
-            val returnType = descriptor.returnType?.let { toIrType(it) } ?: error("No return type for $descriptor")
+            konst returnType = descriptor.returnType?.let { toIrType(it) } ?: error("No return type for $descriptor")
 
 
-            val functionDeclare = { s: IrSimpleFunctionSymbol ->
+            konst functionDeclare = { s: IrSimpleFunctionSymbol ->
                 descriptor.run {
                     IrFunctionImpl(
                             offset, offset, memberOrigin, s, name, visibility, modality, returnType,
@@ -337,20 +337,20 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
                 }
             }
 
-            val newFunction = symbolTable.declareSimpleFunction(descriptor, functionDeclare)
+            konst newFunction = symbolTable.declareSimpleFunction(descriptor, functionDeclare)
 
             newFunction.parent = this
             newFunction.overriddenSymbols = descriptor.overriddenDescriptors.mapNotNull { symbolTable.referenceSimpleFunction(it.original) }
             newFunction.dispatchReceiverParameter = descriptor.dispatchReceiverParameter?.let { newFunction.createValueParameter(it) }
             newFunction.extensionReceiverParameter = descriptor.extensionReceiverParameter?.let { newFunction.createValueParameter(it) }
-            newFunction.valueParameters = descriptor.valueParameters.map { newFunction.createValueParameter(it) }
+            newFunction.konstueParameters = descriptor.konstueParameters.map { newFunction.createValueParameter(it) }
             newFunction.correspondingPropertySymbol = property
 
             return newFunction
         }
 
         fun createFakeOverrideProperty(descriptor: PropertyDescriptor): IrProperty {
-            val propertyDeclare = { s: IrPropertySymbol ->
+            konst propertyDeclare = { s: IrPropertySymbol ->
                 IrPropertyImpl(
                         startOffset = offset,
                         endOffset = offset,
@@ -367,7 +367,7 @@ internal class BuiltInFictitiousFunctionIrClassFactory(
                         isExpect = descriptor.isExpect,
                         isFakeOverride = true)
             }
-            val property = symbolTable.declareProperty(offset, offset, memberOrigin, descriptor, propertyFactory = propertyDeclare)
+            konst property = symbolTable.declareProperty(offset, offset, memberOrigin, descriptor, propertyFactory = propertyDeclare)
 
             property.parent = this
             property.getter = descriptor.getter?.let { g -> createFakeOverrideFunction(g, property.symbol) }

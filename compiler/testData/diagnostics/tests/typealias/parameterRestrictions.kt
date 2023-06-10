@@ -6,4 +6,4 @@ typealias WithBounds2<X : <!BOUND_ON_TYPE_ALIAS_PARAMETER_NOT_ALLOWED!>Y<!>, Y :
 
 typealias WithBounds3<X> <!SYNTAX!>where <!DEBUG_INFO_MISSING_UNRESOLVED!>X<!> : <!DEBUG_INFO_MISSING_UNRESOLVED!>Any<!><!> = Int
 
-val x: WithVariance<Int, Int> = 0
+konst x: WithVariance<Int, Int> = 0

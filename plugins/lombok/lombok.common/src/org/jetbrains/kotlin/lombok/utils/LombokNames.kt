@@ -10,37 +10,37 @@ import org.jetbrains.kotlin.name.FqName
 
 object LombokNames {
 
-    val ACCESSORS = FqName("lombok.experimental.Accessors")
-    val GETTER = FqName("lombok.Getter")
-    val SETTER = FqName("lombok.Setter")
-    val WITH = FqName("lombok.With")
-    val DATA = FqName("lombok.Data")
-    val VALUE = FqName("lombok.Value")
-    val PACKAGE_PRIVATE = FqName("lombok.PackagePrivate")
-    val NO_ARGS_CONSTRUCTOR = FqName("lombok.NoArgsConstructor")
-    val ALL_ARGS_CONSTRUCTOR = FqName("lombok.AllArgsConstructor")
-    val REQUIRED_ARGS_CONSTRUCTOR = FqName("lombok.RequiredArgsConstructor")
-    val BUILDER = FqName("lombok.Builder")
-    val SINGULAR = FqName("lombok.Singular")
+    konst ACCESSORS = FqName("lombok.experimental.Accessors")
+    konst GETTER = FqName("lombok.Getter")
+    konst SETTER = FqName("lombok.Setter")
+    konst WITH = FqName("lombok.With")
+    konst DATA = FqName("lombok.Data")
+    konst VALUE = FqName("lombok.Value")
+    konst PACKAGE_PRIVATE = FqName("lombok.PackagePrivate")
+    konst NO_ARGS_CONSTRUCTOR = FqName("lombok.NoArgsConstructor")
+    konst ALL_ARGS_CONSTRUCTOR = FqName("lombok.AllArgsConstructor")
+    konst REQUIRED_ARGS_CONSTRUCTOR = FqName("lombok.RequiredArgsConstructor")
+    konst BUILDER = FqName("lombok.Builder")
+    konst SINGULAR = FqName("lombok.Singular")
 
-    val TABLE = FqName("Table".guavaPackage())
+    konst TABLE = FqName("Table".guavaPackage())
 
-    val ACCESSORS_ID = ClassId.topLevel(ACCESSORS)
-    val GETTER_ID = ClassId.topLevel(GETTER)
-    val SETTER_ID = ClassId.topLevel(SETTER)
-    val WITH_ID = ClassId.topLevel(WITH)
-    val DATA_ID = ClassId.topLevel(DATA)
-    val VALUE_ID = ClassId.topLevel(VALUE)
-    val BUILDER_ID = ClassId.topLevel(BUILDER)
-    val SINGULAR_ID = ClassId.topLevel(SINGULAR)
-    val NO_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(NO_ARGS_CONSTRUCTOR)
-    val ALL_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(ALL_ARGS_CONSTRUCTOR)
-    val REQUIRED_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(REQUIRED_ARGS_CONSTRUCTOR)
+    konst ACCESSORS_ID = ClassId.topLevel(ACCESSORS)
+    konst GETTER_ID = ClassId.topLevel(GETTER)
+    konst SETTER_ID = ClassId.topLevel(SETTER)
+    konst WITH_ID = ClassId.topLevel(WITH)
+    konst DATA_ID = ClassId.topLevel(DATA)
+    konst VALUE_ID = ClassId.topLevel(VALUE)
+    konst BUILDER_ID = ClassId.topLevel(BUILDER)
+    konst SINGULAR_ID = ClassId.topLevel(SINGULAR)
+    konst NO_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(NO_ARGS_CONSTRUCTOR)
+    konst ALL_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(ALL_ARGS_CONSTRUCTOR)
+    konst REQUIRED_ARGS_CONSTRUCTOR_ID = ClassId.topLevel(REQUIRED_ARGS_CONSTRUCTOR)
 
-    val TABLE_CLASS_ID = ClassId.topLevel(TABLE)
+    konst TABLE_CLASS_ID = ClassId.topLevel(TABLE)
 
     //taken from idea lombok plugin
-    val NON_NULL_ANNOTATIONS = listOf(
+    konst NON_NULL_ANNOTATIONS = listOf(
         "androidx.annotation.NonNull",
         "android.support.annotation.NonNull",
         "com.sun.istack.internal.NotNull",
@@ -56,7 +56,7 @@ object LombokNames {
         "org.springframework.lang.NonNull"
     ).map { FqName(it) }.toSet()
 
-    private val SUPPORTED_JAVA_COLLECTIONS = setOf(
+    private konst SUPPORTED_JAVA_COLLECTIONS = setOf(
         "java.lang.Iterable",
         "java.util.Collection",
         "java.util.List",
@@ -65,13 +65,13 @@ object LombokNames {
         "java.util.NavigableSet",
     )
 
-    private val SUPPORTED_JAVA_MAPS = setOf(
+    private konst SUPPORTED_JAVA_MAPS = setOf(
         "java.util.Map",
         "java.util.SortedMap",
         "java.util.NavigableMap",
     )
 
-    private val SUPPORTED_KOTLIN_COLLECTIONS = setOf(
+    private konst SUPPORTED_KOTLIN_COLLECTIONS = setOf(
         "kotlin.collections.Iterable",
         "kotlin.collections.MutableIterable",
         "kotlin.collections.Collection",
@@ -82,29 +82,29 @@ object LombokNames {
         "kotlin.collections.MutableSet",
     )
 
-    private val SUPPORTED_KOTLIN_MAPS = setOf(
+    private konst SUPPORTED_KOTLIN_MAPS = setOf(
         "kotlin.collections.Map",
         "kotlin.collections.MutableMap",
     )
 
-    val SUPPORTED_GUAVA_COLLECTIONS = listOf(
+    konst SUPPORTED_GUAVA_COLLECTIONS = listOf(
         "ImmutableCollection",
         "ImmutableList",
         "ImmutableSet",
         "ImmutableSortedSet",
     ).guavaPackage()
 
-    private val SUPPORTED_GUAVA_MAPS = listOf(
+    private konst SUPPORTED_GUAVA_MAPS = listOf(
         "ImmutableMap",
         "ImmutableBiMap",
         "ImmutableSortedMap",
     ).guavaPackage()
 
-    val SUPPORTED_COLLECTIONS = SUPPORTED_JAVA_COLLECTIONS + SUPPORTED_KOTLIN_COLLECTIONS + SUPPORTED_GUAVA_COLLECTIONS
+    konst SUPPORTED_COLLECTIONS = SUPPORTED_JAVA_COLLECTIONS + SUPPORTED_KOTLIN_COLLECTIONS + SUPPORTED_GUAVA_COLLECTIONS
 
-    val SUPPORTED_MAPS = SUPPORTED_JAVA_MAPS + SUPPORTED_KOTLIN_MAPS + SUPPORTED_GUAVA_MAPS
+    konst SUPPORTED_MAPS = SUPPORTED_JAVA_MAPS + SUPPORTED_KOTLIN_MAPS + SUPPORTED_GUAVA_MAPS
 
-    val SUPPORTED_TABLES = listOf(
+    konst SUPPORTED_TABLES = listOf(
         "ImmutableTable",
     ).guavaPackage()
 
@@ -115,7 +115,7 @@ object LombokNames {
     }
 
     private fun String.guavaPackage(): String {
-        val prefix = listOf("com", "google", "common", "collect").joinToString(".")
+        konst prefix = listOf("com", "google", "common", "collect").joinToString(".")
         return "$prefix.$this"
     }
 }

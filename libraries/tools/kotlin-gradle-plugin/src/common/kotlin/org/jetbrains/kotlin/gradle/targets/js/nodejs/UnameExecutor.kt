@@ -11,7 +11,7 @@ import org.gradle.api.provider.ProviderFactory
 import org.jetbrains.kotlin.gradle.plugin.VariantImplementationFactories
 
 internal interface UnameExecutor {
-    val unameExecResult: Provider<String>
+    konst unameExecResult: Provider<String>
 
     interface UnameExecutorVariantFactory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(project: Project): UnameExecutor
@@ -23,11 +23,11 @@ internal class DefaultUnameExecutorVariantFactory : UnameExecutor.UnameExecutorV
 }
 
 internal class DefaultUnameExecutor(
-    private val providerFactory: ProviderFactory,
+    private konst providerFactory: ProviderFactory,
 ) : UnameExecutor {
-    override val unameExecResult: Provider<String>
+    override konst unameExecResult: Provider<String>
         get() {
-            val cmd = providerFactory.exec {
+            konst cmd = providerFactory.exec {
                 it.executable = "uname"
                 it.args = listOf("-m")
             }

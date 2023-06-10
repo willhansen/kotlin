@@ -6,14 +6,14 @@ import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
 import kotlin.coroutines.*
 
-class Bar(val x: Any)
+class Bar(konst x: Any)
 inline fun Any.map(transform: (Any) -> Any) {
     when (this) {
-        is Foo -> Bar(transform(value))
+        is Foo -> Bar(transform(konstue))
     }
 }
 
-class Foo(val value: Any) {
+class Foo(konst konstue: Any) {
     companion object {
         inline fun of(f: () -> Unit): Any = try {
             Foo(f())

@@ -1,4 +1,4 @@
 @ExplicitPropertyAnnotation
 @PropertyAnnotation
-val lazyProperty: kotlin.Int
+konst lazyProperty: kotlin.Int
   get()

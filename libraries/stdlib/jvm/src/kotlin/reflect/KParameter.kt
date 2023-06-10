@@ -24,7 +24,7 @@ public interface KParameter : KAnnotatedElement {
     /**
      * 0-based index of this parameter in the parameter list of its containing callable.
      */
-    public val index: Int
+    public konst index: Int
 
     /**
      * Name of this parameter as it was declared in the source code,
@@ -33,22 +33,22 @@ public interface KParameter : KAnnotatedElement {
      * extension receiver for extension functions or properties, parameters of Java methods
      * compiled without the debug information, and others.
      */
-    public val name: String?
+    public konst name: String?
 
     /**
      * Type of this parameter. For a `vararg` parameter, this is the type of the corresponding array,
      * not the individual element.
      */
-    public val type: KType
+    public konst type: KType
 
     /**
      * Kind of this parameter.
      */
-    public val kind: Kind
+    public konst kind: Kind
 
     /**
      * Kind represents a particular position of the parameter declaration in the source code,
-     * such as an instance, an extension receiver parameter or a value parameter.
+     * such as an instance, an extension receiver parameter or a konstue parameter.
      */
     public enum class Kind {
         /** Instance required to make a call to the member, or an outer class instance for an inner class constructor. */
@@ -57,7 +57,7 @@ public interface KParameter : KAnnotatedElement {
         /** Extension receiver of an extension function or property. */
         EXTENSION_RECEIVER,
 
-        /** Ordinary named value parameter. */
+        /** Ordinary named konstue parameter. */
         VALUE,
     }
 
@@ -65,10 +65,10 @@ public interface KParameter : KAnnotatedElement {
      * `true` if this parameter is optional and can be omitted when making a call via [KCallable.callBy], or `false` otherwise.
      *
      * A parameter is optional in any of the two cases:
-     * 1. The default value is provided at the declaration of this parameter.
+     * 1. The default konstue is provided at the declaration of this parameter.
      * 2. The parameter is declared in a member function and one of the corresponding parameters in the super functions is optional.
      */
-    public val isOptional: Boolean
+    public konst isOptional: Boolean
 
     /**
      * `true` if this parameter is `vararg`.
@@ -76,5 +76,5 @@ public interface KParameter : KAnnotatedElement {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isVararg: Boolean
+    public konst isVararg: Boolean
 }

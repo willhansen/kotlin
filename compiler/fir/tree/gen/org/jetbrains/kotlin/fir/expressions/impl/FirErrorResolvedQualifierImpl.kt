@@ -27,22 +27,22 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirErrorResolvedQualifierImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val packageFqName: FqName,
-    override val relativeClassFqName: FqName?,
-    override val symbol: FirClassLikeSymbol<*>?,
+    override konst packageFqName: FqName,
+    override konst relativeClassFqName: FqName?,
+    override konst symbol: FirClassLikeSymbol<*>?,
     override var isNullableLHSForCallableReference: Boolean,
-    override val isFullyQualified: Boolean,
+    override konst isFullyQualified: Boolean,
     override var nonFatalDiagnostics: MutableOrEmptyList<ConeDiagnostic>,
     override var typeArguments: MutableOrEmptyList<FirTypeProjection>,
-    override val diagnostic: ConeDiagnostic,
+    override konst diagnostic: ConeDiagnostic,
 ) : FirErrorResolvedQualifier() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val classId: ClassId? get() = relativeClassFqName?.let {
+    override konst classId: ClassId? get() = relativeClassFqName?.let {
     ClassId(packageFqName, it, false)
 }
-    override val resolvedToCompanionObject: Boolean get() = false
+    override konst resolvedToCompanionObject: Boolean get() = false
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         typeRef.accept(visitor, data)

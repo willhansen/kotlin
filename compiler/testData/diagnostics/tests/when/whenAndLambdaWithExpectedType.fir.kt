@@ -9,25 +9,25 @@
  * overload-resolution, determining-function-applicability-for-a-specific-call, description -> paragraph 3 -> sentence 3
  */
 
-val test1: (String) -> Boolean =
+konst test1: (String) -> Boolean =
         when {
             true -> {{ true }}
             else -> {{ false }}
         }
 
-val test2: (String) -> Boolean =
+konst test2: (String) -> Boolean =
         when {
             true -> {{ true }}
             else -> null!!
         }
 
-val test3: (String) -> Boolean =
+konst test3: (String) -> Boolean =
         when {
             true -> { s -> true }
             else -> null!!
         }
 
-val test4: (String) -> Boolean =
+konst test4: (String) -> Boolean =
         <!INITIALIZER_TYPE_MISMATCH!>when {
             true -> <!ARGUMENT_TYPE_MISMATCH!>{ s1, <!CANNOT_INFER_PARAMETER_TYPE!>s2<!> -> true }<!>
             else -> null!!

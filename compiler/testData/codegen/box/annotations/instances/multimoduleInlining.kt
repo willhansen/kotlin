@@ -8,7 +8,7 @@
 
 package a
 
-annotation class A(val i: Int)
+annotation class A(konst i: Int)
 
 inline fun foo(i: Int): A = A(i)
 
@@ -27,8 +27,8 @@ class C {
 }
 
 fun box(): String {
-    val one = C().one()
-    val two = C().two()
+    konst one = C().one()
+    konst two = C().two()
     assert(one.i == 1)
     assert(two.i == 2)
     // Just like SAM wrappers, annotation implementation classes should be copied from inline functions

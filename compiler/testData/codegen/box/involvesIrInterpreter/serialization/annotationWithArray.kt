@@ -7,11 +7,11 @@
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AnnotationWithVararg(vararg val array: String)
+annotation class AnnotationWithVararg(vararg konst array: String)
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AnnotationWithArray(val array: Array<String>)
+annotation class AnnotationWithArray(konst array: Array<String>)
 
 @AnnotationWithVararg("Str" <!EVALUATED("String")!>+ "ing"<!>, <!EVALUATED("String2")!>"String2"<!>, <!EVALUATED("String3")!>"String${3}"<!>)
 class A

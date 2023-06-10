@@ -69,11 +69,11 @@ fun isValidJavaFqName(qualifiedName: String?): Boolean {
     return state != State.AFTER_DOT
 }
 
-fun <V> FqName.findValueForMostSpecificFqname(values: Map<FqName, V>): V? {
-    val suitableItems = values.filter { (fqName, _) -> this == fqName || this.isChildOf(fqName) }
+fun <V> FqName.findValueForMostSpecificFqname(konstues: Map<FqName, V>): V? {
+    konst suitableItems = konstues.filter { (fqName, _) -> this == fqName || this.isChildOf(fqName) }
         .takeIf { it.isNotEmpty() } ?: return null
 
-    return suitableItems.minByOrNull { (fqName, _) -> fqName.tail(this).asString().length }?.value
+    return suitableItems.minByOrNull { (fqName, _) -> fqName.tail(this).asString().length }?.konstue
 }
 
 fun ClassId.callableIdForConstructor(): CallableId {

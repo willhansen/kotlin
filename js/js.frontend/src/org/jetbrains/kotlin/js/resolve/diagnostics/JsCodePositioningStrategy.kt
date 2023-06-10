@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.js.resolve.diagnostics.JsCallData
 object JsCodePositioningStrategy : PositioningStrategy<PsiElement>() {
     override fun markDiagnostic(diagnostic: DiagnosticMarker): List<TextRange> {
         @Suppress("UNCHECKED_CAST")
-        val diagnosticWithParameters = diagnostic as DiagnosticWithParameters1<KtExpression, JsCallData>
-        val textRange = diagnosticWithParameters.a.reportRange
+        konst diagnosticWithParameters = diagnostic as DiagnosticWithParameters1<KtExpression, JsCallData>
+        konst textRange = diagnosticWithParameters.a.reportRange
         return listOf(textRange)
     }
 }

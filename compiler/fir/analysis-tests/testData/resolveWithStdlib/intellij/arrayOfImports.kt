@@ -13,8 +13,8 @@ import kotlin.reflect.KClass
 @Second(<!ARGUMENT_TYPE_MISMATCH!>arrayOf(arrayOf(""), arrayOf(First(arrayOf())))<!>)
 fun foo() {}
 
-annotation class First(val value: Array<KClass<*>>)
+annotation class First(konst konstue: Array<KClass<*>>)
 
-annotation class Second(val value: Array<First>)
+annotation class Second(konst konstue: Array<First>)
 
-annotation class Third(val first: First, val second: Second)
+annotation class Third(konst first: First, konst second: Second)

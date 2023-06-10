@@ -6,7 +6,7 @@ class A {
 }
 
 fun box(): String {
-    val x = (A::foo).call(A(), 42, 239)
+    konst x = (A::foo).call(A(), 42, 239)
     if (x != 281) return "Fail: $x"
 
     try {

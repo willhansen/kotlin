@@ -3,7 +3,7 @@
 package foo
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
     s.append("a")
     s.append("b").append("c")
     s.append('d').append("e")

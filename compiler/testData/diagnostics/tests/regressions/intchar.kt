@@ -1,2 +1,2 @@
 // FIR_IDENTICAL
-val x: Char = '1'.plus(1)
+konst x: Char = '1'.plus(1)

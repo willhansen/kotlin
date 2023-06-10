@@ -7,8 +7,8 @@ package org.jetbrains.kotlin.ir.expressions
 
 import org.jetbrains.kotlin.ir.types.IrType
 
-class ConstructorTypeArguments(internal val irConstructorCall: IrConstructorCall) : AbstractList<IrType?>() {
-    override val size: Int
+class ConstructorTypeArguments(internal konst irConstructorCall: IrConstructorCall) : AbstractList<IrType?>() {
+    override konst size: Int
         get() = irConstructorCall.constructorTypeArgumentsCount
 
     override fun get(index: Int): IrType? =
@@ -18,8 +18,8 @@ class ConstructorTypeArguments(internal val irConstructorCall: IrConstructorCall
             irConstructorCall.getConstructorTypeArgument(index)
 }
 
-class ClassTypeArguments(internal val irConstructorCall: IrConstructorCall) : AbstractList<IrType?>() {
-    override val size: Int
+class ClassTypeArguments(internal konst irConstructorCall: IrConstructorCall) : AbstractList<IrType?>() {
+    override konst size: Int
         get() = irConstructorCall.classTypeArgumentsCount
 
     override fun get(index: Int): IrType? =
@@ -44,7 +44,7 @@ operator fun ConstructorTypeArguments.set(index: Int, type: IrType?) {
     irConstructorCall.putConstructorTypeArgument(index, type)
 }
 
-val IrConstructorCall.classTypeArgumentsCount: Int
+konst IrConstructorCall.classTypeArgumentsCount: Int
     get() = typeArgumentsCount - constructorTypeArgumentsCount
 
 fun IrConstructorCall.getClassTypeArgument(index: Int): IrType? =
@@ -67,6 +67,6 @@ fun IrConstructorCall.getClassTypeArguments() =
 
 var IrConstructorCall.outerClassReceiver: IrExpression?
     get() = dispatchReceiver
-    set(value) {
-        dispatchReceiver = value
+    set(konstue) {
+        dispatchReceiver = konstue
     }

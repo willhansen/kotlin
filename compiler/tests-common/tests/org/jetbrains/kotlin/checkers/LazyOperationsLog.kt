@@ -39,30 +39,30 @@ import java.util.*
 import java.util.regex.Pattern
 
 class LazyOperationsLog(
-        val stringSanitizer: (String) -> String
+        konst stringSanitizer: (String) -> String
 ) {
-    val ids = IdentityHashMap<Any, Int>()
+    konst ids = IdentityHashMap<Any, Int>()
     private fun objectId(o: Any): Int = ids.getOrPut(o, { ids.size })
 
     private class Record(
-            val lambda: Any,
-            val data: LoggingStorageManager.CallData
+            konst lambda: Any,
+            konst data: LoggingStorageManager.CallData
     )
 
-    private val records = ArrayList<Record>()
+    private konst records = ArrayList<Record>()
 
-    val addRecordFunction: (lambda: Any, LoggingStorageManager.CallData) -> Unit = {
+    konst addRecordFunction: (lambda: Any, LoggingStorageManager.CallData) -> Unit = {
         lambda, data ->
         records.add(Record(lambda, data))
     }
 
     fun getText(): String {
-        val groupedByOwner = records.groupByTo(IdentityHashMap()) {
+        konst groupedByOwner = records.groupByTo(IdentityHashMap()) {
             it.data.fieldOwner
-        }.map { Pair(it.key, it.value) }
+        }.map { Pair(it.key, it.konstue) }
 
         return groupedByOwner.map {
-            val (owner, records) = it
+            konst (owner, records) = it
             renderOwner(owner, records)
         }.sortedBy(stringSanitizer).joinToString("\n").renumberObjects()
     }
@@ -74,13 +74,13 @@ class LazyOperationsLog(
      *   output = "A@0 B@1"
      */
     private fun String.renumberObjects(): String {
-        val ids = HashMap<String, String>()
+        konst ids = HashMap<String, String>()
         fun newId(objectId: String): String {
             return ids.getOrPut(objectId, { "@" + ids.size })
         }
 
-        val m = Pattern.compile("@\\d+").matcher(this)
-        val sb = StringBuffer()
+        konst m = Pattern.compile("@\\d+").matcher(this)
+        konst sb = StringBuffer()
         while (m.find()) {
             m.appendReplacement(sb, newId(m.group(0)))
         }
@@ -89,7 +89,7 @@ class LazyOperationsLog(
     }
 
     private fun renderOwner(owner: Any?, records: List<Record>): String {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         with (Printer(sb)) {
             println(render(owner), " {")
             indent {
@@ -103,8 +103,8 @@ class LazyOperationsLog(
     }
 
     private fun renderRecord(record: Record): String {
-        val data = record.data
-        val sb = StringBuilder()
+        konst data = record.data
+        konst sb = StringBuilder()
 
         sb.append(data.field?.name ?: "in ${data.lambdaCreatedIn.getDeclarationName()}")
 
@@ -124,14 +124,14 @@ class LazyOperationsLog(
     private fun render(o: Any?): String {
         if (o == null) return "null"
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         if (o is FqName || o is Name || o is String || o is Number || o is Boolean) {
             sb.append("'$o': ")
         }
 
-        val id = objectId(o)
+        konst id = objectId(o)
 
-        val aClass = o::class.java
+        konst aClass = o::class.java
         sb.append(if (aClass.isAnonymousClass) aClass.name.substringAfterLast('.') else aClass.simpleName).append("@$id")
 
         fun Any.appendQuoted() {
@@ -141,21 +141,21 @@ class LazyOperationsLog(
         when {
             o is Named -> o.name.appendQuoted()
             o::class.java.simpleName == "LazyJavaClassifierType" -> {
-                val javaType = o.field<JavaTypeImpl<*>>("javaType")
+                konst javaType = o.field<JavaTypeImpl<*>>("javaType")
                 javaType.psi.presentableText.appendQuoted()
             }
             o::class.java.simpleName == "LazyJavaClassTypeConstructor" -> {
-                val javaClass = o.field<Any>("this\$0").field<JavaClassImpl>("jClass")
+                konst javaClass = o.field<Any>("this\$0").field<JavaClassImpl>("jClass")
                 javaClass.psi.name!!.appendQuoted()
             }
             o::class.java.simpleName == "DeserializedType" -> {
-                val typeDeserializer = o.field<TypeDeserializer>("typeDeserializer")
-                val context = typeDeserializer.field<DeserializationContext>("c")
-                val typeProto = o.field<ProtoBuf.Type>("typeProto")
-                val text = when {
+                konst typeDeserializer = o.field<TypeDeserializer>("typeDeserializer")
+                konst context = typeDeserializer.field<DeserializationContext>("c")
+                konst typeProto = o.field<ProtoBuf.Type>("typeProto")
+                konst text = when {
                     typeProto.hasClassName() -> context.nameResolver.getClassId(typeProto.className).asSingleFqName().asString()
                     typeProto.hasTypeParameter() -> {
-                        val classifier = (o as KotlinType).constructor.declarationDescriptor!!
+                        konst classifier = (o as KotlinType).constructor.declarationDescriptor!!
                         "" + classifier.name + " in " + DescriptorUtils.getFqName(classifier.containingDeclaration)
                     }
                     else -> "???"
@@ -192,7 +192,7 @@ class LazyOperationsLog(
 }
 
 private fun <T> Any.field(name: String): T {
-    val field = this::class.java.getDeclaredField(name)
+    konst field = this::class.java.getDeclaredField(name)
     field.isAccessible = true
     @Suppress("UNCHECKED_CAST")
     return field.get(this) as T

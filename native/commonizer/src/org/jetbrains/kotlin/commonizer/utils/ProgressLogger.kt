@@ -8,12 +8,12 @@ package org.jetbrains.kotlin.commonizer.utils
 import org.jetbrains.kotlin.commonizer.CommonizerTarget
 import org.jetbrains.kotlin.util.Logger
 
-private const val ansiReset = "\u001B[0m"
-private const val ansiTimeColor = "\u001B[36m"
-private const val ansiTargetColor = "\u001B[32m"
+private const konst ansiReset = "\u001B[0m"
+private const konst ansiTimeColor = "\u001B[36m"
+private const konst ansiTargetColor = "\u001B[32m"
 
 internal inline fun <T> Logger?.progress(message: String, action: () -> T): T {
-    val clock = ResettableClockMark()
+    konst clock = ResettableClockMark()
     clock.reset()
     try {
         return action()

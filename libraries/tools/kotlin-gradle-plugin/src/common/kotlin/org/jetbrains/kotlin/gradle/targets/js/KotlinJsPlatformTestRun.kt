@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.gradle.testing.requireCompilationOfTarget
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class JsCompilationExecutionSource(override val compilation: KotlinJsCompilation) :
+class JsCompilationExecutionSource(override konst compilation: KotlinJsCompilation) :
     CompilationExecutionSource<KotlinJsCompilation>
 
 open class KotlinJsPlatformTestRun(testRunName: String, target: KotlinTarget) :
@@ -33,9 +33,9 @@ open class KotlinJsPlatformTestRun(testRunName: String, target: KotlinTarget) :
 
     final override var executionSource: JsCompilationExecutionSource
         get() = _executionSource
-        set(value) {
-            executionTask.configure { it.compilation = value.compilation }
-            _executionSource = value
+        set(konstue) {
+            executionTask.configure { it.compilation = konstue.compilation }
+            _executionSource = konstue
         }
 
     override fun setExecutionSourceFrom(compilation: KotlinJsCompilation) {
@@ -45,16 +45,16 @@ open class KotlinJsPlatformTestRun(testRunName: String, target: KotlinTarget) :
     }
 }
 
-class JsAggregatingExecutionSource(private val aggregatingTestRun: KotlinJsReportAggregatingTestRun) :
+class JsAggregatingExecutionSource(private konst aggregatingTestRun: KotlinJsReportAggregatingTestRun) :
     KotlinAggregateExecutionSource<JsCompilationExecutionSource> {
 
-    override val executionSources: Iterable<JsCompilationExecutionSource>
+    override konst executionSources: Iterable<JsCompilationExecutionSource>
         get() = aggregatingTestRun.getConfiguredExecutions().map { it.executionSource }
 }
 
 abstract class KotlinJsReportAggregatingTestRun @Inject constructor(
     testRunName: String,
-    override val target: KotlinJsSubTargetContainerDsl
+    override konst target: KotlinJsSubTargetContainerDsl
 ) : KotlinReportAggregatingTestRun<JsCompilationExecutionSource, JsAggregatingExecutionSource, KotlinJsPlatformTestRun>(testRunName),
     KotlinTargetTestRun<JsAggregatingExecutionSource>,
     CompilationExecutionSourceSupport<KotlinJsCompilation> {
@@ -63,7 +63,7 @@ abstract class KotlinJsReportAggregatingTestRun @Inject constructor(
         setExecutionSourceFrom(compilation)
     }
 
-    override val executionSource: JsAggregatingExecutionSource
+    override konst executionSource: JsAggregatingExecutionSource
         get() = JsAggregatingExecutionSource(this)
 
     private fun KotlinJsSubTargetDsl.getChildTestExecution() = testRuns.maybeCreate(testRunName)
@@ -78,7 +78,7 @@ abstract class KotlinJsReportAggregatingTestRun @Inject constructor(
     }
 
     override fun configureAllExecutions(configure: KotlinJsPlatformTestRun.() -> Unit) {
-        val doConfigureInChildren: KotlinJsSubTargetDsl.() -> Unit = {
+        konst doConfigureInChildren: KotlinJsSubTargetDsl.() -> Unit = {
             configure(getChildTestExecution())
         }
 

@@ -11,7 +11,7 @@ annotation class TopLevel
 class MetaSerializableNestedTest {
     <!META_SERIALIZABLE_NOT_APPLICABLE!>@MetaSerializable<!>
     @Target(AnnotationTarget.PROPERTY, AnnotationTarget.CLASS)
-    annotation class JsonComment(val comment: String)
+    annotation class JsonComment(konst comment: String)
 
     object Nested2 {
         <!META_SERIALIZABLE_NOT_APPLICABLE!>@MetaSerializable<!>
@@ -19,5 +19,5 @@ class MetaSerializableNestedTest {
     }
 
     @JsonComment("class_comment")
-    data class IntDataCommented(val i: Int)
+    data class IntDataCommented(konst i: Int)
 }

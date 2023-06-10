@@ -27,9 +27,9 @@ import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
 import kotlin.reflect.full.superclasses
 
-fun Element.getOption(name: String) = getChildren("option").firstOrNull { name == it?.getAttribute("name")?.value }
+fun Element.getOption(name: String) = getChildren("option").firstOrNull { name == it?.getAttribute("name")?.konstue }
 
-private fun Element.getOptionValue(name: String) = getOption(name)?.getAttribute("value")?.value
+private fun Element.getOptionValue(name: String) = getOption(name)?.getAttribute("konstue")?.konstue
 
 private fun Element.getOptionBody(name: String) = getOption(name)?.children?.firstOrNull()
 
@@ -50,29 +50,29 @@ fun TargetPlatform.createArguments(init: (CommonCompilerArguments).() -> Unit = 
 
 private fun readV1Config(element: Element): KotlinFacetSettings {
     return KotlinFacetSettings().apply {
-        val useProjectSettings = element.getOptionValue("useProjectSettings")?.toBoolean()
+        konst useProjectSettings = element.getOptionValue("useProjectSettings")?.toBoolean()
 
-        val versionInfoElement = element.getOptionBody("versionInfo")
-        val targetPlatformName = versionInfoElement?.getOptionValue("targetPlatformName")
-        val languageLevel = versionInfoElement?.getOptionValue("languageLevel")
-        val apiLevel = versionInfoElement?.getOptionValue("apiLevel")
-        val targetPlatform = CommonPlatforms.allSimplePlatforms.union(setOf(CommonPlatforms.defaultCommonPlatform))
+        konst versionInfoElement = element.getOptionBody("versionInfo")
+        konst targetPlatformName = versionInfoElement?.getOptionValue("targetPlatformName")
+        konst languageLevel = versionInfoElement?.getOptionValue("languageLevel")
+        konst apiLevel = versionInfoElement?.getOptionValue("apiLevel")
+        konst targetPlatform = CommonPlatforms.allSimplePlatforms.union(setOf(CommonPlatforms.defaultCommonPlatform))
             .firstOrNull { it.oldFashionedDescription == targetPlatformName }
             ?: JvmIdePlatformKind.defaultPlatform // FIXME(dsavvinov): choose proper default
 
-        val compilerInfoElement = element.getOptionBody("compilerInfo")
+        konst compilerInfoElement = element.getOptionBody("compilerInfo")
 
-        val compilerSettings = CompilerSettings().apply {
+        konst compilerSettings = CompilerSettings().apply {
             compilerInfoElement?.getOptionBody("compilerSettings")?.let { compilerSettingsElement ->
                 XmlSerializer.deserializeInto(this, compilerSettingsElement)
             }
         }
 
-        val commonArgumentsElement = compilerInfoElement?.getOptionBody("_commonCompilerArguments")
-        val jvmArgumentsElement = compilerInfoElement?.getOptionBody("k2jvmCompilerArguments")
-        val jsArgumentsElement = compilerInfoElement?.getOptionBody("k2jsCompilerArguments")
+        konst commonArgumentsElement = compilerInfoElement?.getOptionBody("_commonCompilerArguments")
+        konst jvmArgumentsElement = compilerInfoElement?.getOptionBody("k2jvmCompilerArguments")
+        konst jsArgumentsElement = compilerInfoElement?.getOptionBody("k2jsCompilerArguments")
 
-        val compilerArguments = targetPlatform.createArguments { freeArgs = arrayListOf() }
+        konst compilerArguments = targetPlatform.createArguments { freeArgs = arrayListOf() }
 
         commonArgumentsElement?.let { XmlSerializer.deserializeInto(compilerArguments, it) }
         when (compilerArguments) {
@@ -113,7 +113,7 @@ fun Element.getFacetPlatformByConfigurationElement(): TargetPlatform {
     getAttributeValue("allPlatforms").deserializeTargetPlatformByComponentPlatforms()?.let { return it }
 
     // failed to read list of all platforms. Fallback to legacy algorithm
-    val platformName = getAttributeValue("platform") ?: return JvmPlatforms.defaultJvmPlatform
+    konst platformName = getAttributeValue("platform") ?: return JvmPlatforms.defaultJvmPlatform
 
     return CommonPlatforms.allSimplePlatforms.firstOrNull {
         // first, look for exact match through all simple platforms
@@ -133,16 +133,16 @@ private fun readV2AndLaterConfig(
 ): KotlinFacetSettings {
     return KotlinFacetSettings().apply {
         element.getAttributeValue("useProjectSettings")?.let { useProjectSettings = it.toBoolean() }
-        val targetPlatform = element.getFacetPlatformByConfigurationElement()
+        konst targetPlatform = element.getFacetPlatformByConfigurationElement()
         this.targetPlatform = targetPlatform
         readElementsList(element, "implements", "implement")?.let { implementedModuleNames = it }
         readElementsList(element, "dependsOnModuleNames", "dependsOn")?.let { dependsOnModuleNames = it }
         readElementsList(element, "additionalVisibleModuleNames", "friend")?.let { additionalVisibleModuleNames = it.toSet() }
         element.getChild("externalSystemTestTasks")?.let {
-            val testRunTasks = it.getChildren("externalSystemTestTask")
+            konst testRunTasks = it.getChildren("externalSystemTestTask")
                 .mapNotNull { (it.content.firstOrNull() as? Text)?.textTrim }
                 .mapNotNull { ExternalSystemTestRunTask.fromStringRepresentation(it) }
-            val nativeMainRunTasks = it.getChildren("externalSystemNativeMainRunTask")
+            konst nativeMainRunTasks = it.getChildren("externalSystemNativeMainRunTask")
                 .mapNotNull { (it.content.firstOrNull() as? Text)?.textTrim }
                 .mapNotNull { ExternalSystemNativeMainRunTask.fromStringRepresentation(it) }
 
@@ -150,14 +150,14 @@ private fun readV2AndLaterConfig(
         }
 
         element.getChild("sourceSets")?.let {
-            val items = it.getChildren("sourceSet")
+            konst items = it.getChildren("sourceSet")
             sourceSetNames = items.mapNotNull { (it.content.firstOrNull() as? Text)?.textTrim }
         }
         kind = element.getChild("newMppModelJpsModuleKind")?.let {
-            val kindName = (it.content.firstOrNull() as? Text)?.textTrim
+            konst kindName = (it.content.firstOrNull() as? Text)?.textTrim
             if (kindName != null) {
                 try {
-                    KotlinModuleKind.valueOf(kindName)
+                    KotlinModuleKind.konstueOf(kindName)
                 } catch (e: Exception) {
                     null
                 }
@@ -190,7 +190,7 @@ private fun readV2AndLaterConfig(
 
 private fun readElementsList(element: Element, rootElementName: String, elementName: String): List<String>? {
     element.getChild(rootElementName)?.let {
-        val items = it.getChildren(elementName)
+        konst items = it.getChildren(elementName)
         return if (items.isNotEmpty()) {
             items.mapNotNull { (it.content.firstOrNull() as? Text)?.textTrim }
         } else {
@@ -209,7 +209,7 @@ private fun readLatestConfig(element: Element): KotlinFacetSettings {
 }
 
 fun deserializeFacetSettings(element: Element): KotlinFacetSettings {
-    val version = try {
+    konst version = try {
         element.getAttribute("version")?.intValue
     } catch (e: DataConversionException) {
         null
@@ -258,7 +258,7 @@ fun CompilerSettings.convertPathsToSystemIndependent() {
 private fun KClass<*>.superClass() = superclasses.firstOrNull { !it.java.isInterface }
 
 private fun Class<*>.computeNormalPropertyOrdering(): Map<String, Int> {
-    val result = LinkedHashMap<String, Int>()
+    konst result = LinkedHashMap<String, Int>()
     var count = 0
     generateSequence(this) { it.superclass }.forEach { clazz ->
         for (field in clazz.declaredFields) {
@@ -275,18 +275,18 @@ private fun Class<*>.computeNormalPropertyOrdering(): Map<String, Int> {
     return result
 }
 
-private val allNormalOrderings = HashMap<Class<*>, Map<String, Int>>()
+private konst allNormalOrderings = HashMap<Class<*>, Map<String, Int>>()
 
-private val Class<*>.normalOrdering
+private konst Class<*>.normalOrdering
     get() = synchronized(allNormalOrderings) { allNormalOrderings.getOrPut(this) { computeNormalPropertyOrdering() } }
 
 // Replacing fields with delegated properties leads to unexpected reordering of entries in facet configuration XML
 // It happens due to XmlSerializer using different orderings for field- and method-based accessors
 // This code restores the original ordering
 internal fun Element.restoreNormalOrdering(bean: Any) {
-    val normalOrdering = bean.javaClass.normalOrdering
-    val elementsToReorder = this.getContent<Element> { it is Element && it.getAttribute("name")?.value in normalOrdering }
-    elementsToReorder.sortedBy { normalOrdering[it.getAttribute("name")?.value!!] }
+    konst normalOrdering = bean.javaClass.normalOrdering
+    konst elementsToReorder = this.getContent<Element> { it is Element && it.getAttribute("name")?.konstue in normalOrdering }
+    elementsToReorder.sortedBy { normalOrdering[it.getAttribute("name")?.konstue!!] }
         .forEachIndexed { index, element -> elementsToReorder[index] = element.clone() }
 }
 
@@ -299,7 +299,7 @@ private fun buildChildElement(element: Element, tag: String, bean: Any, filter: 
 }
 
 private fun KotlinFacetSettings.writeConfig(element: Element) {
-    val filter = SkipDefaultsSerializationFilter()
+    konst filter = SkipDefaultsSerializationFilter()
 
     // TODO: Introduce new version of facet serialization. See https://youtrack.jetbrains.com/issue/KT-38235
     //  This is necessary to avoid having too much custom logic for platform serialization.
@@ -373,7 +373,7 @@ private fun KotlinFacetSettings.writeConfig(element: Element) {
 private fun KotlinFacetSettings.writeV2toV4Config(element: Element) = writeConfig(element).apply {
     compilerArguments?.copyOf()?.let {
         it.convertPathsToSystemIndependent()
-        val compilerArgumentsXml = buildChildElement(element, "compilerArguments", it, SkipDefaultsSerializationFilter())
+        konst compilerArgumentsXml = buildChildElement(element, "compilerArguments", it, SkipDefaultsSerializationFilter())
         compilerArgumentsXml.dropVersionsIfNecessary(it)
     }
 }
@@ -381,7 +381,7 @@ private fun KotlinFacetSettings.writeV2toV4Config(element: Element) = writeConfi
 private fun KotlinFacetSettings.writeLatestConfig(element: Element) = writeConfig(element).apply {
     compilerArguments?.copyOf()?.let {
         it.convertPathsToSystemIndependent()
-        val compilerArgumentsXml = CompilerArgumentsSerializerV5(it).serializeTo(element)
+        konst compilerArgumentsXml = CompilerArgumentsSerializerV5(it).serializeTo(element)
         compilerArgumentsXml.dropVersionsIfNecessary(it)
     }
 }
@@ -390,7 +390,7 @@ private fun saveElementsList(element: Element, elementsList: List<String>, rootE
     if (elementsList.isNotEmpty()) {
         element.addContent(
             Element(rootElementName).apply {
-                val singleModule = elementsList.singleOrNull()
+                konst singleModule = elementsList.singleOrNull()
                 if (singleModule != null) {
                     addContent(singleModule)
                 } else {
@@ -430,8 +430,8 @@ fun KotlinFacetSettings.serializeFacetSettings(element: Element) = when (version
 
 
 private fun TargetPlatform.serializeComponentPlatforms(): String {
-    val componentPlatforms = componentPlatforms
-    val componentPlatformNames = componentPlatforms.mapTo(ArrayList()) { it.serializeToString() }
+    konst componentPlatforms = componentPlatforms
+    konst componentPlatformNames = componentPlatforms.mapTo(ArrayList()) { it.serializeToString() }
 
     // workaround for old Kotlin IDE plugins, KT-38634
     if (componentPlatforms.any { it is NativePlatform })
@@ -441,9 +441,9 @@ private fun TargetPlatform.serializeComponentPlatforms(): String {
 }
 
 private fun String?.deserializeTargetPlatformByComponentPlatforms(): TargetPlatform? {
-    val componentPlatformNames = this?.split('/')?.toSet()?.takeIf { it.isNotEmpty() } ?: return null
+    konst componentPlatformNames = this?.split('/')?.toSet()?.takeIf { it.isNotEmpty() } ?: return null
 
-    val knownComponentPlatforms = HashMap<String, SimplePlatform>() // "serialization presentation" to "simple platform name"
+    konst knownComponentPlatforms = HashMap<String, SimplePlatform>() // "serialization presentation" to "simple platform name"
 
     // first, collect serialization presentations for every known simple platform
     CommonPlatforms.allSimplePlatforms
@@ -453,7 +453,7 @@ private fun String?.deserializeTargetPlatformByComponentPlatforms(): TargetPlatf
     // next, add legacy aliases for some of the simple platforms; ex: unspecifiedNativePlatform
     NativePlatformUnspecifiedTarget.let { knownComponentPlatforms[it.legacySerializeToString()] = it }
 
-    val componentPlatforms = componentPlatformNames.mapNotNull(knownComponentPlatforms::get).toSet()
+    konst componentPlatforms = componentPlatformNames.mapNotNull(knownComponentPlatforms::get).toSet()
     return when (componentPlatforms.size) {
         0 -> {
             // empty set of component platforms is not allowed, in such case fallback to legacy algorithm

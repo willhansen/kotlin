@@ -15,18 +15,18 @@ fun <T> runBlocking(c: suspend () -> T): T {
 }
 
 class A {
-    var value = ""
+    var konstue = ""
 
-    suspend operator fun get(x: Int) = value
+    suspend operator fun get(x: Int) = konstue
     suspend operator fun set(x: Int, v: String) {
-        value = v
+        konstue = v
     }
 
-    operator suspend fun contains(y: String): Boolean = y == value
+    operator suspend fun contains(y: String): Boolean = y == konstue
 }
 
 fun box() = runBlocking {
-    val a = A()
+    konst a = A()
     if ("" !in a) return@runBlocking "FAIL"
     a[1] = "OK"
 

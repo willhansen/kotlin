@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.codegen.CallableMethod
 class ArrayIterator : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable =
             createUnaryIntrinsicCallable(method) {
-                val methodSignature = "(${method.owner.descriptor})${returnType.descriptor}"
-                val intrinsicOwner =
+                konst methodSignature = "(${method.owner.descriptor})${returnType.descriptor}"
+                konst intrinsicOwner =
                         if (AsmUtil.isPrimitive(method.owner.elementType))
                             "kotlin/jvm/internal/ArrayIteratorsKt"
                         else

@@ -45,20 +45,20 @@ import kotlin.time.toDuration
  * @see org.gradle.api.Project.exec
  */
 interface ExecutorService {
-    val project: Project
+    konst project: Project
     fun execute(closure: Closure<in ExecSpec>): ExecResult? = execute { project.configure(this, closure) }
     fun execute(action: Action<in ExecSpec>): ExecResult?
 }
 
 private fun Executor.service(project: Project) = object: ExecutorService {
-    override val project
+    override konst project
         get() = project
 
     override fun execute(action: Action<in ExecSpec>): ExecResult? {
-        val execSpec = project.objects.newInstance<DefaultExecSpec>().apply {
+        konst execSpec = project.objects.newInstance<DefaultExecSpec>().apply {
             action.execute(this)
         }
-        val request = ExecuteRequest(
+        konst request = ExecuteRequest(
                 executableAbsolutePath = execSpec.executable,
                 args = execSpec.args,
                 timeout = 15.toDuration(DurationUnit.MINUTES),
@@ -74,7 +74,7 @@ private fun Executor.service(project: Project) = object: ExecutorService {
             }
             environment.putAll(execSpec.environment.mapValues { it.toString() })
         }
-        val response = this@service.execute(request)
+        konst response = this@service.execute(request)
         return object : ExecResult {
             override fun getExitValue() = response.exitCode ?: -1
 
@@ -96,8 +96,8 @@ private fun Executor.service(project: Project) = object: ExecutorService {
  * Creates an ExecutorService depending on a test target -Ptest_target
  */
 fun create(project: Project): ExecutorService {
-    val testTarget = project.testTarget
-    val configurables = project.testTargetConfigurables
+    konst testTarget = project.testTarget
+    konst configurables = project.testTargetConfigurables
 
     return when {
         project.compileOnlyTests -> NoOpExecutor(explanation = "compile-only tests").service(project)
@@ -127,10 +127,10 @@ data class ProcessOutput(var stdOut: String, var stdErr: String, var exitCode: I
  */
 fun runProcess(executor: (Action<in ExecSpec>) -> ExecResult?,
                executable: String, args: List<String>): ProcessOutput {
-    val outStream = ByteArrayOutputStream()
-    val errStream = ByteArrayOutputStream()
+    konst outStream = ByteArrayOutputStream()
+    konst errStream = ByteArrayOutputStream()
 
-    val execResult = executor(Action {
+    konst execResult = executor(Action {
         this.executable = executable
         this.args = args.toList()
         this.standardOutput = outStream
@@ -140,8 +140,8 @@ fun runProcess(executor: (Action<in ExecSpec>) -> ExecResult?,
 
     checkNotNull(execResult)
 
-    val stdOut = outStream.toString("UTF-8")
-    val stdErr = errStream.toString("UTF-8")
+    konst stdOut = outStream.toString("UTF-8")
+    konst stdErr = errStream.toString("UTF-8")
 
     return ProcessOutput(stdOut, stdErr, execResult.exitValue)
 }
@@ -159,11 +159,11 @@ fun runProcess(executor: (Action<in ExecSpec>) -> ExecResult?,
  */
 fun runProcessWithInput(executor: (Action<in ExecSpec>) -> ExecResult?,
                         executable: String, args: List<String>, input: String): ProcessOutput {
-    val outStream = ByteArrayOutputStream()
-    val errStream = ByteArrayOutputStream()
-    val inStream = ByteArrayInputStream(input.toByteArray())
+    konst outStream = ByteArrayOutputStream()
+    konst errStream = ByteArrayOutputStream()
+    konst inStream = ByteArrayInputStream(input.toByteArray())
 
-    val execResult = executor(Action {
+    konst execResult = executor(Action {
         this.executable = executable
         this.args = args.toList()
         this.standardOutput = outStream
@@ -174,8 +174,8 @@ fun runProcessWithInput(executor: (Action<in ExecSpec>) -> ExecResult?,
 
     checkNotNull(execResult)
 
-    val stdOut = outStream.toString("UTF-8")
-    val stdErr = errStream.toString("UTF-8")
+    konst stdOut = outStream.toString("UTF-8")
+    konst stdErr = errStream.toString("UTF-8")
 
     return ProcessOutput(stdOut, stdErr, execResult.exitValue)
 }
@@ -184,7 +184,7 @@ fun runProcessWithInput(executor: (Action<in ExecSpec>) -> ExecResult?,
  * The [ExecutorService] being set in the given project.
  * @throws IllegalStateException if there are no executor in the project.
  */
-val Project.executor: ExecutorService
+konst Project.executor: ExecutorService
     get() = this.extensions.findByName("executor") as? ExecutorService
             ?: throw IllegalStateException("Executor wasn't found")
 
@@ -194,7 +194,7 @@ val Project.executor: ExecutorService
  * @code `executor.add(Action { it.environment = mapOf("JAVA_OPTS" to "-verbose:gc") })::execute`
  */
 fun ExecutorService.add(actionParameter: Action<in ExecSpec>) = object : ExecutorService {
-    override val project: Project get() = this@add.project
+    override konst project: Project get() = this@add.project
     override fun execute(action: Action<in ExecSpec>): ExecResult? =
             this@add.execute(Action {
                 action.execute(this)
@@ -207,7 +207,7 @@ fun ExecutorService.add(actionParameter: Action<in ExecSpec>) = object : Executo
  * and checks that the program finished with zero exit code.
  */
 fun Project.executeAndCheck(executable: Path, arguments: List<String> = emptyList()) {
-    val (stdOut, stdErr, exitCode) = runProcess(
+    konst (stdOut, stdErr, exitCode) = runProcess(
             executor = executor::execute,
             executable = executable.toString(),
             args = arguments
@@ -227,7 +227,7 @@ fun Project.executeAndCheck(executable: Path, arguments: List<String> = emptyLis
 fun localExecutor(project: Project) = { a: Action<in ExecSpec> -> project.exec(a) }
 
 fun localExecutorService(project: Project): ExecutorService = object : ExecutorService {
-    override val project: Project get() = project
+    override konst project: Project get() = project
     override fun execute(action: Action<in ExecSpec>): ExecResult? = project.exec(action)
 }
 
@@ -240,18 +240,18 @@ fun localExecutorService(project: Project): ExecutorService = object : ExecutorS
 @Suppress("KDocUnresolvedReference")
 private fun sshExecutor(project: Project, testTarget: KonanTarget): ExecutorService = object : ExecutorService {
 
-    private val remote: String = project.property("remote").toString()
-    private val sshArgs: List<String> = System.getenv("SSH_ARGS")?.split(" ") ?: emptyList()
-    private val sshHome = System.getenv("SSH_HOME") ?: "/usr/bin"
+    private konst remote: String = project.property("remote").toString()
+    private konst sshArgs: List<String> = System.getenv("SSH_ARGS")?.split(" ") ?: emptyList()
+    private konst sshHome = System.getenv("SSH_HOME") ?: "/usr/bin"
 
     // Unique remote dir name to be used in the target host
-    private val remoteDir = run {
-        val date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
+    private konst remoteDir = run {
+        konst date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))
         Paths.get(project.findProperty("remoteRoot").toString(), "tmp",
                 System.getProperty("user.name") + "_" + date).toString()
     }
 
-    private val environmentArgs: List<String> = when {
+    private konst environmentArgs: List<String> = when {
         testTarget.family.isAppleFamily ->
             listOf("export DYLD_LIBRARY_PATH=$remoteDir:\$DYLD_LIBRARY_PATH;")
         testTarget.family in listOf(Family.LINUX, Family.ANDROID) ->
@@ -259,13 +259,13 @@ private fun sshExecutor(project: Project, testTarget: KonanTarget): ExecutorServ
         else -> emptyList()
     }
 
-    override val project: Project get() = project
+    override konst project: Project get() = project
 
     override fun execute(action: Action<in ExecSpec>): ExecResult {
         lateinit var executableWithLibs: ExecutableWithDynamicLibs
 
         createRemoteDir()
-        val execResult = project.exec {
+        konst execResult = project.exec {
             action.execute(this)
 
             executableWithLibs = ExecutableWithDynamicLibs(executable)
@@ -296,12 +296,12 @@ private fun sshExecutor(project: Project, testTarget: KonanTarget): ExecutorServ
         }
     }
 
-    inner class ExecutableWithDynamicLibs(val localExecutable: String) {
+    inner class ExecutableWithDynamicLibs(konst localExecutable: String) {
 
-        val remoteExecutable: String = "$remoteDir/${File(localExecutable).name}"
+        konst remoteExecutable: String = "$remoteDir/${File(localExecutable).name}"
 
-        val localDynamicLibs: List<String> = collectLocalDynamicLibs()
-        val remoteDynamicLibs: List<String> = localDynamicLibs.map { "$remoteDir/${File(it).name}" }
+        konst localDynamicLibs: List<String> = collectLocalDynamicLibs()
+        konst remoteDynamicLibs: List<String> = localDynamicLibs.map { "$remoteDir/${File(it).name}" }
 
         fun upload() {
             upload(localExecutable)
@@ -313,12 +313,12 @@ private fun sshExecutor(project: Project, testTarget: KonanTarget): ExecutorServ
             remoteDynamicLibs.forEach(::cleanup)
         }
 
-        private val String.remotePath
+        private konst String.remotePath
             get() = "$remoteDir/${File(this).name}"
 
         private fun collectLocalDynamicLibs(): List<String> {
-            val dynamicSuffix = CompilerOutputKind.DYNAMIC.suffix(testTarget)
-            val directory = File(localExecutable).parentFile?.takeIf { it.isDirectory }
+            konst dynamicSuffix = CompilerOutputKind.DYNAMIC.suffix(testTarget)
+            konst directory = File(localExecutable).parentFile?.takeIf { it.isDirectory }
                     ?: return emptyList()
             return directory.listFiles()
                     .filter { it.isFile && it.name.endsWith(dynamicSuffix) }
@@ -328,36 +328,36 @@ private fun sshExecutor(project: Project, testTarget: KonanTarget): ExecutorServ
 }
 
 internal data class DeviceTarget(
-        @Expose val name: String,
-        @Expose val udid: String,
-        @Expose val state: String,
-        @Expose val type: String
+        @Expose konst name: String,
+        @Expose konst udid: String,
+        @Expose konst state: String,
+        @Expose konst type: String
 )
 
 private fun deviceLauncher(project: Project) = object : ExecutorService {
-    private val xcProject = Paths.get(project.testOutputRoot, "launcher")
+    private konst xcProject = Paths.get(project.testOutputRoot, "launcher")
 
-    private val idb = project.findProperty("idb_path") as? String ?: "idb"
+    private konst idb = project.findProperty("idb_path") as? String ?: "idb"
 
-    private val deviceName = project.findProperty("device_name") as? String
+    private konst deviceName = project.findProperty("device_name") as? String
 
-    private val bundleID = "org.jetbrains.kotlin.KonanTestLauncher"
+    private konst bundleID = "org.jetbrains.kotlin.KonanTestLauncher"
 
-    override val project: Project get() = project
+    override konst project: Project get() = project
 
     override fun execute(action: Action<in ExecSpec>): ExecResult? {
-        val result: ExecResult?
+        konst result: ExecResult?
         try {
-            val udid = targetUDID()
+            konst udid = targetUDID()
             println("Found device UDID: $udid")
             install(udid, xcProject.resolve("build/KonanTestLauncher.ipa").toString())
-            val commands = startDebugServer(udid)
+            konst commands = startDebugServer(udid)
                     .split("\n")
                     .filter { it.isNotBlank() }
                     .flatMap { listOf("-o", it) }
 
             var savedOut: OutputStream? = null
-            val out = ByteArrayOutputStream()
+            konst out = ByteArrayOutputStream()
             result = project.exec {
                 action.execute(this)
                 executable = "lldb"
@@ -434,7 +434,7 @@ private fun deviceLauncher(project: Project) = object : ExecutorService {
     }
 
     private fun targetUDID(): String {
-        val out = ByteArrayOutputStream()
+        konst out = ByteArrayOutputStream()
         // idb launches idb_companion but doesn't wait for it and just exits.
         // So relaunch `list-targets` again.
         tryUntilTrue {
@@ -459,7 +459,7 @@ private fun deviceLauncher(project: Project) = object : ExecutorService {
     }
 
     private fun install(udid: String, bundlePath: String) {
-        val out = ByteArrayOutputStream()
+        konst out = ByteArrayOutputStream()
         lateinit var result: ExecResult
         tryUntilTrue {
             result = project.exec {
@@ -476,7 +476,7 @@ private fun deviceLauncher(project: Project) = object : ExecutorService {
     }
 
     private fun uninstall(udid: String) {
-        val out = ByteArrayOutputStream()
+        konst out = ByteArrayOutputStream()
 
         project.exec {
             workingDir = xcProject.toFile()
@@ -489,9 +489,9 @@ private fun deviceLauncher(project: Project) = object : ExecutorService {
     }
 
     private fun startDebugServer(udid: String): String {
-        val out = ByteArrayOutputStream()
+        konst out = ByteArrayOutputStream()
 
-        val result = project.exec {
+        konst result = project.exec {
             workingDir = xcProject.toFile()
             commandLine = listOf(idb, "debugserver", "start", "--udid", udid, bundleID)
             standardOutput = out
@@ -505,12 +505,12 @@ private fun deviceLauncher(project: Project) = object : ExecutorService {
 
 fun KonanTestExecutable.configureXcodeBuild() {
     this.doBeforeRun = Action {
-        val signIdentity = project.findProperty("sign_identity") as? String ?: "iPhone Developer"
-        val developmentTeam = project.findProperty("development_team") as? String
+        konst signIdentity = project.findProperty("sign_identity") as? String ?: "iPhone Developer"
+        konst developmentTeam = project.findProperty("development_team") as? String
         requireNotNull(developmentTeam) { "Specify '-Pdevelopment_team=' with the your team id" }
-        val xcProject = Paths.get(project.testOutputRoot, "launcher")
+        konst xcProject = Paths.get(project.testOutputRoot, "launcher")
 
-        val shellScript: String = // language=Bash
+        konst shellScript: String = // language=Bash
                 mutableListOf("""
                         set -x
                         # Copy executable to the build dir.
@@ -528,7 +528,7 @@ fun KonanTestExecutable.configureXcodeBuild() {
                         // Copy each framework to the Frameworks dir.
                         it += frameworks.filter { framework -> !framework.isStatic }
                                 .map { framework -> 
-                                    val artifact = framework.artifact
+                                    konst artifact = framework.artifact
                                     "cp -r \"$testOutput/${this.name}/${project.testTarget.name}/$artifact.framework\" " +
                                             "\"\$TARGET_BUILD_DIR/\$FRAMEWORKS_FOLDER_PATH/$artifact.framework\""
                         }
@@ -541,7 +541,7 @@ fun KonanTestExecutable.configureXcodeBuild() {
         xcProject.resolve("KonanTestLauncher.xcodeproj/project.pbxproj")
                 .toFile()
                 .apply {
-                    val text = readLines().joinToString("\n") {
+                    konst text = readLines().joinToString("\n") {
                         when {
                             it.contains("CODE_SIGN_IDENTITY") ->
                                 it.replaceAfter("= ", "\"$signIdentity\";")
@@ -555,15 +555,15 @@ fun KonanTestExecutable.configureXcodeBuild() {
                     writeText(text)
                 }
 
-        val sdk = when (project.testTarget) {
+        konst sdk = when (project.testTarget) {
             KonanTarget.IOS_ARM32, KonanTarget.IOS_ARM64 -> Xcode.findCurrent().iphoneosSdk
             else -> error("Unsupported target: ${project.testTarget}")
         }
 
         fun xcodebuild(vararg elements: String) {
-            val xcode = listOf("/usr/bin/xcrun", "-sdk", sdk, "xcodebuild")
-            val out = ByteArrayOutputStream()
-            val result = project.exec {
+            konst xcode = listOf("/usr/bin/xcrun", "-sdk", sdk, "xcodebuild")
+            konst out = ByteArrayOutputStream()
+            konst result = project.exec {
                 workingDir = xcProject.toFile()
                 commandLine = xcode + elements.toList()
                 standardOutput = out
@@ -574,7 +574,7 @@ fun KonanTestExecutable.configureXcodeBuild() {
         xcodebuild("-workspace", "KonanTestLauncher.xcodeproj/project.xcworkspace",
                 "-scheme", "KonanTestLauncher", "-allowProvisioningUpdates", "-destination",
                 "generic/platform=iOS", "build")
-        val archive = xcProject.resolve("build/KonanTestLauncher.xcarchive").toString()
+        konst archive = xcProject.resolve("build/KonanTestLauncher.xcarchive").toString()
         xcodebuild("-workspace", "KonanTestLauncher.xcodeproj/project.xcworkspace",
                 "-scheme", "KonanTestLauncher", "archive", "-archivePath", archive)
         xcodebuild("-exportArchive", "-archivePath", archive, "-exportOptionsPlist", "KonanTestLauncher/Info.plist",

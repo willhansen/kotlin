@@ -21,19 +21,19 @@ import java.lang.annotation.Target;
 
 /**
  * Qualifier for a reference type in a {@link ElementType#TYPE_USE TYPE_USE} position:
- * The type that has this annotation is intended to not include the value <code>null</code>.
+ * The type that has this annotation is intended to not include the konstue <code>null</code>.
  * <p>
  * If annotation based null analysis is enabled using this annotation has two consequences:
  * </p>
  * <ol>
  * <li>Dereferencing an expression of this type is safe, i.e., no <code>NullPointerException</code> can occur at runtime.</li>
- * <li>An attempt to bind a <code>null</code> value to an entity (field, local variable, method parameter or method return value)
+ * <li>An attempt to bind a <code>null</code> konstue to an entity (field, local variable, method parameter or method return konstue)
  *      of this type is a compile time error.</li>
  * </ol>
  * For the second case, diagnostics issued by the compiler should distinguish three situations:
  * <ol>
- * <li>Nullness of the value can be statically determined, the entity is definitely bound from either of:
- *     <ul><li>the value <code>null</code>, or</li>
+ * <li>Nullness of the konstue can be statically determined, the entity is definitely bound from either of:
+ *     <ul><li>the konstue <code>null</code>, or</li>
  *         <li>an entity with a {@link Nullable @Nullable} type.</li></ul></li>
  * <li>Nullness cannot definitely be determined, because different code branches yield different results.</li>
  * <li>Nullness cannot be determined, because other program elements are involved for which

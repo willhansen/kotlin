@@ -6,7 +6,7 @@ enum class Foo {
     A;
 
     companion object {
-        val a = A
+        konst a = A
     }
 }
 

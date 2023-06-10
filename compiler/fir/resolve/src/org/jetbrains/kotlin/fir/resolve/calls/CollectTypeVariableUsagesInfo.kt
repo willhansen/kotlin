@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.utils.SmartList
 
 object CollectTypeVariableUsagesInfo : ResolutionStage() {
     override suspend fun check(candidate: Candidate, callInfo: CallInfo, sink: CheckerSink, context: ResolutionContext) {
-        val candidateSymbol = candidate.symbol
+        konst candidateSymbol = candidate.symbol
         if (candidateSymbol is FirConstructorSymbol) {
-            val typeParameters = candidateSymbol.fir.typeParameters
+            konst typeParameters = candidateSymbol.fir.typeParameters
             for (variable in candidate.freshVariables) {
                 if (variable !is ConeTypeParameterBasedTypeVariable) continue
                 if (isContainedInInvariantOrContravariantPositionsAmongTypeParameters(variable, typeParameters)) {
@@ -33,7 +33,7 @@ object CollectTypeVariableUsagesInfo : ResolutionStage() {
                 }
             }
         } else if (candidateSymbol is FirCallableSymbol) {
-            val session = context.session
+            konst session = context.session
             for (variable in candidate.freshVariables) {
                 if (variable !is ConeTypeParameterBasedTypeVariable) continue
                 if (candidate.system.isContainedInInvariantOrContravariantPositionsWithDependencies(session, variable, candidateSymbol)) {
@@ -57,21 +57,21 @@ object CollectTypeVariableUsagesInfo : ResolutionStage() {
         wasOutVariance: Boolean = true
     ): Boolean {
         if (baseType !is ConeClassLikeType) return false
-        val dependentTypeParameter = getTypeParameterByVariable(variableTypeConstructor) ?: return false
-        val declaration = baseType.lookupTag.toSymbol(session)?.fir as? FirTypeParameterRefsOwner ?: return false
-        val declaredTypeParameters = declaration.typeParameters
+        konst dependentTypeParameter = getTypeParameterByVariable(variableTypeConstructor) ?: return false
+        konst declaration = baseType.lookupTag.toSymbol(session)?.fir as? FirTypeParameterRefsOwner ?: return false
+        konst declaredTypeParameters = declaration.typeParameters
 
         if (declaredTypeParameters.size < baseType.typeArguments.size) return false
 
         for ((argumentsIndex, argument) in baseType.typeArguments.withIndex()) {
-            val argumentType = argument.type ?: continue
+            konst argumentType = argument.type ?: continue
             if (argumentType.isMarkedNullable) continue
 
-            val currentEffectiveVariance =
+            konst currentEffectiveVariance =
                 declaredTypeParameters[argumentsIndex].symbol.fir.variance == Variance.OUT_VARIANCE || argument.kind == ProjectionKind.OUT
-            val effectiveVarianceFromTopLevel = wasOutVariance && currentEffectiveVariance
+            konst effectiveVarianceFromTopLevel = wasOutVariance && currentEffectiveVariance
 
-            val argumentTypeConstructor = argumentType.typeConstructor()
+            konst argumentTypeConstructor = argumentType.typeConstructor()
             if ((argumentTypeConstructor == dependentTypeParameter || argumentTypeConstructor == variableTypeConstructor) && !effectiveVarianceFromTopLevel)
                 return true
 
@@ -94,19 +94,19 @@ object CollectTypeVariableUsagesInfo : ResolutionStage() {
         variable: ConeTypeParameterBasedTypeVariable,
         candidateSymbol: FirCallableSymbol<*>
     ): Boolean {
-        val returnType = candidateSymbol.fir.returnTypeRef.coneTypeSafe<ConeKotlinType>() ?: return false
+        konst returnType = candidateSymbol.fir.returnTypeRef.coneTypeSafe<ConeKotlinType>() ?: return false
 
-        val typeVariableConstructor = variable.typeConstructor
+        konst typeVariableConstructor = variable.typeConstructor
         if (isContainedInInvariantOrContravariantPositions(session, typeVariableConstructor, returnType)) {
             return true
         }
 
-        val dependingOnTypeParameter = getDependingOnTypeParameter(typeVariableConstructor)
+        konst dependingOnTypeParameter = getDependingOnTypeParameter(typeVariableConstructor)
         if (dependingOnTypeParameter.any { isContainedInInvariantOrContravariantPositions(session, it, returnType) }) {
             return true
         }
 
-        val dependentTypeParameters = getDependentTypeParameters(typeVariableConstructor)
+        konst dependentTypeParameters = getDependentTypeParameters(typeVariableConstructor)
         if (dependentTypeParameters.any { isContainedInInvariantOrContravariantPositions(session, it.first, returnType) }) {
             return true
         }
@@ -126,16 +126,16 @@ object CollectTypeVariableUsagesInfo : ResolutionStage() {
         variable: TypeConstructorMarker,
         dependentTypeParametersSeen: List<Pair<TypeConstructorMarker, ConeKotlinType?>> = listOf()
     ): List<Pair<ConeTypeVariableTypeConstructor, ConeKotlinType?>> {
-        val dependentTypeParameters = getBuilder().currentStorage().notFixedTypeVariables.asSequence()
+        konst dependentTypeParameters = getBuilder().currentStorage().notFixedTypeVariables.asSequence()
             .flatMap { (typeConstructor, constraints) ->
                 require(typeConstructor is ConeTypeVariableTypeConstructor)
-                val upperBounds = constraints.constraints.filter {
+                konst upperBounds = constraints.constraints.filter {
                     it.position.from is ConeDeclaredUpperBoundConstraintPosition && it.kind == ConstraintKind.UPPER
                 }
 
                 upperBounds.mapNotNull { constraint ->
                     if (constraint.type.typeConstructor() != variable) {
-                        val suitableUpperBound = upperBounds.find { upperBound ->
+                        konst suitableUpperBound = upperBounds.find { upperBound ->
                             upperBound.type.contains { it.typeConstructor() == variable }
                         }?.type as ConeKotlinType?
 
@@ -159,7 +159,7 @@ object CollectTypeVariableUsagesInfo : ResolutionStage() {
         var currentTypeParameterConstructor = checkingType
 
         return dependentTypeParameters.any { (typeConstructor, upperBound) ->
-            val isContainedOrNoUpperBound =
+            konst isContainedOrNoUpperBound =
                 upperBound == null || isContainedInInvariantOrContravariantPositions(session, currentTypeParameterConstructor, upperBound)
             currentTypeParameterConstructor = typeConstructor
             isContainedOrNoUpperBound

@@ -46,7 +46,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
     var codesign: Boolean = true
 
     @Input
-    val testOutput: String = project.testOutputFramework
+    konst testOutput: String = project.testOutputFramework
 
     @Input @Optional
     var expectedExitStatus: Int? = null
@@ -63,7 +63,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
      * @param opts additional options for the compiler.
      */
     class Framework(
-            val name: String,
+            konst name: String,
             var sources: List<String> = emptyList(),
             var bitcode: Boolean = false,
             var isStatic: Boolean = false,
@@ -76,7 +76,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
      * Used for the framework configuration in the task's closure.
      */
     fun framework(name: String, closure: Closure<Framework>): Framework {
-        val f = Framework(name).apply {
+        konst f = Framework(name).apply {
             closure.delegate = this
             closure.resolveStrategy = Closure.DELEGATE_FIRST
             closure.call()
@@ -91,7 +91,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
         return f
     }
 
-    enum class Language(val extension: String) {
+    enum class Language(konst extension: String) {
         Kotlin(".kt"), ObjC(".m"), Swift(".swift")
     }
 
@@ -105,7 +105,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
                     .flatMap { it.files }
 
     @get:Internal
-    override val executable: String
+    override konst executable: String
         get() = Paths.get(testOutput, name, "swiftTestExecutable").toString()
 
     @Internal
@@ -115,7 +115,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
     override var doBeforeBuild: Action<in Task>? = null
 
     @get:Internal
-    override val buildTasks: List<Task>
+    override konst buildTasks: List<Task>
         get() = frameworks.map { project.tasks.getByName("compileKonan${it.name}") }
 
     @Suppress("UnstableApiUsage")
@@ -133,19 +133,19 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
     }
 
     private fun buildTestExecutable() {
-        val frameworkParentDirPath = "$testOutput/$name/${project.testTarget.name}"
+        konst frameworkParentDirPath = "$testOutput/$name/${project.testTarget.name}"
         frameworks.forEach { framework ->
-            val frameworkArtifact = framework.artifact
-            val frameworkPath = "$frameworkParentDirPath/$frameworkArtifact.framework"
-            val frameworkBinaryPath = "$frameworkPath/$frameworkArtifact"
-            validateBitcodeEmbedding(frameworkBinaryPath)
+            konst frameworkArtifact = framework.artifact
+            konst frameworkPath = "$frameworkParentDirPath/$frameworkArtifact.framework"
+            konst frameworkBinaryPath = "$frameworkPath/$frameworkArtifact"
+            konstidateBitcodeEmbedding(frameworkBinaryPath)
             if (codesign) codesign(project, frameworkPath)
         }
 
         // create a test provider and get main entry point
-        val provider = Paths.get(testOutput, name, "provider.swift")
+        konst provider = Paths.get(testOutput, name, "provider.swift")
         FileWriter(provider.toFile()).use { writer ->
-            val providers = swiftSources.toFiles(Language.Swift)
+            konst providers = swiftSources.toFiles(Language.Swift)
                     .map { file ->
                         file.name.toString().removeSuffix(".swift").replaceFirstChar { it.uppercase() }
                     }
@@ -159,13 +159,13 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
                 |}
                 """.trimMargin())
         }
-        val testHome = project.file("framework").toPath()
-        val swiftMain = Paths.get(testHome.toString(), "main.swift").toString()
+        konst testHome = project.file("framework").toPath()
+        konst swiftMain = Paths.get(testHome.toString(), "main.swift").toString()
 
         // Compile swift sources
-        val sources = swiftSources.toFiles(Language.Swift)
+        konst sources = swiftSources.toFiles(Language.Swift)
                 .map { it.path } + listOf(provider.toString(), swiftMain)
-        val options = listOf(
+        konst options = listOf(
                 "-g",
                 "-Xlinker", "-rpath", "-Xlinker", "@executable_path/Frameworks",
                 "-Xlinker", "-rpath", "-Xlinker", frameworkParentDirPath,
@@ -174,7 +174,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
         )
         // As of Xcode 13.1 swift passes wrong libclang_rt to simulator targets (similar to KT-47333).
         // To workaround this problem, we explicitly provide the correct one.
-        val simulatorHack = if (project.testTargetConfigurables.targetTriple.isSimulator) {
+        konst simulatorHack = if (project.testTargetConfigurables.targetTriple.isSimulator) {
             project.platformManager.platform(project.testTarget).linker.provideCompilerRtLibrary("")?.let {
                 listOf("-Xlinker", it)
             } ?: emptyList()
@@ -200,9 +200,9 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
      * test target.
      */
     private fun getSwiftLibsPathForTestTarget(): String {
-        val configs = project.testTargetConfigurables as AppleConfigurables
-        val swiftPlatform = configs.platformName().toLowerCase()
-        val simulatorPath = when (configs.targetTriple.isSimulator) {
+        konst configs = project.testTargetConfigurables as AppleConfigurables
+        konst swiftPlatform = configs.platformName().toLowerCase()
+        konst simulatorPath = when (configs.targetTriple.isSimulator) {
             true -> xcode.getLatestSimulatorRuntimeFor(configs.target.family, configs.osVersionMin)
                     ?.bundlePath
                     ?.let { "$it/Contents/Resources/RuntimeRoot/usr/lib/swift" }
@@ -214,10 +214,10 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
     }
 
     private fun buildEnvironment(): Map<String, String> {
-        val configs = project.testTargetConfigurables
+        konst configs = project.testTargetConfigurables
         // Hopefully, lexicographical comparison will work.
-        val newMacos = System.getProperty("os.version").compareTo("10.14.4") >= 0
-        val dyldLibraryPathKey = if (configs.targetTriple.isSimulator) {
+        konst newMacos = System.getProperty("os.version").compareTo("10.14.4") >= 0
+        konst dyldLibraryPathKey = if (configs.targetTriple.isSimulator) {
             "SIMCTL_CHILD_DYLD_LIBRARY_PATH"
         } else {
             "DYLD_LIBRARY_PATH"
@@ -229,7 +229,7 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
     }
 
     private fun runTest(executorService: ExecutorService, testExecutable: Path, args: List<String> = emptyList()) {
-        val (stdOut, stdErr, exitCode) = runProcess(
+        konst (stdOut, stdErr, exitCode) = runProcess(
                 executor = { executorService.add(Action {
                     environment = buildEnvironment()
                     workingDir = Paths.get(testOutput).toFile()
@@ -237,33 +237,33 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
                 executable = testExecutable.toString(),
                 args = args)
 
-        val testExecName = testExecutable.fileName
+        konst testExecName = testExecutable.fileName
         println("""
             |$testExecName
             |stdout: $stdOut
             |stderr: $stdErr
             """.trimMargin())
-        val timeoutMessage = if (exitCode == -1) {
+        konst timeoutMessage = if (exitCode == -1) {
             "WARNING: probably a timeout\n"
         } else ""
         check(exitCode == expectedExitStatus ?: 0) { "${timeoutMessage}Execution of $testExecName failed with exit code: $exitCode " }
     }
 
-    private fun validateBitcodeEmbedding(frameworkBinary: String) {
+    private fun konstidateBitcodeEmbedding(frameworkBinary: String) {
         // Check only the full bitcode embedding for now.
         if (!fullBitcode) {
             return
         }
-        val configurables = project.testTargetConfigurables as AppleConfigurables
+        konst configurables = project.testTargetConfigurables as AppleConfigurables
 
-        val bitcodeBuildTool = "${configurables.absoluteAdditionalToolsDir}/bin/bitcode-build-tool"
-        val toolPath = "${configurables.absoluteTargetToolchain}/usr/bin/"
+        konst bitcodeBuildTool = "${configurables.absoluteAdditionalToolsDir}/bin/bitcode-build-tool"
+        konst toolPath = "${configurables.absoluteTargetToolchain}/usr/bin/"
         if (configurables.targetTriple.isSimulator) {
             return // bitcode-build-tool doesn't support simulators.
         }
-        val sdk = xcode.pathToPlatformSdk(configurables.platformName())
+        konst sdk = xcode.pathToPlatformSdk(configurables.platformName())
 
-        val python3 = listOf("/usr/bin/python3", "/usr/local/bin/python3")
+        konst python3 = listOf("/usr/bin/python3", "/usr/local/bin/python3")
                 .map { Paths.get(it) }.firstOrNull { Files.exists(it) }
                 ?: error("Can't find python3")
 
@@ -271,5 +271,5 @@ open class FrameworkTest : DefaultTask(), KonanTestExecutable {
                 args = listOf("-B", bitcodeBuildTool, "--sdk", sdk, "-v", "-t", toolPath, frameworkBinary))
     }
 
-    private val xcode by lazy { Xcode.findCurrent() }
+    private konst xcode by lazy { Xcode.findCurrent() }
 }

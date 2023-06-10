@@ -25,9 +25,9 @@ import java.io.File
 import java.io.PrintStream
 
 abstract class KotlinCompilerBaseTask : Task() {
-    protected abstract val compilerFqName: String
+    protected abstract konst compilerFqName: String
 
-    val args: MutableList<String> = arrayListOf()
+    konst args: MutableList<String> = arrayListOf()
 
     var src: Path? = null
     var output: File? = null
@@ -38,14 +38,14 @@ abstract class KotlinCompilerBaseTask : Task() {
 
     var noStdlib: Boolean = false
 
-    val additionalArguments: MutableList<Commandline.Argument> = arrayListOf()
+    konst additionalArguments: MutableList<Commandline.Argument> = arrayListOf()
 
     var exitCode: Int? = null
 
     fun createSrc(): Path {
-        val srcPath = src
+        konst srcPath = src
         if (srcPath == null) {
-            val t = Path(getProject())
+            konst t = Path(getProject())
             src = t
             return t
         }
@@ -58,7 +58,7 @@ abstract class KotlinCompilerBaseTask : Task() {
     }
 
     fun createCompilerArg(): Commandline.Argument {
-        val argument = Commandline.Argument()
+        konst argument = Commandline.Argument()
         additionalArguments.add(argument)
         return argument
     }
@@ -66,7 +66,7 @@ abstract class KotlinCompilerBaseTask : Task() {
     abstract fun fillSpecificArguments()
 
     fun fillArguments() {
-        val sourcePaths = src ?: throw BuildException("\"src\" should be specified")
+        konst sourcePaths = src ?: throw BuildException("\"src\" should be specified")
         args.addAll(sourcePaths.list().map { File(it).canonicalPath })
 
         output ?: throw BuildException("\"output\" should be specified")
@@ -83,13 +83,13 @@ abstract class KotlinCompilerBaseTask : Task() {
     override fun execute() {
         fillArguments()
 
-        val compilerClass = KotlinAntTaskUtil.getOrCreateClassLoader().loadClass(compilerFqName)
-        val compiler = compilerClass.newInstance()
-        val exec = compilerClass.getMethod("execFullPathsInMessages", PrintStream::class.java, Array<String>::class.java)
+        konst compilerClass = KotlinAntTaskUtil.getOrCreateClassLoader().loadClass(compilerFqName)
+        konst compiler = compilerClass.newInstance()
+        konst exec = compilerClass.getMethod("execFullPathsInMessages", PrintStream::class.java, Array<String>::class.java)
 
         log("Compiling ${src!!.list().toList()} => [${output!!.canonicalPath}]")
 
-        val result = exec(compiler, System.err, args.toTypedArray())
+        konst result = exec(compiler, System.err, args.toTypedArray())
         exitCode = (result as Enum<*>).ordinal
 
         if (failOnError && exitCode != 0) {

@@ -13,28 +13,28 @@ import java.util.concurrent.atomic.AtomicReference
  */
 internal object MemoryTracker {
     data class MemoryMark(
-        val timestamp: LocalDateTime,
-        val usedMemory: Long,
-        val freeMemory: Long,
-        val totalMemory: Long,
-        val maxMemory: Long
+        konst timestamp: LocalDateTime,
+        konst usedMemory: Long,
+        konst freeMemory: Long,
+        konst totalMemory: Long,
+        konst maxMemory: Long
     )
 
     private class MemoryTrackerRunner(
-        private val intervalMillis: Long,
-        private val logger: (MemoryMark) -> Unit
+        private konst interkonstMillis: Long,
+        private konst logger: (MemoryMark) -> Unit
     ) : Thread("NativeTestMemoryTrackerRunner") {
-        private val runtime = Runtime.getRuntime()
+        private konst runtime = Runtime.getRuntime()
 
         override fun run() {
             try {
                 while (!interrupted()) {
-                    val timestamp = LocalDateTime.now()
+                    konst timestamp = LocalDateTime.now()
 
-                    val free = runtime.freeMemory()
-                    val total = runtime.totalMemory()
-                    val used = total - free
-                    val max = runtime.maxMemory()
+                    konst free = runtime.freeMemory()
+                    konst total = runtime.totalMemory()
+                    konst used = total - free
+                    konst max = runtime.maxMemory()
 
                     logger(
                         MemoryMark(
@@ -46,7 +46,7 @@ internal object MemoryTracker {
                         )
                     )
 
-                    sleep(intervalMillis)
+                    sleep(interkonstMillis)
                 }
             } catch (_: InterruptedException) {
                 // do nothing, just leave the loop
@@ -54,16 +54,16 @@ internal object MemoryTracker {
         }
     }
 
-    private val activeRunner = AtomicReference<MemoryTrackerRunner>()
+    private konst activeRunner = AtomicReference<MemoryTrackerRunner>()
 
-    fun startTracking(intervalMillis: Long, logger: (MemoryMark) -> Unit) {
-        val runner = MemoryTrackerRunner(intervalMillis, logger)
+    fun startTracking(interkonstMillis: Long, logger: (MemoryMark) -> Unit) {
+        konst runner = MemoryTrackerRunner(interkonstMillis, logger)
         check(activeRunner.compareAndSet(null, runner)) { "There is another active runner" }
         runner.start()
     }
 
     fun stopTracking() {
-        val runner = activeRunner.getAndSet(null) ?: error("No active runner")
+        konst runner = activeRunner.getAndSet(null) ?: error("No active runner")
         runner.interrupt()
     }
 }

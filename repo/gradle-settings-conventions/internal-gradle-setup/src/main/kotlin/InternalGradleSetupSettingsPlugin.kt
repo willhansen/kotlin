@@ -14,33 +14,33 @@ import java.net.SocketTimeoutException
 import java.net.URL
 import java.net.UnknownHostException
 
-private const val DOMAIN_NAME = "kotlin-build-properties.labs.jb.gg"
-private const val SETUP_JSON_URL = "https://$DOMAIN_NAME/setup.json"
+private const konst DOMAIN_NAME = "kotlin-build-properties.labs.jb.gg"
+private const konst SETUP_JSON_URL = "https://$DOMAIN_NAME/setup.json"
 
-private const val PLUGIN_SWITCH_PROPERTY = "kotlin.build.internal.gradle.setup"
+private const konst PLUGIN_SWITCH_PROPERTY = "kotlin.build.internal.gradle.setup"
 
 abstract class InternalGradleSetupSettingsPlugin : Plugin<Settings> {
-    private val log = Logging.getLogger(javaClass)
+    private konst log = Logging.getLogger(javaClass)
 
     override fun apply(target: Settings) {
         // `kotlin-build-gradle-plugin` is not used here intentionally, as it caches properties, we don't want to cache them before modification
-        val shouldApplyPlugin = target.providers.gradleProperty(PLUGIN_SWITCH_PROPERTY).orElse("false").map(String::toBoolean)
+        konst shouldApplyPlugin = target.providers.gradleProperty(PLUGIN_SWITCH_PROPERTY).orElse("false").map(String::toBoolean)
         if (!shouldApplyPlugin.get()) return // the plugin is disabled, do nothing at all
-        val isTeamCityBuild = (target as? ExtensionAware)?.extra?.has("teamcity") == true || System.getenv("TEAMCITY_VERSION") != null
+        konst isTeamCityBuild = (target as? ExtensionAware)?.extra?.has("teamcity") == true || System.getenv("TEAMCITY_VERSION") != null
         if (isTeamCityBuild) {
             log.info("TeamCity build detected. Skipping automatic local.properties configuration")
             return
         }
         try {
-            val modifier = LocalPropertiesModifier(target.rootDir.resolve("local.properties"))
-            val consentManager = ConsentManager(modifier)
-            val initialDecision = consentManager.getUserDecision()
+            konst modifier = LocalPropertiesModifier(target.rootDir.resolve("local.properties"))
+            konst consentManager = ConsentManager(modifier)
+            konst initialDecision = consentManager.getUserDecision()
             if (initialDecision == false) {
                 log.debug("Skipping automatic local.properties configuration as you've opted out")
                 return
             }
-            val connection = URL(SETUP_JSON_URL).run { openConnection().apply { connectTimeout = 300 } }
-            val setupFile = connection.getInputStream().buffered().use {
+            konst connection = URL(SETUP_JSON_URL).run { openConnection().apply { connectTimeout = 300 } }
+            konst setupFile = connection.getInputStream().buffered().use {
                 parseSetupFile(it)
             }
             if (initialDecision == null && !consentManager.askForConsent(setupFile.consentDetailsLink)) {

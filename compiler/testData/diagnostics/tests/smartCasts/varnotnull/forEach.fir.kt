@@ -1,4 +1,4 @@
-data class SomeObject(val n: SomeObject?) {
+data class SomeObject(konst n: SomeObject?) {
     fun doSomething() {}
     fun next(): SomeObject? = n    
 }

@@ -11,19 +11,19 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmFragment
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.containingVariants
 
 internal object IdeaKpmSinglePlatformStdlibCommonFilter : IdeaKpmDependencyTransformer {
-    private const val stdlibCoordinatesGroup = "org.jetbrains.kotlin"
-    private val stdlibCoordinatesModules = setOf("kotlin-stdlib-common", "kotlin-test-common", "kotlin-test-annotations-common")
+    private const konst stdlibCoordinatesGroup = "org.jetbrains.kotlin"
+    private konst stdlibCoordinatesModules = setOf("kotlin-stdlib-common", "kotlin-test-common", "kotlin-test-annotations-common")
 
     override fun transform(
         fragment: GradleKpmFragment,
         dependencies: Set<IdeaKpmDependency>
     ): Set<IdeaKpmDependency> {
-        val platforms = fragment.containingVariants.map { it.platformType }.toSet()
+        konst platforms = fragment.containingVariants.map { it.platformType }.toSet()
         if (platforms.size != 1) return dependencies
 
         return dependencies.filter { dependency ->
-            val binaryDependency = dependency as? IdeaKpmBinaryDependency ?: return@filter true
-            val coordinates = binaryDependency.coordinates ?: return@filter true
+            konst binaryDependency = dependency as? IdeaKpmBinaryDependency ?: return@filter true
+            konst coordinates = binaryDependency.coordinates ?: return@filter true
             coordinates.group != stdlibCoordinatesGroup || coordinates.module !in stdlibCoordinatesModules
         }.toSet()
     }

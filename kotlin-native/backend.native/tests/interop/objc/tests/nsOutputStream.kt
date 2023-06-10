@@ -3,6 +3,6 @@ import kotlin.test.*
 import objcTests.*
 
 @Test fun testNSOutputStreamToMemoryConstructor() {
-    val stream: Any = NSOutputStream(toMemory = Unit)
+    konst stream: Any = NSOutputStream(toMemory = Unit)
     assertTrue(stream is NSOutputStream)
 }

@@ -1,9 +1,9 @@
 sealed interface SealedInterface {
-    val extraNumber get() = 2
+    konst extraNumber get() = 2
 
     fun getNumber() = 0
 
     fun getOtherNumber() = 1
 
-    val otherExtraNumber get() = 1
+    konst otherExtraNumber get() = 1
 }

@@ -198,7 +198,7 @@ fun box(): String {
     if (8000000.p8 != 808080808) return "test8: ${8000000.p8}"
 
 
-    val a = A()
+    konst a = A()
 
     a.p9 = 9
     if (a.p9 != 90909) return "test9: ${a.p9}"

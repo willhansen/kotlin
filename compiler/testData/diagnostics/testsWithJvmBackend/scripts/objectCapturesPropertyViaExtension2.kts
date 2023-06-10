@@ -8,7 +8,7 @@ interface I {
     fun rename()
 }
 
-class DefaultEachEntryConfiguration(val entry: Int) : I {
+class DefaultEachEntryConfiguration(konst entry: Int) : I {
     override fun rename() {
         entry.copy()
     }

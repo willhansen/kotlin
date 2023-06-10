@@ -9,9 +9,9 @@ interface B {
 }
 
 interface G<X> {
-    val <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>X<!>> boo: Double  where X : A, X : B
-    val <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>A<!>> bal: Double  where A : B
-    val <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>Y<!>> bas: Double where Y : B, <!NAME_IN_CONSTRAINT_IS_NOT_A_TYPE_PARAMETER!>X<!> : B
+    konst <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>X<!>> boo: Double  where X : A, X : B
+    konst <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>A<!>> bal: Double  where A : B
+    konst <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>Y<!>> bas: Double where Y : B, <!NAME_IN_CONSTRAINT_IS_NOT_A_TYPE_PARAMETER!>X<!> : B
 }
 
 class C() : A(), B
@@ -62,8 +62,8 @@ fun <T> test2(t : T)
   t.bar()
 }
 
-val t1 = test2<<!UPPER_BOUND_VIOLATED!>A<!>>(<!TYPE_MISMATCH!>A()<!>)
-val t2 = test2<<!UPPER_BOUND_VIOLATED!>B<!>>(C())
-val t3 = test2<C>(C())
+konst t1 = test2<<!UPPER_BOUND_VIOLATED!>A<!>>(<!TYPE_MISMATCH!>A()<!>)
+konst t2 = test2<<!UPPER_BOUND_VIOLATED!>B<!>>(C())
+konst t3 = test2<C>(C())
 
-val <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>T<!>, <!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>B : T<!>> x : Int = 0
+konst <<!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>T<!>, <!TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER!>B : T<!>> x : Int = 0

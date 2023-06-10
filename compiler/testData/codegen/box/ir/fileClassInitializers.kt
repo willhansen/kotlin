@@ -1,8 +1,8 @@
 // WITH_STDLIB
 import kotlin.test.assertEquals
 
-val x = 1
-val y = x + 1
+konst x = 1
+konst y = x + 1
 
 fun box(): String {
     assertEquals(x, 1)

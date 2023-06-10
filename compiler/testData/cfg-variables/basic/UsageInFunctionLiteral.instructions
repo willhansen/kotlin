@@ -1,24 +1,24 @@
 == foo ==
 fun foo() {
-    val a = 1
-    val f = { x: Int ->
-        val y = x + a
+    konst a = 1
+    konst f = { x: Int ->
+        konst y = x + a
         use(a)
     }
 }
 ---------------------
 L0:
   1 <START>                                                           INIT: in: {} out: {}
-  2 mark({ val a = 1 val f = { x: Int -> val y = x + a use(a) } })
-    v(val a = 1)                                                      INIT: in: {} out: {}
+  2 mark({ konst a = 1 konst f = { x: Int -> konst y = x + a use(a) } })
+    v(konst a = 1)                                                      INIT: in: {} out: {}
     r(1) -> <v0>                                                      INIT: in: {} out: {}
     w(a|<v0>)                                                         INIT: in: {} out: {}
-    v(val f = { x: Int -> val y = x + a use(a) })                     INIT: in: {} out: {}
-    mark({ x: Int -> val y = x + a use(a) })                          INIT: in: {} out: {}
+    v(konst f = { x: Int -> konst y = x + a use(a) })                     INIT: in: {} out: {}
+    mark({ x: Int -> konst y = x + a use(a) })                          INIT: in: {} out: {}
     jmp?(L2)
-    d({ x: Int -> val y = x + a use(a) })                             INIT: in: {} out: {}
+    d({ x: Int -> konst y = x + a use(a) })                             INIT: in: {} out: {}
 L2 [after local declaration]:
-    r({ x: Int -> val y = x + a use(a) }) -> <v1>
+    r({ x: Int -> konst y = x + a use(a) }) -> <v1>
     w(f|<v1>)                                                         INIT: in: {} out: {}
 L1:
   1 <END>                                                             INIT: in: {} out: {}
@@ -29,7 +29,7 @@ sink:
 =====================
 == anonymous_0 ==
 { x: Int ->
-        val y = x + a
+        konst y = x + a
         use(a)
     }
 ---------------------
@@ -38,8 +38,8 @@ L3:
     v(x: Int)                                  INIT: in: {} out: {}
     magic[FAKE_INITIALIZER](x: Int) -> <v0>    INIT: in: {} out: {}
     w(x|<v0>)                                  INIT: in: {} out: {}
-  4 mark(val y = x + a use(a))                 INIT: in: {} out: {}
-    v(val y = x + a)                           INIT: in: {} out: {}
+  4 mark(konst y = x + a use(a))                 INIT: in: {} out: {}
+    v(konst y = x + a)                           INIT: in: {} out: {}
     r(x) -> <v1>                               INIT: in: {} out: {}
     r(a) -> <v2>
     mark(x + a)

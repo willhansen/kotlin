@@ -3,7 +3,7 @@
 
 import kotlin.reflect.KProperty1
 
-class Sample(val str: String)
+class Sample(konst str: String)
 
 class Inv<T>
 

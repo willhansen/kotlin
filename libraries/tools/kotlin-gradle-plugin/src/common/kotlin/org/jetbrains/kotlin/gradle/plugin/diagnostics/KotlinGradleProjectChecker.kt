@@ -24,13 +24,13 @@ import org.jetbrains.kotlin.gradle.plugin.diagnostics.checkers.*
  * Fine-grained suspension calls will improve the checker by enabling the checker to emit the Diagnostic as soon as it really becomes
  * relevant. Let's consider the example where an exception is thrown during [KotlinPluginLifecycle.Stage.FinaliseRefinesEdges].
  * (this might happen on ill-defined projects having ill-defined target hierarchies declared). The checker in the example however,
- * only verifies the user input, so it only requires some properties final value:
+ * only verifies the user input, so it only requires some properties final konstue:
  *
  *```kotlin
  *
  * // correct implementation
  * override suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector) {
- *   ↪ val myFinalValue = getUserProperty().awaitFinalValue()
+ *   ↪ konst myFinalValue = getUserProperty().awaitFinalValue()
  *     if(!myFinalValue.isAllowed) {
  *         // emit diagnostic
  *     }
@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.gradle.plugin.diagnostics.checkers.*
  * // non-ideal / lazy implementation
  * override suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector) {
  *   ↪ Stage.ReadyForExecution.await()
- *     val myFinalValue = getUserProperty().orNull
+ *     konst myFinalValue = getUserProperty().orNull
  *     if(!myFinalValue.isAllowed) {
  *         // emit diagnostic
  *     }
@@ -47,7 +47,7 @@ import org.jetbrains.kotlin.gradle.plugin.diagnostics.checkers.*
  * ```
  *
  * In this example the diagnostic will not be emitted in the non-ideal implementation as the exception thrown in previous Stage
- * will never cause the 'isAllowed' check to never execute. Maybe the illegal property value was causing the exception? User will never know!
+ * will never cause the 'isAllowed' check to never execute. Maybe the illegal property konstue was causing the exception? User will never know!
  *
  * However, the correct implementation can unsuspend as soon as the relevant data is available. This will run before the exception,
  * the diagnostic will be emitted and user can be warned about the issue!
@@ -93,7 +93,7 @@ internal interface KotlinGradleProjectChecker {
     suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector)
 
     companion object {
-        val ALL_CHECKERS: List<KotlinGradleProjectChecker> = listOf(
+        konst ALL_CHECKERS: List<KotlinGradleProjectChecker> = listOf(
             CommonMainWithDependsOnChecker,
             DeprecatedKotlinNativeTargetsChecker,
             MissingNativeStdlibChecker,
@@ -104,7 +104,7 @@ internal interface KotlinGradleProjectChecker {
 }
 
 internal open class KotlinGradleProjectCheckerContext(
-    val project: Project,
-    val kotlinPropertiesProvider: PropertiesProvider,
-    val multiplatformExtension: KotlinMultiplatformExtension?,
+    konst project: Project,
+    konst kotlinPropertiesProvider: PropertiesProvider,
+    konst multiplatformExtension: KotlinMultiplatformExtension?,
 )

@@ -39,11 +39,11 @@ class ViewController : UIViewController {
     override fun viewDidLoad() {
         super.viewDidLoad()
 
-        val (width, height) = UIScreen.mainScreen.bounds.useContents {
+        konst (width, height) = UIScreen.mainScreen.bounds.useContents {
             this.size.width to this.size.height
         }
 
-        val header = UIView().apply {
+        konst header = UIView().apply {
             backgroundColor = UIColor.lightGrayColor
             view.addSubview(this)
             translatesAutoresizingMaskIntoConstraints = false

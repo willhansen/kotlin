@@ -11,4 +11,4 @@ You should not be seeing this.
 """)
 }
 
-val x: Unit = produceMessage()
+konst x: Unit = produceMessage()

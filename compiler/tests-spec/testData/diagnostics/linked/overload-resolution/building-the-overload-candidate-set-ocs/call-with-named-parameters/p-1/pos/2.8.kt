@@ -60,7 +60,7 @@ public fun <T> listOf(vararg elements1: T): List<T> = TODO()
 package libPackageCase2Explicit
 import testsCase2.*
 
-val listOf: A
+konst listOf: A
     get() = A()
 
 public fun <T> listOf(vararg elements1: T): List<T> = TODO()
@@ -93,7 +93,7 @@ public fun <T> listOf(vararg elements1: T): List<T> = TODO()
 package libPackageCase3Explicit
 import testsCase3.*
 
-val listOf: A
+konst listOf: A
     get() = A()
 
 private fun <T> listOf(vararg elements1: T): List<T> = TODO()

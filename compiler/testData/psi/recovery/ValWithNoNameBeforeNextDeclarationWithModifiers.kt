@@ -1,13 +1,13 @@
 class A {
-    private val
-    // private is parsed as val's identifier
+    private konst
+    // private is parsed as konst's identifier
     private fun foo1() {
     }
 
-    private val
+    private konst
     private abstract inline fun foo2()
 
-    private val
+    private konst
     fun foo3() {
     }
 }

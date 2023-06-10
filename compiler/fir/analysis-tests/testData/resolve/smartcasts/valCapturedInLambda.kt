@@ -2,7 +2,7 @@
 
 fun test_1(x: Any): String {
     if (x is String) {
-        val thunk = { x }
+        konst thunk = { x }
         return thunk()
     }
     return "str"
@@ -10,7 +10,7 @@ fun test_1(x: Any): String {
 
 fun test_2(x: Any): String {
     if (x is String) {
-        val thunk = { x + "a" }
+        konst thunk = { x + "a" }
         return thunk()
     }
     return "str"

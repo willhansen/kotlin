@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.diagnostics.KtPsiDiagnostic
 import org.jetbrains.kotlin.fir.declarations.FirFile
 
 internal class FileStructureElementDiagnostics(
-    private val firFile: FirFile,
-    private val retriever: FileStructureElementDiagnosticRetriever,
-    private val moduleComponents: LLFirModuleResolveComponents,
+    private konst firFile: FirFile,
+    private konst retriever: FileStructureElementDiagnosticRetriever,
+    private konst moduleComponents: LLFirModuleResolveComponents,
 ) {
-    private val diagnosticByCommonCheckers: FileStructureElementDiagnosticList by lazy {
+    private konst diagnosticByCommonCheckers: FileStructureElementDiagnosticList by lazy {
         retriever.retrieve(firFile, FileStructureElementDiagnosticsCollector.USUAL_COLLECTOR, moduleComponents)
     }
 
-    private val diagnosticByExtendedCheckers: FileStructureElementDiagnosticList by lazy {
+    private konst diagnosticByExtendedCheckers: FileStructureElementDiagnosticList by lazy {
         retriever.retrieve(firFile, FileStructureElementDiagnosticsCollector.EXTENDED_COLLECTOR, moduleComponents)
     }
 

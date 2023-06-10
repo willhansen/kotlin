@@ -3,5 +3,5 @@
 
 package com.example
 
-val propertyInMultifileClass1 = "propertyInMultifileClass1's value"
+konst propertyInMultifileClass1 = "propertyInMultifileClass1's konstue"
 fun functionInMultifileClass1() = "functionInMultifileClass1's body"

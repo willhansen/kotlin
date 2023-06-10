@@ -12,13 +12,13 @@ import kotlin.test.assertEquals
 class C(var state: String) {
     var String.prop: String
         get() = length.toString()
-        set(value) { state = this + value }
+        set(konstue) { state = this + konstue }
 }
 
 fun box(): String {
-    val prop = C::class.memberExtensionProperties.single() as KMutableProperty2<C, String, String>
+    konst prop = C::class.memberExtensionProperties.single() as KMutableProperty2<C, String, String>
 
-    val c = C("")
+    konst c = C("")
     assertEquals("3", prop.getter.invoke(c, "abc"))
     assertEquals("1", prop.getter(c, "d"))
 

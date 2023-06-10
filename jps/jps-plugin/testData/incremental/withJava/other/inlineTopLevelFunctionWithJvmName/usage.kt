@@ -1,3 +1,3 @@
 package usage
 
-val x = inline.g()
+konst x = inline.g()

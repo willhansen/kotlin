@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.utils.isDirectiveDefined
 
 class PsiClassFilesReadingForCompiledJavaTestSuppressor(testServices: TestServices) : MetaTestConfigurator(testServices) {
     override fun shouldSkipTest(): Boolean {
-        val testFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testFile = testServices.moduleStructure.originalTestDataFiles.first()
         return testFile.isDirectiveDefined("// ${MUTE_FOR_PSI_CLASS_FILES_READING.name}")
     }
 }

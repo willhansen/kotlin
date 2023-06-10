@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.scripting.resolve.ScriptCompilationConfigurationResult
 import org.jetbrains.kotlin.scripting.resolve.ScriptCompilationConfigurationWrapper
 import kotlin.script.experimental.api.ScriptCompilationConfiguration
-import kotlin.script.experimental.api.valueOrNull
+import kotlin.script.experimental.api.konstueOrNull
 import kotlin.script.experimental.dependencies.ScriptDependencies
 
 // Note: misleading name, it is now general configurations provider, not only for dependencies
@@ -21,12 +21,12 @@ import kotlin.script.experimental.dependencies.ScriptDependencies
 // TODO: consider deprecating completely and swith to a new interface in the K2
 // TODO: support SourceCode (or KtSourceFile) as a key
 open class ScriptDependenciesProvider constructor(
-    protected val project: Project
+    protected konst project: Project
 ) {
     @Suppress("DEPRECATION")
     @Deprecated("Migrating to configuration refinement", level = DeprecationLevel.ERROR)
     fun getScriptDependencies(file: VirtualFile): ScriptDependencies? {
-        val ktFile = PsiManager.getInstance(project).findFile(file) as? KtFile ?: return null
+        konst ktFile = PsiManager.getInstance(project).findFile(file) as? KtFile ?: return null
         return getScriptConfiguration(ktFile)?.legacyDependencies
     }
 
@@ -44,7 +44,7 @@ open class ScriptDependenciesProvider constructor(
         file: KtFile, providedConfiguration: ScriptCompilationConfiguration?
     ): ScriptCompilationConfigurationResult? = getScriptConfigurationResult(file)
 
-    open fun getScriptConfiguration(file: KtFile): ScriptCompilationConfigurationWrapper? = getScriptConfigurationResult(file)?.valueOrNull()
+    open fun getScriptConfiguration(file: KtFile): ScriptCompilationConfigurationWrapper? = getScriptConfigurationResult(file)?.konstueOrNull()
 
     companion object {
         fun getInstance(project: Project): ScriptDependenciesProvider? =

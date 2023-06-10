@@ -57,13 +57,13 @@ public class RemappingClassBuilder extends DelegatingClassBuilder {
             @NotNull String name,
             @NotNull String desc,
             @Nullable String signature,
-            @Nullable Object value
+            @Nullable Object konstue
     ) {
         FieldVisitor spilledCoroutineVariable = spilledCoroutineVariables.get(name);
         if (spilledCoroutineVariable != null) return spilledCoroutineVariable;
 
         FieldRemapper field = new FieldRemapper(
-                builder.newField(origin, access, name, this.remapper.mapDesc(desc), this.remapper.mapSignature(signature, true), value),
+                builder.newField(origin, access, name, this.remapper.mapDesc(desc), this.remapper.mapSignature(signature, true), konstue),
                 this.remapper
         );
         if (isSpilledCoroutineVariableName(name)) {

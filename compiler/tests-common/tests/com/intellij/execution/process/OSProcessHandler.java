@@ -209,7 +209,7 @@ public class OSProcessHandler extends BaseOSProcessHandler {
      * <p>In case of PTY this process handler will use blocking read because {@link InputStream#available()} doesn't work for Pty4j, and there
      * is no reason to "disconnect" leaving PTY alive. See {@link BaseDataReader.SleepingPolicy} for more info.</p>
      *
-     * <p>The value should be set before {@link #startNotify()} invocation.
+     * <p>The konstue should be set before {@link #startNotify()} invocation.
      * It is set by default in case of using GeneralCommandLine based constructor.</p>
      *
      * @param hasPty {@code true} if process is PTY-based.

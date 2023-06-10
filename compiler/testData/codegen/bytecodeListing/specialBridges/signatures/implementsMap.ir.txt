@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<<A:Ljava/lang/Object;B:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Map<TA;TB;>;Lkotlin/jvm/internal/markers/KMappedMarker;>  MapImpl {
     // source: 'implementsMap.kt'
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TA;>;> method keySet(): java.util.Set
     public <(Ljava/lang/Object;)TB;> method remove(p0: java.lang.Object): java.lang.Object
@@ -26,7 +26,7 @@ public interface<<K:Ljava/lang/Number;V:Ljava/lang/Object;>Ljava/lang/Object;Lja
 @kotlin.Metadata
 public abstract class<<A:Ljava/lang/Number;B:Ljava/lang/Object;>Ljava/lang/Object;LMapN<TA;TB;>;>  MapNImpl {
     // source: 'implementsMap.kt'
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TA;>;> method keySet(): java.util.Set
     public bridge final <(Ljava/lang/Object;)TB;> method get(p0: java.lang.Object): java.lang.Object
@@ -50,7 +50,7 @@ public abstract class<<A:Ljava/lang/Number;B:Ljava/lang/Object;>Ljava/lang/Objec
 @kotlin.Metadata
 public abstract class<<B:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Map<Ljava/lang/String;TB;>;Lkotlin/jvm/internal/markers/KMappedMarker;>  MapSImpl {
     // source: 'implementsMap.kt'
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/lang/String;>;> method keySet(): java.util.Set
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<Ljava/lang/String;TB;>;>;> method entrySet(): java.util.Set
     public bridge final <(Ljava/lang/Object;)TB;> method get(p0: java.lang.Object): java.lang.Object

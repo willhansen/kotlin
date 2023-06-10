@@ -10,8 +10,8 @@ fun main(args: Array<String>) {
         print("No number supplied");
     }
     else {
-        val x = myParseInt(args[0])
-        val y = myParseInt(args[1])
+        konst x = myParseInt(args[0])
+        konst y = myParseInt(args[1])
 
         // We cannot say 'x * y' now because they may hold nulls
         if (x != null && y != null) {

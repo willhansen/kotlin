@@ -18,14 +18,14 @@ public class JavaClass {
         return true;
     }
 
-    public void setSomething(boolean value) {
+    public void setSomething(boolean konstue) {
     }
 
     public boolean getIsSomething2() {
         return true;
     }
 
-    public void setIsSomething2(boolean value) {
+    public void setIsSomething2(boolean konstue) {
     }
 
     public int isSomethingWrong() {

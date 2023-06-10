@@ -11,7 +11,7 @@ import kotlin.test.*
 
 class UseCloseableResourceTest {
 
-    class Resource(val faultyClose: Boolean = false) : Closeable {
+    class Resource(konst faultyClose: Boolean = false) : Closeable {
 
         var isClosed = false
             private set
@@ -24,21 +24,21 @@ class UseCloseableResourceTest {
     }
 
     @Test fun success() {
-        val resource = Resource()
-        val result = resource.use { "ok" }
+        konst resource = Resource()
+        konst result = resource.use { "ok" }
         assertEquals("ok", result)
         assertTrue(resource.isClosed)
     }
 
     @Test fun closeFails() {
-        val e = assertFails {
+        konst e = assertFails {
             Resource(faultyClose = true).use { it.isClosed }
         }
         assertTrue(e is IOException)
     }
 
     @Test fun opFailsCloseSuccess() {
-        val e = assertFails {
+        konst e = assertFails {
             Resource().use { error("op fail") }
         }
         assertTrue(e is IllegalStateException)
@@ -46,7 +46,7 @@ class UseCloseableResourceTest {
     }
 
     @Test fun opFailsCloseFails() {
-        val e = assertFails {
+        konst e = assertFails {
             Resource(faultyClose = true).use { error("op fail") }
         }
         assertTrue(e is IllegalStateException)
@@ -54,7 +54,7 @@ class UseCloseableResourceTest {
     }
 
     @Test fun opFailsCloseFailsTwice() {
-        val e = assertFails {
+        konst e = assertFails {
             Resource(faultyClose = true).use { _ ->
                 Resource(faultyClose = true).use { _ ->
                     error("op fail")
@@ -62,7 +62,7 @@ class UseCloseableResourceTest {
             }
         }
         assertTrue(e is IllegalStateException)
-        val suppressed = e.suppressed
+        konst suppressed = e.suppressed
         assertEquals(2, suppressed.size)
         assertTrue(suppressed.all { it is IOException })
     }
@@ -73,13 +73,13 @@ class UseCloseableResourceTest {
         }
 
         Resource().let { resource ->
-            val result = resource.operation(nonLocal = false)
+            konst result = resource.operation(nonLocal = false)
             assertEquals("local", result)
             assertTrue(resource.isClosed)
         }
 
         Resource().let { resource ->
-            val result = resource.operation(nonLocal = true)
+            konst result = resource.operation(nonLocal = true)
             assertEquals("nonLocal", result)
             assertTrue(resource.isClosed)
         }
@@ -87,14 +87,14 @@ class UseCloseableResourceTest {
     }
 
     @Test fun nullableResourceSuccess() {
-        val resource: Resource? = null
-        val result = resource.use { "ok" }
+        konst resource: Resource? = null
+        konst result = resource.use { "ok" }
         assertEquals("ok", result)
     }
 
     @Test fun nullableResourceOpFails() {
-        val resource: Resource? = null
-        val e = assertFails {
+        konst resource: Resource? = null
+        konst e = assertFails {
             resource.use { requireNotNull(it) }
         }
         assertTrue(e is IllegalArgumentException)
@@ -102,8 +102,8 @@ class UseCloseableResourceTest {
     }
 
     @Test fun platformResourceOpFails() {
-        val resource = platformNull<Resource>()
-        val e = assertFails {
+        konst resource = platformNull<Resource>()
+        konst e = assertFails {
             resource.use { requireNotNull(it) }
         }
         assertTrue(e is IllegalArgumentException)
@@ -112,7 +112,7 @@ class UseCloseableResourceTest {
 
     @Test
     fun contractCallsInPlace() {
-        val i: Int
+        konst i: Int
         Resource().use { _ ->
             Resource().use { _ ->
                 i = 1

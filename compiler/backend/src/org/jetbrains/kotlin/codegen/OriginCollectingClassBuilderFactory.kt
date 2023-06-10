@@ -9,29 +9,29 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin
 import org.jetbrains.org.objectweb.asm.*
 import org.jetbrains.org.objectweb.asm.tree.*
 
-class OriginCollectingClassBuilderFactory(private val builderMode: ClassBuilderMode) : ClassBuilderFactory {
-    val compiledClasses = mutableListOf<ClassNode>()
-    val origins = mutableMapOf<Any, JvmDeclarationOrigin>()
+class OriginCollectingClassBuilderFactory(private konst builderMode: ClassBuilderMode) : ClassBuilderFactory {
+    konst compiledClasses = mutableListOf<ClassNode>()
+    konst origins = mutableMapOf<Any, JvmDeclarationOrigin>()
 
     override fun getClassBuilderMode(): ClassBuilderMode = builderMode
 
     override fun newClassBuilder(origin: JvmDeclarationOrigin): AbstractClassBuilder.Concrete {
-        val classNode = ClassNode()
+        konst classNode = ClassNode()
         compiledClasses += classNode
         origins[classNode] = origin
         return OriginCollectingClassBuilder(classNode)
     }
 
-    private inner class OriginCollectingClassBuilder(val classNode: ClassNode) : AbstractClassBuilder.Concrete(classNode) {
+    private inner class OriginCollectingClassBuilder(konst classNode: ClassNode) : AbstractClassBuilder.Concrete(classNode) {
         override fun newField(
                 origin: JvmDeclarationOrigin,
                 access: Int,
                 name: String,
                 desc: String,
                 signature: String?,
-                value: Any?
+                konstue: Any?
         ): FieldVisitor {
-            val fieldNode = super.newField(origin, access, name, desc, signature, value) as FieldNode
+            konst fieldNode = super.newField(origin, access, name, desc, signature, konstue) as FieldNode
             origins[fieldNode] = origin
             return fieldNode
         }
@@ -44,7 +44,7 @@ class OriginCollectingClassBuilderFactory(private val builderMode: ClassBuilderM
                 signature: String?,
                 exceptions: Array<out String>?
         ): MethodVisitor {
-            val methodNode = super.newMethod(origin, access, name, desc, signature, exceptions) as MethodNode
+            konst methodNode = super.newMethod(origin, access, name, desc, signature, exceptions) as MethodNode
             origins[methodNode] = origin
 
             // ASM doesn't read information about local variables for the `abstract` methods so we need to get it manually
@@ -57,7 +57,7 @@ class OriginCollectingClassBuilderFactory(private val builderMode: ClassBuilderM
     }
 
     override fun asBytes(builder: ClassBuilder): ByteArray {
-        val classWriter = ClassWriter(ClassWriter.COMPUTE_FRAMES or ClassWriter.COMPUTE_MAXS)
+        konst classWriter = ClassWriter(ClassWriter.COMPUTE_FRAMES or ClassWriter.COMPUTE_MAXS)
         (builder as OriginCollectingClassBuilder).classNode.accept(classWriter)
         return classWriter.toByteArray()
     }

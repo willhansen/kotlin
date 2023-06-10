@@ -1,15 +1,15 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_VARIABLE
 
-fun eat(value: Any) {}
+fun eat(konstue: Any) {}
 
 fun test(param: String) {
-    val a = ::<!UNSUPPORTED!>param<!>
+    konst a = ::<!UNSUPPORTED!>param<!>
 
-    val local = "local"
-    val b = ::<!UNSUPPORTED!>local<!>
+    konst local = "local"
+    konst b = ::<!UNSUPPORTED!>local<!>
 
-    val lambda = { -> }
-    val g = ::<!UNSUPPORTED!>lambda<!>
+    konst lambda = { -> }
+    konst g = ::<!UNSUPPORTED!>lambda<!>
 
     eat(::<!UNSUPPORTED!>param<!>)
 }

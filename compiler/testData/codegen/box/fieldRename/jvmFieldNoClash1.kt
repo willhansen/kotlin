@@ -8,10 +8,10 @@
 
 class A {
     @JvmField
-    val x = "outer"
+    konst x = "outer"
 
     companion object {
-        val x = "companion"
+        konst x = "companion"
     }
 }
 

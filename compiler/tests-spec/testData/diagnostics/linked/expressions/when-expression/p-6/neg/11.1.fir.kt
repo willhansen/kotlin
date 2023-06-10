@@ -2,24 +2,24 @@
 // SKIP_TXT
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int, value_2: List<Int>): String {
-    when (value_1) {
+fun case_1(konstue_1: Int, konstue_2: List<Int>): String {
+    when (konstue_1) {
         <!EXPRESSION_REQUIRED!>while (false) {}<!> -> return ""
         <!EXPRESSION_REQUIRED!>do {} while (false)<!> -> return ""
-        for (value in value_2) {} -> return ""
+        for (konstue in konstue_2) {} -> return ""
     }
 
     return ""
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: Int): String {
-    var value_2: Int
-    var value_3 = 10
+fun case_4(konstue_1: Int): String {
+    var konstue_2: Int
+    var konstue_3 = 10
 
-    when (value_1) {
-        <!EXPRESSION_REQUIRED!>value_2 = 10<!> -> return ""
-        <!EXPRESSION_REQUIRED!>value_3 %= 10<!> -> return ""
+    when (konstue_1) {
+        <!EXPRESSION_REQUIRED!>konstue_2 = 10<!> -> return ""
+        <!EXPRESSION_REQUIRED!>konstue_3 %= 10<!> -> return ""
     }
 
     return ""

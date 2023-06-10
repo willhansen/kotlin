@@ -1,8 +1,8 @@
 fun foo(x: Any, y: Any) {}
 
-val y = false
-val zInt = 1
-val zLong = 1L
+konst y = false
+konst zInt = 1
+konst zLong = 1L
 
 fun box(): String {
     var q = "Failed"

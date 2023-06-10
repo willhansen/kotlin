@@ -10,40 +10,40 @@ package kotlin.script.experimental.api
 import java.io.Serializable
 import kotlin.reflect.KClass
 import kotlin.script.experimental.host.ScriptingHostConfiguration
-import kotlin.script.experimental.host.getEvaluationContext
+import kotlin.script.experimental.host.getEkonstuationContext
 import kotlin.script.experimental.util.PropertiesCollection
 
-interface ScriptEvaluationConfigurationKeys
+interface ScriptEkonstuationConfigurationKeys
 
 /**
- * The container for script evaluation configuration
+ * The container for script ekonstuation configuration
  * For usages see actual code examples
  */
-open class ScriptEvaluationConfiguration(baseEvaluationConfigurations: Iterable<ScriptEvaluationConfiguration>, body: Builder.() -> Unit) :
-    PropertiesCollection(Builder(baseEvaluationConfigurations).apply(body).data) {
+open class ScriptEkonstuationConfiguration(baseEkonstuationConfigurations: Iterable<ScriptEkonstuationConfiguration>, body: Builder.() -> Unit) :
+    PropertiesCollection(Builder(baseEkonstuationConfigurations).apply(body).data) {
 
     constructor(body: Builder.() -> Unit = {}) : this(emptyList(), body)
     constructor(
-        vararg baseConfigurations: ScriptEvaluationConfiguration, body: Builder.() -> Unit = {}
+        vararg baseConfigurations: ScriptEkonstuationConfiguration, body: Builder.() -> Unit = {}
     ) : this(baseConfigurations.asIterable(), body)
 
-    class Builder internal constructor(baseEvaluationConfigurations: Iterable<ScriptEvaluationConfiguration>) :
-        ScriptEvaluationConfigurationKeys,
-        PropertiesCollection.Builder(baseEvaluationConfigurations)
+    class Builder internal constructor(baseEkonstuationConfigurations: Iterable<ScriptEkonstuationConfiguration>) :
+        ScriptEkonstuationConfigurationKeys,
+        PropertiesCollection.Builder(baseEkonstuationConfigurations)
 
-    companion object : ScriptEvaluationConfigurationKeys
+    companion object : ScriptEkonstuationConfigurationKeys
 
-    object Default : ScriptEvaluationConfiguration()
+    object Default : ScriptEkonstuationConfiguration()
 }
 
 /**
  * An alternative to the constructor with base configuration, which returns a new configuration only if [body] adds anything
  * to the original one, otherwise returns original
  */
-fun ScriptEvaluationConfiguration?.with(body: ScriptEvaluationConfiguration.Builder.() -> Unit): ScriptEvaluationConfiguration {
-    val newConfiguration =
-        if (this == null) ScriptEvaluationConfiguration(body = body)
-        else ScriptEvaluationConfiguration(this, body = body)
+fun ScriptEkonstuationConfiguration?.with(body: ScriptEkonstuationConfiguration.Builder.() -> Unit): ScriptEkonstuationConfiguration {
+    konst newConfiguration =
+        if (this == null) ScriptEkonstuationConfiguration(body = body)
+        else ScriptEkonstuationConfiguration(this, body = body)
     return if (newConfiguration != this) newConfiguration else this
 }
 
@@ -51,50 +51,50 @@ fun ScriptEvaluationConfiguration?.with(body: ScriptEvaluationConfiguration.Buil
 /**
  * The list of actual script implicit receiver object, in the same order as specified in {@link ScriptCompilationConfigurationKeys#implicitReceivers}
  */
-val ScriptEvaluationConfigurationKeys.implicitReceivers by PropertiesCollection.key<List<Any>>()
+konst ScriptEkonstuationConfigurationKeys.implicitReceivers by PropertiesCollection.key<List<Any>>()
 
 /**
  * The map of names to actual provided properties objects, according to the properties specified in
  * {@link ScriptCompilationConfigurationKeys#providedProperties}
  */
-val ScriptEvaluationConfigurationKeys.providedProperties by PropertiesCollection.key<Map<String, Any?>>() // external variables
+konst ScriptEkonstuationConfigurationKeys.providedProperties by PropertiesCollection.key<Map<String, Any?>>() // external variables
 
 /**
  * The link to the actual {@link ScriptCompilationConfiguration} object that contains properties used for compiling the script
  */
-val ScriptEvaluationConfigurationKeys.compilationConfiguration by PropertiesCollection.key<ScriptCompilationConfiguration>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.compilationConfiguration by PropertiesCollection.key<ScriptCompilationConfiguration>(isTransient = true)
 
 /**
  * Constructor arguments, additional to implicit receivers and provided properties, according to the script base class constructor
  */
-val ScriptEvaluationConfigurationKeys.constructorArgs by PropertiesCollection.key<List<Any?>>()
+konst ScriptEkonstuationConfigurationKeys.constructorArgs by PropertiesCollection.key<List<Any?>>()
 
 /**
  * If the script is a snippet in a REPL, this property expected to contain previous REPL snippets in historical order
  * For the first snippet in a REPL an empty list should be passed explicitly
  * An array of the previous snippets will be passed to the current snippet constructor
  */
-val ScriptEvaluationConfigurationKeys.previousSnippets by PropertiesCollection.key<List<Any?>>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.previousSnippets by PropertiesCollection.key<List<Any?>>(isTransient = true)
 
 @Deprecated("use scriptsInstancesSharing flag instead", level = DeprecationLevel.ERROR)
-val ScriptEvaluationConfigurationKeys.scriptsInstancesSharingMap by PropertiesCollection.key<MutableMap<KClass<*>, EvaluationResult>>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.scriptsInstancesSharingMap by PropertiesCollection.key<MutableMap<KClass<*>, EkonstuationResult>>(isTransient = true)
 
 /**
- * If enabled - the evaluator will try to get imported script from a shared container
- * only create/evaluate instances if not found, and evaluator will put newly created instances into the container
+ * If enabled - the ekonstuator will try to get imported script from a shared container
+ * only create/ekonstuate instances if not found, and ekonstuator will put newly created instances into the container
  * This allows to have a single instance of the script if it is imported several times via different import paths.
  */
-val ScriptEvaluationConfigurationKeys.scriptsInstancesSharing by PropertiesCollection.key<Boolean>(false)
+konst ScriptEkonstuationConfigurationKeys.scriptsInstancesSharing by PropertiesCollection.key<Boolean>(false)
 
 /**
  * Scripting host configuration
  */
-val ScriptEvaluationConfigurationKeys.hostConfiguration by PropertiesCollection.key<ScriptingHostConfiguration>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.hostConfiguration by PropertiesCollection.key<ScriptingHostConfiguration>(isTransient = true)
 
 /**
  * The callback that will be called on the script compilation immediately before starting the compilation
  */
-val ScriptEvaluationConfigurationKeys.refineConfigurationBeforeEvaluate by PropertiesCollection.key<List<RefineEvaluationConfigurationData>>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.refineConfigurationBeforeEkonstuate by PropertiesCollection.key<List<RefineEkonstuationConfigurationData>>(isTransient = true)
 
 interface ScriptExecutionWrapper<T> {
     fun invoke(block: () -> T): T
@@ -103,13 +103,13 @@ interface ScriptExecutionWrapper<T> {
 /**
  *  An optional user-defined wrapper which is called with the code that actually executes script body
  */
-val ScriptEvaluationConfigurationKeys.scriptExecutionWrapper by PropertiesCollection.key<ScriptExecutionWrapper<*>>(isTransient = true)
+konst ScriptEkonstuationConfigurationKeys.scriptExecutionWrapper by PropertiesCollection.key<ScriptExecutionWrapper<*>>(isTransient = true)
 
 /**
  * A helper to enable passing lambda directly to the scriptExecutionWrapper "keyword"
  */
-fun <T> ScriptEvaluationConfiguration.Builder.scriptExecutionWrapper(wrapper: (() -> T) -> T) {
-    ScriptEvaluationConfiguration.scriptExecutionWrapper.put(object : ScriptExecutionWrapper<T> {
+fun <T> ScriptEkonstuationConfiguration.Builder.scriptExecutionWrapper(wrapper: (() -> T) -> T) {
+    ScriptEkonstuationConfiguration.scriptExecutionWrapper.put(object : ScriptExecutionWrapper<T> {
         override fun invoke(block: () -> T): T = wrapper(block)
     })
 }
@@ -117,7 +117,7 @@ fun <T> ScriptEvaluationConfiguration.Builder.scriptExecutionWrapper(wrapper: ((
 /**
  * A helper to enable scriptsInstancesSharingMap with default implementation
  */
-fun ScriptEvaluationConfiguration.Builder.enableScriptsInstancesSharing() {
+fun ScriptEkonstuationConfiguration.Builder.enableScriptsInstancesSharing() {
     this {
         scriptsInstancesSharing(true)
     }
@@ -126,55 +126,55 @@ fun ScriptEvaluationConfiguration.Builder.enableScriptsInstancesSharing() {
 /**
  * A helper to enable passing lambda directly to the refinement "keyword"
  */
-fun ScriptEvaluationConfiguration.Builder.refineConfigurationBeforeEvaluate(handler: RefineScriptEvaluationConfigurationHandler) {
-    ScriptEvaluationConfiguration.refineConfigurationBeforeEvaluate.append(RefineEvaluationConfigurationData(handler))
+fun ScriptEkonstuationConfiguration.Builder.refineConfigurationBeforeEkonstuate(handler: RefineScriptEkonstuationConfigurationHandler) {
+    ScriptEkonstuationConfiguration.refineConfigurationBeforeEkonstuate.append(RefineEkonstuationConfigurationData(handler))
 }
 
 /**
  * The refinement callback function signature
  */
-typealias RefineScriptEvaluationConfigurationHandler =
-            (ScriptEvaluationConfigurationRefinementContext) -> ResultWithDiagnostics<ScriptEvaluationConfiguration>
+typealias RefineScriptEkonstuationConfigurationHandler =
+            (ScriptEkonstuationConfigurationRefinementContext) -> ResultWithDiagnostics<ScriptEkonstuationConfiguration>
 
-data class RefineEvaluationConfigurationData(
-    val handler: RefineScriptEvaluationConfigurationHandler
+data class RefineEkonstuationConfigurationData(
+    konst handler: RefineScriptEkonstuationConfigurationHandler
 ) : Serializable {
-    companion object { private const val serialVersionUID: Long = 1L }
+    companion object { private const konst serialVersionUID: Long = 1L }
 }
 
-fun ScriptEvaluationConfiguration.refineBeforeEvaluation(
+fun ScriptEkonstuationConfiguration.refineBeforeEkonstuation(
     script: CompiledScript,
-    contextData: ScriptEvaluationContextData? = null
-): ResultWithDiagnostics<ScriptEvaluationConfiguration> {
-    val hostConfiguration = get(ScriptEvaluationConfiguration.hostConfiguration)
-    val baseContextData = hostConfiguration?.get(ScriptingHostConfiguration.getEvaluationContext)?.invoke(hostConfiguration)
-    val actualContextData = merge(baseContextData, contextData)
-    return simpleRefineImpl(ScriptEvaluationConfiguration.refineConfigurationBeforeEvaluate) { config, refineData ->
-        refineData.handler.invoke(ScriptEvaluationConfigurationRefinementContext(script, config, actualContextData))
+    contextData: ScriptEkonstuationContextData? = null
+): ResultWithDiagnostics<ScriptEkonstuationConfiguration> {
+    konst hostConfiguration = get(ScriptEkonstuationConfiguration.hostConfiguration)
+    konst baseContextData = hostConfiguration?.get(ScriptingHostConfiguration.getEkonstuationContext)?.invoke(hostConfiguration)
+    konst actualContextData = merge(baseContextData, contextData)
+    return simpleRefineImpl(ScriptEkonstuationConfiguration.refineConfigurationBeforeEkonstuate) { config, refineData ->
+        refineData.handler.invoke(ScriptEkonstuationConfigurationRefinementContext(script, config, actualContextData))
     }
 }
 
 /**
- * The script evaluation result value
+ * The script ekonstuation result konstue
  */
-sealed class ResultValue(val scriptClass: KClass<*>? = null, val scriptInstance: Any? = null) {
+sealed class ResultValue(konst scriptClass: KClass<*>? = null, konst scriptInstance: Any? = null) {
 
     /**
-     * The result value representing a script return value - the value of the last expression in the script
+     * The result konstue representing a script return konstue - the konstue of the last expression in the script
      * @param name assigned name of the result field - used e.g. in REPL
-     * @param value actual result value
+     * @param konstue actual result konstue
      * @param type name of the result type
      * @param scriptClass the loaded class of the script
      * @param scriptInstance instance of the script class. Should be nullable since on some platforms (e.g. JS) there is no actual instance
      */
-    class Value(val name: String, val value: Any?, val type: String, scriptClass: KClass<*>?, scriptInstance: Any?) :
+    class Value(konst name: String, konst konstue: Any?, konst type: String, scriptClass: KClass<*>?, scriptInstance: Any?) :
         ResultValue(scriptClass, scriptInstance) {
 
-        override fun toString(): String = "$name: $type = $value"
+        override fun toString(): String = "$name: $type = $konstue"
     }
 
     /**
-     * The result value representing unit result, e.g. when the script ends with a statement.
+     * The result konstue representing unit result, e.g. when the script ends with a statement.
      * @param scriptClass the loaded class of the script
      * @param scriptInstance instance of the script class. Please note it's nullable for symmetry with `Value`
      */
@@ -183,38 +183,38 @@ sealed class ResultValue(val scriptClass: KClass<*>? = null, val scriptInstance:
     }
 
     /**
-     * The result value representing an exception from script itself
-     * @param error the actual exception thrown on script evaluation
+     * The result konstue representing an exception from script itself
+     * @param error the actual exception thrown on script ekonstuation
      * @param wrappingException the wrapping exception e.g. InvocationTargetException, sometimes useful for calculating the relevant stacktrace
      * @param scriptClass the loaded class of the script, if any
      */
-    class Error(val error: Throwable, val wrappingException: Throwable? = null, scriptClass: KClass<*>? = null) : ResultValue(scriptClass) {
+    class Error(konst error: Throwable, konst wrappingException: Throwable? = null, scriptClass: KClass<*>? = null) : ResultValue(scriptClass) {
         override fun toString(): String = error.toString()
     }
 
     /**
-     * The result value used in non-evaluating "evaluators"
+     * The result konstue used in non-ekonstuating "ekonstuators"
      */
-    object NotEvaluated : ResultValue()
+    object NotEkonstuated : ResultValue()
 }
 
 /**
- * The facade for the evaluation result and evaluation configuration, used in the evaluator interface
+ * The facade for the ekonstuation result and ekonstuation configuration, used in the ekonstuator interface
  */
-data class EvaluationResult(val returnValue: ResultValue, val configuration: ScriptEvaluationConfiguration?)
+data class EkonstuationResult(konst returnValue: ResultValue, konst configuration: ScriptEkonstuationConfiguration?)
 
 /**
- * The functional interface to the script evaluator
+ * The functional interface to the script ekonstuator
  */
-interface ScriptEvaluator {
+interface ScriptEkonstuator {
 
     /**
-     * Evaluates [compiledScript] using the data from [scriptEvaluationConfiguration]
+     * Ekonstuates [compiledScript] using the data from [scriptEkonstuationConfiguration]
      * @param compiledScript the compiled script class
-     * @param scriptEvaluationConfiguration evaluation configuration
+     * @param scriptEkonstuationConfiguration ekonstuation configuration
      */
     suspend operator fun invoke(
         compiledScript: CompiledScript,
-        scriptEvaluationConfiguration: ScriptEvaluationConfiguration = ScriptEvaluationConfiguration.Default
-    ): ResultWithDiagnostics<EvaluationResult>
+        scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration = ScriptEkonstuationConfiguration.Default
+    ): ResultWithDiagnostics<EkonstuationResult>
 }

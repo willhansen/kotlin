@@ -34,7 +34,7 @@ class Outer<E> {
 fun topLevel(): Outer<String> = null!!
 
 fun foo() {
-    val strInt: Outer<String>.Inner<Int> = Outer<String>().Inner()
+    konst strInt: Outer<String>.Inner<Int> = Outer<String>().Inner()
 
     strInt.foo().checkType { _<String>() }
     strInt.baz().checkType { _<Int>() }

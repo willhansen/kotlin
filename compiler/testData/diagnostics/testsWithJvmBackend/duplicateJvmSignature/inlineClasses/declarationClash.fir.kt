@@ -2,10 +2,10 @@
 // TARGET_BACKEND: JVM_IR
 
 @JvmInline
-value class A<!CONFLICTING_JVM_DECLARATIONS!>(val x: Int)<!> {
+konstue class A<!CONFLICTING_JVM_DECLARATIONS!>(konst x: Int)<!> {
     <!CONFLICTING_JVM_DECLARATIONS!>constructor(x: UInt)<!>: this(x.toInt())
 }
 
-data class B<!CONFLICTING_JVM_DECLARATIONS!>(val x: UInt)<!> {
+data class B<!CONFLICTING_JVM_DECLARATIONS!>(konst x: UInt)<!> {
     <!CONFLICTING_JVM_DECLARATIONS!>constructor(x: Int)<!> : this(x.toUInt())
 }

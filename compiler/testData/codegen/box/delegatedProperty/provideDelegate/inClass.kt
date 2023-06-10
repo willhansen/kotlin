@@ -16,14 +16,14 @@ operator fun String.getValue(receiver: Any?, p: Any): String =
         runLogged("get($this);") { this }
 
 class Test {
-    val testO by runLogged("O;") { "O" }
-    val testK by runLogged("K;") { "K" }
-    val testOK = runLogged("OK;") { testO + testK }
+    konst testO by runLogged("O;") { "O" }
+    konst testK by runLogged("K;") { "K" }
+    konst testOK = runLogged("OK;") { testO + testK }
 }
 
 fun box(): String {
     assertEquals("", log)
-    val test = Test()
+    konst test = Test()
     assertEquals("O;tdf(O);K;tdf(K);OK;get(O);get(K);", log)
     return test.testOK
 }

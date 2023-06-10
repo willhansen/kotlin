@@ -10,7 +10,7 @@
  */
 
 fun box(): String {
-    val bar = ::exit
+    konst bar = ::exit
     try {
         bar()
     } catch (e: NotImplementedError) {

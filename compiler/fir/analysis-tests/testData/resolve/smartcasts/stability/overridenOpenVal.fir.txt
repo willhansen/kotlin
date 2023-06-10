@@ -4,7 +4,7 @@ FILE: overridenOpenVal.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val x: R|kotlin/Any| = R|<local>/x|
+        public open konst x: R|kotlin/Any| = R|<local>/x|
             public get(): R|kotlin/Any|
 
     }

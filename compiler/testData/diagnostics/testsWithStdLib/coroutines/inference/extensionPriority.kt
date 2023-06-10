@@ -13,11 +13,11 @@ suspend fun <S> GenericController<S>.yieldAll(s: Set<S>): Int = 4
 
 fun <T, R> generate(g: suspend GenericController<T>.() -> R): Pair<T, R> = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yieldAll(setOf(4))
 }
 
-val test2 = generate {
+konst test2 = generate {
     yieldAll(listOf(4))
 }
 

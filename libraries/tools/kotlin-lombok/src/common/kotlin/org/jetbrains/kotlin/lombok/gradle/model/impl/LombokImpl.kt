@@ -9,12 +9,12 @@ import org.jetbrains.kotlin.gradle.model.Lombok
 import java.io.File
 import java.io.Serializable
 
-data class LombokImpl(override val name: String, override val configurationFile: File?) : Lombok, Serializable {
+data class LombokImpl(override konst name: String, override konst configurationFile: File?) : Lombok, Serializable {
 
-    override val modelVersion: Long
+    override konst modelVersion: Long
         get() = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

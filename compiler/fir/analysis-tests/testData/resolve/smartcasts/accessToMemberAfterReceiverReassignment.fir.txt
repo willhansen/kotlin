@@ -4,10 +4,10 @@ FILE: accessToMemberAfterReceiverReassignment.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|My?| = R|<local>/x|
+        public final konst x: R|My?| = R|<local>/x|
             public get(): R|My?|
 
-        public final val z: R|My?| = R|<local>/z|
+        public final konst z: R|My?| = R|<local>/z|
             public get(): R|My?|
 
     }

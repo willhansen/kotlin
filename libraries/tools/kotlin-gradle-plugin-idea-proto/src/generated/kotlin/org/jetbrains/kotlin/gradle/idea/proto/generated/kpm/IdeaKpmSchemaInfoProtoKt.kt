@@ -10,7 +10,7 @@ object IdeaKpmSchemaInfoProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmSchemaInfoProtoKt {
       @JvmName("getSinceSchemaVersionMajor")
       get() = _builder.getSinceSchemaVersionMajor()
       @JvmName("setSinceSchemaVersionMajor")
-      set(value) {
-        _builder.setSinceSchemaVersionMajor(value)
+      set(konstue) {
+        _builder.setSinceSchemaVersionMajor(konstue)
       }
     /**
      * <code>optional uint32 since_schema_version_major = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmSchemaInfoProtoKt {
       @JvmName("getSinceSchemaVersionMinor")
       get() = _builder.getSinceSchemaVersionMinor()
       @JvmName("setSinceSchemaVersionMinor")
-      set(value) {
-        _builder.setSinceSchemaVersionMinor(value)
+      set(konstue) {
+        _builder.setSinceSchemaVersionMinor(konstue)
       }
     /**
      * <code>optional uint32 since_schema_version_minor = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmSchemaInfoProtoKt {
       @JvmName("getSinceSchemaVersionPatch")
       get() = _builder.getSinceSchemaVersionPatch()
       @JvmName("setSinceSchemaVersionPatch")
-      set(value) {
-        _builder.setSinceSchemaVersionPatch(value)
+      set(konstue) {
+        _builder.setSinceSchemaVersionPatch(konstue)
       }
     /**
      * <code>optional uint32 since_schema_version_patch = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKpmSchemaInfoProtoKt {
       @JvmName("getSeverity")
       get() = _builder.getSeverity()
       @JvmName("setSeverity")
-      set(value) {
-        _builder.setSeverity(value)
+      set(konstue) {
+        _builder.setSeverity(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto.Severity severity = 4;</code>
@@ -125,8 +125,8 @@ object IdeaKpmSchemaInfoProtoKt {
       @JvmName("getMessage")
       get() = _builder.getMessage()
       @JvmName("setMessage")
-      set(value) {
-        _builder.setMessage(value)
+      set(konstue) {
+        _builder.setMessage(konstue)
       }
     /**
      * <code>optional string message = 5;</code>

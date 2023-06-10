@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.test.runners.codegen.commonConfigurationForTest
 abstract class AbstractFirLoadCompiledJvmKotlinTestBase<F : ResultingArtifact.FrontendOutput<F>> :
     AbstractKotlinCompilerWithTargetBackendTest(TargetBackend.JVM_IR)
 {
-    protected abstract val frontendKind: FrontendKind<F>
-    protected abstract val frontendFacade: Constructor<FrontendFacade<F>>
-    protected abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<F, IrBackendInput>>
+    protected abstract konst frontendKind: FrontendKind<F>
+    protected abstract konst frontendFacade: Constructor<FrontendFacade<F>>
+    protected abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<F, IrBackendInput>>
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForTest(
@@ -51,20 +51,20 @@ abstract class AbstractFirLoadCompiledJvmKotlinTestBase<F : ResultingArtifact.Fr
 }
 
 open class AbstractFirLoadK1CompiledJvmKotlinTest : AbstractFirLoadCompiledJvmKotlinTestBase<ClassicFrontendOutputArtifact>() {
-    override val frontendKind: FrontendKind<ClassicFrontendOutputArtifact>
+    override konst frontendKind: FrontendKind<ClassicFrontendOutputArtifact>
         get() = FrontendKinds.ClassicFrontend
-    override val frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
         get() = ::ClassicFrontend2IrConverter
 }
 
 open class AbstractFirLoadK2CompiledJvmKotlinTest : AbstractFirLoadCompiledJvmKotlinTestBase<FirOutputArtifact>() {
-    override val frontendKind: FrontendKind<FirOutputArtifact>
+    override konst frontendKind: FrontendKind<FirOutputArtifact>
         get() = FrontendKinds.FIR
-    override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
 
     override fun configure(builder: TestConfigurationBuilder) {

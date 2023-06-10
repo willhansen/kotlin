@@ -5,9 +5,9 @@
 // FILE: Value.kt
 package vv
 
-sealed class Value<T>(@JvmField val value: T) {
-    class StringValue(value: String) : Value<String>(value)
-    class BooleanValue(value: Boolean): Value<Boolean>(value)
+sealed class Value<T>(@JvmField konst konstue: T) {
+    class StringValue(konstue: String) : Value<String>(konstue)
+    class BooleanValue(konstue: Boolean): Value<Boolean>(konstue)
 }
 
 
@@ -19,9 +19,9 @@ import vv.*
 fun test(v: Value<*>) {
     when (v) {
         is Value.StringValue ->
-            assertEquals("a string", v.value)
+            assertEquals("a string", v.konstue)
         is Value.BooleanValue ->
-            assertEquals(true, v.value)
+            assertEquals(true, v.konstue)
     }
 }
 

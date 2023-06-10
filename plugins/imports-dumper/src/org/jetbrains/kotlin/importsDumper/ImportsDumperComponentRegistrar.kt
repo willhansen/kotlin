@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.AnalysisHandlerExtension
 
 class ImportsDumperComponentRegistrar : CompilerPluginRegistrar() {
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val destinationPath = configuration[ImportsDumperConfigurationKeys.DESTINATION] ?: return
+        konst destinationPath = configuration[ImportsDumperConfigurationKeys.DESTINATION] ?: return
         AnalysisHandlerExtension.registerExtension(ImportsDumperExtension(destinationPath))
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = false
 }

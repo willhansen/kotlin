@@ -22,15 +22,15 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirAnonymousInitializer : FirDeclaration(), FirControlFlowGraphOwner {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract val body: FirBlock?
-    abstract override val symbol: FirAnonymousInitializerSymbol
-    abstract val dispatchReceiverType: ConeClassLikeType?
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract konst body: FirBlock?
+    abstract override konst symbol: FirAnonymousInitializerSymbol
+    abstract konst dispatchReceiverType: ConeClassLikeType?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAnonymousInitializer(this, data)
 

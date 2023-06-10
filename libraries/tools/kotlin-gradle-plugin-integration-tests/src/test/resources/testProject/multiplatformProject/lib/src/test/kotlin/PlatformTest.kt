@@ -1,7 +1,7 @@
 package foo
 
 expect class PlatformTest {
-    val value: PlatformClass
+    konst konstue: PlatformClass
 }
 
-class CommonTest(val commonClass: CommonClass)
+class CommonTest(konst commonClass: CommonClass)

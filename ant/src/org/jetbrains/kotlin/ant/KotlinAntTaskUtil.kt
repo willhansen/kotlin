@@ -27,19 +27,19 @@ import java.net.JarURLConnection
 internal object KotlinAntTaskUtil {
     private var classLoaderRef = SoftReference<ClassLoader?>(null)
 
-    private val libPath: File by lazy {
+    private konst libPath: File by lazy {
         // Find path of kotlin-ant.jar in the filesystem and find kotlin-compiler.jar in the same directory
-        val resourcePath = "/" + this::class.java.name.replace('.', '/') + ".class"
-        val jarConnection = this::class.java.getResource(resourcePath).openConnection() as? JarURLConnection
+        konst resourcePath = "/" + this::class.java.name.replace('.', '/') + ".class"
+        konst jarConnection = this::class.java.getResource(resourcePath).openConnection() as? JarURLConnection
                             ?: throw UnsupportedOperationException("Kotlin compiler Ant task should be loaded from the JAR file")
-        val antTaskJarPath = File(jarConnection.jarFileURL.toURI())
+        konst antTaskJarPath = File(jarConnection.jarFileURL.toURI())
 
         antTaskJarPath.parentFile
     }
 
-    val compilerJar: File by jar("kotlin-compiler.jar")
-    val runtimeJar: File by jar("kotlin-stdlib.jar")
-    val reflectJar: File by jar("kotlin-reflect.jar")
+    konst compilerJar: File by jar("kotlin-compiler.jar")
+    konst runtimeJar: File by jar("kotlin-stdlib.jar")
+    konst reflectJar: File by jar("kotlin-reflect.jar")
 
     private fun jar(name: String) = lazy {
         File(libPath, name).apply {
@@ -51,18 +51,18 @@ internal object KotlinAntTaskUtil {
 
     @Synchronized
     fun getOrCreateClassLoader(): ClassLoader {
-        val cached = classLoaderRef.get()
+        konst cached = classLoaderRef.get()
         if (cached != null) return cached
 
-        val myLoader = this::class.java.classLoader
+        konst myLoader = this::class.java.classLoader
         if (myLoader !is AntClassLoader) return myLoader
 
-        val classLoader = ClassPreloadingUtils.preloadClasses(listOf(compilerJar), Preloader.DEFAULT_CLASS_NUMBER_ESTIMATE, myLoader, null)
+        konst classLoader = ClassPreloadingUtils.preloadClasses(listOf(compilerJar), Preloader.DEFAULT_CLASS_NUMBER_ESTIMATE, myLoader, null)
         classLoaderRef = SoftReference(classLoader)
 
         return classLoader
     }
 }
 
-internal val Task.defaultModuleName: String?
+internal konst Task.defaultModuleName: String?
     get() = owningTarget?.name ?: project?.name

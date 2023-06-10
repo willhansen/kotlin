@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
     if (args.isEmpty())
         return help()
 
-    val curl = CUrl(args[0])
+    konst curl = CUrl(args[0])
     curl.header += {
         println("[H] $it")
     }

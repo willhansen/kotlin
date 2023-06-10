@@ -8,10 +8,10 @@ interface IFoo<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val x: Long) : IFoo<L>
+konstue class L(konst x: Long) : IFoo<L>
 
 fun box(): String {
-    val z = L(0L)
+    konst z = L(0L)
     return with(z) {
         foo(z) + z.bar()
     }

@@ -21,7 +21,7 @@ import kotlin.contracts.contract
 @FirBuilderDsl
 class FirAnnotationArgumentMappingBuilder {
     var source: KtSourceElement? = null
-    val mapping: MutableMap<Name, FirExpression> = mutableMapOf()
+    konst mapping: MutableMap<Name, FirExpression> = mutableMapOf()
 
     fun build(): FirAnnotationArgumentMapping {
         if (source == null && mapping.isEmpty()) return FirEmptyAnnotationArgumentMapping

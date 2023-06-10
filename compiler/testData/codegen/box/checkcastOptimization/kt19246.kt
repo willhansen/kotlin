@@ -1,13 +1,13 @@
 // WITH_STDLIB
 
-enum class ResultType constructor(val reason: String) {
+enum class ResultType constructor(konst reason: String) {
     SOMETHING("123"),
     OK("OK"),
     UNKNOWN("FAIL");
 
     companion object {
         fun getByVal(reason: String): ResultType {
-            return ResultType.values().firstOrDefault({ it.reason == reason }, UNKNOWN)
+            return ResultType.konstues().firstOrDefault({ it.reason == reason }, UNKNOWN)
         }
     }
 }

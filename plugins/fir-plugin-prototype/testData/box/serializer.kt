@@ -8,8 +8,8 @@ object FirstSerializer {
     fun bFunction() {}
     fun aFunction() {}
 
-    val bProp = 1
-    val aProp = 2
+    konst bProp = 1
+    konst aProp = 2
 }
 
 @CoreSerializer

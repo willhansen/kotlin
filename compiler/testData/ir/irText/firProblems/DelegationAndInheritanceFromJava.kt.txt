@@ -5,8 +5,8 @@ class Impl : A, B {
 
   }
 
-  private /* final field */ val $$delegate_0: B = b
-  override val size: Int
+  private /* final field */ konst $$delegate_0: B = b
+  override konst size: Int
     override get(): Int {
       return <this>.#$$delegate_0.<get-size>()
     }

@@ -1,4 +1,4 @@
-inline class SomeClass(val v: Int) {
+inline class SomeClass(konst v: Int) {
     companion object {
         fun <T> comp(s: SomeClass, t: T): T? = null
     }
@@ -7,7 +7,7 @@ inline class SomeClass(val v: Int) {
 
     fun <T, K> getTK(t: T): K? = null
 
-    val <K> K.propK: K? get() = null
+    konst <K> K.propK: K? get() = null
 }
 
 // method: SomeClass::getT-impl

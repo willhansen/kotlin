@@ -2,7 +2,7 @@
 // documents inconsistency between scripts and classes, see DeclarationScopeProviderImpl
 
 fun function() = 42
-val property = ""
+konst property = ""
 
 class Nested {
     fun f() = <!INACCESSIBLE_OUTER_CLASS_EXPRESSION{OI}!>function()<!>
@@ -12,9 +12,9 @@ class Nested {
 
 inner class Inner {
     fun innerFun() = function()
-    val innerProp = property
+    konst innerProp = property
     fun innerThisFun() = this@NestedInnerClass.function()
-    val innerThisProp = this@NestedInnerClass.property
+    konst innerThisProp = this@NestedInnerClass.property
 
     inner class InnerInner {
         fun f() = innerFun()

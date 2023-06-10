@@ -15,10 +15,10 @@ class B : A() {
 // FILE: box.kt
 
 fun box(): String {
-    val af = A().f()
+    konst af = A().f()
     if (af != 1) return "fail: result of 'A().f()' is '$af', but '1' was expected"
 
-    val bf = B().f()
+    konst bf = B().f()
     if (bf != 3) return "fail: result of 'B().f()' is '$bf', but '3' was expected"
 
     return "OK"

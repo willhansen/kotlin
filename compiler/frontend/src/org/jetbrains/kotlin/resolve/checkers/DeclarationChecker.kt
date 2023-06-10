@@ -30,10 +30,10 @@ interface DeclarationChecker {
 }
 
 class DeclarationCheckerContext(
-    override val trace: BindingTrace,
-    override val languageVersionSettings: LanguageVersionSettings,
-    override val deprecationResolver: DeprecationResolver,
-    override val moduleDescriptor: ModuleDescriptor,
-    val expectActualTracker: ExpectActualTracker,
-    val missingSupertypesResolver: MissingSupertypesResolver
+    override konst trace: BindingTrace,
+    override konst languageVersionSettings: LanguageVersionSettings,
+    override konst deprecationResolver: DeprecationResolver,
+    override konst moduleDescriptor: ModuleDescriptor,
+    konst expectActualTracker: ExpectActualTracker,
+    konst missingSupertypesResolver: MissingSupertypesResolver
 ) : CheckerContext

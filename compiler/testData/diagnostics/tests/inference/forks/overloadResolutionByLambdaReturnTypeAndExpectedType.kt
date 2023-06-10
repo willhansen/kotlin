@@ -11,19 +11,19 @@ interface C : MyList<String>
 
 fun <E> foo(m: MyList<E>, c: C) {
     if (c === m) {
-        val x1: MyList<String> = <!DEBUG_INFO_SMARTCAST!>m<!>.noOverloadResolutionByLambdaReturnType { x ->
+        konst x1: MyList<String> = <!DEBUG_INFO_SMARTCAST!>m<!>.noOverloadResolutionByLambdaReturnType { x ->
             myListOf(x)
         } // ok in K1 and K2
 
-        val x2: MyList<E> = <!TYPE_MISMATCH!><!DEBUG_INFO_SMARTCAST!>m<!>.<!TYPE_MISMATCH, TYPE_MISMATCH!>noOverloadResolutionByLambdaReturnType { x ->
+        konst x2: MyList<E> = <!TYPE_MISMATCH!><!DEBUG_INFO_SMARTCAST!>m<!>.<!TYPE_MISMATCH, TYPE_MISMATCH!>noOverloadResolutionByLambdaReturnType { x ->
             myListOf(x)
         }<!><!> // ok in K2, error in k1
 
-        val y1: MyList<String> = <!DEBUG_INFO_SMARTCAST!>m<!>.limitedFlatMap { x ->
+        konst y1: MyList<String> = <!DEBUG_INFO_SMARTCAST!>m<!>.limitedFlatMap { x ->
             myListOf(x)
         } // ok in K1 and K2
 
-        val y2: MyList<E> = <!TYPE_MISMATCH!><!DEBUG_INFO_SMARTCAST!>m<!>.<!TYPE_MISMATCH!>limitedFlatMap { x ->
+        konst y2: MyList<E> = <!TYPE_MISMATCH!><!DEBUG_INFO_SMARTCAST!>m<!>.<!TYPE_MISMATCH!>limitedFlatMap { x ->
             myListOf(x)
         }<!><!> // error in K1 and K2
     }

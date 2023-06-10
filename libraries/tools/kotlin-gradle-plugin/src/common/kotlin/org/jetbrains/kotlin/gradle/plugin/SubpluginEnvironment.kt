@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.gradle.tasks.*
 import org.jetbrains.kotlin.gradle.utils.whenKaptEnabled
 
 class SubpluginEnvironment(
-    private val subplugins: List<KotlinCompilerPluginSupportPlugin>,
-    private val kotlinPluginVersion: String
+    private konst subplugins: List<KotlinCompilerPluginSupportPlugin>,
+    private konst kotlinPluginVersion: String
 ) {
     companion object {
         fun loadSubplugins(project: Project): SubpluginEnvironment {
-            val kotlinPluginVersion = project.getKotlinPluginVersion()
+            konst kotlinPluginVersion = project.getKotlinPluginVersion()
             return SubpluginEnvironment(project.plugins.filterIsInstance<KotlinCompilerPluginSupportPlugin>(), kotlinPluginVersion)
         }
     }
@@ -26,11 +26,11 @@ class SubpluginEnvironment(
         project: Project,
         kotlinCompilation: KotlinCompilation<*>
     ): List<KotlinCompilerPluginSupportPlugin> {
-        val appliedSubplugins = subplugins.filter { it.isApplicable(kotlinCompilation) }
+        konst appliedSubplugins = subplugins.filter { it.isApplicable(kotlinCompilation) }
         for (subplugin in appliedSubplugins) {
             if (!subplugin.isApplicable(kotlinCompilation)) continue
 
-            val pluginId = subplugin.getCompilerPluginId()
+            konst pluginId = subplugin.getCompilerPluginId()
             project.logger.kotlinDebug { "Loading subplugin $pluginId" }
 
 
@@ -44,17 +44,17 @@ class SubpluginEnvironment(
                 )
             }
 
-            val subpluginOptionsProvider = subplugin.applyToCompilation(kotlinCompilation)
-            val subpluginId = subplugin.getCompilerPluginId()
-            val compilerOptions = subpluginOptionsProvider.map { subpluginOptions ->
-                val options = CompilerPluginOptions()
+            konst subpluginOptionsProvider = subplugin.applyToCompilation(kotlinCompilation)
+            konst subpluginId = subplugin.getCompilerPluginId()
+            konst compilerOptions = subpluginOptionsProvider.map { subpluginOptions ->
+                konst options = CompilerPluginOptions()
                 subpluginOptions.forEach { opt ->
                     options.addPluginArgument(subpluginId, opt)
                 }
                 options
             }
 
-            val configureKotlinTask: (KotlinCompilationTask<*>) -> Unit = {
+            konst configureKotlinTask: (KotlinCompilationTask<*>) -> Unit = {
                 when (it) {
                     is AbstractKotlinCompile<*> -> it.pluginOptions.add(compilerOptions)
                     is KotlinNativeCompile -> it.compilerPluginOptions.addPluginArgument(compilerOptions.get())
@@ -89,7 +89,7 @@ class SubpluginEnvironment(
         ) {
             whenKaptEnabled {
                 @Suppress("UNCHECKED_CAST")
-                val kaptGenerateStubsTaskName = (kotlinCompilation.compileTaskProvider as TaskProvider<KotlinJvmCompile>)
+                konst kaptGenerateStubsTaskName = (kotlinCompilation.compileTaskProvider as TaskProvider<KotlinJvmCompile>)
                     .kaptGenerateStubsTaskName
                 tasks.withType<KaptGenerateStubs>().configureEach { task ->
                     if (task.name == kaptGenerateStubsTaskName) {
@@ -101,8 +101,8 @@ class SubpluginEnvironment(
     }
 
     private fun Project.addMavenDependency(configuration: String, artifact: SubpluginArtifact) {
-        val artifactVersion = artifact.version ?: kotlinPluginVersion
-        val mavenCoordinate = "${artifact.groupId}:${artifact.artifactId}:$artifactVersion"
+        konst artifactVersion = artifact.version ?: kotlinPluginVersion
+        konst mavenCoordinate = "${artifact.groupId}:${artifact.artifactId}:$artifactVersion"
         project.logger.kotlinDebug { "Adding '$mavenCoordinate' to '$configuration' configuration" }
         project.dependencies.add(configuration, mavenCoordinate)
     }

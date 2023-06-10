@@ -1,11 +1,11 @@
 class Queue<T> : IPushPop<T> {
-  private class Item<T>(val data : T, var next : Item<T>)
+  private class Item<T>(konst data : T, var next : Item<T>)
 
   private var head : Item<T> = null
   private var tail : Item<T> = null
 
   override fun push(item : T) {
-    val i = Item(item)
+    konst i = Item(item)
     if (tail == null) {
       head = i
       tail = head
@@ -19,14 +19,14 @@ class Queue<T> : IPushPop<T> {
     if (head == null)
       throw UnderflowException()
     else {
-      val result = head.data
+      konst result = head.data
       head = head.next
       if (head == null)
         tail = null
       result
     }
 
-  override val isEmpty
+  override konst isEmpty
     get() = head == null
 
 

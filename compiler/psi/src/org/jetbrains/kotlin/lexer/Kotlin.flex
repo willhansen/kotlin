@@ -154,7 +154,7 @@ LONELY_BACKTICK=`
                                                         yypushback(yylength() - 1);
                                                         return KtTokens.SHORT_TEMPLATE_ENTRY_START;
                                                    }
-// Only *this* keyword is itself an expression valid in this position
+// Only *this* keyword is itself an expression konstid in this position
 // *null*, *true* and *false* are also keywords and expression, but it does not make sense to put them
 // in a string template for it'd be easier to just type them in without a dollar
 <SHORT_TEMPLATE_ENTRY> "this"          { popState(); return KtTokens.THIS_KEYWORD; }
@@ -259,7 +259,7 @@ LONELY_BACKTICK=`
 "null"       { return KtTokens.NULL_KEYWORD ;}
 "else"       { return KtTokens.ELSE_KEYWORD ;}
 "try"        { return KtTokens.TRY_KEYWORD ;}
-"val"        { return KtTokens.VAL_KEYWORD ;}
+"konst"        { return KtTokens.VAL_KEYWORD ;}
 "var"        { return KtTokens.VAR_KEYWORD ;}
 "fun"        { return KtTokens.FUN_KEYWORD ;}
 "for"        { return KtTokens.FOR_KEYWORD ;}

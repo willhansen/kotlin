@@ -20,7 +20,7 @@ fun box(): String {
             Foo::class.createType(listOf(KTypeProjection.STAR))
     )
 
-    val i = Int::class.createType()
+    konst i = Int::class.createType()
     assertEquals(
             Foo::class.createType(listOf(KTypeProjection.invariant(i))),
             Foo::class.createType(listOf(KTypeProjection.invariant(i)))

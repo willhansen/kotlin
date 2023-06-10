@@ -16,7 +16,7 @@ class JUnitContributor : AsserterContributor {
         return if (hasJUnitInClassPath) JUnitAsserter else null
     }
 
-    private val hasJUnitInClassPath = try {
+    private konst hasJUnitInClassPath = try {
         Class.forName("org.junit.Assert")
         true
     } catch (_: ClassNotFoundException) {
@@ -45,11 +45,11 @@ object JUnitAsserter : Asserter {
     }
 
     override fun assertNotNull(message: String?, actual: Any?) {
-        Assert.assertNotNull(message ?: "actual value is null", actual)
+        Assert.assertNotNull(message ?: "actual konstue is null", actual)
     }
 
     override fun assertNull(message: String?, actual: Any?) {
-        Assert.assertNull(message ?: "actual value is not null", actual)
+        Assert.assertNull(message ?: "actual konstue is not null", actual)
     }
 
     override fun fail(message: String?): Nothing {

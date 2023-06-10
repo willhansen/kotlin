@@ -10,11 +10,11 @@ fun test_0(d: Derived) {
 }
 
 fun test_1() {
-    val list = listOf<Any>().map { Derived() as Base }.toMutableList() // should be no USELESS_CAST
+    konst list = listOf<Any>().map { Derived() as Base }.toMutableList() // should be no USELESS_CAST
     list.add(Base())
 }
 
 fun test_2() {
-    val list = listOf<Any>().map { Derived() }.toMutableList()
+    konst list = listOf<Any>().map { Derived() }.toMutableList()
     list.add(<!ARGUMENT_TYPE_MISMATCH!>Base()<!>) // should be an error
 }

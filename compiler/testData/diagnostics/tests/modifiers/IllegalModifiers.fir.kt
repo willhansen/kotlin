@@ -15,7 +15,7 @@ abstract class A() {
 
 class FinalClass() {
     <!NON_FINAL_MEMBER_IN_FINAL_CLASS!>open<!> fun foo() {}
-    val i: Int = 1
+    konst i: Int = 1
         <!WRONG_MODIFIER_TARGET!>open<!> get(): Int = field
     var j: Int = 1
         <!WRONG_MODIFIER_TARGET!>open<!> set(v: Int) {}
@@ -25,10 +25,10 @@ class FinalClass() {
 <!INCOMPATIBLE_MODIFIERS!>private<!> <!INCOMPATIBLE_MODIFIERS!>public<!> object D
 
 //A sample annotation to check annotation usage in parameters.
-annotation class annotated(val text: String = "not given")
+annotation class annotated(konst text: String = "not given")
 
 //Check legal modifiers in constructor
-class LegalModifier(val a: Int, @annotated private var b: String, @annotated vararg v: Int)
+class LegalModifier(konst a: Int, @annotated private var b: String, @annotated vararg v: Int)
 
 //Check illegal modifier in constructor parameters
 class IllegalModifiers1(
@@ -48,7 +48,7 @@ class IllegalModifiers2(<!WRONG_MODIFIER_TARGET!>private<!> <!INCOMPATIBLE_MODIF
 class IllegalModifiers3(@annotated <!WRONG_MODIFIER_TARGET!>public<!> <!WRONG_MODIFIER_TARGET!>abstract<!> b: String)
 
 //Check annotations and vararg with illegal modifiers in constructor
-class IllegalModifiers4(val a: Int, @annotated("a text") <!WRONG_MODIFIER_TARGET!>protected<!> vararg v: Int)
+class IllegalModifiers4(konst a: Int, @annotated("a text") <!WRONG_MODIFIER_TARGET!>protected<!> vararg v: Int)
 
 //Check illegal modifiers for functions and catch block
 abstract class IllegalModifiers5() {
@@ -104,7 +104,7 @@ class IllegalModifiers7() {
     <!INCOMPATIBLE_MODIFIERS!>in<!>
     <!WRONG_MODIFIER_TARGET!>vararg<!>
     <!WRONG_MODIFIER_TARGET!>reified<!>
-    val x = 1
+    konst x = 1
     <!WRONG_MODIFIER_TARGET!>enum<!>
     <!WRONG_MODIFIER_TARGET!>inner<!>
     <!WRONG_MODIFIER_TARGET!>annotation<!>

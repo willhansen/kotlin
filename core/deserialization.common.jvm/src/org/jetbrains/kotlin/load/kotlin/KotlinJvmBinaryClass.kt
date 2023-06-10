@@ -12,21 +12,21 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.constants.ClassLiteralValue
 
 interface KotlinJvmBinaryClass {
-    val classId: ClassId
+    konst classId: ClassId
 
     /**
      * @return path to the class file (to be reported to the user upon error)
      */
-    val location: String
+    konst location: String
 
-    val containingLibrary: String?
+    konst containingLibrary: String?
         get() = null
 
     fun loadClassAnnotations(visitor: AnnotationVisitor, cachedContents: ByteArray?)
 
     fun visitMembers(visitor: MemberVisitor, cachedContents: ByteArray?)
 
-    val classHeader: KotlinClassHeader
+    konst classHeader: KotlinClassHeader
 
     interface MemberVisitor {
         // TODO: abstract signatures for methods and fields instead of ASM 'desc' strings?
@@ -49,9 +49,9 @@ interface KotlinJvmBinaryClass {
     }
 
     interface AnnotationArgumentVisitor {
-        fun visit(name: Name?, value: Any?)
+        fun visit(name: Name?, konstue: Any?)
 
-        fun visitClassLiteral(name: Name?, value: ClassLiteralValue)
+        fun visitClassLiteral(name: Name?, konstue: ClassLiteralValue)
 
         fun visitEnum(name: Name?, enumClassId: ClassId, enumEntryName: Name)
 
@@ -63,11 +63,11 @@ interface KotlinJvmBinaryClass {
     }
 
     interface AnnotationArrayArgumentVisitor {
-        fun visit(value: Any?)
+        fun visit(konstue: Any?)
 
         fun visitEnum(enumClassId: ClassId, enumEntryName: Name)
 
-        fun visitClassLiteral(value: ClassLiteralValue)
+        fun visitClassLiteral(konstue: ClassLiteralValue)
 
         fun visitAnnotation(classId: ClassId): AnnotationArgumentVisitor?
 

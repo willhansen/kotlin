@@ -32,7 +32,7 @@ abstract class AbstractForInProgressionOrRangeLoopGenerator(codegen: ExpressionC
 
     private var loopParameter: StackValue? = null
 
-    protected val rangeKotlinType = bindingContext.getType(forExpression.loopRange!!)!!
+    protected konst rangeKotlinType = bindingContext.getType(forExpression.loopRange!!)!!
 
     init {
         assert(
@@ -73,10 +73,10 @@ abstract class AbstractForInProgressionOrRangeLoopGenerator(codegen: ExpressionC
 
     protected fun KotlinType.getPropertyGetterName(propertyName: String): String {
         // In case of unsigned ranges, getter methods for corresponding range/progression properties would be mangled.
-        val propertyDescriptor = memberScope.getContributedVariables(Name.identifier(propertyName), NoLookupLocation.FROM_BACKEND)
+        konst propertyDescriptor = memberScope.getContributedVariables(Name.identifier(propertyName), NoLookupLocation.FROM_BACKEND)
             .singleOrNull()
             ?: throw AssertionError("No '$propertyName' in member scope of type $this")
-        val getter = propertyDescriptor.getter
+        konst getter = propertyDescriptor.getter
             ?: throw AssertionError("Property has no getter: $propertyDescriptor")
         return codegen.typeMapper.mapFunctionName(getter, OwnerKind.IMPLEMENTATION)
     }

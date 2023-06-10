@@ -11,14 +11,14 @@ object CppUsage {
      * LLVM bitcode of a component.
      */
     @JvmField
-    val LLVM_BITCODE = "llvm-bitcode"
+    konst LLVM_BITCODE = "llvm-bitcode"
 
     /**
      * [JSON Compilation Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html) of a component.
      */
     @JvmField
-    val COMPILATION_DATABASE = "llvm-compilation-database"
+    konst COMPILATION_DATABASE = "llvm-compilation-database"
 
     @JvmField
-    val USAGE_ATTRIBUTE: Attribute<Usage> = Usage.USAGE_ATTRIBUTE
+    konst USAGE_ATTRIBUTE: Attribute<Usage> = Usage.USAGE_ATTRIBUTE
 }

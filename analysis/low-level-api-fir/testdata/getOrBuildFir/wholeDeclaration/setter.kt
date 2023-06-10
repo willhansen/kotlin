@@ -1,2 +1,2 @@
 var x: String
-    <expr>set(value) {}</expr>
+    <expr>set(konstue) {}</expr>

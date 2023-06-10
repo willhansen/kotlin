@@ -12,7 +12,7 @@ class A {
 }
 
 fun foo(k: Int, a1: A, a2: A): A {
-    val a3 = A()
+    konst a3 = A()
     if (k == 0)
         return a1
     a3.f = a1

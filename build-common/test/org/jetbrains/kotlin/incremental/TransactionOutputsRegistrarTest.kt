@@ -22,7 +22,7 @@ class TransactionOutputsRegistrarTest {
     private lateinit var workingDir: Path
 
     private class MockOutputItemsCollector : OutputItemsCollector {
-        val addedOutputItems = mutableSetOf<Pair<Collection<File>, File>>()
+        konst addedOutputItems = mutableSetOf<Pair<Collection<File>, File>>()
 
         override fun add(sourceFiles: Collection<File>, outputFile: File) {
             addedOutputItems.add(sourceFiles to outputFile)
@@ -31,11 +31,11 @@ class TransactionOutputsRegistrarTest {
 
     @Test
     fun testSuccessfulTransaction() {
-        val mockCollector = MockOutputItemsCollector()
-        val srcFile = workingDir.resolve("a.kt")
-        val outputFile = workingDir.resolve("AKt.class")
+        konst mockCollector = MockOutputItemsCollector()
+        konst srcFile = workingDir.resolve("a.kt")
+        konst outputFile = workingDir.resolve("AKt.class")
         RecoverableCompilationTransaction(DoNothingBuildReporter, stashDir).use {
-            val registrar = TransactionOutputsRegistrar(it, mockCollector)
+            konst registrar = TransactionOutputsRegistrar(it, mockCollector)
             registrar.add(listOf(srcFile.toFile()), outputFile.toFile())
             Files.write(outputFile, "blah-blah".toByteArray())
             it.markAsSuccessful()
@@ -50,11 +50,11 @@ class TransactionOutputsRegistrarTest {
 
     @Test
     fun testFailedTransaction() {
-        val mockCollector = MockOutputItemsCollector()
-        val srcFile = workingDir.resolve("a.kt")
-        val outputFile = workingDir.resolve("AKt.class")
+        konst mockCollector = MockOutputItemsCollector()
+        konst srcFile = workingDir.resolve("a.kt")
+        konst outputFile = workingDir.resolve("AKt.class")
         RecoverableCompilationTransaction(DoNothingBuildReporter, stashDir).use {
-            val registrar = TransactionOutputsRegistrar(it, mockCollector)
+            konst registrar = TransactionOutputsRegistrar(it, mockCollector)
             registrar.add(listOf(srcFile.toFile()), outputFile.toFile())
             Files.write(outputFile, "blah-blah".toByteArray())
         }

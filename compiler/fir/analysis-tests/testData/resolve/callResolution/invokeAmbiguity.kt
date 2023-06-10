@@ -7,10 +7,10 @@ class B {
 }
 
 open class C
-val C.attr: A get() = TODO()
+konst C.attr: A get() = TODO()
 
 open class D: C()
-val D.attr: B get() = TODO()
+konst D.attr: B get() = TODO()
 
 fun box(d: D) {
     (d.attr {}).length

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 
 abstract class ReturnTypeCalculator {
-    abstract val fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
+    abstract konst fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
 
     abstract fun tryCalculateReturnTypeOrNull(declaration: FirCallableDeclaration): FirResolvedTypeRef?
 

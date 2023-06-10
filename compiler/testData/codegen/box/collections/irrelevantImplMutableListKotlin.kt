@@ -99,7 +99,7 @@ public abstract class AImpl {
 class X : A()
 
 fun box(): String {
-    val x = X()
+    konst x = X()
     if (x.size != 56) return "fail 1"
     if (!x.contains("")) return "fail 2"
     return "OK"

@@ -39,11 +39,11 @@ public class ConstructorBuildingContext(
     session: FirSession,
     key: GeneratedDeclarationKey,
     owner: FirClassSymbol<*>,
-    private val isPrimary: Boolean
+    private konst isPrimary: Boolean
 ) : FunctionBuildingContext<FirConstructor>(owner.classId.callableIdForConstructor(), session, key, owner) {
     override fun build(): FirConstructor {
         requireNotNull(owner)
-        val init: FirAbstractConstructorBuilder.() -> Unit = {
+        konst init: FirAbstractConstructorBuilder.() -> Unit = {
             symbol = FirConstructorSymbol(owner.classId)
 
             resolvePhase = FirResolvePhase.BODY_RESOLVE
@@ -54,18 +54,18 @@ public class ConstructorBuildingContext(
             returnTypeRef = owner.defaultType().toFirResolvedTypeRef()
             status = generateStatus()
             if (owner.isInner) {
-                val parentSymbol = owner.getContainingClassLookupTag()?.toSymbol(session) as? FirClassSymbol<*>
+                konst parentSymbol = owner.getContainingClassLookupTag()?.toSymbol(session) as? FirClassSymbol<*>
                     ?: error("Symbol for parent of $owner not found")
                 dispatchReceiverType = parentSymbol.defaultType()
             }
-            this@ConstructorBuildingContext.valueParameters.mapTo(valueParameters) { generateValueParameter(it, symbol, typeParameters) }
+            this@ConstructorBuildingContext.konstueParameters.mapTo(konstueParameters) { generateValueParameter(it, symbol, typeParameters) }
             if (owner is FirRegularClassSymbol) {
                 owner.resolvedContextReceivers.mapTo(contextReceivers) {
                     buildContextReceiver { typeRef = it.typeRef.coneType.toFirResolvedTypeRef() }
                 }
             }
         }
-        val constructor = if (isPrimary) {
+        konst constructor = if (isPrimary) {
             buildPrimaryConstructor(init)
         } else {
             buildConstructor(init)
@@ -150,20 +150,20 @@ public fun FirExtension.createDefaultPrivateConstructor(
 
 context(FirExtension)
 private fun FirConstructor.generateNoArgDelegatingConstructorCall() {
-    val owner = returnTypeRef.coneType.toSymbol(session) as? FirClassSymbol<*>
+    konst owner = returnTypeRef.coneType.toSymbol(session) as? FirClassSymbol<*>
     requireNotNull(owner)
-    val delegatingConstructorCall = buildDelegatedConstructorCall {
-        val superClasses = owner.resolvedSuperTypes.filter { it.toRegularClassSymbol(session)?.classKind == ClassKind.CLASS }
-        val singleSupertype = when (superClasses.size) {
+    konst delegatingConstructorCall = buildDelegatedConstructorCall {
+        konst superClasses = owner.resolvedSuperTypes.filter { it.toRegularClassSymbol(session)?.classKind == ClassKind.CLASS }
+        konst singleSupertype = when (superClasses.size) {
             0 -> session.builtinTypes.anyType.type
             1 -> superClasses.first()
             else -> error("Object $owner has more than one class supertypes: $superClasses")
         }
         constructedTypeRef = singleSupertype.toFirResolvedTypeRef()
-        val superSymbol = singleSupertype.toRegularClassSymbol(session) ?: error("Symbol for supertype $singleSupertype not found")
-        val superConstructorSymbol = superSymbol.declaredMemberScope(session, memberRequiredPhase = null)
+        konst superSymbol = singleSupertype.toRegularClassSymbol(session) ?: error("Symbol for supertype $singleSupertype not found")
+        konst superConstructorSymbol = superSymbol.declaredMemberScope(session, memberRequiredPhase = null)
             .getDeclaredConstructors()
-            .firstOrNull { it.valueParameterSymbols.isEmpty() }
+            .firstOrNull { it.konstueParameterSymbols.isEmpty() }
             ?: error("No arguments constructor for class $singleSupertype not found")
         calleeReference = buildResolvedNamedReference {
             name = superConstructorSymbol.name

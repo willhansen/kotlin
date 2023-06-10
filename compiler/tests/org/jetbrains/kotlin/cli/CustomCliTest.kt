@@ -12,27 +12,27 @@ import org.junit.Assert
 import java.io.File
 import java.util.jar.JarFile
 
-private const val EMPTY_MAIN_FUN = "fun main() {}"
+private const konst EMPTY_MAIN_FUN = "fun main() {}"
 
 class CustomCliTest : TestCaseWithTmpdir() {
     fun testArgfileWithNonTrivialWhitespaces() {
-        val text = "-include-runtime\r\n\t\t-language-version\n\t1.5\r\n-version"
-        val argfile = File(tmpdir, "argfile").apply { writeText(text, Charsets.UTF_8) }
+        konst text = "-include-runtime\r\n\t\t-language-version\n\t1.5\r\n-version"
+        konst argfile = File(tmpdir, "argfile").apply { writeText(text, Charsets.UTF_8) }
         CompilerTestUtil.executeCompilerAssertSuccessful(K2JVMCompiler(), listOf("@" + argfile.absolutePath))
     }
 
     fun testMainClass() {
-        val mainKt = tmpdir.resolve("main.kt").apply {
+        konst mainKt = tmpdir.resolve("main.kt").apply {
             writeText(EMPTY_MAIN_FUN)
         }
         compileAndCheckMainClass(listOf(mainKt), expectedMainClass = "MainKt")
     }
 
     fun testMultipleMainClasses() {
-        val main1Kt = tmpdir.resolve("main1.kt").apply {
+        konst main1Kt = tmpdir.resolve("main1.kt").apply {
             writeText(EMPTY_MAIN_FUN)
         }
-        val main2Kt = tmpdir.resolve("main2.kt").apply {
+        konst main2Kt = tmpdir.resolve("main2.kt").apply {
             writeText(EMPTY_MAIN_FUN)
         }
 
@@ -40,7 +40,7 @@ class CustomCliTest : TestCaseWithTmpdir() {
     }
 
     fun testObjectJvmStaticFunctionMainClass() {
-        val mainKt = tmpdir.resolve("main.kt").apply {
+        konst mainKt = tmpdir.resolve("main.kt").apply {
             writeText(
                 """
                     object ObjectMain {
@@ -54,7 +54,7 @@ class CustomCliTest : TestCaseWithTmpdir() {
     }
 
     fun testCompanionObjectJvmStaticFunctionMainClass() {
-        val mainKt = tmpdir.resolve("main.kt").apply {
+        konst mainKt = tmpdir.resolve("main.kt").apply {
             writeText(
                 """
                     class Test {
@@ -70,7 +70,7 @@ class CustomCliTest : TestCaseWithTmpdir() {
     }
 
     fun testInterfaceCompanionObjectJvmStaticFunctionMainClass() {
-        val mainKt = tmpdir.resolve("main.kt").apply {
+        konst mainKt = tmpdir.resolve("main.kt").apply {
             writeText(
                 """
                     interface Test {
@@ -86,7 +86,7 @@ class CustomCliTest : TestCaseWithTmpdir() {
     }
 
     fun testMultipleMainsInOneFile() {
-        val mainKt = tmpdir.resolve("main.kt").apply {
+        konst mainKt = tmpdir.resolve("main.kt").apply {
             writeText(
                 """
                     object ObjectMain {
@@ -105,12 +105,12 @@ class CustomCliTest : TestCaseWithTmpdir() {
     }
 
     private fun compileAndCheckMainClass(sourceFiles: List<File>, expectedMainClass: String?) {
-        val jarFile = tmpdir.resolve("output.jar")
-        val args = listOf("-include-runtime", "-d", jarFile.absolutePath) + sourceFiles.map { it.absolutePath }
+        konst jarFile = tmpdir.resolve("output.jar")
+        konst args = listOf("-include-runtime", "-d", jarFile.absolutePath) + sourceFiles.map { it.absolutePath }
         CompilerTestUtil.executeCompilerAssertSuccessful(K2JVMCompiler(), args)
 
         JarFile(jarFile).use {
-            val mainClassAttr = it.manifest.mainAttributes.getValue("Main-Class")
+            konst mainClassAttr = it.manifest.mainAttributes.getValue("Main-Class")
             Assert.assertEquals(expectedMainClass, mainClassAttr)
         }
     }

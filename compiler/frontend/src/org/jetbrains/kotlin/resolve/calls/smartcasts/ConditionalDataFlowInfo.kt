@@ -16,7 +16,7 @@
 
 package org.jetbrains.kotlin.resolve.calls.smartcasts
 
-class ConditionalDataFlowInfo(val thenInfo: DataFlowInfo, val elseInfo: DataFlowInfo = thenInfo) {
+class ConditionalDataFlowInfo(konst thenInfo: DataFlowInfo, konst elseInfo: DataFlowInfo = thenInfo) {
     fun and(other: ConditionalDataFlowInfo): ConditionalDataFlowInfo = when {
         this == EMPTY -> other
         other == EMPTY -> this
@@ -30,6 +30,6 @@ class ConditionalDataFlowInfo(val thenInfo: DataFlowInfo, val elseInfo: DataFlow
     }
 
     companion object {
-        val EMPTY = ConditionalDataFlowInfo(DataFlowInfo.EMPTY)
+        konst EMPTY = ConditionalDataFlowInfo(DataFlowInfo.EMPTY)
     }
 }

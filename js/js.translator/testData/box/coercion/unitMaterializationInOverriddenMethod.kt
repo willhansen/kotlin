@@ -17,7 +17,7 @@ class B: A() {
 }
 
 fun box(): String {
-    val b: A = B()
+    konst b: A = B()
     if (b.foo() !is Unit) return "fail1"
     if (b.foo() !is Unit) return "fail2"
     return "OK"

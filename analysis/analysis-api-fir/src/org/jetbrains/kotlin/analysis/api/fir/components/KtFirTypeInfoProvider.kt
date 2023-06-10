@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.fir.resolve.fullyExpandedType
 import org.jetbrains.kotlin.fir.types.*
 
 internal class KtFirTypeInfoProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken
 ) : KtTypeInfoProvider(), KtFirAnalysisSessionComponent {
 
     override fun isFunctionalInterfaceType(type: KtType): Boolean {
-        val coneType = (type as KtFirType).coneType
-        val firSession = analysisSession.useSiteSession
-        val samResolver = FirSamResolver(
+        konst coneType = (type as KtFirType).coneType
+        konst firSession = analysisSession.useSiteSession
+        konst samResolver = FirSamResolver(
             firSession,
             analysisSession.getScopeSessionFor(firSession),
         )
@@ -38,7 +38,7 @@ internal class KtFirTypeInfoProvider(
     override fun canBeNull(type: KtType): Boolean = (type as KtFirType).coneType.canBeNull
 
     override fun isDenotable(type: KtType): Boolean {
-        val coneType = (type as KtFirType).coneType
+        konst coneType = (type as KtFirType).coneType
         return analysisSession.useSiteSession.typeApproximator.approximateToSuperType(
             coneType,
             PublicTypeApproximator.PublicApproximatorConfiguration(false)

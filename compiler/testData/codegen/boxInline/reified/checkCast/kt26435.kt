@@ -8,7 +8,7 @@ enum class Id {
 }
 
 
-sealed class Base(val id: Id)
+sealed class Base(konst id: Id)
 class A(id: Id) : Base(id)
 class B(id: Id) : Base(id)
 
@@ -31,7 +31,7 @@ fun doSomethingInCaseOfA(a: A) {}
 fun doSomethingInCaseOfB(b: B) {}
 
 fun box(): String {
-    val a = doSth(A(Id.OK))!!
+    konst a = doSth(A(Id.OK))!!
 
     return a.id.name
 }

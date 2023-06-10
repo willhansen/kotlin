@@ -26,26 +26,26 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 interface JsCommonBackendContext : CommonBackendContext {
-    override val mapping: JsMapping
+    override konst mapping: JsMapping
 
-    val reflectionSymbols: ReflectionSymbols
-    val propertyLazyInitialization: PropertyLazyInitialization
+    konst reflectionSymbols: ReflectionSymbols
+    konst propertyLazyInitialization: PropertyLazyInitialization
 
-    override val inlineClassesUtils: JsCommonInlineClassesUtils
+    override konst inlineClassesUtils: JsCommonInlineClassesUtils
 
-    val coroutineSymbols: JsCommonCoroutineSymbols
+    konst coroutineSymbols: JsCommonCoroutineSymbols
 
-    val catchAllThrowableType: IrType
+    konst catchAllThrowableType: IrType
         get() = irBuiltIns.throwableType
 
-    val es6mode: Boolean
+    konst es6mode: Boolean
         get() = false
 
-    val suiteFun: IrSimpleFunctionSymbol?
-    val testFun: IrSimpleFunctionSymbol?
+    konst suiteFun: IrSimpleFunctionSymbol?
+    konst testFun: IrSimpleFunctionSymbol?
 
-    val enumEntries: IrClassSymbol
-    val createEnumEntries: IrSimpleFunctionSymbol
+    konst enumEntries: IrClassSymbol
+    konst createEnumEntries: IrSimpleFunctionSymbol
 
     fun createTestContainerFun(irFile: IrFile): IrSimpleFunction
 
@@ -57,41 +57,41 @@ internal fun <T> BackendContext.lazy2(fn: () -> T) = lazy(LazyThreadSafetyMode.N
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class JsCommonCoroutineSymbols(
     symbolTable: SymbolTable,
-    val module: ModuleDescriptor,
-    val context: JsCommonBackendContext
+    konst module: ModuleDescriptor,
+    konst context: JsCommonBackendContext
 ) {
-    val coroutinePackage = module.getPackage(COROUTINE_PACKAGE_FQNAME)
-    val coroutineIntrinsicsPackage = module.getPackage(COROUTINE_INTRINSICS_PACKAGE_FQNAME)
+    konst coroutinePackage = module.getPackage(COROUTINE_PACKAGE_FQNAME)
+    konst coroutineIntrinsicsPackage = module.getPackage(COROUTINE_INTRINSICS_PACKAGE_FQNAME)
 
-    val coroutineImpl =
+    konst coroutineImpl =
         symbolTable.referenceClass(findClass(coroutinePackage.memberScope, COROUTINE_IMPL_NAME))
 
-    val coroutineImplLabelPropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("state")!!.owner }
-    val coroutineImplLabelPropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("state")!!.owner }
-    val coroutineImplResultSymbolGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("result")!!.owner }
-    val coroutineImplResultSymbolSetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("result")!!.owner }
-    val coroutineImplExceptionPropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("exception")!!.owner }
-    val coroutineImplExceptionPropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("exception")!!.owner }
-    val coroutineImplExceptionStatePropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("exceptionState")!!.owner }
-    val coroutineImplExceptionStatePropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("exceptionState")!!.owner }
+    konst coroutineImplLabelPropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("state")!!.owner }
+    konst coroutineImplLabelPropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("state")!!.owner }
+    konst coroutineImplResultSymbolGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("result")!!.owner }
+    konst coroutineImplResultSymbolSetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("result")!!.owner }
+    konst coroutineImplExceptionPropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("exception")!!.owner }
+    konst coroutineImplExceptionPropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("exception")!!.owner }
+    konst coroutineImplExceptionStatePropertyGetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertyGetter("exceptionState")!!.owner }
+    konst coroutineImplExceptionStatePropertySetter by lazy(LazyThreadSafetyMode.NONE) { coroutineImpl.getPropertySetter("exceptionState")!!.owner }
 
-    val continuationClass = symbolTable.referenceClass(
+    konst continuationClass = symbolTable.referenceClass(
         coroutinePackage.memberScope.getContributedClassifier(
             CONTINUATION_NAME,
             NoLookupLocation.FROM_BACKEND
         ) as ClassDescriptor
     )
 
-    val coroutineSuspendedGetter = symbolTable.referenceSimpleFunction(
+    konst coroutineSuspendedGetter = symbolTable.referenceSimpleFunction(
         coroutineIntrinsicsPackage.memberScope.getContributedVariables(
             COROUTINE_SUSPENDED_NAME,
             NoLookupLocation.FROM_BACKEND
         ).filterNot { it.isExpect }.single().getter!!
     )
 
-    val coroutineGetContext: IrSimpleFunctionSymbol
+    konst coroutineGetContext: IrSimpleFunctionSymbol
         get() {
-            val contextGetter =
+            konst contextGetter =
                 continuationClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
                     .atMostOne { it.name == CONTINUATION_CONTEXT_GETTER_NAME }
                     ?: continuationClass.owner.declarations.filterIsInstance<IrProperty>()
@@ -99,9 +99,9 @@ class JsCommonCoroutineSymbols(
             return contextGetter.symbol
         }
 
-    val coroutineContextProperty: PropertyDescriptor
+    konst coroutineContextProperty: PropertyDescriptor
         get() {
-            val vars = coroutinePackage.memberScope.getContributedVariables(
+            konst vars = coroutinePackage.memberScope.getContributedVariables(
                 COROUTINE_CONTEXT_NAME,
                 NoLookupLocation.FROM_BACKEND
             )
@@ -109,15 +109,15 @@ class JsCommonCoroutineSymbols(
         }
 
     companion object {
-        private val INTRINSICS_PACKAGE_NAME = Name.identifier("intrinsics")
-        private val COROUTINE_SUSPENDED_NAME = Name.identifier("COROUTINE_SUSPENDED")
-        private val COROUTINE_CONTEXT_NAME = Name.identifier("coroutineContext")
-        private val COROUTINE_IMPL_NAME = Name.identifier("CoroutineImpl")
-        private val CONTINUATION_NAME = Name.identifier("Continuation")
-        private val CONTINUATION_CONTEXT_GETTER_NAME = Name.special("<get-context>")
-        private val CONTINUATION_CONTEXT_PROPERTY_NAME = Name.identifier("context")
-        private val COROUTINE_PACKAGE_FQNAME = FqName.fromSegments(listOf("kotlin", "coroutines"))
-        private val COROUTINE_INTRINSICS_PACKAGE_FQNAME = COROUTINE_PACKAGE_FQNAME.child(INTRINSICS_PACKAGE_NAME)
+        private konst INTRINSICS_PACKAGE_NAME = Name.identifier("intrinsics")
+        private konst COROUTINE_SUSPENDED_NAME = Name.identifier("COROUTINE_SUSPENDED")
+        private konst COROUTINE_CONTEXT_NAME = Name.identifier("coroutineContext")
+        private konst COROUTINE_IMPL_NAME = Name.identifier("CoroutineImpl")
+        private konst CONTINUATION_NAME = Name.identifier("Continuation")
+        private konst CONTINUATION_CONTEXT_GETTER_NAME = Name.special("<get-context>")
+        private konst CONTINUATION_CONTEXT_PROPERTY_NAME = Name.identifier("context")
+        private konst COROUTINE_PACKAGE_FQNAME = FqName.fromSegments(listOf("kotlin", "coroutines"))
+        private konst COROUTINE_INTRINSICS_PACKAGE_FQNAME = COROUTINE_PACKAGE_FQNAME.child(INTRINSICS_PACKAGE_NAME)
     }
 }
 
@@ -139,19 +139,19 @@ interface JsCommonInlineClassesUtils : InlineClassesUtils {
     }
 
     fun shouldValueParameterBeBoxed(parameter: IrValueParameter): Boolean {
-        val function = parameter.parent as? IrSimpleFunction ?: return false
-        val klass = function.parent as? IrClass ?: return false
+        konst function = parameter.parent as? IrSimpleFunction ?: return false
+        konst klass = function.parent as? IrClass ?: return false
         if (!isClassInlineLike(klass)) return false
         return parameter.isDispatchReceiver && function.isOverridableOrOverrides
     }
 
     /**
-     * An intrinsic for creating an instance of an inline class from its underlying value.
+     * An intrinsic for creating an instance of an inline class from its underlying konstue.
      */
-    val boxIntrinsic: IrSimpleFunctionSymbol
+    konst boxIntrinsic: IrSimpleFunctionSymbol
 
     /**
-     * An intrinsic for obtaining the underlying value from an instance of an inline class.
+     * An intrinsic for obtaining the underlying konstue from an instance of an inline class.
      */
-    val unboxIntrinsic: IrSimpleFunctionSymbol
+    konst unboxIntrinsic: IrSimpleFunctionSymbol
 }

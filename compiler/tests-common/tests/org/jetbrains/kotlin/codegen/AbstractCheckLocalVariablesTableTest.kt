@@ -34,22 +34,22 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
         compile(files)
 
         try {
-            val filteredLines = filterTestFileForTargetBackend(wholeFile)
-            val classAndMethod = parseClassAndMethodSignature(filteredLines)
-            val split = classAndMethod.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            konst filteredLines = filterTestFileForTargetBackend(wholeFile)
+            konst classAndMethod = parseClassAndMethodSignature(filteredLines)
+            konst split = classAndMethod.split("\\.".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             assert(split.size == 2) { "Exactly one dot is expected: $classAndMethod" }
-            val classFileRegex = StringUtil.escapeToRegexp(split[0] + ".class").replace("\\*", ".+")
-            val methodName = split[1]
+            konst classFileRegex = StringUtil.escapeToRegexp(split[0] + ".class").replace("\\*", ".+")
+            konst methodName = split[1]
 
-            val outputFiles = (classFileFactory as OutputFileCollection).asList()
-            val outputFile = outputFiles.firstOrNull { file -> file.relativePath.matches(classFileRegex.toRegex()) }
+            konst outputFiles = (classFileFactory as OutputFileCollection).asList()
+            konst outputFile = outputFiles.firstOrNull { file -> file.relativePath.matches(classFileRegex.toRegex()) }
             checkNotNull(outputFile) {
-                val pathsString = outputFiles.joinToString { it.relativePath }
+                konst pathsString = outputFiles.joinToString { it.relativePath }
                 "Couldn't find class file for pattern $classFileRegex in: $pathsString"
             }
 
-            val classReader = ClassReader(outputFile.asByteArray())
-            val actualLocalVariables = readLocalVariable(classReader, methodName)
+            konst classReader = ClassReader(outputFile.asByteArray())
+            konst actualLocalVariables = readLocalVariable(classReader, methodName)
             checkLocalVariableTypes(classReader, methodName, actualLocalVariables)
 
             doCompare(filteredLines, actualLocalVariables)
@@ -61,7 +61,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
 
     // TODO: Refactor test infrastructure to share filtering with AbstractBytecodeTextTest
     private fun filterTestFileForTargetBackend(testFile: File): List<String> {
-        val filteredLines = mutableListOf<String>()
+        konst filteredLines = mutableListOf<String>()
         var currentBackend = TargetBackend.ANY
         for (line in testFile.readLines()) {
             if (line.contains(JVM_TEMPLATES)) {
@@ -79,8 +79,8 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
         testFileLines: List<String>,
         actualLocalVariables: List<LocalVariable>
     ) {
-        val actual = getActualVariablesAsString(actualLocalVariables)
-        val expected = getExpectedVariablesAsString(testFileLines)
+        konst actual = getActualVariablesAsString(actualLocalVariables)
+        konst expected = getExpectedVariablesAsString(testFileLines)
         Assert.assertEquals(expected, actual)
     }
 
@@ -94,7 +94,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
     }
 
     private fun getExpectedVariablesAsString(testFileLines: List<String>): String {
-        val variableLines = testFileLines.asSequence().filter { line -> line.startsWith("// VARIABLE ") }
+        konst variableLines = testFileLines.asSequence().filter { line -> line.startsWith("// VARIABLE ") }
         return if (backend.isIR) {
             // Ignore local index.
             variableLines
@@ -107,11 +107,11 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
     }
 
     private class LocalVariable internal constructor(
-        val name: String,
-        val type: String,
-        val index: Int,
-        val startLabelNumber: Int,
-        val endLabelNumber: Int
+        konst name: String,
+        konst type: String,
+        konst index: Int,
+        konst startLabelNumber: Int,
+        konst endLabelNumber: Int
     ) {
 
         override fun toString(): String {
@@ -121,7 +121,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
 
     private fun parseClassAndMethodSignature(testFileLines: List<String>): String {
         for (line in testFileLines) {
-            val methodMatcher = methodPattern.matcher(line)
+            konst methodMatcher = methodPattern.matcher(line)
             if (methodMatcher.matches()) {
                 return methodMatcher.group(1)
             }
@@ -132,11 +132,11 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
 
     companion object {
 
-        private const val JVM_TEMPLATES = "// JVM_TEMPLATES"
+        private const konst JVM_TEMPLATES = "// JVM_TEMPLATES"
 
-        private const val JVM_IR_TEMPLATES = "// JVM_IR_TEMPLATES"
+        private const konst JVM_IR_TEMPLATES = "// JVM_IR_TEMPLATES"
 
-        private val methodPattern = Pattern.compile("^// METHOD : *(.*)")
+        private konst methodPattern = Pattern.compile("^// METHOD : *(.*)")
 
         private fun readLocalVariable(cr: ClassReader, methodName: String): List<LocalVariable> {
 
@@ -155,7 +155,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                             // Therefore, we keep our own numbering that is consistent across multiple
                             // visits.
                             private var currentLabelNumber = 0
-                            private val labelToNumber: MutableMap<Label, Int> = mutableMapOf()
+                            private konst labelToNumber: MutableMap<Label, Int> = mutableMapOf()
 
                             override fun visitLocalVariable(
                                 name: String, desc: String, signature: String?, start: Label, end: Label, index: Int
@@ -174,7 +174,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                 }
             }
 
-            val visitor = Visitor()
+            konst visitor = Visitor()
             cr.accept(visitor, ClassReader.SKIP_FRAMES)
             TestCase.assertTrue(
                 "Method not found: $methodName. Methods found were: ${visitor.methodsFound.joinToString()}",
@@ -186,7 +186,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
         private fun checkLocalVariableTypes(cr: ClassReader, methodName: String, locals: List<LocalVariable>) {
 
             // Representation of local load and store instruction.
-            open class Instruction(val index: Int, val type: String)
+            open class Instruction(konst index: Int, konst type: String)
             class Load(index: Int, type: String): Instruction(index, type)
             class Store(index: Int, type: String): Instruction(index, type)
 
@@ -194,11 +194,11 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
             // as well as the actual locals at entry to the block computed
             // based on the recorded load and store instructions in the code.
             class BasicBlock(
-                val successors: MutableSet<BasicBlock> = mutableSetOf(),
+                konst successors: MutableSet<BasicBlock> = mutableSetOf(),
                 var endsWithUnconditionalJump: Boolean = false,
                 var localsTable: MutableMap<Int, String> = mutableMapOf(),
                 var localsAtEntry: MutableMap<Int, String> = mutableMapOf(),
-                val localsInstructions: MutableList<Instruction> = mutableListOf()
+                konst localsInstructions: MutableList<Instruction> = mutableListOf()
             ) {
                 fun addInstruction(index: Int, opcode: Int) {
                     localsInstructions.add(
@@ -232,13 +232,13 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                 var allBlocks: MutableSet<BasicBlock> = mutableSetOf(entryBlock)
                 var currentBlock = entryBlock
                 var labelToBlock: MutableMap<Label, BasicBlock> = mutableMapOf()
-                val currentLocalsTable: MutableMap<Int, String> = mutableMapOf()
+                konst currentLocalsTable: MutableMap<Int, String> = mutableMapOf()
 
                 private fun ensureBlock(label: Label): BasicBlock {
                     return if (labelToBlock.containsKey(label)) {
                         labelToBlock[label]!!
                     } else {
-                        val result = BasicBlock()
+                        konst result = BasicBlock()
                         allBlocks.add(result)
                         labelToBlock[label] = result
                         result
@@ -246,7 +246,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                 }
 
                 private fun recordLocalTypesForParameters(access: Int, desc: String) {
-                    val localsAtEntry = entryBlock.localsAtEntry
+                    konst localsAtEntry = entryBlock.localsAtEntry
                     var parameterIndex = 0
                     if (access and Opcodes.ACC_STATIC == 0) {
                         localsAtEntry[parameterIndex++] = "Ljava/lang/Object;"
@@ -306,8 +306,8 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                                     Opcodes.IF_ACMPNE,
                                     Opcodes.IFNULL,
                                     Opcodes.IFNONNULL -> {
-                                        val target = ensureBlock(label!!)
-                                        val fallthrough = BasicBlock()
+                                        konst target = ensureBlock(label!!)
+                                        konst fallthrough = BasicBlock()
                                         fallthrough.localsTable = currentLocalsTable.toMutableMap()
                                         allBlocks.add(fallthrough)
                                         currentBlock.successors.add(target)
@@ -324,7 +324,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                                 }
                             }
 
-                            // Skip validation for control-flow we do not yet support.
+                            // Skip konstidation for control-flow we do not yet support.
                             // TODO: Implement these to extend coverage.
                             override fun visitTryCatchBlock(start: Label?, end: Label?, handler: Label?, type: String?) {
                                 skipValidation = true
@@ -340,7 +340,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
 
                             // Start a new basic block at all labels and compute the active locals table.
                             override fun visitLabel(label: Label?) {
-                                val newBlock = ensureBlock(label!!)
+                                konst newBlock = ensureBlock(label!!)
                                 if (!currentBlock.endsWithUnconditionalJump) {
                                     currentBlock.successors.add(newBlock)
                                 }
@@ -392,10 +392,10 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                     // we propagate everything. After that, it is a fixed-point
                     // algorithm using a worklist: when the entry state of a block
                     // changes we enqueue that block for reprocessing.
-                    val worklist: MutableList<BasicBlock> = LinkedList(allBlocks)
+                    konst worklist: MutableList<BasicBlock> = LinkedList(allBlocks)
                     while (worklist.size > 0) {
-                        val currentBlock = worklist.removeAt(0)
-                        val currentLocals = currentBlock.localsAtEntry.toMutableMap()
+                        konst currentBlock = worklist.removeAt(0)
+                        konst currentLocals = currentBlock.localsAtEntry.toMutableMap()
                         // Check consistency with the local table.
                         for ((index, type) in currentBlock.localsTable) {
                             currentLocals[index]?.let {
@@ -448,8 +448,8 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                 }
 
                 private fun areCompatible(type0: String, type1: String): Boolean {
-                    val t0 = if (type0.startsWith("[")) "Ljava/lang/Object;" else type0
-                    val t1 = if (type1.startsWith("[")) "Ljava/lang/Object;" else type1
+                    konst t0 = if (type0.startsWith("[")) "Ljava/lang/Object;" else type0
+                    konst t1 = if (type1.startsWith("[")) "Ljava/lang/Object;" else type1
                     if (t0.equals(t1)) return true
                     // If both are object descriptors we are fine, otherwise we have a mix
                     // of an object type and a basic type.
@@ -457,7 +457,7 @@ abstract class AbstractCheckLocalVariablesTableTest : CodegenTestCase() {
                 }
             }
 
-            val visitor = Visitor()
+            konst visitor = Visitor()
             cr.accept(visitor, ClassReader.SKIP_FRAMES)
             TestCase.assertTrue("method not found: $methodName", visitor.methodFound)
         }

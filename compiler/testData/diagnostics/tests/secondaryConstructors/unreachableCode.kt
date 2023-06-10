@@ -1,5 +1,5 @@
 class A0 {
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val x: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst x: Int<!>
     constructor() {
         if (1 == 1) {
             return
@@ -12,7 +12,7 @@ class A0 {
 }
 
 class A1 {
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val x: Int<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst x: Int<!>
     constructor() {
         if (1 == 1) {
             return
@@ -22,7 +22,7 @@ class A1 {
 }
 
 class A2 {
-    val x: Int
+    konst x: Int
     constructor() {
         if (1 == 1) {
             x = 1

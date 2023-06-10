@@ -32,18 +32,18 @@ fun box(): String {
     assertEquals(listOf(::notNullAny.returnType), NotNullAnyBound::class.typeParameters.single().upperBounds)
 
     TwoBounds::class.typeParameters.single().let {
-        val (cl, cm) = it.upperBounds
+        konst (cl, cm) = it.upperBounds
         assertEquals(Cloneable::class, cl.classifier)
         assertEquals(listOf(), cl.arguments)
 
         assertEquals(Comparable::class, cm.classifier)
-        val cmt = cm.arguments.single()
+        konst cmt = cm.arguments.single()
         assertEquals(KVariance.INVARIANT, cmt.variance)
         assertEquals(it, cmt.type!!.classifier)
     }
 
     OtherParameterBound::class.typeParameters.let {
-        val (t, u) = it
+        konst (t, u) = it
         assertEquals(u, t.upperBounds.single().classifier)
         assertEquals(Number::class, u.upperBounds.single().classifier)
     }
@@ -52,8 +52,8 @@ fun box(): String {
         assertEquals(foo.returnType, foo.typeParameters.single().upperBounds.single())
     }
 
-    val recursiveGenericTypeParameter = RecursiveGeneric::class.typeParameters.single()
-    val recursiveGenericBound = recursiveGenericTypeParameter.upperBounds.single()
+    konst recursiveGenericTypeParameter = RecursiveGeneric::class.typeParameters.single()
+    konst recursiveGenericBound = recursiveGenericTypeParameter.upperBounds.single()
     assertEquals(Enum::class, recursiveGenericBound.classifier)
     recursiveGenericBound.arguments.single().let { projection ->
         assertEquals(KVariance.INVARIANT, projection.variance)

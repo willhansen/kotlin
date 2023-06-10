@@ -1,5 +1,5 @@
-open class ATAny<T>(open val x: T)
+open class ATAny<T>(open konst x: T)
 
-open class BTChar<T : Char>(override val x: T) : ATAny<T>(x)
+open class BTChar<T : Char>(override konst x: T) : ATAny<T>(x)
 
-class CChar(override val x: Char) : BTChar<Char>('x')
+class CChar(override konst x: Char) : BTChar<Char>('x')

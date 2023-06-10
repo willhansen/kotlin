@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.fir.analysis.checkers.syntax.FirConfusingWhenBranchS
 import org.jetbrains.kotlin.fir.analysis.checkers.syntax.FirUnderscoredTypeArgumentSyntaxChecker
 
 object CommonExpressionCheckers : ExpressionCheckers() {
-    override val annotationCallCheckers: Set<FirAnnotationCallChecker>
+    override konst annotationCallCheckers: Set<FirAnnotationCallChecker>
         get() = setOf(
             FirAnnotationExpressionChecker,
             FirOptInAnnotationCallChecker,
         )
 
-    override val basicExpressionCheckers: Set<FirBasicExpressionChecker>
+    override konst basicExpressionCheckers: Set<FirBasicExpressionChecker>
         get() = setOf(
             FirUnderscoreChecker,
             FirExpressionAnnotationChecker,
@@ -26,12 +26,12 @@ object CommonExpressionCheckers : ExpressionCheckers() {
             FirOptInUsageAccessChecker,
         )
 
-    override val throwExpressionCheckers: Set<FirThrowExpressionChecker>
+    override konst throwExpressionCheckers: Set<FirThrowExpressionChecker>
         get() = setOf(
             FirThrowExpressionTypeChecker,
         )
 
-    override val qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
+    override konst qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
         get() = setOf(
             FirCallableReferenceChecker,
             FirSuperReferenceChecker,
@@ -51,12 +51,12 @@ object CommonExpressionCheckers : ExpressionCheckers() {
             FirAbstractClassInstantiationChecker,
         )
 
-    override val callCheckers: Set<FirCallChecker>
+    override konst callCheckers: Set<FirCallChecker>
         get() = setOf(
             FirNamedVarargChecker,
         )
 
-    override val functionCallCheckers: Set<FirFunctionCallChecker>
+    override konst functionCallCheckers: Set<FirFunctionCallChecker>
         get() = setOf(
             FirConventionFunctionCallChecker,
             FirDivisionByZeroChecker,
@@ -68,23 +68,23 @@ object CommonExpressionCheckers : ExpressionCheckers() {
             FirContractNotFirstStatementChecker,
         )
 
-    override val propertyAccessExpressionCheckers: Set<FirPropertyAccessExpressionChecker>
+    override konst propertyAccessExpressionCheckers: Set<FirPropertyAccessExpressionChecker>
         get() = setOf(
             FirPropertyAccessTypeArgumentsChecker,
         )
 
-    override val tryExpressionCheckers: Set<FirTryExpressionChecker>
+    override konst tryExpressionCheckers: Set<FirTryExpressionChecker>
         get() = setOf(
             FirCatchParameterChecker
         )
 
-    override val variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
+    override konst variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
         get() = setOf(
             FirReassignmentAndInvisibleSetterChecker,
             FirAssignmentTypeMismatchChecker,
         )
 
-    override val whenExpressionCheckers: Set<FirWhenExpressionChecker>
+    override konst whenExpressionCheckers: Set<FirWhenExpressionChecker>
         get() = setOf(
             FirExhaustiveWhenChecker,
             FirWhenConditionChecker,
@@ -93,60 +93,60 @@ object CommonExpressionCheckers : ExpressionCheckers() {
             FirConfusingWhenBranchSyntaxChecker,
         )
 
-    override val loopExpressionCheckers: Set<FirLoopExpressionChecker>
+    override konst loopExpressionCheckers: Set<FirLoopExpressionChecker>
         get() = setOf(
             FirLoopConditionChecker,
         )
 
-    override val loopJumpCheckers: Set<FirLoopJumpChecker>
+    override konst loopJumpCheckers: Set<FirLoopJumpChecker>
         get() = setOf(
             FirBreakOrContinueJumpsAcrossFunctionBoundaryChecker
         )
 
-    override val logicExpressionCheckers: Set<FirLogicExpressionChecker>
+    override konst logicExpressionCheckers: Set<FirLogicExpressionChecker>
         get() = setOf(
             FirLogicExpressionTypeChecker,
         )
 
-    override val returnExpressionCheckers: Set<FirReturnExpressionChecker>
+    override konst returnExpressionCheckers: Set<FirReturnExpressionChecker>
         get() = setOf(
             FirReturnSyntaxAndLabelChecker,
             FirFunctionReturnTypeMismatchChecker
         )
 
-    override val blockCheckers: Set<FirBlockChecker>
+    override konst blockCheckers: Set<FirBlockChecker>
         get() = setOf(
             FirForLoopChecker,
             FirConflictsExpressionChecker
         )
 
-    override val checkNotNullCallCheckers: Set<FirCheckNotNullCallChecker>
+    override konst checkNotNullCallCheckers: Set<FirCheckNotNullCallChecker>
         get() = setOf(
             FirNotNullAssertionChecker,
         )
 
-    override val elvisExpressionCheckers: Set<FirElvisExpressionChecker>
+    override konst elvisExpressionCheckers: Set<FirElvisExpressionChecker>
         get() = setOf(
             FirUselessElvisChecker,
         )
 
-    override val getClassCallCheckers: Set<FirGetClassCallChecker>
+    override konst getClassCallCheckers: Set<FirGetClassCallChecker>
         get() = setOf(
             FirClassLiteralChecker,
         )
 
-    override val safeCallExpressionCheckers: Set<FirSafeCallExpressionChecker>
+    override konst safeCallExpressionCheckers: Set<FirSafeCallExpressionChecker>
         get() = setOf(
             FirUnnecessarySafeCallChecker,
         )
 
-    override val typeOperatorCallCheckers: Set<FirTypeOperatorCallChecker>
+    override konst typeOperatorCallCheckers: Set<FirTypeOperatorCallChecker>
         get() = setOf(
             FirUselessTypeOperationCallChecker,
             FirCastOperatorsChecker
         )
 
-    override val resolvedQualifierCheckers: Set<FirResolvedQualifierChecker>
+    override konst resolvedQualifierCheckers: Set<FirResolvedQualifierChecker>
         get() = setOf(
             FirStandaloneQualifierChecker,
             FirOptInUsageQualifierChecker,
@@ -154,17 +154,17 @@ object CommonExpressionCheckers : ExpressionCheckers() {
             FirVisibilityQualifierChecker,
         )
 
-    override val equalityOperatorCallCheckers: Set<FirEqualityOperatorCallChecker>
+    override konst equalityOperatorCallCheckers: Set<FirEqualityOperatorCallChecker>
         get() = setOf(
             FirEqualityCompatibilityChecker,
         )
 
-    override val arrayOfCallCheckers: Set<FirArrayOfCallChecker>
+    override konst arrayOfCallCheckers: Set<FirArrayOfCallChecker>
         get() = setOf(
             FirUnsupportedArrayLiteralChecker
         )
 
-    override val inaccessibleReceiverCheckers: Set<FirInaccessibleReceiverChecker>
+    override konst inaccessibleReceiverCheckers: Set<FirInaccessibleReceiverChecker>
         get() = setOf(
             FirReceiverAccessBeforeSuperCallChecker,
         )

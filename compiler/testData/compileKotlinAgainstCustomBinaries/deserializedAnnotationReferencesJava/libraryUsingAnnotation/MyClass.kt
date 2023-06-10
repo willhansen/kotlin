@@ -1,1 +1,1 @@
-class MyClass(val name: @Nls(capitalization = Nls.Capitalization.Title) String)
+class MyClass(konst name: @Nls(capitalization = Nls.Capitalization.Title) String)

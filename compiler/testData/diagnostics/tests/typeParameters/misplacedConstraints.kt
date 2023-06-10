@@ -5,7 +5,7 @@ class Foo<<!MISPLACED_TYPE_PARAMETER_CONSTRAINTS!>T : Cloneable<!>> where T : Co
         return u
     }
 
-    val <<!MISPLACED_TYPE_PARAMETER_CONSTRAINTS!>U : Cloneable<!>> U.foo: U? where U: Comparable<U>
+    konst <<!MISPLACED_TYPE_PARAMETER_CONSTRAINTS!>U : Cloneable<!>> U.foo: U? where U: Comparable<U>
        get() { return null }
 }
 

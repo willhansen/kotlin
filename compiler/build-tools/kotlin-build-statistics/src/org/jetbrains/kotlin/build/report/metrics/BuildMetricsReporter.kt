@@ -13,13 +13,13 @@ interface BuildMetricsReporter {
     fun addTimeMetricNs(time: BuildTime, durationNs: Long)
     fun addTimeMetricMs(time: BuildTime, durationMs: Long) = addTimeMetricNs(time, durationMs * 1_000_000)
 
-    fun addMetric(metric: BuildPerformanceMetric, value: Long)
+    fun addMetric(metric: BuildPerformanceMetric, konstue: Long)
     fun addTimeMetric(metric: BuildPerformanceMetric)
 
     //Change metric to enum if possible
-    fun addGcMetric(metric: String, value: GcMetric)
-    fun startGcMetric(name: String, value: GcMetric)
-    fun endGcMetric(name: String, value: GcMetric)
+    fun addGcMetric(metric: String, konstue: GcMetric)
+    fun startGcMetric(name: String, konstue: GcMetric)
+    fun endGcMetric(name: String, konstue: GcMetric)
 
     fun addAttribute(attribute: BuildAttribute)
 

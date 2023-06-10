@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 fun interface F1 {
-    val <!FUNCTION_DELEGATE_MEMBER_NAME_CLASH!>functionDelegate<!>: Function<*>? get() = null
+    konst <!FUNCTION_DELEGATE_MEMBER_NAME_CLASH!>functionDelegate<!>: Function<*>? get() = null
     fun invoke()
 }
 
@@ -12,7 +12,7 @@ fun interface F2 {
 }
 
 fun interface F3 {
-    val getFunctionDelegate: Function<*>? get() = null
+    konst getFunctionDelegate: Function<*>? get() = null
     fun invoke()
 }
 
@@ -22,12 +22,12 @@ fun interface F4 {
 }
 
 fun interface F5 {
-    val <!FUNCTION_DELEGATE_MEMBER_NAME_CLASH!>functionDelegate<!>: Any? get() = null
+    konst <!FUNCTION_DELEGATE_MEMBER_NAME_CLASH!>functionDelegate<!>: Any? get() = null
     fun invoke()
 }
 
 fun interface F6 {
-    val String.functionDelegate: Function<*>? get() = null
+    konst String.functionDelegate: Function<*>? get() = null
     fun getFunctionDelegate(x: Any?): Function<*>? = null
     fun invoke()
 }

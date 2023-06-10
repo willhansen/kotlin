@@ -11,37 +11,37 @@ import java.util.*
 
 abstract class JsAstSerializerBase {
 
-    protected val nameTableBuilder = JsAstProtoBuf.NameTable.newBuilder()
-    protected val stringTableBuilder = JsAstProtoBuf.StringTable.newBuilder()
-    protected val nameMap = mutableMapOf<JsName, Int>()
-    protected val stringMap = mutableMapOf<String, Int>()
-    protected val fileStack: Deque<String> = ArrayDeque()
-    protected val importedNames = mutableSetOf<JsName>()
+    protected konst nameTableBuilder = JsAstProtoBuf.NameTable.newBuilder()
+    protected konst stringTableBuilder = JsAstProtoBuf.StringTable.newBuilder()
+    protected konst nameMap = mutableMapOf<JsName, Int>()
+    protected konst stringMap = mutableMapOf<String, Int>()
+    protected konst fileStack: Deque<String> = ArrayDeque()
+    protected konst importedNames = mutableSetOf<JsName>()
 
     protected fun serialize(statement: JsStatement): JsAstProtoBuf.Statement {
-        val visitor = object : JsVisitor() {
-            val builder = JsAstProtoBuf.Statement.newBuilder()
+        konst visitor = object : JsVisitor() {
+            konst builder = JsAstProtoBuf.Statement.newBuilder()
 
             override fun visitReturn(x: JsReturn) {
-                val returnBuilder = JsAstProtoBuf.Return.newBuilder()
-                x.expression?.let { returnBuilder.value = serialize(it) }
+                konst returnBuilder = JsAstProtoBuf.Return.newBuilder()
+                x.expression?.let { returnBuilder.konstue = serialize(it) }
                 builder.returnStatement = returnBuilder.build()
             }
 
             override fun visitThrow(x: JsThrow) {
-                val throwBuilder = JsAstProtoBuf.Throw.newBuilder()
+                konst throwBuilder = JsAstProtoBuf.Throw.newBuilder()
                 throwBuilder.exception = serialize(x.expression)
                 builder.throwStatement = throwBuilder.build()
             }
 
             override fun visitBreak(x: JsBreak) {
-                val breakBuilder = JsAstProtoBuf.Break.newBuilder()
+                konst breakBuilder = JsAstProtoBuf.Break.newBuilder()
                 x.label?.let { breakBuilder.labelId = serialize(it.name!!) }
                 builder.breakStatement = breakBuilder.build()
             }
 
             override fun visitContinue(x: JsContinue) {
-                val continueBuilder = JsAstProtoBuf.Continue.newBuilder()
+                konst continueBuilder = JsAstProtoBuf.Continue.newBuilder()
                 x.label?.let { continueBuilder.labelId = serialize(it.name!!) }
                 builder.continueStatement = continueBuilder.build()
             }
@@ -51,9 +51,9 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitExpressionStatement(x: JsExpressionStatement) {
-                val statementBuilder = JsAstProtoBuf.ExpressionStatement.newBuilder()
+                konst statementBuilder = JsAstProtoBuf.ExpressionStatement.newBuilder()
                 statementBuilder.expression = serialize(x.expression)
-                val tag = x.exportedTag
+                konst tag = x.exportedTag
                 if (tag != null) {
                     statementBuilder.exportedTagId = serialize(tag)
                 }
@@ -69,7 +69,7 @@ abstract class JsAstSerializerBase {
                 when (x) {
                     is JsCompositeBlock -> { builder.compositeBlock = serializeBlock(x) }
                     else -> {
-                        val blockBuilder = JsAstProtoBuf.Block.newBuilder()
+                        konst blockBuilder = JsAstProtoBuf.Block.newBuilder()
                         for (part in x.statements) {
                             blockBuilder.addStatement(serialize(part))
                         }
@@ -79,14 +79,14 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitLabel(x: JsLabel) {
-                val labelBuilder = JsAstProtoBuf.Label.newBuilder()
+                konst labelBuilder = JsAstProtoBuf.Label.newBuilder()
                 labelBuilder.nameId = serialize(x.name)
                 labelBuilder.innerStatement = serialize(x.statement)
                 builder.label = labelBuilder.build()
             }
 
             override fun visitIf(x: JsIf) {
-                val ifBuilder = JsAstProtoBuf.If.newBuilder()
+                konst ifBuilder = JsAstProtoBuf.If.newBuilder()
                 ifBuilder.condition = serialize(x.ifExpression)
                 ifBuilder.thenStatement = serialize(x.thenStatement)
                 x.elseStatement?.let { ifBuilder.elseStatement = serialize(it) }
@@ -94,10 +94,10 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visit(x: JsSwitch) {
-                val switchBuilder = JsAstProtoBuf.Switch.newBuilder()
+                konst switchBuilder = JsAstProtoBuf.Switch.newBuilder()
                 switchBuilder.expression = serialize(x.expression)
                 for (case in x.cases) {
-                    val entryBuilder = JsAstProtoBuf.SwitchEntry.newBuilder()
+                    konst entryBuilder = JsAstProtoBuf.SwitchEntry.newBuilder()
                     withLocation(case, { entryBuilder.fileId = it }, { entryBuilder.location = it }) {}
                     if (case is JsCase) {
                         entryBuilder.label = serialize(case.caseExpression)
@@ -111,21 +111,21 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitWhile(x: JsWhile) {
-                val whileBuilder = JsAstProtoBuf.While.newBuilder()
+                konst whileBuilder = JsAstProtoBuf.While.newBuilder()
                 whileBuilder.condition = serialize(x.condition)
                 whileBuilder.body = serialize(x.body)
                 builder.whileStatement = whileBuilder.build()
             }
 
             override fun visitDoWhile(x: JsDoWhile) {
-                val doWhileBuilder = JsAstProtoBuf.DoWhile.newBuilder()
+                konst doWhileBuilder = JsAstProtoBuf.DoWhile.newBuilder()
                 doWhileBuilder.condition = serialize(x.condition)
                 doWhileBuilder.body = serialize(x.body)
                 builder.doWhileStatement = doWhileBuilder.build()
             }
 
             override fun visitFor(x: JsFor) {
-                val forBuilder = JsAstProtoBuf.For.newBuilder()
+                konst forBuilder = JsAstProtoBuf.For.newBuilder()
                 when {
                     x.initVars != null -> forBuilder.variables = serialize(x.initVars)
                     x.initExpression != null -> forBuilder.expression = serialize(x.initExpression)
@@ -138,7 +138,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitForIn(x: JsForIn) {
-                val forInBuilder = JsAstProtoBuf.ForIn.newBuilder()
+                konst forInBuilder = JsAstProtoBuf.ForIn.newBuilder()
                 when {
                     x.iterVarName != null -> forInBuilder.nameId = serialize(x.iterVarName)
                     x.iterExpression != null -> forInBuilder.expression = serialize(x.iterExpression)
@@ -149,10 +149,10 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitTry(x: JsTry) {
-                val tryBuilder = JsAstProtoBuf.Try.newBuilder()
+                konst tryBuilder = JsAstProtoBuf.Try.newBuilder()
                 tryBuilder.tryBlock = serialize(x.tryBlock)
                 x.catches.firstOrNull()?.let { c ->
-                    val catchBuilder = JsAstProtoBuf.Catch.newBuilder()
+                    konst catchBuilder = JsAstProtoBuf.Catch.newBuilder()
                     catchBuilder.parameter = serializeParameter(c.parameter)
                     catchBuilder.body = serialize(c.body)
                     tryBuilder.catchBlock = catchBuilder.build()
@@ -192,8 +192,8 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serialize(expression: JsExpression): JsAstProtoBuf.Expression {
-        val visitor = object : JsVisitor() {
-            val builder = JsAstProtoBuf.Expression.newBuilder()
+        konst visitor = object : JsVisitor() {
+            konst builder = JsAstProtoBuf.Expression.newBuilder()
 
             override fun visitThis(x: JsThisRef) {
                 builder.thisLiteral = JsAstProtoBuf.ThisLiteral.newBuilder().build()
@@ -208,7 +208,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitBoolean(x: JsBooleanLiteral) {
-                if (x.value) {
+                if (x.konstue) {
                     builder.trueLiteral = JsAstProtoBuf.TrueLiteral.newBuilder().build()
                 } else {
                     builder.falseLiteral = JsAstProtoBuf.FalseLiteral.newBuilder().build()
@@ -216,36 +216,36 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitString(x: JsStringLiteral) {
-                builder.stringLiteral = serialize(x.value)
+                builder.stringLiteral = serialize(x.konstue)
             }
 
             override fun visitRegExp(x: JsRegExp) {
-                val regExpBuilder = JsAstProtoBuf.RegExpLiteral.newBuilder()
+                konst regExpBuilder = JsAstProtoBuf.RegExpLiteral.newBuilder()
                 regExpBuilder.patternStringId = serialize(x.pattern)
                 x.flags?.let { regExpBuilder.flagsStringId = serialize(it) }
                 builder.regExpLiteral = regExpBuilder.build()
             }
 
             override fun visitInt(x: JsIntLiteral) {
-                builder.intLiteral = x.value
+                builder.intLiteral = x.konstue
             }
 
             override fun visitDouble(x: JsDoubleLiteral) {
-                builder.doubleLiteral = x.value
+                builder.doubleLiteral = x.konstue
             }
 
             override fun visitArray(x: JsArrayLiteral) {
-                val arrayBuilder = JsAstProtoBuf.ArrayLiteral.newBuilder()
+                konst arrayBuilder = JsAstProtoBuf.ArrayLiteral.newBuilder()
                 x.expressions.forEach { arrayBuilder.addElement(serialize(it)) }
                 builder.arrayLiteral = arrayBuilder.build()
             }
 
             override fun visitObjectLiteral(x: JsObjectLiteral) {
-                val objectBuilder = JsAstProtoBuf.ObjectLiteral.newBuilder()
+                konst objectBuilder = JsAstProtoBuf.ObjectLiteral.newBuilder()
                 for (initializer in x.propertyInitializers) {
-                    val entryBuilder = JsAstProtoBuf.ObjectLiteralEntry.newBuilder()
+                    konst entryBuilder = JsAstProtoBuf.ObjectLiteralEntry.newBuilder()
                     entryBuilder.key = serialize(initializer.labelExpr)
-                    entryBuilder.value = serialize(initializer.valueExpr)
+                    entryBuilder.konstue = serialize(initializer.konstueExpr)
                     objectBuilder.addEntry(entryBuilder)
                 }
                 objectBuilder.multiline = x.isMultiline
@@ -257,7 +257,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitClass(x: JsClass) {
-                val classBuilder = JsAstProtoBuf.Class.newBuilder()
+                konst classBuilder = JsAstProtoBuf.Class.newBuilder()
                 x.name?.let { classBuilder.nameId = serialize(it) }
                 x.baseClass?.let { classBuilder.superExpression = serialize(it) }
                 x.constructor?.let { classBuilder.constructor = serializeFunction(it) }
@@ -266,13 +266,13 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitDocComment(comment: JsDocComment) {
-                val commentBuilder = JsAstProtoBuf.DocComment.newBuilder()
-                for ((name, value) in comment.tags) {
-                    val tagBuilder = JsAstProtoBuf.DocCommentTag.newBuilder()
+                konst commentBuilder = JsAstProtoBuf.DocComment.newBuilder()
+                for ((name, konstue) in comment.tags) {
+                    konst tagBuilder = JsAstProtoBuf.DocCommentTag.newBuilder()
                     tagBuilder.nameId = serialize(name)
-                    when (value) {
-                        is JsNameRef -> tagBuilder.expression = serialize(value)
-                        is String -> tagBuilder.valueStringId = serialize(value)
+                    when (konstue) {
+                        is JsNameRef -> tagBuilder.expression = serialize(konstue)
+                        is String -> tagBuilder.konstueStringId = serialize(konstue)
                     }
                     commentBuilder.addTag(tagBuilder)
                 }
@@ -280,7 +280,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitBinaryExpression(x: JsBinaryOperation) {
-                val binaryBuilder = JsAstProtoBuf.BinaryOperation.newBuilder()
+                konst binaryBuilder = JsAstProtoBuf.BinaryOperation.newBuilder()
                 binaryBuilder.left = serialize(x.arg1)
                 binaryBuilder.right = serialize(x.arg2)
                 binaryBuilder.type = map(x.operator)
@@ -296,7 +296,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitConditional(x: JsConditional) {
-                val conditionalBuilder = JsAstProtoBuf.Conditional.newBuilder()
+                konst conditionalBuilder = JsAstProtoBuf.Conditional.newBuilder()
                 conditionalBuilder.testExpression = serialize(x.testExpression)
                 conditionalBuilder.thenExpression = serialize(x.thenExpression)
                 conditionalBuilder.elseExpression = serialize(x.elseExpression)
@@ -304,18 +304,18 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitArrayAccess(x: JsArrayAccess) {
-                val arrayAccessBuilder = JsAstProtoBuf.ArrayAccess.newBuilder()
+                konst arrayAccessBuilder = JsAstProtoBuf.ArrayAccess.newBuilder()
                 arrayAccessBuilder.array = serialize(x.arrayExpression)
                 arrayAccessBuilder.index = serialize(x.indexExpression)
                 builder.arrayAccess = arrayAccessBuilder.build()
             }
 
             override fun visitNameRef(nameRef: JsNameRef) {
-                val name = nameRef.name
-                val qualifier = nameRef.qualifier
+                konst name = nameRef.name
+                konst qualifier = nameRef.qualifier
                 if (name != null) {
                     if (qualifier != null || nameRef.isInline == true) {
-                        val nameRefBuilder = JsAstProtoBuf.NameReference.newBuilder()
+                        konst nameRefBuilder = JsAstProtoBuf.NameReference.newBuilder()
                         nameRefBuilder.nameId = serialize(name)
                         if (qualifier != null) {
                             nameRefBuilder.qualifier = serialize(qualifier)
@@ -328,7 +328,7 @@ abstract class JsAstSerializerBase {
                         builder.simpleNameReference = serialize(name)
                     }
                 } else {
-                    val propertyRefBuilder = JsAstProtoBuf.PropertyReference.newBuilder()
+                    konst propertyRefBuilder = JsAstProtoBuf.PropertyReference.newBuilder()
                     propertyRefBuilder.stringId = serialize(nameRef.ident)
                     qualifier?.let { propertyRefBuilder.qualifier = serialize(it) }
                     nameRef.isInline?.let {
@@ -339,7 +339,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitInvocation(invocation: JsInvocation) {
-                val invocationBuilder = JsAstProtoBuf.Invocation.newBuilder()
+                konst invocationBuilder = JsAstProtoBuf.Invocation.newBuilder()
                 invocationBuilder.qualifier = serialize(invocation.qualifier)
                 invocation.arguments.forEach { invocationBuilder.addArgument(serialize(it)) }
                 if (invocation.isInline == true) {
@@ -349,7 +349,7 @@ abstract class JsAstSerializerBase {
             }
 
             override fun visitNew(x: JsNew) {
-                val instantiationBuilder = JsAstProtoBuf.Instantiation.newBuilder()
+                konst instantiationBuilder = JsAstProtoBuf.Instantiation.newBuilder()
                 instantiationBuilder.qualifier = serialize(x.constructorExpression)
                 x.arguments.forEach { instantiationBuilder.addArgument(serialize(it)) }
                 builder.instantiation = instantiationBuilder.build()
@@ -372,7 +372,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serialize(module: JsImportedModule): JsAstProtoBuf.JsImportedModule {
-        val moduleBuilder = JsAstProtoBuf.JsImportedModule.newBuilder()
+        konst moduleBuilder = JsAstProtoBuf.JsImportedModule.newBuilder()
         moduleBuilder.externalName = serialize(module.externalName)
         moduleBuilder.internalName = serialize(module.internalName)
         module.plainReference?.let {
@@ -382,7 +382,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serializeParameter(parameter: JsParameter): JsAstProtoBuf.Parameter {
-        val parameterBuilder = JsAstProtoBuf.Parameter.newBuilder()
+        konst parameterBuilder = JsAstProtoBuf.Parameter.newBuilder()
         parameterBuilder.nameId = serialize(parameter.name)
         if (parameter.hasDefaultValue) {
             parameterBuilder.hasDefaultValue = true
@@ -391,7 +391,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serializeBlock(block: JsCompositeBlock): JsAstProtoBuf.CompositeBlock {
-        val blockBuilder = JsAstProtoBuf.CompositeBlock.newBuilder()
+        konst blockBuilder = JsAstProtoBuf.CompositeBlock.newBuilder()
         for (part in block.statements) {
             blockBuilder.addStatement(serialize(part))
         }
@@ -399,7 +399,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serializeFunction(function: JsFunction): JsAstProtoBuf.Function {
-        val functionBuilder = JsAstProtoBuf.Function.newBuilder()
+        konst functionBuilder = JsAstProtoBuf.Function.newBuilder()
         function.parameters.forEach { functionBuilder.addParameter(serializeParameter(it)) }
         function.modifiers.forEach { functionBuilder.addModifier(map(it)) }
         function.name?.let { functionBuilder.nameId = serialize(it) }
@@ -412,9 +412,9 @@ abstract class JsAstSerializerBase {
 
 
     protected fun serializeVars(vars: JsVars): JsAstProtoBuf.Vars {
-        val varsBuilder = JsAstProtoBuf.Vars.newBuilder()
+        konst varsBuilder = JsAstProtoBuf.Vars.newBuilder()
         for (varDecl in vars.vars) {
-            val declBuilder = JsAstProtoBuf.VarDeclaration.newBuilder()
+            konst declBuilder = JsAstProtoBuf.VarDeclaration.newBuilder()
             withLocation(varDecl, { declBuilder.fileId = it }, { declBuilder.location = it }) {
                 declBuilder.nameId = serialize(varDecl.name)
                 varDecl.initExpression?.let { declBuilder.initialValue = serialize(it) }
@@ -431,7 +431,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serializeUnary(x: JsUnaryOperation, postfix: Boolean): JsAstProtoBuf.UnaryOperation {
-        val unaryBuilder = JsAstProtoBuf.UnaryOperation.newBuilder()
+        konst unaryBuilder = JsAstProtoBuf.UnaryOperation.newBuilder()
         unaryBuilder.operand = serialize(x.arg)
         unaryBuilder.type = map(x.operator)
         unaryBuilder.postfix = postfix
@@ -516,7 +516,7 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serialize(name: JsName): Int = nameMap.getOrPut(name) {
-        val builder = JsAstProtoBuf.Name.newBuilder()
+        konst builder = JsAstProtoBuf.Name.newBuilder()
         builder.identifier = serialize(name.ident)
         builder.temporary = name.isTemporary
         name.localAlias?.let {
@@ -531,13 +531,13 @@ abstract class JsAstSerializerBase {
             builder.specialFunction = map(it)
         }
 
-        val result = nameTableBuilder.entryCount
+        konst result = nameTableBuilder.entryCount
         nameTableBuilder.addEntry(builder)
         result
     }
 
     protected fun serialize(alias: LocalAlias): JsAstProtoBuf.LocalAlias {
-        val builder = JsAstProtoBuf.LocalAlias.newBuilder()
+        konst builder = JsAstProtoBuf.LocalAlias.newBuilder()
         builder.localNameId = serialize(alias.name)
         alias.tag?.let {
             builder.tag = serialize(it)
@@ -546,13 +546,13 @@ abstract class JsAstSerializerBase {
     }
 
     protected fun serialize(string: String) = stringMap.getOrPut(string) {
-        val result = stringTableBuilder.entryCount
+        konst result = stringTableBuilder.entryCount
         stringTableBuilder.addEntry(string)
         result
     }
 
     protected fun serialize(comment: JsComment): JsAstProtoBuf.Comment {
-        val builder = JsAstProtoBuf.Comment.newBuilder().apply {
+        konst builder = JsAstProtoBuf.Comment.newBuilder().apply {
             text = comment.text
             multiline = when (comment) {
                 is JsSingleLineComment -> false
@@ -564,17 +564,17 @@ abstract class JsAstSerializerBase {
     }
 
     private inline fun withLocation(node: JsNode, fileConsumer: (Int) -> Unit, locationConsumer: (JsAstProtoBuf.Location) -> Unit, inner: () -> Unit) {
-        val location = extractLocation(node)
+        konst location = extractLocation(node)
         var fileChanged = false
         if (location != null) {
-            val lastFile = fileStack.peek()
-            val newFile = location.file
+            konst lastFile = fileStack.peek()
+            konst newFile = location.file
             fileChanged = lastFile != newFile
             if (fileChanged) {
                 fileConsumer(serialize(newFile))
                 fileStack.push(location.file)
             }
-            val locationBuilder = JsAstProtoBuf.Location.newBuilder()
+            konst locationBuilder = JsAstProtoBuf.Location.newBuilder()
             locationBuilder.startLine = location.startLine
             locationBuilder.startChar = location.startChar
             locationConsumer(locationBuilder.build())

@@ -21,7 +21,7 @@ internal class NativeAppleSimulatorTCServiceMessagesTestExecutionSpec(
     checkExitCode: Boolean,
     clientSettings: TCServiceMessagesClientSettings,
     dryRunArgs: List<String>?,
-    private val standaloneMode: Provider<Boolean>,
+    private konst standaloneMode: Provider<Boolean>,
 ) : TCServiceMessagesTestExecutionSpec(forkOptions, args, checkExitCode, clientSettings, dryRunArgs) {
     override fun createClient(
         testResultProcessor: TestResultProcessor,
@@ -37,7 +37,7 @@ internal class NativeAppleSimulatorTCServiceMessagesClient(
     settings: TCServiceMessagesClientSettings,
     log: Logger,
     testReporter: MppTestReportHelper,
-    private val standaloneMode: Provider<Boolean>
+    private konst standaloneMode: Provider<Boolean>
 ) : TCServiceMessagesClient(results, settings, log, testReporter) {
     override fun testFailedMessage(execHandle: ExecHandle, exitValue: Int) = when {
         !standaloneMode.get() && exitValue == 149 -> """

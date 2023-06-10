@@ -26,6 +26,6 @@ fun Any.test_2() {
 
 fun Any.test_3() {
     if (this is A) {
-        val f = ::foo // ok
+        konst f = ::foo // ok
     }
 }

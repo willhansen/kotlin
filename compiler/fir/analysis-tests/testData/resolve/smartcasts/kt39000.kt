@@ -1,7 +1,7 @@
 interface A
 class B: A
 
-val X = B()
+konst X = B()
 
 fun foo(b: B) {}
 

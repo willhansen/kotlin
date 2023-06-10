@@ -1,12 +1,12 @@
 // EXPECTED_REACHABLE_NODES: 1376
 package foo
 
-open class Base(val bb: String) {
+open class Base(konst bb: String) {
 
     open fun foo() = bb
 }
 
-class Test(val tt: String) : Base("fail") {
+class Test(konst tt: String) : Base("fail") {
 
     override fun foo() = tt
 
@@ -14,6 +14,6 @@ class Test(val tt: String) : Base("fail") {
 
 fun box(): String {
 
-    val t = Test("OK")
+    konst t = Test("OK")
     return t.foo()
 }

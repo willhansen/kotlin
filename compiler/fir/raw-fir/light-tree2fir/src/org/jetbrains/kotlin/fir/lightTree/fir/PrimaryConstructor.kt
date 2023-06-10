@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.fir.lightTree.fir
 import org.jetbrains.kotlin.fir.declarations.FirConstructor
 
 data class PrimaryConstructor(
-    val firConstructor: FirConstructor,
-    val valueParameters: List<ValueParameter>
+    konst firConstructor: FirConstructor,
+    konst konstueParameters: List<ValueParameter>
 )

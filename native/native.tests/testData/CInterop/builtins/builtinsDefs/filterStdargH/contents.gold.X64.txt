@@ -20,7 +20,7 @@ package pod1 {
 }
 
 package pod1 {
-    const val __GNUC_VA_LIST: Int = 1
+    const konst __GNUC_VA_LIST: Int = 1
     typealias __builtin_va_list = CArrayPointer<__va_list_tag>
     typealias __builtin_va_listVar = CPointerVarOf<__builtin_va_list /* = CPointer<__va_list_tag> */>
     typealias __gnuc_va_list = __builtin_va_list

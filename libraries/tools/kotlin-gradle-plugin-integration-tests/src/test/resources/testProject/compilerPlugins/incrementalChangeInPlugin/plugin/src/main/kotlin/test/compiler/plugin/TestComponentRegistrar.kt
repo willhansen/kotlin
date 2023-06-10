@@ -28,8 +28,8 @@ class TestComponentRegistrar : ComponentRegistrar {
         project: MockProject,
         configuration: CompilerConfiguration
     ) {
-        val kotlinSourceRoots = configuration.kotlinSourceRoots.ifEmpty { return }
-        val sourceGenFolder = createSourceGenFolder(kotlinSourceRoots)
+        konst kotlinSourceRoots = configuration.kotlinSourceRoots.ifEmpty { return }
+        konst sourceGenFolder = createSourceGenFolder(kotlinSourceRoots)
 
         var counter = 0
 
@@ -45,9 +45,9 @@ class TestComponentRegistrar : ComponentRegistrar {
                 if (didRecompile) return null
                 didRecompile = true
 
-                val classes = files
+                konst classes = files
                     .flatMap { ktFile ->
-                        val packageName = ktFile.packageFqName.asString()
+                        konst packageName = ktFile.packageFqName.asString()
                         ktFile.findChildrenByClass(KtClassOrObject::class.java)
                             .map { packageName + "." + it.nameAsSafeName.asString() }
                     }
@@ -59,10 +59,10 @@ class TestComponentRegistrar : ComponentRegistrar {
                 if (classes.isEmpty()) return null
 
                 classes.forEach { classDescriptor ->
-                    val className = classDescriptor.name.asString()
+                    konst className = classDescriptor.name.asString()
 
-                    val directory = File(sourceGenFolder, "plugin/test/gen")
-                    val file = File(directory, "$className.kt")
+                    konst directory = File(sourceGenFolder, "plugin/test/gen")
+                    konst file = File(directory, "$className.kt")
                         .also {
                             check(it.parentFile.exists() || it.parentFile.mkdirs()) {
                                 "Could not generate package directory: $this"
@@ -73,7 +73,7 @@ class TestComponentRegistrar : ComponentRegistrar {
                         """
                   package plugin.test.gen
                   
-                  val hello${counter++} = "world."
+                  konst hello${counter++} = "world."
               """.trimIndent()
                     )
                 }
@@ -93,8 +93,8 @@ class TestComponentRegistrar : ComponentRegistrar {
             }
         }
 
-        val oneSourceFile = kotlinSourceRoots.first().path.let { File(it) }
-        val parentSequence = generateSequence(oneSourceFile) { it.parentFile }
+        konst oneSourceFile = kotlinSourceRoots.first().path.let { File(it) }
+        konst parentSequence = generateSequence(oneSourceFile) { it.parentFile }
 
         // Try to find the src dir.
         parentSequence.firstOrNull { it.name == "src" }

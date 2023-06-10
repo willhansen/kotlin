@@ -35,11 +35,11 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirWhenExpressionBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     var calleeReference: FirReference = FirStubReference
     var subject: FirExpression? = null
     var subjectVariable: FirVariable? = null
-    val branches: MutableList<FirWhenBranch> = mutableListOf()
+    konst branches: MutableList<FirWhenBranch> = mutableListOf()
     var exhaustivenessStatus: ExhaustivenessStatus? = null
     var usedAsExpression: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
 

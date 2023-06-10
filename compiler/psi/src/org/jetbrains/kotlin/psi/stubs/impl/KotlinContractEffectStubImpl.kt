@@ -24,8 +24,8 @@ class KotlinContractEffectStubImpl(
 enum class KotlinContractEffectType {
     CALLS {
         override fun deserialize(dataStream: StubInputStream): KtCallsEffectDeclaration<KotlinTypeBean, Nothing?> {
-            val declaration = PARAMETER_REFERENCE.deserialize(dataStream)
-            val range = EventOccurrencesRange.values()[dataStream.readInt()]
+            konst declaration = PARAMETER_REFERENCE.deserialize(dataStream)
+            konst range = EventOccurrencesRange.konstues()[dataStream.readInt()]
             return KtCallsEffectDeclaration(declaration as KtValueParameterReference, range)
         }
     },
@@ -36,8 +36,8 @@ enum class KotlinContractEffectType {
     },
     CONDITIONAL {
         override fun deserialize(dataStream: StubInputStream): KtContractDescriptionElement<KotlinTypeBean, Nothing?> {
-            val descriptionElement = values()[dataStream.readInt()].deserialize(dataStream)
-            val condition = values()[dataStream.readInt()].deserialize(dataStream)
+            konst descriptionElement = konstues()[dataStream.readInt()].deserialize(dataStream)
+            konst condition = konstues()[dataStream.readInt()].deserialize(dataStream)
             return KtConditionalEffectDeclaration(
                 descriptionElement as KtEffectDeclaration,
                 condition as KtBooleanExpression
@@ -63,14 +63,14 @@ enum class KotlinContractEffectType {
     },
     NOT {
         override fun deserialize(dataStream: StubInputStream): KtContractDescriptionElement<KotlinTypeBean, Nothing?> {
-            return KtLogicalNot(values()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression)
+            return KtLogicalNot(konstues()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression)
         }
     },
     BOOLEAN_LOGIC {
         override fun deserialize(dataStream: StubInputStream): KtContractDescriptionElement<KotlinTypeBean, Nothing?> {
-            val kind = if (dataStream.readBoolean()) LogicOperationKind.AND else LogicOperationKind.OR
-            val left = values()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression
-            val right = values()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression
+            konst kind = if (dataStream.readBoolean()) LogicOperationKind.AND else LogicOperationKind.OR
+            konst left = konstues()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression
+            konst right = konstues()[dataStream.readInt()].deserialize(dataStream) as KtBooleanExpression
             return KtBinaryLogicExpression(left, right, kind)
         }
     },
@@ -86,7 +86,7 @@ enum class KotlinContractEffectType {
     },
     CONSTANT {
         override fun deserialize(dataStream: StubInputStream): KtContractDescriptionElement<KotlinTypeBean, Nothing?> {
-            return when (val str = dataStream.readNameString()!!) {
+            return when (konst str = dataStream.readNameString()!!) {
                 "TRUE" -> KotlinContractConstantValues.TRUE
                 "FALSE" -> KotlinContractConstantValues.FALSE
                 "NULL" -> KotlinContractConstantValues.NULL
@@ -100,11 +100,11 @@ enum class KotlinContractEffectType {
     abstract fun deserialize(dataStream: StubInputStream): KtContractDescriptionElement<KotlinTypeBean, Nothing?>
 
     companion object {
-        const val IGNORE_REFERENCE_PARAMETER_NAME = "<ignore>"
+        const konst IGNORE_REFERENCE_PARAMETER_NAME = "<ignore>"
     }
 }
 
-class KotlinContractSerializationVisitor(val dataStream: StubOutputStream) :
+class KotlinContractSerializationVisitor(konst dataStream: StubOutputStream) :
     KtContractDescriptionVisitor<Unit, Nothing?, KotlinTypeBean, Nothing?>() {
     override fun visitConditionalEffectDeclaration(
         conditionalEffect: KtConditionalEffectDeclaration<KotlinTypeBean, Nothing?>,
@@ -117,12 +117,12 @@ class KotlinContractSerializationVisitor(val dataStream: StubOutputStream) :
 
     override fun visitReturnsEffectDeclaration(returnsEffect: KtReturnsEffectDeclaration<KotlinTypeBean, Nothing?>, data: Nothing?) {
         dataStream.writeInt(KotlinContractEffectType.RETURNS.ordinal)
-        dataStream.writeName(returnsEffect.value.name)
+        dataStream.writeName(returnsEffect.konstue.name)
     }
 
     override fun visitCallsEffectDeclaration(callsEffect: KtCallsEffectDeclaration<KotlinTypeBean, Nothing?>, data: Nothing?) {
         dataStream.writeInt(KotlinContractEffectType.CALLS.ordinal)
-        dataStream.writeInt(callsEffect.valueParameterReference.parameterIndex)
+        dataStream.writeInt(callsEffect.konstueParameterReference.parameterIndex)
         dataStream.writeInt(callsEffect.kind.ordinal)
     }
 
@@ -160,9 +160,9 @@ class KotlinContractSerializationVisitor(val dataStream: StubOutputStream) :
         dataStream.writeName(constantReference.name)
     }
 
-    override fun visitValueParameterReference(valueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>, data: Nothing?) {
+    override fun visitValueParameterReference(konstueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>, data: Nothing?) {
         dataStream.writeInt(KotlinContractEffectType.PARAMETER_REFERENCE.ordinal)
-        dataStream.writeInt(valueParameterReference.parameterIndex)
+        dataStream.writeInt(konstueParameterReference.parameterIndex)
     }
 
     override fun visitBooleanValueParameterReference(
@@ -175,10 +175,10 @@ class KotlinContractSerializationVisitor(val dataStream: StubOutputStream) :
 }
 
 object KotlinContractConstantValues {
-    val NULL = KtConstantReference<KotlinTypeBean, Nothing?>("NULL")
-    val WILDCARD = KtConstantReference<KotlinTypeBean, Nothing?>("WILDCARD")
-    val NOT_NULL = KtConstantReference<KotlinTypeBean, Nothing?>("NOT_NULL")
+    konst NULL = KtConstantReference<KotlinTypeBean, Nothing?>("NULL")
+    konst WILDCARD = KtConstantReference<KotlinTypeBean, Nothing?>("WILDCARD")
+    konst NOT_NULL = KtConstantReference<KotlinTypeBean, Nothing?>("NOT_NULL")
 
-    val TRUE = KtBooleanConstantReference<KotlinTypeBean, Nothing?>("TRUE")
-    val FALSE = KtBooleanConstantReference<KotlinTypeBean, Nothing?>("FALSE")
+    konst TRUE = KtBooleanConstantReference<KotlinTypeBean, Nothing?>("TRUE")
+    konst FALSE = KtBooleanConstantReference<KotlinTypeBean, Nothing?>("FALSE")
 }

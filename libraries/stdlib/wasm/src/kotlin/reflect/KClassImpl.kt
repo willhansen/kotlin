@@ -11,22 +11,22 @@ import kotlin.wasm.internal.isInterfaceById
 import kotlin.wasm.internal.isInterfaceType
 
 internal object NothingKClassImpl : KClass<Nothing> {
-    override val simpleName: String = "Nothing"
-    override val qualifiedName: String get() = "kotlin.Nothing"
+    override konst simpleName: String = "Nothing"
+    override konst qualifiedName: String get() = "kotlin.Nothing"
 
-    override fun isInstance(value: Any?): Boolean = false
+    override fun isInstance(konstue: Any?): Boolean = false
 }
 
 internal object ErrorKClass : KClass<Nothing> {
-    override val simpleName: String get() = error("Unknown simpleName for ErrorKClass")
-    override val qualifiedName: String get() = error("Unknown qualifiedName for ErrorKClass")
+    override konst simpleName: String get() = error("Unknown simpleName for ErrorKClass")
+    override konst qualifiedName: String get() = error("Unknown qualifiedName for ErrorKClass")
 
-    override fun isInstance(value: Any?): Boolean = error("Can's check isInstance on ErrorKClass")
+    override fun isInstance(konstue: Any?): Boolean = error("Can's check isInstance on ErrorKClass")
 }
 
-internal class KClassImpl<T : Any>(internal val typeData: TypeInfoData) : KClass<T> {
-    override val simpleName: String get() = typeData.typeName
-    override val qualifiedName: String =
+internal class KClassImpl<T : Any>(internal konst typeData: TypeInfoData) : KClass<T> {
+    override konst simpleName: String get() = typeData.typeName
+    override konst qualifiedName: String =
         if (typeData.packageName.isEmpty()) typeData.typeName else "${typeData.packageName}.${typeData.typeName}"
 
     private fun checkSuperTypeInstance(obj: Any): Boolean {
@@ -38,11 +38,11 @@ internal class KClassImpl<T : Any>(internal val typeData: TypeInfoData) : KClass
         return false
     }
 
-    override fun isInstance(value: Any?): Boolean {
-        if (value !is Any) return false
+    override fun isInstance(konstue: Any?): Boolean {
+        if (konstue !is Any) return false
         return when (typeData.isInterfaceType) {
-            true -> isInterfaceById(value, typeData.typeId)
-            false -> checkSuperTypeInstance(value)
+            true -> isInterfaceById(konstue, typeData.typeId)
+            false -> checkSuperTypeInstance(konstue)
         }
     }
 

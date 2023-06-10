@@ -26,15 +26,15 @@ class FunInterfaceDeclarationChecker : DeclarationChecker {
         if (declaration !is KtClass) return
         if (descriptor !is ClassDescriptor || !descriptor.isFun) return
 
-        val funKeyword = declaration.getFunKeyword() ?: return
+        konst funKeyword = declaration.getFunKeyword() ?: return
 
-        val abstractMembers = getAbstractMembers(descriptor)
+        konst abstractMembers = getAbstractMembers(descriptor)
         for (abstractMember in abstractMembers) {
             if (abstractMember !is PropertyDescriptor) continue
 
-            val reportOnProperty = abstractMember.containingDeclaration == descriptor
-            val reportOn = if (reportOnProperty) {
-                (abstractMember.source.getPsi() as? KtProperty)?.valOrVarKeyword ?: funKeyword
+            konst reportOnProperty = abstractMember.containingDeclaration == descriptor
+            konst reportOn = if (reportOnProperty) {
+                (abstractMember.source.getPsi() as? KtProperty)?.konstOrVarKeyword ?: funKeyword
             } else {
                 funKeyword
             }
@@ -44,7 +44,7 @@ class FunInterfaceDeclarationChecker : DeclarationChecker {
             if (!reportOnProperty) return // It's enough to report only once if abstract properties are in the base class
         }
 
-        val abstractMember = abstractMembers.filterIsInstance<FunctionDescriptor>().singleOrNull()
+        konst abstractMember = abstractMembers.filterIsInstance<FunctionDescriptor>().singleOrNull()
 
         if (abstractMember == null) {
             context.trace.report(Errors.FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS.on(funKeyword))
@@ -59,17 +59,17 @@ class FunInterfaceDeclarationChecker : DeclarationChecker {
         funInterfaceKeyword: PsiElement,
         context: DeclarationCheckerContext,
     ) {
-        val ktFunction = abstractMember.source.getPsi() as? KtNamedFunction
+        konst ktFunction = abstractMember.source.getPsi() as? KtNamedFunction
 
         if (abstractMember.typeParameters.isNotEmpty()) {
-            val reportOn = ktFunction?.typeParameterList ?: ktFunction?.funKeyword ?: funInterfaceKeyword
+            konst reportOn = ktFunction?.typeParameterList ?: ktFunction?.funKeyword ?: funInterfaceKeyword
             context.trace.report(Errors.FUN_INTERFACE_ABSTRACT_METHOD_WITH_TYPE_PARAMETERS.on(reportOn))
             return
         }
 
-        for (parameter in abstractMember.valueParameters) {
+        for (parameter in abstractMember.konstueParameters) {
             if (parameter.hasDefaultValue()) {
-                val reportOn = parameter.source.getPsi() ?: ktFunction?.funKeyword ?: funInterfaceKeyword
+                konst reportOn = parameter.source.getPsi() ?: ktFunction?.funKeyword ?: funInterfaceKeyword
                 context.trace.report(Errors.FUN_INTERFACE_ABSTRACT_METHOD_WITH_DEFAULT_VALUE.on(reportOn))
                 return
             }

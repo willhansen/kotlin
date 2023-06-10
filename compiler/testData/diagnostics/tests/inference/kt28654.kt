@@ -4,6 +4,6 @@
 fun <K> select(): K = <!TYPE_MISMATCH!>run <!TYPE_MISMATCH!>{ }<!><!>
 
 fun test() {
-    val x: Int = select()
-    val t = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>select<!>()
+    konst x: Int = select()
+    konst t = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>select<!>()
 }

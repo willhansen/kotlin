@@ -68,7 +68,7 @@ fun box(): String {
     r = o.bar("W")
     if (r != "E.bar(W)") return "fail E.bar(W): $r"
 
-    val p: K = F()
+    konst p: K = F()
     r = p.foo()
     if (r != "L.foo(Q)") return "fail F.foo(): $r"
     r = p.foo("W")

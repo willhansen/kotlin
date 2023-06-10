@@ -12,7 +12,7 @@ inline fun <T> inlineFun(arg: T, f: (T) -> Unit) {
 import test.*
 
 fun box(): String {
-    val param = "start"
+    konst param = "start"
     var result = "fail"
     inlineFun("1")  { c ->
         {

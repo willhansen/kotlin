@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val string: T)
+konstue class Str<T: String>(konst string: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj<T: Any>(val obj: T)
+konstue class Obj<T: Any>(konst obj: T)
 
 inline fun <T, R> s0(x: T, fn: (Int, T) -> R) = fn(0, x)
 

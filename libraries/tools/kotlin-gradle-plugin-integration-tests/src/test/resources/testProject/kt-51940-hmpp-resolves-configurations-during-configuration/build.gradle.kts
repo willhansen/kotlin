@@ -19,7 +19,7 @@ kotlin {
 
 // Setup configuration resolution hook
 // Report configurations that is going to be resolved before the task graph is ready
-val isResolutionAllowed = AtomicBoolean(false)
+konst isResolutionAllowed = AtomicBoolean(false)
 project.gradle.taskGraph.whenReady { isResolutionAllowed.set(true) }
 
 configurations.all {

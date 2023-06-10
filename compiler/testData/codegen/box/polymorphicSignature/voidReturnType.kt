@@ -16,7 +16,7 @@ class C {
 }
 
 fun box(): String {
-    val mh = MethodHandles.lookup().findVirtual(
+    konst mh = MethodHandles.lookup().findVirtual(
         C::class.java, "foo",
         MethodType.methodType(Void.TYPE, String::class.java)
     )

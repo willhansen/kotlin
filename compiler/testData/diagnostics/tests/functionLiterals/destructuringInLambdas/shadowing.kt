@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_VARIABLE
-data class A(val x: Int, val y: String)
+data class A(konst x: Int, konst y: String)
 
 fun foo(block: (A) -> Unit) { }
 
 fun bar(a: Double) {
-    val b = 1.toShort()
+    konst b = 1.toShort()
     // Do not report NAME_SHADOWING on lambda destructured parameter, the same way as for common parameters
     foo { (a, b) ->
         a checkType { _<Int>() }

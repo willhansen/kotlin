@@ -1,5 +1,5 @@
 inline fun <reified T> foo(default: T): T {
-    val t: T
+    konst t: T
     run {
         t = default
     }

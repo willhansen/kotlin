@@ -26,5 +26,5 @@ interface CompiledJvmScriptsCache {
     }
 }
 
-val JvmScriptingHostConfigurationKeys.compilationCache by PropertiesCollection.key<CompiledJvmScriptsCache>(isTransient = true)
+konst JvmScriptingHostConfigurationKeys.compilationCache by PropertiesCollection.key<CompiledJvmScriptsCache>(isTransient = true)
 

@@ -11,7 +11,7 @@ public class J {
 
 fun box(): String {
     var result = "Fail"
-    val setter = { result = "OK" }
+    konst setter = { result = "OK" }
     1.apply { J.g(setter) }
     return result
 }

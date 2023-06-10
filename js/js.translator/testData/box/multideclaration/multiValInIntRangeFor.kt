@@ -10,7 +10,7 @@ operator fun Int.component2(): String = "b"
 fun box(): String {
     var i = 0;
     var s = "";
-    val range = 1..4
+    konst range = 1..4
     for ((a, b) in range) {
         i = a
         s = b

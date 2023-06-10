@@ -10,7 +10,7 @@ public open class Test() {
         System.out?.println(hello)
     }
     companion object {
-        private val hello : String? = "Hello"
+        private konst hello : String? = "Hello"
     }
 }
 

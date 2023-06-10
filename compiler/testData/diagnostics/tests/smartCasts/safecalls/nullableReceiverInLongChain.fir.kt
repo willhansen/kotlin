@@ -1,6 +1,6 @@
-class Bar(val gav: String)
+class Bar(konst gav: String)
 
-class Foo(val bar: Bar, val nbar: Bar?) {
+class Foo(konst bar: Bar, konst nbar: Bar?) {
     fun baz(s: String) = if (s != "") Bar(s) else null
 }
 
@@ -24,7 +24,7 @@ fun test(foo: Foo?) {
 }
 
 fun testNotNull(foo: Foo) {
-    val s: String? = ""
+    konst s: String? = ""
     foo.baz(s!!)?.gav.let {
         it<!UNSAFE_CALL!>.<!>length
         // Ok because of foo.
@@ -33,7 +33,7 @@ fun testNotNull(foo: Foo) {
 }
 
 fun testNullable(foo: Foo?) {
-    val s: String? = ""
+    konst s: String? = ""
     foo?.baz(s!!)?.gav.let {
         it<!UNSAFE_CALL!>.<!>length
         // Ok because of foo?.

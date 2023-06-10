@@ -10,7 +10,7 @@
 
 // FILE: boundRefToSuperClassMethod.kt
 
-class Impl(val set1: Set<String>, val set2: Set<String>) : JDerived() {
+class Impl(konst set1: Set<String>, konst set2: Set<String>) : JDerived() {
     override fun is1(x: String) = x in set1
     override fun is2(x: String) = x in set2
 }
@@ -20,8 +20,8 @@ fun cmp(d: JDerived) =
         .thenComparing(d::is2)
 
 fun box(): String {
-    val cmp = cmp(Impl(setOf("a", "c"), setOf("c", "d")))
-    val list = listOf("e", "d", "c", "b", "a").sortedWith(cmp)
+    konst cmp = cmp(Impl(setOf("a", "c"), setOf("c", "d")))
+    konst list = listOf("e", "d", "c", "b", "a").sortedWith(cmp)
     if (list != listOf("e", "b", "d", "a", "c"))
         return "Failed: ${list.toString()}"
     return "OK"

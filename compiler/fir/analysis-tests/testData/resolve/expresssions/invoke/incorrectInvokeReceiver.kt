@@ -1,8 +1,8 @@
 operator fun String.invoke() = this
 
-val some = ""
+konst some = ""
 fun sss() {
-    val some = 10
+    konst some = 10
 
     // Should be resolved to top-level some,
     // because with local some invoke isn't applicable

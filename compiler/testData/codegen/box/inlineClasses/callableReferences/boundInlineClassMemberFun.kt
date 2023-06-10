@@ -3,17 +3,17 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int) {
+konstue class Z(konst x: Int) {
     fun test() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val x: Long) {
+konstue class L(konst x: Long) {
     fun test() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String) {
+konstue class S(konst x: String) {
     fun test() = x
 }
 

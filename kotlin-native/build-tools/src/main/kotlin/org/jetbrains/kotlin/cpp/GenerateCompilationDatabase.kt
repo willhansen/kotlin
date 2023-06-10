@@ -40,11 +40,11 @@ abstract class GenerateCompilationDatabase : DefaultTask() {
          * The working directory of the compilation. All paths in the [arguments] must either be absolute or relative to this directory.
          */
         @get:Internal
-        abstract val directory: DirectoryProperty
+        abstract konst directory: DirectoryProperty
 
         // Only the path of the directory is an input.
         @get:Input
-        protected val pathToDirectory: Provider<String>
+        protected konst pathToDirectory: Provider<String>
             get() = directory.asFile.map { it.absolutePath }
 
         /**
@@ -54,11 +54,11 @@ abstract class GenerateCompilationDatabase : DefaultTask() {
          * entry will be generated in the database with the same [directory], [arguments] and [output].
          */
         @get:Internal
-        abstract val files: ConfigurableFileCollection
+        abstract konst files: ConfigurableFileCollection
 
         // Only the paths of files are an input.
         @get:Input
-        protected val pathsToFiles: Iterable<String>
+        protected konst pathsToFiles: Iterable<String>
             get() = files.files.map { it.absolutePath }
 
         /**
@@ -67,7 +67,7 @@ abstract class GenerateCompilationDatabase : DefaultTask() {
          * List of arguments of the compilation commands. The first argument must be the executable.
          */
         @get:Input
-        abstract val arguments: ListProperty<String>
+        abstract konst arguments: ListProperty<String>
 
         /**
          * **output** from the [JSON Compilation Database](https://clang.llvm.org/docs/JSONCompilationDatabase.html#format).
@@ -76,23 +76,23 @@ abstract class GenerateCompilationDatabase : DefaultTask() {
          * between different modes of compilation of the same sources.
          */
         @get:Input
-        abstract val output: Property<String>
+        abstract konst output: Property<String>
     }
 
     // Must follow https://clang.llvm.org/docs/JSONCompilationDatabase.html#format
     private data class SerializedEntry(
-            @Expose val directory: String,
-            @Expose val file: String,
-            @Expose val arguments: List<String>,
-            @Expose val output: String,
+            @Expose konst directory: String,
+            @Expose konst file: String,
+            @Expose konst arguments: List<String>,
+            @Expose konst output: String,
     ) {
         companion object {
             fun fromEntry(entry: Entry): List<SerializedEntry> {
-                val directory = entry.directory.asFile.get().absolutePath
-                val arguments = entry.arguments.get()
-                val output = entry.output.get()
+                konst directory = entry.directory.asFile.get().absolutePath
+                konst arguments = entry.arguments.get()
+                konst output = entry.output.get()
                 return entry.files.map {
-                    val file = it.absolutePath
+                    konst file = it.absolutePath
                     SerializedEntry(
                             directory,
                             file,
@@ -108,23 +108,23 @@ abstract class GenerateCompilationDatabase : DefaultTask() {
      * List of [Entry]s to generate database from.
      */
     @get:Nested
-    abstract val entries: ListProperty<Entry>
+    abstract konst entries: ListProperty<Entry>
 
     /**
      * List of databases to merge into this database.
      */
     @get:InputFiles
-    abstract val mergeFiles: ConfigurableFileCollection
+    abstract konst mergeFiles: ConfigurableFileCollection
 
     /**
      * Where to put the database.
      */
     @get:OutputFile
-    abstract val outputFile: RegularFileProperty
+    abstract konst outputFile: RegularFileProperty
 
     @TaskAction
     fun run() {
-        val serialized = mutableListOf<SerializedEntry>()
+        konst serialized = mutableListOf<SerializedEntry>()
         mergeFiles.files.forEach { file ->
             FileReader(file).use {
                 try {

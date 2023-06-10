@@ -49,21 +49,21 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.Value
 @Suppress("DuplicatedCode")
 open class FastMethodAnalyzer<V : Value>
 @JvmOverloads constructor(
-    private val owner: String,
-    private val method: MethodNode,
-    private val interpreter: Interpreter<V>,
-    private val pruneExceptionEdges: Boolean = false
+    private konst owner: String,
+    private konst method: MethodNode,
+    private konst interpreter: Interpreter<V>,
+    private konst pruneExceptionEdges: Boolean = false
 ) {
-    private val insnsArray = method.instructions.toArray()
-    private val nInsns = method.instructions.size()
+    private konst insnsArray = method.instructions.toArray()
+    private konst nInsns = method.instructions.size()
 
-    private val isMergeNode = findMergeNodes(method)
+    private konst isMergeNode = findMergeNodes(method)
 
-    private val frames: Array<Frame<V>?> = arrayOfNulls(nInsns)
+    private konst frames: Array<Frame<V>?> = arrayOfNulls(nInsns)
 
-    private val handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
-    private val queued = BooleanArray(nInsns)
-    private val queue = IntArray(nInsns)
+    private konst handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
+    private konst queued = BooleanArray(nInsns)
+    private konst queue = IntArray(nInsns)
     private var top = 0
 
     protected open fun newFrame(nLocals: Int, nStack: Int): Frame<V> =
@@ -75,25 +75,25 @@ open class FastMethodAnalyzer<V : Value>
         checkAssertions()
         computeExceptionHandlersForEachInsn(method)
 
-        val isTcbStart = BooleanArray(nInsns)
+        konst isTcbStart = BooleanArray(nInsns)
         for (tcb in method.tryCatchBlocks) {
             isTcbStart[tcb.start.indexOf() + 1] = true
         }
 
-        val current = newFrame(method.maxLocals, method.maxStack)
-        val handler = newFrame(method.maxLocals, method.maxStack)
+        konst current = newFrame(method.maxLocals, method.maxStack)
+        konst handler = newFrame(method.maxLocals, method.maxStack)
         initLocals(current)
         mergeControlFlowEdge(0, current)
 
         while (top > 0) {
-            val insn = queue[--top]
-            val f = frames[insn]!!
+            konst insn = queue[--top]
+            konst f = frames[insn]!!
             queued[insn] = false
 
-            val insnNode = method.instructions[insn]
+            konst insnNode = method.instructions[insn]
             try {
-                val insnOpcode = insnNode.opcode
-                val insnType = insnNode.type
+                konst insnOpcode = insnNode.opcode
+                konst insnType = insnNode.type
 
                 if (insnType == AbstractInsnNode.LABEL ||
                     insnType == AbstractInsnNode.LINE ||
@@ -127,8 +127,8 @@ open class FastMethodAnalyzer<V : Value>
                     isTcbStart[insn]
                 ) {
                     handlers[insn]?.forEach { tcb ->
-                        val exnType = Type.getObjectType(tcb.type ?: "java/lang/Throwable")
-                        val jump = tcb.handler.indexOf()
+                        konst exnType = Type.getObjectType(tcb.type ?: "java/lang/Throwable")
+                        konst jump = tcb.handler.indexOf()
 
                         handler.init(f)
                         handler.clearStack()
@@ -158,9 +158,9 @@ open class FastMethodAnalyzer<V : Value>
 
     internal fun initLocals(current: Frame<V>) {
         current.setReturn(interpreter.newReturnTypeValue(Type.getReturnType(method.desc)))
-        val args = Type.getArgumentTypes(method.desc)
+        konst args = Type.getArgumentTypes(method.desc)
         var local = 0
-        val isInstanceMethod = (method.access and Opcodes.ACC_STATIC) == 0
+        konst isInstanceMethod = (method.access and Opcodes.ACC_STATIC) == 0
         if (isInstanceMethod) {
             current.setLocal(local, interpreter.newParameterValue(true, local, Type.getObjectType(owner)))
             local++
@@ -222,8 +222,8 @@ open class FastMethodAnalyzer<V : Value>
 
     private fun computeExceptionHandlersForEachInsn(m: MethodNode) {
         for (tcb in m.tryCatchBlocks) {
-            val begin = tcb.start.indexOf()
-            val end = tcb.end.indexOf()
+            konst begin = tcb.start.indexOf()
+            konst end = tcb.end.indexOf()
             for (j in begin until end) {
                 if (!insnsArray[j].isMeaningful) continue
                 var insnHandlers: MutableList<TryCatchBlockNode>? = handlers[j]
@@ -237,13 +237,13 @@ open class FastMethodAnalyzer<V : Value>
     }
 
     /**
-     * Updates frame at the index [dest] with its old value if provided and previous control flow node frame [frame].
+     * Updates frame at the index [dest] with its old konstue if provided and previous control flow node frame [frame].
      * Reuses old frame when possible and when [canReuse] is true.
      * If updated, adds the frame to the queue
      */
     private fun mergeControlFlowEdge(dest: Int, frame: Frame<V>, canReuse: Boolean = false) {
-        val oldFrame = frames[dest]
-        val changes = when {
+        konst oldFrame = frames[dest]
+        konst changes = when {
             canReuse && !isMergeNode[dest] -> {
                 frames[dest] = frame
                 true
@@ -277,7 +277,7 @@ open class FastMethodAnalyzer<V : Value>
                 append("    #$i: ${this@dump.getLocal(i)}\n")
             }
             append("  ]\n")
-            val stackSize = this@dump.stackSize
+            konst stackSize = this@dump.stackSize
             append("  stack: size=")
             append(stackSize)
             if (stackSize == 0) {
@@ -295,22 +295,22 @@ open class FastMethodAnalyzer<V : Value>
 
     companion object {
         fun findMergeNodes(method: MethodNode): BooleanArray {
-            val isMergeNode = BooleanArray(method.instructions.size())
+            konst isMergeNode = BooleanArray(method.instructions.size())
             for (insn in method.instructions) {
                 when (insn.type) {
                     AbstractInsnNode.JUMP_INSN -> {
-                        val jumpInsn = insn as JumpInsnNode
+                        konst jumpInsn = insn as JumpInsnNode
                         isMergeNode[method.instructions.indexOf(jumpInsn.label)] = true
                     }
                     AbstractInsnNode.LOOKUPSWITCH_INSN -> {
-                        val switchInsn = insn as LookupSwitchInsnNode
+                        konst switchInsn = insn as LookupSwitchInsnNode
                         isMergeNode[method.instructions.indexOf(switchInsn.dflt)] = true
                         for (label in switchInsn.labels) {
                             isMergeNode[method.instructions.indexOf(label)] = true
                         }
                     }
                     AbstractInsnNode.TABLESWITCH_INSN -> {
-                        val switchInsn = insn as TableSwitchInsnNode
+                        konst switchInsn = insn as TableSwitchInsnNode
                         isMergeNode[method.instructions.indexOf(switchInsn.dflt)] = true
                         for (label in switchInsn.labels) {
                             isMergeNode[method.instructions.indexOf(label)] = true

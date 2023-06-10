@@ -25,7 +25,7 @@ class CompilerOutputTest : AbstractNativeSimpleTest() {
     fun testReleaseCompilerAgainstPreReleaseLibrary() {
         // We intentionally use JS testdata, because the compilers should behave the same way in such a test.
         // To be refactored later, after CompileKotlinAgainstCustomBinariesTest.testReleaseCompilerAgainstPreReleaseLibraryJs is fixed.
-        val rootDir = File("compiler/testData/compileKotlinAgainstCustomBinaries/releaseCompilerAgainstPreReleaseLibraryJs")
+        konst rootDir = File("compiler/testData/compileKotlinAgainstCustomBinaries/releaseCompilerAgainstPreReleaseLibraryJs")
 
         doTestPreReleaseKotlinLibrary(rootDir, emptyList())
     }
@@ -35,27 +35,27 @@ class CompilerOutputTest : AbstractNativeSimpleTest() {
         // We intentionally use JS testdata, because the compilers should behave the same way in such a test.
         // To be refactored later, after
         // CompileKotlinAgainstCustomBinariesTest.testReleaseCompilerAgainstPreReleaseLibraryJsSkipPrereleaseCheck is fixed.
-        val rootDir =
+        konst rootDir =
             File("compiler/testData/compileKotlinAgainstCustomBinaries/releaseCompilerAgainstPreReleaseLibraryJsSkipPrereleaseCheck")
 
         doTestPreReleaseKotlinLibrary(rootDir, listOf("-Xskip-prerelease-check"))
     }
 
     private fun doTestPreReleaseKotlinLibrary(rootDir: File, additionalOptions: List<String>) {
-        val someNonStableVersion = LanguageVersion.values().firstOrNull { it > LanguageVersion.LATEST_STABLE } ?: return
+        konst someNonStableVersion = LanguageVersion.konstues().firstOrNull { it > LanguageVersion.LATEST_STABLE } ?: return
 
-        val libraryOptions = listOf(
+        konst libraryOptions = listOf(
             "-language-version", someNonStableVersion.versionString,
             // Suppress the "language version X is experimental..." warning.
             "-Xsuppress-version-warnings"
         )
-        val library = compileLibrary(
+        konst library = compileLibrary(
             source = rootDir.resolve("library"),
             freeCompilerArgs = libraryOptions,
             dependencies = emptyList()
         ).assertSuccess().resultingArtifact
 
-        val compilationResult = compileLibrary(
+        konst compilationResult = compileLibrary(
             source = rootDir.resolve("source.kt"),
             freeCompilerArgs = additionalOptions + listOf("-language-version", LanguageVersion.LATEST_STABLE.versionString),
             dependencies = listOf(library)
@@ -69,8 +69,8 @@ class CompilerOutputTest : AbstractNativeSimpleTest() {
         freeCompilerArgs: List<String>,
         dependencies: List<TestCompilationArtifact.KLIB>
     ): TestCompilationResult<out TestCompilationArtifact.KLIB> {
-        val testCase = generateTestCaseWithSingleModule(source, TestCompilerArgs(freeCompilerArgs))
-        val compilation = LibraryCompilation(
+        konst testCase = generateTestCaseWithSingleModule(source, TestCompilerArgs(freeCompilerArgs))
+        konst compilation = LibraryCompilation(
             settings = testRunSettings,
             freeCompilerArgs = testCase.freeCompilerArgs,
             sourceModules = testCase.modules,
@@ -82,7 +82,7 @@ class CompilerOutputTest : AbstractNativeSimpleTest() {
 
     private fun TestCompilationResult<*>.toOutput(): String {
         check(this is TestCompilationResult.ImmediateResult<*>) { this }
-        val loggedData = this.loggedData
+        konst loggedData = this.loggedData
         check(loggedData is LoggedData.CompilationToolCall) { loggedData::class }
         return normalizeOutput(loggedData.toolOutput, loggedData.exitCode)
     }

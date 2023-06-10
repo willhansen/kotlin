@@ -9,7 +9,7 @@ import java.io.File
 import java.security.DigestInputStream
 import java.security.MessageDigest
 
-class PluginClasspaths(val classpaths: Array<String>?) {
+class PluginClasspaths(konst classpaths: Array<String>?) {
     companion object {
         fun deserializeWithHashes(str: String): List<Pair<String, String>> =
             str.split(":")
@@ -18,16 +18,16 @@ class PluginClasspaths(val classpaths: Array<String>?) {
     }
 
     fun serialize() = classpaths?.mapNotNull { it ->
-        val jar = File(it).takeIf { it.exists() } ?: return@mapNotNull null
-        val jarPath = jar.absolutePath
-        val jarHash = jar.sha256()
+        konst jar = File(it).takeIf { it.exists() } ?: return@mapNotNull null
+        konst jarPath = jar.absolutePath
+        konst jarHash = jar.sha256()
         "$jarPath-$jarHash"
     }?.joinToString(":") ?: ""
 
     private fun File.sha256(): String {
-        val digest = MessageDigest.getInstance("SHA-256")
+        konst digest = MessageDigest.getInstance("SHA-256")
         DigestInputStream(this.inputStream(), digest).use { dis ->
-            val buffer = ByteArray(8192)
+            konst buffer = ByteArray(8192)
             var bytesRead = 0
             while (bytesRead != -1) {
                 bytesRead = dis.read(buffer, 0, buffer.size)
@@ -41,16 +41,16 @@ class PluginClasspaths(val classpaths: Array<String>?) {
 }
 
 class PluginClasspathsComparator(old: String, new: String) {
-    private val oldPluginClasspath: List<Pair<String, String>> by lazy { PluginClasspaths.deserializeWithHashes(old) }
-    private val newPluginClasspath: List<Pair<String, String>> by lazy { PluginClasspaths.deserializeWithHashes(new) }
+    private konst oldPluginClasspath: List<Pair<String, String>> by lazy { PluginClasspaths.deserializeWithHashes(old) }
+    private konst newPluginClasspath: List<Pair<String, String>> by lazy { PluginClasspaths.deserializeWithHashes(new) }
 
     fun equals() = oldPluginClasspath == newPluginClasspath
 
     fun describeDifferencesOrNull(): String? {
-        val changed = oldPluginClasspath != newPluginClasspath
+        konst changed = oldPluginClasspath != newPluginClasspath
         if (!changed) return null
-        val added = newPluginClasspath.subtract(oldPluginClasspath).takeIf { it.isNotEmpty() }?.toList()
-        val deleted = oldPluginClasspath.subtract(newPluginClasspath).takeIf { it.isNotEmpty() }?.toList()
+        konst added = newPluginClasspath.subtract(oldPluginClasspath).takeIf { it.isNotEmpty() }?.toList()
+        konst deleted = oldPluginClasspath.subtract(newPluginClasspath).takeIf { it.isNotEmpty() }?.toList()
         return StringBuilder().apply {
             if (added == null && deleted == null) {
                 this.append("Plugin classpaths was reordered.")

@@ -4,6 +4,6 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithGetterAndSetter.kt
         public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ F|/withGetterAndSetter|
         }
-        public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
-            F|/withGetterAndSetter| = R|<local>/value|
+        public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit| {
+            F|/withGetterAndSetter| = R|<local>/konstue|
         }

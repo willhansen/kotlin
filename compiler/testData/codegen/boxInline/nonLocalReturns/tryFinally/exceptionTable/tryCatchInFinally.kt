@@ -2,17 +2,17 @@
 
 package test
 
-public class Holder(var value: String = "") {
+public class Holder(var konstue: String = "") {
 
     operator fun plusAssign(s: String?) {
-        if (value.length != 0) {
-            value += " -> "
+        if (konstue.length != 0) {
+            konstue += " -> "
         }
-        value += s
+        konstue += s
     }
 
     override fun toString(): String {
-        return value
+        return konstue
     }
 
 }
@@ -48,7 +48,7 @@ fun test0(
         res: String = "Fail"
 ): String {
     try {
-        val localResult = doCall (
+        konst localResult = doCall (
                 {
                     h += "OK_NON_LOCAL"
                     return "OK_NON_LOCAL"
@@ -80,11 +80,11 @@ fun test0(
 fun box(): String {
     var h = Holder()
     var test0 = test0(h, res = "OK")
-    if (test0 != "OK_NON_LOCAL" || h.value != "OK_NON_LOCAL -> OK_FINALLY1 -> innerTryBlock") return "test0_1: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_NON_LOCAL" || h.konstue != "OK_NON_LOCAL -> OK_FINALLY1 -> innerTryBlock") return "test0_1: ${test0}, holder: ${h.konstue}"
 
     h = Holder()
     test0 = test0(h, throwExternalFinEx1 = true, res = "OK")
-    if (test0 != "OK_NON_LOCAL" || h.value != "OK_NON_LOCAL -> OK_FINALLY1 -> innerTryBlock -> CATCHBLOCK") return "test0_2: ${test0}, holder: ${h.value}"
+    if (test0 != "OK_NON_LOCAL" || h.konstue != "OK_NON_LOCAL -> OK_FINALLY1 -> innerTryBlock -> CATCHBLOCK") return "test0_2: ${test0}, holder: ${h.konstue}"
 
     return "OK"
 }

@@ -12,7 +12,7 @@ KtErrorCallInfo:
           receiverType = null
           returnType = kotlin.Unit
           symbol = /A.foo(<dispatch receiver>: A): kotlin.Unit
-          valueParameters = []
+          konstueParameters = []
           callableIdIfNonLocal = /A.foo
       typeArgumentsMapping = {}
       argumentMapping = {}

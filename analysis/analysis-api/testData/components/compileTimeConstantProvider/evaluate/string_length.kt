@@ -1,1 +1,1 @@
-const val LENGTH = <expr>"Hello, world".length</expr>
+const konst LENGTH = <expr>"Hello, world".length</expr>

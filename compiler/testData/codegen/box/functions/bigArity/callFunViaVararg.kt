@@ -17,7 +17,7 @@ public class J {
             Arrays.fill(args, o);
             try {
                 if (f.invoke(args).intValue() != 300 + i) {
-                    throw new AssertionError("Bad return value from function");
+                    throw new AssertionError("Bad return konstue from function");
                 }
             } catch (IllegalArgumentException e) {
                 if (i == 30) {

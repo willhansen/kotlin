@@ -1,6 +1,6 @@
 fun test() {
     while(true) {
-        val x = 45 ?: <expr>continue</expr>
+        konst x = 45 ?: <expr>continue</expr>
         return
     }
 }

@@ -36,19 +36,19 @@ class KotlinCompileArgumentsTest {
 
     @Test
     fun `test - simple project - compare CompilerArgumentsAware with KotlinCompilerArgumentsAware implementations`() {
-        val project = buildProjectWithJvm()
+        konst project = buildProjectWithJvm()
 
         project.repositories {
             mavenLocal()
             mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.kotlinJvmExtension
-        project.evaluate()
+        konst kotlin = project.kotlinJvmExtension
+        project.ekonstuate()
 
-        val mainCompilation = kotlin.target.compilations.getByName("main")
-        val mainCompilationTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
-        val argumentsFromKotlinCompilerArgumentsAware = mainCompilationTask.createCompilerArguments(
+        konst mainCompilation = kotlin.target.compilations.getByName("main")
+        konst mainCompilationTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
+        konst argumentsFromKotlinCompilerArgumentsAware = mainCompilationTask.createCompilerArguments(
             CreateCompilerArgumentsContext(
                 includeArgumentTypes = setOf(Primitive, PluginClasspath),
                 isLenient = true
@@ -63,28 +63,28 @@ class KotlinCompileArgumentsTest {
     }
 
     /**
-     * The jvmTargets default argument value is up for change over time.
+     * The jvmTargets default argument konstue is up for change over time.
      * The argument shall always be explicitly set!
      */
     @Test
     fun `test - simple project - jvmTarget is explicit - and uses correct default`() {
-        val project = buildProjectWithJvm()
-        val kotlin = project.kotlinJvmExtension
-        project.evaluate()
+        konst project = buildProjectWithJvm()
+        konst kotlin = project.kotlinJvmExtension
+        project.ekonstuate()
 
-        val mainCompilation = kotlin.target.compilations.getByName("main")
-        val mainCompilationTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
+        konst mainCompilation = kotlin.target.compilations.getByName("main")
+        konst mainCompilationTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
 
-        val arguments = mainCompilationTask.createCompilerArguments(lenient)
+        konst arguments = mainCompilationTask.createCompilerArguments(lenient)
 
-        val argumentsString = ArgumentUtils.convertArgumentsToStringList(arguments)
-        val jvmTargetArgument = K2JVMCompilerArguments::jvmTarget.findAnnotation<Argument>()!!.value
+        konst argumentsString = ArgumentUtils.convertArgumentsToStringList(arguments)
+        konst jvmTargetArgument = K2JVMCompilerArguments::jvmTarget.findAnnotation<Argument>()!!.konstue
         if (jvmTargetArgument !in argumentsString) fail("Missing '$jvmTargetArgument' in argument list")
-        val indexOfJvmTargetArgument = argumentsString.indexOf(jvmTargetArgument)
-        val jvmTargetTargetArgumentValue = argumentsString.getOrNull(indexOfJvmTargetArgument + 1)
+        konst indexOfJvmTargetArgument = argumentsString.indexOf(jvmTargetArgument)
+        konst jvmTargetTargetArgumentValue = argumentsString.getOrNull(indexOfJvmTargetArgument + 1)
         assertEquals(JvmTarget.DEFAULT.description, jvmTargetTargetArgumentValue)
 
-        val parsedArguments = K2JVMCompilerArguments().apply { parseCommandLineArguments(argumentsString, this) }
+        konst parsedArguments = K2JVMCompilerArguments().apply { parseCommandLineArguments(argumentsString, this) }
         assertNotNull(parsedArguments.jvmTarget)
         assertEquals(JvmTarget.DEFAULT.description, parsedArguments.jvmTarget)
 
@@ -92,17 +92,17 @@ class KotlinCompileArgumentsTest {
 
     @Test
     fun `test - multiplatform - with K2`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
 
-        val jvmMainCompilation = kotlin.jvm().compilations.getByName("main")
+        konst jvmMainCompilation = kotlin.jvm().compilations.getByName("main")
         jvmMainCompilation.compilerOptions.options.languageVersion.set(KotlinVersion.KOTLIN_2_0)
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val jvmMainCompileTask = jvmMainCompilation.compileTaskProvider.get() as KotlinCompile
-        val arguments = jvmMainCompileTask.createCompilerArguments(lenient)
+        konst jvmMainCompileTask = jvmMainCompilation.compileTaskProvider.get() as KotlinCompile
+        konst arguments = jvmMainCompileTask.createCompilerArguments(lenient)
 
         assertEquals(
             setOf("commonMain", "jvmMain"),
@@ -112,19 +112,19 @@ class KotlinCompileArgumentsTest {
 
     @Test
     fun `test - multiplatform - with K2 - source filter on compile task is respected`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
-        val compilation = kotlin.jvm().compilations.main
+        konst compilation = kotlin.jvm().compilations.main
         compilation.compilerOptions.options.languageVersion.set(KotlinVersion.KOTLIN_2_0)
-        val compileTask = compilation.compileTaskProvider.get() as KotlinCompile
+        konst compileTask = compilation.compileTaskProvider.get() as KotlinCompile
 
         /*
         Create Source Files
          */
-        val aKt = project.file("src/jvmMain/kotlin/A.kt")
-        val bKt = project.file("src/jvmMain/kotlin/B.kt")
-        val cTxt = project.file("src/jvmMain/kotlin/C.txt")
+        konst aKt = project.file("src/jvmMain/kotlin/A.kt")
+        konst bKt = project.file("src/jvmMain/kotlin/B.kt")
+        konst cTxt = project.file("src/jvmMain/kotlin/C.txt")
 
         listOf(aKt, bKt, cTxt).forEach { file ->
             file.parentFile.mkdirs()

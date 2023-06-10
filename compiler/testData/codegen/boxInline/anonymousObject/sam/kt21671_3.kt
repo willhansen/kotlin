@@ -16,8 +16,8 @@ import test.*
 
 fun box() : String {
     var result = ""
-    var value = 1
-    doWork { result += if (value++ == 1) "O" else "K" }
+    var konstue = 1
+    doWork { result += if (konstue++ == 1) "O" else "K" }
 
     return result
 }

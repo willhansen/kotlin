@@ -29,15 +29,15 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 class JvmInlineApplicabilityChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor) return
-        val annotation = descriptor.annotations.findAnnotation(JVM_INLINE_ANNOTATION_FQ_NAME)
+        konst annotation = descriptor.annotations.findAnnotation(JVM_INLINE_ANNOTATION_FQ_NAME)
         if (annotation != null && !descriptor.isValue) {
-            val annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
+            konst annotationEntry = DescriptorToSourceUtils.getSourceFromAnnotation(annotation) ?: return
             context.trace.report(ErrorsJvm.JVM_INLINE_WITHOUT_VALUE_CLASS.on(annotationEntry))
         }
 
         if (descriptor.isValue && annotation == null && !descriptor.isExpect) {
-            val valueKeyword = declaration.modifierList?.getModifier(KtTokens.VALUE_KEYWORD) ?: return
-            context.trace.report(ErrorsJvm.VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION.on(valueKeyword))
+            konst konstueKeyword = declaration.modifierList?.getModifier(KtTokens.VALUE_KEYWORD) ?: return
+            context.trace.report(ErrorsJvm.VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION.on(konstueKeyword))
         }
     }
 }

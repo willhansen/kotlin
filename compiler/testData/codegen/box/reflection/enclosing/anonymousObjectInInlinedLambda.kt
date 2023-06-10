@@ -15,9 +15,9 @@ inline fun foo(): A {
 }
 
 fun box(): String {
-    val y = foo()
+    konst y = foo()
 
-    val enclosing = y.javaClass.getEnclosingMethod()
+    konst enclosing = y.javaClass.getEnclosingMethod()
     if (enclosing?.getName() != "foo") return "method: $enclosing"
 
     return y.f()

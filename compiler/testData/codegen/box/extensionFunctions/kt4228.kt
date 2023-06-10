@@ -2,7 +2,7 @@ class A {
     companion object
 }
 
-val foo: Any.() -> Unit = {}
+konst foo: Any.() -> Unit = {}
 
 fun test() {
     A.(foo)()

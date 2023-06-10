@@ -32,8 +32,8 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 // Replace callable reference on inline function with reified parameter
 // with callable reference on new non inline function with substituted types
-class WrapInlineDeclarationsWithReifiedTypeParametersLowering(val context: BackendContext) : BodyLoweringPass {
-    private val irFactory
+class WrapInlineDeclarationsWithReifiedTypeParametersLowering(konst context: BackendContext) : BodyLoweringPass {
+    private konst irFactory
         get() = context.irFactory
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -44,24 +44,24 @@ class WrapInlineDeclarationsWithReifiedTypeParametersLowering(val context: Backe
             override fun visitFunctionReference(expression: IrFunctionReference, data: IrDeclarationParent?): IrExpression {
                 expression.transformChildren(this, data)
 
-                val owner = expression.symbol.owner as? IrSimpleFunction
+                konst owner = expression.symbol.owner as? IrSimpleFunction
                     ?: return expression
 
                 if (!owner.isInlineFunWithReifiedParameter()) {
                     return expression
                 }
-                val substitutionMap = expression.typeSubstitutionMap
+                konst substitutionMap = expression.typeSubstitutionMap
                     .entries
-                    .map { (key, value) ->
-                        key to (value as IrTypeArgument)
+                    .map { (key, konstue) ->
+                        key to (konstue as IrTypeArgument)
                     }
-                val typeSubstitutor = IrTypeSubstitutor(
+                konst typeSubstitutor = IrTypeSubstitutor(
                     substitutionMap.map { it.first },
                     substitutionMap.map { it.second },
                     context.irBuiltIns
                 )
 
-                val function = irFactory.buildFun {
+                konst function = irFactory.buildFun {
                     name = Name.identifier("${owner.name}${"$"}wrap")
                     returnType = typeSubstitutor.substitute(owner.returnType)
                     visibility = DescriptorVisibilities.LOCAL
@@ -70,8 +70,8 @@ class WrapInlineDeclarationsWithReifiedTypeParametersLowering(val context: Backe
                     endOffset = SYNTHETIC_OFFSET
                 }.apply {
                     parent = data ?: error("Unable to get a proper parent while lower ${expression.render()} at ${container.render()}")
-                    val irBuilder = context.createIrBuilder(symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
-                    val forwardExtensionReceiverAsParam = owner.extensionReceiverParameter?.let { extensionReceiver ->
+                    konst irBuilder = context.createIrBuilder(symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
+                    konst forwardExtensionReceiverAsParam = owner.extensionReceiverParameter?.let { extensionReceiver ->
                         runIf(expression.extensionReceiver == null) {
                             addValueParameter(
                                 extensionReceiver.name,
@@ -80,10 +80,10 @@ class WrapInlineDeclarationsWithReifiedTypeParametersLowering(val context: Backe
                             true
                         }
                     } ?: false
-                    owner.valueParameters.forEach { valueParameter ->
+                    owner.konstueParameters.forEach { konstueParameter ->
                         addValueParameter(
-                            valueParameter.name,
-                            typeSubstitutor.substitute(valueParameter.type)
+                            konstueParameter.name,
+                            typeSubstitutor.substitute(konstueParameter.type)
                         )
                     }
                     body = irFactory.createBlockBody(
@@ -95,16 +95,16 @@ class WrapInlineDeclarationsWithReifiedTypeParametersLowering(val context: Backe
                                 irBuilder.irCall(owner.symbol).also { call ->
                                     expression.extensionReceiver?.setDeclarationsParent(this@apply)
                                     expression.dispatchReceiver?.setDeclarationsParent(this@apply)
-                                    val (extensionReceiver, forwardedParams) = if (forwardExtensionReceiverAsParam) {
-                                        irBuilder.irGet(valueParameters.first()) to valueParameters.subList(1, valueParameters.size)
+                                    konst (extensionReceiver, forwardedParams) = if (forwardExtensionReceiverAsParam) {
+                                        irBuilder.irGet(konstueParameters.first()) to konstueParameters.subList(1, konstueParameters.size)
                                     } else {
-                                        expression.extensionReceiver to valueParameters
+                                        expression.extensionReceiver to konstueParameters
                                     }
                                     call.extensionReceiver = extensionReceiver
                                     call.dispatchReceiver = expression.dispatchReceiver
 
-                                    forwardedParams.forEachIndexed { index, valueParameter ->
-                                        call.putValueArgument(index, irBuilder.irGet(valueParameter))
+                                    forwardedParams.forEachIndexed { index, konstueParameter ->
+                                        call.putValueArgument(index, irBuilder.irGet(konstueParameter))
                                     }
                                     for (i in 0 until expression.typeArgumentsCount) {
                                         call.putTypeArgument(i, expression.getTypeArgument(i))

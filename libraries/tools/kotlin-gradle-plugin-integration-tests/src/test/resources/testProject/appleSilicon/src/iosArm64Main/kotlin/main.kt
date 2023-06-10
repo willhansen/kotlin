@@ -1,1 +1,1 @@
-actual val sourceSetsAfterIosMain: String = "iosArm64"
+actual konst sourceSetsAfterIosMain: String = "iosArm64"

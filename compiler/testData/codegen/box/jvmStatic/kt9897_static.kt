@@ -35,10 +35,10 @@ object Test {
 }
 
 fun box(): String {
-    val changeObject = Test.changeObject()
+    konst changeObject = Test.changeObject()
     if (changeObject != "012") return "fail 1: $changeObject"
 
-    val changeLong = Test.changeLong()
+    konst changeLong = Test.changeLong()
     if (changeLong != 1L) return "fail 1: $changeLong"
 
     return "OK"

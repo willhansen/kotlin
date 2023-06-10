@@ -29,10 +29,10 @@ import org.jetbrains.kotlin.types.isDynamic
 
 object JsDynamicDeclarationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val trace = context.trace
+        konst trace = context.trace
         if (declaration is KtProperty && descriptor is VariableDescriptorWithAccessors) {
             declaration.delegateExpression?.let { delegateExpression ->
-                val provideDelegateCall = trace[BindingContext.PROVIDE_DELEGATE_RESOLVED_CALL, descriptor]
+                konst provideDelegateCall = trace[BindingContext.PROVIDE_DELEGATE_RESOLVED_CALL, descriptor]
                 if (provideDelegateCall != null && provideDelegateCall.resultingDescriptor.returnType?.isDynamic() == true ||
                     trace.getType(delegateExpression)?.isDynamic() == true
                 ) {
@@ -42,7 +42,7 @@ object JsDynamicDeclarationChecker : DeclarationChecker {
         }
         else if (declaration is KtClassOrObject) {
             for (delegateDecl in declaration.superTypeListEntries.filterIsInstance<KtDelegatedSuperTypeEntry>()) {
-                val delegateExpr = delegateDecl.delegateExpression ?: continue
+                konst delegateExpr = delegateDecl.delegateExpression ?: continue
                 if (trace.getType(delegateExpr)?.isDynamic() == true) {
                     trace.report(ErrorsJs.DELEGATION_BY_DYNAMIC.on(delegateExpr))
                 }

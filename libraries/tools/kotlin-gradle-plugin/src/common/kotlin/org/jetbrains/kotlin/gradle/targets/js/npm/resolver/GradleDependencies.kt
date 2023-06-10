@@ -12,31 +12,31 @@ import java.io.File
 import java.io.Serializable
 
 data class ExternalGradleDependency(
-    val dependency: ResolvedDependency,
-    val artifact: ResolvedArtifact
+    konst dependency: ResolvedDependency,
+    konst artifact: ResolvedArtifact
 ) : Serializable
 
 data class FileCollectionExternalGradleDependency(
-    val files: Collection<File>,
-    val dependencyVersion: String?
+    konst files: Collection<File>,
+    konst dependencyVersion: String?
 ) : Serializable
 
 data class FileExternalGradleDependency(
-    val dependencyName: String,
-    val dependencyVersion: String,
-    val file: File
+    konst dependencyName: String,
+    konst dependencyVersion: String,
+    konst file: File
 ) : Serializable
 
 data class CompositeDependency(
-    val dependencyName: String,
-    val dependencyVersion: String,
-    val includedBuildDir: File,
+    konst dependencyName: String,
+    konst dependencyVersion: String,
+    konst includedBuildDir: File,
     @Transient
-    val includedBuild: IncludedBuild?
+    konst includedBuild: IncludedBuild?
 ) : Serializable
 
 data class InternalDependency(
-    val projectPath: String,
-    val compilationName: String,
-    val projectName: String
+    konst projectPath: String,
+    konst compilationName: String,
+    konst projectName: String
 ) : Serializable

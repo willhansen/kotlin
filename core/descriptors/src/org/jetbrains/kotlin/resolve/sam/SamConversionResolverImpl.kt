@@ -21,22 +21,22 @@ import java.util.*
 
 class SamConversionResolverImpl(
     storageManager: StorageManager,
-    private val samWithReceiverResolvers: Iterable<SamWithReceiverResolver>
+    private konst samWithReceiverResolvers: Iterable<SamWithReceiverResolver>
 ) : SamConversionResolver {
     class SamConversionResolverWithoutReceiverConversion(storageManager: StorageManager) : SamConversionResolver {
-        val resolver = SamConversionResolverImpl(storageManager, emptyList())
+        konst resolver = SamConversionResolverImpl(storageManager, emptyList())
 
         override fun resolveFunctionTypeIfSamInterface(classDescriptor: ClassDescriptor): SimpleType? {
             return resolver.resolveFunctionTypeIfSamInterface(classDescriptor)
         }
     }
 
-    private val functionTypesForSamInterfaces = storageManager.createCacheWithNullableValues<ClassDescriptor, SimpleType>()
+    private konst functionTypesForSamInterfaces = storageManager.createCacheWithNullableValues<ClassDescriptor, SimpleType>()
 
     override fun resolveFunctionTypeIfSamInterface(classDescriptor: ClassDescriptor): SimpleType? {
         return functionTypesForSamInterfaces.computeIfAbsent(classDescriptor) {
-            val abstractMethod = getSingleAbstractMethodOrNull(classDescriptor) ?: return@computeIfAbsent null
-            val shouldConvertFirstParameterToDescriptor = samWithReceiverResolvers.any { it.shouldConvertFirstSamParameterToReceiver(abstractMethod) }
+            konst abstractMethod = getSingleAbstractMethodOrNull(classDescriptor) ?: return@computeIfAbsent null
+            konst shouldConvertFirstParameterToDescriptor = samWithReceiverResolvers.any { it.shouldConvertFirstSamParameterToReceiver(abstractMethod) }
             getFunctionTypeForAbstractMethod(abstractMethod, shouldConvertFirstParameterToDescriptor)
         }
     }
@@ -51,7 +51,7 @@ fun getSingleAbstractMethodOrNull(klass: ClassDescriptor): FunctionDescriptor? {
 
     if (klass.isDefinitelyNotSamInterface) return null
 
-    val abstractMember = getAbstractMembers(klass).singleOrNull() ?: return null
+    konst abstractMember = getAbstractMembers(klass).singleOrNull() ?: return null
 
     return if (abstractMember is SimpleFunctionDescriptor && abstractMember.typeParameters.isEmpty())
         abstractMember
@@ -70,25 +70,25 @@ fun getFunctionTypeForAbstractMethod(
     function: FunctionDescriptor,
     shouldConvertFirstParameterToDescriptor: Boolean
 ): SimpleType {
-    val returnType = function.returnType ?: error("function is not initialized: $function")
-    val valueParameters = function.valueParameters
+    konst returnType = function.returnType ?: error("function is not initialized: $function")
+    konst konstueParameters = function.konstueParameters
 
-    val parameterTypes = ArrayList<KotlinType>(valueParameters.size)
-    val parameterNames = ArrayList<Name>(valueParameters.size)
+    konst parameterTypes = ArrayList<KotlinType>(konstueParameters.size)
+    konst parameterNames = ArrayList<Name>(konstueParameters.size)
 
-    val contextReceiversTypes = function.contextReceiverParameters.map { it.type }
+    konst contextReceiversTypes = function.contextReceiverParameters.map { it.type }
     var startIndex = 0
     var receiverType: KotlinType? = null
-    val extensionReceiver = function.extensionReceiverParameter
+    konst extensionReceiver = function.extensionReceiverParameter
     if (extensionReceiver != null) {
         receiverType = extensionReceiver.type
-    } else if (shouldConvertFirstParameterToDescriptor && function.valueParameters.isNotEmpty()) {
-        receiverType = valueParameters[0].type
+    } else if (shouldConvertFirstParameterToDescriptor && function.konstueParameters.isNotEmpty()) {
+        receiverType = konstueParameters[0].type
         startIndex = 1
     }
 
-    for (i in startIndex until valueParameters.size) {
-        val parameter = valueParameters[i]
+    for (i in startIndex until konstueParameters.size) {
+        konst parameter = konstueParameters[i]
         parameterTypes.add(parameter.type)
         parameterNames.add(if (function.hasSynthesizedParameterNames()) SpecialNames.NO_NAME_PROVIDED else parameter.name)
     }
@@ -109,10 +109,10 @@ fun getFunctionTypeForSamType(
     samResolver: SamConversionResolver,
     samConversionOracle: SamConversionOracle
 ): KotlinType? {
-    val unwrappedType = samType.unwrap()
+    konst unwrappedType = samType.unwrap()
     if (unwrappedType is FlexibleType) {
-        val lower = getFunctionTypeForSamType(unwrappedType.lowerBound, samResolver, samConversionOracle)
-        val upper = getFunctionTypeForSamType(unwrappedType.upperBound, samResolver, samConversionOracle)
+        konst lower = getFunctionTypeForSamType(unwrappedType.lowerBound, samResolver, samConversionOracle)
+        konst upper = getFunctionTypeForSamType(unwrappedType.upperBound, samResolver, samConversionOracle)
 
         assert((lower == null) == (upper == null)) { "Illegal flexible type: $unwrappedType" }
 
@@ -130,22 +130,22 @@ private fun getFunctionTypeForSamType(
     samConversionOracle: SamConversionOracle
 ): SimpleType? {
     // e.g. samType == Comparator<String>?
-    val classifier = samType.constructor.declarationDescriptor
+    konst classifier = samType.constructor.declarationDescriptor
     if (classifier !is ClassDescriptor) return null
 
     if (!samConversionOracle.isPossibleSamType(samType)) return null
 
     // Function2<T, T, Int>
-    val functionTypeDefault = samResolver.resolveFunctionTypeIfSamInterface(classifier) ?: return null
-    val noProjectionsSamType = nonProjectionParametrization(samType) ?: return null
+    konst functionTypeDefault = samResolver.resolveFunctionTypeIfSamInterface(classifier) ?: return null
+    konst noProjectionsSamType = nonProjectionParametrization(samType) ?: return null
 
     // Function2<String, String, Int>?
-    val type = TypeSubstitutor.create(noProjectionsSamType).substitute(functionTypeDefault, Variance.IN_VARIANCE)
+    konst type = TypeSubstitutor.create(noProjectionsSamType).substitute(functionTypeDefault, Variance.IN_VARIANCE)
     assert(type != null) {
         "Substitution based on type with no projections '$noProjectionsSamType' should not end with conflict"
     }
 
-    val simpleType = type!!.asSimpleType()
+    konst simpleType = type!!.asSimpleType()
     return simpleType.makeNullableAsSpecified(samType.isMarkedNullable)
 }
 
@@ -159,12 +159,12 @@ private fun getFunctionTypeForSamType(
 // See Non-wildcard parametrization in JLS 8 p.9.9 for clarification
 fun nonProjectionParametrization(samType: SimpleType): SimpleType? {
     if (samType.arguments.none { it.projectionKind != Variance.INVARIANT }) return samType
-    val parameters = samType.constructor.parameters
-    val parametersSet = parameters.toSet()
+    konst parameters = samType.constructor.parameters
+    konst parametersSet = parameters.toSet()
 
     return samType.replace(
         newArguments = samType.arguments.zip(parameters).map {
-            val (projection, parameter) = it
+            konst (projection, parameter) = it
             when {
                 projection.projectionKind == Variance.INVARIANT -> projection
 

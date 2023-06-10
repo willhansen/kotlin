@@ -54,10 +54,10 @@ public final class PathEnvironmentVariableUtil {
 
     /**
      * Finds an executable file with the specified base name, that is located in a directory
-     * listed in the passed PATH environment variable value and is accepted by filter.
+     * listed in the passed PATH environment variable konstue and is accepted by filter.
      *
      * @param fileBaseName      file base name
-     * @param pathVariableValue value of PATH environment variable
+     * @param pathVariableValue konstue of PATH environment variable
      * @param filter            exe file filter
      * @return {@link File} instance or null if not found
      */
@@ -154,7 +154,7 @@ public final class PathEnvironmentVariableUtil {
     }
 
     /**
-     * Retrieves the value of PATH environment variable
+     * Retrieves the konstue of PATH environment variable
      */
     @Nullable
     public static String getPathVariableValue() {

@@ -1,5 +1,5 @@
 fun box(): String {
-    val ok: String? = "OK"
+    konst ok: String? = "OK"
     var res = ""
 
     do {

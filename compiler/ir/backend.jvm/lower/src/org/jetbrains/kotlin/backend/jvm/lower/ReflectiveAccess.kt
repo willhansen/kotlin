@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 
 // Used from CodeFragmentCompiler for IDE Debugger Plug-In
 @Suppress("unused")
-val reflectiveAccessLowering = makeIrFilePhase(
+konst reflectiveAccessLowering = makeIrFilePhase(
     ::ReflectiveAccessLowering,
     name = "ReflectiveCalls",
     description = "Avoid the need for accessors by replacing direct access to inaccessible members with accesses via reflection",
@@ -37,7 +37,7 @@ val reflectiveAccessLowering = makeIrFilePhase(
 
 // This lowering replaces member accesses that are illegal according to JVM
 // accessibility rules with corresponding calls to the java.lang.reflect
-// API. The primary use-case is to facilitate the design of the "Evaluate
+// API. The primary use-case is to facilitate the design of the "Ekonstuate
 // expression..." mechanism in the JVM Debugger. Here, a code fragment is
 // compiled _as if_ in the context of a breakpoint. Hence, it is compiled
 // against an existing class hierarchy and any access to private or otherwise
@@ -60,7 +60,7 @@ val reflectiveAccessLowering = makeIrFilePhase(
 // hierarchy of the involved classes, so is emulated in fragment compilation by
 // the use of `invokespecial` - see `invokeSpecialForCall` below.
 internal class ReflectiveAccessLowering(
-    val context: JvmBackendContext
+    konst context: JvmBackendContext
 ) : IrElementTransformerVoidWithContext(), FileLoweringPass {
 
     lateinit var inlineScopeResolver: IrInlineScopeResolver
@@ -81,12 +81,12 @@ internal class ReflectiveAccessLowering(
     // reflective access. We record these _before_ transformation, in order to
     // later predict the compilation strategy for fields. See the uses of
     // `fieldLocationAndReceiver`.
-    val callsOnCompanionObjects: MutableMap<IrCall, IrClassSymbol> = mutableMapOf()
+    konst callsOnCompanionObjects: MutableMap<IrCall, IrClassSymbol> = mutableMapOf()
 
     private fun recordCompanionObjectAsDispatchReceiver(expression: IrCall) {
-        val dispatchReceiver = expression.dispatchReceiver as? IrGetField ?: return
-        val dispatchReceiverType = dispatchReceiver.symbol.owner.type as? IrSimpleType ?: return
-        val klass = dispatchReceiverType.classOrNull
+        konst dispatchReceiver = expression.dispatchReceiver as? IrGetField ?: return
+        konst dispatchReceiverType = dispatchReceiver.symbol.owner.type as? IrSimpleType ?: return
+        konst klass = dispatchReceiverType.classOrNull
         if (klass != null && klass.owner.isCompanion) {
             callsOnCompanionObjects[expression] = klass
         }
@@ -100,8 +100,8 @@ internal class ReflectiveAccessLowering(
         recordCompanionObjectAsDispatchReceiver(expression)
         expression.transformChildrenVoid(this)
 
-        val superQualifier: IrClassSymbol? = expression.superQualifierSymbol
-        val callee = expression.symbol
+        konst superQualifier: IrClassSymbol? = expression.superQualifierSymbol
+        konst callee = expression.symbol
 
         if (callee.isAccessible(withSuper = superQualifier != null)) {
             return expression
@@ -122,7 +122,7 @@ internal class ReflectiveAccessLowering(
     override fun visitGetField(expression: IrGetField): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val field = expression.symbol
+        konst field = expression.symbol
         return if (field.isAccessible()) {
             expression
         } else {
@@ -133,7 +133,7 @@ internal class ReflectiveAccessLowering(
     override fun visitSetField(expression: IrSetField): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val field = expression.symbol
+        konst field = expression.symbol
         return if (field.isAccessible()) {
             expression
         } else if (field.owner.correspondingPropertySymbol?.owner?.isConst == true || (field.owner.isFromJava() && field.owner.isFinal)) {
@@ -146,7 +146,7 @@ internal class ReflectiveAccessLowering(
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val callee = expression.symbol
+        konst callee = expression.symbol
         return if (callee.isAccessible()) {
             expression
         } else {
@@ -157,7 +157,7 @@ internal class ReflectiveAccessLowering(
     override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val callee = expression.symbol
+        konst callee = expression.symbol
         return if (callee.isAccessible()) {
             expression
         } else {
@@ -169,8 +169,8 @@ internal class ReflectiveAccessLowering(
      * IR Generation for java.lang.reflect.{field, method, constructor} API
      */
 
-    private val symbols = context.ir.symbols
-    private val reflectSymbols = symbols.javaLangReflectSymbols
+    private konst symbols = context.ir.symbols
+    private konst reflectSymbols = symbols.javaLangReflectSymbols
 
     private fun IrBuilderWithScope.javaClassObject(klass: IrType): IrExpression =
         irCall(symbols.kClassJavaPropertyGetter).apply {
@@ -195,11 +195,11 @@ internal class ReflectiveAccessLowering(
             putValueArgument(0, irTrue())
         }
 
-    private fun IrBuilderWithScope.fieldSet(fieldObject: IrExpression, receiver: IrExpression, value: IrExpression): IrExpression =
+    private fun IrBuilderWithScope.fieldSet(fieldObject: IrExpression, receiver: IrExpression, konstue: IrExpression): IrExpression =
         irCall(reflectSymbols.javaLangReflectFieldSet).apply {
             dispatchReceiver = fieldObject
             putValueArgument(0, receiver)
-            putValueArgument(1, value)
+            putValueArgument(1, konstue)
         }
 
     private fun IrBuilderWithScope.fieldGet(fieldObject: IrExpression, receiver: IrExpression): IrExpression =
@@ -213,11 +213,11 @@ internal class ReflectiveAccessLowering(
 
     private fun IrBuilderWithScope.irVararg(
         elementType: IrType,
-        values: List<IrExpression>
+        konstues: List<IrExpression>
     ): IrExpression {
         return IrArrayBuilder(createBuilder(), context.irBuiltIns.arrayClass.typeWith(elementType)).apply {
-            for (value in values) {
-                +value
+            for (konstue in konstues) {
+                +konstue
             }
         }.build()
     }
@@ -286,7 +286,7 @@ internal class ReflectiveAccessLowering(
         symbol: IrSymbol
     ): IrExpression =
         context.createJvmIrBuilder(symbol).irBlock(resultType = returnType) {
-            val methodVar =
+            konst methodVar =
                 createTmpVariable(
                     getDeclaredMethod(
                         javaClassObject(declaringClass),
@@ -301,14 +301,14 @@ internal class ReflectiveAccessLowering(
         }
 
     private fun IrFunctionAccessExpression.getValueArguments(): List<IrExpression> =
-        (0 until valueArgumentsCount).map { getValueArgument(it)!! }
+        (0 until konstueArgumentsCount).map { getValueArgument(it)!! }
 
-    private fun IrFunctionAccessExpression.valueParameterTypes(): List<IrType> =
-        symbol.owner.valueParameters.map { it.type }
+    private fun IrFunctionAccessExpression.konstueParameterTypes(): List<IrType> =
+        symbol.owner.konstueParameters.map { it.type }
 
     private fun generateReflectiveMethodInvocation(call: IrCall): IrExpression {
-        val parameterTypes = mutableListOf<IrType>()
-        val arguments = mutableListOf<IrExpression>()
+        konst parameterTypes = mutableListOf<IrType>()
+        konst arguments = mutableListOf<IrExpression>()
 
         when {
             call.extensionReceiver != null -> {
@@ -321,7 +321,7 @@ internal class ReflectiveAccessLowering(
             }
         }
 
-        parameterTypes.addAll(call.valueParameterTypes())
+        parameterTypes.addAll(call.konstueParameterTypes())
         arguments.addAll(call.getValueArguments())
 
         return generateReflectiveMethodInvocation(
@@ -340,7 +340,7 @@ internal class ReflectiveAccessLowering(
         return generateReflectiveMethodInvocation(
             call.symbol.owner.parentAsClass.defaultType,
             call.symbol.owner.name.asString(),
-            call.valueParameterTypes(),
+            call.konstueParameterTypes(),
             null, // static call
             call.getValueArguments(),
             call.type,
@@ -351,11 +351,11 @@ internal class ReflectiveAccessLowering(
     private fun generateReflectiveConstructorInvocation(call: IrConstructorCall): IrExpression =
         context.createJvmIrBuilder(call.symbol)
             .irBlock(resultType = call.type) {
-                val constructorVar =
+                konst constructorVar =
                     createTmpVariable(
                         getDeclaredConstructor(
                             javaClassObject(call.symbol.owner.parentAsClass.defaultType),
-                            call.valueParameterTypes()
+                            call.konstueParameterTypes()
                         ),
                         nameHint = "constructor",
                         irType = reflectSymbols.javaLangReflectConstructor.defaultType
@@ -373,12 +373,12 @@ internal class ReflectiveAccessLowering(
     ): IrExpression =
         context.createJvmIrBuilder(symbol)
             .irBlock(resultType = fieldType) {
-                val classVar = createTmpVariable(
+                konst classVar = createTmpVariable(
                     javaClassObject(declaringClass),
                     nameHint = "klass",
                     irType = symbols.kClassJavaPropertyGetter.returnType
                 )
-                val fieldVar = createTmpVariable(
+                konst fieldVar = createTmpVariable(
                     getDeclaredField(irGet(classVar), fieldName),
                     nameHint = "field",
                     irType = reflectSymbols.javaLangReflectField.defaultType
@@ -399,14 +399,14 @@ internal class ReflectiveAccessLowering(
     private fun generateReflectiveFieldSet(
         declaringClass: IrType,
         fieldName: String,
-        value: IrExpression,
+        konstue: IrExpression,
         type: IrType,
         instance: IrExpression?,
         symbol: IrSymbol
     ): IrExpression {
         return context.createJvmIrBuilder(symbol)
             .irBlock(resultType = type) {
-                val fieldVar =
+                konst fieldVar =
                     createTmpVariable(
                         getDeclaredField(
                             javaClassObject(declaringClass),
@@ -416,7 +416,7 @@ internal class ReflectiveAccessLowering(
                         irType = reflectSymbols.javaLangReflectField.defaultType
                     )
                 +fieldSetAccessible(irGet(fieldVar))
-                +fieldSet(irGet(fieldVar), instance ?: irNull(), value)
+                +fieldSet(irGet(fieldVar), instance ?: irNull(), konstue)
             }
     }
 
@@ -424,7 +424,7 @@ internal class ReflectiveAccessLowering(
         generateReflectiveFieldSet(
             setField.symbol.owner.parentClassOrNull!!.defaultType,
             setField.symbol.owner.name.asString(),
-            setField.value,
+            setField.konstue,
             setField.type,
             setField.receiver,
             setField.symbol,
@@ -441,7 +441,7 @@ internal class ReflectiveAccessLowering(
     // absolutely determined to be inaccessible to outside code).
     private fun fieldLocationAndReceiver(call: IrCall): Pair<IrType, IrExpression?> {
         callsOnCompanionObjects[call]?.let {
-            val parentAsClass = it.owner.parentAsClass
+            konst parentAsClass = it.owner.parentAsClass
             if (!parentAsClass.isJvmInterface) {
                 return parentAsClass.defaultType to null
             }
@@ -451,8 +451,8 @@ internal class ReflectiveAccessLowering(
     }
 
     private fun generateReflectiveAccessForGetter(call: IrCall): IrExpression {
-        val getter = call.symbol.owner
-        val property = getter.correspondingPropertySymbol!!.owner
+        konst getter = call.symbol.owner
+        konst property = getter.correspondingPropertySymbol!!.owner
 
         if (shouldUseAccessor(getter)) {
             return generateReflectiveMethodInvocation(
@@ -466,7 +466,7 @@ internal class ReflectiveAccessLowering(
             )
         }
 
-        val (fieldLocation, instance) = fieldLocationAndReceiver(call)
+        konst (fieldLocation, instance) = fieldLocationAndReceiver(call)
         return generateReflectiveFieldGet(
             fieldLocation,
             property.name.asString(),
@@ -477,8 +477,8 @@ internal class ReflectiveAccessLowering(
     }
 
     private fun generateReflectiveAccessForSetter(call: IrCall): IrExpression {
-        val setter = call.symbol.owner
-        val property = setter.correspondingPropertySymbol!!.owner
+        konst setter = call.symbol.owner
+        konst property = setter.correspondingPropertySymbol!!.owner
 
         if (shouldUseAccessor(setter)) {
             return generateReflectiveMethodInvocation(
@@ -486,7 +486,7 @@ internal class ReflectiveAccessLowering(
                 JvmAbi.setterName(propertyName = property.name.asString()),
                 mutableListOf<IrType>().apply {
                     setter.extensionReceiverParameter?.let { add(it.type) }
-                    addAll(call.valueParameterTypes())
+                    addAll(call.konstueParameterTypes())
                 },
                 call.dispatchReceiver,
                 mutableListOf<IrExpression>().apply {
@@ -498,7 +498,7 @@ internal class ReflectiveAccessLowering(
             )
         }
 
-        val (fieldLocation, receiver) = fieldLocationAndReceiver(call)
+        konst (fieldLocation, receiver) = fieldLocationAndReceiver(call)
         return generateReflectiveFieldSet(
             fieldLocation,
             property.name.asString(),
@@ -521,13 +521,13 @@ internal class ReflectiveAccessLowering(
     // This is needed to coerce the codegen to emit a very specific
     // invokespecial instruction to target a super-call that is otherwise
     // illegal on the JVM. However! The byte code from this compilation is
-    // not run on a JVM: it is interpreted by eval4j. Eval4j handles
+    // not run on a JVM: it is interpreted by ekonst4j. Ekonst4j handles
     // invokespecial via JDI from which it *is* possible to do the required
     // super call.
     private fun generateInvokeSpecialForCall(expression: IrCall, superQualifier: IrClassSymbol): IrExpression {
-        val jvmSignature = context.defaultMethodSignatureMapper.mapSignatureSkipGeneric(expression.symbol.owner)
-        val owner = superQualifier.owner
-        val builder = context.createJvmIrBuilder(expression.symbol)
+        konst jvmSignature = context.defaultMethodSignatureMapper.mapSignatureSkipGeneric(expression.symbol.owner)
+        konst owner = superQualifier.owner
+        konst builder = context.createJvmIrBuilder(expression.symbol)
 
         // invokeSpecial(owner: String, name: String, descriptor: String, isInterface: Boolean): T
         return builder.irCall(symbols.jvmDebuggerInvokeSpecialIntrinsic).apply {

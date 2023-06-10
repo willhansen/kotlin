@@ -4,14 +4,14 @@
  */
 
 // FILE: lib.kt
-class X(val s: String)
+class X(konst s: String)
 
-val x = X("zzz")
+konst x = X("zzz")
 
 // FILE: lib2.kt
-class Z(val x: Int)
+class Z(konst x: Int)
 
-val z2 = Z(x.s.length)
+konst z2 = Z(x.s.length)
 
 // FILE: main.kt
 fun main() {

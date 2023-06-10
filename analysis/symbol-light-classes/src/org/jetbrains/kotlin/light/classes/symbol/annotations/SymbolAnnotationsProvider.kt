@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.light.classes.symbol.withSymbol
 import org.jetbrains.kotlin.name.ClassId
 
 internal class SymbolAnnotationsProvider<T : KtAnnotatedSymbol>(
-    private val ktModule: KtModule,
-    private val annotatedSymbolPointer: KtSymbolPointer<T>,
-    private val annotationUseSiteTargetFilter: AnnotationUseSiteTargetFilter = AnyAnnotationUseSiteTargetFilter,
+    private konst ktModule: KtModule,
+    private konst annotatedSymbolPointer: KtSymbolPointer<T>,
+    private konst annotationUseSiteTargetFilter: AnnotationUseSiteTargetFilter = AnyAnnotationUseSiteTargetFilter,
 ) : AnnotationsProvider {
     private inline fun <T> withAnnotatedSymbol(crossinline action: context(KtAnalysisSession) (KtAnnotatedSymbol) -> T): T =
         annotatedSymbolPointer.withSymbol(ktModule, action)

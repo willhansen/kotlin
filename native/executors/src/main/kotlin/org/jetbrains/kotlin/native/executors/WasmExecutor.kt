@@ -18,15 +18,15 @@ import java.io.File
  * @param configurables [Configurables] for the wasm target
  */
 class WasmExecutor(
-        private val configurables: WasmConfigurables,
+        private konst configurables: WasmConfigurables,
 ) : Executor {
-    private val hostExecutor: Executor = HostExecutor()
+    private konst hostExecutor: Executor = HostExecutor()
 
     override fun execute(request: ExecuteRequest): ExecuteResponse {
-        val absoluteTargetToolchain = configurables.absoluteTargetToolchain
-        val workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
-        val executable = request.executableAbsolutePath
-        val launcherJs = "$executable.js"
+        konst absoluteTargetToolchain = configurables.absoluteTargetToolchain
+        konst workingDirectory = request.workingDirectory ?: File(request.executableAbsolutePath).parentFile
+        konst executable = request.executableAbsolutePath
+        konst launcherJs = "$executable.js"
         return hostExecutor.execute(request.copying {
             this.executableAbsolutePath = "$absoluteTargetToolchain/bin/d8"
             this.workingDirectory = workingDirectory

@@ -7,7 +7,7 @@ import java.awt.GridLayout
 import javax.swing.JPanel
 
 class Some {
-    val baz get() = foo().layout
+    konst baz get() = foo().layout
 
     companion object {
         private fun foo() = object : ButtonPanel() {

@@ -8,11 +8,11 @@ package test.io
 import java.io.*
 import kotlin.test.*
 
-private class Serial(val name: String) : Serializable {
+private class Serial(konst name: String) : Serializable {
     override fun toString() = name
 }
 
-private data class DataType(val name: String, val value: Int, val percent: Double) : Serializable
+private data class DataType(konst name: String, konst konstue: Int, konst percent: Double) : Serializable
 
 private enum class EnumSingleton { INSTANCE }
 private object ObjectSingleton : Serializable {
@@ -23,32 +23,32 @@ private class OldSchoolSingleton private constructor() : Serializable {
     private fun readResolve(): Any = INSTANCE
 
     companion object {
-        val INSTANCE = OldSchoolSingleton()
+        konst INSTANCE = OldSchoolSingleton()
     }
 }
 
 
 class SerializableTest {
     @Test fun testClosure() {
-        val tuple = Triple("Ivan", 12, Serial("serial"))
-        val fn = @JvmSerializableLambda { tuple.toString() }
-        val deserialized = serializeAndDeserialize(fn)
+        konst tuple = Triple("Ivan", 12, Serial("serial"))
+        konst fn = @JvmSerializableLambda { tuple.toString() }
+        konst deserialized = serializeAndDeserialize(fn)
 
         assertEquals(fn(), deserialized())
     }
 
     @Test fun testComplexClosure() {
-        val y = 12
-        val fn1 = @JvmSerializableLambda { x: Int -> (x + y).toString() }
-        val fn2: Int.(Int) -> String = @JvmSerializableLambda { fn1(this + it) }
-        val deserialized = serializeAndDeserialize(fn2)
+        konst y = 12
+        konst fn1 = @JvmSerializableLambda { x: Int -> (x + y).toString() }
+        konst fn2: Int.(Int) -> String = @JvmSerializableLambda { fn1(this + it) }
+        konst deserialized = serializeAndDeserialize(fn2)
 
         assertEquals(5.fn2(10), 5.deserialized(10))
     }
 
     @Test fun testDataClass() {
-        val data = DataType("name", 176, 1.4)
-        val deserialized = serializeAndDeserialize(data)
+        konst data = DataType("name", 176, 1.4)
+        konst deserialized = serializeAndDeserialize(data)
 
         assertEquals(data, deserialized)
     }
@@ -60,32 +60,32 @@ class SerializableTest {
     }
 }
 
-public fun <T> serializeToByteArray(value: T): ByteArray {
-    val outputStream = ByteArrayOutputStream()
-    val objectOutputStream = ObjectOutputStream(outputStream)
+public fun <T> serializeToByteArray(konstue: T): ByteArray {
+    konst outputStream = ByteArrayOutputStream()
+    konst objectOutputStream = ObjectOutputStream(outputStream)
 
-    objectOutputStream.writeObject(value)
+    objectOutputStream.writeObject(konstue)
     objectOutputStream.close()
     outputStream.close()
     return outputStream.toByteArray()
 }
 
 public fun <T> deserializeFromByteArray(bytes: ByteArray): T {
-    val inputStream = ByteArrayInputStream(bytes)
-    val inputObjectStream = ObjectInputStream(inputStream)
+    konst inputStream = ByteArrayInputStream(bytes)
+    konst inputObjectStream = ObjectInputStream(inputStream)
     @Suppress("UNCHECKED_CAST")
     return inputObjectStream.readObject() as T
 }
 
-public fun <T> serializeAndDeserialize(value: T): T {
-    val bytes = serializeToByteArray(value)
+public fun <T> serializeAndDeserialize(konstue: T): T {
+    konst bytes = serializeToByteArray(konstue)
     return deserializeFromByteArray(bytes)
 }
 
-private fun hexToBytes(value: String): ByteArray = value.split(" ").map { Integer.parseInt(it, 16).toByte() }.toByteArray()
+private fun hexToBytes(konstue: String): ByteArray = konstue.split(" ").map { Integer.parseInt(it, 16).toByte() }.toByteArray()
 
-public fun <T> deserializeFromHex(value: String) = deserializeFromByteArray<T>(hexToBytes(value))
+public fun <T> deserializeFromHex(konstue: String) = deserializeFromByteArray<T>(hexToBytes(konstue))
 
-public fun <T> serializeToHex(value: T) =
-    serializeToByteArray(value).joinToString(" ") { (it.toInt() and 0xFF).toString(16).padStart(2, '0') }
+public fun <T> serializeToHex(konstue: T) =
+    serializeToByteArray(konstue).joinToString(" ") { (it.toInt() and 0xFF).toString(16).padStart(2, '0') }
 

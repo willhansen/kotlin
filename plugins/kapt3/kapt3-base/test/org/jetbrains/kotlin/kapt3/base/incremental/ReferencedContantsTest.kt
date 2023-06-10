@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
-private val MY_TEST_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental/constants")
+private konst MY_TEST_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental/constants")
 
 class ReferencedConstantsTest {
 
@@ -25,14 +25,14 @@ class ReferencedConstantsTest {
         @JvmStatic
         @BeforeAll
         fun setUp(@TempDir tmp: File) {
-            val compiledClasses = tmp.newFolder("compiledClasses")
+            konst compiledClasses = tmp.newFolder("compiledClasses")
             compileSources(listOf(MY_TEST_DIR.resolve("CKlass.java")), compiledClasses)
 
             cache = JavaClassCacheManager(tmp.newCacheFolder())
             generatedSources = tmp.newGeneratedSourcesFolder()
             cache.close()
-            val processor = SimpleProcessor().toAggregating()
-            val srcFiles = listOf(
+            konst processor = SimpleProcessor().toAggregating()
+            konst srcFiles = listOf(
                 "A.java",
                 "B.java",
                 "AnnotationA.java",
@@ -50,7 +50,7 @@ class ReferencedConstantsTest {
 
     @Test
     fun testConstantInField() {
-        val klassA = cache.javaCache.getStructure(MY_TEST_DIR.resolve("A.java"))!! as SourceFileStructure
+        konst klassA = cache.javaCache.getStructure(MY_TEST_DIR.resolve("A.java"))!! as SourceFileStructure
 
         assertEquals(setOf("test.A"), klassA.declaredTypes)
         assertEquals(emptySet<String>(), klassA.getMentionedAnnotations())
@@ -66,7 +66,7 @@ class ReferencedConstantsTest {
 
     @Test
     fun testConstantInDefaultValue() {
-        val annotationA = cache.javaCache.getStructure(MY_TEST_DIR.resolve("AnnotationA.java"))!! as SourceFileStructure
+        konst annotationA = cache.javaCache.getStructure(MY_TEST_DIR.resolve("AnnotationA.java"))!! as SourceFileStructure
 
         assertEquals(setOf("test.AnnotationA"), annotationA.declaredTypes)
         assertEquals(emptySet<String>(), annotationA.getMentionedAnnotations())
@@ -77,7 +77,7 @@ class ReferencedConstantsTest {
 
     @Test
     fun testConstantInAnnotationElementValue() {
-        val annotated = cache.javaCache.getStructure(MY_TEST_DIR.resolve("AnnotatedType.java"))!! as SourceFileStructure
+        konst annotated = cache.javaCache.getStructure(MY_TEST_DIR.resolve("AnnotatedType.java"))!! as SourceFileStructure
 
         assertEquals(setOf("test.AnnotatedType"), annotated.declaredTypes)
         assertEquals(setOf("test.AnnotationA"), annotated.getMentionedAnnotations())

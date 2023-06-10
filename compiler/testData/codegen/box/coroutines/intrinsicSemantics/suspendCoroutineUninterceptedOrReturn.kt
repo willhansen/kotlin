@@ -19,14 +19,14 @@ fun builder(shouldSuspend: Boolean, c: suspend () -> String): String {
     var fromSuspension: String? = null
     var counter = 0
 
-    val result = try {
+    konst result = try {
         c.startCoroutineUninterceptedOrReturn(object: Continuation<String> {
-            override val context: CoroutineContext
+            override konst context: CoroutineContext
                 get() =  ContinuationDispatcher { counter++ }
 
-            override fun resumeWith(value: Result<String>) {
+            override fun resumeWith(konstue: Result<String>) {
                 fromSuspension = try {
-                    value.getOrThrow()
+                    konstue.getOrThrow()
                 } catch (exception: Throwable) {
                     "Exception: " + exception.message!!
                 }
@@ -48,19 +48,19 @@ fun builder(shouldSuspend: Boolean, c: suspend () -> String): String {
     return result as String
 }
 
-class ContinuationDispatcher(val dispatcher: () -> Unit) : AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor {
+class ContinuationDispatcher(konst dispatcher: () -> Unit) : AbstractCoroutineContextElement(ContinuationInterceptor), ContinuationInterceptor {
     override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> = DispatchedContinuation(dispatcher, continuation)
 }
 
 private class DispatchedContinuation<T>(
-        val dispatcher: () -> Unit,
-        val continuation: Continuation<T>
+        konst dispatcher: () -> Unit,
+        konst continuation: Continuation<T>
 ): Continuation<T> {
-    override val context: CoroutineContext = continuation.context
+    override konst context: CoroutineContext = continuation.context
 
-    override fun resumeWith(value: Result<T>) {
+    override fun resumeWith(konstue: Result<T>) {
         dispatcher()
-        continuation.resumeWith(value)
+        continuation.resumeWith(konstue)
     }
 }
 

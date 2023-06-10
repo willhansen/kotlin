@@ -5,7 +5,7 @@
 package org.jetbrains.kotlin.backend.konan
 
 // Must match `DestroyRuntimeMode` in CompilerConstants.hpp
-enum class DestroyRuntimeMode(val value: Int) {
+enum class DestroyRuntimeMode(konst konstue: Int) {
     LEGACY(0),
     ON_SHUTDOWN(1),
 }

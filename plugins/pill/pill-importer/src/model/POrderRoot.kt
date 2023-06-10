@@ -6,16 +6,16 @@
 package org.jetbrains.kotlin.pill.model
 
 data class POrderRoot(
-    val dependency: PDependency,
-    val scope: Scope,
-    val isExported: Boolean = false,
-    val isProductionOnTestDependency: Boolean = false
+    konst dependency: PDependency,
+    konst scope: Scope,
+    konst isExported: Boolean = false,
+    konst isProductionOnTestDependency: Boolean = false
 ) {
     enum class Scope { COMPILE, TEST, RUNTIME, PROVIDED }
 }
 
 sealed class PDependency {
-    data class Module(val name: String) : PDependency()
-    data class Library(val name: String) : PDependency()
-    data class ModuleLibrary(val library: PLibrary) : PDependency()
+    data class Module(konst name: String) : PDependency()
+    data class Library(konst name: String) : PDependency()
+    data class ModuleLibrary(konst library: PLibrary) : PDependency()
 }

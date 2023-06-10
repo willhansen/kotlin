@@ -13,21 +13,21 @@ import org.jetbrains.org.objectweb.asm.Type
 /**
  * Implicit coercion between IrTypes with the same underlying representation.
  *
- * A call of the form `coerce<A,B>(x)` allows us to coerce the value of `x` to type `A` but treat the result as if
+ * A call of the form `coerce<A,B>(x)` allows us to coerce the konstue of `x` to type `A` but treat the result as if
  * it had IrType `B`. This is useful for inline classes, whose coercion behavior depends on the IrType in
  * addition to the underlying asmType.
  */
 object UnsafeCoerce : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue {
-        val from = expression.getTypeArgument(0)!!
-        val to = expression.getTypeArgument(1)!!
-        val fromType = codegen.typeMapper.mapType(from)
-        val toType = codegen.typeMapper.mapType(to)
+        konst from = expression.getTypeArgument(0)!!
+        konst to = expression.getTypeArgument(1)!!
+        konst fromType = codegen.typeMapper.mapType(from)
+        konst toType = codegen.typeMapper.mapType(to)
         require(fromType == toType) {
             "Inline class types should have the same representation: $fromType != $toType"
         }
-        val arg = expression.getValueArgument(0)!!
-        val result = arg.accept(codegen, data)
+        konst arg = expression.getValueArgument(0)!!
+        konst result = arg.accept(codegen, data)
         return object : PromisedValue(codegen, toType, to) {
             override fun materializeAt(target: Type, irTarget: IrType, castForReified: Boolean) {
                 result.materializeAt(fromType, from)

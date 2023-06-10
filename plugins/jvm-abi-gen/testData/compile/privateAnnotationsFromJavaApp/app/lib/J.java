@@ -1,8 +1,8 @@
 package lib;
 
-@A(value = "OK")
+@A(konstue = "OK")
 public class J {
-    public static String value() {
-        return J.class.getAnnotation(A.class).value();
+    public static String konstue() {
+        return J.class.getAnnotation(A.class).konstue();
     }
 }

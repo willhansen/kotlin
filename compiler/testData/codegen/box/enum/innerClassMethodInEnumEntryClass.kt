@@ -1,17 +1,17 @@
 enum class A {
     X {
-        val x = "OK"
+        konst x = "OK"
 
         inner class Inner {
             fun foo() = x
         }
 
-        val z = Inner()
+        konst z = Inner()
 
-        override val test = z.foo()
+        override konst test = z.foo()
     };
 
-    abstract val test: String
+    abstract konst test: String
 }
 
 fun box() = A.X.test

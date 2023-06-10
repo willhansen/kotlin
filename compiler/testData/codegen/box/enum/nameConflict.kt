@@ -14,7 +14,7 @@ public enum C {
 // MODULE: main(lib)
 // FILE: 1.kt
 fun box(): String {
-    val ok = C.OK
+    konst ok = C.OK
     return when (ok) {
         C.OK -> "OK"
         else -> "fail"

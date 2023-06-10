@@ -33,25 +33,25 @@ class TreeBasedConstructor(
         javac: JavacWrapper
 ) : TreeBasedMember<JCTree.JCMethodDecl>(tree, compilationUnit, containingClass, javac), JavaConstructor {
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(tree.name.toString())
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = false
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = false
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = true
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = tree.modifiers.visibility
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
         get() = tree.typeParameters.map { TreeBasedTypeParameter(it, compilationUnit, javac, this) }
 
-    override val valueParameters: List<JavaValueParameter>
+    override konst konstueParameters: List<JavaValueParameter>
         get() = tree.parameters.map { TreeBasedValueParameter(it, compilationUnit, javac, this) }
 
 }

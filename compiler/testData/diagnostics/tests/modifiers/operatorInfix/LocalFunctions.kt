@@ -18,8 +18,8 @@ fun a() {
         fun Example.div(other: Example) = ""
 
         with (Example()) {
-            val a = Example()
-            val b = Example()
+            konst a = Example()
+            konst b = Example()
 
             consumeString(a + b)
             consumeInt(a - b)

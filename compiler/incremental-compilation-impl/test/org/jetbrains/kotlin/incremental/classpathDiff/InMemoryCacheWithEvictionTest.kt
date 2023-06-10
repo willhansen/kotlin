@@ -15,7 +15,7 @@ class InMemoryCacheWithEvictionTest {
 
     @Test
     fun testComputeIfAbsent() {
-        val cache = InMemoryCacheWithEviction<Int, Any>(
+        konst cache = InMemoryCacheWithEviction<Int, Any>(
             maxTimePeriodsToKeepStrongReferences = 10,
             maxTimePeriodsToKeepSoftReferences = 10,
             maxMemoryUsageRatioToKeepStrongReferences = 0.8,
@@ -33,7 +33,7 @@ class InMemoryCacheWithEvictionTest {
 
     @Test
     fun testLeastRecentlyUsedCacheEviction() {
-        val cache = InMemoryCacheWithEviction<Int, Any>(
+        konst cache = InMemoryCacheWithEviction<Int, Any>(
             maxTimePeriodsToKeepStrongReferences = 2,
             maxTimePeriodsToKeepSoftReferences = 3,
             maxMemoryUsageRatioToKeepStrongReferences = 0.8,
@@ -97,8 +97,8 @@ class InMemoryCacheWithEvictionTest {
 
     @Test
     fun testMemoryUsageLimitCacheEviction() {
-        val memoryUsageRatio = AtomicDouble(0.5)
-        val cache = InMemoryCacheWithEviction<Int, Any>(
+        konst memoryUsageRatio = AtomicDouble(0.5)
+        konst cache = InMemoryCacheWithEviction<Int, Any>(
             maxTimePeriodsToKeepStrongReferences = 10,
             maxTimePeriodsToKeepSoftReferences = 10,
             maxMemoryUsageRatioToKeepStrongReferences = 0.8,

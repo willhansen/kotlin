@@ -93,7 +93,7 @@ class IncrementalSpecification extends BaseKonanSpecification {
     def 'Parameter changes should cause only recompilaton'() {
         when:
         def results = buildTwice { KonanProject project ->
-            project.addSetting("main", parameter, value)
+            project.addSetting("main", parameter, konstue)
         }
 
         then:
@@ -101,7 +101,7 @@ class IncrementalSpecification extends BaseKonanSpecification {
 
 
         where:
-        parameter             | value
+        parameter             | konstue
         "baseDir"             | "'build/new/outputDir'"
         "enableOptimizations" | "true"
         "linkerOpts"          | "'--help'"
@@ -196,14 +196,14 @@ class IncrementalSpecification extends BaseKonanSpecification {
     def 'Parameter change for an interop task should cause recompilation and interop reprocessing'() {
         when:
         def results = buildTwice { KonanProject project ->
-            project.addSetting("stdio", parameter, value)
+            project.addSetting("stdio", parameter, konstue)
         }
 
         then:
         recompilationAndInteropProcessingHappened(*results)
 
         where:
-        parameter                | value
+        parameter                | konstue
         "packageName"            | "'org.sample'"
         "compilerOpts"           | "'-g'"
         "linkerOpts"             | "'--help'"

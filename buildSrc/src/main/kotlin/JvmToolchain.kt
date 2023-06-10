@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 enum class JdkMajorVersion(
-    val majorVersion: Int,
-    val targetName: String = majorVersion.toString(),
-    private val overrideMajorVersion: Int? = null,
-    private val mandatory: Boolean = true
+    konst majorVersion: Int,
+    konst targetName: String = majorVersion.toString(),
+    private konst overrideMajorVersion: Int? = null,
+    private konst mandatory: Boolean = true
 ) {
     JDK_1_6(6, targetName = "1.6", overrideMajorVersion = 8),
     JDK_1_7(7, targetName = "1.7", overrideMajorVersion = 8),
@@ -28,19 +28,19 @@ enum class JdkMajorVersion(
 
     fun isMandatory(): Boolean = mandatory
 
-    val overrideVersion by lazy {
+    konst overrideVersion by lazy {
         if (overrideMajorVersion != null) {
-            values().firstOrNull() { it.majorVersion == overrideMajorVersion }
-                ?: error("Can't find the value with majorVersion=$overrideMajorVersion")
+            konstues().firstOrNull() { it.majorVersion == overrideMajorVersion }
+                ?: error("Can't find the konstue with majorVersion=$overrideMajorVersion")
         } else {
             null
         }
     }
 
-    val envName = name
+    konst envName = name
 }
 
-val DEFAULT_JVM_TOOLCHAIN = JdkMajorVersion.JDK_1_8
+konst DEFAULT_JVM_TOOLCHAIN = JdkMajorVersion.JDK_1_8
 
 fun Project.configureJvmDefaultToolchain() {
     configureJvmToolchain(DEFAULT_JVM_TOOLCHAIN)
@@ -51,12 +51,12 @@ fun Project.shouldOverrideObsoleteJdk(jdkVersion: JdkMajorVersion): Boolean =
 
 fun Project.configureJvmToolchain(jdkVersion: JdkMajorVersion) {
     @Suppress("NAME_SHADOWING")
-    val jdkVersion = chooseJdk_1_8ForJpsBuild(jdkVersion)
+    konst jdkVersion = chooseJdk_1_8ForJpsBuild(jdkVersion)
     // Ensure java only modules also set default toolchain
     configureJavaOnlyToolchain(jdkVersion)
 
     plugins.withId("org.jetbrains.kotlin.jvm") {
-        val kotlinExtension = extensions.getByType<KotlinTopLevelExtension>()
+        konst kotlinExtension = extensions.getByType<KotlinTopLevelExtension>()
 
         if (shouldOverrideObsoleteJdk(jdkVersion)) {
             kotlinExtension.jvmToolchain {
@@ -88,9 +88,9 @@ fun Project.configureJavaOnlyToolchain(
     jdkVersion: JdkMajorVersion
 ) {
     @Suppress("NAME_SHADOWING")
-    val jdkVersion = chooseJdk_1_8ForJpsBuild(jdkVersion)
+    konst jdkVersion = chooseJdk_1_8ForJpsBuild(jdkVersion)
     plugins.withId("java-base") {
-        val javaExtension = extensions.getByType<JavaPluginExtension>()
+        konst javaExtension = extensions.getByType<JavaPluginExtension>()
         if (shouldOverrideObsoleteJdk(jdkVersion)) {
             javaExtension.toolchain {
                 setupToolchain(jdkVersion.overrideVersion ?: error("Substitution version should be defined for override mode"))
@@ -155,7 +155,7 @@ fun Project.updateJvmTarget(
     jvmTarget: String
 ) {
     @Suppress("NAME_SHADOWING")
-    val jvmTarget = if (kotlinBuildProperties.isInJpsBuildIdeaSync && jvmTarget == "1.6") {
+    konst jvmTarget = if (kotlinBuildProperties.isInJpsBuildIdeaSync && jvmTarget == "1.6") {
         "1.8"
     } else {
         jvmTarget
@@ -181,7 +181,7 @@ fun Project.updateJvmTarget(
 private fun Project.getToolchainCompilerFor(
     jdkVersion: JdkMajorVersion
 ): Provider<JavaCompiler> {
-    val service = project.extensions.getByType<JavaToolchainService>()
+    konst service = project.extensions.getByType<JavaToolchainService>()
     return service.compilerFor {
         this.languageVersion.set(JavaLanguageVersion.of(jdkVersion.majorVersion))
     }
@@ -190,8 +190,8 @@ private fun Project.getToolchainCompilerFor(
 fun Project.getToolchainLauncherFor(
     jdkVersion: JdkMajorVersion
 ): Provider<JavaLauncher> {
-    val service = project.extensions.getByType<JavaToolchainService>()
-    val jdkVersionWithOverride = project.getJdkVersionWithOverride(jdkVersion)
+    konst service = project.extensions.getByType<JavaToolchainService>()
+    konst jdkVersionWithOverride = project.getJdkVersionWithOverride(jdkVersion)
     return service.launcherFor {
         this.languageVersion.set(JavaLanguageVersion.of(jdkVersionWithOverride.majorVersion))
     }

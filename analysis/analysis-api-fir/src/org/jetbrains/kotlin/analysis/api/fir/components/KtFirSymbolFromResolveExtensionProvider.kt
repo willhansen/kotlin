@@ -20,27 +20,27 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtNamedDeclaration
 
 internal class KtFirSymbolFromResolveExtensionProvider(
-    override val analysisSession: KtFirAnalysisSession,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtSymbolFromResolveExtensionProvider(), KtFirAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getResolveExtensionScopeWithTopLevelDeclarations(): KtScope {
-        val tools = analysisSession.extensionTools
+        konst tools = analysisSession.extensionTools
         if (tools.isEmpty()) return KtEmptyScope(token)
         return KtFirResolveExtensionScope(analysisSession, tools)
     }
 }
 
 private class KtFirResolveExtensionScope(
-    private val analysisSession: KtFirAnalysisSession,
-    private val tools: List<LLFirResolveExtensionTool>,
+    private konst analysisSession: KtFirAnalysisSession,
+    private konst tools: List<LLFirResolveExtensionTool>,
 ) : KtScope {
     init {
         require(tools.isNotEmpty())
     }
 
-    override val token: KtLifetimeToken get() = analysisSession.token
+    override konst token: KtLifetimeToken get() = analysisSession.token
 
     override fun getCallableSymbols(nameFilter: KtScopeNameFilter): Sequence<KtCallableSymbol> = withValidityAssertion {
         gelTopLevelDeclarations(nameFilter) { it.getTopLevelCallables() }
@@ -48,7 +48,7 @@ private class KtFirResolveExtensionScope(
 
     override fun getCallableSymbols(names: Collection<Name>): Sequence<KtCallableSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getCallableSymbols { it in namesSet }
     }
 
@@ -58,7 +58,7 @@ private class KtFirResolveExtensionScope(
 
     override fun getClassifierSymbols(names: Collection<Name>): Sequence<KtClassifierSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getClassifierSymbols { it in namesSet }
     }
 
@@ -68,7 +68,7 @@ private class KtFirResolveExtensionScope(
     ): Sequence<S> = sequence {
         for (tool in tools) {
             for (declaration in getDeclarationsByProvider(tool.declarationProvider)) {
-                val declarationName = declaration.nameAsName ?: continue
+                konst declarationName = declaration.nameAsName ?: continue
                 if (!nameFilter(declarationName)) continue
                 with(analysisSession) {
                     yield(declaration.getSymbolOfType())

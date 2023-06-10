@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.daemon.common.RemoteOutputStream
 import org.jetbrains.kotlin.daemon.common.withMeasure
 import java.io.OutputStream
 
-class RemoteOutputStreamClient(val remote: RemoteOutputStream, val profiler: Profiler = DummyProfiler()): OutputStream() {
+class RemoteOutputStreamClient(konst remote: RemoteOutputStream, konst profiler: Profiler = DummyProfiler()): OutputStream() {
     override fun write(data: ByteArray) {
         profiler.withMeasure(this) { remote.write(data, 0, data.size) }
     }

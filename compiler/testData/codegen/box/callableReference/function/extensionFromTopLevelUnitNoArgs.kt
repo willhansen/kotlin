@@ -7,8 +7,8 @@ fun A.foo() {
 }
 
 fun box(): String {
-    val a = A()
-    val x = A::foo
+    konst a = A()
+    konst x = A::foo
     x(a)
     return a.result
 }

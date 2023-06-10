@@ -25,7 +25,7 @@ open class GradleKpmFragmentSourcesProvider {
         fragments.associateWith { it.project.provider { it.kotlinSourceRoots } }
 
     open fun getFragmentOwnSources(fragment: GradleKpmFragment): SourceRootsProvider =
-        getSourcesFromFragmentsAsMap(listOf(fragment)).values.single()
+        getSourcesFromFragmentsAsMap(listOf(fragment)).konstues.single()
 
     open fun getAllFragmentSourcesAsMap(module: GradleKpmModule): SourceRootsProvidersByFragment =
         getSourcesFromFragmentsAsMap(module.fragments)
@@ -34,11 +34,11 @@ open class GradleKpmFragmentSourcesProvider {
         getSourcesFromFragmentsAsMap(fragment.withRefinesClosure)
 
     open fun getSourcesFromRefinesClosure(fragment: GradleKpmFragment): MultipleSourceRootsProvider =
-        fragment.project.provider { getSourcesFromRefinesClosureAsMap(fragment).values }
+        fragment.project.provider { getSourcesFromRefinesClosureAsMap(fragment).konstues }
 
     open fun getCommonSourcesFromRefinesClosure(fragment: GradleKpmFragment): MultipleSourceRootsProvider {
-        val containingModule = fragment.containingModule
-        val project = containingModule.project
+        konst containingModule = fragment.containingModule
+        konst project = containingModule.project
         getSourcesFromRefinesClosureAsMap(fragment)
         return project.provider {
             fragment.withRefinesClosure.filter {
@@ -49,10 +49,10 @@ open class GradleKpmFragmentSourcesProvider {
     }
 }
 
-open class LifecycleTasksManager(private val project: Project) {
+open class LifecycleTasksManager(private konst project: Project) {
     open fun registerClassesTask(compilationData: GradleKpmCompilationData<*>) = with(project) {
-        val classesTaskName = compilationData.compileAllTaskName
-        val classesTask = project.tasks.register(classesTaskName) { classesTask ->
+        konst classesTaskName = compilationData.compileAllTaskName
+        konst classesTask = project.tasks.register(classesTaskName) { classesTask ->
             classesTask.inputs.files(compilationData.output.allOutputs)
         }
         project.tasks.named(LifecycleBasePlugin.BUILD_TASK_NAME).configure { it.dependsOn(classesTask) }

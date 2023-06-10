@@ -10,4 +10,4 @@ import kotlin.native.concurrent.*
 public fun test() {}
 
 @SharedImmutable
-private val EmptyArray: Array<Int> = arrayOf()
+private konst EmptyArray: Array<Int> = arrayOf()

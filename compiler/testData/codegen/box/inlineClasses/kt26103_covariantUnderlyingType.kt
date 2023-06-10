@@ -4,31 +4,31 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GList<T>(val xs: List<T>)
+konstue class GList<T>(konst xs: List<T>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GList2<T: Any>(val xs: List<T?>)
+konstue class GList2<T: Any>(konst xs: List<T?>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GSList<T>(val ss: List<String>)
+konstue class GSList<T>(konst ss: List<String>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class SList(val ss: List<String>)
+konstue class SList(konst ss: List<String>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IList(val ints: List<Int>)
+konstue class IList(konst ints: List<Int>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GIList<T>(val ints: List<Int>)
+konstue class GIList<T>(konst ints: List<Int>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class II(val i: Int)
+konstue class II(konst i: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IIList(val iis: List<II>)
+konstue class IIList(konst iis: List<II>)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GIIList<T>(val iis: List<II>)
+konstue class GIIList<T>(konst iis: List<II>)
 
 fun testGList(gl: GList<String>) {
     if (gl.xs[0] != "OK") throw AssertionError()

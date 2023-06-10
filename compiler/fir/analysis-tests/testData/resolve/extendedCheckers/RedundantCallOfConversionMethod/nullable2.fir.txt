@@ -4,7 +4,7 @@ FILE: nullable2.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val name: R|kotlin/String| = R|<local>/name|
+        public final konst name: R|kotlin/String| = R|<local>/name|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|
@@ -13,5 +13,5 @@ FILE: nullable2.kt
 
     }
     public final fun nullable2(foo: R|Foo?|): R|kotlin/Unit| {
-        lval s: R|kotlin/String| = R|<local>/foo|?.{ $subj$.R|/Foo.name| }.R|kotlin/toString|()
+        lkonst s: R|kotlin/String| = R|<local>/foo|?.{ $subj$.R|/Foo.name| }.R|kotlin/toString|()
     }

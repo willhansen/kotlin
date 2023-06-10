@@ -1,12 +1,12 @@
 class AnonymousInitializers() {
-    val k = 34
+    konst k = 34
 
-    val i: Int
+    konst i: Int
     init {
         i = 12
     }
 
-    val j: Int
+    konst j: Int
        get() = 20
 
     init {

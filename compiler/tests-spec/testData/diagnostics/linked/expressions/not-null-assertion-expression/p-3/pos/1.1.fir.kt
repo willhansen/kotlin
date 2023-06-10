@@ -20,39 +20,39 @@ import checkSubtype
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val a = JavaClass.STR
+    konst a = JavaClass.STR
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String..kotlin.String?!")!>a<!>
-    val res = a!!
+    konst res = a!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>res<!>
 }
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val a = JavaClass.obj
+    konst a = JavaClass.obj
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any..kotlin.Any?!")!>a<!>
-    val x = a!!
+    konst x = a!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>x<!>
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val a : Any? = false
+    konst a : Any? = false
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>a<!>
-    val x = a!!
+    konst x = a!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>x<!>
 }
 
 // TESTCASE NUMBER: 4
 fun case4() {
-    val a : String? = "weds"
+    konst a : String? = "weds"
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>a<!>
-    val x = a!!
+    konst x = a!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>x<!>
 }
 
 // TESTCASE NUMBER: 5
 fun case5(nothing: Nothing?) {
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing?")!>nothing<!>
-    val y = nothing!!
+    konst y = nothing!!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing")!>y<!>
 }

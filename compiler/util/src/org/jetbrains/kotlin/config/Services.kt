@@ -18,10 +18,10 @@ package org.jetbrains.kotlin.config
 
 import java.util.*
 
-class Services private constructor(private val map: Map<Class<*>, Any>) {
+class Services private constructor(private konst map: Map<Class<*>, Any>) {
     companion object {
         @JvmField
-        val EMPTY: Services = Builder().build()
+        konst EMPTY: Services = Builder().build()
     }
 
     operator fun <T> get(interfaceClass: Class<T>): T? {
@@ -30,7 +30,7 @@ class Services private constructor(private val map: Map<Class<*>, Any>) {
     }
 
     class Builder {
-        private val map = HashMap<Class<*>, Any>()
+        private konst map = HashMap<Class<*>, Any>()
 
         fun <T : Any> register(interfaceClass: Class<T>, implementation: T): Builder {
             map.put(interfaceClass, implementation)

@@ -3,7 +3,7 @@
 // FILE: lib.kt
 package lib
 
-val foo: Int
+konst foo: Int
     @JsName("getBar") get() = 23
 
 // MODULE: main(lib)

@@ -7,7 +7,7 @@ package codegen.lateinit.inBaseClass
 
 import kotlin.test.*
 
-class A(val a: Int)
+class A(konst a: Int)
 
 open class B {
     lateinit var a: A
@@ -18,7 +18,7 @@ class C: B() {
 }
 
 @Test fun runTest() {
-    val c = C()
+    konst c = C()
     c.foo()
     println(c.a.a)
 }

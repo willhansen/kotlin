@@ -23,9 +23,9 @@ import kotlin.test.*
 class SplitTest {
 
     @Test fun testSimple() {
-        val p = Regex("/")
-        val results = p.split("have/you/done/it/right")
-        val expected = arrayOf("have", "you", "done", "it", "right")
+        konst p = Regex("/")
+        konst results = p.split("have/you/done/it/right")
+        konst expected = arrayOf("have", "you", "done", "it", "right")
         assertEquals(expected.size, results.size)
         for (i in expected.indices) {
             assertEquals(results[i], expected[i])
@@ -35,7 +35,7 @@ class SplitTest {
     @Test fun testSplit1() {
         var p = Regex(" ")
 
-        val input = "poodle zoo"
+        konst input = "poodle zoo"
         var tokens: List<String>
 
         tokens = p.split(input, 1)
@@ -113,7 +113,7 @@ class SplitTest {
     }
 
     @Test fun testSplit2() {
-        val p = Regex("")
+        konst p = Regex("")
         var s: List<String>
         s = p.split("a", 0)
         assertEquals(3, s.size)
@@ -142,8 +142,8 @@ class SplitTest {
          * See http://www.unicode.org/reports/tr18/#Supplementary_Characters We
          * have to treat text as code points not code units.
          */
-        val p = Regex("")
-        val s: List<String>
+        konst p = Regex("")
+        konst s: List<String>
         s = p.split("a\ud869\uded6b", 0)
         assertEquals(5, s.size)
         assertEquals("", s[0])

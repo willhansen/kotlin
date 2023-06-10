@@ -14,17 +14,17 @@ fun test1(): Int {
             {
                 1
             }, {
-                 it.value
+                 it.konstue
             })
     return res
 }
 
 fun test11(): Int {
     var result = -1;
-    val res = My(111).performWithFinally<My, Int>(
+    konst res = My(111).performWithFinally<My, Int>(
             {
                 try {
-                    result = it.value
+                    result = it.konstue
                     throw RuntimeException("1")
                 } catch (e: RuntimeException) {
                     ++result
@@ -43,7 +43,7 @@ fun test2(): Int {
             throw RuntimeException("1")
         },
         {
-            it.value
+            it.konstue
         })
 
 
@@ -53,9 +53,9 @@ fun test2(): Int {
 fun test3(): Int {
     try {
         var result = -1;
-        val res = My(111).performWithFailFinally<My, Int>(
+        konst res = My(111).performWithFailFinally<My, Int>(
                 {
-                    result = it.value;
+                    result = it.konstue;
                     throw RuntimeException("-1")
                 },
                 { e, z ->
@@ -86,7 +86,7 @@ fun box(): String {
 // FILE: b.kt
 package foo
 
-class My(val value: Int)
+class My(konst konstue: Int)
 
 inline fun <T, R> T.performWithFinally(job: (T)-> R, finallyFun: (T) -> R) : R {
     try {

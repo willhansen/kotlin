@@ -13,7 +13,7 @@ import com.intellij.psi.impl.light.LightTypeParameterListBuilder
 import com.intellij.psi.scope.PsiScopeProcessor
 import org.jetbrains.kotlin.idea.KotlinLanguage
 
-class KotlinLightTypeParameterListBuilder(private val owner: PsiTypeParameterListOwner) :
+class KotlinLightTypeParameterListBuilder(private konst owner: PsiTypeParameterListOwner) :
     LightTypeParameterListBuilder(owner.manager, KotlinLanguage.INSTANCE) {
     override fun processDeclarations(
         processor: PsiScopeProcessor,

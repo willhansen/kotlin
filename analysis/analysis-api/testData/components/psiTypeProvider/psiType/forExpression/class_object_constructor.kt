@@ -7,5 +7,5 @@ class Outer() {
 }
 
 fun main(args: Array<String>) {
-    val inner = Outer.getInner()
+    konst inner = Outer.getInner()
 }

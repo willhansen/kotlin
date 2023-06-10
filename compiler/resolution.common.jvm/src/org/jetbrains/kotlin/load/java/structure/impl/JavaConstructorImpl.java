@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementSourceFac
 import java.util.List;
 
 import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.typeParameters;
-import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.valueParameters;
+import static org.jetbrains.kotlin.load.java.structure.impl.JavaElementCollectionFromPsiArrayUtil.konstueParameters;
 
 public class JavaConstructorImpl extends JavaMemberImpl<PsiMethod> implements JavaConstructor {
     public JavaConstructorImpl(@NotNull JavaElementPsiSource<PsiMethod> psiConstructorSource) {
@@ -48,7 +48,7 @@ public class JavaConstructorImpl extends JavaMemberImpl<PsiMethod> implements Ja
     @NotNull
     @Override
     public List<JavaValueParameter> getValueParameters() {
-        return valueParameters(getPsi().getParameterList().getParameters(), getSourceFactory());
+        return konstueParameters(getPsi().getParameterList().getParameters(), getSourceFactory());
     }
 
     @NotNull

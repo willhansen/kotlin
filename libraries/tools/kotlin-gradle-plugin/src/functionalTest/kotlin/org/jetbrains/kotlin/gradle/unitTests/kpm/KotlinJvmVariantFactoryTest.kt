@@ -18,18 +18,18 @@ import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
 class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
-    private val testAttribute = Attribute.of("this.test", String::class.java)
+    private konst testAttribute = Attribute.of("this.test", String::class.java)
 
     @Test
     fun `test platform type`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         assertEquals(KotlinPlatformType.jvm, variant.platformType)
         assertEquals("jvm", variant.fragmentName)
     }
 
     @Test
     fun `test accessing configurations`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
 
         variant.compileDependenciesConfiguration
         variant.runtimeDependenciesConfiguration
@@ -43,49 +43,49 @@ class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
 
     @Test
     fun `test compilationData`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         assertSame(variant, variant.compilationData.owner)
     }
 
     @Test
     fun `test accessing compileDependencyFiles`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         variant.compileDependencyFiles.files
     }
 
     @Test
     fun `test accessing runtimeDependencyFiles`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         variant.runtimeDependencyFiles.files
     }
 
     @Test
     fun `test accessing runtimeFiles`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         variant.runtimeFiles.files
     }
 
     @Test
     fun `test has source roots`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         assertTrue(variant.kotlinSourceRoots.srcDirs.isNotEmpty())
     }
 
     @Test
     fun `test sourceArchiveTaskName registered`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         assertTrue(project.tasks.getByName(variant.sourceArchiveTaskName) is Zip)
     }
 
     @Test
     fun `test compileTask registered`() {
-        val variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
+        konst variant = GradleKpmJvmVariantFactory(kotlin.main).create("jvm")
         assertTrue(project.tasks.getByName(variant.compilationData.compileKotlinTaskName) is KotlinCompile)
     }
 
     @Test
     fun `test custom configure compileDependenciesConfiguration`() {
-        val variant = GradleKpmJvmVariantFactory(
+        konst variant = GradleKpmJvmVariantFactory(
             kotlin.main, GradleKpmJvmVariantConfig(
                 compileDependencies = DefaultKotlinCompileDependenciesDefinition + GradleKpmConfigurationAttributesSetup {
                     assertSame(fragment.compileDependenciesConfiguration.attributes, attributes)
@@ -101,7 +101,7 @@ class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
 
     @Test
     fun `test custom configure runtimeDependenciesConfiguration`() {
-        val variant = GradleKpmJvmVariantFactory(
+        konst variant = GradleKpmJvmVariantFactory(
             kotlin.main, GradleKpmJvmVariantConfig(
                 runtimeDependencies = DefaultKotlinRuntimeDependenciesDefinition + GradleKpmConfigurationAttributesSetup {
                     assertSame(fragment.runtimeDependenciesConfiguration.attributes, attributes)
@@ -117,7 +117,7 @@ class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
 
     @Test
     fun `test custom configure apiElementsConfiguration`() {
-        val variant = GradleKpmJvmVariantFactory(
+        konst variant = GradleKpmJvmVariantFactory(
             kotlin.main, GradleKpmJvmVariantConfig(
                 apiElements = DefaultKotlinApiElementsDefinition + GradleKpmConfigurationAttributesSetup {
                     assertSame(fragment.apiElementsConfiguration.attributes, attributes)
@@ -133,7 +133,7 @@ class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
 
     @Test
     fun `test custom configure runtimeElementsConfiguration`() {
-        val variant = GradleKpmJvmVariantFactory(
+        konst variant = GradleKpmJvmVariantFactory(
             kotlin.main, GradleKpmJvmVariantConfig(
                 runtimeElements = DefaultKotlinRuntimeElementsDefinition + GradleKpmConfigurationAttributesSetup {
                     assertSame(fragment.runtimeElementsConfiguration.attributes, attributes)
@@ -149,7 +149,7 @@ class KotlinJvmVariantFactoryTest : AbstractKpmExtensionTest() {
 
     @Test
     fun `test custom sourceDirectories configuration`() {
-        val variant = GradleKpmJvmVariantFactory(
+        konst variant = GradleKpmJvmVariantFactory(
             kotlin.main, GradleKpmJvmVariantConfig(
                 sourceDirectoriesConfigurator = object : GradleKpmSourceDirectoriesConfigurator<GradleKpmJvmVariant> {
                     override fun configure(fragment: GradleKpmJvmVariant) {

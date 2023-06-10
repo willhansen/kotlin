@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 
 class DisabledOptimisticNumberCommonizationTest : AbstractInlineSourcesCommonizationTest() {
     fun `test non-platform types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, false)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -33,7 +33,7 @@ class DisabledOptimisticNumberCommonizationTest : AbstractInlineSourcesCommoniza
     }
 
     fun `test platform types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, false)
             registerFakeStdlibIntegersDependency("(a, b)")

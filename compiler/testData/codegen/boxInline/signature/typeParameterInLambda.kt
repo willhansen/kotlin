@@ -25,14 +25,14 @@ import java.util.*
 
 
 fun box(): String {
-    val result = Test().callInline("test")
+    konst result = Test().callInline("test")
 
-    val method = result.javaClass.getMethod("invoke")
-    val genericReturnType = method.genericReturnType
+    konst method = result.javaClass.getMethod("invoke")
+    konst genericReturnType = method.genericReturnType
     if (genericReturnType.toString() != "T") return "fail 1: $genericReturnType"
 
-    val method2 = Test::class.java.getMethod("callInline", Any::class.java)
-    val genericParameterType = method2.genericParameterTypes.firstOrNull()
+    konst method2 = Test::class.java.getMethod("callInline", Any::class.java)
+    konst genericParameterType = method2.genericParameterTypes.firstOrNull()
 
     if (genericParameterType != genericReturnType) return "fail 2: $genericParameterType != $genericReturnType"
 

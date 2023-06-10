@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.defaultsProvider
 import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 
-val TestServices.loadedMetadataSuppressionDirective: SimpleDirective
+konst TestServices.loadedMetadataSuppressionDirective: SimpleDirective
     get() = when (defaultsProvider.defaultFrontend) {
         FrontendKinds.ClassicFrontend -> CodegenTestDirectives.IGNORE_FIR_METADATA_LOADING_K1
         FrontendKinds.FIR -> CodegenTestDirectives.IGNORE_FIR_METADATA_LOADING_K2

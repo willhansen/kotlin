@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-class JvmReflectSymbols(val context: JvmBackendContext) {
-    private val irBuiltIns: IrBuiltIns = context.irBuiltIns
+class JvmReflectSymbols(konst context: JvmBackendContext) {
+    private konst irBuiltIns: IrBuiltIns = context.irBuiltIns
 
-    private val javaLangReflect: FqName = FqName("java.lang.reflect")
+    private konst javaLangReflect: FqName = FqName("java.lang.reflect")
 
-    private val javaLangReflectPackage: IrPackageFragment =
+    private konst javaLangReflectPackage: IrPackageFragment =
         IrExternalPackageFragmentImpl.createEmptyExternalPackageFragment(context.state.module, javaLangReflect)
 
-    val javaLangReflectField: IrClassSymbol =
+    konst javaLangReflectField: IrClassSymbol =
         createJavaLangReflectClass(FqName("java.lang.reflect.Field")) { klass ->
             klass.addFunction("setAccessible", irBuiltIns.unitType).apply {
                 addValueParameter("isAccessible", irBuiltIns.booleanType)
@@ -41,11 +41,11 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
             }
             klass.addFunction("set", irBuiltIns.unitType).apply {
                 addValueParameter("receiver", irBuiltIns.anyNType)
-                addValueParameter("value", irBuiltIns.anyNType)
+                addValueParameter("konstue", irBuiltIns.anyNType)
             }
         }
 
-    val javaLangReflectMethod: IrClassSymbol =
+    konst javaLangReflectMethod: IrClassSymbol =
         createJavaLangReflectClass(FqName("java.lang.reflect.Method")) { klass ->
             klass.addFunction("setAccessible", irBuiltIns.unitType).apply {
                 addValueParameter("isAccessible", irBuiltIns.booleanType)
@@ -60,7 +60,7 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
             }
         }
 
-    val javaLangReflectConstructor: IrClassSymbol =
+    konst javaLangReflectConstructor: IrClassSymbol =
         createJavaLangReflectClass(FqName("java.lang.reflect.Constructor")) { klass ->
             klass.addFunction("setAccessible", irBuiltIns.unitType).apply {
                 addValueParameter("isAccessible", irBuiltIns.booleanType)
@@ -75,7 +75,7 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
         }
 
     init {
-        val klass = context.ir.symbols.javaLangClass.owner
+        konst klass = context.ir.symbols.javaLangClass.owner
         klass.addFunction("getDeclaredMethod", javaLangReflectMethod.defaultType.makeNullable()).apply {
             addValueParameter("methodName", irBuiltIns.stringType.makeNullable())
             addValueParameter {
@@ -96,34 +96,34 @@ class JvmReflectSymbols(val context: JvmBackendContext) {
         }
     }
 
-    val javaLangReflectFieldSetAccessible: IrSimpleFunctionSymbol =
+    konst javaLangReflectFieldSetAccessible: IrSimpleFunctionSymbol =
         javaLangReflectField.functionByName("setAccessible")
 
-    val javaLangReflectMethodSetAccessible: IrSimpleFunctionSymbol =
+    konst javaLangReflectMethodSetAccessible: IrSimpleFunctionSymbol =
         javaLangReflectMethod.functionByName("setAccessible")
 
-    val javaLangReflectConstructorSetAccessible: IrSimpleFunctionSymbol =
+    konst javaLangReflectConstructorSetAccessible: IrSimpleFunctionSymbol =
         javaLangReflectConstructor.functionByName("setAccessible")
 
-    val getDeclaredField: IrSimpleFunctionSymbol =
+    konst getDeclaredField: IrSimpleFunctionSymbol =
         context.ir.symbols.javaLangClass.functionByName("getDeclaredField")
 
-    val getDeclaredMethod: IrSimpleFunctionSymbol =
+    konst getDeclaredMethod: IrSimpleFunctionSymbol =
         context.ir.symbols.javaLangClass.functionByName("getDeclaredMethod")
 
-    val getDeclaredConstructor: IrSimpleFunctionSymbol =
+    konst getDeclaredConstructor: IrSimpleFunctionSymbol =
         context.ir.symbols.javaLangClass.functionByName("getDeclaredConstructor")
 
-    val javaLangReflectFieldGet: IrSimpleFunctionSymbol =
+    konst javaLangReflectFieldGet: IrSimpleFunctionSymbol =
         javaLangReflectField.functionByName("get")
 
-    val javaLangReflectFieldSet: IrSimpleFunctionSymbol =
+    konst javaLangReflectFieldSet: IrSimpleFunctionSymbol =
         javaLangReflectField.functionByName("set")
 
-    val javaLangReflectMethodInvoke: IrSimpleFunctionSymbol =
+    konst javaLangReflectMethodInvoke: IrSimpleFunctionSymbol =
         javaLangReflectMethod.functionByName("invoke")
 
-    val javaLangReflectConstructorNewInstance: IrSimpleFunctionSymbol =
+    konst javaLangReflectConstructorNewInstance: IrSimpleFunctionSymbol =
         javaLangReflectConstructor.functionByName("newInstance")
 
     private fun createJavaLangReflectClass(

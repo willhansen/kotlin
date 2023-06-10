@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.wasm.ir.source.location
 
-class Box(var value: Int)
+class Box(var konstue: Int)

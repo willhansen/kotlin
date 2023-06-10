@@ -7,7 +7,7 @@ package one
         }
     }/* <-- */
 
-    /* anchor --> */val i: Int = 42/* <-- */
+    /* anchor --> */konst i: Int = 42/* <-- */
 
     /* anchor --> */init {
         fun foo() {

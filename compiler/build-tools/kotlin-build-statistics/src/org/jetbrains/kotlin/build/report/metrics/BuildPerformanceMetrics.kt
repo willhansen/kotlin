@@ -10,10 +10,10 @@ import java.util.*
 
 class BuildPerformanceMetrics : Serializable {
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 
-    private val myBuildMetrics = EnumMap<BuildPerformanceMetric, Long>(BuildPerformanceMetric::class.java)
+    private konst myBuildMetrics = EnumMap<BuildPerformanceMetric, Long>(BuildPerformanceMetric::class.java)
 
     fun addAll(other: BuildPerformanceMetrics) {
         for ((bt, timeNs) in other.myBuildMetrics) {
@@ -21,8 +21,8 @@ class BuildPerformanceMetrics : Serializable {
         }
     }
 
-    fun add(metric: BuildPerformanceMetric, value: Long = 1) {
-        myBuildMetrics[metric] = myBuildMetrics.getOrDefault(metric, 0) + value
+    fun add(metric: BuildPerformanceMetric, konstue: Long = 1) {
+        myBuildMetrics[metric] = myBuildMetrics.getOrDefault(metric, 0) + konstue
     }
 
     fun asMap(): Map<BuildPerformanceMetric, Long> = myBuildMetrics

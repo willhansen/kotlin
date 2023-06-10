@@ -1,9 +1,9 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
-public open class Outer private constructor(val s: String) {
+public open class Outer private constructor(konst s: String) {
 
     companion object {
-        fun test () = eval { Outer("OK") }
+        fun test () = ekonst { Outer("OK") }
     }
 }
 

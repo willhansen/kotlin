@@ -8,10 +8,10 @@ package kotlin.jvm
 import kotlin.reflect.KClass
 
 /**
- * Instructs the Kotlin compiler to generate overloads for this function that substitute default parameter values.
+ * Instructs the Kotlin compiler to generate overloads for this function that substitute default parameter konstues.
  *
- * If a method has N parameters and M of which have default values, M overloads are generated: the first one
- * takes N-1 parameters (all but the last one that takes a default value), the second takes N-2 parameters, and so on.
+ * If a method has N parameters and M of which have default konstues, M overloads are generated: the first one
+ * takes N-1 parameters (all but the last one that takes a default konstue), the second takes N-2 parameters, and so on.
  */
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.BINARY)
@@ -40,7 +40,7 @@ public actual annotation class JvmStatic
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
-public actual annotation class JvmName(actual val name: String)
+public actual annotation class JvmName(actual konst name: String)
 
 /**
  * Instructs the Kotlin compiler to generate a multifile class with top-level functions and properties declared in this file as one of its parts.
@@ -61,7 +61,7 @@ public actual annotation class JvmMultifileClass
 @Retention(AnnotationRetention.SOURCE)
 @MustBeDocumented
 @SinceKotlin("1.2")
-internal actual annotation class JvmPackageName(actual val name: String)
+internal actual annotation class JvmPackageName(actual konst name: String)
 
 /**
  * Sets `ACC_SYNTHETIC` flag on the annotated target in the Java bytecode.
@@ -96,7 +96,7 @@ public actual annotation class JvmSynthetic
  */
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.CONSTRUCTOR)
 @Retention(AnnotationRetention.SOURCE)
-public annotation class Throws(vararg val exceptionClasses: KClass<out Throwable>)
+public annotation class Throws(vararg konst exceptionClasses: KClass<out Throwable>)
 
 
 /**
@@ -122,7 +122,7 @@ public actual annotation class JvmField
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY, AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
-public actual annotation class JvmSuppressWildcards(actual val suppress: Boolean = true)
+public actual annotation class JvmSuppressWildcards(actual konst suppress: Boolean = true)
 
 /**
  * Instructs compiler to generate wildcard for annotated type arguments corresponding to parameters with declaration-site variance.
@@ -135,7 +135,7 @@ public actual annotation class JvmSuppressWildcards(actual val suppress: Boolean
 public actual annotation class JvmWildcard
 
 /**
- * Specifies that given value class is inline class.
+ * Specifies that given konstue class is inline class.
  *
  * Adding and removing the annotation is binary incompatible change, since inline classes' methods and functions with inline classes
  * in their signature are mangled.

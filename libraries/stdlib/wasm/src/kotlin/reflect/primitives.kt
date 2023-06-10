@@ -11,29 +11,29 @@ import kotlin.reflect.wasm.internal.*
 
 internal object PrimitiveClasses {
 
-    val nothingClass = NothingKClassImpl
+    konst nothingClass = NothingKClassImpl
 
-    val anyClass = wasmGetKClass<Any>()
-    val numberClass = wasmGetKClass<Number>()
-    val longClass = wasmGetKClass<Long>()
-    val booleanClass = wasmGetKClass<Boolean>()
-    val byteClass = wasmGetKClass<Byte>()
-    val shortClass = wasmGetKClass<Short>()
-    val intClass = wasmGetKClass<Int>()
-    val floatClass = wasmGetKClass<Float>()
-    val doubleClass = wasmGetKClass<Double>()
-    val arrayClass = wasmGetKClass<Array<*>>()
-    val stringClass = wasmGetKClass<String>()
+    konst anyClass = wasmGetKClass<Any>()
+    konst numberClass = wasmGetKClass<Number>()
+    konst longClass = wasmGetKClass<Long>()
+    konst booleanClass = wasmGetKClass<Boolean>()
+    konst byteClass = wasmGetKClass<Byte>()
+    konst shortClass = wasmGetKClass<Short>()
+    konst intClass = wasmGetKClass<Int>()
+    konst floatClass = wasmGetKClass<Float>()
+    konst doubleClass = wasmGetKClass<Double>()
+    konst arrayClass = wasmGetKClass<Array<*>>()
+    konst stringClass = wasmGetKClass<String>()
 
-    val throwableClass = wasmGetKClass<Throwable>()
-    val booleanArrayClass = wasmGetKClass<BooleanArray>()
-    val charArrayClass = wasmGetKClass<CharArray>()
-    val byteArrayClass = wasmGetKClass<ByteArray>()
-    val shortArrayClass = wasmGetKClass<ShortArray>()
-    val intArrayClass = wasmGetKClass<IntArray>()
-    val longArrayClass = wasmGetKClass<LongArray>()
-    val floatArrayClass = wasmGetKClass<FloatArray>()
-    val doubleArrayClass = wasmGetKClass<DoubleArray>()
+    konst throwableClass = wasmGetKClass<Throwable>()
+    konst booleanArrayClass = wasmGetKClass<BooleanArray>()
+    konst charArrayClass = wasmGetKClass<CharArray>()
+    konst byteArrayClass = wasmGetKClass<ByteArray>()
+    konst shortArrayClass = wasmGetKClass<ShortArray>()
+    konst intArrayClass = wasmGetKClass<IntArray>()
+    konst longArrayClass = wasmGetKClass<LongArray>()
+    konst floatArrayClass = wasmGetKClass<FloatArray>()
+    konst doubleArrayClass = wasmGetKClass<DoubleArray>()
 
     fun functionClass(arity: Int): KClass<*> {
         //TODO FunctionN

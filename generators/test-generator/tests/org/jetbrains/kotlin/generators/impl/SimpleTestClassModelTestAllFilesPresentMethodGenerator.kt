@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 object SimpleTestClassModelTestAllFilesPresentMethodGenerator : MethodGenerator<SimpleTestClassModel.TestAllFilesPresentMethodModel>() {
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = SimpleTestClassModel.TestAllFilesPresentMethodKind
 
     override fun generateSignature(method: SimpleTestClassModel.TestAllFilesPresentMethodModel, p: Printer) {
@@ -24,16 +24,16 @@ object SimpleTestClassModelTestAllFilesPresentMethodGenerator : MethodGenerator<
 
     override fun generateBody(method: SimpleTestClassModel.TestAllFilesPresentMethodModel, p: Printer) {
         with(method) {
-            val exclude = StringBuilder()
+            konst exclude = StringBuilder()
             for (dir in classModel.excludeDirs + classModel.excludeDirsRecursively) {
                 exclude.append(", \"")
                 exclude.append(StringUtil.escapeStringCharacters(dir))
                 exclude.append("\"")
             }
-            val excludedArgument = runIf(classModel.excludePattern != null) {
+            konst excludedArgument = runIf(classModel.excludePattern != null) {
                 String.format("Pattern.compile(\"%s\")", StringUtil.escapeStringCharacters(classModel.excludePattern!!.pattern()))
             }
-            val assertTestsPresentStr = if (classModel.targetBackend === TargetBackend.ANY) {
+            konst assertTestsPresentStr = if (classModel.targetBackend === TargetBackend.ANY) {
                 String.format(
                     "KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File(\"%s\"), Pattern.compile(\"%s\"), %s, %s%s);",
                     KtTestUtil.getFilePath(classModel.rootFile),

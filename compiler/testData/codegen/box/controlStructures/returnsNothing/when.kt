@@ -3,7 +3,7 @@ fun exit(): Nothing = null!!
 var x = 0
 
 fun box(): String {
-    val a: String
+    konst a: String
     when (x) {
         0 -> a = "OK"
         1 -> a = "???"

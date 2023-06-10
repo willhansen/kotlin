@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.gradle.plugin
 import org.gradle.api.Project
 
 interface HasProject {
-    val project: Project
+    konst project: Project
 }

@@ -1,7 +1,7 @@
 // -- Module: <m1-common> --
 package
 
-private expect val bar: kotlin.String
+private expect konst bar: kotlin.String
 private expect fun foo(): kotlin.Unit
 private expect fun kotlin.Int.memExt(): kotlin.Any
 
@@ -14,7 +14,7 @@ private final expect class Foo {
 // -- Module: <m2-jvm> --
 package
 
-private actual val bar: kotlin.String = ""
+private actual konst bar: kotlin.String = ""
 private actual fun foo(): kotlin.Unit
 private actual fun kotlin.Int.memExt(): kotlin.Any
 

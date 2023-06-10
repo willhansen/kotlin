@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 
 class A {
     fun foo() = "foo"
-    val bar = "bar"
+    konst bar = "bar"
 }
 
 fun checkEqual(x: Any, y: Any) {

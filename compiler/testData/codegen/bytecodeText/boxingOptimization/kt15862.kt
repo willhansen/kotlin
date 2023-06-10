@@ -1,12 +1,12 @@
 // FILE: test.kt
 
 // @TestKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)
 
-val mask = 127
-val entries = IntArray(128)
-val flags = BooleanArray(128)
+konst mask = 127
+konst entries = IntArray(128)
+konst flags = BooleanArray(128)
 
 fun distance(index: Int, hash: Int): Int = (128 + index - (hash and mask)) and mask
 
@@ -37,13 +37,13 @@ inline fun <T> insertWithBoxing(entry: T,
             return true
         }
 
-        val existingEntry = fetch(index)
+        konst existingEntry = fetch(index)
         if (equals(existingEntry, currentEntry)) {
             return false
         }
 
-        val existingHash = hash(existingEntry)
-        val existingDistance = distance(index, existingHash)
+        konst existingHash = hash(existingEntry)
+        konst existingDistance = distance(index, existingHash)
         if (existingDistance < dist) {
             store(index, currentEntry)
             currentEntry = existingEntry

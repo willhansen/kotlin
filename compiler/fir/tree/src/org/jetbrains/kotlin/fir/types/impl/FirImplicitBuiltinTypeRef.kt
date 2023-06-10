@@ -15,20 +15,20 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.StandardClassIds
 
 sealed class FirImplicitBuiltinTypeRef(
-    override val source: KtSourceElement?,
-    val id: ClassId,
+    override konst source: KtSourceElement?,
+    konst id: ClassId,
     typeArguments: Array<out ConeTypeProjection> = emptyArray(),
     isNullable: Boolean = false
 ) : FirResolvedTypeRef() {
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = emptyList()
 
-    override val type: ConeClassLikeType = ConeClassLikeTypeImpl(id.toLookupTag(), typeArguments, isNullable)
+    override konst type: ConeClassLikeType = ConeClassLikeTypeImpl(id.toLookupTag(), typeArguments, isNullable)
 
-    override val delegatedTypeRef: FirTypeRef?
+    override konst delegatedTypeRef: FirTypeRef?
         get() = null
 
-    override val isFromStubType: Boolean
+    override konst isFromStubType: Boolean
         get() = false
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
@@ -182,7 +182,7 @@ class FirImplicitKMutableProperty2TypeRef(
 )
 
 fun FirImplicitBuiltinTypeRef.withNewSource(newSource: KtSourceElement?): FirImplicitBuiltinTypeRef {
-    val source = source ?: return this
+    konst source = source ?: return this
     if (source.kind == newSource?.kind) return this
     return when (this) {
         is FirImplicitUnitTypeRef -> FirImplicitUnitTypeRef(newSource)

@@ -3,7 +3,7 @@ FILE: contextReceivers.kt
     public? final? fun foo(): R|kotlin/Unit| {
     }
     context(A, b@B)
-    public? final? val x: Int
+    public? final? konst x: Int
         public? get(): Int {
             ^ IntegerLiteral(1)
         }

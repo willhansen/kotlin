@@ -6,34 +6,34 @@ enum class Weapon {
     SCISSORS
 }
 
-val byteConst: Byte = 10
-val shortConst: Short = 20
-val intConst: Int = 30
-val longConst: Long = 40
-val charConst: Char = 'A'
-val stringConst: String = "abcd"
-val booleanConst: Boolean = true
-val floatConst: Float = 2.0f
-val doubleConst: Double = 3.0
-val enumConst: Weapon? = Weapon.ROCK
-val arrayConst: Any = byteArrayOf(1,2)
+konst byteConst: Byte = 10
+konst shortConst: Short = 20
+konst intConst: Int = 30
+konst longConst: Long = 40
+konst charConst: Char = 'A'
+konst stringConst: String = "abcd"
+konst booleanConst: Boolean = true
+konst floatConst: Float = 2.0f
+konst doubleConst: Double = 3.0
+konst enumConst: Weapon? = Weapon.ROCK
+konst arrayConst: Any = byteArrayOf(1,2)
 
-val a = 10
-val b = a + 20
+konst a = 10
+konst b = a + 20
 
 class Class {
-    val byteConst: Byte = 10
-    val shortConst: Short = 20
-    val intConst: Int = 30
-    val longConst: Long = 40
-    val charConst: Char = 'A'
-    val stringConst: String = "abcd"
-    val booleanConst: Boolean = true
-    val floatConst: Float = 2.0f
-    val doubleConst: Double = 3.0
-    val enumConst: Weapon? = Weapon.ROCK
-    val arrayConst: Any = byteArrayOf(1,2)
-    val a = 10
-    val b = a + 20
+    konst byteConst: Byte = 10
+    konst shortConst: Short = 20
+    konst intConst: Int = 30
+    konst longConst: Long = 40
+    konst charConst: Char = 'A'
+    konst stringConst: String = "abcd"
+    konst booleanConst: Boolean = true
+    konst floatConst: Float = 2.0f
+    konst doubleConst: Double = 3.0
+    konst enumConst: Weapon? = Weapon.ROCK
+    konst arrayConst: Any = byteArrayOf(1,2)
+    konst a = 10
+    konst b = a + 20
 }
 

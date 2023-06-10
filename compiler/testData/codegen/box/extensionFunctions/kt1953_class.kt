@@ -1,6 +1,6 @@
 // KJS_WITH_FULL_RUNTIME
 class A {
-    private val sb: StringBuilder = StringBuilder()
+    private konst sb: StringBuilder = StringBuilder()
 
     operator fun String.unaryPlus() {
         sb.append(this)

@@ -46,19 +46,19 @@ import kotlin.contracts.contract
 import kotlin.properties.Delegates
 
 class FirJavaMethod @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin.Java,
+    override konst source: KtSourceElement?,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin.Java,
     resolvePhase: FirResolvePhase,
-    override val attributes: FirDeclarationAttributes,
+    override konst attributes: FirDeclarationAttributes,
     override var returnTypeRef: FirTypeRef,
-    override val typeParameters: MutableList<FirTypeParameter>,
-    override val valueParameters: MutableList<FirValueParameter>,
-    override val name: Name,
+    override konst typeParameters: MutableList<FirTypeParameter>,
+    override konst konstueParameters: MutableList<FirValueParameter>,
+    override konst name: Name,
     override var status: FirDeclarationStatus,
-    override val symbol: FirNamedFunctionSymbol,
+    override konst symbol: FirNamedFunctionSymbol,
     annotationBuilder: () -> List<FirAnnotation>,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
 ) : FirSimpleFunction() {
     init {
         symbol.bind(this)
@@ -67,23 +67,23 @@ class FirJavaMethod @FirImplementationDetail constructor(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val receiverParameter: FirReceiverParameter?
+    override konst receiverParameter: FirReceiverParameter?
         get() = null
 
-    override val body: FirBlock?
+    override konst body: FirBlock?
         get() = null
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = null
 
-    override val contractDescription: FirContractDescription
+    override konst contractDescription: FirContractDescription
         get() = FirEmptyContractDescription
 
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
 
-    override val annotations: List<FirAnnotation> by lazy { annotationBuilder() }
+    override konst annotations: List<FirAnnotation> by lazy { annotationBuilder() }
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     //not used actually, because get 'enhanced' into regular FirSimpleFunction
@@ -93,7 +93,7 @@ class FirJavaMethod @FirImplementationDetail constructor(
         returnTypeRef.accept(visitor, data)
         receiverParameter?.accept(visitor, data)
         controlFlowGraphReference?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         body?.accept(visitor, data)
         status.accept(visitor, data)
         contractDescription.accept(visitor, data)
@@ -124,7 +124,7 @@ class FirJavaMethod @FirImplementationDetail constructor(
     }
 
     override fun <D> transformValueParameters(transformer: FirTransformer<D>, data: D): FirSimpleFunction {
-        valueParameters.transformInplace(transformer, data)
+        konstueParameters.transformInplace(transformer, data)
         return this
     }
 
@@ -169,8 +169,8 @@ class FirJavaMethod @FirImplementationDetail constructor(
     }
 
     override fun replaceValueParameters(newValueParameters: List<FirValueParameter>) {
-        valueParameters.clear()
-        valueParameters.addAll(newValueParameters)
+        konstueParameters.clear()
+        konstueParameters.addAll(newValueParameters)
     }
 
     override fun replaceBody(newBody: FirBlock?) {
@@ -188,7 +188,7 @@ class FirJavaMethod @FirImplementationDetail constructor(
     }
 }
 
-val ALL_JAVA_OPERATION_NAMES =
+konst ALL_JAVA_OPERATION_NAMES =
     UNARY_OPERATION_NAMES + BINARY_OPERATION_NAMES + ASSIGNMENT_OPERATIONS + DELEGATED_PROPERTY_OPERATORS +
             EQUALS + COMPARE_TO + CONTAINS + INVOKE + ITERATOR + GET + SET + NEXT + HAS_NEXT
 
@@ -198,14 +198,14 @@ class FirJavaMethodBuilder : FirFunctionBuilder, FirTypeParametersOwnerBuilder, 
     override lateinit var moduleData: FirModuleData
     override var attributes: FirDeclarationAttributes = FirDeclarationAttributes()
     override lateinit var returnTypeRef: FirTypeRef
-    override val valueParameters: MutableList<FirValueParameter> = mutableListOf()
+    override konst konstueParameters: MutableList<FirValueParameter> = mutableListOf()
     override var body: FirBlock? = null
     override lateinit var status: FirDeclarationStatus
     override var dispatchReceiverType: ConeSimpleKotlinType? = null
     lateinit var name: Name
     lateinit var symbol: FirNamedFunctionSymbol
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    override val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
     var isStatic: Boolean by Delegates.notNull()
     override var resolvePhase: FirResolvePhase = FirResolvePhase.ANALYZED_DEPENDENCIES
     var isFromSource: Boolean by Delegates.notNull()
@@ -233,7 +233,7 @@ class FirJavaMethodBuilder : FirFunctionBuilder, FirTypeParametersOwnerBuilder, 
         }
 
     @Deprecated("Modification of 'contextReceivers' has no impact for FirJavaFunctionBuilder", level = DeprecationLevel.HIDDEN)
-    override val contextReceivers: MutableList<FirContextReceiver>
+    override konst contextReceivers: MutableList<FirContextReceiver>
         get() = throw IllegalStateException()
 
     @OptIn(FirImplementationDetail::class)
@@ -246,7 +246,7 @@ class FirJavaMethodBuilder : FirFunctionBuilder, FirTypeParametersOwnerBuilder, 
             attributes,
             returnTypeRef,
             typeParameters,
-            valueParameters,
+            konstueParameters,
             name,
             status,
             symbol,
@@ -265,13 +265,13 @@ inline fun buildJavaMethodCopy(original: FirSimpleFunction, init: FirJavaMethodB
     contract {
         callsInPlace(init, InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirJavaMethodBuilder()
+    konst copyBuilder = FirJavaMethodBuilder()
     copyBuilder.source = original.source
     copyBuilder.moduleData = original.moduleData
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.attributes = original.attributes.copy()
     copyBuilder.returnTypeRef = original.returnTypeRef
-    copyBuilder.valueParameters.addAll(original.valueParameters)
+    copyBuilder.konstueParameters.addAll(original.konstueParameters)
     copyBuilder.body = original.body
     copyBuilder.status = original.status
     copyBuilder.dispatchReceiverType = original.dispatchReceiverType
@@ -280,7 +280,7 @@ inline fun buildJavaMethodCopy(original: FirSimpleFunction, init: FirJavaMethodB
     copyBuilder.isFromSource = original.origin.fromSource
     copyBuilder.annotations.addAll(original.annotations)
     copyBuilder.typeParameters.addAll(original.typeParameters)
-    val annotations = original.annotations
+    konst annotations = original.annotations
     copyBuilder.annotationBuilder = { annotations }
     return copyBuilder
         .apply(init)

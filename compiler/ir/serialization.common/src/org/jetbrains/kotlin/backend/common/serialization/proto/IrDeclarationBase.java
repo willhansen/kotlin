@@ -30,7 +30,7 @@ public final class IrDeclarationBase extends
   private IrDeclarationBase(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -83,10 +83,10 @@ public final class IrDeclarationBase extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
@@ -107,7 +107,7 @@ public final class IrDeclarationBase extends
     public IrDeclarationBase parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDeclarationBase(input, extensionRegistry);
     }
   };
@@ -309,23 +309,23 @@ public final class IrDeclarationBase extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parseFrom(java.io.InputStream input)
@@ -505,7 +505,7 @@ public final class IrDeclarationBase extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -533,9 +533,9 @@ public final class IrDeclarationBase extends
     /**
      * <code>required int64 symbol = 1;</code>
      */
-    public Builder setSymbol(long value) {
+    public Builder setSymbol(long konstue) {
       bitField0_ |= 0x00000001;
-      symbol_ = value;
+      symbol_ = konstue;
       
       return this;
     }
@@ -565,9 +565,9 @@ public final class IrDeclarationBase extends
     /**
      * <code>required int32 origin_name = 2;</code>
      */
-    public Builder setOriginName(int value) {
+    public Builder setOriginName(int konstue) {
       bitField0_ |= 0x00000002;
-      originName_ = value;
+      originName_ = konstue;
       
       return this;
     }
@@ -597,9 +597,9 @@ public final class IrDeclarationBase extends
     /**
      * <code>required int64 coordinates = 3;</code>
      */
-    public Builder setCoordinates(long value) {
+    public Builder setCoordinates(long konstue) {
       bitField0_ |= 0x00000004;
-      coordinates_ = value;
+      coordinates_ = konstue;
       
       return this;
     }
@@ -629,9 +629,9 @@ public final class IrDeclarationBase extends
     /**
      * <code>optional int64 flags = 4 [default = 0];</code>
      */
-    public Builder setFlags(long value) {
+    public Builder setFlags(long konstue) {
       bitField0_ |= 0x00000008;
-      flags_ = value;
+      flags_ = konstue;
       
       return this;
     }
@@ -676,12 +676,12 @@ public final class IrDeclarationBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 5;</code>
      */
     public Builder setAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.set(index, value);
+      annotation_.set(index, konstue);
 
       return this;
     }
@@ -698,12 +698,12 @@ public final class IrDeclarationBase extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 5;</code>
      */
-    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(value);
+      annotation_.add(konstue);
 
       return this;
     }
@@ -711,12 +711,12 @@ public final class IrDeclarationBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 5;</code>
      */
     public Builder addAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(index, value);
+      annotation_.add(index, konstue);
 
       return this;
     }
@@ -744,10 +744,10 @@ public final class IrDeclarationBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 5;</code>
      */
     public Builder addAllAnnotation(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> konstues) {
       ensureAnnotationIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, annotation_);
+          konstues, annotation_);
 
       return this;
     }

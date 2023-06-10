@@ -28,7 +28,7 @@ class Intermediate extends a.Base {
 package b
 
 private class Final : Intermediate() {
-    private val foo = "FAIL"
+    private konst foo = "FAIL"
 }
 
 fun box(): String =

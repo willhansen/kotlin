@@ -182,7 +182,7 @@ public class Profiler {
 
     public Profiler println(Object message) {
         if (!mute && log.isDebugEnabled()) {
-            log.debug(String.valueOf(message));
+            log.debug(String.konstueOf(message));
         }
         return this;
     }
@@ -191,7 +191,7 @@ public class Profiler {
         if (!mute && log.isDebugEnabled()) {
             OUT_LOCK.lock();
             try {
-                log.debug(String.valueOf(a) + b);
+                log.debug(String.konstueOf(a) + b);
             }
             finally {
                 OUT_LOCK.unlock();
@@ -204,7 +204,7 @@ public class Profiler {
         if (!mute && log.isDebugEnabled()) {
             OUT_LOCK.lock();
             try {
-                log.debug(String.valueOf(a) + b + c);
+                log.debug(String.konstueOf(a) + b + c);
             }
             finally {
                 OUT_LOCK.unlock();

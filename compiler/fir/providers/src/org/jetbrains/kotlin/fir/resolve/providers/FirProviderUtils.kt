@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.ClassId
 fun FirProvider.getContainingFile(symbol: FirBasedSymbol<*>): FirFile? = when (symbol) {
     is FirSyntheticFunctionSymbol -> {
         // SAM case
-        val classId = ClassId(symbol.callableId.packageName, symbol.callableId.callableName)
+        konst classId = ClassId(symbol.callableId.packageName, symbol.callableId.callableName)
         getFirClassifierContainerFile(classId)
     }
     is FirClassLikeSymbol<*> -> getFirClassifierContainerFileIfAny(symbol)

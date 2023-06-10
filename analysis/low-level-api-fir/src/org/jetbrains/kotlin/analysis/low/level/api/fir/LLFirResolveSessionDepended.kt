@@ -32,15 +32,15 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class LLFirResolveSessionDepended(
-    val originalFirResolveSession: LLFirResolvableResolveSession,
-    val towerProviderBuiltUponElement: FirTowerContextProvider,
-    private val ktToFirMapping: KtToFirMapping?,
+    konst originalFirResolveSession: LLFirResolvableResolveSession,
+    konst towerProviderBuiltUponElement: FirTowerContextProvider,
+    private konst ktToFirMapping: KtToFirMapping?,
 ) : LLFirResolveSession() {
-    override val project: Project get() = originalFirResolveSession.project
-    override val useSiteKtModule: KtModule get() = originalFirResolveSession.useSiteKtModule
-    override val useSiteFirSession get() = originalFirResolveSession.useSiteFirSession
+    override konst project: Project get() = originalFirResolveSession.project
+    override konst useSiteKtModule: KtModule get() = originalFirResolveSession.useSiteKtModule
+    override konst useSiteFirSession get() = originalFirResolveSession.useSiteFirSession
 
-    private val scopeSessionProviderCache = SoftCachedMap.create<FirSession, LLFirScopeSessionProvider>(
+    private konst scopeSessionProviderCache = SoftCachedMap.create<FirSession, LLFirScopeSessionProvider>(
         project,
         SoftCachedMap.Kind.SOFT_KEYS_SOFT_VALUES,
         listOf(
@@ -51,7 +51,7 @@ internal class LLFirResolveSessionDepended(
 
     override fun getScopeSessionFor(firSession: FirSession): ScopeSession {
         return scopeSessionProviderCache
-            .getOrPut(firSession) { LLFirScopeSessionProvider.create(project, invalidationTrackers = emptyList()) }
+            .getOrPut(firSession) { LLFirScopeSessionProvider.create(project, inkonstidationTrackers = emptyList()) }
             .getScopeSession()
     }
 
@@ -59,7 +59,7 @@ internal class LLFirResolveSessionDepended(
         originalFirResolveSession.getSessionFor(module)
 
     override fun getOrBuildFirFor(element: KtElement): FirElement? {
-        val psi = FirElementBuilder.getPsiAsFirElementSource(element) ?: return null
+        konst psi = FirElementBuilder.getPsiAsFirElementSource(element) ?: return null
         ktToFirMapping?.getFirOfClosestParent(psi)?.let { return it }
         return originalFirResolveSession.getOrBuildFirFor(element = element)
     }

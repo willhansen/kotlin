@@ -2,7 +2,7 @@ package test;
 
 public interface StringInParam {
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     @Anno("hello")

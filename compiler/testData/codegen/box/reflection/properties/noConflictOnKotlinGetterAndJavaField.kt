@@ -16,18 +16,18 @@ class K : J() {
 }
 
 fun box(): String {
-    val j = J()
-    val x = J::foo
+    konst j = J()
+    konst x = J::foo
     x.set(j, "J")
     assertEquals("J", x.get(j))
 
-    val k = K()
-    val y = K::foo
+    konst k = K()
+    konst y = K::foo
     y.set(k, "K")
     assertEquals("K", y.get(k))
     assertEquals("K", x.get(k))
 
-    val z = K::getFoo
+    konst z = K::getFoo
     assertEquals("K", z.invoke(k))
 
     return "OK"

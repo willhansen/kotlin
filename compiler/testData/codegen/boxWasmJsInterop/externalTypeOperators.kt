@@ -17,11 +17,11 @@ function testPrimitive(obj, n) {
 }
 
 function getNewObject() {
-    return { value: 123 };
+    return { konstue: 123 };
 }
 
 function testObject(obj) {
-    return obj.value === 123;
+    return obj.konstue === 123;
 }
 
 function getNewArray() {
@@ -127,16 +127,16 @@ fun test(
     checkObj(obj as Any?)
     checkObj(obj as? Any?)
     testWithTypeParameters<Any, Any?, Obj>(obj, checkObj)
-    val subObj: SubObj = obj as SubObj
+    konst subObj: SubObj = obj as SubObj
     checkObj(subObj)
     checkObj(subObj as Obj)
-    val roundTrippedObj = roundTrip(obj)
+    konst roundTrippedObj = roundTrip(obj)
     checkObj(roundTrippedObj)
     assertTrue(obj == roundTrippedObj)
     if (stableIdentity)
         assertTrue(obj === roundTrippedObj)
 
-    val castedObj = multiCast(roundTrippedObj)
+    konst castedObj = multiCast(roundTrippedObj)
     checkObj(castedObj)
 
     assertTrue(obj is Any)
@@ -147,7 +147,7 @@ fun test(
     assertFalse(obj as Any is CustomClass)
     assertFalse(obj as Any is CustomInterface)
 
-    val objects = listOf<Obj>(obj, roundTrippedObj, castedObj)
+    konst objects = listOf<Obj>(obj, roundTrippedObj, castedObj)
     for (obj1 in objects) {
         checkObj(obj1)
         assertTrue(obj1.hashCode() == obj.hashCode())
@@ -180,8 +180,8 @@ fun testPrimitive(n: Int) {
     )
 }
 
-class C(val x: Int)
-value class IC(val x: Int)
+class C(konst x: Int)
+konstue class IC(konst x: Int)
 
 fun box(): String {
     for (i in 0..2) { // TODO: Symbols and BigInts are not supprted in Wasm
@@ -211,15 +211,15 @@ fun box(): String {
     )
 
 
-    val kotlinValues = listOf(10, "10", true,  arrayOf(10), intArrayOf(20), C(10), IC(10))
-    val otherValues  = listOf(11, "11", false, arrayOf(12), intArrayOf(22), C(11), IC(11))
+    konst kotlinValues = listOf(10, "10", true,  arrayOf(10), intArrayOf(20), C(10), IC(10))
+    konst otherValues  = listOf(11, "11", false, arrayOf(12), intArrayOf(22), C(11), IC(11))
 
-    for ((value, otherValue) in kotlinValues.zip(otherValues)) {
+    for ((konstue, otherValue) in kotlinValues.zip(otherValues)) {
         test(
-            value as Obj,
+            konstue as Obj,
             otherValues as Obj,
             { obj ->
-                if (obj !== value) {
+                if (obj !== konstue) {
                     error("Fail custom class")
                 }
             },

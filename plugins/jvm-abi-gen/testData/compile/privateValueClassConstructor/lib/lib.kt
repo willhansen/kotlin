@@ -1,7 +1,7 @@
 package lib
 
 @JvmInline
-value class A private constructor(val value: String) {
+konstue class A private constructor(konst konstue: String) {
     companion object { fun a() = A("OK") }
-    inline fun b() = value
+    inline fun b() = konstue
 }

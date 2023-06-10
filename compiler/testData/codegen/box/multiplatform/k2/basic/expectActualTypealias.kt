@@ -6,7 +6,7 @@
 // FILE: common.kt
 
 expect class S {
-    val length: Int
+    konst length: Int
 }
 
 expect fun foo(): S

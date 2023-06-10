@@ -1,14 +1,14 @@
 public final annotation class Anno : R|kotlin/Annotation| {
-    public final val d2arKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/DoubleArray>>|
+    public final konst d2arKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/DoubleArray>>|
         public get(): R|kotlin/reflect/KClass<kotlin/Array<kotlin/DoubleArray>>|
 
-    public final val klass: R|kotlin/reflect/KClass<*>|
+    public final konst klass: R|kotlin/reflect/KClass<*>|
         public get(): R|kotlin/reflect/KClass<*>|
 
-    public final val klasses: R|kotlin/Array<kotlin/reflect/KClass<*>>|
+    public final konst klasses: R|kotlin/Array<kotlin/reflect/KClass<*>>|
         public get(): R|kotlin/Array<kotlin/reflect/KClass<*>>|
 
-    public final val sarKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/String>>|
+    public final konst sarKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/String>>|
         public get(): R|kotlin/reflect/KClass<kotlin/Array<kotlin/String>>|
 
     public constructor(klass: R|kotlin/reflect/KClass<*>|, klasses: R|kotlin/Array<kotlin/reflect/KClass<*>>|, sarKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/String>>|, d2arKlass: R|kotlin/reflect/KClass<kotlin/Array<kotlin/DoubleArray>>|): R|test/Anno|

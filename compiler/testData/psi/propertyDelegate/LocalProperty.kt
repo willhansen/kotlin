@@ -1,5 +1,5 @@
 class B {
   fun foo() {
-    val p: Int by A()
+    konst p: Int by A()
   }
 }

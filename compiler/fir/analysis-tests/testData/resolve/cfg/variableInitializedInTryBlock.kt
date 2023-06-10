@@ -2,9 +2,9 @@
 // ISSUE: KT-48376
 
 fun test() {
-    val b: Boolean
+    konst b: Boolean
     try {
-        val s = getStringOrNull() ?: return
+        konst s = getStringOrNull() ?: return
         b = s.length != 0
     } finally {
         test()

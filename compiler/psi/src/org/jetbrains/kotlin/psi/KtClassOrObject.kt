@@ -46,21 +46,21 @@ abstract class KtClassOrObject :
 
     fun addSuperTypeListEntry(superTypeListEntry: KtSuperTypeListEntry): KtSuperTypeListEntry {
         getSuperTypeList()?.let {
-            val single = it.entries.singleOrNull()
+            konst single = it.entries.singleOrNull()
             if (single != null && single.typeReference?.typeElement == null) {
                 return single.replace(superTypeListEntry) as KtSuperTypeListEntry
             }
             return EditCommaSeparatedListHelper.addItem(it, superTypeListEntries, superTypeListEntry)
         }
 
-        val psiFactory = KtPsiFactory(project)
-        val specifierListToAdd = psiFactory.createSuperTypeCallEntry("A()").replace(superTypeListEntry).parent
-        val colon = addBefore(psiFactory.createColon(), getBody())
+        konst psiFactory = KtPsiFactory(project)
+        konst specifierListToAdd = psiFactory.createSuperTypeCallEntry("A()").replace(superTypeListEntry).parent
+        konst colon = addBefore(psiFactory.createColon(), getBody())
         return (addAfter(specifierListToAdd, colon) as KtSuperTypeList).entries.first()
     }
 
     fun removeSuperTypeListEntry(superTypeListEntry: KtSuperTypeListEntry) {
-        val specifierList = getSuperTypeList() ?: return
+        konst specifierList = getSuperTypeList() ?: return
         assert(superTypeListEntry.parent === specifierList)
 
         if (specifierList.entries.size > 1) {
@@ -75,8 +75,8 @@ abstract class KtClassOrObject :
     override fun getBody(): KtClassBody? = getStubOrPsiChild(KtStubElementTypes.CLASS_BODY)
 
     inline fun <reified T : KtDeclaration> addDeclaration(declaration: T): T {
-        val body = getOrCreateBody()
-        val anchor = PsiTreeUtil.skipSiblingsBackward(body.rBrace ?: body.lastChild!!, PsiWhiteSpace::class.java)
+        konst body = getOrCreateBody()
+        konst anchor = PsiTreeUtil.skipSiblingsBackward(body.rBrace ?: body.lastChild!!, PsiWhiteSpace::class.java)
         return if (anchor?.nextSibling is PsiErrorElement) {
             body.addBefore(declaration, anchor)
         } else {
@@ -85,12 +85,12 @@ abstract class KtClassOrObject :
     }
 
     inline fun <reified T : KtDeclaration> addDeclarationAfter(declaration: T, anchor: PsiElement?): T {
-        val anchorBefore = anchor ?: declarations.lastOrNull() ?: return addDeclaration(declaration)
+        konst anchorBefore = anchor ?: declarations.lastOrNull() ?: return addDeclaration(declaration)
         return getOrCreateBody().addAfter(declaration, anchorBefore) as T
     }
 
     inline fun <reified T : KtDeclaration> addDeclarationBefore(declaration: T, anchor: PsiElement?): T {
-        val anchorAfter = anchor ?: declarations.firstOrNull() ?: return addDeclaration(declaration)
+        konst anchorAfter = anchor ?: declarations.firstOrNull() ?: return addDeclaration(declaration)
         return getOrCreateBody().addBefore(declaration, anchorAfter) as T
     }
 
@@ -113,7 +113,7 @@ abstract class KtClassOrObject :
 
     override fun getPrimaryConstructorModifierList(): KtModifierList? = primaryConstructor?.modifierList
 
-    fun getPrimaryConstructorParameterList(): KtParameterList? = primaryConstructor?.valueParameterList
+    fun getPrimaryConstructorParameterList(): KtParameterList? = primaryConstructor?.konstueParameterList
 
     override fun getPrimaryConstructorParameters(): List<KtParameter> = getPrimaryConstructorParameterList()?.parameters.orEmpty()
 
@@ -129,14 +129,14 @@ abstract class KtClassOrObject :
 
     fun getDeclarationKeyword(): PsiElement? = findChildByType(classInterfaceObjectTokenSet)
 
-    private val classInterfaceObjectTokenSet = TokenSet.create(
+    private konst classInterfaceObjectTokenSet = TokenSet.create(
         KtTokens.CLASS_KEYWORD, KtTokens.INTERFACE_KEYWORD, KtTokens.OBJECT_KEYWORD
     )
 
     override fun delete() {
         CheckUtil.checkWritable(this)
 
-        val file = containingKtFile
+        konst file = containingKtFile
         if (!isTopLevel() || file.declarations.size > 1) {
             super.delete()
         } else {
@@ -144,7 +144,7 @@ abstract class KtClassOrObject :
         }
     }
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
         if (this === another) {
             return true
         }
@@ -153,16 +153,16 @@ abstract class KtClassOrObject :
             return false
         }
 
-        val fq1 = getQualifiedName() ?: return false
-        val fq2 = another.getQualifiedName() ?: return false
+        konst fq1 = getQualifiedName() ?: return false
+        konst fq2 = another.getQualifiedName() ?: return false
         if (fq1 == fq2) {
-            val thisLocal = isLocal
+            konst thisLocal = isLocal
             if (thisLocal != another.isLocal) {
                 return false
             }
 
             // For non-local classes same fqn is enough
-            // Consider different instances of local classes non-equivalent
+            // Consider different instances of local classes non-equikonstent
             return !thisLocal
         }
 
@@ -170,21 +170,21 @@ abstract class KtClassOrObject :
     }
 
     protected fun getQualifiedName(): String? {
-        val stub = stub
+        konst stub = stub
         if (stub != null) {
-            val fqName = stub.getFqName()
+            konst fqName = stub.getFqName()
             return fqName?.asString()
         }
 
-        val parts = mutableListOf<String>()
+        konst parts = mutableListOf<String>()
         var current: KtClassOrObject? = this
         while (current != null) {
-            val name = current.name ?: return null
+            konst name = current.name ?: return null
             parts.add(name)
             current = PsiTreeUtil.getParentOfType(current, KtClassOrObject::class.java)
         }
-        val file = containingFile as? KtFile ?: return null
-        val fileQualifiedName = file.packageFqName.asString()
+        konst file = containingFile as? KtFile ?: return null
+        konst fileQualifiedName = file.packageFqName.asString()
         if (!fileQualifiedName.isEmpty()) {
             parts.add(fileQualifiedName)
         }
@@ -202,10 +202,10 @@ abstract class KtClassOrObject :
 fun KtClassOrObject.getOrCreateBody(): KtClassBody {
     getBody()?.let { return it }
 
-    val newBody = KtPsiFactory(project).createEmptyClassBody()
+    konst newBody = KtPsiFactory(project).createEmptyClassBody()
     if (this is KtEnumEntry) return addAfter(newBody, initializerList ?: nameIdentifier) as KtClassBody
     return add(newBody) as KtClassBody
 }
 
-val KtClassOrObject.allConstructors
+konst KtClassOrObject.allConstructors
     get() = listOfNotNull(primaryConstructor) + secondaryConstructors

@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 abstract class FirInlineCheckerPlatformSpecificComponent : FirSessionComponent {
     open fun isGenerallyOk(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter): Boolean = true
 
-    open val inlineVisitor get() = FirInlineDeclarationChecker::BasicInlineVisitor
+    open konst inlineVisitor get() = FirInlineDeclarationChecker::BasicInlineVisitor
 
     open fun checkSuspendFunctionalParameterWithDefaultValue(
         param: FirValueParameter,
@@ -37,4 +37,4 @@ abstract class FirInlineCheckerPlatformSpecificComponent : FirSessionComponent {
     }
 }
 
-val FirSession.inlineCheckerExtension by FirSession.nullableSessionComponentAccessor<FirInlineCheckerPlatformSpecificComponent>()
+konst FirSession.inlineCheckerExtension by FirSession.nullableSessionComponentAccessor<FirInlineCheckerPlatformSpecificComponent>()

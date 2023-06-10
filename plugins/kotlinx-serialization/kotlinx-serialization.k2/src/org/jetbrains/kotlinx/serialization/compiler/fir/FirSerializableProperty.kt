@@ -17,26 +17,26 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.ISerializablePropert
 
 class FirSerializableProperty(
     session: FirSession,
-    val propertySymbol: FirPropertySymbol,
-    override val isConstructorParameterWithDefault: Boolean,
+    konst propertySymbol: FirPropertySymbol,
+    override konst isConstructorParameterWithDefault: Boolean,
     declaresDefaultValue: Boolean
 ) : ISerializableProperty {
-    override val name: String = propertySymbol.getSerialNameValue(session) ?: propertySymbol.name.asString()
+    override konst name: String = propertySymbol.getSerialNameValue(session) ?: propertySymbol.name.asString()
 
-    override val originalDescriptorName: Name
+    override konst originalDescriptorName: Name
         get() = propertySymbol.name
 
-    override val optional: Boolean = !propertySymbol.getSerialRequired(session) && declaresDefaultValue
+    override konst optional: Boolean = !propertySymbol.getSerialRequired(session) && declaresDefaultValue
 
-    override val transient: Boolean = propertySymbol.hasSerialTransient(session) || !propertySymbol.hasBackingField
+    override konst transient: Boolean = propertySymbol.hasSerialTransient(session) || !propertySymbol.hasBackingField
 
-    val serializableWith: ConeKotlinType? = propertySymbol.getSerializableWith(session)
+    konst serializableWith: ConeKotlinType? = propertySymbol.getSerializableWith(session)
         ?: analyzeSpecialSerializers(session, propertySymbol.resolvedAnnotationsWithArguments)?.defaultType()
 }
 
 class FirSerializableProperties(
-    override val serializableProperties: List<FirSerializableProperty>,
-    override val isExternallySerializable: Boolean,
-    override val serializableConstructorProperties: List<FirSerializableProperty>,
-    override val serializableStandaloneProperties: List<FirSerializableProperty>,
+    override konst serializableProperties: List<FirSerializableProperty>,
+    override konst isExternallySerializable: Boolean,
+    override konst serializableConstructorProperties: List<FirSerializableProperty>,
+    override konst serializableStandaloneProperties: List<FirSerializableProperty>,
 ) : ISerializableProperties<FirSerializableProperty>

@@ -6,7 +6,7 @@
 import kotlin.reflect.jvm.reflect
 
 class C {
-    val x: suspend (String) -> Unit = { OK: String -> }
+    konst x: suspend (String) -> Unit = { OK: String -> }
 }
 
 fun box(): String {

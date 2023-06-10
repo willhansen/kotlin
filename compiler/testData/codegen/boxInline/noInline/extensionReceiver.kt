@@ -10,10 +10,10 @@ inline fun (() -> String).extensionNoInline(): String = this() + (this.hashCode(
 
 
 fun box(): String {
-    val res = { "OK" }.test()()
+    konst res = { "OK" }.test()()
     if (res != "OKOKOK") return "fail 1: $res"
 
-    val res2 = { "OK" }.extensionNoInline().subSequence(0, 2)
+    konst res2 = { "OK" }.extensionNoInline().subSequence(0, 2)
     if (res2 != "OK") return "fail 2: $res2"
 
     return "OK"

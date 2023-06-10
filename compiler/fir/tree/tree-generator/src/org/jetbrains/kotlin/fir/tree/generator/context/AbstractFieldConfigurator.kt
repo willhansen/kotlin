@@ -7,14 +7,14 @@ package org.jetbrains.kotlin.fir.tree.generator.context
 
 import org.jetbrains.kotlin.fir.tree.generator.model.*
 
-abstract class AbstractFieldConfigurator<T : AbstractFirTreeBuilder>(private val builder: T) {
-    inner class ConfigureContext(val element: Element) {
+abstract class AbstractFieldConfigurator<T : AbstractFirTreeBuilder>(private konst builder: T) {
+    inner class ConfigureContext(konst element: Element) {
         operator fun FieldSet.unaryPlus() {
             element.fields.addAll(this.map { it.copy() })
         }
 
         operator fun Field.unaryPlus() {
-            val doesNotContains = element.fields.add(this.copy())
+            konst doesNotContains = element.fields.add(this.copy())
             require(doesNotContains) {
                 "$element already contains field $this}"
             }
@@ -31,7 +31,7 @@ abstract class AbstractFieldConfigurator<T : AbstractFirTreeBuilder>(private val
         }
 
         fun withArg(name: String, upperBound: Importable, vararg upperBounds: Importable) {
-            val allUpperBounds = mutableListOf(upperBound).apply { this += upperBounds }
+            konst allUpperBounds = mutableListOf(upperBound).apply { this += upperBounds }
             withArg(name, allUpperBounds)
         }
 
@@ -54,7 +54,7 @@ abstract class AbstractFieldConfigurator<T : AbstractFirTreeBuilder>(private val
             require(parent in element.parents) {
                 "$parent is not parent of $element"
             }
-            val argMap = element.parentsArguments.getOrPut(parent) { mutableMapOf() }
+            konst argMap = element.parentsArguments.getOrPut(parent) { mutableMapOf() }
             require(argument !in argMap) {
                 "Argument $argument already defined for parent $parent of $element"
             }

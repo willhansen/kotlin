@@ -25,13 +25,13 @@ import kotlin.contracts.contract
  */
 
 fun FirJavaField.toAccessorBaseName(config: ConeLombokAnnotations.Accessors): String? {
-    val isPrimitiveBoolean = returnTypeRef.isPrimitiveBoolean()
+    konst isPrimitiveBoolean = returnTypeRef.isPrimitiveBoolean()
     return if (config.prefix.isEmpty()) {
-        val prefixes = if (isPrimitiveBoolean) listOf(AccessorNames.IS) else emptyList()
+        konst prefixes = if (isPrimitiveBoolean) listOf(AccessorNames.IS) else emptyList()
         toPropertyName(name.identifier, prefixes)
     } else {
-        val id = name.identifier
-        val name = toPropertyName(id, config.prefix)
+        konst id = name.identifier
+        konst name = toPropertyName(id, config.prefix)
         name.takeIf { it.length != id.length}
     }
 }
@@ -54,8 +54,8 @@ fun FirClassSymbol<*>.isSuitableJavaClass(): Boolean {
 @OptIn(SymbolInternals::class)
 fun List<FirFunction>.filterClashingDeclarations(classSymbol: FirClassSymbol<*>): List<FirFunctionSymbol<*>> {
     @Suppress("UNCHECKED_CAST")
-    val allStaticFunctionsAndConstructors = classSymbol.fir.declarations.filterIsInstance<FirFunction>().toMutableList()
-    val result = mutableListOf<FirFunction>()
+    konst allStaticFunctionsAndConstructors = classSymbol.fir.declarations.filterIsInstance<FirFunction>().toMutableList()
+    konst result = mutableListOf<FirFunction>()
     for (function in this) {
         if (allStaticFunctionsAndConstructors.none { sameSignature(it, function) }) {
             allStaticFunctionsAndConstructors += function
@@ -72,10 +72,10 @@ fun List<FirFunction>.filterClashingDeclarations(classSymbol: FirClassSymbol<*>)
 private fun sameSignature(a: FirFunction, b: FirFunction): Boolean {
     if (a is FirConstructor && b !is FirConstructor || a !is FirConstructor && b is FirConstructor) return false
     if (a.symbol.callableId.callableName != b.symbol.callableId.callableName) return false
-    val aVararg = a.valueParameters.any { it.isVararg }
-    val bVararg = b.valueParameters.any { it.isVararg }
-    val aSize = a.valueParameters.size
-    val bSize = b.valueParameters.size
+    konst aVararg = a.konstueParameters.any { it.isVararg }
+    konst bVararg = b.konstueParameters.any { it.isVararg }
+    konst aSize = a.konstueParameters.size
+    konst bSize = b.konstueParameters.size
     return aVararg && bVararg ||
             aVararg && bSize >= (aSize - 1) ||
             bVararg && aSize >= (bSize - 1) ||

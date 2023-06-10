@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 class CompilationOutputTest : AbstractSerializationTest<IdeaKpmCompilationOutput>() {
 
-    override fun serialize(value: IdeaKpmCompilationOutput): ByteArray = value.toByteArray()
+    override fun serialize(konstue: IdeaKpmCompilationOutput): ByteArray = konstue.toByteArray()
     override fun deserialize(data: ByteArray): IdeaKpmCompilationOutput = IdeaKpmCompilationOutput(data)
 
     @Test

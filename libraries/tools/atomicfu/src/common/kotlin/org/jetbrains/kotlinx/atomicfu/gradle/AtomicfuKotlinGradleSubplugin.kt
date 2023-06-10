@@ -20,12 +20,12 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.*
 
-private const val EXTENSION_NAME = "atomicfuCompilerPlugin"
+private const konst EXTENSION_NAME = "atomicfuCompilerPlugin"
 
 class AtomicfuKotlinGradleSubplugin :
     KotlinCompilerPluginSupportPlugin {
     companion object {
-        const val ATOMICFU_ARTIFACT_NAME = "kotlin-atomicfu-compiler-plugin-embeddable"
+        const konst ATOMICFU_ARTIFACT_NAME = "kotlin-atomicfu-compiler-plugin-embeddable"
     }
 
     override fun apply(target: Project) {
@@ -34,8 +34,8 @@ class AtomicfuKotlinGradleSubplugin :
     }
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean {
-        val project = kotlinCompilation.target.project
-        val config = project.extensions.getByType(AtomicfuKotlinGradleExtension::class.java)
+        konst project = kotlinCompilation.target.project
+        konst config = project.extensions.getByType(AtomicfuKotlinGradleExtension::class.java)
         return (config.isJsIrTransformationEnabled && kotlinCompilation.target.isJs()) ||
                 (config.isJvmIrTransformationEnabled && kotlinCompilation.target.isJvm())
     }

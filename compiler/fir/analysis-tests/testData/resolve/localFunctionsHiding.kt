@@ -1,5 +1,5 @@
 interface A {
-    val x: Int
+    konst x: Int
 }
 
 fun test_1() {
@@ -8,7 +8,7 @@ fun test_1() {
         return x.transform()
     }
 
-    val y = 1
+    konst y = 1
     y.transform()
 }
 
@@ -18,6 +18,6 @@ fun test_2() {
         return x.transform()
     }
 
-    val y = 1
+    konst y = 1
     y.transform()
 }

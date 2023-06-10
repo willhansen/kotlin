@@ -33,16 +33,16 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirTypeAliasImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var status: FirDeclarationStatus,
     override var deprecationsProvider: DeprecationsProvider,
-    override val typeParameters: MutableList<FirTypeParameter>,
-    override val name: Name,
-    override val symbol: FirTypeAliasSymbol,
+    override konst typeParameters: MutableList<FirTypeParameter>,
+    override konst name: Name,
+    override konst symbol: FirTypeAliasSymbol,
     override var expandedTypeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
 ) : FirTypeAlias() {

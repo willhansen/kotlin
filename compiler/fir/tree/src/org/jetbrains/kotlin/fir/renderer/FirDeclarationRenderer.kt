@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 open class FirDeclarationRenderer {
 
     internal lateinit var components: FirRendererComponents
-    protected val printer get() = components.printer
-    private val resolvePhaseRenderer get() = components.resolvePhaseRenderer
-    private val typeRenderer get() = components.typeRenderer
+    protected konst printer get() = components.printer
+    private konst resolvePhaseRenderer get() = components.resolvePhaseRenderer
+    private konst typeRenderer get() = components.typeRenderer
 
     fun render(declaration: FirDeclaration) {
         renderPhaseAndAttributes(declaration)
@@ -36,8 +36,8 @@ open class FirDeclarationRenderer {
                     if (declaration.isCatchParameter == true) {
                         ""
                     } else {
-                        val prefix = if (declaration.isLocal) "l" else ""
-                        prefix + if (declaration.isVal) "val" else "var"
+                        konst prefix = if (declaration.isLocal) "l" else ""
+                        prefix + if (declaration.isVal) "konst" else "var"
                     }
                 }
                 is FirPropertyAccessor -> if (declaration.isGetter) "get" else "set"

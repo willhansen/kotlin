@@ -5,10 +5,10 @@ class A {
 
 fun a(aa : A?, b : Any) {
     if (aa != null) {
-        val (a1, b1) = aa;
+        konst (a1, b1) = aa;
     }
 
     if (b is A) {
-        val (a1, b1) = b;
+        konst (a1, b1) = b;
     }
 }

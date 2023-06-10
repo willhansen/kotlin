@@ -13,7 +13,7 @@ import kotlin.wasm.internal.implementedAsIntrinsic
  * Corresponds to `i32` type on 32-bit Wasm architecture.
  */
 @UnsafeWasmMemoryApi
-public value class Pointer public constructor(public val address: UInt) {
+public konstue class Pointer public constructor(public konst address: UInt) {
 
     /** Adds an [Int] to the address of this [Pointer] */
     public operator fun plus(other: Int): Pointer =
@@ -31,47 +31,47 @@ public value class Pointer public constructor(public val address: UInt) {
     public operator fun minus(other: UInt): Pointer =
         Pointer(address - other)
 
-    /** Load a Byte (8 bit) value */
+    /** Load a Byte (8 bit) konstue */
     @WasmOp(WasmOp.I32_LOAD8_S)
     public fun loadByte(): Byte =
         implementedAsIntrinsic
 
-    /** Load a Short (16 bit) value */
+    /** Load a Short (16 bit) konstue */
     @WasmOp(WasmOp.I32_LOAD16_S)
     public fun loadShort(): Short =
         implementedAsIntrinsic
 
-    /** Load an Int (32 bit) value */
+    /** Load an Int (32 bit) konstue */
     @WasmOp(WasmOp.I32_LOAD)
     public fun loadInt(): Int =
         implementedAsIntrinsic
 
-    /** Load a Long (64 bit) value */
+    /** Load a Long (64 bit) konstue */
     @WasmOp(WasmOp.I64_LOAD)
     public fun loadLong(): Long =
         implementedAsIntrinsic
 
-    /** Store a Byte (8 bit) [value] */
+    /** Store a Byte (8 bit) [konstue] */
     @Suppress("UNUSED_PARAMETER")
     @WasmOp(WasmOp.I32_STORE8)
-    public fun storeByte(value: Byte): Unit =
+    public fun storeByte(konstue: Byte): Unit =
         implementedAsIntrinsic
 
-    /** Store a Short (16 bit) [value] */
+    /** Store a Short (16 bit) [konstue] */
     @Suppress("UNUSED_PARAMETER")
     @WasmOp(WasmOp.I32_STORE16)
-    public fun storeShort(value: Short): Unit =
+    public fun storeShort(konstue: Short): Unit =
         implementedAsIntrinsic
 
-    /** Store an Int (32 bit) [value] */
+    /** Store an Int (32 bit) [konstue] */
     @Suppress("UNUSED_PARAMETER")
     @WasmOp(WasmOp.I32_STORE)
-    public fun storeInt(value: Int): Unit =
+    public fun storeInt(konstue: Int): Unit =
         implementedAsIntrinsic
 
-    /** Store a Long (64 bit) [value] */
+    /** Store a Long (64 bit) [konstue] */
     @Suppress("UNUSED_PARAMETER")
     @WasmOp(WasmOp.I64_STORE)
-    public fun storeLong(value: Long): Unit =
+    public fun storeLong(konstue: Long): Unit =
         implementedAsIntrinsic
 }

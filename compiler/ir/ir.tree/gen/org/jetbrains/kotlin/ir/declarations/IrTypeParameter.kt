@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.types.Variance
  */
 abstract class IrTypeParameter : IrDeclarationBase(), IrDeclarationWithName {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: TypeParameterDescriptor
+    abstract override konst descriptor: TypeParameterDescriptor
 
-    abstract override val symbol: IrTypeParameterSymbol
+    abstract override konst symbol: IrTypeParameterSymbol
 
     abstract var variance: Variance
 

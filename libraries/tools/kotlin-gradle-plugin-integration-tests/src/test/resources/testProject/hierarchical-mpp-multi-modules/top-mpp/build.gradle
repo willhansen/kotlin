@@ -38,7 +38,7 @@ kotlin {
         binaries {
             // Creating static library with a custom name.
             staticLib('customNameForLinuxLib') {
-                outputDirectory = file("customNameForLinuxLib") // outputDir is a `val` property.
+                outputDirectory = file("customNameForLinuxLib") // outputDir is a `konst` property.
                 linkTask.destinationDirectory = file("customNameForLinuxLib")
             }
         }
@@ -49,7 +49,7 @@ kotlin {
         binaries {
             // Creating static library with a custom name.
             staticLib('customNameForMacosLib') {
-                outputDirectory = file("customNameForMacosLib") // outputDir is a `val` property.
+                outputDirectory = file("customNameForMacosLib") // outputDir is a `konst` property.
                 linkTask.destinationDirectory = file("customNameForMacosLib")
             }
         }
@@ -59,7 +59,7 @@ kotlin {
         binaries {
             // KT-29395 fix
             framework {
-                outputDirectory = file("fooDummyiOS") // outputDir is a `val` property.
+                outputDirectory = file("fooDummyiOS") // outputDir is a `konst` property.
                 linkTask.destinationDirectory = file("fooDummyiOS")
             }
         }

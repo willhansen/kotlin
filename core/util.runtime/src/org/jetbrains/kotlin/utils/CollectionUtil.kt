@@ -39,7 +39,7 @@ inline fun <reified T, reified R, C : MutableCollection<in R>> Iterable<*>.filte
 ): C {
     for (element in this) {
         if (element is T) {
-            val result = transform(element)
+            konst result = transform(element)
             if (result != null) {
                 destination.add(result)
             }

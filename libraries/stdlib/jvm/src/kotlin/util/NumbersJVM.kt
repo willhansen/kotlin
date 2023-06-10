@@ -9,44 +9,44 @@ package kotlin
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Double.isNaN(): Boolean = java.lang.Double.isNaN(this)
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Float.isNaN(): Boolean = java.lang.Float.isNaN(this)
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Double.isInfinite(): Boolean = java.lang.Double.isInfinite(this)
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Float.isInfinite(): Boolean = java.lang.Float.isInfinite(this)
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Double.isFinite(): Boolean = !isInfinite() && !isNaN()
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 @kotlin.internal.InlineOnly
 public actual inline fun Float.isFinite(): Boolean = !isInfinite() && !isNaN()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout.
  */
 @SinceKotlin("1.2")
@@ -54,23 +54,23 @@ public actual inline fun Float.isFinite(): Boolean = !isInfinite() && !isNaN()
 public actual inline fun Double.toBits(): Long = java.lang.Double.doubleToLongBits(this)
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public actual inline fun Double.toRawBits(): Long = java.lang.Double.doubleToRawLongBits(this)
 
 /**
- * Returns the [Double] value corresponding to a given bit representation.
+ * Returns the [Double] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public actual inline fun Double.Companion.fromBits(bits: Long): Double = java.lang.Double.longBitsToDouble(bits)
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout.
  */
 @SinceKotlin("1.2")
@@ -78,16 +78,16 @@ public actual inline fun Double.Companion.fromBits(bits: Long): Double = java.la
 public actual inline fun Float.toBits(): Int = java.lang.Float.floatToIntBits(this)
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public actual inline fun Float.toRawBits(): Int = java.lang.Float.floatToRawIntBits(this)
 
 /**
- * Returns the [Float] value corresponding to a given bit representation.
+ * Returns the [Float] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly

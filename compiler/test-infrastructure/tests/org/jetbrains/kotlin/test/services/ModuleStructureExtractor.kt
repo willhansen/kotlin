@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.test.TestInfrastructureInternals
 import org.jetbrains.kotlin.test.directives.model.DirectivesContainer
 
 abstract class ModuleStructureExtractor @OptIn(TestInfrastructureInternals::class) constructor(
-    protected val testServices: TestServices,
-    protected val additionalSourceProviders: List<AdditionalSourceProvider>,
-    protected val moduleStructureTransformers: List<ModuleStructureTransformer>
+    protected konst testServices: TestServices,
+    protected konst additionalSourceProviders: List<AdditionalSourceProvider>,
+    protected konst moduleStructureTransformers: List<ModuleStructureTransformer>
 ) {
     abstract fun splitTestDataByModules(
         testDataFileName: String,
@@ -19,6 +19,6 @@ abstract class ModuleStructureExtractor @OptIn(TestInfrastructureInternals::clas
     ): TestModuleStructure
 
     companion object {
-        const val DEFAULT_MODULE_NAME = "main"
+        const konst DEFAULT_MODULE_NAME = "main"
     }
 }

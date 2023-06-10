@@ -6,6 +6,6 @@ class A {
 }
 
 fun f() {
-    val a = A()
+    konst a = A()
     a.<!UNRESOLVED_REFERENCE!>BAlias<!>
 }

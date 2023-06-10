@@ -1,7 +1,7 @@
 == foo ==
 fun foo() {
     "before"
-    val b = 1
+    konst b = 1
     fun local(x: Int) = x + b
     "after"
 }
@@ -9,7 +9,7 @@ fun foo() {
 "before"                                                   <v0>: *     NEW: r("before") -> <v0>
 1                                                          <v1>: Int   NEW: r(1) -> <v1>       
 "after"                                                    <v2>: *     NEW: r("after") -> <v2> 
-{ "before" val b = 1 fun local(x: Int) = x + b "after" }   <v2>: *     COPY                    
+{ "before" konst b = 1 fun local(x: Int) = x + b "after" }   <v2>: *     COPY                    
 =====================
 == local ==
 fun local(x: Int) = x + b

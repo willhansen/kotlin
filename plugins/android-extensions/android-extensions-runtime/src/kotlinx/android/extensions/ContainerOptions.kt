@@ -23,5 +23,5 @@ import kotlinx.android.extensions.CacheImplementation.*
  */
 public annotation class ContainerOptions(
         /** A cache implementation for the container. */
-        public val cache: CacheImplementation = HASH_MAP
+        public konst cache: CacheImplementation = HASH_MAP
 )

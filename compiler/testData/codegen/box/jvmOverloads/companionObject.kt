@@ -11,6 +11,6 @@ class C {
 }
 
 fun box(): String {
-    val m = C::class.java.getMethod("foo", String::class.java)
+    konst m = C::class.java.getMethod("foo", String::class.java)
     return m.invoke(null, "O") as String
 }

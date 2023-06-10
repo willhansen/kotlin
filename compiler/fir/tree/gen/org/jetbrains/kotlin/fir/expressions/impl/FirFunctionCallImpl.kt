@@ -38,7 +38,7 @@ open class FirFunctionCallImpl @FirImplementationDetail constructor(
     override var source: KtSourceElement?,
     override var argumentList: FirArgumentList,
     override var calleeReference: FirNamedReference,
-    override val origin: FirFunctionCallOrigin,
+    override konst origin: FirFunctionCallOrigin,
 ) : FirFunctionCall() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         typeRef.accept(visitor, data)

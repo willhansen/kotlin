@@ -1,4 +1,4 @@
-class Cell<T>(val value: T)
+class Cell<T>(konst konstue: T)
 
 typealias IntAlias = Cell<Int>
 

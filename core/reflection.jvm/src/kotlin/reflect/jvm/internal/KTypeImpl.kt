@@ -36,25 +36,25 @@ import kotlin.reflect.KTypeProjection
 import kotlin.reflect.jvm.jvmErasure
 
 internal class KTypeImpl(
-    val type: KotlinType,
+    konst type: KotlinType,
     computeJavaType: (() -> Type)? = null
 ) : KTypeBase {
-    private val computeJavaType =
+    private konst computeJavaType =
         computeJavaType as? ReflectProperties.LazySoftVal<Type> ?: computeJavaType?.let(ReflectProperties::lazySoft)
 
-    override val javaType: Type?
+    override konst javaType: Type?
         get() = computeJavaType?.invoke()
 
-    override val classifier: KClassifier? by ReflectProperties.lazySoft { convert(type) }
+    override konst classifier: KClassifier? by ReflectProperties.lazySoft { convert(type) }
 
     private fun convert(type: KotlinType): KClassifier? {
-        when (val descriptor = type.constructor.declarationDescriptor) {
+        when (konst descriptor = type.constructor.declarationDescriptor) {
             is ClassDescriptor -> {
-                val jClass = descriptor.toJavaClass() ?: return null
+                konst jClass = descriptor.toJavaClass() ?: return null
                 if (jClass.isArray) {
                     // There may be no argument if it's a primitive array (such as IntArray)
-                    val argument = type.arguments.singleOrNull()?.type ?: return KClassImpl(jClass)
-                    val elementClassifier =
+                    konst argument = type.arguments.singleOrNull()?.type ?: return KClassImpl(jClass)
+                    konst elementClassifier =
                         convert(argument)
                             ?: throw KotlinReflectionInternalError("Cannot determine classifier for array element type: $this")
                     return KClassImpl(elementClassifier.jvmErasure.java.createArrayType())
@@ -72,18 +72,18 @@ internal class KTypeImpl(
         }
     }
 
-    override val arguments: List<KTypeProjection> by ReflectProperties.lazySoft arguments@{
-        val typeArguments = type.arguments
+    override konst arguments: List<KTypeProjection> by ReflectProperties.lazySoft arguments@{
+        konst typeArguments = type.arguments
         if (typeArguments.isEmpty()) return@arguments emptyList<KTypeProjection>()
 
-        val parameterizedTypeArguments by lazy(PUBLICATION) { javaType!!.parameterizedTypeArguments }
+        konst parameterizedTypeArguments by lazy(PUBLICATION) { javaType!!.parameterizedTypeArguments }
 
         typeArguments.mapIndexed { i, typeProjection ->
             if (typeProjection.isStarProjection) {
                 KTypeProjection.STAR
             } else {
-                val type = KTypeImpl(typeProjection.type, if (computeJavaType == null) null else fun(): Type {
-                    return when (val javaType = javaType) {
+                konst type = KTypeImpl(typeProjection.type, if (computeJavaType == null) null else fun(): Type {
+                    return when (konst javaType = javaType) {
                         is Class<*> -> {
                             // It's either an array or a raw type.
                             // TODO: return upper bound of the corresponding parameter for a raw type?
@@ -94,7 +94,7 @@ internal class KTypeImpl(
                             javaType.genericComponentType
                         }
                         is ParameterizedType -> {
-                            val argument = parameterizedTypeArguments[i]
+                            konst argument = parameterizedTypeArguments[i]
                             // In "Foo<out Bar>", the JVM type of the first type argument should be "Bar", not "? extends Bar"
                             if (argument !is WildcardType) argument
                             else argument.lowerBounds.firstOrNull() ?: argument.upperBounds.first()
@@ -111,10 +111,10 @@ internal class KTypeImpl(
         }
     }
 
-    override val isMarkedNullable: Boolean
+    override konst isMarkedNullable: Boolean
         get() = type.isMarkedNullable
 
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = type.computeAnnotations()
 
     internal fun makeNullableAsSpecified(nullable: Boolean): KTypeImpl {

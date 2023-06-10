@@ -8,7 +8,7 @@ package codegen.inline.propertyAccessorInline
 import kotlin.test.*
 
 object C {
-    const val x = 42
+    const konst x = 42
 }
 
 fun getC(): C {

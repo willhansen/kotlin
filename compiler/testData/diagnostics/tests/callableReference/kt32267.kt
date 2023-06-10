@@ -19,7 +19,7 @@ class Command2 : Command {
     companion object : CommandFactory<Command2>
 }
 class Configuration {
-    val commands = Commands()
+    konst commands = Commands()
     inline fun commands(configure: Commands.() -> Unit) {
         commands.configure()
     }
@@ -31,7 +31,7 @@ class Configuration {
     }
 }
 interface Transaction {
-    val someService: SomeService
+    konst someService: SomeService
 }
 interface SomeService {
     fun execute(command: Command1)

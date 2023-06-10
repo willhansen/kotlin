@@ -18,16 +18,16 @@ import org.jetbrains.kotlin.fir.references.toResolvedCallableSymbol
 import org.jetbrains.kotlin.name.ClassId
 
 object FirJvmPolymorphicSignatureCallChecker : FirFunctionCallChecker() {
-    private val polymorphicSignatureClassId = ClassId.fromString("java/lang/invoke/MethodHandle.PolymorphicSignature")
+    private konst polymorphicSignatureClassId = ClassId.fromString("java/lang/invoke/MethodHandle.PolymorphicSignature")
 
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!context.session.languageVersionSettings.supportsFeature(LanguageFeature.PolymorphicSignature)) return
-        val callableSymbol = expression.calleeReference.toResolvedCallableSymbol() ?: return
+        konst callableSymbol = expression.calleeReference.toResolvedCallableSymbol() ?: return
         if (callableSymbol.getAnnotationByClassId(polymorphicSignatureClassId, context.session) == null) return
 
-        for (valueArgument in expression.arguments) {
-            if (valueArgument is FirVarargArgumentsExpression) {
-                for (argument in valueArgument.arguments) {
+        for (konstueArgument in expression.arguments) {
+            if (konstueArgument is FirVarargArgumentsExpression) {
+                for (argument in konstueArgument.arguments) {
                     if (argument is FirSpreadArgumentExpression) {
                         reporter.reportOn(argument.source, FirJvmErrors.SPREAD_ON_SIGNATURE_POLYMORPHIC_CALL, context)
                     }

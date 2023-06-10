@@ -19,26 +19,26 @@ fun WeakInterner(lock: Lock? = null): Interner = InternerImpl(Weak(), lock)
 fun Interner(lock: Lock? = null): Interner = InternerImpl(Strong(), lock)
 
 interface Interner {
-    fun <T : Any> getOrPut(value: T): T
+    fun <T : Any> getOrPut(konstue: T): T
     fun clear()
 }
 
 private class InternerImpl(
-    private val store: Store,
-    private val lock: Lock? = null
+    private konst store: Store,
+    private konst lock: Lock? = null
 ) : Interner {
 
     interface Store {
-        fun <T : Any> getOrPut(value: T): T
+        fun <T : Any> getOrPut(konstue: T): T
         fun clear()
 
         class Weak : Store {
-            private val references = WeakHashMap<Any, WeakReference<Any>>()
-            override fun <T : Any> getOrPut(value: T): T {
+            private konst references = WeakHashMap<Any, WeakReference<Any>>()
+            override fun <T : Any> getOrPut(konstue: T): T {
                 @Suppress("unchecked_cast")
-                return (references.getOrPut(value) { WeakReference(value) }.get() ?: run {
-                    references[value] = WeakReference(value)
-                    value
+                return (references.getOrPut(konstue) { WeakReference(konstue) }.get() ?: run {
+                    references[konstue] = WeakReference(konstue)
+                    konstue
                 }) as T
             }
 
@@ -49,9 +49,9 @@ private class InternerImpl(
 
         @Suppress("UNCHECKED_CAST")
         class Strong : Store {
-            private val references = hashMapOf<Any, Any>()
-            override fun <T : Any> getOrPut(value: T): T {
-                return references.getOrPut(value) { value } as T
+            private konst references = hashMapOf<Any, Any>()
+            override fun <T : Any> getOrPut(konstue: T): T {
+                return references.getOrPut(konstue) { konstue } as T
             }
 
             override fun clear() {
@@ -60,8 +60,8 @@ private class InternerImpl(
         }
     }
 
-    override fun <T : Any> getOrPut(value: T): T {
-        return withLockIfAny { store.getOrPut(value) }
+    override fun <T : Any> getOrPut(konstue: T): T {
+        return withLockIfAny { store.getOrPut(konstue) }
     }
 
     override fun clear() {

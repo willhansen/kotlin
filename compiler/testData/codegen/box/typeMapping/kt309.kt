@@ -7,7 +7,7 @@ class N {
 }
 
 fun box(): String {
-    val method = N::class.java.getDeclaredMethod("foo")
+    konst method = N::class.java.getDeclaredMethod("foo")
     if (method.returnType.name != "java.lang.Void") return "Fail: Nothing should be mapped to Void"
     
     return "OK"

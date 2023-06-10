@@ -1,7 +1,7 @@
 fun foo() {
-    val x = object {
+    konst x = object {
         fun sss() = abc()
         fun abc() = 1
     }
-    val g = x.sss()
+    konst g = x.sss()
 }

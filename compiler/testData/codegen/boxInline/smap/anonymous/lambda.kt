@@ -5,7 +5,7 @@
 package builders
 
 inline fun call(crossinline init: () -> Unit) {
-    val lambda = {
+    konst lambda = {
         init()
     }; lambda()
 }

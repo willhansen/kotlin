@@ -212,9 +212,9 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiImportOptimizerTestGener
         }
 
         @Test
-        @TestMetadata("unusedTypeHiddenByTypeParameter_invalidAsArgument.kt")
-        public void testUnusedTypeHiddenByTypeParameter_invalidAsArgument() throws Exception {
-            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/unusedTypeHiddenByTypeParameter_invalidAsArgument.kt");
+        @TestMetadata("unusedTypeHiddenByTypeParameter_inkonstidAsArgument.kt")
+        public void testUnusedTypeHiddenByTypeParameter_inkonstidAsArgument() throws Exception {
+            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/unusedTypeHiddenByTypeParameter_inkonstidAsArgument.kt");
         }
 
         @Test
@@ -224,9 +224,9 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiImportOptimizerTestGener
         }
 
         @Test
-        @TestMetadata("usedConstructor_invalidArguments.kt")
-        public void testUsedConstructor_invalidArguments() throws Exception {
-            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedConstructor_invalidArguments.kt");
+        @TestMetadata("usedConstructor_inkonstidArguments.kt")
+        public void testUsedConstructor_inkonstidArguments() throws Exception {
+            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedConstructor_inkonstidArguments.kt");
         }
 
         @Test
@@ -236,21 +236,21 @@ public class FirIdeNormalAnalysisSourceModuleAnalysisApiImportOptimizerTestGener
         }
 
         @Test
-        @TestMetadata("usedExtensionFunction_invalidArguments.kt")
-        public void testUsedExtensionFunction_invalidArguments() throws Exception {
-            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedExtensionFunction_invalidArguments.kt");
+        @TestMetadata("usedExtensionFunction_inkonstidArguments.kt")
+        public void testUsedExtensionFunction_inkonstidArguments() throws Exception {
+            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedExtensionFunction_inkonstidArguments.kt");
         }
 
         @Test
-        @TestMetadata("usedExtensionProperty_invalidReceiver.kt")
-        public void testUsedExtensionProperty_invalidReceiver() throws Exception {
-            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedExtensionProperty_invalidReceiver.kt");
+        @TestMetadata("usedExtensionProperty_inkonstidReceiver.kt")
+        public void testUsedExtensionProperty_inkonstidReceiver() throws Exception {
+            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedExtensionProperty_inkonstidReceiver.kt");
         }
 
         @Test
-        @TestMetadata("usedInvokeOperator_invalidArguments.kt")
-        public void testUsedInvokeOperator_invalidArguments() throws Exception {
-            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedInvokeOperator_invalidArguments.kt");
+        @TestMetadata("usedInvokeOperator_inkonstidArguments.kt")
+        public void testUsedInvokeOperator_inkonstidArguments() throws Exception {
+            runTest("analysis/analysis-api/testData/components/importOptimizer/analyseImports/referencesWithErrors/usedInvokeOperator_inkonstidArguments.kt");
         }
 
         @Test

@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.ir.util.fqNameWhenAvailable
 import org.jetbrains.kotlin.ir.util.isUnsigned
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
-import org.jetbrains.kotlin.resolve.constants.evaluate.evaluateBinary
-import org.jetbrains.kotlin.resolve.constants.evaluate.evaluateUnary
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ekonstuateBinary
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ekonstuateUnary
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
@@ -41,9 +41,9 @@ import kotlin.math.min
  * TODO: constant fields (e.g. Double.NaN)
  */
 class FoldConstantLowering(
-    private val context: CommonBackendContext,
+    private konst context: CommonBackendContext,
     // In K/JS Float and Double are the same so Float constant should be fold similar to Double
-    private val floatSpecial: Boolean = false
+    private konst floatSpecial: Boolean = false
 ) : IrElementTransformerVoid(), BodyLoweringPass {
     /**
      * ID of an binary operator / method.
@@ -51,21 +51,21 @@ class FoldConstantLowering(
      * An binary operator / method can be identified by its operand types (in full qualified names) and its name.
      */
     private data class BinaryOp(
-        val lhsType: String,
-        val rhsType: String,
-        val operatorName: String
+        konst lhsType: String,
+        konst rhsType: String,
+        konst operatorName: String
     )
 
     @Suppress("unused")
-    private data class PrimitiveTypeName<T>(val name: String)
+    private data class PrimitiveTypeName<T>(konst name: String)
 
     companion object {
-        private val INT = PrimitiveTypeName<Int>("Int")
-        private val LONG = PrimitiveTypeName<Long>("Long")
-        private val DOUBLE = PrimitiveTypeName<Double>("Double")
-        private val FLOAT = PrimitiveTypeName<Float>("Float")
+        private konst INT = PrimitiveTypeName<Int>("Int")
+        private konst LONG = PrimitiveTypeName<Long>("Long")
+        private konst DOUBLE = PrimitiveTypeName<Double>("Double")
+        private konst FLOAT = PrimitiveTypeName<Float>("Float")
 
-        private val BINARY_OP_TO_EVALUATOR = HashMap<BinaryOp, Function2<Any?, Any?, Any>>()
+        private konst BINARY_OP_TO_EVALUATOR = HashMap<BinaryOp, Function2<Any?, Any?, Any>>()
 
         @Suppress("UNCHECKED_CAST")
         private fun <T> registerBuiltinBinaryOp(operandType: PrimitiveTypeName<T>, operatorName: String, f: (T, T) -> Any) {
@@ -100,9 +100,9 @@ class FoldConstantLowering(
         }
 
         fun IrStringConcatenation.tryToFold(context: CommonBackendContext, floatSpecial: Boolean): IrExpression {
-            val folded = mutableListOf<IrExpression>()
+            konst folded = mutableListOf<IrExpression>()
             for (next in this.arguments) {
-                val last = folded.lastOrNull()
+                konst last = folded.lastOrNull()
                 when {
                     next !is IrConst<*> -> folded += next
                     last !is IrConst<*> -> folded += IrConstImpl.string(
@@ -122,9 +122,9 @@ class FoldConstantLowering(
 
         private fun constToString(const: IrConst<*>, floatSpecial: Boolean): String {
             if (floatSpecial) {
-                when (val kind = const.kind) {
+                when (konst kind = const.kind) {
                     is IrConstKind.Float -> {
-                        val f = kind.valueOf(const)
+                        konst f = kind.konstueOf(const)
                         if (!f.isInfinite()) {
                             if (floor(f) == f) {
                                 return f.toInt().toString()
@@ -132,7 +132,7 @@ class FoldConstantLowering(
                         }
                     }
                     is IrConstKind.Double -> {
-                        val d = kind.valueOf(const)
+                        konst d = kind.konstueOf(const)
                         if (!d.isInfinite()) {
                             if (floor(d) == d) {
                                 return d.toLong().toString()
@@ -149,19 +149,19 @@ class FoldConstantLowering(
         private fun normalizeUnsignedValue(const: IrConst<*>): Any? {
             // Unsigned constants are represented through signed constants with a different IrType
             if (const.type.isUnsigned()) {
-                when (val kind = const.kind) {
+                when (konst kind = const.kind) {
                     is IrConstKind.Byte ->
-                        return kind.valueOf(const).toUByte()
+                        return kind.konstueOf(const).toUByte()
                     is IrConstKind.Short ->
-                        return kind.valueOf(const).toUShort()
+                        return kind.konstueOf(const).toUShort()
                     is IrConstKind.Int ->
-                        return kind.valueOf(const).toUInt()
+                        return kind.konstueOf(const).toUInt()
                     is IrConstKind.Long ->
-                        return kind.valueOf(const).toULong()
+                        return kind.konstueOf(const).toULong()
                     else -> {}
                 }
             }
-            return const.value
+            return const.konstue
         }
     }
 
@@ -191,30 +191,30 @@ class FoldConstantLowering(
     }
 
     private fun tryFoldingUnaryOps(call: IrCall): IrExpression {
-        val operand = call.dispatchReceiver as? IrConst<*> ?: return call
-        val operationName = call.symbol.owner.name.toString()
+        konst operand = call.dispatchReceiver as? IrConst<*> ?: return call
+        konst operationName = call.symbol.owner.name.toString()
 
-        val evaluated = when {
+        konst ekonstuated = when {
             // Since there is no distinguish between signed and unsigned types a special handling for `toString` is required
             operationName == "toString" -> constToString(operand, floatSpecial)
             // Disable toFloat folding on K/JS till `toFloat` is fixed (KT-35422)
             operationName == "toFloat" && floatSpecial -> return call
             operand.kind == IrConstKind.Null -> return call
-            else -> evaluateUnary(
+            else -> ekonstuateUnary(
                 operationName,
                 operand.kind.toString(),
-                operand.value!!
+                operand.konstue!!
             ) ?: return call
         }
 
-        return buildIrConstant(call.startOffset, call.endOffset, call.type, evaluated)
+        return buildIrConstant(call.startOffset, call.endOffset, call.type, ekonstuated)
     }
 
     private fun coerceToDouble(irConst: IrConst<*>): IrConst<*> {
         // TODO: for consistency with current K/JS implementation Float constant should be treated as a Double (KT-35422)
         if (!floatSpecial) return irConst
         if (irConst.kind == IrConstKind.Float) return irConst.run {
-            IrConstImpl(startOffset, endOffset, context.irBuiltIns.doubleType, IrConstKind.Double, value.toString().toDouble())
+            IrConstImpl(startOffset, endOffset, context.irBuiltIns.doubleType, IrConstKind.Double, konstue.toString().toDouble())
         }
         return irConst
     }
@@ -228,21 +228,21 @@ class FoldConstantLowering(
     }
 
     private fun tryFoldingBinaryOps(call: IrCall): IrExpression {
-        val lhs = coerceToDouble(call.dispatchReceiver as? IrConst<*> ?: return call)
-        val rhs = coerceToDouble(call.getValueArgument(0) as? IrConst<*> ?: return call)
+        konst lhs = coerceToDouble(call.dispatchReceiver as? IrConst<*> ?: return call)
+        konst rhs = coerceToDouble(call.getValueArgument(0) as? IrConst<*> ?: return call)
 
         if (lhs.kind == IrConstKind.Null || rhs.kind == IrConstKind.Null) return call
 
-        val evaluated = try {
-            evaluateBinary(
+        konst ekonstuated = try {
+            ekonstuateBinary(
                 call.symbol.owner.name.toString(),
                 lhs.kind.toString(),
                 normalizeUnsignedValue(lhs)!!,
-                // 1. Although some operators have nullable parameters, evaluators deals with non-nullable types only.
+                // 1. Although some operators have nullable parameters, ekonstuators deals with non-nullable types only.
                 //    The passed parameters are guaranteed to be non-null, since they are from IrConst.
                 // 2. The operators are registered with prototype as if virtual member functions. They are identified by
                 //    actual_receiver_type.operator_name(parameter_type_in_prototype).
-                call.symbol.owner.valueParameters[0].type.typeConstructorName(),
+                call.symbol.owner.konstueParameters[0].type.typeConstructorName(),
                 normalizeUnsignedValue(rhs)!!
             ) ?: return call
         } catch (e: Exception) {
@@ -250,7 +250,7 @@ class FoldConstantLowering(
             return call
         }
 
-        return buildIrConstant(call.startOffset, call.endOffset, call.type, evaluated)
+        return buildIrConstant(call.startOffset, call.endOffset, call.type, ekonstuated)
     }
 
     private fun tryFoldingBuiltinBinaryOps(call: IrCall): IrExpression {
@@ -258,20 +258,20 @@ class FoldConstantLowering(
         if (call.symbol.owner.fqNameWhenAvailable?.parent() != IrBuiltIns.KOTLIN_INTERNAL_IR_FQN)
             return call
 
-        val lhs = call.getValueArgument(0) as? IrConst<*> ?: return call
-        val rhs = call.getValueArgument(1) as? IrConst<*> ?: return call
+        konst lhs = call.getValueArgument(0) as? IrConst<*> ?: return call
+        konst rhs = call.getValueArgument(1) as? IrConst<*> ?: return call
 
         if (lhs.kind == IrConstKind.Null || rhs.kind == IrConstKind.Null) return call
 
-        val evaluated = try {
-            val evaluator =
+        konst ekonstuated = try {
+            konst ekonstuator =
                 BINARY_OP_TO_EVALUATOR[BinaryOp(lhs.kind.toString(), rhs.kind.toString(), call.symbol.owner.name.toString())] ?: return call
-            evaluator(lhs.value!!, rhs.value!!)
+            ekonstuator(lhs.konstue!!, rhs.konstue!!)
         } catch (e: Exception) {
             return call
         }
 
-        return buildIrConstant(call.startOffset, call.endOffset, call.type, evaluated)
+        return buildIrConstant(call.startOffset, call.endOffset, call.type, ekonstuated)
     }
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -281,9 +281,9 @@ class FoldConstantLowering(
 
                 return when {
                     expression.extensionReceiver != null -> expression
-                    expression.dispatchReceiver != null && expression.valueArgumentsCount == 0 -> tryFoldingUnaryOps(expression)
-                    expression.dispatchReceiver != null && expression.valueArgumentsCount == 1 -> tryFoldingBinaryOps(expression)
-                    expression.dispatchReceiver == null && expression.valueArgumentsCount == 2 -> tryFoldingBuiltinBinaryOps(expression)
+                    expression.dispatchReceiver != null && expression.konstueArgumentsCount == 0 -> tryFoldingUnaryOps(expression)
+                    expression.dispatchReceiver != null && expression.konstueArgumentsCount == 1 -> tryFoldingBinaryOps(expression)
+                    expression.dispatchReceiver == null && expression.konstueArgumentsCount == 2 -> tryFoldingBuiltinBinaryOps(expression)
                     else -> expression
                 }
             }
@@ -295,9 +295,9 @@ class FoldConstantLowering(
 
             override fun visitTypeOperator(expression: IrTypeOperatorCall): IrExpression {
                 expression.transformChildrenVoid()
-                val argument = expression.argument
+                konst argument = expression.argument
                 return if (argument is IrConst<*> && expression.operator == IrTypeOperator.IMPLICIT_INTEGER_COERCION)
-                    buildIrConstant(expression.startOffset, expression.endOffset, expression.type, argument.value)
+                    buildIrConstant(expression.startOffset, expression.endOffset, expression.type, argument.konstue)
                 else
                     expression
             }

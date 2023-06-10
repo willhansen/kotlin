@@ -20,10 +20,10 @@ import javax.inject.Inject
 abstract class KotlinNodeJs @Inject constructor(target: KotlinJsTarget) :
     KotlinJsSubTarget(target, "node"),
     KotlinJsNodeDsl {
-    override val testTaskDescription: String
+    override konst testTaskDescription: String
         get() = "Run all ${target.name} tests inside nodejs using the builtin test framework"
 
-    private val runTaskName = disambiguateCamelCased("run")
+    private konst runTaskName = disambiguateCamelCased("run")
 
     override fun runTask(body: Action<NodeJsExec>) {
         project.tasks.withType<NodeJsExec>().named(runTaskName).configure(body)
@@ -49,7 +49,7 @@ abstract class KotlinNodeJs @Inject constructor(target: KotlinJsTarget) :
     private fun configureRun(
         compilation: KotlinJsCompilation
     ) {
-        val runTaskHolder = NodeJsExec.create(compilation, disambiguateCamelCased(RUN_TASK_NAME)) {
+        konst runTaskHolder = NodeJsExec.create(compilation, disambiguateCamelCased(RUN_TASK_NAME)) {
             group = taskGroupName
             inputFileProperty.fileProvider(compilation.compileKotlinTaskProvider.flatMap { it.outputFileProperty })
         }

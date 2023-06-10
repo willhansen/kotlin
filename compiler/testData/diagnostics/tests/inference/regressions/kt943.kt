@@ -10,9 +10,9 @@ import java.util.*
 import checkSubtype
 
 fun foo(lines: List<String>) {
-    val w = max(lines, comparator {o1, o2 ->
-        val l1 : Int = o1.length // Types of o1 and o2 are ERROR
-        val l2 = o2.length
+    konst w = max(lines, comparator {o1, o2 ->
+        konst l1 : Int = o1.length // Types of o1 and o2 are ERROR
+        konst l2 = o2.length
         l1 - l2
     }).sure()
     checkSubtype<String>(w)

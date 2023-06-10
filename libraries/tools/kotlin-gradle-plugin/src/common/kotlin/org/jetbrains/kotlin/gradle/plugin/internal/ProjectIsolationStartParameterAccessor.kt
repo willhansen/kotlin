@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.gradle.plugin.variantImplementationFactory
  * Gradle 8.0 has changed internal method return type to `Option.Value<Boolean>` from previous `BuildOption.Value<Boolean>`.
  */
 interface ProjectIsolationStartParameterAccessor {
-    val isProjectIsolationEnabled: Boolean
+    konst isProjectIsolationEnabled: Boolean
 
     interface Factory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(gradle: Gradle): ProjectIsolationStartParameterAccessor
@@ -30,14 +30,14 @@ internal class DefaultProjectIsolationStartParameterAccessorVariantFactory :
 }
 
 internal class DefaultProjectIsolationStartParameterAccessor(
-    private val gradle: Gradle
+    private konst gradle: Gradle
 ) : ProjectIsolationStartParameterAccessor {
-    override val isProjectIsolationEnabled: Boolean by lazy {
+    override konst isProjectIsolationEnabled: Boolean by lazy {
         (gradle.startParameter as StartParameterInternal).isolatedProjects.get()
     }
 }
 
-internal val Project.isProjectIsolationEnabled
+internal konst Project.isProjectIsolationEnabled
     get() = variantImplementationFactory<ProjectIsolationStartParameterAccessor.Factory>()
         .getInstance(gradle)
         .isProjectIsolationEnabled

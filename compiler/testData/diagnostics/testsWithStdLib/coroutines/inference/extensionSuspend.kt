@@ -14,20 +14,20 @@ suspend fun <K> GenericController<K>.yieldAll(s: Collection<K>) {}
 
 fun <S> generate(g: suspend GenericController<S>.() -> Unit): S = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield(4)
     yieldAll(setOf(4, 5))
 }
 
-val test2 = generate {
+konst test2 = generate {
     yieldAll(setOf(B))
 }
 
-val test3 = generate {
+konst test3 = generate {
     yieldAll(setOf(B, C))
 }
 
-val test4 = generate {
+konst test4 = generate {
     yieldAll(setOf(B))
 
     yield(C)

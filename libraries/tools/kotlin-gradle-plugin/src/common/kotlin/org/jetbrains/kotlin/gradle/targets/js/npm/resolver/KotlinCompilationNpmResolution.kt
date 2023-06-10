@@ -18,19 +18,19 @@ class KotlinCompilationNpmResolution(
     var externalGradleDependencies: Collection<FileExternalGradleDependency>,
     var externalNpmDependencies: Collection<NpmDependencyDeclaration>,
     var fileCollectionDependencies: Collection<FileCollectionExternalGradleDependency>,
-    val projectPath: String,
-    val projectPackagesDir: File,
-    val rootDir: File,
-    val compilationDisambiguatedName: String,
-    val npmProjectName: String,
-    val npmProjectVersion: String,
-    val npmProjectMain: String,
-    val npmProjectPackageJsonFile: File,
-    val npmProjectDir: File,
-    val tasksRequirements: TasksRequirements
+    konst projectPath: String,
+    konst projectPackagesDir: File,
+    konst rootDir: File,
+    konst compilationDisambiguatedName: String,
+    konst npmProjectName: String,
+    konst npmProjectVersion: String,
+    konst npmProjectMain: String,
+    konst npmProjectPackageJsonFile: File,
+    konst npmProjectDir: File,
+    konst tasksRequirements: TasksRequirements
 ) : Serializable {
 
-    val inputs: PackageJsonProducerInputs
+    konst inputs: PackageJsonProducerInputs
         get() = PackageJsonProducerInputs(
             internalDependencies.map { it.projectName },
             externalGradleDependencies.map { it.file },
@@ -86,18 +86,18 @@ class KotlinCompilationNpmResolution(
         npmResolutionManager: KotlinNpmResolutionManager,
         logger: Logger
     ): PreparedKotlinCompilationNpmResolution {
-        val rootResolver = npmResolutionManager.parameters.resolution.get()
+        konst rootResolver = npmResolutionManager.parameters.resolution.get()
 
-        val internalNpmDependencies = internalDependencies
+        konst internalNpmDependencies = internalDependencies
             .map {
-                val compilationNpmResolution: KotlinCompilationNpmResolution = rootResolver[it.projectPath][it.compilationName]
+                konst compilationNpmResolution: KotlinCompilationNpmResolution = rootResolver[it.projectPath][it.compilationName]
                 compilationNpmResolution.getResolutionOrPrepare(
                     npmResolutionManager,
                     logger
                 )
             }
             .flatMap { it.externalNpmDependencies }
-        val importedExternalGradleDependencies = externalGradleDependencies.mapNotNull {
+        konst importedExternalGradleDependencies = externalGradleDependencies.mapNotNull {
             npmResolutionManager.parameters.gradleNodeModulesProvider.get().get(it.dependencyName, it.dependencyVersion, it.file)
         } + fileCollectionDependencies.flatMap { dependency ->
             dependency.files
@@ -111,20 +111,20 @@ class KotlinCompilationNpmResolution(
                     )
                 }
         }.filterNotNull()
-        val transitiveNpmDependencies = (importedExternalGradleDependencies.flatMap {
+        konst transitiveNpmDependencies = (importedExternalGradleDependencies.flatMap {
             it.dependencies
         } + internalNpmDependencies).filter { it.scope != NpmDependency.Scope.DEV }
 
-        val toolsNpmDependencies = tasksRequirements
+        konst toolsNpmDependencies = tasksRequirements
             .getCompilationNpmRequirements(projectPath, compilationDisambiguatedName)
 
-        val otherNpmDependencies = toolsNpmDependencies + transitiveNpmDependencies
-        val allNpmDependencies = disambiguateDependencies(externalNpmDependencies, otherNpmDependencies, logger)
-        val packageJsonHandlers =
+        konst otherNpmDependencies = toolsNpmDependencies + transitiveNpmDependencies
+        konst allNpmDependencies = disambiguateDependencies(externalNpmDependencies, otherNpmDependencies, logger)
+        konst packageJsonHandlers =
             npmResolutionManager.parameters.packageJsonHandlers.get()["$projectPath:${compilationDisambiguatedName}"]
                 ?: emptyList()
 
-        val packageJson = packageJson(
+        konst packageJson = packageJson(
             npmProjectName,
             npmProjectVersion,
             npmProjectMain,
@@ -152,7 +152,7 @@ class KotlinCompilationNpmResolution(
         others: Collection<NpmDependencyDeclaration>,
         logger: Logger,
     ): Collection<NpmDependencyDeclaration> {
-        val unique = others.groupBy(NpmDependencyDeclaration::name)
+        konst unique = others.groupBy(NpmDependencyDeclaration::name)
             .filterKeys { k -> direct.none { it.name == k } }
             .mapNotNull { (name, dependencies) ->
                 dependencies.maxByOrNull { dep ->

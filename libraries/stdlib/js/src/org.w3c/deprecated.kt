@@ -11,13 +11,13 @@ typealias UnionMessagePortOrWindow = UnionMessagePortOrWindowProxy
 @Deprecated("Use `as` instead.", ReplaceWith("`as`"))
 var HTMLLinkElement.as_
     get() = `as`
-    set(value) {
-        `as` = value
+    set(konstue) {
+        `as` = konstue
     }
 
 @Deprecated("Use `is` instead.", ReplaceWith("`is`"))
 var ElementCreationOptions.is_
     get() = `is`
-    set(value) {
-        `is` = value
+    set(konstue) {
+        `is` = konstue
     }

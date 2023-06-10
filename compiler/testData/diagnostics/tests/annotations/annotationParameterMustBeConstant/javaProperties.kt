@@ -11,7 +11,7 @@ public class Test {
 }
 
 // FILE: a.kt
-annotation class Ann(vararg val i: Int)
+annotation class Ann(vararg konst i: Int)
 
 @Ann(
         <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>Test.i1<!>,

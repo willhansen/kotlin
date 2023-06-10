@@ -7,7 +7,7 @@ class B() : A() {
 }
 
 fun f9(init : A?) {
-  val a : A? = init
+  konst a : A? = init
   a?.foo()
   a?.<!UNRESOLVED_REFERENCE!>bar<!>()
   if (a is B) {
@@ -31,7 +31,7 @@ fun f9(init : A?) {
 }
 
 fun f10(init : A?) {
-  val a : A? = init
+  konst a : A? = init
   if (!(a is B)) {
     return;
   }
@@ -153,16 +153,16 @@ fun illegalWhenBlock(a: Any): Int {
 <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 fun declarations(a: Any?) {
     if (a is String) {
-       val p4: String = a
+       konst p4: String = a
     }
     if (a is String?) {
         if (a != null) {
-            val s: String = a
+            konst s: String = a
         }
     }
     if (a != null) {
         if (a is String?) {
-            val s: String = a
+            konst s: String = a
         }
     }
 }
@@ -198,7 +198,7 @@ fun mergeSmartCasts(a: Any?) {
     is String, is Any -> a.<!UNRESOLVED_REFERENCE!>compareTo<!>("")
   }
   if (a is String && <!USELESS_IS_CHECK!>a is Any<!>) {
-    val i: Int = a.compareTo("")
+    konst i: Int = a.compareTo("")
   }
   if (a is String && a.compareTo("") == 0) {}
   if (a is String || a.<!UNRESOLVED_REFERENCE!>compareTo<!>("") == 0) {}
@@ -209,10 +209,10 @@ fun f(): String {
     var a: Any = 11
     if (a is String) {
         // a is a string, despite of being a variable
-        val i: String = a
+        konst i: String = a
         a.compareTo("f")
         // Beginning from here a is captured in a closure but nobody modifies it
-        val f: Function0<String> = { a }
+        konst f: Function0<String> = { a }
         return a
     }
     return ""

@@ -15,7 +15,7 @@ inline fun test(cond: Boolean, crossinline cif: () -> String): String {
 import test.*
 
 fun box(): String {
-    val s = "OK"
+    konst s = "OK"
     return test(true) {
         {
             s

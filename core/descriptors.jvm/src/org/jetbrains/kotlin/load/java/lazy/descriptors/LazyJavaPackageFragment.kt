@@ -36,29 +36,29 @@ import org.jetbrains.kotlin.utils.jvmMetadataVersionOrDefault
 
 class LazyJavaPackageFragment(
     outerContext: LazyJavaResolverContext,
-    private val jPackage: JavaPackage,
+    private konst jPackage: JavaPackage,
 ) : PackageFragmentDescriptorImpl(outerContext.module, jPackage.fqName) {
-    private val c = outerContext.childForClassOrPackage(this)
+    private konst c = outerContext.childForClassOrPackage(this)
 
-    private val jvmMetadataVersion =
+    private konst jvmMetadataVersion =
         outerContext.components.deserializedDescriptorResolver.components.configuration.jvmMetadataVersionOrDefault()
 
-    internal val binaryClasses by c.storageManager.createLazyValue {
+    internal konst binaryClasses by c.storageManager.createLazyValue {
         c.components.packagePartProvider.findPackageParts(fqName.asString()).mapNotNull { partName ->
-            val classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
+            konst classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
             c.components.kotlinClassFinder.findKotlinClass(classId, jvmMetadataVersion)?.let { partName to it }
         }.toMap()
     }
 
-    private val scope = JvmPackageScope(c, jPackage, this)
+    private konst scope = JvmPackageScope(c, jPackage, this)
 
-    private val subPackages = c.storageManager.createRecursionTolerantLazyValue(
+    private konst subPackages = c.storageManager.createRecursionTolerantLazyValue(
         { jPackage.subPackages.map(JavaPackage::fqName) },
         // This breaks infinite recursion between loading Java descriptors and building light classes
         onRecursiveCall = listOf()
     )
 
-    override val annotations =
+    override konst annotations =
         // Do not resolve package annotations if JSR-305 is disabled
         if (c.components.javaTypeEnhancementState.disabledDefaultAnnotations) Annotations.EMPTY
         else c.resolveAnnotations(jPackage)
@@ -67,11 +67,11 @@ class LazyJavaPackageFragment(
 
     internal fun findClassifierByJavaClass(jClass: JavaClass): ClassDescriptor? = scope.javaScope.findClassifierByJavaClass(jClass)
 
-    private val partToFacade by c.storageManager.createLazyValue {
-        val result = hashMapOf<JvmClassName, JvmClassName>()
+    private konst partToFacade by c.storageManager.createLazyValue {
+        konst result = hashMapOf<JvmClassName, JvmClassName>()
         kotlinClasses@ for ((partInternalName, kotlinClass) in binaryClasses) {
-            val partName = JvmClassName.byInternalName(partInternalName)
-            val header = kotlinClass.classHeader
+            konst partName = JvmClassName.byInternalName(partInternalName)
+            konst header = kotlinClass.classHeader
             when (header.kind) {
                 KotlinClassHeader.Kind.MULTIFILE_CLASS_PART -> {
                     result[partName] = JvmClassName.byInternalName(header.multifileClassName ?: continue@kotlinClasses)

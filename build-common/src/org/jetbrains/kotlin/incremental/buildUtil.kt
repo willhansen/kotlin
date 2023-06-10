@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.flattenTo
 import java.io.File
 import java.nio.file.Files
 
-const val DELETE_MODULE_FILE_PROPERTY = "kotlin.delete.module.file.after.build"
+const konst DELETE_MODULE_FILE_PROPERTY = "kotlin.delete.module.file.after.build"
 
 fun makeModuleFile(
     name: String,
@@ -48,7 +48,7 @@ fun makeModuleFile(
     friendDirs: Iterable<File>,
     isIncrementalMode: Boolean = true
 ): File {
-    val builder = KotlinModuleXmlBuilder()
+    konst builder = KotlinModuleXmlBuilder()
     builder.addModule(
         name,
         outputDir.absolutePath,
@@ -68,7 +68,7 @@ fun makeModuleFile(
         isIncrementalMode
     )
 
-    val scriptFile = Files.createTempFile("kjps", sanitizeJavaIdentifier(name) + ".script.xml").toFile()
+    konst scriptFile = Files.createTempFile("kjps", sanitizeJavaIdentifier(name) + ".script.xml").toFile()
     scriptFile.writeText(builder.asText().toString())
     return scriptFile
 }
@@ -131,13 +131,13 @@ fun LookupStorage.update(
 
     removeLookupsFrom(filesToCompile.asSequence() + removedFiles.asSequence())
 
-    addAll(lookupTracker.lookups, lookupTracker.pathInterner.values)
+    addAll(lookupTracker.lookups, lookupTracker.pathInterner.konstues)
 }
 
 data class DirtyData(
-    val dirtyLookupSymbols: Collection<LookupSymbol> = emptyList(),
-    val dirtyClassesFqNames: Collection<FqName> = emptyList(),
-    val dirtyClassesFqNamesForceRecompile: Collection<FqName> = emptyList()
+    konst dirtyLookupSymbols: Collection<LookupSymbol> = emptyList(),
+    konst dirtyClassesFqNames: Collection<FqName> = emptyList(),
+    konst dirtyClassesFqNamesForceRecompile: Collection<FqName> = emptyList()
 )
 
 /**
@@ -171,27 +171,27 @@ fun List<ChangeInfo>.getChangedAndImpactedSymbols(
     caches: Iterable<IncrementalCacheCommon>,
     reporter: ICReporter
 ): DirtyData {
-    val dirtyLookupSymbols = HashSet<LookupSymbol>()
-    val dirtyClassesFqNames = HashSet<FqName>()
+    konst dirtyLookupSymbols = HashSet<LookupSymbol>()
+    konst dirtyClassesFqNames = HashSet<FqName>()
 
-    val sealedParents = HashSet<FqName>()
+    konst sealedParents = HashSet<FqName>()
 
     for (change in this) {
         reporter.debug { "Process $change" }
 
         if (change is ChangeInfo.SignatureChanged) {
-            val fqNames = if (!change.areSubclassesAffected) listOf(change.fqName) else withSubtypes(change.fqName, caches)
+            konst fqNames = if (!change.areSubclassesAffected) listOf(change.fqName) else withSubtypes(change.fqName, caches)
             dirtyClassesFqNames.addAll(fqNames)
 
             for (classFqName in fqNames) {
                 assert(!classFqName.isRoot) { "$classFqName is root when processing $change" }
 
-                val scope = classFqName.parent().asString()
-                val name = classFqName.shortName().identifier
+                konst scope = classFqName.parent().asString()
+                konst name = classFqName.shortName().identifier
                 dirtyLookupSymbols.add(LookupSymbol(name, scope))
             }
         } else if (change is ChangeInfo.MembersChanged) {
-            val fqNames = withSubtypes(change.fqName, caches)
+            konst fqNames = withSubtypes(change.fqName, caches)
             // need to recompile subtypes because changed member might break override
             dirtyClassesFqNames.addAll(fqNames)
 
@@ -215,10 +215,10 @@ fun mapLookupSymbolsToFiles(
     reporter: ICReporter,
     excludes: Set<File> = emptySet()
 ): Set<File> {
-    val dirtyFiles = HashSet<File>()
+    konst dirtyFiles = HashSet<File>()
 
     for (lookup in lookupSymbols) {
-        val affectedFiles = lookupStorage.get(lookup).map(::File).filter { it !in excludes }
+        konst affectedFiles = lookupStorage.get(lookup).map(::File).filter { it !in excludes }
         reporter.reportMarkDirtyMember(affectedFiles, scope = lookup.scope, name = lookup.name)
         dirtyFiles.addAll(affectedFiles)
     }
@@ -232,11 +232,11 @@ fun mapClassesFqNamesToFiles(
     reporter: ICReporter,
     excludes: Set<File> = emptySet()
 ): Set<File> {
-    val fqNameToAffectedFiles = HashMap<FqName, MutableSet<File>>()
+    konst fqNameToAffectedFiles = HashMap<FqName, MutableSet<File>>()
 
     for (cache in caches) {
         for (classFqName in classesFqNames) {
-            val srcFile = cache.getSourceFileIfClass(classFqName)
+            konst srcFile = cache.getSourceFileIfClass(classFqName)
             if (srcFile == null || srcFile in excludes || srcFile.isJavaFile()) continue
 
             fqNameToAffectedFiles.getOrPut(classFqName) { HashSet() }.add(srcFile)
@@ -247,7 +247,7 @@ fun mapClassesFqNamesToFiles(
         reporter.reportMarkDirtyClass(affectedFiles, classFqName.asString())
     }
 
-    return fqNameToAffectedFiles.values.flattenTo(HashSet())
+    return fqNameToAffectedFiles.konstues.flattenTo(HashSet())
 }
 
 fun isSealed(
@@ -274,13 +274,13 @@ fun withSubtypes(
     typeFqName: FqName,
     caches: Iterable<IncrementalCacheCommon>
 ): Set<FqName> {
-    val typesToProccess = LinkedHashSet(listOf(typeFqName))
-    val proccessedTypes = hashSetOf<FqName>()
+    konst typesToProccess = LinkedHashSet(listOf(typeFqName))
+    konst proccessedTypes = hashSetOf<FqName>()
 
 
     while (typesToProccess.isNotEmpty()) {
-        val iterator = typesToProccess.iterator()
-        val unprocessedType = iterator.next()
+        konst iterator = typesToProccess.iterator()
+        konst unprocessedType = iterator.next()
         iterator.remove()
 
         caches.asSequence()

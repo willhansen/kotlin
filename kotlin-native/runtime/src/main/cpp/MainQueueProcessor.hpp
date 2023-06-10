@@ -12,7 +12,7 @@ void initializeMainQueueProcessor() noexcept;
 bool isMainQueueProcessorAvailable() noexcept;
 
 // Run `f(arg)` on main queue without waiting for its completion.
-// Only valid if `isMainQueueProcessorAvailable()` returns true.
+// Only konstid if `isMainQueueProcessorAvailable()` returns true.
 void runOnMainQueue(void* arg, void (*f)(void*)) noexcept;
 
 } // namespace kotlin

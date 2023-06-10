@@ -74,7 +74,7 @@ static inline intptr_t mi_atomic_subi(_Atomic(intptr_t)*p, intptr_t sub);
 
 #if defined(__cplusplus) || !defined(_MSC_VER)
 
-// In C++/C11 atomics we have polymorphic atomics so can use the typed `ptr` variants (where `tp` is the type of atomic value)
+// In C++/C11 atomics we have polymorphic atomics so can use the typed `ptr` variants (where `tp` is the type of atomic konstue)
 // We use these macros so we can provide a typed wrapper in MSVC in C compilation mode as well
 #define mi_atomic_load_ptr_acquire(tp,p)                mi_atomic_load_acquire(p)
 #define mi_atomic_load_ptr_relaxed(tp,p)                mi_atomic_load_relaxed(p)
@@ -260,12 +260,12 @@ static inline void mi_atomic_maxi64_relaxed(volatile _Atomic(int64_t)*p, int64_t
 #endif
 
 
-// Atomically add a signed value; returns the previous value.
+// Atomically add a signed konstue; returns the previous konstue.
 static inline intptr_t mi_atomic_addi(_Atomic(intptr_t)*p, intptr_t add) {
   return (intptr_t)mi_atomic_add_acq_rel((_Atomic(uintptr_t)*)p, (uintptr_t)add);
 }
 
-// Atomically subtract a signed value; returns the previous value.
+// Atomically subtract a signed konstue; returns the previous konstue.
 static inline intptr_t mi_atomic_subi(_Atomic(intptr_t)*p, intptr_t sub) {
   return (intptr_t)mi_atomic_addi(p, -sub);
 }

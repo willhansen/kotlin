@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.kapt.cli
 
 import java.io.File
 
-internal const val JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
+internal const konst JAVAC_CONTEXT_CLASS = "com.sun.tools.javac.util.Context"
 
 internal fun areJavacComponentsAvailable(): Boolean {
     return try {
@@ -19,7 +19,7 @@ internal fun areJavacComponentsAvailable(): Boolean {
 }
 
 internal fun findToolsJar(): File? {
-    val currentJavaHome = System.getProperty("java.home")
+    konst currentJavaHome = System.getProperty("java.home")
         ?.takeIf { it.isNotEmpty() }
         ?.let(::File)
         ?.takeIf { it.exists() }

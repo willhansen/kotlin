@@ -35,13 +35,13 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.FieldNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
-class KDocCommentKeeper(private val kaptContext: KaptContextForStubGeneration) {
-    private val docCommentTable = KaptDocCommentTable()
+class KDocCommentKeeper(private konst kaptContext: KaptContextForStubGeneration) {
+    private konst docCommentTable = KaptDocCommentTable()
 
     fun getDocTable(file: JCTree.JCCompilationUnit): DocCommentTable {
-        val map = docCommentTable.takeIf { it.map.isNotEmpty() } ?: return docCommentTable
+        konst map = docCommentTable.takeIf { it.map.isNotEmpty() } ?: return docCommentTable
 
-        // Enum values with doc comments are rendered incorrectly in javac pretty print,
+        // Enum konstues with doc comments are rendered incorrectly in javac pretty print,
         // so we delete the comments.
         file.accept(object : TreeScanner() {
             var removeComments = false
@@ -72,10 +72,10 @@ class KDocCommentKeeper(private val kaptContext: KaptContextForStubGeneration) {
     }
 
     fun saveKDocComment(tree: JCTree, node: Any) {
-        val origin = kaptContext.origins[node] ?: return
-        val psiElement = origin.element as? KtDeclaration ?: return
-        val descriptor = origin.descriptor
-        val docComment = psiElement.docComment ?: return
+        konst origin = kaptContext.origins[node] ?: return
+        konst psiElement = origin.element as? KtDeclaration ?: return
+        konst descriptor = origin.descriptor
+        konst docComment = psiElement.docComment ?: return
 
         if (descriptor is ConstructorDescriptor && psiElement is KtClassOrObject) {
             // We don't want the class comment to be duplicated on <init>()
@@ -100,13 +100,13 @@ class KDocCommentKeeper(private val kaptContext: KaptContextForStubGeneration) {
     }
 
     private fun escapeNestedComments(text: String): String {
-        val result = StringBuilder()
+        konst result = StringBuilder()
 
         var index = 0
         var commentLevel = 0
 
         while (index < text.length) {
-            val currentChar = text[index]
+            konst currentChar = text[index]
             fun nextChar() = text.getOrNull(index + 1)
 
             if (currentChar == '/' && nextChar() == '*') {
@@ -133,7 +133,7 @@ class KDocCommentKeeper(private val kaptContext: KaptContextForStubGeneration) {
                 override fun visitElement(element: PsiElement) {
                     if (element is LeafPsiElement) {
                         if (element.isKDocLeadingAsterisk()) {
-                            val indent = takeLastWhile { it == ' ' || it == '\t' }.length
+                            konst indent = takeLastWhile { it == ' ' || it == '\t' }.length
                             if (indent > 0) {
                                 delete(length - indent, length)
                             }
@@ -153,7 +153,7 @@ class KDocCommentKeeper(private val kaptContext: KaptContextForStubGeneration) {
     private fun LeafPsiElement.isKDocLeadingAsterisk() = elementType == KDocTokens.LEADING_ASTERISK
 }
 
-private class KDocComment(val body: String) : Tokens.Comment {
+private class KDocComment(konst body: String) : Tokens.Comment {
     override fun getSourcePos(index: Int) = -1
     override fun getStyle() = Tokens.Comment.CommentStyle.JAVADOC
     override fun getText() = body
@@ -161,9 +161,9 @@ private class KDocComment(val body: String) : Tokens.Comment {
 }
 
 private class KaptDocCommentTable(map: Map<JCTree, Tokens.Comment> = emptyMap()) : DocCommentTable {
-    private val table = map.toMutableMap()
+    private konst table = map.toMutableMap()
 
-    val map: Map<JCTree, Tokens.Comment>
+    konst map: Map<JCTree, Tokens.Comment>
         get() = table
 
     override fun hasComment(tree: JCTree) = tree in table

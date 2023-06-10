@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirContractDescription : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
+    abstract override konst source: KtSourceElement?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitContractDescription(this, data)
 

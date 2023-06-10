@@ -88,8 +88,8 @@ class A(
 }
 
 fun box(): String {
-    val f = A::class.constructors.single()
-    val parameters = f.parameters
+    konst f = A::class.constructors.single()
+    konst parameters = f.parameters
 
     f.callBy(mapOf(
             *((1..70)).map { i -> parameters[i - 1] to i }.toTypedArray()

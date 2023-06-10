@@ -8,6 +8,6 @@ class ST : I()
 
 fun main() {
     var local = I()
-    val x: ST = ++local
-    val y: ST = local
+    konst x: ST = ++local
+    konst y: ST = local
 }

@@ -29,9 +29,9 @@ internal class SymbolFakeFile(classOrObject: KtClassOrObject, ktClass: KtLightCl
 
         // We have to explicitly process package declarations if current file belongs to default package
         // so that Java resolve can find classes located in that package
-        val packageName = packageName
+        konst packageName = packageName
         if (packageName.isNotEmpty()) return true
-        val aPackage = JavaPsiFacade.getInstance(project).findPackage(packageName)
+        konst aPackage = JavaPsiFacade.getInstance(project).findPackage(packageName)
         if (aPackage != null && !aPackage.processDeclarations(processor, state, null, place)) return false
 
         return true

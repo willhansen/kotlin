@@ -1,11 +1,11 @@
 package
 
-@kotlin.internal.ImplicitIntegerCoercion public const val BIGGER_THAN_UBYTE: kotlin.Int = 256
-@kotlin.internal.ImplicitIntegerCoercion public const val EXPLICIT_INT: kotlin.Int = 255
-@kotlin.internal.ImplicitIntegerCoercion public const val IMPLICIT_INT: kotlin.Int = 255
-@kotlin.internal.ImplicitIntegerCoercion public const val LONG_CONST: kotlin.Long = 255.toLong()
-@kotlin.internal.ImplicitIntegerCoercion public val NON_CONST: kotlin.Int = 255
-@kotlin.internal.ImplicitIntegerCoercion public const val UINT_CONST: kotlin.UInt = 42.toUInt()
+@kotlin.internal.ImplicitIntegerCoercion public const konst BIGGER_THAN_UBYTE: kotlin.Int = 256
+@kotlin.internal.ImplicitIntegerCoercion public const konst EXPLICIT_INT: kotlin.Int = 255
+@kotlin.internal.ImplicitIntegerCoercion public const konst IMPLICIT_INT: kotlin.Int = 255
+@kotlin.internal.ImplicitIntegerCoercion public const konst LONG_CONST: kotlin.Long = 255.toLong()
+@kotlin.internal.ImplicitIntegerCoercion public konst NON_CONST: kotlin.Int = 255
+@kotlin.internal.ImplicitIntegerCoercion public const konst UINT_CONST: kotlin.UInt = 42.toUInt()
 public fun takeIntWithoutAnnotation(/*0*/ i: kotlin.Int): kotlin.Unit
 public fun takeLong(/*0*/ @kotlin.internal.ImplicitIntegerCoercion l: kotlin.Long): kotlin.Unit
 public fun takeUByte(/*0*/ @kotlin.internal.ImplicitIntegerCoercion u: kotlin.UByte): kotlin.Unit

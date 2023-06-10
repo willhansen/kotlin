@@ -117,15 +117,15 @@ enum dwarf_attribute {
   DW_AT_language = 0x13,
   DW_AT_member = 0x14,
   DW_AT_discr = 0x15,
-  DW_AT_discr_value = 0x16,
+  DW_AT_discr_konstue = 0x16,
   DW_AT_visibility = 0x17,
   DW_AT_import = 0x18,
   DW_AT_string_length = 0x19,
   DW_AT_common_reference = 0x1a,
   DW_AT_comp_dir = 0x1b,
-  DW_AT_const_value = 0x1c,
+  DW_AT_const_konstue = 0x1c,
   DW_AT_containing_type = 0x1d,
-  DW_AT_default_value = 0x1e,
+  DW_AT_default_konstue = 0x1e,
   DW_AT_inline = 0x20,
   DW_AT_is_optional = 0x21,
   DW_AT_lower_bound = 0x22,
@@ -205,13 +205,13 @@ enum dwarf_attribute {
   DW_AT_rnglists_base = 0x74,
   DW_AT_dwo_name = 0x76,
   DW_AT_reference = 0x77,
-  DW_AT_rvalue_reference = 0x78,
+  DW_AT_rkonstue_reference = 0x78,
   DW_AT_macros = 0x79,
   DW_AT_call_all_calls = 0x7a,
   DW_AT_call_all_source_calls = 0x7b,
   DW_AT_call_all_tail_calls = 0x7c,
   DW_AT_call_return_pc = 0x7d,
-  DW_AT_call_value = 0x7e,
+  DW_AT_call_konstue = 0x7e,
   DW_AT_call_origin = 0x7f,
   DW_AT_call_parameter = 0x80,
   DW_AT_call_pc = 0x81,
@@ -219,7 +219,7 @@ enum dwarf_attribute {
   DW_AT_call_target = 0x83,
   DW_AT_call_target_clobbered = 0x84,
   DW_AT_call_data_location = 0x85,
-  DW_AT_call_data_value = 0x86,
+  DW_AT_call_data_konstue = 0x86,
   DW_AT_noreturn = 0x87,
   DW_AT_alignment = 0x88,
   DW_AT_export_symbols = 0x89,
@@ -277,8 +277,8 @@ enum dwarf_attribute {
   DW_AT_GNU_shared_locks_required = 0x210e,
   DW_AT_GNU_odr_signature = 0x210f,
   DW_AT_GNU_template_name = 0x2110,
-  DW_AT_GNU_call_site_value = 0x2111,
-  DW_AT_GNU_call_site_data_value = 0x2112,
+  DW_AT_GNU_call_site_konstue = 0x2111,
+  DW_AT_GNU_call_site_data_konstue = 0x2112,
   DW_AT_GNU_call_site_target = 0x2113,
   DW_AT_GNU_call_site_target_clobbered = 0x2114,
   DW_AT_GNU_tail_call = 0x2115,
@@ -427,8 +427,8 @@ struct attr
   enum dwarf_attribute name;
   /* The attribute form.  */
   enum dwarf_form form;
-  /* The attribute value, for DW_FORM_implicit_const.  */
-  int64_t val;
+  /* The attribute konstue, for DW_FORM_implicit_const.  */
+  int64_t konst;
 };
 
 /* A single DWARF abbreviation.  */
@@ -462,15 +462,15 @@ struct abbrevs
   struct abbrev *abbrevs;
 };
 
-/* The different kinds of attribute values.  */
+/* The different kinds of attribute konstues.  */
 
-enum attr_val_encoding
+enum attr_konst_encoding
 {
-  /* No attribute value.  */
+  /* No attribute konstue.  */
   ATTR_VAL_NONE,
   /* An address.  */
   ATTR_VAL_ADDRESS,
-  /* An index into the .debug_addr section, whose value is relative to
+  /* An index into the .debug_addr section, whose konstue is relative to
    * the DW_AT_addr_base attribute of the compilation unit.  */
   ATTR_VAL_ADDRESS_INDEX,
   /* A unsigned integer.  */
@@ -499,12 +499,12 @@ enum attr_val_encoding
   ATTR_VAL_EXPR,
 };
 
-/* An attribute value.  */
+/* An attribute konstue.  */
 
-struct attr_val
+struct attr_konst
 {
-  /* How the value is stored in the field u.  */
-  enum attr_val_encoding encoding;
+  /* How the konstue is stored in the field u.  */
+  enum attr_konst_encoding encoding;
   union
   {
     /* ATTR_VAL_ADDRESS*, ATTR_VAL_UINT, ATTR_VAL_REF*.  */
@@ -555,8 +555,8 @@ struct line_header_format
   enum dwarf_form form;	/* Form of entry data.  */
 };
 
-/* Map a single PC value to a file/line.  We will keep a vector of
-   these sorted by PC value.  Each file/line will be correct from the
+/* Map a single PC konstue to a file/line.  We will keep a vector of
+   these sorted by PC konstue.  Each file/line will be correct from the
    PC up to the PC of the next entry if there is one.  We allocate one
    extra entry at the end so that we can use bsearch.  */
 
@@ -584,7 +584,7 @@ struct line_vector
 {
   /* Memory.  This is an array of struct line.  */
   struct backtrace_vector vec;
-  /* Number of valid mappings.  */
+  /* Number of konstid mappings.  */
   size_t count;
 };
 
@@ -610,7 +610,7 @@ struct function
   size_t function_addrs_count;
 };
 
-/* An address range for a function.  This maps a PC value to a
+/* An address range for a function.  This maps a PC konstue to a
    specific function.  */
 
 struct function_addrs
@@ -678,9 +678,9 @@ struct unit
      as needed, and therefore require care, as different threads may
      try to initialize them simultaneously.  */
 
-  /* PC to line number mapping.  This is NULL if the values have not
+  /* PC to line number mapping.  This is NULL if the konstues have not
      been read.  This is (struct line *) -1 if there was an error
-     reading the values.  */
+     reading the konstues.  */
   struct line *lines;
   /* Number of entries in lines.  */
   size_t lines_count;
@@ -689,7 +689,7 @@ struct unit
   size_t function_addrs_count;
 };
 
-/* An address range for a compilation unit.  This maps a PC value to a
+/* An address range for a compilation unit.  This maps a PC konstue to a
    specific compilation unit.  Note that we invert the representation
    in DWARF: instead of listing the units and attaching a list of
    ranges, we list the ranges and have each one point to the unit.
@@ -850,7 +850,7 @@ read_uint16 (struct dwarf_buf *buf)
     return ((uint16_t) p[1] << 8) | (uint16_t) p[0];
 }
 
-/* Read a 24 bit value from BUF and advance 3 bytes.  */
+/* Read a 24 bit konstue from BUF and advance 3 bytes.  */
 
 static uint32_t
 read_uint24 (struct dwarf_buf *buf)
@@ -939,7 +939,7 @@ read_address (struct dwarf_buf *buf, int addrsize)
     }
 }
 
-/* Return whether a value is the highest possible address, given the
+/* Return whether a konstue is the highest possible address, given the
    address size.  */
 
 static int
@@ -1000,12 +1000,12 @@ read_uleb128 (struct dwarf_buf *buf)
 static int64_t
 read_sleb128 (struct dwarf_buf *buf)
 {
-  uint64_t val;
+  uint64_t konst;
   unsigned int shift;
   int overflow;
   unsigned char b;
 
-  val = 0;
+  konst = 0;
   shift = 0;
   overflow = 0;
   do
@@ -1017,7 +1017,7 @@ read_sleb128 (struct dwarf_buf *buf)
 	return 0;
       b = *p;
       if (shift < 64)
-	val |= ((uint64_t) (b & 0x7f)) << shift;
+	konst |= ((uint64_t) (b & 0x7f)) << shift;
       else if (!overflow)
 	{
 	  dwarf_buf_error (buf, "signed LEB128 overflows uint64_t", 0);
@@ -1028,9 +1028,9 @@ read_sleb128 (struct dwarf_buf *buf)
   while ((b & 0x80) != 0);
 
   if ((b & 0x40) != 0 && shift < 64)
-    val |= ((uint64_t) -1) << shift;
+    konst |= ((uint64_t) -1) << shift;
 
-  return (int64_t) val;
+  return (int64_t) konst;
 }
 
 /* Return the length of an LEB128 number.  */
@@ -1087,71 +1087,71 @@ free_abbrevs (struct backtrace_state *state, struct abbrevs *abbrevs,
   abbrevs->abbrevs = NULL;
 }
 
-/* Read an attribute value.  Returns 1 on success, 0 on failure.  If
-   the value can be represented as a uint64_t, sets *VAL and sets
-   *IS_VALID to 1.  We don't try to store the value of other attribute
+/* Read an attribute konstue.  Returns 1 on success, 0 on failure.  If
+   the konstue can be represented as a uint64_t, sets *VAL and sets
+   *IS_VALID to 1.  We don't try to store the konstue of other attribute
    forms, because we don't care about them.  */
 
 static int
-read_attribute (enum dwarf_form form, uint64_t implicit_val,
+read_attribute (enum dwarf_form form, uint64_t implicit_konst,
 		struct dwarf_buf *buf, int is_dwarf64, int version,
 		int addrsize, const struct dwarf_sections *dwarf_sections,
-		struct dwarf_data *altlink, struct attr_val *val)
+		struct dwarf_data *altlink, struct attr_konst *konst)
 {
-  /* Avoid warnings about val.u.FIELD may be used uninitialized if
-     this function is inlined.  The warnings aren't valid but can
+  /* Avoid warnings about konst.u.FIELD may be used uninitialized if
+     this function is inlined.  The warnings aren't konstid but can
      occur because the different fields are set and used
      conditionally.  */
-  memset (val, 0, sizeof *val);
+  memset (konst, 0, sizeof *konst);
 
   switch (form)
     {
     case DW_FORM_addr:
-      val->encoding = ATTR_VAL_ADDRESS;
-      val->u.uint = read_address (buf, addrsize);
+      konst->encoding = ATTR_VAL_ADDRESS;
+      konst->u.uint = read_address (buf, addrsize);
       return 1;
     case DW_FORM_block2:
-      val->encoding = ATTR_VAL_BLOCK;
+      konst->encoding = ATTR_VAL_BLOCK;
       return advance (buf, read_uint16 (buf));
     case DW_FORM_block4:
-      val->encoding = ATTR_VAL_BLOCK;
+      konst->encoding = ATTR_VAL_BLOCK;
       return advance (buf, read_uint32 (buf));
     case DW_FORM_data2:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_uint16 (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_uint16 (buf);
       return 1;
     case DW_FORM_data4:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_uint32 (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_uint32 (buf);
       return 1;
     case DW_FORM_data8:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_uint64 (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_uint64 (buf);
       return 1;
     case DW_FORM_data16:
-      val->encoding = ATTR_VAL_BLOCK;
+      konst->encoding = ATTR_VAL_BLOCK;
       return advance (buf, 16);
     case DW_FORM_string:
-      val->encoding = ATTR_VAL_STRING;
-      val->u.string = read_string (buf);
-      return val->u.string == NULL ? 0 : 1;
+      konst->encoding = ATTR_VAL_STRING;
+      konst->u.string = read_string (buf);
+      return konst->u.string == NULL ? 0 : 1;
     case DW_FORM_block:
-      val->encoding = ATTR_VAL_BLOCK;
+      konst->encoding = ATTR_VAL_BLOCK;
       return advance (buf, read_uleb128 (buf));
     case DW_FORM_block1:
-      val->encoding = ATTR_VAL_BLOCK;
+      konst->encoding = ATTR_VAL_BLOCK;
       return advance (buf, read_byte (buf));
     case DW_FORM_data1:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_byte (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_byte (buf);
       return 1;
     case DW_FORM_flag:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_byte (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_byte (buf);
       return 1;
     case DW_FORM_sdata:
-      val->encoding = ATTR_VAL_SINT;
-      val->u.sint = read_sleb128 (buf);
+      konst->encoding = ATTR_VAL_SINT;
+      konst->u.sint = read_sleb128 (buf);
       return 1;
     case DW_FORM_strp:
       {
@@ -1163,8 +1163,8 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	    dwarf_buf_error (buf, "DW_FORM_strp out of range", 0);
 	    return 0;
 	  }
-	val->encoding = ATTR_VAL_STRING;
-	val->u.string =
+	konst->encoding = ATTR_VAL_STRING;
+	konst->u.string =
 	  (const char *) dwarf_sections->data[DEBUG_STR] + offset;
 	return 1;
       }
@@ -1178,41 +1178,41 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	    dwarf_buf_error (buf, "DW_FORM_line_strp out of range", 0);
 	    return 0;
 	  }
-	val->encoding = ATTR_VAL_STRING;
-	val->u.string =
+	konst->encoding = ATTR_VAL_STRING;
+	konst->u.string =
 	  (const char *) dwarf_sections->data[DEBUG_LINE_STR] + offset;
 	return 1;
       }
     case DW_FORM_udata:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_ref_addr:
-      val->encoding = ATTR_VAL_REF_INFO;
+      konst->encoding = ATTR_VAL_REF_INFO;
       if (version == 2)
-	val->u.uint = read_address (buf, addrsize);
+	konst->u.uint = read_address (buf, addrsize);
       else
-	val->u.uint = read_offset (buf, is_dwarf64);
+	konst->u.uint = read_offset (buf, is_dwarf64);
       return 1;
     case DW_FORM_ref1:
-      val->encoding = ATTR_VAL_REF_UNIT;
-      val->u.uint = read_byte (buf);
+      konst->encoding = ATTR_VAL_REF_UNIT;
+      konst->u.uint = read_byte (buf);
       return 1;
     case DW_FORM_ref2:
-      val->encoding = ATTR_VAL_REF_UNIT;
-      val->u.uint = read_uint16 (buf);
+      konst->encoding = ATTR_VAL_REF_UNIT;
+      konst->u.uint = read_uint16 (buf);
       return 1;
     case DW_FORM_ref4:
-      val->encoding = ATTR_VAL_REF_UNIT;
-      val->u.uint = read_uint32 (buf);
+      konst->encoding = ATTR_VAL_REF_UNIT;
+      konst->u.uint = read_uint32 (buf);
       return 1;
     case DW_FORM_ref8:
-      val->encoding = ATTR_VAL_REF_UNIT;
-      val->u.uint = read_uint64 (buf);
+      konst->encoding = ATTR_VAL_REF_UNIT;
+      konst->u.uint = read_uint64 (buf);
       return 1;
     case DW_FORM_ref_udata:
-      val->encoding = ATTR_VAL_REF_UNIT;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_REF_UNIT;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_indirect:
       {
@@ -1228,22 +1228,22 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	  }
 	return read_attribute ((enum dwarf_form) form, 0, buf, is_dwarf64,
 			       version, addrsize, dwarf_sections, altlink,
-			       val);
+			       konst);
       }
     case DW_FORM_sec_offset:
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_offset (buf, is_dwarf64);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_offset (buf, is_dwarf64);
       return 1;
     case DW_FORM_exprloc:
-      val->encoding = ATTR_VAL_EXPR;
+      konst->encoding = ATTR_VAL_EXPR;
       return advance (buf, read_uleb128 (buf));
     case DW_FORM_flag_present:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = 1;
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = 1;
       return 1;
     case DW_FORM_ref_sig8:
-      val->encoding = ATTR_VAL_REF_TYPE;
-      val->u.uint = read_uint64 (buf);
+      konst->encoding = ATTR_VAL_REF_TYPE;
+      konst->u.uint = read_uint64 (buf);
       return 1;
     case DW_FORM_strx: case DW_FORM_strx1: case DW_FORM_strx2:
     case DW_FORM_strx3: case DW_FORM_strx4:
@@ -1271,8 +1271,8 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	    /* This case can't happen.  */
 	    return 0;
 	  }
-	val->encoding = ATTR_VAL_STRING_INDEX;
-	val->u.uint = offset;
+	konst->encoding = ATTR_VAL_STRING_INDEX;
+	konst->u.uint = offset;
 	return 1;
       }
     case DW_FORM_addrx: case DW_FORM_addrx1: case DW_FORM_addrx2:
@@ -1301,48 +1301,48 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	    /* This case can't happen.  */
 	    return 0;
 	  }
-	val->encoding = ATTR_VAL_ADDRESS_INDEX;
-	val->u.uint = offset;
+	konst->encoding = ATTR_VAL_ADDRESS_INDEX;
+	konst->u.uint = offset;
 	return 1;
       }
     case DW_FORM_ref_sup4:
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_uint32 (buf);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_uint32 (buf);
       return 1;
     case DW_FORM_ref_sup8:
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_uint64 (buf);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_uint64 (buf);
       return 1;
     case DW_FORM_implicit_const:
-      val->encoding = ATTR_VAL_UINT;
-      val->u.uint = implicit_val;
+      konst->encoding = ATTR_VAL_UINT;
+      konst->u.uint = implicit_konst;
       return 1;
     case DW_FORM_loclistx:
       /* We don't distinguish this from DW_FORM_sec_offset.  It
        * shouldn't matter since we don't care about loclists.  */
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_rnglistx:
-      val->encoding = ATTR_VAL_RNGLISTS_INDEX;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_RNGLISTS_INDEX;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_GNU_addr_index:
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_GNU_str_index:
-      val->encoding = ATTR_VAL_REF_SECTION;
-      val->u.uint = read_uleb128 (buf);
+      konst->encoding = ATTR_VAL_REF_SECTION;
+      konst->u.uint = read_uleb128 (buf);
       return 1;
     case DW_FORM_GNU_ref_alt:
-      val->u.uint = read_offset (buf, is_dwarf64);
+      konst->u.uint = read_offset (buf, is_dwarf64);
       if (altlink == NULL)
 	{
-	  val->encoding = ATTR_VAL_NONE;
+	  konst->encoding = ATTR_VAL_NONE;
 	  return 1;
 	}
-      val->encoding = ATTR_VAL_REF_ALT_INFO;
+      konst->encoding = ATTR_VAL_REF_ALT_INFO;
       return 1;
     case DW_FORM_strp_sup: case DW_FORM_GNU_strp_alt:
       {
@@ -1351,7 +1351,7 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	offset = read_offset (buf, is_dwarf64);
 	if (altlink == NULL)
 	  {
-	    val->encoding = ATTR_VAL_NONE;
+	    konst->encoding = ATTR_VAL_NONE;
 	    return 1;
 	  }
 	if (offset >= altlink->dwarf_sections.size[DEBUG_STR])
@@ -1359,8 +1359,8 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
 	    dwarf_buf_error (buf, "DW_FORM_strp_sup out of range", 0);
 	    return 0;
 	  }
-	val->encoding = ATTR_VAL_STRING;
-	val->u.string =
+	konst->encoding = ATTR_VAL_STRING;
+	konst->u.string =
 	  (const char *) altlink->dwarf_sections.data[DEBUG_STR] + offset;
 	return 1;
       }
@@ -1370,23 +1370,23 @@ read_attribute (enum dwarf_form form, uint64_t implicit_val,
     }
 }
 
-/* If we can determine the value of a string attribute, set *STRING to
+/* If we can determine the konstue of a string attribute, set *STRING to
    point to the string.  Return 1 on success, 0 on error.  If we don't
-   know the value, we consider that a success, and we don't change
+   know the konstue, we consider that a success, and we don't change
    *STRING.  An error is only reported for some sort of out of range
    offset.  */
 
 static int
 resolve_string (const struct dwarf_sections *dwarf_sections, int is_dwarf64,
 		int is_bigendian, uint64_t str_offsets_base,
-		const struct attr_val *val,
+		const struct attr_konst *konst,
 		backtrace_error_callback error_callback, void *data,
 		const char **string)
 {
-  switch (val->encoding)
+  switch (konst->encoding)
     {
     case ATTR_VAL_STRING:
-      *string = val->u.string;
+      *string = konst->u.string;
       return 1;
 
     case ATTR_VAL_STRING_INDEX:
@@ -1394,11 +1394,11 @@ resolve_string (const struct dwarf_sections *dwarf_sections, int is_dwarf64,
 	uint64_t offset;
 	struct dwarf_buf offset_buf;
 
-	offset = val->u.uint * (is_dwarf64 ? 8 : 4) + str_offsets_base;
+	offset = konst->u.uint * (is_dwarf64 ? 8 : 4) + str_offsets_base;
 	if (offset + (is_dwarf64 ? 8 : 4)
 	    > dwarf_sections->size[DEBUG_STR_OFFSETS])
 	  {
-	    error_callback (data, "DW_FORM_strx value out of range", 0);
+	    error_callback (data, "DW_FORM_strx konstue out of range", 0);
 	    return 0;
 	  }
 
@@ -1444,7 +1444,7 @@ resolve_addr_index (const struct dwarf_sections *dwarf_sections,
   offset = addr_index * addrsize + addr_base;
   if (offset + addrsize > dwarf_sections->size[DEBUG_ADDR])
     {
-      error_callback (data, "DW_FORM_addrx value out of range", 0);
+      error_callback (data, "DW_FORM_addrx konstue out of range", 0);
       return 0;
     }
 
@@ -1619,7 +1619,7 @@ unit_addrs_search (const void *vkey, const void *ventry)
 }
 
 /* Sort the line vector by PC.  We want a stable sort here to maintain
-   the order of lines for the same PC values.  Since the sequence is
+   the order of lines for the same PC konstues.  Since the sequence is
    being sorted in place, their addresses cannot be relied on to
    maintain stability.  That is the purpose of the index member.  */
 
@@ -1644,7 +1644,7 @@ line_compare (const void *v1, const void *v2)
 /* Find a PC in a line vector.  We always allocate an extra entry at
    the end of the lines vector, so that this routine can safely look
    at the next entry.  Note that when there are multiple mappings for
-   the same PC value, this will return the last one.  */
+   the same PC konstue, this will return the last one.  */
 
 static int
 line_search (const void *vkey, const void *ventry)
@@ -1813,9 +1813,9 @@ read_abbrevs (struct backtrace_state *state, uint64_t abbrev_offset,
 	      attrs[num_attrs].name = (enum dwarf_attribute) name;
 	      attrs[num_attrs].form = (enum dwarf_form) form;
 	      if ((enum dwarf_form) form == DW_FORM_implicit_const)
-		attrs[num_attrs].val = read_sleb128 (&abbrev_buf);
+		attrs[num_attrs].konst = read_sleb128 (&abbrev_buf);
 	      else
-		attrs[num_attrs].val = 0;
+		attrs[num_attrs].konst = 0;
 	      ++num_attrs;
 	    }
 	}
@@ -1859,7 +1859,7 @@ lookup_abbrev (struct abbrevs *abbrevs, uint64_t code,
 	       sizeof (struct abbrev), abbrev_compare);
   if (p == NULL)
     {
-      error_callback (data, "invalid abbreviation code", 0);
+      error_callback (data, "inkonstid abbreviation code", 0);
       return NULL;
     }
   return (const struct abbrev *) p;
@@ -1872,70 +1872,70 @@ lookup_abbrev (struct abbrevs *abbrevs, uint64_t code,
    lowpc/highpc is set or ranges is set.  */
 
 struct pcrange {
-  uint64_t lowpc;		/* The low PC value.  */
-  int have_lowpc;		/* Whether a low PC value was found.  */
+  uint64_t lowpc;		/* The low PC konstue.  */
+  int have_lowpc;		/* Whether a low PC konstue was found.  */
   int lowpc_is_addr_index;	/* Whether lowpc is in .debug_addr.  */
-  uint64_t highpc;		/* The high PC value.  */
-  int have_highpc;		/* Whether a high PC value was found.  */
+  uint64_t highpc;		/* The high PC konstue.  */
+  int have_highpc;		/* Whether a high PC konstue was found.  */
   int highpc_is_relative;	/* Whether highpc is relative to lowpc.  */
   int highpc_is_addr_index;	/* Whether highpc is in .debug_addr.  */
   uint64_t ranges;		/* Offset in ranges section.  */
-  int have_ranges;		/* Whether ranges is valid.  */
+  int have_ranges;		/* Whether ranges is konstid.  */
   int ranges_is_index;		/* Whether ranges is DW_FORM_rnglistx.  */
 };
 
-/* Update PCRANGE from an attribute value.  */
+/* Update PCRANGE from an attribute konstue.  */
 
 static void
-update_pcrange (const struct attr* attr, const struct attr_val* val,
+update_pcrange (const struct attr* attr, const struct attr_konst* konst,
 		struct pcrange *pcrange)
 {
   switch (attr->name)
     {
     case DW_AT_low_pc:
-      if (val->encoding == ATTR_VAL_ADDRESS)
+      if (konst->encoding == ATTR_VAL_ADDRESS)
 	{
-	  pcrange->lowpc = val->u.uint;
+	  pcrange->lowpc = konst->u.uint;
 	  pcrange->have_lowpc = 1;
 	}
-      else if (val->encoding == ATTR_VAL_ADDRESS_INDEX)
+      else if (konst->encoding == ATTR_VAL_ADDRESS_INDEX)
 	{
-	  pcrange->lowpc = val->u.uint;
+	  pcrange->lowpc = konst->u.uint;
 	  pcrange->have_lowpc = 1;
 	  pcrange->lowpc_is_addr_index = 1;
 	}
       break;
 
     case DW_AT_high_pc:
-      if (val->encoding == ATTR_VAL_ADDRESS)
+      if (konst->encoding == ATTR_VAL_ADDRESS)
 	{
-	  pcrange->highpc = val->u.uint;
+	  pcrange->highpc = konst->u.uint;
 	  pcrange->have_highpc = 1;
 	}
-      else if (val->encoding == ATTR_VAL_UINT)
+      else if (konst->encoding == ATTR_VAL_UINT)
 	{
-	  pcrange->highpc = val->u.uint;
+	  pcrange->highpc = konst->u.uint;
 	  pcrange->have_highpc = 1;
 	  pcrange->highpc_is_relative = 1;
 	}
-      else if (val->encoding == ATTR_VAL_ADDRESS_INDEX)
+      else if (konst->encoding == ATTR_VAL_ADDRESS_INDEX)
 	{
-	  pcrange->highpc = val->u.uint;
+	  pcrange->highpc = konst->u.uint;
 	  pcrange->have_highpc = 1;
 	  pcrange->highpc_is_addr_index = 1;
 	}
       break;
 
     case DW_AT_ranges:
-      if (val->encoding == ATTR_VAL_UINT
-	  || val->encoding == ATTR_VAL_REF_SECTION)
+      if (konst->encoding == ATTR_VAL_UINT
+	  || konst->encoding == ATTR_VAL_REF_SECTION)
 	{
-	  pcrange->ranges = val->u.uint;
+	  pcrange->ranges = konst->u.uint;
 	  pcrange->have_ranges = 1;
 	}
-      else if (val->encoding == ATTR_VAL_RNGLISTS_INDEX)
+      else if (konst->encoding == ATTR_VAL_RNGLISTS_INDEX)
 	{
-	  pcrange->ranges = val->u.uint;
+	  pcrange->ranges = konst->u.uint;
 	  pcrange->have_ranges = 1;
 	  pcrange->ranges_is_index = 1;
 	}
@@ -1986,7 +1986,7 @@ add_low_high_range (struct backtrace_state *state,
   if (pcrange->highpc_is_relative)
     highpc += lowpc;
 
-  /* Add in the base address of the module when recording PC values,
+  /* Add in the base address of the module when recording PC konstues,
      so that we can look up the PC directly.  */
   lowpc += base_address;
   highpc += base_address;
@@ -2224,7 +2224,7 @@ add_ranges_from_rnglists (
 	  break;
 
 	default:
-	  dwarf_buf_error (&rnglists_buf, "unrecognized DW_RLE value", -1);
+	  dwarf_buf_error (&rnglists_buf, "unrecognized DW_RLE konstue", -1);
 	  return 0;
 	}
     }
@@ -2276,7 +2276,7 @@ add_ranges (struct backtrace_state *state,
 }
 
 /* Find the address range covered by a compilation unit, reading from
-   UNIT_BUF and adding values to U.  Returns 1 if all data could be
+   UNIT_BUF and adding konstues to U.  Returns 1 if all data could be
    read, 0 if there is some error.  */
 
 static int
@@ -2293,10 +2293,10 @@ find_address_ranges (struct backtrace_state *state, uintptr_t base_address,
       uint64_t code;
       const struct abbrev *abbrev;
       struct pcrange pcrange;
-      struct attr_val name_val;
-      int have_name_val;
-      struct attr_val comp_dir_val;
-      int have_comp_dir_val;
+      struct attr_konst name_konst;
+      int have_name_konst;
+      struct attr_konst comp_dir_konst;
+      int have_comp_dir_konst;
       size_t i;
 
       code = read_uleb128 (unit_buf);
@@ -2311,64 +2311,64 @@ find_address_ranges (struct backtrace_state *state, uintptr_t base_address,
 	*unit_tag = abbrev->tag;
 
       memset (&pcrange, 0, sizeof pcrange);
-      memset (&name_val, 0, sizeof name_val);
-      have_name_val = 0;
-      memset (&comp_dir_val, 0, sizeof comp_dir_val);
-      have_comp_dir_val = 0;
+      memset (&name_konst, 0, sizeof name_konst);
+      have_name_konst = 0;
+      memset (&comp_dir_konst, 0, sizeof comp_dir_konst);
+      have_comp_dir_konst = 0;
       for (i = 0; i < abbrev->num_attrs; ++i)
 	{
-	  struct attr_val val;
+	  struct attr_konst konst;
 
-	  if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].val,
+	  if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].konst,
 			       unit_buf, u->is_dwarf64, u->version,
-			       u->addrsize, dwarf_sections, altlink, &val))
+			       u->addrsize, dwarf_sections, altlink, &konst))
 	    return 0;
 
 	  switch (abbrev->attrs[i].name)
 	    {
 	    case DW_AT_low_pc: case DW_AT_high_pc: case DW_AT_ranges:
-	      update_pcrange (&abbrev->attrs[i], &val, &pcrange);
+	      update_pcrange (&abbrev->attrs[i], &konst, &pcrange);
 	      break;
 
 	    case DW_AT_stmt_list:
 	      if (abbrev->tag == DW_TAG_compile_unit
-		  && (val.encoding == ATTR_VAL_UINT
-		      || val.encoding == ATTR_VAL_REF_SECTION))
-		u->lineoff = val.u.uint;
+		  && (konst.encoding == ATTR_VAL_UINT
+		      || konst.encoding == ATTR_VAL_REF_SECTION))
+		u->lineoff = konst.u.uint;
 	      break;
 
 	    case DW_AT_name:
 	      if (abbrev->tag == DW_TAG_compile_unit)
 		{
-		  name_val = val;
-		  have_name_val = 1;
+		  name_konst = konst;
+		  have_name_konst = 1;
 		}
 	      break;
 
 	    case DW_AT_comp_dir:
 	      if (abbrev->tag == DW_TAG_compile_unit)
 		{
-		  comp_dir_val = val;
-		  have_comp_dir_val = 1;
+		  comp_dir_konst = konst;
+		  have_comp_dir_konst = 1;
 		}
 	      break;
 
 	    case DW_AT_str_offsets_base:
 	      if (abbrev->tag == DW_TAG_compile_unit
-		  && val.encoding == ATTR_VAL_REF_SECTION)
-		u->str_offsets_base = val.u.uint;
+		  && konst.encoding == ATTR_VAL_REF_SECTION)
+		u->str_offsets_base = konst.u.uint;
 	      break;
 
 	    case DW_AT_addr_base:
 	      if (abbrev->tag == DW_TAG_compile_unit
-		  && val.encoding == ATTR_VAL_REF_SECTION)
-		u->addr_base = val.u.uint;
+		  && konst.encoding == ATTR_VAL_REF_SECTION)
+		u->addr_base = konst.u.uint;
 	      break;
 
 	    case DW_AT_rnglists_base:
 	      if (abbrev->tag == DW_TAG_compile_unit
-		  && val.encoding == ATTR_VAL_REF_SECTION)
-		u->rnglists_base = val.u.uint;
+		  && konst.encoding == ATTR_VAL_REF_SECTION)
+		u->rnglists_base = konst.u.uint;
 	      break;
 
 	    default:
@@ -2378,17 +2378,17 @@ find_address_ranges (struct backtrace_state *state, uintptr_t base_address,
 
       // Resolve strings after we're sure that we have seen
       // DW_AT_str_offsets_base.
-      if (have_name_val)
+      if (have_name_konst)
 	{
 	  if (!resolve_string (dwarf_sections, u->is_dwarf64, is_bigendian,
-			       u->str_offsets_base, &name_val,
+			       u->str_offsets_base, &name_konst,
 			       error_callback, data, &u->filename))
 	    return 0;
 	}
-      if (have_comp_dir_val)
+      if (have_comp_dir_konst)
 	{
 	  if (!resolve_string (dwarf_sections, u->is_dwarf64, is_bigendian,
-			       u->str_offsets_base, &comp_dir_val,
+			       u->str_offsets_base, &comp_dir_konst,
 			       error_callback, data, &u->comp_dir))
 	    return 0;
 	}
@@ -2770,7 +2770,7 @@ read_v2_paths (struct backtrace_state *state, struct unit *u,
 	  else
 	    {
 	      dwarf_buf_error (hdr_buf,
-			       ("invalid directory index in "
+			       ("inkonstid directory index in "
 				"line number program header"),
 			       0);
 	      return 0;
@@ -2819,33 +2819,33 @@ read_lnct (struct backtrace_state *state, struct dwarf_data *ddata,
   path = NULL;
   for (i = 0; i < formats_count; i++)
     {
-      struct attr_val val;
+      struct attr_konst konst;
 
       if (!read_attribute (formats[i].form, 0, hdr_buf, u->is_dwarf64,
 			   u->version, hdr->addrsize, &ddata->dwarf_sections,
-			   ddata->altlink, &val))
+			   ddata->altlink, &konst))
 	return 0;
       switch (formats[i].lnct)
 	{
 	case DW_LNCT_path:
 	  if (!resolve_string (&ddata->dwarf_sections, u->is_dwarf64,
 			       ddata->is_bigendian, u->str_offsets_base,
-			       &val, hdr_buf->error_callback, hdr_buf->data,
+			       &konst, hdr_buf->error_callback, hdr_buf->data,
 			       &path))
 	    return 0;
 	  break;
 	case DW_LNCT_directory_index:
-	  if (val.encoding == ATTR_VAL_UINT)
+	  if (konst.encoding == ATTR_VAL_UINT)
 	    {
-	      if (val.u.uint >= hdr->dirs_count)
+	      if (konst.u.uint >= hdr->dirs_count)
 		{
 		  dwarf_buf_error (hdr_buf,
-				   ("invalid directory index in "
+				   ("inkonstid directory index in "
 				    "line number program header"),
 				   0);
 		  return 0;
 		}
-	      dir = hdr->dirs[val.u.uint];
+	      dir = hdr->dirs[konst.u.uint];
 	    }
 	  break;
 	default:
@@ -3142,7 +3142,7 @@ read_line_program (struct backtrace_state *state, struct dwarf_data *ddata,
 		    else
 		      {
 			dwarf_buf_error (line_buf,
-					 ("invalid directory index "
+					 ("inkonstid directory index "
 					  "in line number program"),
 					 0);
 			return 0;
@@ -3205,7 +3205,7 @@ read_line_program (struct backtrace_state *state, struct dwarf_data *ddata,
 		if (fileno >= hdr->filenames_count)
 		  {
 		    dwarf_buf_error (line_buf,
-				     ("invalid file number in "
+				     ("inkonstid file number in "
 				      "line number program"),
 				     0);
 		    return 0;
@@ -3351,7 +3351,7 @@ static const char *read_referenced_name (struct dwarf_data *, struct unit *,
 
 static const char *
 read_referenced_name_from_attr (struct dwarf_data *ddata, struct unit *u,
-				struct attr *attr, struct attr_val *val,
+				struct attr *attr, struct attr_konst *konst,
 				backtrace_error_callback error_callback,
 				void *data)
 {
@@ -3367,31 +3367,31 @@ read_referenced_name_from_attr (struct dwarf_data *ddata, struct unit *u,
   if (attr->form == DW_FORM_ref_sig8)
     return NULL;
 
-  if (val->encoding == ATTR_VAL_REF_INFO)
+  if (konst->encoding == ATTR_VAL_REF_INFO)
     {
       struct unit *unit
 	= find_unit (ddata->units, ddata->units_count,
-		     val->u.uint);
+		     konst->u.uint);
       if (unit == NULL)
 	return NULL;
 
-      uint64_t offset = val->u.uint - unit->low_offset;
+      uint64_t offset = konst->u.uint - unit->low_offset;
       return read_referenced_name (ddata, unit, offset, error_callback, data);
     }
 
-  if (val->encoding == ATTR_VAL_UINT
-      || val->encoding == ATTR_VAL_REF_UNIT)
-    return read_referenced_name (ddata, u, val->u.uint, error_callback, data);
+  if (konst->encoding == ATTR_VAL_UINT
+      || konst->encoding == ATTR_VAL_REF_UNIT)
+    return read_referenced_name (ddata, u, konst->u.uint, error_callback, data);
 
-  if (val->encoding == ATTR_VAL_REF_ALT_INFO)
+  if (konst->encoding == ATTR_VAL_REF_ALT_INFO)
     {
       struct unit *alt_unit
 	= find_unit (ddata->altlink->units, ddata->altlink->units_count,
-		     val->u.uint);
+		     konst->u.uint);
       if (alt_unit == NULL)
 	return NULL;
 
-      uint64_t offset = val->u.uint - alt_unit->low_offset;
+      uint64_t offset = konst->u.uint - alt_unit->low_offset;
       return read_referenced_name (ddata->altlink, alt_unit, offset,
 				   error_callback, data);
     }
@@ -3442,7 +3442,7 @@ read_referenced_name (struct dwarf_data *ddata, struct unit *u,
   if (code == 0)
     {
       dwarf_buf_error (&unit_buf,
-		       "invalid abstract origin or specification",
+		       "inkonstid abstract origin or specification",
 		       0);
       return NULL;
     }
@@ -3454,11 +3454,11 @@ read_referenced_name (struct dwarf_data *ddata, struct unit *u,
   ret = NULL;
   for (i = 0; i < abbrev->num_attrs; ++i)
     {
-      struct attr_val val;
+      struct attr_konst konst;
 
-      if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].val,
+      if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].konst,
 			   &unit_buf, u->is_dwarf64, u->version, u->addrsize,
-			   &ddata->dwarf_sections, ddata->altlink, &val))
+			   &ddata->dwarf_sections, ddata->altlink, &konst))
 	return NULL;
 
       switch (abbrev->attrs[i].name)
@@ -3471,7 +3471,7 @@ read_referenced_name (struct dwarf_data *ddata, struct unit *u,
 	    break;
 	  if (!resolve_string (&ddata->dwarf_sections, u->is_dwarf64,
 			       ddata->is_bigendian, u->str_offsets_base,
-			       &val, error_callback, data, &ret))
+			       &konst, error_callback, data, &ret))
 	    return NULL;
 	  break;
 
@@ -3484,7 +3484,7 @@ read_referenced_name (struct dwarf_data *ddata, struct unit *u,
 	    s = NULL;
 	    if (!resolve_string (&ddata->dwarf_sections, u->is_dwarf64,
 				 ddata->is_bigendian, u->str_offsets_base,
-				 &val, error_callback, data, &s))
+				 &konst, error_callback, data, &s))
 	      return NULL;
 	    if (s != NULL)
 	      return s;
@@ -3498,7 +3498,7 @@ read_referenced_name (struct dwarf_data *ddata, struct unit *u,
 	    const char *name;
 
 	    name = read_referenced_name_from_attr (ddata, u, &abbrev->attrs[i],
-						   &val, error_callback, data);
+						   &konst, error_callback, data);
 	    if (name != NULL)
 	      ret = name;
 	  }
@@ -3606,12 +3606,12 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
       have_linkage_name = 0;
       for (i = 0; i < abbrev->num_attrs; ++i)
 	{
-	  struct attr_val val;
+	  struct attr_konst konst;
 
-	  if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].val,
+	  if (!read_attribute (abbrev->attrs[i].form, abbrev->attrs[i].konst,
 			       unit_buf, u->is_dwarf64, u->version,
 			       u->addrsize, &ddata->dwarf_sections,
-			       ddata->altlink, &val))
+			       ddata->altlink, &konst))
 	    return 0;
 
 	  /* The compile unit sets the base address for any address
@@ -3619,13 +3619,13 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
 	  if (abbrev->tag == DW_TAG_compile_unit
 	      && abbrev->attrs[i].name == DW_AT_low_pc)
 	    {
-	      if (val.encoding == ATTR_VAL_ADDRESS)
-		base = val.u.uint;
-	      else if (val.encoding == ATTR_VAL_ADDRESS_INDEX)
+	      if (konst.encoding == ATTR_VAL_ADDRESS)
+		base = konst.u.uint;
+	      else if (konst.encoding == ATTR_VAL_ADDRESS_INDEX)
 		{
 		  if (!resolve_addr_index (&ddata->dwarf_sections,
 					   u->addr_base, u->addrsize,
-					   ddata->is_bigendian, val.u.uint,
+					   ddata->is_bigendian, konst.u.uint,
 					   error_callback, data, &base))
 		    return 0;
 		}
@@ -3636,27 +3636,27 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
 	      switch (abbrev->attrs[i].name)
 		{
 		case DW_AT_call_file:
-		  if (val.encoding == ATTR_VAL_UINT)
+		  if (konst.encoding == ATTR_VAL_UINT)
 		    {
-		      if (val.u.uint >= lhdr->filenames_count)
+		      if (konst.u.uint >= lhdr->filenames_count)
 			{
 			  dwarf_buf_error (unit_buf,
-					   ("invalid file number in "
+					   ("inkonstid file number in "
 					    "DW_AT_call_file attribute"),
 					   0);
 			  return 0;
 			}
-		      function->caller_filename = lhdr->filenames[val.u.uint];
+		      function->caller_filename = lhdr->filenames[konst.u.uint];
 		    }
 		  break;
 
 		case DW_AT_call_line:
-		  if (val.encoding == ATTR_VAL_UINT)
-		    function->caller_lineno = val.u.uint;
+		  if (konst.encoding == ATTR_VAL_UINT)
+		    function->caller_lineno = konst.u.uint;
 		  break;
 		case DW_AT_call_column:
-		  if (val.encoding == ATTR_VAL_UINT)
-		    function->caller_column = val.u.uint;
+		  if (konst.encoding == ATTR_VAL_UINT)
+		    function->caller_column = konst.u.uint;
 		  break;
 
 		case DW_AT_abstract_origin:
@@ -3670,7 +3670,7 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
 
 		    name
 		      = read_referenced_name_from_attr (ddata, u,
-							&abbrev->attrs[i], &val,
+							&abbrev->attrs[i], &konst,
 							error_callback, data);
 		    if (name != NULL)
 		      function->name = name;
@@ -3683,7 +3683,7 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
             const char *n = NULL;
             if (!resolve_string (&ddata->dwarf_sections, u->is_dwarf64,
                          ddata->is_bigendian,
-                         u->str_offsets_base, &val,
+                         u->str_offsets_base, &konst,
                          error_callback, data, &n))
               return 0;
             if (n != NULL) {
@@ -3704,7 +3704,7 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
 		    s = NULL;
 		    if (!resolve_string (&ddata->dwarf_sections, u->is_dwarf64,
 					 ddata->is_bigendian,
-					 u->str_offsets_base, &val,
+					 u->str_offsets_base, &konst,
 					 error_callback, data, &s))
 		      return 0;
 		    if (s != NULL)
@@ -3716,7 +3716,7 @@ read_function_entry (struct backtrace_state *state, struct dwarf_data *ddata,
 		  break;
 
 		case DW_AT_low_pc: case DW_AT_high_pc: case DW_AT_ranges:
-		  update_pcrange (&abbrev->attrs[i], &val, &pcrange);
+		  update_pcrange (&abbrev->attrs[i], &konst, &pcrange);
 		  break;
 
 		default:
@@ -3918,7 +3918,7 @@ report_inlined_functions (uintptr_t pc, struct function *function,
     return 0;
 
   /* Our search isn't safe if pc == -1, as that is the sentinel
-     value.  */
+     konstue.  */
   if (pc + 1 == 0)
     return 0;
 
@@ -3932,8 +3932,8 @@ report_inlined_functions (uintptr_t pc, struct function *function,
 
   /* Here pc >= p->low && pc < (p + 1)->low.  The function_addrs are
      sorted by low, so if pc > p->low we are at the end of a range of
-     function_addrs with the same low value.  If pc == p->low walk
-     forward to the end of the range with that low value.  Then walk
+     function_addrs with the same low konstue.  If pc == p->low walk
+     forward to the end of the range with that low konstue.  Then walk
      backward and use the first range that includes pc.  */
   while (pc == (p + 1)->low)
     ++p;
@@ -4006,7 +4006,7 @@ dwarf_lookup_pc (struct backtrace_state *state, struct dwarf_data *ddata,
   *found = 1;
 
   /* Find an address range that includes PC.  Our search isn't safe if
-     PC == -1, as we use that as a sentinel value, so skip the search
+     PC == -1, as we use that as a sentinel konstue, so skip the search
      in that case.  */
   entry = (ddata->addrs_count == 0 || pc + 1 == 0
 	   ? NULL
@@ -4021,8 +4021,8 @@ dwarf_lookup_pc (struct backtrace_state *state, struct dwarf_data *ddata,
 
   /* Here pc >= entry->low && pc < (entry + 1)->low.  The unit_addrs
      are sorted by low, so if pc > p->low we are at the end of a range
-     of unit_addrs with the same low value.  If pc == p->low walk
-     forward to the end of the range with that low value.  Then walk
+     of unit_addrs with the same low konstue.  If pc == p->low walk
+     forward to the end of the range with that low konstue.  Then walk
      backward and use the first range that includes pc.  */
   while (pc == (entry + 1)->low)
     ++entry;
@@ -4207,8 +4207,8 @@ dwarf_lookup_pc (struct backtrace_state *state, struct dwarf_data *ddata,
 
   /* Here pc >= p->low && pc < (p + 1)->low.  The function_addrs are
      sorted by low, so if pc > p->low we are at the end of a range of
-     function_addrs with the same low value.  If pc == p->low walk
-     forward to the end of the range with that low value.  Then walk
+     function_addrs with the same low konstue.  If pc == p->low walk
+     forward to the end of the range with that low konstue.  Then walk
      backward and use the first range that includes pc.  */
   while (pc == (p + 1)->low)
     ++p;

@@ -4,13 +4,13 @@ public final class AnnotationCtorCallNoSyntheticKt {
     public final static @Foo(bar=Bar) method box(): void
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class Bar {
     // source: 'annotationCtorCallNoSynthetic.kt'
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class Foo {
     // source: 'annotationCtorCallNoSynthetic.kt'

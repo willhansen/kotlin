@@ -20,17 +20,17 @@ internal fun List<Name>.fqNameBeforeIndex(toIndexExclusive: Int): FqName =
     if (toIndexExclusive == 0) FqName.ROOT else FqName(subList(0, toIndexExclusive).joinToString("."))
 
 internal fun FqName.removeSuffix(suffix: FqName): FqName {
-    val pathSegments = pathSegments()
-    val suffixPathSegments = suffix.pathSegments()
+    konst pathSegments = pathSegments()
+    konst suffixPathSegments = suffix.pathSegments()
 
-    val suffixStart = pathSegments.size - suffixPathSegments.size
+    konst suffixStart = pathSegments.size - suffixPathSegments.size
     assertEquals(suffixPathSegments, pathSegments.subList(suffixStart, pathSegments.size))
 
     return FqName(pathSegments.take(suffixStart).joinToString("."))
 }
 
 internal fun KtDotQualifiedExpression.collectNames(): List<Name> {
-    val output = mutableListOf<Name>()
+    konst output = mutableListOf<Name>()
 
     fun KtExpression.recurse(): Boolean {
         children.forEach { child ->
@@ -83,7 +83,7 @@ internal fun KtUserType.collectNames(output: MutableList<Name> = mutableListOf()
 }
 
 internal fun KtElement.collectAccessibleDeclarationNames(): Set<Name> {
-    val names = hashSetOf<Name>()
+    konst names = hashSetOf<Name>()
 
     if (this is KtTypeParameterListOwner) {
         typeParameters.mapTo(names) { it.nameAsSafeName }

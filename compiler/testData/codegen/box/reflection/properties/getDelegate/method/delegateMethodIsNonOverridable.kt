@@ -4,30 +4,30 @@
 import kotlin.reflect.*
 import kotlin.reflect.jvm.isAccessible
 
-val a = 1
-val b = 2
+konst a = 1
+konst b = 2
 
 fun KProperty0<*>.test(): String =
     (apply { isAccessible = true }.getDelegate() as KProperty<*>).name
 
 open class C {
-    open val x by run { ::a }
-    open val y by ::a
+    open konst x by run { ::a }
+    open konst y by ::a
 
-    val xc = ::x.test()
-    val yc = ::y.test()
+    konst xc = ::x.test()
+    konst yc = ::y.test()
 }
 
 class D : C() {
-    override val x by run { ::b }
-    override val y by ::b
+    override konst x by run { ::b }
+    override konst y by ::b
 
-    val xd = ::x.test()
-    val yd = ::y.test()
+    konst xd = ::x.test()
+    konst yd = ::y.test()
 }
 
 fun box(): String {
-    val result = D().run { "$xc $yc $xd $yd" }
+    konst result = D().run { "$xc $yc $xd $yd" }
     if (result != "a a b b") return "Fail: $result"
 
     return "OK"

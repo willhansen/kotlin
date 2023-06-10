@@ -2,8 +2,8 @@
 // WITH_STDLIB
 import kotlin.test.*
 
-val pUnit = Unit
-val pNUnit: Unit? = Unit
+konst pUnit = Unit
+konst pNUnit: Unit? = Unit
 
 fun box(): String {
     assertEquals(null, pUnit::class.javaPrimitiveType)

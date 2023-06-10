@@ -46,29 +46,29 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.util.OperatorNameConventions
 import kotlin.properties.Delegates
 
-internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallChecker {
+internal class InlineChecker(private konst descriptor: FunctionDescriptor) : CallChecker {
     init {
         assert(InlineUtil.isInline(descriptor)) { "This extension should be created only for inline functions: $descriptor" }
     }
 
-    private val inlineFunEffectiveVisibility = descriptor.effectiveVisibility(descriptor.visibility, true)
+    private konst inlineFunEffectiveVisibility = descriptor.effectiveVisibility(descriptor.visibility, true)
 
-    private val isEffectivelyPrivateApiFunction = descriptor.isEffectivelyPrivateApi
+    private konst isEffectivelyPrivateApiFunction = descriptor.isEffectivelyPrivateApi
 
-    private val inlinableParameters = descriptor.valueParameters.filter { InlineUtil.isInlineParameter(it) }
+    private konst inlinableParameters = descriptor.konstueParameters.filter { InlineUtil.isInlineParameter(it) }
 
-    private val inlinableKtParameters = inlinableParameters.mapNotNull { (it.source as? KotlinSourceElement)?.psi }
+    private konst inlinableKtParameters = inlinableParameters.mapNotNull { (it.source as? KotlinSourceElement)?.psi }
 
     private var supportDefaultValueInline by Delegates.notNull<Boolean>()
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val call = resolvedCall.call
-        val expression = call.calleeExpression ?: return
+        konst call = resolvedCall.call
+        konst expression = call.calleeExpression ?: return
 
         supportDefaultValueInline = context.languageVersionSettings.supportsFeature(LanguageFeature.InlineDefaultFunctionalParameters)
 
         //checking that only invoke or inlinable extension called on function parameter
-        val targetDescriptor = resolvedCall.resultingDescriptor
+        konst targetDescriptor = resolvedCall.resultingDescriptor
 
         // Omit inline checks for 'contract'-call because those calls will never be executed, so inline checking is pointless
         if (targetDescriptor.isFromContractDsl()) return
@@ -84,22 +84,22 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
             }
         }
 
-        for ((valueDescriptor, value) in resolvedCall.valueArguments) {
-            if (value !is DefaultValueArgument) {
-                for (argument in value.arguments) {
-                    checkValueParameter(context, targetDescriptor, argument, valueDescriptor)
+        for ((konstueDescriptor, konstue) in resolvedCall.konstueArguments) {
+            if (konstue !is DefaultValueArgument) {
+                for (argument in konstue.arguments) {
+                    checkValueParameter(context, targetDescriptor, argument, konstueDescriptor)
                 }
             }
         }
 
-        val replacementForReport = (call.dispatchReceiver as? ExpressionReceiver)?.expression
+        konst replacementForReport = (call.dispatchReceiver as? ExpressionReceiver)?.expression
         checkVisibilityAndAccess(targetDescriptor, expression, replacementForReport, context, call)
         checkRecursion(context, targetDescriptor, expression, replacementForReport)
     }
 
     private fun checkNotInDefaultParameter(context: CallCheckerContext, expression: KtExpression) =
         !supportDefaultValueInline || expression.getParentOfType<KtParameter>(true)?.let {
-            val allow = it !in inlinableKtParameters
+            konst allow = it !in inlinableKtParameters
             if (!allow) {
                 context.trace.report(
                     NOT_SUPPORTED_INLINE_PARAMETER_IN_INLINE_PARAMETER_DEFAULT_VALUE.on(
@@ -113,9 +113,9 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         } ?: true
 
     private fun isInsideCall(expression: KtExpression): Boolean {
-        val parent = KtPsiUtil.getParentCallIfPresent(expression)
+        konst parent = KtPsiUtil.getParentCallIfPresent(expression)
         if (parent is KtBinaryExpression) {
-            val token = KtPsiUtil.getOperationToken((parent as KtOperationExpression?)!!)
+            konst token = KtPsiUtil.getOperationToken((parent as KtOperationExpression?)!!)
             if (token === KtTokens.EQ || token === KtTokens.ANDAND || token === KtTokens.OROR) {
                 //assignment
                 return false
@@ -143,8 +143,8 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         targetArgument: ValueArgument,
         targetParameterDescriptor: ValueParameterDescriptor
     ) {
-        val argumentExpression = targetArgument.getArgumentExpression() ?: return
-        val argumentCallee = getCalleeDescriptor(context, argumentExpression, false)
+        konst argumentExpression = targetArgument.getArgumentExpression() ?: return
+        konst argumentCallee = getCalleeDescriptor(context, argumentExpression, false)
 
         if (argumentCallee != null && inlinableParameters.contains(argumentCallee)) {
             when {
@@ -171,15 +171,15 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
     ) {
         if (receiver == null) return
 
-        val varDescriptor: CallableDescriptor?
-        val receiverExpression: KtExpression?
+        konst varDescriptor: CallableDescriptor?
+        konst receiverExpression: KtExpression?
         when (receiver) {
             is ExpressionReceiver -> {
                 receiverExpression = receiver.expression
                 varDescriptor = getCalleeDescriptor(context, receiverExpression, true)
             }
             is ExtensionReceiver -> {
-                val extension = receiver.declarationDescriptor
+                konst extension = receiver.declarationDescriptor
 
                 varDescriptor = extension.extensionReceiverParameter
                 assert(varDescriptor != null) { "Extension should have receiverParameterDescriptor: " + extension }
@@ -205,7 +205,7 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
     ): CallableDescriptor? {
         if (!(expression is KtSimpleNameExpression || expression is KtThisExpression)) return null
 
-        val thisCall = expression.getResolvedCall(context.trace.bindingContext)
+        konst thisCall = expression.getResolvedCall(context.trace.bindingContext)
         if (unwrapVariableAsFunction && thisCall is VariableAsFunctionResolvedCall) {
             return (thisCall as VariableAsFunctionResolvedCall).variableCall.resultingDescriptor
         }
@@ -218,7 +218,7 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         callDescriptor: CallableDescriptor,
         receiverExpression: KtExpression
     ) {
-        val inlinableCall = isInvokeOrInlineExtension(callDescriptor)
+        konst inlinableCall = isInvokeOrInlineExtension(callDescriptor)
         if (!inlinableCall) {
             if (InlineUtil.isInline(callDescriptor) &&
                 !context.languageVersionSettings.supportsFeature(LanguageFeature.ForbidExtensionCallsOnInlineFunctionalParameters)
@@ -251,7 +251,7 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         // TODO: receivers are currently not inline (KT-5837)
         // if (InlineUtil.isInline(descriptor)) return true
 
-        val containingDeclaration = descriptor.getContainingDeclaration()
+        konst containingDeclaration = descriptor.getContainingDeclaration()
         return descriptor.getName() == OperatorNameConventions.INVOKE &&
                 containingDeclaration is ClassDescriptor && containingDeclaration.defaultType.isBuiltinFunctionalType
     }
@@ -263,13 +263,13 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         context: CallCheckerContext,
         call: Call
     ) {
-        val calledFunEffectiveVisibility = if (isDefinedInInlineFunction(calledDescriptor))
+        konst calledFunEffectiveVisibility = if (isDefinedInInlineFunction(calledDescriptor))
             EffectiveVisibility.Public
         else
             calledDescriptor.effectiveVisibility(calledDescriptor.visibility, true)
 
-        val isCalledFunPublicOrPublishedApi = calledFunEffectiveVisibility.publicApi
-        val isInlineFunPublicOrPublishedApi = inlineFunEffectiveVisibility.publicApi
+        konst isCalledFunPublicOrPublishedApi = calledFunEffectiveVisibility.publicApi
+        konst isInlineFunPublicOrPublishedApi = inlineFunEffectiveVisibility.publicApi
         if (isInlineFunPublicOrPublishedApi &&
             !isCalledFunPublicOrPublishedApi &&
             calledDescriptor.visibility !== DescriptorVisibilities.LOCAL
@@ -283,7 +283,7 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
             }
         }
 
-        val isConstructorCall = calledDescriptor is ConstructorDescriptor
+        konst isConstructorCall = calledDescriptor is ConstructorDescriptor
         if ((!isConstructorCall || expression !is KtConstructorCalleeExpression) &&
             isInlineFunPublicOrPublishedApi &&
             inlineFunEffectiveVisibility.toVisibility() !== Visibilities.Protected &&
@@ -328,14 +328,14 @@ internal class InlineChecker(private val descriptor: FunctionDescriptor) : CallC
         expression: KtElement,
         context: CallCheckerContext
     ) {
-        val superCall = getSuperCallExpression(call)
+        konst superCall = getSuperCallExpression(call)
         if (superCall != null) {
-            val thisTypeForSuperCall: KotlinType =
+            konst thisTypeForSuperCall: KotlinType =
                 context.trace.get(
                     BindingContext.THIS_TYPE_FOR_SUPER_EXPRESSION,
                     superCall
                 ) ?: return
-            val descriptor = thisTypeForSuperCall.constructor.declarationDescriptor as? DeclarationDescriptorWithVisibility ?: return
+            konst descriptor = thisTypeForSuperCall.constructor.declarationDescriptor as? DeclarationDescriptorWithVisibility ?: return
 
             if (!isDefinedInInlineFunction(descriptor)) {
                 context.trace.report(

@@ -15,7 +15,7 @@ interface BaseInterface
 typealias FirstTypeAlias = @Anno1 BaseInterface
 typealias SecondTypeAlias = @Anno2 FirstTypeAlias
 
-val foo: @Anno3 SecondTypeAlias = TODO()
+konst foo: @Anno3 SecondTypeAlias = TODO()
     get() {
         return fie<caret>ld
     }

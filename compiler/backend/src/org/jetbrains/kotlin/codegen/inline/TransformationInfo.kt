@@ -19,12 +19,12 @@ package org.jetbrains.kotlin.codegen.inline
 import org.jetbrains.org.objectweb.asm.tree.FieldInsnNode
 
 interface TransformationInfo {
-    val oldClassName: String
+    konst oldClassName: String
 
-    val newClassName: String
+    konst newClassName: String
         get() = nameGenerator.generatorClass
 
-    val nameGenerator: NameGenerator
+    konst nameGenerator: NameGenerator
 
     fun shouldRegenerate(sameModule: Boolean): Boolean
 
@@ -34,13 +34,13 @@ interface TransformationInfo {
 }
 
 class WhenMappingTransformationInfo(
-    override val oldClassName: String,
+    override konst oldClassName: String,
     parentNameGenerator: NameGenerator,
-    private val alreadyRegenerated: Boolean,
-    val fieldNode: FieldInsnNode
+    private konst alreadyRegenerated: Boolean,
+    konst fieldNode: FieldInsnNode
 ) : TransformationInfo {
 
-    override val nameGenerator by lazy {
+    override konst nameGenerator by lazy {
         parentNameGenerator.subGenerator(false, oldClassName.substringAfterLast("/").substringAfterLast(TRANSFORMED_WHEN_MAPPING_MARKER))
     }
 
@@ -56,23 +56,23 @@ class WhenMappingTransformationInfo(
         WhenMappingTransformer(this, inliningContext)
 
     companion object {
-        const val TRANSFORMED_WHEN_MAPPING_MARKER = "\$wm$"
+        const konst TRANSFORMED_WHEN_MAPPING_MARKER = "\$wm$"
     }
 }
 
 class AnonymousObjectTransformationInfo internal constructor(
-    override val oldClassName: String,
-    private val needReification: Boolean,
-    val functionalArguments: Map<Int, FunctionalArgument>,
-    private val capturedOuterRegenerated: Boolean,
-    private val alreadyRegenerated: Boolean,
-    val constructorDesc: String?,
-    private val isStaticOrigin: Boolean,
+    override konst oldClassName: String,
+    private konst needReification: Boolean,
+    konst functionalArguments: Map<Int, FunctionalArgument>,
+    private konst capturedOuterRegenerated: Boolean,
+    private konst alreadyRegenerated: Boolean,
+    konst constructorDesc: String?,
+    private konst isStaticOrigin: Boolean,
     parentNameGenerator: NameGenerator,
-    private val capturesAnonymousObjectThatMustBeRegenerated: Boolean = false
+    private konst capturesAnonymousObjectThatMustBeRegenerated: Boolean = false
 ) : TransformationInfo {
 
-    override val nameGenerator by lazy {
+    override konst nameGenerator by lazy {
         parentNameGenerator.subGenerator(true, null)
     }
 
@@ -97,7 +97,7 @@ class AnonymousObjectTransformationInfo internal constructor(
     //   to map the inner reference to the outer regenerated type and producing an infinite recursion.
     override fun shouldRegenerate(sameModule: Boolean): Boolean = alreadyRegenerated ||
             !sameModule || capturedOuterRegenerated || needReification || capturesAnonymousObjectThatMustBeRegenerated ||
-                    functionalArguments.values.any { it != NonInlineArgumentForInlineSuspendParameter.INLINE_LAMBDA_AS_VARIABLE }
+                    functionalArguments.konstues.any { it != NonInlineArgumentForInlineSuspendParameter.INLINE_LAMBDA_AS_VARIABLE }
 
     override fun canRemoveAfterTransformation(): Boolean {
         // Note: It is unsafe to remove anonymous class that is referenced by GETSTATIC within lambda

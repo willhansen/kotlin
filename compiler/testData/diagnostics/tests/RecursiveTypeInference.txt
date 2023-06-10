@@ -1,7 +1,7 @@
 package
 
 package a {
-    public val foo: [ERROR : Error function type]
+    public konst foo: [ERROR : Error function type]
     public fun bar(): [ERROR : Error function type]
 }
 
@@ -19,7 +19,7 @@ package c {
 package ok {
 
     package ok.a {
-        public val foo: kotlin.Int
+        public konst foo: kotlin.Int
         public fun bar(): kotlin.Int
     }
 

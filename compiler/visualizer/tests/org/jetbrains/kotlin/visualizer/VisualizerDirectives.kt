@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.visualizer
 import org.jetbrains.kotlin.test.directives.model.SimpleDirectivesContainer
 
 internal object VisualizerDirectives : SimpleDirectivesContainer() {
-    val TEST_FILE_PATH by stringDirective(
+    konst TEST_FILE_PATH by stringDirective(
         description = "Specify that part of test file path must be replaced with EXPECTED_FILE_PATH"
     )
-    val EXPECTED_FILE_PATH by stringDirective(
+    konst EXPECTED_FILE_PATH by stringDirective(
         description = "Specify the path to expected result file that will be inserted instead of TEST_FILE_PATH"
     )
 }

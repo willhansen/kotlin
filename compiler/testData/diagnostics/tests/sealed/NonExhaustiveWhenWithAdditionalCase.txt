@@ -4,22 +4,22 @@ public fun foo(/*0*/ s: Sealed): kotlin.Int
 
 public sealed class Sealed {
     protected constructor Sealed(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public object First : Sealed {
         private constructor First()
-        public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
     public interface ITuple {
-        public abstract val x: kotlin.Int
-        public abstract val y: kotlin.Int
+        public abstract konst x: kotlin.Int
+        public abstract konst y: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -27,16 +27,16 @@ public sealed class Sealed {
 
     public open class NonFirst : Sealed, Sealed.ITuple {
         public constructor NonFirst(/*0*/ tuple: Sealed.Tuple)
-        public final override /*2*/ /*fake_override*/ val x: kotlin.Int
-        public open override /*1*/ val y: kotlin.Int
+        public final override /*2*/ /*fake_override*/ konst x: kotlin.Int
+        public open override /*1*/ konst y: kotlin.Int
         public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
         public object Second : Sealed.NonFirst {
             private constructor Second()
-            public final override /*1*/ /*fake_override*/ val x: kotlin.Int
-            public open override /*1*/ /*fake_override*/ val y: kotlin.Int
+            public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
+            public open override /*1*/ /*fake_override*/ konst y: kotlin.Int
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -44,8 +44,8 @@ public sealed class Sealed {
 
         public final class Third : Sealed.NonFirst {
             public constructor Third()
-            public final override /*1*/ /*fake_override*/ val x: kotlin.Int
-            public open override /*1*/ /*fake_override*/ val y: kotlin.Int
+            public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
+            public open override /*1*/ /*fake_override*/ konst y: kotlin.Int
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -54,8 +54,8 @@ public sealed class Sealed {
 
     public final class Tuple : Sealed.ITuple {
         public constructor Tuple(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.Int)
-        public open override /*1*/ val x: kotlin.Int
-        public open override /*1*/ val y: kotlin.Int
+        public open override /*1*/ konst x: kotlin.Int
+        public open override /*1*/ konst y: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

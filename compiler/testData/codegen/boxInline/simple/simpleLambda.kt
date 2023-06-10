@@ -9,7 +9,7 @@ public inline fun <T, R> T.use(block: (T)-> R) : R {
 }
 
 public inline fun use2() : Int {
-    val s = 100
+    konst s = 100
     return s
 }
 
@@ -20,14 +20,14 @@ import test.*
 class Z {}
 
 fun test1() : Int {
-    val input = Z()
+    konst input = Z()
     return input.use<Z, Int>{
         100
     }
 }
 
 fun test2() : Int {
-    val x = 1000
+    konst x = 1000
     return use2() + x
 }
 

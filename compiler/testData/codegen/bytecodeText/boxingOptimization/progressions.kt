@@ -1,6 +1,6 @@
 
 inline fun <R, T : Iterable<R>> foo(x : T, block : (R) -> R) : R {
-    val y = x.iterator()
+    konst y = x.iterator()
     if (y.hasNext()) {
         return block(y.next())
     } else {

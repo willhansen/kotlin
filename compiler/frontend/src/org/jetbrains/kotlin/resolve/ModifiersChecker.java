@@ -171,9 +171,9 @@ public class ModifiersChecker {
                 @NotNull KtValVarKeywordOwner parameter,
                 @NotNull DiagnosticFactory1<PsiElement, KtKeywordToken> diagnosticFactory
         ) {
-            PsiElement valOrVar = parameter.getValOrVarKeyword();
-            if (valOrVar != null) {
-                trace.report(diagnosticFactory.on(valOrVar, ((KtKeywordToken) valOrVar.getNode().getElementType())));
+            PsiElement konstOrVar = parameter.getValOrVarKeyword();
+            if (konstOrVar != null) {
+                trace.report(diagnosticFactory.on(konstOrVar, ((KtKeywordToken) konstOrVar.getNode().getElementType())));
             }
         }
 

@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.wasm.ir.*
 
 class WasmTypeTransformer(
-    val context: WasmModuleCodegenContext,
-    val builtIns: IrBuiltIns
+    konst context: WasmModuleCodegenContext,
+    konst builtIns: IrBuiltIns
 ) {
-    val symbols = context.backendContext.wasmSymbols
+    konst symbols = context.backendContext.wasmSymbols
 
     fun IrType.toWasmResultType(): WasmType? =
         when (this) {
@@ -89,16 +89,16 @@ class WasmTypeTransformer(
                 WasmAnyRef
 
             symbols.voidType ->
-                error("Void type can't be used as a value")
+                error("Void type can't be used as a konstue")
 
             else -> {
-                val klass = this.erasedUpperBound ?: builtIns.anyClass.owner
-                val ic = context.backendContext.inlineClassesUtils.getInlinedClass(this)
+                konst klass = this.erasedUpperBound ?: builtIns.anyClass.owner
+                konst ic = context.backendContext.inlineClassesUtils.getInlinedClass(this)
 
                 if (klass.isExternal) {
                     WasmExternRef
                 } else if (isBuiltInWasmRefType(this)) {
-                    when (val name = klass.name.identifier) {
+                    when (konst name = klass.name.identifier) {
                         "anyref" -> WasmAnyRef
                         "eqref" -> WasmEqRef
                         "structref" -> WasmRefNullType(WasmHeapType.Simple.Struct)

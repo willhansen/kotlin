@@ -9,7 +9,7 @@ import java.util.ArrayList
 
 fun box(): String {
     try {
-        val a: Any? = null
+        konst a: Any? = null
         a as Array<String>
     }
     catch (e: NullPointerException) {
@@ -19,7 +19,7 @@ fun box(): String {
     }
 
     try {
-        val x: String? = null
+        konst x: String? = null
         x as String
     }
     catch (e: NullPointerException) {

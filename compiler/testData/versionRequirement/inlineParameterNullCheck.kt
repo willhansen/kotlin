@@ -6,8 +6,8 @@ inline fun doRun(f: () -> Unit) {}
 // we still generate version requirements, just in case we support inlining here in the future.
 inline var lambdaVarProperty: () -> Unit
     get() = {}
-    set(value) { value() }
+    set(konstue) { konstue() }
 
 inline var (() -> String).extensionProperty: String
     get() = this()
-    set(value) { this() }
+    set(konstue) { this() }

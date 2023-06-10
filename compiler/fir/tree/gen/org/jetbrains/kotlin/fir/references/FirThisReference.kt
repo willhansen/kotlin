@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirThisReference : FirReference() {
-    abstract override val source: KtSourceElement?
-    abstract val labelName: String?
-    abstract val boundSymbol: FirBasedSymbol<*>?
-    abstract val contextReceiverNumber: Int
+    abstract override konst source: KtSourceElement?
+    abstract konst labelName: String?
+    abstract konst boundSymbol: FirBasedSymbol<*>?
+    abstract konst contextReceiverNumber: Int
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitThisReference(this, data)
 

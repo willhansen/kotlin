@@ -22,7 +22,7 @@ public interface Flow</*0*/ T> {
 }
 
 public interface FlowCollector</*0*/ in T> {
-    public abstract suspend fun emit(/*0*/ value: T): kotlin.Unit
+    public abstract suspend fun emit(/*0*/ konstue: T): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

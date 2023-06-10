@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.resolve.jvm.modules.JavaModule
 
 fun JavaModule.getJavaModuleRoots(): List<JavaRoot> =
     moduleRoots.map { (root, isBinary, isBinarySignature) ->
-        val type = when {
+        konst type = when {
             isBinarySignature -> JavaRoot.RootType.BINARY_SIG
             isBinary -> JavaRoot.RootType.BINARY
             else -> JavaRoot.RootType.SOURCE
@@ -23,10 +23,10 @@ fun JavaModule.getJavaModuleRoots(): List<JavaRoot> =
  * Computes the JDK's default root modules. See [JEP 261: Module System](http://openjdk.java.net/jeps/261).
  */
 fun CliJavaModuleFinder.computeDefaultRootModules(): List<String> {
-    val result = arrayListOf<String>()
+    konst result = arrayListOf<String>()
 
-    val systemModules = systemModules.associateBy(JavaModule::name)
-    val javaSeExists = "java.se" in systemModules
+    konst systemModules = systemModules.associateBy(JavaModule::name)
+    konst javaSeExists = "java.se" in systemModules
     if (javaSeExists) {
         // The java.se module is a root, if it exists.
         result.add("java.se")

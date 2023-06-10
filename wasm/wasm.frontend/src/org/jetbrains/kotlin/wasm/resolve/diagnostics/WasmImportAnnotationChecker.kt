@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.types.typeUtil.isUnit
 
 // TODO: Implement in K2: KT-56849
 object WasmImportAnnotationChecker : DeclarationChecker {
-    private val wasmImportFqName = FqName("kotlin.wasm.WasmImport")
+    private konst wasmImportFqName = FqName("kotlin.wasm.WasmImport")
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val wasmImport = descriptor.annotations.findAnnotation(wasmImportFqName) ?: return
-        val trace = context.trace
+        konst wasmImport = descriptor.annotations.findAnnotation(wasmImportFqName) ?: return
+        konst trace = context.trace
 
-        val wasmImportPsi = wasmImport.source.getPsi() ?: declaration
+        konst wasmImportPsi = wasmImport.source.getPsi() ?: declaration
 
         if (!DescriptorUtils.isTopLevelDeclaration(descriptor)) {
             trace.report(ErrorsWasm.NESTED_WASM_IMPORT.on(wasmImportPsi))
@@ -48,19 +48,19 @@ object WasmImportAnnotationChecker : DeclarationChecker {
             if (!descriptor.isEffectivelyExternal()) {
                 trace.report(ErrorsWasm.WASM_IMPORT_ON_NON_EXTERNAL_DECLARATION.on(wasmImportPsi))
             }
-            for (parameter: ValueParameterDescriptor in descriptor.valueParameters) {
-                val valueParameterDeclaration by lazy { DescriptorToSourceUtils.descriptorToDeclaration(parameter)!! }
+            for (parameter: ValueParameterDescriptor in descriptor.konstueParameters) {
+                konst konstueParameterDeclaration by lazy { DescriptorToSourceUtils.descriptorToDeclaration(parameter)!! }
                 if (parameter.declaresDefaultValue()) {
-                    trace.report(ErrorsWasm.WASM_IMPORT_PARAMETER_DEFAULT_VALUE.on(valueParameterDeclaration))
+                    trace.report(ErrorsWasm.WASM_IMPORT_PARAMETER_DEFAULT_VALUE.on(konstueParameterDeclaration))
                 }
                 if (parameter.isVararg) {
-                    trace.report(ErrorsWasm.WASM_IMPORT_VARARG_PARAMETER.on(valueParameterDeclaration))
+                    trace.report(ErrorsWasm.WASM_IMPORT_VARARG_PARAMETER.on(konstueParameterDeclaration))
                 }
                 if (!isParameterTypeSupported(parameter.type)) {
-                    trace.report(ErrorsWasm.WASM_IMPORT_UNSUPPORTED_PARAMETER_TYPE.on(valueParameterDeclaration, parameter.type))
+                    trace.report(ErrorsWasm.WASM_IMPORT_UNSUPPORTED_PARAMETER_TYPE.on(konstueParameterDeclaration, parameter.type))
                 }
             }
-            val returnType = descriptor.returnType
+            konst returnType = descriptor.returnType
             if (returnType != null && !isReturnTypeSupported(returnType)) {
                 trace.report(ErrorsWasm.WASM_IMPORT_UNSUPPORTED_RETURN_TYPE.on(declaration, returnType))
             }

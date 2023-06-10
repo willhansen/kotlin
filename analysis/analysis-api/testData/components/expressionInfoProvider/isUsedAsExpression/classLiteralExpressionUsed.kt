@@ -1,3 +1,3 @@
 fun test() {
-    val string = <expr>String::class</expr>
+    konst string = <expr>String::class</expr>
 }

@@ -1,6 +1,6 @@
 fun builder(c: suspend () -> Unit) {}
 
-private val lock = Any()
+private konst lock = Any()
 
 suspend fun suspensionPoint() {}
 
@@ -47,7 +47,7 @@ interface SuspendRunnable {
 
 
 inline fun withCrossinline(crossinline a: suspend () -> Unit): suspend () -> Unit {
-    val c : suspend () -> Unit = {
+    konst c : suspend () -> Unit = {
         inlineMe {
             a()
         }

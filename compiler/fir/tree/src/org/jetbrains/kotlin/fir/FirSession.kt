@@ -16,8 +16,8 @@ import kotlin.reflect.KClass
 interface FirSessionComponent
 
 abstract class FirSession @PrivateSessionConstructor constructor(
-    val sessionProvider: FirSessionProvider?,
-    val kind: Kind
+    konst sessionProvider: FirSessionProvider?,
+    konst kind: Kind
 ) : ComponentArrayOwner<FirSessionComponent, FirSessionComponent>() {
     companion object : ConeTypeRegistry<FirSessionComponent, FirSessionComponent>() {
         inline fun <reified T : FirSessionComponent> sessionComponentAccessor(): ArrayMapAccessor<FirSessionComponent, FirSessionComponent, T> {
@@ -33,22 +33,22 @@ abstract class FirSession @PrivateSessionConstructor constructor(
         }
     }
 
-    open val builtinTypes: BuiltinTypes = BuiltinTypes()
+    open konst builtinTypes: BuiltinTypes = BuiltinTypes()
 
-    final override val typeRegistry: TypeRegistry<FirSessionComponent, FirSessionComponent> = Companion
+    final override konst typeRegistry: TypeRegistry<FirSessionComponent, FirSessionComponent> = Companion
 
     @SessionConfiguration
-    fun register(tClass: KClass<out FirSessionComponent>, value: FirSessionComponent) {
-        registerComponent(tClass, value)
+    fun register(tClass: KClass<out FirSessionComponent>, konstue: FirSessionComponent) {
+        registerComponent(tClass, konstue)
     }
 
     @SessionConfiguration
-    fun register(keyQualifiedName: String, value: FirSessionComponent) {
-        registerComponent(keyQualifiedName, value)
+    fun register(keyQualifiedName: String, konstue: FirSessionComponent) {
+        registerComponent(keyQualifiedName, konstue)
     }
 
     override fun toString(): String {
-        val moduleData = nullableModuleData ?: return "Libraries session"
+        konst moduleData = nullableModuleData ?: return "Libraries session"
         return "Source session for module ${moduleData.name}"
     }
 
@@ -62,29 +62,29 @@ abstract class FirSessionProvider {
 }
 
 class BuiltinTypes {
-    val unitType: FirImplicitBuiltinTypeRef = FirImplicitUnitTypeRef(null)
-    val anyType: FirImplicitBuiltinTypeRef = FirImplicitAnyTypeRef(null)
-    val nullableAnyType: FirImplicitBuiltinTypeRef = FirImplicitNullableAnyTypeRef(null)
-    val enumType: FirImplicitBuiltinTypeRef = FirImplicitEnumTypeRef(null)
-    val annotationType: FirImplicitBuiltinTypeRef = FirImplicitAnnotationTypeRef(null)
-    val booleanType: FirImplicitBuiltinTypeRef = FirImplicitBooleanTypeRef(null)
-    val numberType: FirImplicitBuiltinTypeRef = FirImplicitNumberTypeRef(null)
-    val byteType: FirImplicitBuiltinTypeRef = FirImplicitByteTypeRef(null)
-    val shortType: FirImplicitBuiltinTypeRef = FirImplicitShortTypeRef(null)
-    val intType: FirImplicitBuiltinTypeRef = FirImplicitIntTypeRef(null)
-    val longType: FirImplicitBuiltinTypeRef = FirImplicitLongTypeRef(null)
-    val doubleType: FirImplicitBuiltinTypeRef = FirImplicitDoubleTypeRef(null)
-    val floatType: FirImplicitBuiltinTypeRef = FirImplicitFloatTypeRef(null)
+    konst unitType: FirImplicitBuiltinTypeRef = FirImplicitUnitTypeRef(null)
+    konst anyType: FirImplicitBuiltinTypeRef = FirImplicitAnyTypeRef(null)
+    konst nullableAnyType: FirImplicitBuiltinTypeRef = FirImplicitNullableAnyTypeRef(null)
+    konst enumType: FirImplicitBuiltinTypeRef = FirImplicitEnumTypeRef(null)
+    konst annotationType: FirImplicitBuiltinTypeRef = FirImplicitAnnotationTypeRef(null)
+    konst booleanType: FirImplicitBuiltinTypeRef = FirImplicitBooleanTypeRef(null)
+    konst numberType: FirImplicitBuiltinTypeRef = FirImplicitNumberTypeRef(null)
+    konst byteType: FirImplicitBuiltinTypeRef = FirImplicitByteTypeRef(null)
+    konst shortType: FirImplicitBuiltinTypeRef = FirImplicitShortTypeRef(null)
+    konst intType: FirImplicitBuiltinTypeRef = FirImplicitIntTypeRef(null)
+    konst longType: FirImplicitBuiltinTypeRef = FirImplicitLongTypeRef(null)
+    konst doubleType: FirImplicitBuiltinTypeRef = FirImplicitDoubleTypeRef(null)
+    konst floatType: FirImplicitBuiltinTypeRef = FirImplicitFloatTypeRef(null)
 
-    val uIntType: FirImplicitUIntTypeRef = FirImplicitUIntTypeRef(null)
-    val uLongType: FirImplicitULongTypeRef = FirImplicitULongTypeRef(null)
+    konst uIntType: FirImplicitUIntTypeRef = FirImplicitUIntTypeRef(null)
+    konst uLongType: FirImplicitULongTypeRef = FirImplicitULongTypeRef(null)
 
-    val nothingType: FirImplicitBuiltinTypeRef = FirImplicitNothingTypeRef(null)
-    val nullableNothingType: FirImplicitBuiltinTypeRef = FirImplicitNullableNothingTypeRef(null)
-    val charType: FirImplicitBuiltinTypeRef = FirImplicitCharTypeRef(null)
-    val stringType: FirImplicitBuiltinTypeRef = FirImplicitStringTypeRef(null)
-    val throwableType: FirImplicitThrowableTypeRef = FirImplicitThrowableTypeRef(null)
+    konst nothingType: FirImplicitBuiltinTypeRef = FirImplicitNothingTypeRef(null)
+    konst nullableNothingType: FirImplicitBuiltinTypeRef = FirImplicitNullableNothingTypeRef(null)
+    konst charType: FirImplicitBuiltinTypeRef = FirImplicitCharTypeRef(null)
+    konst stringType: FirImplicitBuiltinTypeRef = FirImplicitStringTypeRef(null)
+    konst throwableType: FirImplicitThrowableTypeRef = FirImplicitThrowableTypeRef(null)
 
-    val charSequenceType: FirImplicitCharSequenceTypeRef = FirImplicitCharSequenceTypeRef(null)
-    val charIteratorType: FirImplicitCharIteratorTypeRef = FirImplicitCharIteratorTypeRef(null)
+    konst charSequenceType: FirImplicitCharSequenceTypeRef = FirImplicitCharSequenceTypeRef(null)
+    konst charIteratorType: FirImplicitCharIteratorTypeRef = FirImplicitCharIteratorTypeRef(null)
 }

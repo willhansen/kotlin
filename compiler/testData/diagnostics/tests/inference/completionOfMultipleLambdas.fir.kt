@@ -26,6 +26,6 @@ fun test_1() {
 // ISSUE: KT-31102
 fun bar(): Int = 1
 fun test_2(x: Int) {
-    val f1: () -> Int = select({ bar() }, ::bar) // TYPE_MISMATCH on lambda
-    val f2 = select({ bar() }, ::bar) // Same
+    konst f1: () -> Int = select({ bar() }, ::bar) // TYPE_MISMATCH on lambda
+    konst f2 = select({ bar() }, ::bar) // Same
 }

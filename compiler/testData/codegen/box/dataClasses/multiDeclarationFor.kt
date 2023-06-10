@@ -1,7 +1,7 @@
-data class A(val x: Int, val y: String)
+data class A(konst x: Int, konst y: String)
 
 fun box(): String {
-    val arr = Array<A>(5) {
+    konst arr = Array<A>(5) {
         i -> A(i, i.toString())
     }
     

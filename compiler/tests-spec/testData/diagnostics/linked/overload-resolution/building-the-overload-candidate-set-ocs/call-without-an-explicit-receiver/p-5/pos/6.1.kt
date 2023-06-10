@@ -50,7 +50,7 @@ import testsCase2.*
 
 public fun <T> emptyArray(): Array<T> = TODO()
 
-val emptyArray: A
+konst emptyArray: A
     get() = A()
 
 // FILE: TestCase3.kt
@@ -73,5 +73,5 @@ import testsCase3.*
 
 private fun <T> emptyArray(): Array<T> = TODO()
 
-val emptyArray: A
+konst emptyArray: A
     get() = A()

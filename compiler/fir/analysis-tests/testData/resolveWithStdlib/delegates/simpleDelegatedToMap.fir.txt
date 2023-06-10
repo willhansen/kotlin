@@ -4,7 +4,7 @@ FILE: simpleDelegatedToMap.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val map: R|kotlin/collections/MutableMap<kotlin/String, kotlin/Any>| = R|<local>/map|
+        public final konst map: R|kotlin/collections/MutableMap<kotlin/String, kotlin/Any>| = R|<local>/map|
             public get(): R|kotlin/collections/MutableMap<kotlin/String, kotlin/Any>|
 
         public final var foo: R|kotlin/Any|by this@R|/C|.R|/C.map|

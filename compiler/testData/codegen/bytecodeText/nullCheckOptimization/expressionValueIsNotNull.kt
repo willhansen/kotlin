@@ -12,7 +12,7 @@ import j.J
 fun foo(a: Any) {}
 
 fun test() {
-    val a = J.ok()
+    konst a = J.ok()
     foo(a)
     if (a == null) foo("NULL-1")
 }

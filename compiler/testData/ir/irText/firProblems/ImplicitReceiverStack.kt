@@ -12,17 +12,17 @@ interface SymbolOwner<E : SymbolOwner<E>>
 interface Symbol<E : SymbolOwner<E>>
 
 interface ReceiverValue {
-    val type: String
+    konst type: String
 }
 
-class ImplicitReceiverValue<S : Symbol<*>>(val boundSymbol: S?, override val type: String) : ReceiverValue
+class ImplicitReceiverValue<S : Symbol<*>>(konst boundSymbol: S?, override konst type: String) : ReceiverValue
 
 abstract class ImplicitReceiverStack : Iterable<ImplicitReceiverValue<*>> {
     abstract operator fun get(name: String?): ImplicitReceiverValue<*>?
 }
 
 class PersistentImplicitReceiverStack(
-    private val stack: List<ImplicitReceiverValue<*>>
+    private konst stack: List<ImplicitReceiverValue<*>>
 ) : ImplicitReceiverStack(), Iterable<ImplicitReceiverValue<*>> {
     override operator fun iterator(): Iterator<ImplicitReceiverValue<*>> {
         return stack.iterator()
@@ -43,7 +43,7 @@ fun foo(stack: PersistentImplicitReceiverStack) {
 }
 
 fun box(): String {
-    val stack = PersistentImplicitReceiverStack(
+    konst stack = PersistentImplicitReceiverStack(
         listOf(ImplicitReceiverValue(null, "O"), ImplicitReceiverValue(null, "K"))
     )
     foo(stack)

@@ -57,7 +57,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   DefaultSimpleImportingScope, index = 4

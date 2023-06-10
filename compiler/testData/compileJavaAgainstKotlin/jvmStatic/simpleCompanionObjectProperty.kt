@@ -2,7 +2,7 @@ package test
 
 class A {
     companion object {
-        @JvmStatic val b: String = "OK"
+        @JvmStatic konst b: String = "OK"
 
         var A.c: String
             @JvmStatic get() = "OK"

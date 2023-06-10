@@ -1,12 +1,12 @@
 import kotlin.reflect.KProperty
 
-class Delegate(val value: String) {
-    operator fun provideDelegate(instance: A, property: KProperty<*>): Delegate = Delegate(instance.value)
-    operator fun getValue(instance: Any?, property: KProperty<*>) = value
+class Delegate(konst konstue: String) {
+    operator fun provideDelegate(instance: A, property: KProperty<*>): Delegate = Delegate(instance.konstue)
+    operator fun getValue(instance: Any?, property: KProperty<*>) = konstue
 }
 
-class A(val value: String) {
-    val result: String by Delegate("Fail")
+class A(konst konstue: String) {
+    konst result: String by Delegate("Fail")
 }
 
 fun box(): String {

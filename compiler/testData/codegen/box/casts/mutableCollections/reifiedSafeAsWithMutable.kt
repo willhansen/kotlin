@@ -19,18 +19,18 @@ class M : Map<String, String> by HashMap<String, String>()
 class MM : MutableMap<String, String> by HashMap<String, String>()
 
 class ME : Map.Entry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
 }
 
 class MME : MutableMap.MutableEntry<String, String> {
-    override val key: String get() = throw UnsupportedOperationException()
-    override val value: String get() = throw UnsupportedOperationException()
-    override fun setValue(value: String): String = throw UnsupportedOperationException()
+    override konst key: String get() = throw UnsupportedOperationException()
+    override konst konstue: String get() = throw UnsupportedOperationException()
+    override fun setValue(konstue: String): String = throw UnsupportedOperationException()
 }
 
 inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -42,7 +42,7 @@ inline fun <reified T> reifiedSafeAsReturnsNonNull(x: Any?, operation: String) {
 }
 
 inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
-    val y = try {
+    konst y = try {
         x as? T
     }
     catch (e: Throwable) {
@@ -54,29 +54,29 @@ inline fun <reified T> reifiedSafeAsReturnsNull(x: Any?, operation: String) {
 }
 
 fun box(): String {
-    val itr = Itr() as Any
-    val mitr = MItr()
+    konst itr = Itr() as Any
+    konst mitr = MItr()
 
     reifiedSafeAsReturnsNull<MutableIterator<*>>(itr, "reifiedSafeAs<MutableIterator<*>>(itr)")
     reifiedSafeAsReturnsNonNull<MutableIterator<*>>(mitr, "reifiedSafeAs<MutableIterator<*>>(mitr)")
 
-    val litr = LItr() as Any
-    val mlitr = MLItr()
+    konst litr = LItr() as Any
+    konst mlitr = MLItr()
 
     reifiedSafeAsReturnsNull<MutableIterator<*>>(litr, "reifiedSafeAs<MutableIterator<*>>(litr)")
     reifiedSafeAsReturnsNull<MutableListIterator<*>>(litr, "reifiedSafeAs<MutableListIterator<*>>(litr)")
     reifiedSafeAsReturnsNonNull<MutableListIterator<*>>(mlitr, "reifiedSafeAs<MutableListIterator<*>>(mlitr)")
 
-    val it = It() as Any
-    val mit = MIt()
-    val arrayList = ArrayList<String>()
+    konst it = It() as Any
+    konst mit = MIt()
+    konst arrayList = ArrayList<String>()
 
     reifiedSafeAsReturnsNull<MutableIterable<*>>(it, "reifiedSafeAs<MutableIterable<*>>(it)")
     reifiedSafeAsReturnsNonNull<MutableIterable<*>>(mit, "reifiedSafeAs<MutableIterable<*>>(mit)")
     reifiedSafeAsReturnsNonNull<MutableIterable<*>>(arrayList, "reifiedSafeAs<MutableIterable<*>>(arrayList)")
 
-    val coll = C() as Any
-    val mcoll = MC()
+    konst coll = C() as Any
+    konst mcoll = MC()
 
     reifiedSafeAsReturnsNull<MutableCollection<*>>(coll, "reifiedSafeAs<MutableCollection<*>>(coll)")
     reifiedSafeAsReturnsNull<MutableIterable<*>>(coll, "reifiedSafeAs<MutableIterable<*>>(coll)")
@@ -84,8 +84,8 @@ fun box(): String {
     reifiedSafeAsReturnsNonNull<MutableIterable<*>>(mcoll, "reifiedSafeAs<MutableIterable<*>>(mcoll)")
     reifiedSafeAsReturnsNonNull<MutableCollection<*>>(arrayList, "reifiedSafeAs<MutableCollection<*>>(arrayList)")
 
-    val list = L() as Any
-    val mlist = ML()
+    konst list = L() as Any
+    konst mlist = ML()
 
     reifiedSafeAsReturnsNull<MutableList<*>>(list, "reifiedSafeAs<MutableList<*>>(list)")
     reifiedSafeAsReturnsNull<MutableCollection<*>>(list, "reifiedSafeAs<MutableCollection<*>>(list)")
@@ -95,9 +95,9 @@ fun box(): String {
     reifiedSafeAsReturnsNonNull<MutableIterable<*>>(mlist, "reifiedSafeAs<MutableIterable<*>>(mlist)")
     reifiedSafeAsReturnsNonNull<MutableList<*>>(arrayList, "reifiedSafeAs<MutableList<*>>(arrayList)")
 
-    val set = S() as Any
-    val mset = MS()
-    val hashSet = HashSet<String>()
+    konst set = S() as Any
+    konst mset = MS()
+    konst hashSet = HashSet<String>()
 
     reifiedSafeAsReturnsNull<MutableSet<*>>(set, "reifiedSafeAs<MutableSet<*>>(set)")
     reifiedSafeAsReturnsNull<MutableCollection<*>>(set, "reifiedSafeAs<MutableCollection<*>>(set)")
@@ -109,19 +109,19 @@ fun box(): String {
     reifiedSafeAsReturnsNonNull<MutableCollection<*>>(hashSet, "reifiedSafeAs<MutableCollection<*>>(hashSet)")
     reifiedSafeAsReturnsNonNull<MutableIterable<*>>(hashSet, "reifiedSafeAs<MutableIterable<*>>(hashSet)")
 
-    val map = M() as Any
-    val mmap = MM()
-    val hashMap = HashMap<String, String>()
+    konst map = M() as Any
+    konst mmap = MM()
+    konst hashMap = HashMap<String, String>()
 
     reifiedSafeAsReturnsNull<MutableMap<*, *>>(map, "reifiedSafeAs<MutableMap<*, *>>(map)")
     reifiedSafeAsReturnsNonNull<MutableMap<*, *>>(mmap, "reifiedSafeAs<MutableMap<*, *>>(mmap)")
     reifiedSafeAsReturnsNonNull<MutableMap<*, *>>(hashMap, "reifiedSafeAs<MutableMap<*, *>>(hashMap)")
 
-    val entry = ME() as Any
-    val mentry = MME()
+    konst entry = ME() as Any
+    konst mentry = MME()
 
     hashMap[""] = ""
-    val hashMapEntry = hashMap.entries.first()
+    konst hashMapEntry = hashMap.entries.first()
 
     reifiedSafeAsReturnsNull<MutableMap.MutableEntry<*, *>>(entry, "reifiedSafeAs<MutableMap.MutableEntry<*, *>>(entry)")
     reifiedSafeAsReturnsNonNull<MutableMap.MutableEntry<*, *>>(mentry, "reifiedSafeAs<MutableMap.MutableEntry<*, *>>(mentry)")

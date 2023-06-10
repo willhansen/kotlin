@@ -19,54 +19,54 @@ package org.jetbrains.ring
 import org.jetbrains.benchmarksLauncher.Blackhole
 import org.jetbrains.benchmarksLauncher.Random
 
-val SPARSE_SWITCH_CASES = intArrayOf(11, 29, 47, 71, 103,
+konst SPARSE_SWITCH_CASES = intArrayOf(11, 29, 47, 71, 103,
                                      149, 175, 227, 263, 307,
                                      361, 487, 563, 617, 677,
                                      751, 823, 883, 967, 1031)
 
-const val V1 = 1
-const val V2 = 2
-const val V3 = 3
-const val V4 = 4
-const val V5 = 5
-const val V6 = 6
-const val V7 = 7
-const val V8 = 8
-const val V9 = 9
-const val V10 = 10
-const val V11 = 11
-const val V12 = 12
-const val V13 = 13
-const val V14 = 14
-const val V15 = 15
-const val V16 = 16
-const val V17 = 17
-const val V18 = 18
-const val V19 = 19
-const val V20 = 20
+const konst V1 = 1
+const konst V2 = 2
+const konst V3 = 3
+const konst V4 = 4
+const konst V5 = 5
+const konst V6 = 6
+const konst V7 = 7
+const konst V8 = 8
+const konst V9 = 9
+const konst V10 = 10
+const konst V11 = 11
+const konst V12 = 12
+const konst V13 = 13
+const konst V14 = 14
+const konst V15 = 15
+const konst V16 = 16
+const konst V17 = 17
+const konst V18 = 18
+const konst V19 = 19
+const konst V20 = 20
 
 
 object Numbers {
-    const val V1 = 1
-    const val V2 = 2
-    const val V3 = 3
-    const val V4 = 4
-    const val V5 = 5
-    const val V6 = 6
-    const val V7 = 7
-    const val V8 = 8
-    const val V9 = 9
-    const val V10 = 10
-    const val V11 = 11
-    const val V12 = 12
-    const val V13 = 13
-    const val V14 = 14
-    const val V15 = 15
-    const val V16 = 16
-    const val V17 = 17
-    const val V18 = 18
-    const val V19 = 19
-    const val V20 = 20
+    const konst V1 = 1
+    const konst V2 = 2
+    const konst V3 = 3
+    const konst V4 = 4
+    const konst V5 = 5
+    const konst V6 = 6
+    const konst V7 = 7
+    const konst V8 = 8
+    const konst V9 = 9
+    const konst V10 = 10
+    const konst V11 = 11
+    const konst V12 = 12
+    const konst V13 = 13
+    const konst V14 = 14
+    const konst V15 = 15
+    const konst V16 = 16
+    const konst V17 = 17
+    const konst V18 = 18
+    const konst V19 = 19
+    const konst V20 = 20
 }
 
 var VV1 = 1
@@ -520,7 +520,7 @@ open class SwitchBenchmark {
 
     //Benchmark 
     fun testStringsSwitch() {
-        val n = data.size
+        konst n = data.size
         for (s in data) {
             Blackhole.consume(stringSwitch(s))
         }
@@ -589,8 +589,8 @@ open class SwitchBenchmark {
 
     //Benchmark 
     fun testEnumsSwitch() {
-        val n = enumData.size -1
-        val data = enumData
+        konst n = enumData.size -1
+        konst data = enumData
         for (i in 0..n) {
             Blackhole.consume(enumSwitch(data[i]))
         }
@@ -598,8 +598,8 @@ open class SwitchBenchmark {
 
     //Benchmark 
     fun testDenseEnumsSwitch() {
-        val n = denseEnumData.size -1
-        val data = denseEnumData
+        konst n = denseEnumData.size -1
+        konst data = denseEnumData
         for (i in 0..n) {
             Blackhole.consume(denseEnumSwitch(data[i]))
         }
@@ -625,10 +625,10 @@ open class SwitchBenchmark {
             "ABCDEFG" + Random.nextInt(22)
         }
         enumData = Array(BENCHMARK_SIZE) {
-            MyEnum.values()[it % MyEnum.values().size]
+            MyEnum.konstues()[it % MyEnum.konstues().size]
         }
         denseEnumData = Array(BENCHMARK_SIZE) {
-            MyEnum.values()[it % 20]
+            MyEnum.konstues()[it % 20]
         }
         denseIntData = IntArray(BENCHMARK_SIZE) { Random.nextInt(25) - 1 }
         sparseIntData = IntArray(BENCHMARK_SIZE) { SPARSE_SWITCH_CASES[Random.nextInt(20)] }
@@ -666,7 +666,7 @@ open class SwitchBenchmark {
 
     //Benchmark 
     fun testSealedWhenSwitch() {
-        val n = sealedClassData.size -1
+        konst n = sealedClassData.size -1
         for (i in 0..n) {
             Blackhole.consume(sealedWhenSwitch(sealedClassData[i]))
         }

@@ -10,19 +10,19 @@ import kotlin.test.*
 
 import kotlin.native.concurrent.*
 
-data class SharedDataMember(val double: Double)
+data class SharedDataMember(konst double: Double)
 
-data class SharedData(val string: String, val int: Int, val member: SharedDataMember)
+data class SharedData(konst string: String, konst int: Int, konst member: SharedDataMember)
 
 @Test fun runTest() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
     // Here we do rather strange thing. To test object detach API we detach object graph,
-    // pass detached graph to a worker, where we manually reattached passed value.
-    val future = worker.execute(TransferMode.SAFE, {
+    // pass detached graph to a worker, where we manually reattached passed konstue.
+    konst future = worker.execute(TransferMode.SAFE, {
         DetachedObjectGraph { SharedData("Hello", 10, SharedDataMember(0.1)) }.asCPointer()
     }) {
         inputDetached ->
-        val input = DetachedObjectGraph<SharedData>(inputDetached).attach()
+        konst input = DetachedObjectGraph<SharedData>(inputDetached).attach()
         println(input)
     }
     future.consume {

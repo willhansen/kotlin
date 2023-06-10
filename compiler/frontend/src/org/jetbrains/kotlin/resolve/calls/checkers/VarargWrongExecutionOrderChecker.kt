@@ -16,29 +16,29 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isAnnotationConstructor
 
 object VarargWrongExecutionOrderChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val isCorrectExecutionOrderForVarargArgumentsAlreadyUsed =
+        konst isCorrectExecutionOrderForVarargArgumentsAlreadyUsed =
             context.languageVersionSettings.getFeatureSupport(LanguageFeature.UseCorrectExecutionOrderForVarargArguments) == LanguageFeature.State.ENABLED
 
         if (resolvedCall.candidateDescriptor.isAnnotationConstructor()) return
 
         if (isCorrectExecutionOrderForVarargArgumentsAlreadyUsed) return
 
-        val valueArguments = resolvedCall.call.valueArguments
+        konst konstueArguments = resolvedCall.call.konstueArguments
 
-        val varargIndex = valueArguments.indexOfFirst {
+        konst varargIndex = konstueArguments.indexOfFirst {
             resolvedCall.getParameterForArgument(it)?.isVararg == true
         }.takeIf { it != -1 } ?: return
-        val nonVarargIndex = valueArguments.indexOfLast {
+        konst nonVarargIndex = konstueArguments.indexOfLast {
             resolvedCall.getParameterForArgument(it)?.isVararg != true
         }.takeIf { it != -1 } ?: return
 
         if (varargIndex > nonVarargIndex) return
 
-        val varargValueArgument = valueArguments[varargIndex]
+        konst varargValueArgument = konstueArguments[varargIndex]
 
         if (!varargValueArgument.isNamed() || varargValueArgument !is PsiElement) return
 
-        // If named form for vararg is used then we can have only one real value argument on a call site
+        // If named form for vararg is used then we can have only one real konstue argument on a call site
         context.trace.report(Errors.CHANGING_ARGUMENTS_EXECUTION_ORDER_FOR_NAMED_VARARGS.on(varargValueArgument))
     }
 }

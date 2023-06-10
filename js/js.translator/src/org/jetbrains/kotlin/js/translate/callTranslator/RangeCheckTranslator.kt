@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.js.translate.general.Translation
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 
-class RangeCheckTranslator(private val context: TranslationContext) {
+class RangeCheckTranslator(private konst context: TranslationContext) {
     fun translateAsRangeCheck(resolvedCall: ResolvedCall<out FunctionDescriptor>, receivers: ExplicitReceivers): JsExpression? {
-        val calledFunction = resolvedCall.resultingDescriptor
+        konst calledFunction = resolvedCall.resultingDescriptor
         if (calledFunction.name.asString() != "contains" || calledFunction.containingDeclaration !is ClassDescriptor) return null
 
-        val invocation = (receivers.extensionOrDispatchReceiver as? JsExpression.JsExpressionHasArguments) ?: return null
-        val (rangeType, rangeKind) = invocation.range ?: return null
+        konst invocation = (receivers.extensionOrDispatchReceiver as? JsExpression.JsExpressionHasArguments) ?: return null
+        konst (rangeType, rangeKind) = invocation.range ?: return null
         var (lower, upper) = when {
             rangeKind == RangeKind.UNTIL || rangeType == RangeType.INT -> {
                 if (invocation.arguments.size != 2) return null
@@ -41,8 +41,8 @@ class RangeCheckTranslator(private val context: TranslationContext) {
             }
             else -> {
                 if (invocation !is JsInvocation) return null
-                val qualifier = invocation.qualifier as? JsNameRef ?: return null
-                val receiver = qualifier.qualifier ?: return null
+                konst qualifier = invocation.qualifier as? JsNameRef ?: return null
+                konst receiver = qualifier.qualifier ?: return null
                 if (invocation.arguments.size != 1) return null
                 listOf(receiver, invocation.arguments.single())
             }
@@ -50,8 +50,8 @@ class RangeCheckTranslator(private val context: TranslationContext) {
         lower = context.cacheExpressionIfNeeded(lower)
         upper = context.cacheExpressionIfNeeded(upper)
 
-        val subjectPsi = resolvedCall.valueArguments.values.singleOrNull()?.arguments?.singleOrNull()?.getArgumentExpression() ?: return null
-        val subject = context.cacheExpressionIfNeeded(Translation.translateAsExpression(subjectPsi, context))
+        konst subjectPsi = resolvedCall.konstueArguments.konstues.singleOrNull()?.arguments?.singleOrNull()?.getArgumentExpression() ?: return null
+        konst subject = context.cacheExpressionIfNeeded(Translation.translateAsExpression(subjectPsi, context))
 
         return when (rangeType) {
             RangeType.INT -> translateAsIntRangeCheck(lower, upper, rangeKind, subject)
@@ -60,8 +60,8 @@ class RangeCheckTranslator(private val context: TranslationContext) {
     }
 
     private fun translateAsIntRangeCheck(lower: JsExpression, upper: JsExpression, kind: RangeKind, subject: JsExpression): JsExpression {
-        val lowerCheck = JsAstUtils.lessThanEq(lower, subject)
-        val upperCheck = when (kind) {
+        konst lowerCheck = JsAstUtils.lessThanEq(lower, subject)
+        konst upperCheck = when (kind) {
             RangeKind.RANGE_TO -> JsAstUtils.lessThanEq(subject, upper)
             RangeKind.UNTIL -> JsAstUtils.lessThan(subject, upper)
         }
@@ -71,8 +71,8 @@ class RangeCheckTranslator(private val context: TranslationContext) {
     }
 
     private fun translateAsLongRangeCheck(lower: JsExpression, upper: JsExpression, kind: RangeKind, subject: JsExpression): JsExpression {
-        val lowerCheck = JsAstUtils.invokeMethod(lower, "lessThanOrEqual", subject).apply { sideEffects = SideEffectKind.PURE }
-        val upperCheck = when (kind) {
+        konst lowerCheck = JsAstUtils.invokeMethod(lower, "lessThanOrEqual", subject).apply { sideEffects = SideEffectKind.PURE }
+        konst upperCheck = when (kind) {
             RangeKind.RANGE_TO -> JsAstUtils.invokeMethod(subject, "lessThanOrEqual", upper)
             RangeKind.UNTIL -> JsAstUtils.invokeMethod(subject, "lessThan", upper)
         }

@@ -1,1 +1,1 @@
-data class User(val name: String, val age: Int)
+data class User(konst name: String, konst age: Int)

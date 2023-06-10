@@ -8,7 +8,7 @@
 
 fun box(): String {
     var ok = "Failed"
-    val lam = { ok = "OK" }
+    konst lam = { ok = "OK" }
     lam()
     return ok
 }

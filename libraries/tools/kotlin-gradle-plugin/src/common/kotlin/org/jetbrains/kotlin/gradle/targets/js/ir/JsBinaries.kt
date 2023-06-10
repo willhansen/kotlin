@@ -20,25 +20,25 @@ import org.jetbrains.kotlin.gradle.tasks.withType
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 interface JsBinary {
-    val compilation: KotlinJsCompilation
-    val name: String
-    val mode: KotlinJsBinaryMode
-    val distribution: Distribution
+    konst compilation: KotlinJsCompilation
+    konst name: String
+    konst mode: KotlinJsBinaryMode
+    konst distribution: Distribution
 }
 
 sealed class JsIrBinary(
-    final override val compilation: KotlinJsCompilation,
-    final override val name: String,
-    override val mode: KotlinJsBinaryMode
+    final override konst compilation: KotlinJsCompilation,
+    final override konst name: String,
+    override konst mode: KotlinJsBinaryMode
 ) : JsBinary {
-    override val distribution: Distribution =
+    override konst distribution: Distribution =
         createDefaultDistribution(compilation.target.project, compilation.target.targetName, name)
 
-    val linkTaskName: String = linkTaskName()
+    konst linkTaskName: String = linkTaskName()
 
     var generateTs: Boolean = false
 
-    val linkTask: TaskProvider<KotlinJsIrLink>
+    konst linkTask: TaskProvider<KotlinJsIrLink>
         get() = target.project.tasks
             .withType(KotlinJsIrLink::class.java)
             .named(linkTaskName)
@@ -51,11 +51,11 @@ sealed class JsIrBinary(
             target.targetName
         )
 
-    val linkSyncTaskName: String = linkSyncTaskName()
+    konst linkSyncTaskName: String = linkSyncTaskName()
 
-    val validateGeneratedTsTaskName: String = validateTypeScriptTaskName()
+    konst konstidateGeneratedTsTaskName: String = konstidateTypeScriptTaskName()
 
-    val linkSyncTask: TaskProvider<IncrementalSyncTask>
+    konst linkSyncTask: TaskProvider<IncrementalSyncTask>
         get() = target.project.tasks
             .withType<IncrementalSyncTask>()
             .named(linkSyncTaskName)
@@ -68,7 +68,7 @@ sealed class JsIrBinary(
             COMPILE_SYNC
         )
 
-    private fun validateTypeScriptTaskName(): String =
+    private fun konstidateTypeScriptTaskName(): String =
         lowerCamelCaseName(
             compilation.target.disambiguationClassifier,
             compilation.name.takeIf { it != KotlinCompilation.MAIN_COMPILATION_NAME },
@@ -76,10 +76,10 @@ sealed class JsIrBinary(
             TypeScriptValidationTask.NAME
         )
 
-    val target: KotlinTarget
+    konst target: KotlinTarget
         get() = compilation.target
 
-    val project: Project
+    konst project: Project
         get() = target.project
 }
 
@@ -92,14 +92,14 @@ class Executable(
     name,
     mode
 ) {
-    override val distribution: Distribution =
+    override konst distribution: Distribution =
         createDefaultDistribution(
             compilation.target.project,
             compilation.target.targetName,
             super.distribution.distributionName
         )
 
-    val executeTaskBaseName: String =
+    konst executeTaskBaseName: String =
         generateBinaryName(
             compilation,
             mode,
@@ -116,7 +116,7 @@ class Library(
     name,
     mode
 ) {
-    val executeTaskBaseName: String =
+    konst executeTaskBaseName: String =
         generateBinaryName(
             compilation,
             mode,
@@ -125,11 +125,11 @@ class Library(
 }
 
 // Hack for legacy
-internal val JsBinary.executeTaskBaseName: String
+internal konst JsBinary.executeTaskBaseName: String
     get() = generateBinaryName(
         compilation,
         mode,
         null
     )
 
-internal const val COMPILE_SYNC = "compileSync"
+internal const konst COMPILE_SYNC = "compileSync"

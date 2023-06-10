@@ -32,7 +32,7 @@ public interface SelectClause2</*0*/ in P, /*1*/ out Q> {
 }
 
 public interface SendChannel</*0*/ in E> {
-    public abstract val onSend: SelectClause2<E, SendChannel<E>>
+    public abstract konst onSend: SelectClause2<E, SendChannel<E>>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

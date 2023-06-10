@@ -7,16 +7,16 @@ fun takeInt(x: Int) {}
 fun takeString(x: String) {}
 
 fun test_1() {
-    val res = foo { x -> } // (1)
+    konst res = foo { x -> } // (1)
     takeInt(res)
 }
 
 fun test_2() {
-    val res = foo { x, y -> } // (2)
+    konst res = foo { x, y -> } // (2)
     takeString(res)
 }
 
 fun test_3() {
-    val res = foo {} // (1)
+    konst res = foo {} // (1)
     takeInt(res)
 }

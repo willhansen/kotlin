@@ -17,7 +17,7 @@
  */
 fun case_1(x: Any) {
     x as Boolean
-    val y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
+    konst y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
         true -> "true"
         false -> "false"
     }
@@ -30,7 +30,7 @@ fun case_1(x: Any) {
  */
 fun case_2(x: Any) {
     x as Boolean?
-    val y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
+    konst y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
         true -> "true"
         false -> "false"
         <!SENSELESS_NULL_IN_WHEN!>null<!> -> "false"
@@ -44,7 +44,7 @@ fun case_2(x: Any) {
  */
 fun case_3(x: Any?) {
     x as Boolean?
-    val y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
+    konst y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
         true -> "true"
         false -> "false"
         null -> "false"
@@ -80,7 +80,7 @@ fun case_5(x: Any): String {
  */
 fun case_6(x: Any) {
     if (x is Boolean) {
-        val y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
+        konst y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
             true -> "true"
             false -> "false"
         }
@@ -94,7 +94,7 @@ fun case_6(x: Any) {
  */
 fun case_7(x: Any) {
     if (x is Boolean<!USELESS_NULLABLE_CHECK!>?<!>) {
-        val y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
+        konst y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
             true -> "true"
             false -> "false"
             <!SENSELESS_NULL_IN_WHEN!>null<!> -> "false"
@@ -108,7 +108,7 @@ fun case_7(x: Any) {
  * ISSUES: KT-17694
  */
 fun case_8(x: Any?) {
-    val y: Any
+    konst y: Any
     when (x) {
         is Boolean? -> y = <!NO_ELSE_IN_WHEN!>when<!>(x) {
             true -> "true"
@@ -203,7 +203,7 @@ fun case_14(x: Any?): String? {
 // TESTCASE NUMBER: 15
 fun case_15(x: Any) {
     x as EnumClass
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         EnumClass.NORTH -> 1
         EnumClass.SOUTH -> 2
         EnumClass.WEST -> 3
@@ -214,7 +214,7 @@ fun case_15(x: Any) {
 // TESTCASE NUMBER: 16
 fun case_16(x: Any) {
     if (x is EnumClass<!USELESS_NULLABLE_CHECK!>?<!>) {
-        val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+        konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
             EnumClass.NORTH -> 1
             EnumClass.SOUTH -> 2
             EnumClass.WEST -> 3
@@ -227,7 +227,7 @@ fun case_16(x: Any) {
 // TESTCASE NUMBER: 17
 fun case_17(x: Any?) {
     x as EnumClass?
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         EnumClass.NORTH -> 1
         EnumClass.SOUTH -> 2
         EnumClass.WEST -> 3
@@ -264,7 +264,7 @@ fun case_19(x: Any): Int {
 // TESTCASE NUMBER: 20
 fun case_20(x: Any?) {
     x as EnumClass
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         EnumClass.NORTH -> 1
         EnumClass.SOUTH -> 2
         EnumClass.WEST -> 3
@@ -288,7 +288,7 @@ fun case_21(x: EnumClass?): Int {
 // TESTCASE NUMBER: 22
 fun case_22(x: Boolean?) {
     x!!
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         true -> "true"
         false -> "false"
     }
@@ -298,7 +298,7 @@ fun case_22(x: Boolean?) {
 fun case_23(x: Any?) {
     x as Boolean?
     if (x != null) {
-        val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+        konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
             true -> "true"
             false -> "false"
         }
@@ -308,7 +308,7 @@ fun case_23(x: Any?) {
 // TESTCASE NUMBER: 24
 fun case_24(x: Any) {
     x as SealedClass
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         is SealedChild1 -> 1
         is SealedChild2 -> 2
         is SealedChild3 -> 3
@@ -318,7 +318,7 @@ fun case_24(x: Any) {
 // TESTCASE NUMBER: 25
 fun case_25(x: Any) {
     if (x is SealedClass<!USELESS_NULLABLE_CHECK!>?<!>) {
-        val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+        konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
             is SealedChild1 -> 1
             is SealedChild2 -> 2
             is SealedChild3 -> 3
@@ -330,7 +330,7 @@ fun case_25(x: Any) {
 // TESTCASE NUMBER: 26
 fun case_26(x: Any?) {
     x as SealedClass?
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         is SealedChild1 -> 1
         is SealedChild2 -> 2
         is SealedChild3 -> 3
@@ -364,7 +364,7 @@ fun case_28(x: Any): Int {
 // TESTCASE NUMBER: 29
 fun case_29(x: Any?) {
     x as SealedClass
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         is SealedChild1 -> 1
         is SealedChild2 -> 2
         is SealedChild3 -> 3
@@ -386,7 +386,7 @@ fun case_30(x: SealedClass?): Int {
 // TESTCASE NUMBER: 31
 fun case_31(x: Any) {
     x as SealedClassWithObjects
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         SealedWithObjectsChild1 -> 1
         SealedWithObjectsChild2 -> 2
         SealedWithObjectsChild3 -> 3
@@ -396,7 +396,7 @@ fun case_31(x: Any) {
 // TESTCASE NUMBER: 32
 fun case_32(x: Any) {
     if (x is SealedClassWithObjects<!USELESS_NULLABLE_CHECK!>?<!>) {
-        val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+        konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
             SealedWithObjectsChild1 -> 1
             SealedWithObjectsChild2 -> 2
             SealedWithObjectsChild3 -> 3
@@ -408,7 +408,7 @@ fun case_32(x: Any) {
 // TESTCASE NUMBER: 33
 fun case_33(x: Any?) {
     x as SealedClassWithObjects?
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         SealedWithObjectsChild1 -> 1
         SealedWithObjectsChild2 -> 2
         SealedWithObjectsChild3 -> 3
@@ -442,7 +442,7 @@ fun case_35(x: Any): Int {
 // TESTCASE NUMBER: 36
 fun case_36(x: Any?) {
     x as SealedClassWithObjects
-    val y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
+    konst y = when(<!DEBUG_INFO_SMARTCAST!>x<!>) {
         SealedWithObjectsChild1 -> 1
         SealedWithObjectsChild2 -> 2
         SealedWithObjectsChild3 -> 3

@@ -1,4 +1,4 @@
 
 fun test() {
-    val x = object {}
+    konst x = object {}
 }

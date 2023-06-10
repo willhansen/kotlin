@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 
 object SingleArgumentInlineFunctionIntrinsic : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? {
-        val sourceCompiler = IrSourceCompilerForInline(codegen.state, expression, expression.symbol.owner, codegen, data)
-        val argumentExpression = expression.getValueArgument(0)!!
-        val inlineLambda = argumentExpression.unwrapInlineLambda()
+        konst sourceCompiler = IrSourceCompilerForInline(codegen.state, expression, expression.symbol.owner, codegen, data)
+        konst argumentExpression = expression.getValueArgument(0)!!
+        konst inlineLambda = argumentExpression.unwrapInlineLambda()
         if (inlineLambda != null) {
-            val lambdaInfo = IrExpressionLambdaImpl(codegen, inlineLambda)
+            konst lambdaInfo = IrExpressionLambdaImpl(codegen, inlineLambda)
             lambdaInfo.generateLambdaBody(sourceCompiler)
             codegen.context.typeToCachedSMAP[lambdaInfo.lambdaClassType] = lambdaInfo.node.classSMAP
         }

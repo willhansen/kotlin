@@ -24,5 +24,5 @@ class AbortParsingException : RuntimeException()
 
 class JsParserException(
         message: String,
-        val position: CodePosition
+        konst position: CodePosition
 ) : RuntimeException("$message at $position")

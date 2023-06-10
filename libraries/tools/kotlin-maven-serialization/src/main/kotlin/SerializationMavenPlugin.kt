@@ -22,7 +22,7 @@ import org.codehaus.plexus.component.annotations.*
 import org.codehaus.plexus.logging.*
 import org.jetbrains.kotlin.maven.*
 
-val SERIALIZATION_COMPILER_PLUGIN_ID = "org.jetbrains.kotlinx.serialization"
+konst SERIALIZATION_COMPILER_PLUGIN_ID = "org.jetbrains.kotlinx.serialization"
 
 @Component(role = KotlinMavenPluginExtension::class, hint = "kotlinx-serialization")
 class KotlinSerializationMavenPlugin : KotlinMavenPluginExtension {

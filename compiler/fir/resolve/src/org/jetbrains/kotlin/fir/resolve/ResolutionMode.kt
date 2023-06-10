@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.render
 import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.builder.buildResolvedTypeRef
 
-sealed class ResolutionMode(val forceFullCompletion: Boolean) {
+sealed class ResolutionMode(konst forceFullCompletion: Boolean) {
     object ContextDependent : ResolutionMode(forceFullCompletion = false) {
         override fun toString(): String = "ContextDependent"
     }
@@ -29,18 +29,18 @@ sealed class ResolutionMode(val forceFullCompletion: Boolean) {
     }
 
     class WithExpectedType(
-        val expectedTypeRef: FirResolvedTypeRef,
-        val mayBeCoercionToUnitApplied: Boolean = false,
-        val expectedTypeMismatchIsReportedInChecker: Boolean = false,
-        val fromCast: Boolean = false,
+        konst expectedTypeRef: FirResolvedTypeRef,
+        konst mayBeCoercionToUnitApplied: Boolean = false,
+        konst expectedTypeMismatchIsReportedInChecker: Boolean = false,
+        konst fromCast: Boolean = false,
         // It might be ok if the types turn out to be incompatible
         // Consider the following examples with properties and their backing fields:
         //
-        // val items: List field = mutableListOf()
-        // val s: String field = 10 get() = ...
+        // konst items: List field = mutableListOf()
+        // konst s: String field = 10 get() = ...
         // In these examples we should try using the property type information while resolving the initializer,
         // but it's ok if it's not applicable
-        val shouldBeStrictlyEnforced: Boolean = true,
+        konst shouldBeStrictlyEnforced: Boolean = true,
         // Currently the only case for expected type when we don't force completion are when's branches
         forceFullCompletion: Boolean = true,
     ) : ResolutionMode(forceFullCompletion) {
@@ -62,13 +62,13 @@ sealed class ResolutionMode(val forceFullCompletion: Boolean) {
         }
     }
 
-    class WithStatus(val status: FirDeclarationStatus) : ResolutionMode(forceFullCompletion = false) {
+    class WithStatus(konst status: FirDeclarationStatus) : ResolutionMode(forceFullCompletion = false) {
         override fun toString(): String {
             return "WithStatus: ${status.render()}"
         }
     }
 
-    class LambdaResolution(val expectedReturnTypeRef: FirResolvedTypeRef?) : ResolutionMode(forceFullCompletion = false) {
+    class LambdaResolution(konst expectedReturnTypeRef: FirResolvedTypeRef?) : ResolutionMode(forceFullCompletion = false) {
         override fun toString(): String {
             return "LambdaResolution: ${expectedReturnTypeRef.prettyString()}"
         }
@@ -85,14 +85,14 @@ sealed class ResolutionMode(val forceFullCompletion: Boolean) {
      * - assigning to a property with a setter that has a different visibility than the property
      * - assigning to a non-deprecated property with a setter that is deprecated
      */
-    class AssignmentLValue(val variableAssignment: FirVariableAssignment) : ResolutionMode(forceFullCompletion = true) {
+    class AssignmentLValue(konst variableAssignment: FirVariableAssignment) : ResolutionMode(forceFullCompletion = true) {
         override fun toString(): String = "AssignmentLValue: ${variableAssignment.render()}"
     }
 
     private companion object {
         private fun FirTypeRef?.prettyString(): String {
             if (this == null) return "null"
-            val coneType = this.coneTypeSafe<ConeKotlinType>() ?: return this.render()
+            konst coneType = this.coneTypeSafe<ConeKotlinType>() ?: return this.render()
             return coneType.renderForDebugging()
         }
     }
@@ -120,7 +120,7 @@ fun withExpectedType(coneType: ConeKotlinType?, mayBeCoercionToUnitApplied: Bool
 }
 
 fun withExpectedType(coneType: ConeKotlinType, mayBeCoercionToUnitApplied: Boolean = false): ResolutionMode {
-    val typeRef = buildResolvedTypeRef {
+    konst typeRef = buildResolvedTypeRef {
         type = coneType
     }
     return ResolutionMode.WithExpectedType(typeRef, mayBeCoercionToUnitApplied)

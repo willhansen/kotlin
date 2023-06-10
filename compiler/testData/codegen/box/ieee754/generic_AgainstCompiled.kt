@@ -30,7 +30,7 @@ public class JavaClass<T> {
 // FILE: b.kt
 
 fun box(): String {
-    val jClass = JavaClass<Double>(-0.0, 0.0)
+    konst jClass = JavaClass<Double>(-0.0, 0.0)
 
     if (jClass.minus0() < jClass.plus0()) return "fail 2"
     if (jClass.minus0() != jClass.plus0()) return "fail 5"

@@ -56,7 +56,7 @@ class Iterable(iterator: Inv) {
     operator fun iterator(): CharIterator = MyIterator(true)
 }
 
-class Inv(val c: Char) {
+class Inv(konst c: Char) {
     operator fun invoke(): CharIterator = MyIterator()
 }
 

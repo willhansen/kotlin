@@ -5,7 +5,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}c
   //   Public signature: /C.c|-4416962153448040627[0]
-  val c: Int
+  konst c: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-c>(){}kotlin.Int
     //   Public signature: /C.c.<get-c>|-2440337234483931882[0]
@@ -39,7 +39,7 @@ class R {
   // CHECK:
   //   Mangled name: R{}r
   //   Public signature: /R.r|-8117627916896159533[0]
-  val r: Int
+  konst r: Int
     // CHECK JVM_IR:
     //   Mangled name: R#<get-r>(){}kotlin.Int
     //   Public signature: /R.r.<get-r>|4210912234201800356[0]

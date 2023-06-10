@@ -24,17 +24,17 @@ public class A<T> {
 class X<T>(t: T?) {
 
     init {
-        val a = A<T>()
+        konst a = A<T>()
         a.foo(t)
 
-        val x: T = a.bam()
-        val y: T = a.baz<T>()
+        konst x: T = a.bam()
+        konst y: T = a.baz<T>()
     }
 }
 
 fun test() {
-    val a = A<String?>()
+    konst a = A<String?>()
     a.foo(null)
 
-    val b: String = a.bar()
+    konst b: String = a.bar()
 }

@@ -5,7 +5,7 @@ open enum class A : Enum<A> {
   // CHECK:
   //   Mangled name: A{}prop1
   //   Public signature: /A.prop1|-8329482664683066904[0]
-  val prop1: String
+  konst prop1: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-prop1>(){}kotlin.String
     //   Public signature: /A.prop1.<get-prop1>|-4492148362286235808[0]
@@ -17,7 +17,7 @@ open enum class A : Enum<A> {
   // CHECK:
   //   Mangled name: A{}prop2
   //   Public signature: /A.prop2|4028676822563871521[0]
-  val prop2: String
+  konst prop2: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-prop2>(){}kotlin.String
     //   Public signature: /A.prop2.<get-prop2>|-8475233937604972170[0]
@@ -123,7 +123,7 @@ open enum class A : Enum<A> {
     // CHECK:
     //   Mangled name: A.Y{}name
     //   Public signature: /A.Y.<EEC>.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: A.Y#<get-name>(){}kotlin.String
       //   Public signature: /A.Y.<EEC>.name.<get-name>|-8006111524522882650[0]
@@ -135,7 +135,7 @@ open enum class A : Enum<A> {
     // CHECK:
     //   Mangled name: A.Y{}ordinal
     //   Public signature: /A.Y.<EEC>.ordinal|1912745122988592376[0]
-    /* fake */ override val ordinal: Int
+    /* fake */ override konst ordinal: Int
       // CHECK JVM_IR:
       //   Mangled name: A.Y#<get-ordinal>(){}kotlin.Int
       //   Public signature: /A.Y.<EEC>.ordinal.<get-ordinal>|-6902664390061762634[0]
@@ -147,7 +147,7 @@ open enum class A : Enum<A> {
     // CHECK:
     //   Mangled name: A.Y{}prop1
     //   Public signature: /A.Y.<EEC>.prop1|-8329482664683066904[0]
-    /* fake */ override val prop1: String
+    /* fake */ override konst prop1: String
       // CHECK JVM_IR:
       //   Mangled name: A.Y#<get-prop1>(){}kotlin.String
       //   Public signature: /A.Y.<EEC>.prop1.<get-prop1>|-4492148362286235808[0]
@@ -159,7 +159,7 @@ open enum class A : Enum<A> {
     // CHECK:
     //   Mangled name: A.Y{}prop2
     //   Public signature: /A.Y.<EEC>.prop2|4028676822563871521[0]
-    /* fake */ override val prop2: String
+    /* fake */ override konst prop2: String
       // CHECK JVM_IR:
       //   Mangled name: A.Y#<get-prop2>(){}kotlin.String
       //   Public signature: /A.Y.<EEC>.prop2.<get-prop2>|-8475233937604972170[0]
@@ -192,20 +192,20 @@ open enum class A : Enum<A> {
   Z
 
   // CHECK JVM_IR:
-  //   Mangled name: A#valueOf#static(kotlin.String){}A
-  //   Public signature: /A.valueOf|8636923007498802918[0]
+  //   Mangled name: A#konstueOf#static(kotlin.String){}A
+  //   Public signature: /A.konstueOf|8636923007498802918[0]
   // CHECK JS_IR NATIVE:
-  //   Mangled name: A#values#static(){}
-  //   Public signature: /A.values|-8715569000920726747[0]
-  fun valueOf(value: String): A
+  //   Mangled name: A#konstues#static(){}
+  //   Public signature: /A.konstues|-8715569000920726747[0]
+  fun konstueOf(konstue: String): A
 
   // CHECK JVM_IR:
-  //   Mangled name: A#values#static(){}kotlin.Array<A>
-  //   Public signature: /A.values|5753238680897834936[0]
+  //   Mangled name: A#konstues#static(){}kotlin.Array<A>
+  //   Public signature: /A.konstues|5753238680897834936[0]
   // CHECK JS_IR NATIVE:
   //   Mangled name: A#compareTo(A){}
   //   Public signature: /A.compareTo|5303387127644845713[0]
-  fun values(): Array<A>
+  fun konstues(): Array<A>
 
   // CHECK JVM_IR:
   //   Mangled name: A#clone(){}kotlin.Any
@@ -258,7 +258,7 @@ open enum class A : Enum<A> {
   // CHECK:
   //   Mangled name: A#static{}entries
   //   Public signature: /A.entries|-5134227801081826149[0]
-  val entries: EnumEntries<A>
+  konst entries: EnumEntries<A>
     // CHECK JVM_IR:
     //   Mangled name: A#<get-entries>#static(){}kotlin.enums.EnumEntries<A>
     //   Public signature: /A.entries.<get-entries>|3279885591622842062[0]
@@ -270,7 +270,7 @@ open enum class A : Enum<A> {
   // CHECK:
   //   Mangled name: A{}name
   //   Public signature: /A.name|4231860309499509769[0]
-  /* fake */ override val name: String
+  /* fake */ override konst name: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-name>(){}kotlin.String
     //   Public signature: /A.name.<get-name>|-8006111524522882650[0]
@@ -282,7 +282,7 @@ open enum class A : Enum<A> {
   // CHECK:
   //   Mangled name: A{}ordinal
   //   Public signature: /A.ordinal|1912745122988592376[0]
-  /* fake */ override val ordinal: Int
+  /* fake */ override konst ordinal: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-ordinal>(){}kotlin.Int
     //   Public signature: /A.ordinal.<get-ordinal>|-6902664390061762634[0]

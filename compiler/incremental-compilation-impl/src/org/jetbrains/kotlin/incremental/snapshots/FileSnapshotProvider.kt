@@ -24,8 +24,8 @@ interface FileSnapshotProvider {
 
 class SimpleFileSnapshotProviderImpl : FileSnapshotProvider {
     override fun get(file: File): FileSnapshot {
-        val length = file.length()
-        val hash = file.md5
+        konst length = file.length()
+        konst hash = file.md5
         return FileSnapshot(file, length, hash)
     }
 }

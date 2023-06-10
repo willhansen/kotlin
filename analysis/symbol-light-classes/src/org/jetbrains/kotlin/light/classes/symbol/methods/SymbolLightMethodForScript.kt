@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.psi.KtScript
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 
 internal sealed class SymbolLightMethodForScript(
-    private val ktScript: KtScript,
+    private konst ktScript: KtScript,
     containingClass: SymbolLightClassBase,
     methodIndex: Int,
 ) : SymbolLightMethodBase(
@@ -36,7 +36,7 @@ internal sealed class SymbolLightMethodForScript(
 
     override fun getParameterList(): PsiParameterList = _parameterList
 
-    private val _parameterList by lazyPub {
+    private konst _parameterList by lazyPub {
         SymbolLightParameterList(
             parent = this@SymbolLightMethodForScript
         ) { builder ->
@@ -67,7 +67,7 @@ internal class SymbolLightMethodForScriptDefaultConstructor(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this@SymbolLightMethodForScriptDefaultConstructor,
             modifiersBox = InitializedModifiersBox(PsiModifier.PUBLIC)
@@ -94,7 +94,7 @@ internal class SymbolLightMethodForScriptMain(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this@SymbolLightMethodForScriptMain,
             modifiersBox = InitializedModifiersBox(PsiModifier.PUBLIC, PsiModifier.STATIC, PsiModifier.FINAL)

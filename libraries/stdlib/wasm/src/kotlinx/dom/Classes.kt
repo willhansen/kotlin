@@ -18,9 +18,9 @@ fun Element.hasClass(cssClass: String): Boolean = className.matches("""(^|.*\s+)
  */
 @SinceKotlin("1.4")
 fun Element.addClass(vararg cssClasses: String): Boolean {
-    val missingClasses = cssClasses.filterNot { hasClass(it) }
+    konst missingClasses = cssClasses.filterNot { hasClass(it) }
     if (missingClasses.isNotEmpty()) {
-        val presentClasses = className.trim()
+        konst presentClasses = className.trim()
         className = buildString {
             append(presentClasses)
             if (!presentClasses.isEmpty()) {
@@ -42,7 +42,7 @@ fun Element.addClass(vararg cssClasses: String): Boolean {
 @SinceKotlin("1.4")
 fun Element.removeClass(vararg cssClasses: String): Boolean {
     if (cssClasses.any { hasClass(it) }) {
-        val toBeRemoved = cssClasses.toSet()
+        konst toBeRemoved = cssClasses.toSet()
         className = className.trim().split("\\s+".toRegex()).filter { it !in toBeRemoved }.joinToString(" ")
         return true
     }

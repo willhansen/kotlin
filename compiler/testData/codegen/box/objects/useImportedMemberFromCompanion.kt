@@ -14,7 +14,7 @@ interface I<G> {
 }
 
 open class BaseClass {
-    val <T> T.fromClass: T
+    konst <T> T.fromClass: T
         get() = this
 }
 
@@ -25,11 +25,11 @@ class Class {
         fun Boolean.f() = 3
 
         var p: Int = 4
-        val Int.ext: Int
+        konst Int.ext: Int
             get() = 6
 
         fun <T> g1(t: T): T = t
-        val <T> T.g2: T
+        konst <T> T.g2: T
             get() = this
     }
 }

@@ -17,6 +17,6 @@ fun test() {
     }
 }
 
-val i = a@{
+konst i = a@{
     return@a/* <anonymous>@(20,11) */
 }

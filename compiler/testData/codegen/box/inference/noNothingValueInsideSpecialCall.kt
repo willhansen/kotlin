@@ -20,6 +20,6 @@ open class A
 class B : A()
 
 fun box(): String {
-    val r = create(A::class.java)
+    konst r = create(A::class.java)
     return if (r is B) "OK" else "fail"
 }

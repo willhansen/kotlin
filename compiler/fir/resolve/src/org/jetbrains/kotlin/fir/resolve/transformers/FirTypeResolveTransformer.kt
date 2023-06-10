@@ -37,7 +37,7 @@ class FirTypeResolveProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, FirResolvePhase.TYPES) {
-    override val transformer = FirTypeResolveTransformer(session, scopeSession)
+    override konst transformer = FirTypeResolveTransformer(session, scopeSession)
 }
 
 fun <F : FirClassLikeDeclaration> F.runTypeResolvePhaseForLocalClass(
@@ -47,7 +47,7 @@ fun <F : FirClassLikeDeclaration> F.runTypeResolvePhaseForLocalClass(
     useSiteFile: FirFile,
     containingDeclarations: List<FirDeclaration>,
 ): F {
-    val transformer = FirTypeResolveTransformer(
+    konst transformer = FirTypeResolveTransformer(
         session,
         scopeSession,
         currentScopeList,
@@ -60,11 +60,11 @@ fun <F : FirClassLikeDeclaration> F.runTypeResolvePhaseForLocalClass(
 
 @OptIn(PrivateForInline::class)
 open class FirTypeResolveTransformer(
-    final override val session: FirSession,
-    @property:PrivateForInline val scopeSession: ScopeSession,
+    final override konst session: FirSession,
+    @property:PrivateForInline konst scopeSession: ScopeSession,
     initialScopes: List<FirScope> = emptyList(),
     initialCurrentFile: FirFile? = null,
-    @property:PrivateForInline val classDeclarationsStack: ArrayDeque<FirClass> = ArrayDeque()
+    @property:PrivateForInline konst classDeclarationsStack: ArrayDeque<FirClass> = ArrayDeque()
 ) : FirAbstractTreeTransformer<Any?>(FirResolvePhase.TYPES) {
     /**
      * All current scopes sorted from outermost to innermost.
@@ -84,7 +84,7 @@ open class FirTypeResolveTransformer(
     private var currentDeclaration: FirDeclaration? = null
 
     private inline fun <T> withDeclaration(declaration: FirDeclaration, crossinline action: () -> T): T {
-        val oldDeclaration = currentDeclaration
+        konst oldDeclaration = currentDeclaration
         return try {
             currentDeclaration = declaration
             action()
@@ -93,7 +93,7 @@ open class FirTypeResolveTransformer(
         }
     }
 
-    private val typeResolverTransformer: FirSpecificTypeResolverTransformer = FirSpecificTypeResolverTransformer(session)
+    private konst typeResolverTransformer: FirSpecificTypeResolverTransformer = FirSpecificTypeResolverTransformer(session)
 
     @PrivateForInline
     var currentFile: FirFile? = initialCurrentFile
@@ -145,12 +145,12 @@ open class FirTypeResolveTransformer(
     override fun transformConstructor(constructor: FirConstructor, data: Any?): FirConstructor = whileAnalysing(session, constructor) {
         return withScopeCleanup {
             addTypeParametersScope(constructor)
-            val result = transformDeclaration(constructor, data) as FirConstructor
+            konst result = transformDeclaration(constructor, data) as FirConstructor
 
             if (result.isPrimary) {
-                for (valueParameter in result.valueParameters) {
-                    if (valueParameter.correspondingProperty != null) {
-                        valueParameter.moveOrDeleteIrrelevantAnnotations()
+                for (konstueParameter in result.konstueParameters) {
+                    if (konstueParameter.correspondingProperty != null) {
+                        konstueParameter.moveOrDeleteIrrelevantAnnotations()
                     }
                 }
             }
@@ -202,14 +202,14 @@ open class FirTypeResolveTransformer(
                     }
                     property.returnTypeRef !is FirResolvedTypeRef && property.initializer == null &&
                             property.getter?.returnTypeRef is FirResolvedTypeRef -> {
-                        val returnTypeRef = property.getter!!.returnTypeRef
+                        konst returnTypeRef = property.getter!!.returnTypeRef
 
                         property.replaceReturnTypeRef(returnTypeRef.copyWithNewSourceKind(KtFakeSourceElementKind.PropertyTypeFromGetterReturnType))
                         property.backingField?.replaceReturnTypeRef(
                             returnTypeRef.copyWithNewSourceKind(KtFakeSourceElementKind.PropertyTypeFromGetterReturnType)
                         )
 
-                        property.setter?.valueParameters?.forEach {
+                        property.setter?.konstueParameters?.forEach {
                             it.replaceReturnTypeRef(
                                 returnTypeRef.copyWithNewSourceKind(KtFakeSourceElementKind.PropertyTypeFromGetterReturnType)
                             )
@@ -227,7 +227,7 @@ open class FirTypeResolveTransformer(
 
     private fun setAccessorTypesByPropertyType(property: FirProperty) {
         property.getter?.replaceReturnTypeRef(property.returnTypeRef)
-        property.setter?.valueParameters?.map { it.replaceReturnTypeRef(property.returnTypeRef) }
+        property.setter?.konstueParameters?.map { it.replaceReturnTypeRef(property.returnTypeRef) }
     }
 
     override fun transformField(field: FirField, data: Any?): FirField = whileAnalysing(session, field) {
@@ -249,7 +249,7 @@ open class FirTypeResolveTransformer(
         withScopeCleanup {
             withDeclaration(simpleFunction) {
                 addTypeParametersScope(simpleFunction)
-                val result = transformDeclaration(simpleFunction, data).also {
+                konst result = transformDeclaration(simpleFunction, data).also {
                     unboundCyclesInTypeParametersSupertypes(it as FirTypeParametersOwner)
                 }
 
@@ -257,8 +257,8 @@ open class FirTypeResolveTransformer(
                     result is FirSimpleFunction &&
                     result.name == StandardNames.DATA_CLASS_COPY
                 ) {
-                    for (valueParameter in result.valueParameters) {
-                        valueParameter.moveOrDeleteIrrelevantAnnotations()
+                    for (konstueParameter in result.konstueParameters) {
+                        konstueParameter.moveOrDeleteIrrelevantAnnotations()
                     }
                 }
 
@@ -271,7 +271,7 @@ open class FirTypeResolveTransformer(
         for (typeParameter in typeParametersOwner.typeParameters) {
             if (typeParameter !is FirTypeParameter) continue
             if (hasSupertypePathToParameter(typeParameter, typeParameter, mutableSetOf())) {
-                val errorType = buildErrorTypeRef {
+                konst errorType = buildErrorTypeRef {
                     diagnostic = ConeCyclicTypeBound(typeParameter.symbol, typeParameter.bounds.toImmutableList())
                 }
                 typeParameter.replaceBounds(
@@ -290,7 +290,7 @@ open class FirTypeResolveTransformer(
         if (!visited.add(currentTypeParameter)) return false
 
         return currentTypeParameter.bounds.any {
-            val nextTypeParameter = it.coneTypeSafe<ConeTypeParameterType>()?.lookupTag?.typeParameterSymbol?.fir ?: return@any false
+            konst nextTypeParameter = it.coneTypeSafe<ConeTypeParameterType>()?.lookupTag?.typeParameterSymbol?.fir ?: return@any false
 
             hasSupertypePathToParameter(nextTypeParameter, typeParameter, visited)
         }
@@ -310,14 +310,14 @@ open class FirTypeResolveTransformer(
     }
 
     override fun transformValueParameter(
-        valueParameter: FirValueParameter,
+        konstueParameter: FirValueParameter,
         data: Any?,
-    ): FirStatement = whileAnalysing(session, valueParameter) {
-        withDeclaration(valueParameter) {
-            valueParameter.transformReturnTypeRef(this, data)
-            valueParameter.transformAnnotations(this, data)
-            valueParameter.transformVarargTypeToArrayType()
-            valueParameter
+    ): FirStatement = whileAnalysing(session, konstueParameter) {
+        withDeclaration(konstueParameter) {
+            konstueParameter.transformReturnTypeRef(this, data)
+            konstueParameter.transformAnnotations(this, data)
+            konstueParameter.transformVarargTypeToArrayType()
+            konstueParameter
         }
     }
 
@@ -333,7 +333,7 @@ open class FirTypeResolveTransformer(
         annotationCall: FirAnnotationCall,
         data: Any?
     ): FirStatement = whileAnalysing(session, annotationCall) {
-        when (val originalTypeRef = annotationCall.annotationTypeRef) {
+        when (konst originalTypeRef = annotationCall.annotationTypeRef) {
             is FirResolvedTypeRef -> {
                 when (annotationCall.annotationResolvePhase) {
                     FirAnnotationResolvePhase.Unresolved -> when (originalTypeRef) {
@@ -342,12 +342,12 @@ open class FirTypeResolveTransformer(
                     }
                     FirAnnotationResolvePhase.CompilerRequiredAnnotations -> {
                         annotationCall.replaceAnnotationResolvePhase(FirAnnotationResolvePhase.Types)
-                        val alternativeResolvedTypeRef =
+                        konst alternativeResolvedTypeRef =
                             originalTypeRef.delegatedTypeRef?.transformSingle(this, data) ?: return annotationCall
-                        val coneTypeFromCompilerRequiredPhase = originalTypeRef.coneType
-                        val coneTypeFromTypesPhase = alternativeResolvedTypeRef.coneType
+                        konst coneTypeFromCompilerRequiredPhase = originalTypeRef.coneType
+                        konst coneTypeFromTypesPhase = alternativeResolvedTypeRef.coneType
                         if (coneTypeFromTypesPhase != coneTypeFromCompilerRequiredPhase) {
-                            val errorTypeRef = buildErrorTypeRef {
+                            konst errorTypeRef = buildErrorTypeRef {
                                 source = originalTypeRef.source
                                 type = coneTypeFromCompilerRequiredPhase
                                 delegatedTypeRef = originalTypeRef.delegatedTypeRef
@@ -363,7 +363,7 @@ open class FirTypeResolveTransformer(
                 }
             }
             else -> {
-                val transformedTypeRef = originalTypeRef.transformSingle(this, data)
+                konst transformedTypeRef = originalTypeRef.transformSingle(this, data)
                 annotationCall.replaceAnnotationResolvePhase(FirAnnotationResolvePhase.Types)
                 annotationCall.replaceAnnotationTypeRef(transformedTypeRef)
             }
@@ -373,12 +373,12 @@ open class FirTypeResolveTransformer(
     }
 
     inline fun <T> withScopeCleanup(crossinline l: () -> T): T {
-        val scopesBeforeSnapshot = scopes
+        konst scopesBeforeSnapshot = scopes
         scopesBefore = scopesBeforeSnapshot
 
-        val staticScopesBefore = staticScopes
+        konst staticScopesBefore = staticScopes
 
-        val result = l()
+        konst result = l()
 
         scopes = scopesBeforeSnapshot
         staticScopes = staticScopesBefore
@@ -430,7 +430,7 @@ open class FirTypeResolveTransformer(
         actionInsideStaticScope()
 
         // ? Is it Ok to use original file session here ?
-        val superTypes = lookupSuperTypes(
+        konst superTypes = lookupSuperTypes(
             firClass,
             lookupInterfaces = false,
             deep = true,
@@ -438,18 +438,18 @@ open class FirTypeResolveTransformer(
             useSiteSession = session
         ).asReversed()
 
-        val scopesToAdd = mutableListOf<FirScope>()
+        konst scopesToAdd = mutableListOf<FirScope>()
 
         for (superType in superTypes) {
             superType.lookupTag.getNestedClassifierScope(session, scopeSession)?.let { nestedClassifierScope ->
-                val scope = nestedClassifierScope.wrapNestedClassifierScopeWithSubstitutionForSuperType(superType, session)
+                konst scope = nestedClassifierScope.wrapNestedClassifierScopeWithSubstitutionForSuperType(superType, session)
                 scopesToAdd.add(scope)
             }
         }
 
         session.nestedClassifierScope(firClass)?.let(scopesToAdd::add)
         if (firClass is FirRegularClass) {
-            val companionObject = firClass.companionObjectSymbol?.fir
+            konst companionObject = firClass.companionObjectSymbol?.fir
             if (companionObject != null) {
                 session.nestedClassifierScope(companionObject)?.let(scopesToAdd::add)
             }
@@ -478,7 +478,7 @@ open class FirTypeResolveTransformer(
 
     fun addScopes(list: List<FirScope>) {
         // small optimization to skip unnecessary allocations
-        val scopesAreTheSame = scopes === staticScopes
+        konst scopesAreTheSame = scopes === staticScopes
 
         scopes = scopes.addAll(list)
         staticScopes = if (scopesAreTheSame) scopes else staticScopes.addAll(list)
@@ -486,9 +486,9 @@ open class FirTypeResolveTransformer(
 
     /**
      * Filters annotations by target.
-     * For example, in the following snippet the annotation may apply to the constructor value parameter, the property or the underlying field:
+     * For example, in the following snippet the annotation may apply to the constructor konstue parameter, the property or the underlying field:
      * ```
-     * class Foo(@Ann val x: String)
+     * class Foo(@Ann konst x: String)
      * ```
      * This ambiguity may be resolved by specifying the use-site explicitly, i.e. `@field:Ann` or by analysing the allowed targets from
      * the [kotlin.annotation.Target] meta-annotation.
@@ -496,12 +496,12 @@ open class FirTypeResolveTransformer(
      */
     private fun FirVariable.moveOrDeleteIrrelevantAnnotations() {
         if (annotations.isEmpty()) return
-        val backingFieldAnnotations by lazy(LazyThreadSafetyMode.NONE) { backingField?.annotations?.toMutableList() ?: mutableListOf() }
+        konst backingFieldAnnotations by lazy(LazyThreadSafetyMode.NONE) { backingField?.annotations?.toMutableList() ?: mutableListOf() }
         var replaceBackingFieldAnnotations = false
         replaceAnnotations(annotations.filter { annotation ->
             when (annotation.useSiteTarget) {
                 null -> {
-                    val allowedTargets = annotation.useSiteTargetsFromMetaAnnotation(session)
+                    konst allowedTargets = annotation.useSiteTargetsFromMetaAnnotation(session)
                     when {
                         this is FirValueParameter -> CONSTRUCTOR_PARAMETER in allowedTargets
                         this.source?.kind == KtFakeSourceElementKind.PropertyFromParameter && CONSTRUCTOR_PARAMETER in allowedTargets -> false
@@ -537,7 +537,7 @@ annotation class Prop
 annotation class Both
 
 data class Foo(
-    @NoTarget @Param @Prop @Both val p1: Int,
-    @param:NoTarget @param:Both val p2: String,
-    @property:NoTarget @property:Both val p3: Boolean,
+    @NoTarget @Param @Prop @Both konst p1: Int,
+    @param:NoTarget @param:Both konst p2: String,
+    @property:NoTarget @property:Both konst p3: Boolean,
 )

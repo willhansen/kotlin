@@ -14,10 +14,10 @@ FILE: RedeclaredValsAndVars.fir.kt
 
     }
     public final fun testRedeclaration(b: R|kotlin/Boolean|): R|kotlin/Unit| {
-        lval y: R|kotlin/Int| = Int(1)
-        lval y: R|kotlin/Int| = Int(2)
-        lval _: R|kotlin/Int| = Int(3)
-        lval _: R|kotlin/Int| = Int(4)
+        lkonst y: R|kotlin/Int| = Int(1)
+        lkonst y: R|kotlin/Int| = Int(2)
+        lkonst _: R|kotlin/Int| = Int(3)
+        lkonst _: R|kotlin/Int| = Int(4)
         fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
             lvar a: R|kotlin/Int| = Int(10)
             lvar a: R|kotlin/Int| = Int(11)
@@ -26,11 +26,11 @@ FILE: RedeclaredValsAndVars.fir.kt
     }
     public final fun testNoRedeclaration(list: R|kotlin/collections/List<kotlin/Int>|, b: R|kotlin/Boolean|): R|kotlin/Unit| {
          {
-            lval <iterator>: R|kotlin/collections/Iterator<kotlin/Int>| = R|<local>/list|.R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<kotlin/Int>|>|()
+            lkonst <iterator>: R|kotlin/collections/Iterator<kotlin/Int>| = R|<local>/list|.R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<kotlin/Int>|>|()
             while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.hasNext: R|kotlin/Boolean|>|()) {
-                lval el: R|kotlin/Int| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/Int|>|()
+                lkonst el: R|kotlin/Int| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/Int|>|()
                  {
-                    lval el: R|kotlin/Int| = Int(42)
+                    lkonst el: R|kotlin/Int| = Int(42)
                 }
 
             }
@@ -39,13 +39,13 @@ FILE: RedeclaredValsAndVars.fir.kt
 
         when () {
             R|<local>/b| ->  {
-                lval z: R|kotlin/Int| = Int(3)
+                lkonst z: R|kotlin/Int| = Int(3)
             }
             else ->  {
-                lval z: R|kotlin/Int| = Int(4)
+                lkonst z: R|kotlin/Int| = Int(4)
             }
         }
 
-        lval <destruct>: R|A| = R|/A.A|()
-        lval _: R|kotlin/Int| = R|<local>/<destruct>|.R|/A.component1|()
+        lkonst <destruct>: R|A| = R|/A.A|()
+        lkonst _: R|kotlin/Int| = R|<local>/<destruct>|.R|/A.component1|()
     }

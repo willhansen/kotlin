@@ -53,12 +53,12 @@ sink:
 == test ==
 fun test() {
     myRun { throw java.lang.IllegalArgumentException() }
-    val x: Int = 42
+    konst x: Int = 42
 }
 ---------------------
 L0:
   1 <START>                                                                           INIT: in: {} out: {}
-  2 mark({ myRun { throw java.lang.IllegalArgumentException() } val x: Int = 42 })
+  2 mark({ myRun { throw java.lang.IllegalArgumentException() } konst x: Int = 42 })
     mark({ throw java.lang.IllegalArgumentException() })
     r({ throw java.lang.IllegalArgumentException() }) -> <v0>
     mark(myRun { throw java.lang.IllegalArgumentException() })
@@ -66,7 +66,7 @@ L0:
 L2 [before inlined declaration]:
     inlined({ throw java.lang.IllegalArgumentException() })                                                   USE: in: {} out: {}
 L3 [after inlined declaration]:
--   v(val x: Int = 42)
+-   v(konst x: Int = 42)
 -   r(42) -> <v2>
 -   w(x|<v2>)
 L1:

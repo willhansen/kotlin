@@ -7,7 +7,7 @@ fun box(): String {
 
       }
 
-      val a: A
+      konst a: A
         field = <this>.A(ok = "OK")
         get
 
@@ -18,7 +18,7 @@ fun box(): String {
 
         }
 
-        val ok: String
+        konst ok: String
           field = ok
           get
 

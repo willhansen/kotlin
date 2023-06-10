@@ -4,7 +4,7 @@ import kotlin.native.concurrent.freeze
 
 // KT-47828
 fun setHookAndThrow() {
-    val hook = { _: Throwable ->
+    konst hook = { _: Throwable ->
         println("OK. Kotlin unhandled exception hook")
     }
     hook.freeze()

@@ -16,9 +16,9 @@ import platform.posix.memcpy
 import kotlin.native.concurrent.*
 import kotlin.test.assertNotNull
 
-data class QueryResult(val json: Map<String, *>?, val error: String?)
+data class QueryResult(konst json: Map<String, *>?, konst error: String?)
 
-private val NSData.json: Map<String, *>?
+private konst NSData.json: Map<String, *>?
     get() = NSJSONSerialization.JSONObjectWithData(this, 0, null) as? Map<String, *>
 
 fun main() {
@@ -27,10 +27,10 @@ fun main() {
     }
 }
 
-val appDelegate = MyAppDelegate()
+konst appDelegate = MyAppDelegate()
 
 private fun runApp() {
-    val app = NSApplication.sharedApplication()
+    konst app = NSApplication.sharedApplication()
 
     app.delegate = appDelegate
     app.setActivationPolicy(NSApplicationActivationPolicy.NSApplicationActivationPolicyRegular)
@@ -42,7 +42,7 @@ private fun runApp() {
 
 class Controller : NSObject() {
     private var index = 1
-    private val httpDelegate = HttpDelegate()
+    private konst httpDelegate = HttpDelegate()
 
     @ObjCAction
     fun onClick() {
@@ -70,7 +70,7 @@ class Controller : NSObject() {
 
     @ObjCAction
     fun onRequest() {
-        val addressBookRef = CNContactStore()
+        konst addressBookRef = CNContactStore()
         addressBookRef.requestAccessForEntityType(CNEntityType.CNEntityTypeContacts, mainContinuation {
             granted, error ->
             appDelegate.contentText.string = if (granted)
@@ -81,12 +81,12 @@ class Controller : NSObject() {
     }
 
     class HttpDelegate: NSObject(), NSURLSessionDataDelegateProtocol {
-        private val asyncQueue = NSOperationQueue()
+        private konst asyncQueue = NSOperationQueue()
         private var receivedData: NSData? = null
 
         fun fetchUrl(url: String) {
             receivedData = null
-            val session = NSURLSession.sessionWithConfiguration(
+            konst session = NSURLSession.sessionWithConfiguration(
                     NSURLSessionConfiguration.defaultSessionConfiguration(),
                     this,
                     delegateQueue = asyncQueue
@@ -103,7 +103,7 @@ class Controller : NSObject() {
             initRuntimeIfNeeded()
 
             executeAsync(NSOperationQueue.mainQueue) {
-                val response = task.response as? NSHTTPURLResponse
+                konst response = task.response as? NSHTTPURLResponse
                 Pair(when {
                     response == null -> QueryResult(null, didCompleteWithError?.localizedDescription)
                     response.statusCode.toInt() != 200 -> QueryResult(null, "${response.statusCode.toInt()})")
@@ -119,14 +119,14 @@ class Controller : NSObject() {
 
 class MyAppDelegate() : NSObject(), NSApplicationDelegateProtocol {
 
-    private val window: NSWindow
-    private val controller = Controller()
-    val contentText: NSText
+    private konst window: NSWindow
+    private konst controller = Controller()
+    konst contentText: NSText
     var canClick = true
 
     init {
-        val mainDisplayRect = NSScreen.mainScreen()!!.frame
-        val windowRect = mainDisplayRect.useContents {
+        konst mainDisplayRect = NSScreen.mainScreen()!!.frame
+        konst windowRect = mainDisplayRect.useContents {
             NSMakeRect(
                     origin.x + size.width * 0.25,
                     origin.y + size.height * 0.25,
@@ -135,7 +135,7 @@ class MyAppDelegate() : NSObject(), NSApplicationDelegateProtocol {
             )
         }
 
-        val windowStyle = NSWindowStyleMaskTitled or NSWindowStyleMaskMiniaturizable or
+        konst windowStyle = NSWindowStyleMaskTitled or NSWindowStyleMaskMiniaturizable or
                 NSWindowStyleMaskClosable or NSWindowStyleMaskResizable
 
         window = NSWindow(windowRect, windowStyle, NSBackingStoreBuffered, false).apply {
@@ -147,7 +147,7 @@ class MyAppDelegate() : NSObject(), NSApplicationDelegateProtocol {
             backgroundColor = NSColor.grayColor()
             releasedWhenClosed = false
 
-            val delegateImpl = object : NSObject(), NSWindowDelegateProtocol {
+            konst delegateImpl = object : NSObject(), NSWindowDelegateProtocol {
                 override fun windowShouldClose(sender: NSWindow): Boolean {
                     NSApplication.sharedApplication().stop(this)
                     return true
@@ -156,27 +156,27 @@ class MyAppDelegate() : NSObject(), NSApplicationDelegateProtocol {
 
             // Wrapping to autoreleasepool is a workaround for false-positive memory leak detected:
             // NSWindow.delegate setter appears to put the delegate to autorelease pool.
-            // Since this code runs during top-level val initializer, it misses the autoreleasepool in [main],
+            // Since this code runs during top-level konst initializer, it misses the autoreleasepool in [main],
             // so the object gets released too late.
             autoreleasepool {
                 delegate = delegateImpl
             }
         }
 
-        val buttonPress = NSButton(NSMakeRect(10.0, 10.0, 100.0, 40.0)).apply {
+        konst buttonPress = NSButton(NSMakeRect(10.0, 10.0, 100.0, 40.0)).apply {
             title = "Click"
             target = controller
             action = NSSelectorFromString("onClick")
         }
         window.contentView!!.addSubview(buttonPress)
-        val buttonQuit = NSButton(NSMakeRect(120.0, 10.0, 100.0, 40.0)).apply {
+        konst buttonQuit = NSButton(NSMakeRect(120.0, 10.0, 100.0, 40.0)).apply {
             title = "Quit"
             target = controller
             action = NSSelectorFromString("onQuit")
         }
         window.contentView!!.addSubview(buttonQuit)
 
-        val buttonRequest = NSButton(NSMakeRect(230.0, 10.0, 100.0, 40.0)).apply {
+        konst buttonRequest = NSButton(NSMakeRect(230.0, 10.0, 100.0, 40.0)).apply {
             title = "Request"
             target = controller
             action = NSSelectorFromString("onRequest")

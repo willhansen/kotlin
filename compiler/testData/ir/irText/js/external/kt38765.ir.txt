@@ -60,21 +60,21 @@ FILE fqName:events fileName:/kt38765.kt
       ENUM_ENTRY name:B
         init: EXPRESSION_BODY
           ENUM_CONSTRUCTOR_CALL 'private constructor <init> () declared in events.internal.NestedExternalEnum'
-      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [external,fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [external,fake_override,konst]
         annotations:
-          IntrinsicConstEvaluation
+          IntrinsicConstEkonstuation
         overridden:
           public final name: kotlin.String
         FUN FAKE_OVERRIDE name:<get-name> visibility:public modality:FINAL <> ($this:kotlin.Enum<events.internal.NestedExternalEnum>) returnType:kotlin.String [external,fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [external,fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:name visibility:public modality:FINAL [external,fake_override,konst]
           overridden:
             public final fun <get-name> (): kotlin.String declared in kotlin.Enum
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<events.internal.NestedExternalEnum>
-      PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [external,fake_override,val]
+      PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [external,fake_override,konst]
         overridden:
           public final ordinal: kotlin.Int
         FUN FAKE_OVERRIDE name:<get-ordinal> visibility:public modality:FINAL <> ($this:kotlin.Enum<events.internal.NestedExternalEnum>) returnType:kotlin.Int [external,fake_override]
-          correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [external,fake_override,val]
+          correspondingProperty: PROPERTY FAKE_OVERRIDE name:ordinal visibility:public modality:FINAL [external,fake_override,konst]
           overridden:
             public final fun <get-ordinal> (): kotlin.Int declared in kotlin.Enum
           $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<events.internal.NestedExternalEnum>
@@ -96,14 +96,14 @@ FILE fqName:events fileName:/kt38765.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Enum
         $this: VALUE_PARAMETER name:<this> type:kotlin.Enum<events.internal.NestedExternalEnum>
-      FUN ENUM_CLASS_SPECIAL_MEMBER name:values visibility:public modality:FINAL <> () returnType:kotlin.Array<events.internal.NestedExternalEnum> [external]
+      FUN ENUM_CLASS_SPECIAL_MEMBER name:konstues visibility:public modality:FINAL <> () returnType:kotlin.Array<events.internal.NestedExternalEnum> [external]
         SYNTHETIC_BODY kind=ENUM_VALUES
-      FUN ENUM_CLASS_SPECIAL_MEMBER name:valueOf visibility:public modality:FINAL <> (value:kotlin.String) returnType:events.internal.NestedExternalEnum [external]
-        VALUE_PARAMETER name:value index:0 type:kotlin.String
+      FUN ENUM_CLASS_SPECIAL_MEMBER name:konstueOf visibility:public modality:FINAL <> (konstue:kotlin.String) returnType:events.internal.NestedExternalEnum [external]
+        VALUE_PARAMETER name:konstue index:0 type:kotlin.String
         SYNTHETIC_BODY kind=ENUM_VALUEOF
-      PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [external,val]
+      PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [external,konst]
         FUN ENUM_CLASS_SPECIAL_MEMBER name:<get-entries> visibility:public modality:FINAL <> () returnType:kotlin.enums.EnumEntries<events.internal.NestedExternalEnum> [external]
-          correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [external,val]
+          correspondingProperty: PROPERTY ENUM_CLASS_SPECIAL_MEMBER name:entries visibility:public modality:FINAL [external,konst]
           SYNTHETIC_BODY kind=ENUM_ENTRIES
     CLASS INTERFACE name:NestedExternalInterface modality:ABSTRACT visibility:public [external] superTypes:[kotlin.Any]
       $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:events.internal.NestedExternalInterface

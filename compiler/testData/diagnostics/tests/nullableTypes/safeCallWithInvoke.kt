@@ -1,5 +1,5 @@
 class A {
-    val b = B()
+    konst b = B()
 }
 class B
 operator fun B.invoke(i: Int) = i

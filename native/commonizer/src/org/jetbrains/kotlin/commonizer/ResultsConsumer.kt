@@ -17,14 +17,14 @@ interface ResultsConsumer {
     enum class Status { NOTHING_TO_DO, DONE }
 
     sealed class ModuleResult {
-        abstract val libraryName: String
+        abstract konst libraryName: String
 
-        class Missing(val originalLocation: File) : ModuleResult() {
-            override val libraryName: String get() = originalLocation.name
+        class Missing(konst originalLocation: File) : ModuleResult() {
+            override konst libraryName: String get() = originalLocation.name
         }
 
         class Commonized(
-            override val libraryName: String, val metadata: SerializedMetadata, val manifest: NativeSensitiveManifestData
+            override konst libraryName: String, konst metadata: SerializedMetadata, konst manifest: NativeSensitiveManifestData
         ) : ModuleResult()
     }
 
@@ -50,7 +50,7 @@ internal class ResultsConsumerBuilder {
     private var resultsConsumer: ResultsConsumer? = null
 
     infix fun add(consumer: ResultsConsumer) {
-        val resultsConsumer = this.resultsConsumer
+        konst resultsConsumer = this.resultsConsumer
         if (resultsConsumer == null) {
             this.resultsConsumer = consumer
             return
@@ -71,7 +71,7 @@ operator fun ResultsConsumer.plus(other: ResultsConsumer?): ResultsConsumer {
     return CompositeResultsConsumer(listOf(this, other))
 }
 
-private class CompositeResultsConsumer(val consumers: List<ResultsConsumer>) : ResultsConsumer {
+private class CompositeResultsConsumer(konst consumers: List<ResultsConsumer>) : ResultsConsumer {
     override fun consume(parameters: CommonizerParameters, target: CommonizerTarget, moduleResult: ResultsConsumer.ModuleResult) {
         consumers.forEach { consumer ->
             consumer.consume(parameters, target, moduleResult)

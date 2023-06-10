@@ -9,18 +9,18 @@
 package foo
 
 @JsExport
-enum class TestEnumClass(val constructorParameter: String) {
+enum class TestEnumClass(konst constructorParameter: String) {
     A("aConstructorParameter"),
     B("bConstructorParameter");
 
-    val foo = ordinal
+    konst foo = ordinal
 
-    fun bar(value: String) = value
+    fun bar(konstue: String) = konstue
 
     fun bay() = name
 
     class Nested {
-        val prop: String = "hello2"
+        konst prop: String = "hello2"
     }
 }
 

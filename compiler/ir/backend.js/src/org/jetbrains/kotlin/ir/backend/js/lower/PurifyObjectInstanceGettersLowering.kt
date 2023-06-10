@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrExpressionBodyImpl
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.util.*
 
-class PurifyObjectInstanceGettersLowering(val context: JsCommonBackendContext) : DeclarationTransformer {
+class PurifyObjectInstanceGettersLowering(konst context: JsCommonBackendContext) : DeclarationTransformer {
     private var IrClass.instanceField by context.mapping.objectToInstanceField
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
@@ -49,11 +49,11 @@ class PurifyObjectInstanceGettersLowering(val context: JsCommonBackendContext) :
     }
 
     private fun IrSimpleFunction.purifyObjectGetterIfPossible(): List<IrDeclaration>? {
-        val objectToCreate = returnType.classOrNull?.owner ?: return null
+        konst objectToCreate = returnType.classOrNull?.owner ?: return null
 
         if (objectToCreate.isPureObject()) {
-            val body = (body as? IrBlockBody) ?: return null
-            val instanceField = objectToCreate.instanceField ?: error("Expect the object instance field to be created")
+            konst body = (body as? IrBlockBody) ?: return null
+            konst instanceField = objectToCreate.instanceField ?: error("Expect the object instance field to be created")
 
             body.statements.clear()
             body.statements += JsIrBuilder.buildReturn(
@@ -67,10 +67,10 @@ class PurifyObjectInstanceGettersLowering(val context: JsCommonBackendContext) :
     }
 
     private fun IrField.purifyObjectInstanceFieldIfPossible(): List<IrDeclaration>? {
-        val objectToCreate = type.classOrNull?.owner ?: return null
+        konst objectToCreate = type.classOrNull?.owner ?: return null
 
         if (objectToCreate.isPureObject()) {
-            val objectConstructor = objectToCreate.primaryConstructor ?: error("Object should contain a primary constructor")
+            konst objectConstructor = objectToCreate.primaryConstructor ?: error("Object should contain a primary constructor")
             initializer = IrExpressionBodyImpl(JsIrBuilder.buildConstructorCall(objectConstructor.symbol))
         }
 
@@ -96,10 +96,10 @@ class PurifyObjectInstanceGettersLowering(val context: JsCommonBackendContext) :
                         (this is IrVariable && initializer?.isPureStatementForObjectInitialization(owner) != false) ||
                         // Only fields of the objects are safe to not save an intermediate state of another class/object/global
                         (this is IrGetField && receiver?.isPureStatementForObjectInitialization(owner) == true) ||
-                        (this is IrSetField && receiver?.isPureStatementForObjectInitialization(owner) == true && value.isPureStatementForObjectInitialization(owner)) ||
+                        (this is IrSetField && receiver?.isPureStatementForObjectInitialization(owner) == true && konstue.isPureStatementForObjectInitialization(owner)) ||
                         // Only current object could be initialized inside the object constructor, so we need to ignore it as an effect
                         (this is IrSetField && symbol.owner.isObjectInstanceField()) ||
-                        (this is IrSetValue && symbol.owner.isLocal && value.isPureStatementForObjectInitialization(owner))
+                        (this is IrSetValue && symbol.owner.isLocal && konstue.isPureStatementForObjectInitialization(owner))
                 )
 
     }

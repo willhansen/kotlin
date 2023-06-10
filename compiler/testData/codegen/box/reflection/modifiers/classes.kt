@@ -6,7 +6,7 @@ import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 
 sealed class S {
-    data class DataClass(val x: Int) : S()
+    data class DataClass(konst x: Int) : S()
     data object DataObject
     inner class InnerClass
     companion object
@@ -15,7 +15,7 @@ sealed class S {
 }
 
 @JvmInline
-value class V(val value: String)
+konstue class V(konst konstue: String)
 
 fun box(): String {
     assertTrue(S::class.isSealed)

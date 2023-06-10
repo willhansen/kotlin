@@ -61,7 +61,7 @@ import java.util.Stack;
 public class MavenComparableVersion
     implements Comparable<MavenComparableVersion>
 {
-    private String value;
+    private String konstue;
 
     private String canonical;
 
@@ -88,18 +88,18 @@ public class MavenComparableVersion
     {
         private static final BigInteger BIG_INTEGER_ZERO = new BigInteger( "0" );
 
-        private final BigInteger value;
+        private final BigInteger konstue;
 
         public static final IntegerItem ZERO = new IntegerItem();
 
         private IntegerItem()
         {
-            this.value = BIG_INTEGER_ZERO;
+            this.konstue = BIG_INTEGER_ZERO;
         }
 
         public IntegerItem( String str )
         {
-            this.value = new BigInteger( str );
+            this.konstue = new BigInteger( str );
         }
 
         public int getType()
@@ -109,20 +109,20 @@ public class MavenComparableVersion
 
         public boolean isNull()
         {
-            return BIG_INTEGER_ZERO.equals( value );
+            return BIG_INTEGER_ZERO.equals( konstue );
         }
 
         public int compareTo( Item item )
         {
             if ( item == null )
             {
-                return BIG_INTEGER_ZERO.equals( value ) ? 0 : 1; // 1.0 == 1, 1.1 > 1
+                return BIG_INTEGER_ZERO.equals( konstue ) ? 0 : 1; // 1.0 == 1, 1.1 > 1
             }
 
             switch ( item.getType() )
             {
                 case INTEGER_ITEM:
-                    return value.compareTo( ( (IntegerItem) item ).value );
+                    return konstue.compareTo( ( (IntegerItem) item ).konstue );
 
                 case STRING_ITEM:
                     return 1; // 1.1 > 1-sp
@@ -131,13 +131,13 @@ public class MavenComparableVersion
                     return 1; // 1.1 > 1-1
 
                 default:
-                    throw new RuntimeException( "invalid item: " + item.getClass() );
+                    throw new RuntimeException( "inkonstid item: " + item.getClass() );
             }
         }
 
         public String toString()
         {
-            return value.toString();
+            return konstue.toString();
         }
     }
 
@@ -161,33 +161,33 @@ public class MavenComparableVersion
         }
 
         /**
-         * A comparable value for the empty-string qualifier. This one is used to determine if a given qualifier makes
+         * A comparable konstue for the empty-string qualifier. This one is used to determine if a given qualifier makes
          * the version older than one without a qualifier, or more recent.
          */
-        private static final String RELEASE_VERSION_INDEX = String.valueOf( _QUALIFIERS.indexOf( "" ) );
+        private static final String RELEASE_VERSION_INDEX = String.konstueOf( _QUALIFIERS.indexOf( "" ) );
 
-        private String value;
+        private String konstue;
 
-        public StringItem( String value, boolean followedByDigit )
+        public StringItem( String konstue, boolean followedByDigit )
         {
-            if ( followedByDigit && value.length() == 1 )
+            if ( followedByDigit && konstue.length() == 1 )
             {
                 // a1 = alpha-1, b1 = beta-1, m1 = milestone-1
-                switch ( value.charAt( 0 ) )
+                switch ( konstue.charAt( 0 ) )
                 {
                     case 'a':
-                        value = "alpha";
+                        konstue = "alpha";
                         break;
                     case 'b':
-                        value = "beta";
+                        konstue = "beta";
                         break;
                     case 'm':
-                        value = "milestone";
+                        konstue = "milestone";
                         break;
                     default:
                 }
             }
-            this.value = ALIASES.getProperty( value , value );
+            this.konstue = ALIASES.getProperty( konstue , konstue );
         }
 
         public int getType()
@@ -197,11 +197,11 @@ public class MavenComparableVersion
 
         public boolean isNull()
         {
-            return ( comparableQualifier( value ).compareTo( RELEASE_VERSION_INDEX ) == 0 );
+            return ( comparableQualifier( konstue ).compareTo( RELEASE_VERSION_INDEX ) == 0 );
         }
 
         /**
-         * Returns a comparable value for a qualifier.
+         * Returns a comparable konstue for a qualifier.
          *
          * This method takes into account the ordering of known qualifiers then unknown qualifiers with lexical
          * ordering.
@@ -211,13 +211,13 @@ public class MavenComparableVersion
          * so this is still fast. If more characters are needed then it requires a lexical sort anyway.
          *
          * @param qualifier
-         * @return an equivalent value that can be used with lexical comparison
+         * @return an equikonstent konstue that can be used with lexical comparison
          */
         public static String comparableQualifier( String qualifier )
         {
             int i = _QUALIFIERS.indexOf( qualifier );
 
-            return i == -1 ? ( _QUALIFIERS.size() + "-" + qualifier ) : String.valueOf( i );
+            return i == -1 ? ( _QUALIFIERS.size() + "-" + qualifier ) : String.konstueOf( i );
         }
 
         public int compareTo( Item item )
@@ -225,7 +225,7 @@ public class MavenComparableVersion
             if ( item == null )
             {
                 // 1-rc < 1, 1-ga > 1
-                return comparableQualifier( value ).compareTo( RELEASE_VERSION_INDEX );
+                return comparableQualifier( konstue ).compareTo( RELEASE_VERSION_INDEX );
             }
             switch ( item.getType() )
             {
@@ -233,19 +233,19 @@ public class MavenComparableVersion
                     return -1; // 1.any < 1.1 ?
 
                 case STRING_ITEM:
-                    return comparableQualifier( value ).compareTo( comparableQualifier( ( (StringItem) item ).value ) );
+                    return comparableQualifier( konstue ).compareTo( comparableQualifier( ( (StringItem) item ).konstue ) );
 
                 case LIST_ITEM:
                     return -1; // 1.any < 1-1
 
                 default:
-                    throw new RuntimeException( "invalid item: " + item.getClass() );
+                    throw new RuntimeException( "inkonstid item: " + item.getClass() );
             }
         }
 
         public String toString()
         {
-            return value;
+            return konstue;
         }
     }
 
@@ -325,7 +325,7 @@ public class MavenComparableVersion
                     return 0;
 
                 default:
-                    throw new RuntimeException( "invalid item: " + item.getClass() );
+                    throw new RuntimeException( "inkonstid item: " + item.getClass() );
             }
         }
 
@@ -352,7 +352,7 @@ public class MavenComparableVersion
 
     public final void parseVersion( String version )
     {
-        this.value = version;
+        this.konstue = version;
 
         items = new ListItem();
 
@@ -452,7 +452,7 @@ public class MavenComparableVersion
 
     public String toString()
     {
-        return value;
+        return konstue;
     }
 
     public String getCanonical()
@@ -496,7 +496,7 @@ public class MavenComparableVersion
                     + ( ( compare == 0 ) ? "==" : ( ( compare < 0 ) ? "<" : ">" ) ) + ' ' + version );
             }
 
-            System.out.println( String.valueOf( i++ ) + ". " + version + " == " + c.getCanonical() );
+            System.out.println( String.konstueOf( i++ ) + ". " + version + " == " + c.getCanonical() );
 
             prev = c;
         }

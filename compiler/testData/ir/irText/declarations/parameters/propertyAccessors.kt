@@ -1,27 +1,27 @@
 // FIR_IDENTICAL
 
-val test1 get() = 42
+konst test1 get() = 42
 
-var test2 get() = 42; set(value) {}
+var test2 get() = 42; set(konstue) {}
 
-val String.testExt1 get() = 42
+konst String.testExt1 get() = 42
 
-var String.testExt2 get() = 42; set(value) {}
+var String.testExt2 get() = 42; set(konstue) {}
 
-val <T> T.testExt3 get() = 42
+konst <T> T.testExt3 get() = 42
 
-var <T> T.testExt4 get() = 42; set(value) {}
+var <T> T.testExt4 get() = 42; set(konstue) {}
 
 class Host<T> {
-    val testMem1 get() = 42
+    konst testMem1 get() = 42
 
-    var testMem2 get() = 42; set(value) {}
+    var testMem2 get() = 42; set(konstue) {}
 
-    val String.testMemExt1 get() = 42
+    konst String.testMemExt1 get() = 42
 
-    var String.testMemExt2 get() = 42; set(value) {}
+    var String.testMemExt2 get() = 42; set(konstue) {}
 
-    val <TT> TT.testMemExt3 get() = 42
+    konst <TT> TT.testMemExt3 get() = 42
 
-    var <TT> TT.testMemExt4 get() = 42; set(value) {}
+    var <TT> TT.testMemExt4 get() = 42; set(konstue) {}
 }

@@ -1,6 +1,6 @@
 // WITH_STDLIB
 class World() {
-  public val items: ArrayList<Item> = ArrayList<Item>()
+  public konst items: ArrayList<Item> = ArrayList<Item>()
 
   inner class Item() {
     init {
@@ -8,11 +8,11 @@ class World() {
     }
   }
 
-  val foo = Item()
+  konst foo = Item()
 }
 
 fun box() : String {
-  val w = World()
+  konst w = World()
   if (w.items.size != 1) return "fail"
   return "OK"
 }

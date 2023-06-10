@@ -8,6 +8,6 @@ class Bar<T> {
 class Inv<O>
 
 fun <K : Inv<Inv<Number>>> main() {
-    val foo = Foo<K>()
+    konst foo = Foo<K>()
     Bar<Inv<in Inv<in Int>>>().takeFoo(foo) // error in 1.3.72, no error in 1.4.31
 }

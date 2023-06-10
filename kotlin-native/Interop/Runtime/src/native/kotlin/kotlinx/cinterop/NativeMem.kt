@@ -12,7 +12,7 @@ import kotlin.native.internal.TypedIntrinsic
 import kotlin.native.internal.IntrinsicType
 
 @PublishedApi
-internal inline val pointerSize: Int
+internal inline konst pointerSize: Int
     get() = getPointerSize()
 
 @PublishedApi
@@ -23,32 +23,32 @@ internal external fun getPointerSize(): Int
 @PublishedApi
 internal object nativeMemUtils {
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getByte(mem: NativePointed): Byte
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putByte(mem: NativePointed, value: Byte)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putByte(mem: NativePointed, konstue: Byte)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getShort(mem: NativePointed): Short
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putShort(mem: NativePointed, value: Short)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putShort(mem: NativePointed, konstue: Short)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getInt(mem: NativePointed): Int
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putInt(mem: NativePointed, value: Int)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putInt(mem: NativePointed, konstue: Int)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getLong(mem: NativePointed): Long
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putLong(mem: NativePointed, value: Long)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putLong(mem: NativePointed, konstue: Long)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getFloat(mem: NativePointed): Float
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putFloat(mem: NativePointed, value: Float)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putFloat(mem: NativePointed, konstue: Float)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getDouble(mem: NativePointed): Double
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putDouble(mem: NativePointed, value: Double)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putDouble(mem: NativePointed, konstue: Double)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getNativePtr(mem: NativePointed): NativePtr
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putNativePtr(mem: NativePointed, value: NativePtr)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putNativePtr(mem: NativePointed, konstue: NativePtr)
 
     @TypedIntrinsic(IntrinsicType.INTEROP_READ_PRIMITIVE) external fun getVector(mem: NativePointed): Vector128
-    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putVector(mem: NativePointed, value: Vector128)
+    @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_PRIMITIVE) external fun putVector(mem: NativePointed, konstue: Vector128)
 
     // TODO: optimize
     fun getByteArray(source: NativePointed, dest: ByteArray, length: Int) {
-        val sourceArray = source.reinterpret<ByteVar>().ptr
+        konst sourceArray = source.reinterpret<ByteVar>().ptr
         var index = 0
         while (index < length) {
             dest[index] = sourceArray[index]
@@ -58,7 +58,7 @@ internal object nativeMemUtils {
 
     // TODO: optimize
     fun putByteArray(source: ByteArray, dest: NativePointed, length: Int) {
-        val destArray = dest.reinterpret<ByteVar>().ptr
+        konst destArray = dest.reinterpret<ByteVar>().ptr
         var index = 0
         while (index < length) {
             destArray[index] = source[index]
@@ -68,7 +68,7 @@ internal object nativeMemUtils {
 
     // TODO: optimize
     fun getCharArray(source: NativePointed, dest: CharArray, length: Int) {
-        val sourceArray = source.reinterpret<ShortVar>().ptr
+        konst sourceArray = source.reinterpret<ShortVar>().ptr
         var index = 0
         while (index < length) {
             dest[index] = sourceArray[index].toInt().toChar()
@@ -78,7 +78,7 @@ internal object nativeMemUtils {
 
     // TODO: optimize
     fun putCharArray(source: CharArray, dest: NativePointed, length: Int) {
-        val destArray = dest.reinterpret<ShortVar>().ptr
+        konst destArray = dest.reinterpret<ShortVar>().ptr
         var index = 0
         while (index < length) {
             destArray[index] = source[index].code.toShort()
@@ -88,7 +88,7 @@ internal object nativeMemUtils {
 
     // TODO: optimize
     fun zeroMemory(dest: NativePointed, length: Int): Unit {
-        val destArray = dest.reinterpret<ByteVar>().ptr
+        konst destArray = dest.reinterpret<ByteVar>().ptr
         var index = 0
         while (index < length) {
             destArray[index] = 0
@@ -98,8 +98,8 @@ internal object nativeMemUtils {
 
     // TODO: optimize
     fun copyMemory(dest: NativePointed, length: Int, src: NativePointed): Unit {
-        val destArray = dest.reinterpret<ByteVar>().ptr
-        val srcArray = src.reinterpret<ByteVar>().ptr
+        konst destArray = dest.reinterpret<ByteVar>().ptr
+        konst srcArray = src.reinterpret<ByteVar>().ptr
         var index = 0
         while (index < length) {
             destArray[index] = srcArray[index]
@@ -116,7 +116,7 @@ internal object nativeMemUtils {
     }
 
     internal fun allocRaw(size: Long, align: Int): NativePtr {
-        val ptr = malloc(size, align)
+        konst ptr = malloc(size, align)
         if (ptr == nativeNullPtr) {
             throw OutOfMemoryError("unable to allocate native memory")
         }
@@ -130,13 +130,13 @@ internal object nativeMemUtils {
 
 @ExperimentalForeignApi
 public fun CPointer<UShortVar>.toKStringFromUtf16(): String {
-    val nativeBytes = this
+    konst nativeBytes = this
 
     var length = 0
     while (nativeBytes[length] != 0.toUShort()) {
         ++length
     }
-    val chars = kotlin.CharArray(length)
+    konst chars = kotlin.CharArray(length)
     var index = 0
     while (index < length) {
         chars[index] = nativeBytes[index].toInt().toChar()
@@ -163,4 +163,4 @@ external fun readBits(ptr: NativePtr, offset: Long, size: Int, signed: Boolean):
 
 @ExperimentalForeignApi
 @TypedIntrinsic(IntrinsicType.INTEROP_WRITE_BITS)
-external fun writeBits(ptr: NativePtr, offset: Long, size: Int, value: Long)
+external fun writeBits(ptr: NativePtr, offset: Long, size: Int, konstue: Long)

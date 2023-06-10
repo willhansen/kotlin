@@ -1,19 +1,19 @@
 // FILE: test.kt
 
 fun stringSwitch(x: String) {
-    val l = when {
+    konst l = when {
         x == "x" -> 1
         x == "xy" -> 2
         else -> -1
     }
 
-    val l2 = when (x) {
+    konst l2 = when (x) {
         "x" -> 1
         "xy" -> 2
         else -> -1
     }
 
-    val l3 = when
+    konst l3 = when
         (x)
     {
         "x" -> 1

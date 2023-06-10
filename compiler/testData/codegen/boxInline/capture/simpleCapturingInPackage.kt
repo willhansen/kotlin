@@ -14,15 +14,15 @@ fun testAll(): String {
 }
 
 fun testAllWithCapturedVal(): String {
-    val c1 = 21
-    val c2 = 22.9
-    val c3 = 23.9
-    val c4 = "24"
-    val c5 = 25.toLong()
-    val c6 = 'H'
-    val c7 = 26.toByte()
-    val c8 = 27.toShort()
-    val c9 = 28.toFloat() + 0.3
+    konst c1 = 21
+    konst c2 = 22.9
+    konst c3 = 23.9
+    konst c4 = "24"
+    konst c5 = 25.toLong()
+    konst c6 = 'H'
+    konst c7 = 26.toByte()
+    konst c8 = 27.toShort()
+    konst c9 = 28.toFloat() + 0.3
 
     return inline({ a1: Int, a2: Double, a3: Double, a4: String, a5: Long ->
                       "" + a1 + a2 + a3 + a4 + a5 + c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9},
@@ -38,7 +38,7 @@ fun testAllWithCapturedVar(): String {
     var c6 = 'H'
     var c7 = 26.toByte()
     var c8 = 27.toShort()
-    val c9 = 28.toFloat() + 0.3
+    konst c9 = 28.toFloat() + 0.3
 
     return inline({ a1: Int, a2: Double, a3: Double, a4: String, a5: Long ->
                       "" + a1 + a2 + a3 + a4 + a5 + c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9},
@@ -48,13 +48,13 @@ fun testAllWithCapturedVar(): String {
 fun testAllWithCapturedValAndVar(): String {
     var c1 = 21
     var c2 = 22.9
-    val c3 = 23.9
-    val c4 = "24"
+    konst c3 = 23.9
+    konst c4 = "24"
     var c5 = 25.toLong()
-    val c6 = 'H'
+    konst c6 = 'H'
     var c7 = 26.toByte()
     var c8 = 27.toShort()
-    val c9 = 28.toFloat() + 0.3
+    konst c9 = 28.toFloat() + 0.3
 
     return inline({ a1: Int, a2: Double, a3: Double, a4: String, a5: Long ->
                       "" + a1 + a2 + a3 + a4 + a5 + c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8 + c9},

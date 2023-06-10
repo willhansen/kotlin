@@ -14,6 +14,6 @@ fun f(): I {
     }
 }
 
-val rv = f().g().g().g()
+konst rv = f().g().g().g()
 
 // expected: rv: OK

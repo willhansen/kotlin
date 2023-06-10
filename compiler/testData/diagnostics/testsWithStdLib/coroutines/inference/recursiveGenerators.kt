@@ -12,7 +12,7 @@ class GenericController<T> {
 
 fun <S> generate(g: suspend GenericController<S>.() -> Unit): List<S> = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield(generate {
         yield(generate {
             yield(generate {

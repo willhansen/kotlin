@@ -16,10 +16,10 @@
 
 package org.jetbrains.kotlin.native.interop.gen
 
-val kotlinKeywords = setOf(
+konst kotlinKeywords = setOf(
         "as", "break", "class", "continue", "do", "dynamic", "else", "false", "for", "fun", "if", "in",
         "interface", "is", "null", "object", "package", "return", "super", "this", "throw",
-        "true", "try", "typealias", "val", "var", "when", "while",
+        "true", "try", "typealias", "konst", "var", "when", "while",
         // While not technically keywords, those shall be escaped as well.
         "_", "__", "___"
 )
@@ -52,8 +52,8 @@ fun String.asSimpleName(): String = if (this in kotlinKeywords || this.contains(
  * in normal code, and keep mangling easy readable.
  */
 internal fun mangleSimple(name: String): String {
-    val reserved = setOf("Companion")
-    val postfix = "\$"
+    konst reserved = setOf("Companion")
+    konst postfix = "\$"
     return if (name in reserved)
         "$name$postfix"
     else
@@ -80,12 +80,12 @@ fun String.quoteAsKotlinLiteral(): KotlinExpression = buildString {
 
 // TODO: improve literal readability by preserving more characters.
 
-private val charactersAllowedInKotlinStringLiterals: Set<Char> = mutableSetOf<Char>().apply {
+private konst charactersAllowedInKotlinStringLiterals: Set<Char> = mutableSetOf<Char>().apply {
     addAll('a' .. 'z')
     addAll('A' .. 'Z')
     addAll('0' .. '9')
     addAll(listOf('_', '@', ':', ';', '.', ',', '{', '}', '=', '[', ']', '^', '#', '*', ' ', '(', ')'))
 }
 
-val annotationForUnableToImport
+konst annotationForUnableToImport
     get() = "@Deprecated(${"Unable to import this declaration".quoteAsKotlinLiteral()}, level = DeprecationLevel.ERROR)"

@@ -25,26 +25,26 @@ fun builder(c: suspend Controller.() -> Unit) {
     c.startCoroutine(Controller(), EmptyContinuation)
 }
 
-class A(val first: String, val second: String) {
+class A(konst first: String, konst second: String) {
     override fun toString() = "$first$second"
 }
 
-class B(val first: String, val second: String, val third: String) {
+class B(konst first: String, konst second: String, konst third: String) {
     override fun toString() = "$first$second$third"
 }
 
-class C(val a: Long, val b: Double, val c: Int, val d: String) {
+class C(konst a: Long, konst b: Double, konst c: Int, konst d: String) {
     override fun toString() = "$a#$b#$c#$d"
 }
 
-val condition = true
+konst condition = true
 
 fun box(): String {
     var result = "OK"
 
     builder {
         for (count in 0..3) {
-            val local = A(if (count > 0) break else "O", suspendHere())
+            konst local = A(if (count > 0) break else "O", suspendHere())
 
             if (count > 0) {
                 result = "fail 1: count=$count"
@@ -58,7 +58,7 @@ fun box(): String {
         }
 
         for (count in 0..3) {
-            val local = B(if (count > 0) break else "#", suspendWithArgument("O"), suspendHere())
+            konst local = B(if (count > 0) break else "#", suspendWithArgument("O"), suspendHere())
 
             if (count > 0) {
                 result = "fail 2: count=$count"
@@ -72,7 +72,7 @@ fun box(): String {
         }
 
         for (count in 0..3) {
-            val local = B(suspendWithArgument("#"), if (count > 0) break else "O", suspendHere())
+            konst local = B(suspendWithArgument("#"), if (count > 0) break else "O", suspendHere())
 
             if (count > 0) {
                 result = "fail 3: count=$count"
@@ -86,7 +86,7 @@ fun box(): String {
         }
 
         for (count in 0..3) {
-            val local = B(
+            konst local = B(
                     "#",
                     B("",
                       if (count > 0) break else "O",
@@ -107,7 +107,7 @@ fun box(): String {
         }
 
         loop@for (count in 0..3) {
-            val local = B(
+            konst local = B(
                     if (!condition) "1" else suspendWithArgument("#"),
                     when {
                         count > 0 -> break@loop
@@ -129,7 +129,7 @@ fun box(): String {
         }
 
         for (count in 0..3) {
-            val local = C(
+            konst local = C(
                     1234567890123L,
                     suspendWithDouble(3.14),
                     42,

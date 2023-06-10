@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 
-abstract class AbstractIrTypeSubstitutor(private val irBuiltIns: IrBuiltIns) : TypeSubstitutorMarker {
+abstract class AbstractIrTypeSubstitutor(private konst irBuiltIns: IrBuiltIns) : TypeSubstitutorMarker {
 
     private fun IrType.typeParameterConstructor(): IrTypeParameterSymbol? {
         return if (this is IrSimpleType) classifier as? IrTypeParameterSymbol
@@ -29,7 +29,7 @@ abstract class AbstractIrTypeSubstitutor(private val irBuiltIns: IrBuiltIns) : T
         if (isEmptySubstitution()) return type
 
         return type.typeParameterConstructor()?.let {
-            when (val typeArgument = getSubstitutionArgument(it)) {
+            when (konst typeArgument = getSubstitutionArgument(it)) {
                 is IrStarProjection -> irBuiltIns.anyNType // TODO upper bound for T
                 is IrTypeProjection -> typeArgument.type.run { if (type.isMarkedNullable()) makeNullable() else this }
             }
@@ -55,11 +55,11 @@ abstract class AbstractIrTypeSubstitutor(private val irBuiltIns: IrBuiltIns) : T
         when (typeArgument) {
             is IrStarProjection -> return typeArgument
             is IrTypeProjection -> {
-                val type = typeArgument.type
+                konst type = typeArgument.type
                 if (type is IrSimpleType) {
-                    val classifier = type.classifier
+                    konst classifier = type.classifier
                     if (classifier is IrTypeParameterSymbol) {
-                        val newArgument = getSubstitutionArgument(classifier)
+                        konst newArgument = getSubstitutionArgument(classifier)
                         return if (newArgument is IrTypeProjection) {
                             makeTypeProjection(newArgument.type, typeArgument.variance)
                         } else newArgument
@@ -88,7 +88,7 @@ class IrTypeSubstitutor(
         }
     }
 
-    private val substitution = typeParameters.zip(typeArguments).toMap()
+    private konst substitution = typeParameters.zip(typeArguments).toMap()
 
     override fun getSubstitutionArgument(typeParameter: IrTypeParameterSymbol): IrTypeArgument =
         substitution[typeParameter]
@@ -109,8 +109,8 @@ class IrCapturedTypeSubstitutor(
         assert(capturedTypes.size == typeParameters.size)
     }
 
-    private val oldSubstitution = typeParameters.zip(typeArguments).toMap()
-    private val capturedSubstitution = typeParameters.zip(capturedTypes).toMap()
+    private konst oldSubstitution = typeParameters.zip(typeArguments).toMap()
+    private konst capturedSubstitution = typeParameters.zip(capturedTypes).toMap()
 
     override fun getSubstitutionArgument(typeParameter: IrTypeParameterSymbol): IrTypeArgument {
         return capturedSubstitution[typeParameter]?.let { makeTypeProjection(it, Variance.INVARIANT) }

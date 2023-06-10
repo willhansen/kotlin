@@ -19,12 +19,12 @@ interface SuspendRunnable {
 // suspend calls possible inside lambda matching to the parameter
 suspend inline fun test(noinline c: suspend () -> Unit) {
     c()
-    val o = object : SuspendRunnable {
+    konst o = object : SuspendRunnable {
         override suspend fun run() {
             c()
         }
     }
-    val l: suspend () -> Unit = { c() }
+    konst l: suspend () -> Unit = { c() }
     c.startCoroutine(EmptyContinuation)
 }
 

@@ -4,7 +4,7 @@ FILE: booleanElvisBoundSmartcast.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val b: R|kotlin/Boolean| = R|<local>/b|
+        public final konst b: R|kotlin/Boolean| = R|<local>/b|
             public get(): R|kotlin/Boolean|
 
         public final fun foo(): R|kotlin/Unit| {

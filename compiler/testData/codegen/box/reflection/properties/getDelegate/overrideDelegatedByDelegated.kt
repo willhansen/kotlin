@@ -5,26 +5,26 @@ import kotlin.reflect.KProperty
 import kotlin.reflect.jvm.isAccessible
 import kotlin.test.*
 
-class Delegate(val value: String) {
-    operator fun getValue(instance: Any?, property: KProperty<*>) = value
+class Delegate(konst konstue: String) {
+    operator fun getValue(instance: Any?, property: KProperty<*>) = konstue
 }
 
 open class Base {
-    open val x: String by Delegate("Base")
+    open konst x: String by Delegate("Base")
 }
 
 class Derived : Base() {
-    override val x: String by Delegate("Derived")
+    override konst x: String by Delegate("Derived")
 }
 
 fun check(expected: String, delegate: Any?) {
     if (delegate == null) throw AssertionError("getDelegate returned null")
-    assertEquals(expected, (delegate as Delegate).value)
+    assertEquals(expected, (delegate as Delegate).konstue)
 }
 
 fun box(): String {
-    val base = Base()
-    val derived = Derived()
+    konst base = Base()
+    konst derived = Derived()
 
     check("Base", (Base::x).apply { isAccessible = true }.getDelegate(base))
     check("Base", (base::x).apply { isAccessible = true }.getDelegate())

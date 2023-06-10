@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 
 object FirAbstractClassInstantiationChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol() ?: return
-        val declarationClass = constructorSymbol.resolvedReturnTypeRef.coneType.toRegularClassSymbol(context.session) ?: return
+        konst constructorSymbol = expression.calleeReference.toResolvedConstructorSymbol() ?: return
+        konst declarationClass = constructorSymbol.resolvedReturnTypeRef.coneType.toRegularClassSymbol(context.session) ?: return
 
         if (declarationClass.isAbstract && declarationClass.classKind == ClassKind.CLASS) {
-            val source = when (expression) {
+            konst source = when (expression) {
                 is FirCallableReferenceAccess -> expression.calleeReference.source
                 else -> expression.source
             }

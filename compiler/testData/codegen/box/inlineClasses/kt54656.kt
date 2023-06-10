@@ -8,7 +8,7 @@ public class J {
 
 // FILE: 1.kt
 @JvmInline
-value class Email(val address: String)
+konstue class Email(konst address: String)
 
 fun box():String {
     J(Email("test"))

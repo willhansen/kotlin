@@ -153,7 +153,7 @@ public class KtProperty extends KtTypeParameterListOwnerStub<KotlinPropertyStub>
                 List<KtTypeReference> typeReferences = getStubOrPsiChildrenAsList(KtStubElementTypes.TYPE_REFERENCE);
                 int returnTypeRefPositionInPsi = stub.isExtension() ? 1 : 0;
                 if (typeReferences.size() <= returnTypeRefPositionInPsi) {
-                    LOG.error("Invalid stub structure built for property:\n" + getText());
+                    LOG.error("Inkonstid stub structure built for property:\n" + getText());
                     return null;
                 }
                 return typeReferences.get(returnTypeRefPositionInPsi);

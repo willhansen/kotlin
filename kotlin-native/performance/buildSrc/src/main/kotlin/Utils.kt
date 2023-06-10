@@ -23,9 +23,9 @@ fun String.splitCommaSeparatedOption(optionName: String) =
             if (it.isNotEmpty()) listOf(optionName, it) else listOf(null)
         }.flatten().filterNotNull()
 
-data class Commit(val revision: String, val developer: String, val webUrlWithDescription: String)
+data class Commit(konst revision: String, konst developer: String, konst webUrlWithDescription: String)
 
-val teamCityUrl = "https://buildserver.labs.intellij.net"
+konst teamCityUrl = "https://buildserver.labs.intellij.net"
 
 fun buildsUrl(buildLocator: String) =
         "$teamCityUrl/app/rest/builds/?locator=$buildLocator"
@@ -38,9 +38,9 @@ fun getBuild(buildLocator: String, user: String, password: String) =
         }
 
 fun sendGetRequest(url: String, username: String? = null, password: String? = null): String {
-    val connection = URL(url).openConnection() as HttpURLConnection
+    konst connection = URL(url).openConnection() as HttpURLConnection
     if (username != null && password != null) {
-        val auth = Base64.getEncoder().encode(("$username:$password").toByteArray()).toString(Charsets.UTF_8)
+        konst auth = Base64.getEncoder().encode(("$username:$password").toByteArray()).toString(Charsets.UTF_8)
         connection.addRequestProperty("Authorization", "Basic $auth")
     }
     connection.setRequestProperty("Accept", "application/json");
@@ -48,23 +48,23 @@ fun sendGetRequest(url: String, username: String? = null, password: String? = nu
     return connection.inputStream.use { it.reader().use { reader -> reader.readText() } }
 }
 
-val Project.platformManager
+konst Project.platformManager
     get() = findProperty("platformManager") as PlatformManager
 
-val validPropertiesNames = listOf(
+konst konstidPropertiesNames = listOf(
         "konan.home",
         "org.jetbrains.kotlin.native.home",
         "kotlin.native.home"
 )
 
-val Project.kotlinNativeDist
+konst Project.kotlinNativeDist
     get() = rootProject.currentKotlinNativeDist
 
-val Project.currentKotlinNativeDist
-    get() = file(validPropertiesNames.firstOrNull { hasProperty(it) }?.let { findProperty(it) } ?: "dist")
+konst Project.currentKotlinNativeDist
+    get() = file(konstidPropertiesNames.firstOrNull { hasProperty(it) }?.let { findProperty(it) } ?: "dist")
 
-val kotlinNativeHome
-    get() = validPropertiesNames.mapNotNull(System::getProperty).first()
+konst kotlinNativeHome
+    get() = konstidPropertiesNames.mapNotNull(System::getProperty).first()
 
-val Project.useCustomDist
-    get() = validPropertiesNames.any { hasProperty(it) }
+konst Project.useCustomDist
+    get() = konstidPropertiesNames.any { hasProperty(it) }

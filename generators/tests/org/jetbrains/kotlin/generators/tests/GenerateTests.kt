@@ -229,7 +229,7 @@ fun main(args: Array<String>) {
     }
 
     generateTestGroupSuiteWithJUnit5 {
-        val excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
+        konst excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
 
         testGroup("plugins/parcelize/parcelize-compiler/tests-gen", "plugins/parcelize/parcelize-compiler/testData") {
             testClass<AbstractParcelizeIrBoxTest> {
@@ -376,7 +376,7 @@ fun main(args: Array<String>) {
         }
 
         testGroup("plugins/kapt3/kapt3-compiler/tests-gen", "plugins/kapt3/kapt3-compiler/testData") {
-            val annotations = listOf(annotation(Tag::class.java, "IgnoreJDK11"))
+            konst annotations = listOf(annotation(Tag::class.java, "IgnoreJDK11"))
             testClass<AbstractKotlinKaptContextTest>(annotations = annotations) {
                 model("kotlinRunner")
             }

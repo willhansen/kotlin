@@ -6,17 +6,17 @@ interface A {
 }
 
 fun foo(a: A) {
-    val g : () -> Unit = {
+    konst g : () -> Unit = {
         a.gen()  //it works: Unit is derived
     }
 
-    val u: Unit = a.gen() // Unit should be inferred
+    konst u: Unit = a.gen() // Unit should be inferred
 
     if (true) {
         a.<!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>gen<!>() // Shouldn't work: no info for inference
     }
 
-    val b : () -> Unit = {
+    konst b : () -> Unit = {
         if (true) {
             a.gen()  // unit can be inferred
         }
@@ -25,7 +25,7 @@ fun foo(a: A) {
         }
     }
 
-    val f : () -> Int = {
+    konst f : () -> Int = {
         a.gen()  //type mismatch, but Int can be derived
     }
 

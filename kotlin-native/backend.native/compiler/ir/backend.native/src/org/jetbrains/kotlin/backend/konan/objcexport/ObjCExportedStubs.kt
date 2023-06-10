@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.backend.konan.objcexport
 
 data class ObjCExportedStubs(
-    val classForwardDeclarations: Set<ObjCClassForwardDeclaration>,
-    val protocolForwardDeclarations: Set<String>,
-    val stubs: List<Stub<*>>
+    konst classForwardDeclarations: Set<ObjCClassForwardDeclaration>,
+    konst protocolForwardDeclarations: Set<String>,
+    konst stubs: List<Stub<*>>
 )

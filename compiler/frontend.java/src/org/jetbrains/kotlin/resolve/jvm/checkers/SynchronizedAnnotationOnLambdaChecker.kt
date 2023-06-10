@@ -29,10 +29,10 @@ object SynchronizedAnnotationOnLambdaChecker : AdditionalAnnotationChecker {
     ) {
         if (entries.isEmpty()) return
 
-        val annotation = entries.find { trace.get(BindingContext.ANNOTATION, it)?.fqName == SYNCHRONIZED_ANNOTATION_FQ_NAME } ?: return
+        konst annotation = entries.find { trace.get(BindingContext.ANNOTATION, it)?.fqName == SYNCHRONIZED_ANNOTATION_FQ_NAME } ?: return
 
-        val literal = (annotated?.unwrapParenthesesLabelsAndAnnotations() as? KtLambdaExpression)?.functionLiteral ?: return
-        val descriptor = trace.bindingContext[BindingContext.DECLARATION_TO_DESCRIPTOR, literal]
+        konst literal = (annotated?.unwrapParenthesesLabelsAndAnnotations() as? KtLambdaExpression)?.functionLiteral ?: return
+        konst descriptor = trace.bindingContext[BindingContext.DECLARATION_TO_DESCRIPTOR, literal]
         if (descriptor is FunctionDescriptor && descriptor.isSuspend) {
             trace.report(ErrorsJvm.SYNCHRONIZED_ON_SUSPEND.on(languageVersionSettings, annotation))
         }

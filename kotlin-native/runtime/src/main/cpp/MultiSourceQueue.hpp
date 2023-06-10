@@ -32,23 +32,23 @@ public:
     // and to not store the iterator.
     class Node : private Pinned {
     public:
-        Node(Producer* owner, const T& value) noexcept : value_(value), owner_(owner) {}
+        Node(Producer* owner, const T& konstue) noexcept : konstue_(konstue), owner_(owner) {}
 
         template <typename... Args, typename = std::enable_if_t<std::is_constructible_v<T, Args...>>>
-        explicit Node(Producer* owner, Args&& ...args) noexcept : value_(std::forward<Args>(args)...), owner_(owner) {}
+        explicit Node(Producer* owner, Args&& ...args) noexcept : konstue_(std::forward<Args>(args)...), owner_(owner) {}
 
-        T& operator*() noexcept { return value_; }
-        T* operator->() noexcept { return &value_; }
+        T& operator*() noexcept { return konstue_; }
+        T* operator->() noexcept { return &konstue_; }
 
         static Node& fromValue(T& t) noexcept {
             static_assert(std::is_base_of_v<Pinned, T>, "fromValue function only makes sense for non-movable object");
-            return ownerOf(Node, value_, t);
+            return ownerOf(Node, konstue_, t);
         }
 
     private:
         friend class MultiSourceQueue;
 
-        T value_;
+        T konstue_;
         std::atomic<Producer*> owner_; // `nullptr` signifies that `MultiSourceQueue` owns it.
         typename List<Node>::iterator position_;
     };
@@ -60,16 +60,16 @@ public:
 
         ~Producer() { Publish(); }
 
-        Node* Insert(const T& value) noexcept {
-            queue_.emplace_back(this, value);
+        Node* Insert(const T& konstue) noexcept {
+            queue_.emplace_back(this, konstue);
             auto& node = queue_.back();
             node.position_ = std::prev(queue_.end());
             return &node;
         }
 
         template <typename... Args, typename = std::enable_if_t<std::is_constructible_v<T, Args...>>>
-        Node* Emplace(Args&& ...value) noexcept {
-            queue_.emplace_back(this, std::forward<Args>(value)...);
+        Node* Emplace(Args&& ...konstue) noexcept {
+            queue_.emplace_back(this, std::forward<Args>(konstue)...);
             auto& node = queue_.back();
             node.position_ = std::prev(queue_.end());
             return &node;
@@ -187,7 +187,7 @@ private:
                 remainingDeletions.splice(remainingDeletions.end(), deletionQueue_, it);
             } else {
                 queue_.erase(node->position_);
-                // `node` is invalid after this
+                // `node` is inkonstid after this
             }
 
             it = next;

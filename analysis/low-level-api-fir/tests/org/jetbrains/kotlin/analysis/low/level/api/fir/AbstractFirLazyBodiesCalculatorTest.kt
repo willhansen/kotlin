@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class AbstractFirLazyBodiesCalculatorTest : AbstractLowLevelApiSingleFileTest() {
-    private val lazyChecker = object : FirVisitorVoid() {
+    private konst lazyChecker = object : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
             TestCase.assertFalse("${FirLazyBlock::class.qualifiedName} should not present in the tree", element is FirLazyBlock)
             TestCase.assertFalse("${FirLazyExpression::class.qualifiedName} should not present in the tree", element is FirLazyExpression)
@@ -33,10 +33,10 @@ abstract class AbstractFirLazyBodiesCalculatorTest : AbstractLowLevelApiSingleFi
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
         resolveWithClearCaches(ktFile) { firResolveSession ->
-            val session = firResolveSession.useSiteFirSession
-            val provider = session.kotlinScopeProvider
+            konst session = firResolveSession.useSiteFirSession
+            konst provider = session.kotlinScopeProvider
 
-            val laziedFirFile = RawFirBuilder(
+            konst laziedFirFile = RawFirBuilder(
                 session,
                 provider,
                 bodyBuildingMode = BodyBuildingMode.LAZY_BODIES
@@ -45,14 +45,14 @@ abstract class AbstractFirLazyBodiesCalculatorTest : AbstractLowLevelApiSingleFi
             FirLazyBodiesCalculator.calculateAllLazyExpressionsInFile(laziedFirFile)
             laziedFirFile.accept(lazyChecker)
 
-            val fullFirFile = RawFirBuilder(
+            konst fullFirFile = RawFirBuilder(
                 session,
                 provider,
                 bodyBuildingMode = BodyBuildingMode.NORMAL
             ).buildFirFile(ktFile)
 
-            val laziedFirFileDump = FirRenderer().renderElementAsString(laziedFirFile)
-            val fullFirFileDump = FirRenderer().renderElementAsString(fullFirFile)
+            konst laziedFirFileDump = FirRenderer().renderElementAsString(laziedFirFile)
+            konst fullFirFileDump = FirRenderer().renderElementAsString(fullFirFile)
 
             TestCase.assertEquals(laziedFirFileDump, fullFirFileDump)
         }
@@ -60,9 +60,9 @@ abstract class AbstractFirLazyBodiesCalculatorTest : AbstractLowLevelApiSingleFi
 }
 
 abstract class AbstractFirSourceLazyBodiesCalculatorTest : AbstractFirLazyBodiesCalculatorTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractFirOutOfContentRootLazyBodiesCalculatorTest : AbstractFirLazyBodiesCalculatorTest() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

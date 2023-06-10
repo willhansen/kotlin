@@ -1,3 +1,3 @@
 package demo
 
-open class Greeter(val greeting: String)
+open class Greeter(konst greeting: String)

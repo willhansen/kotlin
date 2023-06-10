@@ -7,22 +7,22 @@ A.prototype = {
     }
 };
 
-A.B = function(value) {
-    this.value = value;
+A.B = function(konstue) {
+    this.konstue = konstue;
 };
 A.B.prototype = {
     bar : function() {
-        return 10000 + this.value;
+        return 10000 + this.konstue;
     }
 };
 
-A.C = function(outer, value) {
+A.C = function(outer, konstue) {
     this.outer = outer;
-    this.value = value;
+    this.konstue = konstue;
 };
 A.C.prototype = {
     bar : function() {
-        return this.outer.foo() + this.value + 10000;
+        return this.outer.foo() + this.konstue + 10000;
     },
     dec : function() {
         this.outer.x--;

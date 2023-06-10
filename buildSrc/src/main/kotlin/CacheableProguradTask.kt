@@ -18,14 +18,14 @@ import java.io.File
 open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
 
     @get:Internal
-    val javaLauncher: Property<JavaLauncher> = project.objects.property()
+    konst javaLauncher: Property<JavaLauncher> = project.objects.property()
 
     @get:Internal
-    val jdkHomePath: Provider<File> = javaLauncher.map { it.metadata.installationPath.asFile }
+    konst jdkHomePath: Provider<File> = javaLauncher.map { it.metadata.installationPath.asFile }
 
     @get:Optional
     @get:Input
-    internal val jdkMajorVersion: Provider<JavaVersion> = javaLauncher.map {
+    internal konst jdkMajorVersion: Provider<JavaVersion> = javaLauncher.map {
         JavaVersion.toVersion(it.metadata.languageVersion.toString())
     }
 
@@ -49,7 +49,7 @@ open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
 
     @get:Optional
     @get:OutputFile
-    internal val printConfigurationFile: File?
+    internal konst printConfigurationFile: File?
         get() = configuration.printConfiguration?.takeIf { it.path.isNotEmpty() }
 
     @Input
@@ -213,9 +213,9 @@ open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
     @Internal
     override fun getdontnote(): Any? = throw NotImplementedError()
 
-    override fun assumenoexternalreturnvalues(classSpecificationString: String?) = throw NotImplementedError()
+    override fun assumenoexternalreturnkonstues(classSpecificationString: String?) = throw NotImplementedError()
 
-    override fun assumenoexternalreturnvalues(classSpecificationArgs: MutableMap<Any?, Any?>?, classMembersClosure: Closure<*>?) = throw NotImplementedError()
+    override fun assumenoexternalreturnkonstues(classSpecificationArgs: MutableMap<Any?, Any?>?, classMembersClosure: Closure<*>?) = throw NotImplementedError()
 
     override fun target(targetClassVersion: String?) = throw NotImplementedError()
 
@@ -334,9 +334,9 @@ open class CacheableProguardTask : proguard.gradle.ProGuardTask() {
     @Internal
     override fun getkeeppackagenames(): Any? = throw NotImplementedError()
 
-    override fun assumevalues(classSpecificationString: String?) = throw NotImplementedError()
+    override fun assumekonstues(classSpecificationString: String?) = throw NotImplementedError()
 
-    override fun assumevalues(classSpecificationArgs: MutableMap<Any?, Any?>?, classMembersClosure: Closure<*>?) = throw NotImplementedError()
+    override fun assumekonstues(classSpecificationArgs: MutableMap<Any?, Any?>?, classMembersClosure: Closure<*>?) = throw NotImplementedError()
 
     override fun printusage() = throw NotImplementedError()
 

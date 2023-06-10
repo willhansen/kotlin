@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.analysis.collectors.DiagnosticCollectorComponent
 
 object DiagnosticComponentsFactory {
     fun createAllDiagnosticComponents(session: FirSession, reporter: DiagnosticReporter): DiagnosticCollectorComponents {
-        val regularComponents = listOf(
+        konst regularComponents = listOf(
             DeclarationCheckersDiagnosticComponent(session, reporter),
             ExpressionCheckersDiagnosticComponent(session, reporter),
             TypeCheckersDiagnosticComponent(session, reporter),

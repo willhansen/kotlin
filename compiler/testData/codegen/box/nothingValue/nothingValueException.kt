@@ -19,7 +19,7 @@ fun box(): String {
         "str".decodeOut(Context<Any>())
     } catch (e: Exception) {
         // TODO check FQN
-        val exceptionClassName = e::class.simpleName
+        konst exceptionClassName = e::class.simpleName
         if (exceptionClassName != "KotlinNothingValueException") {
             throw AssertionError("Unexpected exception: $e")
         } else {

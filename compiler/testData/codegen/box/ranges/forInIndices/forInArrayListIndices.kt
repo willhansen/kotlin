@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun foo(): String {
-    val a = ArrayList<String>()
+    konst a = ArrayList<String>()
     a.add("OK")
     for (i in a.indices) {
         return a[i]
@@ -11,20 +11,20 @@ fun foo(): String {
 
 // KT-42642
 fun bar(): String {
-    val a = ArrayList<String>()
+    konst a = ArrayList<String>()
     a.add("O")
     a.add("K")
-    val map = mutableMapOf<String, String>().apply {
+    konst map = mutableMapOf<String, String>().apply {
         for (i in a.indices step 2) {
             put(a[i].toLowerCase(), a[i])
             put(a[i + 1].toLowerCase(), a[i + 1])
         }
     }
-    return map.values.joinToString(separator = "")
+    return map.konstues.joinToString(separator = "")
 }
 
 fun box(): String {
-    val r = foo()
+    konst r = foo()
     if (r != "OK") return r
     return bar()
 }

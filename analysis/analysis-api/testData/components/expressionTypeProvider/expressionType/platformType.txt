@@ -1,2 +1,2 @@
-expression: java.lang.String.valueOf(1)
+expression: java.lang.String.konstueOf(1)
 type: kotlin.String!

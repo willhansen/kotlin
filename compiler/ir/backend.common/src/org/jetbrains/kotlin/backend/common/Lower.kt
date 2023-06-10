@@ -93,7 +93,7 @@ fun ClassLoweringPass.runOnFilePostfix(irFile: IrFile) {
 }
 
 private class ClassLoweringVisitor(
-    private val loweringPass: ClassLoweringPass
+    private konst loweringPass: ClassLoweringPass
 ) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -110,7 +110,7 @@ fun ScriptLoweringPass.runOnFilePostfix(irFile: IrFile) {
 }
 
 private class ScriptLoweringVisitor(
-    private val loweringPass: ScriptLoweringPass
+    private konst loweringPass: ScriptLoweringPass
 ) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -128,7 +128,7 @@ fun DeclarationContainerLoweringPass.runOnFilePostfix(irFile: IrFile) {
 }
 
 private class DeclarationContainerLoweringVisitor(
-    private val loweringPass: DeclarationContainerLoweringPass
+    private konst loweringPass: DeclarationContainerLoweringPass
 ) : IrElementVisitorVoid {
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -144,7 +144,7 @@ fun BodyLoweringPass.runOnFilePostfix(
     irFile: IrFile,
     withLocalDeclarations: Boolean = false
 ) {
-    val visitor = BodyLoweringVisitor(this, withLocalDeclarations)
+    konst visitor = BodyLoweringVisitor(this, withLocalDeclarations)
     for (declaration in ArrayList(irFile.declarations)) {
         try {
             declaration.accept(visitor, null)
@@ -162,15 +162,15 @@ fun BodyLoweringPass.runOnFilePostfix(
 }
 
 fun BodyAndScriptBodyLoweringPass.runOnFilePostfix(irFile: IrFile) {
-    val visitor = ScriptBodyLoweringVisitor(this)
+    konst visitor = ScriptBodyLoweringVisitor(this)
     for (declaration in ArrayList(irFile.declarations)) {
         declaration.accept(visitor, null)
     }
 }
 
 private open class BodyLoweringVisitor(
-    private val loweringPass: BodyLoweringPass,
-    private val withLocalDeclarations: Boolean,
+    private konst loweringPass: BodyLoweringPass,
+    private konst withLocalDeclarations: Boolean,
 ) : IrElementVisitor<Unit, IrDeclaration?> {
     override fun visitElement(element: IrElement, data: IrDeclaration?) {
         element.acceptChildren(this, data)
@@ -188,7 +188,7 @@ private open class BodyLoweringVisitor(
 
     override fun visitBody(body: IrBody, data: IrDeclaration?) {
         if (withLocalDeclarations) body.acceptChildren(this, null)
-        val stageController = data!!.factory.stageController
+        konst stageController = data!!.factory.stageController
         stageController.restrictTo(data) {
             loweringPass.lower(body, data)
         }
@@ -201,7 +201,7 @@ private open class BodyLoweringVisitor(
 }
 
 private class ScriptBodyLoweringVisitor(
-    private val loweringPass: BodyAndScriptBodyLoweringPass
+    private konst loweringPass: BodyAndScriptBodyLoweringPass
 ) : BodyLoweringVisitor(loweringPass, false) {
 
     override fun visitClass(declaration: IrClass, data: IrDeclaration?) {
@@ -217,11 +217,11 @@ private class ScriptBodyLoweringVisitor(
 interface DeclarationTransformer : FileLoweringPass {
     fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>?
 
-    val withLocalDeclarations: Boolean
+    konst withLocalDeclarations: Boolean
         get() = false
 
     override fun lower(irFile: IrFile) {
-        val visitor = Visitor(this)
+        konst visitor = Visitor(this)
         irFile.declarations.transformFlat { declaration ->
             try {
                 declaration.acceptVoid(visitor)
@@ -245,7 +245,7 @@ interface DeclarationTransformer : FileLoweringPass {
         }
     }
 
-    private class Visitor(private val transformer: DeclarationTransformer) : IrElementVisitorVoid {
+    private class Visitor(private konst transformer: DeclarationTransformer) : IrElementVisitorVoid {
         override fun visitElement(element: IrElement) {
             element.acceptChildrenVoid(this)
         }
@@ -253,16 +253,16 @@ interface DeclarationTransformer : FileLoweringPass {
         override fun visitFunction(declaration: IrFunction) {
             declaration.acceptChildrenVoid(this)
 
-            for (v in declaration.valueParameters) {
-                val result = transformer.transformFlatRestricted(v)
-                if (result != null) error("Don't know how to add value parameters")
+            for (v in declaration.konstueParameters) {
+                konst result = transformer.transformFlatRestricted(v)
+                if (result != null) error("Don't know how to add konstue parameters")
             }
         }
 
         override fun visitProperty(declaration: IrProperty) {
             // TODO This is a hack to allow lowering a getter separately from the enclosing property
 
-            val visitor = this
+            konst visitor = this
 
             fun IrDeclaration.replaceInContainer(container: MutableList<in IrDeclaration>, result: List<IrDeclaration>): Boolean {
                 var index = container.indexOf(this)
@@ -279,9 +279,9 @@ interface DeclarationTransformer : FileLoweringPass {
 
                 acceptVoid(visitor)
 
-                val result = transformer.transformFlatRestricted(this)
+                konst result = transformer.transformFlatRestricted(this)
                 if (result != null) {
-                    when (val parentCopy = parent) {
+                    when (konst parentCopy = parent) {
                         is IrDeclarationContainer -> replaceInContainer(parentCopy.declarations, result)
                         is IrStatementContainer -> replaceInContainer(parentCopy.statements, result)
                     }

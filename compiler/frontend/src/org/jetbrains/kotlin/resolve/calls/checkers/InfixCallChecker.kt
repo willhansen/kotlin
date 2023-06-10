@@ -28,11 +28,11 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 
 class InfixCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val functionDescriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
+        konst functionDescriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
         if (functionDescriptor.isInfix || functionDescriptor.isDynamic() || ErrorUtils.isError(functionDescriptor)) return
-        val call = ((resolvedCall as? VariableAsFunctionResolvedCall)?.variableCall ?: resolvedCall).call
+        konst call = ((resolvedCall as? VariableAsFunctionResolvedCall)?.variableCall ?: resolvedCall).call
         if (isInfixCall(call)) {
-            val containingDeclarationName = functionDescriptor.containingDeclaration.fqNameUnsafe.asString()
+            konst containingDeclarationName = functionDescriptor.containingDeclaration.fqNameUnsafe.asString()
             context.trace.report(Errors.INFIX_MODIFIER_REQUIRED.on(reportOn, functionDescriptor, containingDeclarationName))
         }
     }

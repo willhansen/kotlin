@@ -10,7 +10,7 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmResolvedBinaryDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmResolvedBinaryDependencyProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
       @JvmName("getCoordinates")
       get() = _builder.getCoordinates()
       @JvmName("setCoordinates")
-      set(value) {
-        _builder.setCoordinates(value)
+      set(konstue) {
+        _builder.setCoordinates(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto coordinates = 2;</code>
@@ -71,7 +71,7 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
     fun hasCoordinates(): kotlin.Boolean {
       return _builder.hasCoordinates()
     }
-    val IdeaKpmResolvedBinaryDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto?
+    konst IdeaKpmResolvedBinaryDependencyProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto?
       get() = _builder.coordinatesOrNull
 
     /**
@@ -81,8 +81,8 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
       @JvmName("getBinaryType")
       get() = _builder.getBinaryType()
       @JvmName("setBinaryType")
-      set(value) {
-        _builder.setBinaryType(value)
+      set(konstue) {
+        _builder.setBinaryType(konstue)
       }
     /**
      * <code>optional string binary_type = 3;</code>
@@ -105,8 +105,8 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
       @JvmName("getBinaryFileAbsolutePath")
       get() = _builder.getBinaryFileAbsolutePath()
       @JvmName("setBinaryFileAbsolutePath")
-      set(value) {
-        _builder.setBinaryFileAbsolutePath(value)
+      set(konstue) {
+        _builder.setBinaryFileAbsolutePath(konstue)
       }
     /**
      * <code>optional string binary_file_absolute_path = 4;</code>
@@ -127,9 +127,9 @@ object IdeaKpmResolvedBinaryDependencyProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmResolvedBinaryDependencyProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmBinaryCoordinatesProto?
   get() = if (hasCoordinates()) getCoordinates() else null
 

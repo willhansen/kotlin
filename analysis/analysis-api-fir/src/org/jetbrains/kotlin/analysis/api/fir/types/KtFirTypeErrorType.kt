@@ -19,23 +19,23 @@ import org.jetbrains.kotlin.fir.types.ConeErrorType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirTypeErrorType(
-    override val coneType: ConeErrorType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeErrorType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtTypeErrorType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
-    override val errorMessage: String get() = withValidityAssertion { coneType.diagnostic.reason }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst errorMessage: String get() = withValidityAssertion { coneType.diagnostic.reason }
 
     override fun tryRenderAsNonErrorType(): String? = withValidityAssertion {
-        when (val diagnostic = coneType.diagnostic) {
+        when (konst diagnostic = coneType.diagnostic) {
             is ConeCannotInferTypeParameterType -> diagnostic.typeParameter.name.asString()
             is ConeTypeVariableTypeIsNotInferred -> diagnostic.typeVariableType.lookupTag.debugName
             else -> null
         }
     }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 

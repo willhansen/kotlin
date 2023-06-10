@@ -31,7 +31,7 @@ class Binary {
 // FILE: 1.kt
 
 fun box(): String {
-    val augAssignmentPure = AugmentedAssignmentPure()
+    konst augAssignmentPure = AugmentedAssignmentPure()
     var v1 = "FAIL"
     augAssignmentPure %= { v1 = "OK" }
     if (v1 != "OK") return "assignment pure: $v1"
@@ -41,7 +41,7 @@ fun box(): String {
     augmentedAssignmentViaSimpleBinary %= { v2 = "OK" }
     if (v2 != "OK") return "assignment via simple binary: $v2"
 
-    val binary = Binary()
+    konst binary = Binary()
     var v3 = "FAIL"
     binary % { v3 = "OK" }
     if (v3 != "OK") return "binary: $v3"

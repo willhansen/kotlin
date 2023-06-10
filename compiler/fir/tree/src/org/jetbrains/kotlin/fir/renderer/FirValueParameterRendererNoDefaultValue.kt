@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.fir.renderer
 import org.jetbrains.kotlin.fir.declarations.FirValueParameter
 
 class FirValueParameterRendererNoDefaultValue : FirValueParameterRenderer() {
-    override fun renderDefaultValue(valueParameter: FirValueParameter) {
-        valueParameter.defaultValue?.let {
+    override fun renderDefaultValue(konstueParameter: FirValueParameter) {
+        konstueParameter.defaultValue?.let {
             printer.print(" = ...")
         }
     }

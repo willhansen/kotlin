@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-internal class LLFirBuiltinsAndCloneableSessionProvider(override val symbolProvider: FirSymbolProvider) : FirProvider() {
+internal class LLFirBuiltinsAndCloneableSessionProvider(override konst symbolProvider: FirSymbolProvider) : FirProvider() {
     override fun getFirClassifierByFqName(classId: ClassId): FirClassLikeDeclaration? =
         symbolProvider.getClassLikeSymbolByClassId(classId)?.fir
 

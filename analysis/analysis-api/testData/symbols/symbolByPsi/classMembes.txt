@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/Int
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -106,7 +106,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []

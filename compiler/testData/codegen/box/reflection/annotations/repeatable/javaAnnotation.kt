@@ -15,16 +15,16 @@ import kotlin.reflect.full.hasAnnotation
 fun f() {}
 
 fun box(): String {
-    val element = ::f
+    konst element = ::f
     if (element.hasAnnotation<A>()) return "Fail hasAnnotation $element"
-    val find = element.findAnnotation<A>()
+    konst find = element.findAnnotation<A>()
     if (find != null) return "Fail findAnnotation $element: $find"
 
-    val all = (element.annotations.single() as A.Container).value.asList()
-    val findAll = element.findAnnotations<A>()
+    konst all = (element.annotations.single() as A.Container).konstue.asList()
+    konst findAll = element.findAnnotations<A>()
     if (all != findAll) throw AssertionError("Fail findAnnotations $element: $all != $findAll")
 
-    return all.fold("") { acc, it -> acc + it.value }
+    return all.fold("") { acc, it -> acc + it.konstue }
 }
 
 // FILE: A.java
@@ -34,10 +34,10 @@ import java.lang.annotation.*;
 @Repeatable(A.Container.class)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface A {
-    String value();
+    String konstue();
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Container {
-        A[] value();
+        A[] konstue();
     }
 }

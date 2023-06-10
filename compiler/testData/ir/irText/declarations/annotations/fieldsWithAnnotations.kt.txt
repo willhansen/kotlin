@@ -5,14 +5,14 @@ open annotation class TestAnn : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
 }
 
-val testVal: String
-  field = "a val"
+konst testVal: String
+  field = "a konst"
   get
 
 var testVar: String

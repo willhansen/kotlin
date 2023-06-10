@@ -5,7 +5,7 @@
 
 class C {
     companion object {
-        val defaultGetter: Int = 1
+        konst defaultGetter: Int = 1
             external get
 
         var defaultSetter: Int = 1
@@ -13,7 +13,7 @@ class C {
             external set
     }
 
-    val defaultGetter: Int = 1
+    konst defaultGetter: Int = 1
         external get
 
     var defaultSetter: Int = 1
@@ -21,7 +21,7 @@ class C {
         external set
 }
 
-val defaultGetter: Int = 1
+konst defaultGetter: Int = 1
     external get
 
 var defaultSetter: Int = 1

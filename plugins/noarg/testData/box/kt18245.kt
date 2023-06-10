@@ -3,20 +3,20 @@
 annotation class NoArg
 
 sealed class Test {
-    abstract val test: String
+    abstract konst test: String
 
     @NoArg
-    data class Test1(override val test: String) : Test()
+    data class Test1(override konst test: String) : Test()
 
     @NoArg
-    data class Test2(override val test: String) : Test()
+    data class Test2(override konst test: String) : Test()
 }
 
 fun box(): String {
     Test::class.java.declaredConstructors.forEach { it.isAccessible = true }
     Test.Test1::class.java.declaredConstructors.forEach { it.isAccessible = true }
 
-    val instance = Test.Test1::class.java.newInstance() // Error
+    konst instance = Test.Test1::class.java.newInstance() // Error
 
     Demo.Foo::class.java.newInstance()
     Demo.Free::class.java.newInstance()
@@ -27,7 +27,7 @@ fun box(): String {
 }
 
 @NoArg
-sealed class Demo(val name : String) {
+sealed class Demo(konst name : String) {
     @NoArg
     class Free(name: String)
 
@@ -39,7 +39,7 @@ sealed class Demo(val name : String) {
 }
 
 @NoArg
-abstract class A(val name: String) {
+abstract class A(konst name: String) {
     @NoArg
     class Free(name: String) : A(name)
 }

@@ -3,7 +3,7 @@ package
 package api {
     @api.API public fun f(): kotlin.Unit
 
-    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Retention(value = AnnotationRetention.BINARY) public final annotation class API : kotlin.Annotation {
+    @kotlin.RequiresOptIn(level = Level.WARNING) @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) public final annotation class API : kotlin.Annotation {
         public constructor API()
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -15,7 +15,7 @@ package usage {
     public var inlineUse2: kotlin.Unit
     @set:api.API public var inlineUse3: kotlin.Unit
     private var privateInline3: kotlin.Unit
-    public val use2: kotlin.Unit
+    public konst use2: kotlin.Unit
     public inline fun inlineUse1(): kotlin.Unit
     @api.API public inline fun inlineUse4(): kotlin.Unit
     private inline fun privateInline1(): kotlin.Unit

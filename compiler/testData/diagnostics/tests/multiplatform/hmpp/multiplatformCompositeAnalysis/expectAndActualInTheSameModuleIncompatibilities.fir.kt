@@ -8,7 +8,7 @@ fun parameterCount(p: String) {}
 <!ACTUAL_WITHOUT_EXPECT!>actual fun parameterCount2(p: String) {}<!>
 
 expect fun callableKind(): Int
-val callableKind: Int = 1
+konst callableKind: Int = 1
 
 expect fun <T> typeParameterCount()
 fun typeParameterCount() {}

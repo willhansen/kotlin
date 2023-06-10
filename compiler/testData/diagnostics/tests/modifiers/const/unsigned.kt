@@ -1,72 +1,72 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
-const val byteVal: UByte = 1u
-const val shortVal: UShort = 2u
-const val intVal: UInt = 3u
-const val longVal: ULong = 4uL
+const konst byteVal: UByte = 1u
+const konst shortVal: UShort = 2u
+const konst intVal: UInt = 3u
+const konst longVal: ULong = 4uL
 
-const val compareTo1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(byteVal)<!>
-const val compareTo2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(shortVal)<!>
-const val compareTo3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(intVal)<!>
-const val compareTo4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(longVal)<!>
+const konst compareTo1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(byteVal)<!>
+const konst compareTo2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(shortVal)<!>
+const konst compareTo3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(intVal)<!>
+const konst compareTo4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.compareTo(longVal)<!>
 
-const val plus1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(byteVal)<!>
-const val plus2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(shortVal)<!>
-const val plus3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(intVal)<!>
-const val plus4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(longVal)<!>
+const konst plus1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(byteVal)<!>
+const konst plus2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(shortVal)<!>
+const konst plus3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(intVal)<!>
+const konst plus4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.plus(longVal)<!>
 
-const val minus1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(byteVal)<!>
-const val minus2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(shortVal)<!>
-const val minus3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(intVal)<!>
-const val minus4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(longVal)<!>
+const konst minus1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(byteVal)<!>
+const konst minus2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(shortVal)<!>
+const konst minus3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(intVal)<!>
+const konst minus4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.minus(longVal)<!>
 
-const val times1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(byteVal)<!>
-const val times2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(shortVal)<!>
-const val times3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(intVal)<!>
-const val times4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(longVal)<!>
+const konst times1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(byteVal)<!>
+const konst times2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(shortVal)<!>
+const konst times3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(intVal)<!>
+const konst times4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.times(longVal)<!>
 
-const val div1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(byteVal)<!>
-const val div2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(shortVal)<!>
-const val div3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(intVal)<!>
-const val div4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(longVal)<!>
+const konst div1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(byteVal)<!>
+const konst div2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(shortVal)<!>
+const konst div3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(intVal)<!>
+const konst div4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.div(longVal)<!>
 
-const val rem1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(byteVal)<!>
-const val rem2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(shortVal)<!>
-const val rem3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(intVal)<!>
-const val rem4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(longVal)<!>
+const konst rem1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(byteVal)<!>
+const konst rem2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(shortVal)<!>
+const konst rem3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(intVal)<!>
+const konst rem4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.rem(longVal)<!>
 
-const val floorDiv1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(byteVal)<!>
-const val floorDiv2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(shortVal)<!>
-const val floorDiv3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(intVal)<!>
-const val floorDiv4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(longVal)<!>
+const konst floorDiv1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(byteVal)<!>
+const konst floorDiv2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(shortVal)<!>
+const konst floorDiv3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(intVal)<!>
+const konst floorDiv4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.floorDiv(longVal)<!>
 
-const val mod1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(byteVal)<!>
-const val mod2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(shortVal)<!>
-const val mod3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(intVal)<!>
-const val mod4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(longVal)<!>
+const konst mod1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(byteVal)<!>
+const konst mod2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(shortVal)<!>
+const konst mod3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(intVal)<!>
+const konst mod4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.mod(longVal)<!>
 
-const val and = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.and(byteVal)<!>
-const val or = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.or(byteVal)<!>
-const val xor = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.xor(byteVal)<!>
-const val inv = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.inv()<!>
+const konst and = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.and(byteVal)<!>
+const konst or = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.or(byteVal)<!>
+const konst xor = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.xor(byteVal)<!>
+const konst inv = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.inv()<!>
 
-const val convert1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toByte()<!>
-const val convert2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toShort()<!>
-const val convert3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toInt()<!>
-const val convert4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toLong()<!>
-const val convert5 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toFloat()<!>
-const val convert6 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toDouble()<!>
-const val convert7 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUByte()<!>
-const val convert8 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUShort()<!>
-const val convert9 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUInt()<!>
-const val convert10 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toULong()<!>
+const konst convert1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toByte()<!>
+const konst convert2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toShort()<!>
+const konst convert3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toInt()<!>
+const konst convert4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toLong()<!>
+const konst convert5 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toFloat()<!>
+const konst convert6 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toDouble()<!>
+const konst convert7 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUByte()<!>
+const konst convert8 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUShort()<!>
+const konst convert9 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toUInt()<!>
+const konst convert10 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toULong()<!>
 
-const val toString1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toString()<!>
-const val toString2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>shortVal.toString()<!>
-const val toString3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>intVal.toString()<!>
-const val toString4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>longVal.toString()<!>
+const konst toString1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.toString()<!>
+const konst toString2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>shortVal.toString()<!>
+const konst toString3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>intVal.toString()<!>
+const konst toString4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>longVal.toString()<!>
 
-const val equals1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(byteVal)<!>
-const val equals2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(shortVal)<!>
-const val equals3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(intVal)<!>
-const val equals4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(longVal)<!>
+const konst equals1 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(byteVal)<!>
+const konst equals2 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(shortVal)<!>
+const konst equals3 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(intVal)<!>
+const konst equals4 = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>byteVal.equals(longVal)<!>

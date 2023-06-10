@@ -8,20 +8,20 @@ package org.jetbrains.kotlin.codeMetaInfo.model
 import org.jetbrains.kotlin.codeMetaInfo.renderConfigurations.JspecifyCodeMetaInfoRenderConfiguration
 
 class JspecifyMarkerCodeMetaInfo(
-    override val start: Int,
-    override val end: Int,
-    val offset: Int,
-    val name: String
+    override konst start: Int,
+    override konst end: Int,
+    konst offset: Int,
+    konst name: String
 ) : CodeMetaInfo {
-    override val tagPrefix = "\n${" ".repeat(offset)}// "
-    override val tagPostfix = ""
-    override val closingTag = ""
+    override konst tagPrefix = "\n${" ".repeat(offset)}// "
+    override konst tagPostfix = ""
+    override konst closingTag = ""
 
-    override val renderConfiguration = JspecifyCodeMetaInfoRenderConfiguration
+    override konst renderConfiguration = JspecifyCodeMetaInfoRenderConfiguration
 
-    override val tag = renderConfiguration.getTag(this)
+    override konst tag = renderConfiguration.getTag(this)
 
-    override val attributes: MutableList<String> = mutableListOf()
+    override konst attributes: MutableList<String> = mutableListOf()
 
     override fun asString(): String = renderConfiguration.asString(this)
 }

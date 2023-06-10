@@ -37,22 +37,22 @@ class SimpleConstraintSystemImpl(
     kotlinTypeRefiner: KotlinTypeRefiner,
     languageVersionSettings: LanguageVersionSettings
 ) : SimpleConstraintSystem {
-    val system = NewConstraintSystemImpl(
+    konst system = NewConstraintSystemImpl(
         constraintInjector, ClassicTypeSystemContextForCS(builtIns, kotlinTypeRefiner), languageVersionSettings
     )
-    val csBuilder: ConstraintSystemBuilder =
+    konst csBuilder: ConstraintSystemBuilder =
         system.getBuilder()
 
     override fun registerTypeVariables(typeParameters: Collection<TypeParameterMarker>): TypeSubstitutorMarker {
 
-        val substitutionMap = typeParameters.associate {
+        konst substitutionMap = typeParameters.associate {
             requireOrDescribe(it is TypeParameterDescriptor, it)
-            val variable = TypeVariableFromCallableDescriptor(it)
+            konst variable = TypeVariableFromCallableDescriptor(it)
             csBuilder.registerVariable(variable)
 
             it.defaultType.constructor to variable.defaultType.asTypeProjection()
         }
-        val substitutor = TypeConstructorSubstitution.createByConstructorsMap(substitutionMap).buildSubstitutor()
+        konst substitutor = TypeConstructorSubstitution.createByConstructorsMap(substitutionMap).buildSubstitutor()
         for (typeParameter in typeParameters) {
             requireOrDescribe(typeParameter is TypeParameterDescriptor, typeParameter)
             for (upperBound in typeParameter.upperBounds) {
@@ -71,8 +71,8 @@ class SimpleConstraintSystemImpl(
     }
 
     override fun hasContradiction() = csBuilder.hasContradiction
-    override val captureFromArgument get() = true
+    override konst captureFromArgument get() = true
 
-    override val context: TypeSystemInferenceExtensionContext
+    override konst context: TypeSystemInferenceExtensionContext
         get() = system
 }

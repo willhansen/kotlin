@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.SmartSet
 
-val ConeKotlinType.isNullable: Boolean get() = nullability != ConeNullability.NOT_NULL
-val ConeKotlinType.isMarkedNullable: Boolean get() = nullability == ConeNullability.NULLABLE
+konst ConeKotlinType.isNullable: Boolean get() = nullability != ConeNullability.NOT_NULL
+konst ConeKotlinType.isMarkedNullable: Boolean get() = nullability == ConeNullability.NULLABLE
 
-val ConeKotlinType.classId: ClassId? get() = (this as? ConeClassLikeType)?.lookupTag?.classId
+konst ConeKotlinType.classId: ClassId? get() = (this as? ConeClassLikeType)?.lookupTag?.classId
 
 /**
  * Recursively visits each [ConeKotlinType] inside (including itself) and performs the given action.
@@ -109,24 +109,24 @@ fun ConeKotlinType.toTypeProjection(projectionKind: ProjectionKind): ConeTypePro
 
 fun ConeClassLikeType.replaceArgumentsWithStarProjections(): ConeClassLikeType {
     if (typeArguments.isEmpty()) return this
-    val newArguments = Array(typeArguments.size) { ConeStarProjection }
+    konst newArguments = Array(typeArguments.size) { ConeStarProjection }
     return withArguments(newArguments)
 }
 
 fun ConeKotlinType.renderForDebugging(): String {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     ConeTypeRendererForDebugging(builder).render(this)
     return builder.toString()
 }
 
 fun ConeKotlinType.renderReadable(): String {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     ConeTypeRendererWithJavaFlexibleTypes(builder) { ConeIdShortRenderer() }.render(this)
     return builder.toString()
 }
 
 fun ConeKotlinType.renderReadableWithFqNames(): String {
-    val builder = StringBuilder()
+    konst builder = StringBuilder()
     ConeTypeRendererWithJavaFlexibleTypes(builder) { ConeIdRendererForDebugging() }.render(this)
     return builder.toString()
 }

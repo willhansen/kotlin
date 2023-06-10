@@ -1,6 +1,6 @@
 // FILE: test.kt
 fun box() {
-    val k = if (getA()
+    konst k = if (getA()
         && getB()
         && getC()
         && getD()) {

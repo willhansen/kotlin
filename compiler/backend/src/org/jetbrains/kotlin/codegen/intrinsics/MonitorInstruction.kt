@@ -23,13 +23,13 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
-class MonitorInstruction private constructor(private val opcode: Int) : IntrinsicMethod() {
+class MonitorInstruction private constructor(private konst opcode: Int) : IntrinsicMethod() {
     companion object {
         @JvmField
-        val MONITOR_ENTER: MonitorInstruction = MonitorInstruction(Opcodes.MONITORENTER)
+        konst MONITOR_ENTER: MonitorInstruction = MonitorInstruction(Opcodes.MONITORENTER)
 
         @JvmField
-        val MONITOR_EXIT: MonitorInstruction = MonitorInstruction(Opcodes.MONITOREXIT)
+        konst MONITOR_EXIT: MonitorInstruction = MonitorInstruction(Opcodes.MONITOREXIT)
     }
 
     override fun toCallable(method: CallableMethod): Callable {

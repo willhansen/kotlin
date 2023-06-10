@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.assignment.plugin.gradle
 
 open class AssignmentExtension {
-    internal val myAnnotations = mutableListOf<String>()
+    internal konst myAnnotations = mutableListOf<String>()
 
     open fun annotation(fqName: String) {
         myAnnotations.add(fqName)

@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 fun test1(): String {
-    val u = Unit
+    konst u = Unit
     return u.mapNullable({ "X1" }, { "X2" })
 }
 

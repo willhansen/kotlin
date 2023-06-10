@@ -10,8 +10,8 @@ fun nonNull(): String = ""
 fun nullable(): String? = ""
 
 fun box(): String {
-    val nonNull = ::nonNull.returnType
-    val nullable = ::nullable.returnType
+    konst nonNull = ::nonNull.returnType
+    konst nullable = ::nullable.returnType
 
     assertEquals(nullable.javaType, nullable.withNullability(false).javaType)
     assertEquals(nullable.javaType, nullable.withNullability(true).javaType)

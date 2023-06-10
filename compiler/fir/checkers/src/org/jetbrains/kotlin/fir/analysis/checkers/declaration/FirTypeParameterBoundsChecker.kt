@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.types.model.TypeCheckerProviderContext
 
 object FirTypeParameterBoundsChecker : FirTypeParameterChecker() {
 
-    private val classKinds = setOf(
+    private konst classKinds = setOf(
         ClassKind.CLASS,
         ClassKind.ENUM_CLASS,
         ClassKind.OBJECT
     )
 
     override fun check(declaration: FirTypeParameter, context: CheckerContext, reporter: DiagnosticReporter) {
-        val containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
+        konst containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
         if (containingDeclaration is FirConstructor) return
 
         checkFinalUpperBounds(declaration, containingDeclaration, context, reporter)
@@ -83,19 +83,19 @@ object FirTypeParameterBoundsChecker : FirTypeParameterChecker() {
     }
 
     private fun checkOnlyOneTypeParameterBound(declaration: FirTypeParameter, context: CheckerContext, reporter: DiagnosticReporter) {
-        val bounds = declaration.symbol.resolvedBounds.distinctBy { it.coneType }
-        val (boundWithParam, otherBounds) = bounds.partition { it.coneType is ConeTypeParameterType }
+        konst bounds = declaration.symbol.resolvedBounds.distinctBy { it.coneType }
+        konst (boundWithParam, otherBounds) = bounds.partition { it.coneType is ConeTypeParameterType }
         if (boundWithParam.size > 1 || (boundWithParam.size == 1 && otherBounds.isNotEmpty())) {
             // If there's only one problematic bound (either 2 type parameter bounds, or 1 type parameter bound + 1 other bound),
             // report the diagnostic on that bound
 
             //take TypeConstraint bounds only to report on the same point as old FE
-            val constraintBounds = with(SourceNavigator.forElement(declaration)) {
+            konst constraintBounds = with(SourceNavigator.forElement(declaration)) {
                 bounds.filter { it.isInTypeConstraint() }.toSet()
             }
-            val reportOn =
+            konst reportOn =
                 if (bounds.size == 2) {
-                    val boundDecl = otherBounds.firstOrNull() ?: boundWithParam.last()
+                    konst boundDecl = otherBounds.firstOrNull() ?: boundWithParam.last()
                     if (constraintBounds.contains(boundDecl)) boundDecl.source
                     else declaration.source
                 } else {
@@ -106,9 +106,9 @@ object FirTypeParameterBoundsChecker : FirTypeParameterChecker() {
     }
 
     private fun checkBoundUniqueness(declaration: FirTypeParameter, context: CheckerContext, reporter: DiagnosticReporter) {
-        val seenClasses = mutableSetOf<FirRegularClassSymbol>()
-        val allNonErrorBounds = declaration.symbol.resolvedBounds.filter { it !is FirErrorTypeRef }
-        val uniqueBounds = allNonErrorBounds.distinctBy { it.coneType.classId ?: it.coneType }
+        konst seenClasses = mutableSetOf<FirRegularClassSymbol>()
+        konst allNonErrorBounds = declaration.symbol.resolvedBounds.filter { it !is FirErrorTypeRef }
+        konst uniqueBounds = allNonErrorBounds.distinctBy { it.coneType.classId ?: it.coneType }
 
         uniqueBounds.forEach { bound ->
             bound.coneType.toRegularClassSymbol(context.session)?.let { symbol ->
@@ -162,11 +162,11 @@ object FirTypeParameterBoundsChecker : FirTypeParameterChecker() {
     ) {
         if (declaration.bounds.size <= 1) return
 
-        val firTypeRefClasses = mutableListOf<Pair<FirTypeRef, FirRegularClassSymbol>>()
-        val firRegularClassesSet = mutableSetOf<FirRegularClassSymbol>()
+        konst firTypeRefClasses = mutableListOf<Pair<FirTypeRef, FirRegularClassSymbol>>()
+        konst firRegularClassesSet = mutableSetOf<FirRegularClassSymbol>()
 
         for (bound in declaration.symbol.resolvedBounds) {
-            val classSymbol = bound.toRegularClassSymbol(context.session)
+            konst classSymbol = bound.toRegularClassSymbol(context.session)
             if (firRegularClassesSet.contains(classSymbol)) {
                 // no need to throw INCONSISTENT_TYPE_PARAMETER_BOUNDS diagnostics here because REPEATED_BOUNDS diagnostic is already exist
                 return

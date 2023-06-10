@@ -1,6 +1,6 @@
 fun box() : String {
-    val s = "notA"
-    val id = when (s) {
+    konst s = "notA"
+    konst id = when (s) {
         "a" -> 1
         else -> null
     }

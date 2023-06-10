@@ -27,14 +27,14 @@ import kotlin.experimental.ExperimentalNativeApi
 /**
  * The node which marks end of the particular group.
  */
-open internal class FSet(val groupIndex: Int) : SimpleSet() {
+open internal class FSet(konst groupIndex: Int) : SimpleSet() {
 
     var isBackReferenced = false
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val oldEnd = matchResult.getEnd(groupIndex)
+        konst oldEnd = matchResult.getEnd(groupIndex)
         matchResult.setEnd(groupIndex, startIndex)
-        val shift = next.matches(startIndex, testString, matchResult)
+        konst shift = next.matches(startIndex, testString, matchResult)
         if (shift < 0) {
             matchResult.setEnd(groupIndex, oldEnd)
         }
@@ -42,11 +42,11 @@ open internal class FSet(val groupIndex: Int) : SimpleSet() {
     }
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean = false
-    override val name: String
+    override konst name: String
             get() = "fSet"
 
     override fun processSecondPass(): FSet {
-        val result = super.processSecondPass()
+        konst result = super.processSecondPass()
         @OptIn(ExperimentalNativeApi::class)
         assert(result == this)
         return this
@@ -65,12 +65,12 @@ open internal class FSet(val groupIndex: Int) : SimpleSet() {
             return false
         }
 
-        override val name: String
+        override konst name: String
                 get() = "possessiveFSet"
     }
 
     companion object {
-        val possessiveFSet = PossessiveFSet()
+        konst possessiveFSet = PossessiveFSet()
     }
 }
 
@@ -88,7 +88,7 @@ internal class FinalSet : FSet(0) {
         return -1
     }
 
-    override val name: String
+    override konst name: String
         get() = "FinalSet"
 }
 
@@ -102,7 +102,7 @@ internal class NonCapFSet(groupIndex: Int) : FSet(groupIndex) {
         return next.matches(startIndex, testString, matchResult)
     }
 
-    override val name: String
+    override konst name: String
         get() = "NonCapFSet"
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {
@@ -119,7 +119,7 @@ internal class AheadFSet : FSet(-1) {
         return startIndex
     }
 
-    override val name: String
+    override konst name: String
         get() = "AheadFSet"
 }
 
@@ -132,11 +132,11 @@ internal class AheadFSet : FSet(-1) {
 internal class BehindFSet(groupIndex: Int) : FSet(groupIndex) {
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val rightBound = matchResult.getConsumed(groupIndex)
+        konst rightBound = matchResult.getConsumed(groupIndex)
         return if (rightBound == startIndex) startIndex else -1
     }
 
-    override val name: String
+    override konst name: String
         get() = "BehindFSet"
 }
 
@@ -153,7 +153,7 @@ internal class AtomicFSet(groupIndex: Int) : FSet(groupIndex) {
         return startIndex
     }
 
-    override val name: String
+    override konst name: String
         get() = "AtomicFSet"
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {

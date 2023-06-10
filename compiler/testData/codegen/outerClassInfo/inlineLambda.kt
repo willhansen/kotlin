@@ -21,7 +21,7 @@ class Bar {
     }
 
     fun objectInInlineLambda() {
-        val s = 1;
+        konst s = 1;
         Foo().simpleFoo {
             {
                 s
@@ -30,7 +30,7 @@ class Bar {
     }
 
     fun objectInLambdaInlinedIntoObject() {
-        val s = 1;
+        konst s = 1;
         Foo().inlineFoo {
             {
                 s

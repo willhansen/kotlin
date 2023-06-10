@@ -49,22 +49,22 @@ class NameResolutionTest {
     fun labels() = doTest()
 
     private fun doTest() {
-        val methodName = testName.methodName
-        val baseName = "${TEST_DATA_DIR_PATH}/js-name-resolution/"
-        val originalName = "$baseName/$methodName.original.js"
-        val expectedName = "$baseName/$methodName.expected.js"
+        konst methodName = testName.methodName
+        konst baseName = "${TEST_DATA_DIR_PATH}/js-name-resolution/"
+        konst originalName = "$baseName/$methodName.original.js"
+        konst expectedName = "$baseName/$methodName.expected.js"
 
-        val originalCode = FileUtil.loadFile(File(originalName))
-        val expectedCode = FileUtil.loadFile(File(expectedName))
+        konst originalCode = FileUtil.loadFile(File(originalName))
+        konst expectedCode = FileUtil.loadFile(File(expectedName))
 
-        val parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
-        val originalAst = JsCompositeBlock()
+        konst parserScope = JsFunctionScope(JsRootScope(JsProgram()), "<js fun>")
+        konst originalAst = JsCompositeBlock()
             .apply { statements += parse(originalCode, errorReporter, parserScope, originalName).orEmpty() }
-        val expectedAst = JsCompositeBlock()
+        konst expectedAst = JsCompositeBlock()
             .apply { statements += parse(expectedCode, errorReporter, parserScope, expectedName).orEmpty() }
 
         originalAst.accept(object : RecursiveJsVisitor() {
-            val cache = mutableMapOf<JsName, JsName>()
+            konst cache = mutableMapOf<JsName, JsName>()
 
             override fun visitElement(node: JsNode) {
                 super.visitElement(node)
@@ -85,7 +85,7 @@ class NameResolutionTest {
         assertEquals(expectedAst.toString(), originalAst.toString())
     }
 
-    private val errorReporter = object : ErrorReporter {
+    private konst errorReporter = object : ErrorReporter {
         override fun warning(message: String, startPosition: CodePosition, endPosition: CodePosition) {}
 
         override fun error(message: String, startPosition: CodePosition, endPosition: CodePosition) {

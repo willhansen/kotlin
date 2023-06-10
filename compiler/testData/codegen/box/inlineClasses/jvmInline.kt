@@ -15,22 +15,22 @@ import kotlin.jvm.JvmInline
 import kotlin.coroutines.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCString(val a: String)
+konstue class VCString(konst a: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCStringNullable(val a: String?)
+konstue class VCStringNullable(konst a: String?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCAny(val a: Any)
+konstue class VCAny(konst a: Any)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCAnyNullable(val a: Any?)
+konstue class VCAnyNullable(konst a: Any?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCInt(val a: Int)
+konstue class VCInt(konst a: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class VCIntNullable(val a: Int?)
+konstue class VCIntNullable(konst a: Int?)
 
 var result: Any? = null
 fun ordinaryNoninlineReturnsVCString(): VCString = VCString("OK")

@@ -6,7 +6,7 @@
 
 interface Foo<T> {
     fun test(p: T) = "fail"
-    val T.prop: String
+    konst T.prop: String
         get() = "fail"
 }
 
@@ -16,7 +16,7 @@ interface Foo<T> {
 interface Foo2: Foo<String> {
     override fun test(p: String) : String = p
 
-    override val String.prop: String
+    override konst String.prop: String
         get() = this
 }
 
@@ -25,6 +25,6 @@ interface Foo3: Foo<String>, Foo2
 class Base : Foo3
 
 fun box(): String {
-    val base = Base()
+    konst base = Base()
     return base.test("O") + with(base) { "K".prop }
 }

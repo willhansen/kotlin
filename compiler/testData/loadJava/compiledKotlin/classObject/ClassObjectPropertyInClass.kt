@@ -3,8 +3,8 @@ package test
 
 class A {
   companion object {
-    val some = { 1 }()
+    konst some = { 1 }()
   }
 
-  val other = some
+  konst other = some
 }

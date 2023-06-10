@@ -20,9 +20,9 @@ import java.io.File
 internal object IdePlatformCinteropDependencyResolver : IdeDependencyResolver, IdeDependencyResolver.WithBuildDependencies {
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
         if (sourceSet !is DefaultKotlinSourceSet) return emptySet()
-        val project = sourceSet.project
+        konst project = sourceSet.project
 
-        val cinteropFiles = project.getPlatformCinteropDependenciesOrEmpty(sourceSet).map { file ->
+        konst cinteropFiles = project.getPlatformCinteropDependenciesOrEmpty(sourceSet).map { file ->
             project.copyCInteropFileForIdeIfNecessary(file)
         }
 
@@ -34,8 +34,8 @@ internal object IdePlatformCinteropDependencyResolver : IdeDependencyResolver, I
      */
     private fun Project.copyCInteropFileForIdeIfNecessary(file: File): File {
         if (!file.exists()) return file
-        val newFileName = "${file.nameWithoutExtension}-${file.crc32ChecksumString()}.${file.extension}"
-        val outputFile = kotlinCInteropLibraryDirectoryForIde.resolve(newFileName)
+        konst newFileName = "${file.nameWithoutExtension}-${file.crc32ChecksumString()}.${file.extension}"
+        konst outputFile = kotlinCInteropLibraryDirectoryForIde.resolve(newFileName)
 
         /* Copy only if really necessary */
         if (!outputFile.exists()) {

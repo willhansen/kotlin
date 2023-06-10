@@ -4,8 +4,8 @@ class C {
 }
 
 fun box(): String {
-    val a: C? = C()
-    val b: C? = null
+    konst a: C? = C()
+    konst b: C? = null
 
     if (a?.foo() != Unit) return "fail1: ${a?.foo()}"
     if (b?.foo() != null) return "fail2: ${b?.foo()}"

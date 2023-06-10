@@ -8,8 +8,8 @@ fun test3(
 ) =
     C(f1).D(f2)
 
-class Outer<T1>(val j11: J<T1, T1>) {
-    inner class Inner<T2>(val j12: J<T1, T2>)
+class Outer<T1>(konst j11: J<T1, T1>) {
+    inner class Inner<T2>(konst j12: J<T1, T2>)
 }
 
 fun test4(f: (String) -> String, g: (Any) -> String) = Outer(f).Inner(g)

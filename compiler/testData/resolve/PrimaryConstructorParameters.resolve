@@ -1,5 +1,5 @@
 
-class C(~x~x : Int, ~y~val y : Int) : Base(`x`x /*parameter*/), Base1 by Base1(`x`x) {
+class C(~x~x : Int, ~y~konst y : Int) : Base(`x`x /*parameter*/), Base1 by Base1(`x`x) {
   var zx = `x`x // parameter
     get() = `!`x // inaccessible
 
@@ -7,19 +7,19 @@ class C(~x~x : Int, ~y~val y : Int) : Base(`x`x /*parameter*/), Base1 by Base1(`
     get() = `y`y // property
 
   init {
-    val wx = `x`x
-    val wy = `y`y
+    konst wx = `x`x
+    konst wy = `y`y
   }
 
-  val fx = `x`x
-  val fy = `y`y
+  konst fx = `x`x
+  konst fy = `y`y
 
   fun test() {
-    val ux = `!`x // inaccessible
-    val uy = `y`y // property
+    konst ux = `!`x // inaccessible
+    konst uy = `y`y // property
   }
 }
 
 class D(~a~a: Int) {
-  val a = `a`a
+  konst a = `a`a
 }

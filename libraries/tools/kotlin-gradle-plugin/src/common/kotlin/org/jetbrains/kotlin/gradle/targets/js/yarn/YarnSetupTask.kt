@@ -23,29 +23,29 @@ import javax.inject.Inject
 
 abstract class YarnSetupTask : DefaultTask() {
     @Transient
-    private val settings = project.yarn
-    private val env by lazy { settings.requireConfigured() }
+    private konst settings = project.yarn
+    private konst env by lazy { settings.requireConfigured() }
 
-    private val shouldDownload = settings.download
-
-    @get:Inject
-    internal abstract val archiveOperations: ArchiveOperations
+    private konst shouldDownload = settings.download
 
     @get:Inject
-    internal abstract val fileHasher: FileHasher
+    internal abstract konst archiveOperations: ArchiveOperations
 
     @get:Inject
-    internal abstract val fs: FileSystemOperations
+    internal abstract konst fileHasher: FileHasher
+
+    @get:Inject
+    internal abstract konst fs: FileSystemOperations
 
     @Suppress("MemberVisibilityCanBePrivate")
-    val downloadUrl
+    konst downloadUrl
         @Input get() = env.downloadUrl
 
     @Suppress("MemberVisibilityCanBePrivate")
-    val destination: File
+    konst destination: File
         @OutputDirectory get() = env.home
 
-    val destinationHashFile: File
+    konst destinationHashFile: File
         @OutputFile get() = destination.parentFile.resolve("${destination.name}.hash")
 
     init {
@@ -53,7 +53,7 @@ abstract class YarnSetupTask : DefaultTask() {
         description = "Download and install a local yarn version"
     }
 
-    val ivyDependency: String
+    konst ivyDependency: String
         @Input get() = env.ivyDependency
 
     @Transient
@@ -62,9 +62,9 @@ abstract class YarnSetupTask : DefaultTask() {
 
     @get:Classpath
     @get:Optional
-    val yarnDist: File? by lazy {
+    konst yarnDist: File? by lazy {
         if (shouldDownload) {
-            val repo = project.repositories.ivy { repo ->
+            konst repo = project.repositories.ivy { repo ->
                 repo.name = "Yarn Distributions at ${downloadUrl}"
                 repo.url = URI(downloadUrl)
                 repo.patternLayout {
@@ -73,9 +73,9 @@ abstract class YarnSetupTask : DefaultTask() {
                 repo.metadataSources { it.artifact() }
                 repo.content { it.includeModule("com.yarnpkg", "yarn") }
             }
-            val startDownloadTime = System.currentTimeMillis()
-            val dist = configuration.get().files.single()
-            val downloadDuration = System.currentTimeMillis() - startDownloadTime
+            konst startDownloadTime = System.currentTimeMillis()
+            konst dist = configuration.get().files.single()
+            konst downloadDuration = System.currentTimeMillis() - startDownloadTime
             if (downloadDuration > 0) {
                 KotlinBuildStatsService.getInstance()
                     ?.report(NumericalMetrics.ARTIFACTS_DOWNLOAD_SPEED, dist.length() * 1000 / downloadDuration)
@@ -106,7 +106,7 @@ abstract class YarnSetupTask : DefaultTask() {
     }
 
     private fun extract(archive: File, destination: File) {
-        val dirInTar = archive.name.removeSuffix(".tar.gz")
+        konst dirInTar = archive.name.removeSuffix(".tar.gz")
         fs.copy {
             it.from(archiveOperations.tarTree(archive))
             it.into(destination)
@@ -118,6 +118,6 @@ abstract class YarnSetupTask : DefaultTask() {
     }
 
     companion object {
-        const val NAME: String = "kotlinYarnSetup"
+        const konst NAME: String = "kotlinYarnSetup"
     }
 }

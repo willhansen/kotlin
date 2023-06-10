@@ -1,21 +1,21 @@
 
-abstract class O(val value: String) {
+abstract class O(konst konstue: String) {
     constructor(o: Char = 'O') : this("$o")
 }
 
 abstract class K {
-    val value: String
+    konst konstue: String
 
     constructor(k: Char = 'K') {
-        value = "$k"
+        konstue = "$k"
     }
 }
 
 fun box(): String {
 
-    val o = object : O() {}
+    konst o = object : O() {}
 
-    val k = object : K() {}
+    konst k = object : K() {}
 
-    return o.value + k.value
+    return o.konstue + k.konstue
 }

@@ -17,9 +17,9 @@ public final class Box$$serializer : java/lang/Object, kotlinx/serialization/int
 
     private final kotlinx.serialization.KSerializer getTypeSerial0()
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, Box value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, Box konstue)
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue)
 
     public kotlinx.serialization.KSerializer[] typeParametersSerializers()
 }
@@ -231,9 +231,9 @@ public final class Simple$$serializer : java/lang/Object, kotlinx/serialization/
 
     public kotlinx.serialization.descriptors.SerialDescriptor getDescriptor()
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, Simple value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, Simple konstue)
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue)
 
     public kotlinx.serialization.KSerializer[] typeParametersSerializers()
 }

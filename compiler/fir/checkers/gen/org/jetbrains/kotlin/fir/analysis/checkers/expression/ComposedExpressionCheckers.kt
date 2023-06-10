@@ -13,106 +13,106 @@ import org.jetbrains.kotlin.fir.analysis.CheckersComponentInternal
  */
 
 class ComposedExpressionCheckers : ExpressionCheckers() {
-    override val basicExpressionCheckers: Set<FirBasicExpressionChecker>
+    override konst basicExpressionCheckers: Set<FirBasicExpressionChecker>
         get() = _basicExpressionCheckers
-    override val qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
+    override konst qualifiedAccessExpressionCheckers: Set<FirQualifiedAccessExpressionChecker>
         get() = _qualifiedAccessExpressionCheckers
-    override val callCheckers: Set<FirCallChecker>
+    override konst callCheckers: Set<FirCallChecker>
         get() = _callCheckers
-    override val functionCallCheckers: Set<FirFunctionCallChecker>
+    override konst functionCallCheckers: Set<FirFunctionCallChecker>
         get() = _functionCallCheckers
-    override val propertyAccessExpressionCheckers: Set<FirPropertyAccessExpressionChecker>
+    override konst propertyAccessExpressionCheckers: Set<FirPropertyAccessExpressionChecker>
         get() = _propertyAccessExpressionCheckers
-    override val integerLiteralOperatorCallCheckers: Set<FirIntegerLiteralOperatorCallChecker>
+    override konst integerLiteralOperatorCallCheckers: Set<FirIntegerLiteralOperatorCallChecker>
         get() = _integerLiteralOperatorCallCheckers
-    override val variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
+    override konst variableAssignmentCheckers: Set<FirVariableAssignmentChecker>
         get() = _variableAssignmentCheckers
-    override val tryExpressionCheckers: Set<FirTryExpressionChecker>
+    override konst tryExpressionCheckers: Set<FirTryExpressionChecker>
         get() = _tryExpressionCheckers
-    override val whenExpressionCheckers: Set<FirWhenExpressionChecker>
+    override konst whenExpressionCheckers: Set<FirWhenExpressionChecker>
         get() = _whenExpressionCheckers
-    override val loopExpressionCheckers: Set<FirLoopExpressionChecker>
+    override konst loopExpressionCheckers: Set<FirLoopExpressionChecker>
         get() = _loopExpressionCheckers
-    override val loopJumpCheckers: Set<FirLoopJumpChecker>
+    override konst loopJumpCheckers: Set<FirLoopJumpChecker>
         get() = _loopJumpCheckers
-    override val logicExpressionCheckers: Set<FirLogicExpressionChecker>
+    override konst logicExpressionCheckers: Set<FirLogicExpressionChecker>
         get() = _logicExpressionCheckers
-    override val returnExpressionCheckers: Set<FirReturnExpressionChecker>
+    override konst returnExpressionCheckers: Set<FirReturnExpressionChecker>
         get() = _returnExpressionCheckers
-    override val blockCheckers: Set<FirBlockChecker>
+    override konst blockCheckers: Set<FirBlockChecker>
         get() = _blockCheckers
-    override val annotationCheckers: Set<FirAnnotationChecker>
+    override konst annotationCheckers: Set<FirAnnotationChecker>
         get() = _annotationCheckers
-    override val annotationCallCheckers: Set<FirAnnotationCallChecker>
+    override konst annotationCallCheckers: Set<FirAnnotationCallChecker>
         get() = _annotationCallCheckers
-    override val checkNotNullCallCheckers: Set<FirCheckNotNullCallChecker>
+    override konst checkNotNullCallCheckers: Set<FirCheckNotNullCallChecker>
         get() = _checkNotNullCallCheckers
-    override val elvisExpressionCheckers: Set<FirElvisExpressionChecker>
+    override konst elvisExpressionCheckers: Set<FirElvisExpressionChecker>
         get() = _elvisExpressionCheckers
-    override val getClassCallCheckers: Set<FirGetClassCallChecker>
+    override konst getClassCallCheckers: Set<FirGetClassCallChecker>
         get() = _getClassCallCheckers
-    override val safeCallExpressionCheckers: Set<FirSafeCallExpressionChecker>
+    override konst safeCallExpressionCheckers: Set<FirSafeCallExpressionChecker>
         get() = _safeCallExpressionCheckers
-    override val equalityOperatorCallCheckers: Set<FirEqualityOperatorCallChecker>
+    override konst equalityOperatorCallCheckers: Set<FirEqualityOperatorCallChecker>
         get() = _equalityOperatorCallCheckers
-    override val stringConcatenationCallCheckers: Set<FirStringConcatenationCallChecker>
+    override konst stringConcatenationCallCheckers: Set<FirStringConcatenationCallChecker>
         get() = _stringConcatenationCallCheckers
-    override val typeOperatorCallCheckers: Set<FirTypeOperatorCallChecker>
+    override konst typeOperatorCallCheckers: Set<FirTypeOperatorCallChecker>
         get() = _typeOperatorCallCheckers
-    override val resolvedQualifierCheckers: Set<FirResolvedQualifierChecker>
+    override konst resolvedQualifierCheckers: Set<FirResolvedQualifierChecker>
         get() = _resolvedQualifierCheckers
-    override val constExpressionCheckers: Set<FirConstExpressionChecker>
+    override konst constExpressionCheckers: Set<FirConstExpressionChecker>
         get() = _constExpressionCheckers
-    override val callableReferenceAccessCheckers: Set<FirCallableReferenceAccessChecker>
+    override konst callableReferenceAccessCheckers: Set<FirCallableReferenceAccessChecker>
         get() = _callableReferenceAccessCheckers
-    override val thisReceiverExpressionCheckers: Set<FirThisReceiverExpressionChecker>
+    override konst thisReceiverExpressionCheckers: Set<FirThisReceiverExpressionChecker>
         get() = _thisReceiverExpressionCheckers
-    override val whileLoopCheckers: Set<FirWhileLoopChecker>
+    override konst whileLoopCheckers: Set<FirWhileLoopChecker>
         get() = _whileLoopCheckers
-    override val throwExpressionCheckers: Set<FirThrowExpressionChecker>
+    override konst throwExpressionCheckers: Set<FirThrowExpressionChecker>
         get() = _throwExpressionCheckers
-    override val doWhileLoopCheckers: Set<FirDoWhileLoopChecker>
+    override konst doWhileLoopCheckers: Set<FirDoWhileLoopChecker>
         get() = _doWhileLoopCheckers
-    override val arrayOfCallCheckers: Set<FirArrayOfCallChecker>
+    override konst arrayOfCallCheckers: Set<FirArrayOfCallChecker>
         get() = _arrayOfCallCheckers
-    override val classReferenceExpressionCheckers: Set<FirClassReferenceExpressionChecker>
+    override konst classReferenceExpressionCheckers: Set<FirClassReferenceExpressionChecker>
         get() = _classReferenceExpressionCheckers
-    override val inaccessibleReceiverCheckers: Set<FirInaccessibleReceiverChecker>
+    override konst inaccessibleReceiverCheckers: Set<FirInaccessibleReceiverChecker>
         get() = _inaccessibleReceiverCheckers
 
-    private val _basicExpressionCheckers: MutableSet<FirBasicExpressionChecker> = mutableSetOf()
-    private val _qualifiedAccessExpressionCheckers: MutableSet<FirQualifiedAccessExpressionChecker> = mutableSetOf()
-    private val _callCheckers: MutableSet<FirCallChecker> = mutableSetOf()
-    private val _functionCallCheckers: MutableSet<FirFunctionCallChecker> = mutableSetOf()
-    private val _propertyAccessExpressionCheckers: MutableSet<FirPropertyAccessExpressionChecker> = mutableSetOf()
-    private val _integerLiteralOperatorCallCheckers: MutableSet<FirIntegerLiteralOperatorCallChecker> = mutableSetOf()
-    private val _variableAssignmentCheckers: MutableSet<FirVariableAssignmentChecker> = mutableSetOf()
-    private val _tryExpressionCheckers: MutableSet<FirTryExpressionChecker> = mutableSetOf()
-    private val _whenExpressionCheckers: MutableSet<FirWhenExpressionChecker> = mutableSetOf()
-    private val _loopExpressionCheckers: MutableSet<FirLoopExpressionChecker> = mutableSetOf()
-    private val _loopJumpCheckers: MutableSet<FirLoopJumpChecker> = mutableSetOf()
-    private val _logicExpressionCheckers: MutableSet<FirLogicExpressionChecker> = mutableSetOf()
-    private val _returnExpressionCheckers: MutableSet<FirReturnExpressionChecker> = mutableSetOf()
-    private val _blockCheckers: MutableSet<FirBlockChecker> = mutableSetOf()
-    private val _annotationCheckers: MutableSet<FirAnnotationChecker> = mutableSetOf()
-    private val _annotationCallCheckers: MutableSet<FirAnnotationCallChecker> = mutableSetOf()
-    private val _checkNotNullCallCheckers: MutableSet<FirCheckNotNullCallChecker> = mutableSetOf()
-    private val _elvisExpressionCheckers: MutableSet<FirElvisExpressionChecker> = mutableSetOf()
-    private val _getClassCallCheckers: MutableSet<FirGetClassCallChecker> = mutableSetOf()
-    private val _safeCallExpressionCheckers: MutableSet<FirSafeCallExpressionChecker> = mutableSetOf()
-    private val _equalityOperatorCallCheckers: MutableSet<FirEqualityOperatorCallChecker> = mutableSetOf()
-    private val _stringConcatenationCallCheckers: MutableSet<FirStringConcatenationCallChecker> = mutableSetOf()
-    private val _typeOperatorCallCheckers: MutableSet<FirTypeOperatorCallChecker> = mutableSetOf()
-    private val _resolvedQualifierCheckers: MutableSet<FirResolvedQualifierChecker> = mutableSetOf()
-    private val _constExpressionCheckers: MutableSet<FirConstExpressionChecker> = mutableSetOf()
-    private val _callableReferenceAccessCheckers: MutableSet<FirCallableReferenceAccessChecker> = mutableSetOf()
-    private val _thisReceiverExpressionCheckers: MutableSet<FirThisReceiverExpressionChecker> = mutableSetOf()
-    private val _whileLoopCheckers: MutableSet<FirWhileLoopChecker> = mutableSetOf()
-    private val _throwExpressionCheckers: MutableSet<FirThrowExpressionChecker> = mutableSetOf()
-    private val _doWhileLoopCheckers: MutableSet<FirDoWhileLoopChecker> = mutableSetOf()
-    private val _arrayOfCallCheckers: MutableSet<FirArrayOfCallChecker> = mutableSetOf()
-    private val _classReferenceExpressionCheckers: MutableSet<FirClassReferenceExpressionChecker> = mutableSetOf()
-    private val _inaccessibleReceiverCheckers: MutableSet<FirInaccessibleReceiverChecker> = mutableSetOf()
+    private konst _basicExpressionCheckers: MutableSet<FirBasicExpressionChecker> = mutableSetOf()
+    private konst _qualifiedAccessExpressionCheckers: MutableSet<FirQualifiedAccessExpressionChecker> = mutableSetOf()
+    private konst _callCheckers: MutableSet<FirCallChecker> = mutableSetOf()
+    private konst _functionCallCheckers: MutableSet<FirFunctionCallChecker> = mutableSetOf()
+    private konst _propertyAccessExpressionCheckers: MutableSet<FirPropertyAccessExpressionChecker> = mutableSetOf()
+    private konst _integerLiteralOperatorCallCheckers: MutableSet<FirIntegerLiteralOperatorCallChecker> = mutableSetOf()
+    private konst _variableAssignmentCheckers: MutableSet<FirVariableAssignmentChecker> = mutableSetOf()
+    private konst _tryExpressionCheckers: MutableSet<FirTryExpressionChecker> = mutableSetOf()
+    private konst _whenExpressionCheckers: MutableSet<FirWhenExpressionChecker> = mutableSetOf()
+    private konst _loopExpressionCheckers: MutableSet<FirLoopExpressionChecker> = mutableSetOf()
+    private konst _loopJumpCheckers: MutableSet<FirLoopJumpChecker> = mutableSetOf()
+    private konst _logicExpressionCheckers: MutableSet<FirLogicExpressionChecker> = mutableSetOf()
+    private konst _returnExpressionCheckers: MutableSet<FirReturnExpressionChecker> = mutableSetOf()
+    private konst _blockCheckers: MutableSet<FirBlockChecker> = mutableSetOf()
+    private konst _annotationCheckers: MutableSet<FirAnnotationChecker> = mutableSetOf()
+    private konst _annotationCallCheckers: MutableSet<FirAnnotationCallChecker> = mutableSetOf()
+    private konst _checkNotNullCallCheckers: MutableSet<FirCheckNotNullCallChecker> = mutableSetOf()
+    private konst _elvisExpressionCheckers: MutableSet<FirElvisExpressionChecker> = mutableSetOf()
+    private konst _getClassCallCheckers: MutableSet<FirGetClassCallChecker> = mutableSetOf()
+    private konst _safeCallExpressionCheckers: MutableSet<FirSafeCallExpressionChecker> = mutableSetOf()
+    private konst _equalityOperatorCallCheckers: MutableSet<FirEqualityOperatorCallChecker> = mutableSetOf()
+    private konst _stringConcatenationCallCheckers: MutableSet<FirStringConcatenationCallChecker> = mutableSetOf()
+    private konst _typeOperatorCallCheckers: MutableSet<FirTypeOperatorCallChecker> = mutableSetOf()
+    private konst _resolvedQualifierCheckers: MutableSet<FirResolvedQualifierChecker> = mutableSetOf()
+    private konst _constExpressionCheckers: MutableSet<FirConstExpressionChecker> = mutableSetOf()
+    private konst _callableReferenceAccessCheckers: MutableSet<FirCallableReferenceAccessChecker> = mutableSetOf()
+    private konst _thisReceiverExpressionCheckers: MutableSet<FirThisReceiverExpressionChecker> = mutableSetOf()
+    private konst _whileLoopCheckers: MutableSet<FirWhileLoopChecker> = mutableSetOf()
+    private konst _throwExpressionCheckers: MutableSet<FirThrowExpressionChecker> = mutableSetOf()
+    private konst _doWhileLoopCheckers: MutableSet<FirDoWhileLoopChecker> = mutableSetOf()
+    private konst _arrayOfCallCheckers: MutableSet<FirArrayOfCallChecker> = mutableSetOf()
+    private konst _classReferenceExpressionCheckers: MutableSet<FirClassReferenceExpressionChecker> = mutableSetOf()
+    private konst _inaccessibleReceiverCheckers: MutableSet<FirInaccessibleReceiverChecker> = mutableSetOf()
 
     @CheckersComponentInternal
     fun register(checkers: ExpressionCheckers) {

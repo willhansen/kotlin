@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
 interface A {
-    val foo: Int
-    val bar: String
+    konst foo: Int
+    konst bar: String
         get() = ""
 }
 
 fun test(foo: Int, bar: Int) {
     object : A {
-        override val foo: Int = foo + bar
+        override konst foo: Int = foo + bar
     }
 }

@@ -39,7 +39,7 @@ internal class KJvmCompiledScriptData(
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 5L
+        private konst serialVersionUID = 5L
     }
 }
 
@@ -60,27 +60,27 @@ open class KJvmCompiledScript internal constructor(
         compiledModule
     )
 
-    override val sourceLocationId: String?
+    override konst sourceLocationId: String?
         get() = data.sourceLocationId
 
-    override val compilationConfiguration: ScriptCompilationConfiguration
+    override konst compilationConfiguration: ScriptCompilationConfiguration
         get() = data.compilationConfiguration
 
-    override val otherScripts: List<CompiledScript>
+    override konst otherScripts: List<CompiledScript>
         get() = data.otherScripts
 
-    val scriptClassFQName: String
+    konst scriptClassFQName: String
         get() = data.scriptClassFQName
 
-    override val resultField: Pair<String, KotlinType>?
+    override konst resultField: Pair<String, KotlinType>?
         get() = data.resultField
 
-    override suspend fun getClass(scriptEvaluationConfiguration: ScriptEvaluationConfiguration?): ResultWithDiagnostics<KClass<*>> = try {
+    override suspend fun getClass(scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration?): ResultWithDiagnostics<KClass<*>> = try {
         // ensuring proper defaults are used
-        val actualEvaluationConfiguration = scriptEvaluationConfiguration ?: ScriptEvaluationConfiguration()
-        val classLoader = getOrCreateActualClassloader(actualEvaluationConfiguration)
+        konst actualEkonstuationConfiguration = scriptEkonstuationConfiguration ?: ScriptEkonstuationConfiguration()
+        konst classLoader = getOrCreateActualClassloader(actualEkonstuationConfiguration)
 
-        val clazz = classLoader.loadClass(data.scriptClassFQName).kotlin
+        konst clazz = classLoader.loadClass(data.scriptClassFQName).kotlin
         clazz.asSuccess()
     } catch (e: Throwable) {
         ResultWithDiagnostics.Failure(
@@ -108,34 +108,34 @@ open class KJvmCompiledScript internal constructor(
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 3L
+        private konst serialVersionUID = 3L
     }
 }
 
-fun KJvmCompiledScript.getOrCreateActualClassloader(evaluationConfiguration: ScriptEvaluationConfiguration): ClassLoader =
-    evaluationConfiguration[ScriptEvaluationConfiguration.jvm.actualClassLoader] ?: run {
-        val module = compiledModule
+fun KJvmCompiledScript.getOrCreateActualClassloader(ekonstuationConfiguration: ScriptEkonstuationConfiguration): ClassLoader =
+    ekonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.actualClassLoader] ?: run {
+        konst module = compiledModule
             ?: throw IllegalStateException("Illegal call sequence, actualClassloader should be set before calling function on the class without module")
-        val baseClassLoader = evaluationConfiguration[ScriptEvaluationConfiguration.jvm.baseClassLoader]
-        val lastClassLoader = evaluationConfiguration[ScriptEvaluationConfiguration.jvm.lastSnippetClassLoader] ?: baseClassLoader
-        val classLoaderWithDeps =
-            if (evaluationConfiguration[ScriptEvaluationConfiguration.jvm.loadDependencies] == false) baseClassLoader
+        konst baseClassLoader = ekonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.baseClassLoader]
+        konst lastClassLoader = ekonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.lastSnippetClassLoader] ?: baseClassLoader
+        konst classLoaderWithDeps =
+            if (ekonstuationConfiguration[ScriptEkonstuationConfiguration.jvm.loadDependencies] == false) baseClassLoader
             else makeClassLoaderFromDependencies(baseClassLoader, lastClassLoader)
         return module.createClassLoader(classLoaderWithDeps)
     }
 
 private fun CompiledScript.makeClassLoaderFromDependencies(baseClassLoader: ClassLoader?, lastClassLoader: ClassLoader?): ClassLoader? {
-    val processedScripts = mutableSetOf<CompiledScript>()
+    konst processedScripts = mutableSetOf<CompiledScript>()
     fun recursiveScriptsSeq(res: Sequence<CompiledScript>, script: CompiledScript): Sequence<CompiledScript> =
         if (processedScripts.add(script)) script.otherScripts.asSequence().fold(res + script, ::recursiveScriptsSeq)
         else res
 
-    val dependenciesWithConfigurations = recursiveScriptsSeq(emptySequence(), this).flatMap { script ->
+    konst dependenciesWithConfigurations = recursiveScriptsSeq(emptySequence(), this).flatMap { script ->
         script.compilationConfiguration[ScriptCompilationConfiguration.dependencies]
             ?.asSequence()?.map { script.compilationConfiguration to it } ?: emptySequence()
     }
 
-    val processedClasspathElements = mutableSetOf<URL>()
+    konst processedClasspathElements = mutableSetOf<URL>()
     fun recursiveClassPath(res: Sequence<URL>, classLoader: ClassLoader?): Sequence<URL> =
         when (classLoader) {
             null, baseClassLoader -> res
@@ -146,18 +146,18 @@ private fun CompiledScript.makeClassLoaderFromDependencies(baseClassLoader: Clas
         }
     recursiveClassPath(emptySequence(), lastClassLoader).forEach { processedClasspathElements.add(it) }
 
-    val processedClassloaders = mutableSetOf<ClassLoader>()
+    konst processedClassloaders = mutableSetOf<ClassLoader>()
 
     return dependenciesWithConfigurations.fold(lastClassLoader) { parentClassLoader, (compilationConfiguration, scriptDependency) ->
         when (scriptDependency) {
             is JvmDependency -> {
                 scriptDependency.classpath.mapNotNull {
-                    val url = it.toURI().toURL()
+                    konst url = it.toURI().toURL()
                     if (processedClasspathElements.add(url)) url else null
                 }.takeUnless { it.isEmpty() }?.let { URLClassLoader(it.toTypedArray(), parentClassLoader) }
             }
             is JvmDependencyFromClassLoader -> {
-                val dependenciesClassLoader = scriptDependency.getClassLoader(compilationConfiguration)
+                konst dependenciesClassLoader = scriptDependency.getClassLoader(compilationConfiguration)
                 if (processedClassloaders.add(dependenciesClassLoader)) DualClassLoader(dependenciesClassLoader, parentClassLoader)
                 else null
             }
@@ -166,15 +166,15 @@ private fun CompiledScript.makeClassLoaderFromDependencies(baseClassLoader: Clas
     }
 }
 
-const val KOTLIN_SCRIPT_METADATA_PATH = "META-INF/kotlin/script"
-const val KOTLIN_SCRIPT_METADATA_EXTENSION_WITH_DOT = ".kotlin_script"
+const konst KOTLIN_SCRIPT_METADATA_PATH = "META-INF/kotlin/script"
+const konst KOTLIN_SCRIPT_METADATA_EXTENSION_WITH_DOT = ".kotlin_script"
 fun scriptMetadataPath(scriptClassFQName: String) =
     "$KOTLIN_SCRIPT_METADATA_PATH/$scriptClassFQName$KOTLIN_SCRIPT_METADATA_EXTENSION_WITH_DOT"
 
 fun KJvmCompiledScript.copyWithoutModule(): KJvmCompiledScript = KJvmCompiledScript(data, null)
 
 fun KJvmCompiledScript.toBytes(): ByteArray {
-    val bos = ByteArrayOutputStream()
+    konst bos = ByteArrayOutputStream()
     var oos: ObjectOutputStream? = null
     try {
         oos = ObjectOutputStream(bos)
@@ -190,9 +190,9 @@ fun KJvmCompiledScript.toBytes(): ByteArray {
 }
 
 fun createScriptFromClassLoader(scriptClassFQName: String, classLoader: ClassLoader): KJvmCompiledScript {
-    val scriptDataStream = classLoader.getResourceAsStream(scriptMetadataPath(scriptClassFQName))
+    konst scriptDataStream = classLoader.getResourceAsStream(scriptMetadataPath(scriptClassFQName))
         ?: throw IllegalArgumentException("Cannot find metadata for script $scriptClassFQName")
-    val script = ObjectInputStream(scriptDataStream).use {
+    konst script = ObjectInputStream(scriptDataStream).use {
         it.readObject() as KJvmCompiledScript
     }
     script.compiledModule = KJvmCompiledModuleFromClassLoader(classLoader)

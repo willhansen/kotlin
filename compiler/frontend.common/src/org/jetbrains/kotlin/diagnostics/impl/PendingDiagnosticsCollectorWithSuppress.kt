@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
 
 class PendingDiagnosticsCollectorWithSuppress : BaseDiagnosticsCollector() {
-    private val pendingDiagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
-    private val _diagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
-    override val diagnostics: List<KtDiagnostic>
-        get() = _diagnosticsByFilePath.flatMap { it.value }
-    override val diagnosticsByFilePath: Map<String?, List<KtDiagnostic>>
+    private konst pendingDiagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
+    private konst _diagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
+    override konst diagnostics: List<KtDiagnostic>
+        get() = _diagnosticsByFilePath.flatMap { it.konstue }
+    override konst diagnosticsByFilePath: Map<String?, List<KtDiagnostic>>
         get() = _diagnosticsByFilePath
 
     override var hasErrors = false
@@ -33,12 +33,12 @@ class PendingDiagnosticsCollectorWithSuppress : BaseDiagnosticsCollector() {
         element: AbstractKtSourceElement,
         context: DiagnosticContext?
     ) {
-        val commitEverything = context == null
+        konst commitEverything = context == null
         for ((path, pendingList) in pendingDiagnosticsByFilePath) {
-            val committedList = _diagnosticsByFilePath.getOrPut(path) { mutableListOf() }
-            val iterator = pendingList.iterator()
+            konst committedList = _diagnosticsByFilePath.getOrPut(path) { mutableListOf() }
+            konst iterator = pendingList.iterator()
             while (iterator.hasNext()) {
-                val diagnostic = iterator.next()
+                konst diagnostic = iterator.next()
                 when {
                     context?.isDiagnosticSuppressed(diagnostic) == true -> {
                         if (diagnostic.element == element ||

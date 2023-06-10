@@ -16,7 +16,7 @@ class Outer<A, B> {
 fun foo(): Outer<Int, Number>.Inner<String, Float>.Innermost<Any, Any?> = null!!
 
 fun box(): String {
-    val types = ::foo.returnType.arguments.map { it.type!! }
+    konst types = ::foo.returnType.arguments.map { it.type!! }
 
     assertEquals(
             listOf(

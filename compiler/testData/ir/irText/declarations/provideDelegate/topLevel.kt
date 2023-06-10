@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
 
-class Delegate(val value: String) {
-    operator fun getValue(thisRef: Any?, property: Any?) = value
+class Delegate(konst konstue: String) {
+    operator fun getValue(thisRef: Any?, property: Any?) = konstue
 }
 
-class DelegateProvider(val value: String) {
-    operator fun provideDelegate(thisRef: Any?, property: Any?) = Delegate(value)
+class DelegateProvider(konst konstue: String) {
+    operator fun provideDelegate(thisRef: Any?, property: Any?) = Delegate(konstue)
 }
 
-val testTopLevel by DelegateProvider("OK")
+konst testTopLevel by DelegateProvider("OK")
 

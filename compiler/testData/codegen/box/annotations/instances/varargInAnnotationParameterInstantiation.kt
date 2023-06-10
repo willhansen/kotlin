@@ -4,11 +4,11 @@
 // See also: KT-59032.
 // IGNORE_BACKEND: WASM
 
-annotation class KotlinAnn(vararg val foo: String)
+annotation class KotlinAnn(vararg konst foo: String)
 
-annotation class KotlinIntAnn(vararg val foo: Int)
+annotation class KotlinIntAnn(vararg konst foo: Int)
 
-annotation class KotlinUIntAnn(vararg val foo: UInt)
+annotation class KotlinUIntAnn(vararg konst foo: UInt)
 
 fun box(): String {
     KotlinAnn()

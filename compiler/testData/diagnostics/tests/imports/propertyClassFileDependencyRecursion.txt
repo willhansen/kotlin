@@ -1,11 +1,11 @@
 package
 
 package other {
-    public val prop: test.PropType? = null
+    public konst prop: test.PropType? = null
 }
 
 package test {
-    public val checkTypeProp: test.PropType? = null
+    public konst checkTypeProp: test.PropType? = null
 
     public final class PropType {
         public constructor PropType()

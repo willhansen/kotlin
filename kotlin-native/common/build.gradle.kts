@@ -26,7 +26,7 @@ bitcode {
     }
 }
 
-val hostName: String by project
+konst hostName: String by project
 
 tasks.register("build") {
     dependsOn("${hostName}Common")

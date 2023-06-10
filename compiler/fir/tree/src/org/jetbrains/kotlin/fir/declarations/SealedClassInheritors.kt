@@ -18,7 +18,7 @@ abstract class SealedClassInheritorsProvider : FirSessionComponent {
     abstract fun getSealedClassInheritors(firClass: FirRegularClass): List<ClassId>
 }
 
-private val FirSession.sealedClassInheritorsProvider: SealedClassInheritorsProvider by FirSession.sessionComponentAccessor()
+private konst FirSession.sealedClassInheritorsProvider: SealedClassInheritorsProvider by FirSession.sessionComponentAccessor()
 
 object SealedClassInheritorsProviderImpl : SealedClassInheritorsProvider() {
     @OptIn(SealedClassInheritorsProviderInternals::class)

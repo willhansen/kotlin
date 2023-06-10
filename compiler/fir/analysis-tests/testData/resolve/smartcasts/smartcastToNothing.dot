@@ -163,7 +163,7 @@ digraph smartcastToNothing_kt {
                 54 [label="Enter block"];
                 55 [label="Access variable R|<local>/results|"];
                 56 [label="Function call: R|<local>/results|.R|SubstitutionOverride<kotlin/collections/List.iterator: R|kotlin/collections/Iterator<kotlin/Nothing>|>|()" style="filled" fillcolor=yellow];
-                57 [label="Variable declaration: lval <iterator>: R|kotlin/collections/Iterator<kotlin/Nothing>|"];
+                57 [label="Variable declaration: lkonst <iterator>: R|kotlin/collections/Iterator<kotlin/Nothing>|"];
                 subgraph cluster_17 {
                     color=blue
                     58 [label="Enter while loop"];
@@ -183,7 +183,7 @@ digraph smartcastToNothing_kt {
                             65 [label="Access variable R|<local>/<iterator>|"];
                             66 [label="Function call: R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/Nothing|>|()" style="filled" fillcolor=yellow];
                             67 [label="Stub" style="filled" fillcolor=gray];
-                            68 [label="Variable declaration: lval result: R|kotlin/Nothing|" style="filled" fillcolor=gray];
+                            68 [label="Variable declaration: lkonst result: R|kotlin/Nothing|" style="filled" fillcolor=gray];
                             subgraph cluster_21 {
                                 color=blue
                                 69 [label="Enter block" style="filled" fillcolor=gray];
@@ -329,7 +329,7 @@ digraph smartcastToNothing_kt {
                     118 [label="Enter safe call"];
                     119 [label="Access variable R|kotlin/String.length|"];
                     120 [label="Exit safe call"];
-                    121 [label="Variable declaration: lval b: R|kotlin/Int?|"];
+                    121 [label="Variable declaration: lkonst b: R|kotlin/Int?|"];
                     122 [label="Exit block"];
                 }
                 123 [label="Exit when branch result"];
@@ -354,7 +354,7 @@ digraph smartcastToNothing_kt {
                     134 [label="Smart cast: R|<local>/a|"];
                     135 [label="Stub" style="filled" fillcolor=gray];
                     136 [label="Access variable R|kotlin/String.length|" style="filled" fillcolor=gray];
-                    137 [label="Variable declaration: lval b: R|kotlin/Int|" style="filled" fillcolor=gray];
+                    137 [label="Variable declaration: lkonst b: R|kotlin/Int|" style="filled" fillcolor=gray];
                     138 [label="Exit block" style="filled" fillcolor=gray];
                 }
                 139 [label="Exit when branch result" style="filled" fillcolor=gray];

@@ -4,7 +4,7 @@ package foo
 
 
 fun box(): String {
-    val a = ArrayList<Int>();
+    konst a = ArrayList<Int>();
     a.add(1)
     a.add(2)
     a[1] = 100

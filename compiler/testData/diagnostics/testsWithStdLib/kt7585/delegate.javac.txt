@@ -15,7 +15,7 @@ public final class Derived</*0*/ T : kotlin.Any!> : Base, Other {
 
 public final class DerivedWrapper : Wrapper<Derived<*>> {
     public constructor DerivedWrapper(/*0*/ v: Derived<*>)
-    public final override /*1*/ /*fake_override*/ val v: Derived<*>
+    public final override /*1*/ /*fake_override*/ konst v: Derived<*>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -31,7 +31,7 @@ public final class Exotic : Base, Other {
 
 public final class ExoticWrapper : Wrapper<Exotic> {
     public constructor ExoticWrapper(/*0*/ v: Exotic)
-    public final override /*1*/ /*fake_override*/ val v: Exotic
+    public final override /*1*/ /*fake_override*/ konst v: Exotic
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -39,8 +39,8 @@ public final class ExoticWrapper : Wrapper<Exotic> {
 
 public final class My {
     public constructor My(/*0*/ x: kotlin.Int)
-    public final val wrapper: Wrapper<*>!
-    public final val x: kotlin.Int
+    public final konst wrapper: Wrapper<*>!
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -84,7 +84,7 @@ public/*package*/ open class Val</*0*/ T : kotlin.Any!> {
 
 public open class Wrapper</*0*/ out T : Base> {
     public constructor Wrapper</*0*/ out T : Base>(/*0*/ v: T)
-    public final val v: T
+    public final konst v: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

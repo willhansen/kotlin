@@ -8,7 +8,7 @@
  * PRIMARY LINKS: statements, loop-statements, do-while-loop-statement -> paragraph 2 -> sentence 1
  * statements, loop-statements, do-while-loop-statement -> paragraph 1 -> sentence 2
  * NUMBER: 2
- * DESCRIPTION: do-while-loop-statement evaluates the loop condition expression after evaluating the loop body.
+ * DESCRIPTION: do-while-loop-statement ekonstuates the loop condition expression after ekonstuating the loop body.
  */
 
 

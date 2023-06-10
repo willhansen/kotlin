@@ -15,7 +15,7 @@ interface HTMLFormControlsCollection : HTMLCollection {
 };
 
 interface RadioNodeList : NodeList {
-  attribute DOMString value;
+  attribute DOMString konstue;
 };
 interface HTMLOptionsCollection : HTMLCollection {
   // inherits item(), namedItem()
@@ -65,7 +65,7 @@ partial interface Document {
   readonly attribute Element? activeElement;
   boolean hasFocus();
   [CEReactions] attribute DOMString designMode;
-  [CEReactions] boolean execCommand(DOMString commandId, optional boolean showUI = false, optional DOMString value = "");
+  [CEReactions] boolean execCommand(DOMString commandId, optional boolean showUI = false, optional DOMString konstue = "");
   boolean queryCommandEnabled(DOMString commandId);
   boolean queryCommandIndeterm(DOMString commandId);
   boolean queryCommandState(DOMString commandId);
@@ -95,7 +95,7 @@ interface HTMLElement : Element {
   [CEReactions] attribute DOMString accessKey;
   readonly attribute DOMString accessKeyLabel;
   [CEReactions] attribute boolean draggable;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList dropzone;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList dropzone;
   [CEReactions] attribute HTMLMenuElement? contextMenu;
   [CEReactions] attribute boolean spellcheck;
   void forceSpellCheck();
@@ -110,7 +110,7 @@ interface HTMLUnknownElement : HTMLElement { };
 [OverrideBuiltins]
 interface DOMStringMap {
   getter DOMString (DOMString name);
-  [CEReactions] setter void (DOMString name, DOMString value);
+  [CEReactions] setter void (DOMString name, DOMString konstue);
   [CEReactions] deleter void (DOMString name);
 };
 [HTMLConstructor]
@@ -131,12 +131,12 @@ interface HTMLLinkElement : HTMLElement {
   [CEReactions] attribute DOMString? crossOrigin;
   [CEReactions] attribute DOMString rel;
   [CEReactions] attribute RequestDestination as; // (default "")
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList relList;
   [CEReactions] attribute DOMString media;
   [CEReactions] attribute DOMString nonce;
   [CEReactions] attribute DOMString hreflang;
   [CEReactions] attribute DOMString type;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList sizes;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList sizes;
   [CEReactions] attribute DOMString referrerPolicy;
 };
 HTMLLinkElement implements LinkStyle;
@@ -179,7 +179,7 @@ interface HTMLOListElement : HTMLElement {
 interface HTMLUListElement : HTMLElement {};
 [HTMLConstructor]
 interface HTMLLIElement : HTMLElement {
-  [CEReactions] attribute long value;
+  [CEReactions] attribute long konstue;
 };
 [HTMLConstructor]
 interface HTMLDListElement : HTMLElement {};
@@ -191,7 +191,7 @@ interface HTMLAnchorElement : HTMLElement {
   [CEReactions] attribute DOMString download;
   [CEReactions] attribute USVString ping;
   [CEReactions] attribute DOMString rel;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList relList;
   [CEReactions] attribute DOMString hreflang;
   [CEReactions] attribute DOMString type;
 
@@ -202,7 +202,7 @@ interface HTMLAnchorElement : HTMLElement {
 HTMLAnchorElement implements HTMLHyperlinkElementUtils;
 [HTMLConstructor]
 interface HTMLDataElement : HTMLElement {
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 };
 [HTMLConstructor]
 interface HTMLTimeElement : HTMLElement {
@@ -263,7 +263,7 @@ interface HTMLIFrameElement : HTMLElement {
   [CEReactions] attribute USVString src;
   [CEReactions] attribute DOMString srcdoc;
   [CEReactions] attribute DOMString name;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList sandbox;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList sandbox;
   [CEReactions] attribute boolean allowFullscreen;
   [CEReactions] attribute boolean allowUserMedia;
   [CEReactions] attribute DOMString width;
@@ -297,8 +297,8 @@ interface HTMLObjectElement : HTMLElement {
   Document? getSVGDocument();
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -308,7 +308,7 @@ interface HTMLObjectElement : HTMLElement {
 [HTMLConstructor]
 interface HTMLParamElement : HTMLElement {
   [CEReactions] attribute DOMString name;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 };
 [HTMLConstructor]
 interface HTMLVideoElement : HTMLMediaElement {
@@ -511,7 +511,7 @@ interface HTMLAreaElement : HTMLElement {
   [CEReactions] attribute DOMString download;
   [CEReactions] attribute USVString ping;
   [CEReactions] attribute DOMString rel;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList relList;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList relList;
   [CEReactions] attribute DOMString referrerPolicy;
 };
 HTMLAreaElement implements HTMLHyperlinkElementUtils;
@@ -630,17 +630,17 @@ interface HTMLInputElement : HTMLElement {
   [CEReactions] attribute DOMString step;
   [CEReactions] attribute DOMString type;
   [CEReactions] attribute DOMString defaultValue;
-  [CEReactions, TreatNullAs=EmptyString] attribute DOMString value;
-  attribute object? valueAsDate;
-  attribute unrestricted double valueAsNumber;
+  [CEReactions, TreatNullAs=EmptyString] attribute DOMString konstue;
+  attribute object? konstueAsDate;
+  attribute unrestricted double konstueAsNumber;
   [CEReactions] attribute unsigned long width;
 
   void stepUp(optional long n = 1);
   void stepDown(optional long n = 1);
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -667,12 +667,12 @@ interface HTMLButtonElement : HTMLElement {
   [CEReactions] attribute DOMString formTarget;
   [CEReactions] attribute DOMString name;
   [CEReactions] attribute DOMString type;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
   [CEReactions] attribute HTMLMenuElement? menu;
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -703,11 +703,11 @@ interface HTMLSelectElement : HTMLElement {
 
   [SameObject] readonly attribute HTMLCollection selectedOptions;
   attribute long selectedIndex;
-  attribute DOMString value;
+  attribute DOMString konstue;
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -723,14 +723,14 @@ interface HTMLOptGroupElement : HTMLElement {
   [CEReactions] attribute boolean disabled;
   [CEReactions] attribute DOMString label;
 };
-[HTMLConstructor, NamedConstructor=Option(optional DOMString text = "", optional DOMString value, optional boolean defaultSelected = false, optional boolean selected = false)]
+[HTMLConstructor, NamedConstructor=Option(optional DOMString text = "", optional DOMString konstue, optional boolean defaultSelected = false, optional boolean selected = false)]
 interface HTMLOptionElement : HTMLElement {
   [CEReactions] attribute boolean disabled;
   readonly attribute HTMLFormElement? form;
   [CEReactions] attribute DOMString label;
   [CEReactions] attribute boolean defaultSelected;
   attribute boolean selected;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 
   [CEReactions] attribute DOMString text;
   readonly attribute long index;
@@ -755,12 +755,12 @@ interface HTMLTextAreaElement : HTMLElement {
 
   readonly attribute DOMString type;
   [CEReactions] attribute DOMString defaultValue;
-  [CEReactions, TreatNullAs=EmptyString] attribute DOMString value;
+  [CEReactions, TreatNullAs=EmptyString] attribute DOMString konstue;
   readonly attribute unsigned long textLength;
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -787,8 +787,8 @@ interface HTMLKeygenElement : HTMLElement {
   readonly attribute DOMString type;
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -797,17 +797,17 @@ interface HTMLKeygenElement : HTMLElement {
 };
 [HTMLConstructor]
 interface HTMLOutputElement : HTMLElement {
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList htmlFor;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList htmlFor;
   readonly attribute HTMLFormElement? form;
   [CEReactions] attribute DOMString name;
 
   readonly attribute DOMString type;
   [CEReactions] attribute DOMString defaultValue;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 
   readonly attribute boolean willValidate;
-  readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -816,14 +816,14 @@ interface HTMLOutputElement : HTMLElement {
 };
 [HTMLConstructor]
 interface HTMLProgressElement : HTMLElement {
-  [CEReactions] attribute double value;
+  [CEReactions] attribute double konstue;
   [CEReactions] attribute double max;
   readonly attribute double position;
   [SameObject] readonly attribute NodeList labels;
 };
 [HTMLConstructor]
 interface HTMLMeterElement : HTMLElement {
-  [CEReactions] attribute double value;
+  [CEReactions] attribute double konstue;
   [CEReactions] attribute double min;
   [CEReactions] attribute double max;
   [CEReactions] attribute double low;
@@ -842,8 +842,8 @@ interface HTMLFieldSetElement : HTMLElement {
   [SameObject] readonly attribute HTMLCollection elements;
 
   readonly attribute boolean willValidate;
-  [SameObject] readonly attribute ValidityState validity;
-  readonly attribute DOMString validationMessage;
+  [SameObject] readonly attribute ValidityState konstidity;
+  readonly attribute DOMString konstidationMessage;
   boolean checkValidity();
   boolean reportValidity();
   void setCustomValidity(DOMString error);
@@ -859,7 +859,7 @@ enum SelectionMode {
   "preserve", // default
 };
 interface ValidityState {
-  readonly attribute boolean valueMissing;
+  readonly attribute boolean konstueMissing;
   readonly attribute boolean typeMismatch;
   readonly attribute boolean patternMismatch;
   readonly attribute boolean tooLong;
@@ -869,7 +869,7 @@ interface ValidityState {
   readonly attribute boolean stepMismatch;
   readonly attribute boolean badInput;
   readonly attribute boolean customError;
-  readonly attribute boolean valid;
+  readonly attribute boolean konstid;
 };
 [HTMLConstructor]
 interface HTMLDetailsElement : HTMLElement {
@@ -1495,7 +1495,7 @@ interface GlobalEventHandlers {
   attribute OnErrorEventHandler onerror;
   attribute EventHandler onfocus;
   attribute EventHandler oninput;
-  attribute EventHandler oninvalid;
+  attribute EventHandler oninkonstid;
   attribute EventHandler onkeydown;
   attribute EventHandler onkeypress;
   attribute EventHandler onkeyup;
@@ -1571,8 +1571,8 @@ interface WindowOrWorkerGlobalScope {
   // timers
   long setTimeout(TimerHandler handler, optional long timeout = 0, any... arguments);
   void clearTimeout(optional long handle = 0);
-  long setInterval(TimerHandler handler, optional long timeout = 0, any... arguments);
-  void clearInterval(optional long handle = 0);
+  long setInterkonst(TimerHandler handler, optional long timeout = 0, any... arguments);
+  void clearInterkonst(optional long handle = 0);
 
   // ImageBitmap
   Promise<ImageBitmap> createImageBitmap(ImageBitmapSource image, optional ImageBitmapOptions options);
@@ -1870,7 +1870,7 @@ interface Storage {
   readonly attribute unsigned long length;
   DOMString? key(unsigned long index);
   getter DOMString? getItem(DOMString key);
-  setter void setItem(DOMString key, DOMString value);
+  setter void setItem(DOMString key, DOMString konstue);
   deleter void removeItem(DOMString key);
   void clear();
 };
@@ -2076,7 +2076,7 @@ partial interface HTMLParagraphElement {
 };
 partial interface HTMLParamElement {
   [CEReactions] attribute DOMString type;
-  [CEReactions] attribute DOMString valueType;
+  [CEReactions] attribute DOMString konstueType;
 };
 partial interface HTMLPreElement {
   [CEReactions] attribute long width;
@@ -2462,7 +2462,7 @@ interface Element : Node {
 
   [CEReactions] attribute DOMString id;
   [CEReactions] attribute DOMString className;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList classList;
   [CEReactions, Unscopable] attribute DOMString slot;
 
   boolean hasAttributes();
@@ -2470,8 +2470,8 @@ interface Element : Node {
   sequence<DOMString> getAttributeNames();
   DOMString? getAttribute(DOMString qualifiedName);
   DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-  [CEReactions] void setAttribute(DOMString qualifiedName, DOMString value);
-  [CEReactions] void setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
+  [CEReactions] void setAttribute(DOMString qualifiedName, DOMString konstue);
+  [CEReactions] void setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString konstue);
   [CEReactions] void removeAttribute(DOMString qualifiedName);
   [CEReactions] void removeAttributeNS(DOMString? namespace, DOMString localName);
   boolean hasAttribute(DOMString qualifiedName);
@@ -2518,7 +2518,7 @@ interface Attr : Node {
   readonly attribute DOMString? prefix;
   readonly attribute DOMString localName;
   readonly attribute DOMString name;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 
   readonly attribute Element? ownerElement;
 
@@ -2654,7 +2654,7 @@ interface DOMTokenList {
   [CEReactions] boolean toggle(DOMString token, optional boolean force);
   [CEReactions] void replace(DOMString token, DOMString newToken);
   boolean supports(DOMString token);
-  [CEReactions] stringifier attribute DOMString value;
+  [CEReactions] stringifier attribute DOMString konstue;
   iterable<DOMString>;
 };
 [Constructor(DOMString type, optional EventInit eventInitDict),
@@ -2981,7 +2981,7 @@ interface Element : Node {
 
   [CEReactions] attribute DOMString id;
   [CEReactions] attribute DOMString className;
-  [CEReactions, SameObject, PutForwards=value] readonly attribute DOMTokenList classList;
+  [CEReactions, SameObject, PutForwards=konstue] readonly attribute DOMTokenList classList;
   [CEReactions, Unscopable] attribute DOMString slot;
 
   boolean hasAttributes();
@@ -2989,8 +2989,8 @@ interface Element : Node {
   sequence<DOMString> getAttributeNames();
   DOMString? getAttribute(DOMString qualifiedName);
   DOMString? getAttributeNS(DOMString? namespace, DOMString localName);
-  [CEReactions] void setAttribute(DOMString qualifiedName, DOMString value);
-  [CEReactions] void setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString value);
+  [CEReactions] void setAttribute(DOMString qualifiedName, DOMString konstue);
+  [CEReactions] void setAttributeNS(DOMString? namespace, DOMString qualifiedName, DOMString konstue);
   [CEReactions] void removeAttribute(DOMString qualifiedName);
   [CEReactions] void removeAttributeNS(DOMString? namespace, DOMString localName);
   boolean hasAttribute(DOMString qualifiedName);
@@ -3039,7 +3039,7 @@ interface Attr : Node {
   readonly attribute DOMString? prefix;
   readonly attribute DOMString localName;
   readonly attribute DOMString name;
-  [CEReactions] attribute DOMString value;
+  [CEReactions] attribute DOMString konstue;
 
   readonly attribute Element? ownerElement;
 
@@ -3180,7 +3180,7 @@ interface DOMTokenList {
   [CEReactions] boolean toggle(DOMString token, optional boolean force);
   [CEReactions] void replace(DOMString token, DOMString newToken);
   boolean supports(DOMString token);
-  [CEReactions] stringifier attribute DOMString value;
+  [CEReactions] stringifier attribute DOMString konstue;
   iterable<DOMString>;
 };
 // Downloaded from https://dvcs.w3.org/hg/editing/raw-file/tip/editing.html

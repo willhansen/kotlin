@@ -6,29 +6,29 @@ class B1 : A {
     override fun foo() = 10
 }
 
-class B2(val z: Int) : A {
+class B2(konst z: Int) : A {
     override fun foo() = z
 }
 
 
 
 fun f1(b: B1): Int {
-    val o = object : A by b { }
+    konst o = object : A by b { }
     return o.foo()
 }
 
 fun f2(b: B2): Int {
-    val o = object : A by B2(b.z) { }
+    konst o = object : A by B2(b.z) { }
     return o.foo()
 }
 
 fun f3(b: B2, mult: Int): Int {
-    val o = object : A by B2(mult * b.z) { }
+    konst o = object : A by B2(mult * b.z) { }
     return o.foo()
 }
 
 fun f4(b: B1, x: Int, y: Int, z: Int): Int {
-    val o = object : A by b {
+    konst o = object : A by b {
         fun bar() = x + y + z
     }
     return o.foo()

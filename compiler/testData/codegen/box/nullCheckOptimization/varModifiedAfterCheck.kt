@@ -4,7 +4,7 @@ fun implicitCheck(s: String) {}
 
 fun test1() {
     var a = J.foo()
-    val b = a
+    konst b = a
     a = J.bar()
     if (b != null) {
         if (a != null) {
@@ -15,7 +15,7 @@ fun test1() {
 
 fun test2() {
     var a = J.foo()
-    val b = a
+    konst b = a
     if (b != null) {
         a = J.bar()
         if (a != null) {
@@ -26,7 +26,7 @@ fun test2() {
 
 fun test3() {
     var a = J.foo()
-    val b = a
+    konst b = a
     a = J.bar()
     implicitCheck(b)
     if (a != null) {
@@ -36,7 +36,7 @@ fun test3() {
 
 fun test4() {
     var a = J.foo()
-    val b = a
+    konst b = a
     implicitCheck(b)
     a = J.bar()
     if (a != null) {

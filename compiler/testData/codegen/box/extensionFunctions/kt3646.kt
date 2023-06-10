@@ -1,7 +1,7 @@
 fun test(cl: Int.() -> Int):Int = 11.cl()
 
 class Foo {
-    val a = test { this }
+    konst a = test { this }
 }
 
 fun box(): String {

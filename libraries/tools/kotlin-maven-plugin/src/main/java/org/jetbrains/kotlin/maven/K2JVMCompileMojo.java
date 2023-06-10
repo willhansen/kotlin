@@ -101,8 +101,8 @@ public class K2JVMCompileMojo extends KotlinCompileMojoBase<K2JVMCompilerArgumen
     }
 
     private boolean isIncrementalSystemProperty() {
-        String value = System.getProperty("kotlin.incremental");
-        return value != null && value.equals("true");
+        String konstue = System.getProperty("kotlin.incremental");
+        return konstue != null && konstue.equals("true");
     }
 
     @Override

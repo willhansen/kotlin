@@ -32,7 +32,7 @@ import kotlin.collections.HashSet
  * Incremental cache common for JVM and JS, ClassName type aware
  */
 interface IncrementalCacheCommon {
-    val thisWithDependentCaches: Iterable<AbstractIncrementalCache<*>>
+    konst thisWithDependentCaches: Iterable<AbstractIncrementalCache<*>>
     fun classesFqNamesBySources(files: Iterable<File>): Collection<FqName>
     fun getSubtypesOf(className: FqName): Sequence<FqName>
     fun getSupertypesOf(className: FqName): Sequence<FqName>
@@ -54,36 +54,36 @@ abstract class AbstractIncrementalCache<ClassName>(
     icContext: IncrementalCompilationContext,
 ) : BasicMapsOwner(workingDir), IncrementalCacheCommon {
     companion object {
-        private const val CLASS_ATTRIBUTES = "class-attributes"
-        private const val SUBTYPES = "subtypes"
-        private const val SUPERTYPES = "supertypes"
-        private const val CLASS_FQ_NAME_TO_SOURCE = "class-fq-name-to-source"
-        private const val COMPLEMENTARY_FILES = "complementary-files"
+        private const konst CLASS_ATTRIBUTES = "class-attributes"
+        private const konst SUBTYPES = "subtypes"
+        private const konst SUPERTYPES = "supertypes"
+        private const konst CLASS_FQ_NAME_TO_SOURCE = "class-fq-name-to-source"
+        private const konst COMPLEMENTARY_FILES = "complementary-files"
 
         @JvmStatic
-        protected val SOURCE_TO_CLASSES = "source-to-classes"
+        protected konst SOURCE_TO_CLASSES = "source-to-classes"
 
         @JvmStatic
-        protected val DIRTY_OUTPUT_CLASSES = "dirty-output-classes"
+        protected konst DIRTY_OUTPUT_CLASSES = "dirty-output-classes"
     }
 
-    private val dependents = arrayListOf<AbstractIncrementalCache<ClassName>>()
+    private konst dependents = arrayListOf<AbstractIncrementalCache<ClassName>>()
     fun addDependentCache(cache: AbstractIncrementalCache<ClassName>) {
         dependents.add(cache)
     }
 
-    override val thisWithDependentCaches: Iterable<AbstractIncrementalCache<ClassName>> by lazy {
-        val result = arrayListOf(this)
+    override konst thisWithDependentCaches: Iterable<AbstractIncrementalCache<ClassName>> by lazy {
+        konst result = arrayListOf(this)
         result.addAll(dependents)
         result
     }
 
-    internal val classAttributesMap = registerMap(ClassAttributesMap(CLASS_ATTRIBUTES.storageFile, icContext))
-    private val subtypesMap = registerMap(SubtypesMap(SUBTYPES.storageFile, icContext))
-    private val supertypesMap = registerMap(SupertypesMap(SUPERTYPES.storageFile, icContext))
-    protected val classFqNameToSourceMap = registerMap(ClassFqNameToSourceMap(CLASS_FQ_NAME_TO_SOURCE.storageFile, icContext))
-    internal abstract val sourceToClassesMap: AbstractSourceToOutputMap<ClassName>
-    internal abstract val dirtyOutputClassesMap: AbstractDirtyClassesMap<ClassName>
+    internal konst classAttributesMap = registerMap(ClassAttributesMap(CLASS_ATTRIBUTES.storageFile, icContext))
+    private konst subtypesMap = registerMap(SubtypesMap(SUBTYPES.storageFile, icContext))
+    private konst supertypesMap = registerMap(SupertypesMap(SUPERTYPES.storageFile, icContext))
+    protected konst classFqNameToSourceMap = registerMap(ClassFqNameToSourceMap(CLASS_FQ_NAME_TO_SOURCE.storageFile, icContext))
+    internal abstract konst sourceToClassesMap: AbstractSourceToOutputMap<ClassName>
+    internal abstract konst dirtyOutputClassesMap: AbstractDirtyClassesMap<ClassName>
 
     /**
      * A file X is a complementary to a file Y if they contain corresponding expect/actual declarations.
@@ -91,7 +91,7 @@ abstract class AbstractIncrementalCache<ClassName>(
      * about missing parts.
      * TODO: provide a better solution (maintain an index of expect/actual declarations akin to IncrementalPackagePartProvider)
      */
-    private val complementaryFilesMap = registerMap(ComplementarySourceFilesMap(COMPLEMENTARY_FILES.storageFile, icContext))
+    private konst complementaryFilesMap = registerMap(ComplementarySourceFilesMap(COMPLEMENTARY_FILES.storageFile, icContext))
 
     override fun classesFqNamesBySources(files: Iterable<File>): Collection<FqName> =
         files.flatMapTo(HashSet()) { sourceToClassesMap.getFqNames(it) }
@@ -129,17 +129,17 @@ abstract class AbstractIncrementalCache<ClassName>(
      * The `srcFile` argument may be `null` (e.g., if we are processing .class files in jars where source files are not available).
      */
     protected fun addToClassStorage(classProtoData: ClassProtoData, srcFile: File?) {
-        val (proto, nameResolver) = classProtoData
+        konst (proto, nameResolver) = classProtoData
 
-        val supertypes = proto.supertypes(TypeTable(proto.typeTable))
-        val parents = supertypes.map { nameResolver.getClassId(it.className).asSingleFqName() }
+        konst supertypes = proto.supertypes(TypeTable(proto.typeTable))
+        konst parents = supertypes.map { nameResolver.getClassId(it.className).asSingleFqName() }
             .filter { it.asString() != "kotlin.Any" }
             .toSet()
-        val child = nameResolver.getClassId(proto.fqName).asSingleFqName()
+        konst child = nameResolver.getClassId(proto.fqName).asSingleFqName()
 
         parents.forEach { subtypesMap.add(it, child) }
 
-        val removedSupertypes = supertypesMap[child].filter { it !in parents }
+        konst removedSupertypes = supertypesMap[child].filter { it !in parents }
         removedSupertypes.forEach { subtypesMap.removeValues(it, setOf(child)) }
 
         supertypesMap[child] = parents
@@ -150,7 +150,7 @@ abstract class AbstractIncrementalCache<ClassName>(
     protected fun removeAllFromClassStorage(removedClasses: Collection<FqName>, changesCollector: ChangesCollector) {
         if (removedClasses.isEmpty()) return
 
-        val removedFqNames = removedClasses.toSet()
+        konst removedFqNames = removedClasses.toSet()
 
         for (removedClass in removedFqNames) {
             for (affectedClass in withSubtypes(removedClass, thisWithDependentCaches)) {
@@ -159,8 +159,8 @@ abstract class AbstractIncrementalCache<ClassName>(
         }
 
         for (cache in thisWithDependentCaches) {
-            val parentsFqNames = hashSetOf<FqName>()
-            val childrenFqNames = hashSetOf<FqName>()
+            konst parentsFqNames = hashSetOf<FqName>()
+            konst childrenFqNames = hashSetOf<FqName>()
 
             for (removedFqName in removedFqNames) {
                 parentsFqNames.addAll(cache.supertypesMap[removedFqName])
@@ -200,18 +200,18 @@ abstract class AbstractIncrementalCache<ClassName>(
             storage.remove(fqName.asString())
         }
 
-        override fun dumpValue(value: String) = value
+        override fun dumpValue(konstue: String) = konstue
     }
 
     override fun getComplementaryFilesRecursive(dirtyFiles: Collection<File>): Collection<File> {
-        val complementaryFiles = HashSet<File>()
-        val filesQueue = ArrayDeque(dirtyFiles)
+        konst complementaryFiles = HashSet<File>()
+        konst filesQueue = ArrayDeque(dirtyFiles)
 
-        val processedClasses = HashSet<FqName>()
-        val processedFiles = HashSet<File>()
+        konst processedClasses = HashSet<FqName>()
+        konst processedFiles = HashSet<File>()
 
         while (filesQueue.isNotEmpty()) {
-            val file = filesQueue.pollFirst()
+            konst file = filesQueue.pollFirst()
             if (processedFiles.contains(file)) {
                 continue
             }
@@ -219,15 +219,15 @@ abstract class AbstractIncrementalCache<ClassName>(
             complementaryFilesMap[file].forEach {
                 if (complementaryFiles.add(it) && !processedFiles.contains(it)) filesQueue.add(it)
             }
-            val classes2recompile = sourceToClassesMap.getFqNames(file)
+            konst classes2recompile = sourceToClassesMap.getFqNames(file)
             classes2recompile.filter { !processedClasses.contains(it) }.forEach { class2recompile ->
                 processedClasses.add(class2recompile)
-                val sealedClasses = findSealedSupertypes(class2recompile, listOf(this))
-                val allSubtypes = sealedClasses.flatMap { withSubtypes(it, listOf(this)) }.also {
+                konst sealedClasses = findSealedSupertypes(class2recompile, listOf(this))
+                konst allSubtypes = sealedClasses.flatMap { withSubtypes(it, listOf(this)) }.also {
                     // there could be only one sealed class in hierarchy
                     processedClasses.addAll(it)
                 }
-                val files2add = allSubtypes.mapNotNull { classFqNameToSourceMap[it] }.filter { !processedFiles.contains(it) }
+                konst files2add = allSubtypes.mapNotNull { classFqNameToSourceMap[it] }.filter { !processedFiles.contains(it) }
                 filesQueue.addAll(files2add)
             }
 
@@ -243,7 +243,7 @@ abstract class AbstractIncrementalCache<ClassName>(
             complementaryFilesMap.remove(it)
         }
 
-        val actualToExpect = hashMapOf<File, MutableSet<File>>()
+        konst actualToExpect = hashMapOf<File, MutableSet<File>>()
         for ((expect, actuals) in expectActualTracker.expectToActualMap) {
             for (actual in actuals) {
                 actualToExpect.getOrPut(actual) { hashSetOf() }.add(expect)

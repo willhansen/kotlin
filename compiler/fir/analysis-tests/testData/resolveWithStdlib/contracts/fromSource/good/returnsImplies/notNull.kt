@@ -38,7 +38,7 @@ fun test4(x: String?): Any? {
         returns(true) implies (x != null)
     }
 
-    val y = x
+    konst y = x
 
     if(y != null){
         return true

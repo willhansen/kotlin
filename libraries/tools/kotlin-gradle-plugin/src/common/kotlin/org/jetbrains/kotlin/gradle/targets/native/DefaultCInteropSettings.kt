@@ -29,21 +29,21 @@ import java.io.File
 import javax.inject.Inject
 
 abstract class DefaultCInteropSettings @Inject internal constructor(
-    private val params: Params
+    private konst params: Params
 ) : CInteropSettings {
 
     internal data class Params(
-        val name: String,
-        val identifier: CInteropIdentifier,
-        val dependencyConfigurationName: String,
-        val interopProcessingTaskName: String,
-        val services: Services
+        konst name: String,
+        konst identifier: CInteropIdentifier,
+        konst dependencyConfigurationName: String,
+        konst interopProcessingTaskName: String,
+        konst services: Services
     ) {
         open class Services @Inject constructor(
-            val providerFactory: ProviderFactory,
-            val objectFactory: ObjectFactory,
-            val projectLayout: ProjectLayout,
-            val fileOperations: FileOperations,
+            konst providerFactory: ProviderFactory,
+            konst objectFactory: ObjectFactory,
+            konst projectLayout: ProjectLayout,
+            konst fileOperations: FileOperations,
         )
     }
 
@@ -67,49 +67,49 @@ abstract class DefaultCInteropSettings @Inject internal constructor(
 
     override fun getName(): String = params.name
 
-    internal val identifier = params.identifier
+    internal konst identifier = params.identifier
 
     @Deprecated(
         "This configuration is no longer used by the plugin, the property shouldn't be accessed",
         level = DeprecationLevel.ERROR
     )
-    override val dependencyConfigurationName: String
+    override konst dependencyConfigurationName: String
         get() = params.dependencyConfigurationName
 
     override var dependencyFiles: FileCollection = files()
 
-    val interopProcessingTaskName get() = params.interopProcessingTaskName
+    konst interopProcessingTaskName get() = params.interopProcessingTaskName
 
-    val defFileProperty: Property<File> = params.services.objectFactory.property<File>().value(
+    konst defFileProperty: Property<File> = params.services.objectFactory.property<File>().konstue(
         params.services.projectLayout.projectDirectory.file("src/nativeInterop/cinterop/$name.def").asFile
     )
 
     var defFile: File
         get() = defFileProperty.get()
-        set(value) {
-            defFileProperty.set(value)
+        set(konstue) {
+            defFileProperty.set(konstue)
         }
 
     var packageName: String?
         get() = _packageNameProp.orNull
-        set(value) {
-            _packageNameProp.set(value)
+        set(konstue) {
+            _packageNameProp.set(konstue)
         }
 
-    internal val _packageNameProp: Property<String> = params.services.objectFactory.property(String::class.java)
+    internal konst _packageNameProp: Property<String> = params.services.objectFactory.property(String::class.java)
 
-    val compilerOpts = mutableListOf<String>()
-    val linkerOpts = mutableListOf<String>()
+    konst compilerOpts = mutableListOf<String>()
+    konst linkerOpts = mutableListOf<String>()
     var extraOpts: List<String>
         get() = _extraOptsProp.get()
-        set(value) {
+        set(konstue) {
             _extraOptsProp = params.services.objectFactory.listProperty(String::class.java)
-            extraOpts(value)
+            extraOpts(konstue)
         }
 
     internal var _extraOptsProp: ListProperty<String> = params.services.objectFactory.listProperty(String::class.java)
 
-    val includeDirs = DefaultIncludeDirectories()
+    konst includeDirs = DefaultIncludeDirectories()
     var headers: FileCollection = files()
 
     // DSL methods.
@@ -118,8 +118,8 @@ abstract class DefaultCInteropSettings @Inject internal constructor(
         defFileProperty.set(params.services.fileOperations.file(file))
     }
 
-    override fun packageName(value: String) {
-        _packageNameProp.set(value)
+    override fun packageName(konstue: String) {
+        _packageNameProp.set(konstue)
     }
 
     override fun header(file: Any) = headers(file)
@@ -128,30 +128,30 @@ abstract class DefaultCInteropSettings @Inject internal constructor(
         headers += files
     }
 
-    override fun includeDirs(vararg values: Any) = includeDirs.allHeaders(values.toList())
+    override fun includeDirs(vararg konstues: Any) = includeDirs.allHeaders(konstues.toList())
     override fun includeDirs(action: Action<IncludeDirectories>) = includeDirs { action.execute(this) }
     override fun includeDirs(configure: IncludeDirectories.() -> Unit) = includeDirs.configure()
 
-    override fun compilerOpts(vararg values: String) = compilerOpts(values.toList())
-    override fun compilerOpts(values: List<String>) {
-        compilerOpts.addAll(values)
+    override fun compilerOpts(vararg konstues: String) = compilerOpts(konstues.toList())
+    override fun compilerOpts(konstues: List<String>) {
+        compilerOpts.addAll(konstues)
     }
 
-    override fun linkerOpts(vararg values: String) = linkerOpts(values.toList())
-    override fun linkerOpts(values: List<String>) {
-        linkerOpts.addAll(values)
+    override fun linkerOpts(vararg konstues: String) = linkerOpts(konstues.toList())
+    override fun linkerOpts(konstues: List<String>) {
+        linkerOpts.addAll(konstues)
     }
 
-    override fun extraOpts(vararg values: Any) = extraOpts(values.toList())
-    override fun extraOpts(values: List<Any>) {
-        _extraOptsProp.addAll(params.services.providerFactory.provider { values.map { it.toString() } })
+    override fun extraOpts(vararg konstues: Any) = extraOpts(konstues.toList())
+    override fun extraOpts(konstues: List<Any>) {
+        _extraOptsProp.addAll(params.services.providerFactory.provider { konstues.map { it.toString() } })
     }
 }
 
-internal class DefaultCInteropSettingsFactory(private val compilation: KotlinCompilation<*>) :
+internal class DefaultCInteropSettingsFactory(private konst compilation: KotlinCompilation<*>) :
     NamedDomainObjectFactory<DefaultCInteropSettings> {
     override fun create(name: String): DefaultCInteropSettings {
-        val params = DefaultCInteropSettings.Params(
+        konst params = DefaultCInteropSettings.Params(
             name = name,
             identifier = CInteropIdentifier(CInteropIdentifier.Scope.create(compilation), name),
             dependencyConfigurationName = compilation.disambiguateName("${name.capitalizeAsciiOnly()}CInterop"),
@@ -168,10 +168,10 @@ internal class DefaultCInteropSettingsFactory(private val compilation: KotlinCom
     }
 }
 
-internal class GradleKpmDefaultCInteropSettingsFactory(private val compilation: GradleKpmNativeVariantCompilationData) :
+internal class GradleKpmDefaultCInteropSettingsFactory(private konst compilation: GradleKpmNativeVariantCompilationData) :
     NamedDomainObjectFactory<DefaultCInteropSettings> {
     override fun create(name: String): DefaultCInteropSettings {
-        val params = DefaultCInteropSettings.Params(
+        konst params = DefaultCInteropSettings.Params(
             name = name,
             identifier = CInteropIdentifier(CInteropIdentifier.Scope.create(compilation), name),
             dependencyConfigurationName = compilation.owner.disambiguateName("${name.capitalizeAsciiOnly()}CInterop"),

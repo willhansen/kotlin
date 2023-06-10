@@ -69,22 +69,22 @@ import org.jetbrains.kotlin.analysis.api.fir.signatures.KtFirVariableLikeSubstit
  * Maps FirElement to KtSymbol & ConeType to KtType, thread safe
  */
 internal class KtSymbolByFirBuilder constructor(
-    private val project: Project,
-    private val analysisSession: KtFirAnalysisSession,
-    val token: KtLifetimeToken,
+    private konst project: Project,
+    private konst analysisSession: KtFirAnalysisSession,
+    konst token: KtLifetimeToken,
 ) {
-    private val firResolveSession: LLFirResolveSession = analysisSession.firResolveSession
-    private val firProvider get() = firResolveSession.useSiteFirSession.symbolProvider
-    val rootSession: FirSession = firResolveSession.useSiteFirSession
+    private konst firResolveSession: LLFirResolveSession = analysisSession.firResolveSession
+    private konst firProvider get() = firResolveSession.useSiteFirSession.symbolProvider
+    konst rootSession: FirSession = firResolveSession.useSiteFirSession
 
-    private val symbolsCache = BuilderCache<FirBasedSymbol<*>, KtSymbol>()
+    private konst symbolsCache = BuilderCache<FirBasedSymbol<*>, KtSymbol>()
 
-    val classifierBuilder = ClassifierSymbolBuilder()
-    val functionLikeBuilder = FunctionLikeSymbolBuilder()
-    val variableLikeBuilder = VariableLikeSymbolBuilder()
-    val callableBuilder = CallableSymbolBuilder()
-    val anonymousInitializerBuilder = AnonymousInitializerBuilder()
-    val typeBuilder = TypeBuilder()
+    konst classifierBuilder = ClassifierSymbolBuilder()
+    konst functionLikeBuilder = FunctionLikeSymbolBuilder()
+    konst variableLikeBuilder = VariableLikeSymbolBuilder()
+    konst callableBuilder = CallableSymbolBuilder()
+    konst anonymousInitializerBuilder = AnonymousInitializerBuilder()
+    konst typeBuilder = TypeBuilder()
 
     fun buildSymbol(fir: FirDeclaration): KtSymbol =
         buildSymbol(fir.symbol)
@@ -107,10 +107,10 @@ internal class KtSymbolByFirBuilder constructor(
 
     fun buildScriptSymbol(firSymbol: FirScriptSymbol) = KtFirScriptSymbol(firSymbol, analysisSession)
 
-    private val packageProvider: KotlinPackageProvider get() = analysisSession.useSitePackageProvider
+    private konst packageProvider: KotlinPackageProvider get() = analysisSession.useSitePackageProvider
 
     fun createPackageSymbolIfOneExists(packageFqName: FqName): KtFirPackageSymbol? {
-        val exists = packageProvider.doesPackageExist(packageFqName, analysisSession.targetPlatform)
+        konst exists = packageProvider.doesPackageExist(packageFqName, analysisSession.targetPlatform)
         if (!exists) {
             return null
         }
@@ -166,17 +166,17 @@ internal class KtSymbolByFirBuilder constructor(
         }
 
         fun buildTypeParameterSymbolByLookupTag(lookupTag: ConeTypeParameterLookupTag): KtTypeParameterSymbol? {
-            val firTypeParameterSymbol = firProvider.getSymbolByLookupTag(lookupTag) as? FirTypeParameterSymbol ?: return null
+            konst firTypeParameterSymbol = firProvider.getSymbolByLookupTag(lookupTag) as? FirTypeParameterSymbol ?: return null
             return buildTypeParameterSymbol(firTypeParameterSymbol)
         }
 
         fun buildClassLikeSymbolByClassId(classId: ClassId): KtClassLikeSymbol? {
-            val firClassLikeSymbol = firProvider.getClassLikeSymbolByClassId(classId) ?: return null
+            konst firClassLikeSymbol = firProvider.getClassLikeSymbolByClassId(classId) ?: return null
             return buildClassLikeSymbol(firClassLikeSymbol)
         }
 
         fun buildClassLikeSymbolByLookupTag(lookupTag: ConeClassLikeLookupTag): KtClassLikeSymbol? {
-            val firClassLikeSymbol = firProvider.getSymbolByLookupTag(lookupTag) ?: return null
+            konst firClassLikeSymbol = firProvider.getSymbolByLookupTag(lookupTag) ?: return null
             return buildClassLikeSymbol(firClassLikeSymbol)
         }
     }
@@ -231,8 +231,8 @@ internal class KtSymbolByFirBuilder constructor(
         }
 
         fun buildConstructorSymbol(firSymbol: FirConstructorSymbol): KtFirConstructorSymbol {
-            val originalFirSymbol = firSymbol.fir.originalConstructorIfTypeAlias?.symbol ?: firSymbol
-            val unwrapped = originalFirSymbol.originalIfFakeOverride() ?: originalFirSymbol
+            konst originalFirSymbol = firSymbol.fir.originalConstructorIfTypeAlias?.symbol ?: firSymbol
+            konst unwrapped = originalFirSymbol.originalIfFakeOverride() ?: originalFirSymbol
             return symbolsCache.cache(unwrapped) {
                 KtFirConstructorSymbol(unwrapped, analysisSession)
             }
@@ -343,7 +343,7 @@ internal class KtSymbolByFirBuilder constructor(
         }
 
         fun buildBackingFieldSymbolByProperty(firSymbol: FirPropertySymbol): KtFirBackingFieldSymbol {
-            val backingFieldSymbol = firSymbol.backingFieldSymbol
+            konst backingFieldSymbol = firSymbol.backingFieldSymbol
                 ?: error("FirProperty backingField is null")
             return buildBackingFieldSymbol(backingFieldSymbol)
         }
@@ -427,7 +427,7 @@ internal class KtSymbolByFirBuilder constructor(
                     }
                 }
                 is ConeTypeParameterType -> KtFirTypeParameterType(coneType, this@KtSymbolByFirBuilder)
-                is ConeErrorType -> when (val diagnostic = coneType.diagnostic) {
+                is ConeErrorType -> when (konst diagnostic = coneType.diagnostic) {
                     is ConeUnresolvedError, is ConeUnmatchedTypeArgumentsError ->
                         KtFirClassErrorType(coneType, diagnostic, this@KtSymbolByFirBuilder)
                     else -> KtFirTypeErrorType(coneType, this@KtSymbolByFirBuilder)
@@ -441,16 +441,16 @@ internal class KtSymbolByFirBuilder constructor(
                 is ConeIntegerConstantOperatorType -> buildKtType(coneType.getApproximatedType())
                 is ConeStubTypeForChainInference -> {
                     // TODO this is a temporary hack to prevent FIR IDE from crashing on builder inference, see KT-50916
-                    val typeVariable = coneType.constructor.variable as? ConeTypeParameterBasedTypeVariable
-                    val typeParameterSymbol = typeVariable?.typeParameterSymbol ?: throwUnexpectedElementError(coneType)
-                    val coneTypeParameterType = (typeParameterSymbol.toConeType() as ConeTypeParameterType)
+                    konst typeVariable = coneType.constructor.variable as? ConeTypeParameterBasedTypeVariable
+                    konst typeParameterSymbol = typeVariable?.typeParameterSymbol ?: throwUnexpectedElementError(coneType)
+                    konst coneTypeParameterType = (typeParameterSymbol.toConeType() as ConeTypeParameterType)
                         .withNullability(coneType.nullability, rootSession.typeContext)
 
                     KtFirTypeParameterType(coneTypeParameterType, this@KtSymbolByFirBuilder)
                 }
 
                 is ConeTypeVariableType -> {
-                    val diagnostic = when ( val typeParameter = coneType.lookupTag.originalTypeParameter) {
+                    konst diagnostic = when ( konst typeParameter = coneType.lookupTag.originalTypeParameter) {
                         null -> ConeSimpleDiagnostic("Cannot infer parameter type for ${coneType.lookupTag.debugName}")
                         else -> ConeCannotInferTypeParameterType((typeParameter as ConeTypeParameterLookupTag).typeParameterSymbol)
                     }
@@ -522,10 +522,10 @@ internal class KtSymbolByFirBuilder constructor(
      * @return An unsubstituted declaration ([originalForSubstitutionOverride]]) if [this] is a use-site substitution override.
      */
     private inline fun <reified T : FirCallableDeclaration> T.unwrapUseSiteSubstitutionOverride(): T? {
-        val originalDeclaration = originalForSubstitutionOverride ?: return null
+        konst originalDeclaration = originalForSubstitutionOverride ?: return null
 
-        val containingClass = getContainingMemberOrSelf().getContainingClass(rootSession) ?: return null
-        val originalContainingClass = originalDeclaration.getContainingMemberOrSelf().getContainingClass(rootSession) ?: return null
+        konst containingClass = getContainingMemberOrSelf().getContainingClass(rootSession) ?: return null
+        konst originalContainingClass = originalDeclaration.getContainingMemberOrSelf().getContainingClass(rootSession) ?: return null
 
         // If substitution override does not change the containing class of the FIR declaration,
         // it is a use-site substitution override
@@ -555,10 +555,10 @@ internal class KtSymbolByFirBuilder constructor(
      * in signature; `null` otherwise.
      */
     private inline fun <reified T : FirCallableDeclaration> T.unwrapInheritanceSubstitutionOverrideIfNeeded(): T? {
-        val containingClass = getContainingClass(rootSession) ?: return null
-        val originalDeclaration = originalForSubstitutionOverride ?: return null
+        konst containingClass = getContainingClass(rootSession) ?: return null
+        konst originalDeclaration = originalForSubstitutionOverride ?: return null
 
-        val allowedTypeParameters = buildSet {
+        konst allowedTypeParameters = buildSet {
             // declaration's own parameters
             originalDeclaration.typeParameters.mapTo(this) { it.symbol.toLookupTag() }
 
@@ -568,7 +568,7 @@ internal class KtSymbolByFirBuilder constructor(
             }
         }
 
-        val usedTypeParameters = collectReferencedTypeParameters(originalDeclaration)
+        konst usedTypeParameters = collectReferencedTypeParameters(originalDeclaration)
 
         return if (allowedTypeParameters.containsAll(usedTypeParameters)) {
             originalDeclaration
@@ -605,7 +605,7 @@ internal class KtSymbolByFirBuilder constructor(
                 returns() implies requirement
             }
             require(requirement) {
-                val renderedSymbol = FirRenderer.withResolvePhase().renderElementWithTypeAsString(firSymbol.fir)
+                konst renderedSymbol = FirRenderer.withResolvePhase().renderElementWithTypeAsString(firSymbol.fir)
                 "Cannot build ${S::class.simpleName} for $renderedSymbol}"
             }
         }
@@ -614,12 +614,12 @@ internal class KtSymbolByFirBuilder constructor(
 
 
 private class BuilderCache<From, To : KtSymbol> {
-    private val cache = ContainerUtil.createConcurrentWeakKeySoftValueMap<From, To>()
+    private konst cache = ContainerUtil.createConcurrentWeakKeySoftValueMap<From, To>()
 
     inline fun <reified S : To> cache(key: From, calculation: () -> S): S {
-        val value = cache.getOrPut(key, calculation)
-        return value as? S
-            ?: error("Cannot cast ${value::class} to ${S::class}\n${value}")
+        konst konstue = cache.getOrPut(key, calculation)
+        return konstue as? S
+            ?: error("Cannot cast ${konstue::class} to ${S::class}\n${konstue}")
     }
 }
 
@@ -633,7 +633,7 @@ internal fun FirBasedSymbol<*>.buildSymbol(builder: KtSymbolByFirBuilder): KtSym
     builder.buildSymbol(this)
 
 private fun collectReferencedTypeParameters(declaration: FirCallableDeclaration): Set<ConeTypeParameterLookupTag> {
-    val allUsedTypeParameters = mutableSetOf<ConeTypeParameterLookupTag>()
+    konst allUsedTypeParameters = mutableSetOf<ConeTypeParameterLookupTag>()
 
     declaration.accept(object : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
@@ -644,7 +644,7 @@ private fun collectReferencedTypeParameters(declaration: FirCallableDeclaration)
             simpleFunction.typeParameters.forEach { it.accept(this) }
 
             simpleFunction.receiverParameter?.accept(this)
-            simpleFunction.valueParameters.forEach { it.returnTypeRef.accept(this) }
+            simpleFunction.konstueParameters.forEach { it.returnTypeRef.accept(this) }
             simpleFunction.returnTypeRef.accept(this)
         }
 
@@ -666,7 +666,7 @@ private fun collectReferencedTypeParameters(declaration: FirCallableDeclaration)
         }
 
         private fun handleTypeRef(resolvedTypeRef: FirResolvedTypeRef) {
-            val resolvedType = resolvedTypeRef.type
+            konst resolvedType = resolvedTypeRef.type
 
             resolvedType.forEachType {
                 if (it is ConeTypeParameterType) {

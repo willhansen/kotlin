@@ -6,7 +6,7 @@ open class B: A()
 open class A
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     if (c !is A) return "FAIL"
 

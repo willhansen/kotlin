@@ -26,19 +26,19 @@ import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 
 class SyntheticJavaClassDescriptor(
-    private val outerContext: LazyJavaResolverContext,
+    private konst outerContext: LazyJavaResolverContext,
     name: Name,
-    private val outerClass: ClassDescriptor,
-    private val classKind: ClassKind,
-    private val modality: Modality,
-    private val visibility: DescriptorVisibility,
-    private val isInner: Boolean,
-    private val isRecord: Boolean,
-    override val annotations: Annotations,
-    private val declaredTypeParameters: List<TypeParameterDescriptor>,
-    private val sealedSubclasses: Collection<ClassDescriptor>,
+    private konst outerClass: ClassDescriptor,
+    private konst classKind: ClassKind,
+    private konst modality: Modality,
+    private konst visibility: DescriptorVisibility,
+    private konst isInner: Boolean,
+    private konst isRecord: Boolean,
+    override konst annotations: Annotations,
+    private konst declaredTypeParameters: List<TypeParameterDescriptor>,
+    private konst sealedSubclasses: Collection<ClassDescriptor>,
     supertypes: List<KotlinType>,
-    val attributes: Map<String, Any?>
+    konst attributes: Map<String, Any?>
 ) : AbstractClassDescriptor(
     outerContext.storageManager,
     name
@@ -46,12 +46,12 @@ class SyntheticJavaClassDescriptor(
 
     companion object {
         @JvmStatic
-        private val PUBLIC_METHOD_NAMES_IN_OBJECT = setOf("equals", "hashCode", "getClass", "wait", "notify", "notifyAll", "toString")
+        private konst PUBLIC_METHOD_NAMES_IN_OBJECT = setOf("equals", "hashCode", "getClass", "wait", "notify", "notifyAll", "toString")
     }
 
-    private val jClass = FakeJavaClass()
+    private konst jClass = FakeJavaClass()
 
-    private val c: LazyJavaResolverContext = outerContext.childForClassOrPackage(this)
+    private konst c: LazyJavaResolverContext = outerContext.childForClassOrPackage(this)
 
     override fun getKind(): ClassKind = classKind
     override fun getModality(): Modality = modality
@@ -67,13 +67,13 @@ class SyntheticJavaClassDescriptor(
     override fun isFun() = false
     override fun isValue() = false
 
-    private val typeConstructor = ClassTypeConstructorImpl(this, declaredTypeParameters, supertypes, c.storageManager)
+    private konst typeConstructor = ClassTypeConstructorImpl(this, declaredTypeParameters, supertypes, c.storageManager)
     override fun getTypeConstructor(): TypeConstructor = typeConstructor
 
-    private val unsubstitutedMemberScope =
+    private konst unsubstitutedMemberScope =
         LazyJavaClassMemberScope(c, this, jClass, skipRefinement = true)
 
-    private val scopeHolder =
+    private konst scopeHolder =
         ScopesHolderForClass.create(this, c.storageManager, c.components.kotlinTypeChecker.kotlinTypeRefiner) {
             LazyJavaClassMemberScope(
                 c, this, jClass,
@@ -84,10 +84,10 @@ class SyntheticJavaClassDescriptor(
 
     override fun getUnsubstitutedMemberScope(kotlinTypeRefiner: KotlinTypeRefiner) = scopeHolder.getScope(kotlinTypeRefiner)
 
-    private val innerClassesScope = InnerClassesScopeWrapper(unsubstitutedMemberScope)
+    private konst innerClassesScope = InnerClassesScopeWrapper(unsubstitutedMemberScope)
     override fun getUnsubstitutedInnerClassesScope(): MemberScope = innerClassesScope
 
-    private val staticScope = LazyJavaStaticClassScope(c, jClass, this)
+    private konst staticScope = LazyJavaStaticClassScope(c, jClass, this)
     override fun getStaticScope(): MemberScope = staticScope
 
     override fun getUnsubstitutedPrimaryConstructor(): ClassConstructorDescriptor? = null
@@ -142,7 +142,7 @@ class SyntheticJavaClassDescriptor(
         return outerClass
     }
 
-    private val sourceElement = c.components.sourceElementFactory.source(jClass)
+    private konst sourceElement = c.components.sourceElementFactory.source(jClass)
 
     override fun getSource(): SourceElement = sourceElement
 
@@ -151,59 +151,59 @@ class SyntheticJavaClassDescriptor(
     override fun toString() = "Lazy Java class ${this.fqNameUnsafe}"
 
     private inner class FakeJavaClass : JavaClass {
-        override val name: Name
+        override konst name: Name
             get() = this@SyntheticJavaClassDescriptor.name
-        override val isFromSource: Boolean
+        override konst isFromSource: Boolean
             get() = false
-        override val annotations: Collection<JavaAnnotation>
+        override konst annotations: Collection<JavaAnnotation>
             get() = emptyList()
-        override val isDeprecatedInJavaDoc: Boolean
+        override konst isDeprecatedInJavaDoc: Boolean
             get() = false
 
         override fun findAnnotation(fqName: FqName): JavaAnnotation? = null
 
-        override val isAbstract: Boolean
+        override konst isAbstract: Boolean
             get() = modality == Modality.ABSTRACT
-        override val isStatic: Boolean
+        override konst isStatic: Boolean
             get() = !isInner
-        override val isFinal: Boolean
+        override konst isFinal: Boolean
             get() = modality == Modality.FINAL
-        override val visibility: Visibility
+        override konst visibility: Visibility
             get() = this@SyntheticJavaClassDescriptor.visibility.delegate
-        override val typeParameters: List<JavaTypeParameter>
+        override konst typeParameters: List<JavaTypeParameter>
             get() = emptyList()
-        override val fqName: FqName
+        override konst fqName: FqName
             get() = this@SyntheticJavaClassDescriptor.fqNameSafe
-        override val supertypes: Collection<JavaClassifierType>
+        override konst supertypes: Collection<JavaClassifierType>
             get() = emptyList()
-        override val innerClassNames: Collection<Name>
+        override konst innerClassNames: Collection<Name>
             get() = emptyList()
 
         override fun findInnerClass(name: Name): JavaClass? = null
 
-        override val outerClass: JavaClass?
+        override konst outerClass: JavaClass?
             get() = null
-        override val isInterface: Boolean
+        override konst isInterface: Boolean
             get() = classKind == ClassKind.INTERFACE
-        override val isAnnotationType: Boolean
+        override konst isAnnotationType: Boolean
             get() = classKind == ClassKind.ANNOTATION_CLASS
-        override val isEnum: Boolean
+        override konst isEnum: Boolean
             get() = classKind == ClassKind.ENUM_CLASS
-        override val isRecord: Boolean
+        override konst isRecord: Boolean
             get() = this@SyntheticJavaClassDescriptor.isRecord
-        override val isSealed: Boolean
+        override konst isSealed: Boolean
             get() = modality == Modality.SEALED
-        override val permittedTypes: Collection<JavaClassifierType>
+        override konst permittedTypes: Collection<JavaClassifierType>
             get() = emptyList()
-        override val lightClassOriginKind: LightClassOriginKind?
+        override konst lightClassOriginKind: LightClassOriginKind?
             get() = null
-        override val methods: Collection<JavaMethod>
+        override konst methods: Collection<JavaMethod>
             get() = emptyList()
-        override val fields: Collection<JavaField>
+        override konst fields: Collection<JavaField>
             get() = emptyList()
-        override val constructors: Collection<JavaConstructor>
+        override konst constructors: Collection<JavaConstructor>
             get() = emptyList()
-        override val recordComponents: Collection<JavaRecordComponent>
+        override konst recordComponents: Collection<JavaRecordComponent>
             get() = emptyList()
 
         override fun hasDefaultConstructor(): Boolean = false

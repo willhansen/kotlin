@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.ir.declarations
 
 import org.jetbrains.kotlin.ir.util.IdSignature
 
-open class StageController(open val currentStage: Int = 0) {
+open class StageController(open konst currentStage: Int = 0) {
     open fun <T> restrictTo(declaration: IrDeclaration, fn: () -> T): T = fn()
 
     open fun <T> withInitialIr(block: () -> T): T = block()
@@ -15,7 +15,7 @@ open class StageController(open val currentStage: Int = 0) {
     // Used in JS IC. Declarations created during lowerings need meaningful signatures.
     open fun createSignature(parentSignature: IdSignature): IdSignature? = null
 
-    open val currentDeclaration: IrDeclaration? get() = null
+    open konst currentDeclaration: IrDeclaration? get() = null
 }
 
 interface IdSignatureRetriever {

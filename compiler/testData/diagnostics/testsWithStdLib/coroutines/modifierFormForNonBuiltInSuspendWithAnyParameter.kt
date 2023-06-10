@@ -36,7 +36,7 @@ fun bar() {
 
     suspend<Nothing?>(null)
 
-    val w: (Any?) -> Any? = ::suspend
+    konst w: (Any?) -> Any? = ::suspend
 
     A().<!MODIFIER_FORM_FOR_NON_BUILT_IN_SUSPEND!>suspend<!> {
         println()

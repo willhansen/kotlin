@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import java.io.File
 import kotlin.test.assertTrue
 
-val androidSdk: String? = System.getProperty("android.sdk")?.replace("\\", "/")
+konst androidSdk: String? = System.getProperty("android.sdk")?.replace("\\", "/")
 
 fun assertAndroidSdkAvailable() {
     assertTrue(androidSdk?.let { root -> File(root).exists() } ?: false,
@@ -17,7 +17,7 @@ fun assertAndroidSdkAvailable() {
 }
 
 fun setAndroidSdkDirProperty(project: Project) {
-    val localPropertiesFile = File(project.rootDir.canonicalPath).resolve("local.properties")
+    konst localPropertiesFile = File(project.rootDir.canonicalPath).resolve("local.properties")
     if (!localPropertiesFile.exists()) {
         localPropertiesFile.createNewFile()
     }

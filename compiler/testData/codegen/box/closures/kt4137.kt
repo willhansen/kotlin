@@ -1,4 +1,4 @@
-open class A(val s: Int) {
+open class A(konst s: Int) {
 
 }
 

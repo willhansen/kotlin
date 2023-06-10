@@ -34,7 +34,7 @@ import org.jetbrains.kotlin.synthetic.SyntheticJavaPropertyDescriptor
 class UnsupportedSyntheticCallableReferenceChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         // TODO: support references to synthetic Java extension properties (KT-8575)
-        val callableReferenceExpression = resolvedCall.call.extractCallableReferenceExpression() ?: return
+        konst callableReferenceExpression = resolvedCall.call.extractCallableReferenceExpression() ?: return
 
         // We allow resolution of top-level callable references to synthetic Java extension properties in the delegate position. See KT-47299
         if (callableReferenceExpression.unwrapParenthesesLabelsAndAnnotationsDeeply() is KtPropertyDelegate) return

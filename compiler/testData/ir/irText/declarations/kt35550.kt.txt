@@ -1,5 +1,5 @@
 interface I {
-  val <T : Any?> T.id: T
+  konst <T : Any?> T.id: T
     get(): T {
       return <this>
     }
@@ -13,8 +13,8 @@ class A : I {
 
   }
 
-  private /* final field */ val $$delegate_0: I = i
-  override val <T : Any?> T.id: T
+  private /* final field */ konst $$delegate_0: I = i
+  override konst <T : Any?> T.id: T
     override get(): T {
       return (<this>.#$$delegate_0, <this>).<get-id><T>()
     }

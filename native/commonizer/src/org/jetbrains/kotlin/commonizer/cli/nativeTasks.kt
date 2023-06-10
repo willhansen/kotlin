@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.konan.library.KONAN_DISTRIBUTION_PLATFORM_LIBS_DIR
 import java.io.File
 
 internal class NativeDistributionListTargets(options: Collection<Option<*>>) : Task(options) {
-    override val category get() = Category.INFORMATIONAL
+    override konst category get() = Category.INFORMATIONAL
 
     override fun execute(logPrefix: String) {
-        val distributionPath = getMandatory<File, NativeDistributionOptionType>()
+        konst distributionPath = getMandatory<File, NativeDistributionOptionType>()
 
-        val targets = distributionPath.resolve(KONAN_DISTRIBUTION_KLIB_DIR)
+        konst targets = distributionPath.resolve(KONAN_DISTRIBUTION_KLIB_DIR)
             .resolve(KONAN_DISTRIBUTION_PLATFORM_LIBS_DIR)
             .list()
             ?.sorted()
@@ -42,28 +42,28 @@ internal class NativeDistributionListTargets(options: Collection<Option<*>>) : T
 }
 
 internal class NativeKlibCommonize(options: Collection<Option<*>>) : Task(options) {
-    override val category: Category = Category.COMMONIZATION
+    override konst category: Category = Category.COMMONIZATION
 
     override fun execute(logPrefix: String) {
-        val distribution = KonanDistribution(getMandatory<File, NativeDistributionOptionType>())
-        val destination = getMandatory<File, OutputOptionType>()
-        val targetLibraries = getMandatory<List<File>, InputLibrariesOptionType>()
-        val dependencyLibraries = getOptional<List<CommonizerDependency>, DependencyLibrariesOptionType>().orEmpty()
-        val outputTargets = getMandatory<Set<SharedCommonizerTarget>, OutputCommonizerTargetsOptionType>()
-        val statsType = getOptional<StatsType, StatsTypeOptionType> { it == "log-stats" } ?: StatsType.NONE
-        val logLevel = getOptional<CommonizerLogLevel, LogLevelOptionType>() ?: CommonizerLogLevel.Quiet
+        konst distribution = KonanDistribution(getMandatory<File, NativeDistributionOptionType>())
+        konst destination = getMandatory<File, OutputOptionType>()
+        konst targetLibraries = getMandatory<List<File>, InputLibrariesOptionType>()
+        konst dependencyLibraries = getOptional<List<CommonizerDependency>, DependencyLibrariesOptionType>().orEmpty()
+        konst outputTargets = getMandatory<Set<SharedCommonizerTarget>, OutputCommonizerTargetsOptionType>()
+        konst statsType = getOptional<StatsType, StatsTypeOptionType> { it == "log-stats" } ?: StatsType.NONE
+        konst logLevel = getOptional<CommonizerLogLevel, LogLevelOptionType>() ?: CommonizerLogLevel.Quiet
 
 
-        val konanTargets = outputTargets.konanTargets
-        val commonizerTargets = konanTargets.map(::CommonizerTarget)
-        val settings = getSettings()
+        konst konanTargets = outputTargets.konanTargets
+        konst commonizerTargets = konanTargets.map(::CommonizerTarget)
+        konst settings = getSettings()
 
-        val logger = CliLoggerAdapter(logLevel, 2)
-        val libraryLoader = DefaultNativeLibraryLoader(logger)
-        val statsCollector = StatsCollector(statsType, commonizerTargets)
-        val repository = FilesRepository(targetLibraries.toSet(), libraryLoader)
+        konst logger = CliLoggerAdapter(logLevel, 2)
+        konst libraryLoader = DefaultNativeLibraryLoader(logger)
+        konst statsCollector = StatsCollector(statsType, commonizerTargets)
+        konst repository = FilesRepository(targetLibraries.toSet(), libraryLoader)
 
-        val resultsConsumer = buildResultsConsumer {
+        konst resultsConsumer = buildResultsConsumer {
             this add ModuleSerializer(destination)
         }
 
@@ -83,28 +83,28 @@ internal class NativeKlibCommonize(options: Collection<Option<*>>) : Task(option
 }
 
 internal class NativeDistributionCommonize(options: Collection<Option<*>>) : Task(options) {
-    override val category get() = Category.COMMONIZATION
+    override konst category get() = Category.COMMONIZATION
 
     override fun execute(logPrefix: String) {
-        val distribution = KonanDistribution(getMandatory<File, NativeDistributionOptionType>())
-        val destination = getMandatory<File, OutputOptionType>()
+        konst distribution = KonanDistribution(getMandatory<File, NativeDistributionOptionType>())
+        konst destination = getMandatory<File, OutputOptionType>()
 
-        val outputTargets = getMandatory<Set<SharedCommonizerTarget>, OutputCommonizerTargetsOptionType>()
+        konst outputTargets = getMandatory<Set<SharedCommonizerTarget>, OutputCommonizerTargetsOptionType>()
 
-        val statsType = getOptional<StatsType, StatsTypeOptionType> { it == "log-stats" } ?: StatsType.NONE
-        val logLevel = getOptional<CommonizerLogLevel, LogLevelOptionType>() ?: CommonizerLogLevel.Quiet
+        konst statsType = getOptional<StatsType, StatsTypeOptionType> { it == "log-stats" } ?: StatsType.NONE
+        konst logLevel = getOptional<CommonizerLogLevel, LogLevelOptionType>() ?: CommonizerLogLevel.Quiet
 
-        val logger = CliLoggerAdapter(logLevel, 2)
-        val libraryLoader = DefaultNativeLibraryLoader(logger)
-        val repository = KonanDistributionRepository(distribution, outputTargets.konanTargets, libraryLoader)
-        val statsCollector = StatsCollector(statsType, outputTargets.allLeaves().toList())
-        val settings = getSettings()
+        konst logger = CliLoggerAdapter(logLevel, 2)
+        konst libraryLoader = DefaultNativeLibraryLoader(logger)
+        konst repository = KonanDistributionRepository(distribution, outputTargets.konanTargets, libraryLoader)
+        konst statsCollector = StatsCollector(statsType, outputTargets.allLeaves().toList())
+        konst settings = getSettings()
 
-        val resultsConsumer = buildResultsConsumer {
+        konst resultsConsumer = buildResultsConsumer {
             this add ModuleSerializer(destination)
         }
 
-        val descriptionSuffix = estimateLibrariesCount(repository, outputTargets.allLeaves()).let { " ($it items)" }
+        konst descriptionSuffix = estimateLibrariesCount(repository, outputTargets.allLeaves()).let { " ($it items)" }
         logger.log("${logPrefix}Preparing commonized Kotlin/Native libraries for ${outputTargets.allLeaves()}$descriptionSuffix")
 
         LibraryCommonizer(

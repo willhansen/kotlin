@@ -37,41 +37,41 @@ import org.jetbrains.kotlin.util.ImplementationStatus
 object FirNotImplementedOverrideChecker : FirClassChecker() {
 
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = declaration.source ?: return
-        val sourceKind = source.kind
+        konst source = declaration.source ?: return
+        konst sourceKind = source.kind
         if (sourceKind is KtFakeSourceElementKind && sourceKind != KtFakeSourceElementKind.EnumInitializer) return
-        val modality = declaration.modality()
-        val canHaveAbstractDeclarations = modality == Modality.ABSTRACT || modality == Modality.SEALED
+        konst modality = declaration.modality()
+        konst canHaveAbstractDeclarations = modality == Modality.ABSTRACT || modality == Modality.SEALED
         if (declaration is FirRegularClass && declaration.isExpect) return
-        val classKind = declaration.classKind
+        konst classKind = declaration.classKind
         if (classKind == ClassKind.ANNOTATION_CLASS || classKind == ClassKind.ENUM_CLASS) return
-        val classSymbol = declaration.symbol
+        konst classSymbol = declaration.symbol
 
-        val classScope = declaration.unsubstitutedScope(context)
+        konst classScope = declaration.unsubstitutedScope(context)
 
-        val notImplementedSymbols = mutableListOf<FirCallableSymbol<*>>()
-        val notImplementedIntersectionSymbols = mutableListOf<FirCallableSymbol<*>>()
-        val manyImplementationsDelegationSymbols = mutableListOf<FirCallableSymbol<*>>()
-        val delegationOverrideOfFinal = mutableListOf<Pair<FirCallableSymbol<*>, FirCallableSymbol<*>>>()
-        val delegationOverrideOfOpen = mutableListOf<Pair<FirCallableSymbol<*>, FirCallableSymbol<*>>>()
-        val invisibleSymbols = mutableListOf<FirCallableSymbol<*>>()
-        val varsImplementedByInheritedVal = mutableListOf<FirIntersectionCallableSymbol>()
+        konst notImplementedSymbols = mutableListOf<FirCallableSymbol<*>>()
+        konst notImplementedIntersectionSymbols = mutableListOf<FirCallableSymbol<*>>()
+        konst manyImplementationsDelegationSymbols = mutableListOf<FirCallableSymbol<*>>()
+        konst delegationOverrideOfFinal = mutableListOf<Pair<FirCallableSymbol<*>, FirCallableSymbol<*>>>()
+        konst delegationOverrideOfOpen = mutableListOf<Pair<FirCallableSymbol<*>, FirCallableSymbol<*>>>()
+        konst invisibleSymbols = mutableListOf<FirCallableSymbol<*>>()
+        konst varsImplementedByInheritedVal = mutableListOf<FirIntersectionCallableSymbol>()
 
         fun collectSymbol(symbol: FirCallableSymbol<*>) {
-            val delegatedWrapperData = symbol.delegatedWrapperData
+            konst delegatedWrapperData = symbol.delegatedWrapperData
             if (delegatedWrapperData != null) {
-                val directOverriddenMembersWithBaseScope = classScope.getDirectOverriddenMembersWithBaseScope(
+                konst directOverriddenMembersWithBaseScope = classScope.getDirectOverriddenMembersWithBaseScope(
                     symbol
                 )
 
                 @Suppress("UNCHECKED_CAST")
-                val filteredOverriddenMembers = when (symbol) {
+                konst filteredOverriddenMembers = when (symbol) {
                     is FirNamedFunctionSymbol -> filterOutOverriddenFunctions(directOverriddenMembersWithBaseScope as List<MemberWithBaseScope<FirNamedFunctionSymbol>>)
                     is FirPropertySymbol -> filterOutOverriddenProperties(directOverriddenMembersWithBaseScope as List<MemberWithBaseScope<FirPropertySymbol>>)
                     else -> directOverriddenMembersWithBaseScope
                 }.map { it.member }
 
-                val delegatedTo = delegatedWrapperData.wrapped.unwrapFakeOverrides().symbol
+                konst delegatedTo = delegatedWrapperData.wrapped.unwrapFakeOverrides().symbol
 
                 if (symbol.multipleDelegatesWithTheSameSignature == true) {
                     if (directOverriddenMembersWithBaseScope.isNotEmpty() &&
@@ -82,8 +82,8 @@ object FirNotImplementedOverrideChecker : FirClassChecker() {
                     }
                 }
 
-                val firstFinal = filteredOverriddenMembers.firstOrNull { it.isFinal }
-                val firstOpen = filteredOverriddenMembers.firstOrNull { it.isOpen && delegatedTo != it.unwrapFakeOverrides() }
+                konst firstFinal = filteredOverriddenMembers.firstOrNull { it.isFinal }
+                konst firstOpen = filteredOverriddenMembers.firstOrNull { it.isOpen && delegatedTo != it.unwrapFakeOverrides() }
 
                 when {
                     firstFinal != null ->
@@ -114,7 +114,7 @@ object FirNotImplementedOverrideChecker : FirClassChecker() {
         }
 
         varsImplementedByInheritedVal.firstOrNull()?.let { symbol ->
-            val implementationVal = symbol.intersections.first { it is FirPropertySymbol && it.isVal && !it.isAbstract }
+            konst implementationVal = symbol.intersections.first { it is FirPropertySymbol && it.isVal && !it.isAbstract }
             reporter.reportOn(
                 source,
                 VAR_IMPLEMENTED_BY_INHERITED_VAL,
@@ -125,7 +125,7 @@ object FirNotImplementedOverrideChecker : FirClassChecker() {
             )
         }
         if (!canHaveAbstractDeclarations && notImplementedSymbols.isNotEmpty()) {
-            val notImplemented = (notImplementedSymbols.firstOrNull { !it.isFromInterfaceOrEnum(context) } ?: notImplementedSymbols.first())
+            konst notImplemented = (notImplementedSymbols.firstOrNull { !it.isFromInterfaceOrEnum(context) } ?: notImplementedSymbols.first())
                 .unwrapFakeOverrides()
             if (notImplemented.isFromInterfaceOrEnum(context)) {
                 reporter.reportOn(source, ABSTRACT_MEMBER_NOT_IMPLEMENTED, classSymbol, notImplemented, context)
@@ -134,7 +134,7 @@ object FirNotImplementedOverrideChecker : FirClassChecker() {
             }
         }
         if (!canHaveAbstractDeclarations && invisibleSymbols.isNotEmpty()) {
-            val invisible = invisibleSymbols.first()
+            konst invisible = invisibleSymbols.first()
             reporter.reportOn(source, INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER, classSymbol, invisible, context)
         }
 
@@ -163,8 +163,8 @@ object FirNotImplementedOverrideChecker : FirClassChecker() {
         }
 
         if (manyImplementationsDelegationSymbols.isEmpty() && notImplementedIntersectionSymbols.isNotEmpty()) {
-            val notImplementedIntersectionSymbol = notImplementedIntersectionSymbols.first()
-            val (abstractIntersections, implIntersections) =
+            konst notImplementedIntersectionSymbol = notImplementedIntersectionSymbols.first()
+            konst (abstractIntersections, implIntersections) =
                 (notImplementedIntersectionSymbol as FirIntersectionCallableSymbol).intersections.partition {
                     it.modality == Modality.ABSTRACT
                 }

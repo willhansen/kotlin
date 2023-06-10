@@ -16,8 +16,8 @@ public class Test {
 class MyMapEntry : Test.MapEntryImpl()
 
 fun test() {
-    val b = MyMapEntry()
-    val key = b.key
-    val value = b.value
+    konst b = MyMapEntry()
+    konst key = b.key
+    konst konstue = b.konstue
     b.setValue(null)
 }

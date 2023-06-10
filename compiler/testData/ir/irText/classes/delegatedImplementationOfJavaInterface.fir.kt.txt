@@ -31,7 +31,7 @@ class Test : J {
     return <this>.#j.returnsFlexible()
   }
 
-  private val j: J
+  private konst j: J
     field = j
     private get
 

@@ -1,5 +1,5 @@
 fun test() {
-    val x = 45 ?: <expr>throw Exception()</expr>
+    konst x = 45 ?: <expr>throw Exception()</expr>
     return
 }
 

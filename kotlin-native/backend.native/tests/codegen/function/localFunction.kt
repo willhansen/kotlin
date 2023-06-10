@@ -8,7 +8,7 @@ package codegen.function.localFunction
 import kotlin.test.*
 
 @Test fun runTest() {
-    val x = 1
+    konst x = 1
     fun local0() = println(x)
     fun local1() {
         fun local2() {

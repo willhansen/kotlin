@@ -35,7 +35,7 @@ public class J {
 // FILE: test.kt
 
 open class A : CharSequence {
-    override val length: Int = 123
+    override konst length: Int = 123
 
     override fun get(index: Int) = 'z';
 
@@ -45,8 +45,8 @@ open class A : CharSequence {
 }
 
 fun box(): String {
-    val b = J.B()
-    val a = A()
+    konst b = J.B()
+    konst a = A()
 
     if (b[0] != 'z') return "fail 6"
     if (a[0] != 'z') return "fail 7"

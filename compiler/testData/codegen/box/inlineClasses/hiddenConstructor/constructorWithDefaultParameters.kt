@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
-class Test(val x: S, val y: S = S("K")) {
-    val test = x.string + y.string
+class Test(konst x: S, konst y: S = S("K")) {
+    konst test = x.string + y.string
 }
 
 fun box() = Test(S("O")).test

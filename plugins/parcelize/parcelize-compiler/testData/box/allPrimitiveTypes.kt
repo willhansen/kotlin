@@ -10,21 +10,21 @@ import android.os.Parcelable
 
 @Parcelize
 data class PrimitiveTypes(
-    val boo: Boolean, val c: Char, val byt: Byte, val s: Short,
-    val i: Int, val f: Float, val l: Long, val d: Double,
+    konst boo: Boolean, konst c: Char, konst byt: Byte, konst s: Short,
+    konst i: Int, konst f: Float, konst l: Long, konst d: Double,
 
-    val nboo: Boolean?, val nc: Char?, val nbyt: Byte?, val ns: Short?,
-    val ni: Int?, val nf: Float?, val nl: Long?, val nd: Double?,
+    konst nboo: Boolean?, konst nc: Char?, konst nbyt: Byte?, konst ns: Short?,
+    konst ni: Int?, konst nf: Float?, konst nl: Long?, konst nd: Double?,
 
-    val jboo: java.lang.Boolean, val jc: java.lang.Character, val jbyt: java.lang.Byte, val js: java.lang.Short,
-    val ji: java.lang.Integer, val jf: java.lang.Float, val jl: java.lang.Long, val jd: java.lang.Double,
+    konst jboo: java.lang.Boolean, konst jc: java.lang.Character, konst jbyt: java.lang.Byte, konst js: java.lang.Short,
+    konst ji: java.lang.Integer, konst jf: java.lang.Float, konst jl: java.lang.Long, konst jd: java.lang.Double,
 
-    val njboo: java.lang.Boolean?, val njc: java.lang.Character?, val njbyt: java.lang.Byte?, val njs: java.lang.Short?,
-    val nji: java.lang.Integer?, val njf: java.lang.Float?, val njl: java.lang.Long?, val njd: java.lang.Double?
+    konst njboo: java.lang.Boolean?, konst njc: java.lang.Character?, konst njbyt: java.lang.Byte?, konst njs: java.lang.Short?,
+    konst nji: java.lang.Integer?, konst njf: java.lang.Float?, konst njl: java.lang.Long?, konst njd: java.lang.Double?
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = PrimitiveTypes(
+    konst first = PrimitiveTypes(
         true, '#', 3.toByte(), 10.toShort(), -300, -5.0f, Long.MAX_VALUE, 3.14,
         true, '#', 3.toByte(), 10.toShort(), -300, -5.0f, Long.MAX_VALUE, 3.14,
         true as java.lang.Boolean, '#' as java.lang.Character,
@@ -36,7 +36,7 @@ fun box() = parcelTest { parcel ->
         -300 as java.lang.Integer, -5.0f as java.lang.Float,
         10L as java.lang.Long, 3.14 as java.lang.Double
     )
-    val second = PrimitiveTypes(
+    konst second = PrimitiveTypes(
         false, '\n', Byte.MIN_VALUE, Short.MIN_VALUE,
         Int.MIN_VALUE, Float.POSITIVE_INFINITY, Long.MAX_VALUE, Double.NEGATIVE_INFINITY,
         null, null, null, null, null, null, null, null,
@@ -50,13 +50,13 @@ fun box() = parcelTest { parcel ->
     first.writeToParcel(parcel, 0)
     second.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val parcelableCreator = parcelableCreator<PrimitiveTypes>()
-    val first2 = parcelableCreator.createFromParcel(parcel)
-    val second2 = parcelableCreator.createFromParcel(parcel)
+    konst parcelableCreator = parcelableCreator<PrimitiveTypes>()
+    konst first2 = parcelableCreator.createFromParcel(parcel)
+    konst second2 = parcelableCreator.createFromParcel(parcel)
 
     assert(first == first2)
     assert(second == second2)

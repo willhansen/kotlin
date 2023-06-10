@@ -39,8 +39,8 @@ import org.jetbrains.kotlin.types.KotlinType
 import java.io.File
 
 class ExpectedActualDeclarationChecker(
-    val moduleStructureOracle: ModuleStructureOracle,
-    val argumentExtractors: Iterable<ActualAnnotationArgumentExtractor>
+    konst moduleStructureOracle: ModuleStructureOracle,
+    konst argumentExtractors: Iterable<ActualAnnotationArgumentExtractor>
 ) : DeclarationChecker {
     interface ActualAnnotationArgumentExtractor {
         fun extractDefaultValue(parameter: ValueParameterDescriptor, expectedType: KotlinType): ConstantValue<*>?
@@ -57,7 +57,7 @@ class ExpectedActualDeclarationChecker(
         if (declaration !is KtNamedDeclaration) return
         if (descriptor !is MemberDescriptor || DescriptorUtils.isEnumEntry(descriptor)) return
 
-        val checkActualModifier = !context.languageVersionSettings.getFlag(AnalysisFlags.multiPlatformDoNotCheckActual)
+        konst checkActualModifier = !context.languageVersionSettings.getFlag(AnalysisFlags.multiPlatformDoNotCheckActual)
 
         if (descriptor.isExpect) {
             checkExpectedDeclarationHasProperActuals(
@@ -66,7 +66,7 @@ class ExpectedActualDeclarationChecker(
             )
         }
         if (descriptor.isActualOrSomeContainerIsActual()) {
-            val allDependsOnModules = moduleStructureOracle.findAllDependsOnPaths(descriptor.module).flatMap { it.nodes }.toHashSet()
+            konst allDependsOnModules = moduleStructureOracle.findAllDependsOnPaths(descriptor.module).flatMap { it.nodes }.toHashSet()
             checkActualDeclarationHasExpected(
                 declaration,
                 descriptor,
@@ -92,11 +92,11 @@ class ExpectedActualDeclarationChecker(
         checkActualModifier: Boolean,
         expectActualTracker: ExpectActualTracker
     ) {
-        val allActualizationPaths = moduleStructureOracle.findAllReversedDependsOnPaths(descriptor.module)
-        val allLeafModules = allActualizationPaths.map { it.nodes.last() }.toSet()
+        konst allActualizationPaths = moduleStructureOracle.findAllReversedDependsOnPaths(descriptor.module)
+        konst allLeafModules = allActualizationPaths.map { it.nodes.last() }.toSet()
 
         allLeafModules.forEach { leafModule ->
-            val actuals = ExpectedActualResolver.findActualForExpected(descriptor, leafModule) ?: return@forEach
+            konst actuals = ExpectedActualResolver.findActualForExpected(descriptor, leafModule) ?: return@forEach
 
             checkExpectedDeclarationHasAtLeastOneActual(
                 reportOn, descriptor, actuals, trace, leafModule, checkActualModifier, expectActualTracker
@@ -115,9 +115,9 @@ class ExpectedActualDeclarationChecker(
         modulePaths: List<ModulePath>,
         trace: BindingTrace,
     ) {
-        val atLeastWeaklyCompatibleActuals = actuals
+        konst atLeastWeaklyCompatibleActuals = actuals
             .filterKeys { compatibility -> compatibility.isCompatibleOrWeakCompatible() }
-            .values.flatten()
+            .konstues.flatten()
 
         // Eagerly return here: We won't find a duplicate in any module path in this case
         if (atLeastWeaklyCompatibleActuals.size <= 1) return
@@ -139,7 +139,7 @@ class ExpectedActualDeclarationChecker(
         If we merge behaviour (e.g. decide to report ERROR for first case too)
         for those two cases, we can drop separate logic for DUPLICATE_ACTUALS
         */
-        val actualsByModulePath = modulePaths.associateWith { path ->
+        konst actualsByModulePath = modulePaths.associateWith { path ->
             atLeastWeaklyCompatibleActuals.filter { it.module in path.nodes }
         }
 
@@ -177,14 +177,14 @@ class ExpectedActualDeclarationChecker(
         ) {
             assert(actuals.keys.all { it is Incompatible })
             @Suppress("UNCHECKED_CAST")
-            val incompatibility = actuals as Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>
+            konst incompatibility = actuals as Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>
             trace.report(Errors.NO_ACTUAL_FOR_EXPECT.on(reportOn, expectDescriptor, module, incompatibility))
             return
         }
 
         // Here we have exactly one compatible actual and/or some weakly incompatible. In either case, we don't report anything on expect...
-        val actualMembers = actuals.asSequence()
-            .filter { it.key.isCompatibleOrWeakCompatible() }.flatMap { it.value.asSequence() }
+        konst actualMembers = actuals.asSequence()
+            .filter { it.key.isCompatibleOrWeakCompatible() }.flatMap { it.konstue.asSequence() }
 
         // ...except diagnostics regarding missing actual keyword, because in that case we won't start looking for the actual at all
         if (checkActualModifier) {
@@ -197,7 +197,7 @@ class ExpectedActualDeclarationChecker(
     private fun reportMissingActualModifier(actual: MemberDescriptor, reportOn: KtNamedDeclaration?, trace: BindingTrace) {
         if (actual.isActual) return
         @Suppress("NAME_SHADOWING")
-        val reportOn = reportOn ?: (actual.source as? KotlinSourceElement)?.psi as? KtNamedDeclaration ?: return
+        konst reportOn = reportOn ?: (actual.source as? KotlinSourceElement)?.psi as? KtNamedDeclaration ?: return
 
         if (requireActualModifier(actual)) {
             trace.report(Errors.ACTUAL_MISSING.on(reportOn))
@@ -214,12 +214,12 @@ class ExpectedActualDeclarationChecker(
             expectDescriptor.kind == ClassKind.ANNOTATION_CLASS
         ) return
 
-        val members = expectDescriptor.constructors + expectDescriptor.unsubstitutedMemberScope
+        konst members = expectDescriptor.constructors + expectDescriptor.unsubstitutedMemberScope
             .getContributedDescriptors(DescriptorKindFilter.FUNCTIONS)
             .filterIsInstance<FunctionDescriptor>()
 
-        val membersWithDefaultValueParameters = members
-            .filter { it.valueParameters.any { p -> p.declaresDefaultValue() }}
+        konst membersWithDefaultValueParameters = members
+            .filter { it.konstueParameters.any { p -> p.declaresDefaultValue() }}
 
         if (membersWithDefaultValueParameters.isEmpty()) return
 
@@ -235,8 +235,8 @@ class ExpectedActualDeclarationChecker(
     private fun MemberDescriptor.hasNoActualWithDiagnostic(
         compatibility: Map<ExpectActualCompatibility<MemberDescriptor>, List<MemberDescriptor>>
     ): Boolean {
-        return compatibility.values.flatMapTo(hashSetOf()) { it }.all { actual ->
-            val expectedOnes = ExpectedActualResolver.findExpectedForActual(actual, onlyFromThisModule(module))
+        return compatibility.konstues.flatMapTo(hashSetOf()) { it }.all { actual ->
+            konst expectedOnes = ExpectedActualResolver.findExpectedForActual(actual, onlyFromThisModule(module))
             expectedOnes != null && Compatible in expectedOnes.keys
         }
     }
@@ -244,15 +244,15 @@ class ExpectedActualDeclarationChecker(
     private fun ExpectActualTracker.reportExpectActual(expected: MemberDescriptor, actualMembers: Sequence<MemberDescriptor>) {
         if (this is ExpectActualTracker.DoNothing) return
 
-        val expectedFile = sourceFile(expected) ?: return
+        konst expectedFile = sourceFile(expected) ?: return
         for (actual in actualMembers) {
-            val actualFile = sourceFile(actual) ?: continue
+            konst actualFile = sourceFile(actual) ?: continue
             report(expectedFile = expectedFile, actualFile = actualFile)
         }
     }
 
     private fun sourceFile(descriptor: MemberDescriptor): File? {
-        val containingFile = descriptor.source.containingFile as? PsiSourceFile ?: return null
+        konst containingFile = descriptor.source.containingFile as? PsiSourceFile ?: return null
         return VfsUtilCore.virtualToIoFile(containingFile.psiFile.virtualFile)
     }
 
@@ -263,7 +263,7 @@ class ExpectedActualDeclarationChecker(
         trace: BindingTrace,
         moduleVisibilityFilter: ModuleFilter
     ) {
-        val compatibility = ExpectedActualResolver.findExpectedForActual(descriptor, moduleVisibilityFilter)
+        konst compatibility = ExpectedActualResolver.findExpectedForActual(descriptor, moduleVisibilityFilter)
             ?: return
 
         checkAmbiguousExpects(compatibility, trace, reportOn, descriptor)
@@ -284,7 +284,7 @@ class ExpectedActualDeclarationChecker(
 
         // 'firstOrNull' is needed because in diagnostic tests, common sources appear twice, so the same class is duplicated
         // TODO: replace with 'singleOrNull' as soon as multi-module diagnostic tests are refactored
-        val singleIncompatibility = compatibility.keys.firstOrNull()
+        konst singleIncompatibility = compatibility.keys.firstOrNull()
         if (singleIncompatibility is Incompatible.ClassScopes) {
             assert(descriptor is ClassDescriptor || descriptor is TypeAliasDescriptor) {
                 "Incompatible.ClassScopes is only possible for a class or a typealias: $descriptor"
@@ -297,20 +297,20 @@ class ExpectedActualDeclarationChecker(
             fun hasSingleActualSuspect(
                 expectedWithIncompatibility: Pair<MemberDescriptor, Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>>
             ): Boolean {
-                val (expectedMember, incompatibility) = expectedWithIncompatibility
-                val actualMember = incompatibility.values.singleOrNull()?.singleOrNull()
+                konst (expectedMember, incompatibility) = expectedWithIncompatibility
+                konst actualMember = incompatibility.konstues.singleOrNull()?.singleOrNull()
                 return actualMember != null &&
                         actualMember.isExplicitActualDeclaration() &&
                         !incompatibility.allStrongIncompatibilities() &&
                         ExpectedActualResolver.findExpectedForActual(
                             actualMember, onlyFromThisModule(expectedMember.module)
-                        )?.values?.singleOrNull()?.singleOrNull() == expectedMember
+                        )?.konstues?.singleOrNull()?.singleOrNull() == expectedMember
             }
 
-            val nonTrivialUnfulfilled = singleIncompatibility.unfulfilled.filterNot(::hasSingleActualSuspect)
+            konst nonTrivialUnfulfilled = singleIncompatibility.unfulfilled.filterNot(::hasSingleActualSuspect)
 
             if (nonTrivialUnfulfilled.isNotEmpty()) {
-                val classDescriptor =
+                konst classDescriptor =
                     (descriptor as? TypeAliasDescriptor)?.expandedType?.constructor?.declarationDescriptor as? ClassDescriptor
                         ?: (descriptor as ClassDescriptor)
                 trace.report(
@@ -322,21 +322,21 @@ class ExpectedActualDeclarationChecker(
         } else if (Compatible !in compatibility) {
             assert(compatibility.keys.all { it is Incompatible })
             @Suppress("UNCHECKED_CAST")
-            val incompatibility = compatibility as Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>
+            konst incompatibility = compatibility as Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>
             trace.report(Errors.ACTUAL_WITHOUT_EXPECT.on(reportOn, descriptor, incompatibility))
         } else {
-            val expected = compatibility[Compatible]!!.first()
+            konst expected = compatibility[Compatible]!!.first()
             if (expected is ClassDescriptor && expected.kind == ClassKind.ANNOTATION_CLASS) {
-                val actualConstructor =
+                konst actualConstructor =
                     (descriptor as? ClassDescriptor)?.constructors?.singleOrNull()
                         ?: (descriptor as? TypeAliasDescriptor)?.constructors?.singleOrNull()?.underlyingConstructorDescriptor
-                val expectedConstructor = expected.constructors.singleOrNull()
+                konst expectedConstructor = expected.constructors.singleOrNull()
                 if (expectedConstructor != null && actualConstructor != null) {
                     checkAnnotationConstructors(expectedConstructor, actualConstructor, trace, reportOn)
                 }
             }
         }
-        val expectSingleCandidate = compatibility.values.singleOrNull()?.firstOrNull()
+        konst expectSingleCandidate = compatibility.konstues.singleOrNull()?.firstOrNull()
         if (expectSingleCandidate != null) {
             checkIfExpectHasDefaultArgumentsAndActualizedWithTypealias(expectSingleCandidate, reportOn, trace)
         }
@@ -348,7 +348,7 @@ class ExpectedActualDeclarationChecker(
         reportOn: KtNamedDeclaration,
         descriptor: MemberDescriptor
     ) {
-        val filesWithAtLeastWeaklyCompatibleExpects = compatibility.asSequence()
+        konst filesWithAtLeastWeaklyCompatibleExpects = compatibility.asSequence()
             .filter { (compatibility, _) ->
                 compatibility.isCompatibleOrWeakCompatible()
             }
@@ -366,7 +366,7 @@ class ExpectedActualDeclarationChecker(
     // we don't require `actual` modifier on
     //  - annotation constructors, because annotation classes can only have one constructor
     //  - inline class primary constructors, because inline class must have primary constructor
-    //  - value parameter inside primary constructor of inline class, because inline class must have one value parameter
+    //  - konstue parameter inside primary constructor of inline class, because inline class must have one konstue parameter
     private fun requireActualModifier(descriptor: MemberDescriptor): Boolean {
         return !descriptor.isAnnotationConstructor() &&
                 !descriptor.isPrimaryConstructorOfInlineClass() &&
@@ -389,22 +389,22 @@ class ExpectedActualDeclarationChecker(
     private fun checkAnnotationConstructors(
         expected: ConstructorDescriptor, actual: ConstructorDescriptor, trace: BindingTrace, reportOn: PsiElement
     ) {
-        for (expectedParameterDescriptor in expected.valueParameters) {
+        for (expectedParameterDescriptor in expected.konstueParameters) {
             // Actual parameter with the same name is guaranteed to exist because this method is only called for compatible annotations
-            val actualParameterDescriptor = actual.valueParameters.first { it.name == expectedParameterDescriptor.name }
+            konst actualParameterDescriptor = actual.konstueParameters.first { it.name == expectedParameterDescriptor.name }
 
             if (expectedParameterDescriptor.declaresDefaultValue() && actualParameterDescriptor.declaresDefaultValue()) {
-                val expectedParameter =
+                konst expectedParameter =
                     DescriptorToSourceUtils.descriptorToDeclaration(expectedParameterDescriptor) as? KtParameter ?: continue
 
-                val expectedValue = trace.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expectedParameter.defaultValue)
+                konst expectedValue = trace.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expectedParameter.defaultValue)
                     ?.toConstantValue(expectedParameterDescriptor.type)
 
-                val actualValue =
+                konst actualValue =
                     getActualAnnotationParameterValue(actualParameterDescriptor, trace.bindingContext, expectedParameterDescriptor.type)
                 if (expectedValue != actualValue) {
-                    val ktParameter = DescriptorToSourceUtils.descriptorToDeclaration(actualParameterDescriptor)
-                    val target = (ktParameter as? KtParameter)?.defaultValue ?: (reportOn as? KtTypeAlias)?.nameIdentifier ?: reportOn
+                    konst ktParameter = DescriptorToSourceUtils.descriptorToDeclaration(actualParameterDescriptor)
+                    konst target = (ktParameter as? KtParameter)?.defaultValue ?: (reportOn as? KtTypeAlias)?.nameIdentifier ?: reportOn
                     trace.report(Errors.ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE.on(target, actualParameterDescriptor))
                 }
             }
@@ -414,7 +414,7 @@ class ExpectedActualDeclarationChecker(
     private fun getActualAnnotationParameterValue(
         actualParameter: ValueParameterDescriptor, bindingContext: BindingContext, expectedType: KotlinType
     ): ConstantValue<*>? {
-        val declaration = DescriptorToSourceUtils.descriptorToDeclaration(actualParameter)
+        konst declaration = DescriptorToSourceUtils.descriptorToDeclaration(actualParameter)
         if (declaration is KtParameter) {
             return bindingContext.get(BindingContext.COMPILE_TIME_VALUE, declaration.defaultValue)?.toConstantValue(expectedType)
         }

@@ -9,16 +9,16 @@ import java.io.File
 import kotlin.script.experimental.api.*
 import kotlin.script.experimental.dependencies.ExternalDependenciesResolver.Options
 
-open class RepositoryCoordinates(val string: String)
+open class RepositoryCoordinates(konst string: String)
 
 interface ExternalDependenciesResolver {
     interface Options {
         object Empty : Options {
-            override fun value(name: String): String? = null
+            override fun konstue(name: String): String? = null
             override fun flag(name: String): Boolean? = null
         }
 
-        fun value(name: String): String?
+        fun konstue(name: String): String?
         fun flag(name: String): Boolean?
     }
 

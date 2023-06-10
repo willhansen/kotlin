@@ -18,9 +18,9 @@ import zzz.*
 
 fun box(): String {
 
-    val p = { calc { 11 } }.let { it() }
+    konst p = { calc { 11 } }.let { it() }
 
-    val z = { calc { 12 } }.let { it() }
+    konst z = { calc { 12 } }.let { it() }
 
     if (p == z) return "fail"
 

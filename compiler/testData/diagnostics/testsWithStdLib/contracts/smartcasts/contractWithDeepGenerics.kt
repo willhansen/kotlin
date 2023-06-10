@@ -5,8 +5,8 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 sealed class Either<L : Any, R : Any> {
-    data class Left<L : Any, R : Any>(val leftValue: L) : Either<L, R>()
-    data class Right<L : Any, R : Any>(val rightValue: R) : Either<L, R>()
+    data class Left<L : Any, R : Any>(konst leftValue: L) : Either<L, R>()
+    data class Right<L : Any, R : Any>(konst rightValue: R) : Either<L, R>()
 }
 
 inline fun <reified L : Any, reified R : Any> Either<L, R>.isLeft(): Boolean {
@@ -24,8 +24,8 @@ inline fun <reified L : Any, reified R : Any> Either<L, R>.isRight(): Boolean {
 }
 
 fun test() {
-    val result: Either<Exception, Unit> = Either.Left(RuntimeException("simulating missing code"))
+    konst result: Either<Exception, Unit> = Either.Left(RuntimeException("simulating missing code"))
     if (result.isLeft()) {
-        val cause = <!DEBUG_INFO_SMARTCAST!>result<!>.leftValue.cause
+        konst cause = <!DEBUG_INFO_SMARTCAST!>result<!>.leftValue.cause
     }
 }

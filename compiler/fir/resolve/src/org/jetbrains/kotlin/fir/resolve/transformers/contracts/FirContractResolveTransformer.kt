@@ -18,6 +18,6 @@ class FirContractResolveTransformer(
     scopeSession,
     outerBodyResolveContext,
 ) {
-    override val contractDeclarationsTransformer: FirDeclarationsContractResolveTransformer
+    override konst contractDeclarationsTransformer: FirDeclarationsContractResolveTransformer
         get() = FirDeclarationsContractResolveTransformer()
 }

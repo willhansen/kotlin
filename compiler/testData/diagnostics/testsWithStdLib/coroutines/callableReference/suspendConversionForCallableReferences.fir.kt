@@ -8,7 +8,7 @@ fun builder(c: suspend () -> Unit) {}
 suspend fun String.id(): String = this
 
 fun box() {
-    val x = "f"
+    konst x = "f"
     builder {
         <!INAPPLICABLE_CANDIDATE!>go1<!>(x::<!UNRESOLVED_REFERENCE!>id<!>)
         <!INAPPLICABLE_CANDIDATE!>go2<!>(x::<!UNRESOLVED_REFERENCE!>id<!>)

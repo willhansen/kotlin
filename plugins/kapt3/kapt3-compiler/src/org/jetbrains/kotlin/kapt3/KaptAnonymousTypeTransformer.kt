@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.PartialAnalysisHandlerExtensi
 import org.jetbrains.kotlin.types.KotlinType
 
 class KaptAnonymousTypeTransformer(
-    private val analysisExtension: PartialAnalysisHandlerExtension
+    private konst analysisExtension: PartialAnalysisHandlerExtension
 ) : DeclarationSignatureAnonymousTypeTransformer {
     override fun transformAnonymousType(descriptor: DeclarationDescriptorWithVisibility, type: KotlinType): KotlinType? {
         if (!analysisExtension.analyzePartially) {

@@ -1,12 +1,12 @@
 fun test_1() {
-    val list = buildList {
+    konst list = buildList {
         add("")
     }
     takeList(list)
 }
 
 fun test_2() {
-    val list = myBuildList {
+    konst list = myBuildList {
         add("")
     }
     takeList(list)

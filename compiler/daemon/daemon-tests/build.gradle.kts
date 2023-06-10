@@ -24,7 +24,7 @@ projectTest(parallel = true) {
     dependsOn(":dist")
     workingDir = rootDir
 
-    val testClassesDirs = testSourceSet.output.classesDirs
+    konst testClassesDirs = testSourceSet.output.classesDirs
     doFirst {
         systemProperty("kotlin.test.script.classpath", testClassesDirs.joinToString(File.pathSeparator))
     }

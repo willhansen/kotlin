@@ -6,11 +6,11 @@ annotation class repann
 
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class repann1(val x: Int)
+annotation class repann1(konst x: Int)
 
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class repann2(val f: Boolean)
+annotation class repann2(konst f: Boolean)
 
 @Retention(AnnotationRetention.BINARY)
 @Repeatable

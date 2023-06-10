@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 /**
  * A leaf IR tree element.
  *
- * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.valueParameter]
+ * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.konstueParameter]
  */
 abstract class IrValueParameter : IrDeclarationBase(), IrValueDeclaration {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: ParameterDescriptor
+    abstract override konst descriptor: ParameterDescriptor
 
-    abstract override val symbol: IrValueParameterSymbol
+    abstract override konst symbol: IrValueParameterSymbol
 
     abstract var index: Int
 
@@ -37,10 +37,10 @@ abstract class IrValueParameter : IrDeclarationBase(), IrValueDeclaration {
     abstract var isNoinline: Boolean
 
     /**
-     * If `true`, the value parameter does not participate in [IdSignature] computation.
+     * If `true`, the konstue parameter does not participate in [IdSignature] computation.
      *
      * This is a workaround that is needed for better support of compiler plugins.
-     * Suppose you have the following code and some IR plugin that adds a value parameter to
+     * Suppose you have the following code and some IR plugin that adds a konstue parameter to
      * functions
      * marked with the `@PluginMarker` annotation.
      * ```kotlin

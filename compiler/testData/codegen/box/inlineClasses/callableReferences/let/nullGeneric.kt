@@ -3,8 +3,8 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Value<T: Any>(val value: T)
+konstue class Value<T: Any>(konst konstue: T)
 
-fun foo(value: Value<String>?) = value?.value
+fun foo(konstue: Value<String>?) = konstue?.konstue
 
 fun box(): String = (null as Value<String>?).let(::foo) ?: "OK"

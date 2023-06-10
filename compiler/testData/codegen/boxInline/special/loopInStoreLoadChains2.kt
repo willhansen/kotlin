@@ -10,7 +10,7 @@ inline fun cycle(p: String): String {
 }
 
 inline fun test(crossinline foo: String.() -> String): String {
-    val cycle = cycle("123");
+    konst cycle = cycle("123");
 
     {
         cycle.foo()

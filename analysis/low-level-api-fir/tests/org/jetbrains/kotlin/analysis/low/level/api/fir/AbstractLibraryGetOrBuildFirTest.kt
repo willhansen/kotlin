@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.test.services.assertions
 import org.jetbrains.kotlin.test.services.service
 
 abstract class AbstractLibraryGetOrBuildFirTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator = AnalysisApiFirLibraryBinaryTestConfigurator
+    override konst configurator = AnalysisApiFirLibraryBinaryTestConfigurator
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
         with(builder) {
@@ -31,20 +31,20 @@ abstract class AbstractLibraryGetOrBuildFirTest : AbstractLowLevelApiSingleFileT
     }
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val declaration = getElementToSearch(ktFile, moduleStructure)
+        konst declaration = getElementToSearch(ktFile, moduleStructure)
 
-        val module = ProjectStructureProvider.getModule(ktFile.project, ktFile, contextualModule = null)
-        val resolveSession = LLFirResolveSessionService.getInstance(ktFile.project).getFirResolveSessionForBinaryModule(module)
-        val symbolProvider = resolveSession.getSessionFor(module).symbolProvider
-        val fir = FirDeclarationForCompiledElementSearcher(symbolProvider).findNonLocalDeclaration(declaration)
+        konst module = ProjectStructureProvider.getModule(ktFile.project, ktFile, contextualModule = null)
+        konst resolveSession = LLFirResolveSessionService.getInstance(ktFile.project).getFirResolveSessionForBinaryModule(module)
+        konst symbolProvider = resolveSession.getSessionFor(module).symbolProvider
+        konst fir = FirDeclarationForCompiledElementSearcher(symbolProvider).findNonLocalDeclaration(declaration)
 
         testServices.assertions.assertEqualsToTestDataFileSibling(renderActualFir(fir, declaration, true))
     }
 
     private fun getElementToSearch(ktFile: KtFile, moduleStructure: TestModuleStructure): KtDeclaration {
-        val expectedType = moduleStructure.allDirectives[Directives.DECLARATION_TYPE].firstOrNull()
+        konst expectedType = moduleStructure.allDirectives[Directives.DECLARATION_TYPE].firstOrNull()
             ?: error("Compiled code should have element type specified")
-        @Suppress("UNCHECKED_CAST") val expectedClass = Class.forName(expectedType) as Class<PsiElement>
+        @Suppress("UNCHECKED_CAST") konst expectedClass = Class.forName(expectedType) as Class<PsiElement>
         return findFirstDeclaration(ktFile.declarations, expectedClass)!!
     }
 
@@ -58,7 +58,7 @@ abstract class AbstractLibraryGetOrBuildFirTest : AbstractLowLevelApiSingleFileT
                 findFirstDeclaration(decl.declarations, expectedClass)?.let { return it }
             }
             if (decl is KtFunction) {
-                findFirstDeclaration(decl.valueParameters, expectedClass)?.let { return it }
+                findFirstDeclaration(decl.konstueParameters, expectedClass)?.let { return it }
             }
             if (decl is KtClass && expectedClass == KtConstructor::class.java) {
                 decl.primaryConstructor?.let { return it }
@@ -68,6 +68,6 @@ abstract class AbstractLibraryGetOrBuildFirTest : AbstractLowLevelApiSingleFileT
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val DECLARATION_TYPE by stringDirective("DECLARATION_TYPE")
+        konst DECLARATION_TYPE by stringDirective("DECLARATION_TYPE")
     }
 }

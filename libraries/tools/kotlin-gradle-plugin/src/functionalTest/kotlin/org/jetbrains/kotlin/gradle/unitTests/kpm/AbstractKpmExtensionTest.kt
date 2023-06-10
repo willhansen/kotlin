@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinPm20ProjectExtension
 import org.jetbrains.kotlin.gradle.util.addBuildEventsListenerRegistryMock
 
 abstract class AbstractKpmExtensionTest {
-    protected val project: ProjectInternal = (ProjectBuilder.builder().build() as ProjectInternal).also { project ->
+    protected konst project: ProjectInternal = (ProjectBuilder.builder().build() as ProjectInternal).also { project ->
         project.gradle.startParameter.dependencyVerificationMode = DependencyVerificationMode.OFF
     }
 
-    protected val kotlin: KotlinPm20ProjectExtension by lazy { project.applyKpmPlugin() }
+    protected konst kotlin: KotlinPm20ProjectExtension by lazy { project.applyKpmPlugin() }
 }
 
 fun Project.applyKpmPlugin(configure: KotlinPm20ProjectExtension.() -> Unit = {}): KotlinPm20ProjectExtension {

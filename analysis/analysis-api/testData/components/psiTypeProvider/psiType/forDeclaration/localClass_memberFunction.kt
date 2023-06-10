@@ -4,5 +4,5 @@ fun foo() {
             return this
         }
     }
-    val a = Local().bar()
+    konst a = Local().bar()
 }

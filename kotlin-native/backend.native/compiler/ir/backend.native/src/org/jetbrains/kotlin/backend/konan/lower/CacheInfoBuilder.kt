@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.library.impl.javaFile
 
 internal class CacheInfoBuilder(
-        private val generationState: NativeGenerationState,
-        private val moduleDeserializer: KonanIrLinker.KonanPartialModuleDeserializer,
-        private val irModule: IrModuleFragment
+        private konst generationState: NativeGenerationState,
+        private konst moduleDeserializer: KonanIrLinker.KonanPartialModuleDeserializer,
+        private konst irModule: IrModuleFragment
 ) {
     fun build() {
         if (!generationState.config.producePerFileCache)
@@ -44,7 +44,7 @@ internal class CacheInfoBuilder(
                     if (!declaration.isInterface && !declaration.isLocal
                             && declaration.isExported && declaration.origin != DECLARATION_ORIGIN_FUNCTION_CLASS
                     ) {
-                        val declaredFields = generationState.context.getLayoutBuilder(declaration).getDeclaredFields(generationState.llvm)
+                        konst declaredFields = generationState.context.getLayoutBuilder(declaration).getDeclaredFields(generationState.llvm)
                         generationState.classFields.add(moduleDeserializer.buildClassFields(declaration, declaredFields))
                     }
                 }
@@ -78,10 +78,10 @@ internal class CacheInfoBuilder(
         }
     }
 
-    private val IrDeclaration.isExported
+    private konst IrDeclaration.isExported
         get() = with(KonanManglerIr) { isExported(compatibleMode = moduleDeserializer.compatibilityMode.oldSignatures) }
 
-    private val visitedInlineFunctions = mutableSetOf<IrFunction>()
+    private konst visitedInlineFunctions = mutableSetOf<IrFunction>()
 
     private fun trackCallees(irFunction: IrFunction) {
         if (irFunction in visitedInlineFunctions) return
@@ -108,8 +108,8 @@ internal class CacheInfoBuilder(
 
             override fun visitGetObjectValue(expression: IrGetObjectValue) {
                 expression.acceptChildrenVoid(this)
-                val singleton = expression.symbol.owner
-                val isExternalObjCCompanion = singleton.isCompanion && (singleton.parent as IrClass).isExternalObjCClass()
+                konst singleton = expression.symbol.owner
+                konst isExternalObjCCompanion = singleton.isCompanion && (singleton.parent as IrClass).isExternalObjCClass()
                 if (!isExternalObjCCompanion) {
                     processFunction(generationState.context.getObjectClassInstanceFunction(singleton))
                 }

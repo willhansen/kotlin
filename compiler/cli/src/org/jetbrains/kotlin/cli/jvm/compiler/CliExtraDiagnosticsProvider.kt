@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtClassOrObject
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.diagnostics.Diagnostics
 
-private val JAVA_API_STUB = Key.create<CachedValue<Diagnostics>>("JAVA_API_STUB")
+private konst JAVA_API_STUB = Key.create<CachedValue<Diagnostics>>("JAVA_API_STUB")
 
 object CliExtraDiagnosticsProvider {
     fun forClassOrObject(kclass: KtClassOrObject): Diagnostics {
@@ -30,7 +30,7 @@ object CliExtraDiagnosticsProvider {
             return Diagnostics.EMPTY
         }
 
-        return getLightClassCachedValue(kclass).value
+        return getLightClassCachedValue(kclass).konstue
     }
 
     fun forFacade(file: KtFile): Diagnostics = CachedValuesManager.getCachedValue(file) {
@@ -41,29 +41,29 @@ object CliExtraDiagnosticsProvider {
     }
 
     private fun calculateForFacade(file: KtFile): Diagnostics {
-        val project = file.project
-        val facadeFqName = file.javaFileFacadeFqName
-        val facadeCollection = KotlinAsJavaSupport.getInstance(project)
+        konst project = file.project
+        konst facadeFqName = file.javaFileFacadeFqName
+        konst facadeCollection = KotlinAsJavaSupport.getInstance(project)
             .findFilesForFacade(facadeFqName, GlobalSearchScope.allScope(project))
             .ifEmpty { return Diagnostics.EMPTY }
 
-        val context = (LightClassGenerationSupport.getInstance(project) as CliLightClassGenerationSupport).context
-        val (_, _, diagnostics) = extraJvmDiagnosticsFromBackend(
+        konst context = (LightClassGenerationSupport.getInstance(project) as CliLightClassGenerationSupport).context
+        konst (_, _, diagnostics) = extraJvmDiagnosticsFromBackend(
             facadeFqName.parent(),
             facadeCollection,
             ClassFilterForFacade,
             context,
         ) generate@{ state, files ->
-            val representativeFile = files.first()
-            val fileClassInfo = JvmFileClassUtil.getFileClassInfoNoResolve(representativeFile)
+            konst representativeFile = files.first()
+            konst fileClassInfo = JvmFileClassUtil.getFileClassInfoNoResolve(representativeFile)
             if (!fileClassInfo.withJvmMultifileClass) {
-                val codegen = state.factory.forPackage(representativeFile.packageFqName, files)
+                konst codegen = state.factory.forPackage(representativeFile.packageFqName, files)
                 codegen.generate()
                 state.factory.done()
                 return@generate
             }
 
-            val codegen = state.factory.forMultifileClass(facadeFqName, files)
+            konst codegen = state.factory.forMultifileClass(facadeFqName, files)
             codegen.generate()
             state.factory.done()
         }
@@ -73,7 +73,7 @@ object CliExtraDiagnosticsProvider {
 }
 
 private fun getLightClassCachedValue(classOrObject: KtClassOrObject): CachedValue<Diagnostics> {
-    val outerClassValue = getOutermostClassOrObject(classOrObject).getUserData(JAVA_API_STUB)
+    konst outerClassValue = getOutermostClassOrObject(classOrObject).getUserData(JAVA_API_STUB)
     outerClassValue?.let {
         // stub computed for outer class can be used for inner/nested
         return it
@@ -83,12 +83,12 @@ private fun getLightClassCachedValue(classOrObject: KtClassOrObject): CachedValu
 }
 
 private fun computeLightClassCachedValue(classOrObject: KtClassOrObject): CachedValue<Diagnostics> {
-    val value = classOrObject.getUserData(JAVA_API_STUB) ?: run {
-        val manager = CachedValuesManager.getManager(classOrObject.project)
-        val cachedValue = manager.createCachedValue(LightClassDataProviderForClassOrObject(classOrObject))
+    konst konstue = classOrObject.getUserData(JAVA_API_STUB) ?: run {
+        konst manager = CachedValuesManager.getManager(classOrObject.project)
+        konst cachedValue = manager.createCachedValue(LightClassDataProviderForClassOrObject(classOrObject))
 
         classOrObject.putUserDataIfAbsent(JAVA_API_STUB, cachedValue)
     }
 
-    return value
+    return konstue
 }

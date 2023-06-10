@@ -21,7 +21,7 @@ fun foo((a, b): Pair<Int, String>, c: Bar)
 foo(pair, bar)
 
 // decompose a constructor parameter
-class C(val (a, b): Pair<Int, String>) {}
+class C(konst (a, b): Pair<Int, String>) {}
 ```
 
 ## TODO
@@ -115,7 +115,7 @@ New concept introduced: "function expression" (looks like a function declaration
 
 From the outside a multi-declared parameter is seen as one parameter of the specified type:
 ``` kotlin
-foo(pair) // caller can not pass two separate values here
+foo(pair) // caller can not pass two separate konstues here
 ```
 
 No changes to the call-site checking are required.
@@ -132,7 +132,7 @@ Types of individual components of the multi-declarations are optional:
 fun foo((a: A, b: B): Pair<A, B>) {...} // individual types of `a` and `b` are not required
 ```
 
-Default values are only allowed for whole parameters, not for individual components:
+Default konstues are only allowed for whole parameters, not for individual components:
 ``` kotlin
 fun foo((a, b): AB = AB(1, 2)) {...}
 ```
@@ -142,7 +142,7 @@ All names in the parameter list belong to one and the same namespace:
 fun foo((a, b): AB, a: A) // redeclaration: two variables named `a`
 ```
 
-One can use components of previously declared parameters in default values:
+One can use components of previously declared parameters in default konstues:
 ``` kotlin
 fun foo((a, b): AB, c: C = C(a, b)) {...}
 ```
@@ -168,7 +168,7 @@ Function expression syntax differs from function declaration syntax in the follo
 - type parameters are not allowed
 - `where` clause is not allowed
 - parameter types can be omitted (even for decomposed parameters)
-- parameter default values are not allowed
+- parameter default konstues are not allowed
 - varargs are allowed, but useless (warning issued)
 
 NOTE: local returns are allowed in function expressions without qualification.
@@ -186,7 +186,7 @@ TODO: support qualified returns in lambdas (when return type is unknown, nad has
 
 Example:
 ``` kotlin
-val (a, (b, c)) = abc // e.g. of type Pair<A, Pair<B, C>>
+konst (a, (b, c)) = abc // e.g. of type Pair<A, Pair<B, C>>
 ```
 
 This translates to
@@ -225,8 +225,8 @@ It seems that this does not impose any significant issues on the inference, and 
 TODO
 - what is the Java name of this parameter: `(a, b): Pair<A, B>`?
   - maybe `a_b`
-- make components available in default parameter values
-- create locals for components, assign values (on nested decompositions, avoid calling the same component twice)
+- make components available in default parameter konstues
+- create locals for components, assign konstues (on nested decompositions, avoid calling the same component twice)
 - make sure that function expressions are inlined as well as lambda expressions
 
 ## IDE Changes

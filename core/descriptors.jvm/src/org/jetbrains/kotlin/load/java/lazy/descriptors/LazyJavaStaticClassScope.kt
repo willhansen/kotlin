@@ -37,8 +37,8 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 class LazyJavaStaticClassScope(
     c: LazyJavaResolverContext,
-    private val jClass: JavaClass,
-    override val ownerDescriptor: JavaClassDescriptor
+    private konst jClass: JavaClass,
+    override konst ownerDescriptor: JavaClassDescriptor
 ) : LazyJavaStaticScope(c) {
 
     override fun computeMemberIndex() = ClassDeclaredMemberIndex(jClass) { it.isStatic }
@@ -68,7 +68,7 @@ class LazyJavaStaticClassScope(
     }
 
     override fun computeNonDeclaredFunctions(result: MutableCollection<SimpleFunctionDescriptor>, name: Name) {
-        val functionsFromSupertypes = getStaticFunctionsFromJavaSuperClasses(name, ownerDescriptor)
+        konst functionsFromSupertypes = getStaticFunctionsFromJavaSuperClasses(name, ownerDescriptor)
         result.addAll(
             resolveOverridesForStaticMembers(
                 name,
@@ -93,7 +93,7 @@ class LazyJavaStaticClassScope(
     }
 
     override fun computeNonDeclaredProperties(name: Name, result: MutableCollection<PropertyDescriptor>) {
-        val propertiesFromSupertypes = flatMapJavaStaticSupertypesScopes(ownerDescriptor, mutableSetOf()) {
+        konst propertiesFromSupertypes = flatMapJavaStaticSupertypesScopes(ownerDescriptor, mutableSetOf()) {
             it.getContributedVariables(name, NoLookupLocation.WHEN_GET_SUPER_MEMBERS)
         }
 
@@ -113,7 +113,7 @@ class LazyJavaStaticClassScope(
                 it.realOriginal
             }.flatMap {
                 resolveOverridesForStaticMembers(
-                    name, it.value, result, ownerDescriptor, c.components.errorReporter,
+                    name, it.konstue, result, ownerDescriptor, c.components.errorReporter,
                     c.components.kotlinTypeChecker.overridingUtil
                 )
             })
@@ -127,7 +127,7 @@ class LazyJavaStaticClassScope(
     }
 
     private fun getStaticFunctionsFromJavaSuperClasses(name: Name, descriptor: ClassDescriptor): Set<SimpleFunctionDescriptor> {
-        val staticScope = descriptor.getParentJavaStaticClassScope() ?: return emptySet()
+        konst staticScope = descriptor.getParentJavaStaticClassScope() ?: return emptySet()
         return staticScope.getContributedFunctions(name, NoLookupLocation.WHEN_GET_SUPER_MEMBERS).toSet()
     }
 
@@ -145,7 +145,7 @@ class LazyJavaStaticClassScope(
                 object : DFS.AbstractNodeHandler<ClassDescriptor, Unit>() {
                     override fun beforeChildren(current: ClassDescriptor): Boolean {
                         if (current === root) return true
-                        val staticScope = current.staticScope
+                        konst staticScope = current.staticScope
 
                         if (staticScope is LazyJavaStaticScope) {
                             result.addAll(onJavaStaticScope(staticScope))
@@ -161,7 +161,7 @@ class LazyJavaStaticClassScope(
         return result
     }
 
-    private val PropertyDescriptor.realOriginal: PropertyDescriptor
+    private konst PropertyDescriptor.realOriginal: PropertyDescriptor
         get() {
             if (this.kind.isReal) return this
 

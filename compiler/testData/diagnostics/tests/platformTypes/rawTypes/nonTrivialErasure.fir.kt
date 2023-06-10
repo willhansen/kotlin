@@ -17,10 +17,10 @@ class Test {
 }
 
 // FILE: main.kt
-val strList: List<String> = null!!
+konst strList: List<String> = null!!
 
 fun main() {
-    val rawA = Test.rawAField
+    konst rawA = Test.rawAField
     rawA.first = Test.rawAField.second
     Test.rawAField.second = rawA.first.second
 

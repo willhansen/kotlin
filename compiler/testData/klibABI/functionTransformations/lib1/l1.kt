@@ -1,39 +1,39 @@
 @file:Suppress("RedundantSuspendModifier", "NOTHING_TO_INLINE")
 
 class Cache {
-    private val cache = mutableMapOf<String, String>()
+    private konst cache = mutableMapOf<String, String>()
     fun load(key: String): String? = cache[key]
-    fun store(key: String, value: String) { cache[key] = value }
-    fun dumpToString(): String = cache.entries.sortedBy { it.key }.joinToString(",") { it.key + "=" + it.value }
+    fun store(key: String, konstue: String) { cache[key] = konstue }
+    fun dumpToString(): String = cache.entries.sortedBy { it.key }.joinToString(",") { it.key + "=" + it.konstue }
 }
 
-class OperatorsToNonOperators(private val cache: Cache) {
+class OperatorsToNonOperators(private konst cache: Cache) {
     operator fun get(key: String): String? = cache.load(key)
-    operator fun set(key: String, value: String) = cache.store(key, value)
+    operator fun set(key: String, konstue: String) = cache.store(key, konstue)
     operator fun invoke(): String = cache.dumpToString()
 
     companion object {
         operator fun Cache.get(key: String): String? = load(key)
-        operator fun Cache.set(key: String, value: String) = store(key, value)
+        operator fun Cache.set(key: String, konstue: String) = store(key, konstue)
         operator fun Cache.invoke(): String = dumpToString()
     }
 }
 
-class NonOperatorsToOperators(private val cache: Cache) {
+class NonOperatorsToOperators(private konst cache: Cache) {
     fun get(key: String): String? = cache.load(key)
-    fun set(key: String, value: String) = cache.store(key, value)
+    fun set(key: String, konstue: String) = cache.store(key, konstue)
     fun invoke(): String = cache.dumpToString()
 
     companion object {
         fun Cache.get(key: String): String? = load(key)
-        fun Cache.set(key: String, value: String) = store(key, value)
+        fun Cache.set(key: String, konstue: String) = store(key, konstue)
         fun Cache.invoke(): String = dumpToString()
     }
 }
 
-data class Wrapper(private val value: Int) {
-    private operator fun plus(other: Wrapper): Wrapper = (value + other.value).wrap()
-    fun unwrap(): Int = value
+data class Wrapper(private konst konstue: Int) {
+    private operator fun plus(other: Wrapper): Wrapper = (konstue + other.konstue).wrap()
+    fun unwrap(): Int = konstue
 
     fun memberNonInfixToInfix(other: Wrapper): Wrapper = this + other
     infix fun memberInfixToNonInfix(other: Wrapper): Wrapper = this + other
@@ -64,10 +64,10 @@ object Functions {
 }
 
 class RemovedFirstDefaultValueInConstructor(a: Int = 42, b: Int) {
-    val value = a + b
+    konst konstue = a + b
 }
 class RemovedLastDefaultValueInConstructor(a: Int, b: Int = 42) {
-    val value = a + b
+    konst konstue = a + b
 }
 
 interface Interface {

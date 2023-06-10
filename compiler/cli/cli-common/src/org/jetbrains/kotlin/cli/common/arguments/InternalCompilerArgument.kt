@@ -26,16 +26,16 @@ interface InternalArgumentParser<A : InternalArgument> {
     fun parseInternalArgument(arg: String, errors: ArgumentParseErrors): A?
 
     companion object {
-        internal const val INTERNAL_ARGUMENT_PREFIX = "-XX"
+        internal const konst INTERNAL_ARGUMENT_PREFIX = "-XX"
 
-        internal val PARSERS: List<InternalArgumentParser<*>> = listOf(
+        internal konst PARSERS: List<InternalArgumentParser<*>> = listOf(
             LanguageSettingsParser()
         )
     }
 }
 
 abstract class AbstractInternalArgumentParser<A : InternalArgument>(familyName: String) : InternalArgumentParser<A> {
-    private val wholePrefix: String = INTERNAL_ARGUMENT_PREFIX + familyName
+    private konst wholePrefix: String = INTERNAL_ARGUMENT_PREFIX + familyName
 
     override fun canParse(arg: String): Boolean = arg.startsWith(wholePrefix)
 
@@ -61,8 +61,8 @@ class LanguageSettingsParser : AbstractInternalArgumentParser<ManualLanguageFeat
 
         if (tail.getOrNull(0) != ':') return reportAndReturnNull("Incorrect internal argument syntax, missing colon: $wholeArgument")
 
-        val modificator = tail.getOrNull(1)
-        val languageFeatureState = when (modificator) {
+        konst modificator = tail.getOrNull(1)
+        konst languageFeatureState = when (modificator) {
             '+' -> LanguageFeature.State.ENABLED
 
             '-' -> LanguageFeature.State.DISABLED
@@ -70,10 +70,10 @@ class LanguageSettingsParser : AbstractInternalArgumentParser<ManualLanguageFeat
             else -> return reportAndReturnNull("Incorrect internal argument syntax, missing modificator: $wholeArgument")
         }
 
-        val languageFeatureName = tail.substring(2)
+        konst languageFeatureName = tail.substring(2)
         if (languageFeatureName.isEmpty()) return reportAndReturnNull("Empty language feature name for internal argument '$wholeArgument'")
 
-        val languageFeature = LanguageFeature.fromString(languageFeatureName)
+        konst languageFeature = LanguageFeature.fromString(languageFeatureName)
             ?: return reportAndReturnNull("Unknown language feature '$languageFeatureName' in passed internal argument '$wholeArgument'")
 
         return ManualLanguageFeatureSetting(languageFeature, languageFeatureState, wholeArgument)
@@ -81,11 +81,11 @@ class LanguageSettingsParser : AbstractInternalArgumentParser<ManualLanguageFeat
 }
 
 interface InternalArgument {
-    val stringRepresentation: String
+    konst stringRepresentation: String
 }
 
 data class ManualLanguageFeatureSetting(
-    val languageFeature: LanguageFeature,
-    val state: LanguageFeature.State,
-    override val stringRepresentation: String
+    konst languageFeature: LanguageFeature,
+    konst state: LanguageFeature.State,
+    override konst stringRepresentation: String
 ) : InternalArgument

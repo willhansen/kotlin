@@ -11,7 +11,7 @@ public class B<E> extends A<E> {
 
 // FILE: main.kt
 open class A<T> : Collection<T> {
-    override val size: Int
+    override konst size: Int
         get() = TODO("Not yet implemented")
 
     override fun contains(element: T): Boolean {

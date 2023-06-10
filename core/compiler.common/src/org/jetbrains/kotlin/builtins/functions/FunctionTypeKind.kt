@@ -39,10 +39,10 @@ import org.jetbrains.kotlin.name.Name
  *   with [IrGenerationExtension] implementation
  */
 abstract class FunctionTypeKind internal constructor(
-    val packageFqName: FqName,
-    val classNamePrefix: String,
-    val isReflectType: Boolean,
-    val annotationOnInvokeClassId: ClassId?
+    konst packageFqName: FqName,
+    konst classNamePrefix: String,
+    konst isReflectType: Boolean,
+    konst annotationOnInvokeClassId: ClassId?
 ) {
     /*
      * This constructor is needed to enforce not nullable [annotationOnInvokeClassId] for
@@ -60,7 +60,7 @@ abstract class FunctionTypeKind internal constructor(
      * E.g. if `prefixForTypeRender = @Some` and type is `some.CustomFunction2<Int, String, Double>`,
      *   then type will be rendered as `@Some (Int, String) -> Double`
      */
-    open val prefixForTypeRender: String?
+    open konst prefixForTypeRender: String?
         get() = null
 
 
@@ -76,7 +76,7 @@ abstract class FunctionTypeKind internal constructor(
      * K2 plugin that uses custom function types to be used by clients using a K1 compiler
      * with a K1 compiler plugin that understands the custom function types.
      */
-    open val serializeAsFunctionWithAnnotationUntil: String?
+    open konst serializeAsFunctionWithAnnotationUntil: String?
         get() = null
 
     /**
@@ -124,7 +124,7 @@ abstract class FunctionTypeKind internal constructor(
         isReflectType = false,
         annotationOnInvokeClassId = null
     ) {
-        override val prefixForTypeRender: String
+        override konst prefixForTypeRender: String
             get() = "suspend"
 
         override fun reflectKind(): FunctionTypeKind = KSuspendFunction
@@ -149,7 +149,7 @@ abstract class FunctionTypeKind internal constructor(
     }
 }
 
-val FunctionTypeKind.isBuiltin: Boolean
+konst FunctionTypeKind.isBuiltin: Boolean
     get() = when (this) {
         FunctionTypeKind.Function,
         FunctionTypeKind.SuspendFunction,
@@ -158,8 +158,8 @@ val FunctionTypeKind.isBuiltin: Boolean
         else -> false
     }
 
-val FunctionTypeKind.isSuspendOrKSuspendFunction: Boolean
+konst FunctionTypeKind.isSuspendOrKSuspendFunction: Boolean
     get() = this.nonReflectKind() == FunctionTypeKind.SuspendFunction
 
-val FunctionTypeKind.isBasicFunctionOrKFunction: Boolean
+konst FunctionTypeKind.isBasicFunctionOrKFunction: Boolean
     get() = this.nonReflectKind() == FunctionTypeKind.Function

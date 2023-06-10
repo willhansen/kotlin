@@ -26,14 +26,14 @@ import generators.unicode.toHexIntLiteral
 internal class PeriodicRangePattern private constructor(
     charCode: Int,
     categoryId: String,
-    val sequenceLength: Int,
+    konst sequenceLength: Int,
     isPeriodic: Boolean,
     unassignedCategoryId: String,
-    private val makeCategory: (Array<String>) -> Int
+    private konst makeCategory: (Array<String>) -> Int
 ) : RangePattern {
     private var start: Int = charCode
     private var end: Int = charCode
-    private val bag: Bag = Bag(sequenceLength, isPeriodic, unassignedCategoryId)
+    private konst bag: Bag = Bag(sequenceLength, isPeriodic, unassignedCategoryId)
 
     init {
         bag.fill(charCode, categoryId)
@@ -70,7 +70,7 @@ internal class PeriodicRangePattern private constructor(
     }
 
     private fun orderedCategoryIds(): Array<String> {
-        val size = minOf(sequenceLength, rangeLength())
+        konst size = minOf(sequenceLength, rangeLength())
         return Array(size) { categoryIdOf(start + it) }
     }
 
@@ -78,7 +78,7 @@ internal class PeriodicRangePattern private constructor(
         if (charCode !in start..end) {
             throw IllegalArgumentException("Char code ${charCode.toHexIntLiteral()} is not in $this")
         }
-        val categoryId = bag.categoryIdOf(charCode)
+        konst categoryId = bag.categoryIdOf(charCode)
         check(categoryId != null)
         return categoryId
     }
@@ -105,8 +105,8 @@ internal class PeriodicRangePattern private constructor(
         ): PeriodicRangePattern? {
             require(charCode > range.rangeEnd())
 
-            val start = range.rangeStart()
-            val newRange = from(start, range.categoryIdOf(start), sequenceLength, isPeriodic, unassignedCategoryId, makeCategory)
+            konst start = range.rangeStart()
+            konst newRange = from(start, range.categoryIdOf(start), sequenceLength, isPeriodic, unassignedCategoryId, makeCategory)
             if (newRange.append(start + 1, range.rangeEnd(), range::categoryIdOf, charCode, categoryId)) {
                 return newRange
             }
@@ -132,11 +132,11 @@ internal class PeriodicRangePattern private constructor(
  * Category Id of a char with code equal to `charCode` is placed at index `charCode % sequenceLength` of the [categoryIds].
  */
 private class Bag(
-    private val sequenceLength: Int,
-    private val isPeriodic: Boolean,
-    val unassignedCategoryId: String
+    private konst sequenceLength: Int,
+    private konst isPeriodic: Boolean,
+    konst unassignedCategoryId: String
 ) {
-    private val categoryIds = arrayOfNulls<String>(sequenceLength)
+    private konst categoryIds = arrayOfNulls<String>(sequenceLength)
 
     fun categoryIdOf(charCode: Int): String? {
         return categoryIds[charCode % sequenceLength]
@@ -151,7 +151,7 @@ private class Bag(
     fun fill(rangeStart: Int, rangeEnd: Int, categoryIdOf: (Int) -> String, charCode: Int, categoryId: String): Boolean {
         require(charCode == rangeStart - 1 || charCode == rangeEnd + 1)
 
-        val attempt = categoryIds.copyOf()
+        konst attempt = categoryIds.copyOf()
 
         for (ch in rangeStart..rangeEnd) {
             if (!attempt.fill(ch, categoryIdOf(ch))) return false
@@ -175,8 +175,8 @@ private class Bag(
      * The [charCode] is placed at index `charCode % sequenceLength`.
      */
     private fun Array<String?>.fill(charCode: Int, categoryId: String): Boolean {
-        val index = charCode % sequenceLength
-        val current = this[index]
+        konst index = charCode % sequenceLength
+        konst current = this[index]
         if (current == null || (isPeriodic && current == categoryId)) {
             this[index] = categoryId
             return true

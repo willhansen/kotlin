@@ -14,7 +14,7 @@ enum class KotlinCompilerExecutionStrategy(
     /**
      * Value that should be passed for `kotlin.compiler.execution.strategy` Gradle property to choose the strategy
      */
-    val propertyValue: String
+    konst propertyValue: String
 ) {
     /**
      * Execute Kotlin compiler in its own daemon. Default strategy.
@@ -39,12 +39,12 @@ enum class KotlinCompilerExecutionStrategy(
     ;
 
     companion object {
-        fun fromProperty(value: String?) =
-            if (value == null) {
+        fun fromProperty(konstue: String?) =
+            if (konstue == null) {
                 DAEMON
             } else {
-                values().find { it.propertyValue.equals(value, ignoreCase = true) }
-                    ?: error("Unknown value '$value' is passed for Kotlin compiler execution strategy")
+                konstues().find { it.propertyValue.equals(konstue, ignoreCase = true) }
+                    ?: error("Unknown konstue '$konstue' is passed for Kotlin compiler execution strategy")
             }
     }
 }
@@ -57,13 +57,13 @@ interface CompileUsingKotlinDaemon : Task {
      * Provides JVM arguments to Kotlin daemon, default is `null` if "kotlin.daemon.jvmargs" property is not set.
      */
     @get:Internal
-    val kotlinDaemonJvmArguments: ListProperty<String>
+    konst kotlinDaemonJvmArguments: ListProperty<String>
 
     /**
      * Defines compiler execution strategy, see docs for [KotlinCompilerExecutionStrategy] for more details
      */
     @get:Internal
-    val compilerExecutionStrategy: Property<KotlinCompilerExecutionStrategy>
+    konst compilerExecutionStrategy: Property<KotlinCompilerExecutionStrategy>
 
     /**
      * Defines whether task execution should fail when [compilerExecutionStrategy] is set to [KotlinCompilerExecutionStrategy.DAEMON]
@@ -71,5 +71,5 @@ interface CompileUsingKotlinDaemon : Task {
      * Default is `true`
      */
     @get:Internal
-    val useDaemonFallbackStrategy: Property<Boolean>
+    konst useDaemonFallbackStrategy: Property<Boolean>
 }

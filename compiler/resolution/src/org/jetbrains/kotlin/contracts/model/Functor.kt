@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.resolve.calls.inference.components.NewTypeSubstituto
  *
  * One can think of Functor as of adjoint to function declaration, responsible
  * for generating effects. It's [invokeWithArguments] method roughly corresponds
- * to call of corresponding function, but instead of taking values and returning
- * values, it takes effects and returns effects.
+ * to call of corresponding function, but instead of taking konstues and returning
+ * konstues, it takes effects and returns effects.
  */
 interface Functor {
     fun invokeWithArguments(arguments: List<Computation>, typeSubstitution: ESTypeSubstitution, reducer: Reducer): List<ESEffect>
@@ -46,8 +46,8 @@ abstract class AbstractFunctor : Functor {
 }
 
 class ESTypeSubstitution(
-    val substitutor: NewTypeSubstitutor,
-    val builtIns: KotlinBuiltIns
+    konst substitutor: NewTypeSubstitutor,
+    konst builtIns: KotlinBuiltIns
 ) {
     companion object {
         fun empty(builtIns: KotlinBuiltIns): ESTypeSubstitution {

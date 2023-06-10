@@ -46,16 +46,16 @@ class E {
 
 
     <!NON_INTERNAL_PUBLISHED_API!>@kotlin.PublishedApi<!>
-    val ap = 1
+    konst ap = 1
 
     @kotlin.PublishedApi
-    internal val bp = 1
+    internal konst bp = 1
 
     <!NON_INTERNAL_PUBLISHED_API!>@kotlin.PublishedApi<!>
-    protected val c = 1
+    protected konst c = 1
 
     <!NON_INTERNAL_PUBLISHED_API!>@kotlin.PublishedApi<!>
-    private val d = 1
+    private konst d = 1
 }
 
 
@@ -72,9 +72,9 @@ class D <!NON_INTERNAL_PUBLISHED_API!>@kotlin.PublishedApi<!> constructor() {
 }
 
 class InConstructor(
-    <!NON_INTERNAL_PUBLISHED_API!>@PublishedApi<!> val extensionPoint: Any
+    <!NON_INTERNAL_PUBLISHED_API!>@PublishedApi<!> konst extensionPoint: Any
 )
 
 class FalsePositiveInConstructor(
-    @PublishedApi internal val extensionPoint: Any
+    @PublishedApi internal konst extensionPoint: Any
 )

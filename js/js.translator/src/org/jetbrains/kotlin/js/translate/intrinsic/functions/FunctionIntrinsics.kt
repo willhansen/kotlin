@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.js.translate.intrinsic.functions.factories.*
 
 class FunctionIntrinsics {
 
-    private val intrinsicCache = mutableMapOf<FunctionDescriptor, FunctionIntrinsic?>()
+    private konst intrinsicCache = mutableMapOf<FunctionDescriptor, FunctionIntrinsic?>()
 
-    private val factories = listOf(
+    private konst factories = listOf(
         LongOperationFIF,
         PrimitiveUnaryOperationFIF.INSTANCE,
         StringPlusCharFIF,

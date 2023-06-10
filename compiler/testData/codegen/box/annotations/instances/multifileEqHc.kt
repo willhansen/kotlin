@@ -11,7 +11,7 @@
 // FILE: a.kt
 package a
 
-annotation class A(val i: Int)
+annotation class A(konst i: Int)
 
 fun createInOtherFile(): A = A(10)
 

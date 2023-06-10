@@ -26,8 +26,8 @@ internal fun <T> NamedDomainObjectContainer<T>.getOrCreate(
 ): T {
     return if (name in names) named(name).also { provider ->
         if (configure != null) provider.configure(configure)
-    }.get() else (if (configure != null) create(name, configure) else create(name)).also { value ->
-        if (invokeWhenCreated != null) invokeWhenCreated(value)
+    }.get() else (if (configure != null) create(name, configure) else create(name)).also { konstue ->
+        if (invokeWhenCreated != null) invokeWhenCreated(konstue)
     }
 }
 
@@ -35,7 +35,7 @@ internal fun <T> NamedDomainObjectContainer<T>.maybeRegister(
     name: String,
     configure: (T.() -> Unit)? = null
 ): NamedDomainObjectProvider<T> {
-    val entity = if (name in names) {
+    konst entity = if (name in names) {
         named(name)
     } else {
         register(name)

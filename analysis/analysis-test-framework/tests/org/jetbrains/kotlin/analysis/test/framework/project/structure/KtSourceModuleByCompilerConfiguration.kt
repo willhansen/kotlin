@@ -27,20 +27,20 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 abstract class KtModuleByCompilerConfiguration(
-    val project: Project,
-    val testModule: TestModule,
-    val psiFiles: List<PsiFile>,
+    konst project: Project,
+    konst testModule: TestModule,
+    konst psiFiles: List<PsiFile>,
     testServices: TestServices,
 ) {
-    private val moduleProvider = testServices.ktModuleProvider
-    private val compilerConfigurationProvider = testServices.compilerConfigurationProvider
-    private val configuration = compilerConfigurationProvider.getCompilerConfiguration(testModule)
+    private konst moduleProvider = testServices.ktModuleProvider
+    private konst compilerConfigurationProvider = testServices.compilerConfigurationProvider
+    private konst configuration = compilerConfigurationProvider.getCompilerConfiguration(testModule)
 
 
-    val moduleName: String
+    konst moduleName: String
         get() = testModule.name
 
-    val directRegularDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    konst directRegularDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         buildList {
             testModule.allDependencies.mapTo(this) { moduleProvider.getModule(it.moduleName) }
             addAll(
@@ -51,14 +51,14 @@ abstract class KtModuleByCompilerConfiguration(
         }
     }
 
-    val directDependsOnDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    konst directDependsOnDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         testModule.dependsOnDependencies
             .map { moduleProvider.getModule(it.moduleName) }
     }
 
-    val transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
+    konst transitiveDependsOnDependencies: List<KtModule> by lazy { computeTransitiveDependsOnDependencies(directDependsOnDependencies) }
 
-    val directFriendDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    konst directFriendDependencies: List<KtModule> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         buildList {
             testModule.friendDependencies.mapTo(this) { moduleProvider.getModule(it.moduleName) }
             addAll(
@@ -67,17 +67,17 @@ abstract class KtModuleByCompilerConfiguration(
         }
     }
 
-    protected abstract val ktModule: KtModule
+    protected abstract konst ktModule: KtModule
 
     private fun librariesByRoots(roots: List<Path>): List<LibraryByRoot> = roots.map { LibraryByRoot(it, ktModule, project) }
 
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
         get() = testModule.languageVersionSettings
 
-    val platform: TargetPlatform
+    konst platform: TargetPlatform
         get() = testModule.targetPlatform
 
-    val analyzerServices: PlatformDependentAnalyzerServices
+    konst analyzerServices: PlatformDependentAnalyzerServices
         get() = testModule.targetPlatform.getAnalyzerServices()
 }
 
@@ -87,9 +87,9 @@ class KtSourceModuleByCompilerConfiguration(
     psiFiles: List<PsiFile>,
     testServices: TestServices
 ) : KtModuleByCompilerConfiguration(project, testModule, psiFiles, testServices), KtSourceModule {
-    override val ktModule: KtModule get() = this
+    override konst ktModule: KtModule get() = this
 
-    override val contentScope: GlobalSearchScope =
+    override konst contentScope: GlobalSearchScope =
         TopDownAnalyzerFacadeForJVM.newModuleSearchScope(project, psiFiles.filterIsInstance<KtFile>())
 }
 
@@ -97,16 +97,16 @@ class KtLibraryModuleByCompilerConfiguration(
     project: Project,
     testModule: TestModule,
     psiFiles: List<PsiFile>,
-    private val binaryRoots: List<Path>,
+    private konst binaryRoots: List<Path>,
     testServices: TestServices
 ) : KtModuleByCompilerConfiguration(project, testModule, psiFiles, testServices), KtLibraryModule {
-    override val ktModule: KtModule get() = this
-    override val libraryName: String get() = testModule.name
-    override val librarySources: KtLibrarySourceModule? get() = null
+    override konst ktModule: KtModule get() = this
+    override konst libraryName: String get() = testModule.name
+    override konst librarySources: KtLibrarySourceModule? get() = null
 
     override fun getBinaryRoots(): Collection<Path> = binaryRoots
 
-    override val contentScope: GlobalSearchScope =
+    override konst contentScope: GlobalSearchScope =
         GlobalSearchScope.filesScope(project, psiFiles.map { it.virtualFile })
 }
 
@@ -115,27 +115,27 @@ class KtLibrarySourceModuleByCompilerConfiguration(
     testModule: TestModule,
     psiFiles: List<PsiFile>,
     testServices: TestServices,
-    override val binaryLibrary: KtLibraryModule,
+    override konst binaryLibrary: KtLibraryModule,
 ) : KtModuleByCompilerConfiguration(project, testModule, psiFiles, testServices), KtLibrarySourceModule {
-    override val ktModule: KtModule get() = this
-    override val contentScope: GlobalSearchScope get() = GlobalSearchScope.filesScope(project, psiFiles.map { it.virtualFile })
+    override konst ktModule: KtModule get() = this
+    override konst contentScope: GlobalSearchScope get() = GlobalSearchScope.filesScope(project, psiFiles.map { it.virtualFile })
 
-    override val libraryName: String get() = testModule.name
+    override konst libraryName: String get() = testModule.name
 }
 
 private class LibraryByRoot(
-    private val root: Path,
-    private val parentModule: KtModule,
-    override val project: Project,
+    private konst root: Path,
+    private konst parentModule: KtModule,
+    override konst project: Project,
 ) : KtLibraryModule {
-    override val libraryName: String get() = "Test Library $root"
-    override val directRegularDependencies: List<KtModule> get() = emptyList()
-    override val directDependsOnDependencies: List<KtModule> get() = emptyList()
-    override val transitiveDependsOnDependencies: List<KtModule> get() = emptyList()
-    override val directFriendDependencies: List<KtModule> get() = emptyList()
-    override val contentScope: GlobalSearchScope get() = ProjectScope.getLibrariesScope(project)
-    override val platform: TargetPlatform get() = parentModule.platform
-    override val analyzerServices: PlatformDependentAnalyzerServices get() = parentModule.analyzerServices
+    override konst libraryName: String get() = "Test Library $root"
+    override konst directRegularDependencies: List<KtModule> get() = emptyList()
+    override konst directDependsOnDependencies: List<KtModule> get() = emptyList()
+    override konst transitiveDependsOnDependencies: List<KtModule> get() = emptyList()
+    override konst directFriendDependencies: List<KtModule> get() = emptyList()
+    override konst contentScope: GlobalSearchScope get() = ProjectScope.getLibrariesScope(project)
+    override konst platform: TargetPlatform get() = parentModule.platform
+    override konst analyzerServices: PlatformDependentAnalyzerServices get() = parentModule.analyzerServices
     override fun getBinaryRoots(): Collection<Path> = listOf(root)
 
     override fun equals(other: Any?): Boolean {
@@ -151,5 +151,5 @@ private class LibraryByRoot(
         return root.hashCode()
     }
 
-    override val librarySources: KtLibrarySourceModule? get() = null
+    override konst librarySources: KtLibrarySourceModule? get() = null
 }

@@ -9,7 +9,7 @@ fun nullable(r: SoftReference<String?>) {
 }
 
 fun platform() {
-    val r = SoftReference("x")
+    konst r = SoftReference("x")
     r.<caret>get()
 }
 

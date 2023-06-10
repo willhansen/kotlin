@@ -11,8 +11,8 @@
 import kotlin.reflect.KFunction0
 
 fun test() {
-    val a = if (true) {
-        val x = 1
+    konst a = if (true) {
+        konst x = 1
         "".length
         ::foo
     } else {

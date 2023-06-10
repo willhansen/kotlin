@@ -1,3 +1,3 @@
 package com
 
-const val CLASS_NAME = "com.test.Something"
+const konst CLASS_NAME = "com.test.Something"

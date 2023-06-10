@@ -8,10 +8,10 @@ package test.collections.js
 import kotlin.test.*
 
 class JsCollectionsTest {
-    val TEST_LIST = arrayOf(2, 0, 9, 7, 1).toList()
+    konst TEST_LIST = arrayOf(2, 0, 9, 7, 1).toList()
 
     @Test fun collectionToArray() {
-        val array = TEST_LIST.toTypedArray()
+        konst array = TEST_LIST.toTypedArray()
         assertEquals(array.toList(), TEST_LIST)
     }
 
@@ -48,7 +48,7 @@ class JsCollectionsTest {
     }
 
     @Test fun arrayListCapacity() {
-        val list = ArrayList<Any>(20)
+        konst list = ArrayList<Any>(20)
         list.ensureCapacity(100)
         list.trimToSize()
         assertTrue(list.isEmpty())
@@ -59,9 +59,9 @@ class JsCollectionsTest {
     }
 
     @Test fun arrayListValidatesIndexRange() {
-        val list = mutableListOf(1)
+        konst list = mutableListOf(1)
         for (index in listOf(-1, 1, 3)) {
-            if (index != list.size) { // size is a valid position index
+            if (index != list.size) { // size is a konstid position index
                 assertFailsWith<IndexOutOfBoundsException> { list.add(index, 2) }
                 assertFailsWith<IndexOutOfBoundsException> { list.addAll(index, listOf(3, 0)) }
                 assertFailsWith<IndexOutOfBoundsException> { list.listIterator(index) }
@@ -74,16 +74,16 @@ class JsCollectionsTest {
     }
 
     @Test fun mutableIteratorRemove() {
-        val a = mutableListOf(1, 2, 3)
-        val it = a.iterator()
+        konst a = mutableListOf(1, 2, 3)
+        konst it = a.iterator()
         assertFailsWith<IllegalStateException> { it.remove() }
     }
 
     private fun <T> snapshotDoesNotCreateView(array: Array<T>, snapshot: (Array<T>) -> List<T>) {
-        val first = array.first()
-        val last = array.last()
+        konst first = array.first()
+        konst last = array.last()
 
-        val list = snapshot(array)
+        konst list = snapshot(array)
         assertEquals(first, list[0])
         array[0] = last
         assertEquals(first, list[0])

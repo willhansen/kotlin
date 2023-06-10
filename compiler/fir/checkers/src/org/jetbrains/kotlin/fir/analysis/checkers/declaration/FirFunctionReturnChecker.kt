@@ -33,9 +33,9 @@ object FirFunctionReturnChecker : FirFunctionChecker() {
         if (declaration is FirConstructor) return
         if (declaration is FirAnonymousFunction && declaration.isLambda) return
         if (declaration.returnTypeRef.isUnit || declaration.returnTypeRef.isNothing) return
-        val graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
+        konst graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
 
-        val blockExitNode = graph.exitNode.previousNodes.lastOrNull { it is BlockExitNode } ?: return
+        konst blockExitNode = graph.exitNode.previousNodes.lastOrNull { it is BlockExitNode } ?: return
         if (!blockExitNode.isDead) {
             reporter.reportOn(declaration.source, FirErrors.NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY, context)
         }

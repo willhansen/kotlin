@@ -2,26 +2,26 @@
 
 // WITH_REFLECT
 
-import kotlin.reflect.full.valueParameters
+import kotlin.reflect.full.konstueParameters
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Simple(val value: String)
+annotation class Simple(konst konstue: String)
 
 fun local(): Any {
-    class A(@Simple("OK") val z: String)
+    class A(@Simple("OK") konst z: String)
     return A("OK")
 }
 
 fun localCaptured(): Any {
-    val z  = 1
-    class A(@Simple("K") val z: String) {
-        val x = z
+    konst z  = 1
+    class A(@Simple("K") konst z: String) {
+        konst x = z
     }
     return A("K")
 }
 
 fun box(): String {
-    return (local()::class.constructors.single().valueParameters.single().annotations.single() as Simple).value
+    return (local()::class.constructors.single().konstueParameters.single().annotations.single() as Simple).konstue
     //KT-25573
-    //return (localCaptured()::class.constructors.single().valueParameters.single().annotations.single() as Simple).value
+    //return (localCaptured()::class.constructors.single().konstueParameters.single().annotations.single() as Simple).konstue
 }

@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitor
 import org.jetbrains.kotlin.name.Name
 
 class FirAnnotationArgumentMappingImpl(
-    override val source: KtSourceElement?,
-    override val mapping: Map<Name, FirExpression>
+    override konst source: KtSourceElement?,
+    override konst mapping: Map<Name, FirExpression>
 ) : FirAnnotationArgumentMapping() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 
@@ -26,9 +26,9 @@ class FirAnnotationArgumentMappingImpl(
 }
 
 object FirEmptyAnnotationArgumentMapping : FirAnnotationArgumentMapping() {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
-    override val mapping: Map<Name, FirExpression>
+    override konst mapping: Map<Name, FirExpression>
         get() = emptyMap()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
@@ -42,8 +42,8 @@ fun FirResolvedArgumentList.toAnnotationArgumentMapping(): FirAnnotationArgument
     return FirAnnotationArgumentMappingImpl(
         source = null,
         mapping = mapping.entries.associateBy(
-            keySelector = { it.value.name },
-            valueTransform = { it.key.unwrapArgument() }
+            keySelector = { it.konstue.name },
+            konstueTransform = { it.key.unwrapArgument() }
         )
     )
 }

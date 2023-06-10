@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionVisitorWithRe
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionImpl
 
 class SubroutineEnterInstruction(
-    val subroutine: KtElement,
+    konst subroutine: KtElement,
     blockScope: BlockScope
 ) : InstructionWithNext(subroutine, blockScope) {
     override fun accept(visitor: InstructionVisitor) {

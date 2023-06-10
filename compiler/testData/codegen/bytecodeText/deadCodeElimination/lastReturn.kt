@@ -1,7 +1,7 @@
 import kotlin.test.assertEquals
 
-fun foo(value: Boolean): Int {
-    if (value)
+fun foo(konstue: Boolean): Int {
+    if (konstue)
         return 1
     else
         return 2

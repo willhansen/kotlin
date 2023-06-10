@@ -23,7 +23,7 @@ fun box(): String {
     class Local
     assertEquals(null, Local::class.qualifiedName)
 
-    val o = object {}
+    konst o = object {}
     assertEquals(null, o.javaClass.kotlin.qualifiedName)
 
     return "OK"

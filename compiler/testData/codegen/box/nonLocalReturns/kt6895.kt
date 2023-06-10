@@ -6,13 +6,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 import kotlin.concurrent.write
 
 class UpdateableThing {
-    private val lock = ReentrantReadWriteLock()
+    private konst lock = ReentrantReadWriteLock()
     private var updateCount = 0
 
     fun <T> performUpdates(block: () -> T): T {
         lock.write {
             ++updateCount
-            val result = block()
+            konst result = block()
             --updateCount
 
             return result

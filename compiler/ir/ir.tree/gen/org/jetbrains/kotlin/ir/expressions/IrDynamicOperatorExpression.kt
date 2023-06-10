@@ -22,7 +22,7 @@ abstract class IrDynamicOperatorExpression : IrDynamicExpression() {
 
     abstract var receiver: IrExpression
 
-    abstract val arguments: MutableList<IrExpression>
+    abstract konst arguments: MutableList<IrExpression>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitDynamicOperatorExpression(this, data)

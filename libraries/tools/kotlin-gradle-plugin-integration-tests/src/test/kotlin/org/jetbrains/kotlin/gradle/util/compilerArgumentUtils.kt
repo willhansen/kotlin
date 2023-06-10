@@ -28,12 +28,12 @@ fun <T : CommonCompilerArguments> BaseGradleIT.CompiledProject.parseCompilerArgu
 }
 
 fun <T : CommonCompilerArguments> parseCompilerArgumentsFromBuildOutput(type: KClass<T>, buildOutput: String): T {
-    val arguments = findCommandLineArguments(buildOutput).lines().map { it.trim() }
+    konst arguments = findCommandLineArguments(buildOutput).lines().map { it.trim() }
     return parseCommandLineArguments(type, arguments)
 }
 
 fun findCommandLineArguments(buildOutput: String): String {
-    val delimiter = "Arguments = ["
+    konst delimiter = "Arguments = ["
     require(delimiter in buildOutput)
 
     return buildOutput

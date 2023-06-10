@@ -10,13 +10,13 @@ public class Java<SELF extends Java<SELF, ELEMENT>, ELEMENT> {
         return null;
     }
 
-    public void consumeElement(ELEMENT values) {}
+    public void consumeElement(ELEMENT konstues) {}
 }
 
 // FILE: main.kt
 fun main() {
-    val a = Java.factory("")
-    val b = a.produceSelf()
+    konst a = Java.factory("")
+    konst b = a.produceSelf()
     b.consumeElement("testing")
 }
 

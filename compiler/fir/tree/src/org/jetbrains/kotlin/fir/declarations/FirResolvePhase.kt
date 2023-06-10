@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.fir.declarations
 
-enum class FirResolvePhase(val noProcessor: Boolean = false) {
+enum class FirResolvePhase(konst noProcessor: Boolean = false) {
     RAW_FIR(noProcessor = true),
     IMPORTS,
     COMPILER_REQUIRED_ANNOTATIONS,
@@ -21,26 +21,26 @@ enum class FirResolvePhase(val noProcessor: Boolean = false) {
     ANNOTATIONS_ARGUMENTS_MAPPING,
     BODY_RESOLVE;
 
-    val requiredToLaunch: FirResolvePhase
+    konst requiredToLaunch: FirResolvePhase
         get() = when (this) {
             RAW_FIR -> RAW_FIR
             IMPORTS -> RAW_FIR
             STATUS -> TYPES
             IMPLICIT_TYPES_BODY_RESOLVE, BODY_RESOLVE -> STATUS
-            else -> values()[ordinal - 1]
+            else -> konstues()[ordinal - 1]
         }
 
-    val next: FirResolvePhase get() = values()[ordinal + 1]
-    val previous: FirResolvePhase get() = values()[ordinal - 1]
+    konst next: FirResolvePhase get() = konstues()[ordinal + 1]
+    konst previous: FirResolvePhase get() = konstues()[ordinal - 1]
 
     companion object {
         // Short-cut
-        val DECLARATIONS = STATUS
-        val ANALYZED_DEPENDENCIES = BODY_RESOLVE
+        konst DECLARATIONS = STATUS
+        konst ANALYZED_DEPENDENCIES = BODY_RESOLVE
     }
 }
 
-val FirResolvePhase.isBodyResolve: Boolean
+konst FirResolvePhase.isBodyResolve: Boolean
     get() = when (this) {
         FirResolvePhase.BODY_RESOLVE,
         FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE -> true

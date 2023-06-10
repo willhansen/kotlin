@@ -6,14 +6,14 @@ class A : java.util.concurrent.ConcurrentHashMap<String, Int>() {
     operator fun contains(x: Char): Boolean = true
 }
 class B : java.util.concurrent.ConcurrentHashMap<String, Int>() {
-    override fun contains(value: Any?): Boolean {
-        return super.contains(value)
+    override fun contains(konstue: Any?): Boolean {
+        return super.contains(konstue)
     }
 }
 
 class C : java.util.concurrent.ConcurrentHashMap<String, Int>() {
-    operator override fun contains(value: Any?): Boolean {
-        return super.contains(value)
+    operator override fun contains(konstue: Any?): Boolean {
+        return super.contains(konstue)
     }
 }
 
@@ -23,7 +23,7 @@ class E : D<String, Int>()
 
 fun main() {
     run { // CHM test
-        val hm = java.util.concurrent.ConcurrentHashMap<String, Int>()
+        konst hm = java.util.concurrent.ConcurrentHashMap<String, Int>()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> hm
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> hm
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> hm
@@ -39,7 +39,7 @@ fun main() {
     }
 
     run { // A : CHM test
-        val a = A()
+        konst a = A()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> a
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> a
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> a
@@ -57,7 +57,7 @@ fun main() {
     }
 
     run { // B : CHM test
-        val b = B()
+        konst b = B()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> b
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> b
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> b
@@ -74,7 +74,7 @@ fun main() {
 
     run { // C : CHM
         // Actually, we could've allow calls here because the owner explicitly declared as operator, but semantics is still weird
-        val c = C()
+        konst c = C()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> c
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> c
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> c
@@ -90,7 +90,7 @@ fun main() {
     }
 
     run { // D<K, V> : CHM<K, V>
-        val d = D<String, Int>()
+        konst d = D<String, Int>()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> d
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> d
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> d
@@ -106,7 +106,7 @@ fun main() {
     }
 
     run { // E : D<String ,Int>
-        val e = E()
+        konst e = E()
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>in<!> e
         "" <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> e
         1 <!CONCURRENT_HASH_MAP_CONTAINS_OPERATOR_ERROR!>!in<!> e

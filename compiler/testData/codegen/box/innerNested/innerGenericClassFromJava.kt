@@ -9,8 +9,8 @@ public abstract class JavaClass {
 
 // FILE: Kotlin.kt
 
-class Outer<E>(val x: E) {
-    inner class Inner<F>(val y: F) {
+class Outer<E>(konst x: E) {
+    inner class Inner<F>(konst y: F) {
         fun foo() = x.toString() + y.toString()
     }
 }
@@ -20,7 +20,7 @@ object Test {
 }
 
 fun box(): String {
-    val result = JavaClass.test()
+    konst result = JavaClass.test()
     if (result != "OK1") return "Fail: $result"
     return "OK"
 }

@@ -8,8 +8,8 @@ import javax.tools.Diagnostic
 
 class CheckAnnotationIsRepeated : AbstractProcessor() {
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
-        val element = processingEnv.elementUtils.getTypeElement("example.TestClass")
-        val containerAnnotation = element.annotationMirrors.singleOrNull {
+        konst element = processingEnv.elementUtils.getTypeElement("example.TestClass")
+        konst containerAnnotation = element.annotationMirrors.singleOrNull {
             it.annotationType.asElement().simpleName.contentEquals("Container") &&
                     it.annotationType.asElement().enclosingElement.simpleName.contentEquals("Anno")
         }
@@ -23,12 +23,12 @@ class CheckAnnotationIsRepeated : AbstractProcessor() {
             return true
         }
 
-        val expected = "{value()={@example.Anno(\"1\"), @example.Anno(\"2\")}}"
-        val actual = containerAnnotation.elementValues.toString()
+        konst expected = "{konstue()={@example.Anno(\"1\"), @example.Anno(\"2\")}}"
+        konst actual = containerAnnotation.elementValues.toString()
         if (actual != expected) {
             processingEnv.messager.printMessage(
                 Diagnostic.Kind.ERROR,
-                "Repeatable annotation values are incorrect: $actual"
+                "Repeatable annotation konstues are incorrect: $actual"
             )
         }
 

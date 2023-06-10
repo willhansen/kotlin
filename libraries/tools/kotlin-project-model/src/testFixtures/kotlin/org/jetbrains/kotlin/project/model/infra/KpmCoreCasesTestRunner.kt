@@ -39,15 +39,15 @@ interface KpmCoreCasesTestRunner {
     @Test
     @Throws(Exception::class)
     fun checkAllCoreCasesCovered() {
-        val testRunnerClass = this::class.java
+        konst testRunnerClass = this::class.java
 
-        val testCasesNames = testRunnerClass.methods.asSequence()
+        konst testCasesNames = testRunnerClass.methods.asSequence()
             .map { it.name }
             .filter { it.startsWith("test") }
             .map { it.substringAfter("test") }
             .toSet()
 
-        val uncoveredCases = KpmTestCaseDescriptor.allCasesNames - testCasesNames
+        konst uncoveredCases = KpmTestCaseDescriptor.allCasesNames - testCasesNames
         if (uncoveredCases.isNotEmpty()) {
             Assertions.fail<Nothing>(
                 """

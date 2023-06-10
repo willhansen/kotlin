@@ -1,34 +1,34 @@
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.EXPIRED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.EXPIRED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.INDIVIDUALIZATION_REQUEST: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.INDIVIDUALIZATION_REQUEST: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.INTERNAL_ERROR: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.INTERNAL_ERROR: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_RELEASE: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_RELEASE: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_RENEWAL: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_RENEWAL: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_REQUEST: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyMessageType.Companion.LICENSE_REQUEST: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.NOT_ALLOWED: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.NOT_ALLOWED: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.OPTIONAL: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.OPTIONAL: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.OUTPUT_DOWNSCALED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.OUTPUT_DOWNSCALED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.OUTPUT_RESTRICTED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.OUTPUT_RESTRICTED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeySessionType.Companion.PERSISTENT_LICENSE: org.w3c.dom.encryptedmedia.MediaKeySessionType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeySessionType.Companion.PERSISTENT_LICENSE: org.w3c.dom.encryptedmedia.MediaKeySessionType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.RELEASED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.RELEASED: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.REQUIRED: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeysRequirement.Companion.REQUIRED: org.w3c.dom.encryptedmedia.MediaKeysRequirement { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.STATUS_PENDING: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.STATUS_PENDING: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeySessionType.Companion.TEMPORARY: org.w3c.dom.encryptedmedia.MediaKeySessionType { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeySessionType.Companion.TEMPORARY: org.w3c.dom.encryptedmedia.MediaKeySessionType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.USABLE: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
+/*∆*/ public konst org.w3c.dom.encryptedmedia.MediaKeyStatus.Companion.USABLE: org.w3c.dom.encryptedmedia.MediaKeyStatus { get; }
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
 /*∆*/ public inline fun MediaEncryptedEventInit(initDataType: kotlin.String? = ..., initData: org.khronos.webgl.ArrayBuffer? = ..., bubbles: kotlin.Boolean? = ..., cancelable: kotlin.Boolean? = ..., composed: kotlin.Boolean? = ...): org.w3c.dom.encryptedmedia.MediaEncryptedEventInit
@@ -45,18 +45,18 @@
 /*∆*/ public open external class MediaEncryptedEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor MediaEncryptedEvent(type: kotlin.String, eventInitDict: org.w3c.dom.encryptedmedia.MediaEncryptedEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val initData: org.khronos.webgl.ArrayBuffer? { get; }
+/*∆*/     public open konst initData: org.khronos.webgl.ArrayBuffer? { get; }
 /*∆*/ 
-/*∆*/     public open val initDataType: kotlin.String { get; }
+/*∆*/     public open konst initDataType: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of MediaEncryptedEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -69,18 +69,18 @@
 /*∆*/ public open external class MediaKeyMessageEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor MediaKeyMessageEvent(type: kotlin.String, eventInitDict: org.w3c.dom.encryptedmedia.MediaKeyMessageEventInit)
 /*∆*/ 
-/*∆*/     public open val message: org.khronos.webgl.ArrayBuffer { get; }
+/*∆*/     public open konst message: org.khronos.webgl.ArrayBuffer { get; }
 /*∆*/ 
-/*∆*/     public open val messageType: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
+/*∆*/     public open konst messageType: org.w3c.dom.encryptedmedia.MediaKeyMessageType { get; }
 /*∆*/ 
 /*∆*/     public companion object of MediaKeyMessageEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -99,17 +99,17 @@
 /*∆*/ public abstract external class MediaKeySession : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor MediaKeySession()
 /*∆*/ 
-/*∆*/     public open val closed: kotlin.js.Promise<kotlin.Unit> { get; }
+/*∆*/     public open konst closed: kotlin.js.Promise<kotlin.Unit> { get; }
 /*∆*/ 
-/*∆*/     public open val expiration: kotlin.Double { get; }
+/*∆*/     public open konst expiration: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val keyStatuses: org.w3c.dom.encryptedmedia.MediaKeyStatusMap { get; }
+/*∆*/     public open konst keyStatuses: org.w3c.dom.encryptedmedia.MediaKeyStatusMap { get; }
 /*∆*/ 
 /*∆*/     public open var onkeystatuseschange: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open var onmessage: ((org.w3c.dom.MessageEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val sessionId: kotlin.String { get; }
+/*∆*/     public open konst sessionId: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun close(): kotlin.js.Promise<kotlin.Unit>
 /*∆*/ 
@@ -137,7 +137,7 @@
 /*∆*/ public abstract external class MediaKeyStatusMap {
 /*∆*/     public constructor MediaKeyStatusMap()
 /*∆*/ 
-/*∆*/     public open val size: kotlin.Int { get; }
+/*∆*/     public open konst size: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun get(keyId: dynamic): kotlin.Any?
 /*∆*/ 
@@ -147,7 +147,7 @@
 /*∆*/ public abstract external class MediaKeySystemAccess {
 /*∆*/     public constructor MediaKeySystemAccess()
 /*∆*/ 
-/*∆*/     public open val keySystem: kotlin.String { get; }
+/*∆*/     public open konst keySystem: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun createMediaKeys(): kotlin.js.Promise<org.w3c.dom.encryptedmedia.MediaKeys>
 /*∆*/ 

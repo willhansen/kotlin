@@ -16,9 +16,9 @@ abstract class WaitFor {
 }
 
 fun box(): String {
-    val local = ""
+    konst local = ""
     var result = "fail"
-    val s = object : WaitFor() {
+    konst s = object : WaitFor() {
 
         override fun condition(): Boolean {
             result = "OK"

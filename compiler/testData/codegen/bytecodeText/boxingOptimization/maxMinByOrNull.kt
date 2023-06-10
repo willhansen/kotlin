@@ -1,21 +1,21 @@
 // FILE: list.kt
 
-val intList = listOf(1, 2, 3)
-val longList = listOf(1L, 2L, 3L)
+konst intList = listOf(1, 2, 3)
+konst longList = listOf(1L, 2L, 3L)
 
 // FILE: box.kt
 
 fun box(): String {
-    val intListMin = intList.minByOrNull { it } ?: -1
+    konst intListMin = intList.minByOrNull { it } ?: -1
     if (intListMin != 1) return "Fail intListMin=$intListMin"
 
-    val intListMax = intList.maxByOrNull { it } ?: -1
+    konst intListMax = intList.maxByOrNull { it } ?: -1
     if (intListMax != 3) return "Fail intListMax=$intListMax"
 
-    val longListMin = longList.minByOrNull { it } ?: -1
+    konst longListMin = longList.minByOrNull { it } ?: -1
     if (longListMin != 1L) return "Fail longListMin=$longListMin"
 
-    val longListMax = longList.maxByOrNull { it } ?: -1
+    konst longListMax = longList.maxByOrNull { it } ?: -1
     if (longListMax != 3L) return "Fail longListMax=$longListMax"
 
     return "OK"
@@ -33,7 +33,7 @@ fun box(): String {
 // 1 IFGE
 // 1 IFLE
 
-// 0 valueOf
+// 0 konstueOf
 // 0 Intrinsics.stringPlus
 // 4 StringBuilder.<init>
 // 8 StringBuilder.append

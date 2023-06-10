@@ -30,28 +30,28 @@ import java.io.File
 import java.util.HashSet
 
 class AstGenerationResult(
-    val units: Collection<TranslationUnit>,
-    val translatedSourceFiles: Map<KtFile, SourceFileTranslationResult>,
-    val inlineFunctionTagMap: Map<String, TranslationUnit>,
+    konst units: Collection<TranslationUnit>,
+    konst translatedSourceFiles: Map<KtFile, SourceFileTranslationResult>,
+    konst inlineFunctionTagMap: Map<String, TranslationUnit>,
     moduleDescriptor: ModuleDescriptor,
     config: JsConfig
 ) {
 
-    val newFragments = translatedSourceFiles.values.map { it.fragment }.toSet()
+    konst newFragments = translatedSourceFiles.konstues.map { it.fragment }.toSet()
 
-    private val cache = mutableMapOf<TranslationUnit.BinaryAst, DeserializedFileTranslationResult>()
+    private konst cache = mutableMapOf<TranslationUnit.BinaryAst, DeserializedFileTranslationResult>()
 
-    private val merger = Merger(moduleDescriptor, config.moduleId, config.moduleKind)
+    private konst merger = Merger(moduleDescriptor, config.moduleId, config.moduleKind)
 
-    private val sourceRoots = config.sourceMapRoots.map { File(it) }
-    private val deserializer = JsAstDeserializer(merger.program, sourceRoots)
+    private konst sourceRoots = config.sourceMapRoots.map { File(it) }
+    private konst deserializer = JsAstDeserializer(merger.program, sourceRoots)
 
     fun getTranslationResult(unit: TranslationUnit): FileTranslationResult =
         when (unit) {
             is TranslationUnit.SourceFile -> translatedSourceFiles[unit.file]!!
             is TranslationUnit.BinaryAst -> cache.getOrPut(unit) {
                 // TODO Don't deserialize header twice
-                val inlineData = JsAstProtoBuf.InlineData.parseFrom(CodedInputStream.newInstance(unit.inlineData))
+                konst inlineData = JsAstProtoBuf.InlineData.parseFrom(CodedInputStream.newInstance(unit.inlineData))
 
                 DeserializedFileTranslationResult(
                     deserializer.deserialize(ByteArrayInputStream(unit.data)),
@@ -61,26 +61,26 @@ class AstGenerationResult(
         }
 
     fun buildProgram(): Pair<JsProgram, List<String>> {
-        val fragments = units.map { getTranslationResult(it).fragment }
+        konst fragments = units.map { getTranslationResult(it).fragment }
         fragments.forEach { merger.addFragment(it) }
         return merger.buildProgram() to merger.importedModules.map { it.externalName }
     }
 }
 
 sealed class FileTranslationResult {
-    abstract val fragment: JsProgramFragment
+    abstract konst fragment: JsProgramFragment
 
-    abstract val inlineFunctionTags: Set<String>
+    abstract konst inlineFunctionTags: Set<String>
 }
 
 class SourceFileTranslationResult(
-    override val fragment: JsProgramFragment,
-    override val inlineFunctionTags: Set<String>,
-    val memberScope: List<DeclarationDescriptor>
+    override konst fragment: JsProgramFragment,
+    override konst inlineFunctionTags: Set<String>,
+    konst memberScope: List<DeclarationDescriptor>
 ) : FileTranslationResult()
 
 class DeserializedFileTranslationResult(
-    override val fragment: JsProgramFragment,
-    override val inlineFunctionTags: Set<String>
+    override konst fragment: JsProgramFragment,
+    override konst inlineFunctionTags: Set<String>
 ) : FileTranslationResult()
 

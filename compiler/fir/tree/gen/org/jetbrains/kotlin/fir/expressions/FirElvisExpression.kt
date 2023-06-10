@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirElvisExpression : FirExpression(), FirResolvable {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val calleeReference: FirReference
-    abstract val lhs: FirExpression
-    abstract val rhs: FirExpression
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst calleeReference: FirReference
+    abstract konst lhs: FirExpression
+    abstract konst rhs: FirExpression
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitElvisExpression(this, data)
 

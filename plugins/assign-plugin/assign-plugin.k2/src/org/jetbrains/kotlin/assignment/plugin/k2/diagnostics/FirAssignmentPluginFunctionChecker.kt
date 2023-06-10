@@ -26,7 +26,7 @@ object FirAssignmentPluginFunctionChecker : FirSimpleFunctionChecker() {
         if (declaration.origin != FirDeclarationOrigin.Source) return
         if (!declaration.isAssignMethod()) return
 
-        val receiverClassSymbol = if (declaration.symbol.isExtension) {
+        konst receiverClassSymbol = if (declaration.symbol.isExtension) {
             declaration.symbol.resolvedReceiverTypeRef?.toRegularClassSymbol(context.session)
         } else {
             declaration.dispatchReceiverType?.toRegularClassSymbol(context.session)
@@ -38,6 +38,6 @@ object FirAssignmentPluginFunctionChecker : FirSimpleFunctionChecker() {
     }
 
     private fun FirSimpleFunction.isAssignMethod(): Boolean {
-        return valueParameters.size == 1 && this.name == ASSIGN_METHOD
+        return konstueParameters.size == 1 && this.name == ASSIGN_METHOD
     }
 }

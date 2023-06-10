@@ -1,1 +1,1 @@
-val p by A()
+konst p by A()

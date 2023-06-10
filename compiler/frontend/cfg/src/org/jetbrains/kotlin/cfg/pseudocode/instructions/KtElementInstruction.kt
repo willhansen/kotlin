@@ -19,5 +19,5 @@ package org.jetbrains.kotlin.cfg.pseudocode.instructions
 import org.jetbrains.kotlin.psi.KtElement
 
 interface KtElementInstruction : Instruction {
-    val element: KtElement
+    konst element: KtElement
 }

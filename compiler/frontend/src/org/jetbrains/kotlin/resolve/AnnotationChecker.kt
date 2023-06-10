@@ -37,12 +37,12 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingUtils
 import org.jetbrains.kotlin.types.isError
 
 class AnnotationChecker(
-    private val additionalCheckers: Iterable<AdditionalAnnotationChecker>,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val platformAnnotationFeaturesSupport: PlatformAnnotationFeaturesSupport,
+    private konst additionalCheckers: Iterable<AdditionalAnnotationChecker>,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst platformAnnotationFeaturesSupport: PlatformAnnotationFeaturesSupport,
 ) {
     fun check(annotated: KtAnnotated, trace: BindingTrace, descriptor: DeclarationDescriptor? = null) {
-        val actualTargets = getActualTargetList(annotated, descriptor, trace.bindingContext)
+        konst actualTargets = getActualTargetList(annotated, descriptor, trace.bindingContext)
         checkEntries(annotated.annotationEntries, actualTargets, trace, annotated)
         if (annotated is KtProperty) {
             checkPropertyUseSiteTargetAnnotations(annotated, trace)
@@ -93,7 +93,7 @@ class AnnotationChecker(
         }
         if (annotated is KtDeclarationWithBody) {
             // KtFunction or KtPropertyAccessor
-            for (parameter in annotated.valueParameters) {
+            for (parameter in annotated.konstueParameters) {
                 if (!parameter.hasValOrVar()) {
                     check(parameter, trace)
                     if (annotated is KtFunctionLiteral) {
@@ -112,13 +112,13 @@ class AnnotationChecker(
             expression.parent as? KtAnnotated
         )
         if (expression is KtCallElement && languageVersionSettings.supportsFeature(ProperCheckAnnotationsTargetInTypeUsePositions)) {
-            val typeArguments = expression.typeArguments.mapNotNull { it.typeReference }
+            konst typeArguments = expression.typeArguments.mapNotNull { it.typeReference }
             for (typeArgument in typeArguments) {
                 checkEntries(typeArgument.annotationEntries, getActualTargetList(typeArgument, null, trace.bindingContext), trace)
             }
         }
         if (expression is KtLambdaExpression) {
-            for (parameter in expression.valueParameters) {
+            for (parameter in expression.konstueParameters) {
                 parameter.typeReference?.let { check(it, trace) }
             }
         }
@@ -128,20 +128,20 @@ class AnnotationChecker(
         fun List<KtAnnotationEntry>?.getDescriptors() =
             this?.mapNotNull { trace.get(BindingContext.ANNOTATION, it)?.annotationClass } ?: listOf()
 
-        val reportError = languageVersionSettings.supportsFeature(ProhibitRepeatedUseSiteTargetAnnotations)
+        konst reportError = languageVersionSettings.supportsFeature(ProhibitRepeatedUseSiteTargetAnnotations)
 
-        val propertyAnnotations = mapOf(
+        konst propertyAnnotations = mapOf(
             AnnotationUseSiteTarget.PROPERTY_GETTER to property.getter?.annotationEntries.getDescriptors(),
             AnnotationUseSiteTarget.PROPERTY_SETTER to property.setter?.annotationEntries.getDescriptors(),
             AnnotationUseSiteTarget.SETTER_PARAMETER to property.setter?.parameter?.annotationEntries.getDescriptors()
         )
 
         for (entry in property.annotationEntries) {
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
-            val classDescriptor = descriptor.annotationClass ?: continue
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst classDescriptor = descriptor.annotationClass ?: continue
 
-            val useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget() ?: property.getDefaultUseSiteTarget(descriptor)
-            val existingAnnotations = propertyAnnotations[useSiteTarget] ?: continue
+            konst useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget() ?: property.getDefaultUseSiteTarget(descriptor)
+            konst existingAnnotations = propertyAnnotations[useSiteTarget] ?: continue
             if (classDescriptor in existingAnnotations && !isRepeatableAnnotation(classDescriptor)) {
                 if (reportError) {
                     trace.reportDiagnosticOnce(Errors.REPEATED_ANNOTATION.on(entry))
@@ -165,9 +165,9 @@ class AnnotationChecker(
         shouldCheckReferenceItself: Boolean = false,
         checkWithoutLanguageFeature: Boolean = false
     ) {
-        val shouldRunCheck = isSuperType || shouldCheckReferenceItself
+        konst shouldRunCheck = isSuperType || shouldCheckReferenceItself
         for (entry in reference.annotationEntries) {
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry)
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry)
             if (shouldRunCheck) {
                 if (descriptor is LazyAnnotationDescriptor) {
                     /*
@@ -177,7 +177,7 @@ class AnnotationChecker(
                      */
                     descriptor.forceResolveAllContents()
                 }
-                val actualTargets = getActualTargetList(reference, null, trace.bindingContext)
+                konst actualTargets = getActualTargetList(reference, null, trace.bindingContext)
                 if (entry.useSiteTarget != null && isSuperType) {
                     trace.report(Errors.ANNOTATION_ON_SUPERCLASS.on(languageVersionSettings, entry))
                 } else if (shouldRunCheck && (languageVersionSettings.supportsFeature(ProperCheckAnnotationsTargetInTypeUsePositions) || checkWithoutLanguageFeature)) {
@@ -185,7 +185,7 @@ class AnnotationChecker(
                 }
             }
             if (descriptor?.annotationClass?.classId == StandardClassIds.Annotations.ExtensionFunctionType) {
-                val type = trace[BindingContext.TYPE, reference] ?: trace[BindingContext.ABBREVIATED_TYPE, reference]
+                konst type = trace[BindingContext.TYPE, reference] ?: trace[BindingContext.ABBREVIATED_TYPE, reference]
                 if (type != null) {
                     if (!type.isFunctionOrKFunctionTypeWithAnySuspendability) {
                         if (languageVersionSettings.supportsFeature(ForbidExtensionFunctionTypeOnNonFunctionTypes)) {
@@ -199,7 +199,7 @@ class AnnotationChecker(
                 }
             }
         }
-        val typeArguments = reference.typeElement?.typeArgumentsAsTypes ?: return
+        konst typeArguments = reference.typeElement?.typeArgumentsAsTypes ?: return
         for (typeArgument in typeArguments) {
             typeArgument?.let { checkTypeReference(it, trace, shouldCheckReferenceItself = true) }
         }
@@ -229,11 +229,11 @@ class AnnotationChecker(
     ) {
         if (entries.isEmpty()) return
 
-        val entryTypesWithAnnotations = hashMapOf<KotlinType, MutableList<AnnotationUseSiteTarget?>>()
+        konst entryTypesWithAnnotations = hashMapOf<KotlinType, MutableList<AnnotationUseSiteTarget?>>()
 
         for (entry in entries) {
             checkAnnotationEntry(entry, actualTargets, trace)
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
             if (descriptor is LazyAnnotationDescriptor) {
                 /*
                  * There are no users of type annotations until backend, so if there are errors
@@ -243,16 +243,16 @@ class AnnotationChecker(
                 descriptor.forceResolveAllContents()
             }
 
-            val contextReceiversSupported = languageVersionSettings.supportsFeature(ContextReceivers)
+            konst contextReceiversSupported = languageVersionSettings.supportsFeature(ContextReceivers)
             if (descriptor.fqName == FqName("kotlin.ContextFunctionTypeParams") && !contextReceiversSupported) {
                 trace.report(Errors.UNSUPPORTED_FEATURE.on(entry, ContextReceivers to languageVersionSettings))
             }
 
-            val classDescriptor = descriptor.annotationClass ?: continue
+            konst classDescriptor = descriptor.annotationClass ?: continue
 
-            val useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget() ?: annotated.getDefaultUseSiteTarget(descriptor)
-            val existingTargetsForAnnotation = entryTypesWithAnnotations.getOrPut(descriptor.type) { arrayListOf() }
-            val duplicateAnnotation = useSiteTarget in existingTargetsForAnnotation
+            konst useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget() ?: annotated.getDefaultUseSiteTarget(descriptor)
+            konst existingTargetsForAnnotation = entryTypesWithAnnotations.getOrPut(descriptor.type) { arrayListOf() }
+            konst duplicateAnnotation = useSiteTarget in existingTargetsForAnnotation
                     || (existingTargetsForAnnotation.any { (it == null) != (useSiteTarget == null) })
 
             if (duplicateAnnotation && !isRepeatableAnnotation(classDescriptor)) {
@@ -268,8 +268,8 @@ class AnnotationChecker(
     }
 
     private fun checkAnnotationEntry(entry: KtAnnotationEntry, actualTargets: TargetList, trace: BindingTrace) {
-        val applicableTargets = applicableTargetSet(entry, trace)
-        val useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
+        konst applicableTargets = applicableTargetSet(entry, trace)
+        konst useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
 
         fun check(targets: List<KotlinTarget>) = targets.any {
             it in applicableTargets && (useSiteTarget == null || KotlinTarget.USE_SITE_MAPPING[useSiteTarget] == it)
@@ -278,12 +278,12 @@ class AnnotationChecker(
         fun checkUselessFunctionLiteralAnnotation() {
             // TODO: tests on different KtAnnotatedExpression (?!)
             if (KotlinTarget.FUNCTION !in applicableTargets) return
-            val annotatedExpression = entry.parent as? KtAnnotatedExpression ?: return
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: return
-            val retention = descriptor.annotationClass?.getAnnotationRetention()
+            konst annotatedExpression = entry.parent as? KtAnnotatedExpression ?: return
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: return
+            konst retention = descriptor.annotationClass?.getAnnotationRetention()
             if (retention == KotlinRetention.SOURCE) return
 
-            val functionLiteralExpression = annotatedExpression.baseExpression as? KtLambdaExpression ?: return
+            konst functionLiteralExpression = annotatedExpression.baseExpression as? KtLambdaExpression ?: return
             if (InlineUtil.isInlinedArgument(functionLiteralExpression.functionLiteral, trace.bindingContext, false)) {
                 trace.report(Errors.NON_SOURCE_ANNOTATION_ON_INLINED_LAMBDA_EXPRESSION.on(entry))
             }
@@ -292,7 +292,7 @@ class AnnotationChecker(
         fun checkWithUseSiteTargets(): Boolean {
             if (useSiteTarget == null) return false
 
-            val useSiteMapping = KotlinTarget.USE_SITE_MAPPING[useSiteTarget]
+            konst useSiteMapping = KotlinTarget.USE_SITE_MAPPING[useSiteTarget]
             return actualTargets.onlyWithUseSiteTarget.any { it in applicableTargets && it == useSiteMapping }
         }
 
@@ -320,10 +320,10 @@ class AnnotationChecker(
         descriptor.isAnnotatedWithKotlinRepeatable() || platformAnnotationFeaturesSupport.isRepeatableAnnotationClass(descriptor)
 
     companion object {
-        private val TARGET_ALLOWED_TARGETS = Name.identifier("allowedTargets")
+        private konst TARGET_ALLOWED_TARGETS = Name.identifier("allowedTargets")
 
         private fun applicableTargetSet(entry: KtAnnotationEntry, trace: BindingTrace): Set<KotlinTarget> {
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: return KotlinTarget.DEFAULT_TARGET_SET
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: return KotlinTarget.DEFAULT_TARGET_SET
             // For descriptor with error type, all targets are considered as possible
             if (descriptor.type.isError) return KotlinTarget.ALL_TARGET_SET
             return descriptor.annotationClass?.let(this::applicableTargetSetFromTargetAnnotationOrNull) ?: KotlinTarget.DEFAULT_TARGET_SET
@@ -331,24 +331,24 @@ class AnnotationChecker(
 
         @JvmStatic
         fun applicableTargetSet(descriptor: AnnotationDescriptor): Set<KotlinTarget> {
-            val classDescriptor = descriptor.annotationClass ?: return emptySet()
+            konst classDescriptor = descriptor.annotationClass ?: return emptySet()
             return applicableTargetSet(classDescriptor)
         }
 
         fun applicableTargetSet(classDescriptor: ClassDescriptor): Set<KotlinTarget> {
-            val targetEntryDescriptor = classDescriptor.annotations.findAnnotation(StandardNames.FqNames.target)
+            konst targetEntryDescriptor = classDescriptor.annotations.findAnnotation(StandardNames.FqNames.target)
             return targetEntryDescriptor?.let { loadAnnotationTargets(it) } ?: KotlinTarget.DEFAULT_TARGET_SET
         }
 
         fun applicableTargetSetFromTargetAnnotationOrNull(classDescriptor: ClassDescriptor): Set<KotlinTarget>? {
-            val targetEntryDescriptor = classDescriptor.annotations.findAnnotation(StandardNames.FqNames.target) ?: return null
+            konst targetEntryDescriptor = classDescriptor.annotations.findAnnotation(StandardNames.FqNames.target) ?: return null
             return loadAnnotationTargets(targetEntryDescriptor)
         }
 
         fun loadAnnotationTargets(targetEntryDescriptor: AnnotationDescriptor): Set<KotlinTarget>? {
-            val valueArgument = targetEntryDescriptor.allValueArguments[TARGET_ALLOWED_TARGETS] as? ArrayValue ?: return null
-            return valueArgument.value.filterIsInstance<EnumValue>().mapNotNull {
-                KotlinTarget.valueOrNull(it.enumEntryName.asString())
+            konst konstueArgument = targetEntryDescriptor.allValueArguments[TARGET_ALLOWED_TARGETS] as? ArrayValue ?: return null
+            return konstueArgument.konstue.filterIsInstance<EnumValue>().mapNotNull {
+                KotlinTarget.konstueOrNull(it.enumEntryName.asString())
             }.toSet()
         }
 
@@ -383,7 +383,7 @@ class AnnotationChecker(
                     }
                 }
                 is KtParameter -> {
-                    val destructuringDeclaration = annotated.destructuringDeclaration
+                    konst destructuringDeclaration = annotated.destructuringDeclaration
                     when {
                         destructuringDeclaration != null -> TargetLists.T_DESTRUCTURING_DECLARATION
                         annotated.hasValOrVar() -> TargetLists.T_VALUE_PARAMETER_WITH_VAL

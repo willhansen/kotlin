@@ -7,7 +7,7 @@
 var z = false
 
 // FILE: lib2.kt
-val x = foo()
+konst x = foo()
 
 fun foo(): Int {
     z = true

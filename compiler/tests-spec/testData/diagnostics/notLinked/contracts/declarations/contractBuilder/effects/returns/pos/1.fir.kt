@@ -4,15 +4,15 @@
 import kotlin.contracts.*
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Boolean) {
-    contract { returns() implies (value_1) }
-    if (!value_1) throw Exception()
+fun case_1(konstue_1: Boolean) {
+    contract { returns() implies (konstue_1) }
+    if (!konstue_1) throw Exception()
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Boolean): Boolean {
-    contract { returns(false) implies (!value_1) }
-    return value_1
+fun case_2(konstue_1: Boolean): Boolean {
+    contract { returns(false) implies (!konstue_1) }
+    return konstue_1
 }
 
 // TESTCASE NUMBER: 3
@@ -22,15 +22,15 @@ fun Boolean.case_3() {
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(value_1: Any?) {
-    contract { returns() implies (value_1 is String) }
-    if (value_1 !is String) throw Exception()
+fun case_5(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 is String) }
+    if (konstue_1 !is String) throw Exception()
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Any?) {
-    contract { returns() implies (value_1 !is String?) }
-    if (value_1 is String?) throw Exception()
+fun case_6(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 !is String?) }
+    if (konstue_1 is String?) throw Exception()
 }
 
 // TESTCASE NUMBER: 7
@@ -52,15 +52,15 @@ fun <T : Number?>T.case_9(): Boolean? {
 }
 
 // TESTCASE NUMBER: 10
-fun case_10(value_1: Any?) {
-    contract { returns() implies (value_1 == null) }
-    if (value_1 != null) throw Exception()
+fun case_10(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 == null) }
+    if (konstue_1 != null) throw Exception()
 }
 
 // TESTCASE NUMBER: 11
-fun case_11(value_1: Any?): Boolean? {
-    contract { returns(null) implies (value_1 != null) }
-    return if (value_1 != null) null else true
+fun case_11(konstue_1: Any?): Boolean? {
+    contract { returns(null) implies (konstue_1 != null) }
+    return if (konstue_1 != null) null else true
 }
 
 // TESTCASE NUMBER: 12

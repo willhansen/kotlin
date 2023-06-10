@@ -37,27 +37,27 @@ internal interface KonanToolRunner {
 
 internal fun KonanToolRunner.run(vararg args: String) = run(args.toList())
 
-private const val runFromDaemonPropertyName = "kotlin.native.tool.runFromDaemon"
+private const konst runFromDaemonPropertyName = "kotlin.native.tool.runFromDaemon"
 
 @Suppress("DEPRECATION") // calling KotlinToolRunner(project) constructor is deprecated
 internal abstract class KonanCliRunner(
-        protected val toolName: String,
+        protected konst toolName: String,
         project: Project,
-        val additionalJvmArgs: List<String> = emptyList(),
-        val konanHome: String = project.konanHome
+        konst additionalJvmArgs: List<String> = emptyList(),
+        konst konanHome: String = project.konanHome
 ) : KotlinToolRunner(project), KonanToolRunner {
-    final override val displayName get() = toolName
+    final override konst displayName get() = toolName
 
-    final override val mainClass get() = "org.jetbrains.kotlin.cli.utilities.MainKt"
-    final override val daemonEntryPoint get() = "daemonMain"
+    final override konst mainClass get() = "org.jetbrains.kotlin.cli.utilities.MainKt"
+    final override konst daemonEntryPoint get() = "daemonMain"
 
-    final override val mustRunViaExec get() = false.also { System.setProperty(runFromDaemonPropertyName, "true") }
+    final override konst mustRunViaExec get() = false.also { System.setProperty(runFromDaemonPropertyName, "true") }
 
-    final override val execSystemPropertiesBlacklist: Set<String>
+    final override konst execSystemPropertiesBlacklist: Set<String>
         get() = super.execSystemPropertiesBlacklist + runFromDaemonPropertyName
 
     // We need to unset some environment variables which are set by XCode and may potentially affect the tool executed.
-    final override val execEnvironmentBlacklist: Set<String> by lazy {
+    final override konst execEnvironmentBlacklist: Set<String> by lazy {
         HashSet<String>().also { collector ->
             KonanPlugin::class.java.getResourceAsStream("/env_blacklist")?.let { stream ->
                 stream.reader().use { r -> r.forEachLine { collector.add(it) } }
@@ -65,9 +65,9 @@ internal abstract class KonanCliRunner(
         }
     }
 
-    final override val execSystemProperties by lazy { mapOf("konan.home" to konanHome) }
+    final override konst execSystemProperties by lazy { mapOf("konan.home" to konanHome) }
 
-    final override val classpath by lazy {
+    final override konst classpath by lazy {
         project.fileTree("$konanHome/konan/lib/").apply {
             include("trove4j.jar")
             include("kotlin-native-compiler-embeddable.jar")
@@ -83,14 +83,14 @@ internal abstract class KonanCliRunner(
             """.trimIndent()
             }
 
-    data class IsolatedClassLoaderCacheKey(val classpath: Set<File>)
+    data class IsolatedClassLoaderCacheKey(konst classpath: Set<File>)
 
     // TODO: can't we use this for other implementations too?
-    final override val isolatedClassLoaderCacheKey get() = IsolatedClassLoaderCacheKey(classpath)
+    final override konst isolatedClassLoaderCacheKey get() = IsolatedClassLoaderCacheKey(classpath)
 
     // A separate map for each build for automatic cleaning the daemon after the build have finished.
     @Suppress("UNCHECKED_CAST")
-    final override val isolatedClassLoaders = project.project(":kotlin-native").ext["toolClassLoadersMap"] as ConcurrentHashMap<Any, URLClassLoader>
+    final override konst isolatedClassLoaders = project.project(":kotlin-native").ext["toolClassLoadersMap"] as ConcurrentHashMap<Any, URLClassLoader>
 
     override fun transformArgs(args: List<String>) = listOf(toolName) + args
 
@@ -101,16 +101,16 @@ internal abstract class KonanCliRunner(
 internal class KonanCliCompilerRunner(
         project: Project,
         additionalJvmArgs: List<String> = emptyList(),
-        val useArgFile: Boolean = true,
+        konst useArgFile: Boolean = true,
         konanHome: String = project.konanHome
 ) : KonanCliRunner("konanc", project, additionalJvmArgs, konanHome) {
     override fun transformArgs(args: List<String>): List<String> {
         if (!useArgFile) return super.transformArgs(args)
 
-        val argFile = Files.createTempFile(/* prefix = */ "konancArgs", /* suffix = */ ".lst").toFile().apply { deleteOnExit() }
+        konst argFile = Files.createTempFile(/* prefix = */ "konancArgs", /* suffix = */ ".lst").toFile().apply { deleteOnExit() }
         argFile.printWriter().use { w ->
             for (arg in args) {
-                val escapedArg = arg
+                konst escapedArg = arg
                         .replace("\\", "\\\\")
                         .replace("\"", "\\\"")
                 w.println("\"$escapedArg\"")
@@ -121,7 +121,7 @@ internal class KonanCliCompilerRunner(
     }
 }
 
-private val load0 = Runtime::class.java.getDeclaredMethod("load0", Class::class.java, String::class.java).also {
+private konst load0 = Runtime::class.java.getDeclaredMethod("load0", Class::class.java, String::class.java).also {
     it.isAccessible = true
 }
 
@@ -140,14 +140,14 @@ internal class KonanCliInteropRunner(
         additionalJvmArgs: List<String> = emptyList(),
         konanHome: String = project.konanHome
 ) : KonanCliRunner("cinterop", project, additionalJvmArgs, konanHome) {
-    private val projectDir = project.projectDir.toString()
+    private konst projectDir = project.projectDir.toString()
 
     override fun transformArgs(args: List<String>): List<String> {
         return super.transformArgs(args) + listOf("-Xproject-dir", projectDir)
     }
 
-    override val execEnvironment by lazy {
-        val result = mutableMapOf<String, String>()
+    override konst execEnvironment by lazy {
+        konst result = mutableMapOf<String, String>()
         result.putAll(super.execEnvironment)
         result["LIBCLANG_DISABLE_CRASH_RECOVERY"] = "1"
         llvmExecutablesPath?.let {
@@ -160,10 +160,10 @@ internal class KonanCliInteropRunner(
         CliToolConfig(konanHome, target).prepare()
     }
 
-    private val llvmExecutablesPath: String? by lazy {
+    private konst llvmExecutablesPath: String? by lazy {
         if (HostManager.host == KonanTarget.MINGW_X64) {
             // TODO: Read it from Platform properties when it is accessible.
-            val konanProperties = Properties().apply {
+            konst konanProperties = Properties().apply {
                 project.file("$konanHome/konan/konan.properties").inputStream().use(::load)
             }
 

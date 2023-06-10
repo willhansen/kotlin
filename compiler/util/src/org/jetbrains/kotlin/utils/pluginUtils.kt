@@ -22,28 +22,28 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 
 fun decodePluginOptions(options: String): Map<String, List<String>> {
-    val map = LinkedHashMap<String, List<String>>()
+    konst map = LinkedHashMap<String, List<String>>()
 
-    val decodedBytes = Base64.getDecoder().decode(options)
-    val bis = ByteArrayInputStream(decodedBytes)
-    val ois = ObjectInputStream(bis)
+    konst decodedBytes = Base64.getDecoder().decode(options)
+    konst bis = ByteArrayInputStream(decodedBytes)
+    konst ois = ObjectInputStream(bis)
 
-    val n = ois.readInt()
+    konst n = ois.readInt()
 
     repeat(n) {
-        val key = ois.readUTF()
+        konst key = ois.readUTF()
 
-        val valueCount = ois.readInt()
-        val values = mutableListOf<String>()
+        konst konstueCount = ois.readInt()
+        konst konstues = mutableListOf<String>()
 
-        repeat(valueCount) {
-            val size = ois.readInt()
-            val byteArray = ByteArray(size)
+        repeat(konstueCount) {
+            konst size = ois.readInt()
+            konst byteArray = ByteArray(size)
             ois.readFully(byteArray)
-            values += String(byteArray, StandardCharsets.UTF_8)
+            konstues += String(byteArray, StandardCharsets.UTF_8)
         }
 
-        map[key] = values
+        map[key] = konstues
     }
 
     return map

@@ -19,19 +19,19 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.fir.symbols.impl.FirBackingFieldSymbol
 
 internal class KtFirBackingFieldSymbol(
-    override val firSymbol: FirBackingFieldSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirBackingFieldSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtBackingFieldSymbol(), KtFirSymbol<FirBackingFieldSymbol> {
-    override val origin: KtSymbolOrigin get() = withValidityAssertion { super<KtBackingFieldSymbol>.origin }
+    override konst origin: KtSymbolOrigin get() = withValidityAssertion { super<KtBackingFieldSymbol>.origin }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
 
-    override val owningProperty: KtKotlinPropertySymbol
+    override konst owningProperty: KtKotlinPropertySymbol
         get() = withValidityAssertion {
             builder.variableLikeBuilder.buildPropertySymbol(firSymbol.propertySymbol) as KtKotlinPropertySymbol
         }

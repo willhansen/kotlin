@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.moduleStructure
 
 class FirMetadataLoadingTestSuppressor(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun suppressIfNeeded(failedAssertions: List<WrappedException>): List<WrappedException> {
-        val moduleStructure = testServices.moduleStructure
-        val directive = testServices.loadedMetadataSuppressionDirective
+        konst moduleStructure = testServices.moduleStructure
+        konst directive = testServices.loadedMetadataSuppressionDirective
         if (moduleStructure.modules.any { directive in it.directives }) {
             return if (failedAssertions.isNotEmpty()) {
                 emptyList()

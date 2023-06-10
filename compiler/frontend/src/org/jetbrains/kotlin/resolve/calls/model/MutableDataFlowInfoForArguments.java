@@ -28,7 +28,7 @@ public abstract class MutableDataFlowInfoForArguments implements DataFlowInfoFor
         this.initialDataFlowInfo = initialDataFlowInfo;
     }
 
-    public abstract void updateInfo(@NotNull ValueArgument valueArgument, @NotNull DataFlowInfo dataFlowInfo);
+    public abstract void updateInfo(@NotNull ValueArgument konstueArgument, @NotNull DataFlowInfo dataFlowInfo);
     public abstract void updateResultInfo(@NotNull DataFlowInfo dataFlowInfo);
 
     @NotNull
@@ -44,7 +44,7 @@ public abstract class MutableDataFlowInfoForArguments implements DataFlowInfoFor
         }
 
         @Override
-        public void updateInfo(@NotNull ValueArgument valueArgument, @NotNull DataFlowInfo dataFlowInfo) {
+        public void updateInfo(@NotNull ValueArgument konstueArgument, @NotNull DataFlowInfo dataFlowInfo) {
             throw new IllegalStateException();
         }
 
@@ -55,7 +55,7 @@ public abstract class MutableDataFlowInfoForArguments implements DataFlowInfoFor
 
         @NotNull
         @Override
-        public DataFlowInfo getInfo(@NotNull ValueArgument valueArgument) {
+        public DataFlowInfo getInfo(@NotNull ValueArgument konstueArgument) {
             throw new IllegalStateException();
         }
     };

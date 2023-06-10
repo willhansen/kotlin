@@ -7,9 +7,9 @@ package codegen.enum.test0
 
 import kotlin.test.*
 
-val TOP_LEVEL = 5
+konst TOP_LEVEL = 5
 
-enum class MyEnum(value: Int) {
+enum class MyEnum(konstue: Int) {
     VALUE(TOP_LEVEL)
 }
 

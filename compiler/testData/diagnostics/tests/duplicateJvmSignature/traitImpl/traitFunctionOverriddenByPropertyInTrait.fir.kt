@@ -3,6 +3,6 @@ interface T {
 }
 
 interface C : T {
-    val x: Int
+    konst x: Int
         get() = 1
 }

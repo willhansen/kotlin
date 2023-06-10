@@ -2,7 +2,7 @@
 // FILE: E.java
 public enum E {
     A();
-    public static void values(boolean b) {
+    public static void konstues(boolean b) {
     }
 }
 

@@ -28,7 +28,7 @@ object JavacOptionsMapper {
 
     fun setUTF8Encoding(options: Options) = options.put(Option.ENCODING, "UTF8")
 
-    private val optionPattern = Pattern.compile("\\s+")
+    private konst optionPattern = Pattern.compile("\\s+")
 
     private fun Options.putOption(option: String) =
             option.split(optionPattern)

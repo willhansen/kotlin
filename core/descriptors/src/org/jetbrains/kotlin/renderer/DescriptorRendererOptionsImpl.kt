@@ -39,19 +39,19 @@ internal class DescriptorRendererOptionsImpl : DescriptorRendererOptions {
     }
 
     fun copy(): DescriptorRendererOptionsImpl {
-        val copy = DescriptorRendererOptionsImpl()
+        konst copy = DescriptorRendererOptionsImpl()
 
         //TODO: use Kotlin reflection
         for (field in this::class.java.declaredFields) {
             if (field.modifiers.and(Modifier.STATIC) != 0) continue
             field.isAccessible = true
-            val property = field.get(this) as? ObservableProperty<*> ?: continue
+            konst property = field.get(this) as? ObservableProperty<*> ?: continue
             assert(!field.name.startsWith("is")) { "Fields named is* are not supported here yet" }
-            val value = property.getValue(
+            konst konstue = property.getValue(
                     this,
                     PropertyReference1Impl(DescriptorRendererOptionsImpl::class, field.name, "get" + field.name.replaceFirstChar(Char::uppercaseChar))
             )
-            field.set(copy, copy.property(value))
+            field.set(copy, copy.property(konstue))
         }
 
         return copy
@@ -95,7 +95,7 @@ internal class DescriptorRendererOptionsImpl : DescriptorRendererOptions {
     override var defaultParameterValueRenderer by property<((ValueParameterDescriptor) -> String)?>({ "..." })
     override var secondaryConstructorsAsPrimary by property(true)
     override var overrideRenderingPolicy by property(OverrideRenderingPolicy.RENDER_OPEN)
-    override var valueParametersHandler: DescriptorRenderer.ValueParametersHandler by property(DescriptorRenderer.ValueParametersHandler.DEFAULT)
+    override var konstueParametersHandler: DescriptorRenderer.ValueParametersHandler by property(DescriptorRenderer.ValueParametersHandler.DEFAULT)
     override var textFormat by property(RenderingFormat.PLAIN)
     override var parameterNameRenderingPolicy by property(ParameterNameRenderingPolicy.ALL)
     override var receiverAfterName by property(false)

@@ -25,7 +25,7 @@ interface MessageCollector {
     fun hasErrors(): Boolean
 
     companion object {
-        val NONE: MessageCollector = object : MessageCollector {
+        konst NONE: MessageCollector = object : MessageCollector {
             override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
                 // Do nothing
             }

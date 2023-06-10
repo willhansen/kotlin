@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrConstImpl
 import org.jetbrains.kotlin.name.Name
 
 class JsErrorDeclarationLowering(context: JsIrBackendContext) : ErrorDeclarationLowering() {
-    private val nothingType = context.irBuiltIns.nothingType
-    private val stringType = context.irBuiltIns.stringType
-    private val errorSymbol = context.errorCodeSymbol
-    private val irFactory = context.irFactory
+    private konst nothingType = context.irBuiltIns.nothingType
+    private konst stringType = context.irBuiltIns.stringType
+    private konst errorSymbol = context.errorCodeSymbol
+    private konst irFactory = context.irFactory
 
     override fun transformErrorDeclaration(declaration: IrErrorDeclaration): IrDeclaration {
         require(errorSymbol != null) { "Should be non-null if errors are allowed" }
@@ -43,12 +43,12 @@ class JsErrorDeclarationLowering(context: JsIrBackendContext) : ErrorDeclaration
 
 class JsErrorExpressionLowering(context: JsIrBackendContext) : ErrorExpressionLowering(context) {
 
-    private val stringType = context.irBuiltIns.nothingType
-    private val errorSymbol = context.errorCodeSymbol
+    private konst stringType = context.irBuiltIns.nothingType
+    private konst errorSymbol = context.errorCodeSymbol
 
     override fun transformErrorExpression(expression: IrExpression, nodeKind: String): IrExpression {
-        val errorExpression = expression as? IrErrorExpression
-        val description = errorExpression?.let { "$nodeKind: ${it.description}" } ?: nodeKind
+        konst errorExpression = expression as? IrErrorExpression
+        konst description = errorExpression?.let { "$nodeKind: ${it.description}" } ?: nodeKind
         return buildThrowError(expression, description)
     }
 

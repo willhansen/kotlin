@@ -30,5 +30,5 @@ fun case2() {
 }
 
 class Case2() {
-    val a = A()
+    konst a = A()
 }

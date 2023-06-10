@@ -10,37 +10,37 @@ import org.jetbrains.kotlin.diagnostics.Severity
 import kotlin.reflect.KType
 
 sealed class DiagnosticData {
-    abstract val containingObjectName: String
-    abstract val name: String
-    abstract val psiType: KType
-    abstract val parameters: List<DiagnosticParameter>
-    abstract val positioningStrategy: PositioningStrategy
+    abstract konst containingObjectName: String
+    abstract konst name: String
+    abstract konst psiType: KType
+    abstract konst parameters: List<DiagnosticParameter>
+    abstract konst positioningStrategy: PositioningStrategy
 }
 
 data class RegularDiagnosticData(
-    override val containingObjectName: String,
-    val severity: Severity,
-    override val name: String,
-    override val psiType: KType,
-    override val parameters: List<DiagnosticParameter>,
-    override val positioningStrategy: PositioningStrategy,
+    override konst containingObjectName: String,
+    konst severity: Severity,
+    override konst name: String,
+    override konst psiType: KType,
+    override konst parameters: List<DiagnosticParameter>,
+    override konst positioningStrategy: PositioningStrategy,
 ) : DiagnosticData()
 
 data class DeprecationDiagnosticData(
-    override val containingObjectName: String,
-    val featureForError: LanguageFeature,
-    override val name: String,
-    override val psiType: KType,
-    override val parameters: List<DiagnosticParameter>,
-    override val positioningStrategy: PositioningStrategy,
+    override konst containingObjectName: String,
+    konst featureForError: LanguageFeature,
+    override konst name: String,
+    override konst psiType: KType,
+    override konst parameters: List<DiagnosticParameter>,
+    override konst positioningStrategy: PositioningStrategy,
 ) : DiagnosticData()
 
 data class DiagnosticParameter(
-    val name: String,
-    val type: KType
+    konst name: String,
+    konst type: KType
 )
 
-enum class PositioningStrategy(private val strategy: String? = null) {
+enum class PositioningStrategy(private konst strategy: String? = null) {
     DEFAULT,
     VAL_OR_VAR_NODE,
     SECONDARY_CONSTRUCTOR_DELEGATION_CALL,
@@ -116,10 +116,10 @@ enum class PositioningStrategy(private val strategy: String? = null) {
     CALL_ELEMENT_WITH_DOT,
     ;
 
-    val expressionToCreate get() = "SourceElementPositioningStrategies.${strategy ?: name}"
+    konst expressionToCreate get() = "SourceElementPositioningStrategies.${strategy ?: name}"
 
     companion object {
-        const val importToAdd = "org.jetbrains.kotlin.diagnostics.SourceElementPositioningStrategies"
+        const konst importToAdd = "org.jetbrains.kotlin.diagnostics.SourceElementPositioningStrategies"
     }
 }
 

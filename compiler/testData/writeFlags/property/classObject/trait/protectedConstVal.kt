@@ -1,6 +1,6 @@
 interface Test {
   companion object {
-    protected const val prop: Int = 0
+    protected const konst prop: Int = 0
   }
 }
 

@@ -90,8 +90,8 @@ class Contracts {
 
         @Sample
         @kotlin.contracts.ExperimentalContracts
-        fun valPossibleInitialization() {
-            val x: Int
+        fun konstPossibleInitialization() {
+            konst x: Int
 
             callsInPlaceAtMostOnceContract {
                 x = 10
@@ -113,8 +113,8 @@ class Contracts {
 
         @Sample
         @kotlin.contracts.ExperimentalContracts
-        fun valInitialization() {
-            val x: Int
+        fun konstInitialization() {
+            konst x: Int
 
             callsInPlaceExactlyOnceContract {
                 x = 10

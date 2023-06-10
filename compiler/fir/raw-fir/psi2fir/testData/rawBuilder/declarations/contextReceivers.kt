@@ -2,7 +2,7 @@ context(A, b@B)
 fun foo() {}
 
 context(A, b@B)
-val x: Int get() = 1
+konst x: Int get() = 1
 
 context(A, b@B)
 class C

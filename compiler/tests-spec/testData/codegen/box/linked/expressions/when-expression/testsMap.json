@@ -79,7 +79,7 @@
         {
           "specVersion": "0.1-313",
           "casesNumber": 0,
-          "description": "The else condition is a special condition which evaluates to true if none of the branches above it evaluated to true.",
+          "description": "The else condition is a special condition which ekonstuates to true if none of the branches above it ekonstuated to true.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/when-expression/p-5/neg/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

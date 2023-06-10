@@ -17,10 +17,10 @@ import kotlin.reflect.KClass
 
 abstract class AbstractAdditionalStubInfoTest : AbstractDecompiledClassTest() {
     fun runTest(testDirectory: String) {
-        val testDirectoryPath = Paths.get(testDirectory)
-        val testData = TestData.createFromDirectory(testDirectoryPath)
-        val stub = KotlinClsStubBuilder().buildFileStub(FileContentImpl.createByFile(getClassFileToDecompile(testData, false)))!!
-        val builder = StringBuilder()
+        konst testDirectoryPath = Paths.get(testDirectory)
+        konst testData = TestData.createFromDirectory(testDirectoryPath)
+        konst stub = KotlinClsStubBuilder().buildFileStub(FileContentImpl.createByFile(getClassFileToDecompile(testData, false)))!!
+        konst builder = StringBuilder()
         extractAdditionInfo(stub, builder, 0)
         KotlinTestUtils.assertEqualsToFile(testData.expectedFile, builder.toString())
     }
@@ -29,14 +29,14 @@ abstract class AbstractAdditionalStubInfoTest : AbstractDecompiledClassTest() {
         builder.append(stub.toString())
         when (stub) {
             is KotlinUserTypeStubImpl -> {
-                val upperBound = stub.upperBound
+                konst upperBound = stub.upperBound
                 if (upperBound != null) {
                     builder.append("    ft: ")
                     appendFlexibleTypeInfo(builder, upperBound)
                 }
             }
             is KotlinFunctionStubImpl -> {
-                val contract = stub.contract
+                konst contract = stub.contract
                 if (contract != null) {
                     for (element in contract) {
                         builder.append("\n" + "  ".repeat(level)).append("effect:")
@@ -45,19 +45,19 @@ abstract class AbstractAdditionalStubInfoTest : AbstractDecompiledClassTest() {
                 }
             }
             is KotlinPropertyStubImpl -> {
-                val initializer = stub.constantInitializer
+                konst initializer = stub.constantInitializer
                 if (initializer != null) {
-                    builder.append("\n").append("  ".repeat(level)).append("initializer: ${initializer.value}")
+                    builder.append("\n").append("  ".repeat(level)).append("initializer: ${initializer.konstue}")
                 }
             }
             is KotlinAnnotationEntryStubImpl -> {
-                val arguments = stub.valueArguments
+                konst arguments = stub.konstueArguments
                 if (arguments != null) {
                     builder
                         .append("\n")
                         .append("  ".repeat(level))
-                        .append("valueArguments: ")
-                        .append(arguments.entries.joinToString(", ", "(", ")") { "${it.key.asString()} = ${it.value}" })
+                        .append("konstueArguments: ")
+                        .append(arguments.entries.joinToString(", ", "(", ")") { "${it.key.asString()} = ${it.konstue}" })
                 }
             }
             is KotlinParameterStubImpl -> {
@@ -74,7 +74,7 @@ abstract class AbstractAdditionalStubInfoTest : AbstractDecompiledClassTest() {
         when (typeBean) {
             is KotlinClassTypeBean -> {
                 builder.append(typeBean.classId.asFqNameString())
-                val arguments = typeBean.arguments
+                konst arguments = typeBean.arguments
                 if (arguments.isNotEmpty()) {
                     builder.append("<")
                     arguments.forEachIndexed { index, arg ->
@@ -111,7 +111,7 @@ abstract class AbstractAdditionalStubInfoTest : AbstractDecompiledClassTest() {
     }
 }
 
-class KotlinContractRenderer(private val buffer: StringBuilder) : KtContractDescriptionVisitor<Unit, Nothing?, KotlinTypeBean, Nothing?>() {
+class KotlinContractRenderer(private konst buffer: StringBuilder) : KtContractDescriptionVisitor<Unit, Nothing?, KotlinTypeBean, Nothing?>() {
     override fun visitConditionalEffectDeclaration(conditionalEffect: KtConditionalEffectDeclaration<KotlinTypeBean, Nothing?>, data: Nothing?) {
         conditionalEffect.effect.accept(this, data)
         buffer.append(" -> ")
@@ -120,13 +120,13 @@ class KotlinContractRenderer(private val buffer: StringBuilder) : KtContractDesc
 
     override fun visitReturnsEffectDeclaration(returnsEffect: KtReturnsEffectDeclaration<KotlinTypeBean, Nothing?>, data: Nothing?) {
         buffer.append("Returns(")
-        returnsEffect.value.accept(this, data)
+        returnsEffect.konstue.accept(this, data)
         buffer.append(")")
     }
 
     override fun visitCallsEffectDeclaration(callsEffect: KtCallsEffectDeclaration<KotlinTypeBean, Nothing?>, data: Nothing?) {
         buffer.append("CallsInPlace(")
-        callsEffect.valueParameterReference.accept(this, data)
+        callsEffect.konstueParameterReference.accept(this, data)
         buffer.append(", ${callsEffect.kind})")
     }
 
@@ -154,8 +154,8 @@ class KotlinContractRenderer(private val buffer: StringBuilder) : KtContractDesc
         buffer.append(constantReference.name)
     }
 
-    override fun visitValueParameterReference(valueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>, data: Nothing?) {
-        buffer.append("param(").append(valueParameterReference.parameterIndex).append(")")
+    override fun visitValueParameterReference(konstueParameterReference: KtValueParameterReference<KotlinTypeBean, Nothing?>, data: Nothing?) {
+        buffer.append("param(").append(konstueParameterReference.parameterIndex).append(")")
     }
 
 }

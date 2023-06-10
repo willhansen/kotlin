@@ -1,6 +1,6 @@
 package
 
-public val bar: kotlin.String = ""
+public konst bar: kotlin.String = ""
 
 public open class A {
     public constructor A()

@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.backend.ast.metadata.synthetic
 import org.jetbrains.kotlin.js.inline.util.collectFreeVariables
 
-internal class RedundantVariableDeclarationElimination(private val root: JsStatement) {
-    private val usages = mutableSetOf<JsName>()
+internal class RedundantVariableDeclarationElimination(private konst root: JsStatement) {
+    private konst usages = mutableSetOf<JsName>()
     private var hasChanges = false
 
     fun apply(): Boolean {
@@ -33,7 +33,7 @@ internal class RedundantVariableDeclarationElimination(private val root: JsState
     private fun analyze() {
         object : JsVisitorWithContextImpl() {
             override fun visit(x: JsNameRef, ctx: JsContext<*>): Boolean {
-                val name = x.name
+                konst name = x.name
                 if (name != null && x.qualifier == null) {
                     usages += name
                 }

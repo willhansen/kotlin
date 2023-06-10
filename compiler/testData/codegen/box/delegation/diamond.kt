@@ -29,7 +29,7 @@ class Fail : Derived {
 }
 
 fun box(): String {
-    val z = object : Derived by Fail() {
+    konst z = object : Derived by Fail() {
         override fun getValue() = "K"
     }
     return z.test()

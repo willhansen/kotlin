@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.fir.types.isUnit
 
 object FirStandaloneQualifierChecker : FirResolvedQualifierChecker() {
     override fun check(expression: FirResolvedQualifier, context: CheckerContext, reporter: DiagnosticReporter) {
-        val lastQualifiedAccess = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull() as? FirQualifiedAccessExpression
+        konst lastQualifiedAccess = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.lastOrNull() as? FirQualifiedAccessExpression
         // Note: qualifier isn't standalone when it's in receiver (SomeClass.foo) or getClass (SomeClass::class) position
         if (lastQualifiedAccess?.explicitReceiver === expression || lastQualifiedAccess?.dispatchReceiver === expression) return
-        val lastGetClass = context.getClassCalls.lastOrNull()
+        konst lastGetClass = context.getClassCalls.lastOrNull()
         if (lastGetClass?.argument === expression) return
         // Note: if it's real Unit, it will be filtered by ClassKind.OBJECT check below
         if (!expression.typeRef.isUnit) return

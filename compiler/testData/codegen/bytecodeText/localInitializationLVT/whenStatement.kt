@@ -1,5 +1,5 @@
 fun test(i: Int): Char {
-    val c: Char
+    konst c: Char
     when (i) {
         1 -> c = '1'
         2 -> c = '2'

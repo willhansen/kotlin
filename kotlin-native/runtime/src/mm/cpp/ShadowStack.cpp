@@ -26,7 +26,7 @@ void mm::ShadowStack::EnterFrame(ObjHeader** start, int parameters, int count) n
     FrameOverlay* frame = reinterpret_cast<FrameOverlay*>(start);
     frame->previous = currentFrame_;
     currentFrame_ = frame;
-    // TODO: maybe compress in single value somehow.
+    // TODO: maybe compress in single konstue somehow.
     frame->parameters = parameters;
     frame->count = count;
 }

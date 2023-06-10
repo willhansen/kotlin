@@ -55,7 +55,7 @@ public class KtCallExpression extends KtExpressionImpl implements KtCallElement,
 
     /**
      * Normally there should be only one (or zero) function literal arguments.
-     * The returned value is a list for better handling of commonly made mistake of a function taking a lambda and returning another function.
+     * The returned konstue is a list for better handling of commonly made mistake of a function taking a lambda and returning another function.
      * Most of users can simply ignore lists of more than one element.
      */
     @Override
@@ -68,13 +68,13 @@ public class KtCallExpression extends KtExpressionImpl implements KtCallElement,
     @NotNull
     public List<KtValueArgument> getValueArguments() {
         KtValueArgumentList list = getValueArgumentList();
-        List<KtValueArgument> valueArgumentsInParentheses = list != null ? list.getArguments() : Collections.emptyList();
+        List<KtValueArgument> konstueArgumentsInParentheses = list != null ? list.getArguments() : Collections.emptyList();
         List<KtLambdaArgument> functionLiteralArguments = getLambdaArguments();
         if (functionLiteralArguments.isEmpty()) {
-            return valueArgumentsInParentheses;
+            return konstueArgumentsInParentheses;
         }
         List<KtValueArgument> allValueArguments = Lists.newArrayList();
-        allValueArguments.addAll(valueArgumentsInParentheses);
+        allValueArguments.addAll(konstueArgumentsInParentheses);
         allValueArguments.addAll(functionLiteralArguments);
         return allValueArguments;
     }

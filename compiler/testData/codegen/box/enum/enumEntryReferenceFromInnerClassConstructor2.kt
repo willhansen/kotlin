@@ -10,10 +10,10 @@ enum class Test : IFoo, IBar {
     FOO {
         // FOO referenced from inner class constructor with initialized 'this'
         inner class Inner {
-            val fooFoo = FOO.foo()
+            konst fooFoo = FOO.foo()
         }
 
-        val z = Inner()
+        konst z = Inner()
 
         override fun foo() = "OK"
 

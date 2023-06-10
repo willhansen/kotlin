@@ -38,7 +38,7 @@ import libPackage.contains
 
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
    "" <!INFIX_MODIFIER_REQUIRED!>contains<!>  regex
 }
 
@@ -55,7 +55,7 @@ fun case2() {
         return true
     }
 
-    val regex = Regex("")
+    konst regex = Regex("")
     "" <!INFIX_MODIFIER_REQUIRED!>contains<!>  regex
 }
 

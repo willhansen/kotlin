@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.js.translate.context.TranslationContext
 import org.jetbrains.kotlin.psi.KtCallExpression
 
 class QualifiedExpressionWithCallSelectorAccessTranslator(
-    private val selector: KtCallExpression,
-    private val receiver: JsExpression?,
-    private val context: TranslationContext
+    private konst selector: KtCallExpression,
+    private konst receiver: JsExpression?,
+    private konst context: TranslationContext
 ) : AccessTranslator {
 
     override fun translateAsGet(): JsExpression {

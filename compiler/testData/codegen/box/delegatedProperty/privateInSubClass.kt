@@ -2,13 +2,13 @@
 // WITH_STDLIB
 
 open class A {
-    private val _myVal by lazy {
+    private konst _myVal by lazy {
         "1" + "2"
     }
 }
 
 class B : A() {
-    private val _myVal by lazy {
+    private konst _myVal by lazy {
         "O" + "K"
     }
 

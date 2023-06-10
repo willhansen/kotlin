@@ -25,7 +25,7 @@ abstract class AbstractReferenceResolveWithResolveExtensionTest : AbstractRefere
 
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
-        val provider = createResolveExtensionProvider(
+        konst provider = createResolveExtensionProvider(
             files = listOf(
                 KtResolveExtensionFileForTests(
                     "extension1.kt",

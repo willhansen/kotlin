@@ -3,19 +3,19 @@ open class M() {
 }
 
 class N() : M() {
-    val a : Int
+    konst a : Int
         get() {
             super.b = super.b + 1
             return super.b + 1
         }
     override var b: Int = a + 1
 
-    val superb : Int
+    konst superb : Int
         get() = super.b
 }
 
 fun box(): String {
-    val n = N()
+    konst n = N()
     n.a
     n.b
     n.superb

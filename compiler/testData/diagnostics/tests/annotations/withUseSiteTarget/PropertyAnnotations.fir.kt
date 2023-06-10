@@ -14,16 +14,16 @@ class SomeClass {
     constructor(s: String)
 
     @property:Ann
-    protected val p1: String = ""
+    protected konst p1: String = ""
 
     @property:[Ann Second]
-    protected val p2: String = ""
+    protected konst p2: String = ""
 
     @property:Ann
     protected var p3: String = ""
 
     @property:Ann
-    protected val p4: String by CustomDelegate()
+    protected konst p4: String by CustomDelegate()
 
     @property:Ann
     var propertyWithCustomSetter: Int
@@ -33,7 +33,7 @@ class SomeClass {
     <!INAPPLICABLE_TARGET_ON_PROPERTY, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@property:Ann<!>
     fun anotherFun() {
         <!INAPPLICABLE_TARGET_ON_PROPERTY, WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET!>@property:Ann<!>
-        val localVariable = 5
+        konst localVariable = 5
     }
 
 }

@@ -14,10 +14,10 @@ fun <S> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
 class A
 
-val test1 = generate {
+konst test1 = generate {
     yield(<!NO_COMPANION_OBJECT!>A<!>)
 }
 
-val test2: Int = generate {
+konst test2: Int = generate {
     yield(<!ARGUMENT_TYPE_MISMATCH!>A()<!>)
 }

@@ -48,15 +48,15 @@ interface ExternalKotlinCompilationDescriptor<T : DecoratedExternalKotlinCompila
         fun associate(auxiliary: T, main: DecoratedExternalKotlinCompilation)
     }
 
-    val compilationName: String
-    val compileTaskName: String?
-    val compileAllTaskName: String?
-    val defaultSourceSet: KotlinSourceSet
-    val compilationFactory: CompilationFactory<T>
-    val friendArtifactResolver: FriendArtifactResolver<T>?
-    val compilationAssociator: CompilationAssociator<T>?
-    val sourceSetTreeClassifier: SourceSetTreeClassifier
-    val configure: ((T) -> Unit)?
+    konst compilationName: String
+    konst compileTaskName: String?
+    konst compileAllTaskName: String?
+    konst defaultSourceSet: KotlinSourceSet
+    konst compilationFactory: CompilationFactory<T>
+    konst friendArtifactResolver: FriendArtifactResolver<T>?
+    konst compilationAssociator: CompilationAssociator<T>?
+    konst sourceSetTreeClassifier: SourceSetTreeClassifier
+    konst configure: ((T) -> Unit)?
 }
 
 @ExternalKotlinTargetApi
@@ -92,20 +92,20 @@ class ExternalKotlinCompilationDescriptorBuilder<T : DecoratedExternalKotlinComp
     internal var configure: ((T) -> Unit)? = null
 
     fun configure(action: (T) -> Unit) = apply {
-        val configure = this.configure
+        konst configure = this.configure
         if (configure == null) this.configure = action
         else this.configure = { configure(it); action(it) }
     }
 }
 
 private data class ExternalKotlinCompilationDescriptorImpl<T : DecoratedExternalKotlinCompilation>(
-    override val compilationName: String,
-    override val compileTaskName: String?,
-    override val compileAllTaskName: String?,
-    override val defaultSourceSet: KotlinSourceSet,
-    override val compilationFactory: CompilationFactory<T>,
-    override val friendArtifactResolver: FriendArtifactResolver<T>?,
-    override val compilationAssociator: CompilationAssociator<T>?,
-    override val sourceSetTreeClassifier: SourceSetTreeClassifier,
-    override val configure: ((T) -> Unit)?,
+    override konst compilationName: String,
+    override konst compileTaskName: String?,
+    override konst compileAllTaskName: String?,
+    override konst defaultSourceSet: KotlinSourceSet,
+    override konst compilationFactory: CompilationFactory<T>,
+    override konst friendArtifactResolver: FriendArtifactResolver<T>?,
+    override konst compilationAssociator: CompilationAssociator<T>?,
+    override konst sourceSetTreeClassifier: SourceSetTreeClassifier,
+    override konst configure: ((T) -> Unit)?,
 ) : ExternalKotlinCompilationDescriptor<T>

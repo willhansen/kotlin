@@ -23,7 +23,7 @@ import java.util.*
 @Suppress("IncorrectFormatting") // KTIJ-22227
 class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPartsProvider {
 
-    private val processors = listOf(
+    private konst processors = listOf(
         GetterProcessor(config),
         SetterProcessor(config),
         WithProcessor(),
@@ -33,14 +33,14 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
         BuilderProcessor(config)
     )
 
-    private val valueFieldModifier = ValueFieldModifier(config)
+    private konst konstueFieldModifier = ValueFieldModifier(config)
 
     /**
      * kotlin resolve references in two calls - first it gets names, then actual member descriptor
      * but for us it is much easier to run full generation for class once
      * hence we cache results and reuse it
      */
-    private val partsCache: MutableMap<ClassDescriptor, SyntheticParts> = HashMap()
+    private konst partsCache: MutableMap<ClassDescriptor, SyntheticParts> = HashMap()
 
     context(LazyJavaResolverContext)
     override fun getMethodNames(thisDescriptor: ClassDescriptor): List<Name> =
@@ -52,7 +52,7 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
         name: Name,
         result: MutableCollection<SimpleFunctionDescriptor>
     ) {
-        val methods = getSyntheticParts(thisDescriptor).methods.filter { it.name == name }
+        konst methods = getSyntheticParts(thisDescriptor).methods.filter { it.name == name }
         addNonExistent(result, methods)
     }
 
@@ -62,13 +62,13 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
 
     context(LazyJavaResolverContext)
     override fun generateStaticFunctions(thisDescriptor: ClassDescriptor, name: Name, result: MutableCollection<SimpleFunctionDescriptor>) {
-        val functions = getSyntheticParts(thisDescriptor).staticFunctions.filter { it.name == name }
+        konst functions = getSyntheticParts(thisDescriptor).staticFunctions.filter { it.name == name }
         addNonExistent(result, functions)
     }
 
     context(LazyJavaResolverContext)
     override fun generateConstructors(thisDescriptor: ClassDescriptor, result: MutableList<ClassConstructorDescriptor>) {
-        val constructors = getSyntheticParts(thisDescriptor).constructors
+        konst constructors = getSyntheticParts(thisDescriptor).constructors
         addNonExistent(result, constructors)
     }
 
@@ -96,7 +96,7 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
 
     context(LazyJavaResolverContext)
     private fun computeSyntheticParts(descriptor: ClassDescriptor): SyntheticParts {
-        val builder = SyntheticPartsBuilder()
+        konst builder = SyntheticPartsBuilder()
         processors.forEach { it.contribute(descriptor, builder) }
         return builder.build()
     }
@@ -106,7 +106,7 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
         thisDescriptor: ClassDescriptor,
         propertyDescriptor: PropertyDescriptorImpl
     ): PropertyDescriptorImpl {
-        return valueFieldModifier.modifyField(thisDescriptor, propertyDescriptor) ?: propertyDescriptor
+        return konstueFieldModifier.modifyField(thisDescriptor, propertyDescriptor) ?: propertyDescriptor
     }
 
     /**
@@ -126,12 +126,12 @@ class LombokSyntheticJavaPartsProvider(config: LombokConfig) : SyntheticJavaPart
          * Corresponding code in lombok - https://github.com/projectlombok/lombok/blob/v1.18.20/src/core/lombok/javac/handlers/JavacHandlerUtil.java#L752
          */
         private fun sameSignature(a: FunctionDescriptor, b: FunctionDescriptor): Boolean {
-            val aVararg = a.valueParameters.any { it.varargElementType != null }
-            val bVararg = b.valueParameters.any { it.varargElementType != null }
+            konst aVararg = a.konstueParameters.any { it.varargElementType != null }
+            konst bVararg = b.konstueParameters.any { it.varargElementType != null }
             return aVararg && bVararg ||
-                    aVararg && b.valueParameters.size >= (a.valueParameters.size - 1) ||
-                    bVararg && a.valueParameters.size >= (b.valueParameters.size - 1) ||
-                    a.valueParameters.size == b.valueParameters.size
+                    aVararg && b.konstueParameters.size >= (a.konstueParameters.size - 1) ||
+                    bVararg && a.konstueParameters.size >= (b.konstueParameters.size - 1) ||
+                    a.konstueParameters.size == b.konstueParameters.size
         }
     }
 }

@@ -34,7 +34,7 @@ class Foo {
 // FILE: 2.kt
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
     foo.start()
 
     return foo.bar

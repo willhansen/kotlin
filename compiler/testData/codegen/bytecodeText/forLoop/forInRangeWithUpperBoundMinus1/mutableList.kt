@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val list = mutableListOf(1, 2, 3)
+    konst list = mutableListOf(1, 2, 3)
     var optimized = 0
     for (i in 0..list.size - 1) optimized += list[i]
 }

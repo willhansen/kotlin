@@ -33,7 +33,7 @@ import kotlin.properties.Delegates
 class KotlinExampleActivity : Activity() {
 
     companion object {
-        val TAG: String = KotlinExampleActivity::class.qualifiedName as String
+        konst TAG: String = KotlinExampleActivity::class.qualifiedName as String
     }
 
     private var rootLayout: LinearLayout by Delegates.notNull()
@@ -81,7 +81,7 @@ class KotlinExampleActivity : Activity() {
 
     private fun showStatus(txt: String) {
         Log.i(TAG, txt)
-        val tv = TextView(this)
+        konst tv = TextView(this)
         tv.text = txt
         rootLayout.addView(tv)
     }
@@ -114,8 +114,8 @@ class KotlinExampleActivity : Activity() {
         showStatus("\nPerforming basic Query operation...")
         showStatus("Number of persons: ${realm.where(Person::class.java).count()}")
 
-        val age = 99
-        val results = realm.where(Person::class.java).equalTo("age", age).findAll()
+        konst age = 99
+        konst results = realm.where(Person::class.java).equalTo("age", age).findAll()
 
         showStatus("Size of result set: " + results.size)
     }
@@ -124,7 +124,7 @@ class KotlinExampleActivity : Activity() {
         showStatus("\nPerforming basic Link Query operation...")
         showStatus("Number of persons: ${realm.where(Person::class.java).count()}")
 
-        val results = realm.where(Person::class.java).equalTo("cats.name", "Tiger").findAll()
+        konst results = realm.where(Person::class.java).equalTo("cats.name", "Tiger").findAll()
 
         showStatus("Size of result set: ${results.size}")
     }
@@ -134,14 +134,14 @@ class KotlinExampleActivity : Activity() {
 
         // Open the default realm. All threads must use it's own reference to the realm.
         // Those can not be transferred across threads.
-        val realm = Realm.getInstance(realmConfig)
+        konst realm = Realm.getInstance(realmConfig)
 
         // Add ten persons in one transaction
         realm.executeTransaction {
-            val fido = realm.createObject(Dog::class.java)
+            konst fido = realm.createObject(Dog::class.java)
             fido.name = "fido"
             for (i in 0..9) {
-                val person = realm.createObject(Person::class.java)
+                konst person = realm.createObject(Person::class.java)
                 person.id = i.toLong()
                 person.name = "Person no. $i"
                 person.age = i
@@ -154,7 +154,7 @@ class KotlinExampleActivity : Activity() {
                 person.tempReference = 42
 
                 for (j in 0..i - 1) {
-                    val cat = realm.createObject(Cat::class.java)
+                    konst cat = realm.createObject(Cat::class.java)
                     cat.name = "Cat_$j"
                     person.cats.add(cat)
                 }
@@ -166,18 +166,18 @@ class KotlinExampleActivity : Activity() {
 
         // Iterate over all objects
         for (person in realm.where(Person::class.java).findAll()) {
-            val dogName: String = person?.dog?.name ?: "None"
+            konst dogName: String = person?.dog?.name ?: "None"
 
             status += "\n${person.name}: ${person.age} : $dogName : ${person.cats.size}"
 
             // The field tempReference is annotated with @Ignore
-            // Though we initially set its value to 42, it has
+            // Though we initially set its konstue to 42, it has
             // not been saved as part of the Person RealmObject:
             check(person.tempReference == 0)
         }
 
         // Sorting
-        val sortedPersons = realm.where(Person::class.java).sort("age", Sort.DESCENDING).findAll()
+        konst sortedPersons = realm.where(Person::class.java).sort("age", Sort.DESCENDING).findAll()
         check(realm.where(Person::class.java).findAll().last()!!.name == sortedPersons.first()!!.name)
         status += "\nSorting ${sortedPersons.last()!!.name} == ${realm.where(Person::class.java).findAll().first()!!.name}"
 
@@ -195,7 +195,7 @@ class KotlinExampleActivity : Activity() {
             status += "\nNumber of persons: ${it.where(Person::class.java).count()}"
 
             // Find all persons where age between 7 and 9 and name begins with "Person".
-            val results = it
+            konst results = it
                 .where(Person::class.java)
                 .between("age", 7, 9)       // Notice implicit "and" operation
                 .beginsWith("name", "Person")

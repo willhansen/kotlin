@@ -10,12 +10,12 @@ class A() {
 
 var d = 0
 
-val p: A.() -> Int = {
+konst p: A.() -> Int = {
     d = foo()
     d++
 }
 
-val c = A().a(p)
+konst c = A().a(p)
 
 fun box(): String {
     if (c != 1) return "fail: $c"

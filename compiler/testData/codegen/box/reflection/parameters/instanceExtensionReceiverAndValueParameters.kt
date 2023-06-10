@@ -22,19 +22,19 @@ fun box(): String {
     A::class.members.single { it.name == "memExt" }.let {
         assertNotNull(it.instanceParameter)
         assertNotNull(it.extensionReceiverParameter)
-        assertEquals(1, it.valueParameters.size)
+        assertEquals(1, it.konstueParameters.size)
     }
 
     ::topLevel.let {
         assertNull(it.instanceParameter)
         assertNull(it.extensionReceiverParameter)
-        assertEquals(0, it.valueParameters.size)
+        assertEquals(0, it.konstueParameters.size)
     }
 
     Int::ext.let {
         assertNull(it.instanceParameter)
         assertNotNull(it.extensionReceiverParameter)
-        assertEquals(1, it.valueParameters.size)
+        assertEquals(1, it.konstueParameters.size)
     }
 
     return "OK"

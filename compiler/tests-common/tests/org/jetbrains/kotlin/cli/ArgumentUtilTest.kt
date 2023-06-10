@@ -16,11 +16,11 @@ class ArgumentUtilTest : TestCase() {
     fun testCopyDoesNotCopyTransientFields() {
         assertTrue(Modifier.isTransient(K2JVMCompilerArguments::errors.javaField!!.modifiers))
 
-        val a = K2JVMCompilerArguments()
+        konst a = K2JVMCompilerArguments()
         a.errors = ArgumentParseErrors()
         a.moduleName = "my module name"
 
-        val b = K2JVMCompilerArguments()
+        konst b = K2JVMCompilerArguments()
         assertNull(b.errors)
         assertNull(b.moduleName)
 

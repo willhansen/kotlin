@@ -29,7 +29,7 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         }
 
-        val targetARoot = CirTreeRoot(
+        konst targetARoot = CirTreeRoot(
             modules = listOf(
                 createCirTree {
                     withDependencies()
@@ -44,7 +44,7 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         )
 
-        val targetBRoot = CirTreeRoot(
+        konst targetBRoot = CirTreeRoot(
             modules = listOf(
                 createCirTree {
                     withDependencies()
@@ -59,12 +59,12 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         )
 
-        val roots = TargetDependent(
+        konst roots = TargetDependent(
             LeafCommonizerTarget("a") to targetARoot,
             LeafCommonizerTarget("b") to targetBRoot
         )
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = roots.mapValue(::CirClassifierIndex),
             targetDependencies = roots.mapValue(CirTreeRoot::dependencies),
             commonizedNodes = CirCommonizedClassifierNodes.default(),
@@ -93,12 +93,12 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         )
 
-        val mergedTree = mergeCirTree(LockBasedStorageManager.NO_LOCKS, classifiers, roots, DefaultCommonizerSettings)
+        konst mergedTree = mergeCirTree(LockBasedStorageManager.NO_LOCKS, classifiers, roots, DefaultCommonizerSettings)
         InlineTypeAliasCirNodeTransformer(LockBasedStorageManager.NO_LOCKS, classifiers, DefaultCommonizerSettings).invoke(mergedTree)
 
-        val pkg = mergedTree.modules.values.single().packages.getValue(CirPackageName.create("pkg"))
-        val xClassNode = kotlin.test.assertNotNull(pkg.classes[CirName.create("X")])
-        val inlinedXClass = kotlin.test.assertNotNull(xClassNode.targetDeclarations[1])
+        konst pkg = mergedTree.modules.konstues.single().packages.getValue(CirPackageName.create("pkg"))
+        konst xClassNode = kotlin.test.assertNotNull(pkg.classes[CirName.create("X")])
+        konst inlinedXClass = kotlin.test.assertNotNull(xClassNode.targetDeclarations[1])
 
         kotlin.test.assertEquals(
             setOf(CirEntityId.create("dep/ClassA")),
@@ -119,7 +119,7 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         }
 
-        val targetARoot = CirTreeRoot(
+        konst targetARoot = CirTreeRoot(
             modules = listOf(
                 createCirTree {
                     withDependencies()
@@ -134,7 +134,7 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         )
 
-        val targetBRoot = CirTreeRoot(
+        konst targetBRoot = CirTreeRoot(
             dependencies = CirProvidedClassifiersByModules(
                 true, mapOf(
                     CirEntityId.create("dep/ClassA") to CirProvided.RegularClass(
@@ -172,24 +172,24 @@ class InlineTypeAliasCirNodeTransformerTest : KtInlineSourceCommonizerTestCase()
             )
         )
 
-        val roots = TargetDependent(
+        konst roots = TargetDependent(
             LeafCommonizerTarget("a") to targetARoot,
             LeafCommonizerTarget("b") to targetBRoot
         )
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = roots.mapValue(::CirClassifierIndex),
             targetDependencies = roots.mapValue(CirTreeRoot::dependencies),
             commonizedNodes = CirCommonizedClassifierNodes.default(),
             commonDependencies = CirProvidedClassifiers.EMPTY
         )
 
-        val mergedTree = mergeCirTree(LockBasedStorageManager.NO_LOCKS, classifiers, roots, DefaultCommonizerSettings)
+        konst mergedTree = mergeCirTree(LockBasedStorageManager.NO_LOCKS, classifiers, roots, DefaultCommonizerSettings)
         InlineTypeAliasCirNodeTransformer(LockBasedStorageManager.NO_LOCKS, classifiers, DefaultCommonizerSettings).invoke(mergedTree)
 
-        val pkg = mergedTree.modules.values.single().packages.getValue(CirPackageName.create("pkg"))
-        val xClassNode = kotlin.test.assertNotNull(pkg.classes[CirName.create("X")])
-        val inlinedXClass = kotlin.test.assertNotNull(xClassNode.targetDeclarations[1])
+        konst pkg = mergedTree.modules.konstues.single().packages.getValue(CirPackageName.create("pkg"))
+        konst xClassNode = kotlin.test.assertNotNull(pkg.classes[CirName.create("X")])
+        konst inlinedXClass = kotlin.test.assertNotNull(xClassNode.targetDeclarations[1])
 
         kotlin.test.assertEquals(
             setOf(CirEntityId.create("dep/ClassA")),

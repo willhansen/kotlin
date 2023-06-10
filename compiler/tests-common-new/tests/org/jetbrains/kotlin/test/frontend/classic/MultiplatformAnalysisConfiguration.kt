@@ -54,9 +54,9 @@ internal interface MultiplatformAnalysisConfiguration {
  * This mode works similar to how actual user projects would compile platforms like 'jvm', 'native' or js targets.
  */
 internal class MultiplatformSeparateAnalysisConfiguration(
-    private val dependencyProvider: DependencyProvider,
-    private val sourceFileProvider: SourceFileProvider,
-    private val moduleDescriptorProvider: ModuleDescriptorProvider
+    private konst dependencyProvider: DependencyProvider,
+    private konst sourceFileProvider: SourceFileProvider,
+    private konst moduleDescriptorProvider: ModuleDescriptorProvider
 ) : MultiplatformAnalysisConfiguration {
 
     override fun getCompilerEnvironment(module: TestModule): TargetEnvironment {
@@ -81,18 +81,18 @@ internal class MultiplatformSeparateAnalysisConfiguration(
     }
 
     override fun getKtFilesForForSourceFiles(project: Project, module: TestModule): Map<TestFile, KtFile> {
-        val ktFilesMap = sourceFileProvider.getKtFilesForSourceFiles(module.files, project).toMutableMap()
+        konst ktFilesMap = sourceFileProvider.getKtFilesForSourceFiles(module.files, project).toMutableMap()
         fun addDependsOnSources(dependencies: List<DependencyDescription>) {
             if (dependencies.isEmpty()) return
             for (dependency in dependencies) {
-                val dependencyModule = dependencyProvider.getTestModule(dependency.moduleName)
-                val artifact = dependencyProvider.getArtifact(dependencyModule, FrontendKinds.ClassicFrontend)
+                konst dependencyModule = dependencyProvider.getTestModule(dependency.moduleName)
+                konst artifact = dependencyProvider.getArtifact(dependencyModule, FrontendKinds.ClassicFrontend)
                 /*
                 We need create KtFiles again with new project because otherwise we can access to some caches using
                 old project as key which may leads to missing services in core environment
                  */
-                val ktFiles = sourceFileProvider.getKtFilesForSourceFiles(artifact.allKtFiles.keys, project)
-                ktFiles.values.forEach { ktFile -> ktFile.isCommonSource = true }
+                konst ktFiles = sourceFileProvider.getKtFilesForSourceFiles(artifact.allKtFiles.keys, project)
+                ktFiles.konstues.forEach { ktFile -> ktFile.isCommonSource = true }
                 ktFilesMap.putAll(ktFiles)
                 addDependsOnSources(dependencyModule.dependsOnDependencies)
             }
@@ -108,9 +108,9 @@ internal class MultiplatformSeparateAnalysisConfiguration(
  * reversed depends on paths see [CompositeAnalysisModuleStructureOracle]
  */
 internal class MultiplatformCompositeAnalysisConfiguration(
-    private val dependencyProvider: DependencyProvider,
-    private val sourceFileProvider: SourceFileProvider,
-    private val moduleDescriptorProvider: ModuleDescriptorProvider,
+    private konst dependencyProvider: DependencyProvider,
+    private konst sourceFileProvider: SourceFileProvider,
+    private konst moduleDescriptorProvider: ModuleDescriptorProvider,
 ) : MultiplatformAnalysisConfiguration {
 
     override fun getCompilerEnvironment(module: TestModule): TargetEnvironment {
@@ -123,10 +123,10 @@ internal class MultiplatformCompositeAnalysisConfiguration(
 
     override fun getDependencyDescriptors(module: TestModule): List<ModuleDescriptor> {
         // Transitive dependsOn descriptors should also be returned as dependencies
-        val allDependsOnDependencies = module.dependsOnDependencies.closure(preserveOrder = true) { dependsOnDependency ->
+        konst allDependsOnDependencies = module.dependsOnDependencies.closure(preserveOrder = true) { dependsOnDependency ->
             dependencyProvider.getTestModule(dependsOnDependency.moduleName).dependsOnDependencies
         }
-        val allDependencies = (module.allDependencies + allDependsOnDependencies).distinct()
+        konst allDependencies = (module.allDependencies + allDependsOnDependencies).distinct()
         return getDescriptors(allDependencies, dependencyProvider, moduleDescriptorProvider)
     }
 
@@ -162,7 +162,7 @@ private object CompositeAnalysisModuleStructureOracle : ModuleStructureOracle {
 
     override fun findAllDependsOnPaths(module: ModuleDescriptor): List<ModulePath> {
         return module.expectedByModules.flatMap { expectedByModule ->
-            val head = listOf(module, expectedByModule)
+            konst head = listOf(module, expectedByModule)
             if (expectedByModule.expectedByModules.isEmpty()) listOf(ModulePath(head))
             else findAllDependsOnPaths(expectedByModule).map { path ->
                 ModulePath(head + path.nodes)

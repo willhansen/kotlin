@@ -1,15 +1,15 @@
 // WITH_STDLIB
 
-fun valueFromDB(value: Any): Any {
-    return when (value) {
-        is Char -> value
-        is Number-> value.toChar()
-        is String -> value.single()
-        else -> error("Unexpected value of type Char: $value")
+fun konstueFromDB(konstue: Any): Any {
+    return when (konstue) {
+        is Char -> konstue
+        is Number-> konstue.toChar()
+        is String -> konstue.single()
+        else -> error("Unexpected konstue of type Char: $konstue")
     }
 }
 
 fun box(): String {
-    valueFromDB(1)
-    return "" + valueFromDB("O") + valueFromDB("K")
+    konstueFromDB(1)
+    return "" + konstueFromDB("O") + konstueFromDB("K")
 }

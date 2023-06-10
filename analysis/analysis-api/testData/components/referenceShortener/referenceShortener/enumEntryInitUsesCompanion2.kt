@@ -1,4 +1,4 @@
-enum class C(val i: Int) {
+enum class C(konst i: Int) {
     ONE(<expr>C.foo()</expr>)
     ;
 

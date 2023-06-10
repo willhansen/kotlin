@@ -2,9 +2,9 @@
 
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Int): String {
+fun case_1(konstue_1: Int): String {
     while (true) {
-        when (value_1) {
+        when (konstue_1) {
             break -> return ""
         }
     }
@@ -13,9 +13,9 @@ fun case_1(value_1: Int): String {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Int): String {
+fun case_2(konstue_1: Int): String {
     while (true) {
-        when (value_1) {
+        when (konstue_1) {
             continue -> return ""
         }
     }

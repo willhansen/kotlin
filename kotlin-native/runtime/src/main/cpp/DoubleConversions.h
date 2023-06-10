@@ -39,9 +39,9 @@ inline KDouble bitsToDouble(KLong bits) {
   return alias.d;
 }
 
-inline KLong doubleToBits(KDouble value) {
+inline KLong doubleToBits(KDouble konstue) {
   DoubleAlias alias;
-  alias.d = value;
+  alias.d = konstue;
   return alias.l;
 }
 
@@ -51,13 +51,13 @@ inline KFloat bitsToFloat(KInt bits) {
   return alias.f;
 }
 
-inline KInt floatToBits(KFloat value) {
+inline KInt floatToBits(KFloat konstue) {
   FloatAlias alias;
-  alias.f = value;
+  alias.f = konstue;
   return alias.i;
 }
 
-extern "C" KInt doubleUpper(KDouble value);
-extern "C" KInt doubleLower(KDouble value);
+extern "C" KInt doubleUpper(KDouble konstue);
+extern "C" KInt doubleLower(KDouble konstue);
 
 #endif // RUNTIME_DOUBLECONVERSIONS_H

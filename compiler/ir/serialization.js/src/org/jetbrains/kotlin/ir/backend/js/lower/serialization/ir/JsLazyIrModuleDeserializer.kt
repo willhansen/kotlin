@@ -25,20 +25,20 @@ import org.jetbrains.kotlin.library.KotlinAbiVersion
 class JsLazyIrModuleDeserializer(
     moduleDescriptor: ModuleDescriptor,
     libraryAbiVersion: KotlinAbiVersion,
-    private val builtIns: IrBuiltIns,
-    private val stubGenerator: DeclarationStubGenerator
+    private konst builtIns: IrBuiltIns,
+    private konst stubGenerator: DeclarationStubGenerator
 ) : IrModuleDeserializer(moduleDescriptor, libraryAbiVersion) {
-    private val dependencies = emptyList<IrModuleDeserializer>()
+    private konst dependencies = emptyList<IrModuleDeserializer>()
 
     // TODO: implement proper check whether `idSig` belongs to this module
     override fun contains(idSig: IdSignature): Boolean = true
 
-    private val descriptorFinder = DescriptorByIdSignatureFinderImpl(moduleDescriptor, JsManglerDesc)
+    private konst descriptorFinder = DescriptorByIdSignatureFinderImpl(moduleDescriptor, JsManglerDesc)
 
     override fun tryDeserializeIrSymbol(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol? {
-        val descriptor = descriptorFinder.findDescriptorBySignature(idSig) ?: return null
+        konst descriptor = descriptorFinder.findDescriptorBySignature(idSig) ?: return null
 
-        val declaration = stubGenerator.run {
+        konst declaration = stubGenerator.run {
             when (symbolKind) {
                 BinarySymbolData.SymbolKind.CLASS_SYMBOL -> generateClassStub(descriptor as ClassDescriptor)
                 BinarySymbolData.SymbolKind.PROPERTY_SYMBOL -> generatePropertyStub(descriptor as PropertyDescriptor)
@@ -67,7 +67,7 @@ class JsLazyIrModuleDeserializer(
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     private fun declareFieldStub(symbol: IrFieldSymbol): IrField {
         return with(stubGenerator) {
-            val old = stubGenerator.unboundSymbolGeneration
+            konst old = stubGenerator.unboundSymbolGeneration
             try {
                 stubGenerator.unboundSymbolGeneration = true
                 generateFieldStub(symbol.descriptor)
@@ -78,9 +78,9 @@ class JsLazyIrModuleDeserializer(
     }
 
 
-    override val moduleFragment: IrModuleFragment = IrModuleFragmentImpl(moduleDescriptor, builtIns, emptyList())
-    override val moduleDependencies: Collection<IrModuleDeserializer> = dependencies
+    override konst moduleFragment: IrModuleFragment = IrModuleFragmentImpl(moduleDescriptor, builtIns, emptyList())
+    override konst moduleDependencies: Collection<IrModuleDeserializer> = dependencies
 
-    override val kind get() = IrModuleDeserializerKind.SYNTHETIC
+    override konst kind get() = IrModuleDeserializerKind.SYNTHETIC
 }
 

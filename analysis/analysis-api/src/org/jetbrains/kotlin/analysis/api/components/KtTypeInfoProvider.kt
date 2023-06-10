@@ -31,71 +31,71 @@ public interface KtTypeInfoProviderMixIn : KtAnalysisSessionMixIn {
      * Returns true if this type is denotable. A denotable type is a type that can be written in Kotlin by end users. See
      * https://kotlinlang.org/spec/type-system.html#type-kinds for more details.
      */
-    public val KtType.isDenotable: Boolean
+    public konst KtType.isDenotable: Boolean
         get() = withValidityAssertion { analysisSession.typeInfoProvider.isDenotable(this) }
 
     /**
      * Returns true if this type is a functional interface type, a.k.a. SAM type, e.g., Runnable.
      */
-    public val KtType.isFunctionalInterfaceType: Boolean
+    public konst KtType.isFunctionalInterfaceType: Boolean
         get() = withValidityAssertion { analysisSession.typeInfoProvider.isFunctionalInterfaceType(this) }
 
     /**
      * Returns [FunctionTypeKind] of the given [KtType]
      */
-    public val KtType.functionTypeKind: FunctionTypeKind?
+    public konst KtType.functionTypeKind: FunctionTypeKind?
         get() = withValidityAssertion { analysisSession.typeInfoProvider.getFunctionClassKind(this) }
 
-    public val KtType.isFunctionType: Boolean
+    public konst KtType.isFunctionType: Boolean
         get() = withValidityAssertion { functionTypeKind == FunctionTypeKind.Function }
 
-    public val KtType.isKFunctionType: Boolean
+    public konst KtType.isKFunctionType: Boolean
         get() = withValidityAssertion { functionTypeKind == FunctionTypeKind.KFunction }
 
-    public val KtType.isSuspendFunctionType: Boolean
+    public konst KtType.isSuspendFunctionType: Boolean
         get() = withValidityAssertion { functionTypeKind == FunctionTypeKind.SuspendFunction }
 
-    public val KtType.isKSuspendFunctionType: Boolean
+    public konst KtType.isKSuspendFunctionType: Boolean
         get() = withValidityAssertion { functionTypeKind == FunctionTypeKind.KSuspendFunction }
 
     /**
-     * Returns true if a public value of this type can potentially be null. This means this type is not a subtype of [Any]. However, it does not
-     * mean one can assign `null` to a variable of this type because it may be unknown if this type can accept `null`. For example, a public value
+     * Returns true if a public konstue of this type can potentially be null. This means this type is not a subtype of [Any]. However, it does not
+     * mean one can assign `null` to a variable of this type because it may be unknown if this type can accept `null`. For example, a public konstue
      * of type `T:Any?` can potentially be null. But one can not assign `null` to such a variable because the instantiated type may not be
      * nullable.
      */
-    public val KtType.canBeNull: Boolean get() = withValidityAssertion { analysisSession.typeInfoProvider.canBeNull(this) }
+    public konst KtType.canBeNull: Boolean get() = withValidityAssertion { analysisSession.typeInfoProvider.canBeNull(this) }
 
     /** Returns true if the type is explicitly marked as nullable. This means it's safe to assign `null` to a variable with this type. */
-    public val KtType.isMarkedNullable: Boolean get() = withValidityAssertion { this.nullability == KtTypeNullability.NULLABLE }
+    public konst KtType.isMarkedNullable: Boolean get() = withValidityAssertion { this.nullability == KtTypeNullability.NULLABLE }
 
     /** Returns true if the type is a platform flexible type and may or may not be marked nullable. */
-    public val KtType.hasFlexibleNullability: Boolean get() = withValidityAssertion { this is KtFlexibleType && this.upperBound.isMarkedNullable != this.lowerBound.isMarkedNullable }
+    public konst KtType.hasFlexibleNullability: Boolean get() = withValidityAssertion { this is KtFlexibleType && this.upperBound.isMarkedNullable != this.lowerBound.isMarkedNullable }
 
-    public val KtType.isUnit: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.UNIT) }
-    public val KtType.isInt: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.INT) }
-    public val KtType.isLong: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.LONG) }
-    public val KtType.isShort: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.SHORT) }
-    public val KtType.isByte: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.BYTE) }
-    public val KtType.isFloat: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.FLOAT) }
-    public val KtType.isDouble: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.DOUBLE) }
-    public val KtType.isChar: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.CHAR) }
-    public val KtType.isBoolean: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.BOOLEAN) }
-    public val KtType.isString: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.STRING) }
-    public val KtType.isCharSequence: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.CHAR_SEQUENCE) }
-    public val KtType.isAny: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.ANY) }
-    public val KtType.isNothing: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.NOTHING) }
+    public konst KtType.isUnit: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.UNIT) }
+    public konst KtType.isInt: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.INT) }
+    public konst KtType.isLong: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.LONG) }
+    public konst KtType.isShort: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.SHORT) }
+    public konst KtType.isByte: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.BYTE) }
+    public konst KtType.isFloat: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.FLOAT) }
+    public konst KtType.isDouble: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.DOUBLE) }
+    public konst KtType.isChar: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.CHAR) }
+    public konst KtType.isBoolean: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.BOOLEAN) }
+    public konst KtType.isString: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.STRING) }
+    public konst KtType.isCharSequence: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.CHAR_SEQUENCE) }
+    public konst KtType.isAny: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.ANY) }
+    public konst KtType.isNothing: Boolean get() = withValidityAssertion { isClassTypeWithClassId(DefaultTypeClassIds.NOTHING) }
 
-    public val KtType.isUInt: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uInt) }
-    public val KtType.isULong: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uLong) }
-    public val KtType.isUShort: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uShort) }
-    public val KtType.isUByte: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uByte) }
+    public konst KtType.isUInt: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uInt) }
+    public konst KtType.isULong: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uLong) }
+    public konst KtType.isUShort: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uShort) }
+    public konst KtType.isUByte: Boolean get() = withValidityAssertion { isClassTypeWithClassId(StandardNames.FqNames.uByte) }
 
     /** Gets the class symbol backing the given type, if available. */
-    public val KtType.expandedClassSymbol: KtClassOrObjectSymbol?
+    public konst KtType.expandedClassSymbol: KtClassOrObjectSymbol?
         get() = withValidityAssertion {
             return when (this) {
-                is KtNonErrorClassType -> when (val classSymbol = classSymbol) {
+                is KtNonErrorClassType -> when (konst classSymbol = classSymbol) {
                     is KtClassOrObjectSymbol -> classSymbol
                     is KtTypeAliasSymbol -> classSymbol.expandedType.expandedClassSymbol
                 }
@@ -116,7 +116,7 @@ public interface KtTypeInfoProviderMixIn : KtAnalysisSessionMixIn {
      * ```
      * The return type of `foo` will be `@Anno3 @Anno2 @Anno1 Base` instead of `@Anno3 SecondAlias`
      */
-    public val KtType.fullyExpandedType: KtType
+    public konst KtType.fullyExpandedType: KtType
         get() = withValidityAssertion {
             analysisSession.typeInfoProvider.fullyExpandedType(this)
         }
@@ -137,13 +137,13 @@ public interface KtTypeInfoProviderMixIn : KtAnalysisSessionMixIn {
         return this.classId == classId
     }
 
-    public val KtType.isPrimitive: Boolean
+    public konst KtType.isPrimitive: Boolean
         get() = withValidityAssertion {
             if (this !is KtNonErrorClassType) return false
             return this.classId in DefaultTypeClassIds.PRIMITIVES
         }
 
-    public val KtType.defaultInitializer: String?
+    public konst KtType.defaultInitializer: String?
         get() = withValidityAssertion {
             when {
                 isMarkedNullable -> "null"
@@ -164,18 +164,18 @@ public interface KtTypeInfoProviderMixIn : KtAnalysisSessionMixIn {
 }
 
 public object DefaultTypeClassIds {
-    public val UNIT: ClassId = ClassId.topLevel(StandardNames.FqNames.unit.toSafe())
-    public val INT: ClassId = ClassId.topLevel(StandardNames.FqNames._int.toSafe())
-    public val LONG: ClassId = ClassId.topLevel(StandardNames.FqNames._long.toSafe())
-    public val SHORT: ClassId = ClassId.topLevel(StandardNames.FqNames._short.toSafe())
-    public val BYTE: ClassId = ClassId.topLevel(StandardNames.FqNames._byte.toSafe())
-    public val FLOAT: ClassId = ClassId.topLevel(StandardNames.FqNames._float.toSafe())
-    public val DOUBLE: ClassId = ClassId.topLevel(StandardNames.FqNames._double.toSafe())
-    public val CHAR: ClassId = ClassId.topLevel(StandardNames.FqNames._char.toSafe())
-    public val BOOLEAN: ClassId = ClassId.topLevel(StandardNames.FqNames._boolean.toSafe())
-    public val STRING: ClassId = ClassId.topLevel(StandardNames.FqNames.string.toSafe())
-    public val CHAR_SEQUENCE: ClassId = ClassId.topLevel(StandardNames.FqNames.charSequence.toSafe())
-    public val ANY: ClassId = ClassId.topLevel(StandardNames.FqNames.any.toSafe())
-    public val NOTHING: ClassId = ClassId.topLevel(StandardNames.FqNames.nothing.toSafe())
-    public val PRIMITIVES: Set<ClassId> = setOf(INT, LONG, SHORT, BYTE, FLOAT, DOUBLE, CHAR, BOOLEAN)
+    public konst UNIT: ClassId = ClassId.topLevel(StandardNames.FqNames.unit.toSafe())
+    public konst INT: ClassId = ClassId.topLevel(StandardNames.FqNames._int.toSafe())
+    public konst LONG: ClassId = ClassId.topLevel(StandardNames.FqNames._long.toSafe())
+    public konst SHORT: ClassId = ClassId.topLevel(StandardNames.FqNames._short.toSafe())
+    public konst BYTE: ClassId = ClassId.topLevel(StandardNames.FqNames._byte.toSafe())
+    public konst FLOAT: ClassId = ClassId.topLevel(StandardNames.FqNames._float.toSafe())
+    public konst DOUBLE: ClassId = ClassId.topLevel(StandardNames.FqNames._double.toSafe())
+    public konst CHAR: ClassId = ClassId.topLevel(StandardNames.FqNames._char.toSafe())
+    public konst BOOLEAN: ClassId = ClassId.topLevel(StandardNames.FqNames._boolean.toSafe())
+    public konst STRING: ClassId = ClassId.topLevel(StandardNames.FqNames.string.toSafe())
+    public konst CHAR_SEQUENCE: ClassId = ClassId.topLevel(StandardNames.FqNames.charSequence.toSafe())
+    public konst ANY: ClassId = ClassId.topLevel(StandardNames.FqNames.any.toSafe())
+    public konst NOTHING: ClassId = ClassId.topLevel(StandardNames.FqNames.nothing.toSafe())
+    public konst PRIMITIVES: Set<ClassId> = setOf(INT, LONG, SHORT, BYTE, FLOAT, DOUBLE, CHAR, BOOLEAN)
 }

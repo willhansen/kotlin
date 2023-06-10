@@ -9,33 +9,33 @@ import kotlinx.cinterop.toCValues
 import llvm.*
 
 /**
- *  Wrapper around LLVM value of functional type.
+ *  Wrapper around LLVM konstue of functional type.
  *
  *  @todo This class mixes "something that can be called" and function abstractions.
  *        Some of it's methods make sense only for functions. Probably, LlvmFunction sub-class should be extracted.
  */
-class LlvmCallable(private val llvmValue: LLVMValueRef, private val attributeProvider: LlvmFunctionAttributeProvider) {
-    val returnType: LLVMTypeRef by lazy {
+class LlvmCallable(private konst llvmValue: LLVMValueRef, private konst attributeProvider: LlvmFunctionAttributeProvider) {
+    konst returnType: LLVMTypeRef by lazy {
         LLVMGetReturnType(functionType)!!
     }
 
-    val name by lazy {
+    konst name by lazy {
         llvmValue.name
     }
 
-    val functionType: LLVMTypeRef by lazy {
+    konst functionType: LLVMTypeRef by lazy {
         getFunctionType(llvmValue)
     }
 
-    val numParams by lazy {
+    konst numParams by lazy {
         LLVMCountParams(llvmValue)
     }
 
-    val pgoFunctionNameVar by lazy {
+    konst pgoFunctionNameVar by lazy {
         LLVMCreatePGOFunctionNameVar(llvmValue, name)!!
     }
 
-    val isConstant by lazy {
+    konst isConstant by lazy {
         LLVMIsConstant(llvmValue) == 1
     }
 
@@ -79,7 +79,7 @@ class LlvmCallable(private val llvmValue: LLVMValueRef, private val attributePro
         return LLVMGetParam(llvmValue, i)!!
     }
 
-    val isNoUnwind by lazy {
+    konst isNoUnwind by lazy {
         LLVMIsAFunction(llvmValue) != null && isFunctionNoUnwind(llvmValue)
     }
 

@@ -1,9 +1,9 @@
 fun test() {
-    when (val) {}
-    when (val x1) {}
-    when (val x2 = ) {}
-    when (val x3: ) {}
-    when (val x = 1; 42)
+    when (konst) {}
+    when (konst x1) {}
+    when (konst x2 = ) {}
+    when (konst x3: ) {}
+    when (konst x = 1; 42)
 
     when (fun foo() {}) {}
     when (class C {}) {}

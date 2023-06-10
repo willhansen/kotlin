@@ -1,2 +1,2 @@
-val v = 239
+konst v = 239
 fun method() = num + v

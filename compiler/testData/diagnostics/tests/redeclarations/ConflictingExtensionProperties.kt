@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
 package foo
 
-val Int.<!REDECLARATION!>foo<!>: Int get() = 2
-val Int.<!REDECLARATION!>foo<!>: Int get() = 3
+konst Int.<!REDECLARATION!>foo<!>: Int get() = 2
+konst Int.<!REDECLARATION!>foo<!>: Int get() = 3

@@ -12,23 +12,23 @@
 
 // FILE: funInterfaceConstructedObjectsEquality.kt
 
-val ks1: (() -> String) -> KSupplier<String> =
+konst ks1: (() -> String) -> KSupplier<String> =
     ::KSupplier
 
-val ks11Foo = ks1(::foo)
+konst ks11Foo = ks1(::foo)
 // getter is used to avoid dependency on lazy initialization support
-val ks21Foo get() = ks2(::foo)
+konst ks21Foo get() = ks2(::foo)
 
 fun interface KStringSupplier {
     fun get(): String
 }
 
-val kss: (() -> String) -> KStringSupplier =
+konst kss: (() -> String) -> KStringSupplier =
     ::KStringSupplier
 
-val ks11Bar = ks1(::bar)
+konst ks11Bar = ks1(::bar)
 
-val kssFoo = kss(::foo)
+konst kssFoo = kss(::foo)
 
 fun checkEqual(message: String, a1: Any, a2: Any) {
     if (a1 != a2) {
@@ -66,8 +66,8 @@ fun foo() = "abc"
 
 fun bar() = "def"
 
-val ks2: (() -> String) -> KSupplier<String> =
+konst ks2: (() -> String) -> KSupplier<String> =
     ::KSupplier
 
-val ks12Foo get() = ks1(::foo)
-val ks22Foo = ks2(::foo)
+konst ks12Foo get() = ks1(::foo)
+konst ks22Foo = ks2(::foo)

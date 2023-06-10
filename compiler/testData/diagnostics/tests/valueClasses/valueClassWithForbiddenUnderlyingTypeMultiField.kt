@@ -4,45 +4,45 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class Empty<T><!VALUE_CLASS_EMPTY_CONSTRUCTOR!>()<!>
+konstue class Empty<T><!VALUE_CLASS_EMPTY_CONSTRUCTOR!>()<!>
 
 
 @JvmInline
-value class Foo<T>(val x: T, val y: T)
+konstue class Foo<T>(konst x: T, konst y: T)
 
 @JvmInline
-value class FooNullable<T>(val x: T?, val y: T?)
-
-
-@JvmInline
-value class FooGenericArray<T>(val x: Array<T>, val y: Array<T>)
-
-@JvmInline
-value class FooGenericArray2<T>(val x: Array<Array<T>>, val y: Array<Array<T>>)
+konstue class FooNullable<T>(konst x: T?, konst y: T?)
 
 
 @JvmInline
-value class FooStarProjectedArray(val x: Array<*>, val y: Array<*>)
+konstue class FooGenericArray<T>(konst x: Array<T>, konst y: Array<T>)
 
 @JvmInline
-value class FooStarProjectedArray2(val x: Array<Array<*>>, val y: Array<Array<*>>)
-
-
-@JvmInline
-value class Bar(val u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>, val y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>)
-
-@JvmInline
-value class BarNullable(val u: Unit?, val y: Unit?)
+konstue class FooGenericArray2<T>(konst x: Array<Array<T>>, konst y: Array<Array<T>>)
 
 
 @JvmInline
-value class Baz(val u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>, val y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
+konstue class FooStarProjectedArray(konst x: Array<*>, konst y: Array<*>)
 
 @JvmInline
-value class Baz1(val u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>, val y: Int)
+konstue class FooStarProjectedArray2(konst x: Array<Array<*>>, konst y: Array<Array<*>>)
+
 
 @JvmInline
-value class Baz2(val u: Int, val y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
+konstue class Bar(konst u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>, konst y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Unit<!>)
 
 @JvmInline
-value class BazNullable(val u: Nothing?, val y: Nothing?)
+konstue class BarNullable(konst u: Unit?, konst y: Unit?)
+
+
+@JvmInline
+konstue class Baz(konst u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>, konst y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
+
+@JvmInline
+konstue class Baz1(konst u: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>, konst y: Int)
+
+@JvmInline
+konstue class Baz2(konst u: Int, konst y: <!VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE!>Nothing<!>)
+
+@JvmInline
+konstue class BazNullable(konst u: Nothing?, konst y: Nothing?)

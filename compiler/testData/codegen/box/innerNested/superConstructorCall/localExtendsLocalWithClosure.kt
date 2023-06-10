@@ -1,7 +1,7 @@
 fun box(): String {
-    val result = "OK"
+    konst result = "OK"
 
-    open class Local(val ok: Boolean) {
+    open class Local(konst ok: Boolean) {
         fun result() = if (ok) result else "Fail"
     }
 

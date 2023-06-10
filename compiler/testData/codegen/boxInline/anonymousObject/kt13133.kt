@@ -6,7 +6,7 @@ package test
 
 inline fun inf(crossinline cif: Any.() -> String): () -> String {
     // Approximate the types manually to avoid running into KT-30696
-    val factory: () -> () -> String = {
+    konst factory: () -> () -> String = {
         object : () -> String {
             override fun invoke() = cif()
         }
@@ -18,13 +18,13 @@ inline fun inf(crossinline cif: Any.() -> String): () -> String {
 import test.*
 
 fun box(): String {
-    val simpleName = inf {
+    konst simpleName = inf {
         javaClass.simpleName
     }()
 
     if (simpleName != "" ) return "fail 1: $simpleName"
 
-    val name = inf {
+    konst name = inf {
         javaClass.name
     }()
 

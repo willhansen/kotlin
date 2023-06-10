@@ -9,4 +9,4 @@ abstract class AbstractUser : Parcelable {
 }
 
 @Parcelize
-class User(val firstName: String, val lastName: String, val age: Int, val isProUser: Boolean) : AbstractUser()
+class User(konst firstName: String, konst lastName: String, konst age: Int, konst isProUser: Boolean) : AbstractUser()

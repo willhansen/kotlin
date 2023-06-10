@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.diagnostics.rendering.RenderingContext
 
 object RenderFirstLineOfElementText : DiagnosticParameterRenderer<PsiElement> {
     override fun render(obj: PsiElement, renderingContext: RenderingContext): String {
-        val text = obj.text
-        val index = text.indexOf('\n')
+        konst text = obj.text
+        konst index = text.indexOf('\n')
         return if (index == -1) text else text.substring(0, index) + "..."
     }
 }
@@ -41,16 +41,16 @@ abstract class JsCallDataRenderer : DiagnosticParameterRenderer<JsCallData> {
 
 object JsCallDataTextRenderer : JsCallDataRenderer() {
     override fun format(data: JsCallDataWithCode): String {
-        val codeRange = data.codeRange
-        val code = data.code.underlineAsText(codeRange.startOffset, codeRange.endOffset)
+        konst codeRange = data.codeRange
+        konst code = data.code.underlineAsText(codeRange.startOffset, codeRange.endOffset)
         return "${data.message} in code:\n$code"
     }
 }
 
 object JsCallDataHtmlRenderer : JsCallDataRenderer() {
     override fun format(data: JsCallDataWithCode): String {
-        val codeRange = data.codeRange
-        val code = data.code.underlineAsHtml(codeRange.startOffset, codeRange.endOffset)
+        konst codeRange = data.codeRange
+        konst code = data.code.underlineAsHtml(codeRange.startOffset, codeRange.endOffset)
         return "${data.message} in code:<br><pre>$code</pre>"
     }
 }
@@ -63,13 +63,13 @@ object JsCallDataHtmlRenderer : JsCallDataRenderer() {
  *    ^^^^
  */
 fun String.underlineAsText(from: Int, to: Int): String {
-    val lines = StringBuilder()
+    konst lines = StringBuilder()
     var marks = StringBuilder()
     var lineWasMarked = false
 
     for (i in indices) {
-        val c = this[i]
-        val mark: Char
+        konst c = this[i]
+        konst mark: Char
 
         mark = when (i) {
             in from..to -> '^'
@@ -99,15 +99,15 @@ fun String.underlineAsText(from: Int, to: Int): String {
 }
 
 fun String.underlineAsHtml(from: Int, to: Int): String {
-    val lines = StringBuilder()
+    konst lines = StringBuilder()
     var openMarker = false
-    val underlineStart = "<u>"
-    val underlineEnd = "</u>"
+    konst underlineStart = "<u>"
+    konst underlineEnd = "</u>"
 
     for (i in indices) {
-        val c = this[i]
+        konst c = this[i]
 
-        val mark = when (i) {
+        konst mark = when (i) {
             from -> {
                 openMarker = true
                 underlineStart

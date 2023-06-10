@@ -30,13 +30,13 @@ class CompilerPluginOptions() : CompilerPluginConfig() {
     }
 
     @get:Internal
-    internal val subpluginOptionsByPluginId = optionsByPluginId
+    internal konst subpluginOptionsByPluginId = optionsByPluginId
 
     @get:Internal
-    val arguments: List<String>
+    konst arguments: List<String>
         get() = optionsByPluginId.flatMap { (pluginId, subplubinOptions) ->
             subplubinOptions.map { option ->
-                "plugin:$pluginId:${option.key}=${option.value}"
+                "plugin:$pluginId:${option.key}=${option.konstue}"
             }
         }
 
@@ -46,7 +46,7 @@ class CompilerPluginOptions() : CompilerPluginConfig() {
 
     operator fun plus(options: CompilerPluginConfig?): CompilerPluginOptions {
         if (options == null) return this
-        val newOptions = CompilerPluginOptions()
+        konst newOptions = CompilerPluginOptions()
         newOptions.optionsByPluginId += subpluginOptionsByPluginId
         newOptions.copyOptionsFrom(options)
 
@@ -55,7 +55,7 @@ class CompilerPluginOptions() : CompilerPluginConfig() {
 
     private fun copyOptionsFrom(options: CompilerPluginConfig) {
         options.allOptions().forEach { entry ->
-            optionsByPluginId[entry.key] = entry.value.toMutableList()
+            optionsByPluginId[entry.key] = entry.konstue.toMutableList()
         }
     }
 }
@@ -68,7 +68,7 @@ internal fun ListProperty<out CompilerPluginConfig>.toSingleCompilerPluginOption
 
 internal fun Provider<List<SubpluginOption>>.toCompilerPluginOptions(): Provider<CompilerPluginOptions> {
     return map {
-        val res = CompilerPluginOptions()
+        konst res = CompilerPluginOptions()
         it.forEach { res.addPluginArgument(Kapt3GradleSubplugin.KAPT_SUBPLUGIN_ID, it) }
         return@map res
     }

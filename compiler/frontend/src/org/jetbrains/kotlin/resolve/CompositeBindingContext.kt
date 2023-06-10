@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import java.util.*
 
 class CompositeBindingContext private constructor(
-    private val delegates: LinkedHashSet<BindingContext>
+    private konst delegates: LinkedHashSet<BindingContext>
 ) : BindingContext {
     override fun getType(expression: KtExpression): KotlinType? {
         return delegates.asSequence().map { it.getType(expression) }.firstOrNull { it != null }
@@ -37,7 +37,7 @@ class CompositeBindingContext private constructor(
     companion object {
         fun create(delegates: List<BindingContext>): BindingContext {
             if (delegates.isEmpty()) return BindingContext.EMPTY
-            val delegatesSet = LinkedHashSet(delegates)
+            konst delegatesSet = LinkedHashSet(delegates)
             if (delegatesSet.size == 1) return delegates.first()
             return CompositeBindingContext(delegatesSet)
         }
@@ -53,7 +53,7 @@ class CompositeBindingContext private constructor(
 
     override fun <K, V> getSliceContents(slice: ReadOnlySlice<K, V>): ImmutableMap<K, V> {
         //we need intermediate map cause ImmutableMap doesn't support same entries obtained from different slices
-        val map = hashMapOf<K, V>()
+        konst map = hashMapOf<K, V>()
         delegates.forEach { map.putAll(it.getSliceContents(slice)) }
         return ImmutableMap.builder<K, V>().putAll(map).build()
     }
@@ -67,14 +67,14 @@ class CompositeBindingContext private constructor(
     }
 
     private class CompositeDiagnostics(
-        private val delegates: List<Diagnostics>
+        private konst delegates: List<Diagnostics>
     ) : Diagnostics {
 
         override fun iterator(): Iterator<Diagnostic> {
             return delegates.fold(emptySequence<Diagnostic>(), { r, t -> r + t.asSequence() }).iterator()
         }
 
-        override val modificationTracker = ModificationTracker {
+        override konst modificationTracker = ModificationTracker {
             delegates.fold(0L, { r, t -> r + t.modificationTracker.modificationCount })
         }
 

@@ -6,7 +6,7 @@ class Message1
 class Task<T>
 object Message2
 enum class Message3
-data class Message4(val x: Int)
+data class Message4(konst x: Int)
 interface Manager<T> {}
 
 object MessageManager1 : Manager<Message1> {
@@ -59,7 +59,7 @@ class MessageManager11<A> : <!UNRESOLVED_REFERENCE!>Message5<!><<!UNRESOLVED_REF
     fun <T : <!UNRESOLVED_REFERENCE!>Message5<!><A>> execute() {}
 }
 
-data class MessageManager12(val x: Int) : <!UNRESOLVED_REFERENCE!>Message5<!><Message2>() {
+data class MessageManager12(konst x: Int) : <!UNRESOLVED_REFERENCE!>Message5<!><Message2>() {
     fun <T : <!FINAL_UPPER_BOUND!>Message2<!>> execute() {}
 }
 
@@ -68,15 +68,15 @@ sealed class MessageManager13<A> : <!UNRESOLVED_REFERENCE!>Message5<!><A>() {
 }
 
 class MessageManager14 : Manager<Message2> {
-    val <T : <!FINAL_UPPER_BOUND!>Message2<!>> T.x get() = 10
+    konst <T : <!FINAL_UPPER_BOUND!>Message2<!>> T.x get() = 10
     var <T : <!FINAL_UPPER_BOUND!>Message2<!>> T.y
         get() = 10
-        set(value) {}
+        set(konstue) {}
 }
 
 object MessageManager15 : Manager<Int> {
-    val <T : <!FINAL_UPPER_BOUND!>Int<!>> T.x get() = 10
+    konst <T : <!FINAL_UPPER_BOUND!>Int<!>> T.x get() = 10
     var <T : <!FINAL_UPPER_BOUND!>Int<!>> T.y
         get() = 10
-        set(value) {}
+        set(konstue) {}
 }

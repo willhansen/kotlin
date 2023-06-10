@@ -1,4 +1,4 @@
 // WITH_STDLIB
 
-val s: String? = ""
-val blank = s.isNullOrBlank()
+konst s: String? = ""
+konst blank = s.isNullOrBlank()

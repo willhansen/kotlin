@@ -22,27 +22,27 @@ import kotlin.coroutines.Continuation
 class InfrastructureCompressedNamesTest {
     @Test
     fun targetNameCompression() {
-        val knownTargets: Set<KonanTarget> = KonanTarget.predefinedTargets.values.toSet()
+        konst knownTargets: Set<KonanTarget> = KonanTarget.predefinedTargets.konstues.toSet()
 
-        val compressedNameToTargets: Map<String, KonanTarget> = knownTargets.associateBy { it.compressedName }
-        val missingTargets: Set<KonanTarget> = compressedNameToTargets.values.toSet() - knownTargets
+        konst compressedNameToTargets: Map<String, KonanTarget> = knownTargets.associateBy { it.compressedName }
+        konst missingTargets: Set<KonanTarget> = compressedNameToTargets.konstues.toSet() - knownTargets
 
         assertTrue(missingTargets.isEmpty()) { "There are missing targets: $missingTargets" }
         assertEquals(knownTargets.size, compressedNameToTargets.size)
 
-        val shortestCompressedName = compressedNameToTargets.keys.minByOrNull { it.length }!!
+        konst shortestCompressedName = compressedNameToTargets.keys.minByOrNull { it.length }!!
         assertTrue(shortestCompressedName.isNotEmpty()) { "Found empty compressed name: $shortestCompressedName" }
 
-        val longestCompressedName = compressedNameToTargets.keys.maxByOrNull { it.length }!!
+        konst longestCompressedName = compressedNameToTargets.keys.maxByOrNull { it.length }!!
         assertTrue(longestCompressedName.length < 6) { "Found too long compressed name: $longestCompressedName" }
     }
 
     @Test
     fun familyNameCompression() {
-        val knownFamilies: Set<Family> = Family.values().toSet()
+        konst knownFamilies: Set<Family> = Family.konstues().toSet()
 
-        val compressedNameToFamily: Map<Char, Family> = knownFamilies.associateBy { it.compressedName }
-        val missingFamilies: Set<Family> = compressedNameToFamily.values.toSet() - knownFamilies
+        konst compressedNameToFamily: Map<Char, Family> = knownFamilies.associateBy { it.compressedName }
+        konst missingFamilies: Set<Family> = compressedNameToFamily.konstues.toSet() - knownFamilies
 
         assertTrue(missingFamilies.isEmpty()) { "There are missing families: $missingFamilies" }
         assertEquals(knownFamilies.size, compressedNameToFamily.size)
@@ -50,15 +50,15 @@ class InfrastructureCompressedNamesTest {
 
     @Test
     fun architectureNameCompression() {
-        val knownArchitectures: Set<Architecture> = Architecture.values().toSet()
+        konst knownArchitectures: Set<Architecture> = Architecture.konstues().toSet()
 
-        val compressedNameToArchitecture: Map<String, Architecture> = knownArchitectures.associateBy { it.compressedName }
-        val missingArchitecture: Set<Architecture> = compressedNameToArchitecture.values.toSet() - knownArchitectures
+        konst compressedNameToArchitecture: Map<String, Architecture> = knownArchitectures.associateBy { it.compressedName }
+        konst missingArchitecture: Set<Architecture> = compressedNameToArchitecture.konstues.toSet() - knownArchitectures
 
         assertTrue(missingArchitecture.isEmpty()) { "There are missing architectures: $missingArchitecture" }
         assertEquals(knownArchitectures.size, compressedNameToArchitecture.size)
 
-        val nameLengths: Map<Int, List<String>> = compressedNameToArchitecture.keys.groupBy { it.length }
+        konst nameLengths: Map<Int, List<String>> = compressedNameToArchitecture.keys.groupBy { it.length }
         assertEquals(setOf(3), nameLengths.keys) { "Found compressed names with unexpected lengths: $nameLengths" }
     }
 
@@ -94,7 +94,7 @@ class InfrastructureCompressedNamesTest {
     }
 
     companion object {
-        private val String.compressedPackageName
+        private konst String.compressedPackageName
             get() = PackageName(this).compressedPackageName
     }
 }

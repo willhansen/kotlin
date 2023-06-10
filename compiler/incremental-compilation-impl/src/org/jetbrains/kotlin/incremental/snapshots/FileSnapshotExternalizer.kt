@@ -22,18 +22,18 @@ import java.io.DataOutput
 import java.io.File
 
 object FileSnapshotExternalizer : DataExternalizer<FileSnapshot> {
-    override fun save(out: DataOutput, value: FileSnapshot) {
-        out.writeUTF(value.file.normalize().absolutePath)
-        out.writeLong(value.length)
-        out.writeInt(value.hash.size)
-        out.write(value.hash)
+    override fun save(out: DataOutput, konstue: FileSnapshot) {
+        out.writeUTF(konstue.file.normalize().absolutePath)
+        out.writeLong(konstue.length)
+        out.writeInt(konstue.hash.size)
+        out.write(konstue.hash)
     }
 
     override fun read(input: DataInput): FileSnapshot {
-        val file = File(input.readUTF())
-        val length = input.readLong()
-        val hashSize = input.readInt()
-        val hash = ByteArray(hashSize)
+        konst file = File(input.readUTF())
+        konst length = input.readLong()
+        konst hashSize = input.readInt()
+        konst hash = ByteArray(hashSize)
         input.readFully(hash)
         return FileSnapshot(file, length, hash)
     }

@@ -487,7 +487,7 @@ static void* mi_os_get_aligned_hint(size_t try_alignment, size_t size)
 {
   if (try_alignment == 0 || try_alignment > MI_SEGMENT_SIZE) return NULL;
   if ((size%MI_SEGMENT_SIZE) != 0) return NULL;
-  if (size > 1*GiB) return NULL;  // guarantee the chance of fixed valid address is at most 1/(KK_HINT_AREA / 1<<30) = 1/4096.
+  if (size > 1*GiB) return NULL;  // guarantee the chance of fixed konstid address is at most 1/(KK_HINT_AREA / 1<<30) = 1/4096.
   #if (MI_SECURE>0)
   size += MI_SEGMENT_SIZE;        // put in `MI_SEGMENT_SIZE` virtual gaps between hinted blocks; this splits VLA's but increases guarded areas.
   #endif
@@ -1163,7 +1163,7 @@ static size_t mi_os_numa_node_countx(void) {
         if (mask != 0) break; // found the maximum non-empty node
       };
     }
-    // max node was invalid or had no processor assigned, try again
+    // max node was inkonstid or had no processor assigned, try again
     numa_max--;
   }
   return ((size_t)numa_max + 1);

@@ -1,7 +1,7 @@
 var log = ""
 
-fun logged(value: String) =
-    value.also { log += value }
+fun logged(konstue: String) =
+    konstue.also { log += konstue }
 
 object A {
     var x = ""
@@ -16,12 +16,12 @@ object A {
         return x
     }
 
-    operator fun set(vararg va: String, value: String) {
+    operator fun set(vararg va: String, konstue: String) {
         for (s in va) {
             sets += s
         }
         log += "set;"
-        x = value
+        x = konstue
     }
 }
 
@@ -29,7 +29,7 @@ operator fun String.inc() = this + logged("inc;")
 
 fun box(): String {
     A.x = "start;"
-    val xx = A[logged("1;"), logged("2;"), logged("3;")]++
+    konst xx = A[logged("1;"), logged("2;"), logged("3;")]++
     if (xx != "start;") return "Failed xx: $xx"
     if (A.x != "start;inc;") return "Failed A.x: ${A.x}"
     if (A.gets != "1;2;3;") return "Failed A.gets: ${A.gets}"

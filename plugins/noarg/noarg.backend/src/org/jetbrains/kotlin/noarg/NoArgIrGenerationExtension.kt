@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.name.JvmNames.JVM_OVERLOADS_FQ_NAME
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 class NoArgIrGenerationExtension(
-    private val annotations: List<String>,
-    private val invokeInitializers: Boolean,
+    private konst annotations: List<String>,
+    private konst invokeInitializers: Boolean,
 ) : IrGenerationExtension {
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         moduleFragment.accept(NoArgIrTransformer(pluginContext, annotations, invokeInitializers), null)
@@ -34,9 +34,9 @@ class NoArgIrGenerationExtension(
 }
 
 private class NoArgIrTransformer(
-    private val context: IrPluginContext,
-    private val annotations: List<String>,
-    private val invokeInitializers: Boolean,
+    private konst context: IrPluginContext,
+    private konst annotations: List<String>,
+    private konst invokeInitializers: Boolean,
 ) : AnnotationBasedExtension, IrElementVisitorVoid {
     override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?): List<String> = annotations
 
@@ -52,14 +52,14 @@ private class NoArgIrTransformer(
         }
     }
 
-    private val noArgConstructors = mutableMapOf<IrClass, IrConstructor>()
+    private konst noArgConstructors = mutableMapOf<IrClass, IrConstructor>()
 
     private fun getOrGenerateNoArgConstructor(klass: IrClass): IrConstructor = noArgConstructors.getOrPut(klass) {
-        val superClass =
+        konst superClass =
             klass.superTypes.mapNotNull(IrType::getClass).singleOrNull { it.kind == ClassKind.CLASS }
                 ?: context.irBuiltIns.anyClass.owner
 
-        val superConstructor =
+        konst superConstructor =
             if (needsNoargConstructor(superClass))
                 getOrGenerateNoArgConstructor(superClass)
             else superClass.constructors.singleOrNull { it.isZeroParameterConstructor() }
@@ -76,7 +76,7 @@ private class NoArgIrTransformer(
                 listOfNotNull(
                     IrDelegatingConstructorCallImpl(
                         ctor.startOffset, ctor.endOffset, context.irBuiltIns.unitType,
-                        superConstructor.symbol, 0, superConstructor.valueParameters.size
+                        superConstructor.symbol, 0, superConstructor.konstueParameters.size
                     ),
                     IrInstanceInitializerCallImpl(
                         ctor.startOffset, ctor.endOffset, klass.symbol, context.irBuiltIns.unitType
@@ -96,5 +96,5 @@ private class NoArgIrTransformer(
 
     // Returns true if this constructor is callable with no arguments by JVM rules, i.e. will have descriptor `()V`.
     private fun IrConstructor.isZeroParameterConstructor(): Boolean =
-        valueParameters.all { it.defaultValue != null } && (valueParameters.isEmpty() || isPrimary || hasAnnotation(JVM_OVERLOADS_FQ_NAME))
+        konstueParameters.all { it.defaultValue != null } && (konstueParameters.isEmpty() || isPrimary || hasAnnotation(JVM_OVERLOADS_FQ_NAME))
 }

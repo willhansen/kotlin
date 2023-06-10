@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrStringConcatenationImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType
 ) : IrStringConcatenation() {
     constructor(
@@ -35,5 +35,5 @@ class IrStringConcatenationImpl(
         this.arguments.addAll(arguments)
     }
 
-    override val arguments: MutableList<IrExpression> = ArrayList(2)
+    override konst arguments: MutableList<IrExpression> = ArrayList(2)
 }

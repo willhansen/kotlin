@@ -19,7 +19,7 @@ object Z2 : Z {
 }
 
 fun box() : String {
-    val size = Class.forName("test.Z2").declaredMethods.size
+    konst size = Class.forName("test.Z2").declaredMethods.size
     if (size != 0) return "fail: $size"
     return "OK"
 }

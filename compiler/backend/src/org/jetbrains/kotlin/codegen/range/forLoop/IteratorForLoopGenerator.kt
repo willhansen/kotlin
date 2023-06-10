@@ -32,13 +32,13 @@ import org.jetbrains.org.objectweb.asm.Type
 class IteratorForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression) :
     AbstractForLoopGenerator(codegen, forExpression) {
     private var iteratorVarIndex: Int = 0
-    private val iteratorCall: ResolvedCall<FunctionDescriptor>
-    private val nextCall: ResolvedCall<FunctionDescriptor>
-    private val iteratorType: KotlinType
-    private val asmTypeForIterator: Type
+    private konst iteratorCall: ResolvedCall<FunctionDescriptor>
+    private konst nextCall: ResolvedCall<FunctionDescriptor>
+    private konst iteratorType: KotlinType
+    private konst asmTypeForIterator: Type
 
     init {
-        val loopRange = forExpression.loopRange!!
+        konst loopRange = forExpression.loopRange!!
         this.iteratorCall = getNotNull(
             bindingContext,
             LOOP_RANGE_ITERATOR_RESOLVED_CALL, loopRange,
@@ -70,24 +70,24 @@ class IteratorForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForE
     override fun checkPreCondition(loopExit: Label) {
         // tmp<iterator>.hasNext()
 
-        val loopRange = forExpression.loopRange
-        val hasNextCall = getNotNull(
+        konst loopRange = forExpression.loopRange
+        konst hasNextCall = getNotNull(
             codegen.bindingContext, LOOP_RANGE_HAS_NEXT_RESOLVED_CALL,
             loopRange!!,
             "No hasNext() function " + PsiDiagnosticUtils.atLocation(loopRange)
         )
-        val fakeCall = codegen.makeFakeCall(TransientReceiver(iteratorCall.resultingDescriptor.returnType!!))
-        val result = codegen.invokeFunction(fakeCall, hasNextCall, StackValue.local(iteratorVarIndex, asmTypeForIterator, iteratorType))
+        konst fakeCall = codegen.makeFakeCall(TransientReceiver(iteratorCall.resultingDescriptor.returnType!!))
+        konst result = codegen.invokeFunction(fakeCall, hasNextCall, StackValue.local(iteratorVarIndex, asmTypeForIterator, iteratorType))
         result.put(Type.BOOLEAN_TYPE, v)
 
         v.ifeq(loopExit)
     }
 
     override fun assignToLoopParameter() {
-        val fakeCall = codegen.makeFakeCall(TransientReceiver(iteratorCall.resultingDescriptor.returnType!!))
-        val value = codegen.invokeFunction(fakeCall, nextCall, StackValue.local(iteratorVarIndex, asmTypeForIterator, iteratorType))
+        konst fakeCall = codegen.makeFakeCall(TransientReceiver(iteratorCall.resultingDescriptor.returnType!!))
+        konst konstue = codegen.invokeFunction(fakeCall, nextCall, StackValue.local(iteratorVarIndex, asmTypeForIterator, iteratorType))
 
-        StackValue.local(loopParameterVar, loopParameterType, loopParameterKotlinType).store(value, v)
+        StackValue.local(loopParameterVar, loopParameterType, loopParameterKotlinType).store(konstue, v)
     }
 
     override fun checkPostConditionAndIncrement(loopExit: Label) {}

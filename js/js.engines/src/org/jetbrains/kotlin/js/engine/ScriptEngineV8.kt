@@ -9,13 +9,13 @@ class ScriptEngineV8 : ProcessBasedScriptEngine(System.getProperty("javascript.e
 
 fun main() {
 //    System.setProperty("javascript.engine.path.V8", "<path-to-d8>")
-    val vm = ScriptEngineV8()
+    konst vm = ScriptEngineV8()
     println("Welcome!")
     while (true) {
         print("> ")
-        val t = readLine()
+        konst t = readLine()
         try {
-            println(vm.eval(t!!))
+            println(vm.ekonst(t!!))
         } catch (e: Throwable) {
             System.err.println(e)
         }

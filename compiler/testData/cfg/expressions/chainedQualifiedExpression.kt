@@ -4,7 +4,7 @@ class JetToken
 
 public open class JetKeywordCompletionContributor() {
     init {
-        val inTopLevel = 1.0
+        konst inTopLevel = 1.0
 
         BunchKeywordRegister()
                 .add(ABSTRACT_KEYWORD, inTopLevel, inTopLevel, inTopLevel)
@@ -49,25 +49,25 @@ public open class JetKeywordCompletionContributor() {
     }
 }
 
-val ABSTRACT_KEYWORD = JetToken()
-val FINAL_KEYWORD OPEN_KEYWORD = JetToken()
-val OPEN_KEYWORD = JetToken()
-val INTERNAL_KEYWORD = JetToken()
-val PRIVATE_KEYWORD = JetToken()
-val PROTECTED_KEYWORD = JetToken()
-val PUBLIC_KEYWORD = JetToken()
-val CLASS_KEYWORD = JetToken()
-val ENUM_KEYWORD = JetToken()
-val FUN_KEYWORD = JetToken()
-val GET_KEYWORD = JetToken()
-val SET_KEYWORD = JetToken()
-val INTERFACE_KEYWORD = JetToken()
-val VAL_KEYWORD = JetToken()
-val VAR_KEYWORD = JetToken()
-val TYPE_KEYWORD = JetToken()
-val IMPORT_KEYWORD = JetToken()
-val PACKAGE_KEYWORD = JetToken()
-val OVERRIDE_KEYWORD = JetToken()
-val IN_KEYWORD = JetToken()
-val OUT_KEYWORD = JetToken()
-val OBJECT_KEYWORD = JetToken()
+konst ABSTRACT_KEYWORD = JetToken()
+konst FINAL_KEYWORD OPEN_KEYWORD = JetToken()
+konst OPEN_KEYWORD = JetToken()
+konst INTERNAL_KEYWORD = JetToken()
+konst PRIVATE_KEYWORD = JetToken()
+konst PROTECTED_KEYWORD = JetToken()
+konst PUBLIC_KEYWORD = JetToken()
+konst CLASS_KEYWORD = JetToken()
+konst ENUM_KEYWORD = JetToken()
+konst FUN_KEYWORD = JetToken()
+konst GET_KEYWORD = JetToken()
+konst SET_KEYWORD = JetToken()
+konst INTERFACE_KEYWORD = JetToken()
+konst VAL_KEYWORD = JetToken()
+konst VAR_KEYWORD = JetToken()
+konst TYPE_KEYWORD = JetToken()
+konst IMPORT_KEYWORD = JetToken()
+konst PACKAGE_KEYWORD = JetToken()
+konst OVERRIDE_KEYWORD = JetToken()
+konst IN_KEYWORD = JetToken()
+konst OUT_KEYWORD = JetToken()
+konst OBJECT_KEYWORD = JetToken()

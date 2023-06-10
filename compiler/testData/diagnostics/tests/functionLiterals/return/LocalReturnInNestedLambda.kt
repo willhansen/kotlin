@@ -2,7 +2,7 @@
 // !CHECK_TYPE
 
 fun test() {
-    val x = run f@{
+    konst x = run f@{
       run ff@ {
         return@ff "2"
       }

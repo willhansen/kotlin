@@ -59,8 +59,8 @@ interface IncrementalNextRoundChecker {
     fun shouldGoToNextRound(): Boolean
 }
 
-class FunctionWithSourceInfo(val expression: Any, val line: Int, val column: Int) {
-    val md5: Long
+class FunctionWithSourceInfo(konst expression: Any, konst line: Int, konst column: Int) {
+    konst md5: Long
         get() = "($line:$column)$expression".toByteArray().md5()
 }
 
@@ -68,18 +68,18 @@ open class IncrementalResultsConsumerImpl : IncrementalResultsConsumer {
     lateinit var headerMetadata: ByteArray
         private set
 
-    private val _packageParts = hashMapOf<File, TranslationResultValue>()
-    val packageParts: Map<File, TranslationResultValue>
+    private konst _packageParts = hashMapOf<File, TranslationResultValue>()
+    konst packageParts: Map<File, TranslationResultValue>
         get() = _packageParts
 
-    private val _deferInlineFuncs = hashMapOf<File, MutableMap<String, FunctionWithSourceInfo>>()
+    private konst _deferInlineFuncs = hashMapOf<File, MutableMap<String, FunctionWithSourceInfo>>()
     private var _processedInlineFuncs: Collection<JsInlineFunctionHash>? = null
-    val inlineFunctions: Map<File, Map<String, Long>>
+    konst inlineFunctions: Map<File, Map<String, Long>>
         get() {
-            val result = HashMap<File, MutableMap<String, Long>>(_deferInlineFuncs.size)
+            konst result = HashMap<File, MutableMap<String, Long>>(_deferInlineFuncs.size)
 
             for ((file, inlineFnsFromFile) in _deferInlineFuncs) {
-                val functionsHashes = HashMap<String, Long>(inlineFnsFromFile.size)
+                konst functionsHashes = HashMap<String, Long>(inlineFnsFromFile.size)
 
                 for ((fqName, fn) in inlineFnsFromFile) {
                     functionsHashes[fqName] = fn.md5
@@ -89,7 +89,7 @@ open class IncrementalResultsConsumerImpl : IncrementalResultsConsumer {
             }
 
             _processedInlineFuncs?.forEach {
-                val fileFunctions = result.getOrPut(File(it.sourceFilePath)) { mutableMapOf() }
+                konst fileFunctions = result.getOrPut(File(it.sourceFilePath)) { mutableMapOf() }
                 fileFunctions[it.fqName] = it.inlineFunctionMd5Hash
             }
 
@@ -110,12 +110,12 @@ open class IncrementalResultsConsumerImpl : IncrementalResultsConsumer {
     }
 
     override fun processInlineFunction(sourceFile: File, fqName: String, inlineFunction: Any, line: Int, column: Int) {
-        val mapForSource = _deferInlineFuncs.getOrPut(sourceFile) { hashMapOf() }
+        konst mapForSource = _deferInlineFuncs.getOrPut(sourceFile) { hashMapOf() }
         mapForSource[fqName] = FunctionWithSourceInfo(inlineFunction, line, column)
     }
 
-    private val _packageMetadata = hashMapOf<String, ByteArray>()
-    val packageMetadata: Map<String, ByteArray>
+    private konst _packageMetadata = hashMapOf<String, ByteArray>()
+    konst packageMetadata: Map<String, ByteArray>
         get() = _packageMetadata
 
     override fun processPackageMetadata(packageName: String, metadata: ByteArray) {
@@ -123,8 +123,8 @@ open class IncrementalResultsConsumerImpl : IncrementalResultsConsumer {
     }
 
 //    class IrFileData(fileData: ByteArray, symbols: ByteArray, types: ByteArray, strings: ByteArray, bodies: ByteArray, declarations: ByteArray)
-    private val _irFileData = hashMapOf<File, IrTranslationResultValue>()
-    val irFileData: Map<File, IrTranslationResultValue>
+    private konst _irFileData = hashMapOf<File, IrTranslationResultValue>()
+    konst irFileData: Map<File, IrTranslationResultValue>
         get() = _irFileData
 
     override fun processIrFile(
@@ -143,7 +143,7 @@ open class IncrementalResultsConsumerImpl : IncrementalResultsConsumer {
 }
 
 private fun ByteArray.md5(): Long {
-    val d = MessageDigest.getInstance("MD5").digest(this)!!
+    konst d = MessageDigest.getInstance("MD5").digest(this)!!
     return ((d[0].toLong() and 0xFFL)
             or ((d[1].toLong() and 0xFFL) shl 8)
             or ((d[2].toLong() and 0xFFL) shl 16)

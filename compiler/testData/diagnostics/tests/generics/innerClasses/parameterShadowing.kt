@@ -12,7 +12,7 @@ class Outer<E> {
 }
 
 fun main() {
-    val inner = Outer<String>().Inner<Int>()
+    konst inner = Outer<String>().Inner<Int>()
 
     inner.foo().checkType { _<Int>() }
     inner.outerE().checkType { _<String>() }

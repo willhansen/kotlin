@@ -13,7 +13,7 @@ var res = "FAIL 1"
 fun testOuterJobIsCancelled() = builder {
     suspend fun callJobScoped() = "OK"
 
-    val outerJob = suspend {
+    konst outerJob = suspend {
         res = callJobScoped()
     }
     outerJob()

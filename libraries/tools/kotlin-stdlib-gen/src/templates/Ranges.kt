@@ -10,7 +10,7 @@ import templates.PrimitiveType.Companion.maxByCapacity
 
 object RangeOps : TemplateGroupBase() {
 
-    private val rangePrimitives = PrimitiveType.rangePrimitives
+    private konst rangePrimitives = PrimitiveType.rangePrimitives
     private fun rangeElementType(fromType: PrimitiveType, toType: PrimitiveType) =
         maxByCapacity(fromType, toType).let {
             when {
@@ -27,13 +27,13 @@ object RangeOps : TemplateGroupBase() {
 
     private fun <T> Collection<T>.combinations(): List<Pair<T, T>> = flatMap { a -> map { b -> a to b } }
 
-    private val numericCombinations = PrimitiveType.numericPrimitives.combinations()
-    private val primitiveCombinations = numericCombinations + (PrimitiveType.Char to PrimitiveType.Char)
-    private val integralCombinations = primitiveCombinations.filter { it.first.isIntegral() && it.second.isIntegral() }
-    private val unsignedCombinations = PrimitiveType.unsignedPrimitives.combinations()
-    private val unsignedMappings = PrimitiveType.unsignedPrimitives.map { it to it }
+    private konst numericCombinations = PrimitiveType.numericPrimitives.combinations()
+    private konst primitiveCombinations = numericCombinations + (PrimitiveType.Char to PrimitiveType.Char)
+    private konst integralCombinations = primitiveCombinations.filter { it.first.isIntegral() && it.second.isIntegral() }
+    private konst unsignedCombinations = PrimitiveType.unsignedPrimitives.combinations()
+    private konst unsignedMappings = PrimitiveType.unsignedPrimitives.map { it to it }
 
-    val PrimitiveType.stepType get() = when(this) {
+    konst PrimitiveType.stepType get() = when(this) {
         PrimitiveType.Char -> "Int"
         PrimitiveType.Int, PrimitiveType.Long -> name
         PrimitiveType.UInt, PrimitiveType.ULong -> name.drop(1)
@@ -53,7 +53,7 @@ object RangeOps : TemplateGroupBase() {
         }
     }
 
-    val f_reversed = fn("reversed()") {
+    konst f_reversed = fn("reversed()") {
         include(ProgressionsOfPrimitives, rangePrimitives)
     } builder {
         doc { "Returns a progression that goes over the same range in the opposite direction with the same step." }
@@ -63,7 +63,7 @@ object RangeOps : TemplateGroupBase() {
         }
     }
 
-    val f_step = fn("step(step: STEP)") {
+    konst f_step = fn("step(step: STEP)") {
         include(ProgressionsOfPrimitives, rangePrimitives)
     } builder {
         infix(true)
@@ -78,11 +78,11 @@ object RangeOps : TemplateGroupBase() {
         }
     }
 
-    val f_downTo = fn("downTo(to: Primitive)").byTwoPrimitives {
+    konst f_downTo = fn("downTo(to: Primitive)").byTwoPrimitives {
         include(Primitives, integralCombinations + unsignedMappings)
     } builderWith { (fromType, toType) ->
-        val elementType = rangeElementType(fromType, toType)
-        val progressionType = elementType.name + "Progression"
+        konst elementType = rangeElementType(fromType, toType)
+        konst progressionType = elementType.name + "Progression"
 
         infix()
         signature("downTo(to: $toType)")
@@ -90,17 +90,17 @@ object RangeOps : TemplateGroupBase() {
 
         doc {
             """
-            Returns a progression from this value down to the specified [to] value with the step -1.
+            Returns a progression from this konstue down to the specified [to] konstue with the step -1.
 
-            The [to] value should be less than or equal to `this` value.
-            If the [to] value is greater than `this` value the returned progression is empty.
+            The [to] konstue should be less than or equal to `this` konstue.
+            If the [to] konstue is greater than `this` konstue the returned progression is empty.
             """
         }
 
 
-        val fromExpr = if (elementType == fromType) "this" else "this.to$elementType()"
-        val toExpr = if (elementType == toType) "to" else "to.to$elementType()"
-        val incrementExpr = when (elementType) {
+        konst fromExpr = if (elementType == fromType) "this" else "this.to$elementType()"
+        konst toExpr = if (elementType == toType) "to" else "to.to$elementType()"
+        konst incrementExpr = when (elementType) {
             PrimitiveType.Long, PrimitiveType.ULong -> "-1L"
             PrimitiveType.Float -> "-1.0F"
             PrimitiveType.Double -> "-1.0"
@@ -113,31 +113,31 @@ object RangeOps : TemplateGroupBase() {
     }
 
 
-    val f_until = fn("until(to: Primitive)").byTwoPrimitives {
+    konst f_until = fn("until(to: Primitive)").byTwoPrimitives {
         include(Primitives, integralCombinations + unsignedMappings)
     } builderWith { (fromType, toType) ->
         infix()
         signature("until(to: $toType)")
 
-        val elementType = rangeElementType(fromType, toType)
-        val progressionType = elementType.name + "Range"
+        konst elementType = rangeElementType(fromType, toType)
+        konst progressionType = elementType.name + "Range"
         returns(progressionType)
 
         doc {
             """
-            Returns a range from this value up to but excluding the specified [to] value.
+            Returns a range from this konstue up to but excluding the specified [to] konstue.
 
-            If the [to] value is less than or equal to `this` value, then the returned range is empty.
+            If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
             """
         }
 
-        val minValue = when {
+        konst minValue = when {
             elementType == PrimitiveType.Char -> "'\\u0000'"
             elementType.isUnsigned() -> "$toType.MIN_VALUE"
             else -> "$elementType.MIN_VALUE"
         }
-        val fromExpr = if (elementType == fromType) "this" else "this.to$elementType()"
-        val u = if (elementType.isUnsigned()) "u" else ""
+        konst fromExpr = if (elementType == fromType) "this" else "this.to$elementType()"
+        konst u = if (elementType.isUnsigned()) "u" else ""
 
         if (elementType == toType || elementType.isUnsigned()) {
             body {
@@ -152,31 +152,31 @@ object RangeOps : TemplateGroupBase() {
         }
     }
 
-    val f_containsMixedClosed = fn("contains(value: Primitive)").byTwoPrimitives {
+    konst f_containsMixedClosed = fn("contains(konstue: Primitive)").byTwoPrimitives {
         include(Ranges, numericCombinations)
         filter { _, (rangeType, itemType) -> rangeType != itemType }
     } builderWith { (rangeType, itemType) ->
         operator()
-        signature("contains(value: $itemType)")
+        signature("contains(konstue: $itemType)")
 
         check(rangeType.isNumeric() == itemType.isNumeric()) { "Required rangeType and itemType both to be numeric or both not, got: $rangeType, $itemType" }
         if (rangeType.isIntegral() != itemType.isIntegral()) {
-            val message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed."
+            konst message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed."
             deprecate(Deprecation(message, warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5"))
         }
 
         platformName("${rangeType.name.decapitalize()}RangeContains")
         returns("Boolean")
-        doc { "Checks if the specified [value] belongs to this range." }
+        doc { "Checks if the specified [konstue] belongs to this range." }
         body {
             if (shouldCheckForConversionOverflow(fromType = itemType, toType = rangeType))
-                "return value.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
+                "return konstue.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
             else
-                "return contains(value.to$rangeType())"
+                "return contains(konstue.to$rangeType())"
         }
     }
 
-    val f_containsMixedOpenAndPrimitive = fn("contains(value: Primitive)").byTwoPrimitives {
+    konst f_containsMixedOpenAndPrimitive = fn("contains(konstue: Primitive)").byTwoPrimitives {
         include(OpenRanges, numericCombinations)
         include(RangesOfPrimitives, numericCombinations.filter { (rangeType, _) -> rangeType in rangePrimitives })
         filter { _, (rangeType, itemType) ->
@@ -189,28 +189,28 @@ object RangeOps : TemplateGroupBase() {
             since("1.9")
             annotation("@WasExperimental(ExperimentalStdlibApi::class)")
         }
-        signature("contains(value: $itemType)")
+        signature("contains(konstue: $itemType)")
 
         check(rangeType.isNumeric() == itemType.isNumeric()) { "Required rangeType and itemType both to be numeric or both not, got: $rangeType, $itemType" }
 
         platformName("${rangeType.name.decapitalize()}RangeContains")
         returns("Boolean")
-        doc { "Checks if the specified [value] belongs to this range." }
+        doc { "Checks if the specified [konstue] belongs to this range." }
         body {
             if (shouldCheckForConversionOverflow(fromType = itemType, toType = rangeType))
-                "return value.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
+                "return konstue.to${rangeType}ExactOrNull().let { if (it != null) contains(it) else false }"
             else
-                "return contains(value.to$rangeType())"
+                "return contains(konstue.to$rangeType())"
         }
         specialFor(RangesOfPrimitives) {
             inlineOnly()
             body {
-                "return (this as ClosedRange<$rangeType>).contains(value)"
+                "return (this as ClosedRange<$rangeType>).contains(konstue)"
             }
         }
     }
 
-    val f_contains_nullable = fn("contains(element: T?)") {
+    konst f_contains_nullable = fn("contains(element: T?)") {
         include(RangesOfPrimitives, rangePrimitives)
     } builder {
         since("1.3")
@@ -229,26 +229,26 @@ object RangeOps : TemplateGroupBase() {
         body { "return element != null && contains(element)" }
     }
 
-    val f_contains_unsigned = fn("contains(element: Primitive)").byTwoPrimitives {
+    konst f_contains_unsigned = fn("contains(element: Primitive)").byTwoPrimitives {
         include(RangesOfPrimitives, unsignedCombinations)
         filter { _, (rangeType, itemType) -> rangeType in rangePrimitives && rangeType != itemType }
     } builderWith { (rangeType, itemType) ->
         operator()
-        signature("contains(value: $itemType)")
+        signature("contains(konstue: $itemType)")
         returns("Boolean")
 
         since("1.3")
-        doc { "Checks if the specified [value] belongs to this range." }
+        doc { "Checks if the specified [konstue] belongs to this range." }
 
         body {
             if (shouldCheckForConversionOverflow(fromType = itemType, toType = rangeType))
-                "return (value shr $rangeType.SIZE_BITS) == ${itemType.zero()} && contains(value.to$rangeType())"
+                "return (konstue shr $rangeType.SIZE_BITS) == ${itemType.zero()} && contains(konstue.to$rangeType())"
             else
-                "return contains(value.to$rangeType())"
+                "return contains(konstue.to$rangeType())"
         }
     }
 
-    val f_toPrimitiveExactOrNull = fn("to{}ExactOrNull()").byTwoPrimitives {
+    konst f_toPrimitiveExactOrNull = fn("to{}ExactOrNull()").byTwoPrimitives {
         include(Primitives, numericCombinations)
         filter { _, (fromType, toType) -> shouldCheckForConversionOverflow(fromType, toType) }
     } builderWith { (fromType, toType) ->
@@ -258,8 +258,8 @@ object RangeOps : TemplateGroupBase() {
         signature("to${toType}ExactOrNull()")
         returns("$toType?")
 
-        val isConversionDeprecated = fromType.isFloatingPoint() && toType in listOf(PrimitiveType.Byte, PrimitiveType.Short)
-        val conversion = if (isConversionDeprecated) "toInt().to$toType" else "to$toType"
+        konst isConversionDeprecated = fromType.isFloatingPoint() && toType in listOf(PrimitiveType.Byte, PrimitiveType.Short)
+        konst conversion = if (isConversionDeprecated) "toInt().to$toType" else "to$toType"
 
         body {
             "return if (this in $toType.MIN_VALUE.to$fromType()..$toType.MAX_VALUE.to$fromType()) this.$conversion() else null"

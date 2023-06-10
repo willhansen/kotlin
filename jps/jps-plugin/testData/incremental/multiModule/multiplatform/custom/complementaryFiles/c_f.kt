@@ -6,4 +6,4 @@ internal expect annotation class SharedImmutable()
 
 @ExperimentalMultiplatform
 @SharedImmutable
-val UNDEFINED = 1
+konst UNDEFINED = 1

@@ -1,6 +1,6 @@
 fun box() : String {
     var i = 0
-    val lambda = { i++ }
+    konst lambda = { i++ }
     lambda()
     i++  //the problem is here
 //    i = i + 1  //this way it works

@@ -1,16 +1,16 @@
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-suspend fun foo(value: Int): Int = suspendCoroutineUninterceptedOrReturn { c ->
-    c.resume(value)
+suspend fun foo(konstue: Int): Int = suspendCoroutineUninterceptedOrReturn { c ->
+    c.resume(konstue)
     COROUTINE_SUSPENDED
 }
 
 suspend fun bar(): Unit {
     println("!")
-    val a = foo(2)
+    konst a = foo(2)
     println("!")
-    val b = foo(3)
+    konst b = foo(3)
     println(a + b)
 }
 

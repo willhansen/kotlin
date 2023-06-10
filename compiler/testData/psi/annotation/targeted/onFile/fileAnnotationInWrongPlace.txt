@@ -20,7 +20,7 @@ KtFile: fileAnnotationInWrongPlace.kt
               REFERENCE_EXPRESSION
                 PsiElement(IDENTIFIER)('foo')
     PsiWhiteSpace('\n')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('prop')
   PsiWhiteSpace('\n\n')

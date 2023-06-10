@@ -22,18 +22,18 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlinx.serialization.compiler.backend.common.analyzeSpecialSerializers
 
 class SerializableProperty(
-    val descriptor: PropertyDescriptor,
-    override val isConstructorParameterWithDefault: Boolean,
+    konst descriptor: PropertyDescriptor,
+    override konst isConstructorParameterWithDefault: Boolean,
     hasBackingField: Boolean,
     declaresDefaultValue: Boolean
 ) : ISerializableProperty {
-    override val name = descriptor.annotations.serialNameValue ?: descriptor.name.asString()
-    override val originalDescriptorName: Name = descriptor.name
-    val type = descriptor.type
-    val genericIndex = type.genericIndex
-    val module = descriptor.module
-    val serializableWith = descriptor.serializableWith ?: analyzeSpecialSerializers(module, descriptor.annotations)?.defaultType
-    override val optional = !descriptor.annotations.serialRequired && declaresDefaultValue
-    override val transient = descriptor.annotations.serialTransient || !hasBackingField
+    override konst name = descriptor.annotations.serialNameValue ?: descriptor.name.asString()
+    override konst originalDescriptorName: Name = descriptor.name
+    konst type = descriptor.type
+    konst genericIndex = type.genericIndex
+    konst module = descriptor.module
+    konst serializableWith = descriptor.serializableWith ?: analyzeSpecialSerializers(module, descriptor.annotations)?.defaultType
+    override konst optional = !descriptor.annotations.serialRequired && declaresDefaultValue
+    override konst transient = descriptor.annotations.serialTransient || !hasBackingField
 }
 

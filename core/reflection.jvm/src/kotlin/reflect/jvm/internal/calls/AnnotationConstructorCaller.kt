@@ -13,35 +13,35 @@ import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 import java.lang.reflect.Method as ReflectMethod
 
 internal class AnnotationConstructorCaller(
-    private val jClass: Class<*>,
-    private val parameterNames: List<String>,
-    private val callMode: CallMode,
+    private konst jClass: Class<*>,
+    private konst parameterNames: List<String>,
+    private konst callMode: CallMode,
     origin: Origin,
-    private val methods: List<ReflectMethod> = parameterNames.map { name -> jClass.getDeclaredMethod(name) }
+    private konst methods: List<ReflectMethod> = parameterNames.map { name -> jClass.getDeclaredMethod(name) }
 ) : Caller<Nothing?> {
-    override val member: Nothing?
+    override konst member: Nothing?
         get() = null
 
-    override val returnType: Type
+    override konst returnType: Type
         get() = jClass
 
-    override val parameterTypes: List<Type> = methods.map { it.genericReturnType }
+    override konst parameterTypes: List<Type> = methods.map { it.genericReturnType }
 
     enum class CallMode { CALL_BY_NAME, POSITIONAL_CALL }
 
     enum class Origin { JAVA, KOTLIN }
 
     // Transform primitive int to java.lang.Integer because actual arguments passed here will be boxed and Class#isInstance should succeed
-    private val erasedParameterTypes: List<Class<*>> = methods.map { method -> method.returnType.let { it.wrapperByPrimitive ?: it } }
+    private konst erasedParameterTypes: List<Class<*>> = methods.map { method -> method.returnType.let { it.wrapperByPrimitive ?: it } }
 
-    private val defaultValues: List<Any?> = methods.map { method -> method.defaultValue }
+    private konst defaultValues: List<Any?> = methods.map { method -> method.defaultValue }
 
     init {
         // TODO: consider lifting this restriction once KT-8957 is implemented
-        if (callMode == CallMode.POSITIONAL_CALL && origin == Origin.JAVA && (parameterNames - "value").isNotEmpty()) {
+        if (callMode == CallMode.POSITIONAL_CALL && origin == Origin.JAVA && (parameterNames - "konstue").isNotEmpty()) {
             throw UnsupportedOperationException(
                 "Positional call of a Java annotation constructor is allowed only if there are no parameters " +
-                        "or one parameter named \"value\". This restriction exists because Java annotations (in contrast to Kotlin)" +
+                        "or one parameter named \"konstue\". This restriction exists because Java annotations (in contrast to Kotlin)" +
                         "do not impose any order on their arguments. Use KCallable#callBy instead."
             )
         }
@@ -50,24 +50,24 @@ internal class AnnotationConstructorCaller(
     override fun call(args: Array<*>): Any? {
         checkArguments(args)
 
-        val values = args.mapIndexed { index, arg ->
-            val value =
+        konst konstues = args.mapIndexed { index, arg ->
+            konst konstue =
                 if (arg == null && callMode == CallMode.CALL_BY_NAME) defaultValues[index]
                 else arg.transformKotlinToJvm(erasedParameterTypes[index])
-            value ?: throwIllegalArgumentType(index, parameterNames[index], erasedParameterTypes[index])
+            konstue ?: throwIllegalArgumentType(index, parameterNames[index], erasedParameterTypes[index])
         }
 
-        return createAnnotationInstance(jClass, parameterNames.zip(values).toMap(), methods)
+        return createAnnotationInstance(jClass, parameterNames.zip(konstues).toMap(), methods)
     }
 }
 
 /**
- * Transforms a Kotlin value to the one required by the JVM, e.g. KClass<*> -> Class<*> or Array<KClass<*>> -> Array<Class<*>>.
+ * Transforms a Kotlin konstue to the one required by the JVM, e.g. KClass<*> -> Class<*> or Array<KClass<*>> -> Array<Class<*>>.
  * Returns `null` in case when no transformation is possible (an argument of an incorrect type was passed).
  */
 private fun Any?.transformKotlinToJvm(expectedType: Class<*>): Any? {
     @Suppress("UNCHECKED_CAST")
-    val result = when (this) {
+    konst result = when (this) {
         is Class<*> -> return null
         is KClass<*> -> this.java
         is Array<*> -> when {
@@ -82,14 +82,14 @@ private fun Any?.transformKotlinToJvm(expectedType: Class<*>): Any? {
 }
 
 private fun throwIllegalArgumentType(index: Int, name: String, expectedJvmType: Class<*>): Nothing {
-    val kotlinClass = when {
+    konst kotlinClass = when {
         expectedJvmType == Class::class.java -> KClass::class
         expectedJvmType.isArray && expectedJvmType.componentType == Class::class.java ->
             @Suppress("CLASS_LITERAL_LHS_NOT_A_CLASS") Array<KClass<*>>::class // Workaround KT-13924
         else -> expectedJvmType.kotlin
     }
     // For arrays, also render the type argument in the message, e.g. "... not of the required type kotlin.Array<kotlin.reflect.KClass>"
-    val typeString =
+    konst typeString =
         if (kotlinClass.qualifiedName == Array<Any>::class.qualifiedName)
             "${kotlinClass.qualifiedName}<${kotlinClass.java.componentType.kotlin.qualifiedName}>"
         else kotlinClass.qualifiedName
@@ -98,14 +98,14 @@ private fun throwIllegalArgumentType(index: Int, name: String, expectedJvmType: 
 
 internal fun <T : Any> createAnnotationInstance(
     annotationClass: Class<T>,
-    values: Map<String, Any>,
-    methods: List<ReflectMethod> = values.keys.map { name -> annotationClass.getDeclaredMethod(name) }
+    konstues: Map<String, Any>,
+    methods: List<ReflectMethod> = konstues.keys.map { name -> annotationClass.getDeclaredMethod(name) }
 ): T {
     fun equals(other: Any?): Boolean =
         (other as? Annotation)?.annotationClass?.java == annotationClass &&
                 methods.all { method ->
-                    val ours = values[method.name]
-                    val theirs = method(other)
+                    konst ours = konstues[method.name]
+                    konst theirs = method(other)
                     when (ours) {
                         is BooleanArray -> ours contentEquals theirs as BooleanArray
                         is CharArray -> ours contentEquals theirs as CharArray
@@ -120,56 +120,56 @@ internal fun <T : Any> createAnnotationInstance(
                     }
                 }
 
-    val hashCode by lazy {
-        values.entries.sumOf { entry ->
-            val (key, value) = entry
-            val valueHash = when (value) {
-                is BooleanArray -> value.contentHashCode()
-                is CharArray -> value.contentHashCode()
-                is ByteArray -> value.contentHashCode()
-                is ShortArray -> value.contentHashCode()
-                is IntArray -> value.contentHashCode()
-                is FloatArray -> value.contentHashCode()
-                is LongArray -> value.contentHashCode()
-                is DoubleArray -> value.contentHashCode()
-                is Array<*> -> value.contentHashCode()
-                else -> value.hashCode()
+    konst hashCode by lazy {
+        konstues.entries.sumOf { entry ->
+            konst (key, konstue) = entry
+            konst konstueHash = when (konstue) {
+                is BooleanArray -> konstue.contentHashCode()
+                is CharArray -> konstue.contentHashCode()
+                is ByteArray -> konstue.contentHashCode()
+                is ShortArray -> konstue.contentHashCode()
+                is IntArray -> konstue.contentHashCode()
+                is FloatArray -> konstue.contentHashCode()
+                is LongArray -> konstue.contentHashCode()
+                is DoubleArray -> konstue.contentHashCode()
+                is Array<*> -> konstue.contentHashCode()
+                else -> konstue.hashCode()
             }
-            127 * key.hashCode() xor valueHash
+            127 * key.hashCode() xor konstueHash
         }
     }
 
-    val toString by lazy {
+    konst toString by lazy {
         buildString {
             append('@')
             append(annotationClass.canonicalName)
-            values.entries.joinTo(this, separator = ", ", prefix = "(", postfix = ")") { entry ->
-                val (key, value) = entry
-                val valueString = when (value) {
-                    is BooleanArray -> value.contentToString()
-                    is CharArray -> value.contentToString()
-                    is ByteArray -> value.contentToString()
-                    is ShortArray -> value.contentToString()
-                    is IntArray -> value.contentToString()
-                    is FloatArray -> value.contentToString()
-                    is LongArray -> value.contentToString()
-                    is DoubleArray -> value.contentToString()
-                    is Array<*> -> value.contentToString()
-                    else -> value.toString()
+            konstues.entries.joinTo(this, separator = ", ", prefix = "(", postfix = ")") { entry ->
+                konst (key, konstue) = entry
+                konst konstueString = when (konstue) {
+                    is BooleanArray -> konstue.contentToString()
+                    is CharArray -> konstue.contentToString()
+                    is ByteArray -> konstue.contentToString()
+                    is ShortArray -> konstue.contentToString()
+                    is IntArray -> konstue.contentToString()
+                    is FloatArray -> konstue.contentToString()
+                    is LongArray -> konstue.contentToString()
+                    is DoubleArray -> konstue.contentToString()
+                    is Array<*> -> konstue.contentToString()
+                    else -> konstue.toString()
                 }
-                "$key=$valueString"
+                "$key=$konstueString"
             }
         }
     }
 
-    val result = Proxy.newProxyInstance(annotationClass.classLoader, arrayOf(annotationClass)) { _, method, args ->
-        when (val name = method.name) {
+    konst result = Proxy.newProxyInstance(annotationClass.classLoader, arrayOf(annotationClass)) { _, method, args ->
+        when (konst name = method.name) {
             "annotationType" -> annotationClass
             "toString" -> toString
             "hashCode" -> hashCode
             else -> when {
                 name == "equals" && args?.size == 1 -> equals(args.single())
-                values.containsKey(name) -> values[name]
+                konstues.containsKey(name) -> konstues[name]
                 else -> throw KotlinReflectionInternalError("Method is not supported: $method (args: ${args.orEmpty().toList()})")
             }
         }

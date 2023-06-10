@@ -2,8 +2,8 @@ package
 
 public open class ExceptionWithAbstractMessage : java.lang.RuntimeException, PlaceholderExceptionSupport {
     public constructor ExceptionWithAbstractMessage(/*0*/ x: kotlin.String!)
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public/*package*/ abstract override /*1*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public/*package*/ abstract override /*1*/ konst message: kotlin.String?
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -19,13 +19,13 @@ public open class ExceptionWithAbstractMessage : java.lang.RuntimeException, Pla
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val serialVersionUID: kotlin.Long = -7034897190745766939.toLong()
+    invisible_fake const final override /*1*/ /*fake_override*/ konst serialVersionUID: kotlin.Long = -7034897190745766939.toLong()
 }
 
 public final class KotlinTestFailure : ExceptionWithAbstractMessage {
     public constructor KotlinTestFailure()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public/*package*/ abstract override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public/*package*/ abstract override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -43,8 +43,8 @@ public final class KotlinTestFailure : ExceptionWithAbstractMessage {
 
 public final class KotlinTestSuccess : PlaceholderException {
     public constructor KotlinTestSuccess()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -62,8 +62,8 @@ public final class KotlinTestSuccess : PlaceholderException {
 
 public open class PlaceholderException : java.lang.RuntimeException, PlaceholderExceptionSupport {
     public constructor PlaceholderException(/*0*/ x: kotlin.String!)
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*2*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*2*/ /*fake_override*/ konst message: kotlin.String?
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -79,7 +79,7 @@ public open class PlaceholderException : java.lang.RuntimeException, Placeholder
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val serialVersionUID: kotlin.Long = -7034897190745766939.toLong()
+    invisible_fake const final override /*1*/ /*fake_override*/ konst serialVersionUID: kotlin.Long = -7034897190745766939.toLong()
 }
 
 public interface PlaceholderExceptionSupport {

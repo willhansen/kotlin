@@ -43,7 +43,7 @@ public class NoOverride {
 
 // FILE: KotlinBase.kt
 open class KotlinBase {
-    val foo: String
+    konst foo: String
         get() = ""
 }
 

@@ -8,7 +8,7 @@ FILE: kt41982.kt
             ^getValue Null(null)!!
         }
 
-        public final operator fun setValue(thisRef: R|R|, property: R|kotlin/reflect/KProperty<*>|, value: R|T|): R|kotlin/Unit| {
+        public final operator fun setValue(thisRef: R|R|, property: R|kotlin/reflect/KProperty<*>|, konstue: R|T|): R|kotlin/Unit| {
         }
 
     }

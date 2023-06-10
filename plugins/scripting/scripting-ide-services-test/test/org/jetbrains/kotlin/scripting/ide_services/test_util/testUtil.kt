@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.scripting.ide_services.compiler.KJvmReplCompilerWith
 import java.io.Closeable
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.script.experimental.api.*
-import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
+import kotlin.script.experimental.jvm.BasicJvmReplEkonstuator
 import kotlin.script.experimental.jvm.impl.KJvmCompiledScript
 import kotlin.script.experimental.util.LinkedSnippet
 import kotlin.script.experimental.jvm.util.toSourceCodePosition
 import kotlin.script.experimental.util.get
 
 internal class JvmTestRepl (
-    private val compileConfiguration: ScriptCompilationConfiguration = simpleScriptCompilationConfiguration,
-    private val evalConfiguration: ScriptEvaluationConfiguration = simpleScriptEvaluationConfiguration,
+    private konst compileConfiguration: ScriptCompilationConfiguration = simpleScriptCompilationConfiguration,
+    private konst ekonstConfiguration: ScriptEkonstuationConfiguration = simpleScriptEkonstuationConfiguration,
 ) : Closeable {
-    private val currentLineCounter = AtomicInteger(0)
+    private konst currentLineCounter = AtomicInteger(0)
 
     fun nextCodeLine(code: String): SourceCode =
         SourceCodeTestImpl(
@@ -30,18 +30,18 @@ internal class JvmTestRepl (
             code
         )
 
-    private val replCompiler: KJvmReplCompilerWithIdeServices by lazy {
+    private konst replCompiler: KJvmReplCompilerWithIdeServices by lazy {
         KJvmReplCompilerWithIdeServices()
     }
 
-    private val compiledEvaluator: BasicJvmReplEvaluator by lazy {
-        BasicJvmReplEvaluator()
+    private konst compiledEkonstuator: BasicJvmReplEkonstuator by lazy {
+        BasicJvmReplEkonstuator()
     }
 
     fun compile(code: SourceCode) = runBlocking { replCompiler.compile(code, compileConfiguration) }
     fun complete(code: SourceCode, cursor: Int) = runBlocking { replCompiler.complete(code, cursor.toSourceCodePosition(code), compileConfiguration) }
 
-    fun eval(snippet: LinkedSnippet<out CompiledSnippet>) = runBlocking { compiledEvaluator.eval(snippet, evalConfiguration) }
+    fun ekonst(snippet: LinkedSnippet<out CompiledSnippet>) = runBlocking { compiledEkonstuator.ekonst(snippet, ekonstConfiguration) }
 
     override fun close() {
 
@@ -49,25 +49,25 @@ internal class JvmTestRepl (
 
 }
 
-internal class SourceCodeTestImpl(number: Int, override val text: String) : SourceCode {
-    override val name: String? = "Line_$number"
-    override val locationId: String? = "location_$number"
+internal class SourceCodeTestImpl(number: Int, override konst text: String) : SourceCode {
+    override konst name: String? = "Line_$number"
+    override konst locationId: String? = "location_$number"
 }
 
 @JvmName("iterableToList")
-fun <T> ResultWithDiagnostics<Iterable<T>>.toList() = this.valueOrNull()?.toList().orEmpty()
+fun <T> ResultWithDiagnostics<Iterable<T>>.toList() = this.konstueOrNull()?.toList().orEmpty()
 
 @JvmName("sequenceToList")
-fun <T> ResultWithDiagnostics<Sequence<T>>.toList() = this.valueOrNull()?.toList().orEmpty()
+fun <T> ResultWithDiagnostics<Sequence<T>>.toList() = this.konstueOrNull()?.toList().orEmpty()
 
-internal fun JvmTestRepl.compileAndEval(codeLine: SourceCode): Pair<ResultWithDiagnostics<LinkedSnippet<out CompiledSnippet>>, EvaluatedSnippet?> {
+internal fun JvmTestRepl.compileAndEkonst(codeLine: SourceCode): Pair<ResultWithDiagnostics<LinkedSnippet<out CompiledSnippet>>, EkonstuatedSnippet?> {
 
-    val compRes = compile(codeLine)
+    konst compRes = compile(codeLine)
 
-    val evalRes = compRes.valueOrNull()?.let {
-        eval(it)
+    konst ekonstRes = compRes.konstueOrNull()?.let {
+        ekonst(it)
     }
-    return compRes to evalRes?.valueOrNull().get()
+    return compRes to ekonstRes?.konstueOrNull().get()
 }
 
 internal fun assertCompileFails(
@@ -75,60 +75,60 @@ internal fun assertCompileFails(
     @Suppress("SameParameterValue")
     line: String
 ) {
-    val compiledSnippet =
+    konst compiledSnippet =
         checkCompile(repl, line)
 
     TestCase.assertNull(compiledSnippet)
 }
 
-internal fun assertEvalUnit(
+internal fun assertEkonstUnit(
     repl: JvmTestRepl,
     @Suppress("SameParameterValue")
     line: String
 ) {
-    val compiledSnippet =
+    konst compiledSnippet =
         checkCompile(repl, line)
 
-    val evalResult = repl.eval(compiledSnippet!!)
-    val valueResult = evalResult.valueOrNull().get()
+    konst ekonstResult = repl.ekonst(compiledSnippet!!)
+    konst konstueResult = ekonstResult.konstueOrNull().get()
 
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.result is ResultValue.Unit)
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+    TestCase.assertTrue(konstueResult!!.result is ResultValue.Unit)
 }
 
-internal fun <R> assertEvalResult(repl: JvmTestRepl, line: String, expectedResult: R) {
-    val compiledSnippet =
+internal fun <R> assertEkonstResult(repl: JvmTestRepl, line: String, expectedResult: R) {
+    konst compiledSnippet =
         checkCompile(repl, line)
 
-    val evalResult = repl.eval(compiledSnippet!!)
-    val valueResult = evalResult.valueOrNull().get()
+    konst ekonstResult = repl.ekonst(compiledSnippet!!)
+    konst konstueResult = ekonstResult.konstueOrNull().get()
 
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.result is ResultValue.Value)
-    TestCase.assertEquals(expectedResult, (valueResult.result as ResultValue.Value).value)
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+    TestCase.assertTrue(konstueResult!!.result is ResultValue.Value)
+    TestCase.assertEquals(expectedResult, (konstueResult.result as ResultValue.Value).konstue)
 }
 
-internal inline fun <reified R> assertEvalResultIs(repl: JvmTestRepl, line: String) {
-    val compiledSnippet =
+internal inline fun <reified R> assertEkonstResultIs(repl: JvmTestRepl, line: String) {
+    konst compiledSnippet =
         checkCompile(repl, line)
 
-    val evalResult = repl.eval(compiledSnippet!!)
-    val valueResult = evalResult.valueOrNull().get()
+    konst ekonstResult = repl.ekonst(compiledSnippet!!)
+    konst konstueResult = ekonstResult.konstueOrNull().get()
 
-    TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-    TestCase.assertTrue(valueResult!!.result is ResultValue.Value)
-    TestCase.assertTrue((valueResult.result as ResultValue.Value).value is R)
+    TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+    TestCase.assertTrue(konstueResult!!.result is ResultValue.Value)
+    TestCase.assertTrue((konstueResult.result as ResultValue.Value).konstue is R)
 }
 
 internal fun checkCompile(repl: JvmTestRepl, line: String): LinkedSnippet<KJvmCompiledScript>? {
-    val codeLine = repl.nextCodeLine(line)
-    val compileResult = repl.compile(codeLine)
-    return compileResult.valueOrNull()
+    konst codeLine = repl.nextCodeLine(line)
+    konst compileResult = repl.compile(codeLine)
+    return compileResult.konstueOrNull()
 }
 
 internal data class CompilationErrors(
-    val message: String,
-    val location: CompilerMessageLocationWithRange?
+    konst message: String,
+    konst location: CompilerMessageLocationWithRange?
 )
 
 internal fun <T> ResultWithDiagnostics<T>.getErrors(): CompilationErrors =
@@ -154,7 +154,7 @@ internal fun <T> ResultWithDiagnostics<T>.getErrors(): CompilationErrors =
                 else -> false
             }
         }?.let {
-            val loc = it.location ?: return@let null
+            konst loc = it.location ?: return@let null
             CompilerMessageLocationWithRange.create(
                 it.sourcePath,
                 loc.start.line,

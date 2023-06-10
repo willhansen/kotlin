@@ -5,10 +5,10 @@ package totally {
     package totally.normal {
 
         package totally.normal.pkg {
-            public val `check{property`: kotlin.Int = 1
-            public val `check}delegated}property`: kotlin.Any?
-            public val normalDelegatedProperty: kotlin.Any?
-            public val normalProperty: kotlin.Int = 2
+            public konst `check{property`: kotlin.Int = 1
+            public konst `check}delegated}property`: kotlin.Any?
+            public konst normalDelegatedProperty: kotlin.Any?
+            public konst normalProperty: kotlin.Int = 2
             public fun `check#`(): kotlin.Unit
             public fun `check%`(): kotlin.Unit
             public fun `check&`(): kotlin.Unit
@@ -41,8 +41,8 @@ package totally {
                 enum entry `CHECK:ENUM:ENTRY`
 
                 private constructor `Check>Enum>Entry`()
-                @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-                public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+                @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+                public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
                 protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
                 public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: totally.normal.pkg.`Check>Enum>Entry`): kotlin.Int
                 public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -50,8 +50,8 @@ package totally {
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
                 // Static members
-                public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): totally.normal.pkg.`Check>Enum>Entry`
-                public final /*synthesized*/ fun values(): kotlin.Array<totally.normal.pkg.`Check>Enum>Entry`>
+                public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): totally.normal.pkg.`Check>Enum>Entry`
+                public final /*synthesized*/ fun konstues(): kotlin.Array<totally.normal.pkg.`Check>Enum>Entry`>
             }
 
             public object Delegate {
@@ -79,8 +79,8 @@ package totally {
 
             public final data class Pair {
                 public constructor Pair(/*0*/ first: kotlin.Int, /*1*/ `next,one`: kotlin.Int)
-                public final val first: kotlin.Int
-                public final val `next,one`: kotlin.Int
+                public final konst first: kotlin.Int
+                public final konst `next,one`: kotlin.Int
                 public final operator /*synthesized*/ fun component1(): kotlin.Int
                 public final operator /*synthesized*/ fun component2(): kotlin.Int
                 public final /*synthesized*/ fun copy(/*0*/ first: kotlin.Int = ..., /*1*/ `next,one`: kotlin.Int = ...): totally.normal.pkg.Pair

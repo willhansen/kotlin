@@ -13,10 +13,10 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 class FirControlFlowGraphReferenceImpl(
-    val controlFlowGraph: ControlFlowGraph,
-    val dataFlowInfo: DataFlowInfo? = null
+    konst controlFlowGraph: ControlFlowGraph,
+    konst dataFlowInfo: DataFlowInfo? = null
 ) : FirControlFlowGraphReference() {
-    override val source: KtSourceElement? get() = null
+    override konst source: KtSourceElement? get() = null
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 
@@ -25,10 +25,10 @@ class FirControlFlowGraphReferenceImpl(
     }
 }
 
-class DataFlowInfo(val variableStorage: VariableStorage)
+class DataFlowInfo(konst variableStorage: VariableStorage)
 
-val FirControlFlowGraphReference.controlFlowGraph: ControlFlowGraph?
+konst FirControlFlowGraphReference.controlFlowGraph: ControlFlowGraph?
     get() = (this as? FirControlFlowGraphReferenceImpl)?.controlFlowGraph
 
-val FirControlFlowGraphReference.dataFlowInfo: DataFlowInfo?
+konst FirControlFlowGraphReference.dataFlowInfo: DataFlowInfo?
     get() = (this as? FirControlFlowGraphReferenceImpl)?.dataFlowInfo

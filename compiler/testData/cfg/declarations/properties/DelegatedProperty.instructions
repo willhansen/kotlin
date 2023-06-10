@@ -33,11 +33,11 @@ sink:
     <SINK>                                              PREV:[<ERROR>, <END>]
 =====================
 == a ==
-val a = Delegate()
+konst a = Delegate()
 ---------------------
 L0:
   1 <START>
-    v(val a = Delegate())
+    v(konst a = Delegate())
     mark(Delegate())
     call(Delegate(), <init>) -> <v0>
     w(a|<v0>)
@@ -49,15 +49,15 @@ sink:
     <SINK>                              PREV:[<ERROR>, <END>]
 =====================
 == b ==
-val b by a
+konst b by a
 ---------------------
 L0:
   1 <START>
-    v(val b by a)
-    magic[UNRECOGNIZED_WRITE_RHS](val b by a) -> <v0>
+    v(konst b by a)
+    magic[UNRECOGNIZED_WRITE_RHS](konst b by a) -> <v0>
     w(b|<v0>)
     r(a) -> <v1>
-    magic[VALUE_CONSUMER](val b by a|<v1>) -> <v2>
+    magic[VALUE_CONSUMER](konst b by a|<v1>) -> <v2>
 L1:
     <END>                                                NEXT:[<SINK>]
 error:

@@ -41,14 +41,14 @@ class KotlinJsr223JvmDaemonCompileScriptEngine(
         compilerClasspath: List<File>,
         templateClasspath: List<File>,
         templateClassName: String,
-        val getScriptArgs: (ScriptContext, Array<out KClass<out Any>>?) -> ScriptArgsWithTypes?,
-        val scriptArgsTypes: Array<out KClass<out Any>>?,
+        konst getScriptArgs: (ScriptContext, Array<out KClass<out Any>>?) -> ScriptArgsWithTypes?,
+        konst scriptArgsTypes: Array<out KClass<out Any>>?,
         compilerOut: OutputStream = System.err
 ) : KotlinJsr223JvmScriptEngineBase(factory), KotlinJsr223JvmInvocableScriptEngine {
 
-    private val daemon by lazy { connectToCompileService(compilerClasspath) }
+    private konst daemon by lazy { connectToCompileService(compilerClasspath) }
 
-    override val replCompiler by lazy {
+    override konst replCompiler by lazy {
         daemon.let {
             KotlinRemoteReplCompilerClient(
                     it,
@@ -61,23 +61,23 @@ class KotlinJsr223JvmDaemonCompileScriptEngine(
         }
     }
 
-    // TODO: bindings passing works only once on the first eval, subsequent setContext/setBindings call have no effect. Consider making it dynamic, but take history into account
-    val localEvaluator by lazy { GenericReplCompilingEvaluator(replCompiler, templateClasspath, Thread.currentThread().contextClassLoader, getScriptArgs(getContext(), scriptArgsTypes)) }
+    // TODO: bindings passing works only once on the first ekonst, subsequent setContext/setBindings call have no effect. Consider making it dynamic, but take history into account
+    konst localEkonstuator by lazy { GenericReplCompilingEkonstuator(replCompiler, templateClasspath, Thread.currentThread().contextClassLoader, getScriptArgs(getContext(), scriptArgsTypes)) }
 
-    override val replEvaluator: ReplFullEvaluator get() = localEvaluator
+    override konst replEkonstuator: ReplFullEkonstuator get() = localEkonstuator
 
-    override val state: IReplStageState<*> get() = getCurrentState(getContext())
+    override konst state: IReplStageState<*> get() = getCurrentState(getContext())
 
-    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEvaluator.createState(lock)
+    override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> = replEkonstuator.createState(lock)
 
     override fun overrideScriptArgs(context: ScriptContext): ScriptArgsWithTypes? = getScriptArgs(context, scriptArgsTypes)
 
     private fun connectToCompileService(compilerCP: List<File>): CompileService {
-        val compilerId = CompilerId.makeCompilerId(*compilerCP.toTypedArray())
-        val daemonOptions = configureDaemonOptions()
-        val daemonJVMOptions = DaemonJVMOptions()
+        konst compilerId = CompilerId.makeCompilerId(*compilerCP.toTypedArray())
+        konst daemonOptions = configureDaemonOptions()
+        konst daemonJVMOptions = DaemonJVMOptions()
 
-        val daemonReportMessages = arrayListOf<DaemonReportMessage>()
+        konst daemonReportMessages = arrayListOf<DaemonReportMessage>()
 
         return KotlinCompilerClient.connectToCompileService(compilerId, daemonJVMOptions, daemonOptions, DaemonReportingTargets(null, daemonReportMessages), true, true)
                ?: throw ScriptException("Unable to connect to repl server:" + daemonReportMessages.joinToString("\n  ", prefix = "\n  ") { "${it.category.name} ${it.message}" })

@@ -64,8 +64,8 @@ import kotlin.reflect.KClass
  */
 abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
 
-    private val logger = Logging.getLogger(DefaultKotlinBasePlugin::class.java)
-    override val pluginVersion: String = getKotlinPluginVersion(logger)
+    private konst logger = Logging.getLogger(DefaultKotlinBasePlugin::class.java)
+    override konst pluginVersion: String = getKotlinPluginVersion(logger)
 
     override fun apply(project: Project) {
         checkGradleCompatibility()
@@ -76,8 +76,8 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
         }
         BuildFlowService.registerIfAbsent(project)
 
-        project.gradle.projectsEvaluated {
-            whenBuildEvaluated(project)
+        project.gradle.projectsEkonstuated {
+            whenBuildEkonstuated(project)
         }
 
         addKotlinCompilerConfiguration(project)
@@ -90,7 +90,7 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
             addGradlePluginMetadataAttributes(project)
         }
 
-        val kotlinGradleBuildServices = KotlinGradleBuildServices.registerIfAbsent(project.gradle).get()
+        konst kotlinGradleBuildServices = KotlinGradleBuildServices.registerIfAbsent(project.gradle).get()
         if (!project.isProjectIsolationEnabled) {
             kotlinGradleBuildServices.detectKotlinPluginLoadedInMultipleProjects(project, pluginVersion)
         }
@@ -125,7 +125,7 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
             .configureEach { task ->
                 task.defaultCompilerClasspath.setFrom(
                     {
-                        val classpathConfiguration = when (task.runViaBuildToolsApi.get()) {
+                        konst classpathConfiguration = when (task.runViaBuildToolsApi.get()) {
                             true -> BUILD_TOOLS_API_CLASSPATH_CONFIGURATION_NAME
                             false -> COMPILER_CLASSPATH_CONFIGURATION_NAME
                         }
@@ -136,7 +136,7 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
     }
 
     private fun Project.registerDefaultVariantImplementations() {
-        val factories = VariantImplementationFactoriesConfigurator.get(project.gradle)
+        konst factories = VariantImplementationFactoriesConfigurator.get(project.gradle)
         factories.putIfAbsent(
             MavenPluginConfigurator.MavenPluginConfiguratorVariantFactory::class,
             MavenPluginConfigurator.DefaultMavenPluginConfiguratorVariantFactory()
@@ -204,16 +204,16 @@ abstract class DefaultKotlinBasePlugin : KotlinBasePlugin {
         CInteropKlibLibraryElements.setupAttributesMatchingStrategy(this)
     }
 
-    open fun whenBuildEvaluated(project: Project) {
+    open fun whenBuildEkonstuated(project: Project) {
     }
 }
 
 
 abstract class KotlinBasePluginWrapper : DefaultKotlinBasePlugin() {
 
-    open val projectExtensionClass: KClass<out KotlinTopLevelExtension> get() = KotlinProjectExtension::class
+    open konst projectExtensionClass: KClass<out KotlinTopLevelExtension> get() = KotlinProjectExtension::class
 
-    abstract val pluginVariant: String
+    abstract konst pluginVariant: String
 
     internal open fun kotlinSourceSetFactory(project: Project): NamedDomainObjectFactory<KotlinSourceSet> =
         DefaultKotlinSourceSetFactory(project)
@@ -237,7 +237,7 @@ abstract class KotlinBasePluginWrapper : DefaultKotlinBasePlugin() {
             fun kotlinSourceSetContainer(factory: NamedDomainObjectFactory<KotlinSourceSet>) =
                 project.container(KotlinSourceSet::class.java, factory)
 
-            val topLevelExtension = project.topLevelExtension
+            konst topLevelExtension = project.topLevelExtension
             if (topLevelExtension is KotlinProjectExtension) {
                 project.kotlinExtension.sourceSets = kotlinSourceSetContainer(kotlinSourceSetFactory(project))
             }
@@ -245,7 +245,7 @@ abstract class KotlinBasePluginWrapper : DefaultKotlinBasePlugin() {
 
         project.extensions.add(KotlinTestsRegistry.PROJECT_EXTENSION_NAME, createTestRegistry(project))
 
-        val plugin = getPlugin(project)
+        konst plugin = getPlugin(project)
 
         setupAttributeMatchingStrategy(project)
 
@@ -280,32 +280,32 @@ private fun Project.launchDiagnosticChecksAndReporting() {
 }
 
 abstract class AbstractKotlinPluginWrapper(
-    protected val registry: ToolingModelBuilderRegistry,
+    protected konst registry: ToolingModelBuilderRegistry,
 ) : KotlinBasePluginWrapper() {
     override fun getPlugin(project: Project): Plugin<Project> =
         KotlinJvmPlugin(registry)
 
-    override val projectExtensionClass: KClass<out KotlinJvmProjectExtension>
+    override konst projectExtensionClass: KClass<out KotlinJvmProjectExtension>
         get() = KotlinJvmProjectExtension::class
 }
 
 abstract class AbstractKotlinCommonPluginWrapper(
-    protected val registry: ToolingModelBuilderRegistry,
+    protected konst registry: ToolingModelBuilderRegistry,
 ) : KotlinBasePluginWrapper() {
     override fun getPlugin(project: Project): Plugin<Project> =
         KotlinCommonPlugin(registry)
 
-    override val projectExtensionClass: KClass<out KotlinCommonProjectExtension>
+    override konst projectExtensionClass: KClass<out KotlinCommonProjectExtension>
         get() = KotlinCommonProjectExtension::class
 }
 
 abstract class AbstractKotlinAndroidPluginWrapper(
-    protected val registry: ToolingModelBuilderRegistry,
+    protected konst registry: ToolingModelBuilderRegistry,
 ) : KotlinBasePluginWrapper() {
     override fun getPlugin(project: Project): Plugin<Project> =
         KotlinAndroidPlugin(registry)
 
-    override val projectExtensionClass: KClass<out KotlinAndroidProjectExtension>
+    override konst projectExtensionClass: KClass<out KotlinAndroidProjectExtension>
         get() = KotlinAndroidProjectExtension::class
 }
 
@@ -314,14 +314,14 @@ abstract class AbstractKotlinAndroidPluginWrapper(
     level = DeprecationLevel.ERROR
 )
 abstract class AbstractKotlin2JsPluginWrapper(
-    protected val registry: ToolingModelBuilderRegistry,
+    protected konst registry: ToolingModelBuilderRegistry,
 ) : KotlinBasePluginWrapper() {
 
     @Suppress("DEPRECATION_ERROR")
     override fun getPlugin(project: Project): Plugin<Project> =
         Kotlin2JsPlugin(registry)
 
-    override val projectExtensionClass: KClass<out Kotlin2JsProjectExtension>
+    override konst projectExtensionClass: KClass<out Kotlin2JsProjectExtension>
         get() = Kotlin2JsProjectExtension::class
 }
 
@@ -329,11 +329,11 @@ abstract class AbstractKotlinJsPluginWrapper : KotlinBasePluginWrapper() {
     override fun getPlugin(project: Project): Plugin<Project> =
         KotlinJsPlugin()
 
-    override val projectExtensionClass: KClass<out KotlinJsProjectExtension>
+    override konst projectExtensionClass: KClass<out KotlinJsProjectExtension>
         get() = KotlinJsProjectExtension::class
 
-    override fun whenBuildEvaluated(project: Project) = project.runProjectConfigurationHealthCheck {
-        val isJsTargetUninitialized = (project.kotlinExtension as KotlinJsProjectExtension)
+    override fun whenBuildEkonstuated(project: Project) = project.runProjectConfigurationHealthCheck {
+        konst isJsTargetUninitialized = (project.kotlinExtension as KotlinJsProjectExtension)
             ._target == null
 
         if (isJsTargetUninitialized) {
@@ -365,10 +365,10 @@ abstract class AbstractKotlinMultiplatformPluginWrapper : KotlinBasePluginWrappe
         project.runMultiplatformAndroidGradlePluginCompatibilityHealthCheckWhenAndroidIsApplied()
     }
 
-    override val projectExtensionClass: KClass<out KotlinMultiplatformExtension>
+    override konst projectExtensionClass: KClass<out KotlinMultiplatformExtension>
         get() = KotlinMultiplatformExtension::class
 
-    override fun whenBuildEvaluated(project: Project) {
+    override fun whenBuildEkonstuated(project: Project) {
         project.runMissingAndroidTargetProjectConfigurationHealthCheck()
         project.runMissingKotlinTargetsProjectConfigurationHealthCheck()
         project.runDisabledCInteropCommonizationOnHmppProjectConfigurationHealthCheck()
@@ -376,7 +376,7 @@ abstract class AbstractKotlinMultiplatformPluginWrapper : KotlinBasePluginWrappe
 }
 
 abstract class AbstractKotlinPm20PluginWrapper(
-    private val objectFactory: ObjectFactory,
+    private konst objectFactory: ObjectFactory,
 ) : KotlinBasePluginWrapper() {
     override fun apply(project: Project) {
         super.apply(project)
@@ -386,7 +386,7 @@ abstract class AbstractKotlinPm20PluginWrapper(
     override fun getPlugin(project: Project): Plugin<Project> =
         objectFactory.newInstance(KotlinPm20GradlePlugin::class.java)
 
-    override val projectExtensionClass: KClass<out KotlinPm20ProjectExtension>
+    override konst projectExtensionClass: KClass<out KotlinPm20ProjectExtension>
         get() = KotlinPm20ProjectExtension::class
 }
 
@@ -395,13 +395,13 @@ fun Project.getKotlinPluginVersion() = getKotlinPluginVersion(project.logger)
 fun getKotlinPluginVersion(logger: Logger): String {
     if (!kotlinPluginVersionFromResources.isInitialized()) {
         logger.kotlinDebug("Loading version information")
-        logger.kotlinDebug("Found project version [${kotlinPluginVersionFromResources.value}]")
+        logger.kotlinDebug("Found project version [${kotlinPluginVersionFromResources.konstue}]")
     }
-    return kotlinPluginVersionFromResources.value
+    return kotlinPluginVersionFromResources.konstue
 }
 
 @ExperimentalKotlinGradlePluginApi
-val Project.kotlinToolingVersion: KotlinToolingVersion
+konst Project.kotlinToolingVersion: KotlinToolingVersion
     get() = extensions.extraProperties.getOrPut("kotlinToolingVersion") {
         KotlinToolingVersion(getKotlinPluginVersion())
     }
@@ -410,6 +410,6 @@ val Project.kotlinToolingVersion: KotlinToolingVersion
 private fun loadKotlinPluginVersionFromResourcesOf(any: Any) =
     any.loadPropertyFromResources("project.properties", "project.version")
 
-private val kotlinPluginVersionFromResources = lazy {
+private konst kotlinPluginVersionFromResources = lazy {
     loadKotlinPluginVersionFromResourcesOf(object {})
 }

@@ -9,7 +9,7 @@ public fun main(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FILE}) @javax.annotation.Nonnull /* annotation class not found */ @javax.annotation.meta.TypeQualifierDefault(value = {ElementType.METHOD, ElementType.PARAMETER}) /* annotation class not found */ @kotlin.annotation.MustBeDocumented @kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class NonNullApi : kotlin.Annotation {
+@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FILE}) @javax.annotation.Nonnull /* annotation class not found */ @javax.annotation.meta.TypeQualifierDefault(konstue = {ElementType.METHOD, ElementType.PARAMETER}) /* annotation class not found */ @kotlin.annotation.MustBeDocumented @kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class NonNullApi : kotlin.Annotation {
     public constructor NonNullApi()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

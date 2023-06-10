@@ -23,61 +23,61 @@ class Zin<in T> {
 }
 
 
-class Test<T>(val constructorProperty: T) {
+class Test<T>(konst constructorProperty: T) {
 
-    val classField1 : Z<T>? = null
+    konst classField1 : Z<T>? = null
 
-    val classField2 : Z<String>? = null
+    konst classField2 : Z<String>? = null
 
-    val classField3 : Zout<String>? = null
+    konst classField3 : Zout<String>? = null
 
-    val classField4 : Zin<TParam>? = null
+    konst classField4 : Zin<TParam>? = null
 
-    val delegateLazy: Z<TParam>? by lazy {Z<TParam>()}
+    konst delegateLazy: Z<TParam>? by lazy {Z<TParam>()}
 
-    val delegateNotNull: Z<TParam>? by Delegates.notNull()
+    konst delegateNotNull: Z<TParam>? by Delegates.notNull()
 
 
 }
 
 fun box(): String {
-    val clz = Test::class.java
+    konst clz = Test::class.java
 
-    val constructorProperty = clz.getDeclaredField("constructorProperty");
+    konst constructorProperty = clz.getDeclaredField("constructorProperty");
 
     if (constructorProperty.getGenericType().toString() != "T")
         return "fail0: " + constructorProperty.getGenericType();
 
 
-    val classField = clz.getDeclaredField("classField1");
+    konst classField = clz.getDeclaredField("classField1");
 
     if (classField.getGenericType().toString() != "test.Z<T>")
         return "fail1: " + classField.getGenericType();
 
 
-    val classField2 = clz.getDeclaredField("classField2");
+    konst classField2 = clz.getDeclaredField("classField2");
 
     if (classField2.getGenericType().toString() != "test.Z<java.lang.String>")
         return "fail2: " + classField2.getGenericType();
 
 
-    val classField3 = clz.getDeclaredField("classField3");
+    konst classField3 = clz.getDeclaredField("classField3");
 
     if (classField3.getGenericType().toString() != "test.Zout<java.lang.String>")
         return "fail3: " + classField3.getGenericType();
 
 
-    val classField4 = clz.getDeclaredField("classField4");
+    konst classField4 = clz.getDeclaredField("classField4");
 
     if (classField4.getGenericType().toString() != "test.Zin<test.TParam>")
         return "fail4: " + classField4.getGenericType();
 
-    val classField5 = clz.getDeclaredField("delegateLazy\$delegate");
+    konst classField5 = clz.getDeclaredField("delegateLazy\$delegate");
 
     if (classField5.getGenericType().toString() != "interface kotlin.Lazy")
         return "fail5: " + classField5.getGenericType();
 
-    val classField6 = clz.getDeclaredField("delegateNotNull\$delegate");
+    konst classField6 = clz.getDeclaredField("delegateNotNull\$delegate");
 
     if (classField6.getGenericType().toString() != "interface kotlin.properties.ReadWriteProperty")
         return "fail6: " + classField6.getGenericType();

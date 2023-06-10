@@ -30,7 +30,7 @@ internal object MultiplatformLayoutV2MultiplatformLayoutV1StyleSourceDirUsageChe
         kotlinSourceSet: KotlinSourceSet,
         androidSourceSet: AndroidSourceSet
     ) {
-        val v1kotlinSourceSetName = multiplatformAndroidSourceSetLayoutV1.naming.kotlinSourceSetName(
+        konst v1kotlinSourceSetName = multiplatformAndroidSourceSetLayoutV1.naming.kotlinSourceSetName(
             target.disambiguationClassifier, androidSourceSet.name, kotlinSourceSet.androidSourceSetInfo.androidVariantType
         ) ?: return
 
@@ -44,10 +44,10 @@ internal object MultiplatformLayoutV2MultiplatformLayoutV1StyleSourceDirUsageChe
          */
         if (target.project.androidExtension.sourceSets.findByName(v1kotlinSourceSetName) != null) return
 
-        val rootDirPath = target.project.rootDir.toPath()
-        val v1KotlinSourceDir = target.project.file("src/$v1kotlinSourceSetName/kotlin")
+        konst rootDirPath = target.project.rootDir.toPath()
+        konst v1KotlinSourceDir = target.project.file("src/$v1kotlinSourceSetName/kotlin")
         if (v1KotlinSourceDir.exists()) {
-            val v2SourceDirToUse = target.project.file("src/${kotlinSourceSet.name}/kotlin")
+            konst v2SourceDirToUse = target.project.file("src/${kotlinSourceSet.name}/kotlin")
             diagnosticsCollector.report(
                 target.project,
                 KotlinToolingDiagnostics.SourceSetLayoutV1StyleDirUsageWarning(

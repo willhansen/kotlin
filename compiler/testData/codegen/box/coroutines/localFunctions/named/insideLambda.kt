@@ -5,7 +5,7 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 suspend fun callLocal(): String {
-    val l: suspend () -> String = {
+    konst l: suspend () -> String = {
         suspend fun local() = suspendCoroutineUninterceptedOrReturn<String> {
             it.resume("OK")
             COROUTINE_SUSPENDED

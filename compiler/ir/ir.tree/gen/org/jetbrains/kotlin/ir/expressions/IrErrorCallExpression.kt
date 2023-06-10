@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 abstract class IrErrorCallExpression : IrErrorExpression() {
     abstract var explicitReceiver: IrExpression?
 
-    abstract val arguments: MutableList<IrExpression>
+    abstract konst arguments: MutableList<IrExpression>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitErrorCallExpression(this, data)

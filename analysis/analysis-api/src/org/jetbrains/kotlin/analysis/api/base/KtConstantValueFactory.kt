@@ -8,21 +8,21 @@ package org.jetbrains.kotlin.analysis.api.base
 import org.jetbrains.kotlin.psi.KtElement
 
 public object KtConstantValueFactory {
-    public fun createConstantValue(value: Any?, expression: KtElement? = null): KtConstantValue? = when (value) {
+    public fun createConstantValue(konstue: Any?, expression: KtElement? = null): KtConstantValue? = when (konstue) {
         null -> KtConstantValue.KtNullConstantValue(expression)
-        is Boolean -> KtConstantValue.KtBooleanConstantValue(value, expression)
-        is Char -> KtConstantValue.KtCharConstantValue(value, expression)
-        is Byte -> KtConstantValue.KtByteConstantValue(value, expression)
-        is UByte -> KtConstantValue.KtUnsignedByteConstantValue(value, expression)
-        is Short -> KtConstantValue.KtShortConstantValue(value, expression)
-        is UShort -> KtConstantValue.KtUnsignedShortConstantValue(value, expression)
-        is Int -> KtConstantValue.KtIntConstantValue(value, expression)
-        is UInt -> KtConstantValue.KtUnsignedIntConstantValue(value, expression)
-        is Long -> KtConstantValue.KtLongConstantValue(value, expression)
-        is ULong -> KtConstantValue.KtUnsignedLongConstantValue(value, expression)
-        is String -> KtConstantValue.KtStringConstantValue(value, expression)
-        is Float -> KtConstantValue.KtFloatConstantValue(value, expression)
-        is Double -> KtConstantValue.KtDoubleConstantValue(value, expression)
+        is Boolean -> KtConstantValue.KtBooleanConstantValue(konstue, expression)
+        is Char -> KtConstantValue.KtCharConstantValue(konstue, expression)
+        is Byte -> KtConstantValue.KtByteConstantValue(konstue, expression)
+        is UByte -> KtConstantValue.KtUnsignedByteConstantValue(konstue, expression)
+        is Short -> KtConstantValue.KtShortConstantValue(konstue, expression)
+        is UShort -> KtConstantValue.KtUnsignedShortConstantValue(konstue, expression)
+        is Int -> KtConstantValue.KtIntConstantValue(konstue, expression)
+        is UInt -> KtConstantValue.KtUnsignedIntConstantValue(konstue, expression)
+        is Long -> KtConstantValue.KtLongConstantValue(konstue, expression)
+        is ULong -> KtConstantValue.KtUnsignedLongConstantValue(konstue, expression)
+        is String -> KtConstantValue.KtStringConstantValue(konstue, expression)
+        is Float -> KtConstantValue.KtFloatConstantValue(konstue, expression)
+        is Double -> KtConstantValue.KtDoubleConstantValue(konstue, expression)
         else -> null
     }
 }

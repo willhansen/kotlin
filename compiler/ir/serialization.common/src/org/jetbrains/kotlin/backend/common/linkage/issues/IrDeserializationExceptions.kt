@@ -9,12 +9,12 @@ import org.jetbrains.kotlin.ir.declarations.IrAnnotationContainer
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 sealed class IrDeserializationException(message: String) : Exception(message) {
-    override val message: String get() = super.message!!
+    override konst message: String get() = super.message!!
 }
 
 class IrSymbolTypeMismatchException(
-    val expected: Class<out IrSymbol>,
-    val actual: IrSymbol
+    konst expected: Class<out IrSymbol>,
+    konst actual: IrSymbol
 ) : IrDeserializationException("The symbol of unexpected type encountered during IR deserialization: ${actual::class.java.simpleName}, ${actual.signature?.render() ?: actual.toString()}. ${expected.simpleName} is expected.")
 
 class IrDisallowedErrorNode(

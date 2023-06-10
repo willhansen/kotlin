@@ -22,15 +22,15 @@ import kotlin.reflect.jvm.*
 import kotlin.test.*
 
 fun box(): String {
-    val c = J::class.constructors.single()
+    konst c = J::class.constructors.single()
     assertFalse(c.isAccessible)
     assertFailsWith(IllegalCallableAccessException::class) { c.call("") }
 
     c.isAccessible = true
     assertTrue(c.isAccessible)
-    val j = c.call("OK")
+    konst j = c.call("OK")
 
-    val m = J::class.members.single { it.name == "getResult" }
+    konst m = J::class.members.single { it.name == "getResult" }
     assertFalse(m.isAccessible)
     assertFailsWith(IllegalCallableAccessException::class) { m.call(j)!! }
 

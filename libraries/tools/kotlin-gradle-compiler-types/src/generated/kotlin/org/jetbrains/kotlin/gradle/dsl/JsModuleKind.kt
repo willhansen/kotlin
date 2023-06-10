@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JsModuleKind(val kind: String) {
+enum class JsModuleKind(konst kind: String) {
     MODULE_AMD("amd"),
     MODULE_PLAIN("plain"),
     MODULE_ES("es"),
@@ -15,7 +15,7 @@ enum class JsModuleKind(val kind: String) {
 
     companion object {
         fun fromKind(kind: String): JsModuleKind =
-            JsModuleKind.values().firstOrNull { it.kind == kind }
+            JsModuleKind.konstues().firstOrNull { it.kind == kind }
                 ?: throw IllegalArgumentException("Unknown JS module kind: $kind")
     }
 }

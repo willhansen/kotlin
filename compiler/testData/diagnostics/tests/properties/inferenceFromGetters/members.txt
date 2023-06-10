@@ -6,12 +6,12 @@ public fun </*0*/ E> l(/*0*/ x: E): kotlin.collections.List<E>
 
 public final class A {
     public constructor A()
-    public final val x: kotlin.Int
-    public final val y: kotlin.Int
-    public final val y2: kotlin.Int
-    public final val z: kotlin.collections.List<kotlin.String>
-    public final val z2: kotlin.collections.List<kotlin.collections.List<kotlin.String>>
-    public final val </*0*/ T> T.u: T
+    public final konst x: kotlin.Int
+    public final konst y: kotlin.Int
+    public final konst y2: kotlin.Int
+    public final konst z: kotlin.collections.List<kotlin.String>
+    public final konst z2: kotlin.collections.List<kotlin.collections.List<kotlin.String>>
+    public final konst </*0*/ T> T.u: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -19,9 +19,9 @@ package org.jetbrains.kotlin.resolve.jvm.diagnostics
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 
 class ConflictingJvmDeclarationsData(
-    val classInternalName: String,
-    val classOrigin: JvmDeclarationOrigin?,
-    val signature: RawSignature,
-    val signatureOrigins: Collection<JvmDeclarationOrigin>?,
-    val signatureDescriptors: Collection<DeclarationDescriptor>,
+    konst classInternalName: String,
+    konst classOrigin: JvmDeclarationOrigin?,
+    konst signature: RawSignature,
+    konst signatureOrigins: Collection<JvmDeclarationOrigin>?,
+    konst signatureDescriptors: Collection<DeclarationDescriptor>,
 )

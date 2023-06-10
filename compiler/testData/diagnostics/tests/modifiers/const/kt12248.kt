@@ -11,12 +11,12 @@ public class Bar {
 
 class Foo {
     companion object {
-        const val FOO = 1
+        const konst FOO = 1
     }
 }
 
 class Baz {
     companion object {
-        const val BAZ = Bar.BAR + 1
+        const konst BAZ = Bar.BAR + 1
     }
 }

@@ -1,148 +1,148 @@
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.ALPHABETIC: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.ALPHABETIC: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.BinaryType.Companion.ARRAYBUFFER: org.w3c.dom.BinaryType { get; }
+/*∆*/ public konst org.w3c.dom.BinaryType.Companion.ARRAYBUFFER: org.w3c.dom.BinaryType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollBehavior.Companion.AUTO: org.w3c.dom.ScrollBehavior { get; }
+/*∆*/ public konst org.w3c.dom.ScrollBehavior.Companion.AUTO: org.w3c.dom.ScrollBehavior { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollRestoration.Companion.AUTO: org.w3c.dom.ScrollRestoration { get; }
+/*∆*/ public konst org.w3c.dom.ScrollRestoration.Companion.AUTO: org.w3c.dom.ScrollRestoration { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineJoin.Companion.BEVEL: org.w3c.dom.CanvasLineJoin { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineJoin.Companion.BEVEL: org.w3c.dom.CanvasLineJoin { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.BinaryType.Companion.BLOB: org.w3c.dom.BinaryType { get; }
+/*∆*/ public konst org.w3c.dom.BinaryType.Companion.BLOB: org.w3c.dom.BinaryType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CSSBoxType.Companion.BORDER: org.w3c.dom.CSSBoxType { get; }
+/*∆*/ public konst org.w3c.dom.CSSBoxType.Companion.BORDER: org.w3c.dom.CSSBoxType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.BOTTOM: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.BOTTOM: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineCap.Companion.BUTT: org.w3c.dom.CanvasLineCap { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineCap.Companion.BUTT: org.w3c.dom.CanvasLineCap { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackKind.Companion.CAPTIONS: org.w3c.dom.TextTrackKind { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackKind.Companion.CAPTIONS: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextAlign.Companion.CENTER: org.w3c.dom.CanvasTextAlign { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextAlign.Companion.CENTER: org.w3c.dom.CanvasTextAlign { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollLogicalPosition.Companion.CENTER: org.w3c.dom.ScrollLogicalPosition { get; }
+/*∆*/ public konst org.w3c.dom.ScrollLogicalPosition.Companion.CENTER: org.w3c.dom.ScrollLogicalPosition { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackKind.Companion.CHAPTERS: org.w3c.dom.TextTrackKind { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackKind.Companion.CHAPTERS: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.WorkerType.Companion.CLASSIC: org.w3c.dom.WorkerType { get; }
+/*∆*/ public konst org.w3c.dom.WorkerType.Companion.CLASSIC: org.w3c.dom.WorkerType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ShadowRootMode.Companion.CLOSED: org.w3c.dom.ShadowRootMode { get; }
+/*∆*/ public konst org.w3c.dom.ShadowRootMode.Companion.CLOSED: org.w3c.dom.ShadowRootMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.DocumentReadyState.Companion.COMPLETE: org.w3c.dom.DocumentReadyState { get; }
+/*∆*/ public konst org.w3c.dom.DocumentReadyState.Companion.COMPLETE: org.w3c.dom.DocumentReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CSSBoxType.Companion.CONTENT: org.w3c.dom.CSSBoxType { get; }
+/*∆*/ public konst org.w3c.dom.CSSBoxType.Companion.CONTENT: org.w3c.dom.CSSBoxType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ColorSpaceConversion.Companion.DEFAULT: org.w3c.dom.ColorSpaceConversion { get; }
+/*∆*/ public konst org.w3c.dom.ColorSpaceConversion.Companion.DEFAULT: org.w3c.dom.ColorSpaceConversion { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.PremultiplyAlpha.Companion.DEFAULT: org.w3c.dom.PremultiplyAlpha { get; }
+/*∆*/ public konst org.w3c.dom.PremultiplyAlpha.Companion.DEFAULT: org.w3c.dom.PremultiplyAlpha { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackKind.Companion.DESCRIPTIONS: org.w3c.dom.TextTrackKind { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackKind.Companion.DESCRIPTIONS: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackMode.Companion.DISABLED: org.w3c.dom.TextTrackMode { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackMode.Companion.DISABLED: org.w3c.dom.TextTrackMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanPlayTypeResult.Companion.EMPTY: org.w3c.dom.CanPlayTypeResult { get; }
+/*∆*/ public konst org.w3c.dom.CanPlayTypeResult.Companion.EMPTY: org.w3c.dom.CanPlayTypeResult { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextAlign.Companion.END: org.w3c.dom.CanvasTextAlign { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextAlign.Companion.END: org.w3c.dom.CanvasTextAlign { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollLogicalPosition.Companion.END: org.w3c.dom.ScrollLogicalPosition { get; }
+/*∆*/ public konst org.w3c.dom.ScrollLogicalPosition.Companion.END: org.w3c.dom.ScrollLogicalPosition { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.SelectionMode.Companion.END: org.w3c.dom.SelectionMode { get; }
+/*∆*/ public konst org.w3c.dom.SelectionMode.Companion.END: org.w3c.dom.SelectionMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasFillRule.Companion.EVENODD: org.w3c.dom.CanvasFillRule { get; }
+/*∆*/ public konst org.w3c.dom.CanvasFillRule.Companion.EVENODD: org.w3c.dom.CanvasFillRule { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ImageOrientation.Companion.FLIPY: org.w3c.dom.ImageOrientation { get; }
+/*∆*/ public konst org.w3c.dom.ImageOrientation.Companion.FLIPY: org.w3c.dom.ImageOrientation { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.HANGING: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.HANGING: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackMode.Companion.HIDDEN: org.w3c.dom.TextTrackMode { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackMode.Companion.HIDDEN: org.w3c.dom.TextTrackMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ImageSmoothingQuality.Companion.HIGH: org.w3c.dom.ImageSmoothingQuality { get; }
+/*∆*/ public konst org.w3c.dom.ImageSmoothingQuality.Companion.HIGH: org.w3c.dom.ImageSmoothingQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ResizeQuality.Companion.HIGH: org.w3c.dom.ResizeQuality { get; }
+/*∆*/ public konst org.w3c.dom.ResizeQuality.Companion.HIGH: org.w3c.dom.ResizeQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.IDEOGRAPHIC: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.IDEOGRAPHIC: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasDirection.Companion.INHERIT: org.w3c.dom.CanvasDirection { get; }
+/*∆*/ public konst org.w3c.dom.CanvasDirection.Companion.INHERIT: org.w3c.dom.CanvasDirection { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollBehavior.Companion.INSTANT: org.w3c.dom.ScrollBehavior { get; }
+/*∆*/ public konst org.w3c.dom.ScrollBehavior.Companion.INSTANT: org.w3c.dom.ScrollBehavior { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.DocumentReadyState.Companion.INTERACTIVE: org.w3c.dom.DocumentReadyState { get; }
+/*∆*/ public konst org.w3c.dom.DocumentReadyState.Companion.INTERACTIVE: org.w3c.dom.DocumentReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextAlign.Companion.LEFT: org.w3c.dom.CanvasTextAlign { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextAlign.Companion.LEFT: org.w3c.dom.CanvasTextAlign { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.DocumentReadyState.Companion.LOADING: org.w3c.dom.DocumentReadyState { get; }
+/*∆*/ public konst org.w3c.dom.DocumentReadyState.Companion.LOADING: org.w3c.dom.DocumentReadyState { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ImageSmoothingQuality.Companion.LOW: org.w3c.dom.ImageSmoothingQuality { get; }
+/*∆*/ public konst org.w3c.dom.ImageSmoothingQuality.Companion.LOW: org.w3c.dom.ImageSmoothingQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ResizeQuality.Companion.LOW: org.w3c.dom.ResizeQuality { get; }
+/*∆*/ public konst org.w3c.dom.ResizeQuality.Companion.LOW: org.w3c.dom.ResizeQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasDirection.Companion.LTR: org.w3c.dom.CanvasDirection { get; }
+/*∆*/ public konst org.w3c.dom.CanvasDirection.Companion.LTR: org.w3c.dom.CanvasDirection { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollRestoration.Companion.MANUAL: org.w3c.dom.ScrollRestoration { get; }
+/*∆*/ public konst org.w3c.dom.ScrollRestoration.Companion.MANUAL: org.w3c.dom.ScrollRestoration { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CSSBoxType.Companion.MARGIN: org.w3c.dom.CSSBoxType { get; }
+/*∆*/ public konst org.w3c.dom.CSSBoxType.Companion.MARGIN: org.w3c.dom.CSSBoxType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanPlayTypeResult.Companion.MAYBE: org.w3c.dom.CanPlayTypeResult { get; }
+/*∆*/ public konst org.w3c.dom.CanPlayTypeResult.Companion.MAYBE: org.w3c.dom.CanPlayTypeResult { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ImageSmoothingQuality.Companion.MEDIUM: org.w3c.dom.ImageSmoothingQuality { get; }
+/*∆*/ public konst org.w3c.dom.ImageSmoothingQuality.Companion.MEDIUM: org.w3c.dom.ImageSmoothingQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ResizeQuality.Companion.MEDIUM: org.w3c.dom.ResizeQuality { get; }
+/*∆*/ public konst org.w3c.dom.ResizeQuality.Companion.MEDIUM: org.w3c.dom.ResizeQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackKind.Companion.METADATA: org.w3c.dom.TextTrackKind { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackKind.Companion.METADATA: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.MIDDLE: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.MIDDLE: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineJoin.Companion.MITER: org.w3c.dom.CanvasLineJoin { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineJoin.Companion.MITER: org.w3c.dom.CanvasLineJoin { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.WorkerType.Companion.MODULE: org.w3c.dom.WorkerType { get; }
+/*∆*/ public konst org.w3c.dom.WorkerType.Companion.MODULE: org.w3c.dom.WorkerType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollLogicalPosition.Companion.NEAREST: org.w3c.dom.ScrollLogicalPosition { get; }
+/*∆*/ public konst org.w3c.dom.ScrollLogicalPosition.Companion.NEAREST: org.w3c.dom.ScrollLogicalPosition { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ColorSpaceConversion.Companion.NONE: org.w3c.dom.ColorSpaceConversion { get; }
+/*∆*/ public konst org.w3c.dom.ColorSpaceConversion.Companion.NONE: org.w3c.dom.ColorSpaceConversion { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ImageOrientation.Companion.NONE: org.w3c.dom.ImageOrientation { get; }
+/*∆*/ public konst org.w3c.dom.ImageOrientation.Companion.NONE: org.w3c.dom.ImageOrientation { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.PremultiplyAlpha.Companion.NONE: org.w3c.dom.PremultiplyAlpha { get; }
+/*∆*/ public konst org.w3c.dom.PremultiplyAlpha.Companion.NONE: org.w3c.dom.PremultiplyAlpha { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasFillRule.Companion.NONZERO: org.w3c.dom.CanvasFillRule { get; }
+/*∆*/ public konst org.w3c.dom.CanvasFillRule.Companion.NONZERO: org.w3c.dom.CanvasFillRule { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ShadowRootMode.Companion.OPEN: org.w3c.dom.ShadowRootMode { get; }
+/*∆*/ public konst org.w3c.dom.ShadowRootMode.Companion.OPEN: org.w3c.dom.ShadowRootMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CSSBoxType.Companion.PADDING: org.w3c.dom.CSSBoxType { get; }
+/*∆*/ public konst org.w3c.dom.CSSBoxType.Companion.PADDING: org.w3c.dom.CSSBoxType { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ResizeQuality.Companion.PIXELATED: org.w3c.dom.ResizeQuality { get; }
+/*∆*/ public konst org.w3c.dom.ResizeQuality.Companion.PIXELATED: org.w3c.dom.ResizeQuality { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.PremultiplyAlpha.Companion.PREMULTIPLY: org.w3c.dom.PremultiplyAlpha { get; }
+/*∆*/ public konst org.w3c.dom.PremultiplyAlpha.Companion.PREMULTIPLY: org.w3c.dom.PremultiplyAlpha { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.SelectionMode.Companion.PRESERVE: org.w3c.dom.SelectionMode { get; }
+/*∆*/ public konst org.w3c.dom.SelectionMode.Companion.PRESERVE: org.w3c.dom.SelectionMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanPlayTypeResult.Companion.PROBABLY: org.w3c.dom.CanPlayTypeResult { get; }
+/*∆*/ public konst org.w3c.dom.CanPlayTypeResult.Companion.PROBABLY: org.w3c.dom.CanPlayTypeResult { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextAlign.Companion.RIGHT: org.w3c.dom.CanvasTextAlign { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextAlign.Companion.RIGHT: org.w3c.dom.CanvasTextAlign { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineCap.Companion.ROUND: org.w3c.dom.CanvasLineCap { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineCap.Companion.ROUND: org.w3c.dom.CanvasLineCap { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineJoin.Companion.ROUND: org.w3c.dom.CanvasLineJoin { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineJoin.Companion.ROUND: org.w3c.dom.CanvasLineJoin { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasDirection.Companion.RTL: org.w3c.dom.CanvasDirection { get; }
+/*∆*/ public konst org.w3c.dom.CanvasDirection.Companion.RTL: org.w3c.dom.CanvasDirection { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.SelectionMode.Companion.SELECT: org.w3c.dom.SelectionMode { get; }
+/*∆*/ public konst org.w3c.dom.SelectionMode.Companion.SELECT: org.w3c.dom.SelectionMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackMode.Companion.SHOWING: org.w3c.dom.TextTrackMode { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackMode.Companion.SHOWING: org.w3c.dom.TextTrackMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollBehavior.Companion.SMOOTH: org.w3c.dom.ScrollBehavior { get; }
+/*∆*/ public konst org.w3c.dom.ScrollBehavior.Companion.SMOOTH: org.w3c.dom.ScrollBehavior { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasLineCap.Companion.SQUARE: org.w3c.dom.CanvasLineCap { get; }
+/*∆*/ public konst org.w3c.dom.CanvasLineCap.Companion.SQUARE: org.w3c.dom.CanvasLineCap { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextAlign.Companion.START: org.w3c.dom.CanvasTextAlign { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextAlign.Companion.START: org.w3c.dom.CanvasTextAlign { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.ScrollLogicalPosition.Companion.START: org.w3c.dom.ScrollLogicalPosition { get; }
+/*∆*/ public konst org.w3c.dom.ScrollLogicalPosition.Companion.START: org.w3c.dom.ScrollLogicalPosition { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.SelectionMode.Companion.START: org.w3c.dom.SelectionMode { get; }
+/*∆*/ public konst org.w3c.dom.SelectionMode.Companion.START: org.w3c.dom.SelectionMode { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.TextTrackKind.Companion.SUBTITLES: org.w3c.dom.TextTrackKind { get; }
+/*∆*/ public konst org.w3c.dom.TextTrackKind.Companion.SUBTITLES: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/ public val org.w3c.dom.CanvasTextBaseline.Companion.TOP: org.w3c.dom.CanvasTextBaseline { get; }
+/*∆*/ public konst org.w3c.dom.CanvasTextBaseline.Companion.TOP: org.w3c.dom.CanvasTextBaseline { get; }
 /*∆*/ 
 /*∆*/ @kotlin.Deprecated(message = "Use `as` instead.", replaceWith = kotlin.ReplaceWith(expression = "`as`", imports = {}))
 /*∆*/ public var org.w3c.dom.HTMLLinkElement.as_: org.w3c.fetch.RequestDestination { get; set; }
@@ -342,7 +342,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public inline operator fun org.w3c.dom.Window.get(name: kotlin.String): dynamic
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
-/*∆*/ public inline operator fun org.w3c.dom.DOMStringMap.set(name: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/ public inline operator fun org.w3c.dom.DOMStringMap.set(name: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
 /*∆*/ public inline operator fun org.w3c.dom.HTMLOptionsCollection.set(index: kotlin.Int, option: org.w3c.dom.HTMLOptionElement?): kotlin.Unit
@@ -351,7 +351,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public inline operator fun org.w3c.dom.HTMLSelectElement.set(index: kotlin.Int, option: org.w3c.dom.HTMLOptionElement?): kotlin.Unit
 /*∆*/ 
 /*∆*/ @kotlin.internal.InlineOnly
-/*∆*/ public inline operator fun org.w3c.dom.Storage.set(key: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/ public inline operator fun org.w3c.dom.Storage.set(key: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/ public external interface AbstractWorker {
 /*∆*/     public open var onerror: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
@@ -382,7 +382,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var onupdateready: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val status: kotlin.Short { get; }
+/*∆*/     public open konst status: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public final fun abort(): kotlin.Unit
 /*∆*/ 
@@ -391,17 +391,17 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun update(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of ApplicationCache {
-/*∆*/         public final val CHECKING: kotlin.Short { get; }
+/*∆*/         public final konst CHECKING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOWNLOADING: kotlin.Short { get; }
+/*∆*/         public final konst DOWNLOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val IDLE: kotlin.Short { get; }
+/*∆*/         public final konst IDLE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val OBSOLETE: kotlin.Short { get; }
+/*∆*/         public final konst OBSOLETE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val UNCACHED: kotlin.Short { get; }
+/*∆*/         public final konst UNCACHED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val UPDATEREADY: kotlin.Short { get; }
+/*∆*/         public final konst UPDATEREADY: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -412,77 +412,77 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class Attr : org.w3c.dom.Node {
 /*∆*/     public constructor Attr()
 /*∆*/ 
-/*∆*/     public open val localName: kotlin.String { get; }
+/*∆*/     public open konst localName: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val namespaceURI: kotlin.String? { get; }
+/*∆*/     public open konst namespaceURI: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val ownerElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst ownerElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val prefix: kotlin.String? { get; }
+/*∆*/     public open konst prefix: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val specified: kotlin.Boolean { get; }
+/*∆*/     public open konst specified: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of Attr {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class Audio : org.w3c.dom.HTMLAudioElement {
 /*∆*/     public constructor Audio(src: kotlin.String = ...)
 /*∆*/ 
-/*∆*/     public open override val assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
+/*∆*/     public open override konst assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
 /*∆*/ 
-/*∆*/     public open override val childElementCount: kotlin.Int { get; }
+/*∆*/     public open override konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open override val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open override konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open override var contentEditable: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open override val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val isContentEditable: kotlin.Boolean { get; }
+/*∆*/     public open override konst isContentEditable: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open override val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public open override var onabort: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -540,7 +540,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var oninput: ((org.w3c.dom.events.InputEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override var oninvalid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
+/*∆*/     public open override var oninkonstid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open override var onkeydown: ((org.w3c.dom.events.KeyboardEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -632,9 +632,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var onwheel: ((org.w3c.dom.events.WheelEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open override konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public open override fun after(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -661,59 +661,59 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open override fun replaceWith(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Audio {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_CURRENT_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_CURRENT_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_ENOUGH_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_ENOUGH_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_FUTURE_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_FUTURE_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_METADATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_METADATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_NOTHING: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_NOTHING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_EMPTY: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_EMPTY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_IDLE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_IDLE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_LOADING: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_LOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_NO_SOURCE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_NO_SOURCE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -722,21 +722,21 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var enabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val kind: kotlin.String { get; }
+/*∆*/     public open konst kind: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val label: kotlin.String { get; }
+/*∆*/     public open konst label: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val language: kotlin.String { get; }
+/*∆*/     public open konst language: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
+/*∆*/     public open konst sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class AudioTrackList : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor AudioTrackList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var onaddtrack: ((org.w3c.dom.TrackEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -750,7 +750,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class BarProp {
 /*∆*/     public constructor BarProp()
 /*∆*/ 
-/*∆*/     public open val visible: kotlin.Boolean { get; }
+/*∆*/     public open konst visible: kotlin.Boolean { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class BeforeUnloadEvent : org.w3c.dom.events.Event {
@@ -759,13 +759,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final var returnValue: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of BeforeUnloadEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -784,7 +784,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class BroadcastChannel : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor BroadcastChannel(name: kotlin.String)
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var onmessage: ((org.w3c.dom.MessageEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -797,41 +797,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor CDATASection()
 /*∆*/ 
 /*∆*/     public companion object of CDATASection {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -1017,7 +1017,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class CanvasRenderingContext2D : org.w3c.dom.CanvasState, org.w3c.dom.CanvasTransform, org.w3c.dom.CanvasCompositing, org.w3c.dom.CanvasImageSmoothing, org.w3c.dom.CanvasFillStrokeStyles, org.w3c.dom.CanvasShadowStyles, org.w3c.dom.CanvasFilters, org.w3c.dom.CanvasRect, org.w3c.dom.CanvasDrawPath, org.w3c.dom.CanvasUserInterface, org.w3c.dom.CanvasText, org.w3c.dom.CanvasDrawImage, org.w3c.dom.CanvasHitRegion, org.w3c.dom.CanvasImageData, org.w3c.dom.CanvasPathDrawingStyles, org.w3c.dom.CanvasTextDrawingStyles, org.w3c.dom.CanvasPath, org.w3c.dom.RenderingContext {
 /*∆*/     public constructor CanvasRenderingContext2D()
 /*∆*/ 
-/*∆*/     public open val canvas: org.w3c.dom.HTMLCanvasElement { get; }
+/*∆*/     public open konst canvas: org.w3c.dom.HTMLCanvasElement { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface CanvasRenderingContext2DSettings {
@@ -1101,9 +1101,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class CaretPosition {
 /*∆*/     public constructor CaretPosition()
 /*∆*/ 
-/*∆*/     public open val offset: kotlin.Int { get; }
+/*∆*/     public open konst offset: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val offsetNode: org.w3c.dom.Node { get; }
+/*∆*/     public open konst offsetNode: org.w3c.dom.Node { get; }
 /*∆*/ 
 /*∆*/     public final fun getClientRect(): org.w3c.dom.DOMRect?
 /*∆*/ }
@@ -1113,7 +1113,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var data: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun appendData(data: kotlin.String): kotlin.Unit
 /*∆*/ 
@@ -1126,41 +1126,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun substringData(offset: kotlin.Int, count: kotlin.Int): kotlin.String
 /*∆*/ 
 /*∆*/     public companion object of CharacterData {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -1177,20 +1177,20 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class CloseEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor CloseEvent(type: kotlin.String, eventInitDict: org.w3c.dom.CloseEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val code: kotlin.Short { get; }
+/*∆*/     public open konst code: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val reason: kotlin.String { get; }
+/*∆*/     public open konst reason: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val wasClean: kotlin.Boolean { get; }
+/*∆*/     public open konst wasClean: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public companion object of CloseEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -1211,9 +1211,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class Comment : org.w3c.dom.CharacterData {
 /*∆*/     public constructor Comment(data: kotlin.String = ...)
 /*∆*/ 
-/*∆*/     public open override val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public open override fun after(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -1224,41 +1224,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open override fun replaceWith(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Comment {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -1281,18 +1281,18 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class CustomEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor CustomEvent(type: kotlin.String, eventInitDict: org.w3c.dom.CustomEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val detail: kotlin.Any? { get; }
+/*∆*/     public open konst detail: kotlin.Any? { get; }
 /*∆*/ 
 /*∆*/     public final fun initCustomEvent(type: kotlin.String, bubbles: kotlin.Boolean, cancelable: kotlin.Boolean, detail: kotlin.Any?): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of CustomEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -1399,53 +1399,53 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class DOMMatrixReadOnly {
 /*∆*/     public constructor DOMMatrixReadOnly(numberSequence: kotlin.Array<kotlin.Double>)
 /*∆*/ 
-/*∆*/     public open val a: kotlin.Double { get; }
+/*∆*/     public open konst a: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val b: kotlin.Double { get; }
+/*∆*/     public open konst b: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val c: kotlin.Double { get; }
+/*∆*/     public open konst c: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val d: kotlin.Double { get; }
+/*∆*/     public open konst d: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val e: kotlin.Double { get; }
+/*∆*/     public open konst e: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val f: kotlin.Double { get; }
+/*∆*/     public open konst f: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val is2D: kotlin.Boolean { get; }
+/*∆*/     public open konst is2D: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val isIdentity: kotlin.Boolean { get; }
+/*∆*/     public open konst isIdentity: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val m11: kotlin.Double { get; }
+/*∆*/     public open konst m11: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m12: kotlin.Double { get; }
+/*∆*/     public open konst m12: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m13: kotlin.Double { get; }
+/*∆*/     public open konst m13: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m14: kotlin.Double { get; }
+/*∆*/     public open konst m14: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m21: kotlin.Double { get; }
+/*∆*/     public open konst m21: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m22: kotlin.Double { get; }
+/*∆*/     public open konst m22: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m23: kotlin.Double { get; }
+/*∆*/     public open konst m23: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m24: kotlin.Double { get; }
+/*∆*/     public open konst m24: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m31: kotlin.Double { get; }
+/*∆*/     public open konst m31: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m32: kotlin.Double { get; }
+/*∆*/     public open konst m32: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m33: kotlin.Double { get; }
+/*∆*/     public open konst m33: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m34: kotlin.Double { get; }
+/*∆*/     public open konst m34: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m41: kotlin.Double { get; }
+/*∆*/     public open konst m41: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m42: kotlin.Double { get; }
+/*∆*/     public open konst m42: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m43: kotlin.Double { get; }
+/*∆*/     public open konst m43: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val m44: kotlin.Double { get; }
+/*∆*/     public open konst m44: kotlin.Double { get; }
 /*∆*/ 
 /*∆*/     public final fun flipX(): org.w3c.dom.DOMMatrix
 /*∆*/ 
@@ -1507,13 +1507,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class DOMPointReadOnly {
 /*∆*/     public constructor DOMPointReadOnly(x: kotlin.Double, y: kotlin.Double, z: kotlin.Double, w: kotlin.Double)
 /*∆*/ 
-/*∆*/     public open val w: kotlin.Double { get; }
+/*∆*/     public open konst w: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val x: kotlin.Double { get; }
+/*∆*/     public open konst x: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val y: kotlin.Double { get; }
+/*∆*/     public open konst y: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val z: kotlin.Double { get; }
+/*∆*/     public open konst z: kotlin.Double { get; }
 /*∆*/ 
 /*∆*/     public final fun matrixTransform(matrix: org.w3c.dom.DOMMatrixReadOnly): org.w3c.dom.DOMPoint
 /*∆*/ }
@@ -1523,15 +1523,15 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public constructor DOMQuad(rect: org.w3c.dom.DOMRectInit)
 /*∆*/ 
-/*∆*/     public open val bounds: org.w3c.dom.DOMRectReadOnly { get; }
+/*∆*/     public open konst bounds: org.w3c.dom.DOMRectReadOnly { get; }
 /*∆*/ 
-/*∆*/     public open val p1: org.w3c.dom.DOMPoint { get; }
+/*∆*/     public open konst p1: org.w3c.dom.DOMPoint { get; }
 /*∆*/ 
-/*∆*/     public open val p2: org.w3c.dom.DOMPoint { get; }
+/*∆*/     public open konst p2: org.w3c.dom.DOMPoint { get; }
 /*∆*/ 
-/*∆*/     public open val p3: org.w3c.dom.DOMPoint { get; }
+/*∆*/     public open konst p3: org.w3c.dom.DOMPoint { get; }
 /*∆*/ 
-/*∆*/     public open val p4: org.w3c.dom.DOMPoint { get; }
+/*∆*/     public open konst p4: org.w3c.dom.DOMPoint { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class DOMRect : org.w3c.dom.DOMRectReadOnly {
@@ -1563,21 +1563,21 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class DOMRectReadOnly {
 /*∆*/     public constructor DOMRectReadOnly(x: kotlin.Double, y: kotlin.Double, width: kotlin.Double, height: kotlin.Double)
 /*∆*/ 
-/*∆*/     public open val bottom: kotlin.Double { get; }
+/*∆*/     public open konst bottom: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val height: kotlin.Double { get; }
+/*∆*/     public open konst height: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val left: kotlin.Double { get; }
+/*∆*/     public open konst left: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val right: kotlin.Double { get; }
+/*∆*/     public open konst right: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val top: kotlin.Double { get; }
+/*∆*/     public open konst top: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Double { get; }
+/*∆*/     public open konst width: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val x: kotlin.Double { get; }
+/*∆*/     public open konst x: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val y: kotlin.Double { get; }
+/*∆*/     public open konst y: kotlin.Double { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class DOMStringMap {
@@ -1587,7 +1587,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class DOMTokenList : org.w3c.dom.ItemArrayLike<kotlin.String> {
 /*∆*/     public constructor DOMTokenList()
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public final fun add(vararg tokens: kotlin.String): kotlin.Unit
 /*∆*/ 
@@ -1611,11 +1611,11 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var effectAllowed: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val files: org.w3c.files.FileList { get; }
+/*∆*/     public open konst files: org.w3c.files.FileList { get; }
 /*∆*/ 
-/*∆*/     public open val items: org.w3c.dom.DataTransferItemList { get; }
+/*∆*/     public open konst items: org.w3c.dom.DataTransferItemList { get; }
 /*∆*/ 
-/*∆*/     public open val types: kotlin.Array<out kotlin.String> { get; }
+/*∆*/     public open konst types: kotlin.Array<out kotlin.String> { get; }
 /*∆*/ 
 /*∆*/     public final fun clearData(format: kotlin.String = ...): kotlin.Unit
 /*∆*/ 
@@ -1629,9 +1629,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class DataTransferItem {
 /*∆*/     public constructor DataTransferItem()
 /*∆*/ 
-/*∆*/     public open val kind: kotlin.String { get; }
+/*∆*/     public open konst kind: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun getAsFile(): org.w3c.files.File?
 /*∆*/ 
@@ -1641,7 +1641,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class DataTransferItemList {
 /*∆*/     public constructor DataTransferItemList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun add(data: kotlin.String, type: kotlin.String): org.w3c.dom.DataTransferItem?
 /*∆*/ 
@@ -1665,83 +1665,83 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class Document : org.w3c.dom.Node, org.w3c.dom.GlobalEventHandlers, org.w3c.dom.DocumentAndElementEventHandlers, org.w3c.dom.NonElementParentNode, org.w3c.dom.DocumentOrShadowRoot, org.w3c.dom.ParentNode, org.w3c.dom.GeometryUtils {
 /*∆*/     public constructor Document()
 /*∆*/ 
-/*∆*/     public open val URL: kotlin.String { get; }
+/*∆*/     public open konst URL: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val activeElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst activeElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public final var alinkColor: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val all: org.w3c.dom.HTMLAllCollection { get; }
+/*∆*/     public open konst all: org.w3c.dom.HTMLAllCollection { get; }
 /*∆*/ 
-/*∆*/     public open val anchors: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst anchors: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val applets: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst applets: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public final var bgColor: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public final var body: org.w3c.dom.HTMLElement? { get; set; }
 /*∆*/ 
-/*∆*/     public open val characterSet: kotlin.String { get; }
+/*∆*/     public open konst characterSet: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val charset: kotlin.String { get; }
+/*∆*/     public open konst charset: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open override val childElementCount: kotlin.Int { get; }
+/*∆*/     public open override konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open override val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open override konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val compatMode: kotlin.String { get; }
+/*∆*/     public open konst compatMode: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val contentType: kotlin.String { get; }
+/*∆*/     public open konst contentType: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var cookie: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val currentScript: org.w3c.dom.HTMLOrSVGScriptElement? { get; }
+/*∆*/     public open konst currentScript: org.w3c.dom.HTMLOrSVGScriptElement? { get; }
 /*∆*/ 
-/*∆*/     public open val defaultView: org.w3c.dom.Window? { get; }
+/*∆*/     public open konst defaultView: org.w3c.dom.Window? { get; }
 /*∆*/ 
 /*∆*/     public final var designMode: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public final var dir: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val doctype: org.w3c.dom.DocumentType? { get; }
+/*∆*/     public open konst doctype: org.w3c.dom.DocumentType? { get; }
 /*∆*/ 
-/*∆*/     public open val documentElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst documentElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val documentURI: kotlin.String { get; }
+/*∆*/     public open konst documentURI: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var domain: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val embeds: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst embeds: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public final var fgColor: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open override val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val forms: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst forms: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val fullscreen: kotlin.Boolean { get; }
+/*∆*/     public open konst fullscreen: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open override val fullscreenElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst fullscreenElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val fullscreenEnabled: kotlin.Boolean { get; }
+/*∆*/     public open konst fullscreenEnabled: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val head: org.w3c.dom.HTMLHeadElement? { get; }
+/*∆*/     public open konst head: org.w3c.dom.HTMLHeadElement? { get; }
 /*∆*/ 
-/*∆*/     public open val images: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst images: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val implementation: org.w3c.dom.DOMImplementation { get; }
+/*∆*/     public open konst implementation: org.w3c.dom.DOMImplementation { get; }
 /*∆*/ 
-/*∆*/     public open val inputEncoding: kotlin.String { get; }
+/*∆*/     public open konst inputEncoding: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open override val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val lastModified: kotlin.String { get; }
+/*∆*/     public open konst lastModified: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var linkColor: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val links: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst links: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val location: org.w3c.dom.Location? { get; }
+/*∆*/     public open konst location: org.w3c.dom.Location? { get; }
 /*∆*/ 
 /*∆*/     public open override var onabort: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -1803,7 +1803,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var oninput: ((org.w3c.dom.events.InputEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override var oninvalid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
+/*∆*/     public open override var oninkonstid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open override var onkeydown: ((org.w3c.dom.events.KeyboardEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -1897,21 +1897,21 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var onwheel: ((org.w3c.dom.events.WheelEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val plugins: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst plugins: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val readyState: org.w3c.dom.DocumentReadyState { get; }
+/*∆*/     public open konst readyState: org.w3c.dom.DocumentReadyState { get; }
 /*∆*/ 
-/*∆*/     public open val referrer: kotlin.String { get; }
+/*∆*/     public open konst referrer: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val rootElement: org.w3c.dom.svg.SVGSVGElement? { get; }
+/*∆*/     public open konst rootElement: org.w3c.dom.svg.SVGSVGElement? { get; }
 /*∆*/ 
-/*∆*/     public open val scripts: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst scripts: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val scrollingElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst scrollingElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val styleSheets: org.w3c.dom.css.StyleSheetList { get; }
+/*∆*/     public open konst styleSheets: org.w3c.dom.css.StyleSheetList { get; }
 /*∆*/ 
 /*∆*/     public final var title: kotlin.String { get; set; }
 /*∆*/ 
@@ -1973,7 +1973,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public final fun elementsFromPoint(x: kotlin.Double, y: kotlin.Double): kotlin.Array<org.w3c.dom.Element>
 /*∆*/ 
-/*∆*/     public final fun execCommand(commandId: kotlin.String, showUI: kotlin.Boolean = ..., value: kotlin.String = ...): kotlin.Boolean
+/*∆*/     public final fun execCommand(commandId: kotlin.String, showUI: kotlin.Boolean = ..., konstue: kotlin.String = ...): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public final fun exitFullscreen(): kotlin.js.Promise<kotlin.Unit>
 /*∆*/ 
@@ -2020,41 +2020,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun writeln(vararg text: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Document {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2069,13 +2069,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class DocumentFragment : org.w3c.dom.Node, org.w3c.dom.NonElementParentNode, org.w3c.dom.ParentNode {
 /*∆*/     public constructor DocumentFragment()
 /*∆*/ 
-/*∆*/     public open override val childElementCount: kotlin.Int { get; }
+/*∆*/     public open override konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open override val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open override konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open override val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public open override fun append(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -2088,46 +2088,46 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open override fun querySelectorAll(selectors: kotlin.String): org.w3c.dom.NodeList
 /*∆*/ 
 /*∆*/     public companion object of DocumentFragment {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface DocumentOrShadowRoot {
-/*∆*/     public open val fullscreenElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst fullscreenElement: org.w3c.dom.Element? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ @kotlin.js.JsName(name = "null")
@@ -2139,64 +2139,64 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class DocumentType : org.w3c.dom.Node, org.w3c.dom.ChildNode {
 /*∆*/     public constructor DocumentType()
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val publicId: kotlin.String { get; }
+/*∆*/     public open konst publicId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val systemId: kotlin.String { get; }
+/*∆*/     public open konst systemId: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of DocumentType {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class DragEvent : org.w3c.dom.events.MouseEvent {
 /*∆*/     public constructor DragEvent(type: kotlin.String, eventInitDict: org.w3c.dom.DragEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val dataTransfer: org.w3c.dom.DataTransfer? { get; }
+/*∆*/     public open konst dataTransfer: org.w3c.dom.DataTransfer? { get; }
 /*∆*/ 
 /*∆*/     public companion object of DragEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2207,45 +2207,45 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class Element : org.w3c.dom.Node, org.w3c.dom.ParentNode, org.w3c.dom.NonDocumentTypeChildNode, org.w3c.dom.ChildNode, org.w3c.dom.Slotable, org.w3c.dom.GeometryUtils, org.w3c.dom.UnionElementOrHTMLCollection, org.w3c.dom.UnionElementOrRadioNodeList, org.w3c.dom.UnionElementOrMouseEvent, org.w3c.dom.css.UnionElementOrProcessingInstruction {
 /*∆*/     public constructor Element()
 /*∆*/ 
-/*∆*/     public open val attributes: org.w3c.dom.NamedNodeMap { get; }
+/*∆*/     public open konst attributes: org.w3c.dom.NamedNodeMap { get; }
 /*∆*/ 
-/*∆*/     public open val classList: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst classList: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var className: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val clientHeight: kotlin.Int { get; }
+/*∆*/     public open konst clientHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val clientLeft: kotlin.Int { get; }
+/*∆*/     public open konst clientLeft: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val clientTop: kotlin.Int { get; }
+/*∆*/     public open konst clientTop: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val clientWidth: kotlin.Int { get; }
+/*∆*/     public open konst clientWidth: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var id: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var innerHTML: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val localName: kotlin.String { get; }
+/*∆*/     public open konst localName: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val namespaceURI: kotlin.String? { get; }
+/*∆*/     public open konst namespaceURI: kotlin.String? { get; }
 /*∆*/ 
 /*∆*/     public open var outerHTML: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val prefix: kotlin.String? { get; }
+/*∆*/     public open konst prefix: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val scrollHeight: kotlin.Int { get; }
+/*∆*/     public open konst scrollHeight: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var scrollLeft: kotlin.Double { get; set; }
 /*∆*/ 
 /*∆*/     public open var scrollTop: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val scrollWidth: kotlin.Int { get; }
+/*∆*/     public open konst scrollWidth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val shadowRoot: org.w3c.dom.ShadowRoot? { get; }
+/*∆*/     public open konst shadowRoot: org.w3c.dom.ShadowRoot? { get; }
 /*∆*/ 
 /*∆*/     public open var slot: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val tagName: kotlin.String { get; }
+/*∆*/     public open konst tagName: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun attachShadow(init: org.w3c.dom.ShadowRootInit): org.w3c.dom.ShadowRoot
 /*∆*/ 
@@ -2313,9 +2313,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public final fun scrollTo(options: org.w3c.dom.ScrollToOptions = ...): kotlin.Unit
 /*∆*/ 
-/*∆*/     public final fun setAttribute(qualifiedName: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun setAttribute(qualifiedName: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ 
-/*∆*/     public final fun setAttributeNS(namespace: kotlin.String?, qualifiedName: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun setAttributeNS(namespace: kotlin.String?, qualifiedName: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public final fun setAttributeNode(attr: org.w3c.dom.Attr): org.w3c.dom.Attr?
 /*∆*/ 
@@ -2326,48 +2326,48 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun webkitMatchesSelector(selectors: kotlin.String): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public companion object of Element {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface ElementContentEditable {
 /*∆*/     public abstract var contentEditable: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public abstract val isContentEditable: kotlin.Boolean { get; }
+/*∆*/     public abstract konst isContentEditable: kotlin.Boolean { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface ElementCreationOptions {
@@ -2381,24 +2381,24 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class ErrorEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor ErrorEvent(type: kotlin.String, eventInitDict: org.w3c.dom.ErrorEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val colno: kotlin.Int { get; }
+/*∆*/     public open konst colno: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val error: kotlin.Any? { get; }
+/*∆*/     public open konst error: kotlin.Any? { get; }
 /*∆*/ 
-/*∆*/     public open val filename: kotlin.String { get; }
+/*∆*/     public open konst filename: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val lineno: kotlin.Int { get; }
+/*∆*/     public open konst lineno: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val message: kotlin.String { get; }
+/*∆*/     public open konst message: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of ErrorEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2435,20 +2435,20 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public final var onopen: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val readyState: kotlin.Short { get; }
+/*∆*/     public open konst readyState: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val url: kotlin.String { get; }
+/*∆*/     public open konst url: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val withCredentials: kotlin.Boolean { get; }
+/*∆*/     public open konst withCredentials: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun close(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of EventSource {
-/*∆*/         public final val CLOSED: kotlin.Short { get; }
+/*∆*/         public final konst CLOSED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CONNECTING: kotlin.Short { get; }
+/*∆*/         public final konst CONNECTING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val OPEN: kotlin.Short { get; }
+/*∆*/         public final konst OPEN: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2529,7 +2529,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var oninput: ((org.w3c.dom.events.InputEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open var oninvalid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
+/*∆*/     public open var oninkonstid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open var onkeydown: ((org.w3c.dom.events.KeyboardEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -2623,7 +2623,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class HTMLAllCollection {
 /*∆*/     public constructor HTMLAllCollection()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun item(nameOrIndex: kotlin.String = ...): org.w3c.dom.UnionElementOrHTMLCollection?
 /*∆*/ 
@@ -2649,7 +2649,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var rel: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val relList: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst relList: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var rev: kotlin.String { get; set; }
 /*∆*/ 
@@ -2662,41 +2662,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLAnchorElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2726,41 +2726,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var width: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLAppletElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2781,48 +2781,48 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var rel: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val relList: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst relList: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var shape: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var target: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLAreaElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2830,59 +2830,59 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor HTMLAudioElement()
 /*∆*/ 
 /*∆*/     public companion object of HTMLAudioElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_CURRENT_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_CURRENT_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_ENOUGH_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_ENOUGH_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_FUTURE_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_FUTURE_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_METADATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_METADATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_NOTHING: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_NOTHING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_EMPTY: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_EMPTY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_IDLE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_IDLE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_LOADING: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_LOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_NO_SOURCE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_NO_SOURCE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2892,41 +2892,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var clear: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLBRElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2938,41 +2938,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var target: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLBaseElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -2992,41 +2992,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var vLink: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLBodyElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3037,7 +3037,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var formAction: kotlin.String { get; set; }
 /*∆*/ 
@@ -3049,7 +3049,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var formTarget: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var menu: org.w3c.dom.HTMLMenuElement? { get; set; }
 /*∆*/ 
@@ -3057,13 +3057,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -3072,41 +3072,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLButtonElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3124,41 +3124,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun toDataURL(type: kotlin.String = ..., quality: kotlin.Any? = ...): kotlin.String
 /*∆*/ 
 /*∆*/     public companion object of HTMLCanvasElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3176,129 +3176,129 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var compact: kotlin.Boolean { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDListElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLDataElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLDataElement()
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDataElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLDataListElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLDataListElement()
 /*∆*/ 
-/*∆*/     public open val options: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst options: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDataListElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3308,41 +3308,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var open: kotlin.Boolean { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDetailsElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3360,41 +3360,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun showModal(anchor: org.w3c.dom.UnionElementOrMouseEvent = ...): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLDialogElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3404,41 +3404,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var compact: kotlin.Boolean { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDirectoryElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3448,41 +3448,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var align: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLDivElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3491,17 +3491,17 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var accessKey: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val accessKeyLabel: kotlin.String { get; }
+/*∆*/     public open konst accessKeyLabel: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var contextMenu: org.w3c.dom.HTMLMenuElement? { get; set; }
 /*∆*/ 
-/*∆*/     public open val dataset: org.w3c.dom.DOMStringMap { get; }
+/*∆*/     public open konst dataset: org.w3c.dom.DOMStringMap { get; }
 /*∆*/ 
 /*∆*/     public open var dir: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var draggable: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val dropzone: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst dropzone: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var hidden: kotlin.Boolean { get; set; }
 /*∆*/ 
@@ -3509,15 +3509,15 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var lang: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val offsetHeight: kotlin.Int { get; }
+/*∆*/     public open konst offsetHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val offsetLeft: kotlin.Int { get; }
+/*∆*/     public open konst offsetLeft: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val offsetParent: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst offsetParent: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val offsetTop: kotlin.Int { get; }
+/*∆*/     public open konst offsetTop: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val offsetWidth: kotlin.Int { get; }
+/*∆*/     public open konst offsetWidth: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var spellcheck: kotlin.Boolean { get; set; }
 /*∆*/ 
@@ -3536,41 +3536,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun forceSpellCheck(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3592,41 +3592,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun getSVGDocument(): org.w3c.dom.Document?
 /*∆*/ 
 /*∆*/     public companion object of HTMLEmbedElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3635,19 +3635,19 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val elements: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst elements: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -3656,41 +3656,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLFieldSetElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3704,41 +3704,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var size: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLFontElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3755,13 +3755,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var autocomplete: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val elements: org.w3c.dom.HTMLFormControlsCollection { get; }
+/*∆*/     public open konst elements: org.w3c.dom.HTMLFormControlsCollection { get; }
 /*∆*/ 
 /*∆*/     public open var encoding: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var enctype: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var method: kotlin.String { get; set; }
 /*∆*/ 
@@ -3780,50 +3780,50 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun submit(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLFormElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLFrameElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLFrameElement()
 /*∆*/ 
-/*∆*/     public open val contentDocument: org.w3c.dom.Document? { get; }
+/*∆*/     public open konst contentDocument: org.w3c.dom.Document? { get; }
 /*∆*/ 
-/*∆*/     public open val contentWindow: org.w3c.dom.Window? { get; }
+/*∆*/     public open konst contentWindow: org.w3c.dom.Window? { get; }
 /*∆*/ 
 /*∆*/     public open var frameBorder: kotlin.String { get; set; }
 /*∆*/ 
@@ -3842,41 +3842,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var src: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLFrameElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3888,41 +3888,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var rows: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLFrameSetElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3940,41 +3940,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var width: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLHRElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -3982,41 +3982,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor HTMLHeadElement()
 /*∆*/ 
 /*∆*/     public companion object of HTMLHeadElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4026,41 +4026,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var align: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLHeadingElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4070,41 +4070,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var version: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLHtmlElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4117,7 +4117,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public abstract var href: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public abstract val origin: kotlin.String { get; }
+/*∆*/     public abstract konst origin: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public abstract var password: kotlin.String { get; set; }
 /*∆*/ 
@@ -4141,9 +4141,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var allowUserMedia: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val contentDocument: org.w3c.dom.Document? { get; }
+/*∆*/     public open konst contentDocument: org.w3c.dom.Document? { get; }
 /*∆*/ 
-/*∆*/     public open val contentWindow: org.w3c.dom.Window? { get; }
+/*∆*/     public open konst contentWindow: org.w3c.dom.Window? { get; }
 /*∆*/ 
 /*∆*/     public open var frameBorder: kotlin.String { get; set; }
 /*∆*/ 
@@ -4159,7 +4159,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var referrerPolicy: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val sandbox: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst sandbox: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var scrolling: kotlin.String { get; set; }
 /*∆*/ 
@@ -4172,41 +4172,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun getSVGDocument(): org.w3c.dom.Document?
 /*∆*/ 
 /*∆*/     public companion object of HTMLIFrameElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4219,11 +4219,11 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var border: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val complete: kotlin.Boolean { get; }
+/*∆*/     public open konst complete: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public open var crossOrigin: kotlin.String? { get; set; }
 /*∆*/ 
-/*∆*/     public open val currentSrc: kotlin.String { get; }
+/*∆*/     public open konst currentSrc: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var height: kotlin.Int { get; set; }
 /*∆*/ 
@@ -4237,9 +4237,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val naturalHeight: kotlin.Int { get; }
+/*∆*/     public open konst naturalHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val naturalWidth: kotlin.Int { get; }
+/*∆*/     public open konst naturalWidth: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var referrerPolicy: kotlin.String { get; set; }
 /*∆*/ 
@@ -4255,46 +4255,46 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var width: kotlin.Int { get; set; }
 /*∆*/ 
-/*∆*/     public open val x: kotlin.Int { get; }
+/*∆*/     public open konst x: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val y: kotlin.Int { get; }
+/*∆*/     public open konst y: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLImageElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4321,9 +4321,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val files: org.w3c.files.FileList? { get; }
+/*∆*/     public open konst files: org.w3c.files.FileList? { get; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var formAction: kotlin.String { get; set; }
 /*∆*/ 
@@ -4341,9 +4341,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var inputMode: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
-/*∆*/     public open val list: org.w3c.dom.HTMLElement? { get; }
+/*∆*/     public open konst list: org.w3c.dom.HTMLElement? { get; }
 /*∆*/ 
 /*∆*/     public open var max: kotlin.String { get; set; }
 /*∆*/ 
@@ -4381,19 +4381,19 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var useMap: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open var valueAsDate: dynamic { get; set; }
+/*∆*/     public open var konstueAsDate: dynamic { get; set; }
 /*∆*/ 
-/*∆*/     public open var valueAsNumber: kotlin.Double { get; set; }
+/*∆*/     public open var konstueAsNumber: kotlin.Double { get; set; }
 /*∆*/ 
 /*∆*/     public open var width: kotlin.Int { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -4414,41 +4414,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun stepUp(n: kotlin.Int = ...): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLInputElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4461,21 +4461,21 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var keytype: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -4484,41 +4484,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLKeygenElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4527,92 +4527,92 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.Int { get; set; }
+/*∆*/     public open var konstue: kotlin.Int { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLLIElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLLabelElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLLabelElement()
 /*∆*/ 
-/*∆*/     public open val control: org.w3c.dom.HTMLElement? { get; }
+/*∆*/     public open konst control: org.w3c.dom.HTMLElement? { get; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var htmlFor: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLLabelElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4621,44 +4621,44 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var align: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLLegendElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4683,13 +4683,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var rel: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val relList: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst relList: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var rev: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var scope: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val sizes: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst sizes: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
 /*∆*/     public open var target: kotlin.String { get; set; }
 /*∆*/ 
@@ -4698,87 +4698,87 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var workerType: org.w3c.dom.WorkerType { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLLinkElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLMapElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLMapElement()
 /*∆*/ 
-/*∆*/     public open val areas: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst areas: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLMapElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -4818,58 +4818,58 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun stop(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLMarqueeElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLMediaElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLMediaElement()
 /*∆*/ 
-/*∆*/     public open val audioTracks: org.w3c.dom.AudioTrackList { get; }
+/*∆*/     public open konst audioTracks: org.w3c.dom.AudioTrackList { get; }
 /*∆*/ 
 /*∆*/     public open var autoplay: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val buffered: org.w3c.dom.TimeRanges { get; }
+/*∆*/     public open konst buffered: org.w3c.dom.TimeRanges { get; }
 /*∆*/ 
 /*∆*/     public open var controls: kotlin.Boolean { get; set; }
 /*∆*/ 
 /*∆*/     public open var crossOrigin: kotlin.String? { get; set; }
 /*∆*/ 
-/*∆*/     public open val currentSrc: kotlin.String { get; }
+/*∆*/     public open konst currentSrc: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var currentTime: kotlin.Double { get; set; }
 /*∆*/ 
@@ -4877,45 +4877,45 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var defaultPlaybackRate: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val duration: kotlin.Double { get; }
+/*∆*/     public open konst duration: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val ended: kotlin.Boolean { get; }
+/*∆*/     public open konst ended: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val error: org.w3c.dom.MediaError? { get; }
+/*∆*/     public open konst error: org.w3c.dom.MediaError? { get; }
 /*∆*/ 
 /*∆*/     public open var loop: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val mediaKeys: org.w3c.dom.encryptedmedia.MediaKeys? { get; }
+/*∆*/     public open konst mediaKeys: org.w3c.dom.encryptedmedia.MediaKeys? { get; }
 /*∆*/ 
 /*∆*/     public open var muted: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val networkState: kotlin.Short { get; }
+/*∆*/     public open konst networkState: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public open var onencrypted: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open var onwaitingforkey: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val paused: kotlin.Boolean { get; }
+/*∆*/     public open konst paused: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public open var playbackRate: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val played: org.w3c.dom.TimeRanges { get; }
+/*∆*/     public open konst played: org.w3c.dom.TimeRanges { get; }
 /*∆*/ 
 /*∆*/     public open var preload: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val readyState: kotlin.Short { get; }
+/*∆*/     public open konst readyState: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val seekable: org.w3c.dom.TimeRanges { get; }
+/*∆*/     public open konst seekable: org.w3c.dom.TimeRanges { get; }
 /*∆*/ 
-/*∆*/     public open val seeking: kotlin.Boolean { get; }
+/*∆*/     public open konst seeking: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public open var src: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var srcObject: org.w3c.dom.MediaProvider? { get; set; }
 /*∆*/ 
-/*∆*/     public open val textTracks: org.w3c.dom.TextTrackList { get; }
+/*∆*/     public open konst textTracks: org.w3c.dom.TextTrackList { get; }
 /*∆*/ 
-/*∆*/     public open val videoTracks: org.w3c.dom.VideoTrackList { get; }
+/*∆*/     public open konst videoTracks: org.w3c.dom.VideoTrackList { get; }
 /*∆*/ 
 /*∆*/     public open var volume: kotlin.Double { get; set; }
 /*∆*/ 
@@ -4936,59 +4936,59 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setMediaKeys(mediaKeys: org.w3c.dom.encryptedmedia.MediaKeys?): kotlin.js.Promise<kotlin.Unit>
 /*∆*/ 
 /*∆*/     public companion object of HTMLMediaElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_CURRENT_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_CURRENT_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_ENOUGH_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_ENOUGH_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_FUTURE_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_FUTURE_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_METADATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_METADATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_NOTHING: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_NOTHING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_EMPTY: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_EMPTY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_IDLE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_IDLE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_LOADING: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_LOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_NO_SOURCE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_NO_SOURCE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5002,41 +5002,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLMenuElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5058,41 +5058,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLMenuItemElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5108,41 +5108,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var scheme: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLMetaElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5151,7 +5151,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var high: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var low: kotlin.Double { get; set; }
 /*∆*/ 
@@ -5161,44 +5161,44 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var optimum: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.Double { get; set; }
+/*∆*/     public open var konstue: kotlin.Double { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLMeterElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5210,41 +5210,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var dateTime: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLModElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5260,41 +5260,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLOListElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5313,15 +5313,15 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var codeType: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val contentDocument: org.w3c.dom.Document? { get; }
+/*∆*/     public open konst contentDocument: org.w3c.dom.Document? { get; }
 /*∆*/ 
-/*∆*/     public open val contentWindow: org.w3c.dom.Window? { get; }
+/*∆*/     public open konst contentWindow: org.w3c.dom.Window? { get; }
 /*∆*/ 
 /*∆*/     public open var data: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var declare: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var height: kotlin.String { get; set; }
 /*∆*/ 
@@ -5337,15 +5337,15 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var useMap: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
 /*∆*/     public open var vspace: kotlin.Int { get; set; }
 /*∆*/ 
 /*∆*/     public open var width: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -5356,41 +5356,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLObjectElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5402,41 +5402,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var label: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLOptGroupElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5447,9 +5447,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
-/*∆*/     public open val index: kotlin.Int { get; }
+/*∆*/     public open konst index: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var label: kotlin.String { get; set; }
 /*∆*/ 
@@ -5457,44 +5457,44 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var text: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLOptionElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5521,23 +5521,23 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var defaultValue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
-/*∆*/     public open val htmlFor: org.w3c.dom.DOMTokenList { get; }
+/*∆*/     public open konst htmlFor: org.w3c.dom.DOMTokenList { get; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun checkValidity(): kotlin.Boolean
 /*∆*/ 
@@ -5546,41 +5546,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLOutputElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5590,41 +5590,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var align: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLParagraphElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5635,46 +5635,46 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open var valueType: kotlin.String { get; set; }
+/*∆*/     public open var konstueType: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLParamElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5682,41 +5682,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor HTMLPictureElement()
 /*∆*/ 
 /*∆*/     public companion object of HTMLPictureElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5726,91 +5726,91 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var width: kotlin.Int { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLPreElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLProgressElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLProgressElement()
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var max: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val position: kotlin.Double { get; }
+/*∆*/     public open konst position: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.Double { get; set; }
+/*∆*/     public open var konstue: kotlin.Double { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLProgressElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5820,41 +5820,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var cite: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLQuoteElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5882,41 +5882,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLScriptElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -5929,9 +5929,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open override var length: kotlin.Int { get; set; }
 /*∆*/ 
@@ -5939,25 +5939,25 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val options: org.w3c.dom.HTMLOptionsCollection { get; }
+/*∆*/     public open konst options: org.w3c.dom.HTMLOptionsCollection { get; }
 /*∆*/ 
 /*∆*/     public open var required: kotlin.Boolean { get; set; }
 /*∆*/ 
 /*∆*/     public open var selectedIndex: kotlin.Int { get; set; }
 /*∆*/ 
-/*∆*/     public open val selectedOptions: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst selectedOptions: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var size: kotlin.Int { get; set; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public final fun add(element: org.w3c.dom.UnionHTMLOptGroupElementOrHTMLOptionElement, before: dynamic = ...): kotlin.Unit
 /*∆*/ 
@@ -5974,41 +5974,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setCustomValidity(error: kotlin.String): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLSelectElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6020,41 +6020,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun assignedNodes(options: org.w3c.dom.AssignedNodesOptions = ...): kotlin.Array<org.w3c.dom.Node>
 /*∆*/ 
 /*∆*/     public companion object of HTMLSlotElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6072,41 +6072,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLSourceElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6114,41 +6114,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor HTMLSpanElement()
 /*∆*/ 
 /*∆*/     public companion object of HTMLSpanElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6162,41 +6162,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLStyleElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6206,41 +6206,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var align: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableCaptionElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6255,7 +6255,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var bgColor: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val cellIndex: kotlin.Int { get; }
+/*∆*/     public open konst cellIndex: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var ch: kotlin.String { get; set; }
 /*∆*/ 
@@ -6278,41 +6278,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var width: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableCellElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6332,41 +6332,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var width: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableColElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6387,13 +6387,13 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var frame: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val rows: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst rows: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var rules: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var summary: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val tBodies: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst tBodies: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var tFoot: org.w3c.dom.HTMLTableSectionElement? { get; set; }
 /*∆*/ 
@@ -6420,41 +6420,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun insertRow(index: kotlin.Int = ...): org.w3c.dom.HTMLTableRowElement
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6465,15 +6465,15 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var bgColor: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val cells: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst cells: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var ch: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var chOff: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val rowIndex: kotlin.Int { get; }
+/*∆*/     public open konst rowIndex: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val sectionRowIndex: kotlin.Int { get; }
+/*∆*/     public open konst sectionRowIndex: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var vAlign: kotlin.String { get; set; }
 /*∆*/ 
@@ -6482,41 +6482,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun insertCell(index: kotlin.Int = ...): org.w3c.dom.HTMLElement
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableRowElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6529,7 +6529,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var chOff: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val rows: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open konst rows: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open var vAlign: kotlin.String { get; set; }
 /*∆*/ 
@@ -6538,85 +6538,85 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun insertRow(index: kotlin.Int = ...): org.w3c.dom.HTMLElement
 /*∆*/ 
 /*∆*/     public companion object of HTMLTableSectionElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class HTMLTemplateElement : org.w3c.dom.HTMLElement {
 /*∆*/     public constructor HTMLTemplateElement()
 /*∆*/ 
-/*∆*/     public open val content: org.w3c.dom.DocumentFragment { get; }
+/*∆*/     public open konst content: org.w3c.dom.DocumentFragment { get; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTemplateElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6635,11 +6635,11 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var disabled: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val form: org.w3c.dom.HTMLFormElement? { get; }
+/*∆*/     public open konst form: org.w3c.dom.HTMLFormElement? { get; }
 /*∆*/ 
 /*∆*/     public open var inputMode: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val labels: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst labels: org.w3c.dom.NodeList { get; }
 /*∆*/ 
 /*∆*/     public open var maxLength: kotlin.Int { get; set; }
 /*∆*/ 
@@ -6661,17 +6661,17 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var selectionStart: kotlin.Int? { get; set; }
 /*∆*/ 
-/*∆*/     public open val textLength: kotlin.Int { get; }
+/*∆*/     public open konst textLength: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validationMessage: kotlin.String { get; }
+/*∆*/     public open konst konstidationMessage: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val validity: org.w3c.dom.ValidityState { get; }
+/*∆*/     public open konst konstidity: org.w3c.dom.ValidityState { get; }
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val willValidate: kotlin.Boolean { get; }
+/*∆*/     public open konst willValidate: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public open var wrap: kotlin.String { get; set; }
 /*∆*/ 
@@ -6690,41 +6690,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public final fun setSelectionRange(start: kotlin.Int, end: kotlin.Int, direction: kotlin.String = ...): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of HTMLTextAreaElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6734,41 +6734,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var dateTime: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTimeElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6778,41 +6778,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var text: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTitleElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6825,58 +6825,58 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var label: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val readyState: kotlin.Short { get; }
+/*∆*/     public open konst readyState: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public open var src: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public open var srclang: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val track: org.w3c.dom.TextTrack { get; }
+/*∆*/     public open konst track: org.w3c.dom.TextTrack { get; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLTrackElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ERROR: kotlin.Short { get; }
+/*∆*/         public final konst ERROR: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val LOADED: kotlin.Short { get; }
+/*∆*/         public final konst LOADED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val LOADING: kotlin.Short { get; }
+/*∆*/         public final konst LOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6888,41 +6888,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open var type: kotlin.String { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLUListElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6930,41 +6930,41 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public constructor HTMLUnknownElement()
 /*∆*/ 
 /*∆*/     public companion object of HTMLUnknownElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -6977,84 +6977,84 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open var poster: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val videoHeight: kotlin.Int { get; }
+/*∆*/     public open konst videoHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val videoWidth: kotlin.Int { get; }
+/*∆*/     public open konst videoWidth: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var width: kotlin.Int { get; set; }
 /*∆*/ 
 /*∆*/     public companion object of HTMLVideoElement {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_CURRENT_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_CURRENT_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_ENOUGH_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_ENOUGH_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_FUTURE_DATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_FUTURE_DATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_METADATA: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_METADATA: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val HAVE_NOTHING: kotlin.Short { get; }
+/*∆*/         public final konst HAVE_NOTHING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_EMPTY: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_EMPTY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_IDLE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_IDLE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_LOADING: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_LOADING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NETWORK_NO_SOURCE: kotlin.Short { get; }
+/*∆*/         public final konst NETWORK_NO_SOURCE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class HashChangeEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor HashChangeEvent(type: kotlin.String, eventInitDict: org.w3c.dom.HashChangeEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val newURL: kotlin.String { get; }
+/*∆*/     public open konst newURL: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val oldURL: kotlin.String { get; }
+/*∆*/     public open konst oldURL: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of HashChangeEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -7067,11 +7067,11 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class History {
 /*∆*/     public constructor History()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var scrollRestoration: org.w3c.dom.ScrollRestoration { get; set; }
 /*∆*/ 
-/*∆*/     public open val state: kotlin.Any? { get; }
+/*∆*/     public open konst state: kotlin.Any? { get; }
 /*∆*/ 
 /*∆*/     public final fun back(): kotlin.Unit
 /*∆*/ 
@@ -7105,21 +7105,21 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public open external class Image : org.w3c.dom.HTMLImageElement {
 /*∆*/     public constructor Image(width: kotlin.Int = ..., height: kotlin.Int = ...)
 /*∆*/ 
-/*∆*/     public open override val assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
+/*∆*/     public open override konst assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
 /*∆*/ 
-/*∆*/     public open override val childElementCount: kotlin.Int { get; }
+/*∆*/     public open override konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open override val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open override konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open override var contentEditable: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open override val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val isContentEditable: kotlin.Boolean { get; }
+/*∆*/     public open override konst isContentEditable: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open override val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public open override var onabort: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -7177,7 +7177,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var oninput: ((org.w3c.dom.events.InputEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override var oninvalid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
+/*∆*/     public open override var oninkonstid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open override var onkeydown: ((org.w3c.dom.events.KeyboardEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -7269,9 +7269,9 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public open override var onwheel: ((org.w3c.dom.events.WheelEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open override konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public open override fun after(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -7298,50 +7298,50 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/     public open override fun replaceWith(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Image {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class ImageBitmap : org.w3c.dom.CanvasImageSource, org.khronos.webgl.TexImageSource {
 /*∆*/     public constructor ImageBitmap()
 /*∆*/ 
-/*∆*/     public open val height: kotlin.Int { get; }
+/*∆*/     public open konst height: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Int { get; }
+/*∆*/     public open konst width: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun close(): kotlin.Unit
 /*∆*/ }
@@ -7363,7 +7363,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ public abstract external class ImageBitmapRenderingContext {
 /*∆*/     public constructor ImageBitmapRenderingContext()
 /*∆*/ 
-/*∆*/     public open val canvas: org.w3c.dom.HTMLCanvasElement { get; }
+/*∆*/     public open konst canvas: org.w3c.dom.HTMLCanvasElement { get; }
 /*∆*/ 
 /*∆*/     public final fun transferFromImageBitmap(bitmap: org.w3c.dom.ImageBitmap?): kotlin.Unit
 /*∆*/ }
@@ -7380,11 +7380,11 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ 
 /*∆*/     public constructor ImageData(data: org.khronos.webgl.Uint8ClampedArray, sw: kotlin.Int, sh: kotlin.Int = ...)
 /*∆*/ 
-/*∆*/     public open val data: org.khronos.webgl.Uint8ClampedArray { get; }
+/*∆*/     public open konst data: org.khronos.webgl.Uint8ClampedArray { get; }
 /*∆*/ 
-/*∆*/     public open val height: kotlin.Int { get; }
+/*∆*/     public open konst height: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Int { get; }
+/*∆*/     public open konst width: kotlin.Int { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ @kotlin.js.JsName(name = "null")
@@ -7400,7 +7400,7 @@ public fun <T> org.w3c.dom.ItemArrayLike<T>.asList(): kotlin.collections.List<T>
 /*∆*/ }
 /*∆*/ 
 public external interface ItemArrayLike<out T> {
-    public abstract val length: kotlin.Int { get; }
+    public abstract konst length: kotlin.Int { get; }
 
     public abstract fun item(index: kotlin.Int): T?
 }
@@ -7408,7 +7408,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Location {
 /*∆*/     public constructor Location()
 /*∆*/ 
-/*∆*/     public open val ancestorOrigins: kotlin.Array<out kotlin.String> { get; }
+/*∆*/     public open konst ancestorOrigins: kotlin.Array<out kotlin.String> { get; }
 /*∆*/ 
 /*∆*/     public open var hash: kotlin.String { get; set; }
 /*∆*/ 
@@ -7418,7 +7418,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open var href: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var pathname: kotlin.String { get; set; }
 /*∆*/ 
@@ -7438,16 +7438,16 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class MediaError {
 /*∆*/     public constructor MediaError()
 /*∆*/ 
-/*∆*/     public open val code: kotlin.Short { get; }
+/*∆*/     public open konst code: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public companion object of MediaError {
-/*∆*/         public final val MEDIA_ERR_ABORTED: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_ERR_ABORTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_ERR_DECODE: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_ERR_DECODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_ERR_NETWORK: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_ERR_NETWORK: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val MEDIA_ERR_SRC_NOT_SUPPORTED: kotlin.Short { get; }
+/*∆*/         public final konst MEDIA_ERR_SRC_NOT_SUPPORTED: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -7457,9 +7457,9 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class MediaQueryList : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor MediaQueryList()
 /*∆*/ 
-/*∆*/     public open val matches: kotlin.Boolean { get; }
+/*∆*/     public open konst matches: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val media: kotlin.String { get; }
+/*∆*/     public open konst media: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var onchange: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -7475,18 +7475,18 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class MediaQueryListEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor MediaQueryListEvent(type: kotlin.String, eventInitDict: org.w3c.dom.MediaQueryListEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val matches: kotlin.Boolean { get; }
+/*∆*/     public open konst matches: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val media: kotlin.String { get; }
+/*∆*/     public open konst media: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of MediaQueryListEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -7499,34 +7499,34 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class MessageChannel {
 /*∆*/     public constructor MessageChannel()
 /*∆*/ 
-/*∆*/     public open val port1: org.w3c.dom.MessagePort { get; }
+/*∆*/     public open konst port1: org.w3c.dom.MessagePort { get; }
 /*∆*/ 
-/*∆*/     public open val port2: org.w3c.dom.MessagePort { get; }
+/*∆*/     public open konst port2: org.w3c.dom.MessagePort { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class MessageEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor MessageEvent(type: kotlin.String, eventInitDict: org.w3c.dom.MessageEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val data: kotlin.Any? { get; }
+/*∆*/     public open konst data: kotlin.Any? { get; }
 /*∆*/ 
-/*∆*/     public open val lastEventId: kotlin.String { get; }
+/*∆*/     public open konst lastEventId: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val ports: kotlin.Array<out org.w3c.dom.MessagePort> { get; }
+/*∆*/     public open konst ports: kotlin.Array<out org.w3c.dom.MessagePort> { get; }
 /*∆*/ 
-/*∆*/     public open val source: org.w3c.dom.UnionMessagePortOrWindowProxy? { get; }
+/*∆*/     public open konst source: org.w3c.dom.UnionMessagePortOrWindowProxy? { get; }
 /*∆*/ 
 /*∆*/     public final fun initMessageEvent(type: kotlin.String, bubbles: kotlin.Boolean, cancelable: kotlin.Boolean, data: kotlin.Any?, origin: kotlin.String, lastEventId: kotlin.String, source: org.w3c.dom.UnionMessagePortOrWindowProxy?, ports: kotlin.Array<org.w3c.dom.MessagePort>): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of MessageEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -7557,13 +7557,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class MimeType {
 /*∆*/     public constructor MimeType()
 /*∆*/ 
-/*∆*/     public open val description: kotlin.String { get; }
+/*∆*/     public open konst description: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val enabledPlugin: org.w3c.dom.Plugin { get; }
+/*∆*/     public open konst enabledPlugin: org.w3c.dom.Plugin { get; }
 /*∆*/ 
-/*∆*/     public open val suffixes: kotlin.String { get; }
+/*∆*/     public open konst suffixes: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class MimeTypeArray : org.w3c.dom.ItemArrayLike<org.w3c.dom.MimeType> {
@@ -7603,23 +7603,23 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class MutationRecord {
 /*∆*/     public constructor MutationRecord()
 /*∆*/ 
-/*∆*/     public open val addedNodes: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst addedNodes: org.w3c.dom.NodeList { get; }
 /*∆*/ 
-/*∆*/     public open val attributeName: kotlin.String? { get; }
+/*∆*/     public open konst attributeName: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val attributeNamespace: kotlin.String? { get; }
+/*∆*/     public open konst attributeNamespace: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val nextSibling: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst nextSibling: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val oldValue: kotlin.String? { get; }
+/*∆*/     public open konst oldValue: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val previousSibling: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst previousSibling: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val removedNodes: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst removedNodes: org.w3c.dom.NodeList { get; }
 /*∆*/ 
-/*∆*/     public open val target: org.w3c.dom.Node { get; }
+/*∆*/     public open konst target: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class NamedNodeMap : org.w3c.dom.ItemArrayLike<org.w3c.dom.Attr> {
@@ -7643,13 +7643,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Navigator : org.w3c.dom.NavigatorID, org.w3c.dom.NavigatorLanguage, org.w3c.dom.NavigatorOnLine, org.w3c.dom.NavigatorContentUtils, org.w3c.dom.NavigatorCookies, org.w3c.dom.NavigatorPlugins, org.w3c.dom.NavigatorConcurrentHardware {
 /*∆*/     public constructor Navigator()
 /*∆*/ 
-/*∆*/     public open val clipboard: org.w3c.dom.clipboard.Clipboard { get; }
+/*∆*/     public open konst clipboard: org.w3c.dom.clipboard.Clipboard { get; }
 /*∆*/ 
-/*∆*/     public open val maxTouchPoints: kotlin.Int { get; }
+/*∆*/     public open konst maxTouchPoints: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val mediaDevices: org.w3c.dom.mediacapture.MediaDevices { get; }
+/*∆*/     public open konst mediaDevices: org.w3c.dom.mediacapture.MediaDevices { get; }
 /*∆*/ 
-/*∆*/     public open val serviceWorker: org.w3c.workers.ServiceWorkerContainer { get; }
+/*∆*/     public open konst serviceWorker: org.w3c.workers.ServiceWorkerContainer { get; }
 /*∆*/ 
 /*∆*/     public final fun getUserMedia(constraints: org.w3c.dom.mediacapture.MediaStreamConstraints, successCallback: (org.w3c.dom.mediacapture.MediaStream) -> kotlin.Unit, errorCallback: (dynamic) -> kotlin.Unit): kotlin.Unit
 /*∆*/ 
@@ -7659,7 +7659,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorConcurrentHardware {
-/*∆*/     public abstract val hardwareConcurrency: kotlin.Number { get; }
+/*∆*/     public abstract konst hardwareConcurrency: kotlin.Number { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorContentUtils {
@@ -7677,47 +7677,47 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorCookies {
-/*∆*/     public abstract val cookieEnabled: kotlin.Boolean { get; }
+/*∆*/     public abstract konst cookieEnabled: kotlin.Boolean { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorID {
-/*∆*/     public abstract val appCodeName: kotlin.String { get; }
+/*∆*/     public abstract konst appCodeName: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val appName: kotlin.String { get; }
+/*∆*/     public abstract konst appName: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val appVersion: kotlin.String { get; }
+/*∆*/     public abstract konst appVersion: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val oscpu: kotlin.String { get; }
+/*∆*/     public abstract konst oscpu: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val platform: kotlin.String { get; }
+/*∆*/     public abstract konst platform: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val product: kotlin.String { get; }
+/*∆*/     public abstract konst product: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val productSub: kotlin.String { get; }
+/*∆*/     public abstract konst productSub: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val userAgent: kotlin.String { get; }
+/*∆*/     public abstract konst userAgent: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val vendor: kotlin.String { get; }
+/*∆*/     public abstract konst vendor: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val vendorSub: kotlin.String { get; }
+/*∆*/     public abstract konst vendorSub: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public abstract fun taintEnabled(): kotlin.Boolean
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorLanguage {
-/*∆*/     public abstract val language: kotlin.String { get; }
+/*∆*/     public abstract konst language: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public abstract val languages: kotlin.Array<out kotlin.String> { get; }
+/*∆*/     public abstract konst languages: kotlin.Array<out kotlin.String> { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorOnLine {
-/*∆*/     public abstract val onLine: kotlin.Boolean { get; }
+/*∆*/     public abstract konst onLine: kotlin.Boolean { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NavigatorPlugins {
-/*∆*/     public abstract val mimeTypes: org.w3c.dom.MimeTypeArray { get; }
+/*∆*/     public abstract konst mimeTypes: org.w3c.dom.MimeTypeArray { get; }
 /*∆*/ 
-/*∆*/     public abstract val plugins: org.w3c.dom.PluginArray { get; }
+/*∆*/     public abstract konst plugins: org.w3c.dom.PluginArray { get; }
 /*∆*/ 
 /*∆*/     public abstract fun javaEnabled(): kotlin.Boolean
 /*∆*/ }
@@ -7725,31 +7725,31 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Node : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor Node()
 /*∆*/ 
-/*∆*/     public open val baseURI: kotlin.String { get; }
+/*∆*/     public open konst baseURI: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val childNodes: org.w3c.dom.NodeList { get; }
+/*∆*/     public open konst childNodes: org.w3c.dom.NodeList { get; }
 /*∆*/ 
-/*∆*/     public open val firstChild: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst firstChild: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val isConnected: kotlin.Boolean { get; }
+/*∆*/     public open konst isConnected: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val lastChild: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst lastChild: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val nextSibling: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst nextSibling: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val nodeName: kotlin.String { get; }
+/*∆*/     public open konst nodeName: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val nodeType: kotlin.Short { get; }
+/*∆*/     public open konst nodeType: kotlin.Short { get; }
 /*∆*/ 
 /*∆*/     public open var nodeValue: kotlin.String? { get; set; }
 /*∆*/ 
-/*∆*/     public open val ownerDocument: org.w3c.dom.Document? { get; }
+/*∆*/     public open konst ownerDocument: org.w3c.dom.Document? { get; }
 /*∆*/ 
-/*∆*/     public open val parentElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst parentElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val parentNode: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst parentNode: org.w3c.dom.Node? { get; }
 /*∆*/ 
-/*∆*/     public open val previousSibling: org.w3c.dom.Node? { get; }
+/*∆*/     public open konst previousSibling: org.w3c.dom.Node? { get; }
 /*∆*/ 
 /*∆*/     public open var textContent: kotlin.String? { get; set; }
 /*∆*/ 
@@ -7784,41 +7784,41 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public final fun replaceChild(node: org.w3c.dom.Node, child: org.w3c.dom.Node): org.w3c.dom.Node
 /*∆*/ 
 /*∆*/     public companion object of Node {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -7826,52 +7826,52 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public abstract fun acceptNode(node: org.w3c.dom.Node): kotlin.Short
 /*∆*/ 
 /*∆*/     public companion object of NodeFilter {
-/*∆*/         public final val FILTER_ACCEPT: kotlin.Short { get; }
+/*∆*/         public final konst FILTER_ACCEPT: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FILTER_REJECT: kotlin.Short { get; }
+/*∆*/         public final konst FILTER_REJECT: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val FILTER_SKIP: kotlin.Short { get; }
+/*∆*/         public final konst FILTER_SKIP: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_ALL: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_ALL: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_ATTRIBUTE: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_ATTRIBUTE: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_CDATA_SECTION: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_CDATA_SECTION: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_COMMENT: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_COMMENT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_DOCUMENT: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_DOCUMENT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_DOCUMENT_FRAGMENT: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_DOCUMENT_FRAGMENT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_DOCUMENT_TYPE: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_DOCUMENT_TYPE: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_ELEMENT: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_ELEMENT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_ENTITY: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_ENTITY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_ENTITY_REFERENCE: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_ENTITY_REFERENCE: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_NOTATION: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_NOTATION: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_PROCESSING_INSTRUCTION: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_PROCESSING_INSTRUCTION: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val SHOW_TEXT: kotlin.Int { get; }
+/*∆*/         public final konst SHOW_TEXT: kotlin.Int { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class NodeIterator {
 /*∆*/     public constructor NodeIterator()
 /*∆*/ 
-/*∆*/     public open val filter: org.w3c.dom.NodeFilter? { get; }
+/*∆*/     public open konst filter: org.w3c.dom.NodeFilter? { get; }
 /*∆*/ 
-/*∆*/     public open val pointerBeforeReferenceNode: kotlin.Boolean { get; }
+/*∆*/     public open konst pointerBeforeReferenceNode: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val referenceNode: org.w3c.dom.Node { get; }
+/*∆*/     public open konst referenceNode: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val root: org.w3c.dom.Node { get; }
+/*∆*/     public open konst root: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val whatToShow: kotlin.Int { get; }
+/*∆*/     public open konst whatToShow: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun detach(): kotlin.Unit
 /*∆*/ 
@@ -7887,9 +7887,9 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NonDocumentTypeChildNode {
-/*∆*/     public open val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface NonElementParentNode {
@@ -7897,23 +7897,23 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class Option : org.w3c.dom.HTMLOptionElement {
-/*∆*/     public constructor Option(text: kotlin.String = ..., value: kotlin.String = ..., defaultSelected: kotlin.Boolean = ..., selected: kotlin.Boolean = ...)
+/*∆*/     public constructor Option(text: kotlin.String = ..., konstue: kotlin.String = ..., defaultSelected: kotlin.Boolean = ..., selected: kotlin.Boolean = ...)
 /*∆*/ 
-/*∆*/     public open override val assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
+/*∆*/     public open override konst assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
 /*∆*/ 
-/*∆*/     public open override val childElementCount: kotlin.Int { get; }
+/*∆*/     public open override konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open override val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public open override konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
 /*∆*/     public open override var contentEditable: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open override val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val isContentEditable: kotlin.Boolean { get; }
+/*∆*/     public open override konst isContentEditable: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open override val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public open override var onabort: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -7971,7 +7971,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open override var oninput: ((org.w3c.dom.events.InputEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override var oninvalid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
+/*∆*/     public open override var oninkonstid: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
 /*∆*/     public open override var onkeydown: ((org.w3c.dom.events.KeyboardEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -8063,9 +8063,9 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open override var onwheel: ((org.w3c.dom.events.WheelEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open override val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val style: org.w3c.dom.css.CSSStyleDeclaration { get; }
+/*∆*/     public open override konst style: org.w3c.dom.css.CSSStyleDeclaration { get; }
 /*∆*/ 
 /*∆*/     public open override fun after(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -8092,57 +8092,57 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public open override fun replaceWith(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Option {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class PageTransitionEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor PageTransitionEvent(type: kotlin.String, eventInitDict: org.w3c.dom.PageTransitionEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val persisted: kotlin.Boolean { get; }
+/*∆*/     public open konst persisted: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public companion object of PageTransitionEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8151,13 +8151,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface ParentNode {
-/*∆*/     public abstract val childElementCount: kotlin.Int { get; }
+/*∆*/     public abstract konst childElementCount: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public abstract val children: org.w3c.dom.HTMLCollection { get; }
+/*∆*/     public abstract konst children: org.w3c.dom.HTMLCollection { get; }
 /*∆*/ 
-/*∆*/     public open val firstElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst firstElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val lastElementChild: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst lastElementChild: org.w3c.dom.Element? { get; }
 /*∆*/ 
 /*∆*/     public abstract fun append(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -8203,11 +8203,11 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Plugin : org.w3c.dom.ItemArrayLike<org.w3c.dom.MimeType> {
 /*∆*/     public constructor Plugin()
 /*∆*/ 
-/*∆*/     public open val description: kotlin.String { get; }
+/*∆*/     public open konst description: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val filename: kotlin.String { get; }
+/*∆*/     public open konst filename: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open override fun item(index: kotlin.Int): org.w3c.dom.MimeType?
 /*∆*/ 
@@ -8227,16 +8227,16 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class PopStateEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor PopStateEvent(type: kotlin.String, eventInitDict: org.w3c.dom.PopStateEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val state: kotlin.Any? { get; }
+/*∆*/     public open konst state: kotlin.Any? { get; }
 /*∆*/ 
 /*∆*/     public companion object of PopStateEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8253,62 +8253,62 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class ProcessingInstruction : org.w3c.dom.CharacterData, org.w3c.dom.css.LinkStyle, org.w3c.dom.css.UnionElementOrProcessingInstruction {
 /*∆*/     public constructor ProcessingInstruction()
 /*∆*/ 
-/*∆*/     public open val target: kotlin.String { get; }
+/*∆*/     public open konst target: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of ProcessingInstruction {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class PromiseRejectionEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor PromiseRejectionEvent(type: kotlin.String, eventInitDict: org.w3c.dom.PromiseRejectionEventInit)
 /*∆*/ 
-/*∆*/     public open val promise: kotlin.js.Promise<kotlin.Any?> { get; }
+/*∆*/     public open konst promise: kotlin.js.Promise<kotlin.Any?> { get; }
 /*∆*/ 
-/*∆*/     public open val reason: kotlin.Any? { get; }
+/*∆*/     public open konst reason: kotlin.Any? { get; }
 /*∆*/ 
 /*∆*/     public companion object of PromiseRejectionEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8321,23 +8321,23 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class RadioNodeList : org.w3c.dom.NodeList, org.w3c.dom.UnionElementOrRadioNodeList {
 /*∆*/     public constructor RadioNodeList()
 /*∆*/ 
-/*∆*/     public open var value: kotlin.String { get; set; }
+/*∆*/     public open var konstue: kotlin.String { get; set; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class Range {
 /*∆*/     public constructor Range()
 /*∆*/ 
-/*∆*/     public open val collapsed: kotlin.Boolean { get; }
+/*∆*/     public open konst collapsed: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val commonAncestorContainer: org.w3c.dom.Node { get; }
+/*∆*/     public open konst commonAncestorContainer: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val endContainer: org.w3c.dom.Node { get; }
+/*∆*/     public open konst endContainer: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val endOffset: kotlin.Int { get; }
+/*∆*/     public open konst endOffset: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val startContainer: org.w3c.dom.Node { get; }
+/*∆*/     public open konst startContainer: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val startOffset: kotlin.Int { get; }
+/*∆*/     public open konst startOffset: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun cloneContents(): org.w3c.dom.DocumentFragment
 /*∆*/ 
@@ -8386,29 +8386,29 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public final fun surroundContents(newParent: org.w3c.dom.Node): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Range {
-/*∆*/         public final val END_TO_END: kotlin.Short { get; }
+/*∆*/         public final konst END_TO_END: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val END_TO_START: kotlin.Short { get; }
+/*∆*/         public final konst END_TO_START: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val START_TO_END: kotlin.Short { get; }
+/*∆*/         public final konst START_TO_END: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val START_TO_START: kotlin.Short { get; }
+/*∆*/         public final konst START_TO_START: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class RelatedEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor RelatedEvent(type: kotlin.String, eventInitDict: org.w3c.dom.RelatedEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val relatedTarget: org.w3c.dom.events.EventTarget? { get; }
+/*∆*/     public open konst relatedTarget: org.w3c.dom.events.EventTarget? { get; }
 /*∆*/ 
 /*∆*/     public companion object of RelatedEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8428,17 +8428,17 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Screen {
 /*∆*/     public constructor Screen()
 /*∆*/ 
-/*∆*/     public open val availHeight: kotlin.Int { get; }
+/*∆*/     public open konst availHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val availWidth: kotlin.Int { get; }
+/*∆*/     public open konst availWidth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val colorDepth: kotlin.Int { get; }
+/*∆*/     public open konst colorDepth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val height: kotlin.Int { get; }
+/*∆*/     public open konst height: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val pixelDepth: kotlin.Int { get; }
+/*∆*/     public open konst pixelDepth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Int { get; }
+/*∆*/     public open konst width: kotlin.Int { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ @kotlin.js.JsName(name = "null")
@@ -8484,48 +8484,48 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class ShadowRoot : org.w3c.dom.DocumentFragment, org.w3c.dom.DocumentOrShadowRoot {
 /*∆*/     public constructor ShadowRoot()
 /*∆*/ 
-/*∆*/     public open override val fullscreenElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst fullscreenElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val host: org.w3c.dom.Element { get; }
+/*∆*/     public open konst host: org.w3c.dom.Element { get; }
 /*∆*/ 
-/*∆*/     public open val mode: org.w3c.dom.ShadowRootMode { get; }
+/*∆*/     public open konst mode: org.w3c.dom.ShadowRootMode { get; }
 /*∆*/ 
 /*∆*/     public companion object of ShadowRoot {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8544,15 +8544,15 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open override var onerror: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val port: org.w3c.dom.MessagePort { get; }
+/*∆*/     public open konst port: org.w3c.dom.MessagePort { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class SharedWorkerGlobalScope : org.w3c.dom.WorkerGlobalScope {
 /*∆*/     public constructor SharedWorkerGlobalScope()
 /*∆*/ 
-/*∆*/     public open val applicationCache: org.w3c.dom.ApplicationCache { get; }
+/*∆*/     public open konst applicationCache: org.w3c.dom.ApplicationCache { get; }
 /*∆*/ 
-/*∆*/     public open val name: kotlin.String { get; }
+/*∆*/     public open konst name: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var onconnect: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -8560,13 +8560,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface Slotable {
-/*∆*/     public open val assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
+/*∆*/     public open konst assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class Storage {
 /*∆*/     public constructor Storage()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun clear(): kotlin.Unit
 /*∆*/ 
@@ -8576,30 +8576,30 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public final fun removeItem(key: kotlin.String): kotlin.Unit
 /*∆*/ 
-/*∆*/     public final fun setItem(key: kotlin.String, value: kotlin.String): kotlin.Unit
+/*∆*/     public final fun setItem(key: kotlin.String, konstue: kotlin.String): kotlin.Unit
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class StorageEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor StorageEvent(type: kotlin.String, eventInitDict: org.w3c.dom.StorageEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val key: kotlin.String? { get; }
+/*∆*/     public open konst key: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val newValue: kotlin.String? { get; }
+/*∆*/     public open konst newValue: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val oldValue: kotlin.String? { get; }
+/*∆*/     public open konst oldValue: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val storageArea: org.w3c.dom.Storage? { get; }
+/*∆*/     public open konst storageArea: org.w3c.dom.Storage? { get; }
 /*∆*/ 
-/*∆*/     public open val url: kotlin.String { get; }
+/*∆*/     public open konst url: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of StorageEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8618,13 +8618,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class Text : org.w3c.dom.CharacterData, org.w3c.dom.Slotable, org.w3c.dom.GeometryUtils {
 /*∆*/     public constructor Text(data: kotlin.String = ...)
 /*∆*/ 
-/*∆*/     public open override val assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
+/*∆*/     public open override konst assignedSlot: org.w3c.dom.HTMLSlotElement? { get; }
 /*∆*/ 
-/*∆*/     public open override val nextElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst nextElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open override val previousElementSibling: org.w3c.dom.Element? { get; }
+/*∆*/     public open override konst previousElementSibling: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val wholeText: kotlin.String { get; }
+/*∆*/     public open konst wholeText: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open override fun after(vararg nodes: dynamic): kotlin.Unit
 /*∆*/ 
@@ -8645,94 +8645,94 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public final fun splitText(offset: kotlin.Int): org.w3c.dom.Text
 /*∆*/ 
 /*∆*/     public companion object of Text {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class TextMetrics {
 /*∆*/     public constructor TextMetrics()
 /*∆*/ 
-/*∆*/     public open val actualBoundingBoxAscent: kotlin.Double { get; }
+/*∆*/     public open konst actualBoundingBoxAscent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val actualBoundingBoxDescent: kotlin.Double { get; }
+/*∆*/     public open konst actualBoundingBoxDescent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val actualBoundingBoxLeft: kotlin.Double { get; }
+/*∆*/     public open konst actualBoundingBoxLeft: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val actualBoundingBoxRight: kotlin.Double { get; }
+/*∆*/     public open konst actualBoundingBoxRight: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val alphabeticBaseline: kotlin.Double { get; }
+/*∆*/     public open konst alphabeticBaseline: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val emHeightAscent: kotlin.Double { get; }
+/*∆*/     public open konst emHeightAscent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val emHeightDescent: kotlin.Double { get; }
+/*∆*/     public open konst emHeightDescent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val fontBoundingBoxAscent: kotlin.Double { get; }
+/*∆*/     public open konst fontBoundingBoxAscent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val fontBoundingBoxDescent: kotlin.Double { get; }
+/*∆*/     public open konst fontBoundingBoxDescent: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val hangingBaseline: kotlin.Double { get; }
+/*∆*/     public open konst hangingBaseline: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val ideographicBaseline: kotlin.Double { get; }
+/*∆*/     public open konst ideographicBaseline: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Double { get; }
+/*∆*/     public open konst width: kotlin.Double { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class TextTrack : org.w3c.dom.events.EventTarget, org.w3c.dom.UnionAudioTrackOrTextTrackOrVideoTrack {
 /*∆*/     public constructor TextTrack()
 /*∆*/ 
-/*∆*/     public open val activeCues: org.w3c.dom.TextTrackCueList? { get; }
+/*∆*/     public open konst activeCues: org.w3c.dom.TextTrackCueList? { get; }
 /*∆*/ 
-/*∆*/     public open val cues: org.w3c.dom.TextTrackCueList? { get; }
+/*∆*/     public open konst cues: org.w3c.dom.TextTrackCueList? { get; }
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val inBandMetadataTrackDispatchType: kotlin.String { get; }
+/*∆*/     public open konst inBandMetadataTrackDispatchType: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val kind: org.w3c.dom.TextTrackKind { get; }
+/*∆*/     public open konst kind: org.w3c.dom.TextTrackKind { get; }
 /*∆*/ 
-/*∆*/     public open val label: kotlin.String { get; }
+/*∆*/     public open konst label: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val language: kotlin.String { get; }
+/*∆*/     public open konst language: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var mode: org.w3c.dom.TextTrackMode { get; set; }
 /*∆*/ 
 /*∆*/     public open var oncuechange: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
+/*∆*/     public open konst sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
 /*∆*/ 
 /*∆*/     public final fun addCue(cue: org.w3c.dom.TextTrackCue): kotlin.Unit
 /*∆*/ 
@@ -8754,13 +8754,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open var startTime: kotlin.Double { get; set; }
 /*∆*/ 
-/*∆*/     public open val track: org.w3c.dom.TextTrack? { get; }
+/*∆*/     public open konst track: org.w3c.dom.TextTrack? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class TextTrackCueList {
 /*∆*/     public constructor TextTrackCueList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun getCueById(id: kotlin.String): org.w3c.dom.TextTrackCue?
 /*∆*/ }
@@ -8774,7 +8774,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class TextTrackList : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor TextTrackList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var onaddtrack: ((org.w3c.dom.TrackEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -8794,7 +8794,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class TimeRanges {
 /*∆*/     public constructor TimeRanges()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun end(index: kotlin.Int): kotlin.Double
 /*∆*/ 
@@ -8804,50 +8804,50 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class Touch {
 /*∆*/     public constructor Touch()
 /*∆*/ 
-/*∆*/     public open val clientX: kotlin.Int { get; }
+/*∆*/     public open konst clientX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val clientY: kotlin.Int { get; }
+/*∆*/     public open konst clientY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val identifier: kotlin.Int { get; }
+/*∆*/     public open konst identifier: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val pageX: kotlin.Int { get; }
+/*∆*/     public open konst pageX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val pageY: kotlin.Int { get; }
+/*∆*/     public open konst pageY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val region: kotlin.String? { get; }
+/*∆*/     public open konst region: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val screenX: kotlin.Int { get; }
+/*∆*/     public open konst screenX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val screenY: kotlin.Int { get; }
+/*∆*/     public open konst screenY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val target: org.w3c.dom.events.EventTarget { get; }
+/*∆*/     public open konst target: org.w3c.dom.events.EventTarget { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class TouchEvent : org.w3c.dom.events.UIEvent {
 /*∆*/     public constructor TouchEvent()
 /*∆*/ 
-/*∆*/     public open val altKey: kotlin.Boolean { get; }
+/*∆*/     public open konst altKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val changedTouches: org.w3c.dom.TouchList { get; }
+/*∆*/     public open konst changedTouches: org.w3c.dom.TouchList { get; }
 /*∆*/ 
-/*∆*/     public open val ctrlKey: kotlin.Boolean { get; }
+/*∆*/     public open konst ctrlKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val metaKey: kotlin.Boolean { get; }
+/*∆*/     public open konst metaKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val shiftKey: kotlin.Boolean { get; }
+/*∆*/     public open konst shiftKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val targetTouches: org.w3c.dom.TouchList { get; }
+/*∆*/     public open konst targetTouches: org.w3c.dom.TouchList { get; }
 /*∆*/ 
-/*∆*/     public open val touches: org.w3c.dom.TouchList { get; }
+/*∆*/     public open konst touches: org.w3c.dom.TouchList { get; }
 /*∆*/ 
 /*∆*/     public companion object of TouchEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8860,16 +8860,16 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public open external class TrackEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor TrackEvent(type: kotlin.String, eventInitDict: org.w3c.dom.TrackEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val track: org.w3c.dom.UnionAudioTrackOrTextTrackOrVideoTrack? { get; }
+/*∆*/     public open konst track: org.w3c.dom.UnionAudioTrackOrTextTrackOrVideoTrack? { get; }
 /*∆*/ 
 /*∆*/     public companion object of TrackEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -8882,11 +8882,11 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open var currentNode: org.w3c.dom.Node { get; set; }
 /*∆*/ 
-/*∆*/     public open val filter: org.w3c.dom.NodeFilter? { get; }
+/*∆*/     public open konst filter: org.w3c.dom.NodeFilter? { get; }
 /*∆*/ 
-/*∆*/     public open val root: org.w3c.dom.Node { get; }
+/*∆*/     public open konst root: org.w3c.dom.Node { get; }
 /*∆*/ 
-/*∆*/     public open val whatToShow: kotlin.Int { get; }
+/*∆*/     public open konst whatToShow: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun firstChild(): org.w3c.dom.Node?
 /*∆*/ 
@@ -8924,49 +8924,49 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class ValidityState {
 /*∆*/     public constructor ValidityState()
 /*∆*/ 
-/*∆*/     public open val badInput: kotlin.Boolean { get; }
+/*∆*/     public open konst badInput: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val customError: kotlin.Boolean { get; }
+/*∆*/     public open konst customError: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val patternMismatch: kotlin.Boolean { get; }
+/*∆*/     public open konst patternMismatch: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val rangeOverflow: kotlin.Boolean { get; }
+/*∆*/     public open konst rangeOverflow: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val rangeUnderflow: kotlin.Boolean { get; }
+/*∆*/     public open konst rangeUnderflow: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val stepMismatch: kotlin.Boolean { get; }
+/*∆*/     public open konst stepMismatch: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val tooLong: kotlin.Boolean { get; }
+/*∆*/     public open konst tooLong: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val tooShort: kotlin.Boolean { get; }
+/*∆*/     public open konst tooShort: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val typeMismatch: kotlin.Boolean { get; }
+/*∆*/     public open konst typeMismatch: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val valid: kotlin.Boolean { get; }
+/*∆*/     public open konst konstid: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val valueMissing: kotlin.Boolean { get; }
+/*∆*/     public open konst konstueMissing: kotlin.Boolean { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class VideoTrack : org.w3c.dom.UnionAudioTrackOrTextTrackOrVideoTrack {
 /*∆*/     public constructor VideoTrack()
 /*∆*/ 
-/*∆*/     public open val id: kotlin.String { get; }
+/*∆*/     public open konst id: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val kind: kotlin.String { get; }
+/*∆*/     public open konst kind: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val label: kotlin.String { get; }
+/*∆*/     public open konst label: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val language: kotlin.String { get; }
+/*∆*/     public open konst language: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public open var selected: kotlin.Boolean { get; set; }
 /*∆*/ 
-/*∆*/     public open val sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
+/*∆*/     public open konst sourceBuffer: org.w3c.dom.mediasource.SourceBuffer? { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class VideoTrackList : org.w3c.dom.events.EventTarget {
 /*∆*/     public constructor VideoTrackList()
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public open var onaddtrack: ((org.w3c.dom.TrackEvent) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -8974,7 +8974,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open var onremovetrack: ((org.w3c.dom.TrackEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val selectedIndex: kotlin.Int { get; }
+/*∆*/     public open konst selectedIndex: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun getTrackById(id: kotlin.String): org.w3c.dom.VideoTrack?
 /*∆*/ }
@@ -8984,9 +8984,9 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public final var binaryType: org.w3c.dom.BinaryType { get; set; }
 /*∆*/ 
-/*∆*/     public open val bufferedAmount: kotlin.Number { get; }
+/*∆*/     public open konst bufferedAmount: kotlin.Number { get; }
 /*∆*/ 
-/*∆*/     public open val extensions: kotlin.String { get; }
+/*∆*/     public open konst extensions: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final var onclose: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -8996,11 +8996,11 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public final var onopen: ((org.w3c.dom.events.Event) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val protocol: kotlin.String { get; }
+/*∆*/     public open konst protocol: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val readyState: kotlin.Short { get; }
+/*∆*/     public open konst readyState: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val url: kotlin.String { get; }
+/*∆*/     public open konst url: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun close(code: kotlin.Short = ..., reason: kotlin.String = ...): kotlin.Unit
 /*∆*/ 
@@ -9013,90 +9013,90 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public final fun send(data: org.w3c.files.Blob): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of WebSocket {
-/*∆*/         public final val CLOSED: kotlin.Short { get; }
+/*∆*/         public final konst CLOSED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CLOSING: kotlin.Short { get; }
+/*∆*/         public final konst CLOSING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CONNECTING: kotlin.Short { get; }
+/*∆*/         public final konst CONNECTING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val OPEN: kotlin.Short { get; }
+/*∆*/         public final konst OPEN: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class Window : org.w3c.dom.events.EventTarget, org.w3c.dom.GlobalEventHandlers, org.w3c.dom.WindowEventHandlers, org.w3c.dom.WindowOrWorkerGlobalScope, org.w3c.dom.WindowSessionStorage, org.w3c.dom.WindowLocalStorage, org.w3c.performance.GlobalPerformance, org.w3c.dom.UnionMessagePortOrWindowProxy {
 /*∆*/     public constructor Window()
 /*∆*/ 
-/*∆*/     public open val applicationCache: org.w3c.dom.ApplicationCache { get; }
+/*∆*/     public open konst applicationCache: org.w3c.dom.ApplicationCache { get; }
 /*∆*/ 
-/*∆*/     public open val closed: kotlin.Boolean { get; }
+/*∆*/     public open konst closed: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val customElements: org.w3c.dom.CustomElementRegistry { get; }
+/*∆*/     public open konst customElements: org.w3c.dom.CustomElementRegistry { get; }
 /*∆*/ 
-/*∆*/     public open val devicePixelRatio: kotlin.Double { get; }
+/*∆*/     public open konst devicePixelRatio: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val document: org.w3c.dom.Document { get; }
+/*∆*/     public open konst document: org.w3c.dom.Document { get; }
 /*∆*/ 
-/*∆*/     public open val external: org.w3c.dom.External { get; }
+/*∆*/     public open konst external: org.w3c.dom.External { get; }
 /*∆*/ 
-/*∆*/     public open val frameElement: org.w3c.dom.Element? { get; }
+/*∆*/     public open konst frameElement: org.w3c.dom.Element? { get; }
 /*∆*/ 
-/*∆*/     public open val frames: org.w3c.dom.Window { get; }
+/*∆*/     public open konst frames: org.w3c.dom.Window { get; }
 /*∆*/ 
-/*∆*/     public open val history: org.w3c.dom.History { get; }
+/*∆*/     public open konst history: org.w3c.dom.History { get; }
 /*∆*/ 
-/*∆*/     public open val innerHeight: kotlin.Int { get; }
+/*∆*/     public open konst innerHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val innerWidth: kotlin.Int { get; }
+/*∆*/     public open konst innerWidth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val length: kotlin.Int { get; }
+/*∆*/     public open konst length: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val location: org.w3c.dom.Location { get; }
+/*∆*/     public open konst location: org.w3c.dom.Location { get; }
 /*∆*/ 
-/*∆*/     public open val locationbar: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst locationbar: org.w3c.dom.BarProp { get; }
 /*∆*/ 
-/*∆*/     public open val menubar: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst menubar: org.w3c.dom.BarProp { get; }
 /*∆*/ 
 /*∆*/     public open var name: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val navigator: org.w3c.dom.Navigator { get; }
+/*∆*/     public open konst navigator: org.w3c.dom.Navigator { get; }
 /*∆*/ 
 /*∆*/     public open var opener: kotlin.Any? { get; set; }
 /*∆*/ 
-/*∆*/     public open val outerHeight: kotlin.Int { get; }
+/*∆*/     public open konst outerHeight: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val outerWidth: kotlin.Int { get; }
+/*∆*/     public open konst outerWidth: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val pageXOffset: kotlin.Double { get; }
+/*∆*/     public open konst pageXOffset: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val pageYOffset: kotlin.Double { get; }
+/*∆*/     public open konst pageYOffset: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val parent: org.w3c.dom.Window { get; }
+/*∆*/     public open konst parent: org.w3c.dom.Window { get; }
 /*∆*/ 
-/*∆*/     public open val personalbar: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst personalbar: org.w3c.dom.BarProp { get; }
 /*∆*/ 
-/*∆*/     public open val screen: org.w3c.dom.Screen { get; }
+/*∆*/     public open konst screen: org.w3c.dom.Screen { get; }
 /*∆*/ 
-/*∆*/     public open val screenX: kotlin.Int { get; }
+/*∆*/     public open konst screenX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val screenY: kotlin.Int { get; }
+/*∆*/     public open konst screenY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val scrollX: kotlin.Double { get; }
+/*∆*/     public open konst scrollX: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val scrollY: kotlin.Double { get; }
+/*∆*/     public open konst scrollY: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val scrollbars: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst scrollbars: org.w3c.dom.BarProp { get; }
 /*∆*/ 
-/*∆*/     public open val self: org.w3c.dom.Window { get; }
+/*∆*/     public open konst self: org.w3c.dom.Window { get; }
 /*∆*/ 
 /*∆*/     public open var status: kotlin.String { get; set; }
 /*∆*/ 
-/*∆*/     public open val statusbar: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst statusbar: org.w3c.dom.BarProp { get; }
 /*∆*/ 
-/*∆*/     public open val toolbar: org.w3c.dom.BarProp { get; }
+/*∆*/     public open konst toolbar: org.w3c.dom.BarProp { get; }
 /*∆*/ 
-/*∆*/     public open val top: org.w3c.dom.Window { get; }
+/*∆*/     public open konst top: org.w3c.dom.Window { get; }
 /*∆*/ 
-/*∆*/     public open val window: org.w3c.dom.Window { get; }
+/*∆*/     public open konst window: org.w3c.dom.Window { get; }
 /*∆*/ 
 /*∆*/     public final fun alert(): kotlin.Unit
 /*∆*/ 
@@ -9186,19 +9186,19 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface WindowLocalStorage {
-/*∆*/     public abstract val localStorage: org.w3c.dom.Storage { get; }
+/*∆*/     public abstract konst localStorage: org.w3c.dom.Storage { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface WindowOrWorkerGlobalScope {
-/*∆*/     public abstract val caches: org.w3c.workers.CacheStorage { get; }
+/*∆*/     public abstract konst caches: org.w3c.workers.CacheStorage { get; }
 /*∆*/ 
-/*∆*/     public abstract val origin: kotlin.String { get; }
+/*∆*/     public abstract konst origin: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public abstract fun atob(data: kotlin.String): kotlin.String
 /*∆*/ 
 /*∆*/     public abstract fun btoa(data: kotlin.String): kotlin.String
 /*∆*/ 
-/*∆*/     public abstract fun clearInterval(handle: kotlin.Int = ...): kotlin.Unit
+/*∆*/     public abstract fun clearInterkonst(handle: kotlin.Int = ...): kotlin.Unit
 /*∆*/ 
 /*∆*/     public abstract fun clearTimeout(handle: kotlin.Int = ...): kotlin.Unit
 /*∆*/ 
@@ -9208,13 +9208,13 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public abstract fun fetch(input: dynamic, init: org.w3c.fetch.RequestInit = ...): kotlin.js.Promise<org.w3c.fetch.Response>
 /*∆*/ 
-/*∆*/     public abstract fun setInterval(handler: dynamic, timeout: kotlin.Int = ..., vararg arguments: kotlin.Any?): kotlin.Int
+/*∆*/     public abstract fun setInterkonst(handler: dynamic, timeout: kotlin.Int = ..., vararg arguments: kotlin.Any?): kotlin.Int
 /*∆*/ 
 /*∆*/     public abstract fun setTimeout(handler: dynamic, timeout: kotlin.Int = ..., vararg arguments: kotlin.Any?): kotlin.Int
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface WindowSessionStorage {
-/*∆*/     public abstract val sessionStorage: org.w3c.dom.Storage { get; }
+/*∆*/     public abstract konst sessionStorage: org.w3c.dom.Storage { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public open external class Worker : org.w3c.dom.events.EventTarget, org.w3c.dom.AbstractWorker {
@@ -9232,9 +9232,9 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class WorkerGlobalScope : org.w3c.dom.events.EventTarget, org.w3c.dom.WindowOrWorkerGlobalScope, org.w3c.performance.GlobalPerformance {
 /*∆*/     public constructor WorkerGlobalScope()
 /*∆*/ 
-/*∆*/     public open val location: org.w3c.dom.WorkerLocation { get; }
+/*∆*/     public open konst location: org.w3c.dom.WorkerLocation { get; }
 /*∆*/ 
-/*∆*/     public open val navigator: org.w3c.dom.WorkerNavigator { get; }
+/*∆*/     public open konst navigator: org.w3c.dom.WorkerNavigator { get; }
 /*∆*/ 
 /*∆*/     public open var onerror: ((dynamic, kotlin.String, kotlin.Int, kotlin.Int, kotlin.Any?) -> dynamic)? { get; set; }
 /*∆*/ 
@@ -9248,7 +9248,7 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ 
 /*∆*/     public open var onunhandledrejection: ((org.w3c.dom.PromiseRejectionEvent) -> dynamic)? { get; set; }
 /*∆*/ 
-/*∆*/     public open val self: org.w3c.dom.WorkerGlobalScope { get; }
+/*∆*/     public open konst self: org.w3c.dom.WorkerGlobalScope { get; }
 /*∆*/ 
 /*∆*/     public final fun importScripts(vararg urls: kotlin.String): kotlin.Unit
 /*∆*/ }
@@ -9256,29 +9256,29 @@ public external interface ItemArrayLike<out T> {
 /*∆*/ public abstract external class WorkerLocation {
 /*∆*/     public constructor WorkerLocation()
 /*∆*/ 
-/*∆*/     public open val hash: kotlin.String { get; }
+/*∆*/     public open konst hash: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val host: kotlin.String { get; }
+/*∆*/     public open konst host: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val hostname: kotlin.String { get; }
+/*∆*/     public open konst hostname: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val href: kotlin.String { get; }
+/*∆*/     public open konst href: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val origin: kotlin.String { get; }
+/*∆*/     public open konst origin: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val pathname: kotlin.String { get; }
+/*∆*/     public open konst pathname: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val port: kotlin.String { get; }
+/*∆*/     public open konst port: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val protocol: kotlin.String { get; }
+/*∆*/     public open konst protocol: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val search: kotlin.String { get; }
+/*∆*/     public open konst search: kotlin.String { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public abstract external class WorkerNavigator : org.w3c.dom.NavigatorID, org.w3c.dom.NavigatorLanguage, org.w3c.dom.NavigatorOnLine, org.w3c.dom.NavigatorConcurrentHardware {
 /*∆*/     public constructor WorkerNavigator()
 /*∆*/ 
-/*∆*/     public open val serviceWorker: org.w3c.workers.ServiceWorkerContainer { get; }
+/*∆*/     public open konst serviceWorker: org.w3c.workers.ServiceWorkerContainer { get; }
 /*∆*/ }
 /*∆*/ 
 /*∆*/ public external interface WorkerOptions {
@@ -9297,41 +9297,41 @@ public external interface ItemArrayLike<out T> {
 /*∆*/     public constructor XMLDocument()
 /*∆*/ 
 /*∆*/     public companion object of XMLDocument {
-/*∆*/         public final val ATTRIBUTE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ATTRIBUTE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CDATA_SECTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst CDATA_SECTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val COMMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst COMMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_FRAGMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINED_BY: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_CONTAINS: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_DISCONNECTED: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_FOLLOWING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_POSITION_PRECEDING: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOCUMENT_TYPE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst DOCUMENT_TYPE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ELEMENT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ELEMENT_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val ENTITY_REFERENCE_NODE: kotlin.Short { get; }
+/*∆*/         public final konst ENTITY_REFERENCE_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NOTATION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst NOTATION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
+/*∆*/         public final konst PROCESSING_INSTRUCTION_NODE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val TEXT_NODE: kotlin.Short { get; }
+/*∆*/         public final konst TEXT_NODE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 

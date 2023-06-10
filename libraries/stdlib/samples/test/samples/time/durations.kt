@@ -49,22 +49,22 @@ class Durations {
 
     @Sample
     fun parse() {
-        val isoFormatString = "PT1H30M"
-        val defaultFormatString = "1h 30m"
-        val singleUnitFormatString = "1.5h"
-        val invalidFormatString = "1 hour 30 minutes"
+        konst isoFormatString = "PT1H30M"
+        konst defaultFormatString = "1h 30m"
+        konst singleUnitFormatString = "1.5h"
+        konst inkonstidFormatString = "1 hour 30 minutes"
 
         assertPrints(Duration.parse(isoFormatString), "1h 30m")
         assertPrints(Duration.parse(defaultFormatString), "1h 30m")
         assertPrints(Duration.parse(singleUnitFormatString), "1h 30m")
-        assertFails { Duration.parse(invalidFormatString) }
-        assertPrints(Duration.parseOrNull(invalidFormatString), "null")
+        assertFails { Duration.parse(inkonstidFormatString) }
+        assertPrints(Duration.parseOrNull(inkonstidFormatString), "null")
     }
 
     @Sample
     fun parseIsoString() {
-        val isoFormatString = "PT1H30M"
-        val defaultFormatString = "1h 30m"
+        konst isoFormatString = "PT1H30M"
+        konst defaultFormatString = "1h 30m"
 
         assertPrints(Duration.parseIsoString(isoFormatString), "1h 30m")
         assertFails { Duration.parseIsoString(defaultFormatString) }

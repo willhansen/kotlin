@@ -2,10 +2,10 @@
 package d
 
 fun bar() {
-    val i: Int? = 42
+    konst i: Int? = 42
     if (i != null) {
         <!OVERLOAD_RESOLUTION_AMBIGUITY!>doSmth1<!> {
-        val x = i + 1
+        konst x = i + 1
     }
 }
 }

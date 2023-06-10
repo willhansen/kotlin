@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-val prop = mapOf(
+konst prop = mapOf(
     to("a", "b"),
     to("a", "b"),
     to("a", "b"),

@@ -89,10 +89,10 @@ public final class DelegatesWithErrors {
     public final operator fun getValue(/*0*/ thisRef: kotlin.Any?, /*1*/ prop: kotlin.String): kotlin.String
     public final operator fun getValue(/*0*/ prop: kotlin.reflect.KProperty<*>): kotlin.String
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public final operator fun setValue(/*0*/ thisRef: kotlin.Any?, /*1*/ prop: kotlin.String, /*2*/ value: kotlin.String): kotlin.Unit
+    public final operator fun setValue(/*0*/ thisRef: kotlin.Any?, /*1*/ prop: kotlin.String, /*2*/ konstue: kotlin.String): kotlin.Unit
     public final operator fun setValue(/*0*/ thisRef: kotlin.Any?, /*1*/ prop: kotlin.reflect.KProperty<*>, /*2*/ f: kotlin.Float = ...): kotlin.Unit
     public final operator fun setValue(/*0*/ thisRef: kotlin.Any?, /*1*/ prop: kotlin.reflect.KProperty<*>, /*2*/ vararg n: kotlin.Int /*kotlin.IntArray*/): kotlin.Unit
-    public final operator fun setValue(/*0*/ prop: kotlin.reflect.KProperty<*>, /*1*/ value: kotlin.String): kotlin.Unit
+    public final operator fun setValue(/*0*/ prop: kotlin.reflect.KProperty<*>, /*1*/ konstue: kotlin.String): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 

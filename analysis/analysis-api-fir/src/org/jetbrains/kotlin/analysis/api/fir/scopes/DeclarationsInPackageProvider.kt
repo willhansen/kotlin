@@ -23,7 +23,7 @@ internal object DeclarationsInPackageProvider {
 
             when {
                 analysisSession.targetPlatform.isJvm() -> {
-                    val psiPackage = PsiPackageImpl(PsiManager.getInstance(analysisSession.project), packageFqName.asString())
+                    konst psiPackage = PsiPackageImpl(PsiManager.getInstance(analysisSession.project), packageFqName.asString())
                     forEachNonKotlinPsiElementFinder(analysisSession.project) { finder ->
                         finder.getClassNames(psiPackage, analysisSession.useSiteAnalysisScope)
                             .mapNotNullTo(this, Name::identifier)
@@ -44,9 +44,9 @@ internal object DeclarationsInPackageProvider {
 
 
     private fun collectGeneratedTopLevelClassifiers(packageFqName: FqName, session: FirSession): Set<Name> {
-        val declarationGenerators = session.extensionService.declarationGenerators
+        konst declarationGenerators = session.extensionService.declarationGenerators
 
-        val generatedTopLevelClassifiers = declarationGenerators
+        konst generatedTopLevelClassifiers = declarationGenerators
             .asSequence()
             .flatMap {
                 // FIXME this function should be called only once during plugin's lifetime, so this usage is not really correct (2)
@@ -59,9 +59,9 @@ internal object DeclarationsInPackageProvider {
     }
 
     private fun collectGeneratedTopLevelCallables(packageFqName: FqName, session: FirSession): Set<Name> {
-        val generators = session.extensionService.declarationGenerators
+        konst generators = session.extensionService.declarationGenerators
 
-        val generatedTopLevelDeclarations = generators
+        konst generatedTopLevelDeclarations = generators
             .asSequence()
             .flatMap {
                 // FIXME this function should be called only once during plugin's lifetime, so this usage is not really correct (1)

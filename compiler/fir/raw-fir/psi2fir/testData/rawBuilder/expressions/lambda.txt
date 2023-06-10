@@ -4,10 +4,10 @@ FILE: lambda.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? [ComponentFunctionSymbolKey=/Tuple.component1, IsFromPrimaryConstructor=true] val x: Int = R|<local>/x|
+        public? final? [ComponentFunctionSymbolKey=/Tuple.component1, IsFromPrimaryConstructor=true] konst x: Int = R|<local>/x|
             public? [ContainingClassKey=Tuple] get(): Int
 
-        public? final? [ComponentFunctionSymbolKey=/Tuple.component2, IsFromPrimaryConstructor=true] val y: Int = R|<local>/y|
+        public? final? [ComponentFunctionSymbolKey=/Tuple.component2, IsFromPrimaryConstructor=true] konst y: Int = R|<local>/y|
             public? [ContainingClassKey=Tuple] get(): Int
 
         public? final operator fun component1(): Int
@@ -21,15 +21,15 @@ FILE: lambda.kt
         ^use f#(Tuple#(IntegerLiteral(1), IntegerLiteral(2)))
     }
     public? final? fun foo(): Int {
-        lval l1: <implicit> = fun <implicit>.<anonymous>(t: Tuple): <implicit> <inline=Unknown>  {
-            lval x: <implicit> = t#.x#
-            lval y: <implicit> = t#.y#
+        lkonst l1: <implicit> = fun <implicit>.<anonymous>(t: Tuple): <implicit> <inline=Unknown>  {
+            lkonst x: <implicit> = t#.x#
+            lkonst y: <implicit> = t#.y#
             x#.plus#(y#)
         }
 
         use#(<L> = use@fun <implicit>.<anonymous>(<destruct>: <implicit>): <implicit> <inline=Unknown>  {
-            lval x: <implicit> = R|<local>/<destruct>|.component1#()
-            lval y: <implicit> = R|<local>/<destruct>|.component2#()
+            lkonst x: <implicit> = R|<local>/<destruct>|.component1#()
+            lkonst y: <implicit> = R|<local>/<destruct>|.component2#()
             x#.plus#(y#)
         }
         )
@@ -57,7 +57,7 @@ FILE: lambda.kt
         )
     }
     public? final? fun test(list: List<Int>): R|kotlin/Unit| {
-        lval map: <implicit> = mutableMapOf#<Int, String>()
+        lkonst map: <implicit> = mutableMapOf#<Int, String>()
         list#.forEach#(<L> = forEach@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
             +=(map#.getOrPut#(it#, getOrPut@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                 mutableListOf#()
@@ -66,17 +66,17 @@ FILE: lambda.kt
         }
         )
     }
-    public? final? val simple: <implicit> = fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
+    public? final? konst simple: <implicit> = fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
         ^ Unit
     }
 
         public? get(): <implicit>
-    public? final? val simpleWithArrow: <implicit> = fun <implicit>.<anonymous>(<no-parameters>)(): <implicit> <inline=Unknown>  {
+    public? final? konst simpleWithArrow: <implicit> = fun <implicit>.<anonymous>(<no-parameters>)(): <implicit> <inline=Unknown>  {
         ^ Unit
     }
 
         public? get(): <implicit>
-    public? final? val another: <implicit> = fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
+    public? final? konst another: <implicit> = fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
         IntegerLiteral(42)
     }
 

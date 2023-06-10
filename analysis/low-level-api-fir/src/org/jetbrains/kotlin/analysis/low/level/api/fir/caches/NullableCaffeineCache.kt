@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.fir.caches.NullValue
 import org.jetbrains.kotlin.analysis.low.level.api.fir.fir.caches.nullValueToNull
 
 /**
- * A wrapper around a Caffeine [Cache] which stores `null` values returned by the computation in the form of explicit [NullValue]s. On a
+ * A wrapper around a Caffeine [Cache] which stores `null` konstues returned by the computation in the form of explicit [NullValue]s. On a
  * conceptual level, this allows the cache to store failures so that future accesses to the same key don't recompute the same failure.
  */
 internal class NullableCaffeineCache<K : Any, V : Any>(configure: (Caffeine<Any, Any>) -> Caffeine<Any, Any>) {
-    private val cache: Cache<K, Any> = configure(Caffeine.newBuilder()).build()
+    private konst cache: Cache<K, Any> = configure(Caffeine.newBuilder()).build()
 
     /**
-     * Returns the value for the given [key] if it's contained in the cache, or computes the value with [compute] and adds it to the cache.
+     * Returns the konstue for the given [key] if it's contained in the cache, or computes the konstue with [compute] and adds it to the cache.
      */
     fun get(key: K, compute: (K) -> V?): V? = cache.get(key) { compute(it) ?: NullValue }?.nullValueToNull()
 }

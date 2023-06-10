@@ -14,9 +14,9 @@ fun xml(name: String, vararg args: Pair<String, Any>, block: XmlNode.() -> Unit 
     return XmlNode(name, args.asList(), block)
 }
 
-class XmlNode(val name: String, private val args: List<Pair<String, Any>>, block: XmlNode.() -> Unit = {}) {
-    private val children = mutableListOf<XmlNode>()
-    private var value: Any? = null
+class XmlNode(konst name: String, private konst args: List<Pair<String, Any>>, block: XmlNode.() -> Unit = {}) {
+    private konst children = mutableListOf<XmlNode>()
+    private var konstue: Any? = null
 
     init {
         @Suppress("UNUSED_EXPRESSION")
@@ -32,20 +32,20 @@ class XmlNode(val name: String, private val args: List<Pair<String, Any>>, block
     }
 
     fun raw(text: String) {
-        value = text
+        konstue = text
     }
 
     private fun toElement(): Element {
-        val element = Element(name)
+        konst element = Element(name)
 
         for (arg in args) {
             element.setAttribute(arg.first, arg.second.toString())
         }
 
-        require(value == null || children.isEmpty())
+        require(konstue == null || children.isEmpty())
 
-        value?.let { value ->
-            element.addContent(value.toString())
+        konstue?.let { konstue ->
+            element.addContent(konstue.toString())
         }
 
         for (child in children) {
@@ -56,8 +56,8 @@ class XmlNode(val name: String, private val args: List<Pair<String, Any>>, block
     }
 
     override fun toString(): String {
-        val document = Document().also { it.rootElement = toElement() }
-        val output = XMLOutputter().also { it.format = Format.getPrettyFormat() }
+        konst document = Document().also { it.rootElement = toElement() }
+        konst output = XMLOutputter().also { it.format = Format.getPrettyFormat() }
         return output.outputString(document)
     }
 }

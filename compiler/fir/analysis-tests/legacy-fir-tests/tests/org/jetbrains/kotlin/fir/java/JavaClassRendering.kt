@@ -21,18 +21,18 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirCallableSymbol
 
 @OptIn(SymbolInternals::class)
 fun renderJavaClass(renderer: FirRenderer, javaClass: FirJavaClass, session: FirSession, renderInnerClasses: () -> Unit) {
-    val memberScope = javaClass.unsubstitutedScope(session, ScopeSession(), withForcedTypeCalculator = true, memberRequiredPhase = null)
+    konst memberScope = javaClass.unsubstitutedScope(session, ScopeSession(), withForcedTypeCalculator = true, memberRequiredPhase = null)
 
-    val staticScope = javaClass.scopeProvider.getStaticScope(javaClass, session, ScopeSession())
+    konst staticScope = javaClass.scopeProvider.getStaticScope(javaClass, session, ScopeSession())
 
     renderer.renderAnnotations(javaClass)
     renderer.renderMemberDeclarationClass(javaClass)
     renderer.renderSupertypes(javaClass)
     renderer.printer.renderInBraces {
-        val renderedDeclarations = mutableListOf<FirDeclaration>()
+        konst renderedDeclarations = mutableListOf<FirDeclaration>()
 
         fun renderAndCache(symbol: FirCallableSymbol<*>) {
-            val enhanced = symbol.fir
+            konst enhanced = symbol.fir
             if (enhanced !in renderedDeclarations) {
                 renderer.renderElementAsString(enhanced)
                 renderer.printer.newLine()
@@ -43,7 +43,7 @@ fun renderJavaClass(renderer: FirRenderer, javaClass: FirJavaClass, session: Fir
         for (declaration in javaClass.declarations) {
             if (declaration in renderedDeclarations) continue
 
-            val scopeToUse =
+            konst scopeToUse =
                 if (declaration is FirCallableDeclaration && declaration.status.isStatic)
                     staticScope
                 else

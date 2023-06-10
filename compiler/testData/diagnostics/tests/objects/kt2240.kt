@@ -7,7 +7,7 @@ class A {}
 
 fun <T> A.foo(f : T) {}
 
-val o = object {
+konst o = object {
     fun <T> foo(f: T) {
         A().foo(f) // Ambiguity here!
     }

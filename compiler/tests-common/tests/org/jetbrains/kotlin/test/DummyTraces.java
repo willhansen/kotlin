@@ -71,7 +71,7 @@ public class DummyTraces {
         }
 
         @Override
-        public <K, V> void record(WritableSlice<K, V> slice, K key, V value) {
+        public <K, V> void record(WritableSlice<K, V> slice, K key, V konstue) {
         }
 
         @Override
@@ -159,7 +159,7 @@ public class DummyTraces {
         }
 
         @Override
-        public <K, V> void record(WritableSlice<K, V> slice, K key, V value) {
+        public <K, V> void record(WritableSlice<K, V> slice, K key, V konstue) {
         }
 
         @Override

@@ -7,11 +7,11 @@ class A {
     fun g(i: Int, s: Double): Int {}
     fun g(s: Int, i: Double): String {}
 
-    private val i: Int = { 0 }()
-    private val i: String = { "" }()
+    private konst i: Int = { 0 }()
+    private konst i: String = { "" }()
 
-    private val j: String = { "a" }()
-    private val j: String = { "b" }()
+    private konst j: String = { "a" }()
+    private konst j: String = { "b" }()
 }
 
 // FIR_COMPARISON

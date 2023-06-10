@@ -3,5 +3,5 @@ interface T {
 }
 
 class <!CONFLICTING_JVM_DECLARATIONS!>C<!> : T {
-    <!CONFLICTING_JVM_DECLARATIONS!>val x<!> = 1
+    <!CONFLICTING_JVM_DECLARATIONS!>konst x<!> = 1
 }

@@ -30,7 +30,7 @@ public final class FileLocalIdSignature extends
   private FileLocalIdSignature(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -70,10 +70,10 @@ public final class FileLocalIdSignature extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -91,7 +91,7 @@ public final class FileLocalIdSignature extends
     public FileLocalIdSignature parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new FileLocalIdSignature(input, extensionRegistry);
     }
   };
@@ -217,23 +217,23 @@ public final class FileLocalIdSignature extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parseFrom(java.io.InputStream input)
@@ -377,7 +377,7 @@ public final class FileLocalIdSignature extends
       org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -405,9 +405,9 @@ public final class FileLocalIdSignature extends
     /**
      * <code>required int32 container = 1;</code>
      */
-    public Builder setContainer(int value) {
+    public Builder setContainer(int konstue) {
       bitField0_ |= 0x00000001;
-      container_ = value;
+      container_ = konstue;
       
       return this;
     }
@@ -437,9 +437,9 @@ public final class FileLocalIdSignature extends
     /**
      * <code>required int64 local_id = 2;</code>
      */
-    public Builder setLocalId(long value) {
+    public Builder setLocalId(long konstue) {
       bitField0_ |= 0x00000002;
-      localId_ = value;
+      localId_ = konstue;
       
       return this;
     }
@@ -469,9 +469,9 @@ public final class FileLocalIdSignature extends
     /**
      * <code>optional int32 debug_info = 3;</code>
      */
-    public Builder setDebugInfo(int value) {
+    public Builder setDebugInfo(int konstue) {
       bitField0_ |= 0x00000004;
-      debugInfo_ = value;
+      debugInfo_ = konstue;
       
       return this;
     }

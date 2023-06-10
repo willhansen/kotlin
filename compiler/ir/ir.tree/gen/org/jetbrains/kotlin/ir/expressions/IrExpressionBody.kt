@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.expressionBody]
  */
 abstract class IrExpressionBody : IrBody() {
-    abstract val factory: IrFactory
+    abstract konst factory: IrFactory
 
     abstract var expression: IrExpression
 

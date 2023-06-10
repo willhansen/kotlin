@@ -6,15 +6,15 @@ package foo
 
 fun <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>delete<!>() {}
 
-val <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>instanceof<!> = 4
+konst <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>instanceof<!> = 4
 
-class <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>eval<!>
+class <!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>ekonst<!>
 
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"await"<!>)
 fun foo() {}
 
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"this"<!>)
-val bar = 4
+konst bar = 4
 
 @JsName(<!NON_CONSUMABLE_EXPORTED_IDENTIFIER!>"super"<!>)
 class Baz
@@ -22,7 +22,7 @@ class Baz
 class Test {
     fun instanceof() {}
 
-    @JsName("eval")
+    @JsName("ekonst")
     fun test() {}
 }
 

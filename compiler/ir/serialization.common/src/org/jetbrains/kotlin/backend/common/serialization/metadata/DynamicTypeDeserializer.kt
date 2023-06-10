@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.typeUtil.builtIns
 
 object DynamicTypeDeserializer : FlexibleTypeDeserializer {
-    const val id = DYNAMIC_TYPE_DESERIALIZER_ID
+    const konst id = DYNAMIC_TYPE_DESERIALIZER_ID
 
     override fun create(proto: ProtoBuf.Type, flexibleId: String, lowerBound: SimpleType, upperBound: SimpleType): KotlinType {
         if (flexibleId != id) {

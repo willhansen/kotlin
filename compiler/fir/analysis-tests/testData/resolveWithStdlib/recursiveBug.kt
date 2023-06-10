@@ -1,11 +1,11 @@
 class Foo(name: () -> String) {
-    val result = run { name() }
+    konst result = run { name() }
 
-    val name = result.length
+    konst name = result.length
 }
 
 fun bar(name: () -> String) {
-    val result = run { name() }
+    konst result = run { name() }
 
-    val name = result.length
+    konst name = result.length
 }

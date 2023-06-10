@@ -22,11 +22,11 @@ internal fun runJvmInstance(
     classPath: List<File>,
     classNameToRun: String,
 ) {
-    val javaExe = File(jdkHome, "bin/java.exe").takeIf(File::exists)
+    konst javaExe = File(jdkHome, "bin/java.exe").takeIf(File::exists)
         ?: File(jdkHome, "bin/java").takeIf(File::exists)
         ?: error("Can't find 'java' executable in $jdkHome")
 
-    val command = arrayOf(
+    konst command = arrayOf(
         javaExe.absolutePath,
         "-ea",
         *additionalArgs.toTypedArray(),
@@ -35,7 +35,7 @@ internal fun runJvmInstance(
         classNameToRun,
     )
 
-    val process = ProcessBuilder(*command).inheritIO().start()
+    konst process = ProcessBuilder(*command).inheritIO().start()
     process.waitFor(1, TimeUnit.MINUTES)
     process.outputStream.flush()
     AbstractBlackBoxCodegenTest.assertEquals(0, process.exitValue())

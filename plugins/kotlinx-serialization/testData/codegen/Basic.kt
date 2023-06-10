@@ -4,10 +4,10 @@
 import kotlinx.serialization.*
 
 @Serializable
-class User(val firstName: String, val lastName: String)
+class User(konst firstName: String, konst lastName: String)
 
 @Serializable
-class OptionalUser(val user: User = User("", ""))
+class OptionalUser(konst user: User = User("", ""))
 
 @Serializable
-class ListOfUsers(val list: List<User>)
+class ListOfUsers(konst list: List<User>)

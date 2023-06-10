@@ -7,7 +7,7 @@ import kotlin.coroutines.intrinsics.*
 var globalResult = ""
 var wasCalled = false
 class Controller {
-    val postponedActions = mutableListOf<() -> Unit>()
+    konst postponedActions = mutableListOf<() -> Unit>()
 
     suspend fun suspendWithValue(v: String): String = suspendCoroutineUninterceptedOrReturn { x ->
         postponedActions.add {
@@ -37,7 +37,7 @@ class Controller {
 }
 
 fun builder(expectException: Boolean = false, c: suspend Controller.() -> String) {
-    val controller = Controller()
+    konst controller = Controller()
 
     globalResult = "#"
     wasCalled = false

@@ -24,7 +24,7 @@ object KtFe10PolyVariantResolver : ResolveCache.PolyVariantResolver<KtReference>
 
     private fun resolveToPsiElements(ref: KtFe10Reference): Collection<PsiElement> {
         require(ref is AbstractKtReference<*>) { "reference should be AbstractKtReference, but was ${ref::class}" }
-        val bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(ref.expression)
+        konst bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(ref.expression)
         if (bindingContext == BindingContext.EMPTY) return emptySet()
         return resolveToPsiElements(ref, bindingContext, ref.getTargetDescriptors(bindingContext))
     }
@@ -38,7 +38,7 @@ object KtFe10PolyVariantResolver : ResolveCache.PolyVariantResolver<KtReference>
             return targetDescriptors.flatMap { target -> resolveToPsiElements(ref, target) }.toSet()
         }
 
-        val labelTargets = getLabelTargets(ref, context)
+        konst labelTargets = getLabelTargets(ref, context)
         if (labelTargets != null) {
             return labelTargets
         }
@@ -50,16 +50,16 @@ object KtFe10PolyVariantResolver : ResolveCache.PolyVariantResolver<KtReference>
         ref: KtFe10Reference,
         targetDescriptor: DeclarationDescriptor
     ): Collection<PsiElement> = if (targetDescriptor is PackageViewDescriptor) {
-        val psiFacade = JavaPsiFacade.getInstance(ref.element.project)
-        val fqName = targetDescriptor.fqName.asString()
+        konst psiFacade = JavaPsiFacade.getInstance(ref.element.project)
+        konst fqName = targetDescriptor.fqName.asString()
         listOfNotNull(psiFacade.findPackage(fqName))
     } else {
         DescriptorToSourceUtilsIde.getAllDeclarations(ref.element.project, targetDescriptor, ref.element.resolveScope)
     }
 
     private fun getLabelTargets(ref: KtFe10Reference, context: BindingContext): Collection<PsiElement>? {
-        val reference = ref.element as? KtReferenceExpression ?: return null
-        val labelTarget = context[BindingContext.LABEL_TARGET, reference]
+        konst reference = ref.element as? KtReferenceExpression ?: return null
+        konst labelTarget = context[BindingContext.LABEL_TARGET, reference]
         if (labelTarget != null) {
             return listOf(labelTarget)
         }
@@ -70,7 +70,7 @@ object KtFe10PolyVariantResolver : ResolveCache.PolyVariantResolver<KtReference>
     // TODO: Old impl from IDE side has this logic wrapped inside runWithCancellationCheck. Figure out what we should do here.
     override fun resolve(ref: KtReference, incompleteCode: Boolean): Array<ResolveResult> {
         require(ref is KtFe10Reference) { "reference should be KtFe10Reference, but was ${ref::class}" }
-        val resolveToPsiElements = resolveToPsiElements(ref)
+        konst resolveToPsiElements = resolveToPsiElements(ref)
         return resolveToPsiElements.map { KotlinResolveResult(it) }.toTypedArray()
     }
 }

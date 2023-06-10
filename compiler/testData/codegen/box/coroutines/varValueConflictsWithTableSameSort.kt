@@ -18,7 +18,7 @@ fun builder(c: suspend Controller.() -> Unit) {
 fun box(): String {
     var result = "fail 1"
     builder {
-        // Initialize var with Int value
+        // Initialize var with Int konstue
         try {
             var i: String = "abc"
             i = "123"

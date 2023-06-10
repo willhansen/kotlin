@@ -9,9 +9,9 @@ import org.gradle.api.artifacts.Configuration
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 class GradleKpmNativeVariantConstructor<T : GradleKpmNativeVariantInternal>(
-    val konanTarget: KonanTarget,
-    val variantClass: Class<T>,
-    private val constructor: (
+    konst konanTarget: KonanTarget,
+    konst variantClass: Class<T>,
+    private konst constructor: (
         containingModule: GradleKpmModule,
         fragmentName: String,
         dependencyConfigurations: GradleKpmFragmentDependencyConfigurations,

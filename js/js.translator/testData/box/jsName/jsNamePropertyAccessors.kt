@@ -2,7 +2,7 @@
 package foo
 
 external class A {
-    val xx: Int
+    konst xx: Int
         @JsName("getX") get
 
     var yy: Int
@@ -15,7 +15,7 @@ external var zz: Int
     @JsName("setZ") set
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     assertEquals(23, a.xx)
     assertEquals(0, a.yy)

@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.daemon.common
 import org.jetbrains.kotlin.cli.common.repl.ReplCheckResult
 import org.jetbrains.kotlin.cli.common.repl.ReplCodeLine
 import org.jetbrains.kotlin.cli.common.repl.ReplCompileResult
-import org.jetbrains.kotlin.cli.common.repl.ReplEvalResult
+import org.jetbrains.kotlin.cli.common.repl.ReplEkonstResult
 import java.io.File
 import java.io.Serializable
 import java.rmi.Remote
@@ -39,12 +39,12 @@ interface CompileService : Remote {
     }
 
     companion object {
-        val NO_SESSION: Int = 0
+        konst NO_SESSION: Int = 0
     }
 
     sealed class CallResult<out R> : Serializable {
 
-        class Good<out R>(val result: R) : CallResult<R>() {
+        class Good<out R>(konst result: R) : CallResult<R>() {
             override fun get(): R = result
             override fun equals(other: Any?): Boolean = other is Good<*> && this.result == other.result
             override fun hashCode(): Int = this::class.java.hashCode() + (result?.hashCode() ?: 1)
@@ -62,7 +62,7 @@ interface CompileService : Remote {
             override fun hashCode(): Int = this::class.java.hashCode() + 1 // see comment to Ok.hashCode
         }
 
-        class Error(val message: String?, val cause: Throwable?) : CallResult<Nothing>() {
+        class Error(konst message: String?, konst cause: Throwable?) : CallResult<Nothing>() {
             constructor(cause: Throwable) : this(message = null, cause = cause)
             constructor(message: String) : this(message = message, cause = null)
 
@@ -71,7 +71,7 @@ interface CompileService : Remote {
             override fun hashCode(): Int = this::class.java.hashCode() + (cause?.hashCode() ?: 1) + (message?.hashCode() ?: 2) // see comment to Ok.hashCode
         }
 
-        val isGood: Boolean get() = this is Good<*>
+        konst isGood: Boolean get() = this is Good<*>
 
         abstract fun get(): R
     }

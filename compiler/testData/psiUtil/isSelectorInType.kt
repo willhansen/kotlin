@@ -8,15 +8,15 @@ fun <T1: /*false*/test.some.Test,
         T3: test.some./*true*/Test,
         T: /*false*/Test> foo(a: /*false*/test.some.Test, b: test./*true*/some.Test, c: test.some./*true*/Test, d: /*false*/Test) {
 
-    val t1: /*false*/test.some.Test? = null
-    val t2: test./*true*/some.Test? = null
-    val t3: test.some./*true*/Test? = null
-    val t4: /*false*/Test? = null
+    konst t1: /*false*/test.some.Test? = null
+    konst t2: test./*true*/some.Test? = null
+    konst t3: test.some./*true*/Test? = null
+    konst t4: /*false*/Test? = null
 
-    val t5: GTest</*false*/test.some.Test>? = null
-    val t6: GTest<test./*true*/some.Test>? = null
-    val t7: GTest<test.some./*true*/Test>? = null
-    val t8: GTest</*false*/Test>? = null
-    val t9: test.some.GTest</*false*/Test>? = null
-    val t10: /*false*/GTest<Test>? = null
+    konst t5: GTest</*false*/test.some.Test>? = null
+    konst t6: GTest<test./*true*/some.Test>? = null
+    konst t7: GTest<test.some./*true*/Test>? = null
+    konst t8: GTest</*false*/Test>? = null
+    konst t9: test.some.GTest</*false*/Test>? = null
+    konst t10: /*false*/GTest<Test>? = null
 }

@@ -17,6 +17,6 @@ class TestClass : Test {
 }
 
 fun box(): String {
-    val foo = TestClass()
+    konst foo = TestClass()
     return foo.test()
 }

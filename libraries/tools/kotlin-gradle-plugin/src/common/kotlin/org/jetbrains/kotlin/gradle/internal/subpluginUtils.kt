@@ -27,18 +27,18 @@ import java.nio.charset.StandardCharsets
 import java.util.*
 
 fun encodePluginOptions(options: Map<String, List<String>>): String {
-    val os = ByteArrayOutputStream()
-    val oos = ObjectOutputStream(os)
+    konst os = ByteArrayOutputStream()
+    konst oos = ObjectOutputStream(os)
 
     oos.writeInt(options.size)
-    for ((key, values) in options.entries) {
+    for ((key, konstues) in options.entries) {
         oos.writeUTF(key)
 
-        oos.writeInt(values.size)
-        for (value in values) {
-            val valueBytes = value.toByteArray(StandardCharsets.UTF_8)
-            oos.writeInt(valueBytes.size)
-            oos.write(valueBytes)
+        oos.writeInt(konstues.size)
+        for (konstue in konstues) {
+            konst konstueBytes = konstue.toByteArray(StandardCharsets.UTF_8)
+            oos.writeInt(konstueBytes.size)
+            oos.write(konstueBytes)
         }
     }
 
@@ -53,17 +53,17 @@ internal fun CompilerPluginOptions.withWrappedKaptOptions(
     compiledSourcesDir: List<File> = emptyList(),
     processIncrementally: Boolean = false
 ): CompilerPluginOptions {
-    val resultOptionsByPluginId: MutableMap<String, List<SubpluginOption>> =
+    konst resultOptionsByPluginId: MutableMap<String, List<SubpluginOption>> =
         subpluginOptionsByPluginId.toMutableMap()
 
     resultOptionsByPluginId.compute(Kapt3GradleSubplugin.KAPT_SUBPLUGIN_ID) { _, kaptOptions ->
-        val changedFilesOption = changedFiles.map { SubpluginOption("changedFile", it.normalize().absolutePath) }
-        val classpathChangesOption = classpathChanges.map { SubpluginOption("classpathChange", it) }
-        val processIncrementallyOption = SubpluginOption("processIncrementally", processIncrementally.toString())
-        val compiledSourcesOption =
+        konst changedFilesOption = changedFiles.map { SubpluginOption("changedFile", it.normalize().absolutePath) }
+        konst classpathChangesOption = classpathChanges.map { SubpluginOption("classpathChange", it) }
+        konst processIncrementallyOption = SubpluginOption("processIncrementally", processIncrementally.toString())
+        konst compiledSourcesOption =
             FilesSubpluginOption("compiledSourcesDir", compiledSourcesDir).takeIf { compiledSourcesDir.isNotEmpty() }
 
-        val kaptOptionsWithClasspath =
+        konst kaptOptionsWithClasspath =
             kaptOptions.orEmpty() +
                     withApClasspath.map { FilesSubpluginOption("apclasspath", listOf(it)) } +
                     changedFilesOption +
@@ -74,7 +74,7 @@ internal fun CompilerPluginOptions.withWrappedKaptOptions(
         wrapPluginOptions(kaptOptionsWithClasspath.filterNotNull(), "configuration")
     }
 
-    val result = CompilerPluginOptions()
+    konst result = CompilerPluginOptions()
     resultOptionsByPluginId.forEach { pluginId, options ->
         options.forEach { option -> result.addPluginArgument(pluginId, option) }
     }
@@ -82,12 +82,12 @@ internal fun CompilerPluginOptions.withWrappedKaptOptions(
 }
 
 fun wrapPluginOptions(options: List<SubpluginOption>, newOptionName: String): List<SubpluginOption> {
-    val encodedOptions = lazy {
-        val groupedOptions = options
+    konst encodedOptions = lazy {
+        konst groupedOptions = options
             .groupBy { it.key }
-            .mapValues { (_, options) -> options.map { it.value } }
+            .mapValues { (_, options) -> options.map { it.konstue } }
         encodePluginOptions(groupedOptions)
     }
-    val singleOption = CompositeSubpluginOption(newOptionName, encodedOptions, options)
+    konst singleOption = CompositeSubpluginOption(newOptionName, encodedOptions, options)
     return listOf(singleOption)
 }

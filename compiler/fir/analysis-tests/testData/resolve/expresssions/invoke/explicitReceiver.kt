@@ -5,7 +5,7 @@ fun x() {
 
 class Foo {
 
-    val x: Foo = Foo()
+    konst x: Foo = Foo()
 
     operator fun invoke(): Foo { return this }
 
@@ -15,7 +15,7 @@ class Foo {
 class Bar {
     fun x() {}
 
-    val x: Bar = Bar()
+    konst x: Bar = Bar()
 
     operator fun invoke(): Bar { return this }
 

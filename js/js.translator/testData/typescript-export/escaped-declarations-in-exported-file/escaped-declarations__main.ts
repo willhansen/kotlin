@@ -11,26 +11,26 @@ function assert(condition: boolean) {
 }
 
 function box(): string {
-    assert(foo.invalid_args_name_sum(10, 20) === 30);
-    assert((foo as any)["invalid@name sum"](10, 20) === 30);
+    assert(foo.inkonstid_args_name_sum(10, 20) === 30);
+    assert((foo as any)["inkonstid@name sum"](10, 20) === 30);
 
-    assert((foo as any)["invalid name val"] === 1);
-    assert((foo as any)["invalid@name var"] === 1);
-    (foo as any)["invalid@name var"] = 4
-    assert((foo as any)["invalid@name var"] === 4);
+    assert((foo as any)["inkonstid name konst"] === 1);
+    assert((foo as any)["inkonstid@name var"] === 1);
+    (foo as any)["inkonstid@name var"] = 4
+    assert((foo as any)["inkonstid@name var"] === 4);
 
-    new (foo as any)["Invalid A"]();
+    new (foo as any)["Inkonstid A"]();
 
-    assert(new A1(10, 20)["first value"] === 10);
-    assert(new A1(10, 20)["second.value"] === 20);
+    assert(new A1(10, 20)["first konstue"] === 10);
+    assert(new A1(10, 20)["second.konstue"] === 20);
 
-    assert(new A2()["invalid:name"] === 42);
+    assert(new A2()["inkonstid:name"] === 42);
 
     const a3 = new A3()
-    assert(a3.invalid_args_name_sum(10, 20) === 30);
-    assert(a3["invalid@name sum"](10, 20) === 30);
+    assert(a3.inkonstid_args_name_sum(10, 20) === 30);
+    assert(a3["inkonstid@name sum"](10, 20) === 30);
 
-    assert(A4.Companion["@invalid+name@"] == 23);
+    assert(A4.Companion["@inkonstid+name@"] == 23);
     assert(A4.Companion["^)run.something.weird^("]() === ")_(");
 
     return "OK";

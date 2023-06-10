@@ -25,11 +25,11 @@ sealed interface CirProvidedClassifiers {
     }
 
     companion object {
-        internal val FALLBACK_FORWARD_DECLARATION_CLASS =
+        internal konst FALLBACK_FORWARD_DECLARATION_CLASS =
             CirProvided.RegularClass(emptyList(), emptyList(), Visibilities.Public, ClassKind.CLASS)
 
         fun of(vararg delegates: CirProvidedClassifiers): CirProvidedClassifiers {
-            val unwrappedDelegates: List<CirProvidedClassifiers> = delegates.fold(ArrayList()) { acc, delegate ->
+            konst unwrappedDelegates: List<CirProvidedClassifiers> = delegates.fold(ArrayList()) { acc, delegate ->
                 when (delegate) {
                     EMPTY -> Unit
                     is CompositeClassifiers -> acc.addAll(delegate.delegates)
@@ -59,7 +59,7 @@ internal operator fun CirProvidedClassifiers.plus(other: CirProvidedClassifiers)
     }
 }
 
-private class CompositeClassifiers(val delegates: List<CirProvidedClassifiers>) : CirProvidedClassifiers {
+private class CompositeClassifiers(konst delegates: List<CirProvidedClassifiers>) : CirProvidedClassifiers {
     override fun hasClassifier(classifierId: CirEntityId) = delegates.any { it.hasClassifier(classifierId) }
 
     override fun classifier(classifierId: CirEntityId): CirProvided.Classifier? {

@@ -13,12 +13,12 @@ import org.jetbrains.kotlin.ir.util.fileOrNull
 import org.jetbrains.kotlin.ir.util.getPackageFragment
 import org.jetbrains.kotlin.library.KotlinLibrary
 
-internal abstract class LlvmModuleSpecificationBase(protected val cachedLibraries: CachedLibraries) : LlvmModuleSpecification {
+internal abstract class LlvmModuleSpecificationBase(protected konst cachedLibraries: CachedLibraries) : LlvmModuleSpecification {
     override fun importsKotlinDeclarationsFromOtherObjectFiles(): Boolean =
-            cachedLibraries.hasStaticCaches // A bit conservative but still valid.
+            cachedLibraries.hasStaticCaches // A bit conservative but still konstid.
 
     override fun importsKotlinDeclarationsFromOtherSharedLibraries(): Boolean =
-            cachedLibraries.hasDynamicCaches // A bit conservative but still valid.
+            cachedLibraries.hasDynamicCaches // A bit conservative but still konstid.
 
     override fun containsModule(module: IrModuleFragment): Boolean =
             containsModule(module.descriptor)
@@ -37,17 +37,17 @@ internal abstract class LlvmModuleSpecificationBase(protected val cachedLibrarie
 
 internal class DefaultLlvmModuleSpecification(cachedLibraries: CachedLibraries)
     : LlvmModuleSpecificationBase(cachedLibraries) {
-    override val isFinal = true
+    override konst isFinal = true
 
     override fun containsLibrary(library: KotlinLibrary): Boolean = !cachedLibraries.isLibraryCached(library)
 }
 
 internal class CacheLlvmModuleSpecification(
         cachedLibraries: CachedLibraries,
-        private val libraryToCache: PartialCacheInfo,
-        private val containsStdlib: Boolean,
+        private konst libraryToCache: PartialCacheInfo,
+        private konst containsStdlib: Boolean,
 ) : LlvmModuleSpecificationBase(cachedLibraries) {
-    override val isFinal = false
+    override konst isFinal = false
 
     override fun containsLibrary(library: KotlinLibrary): Boolean = library == libraryToCache.klib
 

@@ -8,8 +8,8 @@ class Boxed<Q> {
 
 fun accept(p: Outer<String>.Inner<Int>) {}
 
-val rr = Outer<String>().Inner<Int>()
-val rrq = Boxed<String>().substitute()
+konst rr = Outer<String>().Inner<Int>()
+konst rrq = Boxed<String>().substitute()
 
 fun check() {
     accept(<!ARGUMENT_TYPE_MISMATCH!>Outer<Int>().Inner<Int>()<!>) // illegal

@@ -17,6 +17,6 @@ class ClassWithPrivateVarSignatureChanged {
 class ClassWithGetterAndSetterForPrivateVarChanged {
     private var x: Int
     get() = 200
-    set(value) {}
+    set(konstue) {}
     public fun unchangedFun() {}
 }

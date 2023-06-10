@@ -19,16 +19,16 @@ import java.io.File
  * Creates fake NodeJS module directory from given gradle [dependency].
  */
 internal class GradleNodeModuleBuilder(
-    val fs: FileSystemOperations,
-    val archiveOperations: ArchiveOperations,
-    val moduleName: String,
-    val moduleVersion: String,
-    val srcFiles: Collection<File>,
-    val cacheDir: File
+    konst fs: FileSystemOperations,
+    konst archiveOperations: ArchiveOperations,
+    konst moduleName: String,
+    konst moduleVersion: String,
+    konst srcFiles: Collection<File>,
+    konst cacheDir: File
 ) {
     private var srcPackageJsonFile: File? = null
-    private val files = mutableListOf<File>()
-    private val fileTrees: MutableList<FileTree> = mutableListOf()
+    private konst files = mutableListOf<File>()
+    private konst fileTrees: MutableList<FileTree> = mutableListOf()
 
     fun visitArtifacts() {
         srcFiles.forEach { srcFile ->
@@ -61,16 +61,16 @@ internal class GradleNodeModuleBuilder(
     fun rebuild(): File? {
         if (files.isEmpty() && srcPackageJsonFile == null) return null
 
-        val packageJson = fromSrcPackageJson(srcPackageJsonFile)?.apply {
-            // Gson set nulls reflectively no matter on default values and non-null types
+        konst packageJson = fromSrcPackageJson(srcPackageJsonFile)?.apply {
+            // Gson set nulls reflectively no matter on default konstues and non-null types
             @Suppress("USELESS_ELVIS")
             version = version ?: moduleVersion
         } ?: PackageJson(moduleName, moduleVersion)
 
-        val metaFiles = files.filter { it.name.endsWith(".$META_JS") }
+        konst metaFiles = files.filter { it.name.endsWith(".$META_JS") }
         if (metaFiles.size == 1) {
-            val metaFile = metaFiles.single()
-            val name = metaFile.name.removeSuffix(".$META_JS")
+            konst metaFile = metaFiles.single()
+            konst name = metaFile.name.removeSuffix(".$META_JS")
             packageJson.name = name
             packageJson.main = "${name}.js"
         }
@@ -80,7 +80,7 @@ internal class GradleNodeModuleBuilder(
         // yarn requires semver
         packageJson.version = fixSemver(packageJson.version)
 
-        val actualFiles = files.filterNot { it.name.endsWith(".$META_JS") }
+        konst actualFiles = files.filterNot { it.name.endsWith(".$META_JS") }
 
         return makeNodeModule(cacheDir, packageJson) { nodeModule ->
             fs.copy { copy ->
@@ -91,7 +91,7 @@ internal class GradleNodeModuleBuilder(
     }
 }
 
-internal val File.isCompatibleArchive
+internal konst File.isCompatibleArchive
     get() = isFile
             && (extension == "jar"
             || extension == "zip"
@@ -99,7 +99,7 @@ internal val File.isCompatibleArchive
 
 private fun isKotlinJsRuntimeFile(file: File): Boolean {
     if (!file.isFile) return false
-    val name = file.name
+    konst name = file.name
     return name.endsWith(".$JS")
             || name.endsWith(".$JS_MAP")
             || name.endsWith(".$HTML")

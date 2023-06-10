@@ -15,15 +15,15 @@ fun printHierarchyGraph(builder: AbstractFirTreeBuilder) {
         else -> "red"
     }
 
-    val elements = builder.elements
+    konst elements = builder.elements
 
-    data class Edge(val from: String, val to: String) {
+    data class Edge(konst from: String, konst to: String) {
         override fun toString(): String {
             return "$from -> $to"
         }
     }
 
-    val (interfaces, classes) = elements.partition { it.kind == Implementation.Kind.Interface }
+    konst (interfaces, classes) = elements.partition { it.kind == Implementation.Kind.Interface }
     println("Interfaces: ${interfaces.size}")
     println("Classes: ${classes.size}")
 
@@ -34,7 +34,7 @@ fun printHierarchyGraph(builder: AbstractFirTreeBuilder) {
                 println("    ${it.type} [color=${it.kind!!.toColor()}]")
             }
             println()
-            val edges = mutableSetOf<Edge>()
+            konst edges = mutableSetOf<Edge>()
             elements.forEach { element ->
                 element.allParents.forEach { parent ->
                     edges += Edge(parent.type, element.type)

@@ -1,8 +1,8 @@
 fun box(): String {
-    val d = 42.0
-    val c = 'C'
+    konst d = 42.0
+    konst c = 'C'
 
-    open class Local(val l: Long) {
+    open class Local(konst l: Long) {
         fun foo(): Boolean = d == 42.0 && c == 'C' && l == 239L
     }
 

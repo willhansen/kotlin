@@ -21,12 +21,12 @@ import kotlin.concurrent.read
 import kotlin.concurrent.write
 
 open class AggregatedReplStateHistory<T1, T2>(
-        private val history1: IReplStageHistory<T1>,
-        private val history2: IReplStageHistory<T2>,
-        override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
+        private konst history1: IReplStageHistory<T1>,
+        private konst history2: IReplStageHistory<T2>,
+        override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
 ) : IReplStageHistory<Pair<T1, T2>>, AbstractList<ReplHistoryRecord<Pair<T1, T2>>>()
 {
-    override val size: Int
+    override konst size: Int
         get() = minOf(history1.size, history2.size)
 
     override fun push(id: ILineId, item: Pair<T1, T2>) {
@@ -39,16 +39,16 @@ open class AggregatedReplStateHistory<T1, T2>(
 
     override fun get(index: Int): ReplHistoryRecord<Pair<T1, T2>> = lock.read {
         assertSameSize()
-        val r1 = history1[index]
-        val r2 = history2[index]
+        konst r1 = history1[index]
+        konst r2 = history2[index]
         assertSameId(r1, r2)
         ReplHistoryRecord(r1.id, r1.item to r2.item)
     }
 
     override fun pop(): ReplHistoryRecord<Pair<T1, T2>>? = lock.write {
         assertSameSize()
-        val r1 = history1.pop()
-        val r2 = history2.pop()
+        konst r1 = history1.pop()
+        konst r2 = history2.pop()
         if (r1 == null && r2 == null) return null
         if (r1 == null || r2 == null) throw IllegalStateException("Aggregated history mismatch: $r1 vs $r2")
         assertSameId(r1, r2)
@@ -57,16 +57,16 @@ open class AggregatedReplStateHistory<T1, T2>(
 
     override fun reset(): Iterable<ILineId> = lock.write {
         assertSameSize()
-        val i1 = history1.reset().toList()
-        val i2 = history2.reset().toList()
+        konst i1 = history1.reset().toList()
+        konst i2 = history2.reset().toList()
         if (i1 != i2) throw IllegalStateException("Aggregated history reset lines mismatch: $i1 != $i2")
         i1
     }
 
     override fun resetTo(id: ILineId): Iterable<ILineId> = lock.write {
         assertSameSize()
-        val i1 = history1.resetTo(id).toList()
-        val i2 = history2.resetTo(id).toList()
+        konst i1 = history1.resetTo(id).toList()
+        konst i2 = history2.resetTo(id).toList()
         if (i1 != i2) throw IllegalStateException("Aggregated history reset lines mismatch: $i1 != $i2")
         i1
     }
@@ -80,10 +80,10 @@ open class AggregatedReplStateHistory<T1, T2>(
     }
 }
 
-open class AggregatedReplStageState<T1, T2>(val state1: IReplStageState<T1>, val state2: IReplStageState<T2>, final override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock())
+open class AggregatedReplStageState<T1, T2>(konst state1: IReplStageState<T1>, konst state2: IReplStageState<T2>, final override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock())
     : IReplStageState<Pair<T1, T2>>
 {
-    override val history: IReplStageHistory<Pair<T1, T2>> = AggregatedReplStateHistory(state1.history, state2.history, lock)
+    override konst history: IReplStageHistory<Pair<T1, T2>> = AggregatedReplStateHistory(state1.history, state2.history, lock)
 
     override fun <StateT : IReplStageState<*>> asState(target: Class<out StateT>): StateT =
         @Suppress("UNCHECKED_CAST")
@@ -95,7 +95,7 @@ open class AggregatedReplStageState<T1, T2>(val state1: IReplStageState<T1>, val
 
     override fun getNextLineNo() = state1.getNextLineNo()
 
-    override val currentGeneration: Int get() = state1.currentGeneration
+    override konst currentGeneration: Int get() = state1.currentGeneration
 
     override fun dispose() {
         state2.dispose()

@@ -1,5 +1,5 @@
 fun box(): String {
-    val a = Array(2) { DoubleArray(3) }
+    konst a = Array(2) { DoubleArray(3) }
 
     for (i in 1..1) {
         for (j in 0..2) {

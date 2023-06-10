@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.contracts.model.*
 import org.jetbrains.kotlin.contracts.model.structure.*
 import org.jetbrains.kotlin.contracts.model.visitors.Reducer
 
-class EqualsFunctor(val isNegated: Boolean) : AbstractFunctor() {
+class EqualsFunctor(konst isNegated: Boolean) : AbstractFunctor() {
     /*
         Equals is a bit tricky case to produce clauses, because e.g. if we want to emit "Returns(true)"-clause,
         then we have to guarantee that we know *all* cases when 'true' could've been returned, and join
@@ -47,7 +47,7 @@ class EqualsFunctor(val isNegated: Boolean) : AbstractFunctor() {
     }
 
     fun invokeWithArguments(left: Computation, right: Computation): List<ESEffect> {
-        // First, check if both arguments are values: then we can produce both 'true' and 'false' clauses
+        // First, check if both arguments are konstues: then we can produce both 'true' and 'false' clauses
         if (left is ESValue && right is ESValue) {
             return equateValues(left, right)
         }
@@ -65,24 +65,24 @@ class EqualsFunctor(val isNegated: Boolean) : AbstractFunctor() {
     }
 
     private fun equateCallAndConstant(call: Computation, constant: ESConstant): List<ESEffect> {
-        val resultingClauses = mutableListOf<ESEffect>()
+        konst resultingClauses = mutableListOf<ESEffect>()
 
         for (effect in call.effects) {
-            if (effect !is ConditionalEffect || effect.simpleEffect !is ESReturns || effect.simpleEffect.value.isWildcard) {
+            if (effect !is ConditionalEffect || effect.simpleEffect !is ESReturns || effect.simpleEffect.konstue.isWildcard) {
                 resultingClauses += effect
                 continue
             }
 
-            if (effect.simpleEffect.value == constant) {
-                val trueClause = ConditionalEffect(effect.condition, ESReturns(ESConstants.booleanValue(isNegated.not())))
+            if (effect.simpleEffect.konstue == constant) {
+                konst trueClause = ConditionalEffect(effect.condition, ESReturns(ESConstants.booleanValue(isNegated.not())))
                 resultingClauses.add(trueClause)
             }
 
-            if (effect.simpleEffect.value != constant && effect.simpleEffect.value is ESConstant && isSafeToProduceFalse(
-                    call, effect.simpleEffect.value, constant
+            if (effect.simpleEffect.konstue != constant && effect.simpleEffect.konstue is ESConstant && isSafeToProduceFalse(
+                    call, effect.simpleEffect.konstue, constant
                 )
             ) {
-                val falseClause = ConditionalEffect(effect.condition, ESReturns(ESConstants.booleanValue(isNegated)))
+                konst falseClause = ConditionalEffect(effect.condition, ESReturns(ESConstants.booleanValue(isNegated)))
                 resultingClauses.add(falseClause)
             }
         }

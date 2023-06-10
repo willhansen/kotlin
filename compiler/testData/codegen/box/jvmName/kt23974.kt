@@ -3,10 +3,10 @@
 
 @Suppress("x")
 @get:JvmName("foo")
-val vo get() = "O"
+konst vo get() = "O"
 
 @Suppress("x")
 @get:JvmName("bar")
-val vk = "K"
+konst vk = "K"
 
 fun box() = vo + vk

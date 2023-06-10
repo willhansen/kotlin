@@ -26,15 +26,15 @@ enum class TryCatchPosition {
     INNER
 }
 
-class SplitPair<out T : Interval>(val patchedPart: T, val newPart: T)
+class SplitPair<out T : Interkonst>(konst patchedPart: T, konst newPart: T)
 
-class SimpleInterval(override val startLabel: LabelNode, override val endLabel: LabelNode) : Interval
+class SimpleInterkonst(override konst startLabel: LabelNode, override konst endLabel: LabelNode) : Interkonst
 
-interface Interval {
-    val startLabel: LabelNode
-    val endLabel: LabelNode
+interface Interkonst {
+    konst startLabel: LabelNode
+    konst endLabel: LabelNode
 
-    /*note that some intervals are mutable */
+    /*note that some interkonsts are mutable */
     fun isEmpty(): Boolean = startLabel == endLabel
 
     fun verify(processor: CoveringTryCatchNodeProcessor) {
@@ -44,67 +44,67 @@ interface Interval {
     }
 }
 
-interface SplittableInterval<out T : Interval> : Interval {
-    fun split(splitBy: Interval, keepStart: Boolean): SplitPair<T>
+interface SplittableInterkonst<out T : Interkonst> : Interkonst {
+    fun split(splitBy: Interkonst, keepStart: Boolean): SplitPair<T>
 }
 
-interface IntervalWithHandler : Interval {
-    val handler: LabelNode
-    val type: String?
+interface InterkonstWithHandler : Interkonst {
+    konst handler: LabelNode
+    konst type: String?
 }
 
 class TryCatchBlockNodeInfo(
-    val node: TryCatchBlockNode,
-    val onlyCopyNotProcess: Boolean
-) : IntervalWithHandler, SplittableInterval<TryCatchBlockNodeInfo> {
-    override val startLabel: LabelNode
+    konst node: TryCatchBlockNode,
+    konst onlyCopyNotProcess: Boolean
+) : InterkonstWithHandler, SplittableInterkonst<TryCatchBlockNodeInfo> {
+    override konst startLabel: LabelNode
         get() = node.start
-    override val endLabel: LabelNode
+    override konst endLabel: LabelNode
         get() = node.end
-    override val handler: LabelNode
+    override konst handler: LabelNode
         get() = node.handler
-    override val type: String?
+    override konst type: String?
         get() = node.type
 
-    override fun split(splitBy: Interval, keepStart: Boolean): SplitPair<TryCatchBlockNodeInfo> {
-        val newPartInterval = if (keepStart) {
-            val oldEnd = endLabel
+    override fun split(splitBy: Interkonst, keepStart: Boolean): SplitPair<TryCatchBlockNodeInfo> {
+        konst newPartInterkonst = if (keepStart) {
+            konst oldEnd = endLabel
             node.end = splitBy.startLabel
             Pair(splitBy.endLabel, oldEnd)
         } else {
-            val oldStart = startLabel
+            konst oldStart = startLabel
             node.start = splitBy.endLabel
             Pair(oldStart, splitBy.startLabel)
         }
         return SplitPair(
             this,
-            TryCatchBlockNodeInfo(TryCatchBlockNode(newPartInterval.first, newPartInterval.second, handler, type), onlyCopyNotProcess)
+            TryCatchBlockNodeInfo(TryCatchBlockNode(newPartInterkonst.first, newPartInterkonst.second, handler, type), onlyCopyNotProcess)
         )
     }
 }
 
-val TryCatchBlockNodeInfo.bodyInstuctions
+konst TryCatchBlockNodeInfo.bodyInstuctions
     get() = InsnSequence(startLabel, endLabel)
 
 class TryCatchBlockNodePosition(
-    val nodeInfo: TryCatchBlockNodeInfo,
+    konst nodeInfo: TryCatchBlockNodeInfo,
     var position: TryCatchPosition
-) : IntervalWithHandler by nodeInfo
+) : InterkonstWithHandler by nodeInfo
 
-class TryBlockCluster<T : IntervalWithHandler>(val blocks: MutableList<T>) {
-    val defaultHandler: T?
+class TryBlockCluster<T : InterkonstWithHandler>(konst blocks: MutableList<T>) {
+    konst defaultHandler: T?
         get() = blocks.firstOrNull() { it.type == null }
 }
 
-fun <T : IntervalWithHandler> doClustering(blocks: List<T>): List<TryBlockCluster<T>> {
-    data class TryBlockInterval(val startLabel: LabelNode, val endLabel: LabelNode)
+fun <T : InterkonstWithHandler> doClustering(blocks: List<T>): List<TryBlockCluster<T>> {
+    data class TryBlockInterkonst(konst startLabel: LabelNode, konst endLabel: LabelNode)
 
-    val clusters = linkedMapOf<TryBlockInterval, TryBlockCluster<T>>()
+    konst clusters = linkedMapOf<TryBlockInterkonst, TryBlockCluster<T>>()
     blocks.forEach { block ->
-        val interval = TryBlockInterval(firstLabelInChain(block.startLabel), firstLabelInChain(block.endLabel))
-        val cluster = clusters.getOrPut(interval, { TryBlockCluster(arrayListOf()) })
+        konst interkonst = TryBlockInterkonst(firstLabelInChain(block.startLabel), firstLabelInChain(block.endLabel))
+        konst cluster = clusters.getOrPut(interkonst, { TryBlockCluster(arrayListOf()) })
         cluster.blocks.add(block)
     }
 
-    return clusters.values.toList()
+    return clusters.konstues.toList()
 }

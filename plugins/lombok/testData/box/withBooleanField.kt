@@ -26,8 +26,8 @@ public class UserData {
 
 // FILE: main.kt
 fun box(): String {
-    val user = UserData("Bob", false, false, false)
-    val modifiedUser = user
+    konst user = UserData("Bob", false, false, false)
+    konst modifiedUser = user
         .withName("Alex")
         .withSome(true)
         .withHasFlag(true)

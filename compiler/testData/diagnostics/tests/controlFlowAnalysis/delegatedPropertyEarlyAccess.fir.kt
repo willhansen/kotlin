@@ -14,19 +14,19 @@ class Kaboom() {
         withGetter.hashCode()
     }
 
-    val other = <!UNINITIALIZED_VARIABLE!>delegated<!>
+    konst other = <!UNINITIALIZED_VARIABLE!>delegated<!>
 
-    val another = <!UNINITIALIZED_VARIABLE!>simple<!>
+    konst another = <!UNINITIALIZED_VARIABLE!>simple<!>
 
-    val something = withGetter
+    konst something = withGetter
     
-    val delegated: String by CustomDelegate()
+    konst delegated: String by CustomDelegate()
 
-    val simple = "xyz"
+    konst simple = "xyz"
 
-    val withGetter: String
+    konst withGetter: String
         get() = "abc"
 
     // No error should be here
-    val after = delegated
+    konst after = delegated
 }

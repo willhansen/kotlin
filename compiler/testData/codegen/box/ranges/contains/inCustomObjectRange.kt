@@ -1,15 +1,15 @@
 // WITH_STDLIB
 
-class A(val z: Int) : Comparable<A> {
+class A(konst z: Int) : Comparable<A> {
     override fun compareTo(other: A): Int {
         return z.compareTo(other.z)
     }
 }
 
 operator fun  A.rangeTo(that: A): ClosedRange<A> = object: ClosedRange<A> {
-    override val endInclusive: A
+    override konst endInclusive: A
         get() = that
-    override val start: A
+    override konst start: A
         get() = this@rangeTo
 }
 

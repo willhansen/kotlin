@@ -7,17 +7,17 @@ interface GetStep {
     fun get(): Any
 }
 
-class Outer protected constructor(val ok: Any) {
+class Outer protected constructor(konst ok: Any) {
     constructor(): this("xxx")
 
-    val obj = object : GetStep {
+    konst obj = object : GetStep {
         override fun get() = Step(::Outer)
     }
 }
 
 fun box(): String {
-    val s = Outer().obj.get() as Step
-    val t = s.step("OK") as Outer
+    konst s = Outer().obj.get() as Step
+    konst t = s.step("OK") as Outer
     return t.ok as String
 }
 

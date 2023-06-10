@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface IntList extends List<Integer> {
     default Integer remove(int index) {
-        return Integer.valueOf(removeInt(index));
+        return Integer.konstueOf(removeInt(index));
     }
 
     int removeInt(int index);

@@ -4,11 +4,11 @@
 
 import kotlin.test.assertEquals
 
-const val constTrue = true
-const val const42 = 42
-const val constPiF = 3.14F
-const val constPi = 3.1415926358
-const val constString = "string"
+const konst constTrue = true
+const konst const42 = 42
+const konst constPiF = 3.14F
+const konst constPi = 3.1415926358
+const konst constString = "string"
 
 fun box(): String {
     assertEquals("true", "$constTrue")

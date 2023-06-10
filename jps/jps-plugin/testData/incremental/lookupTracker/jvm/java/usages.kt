@@ -4,7 +4,7 @@ package foo
 import baz.*
 
 /*p:foo*/fun usages() {
-    val c = /*p:bar*/C()
+    konst c = /*p:bar*/C()
 
     /*p:bar(C) p:kotlin(Int)*/c./*c:bar.C*/field
     /*p:bar(C) p:kotlin(Int)*/c./*c:bar.C*/field = /*p:kotlin(Int)*/2
@@ -23,7 +23,7 @@ import baz.*
     /*p:bar p:baz p:foo p:java.lang p:kotlin p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/C./*c:bar.C*/IS()
 
 
-    val i: /*p:foo*/I = /*p:bar(C)*/c
+    konst i: /*p:foo*/I = /*p:bar(C)*/c
     /*p:foo(I)*/i./*c:foo.I*/ifunc()
 
     /*p:baz p:foo p:java.lang p:kotlin p:kotlin(String) p:kotlin.annotation p:kotlin.collections p:kotlin.comparisons p:kotlin.io p:kotlin.jvm p:kotlin.ranges p:kotlin.sequences p:kotlin.text*/I./*c:foo.I*/isfield

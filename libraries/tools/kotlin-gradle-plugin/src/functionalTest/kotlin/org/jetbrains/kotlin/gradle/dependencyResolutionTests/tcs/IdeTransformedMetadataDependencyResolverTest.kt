@@ -23,29 +23,29 @@ class IdeTransformedMetadataDependencyResolverTest {
 
     @Test
     fun `test - MVIKotlin`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
 
         kotlin.jvm()
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
 
         commonMain.dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         IdeTransformedMetadataDependencyResolver.resolve(commonMain)
             .assertMatches(
@@ -72,7 +72,7 @@ class IdeTransformedMetadataDependencyResolverTest {
 
     @Test
     fun `test OKIO in JVM + Android project`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
             repositories.mavenLocal()
@@ -82,24 +82,24 @@ class IdeTransformedMetadataDependencyResolverTest {
                 compileSdkVersion = "android-31"
             }
         }
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.androidTarget()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
 
         commonMain.dependencies {
             implementation("com.squareup.okio:okio:3.2.0")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         fun KotlinSourceSet.binaryDependencies() =
             project.kotlinIdeMultiplatformImport.resolveDependencies(this).filterIsInstance<IdeaKotlinBinaryDependency>()
 
-        val kgpVersion = project.getKotlinPluginVersion()
+        konst kgpVersion = project.getKotlinPluginVersion()
         commonMain.binaryDependencies().assertMatches(
             binaryCoordinates("com.squareup.okio:okio-jvm:3.2.0"),
             binaryCoordinates("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kgpVersion"),

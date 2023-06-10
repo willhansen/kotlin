@@ -1,5 +1,5 @@
 fun box(): String {
-    val array = arrayOf(doubleArrayOf(-1.0))
+    konst array = arrayOf(doubleArrayOf(-1.0))
     for (node in array) {
         node[0] += 1.0
     }

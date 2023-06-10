@@ -4,7 +4,7 @@ suspend fun dummy() {}
 
 suspend fun test() {
     dummy()
-    val a = 0
+    konst a = 0
 }
 
 // METHOD : SuspendFunctionDeadVariablesKt.test(Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

@@ -15,7 +15,7 @@ package kotlinx.cinterop
 @Target(AnnotationTarget.TYPEALIAS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.BINARY)
 @RequiresOptIn(level = RequiresOptIn.Level.WARNING)
-public annotation class UnsafeNumber(val actualPlatformTypes: Array<String>)
+public annotation class UnsafeNumber(konst actualPlatformTypes: Array<String>)
 
 /**
  * Marks Objective-C and Swift interoperability API as Beta.

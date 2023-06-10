@@ -22,29 +22,29 @@ abstract class AnalysisApiTestConfiguratorFactory {
 }
 
 data class AnalysisApiTestConfiguratorFactoryData(
-    val frontend: FrontendKind,
-    val moduleKind: TestModuleKind,
-    val analysisSessionMode: AnalysisSessionMode,
-    val analysisApiMode: AnalysisApiMode,
+    konst frontend: FrontendKind,
+    konst moduleKind: TestModuleKind,
+    konst analysisSessionMode: AnalysisSessionMode,
+    konst analysisApiMode: AnalysisApiMode,
 )
 
-enum class AnalysisSessionMode(val suffix: String) {
+enum class AnalysisSessionMode(konst suffix: String) {
     Normal("Normal"),
 
     Dependent("Dependent");
 }
 
-enum class AnalysisApiMode(val suffix: String) {
+enum class AnalysisApiMode(konst suffix: String) {
     Ide("Ide"),
     Standalone("Standalone");
 }
 
-enum class FrontendKind(val suffix: String) {
+enum class FrontendKind(konst suffix: String) {
     Fir("Fir"),
     Fe10("Fe10"),
 }
 
-enum class TestModuleKind(val suffix: String) {
+enum class TestModuleKind(konst suffix: String) {
     Source("Source"),
     LibraryBinary("LibraryBinary"),
     LibrarySource("LibrarySource");

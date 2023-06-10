@@ -170,11 +170,11 @@ POSSIBILITY OF SUCH DAMAGES.
 
 7. GENERAL
 
-If any provision of this Agreement is invalid or unenforceable under
-applicable law, it shall not affect the validity or enforceability of the
+If any provision of this Agreement is inkonstid or unenforceable under
+applicable law, it shall not affect the konstidity or enforceability of the
 remainder of the terms of this Agreement, and without further action by
 the parties hereto, such provision shall be reformed to the minimum extent
-necessary to make such provision valid and enforceable.
+necessary to make such provision konstid and enforceable.
 
 If Recipient institutes patent litigation against any entity (including a
 cross-claim or counterclaim in a lawsuit) alleging that the Program itself

@@ -20,7 +20,7 @@ public class A extends AImpl implements CharSequence {
 class X : A()
 
 fun main() {
-    val x = X()
+    konst x = X()
     x[0]
     x.length
 }

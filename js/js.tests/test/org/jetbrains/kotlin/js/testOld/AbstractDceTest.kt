@@ -13,12 +13,12 @@ import java.io.File
 
 abstract class AbstractDceTest : TestCase() {
     fun doTest(filePath: String) {
-        val file = File(filePath)
-        val fileContents = file.readText()
-        val inputFile = InputFile(InputResource.file(filePath), null,
+        konst file = File(filePath)
+        konst fileContents = file.readText()
+        konst inputFile = InputFile(InputResource.file(filePath), null,
                                   File(pathToOutputDir, file.relativeTo(File(pathToTestDir)).path).path, "main")
-        val dceResult = DeadCodeElimination.run(setOf(inputFile), extractDeclarations(REQUEST_REACHABLE_PATTERN, fileContents), true) { _, _ -> }
-        val reachableNodeStrings = dceResult.reachableNodes.map { it.toString().removePrefix("<unknown>.") }.toSet()
+        konst dceResult = DeadCodeElimination.run(setOf(inputFile), extractDeclarations(REQUEST_REACHABLE_PATTERN, fileContents), true) { _, _ -> }
+        konst reachableNodeStrings = dceResult.reachableNodes.map { it.toString().removePrefix("<unknown>.") }.toSet()
 
         for (assertedDeclaration in extractDeclarations(ASSERT_REACHABLE_PATTERN, fileContents)) {
             TestCase.assertTrue("Declaration $assertedDeclaration not reached", assertedDeclaration in reachableNodeStrings)
@@ -32,11 +32,11 @@ abstract class AbstractDceTest : TestCase() {
             regex.findAll(fileContents).map { it.groupValues[1] }.toSet()
 
     companion object {
-        private val ASSERT_REACHABLE_PATTERN = Regex("^ *// *ASSERT_REACHABLE: (.+) *$", RegexOption.MULTILINE)
-        private val ASSERT_UNREACHABLE_PATTERN = Regex("^ *// *ASSERT_UNREACHABLE: (.+) *$", RegexOption.MULTILINE)
-        private val REQUEST_REACHABLE_PATTERN = Regex("^ *// *REQUEST_REACHABLE: (.+) *$", RegexOption.MULTILINE)
+        private konst ASSERT_REACHABLE_PATTERN = Regex("^ *// *ASSERT_REACHABLE: (.+) *$", RegexOption.MULTILINE)
+        private konst ASSERT_UNREACHABLE_PATTERN = Regex("^ *// *ASSERT_UNREACHABLE: (.+) *$", RegexOption.MULTILINE)
+        private konst REQUEST_REACHABLE_PATTERN = Regex("^ *// *REQUEST_REACHABLE: (.+) *$", RegexOption.MULTILINE)
 
-        private val pathToTestDir = "js/js.translator/testData/dce"
-        private val pathToOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
+        private konst pathToTestDir = "js/js.translator/testData/dce"
+        private konst pathToOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
     }
 }

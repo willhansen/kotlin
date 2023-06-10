@@ -12,8 +12,8 @@ import java.rmi.RemoteException
 import java.rmi.server.UnicastRemoteObject
 
 internal class GradleCompilationResults(
-    private val log: KotlinLogger,
-    private val projectRootFile: File
+    private konst log: KotlinLogger,
+    private konst projectRootFile: File
 ) : CompilationResults,
     UnicastRemoteObject(
         SOCKET_ANY_FREE_PORT,
@@ -22,33 +22,33 @@ internal class GradleCompilationResults(
     ) {
 
     var icLogLines: List<String> = emptyList()
-    private val buildMetricsReporter = BuildMetricsReporterImpl()
-    val buildMetrics: BuildMetrics
+    private konst buildMetricsReporter = BuildMetricsReporterImpl()
+    konst buildMetrics: BuildMetrics
         get() = buildMetricsReporter.getMetrics()
 
     @Throws(RemoteException::class)
-    override fun add(compilationResultCategory: Int, value: Serializable) {
+    override fun add(compilationResultCategory: Int, konstue: Serializable) {
         when (compilationResultCategory) {
             CompilationResultCategory.IC_COMPILE_ITERATION.code -> {
                 @Suppress("UNCHECKED_CAST")
-                val compileIterationResult = value as? CompileIterationResult
+                konst compileIterationResult = konstue as? CompileIterationResult
                 if (compileIterationResult != null) {
-                    val sourceFiles = compileIterationResult.sourceFiles
+                    konst sourceFiles = compileIterationResult.sourceFiles
                     if (sourceFiles.any()) {
                         log.kotlinDebug { "compile iteration: ${sourceFiles.pathsAsStringRelativeTo(projectRootFile)}" }
                         buildMetrics.buildPerformanceMetrics.add(BuildPerformanceMetric.COMPILE_ITERATION)
                     }
-                    val exitCode = compileIterationResult.exitCode
+                    konst exitCode = compileIterationResult.exitCode
                     log.kotlinDebug { "compiler exit code: $exitCode" }
                 }
             }
             CompilationResultCategory.BUILD_REPORT_LINES.code,
             CompilationResultCategory.VERBOSE_BUILD_REPORT_LINES.code -> {
                 @Suppress("UNCHECKED_CAST")
-                (value as? List<String>)?.let { icLogLines = it }
+                (konstue as? List<String>)?.let { icLogLines = it }
             }
             CompilationResultCategory.BUILD_METRICS.code -> {
-                (value as? BuildMetrics)?.let { buildMetricsReporter.addMetrics(it) }
+                (konstue as? BuildMetrics)?.let { buildMetricsReporter.addMetrics(it) }
             }
         }
     }

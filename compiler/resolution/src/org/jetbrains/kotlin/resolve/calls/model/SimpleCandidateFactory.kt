@@ -27,17 +27,17 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.isDynamic
 
 class SimpleCandidateFactory(
-    val callComponents: KotlinCallComponents,
-    val scopeTower: ImplicitScopeTower,
-    val kotlinCall: KotlinCall,
-    val resolutionCallbacks: KotlinResolutionCallbacks,
+    konst callComponents: KotlinCallComponents,
+    konst scopeTower: ImplicitScopeTower,
+    konst kotlinCall: KotlinCall,
+    konst resolutionCallbacks: KotlinResolutionCallbacks,
 ) : CandidateFactory<SimpleResolutionCandidate> {
-    val inferenceSession: InferenceSession = resolutionCallbacks.inferenceSession
+    konst inferenceSession: InferenceSession = resolutionCallbacks.inferenceSession
 
-    val baseSystem: ConstraintStorage
+    konst baseSystem: ConstraintStorage
 
     init {
-        val baseSystem = NewConstraintSystemImpl(
+        konst baseSystem = NewConstraintSystemImpl(
             callComponents.constraintInjector, callComponents.builtIns,
             callComponents.kotlinTypeRefiner, callComponents.languageVersionSettings
         )
@@ -77,11 +77,11 @@ class SimpleCandidateFactory(
     }
 
     fun createCandidate(givenCandidate: GivenCandidate): SimpleResolutionCandidate {
-        val isSafeCall = (kotlinCall.explicitReceiver as? SimpleKotlinCallArgument)?.isSafeCall ?: false
+        konst isSafeCall = (kotlinCall.explicitReceiver as? SimpleKotlinCallArgument)?.isSafeCall ?: false
 
-        val explicitReceiverKind =
+        konst explicitReceiverKind =
             if (givenCandidate.dispatchReceiver == null) ExplicitReceiverKind.NO_EXPLICIT_RECEIVER else ExplicitReceiverKind.DISPATCH_RECEIVER
-        val dispatchArgumentReceiver = givenCandidate.dispatchReceiver?.let {
+        konst dispatchArgumentReceiver = givenCandidate.dispatchReceiver?.let {
             ReceiverExpressionKotlinCallArgument(it, isSafeCall)
         }
         return createCandidate(
@@ -95,13 +95,13 @@ class SimpleCandidateFactory(
         explicitReceiverKind: ExplicitReceiverKind,
         extensionReceiver: ReceiverValueWithSmartCastInfo?
     ): SimpleResolutionCandidate {
-        val dispatchArgumentReceiver = createReceiverArgument(
+        konst dispatchArgumentReceiver = createReceiverArgument(
             kotlinCall.getExplicitDispatchReceiver(explicitReceiverKind),
             towerCandidate.dispatchReceiver
         )
-        val extensionArgumentReceiver =
+        konst extensionArgumentReceiver =
             createReceiverArgument(kotlinCall.getExplicitExtensionReceiver(explicitReceiverKind), extensionReceiver)
-        val descriptor = towerCandidate.descriptor
+        konst descriptor = towerCandidate.descriptor
         var diagnostics: List<KotlinCallDiagnostic> = towerCandidate.diagnostics
         if (descriptor is PropertyDescriptor && descriptor.isSyntheticEnumEntries()) {
             diagnostics = diagnostics + LowerPriorityToPreserveCompatibility(needToReportWarning = false).asDiagnostic()
@@ -118,11 +118,11 @@ class SimpleCandidateFactory(
         explicitReceiverKind: ExplicitReceiverKind,
         extensionReceiverCandidates: List<ReceiverValueWithSmartCastInfo>
     ): SimpleResolutionCandidate {
-        val dispatchArgumentReceiver = createReceiverArgument(
+        konst dispatchArgumentReceiver = createReceiverArgument(
             kotlinCall.getExplicitDispatchReceiver(explicitReceiverKind),
             towerCandidate.dispatchReceiver
         )
-        val extensionArgumentReceiverCandidates = extensionReceiverCandidates.mapNotNull {
+        konst extensionArgumentReceiverCandidates = extensionReceiverCandidates.mapNotNull {
             createReceiverArgument(kotlinCall.getExplicitExtensionReceiver(explicitReceiverKind), it)
         }
 
@@ -141,7 +141,7 @@ class SimpleCandidateFactory(
         initialDiagnostics: Collection<KotlinCallDiagnostic>,
         knownSubstitutor: TypeSubstitutor?
     ): SimpleResolutionCandidate {
-        val resolvedKtCall = MutableResolvedCallAtom(
+        konst resolvedKtCall = MutableResolvedCallAtom(
             kotlinCall, descriptor, explicitReceiverKind,
             dispatchArgumentReceiver, extensionArgumentReceiver, extensionArgumentReceiverCandidates
         )
@@ -150,7 +150,7 @@ class SimpleCandidateFactory(
             return SimpleErrorResolutionCandidate(callComponents, resolutionCallbacks, scopeTower, baseSystem, resolvedKtCall)
         }
 
-        val candidate =
+        konst candidate =
             SimpleResolutionCandidate(callComponents, resolutionCallbacks, scopeTower, baseSystem, resolvedKtCall, knownSubstitutor)
 
         initialDiagnostics.forEach(candidate::addDiagnostic)
@@ -160,8 +160,8 @@ class SimpleCandidateFactory(
         }
 
         if (extensionArgumentReceiver != null) {
-            val parameterIsDynamic = descriptor.extensionReceiverParameter!!.value.type.isDynamic()
-            val argumentIsDynamic = extensionArgumentReceiver.receiver.receiverValue.type.isDynamic()
+            konst parameterIsDynamic = descriptor.extensionReceiverParameter!!.konstue.type.isDynamic()
+            konst argumentIsDynamic = extensionArgumentReceiver.receiver.receiverValue.type.isDynamic()
 
             if (parameterIsDynamic != argumentIsDynamic ||
                 (parameterIsDynamic && !descriptor.hasDynamicExtensionAnnotation())) {
@@ -173,15 +173,15 @@ class SimpleCandidateFactory(
     }
 
     override fun createErrorCandidate(): SimpleResolutionCandidate {
-        val errorScope = ErrorUtils.createErrorScope(ErrorScopeKind.SCOPE_FOR_ERROR_RESOLUTION_CANDIDATE, kotlinCall.toString())
-        val errorDescriptor = if (kotlinCall.callKind == KotlinCallKind.VARIABLE) {
+        konst errorScope = ErrorUtils.createErrorScope(ErrorScopeKind.SCOPE_FOR_ERROR_RESOLUTION_CANDIDATE, kotlinCall.toString())
+        konst errorDescriptor = if (kotlinCall.callKind == KotlinCallKind.VARIABLE) {
             errorScope.getContributedVariables(kotlinCall.name, scopeTower.location)
         } else {
             errorScope.getContributedFunctions(kotlinCall.name, scopeTower.location)
         }.first()
 
-        val dispatchReceiver = createReceiverArgument(kotlinCall.explicitReceiver, fromResolution = null)
-        val explicitReceiverKind =
+        konst dispatchReceiver = createReceiverArgument(kotlinCall.explicitReceiver, fromResolution = null)
+        konst explicitReceiverKind =
             if (dispatchReceiver == null) ExplicitReceiverKind.NO_EXPLICIT_RECEIVER else ExplicitReceiverKind.DISPATCH_RECEIVER
 
         return createCandidate(

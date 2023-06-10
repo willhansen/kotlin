@@ -11,21 +11,21 @@ import org.jetbrains.kotlin.commonizer.stats.RawStatsCollector.CommonDeclaration
 class AggregatedStatsCollector(
     targets: List<CommonizerTarget>
 ) : StatsCollector {
-    private val wrappedCollector = RawStatsCollector(targets)
+    private konst wrappedCollector = RawStatsCollector(targets)
 
     override fun logDeclaration(targetIndex: Int, lazyStatsKey: () -> StatsCollector.StatsKey) {
         wrappedCollector.logDeclaration(targetIndex, lazyStatsKey)
     }
 
     override fun writeTo(statsOutput: StatsOutput) {
-        val aggregatingOutput = AggregatingOutput()
+        konst aggregatingOutput = AggregatingOutput()
         wrappedCollector.writeTo(aggregatingOutput)
 
         statsOutput.use {
             statsOutput.writeHeader(AggregatedStatsHeader)
 
             aggregatingOutput.aggregatedStats.keys.sortedBy { it }.forEach { key ->
-                val row = aggregatingOutput.aggregatedStats.getValue(key)
+                konst row = aggregatingOutput.aggregatedStats.getValue(key)
                 statsOutput.writeRow(row)
             }
         }
@@ -47,7 +47,7 @@ class AggregatedStatsCollector(
     }
 
     private class AggregatedStatsRow(
-        private val declarationType: DeclarationType
+        private konst declarationType: DeclarationType
     ) : StatsOutput.StatsRow {
         var liftedUp: Int = 0
         var successfullyCommonized: Int = 0
@@ -55,7 +55,7 @@ class AggregatedStatsCollector(
         var failedOther: Int = 0
 
         override fun toList(): List<String> {
-            val total = liftedUp + successfullyCommonized + failedBecauseMissing + failedOther
+            konst total = liftedUp + successfullyCommonized + failedBecauseMissing + failedOther
 
             fun fraction(amount: Int): Double = if (total > 0) amount.toDouble() / total else 0.0
 
@@ -75,7 +75,7 @@ class AggregatedStatsCollector(
     }
 
     private class AggregatingOutput : StatsOutput {
-        val aggregatedStats = HashMap<DeclarationType, AggregatedStatsRow>()
+        konst aggregatedStats = HashMap<DeclarationType, AggregatedStatsRow>()
 
         override fun writeHeader(header: StatsOutput.StatsHeader) {
             check(header is RawStatsCollector.RawStatsHeader)
@@ -85,8 +85,8 @@ class AggregatedStatsCollector(
         override fun writeRow(row: StatsOutput.StatsRow) {
             check(row is RawStatsCollector.RawStatsRow)
 
-            val declarationType = row.statsKey.declarationType
-            val aggregatedStatsRow = aggregatedStats.getOrPut(declarationType) { AggregatedStatsRow(declarationType) }
+            konst declarationType = row.statsKey.declarationType
+            konst aggregatedStatsRow = aggregatedStats.getOrPut(declarationType) { AggregatedStatsRow(declarationType) }
             when (row.common) {
                 LIFTED_UP -> aggregatedStatsRow.liftedUp++
                 EXPECT -> aggregatedStatsRow.successfullyCommonized++

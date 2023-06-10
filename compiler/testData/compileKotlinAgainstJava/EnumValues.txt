@@ -12,9 +12,9 @@ public final enum class EnumValues : kotlin.Enum<test.EnumValues!> {
     enum entry SCRIPT_EXECUTION_ERROR
 
     private constructor EnumValues(/*0*/ kotlin.Int)
-    private final val code: kotlin.Int
-    @kotlin.internal.IntrinsicConstEvaluation public final /*fake_override*/ val name: kotlin.String
-    public final /*fake_override*/ val ordinal: kotlin.Int
+    private final konst code: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final /*fake_override*/ konst name: kotlin.String
+    public final /*fake_override*/ konst ordinal: kotlin.Int
     protected final /*fake_override*/ fun clone(): kotlin.Any
     public final /*fake_override*/ fun compareTo(/*0*/ test.EnumValues!): kotlin.Int
     protected/*protected and package*/ final /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun finalize(): kotlin.Unit
@@ -22,7 +22,7 @@ public final enum class EnumValues : kotlin.Enum<test.EnumValues!> {
     public final /*fake_override*/ /*isHiddenForResolutionEverywhereBesideSupercalls*/ fun getDeclaringClass(): java.lang.Class<test.EnumValues!>!
 
     // Static members
-    public final /*synthesized*/ val entries: kotlin.enums.EnumEntries<test.EnumValues>
-    public final /*synthesized*/ fun valueOf(/*0*/ kotlin.String): test.EnumValues
-    public final /*synthesized*/ fun values(): kotlin.Array<test.EnumValues>
+    public final /*synthesized*/ konst entries: kotlin.enums.EnumEntries<test.EnumValues>
+    public final /*synthesized*/ fun konstueOf(/*0*/ kotlin.String): test.EnumValues
+    public final /*synthesized*/ fun konstues(): kotlin.Array<test.EnumValues>
 }

@@ -108,35 +108,35 @@ class C : O.B() {
     }
 
     // VISIBLE: Classifiers from direct superclasses
-    val c = FromA::foo
-    val d = FromB::foo
+    konst c = FromA::foo
+    konst d = FromB::foo
 
     // VISIBLE: Classifiers from our own companion
-    val n = FromCompanionC::foo
+    konst n = FromCompanionC::foo
 
     // INVISIBLE: direct superclasses themselves.
-    val a = <!UNRESOLVED_REFERENCE!>A<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
-    val b = <!UNRESOLVED_REFERENCE!>A<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst a = <!UNRESOLVED_REFERENCE!>A<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst b = <!UNRESOLVED_REFERENCE!>A<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
 
     // DEPRECATED: Classifiers from companions of direct superclasses
-    val e = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromCompanionA<!>::foo
-    val f = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromCompanionB<!>::foo
+    konst e = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromCompanionA<!>::foo
+    konst f = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromCompanionB<!>::foo
 
     // INVISIBLE: "cousin" supertypes themselves
-    val g = <!UNRESOLVED_REFERENCE!>Alpha<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
-    val h = <!UNRESOLVED_REFERENCE!>Beta<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
-    val i = <!UNRESOLVED_REFERENCE!>Gamma<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst g = <!UNRESOLVED_REFERENCE!>Alpha<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst h = <!UNRESOLVED_REFERENCE!>Beta<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst i = <!UNRESOLVED_REFERENCE!>Gamma<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
 
     // DEPRECATED: classifiers from "cousin" superclasses
-    val k = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromAlpha<!>::foo
-    val l = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBeta<!>::foo
-    val m = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromGamma<!>::foo
+    konst k = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromAlpha<!>::foo
+    konst l = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromBeta<!>::foo
+    konst m = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromGamma<!>::foo
 
     // INVISIBLE: We don't see classifiers from companions of "cousin" superclasses
-    val o = <!UNRESOLVED_REFERENCE!>FromCompanionAlpha<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
-    val p = <!UNRESOLVED_REFERENCE!>FromCompanionBeta<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
-    val q = <!UNRESOLVED_REFERENCE!>FromCompanionGamma<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst o = <!UNRESOLVED_REFERENCE!>FromCompanionAlpha<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst p = <!UNRESOLVED_REFERENCE!>FromCompanionBeta<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
+    konst q = <!UNRESOLVED_REFERENCE!>FromCompanionGamma<!>::<!DEBUG_INFO_MISSING_UNRESOLVED!>foo<!>
 
     // DEPRECATED: Classifiers from supertypes of our own companion
-    val r = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromDelta<!>::foo
+    konst r = <!DEPRECATED_ACCESS_BY_SHORT_NAME!>FromDelta<!>::foo
 }

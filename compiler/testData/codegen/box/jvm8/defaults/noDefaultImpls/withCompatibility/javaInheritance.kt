@@ -44,9 +44,9 @@ interface KDerived  : JDerived {
 class KClass : KDerived
 
 fun box(): String {
-    val kClass = KClass()
-    val value = kClass.test() + kClass.test2() + kClass.test3()
-    if (value != "OK") return "fail 1: $value"
-    val jClass = JClass()
+    konst kClass = KClass()
+    konst konstue = kClass.test() + kClass.test2() + kClass.test3()
+    if (konstue != "OK") return "fail 1: $konstue"
+    konst jClass = JClass()
     return jClass.test() + jClass.test2() + jClass.test3()
 }

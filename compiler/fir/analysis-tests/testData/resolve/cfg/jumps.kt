@@ -1,6 +1,6 @@
 // !DUMP_CFG
 fun test_1(x: Int?) {
-    val y = if (x == null) {
+    konst y = if (x == null) {
         throw Exception()
     } else {
         x
@@ -10,7 +10,7 @@ fun test_1(x: Int?) {
 }
 
 fun test_2(x: Int?) {
-    val y = if (x == null) {
+    konst y = if (x == null) {
         x
     } else {
         x

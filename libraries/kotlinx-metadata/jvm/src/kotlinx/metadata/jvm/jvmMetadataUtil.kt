@@ -24,11 +24,11 @@ fun ClassName.toJvmInternalName(): String =
     ReplaceWith("toJvmInternalName()"),
     level = DeprecationLevel.WARNING
 )
-val ClassName.jvmInternalName: String get() = toJvmInternalName()
+konst ClassName.jvmInternalName: String get() = toJvmInternalName()
 
 /**
  * Helper function to instantiate [Metadata].
- * In contrary to direct constructor call, this one accept nullable parameters to substitute nulls with default values.
+ * In contrary to direct constructor call, this one accept nullable parameters to substitute nulls with default konstues.
  * Also, this one does not accept [Metadata.bytecodeVersion] as it is deprecated.
  */
 fun Metadata(

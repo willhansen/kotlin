@@ -16,7 +16,7 @@ class A {
     // CHECK:
     //   Mangled name: A#<set-it>(kotlin.Int){}
     //   Public signature: /A.it.<set-it>|-4393420298619979651[0]
-    set(value: Int): Unit
+    set(konstue: Int): Unit
 
   // CHECK:
   //   Mangled name: A#<init>(){}

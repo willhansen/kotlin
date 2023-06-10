@@ -17,15 +17,15 @@ import kotlin.test.assertEquals
 @OtherGradlePluginTests
 open class KaptIncrementalIT : KGPBaseTest() {
     companion object {
-        private val EXAMPLE_ANNOTATION_REGEX = "@(field:)?example.ExampleAnnotation".toRegex()
-        const val PROJECT_NAME = "kaptIncrementalCompilationProject"
-        const val KAPT3_STUBS_PATH = "build/tmp/kapt3/stubs/main"
+        private konst EXAMPLE_ANNOTATION_REGEX = "@(field:)?example.ExampleAnnotation".toRegex()
+        const konst PROJECT_NAME = "kaptIncrementalCompilationProject"
+        const konst KAPT3_STUBS_PATH = "build/tmp/kapt3/stubs/main"
     }
 
-    private val annotatedElements =
-        arrayOf("A", "funA", "valA", "funUtil", "valUtil", "B", "funB", "valB", "useB")
+    private konst annotatedElements =
+        arrayOf("A", "funA", "konstA", "funUtil", "konstUtil", "B", "funB", "konstB", "useB")
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(
         incremental = true,
         kaptOptions = BuildOptions.KaptOptions(incrementalKapt = true)
     )
@@ -91,8 +91,8 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val bKt = javaSourcesDir().resolve("bar/B.kt")
-            val errorKt = bKt.resolveSibling("error.kt")
+            konst bKt = javaSourcesDir().resolve("bar/B.kt")
+            konst errorKt = bKt.resolveSibling("error.kt")
             errorKt.writeText("<COMPILE_ERROR_MARKER>")
 
             buildAndFail("assemble") {
@@ -118,7 +118,7 @@ open class KaptIncrementalIT : KGPBaseTest() {
                 assertOutputContains("foo.ATest PASSED")
             }
 
-            val utilKt = javaSourcesDir().resolve("baz/util.kt")
+            konst utilKt = javaSourcesDir().resolve("baz/util.kt")
             utilKt.modify { oldContent ->
                 assert(oldContent.contains("2 * 2 == 4"))
                 oldContent.replace("2 * 2 == 4", "2 * 2 == 5")
@@ -137,7 +137,7 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val utilKt = javaSourcesDir().resolve("baz/util.kt")
+            konst utilKt = javaSourcesDir().resolve("baz/util.kt")
             utilKt.modify { oldContent ->
                 """
                 $oldContent
@@ -162,7 +162,7 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val utilKt = javaSourcesDir().resolve("baz/util.kt")
+            konst utilKt = javaSourcesDir().resolve("baz/util.kt")
             utilKt.modify {
                 it.replace("fun notAnnotatedFun", "@example.ExampleAnnotation fun notAnnotatedFun")
             }
@@ -179,8 +179,8 @@ open class KaptIncrementalIT : KGPBaseTest() {
     @GradleTest
     fun testRemoveSourceFile(gradleVersion: GradleVersion) {
         kaptProject(gradleVersion) {
-            val kapt3IncDataPath = "build/tmp/kapt3/incrementalData/main"
-            val kapt3StubsPath = "build/tmp/kapt3/stubs/main"
+            konst kapt3IncDataPath = "build/tmp/kapt3/incrementalData/main"
+            konst kapt3StubsPath = "build/tmp/kapt3/stubs/main"
 
             build("assemble") {
                 assertKapt3FullyExecuted()
@@ -215,7 +215,7 @@ open class KaptIncrementalIT : KGPBaseTest() {
                     this,
                     projectPath.allKotlinFiles.map { projectPath.relativize(it) }
                 )
-                val affectedElements = arrayOf("B", "funB", "valB", "useB")
+                konst affectedElements = arrayOf("B", "funB", "konstB", "useB")
                 checkGenerated(kaptGeneratedToPath, *(annotatedElements.toSet() - affectedElements).toTypedArray())
                 checkNotGenerated(kaptGeneratedToPath, *affectedElements)
             }
@@ -273,21 +273,21 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val bKt = javaSourcesDir().resolve("bar/B.kt")
+            konst bKt = javaSourcesDir().resolve("bar/B.kt")
             bKt.modify { it.replace(EXAMPLE_ANNOTATION_REGEX, "") }
-            val affectedElements = arrayOf("B", "funB", "valB")
+            konst affectedElements = arrayOf("B", "funB", "konstB")
 
             build("assemble", buildOptions = buildOptions.copy(logLevel = LogLevel.DEBUG)) {
                 assertKapt3FullyExecuted()
 
-                val useBKt = javaSourcesDir().resolve("bar/useB.kt")
+                konst useBKt = javaSourcesDir().resolve("bar/useB.kt")
                 assertCompiledKotlinSources(
                     listOf(projectPath.relativize(bKt), projectPath.relativize(useBKt)),
                     getOutputForTask(":kaptGenerateStubsKotlin"),
                     errorMessageSuffix = " in task 'kaptGenerateStubsKotlin'"
                 )
 
-                // java removal is detected
+                // java remokonst is detected
                 assertCompiledKotlinSources(
                     projectPath.allKotlinFiles.map { projectPath.relativize(it) },
                     output
@@ -308,9 +308,9 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val bKt = javaSourcesDir().resolve("bar/B.kt")
-            val useBKt = javaSourcesDir().resolve("bar/useB.kt")
-            bKt.modify { it.replace("val valB = \"text\"", "val valB = 4") }
+            konst bKt = javaSourcesDir().resolve("bar/B.kt")
+            konst useBKt = javaSourcesDir().resolve("bar/useB.kt")
+            bKt.modify { it.replace("konst konstB = \"text\"", "konst konstB = 4") }
 
             build("assemble", buildOptions = buildOptions.copy(logLevel = LogLevel.DEBUG)) {
                 assertKapt3FullyExecuted()
@@ -329,7 +329,7 @@ open class KaptIncrementalIT : KGPBaseTest() {
         kaptProject(gradleVersion) {
             build("assemble")
 
-            val file = javaSourcesDir().resolve("delegate/Usage.kt")
+            konst file = javaSourcesDir().resolve("delegate/Usage.kt")
             file.modify { "$it//" }
 
             build("assemble") {
@@ -386,10 +386,10 @@ open class KaptIncrementalIT : KGPBaseTest() {
                 } + "Generated.java"
             }
 
-    val TestProject.kaptGeneratedToPath get() = projectPath.resolve("build/generated/source/kapt")
+    konst TestProject.kaptGeneratedToPath get() = projectPath.resolve("build/generated/source/kapt")
 }
 
 @DisplayName("Kapt incremental compilation with precise compilation outputs backup")
 class KaptIncrementalWithPreciseBackupIT : KaptIncrementalIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }

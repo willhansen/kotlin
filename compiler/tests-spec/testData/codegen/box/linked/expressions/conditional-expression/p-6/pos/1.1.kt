@@ -20,7 +20,7 @@ import java.lang.IllegalStateException
 
 fun box(): String {
     return try {
-        val a = if (JavaClass().x) { "NOK" } else "NOK"
+        konst a = if (JavaClass().x) { "NOK" } else "NOK"
         a
     } catch (e: java.lang.NullPointerException) {
         "OK"

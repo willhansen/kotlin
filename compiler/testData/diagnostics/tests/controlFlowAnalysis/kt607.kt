@@ -3,8 +3,8 @@
 package kt607
 
 fun foo(a: A) {
-    val o = object {
-        val y : Int
+    konst o = object {
+        konst y : Int
            get() = 42
     }
 
@@ -13,6 +13,6 @@ fun foo(a: A) {
 }
 
 class A() {
-    val z : Int
+    konst z : Int
     get() = 3
 }

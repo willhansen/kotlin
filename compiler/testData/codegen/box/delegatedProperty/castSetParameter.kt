@@ -14,13 +14,13 @@ class A {
 }
 
 fun box(): String {
-    val c = A()
+    konst c = A()
     if(c.prop.a != "derived-get") return "fail get ${c.prop.a}"
     c.prop = Derived()
     if (c.prop.a != "derived-get-derived-set-get") return "fail set ${c.prop.a}"
     return "OK"
 }
 
-open class Base(open val a: String = "base")
+open class Base(open konst a: String = "base")
 
-class Derived(override val a: String = "derived"): Base()
+class Derived(override konst a: String = "derived"): Base()

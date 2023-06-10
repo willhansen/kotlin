@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val value: Any)
+konstue class IC(konst konstue: Any)
 
 fun <T> foo(a: Result<T>, ic: IC): Pair<T, Any> = bar(a, ic) { a, ic ->
-    a.getOrThrow() to ic.value
+    a.getOrThrow() to ic.konstue
 }
 
 fun interface FunIFace<T1, T2, R> {

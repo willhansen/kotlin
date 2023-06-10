@@ -10,34 +10,34 @@ interface Build<T>
 fun <T> build(fn: Builder<T>.() -> Unit): Build<T> = TODO()
 
 // Works completely
-val build = build {
-    value(1)
+konst build = build {
+    konstue(1)
 }
 
 // Works completely
-val buildWithWrappedValue = build {
+konst buildWithWrappedValue = build {
     wrappedValue(Wrapped(1))
 }
 
 // Works completely
-val buildWithFn = build {
-    valueFn {
+konst buildWithFn = build {
+    konstueFn {
         1
     }
 }
 
 // Works, but the ide complains with "Non-applicable call for builder inference"
-val buildWithFnWrapped = build {
+konst buildWithFnWrapped = build {
     wrappedValueFn {
         Wrapped(1)
     }
 }
 
 interface Builder<T> {
-    fun value(value: T)
-    fun wrappedValue(value: Wrapped<T>)
+    fun konstue(konstue: T)
+    fun wrappedValue(konstue: Wrapped<T>)
     fun wrappedValueFn(fn: () -> Wrapped<T>)
-    fun valueFn(fn: () -> T)
+    fun konstueFn(fn: () -> T)
 }
 
-data class Wrapped<T>(val value: T)
+data class Wrapped<T>(konst konstue: T)

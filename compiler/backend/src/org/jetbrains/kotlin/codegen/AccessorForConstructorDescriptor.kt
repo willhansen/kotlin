@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeSubstitutor
 
 class AccessorForConstructorDescriptor(
-    override val calleeDescriptor: ClassConstructorDescriptor,
+    override konst calleeDescriptor: ClassConstructorDescriptor,
     containingDeclaration: DeclarationDescriptor,
-    override val superCallTarget: ClassDescriptor?,
-    override val accessorKind: AccessorKind
+    override konst superCallTarget: ClassDescriptor?,
+    override konst accessorKind: AccessorKind
 ) : AbstractAccessorForFunctionDescriptor(containingDeclaration, SpecialNames.INIT),
     ClassConstructorDescriptor,
     AccessorForCallableDescriptor<ConstructorDescriptor> {

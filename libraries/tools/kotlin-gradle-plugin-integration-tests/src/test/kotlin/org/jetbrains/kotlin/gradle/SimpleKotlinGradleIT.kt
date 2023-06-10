@@ -99,8 +99,8 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
 
     @GradleTest
     @DisplayName("Compile task destination dir should be configured on configuration phase")
-    fun testDestinationDirReferencedDuringEvaluation(gradleVersion: GradleVersion) {
-        project("destinationDirReferencedDuringEvaluation", gradleVersion) {
+    fun testDestinationDirReferencedDuringEkonstuation(gradleVersion: GradleVersion) {
+        project("destinationDirReferencedDuringEkonstuation", gradleVersion) {
             build("build") {
                 assertOutputContains("foo.GreeterTest > testHelloWorld PASSED")
             }
@@ -109,10 +109,10 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
 
     @GradleTest
     @DisplayName("Plugin correctly handle redefined build dir location")
-    fun testBuildDirLazyEvaluation(gradleVersion: GradleVersion) {
+    fun testBuildDirLazyEkonstuation(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
             // Change the build directory in the end of the build script:
-            val customBuildDirName = "customBuild"
+            konst customBuildDirName = "customBuild"
             buildGradle.append(
                 "buildDir = '$customBuildDirName'"
             )
@@ -221,7 +221,7 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
     internal fun pluginVariantIsUsed(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
             build("tasks") {
-                val expectedVariant = when (gradleVersion) {
+                konst expectedVariant = when (gradleVersion) {
                     GradleVersion.version(TestVersions.Gradle.G_7_6) -> "gradle76"
                     GradleVersion.version(TestVersions.Gradle.G_7_5) -> "gradle75"
                     GradleVersion.version(TestVersions.Gradle.G_7_4) -> "gradle74"
@@ -238,17 +238,17 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
     @DisplayName("Validate Gradle plugins inputs")
     @GradleTestVersions(minVersion = TestVersions.Gradle.MAX_SUPPORTED) // Always should use only latest Gradle version
     @GradleTest
-    internal fun validatePluginInputs(gradleVersion: GradleVersion) {
+    internal fun konstidatePluginInputs(gradleVersion: GradleVersion) {
         project("kotlinProject", gradleVersion) {
             buildGradle.modify {
                 """
                 plugins {
-                    id "validate-external-gradle-plugin"
+                    id "konstidate-external-gradle-plugin"
                 ${it.substringAfter("plugins {")}
                 """.trimIndent()
             }
 
-            build("validateExternalPlugins")
+            build("konstidateExternalPlugins")
         }
     }
 
@@ -265,11 +265,11 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
     @GradleTest
     fun ignoreNonProjectSourceChanges(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val resources = projectPath.resolve("src/main/resources").createDirectories()
-            val resourceKts = resources.resolve("resource.kts").createFile()
-            resourceKts.appendText("lkdfjgkjs invalid something")
+            konst resources = projectPath.resolve("src/main/resources").createDirectories()
+            konst resourceKts = resources.resolve("resource.kts").createFile()
+            resourceKts.appendText("lkdfjgkjs inkonstid something")
             build("assemble")
-            resourceKts.appendText("kajhgfkh invalid something")
+            resourceKts.appendText("kajhgfkh inkonstid something")
             build("assemble")
         }
     }
@@ -328,11 +328,11 @@ class SimpleKotlinGradleIT : KGPBaseTest() {
     @GradleTest
     internal fun addResourcesKotlinSourceSet(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val mainResDir = projectPath.resolve("src/main/resources").apply { createDirectories() }
-            val mainResFile = mainResDir.resolve("main.txt").apply { writeText("Yay, Kotlin!") }
+            konst mainResDir = projectPath.resolve("src/main/resources").apply { createDirectories() }
+            konst mainResFile = mainResDir.resolve("main.txt").apply { writeText("Yay, Kotlin!") }
 
-            val additionalResDir = projectPath.resolve("additionalRes").apply { createDirectory() }
-            val additionalResFile = additionalResDir.resolve("test.txt").apply { writeText("Kotlin!") }
+            konst additionalResDir = projectPath.resolve("additionalRes").apply { createDirectory() }
+            konst additionalResFile = additionalResDir.resolve("test.txt").apply { writeText("Kotlin!") }
 
             buildGradle.appendText(
                 //language=groovy

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.psi.KtForExpression
 class ForInProgressionExpressionLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val rangeExpression: KtExpression
+    private konst rangeExpression: KtExpression
 ) : AbstractForInProgressionLoopGenerator(codegen, forExpression) {
 
     override fun storeProgressionParametersToLocalVars() {
@@ -31,9 +31,9 @@ class ForInProgressionExpressionLoopGenerator(
         v.dup()
         v.dup()
 
-        val firstName = rangeKotlinType.getPropertyGetterName("first")
-        val lastName = rangeKotlinType.getPropertyGetterName("last")
-        val stepName = rangeKotlinType.getPropertyGetterName("step")
+        konst firstName = rangeKotlinType.getPropertyGetterName("first")
+        konst lastName = rangeKotlinType.getPropertyGetterName("last")
+        konst stepName = rangeKotlinType.getPropertyGetterName("step")
 
         generateRangeOrProgressionProperty(asmLoopRangeType, firstName, asmElementType, loopParameterType, loopParameterVar)
         generateRangeOrProgressionProperty(asmLoopRangeType, lastName, asmElementType, asmElementType, endVar)

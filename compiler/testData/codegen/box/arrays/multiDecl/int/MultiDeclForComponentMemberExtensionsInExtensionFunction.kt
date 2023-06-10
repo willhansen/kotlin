@@ -12,7 +12,7 @@ fun M.doTest(l : Array<Int>): String {
 }
 
 fun box(): String {
-  val l = Array<Int>(3, {x -> x})
-  val s = M().doTest(l)
+  konst l = Array<Int>(3, {x -> x})
+  konst s = M().doTest(l)
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

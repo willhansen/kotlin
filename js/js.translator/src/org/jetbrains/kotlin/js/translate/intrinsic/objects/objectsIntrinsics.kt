@@ -26,12 +26,12 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameUnsafe
 
-class DefaultClassObjectIntrinsic( val fqName: FqName): ObjectIntrinsic {
+class DefaultClassObjectIntrinsic( konst fqName: FqName): ObjectIntrinsic {
     override fun apply(context: TranslationContext) = context.getReferenceToIntrinsic(fqName.asString())
 }
 
 class ObjectIntrinsics {
-    private val cache = mutableMapOf<ClassDescriptor, ObjectIntrinsic?>()
+    private konst cache = mutableMapOf<ClassDescriptor, ObjectIntrinsic?>()
 
     fun getIntrinsic(classDescriptor: ClassDescriptor): ObjectIntrinsic? {
         if (classDescriptor in cache) return cache[classDescriptor]
@@ -48,8 +48,8 @@ class ObjectIntrinsics {
             return null
         }
 
-        val containingDeclaration = classDescriptor.containingDeclaration
-        val name = Name.identifier(containingDeclaration.name.asString() + "CompanionObject")
+        konst containingDeclaration = classDescriptor.containingDeclaration
+        konst name = Name.identifier(containingDeclaration.name.asString() + "CompanionObject")
 
         return DefaultClassObjectIntrinsic(FqName("kotlin.js.internal").child(name))
     }

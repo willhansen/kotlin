@@ -9,19 +9,19 @@ enum class E {
     VALUE2
 }
 
-class C(val nums: Map<E, Int>) {
-    val normalizedNums = loadNormalizedNums()
+class C(konst nums: Map<E, Int>) {
+    konst normalizedNums = loadNormalizedNums()
 
     private fun loadNormalizedNums(): Map<E, Float> {
-        val vals = nums.values
-        val min = vals.minOrNull()!!
-        val max = vals.maxOrNull()!!
-        val rangeDiff = (max - min).toFloat()
-        val normalizedNums = nums.map { kvp ->
-            val (e, num) = kvp
-            //val e = kvp.key
-            //val num = kvp.value
-            val normalized = (num - min) / rangeDiff
+        konst konsts = nums.konstues
+        konst min = konsts.minOrNull()!!
+        konst max = konsts.maxOrNull()!!
+        konst rangeDiff = (max - min).toFloat()
+        konst normalizedNums = nums.map { kvp ->
+            konst (e, num) = kvp
+            //konst e = kvp.key
+            //konst num = kvp.konstue
+            konst normalized = (num - min) / rangeDiff
             Pair(e, normalized)
         }.toMap()
         return normalizedNums
@@ -29,6 +29,6 @@ class C(val nums: Map<E, Int>) {
 }
 
 fun box(): String {
-    val res = C(hashMapOf(E.VALUE to 11, E.VALUE2 to 12)).normalizedNums.values.sorted().joinToString()
+    konst res = C(hashMapOf(E.VALUE to 11, E.VALUE2 to 12)).normalizedNums.konstues.sorted().joinToString()
     return  if ("0.0, 1.0" == res) "OK" else "fail $res"
 }

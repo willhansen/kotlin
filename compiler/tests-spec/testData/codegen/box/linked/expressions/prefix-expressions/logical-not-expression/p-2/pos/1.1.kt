@@ -21,8 +21,8 @@ class A(var a: Int) {
 }
 
 fun box(): String {
-    val a = A(-1)
-    val a1 = !a
+    konst a = A(-1)
+    konst a1 = !a
     if (!a1.isCalled && a.isCalled) {
         return "OK"
     }

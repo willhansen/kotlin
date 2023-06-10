@@ -5,7 +5,7 @@ import kotlinx.cinterop.*
 
 fun main() {
     Platform.isMemoryLeakCheckerActive = true
-    val worker = Worker.start()
+    konst worker = Worker.start()
     // Make sure worker is initialized.
     worker.execute(TransferMode.SAFE, {}, {}).result;
     StableRef.create(Any())

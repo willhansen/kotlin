@@ -19,7 +19,7 @@ import kotlin.test.assertNotNull
 // Should be fixed via planned fixes in Kotlin/JS plugin: https://youtrack.jetbrains.com/issue/KFC-252
 abstract class KotlinJsIrLibraryGradlePluginITBase : KGPBaseTest() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(
         jsOptions = BuildOptions.JsOptions(
             useIrBackend = true,
             jsCompilerType = KotlinJsCompilerType.IR
@@ -77,12 +77,12 @@ abstract class KotlinJsIrLibraryGradlePluginITBase : KGPBaseTest() {
 @DisplayName("Kotlin/JS K1 IR library")
 @JsGradlePluginTests
 class KotlinK1JsIrLibraryGradlePluginIT : KotlinJsIrLibraryGradlePluginITBase() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = null)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = null)
 }
 
 @GradleTestVersions(minVersion = TestVersions.Gradle.G_7_0)
 @DisplayName("Kotlin/JS K2 IR library")
 @JsGradlePluginTests
 class KotlinK2JsIrLibraryGradlePluginIT : KotlinJsIrLibraryGradlePluginITBase() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(languageVersion = "2.0")
 }

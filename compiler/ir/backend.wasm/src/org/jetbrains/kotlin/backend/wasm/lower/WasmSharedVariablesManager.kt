@@ -37,17 +37,17 @@ import org.jetbrains.kotlin.name.SpecialNames
  * This is a copy of an old version of JS lowering, because JS did platform-specific optimization incompatible with Wasm.
  * TODO: Revisit
  */
-class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtIns: IrBuiltIns, val implicitDeclarationsFile: IrPackageFragment) : SharedVariablesManager {
+class WasmSharedVariablesManager(konst context: JsCommonBackendContext, konst builtIns: IrBuiltIns, konst implicitDeclarationsFile: IrPackageFragment) : SharedVariablesManager {
     override fun declareSharedVariable(originalDeclaration: IrVariable): IrVariable {
-        val initializer = originalDeclaration.initializer ?: IrConstImpl.constNull(
+        konst initializer = originalDeclaration.initializer ?: IrConstImpl.constNull(
             originalDeclaration.startOffset,
             originalDeclaration.endOffset,
             builtIns.nothingNType
         )
 
-        val constructorSymbol = closureBoxConstructorDeclaration.symbol
+        konst constructorSymbol = closureBoxConstructorDeclaration.symbol
 
-        val irCall =
+        konst irCall =
             IrConstructorCallImpl(
                 initializer.startOffset,
                 initializer.endOffset,
@@ -55,7 +55,7 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
                 constructorSymbol,
                 closureBoxConstructorDeclaration.parentAsClass.typeParameters.size,
                 closureBoxConstructorDeclaration.typeParameters.size,
-                closureBoxConstructorDeclaration.valueParameters.size
+                closureBoxConstructorDeclaration.konstueParameters.size
             ).apply {
                 putValueArgument(0, initializer)
             }
@@ -79,7 +79,7 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
     override fun defineSharedValue(originalDeclaration: IrVariable, sharedVariableDeclaration: IrVariable) = sharedVariableDeclaration
 
     override fun getSharedValue(sharedVariableSymbol: IrValueSymbol, originalGet: IrGetValue): IrExpression {
-        val getField = IrGetFieldImpl(
+        konst getField = IrGetFieldImpl(
             originalGet.startOffset, originalGet.endOffset,
             closureBoxFieldDeclaration.symbol,
             closureBoxFieldDeclaration.type,
@@ -115,33 +115,33 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
                 sharedVariableSymbol,
                 originalSet.origin
             ),
-            originalSet.value,
+            originalSet.konstue,
             originalSet.type,
             originalSet.origin
         )
 
-    private val boxTypeName = "\$closureBox\$"
+    private konst boxTypeName = "\$closureBox\$"
 
-    private val closureBoxClassDeclaration by lazy {
+    private konst closureBoxClassDeclaration by lazy {
         createClosureBoxClassDeclaration()
     }
 
-    private val closureBoxConstructorDeclaration by lazy {
+    private konst closureBoxConstructorDeclaration by lazy {
         createClosureBoxConstructorDeclaration()
     }
 
-    private val closureBoxFieldDeclaration by lazy {
+    private konst closureBoxFieldDeclaration by lazy {
         closureBoxPropertyDeclaration
     }
 
-    private val closureBoxPropertyDeclaration by lazy {
+    private konst closureBoxPropertyDeclaration by lazy {
         createClosureBoxPropertyDeclaration()
     }
 
     private lateinit var closureBoxType: IrType
 
     private fun createClosureBoxClassDeclaration(): IrClass {
-        val declaration = context.irFactory.buildClass {
+        konst declaration = context.irFactory.buildClass {
             origin = JsLoweredDeclarationOrigin.JS_CLOSURE_BOX_CLASS_DECLARATION
             name = Name.identifier(boxTypeName)
             visibility = DescriptorVisibilities.PUBLIC
@@ -169,8 +169,8 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
     }
 
     private fun createClosureBoxPropertyDeclaration(): IrField {
-        val symbol = IrFieldSymbolImpl()
-        val fieldName = Name.identifier("v")
+        konst symbol = IrFieldSymbolImpl()
+        konst fieldName = Name.identifier("v")
         return context.irFactory.createField(
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
@@ -189,9 +189,9 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
     }
 
     private fun createClosureBoxConstructorDeclaration(): IrConstructor {
-        val symbol = IrConstructorSymbolImpl()
+        konst symbol = IrConstructorSymbolImpl()
 
-        val declaration = context.irFactory.createConstructor(
+        konst declaration = context.irFactory.createConstructor(
             UNDEFINED_OFFSET, UNDEFINED_OFFSET, JsLoweredDeclarationOrigin.JS_CLOSURE_BOX_CLASS_DECLARATION, symbol,
             SpecialNames.INIT, DescriptorVisibilities.PUBLIC, closureBoxClassDeclaration.defaultType,
             isInline = false, isExternal = false, isPrimary = true, isExpect = false
@@ -199,14 +199,14 @@ class WasmSharedVariablesManager(val context: JsCommonBackendContext, val builtI
 
         declaration.parent = closureBoxClassDeclaration
 
-        val parameterDeclaration = createClosureBoxConstructorParameterDeclaration(declaration)
+        konst parameterDeclaration = createClosureBoxConstructorParameterDeclaration(declaration)
 
-        declaration.valueParameters += parameterDeclaration
+        declaration.konstueParameters += parameterDeclaration
 
-        val receiver = JsIrBuilder.buildGetValue(closureBoxClassDeclaration.thisReceiver!!.symbol)
-        val value = JsIrBuilder.buildGetValue(parameterDeclaration.symbol)
+        konst receiver = JsIrBuilder.buildGetValue(closureBoxClassDeclaration.thisReceiver!!.symbol)
+        konst konstue = JsIrBuilder.buildGetValue(parameterDeclaration.symbol)
 
-        val setField = JsIrBuilder.buildSetField(closureBoxFieldDeclaration.symbol, receiver, value, builtIns.unitType)
+        konst setField = JsIrBuilder.buildSetField(closureBoxFieldDeclaration.symbol, receiver, konstue, builtIns.unitType)
 
         declaration.body = context.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET, listOf(setField))
 

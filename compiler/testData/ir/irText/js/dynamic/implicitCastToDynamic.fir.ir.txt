@@ -1,19 +1,19 @@
 FILE fqName:<root> fileName:/implicitCastToDynamic.kt
-  PROPERTY name:d1 visibility:public modality:FINAL [val]
+  PROPERTY name:d1 visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:d1 type:dynamic visibility:private [final,static]
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=1
+        CONST Int type=kotlin.Int konstue=1
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-d1> visibility:public modality:FINAL <> () returnType:dynamic
-      correspondingProperty: PROPERTY name:d1 visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:d1 visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-d1> (): dynamic declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d1 type:dynamic visibility:private [final,static]' type=dynamic origin=null
-  PROPERTY name:p visibility:public modality:FINAL [val]
+  PROPERTY name:p visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final,static]
       EXPRESSION_BODY
-        CONST Int type=kotlin.Int value=1
+        CONST Int type=kotlin.Int konstue=1
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:FINAL <> () returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-p> (): kotlin.Int declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final,static]' type=kotlin.Int origin=null
@@ -31,7 +31,7 @@ FILE fqName:<root> fileName:/implicitCastToDynamic.kt
       VALUE_PARAMETER name:<set-?> index:0 type:dynamic
       BLOCK_BODY
         SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:d2 type:dynamic visibility:private [static]' type=kotlin.Unit origin=null
-          value: GET_VAR '<set-?>: dynamic declared in <root>.<set-d2>' type=dynamic origin=null
+          konstue: GET_VAR '<set-?>: dynamic declared in <root>.<set-d2>' type=dynamic origin=null
   FUN name:withDynamic visibility:public modality:FINAL <> (d:dynamic) returnType:dynamic
     VALUE_PARAMETER name:d index:0 type:dynamic
     BLOCK_BODY
@@ -46,12 +46,12 @@ FILE fqName:<root> fileName:/implicitCastToDynamic.kt
   FUN name:test2 visibility:public modality:FINAL <> (a:kotlin.Any) returnType:kotlin.Unit
     VALUE_PARAMETER name:a index:0 type:kotlin.Any
     BLOCK_BODY
-      VAR name:d type:dynamic [val]
+      VAR name:d type:dynamic [konst]
         GET_VAR 'a: kotlin.Any declared in <root>.test2' type=kotlin.Any origin=null
   FUN name:test3 visibility:public modality:FINAL <> (a:kotlin.Any?) returnType:kotlin.Unit
     VALUE_PARAMETER name:a index:0 type:kotlin.Any?
     BLOCK_BODY
-      VAR name:d type:dynamic [val]
+      VAR name:d type:dynamic [konst]
         GET_VAR 'a: kotlin.Any? declared in <root>.test3' type=kotlin.Any? origin=null
   FUN name:test4 visibility:public modality:FINAL <> (a:kotlin.Any, s:kotlin.String, na:kotlin.Any?) returnType:kotlin.Unit
     VALUE_PARAMETER name:a index:0 type:kotlin.Any

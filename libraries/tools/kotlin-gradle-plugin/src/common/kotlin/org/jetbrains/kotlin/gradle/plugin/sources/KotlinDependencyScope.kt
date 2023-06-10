@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.gradle.utils.COMPILE_ONLY
 import org.jetbrains.kotlin.gradle.utils.IMPLEMENTATION
 import org.jetbrains.kotlin.gradle.utils.RUNTIME_ONLY
 
-internal enum class KotlinDependencyScope(val scopeName: String) {
+internal enum class KotlinDependencyScope(konst scopeName: String) {
     API_SCOPE(API),
     IMPLEMENTATION_SCOPE(IMPLEMENTATION),
     COMPILE_ONLY_SCOPE(COMPILE_ONLY),
     RUNTIME_ONLY_SCOPE(RUNTIME_ONLY);
 
     companion object {
-        val compileScopes = listOf(API_SCOPE, IMPLEMENTATION_SCOPE, COMPILE_ONLY_SCOPE)
+        konst compileScopes = listOf(API_SCOPE, IMPLEMENTATION_SCOPE, COMPILE_ONLY_SCOPE)
     }
 }
 

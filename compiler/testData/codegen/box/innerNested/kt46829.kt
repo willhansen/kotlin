@@ -1,19 +1,19 @@
 class Outer<T> {
     var <V> Inner<T, V>.prop: V
-        get() = this.value
-        set(value) {
-            this.value = value
+        get() = this.konstue
+        set(konstue) {
+            this.konstue = konstue
         }
 }
 
 class Inner<T, V>(
-    val key: T,
-    var value: V
+    konst key: T,
+    var konstue: V
 )
 
 fun box(): String {
     Outer<Boolean>().run {
-        val i = Inner(true, false)
+        konst i = Inner(true, false)
         i.prop = true
     }
     return "OK"

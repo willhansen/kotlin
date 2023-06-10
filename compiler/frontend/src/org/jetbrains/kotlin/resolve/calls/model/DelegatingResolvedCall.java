@@ -94,8 +94,8 @@ public abstract class DelegatingResolvedCall<D extends CallableDescriptor> imple
 
     @NotNull
     @Override
-    public ArgumentMapping getArgumentMapping(@NotNull ValueArgument valueArgument) {
-        return resolvedCall.getArgumentMapping(valueArgument);
+    public ArgumentMapping getArgumentMapping(@NotNull ValueArgument konstueArgument) {
+        return resolvedCall.getArgumentMapping(konstueArgument);
     }
 
     @Nullable

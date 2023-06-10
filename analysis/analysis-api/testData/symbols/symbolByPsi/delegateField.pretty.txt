@@ -1,16 +1,16 @@
 class MyColor(x: kotlin.Int, y: kotlin.Int, z: kotlin.Int) {
-  val x: kotlin.Int
+  konst x: kotlin.Int
 
-  val y: kotlin.Int
+  konst y: kotlin.Int
 
-  val z: kotlin.Int
+  konst z: kotlin.Int
 }
 
 class Some {
-  val delegate: MyColor
+  konst delegate: MyColor
     get()
 
-  val lambda: kotlin.Lazy<MyColor>
+  konst lambda: kotlin.Lazy<MyColor>
 
-  val nonLazy: MyColor
+  konst nonLazy: MyColor
 }

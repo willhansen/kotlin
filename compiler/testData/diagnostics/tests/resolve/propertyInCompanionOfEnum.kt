@@ -6,8 +6,8 @@ package test
 enum class E {
     Entry;
     companion object {
-        val Entry = ""
-        val NotEntry = ""
+        konst Entry = ""
+        konst NotEntry = ""
     }
 }
 

@@ -14,27 +14,27 @@ import generators.unicode.hexToInt
  * The base class of character mappings builders.
  */
 internal abstract class MappingsBuilder {
-    private val patterns = mutableListOf<MappingPattern>()
+    private konst patterns = mutableListOf<MappingPattern>()
 
     /**
      * Appends a line from the UnicodeData.txt file.
      */
     fun append(line: UnicodeDataLine) {
-        val charCode = line.char.hexToInt()
-        val equivalent = mappingEquivalent(line)?.hexToInt() ?: return
-        val mapping = equivalent - charCode
+        konst charCode = line.char.hexToInt()
+        konst equikonstent = mappingEquikonstent(line)?.hexToInt() ?: return
+        konst mapping = equikonstent - charCode
 
-        check((charCode > Char.MAX_VALUE.code) == (equivalent > Char.MAX_VALUE.code)) { "Handle when equivalent mapping is out of BMP." }
+        check((charCode > Char.MAX_VALUE.code) == (equikonstent > Char.MAX_VALUE.code)) { "Handle when equikonstent mapping is out of BMP." }
 
         if (patterns.isEmpty()) {
             patterns.add(createPattern(charCode, line.categoryCode, mapping))
             return
         }
 
-        val lastPattern = patterns.last()
+        konst lastPattern = patterns.last()
 
         if (!lastPattern.append(charCode, line.categoryCode, mapping)) {
-            val newLastPattern = evolveLastPattern(lastPattern, charCode, line.categoryCode, mapping)
+            konst newLastPattern = evolveLastPattern(lastPattern, charCode, line.categoryCode, mapping)
             if (newLastPattern != null) {
                 patterns[patterns.lastIndex] = newLastPattern
             } else {
@@ -53,9 +53,9 @@ internal abstract class MappingsBuilder {
     }
 
     /**
-     * Returns the mapping equivalent this builder is responsible for.
+     * Returns the mapping equikonstent this builder is responsible for.
      */
-    abstract fun mappingEquivalent(line: UnicodeDataLine): String?
+    abstract fun mappingEquikonstent(line: UnicodeDataLine): String?
 
     /**
      * Appends the [charCode] with the specified [categoryCode] and [mapping] to the [lastPattern] and returns the resulting pattern,

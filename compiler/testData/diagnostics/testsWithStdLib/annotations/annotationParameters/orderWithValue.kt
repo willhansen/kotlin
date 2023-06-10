@@ -4,7 +4,7 @@ public @interface A {
     double b();
     Class<?> x1();
     int a();
-    String value();
+    String konstue();
     Class<?> x();
     Class<?> x2();
 }

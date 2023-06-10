@@ -7,7 +7,7 @@ class Inline {
         return 0
     }
 
-    inline operator fun setValue(receiver: Any?, prop: KProperty<*>, value: Int) {
-        println(value)
+    inline operator fun setValue(receiver: Any?, prop: KProperty<*>, konstue: Int) {
+        println(konstue)
     }
 }

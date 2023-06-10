@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.annotationClass
 import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.resolve.descriptorUtil.getAnnotationRetention
 
-class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescriptor) : AdditionalAnnotationChecker {
+class OptInMarkerDeclarationAnnotationChecker(private konst module: ModuleDescriptor) : AdditionalAnnotationChecker {
     override fun checkEntries(
         entries: List<KtAnnotationEntry>,
         actualTargets: List<KotlinTarget>,
@@ -39,15 +39,15 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
         var hasOptIn = false
 
         for (entry in entries) {
-            val annotation = trace.bindingContext.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst annotation = trace.bindingContext.get(BindingContext.ANNOTATION, entry) ?: continue
             when (annotation.fqName) {
                 OptInNames.OPT_IN_FQ_NAME -> {
-                    val annotationClasses = (annotation.allValueArguments[OptInNames.OPT_IN_ANNOTATION_CLASS] as? ArrayValue)
-                        ?.value.orEmpty()
+                    konst annotationClasses = (annotation.allValueArguments[OptInNames.OPT_IN_ANNOTATION_CLASS] as? ArrayValue)
+                        ?.konstue.orEmpty()
                     checkOptInUsage(annotationClasses, trace, entry)
                 }
                 OptInNames.SUBCLASS_OPT_IN_REQUIRED_FQ_NAME -> {
-                    val annotationClass =
+                    konst annotationClass =
                         annotation.allValueArguments[OptInNames.OPT_IN_ANNOTATION_CLASS]
                     checkSubclassOptInUsage(annotated, listOfNotNull(annotationClass), trace, entry)
                 }
@@ -55,11 +55,11 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
                     hasOptIn = true
                 }
             }
-            val annotationClass = annotation.annotationClass ?: continue
+            konst annotationClass = annotation.annotationClass ?: continue
             if (annotationClass.annotations.any { it.fqName == OptInNames.REQUIRES_OPT_IN_FQ_NAME }) {
-                val applicableTargets = AnnotationChecker.applicableTargetSet(annotationClass)
-                val possibleTargets = applicableTargets.intersect(actualTargets)
-                val annotationUseSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
+                konst applicableTargets = AnnotationChecker.applicableTargetSet(annotationClass)
+                konst possibleTargets = applicableTargets.intersect(actualTargets)
+                konst annotationUseSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
                 if (PROPERTY_GETTER in possibleTargets ||
                     annotationUseSiteTarget == AnnotationUseSiteTarget.PROPERTY_GETTER
                 ) {
@@ -110,16 +110,16 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
                 return
             }
             is KtClassOrObject -> {
-                val descriptor = trace[BindingContext.CLASS, annotated]
+                konst descriptor = trace[BindingContext.CLASS, annotated]
                 if (descriptor != null) {
-                    val kind = descriptor.kind
+                    konst kind = descriptor.kind
                     if (kind == ClassKind.OBJECT || kind == ClassKind.ENUM_CLASS || kind == ClassKind.ANNOTATION_CLASS) {
                         trace.report(Errors.SUBCLASS_OPT_IN_INAPPLICABLE.on(entry, kind.toString()))
                         return
                     }
                     if (kind != ClassKind.ENUM_ENTRY) {
                         // ^ We don't report anything on enum entries because it's anyway inapplicable target
-                        val modality = descriptor.modality
+                        konst modality = descriptor.modality
                         if (modality != Modality.ABSTRACT && modality != Modality.OPEN) {
                             trace.report(Errors.SUBCLASS_OPT_IN_INAPPLICABLE.on(entry, "$modality $kind"))
                             return
@@ -141,10 +141,10 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
 
     private fun checkArgumentsAreMarkers(annotationClasses: List<ConstantValue<*>>, trace: BindingTrace, entry: KtAnnotationEntry) {
         for (annotationClass in annotationClasses) {
-            val classDescriptor =
+            konst classDescriptor =
                 (annotationClass as? KClassValue)?.getArgumentType(module)?.constructor?.declarationDescriptor as? ClassDescriptor
                     ?: continue
-            val optInDescription = with(OptInUsageChecker) {
+            konst optInDescription = with(OptInUsageChecker) {
                 classDescriptor.loadOptInForMarkerAnnotation()
             }
             if (optInDescription == null) {
@@ -157,14 +157,14 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
         entries: List<KtAnnotationEntry>,
         trace: BindingTrace
     ) {
-        val associatedEntries = entries.associateWith { entry -> trace.bindingContext.get(BindingContext.ANNOTATION, entry) }.entries
-        val targetEntry = associatedEntries.firstOrNull { (_, descriptor) ->
+        konst associatedEntries = entries.associateWith { entry -> trace.bindingContext.get(BindingContext.ANNOTATION, entry) }.entries
+        konst targetEntry = associatedEntries.firstOrNull { (_, descriptor) ->
             descriptor?.fqName == StandardNames.FqNames.target
         }
         if (targetEntry != null) {
-            val (entry, descriptor) = targetEntry
-            val allowedTargets = AnnotationChecker.loadAnnotationTargets(descriptor!!) ?: return
-            val wrongTargets = allowedTargets.intersect(OptInDescription.WRONG_TARGETS_FOR_MARKER)
+            konst (entry, descriptor) = targetEntry
+            konst allowedTargets = AnnotationChecker.loadAnnotationTargets(descriptor!!) ?: return
+            konst wrongTargets = allowedTargets.intersect(OptInDescription.WRONG_TARGETS_FOR_MARKER)
             if (wrongTargets.isNotEmpty()) {
                 trace.report(
                     Errors.OPT_IN_MARKER_WITH_WRONG_TARGET.on(
@@ -174,11 +174,11 @@ class OptInMarkerDeclarationAnnotationChecker(private val module: ModuleDescript
                 )
             }
         }
-        val retentionEntry = associatedEntries.firstOrNull { (_, descriptor) ->
+        konst retentionEntry = associatedEntries.firstOrNull { (_, descriptor) ->
             descriptor?.fqName == StandardNames.FqNames.retention
         }
         if (retentionEntry != null) {
-            val (entry, descriptor) = retentionEntry
+            konst (entry, descriptor) = retentionEntry
             if (descriptor?.getAnnotationRetention() == KotlinRetention.SOURCE) {
                 trace.report(Errors.OPT_IN_MARKER_WITH_WRONG_RETENTION.on(entry))
             }

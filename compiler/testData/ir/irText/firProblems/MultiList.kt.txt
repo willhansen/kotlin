@@ -1,30 +1,30 @@
 data class Some<T : Any?> {
-  constructor(value: T) /* primary */ {
+  constructor(konstue: T) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: T
-    field = value
+  konst konstue: T
+    field = konstue
     get
 
   operator fun component1(): T {
-    return <this>.#value
+    return <this>.#konstue
   }
 
-  fun copy(value: T = <this>.#value): Some<T> {
-    return Some<T>(value = value)
+  fun copy(konstue: T = <this>.#konstue): Some<T> {
+    return Some<T>(konstue = konstue)
   }
 
   override fun toString(): String {
-    return "Some(" + "value=" + <this>.#value + ")"
+    return "Some(" + "konstue=" + <this>.#konstue + ")"
   }
 
   override fun hashCode(): Int {
     return when {
-      EQEQ(arg0 = <this>.#value, arg1 = null) -> 0
-      else -> <this>.#value.hashCode()
+      EQEQ(arg0 = <this>.#konstue, arg1 = null) -> 0
+      else -> <this>.#konstue.hashCode()
     }
   }
 
@@ -35,9 +35,9 @@ data class Some<T : Any?> {
     when {
       other !is Some<T> -> return false
     }
-    val tmp0_other_with_cast: Some<T> = other as Some<T>
+    konst tmp0_other_with_cast: Some<T> = other as Some<T>
     when {
-      EQEQ(arg0 = <this>.#value, arg1 = tmp0_other_with_cast.#value).not() -> return false
+      EQEQ(arg0 = <this>.#konstue, arg1 = tmp0_other_with_cast.#konstue).not() -> return false
     }
     return true
   }

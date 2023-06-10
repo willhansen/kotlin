@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrGetValueImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrValueSymbol,
+    override konst symbol: IrValueSymbol,
     override var origin: IrStatementOrigin? = null
 ) : IrGetValue() {
     constructor(

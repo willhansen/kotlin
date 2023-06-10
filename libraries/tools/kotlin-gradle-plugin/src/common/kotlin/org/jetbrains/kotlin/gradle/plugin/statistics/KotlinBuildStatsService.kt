@@ -38,35 +38,35 @@ import kotlin.system.measureTimeMillis
  */
 
 interface KotlinBuildStatsMXBean {
-    fun reportBoolean(name: String, value: Boolean, subprojectName: String?, weight: Long?): Boolean
+    fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean
 
-    fun reportNumber(name: String, value: Long, subprojectName: String?, weight: Long?): Boolean
+    fun reportNumber(name: String, konstue: Long, subprojectName: String?, weight: Long?): Boolean
 
-    fun reportString(name: String, value: String, subprojectName: String?, weight: Long?): Boolean
+    fun reportString(name: String, konstue: String, subprojectName: String?, weight: Long?): Boolean
 }
 
 
 internal abstract class KotlinBuildStatsService internal constructor() : IStatisticsValuesConsumer, Closeable {
     companion object {
         // Do not rename this bean otherwise compatibility with the older Kotlin Gradle Plugins would be lost
-        private const val JMX_BEAN_NAME_BEFORE_232_IDEA = "org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService"
+        private const konst JMX_BEAN_NAME_BEFORE_232_IDEA = "org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService"
 
         //update name when API changed
-        private const val SERVICE_NAME = "v2"
-        const val JMX_BEAN_NAME = "org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService,name=$SERVICE_NAME"
+        private const konst SERVICE_NAME = "v2"
+        const konst JMX_BEAN_NAME = "org.jetbrains.kotlin.gradle.plugin.statistics:type=StatsService,name=$SERVICE_NAME"
 
 
         // Property name for disabling saving statistical information
-        const val ENABLE_STATISTICS_PROPERTY_NAME = "enable_kotlin_performance_profile"
+        const konst ENABLE_STATISTICS_PROPERTY_NAME = "enable_kotlin_performance_profile"
 
-        // Property used for tests. Build will fail fast if collected value doesn't fit regexp
-        const val FORCE_VALUES_VALIDATION = "kotlin_performance_profile_force_validation"
+        // Property used for tests. Build will fail fast if collected konstue doesn't fit regexp
+        const konst FORCE_VALUES_VALIDATION = "kotlin_performance_profile_force_konstidation"
 
         // default state
-        const val DEFAULT_STATISTICS_STATE = true
+        const konst DEFAULT_STATISTICS_STATE = true
 
         // "emergency file" collecting statistics is disabled it the file exists
-        const val DISABLE_STATISTICS_FILE_NAME = "${STATISTICS_FOLDER_NAME}/.disable"
+        const konst DISABLE_STATISTICS_FILE_NAME = "${STATISTICS_FOLDER_NAME}/.disable"
 
         /**
          * Method for getting IStatisticsValuesConsumer for reporting some statistics
@@ -102,25 +102,25 @@ internal abstract class KotlinBuildStatsService internal constructor() : IStatis
         internal fun getOrCreateInstance(project: Project): KotlinBuildStatsService? {
 
             return runSafe("${KotlinBuildStatsService::class.java}.getOrCreateInstance") {
-                val gradle = project.gradle
+                konst gradle = project.gradle
                 statisticsIsEnabled = statisticsIsEnabled ?: checkStatisticsEnabled(gradle)
                 if (statisticsIsEnabled != true) {
                     null
                 } else {
-                    val log = getLogger()
+                    konst log = getLogger()
 
                     if (instance != null) {
                         log.debug("${getServiceName()} is already instantiated. Current instance is $instance")
                     } else {
-                        val beanName = ObjectName(JMX_BEAN_NAME)
-                        val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
+                        konst beanName = ObjectName(JMX_BEAN_NAME)
+                        konst mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
                         if (mbs.isRegistered(beanName)) {
                             log.debug(
                                 "${getServiceName()} is already instantiated in another classpath. Creating JMX-wrapper"
                             )
                             instance = JMXKotlinBuildStatsService(mbs, beanName)
                         } else {
-                            val newInstance = DefaultKotlinBuildStatsService(gradle, beanName)
+                            konst newInstance = DefaultKotlinBuildStatsService(gradle, beanName)
 
                             instance = newInstance
                             log.debug("Instantiated ${getServiceName()}: new instance $instance")
@@ -144,16 +144,16 @@ internal abstract class KotlinBuildStatsService internal constructor() : IStatis
 
         //To support backward compatibility with Idea before 232 version
         private fun registerPre232IdeaStatsBean(mbs: MBeanServer, gradle: Gradle, log: Logger) {
-            val beanName = ObjectName(JMX_BEAN_NAME_BEFORE_232_IDEA)
+            konst beanName = ObjectName(JMX_BEAN_NAME_BEFORE_232_IDEA)
             if (!mbs.isRegistered(beanName)) {
-                val newInstance = Pre232IdeaKotlinBuildStatsService(gradle, beanName)
+                konst newInstance = Pre232IdeaKotlinBuildStatsService(gradle, beanName)
                 mbs.registerMBean(StandardMBean(newInstance, Pre232IdeaKotlinBuildStatsMXBean::class.java), beanName)
                 log.debug("Register JMX service for backward compatibility")
             }
         }
 
         protected fun reportTaskIfNeed(task: String) {
-            val metric = when (task.substringAfterLast(":")) {
+            konst metric = when (task.substringAfterLast(":")) {
                 "dokkaHtml" -> BooleanMetrics.ENABLED_DOKKA_HTML
                 "dokkaGfm" -> BooleanMetrics.ENABLED_DOKKA_GFM
                 "dokkaJavadoc" -> BooleanMetrics.ENABLED_DOKKA_JAVADOC
@@ -178,7 +178,7 @@ internal abstract class KotlinBuildStatsService internal constructor() : IStatis
         fun applyIfInitialised(collector: (KotlinBuildStatsService) -> Unit) {
             getInstance()?.apply {
                 try {
-                    val duration = measureTimeMillis {
+                    konst duration = measureTimeMillis {
                         collector.invoke(this)
                     }
                     this.report(NumericalMetrics.STATISTICS_COLLECT_METRICS_OVERHEAD, duration)
@@ -222,56 +222,56 @@ internal abstract class KotlinBuildStatsService internal constructor() : IStatis
      */
     open fun collectStartMetrics(project: Project, isProjectIsolationEnabled: Boolean): MetricContainer = MetricContainer()
 
-    open fun recordProjectsEvaluated(gradle: Gradle) {}
+    open fun recordProjectsEkonstuated(gradle: Gradle) {}
 }
 
-internal class JMXKotlinBuildStatsService(private val mbs: MBeanServer, private val beanName: ObjectName) :
+internal class JMXKotlinBuildStatsService(private konst mbs: MBeanServer, private konst beanName: ObjectName) :
     KotlinBuildStatsService() {
 
-    private fun callJmx(method: String, type: String, metricName: String, value: Any, subprojectName: String?, weight: Long?): Any? {
+    private fun callJmx(method: String, type: String, metricName: String, konstue: Any, subprojectName: String?, weight: Long?): Any? {
         return mbs.invoke(
             beanName,
             method,
-            arrayOf(metricName, value, subprojectName, weight),
+            arrayOf(metricName, konstue, subprojectName, weight),
             arrayOf("java.lang.String", type, "java.lang.String", "java.lang.Long")
         )
     }
 
-    override fun report(metric: BooleanMetrics, value: Boolean, subprojectName: String?, weight: Long?) =
+    override fun report(metric: BooleanMetrics, konstue: Boolean, subprojectName: String?, weight: Long?) =
         runSafe("report metric ${metric.name}") {
-            callJmx("reportBoolean", "boolean", metric.name, value, subprojectName, weight)
+            callJmx("reportBoolean", "boolean", metric.name, konstue, subprojectName, weight)
         } as? Boolean ?: false
 
-    override fun report(metric: NumericalMetrics, value: Long, subprojectName: String?, weight: Long?) =
+    override fun report(metric: NumericalMetrics, konstue: Long, subprojectName: String?, weight: Long?) =
         runSafe("report metric ${metric.name}") {
-            callJmx("reportNumber", "long", metric.name, value, subprojectName, weight)
+            callJmx("reportNumber", "long", metric.name, konstue, subprojectName, weight)
         } as? Boolean ?: false
 
-    override fun report(metric: StringMetrics, value: String, subprojectName: String?, weight: Long?) =
+    override fun report(metric: StringMetrics, konstue: String, subprojectName: String?, weight: Long?) =
         runSafe("report metric ${metric.name}") {
-            callJmx("reportString", "java.lang.String", metric.name, value, subprojectName, weight)
+            callJmx("reportString", "java.lang.String", metric.name, konstue, subprojectName, weight)
         } as? Boolean ?: false
 
 }
 
 internal abstract class AbstractKotlinBuildStatsService(
     gradle: Gradle,
-    private val beanName: ObjectName,
+    private konst beanName: ObjectName,
 ) : KotlinBuildStatsService() {
     companion object {
         //test only
-        const val CUSTOM_LOGGER_ROOT_PATH = "kotlin.session.logger.root.path"
+        const konst CUSTOM_LOGGER_ROOT_PATH = "kotlin.session.logger.root.path"
 
-        private val logger = Logging.getLogger(AbstractKotlinBuildStatsService::class.java)
+        private konst logger = Logging.getLogger(AbstractKotlinBuildStatsService::class.java)
     }
 
-    private val forcePropertiesValidation = if (gradle.rootProject.hasProperty(FORCE_VALUES_VALIDATION)) {
+    private konst forcePropertiesValidation = if (gradle.rootProject.hasProperty(FORCE_VALUES_VALIDATION)) {
         gradle.rootProject.property(FORCE_VALUES_VALIDATION).toString().toBoolean()
     } else {
         false
     }
 
-    private val customSessionLoggerRootPath: String? = if (gradle.rootProject.hasProperty(CUSTOM_LOGGER_ROOT_PATH)) {
+    private konst customSessionLoggerRootPath: String? = if (gradle.rootProject.hasProperty(CUSTOM_LOGGER_ROOT_PATH)) {
         logger.warn("$CUSTOM_LOGGER_ROOT_PATH property for test purpose only")
         gradle.rootProject.property(CUSTOM_LOGGER_ROOT_PATH) as String
     } else {
@@ -279,10 +279,10 @@ internal abstract class AbstractKotlinBuildStatsService(
     }
 
 
-    private val sessionLoggerRootPath =
+    private konst sessionLoggerRootPath =
         customSessionLoggerRootPath?.let { File(it) } ?: gradle.gradleUserHomeDir
 
-    protected val sessionLogger = BuildSessionLogger(
+    protected konst sessionLogger = BuildSessionLogger(
         sessionLoggerRootPath,
         forceValuesValidation = forcePropertiesValidation,
     )
@@ -291,8 +291,8 @@ internal abstract class AbstractKotlinBuildStatsService(
         return (gradle as? DefaultGradle)?.services?.get(BuildRequestMetaData::class.java)?.startTime
     }
 
-    override fun recordProjectsEvaluated(gradle: Gradle) {
-        runSafe("${DefaultKotlinBuildStatsService::class.java}.projectEvaluated") {
+    override fun recordProjectsEkonstuated(gradle: Gradle) {
+        runSafe("${DefaultKotlinBuildStatsService::class.java}.projectEkonstuated") {
             if (!sessionLogger.isBuildSessionStarted()) {
                 sessionLogger.startBuildSession(
                     DaemonReuseCounter.incrementAndGetOrdinal(),
@@ -314,23 +314,23 @@ internal class DefaultKotlinBuildStatsService internal constructor(
     beanName: ObjectName,
 ) : AbstractKotlinBuildStatsService(gradle, beanName), KotlinBuildStatsMXBean {
 
-    override fun report(metric: BooleanMetrics, value: Boolean, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: BooleanMetrics, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun report(metric: NumericalMetrics, value: Long, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: NumericalMetrics, konstue: Long, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun report(metric: StringMetrics, value: String, subprojectName: String?, weight: Long?): Boolean =
-        KotlinBuildStatHandler().report(sessionLogger, metric, value, subprojectName, weight)
+    override fun report(metric: StringMetrics, konstue: String, subprojectName: String?, weight: Long?): Boolean =
+        KotlinBuildStatHandler().report(sessionLogger, metric, konstue, subprojectName, weight)
 
-    override fun reportBoolean(name: String, value: Boolean, subprojectName: String?, weight: Long?): Boolean =
-        report(BooleanMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean =
+        report(BooleanMetrics.konstueOf(name), konstue, subprojectName, weight)
 
-    override fun reportNumber(name: String, value: Long, subprojectName: String?, weight: Long?): Boolean =
-        report(NumericalMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportNumber(name: String, konstue: Long, subprojectName: String?, weight: Long?): Boolean =
+        report(NumericalMetrics.konstueOf(name), konstue, subprojectName, weight)
 
-    override fun reportString(name: String, value: String, subprojectName: String?, weight: Long?): Boolean =
-        report(StringMetrics.valueOf(name), value, subprojectName, weight)
+    override fun reportString(name: String, konstue: String, subprojectName: String?, weight: Long?): Boolean =
+        report(StringMetrics.konstueOf(name), konstue, subprojectName, weight)
 
     //only one jmx bean service should report global metrics
     override fun recordBuildFinish(action: String?, buildFailed: Boolean, configurationTimeMetrics: MetricContainer) {

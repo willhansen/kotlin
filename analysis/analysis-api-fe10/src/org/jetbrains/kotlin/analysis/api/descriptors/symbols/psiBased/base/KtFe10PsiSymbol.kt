@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.psi.KtElement
 
 internal interface KtFe10PsiSymbol<P : KtElement, D : DeclarationDescriptor> : KtFe10Symbol, KtFe10AnnotatedSymbol {
-    override val psi: P
-    val descriptor: D?
+    override konst psi: P
+    konst descriptor: D?
 
-    override val annotationsObject: Annotations
+    override konst annotationsObject: Annotations
         get() = withValidityAssertion { descriptor?.annotations ?: Annotations.EMPTY }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { psi.ktSymbolOrigin }
 }

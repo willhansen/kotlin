@@ -5,11 +5,11 @@ package foo
 
 external class B {
     companion object {
-        val value: String
+        konst konstue: String
     }
 }
 
-inline fun test() = B.value
+inline fun test() = B.konstue
 
 fun box(): String {
     return test()
@@ -19,4 +19,4 @@ fun box(): String {
 
 function B() {};
 
-B.value = "OK";
+B.konstue = "OK";

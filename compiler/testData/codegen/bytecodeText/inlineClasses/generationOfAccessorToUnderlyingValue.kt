@@ -1,8 +1,8 @@
 // !LANGUAGE: +InlineClasses
 
-inline class UInt(val value: Int)
+inline class UInt(konst konstue: Int)
 
 // 0 INVOKESTATIC UInt\$Erased.getValue
 
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

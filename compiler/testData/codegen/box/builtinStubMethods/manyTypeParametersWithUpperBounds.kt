@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 class A<U : Number, V : U, W : V> : Set<W> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: W): Boolean = false
     override fun iterator(): Iterator<W> = emptySet<W>().iterator()
@@ -18,7 +18,7 @@ fun expectUoe(block: () -> Any) {
 }
 
 fun box(): String {
-    val a = A<Int, Int, Int>() as java.util.Set<Int>
+    konst a = A<Int, Int, Int>() as java.util.Set<Int>
 
     a.iterator()
 

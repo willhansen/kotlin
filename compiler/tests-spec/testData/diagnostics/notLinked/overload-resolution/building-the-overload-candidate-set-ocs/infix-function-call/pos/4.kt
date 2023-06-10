@@ -21,8 +21,8 @@ class C() {
 }
 
 class B() {
-    val barC: C = TODO()
-    val B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
+    konst barC: C = TODO()
+    konst B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
     get() = TODO()
 
     infix fun fooC(i: Int) = {}
@@ -31,7 +31,7 @@ class B() {
 }
 
 infix fun B.<!EXTENSION_SHADOWED_BY_MEMBER!>fooC<!>(i: Int) = {}
-val B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
+konst B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
 get() = TODO()
 
 
@@ -48,18 +48,18 @@ import libPackage.*
 
 fun case1() {
     class Case() {
-        val B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
+        konst B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
         get() = TODO()
 
         fun case() {
-            val b = B()
+            konst b = B()
             <!DEBUG_INFO_CALL("fqName: libPackage.B.fooC; typeCall: infix function")!>b fooC 3<!>
             <!DEBUG_INFO_CALL("fqName: libPackage.C.invoke; typeCall: variable&invoke")!>b barC 3<!>
         }
     }
 
     fun case() {
-        val b = B()
+        konst b = B()
         <!DEBUG_INFO_CALL("fqName: libPackage.B.fooC; typeCall: infix function")!>b fooC 3<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.C.invoke; typeCall: variable&invoke")!>b barC 3<!>
     }
@@ -82,27 +82,27 @@ infix fun B.<!EXTENSION_SHADOWED_BY_MEMBER!>fooC<!>(i: Int) = {}
 /*should be shadowed by member property with invoke*/
 infix fun B.<!EXTENSION_FUNCTION_SHADOWED_BY_MEMBER_PROPERTY_WITH_INVOKE!>barC<!>(i: Int) = {}
 /*should be shadowed by member property*/
-val B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
+konst B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
 get() = TODO()
 
 fun case2() {
     class Case() {
         /*should be shadowed by member property*/
-        val B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
+        konst B.<!EXTENSION_SHADOWED_BY_MEMBER!>barC<!>: C
         get() = TODO()
         /*should be shadowed by member property with invoke*/
         infix fun B.<!EXTENSION_FUNCTION_SHADOWED_BY_MEMBER_PROPERTY_WITH_INVOKE!>barC<!>(i: Int) = {}
         /*should be shadowed by member function*/
         infix fun B.<!EXTENSION_SHADOWED_BY_MEMBER!>fooC<!>(i: Int) = {}
         fun case() {
-            val b = B()
+            konst b = B()
             <!DEBUG_INFO_CALL("fqName: libPackage.B.fooC; typeCall: infix function")!>b fooC 3<!>
             <!DEBUG_INFO_CALL("fqName: libPackage.C.invoke; typeCall: variable&invoke")!>b barC 3<!>
         }
     }
 
     fun case() {
-        val b = B()
+        konst b = B()
         <!DEBUG_INFO_CALL("fqName: libPackage.B.fooC; typeCall: infix function")!>b fooC 3<!>
         <!DEBUG_INFO_CALL("fqName: libPackage.C.invoke; typeCall: variable&invoke")!>b barC 3<!>
     }

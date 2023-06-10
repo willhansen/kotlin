@@ -22,7 +22,7 @@ object Delegate {
     }
 }
 
-val x: Unit by Delegate
+konst x: Unit by Delegate
 
 fun box(): String {
     x

@@ -1,4 +1,4 @@
-val items: List<String>
+konst items: List<String>
     field = mutableListOf()
 
 fun test() {

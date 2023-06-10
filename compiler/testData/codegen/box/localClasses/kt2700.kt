@@ -1,6 +1,6 @@
 package a.b
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 interface Test {
     fun invoke(): String {
@@ -8,7 +8,7 @@ interface Test {
     }
 }
 
-private val a : Test = eval {
+private konst a : Test = ekonst {
     object : Test {}
 }
 

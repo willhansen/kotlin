@@ -12,7 +12,7 @@ import java.util.UUID
 
 @JvmInline
 @Parcelize
-value class ParcelableUuid(val uuid: UUID) : Parcelable {
+konstue class ParcelableUuid(konst uuid: UUID) : Parcelable {
     private companion object : Parceler<ParcelableUuid> {
         override fun ParcelableUuid.write(parcel: Parcel, flags: Int) {
             parcel.writeString(uuid.toString())
@@ -23,16 +23,16 @@ value class ParcelableUuid(val uuid: UUID) : Parcelable {
 }
 
 @Parcelize
-class Data(val uuid: ParcelableUuid) : Parcelable
+class Data(konst uuid: ParcelableUuid) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val data = Data(ParcelableUuid(UUID.randomUUID()))
+    konst data = Data(ParcelableUuid(UUID.randomUUID()))
     data.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val data2 = parcelableCreator<Data>().createFromParcel(parcel)
+    konst data2 = parcelableCreator<Data>().createFromParcel(parcel)
     assert(data2.uuid.uuid == data.uuid.uuid)
 }

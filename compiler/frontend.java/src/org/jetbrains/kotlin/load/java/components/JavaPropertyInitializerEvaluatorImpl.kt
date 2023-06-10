@@ -22,19 +22,19 @@ import org.jetbrains.kotlin.resolve.constants.ConstantValue
 import org.jetbrains.kotlin.resolve.constants.ConstantValueFactory
 import org.jetbrains.kotlin.types.KotlinType
 
-object JavaPropertyInitializerEvaluatorImpl : JavaPropertyInitializerEvaluator {
+object JavaPropertyInitializerEkonstuatorImpl : JavaPropertyInitializerEkonstuator {
     override fun getInitializerConstant(field: JavaField, descriptor: PropertyDescriptor): ConstantValue<*>? =
-        field.initializerValue?.let { value -> convertLiteralValue(value, descriptor.type) }
+        field.initializerValue?.let { konstue -> convertLiteralValue(konstue, descriptor.type) }
 
-    internal fun convertLiteralValue(value: Any, expectedType: KotlinType): ConstantValue<*>? =
-        when (value) {
-            // Note: `value` expression may be of class that does not match field type in some cases
+    internal fun convertLiteralValue(konstue: Any, expectedType: KotlinType): ConstantValue<*>? =
+        when (konstue) {
+            // Note: `konstue` expression may be of class that does not match field type in some cases
             // tested for Int, left other checks just in case
             is Byte, is Short, is Int, is Long -> {
-                ConstantValueFactory.createIntegerConstantValue((value as Number).toLong(), expectedType, false)
+                ConstantValueFactory.createIntegerConstantValue((konstue as Number).toLong(), expectedType, false)
             }
             else -> {
-                ConstantValueFactory.createConstantValue(value)
+                ConstantValueFactory.createConstantValue(konstue)
             }
         }
 }

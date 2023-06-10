@@ -34,20 +34,20 @@ public external abstract class XMLHttpRequestUpload : XMLHttpRequestEventTarget,
  */
 public external open class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
     var onreadystatechange: ((Event) -> JsAny?)?
-    open val readyState: Short
+    open konst readyState: Short
     var timeout: Int
     var withCredentials: Boolean
-    open val upload: XMLHttpRequestUpload
-    open val responseURL: String
-    open val status: Short
-    open val statusText: String
+    open konst upload: XMLHttpRequestUpload
+    open konst responseURL: String
+    open konst status: Short
+    open konst statusText: String
     var responseType: XMLHttpRequestResponseType
-    open val response: JsAny?
-    open val responseText: String
-    open val responseXML: Document?
+    open konst response: JsAny?
+    open konst responseText: String
+    open konst responseXML: Document?
     fun open(method: String, url: String)
     fun open(method: String, url: String, async: Boolean, username: String? = definedExternally, password: String? = definedExternally)
-    fun setRequestHeader(name: String, value: String)
+    fun setRequestHeader(name: String, konstue: String)
     fun send(body: JsAny? = definedExternally)
     fun abort()
     fun getResponseHeader(name: String): String?
@@ -55,11 +55,11 @@ public external open class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
     fun overrideMimeType(mime: String)
 
     companion object {
-        val UNSENT: Short
-        val OPENED: Short
-        val HEADERS_RECEIVED: Short
-        val LOADING: Short
-        val DONE: Short
+        konst UNSENT: Short
+        konst OPENED: Short
+        konst HEADERS_RECEIVED: Short
+        konst LOADING: Short
+        konst DONE: Short
     }
 }
 
@@ -67,42 +67,42 @@ public external open class XMLHttpRequest : XMLHttpRequestEventTarget, JsAny {
  * Exposes the JavaScript [FormData](https://developer.mozilla.org/en/docs/Web/API/FormData) to Kotlin
  */
 public external open class FormData(form: HTMLFormElement = definedExternally) : JsAny {
-    fun append(name: String, value: String)
-    fun append(name: String, value: Blob, filename: String = definedExternally)
+    fun append(name: String, konstue: String)
+    fun append(name: String, konstue: Blob, filename: String = definedExternally)
     fun delete(name: String)
     fun get(name: String): JsAny?
     fun getAll(name: String): JsArray<JsAny?>
     fun has(name: String): Boolean
-    fun set(name: String, value: String)
-    fun set(name: String, value: Blob, filename: String = definedExternally)
+    fun set(name: String, konstue: String)
+    fun set(name: String, konstue: Blob, filename: String = definedExternally)
 }
 
 /**
  * Exposes the JavaScript [ProgressEvent](https://developer.mozilla.org/en/docs/Web/API/ProgressEvent) to Kotlin
  */
 public external open class ProgressEvent(type: String, eventInitDict: ProgressEventInit = definedExternally) : Event, JsAny {
-    open val lengthComputable: Boolean
-    open val loaded: JsNumber
-    open val total: JsNumber
+    open konst lengthComputable: Boolean
+    open konst loaded: JsNumber
+    open konst total: JsNumber
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface ProgressEventInit : EventInit, JsAny {
     var lengthComputable: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var loaded: JsNumber? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var total: JsNumber? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -115,14 +115,14 @@ public external interface XMLHttpRequestResponseType : JsAny {
     companion object
 }
 
-public inline val XMLHttpRequestResponseType.Companion.EMPTY: XMLHttpRequestResponseType get() = "".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.EMPTY: XMLHttpRequestResponseType get() = "".toJsString().unsafeCast<XMLHttpRequestResponseType>()
 
-public inline val XMLHttpRequestResponseType.Companion.ARRAYBUFFER: XMLHttpRequestResponseType get() = "arraybuffer".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.ARRAYBUFFER: XMLHttpRequestResponseType get() = "arraybuffer".toJsString().unsafeCast<XMLHttpRequestResponseType>()
 
-public inline val XMLHttpRequestResponseType.Companion.BLOB: XMLHttpRequestResponseType get() = "blob".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.BLOB: XMLHttpRequestResponseType get() = "blob".toJsString().unsafeCast<XMLHttpRequestResponseType>()
 
-public inline val XMLHttpRequestResponseType.Companion.DOCUMENT: XMLHttpRequestResponseType get() = "document".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.DOCUMENT: XMLHttpRequestResponseType get() = "document".toJsString().unsafeCast<XMLHttpRequestResponseType>()
 
-public inline val XMLHttpRequestResponseType.Companion.JSON: XMLHttpRequestResponseType get() = "json".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.JSON: XMLHttpRequestResponseType get() = "json".toJsString().unsafeCast<XMLHttpRequestResponseType>()
 
-public inline val XMLHttpRequestResponseType.Companion.TEXT: XMLHttpRequestResponseType get() = "text".toJsString().unsafeCast<XMLHttpRequestResponseType>()
+public inline konst XMLHttpRequestResponseType.Companion.TEXT: XMLHttpRequestResponseType get() = "text".toJsString().unsafeCast<XMLHttpRequestResponseType>()

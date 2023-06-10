@@ -38,31 +38,31 @@ import kotlin.test.assertTrue
 
 class KotlinClassFinderTest : KotlinTestWithEnvironmentManagement() {
     fun testAbsentClass() {
-        val tmpdir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpdir = KotlinTestUtils.tmpDirForTest(this)
 
-        val environment = createEnvironment(tmpdir)
-        val project = environment.project
+        konst environment = createEnvironment(tmpdir)
+        konst project = environment.project
 
-        val className = "test.A.B.D"
-        val psiClass = JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.allScope(project))
+        konst className = "test.A.B.D"
+        konst psiClass = JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.allScope(project))
         assertNull(psiClass, "Class is expected to be null, there should be no exceptions too.")
     }
 
     fun testNestedClass() {
-        val tmpdir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpdir = KotlinTestUtils.tmpDirForTest(this)
         KotlinTestUtils.compileKotlinWithJava(
             listOf(), listOf(File("compiler/testData/kotlinClassFinder/nestedClass.kt")), tmpdir, testRootDisposable, null
         )
 
-        val environment = createEnvironment(tmpdir)
-        val project = environment.project
+        konst environment = createEnvironment(tmpdir)
+        konst project = environment.project
 
-        val className = "test.A.B.C"
-        val psiClass = JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.allScope(project))
+        konst className = "test.A.B.C"
+        konst psiClass = JavaPsiFacade.getInstance(project).findClass(className, GlobalSearchScope.allScope(project))
         assertNotNull(psiClass, "Psi class not found for $className")
         assertTrue(psiClass !is KtLightClass, "Kotlin light classes are not not expected")
 
-        val binaryClass = VirtualFileFinder.SERVICE.getInstance(project).findKotlinClass(
+        konst binaryClass = VirtualFileFinder.SERVICE.getInstance(project).findKotlinClass(
             JavaClassImpl(JavaElementSourceFactory.getInstance(project).createPsiSource(psiClass)), JvmMetadataVersion.INSTANCE
         )
         assertNotNull(binaryClass, "No binary class for $className")

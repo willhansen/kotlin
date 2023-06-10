@@ -37,7 +37,7 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 object FileClassAnnotationsChecker : AdditionalAnnotationChecker {
     // JvmName & JvmMultifileClass annotations are applicable to multi-file class parts regardless of their retention.
-    private val alwaysApplicable = hashSetOf(JVM_NAME, JVM_MULTIFILE_CLASS)
+    private konst alwaysApplicable = hashSetOf(JVM_NAME, JVM_MULTIFILE_CLASS)
 
     override fun checkEntries(
         entries: List<KtAnnotationEntry>,
@@ -46,22 +46,22 @@ object FileClassAnnotationsChecker : AdditionalAnnotationChecker {
         annotated: KtAnnotated?,
         languageVersionSettings: LanguageVersionSettings
     ) {
-        val fileAnnotationsToCheck = arrayListOf<Pair<KtAnnotationEntry, ClassDescriptor>>()
+        konst fileAnnotationsToCheck = arrayListOf<Pair<KtAnnotationEntry, ClassDescriptor>>()
         for (entry in entries) {
             if (entry.useSiteTarget?.getAnnotationUseSiteTarget() != AnnotationUseSiteTarget.FILE) continue
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
-            val classDescriptor = descriptor.annotationClass ?: continue
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst classDescriptor = descriptor.annotationClass ?: continue
             // This check matters for the applicable annotations only.
-            val applicableTargets = AnnotationChecker.applicableTargetSetFromTargetAnnotationOrNull(classDescriptor)
+            konst applicableTargets = AnnotationChecker.applicableTargetSetFromTargetAnnotationOrNull(classDescriptor)
             if (applicableTargets == null || !applicableTargets.contains(KotlinTarget.FILE)) continue
             fileAnnotationsToCheck.add(Pair(entry, classDescriptor))
         }
 
-        val isMultifileClass = fileAnnotationsToCheck.any { it.second.fqNameSafe == JVM_MULTIFILE_CLASS }
+        konst isMultifileClass = fileAnnotationsToCheck.any { it.second.fqNameSafe == JVM_MULTIFILE_CLASS }
 
         if (isMultifileClass) {
             for ((entry, classDescriptor) in fileAnnotationsToCheck) {
-                val classFqName = classDescriptor.fqNameSafe
+                konst classFqName = classDescriptor.fqNameSafe
                 if (classFqName in alwaysApplicable) continue
                 if (classDescriptor.getAnnotationRetention() != KotlinRetention.SOURCE) {
                     trace.report(ErrorsJvm.ANNOTATION_IS_NOT_APPLICABLE_TO_MULTIFILE_CLASSES.on(entry, classFqName))
@@ -71,14 +71,14 @@ object FileClassAnnotationsChecker : AdditionalAnnotationChecker {
             for ((entry, classDescriptor) in fileAnnotationsToCheck) {
                 if (classDescriptor.fqNameSafe != JVM_PACKAGE_NAME) continue
 
-                val argumentExpression = entry.valueArguments.firstOrNull()?.getArgumentExpression() ?: continue
-                val stringTemplateEntries = (argumentExpression as? KtStringTemplateExpression)?.entries ?: continue
+                konst argumentExpression = entry.konstueArguments.firstOrNull()?.getArgumentExpression() ?: continue
+                konst stringTemplateEntries = (argumentExpression as? KtStringTemplateExpression)?.entries ?: continue
                 if (stringTemplateEntries.size > 1) continue
 
-                val value = (stringTemplateEntries.singleOrNull() as? KtLiteralStringTemplateEntry)?.text
-                if (value == null) {
+                konst konstue = (stringTemplateEntries.singleOrNull() as? KtLiteralStringTemplateEntry)?.text
+                if (konstue == null) {
                     trace.report(ErrorsJvm.JVM_PACKAGE_NAME_CANNOT_BE_EMPTY.on(entry))
-                } else if (!isValidJavaFqName(value)) {
+                } else if (!isValidJavaFqName(konstue)) {
                     trace.report(ErrorsJvm.JVM_PACKAGE_NAME_MUST_BE_VALID_NAME.on(entry))
                 } else if (entry.containingKtFile.declarations.any {
                         it !is KtFunction && it !is KtProperty && it !is KtTypeAlias

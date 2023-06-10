@@ -1,8 +1,8 @@
-open class Z(val s: Int) {
+open class Z(konst s: Int) {
     open fun a() {}
 }
 
-class B(val x: Int) {
+class B(konst x: Int) {
     fun foo() {
         class X : Z(x) {
 

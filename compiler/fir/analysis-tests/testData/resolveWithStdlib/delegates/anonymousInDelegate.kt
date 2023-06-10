@@ -2,8 +2,8 @@ interface Foo {
     fun bar(): Int
 }
 
-val x by lazy {
-    val foo = object : Foo {
+konst x by lazy {
+    konst foo = object : Foo {
         override fun bar(): Int = 42
     }
     foo.bar()

@@ -7,7 +7,7 @@ class NotImported
 
 fun function() = ""
 
-val property = ""
+konst property = ""
 
 // FILE: anotherFromRootPackage.kt
 fun foo(): Klass {
@@ -28,5 +28,5 @@ fun foo(): Klass {
     return Klass()
 }
 
-val v: Nested = Nested()
-val x: <!UNRESOLVED_REFERENCE!>NotImported<!> = <!UNRESOLVED_REFERENCE!>NotImported<!>()
+konst v: Nested = Nested()
+konst x: <!UNRESOLVED_REFERENCE!>NotImported<!> = <!UNRESOLVED_REFERENCE!>NotImported<!>()

@@ -15,21 +15,21 @@ import org.jetbrains.kotlin.gradle.utils.chainedFinalizeValueOnRead
 import org.jetbrains.kotlin.gradle.utils.propertyWithConvention
 
 internal class BasePluginConfigurationG6(
-    private val basePluginConvention: BasePluginConvention,
-    private val objects: ObjectFactory,
-    private val providerFactory: ProviderFactory,
+    private konst basePluginConvention: BasePluginConvention,
+    private konst objects: ObjectFactory,
+    private konst providerFactory: ProviderFactory,
 ) : BasePluginConfiguration {
-    override val archivesName: Property<String>
+    override konst archivesName: Property<String>
         get() = objects
             .propertyWithConvention(
                 providerFactory.provider { basePluginConvention.archivesBaseName }
             )
             .chainedFinalizeValueOnRead()
 
-    override val distsDirectory: DirectoryProperty
+    override konst distsDirectory: DirectoryProperty
         get() = basePluginConvention.distsDirectory
 
-    override val libsDirectory: DirectoryProperty
+    override konst libsDirectory: DirectoryProperty
         get() = basePluginConvention.libsDirectory
 
     internal class BasePluginConfigurationVariantFactoryG6 : BasePluginConfiguration.BasePluginConfigurationVariantFactory {

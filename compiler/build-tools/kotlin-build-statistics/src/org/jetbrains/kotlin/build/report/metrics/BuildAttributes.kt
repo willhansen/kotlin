@@ -9,7 +9,7 @@ import java.io.Serializable
 import java.util.*
 
 class BuildAttributes : Serializable {
-    private val myAttributes =
+    private konst myAttributes =
         EnumMap<BuildAttribute, Int>(
             BuildAttribute::class.java
         )
@@ -25,6 +25,6 @@ class BuildAttributes : Serializable {
     fun asMap(): Map<BuildAttribute, Int> = myAttributes
 
     companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

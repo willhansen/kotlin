@@ -1,11 +1,11 @@
 // WITH_STDLIB
-val String.foo: String
+konst String.foo: String
     get() = this
 
 abstract class A {
-    abstract val x: String
+    abstract konst x: String
 
-    val y by x::foo
+    konst y by x::foo
 }
 
 var storage = "OK"
@@ -13,11 +13,11 @@ var storage = "OK"
 class B : A() {
     override var x: String
         get() = storage
-        set(value) { storage = value }
+        set(konstue) { storage = konstue }
 }
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     b.x = "fail"
     return b.y
 }

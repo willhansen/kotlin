@@ -30,32 +30,32 @@ public class J extends A {
 // FILE: test.kt
 
 open class A {
-    open val valProp: Int = -1
+    open konst konstProp: Int = -1
     open var varProp: Int = -1
     open var isProp: Int = -1
 }
 
 class B : J() {
-    override val valProp: Int = super.valProp + 1
+    override konst konstProp: Int = super.konstProp + 1
     override var varProp: Int
-        set(value) {
-            super.varProp = value
+        set(konstue) {
+            super.varProp = konstue
         }
         get() = super.varProp + 1
 
     override var isProp: Int
-        set(value) {
-            super.isProp = value
+        set(konstue) {
+            super.isProp = konstue
         }
         get() = super.isProp + 1
 }
 
 fun box(): String {
-    val j = J()
+    konst j = J()
     var a: A = j
 
-    if (j.valProp != 123) return "fail 1"
-    if (a.valProp != 123) return "fail 2"
+    if (j.konstProp != 123) return "fail 1"
+    if (a.konstProp != 123) return "fail 2"
 
     j.varProp = -1
     if (!j.okField) return "fail 3"
@@ -79,11 +79,11 @@ fun box(): String {
     if (j.isProp != 789) return "fail 9"
     if (a.isProp != 789) return "fail 10"
 
-    val b = B()
+    konst b = B()
     a = b
 
-    if (b.valProp != 124) return "fail 11"
-    if (a.valProp != 124) return "fail 12"
+    if (b.konstProp != 124) return "fail 11"
+    if (a.konstProp != 124) return "fail 12"
 
     b.varProp = -1
     if (!b.okField) return "fail 13"

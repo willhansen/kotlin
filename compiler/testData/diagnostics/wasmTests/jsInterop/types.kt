@@ -98,7 +98,7 @@ external fun <
 <!WRONG_JS_INTEROP_TYPE!>fun jsCode2(<!WRONG_JS_INTEROP_TYPE!>x: Any<!>): Any<!> {
     js("return x;")
 }
-<!WRONG_JS_INTEROP_TYPE!>val jsProp: Any<!> = js("1")
+<!WRONG_JS_INTEROP_TYPE!>konst jsProp: Any<!> = js("1")
 
 <!WRONG_JS_INTEROP_TYPE!>@JsExport
 fun exported(<!WRONG_JS_INTEROP_TYPE!>x: Any<!>): Any<!> = x

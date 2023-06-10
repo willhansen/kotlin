@@ -21,11 +21,11 @@ import java.io.File
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val outputFile = File(args[0])
-    val baseDir = File(args[1]).canonicalFile
-    val wrapperFile = File(args[2])
+    konst outputFile = File(args[0])
+    konst baseDir = File(args[1]).canonicalFile
+    konst wrapperFile = File(args[2])
 
-    val inputPaths = args.drop(3).map { File(it) }
+    konst inputPaths = args.drop(3).map { File(it) }
     mergeStdlibParts(outputFile, wrapperFile, baseDir, inputPaths)
 }
 
@@ -35,34 +35,34 @@ fun main(args: Array<String>) {
  * The source maps of these files are combined into a single source map.
  */
 private fun mergeStdlibParts(outputFile: File, wrapperFile: File, baseDir: File, inputPaths: List<File>) {
-    val program = JsProgram()
+    konst program = JsProgram()
 
     fun File.makeRelativeIfNecessary(): String = canonicalFile.toRelativeString(baseDir)
 
-    val wrapper = parse(wrapperFile.readText(), ThrowExceptionOnErrorReporter, program.scope, wrapperFile.makeRelativeIfNecessary())
+    konst wrapper = parse(wrapperFile.readText(), ThrowExceptionOnErrorReporter, program.scope, wrapperFile.makeRelativeIfNecessary())
         ?: error("Should not be null because of error reporter")
-    val insertionPlace = wrapper.createInsertionPlace()
+    konst insertionPlace = wrapper.createInsertionPlace()
 
-    val allFiles = mutableListOf<File>()
+    konst allFiles = mutableListOf<File>()
     inputPaths.forEach { collectFiles(it, allFiles) }
 
     for (file in allFiles) {
-        val statements = parse(file.readText(), ThrowExceptionOnErrorReporter, program.scope, file.makeRelativeIfNecessary())
+        konst statements = parse(file.readText(), ThrowExceptionOnErrorReporter, program.scope, file.makeRelativeIfNecessary())
             ?: error("Should not be null because of error reporter")
-        val block = JsBlock(statements)
+        konst block = JsBlock(statements)
         block.fixForwardNameReferences()
 
-        val sourceMapFile = File(file.parent, file.name + ".map")
+        konst sourceMapFile = File(file.parent, file.name + ".map")
         if (sourceMapFile.exists()) {
-            when (val sourceMapParse = SourceMapParser.parse(sourceMapFile)) {
+            when (konst sourceMapParse = SourceMapParser.parse(sourceMapFile)) {
                 is SourceMapError -> {
                     System.err.println("Error parsing source map file $sourceMapFile: ${sourceMapParse.message}")
                     exitProcess(1)
                 }
 
                 is SourceMapSuccess -> {
-                    val sourceMap = sourceMapParse.value
-                    val remapper = SourceMapLocationRemapper(sourceMap)
+                    konst sourceMap = sourceMapParse.konstue
+                    konst remapper = SourceMapLocationRemapper(sourceMap)
                     remapper.remap(block)
                 }
             }
@@ -73,10 +73,10 @@ private fun mergeStdlibParts(outputFile: File, wrapperFile: File, baseDir: File,
 
     program.globalBlock.statements += wrapper
 
-    val sourceMapFile = File(outputFile.parentFile, outputFile.name + ".map")
-    val textOutput = TextOutputImpl()
-    val sourceMapBuilder = SourceMap3Builder(outputFile, textOutput::getColumn, "")
-    val consumer = SourceMapBuilderConsumer(
+    konst sourceMapFile = File(outputFile.parentFile, outputFile.name + ".map")
+    konst textOutput = TextOutputImpl()
+    konst sourceMapBuilder = SourceMap3Builder(outputFile, textOutput::getColumn, "")
+    konst consumer = SourceMapBuilderConsumer(
         File("."),
         sourceMapBuilder,
         SourceFilePathResolver(mutableListOf()),
@@ -84,17 +84,17 @@ private fun mergeStdlibParts(outputFile: File, wrapperFile: File, baseDir: File,
         provideExternalModuleContent = true
     )
     program.globalBlock.accept(JsToStringGenerationVisitor(textOutput, consumer))
-    val sourceMapContent = sourceMapBuilder.build()
+    konst sourceMapContent = sourceMapBuilder.build()
 
-    val programText = textOutput.toString()
+    konst programText = textOutput.toString()
 
     outputFile.writeText(programText + "\n//# sourceMappingURL=${sourceMapFile.name}\n")
 
-    val sourceMapJson = parseJson(sourceMapContent)
-    val sources = (sourceMapJson as JsonObject).properties["sources"] as JsonArray
+    konst sourceMapJson = parseJson(sourceMapContent)
+    konst sources = (sourceMapJson as JsonObject).properties["sources"] as JsonArray
 
     sourceMapJson.properties["sourcesContent"] = JsonArray(*sources.elements.map { sourcePath ->
-        val sourceFile = File((sourcePath as JsonString).value)
+        konst sourceFile = File((sourcePath as JsonString).konstue)
         if (sourceFile.exists()) {
             JsonString(sourceFile.readText())
         } else {
@@ -106,9 +106,9 @@ private fun mergeStdlibParts(outputFile: File, wrapperFile: File, baseDir: File,
 }
 
 private fun List<JsStatement>.createInsertionPlace(): JsBlock {
-    val block = JsCompositeBlock()
+    konst block = JsCompositeBlock()
 
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun visit(x: JsExpressionStatement, ctx: JsContext<in JsStatement>): Boolean {
             return if (isInsertionPlace(x.expression)) {
                 ctx.replaceMe(block)
@@ -121,7 +121,7 @@ private fun List<JsStatement>.createInsertionPlace(): JsBlock {
         private fun isInsertionPlace(expression: JsExpression): Boolean {
             if (expression !is JsInvocation || expression.arguments.isNotEmpty()) return false
 
-            val qualifier = expression.qualifier
+            konst qualifier = expression.qualifier
             if (qualifier !is JsNameRef || qualifier.qualifier != null) return false
             return qualifier.ident == "insertContent"
         }

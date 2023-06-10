@@ -1,6 +1,6 @@
 package
 
-public val cache: Cache<kotlin.String, Signal<out AttributeDefinition>>
+public konst cache: Cache<kotlin.String, Signal<out AttributeDefinition>>
 public fun findByName_java(/*0*/ name: kotlin.String): Mono<AttributeDefinition>
 public fun findByName_kotlin(/*0*/ name: kotlin.String): Mono<AttributeDefinition>
 

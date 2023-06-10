@@ -5,7 +5,7 @@ public abstract class AL : java.util.ArrayList<p.P> {
     invisible_fake final override /*1*/ /*fake_override*/ var elementData: kotlin.Array<(out) kotlin.Any!>!
     protected/*protected and package*/ final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var size: kotlin.Int
-    public open override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public open override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: p.P): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: p.P): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<p.P>): kotlin.Boolean

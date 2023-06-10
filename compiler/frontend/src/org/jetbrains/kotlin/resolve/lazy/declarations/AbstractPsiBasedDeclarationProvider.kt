@@ -31,14 +31,14 @@ abstract class AbstractPsiBasedDeclarationProvider(storageManager: StorageManage
 
     protected class Index {
         // This mutable state is only modified under inside the computable
-        val allDeclarations = ArrayList<KtDeclaration>()
-        val functions = ArrayListMultimap.create<Name, KtNamedFunction>()
-        val properties = ArrayListMultimap.create<Name, KtProperty>()
-        val classesAndObjects = ArrayListMultimap.create<Name, KtClassOrObjectInfo<*>>() // order matters here
-        val scripts = ArrayListMultimap.create<Name, KtScriptInfo>()
-        val typeAliases = ArrayListMultimap.create<Name, KtTypeAlias>()
-        val destructuringDeclarationsEntries = ArrayListMultimap.create<Name, KtDestructuringDeclarationEntry>()
-        val names = hashSetOf<Name>()
+        konst allDeclarations = ArrayList<KtDeclaration>()
+        konst functions = ArrayListMultimap.create<Name, KtNamedFunction>()
+        konst properties = ArrayListMultimap.create<Name, KtProperty>()
+        konst classesAndObjects = ArrayListMultimap.create<Name, KtClassOrObjectInfo<*>>() // order matters here
+        konst scripts = ArrayListMultimap.create<Name, KtScriptInfo>()
+        konst typeAliases = ArrayListMultimap.create<Name, KtTypeAlias>()
+        konst destructuringDeclarationsEntries = ArrayListMultimap.create<Name, KtDestructuringDeclarationEntry>()
+        konst names = hashSetOf<Name>()
 
         fun putToIndex(declaration: KtDeclaration) {
             if (declaration is KtAnonymousInitializer || declaration is KtSecondaryConstructor) return
@@ -57,7 +57,7 @@ abstract class AbstractPsiBasedDeclarationProvider(storageManager: StorageManage
                     scripts.put(KtScriptInfo(declaration).script.nameAsName, KtScriptInfo(declaration))
                 is KtDestructuringDeclaration -> {
                     for (entry in declaration.entries) {
-                        val name = entry.nameAsName.safeNameForLazyResolve()
+                        konst name = entry.nameAsName.safeNameForLazyResolve()
                         destructuringDeclarationsEntries.put(name, entry)
                         names.add(name)
                     }
@@ -78,8 +78,8 @@ abstract class AbstractPsiBasedDeclarationProvider(storageManager: StorageManage
 
     override fun getDeclarationNames() = index().names
 
-    private val index = storageManager.createLazyValue<Index> {
-        val index = Index()
+    private konst index = storageManager.createLazyValue<Index> {
+        konst index = Index()
         doCreateIndex(index)
         index
     }
@@ -89,7 +89,7 @@ abstract class AbstractPsiBasedDeclarationProvider(storageManager: StorageManage
     internal fun toInfoString() = toString() + ": " + index().toString()
 
     override fun getDeclarations(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean): List<KtDeclaration> {
-        val allDeclarations = index().allDeclarations
+        konst allDeclarations = index().allDeclarations
         if (kindFilter == DescriptorKindFilter.CLASSIFIERS) {
             return allDeclarations.filter { it is KtClassOrObject || it is KtTypeAlias }
         }

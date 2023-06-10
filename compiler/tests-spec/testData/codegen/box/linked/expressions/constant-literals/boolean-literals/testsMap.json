@@ -92,7 +92,7 @@
         {
           "specVersion": "0.1-300",
           "casesNumber": 0,
-          "description": "The use of Boolean literals as the identifier (with backtick) in the valueArgument.",
+          "description": "The use of Boolean literals as the identifier (with backtick) in the konstueArgument.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/constant-literals/boolean-literals/p-1/pos/2.25.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

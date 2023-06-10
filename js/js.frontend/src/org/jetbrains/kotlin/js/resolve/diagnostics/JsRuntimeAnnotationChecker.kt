@@ -30,10 +30,10 @@ import org.jetbrains.kotlin.resolve.source.PsiSourceElement
 object JsRuntimeAnnotationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         for (annotation in descriptor.annotations) {
-            val annotationClass = annotation.annotationClass ?: continue
+            konst annotationClass = annotation.annotationClass ?: continue
             if (annotationClass.getAnnotationRetention() != KotlinRetention.RUNTIME) continue
 
-            val annotationPsi = (annotation.source as? PsiSourceElement)?.psi ?: declaration
+            konst annotationPsi = (annotation.source as? PsiSourceElement)?.psi ?: declaration
 
             if (descriptor is MemberDescriptor && descriptor.isEffectivelyExternal()) {
                 context.trace.report(ErrorsJs.RUNTIME_ANNOTATION_ON_EXTERNAL_DECLARATION.on(annotationPsi))

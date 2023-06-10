@@ -8,7 +8,7 @@ FILE fqName:<root> fileName:/objectReference.kt
     PROPERTY name:counter visibility:public modality:FINAL [var]
       FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=0
+          CONST Int type=kotlin.Int konstue=0
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-counter> visibility:public modality:FINAL <> ($this:<root>.Z) returnType:kotlin.Int
         correspondingProperty: PROPERTY name:counter visibility:public modality:FINAL [var]
         $this: VALUE_PARAMETER name:<this> type:<root>.Z
@@ -23,7 +23,7 @@ FILE fqName:<root> fileName:/objectReference.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:counter type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.Z declared in <root>.Z.<set-counter>' type=<root>.Z origin=null
-            value: GET_VAR '<set-?>: kotlin.Int declared in <root>.Z.<set-counter>' type=kotlin.Int origin=null
+            konstue: GET_VAR '<set-?>: kotlin.Int declared in <root>.Z.<set-counter>' type=kotlin.Int origin=null
     FUN name:foo visibility:public modality:FINAL <> ($this:<root>.Z) returnType:kotlin.Unit
       $this: VALUE_PARAMETER name:<this> type:<root>.Z
       BLOCK_BODY
@@ -32,12 +32,12 @@ FILE fqName:<root> fileName:/objectReference.kt
       BLOCK_BODY
         CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
           $this: GET_VAR '<this>: <root>.Z declared in <root>.Z.bar' type=<root>.Z origin=null
-          <set-?>: CONST Int type=kotlin.Int value=1
+          <set-?>: CONST Int type=kotlin.Int konstue=1
         CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
           $this: GET_VAR '<this>: <root>.Z declared in <root>.Z.bar' type=<root>.Z origin=null
         CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
           $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-          <set-?>: CONST Int type=kotlin.Int value=1
+          <set-?>: CONST Int type=kotlin.Int konstue=1
         CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
           $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
     CLASS CLASS name:Nested modality:FINAL visibility:public superTypes:[kotlin.Any]
@@ -50,12 +50,12 @@ FILE fqName:<root> fileName:/objectReference.kt
         BLOCK_BODY
           CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-            <set-?>: CONST Int type=kotlin.Int value=1
+            <set-?>: CONST Int type=kotlin.Int konstue=1
           CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
           CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-            <set-?>: CONST Int type=kotlin.Int value=1
+            <set-?>: CONST Int type=kotlin.Int konstue=1
           CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
       FUN name:test visibility:public modality:FINAL <> ($this:<root>.Z.Nested) returnType:kotlin.Unit
@@ -63,12 +63,12 @@ FILE fqName:<root> fileName:/objectReference.kt
         BLOCK_BODY
           CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-            <set-?>: CONST Int type=kotlin.Int value=1
+            <set-?>: CONST Int type=kotlin.Int konstue=1
           CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
           CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-            <set-?>: CONST Int type=kotlin.Int value=1
+            <set-?>: CONST Int type=kotlin.Int konstue=1
           CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
             $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
       FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
@@ -84,7 +84,7 @@ FILE fqName:<root> fileName:/objectReference.kt
         overridden:
           public open fun toString (): kotlin.String declared in kotlin.Any
         $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-    PROPERTY name:aLambda visibility:public modality:FINAL [val]
+    PROPERTY name:aLambda visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:aLambda type:kotlin.Function0<kotlin.Unit> visibility:private [final]
         EXPRESSION_BODY
           FUN_EXPR type=kotlin.Function0<kotlin.Unit> origin=LAMBDA
@@ -92,22 +92,22 @@ FILE fqName:<root> fileName:/objectReference.kt
               BLOCK_BODY
                 CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                   $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                  <set-?>: CONST Int type=kotlin.Int value=1
+                  <set-?>: CONST Int type=kotlin.Int konstue=1
                 CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                   $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
                 CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                   $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                  <set-?>: CONST Int type=kotlin.Int value=1
+                  <set-?>: CONST Int type=kotlin.Int konstue=1
                 CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                   $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-aLambda> visibility:public modality:FINAL <> ($this:<root>.Z) returnType:kotlin.Function0<kotlin.Unit>
-        correspondingProperty: PROPERTY name:aLambda visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:aLambda visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Z
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-aLambda> (): kotlin.Function0<kotlin.Unit> declared in <root>.Z'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:aLambda type:kotlin.Function0<kotlin.Unit> visibility:private [final]' type=kotlin.Function0<kotlin.Unit> origin=null
               receiver: GET_VAR '<this>: <root>.Z declared in <root>.Z.<get-aLambda>' type=<root>.Z origin=null
-    PROPERTY name:anObject visibility:public modality:FINAL [val]
+    PROPERTY name:anObject visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:anObject type:kotlin.Any visibility:private [final]
         EXPRESSION_BODY
           BLOCK type=<root>.Z.anObject.<no name provided> origin=OBJECT_LITERAL
@@ -121,12 +121,12 @@ FILE fqName:<root> fileName:/objectReference.kt
                 BLOCK_BODY
                   CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                    <set-?>: CONST Int type=kotlin.Int value=1
+                    <set-?>: CONST Int type=kotlin.Int konstue=1
                   CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
                   CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                    <set-?>: CONST Int type=kotlin.Int value=1
+                    <set-?>: CONST Int type=kotlin.Int konstue=1
                   CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
               FUN name:test visibility:public modality:FINAL <> ($this:<root>.Z.anObject.<no name provided>) returnType:kotlin.Unit
@@ -134,12 +134,12 @@ FILE fqName:<root> fileName:/objectReference.kt
                 BLOCK_BODY
                   CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                    <set-?>: CONST Int type=kotlin.Int value=1
+                    <set-?>: CONST Int type=kotlin.Int konstue=1
                   CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
                   CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-                    <set-?>: CONST Int type=kotlin.Int value=1
+                    <set-?>: CONST Int type=kotlin.Int konstue=1
                   CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
                     $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
               FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
@@ -157,7 +157,7 @@ FILE fqName:<root> fileName:/objectReference.kt
                 $this: VALUE_PARAMETER name:<this> type:kotlin.Any
             CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.Z.anObject.<no name provided>' type=<root>.Z.anObject.<no name provided> origin=OBJECT_LITERAL
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-anObject> visibility:public modality:FINAL <> ($this:<root>.Z) returnType:kotlin.Any
-        correspondingProperty: PROPERTY name:anObject visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:anObject visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Z
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-anObject> (): kotlin.Any declared in <root>.Z'
@@ -181,11 +181,11 @@ FILE fqName:<root> fileName:/objectReference.kt
     BLOCK_BODY
       CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
         $this: GET_VAR '<this>: <root>.Z declared in <root>.test' type=<root>.Z origin=null
-        <set-?>: CONST Int type=kotlin.Int value=1
+        <set-?>: CONST Int type=kotlin.Int konstue=1
       CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
         $this: GET_VAR '<this>: <root>.Z declared in <root>.test' type=<root>.Z origin=null
       CALL 'public final fun <set-counter> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=EQ
         $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z
-        <set-?>: CONST Int type=kotlin.Int value=1
+        <set-?>: CONST Int type=kotlin.Int konstue=1
       CALL 'public final fun foo (): kotlin.Unit declared in <root>.Z' type=kotlin.Unit origin=null
         $this: GET_OBJECT 'CLASS OBJECT name:Z modality:FINAL visibility:public superTypes:[kotlin.Any]' type=<root>.Z

@@ -37,16 +37,16 @@ abstract class AbstractJsProtoComparisonTest : AbstractProtoComparisonTest<Proto
                 ?: super.expectedOutputFile(testDir)
 
     override fun compileAndGetClasses(sourceDir: File, outputDir: File): Map<ClassId, ProtoData> {
-        val incrementalResults = IncrementalResultsConsumerImpl()
-        val services = Services.Builder().run {
+        konst incrementalResults = IncrementalResultsConsumerImpl()
+        konst services = Services.Builder().run {
             register(IncrementalResultsConsumer::class.java, incrementalResults)
             build()
         }
 
-        val ktFiles = sourceDir.walkMatching { it.name.endsWith(".kt") }.map { it.canonicalPath }.toList()
-        val messageCollector = TestMessageCollector()
-        val outputItemsCollector = OutputItemsCollectorImpl()
-        val args = K2JSCompilerArguments().apply {
+        konst ktFiles = sourceDir.walkMatching { it.name.endsWith(".kt") }.map { it.canonicalPath }.toList()
+        konst messageCollector = TestMessageCollector()
+        konst outputItemsCollector = OutputItemsCollectorImpl()
+        konst args = K2JSCompilerArguments().apply {
             outputFile = File(outputDir, "out.js").canonicalPath
             metaInfo = true
             main = K2JsArgumentConstants.NO_CALL
@@ -54,14 +54,14 @@ abstract class AbstractJsProtoComparisonTest : AbstractProtoComparisonTest<Proto
             forceDeprecatedLegacyCompilerUsage = true
         }
 
-        val env = createTestingCompilerEnvironment(messageCollector, outputItemsCollector, services)
+        konst env = createTestingCompilerEnvironment(messageCollector, outputItemsCollector, services)
         runJSCompiler(args, env).let { exitCode ->
-            val expectedOutput = "OK"
-            val actualOutput = (listOf(exitCode?.name) + messageCollector.errors).joinToString("\n")
+            konst expectedOutput = "OK"
+            konst actualOutput = (listOf(exitCode?.name) + messageCollector.errors).joinToString("\n")
             Assert.assertEquals(expectedOutput, actualOutput)
         }
 
-        val classes = hashMapOf<ClassId, ProtoData>()
+        konst classes = hashMapOf<ClassId, ProtoData>()
 
         for ((sourceFile, translationResult) in incrementalResults.packageParts) {
             classes.putAll(getProtoData(sourceFile, translationResult.metadata))

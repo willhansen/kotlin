@@ -51,7 +51,7 @@ fun <T> f12() {}
 context(A, A)
 class C1 {
     context(A, A)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(A, A)
     fun m() {}
@@ -60,7 +60,7 @@ class C1 {
 context(A, B)
 class C2 {
     context(A, B)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(A, B)
     fun m() {}
@@ -69,7 +69,7 @@ class C2 {
 context(A, C)
 class C3  {
     context(A, C)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(A, C)
     fun m() {}
@@ -78,7 +78,7 @@ class C3  {
 context(B, C)
 class C4 {
     context(B, C)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(B, C)
     fun m() {}
@@ -87,7 +87,7 @@ class C4 {
 context(C, C)
 class C5 {
     context(C, C)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(C, C)
     fun m() {}
@@ -96,7 +96,7 @@ class C5 {
 context(A, A, A)
 class C6 {
     context(A, A, A)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(A, A, A)
     fun m() {}
@@ -105,7 +105,7 @@ class C6 {
 context(Inv<A>, Inv<B>)
 class C7 {
     context(Inv<A>, Inv<B>)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(Inv<A>, Inv<B>)
     fun m() {}
@@ -114,7 +114,7 @@ class C7 {
 context(Inv<A>, Inv<A>)
 class C8 {
     context(Inv<A>, Inv<A>)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(Inv<A>, Inv<A>)
     fun m() {}
@@ -123,7 +123,7 @@ class C8 {
 context(Inv<T>, Inv<A>)
 class C9<T> {
     context(Inv<T>, Inv<A>)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(Inv<T>, Inv<A>)
     fun m() {}
@@ -132,7 +132,7 @@ class C9<T> {
 context(Cov<A>, Cov<B>)
 class C10 {
     context(Cov<A>, Cov<B>)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(Cov<A>, Cov<B>)
     fun m() {}
@@ -141,7 +141,7 @@ class C10 {
 context(Cov<T>, Cov<A>)
 class C11<T> {
     context(Cov<T>, Cov<A>)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(Cov<T>, Cov<A>)
     fun m() {}
@@ -150,7 +150,7 @@ class C11<T> {
 context(T, A)
 class C12<T> {
     context(T, A)
-    val p: Any get() = 42
+    konst p: Any get() = 42
 
     context(T, A)
     fun m() {}
@@ -159,51 +159,51 @@ class C12<T> {
 // Properties
 
 context(A, A)
-val p1: Any?
+konst p1: Any?
     get() { return null }
 
 context(A, B)
-val p2: Any?
+konst p2: Any?
     get() { return null }
 
 context(A, C)
-val p3: Any?
+konst p3: Any?
     get() { return null }
 
 context(B, C)
-val p4: Any?
+konst p4: Any?
     get() { return null }
 
 context(C, C)
-val p5: Any?
+konst p5: Any?
     get() { return null }
 
 context(A, A, A)
-val p6: Any?
+konst p6: Any?
     get() { return null }
 
 context(Inv<A>, Inv<B>)
-val p7: Any?
+konst p7: Any?
     get() { return null }
 
 context(Inv<A>, Inv<A>)
-val p8: Any?
+konst p8: Any?
     get() { return null }
 
 context(Inv<T>, Inv<A>)
-val <T> p9: Any?
+konst <T> p9: Any?
     get() { return null }
 
 context(Cov<A>, Cov<B>)
-val p10: Any?
+konst p10: Any?
     get() { return null }
 
 context(Cov<T>, Cov<A>)
-val <T> p11: Any?
+konst <T> p11: Any?
     get() { return null }
 
 context(T, A)
-val <T> p12: Any?
+konst <T> p12: Any?
     get() { return null }
 
 // Function types
@@ -212,10 +212,10 @@ val <T> p12: Any?
 // So we check here only one simple case: `context(A, B)`
 
 context(A, B)
-fun f(g: context(A, B) () -> Unit, value: Any): context(A, B) () -> Unit {
-    return value as (context(A, B) () -> Unit)
+fun f(g: context(A, B) () -> Unit, konstue: Any): context(A, B) () -> Unit {
+    return konstue as (context(A, B) () -> Unit)
 }
 
 fun test() {
-    val lf: context(A, B) () -> Unit = { }
+    konst lf: context(A, B) () -> Unit = { }
 }

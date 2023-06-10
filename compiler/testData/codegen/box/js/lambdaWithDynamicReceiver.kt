@@ -3,7 +3,7 @@
 fun jso(
     block: dynamic.() -> Unit,
 ): dynamic {
-    val o = js("{}")
+    konst o = js("{}")
     block(o)
     return o
 }

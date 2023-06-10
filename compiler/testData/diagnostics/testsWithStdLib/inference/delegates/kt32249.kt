@@ -5,13 +5,13 @@
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class Wrapper<T>(val name: String, val defaultValue: T)
+class Wrapper<T>(konst name: String, konst defaultValue: T)
 
 private fun <T> wrapper(defaultValue: T) = object : ReadOnlyProperty<Any, Wrapper<T>> {
     override fun getValue(thisRef: Any, property: KProperty<*>): Wrapper<T> = null!!
 }
 
 object Foo {
-    val x by wrapper(true)
-    val y: Wrapper<Boolean> by wrapper(true)
+    konst x by wrapper(true)
+    konst y: Wrapper<Boolean> by wrapper(true)
 }

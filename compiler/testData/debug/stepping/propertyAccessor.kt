@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 class A {
-    val prop : Int
+    konst prop : Int
         get() {
             return 1
         }

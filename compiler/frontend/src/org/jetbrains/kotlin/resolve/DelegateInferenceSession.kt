@@ -28,14 +28,14 @@ import org.jetbrains.kotlin.types.UnwrappedType
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 class DelegateInferenceSession(
-    val variableDescriptor: VariableDescriptorWithAccessors,
-    val expectedType: UnwrappedType?,
+    konst variableDescriptor: VariableDescriptorWithAccessors,
+    konst expectedType: UnwrappedType?,
     psiCallResolver: PSICallResolver,
     postponedArgumentsAnalyzer: PostponedArgumentsAnalyzer,
     kotlinConstraintSystemCompleter: KotlinConstraintSystemCompleter,
     callComponents: KotlinCallComponents,
     builtIns: KotlinBuiltIns,
-    override val parentSession: InferenceSession?
+    override konst parentSession: InferenceSession?
 ) : StubTypesBasedInferenceSession<FunctionDescriptor>(
     psiCallResolver, postponedArgumentsAnalyzer, kotlinConstraintSystemCompleter, callComponents, builtIns
 ) {
@@ -46,16 +46,16 @@ class DelegateInferenceSession(
     }
 
     fun getNestedBuilderInferenceSessions(): List<BuilderInferenceSession> {
-        val builderInferenceSessions = nestedInferenceSessions.filterIsInstance<BuilderInferenceSession>()
-        val delegatedPropertyInferenceSessions = nestedInferenceSessions.filterIsInstance<DelegateInferenceSession>()
+        konst builderInferenceSessions = nestedInferenceSessions.filterIsInstance<BuilderInferenceSession>()
+        konst delegatedPropertyInferenceSessions = nestedInferenceSessions.filterIsInstance<DelegateInferenceSession>()
 
         return builderInferenceSessions + delegatedPropertyInferenceSessions.map { it.getNestedBuilderInferenceSessions() }.flatten()
     }
 
     override fun prepareForCompletion(commonSystem: NewConstraintSystem, resolvedCallsInfo: List<PSIPartialCallInfo>) {
-        val csBuilder = commonSystem.getBuilder()
+        konst csBuilder = commonSystem.getBuilder()
         for (callInfo in resolvedCallsInfo) {
-            val resultAtom = callInfo.callResolutionResult.resultCallAtom
+            konst resultAtom = callInfo.callResolutionResult.resultCallAtom
             when (resultAtom.candidateDescriptor.name) {
                 OperatorNameConventions.GET_VALUE -> resultAtom.addConstraintsForGetValueMethod(csBuilder)
                 OperatorNameConventions.SET_VALUE -> resultAtom.addConstraintsForSetValueMethod(csBuilder)
@@ -64,19 +64,19 @@ class DelegateInferenceSession(
     }
 
     private fun ResolvedCallAtom.addConstraintForThis(descriptor: CallableDescriptor, commonSystem: ConstraintSystemBuilder) {
-        val typeOfThis = variableDescriptor.extensionReceiverParameter?.type
+        konst typeOfThis = variableDescriptor.extensionReceiverParameter?.type
             ?: variableDescriptor.dispatchReceiverParameter?.type
             ?: builtIns.nullableNothingType
 
-        val valueParameterForThis = descriptor.valueParameters.getOrNull(0) ?: return
-        val substitutedType = freshVariablesSubstitutor.safeSubstitute(valueParameterForThis.type.unwrap())
+        konst konstueParameterForThis = descriptor.konstueParameters.getOrNull(0) ?: return
+        konst substitutedType = freshVariablesSubstitutor.safeSubstitute(konstueParameterForThis.type.unwrap())
         commonSystem.addSubtypeConstraint(typeOfThis.unwrap(), substitutedType, DelegatedPropertyConstraintPositionImpl(atom))
     }
 
     private fun ResolvedCallAtom.addConstraintsForGetValueMethod(commonSystem: ConstraintSystemBuilder) {
         if (expectedType != null) {
-            val unsubstitutedReturnType = candidateDescriptor.returnType?.unwrap() ?: return
-            val substitutedReturnType = freshVariablesSubstitutor.safeSubstitute(unsubstitutedReturnType)
+            konst unsubstitutedReturnType = candidateDescriptor.returnType?.unwrap() ?: return
+            konst substitutedReturnType = freshVariablesSubstitutor.safeSubstitute(unsubstitutedReturnType)
 
             commonSystem.addSubtypeConstraint(substitutedReturnType, expectedType, DelegatedPropertyConstraintPositionImpl(atom))
         }
@@ -86,8 +86,8 @@ class DelegateInferenceSession(
 
     private fun ResolvedCallAtom.addConstraintsForSetValueMethod(commonSystem: ConstraintSystemBuilder) {
         if (expectedType != null) {
-            val unsubstitutedParameterType = candidateDescriptor.valueParameters.getOrNull(2)?.type?.unwrap() ?: return
-            val substitutedParameterType = freshVariablesSubstitutor.safeSubstitute(unsubstitutedParameterType)
+            konst unsubstitutedParameterType = candidateDescriptor.konstueParameters.getOrNull(2)?.type?.unwrap() ?: return
+            konst substitutedParameterType = freshVariablesSubstitutor.safeSubstitute(unsubstitutedParameterType)
 
             commonSystem.addSubtypeConstraint(expectedType, substitutedParameterType, DelegatedPropertyConstraintPositionImpl(atom))
         }
@@ -110,8 +110,8 @@ class DelegateInferenceSession(
 }
 
 class InferenceSessionForExistingCandidates(
-    private val resolveReceiverIndependently: Boolean,
-    override val parentSession: InferenceSession?
+    private konst resolveReceiverIndependently: Boolean,
+    override konst parentSession: InferenceSession?
 ) : InferenceSession {
     override fun shouldRunCompletion(candidate: ResolutionCandidate): Boolean {
         return !ErrorUtils.isError(candidate.resolvedCall.candidateDescriptor)

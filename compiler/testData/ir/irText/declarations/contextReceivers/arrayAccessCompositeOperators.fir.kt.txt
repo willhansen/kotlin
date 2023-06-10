@@ -25,7 +25,7 @@ data class MyContainer {
     when {
       other !is MyContainer -> return false
     }
-    val tmp0_other_with_cast: MyContainer = other as MyContainer
+    konst tmp0_other_with_cast: MyContainer = other as MyContainer
     when {
       EQEQ(arg0 = <this>.#i, arg1 = tmp0_other_with_cast.#i).not() -> return false
     }
@@ -69,7 +69,7 @@ fun box(): String {
   var myContainer: MyContainer = MyContainer(i = 0)
   with<Int, Unit>(receiver = 1, block = local fun Int.<anonymous>() {
     myContainer.plusAssign($context_receiver_0 = $this$with, other = MyContainer(i = { // BLOCK
-      val <unary>: MyContainer = myContainer
+      konst <unary>: MyContainer = myContainer
       myContainer = <unary>.inc($context_receiver_0 = $this$with)
       <unary>
     }.get($context_receiver_0 = $this$with, index = 0)))

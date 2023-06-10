@@ -49,7 +49,7 @@ public final class In</*0*/ in I> {
 
 public final class Inv</*0*/ T> {
     public constructor Inv</*0*/ T>(/*0*/ prop: T)
-    public final val prop: T
+    public final konst prop: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -57,7 +57,7 @@ public final class Inv</*0*/ T> {
 
 public final class Out</*0*/ out O> {
     public constructor Out</*0*/ out O>(/*0*/ arg: O)
-    public final val arg: O
+    public final konst arg: O
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

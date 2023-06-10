@@ -3,7 +3,7 @@
 public @interface A {
     int a();
     double b();
-    String value();
+    String konstue();
     boolean x();
 }
 
@@ -15,4 +15,4 @@ public @interface A {
 @A("v2", <!POSITIONED_VALUE_ARGUMENT_FOR_JAVA_ANNOTATION!>2<!>, x = true, b = 2.0) fun foo2() {}
 
 @A("v2", x = true, b = 3.0, a = 4) fun foo3() {}
-@A(value = "v2", x = true, b = 3.0, a = 4) fun foo4() {}
+@A(konstue = "v2", x = true, b = 3.0, a = 4) fun foo4() {}

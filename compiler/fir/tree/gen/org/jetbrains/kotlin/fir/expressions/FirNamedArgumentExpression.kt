@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirNamedArgumentExpression : FirWrappedArgumentExpression() {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val expression: FirExpression
-    abstract override val isSpread: Boolean
-    abstract val name: Name
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst expression: FirExpression
+    abstract override konst isSpread: Boolean
+    abstract konst name: Name
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitNamedArgumentExpression(this, data)
 

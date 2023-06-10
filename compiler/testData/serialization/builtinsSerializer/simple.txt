@@ -1,6 +1,6 @@
 package test
 
-public val property: kotlin.Unit
+public konst property: kotlin.Unit
 public fun function(/*0*/ int: kotlin.Int, /*1*/ string: kotlin.String = ...): test.Class
 public fun </*0*/ T> T.extension(): T?
 

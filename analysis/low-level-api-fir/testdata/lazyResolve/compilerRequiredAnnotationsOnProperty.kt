@@ -1,4 +1,4 @@
-annotation class Anno(val s: String)
+annotation class Anno(konst s: String)
 
 @Deprecated("property")
 @Anno("property")
@@ -9,6 +9,6 @@ var memberP<caret>roperty = 32
     get() = field
     @Anno("setter")
     @setparam:[Deprecated("setparam") Anno("setparam")]
-    set(value) {
-        field = value
+    set(konstue) {
+        field = konstue
     }

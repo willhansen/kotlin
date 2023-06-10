@@ -6,7 +6,7 @@ package ab
 
 external fun c(): String
 
-external val d: String
+external konst d: String
 
 // MODULE: main(lib)
 // FILE: main.kt

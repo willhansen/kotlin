@@ -1,10 +1,10 @@
 // EXPECTED_REACHABLE_NODES: 1286
 package foo
 
-inline fun<T> with1(value: T, p: T.() -> Unit) = value.p()
+inline fun<T> with1(konstue: T, p: T.() -> Unit) = konstue.p()
 
-class A(val expected: String) {
-    val b = B()
+class A(konst expected: String) {
+    konst b = B()
 
     fun foo(): A {
         with1(b) {

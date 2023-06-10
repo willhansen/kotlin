@@ -16,19 +16,19 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeApproximator
 
 class NewVariableAsFunctionResolvedCallImpl(
-    override val variableCall: NewAbstractResolvedCall<VariableDescriptor>,
-    override val functionCall: NewAbstractResolvedCall<FunctionDescriptor>,
+    override konst variableCall: NewAbstractResolvedCall<VariableDescriptor>,
+    override konst functionCall: NewAbstractResolvedCall<FunctionDescriptor>,
 ) : VariableAsFunctionResolvedCall, NewAbstractResolvedCall<FunctionDescriptor>() {
-    val baseCall: PSIKotlinCallImpl = (functionCall.psiKotlinCall as PSIKotlinCallForInvoke).baseCall
+    konst baseCall: PSIKotlinCallImpl = (functionCall.psiKotlinCall as PSIKotlinCallForInvoke).baseCall
 
-    override val resolvedCallAtom: ResolvedCallAtom? = functionCall.resolvedCallAtom
-    override val psiKotlinCall: PSIKotlinCall = functionCall.psiKotlinCall
-    override val typeApproximator: TypeApproximator = functionCall.typeApproximator
-    override val freshSubstitutor: FreshVariableNewTypeSubstitutor? = functionCall.freshSubstitutor
-    override val argumentMappingByOriginal = functionCall.argumentMappingByOriginal
-    override val kotlinCall = functionCall.kotlinCall
-    override val languageVersionSettings = functionCall.languageVersionSettings
-    override val diagnostics: Collection<KotlinCallDiagnostic> = functionCall.diagnostics
+    override konst resolvedCallAtom: ResolvedCallAtom? = functionCall.resolvedCallAtom
+    override konst psiKotlinCall: PSIKotlinCall = functionCall.psiKotlinCall
+    override konst typeApproximator: TypeApproximator = functionCall.typeApproximator
+    override konst freshSubstitutor: FreshVariableNewTypeSubstitutor? = functionCall.freshSubstitutor
+    override konst argumentMappingByOriginal = functionCall.argumentMappingByOriginal
+    override konst kotlinCall = functionCall.kotlinCall
+    override konst languageVersionSettings = functionCall.languageVersionSettings
+    override konst diagnostics: Collection<KotlinCallDiagnostic> = functionCall.diagnostics
 
     override fun getStatus() = functionCall.status
     override fun getCandidateDescriptor() = functionCall.candidateDescriptor
@@ -45,8 +45,8 @@ class NewVariableAsFunctionResolvedCallImpl(
     override fun updateContextReceiverTypes(newTypes: List<KotlinType>) = functionCall.updateContextReceiverTypes(newTypes)
     override fun argumentToParameterMap(
         resultingDescriptor: CallableDescriptor,
-        valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>
-    ) = functionCall.argumentToParameterMap(resultingDescriptor, valueArguments)
+        konstueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>
+    ) = functionCall.argumentToParameterMap(resultingDescriptor, konstueArguments)
 
     override fun setResultingSubstitutor(substitutor: NewTypeSubstitutor?) {
         functionCall.setResultingSubstitutor(substitutor)

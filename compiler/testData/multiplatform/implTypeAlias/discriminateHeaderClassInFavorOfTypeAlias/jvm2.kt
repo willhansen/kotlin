@@ -1,1 +1,1 @@
-val a = Foo().a?.jvm()
+konst a = Foo().a?.jvm()

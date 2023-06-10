@@ -13,7 +13,7 @@ fun test() {
 package dependency
 
 object Bar {
-    val property: Int = 10
+    konst property: Int = 10
     fun function() {}
     fun callable() {}
 }

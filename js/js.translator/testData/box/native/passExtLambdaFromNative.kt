@@ -6,7 +6,7 @@
 package foo
 
 internal external class A(v: String) {
-    val v: String
+    konst v: String
 }
 
 internal class B {
@@ -17,7 +17,7 @@ internal class B {
 internal external fun nativeBox(b: B): String = definedExternally
 
 fun box(): String {
-    val r = nativeBox(B())
+    konst r = nativeBox(B())
     if (r != "foo_rr_7") return r
 
     return "OK"

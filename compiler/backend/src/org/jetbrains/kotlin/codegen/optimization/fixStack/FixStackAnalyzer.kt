@@ -32,18 +32,18 @@ import kotlin.math.max
 
 internal class FixStackAnalyzer(
     owner: String,
-    val method: MethodNode,
-    val context: FixStackContext,
-    private val skipBreakContinueGotoEdges: Boolean = true
+    konst method: MethodNode,
+    konst context: FixStackContext,
+    private konst skipBreakContinueGotoEdges: Boolean = true
 ) {
     companion object {
         // Stack size is always non-negative
-        const val DEAD_CODE_STACK_SIZE = -1
+        const konst DEAD_CODE_STACK_SIZE = -1
     }
 
-    private val loopEntryPointMarkers = hashMapOf<LabelNode, SmartList<AbstractInsnNode>>()
+    private konst loopEntryPointMarkers = hashMapOf<LabelNode, SmartList<AbstractInsnNode>>()
 
-    val maxExtraStackSize: Int get() = analyzer.maxExtraStackSize
+    konst maxExtraStackSize: Int get() = analyzer.maxExtraStackSize
 
     fun getStackToSpill(location: AbstractInsnNode): List<FixStackValue>? =
         analyzer.spilledStacks[location]
@@ -57,11 +57,11 @@ internal class FixStackAnalyzer(
     fun getExpectedStackSize(location: AbstractInsnNode): Int {
         // We should look for expected stack size at loop entry point markers if available,
         // otherwise at location itself.
-        val expectedStackSizeNodes = loopEntryPointMarkers[location] ?: listOf(location)
+        konst expectedStackSizeNodes = loopEntryPointMarkers[location] ?: listOf(location)
 
         // Find 1st live node among expected stack size nodes and return corresponding stack size
         for (node in expectedStackSizeNodes) {
-            val frame = getFrame(node) ?: continue
+            konst frame = getFrame(node) ?: continue
             return frame.stackSizeWithExtra
         }
 
@@ -80,24 +80,24 @@ internal class FixStackAnalyzer(
     private fun recordLoopEntryPointMarkers() {
         // NB JVM_IR can generate nested loops with same exit labels (see kt37370.kt)
         for (marker in context.fakeAlwaysFalseIfeqMarkers) {
-            val next = marker.next
+            konst next = marker.next
             if (next is JumpInsnNode) {
                 loopEntryPointMarkers.getOrPut(next.label) { SmartList() }.add(marker)
             }
         }
     }
 
-    private val analyzer = InternalAnalyzer(owner)
+    private konst analyzer = InternalAnalyzer(owner)
 
     private inner class InternalAnalyzer(owner: String) :
         FastStackAnalyzer<FixStackValue>(owner, method, FixStackInterpreter()) {
 
-        val spilledStacks = hashMapOf<AbstractInsnNode, List<FixStackValue>>()
+        konst spilledStacks = hashMapOf<AbstractInsnNode, List<FixStackValue>>()
         var maxExtraStackSize = 0; private set
 
         override fun visitControlFlowEdge(insn: Int, successor: Int): Boolean {
             if (!skipBreakContinueGotoEdges) return true
-            val insnNode = insnsArray[insn]
+            konst insnNode = insnsArray[insn]
             return !(insnNode is JumpInsnNode && context.breakContinueGotoNodes.contains(insnNode))
         }
 
@@ -107,7 +107,7 @@ internal class FixStackAnalyzer(
         private fun indexOf(node: AbstractInsnNode) = method.instructions.indexOf(node)
 
         inner class FixStackFrame(nLocals: Int, nStack: Int) : Frame<FixStackValue>(nLocals, nStack) {
-            val extraStack = Stack<FixStackValue>()
+            konst extraStack = Stack<FixStackValue>()
 
             override fun init(src: Frame<out FixStackValue>): Frame<FixStackValue> {
                 extraStack.clear()
@@ -137,10 +137,10 @@ internal class FixStackAnalyzer(
                 super.execute(insn, interpreter)
             }
 
-            val stackSizeWithExtra: Int get() = super.getStackSize() + extraStack.size
+            konst stackSizeWithExtra: Int get() = super.getStackSize() + extraStack.size
 
             fun getStackContent(): List<FixStackValue> {
-                val savedStack = ArrayList<FixStackValue>()
+                konst savedStack = ArrayList<FixStackValue>()
                 for (i in 0 until super.getStackSize()) {
                     savedStack.add(super.getStack(i))
                 }
@@ -148,17 +148,17 @@ internal class FixStackAnalyzer(
                 return savedStack
             }
 
-            override fun push(value: FixStackValue) {
+            override fun push(konstue: FixStackValue) {
                 if (super.getStackSize() < maxStackSize) {
-                    super.push(value)
+                    super.push(konstue)
                 } else {
-                    extraStack.add(value)
+                    extraStack.add(konstue)
                     maxExtraStackSize = max(maxExtraStackSize, extraStack.size)
                 }
             }
 
-            fun pushAll(values: Collection<FixStackValue>) {
-                values.forEach { push(it) }
+            fun pushAll(konstues: Collection<FixStackValue>) {
+                konstues.forEach { push(it) }
             }
 
             override fun pop(): FixStackValue =
@@ -168,11 +168,11 @@ internal class FixStackAnalyzer(
                     super.pop()
                 }
 
-            override fun setStack(i: Int, value: FixStackValue) {
+            override fun setStack(i: Int, konstue: FixStackValue) {
                 if (i < super.getMaxStackSize()) {
-                    super.setStack(i, value)
+                    super.setStack(i, konstue)
                 } else {
-                    extraStack[i - maxStackSize] = value
+                    extraStack[i - maxStackSize] = konstue
                 }
             }
 
@@ -186,28 +186,28 @@ internal class FixStackAnalyzer(
         }
 
         private fun FixStackFrame.saveStackAndClear(insn: AbstractInsnNode) {
-            val savedValues = getStackContent()
+            konst savedValues = getStackContent()
             spilledStacks[insn] = savedValues
             clearStack()
         }
 
         private fun FixStackFrame.executeAfterInlineCallMarker(insn: AbstractInsnNode) {
-            val beforeInlineMarker = context.openingInlineMethodMarker[insn]
+            konst beforeInlineMarker = context.openingInlineMethodMarker[insn]
             if (stackSize > 0) {
-                val returnValue = pop()
+                konst returnValue = pop()
                 clearStack()
-                val savedValues = spilledStacks[beforeInlineMarker]
+                konst savedValues = spilledStacks[beforeInlineMarker]
                 pushAll(savedValues!!)
                 push(returnValue)
             } else {
-                val savedValues = spilledStacks[beforeInlineMarker]
+                konst savedValues = spilledStacks[beforeInlineMarker]
                 pushAll(savedValues!!)
             }
         }
 
         private fun FixStackFrame.executeRestoreStackInTryCatch(insn: AbstractInsnNode) {
-            val saveNode = context.saveStackMarkerForRestoreMarker[insn]
-            val savedValues = spilledStacks.getOrElse(saveNode!!) {
+            konst saveNode = context.saveStackMarkerForRestoreMarker[insn]
+            konst savedValues = spilledStacks.getOrElse(saveNode!!) {
                 throw AssertionError("${indexOf(insn)}: Restore stack is unavailable for ${indexOf(saveNode)}")
             }
             pushAll(savedValues)

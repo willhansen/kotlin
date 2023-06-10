@@ -54,8 +54,8 @@ class KtFe10KotlinReferenceProviderContributor : KotlinReferenceProviderContribu
 
             registerProvider<KtValueArgument> provider@{ element: KtValueArgument ->
                 if (element.isNamed()) return@provider null
-                val annotationEntry = element.getParentOfTypeAndBranch<KtAnnotationEntry> { valueArgumentList } ?: return@provider null
-                if (annotationEntry.valueArguments.size != 1) return@provider null
+                konst annotationEntry = element.getParentOfTypeAndBranch<KtAnnotationEntry> { konstueArgumentList } ?: return@provider null
+                if (annotationEntry.konstueArguments.size != 1) return@provider null
 
                 KtDefaultAnnotationArgumentReference(element)
             }

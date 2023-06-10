@@ -1,6 +1,6 @@
 // EXPECTED_REACHABLE_NODES: 1295
 /**
- * NOTE: this test originally checked that values of classes inheriting from functions could be invoked as functions.
+ * NOTE: this test originally checked that konstues of classes inheriting from functions could be invoked as functions.
  * However, Function{n} / ExtensionFunction{n} classes were incompatible with JS functions our lambdas were compiled to.
  * This led to runtime errors (see KT-7692), so the test is temporarily disabled.
  *
@@ -27,9 +27,9 @@ class Mixed/* :
 }
 
 fun box(): String {
-    val bar = Bar()
-    val baz = Baz()
-    val mixed = Mixed()
+    konst bar = Bar()
+    konst baz = Baz()
+    konst mixed = Mixed()
 
     assertEquals("Bar.invoke()", bar())
     assertEquals("Baz.invoke(2, false)", baz(2, false))

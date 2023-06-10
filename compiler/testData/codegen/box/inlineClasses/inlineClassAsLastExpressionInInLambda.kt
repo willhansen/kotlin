@@ -3,37 +3,37 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Name(private val value: String) {
-    fun asValue(): String = value
+konstue class Name(private konst konstue: String) {
+    fun asValue(): String = konstue
 }
 
 fun concat(a: Name, b: Name) = a.asValue() + b.asValue()
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(private val value: Int) {
-    fun asValue(): Int = value
+konstue class UInt(private konst konstue: Int) {
+    fun asValue(): Int = konstue
 }
 
 fun box(): String {
-    val o = inlinedRun {
+    konst o = inlinedRun {
         Name("O")
     }
 
-    val k = notInlinedRun {
+    konst k = notInlinedRun {
         Name("K")
     }
 
     if (concat(o, k) != "OK") return "fail 1"
 
-    val a = UInt(1)
-    val one = inlinedRun {
+    konst a = UInt(1)
+    konst one = inlinedRun {
         a
     }
 
     if (one.asValue() != 1) return "fail 2"
 
-    val b = UInt(2)
-    val two = notInlinedRun {
+    konst b = UInt(2)
+    konst two = notInlinedRun {
         b
     }
 

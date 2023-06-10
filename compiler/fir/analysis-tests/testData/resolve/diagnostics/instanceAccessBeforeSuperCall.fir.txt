@@ -10,7 +10,7 @@ FILE: instanceAccessBeforeSuperCall.kt
 
         public final var keker: R|kotlin/String| = String(test)
             public get(): R|kotlin/String|
-            public set(value: R|kotlin/String|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit|
 
     }
     public final class B : R|kotlin/Any| {
@@ -26,7 +26,7 @@ FILE: instanceAccessBeforeSuperCall.kt
 
         public constructor(x: R|kotlin/Int|): R|C| {
             this<R|C|>(fun <anonymous>(): <ERROR TYPE REF: Cannot access ''<this>'' before the instance has been initialized> <inline=Unknown>  {
-                lval a: R|kotlin/Int| = Int(10)
+                lkonst a: R|kotlin/Int| = Int(10)
                 ^ this@R|/C|
             }
             )
@@ -36,7 +36,7 @@ FILE: instanceAccessBeforeSuperCall.kt
     public final class D : R|kotlin/Any| {
         public final var a: R|kotlin/Int| = Int(20)
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         public constructor(): R|D| {
             super<R|kotlin/Any|>()
@@ -45,7 +45,7 @@ FILE: instanceAccessBeforeSuperCall.kt
 
     }
     public final fun main(): R|kotlin/Unit| {
-        lval x1: R|kotlin/String.() -> kotlin/String| = when () {
+        lkonst x1: R|kotlin/String.() -> kotlin/String| = when () {
             Boolean(true) ->  {
                 fun R|kotlin/String|.<anonymous>(): R|kotlin/String| <inline=Unknown>  {
                     ^ this@R|special/anonymous|
@@ -63,7 +63,7 @@ FILE: instanceAccessBeforeSuperCall.kt
     }
     public final fun test(f: R|F|): R|kotlin/Unit| {
     }
-    public final val a: <ERROR TYPE REF: 'this' is not defined in this context> = this#
+    public final konst a: <ERROR TYPE REF: 'this' is not defined in this context> = this#
         public get(): <ERROR TYPE REF: 'this' is not defined in this context>
     public final class F : R|kotlin/Any| {
         public constructor(a: R|kotlin/Int|, b: R|kotlin/Int|, closure: R|() -> kotlin/Unit|, instance: R|F?|): R|F| {
@@ -72,11 +72,11 @@ FILE: instanceAccessBeforeSuperCall.kt
 
         public final var a: R|kotlin/Int| = R|<local>/a|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         public constructor(x: R|kotlin/Int|): R|F| {
             this<R|F|>(R|<local>/x|, R|<local>/x|, fun <anonymous>(): R|kotlin/Unit| <inline=Unknown>  {
-                lval a: R|kotlin/Int| = Int(10)
+                lkonst a: R|kotlin/Int| = Int(10)
                 this@R|/F|
                 R|/test|(this@R|/F|)
                 this@R|/F|.<Unresolved name: a># = Int(20)
@@ -91,7 +91,7 @@ FILE: instanceAccessBeforeSuperCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -100,7 +100,7 @@ FILE: instanceAccessBeforeSuperCall.kt
             super<R|Base|>(this#.<Unresolved name: y>#)
         }
 
-        public final val y: R|kotlin/Int| = Int(42)
+        public final konst y: R|kotlin/Int| = Int(42)
             public get(): R|kotlin/Int|
 
     }

@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractAnnotationApplicableTargetsTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val annotationEntry = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtAnnotationEntry>(ktFile)
-        val actual = analyseForTest(annotationEntry) {
-            val annotationClassSymbol = annotationEntry.typeReference?.getKtType()?.expandedClassSymbol!!
-            val applicableTargetsInOrder =
+        konst annotationEntry = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtAnnotationEntry>(ktFile)
+        konst actual = analyseForTest(annotationEntry) {
+            konst annotationClassSymbol = annotationEntry.typeReference?.getKtType()?.expandedClassSymbol!!
+            konst applicableTargetsInOrder =
                 annotationClassSymbol.annotationApplicableTargets
                     ?.map { it.name }
                     ?.sorted()

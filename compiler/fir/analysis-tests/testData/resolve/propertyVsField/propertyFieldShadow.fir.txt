@@ -4,10 +4,10 @@ FILE: test.kt
             super<R|Test|>()
         }
 
-        private final val text: R|kotlin/String| = String(BCDE)
+        private final konst text: R|kotlin/String| = String(BCDE)
             private get(): R|kotlin/String|
 
-        private final val publicPrivateText: R|kotlin/String| = String(YXWV)
+        private final konst publicPrivateText: R|kotlin/String| = String(YXWV)
             private get(): R|kotlin/String|
 
         public final fun check(): R|kotlin/String| {

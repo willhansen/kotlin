@@ -13,7 +13,7 @@ public class CompanionInitialization {
 // FILE: CompanionInitialization.kt
 
 open class Static(): IStatic {
-    val p = IStatic::class.java.getDeclaredField("const").get(null)
+    konst p = IStatic::class.java.getDeclaredField("const").get(null)
 }
 
 interface IStatic {
@@ -21,14 +21,14 @@ interface IStatic {
     }
 
     companion object : Static()  {
-        const val const = 1;
+        const konst const = 1;
     }
 }
 
 fun box(): String {
     IStatic.doSth()
 
-    val companion: Any? = CompanionInitialization.getCompanion()
+    konst companion: Any? = CompanionInitialization.getCompanion()
     if (companion == null) return "fail 1"
     if (companion != IStatic) return "fail 2"
 

@@ -1,6 +1,6 @@
 package aa
 
-annotation class A(val b: B)
+annotation class A(konst b: B)
 annotation class B
 annotation class C
 open class D<T>(a: Any) {

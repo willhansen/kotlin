@@ -30,7 +30,7 @@ public final class AccessorIdSignature extends
   private AccessorIdSignature(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -75,10 +75,10 @@ public final class AccessorIdSignature extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -96,7 +96,7 @@ public final class AccessorIdSignature extends
     public AccessorIdSignature parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new AccessorIdSignature(input, extensionRegistry);
     }
   };
@@ -249,23 +249,23 @@ public final class AccessorIdSignature extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parseFrom(java.io.InputStream input)
@@ -422,7 +422,7 @@ public final class AccessorIdSignature extends
       org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -450,9 +450,9 @@ public final class AccessorIdSignature extends
     /**
      * <code>required int32 property_signature = 1;</code>
      */
-    public Builder setPropertySignature(int value) {
+    public Builder setPropertySignature(int konstue) {
       bitField0_ |= 0x00000001;
-      propertySignature_ = value;
+      propertySignature_ = konstue;
       
       return this;
     }
@@ -482,9 +482,9 @@ public final class AccessorIdSignature extends
     /**
      * <code>required int32 name = 2;</code>
      */
-    public Builder setName(int value) {
+    public Builder setName(int konstue) {
       bitField0_ |= 0x00000002;
-      name_ = value;
+      name_ = konstue;
       
       return this;
     }
@@ -514,9 +514,9 @@ public final class AccessorIdSignature extends
     /**
      * <code>required int64 accessor_hash_id = 3;</code>
      */
-    public Builder setAccessorHashId(long value) {
+    public Builder setAccessorHashId(long konstue) {
       bitField0_ |= 0x00000004;
-      accessorHashId_ = value;
+      accessorHashId_ = konstue;
       
       return this;
     }
@@ -546,9 +546,9 @@ public final class AccessorIdSignature extends
     /**
      * <code>optional int64 flags = 4 [default = 0];</code>
      */
-    public Builder setFlags(long value) {
+    public Builder setFlags(long konstue) {
       bitField0_ |= 0x00000008;
-      flags_ = value;
+      flags_ = konstue;
       
       return this;
     }

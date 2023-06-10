@@ -40,11 +40,11 @@ internal class FirComponentCallImpl(
     override var source: KtSourceElement?,
     override var argumentList: FirArgumentList,
     override var explicitReceiver: FirExpression,
-    override val componentIndex: Int,
+    override konst componentIndex: Int,
 ) : FirComponentCall() {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
     override var calleeReference: FirNamedReference = FirSimpleNamedReference(source, Name.identifier("component$componentIndex"))
-    override val origin: FirFunctionCallOrigin = FirFunctionCallOrigin.Operator
+    override konst origin: FirFunctionCallOrigin = FirFunctionCallOrigin.Operator
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         typeRef.accept(visitor, data)

@@ -20,7 +20,7 @@ public interface KtModifierListRenderer {
     public object AS_LIST : KtModifierListRenderer {
         context(KtAnalysisSession, KtDeclarationModifiersRenderer)
         override fun renderModifiers(symbol: KtDeclarationSymbol, printer: PrettyPrinter) {
-            val modifiers = getModifiers(symbol)
+            konst modifiers = getModifiers(symbol)
                 .distinct()
                 .filter { modifierFilter.filter(it, symbol) }
                 .let { modifiersSorter.sort(it, symbol) }

@@ -1,6 +1,6 @@
 // KJS_WITH_FULL_RUNTIME
 class Template() {
-    val collected = ArrayList<String>()
+    konst collected = ArrayList<String>()
 
     operator fun String.unaryPlus() {
        collected.add(this@unaryPlus)
@@ -12,7 +12,7 @@ class Template() {
 }
 
 fun box() : String {
-    val u = Template()
+    konst u = Template()
     u.test()
     return if(u.collected.size == 1 && u.collected.get(0) == "239") "OK" else "fail"
 }

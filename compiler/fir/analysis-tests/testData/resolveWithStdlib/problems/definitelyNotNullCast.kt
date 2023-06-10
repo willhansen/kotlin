@@ -10,8 +10,8 @@ public class Generator {
 }
 
 // FILE: test.kt
-open class Value(val s: String)
+open class Value(konst s: String)
 
-val generator = Generator()
+konst generator = Generator()
 
-val y = generator.createValue("Omega") <!USELESS_CAST!>as Value<!>
+konst y = generator.createValue("Omega") <!USELESS_CAST!>as Value<!>

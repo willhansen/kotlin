@@ -1,11 +1,11 @@
 KtDeclaration: KtProperty
 Symbol:
-val <T, S> kotlin.collections.Map<T, S>.value: kotlin.collections.List<S>
+konst <T, S> kotlin.collections.Map<T, S>.konstue: kotlin.collections.List<S>
 
 Signature:
 KtVariableLikeSignature:
-  name = value
+  name = konstue
   receiverType = kotlin.collections.Map<kotlin.collections.List<S>, kotlin.Long>
   returnType = kotlin.collections.List<kotlin.Long>
-  symbol = val value: kotlin.collections.List<S>
-  callableIdIfNonLocal = /value
+  symbol = konst konstue: kotlin.collections.List<S>
+  callableIdIfNonLocal = /konstue

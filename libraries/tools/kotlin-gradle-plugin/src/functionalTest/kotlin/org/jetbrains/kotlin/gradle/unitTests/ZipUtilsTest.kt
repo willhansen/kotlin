@@ -26,9 +26,9 @@ import kotlin.test.fail
 class ZipUtilsTest {
 
     @get:Rule
-    val temporaryFolder = TemporaryFolder()
+    konst temporaryFolder = TemporaryFolder()
 
-    private val zipContentFolder by lazy {
+    private konst zipContentFolder by lazy {
         temporaryFolder.newFolder().apply {
             resolve("stub0.txt").apply {
                 parentFile.mkdirs()
@@ -68,7 +68,7 @@ class ZipUtilsTest {
         }
     }
 
-    private val zipFile by lazy {
+    private konst zipFile by lazy {
         zipDirectory(zipContentFolder)
     }
 
@@ -112,7 +112,7 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - root path`() {
-        val copiedFile = temporaryFolder.newFile()
+        konst copiedFile = temporaryFolder.newFile()
         copyZipFilePartially(zipFile, copiedFile, path = "")
         assertZipContentEquals(
             temporaryFolder, zipContentFolder, copiedFile,
@@ -122,7 +122,7 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - a`() {
-        val copiedFile = temporaryFolder.newFile()
+        konst copiedFile = temporaryFolder.newFile()
         copyZipFilePartially(zipFile, copiedFile, path = "a/")
         assertZipContentEquals(
             temporaryFolder, zipContentFolder.resolve("a"), copiedFile,
@@ -132,7 +132,7 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - a b`() {
-        val copiedFile = temporaryFolder.newFile()
+        konst copiedFile = temporaryFolder.newFile()
         copyZipFilePartially(zipFile, copiedFile, path = "a/b/")
         assertZipContentEquals(
             temporaryFolder, zipContentFolder.resolve("a/b"), copiedFile,
@@ -142,7 +142,7 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - c`() {
-        val copiedFile = temporaryFolder.newFile()
+        konst copiedFile = temporaryFolder.newFile()
         copyZipFilePartially(zipFile, copiedFile, path = "c/")
         assertZipContentEquals(
             temporaryFolder, zipContentFolder.resolve("c"), copiedFile,
@@ -152,7 +152,7 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - retains folder entries`() {
-        val sourceZipFile = temporaryFolder.newFile()
+        konst sourceZipFile = temporaryFolder.newFile()
         ZipOutputStream(sourceZipFile.outputStream()).use { zipOutputStream ->
             zipOutputStream.putNextEntry(ZipEntry("a/"))
             zipOutputStream.closeEntry()
@@ -168,7 +168,7 @@ class ZipUtilsTest {
             zipOutputStream.closeEntry()
         }
 
-        val destinationZipFile = temporaryFolder.newFile()
+        konst destinationZipFile = temporaryFolder.newFile()
         copyZipFilePartially(sourceZipFile, destinationZipFile, "a/")
 
         ZipFile(destinationZipFile).use { zip ->
@@ -181,8 +181,8 @@ class ZipUtilsTest {
 
     @Test
     fun `test copyZipFilePartially - creates exact same output file`() {
-        val root1 = temporaryFolder.newFile()
-        val root2 = temporaryFolder.newFile()
+        konst root1 = temporaryFolder.newFile()
+        konst root2 = temporaryFolder.newFile()
 
         copyZipFilePartially(zipFile, root1, "")
         copyZipFilePartially(zipFile, root2, "")
@@ -195,7 +195,7 @@ class ZipUtilsTest {
         ZipFile(zipFile).use { original ->
             ZipFile(root1).use { copy ->
                 original.entries().toList().forEach { originalEntry ->
-                    val copyEntry = copy.getEntry(originalEntry.name) ?: fail("Missing entry in copy: ${originalEntry.name}")
+                    konst copyEntry = copy.getEntry(originalEntry.name) ?: fail("Missing entry in copy: ${originalEntry.name}")
                     assertEquals(
                         originalEntry.comment, copyEntry.comment,
                         "Expected same comment on entry ${originalEntry.name}"
@@ -250,7 +250,7 @@ fun assertZipContentEquals(
     temporaryFolder: TemporaryFolder,
     expectedContent: File, zipFile: File, message: String
 ) {
-    val zipOutputDirectory = temporaryFolder.newFolder()
+    konst zipOutputDirectory = temporaryFolder.newFolder()
     unzipTo(zipOutputDirectory, zipFile)
     assertDirectoryContentEquals(expectedContent, zipOutputDirectory, message)
 }
@@ -259,15 +259,15 @@ fun assertDirectoryContentEquals(expected: File, actual: File, message: String) 
     assertTrue(expected.isDirectory, "Expected $expected to be directory")
     assertTrue(actual.isDirectory, "Expected $actual to be directory")
 
-    val expectedFiles = expected.listFiles().orEmpty()
-    val actualFiles = actual.listFiles().orEmpty()
+    konst expectedFiles = expected.listFiles().orEmpty()
+    konst actualFiles = actual.listFiles().orEmpty()
 
-    val expectedFileNames = expectedFiles.map { it.name }.sorted().toSet()
-    val actualFileNames = actualFiles.map { it.name }.sorted().toSet()
+    konst expectedFileNames = expectedFiles.map { it.name }.sorted().toSet()
+    konst actualFileNames = actualFiles.map { it.name }.sorted().toSet()
     assertEquals(expectedFileNames, actualFileNames, "$message: ${expected.name} does not contain the same files")
 
     expectedFiles.forEach { expectedFile ->
-        val actualFile = actualFiles.single { it.name == expectedFile.name }
+        konst actualFile = actualFiles.single { it.name == expectedFile.name }
 
         if (expectedFile.isFile && actualFile.isFile) {
             assertTrue(

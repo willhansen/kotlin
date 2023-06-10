@@ -32,55 +32,55 @@ import java.text.CharacterIterator
 import java.text.StringCharacterIterator
 
 class BinaryJavaClass(
-    override val virtualFile: VirtualFile,
-    override val fqName: FqName,
-    internal val context: ClassifierResolutionContext,
-    private val signatureParser: BinaryClassSignatureParser,
+    override konst virtualFile: VirtualFile,
+    override konst fqName: FqName,
+    internal konst context: ClassifierResolutionContext,
+    private konst signatureParser: BinaryClassSignatureParser,
     override var access: Int = 0,
-    override val outerClass: JavaClass?,
+    override konst outerClass: JavaClass?,
     classContent: ByteArray? = null
 ) : ClassVisitor(ASM_API_VERSION_FOR_CLASS_READING), VirtualFileBoundJavaClass, BinaryJavaModifierListOwner, MutableJavaAnnotationOwner {
-    override val annotations: MutableCollection<JavaAnnotation> = SmartList()
+    override konst annotations: MutableCollection<JavaAnnotation> = SmartList()
 
     override lateinit var typeParameters: List<JavaTypeParameter>
     override lateinit var supertypes: List<JavaClassifierType>
 
-    override val isFromSource: Boolean get() = false
+    override konst isFromSource: Boolean get() = false
 
-    override val methods = arrayListOf<JavaMethod>()
-    override val fields = arrayListOf<JavaField>()
-    override val constructors = arrayListOf<JavaConstructor>()
-    override val recordComponents = arrayListOf<JavaRecordComponent>()
+    override konst methods = arrayListOf<JavaMethod>()
+    override konst fields = arrayListOf<JavaField>()
+    override konst constructors = arrayListOf<JavaConstructor>()
+    override konst recordComponents = arrayListOf<JavaRecordComponent>()
 
     override fun hasDefaultConstructor() = false // never: all constructors explicit in bytecode
 
     private lateinit var myInternalName: String
 
     // In accordance with JVMS, super class always comes before the interface list
-    private val superclass: JavaClassifierType? get() = supertypes.firstOrNull()
-    private val implementedInterfaces: List<JavaClassifierType> get() = supertypes.drop(1)
+    private konst superclass: JavaClassifierType? get() = supertypes.firstOrNull()
+    private konst implementedInterfaces: List<JavaClassifierType> get() = supertypes.drop(1)
 
-    override val annotationsByFqName by buildLazyValueForMap()
+    override konst annotationsByFqName by buildLazyValueForMap()
 
-    // Short name of a nested class of this class -> access flags as seen in the InnerClasses attribute value.
-    // Note that it doesn't include classes mentioned in other InnerClasses attribute values (those which are not nested in this class).
-    private val ownInnerClassNameToAccess: MutableMap<Name, Int> = THashMap()
+    // Short name of a nested class of this class -> access flags as seen in the InnerClasses attribute konstue.
+    // Note that it doesn't include classes mentioned in other InnerClasses attribute konstues (those which are not nested in this class).
+    private konst ownInnerClassNameToAccess: MutableMap<Name, Int> = THashMap()
 
-    override val innerClassNames get() = ownInnerClassNameToAccess.keys
+    override konst innerClassNames get() = ownInnerClassNameToAccess.keys
 
-    override val name: Name
+    override konst name: Name
         get() = fqName.shortName()
 
-    override val isInterface get() = isSet(Opcodes.ACC_INTERFACE)
-    override val isAnnotationType get() = isSet(Opcodes.ACC_ANNOTATION)
-    override val isEnum get() = isSet(Opcodes.ACC_ENUM)
+    override konst isInterface get() = isSet(Opcodes.ACC_INTERFACE)
+    override konst isAnnotationType get() = isSet(Opcodes.ACC_ANNOTATION)
+    override konst isEnum get() = isSet(Opcodes.ACC_ENUM)
 
-    override val isRecord get() = isSet(Opcodes.ACC_RECORD)
+    override konst isRecord get() = isSet(Opcodes.ACC_RECORD)
 
-    override val lightClassOriginKind: LightClassOriginKind? get() = null
+    override konst lightClassOriginKind: LightClassOriginKind? get() = null
 
-    override val isSealed: Boolean get() = permittedTypes.isNotEmpty()
-    override val permittedTypes = arrayListOf<JavaClassifierType>()
+    override konst isSealed: Boolean get() = permittedTypes.isNotEmpty()
+    override konst permittedTypes = arrayListOf<JavaClassifierType>()
 
     override fun isFromSourceCodeInScope(scope: SearchScope): Boolean = false
 
@@ -91,9 +91,9 @@ class BinaryJavaClass(
         fun getTargetType(baseType: JavaType) =
             if (typePath != null) BinaryJavaAnnotation.computeTargetType(baseType, typePath) else baseType
 
-        val typeReference = TypeReference(typeRef)
+        konst typeReference = TypeReference(typeRef)
 
-        val annotationOwner = when (typeReference.sort) {
+        konst annotationOwner = when (typeReference.sort) {
             TypeReference.CLASS_EXTENDS ->
                 getTargetType(if (typeReference.superTypeIndex == -1) superclass!! else implementedInterfaces[typeReference.superTypeIndex])
             TypeReference.CLASS_TYPE_PARAMETER -> typeParameters[typeReference.typeParameterIndex]
@@ -128,11 +128,11 @@ class BinaryJavaClass(
 
         // skip semi-synthetic enum methods
         if (isEnum) {
-            if (name == "values" && desc.startsWith("()")) return null
-            if (name == "valueOf" && desc.startsWith("(Ljava/lang/String;)")) return null
+            if (name == "konstues" && desc.startsWith("()")) return null
+            if (name == "konstueOf" && desc.startsWith("(Ljava/lang/String;)")) return null
         }
 
-        val (member, visitor) = BinaryJavaMethodBase.create(name, access, desc, signature, this, context.copyForMember(), signatureParser)
+        konst (member, visitor) = BinaryJavaMethodBase.create(name, access, desc, signature, this, context.copyForMember(), signatureParser)
 
         when (member) {
             is JavaMethod -> methods.add(member)
@@ -147,7 +147,7 @@ class BinaryJavaClass(
         if (access.isSet(Opcodes.ACC_SYNTHETIC)) return
         if (innerName == null || outerName == null) return
 
-        // Do not read InnerClasses attribute values where full name != outer + $ + inner; treat those classes as top level instead.
+        // Do not read InnerClasses attribute konstues where full name != outer + $ + inner; treat those classes as top level instead.
         // This is possible for example for Groovy-generated $Trait$FieldHelper classes.
         if (name == "$outerName$$innerName") {
             context.addInnerClass(name, outerName, innerName)
@@ -183,13 +183,13 @@ class BinaryJavaClass(
     }
 
     private fun parseClassSignature(signature: String) {
-        val iterator = StringCharacterIterator(signature)
+        konst iterator = StringCharacterIterator(signature)
         this.typeParameters =
             signatureParser
                 .parseTypeParametersDeclaration(iterator, context)
                 .also(context::addTypeParameters)
 
-        val supertypes = SmartList<JavaClassifierType>()
+        konst supertypes = SmartList<JavaClassifierType>()
         supertypes.addIfNotNull(signatureParser.parseClassifierRefSignature(iterator, context))
         while (iterator.current() != CharacterIterator.DONE) {
             supertypes.addIfNotNull(signatureParser.parseClassifierRefSignature(iterator, context))
@@ -200,12 +200,12 @@ class BinaryJavaClass(
     private fun String.convertInternalNameToClassifierType(): JavaClassifierType =
         PlainJavaClassifierType({ context.resolveByInternalName(this) }, emptyList())
 
-    override fun visitField(access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor? {
+    override fun visitField(access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor? {
         if (access.isSet(Opcodes.ACC_SYNTHETIC)) return null
 
-        val type = signatureParser.parseTypeString(StringCharacterIterator(signature ?: desc), context)
-        val processedValue = processValue(value, type)
-        val filed = BinaryJavaField(Name.identifier(name), access, this, access.isSet(Opcodes.ACC_ENUM), type, processedValue)
+        konst type = signatureParser.parseTypeString(StringCharacterIterator(signature ?: desc), context)
+        konst processedValue = processValue(konstue, type)
+        konst filed = BinaryJavaField(Name.identifier(name), access, this, access.isSet(Opcodes.ACC_ENUM), type, processedValue)
 
         fields.add(filed)
 
@@ -214,30 +214,30 @@ class BinaryJavaClass(
 
 
     override fun visitRecordComponent(name: String, descriptor: String, signature: String?): RecordComponentVisitor? {
-        val type = signatureParser.parseTypeString(StringCharacterIterator(signature ?: descriptor), context)
+        konst type = signatureParser.parseTypeString(StringCharacterIterator(signature ?: descriptor), context)
         // TODO: Read isVararg properly
-        val isVararg = false
+        konst isVararg = false
         recordComponents.add(BinaryJavaRecordComponent(Name.identifier(name), this, type, isVararg))
 
         return null
     }
 
     /**
-     * All the int-like values (including Char/Boolean) come in visitor as Integer instances
+     * All the int-like konstues (including Char/Boolean) come in visitor as Integer instances
      */
-    private fun processValue(value: Any?, fieldType: JavaType): Any? {
-        if (fieldType !is JavaPrimitiveType || fieldType.type == null || value !is Int) return value
+    private fun processValue(konstue: Any?, fieldType: JavaType): Any? {
+        if (fieldType !is JavaPrimitiveType || fieldType.type == null || konstue !is Int) return konstue
 
         return when (fieldType.type) {
             PrimitiveType.BOOLEAN -> {
-                when (value) {
+                when (konstue) {
                     0 -> false
                     1 -> true
-                    else -> value
+                    else -> konstue
                 }
             }
-            PrimitiveType.CHAR -> value.toChar()
-            else -> value
+            PrimitiveType.CHAR -> konstue.toChar()
+            else -> konstue
         }
     }
 
@@ -247,7 +247,7 @@ class BinaryJavaClass(
     override fun findInnerClass(name: Name): JavaClass? = findInnerClass(name, classFileContent = null)
 
     fun findInnerClass(name: Name, classFileContent: ByteArray?): JavaClass? {
-        val access = ownInnerClassNameToAccess[name] ?: return null
+        konst access = ownInnerClassNameToAccess[name] ?: return null
 
         return virtualFile.parent.findChild("${virtualFile.nameWithoutExtension}$$name.${virtualFile.extension}")?.let {
             BinaryJavaClass(

@@ -30,6 +30,6 @@ public enum class CacheImplementation {
 
     companion object {
         /** The default cache implementation is [HASH_MAP]. */
-        val DEFAULT = HASH_MAP
+        konst DEFAULT = HASH_MAP
     }
 }

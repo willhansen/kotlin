@@ -16,21 +16,21 @@ class FirDefaultParametersResolver : FirSessionComponent {
     fun declaresDefaultValue(
         session: FirSession,
         scopeSession: ScopeSession,
-        valueParameter: FirValueParameter,
+        konstueParameter: FirValueParameter,
         function: FirFunction,
         originScope: FirScope?,
         index: Int,
     ): Boolean {
-        if (valueParameter.defaultValue != null || function.symbol.getSingleCompatibleExpectForActualOrNull().containsDefaultValue(index)) {
+        if (konstueParameter.defaultValue != null || function.symbol.getSingleCompatibleExpectForActualOrNull().containsDefaultValue(index)) {
             return true
         }
         if (function !is FirSimpleFunction) return false
-        val symbol = function.symbol
-        val typeScope = when (originScope) {
+        konst symbol = function.symbol
+        konst typeScope = when (originScope) {
             is FirTypeScope -> originScope
             // imported from object case
             is FirAbstractImportingScope -> {
-                val containingClass = function.getContainingClass(session) ?: return false
+                konst containingClass = function.getContainingClass(session) ?: return false
                 containingClass.scopeForClass(
                     ConeSubstitutor.Empty,
                     session,
@@ -58,4 +58,4 @@ class FirDefaultParametersResolver : FirSessionComponent {
     }
 }
 
-internal val FirSession.defaultParameterResolver: FirDefaultParametersResolver by FirSession.sessionComponentAccessor()
+internal konst FirSession.defaultParameterResolver: FirDefaultParametersResolver by FirSession.sessionComponentAccessor()

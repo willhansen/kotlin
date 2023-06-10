@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.js.translate.utils.name
  * @returns `f` for `_.foo.f()` call
  */
 fun getSimpleName(call: JsInvocation): JsName? {
-    val qualifier = call.qualifier
+    konst qualifier = call.qualifier
     return (qualifier as? JsNameRef)?.name
 }
 
@@ -43,7 +43,7 @@ fun getSimpleIdent(call: JsInvocation): String? {
     qualifiers@ while (qualifier != null) {
         when (qualifier) {
             is JsInvocation -> {
-                val callableQualifier = qualifier
+                konst callableQualifier = qualifier
                 qualifier = callableQualifier.qualifier
 
                 if (isCallInvocation(callableQualifier)) {
@@ -65,8 +65,8 @@ fun getSimpleIdent(call: JsInvocation): String? {
  *         false otherwise
  */
 fun isCallInvocation(invocation: JsInvocation): Boolean {
-    val qualifier = invocation.qualifier as? JsNameRef
-    val arguments = invocation.arguments
+    konst qualifier = invocation.qualifier as? JsNameRef
+    konst arguments = invocation.arguments
 
     if (qualifier.name?.descriptor != null) return false
 
@@ -107,7 +107,7 @@ private fun getCallerQualifierImpl(invocation: JsInvocation): JsExpression? {
  * This chain is produced when there are lots of aliases created from aliases, i.e. `var $tmp1 = foo; var $tmp2 = $tmp1;`.
  * So for `$tmp2` we should get reference to `foo`.
  */
-val JsExpression.transitiveStaticRef: JsExpression
+konst JsExpression.transitiveStaticRef: JsExpression
     get() {
         var qualifier = this
         loop@while (true) {

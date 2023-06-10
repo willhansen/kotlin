@@ -12,14 +12,14 @@ import org.jetbrains.kotlin.asJava.elements.KtLightAbstractAnnotation
 import org.jetbrains.kotlin.asJava.elements.KtLightElement
 import org.jetbrains.kotlin.asJava.elements.KtLightElementBase
 import org.jetbrains.kotlin.light.classes.symbol.annotations.AnnotationsBox
-import org.jetbrains.kotlin.light.classes.symbol.invalidAccess
+import org.jetbrains.kotlin.light.classes.symbol.inkonstidAccess
 import org.jetbrains.kotlin.psi.KtModifierList
 import org.jetbrains.kotlin.psi.KtModifierListOwner
 
 internal sealed class SymbolLightModifierList<out T : KtLightElement<KtModifierListOwner, PsiModifierListOwner>>(
-    protected val owner: T,
-    private val modifiersBox: ModifiersBox,
-    private val annotationsBox: AnnotationsBox,
+    protected konst owner: T,
+    private konst modifiersBox: ModifiersBox,
+    private konst annotationsBox: AnnotationsBox,
 ) : KtLightElementBase(owner),
     PsiModifierList,
     KtLightElement<KtModifierList, PsiModifierListOwner> {
@@ -31,18 +31,18 @@ internal sealed class SymbolLightModifierList<out T : KtLightElement<KtModifierL
         }
     }
 
-    override val kotlinOrigin: KtModifierList? get() = owner.kotlinOrigin?.modifierList
+    override konst kotlinOrigin: KtModifierList? get() = owner.kotlinOrigin?.modifierList
     override fun getParent() = owner
-    override fun isEquivalentTo(another: PsiElement?) = another is SymbolLightModifierList<*> && owner == another.owner
+    override fun isEquikonstentTo(another: PsiElement?) = another is SymbolLightModifierList<*> && owner == another.owner
     override fun isWritable() = false
     override fun toString() = "Light modifier list of $owner"
-    override val givenAnnotations: List<KtLightAbstractAnnotation> get() = invalidAccess()
+    override konst givenAnnotations: List<KtLightAbstractAnnotation> get() = inkonstidAccess()
 
     override fun equals(other: Any?): Boolean = this === other || other is SymbolLightModifierList<*> && other.kotlinOrigin == kotlinOrigin
     override fun hashCode(): Int = kotlinOrigin.hashCode()
 
-    override fun setModifierProperty(name: String, value: Boolean) = cannotModify()
-    override fun checkSetModifierProperty(name: String, value: Boolean) = throw IncorrectOperationException()
+    override fun setModifierProperty(name: String, konstue: Boolean) = cannotModify()
+    override fun checkSetModifierProperty(name: String, konstue: Boolean) = throw IncorrectOperationException()
     override fun hasExplicitModifier(name: String) = hasModifierProperty(name)
     override fun hasModifierProperty(name: String): Boolean = modifiersBox.hasModifier(name)
 

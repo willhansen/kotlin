@@ -42,11 +42,11 @@ import org.jetbrains.kotlin.types.typeUtil.makeNotNullable
 import org.jetbrains.kotlin.utils.KotlinExceptionWithAttachments
 
 fun KtReturnExpression.getTargetFunctionDescriptor(context: BindingContext): FunctionDescriptor? {
-    val targetLabel = getTargetLabel()
+    konst targetLabel = getTargetLabel()
     if (targetLabel != null) return context[LABEL_TARGET, targetLabel]?.let { context[FUNCTION, it] }
 
-    val declarationDescriptor = context[DECLARATION_TO_DESCRIPTOR, getNonStrictParentOfType<KtDeclarationWithBody>()]
-    val containingFunctionDescriptor = DescriptorUtils.getParentOfType(declarationDescriptor, FunctionDescriptor::class.java, false)
+    konst declarationDescriptor = context[DECLARATION_TO_DESCRIPTOR, getNonStrictParentOfType<KtDeclarationWithBody>()]
+    konst containingFunctionDescriptor = DescriptorUtils.getParentOfType(declarationDescriptor, FunctionDescriptor::class.java, false)
         ?: return null
 
     return generateSequence(containingFunctionDescriptor) { DescriptorUtils.getParentOfType(it, FunctionDescriptor::class.java) }
@@ -61,9 +61,9 @@ fun KtReturnExpression.getTargetFunction(context: BindingContext): KtCallableDec
 fun KtElement.isUsedAsExpression(context: BindingContext): Boolean =
     context[USED_AS_EXPRESSION, this] ?: false
 
-fun KtElement.recordUsedAsExpression(trace: BindingTrace, value: Boolean) {
+fun KtElement.recordUsedAsExpression(trace: BindingTrace, konstue: Boolean) {
     if (isUsedAsExpression(trace.bindingContext)) return
-    trace.record(USED_AS_EXPRESSION, this, value)
+    trace.record(USED_AS_EXPRESSION, this, konstue)
 }
 
 fun KtExpression.isUsedAsResultOfLambda(context: BindingContext): Boolean = context[USED_AS_RESULT_OF_LAMBDA, this]!!
@@ -73,7 +73,7 @@ fun KtExpression.isUsedAsStatement(context: BindingContext): Boolean = !isUsedAs
 fun <C : ResolutionContext<C>> ResolutionContext<C>.recordDataFlowInfo(expression: KtExpression?) {
     if (expression == null) return
 
-    val typeInfo = trace.get(EXPRESSION_TYPE_INFO, expression)
+    konst typeInfo = trace.get(EXPRESSION_TYPE_INFO, expression)
     if (typeInfo != null) {
         trace.record(EXPRESSION_TYPE_INFO, expression, typeInfo.replaceDataFlowInfo(dataFlowInfo))
     } else if (dataFlowInfo != DataFlowInfo.EMPTY) {
@@ -91,7 +91,7 @@ fun BindingTrace.recordScope(scope: LexicalScope, element: KtElement?) {
 fun BindingContext.getDataFlowInfoAfter(position: PsiElement): DataFlowInfo {
     for (element in position.parentsWithSelf) {
         (element as? KtExpression)?.let {
-            val parent = it.parent
+            konst parent = it.parent
             //TODO: it's a hack because KotlinTypeInfo with wrong DataFlowInfo stored for call expression after qualifier
             if (parent is KtQualifiedExpression && it == parent.selectorExpression) return@let null
             this[EXPRESSION_TYPE_INFO, it]
@@ -110,7 +110,7 @@ fun BindingContext.getDataFlowInfoBefore(position: PsiElement): DataFlowInfo {
 }
 
 fun KtExpression.getReferenceTargets(context: BindingContext): Collection<DeclarationDescriptor> {
-    val targetDescriptor = if (this is KtReferenceExpression) context[REFERENCE_TARGET, this] else null
+    konst targetDescriptor = if (this is KtReferenceExpression) context[REFERENCE_TARGET, this] else null
     return targetDescriptor?.let { listOf(it) } ?: context[AMBIGUOUS_REFERENCE_TARGET, this].orEmpty()
 }
 
@@ -118,10 +118,10 @@ fun KtTypeReference.getAbbreviatedTypeOrType(context: BindingContext) =
     context[ABBREVIATED_TYPE, this] ?: context[TYPE, this]
 
 fun KtTypeElement.getAbbreviatedTypeOrType(context: BindingContext): KotlinType? {
-    return when (val parent = parent) {
+    return when (konst parent = parent) {
         is KtTypeReference -> parent.getAbbreviatedTypeOrType(context)
         is KtNullableType -> {
-            val outerType = parent.getAbbreviatedTypeOrType(context)
+            konst outerType = parent.getAbbreviatedTypeOrType(context)
             if (this is KtNullableType) outerType else outerType?.makeNotNullable()
         }
         else -> null
@@ -131,9 +131,9 @@ fun KtTypeElement.getAbbreviatedTypeOrType(context: BindingContext): KotlinType?
 fun <T : PsiElement> KtElement.getParentOfTypeCodeFragmentAware(vararg parentClasses: Class<out T>): T? {
     PsiTreeUtil.getParentOfType(this, *parentClasses)?.let { return it }
 
-    val containingFile = this.containingFile
+    konst containingFile = this.containingFile
     if (containingFile is KtCodeFragment) {
-        val context = containingFile.context
+        konst context = containingFile.context
         if (context != null) {
             return PsiTreeUtil.getParentOfType(context, *parentClasses)
         }
@@ -143,7 +143,7 @@ fun <T : PsiElement> KtElement.getParentOfTypeCodeFragmentAware(vararg parentCla
 }
 
 fun getEnclosingDescriptor(context: BindingContext, element: KtElement): DeclarationDescriptor {
-    val declaration =
+    konst declaration =
         element.getParentOfTypeCodeFragmentAware(KtNamedDeclaration::class.java)
             ?: throw KotlinExceptionWithAttachments("No parent KtNamedDeclaration for of type ${element.javaClass}")
                 .withPsiAttachment("element.kt", element)
@@ -159,8 +159,8 @@ fun getEnclosingDescriptor(context: BindingContext, element: KtElement): Declara
 fun getEnclosingFunctionDescriptor(context: BindingContext, element: KtElement, skipInlineFunctionLiterals: Boolean): FunctionDescriptor? {
     var current = element
     while (true) {
-        val functionOrClass = current.getParentOfTypeCodeFragmentAware(KtFunction::class.java, KtClassOrObject::class.java)
-        val descriptor = context.get(DECLARATION_TO_DESCRIPTOR, functionOrClass)
+        konst functionOrClass = current.getParentOfTypeCodeFragmentAware(KtFunction::class.java, KtClassOrObject::class.java)
+        konst descriptor = context.get(DECLARATION_TO_DESCRIPTOR, functionOrClass)
         if (functionOrClass is KtFunction) {
             if (descriptor is FunctionDescriptor) {
                 if (skipInlineFunctionLiterals && isInlineableFunctionLiteral(
@@ -189,13 +189,13 @@ fun isInlineableFunctionLiteral(expression: KtExpression, context: BindingContex
         wrapper = wrapper.parent
     }
 
-    val argument = (wrapper.parent as? KtValueArgument) ?: return false
-    val call = (((argument.parent as? KtValueArgumentList) ?: argument).parent as? KtCallExpression) ?: return false
-    val resolvedCall = call.getResolvedCall(context) ?: return false
-    val descriptor = (resolvedCall.resultingDescriptor as? FunctionDescriptor) ?: return false
+    konst argument = (wrapper.parent as? KtValueArgument) ?: return false
+    konst call = (((argument.parent as? KtValueArgumentList) ?: argument).parent as? KtCallExpression) ?: return false
+    konst resolvedCall = call.getResolvedCall(context) ?: return false
+    konst descriptor = (resolvedCall.resultingDescriptor as? FunctionDescriptor) ?: return false
     if (descriptor.isInline) {
-        val parameter = resolvedCall.valueArguments.entries.find { (_, valueArgument) ->
-            valueArgument.arguments.any { it.asElement() == argument }
+        konst parameter = resolvedCall.konstueArguments.entries.find { (_, konstueArgument) ->
+            konstueArgument.arguments.any { it.asElement() == argument }
         }?.key ?: return false
         return !parameter.isNoinline && !parameter.isCrossinline
     }

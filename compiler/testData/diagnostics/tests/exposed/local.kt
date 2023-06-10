@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
-// invalid, depends on local class
+// inkonstid, depends on local class
 fun <!EXPOSED_FUNCTION_RETURN_TYPE!>foo<!>() = run {
     class A
     A()
 }
 
-// invalid, depends on local class
+// inkonstid, depends on local class
 fun <!EXPOSED_FUNCTION_RETURN_TYPE!>gav<!>() = {
     class B
     B()
@@ -13,7 +13,7 @@ fun <!EXPOSED_FUNCTION_RETURN_TYPE!>gav<!>() = {
 
 abstract class My
 
-// valid, object literal here is effectively My
+// konstid, object literal here is effectively My
 fun bar() = run {
     object: My() {}
 }

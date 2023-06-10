@@ -19,5 +19,5 @@ open class ProtectedInsideInlineError : ProtectedInsideInlineParent() {
 
     inline var publicInlineUserVal: Int
         get() = <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedFun<!>() + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentFun<!>()
-        set(<!UNUSED_PARAMETER!>value<!>) { <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedFun<!>() + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentFun<!>() }
+        set(<!UNUSED_PARAMETER!>konstue<!>) { <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedFun<!>() + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentVar<!> + <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>protectedParentFun<!>() }
 }

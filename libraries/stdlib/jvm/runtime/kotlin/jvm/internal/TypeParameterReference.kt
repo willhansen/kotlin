@@ -12,16 +12,16 @@ import kotlin.reflect.typeOf
 
 @SinceKotlin("1.4")
 class TypeParameterReference(
-    private val container: Any?, // Either ClassReference or CallableReference
-    override val name: String,
-    override val variance: KVariance,
-    override val isReified: Boolean,
+    private konst container: Any?, // Either ClassReference or CallableReference
+    override konst name: String,
+    override konst variance: KVariance,
+    override konst isReified: Boolean,
 ) : KTypeParameter {
     @Volatile
     private var bounds: List<KType>? = null
 
     @OptIn(ExperimentalStdlibApi::class)
-    override val upperBounds: List<KType>
+    override konst upperBounds: List<KType>
         get() = bounds ?: listOf(typeOf<Any?>()).also { bounds = it }
 
     fun setUpperBounds(upperBounds: List<KType>) {

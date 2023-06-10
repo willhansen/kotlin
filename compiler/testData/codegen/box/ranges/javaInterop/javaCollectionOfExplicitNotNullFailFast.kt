@@ -18,7 +18,7 @@ import kotlin.test.*
 fun box(): String {
     // Sanity check to make sure there IS an exception even when not in a for-loop
     try {
-        val i = J.listOfNotNull()[0]
+        konst i = J.listOfNotNull()[0]
         return "Fail: should throw on get()"
     } catch (e: NullPointerException) {}
 

@@ -295,7 +295,7 @@ fun C.test(a: A) {
 
 Five functions with the name `foo` are available in the context: two local extensions, two member extensions and a top-level extension.
 Five groups of functions are created, each group contains one function.
-The value the function returns reveals an order of its group: the function #0 (a function that returns 0) has the highest priority and goes first.
+The konstue the function returns reveals an order of its group: the function #0 (a function that returns 0) has the highest priority and goes first.
 In this example it is simple to see which function is called: the closest local function #0.
 But the example illustrates well the different groups of functions:
 
@@ -333,7 +333,7 @@ fun C.test(a: A) {
     with (B()) {
         a.foo("abc") // the function #1 is called
 
-        val i: Int? = ...
+        konst i: Int? = ...
         a.foo(i) // the function #2 is called
     }
 }
@@ -543,7 +543,7 @@ However, all static Java methods are added with the same order as if they were m
 This section describes how hidden `invoke` calls are resolved.
 First we'll describe the `invoke` convention, and then go into details of the name resolution process.
 
-This convention in Kotlin lets you call a value as a function if it has the appropriate `invoke` method, which can be a member or an extension:
+This convention in Kotlin lets you call a konstue as a function if it has the appropriate `invoke` method, which can be a member or an extension:
 
 [source,kotlin]
 ----
@@ -551,14 +551,14 @@ interface MyFunction {
     operator fun invoke(s: String): Int
 }
 fun test(f: MyFunction) {
-    val i: Int = f("a")     <1>
+    konst i: Int = f("a")     <1>
 }
 ----
 <1> the call `f.invoke("a")` by convention is simplified to `f("a")`
 
 The `invoke` function should be applicable on the arguments passed.
 
-When you call a value of function type as a regular function in Kotlin, the same convention takes place.
+When you call a konstue of function type as a regular function in Kotlin, the same convention takes place.
 The function type `(Int) -> Int` is syntactic sugar for `Function1<Int, Int>`, which is a regular interface declared in the standard library:
 
 [source,kotlin]
@@ -566,16 +566,16 @@ The function type `(Int) -> Int` is syntactic sugar for `Function1<Int, Int>`, w
 interface Function1<in P1, out R> : Function<R> {
     operator fun invoke(p1: P1): R
 }
->>> val f: (Int) -> Int = { it + 1 }
+>>> konst f: (Int) -> Int = { it + 1 }
 >>> f(11)                              <1>
 ----
 <1> the short form of the call `f.invoke(11)`
 
-If a value has extension function type, it can be called as extension function:
+If a konstue has extension function type, it can be called as extension function:
 
 [source,kotlin]
 ----
->>> val f : Int.() -> Int = { this }
+>>> konst f : Int.() -> Int = { this }
 >>> 1.f()
 ----
 
@@ -583,7 +583,7 @@ The resolution of such call works through the `invoke` convention as well, but i
 That means the call `1.f()` might be rewritten as `f(1)`, which is the short form for `f.invoke(1)`.
 
 
-The Kotlin compiler has to take this convention into account every time it resolves a call `a.foo()`, because `foo` might be either a regular function, or a value that is called via the `invoke` convention.
+The Kotlin compiler has to take this convention into account every time it resolves a call `a.foo()`, because `foo` might be either a regular function, or a konstue that is called via the `invoke` convention.
 
 Earlier we described how the calls `a.foo()` and `foo()` are resolved.
 Just to remind you, the compiler builds several groups of possibly applicable functions according to different categories of functions.
@@ -606,7 +606,7 @@ A member property of function type has higher priority than an extension functio
 [source,kotlin]
 ----
 class A {
-    val foo: () -> Int = { 1 }
+    konst foo: () -> Int = { 1 }
 }
 
 fun A.foo() = 2
@@ -638,7 +638,7 @@ Thus if the `invoke` function is declared as an extension, the member property w
 [source,kotlin]
 ----
 class A {
-    val foo: CallableFoo = CallableFoo()
+    konst foo: CallableFoo = CallableFoo()
 }
 
 fun A.foo() = 1
@@ -646,7 +646,7 @@ fun A.foo() = 1
 class CallableFoo
 operator fun CallableFoo.invoke() = 2
 
-val A.foo: () -> Int
+konst A.foo: () -> Int
     get() = { 3 }
 
 fun test(a: A, foo: A.() -> Int) {
@@ -663,8 +663,8 @@ This parameter will actually be called in the example above.
 
 2. We have two top-level extension properties named `foo` in the context, for each of them the `invoke` function is available.
 Two groups are created.
-The first one contains the member property `val foo: CallableFoo` together with the function `fun CallableFoo.invoke()`.
-The second group contains the property `val A.foo: () -> Int` together with the member function `invoke` of the class `Function0<Int>`.
+The first one contains the member property `konst foo: CallableFoo` together with the function `fun CallableFoo.invoke()`.
+The second group contains the property `konst A.foo: () -> Int` together with the member function `invoke` of the class `Function0<Int>`.
 These properties belong to different groups with different priorities, because the first property is a member, while the second one is an extension.
 Note that despite being a member, property `foo` of the type `CallableFoo` goes after regular extension functions, because only the extension function `invoke` is available in the context.
 
@@ -675,7 +675,7 @@ Thus the functions and properties of closer receiver have higher priority:
 ----
 class A { fun foo() = 2 }
 
-class B { val foo: () -> Int = { 1 } }
+class B { konst foo: () -> Int = { 1 } }
 
 fun test(a: A, b: B) {
     with (a) { with (b) { foo() } }
@@ -694,7 +694,7 @@ Thus we can construct a call with three implicit receivers:
 [source,kotlin]
 ----
 class A {
-    val B.foo: C.() -> Unit
+    konst B.foo: C.() -> Unit
         get() = { println("Implicit receivers: " +
                 "$this; ${this@foo}; ${this@A}") }}
 }

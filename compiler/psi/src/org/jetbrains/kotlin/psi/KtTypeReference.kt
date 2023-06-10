@@ -39,10 +39,10 @@ class KtTypeReference : KtModifierListOwnerStub<KotlinPlaceHolderStub<KtTypeRefe
         return visitor.visitTypeReference(this, data)
     }
 
-    val isPlaceholder: Boolean
+    konst isPlaceholder: Boolean
         get() = ((typeElement as? KtUserType)?.referenceExpression as? KtNameReferenceExpression)?.isPlaceholder == true
 
-    val typeElement: KtTypeElement?
+    konst typeElement: KtTypeElement?
         get() = KtStubbedPsiUtil.getStubOrPsiChild(this, KtTokenSets.TYPE_ELEMENT_TYPES, KtTypeElement.ARRAY_FACTORY)
 
     override fun getAnnotations(): List<KtAnnotation> {
@@ -68,7 +68,7 @@ class KtTypeReference : KtModifierListOwnerStub<KotlinPlaceHolderStub<KtTypeRefe
     }
 
     private fun getQualifiedName(userType: KtUserType): String? {
-        val qualifier = userType.qualifier ?: return userType.referencedName
+        konst qualifier = userType.qualifier ?: return userType.referencedName
         return getQualifiedName(qualifier) + "." + userType.referencedName
     }
 
@@ -76,10 +76,10 @@ class KtTypeReference : KtModifierListOwnerStub<KotlinPlaceHolderStub<KtTypeRefe
         return when (typeElement) {
             is KtUserType -> buildString {
                 append(getQualifiedName(typeElement))
-                val args = typeElement.typeArguments
+                konst args = typeElement.typeArguments
                 if (args.isNotEmpty()) {
                     append(args.joinToString(", ", "<", ">") {
-                        val projection = when (it.projectionKind) {
+                        konst projection = when (it.projectionKind) {
                             KtProjectionKind.IN -> "in "
                             KtProjectionKind.OUT -> "out "
                             KtProjectionKind.STAR -> "*"
@@ -90,7 +90,7 @@ class KtTypeReference : KtModifierListOwnerStub<KotlinPlaceHolderStub<KtTypeRefe
                 }
             }
             is KtFunctionType -> buildString {
-                val contextReceivers = typeElement.contextReceiversTypeReferences
+                konst contextReceivers = typeElement.contextReceiversTypeReferences
                 if (contextReceivers.isNotEmpty()) {
                     append(contextReceivers.joinToString(", ", "context(", ")") {getTypeText(it.typeElement) ?: ""})
                 }

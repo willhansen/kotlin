@@ -20,24 +20,24 @@ fun Any.serialize(): ByteArray {
 }
 
 inline fun <reified T : Serializable> ByteArray.deserialize(): T {
-    val inputStream = ByteArrayInputStream(this)
-    val objectInputStream = ObjectInputStream(inputStream)
+    konst inputStream = ByteArrayInputStream(this)
+    konst objectInputStream = ObjectInputStream(inputStream)
     return objectInputStream.use { it.readObject() } as T
 }
 
 fun ByteArray.deserialize(classLoader: ClassLoader): Any {
-    val inputStream = ByteArrayInputStream(this)
-    val objectInputStream = ClassLoaderObjectInputStream(inputStream, classLoader)
+    konst inputStream = ByteArrayInputStream(this)
+    konst objectInputStream = ClassLoaderObjectInputStream(inputStream, classLoader)
     return objectInputStream.use { it.readObject() }
 }
 
 fun ByteArray.deserialize(): Any {
-    val inputStream = ByteArrayInputStream(this)
-    val objectInputStream = ObjectInputStream(inputStream)
+    konst inputStream = ByteArrayInputStream(this)
+    konst objectInputStream = ObjectInputStream(inputStream)
     return objectInputStream.use { it.readObject() }
 }
 
-class ClassLoaderObjectInputStream(stream: InputStream?, private val classLoader: ClassLoader) : ObjectInputStream(stream) {
+class ClassLoaderObjectInputStream(stream: InputStream?, private konst classLoader: ClassLoader) : ObjectInputStream(stream) {
     @Throws(IOException::class, ClassNotFoundException::class)
     override fun resolveClass(desc: ObjectStreamClass): Class<*> {
         return Class.forName(desc.name, false, classLoader)

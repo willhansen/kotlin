@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 interface JvmGeneratorExtensions {
-    val classNameOverride: MutableMap<IrClass, JvmClassName>
+    konst classNameOverride: MutableMap<IrClass, JvmClassName>
 
-    val rawTypeAnnotationConstructor: IrConstructor?
+    konst rawTypeAnnotationConstructor: IrConstructor?
 
-    val cachedFields: CachedFieldsForObjectInstances
+    konst cachedFields: CachedFieldsForObjectInstances
 }

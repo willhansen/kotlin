@@ -105,7 +105,7 @@ public final class TopLevelFIF extends CompositeFIF {
         Map<TypeParameterDescriptor, KotlinType> typeArguments = resolvedCall.getTypeArguments();
 
         assert typeArguments.size() == 1;
-        KotlinType type = typeArguments.values().iterator().next();
+        KotlinType type = typeArguments.konstues().iterator().next();
 
         return UtilsKt.getReferenceToJsClass(type, context);
     }

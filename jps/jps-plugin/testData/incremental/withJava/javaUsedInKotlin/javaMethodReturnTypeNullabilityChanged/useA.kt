@@ -1,3 +1,3 @@
 fun useA() {
-    val s = A().f()
+    konst s = A().f()
 }

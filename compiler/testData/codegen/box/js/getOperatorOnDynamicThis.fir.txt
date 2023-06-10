@@ -8,7 +8,7 @@ FILE: getOperatorOnDynamicThis.kt
     public abstract external interface Z : R|kotlin/Any| {
         public abstract var a: R|dynamic|
             public get(): R|dynamic|
-            public set(value: R|dynamic|): R|kotlin/Unit|
+            public set(konstue: R|dynamic|): R|kotlin/Unit|
 
     }
     public final fun foo(): R|kotlin/Unit| {

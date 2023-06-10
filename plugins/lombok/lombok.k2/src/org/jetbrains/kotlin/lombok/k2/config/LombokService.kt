@@ -36,54 +36,54 @@ class LombokService(session: FirSession, configFile: File?) : FirExtensionSessio
         }
     }
 
-    val config = configFile?.let(LombokConfig::parse) ?: LombokConfig.Empty
-    private val cachesFactory = session.firCachesFactory
+    konst config = configFile?.let(LombokConfig::parse) ?: LombokConfig.Empty
+    private konst cachesFactory = session.firCachesFactory
 
-    private val accessorsCache: Cache<Accessors> = cachesFactory.createCache { symbol ->
+    private konst accessorsCache: Cache<Accessors> = cachesFactory.createCache { symbol ->
         Accessors.get(symbol.fir, config)
     }
 
-    private val accessorsIfAnnotatedCache: Cache<Accessors?> = cachesFactory.createCache { symbol ->
+    private konst accessorsIfAnnotatedCache: Cache<Accessors?> = cachesFactory.createCache { symbol ->
         Accessors.getIfAnnotated(symbol.fir, config)
     }
 
-    private val getterCache: Cache<Getter?> = cachesFactory.createCache { symbol ->
+    private konst getterCache: Cache<Getter?> = cachesFactory.createCache { symbol ->
         Getter.getOrNull(symbol.fir)
     }
 
-    private val setterCache: Cache<Setter?> = cachesFactory.createCache { symbol ->
+    private konst setterCache: Cache<Setter?> = cachesFactory.createCache { symbol ->
         Setter.getOrNull(symbol.fir)
     }
 
-    private val withCache: Cache<With?> = cachesFactory.createCache { symbol ->
+    private konst withCache: Cache<With?> = cachesFactory.createCache { symbol ->
         With.getOrNull(symbol.fir)
     }
 
-    private val noArgsConstructorCache: Cache<NoArgsConstructor?> = cachesFactory.createCache { symbol ->
+    private konst noArgsConstructorCache: Cache<NoArgsConstructor?> = cachesFactory.createCache { symbol ->
         NoArgsConstructor.getOrNull(symbol.fir)
     }
 
-    private val allArgsConstructorCache: Cache<AllArgsConstructor?> = cachesFactory.createCache { symbol ->
+    private konst allArgsConstructorCache: Cache<AllArgsConstructor?> = cachesFactory.createCache { symbol ->
         AllArgsConstructor.getOrNull(symbol.fir)
     }
 
-    private val requiredArgsConstructorCache: Cache<RequiredArgsConstructor?> = cachesFactory.createCache { symbol ->
+    private konst requiredArgsConstructorCache: Cache<RequiredArgsConstructor?> = cachesFactory.createCache { symbol ->
         RequiredArgsConstructor.getOrNull(symbol.fir)
     }
 
-    private val dataCache: Cache<Data?> = cachesFactory.createCache { symbol ->
+    private konst dataCache: Cache<Data?> = cachesFactory.createCache { symbol ->
         Data.getOrNull(symbol.fir)
     }
 
-    private val valueCache: Cache<Value?> = cachesFactory.createCache { symbol ->
+    private konst konstueCache: Cache<Value?> = cachesFactory.createCache { symbol ->
         Value.getOrNull(symbol.fir)
     }
 
-    private val builderCache: Cache<Builder?> = cachesFactory.createCache { symbol ->
+    private konst builderCache: Cache<Builder?> = cachesFactory.createCache { symbol ->
         Builder.getIfAnnotated(symbol.fir, config)
     }
 
-    private val singularCache: Cache<Singular?> = cachesFactory.createCache { symbol ->
+    private konst singularCache: Cache<Singular?> = cachesFactory.createCache { symbol ->
         Singular.getOrNull(symbol.fir)
     }
 
@@ -96,11 +96,11 @@ class LombokService(session: FirSession, configFile: File?) : FirExtensionSessio
     fun getAllArgsConstructor(symbol: FirBasedSymbol<*>): AllArgsConstructor? = allArgsConstructorCache.getValue(symbol)
     fun getRequiredArgsConstructor(symbol: FirBasedSymbol<*>): RequiredArgsConstructor? = requiredArgsConstructorCache.getValue(symbol)
     fun getData(symbol: FirBasedSymbol<*>): Data? = dataCache.getValue(symbol)
-    fun getValue(symbol: FirBasedSymbol<*>): Value? = valueCache.getValue(symbol)
+    fun getValue(symbol: FirBasedSymbol<*>): Value? = konstueCache.getValue(symbol)
     fun getBuilder(symbol: FirBasedSymbol<*>): Builder? = builderCache.getValue(symbol)
     fun getSingular(symbol: FirBasedSymbol<*>): Singular? = singularCache.getValue(symbol)
 }
 
 private typealias Cache<T> = FirCache<FirBasedSymbol<*>, T, Nothing?>
 
-val FirSession.lombokService: LombokService by FirSession.sessionComponentAccessor()
+konst FirSession.lombokService: LombokService by FirSession.sessionComponentAccessor()

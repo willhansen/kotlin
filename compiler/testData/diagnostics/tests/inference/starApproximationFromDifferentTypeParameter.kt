@@ -2,7 +2,7 @@
 // SKIP_TXT
 
 // See KT-14453 and KT-35703
-val <T : Any> KClass1<T>.primaryConstructor: KFunction1<T>? get() = null!!
+konst <T : Any> KClass1<T>.primaryConstructor: KFunction1<T>? get() = null!!
 
 interface KClass1<F : Any>
 interface KFunction1<out R>

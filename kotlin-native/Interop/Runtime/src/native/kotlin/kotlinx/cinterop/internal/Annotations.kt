@@ -6,27 +6,27 @@ import kotlin.native.internal.InternalForKotlinNative
 @InternalForKotlinNative
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class CStruct(val spelling: String) {
+annotation class CStruct(konst spelling: String) {
     @Retention(AnnotationRetention.BINARY)
     @Target(
             AnnotationTarget.PROPERTY_GETTER,
             AnnotationTarget.PROPERTY_SETTER
     )
-    annotation class MemberAt(val offset: Long)
+    annotation class MemberAt(konst offset: Long)
 
     @Retention(AnnotationRetention.BINARY)
     @Target(AnnotationTarget.PROPERTY_GETTER)
-    annotation class ArrayMemberAt(val offset: Long)
+    annotation class ArrayMemberAt(konst offset: Long)
 
     @Retention(AnnotationRetention.BINARY)
     @Target(
             AnnotationTarget.PROPERTY_GETTER,
             AnnotationTarget.PROPERTY_SETTER
     )
-    annotation class BitField(val offset: Long, val size: Int)
+    annotation class BitField(konst offset: Long, konst size: Int)
 
     @Retention(AnnotationRetention.BINARY)
-    annotation class VarType(val size: Long, val align: Int)
+    annotation class VarType(konst size: Long, konst align: Int)
 
     @Target(AnnotationTarget.CLASS)
     @Retention(AnnotationRetention.BINARY)
@@ -44,7 +44,7 @@ annotation class CStruct(val spelling: String) {
 )
 @InternalForKotlinNative
 @Retention(AnnotationRetention.BINARY)
-public annotation class CCall(val id: String) {
+public annotation class CCall(konst id: String) {
     @Target(AnnotationTarget.VALUE_PARAMETER)
     @Retention(AnnotationRetention.BINARY)
     annotation class CString
@@ -80,32 +80,32 @@ public annotation class CCall(val id: String) {
 
 /**
  * Collection of annotations that allow to store
- * constant values.
+ * constant konstues.
  */
 @InternalForKotlinNative
 public object ConstantValue {
     @Retention(AnnotationRetention.BINARY)
-    annotation class Byte(val value: kotlin.Byte)
+    annotation class Byte(konst konstue: kotlin.Byte)
     @Retention(AnnotationRetention.BINARY)
-    annotation class Short(val value: kotlin.Short)
+    annotation class Short(konst konstue: kotlin.Short)
     @Retention(AnnotationRetention.BINARY)
-    annotation class Int(val value: kotlin.Int)
+    annotation class Int(konst konstue: kotlin.Int)
     @Retention(AnnotationRetention.BINARY)
-    annotation class Long(val value: kotlin.Long)
+    annotation class Long(konst konstue: kotlin.Long)
     @Retention(AnnotationRetention.BINARY)
-    annotation class UByte(val value: kotlin.UByte)
+    annotation class UByte(konst konstue: kotlin.UByte)
     @Retention(AnnotationRetention.BINARY)
-    annotation class UShort(val value: kotlin.UShort)
+    annotation class UShort(konst konstue: kotlin.UShort)
     @Retention(AnnotationRetention.BINARY)
-    annotation class UInt(val value: kotlin.UInt)
+    annotation class UInt(konst konstue: kotlin.UInt)
     @Retention(AnnotationRetention.BINARY)
-    annotation class ULong(val value: kotlin.ULong)
+    annotation class ULong(konst konstue: kotlin.ULong)
     @Retention(AnnotationRetention.BINARY)
-    annotation class Float(val value: kotlin.Float)
+    annotation class Float(konst konstue: kotlin.Float)
     @Retention(AnnotationRetention.BINARY)
-    annotation class Double(val value: kotlin.Double)
+    annotation class Double(konst konstue: kotlin.Double)
     @Retention(AnnotationRetention.BINARY)
-    annotation class String(val value: kotlin.String)
+    annotation class String(konst konstue: kotlin.String)
 }
 
 /**
@@ -114,7 +114,7 @@ public object ConstantValue {
 @Target(AnnotationTarget.CLASS)
 @InternalForKotlinNative
 @Retention(AnnotationRetention.BINARY)
-public annotation class CEnumEntryAlias(val entryName: String)
+public annotation class CEnumEntryAlias(konst entryName: String)
 
 /**
  * Stores instance size of the type T: CEnumVar.
@@ -122,4 +122,4 @@ public annotation class CEnumEntryAlias(val entryName: String)
 @Target(AnnotationTarget.CLASS)
 @InternalForKotlinNative
 @Retention(AnnotationRetention.BINARY)
-public annotation class CEnumVarTypeSize(val size: Int)
+public annotation class CEnumVarTypeSize(konst size: Int)

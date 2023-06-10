@@ -24,15 +24,15 @@ class ReflectionIntegrationTest : KtUsefulTestCase() {
     // so attempting to find kotlin/kotlin.kotlin_builtins in the same class loader that found java.lang.Object can fail.
     // We should always use the class loader that loads stdlib class files to locate .kotlin_builtins resource files
     fun testClassLoaderForBuiltIns() {
-        val tmpdir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpdir = KotlinTestUtils.tmpDirForTest(this)
 
-        val root = KtTestUtil.getTestDataPathBase() + "/reflection/classLoaderForBuiltIns"
+        konst root = KtTestUtil.getTestDataPathBase() + "/reflection/classLoaderForBuiltIns"
         KotlinTestUtils.compileJavaFiles(
             listOf(File("$root/Main.java")),
             listOf("-d", tmpdir.absolutePath)
         )
 
-        val lib = CompilerTestUtil.compileJvmLibrary(File("$root/test.kt"))
+        konst lib = CompilerTestUtil.compileJvmLibrary(File("$root/test.kt"))
 
         runJava(
             "-ea",
@@ -49,24 +49,24 @@ class ReflectionIntegrationTest : KtUsefulTestCase() {
     // being closed in one of the threads. It creates two threads that for several seconds continuously load kotlin-reflect in a new
     // class loader, call something from it, and close the class loader.
     fun testParallelAccess() {
-        val urls = arrayOf(
+        konst urls = arrayOf(
             ForTestCompileRuntime.reflectJarForTests().toURI().toURL(),
             ForTestCompileRuntime.runtimeJarForTests().toURI().toURL(),
         )
 
-        val latch = CountDownLatch(1)
-        val error = AtomicReference<Throwable?>()
+        konst latch = CountDownLatch(1)
+        konst error = AtomicReference<Throwable?>()
         repeat(2) {
             thread {
                 while (latch.count == 1L) {
                     try {
-                        val classLoader = URLClassLoader(urls, null)
+                        konst classLoader = URLClassLoader(urls, null)
 
                         // Invoke KClass.primaryConstructor on String::class reflectively.
                         // Among other things, it leads to reading a resource kotlin/kotlin.kotlin_builtins from the JAR file.
-                        val getPrimaryConstructor = classLoader.loadClass("kotlin.reflect.full.KClasses")
+                        konst getPrimaryConstructor = classLoader.loadClass("kotlin.reflect.full.KClasses")
                             .getDeclaredMethod("getPrimaryConstructor", classLoader.loadClass(KClass::class.java.name))
-                        val createKClass = classLoader.loadClass("kotlin.jvm.internal.Reflection")
+                        konst createKClass = classLoader.loadClass("kotlin.jvm.internal.Reflection")
                             .getDeclaredMethod("getOrCreateKotlinClass", Class::class.java)
                         getPrimaryConstructor(null, createKClass(null, String::class.java))
 
@@ -95,7 +95,7 @@ class ReflectionIntegrationTest : KtUsefulTestCase() {
     }
 
     private fun compileAndRunProgram(root: String) {
-        val lib = CompilerTestUtil.compileJvmLibrary(File("$root/test.kt"))
+        konst lib = CompilerTestUtil.compileJvmLibrary(File("$root/test.kt"))
 
         runJava(
             "-ea",
@@ -110,16 +110,16 @@ class ReflectionIntegrationTest : KtUsefulTestCase() {
     }
 
     private fun runJava(vararg args: String) {
-        val javaHome = System.getProperty("java.home")
-        val javaExe = File(javaHome, "bin/java.exe").takeIf(File::exists)
+        konst javaHome = System.getProperty("java.home")
+        konst javaExe = File(javaHome, "bin/java.exe").takeIf(File::exists)
             ?: File(javaHome, "bin/java").takeIf(File::exists)
             ?: error("Can't find 'java' executable in $javaHome")
 
-        val process = ProcessBuilder(javaExe.absolutePath, *args).start()
+        konst process = ProcessBuilder(javaExe.absolutePath, *args).start()
         process.waitFor(1, TimeUnit.MINUTES)
-        val stderr = process.errorStream.reader().readText()
-        val stdout = process.inputStream.reader().readText()
-        val exitCode = process.exitValue()
+        konst stderr = process.errorStream.reader().readText()
+        konst stdout = process.inputStream.reader().readText()
+        konst exitCode = process.exitValue()
         assertEquals("Program exited with exit code $exitCode.\nStdout:\n$stdout\nStderr:\n$stderr", 0, exitCode)
     }
 }

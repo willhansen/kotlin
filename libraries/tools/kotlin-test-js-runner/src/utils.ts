@@ -51,8 +51,8 @@ export function escapeRegExp(string: string) {
         : string;
 }
 
-export function pushIfNotNull<T>(list: T[], value: T) {
-    if (value !== null) list.push(value)
+export function pushIfNotNull<T>(list: T[], konstue: T) {
+    if (konstue !== null) list.push(konstue)
 }
 
 export function flatMap<T>(arr: T[], f: (item: T) => T[]): T[] {

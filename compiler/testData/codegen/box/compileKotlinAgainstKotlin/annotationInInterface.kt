@@ -21,8 +21,8 @@ interface Tr {
 class C : a.Tr
 
 fun box(): String {
-    val method = C::class.java.getDeclaredMethod("foo")
-    val annotations = method.getDeclaredAnnotations().joinToString("\n")
+    konst method = C::class.java.getDeclaredMethod("foo")
+    konst annotations = method.getDeclaredAnnotations().joinToString("\n")
     if (annotations != "@a.Ann()") {
         return "Fail: $annotations"
     }

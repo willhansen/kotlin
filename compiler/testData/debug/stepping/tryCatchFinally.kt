@@ -9,7 +9,7 @@ fun foo() {
         "FINALLY"
     }
     
-    val t = try {
+    konst t = try {
         mightThrow2()
     } catch (e: Throwable) {
         "OK2"

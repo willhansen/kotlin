@@ -13,7 +13,7 @@ interface Bar {
     fun bar(): String
 }
 
-val bar: Bar
+konst bar: Bar
     get() = null!!
 
 actual open class Foo : Bar by bar

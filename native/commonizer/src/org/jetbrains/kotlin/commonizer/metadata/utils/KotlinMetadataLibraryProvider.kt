@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.konan.file.File as KFile
  * Provides access to metadata using default compiler's routine.
  */
 // TODO: extract to a separate module (kotlin-native-utils-metadata?) to share with C-interop tool?
-class KotlinMetadataLibraryProvider(private val library: MetadataLibrary) : KlibModuleMetadata.MetadataLibraryProvider {
-    override val moduleHeaderData: ByteArray
+class KotlinMetadataLibraryProvider(private konst library: MetadataLibrary) : KlibModuleMetadata.MetadataLibraryProvider {
+    override konst moduleHeaderData: ByteArray
         get() = library.moduleHeaderData
 
     override fun packageMetadata(fqName: String, partName: String): ByteArray =
@@ -30,7 +30,7 @@ class KotlinMetadataLibraryProvider(private val library: MetadataLibrary) : Klib
         fun readLibraryMetadata(libraryPath: File): KlibModuleMetadata {
             check(libraryPath.exists()) { "Library does not exist: $libraryPath" }
 
-            val library = resolveSingleFileKlib(KFile(libraryPath.absolutePath), strategy = ToolingSingleFileKlibResolveStrategy)
+            konst library = resolveSingleFileKlib(KFile(libraryPath.absolutePath), strategy = ToolingSingleFileKlibResolveStrategy)
             return KlibModuleMetadata.read(KotlinMetadataLibraryProvider(library))
         }
     }

@@ -6,13 +6,13 @@ import kotlinx.serialization.json.*
 import kotlinx.serialization.modules.*
 
 @Serializable
-class Simple(val firstName: String, val lastName: String)
+class Simple(konst firstName: String, konst lastName: String)
 
 class NoSer
 
 class NoSerGeneric<T>
 
-val module = SerializersModule {}
+konst module = SerializersModule {}
 
 inline fun <reified T: Any> getSer(module: SerializersModule): KSerializer<T> {
     return module.serializer()

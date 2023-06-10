@@ -10,8 +10,8 @@ import java.io.Closeable
 import java.io.File
 
 internal interface CompositeMetadataArtifact {
-    val moduleDependencyIdentifier: ModuleDependencyIdentifier
-    val moduleDependencyVersion: String
+    konst moduleDependencyIdentifier: ModuleDependencyIdentifier
+    konst moduleDependencyVersion: String
 
     /**
      * Provides access to the actual content provided by this artifact.
@@ -65,8 +65,8 @@ internal interface CompositeMetadataArtifactContent : Closeable {
     /**
      * Back reference to the [CompositeMetadataArtifact] that opened this [CompositeMetadataArtifactContent]
      */
-    val containingArtifact: CompositeMetadataArtifact
-    val sourceSets: List<SourceSetContent>
+    konst containingArtifact: CompositeMetadataArtifact
+    konst sourceSets: List<SourceSetContent>
     fun getSourceSet(name: String): SourceSetContent
     fun findSourceSet(name: String): SourceSetContent?
 
@@ -77,10 +77,10 @@ internal interface CompositeMetadataArtifactContent : Closeable {
         /**
          * Back reference to the [CompositeMetadataArtifactContent] that contains this [SourceSetContent]
          */
-        val containingArtifactContent: CompositeMetadataArtifactContent
-        val sourceSetName: String
-        val metadataBinary: MetadataBinary?
-        val cinteropMetadataBinaries: List<CInteropMetadataBinary>
+        konst containingArtifactContent: CompositeMetadataArtifactContent
+        konst sourceSetName: String
+        konst metadataBinary: MetadataBinary?
+        konst cinteropMetadataBinaries: List<CInteropMetadataBinary>
     }
 
 
@@ -88,18 +88,18 @@ internal interface CompositeMetadataArtifactContent : Closeable {
         /**
          * Back reference to the [SourceSetContent] that contains this [Binary]
          */
-        val containingSourceSetContent: SourceSetContent
+        konst containingSourceSetContent: SourceSetContent
 
-        val archiveExtension: String
+        konst archiveExtension: String
 
         /**
          * The proposed file-output path.
          * This can actually include several path parts if the [Binary] requires additional scoping (e.g. [CInteropMetadataBinary]s
          * need to be put into another folder)
          */
-        val relativeFile: File
+        konst relativeFile: File
 
-        val checksum: String
+        konst checksum: String
 
         /**
          * Copies the content of this [Binary] directly into the given [file].
@@ -125,6 +125,6 @@ internal interface CompositeMetadataArtifactContent : Closeable {
      * Represents a CInterop Metadata Binary, produced by the commonizer and attached to the [containingSourceSetContent]
      */
     interface CInteropMetadataBinary : Binary {
-        val cinteropLibraryName: String
+        konst cinteropLibraryName: String
     }
 }

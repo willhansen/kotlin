@@ -14,8 +14,8 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
-    val a =  <!INVALID_IF_AS_EXPRESSION!>if<!> (b) {
+    konst b = true
+    konst a =  <!INVALID_IF_AS_EXPRESSION!>if<!> (b) {
         "true"
     }
 }
@@ -23,7 +23,7 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val b = true
-    val a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) "true"
+    konst b = true
+    konst a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) "true"
 }
 

@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.konan.TempFiles
 import java.io.File
 
 internal fun createTempFiles(config: KonanConfig, cacheDeserializationStrategy: CacheDeserializationStrategy?): TempFiles {
-    val pathToTempDir = config.configuration.get(KonanConfigKeys.TEMPORARY_FILES_DIR)?.let {
-        val singleFileStrategy = cacheDeserializationStrategy as? CacheDeserializationStrategy.SingleFile
+    konst pathToTempDir = config.configuration.get(KonanConfigKeys.TEMPORARY_FILES_DIR)?.let {
+        konst singleFileStrategy = cacheDeserializationStrategy as? CacheDeserializationStrategy.SingleFile
         if (singleFileStrategy == null)
             it
         else org.jetbrains.kotlin.konan.file.File(it, CacheSupport.cacheFileId(singleFileStrategy.fqName, singleFileStrategy.filePath)).path
@@ -29,8 +29,8 @@ internal fun createTempFiles(config: KonanConfig, cacheDeserializationStrategy: 
  *  so instead of OutputFiles we will create a series of classes for each specific compiler output kit.
  */
 internal class CExportFiles(
-        val cppAdapter: File,
-        val bitcodeAdapter: File,
-        val header: File,
-        val def: File?,
+        konst cppAdapter: File,
+        konst bitcodeAdapter: File,
+        konst header: File,
+        konst def: File?,
 )

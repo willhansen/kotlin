@@ -11,48 +11,48 @@ import java.io.Serializable
 sealed interface IdeaKotlinDependencyCoordinates : Serializable
 
 data class IdeaKotlinBinaryCoordinates(
-    val group: String,
-    val module: String,
-    val version: String?,
-    val sourceSetName: String? = null,
+    konst group: String,
+    konst module: String,
+    konst version: String?,
+    konst sourceSetName: String? = null,
 ) : IdeaKotlinDependencyCoordinates {
     override fun toString(): String {
         return "$group:$module:$version${sourceSetName?.let { ":$it" }.orEmpty()}"
     }
 
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 data class IdeaKotlinProjectCoordinates(
-    val buildId: String,
-    val projectPath: String,
-    val projectName: String
+    konst buildId: String,
+    konst projectPath: String,
+    konst projectName: String
 ) : Serializable, IdeaKotlinDependencyCoordinates {
     override fun toString(): String {
         return "${buildId.takeIf { it != ":" }?.plus(":").orEmpty()}$projectPath"
     }
 
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 data class IdeaKotlinSourceCoordinates(
-    val project: IdeaKotlinProjectCoordinates,
-    val sourceSetName: String
+    konst project: IdeaKotlinProjectCoordinates,
+    konst sourceSetName: String
 ) : IdeaKotlinDependencyCoordinates {
 
-    val buildId: String get() = project.buildId
-    val projectPath: String get() = project.projectPath
-    val projectName: String get() = project.projectName
+    konst buildId: String get() = project.buildId
+    konst projectPath: String get() = project.projectPath
+    konst projectName: String get() = project.projectName
 
     override fun toString(): String {
         return "$project/$sourceSetName"
     }
 
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

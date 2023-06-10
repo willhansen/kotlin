@@ -1,6 +1,6 @@
 package com.example
 
 class AddedClass {
-    val someProperty = 0
+    konst someProperty = 0
     fun someFunction() {}
 }

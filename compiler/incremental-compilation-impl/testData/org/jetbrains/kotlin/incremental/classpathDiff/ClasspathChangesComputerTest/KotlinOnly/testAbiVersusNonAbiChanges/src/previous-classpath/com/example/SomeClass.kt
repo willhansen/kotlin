@@ -2,11 +2,11 @@ package com.example
 
 class SomeClass {
 
-    val publicPropertyChangedType: Int = 0
+    konst publicPropertyChangedType: Int = 0
 
-    val publicPropertyChangedValue: Int = 0
+    konst publicPropertyChangedValue: Int = 0
 
-    private val privatePropertyChangedType: Int = 0
+    private konst privatePropertyChangedType: Int = 0
 
     fun publicFunctionChangedSignature(): Int = 0
 

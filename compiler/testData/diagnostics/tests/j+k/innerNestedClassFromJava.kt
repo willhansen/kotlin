@@ -23,9 +23,9 @@ public class M {
 package b
 
 fun f() {
-  val c1: a.M.Inner
-  val c2: a.M.Nested
-  val c3: a.M.<!INVISIBLE_REFERENCE!>PrInner<!>
-  val c4: a.M.<!INVISIBLE_REFERENCE!>PrNested<!>
+  konst c1: a.M.Inner
+  konst c2: a.M.Nested
+  konst c3: a.M.<!INVISIBLE_REFERENCE!>PrInner<!>
+  konst c4: a.M.<!INVISIBLE_REFERENCE!>PrNested<!>
 
 }

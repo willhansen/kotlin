@@ -13,29 +13,29 @@ object A {
     return 2
   }
 
-  val bar: Int
+  konst bar: Int
     field = 42
     get
 
-  val Int.barExt: Int
+  konst Int.barExt: Int
     get(): Int {
       return 43
     }
 
 }
 
-val test1: Int
+konst test1: Int
   field = A.foo()
   get
 
-val test2: Int
+konst test2: Int
   field = A.<get-bar>()
   get
 
-val test3: Int
+konst test3: Int
   field = (A, 1).fooExt()
   get
 
-val test4: Int
+konst test4: Int
   field = (A, 1).<get-barExt>()
   get

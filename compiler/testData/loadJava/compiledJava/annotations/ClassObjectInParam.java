@@ -2,7 +2,7 @@ package test;
 
 public class ClassObjectInParam {
     public @interface Anno {
-        Class<?> value();
+        Class<?> konstue();
     }
 
     @Anno(ClassObjectInParam.class)

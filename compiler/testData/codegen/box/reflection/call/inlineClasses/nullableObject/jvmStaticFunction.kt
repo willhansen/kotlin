@@ -5,8 +5,8 @@
 import kotlin.reflect.KFunction
 import kotlin.test.assertEquals
 
-inline class S(val value: String?) {
-    operator fun plus(other: S): S = S(this.value!! + other.value!!)
+inline class S(konst konstue: String?) {
+    operator fun plus(other: S): S = S(this.konstue!! + other.konstue!!)
 }
 
 object C {
@@ -25,10 +25,10 @@ fun box(): String {
     assertEquals(S("abc"), C::foo.call(S("a"), "b", S("c")))
     assertEquals(S("def"), (I)::bar.call("d", S("e"), S("f")))
 
-    val unboundFoo = C::class.members.single { it.name == "foo" } as KFunction<*>
+    konst unboundFoo = C::class.members.single { it.name == "foo" } as KFunction<*>
     assertEquals(S("ghi"), unboundFoo.call(C, S("g"), "h", S("i")))
 
-    val unboundBar = I.Companion::class.members.single { it.name == "bar" } as KFunction<*>
+    konst unboundBar = I.Companion::class.members.single { it.name == "bar" } as KFunction<*>
     assertEquals(S("jkl"), unboundBar.call(I, "j", S("k"), S("l")))
 
     return "OK"

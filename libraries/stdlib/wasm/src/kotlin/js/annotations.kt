@@ -37,7 +37,7 @@ public actual annotation class JsExport {
     AnnotationTarget.PROPERTY_GETTER,
     AnnotationTarget.PROPERTY_SETTER
 )
-public actual annotation class JsName(actual val name: String)
+public actual annotation class JsName(actual konst name: String)
 
 /**
  * Denotes an `external` declaration that must be imported from JavaScript module.
@@ -64,7 +64,7 @@ public actual annotation class JsName(actual val name: String)
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FUNCTION, AnnotationTarget.FILE)
-public annotation class JsModule(val import: String)
+public annotation class JsModule(konst import: String)
 
 
 /**
@@ -90,12 +90,12 @@ public annotation class JsModule(val import: String)
  * external fun bar(): String
  * ```
  *
- * @property value the qualifier to add to the declarations in the generated code.
- *           It must be a sequence of valid JavaScript identifiers separated by the `.` character.
- *           Examples of valid qualifiers are: `foo`, `bar.Baz`, `_.$0.f`.
+ * @property konstue the qualifier to add to the declarations in the generated code.
+ *           It must be a sequence of konstid JavaScript identifiers separated by the `.` character.
+ *           Examples of konstid qualifiers are: `foo`, `bar.Baz`, `_.$0.f`.
  *
  * @see JsModule
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FILE)
-public annotation class JsQualifier(val value: String)
+public annotation class JsQualifier(konst konstue: String)

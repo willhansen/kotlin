@@ -10,10 +10,10 @@ inline fun sum(a: Int, b: Int): Int {
 // CHECK_BREAKS_COUNT: function=box count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=box name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun box(): String {
-    val sum3 = sum(1, 2)
+    konst sum3 = sum(1, 2)
     assertEquals(3, sum3)
 
-    val sum6 = sum(sum3, 3)
+    konst sum6 = sum(sum3, 3)
     assertEquals(6, sum6)
 
     return "OK"

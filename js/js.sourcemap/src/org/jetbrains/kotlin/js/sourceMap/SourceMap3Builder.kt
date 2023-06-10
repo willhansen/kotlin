@@ -12,26 +12,26 @@ import java.io.Reader
 import java.util.function.Supplier
 
 class SourceMap3Builder(
-    private val generatedFile: File?,
-    private val getCurrentOutputColumn: () -> Int,
-    private val pathPrefix: String
+    private konst generatedFile: File?,
+    private konst getCurrentOutputColumn: () -> Int,
+    private konst pathPrefix: String
 ) : SourceMapBuilder {
 
     private class ObjectIntHashMap<T> : TObjectIntHashMap<T>() {
         override fun get(key: T): Int {
-            val index = index(key)
-            return if (index < 0) -1 else _values[index]
+            konst index = index(key)
+            return if (index < 0) -1 else _konstues[index]
         }
     }
 
-    private val out = StringBuilder(8192)
+    private konst out = StringBuilder(8192)
 
-    private val sources = ObjectIntHashMap<SourceKey>()
-    private val orderedSources = mutableListOf<String>()
-    private val orderedSourceContentSuppliers = mutableListOf<Supplier<Reader?>>()
+    private konst sources = ObjectIntHashMap<SourceKey>()
+    private konst orderedSources = mutableListOf<String>()
+    private konst orderedSourceContentSuppliers = mutableListOf<Supplier<Reader?>>()
 
-    private val names = ObjectIntHashMap<String>()
-    private val orderedNames = mutableListOf<String>()
+    private konst names = ObjectIntHashMap<String>()
+    private konst orderedNames = mutableListOf<String>()
     private var previousNameIndex = 0
     private var previousPreviousNameIndex = 0
 
@@ -48,7 +48,7 @@ class SourceMap3Builder(
     override fun getOutFile() = File(generatedFile!!.parentFile, "${generatedFile.name}.map")
 
     override fun build(): String {
-        val json = JsonObject()
+        konst json = JsonObject()
         json.properties["version"] = JsonNumber(3.0)
         if (generatedFile != null)
             json.properties["file"] = JsonString(generatedFile.name)
@@ -97,7 +97,7 @@ class SourceMap3Builder(
     }
 
     private fun getSourceIndex(source: String, fileIdentity: Any?, contentSupplier: Supplier<Reader?>): Int {
-        val key = SourceKey(source, fileIdentity)
+        konst key = SourceKey(source, fileIdentity)
         var sourceIndex = sources[key]
         if (sourceIndex == -1) {
             sourceIndex = orderedSources.size
@@ -138,9 +138,9 @@ class SourceMap3Builder(
         name: String?,
         outputColumn: Int
     ) {
-        val sourceIndex = getSourceIndex(source.replace(File.separatorChar, '/'), fileIdentity, sourceContent)
+        konst sourceIndex = getSourceIndex(source.replace(File.separatorChar, '/'), fileIdentity, sourceContent)
 
-        val nameIndex = name?.let(this::getNameIndex) ?: -1
+        konst nameIndex = name?.let(this::getNameIndex) ?: -1
 
         if (!currentMappingIsEmpty &&
             previousSourceIndex == sourceIndex &&
@@ -177,12 +177,12 @@ class SourceMap3Builder(
     }
 
     private fun startMapping(column: Int) {
-        val newGroupStarted = previousGeneratedColumn == -1
+        konst newGroupStarted = previousGeneratedColumn == -1
         if (newGroupStarted) {
             previousGeneratedColumn = 0
         }
 
-        val columnDiff = column - previousGeneratedColumn
+        konst columnDiff = column - previousGeneratedColumn
         if (!newGroupStarted) {
             out.append(',')
         }
@@ -206,40 +206,40 @@ class SourceMap3Builder(
 
     private object Base64VLQ {
         // A Base64 VLQ digit can represent 5 bits, so it is base-32.
-        private const val VLQ_BASE_SHIFT = 5
-        private const val VLQ_BASE = 1 shl VLQ_BASE_SHIFT
+        private const konst VLQ_BASE_SHIFT = 5
+        private const konst VLQ_BASE = 1 shl VLQ_BASE_SHIFT
 
         // A mask of bits for a VLQ digit (11111), 31 decimal.
-        private const val VLQ_BASE_MASK = VLQ_BASE - 1
+        private const konst VLQ_BASE_MASK = VLQ_BASE - 1
 
         // The continuation bit is the 6th bit.
-        private const val VLQ_CONTINUATION_BIT = VLQ_BASE
+        private const konst VLQ_CONTINUATION_BIT = VLQ_BASE
 
         @Suppress("SpellCheckingInspection")
-        private val BASE64_MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray()
+        private konst BASE64_MAP = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".toCharArray()
 
-        private fun toVLQSigned(value: Int) =
-            if (value < 0) (-value shl 1) + 1 else value shl 1
+        private fun toVLQSigned(konstue: Int) =
+            if (konstue < 0) (-konstue shl 1) + 1 else konstue shl 1
 
-        fun encode(out: StringBuilder, value: Int) {
+        fun encode(out: StringBuilder, konstue: Int) {
             @Suppress("NAME_SHADOWING")
-            var value = toVLQSigned(value)
+            var konstue = toVLQSigned(konstue)
             do {
-                var digit = value and VLQ_BASE_MASK
-                value = value ushr VLQ_BASE_SHIFT
-                if (value > 0) {
+                var digit = konstue and VLQ_BASE_MASK
+                konstue = konstue ushr VLQ_BASE_SHIFT
+                if (konstue > 0) {
                     digit = digit or VLQ_CONTINUATION_BIT
                 }
                 out.append(BASE64_MAP[digit])
-            } while (value > 0)
+            } while (konstue > 0)
         }
     }
 
     private data class SourceKey(
-        private val sourcePath: String,
+        private konst sourcePath: String,
         /**
          * An object to distinguish different files with the same paths
          */
-        private val fileIdentity: Any?
+        private konst fileIdentity: Any?
     )
 }

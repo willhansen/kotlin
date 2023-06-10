@@ -36,17 +36,17 @@ import org.jetbrains.kotlin.types.expressions.OperatorConventions
 
 class OperatorCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val functionDescriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
+        konst functionDescriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return
         if (!checkNotErrorOrDynamic(functionDescriptor)) return
 
-        val element = resolvedCall.call.calleeExpression ?: resolvedCall.call.callElement
-        val call = resolvedCall.call
+        konst element = resolvedCall.call.calleeExpression ?: resolvedCall.call.callElement
+        konst call = resolvedCall.call
 
         if (resolvedCall is VariableAsFunctionResolvedCall &&
             call is CallTransformer.CallForImplicitInvoke && call.itIsVariableAsFunctionCall) {
-            val outerCall = call.outerCall
+            konst outerCall = call.outerCall
             if (isConventionCall(outerCall)) {
-                val containingDeclarationName = functionDescriptor.containingDeclaration.fqNameUnsafe.asString()
+                konst containingDeclarationName = functionDescriptor.containingDeclaration.fqNameUnsafe.asString()
                 context.trace.report(Errors.PROPERTY_AS_OPERATOR.on(reportOn, functionDescriptor, containingDeclarationName))
             } else if (isWrongCallWithExplicitTypeArguments(resolvedCall, outerCall)) {
                 context.trace.report(Errors.TYPE_ARGUMENTS_NOT_ALLOWED.on(reportOn as KtElement, "on implicit invoke call"))
@@ -60,7 +60,7 @@ class OperatorCallChecker : CallChecker {
             return
         }
 
-        val isConventionOperator = element is KtOperationReferenceExpression && element.isConventionOperator()
+        konst isConventionOperator = element is KtOperationReferenceExpression && element.isConventionOperator()
 
         if (isConventionOperator) {
             checkModConvention(functionDescriptor, context.languageVersionSettings, context.trace, reportOn)
@@ -77,8 +77,8 @@ class OperatorCallChecker : CallChecker {
         fun report(reportOn: PsiElement, descriptor: FunctionDescriptor, sink: DiagnosticSink) {
             if (!checkNotErrorOrDynamic(descriptor)) return
 
-            val containingDeclaration = descriptor.containingDeclaration
-            val containingDeclarationName = containingDeclaration.fqNameUnsafe.asString()
+            konst containingDeclaration = descriptor.containingDeclaration
+            konst containingDeclarationName = containingDeclaration.fqNameUnsafe.asString()
             sink.report(Errors.OPERATOR_MODIFIER_REQUIRED.on(reportOn, descriptor, containingDeclarationName))
         }
 
@@ -90,7 +90,7 @@ class OperatorCallChecker : CallChecker {
             resolvedCall: VariableAsFunctionResolvedCall,
             outerCall: Call
         ): Boolean {
-            val passedTypeArgumentsToInvoke = outerCall.typeArguments.isNotEmpty() &&
+            konst passedTypeArgumentsToInvoke = outerCall.typeArguments.isNotEmpty() &&
                     resolvedCall.functionCall.candidateDescriptor.typeParameters.isNotEmpty()
             return passedTypeArgumentsToInvoke && resolvedCall.variableCall.candidateDescriptor.typeParameters.isNotEmpty()
         }
@@ -98,7 +98,7 @@ class OperatorCallChecker : CallChecker {
 }
 
 fun FunctionDescriptor.isOperatorMod(): Boolean {
-    return this.isOperator && name in OperatorConventions.REM_TO_MOD_OPERATION_NAMES.values
+    return this.isOperator && name in OperatorConventions.REM_TO_MOD_OPERATION_NAMES.konstues
 }
 
 fun shouldWarnAboutDeprecatedModFromBuiltIns(languageVersionSettings: LanguageVersionSettings): Boolean {
@@ -128,11 +128,11 @@ private fun warnAboutDeprecatedOrForbiddenMod(
     reportOn: PsiElement,
     languageVersionSettings: LanguageVersionSettings
 ) {
-    val diagnosticFactory = if (languageVersionSettings.supportsFeature(LanguageFeature.ProhibitOperatorMod))
+    konst diagnosticFactory = if (languageVersionSettings.supportsFeature(LanguageFeature.ProhibitOperatorMod))
         Errors.FORBIDDEN_BINARY_MOD_AS_REM
     else
         Errors.DEPRECATED_BINARY_MOD_AS_REM
 
-    val newNameConvention = OperatorConventions.REM_TO_MOD_OPERATION_NAMES.inverse()[descriptor.name]
+    konst newNameConvention = OperatorConventions.REM_TO_MOD_OPERATION_NAMES.inverse()[descriptor.name]
     diagnosticHolder.report(diagnosticFactory.on(reportOn, descriptor, newNameConvention!!.asString()))
 }

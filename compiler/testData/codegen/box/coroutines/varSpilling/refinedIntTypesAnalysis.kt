@@ -4,7 +4,7 @@ class Test {
     suspend fun discardSuspend(discarded0: Long, max: Long) {
         while (isClosedForRead) {
             // this assignment is required
-            val rc = reading {
+            konst rc = reading {
                 true
             }
 
@@ -21,7 +21,7 @@ class Test {
         }
     }
 
-    val isClosedForRead = false
+    konst isClosedForRead = false
 
     private suspend fun readSuspend(size: Int): Boolean = true
     private fun setupStateForRead(): Any? = null

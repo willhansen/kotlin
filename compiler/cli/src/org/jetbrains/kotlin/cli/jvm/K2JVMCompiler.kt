@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.backend.jvm.jvmPhases
 import org.jetbrains.kotlin.cli.common.*
 import org.jetbrains.kotlin.cli.common.ExitCode.*
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
-import org.jetbrains.kotlin.cli.common.extensions.ScriptEvaluationExtension
+import org.jetbrains.kotlin.cli.common.extensions.ScriptEkonstuationExtension
 import org.jetbrains.kotlin.cli.common.extensions.ShellExtension
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity.*
 import org.jetbrains.kotlin.cli.common.messages.FilteringMessageCollector
@@ -58,7 +58,7 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
         rootDisposable: Disposable,
         paths: KotlinPaths?
     ): ExitCode {
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
         configuration.putIfNotNull(CLIConfigurationKeys.REPEAT_COMPILE_MODULES, arguments.repeatCompileModules?.toIntOrNull())
         configuration.put(CLIConfigurationKeys.PHASE_CONFIG, createPhaseConfig(jvmPhases, arguments, messageCollector))
@@ -67,10 +67,10 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
 
         configuration.put(JVMConfigurationKeys.DISABLE_STANDARD_SCRIPT_DEFINITION, arguments.disableStandardScript)
 
-        val pluginLoadResult = loadPlugins(paths, arguments, configuration)
+        konst pluginLoadResult = loadPlugins(paths, arguments, configuration)
         if (pluginLoadResult != ExitCode.OK) return pluginLoadResult
 
-        val moduleName = arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
+        konst moduleName = arguments.moduleName ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
         configuration.put(CommonConfigurationKeys.MODULE_NAME, moduleName)
 
         configuration.configureJavaModulesContentRoots(arguments)
@@ -89,11 +89,11 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
 
             // script or repl
             if (arguments.script && arguments.freeArgs.isEmpty()) {
-                messageCollector.report(ERROR, "Specify script source path to evaluate")
+                messageCollector.report(ERROR, "Specify script source path to ekonstuate")
                 return COMPILATION_ERROR
             }
 
-            val projectEnvironment =
+            konst projectEnvironment =
                 KotlinCoreEnvironment.ProjectEnvironment(
                     rootDisposable,
                     KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForProduction(rootDisposable, configuration),
@@ -106,14 +106,14 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
             }
 
             if (arguments.script || arguments.expression != null) {
-                val scriptingEvaluator = ScriptEvaluationExtension.getInstances(projectEnvironment.project).find { it.isAccepted(arguments) }
-                if (scriptingEvaluator == null) {
-                    messageCollector.report(ERROR, "Unable to evaluate script, no scripting plugin loaded")
+                konst scriptingEkonstuator = ScriptEkonstuationExtension.getInstances(projectEnvironment.project).find { it.isAccepted(arguments) }
+                if (scriptingEkonstuator == null) {
+                    messageCollector.report(ERROR, "Unable to ekonstuate script, no scripting plugin loaded")
                     return COMPILATION_ERROR
                 }
-                return scriptingEvaluator.eval(arguments, configuration, projectEnvironment)
+                return scriptingEkonstuator.ekonst(arguments, configuration, projectEnvironment)
             } else {
-                val shell = ShellExtension.getInstances(projectEnvironment.project).find { it.isAccepted(arguments) }
+                konst shell = ShellExtension.getInstances(projectEnvironment.project).find { it.isAccepted(arguments) }
                 if (shell == null) {
                     messageCollector.report(ERROR, "Unable to run REPL, no scripting plugin loaded")
                     return COMPILATION_ERROR
@@ -123,34 +123,34 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
         }
 
         if (arguments.useOldBackend) {
-            val severity = if (isUseOldBackendAllowed()) WARNING else ERROR
+            konst severity = if (isUseOldBackendAllowed()) WARNING else ERROR
             messageCollector.report(severity, "-Xuse-old-backend is no longer supported. Please migrate to the new JVM IR backend")
             if (severity == ERROR) return COMPILATION_ERROR
         }
 
         messageCollector.report(LOGGING, "Configuring the compilation environment")
         try {
-            val buildFile = arguments.buildFile?.let { File(it) }
+            konst buildFile = arguments.buildFile?.let { File(it) }
 
-            val moduleChunk = configuration.configureModuleChunk(arguments, buildFile)
+            konst moduleChunk = configuration.configureModuleChunk(arguments, buildFile)
 
-            val chunk = moduleChunk.modules
+            konst chunk = moduleChunk.modules
             configuration.configureSourceRoots(chunk, buildFile)
             // should be called after configuring jdk home from build file
             configuration.configureJdkClasspathRoots()
 
-            val targetDescription = chunk.map { input -> input.getModuleName() + "-" + input.getModuleType() }.let { names ->
+            konst targetDescription = chunk.map { input -> input.getModuleName() + "-" + input.getModuleType() }.let { names ->
                 names.singleOrNull() ?: names.joinToString()
             }
             if (configuration.getBoolean(CommonConfigurationKeys.USE_FIR) && configuration.getBoolean(CommonConfigurationKeys.USE_LIGHT_TREE))  {
-                val projectEnvironment =
+                konst projectEnvironment =
                     createProjectEnvironment(configuration, rootDisposable, EnvironmentConfigFiles.JVM_CONFIG_FILES, messageCollector)
 
                 compileModulesUsingFrontendIrAndLightTree(
                     projectEnvironment, configuration, messageCollector, buildFile, chunk, targetDescription
                 )
             } else {
-                val environment = createCoreEnvironment(
+                konst environment = createCoreEnvironment(
                     rootDisposable, configuration, messageCollector,
                     targetDescription
                 ) ?: return COMPILATION_ERROR
@@ -199,9 +199,9 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
     ): KotlinCoreEnvironment? {
         if (messageCollector.hasErrors()) return null
 
-        val environment = KotlinCoreEnvironment.createForProduction(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForProduction(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
-        val sourceFiles = environment.getSourceFiles()
+        konst sourceFiles = environment.getSourceFiles()
         configuration[CLIConfigurationKeys.PERF_MANAGER]?.notifyCompilerInitialized(
             sourceFiles.size, environment.countLinesOfCode(sourceFiles), targetDescription
         )
@@ -253,12 +253,12 @@ class K2JVMCompiler : CLICompiler<K2JVMCompilerArguments>() {
 
     }
 
-    override val defaultPerformanceManager: CommonCompilerPerformanceManager = K2JVMCompilerPerformanceManager()
+    override konst defaultPerformanceManager: CommonCompilerPerformanceManager = K2JVMCompilerPerformanceManager()
 
     override fun createPerformanceManager(arguments: K2JVMCompilerArguments, services: Services): CommonCompilerPerformanceManager {
-        val externalManager = services[CommonCompilerPerformanceManager::class.java]
+        konst externalManager = services[CommonCompilerPerformanceManager::class.java]
         if (externalManager != null) return externalManager
-        val argument = arguments.profileCompilerCommand ?: return defaultPerformanceManager
+        konst argument = arguments.profileCompilerCommand ?: return defaultPerformanceManager
         return ProfilingCompilerPerformanceManager.create(argument)
     }
 
@@ -270,10 +270,10 @@ fun CompilerConfiguration.configureModuleChunk(
     arguments: K2JVMCompilerArguments,
     buildFile: File?
 ): ModuleChunk {
-    val destination = arguments.destination?.let { File(it) }
+    konst destination = arguments.destination?.let { File(it) }
 
     return if (buildFile != null) {
-        val messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst messageCollector = getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
         fun strongWarning(message: String) {
             messageCollector.report(STRONG_WARNING, message)
@@ -289,7 +289,7 @@ fun CompilerConfiguration.configureModuleChunk(
             strongWarning("The '-Xjava-package-prefix' option is ignored because '-Xbuild-file' is specified")
         }
         configureContentRootsFromClassPath(arguments)
-        val sanitizedCollector = FilteringMessageCollector(messageCollector, VERBOSE::contains)
+        konst sanitizedCollector = FilteringMessageCollector(messageCollector, VERBOSE::contains)
         put(JVMConfigurationKeys.MODULE_XML_FILE, buildFile)
         CompileEnvironmentUtil.loadModuleChunk(buildFile, sanitizedCollector)
     } else {
@@ -301,7 +301,7 @@ fun CompilerConfiguration.configureModuleChunk(
             }
         }
 
-        val module = ModuleBuilder(
+        konst module = ModuleBuilder(
             this[CommonConfigurationKeys.MODULE_NAME] ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME,
             destination?.path ?: ".", "java-production"
         )

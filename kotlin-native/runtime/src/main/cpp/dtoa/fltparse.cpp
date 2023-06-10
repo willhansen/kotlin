@@ -90,7 +90,7 @@ static const U_32 tens[] = {
  * could potentially toggle back and forth between decrementing and
  * incrementing. It is possible for us to be stuck in the loop when
  * incrementing by one or decrementing by one may exceed or stay below
- * the value that we are looking for. In this case, just break out of
+ * the konstue that we are looking for. In this case, just break out of
  * the loop if we toggle between incrementing and decrementing for more
  * than twice.
  */
@@ -185,7 +185,7 @@ KFloat createFloat(const char *s, KInt e) {
    *   2. (unprocessed digits + e) < 0, in which case we simply
    *      convert the existing bits that are already parsed along
    *      with the given e
-   *   3. (unprocessed digits + e) > 0 indicates that the value is
+   *   3. (unprocessed digits + e) > 0 indicates that the konstue is
    *      simply too big to be stored as a double, so return Infinity
    */
   if ((unprocessedDigits = strlen (s)) > 0)
@@ -320,7 +320,7 @@ createFloat1 (U_64 * f, IDATA length, KInt e)
 
   /* Don't go straight to zero as the fact that x*0 = 0 independent
    * of x might cause the algorithm to produce an incorrect result.
-   * Instead try the min  value first and let it fall to zero if need
+   * Instead try the min  konstue first and let it fall to zero if need
    * be.
    */
   if (e <= -309 || FLOAT_TO_INTBITS (result) == 0)
@@ -345,8 +345,8 @@ createFloat1 (U_64 * f, IDATA length, KInt e)
  *
  * There is a possibility that the function will end up in an endless
  * loop if the given approximating floating-point number (a very small
- * floating-point whose value is very close to zero) straddles between
- * two approximating integer values. We modified the algorithm slightly
+ * floating-point whose konstue is very close to zero) straddles between
+ * two approximating integer konstues. We modified the algorithm slightly
  * to detect the case where it oscillates back and forth between
  * incrementing and decrementing the floating-point approximation. It
  * is currently set such that if the oscillation occurs more than twice

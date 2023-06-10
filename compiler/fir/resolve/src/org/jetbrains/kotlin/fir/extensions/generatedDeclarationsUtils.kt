@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.fir.scopes.processClassifiersByName
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 
 fun FirClass.generatedNestedClassifiers(session: FirSession): List<FirClassLikeDeclaration> {
-    val scope = session.declaredMemberScope(this, memberRequiredPhase = null)
-    val result = mutableListOf<FirClassLikeDeclaration>()
+    konst scope = session.declaredMemberScope(this, memberRequiredPhase = null)
+    konst result = mutableListOf<FirClassLikeDeclaration>()
     for (name in scope.getClassifierNames()) {
         scope.processClassifiersByName(name) {
             if (it.fir.origin.generated) {
@@ -29,8 +29,8 @@ fun FirClass.generatedNestedClassifiers(session: FirSession): List<FirClassLikeD
 }
 
 fun FirClass.generatedMembers(session: FirSession): List<FirCallableDeclaration> {
-    val scope = session.declaredMemberScope(this, memberRequiredPhase = null)
-    val result = mutableListOf<FirCallableDeclaration>()
+    konst scope = session.declaredMemberScope(this, memberRequiredPhase = null)
+    konst result = mutableListOf<FirCallableDeclaration>()
     for (name in scope.getCallableNames()) {
         scope.processFunctionsByName(name) {
             if (it.fir.origin.generated) {

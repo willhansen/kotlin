@@ -25,7 +25,7 @@ private fun String.splitCanonicalFqName(): List<String> {
     fun String.toNonEmpty(): String =
             if (this.isNotEmpty()) this else SpecialNames.SAFE_IDENTIFIER_FOR_NO_NAME.asString()
 
-    val result = arrayListOf<String>()
+    konst result = arrayListOf<String>()
     var balance = 0
     var currentNameStart = 0
     for ((index, character) in this.withIndex()) {

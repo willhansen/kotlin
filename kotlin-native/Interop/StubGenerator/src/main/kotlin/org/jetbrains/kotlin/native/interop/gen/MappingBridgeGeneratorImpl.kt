@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.native.interop.indexer.unwrapTypedefs
  * maps the type using [mirror].
  */
 class MappingBridgeGeneratorImpl(
-        val declarationMapper: DeclarationMapper,
-        val simpleBridgeGenerator: SimpleBridgeGenerator
+        konst declarationMapper: DeclarationMapper,
+        konst simpleBridgeGenerator: SimpleBridgeGenerator
 ) : MappingBridgeGenerator {
 
     override fun kotlinToNative(
@@ -38,45 +38,45 @@ class MappingBridgeGeneratorImpl(
             independent: Boolean,
             block: NativeCodeBuilder.(nativeValues: List<NativeExpression>) -> NativeExpression
     ): KotlinExpression {
-        val bridgeArguments = mutableListOf<BridgeTypedKotlinValue>()
+        konst bridgeArguments = mutableListOf<BridgeTypedKotlinValue>()
 
-        kotlinValues.forEach { (type, value) ->
+        kotlinValues.forEach { (type, konstue) ->
             if (type.unwrapTypedefs() is RecordType) {
                 builder.pushMemScoped()
-                val bridgeArgument = "$value.getPointer(memScope).rawValue"
+                konst bridgeArgument = "$konstue.getPointer(memScope).rawValue"
                 bridgeArguments.add(BridgeTypedKotlinValue(BridgedType.NATIVE_PTR, bridgeArgument))
             } else {
-                val info = mirror(declarationMapper, type).info
-                bridgeArguments.add(BridgeTypedKotlinValue(info.bridgedType, info.argToBridged(value)))
+                konst info = mirror(declarationMapper, type).info
+                bridgeArguments.add(BridgeTypedKotlinValue(info.bridgedType, info.argToBridged(konstue)))
             }
         }
 
-        val unwrappedReturnType = returnType.unwrapTypedefs()
-        val kniRetVal = "kniRetVal"
-        val bridgeReturnType = when (unwrappedReturnType) {
+        konst unwrappedReturnType = returnType.unwrapTypedefs()
+        konst kniRetVal = "kniRetVal"
+        konst bridgeReturnType = when (unwrappedReturnType) {
             VoidType -> BridgedType.VOID
             is RecordType -> {
-                val mirror = mirror(declarationMapper, returnType)
-                val tmpVarName = kniRetVal
+                konst mirror = mirror(declarationMapper, returnType)
+                konst tmpVarName = kniRetVal
                 // We clear in the finally block.
-                builder.out("val $tmpVarName = nativeHeap.alloc<${mirror.pointedType.render(builder.scope)}>()")
+                builder.out("konst $tmpVarName = nativeHeap.alloc<${mirror.pointedType.render(builder.scope)}>()")
                 builder.pushBlock(start = "try {", end = "} finally { nativeHeap.free($tmpVarName) }")
                 bridgeArguments.add(BridgeTypedKotlinValue(BridgedType.NATIVE_PTR, "$tmpVarName.rawPtr"))
                 BridgedType.VOID
             }
             else -> {
-                val mirror = mirror(declarationMapper, returnType)
+                konst mirror = mirror(declarationMapper, returnType)
                 mirror.info.bridgedType
             }
         }
 
-        val callExpr = simpleBridgeGenerator.kotlinToNative(
+        konst callExpr = simpleBridgeGenerator.kotlinToNative(
                 nativeBacked, bridgeReturnType, bridgeArguments, independent
         ) { bridgeNativeValues ->
 
-            val nativeValues = mutableListOf<String>()
+            konst nativeValues = mutableListOf<String>()
             kotlinValues.forEachIndexed { index, (type, _) ->
-                val unwrappedType = type.unwrapTypedefs()
+                konst unwrappedType = type.unwrapTypedefs()
                 if (unwrappedType is RecordType) {
                     nativeValues.add("*(${unwrappedType.decl.spelling}*)${bridgeNativeValues[index]}")
                 } else {
@@ -88,7 +88,7 @@ class MappingBridgeGeneratorImpl(
                 }
             }
 
-            val nativeResult = block(nativeValues)
+            konst nativeResult = block(nativeValues)
 
             when (unwrappedReturnType) {
                 is VoidType -> {
@@ -96,7 +96,7 @@ class MappingBridgeGeneratorImpl(
                     ""
                 }
                 is RecordType -> {
-                    val kniStructResult = "kniStructResult"
+                    konst kniStructResult = "kniStructResult"
 
                     out("${unwrappedReturnType.decl.spelling} $kniStructResult = $nativeResult;")
                     out("memcpy(${bridgeNativeValues.last()}, &$kniStructResult, sizeof($kniStructResult));")
@@ -108,14 +108,14 @@ class MappingBridgeGeneratorImpl(
             }
         }
 
-        val result = when (unwrappedReturnType) {
+        konst result = when (unwrappedReturnType) {
             is VoidType -> callExpr
             is RecordType -> {
                 builder.out(callExpr)
                 "$kniRetVal.readValue()"
             }
             else -> {
-                val mirror = mirror(declarationMapper, returnType)
+                konst mirror = mirror(declarationMapper, returnType)
                 mirror.info.argFromBridged(callExpr, builder.scope, nativeBacked)
             }
         }
@@ -131,44 +131,44 @@ class MappingBridgeGeneratorImpl(
             block: KotlinCodeBuilder.(kotlinValues: List<KotlinExpression>) -> KotlinExpression
     ): NativeExpression {
 
-        val bridgeArguments = mutableListOf<BridgeTypedNativeValue>()
+        konst bridgeArguments = mutableListOf<BridgeTypedNativeValue>()
 
-        nativeValues.forEachIndexed { _, (type, value) ->
-            val bridgeArgument = if (type.unwrapTypedefs() is RecordType) {
-                BridgeTypedNativeValue(BridgedType.NATIVE_PTR, "&$value")
+        nativeValues.forEachIndexed { _, (type, konstue) ->
+            konst bridgeArgument = if (type.unwrapTypedefs() is RecordType) {
+                BridgeTypedNativeValue(BridgedType.NATIVE_PTR, "&$konstue")
             } else {
-                val info = mirror(declarationMapper, type).info
-                BridgeTypedNativeValue(info.bridgedType, value)
+                konst info = mirror(declarationMapper, type).info
+                BridgeTypedNativeValue(info.bridgedType, konstue)
             }
             bridgeArguments.add(bridgeArgument)
         }
 
-        val unwrappedReturnType = returnType.unwrapTypedefs()
-        val kniRetVal = "kniRetVal"
-        val bridgeReturnType = when (unwrappedReturnType) {
+        konst unwrappedReturnType = returnType.unwrapTypedefs()
+        konst kniRetVal = "kniRetVal"
+        konst bridgeReturnType = when (unwrappedReturnType) {
             VoidType -> BridgedType.VOID
             is RecordType -> {
-                val tmpVarName = kniRetVal
+                konst tmpVarName = kniRetVal
                 builder.out("${unwrappedReturnType.decl.spelling} $tmpVarName;")
                 bridgeArguments.add(BridgeTypedNativeValue(BridgedType.NATIVE_PTR, "&$tmpVarName"))
                 BridgedType.VOID
             }
             else -> {
-                val mirror = mirror(declarationMapper, returnType)
+                konst mirror = mirror(declarationMapper, returnType)
                 mirror.info.bridgedType
             }
         }
 
-        val callExpr = simpleBridgeGenerator.nativeToKotlin(
+        konst callExpr = simpleBridgeGenerator.nativeToKotlin(
                 nativeBacked,
                 bridgeReturnType,
                 bridgeArguments
         ) { bridgeKotlinValues ->
-            val kotlinValues = mutableListOf<String>()
+            konst kotlinValues = mutableListOf<String>()
             nativeValues.forEachIndexed { index, (type, _) ->
-                val mirror = mirror(declarationMapper, type)
+                konst mirror = mirror(declarationMapper, type)
                 if (type.unwrapTypedefs() is RecordType) {
-                    val pointedTypeName = mirror.pointedType.render(this.scope)
+                    konst pointedTypeName = mirror.pointedType.render(this.scope)
                     kotlinValues.add(
                             "interpretPointed<$pointedTypeName>(${bridgeKotlinValues[index]}).readValue()"
                     )
@@ -177,7 +177,7 @@ class MappingBridgeGeneratorImpl(
                 }
             }
 
-            val kotlinResult = block(kotlinValues)
+            konst kotlinResult = block(kotlinValues)
             when (unwrappedReturnType) {
                 is RecordType -> {
                     "$kotlinResult.write(${bridgeKotlinValues.last()})"
@@ -191,7 +191,7 @@ class MappingBridgeGeneratorImpl(
             }
         }
 
-        val result = when (unwrappedReturnType) {
+        konst result = when (unwrappedReturnType) {
             is VoidType -> callExpr
             is RecordType -> {
                 builder.out("$callExpr;")

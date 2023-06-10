@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 
-internal fun getTaskResult(event: TaskFinishEvent) = when (val result = event.result) {
+internal fun getTaskResult(event: TaskFinishEvent) = when (konst result = event.result) {
     is TaskSuccessResult -> when {
         result.isFromCache -> TaskExecutionState.FROM_CACHE
         result.isUpToDate -> TaskExecutionState.UP_TO_DATE
@@ -41,8 +41,8 @@ internal fun prepareData(
     additionalTags: Set<StatTag> = emptySet(),
     metricsToShow: Set<String>? = null
 ): CompileStatisticsData? {
-    val result = event.result
-    val taskPath = event.descriptor.taskPath
+    konst result = event.result
+    konst taskPath = event.descriptor.taskPath
     return prepareData(getTaskResult(event), taskPath, result.startTime, result.endTime - result.startTime, projectName, uuid,
                        label, kotlinVersion, buildOperationRecord, onlyKotlinTask, additionalTags, metricsToShow)
 }
@@ -64,19 +64,19 @@ internal fun prepareData(
     if (onlyKotlinTask && !(buildOperationRecord is TaskRecord && buildOperationRecord.isFromKotlinPlugin)) {
         return null
     }
-    val buildMetrics = buildOperationRecord.buildMetrics
+    konst buildMetrics = buildOperationRecord.buildMetrics
 
-    val performanceMetrics = collectBuildPerformanceMetrics(buildMetrics)
-    val buildTimesMetrics = collectBuildMetrics(
+    konst performanceMetrics = collectBuildPerformanceMetrics(buildMetrics)
+    konst buildTimesMetrics = collectBuildMetrics(
         buildMetrics, startTime, System.currentTimeMillis()
     )
-    val buildAttributes = collectBuildAttributes(buildMetrics)
-    val changes = if (buildOperationRecord is TaskRecord && buildOperationRecord.changedFiles is ChangedFiles.Known) {
+    konst buildAttributes = collectBuildAttributes(buildMetrics)
+    konst changes = if (buildOperationRecord is TaskRecord && buildOperationRecord.changedFiles is ChangedFiles.Known) {
         buildOperationRecord.changedFiles.modified.map { it.absolutePath } + buildOperationRecord.changedFiles.removed.map { it.absolutePath }
     } else {
         emptyList<String>()
     }
-    val kotlinLanguageVersion = if (buildOperationRecord is TaskRecord) buildOperationRecord.kotlinLanguageVersion else null
+    konst kotlinLanguageVersion = if (buildOperationRecord is TaskRecord) buildOperationRecord.kotlinLanguageVersion else null
 
     return CompileStatisticsData(
         durationMs = buildOperationRecord.totalTimeMs,
@@ -116,7 +116,7 @@ private fun <E : Enum<E>> filterMetrics(
 ): Map<E, Long> = expectedMetrics?.let { buildTimesMetrics.filterKeys { metric -> it.contains(metric.name) } } ?: buildTimesMetrics
 
 private fun collectBuildAttributes(buildMetrics: BuildMetrics?): Set<BuildAttribute> {
-    return buildMetrics?.buildAttributes?.asMap()?.filter { it.value > 0 }?.keys ?: emptySet()
+    return buildMetrics?.buildAttributes?.asMap()?.filter { it.konstue > 0 }?.keys ?: emptySet()
 }
 
 
@@ -124,7 +124,7 @@ private fun collectBuildPerformanceMetrics(
     buildMetrics: BuildMetrics?
 ): Map<BuildPerformanceMetric, Long> {
     return buildMetrics?.buildPerformanceMetrics?.asMap()
-        ?.filterValues { value -> value != 0L }
+        ?.filterValues { konstue -> konstue != 0L }
         ?.filterKeys { key ->
             key !in listOf(
                 BuildPerformanceMetric.START_WORKER_EXECUTION,
@@ -140,8 +140,8 @@ private fun collectBuildMetrics(
     gradleTaskStartTime: Long? = null,
     taskFinishEventTime: Long? = null,
 ): Map<BuildTime, Long> {
-    val taskBuildMetrics = HashMap<BuildTime, Long>(buildMetrics?.buildTimes?.asMapMs())
-    val performanceMetrics = buildMetrics?.buildPerformanceMetrics?.asMap() ?: emptyMap()
+    konst taskBuildMetrics = HashMap<BuildTime, Long>(buildMetrics?.buildTimes?.asMapMs())
+    konst performanceMetrics = buildMetrics?.buildPerformanceMetrics?.asMap() ?: emptyMap()
     gradleTaskStartTime?.let { startTime ->
         performanceMetrics[BuildPerformanceMetric.START_TASK_ACTION_EXECUTION]?.let { actionStartTime ->
             taskBuildMetrics.put(BuildTime.GRADLE_TASK_PREPARATION, actionStartTime - startTime)
@@ -157,7 +157,7 @@ private fun collectBuildMetrics(
             taskBuildMetrics.put(BuildTime.RUN_WORKER_DELAY, TimeUnit.NANOSECONDS.toMillis(startWorkerExecutionTime - callWorkerTime))
         }
     }
-    return taskBuildMetrics.filterValues { value -> value != 0L }
+    return taskBuildMetrics.filterValues { konstue -> konstue != 0L }
 
 }
 
@@ -165,12 +165,12 @@ private fun collectTags(
     buildOperation: BuildOperationRecord?,
     additionalTags: Set<StatTag>
 ): Set<StatTag> {
-    val tags = HashSet(additionalTags)
+    konst tags = HashSet(additionalTags)
     if (buildOperation is TaskRecord) {
         tags.addAll(collectTaskRecordTags(buildOperation))
     }
 
-    val nonIncrementalAttributes = collectBuildAttributes(buildOperation?.buildMetrics)
+    konst nonIncrementalAttributes = collectBuildAttributes(buildOperation?.buildMetrics)
     if (nonIncrementalAttributes.isEmpty()) {
         tags.add(StatTag.INCREMENTAL)
     } else {
@@ -183,7 +183,7 @@ private fun collectTags(
 private fun collectTaskRecordTags(
     taskRecord: TaskRecord?,
 ): Set<StatTag> {
-    val tags = HashSet<StatTag>()
+    konst tags = HashSet<StatTag>()
 
     taskRecord?.kotlinLanguageVersion?.also {
         tags.add(getLanguageVersionTag(it))

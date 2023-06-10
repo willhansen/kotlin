@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
-class Test1(val x: Int, val y: Int)
+class Test1(konst x: Int, konst y: Int)
 
-class Test2(x: Int, val y: Int) {
-    val x = x
+class Test2(x: Int, konst y: Int) {
+    konst x = x
 }
 
-class Test3(x: Int, val y: Int) {
-    val x: Int
+class Test3(x: Int, konst y: Int) {
+    konst x: Int
 
     init {
         this.x = x

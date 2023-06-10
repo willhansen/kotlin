@@ -6,7 +6,7 @@ import kotlin.coroutines.intrinsics.*
 
 suspend fun suspendHere(): String {
     var s: String? = null
-    val z: String = suspendCoroutineUninterceptedOrReturn { x ->
+    konst z: String = suspendCoroutineUninterceptedOrReturn { x ->
         s = "zzz"
         x.resume("OK")
         COROUTINE_SUSPENDED

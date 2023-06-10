@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-val Int.foo: Int
+konst Int.foo: Int
     get() = this
 
 

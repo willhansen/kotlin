@@ -2,7 +2,7 @@
 
 import kotlin.js.Console
 
-external val consoleAccessCounter: Int
+external konst consoleAccessCounter: Int
 external fun resetConsoleAccessCounter(): Unit
 
 inline fun resetCounter(): Unit { resetConsoleAccessCounter() }

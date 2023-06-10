@@ -1,10 +1,10 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-val a0: Int = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1uL<!>
-val a1: UInt = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1uL<!>
-val a3: ULong = 1uL
-val a4 = 1UL + 2UL
-val a5 = <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!>1UL
+konst a0: Int = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1uL<!>
+konst a1: UInt = <!CONSTANT_EXPECTED_TYPE_MISMATCH!>1uL<!>
+konst a3: ULong = 1uL
+konst a4 = 1UL + 2UL
+konst a5 = <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>-<!>1UL
 
 fun takeULong(u: ULong) {}
 

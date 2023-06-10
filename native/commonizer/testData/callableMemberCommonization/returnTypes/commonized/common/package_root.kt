@@ -1,23 +1,23 @@
 expect class Planet(name: String, diameter: Double) {
-    val name: String
-    val diameter: Double
+    konst name: String
+    konst diameter: Double
 }
 
-expect val propertyWithInferredType1: Int
-expect val propertyWithInferredType2: String
-expect val propertyWithInferredType3: String
-expect val propertyWithInferredType4: Nothing?
-expect val propertyWithInferredType5: Planet
+expect konst propertyWithInferredType1: Int
+expect konst propertyWithInferredType2: String
+expect konst propertyWithInferredType3: String
+expect konst propertyWithInferredType4: Nothing?
+expect konst propertyWithInferredType5: Planet
 
 typealias C = Planet
 
-expect val property1: Int
-expect val property2: String
-expect val property3: Planet
-expect val property4: Planet
-expect val property5: Planet
-expect val property6: Planet
-expect val property7: C
+expect konst property1: Int
+expect konst property2: String
+expect konst property3: Planet
+expect konst property4: Planet
+expect konst property5: Planet
+expect konst property6: Planet
+expect konst property7: C
 
 expect fun function1(): Int
 expect fun function2(): String
@@ -29,16 +29,16 @@ expect fun function7(): C
 
 // Optimistic Number Commonization: KT-48455, KT-48568
 @kotlinx.cinterop.UnsafeNumber(["js: kotlin.Int", "jvm: kotlin.Long"])
-expect val propertyWithMismatchedType1: Int
+expect konst propertyWithMismatchedType1: Int
 @kotlinx.cinterop.UnsafeNumber(["js: kotlin.Int", "jvm: kotlin.Short"])
-expect val propertyWithMismatchedType2: Short
+expect konst propertyWithMismatchedType2: Short
 @kotlinx.cinterop.UnsafeNumber(["js: kotlin.Int", "jvm: kotlin.Long"])
 expect fun functionWithMismatchedType1(): Int
 @kotlinx.cinterop.UnsafeNumber(["js: kotlin.Int", "jvm: kotlin.Short"])
 expect fun functionWithMismatchedType2(): Short
 
-expect class Box<T>(value: T) {
-    val value: T
+expect class Box<T>(konstue: T) {
+    konst konstue: T
 }
 
 expect class Fox()

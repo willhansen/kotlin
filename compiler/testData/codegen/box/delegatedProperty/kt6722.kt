@@ -4,9 +4,9 @@ interface T {
 }
 
 fun box(): String {
-    val a = "OK"
-    val t = object : T {
-        val foo by lazy {
+    konst a = "OK"
+    konst t = object : T {
+        konst foo by lazy {
             a
         }
     }

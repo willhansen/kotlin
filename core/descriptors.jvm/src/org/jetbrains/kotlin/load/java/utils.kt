@@ -26,10 +26,10 @@ import org.jetbrains.kotlin.load.java.structure.JavaWildcardType
 import org.jetbrains.kotlin.resolve.deprecation.DescriptorBasedDeprecationInfo
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationLevelValue
 
-class DeprecationCausedByFunctionNInfo(override val target: DeclarationDescriptor) : DescriptorBasedDeprecationInfo() {
-    override val deprecationLevel: DeprecationLevelValue
+class DeprecationCausedByFunctionNInfo(override konst target: DeclarationDescriptor) : DescriptorBasedDeprecationInfo() {
+    override konst deprecationLevel: DeprecationLevelValue
         get() = DeprecationLevelValue.ERROR
-    override val message: String
+    override konst message: String
         get() = "Java members containing references to ${JavaToKotlinClassMap.FUNCTION_N_FQ_NAME} are not supported"
 }
 

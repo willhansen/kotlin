@@ -21,21 +21,21 @@ class InlineLambdaContext(
     contextKind: OwnerKind,
     parentContext: CodegenContext<*>,
     closure: MutableClosure?,
-    val isCrossInline: Boolean,
-    private val isPropertyReference: Boolean
+    konst isCrossInline: Boolean,
+    private konst isPropertyReference: Boolean
 ) : MethodContext(functionDescriptor, contextKind, parentContext, closure, false) {
 
     override fun getFirstCrossInlineOrNonInlineContext(): CodegenContext<*> {
         if (isCrossInline && !isSuspendIntrinsicParameter()) return this
 
-        val parent = if (isPropertyReference) parentContext as? AnonymousClassContext else {
+        konst parent = if (isPropertyReference) parentContext as? AnonymousClassContext else {
             parentContext as? ClosureContext
         } ?: throw AssertionError(
             "Parent of inlining lambda body should be " +
                     "${if (isPropertyReference) "ClosureContext" else "AnonymousClassContext"}, but: $parentContext"
         )
 
-        val grandParent =
+        konst grandParent =
             parent.parentContext ?: throw AssertionError("Parent context of lambda class context should exist: $contextDescriptor")
         return grandParent.firstCrossInlineOrNonInlineContext
     }
@@ -43,8 +43,8 @@ class InlineLambdaContext(
     // suspendCoroutine and suspendCoroutineUninterceptedOrReturn accept crossinline parameter, but it is effectively inline
     private fun isSuspendIntrinsicParameter(): Boolean {
         if (contextDescriptor !is AnonymousFunctionDescriptor) return false
-        val resolvedCall = (contextDescriptor.source.getPsi() as? KtElement).getParentResolvedCall(state.bindingContext) ?: return false
-        val descriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return false
+        konst resolvedCall = (contextDescriptor.source.getPsi() as? KtElement).getParentResolvedCall(state.bindingContext) ?: return false
+        konst descriptor = resolvedCall.resultingDescriptor as? FunctionDescriptor ?: return false
         return descriptor.isBuiltInSuspendCoroutineUninterceptedOrReturn()
                 || descriptor.isTopLevelInPackage("suspendCoroutine", StandardNames.COROUTINES_PACKAGE_FQ_NAME.asString())
     }

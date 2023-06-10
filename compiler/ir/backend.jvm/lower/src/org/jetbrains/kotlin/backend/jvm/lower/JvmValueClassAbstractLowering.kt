@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 import org.jetbrains.kotlin.name.Name
 
 internal abstract class JvmValueClassAbstractLowering(
-    val context: JvmBackendContext,
-    override val scopeStack: MutableList<ScopeWithIr>,
+    konst context: JvmBackendContext,
+    override konst scopeStack: MutableList<ScopeWithIr>,
 ) : FileLoweringPass, IrElementTransformerVoidWithContext() {
-    abstract val replacements: MemoizedValueClassAbstractReplacements
+    abstract konst replacements: MemoizedValueClassAbstractReplacements
 
     final override fun lower(irFile: IrFile) = withinScope(irFile) {
         irFile.transformChildrenVoid()
@@ -36,11 +36,11 @@ internal abstract class JvmValueClassAbstractLowering(
             return null
         }
 
-        val replacement = replacements.getReplacementFunction(function)
+        konst replacement = replacements.getReplacementFunction(function)
 
         if (replacement == null) {
             if (function is IrConstructor) {
-                val constructorReplacement = replacements.getReplacementForRegularClassConstructor(function)
+                konst constructorReplacement = replacements.getReplacementForRegularClassConstructor(function)
                 if (constructorReplacement != null) {
                     addBindingsFor(function, constructorReplacement)
                     return transformFlattenedConstructor(function, constructorReplacement)
@@ -62,7 +62,7 @@ internal abstract class JvmValueClassAbstractLowering(
 
         if (function is IrSimpleFunction && function.overriddenSymbols.any { it.owner.parentAsClass.isFun }) {
             // If fun interface methods are already mangled, do not mangle them twice.
-            val suffix = function.hashSuffix()
+            konst suffix = function.hashSuffix()
             if (suffix != null && function.name.asString().endsWith(suffix)) {
                 function.transformChildrenVoid()
                 return null
@@ -78,7 +78,7 @@ internal abstract class JvmValueClassAbstractLowering(
     }
 
     private fun transformFlattenedConstructor(function: IrConstructor, replacement: IrConstructor): List<IrDeclaration> {
-        replacement.valueParameters.forEach {
+        replacement.konstueParameters.forEach {
             it.defaultValue?.patchDeclarationParents(replacement)
             visitParameter(it)
         }
@@ -106,7 +106,7 @@ internal abstract class JvmValueClassAbstractLowering(
     }
 
     private fun transformSimpleFunctionFlat(function: IrSimpleFunction, replacement: IrSimpleFunction): List<IrDeclaration> {
-        replacement.valueParameters.forEach {
+        replacement.konstueParameters.forEach {
             it.defaultValue?.patchDeclarationParents(replacement)
             visitParameter(it)
         }
@@ -119,14 +119,14 @@ internal abstract class JvmValueClassAbstractLowering(
         if (function.overriddenSymbols.isEmpty() || replacement.dispatchReceiverParameter != null)
             return listOf(replacement)
 
-        val bridgeFunction = createBridgeFunction(function, replacement)
+        konst bridgeFunction = createBridgeFunction(function, replacement)
 
         return listOf(replacement, bridgeFunction)
     }
 
     final override fun visitReturn(expression: IrReturn): IrExpression {
         (expression.returnTargetSymbol.owner as? IrFunction)?.let { target ->
-            val suffix = target.hashSuffix()
+            konst suffix = target.hashSuffix()
             if (suffix != null && target.name.asString().endsWith(suffix))
                 return super.visitReturn(expression)
 
@@ -134,7 +134,7 @@ internal abstract class JvmValueClassAbstractLowering(
                 getReplacementFunction(target) ?: if (target is IrConstructor) getReplacementForRegularClassConstructor(target) else null
             }?.let {
                 return context.createIrBuilder(it.symbol, expression.startOffset, expression.endOffset).irReturn(
-                    expression.value.transform(this, null)
+                    expression.konstue.transform(this, null)
                 )
             }
         }
@@ -143,7 +143,7 @@ internal abstract class JvmValueClassAbstractLowering(
 
     internal fun visitStatementContainer(container: IrStatementContainer) {
         container.statements.transformFlat { statement ->
-            val newStatements =
+            konst newStatements =
                 if (statement is IrFunction) withinScope(statement) { transformFunctionFlat(statement) }
                 else listOf(statement.transformStatement(this))
             for (replacingDeclaration in (newStatements ?: listOf(statement)).filterIsInstance<IrDeclaration>()) {
@@ -176,12 +176,12 @@ internal abstract class JvmValueClassAbstractLowering(
 
     protected enum class SpecificMangle { Inline, MultiField }
 
-    protected abstract val specificMangle: SpecificMangle
+    protected abstract konst specificMangle: SpecificMangle
     private fun createBridgeFunction(
         function: IrSimpleFunction,
         replacement: IrSimpleFunction
     ): IrSimpleFunction {
-        val bridgeFunction = createBridgeDeclaration(
+        konst bridgeFunction = createBridgeDeclaration(
             function,
             replacement,
             when {
@@ -209,7 +209,7 @@ internal abstract class JvmValueClassAbstractLowering(
             }
         )
 
-        // Update the overridden symbols to point to their value class replacements
+        // Update the overridden symbols to point to their konstue class replacements
         bridgeFunction.overriddenSymbols = replacement.overriddenSymbols
 
         // Replace the function body with a wrapper
@@ -230,7 +230,7 @@ internal abstract class JvmValueClassAbstractLowering(
     protected fun typedArgumentList(function: IrFunction, expression: IrMemberAccessExpression<*>) = listOfNotNull(
         function.dispatchReceiverParameter?.let { it to expression.dispatchReceiver },
         function.extensionReceiverParameter?.let { it to expression.extensionReceiver }
-    ) + function.valueParameters.map { it to expression.getValueArgument(it.index) }
+    ) + function.konstueParameters.map { it to expression.getValueArgument(it.index) }
 
 
     // We may need to add a bridge method for inline class methods with static replacements. Ideally, we'd do this in BridgeLowering,

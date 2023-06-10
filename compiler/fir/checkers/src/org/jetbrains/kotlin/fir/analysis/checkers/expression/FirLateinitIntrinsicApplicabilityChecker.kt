@@ -26,24 +26,24 @@ import org.jetbrains.kotlin.name.StandardClassIds.Annotations
 object FirLateinitIntrinsicApplicabilityChecker : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
 
-        val resolvedSymbol = expression.calleeReference.toResolvedPropertySymbol() ?: return
+        konst resolvedSymbol = expression.calleeReference.toResolvedPropertySymbol() ?: return
 
         // An optimization
         if (resolvedSymbol.name.identifierOrNullIfSpecial != "isInitialized") return
 
-        val receiverParameter = resolvedSymbol.receiverParameter ?: return
+        konst receiverParameter = resolvedSymbol.receiverParameter ?: return
 
         if (!receiverParameter.hasAnnotation(Annotations.AccessibleLateinitPropertyLiteral, context.session)) return
 
-        val source = expression.calleeReference.source
+        konst source = expression.calleeReference.source
 
-        val extensionReceiver = expression.extensionReceiver
+        konst extensionReceiver = expression.extensionReceiver
         if (extensionReceiver !is FirCallableReferenceAccess) {
             reporter.reportOn(source, FirErrors.LATEINIT_INTRINSIC_CALL_ON_NON_LITERAL, context)
             return
         }
 
-        val calleePropertySymbol = extensionReceiver.calleeReference.toResolvedPropertySymbol() ?: return
+        konst calleePropertySymbol = extensionReceiver.calleeReference.toResolvedPropertySymbol() ?: return
 
         if (!calleePropertySymbol.isLateInit) {
             reporter.reportOn(source, FirErrors.LATEINIT_INTRINSIC_CALL_ON_NON_LATEINIT, context)
@@ -61,7 +61,7 @@ object FirLateinitIntrinsicApplicabilityChecker : FirQualifiedAccessExpressionCh
             return
         }
 
-        val closestOwnFunction = context.containingDeclarations.lastOrNull()
+        konst closestOwnFunction = context.containingDeclarations.lastOrNull()
         if (closestOwnFunction is FirFunction && closestOwnFunction.isInline) {
             reporter.reportOn(source, FirErrors.LATEINIT_INTRINSIC_CALL_IN_INLINE_FUNCTION, context)
         }

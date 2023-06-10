@@ -41,22 +41,22 @@ class DeclarationsDumpHandler(
     testServices: TestServices
 ) : ClassicFrontendAnalysisHandler(testServices) {
     companion object {
-        private val NAMES_OF_CHECK_TYPE_HELPER = listOf("checkSubtype", "CheckTypeInv", "_", "checkType").map { Name.identifier(it) }
+        private konst NAMES_OF_CHECK_TYPE_HELPER = listOf("checkSubtype", "CheckTypeInv", "_", "checkType").map { Name.identifier(it) }
 
-        private val JAVA_PACKAGE_PATTERN = Pattern.compile("^\\s*package [.\\w\\d]*", Pattern.MULTILINE)
+        private konst JAVA_PACKAGE_PATTERN = Pattern.compile("^\\s*package [.\\w\\d]*", Pattern.MULTILINE)
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(DiagnosticsDirectives)
 
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val resultDump = dumper.generateResultingDump()
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val allDirectives = testServices.moduleStructure.allDirectives
-        val prefix = when {
+        konst resultDump = dumper.generateResultingDump()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst allDirectives = testServices.moduleStructure.allDirectives
+        konst prefix = when {
             DiagnosticsDirectives.NI_EXPECTED_FILE in allDirectives &&
                     testServices.moduleStructure.modules.any { it.languageVersionSettings.supportsFeature(LanguageFeature.NewInference) } -> ".ni"
 
@@ -65,35 +65,35 @@ class DeclarationsDumpHandler(
 
             else -> ""
         }
-        val expectedFileName = "${testDataFile.nameWithoutExtension}$prefix.txt"
-        val expectedFile = testDataFile.parentFile.resolve(expectedFileName)
+        konst expectedFileName = "${testDataFile.nameWithoutExtension}$prefix.txt"
+        konst expectedFile = testDataFile.parentFile.resolve(expectedFileName)
         if (!expectedFile.exists()) return
         assertions.assertEqualsToFile(expectedFile, resultDump)
     }
 
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
         if (DiagnosticsDirectives.SKIP_TXT in module.directives) return
-        val moduleDescriptor = info.analysisResult.moduleDescriptor
-        val checkTypeEnabled = AdditionalFilesDirectives.CHECK_TYPE in module.directives
-        val comparator = RecursiveDescriptorComparator(
+        konst moduleDescriptor = info.analysisResult.moduleDescriptor
+        konst checkTypeEnabled = AdditionalFilesDirectives.CHECK_TYPE in module.directives
+        konst comparator = RecursiveDescriptorComparator(
             createdAffectedPackagesConfiguration(module.files, info.ktFiles, moduleDescriptor, checkTypeEnabled)
         )
-        val packages = buildList {
+        konst packages = buildList {
             module.directives[DiagnosticsDirectives.RENDER_PACKAGE].forEach {
                 add(FqName(it))
             }
             add(FqName.ROOT)
         }
-        val textByPackage = packages.keysToMap { StringBuilder() }
+        konst textByPackage = packages.keysToMap { StringBuilder() }
 
         for ((packageName, packageText) in textByPackage.entries) {
-            val aPackage = moduleDescriptor.getPackage(packageName)
+            konst aPackage = moduleDescriptor.getPackage(packageName)
             assertions.assertFalse(aPackage.isEmpty())
 
-            val actualSerialized = comparator.serializeRecursively(aPackage)
+            konst actualSerialized = comparator.serializeRecursively(aPackage)
             packageText.append(actualSerialized)
         }
-        val allPackagesText = textByPackage.values.joinToString("\n")
+        konst allPackagesText = textByPackage.konstues.joinToString("\n")
         dumper.builderForModule(module).appendLine(allPackagesText)
     }
 
@@ -103,20 +103,20 @@ class DeclarationsDumpHandler(
         moduleDescriptor: ModuleDescriptor,
         checkTypeEnabled: Boolean
     ): RecursiveDescriptorComparator.Configuration {
-        val packagesNames = testFiles.mapNotNullTo(mutableSetOf()) {
-            val ktFile = ktFiles[it]
+        konst packagesNames = testFiles.mapNotNullTo(mutableSetOf()) {
+            konst ktFile = ktFiles[it]
             when {
                 ktFile != null -> ktFile.packageFqName.pathSegments().firstOrNull() ?: SpecialNames.ROOT_PACKAGE
                 it.isJavaFile -> getJavaFilePackage(it)
                 else -> null
             }
         }
-        val stepIntoFilter = Predicate<DeclarationDescriptor> { descriptor ->
-            val module = DescriptorUtils.getContainingModuleOrNull(descriptor)
+        konst stepIntoFilter = Predicate<DeclarationDescriptor> { descriptor ->
+            konst module = DescriptorUtils.getContainingModuleOrNull(descriptor)
             if (module != moduleDescriptor) return@Predicate false
 
             if (descriptor is PackageViewDescriptor) {
-                val fqName = descriptor.fqName
+                konst fqName = descriptor.fqName
                 return@Predicate fqName.isRoot || fqName.pathSegments().first() in packagesNames
             }
 
@@ -130,7 +130,7 @@ class DeclarationsDumpHandler(
     }
 
     private fun getJavaFilePackage(testFile: TestFile): Name {
-        val matcher = JAVA_PACKAGE_PATTERN.matcher(testFile.originalContent)
+        konst matcher = JAVA_PACKAGE_PATTERN.matcher(testFile.originalContent)
 
         if (matcher.find()) {
             return testFile.originalContent

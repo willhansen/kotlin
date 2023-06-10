@@ -19,7 +19,7 @@ kotlinArtifacts {
             verbose = true
             freeCompilerArgs = ["foo"]
         }
-        binaryOption("name", "value")
+        binaryOption("name", "konstue")
         setModules(
             project(":shared"),
             project(":lib")

@@ -19,14 +19,14 @@ import java.io.File
 
 internal abstract class AbstractCInteropCommonizerTask : DefaultTask() {
     @get:OutputDirectory
-    abstract val outputDirectory: File
+    abstract konst outputDirectory: File
 
     internal abstract suspend fun findInteropsGroup(dependent: CInteropCommonizerDependent): CInteropCommonizerGroup?
 }
 
 internal fun AbstractCInteropCommonizerTask.outputDirectory(group: CInteropCommonizerGroup): File {
-    val interopsDirectoryName = group.interops.map { it.interopName }.toSet().joinToString("_")
-    val groupDisambiguation = group.targets.joinToString { it.identityString } +
+    konst interopsDirectoryName = group.interops.map { it.interopName }.toSet().joinToString("_")
+    konst groupDisambiguation = group.targets.joinToString { it.identityString } +
             group.interops.joinToString { it.uniqueName }
 
     return outputDirectory
@@ -36,7 +36,7 @@ internal fun AbstractCInteropCommonizerTask.outputDirectory(group: CInteropCommo
 
 internal fun AbstractCInteropCommonizerTask.commonizedOutputLibraries(dependent: CInteropCommonizerDependent): FileCollection {
     return outputFilesProvider {
-        val outputDirectory = project.future { commonizedOutputDirectory(dependent) }.getOrThrow()
+        konst outputDirectory = project.future { commonizedOutputDirectory(dependent) }.getOrThrow()
             ?: return@outputFilesProvider emptySet<File>()
         project.providers.changing {
             outputDirectory.listFiles().orEmpty().toSet()
@@ -45,7 +45,7 @@ internal fun AbstractCInteropCommonizerTask.commonizedOutputLibraries(dependent:
 }
 
 internal suspend fun AbstractCInteropCommonizerTask.commonizedOutputDirectory(dependent: CInteropCommonizerDependent): File? {
-    val group = findInteropsGroup(dependent) ?: return null
+    konst group = findInteropsGroup(dependent) ?: return null
     return CommonizerOutputFileLayout
         .resolveCommonizedDirectory(outputDirectory(group), dependent.target)
 }

@@ -8,11 +8,11 @@
 
 package org.jetbrains.kotlin.backend.common.serialization
 
-private val k0 = 0xc3a5c85c97cb3127U
-private val k1 = 0xb492b66fbe98f273U
-private val k2 = 0x9ae16a3b2f90404fU
-private val kMul = 0x9ddfea08eb382d69UL
-private val kGoldenRatio = 0x9e3779b97f4a7c15UL
+private konst k0 = 0xc3a5c85c97cb3127U
+private konst k1 = 0xb492b66fbe98f273U
+private konst k2 = 0x9ae16a3b2f90404fU
+private konst kMul = 0x9ddfea08eb382d69UL
+private konst kGoldenRatio = 0x9e3779b97f4a7c15UL
 
 private fun toLongLE(b: ByteArray, i: Int): Long {
     return (b[i + 7].toLong() shl 56) +
@@ -40,12 +40,12 @@ private fun fetch32(s: ByteArray, pos: Int): UInt {
     return toIntLE(s, pos).toUInt()
 }
 
-private fun rotate(value: ULong, shift: Int): ULong {
-    return if (shift == 0) value else (value shr shift) or (value shl (64 - shift))
+private fun rotate(konstue: ULong, shift: Int): ULong {
+    return if (shift == 0) konstue else (konstue shr shift) or (konstue shl (64 - shift))
 }
 
-private fun shiftMix(value: ULong): ULong {
-    return value xor (value shr 47)
+private fun shiftMix(konstue: ULong): ULong {
+    return konstue xor (konstue shr 47)
 }
 
 private fun hashLen16(u: ULong, v: ULong): ULong {
@@ -72,35 +72,35 @@ private fun hash128to64(u: ULong, v: ULong): ULong {
 
 private fun hashLen0to16(s: ByteArray, pos: Int, len: Int): ULong {
     if (len >= 8) {
-        val mul =  k2 + len.toULong() * 2u
-        val a = fetch64(s, pos + 0) + k2
-        val b = fetch64(s, pos + len - 8)
-        val c = rotate(b, 37).toULong() * mul.toULong() + a.toULong()
-        val d = (rotate(a, 25) + b) * mul
+        konst mul =  k2 + len.toULong() * 2u
+        konst a = fetch64(s, pos + 0) + k2
+        konst b = fetch64(s, pos + len - 8)
+        konst c = rotate(b, 37).toULong() * mul.toULong() + a.toULong()
+        konst d = (rotate(a, 25) + b) * mul
         return hashLen16(c, d, mul)
     }
     if (len >= 4) {
-        val mul = k2 + len.toULong() * 2u
-        val a = fetch32(s, pos).toULong()
+        konst mul = k2 + len.toULong() * 2u
+        konst a = fetch32(s, pos).toULong()
         return hashLen16((a shl 3) + len.toUInt(), fetch32(s, pos + len - 4).toULong(), mul)
     }
     if (len > 0) {
-        val a = s[pos + 0].toUByte()
-        val b = s[pos + len.ushr(1)].toUByte()
-        val c = s[pos + len - 1].toUByte()
-        val y = a + (b.toUInt() shl 8)
-        val z = len.toULong() + (c.toUInt() shl 2)
+        konst a = s[pos + 0].toUByte()
+        konst b = s[pos + len.ushr(1)].toUByte()
+        konst c = s[pos + len - 1].toUByte()
+        konst y = a + (b.toUInt() shl 8)
+        konst z = len.toULong() + (c.toUInt() shl 2)
         return shiftMix(y * k2 xor z * k0) * k2
     }
     return k2
 }
 
 private fun hashLen17to32(s: ByteArray, pos: Int, len: Int): ULong {
-    val mul = k2 + (len * 2).toUInt()
-    val a = fetch64(s, pos + 0) * k1
-    val b = fetch64(s, pos + 8)
-    val c = fetch64(s, pos + len - 8) * mul
-    val d = fetch64(s, pos + len - 16) * k2
+    konst mul = k2 + (len * 2).toUInt()
+    konst a = fetch64(s, pos + 0) * k1
+    konst b = fetch64(s, pos + 8)
+    konst c = fetch64(s, pos + len - 8) * mul
+    konst d = fetch64(s, pos + len - 16) * k2
     return hashLen16(
             rotate(a + b, 43) + rotate(c, 30) + d,
             a + rotate(b + k2, 18) + c, mul)
@@ -112,7 +112,7 @@ private fun weakHashLen32WithSeeds(w: ULong, x: ULong, y: ULong, z: ULong, a: UL
 
     a += w
     b = rotate(b + a + z, 21)
-    val c = a
+    konst c = a
     a += x
     a += y
     b += rotate(a, 44)
@@ -128,36 +128,36 @@ private fun weakHashLen32WithSeeds(s: ByteArray, pos: Int, a: ULong, b: ULong): 
             a, b)
 }
 
-fun bswap(value: ULong): ULong {
-    val b1 = (value shr 0) and 0xffu
-    val b2 = (value shr 8) and 0xffu
-    val b3 = (value shr 16) and 0xffu
-    val b4 = (value shr 24) and 0xffu
-    val b5 = (value shr 32) and 0xffu
-    val b6 = (value shr 40) and 0xffu
-    val b7 = (value shr 48) and 0xffu
-    val b8 = (value shr 56) and 0xffu
+fun bswap(konstue: ULong): ULong {
+    konst b1 = (konstue shr 0) and 0xffu
+    konst b2 = (konstue shr 8) and 0xffu
+    konst b3 = (konstue shr 16) and 0xffu
+    konst b4 = (konstue shr 24) and 0xffu
+    konst b5 = (konstue shr 32) and 0xffu
+    konst b6 = (konstue shr 40) and 0xffu
+    konst b7 = (konstue shr 48) and 0xffu
+    konst b8 = (konstue shr 56) and 0xffu
 
     return (b1 shl 56) or (b2 shl 48) or (b3 shl 40) or (b4 shl 32) or
             (b5 shl 24) or (b6 shl 16) or (b7 shl 8) or (b8 shl 0)
 }
 
 private fun hashLen33to64(s: ByteArray, pos: Int, len: Int): ULong {
-    val mul = k2 + (len * 2).toUInt()
+    konst mul = k2 + (len * 2).toUInt()
     var a = fetch64(s, pos + 0) * k2
     var b = fetch64(s, pos + 8)
-    val c = fetch64(s, pos + len - 24)
-    val d = fetch64(s, pos + len - 32)
-    val e = fetch64(s, pos + 16) * k2
-    val f = fetch64(s, pos + 24) * 9u
-    val g = fetch64(s, pos + len - 8)
-    val h = fetch64(s, pos + len - 16) * mul
-    val u = rotate(a + g, 43) + (rotate(b, 30) + c) * 9u
-    val v = ((a + g) xor d) + f + 1u
-    val w = bswap((u + v) * mul) + h
-    val x = rotate(e + f, 42) + c
-    val y = (bswap((v + w) * mul) + g) * mul
-    val z = e + f + c
+    konst c = fetch64(s, pos + len - 24)
+    konst d = fetch64(s, pos + len - 32)
+    konst e = fetch64(s, pos + 16) * k2
+    konst f = fetch64(s, pos + 24) * 9u
+    konst g = fetch64(s, pos + len - 8)
+    konst h = fetch64(s, pos + len - 16) * mul
+    konst u = rotate(a + g, 43) + (rotate(b, 30) + c) * 9u
+    konst v = ((a + g) xor d) + f + 1u
+    konst w = bswap((u + v) * mul) + h
+    konst x = rotate(e + f, 42) + c
+    konst y = (bswap((v + w) * mul) + g) * mul
+    konst z = e + f + c
 
     a = bswap((x + z) * mul + y) + b
     b = shiftMix((z + a) * mul + d + h) * mul
@@ -198,7 +198,7 @@ public fun cityHash64(s: ByteArray, pos: Int = 0, len: Int = s.size): ULong {
         v = weakHashLen32WithSeeds(s, pos + 0, v[1] * k1, x + w[0])
         w = weakHashLen32WithSeeds(s, pos + 32, z + w[1], y + fetch64(s, pos + 16))
         run {
-            val swap = z
+            konst swap = z
             z = x
             x = swap
         }
@@ -216,7 +216,7 @@ public fun cityHash64(s: ByteArray, pos: Int = 0, len: Int = s.size): ULong {
 fun String.cityHash64(): Long =
     cityHash64(this.toByteArray()).toLong()
 
-data class Hash128Bits(val lowBytes: ULong = k0, val highBytes: ULong = k1) {
+data class Hash128Bits(konst lowBytes: ULong = k0, konst highBytes: ULong = k1) {
     private infix fun ULong.combineHash(other: ULong) = other xor (this + kGoldenRatio + (other shl 12) + (other shr 4))
 
     fun combineWith(other: Hash128Bits): Hash128Bits {
@@ -285,7 +285,7 @@ fun cityHash128WithSeed(seed: Hash128Bits, s: ByteArray, pos: Int = 0, len: Int 
         v = weakHashLen32WithSeeds(s, pos, v[1] * k1, x + w[0])
         w = weakHashLen32WithSeeds(s, pos + 32, z + w[1], y + fetch64(s, pos + 16))
         run {
-            val swap = z
+            konst swap = z
             z = x
             x = swap
         }
@@ -299,7 +299,7 @@ fun cityHash128WithSeed(seed: Hash128Bits, s: ByteArray, pos: Int = 0, len: Int 
         v = weakHashLen32WithSeeds(s, pos, v[1] * k1, x + w[0])
         w = weakHashLen32WithSeeds(s, pos + 32, z + w[1], y + fetch64(s, pos + 16))
         run {
-            val swap = z
+            konst swap = z
             z = x
             x = swap
         }

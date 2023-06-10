@@ -26,14 +26,14 @@ class IncrementalKaptTest {
         @TempDir projectBaseDirSecondRun: File,
         @TempDir classesOutput: File
     ) {
-        val sourcesDir = baseSourcesDir.resolve("test").also { base ->
+        konst sourcesDir = baseSourcesDir.resolve("test").also { base ->
             base.mkdir()
             listOf("User.java", "Address.java", "Observable.java").map {
                 TEST_DATA_DIR.resolve(it).copyTo(base.resolve(it))
             }
         }
 
-        val options = KaptOptions.Builder().apply {
+        konst options = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirFirstRun
             javaSourceRoots.add(sourcesDir)
 
@@ -45,7 +45,7 @@ class IncrementalKaptTest {
             incrementalCache = incrementalCacheDir
         }.build()
 
-        val logger = WriterBackedKaptLogger(isVerbose = true)
+        konst logger = WriterBackedKaptLogger(isVerbose = true)
         KaptContext(options, true, logger).use {
             it.doAnnotationProcessing(
                 options.collectJavaSourceFiles(SourcesToReprocess.FullRebuild), listOf(SimpleProcessor().toIsolating())
@@ -54,11 +54,11 @@ class IncrementalKaptTest {
 
         compileSources(sourcesDir.listFiles().orEmpty().asIterable(), classesOutput)
 
-        val addressTimestamp = outputDir.resolve("test/AddressGenerated.java").lastModified()
+        konst addressTimestamp = outputDir.resolve("test/AddressGenerated.java").lastModified()
         assertTrue(outputDir.resolve("test/UserGenerated.java").exists())
         assertTrue(outputDir.resolve("test/AddressGenerated.java").exists())
 
-        val optionsForSecondRun = KaptOptions.Builder().apply {
+        konst optionsForSecondRun = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirSecondRun
 
             sourcesOutputDir = outputDir
@@ -103,14 +103,14 @@ class IncrementalKaptTest {
         @TempDir projectBaseDirSecondRun: File,
         @TempDir classesOutput: File
     ) {
-        val sourcesDir = baseSourcesDir.resolve("test").also { base ->
+        konst sourcesDir = baseSourcesDir.resolve("test").also { base ->
             base.mkdir()
             listOf("User.java", "Address.java", "Observable.java").map {
                 TEST_DATA_DIR.resolve(it).copyTo(base.resolve(it))
             }
         }
 
-        val options = KaptOptions.Builder().apply {
+        konst options = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirFirstRun
             javaSourceRoots.add(sourcesDir)
 
@@ -122,7 +122,7 @@ class IncrementalKaptTest {
             incrementalCache = incrementalCacheDir
         }.build()
 
-        val logger = WriterBackedKaptLogger(isVerbose = true)
+        konst logger = WriterBackedKaptLogger(isVerbose = true)
         KaptContext(options, true, logger).use {
             it.doAnnotationProcessing(
                 options.collectJavaSourceFiles(SourcesToReprocess.FullRebuild), listOf(SimpleGeneratingIfTypeDoesNotExist().toIsolating())
@@ -135,7 +135,7 @@ class IncrementalKaptTest {
             classesOutput
         )
 
-        val optionsForSecondRun = KaptOptions.Builder().apply {
+        konst optionsForSecondRun = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirSecondRun
 
             sourcesOutputDir = outputDir
@@ -170,14 +170,14 @@ class IncrementalKaptTest {
         @TempDir projectBaseDirFirstRun: File,
         @TempDir projectBaseDirSecondRun: File
     ) {
-        val sourcesDir = baseSourcesDir.resolve("test").also { base ->
+        konst sourcesDir = baseSourcesDir.resolve("test").also { base ->
             base.mkdir()
             listOf("User.java", "Address.java", "Observable.java").map {
                 TEST_DATA_DIR.resolve(it).copyTo(base.resolve(it))
             }
         }
 
-        val options = KaptOptions.Builder().apply {
+        konst options = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirFirstRun
             javaSourceRoots.add(sourcesDir)
 
@@ -189,7 +189,7 @@ class IncrementalKaptTest {
             incrementalCache = incrementalCacheDir
         }.build()
 
-        val logger = WriterBackedKaptLogger(isVerbose = true)
+        konst logger = WriterBackedKaptLogger(isVerbose = true)
         KaptContext(options, true, logger).use {
             it.doAnnotationProcessing(
                 options.collectJavaSourceFiles(SourcesToReprocess.FullRebuild),
@@ -197,7 +197,7 @@ class IncrementalKaptTest {
             )
         }
 
-        val optionsForSecondRun = KaptOptions.Builder().apply {
+        konst optionsForSecondRun = KaptOptions.Builder().apply {
             projectBaseDir = projectBaseDirSecondRun
             javaSourceRoots.add(sourcesDir)
 

@@ -7,13 +7,13 @@ FILE: [ResolvedTo(RAW_FIR)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -27,13 +27,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -47,13 +47,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -67,13 +67,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(COMPANION_GENERATION)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(COMPANION_GENERATION)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -87,13 +87,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(SUPER_TYPES)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(SUPER_TYPES)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -107,13 +107,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(TYPES)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(TYPES)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -127,13 +127,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -147,13 +147,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(EXPECT_ACTUAL_MATCHING)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -167,13 +167,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -187,13 +187,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(CONTRACTS)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -207,13 +207,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -227,13 +227,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -247,13 +247,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }
@@ -267,13 +267,13 @@ FILE: [ResolvedTo(IMPORTS)] enumValues.kt
         }
 
         public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] enum entry ENTRY: R|one/MyEnum|
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun values(): R|kotlin/Array<one/MyEnum>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun konstues(): R|kotlin/Array<one/MyEnum>| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|one/MyEnum| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] fun konstueOf([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/String|): R|one/MyEnum| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] val entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=MyEnum] konst entries: R|kotlin/enums/EnumEntries<one/MyEnum>|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/enums/EnumEntries<one/MyEnum>|
 
     }

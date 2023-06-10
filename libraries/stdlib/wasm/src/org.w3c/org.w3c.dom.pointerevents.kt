@@ -16,34 +16,34 @@ import org.w3c.dom.events.*
 public external interface PointerEventInit : MouseEventInit, JsAny {
     var pointerId: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var width: Double? /* = 1.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var height: Double? /* = 1.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var pressure: Float? /* = 0f */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var tangentialPressure: Float? /* = 0f */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var tiltX: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var tiltY: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var twist: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var pointerType: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var isPrimary: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -53,21 +53,21 @@ public fun PointerEventInit(pointerId: Int? = 0, width: Double? = 1.0, height: D
  * Exposes the JavaScript [PointerEvent](https://developer.mozilla.org/en/docs/Web/API/PointerEvent) to Kotlin
  */
 public external open class PointerEvent(type: String, eventInitDict: PointerEventInit = definedExternally) : MouseEvent, JsAny {
-    open val pointerId: Int
-    open val width: Double
-    open val height: Double
-    open val pressure: Float
-    open val tangentialPressure: Float
-    open val tiltX: Int
-    open val tiltY: Int
-    open val twist: Int
-    open val pointerType: String
-    open val isPrimary: Boolean
+    open konst pointerId: Int
+    open konst width: Double
+    open konst height: Double
+    open konst pressure: Float
+    open konst tangentialPressure: Float
+    open konst tiltX: Int
+    open konst tiltY: Int
+    open konst twist: Int
+    open konst pointerType: String
+    open konst isPrimary: Boolean
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }

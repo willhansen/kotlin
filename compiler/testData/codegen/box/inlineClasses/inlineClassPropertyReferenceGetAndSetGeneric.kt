@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: String>(val z: T)
+konstue class Foo<T: String>(konst z: T)
 
 var f = Foo("zzz")
 

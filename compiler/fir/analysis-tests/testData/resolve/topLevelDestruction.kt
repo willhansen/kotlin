@@ -1,1 +1,1 @@
-val <!SYNTAX!>(x, y)<!> = Pair(1, 2)
+konst <!SYNTAX!>(x, y)<!> = Pair(1, 2)

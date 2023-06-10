@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_VALUE
 
 fun foo(): Int {
-    val i: Int
+    konst i: Int
     var j = 0
     while (true) {
         <!VAL_REASSIGNMENT!>i<!> = ++j

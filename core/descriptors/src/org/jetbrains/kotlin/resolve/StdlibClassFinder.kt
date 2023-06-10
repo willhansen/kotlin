@@ -26,7 +26,7 @@ private object CliStdlibClassFinderImpl : StdlibClassFinder {
     }
 }
 
-val STDLIB_CLASS_FINDER_CAPABILITY = ModuleCapability<StdlibClassFinder>("StdlibClassFinder")
+konst STDLIB_CLASS_FINDER_CAPABILITY = ModuleCapability<StdlibClassFinder>("StdlibClassFinder")
 
 internal fun ModuleDescriptor.getStdlibClassFinder(): StdlibClassFinder {
     return getCapability(STDLIB_CLASS_FINDER_CAPABILITY) ?: CliStdlibClassFinderImpl

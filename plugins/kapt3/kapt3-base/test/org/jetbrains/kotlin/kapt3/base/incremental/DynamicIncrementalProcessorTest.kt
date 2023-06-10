@@ -12,8 +12,8 @@ import java.io.File
 class DynamicIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir() {
     @Test
     fun testIfIsolating() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val dynamic = DynamicProcessor(kind = RuntimeProcType.ISOLATING).toDynamic()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst dynamic = DynamicProcessor(kind = RuntimeProcType.ISOLATING).toDynamic()
         runAnnotationProcessing(srcFiles, listOf(dynamic), generatedSources)
 
         assertEquals(RuntimeProcType.ISOLATING, dynamic.getRuntimeType())
@@ -29,8 +29,8 @@ class DynamicIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir() {
 
     @Test
     fun testIfAggregating() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val dynamic = DynamicProcessor(kind = RuntimeProcType.AGGREGATING).toDynamic()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst dynamic = DynamicProcessor(kind = RuntimeProcType.AGGREGATING).toDynamic()
         runAnnotationProcessing(srcFiles, listOf(dynamic), generatedSources)
 
         assertEquals(RuntimeProcType.AGGREGATING, dynamic.getRuntimeType())
@@ -46,8 +46,8 @@ class DynamicIncrementalProcessorTest : AbstractTestWithGeneratedSourcesDir() {
 
     @Test
     fun testIfNonIncremental() {
-        val srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
-        val dynamic = DynamicProcessor(kind = RuntimeProcType.NON_INCREMENTAL).toDynamic()
+        konst srcFiles = listOf("User.java", "Address.java", "Observable.java").map { File(TEST_DATA_DIR, it) }
+        konst dynamic = DynamicProcessor(kind = RuntimeProcType.NON_INCREMENTAL).toDynamic()
         runAnnotationProcessing(srcFiles, listOf(dynamic), generatedSources)
 
         assertEquals(RuntimeProcType.NON_INCREMENTAL, dynamic.getRuntimeType())

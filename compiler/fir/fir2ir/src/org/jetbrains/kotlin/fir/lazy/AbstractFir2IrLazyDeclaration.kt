@@ -21,9 +21,9 @@ import kotlin.properties.ReadWriteProperty
 interface AbstractFir2IrLazyDeclaration<F> :
     IrDeclaration, IrLazyDeclarationBase, Fir2IrComponents where F : FirAnnotationContainer {
 
-    val fir: F
+    konst fir: F
 
-    override val factory: IrFactory
+    override konst factory: IrFactory
         get() = irFactory
 
     override fun createLazyAnnotations(): ReadWriteProperty<Any?, List<IrConstructorCall>> = lazyVar(lock) {
@@ -36,9 +36,9 @@ interface AbstractFir2IrLazyDeclaration<F> :
         return parent
     }
 
-    override val stubGenerator: DeclarationStubGenerator
+    override konst stubGenerator: DeclarationStubGenerator
         get() = shouldNotBeCalled()
-    override val typeTranslator: TypeTranslator
+    override konst typeTranslator: TypeTranslator
         get() = shouldNotBeCalled()
 
     fun mutationNotSupported(): Nothing =

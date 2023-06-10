@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.commonizer.utils.MockModulesProvider
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 
 abstract class AbstractMergeCirTreeTest : KtInlineSourceCommonizerTestCase() {
-    private val storageManager = LockBasedStorageManager(this::class.simpleName)
+    private konst storageManager = LockBasedStorageManager(this::class.simpleName)
 
     fun mergeCirTree(vararg modules: Pair<String, CirTreeModule>): CirRootNode {
         return org.jetbrains.kotlin.commonizer.tree.mergeCirTree(
@@ -33,37 +33,37 @@ abstract class AbstractMergeCirTreeTest : KtInlineSourceCommonizerTestCase() {
 
     fun CirRootNode.assertSingleModule(): CirModuleNode {
         kotlin.test.assertEquals(1, modules.size, "Expected exactly one merged module. Found ${modules.map { it.key }}")
-        return modules.values.single()
+        return modules.konstues.single()
     }
 
     fun CirModuleNode.assertSinglePackage(): CirPackageNode {
         kotlin.test.assertEquals(1, packages.size, "Expected exactly one package. Found ${packages.map { it.key }}")
-        return packages.values.single()
+        return packages.konstues.single()
     }
 
     fun CirPackageNode.assertSingleProperty(): CirPropertyNode {
         kotlin.test.assertEquals(1, properties.size, "Expected exactly one property. Found ${properties.map { it.key }}")
-        return properties.values.single()
+        return properties.konstues.single()
     }
 
     fun CirPackageNode.assertSingleFunction(): CirFunctionNode {
         kotlin.test.assertEquals(1, functions.size, "Expected exactly one function. Found ${functions.map { it.key }}")
-        return functions.values.single()
+        return functions.konstues.single()
     }
 
     fun CirPackageNode.assertSingleTypeAlias(): CirTypeAliasNode {
         kotlin.test.assertEquals(1, typeAliases.size, "Expected exactly one type alias. Found ${typeAliases.map { it.key }}")
-        return typeAliases.values.single()
+        return typeAliases.konstues.single()
     }
 
     fun CirPackageNode.assertSingleClass(): CirClassNode {
         kotlin.test.assertEquals(1, classes.size, "Expected exactly one class. Found ${classes.map { it.key }}")
-        return classes.values.single()
+        return classes.konstues.single()
     }
 
     fun CirClassNode.assertSingleConstructor(): CirClassConstructorNode {
         kotlin.test.assertEquals(1, constructors.size, "Expected exactly one function. Found ${constructors.map { it.key }}")
-        return constructors.values.single()
+        return constructors.konstues.single()
     }
 
     fun CirNode<*, *>.assertNoMissingTargetDeclaration() {

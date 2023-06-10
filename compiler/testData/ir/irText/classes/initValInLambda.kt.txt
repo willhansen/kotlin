@@ -5,7 +5,7 @@ class TestInitValInLambdaCalledOnce {
 
   }
 
-  val x: Int
+  konst x: Int
     get
 
   init {

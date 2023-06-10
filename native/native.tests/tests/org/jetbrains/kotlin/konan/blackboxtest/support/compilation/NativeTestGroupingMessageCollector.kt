@@ -24,11 +24,11 @@ internal class NativeTestGroupingMessageCollector(
 ) {
     private var hasWarningsWithRaisedSeverity: Boolean = false
 
-    private val languageFeaturesInCompilerArgs: Set<String> by lazy {
+    private konst languageFeaturesInCompilerArgs: Set<String> by lazy {
         compilerArgs.mapNotNullTo(hashSetOf(), ::parseLanguageFeatureArg)
     }
 
-    private val pathOfCachedLibraryWithTests: String? by lazy {
+    private konst pathOfCachedLibraryWithTests: String? by lazy {
         var isProducingStaticCache = false
         var includedLibraryName: String? = null
         var cachedLibraryName: String? = null
@@ -79,7 +79,7 @@ internal class NativeTestGroupingMessageCollector(
         }
 
     private fun isPreReleaseBinariesWarning(message: String): Boolean {
-        val languageFeatures = substringAfter(message, PRE_RELEASE_WARNING_PREFIX)
+        konst languageFeatures = substringAfter(message, PRE_RELEASE_WARNING_PREFIX)
             ?.split(", ")
             ?.takeIf(Collection<String>::isNotEmpty)
             ?: return false
@@ -88,7 +88,7 @@ internal class NativeTestGroupingMessageCollector(
     }
 
     private fun isUnsafeCompilerArgumentsWarning(message: String): Boolean {
-        val languageFeatures = substringAfter(message, UNSAFE_COMPILER_ARGS_WARNING_PREFIX)
+        konst languageFeatures = substringAfter(message, UNSAFE_COMPILER_ARGS_WARNING_PREFIX)
             ?.lineSequence()
             ?.takeWhile(String::isNotBlank)
             ?.map { parseLanguageFeatureArg(it) ?: "<non-parsable command line argument>" }
@@ -100,7 +100,7 @@ internal class NativeTestGroupingMessageCollector(
     }
 
     private fun isLibraryIncludedMoreThanOnceWarning(message: String): Boolean {
-        val libraryPath = substringAfter(message, LIBRARY_INCLUDED_MORE_THAN_ONCE_WARNING_PREFIX)
+        konst libraryPath = substringAfter(message, LIBRARY_INCLUDED_MORE_THAN_ONCE_WARNING_PREFIX)
             ?.takeIf(String::isNotBlank)
             ?: return false
 
@@ -114,12 +114,12 @@ internal class NativeTestGroupingMessageCollector(
     override fun hasErrors() = hasWarningsWithRaisedSeverity || super.hasErrors()
 
     companion object {
-        private const val PRE_RELEASE_WARNING_PREFIX = "Following manually enabled features will force generation of pre-release binaries: "
-        private const val UNSAFE_COMPILER_ARGS_WARNING_PREFIX = "ATTENTION!\nThis build uses unsafe internal compiler arguments:\n\n"
-        private const val LIBRARY_INCLUDED_MORE_THAN_ONCE_WARNING_PREFIX = "library included more than once: "
-        private const val K2_NATIVE_EXPERIMENTAL_WARNING_PREFIX = "Language version 2.0 is experimental"
+        private const konst PRE_RELEASE_WARNING_PREFIX = "Following manually enabled features will force generation of pre-release binaries: "
+        private const konst UNSAFE_COMPILER_ARGS_WARNING_PREFIX = "ATTENTION!\nThis build uses unsafe internal compiler arguments:\n\n"
+        private const konst LIBRARY_INCLUDED_MORE_THAN_ONCE_WARNING_PREFIX = "library included more than once: "
+        private const konst K2_NATIVE_EXPERIMENTAL_WARNING_PREFIX = "Language version 2.0 is experimental"
 
-        private val PARTIAL_LINKAGE_WARNING_REGEX = Regex("^<[^<>]+>( @ (?:(?!: ).)+)?: .*")
+        private konst PARTIAL_LINKAGE_WARNING_REGEX = Regex("^<[^<>]+>( @ (?:(?!: ).)+)?: .*")
 
         private fun parseLanguageFeatureArg(arg: String): String? =
             substringAfter(arg, "-XXLanguage:-") ?: substringAfter(arg, "-XXLanguage:+")

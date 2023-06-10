@@ -11,11 +11,11 @@ public interface MFunction<T, R> {
 
 
 object Foo {
-    class Requester(val dealToBeOffered: String)
+    class Requester(konst dealToBeOffered: String)
 }
 
 class Bar {
-    val foo = MFunction(Foo::Requester)
+    konst foo = MFunction(Foo::Requester)
 }
 
 fun box(): String {

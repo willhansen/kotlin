@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1282
 package foo
 
-val f = true
+konst f = true
 
 fun box(): String {
     var bar = ""
@@ -11,11 +11,11 @@ fun box(): String {
         bar += "test "
 
         if (f) {
-            val v1 = 42
+            konst v1 = 42
             var bar = 12
             bar += v1
 
-            val v2 = 7
+            konst v2 = 7
             var boo = ""
             boo += v2
         }

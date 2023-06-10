@@ -49,13 +49,13 @@ expect class CC1() {
 expect class CC2()
 expect class CC3()
 
-expect inline class EE1(val value: String)
+expect inline class EE1(konst konstue: String)
 
 expect class FF1(property1: String) {
-    val property1: String
-    val property2: String
-    val property3: String
-    val property4: String
+    konst property1: String
+    konst property2: String
+    konst property3: String
+    konst property4: String
 
     fun function1(): String
     fun function2(): String
@@ -76,23 +76,23 @@ expect enum class II1
 expect enum class II2 { FOO }
 
 expect interface JJ {
-    val property: String
+    konst property: String
     fun function(): String
 }
 
 expect class KK1(property: String) : JJ {
-    override val property: String
+    override konst property: String
     override fun function(): String
 }
 
 expect class KK2(wrapped: JJ) : JJ
 
-expect class LL1(value: String) {
-    val value: String
+expect class LL1(konstue: String) {
+    konst konstue: String
 }
 
-expect class LL2(value: String) {
-    val value: String
+expect class LL2(konstue: String) {
+    konst konstue: String
 }
 
 expect class ExternalClass()

@@ -8,7 +8,7 @@ interface Z {
 
 inline fun test(crossinline z: () -> String) =
     object : Z {
-        val p = z()
+        konst p = z()
 
         override fun a() = p
     }
@@ -19,9 +19,9 @@ import test.*
 
 fun box() {
     // This captured parameter would be added to object constructor
-    val captured = "OK"
+    konst captured = "OK"
     var z: Any = "fail"
-    val res = test {
+    konst res = test {
         z = {
             captured
         }

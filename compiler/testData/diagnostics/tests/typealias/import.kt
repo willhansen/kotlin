@@ -21,6 +21,6 @@ import package1.*
 import package2.I
 import package2.Outer.A
 
-val testS: S = ""
-val testI: I = 42
-val testA: A = Any()
+konst testS: S = ""
+konst testI: I = 42
+konst testA: A = Any()

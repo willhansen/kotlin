@@ -4,10 +4,10 @@ fun runUsual(block: () -> Unit) {}
 fun runComposable(block: @MyComposable () -> Unit) {}
 
 fun test_1() {
-    val l0 = {}
-    val l1: some.MyComposableFunction0<Unit> = {}
-    val l2: @MyComposable (() -> Unit) = {}
-    val l3 = @MyComposable {}
+    konst l0 = {}
+    konst l1: some.MyComposableFunction0<Unit> = {}
+    konst l2: @MyComposable (() -> Unit) = {}
+    konst l3 = @MyComposable {}
 
     runUsual(l0) // ok
     runUsual(<!ARGUMENT_TYPE_MISMATCH!>l1<!>) // error

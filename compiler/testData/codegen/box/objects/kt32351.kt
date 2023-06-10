@@ -8,7 +8,7 @@ interface Runnable {
 class AnonymousClassInLambda {
     fun run(): Int {
         var x = 0
-        val threads = (1..10).map {
+        konst threads = (1..10).map {
             object : Runnable {
                 override fun run() {
                     x++

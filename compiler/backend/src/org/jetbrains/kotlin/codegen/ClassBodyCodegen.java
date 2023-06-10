@@ -312,7 +312,7 @@ public abstract class ClassBodyCodegen extends MemberCodegen<KtPureClassOrObject
                         List<ParameterDescriptor> myParameters = getParameters(inheritedFun);
                         List<ParameterDescriptor> toParameters = getParameters(interfaceFun);
                         assert myParameters.size() == toParameters.size() :
-                                "Inconsistent value parameters between delegating fun " + inheritedFun +
+                                "Inconsistent konstue parameters between delegating fun " + inheritedFun +
                                 "and interface fun " + interfaceFun;
 
                         Iterator<ParameterDescriptor> myParametersIterator = myParameters.iterator();
@@ -330,22 +330,22 @@ public abstract class ClassBodyCodegen extends MemberCodegen<KtPureClassOrObject
                         }
 
                         assert toArgI == toArgTypes.length :
-                                "Invalid trait implementation signature: " + signature +
+                                "Inkonstid trait implementation signature: " + signature +
                                 " vs " + defaultImplsMethod + " for " + interfaceFun;
                     }
 
                     private List<ParameterDescriptor> getParameters(FunctionDescriptor functionDescriptor) {
-                        List<ParameterDescriptor> valueParameterDescriptors =
+                        List<ParameterDescriptor> konstueParameterDescriptors =
                                 new ArrayList<>(functionDescriptor.getValueParameters().size() + 1);
 
                         ReceiverParameterDescriptor extensionReceiverParameter = functionDescriptor.getExtensionReceiverParameter();
                         if (extensionReceiverParameter != null) {
-                            valueParameterDescriptors.add(extensionReceiverParameter);
+                            konstueParameterDescriptors.add(extensionReceiverParameter);
                         }
 
-                        valueParameterDescriptors.addAll(functionDescriptor.getValueParameters());
+                        konstueParameterDescriptors.addAll(functionDescriptor.getValueParameters());
 
-                        return valueParameterDescriptors;
+                        return konstueParameterDescriptors;
                     }
                 }
         );

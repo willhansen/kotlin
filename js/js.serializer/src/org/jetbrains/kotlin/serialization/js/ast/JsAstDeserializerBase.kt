@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import java.util.*
 
 abstract class JsAstDeserializerBase {
-    abstract val scope: JsScope
-    protected val stringTable = mutableListOf<String>()
-    protected val nameTable = mutableListOf<JsAstProtoBuf.Name>()
-    protected val nameCache = mutableListOf<JsName?>()
-    protected val fileStack: Deque<String> = ArrayDeque()
+    abstract konst scope: JsScope
+    protected konst stringTable = mutableListOf<String>()
+    protected konst nameTable = mutableListOf<JsAstProtoBuf.Name>()
+    protected konst nameCache = mutableListOf<JsName?>()
+    protected konst fileStack: Deque<String> = ArrayDeque()
 
     protected fun deserialize(proto: JsAstProtoBuf.Statement): JsStatement {
-        val statement = withLocation(
+        konst statement = withLocation(
             fileId = if (proto.hasFileId()) proto.fileId else null,
             location = if (proto.hasLocation()) proto.location else null,
             action = { deserializeNoMetadata(proto) }
@@ -43,22 +43,22 @@ abstract class JsAstDeserializerBase {
 
     protected fun deserializeNoMetadataHelper(proto: JsAstProtoBuf.Statement): JsStatement = when (proto.statementCase) {
         JsAstProtoBuf.Statement.StatementCase.RETURN_STATEMENT -> {
-            val returnProto = proto.returnStatement
-            JsReturn(if (returnProto.hasValue()) deserialize(returnProto.value) else null)
+            konst returnProto = proto.returnStatement
+            JsReturn(if (returnProto.hasValue()) deserialize(returnProto.konstue) else null)
         }
 
         JsAstProtoBuf.Statement.StatementCase.THROW_STATEMENT -> {
-            val throwProto = proto.throwStatement
+            konst throwProto = proto.throwStatement
             JsThrow(deserialize(throwProto.exception))
         }
 
         JsAstProtoBuf.Statement.StatementCase.BREAK_STATEMENT -> {
-            val breakProto = proto.breakStatement
+            konst breakProto = proto.breakStatement
             JsBreak(if (breakProto.hasLabelId()) JsNameRef(deserializeName(breakProto.labelId)) else null)
         }
 
         JsAstProtoBuf.Statement.StatementCase.CONTINUE_STATEMENT -> {
-            val continueProto = proto.continueStatement
+            konst continueProto = proto.continueStatement
             JsContinue(if (continueProto.hasLabelId()) JsNameRef(deserializeName(continueProto.labelId)) else null)
         }
 
@@ -67,7 +67,7 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.EXPRESSION -> {
-            val expressionProto = proto.expression
+            konst expressionProto = proto.expression
             JsExpressionStatement(deserialize(expressionProto.expression)).also {
                 if (expressionProto.hasExportedTagId()) {
                     it.exportedTag = deserializeString(expressionProto.exportedTagId)
@@ -80,8 +80,8 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.BLOCK -> {
-            val blockProto = proto.block
-            val block = JsBlock()
+            konst blockProto = proto.block
+            konst block = JsBlock()
             block.statements += blockProto.statementList.map { deserialize(it) }
             block
         }
@@ -91,12 +91,12 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.LABEL -> {
-            val labelProto = proto.label
+            konst labelProto = proto.label
             JsLabel(deserializeName(labelProto.nameId), deserialize(labelProto.innerStatement))
         }
 
         JsAstProtoBuf.Statement.StatementCase.IF_STATEMENT -> {
-            val ifProto = proto.ifStatement
+            konst ifProto = proto.ifStatement
             JsIf(
                 deserialize(ifProto.condition),
                 deserialize(ifProto.thenStatement),
@@ -105,11 +105,11 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.SWITCH_STATEMENT -> {
-            val switchProto = proto.switchStatement
+            konst switchProto = proto.switchStatement
             JsSwitch(
                 deserialize(switchProto.expression),
                 switchProto.entryList.map { entryProto ->
-                    val member = withLocation(
+                    konst member = withLocation(
                         fileId = if (entryProto.hasFileId()) entryProto.fileId else null,
                         location = if (entryProto.hasLocation()) entryProto.location else null
                     ) {
@@ -126,22 +126,22 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.WHILE_STATEMENT -> {
-            val whileProto = proto.whileStatement
+            konst whileProto = proto.whileStatement
             JsWhile(deserialize(whileProto.condition), deserialize(whileProto.body))
         }
 
         JsAstProtoBuf.Statement.StatementCase.DO_WHILE_STATEMENT -> {
-            val doWhileProto = proto.doWhileStatement
+            konst doWhileProto = proto.doWhileStatement
             JsDoWhile(deserialize(doWhileProto.condition), deserialize(doWhileProto.body))
         }
 
         JsAstProtoBuf.Statement.StatementCase.FOR_STATEMENT -> {
-            val forProto = proto.forStatement
-            val initVars = if (forProto.hasVariables()) deserialize(forProto.variables) as JsVars else null
-            val initExpr = if (forProto.hasExpression()) deserialize(forProto.expression) else null
-            val condition = if (forProto.hasCondition()) deserialize(forProto.condition) else null
-            val increment = if (forProto.hasIncrement()) deserialize(forProto.increment) else null
-            val body = deserialize(forProto.body)
+            konst forProto = proto.forStatement
+            konst initVars = if (forProto.hasVariables()) deserialize(forProto.variables) as JsVars else null
+            konst initExpr = if (forProto.hasExpression()) deserialize(forProto.expression) else null
+            konst condition = if (forProto.hasCondition()) deserialize(forProto.condition) else null
+            konst increment = if (forProto.hasIncrement()) deserialize(forProto.increment) else null
+            konst body = deserialize(forProto.body)
             if (initVars != null) {
                 JsFor(initVars, condition, increment, body)
             } else {
@@ -150,26 +150,26 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Statement.StatementCase.FOR_IN_STATEMENT -> {
-            val forInProto = proto.forInStatement
-            val iterName = if (forInProto.hasNameId()) deserializeName(forInProto.nameId) else null
-            val iterExpr = if (forInProto.hasExpression()) deserialize(forInProto.expression) else null
-            val iterable = deserialize(forInProto.iterable)
-            val body = deserialize(forInProto.body)
+            konst forInProto = proto.forInStatement
+            konst iterName = if (forInProto.hasNameId()) deserializeName(forInProto.nameId) else null
+            konst iterExpr = if (forInProto.hasExpression()) deserialize(forInProto.expression) else null
+            konst iterable = deserialize(forInProto.iterable)
+            konst body = deserialize(forInProto.body)
             JsForIn(iterName, iterExpr, iterable, body)
         }
 
         JsAstProtoBuf.Statement.StatementCase.TRY_STATEMENT -> {
-            val tryProto = proto.tryStatement
-            val tryBlock = deserialize(tryProto.tryBlock) as JsBlock
-            val catchBlock = if (tryProto.hasCatchBlock()) {
-                val catchProto = tryProto.catchBlock
+            konst tryProto = proto.tryStatement
+            konst tryBlock = deserialize(tryProto.tryBlock) as JsBlock
+            konst catchBlock = if (tryProto.hasCatchBlock()) {
+                konst catchProto = tryProto.catchBlock
                 JsCatch(deserializeName(catchProto.parameter.nameId)).apply {
                     body = deserialize(catchProto.body) as JsBlock
                 }
             } else {
                 null
             }
-            val finallyBlock = if (tryProto.hasFinallyBlock()) deserialize(tryProto.finallyBlock) as JsBlock else null
+            konst finallyBlock = if (tryProto.hasFinallyBlock()) deserialize(tryProto.finallyBlock) as JsBlock else null
             JsTry(tryBlock, catchBlock, finallyBlock)
         }
 
@@ -184,7 +184,7 @@ abstract class JsAstDeserializerBase {
     }
 
     protected fun deserialize(proto: JsAstProtoBuf.Expression): JsExpression {
-        val expression = withLocation(
+        konst expression = withLocation(
             fileId = if (proto.hasFileId()) proto.fileId else null,
             location = if (proto.hasLocation()) proto.location else null,
             action = { deserializeNoMetadata(proto) }
@@ -229,7 +229,7 @@ abstract class JsAstDeserializerBase {
         JsAstProtoBuf.Expression.ExpressionCase.SIMPLE_NAME_REFERENCE -> JsNameRef(deserializeName(proto.simpleNameReference))
 
         JsAstProtoBuf.Expression.ExpressionCase.REG_EXP_LITERAL -> {
-            val regExpProto = proto.regExpLiteral
+            konst regExpProto = proto.regExpLiteral
             JsRegExp().apply {
                 pattern = deserializeString(regExpProto.patternStringId)
                 if (regExpProto.hasFlagsStringId()) {
@@ -239,22 +239,22 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.ARRAY_LITERAL -> {
-            val arrayProto = proto.arrayLiteral
+            konst arrayProto = proto.arrayLiteral
             JsArrayLiteral(arrayProto.elementList.map { deserialize(it) })
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.OBJECT_LITERAL -> {
-            val objectProto = proto.objectLiteral
+            konst objectProto = proto.objectLiteral
             JsObjectLiteral(
                 objectProto.entryList.map { entryProto ->
-                    JsPropertyInitializer(deserialize(entryProto.key), deserialize(entryProto.value))
+                    JsPropertyInitializer(deserialize(entryProto.key), deserialize(entryProto.konstue))
                 },
                 objectProto.multiline
             )
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.CLASS -> {
-            val classProto = proto.class_
+            konst classProto = proto.class_
             JsClass(
                 runIf(classProto.hasNameId()) { deserializeName(classProto.nameId) },
                 runIf(classProto.hasSuperExpression()) { deserialize(classProto.superExpression) as JsNameRef },
@@ -268,32 +268,32 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.DOC_COMMENT -> {
-            val docCommentProto = proto.docComment
+            konst docCommentProto = proto.docComment
             JsDocComment(docCommentProto.tagList.associate { tagProto ->
-                val name = deserializeString(tagProto.nameId)
-                val value: Any = if (tagProto.hasExpression()) {
+                konst name = deserializeString(tagProto.nameId)
+                konst konstue: Any = if (tagProto.hasExpression()) {
                     deserialize(tagProto.expression)
                 } else {
-                    deserializeString(tagProto.valueStringId)
+                    deserializeString(tagProto.konstueStringId)
                 }
-                name to value
+                name to konstue
             })
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.BINARY -> {
-            val binaryProto = proto.binary
+            konst binaryProto = proto.binary
             JsBinaryOperation(map(binaryProto.type), deserialize(binaryProto.left), deserialize(binaryProto.right))
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.UNARY -> {
-            val unaryProto = proto.unary
-            val type = map(unaryProto.type)
-            val operand = deserialize(unaryProto.operand)
+            konst unaryProto = proto.unary
+            konst type = map(unaryProto.type)
+            konst operand = deserialize(unaryProto.operand)
             if (unaryProto.postfix) JsPostfixOperation(type, operand) else JsPrefixOperation(type, operand)
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.CONDITIONAL -> {
-            val conditionalProto = proto.conditional
+            konst conditionalProto = proto.conditional
             JsConditional(
                 deserialize(conditionalProto.testExpression),
                 deserialize(conditionalProto.thenExpression),
@@ -302,13 +302,13 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.ARRAY_ACCESS -> {
-            val arrayAccessProto = proto.arrayAccess
+            konst arrayAccessProto = proto.arrayAccess
             JsArrayAccess(deserialize(arrayAccessProto.array), deserialize(arrayAccessProto.index))
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.NAME_REFERENCE -> {
-            val nameRefProto = proto.nameReference
-            val qualifier = if (nameRefProto.hasQualifier()) deserialize(nameRefProto.qualifier) else null
+            konst nameRefProto = proto.nameReference
+            konst qualifier = if (nameRefProto.hasQualifier()) deserialize(nameRefProto.qualifier) else null
             JsNameRef(deserializeName(nameRefProto.nameId), qualifier).apply {
                 if (nameRefProto.hasInlineStrategy()) {
                     isInline = map(nameRefProto.inlineStrategy)
@@ -317,8 +317,8 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.PROPERTY_REFERENCE -> {
-            val propertyRefProto = proto.propertyReference
-            val qualifier = if (propertyRefProto.hasQualifier()) deserialize(propertyRefProto.qualifier) else null
+            konst propertyRefProto = proto.propertyReference
+            konst qualifier = if (propertyRefProto.hasQualifier()) deserialize(propertyRefProto.qualifier) else null
             JsNameRef(deserializeString(propertyRefProto.stringId), qualifier).apply {
                 if (propertyRefProto.hasInlineStrategy()) {
                     isInline = map(propertyRefProto.inlineStrategy)
@@ -327,7 +327,7 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.INVOCATION -> {
-            val invocationProto = proto.invocation
+            konst invocationProto = proto.invocation
             JsInvocation(
                 deserialize(invocationProto.qualifier),
                 invocationProto.argumentList.map { deserialize(it) }
@@ -339,7 +339,7 @@ abstract class JsAstDeserializerBase {
         }
 
         JsAstProtoBuf.Expression.ExpressionCase.INSTANTIATION -> {
-            val instantiationProto = proto.instantiation
+            konst instantiationProto = proto.instantiation
             JsNew(
                 deserialize(instantiationProto.qualifier),
                 instantiationProto.argumentList.map { deserialize(it) }
@@ -362,13 +362,13 @@ abstract class JsAstDeserializerBase {
     }
 
     protected fun deserializeVars(proto: JsAstProtoBuf.Vars): JsVars {
-        val vars = JsVars(proto.multiline)
+        konst vars = JsVars(proto.multiline)
         for (declProto in proto.declarationList) {
             vars.vars += withLocation(
                 fileId = if (declProto.hasFileId()) declProto.fileId else null,
                 location = if (declProto.hasLocation()) declProto.location else null
             ) {
-                val initialValue = if (declProto.hasInitialValue()) deserialize(declProto.initialValue) else null
+                konst initialValue = if (declProto.hasInitialValue()) deserialize(declProto.initialValue) else null
                 JsVars.JsVar(deserializeName(declProto.nameId), initialValue)
             }
         }
@@ -391,9 +391,9 @@ abstract class JsAstDeserializerBase {
 
     protected fun deserializeName(id: Int): JsName {
         return nameCache[id] ?: let {
-            val nameProto = nameTable[id]
-            val identifier = deserializeString(nameProto.identifier)
-            val name = if (nameProto.temporary) {
+            konst nameProto = nameTable[id]
+            konst identifier = deserializeString(nameProto.identifier)
+            konst name = if (nameProto.temporary) {
                 JsScope.declareTemporaryName(identifier)
             } else {
                 JsDynamicScope.declareName(identifier)
@@ -503,19 +503,19 @@ abstract class JsAstDeserializerBase {
     }
 
     protected fun <T : JsNode> withLocation(fileId: Int?, location: JsAstProtoBuf.Location?, action: () -> T): T {
-        val deserializedFile = fileId?.let { deserializeString(it) }
-        val file = deserializedFile ?: fileStack.peek()
-        val deserializedLocation = if (file != null && location != null) {
+        konst deserializedFile = fileId?.let { deserializeString(it) }
+        konst file = deserializedFile ?: fileStack.peek()
+        konst deserializedLocation = if (file != null && location != null) {
             JsLocation(file, location.startLine, location.startChar)
         } else {
             null
         }
 
-        val shouldUpdateFile = location != null && deserializedFile != null && deserializedFile != fileStack.peek()
+        konst shouldUpdateFile = location != null && deserializedFile != null && deserializedFile != fileStack.peek()
         if (shouldUpdateFile) {
             fileStack.push(deserializedFile)
         }
-        val node = action()
+        konst node = action()
         if (deserializedLocation != null) {
             node.source = embedSources(deserializedLocation, file) ?: deserializedLocation
         }

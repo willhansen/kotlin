@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.load.java
 import org.jetbrains.kotlin.load.java.typeEnhancement.NullabilityQualifierWithMigrationStatus
 
 data class NullabilityQualifierWithApplicability(
-    val nullabilityQualifier: NullabilityQualifierWithMigrationStatus,
-    val qualifierApplicabilityTypes: Collection<AnnotationQualifierApplicabilityType>
+    konst nullabilityQualifier: NullabilityQualifierWithMigrationStatus,
+    konst qualifierApplicabilityTypes: Collection<AnnotationQualifierApplicabilityType>
 )

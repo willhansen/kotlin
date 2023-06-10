@@ -27,7 +27,7 @@ object CachedClasspathSnapshotSerializer {
     // example, if the transform is incremental, the above case may happen (the output directory of an incremental transform is unchanged
     // even though its inputs/outputs have changed). Potential solutions: Write the file's content hash in the file's name or to another
     // file next to it, or check that its timestamp and size haven't changed (we'll need to deal with directories too).
-    private val cache = InMemoryCacheWithEviction<File, ClasspathEntrySnapshot>(
+    private konst cache = InMemoryCacheWithEviction<File, ClasspathEntrySnapshot>(
         maxTimePeriodsToKeepStrongReferences = 20,
         maxTimePeriodsToKeepSoftReferences = 1000,
         maxMemoryUsageRatioToKeepStrongReferences = 0.8
@@ -37,7 +37,7 @@ object CachedClasspathSnapshotSerializer {
         cache.newTimePeriod()
 
         var cacheMisses = 0L
-        val classpathSnapshot = ClasspathSnapshot(classpathEntrySnapshotFiles.map { snapshotFile ->
+        konst classpathSnapshot = ClasspathSnapshot(classpathEntrySnapshotFiles.map { snapshotFile ->
             cache.computeIfAbsent(snapshotFile) {
                 cacheMisses++
                 ClasspathEntrySnapshotExternalizer.loadFromFile(it)
@@ -233,9 +233,9 @@ internal object JavaClassMemberLevelSnapshotExternalizer : DataExternalizer<Java
 
 private object JavaElementSnapshotExternalizer : DataExternalizer<JavaElementSnapshot> {
 
-    override fun save(output: DataOutput, value: JavaElementSnapshot) {
-        StringExternalizer.save(output, value.name)
-        LongExternalizer.save(output, value.abiHash)
+    override fun save(output: DataOutput, konstue: JavaElementSnapshot) {
+        StringExternalizer.save(output, konstue.name)
+        LongExternalizer.save(output, konstue.abiHash)
     }
 
     override fun read(input: DataInput): JavaElementSnapshot {
@@ -272,7 +272,7 @@ private object ClassIdExternalizerWithInterning : DataExternalizer<ClassId> by C
 
 private object FqNameExternalizerWithInterning : DataExternalizer<FqName> by FqNameExternalizer {
 
-    private val fqNameInterner by lazy { Interner.createWeakInterner<FqName>() }
+    private konst fqNameInterner by lazy { Interner.createWeakInterner<FqName>() }
 
     override fun read(input: DataInput): FqName {
         return fqNameInterner.intern(FqNameExternalizer.read(input))
@@ -281,7 +281,7 @@ private object FqNameExternalizerWithInterning : DataExternalizer<FqName> by FqN
 
 private object JvmClassNameExternalizerWithInterning : DataExternalizer<JvmClassName> by JvmClassNameExternalizer {
 
-    private val jvmClassNameInterner by lazy { Interner.createWeakInterner<JvmClassName>() }
+    private konst jvmClassNameInterner by lazy { Interner.createWeakInterner<JvmClassName>() }
 
     override fun read(input: DataInput): JvmClassName {
         return jvmClassNameInterner.intern(JvmClassNameExternalizer.read(input))

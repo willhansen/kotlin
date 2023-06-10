@@ -14,10 +14,10 @@ public class J {
 
 fun test() {
     // @NotNull platform type
-    val platformNN = J.staticNN
+    konst platformNN = J.staticNN
 
     foo(platformNN<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)
-    val bar = Bar()
+    konst bar = Bar()
     bar(platformNN<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)
 }
 

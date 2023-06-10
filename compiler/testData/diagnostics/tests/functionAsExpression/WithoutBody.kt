@@ -1,7 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 annotation class ann
-val bas = <!NON_MEMBER_FUNCTION_NO_BODY!>fun ()<!>
+konst bas = <!NON_MEMBER_FUNCTION_NO_BODY!>fun ()<!>
 
 fun bar(a: Any) = <!NON_MEMBER_FUNCTION_NO_BODY!>fun ()<!>
 

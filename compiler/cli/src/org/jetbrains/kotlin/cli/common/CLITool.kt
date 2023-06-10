@@ -20,7 +20,7 @@ import org.fusesource.jansi.AnsiConsole
 import org.jetbrains.kotlin.cli.common.arguments.CommonToolArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArguments
 import org.jetbrains.kotlin.cli.common.arguments.parseCommandLineArgumentsFromEnvironment
-import org.jetbrains.kotlin.cli.common.arguments.validateArguments
+import org.jetbrains.kotlin.cli.common.arguments.konstidateArguments
 import org.jetbrains.kotlin.cli.common.messages.*
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity.INFO
 import org.jetbrains.kotlin.cli.jvm.compiler.CompileEnvironmentException
@@ -48,14 +48,14 @@ abstract class CLITool<A : CommonToolArguments> {
         messageRenderer: MessageRenderer,
         args: Array<out String>
     ): ExitCode {
-        val arguments = createArguments()
+        konst arguments = createArguments()
         parseCommandLineArguments(args.asList(), arguments)
 
         if (isReadingSettingsFromEnvironmentAllowed) {
             parseCommandLineArgumentsFromEnvironment(arguments)
         }
 
-        val collector = PrintingMessageCollector(errStream, messageRenderer, arguments.verbose)
+        konst collector = PrintingMessageCollector(errStream, messageRenderer, arguments.verbose)
 
         try {
             if (messageRenderer is PlainTextMessageRenderer) {
@@ -64,7 +64,7 @@ abstract class CLITool<A : CommonToolArguments> {
 
             errStream.print(messageRenderer.renderPreamble())
 
-            val errorMessage = validateArguments(arguments.errors)
+            konst errorMessage = konstidateArguments(arguments.errors)
             if (errorMessage != null) {
                 collector.report(CompilerMessageSeverity.ERROR, errorMessage, null)
                 collector.report(INFO, "Use -help for more information", null)
@@ -91,7 +91,7 @@ abstract class CLITool<A : CommonToolArguments> {
 
         printVersionIfNeeded(messageCollector, arguments)
 
-        val fixedMessageCollector = if (arguments.suppressWarnings && !arguments.allWarningsAsErrors) {
+        konst fixedMessageCollector = if (arguments.suppressWarnings && !arguments.allWarningsAsErrors) {
             FilteringMessageCollector(messageCollector, Predicate.isEqual(CompilerMessageSeverity.WARNING))
         } else {
             messageCollector
@@ -119,7 +119,7 @@ abstract class CLITool<A : CommonToolArguments> {
     // Used in kotlin-maven-plugin (KotlinCompileMojoBase) and in kotlin-gradle-plugin (KotlinJvmOptionsImpl, KotlinJsOptionsImpl)
     fun parseArguments(args: Array<out String>, arguments: A) {
         parseCommandLineArguments(args.asList(), arguments)
-        val message = validateArguments(arguments.errors)
+        konst message = konstidateArguments(arguments.errors)
         if (message != null) {
             throw IllegalArgumentException(message)
         }
@@ -127,7 +127,7 @@ abstract class CLITool<A : CommonToolArguments> {
 
     private fun <A : CommonToolArguments> printVersionIfNeeded(messageCollector: MessageCollector, arguments: A) {
         if (arguments.version) {
-            val jreVersion = System.getProperty("java.runtime.version")
+            konst jreVersion = System.getProperty("java.runtime.version")
             messageCollector.report(INFO, "${executableScriptFileName()} ${KotlinCompilerVersion.VERSION} (JRE $jreVersion)")
         }
     }
@@ -158,13 +158,13 @@ abstract class CLITool<A : CommonToolArguments> {
             if (System.getProperty("java.awt.headless") == null) {
                 System.setProperty("java.awt.headless", "true")
             }
-            if (CompilerSystemProperties.KOTLIN_COLORS_ENABLED_PROPERTY.value == null) {
-                CompilerSystemProperties.KOTLIN_COLORS_ENABLED_PROPERTY.value = "true"
+            if (CompilerSystemProperties.KOTLIN_COLORS_ENABLED_PROPERTY.konstue == null) {
+                CompilerSystemProperties.KOTLIN_COLORS_ENABLED_PROPERTY.konstue = "true"
             }
 
             setupIdeaStandaloneExecution()
 
-            val exitCode = doMainNoExit(compiler, args)
+            konst exitCode = doMainNoExit(compiler, args)
             if (exitCode != ExitCode.OK) {
                 exitProcess(exitCode.code)
             }

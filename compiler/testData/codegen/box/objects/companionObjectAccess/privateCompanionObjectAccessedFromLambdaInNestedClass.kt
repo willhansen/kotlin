@@ -1,14 +1,14 @@
 // !LANGUAGE: +ProperVisibilityForCompanionObjectInstanceField
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class Outer {
     private companion object {
-        val result = "OK"
+        konst result = "OK"
     }
 
     class Nested {
-        fun foo() = eval { result }
+        fun foo() = ekonst { result }
     }
 
     fun test() = Nested().foo()

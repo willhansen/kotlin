@@ -22,19 +22,19 @@ fun captureLocalVariableReadWrite(): Int {
     }
 }
 
-val thirteen = 13
+konst thirteen = 13
 
 // CHECK_CONTAINS_NO_CALLS: captureGlobalVariable except=myWith
 // HAS_NO_CAPTURED_VARS: function=captureGlobalVariable except=myWith;captureGlobalVariable$lambda
 fun captureGlobalVariable() = myWith(2) { thirteen * it }
 
-class A(val i: Int) {
+class A(konst i: Int) {
 
     fun captureClassField() = myWith(100) { it + i }
 
-    inner class B(val j: Int) {
+    inner class B(konst j: Int) {
 
-        inner class C(val k: Int) {
+        inner class C(konst k: Int) {
             fun captureInnerClassField() = myWith(200) { it + i + j + k }
 
             fun unusedLambda() {
@@ -46,7 +46,7 @@ class A(val i: Int) {
 
 fun A.captureClassFieldInExtension() = myWith(300) { it + i }
 
-class D(val l: Int) {
+class D(konst l: Int) {
     fun A.captureClassFieldInMemberExtension() = myWith(400) { it + i + l }
 
     fun captureClassFieldInMemberExtension(a: A) = a.captureClassFieldInMemberExtension()

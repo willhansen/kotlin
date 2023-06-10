@@ -10,17 +10,17 @@ class B : A {
 }
 
 fun test1() {
-    val b = B()
+    konst b = B()
     (b as A).foo()
 }
 
 fun test2() {
-    val b = getB()
+    konst b = getB()
     (b as A).foo()
 }
 
 fun test3() {
-    val b = getB()
+    konst b = getB()
     b.foo()
 }
 

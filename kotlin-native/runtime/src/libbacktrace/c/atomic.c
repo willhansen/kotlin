@@ -86,7 +86,7 @@ backtrace_atomic_store_pointer (void *arg, void *p)
     old = *pp;
 }
 
-/* Do an atomic store of a size_t value.  */
+/* Do an atomic store of a size_t konstue.  */
 
 void
 backtrace_atomic_store_size_t (size_t *p, size_t v)
@@ -98,7 +98,7 @@ backtrace_atomic_store_size_t (size_t *p, size_t v)
     old = *p;
 }
 
-/* Do an atomic store of a int value.  */
+/* Do an atomic store of a int konstue.  */
 
 void
 backtrace_atomic_store_int (int *p, int v)

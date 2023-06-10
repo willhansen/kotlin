@@ -2,11 +2,11 @@ plugins {
     `java-base`
 }
 
-val compilerClasspath = configurations.create("compilerClasspath") {
+konst compilerClasspath = configurations.create("compilerClasspath") {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
-val scriptsClasspath = configurations.create("scriptsClasspath") {
+konst scriptsClasspath = configurations.create("scriptsClasspath") {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
@@ -20,20 +20,20 @@ dependencies {
     scriptsClasspath.name(kotlinStdlib())
 }
 
-val service = project.extensions.getByType<JavaToolchainService>()
+konst service = project.extensions.getByType<JavaToolchainService>()
 
 abstract class ScriptArgumentProvider @Inject constructor(
     layout: ProjectLayout,
-    private val releaseKotlinVersion: String
+    private konst releaseKotlinVersion: String
 ) : CommandLineArgumentProvider {
     @get:Classpath
-    abstract val scriptClasspath: ConfigurableFileCollection
+    abstract konst scriptClasspath: ConfigurableFileCollection
 
     @get:Input
-    abstract val script: Property<String>
+    abstract konst script: Property<String>
 
     @get:OutputDirectory
-    val scriptOutputDirectories: Provider<Directory> = layout.buildDirectory.dir("benchmark-script")
+    konst scriptOutputDirectories: Provider<Directory> = layout.buildDirectory.dir("benchmark-script")
 
     override fun asArguments(): Iterable<String> {
         return listOf(
@@ -66,7 +66,7 @@ fun addBenchmarkTask(
         classpath = compilerClasspath
         mainClass.set("org.jetbrains.kotlin.cli.jvm.K2JVMCompiler")
 
-        val scriptArgs = objects.newInstance<ScriptArgumentProvider>(version)
+        konst scriptArgs = objects.newInstance<ScriptArgumentProvider>(version)
         scriptArgs.script.set(script)
         scriptArgs.scriptClasspath.from(scriptsClasspath)
         argumentProviders.add(scriptArgs)
@@ -74,7 +74,7 @@ fun addBenchmarkTask(
     }
 }
 
-val acceptAndroidSdkLicenses = tasks.register("acceptAndroidSdkLicenses") {
+konst acceptAndroidSdkLicenses = tasks.register("acceptAndroidSdkLicenses") {
     useAndroidSdk()
     doLast { acceptAndroidSdkLicenses() }
 }

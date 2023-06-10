@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.js.backend.ast.metadata.specialFunction
 
 // Replaces getKClass(<Primive class constructor>) with PrimitiveClasses.<primitive class KClass>
 fun emergePrimitiveKClass(root: JsNode) {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(invocation: JsInvocation, ctx: JsContext<in JsNode>) {
-            val qualifier = invocation.qualifier as? JsNameRef ?: return
+            konst qualifier = invocation.qualifier as? JsNameRef ?: return
             if (qualifier.name?.specialFunction != SpecialFunction.GET_KCLASS) return
 
-            val firstArg = invocation.arguments.firstOrNull() as? JsNameRef ?: return
+            konst firstArg = invocation.arguments.firstOrNull() as? JsNameRef ?: return
             firstArg.primitiveKClass?.let {
                 ctx.replaceMe(it)
             }

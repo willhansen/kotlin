@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.test.services
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.library.KotlinLibrary
 
-class JsLibraryProvider(private val testServices: TestServices) : TestService {
-    private val descriptorToLibrary = mutableMapOf<ModuleDescriptor, KotlinLibrary>()
-    private val stdlibPathToDescriptor = mutableMapOf<String, ModuleDescriptor>()
+class JsLibraryProvider(private konst testServices: TestServices) : TestService {
+    private konst descriptorToLibrary = mutableMapOf<ModuleDescriptor, KotlinLibrary>()
+    private konst stdlibPathToDescriptor = mutableMapOf<String, ModuleDescriptor>()
 
     fun getDescriptorByPath(path: String): ModuleDescriptor {
         return stdlibPathToDescriptor[path] ?: testServices.assertions.fail {
@@ -30,7 +30,7 @@ class JsLibraryProvider(private val testServices: TestServices) : TestService {
     }
 
     fun getPathByDescriptor(descriptor: ModuleDescriptor): String {
-        return stdlibPathToDescriptor.entries.single { it.value == descriptor }.key
+        return stdlibPathToDescriptor.entries.single { it.konstue == descriptor }.key
     }
 
     fun getDescriptorByCompiledLibrary(library: KotlinLibrary): ModuleDescriptor {
@@ -49,4 +49,4 @@ class JsLibraryProvider(private val testServices: TestServices) : TestService {
     }
 }
 
-val TestServices.jsLibraryProvider: JsLibraryProvider by TestServices.testServiceAccessor()
+konst TestServices.jsLibraryProvider: JsLibraryProvider by TestServices.testServiceAccessor()

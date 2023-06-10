@@ -14,16 +14,16 @@ import org.junit.runners.Parameterized
 import java.io.File
 
 @RunWith(Parameterized::class)
-class KotlinpCompilerTestDataTest(private val file: File) {
+class KotlinpCompilerTestDataTest(private konst file: File) {
     private class TestDisposable : Disposable {
         override fun dispose() {}
     }
 
     @Test
     fun doTest() {
-        val tmpdir = KtTestUtil.tmpDirForTest(this::class.java.simpleName, file.nameWithoutExtension)
+        konst tmpdir = KtTestUtil.tmpDirForTest(this::class.java.simpleName, file.nameWithoutExtension)
 
-        val disposable = TestDisposable()
+        konst disposable = TestDisposable()
         try {
             compileAndPrintAllFiles(file, disposable, tmpdir, compareWithTxt = false, readWriteAndCompare = true, useK2 = false)
         } finally {
@@ -35,7 +35,7 @@ class KotlinpCompilerTestDataTest(private val file: File) {
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun computeTestDataFiles(): Collection<Array<*>> {
-            val baseDirs = listOf(
+            konst baseDirs = listOf(
                 "compiler/testData/loadJava/compiledKotlin",
                 "compiler/testData/loadJava/compiledKotlinWithStdlib",
                 "compiler/testData/serialization/builtinsSerializer"

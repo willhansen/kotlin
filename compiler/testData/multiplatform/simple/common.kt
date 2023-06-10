@@ -3,6 +3,6 @@ expect class Printer() {
 }
 
 fun main() {
-    val printer = Printer()
+    konst printer = Printer()
     printer.print("Hello, world!")
 }

@@ -7,6 +7,6 @@ package kotlin.jvm.internal
 
 import java.io.Serializable
 
-abstract class Lambda<out R>(override val arity: Int) : FunctionBase<R>, Serializable {
+abstract class Lambda<out R>(override konst arity: Int) : FunctionBase<R>, Serializable {
     override fun toString(): String = Reflection.renderLambdaToString(this)
 }

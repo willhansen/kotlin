@@ -17,24 +17,24 @@ enum class KotlinJsCompilerType {
     BOTH;
 
     companion object {
-        const val jsCompilerProperty = "kotlin.js.compiler"
+        const konst jsCompilerProperty = "kotlin.js.compiler"
 
         fun byArgumentOrNull(argument: String): KotlinJsCompilerType? =
-            values().firstOrNull { it.name.equals(argument, ignoreCase = true) }
+            konstues().firstOrNull { it.name.equals(argument, ignoreCase = true) }
 
         fun byArgument(argument: String): KotlinJsCompilerType =
             byArgumentOrNull(argument)
                 ?: throw IllegalArgumentException(
-                    "Unable to find $argument setting. Use [${values().toList().joinToString()}]"
+                    "Unable to find $argument setting. Use [${konstues().toList().joinToString()}]"
                 )
     }
 }
 
-val KotlinJsCompilerType.lowerName
+konst KotlinJsCompilerType.lowerName
     get() = name.toLowerCase(Locale.ENGLISH)
 
 fun String.removeJsCompilerSuffix(compilerType: KotlinJsCompilerType): String {
-    val truncatedString = removeSuffix(compilerType.lowerName)
+    konst truncatedString = removeSuffix(compilerType.lowerName)
     if (this != truncatedString) {
         return truncatedString
     }

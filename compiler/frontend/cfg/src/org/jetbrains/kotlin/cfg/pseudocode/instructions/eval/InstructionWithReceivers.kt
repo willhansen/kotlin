@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.cfg.pseudocode.instructions.eval
+package org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst
 
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.Instruction
 import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 interface InstructionWithReceivers : Instruction {
-    val receiverValues: Map<PseudoValue, ReceiverValue>
+    konst receiverValues: Map<PseudoValue, ReceiverValue>
 }

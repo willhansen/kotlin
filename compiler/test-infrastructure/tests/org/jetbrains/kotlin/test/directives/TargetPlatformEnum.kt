@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
 import org.jetbrains.kotlin.platform.konan.NativePlatformUnspecifiedTarget
 import org.jetbrains.kotlin.platform.konan.NativePlatforms
 
-enum class TargetPlatformEnum(val targetPlatform: TargetPlatform) {
+enum class TargetPlatformEnum(konst targetPlatform: TargetPlatform) {
     Common(
         TargetPlatform(
             setOf(

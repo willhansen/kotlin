@@ -2,7 +2,7 @@
 package outer
 
 fun Int?.optint() : Unit {}
-val Int?.optval : Unit get() = Unit
+konst Int?.optkonst : Unit get() = Unit
 
 fun <T: Any, E> T.foo(x : E, y : A) : T   {
   y.plus(1)
@@ -31,12 +31,12 @@ operator fun A.plus(a : Int) {
 operator fun <T> T.minus(t : T) : Int = 1
 
 fun test() {
-  val y = 1.abs
+  konst y = 1.abs
 }
-val Int.abs : Int
+konst Int.abs : Int
   get() = if (this > 0) this else -this;
 
-<!EXTENSION_PROPERTY_MUST_HAVE_ACCESSORS_OR_BE_ABSTRACT!>val <T> T.foo : T<!>
+<!EXTENSION_PROPERTY_MUST_HAVE_ACCESSORS_OR_BE_ABSTRACT!>konst <T> T.foo : T<!>
 
 fun Int.foo() = this
 
@@ -48,7 +48,7 @@ import outer.*
         fun parse(cmd: String): Command? { return null  }
         class Command() {
         //  fun equals(other : Any?) : Boolean
-          val foo : Int = 0
+          konst foo : Int = 0
         }
 
         fun Any.equals(other : Any?) : Boolean = true
@@ -59,7 +59,7 @@ import outer.*
 
             System.out.print(1)
 
-            val command = parse("")
+            konst command = parse("")
 
             command.foo
 
@@ -68,7 +68,7 @@ import outer.*
             command.equals1(null)
             command?.equals1(null)
 
-            val c = Command()
+            konst c = Command()
             c<!UNNECESSARY_SAFE_CALL!>?.<!>equals2(null)
 
             if (command == null) 1

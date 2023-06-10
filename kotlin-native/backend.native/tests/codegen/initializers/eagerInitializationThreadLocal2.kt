@@ -16,13 +16,13 @@ import kotlin.test.*
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
 @ThreadLocal
-val x = run { z1 = true; 42 }
+konst x = run { z1 = true; 42 }
 
 // Won't be initialized (cause no function from the file will be called during [x] initialization).
-val y1 = run { z2 = true; 117 }
+konst y1 = run { z2 = true; 117 }
 
 @ThreadLocal
-val y2 = run { z3 = true; 117 }
+konst y2 = run { z3 = true; 117 }
 
 // FILE: main.kt
 import kotlin.test.*

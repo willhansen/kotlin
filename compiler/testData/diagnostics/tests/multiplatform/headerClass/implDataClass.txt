@@ -10,7 +10,7 @@ public final expect class Bar {
 
 public final expect class Baz {
     public constructor Baz(/*0*/ w: kotlin.collections.List<kotlin.String>)
-    public expect final val w: kotlin.collections.List<kotlin.String>
+    public expect final konst w: kotlin.collections.List<kotlin.String>
     public final expect operator fun component1(): kotlin.collections.List<kotlin.String>
     public open expect override /*1*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open expect override /*1*/ fun hashCode(): kotlin.Int
@@ -19,8 +19,8 @@ public final expect class Baz {
 
 public final expect class Foo {
     public constructor Foo(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.String)
-    public expect final val x: kotlin.Int
-    public expect final val y: kotlin.String
+    public expect final konst x: kotlin.Int
+    public expect final konst y: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -31,7 +31,7 @@ package
 
 public final actual data class Bar {
     public constructor Bar(/*0*/ z: kotlin.Double)
-    public final val z: kotlin.Double
+    public final konst z: kotlin.Double
     public final operator /*synthesized*/ fun component1(): kotlin.Double
     public final /*synthesized*/ fun copy(/*0*/ z: kotlin.Double = ...): Bar
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -41,7 +41,7 @@ public final actual data class Bar {
 
 public final actual data class Baz {
     public constructor Baz(/*0*/ w: kotlin.collections.List<kotlin.String>)
-    public actual final val w: kotlin.collections.List<kotlin.String>
+    public actual final konst w: kotlin.collections.List<kotlin.String>
     public final operator /*synthesized*/ fun component1(): kotlin.collections.List<kotlin.String>
     public final /*synthesized*/ fun copy(/*0*/ w: kotlin.collections.List<kotlin.String> = ...): Baz
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -51,8 +51,8 @@ public final actual data class Baz {
 
 public final actual data class Foo {
     public constructor Foo(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.String)
-    public actual final val x: kotlin.Int
-    public actual final val y: kotlin.String
+    public actual final konst x: kotlin.Int
+    public actual final konst y: kotlin.String
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): kotlin.String
     public final /*synthesized*/ fun copy(/*0*/ x: kotlin.Int = ..., /*1*/ y: kotlin.String = ...): Foo

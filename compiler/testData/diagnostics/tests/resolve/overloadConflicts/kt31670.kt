@@ -1,13 +1,13 @@
 // FIR_IDENTICAL
 
-open class A<T>(val value: T)
-class B<T>(value: T) : A<T>(value)
+open class A<T>(konst konstue: T)
+class B<T>(konstue: T) : A<T>(konstue)
 
 fun <T> A<T>.foo(block: (T?) -> Unit) {
-    block(value)
+    block(konstue)
 }
 fun <T> B<T>.foo(block: (T) -> Unit) {
-    block(value)
+    block(konstue)
 }
 
 fun main() {

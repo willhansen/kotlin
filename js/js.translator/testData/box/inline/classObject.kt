@@ -32,7 +32,7 @@ fun testClassObjectCall(): String {
 // CHECK_BREAKS_COUNT: function=testInstanceCall count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=testInstanceCall name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun testInstanceCall(): String {
-    val inlineX = InlineAll()
+    konst inlineX = InlineAll()
     return inlineX.inline({"instance"})
 }
 

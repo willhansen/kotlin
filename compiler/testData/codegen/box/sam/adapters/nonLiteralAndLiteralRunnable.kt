@@ -14,7 +14,7 @@ class JavaClass {
 
 fun box(): String {
     var v = "FAIL"
-    val f = { v = "O" }
+    konst f = { v = "O" }
     JavaClass.run(f, { v += "K" })
     return v
 }

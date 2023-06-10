@@ -10,11 +10,11 @@ internal class SpecialCasingLine(properties: List<String>) {
         require(properties.size in 5..6)
     }
 
-    val char: String = properties[0]
-    val lowercaseMapping: List<String> = properties[1].split(" ")
-    val titlecaseMapping: List<String> = properties[2].split(" ")
-    val uppercaseMapping: List<String> = properties[3].split(" ")
-    val conditionList: List<String> = if (properties.size == 6) properties[4].split(" ") else emptyList()
+    konst char: String = properties[0]
+    konst lowercaseMapping: List<String> = properties[1].split(" ")
+    konst titlecaseMapping: List<String> = properties[2].split(" ")
+    konst uppercaseMapping: List<String> = properties[3].split(" ")
+    konst conditionList: List<String> = if (properties.size == 6) properties[4].split(" ") else emptyList()
 
     override fun toString(): String {
         return "SpecialCasingLine{char=$char" +

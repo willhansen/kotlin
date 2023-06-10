@@ -10,7 +10,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val f = B::foo
+    konst f = B::foo
 
     assert("ab" == f.callBy(mapOf(
         f.parameters.first() to B(),

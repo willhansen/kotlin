@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.fir.types.FirResolvedTypeRef
 import org.jetbrains.kotlin.fir.types.builder.buildErrorTypeRef
 
 object ReturnTypeCalculatorForFullBodyResolve : ReturnTypeCalculator() {
-    override val fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
+    override konst fakeOverrideTypeCalculator: FakeOverrideTypeCalculator
         get() = FakeOverrideTypeCalculator.Forced
 
     override fun tryCalculateReturnTypeOrNull(declaration: FirCallableDeclaration): FirResolvedTypeRef? {
-        val returnTypeRef = declaration.returnTypeRef
+        konst returnTypeRef = declaration.returnTypeRef
         if (returnTypeRef is FirResolvedTypeRef) return returnTypeRef
         if (declaration.origin.fromSupertypes) {
             return FakeOverrideTypeCalculator.Forced.computeReturnType(declaration)

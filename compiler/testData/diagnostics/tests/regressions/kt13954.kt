@@ -3,7 +3,7 @@
 
 package foo
 
-class A(val c: C)
+class A(konst c: C)
 
 // FILE: foo/B.kt
 

@@ -34,7 +34,7 @@ Least Upper Bound (aka "common supertype"):
 
 * `lub[(A..B), (C..D)] = (lub[A, C], lub[B, D])
 
-Type equivalence (aka `JetTypeChecker.DEFAULT.equalTypes()`):
+Type equikonstence (aka `JetTypeChecker.DEFAULT.equalTypes()`):
 
 `T1 ~~ T2 <=> T1 <: T2 && T2 <: T1`
 
@@ -130,7 +130,7 @@ class JavaClass {
 ```
 
 ```kotlin
-val x: MutableList<String> = arrayListOf()
+konst x: MutableList<String> = arrayListOf()
 JavaClass.addObject(x) // Ok
 x[0].length() // ClassCastException
 ```
@@ -183,9 +183,9 @@ If there's an expected type and the upper bound is not its subtype, an assertion
 
 Examples:
 ```kotlin
-val x: String = javaStringMethod() // assert that value is not null
-val y: MutableList<Foo> = javaListMethod() // assert that value "is MutableList" returns true
-val arr: Array<Bar> = javaArrayMethod() // assert value "is Bar[]"
+konst x: String = javaStringMethod() // assert that konstue is not null
+konst y: MutableList<Foo> = javaListMethod() // assert that konstue "is MutableList" returns true
+konst arr: Array<Bar> = javaArrayMethod() // assert konstue "is Bar[]"
 ```
 
 * Increment, assignment operations (+= etc)
@@ -198,7 +198,7 @@ val arr: Array<Bar> = javaArrayMethod() // assert value "is Bar[]"
 
 Constructs in question: anything that provides an expected type, i.e.
  - assignments
- - parameter default values
+ - parameter default konstues
  - delegation by: supertypes and properties
  - dereferencing: x.foo
  - all kinds of calls (foo, foo(), x[], x foo y, x + y, x++, x += 3, for loop, multi-declarations, invoke-convention, ...)
@@ -213,17 +213,17 @@ A type loaded from Java is said to *bear* a `@Nullable`/`@NotNull` annotation wh
  - it's a type of a field or a parameter so annotated;
  - it's a so annotated type (Java 8 and later).
 
-A value is `@Nullable`/`@NotNull` when its type bears such an annotation.
+A konstue is `@Nullable`/`@NotNull` when its type bears such an annotation.
 
-Inside this section, a value is *nullable*/*not-null* when
+Inside this section, a konstue is *nullable*/*not-null* when
  - it's `@Nullable`/`@NotNull`, or
  - it's type in Kotlin when refined with data flow info is nullable/not-null.
 
 The compiler issues warnings specific to `@Nullable`/`@NotNull` in the following situations:
- - a `@Nullable` value is assigned to a not-null location (including passing parameters and receivers to functions/properties);
- - a nullable value is assigned to a `@NotNull` location;
- - a `@NotNull` value is dereferenced with a safe call (`?.`), used in `!!` or on the left-hand side of an elvis operator `?:`;
- - a `@NotNull` value is compared with `null` through `==`, `!=`, `===` or `!==`
+ - a `@Nullable` konstue is assigned to a not-null location (including passing parameters and receivers to functions/properties);
+ - a nullable konstue is assigned to a `@NotNull` location;
+ - a `@NotNull` konstue is dereferenced with a safe call (`?.`), used in `!!` or on the left-hand side of an elvis operator `?:`;
+ - a `@NotNull` konstue is compared with `null` through `==`, `!=`, `===` or `!==`
 
 ## More precise type information from annotations
 
@@ -236,8 +236,8 @@ Goals:
 
 ### Annotations recognized by the compiler
 
-- `org.jetbrains.annotations.Nullable` - value may be null/accepts nulls
-- `org.jetbrains.annotations.NotNull` - value can not be null/passing null leads to an exception
+- `org.jetbrains.annotations.Nullable` - konstue may be null/accepts nulls
+- `org.jetbrains.annotations.NotNull` - konstue can not be null/passing null leads to an exception
 - `org.jetbrains.annotations.ReadOnly` - only non-mutating methods can be used on this collection/iterable/iterator
 - `org.jetbrains.annotations.Mutable` - mutating methods can be used on this collection/iterable/iterator
 
@@ -301,14 +301,14 @@ Examples:
 
 A signature is represented as a list of its parts:
  - upper bounds of type parameters
- - value parameter types
+ - konstue parameter types
  - return type
 
 Enhancement rules (the result of their application is called a *propagated signature*) for each part:
  - collect annotations from all supertypes and the override in the subclass
  - for parts other than return type (which may be covariantly overridden) if there are conflicts (`@Nullable` together with `@NotNull` or
    `@ReadOnly` together with `@Mutable`), discard the respective annotations and issue appropriate warnings
- - for return types (full if the type from override is `~~`-equivalent to all from supertypes, and only 0-index (see below) otherwise)):
+ - for return types (full if the type from override is `~~`-equikonstent to all from supertypes, and only 0-index (see below) otherwise)):
      - fist, take annotations from supertypes, and among them: if there's `@NotNull`, discard `@Nullable`, if there's `@Mutable` discard `@ReadOnly`
      - then if in the subtype there's `@Nullable` and in the supertype there's `@NotNull`, discard the nullability annotations (analogously,
        for mutability annotations)
@@ -426,8 +426,8 @@ Now, in the aforementioned procedure, annotations are collected and considered *
 are co-variant, thus the overriding type may not match the overridden ones in its shape (e.g. we can have `Foo<Bar>` from super, 
 and `Baz<One, Two<Three>>` in the override, where `Baz` extends `Foo<Bar>`). This makes it impossible sometimes to propagate data into 
 covariant overrides, and in such cases we resort to only looking at the head constructor (index == 0). The safe cases are detected by checking
-that the overriding type is `~~`-equivalent to all the overridden ones, which guarantees that their shapes match. For example, the overriding 
-type may be `(Mutable)List<Foo!>!` while the overridden ones may be `List<Foo>` and `List<Foo?>`, the equivalence holds and we can safely 
+that the overriding type is `~~`-equikonstent to all the overridden ones, which guarantees that their shapes match. For example, the overriding 
+type may be `(Mutable)List<Foo!>!` while the overridden ones may be `List<Foo>` and `List<Foo?>`, the equikonstence holds and we can safely 
 assume the enhanced return type to be `List<Foo>` (subtype of both overridden ones).
 
 Example:
@@ -494,7 +494,7 @@ We can also support the following annotations out-of-the-box:
  * `*.annotations.CheckForNull`
  * `*.NonNull`
  * `*.Nullable`
-* [`javax.validation.constraints`](http://docs.oracle.com/javaee/6/api/javax/validation/constraints/package-summary.html)
+* [`javax.konstidation.constraints`](http://docs.oracle.com/javaee/6/api/javax/konstidation/constraints/package-summary.html)
  * `NotNull` and `NotNull.List`
 * [Project Lombok](http://projectlombok.org/features/NonNull.html)
 * [`org.eclipse.jdt.annotation`](https://wiki.eclipse.org/JDT_Core/Null_Analysis)

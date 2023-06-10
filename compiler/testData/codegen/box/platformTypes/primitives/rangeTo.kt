@@ -1,8 +1,8 @@
 // KJS_WITH_FULL_RUNTIME
 fun box(): String {
-    val l = ArrayList<Int>()
+    konst l = ArrayList<Int>()
     l.add(2)
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     for (i in l[0]..3) {
         sb.append(i)
     }

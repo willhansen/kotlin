@@ -32,9 +32,9 @@ abstract class AbstractKapt3BuilderModeBytecodeShapeTest : CodegenTestCase() {
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
         compile(files)
-        val irFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".ir.txt")
-        val nonIrFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".txt")
-        val txtFile = if (backend == TargetBackend.JVM_IR && irFile.exists()) irFile else nonIrFile
+        konst irFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".ir.txt")
+        konst nonIrFile = File(wholeFile.parentFile, wholeFile.nameWithoutExtension + ".txt")
+        konst txtFile = if (backend == TargetBackend.JVM_IR && irFile.exists()) irFile else nonIrFile
         KotlinTestUtils.assertEqualsToFile(txtFile, BytecodeListingTextCollectingVisitor.getText(classFileFactory))
     }
 

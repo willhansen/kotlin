@@ -25,11 +25,11 @@ internal open class ClassOneToManyMap(
     storageFile: File,
     icContext: IncrementalCompilationContext,
 ) : AppendableBasicStringMap<Collection<String>>(storageFile, StringCollectionExternalizer, icContext) {
-    override fun dumpValue(value: Collection<String>): String = value.dumpCollection()
+    override fun dumpValue(konstue: Collection<String>): String = konstue.dumpCollection()
 
     @Synchronized
-    fun add(key: FqName, value: FqName) {
-        storage.append(key.asString(), listOf(value.asString()))
+    fun add(key: FqName, konstue: FqName) {
+        storage.append(key.asString(), listOf(konstue.asString()))
     }
 
     @Synchronized
@@ -37,13 +37,13 @@ internal open class ClassOneToManyMap(
         storage[key.asString()]?.map(::FqName) ?: setOf()
 
     @Synchronized
-    operator fun set(key: FqName, values: Collection<FqName>) {
-        if (values.isEmpty()) {
+    operator fun set(key: FqName, konstues: Collection<FqName>) {
+        if (konstues.isEmpty()) {
             remove(key)
             return
         }
 
-        storage[key.asString()] = values.map(FqName::asString)
+        storage[key.asString()] = konstues.map(FqName::asString)
     }
 
     @Synchronized
@@ -55,7 +55,7 @@ internal open class ClassOneToManyMap(
     // thus we need synchronization of this method and all modification methods.
     @Synchronized
     fun removeValues(key: FqName, removed: Set<FqName>) {
-        val notRemoved = this[key].filter { it !in removed }
+        konst notRemoved = this[key].filter { it !in removed }
         this[key] = notRemoved
     }
 }

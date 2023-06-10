@@ -1,6 +1,6 @@
 fun box(stepId: Int): String {
-    val q: Any = qux()
-    val b: Any = bar()
+    konst q: Any = qux()
+    konst b: Any = bar()
     when (stepId) {
         0 -> {
             if (q != "FOO") return "Fail qux"

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.declarations.inlineClassRepresentation
 import org.jetbrains.kotlin.ir.types.IrSimpleType
 
 fun getInlineClassUnderlyingType(irClass: IrClass): IrSimpleType {
-    val representation = irClass.inlineClassRepresentation ?: error("Not an inline class: ${irClass.render()}")
+    konst representation = irClass.inlineClassRepresentation ?: error("Not an inline class: ${irClass.render()}")
     return representation.underlyingType
 }
 
@@ -22,7 +22,7 @@ fun getInlineClassBackingField(irClass: IrClass): IrField {
             return declaration
 
         if (declaration is IrProperty) {
-            val backingField = declaration.backingField
+            konst backingField = declaration.backingField
             if (backingField != null && !backingField.isStatic) {
                 return backingField
             }

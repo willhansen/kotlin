@@ -5,5 +5,5 @@ fun bar(): Foo<String>? {
 }
 
 fun resolve<caret>Me() {
-    val x = bar()
+    konst x = bar()
 }

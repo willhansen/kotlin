@@ -4,27 +4,27 @@
 // CHECK_BYTECODE_LISTING
 
 @JvmInline
-value class IC1<T : Number>(val x: T) {
+konstue class IC1<T : Number>(konst x: T) {
     fun equals(other: Int) = false
     fun equals(other: IC1<*>) = true
 }
 
-class Generic<T, R>(val x: T, val y: R)
+class Generic<T, R>(konst x: T, konst y: R)
 
 @JvmInline
-value class IC2<T, R>(val value: Generic<T, R>) {
+konstue class IC2<T, R>(konst konstue: Generic<T, R>) {
     fun equals(other: IC1<Double>) = false
     fun equals(other: IC2<*, *>) = true
 }
 
 @JvmInline
-value class IC3<T>(val value: T) {
+konstue class IC3<T>(konst konstue: T) {
     fun equals(other: Int) = false
     fun equals(other: IC3<*>) = true
 }
 
 @JvmInline
-value class IC4<T>(val value: T) {
+konstue class IC4<T>(konst konstue: T) {
     fun equals(other: String) = false
     fun equals(other: IC4<*>) = true
 }

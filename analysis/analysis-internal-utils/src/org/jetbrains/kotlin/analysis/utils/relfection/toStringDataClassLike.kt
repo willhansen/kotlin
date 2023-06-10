@@ -16,7 +16,7 @@ public fun Any.renderAsDataClassToString(): String = prettyPrint {
     printCollection(this@renderAsDataClassToString::class.declaredMemberProperties) { property ->
         append(property.name)
         append(": ")
-        val getter = property.getter
+        konst getter = property.getter
         try {
             getter.isAccessible = true
             append(getter.call(this@renderAsDataClassToString).toString())

@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractOverriddenDeclarationProviderTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFiles.first())
+        konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFiles.first())
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(declaration) {
-                val symbol = declaration.getSymbol() as KtCallableSymbol
-                val allOverriddenSymbols = symbol.getAllOverriddenSymbols().map { renderSignature(it) }
-                val directlyOverriddenSymbols = symbol.getDirectlyOverriddenSymbols().map { renderSignature(it) }
+                konst symbol = declaration.getSymbol() as KtCallableSymbol
+                konst allOverriddenSymbols = symbol.getAllOverriddenSymbols().map { renderSignature(it) }
+                konst directlyOverriddenSymbols = symbol.getDirectlyOverriddenSymbols().map { renderSignature(it) }
                 buildString {
                     appendLine("ALL:")
                     allOverriddenSymbols.forEach { appendLine("  $it") }
@@ -45,11 +45,11 @@ abstract class AbstractOverriddenDeclarationProviderTest : AbstractAnalysisApiBa
         append(getPath(symbol))
         if (symbol is KtFunctionSymbol) {
             append("(")
-            symbol.valueParameters.forEachIndexed { index, parameter ->
+            symbol.konstueParameters.forEachIndexed { index, parameter ->
                 append(parameter.name.identifier)
                 append(": ")
                 append(parameter.returnType.render(KtTypeRendererForSource.WITH_SHORT_NAMES, position = Variance.INVARIANT))
-                if (index != symbol.valueParameters.lastIndex) {
+                if (index != symbol.konstueParameters.lastIndex) {
                     append(", ")
                 }
             }
@@ -63,7 +63,7 @@ abstract class AbstractOverriddenDeclarationProviderTest : AbstractAnalysisApiBa
     private fun KtAnalysisSession.getPath(symbol: KtCallableSymbol): String = when (symbol) {
         is KtSyntheticJavaPropertySymbol -> symbol.callableIdIfNonLocal?.toString()!!
         else -> {
-            val ktDeclaration = symbol.psi as? KtDeclaration
+            konst ktDeclaration = symbol.psi as? KtDeclaration
             if (ktDeclaration == null) {
                 symbol.callableIdIfNonLocal?.toString()!!
             } else {

@@ -16,7 +16,7 @@
 
 package org.jetbrains.ring
 
-val zdf_win = listOf(
+konst zdf_win = listOf(
 "-де",
 "-ка",
 "-либо",

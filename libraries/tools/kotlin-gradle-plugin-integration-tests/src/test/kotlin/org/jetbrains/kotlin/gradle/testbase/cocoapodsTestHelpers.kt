@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.util.replaceText
 import java.nio.file.Path
 import kotlin.io.path.appendText
 
-val String.normalizeCocoapadsFrameworkName: String
+konst String.normalizeCocoapadsFrameworkName: String
     get() = replace('-', '_')
 
 fun TestProject.useCustomCocoapodsFrameworkName(

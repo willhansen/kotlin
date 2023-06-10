@@ -61,7 +61,7 @@ KDouble Kotlin_native_NumberConverter_ceil(KDouble x) {
   return ceil(x);
 }
 
-void Kotlin_IntArray_set(KRef thiz, KInt index, KInt value);
+void Kotlin_IntArray_set(KRef thiz, KInt index, KInt konstue);
 
 KDouble Kotlin_native_long_bits_to_double(KLong x);
 }
@@ -149,7 +149,7 @@ static const KDouble tens[] = {
  * could potentially toggle back and forth between decrementing and
  * incrementing. It is possible for us to be stuck in the loop when
  * incrementing by one or decrementing by one may exceed or stay below
- * the value that we are looking for. In this case, just break out of
+ * the konstue that we are looking for. In this case, just break out of
  * the loop if we toggle between incrementing and decrementing for more
  * than twice.
  */
@@ -250,7 +250,7 @@ KDouble createDouble (const char *s, KInt e)
    *   2. (unprocessed digits + e) < 0, in which case we simply
    *      convert the existing bits that are already parsed along
    *      with the given e
-   *   3. (unprocessed digits + e) > 0 indicates that the value is
+   *   3. (unprocessed digits + e) > 0 indicates that the konstue is
    *      simply too big to be stored as a double, so return Infinity
    */
   if ((unprocessedDigits = strlen (s)) > 0)
@@ -333,7 +333,7 @@ createDouble1 (U_64 * f, IDATA length, KInt e)
        * where the user enters 0.0e309! */
       result = toDoubleHighPrecision (f, length);
       /* Don't go straight to zero as the fact that x*0 = 0 independent of x might
-         cause the algorithm to produce an incorrect result.  Instead try the min value
+         cause the algorithm to produce an incorrect result.  Instead try the min konstue
          first and let it fall to zero if need be. */
 
       if (result == 0.0)
@@ -356,7 +356,7 @@ createDouble1 (U_64 * f, IDATA length, KInt e)
     }
 
   /* Don't go straight to zero as the fact that x*0 = 0 independent of x might
-     cause the algorithm to produce an incorrect result.  Instead try the min value
+     cause the algorithm to produce an incorrect result.  Instead try the min konstue
      first and let it fall to zero if need be. */
 
   if (result == 0.0)
@@ -383,7 +383,7 @@ dblparse_shiftRight64 (U_64 * lp, volatile int mbe)
       return 0;
     }
 
-  /* Certain platforms do not handle de-referencing a 64-bit value
+  /* Certain platforms do not handle de-referencing a 64-bit konstue
    * from a pointer on the stack correctly (e.g. MVL-hh/XScale)
    * because the pointer may not be properly aligned, so we'll have
    * to handle two 32-bit chunks. */
@@ -460,8 +460,8 @@ dblparse_shiftRight64 (U_64 * lp, volatile int mbe)
  *
  * There is a possibility that the function will end up in an endless
  * loop if the given approximating floating-point number (a very small
- * floating-point whose value is very close to zero) straddles between
- * two approximating integer values. We modified the algorithm slightly
+ * floating-point whose konstue is very close to zero) straddles between
+ * two approximating integer konstues. We modified the algorithm slightly
  * to detect the case where it oscillates back and forth between
  * incrementing and decrementing the floating-point approximation. It
  * is currently set such that if the oscillation occurs more than twice

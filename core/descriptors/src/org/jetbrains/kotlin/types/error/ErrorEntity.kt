@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.types.error
 
-enum class ErrorEntity(val debugText: String) {
+enum class ErrorEntity(konst debugText: String) {
     ERROR_CLASS("<Error class: %s>"),
     ERROR_FUNCTION("<Error function>"),
     ERROR_SCOPE("<Error scope>"),

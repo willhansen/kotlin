@@ -183,8 +183,8 @@
 -keep class javaslang.match.PatternsProcessor { *; }
 
 -keepclassmembers enum * {
-    public static **[] values();
-    public static ** valueOf(java.lang.String);
+    public static **[] konstues();
+    public static ** konstueOf(java.lang.String);
 }
 
 -keepclassmembers class * {

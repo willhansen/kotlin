@@ -49,8 +49,8 @@ open class FakeOverrideDeclarationTable(
     globalTable: FakeOverrideGlobalDeclarationTable = FakeOverrideGlobalDeclarationTable(mangler),
     signatureSerializerFactory: (PublicIdSignatureComputer, DeclarationTable) -> IdSignatureSerializer
 ) : DeclarationTable(globalTable) {
-    override val globalDeclarationTable: FakeOverrideGlobalDeclarationTable = globalTable
-    override val signaturer: IdSignatureSerializer = signatureSerializerFactory(globalTable.publicIdSignatureComputer, this)
+    override konst globalDeclarationTable: FakeOverrideGlobalDeclarationTable = globalTable
+    override konst signaturer: IdSignatureSerializer = signatureSerializerFactory(globalTable.publicIdSignatureComputer, this)
 
     fun clear() {
         this.table.clear()
@@ -72,14 +72,14 @@ object DefaultFakeOverrideClassFilter : FakeOverrideClassFilter {
 }
 
 class FakeOverrideBuilder(
-    val linker: FileLocalAwareLinker,
-    val symbolTable: SymbolTable,
+    konst linker: FileLocalAwareLinker,
+    konst symbolTable: SymbolTable,
     mangler: KotlinMangler.IrMangler,
     typeSystem: IrTypeSystemContext,
     friendModules: Map<String, Collection<String>>,
-    private val partialLinkageSupport: PartialLinkageSupportForLinker,
-    val platformSpecificClassFilter: FakeOverrideClassFilter = DefaultFakeOverrideClassFilter,
-    private val fakeOverrideDeclarationTable: DeclarationTable = FakeOverrideDeclarationTable(mangler) { builder, table ->
+    private konst partialLinkageSupport: PartialLinkageSupportForLinker,
+    konst platformSpecificClassFilter: FakeOverrideClassFilter = DefaultFakeOverrideClassFilter,
+    private konst fakeOverrideDeclarationTable: DeclarationTable = FakeOverrideDeclarationTable(mangler) { builder, table ->
         IdSignatureSerializer(builder, table)
     }
 ) : FakeOverrideBuilderStrategy(
@@ -89,15 +89,15 @@ class FakeOverrideBuilder(
     else
         ProcessAsFakeOverrides
 ) {
-    private val haveFakeOverrides = mutableSetOf<IrClass>()
+    private konst haveFakeOverrides = mutableSetOf<IrClass>()
 
-    private val irOverridingUtil = IrOverridingUtil(typeSystem, this)
-    private val irBuiltIns = typeSystem.irBuiltIns
+    private konst irOverridingUtil = IrOverridingUtil(typeSystem, this)
+    private konst irBuiltIns = typeSystem.irBuiltIns
 
     // TODO: The declaration table is needed for the signaturer.
-//    private val fakeOverrideDeclarationTable = FakeOverrideDeclarationTable(mangler, signatureSerializerFactory)
+//    private konst fakeOverrideDeclarationTable = FakeOverrideDeclarationTable(mangler, signatureSerializerFactory)
 
-    val fakeOverrideCandidates = mutableMapOf<IrClass, CompatibilityMode>()
+    konst fakeOverrideCandidates = mutableMapOf<IrClass, CompatibilityMode>()
     fun enqueueClass(clazz: IrClass, signature: IdSignature, compatibilityMode: CompatibilityMode) {
         fakeOverrideDeclarationTable.assumeDeclarationSignature(clazz, signature)
         fakeOverrideCandidates[clazz] = compatibilityMode
@@ -106,14 +106,14 @@ class FakeOverrideBuilder(
     private fun buildFakeOverrideChainsForClass(clazz: IrClass, compatibilityMode: CompatibilityMode): Boolean {
         if (haveFakeOverrides.contains(clazz)) return true
 
-        val superTypes = clazz.superTypes
+        konst superTypes = clazz.superTypes
 
-        val superClasses = superTypes.map {
+        konst superClasses = superTypes.map {
             it.getClass() ?: error("Unexpected super type: $it")
         }
 
         superClasses.forEach { superClass ->
-            val mode = fakeOverrideCandidates[superClass] ?: compatibilityMode
+            konst mode = fakeOverrideCandidates[superClass] ?: compatibilityMode
             if (buildFakeOverrideChainsForClass(superClass, mode))
                 haveFakeOverrides.add(superClass)
         }
@@ -129,7 +129,7 @@ class FakeOverrideBuilder(
     }
 
     override fun linkFunctionFakeOverride(function: IrFunctionWithLateBinding, manglerCompatibleMode: Boolean) {
-        val (signature, symbol) = computeFunctionFakeOverrideSymbol(function, manglerCompatibleMode)
+        konst (signature, symbol) = computeFunctionFakeOverrideSymbol(function, manglerCompatibleMode)
 
         symbolTable.declareSimpleFunction(signature, { symbol }) {
             assert(it === symbol)
@@ -144,7 +144,7 @@ class FakeOverrideBuilder(
         // But to create and link that symbol we should already have the signature computed.
         // To break this loop we use temp symbol in correspondingProperty.
 
-        val tempSymbol = IrPropertySymbolImpl().also {
+        konst tempSymbol = IrPropertySymbolImpl().also {
             it.bind(property as IrProperty)
         }
         property.getter?.let { getter ->
@@ -154,7 +154,7 @@ class FakeOverrideBuilder(
             setter.correspondingPropertySymbol = tempSymbol
         }
 
-        val (signature, symbol) = computePropertyFakeOverrideSymbol(property, manglerCompatibleMode)
+        konst (signature, symbol) = computePropertyFakeOverrideSymbol(property, manglerCompatibleMode)
         symbolTable.declareProperty(signature, { symbol }) {
             assert(it === symbol)
             property.acquireSymbol(it)
@@ -184,10 +184,10 @@ class FakeOverrideBuilder(
         manglerCompatibleMode: Boolean
     ): Pair<IdSignature, IrSimpleFunctionSymbol> {
         require(function is IrSimpleFunction) { "Unexpected fake override function: $function" }
-        val parent = function.parentAsClass
+        konst parent = function.parentAsClass
 
-        val signature = composeSignature(function, manglerCompatibleMode)
-        val symbol = linker.tryReferencingSimpleFunctionByLocalSignature(parent, signature)
+        konst signature = composeSignature(function, manglerCompatibleMode)
+        konst symbol = linker.tryReferencingSimpleFunctionByLocalSignature(parent, signature)
             ?: symbolTable.referenceSimpleFunction(signature)
 
         if (!partialLinkageSupport.isEnabled
@@ -204,11 +204,11 @@ class FakeOverrideBuilder(
         // state or the existing function with `isInline=true`.
         // This signature is not supposed to be ever serialized (as fake overrides are not serialized in KLIBs).
         // In new KLIB signatures `isSuspend` and `isInline` flags will be taken into account as a part of signature.
-        val functionWithDisambiguatedSignature = buildFunctionWithDisambiguatedSignature(function)
-        val disambiguatedSignature = composeSignature(functionWithDisambiguatedSignature, manglerCompatibleMode)
+        konst functionWithDisambiguatedSignature = buildFunctionWithDisambiguatedSignature(function)
+        konst disambiguatedSignature = composeSignature(functionWithDisambiguatedSignature, manglerCompatibleMode)
         assert(disambiguatedSignature != signature) { "Failed to compute disambiguated signature for fake override $function" }
 
-        val symbolWithDisambiguatedSignature = linker.tryReferencingSimpleFunctionByLocalSignature(parent, disambiguatedSignature)
+        konst symbolWithDisambiguatedSignature = linker.tryReferencingSimpleFunctionByLocalSignature(parent, disambiguatedSignature)
             ?: symbolTable.referenceSimpleFunction(disambiguatedSignature)
 
         return disambiguatedSignature to symbolWithDisambiguatedSignature
@@ -219,10 +219,10 @@ class FakeOverrideBuilder(
         manglerCompatibleMode: Boolean
     ): Pair<IdSignature, IrPropertySymbol> {
         require(property is IrProperty) { "Unexpected fake override property: $property" }
-        val parent = property.parentAsClass
+        konst parent = property.parentAsClass
 
-        val signature = composeSignature(property, manglerCompatibleMode)
-        val symbol = linker.tryReferencingPropertyByLocalSignature(parent, signature)
+        konst signature = composeSignature(property, manglerCompatibleMode)
+        konst symbol = linker.tryReferencingPropertyByLocalSignature(parent, signature)
             ?: symbolTable.referenceProperty(signature)
 
         if (!partialLinkageSupport.isEnabled
@@ -240,11 +240,11 @@ class FakeOverrideBuilder(
         // This signature is not supposed to be ever serialized (as fake overrides are not serialized in KLIBs).
         // In new KLIB signatures `isInline` flag will be taken into account as a part of signature.
 
-        val propertyWithDisambiguatedSignature = buildPropertyWithDisambiguatedSignature(property)
-        val disambiguatedSignature = composeSignature(propertyWithDisambiguatedSignature, manglerCompatibleMode)
+        konst propertyWithDisambiguatedSignature = buildPropertyWithDisambiguatedSignature(property)
+        konst disambiguatedSignature = composeSignature(propertyWithDisambiguatedSignature, manglerCompatibleMode)
         assert(disambiguatedSignature != signature) { "Failed to compute disambiguated signature for fake override $property" }
 
-        val symbolWithDisambiguatedSignature = linker.tryReferencingPropertyByLocalSignature(parent, disambiguatedSignature)
+        konst symbolWithDisambiguatedSignature = linker.tryReferencingPropertyByLocalSignature(parent, disambiguatedSignature)
             ?: symbolTable.referenceProperty(disambiguatedSignature)
 
         return disambiguatedSignature to symbolWithDisambiguatedSignature
@@ -286,11 +286,11 @@ class FakeOverrideBuilder(
     }
 
     fun provideFakeOverrides() {
-        val entries = fakeOverrideCandidates.entries
+        konst entries = fakeOverrideCandidates.entries
         while (entries.isNotEmpty()) {
-            val candidate = entries.last()
+            konst candidate = entries.last()
             entries.remove(candidate)
-            provideFakeOverrides(candidate.key, candidate.value)
+            provideFakeOverrides(candidate.key, candidate.konstue)
         }
     }
 }

@@ -61,7 +61,7 @@ public abstract class VariableDescriptorWithInitializerImpl extends VariableDesc
     }
 
     public void setCompileTimeInitializerFactory(@NotNull Function0<NullableLazyValue<ConstantValue<?>>> compileTimeInitializerFactory) {
-        assert !isVar() : "Constant value for variable initializer should be recorded only for final variables: " + getName();
+        assert !isVar() : "Constant konstue for variable initializer should be recorded only for final variables: " + getName();
         setCompileTimeInitializer(null, compileTimeInitializerFactory);
     }
 
@@ -69,7 +69,7 @@ public abstract class VariableDescriptorWithInitializerImpl extends VariableDesc
             @Nullable NullableLazyValue<ConstantValue<?>> compileTimeInitializer,
             @NotNull Function0<NullableLazyValue<ConstantValue<?>>> compileTimeInitializerFactory
     ) {
-        assert !isVar() : "Constant value for variable initializer should be recorded only for final variables: " + getName();
+        assert !isVar() : "Constant konstue for variable initializer should be recorded only for final variables: " + getName();
         this.compileTimeInitializerFactory = compileTimeInitializerFactory;
         this.compileTimeInitializer = compileTimeInitializer != null ? compileTimeInitializer : compileTimeInitializerFactory.invoke();
     }

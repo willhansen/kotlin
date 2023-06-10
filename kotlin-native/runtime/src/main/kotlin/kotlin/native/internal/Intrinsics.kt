@@ -30,7 +30,7 @@ import kotlin.native.internal.IntrinsicType
 @TypedIntrinsic(IntrinsicType.IEEE_754_EQUALS) @PublishedApi external internal fun ieee754Equals(first: Float, second: Float): Boolean
 @TypedIntrinsic(IntrinsicType.IEEE_754_EQUALS) @PublishedApi external internal fun ieee754Equals(first: Double, second: Double): Boolean
 
-// Reinterprets this value from T to R having the same binary representation (e.g. to unwrap inline class).
+// Reinterprets this konstue from T to R having the same binary representation (e.g. to unwrap inline class).
 @TypedIntrinsic(IntrinsicType.IDENTITY) @PublishedApi external internal fun <T, R> T.reinterpret(): R
 
 

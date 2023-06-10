@@ -22,19 +22,19 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class IrLazyConstructor(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrConstructorSymbol,
-    override val descriptor: ClassConstructorDescriptor,
+    override konst symbol: IrConstructorSymbol,
+    override konst descriptor: ClassConstructorDescriptor,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     override var isInline: Boolean,
     override var isExternal: Boolean,
     override var isPrimary: Boolean,
     override var isExpect: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrConstructor(), IrLazyFunctionBase {
     override var parent: IrDeclarationParent by createLazyParent()
 
@@ -44,7 +44,7 @@ class IrLazyConstructor(
 
     override var returnType: IrType by lazyVar(stubGenerator.lock) { createReturnType() }
 
-    override val initialSignatureFunction: IrFunction? by createInitialSignatureFunction()
+    override konst initialSignatureFunction: IrFunction? by createInitialSignatureFunction()
 
     override var dispatchReceiverParameter: IrValueParameter? by lazyVar(stubGenerator.lock) {
         createReceiverParameter(descriptor.dispatchReceiverParameter)
@@ -54,7 +54,7 @@ class IrLazyConstructor(
         createReceiverParameter(descriptor.extensionReceiverParameter)
     }
 
-    override var valueParameters: List<IrValueParameter> by lazyVar(stubGenerator.lock) { createValueParameters() }
+    override var konstueParameters: List<IrValueParameter> by lazyVar(stubGenerator.lock) { createValueParameters() }
 
     override var contextReceiverParametersCount: Int = descriptor.contextReceiverParameters.size
 
@@ -65,8 +65,8 @@ class IrLazyConstructor(
     override var typeParameters: List<IrTypeParameter> by lazyVar(stubGenerator.lock) {
         typeTranslator.buildWithScope(this) {
             stubGenerator.symbolTable.withScope(this) {
-                val classTypeParametersCount = descriptor.constructedClass.original.declaredTypeParameters.size
-                val allConstructorTypeParameters = descriptor.typeParameters
+                konst classTypeParametersCount = descriptor.constructedClass.original.declaredTypeParameters.size
+                konst allConstructorTypeParameters = descriptor.typeParameters
                 allConstructorTypeParameters.subList(classTypeParametersCount, allConstructorTypeParameters.size).mapTo(ArrayList()) {
                     stubGenerator.generateOrGetTypeParameterStub(it)
                 }
@@ -74,7 +74,7 @@ class IrLazyConstructor(
         }
     }
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = (descriptor as? DescriptorWithContainerSource)?.containerSource
 
     init {

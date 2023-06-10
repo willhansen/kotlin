@@ -8,21 +8,21 @@ package org.jetbrains.kotlin.fir.renderer
 import org.jetbrains.kotlin.fir.contracts.description.ConeContractRenderer
 
 internal interface FirRendererComponents {
-    val visitor: FirRenderer.Visitor
-    val printer: FirPrinter
-    val declarationRenderer: FirDeclarationRenderer?
-    val annotationRenderer: FirAnnotationRenderer?
-    val bodyRenderer: FirBodyRenderer?
-    val callArgumentsRenderer: FirCallArgumentsRenderer?
-    val classMemberRenderer: FirClassMemberRenderer?
-    val contractRenderer: ConeContractRenderer?
-    val idRenderer: ConeIdRenderer
-    val modifierRenderer: FirModifierRenderer?
-    val packageDirectiveRenderer: FirPackageDirectiveRenderer?
-    val propertyAccessorRenderer: FirPropertyAccessorRenderer?
-    val resolvePhaseRenderer: FirResolvePhaseRenderer?
-    val typeRenderer: ConeTypeRenderer
-    val valueParameterRenderer: FirValueParameterRenderer?
-    val errorExpressionRenderer: FirErrorExpressionRenderer?
-    val fileAnnotationsContainerRenderer: FirFileAnnotationsContainerRenderer?
+    konst visitor: FirRenderer.Visitor
+    konst printer: FirPrinter
+    konst declarationRenderer: FirDeclarationRenderer?
+    konst annotationRenderer: FirAnnotationRenderer?
+    konst bodyRenderer: FirBodyRenderer?
+    konst callArgumentsRenderer: FirCallArgumentsRenderer?
+    konst classMemberRenderer: FirClassMemberRenderer?
+    konst contractRenderer: ConeContractRenderer?
+    konst idRenderer: ConeIdRenderer
+    konst modifierRenderer: FirModifierRenderer?
+    konst packageDirectiveRenderer: FirPackageDirectiveRenderer?
+    konst propertyAccessorRenderer: FirPropertyAccessorRenderer?
+    konst resolvePhaseRenderer: FirResolvePhaseRenderer?
+    konst typeRenderer: ConeTypeRenderer
+    konst konstueParameterRenderer: FirValueParameterRenderer?
+    konst errorExpressionRenderer: FirErrorExpressionRenderer?
+    konst fileAnnotationsContainerRenderer: FirFileAnnotationsContainerRenderer?
 }

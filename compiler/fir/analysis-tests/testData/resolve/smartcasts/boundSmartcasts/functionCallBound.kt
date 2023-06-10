@@ -1,7 +1,7 @@
 // !DUMP_CFG
 
 open class Base
-class Sub(val data: Base): Base()
+class Sub(konst data: Base): Base()
 
 fun Sub.isOk() = true
 

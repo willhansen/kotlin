@@ -27,22 +27,22 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-val jvmValueClassPhase = makeIrFilePhase(
+konst jvmValueClassPhase = makeIrFilePhase(
     ::JvmValueClassLoweringDispatcher,
     name = "Value Classes",
-    description = "Lower value classes",
+    description = "Lower konstue classes",
     // forLoopsPhase may produce UInt and ULong which are inline classes.
     // Standard library replacements are done on the not mangled names for UInt and ULong classes.
-    // Collection stubs may require mangling by value class rules.
-    // SAM wrappers may require mangling for fun interfaces with value class parameters
+    // Collection stubs may require mangling by konstue class rules.
+    // SAM wrappers may require mangling for fun interfaces with konstue class parameters
     prerequisite = setOf(forLoopsPhase, jvmBuiltInsPhase, collectionStubMethodLowering, singleAbstractMethodPhase),
 )
 
-internal class JvmValueClassLoweringDispatcher(private val context: JvmBackendContext) : IrElementTransformerVoidWithContext(),
+internal class JvmValueClassLoweringDispatcher(private konst context: JvmBackendContext) : IrElementTransformerVoidWithContext(),
     FileLoweringPass {
-    override val scopeStack: MutableList<ScopeWithIr> = mutableListOf()
-    private val inlineClassLowering: JvmInlineClassLowering = JvmInlineClassLowering(context, scopeStack)
-    private val multiFieldValueClassLowering: JvmMultiFieldValueClassLowering = JvmMultiFieldValueClassLowering(context, scopeStack)
+    override konst scopeStack: MutableList<ScopeWithIr> = mutableListOf()
+    private konst inlineClassLowering: JvmInlineClassLowering = JvmInlineClassLowering(context, scopeStack)
+    private konst multiFieldValueClassLowering: JvmMultiFieldValueClassLowering = JvmMultiFieldValueClassLowering(context, scopeStack)
 
 
     override fun lower(irFile: IrFile) = withinScope(irFile) {
@@ -58,16 +58,16 @@ internal class JvmValueClassLoweringDispatcher(private val context: JvmBackendCo
     }
 
     private fun IrElement.requiresHandling(): Boolean {
-        val visitor = NeedsToVisit(context)
+        konst visitor = NeedsToVisit(context)
         accept(visitor, null)
         return visitor.result
     }
 }
 
-private class NeedsToVisit(private val context: JvmBackendContext) : IrElementVisitorVoid {
+private class NeedsToVisit(private konst context: JvmBackendContext) : IrElementVisitorVoid {
     var result = false
-    private val replacements = context.valueClassLoweringDispatcherSharedData
-    private val visitedParameters = mutableSetOf<IrSymbol>()
+    private konst replacements = context.konstueClassLoweringDispatcherSharedData
+    private konst visitedParameters = mutableSetOf<IrSymbol>()
 
     override fun visitElement(element: IrElement) {
         if (!result) element.acceptChildrenVoid(this)
@@ -78,9 +78,9 @@ private class NeedsToVisit(private val context: JvmBackendContext) : IrElementVi
         return result
     }
 
-    private val IrClass.needsHandling: Boolean
+    private konst IrClass.needsHandling: Boolean
         get() = isValue || typeParameters.any { it.acceptAndGetResult() }
-    private val IrType.needsHandling: Boolean
+    private konst IrType.needsHandling: Boolean
         get() = classifierOrNull?.isBound == true && erasedUpperBound.needsHandling || this is IrSimpleType && arguments.any { it.typeOrNull?.needsHandling == true }
 
     override fun visitClass(declaration: IrClass) {
@@ -114,7 +114,7 @@ private class NeedsToVisit(private val context: JvmBackendContext) : IrElementVi
                     declaration.typeParameters.any { it.acceptAndGetResult() } ||
                     declaration.dispatchReceiverParameter?.acceptAndGetResult() == true ||
                     declaration.extensionReceiverParameter?.acceptAndGetResult() == true ||
-                    declaration.valueParameters.any { it.acceptAndGetResult() } ||
+                    declaration.konstueParameters.any { it.acceptAndGetResult() } ||
                     declaration.returnType.needsHandling ||
                     (declaration as? IrSimpleFunction)?.overriddenSymbols?.any { visitFunction(it.owner, withBody = false); result } == true
         }
@@ -208,7 +208,7 @@ private class NeedsToVisit(private val context: JvmBackendContext) : IrElementVi
     override fun visitCall(expression: IrCall) {
         if (result) return
         if (expression.symbol == context.irBuiltIns.eqeqSymbol) {
-            for (it in 0 until expression.valueArgumentsCount) {
+            for (it in 0 until expression.konstueArgumentsCount) {
                 result = expression.getValueArgument(it)?.type?.needsHandling ?: false
                 if (result) return
             }

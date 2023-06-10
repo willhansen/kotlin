@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.util.Logger
 import org.jetbrains.kotlin.util.removeSuffixIfPresent
 import kotlin.system.exitProcess
 
-internal val KlibFactories = KlibMetadataFactories(::KonanBuiltIns, DynamicTypeDeserializer, PlatformDependentTypeTransformer.None)
+internal konst KlibFactories = KlibMetadataFactories(::KonanBuiltIns, DynamicTypeDeserializer, PlatformDependentTypeTransformer.None)
 
 fun printUsage() {
     println("Usage: klib <command> <library> <options>")
@@ -49,17 +49,17 @@ fun printUsage() {
 }
 
 private fun parseArgs(args: Array<String>): Map<String, List<String>> {
-    val commandLine = mutableMapOf<String, MutableList<String>>()
+    konst commandLine = mutableMapOf<String, MutableList<String>>()
     for (index in args.indices step 2) {
-        val key = args[index]
+        konst key = args[index]
         if (key[0] != '-') {
             throw IllegalArgumentException("Expected a flag with initial dash: $key")
         }
         if (index + 1 == args.size) {
-            throw IllegalArgumentException("Expected an value after $key")
+            throw IllegalArgumentException("Expected an konstue after $key")
         }
-        val value = listOf(args[index + 1])
-        commandLine[key]?.addAll(value) ?: commandLine.put(key, value.toMutableList())
+        konst konstue = listOf(args[index + 1])
+        commandLine[key]?.addAll(konstue) ?: commandLine.put(key, konstue.toMutableList())
     }
     return commandLine
 }
@@ -73,9 +73,9 @@ class Command(args: Array<String>) {
         }
     }
 
-    val verb = args[0]
-    val library = args[1]
-    val options = parseArgs(args.drop(2).toTypedArray())
+    konst verb = args[0]
+    konst library = args[1]
+    konst options = parseArgs(args.drop(2).toTypedArray())
 }
 
 fun warn(text: String) {
@@ -93,30 +93,30 @@ object KlibToolLogger : Logger {
     override fun log(message: String) = println(message)
 }
 
-val defaultRepository = File(DependencyProcessor.localKonanDir.resolve("klib").absolutePath)
+konst defaultRepository = File(DependencyProcessor.localKonanDir.resolve("klib").absolutePath)
 
-open class ModuleDeserializer(val library: ByteArray) {
-    protected val moduleHeader: KlibMetadataProtoBuf.Header
+open class ModuleDeserializer(konst library: ByteArray) {
+    protected konst moduleHeader: KlibMetadataProtoBuf.Header
         get() = parseModuleHeader(library)
 
-    val moduleName: String
+    konst moduleName: String
         get() = moduleHeader.moduleName
 
-    val packageFragmentNameList: List<String>
+    konst packageFragmentNameList: List<String>
         get() = moduleHeader.packageFragmentNameList
 
 }
 
-class Library(val libraryNameOrPath: String, val requestedRepository: String?, val target: String) {
+class Library(konst libraryNameOrPath: String, konst requestedRepository: String?, konst target: String) {
 
-    val repository = requestedRepository?.File() ?: defaultRepository
+    konst repository = requestedRepository?.File() ?: defaultRepository
     fun info() {
-        val library = libraryInRepoOrCurrentDir(repository, libraryNameOrPath)
-        val headerAbiVersion = library.versions.abiVersion
-        val headerCompilerVersion = library.versions.compilerVersion
-        val headerLibraryVersion = library.versions.libraryVersion
-        val headerMetadataVersion = library.versions.metadataVersion
-        val moduleName = ModuleDeserializer(library.moduleHeaderData).moduleName
+        konst library = libraryInRepoOrCurrentDir(repository, libraryNameOrPath)
+        konst headerAbiVersion = library.versions.abiVersion
+        konst headerCompilerVersion = library.versions.compilerVersion
+        konst headerLibraryVersion = library.versions.libraryVersion
+        konst headerMetadataVersion = library.versions.metadataVersion
+        konst moduleName = ModuleDeserializer(library.moduleHeaderData).moduleName
 
         println("")
         println("Resolved to: ${library.libraryName.File().absolutePath}")
@@ -127,7 +127,7 @@ class Library(val libraryNameOrPath: String, val requestedRepository: String?, v
         println("Metadata version: $headerMetadataVersion")
 
         if (library is KonanLibrary) {
-            val targets = library.targetList.joinToString(", ")
+            konst targets = library.targetList.joinToString(", ")
             print("Available targets: $targets\n")
         }
     }
@@ -138,10 +138,10 @@ class Library(val libraryNameOrPath: String, val requestedRepository: String?, v
             repository.mkdirs()
         }
 
-        val libraryTrueName = File(libraryNameOrPath).name.removeSuffixIfPresent(KLIB_FILE_EXTENSION_WITH_DOT)
-        val library = libraryInCurrentDir(libraryNameOrPath)
+        konst libraryTrueName = File(libraryNameOrPath).name.removeSuffixIfPresent(KLIB_FILE_EXTENSION_WITH_DOT)
+        konst library = libraryInCurrentDir(libraryNameOrPath)
 
-        val installLibDir = File(repository, libraryTrueName)
+        konst installLibDir = File(repository, libraryTrueName)
 
         if (installLibDir.exists) installLibDir.deleteRecursively()
 
@@ -151,8 +151,8 @@ class Library(val libraryNameOrPath: String, val requestedRepository: String?, v
     fun remove(blind: Boolean = false) {
         if (!repository.exists) error("Repository does not exist: $repository")
 
-        val library = try {
-            val library = libraryInRepo(repository, libraryNameOrPath)
+        konst library = try {
+            konst library = libraryInRepo(repository, libraryNameOrPath)
             if (blind) warn("Removing The previously installed $libraryNameOrPath from $repository.")
             library
 
@@ -165,29 +165,29 @@ class Library(val libraryNameOrPath: String, val requestedRepository: String?, v
     }
 
     fun contents(output: Appendable, printSignatures: Boolean) {
-        val module = loadModule()
-        val signatureRenderer = if (printSignatures) DefaultIdSignatureRenderer("// ID signature: ") else IdSignatureRenderer.NO_SIGNATURE
-        val printer = DeclarationPrinter(output, DefaultDeclarationHeaderRenderer, signatureRenderer)
+        konst module = loadModule()
+        konst signatureRenderer = if (printSignatures) DefaultIdSignatureRenderer("// ID signature: ") else IdSignatureRenderer.NO_SIGNATURE
+        konst printer = DeclarationPrinter(output, DefaultDeclarationHeaderRenderer, signatureRenderer)
 
         printer.print(module)
     }
 
     fun signatures(output: Appendable) {
-        val module = loadModule()
-        val printer = SignaturePrinter(output, DefaultIdSignatureRenderer())
+        konst module = loadModule()
+        konst printer = SignaturePrinter(output, DefaultIdSignatureRenderer())
 
         printer.print(module)
     }
 
     private fun loadModule(): ModuleDescriptor {
-        val storageManager = LockBasedStorageManager("klib")
-        val library = libraryInRepoOrCurrentDir(repository, libraryNameOrPath)
-        val versionSpec = LanguageVersionSettingsImpl(currentLanguageVersion, currentApiVersion)
-        val module = KlibFactories.DefaultDeserializedDescriptorFactory.createDescriptorAndNewBuiltIns(library, versionSpec, storageManager, null)
+        konst storageManager = LockBasedStorageManager("klib")
+        konst library = libraryInRepoOrCurrentDir(repository, libraryNameOrPath)
+        konst versionSpec = LanguageVersionSettingsImpl(currentLanguageVersion, currentApiVersion)
+        konst module = KlibFactories.DefaultDeserializedDescriptorFactory.createDescriptorAndNewBuiltIns(library, versionSpec, storageManager, null)
 
-        val defaultModules = mutableListOf<ModuleDescriptorImpl>()
+        konst defaultModules = mutableListOf<ModuleDescriptorImpl>()
         if (!module.isNativeStdlib()) {
-            val resolver = resolverByName(
+            konst resolver = resolverByName(
                     emptyList(),
                     distributionKlib = Distribution(KonanHomeProvider.determineKonanHome()).klib,
                     skipCurrentDir = true,
@@ -206,8 +206,8 @@ class Library(val libraryNameOrPath: String, val requestedRepository: String?, v
     }
 }
 
-val currentLanguageVersion = LanguageVersion.LATEST_STABLE
-val currentApiVersion = ApiVersion.LATEST_STABLE
+konst currentLanguageVersion = LanguageVersion.LATEST_STABLE
+konst currentApiVersion = ApiVersion.LATEST_STABLE
 
 fun libraryInRepo(repository: File, name: String) =
         resolverByName(listOf(repository.absolutePath), skipCurrentDir = true, logger = KlibToolLogger).resolve(name)
@@ -218,16 +218,16 @@ fun libraryInRepoOrCurrentDir(repository: File, name: String) =
         resolverByName(listOf(repository.absolutePath), logger = KlibToolLogger).resolve(name)
 
 fun main(args: Array<String>) {
-    val command = Command(args)
+    konst command = Command(args)
 
-    val targetManager = PlatformManager(KonanHomeProvider.determineKonanHome())
+    konst targetManager = PlatformManager(KonanHomeProvider.determineKonanHome())
             .targetManager(command.options["-target"]?.last())
-    val target = targetManager.targetName
+    konst target = targetManager.targetName
 
-    val repository = command.options["-repository"]?.last()
-    val printSignatures = command.options["-print-signatures"]?.last()?.toBoolean() == true
+    konst repository = command.options["-repository"]?.last()
+    konst printSignatures = command.options["-print-signatures"]?.last()?.toBoolean() == true
 
-    val library = Library(command.library, repository, target)
+    konst library = Library(command.library, repository, target)
 
     when (command.verb) {
         "contents" -> library.contents(System.out, printSignatures)

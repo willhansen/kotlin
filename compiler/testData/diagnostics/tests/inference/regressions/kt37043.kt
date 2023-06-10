@@ -15,5 +15,5 @@ fun <T> foo(x: Array<out T>): T = x[0]
 inline fun <reified T> materializeArray(): Array<T> = null as Array<T>
 
 fun main()  {
-    val y = foo(Test.flexibleNumbers() ?: materializeArray()) // Any? in NI, Number! in OI (T of `materializeArray` is inferred to Any?)
+    konst y = foo(Test.flexibleNumbers() ?: materializeArray()) // Any? in NI, Number! in OI (T of `materializeArray` is inferred to Any?)
 }

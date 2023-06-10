@@ -13,4 +13,4 @@ private fun print1000Bytes() {
     repeat(100) { print(TEN_BYTES_STRING) }
 }
 
-private const val TEN_BYTES_STRING = "Hi, test!\n"
+private const konst TEN_BYTES_STRING = "Hi, test!\n"

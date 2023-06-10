@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.scripting.ide_common.util.supertypesWithAny
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import java.util.*
 
-sealed class CallType<TReceiver : KtElement?>(val descriptorKindFilter: DescriptorKindFilter) {
+sealed class CallType<TReceiver : KtElement?>(konst descriptorKindFilter: DescriptorKindFilter) {
     object UNKNOWN : CallType<Nothing?>(DescriptorKindFilter.ALL)
 
     object DEFAULT : CallType<Nothing?>(DescriptorKindFilter.ALL)
@@ -74,7 +74,7 @@ sealed class CallType<TReceiver : KtElement?>(val descriptorKindFilter: Descript
         override fun excludes(descriptor: DeclarationDescriptor) =
             !(descriptor is SimpleFunctionDescriptor && descriptor.isInfix)
 
-        override val fullyExcludedDescriptorKinds: Int
+        override konst fullyExcludedDescriptorKinds: Int
             get() = 0
     }
 
@@ -82,7 +82,7 @@ sealed class CallType<TReceiver : KtElement?>(val descriptorKindFilter: Descript
         override fun excludes(descriptor: DeclarationDescriptor) =
             !(descriptor is SimpleFunctionDescriptor && descriptor.isOperator)
 
-        override val fullyExcludedDescriptorKinds: Int
+        override konst fullyExcludedDescriptorKinds: Int
             get() = 0
     }
 
@@ -90,7 +90,7 @@ sealed class CallType<TReceiver : KtElement?>(val descriptorKindFilter: Descript
         override fun excludes(descriptor: DeclarationDescriptor) /* currently not supported for locals and synthetic */ =
             descriptor !is CallableMemberDescriptor || descriptor.kind == CallableMemberDescriptor.Kind.SYNTHESIZED
 
-        override val fullyExcludedDescriptorKinds: Int
+        override konst fullyExcludedDescriptorKinds: Int
             get() = 0
     }
 
@@ -100,21 +100,21 @@ sealed class CallType<TReceiver : KtElement?>(val descriptorKindFilter: Descript
             return descriptor !is ClassDescriptor || descriptor.kind != ClassKind.ANNOTATION_CLASS
         }
 
-        override val fullyExcludedDescriptorKinds: Int get() = 0
+        override konst fullyExcludedDescriptorKinds: Int get() = 0
     }
 
     private object AbstractMembersExclude : DescriptorKindExclude() {
         override fun excludes(descriptor: DeclarationDescriptor) =
             descriptor is CallableMemberDescriptor && descriptor.modality == Modality.ABSTRACT
 
-        override val fullyExcludedDescriptorKinds: Int
+        override konst fullyExcludedDescriptorKinds: Int
             get() = 0
     }
 }
 
 sealed class CallTypeAndReceiver<TReceiver : KtElement?, out TCallType : CallType<TReceiver>>(
-    val callType: TCallType,
-    val receiver: TReceiver
+    konst callType: TCallType,
+    konst receiver: TReceiver
 ) {
     object UNKNOWN : CallTypeAndReceiver<Nothing?, CallType.UNKNOWN>(CallType.UNKNOWN, null)
     object DEFAULT : CallTypeAndReceiver<Nothing?, CallType.DEFAULT>(CallType.DEFAULT, null)
@@ -143,12 +143,12 @@ sealed class CallTypeAndReceiver<TReceiver : KtElement?, out TCallType : CallTyp
 
     companion object {
         fun detect(expression: KtSimpleNameExpression): CallTypeAndReceiver<*, *> {
-            val parent = expression.parent
+            konst parent = expression.parent
             if (parent is KtCallableReferenceExpression && expression == parent.callableReference) {
                 return CALLABLE_REFERENCE(parent.receiverExpression)
             }
 
-            val receiverExpression = expression.getReceiverExpression()
+            konst receiverExpression = expression.getReceiverExpression()
 
             if (expression.isImportDirectiveExpression()) {
                 return IMPORT_DIRECTIVE(receiverExpression)
@@ -159,7 +159,7 @@ sealed class CallTypeAndReceiver<TReceiver : KtElement?, out TCallType : CallTyp
             }
 
             if (parent is KtUserType) {
-                val constructorCallee = (parent.parent as? KtTypeReference)?.parent as? KtConstructorCalleeExpression
+                konst constructorCallee = (parent.parent as? KtTypeReference)?.parent as? KtConstructorCalleeExpression
                 if (constructorCallee != null && constructorCallee.parent is KtAnnotationEntry) {
                     return ANNOTATION(receiverExpression)
                 }
@@ -221,12 +221,12 @@ sealed class CallTypeAndReceiver<TReceiver : KtElement?, out TCallType : CallTyp
 }
 
 data class ReceiverType(
-    val type: KotlinType,
-    val receiverIndex: Int,
-    val implicitValue: ReceiverValue? = null
+    konst type: KotlinType,
+    konst receiverIndex: Int,
+    konst implicitValue: ReceiverValue? = null
 ) {
     @Suppress("unused") // Used in intellij-community
-    val implicit: Boolean get() = implicitValue != null
+    konst implicit: Boolean get() = implicitValue != null
 
     @Suppress("unused") // Used in intellij-community
     fun extractDslMarkers() =
@@ -252,17 +252,17 @@ fun CallTypeAndReceiver<*, *>.receiverTypesWithIndex(
     stableSmartCastsOnly: Boolean,
     withImplicitReceiversWhenExplicitPresent: Boolean = false
 ): List<ReceiverType>? {
-    val languageVersionSettings = resolutionFacade.getLanguageVersionSettings()
+    konst languageVersionSettings = resolutionFacade.getLanguageVersionSettings()
 
-    val receiverExpression: KtExpression?
+    konst receiverExpression: KtExpression?
     when (this) {
         is CallTypeAndReceiver.CALLABLE_REFERENCE -> {
             if (receiver != null) {
-                return when (val lhs = bindingContext[BindingContext.DOUBLE_COLON_LHS, receiver] ?: return emptyList()) {
+                return when (konst lhs = bindingContext[BindingContext.DOUBLE_COLON_LHS, receiver] ?: return emptyList()) {
                     is DoubleColonLHS.Type -> listOf(ReceiverType(lhs.type, 0))
 
                     is DoubleColonLHS.Expression -> {
-                        val receiverValue = ExpressionReceiver.create(receiver, lhs.type, bindingContext)
+                        konst receiverValue = ExpressionReceiver.create(receiver, lhs.type, bindingContext)
                         receiverValueTypes(
                             receiverValue, lhs.dataFlowInfo, bindingContext,
                             moduleDescriptor, stableSmartCastsOnly,
@@ -284,12 +284,12 @@ fun CallTypeAndReceiver<*, *>.receiverTypesWithIndex(
         is CallTypeAndReceiver.DELEGATE -> receiverExpression = receiver
 
         is CallTypeAndReceiver.SUPER_MEMBERS -> {
-            val qualifier = receiver.superTypeQualifier
+            konst qualifier = receiver.superTypeQualifier
             return if (qualifier != null) {
                 listOfNotNull(bindingContext.getType(receiver)).map { ReceiverType(it, 0) }
             } else {
-                val resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
-                val classDescriptor =
+                konst resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
+                konst classDescriptor =
                     resolutionScope.ownerDescriptor.parentsWithSelf.firstIsInstanceOrNull<ClassDescriptor>() ?: return emptyList()
                 classDescriptor.typeConstructor.supertypesWithAny().map { ReceiverType(it, 0) }
             }
@@ -303,7 +303,7 @@ fun CallTypeAndReceiver<*, *>.receiverTypesWithIndex(
             return null
     }
 
-    val resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
+    konst resolutionScope = contextElement.getResolutionScope(bindingContext, resolutionFacade)
 
     fun extractReceiverTypeFrom(descriptor: ClassDescriptor): KotlinType? =  // companion object type or class itself
         descriptor.classValueType ?: (if (descriptor.isFinalOrEnum || descriptor.isJavaDescriptor) null else descriptor.defaultType)
@@ -321,23 +321,23 @@ fun CallTypeAndReceiver<*, *>.receiverTypesWithIndex(
         ?: tryExtractClassDescriptorFromAlias(context)?.let { extractReceiverTypeFrom(it) }
     }
 
-    val expressionReceiver = receiverExpression?.let {
-        val receiverType = extractReceiverTypeFrom(bindingContext, receiverExpression) ?: return emptyList()
+    konst expressionReceiver = receiverExpression?.let {
+        konst receiverType = extractReceiverTypeFrom(bindingContext, receiverExpression) ?: return emptyList()
         ExpressionReceiver.create(receiverExpression, receiverType, bindingContext)
     }
 
-    val implicitReceiverValues = resolutionScope.getImplicitReceiversWithInstance(
+    konst implicitReceiverValues = resolutionScope.getImplicitReceiversWithInstance(
         excludeShadowedByDslMarkers = languageVersionSettings.supportsFeature(LanguageFeature.DslMarkersSupport)
-    ).map { it.value }
+    ).map { it.konstue }
 
-    val dataFlowInfo = bindingContext.getDataFlowInfoBefore(contextElement)
+    konst dataFlowInfo = bindingContext.getDataFlowInfoBefore(contextElement)
 
-    val result = ArrayList<ReceiverType>()
+    konst result = ArrayList<ReceiverType>()
 
     var receiverIndex = 0
 
     fun addReceiverType(receiverValue: ReceiverValue, implicit: Boolean) {
-        val types = receiverValueTypes(
+        konst types = receiverValueTypes(
             receiverValue, dataFlowInfo, bindingContext, moduleDescriptor, stableSmartCastsOnly,
             resolutionFacade
         )
@@ -364,11 +364,11 @@ private fun receiverValueTypes(
     stableSmartCastsOnly: Boolean,
     resolutionFacade: ResolutionFacade
 ): List<KotlinType> {
-    val languageVersionSettings = resolutionFacade.getLanguageVersionSettings()
-    val dataFlowValueFactory = resolutionFacade.getDataFlowValueFactory()
-    val smartCastManager = resolutionFacade.frontendService<SmartCastManager>()
-    val dataFlowValue = dataFlowValueFactory.createDataFlowValue(receiverValue, bindingContext, moduleDescriptor)
-    return if (dataFlowValue.isStable || !stableSmartCastsOnly) { // we don't include smart cast receiver types for "unstable" receiver value to mark members grayed
+    konst languageVersionSettings = resolutionFacade.getLanguageVersionSettings()
+    konst dataFlowValueFactory = resolutionFacade.getDataFlowValueFactory()
+    konst smartCastManager = resolutionFacade.frontendService<SmartCastManager>()
+    konst dataFlowValue = dataFlowValueFactory.createDataFlowValue(receiverValue, bindingContext, moduleDescriptor)
+    return if (dataFlowValue.isStable || !stableSmartCastsOnly) { // we don't include smart cast receiver types for "unstable" receiver konstue to mark members grayed
         smartCastManager.getSmartCastVariantsWithLessSpecificExcluded(
             receiverValue,
             bindingContext,

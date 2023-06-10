@@ -3,13 +3,13 @@
 // MODULE: lib
 // FILE: 2.kt
 abstract class A {
-    protected lateinit var value: String
-    fun f() = value
+    protected lateinit var konstue: String
+    fun f() = konstue
 }
 
 abstract class B : A() {
     init {
-        value = "OK"
+        konstue = "OK"
     }
 }
 
@@ -24,12 +24,12 @@ fun box(): String = D().f()
 
 // FILE: 2.kt
 abstract class A {
-    protected lateinit var value: String
-    fun f() = value
+    protected lateinit var konstue: String
+    fun f() = konstue
 }
 
 abstract class B : A() {
     init {
-        value = "OK"
+        konstue = "OK"
     }
 }

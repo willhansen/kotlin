@@ -5,19 +5,19 @@ var topLevel: Int
         state += "1"
         return 42
     }
-    set(value) {
+    set(konstue) {
         throw AssertionError("Nooo")
     }
 
 class A {
-    val member: String
+    konst member: String
         get() {
             state += "2"
             return "42"
         }
 }
 
-val A.ext: Any
+konst A.ext: Any
     get() {
         state += "3"
         return this

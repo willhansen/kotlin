@@ -22,8 +22,8 @@ class ParcelizeSubplugin : KotlinCompilerPluginSupportPlugin {
             throw GradleException("${target.path}: 'kotlin-parcelize' can't be applied together with 'kotlin-android-extensions'")
         }
 
-        val kotlinPluginVersion = target.getKotlinPluginVersion()
-        val dependency = target.dependencies.create("org.jetbrains.kotlin:kotlin-parcelize-runtime:$kotlinPluginVersion")
+        konst kotlinPluginVersion = target.getKotlinPluginVersion()
+        konst dependency = target.dependencies.create("org.jetbrains.kotlin:kotlin-parcelize-runtime:$kotlinPluginVersion")
         target.forAllAndroidVariants {
             it.runtimeConfiguration.dependencies.add(dependency)
             it.compileConfiguration.dependencies.add(dependency)
@@ -35,7 +35,7 @@ class ParcelizeSubplugin : KotlinCompilerPluginSupportPlugin {
             return false
         }
 
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
         if (project.extensions.findByName("android") !is BaseExtension) {
             return false
         }

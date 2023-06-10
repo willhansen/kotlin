@@ -10,7 +10,7 @@ public class TestClass {
 
 // FILE: main.kt
 fun run() {
-    val testClass = TestClass()
+    konst testClass = TestClass()
     // inferred as `set<Nothing>()`, return type is Nothing!
     testClass.set("test", null)
 

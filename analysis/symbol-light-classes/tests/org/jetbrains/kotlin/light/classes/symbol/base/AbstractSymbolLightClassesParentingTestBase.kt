@@ -21,8 +21,8 @@ import java.nio.file.Path
 
 open class AbstractSymbolLightClassesParentingTestBase(
     configurator: AnalysisApiTestConfigurator,
-    override val currentExtension: String,
-    override val isTestAgainstCompiledCode: Boolean,
+    override konst currentExtension: String,
+    override konst isTestAgainstCompiledCode: Boolean,
 ) : AbstractSymbolLightClassesTestBase(configurator) {
     override fun configureTest(builder: TestConfigurationBuilder) {
         super.configureTest(builder)
@@ -30,7 +30,7 @@ open class AbstractSymbolLightClassesParentingTestBase(
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val IGNORE_PARENTING_CHECK by directive(description = "Ignore the test")
+        konst IGNORE_PARENTING_CHECK by directive(description = "Ignore the test")
     }
 
     override fun getRenderResult(ktFile: KtFile, ktFiles: List<KtFile>, testDataFile: Path, module: TestModule, project: Project): String {
@@ -41,9 +41,9 @@ open class AbstractSymbolLightClassesParentingTestBase(
         Assume.assumeFalse("The test is not supported", Directives.IGNORE_PARENTING_CHECK in directives)
 
         // drop after KT-56882
-        val ignoreDecompiledClasses = isTestAgainstCompiledCode
+        konst ignoreDecompiledClasses = isTestAgainstCompiledCode
         return object : JavaElementVisitor() {
-            private val declarationStack = ArrayDeque<PsiElement>()
+            private konst declarationStack = ArrayDeque<PsiElement>()
 
             private fun <T : PsiElement> checkParentAndVisitChildren(
                 declaration: T,
@@ -74,21 +74,21 @@ open class AbstractSymbolLightClassesParentingTestBase(
 
                     declaration.action(this)
                 } finally {
-                    val removed = declarationStack.removeLast()
+                    konst removed = declarationStack.removeLast()
                     assertions.assertEquals(declaration, removed)
                 }
             }
 
             private fun visitPsiMemberDeclaration(member: PsiMember) {
-                val containingClass = member.containingClass
-                val expectedClass = declarationStack.lastOrNull()
+                konst containingClass = member.containingClass
+                konst expectedClass = declarationStack.lastOrNull()
                 if (expectedClass != null) {
                     assertions.assertEquals(expectedClass, containingClass)
                 }
 
-                val classToCheck: PsiClass = expectedClass?.let { it as PsiClass } ?: containingClass ?: return
-                val memberToCheck = if (member is PsiEnumConstantInitializer) member.enumConstant else member
-                val collection = when (memberToCheck) {
+                konst classToCheck: PsiClass = expectedClass?.let { it as PsiClass } ?: containingClass ?: return
+                konst memberToCheck = if (member is PsiEnumConstantInitializer) member.enumConstant else member
+                konst collection = when (memberToCheck) {
                     is PsiMethod -> classToCheck.methods
                     is PsiField -> classToCheck.fields
                     is PsiClass -> classToCheck.innerClasses
@@ -167,7 +167,7 @@ open class AbstractSymbolLightClassesParentingTestBase(
 
             override fun visitNameValuePair(pair: PsiNameValuePair) {
                 checkParentAndVisitChildren(pair) {
-                    value?.let(::checkAnnotationMemberValue)
+                    konstue?.let(::checkAnnotationMemberValue)
                 }
             }
 
@@ -190,8 +190,8 @@ open class AbstractSymbolLightClassesParentingTestBase(
             }
 
             private fun checkDeclarationParent(declaration: PsiElement) {
-                val expectedParent = declarationStack.lastOrNull() ?: return
-                val parent = declaration.parent
+                konst expectedParent = declarationStack.lastOrNull() ?: return
+                konst parent = declaration.parent
                 assertions.assertNotNull(parent) { "Parent should not be null for ${declaration::class} with text ${declaration.text}" }
                 assertions.assertEquals(expectedParent, parent) {
                     "Unexpected parent for ${declaration::class} with text ${declaration.text}"
@@ -199,11 +199,11 @@ open class AbstractSymbolLightClassesParentingTestBase(
             }
 
             override fun visitAnnotation(annotation: PsiAnnotation) {
-                val owner = annotation.owner
+                konst owner = annotation.owner
                 assertions.assertNotNull(owner)
 
-                val lastDeclaration = declarationStack.last()
-                val psiModifierListOwner = if (lastDeclaration is PsiModifierListOwner) {
+                konst lastDeclaration = declarationStack.last()
+                konst psiModifierListOwner = if (lastDeclaration is PsiModifierListOwner) {
                     assertions.assertEquals(lastDeclaration.modifierList, owner)
                     lastDeclaration
                 } else {
@@ -225,13 +225,13 @@ open class AbstractSymbolLightClassesParentingTestBase(
                     }
                 }
 
-                val modifierList = psiModifierListOwner.modifierList!!
-                val qualifiedName = annotation.qualifiedName!!
+                konst modifierList = psiModifierListOwner.modifierList!!
+                konst qualifiedName = annotation.qualifiedName!!
                 assertions.assertTrue(modifierList.hasAnnotation(qualifiedName)) {
                     "$qualifiedName is not found in $modifierList"
                 }
 
-                val anno = modifierList.findAnnotation(qualifiedName)
+                konst anno = modifierList.findAnnotation(qualifiedName)
                 assertions.assertNotNull(anno) {
                     "$qualifiedName is not found in $modifierList"
                 }

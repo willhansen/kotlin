@@ -1,7 +1,7 @@
 var x = "OK"
 
 class C(init: () -> String) {
-    val value = init()
+    konst konstue = init()
 }
 
-fun box() = C(::x)::value.get()
+fun box() = C(::x)::konstue.get()

@@ -12,14 +12,14 @@ import org.jetbrains.kotlin.name.FqName
 
 object ImplicitIntegerCoercion {
 
-    val MODULE_CAPABILITY = ModuleCapability<Boolean>("ImplicitIntegerCoercion")
+    konst MODULE_CAPABILITY = ModuleCapability<Boolean>("ImplicitIntegerCoercion")
 
     fun isEnabledFor(descriptor: DeclarationDescriptor, languageVersionSettings: LanguageVersionSettings): Boolean =
         descriptor.hasImplicitIntegerCoercionAnnotation() ||
                 (languageVersionSettings.supportsFeature(LanguageFeature.ImplicitSignedToUnsignedIntegerConversion) &&
                         DescriptorUtils.getContainingModuleOrNull(descriptor)?.hasImplicitIntegerCoercionCapability() == true)
 
-    private val IMPLICIT_INTEGER_COERCION_ANNOTATION_FQ_NAME = FqName("kotlin.internal.ImplicitIntegerCoercion")
+    private konst IMPLICIT_INTEGER_COERCION_ANNOTATION_FQ_NAME = FqName("kotlin.internal.ImplicitIntegerCoercion")
 
     private fun DeclarationDescriptor.hasImplicitIntegerCoercionAnnotation(): Boolean {
         return annotations.findAnnotation(IMPLICIT_INTEGER_COERCION_ANNOTATION_FQ_NAME) != null

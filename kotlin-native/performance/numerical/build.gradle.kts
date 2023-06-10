@@ -22,7 +22,7 @@ benchmark {
     posixSrcDirs = listOf("../shared/src/main/kotlin-native/posix")
 }
 
-val native = kotlin.targets.getByName("native") as KotlinNativeTarget
+konst native = kotlin.targets.getByName("native") as KotlinNativeTarget
 native.apply {
     compilations["main"].cinterops {
         create("cinterop") {

@@ -345,24 +345,24 @@ public class Fe10IdeNormalAnalysisSourceModuleSymbolByPsiTestGenerated extends A
     }
 
     @Nested
-    @TestMetadata("analysis/analysis-api/testData/symbols/symbolByPsi/valueParameters")
+    @TestMetadata("analysis/analysis-api/testData/symbols/symbolByPsi/konstueParameters")
     @TestDataPath("$PROJECT_ROOT")
     public class ValueParameters {
         @Test
         public void testAllFilesPresentInValueParameters() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/symbols/symbolByPsi/valueParameters"), Pattern.compile("^(.+)\\.kt$"), null, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/analysis-api/testData/symbols/symbolByPsi/konstueParameters"), Pattern.compile("^(.+)\\.kt$"), null, true);
         }
 
         @Test
         @TestMetadata("parameterInlining.kt")
         public void testParameterInlining() throws Exception {
-            runTest("analysis/analysis-api/testData/symbols/symbolByPsi/valueParameters/parameterInlining.kt");
+            runTest("analysis/analysis-api/testData/symbols/symbolByPsi/konstueParameters/parameterInlining.kt");
         }
 
         @Test
         @TestMetadata("parameterNotFunctionalType.kt")
         public void testParameterNotFunctionalType() throws Exception {
-            runTest("analysis/analysis-api/testData/symbols/symbolByPsi/valueParameters/parameterNotFunctionalType.kt");
+            runTest("analysis/analysis-api/testData/symbols/symbolByPsi/konstueParameters/parameterNotFunctionalType.kt");
         }
     }
 }

@@ -5,10 +5,10 @@ class Delegate {
 }
 
 fun foo(): Int {
-    val prop by Delegate()
+    konst prop by Delegate()
     return prop
 }
 
-val x = foo()
+konst x = foo()
 
 // expected: x: 3

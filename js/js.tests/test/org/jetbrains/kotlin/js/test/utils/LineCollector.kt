@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.resolve.calls.util.isFakePsiElement
 
 class LineCollector : RecursiveJsVisitor() {
-    val lines = mutableListOf<Int?>()
+    konst lines = mutableListOf<Int?>()
     private var currentStatement: JsStatement? = null
-    val lineNumbersByStatement = mutableMapOf<JsStatement, MutableList<Int>>()
-    val statementsWithoutLineNumbers = mutableSetOf<JsStatement>()
+    konst lineNumbersByStatement = mutableMapOf<JsStatement, MutableList<Int>>()
+    konst statementsWithoutLineNumbers = mutableSetOf<JsStatement>()
 
     override fun visitElement(node: JsNode) {
         handleNodeLocation(node)
@@ -21,13 +21,13 @@ class LineCollector : RecursiveJsVisitor() {
     }
 
     private fun handleNodeLocation(node: JsNode) {
-        val source = node.source
-        val line = when (source) {
+        konst source = node.source
+        konst line = when (source) {
             is PsiElement -> {
                 if (!source.isFakePsiElement) {
-                    val file = source.containingFile
-                    val offset = source.node.startOffset
-                    val document = file.viewProvider.document!!
+                    konst file = source.containingFile
+                    konst offset = source.node.startOffset
+                    konst document = file.viewProvider.document!!
                     document.getLineNumber(offset)
                 } else null
             }
@@ -39,7 +39,7 @@ class LineCollector : RecursiveJsVisitor() {
 
         if (line != null) {
             currentStatement?.let {
-                val linesByStatement = lineNumbersByStatement.getOrPut(it, ::mutableListOf)
+                konst linesByStatement = lineNumbersByStatement.getOrPut(it, ::mutableListOf)
                 if (linesByStatement.lastOrNull() != line) {
                     linesByStatement += line
                     lines += line
@@ -161,7 +161,7 @@ class LineCollector : RecursiveJsVisitor() {
     }
 
     private fun withStatement(statement: JsStatement, action: () -> Unit) {
-        val oldStatement = currentStatement
+        konst oldStatement = currentStatement
         currentStatement = statement
 
         action()

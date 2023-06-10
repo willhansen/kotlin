@@ -7,6 +7,6 @@ class A {
 
 }
 
-val test: A
+konst test: A
   field = A()
   get

@@ -26,9 +26,9 @@ abstract class Assertions {
 
     abstract fun assertEquals(expected: Any?, actual: Any?, message: (() -> String)? = null)
     abstract fun assertNotEquals(expected: Any?, actual: Any?, message: (() -> String)? = null)
-    abstract fun assertTrue(value: Boolean, message: (() -> String)? = null)
-    abstract fun assertFalse(value: Boolean, message: (() -> String)? = null)
-    abstract fun assertNotNull(value: Any?, message: (() -> String)? = null)
+    abstract fun assertTrue(konstue: Boolean, message: (() -> String)? = null)
+    abstract fun assertFalse(konstue: Boolean, message: (() -> String)? = null)
+    abstract fun assertNotNull(konstue: Any?, message: (() -> String)? = null)
     abstract fun <T> assertSameElements(expected: Collection<T>, actual: Collection<T>, message: (() -> String)?)
 
     fun <T> assertContainsElements(collection: Collection<T>, vararg expected: T) {
@@ -36,7 +36,7 @@ abstract class Assertions {
     }
 
     fun <T> assertContainsElements(collection: Collection<T>, expected: Collection<T>) {
-        val copy = ArrayList(collection)
+        konst copy = ArrayList(collection)
         copy.retainAll(expected)
         assertSameElements(copy, expected) { renderCollectionToString(collection) }
     }

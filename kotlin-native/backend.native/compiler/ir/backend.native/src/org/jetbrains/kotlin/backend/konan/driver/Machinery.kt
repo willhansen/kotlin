@@ -37,7 +37,7 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
  * It will take some time to rewrite it properly.
  */
 internal interface PhaseContext : LoggingContext, ConfigChecks, ErrorReportingContext {
-    val messageCollector: MessageCollector
+    konst messageCollector: MessageCollector
 
     /**
      * Called by [PhaseEngine.useContext] after action completion to cleanup resources.
@@ -46,7 +46,7 @@ internal interface PhaseContext : LoggingContext, ConfigChecks, ErrorReportingCo
 }
 
 internal open class BasicPhaseContext(
-        override val config: KonanConfig,
+        override konst config: KonanConfig,
 ) : PhaseContext {
     override var inVerbosePhase = false
     override fun log(message: () -> String) {
@@ -55,11 +55,11 @@ internal open class BasicPhaseContext(
         }
     }
 
-    override val messageCollector: MessageCollector
+    override konst messageCollector: MessageCollector
         get() = config.configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
     override fun report(element: IrElement?, irFile: IrFile?, message: String, isError: Boolean) {
-        val location = element?.getCompilerMessageLocation(irFile ?: error("irFile should be not null for $element"))
+        konst location = element?.getCompilerMessageLocation(irFile ?: error("irFile should be not null for $element"))
         this.messageCollector.report(
                 if (isError) CompilerMessageSeverity.ERROR else CompilerMessageSeverity.WARNING,
                 message, location
@@ -80,21 +80,21 @@ internal open class BasicPhaseContext(
  * This way, PhaseEngine forces user to create more specialized contexts that have a limited lifetime.
  */
 internal class PhaseEngine<C : PhaseContext>(
-        val phaseConfig: PhaseConfigurationService,
-        val phaserState: PhaserState<Any>,
-        val context: C
+        konst phaseConfig: PhaseConfigurationService,
+        konst phaserState: PhaserState<Any>,
+        konst context: C
 ) {
     companion object {
         fun startTopLevel(config: KonanConfig, body: (PhaseEngine<PhaseContext>) -> Unit) {
-            val phaserState = PhaserState<Any>()
-            val phaseConfig = config.flexiblePhaseConfig
-            val context = BasicPhaseContext(config)
-            val topLevelPhase = object : SimpleNamedCompilerPhase<PhaseContext, Any, Unit>(
+            konst phaserState = PhaserState<Any>()
+            konst phaseConfig = config.flexiblePhaseConfig
+            konst context = BasicPhaseContext(config)
+            konst topLevelPhase = object : SimpleNamedCompilerPhase<PhaseContext, Any, Unit>(
                     "Compiler",
                     "The whole compilation process",
             ) {
                 override fun phaseBody(context: PhaseContext, input: Any) {
-                    val engine = PhaseEngine(phaseConfig, phaserState, context)
+                    konst engine = PhaseEngine(phaseConfig, phaserState, context)
                     body(engine)
                 }
 
@@ -110,7 +110,7 @@ internal class PhaseEngine<C : PhaseContext>(
      * Switch to a more specific phase engine.
      */
     inline fun <T : PhaseContext, R> useContext(newContext: T, action: (PhaseEngine<T>) -> R): R {
-        val newEngine = PhaseEngine(phaseConfig, phaserState, newContext)
+        konst newEngine = PhaseEngine(phaseConfig, phaserState, newContext)
         try {
             return action(newEngine)
         } finally {
@@ -123,7 +123,7 @@ internal class PhaseEngine<C : PhaseContext>(
      * This is useful for creating engines for a sub/super context type.
      */
     inline fun <T : PhaseContext, R> newEngine(newContext: T, action: (PhaseEngine<T>) -> R): R {
-        val newEngine = PhaseEngine(phaseConfig, phaserState, newContext)
+        konst newEngine = PhaseEngine(phaseConfig, phaserState, newContext)
         return action(newEngine)
     }
 

@@ -5,7 +5,7 @@ open class L<LL : Any?> {
   // CHECK:
   //   Mangled name: L{}ll
   //   Public signature: /L.ll|-6205844342928411776[0]
-  val ll: LL
+  konst ll: LL
     // CHECK JVM_IR:
     //   Mangled name: L#<get-ll>(){}1:0
     //   Public signature: /L.ll.<get-ll>|3292228176841932804[0]
@@ -28,7 +28,7 @@ class Rec<T : Any?> {
   // CHECK:
   //   Mangled name: Rec{}rt
   //   Public signature: /Rec.rt|-2445570895924930609[0]
-  val rt: T
+  konst rt: T
     // CHECK JVM_IR:
     //   Mangled name: Rec#<get-rt>(){}1:0
     //   Public signature: /Rec.rt.<get-rt>|4833941673195700440[0]
@@ -63,7 +63,7 @@ fun <T1 : Any?, T2 : Any?, R : Any?> foo2(t1: T1, t2: T2, bb: Function2<T1, T2, 
 // CHECK:
 //   Mangled name: @Rec<0:0>{0§<kotlin.Any?>}p
 //   Public signature: /p|1337333823224750046[0]
-val <PT : Any?> Rec<PT>.p: L<PT>
+konst <PT : Any?> Rec<PT>.p: L<PT>
   // CHECK JVM_IR:
   //   Mangled name: #<get-p>@Rec<0:0>(){0§<kotlin.Any?>}L<0:0>
   //   Public signature: /p.<get-p>|-439714386562020387[0]

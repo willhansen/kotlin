@@ -27,7 +27,7 @@ import com.intellij.util.containers.ContainerUtil
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.types.KotlinType
 
-class LockBasedLazyResolveStorageManager(private val storageManager: StorageManager) : StorageManager by storageManager,
+class LockBasedLazyResolveStorageManager(private konst storageManager: StorageManager) : StorageManager by storageManager,
     LazyResolveStorageManager {
     override fun <K, V : Any> createSoftlyRetainedMemoizedFunction(compute: Function1<K, V>) =
         storageManager.createMemoizedFunction<K, V>(compute, ContainerUtil.createConcurrentSoftValueMap<K, Any>())
@@ -38,7 +38,7 @@ class LockBasedLazyResolveStorageManager(private val storageManager: StorageMana
     override fun createSafeTrace(originalTrace: BindingTrace): BindingTrace =
         LockProtectedTrace(storageManager, originalTrace)
 
-    private class LockProtectedContext(private val storageManager: StorageManager, private val context: BindingContext) : BindingContext {
+    private class LockProtectedContext(private konst storageManager: StorageManager, private konst context: BindingContext) : BindingContext {
         override fun getType(expression: KtExpression): KotlinType? = storageManager.compute { context.getType(expression) }
 
         override fun getDiagnostics(): Diagnostics = storageManager.compute { context.diagnostics }
@@ -55,19 +55,19 @@ class LockBasedLazyResolveStorageManager(private val storageManager: StorageMana
         override fun <K, V> getSliceContents(slice: ReadOnlySlice<K, V>) = storageManager.compute { context.getSliceContents<K, V>(slice) }
     }
 
-    private class LockProtectedTrace(private val storageManager: StorageManager, private val trace: BindingTrace) : BindingTrace {
+    private class LockProtectedTrace(private konst storageManager: StorageManager, private konst trace: BindingTrace) : BindingTrace {
         override fun recordType(expression: KtExpression, type: KotlinType?) {
             storageManager.compute { trace.recordType(expression, type) }
         }
 
         override fun getType(expression: KtExpression): KotlinType? = storageManager.compute { trace.getType(expression) }
 
-        private val context: BindingContext = LockProtectedContext(storageManager, trace.bindingContext)
+        private konst context: BindingContext = LockProtectedContext(storageManager, trace.bindingContext)
 
         override fun getBindingContext() = context
 
-        override fun <K, V> record(slice: WritableSlice<K, V>, key: K, value: V) {
-            storageManager.compute { trace.record<K, V>(slice, key, value) }
+        override fun <K, V> record(slice: WritableSlice<K, V>, key: K, konstue: V) {
+            storageManager.compute { trace.record<K, V>(slice, key, konstue) }
         }
 
         override fun <K> record(slice: WritableSlice<K, Boolean>, key: K) {

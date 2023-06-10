@@ -33,9 +33,9 @@
 
 package kotlin.math.fdlibm
 
-private const val one = 1.0
-private const val half = 0.5
-private const val huge = 1.0e300
+private const konst one = 1.0
+private const konst half = 0.5
+private const konst huge = 1.0e300
 
 internal fun __ieee754_cosh(x: Double): Double {
     var t: Double

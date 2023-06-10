@@ -11,13 +11,13 @@ import kotlinx.android.synthetic.main.layout.*
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class MyFragment(): Fragment() {
-    val baseActivity = Activity()
+    konst baseActivity = Activity()
     override fun getView(): View? = null
 }
 

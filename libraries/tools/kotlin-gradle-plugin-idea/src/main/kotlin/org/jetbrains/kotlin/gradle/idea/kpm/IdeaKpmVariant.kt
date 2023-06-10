@@ -9,21 +9,21 @@ import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import java.io.Serializable
 
 sealed interface IdeaKpmVariant : IdeaKpmFragment, Serializable {
-    val platform: IdeaKpmPlatform
-    val variantAttributes: Map<String, String>
-    val compilationOutputs: IdeaKpmCompilationOutput
+    konst platform: IdeaKpmPlatform
+    konst variantAttributes: Map<String, String>
+    konst compilationOutputs: IdeaKpmCompilationOutput
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmVariantImpl(
-    internal val fragment: IdeaKpmFragment,
-    override val platform: IdeaKpmPlatform,
-    override val variantAttributes: Map<String, String>,
-    override val compilationOutputs: IdeaKpmCompilationOutput,
+    internal konst fragment: IdeaKpmFragment,
+    override konst platform: IdeaKpmPlatform,
+    override konst variantAttributes: Map<String, String>,
+    override konst compilationOutputs: IdeaKpmCompilationOutput,
 ) : IdeaKpmVariant, IdeaKpmFragment by fragment {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

@@ -190,7 +190,7 @@ public class DefaultErrorMessages {
         MAP.put(REDUNDANT_ANNOTATION_TARGET, "Redundant annotation target ''{0}''", STRING);
         MAP.put(INAPPLICABLE_FILE_TARGET, "'@file:' annotations can only be applied before package declaration");
 
-        MAP.put(ILLEGAL_KOTLIN_VERSION_STRING_VALUE, "Invalid @{0} annotation value (should be ''major.minor'' or ''major.minor.patch'')", TO_STRING);
+        MAP.put(ILLEGAL_KOTLIN_VERSION_STRING_VALUE, "Inkonstid @{0} annotation konstue (should be ''major.minor'' or ''major.minor.patch'')", TO_STRING);
         MAP.put(NEWER_VERSION_IN_SINCE_KOTLIN, "The version is greater than the specified API version {0}", STRING);
 
         MAP.put(OPT_IN_USAGE, "{1}", TO_STRING, STRING);
@@ -264,7 +264,7 @@ public class DefaultErrorMessages {
             }
         });
 
-        MAP.put(VARARG_OUTSIDE_PARENTHESES, "Passing value as a vararg is only allowed inside a parenthesized argument list");
+        MAP.put(VARARG_OUTSIDE_PARENTHESES, "Passing konstue as a vararg is only allowed inside a parenthesized argument list");
         MAP.put(NON_VARARG_SPREAD, "The spread operator (*foo) may only be applied in a vararg position. See https://youtrack.jetbrains.com/issue/KT-48162 for more details.");
         MAP.put(SPREAD_OF_NULLABLE, "The spread operator (*foo) may not be applied to an argument of nullable type");
         MAP.put(SPREAD_OF_LAMBDA_OR_CALLABLE_REFERENCE, "The spread operator (*foo) cannot be applied to lambda argument or callable reference");
@@ -276,7 +276,7 @@ public class DefaultErrorMessages {
 
         MAP.put(INITIALIZER_REQUIRED_FOR_DESTRUCTURING_DECLARATION, "Initializer required for destructuring declaration");
         MAP.put(COMPONENT_FUNCTION_MISSING, "Destructuring declaration initializer of type {1} must have a ''{0}()'' function", TO_STRING, RENDER_TYPE);
-        MAP.put(COMPONENT_FUNCTION_ON_NULLABLE, "Not nullable value required to call ''{0}()'' function of destructuring declaration initializer", TO_STRING);
+        MAP.put(COMPONENT_FUNCTION_ON_NULLABLE, "Not nullable konstue required to call ''{0}()'' function of destructuring declaration initializer", TO_STRING);
         MAP.put(COMPONENT_FUNCTION_AMBIGUITY, "Function ''{0}()'' is ambiguous for this expression: {1}", TO_STRING, AMBIGUOUS_CALLS);
         MAP.put(COMPONENT_FUNCTION_RETURN_TYPE_MISMATCH, "''{0}()'' function returns ''{1}'', but ''{2}'' is expected",
                                                                                     TO_STRING, RENDER_TYPE, RENDER_TYPE);
@@ -334,7 +334,7 @@ public class DefaultErrorMessages {
         MAP.put(NON_FINAL_MEMBER_IN_FINAL_CLASS, "'open' has no effect in a final class");
         MAP.put(NON_FINAL_MEMBER_IN_OBJECT, "'open' has no effect in an object");
 
-        MAP.put(ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE, "An anonymous function is not allowed to specify default values for its parameters");
+        MAP.put(ANONYMOUS_FUNCTION_PARAMETER_WITH_DEFAULT_VALUE, "An anonymous function is not allowed to specify default konstues for its parameters");
         MAP.put(USELESS_VARARG_ON_PARAMETER, "Vararg on this parameter is useless");
         MAP.put(MULTIPLE_VARARG_PARAMETERS, "Multiple vararg-parameters are prohibited");
         MAP.put(FORBIDDEN_VARARG_PARAMETER_TYPE, "Forbidden vararg parameter type: {0}", RENDER_TYPE);
@@ -361,15 +361,15 @@ public class DefaultErrorMessages {
         MAP.put(ACTUAL_TYPE_ALIAS_TO_CLASS_WITH_DECLARATION_SITE_VARIANCE, "Aliased class should not have type parameters with declaration-site variance");
         MAP.put(ACTUAL_TYPE_ALIAS_WITH_USE_SITE_VARIANCE, "Right-hand side of actual type alias cannot contain use-site variance or star projections");
         MAP.put(ACTUAL_TYPE_ALIAS_WITH_COMPLEX_SUBSTITUTION, "Type arguments in the right-hand side of actual type alias should be its type parameters in the same order, e.g. 'actual typealias Foo<A, B> = Bar<A, B>'");
-        MAP.put(ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, "Actual function cannot have default argument values, they should be declared in the expected function");
-        MAP.put(ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE, "Parameter ''{0}'' has conflicting values in the expected and actual annotation", NAME);
+        MAP.put(ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS, "Actual function cannot have default argument konstues, they should be declared in the expected function");
+        MAP.put(ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE, "Parameter ''{0}'' has conflicting konstues in the expected and actual annotation", NAME);
         MAP.put(DEFAULT_ARGUMENTS_IN_EXPECT_WITH_ACTUAL_TYPEALIAS,
-                "Default argument values inside expect declaration ''{0}'' are not allowed if it is actualized via typealias. " +
-                "Possible fix is to remove default argument values in members:{1}",
+                "Default argument konstues inside expect declaration ''{0}'' are not allowed if it is actualized via typealias. " +
+                "Possible fix is to remove default argument konstues in members:{1}",
                 NAME, DESCRIPTORS_ON_NEWLINE_WITH_INDENT);
 
         MAP.put(EXPECTED_FUNCTION_SOURCE_WITH_DEFAULT_ARGUMENTS_NOT_FOUND,
-                "Expected function source is not found, therefore it's impossible to generate default argument values declared there. " +
+                "Expected function source is not found, therefore it's impossible to generate default argument konstues declared there. " +
                 "Please add the corresponding file to compilation sources");
 
         MAP.put(NO_ACTUAL_FOR_EXPECT, "Expected {0} has no actual declaration in module {1}{2}", DECLARATION_NAME_WITH_KIND,
@@ -398,7 +398,7 @@ public class DefaultErrorMessages {
         MAP.put(VIRTUAL_MEMBER_HIDDEN, "''{0}'' hides member of supertype ''{2}'' and needs ''override'' modifier", NAME, NAME, NAME);
 
         MAP.put(DATA_CLASS_OVERRIDE_CONFLICT, "Function ''{0}'' generated for the data class conflicts with member of supertype ''{1}''", NAME, NAME);
-        MAP.put(DATA_CLASS_OVERRIDE_DEFAULT_VALUES, "Function ''{0}'' generated for the data class has default values for parameters, and conflicts with member of supertype ''{1}''", NAME, NAME);
+        MAP.put(DATA_CLASS_OVERRIDE_DEFAULT_VALUES, "Function ''{0}'' generated for the data class has default konstues for parameters, and conflicts with member of supertype ''{1}''", NAME, NAME);
 
         MAP.put(CANNOT_OVERRIDE_INVISIBLE_MEMBER, "''{0}'' has no access to ''{1}'', so it cannot override it", FQ_NAMES_IN_TYPES,
                 FQ_NAMES_IN_TYPES);
@@ -418,15 +418,15 @@ public class DefaultErrorMessages {
         MAP.put(UNUSED_DESTRUCTURED_PARAMETER_ENTRY, "Destructured parameter ''{0}'' is never used", NAME);
         MAP.put(ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE, "Variable ''{0}'' is assigned but never accessed", NAME);
         MAP.put(VARIABLE_WITH_REDUNDANT_INITIALIZER, "Variable ''{0}'' initializer is redundant", NAME);
-        MAP.put(UNUSED_VALUE, "The value ''{0}'' assigned to ''{1}'' is never used", ELEMENT_TEXT, FQ_NAMES_IN_TYPES);
-        MAP.put(UNUSED_CHANGED_VALUE, "The value changed at ''{0}'' is never used", ELEMENT_TEXT);
+        MAP.put(UNUSED_VALUE, "The konstue ''{0}'' assigned to ''{1}'' is never used", ELEMENT_TEXT, FQ_NAMES_IN_TYPES);
+        MAP.put(UNUSED_CHANGED_VALUE, "The konstue changed at ''{0}'' is never used", ELEMENT_TEXT);
         MAP.put(UNUSED_EXPRESSION, "The expression is unused");
         MAP.put(UNUSED_LAMBDA_EXPRESSION, "The lambda expression is unused. If you mean a block, you can use 'run { ... }'");
 
         MAP.put(VAL_REASSIGNMENT, "Val cannot be reassigned", NAME);
         MAP.put(VAL_REASSIGNMENT_VIA_BACKING_FIELD, "Reassignment of read-only property via backing field", NAME);
-        MAP.put(CAPTURED_VAL_INITIALIZATION, "Captured values initialization is forbidden due to possible reassignment", NAME);
-        MAP.put(CAPTURED_MEMBER_VAL_INITIALIZATION, "Captured member values initialization is forbidden due to possible reassignment", NAME);
+        MAP.put(CAPTURED_VAL_INITIALIZATION, "Captured konstues initialization is forbidden due to possible reassignment", NAME);
+        MAP.put(CAPTURED_MEMBER_VAL_INITIALIZATION, "Captured member konstues initialization is forbidden due to possible reassignment", NAME);
         MAP.put(SETTER_PROJECTED_OUT, "Setter for ''{0}'' is removed by type projection", NAME);
         MAP.put(INVISIBLE_SETTER, "Cannot assign to ''{0}'': the setter is {1} in {2}", NAME, VISIBILITY,
                 NAME_OF_CONTAINING_DECLARATION_OR_FILE);
@@ -552,7 +552,7 @@ public class DefaultErrorMessages {
         MAP.put(LOCAL_VARIABLE_WITH_SETTER, "Local variables are not allowed to have setters");
         MAP.put(LOCAL_VARIABLE_WITH_TYPE_PARAMETERS_WARNING, "Type parameters for local variables are deprecated");
         MAP.put(LOCAL_VARIABLE_WITH_TYPE_PARAMETERS, "Local variables are not allowed to have type parameters");
-        MAP.put(VAL_WITH_SETTER, "A 'val'-property cannot have a setter");
+        MAP.put(VAL_WITH_SETTER, "A 'konst'-property cannot have a setter");
 
         MAP.put(DEPRECATED_IDENTITY_EQUALS, "Identity equality for arguments of types {0} and {1} is deprecated", RENDER_TYPE, RENDER_TYPE);
         MAP.put(IMPLICIT_BOXING_IN_IDENTITY_EQUALS, "Identity equality for arguments of types {0} and {1} can be unstable because of implicit boxing", RENDER_TYPE, RENDER_TYPE);
@@ -577,7 +577,7 @@ public class DefaultErrorMessages {
         MAP.put(SUPER_IS_NOT_AN_EXPRESSION, "''{0}'' is not an expression, it can only be used on the left-hand side of a dot (''.'')", STRING);
         MAP.put(SUPER_CANT_BE_EXTENSION_RECEIVER, "''{0}'' is not an expression, it can not be used as a receiver for extension functions", STRING);
         MAP.put(DECLARATION_IN_ILLEGAL_CONTEXT, "Declarations are not allowed in this position");
-        MAP.put(SETTER_PARAMETER_WITH_DEFAULT_VALUE, "Setter parameters cannot have default values");
+        MAP.put(SETTER_PARAMETER_WITH_DEFAULT_VALUE, "Setter parameters cannot have default konstues");
         MAP.put(NO_THIS, "'this' is not defined in this context");
         MAP.put(SUPER_NOT_AVAILABLE, "No supertypes are accessible in this context");
         MAP.put(SUPERCLASS_NOT_ACCESSIBLE_FROM_INTERFACE, "Superclass is not accessible from interface");
@@ -618,7 +618,7 @@ public class DefaultErrorMessages {
         MAP.put(NEXT_NONE_APPLICABLE, "None of the ''next()'' functions is applicable for ''iterator()'' of type ''{0}''", RENDER_TYPE);
 
         MAP.put(ITERATOR_MISSING, "For-loop range must have an 'iterator()' method");
-        MAP.put(ITERATOR_ON_NULLABLE, "Not nullable value required to call an 'iterator()' method on for-loop range");
+        MAP.put(ITERATOR_ON_NULLABLE, "Not nullable konstue required to call an 'iterator()' method on for-loop range");
         MAP.put(ITERATOR_AMBIGUITY, "Method ''iterator()'' is ambiguous for this expression: {0}", AMBIGUOUS_CALLS);
 
         MAP.put(DELEGATE_SPECIAL_FUNCTION_MISSING, "Type ''{1}'' has no method ''{0}'' and thus it cannot serve as a {2}", STRING, RENDER_TYPE, STRING);
@@ -654,7 +654,7 @@ public class DefaultErrorMessages {
                                      "Use the explicit one if necessary", COMPACT);
 
         MAP.put(NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER, "Semantics of such combination of safe call and operator will change in next compiler version. " +
-                                     "Namely, the right part of the safe call will not be evaluated if receiver is null");
+                                     "Namely, the right part of the safe call will not be ekonstuated if receiver is null");
 
         MAP.put(RETURN_IN_FUNCTION_WITH_EXPRESSION_BODY,
                 "Returns are not allowed for functions with expression body. Use block body in '{...}'");
@@ -662,10 +662,10 @@ public class DefaultErrorMessages {
         MAP.put(NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY_MIGRATION, "A 'return' expression required in a function with a block body ('{...}'). " +
                                                                  "If you got this error after the compiler update, then it's most likely due to a fix of a bug " +
                                                                  "introduced in 1.3.0 (see KT-28061 for details)");
-        MAP.put(RETURN_TYPE_MISMATCH, "This function must return a value of type {0}", RENDER_TYPE);
-        MAP.put(EXPECTED_TYPE_MISMATCH, "Expected a value of type {0}", RENDER_TYPE);
+        MAP.put(RETURN_TYPE_MISMATCH, "This function must return a konstue of type {0}", RENDER_TYPE);
+        MAP.put(EXPECTED_TYPE_MISMATCH, "Expected a konstue of type {0}", RENDER_TYPE);
         MAP.put(ASSIGNMENT_TYPE_MISMATCH,
-                "Expected a value of type {0}. Assignment operation is not an expression, so it does not return any value", RENDER_TYPE);
+                "Expected a konstue of type {0}. Assignment operation is not an expression, so it does not return any konstue", RENDER_TYPE);
 
         MAP.put(EXPECTED_PARAMETER_TYPE_MISMATCH, "Expected parameter of type {0}", RENDER_TYPE);
         MAP.put(EXPECTED_PARAMETER_TYPE_MISMATCH_WARNING, "Expected parameter of type {0}", RENDER_TYPE);
@@ -681,7 +681,7 @@ public class DefaultErrorMessages {
 
         MAP.put(UPPER_BOUND_VIOLATED, "Type argument is not within its bounds: should be subtype of ''{0}''", RENDER_TYPE, RENDER_TYPE);
         MAP.put(UPPER_BOUND_VIOLATED_WARNING, "Type argument is not within its bounds: ''{1}'' should be subtype of ''{0}''. This warning will become an error in K2", RENDER_TYPE, RENDER_TYPE);
-        MAP.put(FINAL_UPPER_BOUND, "''{0}'' is a final type, and thus a value of the type parameter is predetermined", RENDER_TYPE);
+        MAP.put(FINAL_UPPER_BOUND, "''{0}'' is a final type, and thus a konstue of the type parameter is predetermined", RENDER_TYPE);
         MAP.put(UPPER_BOUND_IS_EXTENSION_FUNCTION_TYPE, "Extension function type can not be used as an upper bound");
         MAP.put(ONLY_ONE_CLASS_BOUND_ALLOWED, "Only one of the upper bounds can be a class");
         MAP.put(BOUNDS_NOT_ALLOWED_IF_BOUNDED_BY_TYPE_PARAMETER, "Type parameter cannot have any other bounds if it's bounded by another type parameter");
@@ -720,9 +720,9 @@ public class DefaultErrorMessages {
         MAP.put(CONSTANT_EXPECTED_TYPE_MISMATCH, "The {0} literal does not conform to the expected type {1}", STRING, RENDER_TYPE);
         MAP.put(DIVISION_BY_ZERO, "Division by zero");
         MAP.put(INTEGER_OVERFLOW, "This operation has led to an overflow");
-        MAP.put(INT_LITERAL_OUT_OF_RANGE, "The value is out of range");
+        MAP.put(INT_LITERAL_OUT_OF_RANGE, "The konstue is out of range");
         MAP.put(WRONG_LONG_SUFFIX, "Use 'L' instead of 'l'");
-        MAP.put(FLOAT_LITERAL_OUT_OF_RANGE, "The value is out of range");
+        MAP.put(FLOAT_LITERAL_OUT_OF_RANGE, "The konstue is out of range");
         MAP.put(FLOAT_LITERAL_CONFORMS_INFINITY, "Floating point number conforms to infinity");
         MAP.put(FLOAT_LITERAL_CONFORMS_ZERO, "Floating point number conforms to zero");
         MAP.put(INCORRECT_CHARACTER_LITERAL, "Incorrect character literal");
@@ -730,14 +730,14 @@ public class DefaultErrorMessages {
         MAP.put(ILLEGAL_UNDERSCORE, "Illegal underscore");
         MAP.put(TOO_MANY_CHARACTERS_IN_CHARACTER_LITERAL, "Too many characters in a character literal ''{0}''", ELEMENT_TEXT);
         MAP.put(ILLEGAL_ESCAPE, "Illegal escape: ''{0}''", ELEMENT_TEXT);
-        MAP.put(NULL_FOR_NONNULL_TYPE, "Null can not be a value of a non-null type {0}", RENDER_TYPE);
-        MAP.put(NULL_FOR_NONNULL_TYPE_WARNING, "Null can not be a value of a non-null type {0}", RENDER_TYPE);
+        MAP.put(NULL_FOR_NONNULL_TYPE, "Null can not be a konstue of a non-null type {0}", RENDER_TYPE);
+        MAP.put(NULL_FOR_NONNULL_TYPE_WARNING, "Null can not be a konstue of a non-null type {0}", RENDER_TYPE);
 
         MAP.put(ELSE_MISPLACED_IN_WHEN, "'else' entry must be the last one in a when-expression");
         MAP.put(REDUNDANT_ELSE_IN_WHEN, "'when' is exhaustive so 'else' is redundant here");
         MAP.put(COMMA_IN_WHEN_CONDITION_WITHOUT_ARGUMENT, "Deprecated syntax. Use '||' instead of commas in when-condition for 'when' without argument");
         MAP.put(DUPLICATE_LABEL_IN_WHEN, "Duplicate label in when");
-        MAP.put(ILLEGAL_DECLARATION_IN_WHEN_SUBJECT, "Illegal variable declaration in ''when'' subject: {0}. Should be a simple val with an initializer", STRING);
+        MAP.put(ILLEGAL_DECLARATION_IN_WHEN_SUBJECT, "Illegal variable declaration in ''when'' subject: {0}. Should be a simple konst with an initializer", STRING);
 
         MAP.put(NO_ELSE_IN_WHEN, "''when'' expression must be exhaustive, add necessary {0}", RENDER_WHEN_MISSING_CASES);
         MAP.put(NON_EXHAUSTIVE_WHEN, "''when'' expression on enum is recommended to be exhaustive, add {0}", RENDER_WHEN_MISSING_CASES);
@@ -792,7 +792,7 @@ public class DefaultErrorMessages {
         MAP.put(NO_TAIL_CALLS_FOUND, "A function is marked as tail-recursive but no tail calls are found");
         MAP.put(TAILREC_ON_VIRTUAL_MEMBER, "Tailrec is not allowed on open members");
 
-        MAP.put(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION, "A type annotation is required on a value parameter");
+        MAP.put(VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION, "A type annotation is required on a konstue parameter");
         MAP.put(BREAK_OR_CONTINUE_OUTSIDE_A_LOOP, "'break' and 'continue' are only allowed inside a loop");
         MAP.put(BREAK_OR_CONTINUE_IN_WHEN, "'break' and 'continue' are not allowed in 'when' statements. Consider using labels to continue/break from the outer loop");
         MAP.put(BREAK_OR_CONTINUE_JUMPS_ACROSS_FUNCTION_BOUNDARY, "'break' or 'continue' jumps across a function or a class boundary");
@@ -857,27 +857,27 @@ public class DefaultErrorMessages {
 
         MAP.put(VALUE_CLASS_NOT_TOP_LEVEL, "Value classes cannot be local or inner");
         MAP.put(VALUE_CLASS_NOT_FINAL, "Value classes can be only final");
-        MAP.put(ABSENCE_OF_PRIMARY_CONSTRUCTOR_FOR_VALUE_CLASS, "Primary constructor is required for value class");
+        MAP.put(ABSENCE_OF_PRIMARY_CONSTRUCTOR_FOR_VALUE_CLASS, "Primary constructor is required for konstue class");
         MAP.put(INLINE_CLASS_CONSTRUCTOR_WRONG_PARAMETERS_SIZE, "Inline class must have exactly one primary constructor parameter");
         MAP.put(VALUE_CLASS_EMPTY_CONSTRUCTOR, "Value class must have at least one primary constructor parameter");
-        MAP.put(VALUE_CLASS_CONSTRUCTOR_NOT_FINAL_READ_ONLY_PARAMETER, "Value class primary constructor must only have final read-only (val) property parameters");
+        MAP.put(VALUE_CLASS_CONSTRUCTOR_NOT_FINAL_READ_ONLY_PARAMETER, "Value class primary constructor must only have final read-only (konst) property parameters");
         MAP.put(PROPERTY_WITH_BACKING_FIELD_INSIDE_VALUE_CLASS, "Value class cannot have properties with backing fields");
         MAP.put(DELEGATED_PROPERTY_INSIDE_VALUE_CLASS, "Value class cannot have delegated properties");
-        MAP.put(VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE, "Value class cannot have value parameter of type ''{0}''", RENDER_TYPE);
+        MAP.put(VALUE_CLASS_HAS_INAPPLICABLE_PARAMETER_TYPE, "Value class cannot have konstue parameter of type ''{0}''", RENDER_TYPE);
         MAP.put(VALUE_CLASS_CANNOT_IMPLEMENT_INTERFACE_BY_DELEGATION, "Value class cannot implement an interface by delegation if expression is not a parameter");
         MAP.put(VALUE_CLASS_CANNOT_EXTEND_CLASSES, "Value class cannot extend classes");
         MAP.put(VALUE_CLASS_CANNOT_BE_RECURSIVE, "Value class cannot be recursive");
-        MAP.put(MULTI_FIELD_VALUE_CLASS_PRIMARY_CONSTRUCTOR_DEFAULT_PARAMETER, "Default parameters are not supported in the primary constructor of a multi-field value class");
+        MAP.put(MULTI_FIELD_VALUE_CLASS_PRIMARY_CONSTRUCTOR_DEFAULT_PARAMETER, "Default parameters are not supported in the primary constructor of a multi-field konstue class");
         MAP.put(RESERVED_MEMBER_INSIDE_VALUE_CLASS, "Member with the name ''{0}'' is reserved for future releases", STRING);
-        MAP.put(TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS, "Type arguments for typed value class equals must be only star projections");
+        MAP.put(TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS, "Type arguments for typed konstue class equals must be only star projections");
         MAP.put(INNER_CLASS_INSIDE_VALUE_CLASS, "Value class cannot have inner classes");
         MAP.put(VALUE_CLASS_CANNOT_BE_CLONEABLE, "Value class cannot be Cloneable");
-        MAP.put(INLINE_CLASS_DEPRECATED, "'inline' modifier is deprecated. Use 'value' instead");
+        MAP.put(INLINE_CLASS_DEPRECATED, "'inline' modifier is deprecated. Use 'konstue' instead");
         MAP.put(VALUE_CLASS_CANNOT_HAVE_CONTEXT_RECEIVERS, "Value classes cannot have context receivers");
         MAP.put(INEFFICIENT_EQUALS_OVERRIDING_IN_VALUE_CLASS,
-                "Overriding ''equals'' from ''Any'' in value class without operator ''equals(other: {0}): Boolean'' leads to boxing on every equality comparison",
+                "Overriding ''equals'' from ''Any'' in konstue class without operator ''equals(other: {0}): Boolean'' leads to boxing on every equality comparison",
                 RENDER_TYPE);
-        MAP.put(ANNOTATION_ON_ILLEGAL_MULTI_FIELD_VALUE_CLASS_TYPED_TARGET, "Annotations on {0} of multi-field value class type are not supported", STRING);
+        MAP.put(ANNOTATION_ON_ILLEGAL_MULTI_FIELD_VALUE_CLASS_TYPED_TARGET, "Annotations on {0} of multi-field konstue class type are not supported", STRING);
 
         MAP.put(RESULT_CLASS_IN_RETURN_TYPE, "'kotlin.Result' cannot be used as a return type");
         MAP.put(RESULT_CLASS_WITH_NULLABLE_OPERATOR, "Expression of type ''kotlin.Result'' cannot be used as a left operand of ''{0}''", STRING);
@@ -885,7 +885,7 @@ public class DefaultErrorMessages {
         MAP.put(FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS, "Fun interfaces must have exactly one abstract method");
         MAP.put(FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES, "Fun interfaces cannot have abstract properties");
         MAP.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_TYPE_PARAMETERS, "Single abstract member cannot declare type parameters");
-        MAP.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_DEFAULT_VALUE, "Single abstract member cannot declare default values");
+        MAP.put(FUN_INTERFACE_ABSTRACT_METHOD_WITH_DEFAULT_VALUE, "Single abstract member cannot declare default konstues");
         MAP.put(FUN_INTERFACE_CONSTRUCTOR_REFERENCE, "Functional interface constructor references are prohibited");
         MAP.put(FUN_INTERFACE_WITH_SUSPEND_FUNCTION, "'suspend' modifier is not allowed on a single abstract member");
 
@@ -927,7 +927,7 @@ public class DefaultErrorMessages {
         MAP.put(INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS, "Inner class of generic class extending 'Throwable' is prohibited");
         MAP.put(INNER_CLASS_OF_GENERIC_THROWABLE_SUBCLASS_WARNING, "Inner class of generic class extending 'Throwable' is deprecated");
 
-        MAP.put(TYPE_MISMATCH_IN_FOR_LOOP, "The loop iterates over values of type {0} but the parameter is declared to be {1}", RENDER_TYPE,
+        MAP.put(TYPE_MISMATCH_IN_FOR_LOOP, "The loop iterates over konstues of type {0} but the parameter is declared to be {1}", RENDER_TYPE,
                 RENDER_TYPE);
         MAP.put(INCOMPATIBLE_TYPES, "Incompatible types: {0} and {1}", RENDER_TYPE, RENDER_TYPE);
         MAP.put(IMPLICIT_NOTHING_RETURN_TYPE, "'Nothing' return type needs to be specified explicitly");
@@ -942,7 +942,7 @@ public class DefaultErrorMessages {
         MAP.put(CANNOT_CHECK_FOR_ERASED, "Cannot check for instance of erased type: {0}", RENDER_TYPE);
         MAP.put(UNCHECKED_CAST, "Unchecked cast: {0} to {1}", RENDER_TYPE, RENDER_TYPE);
 
-        MAP.put(INCONSISTENT_TYPE_PARAMETER_VALUES, "Type parameter {0} of ''{1}'' has inconsistent values: {2}", NAME, NAME, RENDER_COLLECTION_OF_TYPES);
+        MAP.put(INCONSISTENT_TYPE_PARAMETER_VALUES, "Type parameter {0} of ''{1}'' has inconsistent konstues: {2}", NAME, NAME, RENDER_COLLECTION_OF_TYPES);
         MAP.put(INCONSISTENT_TYPE_PARAMETER_BOUNDS, "Type parameter {0} of ''{1}'' has inconsistent bounds: {2}", NAME, NAME, RENDER_COLLECTION_OF_TYPES);
 
         MAP.put(EQUALITY_NOT_APPLICABLE, "Operator ''{0}'' cannot be applied to ''{1}'' and ''{2}''", (nameExpression, context) -> nameExpression.getReferencedName(), RENDER_TYPE, RENDER_TYPE);
@@ -985,7 +985,7 @@ public class DefaultErrorMessages {
         MAP.put(PROPERTY_TYPE_MISMATCH_BY_DELEGATION, "Type of property ''{0}'' is not a subtype of overridden by delegation ''{1}''",
                 SHORT_NAMES_IN_TYPES, SHORT_NAMES_IN_TYPES);
 
-        MAP.put(VAR_OVERRIDDEN_BY_VAL, "Var-property {0} cannot be overridden by val-property {1}", FQ_NAMES_IN_TYPES,
+        MAP.put(VAR_OVERRIDDEN_BY_VAL, "Var-property {0} cannot be overridden by konst-property {1}", FQ_NAMES_IN_TYPES,
                 FQ_NAMES_IN_TYPES);
 
         MAP.put(CONFLICTING_INHERITED_MEMBERS, "{0} inherits conflicting members: {1}", NAME, CommonRenderers.commaSeparated(FQ_NAMES_IN_TYPES));
@@ -1042,7 +1042,7 @@ public class DefaultErrorMessages {
         MAP.put(UNRESOLVED_REFERENCE_WRONG_RECEIVER, "Unresolved reference. None of the following candidates is applicable because of receiver type mismatch: {0}", AMBIGUOUS_CALLS);
         MAP.put(CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY, "Callable reference resolution ambiguity: {0}", AMBIGUOUS_CALLABLE_REFERENCES);
 
-        MAP.put(NO_VALUE_FOR_PARAMETER, "No value passed for parameter ''{0}''", NAME);
+        MAP.put(NO_VALUE_FOR_PARAMETER, "No konstue passed for parameter ''{0}''", NAME);
         MAP.put(MISSING_RECEIVER, "A receiver of type {0} is required", RENDER_TYPE);
         MAP.put(NO_RECEIVER_ALLOWED, "No receiver can be passed to this function or property");
         MAP.put(ASSIGNING_SINGLE_ELEMENT_TO_VARARG_IN_NAMED_FORM_FUNCTION, "Assigning single elements to varargs in named form is forbidden", TO_STRING);
@@ -1062,7 +1062,7 @@ public class DefaultErrorMessages {
 
         MAP.put(TYPE_INFERENCE_PARAMETER_CONSTRAINT_ERROR, "Type inference failed: {0}", TYPE_INFERENCE_PARAMETER_CONSTRAINT_ERROR_RENDERER);
         MAP.put(TYPE_INFERENCE_INCORPORATION_ERROR, "Type inference failed. Please try to specify type arguments explicitly.");
-        MAP.put(TYPE_INFERENCE_ONLY_INPUT_TYPES, "Type inference failed. The value of the type parameter {0} should be mentioned in input types " +
+        MAP.put(TYPE_INFERENCE_ONLY_INPUT_TYPES, "Type inference failed. The konstue of the type parameter {0} should be mentioned in input types " +
                                                  "(argument types, receiver type or expected type). Try to specify it explicitly.", NAME);
         MAP.put(INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION, "Type argument for a type parameter {0} can''t be inferred because it has incompatible upper bounds: {1} ({2}{3})", TO_STRING, RENDER_COLLECTION_OF_TYPES, TO_STRING, TO_STRING);
         MAP.put(INFERRED_TYPE_VARIABLE_INTO_POSSIBLE_EMPTY_INTERSECTION, "Type argument for a type parameter {0} has possible incompatible upper bounds: {1} ({2}{3})", TO_STRING, RENDER_COLLECTION_OF_TYPES, TO_STRING, TO_STRING);
@@ -1097,19 +1097,19 @@ public class DefaultErrorMessages {
         MAP.put(TYPE_PARAMETER_OF_PROPERTY_NOT_USED_IN_RECEIVER, "Type parameter of a property must be used in its receiver type");
 
         MAP.put(SUPERTYPES_FOR_ANNOTATION_CLASS, "Annotation class cannot have supertypes");
-        MAP.put(MISSING_VAL_ON_ANNOTATION_PARAMETER, "'val' keyword is missing on annotation parameter");
+        MAP.put(MISSING_VAL_ON_ANNOTATION_PARAMETER, "'konst' keyword is missing on annotation parameter");
         MAP.put(VAR_ANNOTATION_PARAMETER, "An annotation parameter cannot be 'var'");
         MAP.put(ANNOTATION_CLASS_CONSTRUCTOR_CALL, "Annotation class cannot be instantiated");
         MAP.put(NOT_AN_ANNOTATION_CLASS, "''{0}'' is not an annotation class", NAME);
         MAP.put(ANNOTATION_CLASS_MEMBER, "Members are not allowed in annotation class");
-        MAP.put(INVALID_TYPE_OF_ANNOTATION_MEMBER, "Invalid type of annotation member");
+        MAP.put(INVALID_TYPE_OF_ANNOTATION_MEMBER, "Inkonstid type of annotation member");
         MAP.put(NULLABLE_TYPE_OF_ANNOTATION_MEMBER, "An annotation parameter cannot be nullable");
         MAP.put(ANNOTATION_ARGUMENT_MUST_BE_CONST, "An annotation argument must be a compile-time constant");
         MAP.put(ANNOTATION_ARGUMENT_MUST_BE_ENUM_CONST, "An enum annotation argument must be a enum constant");
         MAP.put(ANNOTATION_ARGUMENT_MUST_BE_KCLASS_LITERAL, "An annotation argument must be a class literal (T::class)");
         MAP.put(ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER, "Type parameter in a class literal is not allowed in an annotation argument");
         MAP.put(ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER_ERROR, "Type parameter in a class literal is deprecated in an annotation argument");
-        MAP.put(ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT, "Default value of annotation parameter must be a compile-time constant");
+        MAP.put(ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT, "Default konstue of annotation parameter must be a compile-time constant");
 
         MAP.put(ANNOTATIONS_ON_BLOCK_LEVEL_EXPRESSION_ON_THE_SAME_LINE,
                 "Annotations on block-level expressions are being parsed differently depending on presence of a new line after them. " +
@@ -1126,19 +1126,19 @@ public class DefaultErrorMessages {
 
         MAP.put(ANNOTATION_ON_SUPERCLASS, "Annotations on superclass are meaningless");
 
-        MAP.put(CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT, "Const 'val' are only allowed on top level, in named objects, or in companion objects");
-        MAP.put(CONST_VAL_WITH_DELEGATE, "Const 'val' should not have a delegate");
-        MAP.put(CONST_VAL_WITH_GETTER, "Const 'val' should not have a getter");
-        MAP.put(TYPE_CANT_BE_USED_FOR_CONST_VAL, "Const ''val'' has type ''{0}''. Only primitives and String are allowed", RENDER_TYPE);
-        MAP.put(CONST_VAL_WITHOUT_INITIALIZER, "Const 'val' should have an initializer");
-        MAP.put(CONST_VAL_WITH_NON_CONST_INITIALIZER, "Const 'val' initializer should be a constant value");
-        MAP.put(NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION, "Only 'const val' can be used in constant expressions");
+        MAP.put(CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT, "Const 'konst' are only allowed on top level, in named objects, or in companion objects");
+        MAP.put(CONST_VAL_WITH_DELEGATE, "Const 'konst' should not have a delegate");
+        MAP.put(CONST_VAL_WITH_GETTER, "Const 'konst' should not have a getter");
+        MAP.put(TYPE_CANT_BE_USED_FOR_CONST_VAL, "Const ''konst'' has type ''{0}''. Only primitives and String are allowed", RENDER_TYPE);
+        MAP.put(CONST_VAL_WITHOUT_INITIALIZER, "Const 'konst' should have an initializer");
+        MAP.put(CONST_VAL_WITH_NON_CONST_INITIALIZER, "Const 'konst' initializer should be a constant konstue");
+        MAP.put(NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION, "Only 'const konst' can be used in constant expressions");
 
-        MAP.put(DEFAULT_VALUE_NOT_ALLOWED_IN_OVERRIDE, "An overriding function is not allowed to specify default values for its parameters");
+        MAP.put(DEFAULT_VALUE_NOT_ALLOWED_IN_OVERRIDE, "An overriding function is not allowed to specify default konstues for its parameters");
 
 
-        String multipleDefaultsMessage = "More than one overridden descriptor declares a default value for ''{0}''. " +
-                                         "As the compiler can not make sure these values agree, this is not allowed.";
+        String multipleDefaultsMessage = "More than one overridden descriptor declares a default konstue for ''{0}''. " +
+                                         "As the compiler can not make sure these konstues agree, this is not allowed.";
         MAP.put(MULTIPLE_DEFAULTS_INHERITED_FROM_SUPERTYPES, multipleDefaultsMessage, FQ_NAMES_IN_TYPES);
         MAP.put(MULTIPLE_DEFAULTS_INHERITED_FROM_SUPERTYPES_WHEN_NO_EXPLICIT_OVERRIDE, multipleDefaultsMessage, FQ_NAMES_IN_TYPES);
 
@@ -1154,10 +1154,10 @@ public class DefaultErrorMessages {
 
         MAP.put(DATA_CLASS_WITHOUT_PARAMETERS, "Data class must have at least one primary constructor parameter");
         MAP.put(DATA_CLASS_VARARG_PARAMETER, "Primary constructor vararg parameters are forbidden for data classes");
-        MAP.put(DATA_CLASS_NOT_PROPERTY_PARAMETER, "Data class primary constructor must only have property (val / var) parameters");
+        MAP.put(DATA_CLASS_NOT_PROPERTY_PARAMETER, "Data class primary constructor must only have property (konst / var) parameters");
         MAP.put(DATA_OBJECT_CUSTOM_EQUALS_OR_HASH_CODE, "Data object cannot have a custom implementation of 'equals' or 'hashCode'");
 
-        MAP.put(CATCH_PARAMETER_WITH_DEFAULT_VALUE, "Catch clause parameter may not have a default value");
+        MAP.put(CATCH_PARAMETER_WITH_DEFAULT_VALUE, "Catch clause parameter may not have a default konstue");
 
         MAP.put(AMBIGUOUS_ANONYMOUS_TYPE_INFERRED, "Right-hand side has anonymous type. Please specify type explicitly", TO_STRING);
         MAP.put(APPROXIMATED_LOCAL_TYPE_WILL_BECOME_NULLABLE,
@@ -1199,8 +1199,8 @@ public class DefaultErrorMessages {
         MAP.put(PROTECTED_CALL_FROM_PUBLIC_INLINE, "Protected function call from public-API inline function is prohibited", NAME);
         MAP.put(PROTECTED_CONSTRUCTOR_CALL_FROM_PUBLIC_INLINE, "Protected constructor call from public-API inline function is deprecated", NAME);
         MAP.put(SUPER_CALL_FROM_PUBLIC_INLINE, "Accessing super members from public-API inline function is deprecated", NAME);
-        MAP.put(INVALID_DEFAULT_FUNCTIONAL_PARAMETER_FOR_INLINE, "Invalid default value for inline parameter: ''{0}''. Only lambdas, anonymous functions, and callable references are supported", ELEMENT_TEXT, SHORT_NAMES_IN_TYPES);
-        MAP.put(NOT_SUPPORTED_INLINE_PARAMETER_IN_INLINE_PARAMETER_DEFAULT_VALUE, "Usage of inline parameter ''{0}'' in default value for another inline parameter is not supported", ELEMENT_TEXT, SHORT_NAMES_IN_TYPES);
+        MAP.put(INVALID_DEFAULT_FUNCTIONAL_PARAMETER_FOR_INLINE, "Inkonstid default konstue for inline parameter: ''{0}''. Only lambdas, anonymous functions, and callable references are supported", ELEMENT_TEXT, SHORT_NAMES_IN_TYPES);
+        MAP.put(NOT_SUPPORTED_INLINE_PARAMETER_IN_INLINE_PARAMETER_DEFAULT_VALUE, "Usage of inline parameter ''{0}'' in default konstue for another inline parameter is not supported", ELEMENT_TEXT, SHORT_NAMES_IN_TYPES);
         MAP.put(PRIVATE_INLINE_FUNCTIONS_RETURNING_ANONYMOUS_OBJECTS, "Return type of the private inline function can't be anonymous. It will be approximated to Any in a future release. See KT-33917 for more details");
         //Inline non locals
         MAP.put(NON_LOCAL_RETURN_NOT_ALLOWED, "Can''t inline ''{0}'' here: it may contain non-local returns. Add ''crossinline'' modifier to parameter declaration ''{0}''", ELEMENT_TEXT);

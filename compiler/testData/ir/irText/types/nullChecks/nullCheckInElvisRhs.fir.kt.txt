@@ -8,7 +8,7 @@ fun baz(): String? {
 
 fun test(): String {
   return { // BLOCK
-    val <elvis>: String? = baz()
+    konst <elvis>: String? = baz()
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> foo() /*!! String */
       else -> <elvis>

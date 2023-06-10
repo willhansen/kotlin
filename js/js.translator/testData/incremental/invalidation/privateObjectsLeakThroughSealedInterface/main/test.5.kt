@@ -1,5 +1,5 @@
 fun test(): Int {
-    val a = ClassA()
-    val obj = a.leakedObject
+    konst a = ClassA()
+    konst obj = a.leakedObject
     return obj.getNumber() + obj.extraNumber + obj.getOtherNumber() + obj.otherExtraNumber
 }

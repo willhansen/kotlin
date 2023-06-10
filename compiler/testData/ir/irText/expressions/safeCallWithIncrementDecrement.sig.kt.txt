@@ -30,7 +30,7 @@ operator fun Int?.inc(): Int?
 // CHECK:
 //   Mangled name: test#set@kotlin.Int?(kotlin.Int;kotlin.Int){}
 //   Public signature: test/set|6578463135726025700[0]
-operator fun Int?.set(index: Int, value: Int): Unit
+operator fun Int?.set(index: Int, konstue: Int): Unit
 
 // CHECK:
 //   Mangled name: test#testArrayAccess(test.C?){}
@@ -56,5 +56,5 @@ var C?.p: Int
   // CHECK:
   //   Mangled name: test#<set-p>@test.C?(kotlin.Int){}
   //   Public signature: test/p.<set-p>|358628307976846417[0]
-  set(value: Int): Unit
+  set(konstue: Int): Unit
 

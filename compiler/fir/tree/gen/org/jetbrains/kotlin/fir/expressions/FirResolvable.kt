@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 sealed interface FirResolvable : FirElement {
-    override val source: KtSourceElement?
-    val calleeReference: FirReference
+    override konst source: KtSourceElement?
+    konst calleeReference: FirReference
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvable(this, data)
 

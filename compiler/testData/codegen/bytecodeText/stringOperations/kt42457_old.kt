@@ -11,10 +11,10 @@ public class JavaClass {
 
 // FILE: Kotlin.kt
 fun box() {
-    val toString: String? = JavaClass().toString()
-    val template: String = "${JavaClass()}"
+    konst toString: String? = JavaClass().toString()
+    konst template: String = "${JavaClass()}"
 }
 // 0 INVOKEDYNAMIC makeConcat
 // 1 JavaClass.toString
-// 1 String.valueOf
+// 1 String.konstueOf
 // 0 append

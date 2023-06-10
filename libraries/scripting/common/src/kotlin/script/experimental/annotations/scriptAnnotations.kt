@@ -9,7 +9,7 @@ package kotlin.script.experimental.annotations
 
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.ScriptCompilationConfiguration
-import kotlin.script.experimental.api.ScriptEvaluationConfiguration
+import kotlin.script.experimental.api.ScriptEkonstuationConfiguration
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 
 /**
@@ -31,8 +31,8 @@ import kotlin.script.experimental.host.ScriptingHostConfiguration
  *        default - empty - pattern is not used
  * @param compilationConfiguration an object or a class with default constructor containing initial script compilation configuration
  *        default - {@link ScriptCompilationConfiguration#Default}
- * @param evaluationConfiguration an object or a class with default constructor containing initial script evaluation configuration
- *        default - {@link ScriptEvaluationConfiguration#Default}
+ * @param ekonstuationConfiguration an object or a class with default constructor containing initial script ekonstuation configuration
+ *        default - {@link ScriptEkonstuationConfiguration#Default}
  *
  * Simple usage example:
  * <pre>
@@ -49,11 +49,11 @@ import kotlin.script.experimental.host.ScriptingHostConfiguration
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class KotlinScript(
-    val displayName: String = "",
-    val fileExtension: String = "kts",
-    val filePathPattern: String = "",
-    val compilationConfiguration: KClass<out ScriptCompilationConfiguration> = ScriptCompilationConfiguration.Default::class,
-    val evaluationConfiguration: KClass<out ScriptEvaluationConfiguration> = ScriptEvaluationConfiguration.Default::class,
-    val hostConfiguration: KClass<out ScriptingHostConfiguration> = ScriptingHostConfiguration::class
+    konst displayName: String = "",
+    konst fileExtension: String = "kts",
+    konst filePathPattern: String = "",
+    konst compilationConfiguration: KClass<out ScriptCompilationConfiguration> = ScriptCompilationConfiguration.Default::class,
+    konst ekonstuationConfiguration: KClass<out ScriptEkonstuationConfiguration> = ScriptEkonstuationConfiguration.Default::class,
+    konst hostConfiguration: KClass<out ScriptingHostConfiguration> = ScriptingHostConfiguration::class
 )
 

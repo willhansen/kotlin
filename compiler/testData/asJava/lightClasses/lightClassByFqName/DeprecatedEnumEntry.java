@@ -7,10 +7,10 @@ public enum E /* p.E*/ {
   public static kotlin.enums.EnumEntries<p.E> getEntries();//  getEntries()
 
   @org.jetbrains.annotations.NotNull()
-  public static p.E valueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  valueOf(java.lang.String)
+  public static p.E konstueOf(java.lang.String) throws java.lang.IllegalArgumentException, java.lang.NullPointerException;//  konstueOf(java.lang.String)
 
   @org.jetbrains.annotations.NotNull()
-  public static p.E[] values();//  values()
+  public static p.E[] konstues();//  konstues()
 
   private  E();//  .ctor()
 }

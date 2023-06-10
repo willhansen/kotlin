@@ -8,11 +8,11 @@ interface I {
 }
 
 fun test() {
-    val impl = object : I {
+    konst impl = object : I {
         override fun foo() { println("zzz") }
     }
 
-    val delegating = object: I by impl { }
+    konst delegating = object: I by impl { }
 
     delegating.foo()
 }

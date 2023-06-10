@@ -3,5 +3,5 @@
 // UNEXPECTED: kotlin.annotation.Repeatable
 
 @JvmRepeatable(TwoContainer::class)
-annotation class T<caret>wo(val name: String)
-annotation class TwoContainer(val value: Array<Two>)
+annotation class T<caret>wo(konst name: String)
+annotation class TwoContainer(konst konstue: Array<Two>)

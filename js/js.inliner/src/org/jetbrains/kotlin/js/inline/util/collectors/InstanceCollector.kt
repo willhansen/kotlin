@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.js.backend.ast.JsObjectLiteral
 import org.jetbrains.kotlin.js.backend.ast.RecursiveJsVisitor
 import java.util.ArrayList
 
-class InstanceCollector<T : JsNode>(val klass: Class<T>, val visitNestedDeclarations: Boolean) : RecursiveJsVisitor() {
-    val collected: MutableList<T> = ArrayList()
+class InstanceCollector<T : JsNode>(konst klass: Class<T>, konst visitNestedDeclarations: Boolean) : RecursiveJsVisitor() {
+    konst collected: MutableList<T> = ArrayList()
 
     override fun visitFunction(x: JsFunction) {
         if (visitNestedDeclarations) {

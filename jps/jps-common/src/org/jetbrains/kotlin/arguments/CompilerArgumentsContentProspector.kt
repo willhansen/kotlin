@@ -11,16 +11,16 @@ import kotlin.reflect.KType
 import kotlin.reflect.full.memberProperties
 
 object CompilerArgumentsContentProspector {
-    private val argumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, *>>> =
+    private konst argumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, *>>> =
         mutableMapOf()
 
-    private val flagArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, Boolean>>> =
+    private konst flagArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, Boolean>>> =
         mutableMapOf()
 
-    private val stringArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, String?>>> =
+    private konst stringArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, String?>>> =
         mutableMapOf()
 
-    private val arrayArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, Array<String>?>>> =
+    private konst arrayArgumentPropertiesCache: MutableMap<KClass<out CommonToolArguments>, Collection<KProperty1<out CommonToolArguments, Array<String>?>>> =
         mutableMapOf()
 
     private fun getCompilerArgumentsProperties(kClass: KClass<out CommonToolArguments>) = argumentPropertiesCache.getOrPut(kClass) {
@@ -39,8 +39,8 @@ object CompilerArgumentsContentProspector {
     fun getArrayCompilerArgumentProperties(kClass: KClass<out CommonToolArguments>): Collection<KProperty1<out CommonToolArguments, Array<String>?>> =
         arrayArgumentPropertiesCache.getOrPut(kClass) { getCompilerArgumentsProperties(kClass).filterByReturnType { (it?.classifier as? KClass<*>)?.java?.isArray == true } }
 
-    val freeArgsProperty: KProperty1<in CommonToolArguments, List<String>>
+    konst freeArgsProperty: KProperty1<in CommonToolArguments, List<String>>
         get() = CommonToolArguments::freeArgs
-    val internalArgumentsProperty: KProperty1<in CommonToolArguments, List<InternalArgument>>
+    konst internalArgumentsProperty: KProperty1<in CommonToolArguments, List<InternalArgument>>
         get() = CommonToolArguments::internalArguments
 }

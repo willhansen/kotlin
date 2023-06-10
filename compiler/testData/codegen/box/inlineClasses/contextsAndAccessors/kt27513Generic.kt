@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: String>(val b: T) {
+konstue class A<T: String>(konst b: T) {
     override fun toString(): String =
         buildString { append(b) }
 }

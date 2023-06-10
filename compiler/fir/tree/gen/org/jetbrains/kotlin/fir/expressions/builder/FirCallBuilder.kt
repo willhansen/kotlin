@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 interface FirCallBuilder {
     abstract var source: KtSourceElement?
-    abstract val annotations: MutableList<FirAnnotation>
+    abstract konst annotations: MutableList<FirAnnotation>
     abstract var argumentList: FirArgumentList
     fun build(): FirCall
 }

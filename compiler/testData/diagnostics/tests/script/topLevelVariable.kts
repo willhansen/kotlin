@@ -8,13 +8,13 @@ class Delegate {
     }
 }
 
-val a: Int by Delegate()
+konst a: Int by Delegate()
 
 class Foo {
-    val a: Int by Delegate()
+    konst a: Int by Delegate()
 }
 
 fun foo() {
-    val a: Int by Delegate()
+    konst a: Int by Delegate()
 }
 

@@ -27,19 +27,19 @@ digraph defaultArguments_kt {
     subgraph cluster_2 {
         color=red
         7 [label="Enter function test" style="filled" fillcolor=red];
-        8 [label="Enter default value of y"];
+        8 [label="Enter default konstue of y"];
         subgraph cluster_3 {
             color=blue
-            9 [label="Enter default value of y" style="filled" fillcolor=red];
+            9 [label="Enter default konstue of y" style="filled" fillcolor=red];
             10 [label="Access variable R|<local>/x|"];
             11 [label="Type operator: (R|<local>/x| as R|kotlin/String|)"];
-            12 [label="Exit default value of y" style="filled" fillcolor=red];
+            12 [label="Exit default konstue of y" style="filled" fillcolor=red];
         }
-        13 [label="Exit default value of y"];
-        14 [label="Enter default value of z"];
+        13 [label="Exit default konstue of y"];
+        14 [label="Enter default konstue of z"];
         subgraph cluster_4 {
             color=blue
-            15 [label="Enter default value of z" style="filled" fillcolor=red];
+            15 [label="Enter default konstue of z" style="filled" fillcolor=red];
             16 [label="Postponed enter to lambda"];
             subgraph cluster_5 {
                 color=blue
@@ -54,9 +54,9 @@ digraph defaultArguments_kt {
             }
             22 [label="Postponed exit from lambda"];
             23 [label="Function call: R|kotlin/run|<R|kotlin/Int|>(...)" style="filled" fillcolor=yellow];
-            24 [label="Exit default value of z" style="filled" fillcolor=red];
+            24 [label="Exit default konstue of z" style="filled" fillcolor=red];
         }
-        25 [label="Exit default value of z"];
+        25 [label="Exit default konstue of z"];
         subgraph cluster_7 {
             color=blue
             26 [label="Enter block"];

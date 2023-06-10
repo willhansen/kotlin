@@ -17,7 +17,7 @@ public class A {
     public bridge final method remove(p0: java.lang.Object): java.lang.Object
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata

@@ -27,11 +27,11 @@ class b {
 fun test(a_b: a.b) {
     a_b.a_b()
 
-    val ab_c: a.b.c = a.b.c()
+    konst ab_c: a.b.c = a.b.c()
     ab_c.ab_c()
     ab_c.<!UNRESOLVED_REFERENCE!>a_bc<!>()
 
-    val ab_c2 = a.b.c()
+    konst ab_c2 = a.b.c()
     ab_c2.ab_c()
     ab_c2.<!UNRESOLVED_REFERENCE!>a_bc<!>()
 }
@@ -75,11 +75,11 @@ class b {
 fun test(a_b: a.b) {
     a_b.a_b()
 
-    val ab_c: a.b.c = a.b.c()
+    konst ab_c: a.b.c = a.b.c()
     ab_c.ab_c()
     ab_c.<!UNRESOLVED_REFERENCE!>a_bc<!>()
 
-    val ab_c2 = a.b.c()
+    konst ab_c2 = a.b.c()
     ab_c2.ab_c()
     ab_c2.<!UNRESOLVED_REFERENCE!>a_bc<!>()
 }

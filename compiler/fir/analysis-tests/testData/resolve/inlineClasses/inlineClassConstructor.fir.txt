@@ -16,10 +16,10 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
-        public final val y: R|kotlin/String| = R|<local>/y|
+        public final konst y: R|kotlin/String| = R|<local>/y|
             public get(): R|kotlin/String|
 
     }
@@ -28,7 +28,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val x: R|kotlin/Int| = R|<local>/x|
+        private final konst x: R|kotlin/Int| = R|<local>/x|
             private get(): R|kotlin/Int|
 
     }
@@ -37,7 +37,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val x: R|kotlin/Int| = R|<local>/x|
+        public open konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -54,7 +54,7 @@ FILE: inlineClassConstructor.kt
 
         public final var x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
     }
     public final inline class SimpleParameter : R|kotlin/Any| {
@@ -68,7 +68,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Unit| = R|<local>/x|
+        public final konst x: R|kotlin/Unit| = R|<local>/x|
             public get(): R|kotlin/Unit|
 
     }
@@ -77,7 +77,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Nothing| = R|<local>/x|
+        public final konst x: R|kotlin/Nothing| = R|<local>/x|
             public get(): R|kotlin/Nothing|
 
     }
@@ -86,7 +86,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|T| = R|<local>/x|
+        public final konst x: R|T| = R|<local>/x|
             public get(): R|T|
 
     }
@@ -95,7 +95,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Array<T>| = R|<local>/x|
+        public final konst x: R|kotlin/Array<T>| = R|<local>/x|
             public get(): R|kotlin/Array<T>|
 
     }
@@ -104,7 +104,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/collections/List<T>| = R|<local>/x|
+        public final konst x: R|kotlin/collections/List<T>| = R|<local>/x|
             public get(): R|kotlin/collections/List<T>|
 
     }
@@ -113,7 +113,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Array<*>| = R|<local>/x|
+        public final konst x: R|kotlin/Array<*>| = R|<local>/x|
             public get(): R|kotlin/Array<*>|
 
     }
@@ -122,7 +122,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|SimpleRecursive| = R|<local>/x|
+        public final konst x: R|SimpleRecursive| = R|<local>/x|
             public get(): R|SimpleRecursive|
 
     }
@@ -131,7 +131,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|DoubleRecursive2| = R|<local>/x|
+        public final konst x: R|DoubleRecursive2| = R|<local>/x|
             public get(): R|DoubleRecursive2|
 
     }
@@ -140,7 +140,7 @@ FILE: inlineClassConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|DoubleRecursive1| = R|<local>/x|
+        public final konst x: R|DoubleRecursive1| = R|<local>/x|
             public get(): R|DoubleRecursive1|
 
     }

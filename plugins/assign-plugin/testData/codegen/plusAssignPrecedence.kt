@@ -65,21 +65,21 @@ class StringPropertyWithPlusAndPlusAssign(v: String) : AbstractStringProperty(v)
 }
 
 data class Task(
-    val valInput: StringProperty,
+    konst konstInput: StringProperty,
     var varInput: StringProperty,
 
-    val valInputWithPlus: StringPropertyWithPlus,
+    konst konstInputWithPlus: StringPropertyWithPlus,
     var varInputWithPlus: StringPropertyWithPlus,
 
-    val valInputWithPlusAssign: StringPropertyWithPlusAssign,
+    konst konstInputWithPlusAssign: StringPropertyWithPlusAssign,
     var varInputWithPlusAssign: StringPropertyWithPlusAssign,
 
-    val valInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
+    konst konstInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
     var varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign,
 )
 
 fun box(): String {
-    val task = Task(
+    konst task = Task(
         StringProperty("O"),
         StringProperty("O"),
 
@@ -96,13 +96,13 @@ fun box(): String {
     task.varInputWithPlus += "K"
     if (task.varInputWithPlus.get() != "OK") return task.varInputWithPlus.get()
 
-    task.valInputWithPlusAssign += "K"
-    if (task.valInputWithPlusAssign.get() != "OK") return task.valInputWithPlusAssign.get()
+    task.konstInputWithPlusAssign += "K"
+    if (task.konstInputWithPlusAssign.get() != "OK") return task.konstInputWithPlusAssign.get()
     task.varInputWithPlusAssign += "K"
     if (task.varInputWithPlusAssign.get() != "OK") return task.varInputWithPlusAssign.get()
 
-    task.valInputWithPlusAndPlusAssign += "K"
-    if (task.valInputWithPlusAndPlusAssign.get() != "OK") return task.valInputWithPlusAndPlusAssign.get()
+    task.konstInputWithPlusAndPlusAssign += "K"
+    if (task.konstInputWithPlusAndPlusAssign.get() != "OK") return task.konstInputWithPlusAndPlusAssign.get()
 
     return "OK"
 }

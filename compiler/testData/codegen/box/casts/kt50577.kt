@@ -1,5 +1,5 @@
 abstract class A {
-    abstract val x: Any
+    abstract konst x: Any
 
     init {
         castX(this)
@@ -7,7 +7,7 @@ abstract class A {
 }
 
 class B : A() {
-    override val x: Any = "abc"
+    override konst x: Any = "abc"
 }
 
 fun castX(a: A) {

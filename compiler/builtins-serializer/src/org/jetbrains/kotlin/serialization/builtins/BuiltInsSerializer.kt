@@ -46,11 +46,11 @@ class BuiltInsSerializer(
             dependOnOldBuiltIns: Boolean,
             onComplete: (totalSize: Int, totalFiles: Int) -> Unit
         ) {
-            val rootDisposable = Disposer.newDisposable()
-            val messageCollector = createMessageCollector()
-            val performanceManager = object : CommonCompilerPerformanceManager(presentableName = "test") {}
+            konst rootDisposable = Disposer.newDisposable()
+            konst messageCollector = createMessageCollector()
+            konst performanceManager = object : CommonCompilerPerformanceManager(presentableName = "test") {}
             try {
-                val configuration = CompilerConfiguration().apply {
+                konst configuration = CompilerConfiguration().apply {
                     put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, messageCollector)
 
                     addKotlinSourceRoots(srcDirs.map { it.path })
@@ -62,9 +62,9 @@ class BuiltInsSerializer(
                     put(CLIConfigurationKeys.PERF_MANAGER, performanceManager)
                 }
 
-                val environment = KotlinCoreEnvironment.createForProduction(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+                konst environment = KotlinCoreEnvironment.createForProduction(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
-                val serializer = BuiltInsSerializer(configuration, environment, dependOnOldBuiltIns)
+                konst serializer = BuiltInsSerializer(configuration, environment, dependOnOldBuiltIns)
                 serializer.analyzeAndSerialize()
 
                 onComplete(serializer.totalSize, serializer.totalFiles)
@@ -89,8 +89,8 @@ class BuiltInsSerializer(
     }
 
     override fun serialize(analysisResult: CommonAnalysisResult, destDir: File) {
-        val files = environment.getSourceFiles()
-        val module = analysisResult.moduleDescriptor
+        konst files = environment.getSourceFiles()
+        konst module = analysisResult.moduleDescriptor
 
         destDir.deleteRecursively()
         if (!destDir.mkdirs()) {
@@ -98,7 +98,7 @@ class BuiltInsSerializer(
         }
 
         files.map { it.packageFqName }.toSet().forEach { fqName ->
-            val packageView = module.getPackage(fqName)
+            konst packageView = module.getPackage(fqName)
             PackageSerializer(
                 packageView.memberScope.getContributedDescriptors(DescriptorKindFilter.CLASSIFIERS) + createCloneable(module),
                 packageView.fragments.flatMap { fragment -> DescriptorUtils.getAllDescriptors(fragment.getMemberScope()) },
@@ -114,7 +114,7 @@ class BuiltInsSerializer(
     // Serialize metadata for kotlin.Cloneable manually for compatibility with kotlin-reflect 1.0 which expects this metadata to be there.
     // Since Kotlin 1.1, we always discard this class during deserialization (see ClassDeserializer.kt).
     private fun createCloneable(module: ModuleDescriptor): ClassDescriptor {
-        val factory = JvmBuiltInClassDescriptorFactory(LockBasedStorageManager.NO_LOCKS, module) {
+        konst factory = JvmBuiltInClassDescriptorFactory(LockBasedStorageManager.NO_LOCKS, module) {
             EmptyPackageFragmentDescriptor(module, StandardNames.BUILT_INS_PACKAGE_FQ_NAME)
         }
         return factory.createClass(ClassId.topLevel(StandardNames.FqNames.cloneable.toSafe()))

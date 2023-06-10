@@ -1,6 +1,6 @@
 suspend fun dummy() {}
 
-val c: suspend () -> Unit = {
+konst c: suspend () -> Unit = {
     dummy()
     dummy()
 }

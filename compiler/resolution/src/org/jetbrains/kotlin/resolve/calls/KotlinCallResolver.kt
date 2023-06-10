@@ -24,11 +24,11 @@ import org.jetbrains.kotlin.types.UnwrappedType
 
 
 class KotlinCallResolver(
-    private val towerResolver: TowerResolver,
-    private val kotlinCallCompleter: KotlinCallCompleter,
-    private val overloadingConflictResolver: NewOverloadingConflictResolver,
-    private val callableReferenceArgumentResolver: CallableReferenceArgumentResolver,
-    private val callComponents: KotlinCallComponents
+    private konst towerResolver: TowerResolver,
+    private konst kotlinCallCompleter: KotlinCallCompleter,
+    private konst overloadingConflictResolver: NewOverloadingConflictResolver,
+    private konst callableReferenceArgumentResolver: CallableReferenceArgumentResolver,
+    private konst callComponents: KotlinCallComponents
 ) {
     fun resolveAndCompleteCall(
         scopeTower: ImplicitScopeTower,
@@ -37,8 +37,8 @@ class KotlinCallResolver(
         expectedType: UnwrappedType?,
         collectAllCandidates: Boolean,
     ): CallResolutionResult {
-        val candidateFactory = createFactory(scopeTower, kotlinCall, resolutionCallbacks, expectedType)
-        val candidates = resolveCall(scopeTower, resolutionCallbacks, kotlinCall, collectAllCandidates, candidateFactory)
+        konst candidateFactory = createFactory(scopeTower, kotlinCall, resolutionCallbacks, expectedType)
+        konst candidates = resolveCall(scopeTower, resolutionCallbacks, kotlinCall, collectAllCandidates, candidateFactory)
 
         if (collectAllCandidates) {
             return kotlinCallCompleter.createAllCandidatesResult(candidates, expectedType, resolutionCallbacks)
@@ -54,7 +54,7 @@ class KotlinCallResolver(
         expectedType: UnwrappedType?,
         collectAllCandidates: Boolean,
     ): Collection<ResolutionCandidate> {
-        val candidateFactory = createFactory(scopeTower, kotlinCall, resolutionCallbacks, expectedType)
+        konst candidateFactory = createFactory(scopeTower, kotlinCall, resolutionCallbacks, expectedType)
         return resolveCall(scopeTower, resolutionCallbacks, kotlinCall, collectAllCandidates, candidateFactory)
     }
 
@@ -70,11 +70,11 @@ class KotlinCallResolver(
 
         kotlinCall.checkCallInvariants()
 
-        val candidateFactory = SimpleCandidateFactory(callComponents, scopeTower, kotlinCall, resolutionCallbacks)
-        val resolutionCandidates = givenCandidates.map { candidateFactory.createCandidate(it).forceResolution() }
+        konst candidateFactory = SimpleCandidateFactory(callComponents, scopeTower, kotlinCall, resolutionCallbacks)
+        konst resolutionCandidates = givenCandidates.map { candidateFactory.createCandidate(it).forceResolution() }
 
         if (collectAllCandidates) {
-            val allCandidates = towerResolver.runWithEmptyTowerData(
+            konst allCandidates = towerResolver.runWithEmptyTowerData(
                 KnownResultProcessor(resolutionCandidates),
                 TowerResolver.AllCandidatesCollector(),
                 useOrder = false
@@ -83,12 +83,12 @@ class KotlinCallResolver(
 
         }
 
-        val candidates = towerResolver.runWithEmptyTowerData(
+        konst candidates = towerResolver.runWithEmptyTowerData(
             KnownResultProcessor(resolutionCandidates),
             TowerResolver.SuccessfulResultCollector(),
             useOrder = true
         )
-        val mostSpecificCandidates = choseMostSpecific(kotlinCall, resolutionCallbacks, candidates)
+        konst mostSpecificCandidates = choseMostSpecific(kotlinCall, resolutionCallbacks, candidates)
 
         return kotlinCallCompleter.runCompletion(candidateFactory, mostSpecificCandidates, expectedType, resolutionCallbacks)
     }
@@ -99,8 +99,8 @@ class KotlinCallResolver(
         baseSystem: ConstraintStorage,
         resolutionCallbacks: KotlinResolutionCallbacks
     ): Collection<CallableReferenceResolutionCandidate> {
-        val scopeTower = callComponents.statelessCallbacks.getScopeTowerForCallableReferenceArgument(argument)
-        val factory = createCallableReferenceCallFactory(scopeTower, argument.call, resolutionCallbacks, expectedType, argument, baseSystem)
+        konst scopeTower = callComponents.statelessCallbacks.getScopeTowerForCallableReferenceArgument(argument)
+        konst factory = createCallableReferenceCallFactory(scopeTower, argument.call, resolutionCallbacks, expectedType, argument, baseSystem)
 
         return resolveCall(scopeTower, resolutionCallbacks, argument.call, collectAllCandidates = false, factory)
     }
@@ -113,7 +113,7 @@ class KotlinCallResolver(
         argument: CallableReferenceKotlinCallArgument? = null,
         baseSystem: ConstraintStorage? = null
     ): CandidateFactory<CallableReferenceResolutionCandidate> {
-        val resolutionAtom = argument
+        konst resolutionAtom = argument
             ?: CallableReferenceKotlinCall(kotlinCall, resolutionCallbacks.getLhsResult(kotlinCall), kotlinCall.name)
 
         return CallableReferencesCandidateFactory(resolutionAtom, callComponents, scopeTower, expectedType, baseSystem, resolutionCallbacks)
@@ -148,7 +148,7 @@ class KotlinCallResolver(
         kotlinCall.checkCallInvariants()
 
         @Suppress("UNCHECKED_CAST")
-        val processor = when (kotlinCall.callKind) {
+        konst processor = when (kotlinCall.callKind) {
             KotlinCallKind.VARIABLE -> {
                 createVariableAndObjectProcessor(scopeTower, kotlinCall.name, candidateFactory, kotlinCall.explicitReceiver?.receiver)
             }
@@ -181,7 +181,7 @@ class KotlinCallResolver(
             return towerResolver.collectAllCandidates(scopeTower, processor, kotlinCall.name)
         }
 
-        val candidates = towerResolver.runResolve(
+        konst candidates = towerResolver.runResolve(
             scopeTower,
             processor,
             useOrder = kotlinCall.callKind != KotlinCallKind.UNSUPPORTED,
@@ -200,7 +200,7 @@ class KotlinCallResolver(
         var refinedCandidates = candidates
 
         if (!callComponents.languageVersionSettings.supportsFeature(LanguageFeature.RefinedSamAdaptersPriority) && kotlinCall.callKind != KotlinCallKind.CALLABLE_REFERENCE) {
-            val nonSynthesized = candidates.filter { !it.resolvedCall.candidateDescriptor.isSynthesized }
+            konst nonSynthesized = candidates.filter { !it.resolvedCall.candidateDescriptor.isSynthesized }
             if (nonSynthesized.isNotEmpty()) {
                 refinedCandidates = nonSynthesized
             }
@@ -223,19 +223,19 @@ class KotlinCallResolver(
 
         if (maximallySpecificCandidates.size > 1) {
             if (maximallySpecificCandidates.size == 2) {
-                val enumEntryCandidate = maximallySpecificCandidates.find {
-                    val descriptor = it.resolvedCall.candidateDescriptor
+                konst enumEntryCandidate = maximallySpecificCandidates.find {
+                    konst descriptor = it.resolvedCall.candidateDescriptor
                     descriptor is FakeCallableDescriptorForObject && descriptor.classDescriptor.kind == ClassKind.ENUM_ENTRY
                 }
                 if (enumEntryCandidate != null) {
-                    val otherCandidate = maximallySpecificCandidates.find {
-                        val candidateDescriptor = it.resolvedCall.candidateDescriptor
+                    konst otherCandidate = maximallySpecificCandidates.find {
+                        konst candidateDescriptor = it.resolvedCall.candidateDescriptor
                         candidateDescriptor !is FakeCallableDescriptorForObject
                     }
                     if (otherCandidate != null) {
-                        val propertyDescriptor = otherCandidate.resolvedCall.candidateDescriptor
+                        konst propertyDescriptor = otherCandidate.resolvedCall.candidateDescriptor
                         if (propertyDescriptor is PropertyDescriptor) {
-                            val enumEntryDescriptor =
+                            konst enumEntryDescriptor =
                                 (enumEntryCandidate.resolvedCall.candidateDescriptor as FakeCallableDescriptorForObject).classDescriptor
                             otherCandidate.addDiagnostic(EnumEntryAmbiguityWarning(propertyDescriptor, enumEntryDescriptor))
                             return setOf(otherCandidate)
@@ -248,13 +248,13 @@ class KotlinCallResolver(
                 candidates.all { it.isSuccessful } &&
                 candidates.all { resolutionCallbacks.inferenceSession.shouldRunCompletion(it) }
             ) {
-                val candidatesWithAnnotation = candidates.filter {
+                konst candidatesWithAnnotation = candidates.filter {
                     it.resolvedCall.candidateDescriptor.annotations.hasAnnotation(OVERLOAD_RESOLUTION_BY_LAMBDA_ANNOTATION_FQ_NAME)
                 }.toSet()
-                val candidatesWithoutAnnotation = candidates - candidatesWithAnnotation
+                konst candidatesWithoutAnnotation = candidates - candidatesWithAnnotation
                 if (candidatesWithAnnotation.isNotEmpty()) {
                     @Suppress("UNCHECKED_CAST")
-                    val newCandidates = kotlinCallCompleter.chooseCandidateRegardingOverloadResolutionByLambdaReturnType(
+                    konst newCandidates = kotlinCallCompleter.chooseCandidateRegardingOverloadResolutionByLambdaReturnType(
                         maximallySpecificCandidates as Set<SimpleResolutionCandidate>,
                         resolutionCallbacks
                     )

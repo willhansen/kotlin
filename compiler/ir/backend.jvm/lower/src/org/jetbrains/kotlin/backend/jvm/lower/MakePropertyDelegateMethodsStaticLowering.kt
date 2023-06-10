@@ -25,19 +25,19 @@ import org.jetbrains.kotlin.load.java.JvmAbi
 // when receiver of the optimized property reference is a field from an outer class.
 //
 // Since PropertyReferenceDelegationLowering runs before LocalDeclarationsLowering, fields for captured this (aka `this$0`) are not
-// generated yet. And there's no other way to obtain the instance of the outer class on an arbitrary value of an inner class.
+// generated yet. And there's no other way to obtain the instance of the outer class on an arbitrary konstue of an inner class.
 // However, we need `$delegate` methods to be static to be non-overridable (and public to be visible in reflection and external tools).
 //
 // So PropertyReferenceDelegationLowering generates `$delegate` methods for optimized property references as instance methods,
 // and this phase, which runs _after_ LocalDeclarationsLowering, transforms them to static methods.
-internal val makePropertyDelegateMethodsStaticPhase = makeIrFilePhase(
+internal konst makePropertyDelegateMethodsStaticPhase = makeIrFilePhase(
     ::MakePropertyDelegateMethodsStaticLowering,
     name = "MakePropertyDelegateMethodsStatic",
     description = "Make `\$delegate` methods for optimized delegated properties static",
     prerequisite = setOf(propertyReferenceDelegationPhase, localDeclarationsPhase)
 )
 
-private class MakePropertyDelegateMethodsStaticLowering(val context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
+private class MakePropertyDelegateMethodsStaticLowering(konst context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transform(this, null)
     }
@@ -45,12 +45,12 @@ private class MakePropertyDelegateMethodsStaticLowering(val context: JvmBackendC
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement {
         if (!declaration.isSyntheticDelegateMethod()) return super.visitSimpleFunction(declaration)
 
-        val oldParameter = declaration.dispatchReceiverParameter ?: return super.visitSimpleFunction(declaration)
-        val newParameter = oldParameter.copyTo(declaration, index = 0)
+        konst oldParameter = declaration.dispatchReceiverParameter ?: return super.visitSimpleFunction(declaration)
+        konst newParameter = oldParameter.copyTo(declaration, index = 0)
 
         return declaration.apply {
-            valueParameters =
-                listOf(newParameter) + valueParameters.map { it.copyTo(this, index = it.index + 1) }
+            konstueParameters =
+                listOf(newParameter) + konstueParameters.map { it.copyTo(this, index = it.index + 1) }
             dispatchReceiverParameter = null
             body = body?.transform(VariableRemapper(mapOf(oldParameter to newParameter)), null)
         }

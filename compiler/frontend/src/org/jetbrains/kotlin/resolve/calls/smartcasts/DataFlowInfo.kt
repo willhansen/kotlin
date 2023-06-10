@@ -22,40 +22,40 @@ import org.jetbrains.kotlin.util.javaslang.ImmutableMap
 import org.jetbrains.kotlin.util.javaslang.ImmutableSet
 
 /**
- * This interface is intended to provide and edit information about value nullabilities and possible types.
+ * This interface is intended to provide and edit information about konstue nullabilities and possible types.
  * Data flow info is immutable so functions never change it.
  */
 interface DataFlowInfo {
 
-    val completeNullabilityInfo: ImmutableMap<DataFlowValue, Nullability>
+    konst completeNullabilityInfo: ImmutableMap<DataFlowValue, Nullability>
 
-    val completeTypeInfo: ImmutableMap<DataFlowValue, ImmutableSet<KotlinType>>
+    konst completeTypeInfo: ImmutableMap<DataFlowValue, ImmutableSet<KotlinType>>
 
     /**
-     * Returns collected nullability for the given value, NOT taking its stability into account.
+     * Returns collected nullability for the given konstue, NOT taking its stability into account.
      */
     fun getCollectedNullability(key: DataFlowValue): Nullability
 
     /**
-     * Returns collected nullability for the given value if it's stable.
-     * Otherwise basic value nullability is returned
+     * Returns collected nullability for the given konstue if it's stable.
+     * Otherwise basic konstue nullability is returned
      */
     fun getStableNullability(key: DataFlowValue): Nullability
 
     /**
-     * Returns possible types for the given value, NOT taking its stability into account.
+     * Returns possible types for the given konstue, NOT taking its stability into account.
      *
-     * IMPORTANT: by default, the original (native) type for this value
+     * IMPORTANT: by default, the original (native) type for this konstue
      * are NOT included. So it's quite possible to get an empty set here.
      * Also, type order in the result set MAKES SENSE so keep it stable and do not change without reason
      */
     fun getCollectedTypes(key: DataFlowValue, languageVersionSettings: LanguageVersionSettings): Set<KotlinType>
 
     /**
-     * Returns possible types for the given value if it's stable.
-     * Otherwise, basic value type is returned.
+     * Returns possible types for the given konstue if it's stable.
+     * Otherwise, basic konstue type is returned.
      *
-     * IMPORTANT: by default, the original (native) type for this value
+     * IMPORTANT: by default, the original (native) type for this konstue
      * are NOT included. So it's quite possible to get an empty set here.
      * Also, type order in the result set MAKES SENSE so keep it stable and do not change without reason
      */
@@ -63,9 +63,9 @@ interface DataFlowInfo {
 
     /**
      * Call this function to clear all data flow information about
-     * the given data flow value. Useful when we are not sure how this value can be changed, e.g. in a loop.
+     * the given data flow konstue. Useful when we are not sure how this konstue can be changed, e.g. in a loop.
      */
-    fun clearValueInfo(value: DataFlowValue, languageVersionSettings: LanguageVersionSettings): DataFlowInfo
+    fun clearValueInfo(konstue: DataFlowValue, languageVersionSettings: LanguageVersionSettings): DataFlowInfo
 
     /**
      * Call this function when b is assigned to a
@@ -82,7 +82,7 @@ interface DataFlowInfo {
      */
     fun disequate(a: DataFlowValue, b: DataFlowValue, languageVersionSettings: LanguageVersionSettings): DataFlowInfo
 
-    fun establishSubtyping(value: DataFlowValue, type: KotlinType, languageVersionSettings: LanguageVersionSettings): DataFlowInfo
+    fun establishSubtyping(konstue: DataFlowValue, type: KotlinType, languageVersionSettings: LanguageVersionSettings): DataFlowInfo
 
     /**
      * Call this function to add data flow information from other to this and return sum as the result
@@ -95,11 +95,11 @@ interface DataFlowInfo {
     fun or(other: DataFlowInfo): DataFlowInfo
 
     companion object {
-        val EMPTY = DataFlowInfoFactory.EMPTY
+        konst EMPTY = DataFlowInfoFactory.EMPTY
     }
 }
 
 object DataFlowInfoFactory {
     @JvmField
-    val EMPTY: DataFlowInfo = DataFlowInfoImpl()
+    konst EMPTY: DataFlowInfo = DataFlowInfoImpl()
 }

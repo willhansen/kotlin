@@ -32,7 +32,7 @@ class TestClass2 : TestClass(), Test3 {
 }
 
 fun box(): String {
-    val test = TestClass2().test()
+    konst test = TestClass2().test()
     if (test != "Test2") return "fail 1: $test"
     checkNoMethod(TestClass::class.java, "test")
     checkNoMethod(Test3::class.java, "test")

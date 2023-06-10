@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.fir.scopes.unsubstitutedScope
 import org.jetbrains.kotlin.fir.symbols.impl.FirClassSymbol
 
 internal abstract class KtFirMemberSymbolPointer<S : KtSymbol>(
-    private val ownerPointer: KtSymbolPointer<KtSymbolWithMembers>,
-    private val isStatic: Boolean = false,
+    private konst ownerPointer: KtSymbolPointer<KtSymbolWithMembers>,
+    private konst isStatic: Boolean = false,
 ) : KtSymbolPointer<S>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     final override fun restoreSymbol(analysisSession: KtAnalysisSession): S? {
         require(analysisSession is KtFirAnalysisSession)
-        val scope = with(analysisSession) {
-            val ownerSymbol = ownerPointer.restoreSymbol() ?: return null
-            val owner = ownerSymbol.firSymbol as? FirClassSymbol ?: return null
+        konst scope = with(analysisSession) {
+            konst ownerSymbol = ownerPointer.restoreSymbol() ?: return null
+            konst owner = ownerSymbol.firSymbol as? FirClassSymbol ?: return null
             getSearchScope(owner)
         } ?: return null
 
@@ -39,10 +39,10 @@ internal abstract class KtFirMemberSymbolPointer<S : KtSymbol>(
 
     context(KtFirAnalysisSession)
     protected open fun getSearchScope(owner: FirClassSymbol<*>): FirScope? {
-        val firSession = useSiteSession
-        val scopeSession = getScopeSessionFor(firSession)
+        konst firSession = useSiteSession
+        konst scopeSession = getScopeSessionFor(firSession)
         return if (isStatic) {
-            val firClass = owner.fir as? FirClass ?: return null
+            konst firClass = owner.fir as? FirClass ?: return null
             firClass.scopeProvider.getStaticMemberScopeForCallables(firClass, firSession, scopeSession)
         } else {
             owner.unsubstitutedScope(
@@ -61,7 +61,7 @@ internal abstract class KtFirMemberSymbolPointer<S : KtSymbol>(
 
 context(KtAnalysisSession)
 internal inline fun <reified T : KtSymbol> KtSymbol.requireOwnerPointer(): KtSymbolPointer<T> {
-    val symbolWithMembers = getContainingSymbol()
+    konst symbolWithMembers = getContainingSymbol()
     requireNotNull(symbolWithMembers) { "should present for member declaration" }
     requireIsInstance<T>(symbolWithMembers)
 

@@ -36,15 +36,15 @@ fun createInteropLibrary(
         shortName: String?,
         staticLibraries: List<String>
 ) {
-    val version = KotlinLibraryVersioning(
+    konst version = KotlinLibraryVersioning(
             libraryVersion = libraryVersion,
             abiVersion = KotlinAbiVersion.CURRENT,
             compilerVersion = KotlinCompilerVersion.VERSION,
             metadataVersion = KlibMetadataVersion.INSTANCE.toString(),
     )
-    val libFile = File(outputPath)
-    val unzippedDir = if (nopack) libFile else org.jetbrains.kotlin.konan.file.createTempDir("klib")
-    val layout = KonanLibraryLayoutForWriter(libFile, unzippedDir, target)
+    konst libFile = File(outputPath)
+    konst unzippedDir = if (nopack) libFile else org.jetbrains.kotlin.konan.file.createTempDir("klib")
+    konst layout = KonanLibraryLayoutForWriter(libFile, unzippedDir, target)
     KonanLibraryWriterImpl(
             moduleName,
             version,
@@ -55,7 +55,7 @@ fun createInteropLibrary(
             shortName = shortName,
             layout = layout
     ).apply {
-        val serializedMetadata = metadata.write(ChunkingWriteStrategy())
+        konst serializedMetadata = metadata.write(ChunkingWriteStrategy())
         addMetadata(SerializedMetadata(serializedMetadata.header, serializedMetadata.fragments, serializedMetadata.fragmentNames))
         nativeBitcodeFiles.forEach(this::addNativeBitcode)
         addManifestAddend(manifest)
@@ -67,15 +67,15 @@ fun createInteropLibrary(
 
 // TODO: Consider adding it to kotlinx-metadata-klib.
 class ChunkingWriteStrategy(
-        private val classesChunkSize: Int = 128,
-        private val packagesChunkSize: Int = 128
+        private konst classesChunkSize: Int = 128,
+        private konst packagesChunkSize: Int = 128
 ) : KlibModuleFragmentWriteStrategy {
 
     override fun processPackageParts(parts: List<KmModuleFragment>): List<KmModuleFragment> {
         if (parts.isEmpty()) return emptyList()
-        val fqName = parts.first().fqName
+        konst fqName = parts.first().fqName
                 ?: error("KmModuleFragment should have a not-null fqName!")
-        val classFragments = parts.flatMap(KmModuleFragment::classes)
+        konst classFragments = parts.flatMap(KmModuleFragment::classes)
                 .chunked(classesChunkSize) { chunk ->
                     KmModuleFragment().also { fragment ->
                         fragment.fqName = fqName
@@ -83,7 +83,7 @@ class ChunkingWriteStrategy(
                         chunk.mapTo(fragment.className, KmClass::name)
                     }
                 }
-        val packageFragments = parts.mapNotNull(KmModuleFragment::pkg)
+        konst packageFragments = parts.mapNotNull(KmModuleFragment::pkg)
                 .flatMap { it.functions + it.typeAliases + it.properties }
                 .chunked(packagesChunkSize) { chunk ->
                     KmModuleFragment().also { fragment ->
@@ -96,7 +96,7 @@ class ChunkingWriteStrategy(
                         }
                     }
                 }
-        val result = classFragments + packageFragments
+        konst result = classFragments + packageFragments
         return if (result.isEmpty()) {
             // We still need to emit empty packages because they may
             // represent parts of package declaration (e.g. platform.[]).

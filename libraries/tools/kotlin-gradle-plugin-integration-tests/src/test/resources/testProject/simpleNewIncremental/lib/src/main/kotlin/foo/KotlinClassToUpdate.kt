@@ -6,7 +6,7 @@
 package foo
 
 class KotlinClassToUpdate : KotlinInterface  {
-    override val values: Type
+    override konst konstues: Type
         get() = "0"
 
     fun simpleMethod() = "foo"

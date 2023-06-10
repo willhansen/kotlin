@@ -25,25 +25,25 @@ import contracts.*
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val value_1: Int
-    funWithExactlyOnceCallsInPlace({ value_1 = 11 })
-    value_1.inc()
+    konst konstue_1: Int
+    funWithExactlyOnceCallsInPlace({ konstue_1 = 11 })
+    konstue_1.inc()
 }
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    var value_1: Int
-    funWithAtLeastOnceCallsInPlace({ value_1 = 11 })
-    value_1.inc()
+    var konstue_1: Int
+    funWithAtLeastOnceCallsInPlace({ konstue_1 = 11 })
+    konstue_1.inc()
 }
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val value_1: Int
-    var value_2: Int
-    val value_3: Int
-    contracts.case_3({ value_1 = 1 }, { value_2 = 2 }, { value_3 = 3 })
-    value_1.inc()
-    value_2.inc()
-    value_3.inc()
+    konst konstue_1: Int
+    var konstue_2: Int
+    konst konstue_3: Int
+    contracts.case_3({ konstue_1 = 1 }, { konstue_2 = 2 }, { konstue_3 = 3 })
+    konstue_1.inc()
+    konstue_2.inc()
+    konstue_3.inc()
 }

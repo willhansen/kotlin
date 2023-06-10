@@ -22,11 +22,11 @@ fun foo4(x: Any) = x is @Foo() () -> (() -> Unit?)
 fun foo5(x: Any): @Foo() () -> Unit = x as @Foo () @[Foo Foo ()] @Foo() () -> Unit
 
 fun foo6() {
-    val x: @Foo() @[Foo Foo()] @Foo() () -> Unit = {}
+    konst x: @Foo() @[Foo Foo()] @Foo() () -> Unit = {}
 }
 
 fun foo7() {
-    val x: @Foo() (@Foo() () -> Unit) -> Unit = { x: @Foo() () -> Unit -> }
+    konst x: @Foo() (@Foo() () -> Unit) -> Unit = { x: @Foo() () -> Unit -> }
 }
 
 fun foo8(x: @[Foo() ] () -> Unit) = x as Iterable<@Foo() () -> Unit>?
@@ -34,13 +34,13 @@ fun foo8(x: @[Foo() ] () -> Unit) = x as Iterable<@Foo() () -> Unit>?
 fun foo9(x: @[Foo()] () -> Unit) = x as Iterable<@Foo() () -> Unit>?
 
 fun foo10() {
-    val x: @Foo () @Foo () () -> Unit = {}
+    konst x: @Foo () @Foo () () -> Unit = {}
 }
 
 fun foo11() {
-    val x: @Foo @Foo () () -> Unit = {}
+    konst x: @Foo @Foo () () -> Unit = {}
 }
 
 fun foo12() {
-    val x: @Foo() @Foo () () -> Unit = {}
+    konst x: @Foo() @Foo () () -> Unit = {}
 }

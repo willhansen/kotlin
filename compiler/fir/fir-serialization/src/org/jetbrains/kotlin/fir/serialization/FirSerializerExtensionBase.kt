@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.protobuf.GeneratedMessageLite
 import org.jetbrains.kotlin.serialization.SerializerExtensionProtocol
 
 abstract class FirSerializerExtensionBase(
-    val protocol: SerializerExtensionProtocol,
+    konst protocol: SerializerExtensionProtocol,
 ) : FirSerializerExtension() {
-    final override val stringTable = FirElementAwareSerializableStringTable()
+    final override konst stringTable = FirElementAwareSerializableStringTable()
 
     override fun serializePackage(packageFqName: FqName, proto: ProtoBuf.Package.Builder) {
         proto.setExtension(protocol.packageFqName, stringTable.getPackageFqNameIndex(packageFqName))
@@ -60,11 +60,11 @@ abstract class FirSerializerExtensionBase(
         versionRequirementTable: MutableVersionRequirementTable?,
         childSerializer: FirElementSerializer
     ) {
-        val fieldPropertyAnnotations = mutableListOf<FirAnnotation>()
-        val delegatePropertyAnnotations = mutableListOf<FirAnnotation>()
+        konst fieldPropertyAnnotations = mutableListOf<FirAnnotation>()
+        konst delegatePropertyAnnotations = mutableListOf<FirAnnotation>()
 
         for (annotation in property.backingField?.nonSourceAnnotations(session).orEmpty()) {
-            val destination = when (annotation.useSiteTarget) {
+            konst destination = when (annotation.useSiteTarget) {
                 AnnotationUseSiteTarget.PROPERTY_DELEGATE_FIELD -> delegatePropertyAnnotations
                 else -> fieldPropertyAnnotations
             }
@@ -81,7 +81,7 @@ abstract class FirSerializerExtensionBase(
 
         if (!Flags.HAS_CONSTANT.get(proto.flags)) return
         property.initializer?.toConstantValue<ConstantValue<*>>(session, constValueProvider)?.let {
-            proto.setExtension(protocol.compileTimeValue, annotationSerializer.valueProto(it).build())
+            proto.setExtension(protocol.compileTimeValue, annotationSerializer.konstueProto(it).build())
         }
     }
 
@@ -134,10 +134,10 @@ abstract class FirSerializerExtensionBase(
         Type
     > GeneratedMessageLite.ExtendableBuilder<MessageType, BuilderType>.addExtensionOrNull(
         extension: GeneratedMessageLite.GeneratedExtension<MessageType, List<Type>>,
-        value: Type?
+        konstue: Type?
     ) {
-        if (value != null) {
-            addExtension(extension, value)
+        if (konstue != null) {
+            addExtension(extension, konstue)
         }
     }
 }

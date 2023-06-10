@@ -2,10 +2,10 @@ class Subject {
 
 
 
-    val field:String = ""
+    konst field:String = ""
 
     @MyAnnotation
-    val annotationTrigger: String = ""
+    konst annotationTrigger: String = ""
 }
 
 internal annotation class MyAnnotation

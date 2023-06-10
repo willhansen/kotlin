@@ -202,8 +202,8 @@ struct DestructorRecord {
   void* destructorParameter;
 };
 
-static void onThreadExitCallback(void* value) {
-  DestructorRecord* record = reinterpret_cast<DestructorRecord*>(value);
+static void onThreadExitCallback(void* konstue) {
+  DestructorRecord* record = reinterpret_cast<DestructorRecord*>(konstue);
   pthread_setspecific(terminationKey, nullptr);
   while (record != nullptr) {
     record->destructor(record->destructorParameter);
@@ -225,7 +225,7 @@ static void onThreadExitInit() {
   // Due to glibc bug we have to create first key as dummy, to avoid
   // conflicts with potentially uninitialized dlfcn error key.
   // https://code.woboq.org/userspace/glibc/dlfcn/dlerror.c.html#237
-  // As one may see, glibc checks value of the key even if it was not inited (and == 0),
+  // As one may see, glibc checks konstue of the key even if it was not inited (and == 0),
   // and so data associated with our legit key (== 0 as being the first one) is used.
   // Other libc are not affected, as usually == 0 pthread key is impossible.
   pthread_key_create(&dummyKey, nullptr);
@@ -516,19 +516,19 @@ extern "C" {
 // but they are not actually available on mips. So let's implement them ourselfs using existing __atomic ones.
 
 
-int64_t replace_sync_fetch_and_add_8(int64_t *ptr, int64_t value) asm("__sync_fetch_and_add_8");
-RUNTIME_USED int64_t replace_sync_fetch_and_add_8(int64_t *ptr, int64_t value) {
-    return __atomic_fetch_add(ptr, value, __ATOMIC_SEQ_CST);
+int64_t replace_sync_fetch_and_add_8(int64_t *ptr, int64_t konstue) asm("__sync_fetch_and_add_8");
+RUNTIME_USED int64_t replace_sync_fetch_and_add_8(int64_t *ptr, int64_t konstue) {
+    return __atomic_fetch_add(ptr, konstue, __ATOMIC_SEQ_CST);
 }
-int64_t replace_sync_val_compare_and_swap(int64_t *ptr, int64_t oldval, int64_t newval) asm("__sync_val_compare_and_swap_8");
-RUNTIME_USED int64_t replace_sync_val_compare_and_swap (int64_t *ptr, int64_t oldval, int64_t newval) {
-    __atomic_compare_exchange_n(ptr, &oldval, newval, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
-    return oldval;
+int64_t replace_sync_konst_compare_and_swap(int64_t *ptr, int64_t oldkonst, int64_t newkonst) asm("__sync_konst_compare_and_swap_8");
+RUNTIME_USED int64_t replace_sync_konst_compare_and_swap (int64_t *ptr, int64_t oldkonst, int64_t newkonst) {
+    __atomic_compare_exchange_n(ptr, &oldkonst, newkonst, false, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
+    return oldkonst;
 }
 
-int64_t replace_sync_lock_test_and_set(int64_t *ptr, int64_t value) asm("__sync_lock_test_and_set_8");
-RUNTIME_USED int64_t replace_sync_lock_test_and_set(int64_t *ptr, int64_t value) {
-    return __atomic_exchange_n(ptr, value, __ATOMIC_SEQ_CST);
+int64_t replace_sync_lock_test_and_set(int64_t *ptr, int64_t konstue) asm("__sync_lock_test_and_set_8");
+RUNTIME_USED int64_t replace_sync_lock_test_and_set(int64_t *ptr, int64_t konstue) {
+    return __atomic_exchange_n(ptr, konstue, __ATOMIC_SEQ_CST);
 }
 
 

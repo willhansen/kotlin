@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.ir.declarations.IrMemberWithContainerSource
 import org.jetbrains.kotlin.ir.util.SymbolTable
 
 interface Fir2IrExtensions {
-    val irNeedsDeserialization: Boolean
+    konst irNeedsDeserialization: Boolean
 
     fun generateOrGetFacadeClass(declaration: IrMemberWithContainerSource, components: Fir2IrComponents): IrClass?
     fun deserializeToplevelClass(irClass: IrClass, components: Fir2IrComponents): Boolean
     fun registerDeclarations(symbolTable: SymbolTable)
 
     object Default : Fir2IrExtensions {
-        override val irNeedsDeserialization: Boolean
+        override konst irNeedsDeserialization: Boolean
             get() = false
 
         override fun generateOrGetFacadeClass(declaration: IrMemberWithContainerSource, components: Fir2IrComponents): IrClass? = null

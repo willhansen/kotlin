@@ -10,8 +10,8 @@ public class MyActivity : Activity() {
 }
 
 fun MyActivity.b() {
-    val x = login
-    val y = this.login
+    konst x = login
+    konst y = this.login
 }
 
 // 1 public _\$_findCachedViewById

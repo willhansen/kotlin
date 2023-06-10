@@ -19,15 +19,15 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
         setOf(NpmRange())
 
     override fun visitWildcardRange(ctx: NodeSemverExpressionParser.WildcardRangeContext): Set<NpmRange> {
-        val partialWildcardSemver = ctx.partialWildcardSemver()
-        val versionText = partialWildcardSemver.text
-        val version = versionText
+        konst partialWildcardSemver = ctx.partialWildcardSemver()
+        konst versionText = partialWildcardSemver.text
+        konst version = versionText
             .replace(".x", "")
             .replace(".X", "")
             .replace(".*", "")
             .let { Version.fromString(it) }
 
-        val nextVersion = when {
+        konst nextVersion = when {
             partialWildcardSemver.minor == null -> version.incrementMajor()
             partialWildcardSemver.patch == null -> version.incrementMinor()
             else -> return version(version)
@@ -38,17 +38,17 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
     }
 
     override fun visitOperator(ctx: NodeSemverExpressionParser.OperatorContext): Set<NpmRange> {
-        val eq: TerminalNode? = ctx.unaryOperator().EQ()
-        val gt: TerminalNode? = ctx.unaryOperator().GT()
-        val lt: TerminalNode? = ctx.unaryOperator().LT()
+        konst eq: TerminalNode? = ctx.unaryOperator().EQ()
+        konst gt: TerminalNode? = ctx.unaryOperator().GT()
+        konst lt: TerminalNode? = ctx.unaryOperator().LT()
 
-        val version = ctx.partialWildcardSemver().text
+        konst version = ctx.partialWildcardSemver().text
 
         if (gt == null && lt == null) {
             return setOf(eq(version))
         }
 
-        val eqToken = eq != null
+        konst eqToken = eq != null
 
         if (lt != null) {
             return setOf(
@@ -65,8 +65,8 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
         setOf(NpmRange())
 
     override fun visitTildeRange(ctx: NodeSemverExpressionParser.TildeRangeContext): Set<NpmRange> {
-        val version = Version.fromString(ctx.fullSemver().text)
-        val nextVersion = version
+        konst version = Version.fromString(ctx.fullSemver().text)
+        konst nextVersion = version
             .incrementMinor()
 
         return (gteq(version) intersect lt(nextVersion))
@@ -74,8 +74,8 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
     }
 
     override fun visitCaretRange(ctx: NodeSemverExpressionParser.CaretRangeContext): Set<NpmRange> {
-        val version = Version.fromString(ctx.fullSemver().text)
-        val nextVersion = version
+        konst version = Version.fromString(ctx.fullSemver().text)
+        konst nextVersion = version
             .incrementMajor()
 
         return (gteq(version) intersect lt(nextVersion))
@@ -97,7 +97,7 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
             ctx.simple()
                 .flatMap { visit(it) }
                 .reduce { acc: NpmRange?, next: NpmRange ->
-                    val npmRange = if (acc == null) null else acc intersect next
+                    konst npmRange = if (acc == null) null else acc intersect next
                     npmRange
                 }
         } catch (e: UnsupportedOperationException) {
@@ -166,14 +166,14 @@ class NpmRangeVisitor : NodeSemverExpressionBaseVisitor<Set<NpmRange>>() {
         )
 
     companion object {
-        const val EQ = "="
-        const val GT = ">"
-        const val LT = "<"
-        const val GTEQ = ">="
-        const val LTEQ = "<="
+        const konst EQ = "="
+        const konst GT = ">"
+        const konst LT = "<"
+        const konst GTEQ = ">="
+        const konst LTEQ = "<="
 
-        const val AND = " "
-        const val OR = " || "
-        const val WILDCARD = "*"
+        const konst AND = " "
+        const konst OR = " || "
+        const konst WILDCARD = "*"
     }
 }

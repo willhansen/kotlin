@@ -5,7 +5,7 @@ package lib
 
 external fun bar(): Int
 
-val bar = 32
+konst bar = 32
 
 // FILE: lib.js
 function bar() {

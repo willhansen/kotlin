@@ -32,7 +32,7 @@ class FirErrorTypeRefBuilder : FirAnnotationContainerBuilder {
     lateinit var diagnostic: ConeDiagnostic
 
     override fun build(): FirErrorTypeRef {
-        val type = this.type
+        konst type = this.type
         return if (type != null) {
             FirErrorTypeRefImpl(
                 source,
@@ -52,7 +52,7 @@ class FirErrorTypeRefBuilder : FirAnnotationContainerBuilder {
     }
 
     @Deprecated("Modification of 'annotations' has no impact for FirErrorTypeRefBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)
@@ -68,7 +68,7 @@ inline fun buildErrorTypeRefCopy(original: FirErrorTypeRef, init: FirErrorTypeRe
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirErrorTypeRefBuilder()
+    konst copyBuilder = FirErrorTypeRefBuilder()
     copyBuilder.source = original.source
     copyBuilder.type = original.type
     copyBuilder.delegatedTypeRef = original.delegatedTypeRef

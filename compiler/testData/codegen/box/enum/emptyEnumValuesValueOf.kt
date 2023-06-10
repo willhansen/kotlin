@@ -2,10 +2,10 @@
 enum class Empty
 
 fun box(): String {
-    if (Empty.values().size != 0) return "Fail: ${Empty.values()}"
+    if (Empty.konstues().size != 0) return "Fail: ${Empty.konstues()}"
 
     try {
-        val found = Empty.valueOf("nonExistentEntry")
+        konst found = Empty.konstueOf("nonExistentEntry")
         return "Fail: $found"
     }
     catch (e: Exception) {

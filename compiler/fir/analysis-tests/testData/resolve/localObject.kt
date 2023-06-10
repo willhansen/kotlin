@@ -5,7 +5,7 @@ interface Foo {
 }
 
 fun tesLambda(x: Int) = run {
-    val obj = object : Foo {
+    konst obj = object : Foo {
         override fun foo(): Int {
             return x + 1
         }
@@ -14,21 +14,21 @@ fun tesLambda(x: Int) = run {
 }
 
 class TestProperty {
-    val intConst: Int = 1
+    konst intConst: Int = 1
 
     var x = 1
-        set(value) {
-            val obj = object : Foo {
+        set(konstue) {
+            konst obj = object : Foo {
                 override fun foo(): Int {
                     return intConst + 1
                 }
             }
-            field = value
+            field = konstue
         }
 
-    val y: Int
+    konst y: Int
         get() {
-            val obj = object : Foo {
+            konst obj = object : Foo {
                 override fun foo(): Int {
                     return intConst + 1
                 }
@@ -36,8 +36,8 @@ class TestProperty {
             return 1
         }
 
-    val z = run {
-        val obj = object : Foo {
+    konst z = run {
+        konst obj = object : Foo {
             override fun foo(): Int {
                 return x + 1
             }

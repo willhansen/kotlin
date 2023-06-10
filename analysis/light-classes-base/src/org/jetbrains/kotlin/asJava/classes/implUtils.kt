@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.*
 fun KtSuperTypeList.findEntry(fqNameToFind: String): KtSuperTypeListEntry? =
     entries.find { it.typeAsUserType?.fqName == fqNameToFind }
 
-private val KtUserType.fqName: String?
+private konst KtUserType.fqName: String?
     get() = qualifier?.let { "${it.fqName}.$referencedName" } ?: referencedName
 
 // NOTE: avoid using blocking lazy in light classes, it leads to deadlocks
@@ -33,7 +33,7 @@ fun PsiReferenceList.addSuperTypeEntry(
     reference: PsiJavaCodeReferenceElement
 ) {
     // Only classes may be mentioned in 'extends' list, thus create super call instead simple type reference
-    val entryToAdd =
+    konst entryToAdd =
         if ((reference.parent as? PsiReferenceList)?.role == PsiReferenceList.Role.IMPLEMENTS_LIST && role == PsiReferenceList.Role.EXTENDS_LIST) {
             KtPsiFactory(project).createSuperTypeCallEntry("${entry.text}()")
         } else entry
@@ -49,7 +49,7 @@ fun PsiReferenceList.addSuperTypeEntry(
 fun KtClassOrObject.getExternalDependencies(): List<ModificationTracker> {
     return with(KotlinModificationTrackerService.getInstance(project)) {
         if (!this@getExternalDependencies.isLocal) return listOf(outOfBlockModificationTracker)
-        else when (val file = containingFile) {
+        else when (konst file = containingFile) {
             is KtFile -> listOf(outOfBlockModificationTracker, fileModificationTracker(file))
             else -> listOf(outOfBlockModificationTracker)
         }
@@ -58,9 +58,9 @@ fun KtClassOrObject.getExternalDependencies(): List<ModificationTracker> {
 
 // There is no other known way found to make PSI types annotated for now (without creating a new instance).
 // It seems we need for platform changes to do it more convenient way (KTIJ-141).
-private val setPsiTypeAnnotationProvider: (PsiType, TypeAnnotationProvider) -> Unit by lazyPub {
-    val klass = PsiType::class.java
-    val providerField = try {
+private konst setPsiTypeAnnotationProvider: (PsiType, TypeAnnotationProvider) -> Unit by lazyPub {
+    konst klass = PsiType::class.java
+    konst providerField = try {
         klass.getDeclaredField("myAnnotationProvider")
             .also { it.isAccessible = true }
     } catch (e: NoSuchFieldException) {
@@ -79,15 +79,15 @@ private val setPsiTypeAnnotationProvider: (PsiType, TypeAnnotationProvider) -> U
 fun PsiType.annotateByTypeAnnotationProvider(
     annotations: Sequence<List<PsiAnnotation>>,
 ): PsiType {
-    val annotationsIterator = annotations.iterator()
+    konst annotationsIterator = annotations.iterator()
     if (!annotationsIterator.hasNext()) return this
 
     if (this is PsiPrimitiveType) {
-        val typeAnnotation = annotationsIterator.next()
+        konst typeAnnotation = annotationsIterator.next()
         return if (typeAnnotation.isEmpty()) {
             this
         } else {
-            val provider = TypeAnnotationProvider.Static.create(typeAnnotation.toTypedArray())
+            konst provider = TypeAnnotationProvider.Static.create(typeAnnotation.toTypedArray())
             // NB: [PsiType#annotate] makes a clone of the given [PsiType] while manipulating the type annotation provider.
             // For simple primitive type, it will be okay and intuitive (than reflection hack).
             annotate(provider)
@@ -96,7 +96,7 @@ fun PsiType.annotateByTypeAnnotationProvider(
 
     fun recursiveAnnotator(psiType: PsiType) {
         if (!annotationsIterator.hasNext()) return
-        val typeAnnotations = annotationsIterator.next()
+        konst typeAnnotations = annotationsIterator.next()
 
         when (psiType) {
             is PsiPrimitiveType -> return // Primitive type cannot be type parameter so we skip it
@@ -112,7 +112,7 @@ fun PsiType.annotateByTypeAnnotationProvider(
 
         if (typeAnnotations.isEmpty()) return
 
-        val provider = TypeAnnotationProvider.Static.create(typeAnnotations.toTypedArray())
+        konst provider = TypeAnnotationProvider.Static.create(typeAnnotations.toTypedArray())
         setPsiTypeAnnotationProvider(psiType, provider)
     }
 

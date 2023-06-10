@@ -1,7 +1,7 @@
-const val empty = ""
+const konst empty = ""
 
-val test1 = ""
-val test2 = "abc$empty"
-val test3 = "$empty$empty$empty"
+konst test1 = ""
+konst test2 = "abc$empty"
+konst test3 = "$empty$empty$empty"
 
 // 0 StringBuilder

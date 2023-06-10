@@ -11,12 +11,12 @@ import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.Reader
 
-const val ARGFILE_ARGUMENT = "@"
-private const val EXPERIMENTAL_ARGFILE_ARGUMENT = "-Xargfile="
+const konst ARGFILE_ARGUMENT = "@"
+private const konst EXPERIMENTAL_ARGFILE_ARGUMENT = "-Xargfile="
 
-private const val SINGLE_QUOTE = '\''
-private const val DOUBLE_QUOTE = '"'
-private const val BACKSLASH = '\\'
+private const konst SINGLE_QUOTE = '\''
+private const konst DOUBLE_QUOTE = '"'
+private const konst BACKSLASH = '\\'
 
 /**
  * Performs initial preprocessing of arguments, passed to the compiler.
@@ -26,11 +26,11 @@ private const val BACKSLASH = '\\'
 fun preprocessCommandLineArguments(args: List<String>, errors: Lazy<ArgumentParseErrors>): List<String> =
     args.flatMap { arg ->
         if (arg.isArgfileArgument) {
-            File(arg.argfilePath).expand(errors.value)
+            File(arg.argfilePath).expand(errors.konstue)
         } else if (arg.isDeprecatedArgfileArgument) {
-            errors.value.deprecatedArguments[EXPERIMENTAL_ARGFILE_ARGUMENT] = ARGFILE_ARGUMENT
+            errors.konstue.deprecatedArguments[EXPERIMENTAL_ARGFILE_ARGUMENT] = ARGFILE_ARGUMENT
 
-            File(arg.deprecatedArgfilePath).expand(errors.value)
+            File(arg.deprecatedArgfilePath).expand(errors.konstue)
         } else {
             listOf(arg)
         }
@@ -38,7 +38,7 @@ fun preprocessCommandLineArguments(args: List<String>, errors: Lazy<ArgumentPars
 
 @TestOnly
 fun readArgumentsFromArgFile(content: String): List<String> {
-    val reader = content.reader()
+    konst reader = content.reader()
     return generateSequence { reader.parseNextArgument() }.toList()
 }
 
@@ -58,7 +58,7 @@ private fun File.expand(errors: ArgumentParseErrors): List<String> {
 }
 
 private fun Reader.parseNextArgument(): String? {
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
 
     var r = nextChar()
     while (r != null && r.isWhitespace()) {
@@ -91,14 +91,14 @@ private fun Reader.consumeRestOfQuotedSequence(sb: StringBuilder, quote: Char) {
 private fun Reader.nextChar(): Char? =
     read().takeUnless { it == -1 }?.toChar()
 
-private val String.argfilePath: String
+private konst String.argfilePath: String
     get() = removePrefix(ARGFILE_ARGUMENT)
 
-private val String.isArgfileArgument: Boolean
+private konst String.isArgfileArgument: Boolean
     get() = startsWith(ARGFILE_ARGUMENT)
 
-private val String.deprecatedArgfilePath: String
+private konst String.deprecatedArgfilePath: String
     get() = removePrefix(EXPERIMENTAL_ARGFILE_ARGUMENT)
 
-private val String.isDeprecatedArgfileArgument: Boolean
+private konst String.isDeprecatedArgfileArgument: Boolean
     get() = startsWith(EXPERIMENTAL_ARGFILE_ARGUMENT)

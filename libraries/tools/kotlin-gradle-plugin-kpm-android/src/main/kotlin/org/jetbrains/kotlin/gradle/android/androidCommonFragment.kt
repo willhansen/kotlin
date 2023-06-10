@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.android
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmFragmentInternal
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmModule
 
-val GradleKpmModule.androidCommon: GradleKpmFragmentInternal
+konst GradleKpmModule.androidCommon: GradleKpmFragmentInternal
     get() = (fragments.findByName("androidCommon") ?: fragments.create("androidCommon") { fragment ->
         fragment.refines(common)
     }) as GradleKpmFragmentInternal

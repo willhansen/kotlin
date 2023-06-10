@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.KotlinCompilationI
 abstract class AbstractKotlinCompilationToRunnableFiles<T : KotlinCommonOptions>
 internal constructor(compilation: KotlinCompilationImpl) : AbstractKotlinCompilation<T>(compilation), KotlinCompilationToRunnableFiles<T> {
 
-    final override val runtimeDependencyConfigurationName: String
+    final override konst runtimeDependencyConfigurationName: String
         get() = compilation.runtimeDependencyConfigurationName ?: error("$compilation: Missing 'runtimeDependencyConfigurationName'")
 
     final override var runtimeDependencyFiles: FileCollection =
         compilation.runtimeDependencyFiles ?: error("$compilation: Missing 'runtimeDependencyFiles'")
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     @Suppress("DEPRECATION")
-    override val relatedConfigurationNames: List<String>
+    override konst relatedConfigurationNames: List<String>
         get() = compilation.relatedConfigurationNames
 }

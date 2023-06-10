@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.ir.util.kotlinFqName
 
 /** Builds a [HeaderInfo] for calls to `withIndex()`. */
 internal class WithIndexHandler(
-    private val context: CommonBackendContext,
-    private val visitor: NestedHeaderInfoBuilderForWithIndex
+    private konst context: CommonBackendContext,
+    private konst visitor: NestedHeaderInfoBuilderForWithIndex
 ) : HeaderInfoHandler<IrCall, Nothing?> {
-    private val supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
+    private konst supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
 
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        if (callee.valueParameters.isNotEmpty() || callee.name.asString() != "withIndex") return false
+        konst callee = expression.symbol.owner
+        if (callee.konstueParameters.isNotEmpty() || callee.name.asString() != "withIndex") return false
 
         return when (callee.kotlinFqName.asString()) {
             "kotlin.collections.withIndex" ->
@@ -47,7 +47,7 @@ internal class WithIndexHandler(
 
     override fun build(expression: IrCall, data: Nothing?, scopeOwner: IrSymbol): HeaderInfo? {
         // WithIndexHeaderInfo is a composite that contains the HeaderInfo for the underlying iterable (if any).
-        val nestedInfo = expression.extensionReceiver!!.accept(visitor, null) ?: return null
+        konst nestedInfo = expression.extensionReceiver!!.accept(visitor, null) ?: return null
 
         // We cannot lower `iterable.withIndex().withIndex()`.
         // NestedHeaderInfoBuilderForWithIndex should not be yielding a WithIndexHeaderInfo, hence the assert.

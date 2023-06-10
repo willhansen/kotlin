@@ -8,16 +8,16 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var result = ""
 
-    suspend fun <T> suspendAndLog(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-        result += "suspend($value);"
-        c.resume(value)
+    suspend fun <T> suspendAndLog(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+        result += "suspend($konstue);"
+        c.resume(konstue)
         COROUTINE_SUSPENDED
     }
 
     var count = 0
 
-    fun <T> log(value: T) {
-        result += "$value"
+    fun <T> log(konstue: T) {
+        result += "$konstue"
     }
 
     fun check(): Boolean = count > 1
@@ -26,7 +26,7 @@ class Controller {
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.result += "return;"
     })
@@ -60,7 +60,7 @@ suspend fun Controller.test() {
 }
 
 fun box(): String {
-    val res = builder {
+    konst res = builder {
         test()
     }
 

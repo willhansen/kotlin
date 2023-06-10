@@ -1,9 +1,9 @@
 class My {
-    val x: String
+    konst x: String
 
     constructor() {
-        val y = bar(<!DEBUG_INFO_LEAKING_THIS!>this<!>)
-        val z = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
+        konst y = bar(<!DEBUG_INFO_LEAKING_THIS!>this<!>)
+        konst z = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
         x = "$y$z"
     }
 

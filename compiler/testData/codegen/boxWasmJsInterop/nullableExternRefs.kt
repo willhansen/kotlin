@@ -48,8 +48,8 @@ inline fun checkNPE(body: () -> Unit) {
 }
 
 fun box(): String {
-    val jsNull = getNull()
-    val jsUndefined = getUndefined()
+    konst jsNull = getNull()
+    konst jsUndefined = getUndefined()
 
     assertTrue(jsNull == null)
     assertTrue((jsNull as Any?) == null)

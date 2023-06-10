@@ -9,7 +9,7 @@ inline operator fun String.getValue(t:Any?, p: KProperty<*>): String = p.name + 
 
 object C {
     inline fun inlineFun() = {
-        val O by "K"
+        konst O by "K"
         O
     }.let { it() }
 }

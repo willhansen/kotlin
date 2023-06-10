@@ -11,19 +11,19 @@ inline fun foo(
     second: () -> Unit
 ) {  }
 
-<!INCOMPATIBLE_MODIFIERS, REDUNDANT_MODIFIER!>open<!> <!INCOMPATIBLE_MODIFIERS!>abstract<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class H(val i: Int)
-<!INCOMPATIBLE_MODIFIERS!>sealed<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class I(val i: Int)
-<!INCOMPATIBLE_MODIFIERS!>inline<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class J(val i: Int)
+<!INCOMPATIBLE_MODIFIERS, REDUNDANT_MODIFIER!>open<!> <!INCOMPATIBLE_MODIFIERS!>abstract<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class H(konst i: Int)
+<!INCOMPATIBLE_MODIFIERS!>sealed<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class I(konst i: Int)
+<!INCOMPATIBLE_MODIFIERS!>inline<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class J(konst i: Int)
 
 abstract class K {
-    <!INCOMPATIBLE_MODIFIERS!>private<!> <!INCOMPATIBLE_MODIFIERS!>open<!> val i1: Int = 0
-    <!INCOMPATIBLE_MODIFIERS!>private<!> <!INCOMPATIBLE_MODIFIERS!>abstract<!> val i2: Int
+    <!INCOMPATIBLE_MODIFIERS!>private<!> <!INCOMPATIBLE_MODIFIERS!>open<!> konst i1: Int = 0
+    <!INCOMPATIBLE_MODIFIERS!>private<!> <!INCOMPATIBLE_MODIFIERS!>abstract<!> konst i2: Int
 }
 
 private open <!INVISIBLE_ABSTRACT_MEMBER_FROM_SUPER_ERROR!>class L<!> : K()
 private abstract class M : K()
 
 class X {
-    <!INCOMPATIBLE_MODIFIERS!>inner<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class Y(val i: Int)
+    <!INCOMPATIBLE_MODIFIERS!>inner<!> <!INCOMPATIBLE_MODIFIERS!>data<!> class Y(konst i: Int)
     <!INCOMPATIBLE_MODIFIERS!>sealed<!> <!INCOMPATIBLE_MODIFIERS!>inner<!> class Z
 }

@@ -19,7 +19,7 @@ var result: Any = ""
 
 fun <T : Any> foo(v: T) {
     builder {
-        val r = suspendHere(v)
+        konst r = suspendHere(v)
         suspendHere("")
         result = r
     }

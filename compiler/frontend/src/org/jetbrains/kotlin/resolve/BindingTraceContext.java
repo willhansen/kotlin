@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.util.slicedMap.*;
 import java.util.Collection;
 
 public class BindingTraceContext implements BindingTrace {
-    private static final boolean VALIDATION = Boolean.parseBoolean(System.getProperty("kotlin.bindingTrace.validation"));
+    private static final boolean VALIDATION = Boolean.parseBoolean(System.getProperty("kotlin.bindingTrace.konstidation"));
     // These flags are used for debugging of "Rewrite at slice..." exceptions
     /* package */ final static boolean TRACK_REWRITES = false;
     /* package */ final static boolean TRACK_WITH_STACK_TRACES = true;
@@ -143,11 +143,11 @@ public class BindingTraceContext implements BindingTrace {
     }
 
     @Override
-    public <K, V> void record(WritableSlice<K, V> slice, K key, V value) {
-        if (isValidationEnabled && value instanceof ValidateableDescriptor && !ProgressManager.getInstance().isInNonCancelableSection()) {
-            ((ValidateableDescriptor) value).validate();
+    public <K, V> void record(WritableSlice<K, V> slice, K key, V konstue) {
+        if (isValidationEnabled && konstue instanceof ValidateableDescriptor && !ProgressManager.getInstance().isInNonCancelableSection()) {
+            ((ValidateableDescriptor) konstue).konstidate();
         }
-        map.put(slice, key, value);
+        map.put(slice, key, konstue);
     }
 
     @Override

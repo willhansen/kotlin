@@ -4,5 +4,5 @@ interface MyInterface {
 }
 
 fun MyInterface.foo() {
-    <expr>val prop: MyInterface.Nested = MyInterface.Nested()</expr>
+    <expr>konst prop: MyInterface.Nested = MyInterface.Nested()</expr>
 }

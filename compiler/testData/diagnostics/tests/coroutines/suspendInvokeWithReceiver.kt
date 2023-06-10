@@ -7,7 +7,7 @@ fun nonReproducer1(): String = r {
 }
 
 object MyObject {
-    val someProperty: String = "TODO()"
+    konst someProperty: String = "TODO()"
 }
 
 suspend operator fun <R> String.invoke(): R = null!!

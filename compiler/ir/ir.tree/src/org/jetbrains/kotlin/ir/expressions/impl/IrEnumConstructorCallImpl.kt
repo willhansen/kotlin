@@ -26,18 +26,18 @@ import org.jetbrains.kotlin.ir.util.initializeParameterArguments
 import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 
 class IrEnumConstructorCallImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrConstructorSymbol,
+    override konst symbol: IrConstructorSymbol,
     typeArgumentsCount: Int,
-    valueArgumentsCount: Int
+    konstueArgumentsCount: Int
 ) : IrEnumConstructorCall() {
     override var origin: IrStatementOrigin? = null
 
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(valueArgumentsCount)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(konstueArgumentsCount)
 
     override var contextReceiversCount = 0
 
@@ -49,6 +49,6 @@ class IrEnumConstructorCallImpl(
             type: IrType,
             symbol: IrConstructorSymbol,
             typeArgumentsCount: Int
-        ) = IrEnumConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, symbol.descriptor.valueParameters.size)
+        ) = IrEnumConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, symbol.descriptor.konstueParameters.size)
     }
 }

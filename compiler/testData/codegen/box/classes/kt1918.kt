@@ -15,6 +15,6 @@ fun buildFoo(bar: Bar.() -> Unit): Foo {
 }
 
 fun box(): String {
-    val foo = buildFoo({})
+    konst foo = buildFoo({})
     return foo.xyzzy(Bar())
 }

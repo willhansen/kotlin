@@ -26,7 +26,7 @@ open enum class MyEnum : Enum<MyEnum> {
       <this>.foo()
     }
 
-    val aLambda: Function0<Unit>
+    konst aLambda: Function0<Unit>
       field = local fun <anonymous>() {
         <this>.<set-counter>(<set-?> = 1)
         <this>.foo()
@@ -34,7 +34,7 @@ open enum class MyEnum : Enum<MyEnum> {
 
       get
 
-    val anObject: <no name provided>
+    konst anObject: <no name provided>
       field = { // BLOCK
         local class <no name provided> {
           constructor() /* primary */ {
@@ -61,11 +61,11 @@ open enum class MyEnum : Enum<MyEnum> {
 
   }
 
-  fun values(): Array<MyEnum> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<MyEnum> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): MyEnum /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): MyEnum /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<MyEnum>
+  konst entries: EnumEntries<MyEnum>
     get(): EnumEntries<MyEnum> /* Synthetic body for ENUM_ENTRIES */
 
 }

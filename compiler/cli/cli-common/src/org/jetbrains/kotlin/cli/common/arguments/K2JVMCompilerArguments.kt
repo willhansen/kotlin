@@ -12,248 +12,248 @@ import org.jetbrains.kotlin.config.*
 class K2JVMCompilerArguments : CommonCompilerArguments() {
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 
-    @Argument(value = "-d", valueDescription = "<directory|jar>", description = "Destination for generated class files")
+    @Argument(konstue = "-d", konstueDescription = "<directory|jar>", description = "Destination for generated class files")
     var destination: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-classpath",
+        konstue = "-classpath",
         shortName = "-cp",
-        valueDescription = "<path>",
+        konstueDescription = "<path>",
         description = "List of directories and JAR/ZIP archives to search for user class files"
     )
     var classpath: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
-    @Argument(value = "-include-runtime", description = "Include Kotlin runtime into the resulting JAR")
+    @Argument(konstue = "-include-runtime", description = "Include Kotlin runtime into the resulting JAR")
     var includeRuntime = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-jdk-home",
-        valueDescription = "<path>",
+        konstue = "-jdk-home",
+        konstueDescription = "<path>",
         description = "Include a custom JDK from the specified location into the classpath instead of the default JAVA_HOME"
     )
     var jdkHome: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-no-jdk", description = "Don't automatically include the Java runtime into the classpath")
+    @Argument(konstue = "-no-jdk", description = "Don't automatically include the Java runtime into the classpath")
     var noJdk = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-no-stdlib",
+        konstue = "-no-stdlib",
         description = "Don't automatically include the Kotlin/JVM stdlib and Kotlin reflection into the classpath"
     )
     var noStdlib = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-no-reflect", description = "Don't automatically include Kotlin reflection into the classpath")
+    @Argument(konstue = "-no-reflect", description = "Don't automatically include Kotlin reflection into the classpath")
     var noReflect = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-expression",
+        konstue = "-expression",
         shortName = "-e",
-        description = "Evaluate the given string as a Kotlin script"
+        description = "Ekonstuate the given string as a Kotlin script"
     )
     var expression: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-script-templates",
-        valueDescription = "<fully qualified class name[,]>",
+        konstue = "-script-templates",
+        konstueDescription = "<fully qualified class name[,]>",
         description = "Script definition template classes"
     )
     var scriptTemplates: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @GradleOption(
-        value = DefaultValue.STRING_NULL_DEFAULT,
+        konstue = DefaultValue.STRING_NULL_DEFAULT,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-module-name", valueDescription = "<name>", description = "Name of the generated .kotlin_module file")
+    @Argument(konstue = "-module-name", konstueDescription = "<name>", description = "Name of the generated .kotlin_module file")
     var moduleName: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @GradleOption(
-        value = DefaultValue.JVM_TARGET_VERSIONS,
+        konstue = DefaultValue.JVM_TARGET_VERSIONS,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
     @Argument(
-        value = "-jvm-target",
-        valueDescription = "<version>",
+        konstue = "-jvm-target",
+        konstueDescription = "<version>",
         description = "Target version of the generated JVM bytecode (${JvmTarget.SUPPORTED_VERSIONS_DESCRIPTION}), default is 1.8",
     )
     var jvmTarget: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @GradleOption(
-        value = DefaultValue.BOOLEAN_FALSE_DEFAULT,
+        konstue = DefaultValue.BOOLEAN_FALSE_DEFAULT,
         gradleInputType = GradleInputTypes.INPUT,
         shouldGenerateDeprecatedKotlinOptions = true,
     )
-    @Argument(value = "-java-parameters", description = "Generate metadata for Java 1.8 reflection on method parameters")
+    @Argument(konstue = "-java-parameters", description = "Generate metadata for Java 1.8 reflection on method parameters")
     var javaParameters = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     // Advanced options
 
-    @Argument(value = "-Xuse-old-backend", description = "Use the old JVM backend")
+    @Argument(konstue = "-Xuse-old-backend", description = "Use the old JVM backend")
     var useOldBackend = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xallow-unstable-dependencies",
+        konstue = "-Xallow-unstable-dependencies",
         description = "Do not report errors on classes in dependencies, which were compiled by an unstable version of the Kotlin compiler"
     )
     var allowUnstableDependencies = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xabi-stability",
-        valueDescription = "{stable|unstable}",
+        konstue = "-Xabi-stability",
+        konstueDescription = "{stable|unstable}",
         description = "When using unstable compiler features such as FIR, use 'stable' to mark generated class files as stable\n" +
                 "to prevent diagnostics from stable compilers at the call site.\n" +
                 "When using the JVM IR backend, conversely, use 'unstable' to mark generated class files as unstable\n" +
                 "to force diagnostics to be reported."
     )
     var abiStability: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xir-do-not-clear-binding-context",
+        konstue = "-Xir-do-not-clear-binding-context",
         description = "When using the IR backend, do not clear BindingContext between psi2ir and lowerings"
     )
     var doNotClearBindingContext = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xbackend-threads",
-        valueDescription = "<N>",
+        konstue = "-Xbackend-threads",
+        konstueDescription = "<N>",
         description = "When using the IR backend, run lowerings by file in N parallel threads.\n" +
                 "0 means use a thread per processor core.\n" +
-                "Default value is 1"
+                "Default konstue is 1"
     )
     var backendThreads: String = "1"
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xmodule-path", valueDescription = "<path>", description = "Paths where to find Java 9+ modules")
+    @Argument(konstue = "-Xmodule-path", konstueDescription = "<path>", description = "Paths where to find Java 9+ modules")
     var javaModulePath: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xadd-modules",
-        valueDescription = "<module[,]>",
+        konstue = "-Xadd-modules",
+        konstueDescription = "<module[,]>",
         description = "Root modules to resolve in addition to the initial modules,\n" +
                 "or all modules on the module path if <module> is ALL-MODULE-PATH"
     )
     var additionalJavaModules: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xno-call-assertions", description = "Don't generate not-null assertions for arguments of platform types")
+    @Argument(konstue = "-Xno-call-assertions", description = "Don't generate not-null assertions for arguments of platform types")
     var noCallAssertions = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-receiver-assertions",
+        konstue = "-Xno-receiver-assertions",
         description = "Don't generate not-null assertion for extension receiver arguments of platform types"
     )
     var noReceiverAssertions = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-param-assertions",
+        konstue = "-Xno-param-assertions",
         description = "Don't generate not-null assertions on parameters of methods accessible from Java"
     )
     var noParamAssertions = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xno-optimize", description = "Disable optimizations")
+    @Argument(konstue = "-Xno-optimize", description = "Disable optimizations")
     var noOptimize = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xassertions", valueDescription = "{always-enable|always-disable|jvm|legacy}",
+        konstue = "-Xassertions", konstueDescription = "{always-enable|always-disable|jvm|legacy}",
         description = "Assert calls behaviour\n" +
                 "-Xassertions=always-enable:  enable, ignore jvm assertion settings;\n" +
                 "-Xassertions=always-disable: disable, ignore jvm assertion settings;\n" +
@@ -262,142 +262,142 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
                 "default: legacy"
     )
     var assertionsMode: String? = JVMAssertionsMode.DEFAULT.description
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) JVMAssertionsMode.DEFAULT.description else value
+            field = if (konstue.isNullOrEmpty()) JVMAssertionsMode.DEFAULT.description else konstue
         }
 
     @Argument(
-        value = "-Xbuild-file",
+        konstue = "-Xbuild-file",
         deprecatedName = "-module",
-        valueDescription = "<path>",
+        konstueDescription = "<path>",
         description = "Path to the .xml build file to compile"
     )
     var buildFile: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
-    @Argument(value = "-Xmultifile-parts-inherit", description = "Compile multifile classes as a hierarchy of parts and facade")
+    @Argument(konstue = "-Xmultifile-parts-inherit", description = "Compile multifile classes as a hierarchy of parts and facade")
     var inheritMultifileParts = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xuse-type-table", description = "Use type table in metadata serialization")
+    @Argument(konstue = "-Xuse-type-table", description = "Use type table in metadata serialization")
     var useTypeTable = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xuse-old-class-files-reading",
+        konstue = "-Xuse-old-class-files-reading",
         description = "Use old class files reading implementation. This may slow down the build and cause problems with Groovy interop.\n" +
                 "Should be used in case of problems with the new implementation"
     )
     var useOldClassFilesReading = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xuse-fast-jar-file-system",
+        konstue = "-Xuse-fast-jar-file-system",
         description = "Use fast implementation on Jar FS. This may speed up compilation time, but currently it's an experimental mode"
     )
     var useFastJarFileSystem = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xdump-declarations-to",
-        valueDescription = "<path>",
+        konstue = "-Xdump-declarations-to",
+        konstueDescription = "<path>",
         description = "Path to JSON file to dump Java to Kotlin declaration mappings"
     )
     var declarationsOutputPath: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xsuppress-missing-builtins-error",
+        konstue = "-Xsuppress-missing-builtins-error",
         description = "Suppress the \"cannot access built-in declaration\" error (useful with -no-stdlib)"
     )
     var suppressMissingBuiltinsError = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xscript-resolver-environment",
-        valueDescription = "<key=value[,]>",
-        description = "Script resolver environment in key-value pairs (the value could be quoted and escaped)"
+        konstue = "-Xscript-resolver-environment",
+        konstueDescription = "<key=konstue[,]>",
+        description = "Script resolver environment in key-konstue pairs (the konstue could be quoted and escaped)"
     )
     var scriptResolverEnvironment: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     // Javac options
-    @Argument(value = "-Xuse-javac", description = "Use javac for Java source and class files analysis")
+    @Argument(konstue = "-Xuse-javac", description = "Use javac for Java source and class files analysis")
     var useJavac = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xcompile-java", description = "Reuse javac analysis and compile Java source files")
+    @Argument(konstue = "-Xcompile-java", description = "Reuse javac analysis and compile Java source files")
     var compileJava = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xjavac-arguments",
-        valueDescription = "<option[,]>",
+        konstue = "-Xjavac-arguments",
+        konstueDescription = "<option[,]>",
         description = "Java compiler arguments"
     )
     var javacArguments: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
 
     @Argument(
-        value = "-Xjava-source-roots",
-        valueDescription = "<path>",
+        konstue = "-Xjava-source-roots",
+        konstueDescription = "<path>",
         description = "Paths to directories with Java source files"
     )
     var javaSourceRoots: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xjava-package-prefix",
+        konstue = "-Xjava-package-prefix",
         description = "Package prefix for Java files"
     )
     var javaPackagePrefix: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xjsr305",
+        konstue = "-Xjsr305",
         deprecatedName = "-Xjsr305-annotations",
-        valueDescription = "{ignore/strict/warn}" +
+        konstueDescription = "{ignore/strict/warn}" +
                 "|under-migration:{ignore/strict/warn}" +
                 "|@<fq.name>:{ignore/strict/warn}",
         description = "Specify behavior for JSR-305 nullability annotations:\n" +
@@ -410,14 +410,14 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
                 "  * warn (report a warning)"
     )
     var jsr305: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xnullability-annotations",
-        valueDescription = "@<fq.name>:{ignore/strict/warn}",
+        konstue = "-Xnullability-annotations",
+        konstueDescription = "@<fq.name>:{ignore/strict/warn}",
         description = "Specify behavior for specific Java nullability annotations (provided with fully qualified package name)\n" +
                 "Modes:\n" +
                 "  * ignore\n" +
@@ -425,38 +425,38 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
                 "  * warn (report a warning)"
     )
     var nullabilityAnnotations: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xsupport-compatqual-checker-framework-annotations",
-        valueDescription = "enable|disable",
+        konstue = "-Xsupport-compatqual-checker-framework-annotations",
+        konstueDescription = "enable|disable",
         description = "Specify behavior for Checker Framework compatqual annotations (NullableDecl/NonNullDecl).\n" +
-                "Default value is 'enable'"
+                "Default konstue is 'enable'"
     )
     var supportCompatqualCheckerFrameworkAnnotations: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xjspecify-annotations",
-        valueDescription = "ignore|strict|warn",
+        konstue = "-Xjspecify-annotations",
+        konstueDescription = "ignore|strict|warn",
         description = "Specify behavior for jspecify annotations.\n" +
-                "Default value is 'warn'"
+                "Default konstue is 'warn'"
     )
     var jspecifyAnnotations: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xjvm-default",
-        valueDescription = "{all|all-compatibility|disable}",
+        konstue = "-Xjvm-default",
+        konstueDescription = "{all|all-compatibility|disable}",
         description = """Emit JVM default methods for interface declarations with bodies. Default is 'disable'.
 -Xjvm-default=all                Generate JVM default methods for all interface declarations with bodies in the module.
                                  Do not generate DefaultImpls stubs for interface declarations with bodies, which are generated by default
@@ -479,85 +479,85 @@ class K2JVMCompilerArguments : CommonCompilerArguments() {
 -Xjvm-default=disable            Default behavior. Do not generate JVM default methods."""
     )
     var jvmDefault: String = JvmDefaultMode.DEFAULT.description
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xdefault-script-extension",
-        valueDescription = "<script filename extension>",
+        konstue = "-Xdefault-script-extension",
+        konstueDescription = "<script filename extension>",
         description = "Compile expressions and unrecognized scripts passed with the -script argument as scripts with given filename extension"
     )
     var defaultScriptExtension: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
-    @Argument(value = "-Xdisable-standard-script", description = "Disable standard kotlin script support")
+    @Argument(konstue = "-Xdisable-standard-script", description = "Disable standard kotlin script support")
     var disableStandardScript = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xgenerate-strict-metadata-version",
+        konstue = "-Xgenerate-strict-metadata-version",
         description = "Generate metadata with strict version semantics (see kdoc on Metadata.extraInt)"
     )
     var strictMetadataVersionSemantics = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xsanitize-parentheses",
+        konstue = "-Xsanitize-parentheses",
         description = "Transform '(' and ')' in method names to some other character sequence.\n" +
                 "This mode can BREAK BINARY COMPATIBILITY and is only supposed to be used to workaround\n" +
                 "problems with parentheses in identifiers on certain platforms"
     )
     var sanitizeParentheses = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xfriend-paths",
-        valueDescription = "<path>",
+        konstue = "-Xfriend-paths",
+        konstueDescription = "<path>",
         description = "Paths to output directories for friend modules (whose internals should be visible)"
     )
     var friendPaths: Array<String>? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xallow-no-source-files",
+        konstue = "-Xallow-no-source-files",
         description = "Allow no source files"
     )
     var allowNoSourceFiles = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xemit-jvm-type-annotations",
+        konstue = "-Xemit-jvm-type-annotations",
         description = "Emit JVM type annotations in bytecode"
     )
     var emitJvmTypeAnnotations = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xstring-concat",
-        valueDescription = "{indy-with-constants|indy|inline}",
+        konstue = "-Xstring-concat",
+        konstueDescription = "{indy-with-constants|indy|inline}",
         description = """Select code generation scheme for string concatenation.
 -Xstring-concat=indy-with-constants   Concatenate strings using `invokedynamic` `makeConcatWithConstants`. Requires `-jvm-target 9` or greater.
 -Xstring-concat=indy                Concatenate strings using `invokedynamic` `makeConcat`. Requires `-jvm-target 9` or greater.
@@ -566,289 +566,289 @@ default: `indy-with-constants` for JVM target 9 or greater, `inline` otherwise""
 
     )
     var stringConcat: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xjdk-release",
-        valueDescription = "<version>",
+        konstue = "-Xjdk-release",
+        konstueDescription = "<version>",
         description = """Compile against the specified JDK API version, similarly to javac's `-release`. Requires JDK 9 or newer.
 Supported versions depend on the used JDK; for JDK 17+ supported versions are ${JvmTarget.SUPPORTED_VERSIONS_DESCRIPTION}.
-Also sets `-jvm-target` value equal to the selected JDK version"""
+Also sets `-jvm-target` konstue equal to the selected JDK version"""
     )
     var jdkRelease: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
 
     @Argument(
-        value = "-Xsam-conversions",
-        valueDescription = "{class|indy}",
+        konstue = "-Xsam-conversions",
+        konstueDescription = "{class|indy}",
         description = """Select code generation scheme for SAM conversions.
 -Xsam-conversions=indy              Generate SAM conversions using `invokedynamic` with `LambdaMetafactory.metafactory`. Requires `-jvm-target 1.8` or greater.
 -Xsam-conversions=class             Generate SAM conversions as explicit classes"""
     )
     var samConversions: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xlambdas",
-        valueDescription = "{class|indy}",
+        konstue = "-Xlambdas",
+        konstueDescription = "{class|indy}",
         description = """Select code generation scheme for lambdas.
 -Xlambdas=indy                      Generate lambdas using `invokedynamic` with `LambdaMetafactory.metafactory`. Requires `-jvm-target 1.8` or greater.
                                     Lambda objects created using `LambdaMetafactory.metafactory` will have different `toString()`.
 -Xlambdas=class                     Generate lambdas as explicit classes"""
     )
     var lambdas: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xklib",
-        valueDescription = "<path>",
+        konstue = "-Xklib",
+        konstueDescription = "<path>",
         description = "Paths to cross-platform libraries in .klib format"
     )
     var klibLibraries: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xno-optimized-callable-references",
+        konstue = "-Xno-optimized-callable-references",
         description = "Do not use optimized callable reference superclasses available from 1.4"
     )
     var noOptimizedCallableReferences = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-kotlin-nothing-value-exception",
+        konstue = "-Xno-kotlin-nothing-konstue-exception",
         description = "Do not use KotlinNothingValueException available since 1.4"
     )
     var noKotlinNothingValueException = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-reset-jar-timestamps",
+        konstue = "-Xno-reset-jar-timestamps",
         description = "Do not reset jar entry timestamps to a fixed date"
     )
     var noResetJarTimestamps = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-unified-null-checks",
+        konstue = "-Xno-unified-null-checks",
         description = "Use pre-1.4 exception types in null checks instead of java.lang.NPE. See KT-22275 for more details"
     )
     var noUnifiedNullChecks = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-source-debug-extension",
+        konstue = "-Xno-source-debug-extension",
         description = "Do not generate @kotlin.jvm.internal.SourceDebugExtension annotation on a class with the copy of SMAP"
     )
     var noSourceDebugExtension = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xprofile",
-        valueDescription = "<profilerPath:command:outputDir>",
+        konstue = "-Xprofile",
+        konstueDescription = "<profilerPath:command:outputDir>",
         description = "Debug option: Run compiler with async profiler and save snapshots to `outputDir`; `command` is passed to async-profiler on start.\n" +
                 "`profilerPath` is a path to libasyncProfiler.so; async-profiler.jar should be on the compiler classpath.\n" +
                 "If it's not on the classpath, the compiler will attempt to load async-profiler.jar from the containing directory of profilerPath.\n" +
-                "Example: -Xprofile=<PATH_TO_ASYNC_PROFILER>/async-profiler/build/libasyncProfiler.so:event=cpu,interval=1ms,threads,start:<SNAPSHOT_DIR_PATH>"
+                "Example: -Xprofile=<PATH_TO_ASYNC_PROFILER>/async-profiler/build/libasyncProfiler.so:event=cpu,interkonst=1ms,threads,start:<SNAPSHOT_DIR_PATH>"
     )
     var profileCompilerCommand: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xrepeat",
-        valueDescription = "<number>",
+        konstue = "-Xrepeat",
+        konstueDescription = "<number>",
         description = "Debug option: Repeats modules compilation <number> times"
     )
     var repeatCompileModules: String? = null
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = if (value.isNullOrEmpty()) null else value
+            field = if (konstue.isNullOrEmpty()) null else konstue
         }
 
     @Argument(
-        value = "-Xuse-14-inline-classes-mangling-scheme",
+        konstue = "-Xuse-14-inline-classes-mangling-scheme",
         description = "Use 1.4 inline classes mangling scheme instead of 1.4.30 one"
     )
     var useOldInlineClassesManglingScheme = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xjvm-enable-preview",
+        konstue = "-Xjvm-enable-preview",
         description = "Allow using features from Java language that are in preview phase.\n" +
                 "Works as `--enable-preview` in Java. All class files are marked as preview-generated thus it won't be possible to use them in release environment"
     )
     var enableJvmPreview = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xsuppress-deprecated-jvm-target-warning",
+        konstue = "-Xsuppress-deprecated-jvm-target-warning",
         description = "Suppress deprecation warning about deprecated JVM target versions.\n" +
                 "This option has no effect and will be deleted in a future version."
     )
     var suppressDeprecatedJvmTargetWarning = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xtype-enhancement-improvements-strict-mode",
+        konstue = "-Xtype-enhancement-improvements-strict-mode",
         description = "Enable strict mode for some improvements in the type enhancement for loaded Java types based on nullability annotations,\n" +
                 "including freshly supported reading of the type use annotations from class files.\n" +
                 "See KT-45671 for more details"
     )
     var typeEnhancementImprovementsInStrictMode = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xserialize-ir",
-        valueDescription = "{none|inline|all}",
+        konstue = "-Xserialize-ir",
+        konstueDescription = "{none|inline|all}",
         description = "Save IR to metadata (EXPERIMENTAL)"
     )
     var serializeIr: String = "none"
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xvalidate-ir",
+        konstue = "-Xkonstidate-ir",
         description = "Validate IR before and after lowering"
     )
-    var validateIr = false
-        set(value) {
+    var konstidateIr = false
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xvalidate-bytecode",
+        konstue = "-Xkonstidate-bytecode",
         description = "Validate generated JVM bytecode before and after optimizations"
     )
-    var validateBytecode = false
-        set(value) {
+    var konstidateBytecode = false
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xenhance-type-parameter-types-to-def-not-null",
+        konstue = "-Xenhance-type-parameter-types-to-def-not-null",
         description = "Enhance not null annotated type parameter's types to definitely not null types (@NotNull T => T & Any)"
     )
     var enhanceTypeParameterTypesToDefNotNull = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xlink-via-signatures",
+        konstue = "-Xlink-via-signatures",
         description = "Link JVM IR symbols via signatures, instead of descriptors.\n" +
                 "This mode is slower, but can be useful in troubleshooting problems with the JVM IR backend"
     )
     var linkViaSignatures = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xdebug",
+        konstue = "-Xdebug",
         description = "Enable debug mode for compilation.\n" +
                 "Currently this includes spilling all variables in a suspending context regardless their liveness."
     )
     var enableDebugMode = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xno-new-java-annotation-targets",
+        konstue = "-Xno-new-java-annotation-targets",
         description = "Do not generate Java 1.8+ targets for Kotlin annotation classes"
     )
     var noNewJavaAnnotationTargets = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xuse-old-innerclasses-logic",
+        konstue = "-Xuse-old-innerclasses-logic",
         description = "Use old logic for generation of InnerClasses attributes.\n" +
                 "This option is deprecated and will be deleted in future versions."
     )
     var oldInnerClassesLogic = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xvalue-classes",
-        description = "Enable experimental value classes"
+        konstue = "-Xkonstue-classes",
+        description = "Enable experimental konstue classes"
     )
-    var valueClasses = false
-        set(value) {
+    var konstueClasses = false
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     @Argument(
-        value = "-Xir-inliner",
+        konstue = "-Xir-inliner",
         description = "Inline functions using IR inliner instead of bytecode inliner"
     )
     var enableIrInliner: Boolean = false
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
 
     override fun configureAnalysisFlags(collector: MessageCollector, languageVersion: LanguageVersion): MutableMap<AnalysisFlag<*>, Any> {
-        val result = super.configureAnalysisFlags(collector, languageVersion)
+        konst result = super.configureAnalysisFlags(collector, languageVersion)
         result[JvmAnalysisFlags.strictMetadataVersionSemantics] = strictMetadataVersionSemantics
         result[JvmAnalysisFlags.javaTypeEnhancementState] = JavaTypeEnhancementStateParser(collector, languageVersion.toKotlinVersion())
             .parse(jsr305, supportCompatqualCheckerFrameworkAnnotations, jspecifyAnnotations, nullabilityAnnotations)
@@ -858,7 +858,7 @@ Also sets `-jvm-target` value equal to the selected JDK version"""
         } ?: collector.report(
             CompilerMessageSeverity.ERROR,
             "Unknown -Xjvm-default mode: $jvmDefault, supported modes: ${
-                JvmDefaultMode.values().mapNotNull { mode ->
+                JvmDefaultMode.konstues().mapNotNull { mode ->
                     mode.description.takeIf { JvmDefaultMode.fromStringOrNull(it) != null }
                 }
             }"
@@ -874,7 +874,7 @@ Also sets `-jvm-target` value equal to the selected JDK version"""
     }
 
     override fun configureLanguageFeatures(collector: MessageCollector): MutableMap<LanguageFeature, LanguageFeature.State> {
-        val result = super.configureLanguageFeatures(collector)
+        konst result = super.configureLanguageFeatures(collector)
         if (typeEnhancementImprovementsInStrictMode) {
             result[LanguageFeature.TypeEnhancementImprovementsInStrictMode] = LanguageFeature.State.ENABLED
         }
@@ -885,7 +885,7 @@ Also sets `-jvm-target` value equal to the selected JDK version"""
             result[LanguageFeature.ForbidSuperDelegationToAbstractFakeOverride] = LanguageFeature.State.ENABLED
             result[LanguageFeature.AbstractClassMemberNotImplementedWithIntermediateAbstractClass] = LanguageFeature.State.ENABLED
         }
-        if (valueClasses) {
+        if (konstueClasses) {
             result[LanguageFeature.ValueClasses] = LanguageFeature.State.ENABLED
         }
         return result

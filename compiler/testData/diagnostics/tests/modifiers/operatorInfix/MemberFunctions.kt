@@ -16,8 +16,8 @@ operator infix fun Example.times(other: Example) = ""
 fun Example.div(other: Example) = ""
 
 fun a() {
-    val a = Example()
-    val b = Example()
+    konst a = Example()
+    konst b = Example()
 
     a + b
     a - b

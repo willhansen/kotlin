@@ -113,9 +113,9 @@ object FirCommonSessionFactory : FirAbstractSessionFactory() {
             createProviders = { session, kotlinScopeProvider, symbolProvider, syntheticFunctionalInterfaceProvider, generatedSymbolsProvider, dependencies ->
                 var symbolProviderForBinariesFromIncrementalCompilation: MetadataSymbolProvider? = null
                 incrementalCompilationContext?.let {
-                    val precompiledBinariesPackagePartProvider = it.precompiledBinariesPackagePartProvider
+                    konst precompiledBinariesPackagePartProvider = it.precompiledBinariesPackagePartProvider
                     if (precompiledBinariesPackagePartProvider != null && it.precompiledBinariesFileScope != null) {
-                        val moduleDataProvider = SingleModuleDataProvider(moduleData)
+                        konst moduleDataProvider = SingleModuleDataProvider(moduleData)
                         symbolProviderForBinariesFromIncrementalCompilation =
                             MetadataSymbolProvider(
                                 session,

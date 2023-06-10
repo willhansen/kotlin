@@ -39,15 +39,15 @@ fun resolveUnqualifiedSuperFromExpressionContext(
     supertypes: Collection<KotlinType>,
     anyType: KotlinType
 ): Pair<Collection<KotlinType>, Boolean> {
-    val parentElement = superExpression.parent
+    konst parentElement = superExpression.parent
 
     if (parentElement is KtDotQualifiedExpression) {
-        when (val selectorExpression = parentElement.selectorExpression) {
+        when (konst selectorExpression = parentElement.selectorExpression) {
             is KtCallExpression -> {
                 // super.foo(...): foo can be a function or a property of a callable type
-                val calleeExpression = selectorExpression.calleeExpression
+                konst calleeExpression = selectorExpression.calleeExpression
                 if (calleeExpression is KtSimpleNameExpression) {
-                    val calleeName = calleeExpression.getReferencedNameAsName()
+                    konst calleeName = calleeExpression.getReferencedNameAsName()
                     return if (isCallingMethodOfAny(selectorExpression, calleeName)) {
                         resolveSupertypesForMethodOfAny(supertypes, calleeName, anyType)
                     } else {
@@ -66,23 +66,23 @@ fun resolveUnqualifiedSuperFromExpressionContext(
     return emptyList<KotlinType>() to false
 }
 
-private val ARITY_OF_METHODS_OF_ANY = hashMapOf("hashCode" to 0, "equals" to 1, "toString" to 0)
+private konst ARITY_OF_METHODS_OF_ANY = hashMapOf("hashCode" to 0, "equals" to 1, "toString" to 0)
 
 private fun isCallingMethodOfAny(callExpression: KtCallExpression, calleeName: Name): Boolean =
-    ARITY_OF_METHODS_OF_ANY.getOrElse(calleeName.asString()) { -1 } == callExpression.valueArguments.size
+    ARITY_OF_METHODS_OF_ANY.getOrElse(calleeName.asString()) { -1 } == callExpression.konstueArguments.size
 
 fun isPossiblyAmbiguousUnqualifiedSuper(superExpression: KtSuperExpression, supertypes: Collection<KotlinType>): Boolean =
     supertypes.size > 1 ||
             (supertypes.size == 1 && supertypes.single().isInterface() && isCallingMethodOfAnyWithSuper(superExpression))
 
 private fun isCallingMethodOfAnyWithSuper(superExpression: KtSuperExpression): Boolean {
-    val parent = superExpression.parent
+    konst parent = superExpression.parent
     if (parent is KtDotQualifiedExpression) {
-        val selectorExpression = parent.selectorExpression
+        konst selectorExpression = parent.selectorExpression
         if (selectorExpression is KtCallExpression) {
-            val calleeExpression = selectorExpression.calleeExpression
+            konst calleeExpression = selectorExpression.calleeExpression
             if (calleeExpression is KtSimpleNameExpression) {
-                val calleeName = calleeExpression.getReferencedNameAsName()
+                konst calleeName = calleeExpression.getReferencedNameAsName()
                 return isCallingMethodOfAny(selectorExpression, calleeName)
             }
         }
@@ -91,7 +91,7 @@ private fun isCallingMethodOfAnyWithSuper(superExpression: KtSuperExpression): B
     return false
 }
 
-private val LOOKUP_LOCATION = NoLookupLocation.WHEN_GET_SUPER_MEMBERS
+private konst LOOKUP_LOCATION = NoLookupLocation.WHEN_GET_SUPER_MEMBERS
 
 private fun KotlinType.isInterface(): Boolean =
     TypeUtils.getClassDescriptor(this)?.kind == ClassKind.INTERFACE
@@ -101,7 +101,7 @@ private fun resolveSupertypesForMethodOfAny(
     calleeName: Name,
     anyType: KotlinType
 ): Pair<Collection<KotlinType>, Boolean> {
-    val (typesWithConcreteOverride, isEqualsMigration) = resolveSupertypesByMembers(supertypes, allowNonConcreteInterfaceMembers = false) {
+    konst (typesWithConcreteOverride, isEqualsMigration) = resolveSupertypesByMembers(supertypes, allowNonConcreteInterfaceMembers = false) {
         getFunctionMembers(it, calleeName)
     }
     return typesWithConcreteOverride.ifEmpty { listOf(anyType) } to isEqualsMigration
@@ -123,11 +123,11 @@ private inline fun resolveSupertypesByMembers(
     allowNonConcreteInterfaceMembers: Boolean,
     getMembers: (KotlinType) -> Collection<CallableMemberDescriptor>
 ): Pair<Collection<KotlinType>, Boolean> {
-    val typesWithConcreteMembers = SmartList<KotlinType>()
-    val typesWithNonConcreteMembers = SmartList<KotlinType>()
+    konst typesWithConcreteMembers = SmartList<KotlinType>()
+    konst typesWithNonConcreteMembers = SmartList<KotlinType>()
 
     for (supertype in supertypes) {
-        val members = getMembers(supertype)
+        konst members = getMembers(supertype)
         if (members.isNotEmpty()) {
             if (members.any { isConcreteMember(supertype, it) })
                 typesWithConcreteMembers.add(supertype)
@@ -169,12 +169,12 @@ private fun isConcreteMember(supertype: KotlinType, memberDescriptor: CallableMe
     if (memberDescriptor.modality == Modality.ABSTRACT)
         return false
 
-    val classDescriptorForSupertype = TypeUtils.getClassDescriptor(supertype)
-    val memberKind = memberDescriptor.kind
+    konst classDescriptorForSupertype = TypeUtils.getClassDescriptor(supertype)
+    konst memberKind = memberDescriptor.kind
     if (classDescriptorForSupertype?.kind == ClassKind.INTERFACE && memberKind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
         // We have a fake override on interface. It should have a dispatch receiver, which should not be Any.
-        val dispatchReceiverType = memberDescriptor.dispatchReceiverParameter?.type ?: return false
-        val dispatchReceiverClass = TypeUtils.getClassDescriptor(dispatchReceiverType) ?: return false
+        konst dispatchReceiverType = memberDescriptor.dispatchReceiverParameter?.type ?: return false
+        konst dispatchReceiverClass = TypeUtils.getClassDescriptor(dispatchReceiverType) ?: return false
         return !KotlinBuiltIns.isAny(dispatchReceiverClass)
     }
 

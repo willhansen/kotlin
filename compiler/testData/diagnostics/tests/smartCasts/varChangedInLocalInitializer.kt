@@ -1,6 +1,6 @@
 fun foo() {
     class My {
-        val x: Int
+        konst x: Int
         init {
             var y: Int?
             y = 42

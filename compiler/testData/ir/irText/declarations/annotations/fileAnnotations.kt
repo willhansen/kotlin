@@ -3,4 +3,4 @@
 package test
 
 @Target(AnnotationTarget.FILE)
-annotation class A(val x: String)
+annotation class A(konst x: String)

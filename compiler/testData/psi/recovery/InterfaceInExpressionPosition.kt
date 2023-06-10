@@ -1,3 +1,3 @@
-val p = 1 < interface I {
+konst p = 1 < interface I {
     fun f() {}
 }

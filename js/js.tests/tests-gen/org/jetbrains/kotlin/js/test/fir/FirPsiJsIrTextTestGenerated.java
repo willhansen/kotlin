@@ -682,9 +682,9 @@ public class FirPsiJsIrTextTestGenerated extends AbstractFirPsiJsIrTextTest {
             }
 
             @Test
-            @TestMetadata("valueParametersWithAnnotations.kt")
+            @TestMetadata("konstueParametersWithAnnotations.kt")
             public void testValueParametersWithAnnotations() throws Exception {
-                runTest("compiler/testData/ir/irText/declarations/annotations/valueParametersWithAnnotations.kt");
+                runTest("compiler/testData/ir/irText/declarations/annotations/konstueParametersWithAnnotations.kt");
             }
 
             @Test
@@ -1867,9 +1867,9 @@ public class FirPsiJsIrTextTestGenerated extends AbstractFirPsiJsIrTextTest {
         }
 
         @Test
-        @TestMetadata("values.kt")
+        @TestMetadata("konstues.kt")
         public void testValues() throws Exception {
-            runTest("compiler/testData/ir/irText/expressions/values.kt");
+            runTest("compiler/testData/ir/irText/expressions/konstues.kt");
         }
 
         @Test
@@ -2439,9 +2439,9 @@ public class FirPsiJsIrTextTestGenerated extends AbstractFirPsiJsIrTextTest {
         }
 
         @Test
-        @TestMetadata("valueClassEquals.kt")
+        @TestMetadata("konstueClassEquals.kt")
         public void testValueClassEquals() throws Exception {
-            runTest("compiler/testData/ir/irText/firProblems/valueClassEquals.kt");
+            runTest("compiler/testData/ir/irText/firProblems/konstueClassEquals.kt");
         }
 
         @Test

@@ -3,7 +3,7 @@
 var capturedLambda: ((Int) -> Int)? = null
 
 fun captureLambda(): Boolean {
-    val lambda = { x: Int -> x + 1 }
+    konst lambda = { x: Int -> x + 1 }
     if (capturedLambda == null) {
         capturedLambda = lambda
     } else if (capturedLambda !== lambda) {

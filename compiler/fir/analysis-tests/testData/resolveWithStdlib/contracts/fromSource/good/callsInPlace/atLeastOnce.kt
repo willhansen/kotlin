@@ -19,7 +19,7 @@ fun myRun(block: () -> Unit) {
 }
 
 fun test_1() {
-    val x: Int
+    konst x: Int
     inlineRun {
         <!VAL_REASSIGNMENT!>x<!> = 1
     }
@@ -27,7 +27,7 @@ fun test_1() {
 }
 
 fun test_2() {
-    val x: Int
+    konst x: Int
     myRun {
         <!VAL_REASSIGNMENT!>x<!> = 1
     }

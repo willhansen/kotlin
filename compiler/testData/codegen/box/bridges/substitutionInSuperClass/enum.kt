@@ -4,7 +4,7 @@ interface A<T> {
 
 interface B : A<String>
 
-enum class Z(val aname: String) : B {
+enum class Z(konst aname: String) : B {
     Z1("Z1"),
     Z2("Z2");
     override fun foo(t: String) = aname
@@ -12,10 +12,10 @@ enum class Z(val aname: String) : B {
 
 
 fun box(): String {
-    val z1b: B = Z.Z1
-    val z2b: B = Z.Z2
-    val z1a: A<String> = Z.Z1
-    val z2a: A<String> = Z.Z2
+    konst z1b: B = Z.Z1
+    konst z2b: B = Z.Z2
+    konst z1a: A<String> = Z.Z1
+    konst z2a: A<String> = Z.Z2
     return when {
         Z.Z1.foo("") != "Z1" -> "Fail #1"
         Z.Z2.foo("") != "Z2" -> "Fail #2"

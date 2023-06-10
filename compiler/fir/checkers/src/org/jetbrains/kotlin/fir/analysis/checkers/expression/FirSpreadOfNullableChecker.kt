@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.fir.types.coneType
 object FirSpreadOfNullableChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         fun checkAndReport(argument: FirExpression, source: KtSourceElement?) {
-            val argumentTypeRef = argument.typeRef
+            konst argumentTypeRef = argument.typeRef
             if (argument is FirSpreadArgumentExpression && argumentTypeRef.coneType !is ConeFlexibleType && argumentTypeRef.canBeNull) {
                 reporter.reportOn(source, FirErrors.SPREAD_OF_NULLABLE, context)
             }

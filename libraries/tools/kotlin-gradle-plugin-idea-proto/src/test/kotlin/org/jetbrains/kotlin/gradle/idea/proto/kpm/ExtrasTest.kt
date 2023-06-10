@@ -14,16 +14,16 @@ import kotlin.test.Test
 
 class ExtrasTest : AbstractSerializationTest<Extras>() {
 
-    override fun serialize(value: Extras): ByteArray = IdeaExtrasProto(value).toByteArray()
+    override fun serialize(konstue: Extras): ByteArray = IdeaExtrasProto(konstue).toByteArray()
     override fun deserialize(data: ByteArray): Extras = Extras(IdeaExtrasProto.parseFrom(data))
-    override fun normalize(value: Extras): Extras = value.filter { (_, value) -> value !is Ignored }.toExtras()
+    override fun normalize(konstue: Extras): Extras = konstue.filter { (_, konstue) -> konstue !is Ignored }.toExtras()
 
     class Ignored
 
     @Test
     fun `serialize - deserialize - sample 0`() {
 
-        val extras = mutableExtrasOf(
+        konst extras = mutableExtrasOf(
             extrasKeyOf<String>() withValue "myValue",
             extrasKeyOf<String>("a") withValue "myValueA",
             extrasKeyOf<Int>() withValue 2411,

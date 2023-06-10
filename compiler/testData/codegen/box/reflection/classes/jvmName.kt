@@ -19,11 +19,11 @@ fun box(): String {
     assertEquals("test.Klass\$Companion", Klass.Companion::class.jvmName)
 
     class Local
-    val l = Local::class.jvmName
+    konst l = Local::class.jvmName
     assertTrue(l != null && l.startsWith("test.JvmNameKt\$") && "\$box\$" in l && l.endsWith("\$Local"))
 
-    val obj = object {}
-    val o = obj.javaClass.kotlin.jvmName
+    konst obj = object {}
+    konst o = obj.javaClass.kotlin.jvmName
     assertTrue(o != null && o.startsWith("test.JvmNameKt\$") && "\$box\$" in o && o.endsWith("\$1"))
 
     return "OK"

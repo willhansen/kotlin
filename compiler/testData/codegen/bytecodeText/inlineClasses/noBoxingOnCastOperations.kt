@@ -2,8 +2,8 @@
 
 // FILE: util.kt
 
-inline class AsAny<T>(val x: Any?)
-inline class AsInt(val x: Int)
+inline class AsAny<T>(konst x: Any?)
+inline class AsInt(konst x: Int)
 
 // FILE: Reference.kt
 

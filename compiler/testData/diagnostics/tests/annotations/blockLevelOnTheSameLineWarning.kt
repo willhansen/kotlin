@@ -6,7 +6,7 @@ annotation class Ann1
 
 @Target(AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Ann2(val x: String)
+annotation class Ann2(konst x: String)
 
 fun bar() {}
 fun bar(block: () -> Unit) {}

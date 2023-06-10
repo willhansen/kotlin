@@ -3,7 +3,7 @@
 
 
 // TESTCASE NUMBER: 1
-class A(val x: Any?) {
+class A(konst x: Any?) {
     init {
         x checkType { check<Any?>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>x<!>
@@ -15,7 +15,7 @@ class A(val x: Any?) {
     }
 }
 
-class B(val x: Any) {
+class B(konst x: Any) {
     init {
         x checkType { check<Any>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>x<!>
@@ -27,7 +27,7 @@ class B(val x: Any) {
     }
 }
 
-class C(val x: () -> Any) {
+class C(konst x: () -> Any) {
     init {
         x checkType { check<() -> Any>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Function0<kotlin.Any>")!>x<!>
@@ -39,7 +39,7 @@ class C(val x: () -> Any) {
     }
 }
 
-class D(val x: Enum<*>) {
+class D(konst x: Enum<*>) {
     init {
         x checkType { check<Enum<*>>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Enum<*>")!>x<!>
@@ -51,7 +51,7 @@ class D(val x: Enum<*>) {
     }
 }
 
-class E(val x: Nothing) {
+class E(konst x: Nothing) {
     init {
         x checkType { check<Nothing>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing")!>x<!>
@@ -63,7 +63,7 @@ class E(val x: Nothing) {
     }
 }
 
-class F<T>(val x: T) {
+class F<T>(konst x: T) {
     init {
         x checkType { check<T>() }
         <!DEBUG_INFO_EXPRESSION_TYPE("T")!>x<!>

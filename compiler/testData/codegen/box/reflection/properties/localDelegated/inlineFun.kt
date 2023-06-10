@@ -15,13 +15,13 @@ object Delegate {
 
 class Foo {
     inline fun foo() {
-        val x by Delegate
+        konst x by Delegate
         x
     }
 }
 
 fun box(): String {
     Foo().foo()
-    assertEquals("val x: kotlin.Unit", Delegate.property.toString())
+    assertEquals("konst x: kotlin.Unit", Delegate.property.toString())
     return "OK"
 }

@@ -15,16 +15,16 @@ class ReversedViewsTest {
     }
 
     @Test fun testBehavior() {
-        val original = listOf(2L, 3L, Long.MAX_VALUE)
-        val reversed = original.reversed()
+        konst original = listOf(2L, 3L, Long.MAX_VALUE)
+        konst reversed = original.reversed()
         compare(reversed, original.asReversed()) {
             listBehavior()
         }
     }
 
     @Test fun testMutableBehavior() {
-        val original = mutableListOf(2L, 3L, Long.MAX_VALUE)
-        val reversed = original.reversed()
+        konst original = mutableListOf(2L, 3L, Long.MAX_VALUE)
+        konst reversed = original.reversed()
         compare(reversed, original.asReversed()) {
             listBehavior()
         }
@@ -36,7 +36,7 @@ class ReversedViewsTest {
     }
 
     @Test fun testRandomAccess() {
-        val reversed = listOf(1, 2, 3).asReversed()
+        konst reversed = listOf(1, 2, 3).asReversed()
 
         assertEquals(3, reversed[0])
         assertEquals(2, reversed[1])
@@ -53,13 +53,13 @@ class ReversedViewsTest {
     }
 
     @Test fun testReversedSubList() {
-        val reversed = (1..10).toList().asReversed()
+        konst reversed = (1..10).toList().asReversed()
         assertEquals(listOf(9, 8, 7), reversed.subList(1, 4))
     }
 
     @Test fun testMutableSubList() {
-        val original = arrayListOf(1, 2, 3, 4)
-        val reversedSubList = original.asReversed().subList(1, 3)
+        konst original = arrayListOf(1, 2, 3, 4)
+        konst reversedSubList = original.asReversed().subList(1, 3)
 
         assertEquals(listOf(3, 2), reversedSubList)
         reversedSubList.clear()
@@ -86,13 +86,13 @@ class ReversedViewsTest {
     }
 
     @Test fun testMutableReversedSubList() {
-        val reversed = (1..10).toMutableList().asReversed()
+        konst reversed = (1..10).toMutableList().asReversed()
         assertEquals(listOf(9, 8, 7), reversed.subList(1, 4))
     }
 
     @Test fun testMutableAdd() {
-        val original = mutableListOf(1, 2, 3)
-        val reversed = original.asReversed()
+        konst original = mutableListOf(1, 2, 3)
+        konst reversed = original.asReversed()
 
         reversed.add(0) // add zero at end of reversed
         assertEquals(listOf(3, 2, 1, 0), reversed)
@@ -104,8 +104,8 @@ class ReversedViewsTest {
     }
 
     @Test fun testMutableSet() {
-        val original = mutableListOf(1, 2, 3)
-        val reversed = original.asReversed()
+        konst original = mutableListOf(1, 2, 3)
+        konst reversed = original.asReversed()
 
         reversed.set(0, 300)
         reversed.set(1, 200)
@@ -116,8 +116,8 @@ class ReversedViewsTest {
     }
 
     @Test fun testMutableRemove() {
-        val original = mutableListOf("a", "b", "c")
-        val reversed = original.asReversed()
+        konst original = mutableListOf("a", "b", "c")
+        konst reversed = original.asReversed()
 
         reversed.removeAt(0) // remove c
         assertEquals(listOf("a", "b"), original)
@@ -131,8 +131,8 @@ class ReversedViewsTest {
     }
 
     @Test fun testMutableRemoveByObj() {
-        val original = mutableListOf("a", "b", "c")
-        val reversed = original.asReversed()
+        konst original = mutableListOf("a", "b", "c")
+        konst reversed = original.asReversed()
 
         reversed.remove("c")
         assertEquals(listOf("a", "b"), original)
@@ -140,8 +140,8 @@ class ReversedViewsTest {
     }
 
     @Test fun testMutableClear() {
-        val original = mutableListOf(1, 2, 3)
-        val reversed = original.asReversed()
+        konst original = mutableListOf(1, 2, 3)
+        konst reversed = original.asReversed()
 
         reversed.clear()
 
@@ -155,8 +155,8 @@ class ReversedViewsTest {
     }
 
     @Test fun testBidirectionalModifications() {
-        val original = mutableListOf(1, 2, 3, 4)
-        val reversed = original.asReversed()
+        konst original = mutableListOf(1, 2, 3, 4)
+        konst reversed = original.asReversed()
 
         original.removeAt(3)
         assertEquals(listOf(1, 2, 3), original)
@@ -184,12 +184,12 @@ class ReversedViewsTest {
     }
 
     @Test fun testIteratorAdd() {
-        val original = mutableListOf(1, 2, 4)
-        val reversedView = original.asReversed()
-        val iter = reversedView.listIterator()
+        konst original = mutableListOf(1, 2, 4)
+        konst reversedView = original.asReversed()
+        konst iter = reversedView.listIterator()
 
-        val reversedCopy = original.reversed().toMutableList()
-        val copyIter = reversedCopy.listIterator()
+        konst reversedCopy = original.reversed().toMutableList()
+        konst copyIter = reversedCopy.listIterator()
 
         compare(copyIter, iter) {
             propertyEquals { add(5) }
@@ -214,12 +214,12 @@ class ReversedViewsTest {
     }
 
     @Test fun testIteratorRemove() {
-        val original = mutableListOf(0, 1, 2, 3, 4)
-        val reversedView = original.asReversed()
-        val iter = reversedView.listIterator()
+        konst original = mutableListOf(0, 1, 2, 3, 4)
+        konst reversedView = original.asReversed()
+        konst iter = reversedView.listIterator()
 
-        val reversedCopy = original.reversed().toMutableList()
-        val copyIter = reversedCopy.listIterator()
+        konst reversedCopy = original.reversed().toMutableList()
+        konst copyIter = reversedCopy.listIterator()
 
         compare(copyIter, iter) {
             propertyFailsWith<IllegalStateException> { remove() }
@@ -254,11 +254,11 @@ class ReversedViewsTest {
     }
 
     @Test fun testIteratorSet() {
-        val original = mutableListOf(2, 3, 4)
-        val iter = original.asReversed().listIterator()
+        konst original = mutableListOf(2, 3, 4)
+        konst iter = original.asReversed().listIterator()
 
         while (iter.hasNext()) {
-            val v = iter.next()
+            konst v = iter.next()
             iter.set(v * v)
         }
 
@@ -315,13 +315,13 @@ class ReversedViewsTest {
 
     @Test fun testIteratorNSEOnNext() {
         assertFailsWith<NoSuchElementException> {
-            val it = listOf(1, 2, 3).asReversed().iterator()
+            konst it = listOf(1, 2, 3).asReversed().iterator()
             it.seekEnd()
             it.next()
         }
 
         assertFailsWith<NoSuchElementException> {
-            val it = mutableListOf(1, 2, 3).asReversed().iterator()
+            konst it = mutableListOf(1, 2, 3).asReversed().iterator()
             it.seekEnd()
             it.next()
         }

@@ -8,24 +8,24 @@ package org.jetbrains.kotlin.project.model
 // TODO Gradle allows having multiple capabilities in a published module, we need to figure out how we can include them in the module IDs
 
 interface KpmModule {
-    val moduleIdentifier: KpmModuleIdentifier
+    konst moduleIdentifier: KpmModuleIdentifier
 
-    val fragments: Iterable<KpmFragment>
+    konst fragments: Iterable<KpmFragment>
 
-    val variants: Iterable<KpmVariant>
+    konst variants: Iterable<KpmVariant>
         get() = fragments.filterIsInstance<KpmVariant>()
 
-    val plugins: Iterable<KpmCompilerPlugin>
+    konst plugins: Iterable<KpmCompilerPlugin>
 
     // TODO: isSynthetic?
 }
 
 open class KpmBasicModule(
-    override val moduleIdentifier: KpmModuleIdentifier
+    override konst moduleIdentifier: KpmModuleIdentifier
 ) : KpmModule {
-    override val fragments = mutableListOf<KpmBasicFragment>()
+    override konst fragments = mutableListOf<KpmBasicFragment>()
 
-    override val plugins = mutableListOf<KpmCompilerPlugin>()
+    override konst plugins = mutableListOf<KpmCompilerPlugin>()
 
     override fun toString(): String = "module $moduleIdentifier"
 }

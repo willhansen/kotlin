@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.targets.native.internal.NativeDistributionTyp
 import org.jetbrains.kotlin.gradle.utils.SingleWarningPerBuild
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
-internal enum class NativeDistributionType(val suffix: String?, val mustGeneratePlatformLibs: Boolean) {
+internal enum class NativeDistributionType(konst suffix: String?, konst mustGeneratePlatformLibs: Boolean) {
     LIGHT(null, true),
     PREBUILT("prebuilt", false),
 
@@ -20,8 +20,8 @@ internal enum class NativeDistributionType(val suffix: String?, val mustGenerate
     PREBUILT_1_3(null, false)
 }
 
-internal class NativeDistributionTypeProvider(private val project: Project) {
-    private val propertiesProvider = PropertiesProvider(project)
+internal class NativeDistributionTypeProvider(private konst project: Project) {
+    private konst propertiesProvider = PropertiesProvider(project)
 
     private fun warning(message: String) = SingleWarningPerBuild.show(project, "Warning: $message")
 
@@ -30,8 +30,8 @@ internal class NativeDistributionTypeProvider(private val project: Project) {
         lightType: NativeDistributionType,
         defaultType: NativeDistributionType
     ): NativeDistributionType {
-        val requestedByUser = propertiesProvider.nativeDistributionType?.toLowerCaseAsciiOnly()
-        val deprecatedRestricted = propertiesProvider.nativeDeprecatedRestricted
+        konst requestedByUser = propertiesProvider.nativeDistributionType?.toLowerCaseAsciiOnly()
+        konst deprecatedRestricted = propertiesProvider.nativeDeprecatedRestricted
 
         // A case when a deprecated property (kotlin.native.restrictedDistribution) is used to choose the restricted distribution.
         // Effectively the restricted distribution from 1.3 and the light distribution from 1.4 are the same,
@@ -50,7 +50,7 @@ internal class NativeDistributionTypeProvider(private val project: Project) {
             "prebuilt" -> prebuiltType
             "light" -> lightType
             else -> {
-                warning("Unknown Kotlin/Native distribution type: $requestedByUser. Available values: prebuilt, light")
+                warning("Unknown Kotlin/Native distribution type: $requestedByUser. Available konstues: prebuilt, light")
                 defaultType
             }
         }

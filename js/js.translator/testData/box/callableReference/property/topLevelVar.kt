@@ -3,9 +3,9 @@ package foo
 
 var x = 1
 
-val y = 2
+konst y = 2
 
-val z: Int
+konst z: Int
     get() = 3
 
 fun box(): String {

@@ -24,7 +24,7 @@ class KotlinAndroidTargetHierarchyDsl {
 
     @Test
     fun `test -  module - not set`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val dsl = KotlinAndroidTargetVariantDslImpl(project.objects)
+        konst dsl = KotlinAndroidTargetVariantDslImpl(project.objects)
         project.kotlinPluginLifecycle.launch {
             assertNull(dsl.sourceSetTree.orNull)
             assertNull(dsl.sourceSetTree.awaitFinalValue())
@@ -32,23 +32,23 @@ class KotlinAndroidTargetHierarchyDsl {
     }
 
     @Test
-    fun `test - module - can be set in users afterEvaluate`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val dsl = KotlinAndroidTargetVariantDslImpl(project.objects)
-        afterEvaluate { dsl.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree("x")) }
-        dsl.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree("-set-before-after-evaluate-"))
+    fun `test - module - can be set in users afterEkonstuate`() = buildProjectWithMPP().runLifecycleAwareTest {
+        konst dsl = KotlinAndroidTargetVariantDslImpl(project.objects)
+        afterEkonstuate { dsl.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree("x")) }
+        dsl.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree("-set-before-after-ekonstuate-"))
         assertEquals("x", dsl.sourceSetTree.awaitFinalValue()?.name)
         assertEquals(KotlinPluginLifecycle.Stage.AfterFinaliseDsl, currentKotlinPluginLifecycle().stage)
     }
 
     @Test
     fun `test - module - is respected in default refines edges`() {
-        val project = buildProject {
+        konst project = buildProject {
             setMultiplatformAndroidSourceSetLayoutVersion(2)
             applyMultiplatformPlugin()
             androidLibrary { compileSdk = 33 }
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         project.runLifecycleAwareTest {
             kotlin.androidTarget {
                 unitTestVariant.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree.test)
@@ -64,13 +64,13 @@ class KotlinAndroidTargetHierarchyDsl {
 
     @Test
     fun `test - module - is respected in targetHierarchy`() {
-        val project = buildProject {
+        konst project = buildProject {
             setMultiplatformAndroidSourceSetLayoutVersion(2)
             applyMultiplatformPlugin()
             androidLibrary { compileSdk = 33 }
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         project.runLifecycleAwareTest {
             kotlin.androidTarget {
                 unitTestVariant.sourceSetTree.set(KotlinTargetHierarchy.SourceSetTree("xxx"))

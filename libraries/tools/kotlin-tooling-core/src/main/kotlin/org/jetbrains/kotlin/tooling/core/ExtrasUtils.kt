@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.tooling.core
 import kotlin.reflect.typeOf
 
 /**
- *  Creates a value based key for accessing any [Extras] container
+ *  Creates a konstue based key for accessing any [Extras] container
  *
  * @param T The type of data that is stored in the extras container
  * ```kotlin
@@ -48,7 +48,7 @@ fun Iterable<Extras.Entry<*>>.toExtras(): Extras = ImmutableExtrasImpl(this)
 
 fun Iterable<Extras.Entry<*>>.toMutableExtras(): MutableExtras = MutableExtrasImpl(this)
 
-infix fun <T : Any> Extras.Key<T>.withValue(value: T): Extras.Entry<T> = Extras.Entry(this, value)
+infix fun <T : Any> Extras.Key<T>.withValue(konstue: T): Extras.Entry<T> = Extras.Entry(this, konstue)
 
 operator fun Extras.plus(entry: Extras.Entry<*>): Extras = ImmutableExtrasImpl(this.entries + entry)
 

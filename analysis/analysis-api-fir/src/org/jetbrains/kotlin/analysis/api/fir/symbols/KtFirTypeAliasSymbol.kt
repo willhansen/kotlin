@@ -29,36 +29,36 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirTypeAliasSymbol(
-    override val firSymbol: FirTypeAliasSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirTypeAliasSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtTypeAliasSymbol(), KtFirSymbol<FirTypeAliasSymbol> {
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
-    override val classIdIfNonLocal: ClassId? get() = withValidityAssertion { firSymbol.getClassIdIfNonLocal() }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst classIdIfNonLocal: ClassId? get() = withValidityAssertion { firSymbol.getClassIdIfNonLocal() }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion {
-            when (val possiblyRawVisibility = firSymbol.fir.visibility) {
+            when (konst possiblyRawVisibility = firSymbol.fir.visibility) {
                 Visibilities.Unknown -> Visibilities.Public
                 else -> possiblyRawVisibility
             }
         }
 
-    override val typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
+    override konst typeParameters by cached { firSymbol.createKtTypeParameters(builder) }
 
-    override val expandedType: KtType by cached { builder.typeBuilder.buildKtType(firSymbol.resolvedExpandedTypeRef) }
+    override konst expandedType: KtType by cached { builder.typeBuilder.buildKtType(firSymbol.resolvedExpandedTypeRef) }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
     }
 
-    override val symbolKind: KtSymbolKind get() = withValidityAssertion { getSymbolKind() }
+    override konst symbolKind: KtSymbolKind get() = withValidityAssertion { getSymbolKind() }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtTypeAliasSymbol> = withValidityAssertion {
         KtPsiBasedSymbolPointer.createForSymbolFromSource<KtTypeAliasSymbol>(this)?.let { return it }
 
-        when (val symbolKind = symbolKind) {
+        when (konst symbolKind = symbolKind) {
             KtSymbolKind.LOCAL ->
                 throw CanNotCreateSymbolPointerForLocalLibraryDeclarationException(classIdIfNonLocal?.asString() ?: name.asString())
 

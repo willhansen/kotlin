@@ -13,8 +13,8 @@ class IdeaKotlinClasspathTest {
 
     @Test
     fun `test - equals`() {
-        val first = IdeaKotlinClasspath()
-        val second = IdeaKotlinClasspath()
+        konst first = IdeaKotlinClasspath()
+        konst second = IdeaKotlinClasspath()
 
         assertEquals(first, second)
 
@@ -29,7 +29,7 @@ class IdeaKotlinClasspathTest {
 
     @Test
     fun `test - stores files absolute`() {
-        val classpath = IdeaKotlinClasspath()
+        konst classpath = IdeaKotlinClasspath()
         classpath.add(File("test"))
 
         assertNotEquals(classpath.toSet(), setOf(File("test")))
@@ -38,7 +38,7 @@ class IdeaKotlinClasspathTest {
 
     @Test
     fun `test - contains file - relative and absolute`() {
-        val classpath = IdeaKotlinClasspath()
+        konst classpath = IdeaKotlinClasspath()
         classpath.add(File("test"))
 
         assertTrue(File("test") in classpath)
@@ -47,7 +47,7 @@ class IdeaKotlinClasspathTest {
 
     @Test
     fun `test - remove file - relative and absolute`() {
-        val classpath = IdeaKotlinClasspath()
+        konst classpath = IdeaKotlinClasspath()
         classpath.add(File("test"))
 
         assertTrue(classpath.isNotEmpty())
@@ -62,11 +62,11 @@ class IdeaKotlinClasspathTest {
 
     @Test
     fun `test - classpath interner`() {
-        val classpath1 = IdeaKotlinClasspath()
-        val classpath2 = IdeaKotlinClasspath()
+        konst classpath1 = IdeaKotlinClasspath()
+        konst classpath2 = IdeaKotlinClasspath()
 
-        val fileAInstance1 = File("a")
-        val fileAInstance2 = File("a")
+        konst fileAInstance1 = File("a")
+        konst fileAInstance2 = File("a")
 
         classpath1.add(fileAInstance1)
         classpath2.add(fileAInstance2)

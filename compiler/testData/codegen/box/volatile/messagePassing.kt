@@ -14,10 +14,10 @@ fun box() : String {
         // The test doesn't make sense for legacy mm, you can't have anything non-atomic to protect with @Volatile var
         return "OK"
     }
-    val w1 = Worker.start()
-    val w2 = Worker.start()
+    konst w1 = Worker.start()
+    konst w2 = Worker.start()
 
-    val f1 = w1.execute(TransferMode.SAFE, { -> }) {
+    konst f1 = w1.execute(TransferMode.SAFE, { -> }) {
         repeat(10000) {
             while (x != 0) {}
             y = it
@@ -25,7 +25,7 @@ fun box() : String {
         }
         "O"
     }
-    val f2 = w2.execute(TransferMode.SAFE, { -> }) {
+    konst f2 = w2.execute(TransferMode.SAFE, { -> }) {
         var result = "K"
         repeat(10000) {
             while (x != 1) {}

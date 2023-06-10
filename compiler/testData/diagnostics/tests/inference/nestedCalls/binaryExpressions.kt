@@ -14,8 +14,8 @@ infix fun <T> Z.foo(a: A<T>): A<T> = a
 
 fun test(z: Z) {
     z <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>foo<!> <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>newA<!>()
-    val a: A<Int> = id(z foo newA())
-    val b: A<Int> = id(z.foo(newA()))
+    konst a: A<Int> = id(z foo newA())
+    konst b: A<Int> = id(z.foo(newA()))
     use(a, b)
 }
 
@@ -24,10 +24,10 @@ operator fun <T> Z.plus(a: A<T>): A<T> = a
 
 fun test1(z: Z) {
     <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>id<!>(z <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>+<!> <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>newA<!>())
-    val a: A<Z> = z + newA()
-    val b: A<Z> = z.plus(newA())
-    val c: A<Z> = id(z + newA())
-    val d: A<Z> = id(z.plus(newA()))
+    konst a: A<Z> = z + newA()
+    konst b: A<Z> = z.plus(newA())
+    konst c: A<Z> = id(z + newA())
+    konst d: A<Z> = id(z.plus(newA()))
     use(a, b, c, d)
 }
 
@@ -35,8 +35,8 @@ fun test1(z: Z) {
 operator fun <T> Z.compareTo(a: A<T>): Int { use(a); return 1 }
 
 fun test2(z: Z) {
-    val a: Boolean = id(z <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!><<!> <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>newA<!>())
-    val b: Boolean = id(z < newA<Z>())
+    konst a: Boolean = id(z <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!><<!> <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>newA<!>())
+    konst b: Boolean = id(z < newA<Z>())
     use(a, b)
 }
 

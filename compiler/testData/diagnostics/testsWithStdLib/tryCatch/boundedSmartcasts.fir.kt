@@ -5,7 +5,7 @@ class ExcA : Exception()
 class ExcB : Exception()
 
 fun test0(x: Int?) {
-    val y = try {
+    konst y = try {
         x
     } finally {
 
@@ -23,7 +23,7 @@ fun test0(x: Int?) {
 }
 
 fun test1(x: Int?) {
-    val y = try {
+    konst y = try {
         x
     }
     catch (e: Exception) {
@@ -42,7 +42,7 @@ fun test1(x: Int?) {
 }
 
 fun test2(x: Int?) {
-    val y = try {
+    konst y = try {
         x
     }
     catch (e: Exception) {
@@ -61,7 +61,7 @@ fun test2(x: Int?) {
 }
 
 fun test3(x: Int?) {
-    val y = try {
+    konst y = try {
         x
     } catch (e: Exception) {
         return
@@ -79,7 +79,7 @@ fun test3(x: Int?) {
 }
 
 fun test5(x: Int?) {
-    val y = try {
+    konst y = try {
         x
     }
     catch (e: ExcA) {

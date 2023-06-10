@@ -3,10 +3,10 @@ object Whatever {
 }
 
 fun box(): String {
-    val key by Whatever
+    konst key by Whatever
     return {
         object {
-            val keys = key
+            konst keys = key
         }.keys
     }.let { it() }
 }

@@ -6,7 +6,7 @@ if (isIdeaActive) {
             task.doFirst {
                 task.classpath.files.find { it.name.startsWith("java-rt") }?.let { javaRtJar ->
                     try {
-                        val urlClassLoader =
+                        konst urlClassLoader =
                             Class.forName("org.gradle.launcher.daemon.bootstrap.DaemonMain").classLoader as? java.net.URLClassLoader
 
                         urlClassLoader?.let {

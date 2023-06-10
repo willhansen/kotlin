@@ -44,9 +44,9 @@ KtFile: modifiers.kt
                         PsiElement(IDENTIFIER)('Ann')
               PsiElement(RBRACKET)(']')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
-          PsiElement(IDENTIFIER)('value')
+          PsiElement(IDENTIFIER)('konstue')
           PsiElement(COLON)(':')
           PsiWhiteSpace(' ')
           TYPE_REFERENCE

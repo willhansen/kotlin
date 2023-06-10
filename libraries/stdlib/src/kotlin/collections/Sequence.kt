@@ -6,7 +6,7 @@
 package kotlin.sequences
 
 /**
- * A sequence that returns values through its iterator. The values are evaluated lazily, and the sequence
+ * A sequence that returns konstues through its iterator. The konstues are ekonstuated lazily, and the sequence
  * is potentially infinite.
  *
  * Sequences can be iterated multiple times, however some sequence implementations might constrain themselves
@@ -20,7 +20,7 @@ package kotlin.sequences
  */
 public interface Sequence<out T> {
     /**
-     * Returns an [Iterator] that returns the values from the sequence.
+     * Returns an [Iterator] that returns the konstues from the sequence.
      *
      * Throws an exception if the sequence is constrained to be iterated once and `iterator` is invoked the second time.
      */

@@ -19,13 +19,13 @@ import java.util.concurrent.ConcurrentHashMap
 
 internal interface UsesLibraryFilterCachingService : Task {
     @get:Internal
-    val libraryFilterCacheService: Property<LibraryFilterCachingService>
+    konst libraryFilterCacheService: Property<LibraryFilterCachingService>
 }
 
 internal abstract class LibraryFilterCachingService : BuildService<BuildServiceParameters.None>, AutoCloseable {
-    internal data class LibraryFilterCacheKey(val dependency: File, val irEnabled: Boolean, val preIrDisabled: Boolean)
+    internal data class LibraryFilterCacheKey(konst dependency: File, konst irEnabled: Boolean, konst preIrDisabled: Boolean)
 
-    private val cache = ConcurrentHashMap<LibraryFilterCacheKey, Boolean>()
+    private konst cache = ConcurrentHashMap<LibraryFilterCacheKey, Boolean>()
 
     fun getOrCompute(key: LibraryFilterCacheKey, compute: (File) -> Boolean) = cache.computeIfAbsent(key) {
         compute(it.dependency)

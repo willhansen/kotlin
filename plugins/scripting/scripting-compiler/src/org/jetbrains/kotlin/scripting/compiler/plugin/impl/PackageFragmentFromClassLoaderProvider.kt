@@ -27,9 +27,9 @@ import kotlin.script.experimental.api.ScriptCompilationConfiguration
 import kotlin.script.experimental.jvm.ClassLoaderByConfiguration
 
 class PackageFragmentFromClassLoaderProviderExtension(
-    val classLoaderGetter: ClassLoaderByConfiguration,
-    val scriptCompilationConfiguration: ScriptCompilationConfiguration,
-    val compilerConfiguration: CompilerConfiguration
+    konst classLoaderGetter: ClassLoaderByConfiguration,
+    konst scriptCompilationConfiguration: ScriptCompilationConfiguration,
+    konst compilerConfiguration: CompilerConfiguration
 ) : PackageFragmentProviderExtension {
 
     override fun getPackageFragmentProvider(
@@ -40,21 +40,21 @@ class PackageFragmentFromClassLoaderProviderExtension(
         moduleInfo: ModuleInfo?,
         lookupTracker: LookupTracker
     ): PackageFragmentProvider {
-        val classLoader = classLoaderGetter(scriptCompilationConfiguration)
+        konst classLoader = classLoaderGetter(scriptCompilationConfiguration)
 
-        val reflectKotlinClassFinder = ReflectKotlinClassFinder(classLoader)
-        val deserializedDescriptorResolver = DeserializedDescriptorResolver()
-        val singleModuleClassResolver = SingleModuleClassResolver()
-        val notFoundClasses = NotFoundClasses(storageManager, module)
-        val languageVersionSettings = compilerConfiguration.languageVersionSettings
-        val packagePartProvider =
+        konst reflectKotlinClassFinder = ReflectKotlinClassFinder(classLoader)
+        konst deserializedDescriptorResolver = DeserializedDescriptorResolver()
+        konst singleModuleClassResolver = SingleModuleClassResolver()
+        konst notFoundClasses = NotFoundClasses(storageManager, module)
+        konst languageVersionSettings = compilerConfiguration.languageVersionSettings
+        konst packagePartProvider =
             PackagePartFromClassLoaderProvider(
                 classLoader,
                 languageVersionSettings,
                 compilerConfiguration[CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY]!!
             )
 
-        val lazyJavaPackageFragmentProvider =
+        konst lazyJavaPackageFragmentProvider =
             makeLazyJavaPackageFragmentProvider(
                 ReflectJavaClassFinder(classLoader), module, storageManager, notFoundClasses,
                 reflectKotlinClassFinder, deserializedDescriptorResolver,
@@ -62,7 +62,7 @@ class PackageFragmentFromClassLoaderProviderExtension(
                 packagePartProvider
             )
 
-        val deserializationComponentsForJava =
+        konst deserializationComponentsForJava =
             makeDeserializationComponentsForJava(
                 module, storageManager, notFoundClasses, lazyJavaPackageFragmentProvider,
                 reflectKotlinClassFinder, deserializedDescriptorResolver, RuntimeErrorReporter,
@@ -71,7 +71,7 @@ class PackageFragmentFromClassLoaderProviderExtension(
 
         deserializedDescriptorResolver.setComponents(deserializationComponentsForJava)
 
-        val javaDescriptorResolver = JavaDescriptorResolver(lazyJavaPackageFragmentProvider, JavaResolverCache.EMPTY)
+        konst javaDescriptorResolver = JavaDescriptorResolver(lazyJavaPackageFragmentProvider, JavaResolverCache.EMPTY)
         singleModuleClassResolver.resolver = javaDescriptorResolver
 
         return lazyJavaPackageFragmentProvider

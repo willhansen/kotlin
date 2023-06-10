@@ -25,10 +25,10 @@ import javax.lang.model.element.NestingKind
 import javax.tools.JavaFileObject
 
 class KaptJavaFileObject(
-    val compilationUnit: JCTree.JCCompilationUnit,
-    val clazz: JCTree.JCClassDecl,
-    val file: File? = null,
-    val timestamp: Long = System.currentTimeMillis()
+    konst compilationUnit: JCTree.JCCompilationUnit,
+    konst clazz: JCTree.JCClassDecl,
+    konst file: File? = null,
+    konst timestamp: Long = System.currentTimeMillis()
 ) : JavaFileObject {
     override fun toString() = "${javaClass.simpleName}[$name]"
 
@@ -40,7 +40,7 @@ class KaptJavaFileObject(
     override fun getKind() = JavaFileObject.Kind.SOURCE
 
     override fun getName(): String {
-        val packageName = compilationUnit.getPackageNameJava9Aware()
+        konst packageName = compilationUnit.getPackageNameJava9Aware()
         if (packageName == null || packageName.toString() == "") {
             return clazz.name.toString() + ".java"
         }
@@ -48,7 +48,7 @@ class KaptJavaFileObject(
     }
 
     override fun getAccessLevel(): Modifier? {
-        val flags = clazz.modifiers.getFlags()
+        konst flags = clazz.modifiers.getFlags()
         if (Modifier.PUBLIC in flags) return Modifier.PUBLIC
         if (Modifier.PROTECTED in flags) return Modifier.PROTECTED
         if (Modifier.PRIVATE in flags) return Modifier.PRIVATE

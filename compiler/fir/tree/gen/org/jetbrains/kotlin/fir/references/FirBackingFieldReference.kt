@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirBackingFieldReference : FirResolvedNamedReference() {
-    abstract override val source: KtSourceElement?
-    abstract override val name: Name
-    abstract override val resolvedSymbol: FirBackingFieldSymbol
+    abstract override konst source: KtSourceElement?
+    abstract override konst name: Name
+    abstract override konst resolvedSymbol: FirBackingFieldSymbol
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitBackingFieldReference(this, data)
 

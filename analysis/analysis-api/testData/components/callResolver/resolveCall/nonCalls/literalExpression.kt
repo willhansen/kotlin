@@ -1,3 +1,3 @@
 fun main() {
-    val x = <expr>1</expr>
+    konst x = <expr>1</expr>
 }

@@ -16,75 +16,75 @@ import org.jetbrains.kotlin.utils.newHashSetWithExpectedSize
 
 @Suppress("Reformat")
 object StandardNames {
-    @JvmField val BACKING_FIELD = Name.identifier("field")
+    @JvmField konst BACKING_FIELD = Name.identifier("field")
 
-    @JvmField val DEFAULT_VALUE_PARAMETER = Name.identifier("value")
+    @JvmField konst DEFAULT_VALUE_PARAMETER = Name.identifier("konstue")
 
-    @JvmField val ENUM_VALUES = Name.identifier("values")
+    @JvmField konst ENUM_VALUES = Name.identifier("konstues")
 
-    @JvmField val ENUM_ENTRIES = Name.identifier("entries")
+    @JvmField konst ENUM_ENTRIES = Name.identifier("entries")
 
-    @JvmField val ENUM_VALUE_OF = Name.identifier("valueOf")
+    @JvmField konst ENUM_VALUE_OF = Name.identifier("konstueOf")
 
-    @JvmField val DATA_CLASS_COPY = Name.identifier("copy")
+    @JvmField konst DATA_CLASS_COPY = Name.identifier("copy")
 
-    @JvmField val DATA_CLASS_COMPONENT_PREFIX = "component"
+    @JvmField konst DATA_CLASS_COMPONENT_PREFIX = "component"
 
-    @JvmField val HASHCODE_NAME = Name.identifier("hashCode")
+    @JvmField konst HASHCODE_NAME = Name.identifier("hashCode")
 
-    @JvmField val CHAR_CODE = Name.identifier("code")
+    @JvmField konst CHAR_CODE = Name.identifier("code")
 
-    @JvmField val NAME = Name.identifier("name")
+    @JvmField konst NAME = Name.identifier("name")
 
-    @JvmField val NEXT_CHAR = Name.identifier("nextChar")
+    @JvmField konst NEXT_CHAR = Name.identifier("nextChar")
 
-    @JvmField val CONTEXT_FUNCTION_TYPE_PARAMETER_COUNT_NAME = Name.identifier("count")
+    @JvmField konst CONTEXT_FUNCTION_TYPE_PARAMETER_COUNT_NAME = Name.identifier("count")
 
-    @JvmField val DYNAMIC_FQ_NAME = FqName("<dynamic>")
+    @JvmField konst DYNAMIC_FQ_NAME = FqName("<dynamic>")
 
-    @JvmField val COROUTINES_PACKAGE_FQ_NAME = FqName("kotlin.coroutines")
+    @JvmField konst COROUTINES_PACKAGE_FQ_NAME = FqName("kotlin.coroutines")
 
-    @JvmField val COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME = FqName("kotlin.coroutines.jvm.internal")
+    @JvmField konst COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME = FqName("kotlin.coroutines.jvm.internal")
 
-    @JvmField val COROUTINES_INTRINSICS_PACKAGE_FQ_NAME = FqName("kotlin.coroutines.intrinsics")
+    @JvmField konst COROUTINES_INTRINSICS_PACKAGE_FQ_NAME = FqName("kotlin.coroutines.intrinsics")
 
-    @JvmField val CONTINUATION_INTERFACE_FQ_NAME = COROUTINES_PACKAGE_FQ_NAME.child(Name.identifier("Continuation"))
+    @JvmField konst CONTINUATION_INTERFACE_FQ_NAME = COROUTINES_PACKAGE_FQ_NAME.child(Name.identifier("Continuation"))
 
-    @JvmField val RESULT_FQ_NAME = FqName("kotlin.Result")
+    @JvmField konst RESULT_FQ_NAME = FqName("kotlin.Result")
 
-    @JvmField val KOTLIN_REFLECT_FQ_NAME = FqName("kotlin.reflect")
-    const val K_PROPERTY_PREFIX = "KProperty"
-    const val K_MUTABLE_PROPERTY_PREFIX = "KMutableProperty"
-    const val K_FUNCTION_PREFIX = "KFunction"
-    const val K_SUSPEND_FUNCTION_PREFIX = "KSuspendFunction"
+    @JvmField konst KOTLIN_REFLECT_FQ_NAME = FqName("kotlin.reflect")
+    const konst K_PROPERTY_PREFIX = "KProperty"
+    const konst K_MUTABLE_PROPERTY_PREFIX = "KMutableProperty"
+    const konst K_FUNCTION_PREFIX = "KFunction"
+    const konst K_SUSPEND_FUNCTION_PREFIX = "KSuspendFunction"
 
-    @JvmField val PREFIXES = listOf(K_PROPERTY_PREFIX, K_MUTABLE_PROPERTY_PREFIX, K_FUNCTION_PREFIX, K_SUSPEND_FUNCTION_PREFIX)
-
-    @JvmField
-    val BUILT_INS_PACKAGE_NAME = Name.identifier("kotlin")
+    @JvmField konst PREFIXES = listOf(K_PROPERTY_PREFIX, K_MUTABLE_PROPERTY_PREFIX, K_FUNCTION_PREFIX, K_SUSPEND_FUNCTION_PREFIX)
 
     @JvmField
-    val BUILT_INS_PACKAGE_FQ_NAME = FqName.topLevel(BUILT_INS_PACKAGE_NAME)
+    konst BUILT_INS_PACKAGE_NAME = Name.identifier("kotlin")
 
     @JvmField
-    val ANNOTATION_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("annotation"))
+    konst BUILT_INS_PACKAGE_FQ_NAME = FqName.topLevel(BUILT_INS_PACKAGE_NAME)
 
     @JvmField
-    val COLLECTIONS_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("collections"))
+    konst ANNOTATION_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("annotation"))
 
     @JvmField
-    val RANGES_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("ranges"))
+    konst COLLECTIONS_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("collections"))
 
     @JvmField
-    val TEXT_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("text"))
+    konst RANGES_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("ranges"))
 
     @JvmField
-    val KOTLIN_INTERNAL_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("internal"))
-
-    val NON_EXISTENT_CLASS = FqName("error.NonExistentClass")
+    konst TEXT_PACKAGE_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("text"))
 
     @JvmField
-    val BUILT_INS_PACKAGE_FQ_NAMES = setOf(
+    konst KOTLIN_INTERNAL_FQ_NAME = BUILT_INS_PACKAGE_FQ_NAME.child(Name.identifier("internal"))
+
+    konst NON_EXISTENT_CLASS = FqName("error.NonExistentClass")
+
+    @JvmField
+    konst BUILT_INS_PACKAGE_FQ_NAMES = setOf(
         BUILT_INS_PACKAGE_FQ_NAME,
         COLLECTIONS_PACKAGE_FQ_NAME,
         RANGES_PACKAGE_FQ_NAME,
@@ -95,118 +95,118 @@ object StandardNames {
     )
 
     object FqNames {
-        @JvmField val any: FqNameUnsafe = fqNameUnsafe("Any")
-        @JvmField val nothing: FqNameUnsafe = fqNameUnsafe("Nothing")
-        @JvmField val cloneable: FqNameUnsafe = fqNameUnsafe("Cloneable")
-        @JvmField val suppress: FqName = fqName("Suppress")
-        @JvmField val unit: FqNameUnsafe = fqNameUnsafe("Unit")
-        @JvmField val charSequence: FqNameUnsafe = fqNameUnsafe("CharSequence")
-        @JvmField val string: FqNameUnsafe = fqNameUnsafe("String")
-        @JvmField val array: FqNameUnsafe = fqNameUnsafe("Array")
+        @JvmField konst any: FqNameUnsafe = fqNameUnsafe("Any")
+        @JvmField konst nothing: FqNameUnsafe = fqNameUnsafe("Nothing")
+        @JvmField konst cloneable: FqNameUnsafe = fqNameUnsafe("Cloneable")
+        @JvmField konst suppress: FqName = fqName("Suppress")
+        @JvmField konst unit: FqNameUnsafe = fqNameUnsafe("Unit")
+        @JvmField konst charSequence: FqNameUnsafe = fqNameUnsafe("CharSequence")
+        @JvmField konst string: FqNameUnsafe = fqNameUnsafe("String")
+        @JvmField konst array: FqNameUnsafe = fqNameUnsafe("Array")
 
-        @JvmField val _boolean: FqNameUnsafe = fqNameUnsafe("Boolean")
-        @JvmField val _char: FqNameUnsafe = fqNameUnsafe("Char")
-        @JvmField val _byte: FqNameUnsafe = fqNameUnsafe("Byte")
-        @JvmField val _short: FqNameUnsafe = fqNameUnsafe("Short")
-        @JvmField val _int: FqNameUnsafe = fqNameUnsafe("Int")
-        @JvmField val _long: FqNameUnsafe = fqNameUnsafe("Long")
-        @JvmField val _float: FqNameUnsafe = fqNameUnsafe("Float")
-        @JvmField val _double: FqNameUnsafe = fqNameUnsafe("Double")
-        @JvmField val number: FqNameUnsafe = fqNameUnsafe("Number")
+        @JvmField konst _boolean: FqNameUnsafe = fqNameUnsafe("Boolean")
+        @JvmField konst _char: FqNameUnsafe = fqNameUnsafe("Char")
+        @JvmField konst _byte: FqNameUnsafe = fqNameUnsafe("Byte")
+        @JvmField konst _short: FqNameUnsafe = fqNameUnsafe("Short")
+        @JvmField konst _int: FqNameUnsafe = fqNameUnsafe("Int")
+        @JvmField konst _long: FqNameUnsafe = fqNameUnsafe("Long")
+        @JvmField konst _float: FqNameUnsafe = fqNameUnsafe("Float")
+        @JvmField konst _double: FqNameUnsafe = fqNameUnsafe("Double")
+        @JvmField konst number: FqNameUnsafe = fqNameUnsafe("Number")
 
-        @JvmField val _enum: FqNameUnsafe = fqNameUnsafe("Enum")
+        @JvmField konst _enum: FqNameUnsafe = fqNameUnsafe("Enum")
 
-        @JvmField val functionSupertype: FqNameUnsafe = fqNameUnsafe("Function")
+        @JvmField konst functionSupertype: FqNameUnsafe = fqNameUnsafe("Function")
 
-        @JvmField val throwable: FqName = fqName("Throwable")
-        @JvmField val comparable: FqName = fqName("Comparable")
+        @JvmField konst throwable: FqName = fqName("Throwable")
+        @JvmField konst comparable: FqName = fqName("Comparable")
 
-        @JvmField val intRange: FqNameUnsafe = rangesFqName("IntRange")
-        @JvmField val longRange: FqNameUnsafe = rangesFqName("LongRange")
+        @JvmField konst intRange: FqNameUnsafe = rangesFqName("IntRange")
+        @JvmField konst longRange: FqNameUnsafe = rangesFqName("LongRange")
 
-        @JvmField val deprecated: FqName = fqName("Deprecated")
-        @JvmField val deprecatedSinceKotlin: FqName = fqName("DeprecatedSinceKotlin")
-        @JvmField val deprecationLevel: FqName = fqName("DeprecationLevel")
-        @JvmField val replaceWith: FqName = fqName("ReplaceWith")
-        @JvmField val extensionFunctionType: FqName = fqName("ExtensionFunctionType")
-        @JvmField val contextFunctionTypeParams: FqName = fqName("ContextFunctionTypeParams")
-        @JvmField val parameterName: FqName = fqName("ParameterName")
-        @JvmField val parameterNameClassId: ClassId = ClassId.topLevel(parameterName)
-        @JvmField val annotation: FqName = fqName("Annotation")
-        @JvmField val target: FqName = annotationName("Target")
-        @JvmField val targetClassId: ClassId = ClassId.topLevel(target)
-        @JvmField val annotationTarget: FqName = annotationName("AnnotationTarget")
-        @JvmField val annotationRetention: FqName = annotationName("AnnotationRetention")
-        @JvmField val retention: FqName = annotationName("Retention")
-        @JvmField val retentionClassId: ClassId = ClassId.topLevel(retention)
-        @JvmField val repeatable: FqName = annotationName("Repeatable")
-        @JvmField val repeatableClassId: ClassId = ClassId.topLevel(repeatable)
-        @JvmField val mustBeDocumented: FqName = annotationName("MustBeDocumented")
-        @JvmField val unsafeVariance: FqName = fqName("UnsafeVariance")
-        @JvmField val publishedApi: FqName = fqName("PublishedApi")
-        @JvmField val accessibleLateinitPropertyLiteral: FqName = internalName("AccessibleLateinitPropertyLiteral")
+        @JvmField konst deprecated: FqName = fqName("Deprecated")
+        @JvmField konst deprecatedSinceKotlin: FqName = fqName("DeprecatedSinceKotlin")
+        @JvmField konst deprecationLevel: FqName = fqName("DeprecationLevel")
+        @JvmField konst replaceWith: FqName = fqName("ReplaceWith")
+        @JvmField konst extensionFunctionType: FqName = fqName("ExtensionFunctionType")
+        @JvmField konst contextFunctionTypeParams: FqName = fqName("ContextFunctionTypeParams")
+        @JvmField konst parameterName: FqName = fqName("ParameterName")
+        @JvmField konst parameterNameClassId: ClassId = ClassId.topLevel(parameterName)
+        @JvmField konst annotation: FqName = fqName("Annotation")
+        @JvmField konst target: FqName = annotationName("Target")
+        @JvmField konst targetClassId: ClassId = ClassId.topLevel(target)
+        @JvmField konst annotationTarget: FqName = annotationName("AnnotationTarget")
+        @JvmField konst annotationRetention: FqName = annotationName("AnnotationRetention")
+        @JvmField konst retention: FqName = annotationName("Retention")
+        @JvmField konst retentionClassId: ClassId = ClassId.topLevel(retention)
+        @JvmField konst repeatable: FqName = annotationName("Repeatable")
+        @JvmField konst repeatableClassId: ClassId = ClassId.topLevel(repeatable)
+        @JvmField konst mustBeDocumented: FqName = annotationName("MustBeDocumented")
+        @JvmField konst unsafeVariance: FqName = fqName("UnsafeVariance")
+        @JvmField konst publishedApi: FqName = fqName("PublishedApi")
+        @JvmField konst accessibleLateinitPropertyLiteral: FqName = internalName("AccessibleLateinitPropertyLiteral")
 
-        @JvmField val iterator: FqName = collectionsFqName("Iterator")
-        @JvmField val iterable: FqName = collectionsFqName("Iterable")
-        @JvmField val collection: FqName = collectionsFqName("Collection")
-        @JvmField val list: FqName = collectionsFqName("List")
-        @JvmField val listIterator: FqName = collectionsFqName("ListIterator")
-        @JvmField val set: FqName = collectionsFqName("Set")
-        @JvmField val map: FqName = collectionsFqName("Map")
-        @JvmField val mapEntry: FqName = map.child(Name.identifier("Entry"))
-        @JvmField val mutableIterator: FqName = collectionsFqName("MutableIterator")
-        @JvmField val mutableIterable: FqName = collectionsFqName("MutableIterable")
-        @JvmField val mutableCollection: FqName = collectionsFqName("MutableCollection")
-        @JvmField val mutableList: FqName = collectionsFqName("MutableList")
-        @JvmField val mutableListIterator: FqName = collectionsFqName("MutableListIterator")
-        @JvmField val mutableSet: FqName = collectionsFqName("MutableSet")
-        @JvmField val mutableMap: FqName = collectionsFqName("MutableMap")
-        @JvmField val mutableMapEntry: FqName = mutableMap.child(Name.identifier("MutableEntry"))
+        @JvmField konst iterator: FqName = collectionsFqName("Iterator")
+        @JvmField konst iterable: FqName = collectionsFqName("Iterable")
+        @JvmField konst collection: FqName = collectionsFqName("Collection")
+        @JvmField konst list: FqName = collectionsFqName("List")
+        @JvmField konst listIterator: FqName = collectionsFqName("ListIterator")
+        @JvmField konst set: FqName = collectionsFqName("Set")
+        @JvmField konst map: FqName = collectionsFqName("Map")
+        @JvmField konst mapEntry: FqName = map.child(Name.identifier("Entry"))
+        @JvmField konst mutableIterator: FqName = collectionsFqName("MutableIterator")
+        @JvmField konst mutableIterable: FqName = collectionsFqName("MutableIterable")
+        @JvmField konst mutableCollection: FqName = collectionsFqName("MutableCollection")
+        @JvmField konst mutableList: FqName = collectionsFqName("MutableList")
+        @JvmField konst mutableListIterator: FqName = collectionsFqName("MutableListIterator")
+        @JvmField konst mutableSet: FqName = collectionsFqName("MutableSet")
+        @JvmField konst mutableMap: FqName = collectionsFqName("MutableMap")
+        @JvmField konst mutableMapEntry: FqName = mutableMap.child(Name.identifier("MutableEntry"))
 
-        @JvmField val kClass: FqNameUnsafe = reflect("KClass")
-        @JvmField val kCallable: FqNameUnsafe = reflect("KCallable")
-        @JvmField val kProperty0: FqNameUnsafe = reflect("KProperty0")
-        @JvmField val kProperty1: FqNameUnsafe = reflect("KProperty1")
-        @JvmField val kProperty2: FqNameUnsafe = reflect("KProperty2")
-        @JvmField val kMutableProperty0: FqNameUnsafe = reflect("KMutableProperty0")
-        @JvmField val kMutableProperty1: FqNameUnsafe = reflect("KMutableProperty1")
-        @JvmField val kMutableProperty2: FqNameUnsafe = reflect("KMutableProperty2")
-        @JvmField val kPropertyFqName: FqNameUnsafe = reflect("KProperty")
-        @JvmField val kMutablePropertyFqName: FqNameUnsafe = reflect("KMutableProperty")
-        @JvmField val kProperty: ClassId = ClassId.topLevel(kPropertyFqName.toSafe())
-        @JvmField val kDeclarationContainer: FqNameUnsafe = reflect("KDeclarationContainer")
+        @JvmField konst kClass: FqNameUnsafe = reflect("KClass")
+        @JvmField konst kCallable: FqNameUnsafe = reflect("KCallable")
+        @JvmField konst kProperty0: FqNameUnsafe = reflect("KProperty0")
+        @JvmField konst kProperty1: FqNameUnsafe = reflect("KProperty1")
+        @JvmField konst kProperty2: FqNameUnsafe = reflect("KProperty2")
+        @JvmField konst kMutableProperty0: FqNameUnsafe = reflect("KMutableProperty0")
+        @JvmField konst kMutableProperty1: FqNameUnsafe = reflect("KMutableProperty1")
+        @JvmField konst kMutableProperty2: FqNameUnsafe = reflect("KMutableProperty2")
+        @JvmField konst kPropertyFqName: FqNameUnsafe = reflect("KProperty")
+        @JvmField konst kMutablePropertyFqName: FqNameUnsafe = reflect("KMutableProperty")
+        @JvmField konst kProperty: ClassId = ClassId.topLevel(kPropertyFqName.toSafe())
+        @JvmField konst kDeclarationContainer: FqNameUnsafe = reflect("KDeclarationContainer")
 
-        @JvmField val uByteFqName: FqName = fqName("UByte")
-        @JvmField val uShortFqName: FqName = fqName("UShort")
-        @JvmField val uIntFqName: FqName = fqName("UInt")
-        @JvmField val uLongFqName: FqName = fqName("ULong")
-        @JvmField val uByte: ClassId = ClassId.topLevel(uByteFqName)
-        @JvmField val uShort: ClassId = ClassId.topLevel(uShortFqName)
-        @JvmField val uInt: ClassId = ClassId.topLevel(uIntFqName)
-        @JvmField val uLong: ClassId = ClassId.topLevel(uLongFqName)
-        @JvmField val uByteArrayFqName: FqName = fqName("UByteArray")
-        @JvmField val uShortArrayFqName: FqName = fqName("UShortArray")
-        @JvmField val uIntArrayFqName: FqName = fqName("UIntArray")
-        @JvmField val uLongArrayFqName: FqName = fqName("ULongArray")
+        @JvmField konst uByteFqName: FqName = fqName("UByte")
+        @JvmField konst uShortFqName: FqName = fqName("UShort")
+        @JvmField konst uIntFqName: FqName = fqName("UInt")
+        @JvmField konst uLongFqName: FqName = fqName("ULong")
+        @JvmField konst uByte: ClassId = ClassId.topLevel(uByteFqName)
+        @JvmField konst uShort: ClassId = ClassId.topLevel(uShortFqName)
+        @JvmField konst uInt: ClassId = ClassId.topLevel(uIntFqName)
+        @JvmField konst uLong: ClassId = ClassId.topLevel(uLongFqName)
+        @JvmField konst uByteArrayFqName: FqName = fqName("UByteArray")
+        @JvmField konst uShortArrayFqName: FqName = fqName("UShortArray")
+        @JvmField konst uIntArrayFqName: FqName = fqName("UIntArray")
+        @JvmField konst uLongArrayFqName: FqName = fqName("ULongArray")
 
-        @JvmField val primitiveTypeShortNames: Set<Name> = newHashSetWithExpectedSize<Name>(PrimitiveType.values().size).apply {
-            PrimitiveType.values().mapTo(this) { it.typeName }
+        @JvmField konst primitiveTypeShortNames: Set<Name> = newHashSetWithExpectedSize<Name>(PrimitiveType.konstues().size).apply {
+            PrimitiveType.konstues().mapTo(this) { it.typeName }
         }
 
-        @JvmField val primitiveArrayTypeShortNames: Set<Name> = newHashSetWithExpectedSize<Name>(PrimitiveType.values().size).apply {
-            PrimitiveType.values().mapTo(this) { it.arrayTypeName }
+        @JvmField konst primitiveArrayTypeShortNames: Set<Name> = newHashSetWithExpectedSize<Name>(PrimitiveType.konstues().size).apply {
+            PrimitiveType.konstues().mapTo(this) { it.arrayTypeName }
         }
 
-        @JvmField val fqNameToPrimitiveType: Map<FqNameUnsafe, PrimitiveType> =
-            newHashMapWithExpectedSize<FqNameUnsafe, PrimitiveType>(PrimitiveType.values().size).apply {
-                for (primitiveType in PrimitiveType.values()) {
+        @JvmField konst fqNameToPrimitiveType: Map<FqNameUnsafe, PrimitiveType> =
+            newHashMapWithExpectedSize<FqNameUnsafe, PrimitiveType>(PrimitiveType.konstues().size).apply {
+                for (primitiveType in PrimitiveType.konstues()) {
                     this[fqNameUnsafe(primitiveType.typeName.asString())] = primitiveType
                 }
             }
 
-        @JvmField val arrayClassFqNameToPrimitiveType: MutableMap<FqNameUnsafe, PrimitiveType> =
-            newHashMapWithExpectedSize<FqNameUnsafe, PrimitiveType>(PrimitiveType.values().size).apply {
-                for (primitiveType in PrimitiveType.values()) {
+        @JvmField konst arrayClassFqNameToPrimitiveType: MutableMap<FqNameUnsafe, PrimitiveType> =
+            newHashMapWithExpectedSize<FqNameUnsafe, PrimitiveType>(PrimitiveType.konstues().size).apply {
+                for (primitiveType in PrimitiveType.konstues()) {
                     this[fqNameUnsafe(primitiveType.arrayTypeName.asString())] = primitiveType
                 }
             }
@@ -259,7 +259,7 @@ object StandardNames {
 
     @JvmStatic
     fun getKFunctionClassId(parameterCount: Int): ClassId {
-        val fqName = getKFunctionFqName(parameterCount)
+        konst fqName = getKFunctionFqName(parameterCount)
         return ClassId(fqName.parent().toSafe(), fqName.shortName())
     }
 
@@ -280,7 +280,7 @@ object StandardNames {
 
     @JvmStatic
     fun getKSuspendFunctionClassId(parameterCount: Int): ClassId {
-        val fqName = getKSuspendFunctionName(parameterCount)
+        konst fqName = getKSuspendFunctionName(parameterCount)
         return ClassId(fqName.parent().toSafe(), fqName.shortName())
     }
 

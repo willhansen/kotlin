@@ -22,7 +22,7 @@ import org.codehaus.plexus.component.annotations.*
 import org.codehaus.plexus.logging.*
 import org.jetbrains.kotlin.maven.*
 
-val LOMBOK_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.lombok"
+konst LOMBOK_COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.lombok"
 
 @Component(role = KotlinMavenPluginExtension::class, hint = "lombok")
 class KotlinLombokMavenPluginExtension : KotlinMavenPluginExtension {

@@ -4,7 +4,7 @@ FILE: lambdaArgInScopeFunction.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val name: R|kotlin/String| = R|<local>/name|
+        private final konst name: R|kotlin/String| = R|<local>/name|
             private get(): R|kotlin/String|
 
         public open override operator fun compareTo(that: R|KotlinClass|): R|kotlin/Int| {
@@ -13,15 +13,15 @@ FILE: lambdaArgInScopeFunction.kt
 
     }
     public final fun case1(kotlinClass: R|KotlinClass?|): R|kotlin/Unit| {
-        lval value: R|KotlinClass?| = R|<local>/kotlinClass|?.{ $subj$.R|kotlin/let|<R|KotlinClass|, R|KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst konstue: R|KotlinClass?| = R|<local>/kotlinClass|?.{ $subj$.R|kotlin/let|<R|KotlinClass|, R|KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
             ^ R|<local>/it|
         }
         ) }
-        R|<local>/value|.R|/checkType|<R|KotlinClass?|>(<L> = checkType@fun R|CheckTypeInv<KotlinClass?>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/konstue|.R|/checkType|<R|KotlinClass?|>(<L> = checkType@fun R|CheckTypeInv<KotlinClass?>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_|<R|KotlinClass?|>()
         }
         )
-        lval lambda: R|(() -> KotlinClass)?| = R|<local>/kotlinClass|?.{ $subj$.R|kotlin/let|<R|KotlinClass|, R|() -> KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|() -> KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst lambda: R|(() -> KotlinClass)?| = R|<local>/kotlinClass|?.{ $subj$.R|kotlin/let|<R|KotlinClass|, R|() -> KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|() -> KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
             ^ let@fun <anonymous>(): R|KotlinClass| <inline=Unknown>  {
                 ^ R|<local>/it|
             }
@@ -34,15 +34,15 @@ FILE: lambdaArgInScopeFunction.kt
         )
     }
     public final fun case2(kotlinClass: R|KotlinClass|): R|kotlin/Unit| {
-        lval value: R|KotlinClass| = R|<local>/kotlinClass|.R|kotlin/let|<R|KotlinClass|, R|KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst konstue: R|KotlinClass| = R|<local>/kotlinClass|.R|kotlin/let|<R|KotlinClass|, R|KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
             ^ R|<local>/it|
         }
         )
-        R|<local>/value|.R|/checkType|<R|KotlinClass|>(<L> = checkType@fun R|CheckTypeInv<KotlinClass>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        R|<local>/konstue|.R|/checkType|<R|KotlinClass|>(<L> = checkType@fun R|CheckTypeInv<KotlinClass>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|/_|<R|KotlinClass|>()
         }
         )
-        lval lambda: R|() -> KotlinClass| = R|<local>/kotlinClass|.R|kotlin/let|<R|KotlinClass|, R|() -> KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|() -> KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst lambda: R|() -> KotlinClass| = R|<local>/kotlinClass|.R|kotlin/let|<R|KotlinClass|, R|() -> KotlinClass|>(<L> = let@fun <anonymous>(it: R|KotlinClass|): R|() -> KotlinClass| <inline=Inline, kind=EXACTLY_ONCE>  {
             ^ let@fun <anonymous>(): R|KotlinClass| <inline=Unknown>  {
                 ^ R|<local>/it|
             }

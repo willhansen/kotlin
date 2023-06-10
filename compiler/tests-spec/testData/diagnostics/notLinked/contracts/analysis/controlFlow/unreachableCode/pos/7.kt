@@ -5,7 +5,7 @@
  *
  * SECTIONS: contracts, analysis, controlFlow, unreachableCode
  * NUMBER: 7
- * DESCRIPTION: Smart initialization with correspond contract function with default value before lambda.
+ * DESCRIPTION: Smart initialization with correspond contract function with default konstue before lambda.
  * ISSUES: KT-26444
  */
 

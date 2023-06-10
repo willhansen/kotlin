@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.resolve.calls.checkers.NewSchemeOfIntegerOperatorRes
 import org.jetbrains.kotlin.resolve.calls.components.InferenceSession
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfo
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.lazy.ForceResolveUtil
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.resolve.scopes.LexicalScopeImpl
@@ -36,50 +36,50 @@ import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.types.isError
 
 class ValueParameterResolver(
-    private val expressionTypingServices: ExpressionTypingServices,
-    private val constantExpressionEvaluator: ConstantExpressionEvaluator,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val dataFlowValueFactory: DataFlowValueFactory
+    private konst expressionTypingServices: ExpressionTypingServices,
+    private konst constantExpressionEkonstuator: ConstantExpressionEkonstuator,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst dataFlowValueFactory: DataFlowValueFactory
 ) {
     fun resolveValueParameters(
-        valueParameters: List<KtParameter>,
-        valueParameterDescriptors: List<ValueParameterDescriptor>,
+        konstueParameters: List<KtParameter>,
+        konstueParameterDescriptors: List<ValueParameterDescriptor>,
         declaringScope: LexicalScope,
         dataFlowInfo: DataFlowInfo,
         trace: BindingTrace,
         inferenceSession: InferenceSession?
     ) {
-        val scopeForDefaultValue =
+        konst scopeForDefaultValue =
             LexicalScopeImpl(declaringScope, declaringScope.ownerDescriptor, false, null, listOf(), LexicalScopeKind.DEFAULT_VALUE)
 
-        val contextForDefaultValue = ExpressionTypingContext.newContext(
+        konst contextForDefaultValue = ExpressionTypingContext.newContext(
             trace, scopeForDefaultValue, dataFlowInfo, TypeUtils.NO_EXPECTED_TYPE,
             languageVersionSettings, dataFlowValueFactory, inferenceSession
         )
 
-        for ((descriptor, parameter) in valueParameterDescriptors.zip(valueParameters)) {
+        for ((descriptor, parameter) in konstueParameterDescriptors.zip(konstueParameters)) {
             ForceResolveUtil.forceResolveAllContents(descriptor.annotations)
             resolveDefaultValue(descriptor, parameter, contextForDefaultValue)
         }
     }
 
     private fun resolveDefaultValue(
-        valueParameterDescriptor: ValueParameterDescriptor,
+        konstueParameterDescriptor: ValueParameterDescriptor,
         parameter: KtParameter,
         context: ExpressionTypingContext
     ) {
-        if (!valueParameterDescriptor.declaresDefaultValue()) return
-        val defaultValue = parameter.defaultValue ?: return
-        val type = valueParameterDescriptor.type
+        if (!konstueParameterDescriptor.declaresDefaultValue()) return
+        konst defaultValue = parameter.defaultValue ?: return
+        konst type = konstueParameterDescriptor.type
         expressionTypingServices.getTypeInfo(defaultValue, context.replaceExpectedType(type))
         NewSchemeOfIntegerOperatorResolutionChecker.checkArgument(
             type,
             defaultValue,
             context.trace,
-            constantExpressionEvaluator.module
+            constantExpressionEkonstuator.module
         )
         if (DescriptorUtils.isAnnotationClass(DescriptorResolver.getContainingClass(context.scope))) {
-            val constant = constantExpressionEvaluator.evaluateExpression(defaultValue, context.trace, type)
+            konst constant = constantExpressionEkonstuator.ekonstuateExpression(defaultValue, context.trace, type)
             if ((constant == null || constant.usesNonConstValAsConstant) && !type.isError) {
                 context.trace.report(Errors.ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT.on(defaultValue))
             }

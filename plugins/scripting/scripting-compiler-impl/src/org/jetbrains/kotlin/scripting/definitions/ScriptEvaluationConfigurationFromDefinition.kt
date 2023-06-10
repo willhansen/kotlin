@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.scripting.definitions
 
-import kotlin.script.experimental.api.ScriptEvaluationConfiguration
+import kotlin.script.experimental.api.ScriptEkonstuationConfiguration
 import kotlin.script.experimental.api.hostConfiguration
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 
-class ScriptEvaluationConfigurationFromDefinition(
-    val hostConfiguration: ScriptingHostConfiguration,
-    val scriptDefinition: KotlinScriptDefinition
-) : ScriptEvaluationConfiguration(
+class ScriptEkonstuationConfigurationFromDefinition(
+    konst hostConfiguration: ScriptingHostConfiguration,
+    konst scriptDefinition: KotlinScriptDefinition
+) : ScriptEkonstuationConfiguration(
     {
         hostConfiguration(hostConfiguration)
     }

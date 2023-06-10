@@ -17,7 +17,7 @@ interface ProgressReporter {
     fun clearProgress()
 }
 
-class ProgressReporterImpl(private val context: CompileContext, private val chunk: ModuleChunk) : ProgressReporter {
+class ProgressReporterImpl(private konst context: CompileContext, private konst chunk: ModuleChunk) : ProgressReporter {
     override fun progress(@Nls message: String) {
         @Suppress("HardCodedStringLiteral")
         context.processMessage(ProgressMessage("Kotlin: $message"))

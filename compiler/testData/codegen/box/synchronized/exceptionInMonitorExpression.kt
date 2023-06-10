@@ -3,8 +3,8 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val obj = "" as java.lang.Object
-    val e = IllegalArgumentException()
+    konst obj = "" as java.lang.Object
+    konst e = IllegalArgumentException()
     fun m(): Nothing = throw e
     try {
         synchronized (m()) {

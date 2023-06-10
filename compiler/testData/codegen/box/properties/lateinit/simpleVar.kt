@@ -3,7 +3,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.str = "OK"
     return a.str
 }

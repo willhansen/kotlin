@@ -27,5 +27,5 @@ open class MutableLocalVariableReference : MutablePropertyReference0() {
 
     override fun get(): Any? = notSupportedError()
 
-    override fun set(value: Any?): Unit = notSupportedError()
+    override fun set(konstue: Any?): Unit = notSupportedError()
 }

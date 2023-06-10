@@ -51,22 +51,22 @@ import org.jetbrains.kotlin.types.typeUtil.isAnyOrNullableAny
 import org.jetbrains.kotlin.utils.addToStdlib.cast
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
-open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val support: KtUltraLightSupport) :
+open class KtUltraLightClass(classOrObject: KtClassOrObject, internal konst support: KtUltraLightSupport) :
     KtLightClassImpl(classOrObject, support.jvmDefaultMode) {
 
     private class KtUltraLightClassModifierList(
-        private val containingClass: KtLightClassForSourceDeclaration,
+        private konst containingClass: KtLightClassForSourceDeclaration,
         support: KtUltraLightSupport,
-        private val lazyModifiers: Lazy<Set<String>>,
-        private val lazyIsFinal: Lazy<Boolean>,
+        private konst lazyModifiers: Lazy<Set<String>>,
+        private konst lazyIsFinal: Lazy<Boolean>,
     ) : KtUltraLightModifierList<KtLightClassForSourceDeclaration>(containingClass, support) {
         override fun hasModifierProperty(name: String): Boolean =
-            if (name != PsiModifier.FINAL) name in lazyModifiers.value else owner.isFinal(lazyIsFinal.value)
+            if (name != PsiModifier.FINAL) name in lazyModifiers.konstue else owner.isFinal(lazyIsFinal.konstue)
 
         override fun copy(): PsiElement = KtUltraLightClassModifierList(containingClass, support, lazyModifiers, lazyIsFinal)
     }
 
-    private val membersBuilder by lazyPub {
+    private konst membersBuilder by lazyPub {
         UltraLightMembersCreator(
             this,
             isNamedObject(),
@@ -76,11 +76,11 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         )
     }
 
-    private val _deprecated by lazyPub { classOrObject.isDeprecated(support) }
+    private konst _deprecated by lazyPub { classOrObject.isDeprecated(support) }
 
     override fun isFinal(isFinalByPsi: Boolean) = isFinalByPsi
 
-    private val _modifierList: PsiModifierList? by lazyPub {
+    private konst _modifierList: PsiModifierList? by lazyPub {
         KtUltraLightClassModifierList(
             containingClass = this,
             support = support,
@@ -107,15 +107,15 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     private fun createInheritanceList(forExtendsList: Boolean): PsiReferenceList {
 
-        val role = if (forExtendsList) PsiReferenceList.Role.EXTENDS_LIST else PsiReferenceList.Role.IMPLEMENTS_LIST
+        konst role = if (forExtendsList) PsiReferenceList.Role.EXTENDS_LIST else PsiReferenceList.Role.IMPLEMENTS_LIST
 
         if (isAnnotationType) return KotlinLightReferenceListBuilder(manager, language, role)
 
-        val superTypes = allSuperTypes().filter {
+        konst superTypes = allSuperTypes().filter {
             isTypeForInheritanceList(it, forExtendsList)
         }
 
-        val listBuilder = KotlinSuperTypeListBuilder(
+        konst listBuilder = KotlinSuperTypeListBuilder(
             this,
             kotlinOrigin = kotlinOrigin.getSuperTypeList(),
             manager = manager,
@@ -135,13 +135,13 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     private fun addTypeToTypeList(listBuilder: KotlinSuperTypeListBuilder, superType: KotlinType) {
 
-        val mappedType = mapSupertype(superType, kotlinCollectionAsIs = true) ?: return
+        konst mappedType = mapSupertype(superType, kotlinCollectionAsIs = true) ?: return
 
         listBuilder.addReference(mappedType)
 
         if (mappedType.canonicalText.startsWith("kotlin.collections.")) {
 
-            val mappedToNoCollectionAsIs = mapSupertype(superType, kotlinCollectionAsIs = false)
+            konst mappedToNoCollectionAsIs = mapSupertype(superType, kotlinCollectionAsIs = false)
 
             if (mappedToNoCollectionAsIs !== null &&
                 mappedType.canonicalText != mappedToNoCollectionAsIs.canonicalText
@@ -182,10 +182,10 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     override fun getRBrace(): PsiElement? = null
     override fun getLBrace(): PsiElement? = null
 
-    private val _ownFields: List<KtLightField> by lazyPub {
+    private konst _ownFields: List<KtLightField> by lazyPub {
 
-        val result = arrayListOf<KtLightField>()
-        val usedNames = hashSetOf<String>()
+        konst result = arrayListOf<KtLightField>()
+        konst usedNames = hashSetOf<String>()
 
         this.classOrObject.companionObjects.firstOrNull()?.let { companion ->
             result.add(
@@ -205,7 +205,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         }
 
         fun ArrayList<KtLightField>.updateWithCompilerPlugins() = also {
-            val lazyDescriptor = lazy { getDescriptor() }
+            konst lazyDescriptor = lazy { getDescriptor() }
             project.applyCompilerPlugins {
                 it.interceptFieldsBuilding(
                     declaration = kotlinOrigin,
@@ -223,11 +223,11 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         }
 
         if (!isInterface) {
-            val isCompanion = this.classOrObject.safeAs<KtObjectDeclaration>()?.isCompanion() == true
+            konst isCompanion = this.classOrObject.safeAs<KtObjectDeclaration>()?.isCompanion() == true
             for (property in this.classOrObject.declarations.filterIsInstance<KtProperty>()) {
                 // All fields for companion object of classes are generated to the containing class
                 // For interfaces, only @JvmField-annotated properties are generated to the containing class
-                // Probably, the same should work for const vals but it doesn't at the moment (see KT-28294)
+                // Probably, the same should work for const konsts but it doesn't at the moment (see KT-28294)
                 if (isCompanion && (containingClass?.isInterface == false || property.isJvmField())) continue
 
                 membersBuilder.createPropertyField(property, usedNames, forceStatic = this.classOrObject is KtObjectDeclaration)
@@ -249,7 +249,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
         if (isEnum) {
             for (ktEnumEntry in classOrObject.declarations.filterIsInstance<KtEnumEntry>()) {
-                val name = ktEnumEntry.name ?: continue
+                konst name = ktEnumEntry.name ?: continue
                 result.add(
                     KtUltraLightEnumEntry(
                         ktEnumEntry, name, this, support,
@@ -269,7 +269,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     private fun propertyParameters() = classOrObject.primaryConstructorParameters.filter { it.hasValOrVar() }
 
     private fun ownMethods(): List<PsiMethod> {
-        val result = mutableListOf<PsiMethod>()
+        konst result = mutableListOf<PsiMethod>()
 
         for (declaration in this.classOrObject.declarations.filterNot { it.isHiddenByDeprecation(support) }) {
             if (declaration.hasModifier(PRIVATE_KEYWORD) && isInterface) continue
@@ -319,9 +319,9 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         addMethodsFromDataClass(result)
         addDelegatesToInterfaceMethods(result)
 
-        val lazyDescriptor = lazy { getDescriptor() }
+        konst lazyDescriptor = lazy { getDescriptor() }
         project.applyCompilerPlugins {
-            val methodsList = mutableListOf<KtLightMethod>()
+            konst methodsList = mutableListOf<KtLightMethod>()
             it.interceptMethodsBuilding(
                 declaration = kotlinOrigin,
                 descriptor = lazyDescriptor,
@@ -337,7 +337,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         return result
     }
 
-    private val _ownMethods: CachedValue<List<PsiMethod>> = CachedValuesManager.getManager(project).createCachedValue(
+    private konst _ownMethods: CachedValue<List<PsiMethod>> = CachedValuesManager.getManager(project).createCachedValue(
         {
             CachedValueProvider.Result.create(
                 ownMethods(),
@@ -348,14 +348,14 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     private fun addMethodsFromDataClass(result: MutableList<PsiMethod>) {
         if (!classOrObject.hasModifier(DATA_KEYWORD)) return
-        val ktClass = classOrObject as? KtClass ?: return
-        val descriptor = classOrObject.resolve() as? ClassDescriptor ?: return
-        val bindingContext = classOrObject.analyze()
+        konst ktClass = classOrObject as? KtClass ?: return
+        konst descriptor = classOrObject.resolve() as? ClassDescriptor ?: return
+        konst bindingContext = classOrObject.analyze()
 
         // Force resolving data class members set
         descriptor.unsubstitutedMemberScope.getContributedDescriptors()
 
-        val areCtorParametersAreAnalyzed = ktClass.primaryConstructorParameters
+        konst areCtorParametersAreAnalyzed = ktClass.primaryConstructorParameters
             .filter { it.hasValOrVar() }
             .all { bindingContext.get(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, it) != null }
 
@@ -398,12 +398,12 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         superTypeEntry: KtDelegatedSuperTypeEntry,
         result: MutableList<PsiMethod>
     ) {
-        val classDescriptor = classOrObject.resolve() as? ClassDescriptor ?: return
-        val typeReference = superTypeEntry.typeReference ?: return
-        val bindingContext = typeReference.analyze()
+        konst classDescriptor = classOrObject.resolve() as? ClassDescriptor ?: return
+        konst typeReference = superTypeEntry.typeReference ?: return
+        konst bindingContext = typeReference.analyze()
 
-        val superClassDescriptor = CodegenUtil.getSuperClassBySuperTypeListEntry(superTypeEntry, bindingContext) ?: return
-        val delegationType = superTypeEntry.delegateExpression.kotlinType(bindingContext)
+        konst superClassDescriptor = CodegenUtil.getSuperClassBySuperTypeListEntry(superTypeEntry, bindingContext) ?: return
+        konst delegationType = superTypeEntry.delegateExpression.kotlinType(bindingContext)
 
         for (delegate in DelegationResolver.getDelegates(classDescriptor, superClassDescriptor, delegationType).keys) {
             when (delegate) {
@@ -426,15 +426,15 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
     }
 
     private fun createConstructors(): List<KtLightMethod> {
-        val result = arrayListOf<KtLightMethod>()
-        val constructors = classOrObject.allConstructors
+        konst result = arrayListOf<KtLightMethod>()
+        konst constructors = classOrObject.allConstructors
         if (constructors.isEmpty()) {
             result.add(defaultConstructor())
         }
         for (constructor in constructors.filterNot { isHiddenByDeprecation(it) }) {
             result.addAll(membersBuilder.createMethods(constructor, false, forcePrivate = isEnum))
         }
-        val primary = classOrObject.primaryConstructor
+        konst primary = classOrObject.primaryConstructor
         if (primary != null && shouldGenerateNoArgOverload(primary)) {
             result.add(noArgConstructor(primary.simpleVisibility(), primary, METHOD_INDEX_FOR_NO_ARG_OVERLOAD_CTOR))
         }
@@ -445,14 +445,14 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         return !primary.hasModifier(PRIVATE_KEYWORD) &&
                 !classOrObject.hasModifier(INNER_KEYWORD) && !isEnum &&
                 !classOrObject.hasModifier(SEALED_KEYWORD) &&
-                primary.valueParameters.isNotEmpty() &&
-                primary.valueParameters.all { it.defaultValue != null } &&
-                classOrObject.allConstructors.none { it.valueParameters.isEmpty() } &&
+                primary.konstueParameters.isNotEmpty() &&
+                primary.konstueParameters.all { it.defaultValue != null } &&
+                classOrObject.allConstructors.none { it.konstueParameters.isEmpty() } &&
                 !primary.hasAnnotation(JVM_OVERLOADS_FQ_NAME)
     }
 
     private fun defaultConstructor(): KtUltraLightMethod {
-        val visibility =
+        konst visibility =
             when {
                 classOrObject is KtObjectDeclaration || isEnum -> PsiModifier.PRIVATE
                 classOrObject.hasModifier(SEALED_KEYWORD) -> PsiModifier.PROTECTED
@@ -476,13 +476,13 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
         )
 
     private fun isHiddenByDeprecation(declaration: KtDeclaration): Boolean {
-        val deprecated = support.findAnnotation(declaration, FqName("kotlin.Deprecated"))?.second
+        konst deprecated = support.findAnnotation(declaration, FqName("kotlin.Deprecated"))?.second
         return (deprecated?.argumentValue("level") as? EnumValue)?.enumEntryName?.asString() == "HIDDEN"
     }
 
     private fun isJvmStatic(declaration: KtAnnotated): Boolean = declaration.hasAnnotation(JVM_STATIC_ANNOTATION_FQ_NAME)
 
-    override fun getOwnMethods(): List<PsiMethod> = _ownMethods.value
+    override fun getOwnMethods(): List<PsiMethod> = _ownMethods.konstue
 
     private fun KtAnnotated.hasAnnotation(name: FqName) = support.findAnnotation(this, name) != null
 
@@ -495,12 +495,12 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     override fun getContainingClass(): PsiClass? {
 
-        val containingBody = classOrObject.parent as? KtClassBody
-        val containingClass = containingBody?.parent as? KtClassOrObject
+        konst containingBody = classOrObject.parent as? KtClassBody
+        konst containingClass = containingBody?.parent as? KtClassOrObject
         containingClass?.let { return it.toLightClass() }
 
-        val containingBlock = classOrObject.parent as? KtBlockExpression
-        val containingScript = containingBlock?.parent as? KtScript
+        konst containingBlock = classOrObject.parent as? KtBlockExpression
+        konst containingScript = containingBlock?.parent as? KtScript
         containingScript?.let { return it.toLightClass() }
 
         return null
@@ -534,7 +534,7 @@ open class KtUltraLightClass(classOrObject: KtClassOrObject, internal val suppor
 
     override fun createClassForInterfaceDefaultImpls(): PsiClass = KtUltraLightClassForInterfaceDefaultImpls(classOrObject, support)
 
-    private val shouldGenerateRepeatableAnnotationContainer: Boolean
+    private konst shouldGenerateRepeatableAnnotationContainer: Boolean
         get() = isAnnotationType &&
                 classOrObject.hasAnnotation(StandardNames.FqNames.repeatable) &&
                 !classOrObject.hasAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION)

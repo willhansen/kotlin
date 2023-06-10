@@ -2,25 +2,25 @@ interface I1
 interface I2
 interface I3<T>
 
-fun <T : I1> functionWithValueParameter(value: T) = Unit
-fun <T : I2> functionWithValueParameter(value: T) = Unit
-fun <T : I3<String>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<in String>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<out String>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<Int>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<in Int>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<out Int>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<Any>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<in Any>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<out Any>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<Any?>> functionWithValueParameter(value: T) = Unit
-fun <T : I3<*>> functionWithValueParameter(value: T) = Unit
-fun <T : Any> functionWithValueParameter(value: T) = Unit
-fun <T> functionWithValueParameter(value: T) = Unit
-fun functionWithValueParameter(value: I1) = Unit
-fun functionWithValueParameter(value: I2) = Unit
-fun functionWithValueParameter(value: Any) = Unit
-fun functionWithValueParameter(value: Any?) = Unit
+fun <T : I1> functionWithValueParameter(konstue: T) = Unit
+fun <T : I2> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<String>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<in String>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<out String>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<Int>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<in Int>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<out Int>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<Any>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<in Any>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<out Any>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<Any?>> functionWithValueParameter(konstue: T) = Unit
+fun <T : I3<*>> functionWithValueParameter(konstue: T) = Unit
+fun <T : Any> functionWithValueParameter(konstue: T) = Unit
+fun <T> functionWithValueParameter(konstue: T) = Unit
+fun functionWithValueParameter(konstue: I1) = Unit
+fun functionWithValueParameter(konstue: I2) = Unit
+fun functionWithValueParameter(konstue: Any) = Unit
+fun functionWithValueParameter(konstue: Any?) = Unit
 fun functionWithValueParameter() = Unit
 
 fun <T : I1> T.functionWithReceiver() = Unit

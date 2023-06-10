@@ -13,7 +13,7 @@ public fun testMultipleLabelsWithNestedLambda(): kotlin.Unit
 public fun testParenthesizedLambdaLabel(): () -> kotlin.Unit
 public fun testValLabelInReturn(): kotlin.Unit
 
-@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.EXPRESSION}) @kotlin.annotation.Retention(value = AnnotationRetention.SOURCE) public final annotation class Ann : kotlin.Annotation {
+@kotlin.annotation.Target(allowedTargets = {AnnotationTarget.EXPRESSION}) @kotlin.annotation.Retention(konstue = AnnotationRetention.SOURCE) public final annotation class Ann : kotlin.Annotation {
     public constructor Ann()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

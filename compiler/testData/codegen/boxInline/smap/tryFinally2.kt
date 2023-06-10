@@ -8,14 +8,14 @@
 package test
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
 inline fun <R> doCall(block: ()-> R, h: Holder) : R {
     try {
         return block()
     } finally {
-        h.value += ", in doCall finally"
+        h.konstue += ", in doCall finally"
     }
 }
 
@@ -32,7 +32,7 @@ inline fun test2(holder: Holder, l: (s: Int) -> Unit): String {
         return "fail"
     }
     finally {
-        holder.value += ", in global finally"
+        holder.konstue += ", in global finally"
     }
 }
 

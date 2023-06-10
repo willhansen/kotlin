@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.StandardClassIds
 
 abstract class AbstractDiagnosticCollector(
-    override val session: FirSession,
-    override val scopeSession: ScopeSession = ScopeSession(),
-    protected val createComponents: (DiagnosticReporter) -> DiagnosticCollectorComponents,
+    override konst session: FirSession,
+    override konst scopeSession: ScopeSession = ScopeSession(),
+    protected konst createComponents: (DiagnosticReporter) -> DiagnosticCollectorComponents,
 ) : SessionHolder {
     fun collectDiagnostics(firDeclaration: FirDeclaration, reporter: DiagnosticReporter) {
-        val components = createComponents(reporter)
-        val visitor = createVisitor(components)
+        konst components = createComponents(reporter)
+        konst visitor = createVisitor(components)
         session.lazyDeclarationResolver.disableLazyResolveContractChecksInside {
             firDeclaration.accept(visitor, null)
         }
@@ -36,11 +36,11 @@ abstract class AbstractDiagnosticCollector(
     protected abstract fun createVisitor(components: DiagnosticCollectorComponents): CheckerRunningDiagnosticCollectorVisitor
 
     companion object {
-        const val SUPPRESS_ALL_INFOS = "infos"
-        const val SUPPRESS_ALL_WARNINGS = "warnings"
-        const val SUPPRESS_ALL_ERRORS = "errors"
+        const konst SUPPRESS_ALL_INFOS = "infos"
+        const konst SUPPRESS_ALL_WARNINGS = "warnings"
+        const konst SUPPRESS_ALL_ERRORS = "errors"
 
-        private val SUPPRESS_NAMES_NAME = Name.identifier("names")
+        private konst SUPPRESS_NAMES_NAME = Name.identifier("names")
 
         private fun correctDiagnosticCase(diagnostic: String): String = when (diagnostic) {
             SUPPRESS_ALL_INFOS, SUPPRESS_ALL_WARNINGS, SUPPRESS_ALL_ERRORS -> diagnostic
@@ -51,17 +51,17 @@ abstract class AbstractDiagnosticCollector(
             var result: MutableList<String>? = null
 
             for (annotation in annotationContainer.annotations) {
-                val type = annotation.annotationTypeRef.coneType as? ConeClassLikeType ?: continue
+                konst type = annotation.annotationTypeRef.coneType as? ConeClassLikeType ?: continue
                 if (type.lookupTag.classId != StandardClassIds.Annotations.Suppress) continue
-                val argumentValues = annotation.findArgumentByName(SUPPRESS_NAMES_NAME)?.unwrapVarargValue() ?: continue
+                konst argumentValues = annotation.findArgumentByName(SUPPRESS_NAMES_NAME)?.unwrapVarargValue() ?: continue
 
                 for (argumentValue in argumentValues) {
-                    val value = (argumentValue as? FirConstExpression<*>)?.value as? String ?: continue
+                    konst konstue = (argumentValue as? FirConstExpression<*>)?.konstue as? String ?: continue
 
                     if (result == null) {
                         result = mutableListOf()
                     }
-                    result.add(correctDiagnosticCase(value))
+                    result.add(correctDiagnosticCase(konstue))
                 }
             }
 

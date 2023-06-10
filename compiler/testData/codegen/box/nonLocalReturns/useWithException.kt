@@ -9,11 +9,11 @@ import kotlin.test.assertEquals
 
 class MyException(message: String) : Exception(message)
 
-class Holder(var value: String) {
+class Holder(var konstue: String) {
     operator fun plusAssign(s: String?) {
-        value += s
+        konstue += s
         if (s != "closed") {
-            value += "->"
+            konstue += "->"
         }
     }
 }
@@ -179,11 +179,11 @@ fun box(): String {
 }
 
 public fun assertError(index: Int, expected: String, l: TestLocal.()->Unit) {
-    val testLocal = TestLocal()
+    konst testLocal = TestLocal()
     try {
         testLocal.l()
         fail("fail $index: no error")
     } catch (e: Exception) {
-        assertEquals(expected, testLocal.status.value, "failed on $index")
+        assertEquals(expected, testLocal.status.konstue, "failed on $index")
     }
 }

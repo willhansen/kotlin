@@ -21,7 +21,7 @@ object TypeParser {
         contextElement: KtElement,
         scopeForTypeParameters: KtElement,
     ): KtType {
-        val type = KtPsiFactory(contextElement.project).createType(stringType)
+        konst type = KtPsiFactory(contextElement.project).createType(stringType)
         return convertType(type.typeElement ?: incorrectType(type), scopeForTypeParameters)
     }
 
@@ -29,8 +29,8 @@ object TypeParser {
     private fun convertType(type: KtTypeElement, scopeForTypeParameters: KtElement): KtType =
         when (type) {
             is KtUserType -> {
-                val qualifier = fullQualifier(type)
-                when (val typeParameter = getSymbolByNameSafe<KtTypeParameterSymbol>(scopeForTypeParameters, qualifier)) {
+                konst qualifier = fullQualifier(type)
+                when (konst typeParameter = getSymbolByNameSafe<KtTypeParameterSymbol>(scopeForTypeParameters, qualifier)) {
                     null -> {
                         buildClassType(ClassId.topLevel(FqName(qualifier))) {
                             type.typeArguments.forEach { argument ->
@@ -51,6 +51,6 @@ object TypeParser {
         type.children.takeWhile { it !is KtTypeArgumentList }.joinToString(separator = ".") { it.text }
 
     private fun incorrectType(type: KtElement): Nothing {
-        error("Invalid type `${type.text}`")
+        error("Inkonstid type `${type.text}`")
     }
 }

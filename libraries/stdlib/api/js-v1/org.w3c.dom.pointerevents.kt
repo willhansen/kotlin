@@ -4,34 +4,34 @@
 /*∆*/ public open external class PointerEvent : org.w3c.dom.events.MouseEvent {
 /*∆*/     public constructor PointerEvent(type: kotlin.String, eventInitDict: org.w3c.dom.pointerevents.PointerEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val height: kotlin.Double { get; }
+/*∆*/     public open konst height: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val isPrimary: kotlin.Boolean { get; }
+/*∆*/     public open konst isPrimary: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val pointerId: kotlin.Int { get; }
+/*∆*/     public open konst pointerId: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val pointerType: kotlin.String { get; }
+/*∆*/     public open konst pointerType: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val pressure: kotlin.Float { get; }
+/*∆*/     public open konst pressure: kotlin.Float { get; }
 /*∆*/ 
-/*∆*/     public open val tangentialPressure: kotlin.Float { get; }
+/*∆*/     public open konst tangentialPressure: kotlin.Float { get; }
 /*∆*/ 
-/*∆*/     public open val tiltX: kotlin.Int { get; }
+/*∆*/     public open konst tiltX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val tiltY: kotlin.Int { get; }
+/*∆*/     public open konst tiltY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val twist: kotlin.Int { get; }
+/*∆*/     public open konst twist: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val width: kotlin.Double { get; }
+/*∆*/     public open konst width: kotlin.Double { get; }
 /*∆*/ 
 /*∆*/     public companion object of PointerEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 

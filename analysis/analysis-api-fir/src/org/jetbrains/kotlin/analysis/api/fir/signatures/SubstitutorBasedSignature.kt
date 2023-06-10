@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.analysis.api.fir.signatures
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutor
 
 internal interface SubstitutorBasedSignature {
-    val coneSubstitutor: ConeSubstitutor
+    konst coneSubstitutor: ConeSubstitutor
 }

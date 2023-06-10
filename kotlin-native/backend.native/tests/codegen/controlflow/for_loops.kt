@@ -62,9 +62,9 @@ import kotlin.test.*
     println()
 
     // Without constants
-    val a = 0
-    val b = 4
-    val s = 2
+    konst a = 0
+    konst b = 4
+    konst s = 2
     for (i in a..b step s) {
         print(i)
     }

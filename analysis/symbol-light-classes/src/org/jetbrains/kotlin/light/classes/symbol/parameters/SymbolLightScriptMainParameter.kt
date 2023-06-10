@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightClassM
 import org.jetbrains.kotlin.psi.KtParameter
 
 internal class SymbolLightScriptMainParameter(
-    private val name: String,
-    private val containingMethod: SymbolLightMethodForScript,
+    private konst name: String,
+    private konst containingMethod: SymbolLightMethodForScript,
 ) : SymbolLightParameterBase(containingMethod) {
 
-    override val kotlinOrigin: KtParameter? = null
+    override konst kotlinOrigin: KtParameter? = null
     override fun getName(): String = name
 
     override fun getNameIdentifier(): PsiIdentifier = KtLightIdentifier(this, ktDeclaration = null, name)
@@ -37,7 +37,7 @@ internal class SymbolLightScriptMainParameter(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
         )

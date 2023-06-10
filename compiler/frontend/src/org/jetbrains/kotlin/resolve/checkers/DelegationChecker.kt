@@ -37,8 +37,8 @@ class DelegationChecker : DeclarationChecker {
 
         for (specifier in declaration.superTypeListEntries) {
             if (specifier is KtDelegatedSuperTypeEntry) {
-                val superType = specifier.typeReference?.let { context.trace.get(BindingContext.TYPE, it) } ?: continue
-                val superTypeDescriptor = superType.constructor.declarationDescriptor as? ClassDescriptor ?: continue
+                konst superType = specifier.typeReference?.let { context.trace.get(BindingContext.TYPE, it) } ?: continue
+                konst superTypeDescriptor = superType.constructor.declarationDescriptor as? ClassDescriptor ?: continue
 
                 for ((delegated, delegatedTo) in DelegationResolver.getDelegates(descriptor, superTypeDescriptor)) {
                     checkDescriptor(declaration, delegated, delegatedTo, context.trace)
@@ -53,12 +53,12 @@ class DelegationChecker : DeclarationChecker {
         delegatedToDescriptor: CallableMemberDescriptor,
         diagnosticHolder: DiagnosticSink
     ) {
-        val reachableFromDelegated =
+        konst reachableFromDelegated =
             OverridingUtil.filterOutOverridden(
                 DescriptorUtils.getAllOverriddenDescriptors(delegatedDescriptor).filter { it.kind.isReal }.toSet()
             ) - DescriptorUtils.unwrapFakeOverride(delegatedToDescriptor).original
 
-        val nonAbstractReachable = reachableFromDelegated.filter { it.modality == Modality.OPEN }
+        konst nonAbstractReachable = reachableFromDelegated.filter { it.modality == Modality.OPEN }
 
         if (nonAbstractReachable.isNotEmpty()) {
             /*In case of MANY_IMPL_MEMBER_NOT_IMPLEMENTED error there could be several elements otherwise only one*/

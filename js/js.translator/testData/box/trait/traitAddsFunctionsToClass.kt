@@ -13,10 +13,10 @@ interface Test {
 
 
 class A() : Test {
-    val string = "TEST"
-    fun value(): String {
+    konst string = "TEST"
+    fun konstue(): String {
         return addBar(addFoo(string))
     }
 }
 
-fun box() = if (A().value() == "TESTFOOBAR") "OK" else "fail"
+fun box() = if (A().konstue() == "TESTFOOBAR") "OK" else "fail"

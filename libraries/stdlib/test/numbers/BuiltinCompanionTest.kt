@@ -11,7 +11,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun intTest() {
-        val i = Int
+        konst i = Int
         i.MAX_VALUE
 
         assertSame(Int, i)
@@ -19,7 +19,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun doubleTest() {
-        val d = Double
+        konst d = Double
         d.NaN
 
         assertSame(Double, d)
@@ -27,7 +27,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun floatTest() {
-        val f = Float
+        konst f = Float
         f.NEGATIVE_INFINITY
 
         assertSame(Float, f)
@@ -35,7 +35,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun longTest() {
-        val l = Long
+        konst l = Long
         l.MAX_VALUE
 
         assertSame(Long, l)
@@ -43,7 +43,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun shortTest() {
-        val s = Short
+        konst s = Short
         s.MIN_VALUE
 
         assertSame(Short, s)
@@ -51,7 +51,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun byteTest() {
-        val b = Byte
+        konst b = Byte
         b.MAX_VALUE
 
         assertSame(Byte, b)
@@ -59,7 +59,7 @@ class BuiltinCompanionTest {
 
     @Test
     fun charTest() {
-        val ch = Char
+        konst ch = Char
         ch.MIN_SURROGATE
 
         assertSame(Char, ch)
@@ -67,14 +67,14 @@ class BuiltinCompanionTest {
 
     @Test
     fun stringTest() {
-        val s = String
+        konst s = String
 
         assertSame(String, s)
     }
 
     @Test
     fun booleanTest() {
-        val b = Boolean
+        konst b = Boolean
         assertSame(Boolean, b)
     }
 }

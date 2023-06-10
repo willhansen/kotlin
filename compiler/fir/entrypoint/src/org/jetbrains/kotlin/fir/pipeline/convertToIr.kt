@@ -27,19 +27,19 @@ import org.jetbrains.kotlin.ir.declarations.impl.IrFactoryImpl
 import org.jetbrains.kotlin.ir.util.IdSignatureComposer
 import org.jetbrains.kotlin.ir.util.KotlinMangler
 
-data class FirResult(val outputs: List<ModuleCompilerAnalyzedOutput>)
+data class FirResult(konst outputs: List<ModuleCompilerAnalyzedOutput>)
 
 data class ModuleCompilerAnalyzedOutput(
-    val session: FirSession,
-    val scopeSession: ScopeSession,
-    val fir: List<FirFile>
+    konst session: FirSession,
+    konst scopeSession: ScopeSession,
+    konst fir: List<FirFile>
 )
 
 data class Fir2IrActualizedResult(
-    val irModuleFragment: IrModuleFragment,
-    val components: Fir2IrComponents,
-    val pluginContext: Fir2IrPluginContext,
-    val irActualizedResult: IrActualizedResult?,
+    konst irModuleFragment: IrModuleFragment,
+    konst components: Fir2IrComponents,
+    konst pluginContext: Fir2IrPluginContext,
+    konst irActualizedResult: IrActualizedResult?,
 )
 
 fun FirResult.convertToIrAndActualizeForJvm(
@@ -60,7 +60,7 @@ fun FirResult.convertToIrAndActualizeForJvm(
 )
 
 fun signatureComposerForJvmFir2Ir(generateSignatures: Boolean): IdSignatureComposer {
-    val mangler = JvmDescriptorMangler(null)
+    konst mangler = JvmDescriptorMangler(null)
     return if (generateSignatures) {
         JvmIdSignatureDescriptor(mangler)
     } else {
@@ -80,10 +80,10 @@ fun FirResult.convertToIrAndActualize(
     diagnosticReporter: DiagnosticReporter,
     fir2IrResultPostCompute: Fir2IrResult.() -> Unit = {},
 ): Fir2IrActualizedResult {
-    val fir2IrResult: Fir2IrResult
-    val actualizationResult: IrActualizedResult?
+    konst fir2IrResult: Fir2IrResult
+    konst actualizationResult: IrActualizedResult?
 
-    val commonMemberStorage = Fir2IrCommonMemberStorage(signatureComposer, firMangler)
+    konst commonMemberStorage = Fir2IrCommonMemberStorage(signatureComposer, firMangler)
 
     when (outputs.size) {
         0 -> error("No modules found")
@@ -103,10 +103,10 @@ fun FirResult.convertToIrAndActualize(
             actualizationResult = null
         }
         else -> {
-            val platformOutput = outputs.last()
-            val commonOutputs = outputs.dropLast(1)
+            konst platformOutput = outputs.last()
+            konst commonOutputs = outputs.dropLast(1)
             var irBuiltIns: IrBuiltInsOverFir? = null
-            val commonIrOutputs = commonOutputs.map {
+            konst commonIrOutputs = commonOutputs.map {
                 it.convertToIr(
                     fir2IrExtensions,
                     fir2IrConfiguration,
@@ -145,7 +145,7 @@ fun FirResult.convertToIrAndActualize(
         }
     }
 
-    val (irModuleFragment, components, pluginContext) = fir2IrResult
+    konst (irModuleFragment, components, pluginContext) = fir2IrResult
     return Fir2IrActualizedResult(irModuleFragment, components, pluginContext, actualizationResult)
 }
 

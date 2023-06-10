@@ -2,9 +2,9 @@
 package foo
 
 fun box(): String {
-    val a = "abc"
-    val b = "abc"
-    val c = "def"
+    konst a = "abc"
+    konst b = "abc"
+    konst c = "def"
 
     if (a != b) return "fail1"
     if (a == c) return "fail2"

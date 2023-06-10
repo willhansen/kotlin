@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 class ModuleCoordinatesTest : AbstractSerializationTest<IdeaKpmModuleCoordinates>() {
 
-    override fun serialize(value: IdeaKpmModuleCoordinates) = value.toByteArray()
+    override fun serialize(konstue: IdeaKpmModuleCoordinates) = konstue.toByteArray()
     override fun deserialize(data: ByteArray) = IdeaKpmModuleCoordinates(data)
 
     @Test

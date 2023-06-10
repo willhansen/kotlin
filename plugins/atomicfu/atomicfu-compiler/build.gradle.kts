@@ -9,24 +9,24 @@ plugins {
     id("jps-compatible")
 }
 
-val antLauncherJar by configurations.creating
-val testJsRuntime by configurations.creating {
+konst antLauncherJar by configurations.creating
+konst testJsRuntime by configurations.creating {
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(KotlinUsages.KOTLIN_RUNTIME))
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
     }
 }
 
-val atomicfuJsClasspath by configurations.creating {
+konst atomicfuJsClasspath by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
         attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, KotlinJsCompilerAttribute.ir)
     }
 }
 
-val atomicfuJvmClasspath by configurations.creating
+konst atomicfuJvmClasspath by configurations.creating
 
-val atomicfuJsIrRuntimeForTests by configurations.creating {
+konst atomicfuJsIrRuntimeForTests by configurations.creating {
     attributes {
         attribute(KotlinPlatformType.attribute, KotlinPlatformType.js)
         attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, KotlinJsCompilerAttribute.ir)
@@ -112,9 +112,9 @@ projectTest(jUnitMode = JUnitMode.JUnit5) {
     dependsOn(":dist")
     dependsOn(atomicfuJsIrRuntimeForTests)
 
-    val localAtomicfuJsIrRuntimeForTests: FileCollection = atomicfuJsIrRuntimeForTests
-    val localAtomicfuJsClasspath: FileCollection = atomicfuJsClasspath
-    val localAtomicfuJvmClasspath: FileCollection = atomicfuJvmClasspath
+    konst localAtomicfuJsIrRuntimeForTests: FileCollection = atomicfuJsIrRuntimeForTests
+    konst localAtomicfuJsClasspath: FileCollection = atomicfuJsClasspath
+    konst localAtomicfuJvmClasspath: FileCollection = atomicfuJvmClasspath
 
     doFirst {
         systemProperty("atomicfuJsIrRuntimeForTests.classpath", localAtomicfuJsIrRuntimeForTests.asPath)

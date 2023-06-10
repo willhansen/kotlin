@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.utils.SmartList
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater
 
 internal class GranularAnnotationsBox(
-    private val annotationsProvider: AnnotationsProvider,
-    private val additionalAnnotationsProvider: AdditionalAnnotationsProvider = EmptyAdditionalAnnotationsProvider,
-    private val annotationFilter: AnnotationFilter = AlwaysAllowedAnnotationFilter,
+    private konst annotationsProvider: AnnotationsProvider,
+    private konst additionalAnnotationsProvider: AdditionalAnnotationsProvider = EmptyAdditionalAnnotationsProvider,
+    private konst annotationFilter: AnnotationFilter = AlwaysAllowedAnnotationFilter,
 ) : AnnotationsBox {
     @Volatile
     private var cachedAnnotations: Collection<PsiAnnotation>? = null
@@ -24,16 +24,16 @@ internal class GranularAnnotationsBox(
     private fun getOrComputeCachedAnnotations(owner: PsiModifierList): Collection<PsiAnnotation> {
         cachedAnnotations?.let { return it }
 
-        val annotations = annotationsProvider.annotationInfos().mapNotNullTo(SmartList<PsiAnnotation>()) { applicationInfo ->
+        konst annotations = annotationsProvider.annotationInfos().mapNotNullTo(SmartList<PsiAnnotation>()) { applicationInfo ->
             applicationInfo.classId?.let { _ ->
                 SymbolLightLazyAnnotation(annotationsProvider, applicationInfo, owner)
             }
         }
 
-        val foundQualifiers = annotations.mapNotNullTo(hashSetOf()) { it.qualifiedName }
+        konst foundQualifiers = annotations.mapNotNullTo(hashSetOf()) { it.qualifiedName }
         additionalAnnotationsProvider.addAllAnnotations(annotations, foundQualifiers, owner)
 
-        val resultAnnotations = annotationFilter.filtered(annotations)
+        konst resultAnnotations = annotationFilter.filtered(annotations)
         fieldUpdater.compareAndSet(this, null, resultAnnotations)
 
         return getOrComputeCachedAnnotations(owner)
@@ -56,7 +56,7 @@ internal class GranularAnnotationsBox(
         }
 
         specialAnnotationsListWithSafeArgumentsResolve[qualifiedName]?.let { specialAnnotationClassId ->
-            val annotationApplication = annotationsProvider[specialAnnotationClassId].firstOrNull() ?: return null
+            konst annotationApplication = annotationsProvider[specialAnnotationClassId].firstOrNull() ?: return null
             return SymbolLightLazyAnnotation(annotationsProvider, annotationApplication, owner)
         }
 
@@ -74,7 +74,7 @@ internal class GranularAnnotationsBox(
             return annotations.any { it.qualifiedName == qualifiedName }
         }
 
-        val specialAnnotationClassId = specialAnnotationsList[qualifiedName]
+        konst specialAnnotationClassId = specialAnnotationsList[qualifiedName]
         return if (specialAnnotationClassId != null) {
             specialAnnotationClassId in annotationsProvider
         } else {
@@ -83,7 +83,7 @@ internal class GranularAnnotationsBox(
     }
 
     companion object {
-        private val fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
+        private konst fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
             /* tclass = */ GranularAnnotationsBox::class.java,
             /* vclass = */ Collection::class.java,
             /* fieldName = */ "cachedAnnotations",
@@ -94,14 +94,14 @@ internal class GranularAnnotationsBox(
          *
          * @see org.jetbrains.kotlin.fir.resolve.transformers.plugin.CompilerRequiredAnnotationsHelper
          */
-        private val specialAnnotationsListWithSafeArgumentsResolve: Map<String, ClassId> = listOf(
+        private konst specialAnnotationsListWithSafeArgumentsResolve: Map<String, ClassId> = listOf(
             StandardClassIds.Annotations.JvmRecord,
         ).associateBy { it.asFqNameString() }
 
         /**
          * @see org.jetbrains.kotlin.fir.resolve.transformers.plugin.CompilerRequiredAnnotationsHelper
          */
-        private val specialAnnotationsList: Map<String, ClassId> = listOf(
+        private konst specialAnnotationsList: Map<String, ClassId> = listOf(
             StandardClassIds.Annotations.Deprecated,
             StandardClassIds.Annotations.DeprecatedSinceKotlin,
             StandardClassIds.Annotations.WasExperimental,

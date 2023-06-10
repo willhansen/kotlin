@@ -23,17 +23,17 @@ enum class PrimitiveInteropType {
 }
 
 fun FileWriter.generateAllocWithValue(type: PrimitiveInteropType) {
-    val typeName = type.name
+    konst typeName = type.name
 
     appendLine(
         """
         /**
-         * Allocates variable with given value type and initializes it with given value.
+         * Allocates variable with given konstue type and initializes it with given konstue.
          */
         @Suppress("FINAL_UPPER_BOUND")
         @ExperimentalForeignApi
-        public fun <T : $typeName> NativePlacement.alloc(value: T): ${typeName}VarOf<T> =
-                alloc<${typeName}VarOf<T>> { this.value = value }
+        public fun <T : $typeName> NativePlacement.alloc(konstue: T): ${typeName}VarOf<T> =
+                alloc<${typeName}VarOf<T>> { this.konstue = konstue }
     """.trimIndent()
     )
 }
@@ -42,7 +42,7 @@ fun generateUtils(targetDir: File) {
     FileWriter(targetDir.resolve("_UtilsGenerated.kt")).use { writer ->
         writer.generateHeader()
 
-        for (type in PrimitiveInteropType.values()) {
+        for (type in PrimitiveInteropType.konstues()) {
             writer.generateAllocWithValue(type)
             writer.appendLine()
         }
@@ -50,7 +50,7 @@ fun generateUtils(targetDir: File) {
 }
 
 fun main() {
-    val targetDir = File("kotlin-native/Interop/Runtime/src/main/kotlin/kotlinx/cinterop")
+    konst targetDir = File("kotlin-native/Interop/Runtime/src/main/kotlin/kotlinx/cinterop")
 
     generateUtils(targetDir)
 }

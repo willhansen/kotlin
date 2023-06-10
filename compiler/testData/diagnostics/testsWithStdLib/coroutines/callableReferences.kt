@@ -10,21 +10,21 @@ class A {
 suspend fun A.ext() {}
 
 fun test1(a: A) {
-    val x = ::foo
+    konst x = ::foo
 
-    val y1 = a::member
-    val y2 = A::member
+    konst y1 = a::member
+    konst y2 = A::member
 
-    val z1 = a::ext
-    val z2 = A::ext
+    konst z1 = a::ext
+    konst z2 = A::ext
 }
 
 suspend fun test2(a: A) {
-    val x = ::foo
+    konst x = ::foo
 
-    val y1 = a::member
-    val y2 = A::member
+    konst y1 = a::member
+    konst y2 = A::member
 
-    val z1 = a::ext
-    val z2 = A::ext
+    konst z1 = a::ext
+    konst z2 = A::ext
 }

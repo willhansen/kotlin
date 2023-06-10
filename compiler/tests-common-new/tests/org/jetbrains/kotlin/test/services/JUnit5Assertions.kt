@@ -15,11 +15,11 @@ import java.io.IOException
 import org.junit.jupiter.api.Assertions as JUnit5PlatformAssertions
 
 object JUnit5Assertions : AssertionsService() {
-    val isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
+    konst isTeamCityBuild: Boolean = System.getenv("TEAMCITY_VERSION") != null
 
     override fun assertEqualsToFile(expectedFile: File, actual: String, sanitizer: (String) -> String, message: () -> String) {
         try {
-            val actualText = actual.trim { it <= ' ' }.convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
+            konst actualText = actual.trim { it <= ' ' }.convertLineSeparators().trimTrailingWhitespacesAndAddNewlineAtEOF()
             if (!expectedFile.exists()) {
                 if (isTeamCityBuild) {
                     org.junit.jupiter.api.fail("Expected data file did not exist `$expectedFile`")
@@ -29,8 +29,8 @@ object JUnit5Assertions : AssertionsService() {
                     org.junit.jupiter.api.fail("Expected data file did not exist. Generating: $expectedFile")
                 }
             }
-            val expected = expectedFile.readText().convertLineSeparators()
-            val expectedText = expected.trim { it <= ' ' }.trimTrailingWhitespacesAndAddNewlineAtEOF()
+            konst expected = expectedFile.readText().convertLineSeparators()
+            konst expectedText = expected.trim { it <= ' ' }.trimTrailingWhitespacesAndAddNewlineAtEOF()
             if (sanitizer.invoke(expectedText) != sanitizer.invoke(actualText)) {
                 throw FileComparisonFailure(
                     "${message()}: ${expectedFile.name}",
@@ -50,12 +50,12 @@ object JUnit5Assertions : AssertionsService() {
         JUnit5PlatformAssertions.assertNotEquals(expected, actual, message)
     }
 
-    override fun assertTrue(value: Boolean, message: (() -> String)?) {
-        JUnit5PlatformAssertions.assertTrue(value, message)
+    override fun assertTrue(konstue: Boolean, message: (() -> String)?) {
+        JUnit5PlatformAssertions.assertTrue(konstue, message)
     }
 
-    override fun assertFalse(value: Boolean, message: (() -> String)?) {
-        JUnit5PlatformAssertions.assertFalse(value, message)
+    override fun assertFalse(konstue: Boolean, message: (() -> String)?) {
+        JUnit5PlatformAssertions.assertFalse(konstue, message)
     }
 
     override fun failAll(exceptions: List<Throwable>) {
@@ -67,8 +67,8 @@ object JUnit5Assertions : AssertionsService() {
         JUnit5PlatformAssertions.assertAll(conditions.map { Executable { it() } })
     }
 
-    override fun assertNotNull(value: Any?, message: (() -> String)?) {
-        JUnit5PlatformAssertions.assertNotNull(value, message)
+    override fun assertNotNull(konstue: Any?, message: (() -> String)?) {
+        JUnit5PlatformAssertions.assertNotNull(konstue, message)
     }
 
     override fun <T> assertSameElements(expected: Collection<T>, actual: Collection<T>, message: (() -> String)?) {

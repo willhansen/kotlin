@@ -12,7 +12,7 @@ import org.junit.Test
 
 class BinaryCoordinatesTest : AbstractSerializationTest<IdeaKpmBinaryCoordinates>() {
 
-    override fun serialize(value: IdeaKpmBinaryCoordinates): ByteArray = value.toByteArray()
+    override fun serialize(konstue: IdeaKpmBinaryCoordinates): ByteArray = konstue.toByteArray()
     override fun deserialize(data: ByteArray): IdeaKpmBinaryCoordinates = IdeaKpmBinaryCoordinates(data)
 
     @Test

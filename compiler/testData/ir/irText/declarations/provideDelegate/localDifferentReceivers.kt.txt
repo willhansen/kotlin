@@ -1,18 +1,18 @@
 class MyClass {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
 }
 
 operator fun MyClass.provideDelegate(host: Any?, p: Any): String {
-  return <this>.<get-value>()
+  return <this>.<get-konstue>()
 }
 
 operator fun String.getValue(receiver: Any?, p: Any): String {
@@ -20,18 +20,18 @@ operator fun String.getValue(receiver: Any?, p: Any): String {
 }
 
 fun box(): String {
-  val testO: String
-    val testO$delegate: String = MyClass(value = "O").provideDelegate(host = null, p = ::testO)
+  konst testO: String
+    konst testO$delegate: String = MyClass(konstue = "O").provideDelegate(host = null, p = ::testO)
     local get(): String {
       return testO$delegate.getValue(receiver = null, p = ::testO)
     }
 
-  val testK: String
-    val testK$delegate: String = "K"
+  konst testK: String
+    konst testK$delegate: String = "K"
     local get(): String {
       return testK$delegate.getValue(receiver = null, p = ::testK)
     }
 
-  val testOK: String = <get-testO>().plus(other = <get-testK>())
+  konst testOK: String = <get-testO>().plus(other = <get-testK>())
   return testOK
 }

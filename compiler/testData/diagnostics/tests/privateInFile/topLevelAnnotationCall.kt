@@ -1,14 +1,14 @@
 // FILE: 1.kt
 package pp
 
-private annotation class A(val s: String)
-private const val foo = "O"
+private annotation class A(konst s: String)
+private const konst foo = "O"
 
 @A(foo)
 fun f1() {}
 
 @A(foo)
-val p1 = ""
+konst p1 = ""
 
 @A(foo)
 class C1
@@ -21,7 +21,7 @@ package pp
 fun f2() {}
 
 @<!INVISIBLE_MEMBER, INVISIBLE_REFERENCE!>A<!>(<!INVISIBLE_MEMBER!>foo<!>)
-val p2 = ""
+konst p2 = ""
 
 @<!INVISIBLE_MEMBER, INVISIBLE_REFERENCE!>A<!>(<!INVISIBLE_MEMBER!>foo<!>)
 class C2

@@ -5,7 +5,7 @@ open annotation class ModuleInfo : Annotation {
   // CHECK:
   //   Mangled name: ModuleInfo{}keyBind
   //   Public signature: /ModuleInfo.keyBind|-3946407517690370511[0]
-  val keyBind: Int
+  konst keyBind: Int
     // CHECK JVM_IR:
     //   Mangled name: ModuleInfo#<get-keyBind>(){}kotlin.Int
     //   Public signature: /ModuleInfo.keyBind.<get-keyBind>|-5105783608349623557[0]

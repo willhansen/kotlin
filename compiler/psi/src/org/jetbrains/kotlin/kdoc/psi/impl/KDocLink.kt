@@ -25,7 +25,7 @@ class KDocLink(node: ASTNode) : KtElementImpl(node) {
     fun getLinkText(): String = getLinkTextRange().substring(text)
 
     fun getLinkTextRange(): TextRange {
-        val text = text
+        konst text = text
         if (text.startsWith('[') && text.endsWith(']')) {
             return TextRange(1, text.length - 1)
         }
@@ -36,7 +36,7 @@ class KDocLink(node: ASTNode) : KtElementImpl(node) {
      * If this link is the subject of a tag, returns the tag. Otherwise, returns null.
      */
     fun getTagIfSubject(): KDocTag? {
-        val tag = getStrictParentOfType<KDocTag>()
+        konst tag = getStrictParentOfType<KDocTag>()
         return if (tag != null && tag.getSubjectLink() == this) tag else null
     }
 }

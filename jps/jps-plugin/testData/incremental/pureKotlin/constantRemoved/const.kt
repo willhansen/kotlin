@@ -1,4 +1,4 @@
 package test
 
-const val FOO = "foo"
-const val BAR = "bar"
+const konst FOO = "foo"
+const konst BAR = "bar"

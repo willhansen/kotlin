@@ -6,10 +6,10 @@
 // FILE: lib.kt
 
 @JsExport
-val regularValueProperty: String = "regularValueProperty"
+konst regularValueProperty: String = "regularValueProperty"
 
 @JsExport
-val regularPropertyGetter: String
+konst regularPropertyGetter: String
     get() = "regularPropertyGetter"
 
 @JsExport
@@ -18,7 +18,7 @@ var regularVariableProperty: String = "regularVariableProperty"
 @JsExport
 var regularVariableGetterWithSetter: String = "regularVariableGetterWithSetter"
     get() = "$field by custom getter"
-    set(value) { field = "$value set by custom setter" }
+    set(konstue) { field = "$konstue set by custom setter" }
 
 // FILE: entry.mjs
 // ENTRY_ES_MODULE
@@ -32,16 +32,16 @@ import {
 
 export function box() {
     if (typeof regularValueProperty.get !== "function" || regularValueProperty.get() !== "regularValueProperty") {
-        return "Fail: wrongly exported getter for regular `val` property"
+        return "Fail: wrongly exported getter for regular `konst` property"
     }
     if (typeof regularValueProperty.set !== "undefined") {
-        return "Fail: wrongly exported setter for regular `val` property"
+        return "Fail: wrongly exported setter for regular `konst` property"
     }
     if (typeof regularPropertyGetter.get !== "function" || regularPropertyGetter.get() !== "regularPropertyGetter") {
-        return "Fail: wrongly exported getter for a `val` property with custom getter"
+        return "Fail: wrongly exported getter for a `konst` property with custom getter"
     }
     if (typeof regularPropertyGetter.set !== "undefined") {
-        return "Fail: wrongly exported setter for a `val` property with custom getter"
+        return "Fail: wrongly exported setter for a `konst` property with custom getter"
     }
     if (typeof regularVariableProperty.get !== "function" || regularVariableProperty.get() !== "regularVariableProperty") {
         return "Fail: wrongly exported getter for regular `var` property"

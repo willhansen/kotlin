@@ -2,7 +2,7 @@
 package foo
 
 class Test {
-    private val a = object {
+    private konst a = object {
         fun c() = 3
         fun b() = 2
     }

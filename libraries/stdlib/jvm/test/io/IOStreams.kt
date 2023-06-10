@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 class IOStreamsTest {
     @Test fun testGetStreamOfFile() {
-        val tmpFile = @Suppress("DEPRECATION") createTempFile()
+        konst tmpFile = @Suppress("DEPRECATION") createTempFile()
         var writer: Writer? = null
         try {
             writer = tmpFile.outputStream().writer()
@@ -20,7 +20,7 @@ class IOStreamsTest {
         } finally {
             writer?.close()
         }
-        val act: String?
+        konst act: String?
         var reader: BufferedReader? = null
         try {
             reader = tmpFile.inputStream().reader().buffered()
@@ -32,9 +32,9 @@ class IOStreamsTest {
     }
 
     @Test fun testInputStreamIterator() {
-        val x = ByteArray(10) { it.toByte() }
+        konst x = ByteArray(10) { it.toByte() }
 
-        val result = mutableListOf<Byte>()
+        konst result = mutableListOf<Byte>()
 
         x.inputStream().buffered().use { stream ->
             for (b in stream) {
@@ -46,15 +46,15 @@ class IOStreamsTest {
     }
 
     @Test fun readWriteBytes() {
-        val file = @Suppress("DEPRECATION") createTempFile("temp", Random.nextLong().toString())
+        konst file = @Suppress("DEPRECATION") createTempFile("temp", Random.nextLong().toString())
         try {
-            val bytes = Random.nextBytes(256_000)
+            konst bytes = Random.nextBytes(256_000)
 
             file.outputStream().use { outStream ->
                 outStream.write(bytes)
             }
 
-            val inBytes = file.inputStream().use { inStream ->
+            konst inBytes = file.inputStream().use { inStream ->
                 inStream.readBytes()
             }
 

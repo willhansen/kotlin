@@ -5,7 +5,7 @@ class A
 
 <!WRONG_EXTERNAL_DECLARATION!>external var A.bar: String<!>
     get() = definedExternally
-    set(value) = definedExternally
+    set(konstue) = definedExternally
 
-<!WRONG_EXTERNAL_DECLARATION!>external val A.baz: String<!>
+<!WRONG_EXTERNAL_DECLARATION!>external konst A.baz: String<!>
     get() = definedExternally

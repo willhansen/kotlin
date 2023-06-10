@@ -39,7 +39,7 @@ public class J {
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val n = 123
+    konst n = 123
 
     // Null check behavior in string concatenation might change depending on language design decision for KT-36625.
     // Cases below that could be affected by KT-36625 are marked with a comment.

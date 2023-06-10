@@ -28,10 +28,10 @@ else
     PartialLinkageSupportForLowerings.DISABLED
 
 internal class PartialLinkageSupportForLoweringsImpl(
-    private val builtIns: IrBuiltIns,
-    private val logger: PartialLinkageLogger
+    private konst builtIns: IrBuiltIns,
+    private konst logger: PartialLinkageLogger
 ) : PartialLinkageSupportForLowerings {
-    override val isEnabled get() = true
+    override konst isEnabled get() = true
 
     // N.B. errorMessagesRendered is always >= than throwExpressionsGenerated.
     var throwExpressionsGenerated = 0 // Track each generate `throw` expression.
@@ -46,7 +46,7 @@ internal class PartialLinkageSupportForLoweringsImpl(
         file: PLFile,
         doNotLog: Boolean
     ): IrCall {
-        val errorMessage = if (doNotLog)
+        konst errorMessage = if (doNotLog)
             renderLinkageError(partialLinkageCase) // Just render a message.
         else
             renderAndLogLinkageError(partialLinkageCase, element, file) // Render + log with the appropriate severity.
@@ -59,7 +59,7 @@ internal class PartialLinkageSupportForLoweringsImpl(
             type = builtIns.nothingType,
             symbol = builtIns.linkageErrorSymbol,
             typeArgumentsCount = 0,
-            valueArgumentsCount = 1,
+            konstueArgumentsCount = 1,
             origin = IrStatementOrigin.PARTIAL_LINKAGE_RUNTIME_ERROR
         ).apply {
             putValueArgument(0, IrConstImpl.string(startOffset, endOffset, builtIns.stringType, errorMessage))
@@ -67,8 +67,8 @@ internal class PartialLinkageSupportForLoweringsImpl(
     }
 
     fun renderAndLogLinkageError(partialLinkageCase: PartialLinkageCase, element: IrElement, file: PLFile): String {
-        val errorMessage = renderLinkageError(partialLinkageCase)
-        val locationInSourceCode = file.computeLocationForOffset(element.startOffsetOfFirstDenotableIrElement())
+        konst errorMessage = renderLinkageError(partialLinkageCase)
+        konst locationInSourceCode = file.computeLocationForOffset(element.startOffsetOfFirstDenotableIrElement())
 
         logger.log(errorMessage, locationInSourceCode)
 

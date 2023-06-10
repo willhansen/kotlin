@@ -1,7 +1,7 @@
 package
 
-public val barTest: kotlin.Number
-public val test: kotlin.String
+public konst barTest: kotlin.Number
+public konst test: kotlin.String
 public fun foo(): kotlin.Int
 public fun </*0*/ T> foo(): T
 public fun </*0*/ T> foo2(): T

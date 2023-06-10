@@ -4,22 +4,22 @@
 
 interface MyInterface
 
-var value: Any? = null
+var konstue: Any? = null
 
 fun saveValue(a: Any?) {
-    value = a
+    konstue = a
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class MyClass(private val value: Int): MyInterface {
+konstue class MyClass(private konst konstue: Int): MyInterface {
     fun foo(other: MyInterface) {
-        saveValue((other as? MyClass)?.value)
+        saveValue((other as? MyClass)?.konstue)
     }
 }
 
 fun box(): String {
-    val x = MyClass(5)
+    konst x = MyClass(5)
     x.foo(x)
-    if (value != 5) return "FAIL: $value"
+    if (konstue != 5) return "FAIL: $konstue"
     return "OK"
 }

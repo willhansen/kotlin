@@ -2,7 +2,7 @@
 
 package test
 
-class A(val z: Int) {
+class A(konst z: Int) {
     fun calc() = z
 }
 
@@ -15,6 +15,6 @@ inline fun call(p: Int, s: (Int) -> A): Int {
 import test.*
 
 fun box() : String {
-    val call = call(11, ::A)
+    konst call = call(11, ::A)
     return if (call == 11) "OK" else "fail"
 }

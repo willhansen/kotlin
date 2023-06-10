@@ -11,7 +11,7 @@ fun interface INum {
 }
 
 fun box(): String {
-    val num = INum { 42 }
+    konst num = INum { 42 }
     if (num.get() != 42)
         return "Failed"
     return "OK"

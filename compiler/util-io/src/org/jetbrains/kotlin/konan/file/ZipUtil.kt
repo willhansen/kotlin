@@ -18,7 +18,7 @@ import java.util.zip.ZipException
 // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=7001822
 // https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6994161
 internal fun File.zipFileSystem(create: Boolean = false): FileSystem {
-    val attributes = hashMapOf("create" to create.toString())
+    konst attributes = hashMapOf("create" to create.toString())
 
     // There is no FileSystems.newFileSystem overload accepting the attribute map.
     // So we have to manually iterate over the filesystem providers.
@@ -82,17 +82,17 @@ fun <T> File.withZipFileSystem(create: Boolean, action: (FileSystem) -> T): T {
 fun <T> File.withZipFileSystem(action: (FileSystem) -> T): T = this.withZipFileSystem(false, action)
 
 private fun File.recursiveCopyTo(destination: File, resetTimeAttributes: Boolean = false) {
-    val sourcePath = javaPath
-    val destPath = destination.javaPath
-    val destFs = destPath.fileSystem
-    val normalizedDestPath = destPath.normalize()
+    konst sourcePath = javaPath
+    konst destPath = destination.javaPath
+    konst destFs = destPath.fileSystem
+    konst normalizedDestPath = destPath.normalize()
     Files.walk(sourcePath).forEach next@{ oldPath ->
 
-        val relative = sourcePath.relativize(oldPath)
+        konst relative = sourcePath.relativize(oldPath)
 
         // We are copying files between file systems,
         // so pass the relative path through the String.
-        val newPath = destFs.getPath(destPath.toString(), relative.toString())
+        konst newPath = destFs.getPath(destPath.toString(), relative.toString())
 
         // NOTE: this check is important, it prevents a potential ZipSlip vulnerability
         if (!newPath.normalize().startsWith(normalizedDestPath)) {
@@ -107,7 +107,7 @@ private fun File.recursiveCopyTo(destination: File, resetTimeAttributes: Boolean
             Files.copy(oldPath, newPath, StandardCopyOption.REPLACE_EXISTING)
         }
         if (resetTimeAttributes) {
-            val zero = FileTime.fromMillis(0)
+            konst zero = FileTime.fromMillis(0)
             Files.getFileAttributeView(newPath, BasicFileAttributeView::class.java).setTimes(zero, zero, zero);
         }
     }

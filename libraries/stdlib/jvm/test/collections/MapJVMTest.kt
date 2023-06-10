@@ -11,7 +11,7 @@ import kotlin.test.*
 
 class MapJVMTest {
     @Test fun createSortedMap() {
-        val map = sortedMapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
+        konst map = sortedMapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
         assertEquals(1, map["a"])
         assertEquals(2, map["b"])
         assertEquals(3, map["c"])
@@ -19,7 +19,7 @@ class MapJVMTest {
     }
 
     @Test fun createSortedMapWithComparator() {
-        val map = sortedMapOf(compareBy<String> { it.length }.thenBy { it }, Pair("c", 3), Pair("bc", 2), Pair("bd", 4), Pair("abc", 1))
+        konst map = sortedMapOf(compareBy<String> { it.length }.thenBy { it }, Pair("c", 3), Pair("bc", 2), Pair("bd", 4), Pair("abc", 1))
         assertEquals(1, map["abc"])
         assertEquals(2, map["bc"])
         assertEquals(3, map["c"])
@@ -28,8 +28,8 @@ class MapJVMTest {
     }
 
     @Test fun toSortedMap() {
-        val map = mapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
-        val sorted = map.toSortedMap()
+        konst map = mapOf(Pair("c", 3), Pair("b", 2), Pair("a", 1))
+        konst sorted = map.toSortedMap()
         assertEquals(1, sorted["a"])
         assertEquals(2, sorted["b"])
         assertEquals(3, sorted["c"])
@@ -37,8 +37,8 @@ class MapJVMTest {
     }
 
     @Test fun toSortedMapWithComparator() {
-        val map = mapOf(Pair("c", 3), Pair("bc", 2), Pair("bd", 4), Pair("abc", 1))
-        val sorted = map.toSortedMap(compareBy<String> { it.length }.thenBy { it })
+        konst map = mapOf(Pair("c", 3), Pair("bc", 2), Pair("bd", 4), Pair("abc", 1))
+        konst sorted = map.toSortedMap(compareBy<String> { it.length }.thenBy { it })
         assertEquals(listOf("c", "bc", "bd", "abc"), sorted.keys.toList())
         assertEquals(1, sorted["abc"])
         assertEquals(2, sorted["bc"])
@@ -46,26 +46,26 @@ class MapJVMTest {
     }
 
     @Test fun toProperties() {
-        val map = mapOf("a" to "A", "b" to "B")
-        val prop = map.toProperties()
+        konst map = mapOf("a" to "A", "b" to "B")
+        konst prop = map.toProperties()
         assertEquals(2, prop.size)
         assertEquals("A", prop.getProperty("a", "fail"))
         assertEquals("B", prop.getProperty("b", "fail"))
     }
 
     @Test fun iterateAndRemove() {
-        val map = (1..5).associateByTo(linkedMapOf(), { it }, { 'a' + it })
-        val iterator = map.iterator()
+        konst map = (1..5).associateByTo(linkedMapOf(), { it }, { 'a' + it })
+        konst iterator = map.iterator()
         while (iterator.hasNext()) {
             if (iterator.next().key % 2 == 0)
                 iterator.remove()
         }
         assertEquals(listOf(1, 3, 5), map.keys.toList())
-        assertEquals(listOf('b', 'd', 'f'), map.values.toList())
+        assertEquals(listOf('b', 'd', 'f'), map.konstues.toList())
     }
     
     @Test fun getOrPutFailsOnConcurrentMap() {
-        val map = ConcurrentHashMap<String, Int>()
+        konst map = ConcurrentHashMap<String, Int>()
 
         // not an error anymore
         expect(1) {

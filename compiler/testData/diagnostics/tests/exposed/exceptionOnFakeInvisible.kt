@@ -1,6 +1,6 @@
-// KT-14469: SOE during effective visibility evaluation
+// KT-14469: SOE during effective visibility ekonstuation
 
-abstract class Base(private val v: String)
+abstract class Base(private konst v: String)
 
 fun bar(arg: String) = arg
 

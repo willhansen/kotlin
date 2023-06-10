@@ -16,7 +16,7 @@ class TestClass : Test {
 
 fun box(): String {
     try {
-        val defaultImpls = java.lang.Class.forName(Test::class.java.canonicalName + "\$DefaultImpls")
+        konst defaultImpls = java.lang.Class.forName(Test::class.java.canonicalName + "\$DefaultImpls")
     } catch (e: ClassNotFoundException) {
         return TestClass().test()
     }

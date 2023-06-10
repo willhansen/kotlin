@@ -7,27 +7,27 @@ class P {
         private set
 }
 
-val p = P()
+konst p = P()
 var f = { -> p.<!INVISIBLE_SETTER!>x<!> = 32 }
 
-val o = object {
+konst o = object {
     fun run() {
         p.<!INVISIBLE_SETTER!>x<!> = 4
 
-        val z : Int
+        konst z : Int
         doSmth(<!UNINITIALIZED_VARIABLE!>z<!>)
     }
 }
 
-val g = { ->
-    val x: Int
+konst g = { ->
+    konst x: Int
     doSmth(<!UNINITIALIZED_VARIABLE!>x<!>)
 }
 
 class A {
-    val a : Int = 1
+    konst a : Int = 1
       get() {
-          val x : Int
+          konst x : Int
           doSmth(<!UNINITIALIZED_VARIABLE!>x<!>)
           return field
       }

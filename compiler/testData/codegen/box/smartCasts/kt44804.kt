@@ -1,16 +1,16 @@
 // ISSUE: KT-44804
 // WITH_STDLIB
 
-abstract class AbstractInsnNode(val next: AbstractInsnNode? = null)
+abstract class AbstractInsnNode(konst next: AbstractInsnNode? = null)
 
 class LineNumberNode(next: AbstractInsnNode? = null) : AbstractInsnNode(next) {
-    val line: Int = 1
+    konst line: Int = 1
 }
 
 class LabelNode() : AbstractInsnNode(null)
 
 fun isDeadLineNumber(insn: LineNumberNode, index: Int, frames: Array<out Any?>): Boolean {
-    // Line number node is "dead" if the corresponding line number interval
+    // Line number node is "dead" if the corresponding line number interkonst
     // contains at least one "dead" meaningful instruction and no "live" meaningful instructions.
     var finger: AbstractInsnNode = insn
     var fingerIndex = index
@@ -33,11 +33,11 @@ fun isDeadLineNumber(insn: LineNumberNode, index: Int, frames: Array<out Any?>):
 }
 
 fun box(): String {
-    val node = LineNumberNode(
+    konst node = LineNumberNode(
         LineNumberNode(
             LabelNode()
         )
     )
-    val result = isDeadLineNumber(node, 0, arrayOf(null, null, "aaa", "bbb"))
+    konst result = isDeadLineNumber(node, 0, arrayOf(null, null, "aaa", "bbb"))
     return if (result) "OK" else "fail"
 }

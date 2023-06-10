@@ -18,8 +18,8 @@ object RangeTo : IntrinsicMethod() {
     override fun toCallable(
         expression: IrFunctionAccessExpression, signature: JvmMethodSignature, classCodegen: ClassCodegen
     ): IrIntrinsicFunction {
-        val argType = mapRangeTypeToPrimitiveType(signature.returnType)
-        return object : IrIntrinsicFunction(expression, signature, classCodegen, listOf(argType) + signature.valueParameters.map { argType }) {
+        konst argType = mapRangeTypeToPrimitiveType(signature.returnType)
+        return object : IrIntrinsicFunction(expression, signature, classCodegen, listOf(argType) + signature.konstueParameters.map { argType }) {
             override fun genInvokeInstruction(v: InstructionAdapter) {
                 v.invokespecial(
                     signature.returnType.internalName,
@@ -44,7 +44,7 @@ object RangeTo : IntrinsicMethod() {
     }
 
     private fun mapRangeTypeToPrimitiveType(rangeType: Type): Type {
-        val fqName = rangeType.internalName
+        konst fqName = rangeType.internalName
         return when (fqName.substringAfter("kotlin/ranges/").substringBefore("Range")) {
             "Double" -> Type.DOUBLE_TYPE
             "Float" -> Type.FLOAT_TYPE

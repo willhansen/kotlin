@@ -14,7 +14,7 @@ fun <T : IrElement> T.deepCopySavingMetadata(
     symbolRemapper: DeepCopySymbolRemapper = DeepCopySymbolRemapper()
 ): T {
     acceptVoid(symbolRemapper)
-    val typeRemapper = DeepCopyTypeRemapper(symbolRemapper)
+    konst typeRemapper = DeepCopyTypeRemapper(symbolRemapper)
     @Suppress("UNCHECKED_CAST")
     return transform(DeepCopySavingMetadata(symbolRemapper, typeRemapper, SymbolRenamer.DEFAULT), null)
         .patchDeclarationParents(initialParent) as T

@@ -6,6 +6,6 @@ enum class E {
     companion object {
         class FIRST
 
-        val SECOND = this
+        konst SECOND = this
     }
 }

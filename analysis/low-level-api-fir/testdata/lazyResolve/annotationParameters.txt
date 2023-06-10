@@ -7,13 +7,13 @@ FILE: [ResolvedTo(RAW_FIR)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -22,7 +22,7 @@ FILE: [ResolvedTo(RAW_FIR)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -46,13 +46,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -61,7 +61,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -85,13 +85,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -100,7 +100,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -124,13 +124,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -139,7 +139,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -163,13 +163,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -178,7 +178,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -202,13 +202,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -217,7 +217,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -241,13 +241,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -256,7 +256,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -280,13 +280,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun valueOf([ResolvedTo(RAW_FIR)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(RAW_FIR)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(RAW_FIR)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(RAW_FIR)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -295,7 +295,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -319,13 +319,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -334,7 +334,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -358,13 +358,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -373,7 +373,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -398,13 +398,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -413,7 +413,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val args: A.X = R|<local>/args|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst args: A.X = R|<local>/args|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): A.X
 
     }
@@ -438,13 +438,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -453,7 +453,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for A.X>
 
     }
@@ -478,13 +478,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun valueOf([ResolvedTo(STATUS)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(STATUS)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(STATUS)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(STATUS)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -493,7 +493,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for A.X>
 
     }
@@ -518,13 +518,13 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
         }
 
         public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] enum entry A: R|X|
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] fun values(): R|kotlin/Array<X>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] fun konstues(): R|kotlin/Array<X>| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|X| {
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] fun konstueOf([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/String|): R|X| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] val entries: R|kotlin/enums/EnumEntries<X>|
+        public final static [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=X] konst entries: R|kotlin/enums/EnumEntries<X>|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/enums/EnumEntries<X>|
 
     }
@@ -533,7 +533,7 @@ FILE: [ResolvedTo(IMPORTS)] annotationParameters.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst args: <ERROR TYPE REF: Symbol not found for A.X> = R|<local>/args|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): <ERROR TYPE REF: Symbol not found for A.X>
 
     }

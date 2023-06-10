@@ -13,5 +13,5 @@ public interface A {
 
 // FILE: B.java
 public interface B extends A {
-    void setSomething(int value);
+    void setSomething(int konstue);
 }

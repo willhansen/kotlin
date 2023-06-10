@@ -11,5 +11,5 @@ enum class E { EN }
 
 fun test() {
     A()::<!UNRESOLVED_REFERENCE!>test<!>
-    E.EN::<!UNRESOLVED_REFERENCE!>valueOf<!>
+    E.EN::<!UNRESOLVED_REFERENCE!>konstueOf<!>
 }

@@ -1,8 +1,8 @@
 
 
 sealed class Result {
-    class Failure(val exception: Exception) : Result()
-    class Success(val message: String) : Result()
+    class Failure(konst exception: Exception) : Result()
+    class Success(konst message: String) : Result()
 }
 
 fun box(): String {

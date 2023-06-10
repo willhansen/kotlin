@@ -19,11 +19,11 @@ import org.slf4j.LoggerFactory
 import java.io.OutputStream
 
 open class TCServiceMessagesTestExecutionSpec(
-    val forkOptions: ProcessForkOptions,
-    val args: List<String>,
-    val checkExitCode: Boolean,
-    val clientSettings: TCServiceMessagesClientSettings,
-    val dryRunArgs: List<String>? = null,
+    konst forkOptions: ProcessForkOptions,
+    konst args: List<String>,
+    konst checkExitCode: Boolean,
+    konst clientSettings: TCServiceMessagesClientSettings,
+    konst dryRunArgs: List<String>? = null,
 ) : TestExecutionSpec {
     internal open fun createClient(
         testResultProcessor: TestResultProcessor,
@@ -36,15 +36,15 @@ open class TCServiceMessagesTestExecutionSpec(
     internal open fun showSuppressedOutput() = Unit
 }
 
-private val log = LoggerFactory.getLogger("org.jetbrains.kotlin.gradle.tasks.testing")
+private konst log = LoggerFactory.getLogger("org.jetbrains.kotlin.gradle.tasks.testing")
 
 class TCServiceMessagesTestExecutor(
-    val execHandleFactory: ExecHandleFactory,
-    val buildOperationExecutor: BuildOperationExecutor,
-    val runListeners: MutableList<KotlinTestRunnerListener>,
-    val ignoreTcsmOverflow: Boolean,
-    val ignoreRunFailures: Boolean,
-    val testReporter: MppTestReportHelper,
+    konst execHandleFactory: ExecHandleFactory,
+    konst buildOperationExecutor: BuildOperationExecutor,
+    konst runListeners: MutableList<KotlinTestRunnerListener>,
+    konst ignoreTcsmOverflow: Boolean,
+    konst ignoreRunFailures: Boolean,
+    konst testReporter: MppTestReportHelper,
 ) : TestExecuter<TCServiceMessagesTestExecutionSpec> {
     private lateinit var execHandle: ExecHandle
     var outputReaderThread: Thread? = null
@@ -52,25 +52,25 @@ class TCServiceMessagesTestExecutor(
 
     override fun execute(spec: TCServiceMessagesTestExecutionSpec, testResultProcessor: TestResultProcessor) {
         spec.wrapExecute {
-            val rootOperation = buildOperationExecutor.currentOperation.parentId!!
+            konst rootOperation = buildOperationExecutor.currentOperation.parentId!!
 
-            val client = spec.createClient(testResultProcessor, log, testReporter)
+            konst client = spec.createClient(testResultProcessor, log, testReporter)
 
             if (spec.dryRunArgs != null) {
-                val exec = execHandleFactory.newExec()
+                konst exec = execHandleFactory.newExec()
                 spec.forkOptions.copyTo(exec)
                 exec.args = spec.dryRunArgs
                 execHandle = exec.build()
 
                 execHandle.start()
-                val result: ExecResult = execHandle.waitForFinish()
+                konst result: ExecResult = execHandle.waitForFinish()
                 if (result.exitValue != 0) {
                     error(client.testFailedMessage(execHandle, result.exitValue))
                 }
             }
 
             try {
-                val exec = execHandleFactory.newExec()
+                konst exec = execHandleFactory.newExec()
                 spec.forkOptions.copyTo(exec)
                 exec.args = spec.args
                 exec.standardOutput = TCServiceMessageOutputStreamHandler(
@@ -99,7 +99,7 @@ class TCServiceMessagesTestExecutor(
             } catch (e: Throwable) {
                 spec.showSuppressedOutput()
 
-                val wrappedError = client.ensureNodesClosed(null, e, false) ?: if (e is Error) e else Error(e)
+                konst wrappedError = client.ensureNodesClosed(null, e, false) ?: if (e is Error) e else Error(e)
 
                 runListeners.forEach {
                     it.runningFailure(wrappedError)
@@ -123,6 +123,6 @@ class TCServiceMessagesTestExecutor(
     }
 
     companion object {
-        const val TC_PROJECT_PROPERTY = "teamcity"
+        const konst TC_PROJECT_PROPERTY = "teamcity"
     }
 }

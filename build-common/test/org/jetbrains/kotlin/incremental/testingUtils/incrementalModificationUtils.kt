@@ -21,9 +21,9 @@ import java.io.File
 import java.util.*
 import kotlin.math.max
 
-private val COMMANDS = listOf("new", "touch", "delete")
-private val COMMANDS_AS_REGEX_PART = COMMANDS.joinToString("|")
-private val COMMANDS_AS_MESSAGE_PART = COMMANDS.joinToString("/") { "\".$it\"" }
+private konst COMMANDS = listOf("new", "touch", "delete")
+private konst COMMANDS_AS_REGEX_PART = COMMANDS.joinToString("|")
+private konst COMMANDS_AS_MESSAGE_PART = COMMANDS.joinToString("/") { "\".$it\"" }
 
 enum class TouchPolicy {
     TIMESTAMP,
@@ -31,7 +31,7 @@ enum class TouchPolicy {
 }
 
 fun copyTestSources(testDataDir: File, sourceDestinationDir: File, filePrefix: String): Map<File, File> {
-    val mapping = hashMapOf<File, File>()
+    konst mapping = hashMapOf<File, File>()
     FileUtil.copyDir(testDataDir, sourceDestinationDir) {
         it.isDirectory || it.name.startsWith(filePrefix) && (it.name.endsWith(".kt") || it.name.endsWith(".java"))
     }
@@ -39,7 +39,7 @@ fun copyTestSources(testDataDir: File, sourceDestinationDir: File, filePrefix: S
     for (file in sourceDestinationDir.walk()) {
         if (!file.isFile) continue
 
-        val renamedFile =
+        konst renamedFile =
             if (filePrefix.isEmpty()) {
                 file
             }
@@ -65,13 +65,13 @@ fun getModificationsToPerform(
     fun getModificationsForIteration(newSuffix: String, touchSuffix: String, deleteSuffix: String): List<Modification> {
 
         fun splitToModuleNameAndFileName(fileName: String): Pair<String?, String> {
-            val underscore = fileName.indexOf("_")
+            konst underscore = fileName.indexOf("_")
 
             if (underscore != -1) {
                 var moduleName = fileName.substring(0, underscore)
                 var moduleFileName = fileName.substring(underscore + 1)
                 if (moduleName.all { it.isDigit() }) {
-                    val (moduleName1, moduleFileName1) = moduleFileName.split("_")
+                    konst (moduleName1, moduleFileName1) = moduleFileName.split("_")
                     moduleName = moduleName1
                     moduleFileName = moduleFileName1
                 }
@@ -86,31 +86,31 @@ fun getModificationsToPerform(
             return Pair(null, fileName)
         }
 
-        val rules = mapOf<String, (String, File) -> Modification>(
+        konst rules = mapOf<String, (String, File) -> Modification>(
             newSuffix to { path, file -> ModifyContent(path, file) },
             touchSuffix to { path, _ -> TouchFile(path, touchPolicy) },
             deleteSuffix to { path, _ -> DeleteFile(path) }
         )
 
-        val modifications = ArrayList<Modification>()
+        konst modifications = ArrayList<Modification>()
 
         for (file in testDataDir.walkTopDown()) {
             if (!file.isFile) continue
 
-            val relativeFilePath = file.toRelativeString(testDataDir)
+            konst relativeFilePath = file.toRelativeString(testDataDir)
 
-            val (suffix, createModification) = rules.entries.firstOrNull { file.path.endsWith(it.key) } ?: continue
+            konst (suffix, createModification) = rules.entries.firstOrNull { file.path.endsWith(it.key) } ?: continue
 
-            val (moduleName, fileName) = splitToModuleNameAndFileName(relativeFilePath)
-            val srcDir = moduleName?.let { "$it/src" } ?: "src"
+            konst (moduleName, fileName) = splitToModuleNameAndFileName(relativeFilePath)
+            konst srcDir = moduleName?.let { "$it/src" } ?: "src"
             modifications.add(createModification(srcDir + "/" + fileName.removeSuffix(suffix), file))
         }
 
         return modifications
     }
 
-    val haveFilesWithoutNumbers = testDataDir.walkTopDown().any { it.name.matches(".+\\.($COMMANDS_AS_REGEX_PART)$".toRegex()) }
-    val haveFilesWithNumbers = testDataDir.walkTopDown().any { it.name.matches(".+\\.($COMMANDS_AS_REGEX_PART)\\.\\d+$".toRegex()) }
+    konst haveFilesWithoutNumbers = testDataDir.walkTopDown().any { it.name.matches(".+\\.($COMMANDS_AS_REGEX_PART)$".toRegex()) }
+    konst haveFilesWithNumbers = testDataDir.walkTopDown().any { it.name.matches(".+\\.($COMMANDS_AS_REGEX_PART)\\.\\d+$".toRegex()) }
 
     if (haveFilesWithoutNumbers && haveFilesWithNumbers) {
         throw IllegalStateException("Bad test data format: files ending with both unnumbered and numbered ${COMMANDS_AS_MESSAGE_PART} were found")
@@ -134,21 +134,21 @@ fun getModificationsToPerform(
     }
 }
 
-abstract class Modification(val path: String) {
+abstract class Modification(konst path: String) {
     abstract fun perform(workDir: File, mapping: MutableMap<File, File>): File?
 
     override fun toString(): String = "${this::class.java.simpleName} $path"
 }
 
-class ModifyContent(path: String, val dataFile: File) : Modification(path) {
+class ModifyContent(path: String, konst dataFile: File) : Modification(path) {
     override fun perform(workDir: File, mapping: MutableMap<File, File>): File? {
-        val file = File(workDir, path)
+        konst file = File(workDir, path)
 
-        val oldLastModified = file.lastModified()
+        konst oldLastModified = file.lastModified()
         file.delete()
         dataFile.copyTo(file)
 
-        val newLastModified = file.lastModified()
+        konst newLastModified = file.lastModified()
         if (newLastModified <= oldLastModified) {
             //Mac OS and some versions of Linux truncate timestamp to nearest second
             file.setLastModified(oldLastModified + 1000)
@@ -159,13 +159,13 @@ class ModifyContent(path: String, val dataFile: File) : Modification(path) {
     }
 }
 
-class TouchFile(path: String, private val touchPolicy: TouchPolicy) : Modification(path) {
+class TouchFile(path: String, private konst touchPolicy: TouchPolicy) : Modification(path) {
     override fun perform(workDir: File, mapping: MutableMap<File, File>): File? {
-        val file = File(workDir, path)
+        konst file = File(workDir, path)
 
         when (touchPolicy) {
             TouchPolicy.TIMESTAMP -> {
-                val oldLastModified = file.lastModified()
+                konst oldLastModified = file.lastModified()
                 //Mac OS and some versions of Linux truncate timestamp to nearest second
                 file.setLastModified(max(System.currentTimeMillis(), oldLastModified + 1000))
             }
@@ -180,7 +180,7 @@ class TouchFile(path: String, private val touchPolicy: TouchPolicy) : Modificati
 
 class DeleteFile(path: String) : Modification(path) {
     override fun perform(workDir: File, mapping: MutableMap<File, File>): File? {
-        val fileToDelete = File(workDir, path)
+        konst fileToDelete = File(workDir, path)
         if (!fileToDelete.delete()) {
             throw AssertionError("Couldn't delete $fileToDelete")
         }

@@ -14,10 +14,10 @@ class ClassBaselineBenchmark {
     }
     
     func consumeField() {
-        let value = Value(0)
+        let konstue = Value(0)
         for item in 1...Constants.BENCHMARK_SIZE {
-            value.value = item
-            Blackhole.consume(value)
+            konstue.konstue = item
+            Blackhole.consume(konstue)
         }
     }
     
@@ -40,10 +40,10 @@ class ClassBaselineBenchmark {
     }
     
     func allocateListAndWrite() -> [Value] {
-        let value = Value(0)
+        let konstue = Value(0)
         var list: [Value] = []
         for _ in 1...Constants.BENCHMARK_SIZE {
-            list.append(value)
+            list.append(konstue)
         }
         return list
     }

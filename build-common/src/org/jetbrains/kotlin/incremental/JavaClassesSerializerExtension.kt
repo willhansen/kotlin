@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerial
 
 // It uses BuiltInSerializerProtocol for annotations serialization
 class JavaClassesSerializerExtension : KotlinSerializerExtensionBase(BuiltInSerializerProtocol) {
-    override val metadataVersion: BinaryVersion
+    override konst metadataVersion: BinaryVersion
         get() = JvmMetadataVersion.INVALID_VERSION
 
     override fun serializeClass(
@@ -89,7 +89,7 @@ class JavaClassesSerializerExtension : KotlinSerializerExtensionBase(BuiltInSeri
 
     override fun shouldUseNormalizedVisibility() = true
 
-    override val customClassMembersProducer =
+    override konst customClassMembersProducer =
             object : ClassMembersProducer {
                 override fun getCallableMembers(classDescriptor: ClassDescriptor) =
                         arrayListOf<CallableMemberDescriptor>().apply {

@@ -1,6 +1,6 @@
 // KOTLIN_CONFIGURATION_FLAGS: STRING_CONCAT=indy-with-constants
 // JVM_TARGET: 11
-data class A(val i: Int, val b: Byte, val c: Char, val s: Short, val f: Float, val d: Double, val bo: Boolean, val l: Long)
+data class A(konst i: Int, konst b: Byte, konst c: Char, konst s: Short, konst f: Float, konst d: Double, konst bo: Boolean, konst l: Long)
 
 // 1 INVOKEDYNAMIC makeConcatWithConstants
 // 1 INVOKEDYNAMIC makeConcatWithConstants\(IBCSFDZJ\)Ljava/lang/String;

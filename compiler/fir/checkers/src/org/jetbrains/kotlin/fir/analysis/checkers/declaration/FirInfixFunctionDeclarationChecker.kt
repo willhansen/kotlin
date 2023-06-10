@@ -18,7 +18,7 @@ object FirInfixFunctionDeclarationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if ((declaration as? FirMemberDeclaration)?.status?.isInfix != true) return
         if (declaration is FirSimpleFunction) {
-            if (declaration.valueParameters.size != 1 || !hasExtensionOrDispatchReceiver(declaration, context)) {
+            if (declaration.konstueParameters.size != 1 || !hasExtensionOrDispatchReceiver(declaration, context)) {
                 reporter.reportOn(declaration.source, FirErrors.INAPPLICABLE_INFIX_MODIFIER, context)
             }
             return

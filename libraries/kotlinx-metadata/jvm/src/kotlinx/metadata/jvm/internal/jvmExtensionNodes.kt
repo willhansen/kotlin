@@ -10,30 +10,30 @@ import kotlinx.metadata.*
 import kotlinx.metadata.internal.extensions.*
 import kotlinx.metadata.jvm.*
 
-internal val KmClass.jvm: JvmClassExtension
+internal konst KmClass.jvm: JvmClassExtension
     get() = visitExtensions(JvmClassExtensionVisitor.TYPE) as JvmClassExtension
 
-internal val KmPackage.jvm: JvmPackageExtension
+internal konst KmPackage.jvm: JvmPackageExtension
     get() = visitExtensions(JvmPackageExtensionVisitor.TYPE) as JvmPackageExtension
 
-internal val KmFunction.jvm: JvmFunctionExtension
+internal konst KmFunction.jvm: JvmFunctionExtension
     get() = visitExtensions(JvmFunctionExtensionVisitor.TYPE) as JvmFunctionExtension
 
-internal val KmProperty.jvm: JvmPropertyExtension
+internal konst KmProperty.jvm: JvmPropertyExtension
     get() = visitExtensions(JvmPropertyExtensionVisitor.TYPE) as JvmPropertyExtension
 
-internal val KmConstructor.jvm: JvmConstructorExtension
+internal konst KmConstructor.jvm: JvmConstructorExtension
     get() = visitExtensions(JvmConstructorExtensionVisitor.TYPE) as JvmConstructorExtension
 
-internal val KmTypeParameter.jvm: JvmTypeParameterExtension
+internal konst KmTypeParameter.jvm: JvmTypeParameterExtension
     get() = visitExtensions(JvmTypeParameterExtensionVisitor.TYPE) as JvmTypeParameterExtension
 
-internal val KmType.jvm: JvmTypeExtension
+internal konst KmType.jvm: JvmTypeExtension
     get() = visitExtensions(JvmTypeExtensionVisitor.TYPE) as JvmTypeExtension
 
 
 internal class JvmClassExtension : JvmClassExtensionVisitor(), KmClassExtension {
-    val localDelegatedProperties: MutableList<KmProperty> = ArrayList(0)
+    konst localDelegatedProperties: MutableList<KmProperty> = ArrayList(0)
     var moduleName: String? = null
     var anonymousObjectOriginName: String? = null
     var jvmFlags: Flags = 0
@@ -66,7 +66,7 @@ internal class JvmClassExtension : JvmClassExtensionVisitor(), KmClassExtension 
 }
 
 internal class JvmPackageExtension : JvmPackageExtensionVisitor(), KmPackageExtension {
-    val localDelegatedProperties: MutableList<KmProperty> = ArrayList(0)
+    konst localDelegatedProperties: MutableList<KmProperty> = ArrayList(0)
     var moduleName: String? = null
 
     override fun visitLocalDelegatedProperty(flags: Flags, name: String, getterFlags: Flags, setterFlags: Flags): KmPropertyVisitor =
@@ -157,7 +157,7 @@ internal class JvmConstructorExtension : JvmConstructorExtensionVisitor(), KmCon
 }
 
 internal class JvmTypeParameterExtension : JvmTypeParameterExtensionVisitor(), KmTypeParameterExtension {
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
 
     override fun visitAnnotation(annotation: KmAnnotation) {
         annotations.add(annotation)
@@ -172,7 +172,7 @@ internal class JvmTypeParameterExtension : JvmTypeParameterExtensionVisitor(), K
 
 internal class JvmTypeExtension : JvmTypeExtensionVisitor(), KmTypeExtension {
     var isRaw: Boolean = false
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
 
     override fun visit(isRaw: Boolean) {
         this.isRaw = isRaw

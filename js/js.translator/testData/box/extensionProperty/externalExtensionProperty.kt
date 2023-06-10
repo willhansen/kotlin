@@ -6,7 +6,7 @@ class A {
     fun ok() = "OK"
 }
 
-val A.foo: String
+konst A.foo: String
     get() = ok()
 
 // MODULE: main(lib)

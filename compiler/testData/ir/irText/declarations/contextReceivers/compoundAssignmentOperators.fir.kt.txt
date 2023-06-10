@@ -25,7 +25,7 @@ data class Result {
     when {
       other !is Result -> return false
     }
-    val tmp0_other_with_cast: Result = other as Result
+    konst tmp0_other_with_cast: Result = other as Result
     when {
       EQEQ(arg0 = <this>.#i, arg1 = tmp0_other_with_cast.#i).not() -> return false
     }
@@ -88,7 +88,7 @@ operator fun Result.divAssign($context_receiver_0: Int, other: Result) {
 }
 
 fun box(): String {
-  val result: Result = Result(i = 0)
+  konst result: Result = Result(i = 0)
   with<Int, Unit>(receiver = 1, block = local fun Int.<anonymous>() {
     result.plusAssign($context_receiver_0 = $this$with, other = Result(i = 1).plus($context_receiver_0 = $this$with, other = Result(i = 1)))
     result.minusAssign($context_receiver_0 = $this$with, other = Result(i = 1).minus($context_receiver_0 = $this$with, other = Result(i = 0)))

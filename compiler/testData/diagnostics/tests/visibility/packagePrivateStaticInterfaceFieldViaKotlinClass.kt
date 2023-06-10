@@ -27,8 +27,8 @@ import javapackage.KotlinParentClass
 
 class Child : PublicParentClass() {
     fun foo() {
-        val x = publicStaticField
-        val y = PublicParentClass.publicStaticField
-        val z = KotlinParentClass.<!UNRESOLVED_REFERENCE!>publicStaticField<!>
+        konst x = publicStaticField
+        konst y = PublicParentClass.publicStaticField
+        konst z = KotlinParentClass.<!UNRESOLVED_REFERENCE!>publicStaticField<!>
     }
 }

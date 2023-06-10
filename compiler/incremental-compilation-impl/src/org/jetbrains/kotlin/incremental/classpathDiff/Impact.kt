@@ -57,10 +57,10 @@ internal interface ImpactingClassesResolver {
  */
 internal object AllImpacts : Impact {
 
-    private val allImpacts = listOf(SupertypesInheritorsImpact, ConstantsInCompanionObjectsImpact)
+    private konst allImpacts = listOf(SupertypesInheritorsImpact, ConstantsInCompanionObjectsImpact)
 
     override fun getResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactedSymbolsResolver {
-        val resolvers = allImpacts.map { it.getResolver(allClasses) }
+        konst resolvers = allImpacts.map { it.getResolver(allClasses) }
         return object : ImpactedSymbolsResolver {
             override fun getImpactedClasses(classId: ClassId): Set<ClassId> {
                 return resolvers.flatMapTo(mutableSetOf()) { it.getImpactedClasses(classId) }
@@ -73,7 +73,7 @@ internal object AllImpacts : Impact {
     }
 
     override fun getReverseResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactingClassesResolver {
-        val reverseResolvers = allImpacts.map { it.getReverseResolver(allClasses) }
+        konst reverseResolvers = allImpacts.map { it.getReverseResolver(allClasses) }
         return object : ImpactingClassesResolver {
             override fun getImpactingClasses(classId: ClassId): Set<ClassId> {
                 return reverseResolvers.flatMapTo(mutableSetOf()) { it.getImpactingClasses(classId) }
@@ -89,7 +89,7 @@ internal object AllImpacts : Impact {
 private object SupertypesInheritorsImpact : Impact {
 
     override fun getResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactedSymbolsResolver {
-        val classIdToSubclasses: Map<ClassId, Set<ClassId>> = getClassIdToSubclassesMap(allClasses)
+        konst classIdToSubclasses: Map<ClassId, Set<ClassId>> = getClassIdToSubclassesMap(allClasses)
         return object : ImpactedSymbolsResolver {
             override fun getImpactedClasses(classId: ClassId): Set<ClassId> {
                 return classIdToSubclasses[classId] ?: emptySet()
@@ -106,7 +106,7 @@ private object SupertypesInheritorsImpact : Impact {
     }
 
     override fun getReverseResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactingClassesResolver {
-        val classIdToSupertypesMap: Map<ClassId, Set<ClassId>> = getClassIdToSupertypesMap(allClasses)
+        konst classIdToSupertypesMap: Map<ClassId, Set<ClassId>> = getClassIdToSupertypesMap(allClasses)
         return object : ImpactingClassesResolver {
             override fun getImpactingClasses(classId: ClassId): Set<ClassId> {
                 return classIdToSupertypesMap[classId] ?: emptySet()
@@ -115,7 +115,7 @@ private object SupertypesInheritorsImpact : Impact {
     }
 
     private fun getClassIdToSubclassesMap(allClasses: Iterable<AccessibleClassSnapshot>): Map<ClassId, Set<ClassId>> {
-        val classIdToSubclasses = mutableMapOf<ClassId, MutableSet<ClassId>>()
+        konst classIdToSubclasses = mutableMapOf<ClassId, MutableSet<ClassId>>()
         getClassIdToSupertypesMap(allClasses).forEach { (classId, supertypes) ->
             supertypes.forEach { supertype ->
                 classIdToSubclasses.getOrPut(supertype) { mutableSetOf() }.add(classId)
@@ -125,10 +125,10 @@ private object SupertypesInheritorsImpact : Impact {
     }
 
     private fun getClassIdToSupertypesMap(allClasses: Iterable<AccessibleClassSnapshot>): Map<ClassId, Set<ClassId>> {
-        val classNameToClassId = allClasses.associate { JvmClassName.byClassId(it.classId) to it.classId }
+        konst classNameToClassId = allClasses.associate { JvmClassName.byClassId(it.classId) to it.classId }
         return allClasses.mapNotNull { clazz ->
             // Find supertypes that are within `allClasses`, we don't care about those outside `allClasses` (e.g., `java/lang/Object`)
-            val supertypes = when (clazz) {
+            konst supertypes = when (clazz) {
                 is RegularKotlinClassSnapshot -> clazz.supertypes.mapNotNullTo(mutableSetOf()) { classNameToClassId[it] }
                 is PackageFacadeKotlinClassSnapshot, is MultifileClassKotlinClassSnapshot -> {
                     // These classes may have supertypes (e.g., kotlin/collections/ArraysKt (MULTIFILE_CLASS) extends
@@ -152,30 +152,30 @@ private object SupertypesInheritorsImpact : Impact {
  * Consider the following source file:
  *    class A {
  *       companion object {
- *          const val CONSTANT = 1
+ *          const konst CONSTANT = 1
  *       }
  *    }
  *
  * This source file will compile into 2 .class files:
- *   - `A.Companion.class`'s Kotlin metadata describes the name and type of `CONSTANT` but not its value. Its Java bytecode does not define
+ *   - `A.Companion.class`'s Kotlin metadata describes the name and type of `CONSTANT` but not its konstue. Its Java bytecode does not define
  *     the constant.
  *   - `A.class`'s Kotlin metadata does not contain `CONSTANT`. However, its Java bytecode defines the constant as follows:
  *         public static final int CONSTANT = 1;
  *
- * Therefore, if the value of the constant has changed in the source file, we will only see a change in the Java bytecode of `A.class`, not
+ * Therefore, if the konstue of the constant has changed in the source file, we will only see a change in the Java bytecode of `A.class`, not
  * in `A.Companion.class` or in the Kotlin metadata of either class.
  *
  * Hence, we will need to detect that `A.CONSTANT` impacts `A.Companion.CONSTANT` because if a source file references
- * `A.Companion.CONSTANT`, it will need to be recompiled when `A.CONSTANT`'s value in `A.class` has changed (even though `A.Companion.class`
+ * `A.Companion.CONSTANT`, it will need to be recompiled when `A.CONSTANT`'s konstue in `A.class` has changed (even though `A.Companion.class`
  * has not changed).
  *
- * Note: This corner case only applies to *constants' values* defined in *companion objects* (it does not apply to constants' names and
+ * Note: This corner case only applies to *constants' konstues* defined in *companion objects* (it does not apply to constants' names and
  * types, or top-level constants, or constants in non-companion objects, or inline functions).
  */
 private object ConstantsInCompanionObjectsImpact : Impact {
 
     override fun getResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactedSymbolsResolver {
-        val companionObjectToConstants: Map<ClassId, List<String>> = allClasses.mapNotNull { clazz ->
+        konst companionObjectToConstants: Map<ClassId, List<String>> = allClasses.mapNotNull { clazz ->
             (clazz as? RegularKotlinClassSnapshot)?.constantsInCompanionObject?.let { constants ->
                 // We only care about companion objects that define some constants
                 if (constants.isNotEmpty()) {
@@ -183,7 +183,7 @@ private object ConstantsInCompanionObjectsImpact : Impact {
                 } else null
             }
         }.toMap()
-        val classToCompanionObject: Map<ClassId, ClassId> = companionObjectToConstants.keys.associateBy { companionObject ->
+        konst classToCompanionObject: Map<ClassId, ClassId> = companionObjectToConstants.keys.associateBy { companionObject ->
             // companionObject.parentClassId should be present in `allClasses` as this is a companion object
             companionObject.parentClassId!!
         }
@@ -195,8 +195,8 @@ private object ConstantsInCompanionObjectsImpact : Impact {
 
             override fun getImpactedClassMembers(classMembers: ClassMembers): Set<ClassMembers> {
                 return classToCompanionObject[classMembers.classId]?.let { companionObject ->
-                    val constantsInCompanionObject = companionObjectToConstants[companionObject]!!
-                    val impactedConstants = classMembers.memberNames.intersect(constantsInCompanionObject.toSet())
+                    konst constantsInCompanionObject = companionObjectToConstants[companionObject]!!
+                    konst impactedConstants = classMembers.memberNames.intersect(constantsInCompanionObject.toSet())
                     setOf(ClassMembers(companionObject, impactedConstants))
                 } ?: emptySet()
             }
@@ -204,7 +204,7 @@ private object ConstantsInCompanionObjectsImpact : Impact {
     }
 
     override fun getReverseResolver(allClasses: Iterable<AccessibleClassSnapshot>): ImpactingClassesResolver {
-        val companionObjects: Set<ClassId> = allClasses.mapNotNullTo(mutableSetOf()) { clazz ->
+        konst companionObjects: Set<ClassId> = allClasses.mapNotNullTo(mutableSetOf()) { clazz ->
             (clazz as? RegularKotlinClassSnapshot)?.constantsInCompanionObject?.let { constants ->
                 // We only care about companion objects that define some constants
                 if (constants.isNotEmpty()) clazz.classId else null
@@ -230,12 +230,12 @@ internal object BreadthFirstSearch {
      * The returned set is *inclusive* (it contains the given set + the directly/transitively reachable ones).
      */
     fun <T> findReachableNodes(nodes: Iterable<T>, edgesProvider: (T) -> Iterable<T>): Set<T> {
-        val visitedAndToVisitNodes = nodes.toMutableSet()
-        val nodesToVisit = ArrayDeque(nodes.toSet())
+        konst visitedAndToVisitNodes = nodes.toMutableSet()
+        konst nodesToVisit = ArrayDeque(nodes.toSet())
 
         while (nodesToVisit.isNotEmpty()) {
-            val nodeToVisit = nodesToVisit.removeFirst()
-            val nextNodesToVisit = edgesProvider.invoke(nodeToVisit) - visitedAndToVisitNodes
+            konst nodeToVisit = nodesToVisit.removeFirst()
+            konst nextNodesToVisit = edgesProvider.invoke(nodeToVisit) - visitedAndToVisitNodes
             visitedAndToVisitNodes.addAll(nextNodesToVisit)
             nodesToVisit.addAll(nextNodesToVisit)
         }

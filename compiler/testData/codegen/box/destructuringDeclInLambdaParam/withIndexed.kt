@@ -1,8 +1,8 @@
 // WITH_STDLIB
 data class Station(
-        val id: String?,
-        val name: String,
-        val distance: Int)
+        konst id: String?,
+        konst name: String,
+        konst distance: Int)
 
 fun box(): String {
     var result = ""

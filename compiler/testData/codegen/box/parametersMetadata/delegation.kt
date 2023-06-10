@@ -23,7 +23,7 @@ class KotlinDelegate(impl: KotlinInterface) : KotlinInterface by impl
 class JavaDelegate(impl: JavaInterface) : JavaInterface by impl
 
 private fun check(javaClass: Class<*>) {
-    val pluginMethod = javaClass.getDeclaredMethod("plugin", String::class.java)
+    konst pluginMethod = javaClass.getDeclaredMethod("plugin", String::class.java)
     assertEquals(listOf("id"), pluginMethod.parameters.map { it.name }, "Incorrect parameters for $javaClass")
 }
 

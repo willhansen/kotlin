@@ -1,7 +1,7 @@
 fun test() {
     var x = 1
     run {
-        val obj = object {
+        konst obj = object {
             fun foo() { ++x }
         }
         obj.foo()

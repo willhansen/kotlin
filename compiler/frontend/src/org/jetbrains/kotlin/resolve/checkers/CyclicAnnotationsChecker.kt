@@ -24,26 +24,26 @@ object CyclicAnnotationsChecker : DeclarationChecker {
             descriptor !is ClassDescriptor || descriptor.kind != ClassKind.ANNOTATION_CLASS
         ) return
 
-        val primaryConstructor = declaration.primaryConstructor ?: return
-        val primaryConstructorDescriptor = descriptor.unsubstitutedPrimaryConstructor ?: return
+        konst primaryConstructor = declaration.primaryConstructor ?: return
+        konst primaryConstructorDescriptor = descriptor.unsubstitutedPrimaryConstructor ?: return
 
-        val checker = Checker(descriptor)
+        konst checker = Checker(descriptor)
 
-        for ((parameter, parameterDescriptor) in primaryConstructor.valueParameters.zip(primaryConstructorDescriptor.valueParameters)) {
+        for ((parameter, parameterDescriptor) in primaryConstructor.konstueParameters.zip(primaryConstructorDescriptor.konstueParameters)) {
             if (checker.parameterHasCycle(descriptor, parameterDescriptor)) {
                 context.trace.report(CYCLE_IN_ANNOTATION_PARAMETER.on(context.languageVersionSettings, parameter))
             }
         }
     }
 
-    private class Checker(val targetAnnotation: ClassDescriptor) {
-        private val visitedAnnotationDescriptors = mutableSetOf(targetAnnotation)
-        private val annotationDescriptorsWithCycle = mutableSetOf(targetAnnotation)
+    private class Checker(konst targetAnnotation: ClassDescriptor) {
+        private konst visitedAnnotationDescriptors = mutableSetOf(targetAnnotation)
+        private konst annotationDescriptorsWithCycle = mutableSetOf(targetAnnotation)
 
         fun annotationHasCycle(annotationDescriptor: ClassDescriptor): Boolean {
-            val constructorDescriptor = annotationDescriptor.unsubstitutedPrimaryConstructor ?: return false
+            konst constructorDescriptor = annotationDescriptor.unsubstitutedPrimaryConstructor ?: return false
 
-            for (parameterDescriptor in constructorDescriptor.valueParameters) {
+            for (parameterDescriptor in constructorDescriptor.konstueParameters) {
                 if (parameterHasCycle(annotationDescriptor, parameterDescriptor)) {
                     return true
                 }
@@ -52,7 +52,7 @@ object CyclicAnnotationsChecker : DeclarationChecker {
         }
 
         fun parameterHasCycle(ownedAnnotation: ClassDescriptor, parameterDescriptor: ValueParameterDescriptor): Boolean {
-            val returnType = parameterDescriptor.returnType?.unwrap() ?: return false
+            konst returnType = parameterDescriptor.returnType?.unwrap() ?: return false
             return when {
                 parameterDescriptor.isVararg || returnType.isArrayOrNullableArray() -> false
                 returnType.arguments.isNotEmpty() && !ReflectionTypes.isKClassType(returnType) -> {
@@ -68,7 +68,7 @@ object CyclicAnnotationsChecker : DeclarationChecker {
         }
 
         fun typeHasCycle(ownedAnnotation: ClassDescriptor, type: UnwrappedType): Boolean {
-            val referencedAnnotationDescriptor = (type.constructor.declarationDescriptor as? ClassDescriptor)
+            konst referencedAnnotationDescriptor = (type.constructor.declarationDescriptor as? ClassDescriptor)
                 ?.takeIf { it.kind == ClassKind.ANNOTATION_CLASS }
                 ?: return false
             if (!visitedAnnotationDescriptors.add(referencedAnnotationDescriptor)) {

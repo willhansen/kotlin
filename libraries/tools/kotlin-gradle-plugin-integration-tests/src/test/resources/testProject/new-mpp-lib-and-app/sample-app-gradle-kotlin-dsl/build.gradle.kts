@@ -12,17 +12,17 @@ repositories {
 }
 
 kotlin {
-	val jvm6 = jvm("jvm6") {
+	konst jvm6 = jvm("jvm6") {
         attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 6)
     }
-	val jvm8 = jvm("jvm8") {
+	konst jvm8 = jvm("jvm8") {
         attributes.attribute(TargetJvmVersion.TARGET_JVM_VERSION_ATTRIBUTE, 8)
 		compilations["main"].kotlinOptions.jvmTarget = "1.8"
 	}
-	val nodeJs = js("nodeJs") {
+	konst nodeJs = js("nodeJs") {
         nodejs()
     }
-	val linux64 = linuxX64("linux64")
+	konst linux64 = linuxX64("linux64")
 
     wasm {
     }
@@ -39,12 +39,12 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("com.example:sample-lib:1.0")
             }
         }
-        val allJvm by creating {
+        konst allJvm by creating {
             dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib")
@@ -70,7 +70,7 @@ kotlin {
 tasks.create("resolveRuntimeDependencies", DefaultTask::class.java) {
     doFirst { 
         // KT-26301
-        val configName = kotlin.jvm("jvm6").compilations["main"].runtimeDependencyConfigurationName
+        konst configName = kotlin.jvm("jvm6").compilations["main"].runtimeDependencyConfigurationName
         configurations[configName].resolve()
     }
 }

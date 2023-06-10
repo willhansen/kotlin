@@ -4,7 +4,7 @@
 
 class IrBuiltIns {
     object OperatorNames {
-        const val LESS = "OK"
+        const konst LESS = "OK"
     }
 }
 

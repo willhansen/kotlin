@@ -28,19 +28,19 @@ import org.jetbrains.kotlin.fir.types.impl.FirImplicitTypeRefImplWithoutSource
 import org.jetbrains.kotlin.fir.types.FirTypeRef
 
 abstract class FirAbstractBodyResolveTransformer(phase: FirResolvePhase) : FirAbstractPhaseTransformer<ResolutionMode>(phase) {
-    abstract val context: BodyResolveContext
-    abstract val components: BodyResolveTransformerComponents
-    abstract val resolutionContext: ResolutionContext
+    abstract konst context: BodyResolveContext
+    abstract konst components: BodyResolveTransformerComponents
+    abstract konst resolutionContext: ResolutionContext
 
     @set:PrivateForInline
     abstract var implicitTypeOnly: Boolean
         internal set
 
-    final override val session: FirSession get() = components.session
+    final override konst session: FirSession get() = components.session
 
     @OptIn(PrivateForInline::class)
     internal inline fun <T> withFullBodyResolve(crossinline l: () -> T): T {
-        val shouldSwitchMode = implicitTypeOnly
+        konst shouldSwitchMode = implicitTypeOnly
         if (shouldSwitchMode) {
             implicitTypeOnly = false
         }
@@ -68,63 +68,63 @@ abstract class FirAbstractBodyResolveTransformer(phase: FirResolvePhase) : FirAb
         error(message)
     }
 
-    protected inline val localScopes: List<FirLocalScope> get() = components.localScopes
+    protected inline konst localScopes: List<FirLocalScope> get() = components.localScopes
 
-    protected inline val noExpectedType: FirTypeRef get() = components.noExpectedType
+    protected inline konst noExpectedType: FirTypeRef get() = components.noExpectedType
 
-    protected inline val symbolProvider: FirSymbolProvider get() = components.symbolProvider
+    protected inline konst symbolProvider: FirSymbolProvider get() = components.symbolProvider
 
-    protected inline val implicitReceiverStack: ImplicitReceiverStack get() = components.implicitReceiverStack
-    protected inline val inferenceComponents: InferenceComponents get() = session.inferenceComponents
-    protected inline val resolutionStageRunner: ResolutionStageRunner get() = components.resolutionStageRunner
-    protected inline val samResolver: FirSamResolver get() = components.samResolver
-    protected inline val typeResolverTransformer: FirSpecificTypeResolverTransformer get() = components.typeResolverTransformer
-    protected inline val callResolver: FirCallResolver get() = components.callResolver
-    protected inline val callCompleter: FirCallCompleter get() = components.callCompleter
-    inline val dataFlowAnalyzer: FirDataFlowAnalyzer get() = components.dataFlowAnalyzer
-    protected inline val scopeSession: ScopeSession get() = components.scopeSession
-    protected inline val file: FirFile get() = components.file
+    protected inline konst implicitReceiverStack: ImplicitReceiverStack get() = components.implicitReceiverStack
+    protected inline konst inferenceComponents: InferenceComponents get() = session.inferenceComponents
+    protected inline konst resolutionStageRunner: ResolutionStageRunner get() = components.resolutionStageRunner
+    protected inline konst samResolver: FirSamResolver get() = components.samResolver
+    protected inline konst typeResolverTransformer: FirSpecificTypeResolverTransformer get() = components.typeResolverTransformer
+    protected inline konst callResolver: FirCallResolver get() = components.callResolver
+    protected inline konst callCompleter: FirCallCompleter get() = components.callCompleter
+    inline konst dataFlowAnalyzer: FirDataFlowAnalyzer get() = components.dataFlowAnalyzer
+    protected inline konst scopeSession: ScopeSession get() = components.scopeSession
+    protected inline konst file: FirFile get() = components.file
 
-    val ResolutionMode.expectedType: FirTypeRef?
+    konst ResolutionMode.expectedType: FirTypeRef?
         get() = expectedType(components)
 
     open class BodyResolveTransformerComponents(
-        override val session: FirSession,
-        override val scopeSession: ScopeSession,
-        val transformer: FirAbstractBodyResolveTransformerDispatcher,
-        val context: BodyResolveContext
+        override konst session: FirSession,
+        override konst scopeSession: ScopeSession,
+        konst transformer: FirAbstractBodyResolveTransformerDispatcher,
+        konst context: BodyResolveContext
     ) : BodyResolveComponents() {
-        override val fileImportsScope: List<FirScope> get() = context.fileImportsScope
-        override val towerDataElements: List<FirTowerDataElement> get() = context.towerDataContext.towerDataElements
-        override val localScopes: FirLocalScopes get() = context.towerDataContext.localScopes
+        override konst fileImportsScope: List<FirScope> get() = context.fileImportsScope
+        override konst towerDataElements: List<FirTowerDataElement> get() = context.towerDataContext.towerDataElements
+        override konst localScopes: FirLocalScopes get() = context.towerDataContext.localScopes
 
-        override val towerDataContext: FirTowerDataContext get() = context.towerDataContext
+        override konst towerDataContext: FirTowerDataContext get() = context.towerDataContext
 
-        override val file: FirFile get() = context.file
-        override val implicitReceiverStack: ImplicitReceiverStack get() = context.implicitReceiverStack
-        override val containingDeclarations: List<FirDeclaration> get() = context.containers
-        override val returnTypeCalculator: ReturnTypeCalculator get() = context.returnTypeCalculator
-        override val container: FirDeclaration get() = context.containerIfAny!!
+        override konst file: FirFile get() = context.file
+        override konst implicitReceiverStack: ImplicitReceiverStack get() = context.implicitReceiverStack
+        override konst containingDeclarations: List<FirDeclaration> get() = context.containers
+        override konst returnTypeCalculator: ReturnTypeCalculator get() = context.returnTypeCalculator
+        override konst container: FirDeclaration get() = context.containerIfAny!!
 
-        override val noExpectedType: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-        override val symbolProvider: FirSymbolProvider = session.symbolProvider
+        override konst noExpectedType: FirTypeRef = FirImplicitTypeRefImplWithoutSource
+        override konst symbolProvider: FirSymbolProvider = session.symbolProvider
 
-        override val resolutionStageRunner: ResolutionStageRunner = ResolutionStageRunner()
+        override konst resolutionStageRunner: ResolutionStageRunner = ResolutionStageRunner()
 
-        override val callResolver: FirCallResolver = FirCallResolver(
+        override konst callResolver: FirCallResolver = FirCallResolver(
             this,
         )
-        val typeResolverTransformer = FirSpecificTypeResolverTransformer(
+        konst typeResolverTransformer = FirSpecificTypeResolverTransformer(
             session
         )
-        override val callCompleter: FirCallCompleter = FirCallCompleter(transformer, this)
-        override val dataFlowAnalyzer: FirDataFlowAnalyzer =
+        override konst callCompleter: FirCallCompleter = FirCallCompleter(transformer, this)
+        override konst dataFlowAnalyzer: FirDataFlowAnalyzer =
             FirDataFlowAnalyzer.createFirDataFlowAnalyzer(this, context.dataFlowAnalyzerContext)
-        override val syntheticCallGenerator: FirSyntheticCallGenerator = FirSyntheticCallGenerator(this)
-        override val doubleColonExpressionResolver: FirDoubleColonExpressionResolver = FirDoubleColonExpressionResolver(session)
-        override val outerClassManager: FirOuterClassManager = FirOuterClassManager(session, context.outerLocalClassForNested)
-        override val samResolver: FirSamResolver = FirSamResolver(session, scopeSession, outerClassManager)
-        override val integerLiteralAndOperatorApproximationTransformer: IntegerLiteralAndOperatorApproximationTransformer =
+        override konst syntheticCallGenerator: FirSyntheticCallGenerator = FirSyntheticCallGenerator(this)
+        override konst doubleColonExpressionResolver: FirDoubleColonExpressionResolver = FirDoubleColonExpressionResolver(session)
+        override konst outerClassManager: FirOuterClassManager = FirOuterClassManager(session, context.outerLocalClassForNested)
+        override konst samResolver: FirSamResolver = FirSamResolver(session, scopeSession, outerClassManager)
+        override konst integerLiteralAndOperatorApproximationTransformer: IntegerLiteralAndOperatorApproximationTransformer =
             IntegerLiteralAndOperatorApproximationTransformer(session, scopeSession)
     }
 }

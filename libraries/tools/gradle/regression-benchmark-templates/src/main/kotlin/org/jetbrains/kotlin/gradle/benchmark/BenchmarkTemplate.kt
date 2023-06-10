@@ -29,24 +29,24 @@ import kotlin.script.experimental.util.PropertiesCollection
 @KotlinScript(
     fileExtension = "benchmark.kts",
     compilationConfiguration = BenchmarkScriptDefinition::class,
-    evaluationConfiguration = BenchmarkEvaluationConfiguration::class
+    ekonstuationConfiguration = BenchmarkEkonstuationConfiguration::class
 )
 abstract class BenchmarkTemplate(
     vararg args: String,
-    private val projectName: String,
-    private val projectGitUrl: String,
-    private val gitCommitSha: String,
-    private val stableKotlinVersions: String
+    private konst projectName: String,
+    private konst projectGitUrl: String,
+    private konst gitCommitSha: String,
+    private konst stableKotlinVersions: String
 ) {
-    private val workingDir = File(args.first())
-    val currentKotlinVersion: String = args[1]
-    private val kotlinVersions = setOf(stableKotlinVersions, currentKotlinVersion)
-    private val gradleProfilerDir = workingDir.resolve("gradle-profiler")
-    private val projectRepoDir = workingDir.resolve(projectName)
-    private val scenariosDir = workingDir.resolve("scenarios")
-    private val benchmarkOutputsDir = workingDir.resolve("outputs")
+    private konst workingDir = File(args.first())
+    konst currentKotlinVersion: String = args[1]
+    private konst kotlinVersions = setOf(stableKotlinVersions, currentKotlinVersion)
+    private konst gradleProfilerDir = workingDir.resolve("gradle-profiler")
+    private konst projectRepoDir = workingDir.resolve(projectName)
+    private konst scenariosDir = workingDir.resolve("scenarios")
+    private konst benchmarkOutputsDir = workingDir.resolve("outputs")
 
-    private val gitOperationsPrinter = TextProgressMonitor()
+    private konst gitOperationsPrinter = TextProgressMonitor()
 
     fun <T : InputStream> runBenchmarks(
         repoPatch: (() -> Pair<String, T>)?,
@@ -58,10 +58,10 @@ abstract class BenchmarkTemplate(
 
         repoReset()
         repoPatch?.let {
-            val (patchName, patch) = it()
+            konst (patchName, patch) = it()
             repoApplyPatch(patchName, patch)
         }
-        val result = runBenchmark(suite)
+        konst result = runBenchmark(suite)
         aggregateBenchmarkResults(result)
 
         printEndingMessage()
@@ -84,7 +84,7 @@ abstract class BenchmarkTemplate(
     }
 
     fun checkoutRepository(): File {
-        val git = if (projectRepoDir.exists()) {
+        konst git = if (projectRepoDir.exists()) {
             println("Repository is available, resetting it state")
             Git.open(projectRepoDir).also {
                 it.reset()
@@ -114,7 +114,7 @@ abstract class BenchmarkTemplate(
     fun repoApplyPatchFromFile(
         patchFile: String
     ) {
-        val patch = File(patchFile)
+        konst patch = File(patchFile)
         repoApplyPatch(patch.name, patch.inputStream())
     }
 
@@ -123,7 +123,7 @@ abstract class BenchmarkTemplate(
         patch: InputStream
     ) {
         println("Applying patch $patchName to repository")
-        val git = Git.open(projectRepoDir)
+        konst git = Git.open(projectRepoDir)
         git.apply()
             .setPatch(patch)
             .call()
@@ -132,7 +132,7 @@ abstract class BenchmarkTemplate(
 
     fun repoReset() {
         println("Hard resetting project repo")
-        val git = Git.open(projectRepoDir)
+        konst git = Git.open(projectRepoDir)
         git.reset()
             .setMode(ResetCommand.ResetType.HARD)
             .setProgressMonitor(gitOperationsPrinter)
@@ -149,11 +149,11 @@ abstract class BenchmarkTemplate(
         @Suppress("UNUSED_PARAMETER") dryRun: Boolean = false
     ): BenchmarkResult {
         println("Staring benchmark $projectName")
-        val normalizedBenchmarkName = projectName.normalizeTitle
+        konst normalizedBenchmarkName = projectName.normalizeTitle
         if (!scenariosDir.exists()) scenariosDir.mkdirs()
-        val scenarioFile = scenariosDir.resolve("$normalizedBenchmarkName.scenario")
+        konst scenarioFile = scenariosDir.resolve("$normalizedBenchmarkName.scenario")
         scenarioSuite.writeTo(scenarioFile)
-        val benchmarkOutputDir = benchmarkOutputsDir
+        konst benchmarkOutputDir = benchmarkOutputsDir
             .resolve(projectName)
             .resolve(normalizedBenchmarkName)
             .also {
@@ -161,7 +161,7 @@ abstract class BenchmarkTemplate(
                 it.mkdirs()
             }
 
-        val profilerProcessBuilder = ProcessBuilder()
+        konst profilerProcessBuilder = ProcessBuilder()
             .directory(workingDir)
             .inheritIO()
             .command(
@@ -180,7 +180,7 @@ abstract class BenchmarkTemplate(
                 if (dryRun) it.command().add("--dry-run")
             }
 
-        val profilerProcess = profilerProcessBuilder.start()
+        konst profilerProcess = profilerProcessBuilder.start()
         // Stop profiler on script stop
         Runtime.getRuntime().addShutdownHook(Thread {
             profilerProcess.destroy()
@@ -201,7 +201,7 @@ abstract class BenchmarkTemplate(
     // Not working as intended due to this bug: https://github.com/gradle/gradle-profiler/issues/317
     fun aggregateBenchmarkResults(benchmarkResult: BenchmarkResult) {
         println("Aggregating benchmark results...")
-        val results = DataFrame
+        konst results = DataFrame
             .readCSV(benchmarkResult.result, duplicate = true)
             .drop {
                 // Removing unused rows
@@ -210,16 +210,16 @@ abstract class BenchmarkTemplate(
             }
             .flipColumnsWithRows()
             .add("median build time") { // squashing build times into median build time
-                valuesOf<Int>().median()
+                konstuesOf<Int>().median()
             }
             .remove { nameContains("measured build") } // removing iterations results
             .groupBy("scenario").aggregate { // merging configuration and build times into one row
-                first { it.values().contains("task start") }["median build time"] into "tasks start median time"
-                first { it.values().contains("total execution time") }["median build time"] into "execution median time"
+                first { it.konstues().contains("task start") }["median build time"] into "tasks start median time"
+                first { it.konstues().contains("total execution time") }["median build time"] into "execution median time"
             }
             .groupBy {
                 expr {
-                    val scenarioName = get("scenario").toString()
+                    konst scenarioName = get("scenario").toString()
                     if (scenarioName.endsWith(currentKotlinVersion)) {
                         scenarioName.substringBefore(currentKotlinVersion)
                     } else {
@@ -229,7 +229,7 @@ abstract class BenchmarkTemplate(
             }
             .aggregate {
                 forEach { row ->
-                    val version = if (row["scenario"].toString().endsWith(stableKotlinVersions)) {
+                    konst version = if (row["scenario"].toString().endsWith(stableKotlinVersions)) {
                         stableKotlinVersions
                     } else {
                         currentKotlinVersion
@@ -245,16 +245,16 @@ abstract class BenchmarkTemplate(
                 if (it.name() == "Scenario") "0000Scenario" else it.name()
             }
             .insert("Configuration diff from stable release") {
-                val stableReleaseConfiguration = column<Int>("Configuration: $stableKotlinVersions").getValue(this)
-                val currentReleaseConfiguration = column<Int>("Configuration: $currentKotlinVersion").getValue(this)
-                val percent = currentReleaseConfiguration * 100 / stableReleaseConfiguration
+                konst stableReleaseConfiguration = column<Int>("Configuration: $stableKotlinVersions").getValue(this)
+                konst currentReleaseConfiguration = column<Int>("Configuration: $currentKotlinVersion").getValue(this)
+                konst percent = currentReleaseConfiguration * 100 / stableReleaseConfiguration
                 "${percent}%"
             }
             .after("Configuration: $currentKotlinVersion")
             .insert("Execution diff from stable release") {
-                val stableReleaseConfiguration = column<Int>("Execution: $stableKotlinVersions").getValue(this)
-                val currentReleaseConfiguration = column<Int>("Execution: $currentKotlinVersion").getValue(this)
-                val percent = currentReleaseConfiguration * 100 / stableReleaseConfiguration
+                konst stableReleaseConfiguration = column<Int>("Execution: $stableKotlinVersions").getValue(this)
+                konst currentReleaseConfiguration = column<Int>("Execution: $currentKotlinVersion").getValue(this)
+                konst percent = currentReleaseConfiguration * 100 / stableReleaseConfiguration
                 "${percent}%"
             }
             .after("Execution: $currentKotlinVersion")
@@ -262,17 +262,17 @@ abstract class BenchmarkTemplate(
         println("Benchmark results:")
         println(results.print(borders = true))
 
-        val benchmarkOutputDir = benchmarkOutputsDir.resolve(projectName)
-        val benchmarkCsv = benchmarkOutputDir.resolve("$projectName.csv")
+        konst benchmarkOutputDir = benchmarkOutputsDir.resolve(projectName)
+        konst benchmarkCsv = benchmarkOutputDir.resolve("$projectName.csv")
         results.writeCSV(benchmarkCsv)
-        val benchmarkHtml = benchmarkOutputDir.resolve("$projectName.html")
+        konst benchmarkHtml = benchmarkOutputDir.resolve("$projectName.html")
         benchmarkHtml.writeText(
             results.toHTML(
                 configuration = DisplayConfiguration(
                     cellContentLimit = 120,
                     cellFormatter = { dataRow, dataColumn ->
                         if (dataColumn.name.contains("diff from stable release")) {
-                            val percent = dataRow.getValue<String>(dataColumn.name).removeSuffix("%").toInt()
+                            konst percent = dataRow.getValue<String>(dataColumn.name).removeSuffix("%").toInt()
                             when {
                                 percent <= 100 -> background(184, 255, 184) // Green
                                 percent in 101..105 -> this.background(255, 255, 184) // Yellow
@@ -301,17 +301,17 @@ abstract class BenchmarkTemplate(
 
         gradleProfilerDir.mkdirs()
 
-        val okHttpClient = OkHttpClient()
-        val request = Request.Builder()
+        konst okHttpClient = OkHttpClient()
+        konst request = Request.Builder()
             .get()
             .url(GRADLE_PROFILER_URL)
             .build()
-        val response = okHttpClient.newCall(request).execute()
+        konst response = okHttpClient.newCall(request).execute()
         if (!response.isSuccessful) {
             throw IOException("Failed to download gradle-profiler, error code: ${response.code}")
         }
 
-        val contentLength = response.body!!.contentLength()
+        konst contentLength = response.body!!.contentLength()
         var downloadedLength = 0L
         print("Downloading: ")
         response.body!!.byteStream().buffered().use { responseContent ->
@@ -338,7 +338,7 @@ abstract class BenchmarkTemplate(
     }
 
     private fun ScenarioSuite.writeTo(output: File) {
-        val allScenarios = scenarios
+        konst allScenarios = scenarios
             .map {scenario ->
                 kotlinVersions.map { scenario to it }
             }
@@ -356,7 +356,7 @@ abstract class BenchmarkTemplate(
     }
 
     private fun Scenario.write(): String = kotlinVersions.joinToString(separator = "\n") { kotlinVersion ->
-        val finalGradleArgs = gradleArgs
+        konst finalGradleArgs = gradleArgs
             .plus("-PkotlinVersion=$kotlinVersion")
             .joinToString { "\"$it\"" }
         """
@@ -368,19 +368,19 @@ abstract class BenchmarkTemplate(
         |    gradle-args = [$finalGradleArgs]
         |    ${if (cleanupTasks.isNotEmpty()) "cleanup-tasks = [${cleanupTasks.joinToString { "\"$it\"" }}]" else ""}
         |    ${if (applyAbiChange.isNotEmpty()) "apply-abi-change-to = [${applyAbiChange.joinToString { "\"$it\"" }}]" else ""}
-        |    ${if (applyAndroidResourceValueChange.isNotEmpty()) "apply-android-resource-value-change-to = [${applyAndroidResourceValueChange.joinToString { "\"$it\"" }}]" else ""}
+        |    ${if (applyAndroidResourceValueChange.isNotEmpty()) "apply-android-resource-konstue-change-to = [${applyAndroidResourceValueChange.joinToString { "\"$it\"" }}]" else ""}
         |}
         |
         """.trimMargin()
     }
 
-    private val String.dropLeadingDir: String get() = substringAfter('/')
-    private val String.normalizeTitle: String get() = lowercase().replace(" ", "_")
+    private konst String.dropLeadingDir: String get() = substringAfter('/')
+    private konst String.normalizeTitle: String get() = lowercase().replace(" ", "_")
 
     private fun DataFrame<*>.flipColumnsWithRows(): DataFrame<*> {
-        val firstColumn = columns().first()
+        konst firstColumn = columns().first()
         return DataFrameBuilder(
-            listOf(firstColumn.name) + firstColumn.values.map { it.toString() }
+            listOf(firstColumn.name) + firstColumn.konstues.map { it.toString() }
         ).withColumns { columnName ->
             when {
                 columnName == "scenario" -> DataColumn.createValueColumn(
@@ -401,7 +401,7 @@ abstract class BenchmarkTemplate(
                     columnName,
                     rowToColumn(columnName) { it.toString() }
                 )
-                columnName == "value" -> DataColumn.createValueColumn(
+                columnName == "konstue" -> DataColumn.createValueColumn(
                     columnName,
                     rowToColumn(columnName) { it.toString() }
                 )
@@ -422,9 +422,9 @@ abstract class BenchmarkTemplate(
         rowName: String,
         typeConversion: (Any?) -> T
     ): List<T> =
-        rows().first { it.values().first() == rowName }.values().drop(1).map { typeConversion(it) }
+        rows().first { it.konstues().first() == rowName }.konstues().drop(1).map { typeConversion(it) }
 
-    private val gradleProfilerBin: File
+    private konst gradleProfilerBin: File
         get() = gradleProfilerDir
             .resolve("bin")
             .run {
@@ -436,9 +436,9 @@ abstract class BenchmarkTemplate(
             }
 
     companion object {
-        private const val STEP_SEPARATOR = "###############"
-        private const val GRADLE_PROFILER_VERSION = "0.19.0"
-        private const val GRADLE_PROFILER_URL: String =
+        private const konst STEP_SEPARATOR = "###############"
+        private const konst GRADLE_PROFILER_VERSION = "0.19.0"
+        private const konst GRADLE_PROFILER_URL: String =
             "https://repo1.maven.org/maven2/org/gradle/profiler/gradle-profiler/$GRADLE_PROFILER_VERSION/gradle-profiler-$GRADLE_PROFILER_VERSION.zip"
 
     }
@@ -452,17 +452,17 @@ class BenchmarkFailedException(exitCode: Int) : Exception(
 )
 
 class BenchmarkResult(
-    val name: BenchmarkName,
-    val result: File
+    konst name: BenchmarkName,
+    konst result: File
 )
 
 @Target(AnnotationTarget.FILE)
 @Retention(AnnotationRetention.SOURCE)
 annotation class BenchmarkProject(
-    val name: String,
-    val gitUrl: String,
-    val gitCommitSha: String,
-    val stableKotlinVersion: String,
+    konst name: String,
+    konst gitUrl: String,
+    konst gitCommitSha: String,
+    konst stableKotlinVersion: String,
 )
 
 class BenchmarkScriptDefinition : ScriptCompilationConfiguration(
@@ -479,18 +479,18 @@ class BenchmarkScriptDefinition : ScriptCompilationConfiguration(
     }
 )
 
-class BenchmarkEvaluationConfiguration : ScriptEvaluationConfiguration(
+class BenchmarkEkonstuationConfiguration : ScriptEkonstuationConfiguration(
     {
-        refineConfigurationBeforeEvaluate { context ->
-            val compileConf = context.evaluationConfiguration[compilationConfiguration]
-                ?: return@refineConfigurationBeforeEvaluate makeFailureResult("Script compilation configuration is not available")
+        refineConfigurationBeforeEkonstuate { context ->
+            konst compileConf = context.ekonstuationConfiguration[compilationConfiguration]
+                ?: return@refineConfigurationBeforeEkonstuate makeFailureResult("Script compilation configuration is not available")
 
-            val name: String = compileConf[benchmarkProjectName]!!
-            val gitUrl: String = compileConf[benchmarkGitUrl]!!
-            val gitCommitSha: String = compileConf[benchmarkGitCommitSha]!!
-            val stableKotlinVersion: String = compileConf[benchmarkStableKotlinVersion]!!
+            konst name: String = compileConf[benchmarkProjectName]!!
+            konst gitUrl: String = compileConf[benchmarkGitUrl]!!
+            konst gitCommitSha: String = compileConf[benchmarkGitCommitSha]!!
+            konst stableKotlinVersion: String = compileConf[benchmarkStableKotlinVersion]!!
 
-            context.evaluationConfiguration.with evalConf@{
+            context.ekonstuationConfiguration.with ekonstConf@{
                 constructorArgs(name, gitUrl, gitCommitSha, stableKotlinVersion)
             }.asSuccess()
         }
@@ -501,7 +501,7 @@ internal class BenchmarkScriptConfigurator : RefineScriptCompilationConfiguratio
     override fun invoke(
         context: ScriptConfigurationRefinementContext
     ): ResultWithDiagnostics<ScriptCompilationConfiguration> {
-        val benchmarkProject = context.collectedData
+        konst benchmarkProject = context.collectedData
             ?.get(ScriptCollectedData.foundAnnotations)
             ?.find { it is BenchmarkProject } as? BenchmarkProject
             ?: return run {
@@ -517,7 +517,7 @@ internal class BenchmarkScriptConfigurator : RefineScriptCompilationConfiguratio
     }
 }
 
-private val benchmarkProjectName by PropertiesCollection.key<String>()
-private val benchmarkGitUrl by PropertiesCollection.key<String>()
-private val benchmarkGitCommitSha by PropertiesCollection.key<String>()
-private val benchmarkStableKotlinVersion by PropertiesCollection.key<String>()
+private konst benchmarkProjectName by PropertiesCollection.key<String>()
+private konst benchmarkGitUrl by PropertiesCollection.key<String>()
+private konst benchmarkGitCommitSha by PropertiesCollection.key<String>()
+private konst benchmarkStableKotlinVersion by PropertiesCollection.key<String>()

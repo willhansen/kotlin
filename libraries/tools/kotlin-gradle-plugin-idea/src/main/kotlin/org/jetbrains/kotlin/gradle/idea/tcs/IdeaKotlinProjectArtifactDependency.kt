@@ -10,9 +10,9 @@ package org.jetbrains.kotlin.gradle.idea.tcs
 import org.jetbrains.kotlin.tooling.core.*
 
 data class IdeaKotlinProjectArtifactDependency(
-    val type: IdeaKotlinSourceDependency.Type,
-    override val coordinates: IdeaKotlinProjectCoordinates,
-    override val extras: MutableExtras = mutableExtrasOf()
+    konst type: IdeaKotlinSourceDependency.Type,
+    override konst coordinates: IdeaKotlinProjectCoordinates,
+    override konst extras: MutableExtras = mutableExtrasOf()
 ) : IdeaKotlinDependency {
 
     fun resolved(sourceSetNames: Iterable<String>): Set<IdeaKotlinSourceDependency> {
@@ -32,7 +32,7 @@ data class IdeaKotlinProjectArtifactDependency(
     }
 
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
 
         var IdeaKotlinSourceDependency.projectArtifactDependencyOrigin
                 by extrasReadWriteProperty<IdeaKotlinProjectArtifactDependency>("origin")

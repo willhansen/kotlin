@@ -1,8 +1,8 @@
-annotation class Ann1(val arr: IntArray)
+annotation class Ann1(konst arr: IntArray)
 
-annotation class Ann2(val arr: DoubleArray)
+annotation class Ann2(konst arr: DoubleArray)
 
-annotation class Ann3(val arr: Array<String>)
+annotation class Ann3(konst arr: Array<String>)
 
 //constructor Ann1(IntArray)
 //│

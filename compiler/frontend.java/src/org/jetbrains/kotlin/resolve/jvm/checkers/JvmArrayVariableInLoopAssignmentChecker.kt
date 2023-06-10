@@ -44,21 +44,21 @@ object JvmArrayVariableInLoopAssignmentChecker : AdditionalTypeChecker {
     ) {
         if (c.languageVersionSettings.supportsFeature(LanguageFeature.ProperForInArrayLoopRangeVariableAssignmentSemantic)) return
 
-        val binaryExpression = expression as? KtBinaryExpression ?: return
+        konst binaryExpression = expression as? KtBinaryExpression ?: return
         if (binaryExpression.operationToken != KtTokens.EQ) return
 
-        val lhsExpression = binaryExpression.left as? KtSimpleNameExpression ?: return
-        val resolvedCall = lhsExpression.getResolvedCall(c.trace.bindingContext) ?: return
-        val variableDescriptor = resolvedCall.resultingDescriptor as? LocalVariableDescriptor ?: return
+        konst lhsExpression = binaryExpression.left as? KtSimpleNameExpression ?: return
+        konst resolvedCall = lhsExpression.getResolvedCall(c.trace.bindingContext) ?: return
+        konst variableDescriptor = resolvedCall.resultingDescriptor as? LocalVariableDescriptor ?: return
         if (variableDescriptor is SyntheticFieldDescriptor) return
         if (variableDescriptor.isDelegated) return
 
-        val variableType = variableDescriptor.returnType
+        konst variableType = variableDescriptor.returnType
         if (!KotlinBuiltIns.isArrayOrPrimitiveArray(variableType)) return
 
         if (!isOuterForLoopRangeVariable(expression, variableDescriptor, c)) return
 
-        val dataFlowValueKind = c.dataFlowValueFactory.createDataFlowValue(lhsExpression, variableType, c).kind
+        konst dataFlowValueKind = c.dataFlowValueFactory.createDataFlowValue(lhsExpression, variableType, c).kind
         if (dataFlowValueKind != DataFlowValue.Kind.STABLE_VARIABLE) return
 
         c.trace.report(ErrorsJvm.ASSIGNMENT_TO_ARRAY_LOOP_VARIABLE.on(lhsExpression))
@@ -71,8 +71,8 @@ object JvmArrayVariableInLoopAssignmentChecker : AdditionalTypeChecker {
     ): Boolean {
         for (parent in expression.parents) {
             if (parent is KtForExpression) {
-                val rangeExpression = parent.loopRange as? KtSimpleNameExpression ?: continue
-                val rangeResolvedCall = rangeExpression.getResolvedCall(c.trace.bindingContext) ?: continue
+                konst rangeExpression = parent.loopRange as? KtSimpleNameExpression ?: continue
+                konst rangeResolvedCall = rangeExpression.getResolvedCall(c.trace.bindingContext) ?: continue
                 if (rangeResolvedCall.resultingDescriptor == variableDescriptor) {
                     return true
                 }

@@ -9,15 +9,15 @@ import kotlin.experimental.ExperimentalNativeApi
 
 @ExperimentalNativeApi
 internal interface TestStatistics {
-    val total: Int
-    val passed: Int
-    val failed: Int
-    val ignored: Int
+    konst total: Int
+    konst passed: Int
+    konst failed: Int
+    konst ignored: Int
 
-    val totalSuites: Int
+    konst totalSuites: Int
 
-    val failedTests: Collection<TestCase>
-    val hasFailedTests: Boolean
+    konst failedTests: Collection<TestCase>
+    konst hasFailedTests: Boolean
 }
 
 @ExperimentalNativeApi
@@ -26,23 +26,23 @@ internal class MutableTestStatistics: TestStatistics {
     override var total:   Int = 0; private set
     override var passed:  Int = 0; private set
 
-    override val ignored: Int
+    override konst ignored: Int
         get() = _ignoredTests.size
 
     override var totalSuites: Int = 0; private set
 
-    override val failed: Int
+    override konst failed: Int
         get() = _failedTests.size
 
-    override val hasFailedTests: Boolean
+    override konst hasFailedTests: Boolean
         get() = _failedTests.isNotEmpty()
 
-    private val _failedTests = mutableListOf<TestCase>()
-    override val failedTests: Collection<TestCase>
+    private konst _failedTests = mutableListOf<TestCase>()
+    override konst failedTests: Collection<TestCase>
         get() = _failedTests
 
-    private val _ignoredTests = mutableListOf<TestCase>()
-    val ignoredTests: Collection<TestCase>
+    private konst _ignoredTests = mutableListOf<TestCase>()
+    konst ignoredTests: Collection<TestCase>
         get() = _ignoredTests
 
     fun registerSuite(count: Int = 1) {
@@ -71,7 +71,7 @@ internal class MutableTestStatistics: TestStatistics {
     fun registerIgnore(testCase: TestCase) = registerIgnore(listOf(testCase))
 
     fun registerIgnore(suite: TestSuite) {
-        registerIgnore(suite.testCases.values)
+        registerIgnore(suite.testCases.konstues)
     }
 
     fun reset() {

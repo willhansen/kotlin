@@ -123,7 +123,7 @@ KtFile: trailingCommaForbidden.kt
         PsiElement(LPAR)('(')
         PsiWhiteSpace('\n    ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x')
           PsiElement(COLON)(':')
@@ -135,7 +135,7 @@ KtFile: trailingCommaForbidden.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace('\n    ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('y')
           PsiElement(COLON)(':')
@@ -365,7 +365,7 @@ KtFile: trailingCommaForbidden.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -390,7 +390,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACKET)(']')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiWhiteSpace(' ')
@@ -406,7 +406,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACKET)(']')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z1')
         PsiWhiteSpace(' ')
@@ -424,7 +424,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACKET)(']')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z2')
         PsiWhiteSpace(' ')
@@ -445,7 +445,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACKET)(']')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('z3')
         PsiWhiteSpace(' ')
@@ -477,7 +477,7 @@ KtFile: trailingCommaForbidden.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -563,7 +563,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiWhiteSpace(' ')
@@ -596,7 +596,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PsiErrorElement:Expecting a name
@@ -620,7 +620,7 @@ KtFile: trailingCommaForbidden.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       DESTRUCTURING_DECLARATION
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         PsiErrorElement:Expecting a name

@@ -91,19 +91,19 @@ import org.jetbrains.kotlin.types.Variance
  */
 
 internal class UnsupportedImpl(
-    override val unsupported: String,
+    override konst unsupported: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.Unsupported
 
 internal class UnsupportedFeatureImpl(
-    override val unsupportedFeature: Pair<LanguageFeature, LanguageVersionSettings>,
+    override konst unsupportedFeature: Pair<LanguageFeature, LanguageVersionSettings>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnsupportedFeature
 
 internal class NewInferenceErrorImpl(
-    override val error: String,
+    override konst error: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NewInferenceError
@@ -164,7 +164,7 @@ internal class DelegationNotToInterfaceImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DelegationNotToInterface
 
 internal class NestedClassNotAllowedImpl(
-    override val declaration: String,
+    override konst declaration: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.NestedClassNotAllowed
@@ -215,45 +215,45 @@ internal class DivisionByZeroImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.DivisionByZero
 
 internal class ValOrVarOnLoopParameterImpl(
-    override val valOrVar: KtKeywordToken,
+    override konst konstOrVar: KtKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ValOrVarOnLoopParameter
 
 internal class ValOrVarOnFunParameterImpl(
-    override val valOrVar: KtKeywordToken,
+    override konst konstOrVar: KtKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ValOrVarOnFunParameter
 
 internal class ValOrVarOnCatchParameterImpl(
-    override val valOrVar: KtKeywordToken,
+    override konst konstOrVar: KtKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ValOrVarOnCatchParameter
 
 internal class ValOrVarOnSecondaryConstructorParameterImpl(
-    override val valOrVar: KtKeywordToken,
+    override konst konstOrVar: KtKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ValOrVarOnSecondaryConstructorParameter
 
 internal class InvisibleSetterImpl(
-    override val property: KtVariableSymbol,
-    override val visibility: Visibility,
-    override val callableId: CallableId,
+    override konst property: KtVariableSymbol,
+    override konst visibility: Visibility,
+    override konst callableId: CallableId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InvisibleSetter
 
 internal class InvisibleReferenceImpl(
-    override val reference: KtSymbol,
+    override konst reference: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InvisibleReference
 
 internal class UnresolvedReferenceImpl(
-    override val reference: String,
+    override konst reference: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnresolvedReference
@@ -284,50 +284,50 @@ internal class NoThisImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NoThis
 
 internal class DeprecationErrorImpl(
-    override val reference: KtSymbol,
-    override val message: String,
+    override konst reference: KtSymbol,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecationError
 
 internal class DeprecationImpl(
-    override val reference: KtSymbol,
-    override val message: String,
+    override konst reference: KtSymbol,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.Deprecation
 
 internal class TypealiasExpansionDeprecationErrorImpl(
-    override val alias: KtSymbol,
-    override val reference: KtSymbol,
-    override val message: String,
+    override konst alias: KtSymbol,
+    override konst reference: KtSymbol,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypealiasExpansionDeprecationError
 
 internal class TypealiasExpansionDeprecationImpl(
-    override val alias: KtSymbol,
-    override val reference: KtSymbol,
-    override val message: String,
+    override konst alias: KtSymbol,
+    override konst reference: KtSymbol,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypealiasExpansionDeprecation
 
 internal class ApiNotAvailableImpl(
-    override val sinceKotlinVersion: ApiVersion,
-    override val currentVersion: ApiVersion,
+    override konst sinceKotlinVersion: ApiVersion,
+    override konst currentVersion: ApiVersion,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ApiNotAvailable
 
 internal class UnresolvedReferenceWrongReceiverImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnresolvedReferenceWrongReceiver
 
 internal class UnresolvedImportImpl(
-    override val reference: String,
+    override konst reference: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnresolvedImport
@@ -338,8 +338,8 @@ internal class CreatingAnInstanceOfAbstractClassImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.CreatingAnInstanceOfAbstractClass
 
 internal class FunctionCallExpectedImpl(
-    override val functionName: String,
-    override val hasValueParameters: Boolean,
+    override konst functionName: String,
+    override konst hasValueParameters: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.FunctionCallExpected
@@ -355,34 +355,34 @@ internal class NoReceiverAllowedImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NoReceiverAllowed
 
 internal class FunctionExpectedImpl(
-    override val expression: String,
-    override val type: KtType,
+    override konst expression: String,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.FunctionExpected
 
 internal class ResolutionToClassifierImpl(
-    override val classSymbol: KtClassLikeSymbol,
+    override konst classSymbol: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ResolutionToClassifier
 
 internal class AmbiguousAlteredAssignImpl(
-    override val altererNames: List<String?>,
+    override konst altererNames: List<String?>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.AmbiguousAlteredAssign
 
 internal class ForbiddenBinaryModImpl(
-    override val forbiddenFunction: KtSymbol,
-    override val suggestedFunction: String,
+    override konst forbiddenFunction: KtSymbol,
+    override konst suggestedFunction: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ForbiddenBinaryMod
 
 internal class DeprecatedBinaryModImpl(
-    override val forbiddenFunction: KtSymbol,
-    override val suggestedFunction: String,
+    override konst forbiddenFunction: KtSymbol,
+    override konst suggestedFunction: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedBinaryMod
@@ -408,13 +408,13 @@ internal class AbstractSuperCallWarningImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.AbstractSuperCallWarning
 
 internal class InstanceAccessBeforeSuperCallImpl(
-    override val target: String,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InstanceAccessBeforeSuperCall
 
 internal class SuperCallWithDefaultParametersImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.SuperCallWithDefaultParameters
@@ -440,7 +440,7 @@ internal class SuperclassNotAccessibleFromInterfaceImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.SuperclassNotAccessibleFromInterface
 
 internal class QualifiedSupertypeExtendedByOtherSupertypeImpl(
-    override val otherSuperType: KtSymbol,
+    override konst otherSuperType: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.QualifiedSupertypeExtendedByOtherSupertype
@@ -461,7 +461,7 @@ internal class FinalSupertypeImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.FinalSupertype
 
 internal class ClassCannotBeExtendedDirectlyImpl(
-    override val classSymbol: KtClassLikeSymbol,
+    override konst classSymbol: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ClassCannotBeExtendedDirectly
@@ -502,8 +502,8 @@ internal class SealedSupertypeImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.SealedSupertype
 
 internal class SealedSupertypeInLocalClassImpl(
-    override val declarationType: String,
-    override val sealedClassKind: ClassKind,
+    override konst declarationType: String,
+    override konst sealedClassKind: ClassKind,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.SealedSupertypeInLocalClass
@@ -524,7 +524,7 @@ internal class ClassInheritsJavaSealedClassImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ClassInheritsJavaSealedClass
 
 internal class SupertypeNotAClassOrInterfaceImpl(
-    override val reason: String,
+    override konst reason: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.SupertypeNotAClassOrInterface
@@ -535,7 +535,7 @@ internal class CyclicInheritanceHierarchyImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.CyclicInheritanceHierarchy
 
 internal class ExpandedTypeCannotBeInheritedImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ExpandedTypeCannotBeInherited
@@ -546,29 +546,29 @@ internal class ProjectionInImmediateArgumentToSupertypeImpl(
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.ProjectionInImmediateArgumentToSupertype
 
 internal class InconsistentTypeParameterValuesImpl(
-    override val typeParameter: KtTypeParameterSymbol,
-    override val type: KtClassLikeSymbol,
-    override val bounds: List<KtType>,
+    override konst typeParameter: KtTypeParameterSymbol,
+    override konst type: KtClassLikeSymbol,
+    override konst bounds: List<KtType>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClass>(firDiagnostic, token), KtFirDiagnostic.InconsistentTypeParameterValues
 
 internal class InconsistentTypeParameterBoundsImpl(
-    override val typeParameter: KtTypeParameterSymbol,
-    override val type: KtClassLikeSymbol,
-    override val bounds: List<KtType>,
+    override konst typeParameter: KtTypeParameterSymbol,
+    override konst type: KtClassLikeSymbol,
+    override konst bounds: List<KtType>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InconsistentTypeParameterBounds
 
 internal class AmbiguousSuperImpl(
-    override val candidates: List<KtType>,
+    override konst candidates: List<KtType>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtSuperExpression>(firDiagnostic, token), KtFirDiagnostic.AmbiguousSuper
 
 internal class WrongMultipleInheritanceImpl(
-    override val symbol: KtCallableSymbol,
+    override konst symbol: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.WrongMultipleInheritance
@@ -678,10 +678,10 @@ internal class AnnotationParameterDefaultValueMustBeConstantImpl(
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.AnnotationParameterDefaultValueMustBeConstant
 
-internal class InvalidTypeOfAnnotationMemberImpl(
+internal class InkonstidTypeOfAnnotationMemberImpl(
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
-) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.InvalidTypeOfAnnotationMember
+) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.InkonstidTypeOfAnnotationMember
 
 internal class LocalAnnotationClassErrorImpl(
     firDiagnostic: KtPsiDiagnostic,
@@ -714,7 +714,7 @@ internal class AnnotationClassConstructorCallImpl(
 ) : KtAbstractFirDiagnostic<KtCallExpression>(firDiagnostic, token), KtFirDiagnostic.AnnotationClassConstructorCall
 
 internal class NotAnAnnotationClassImpl(
-    override val annotationName: String,
+    override konst annotationName: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NotAnAnnotationClass
@@ -745,7 +745,7 @@ internal class IllegalKotlinVersionStringValueImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.IllegalKotlinVersionStringValue
 
 internal class NewerVersionInSinceKotlinImpl(
-    override val specifiedVersion: String,
+    override konst specifiedVersion: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NewerVersionInSinceKotlin
@@ -776,8 +776,8 @@ internal class DeprecatedSinceKotlinOutsideKotlinSubpackageImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedSinceKotlinOutsideKotlinSubpackage
 
 internal class OverrideDeprecationImpl(
-    override val overridenSymbol: KtSymbol,
-    override val deprecationInfo: DeprecationInfo,
+    override konst overridenSymbol: KtSymbol,
+    override konst deprecationInfo: DeprecationInfo,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.OverrideDeprecation
@@ -803,32 +803,32 @@ internal class RestrictedRetentionForExpressionAnnotationWarningImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.RestrictedRetentionForExpressionAnnotationWarning
 
 internal class WrongAnnotationTargetImpl(
-    override val actualTarget: String,
+    override konst actualTarget: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.WrongAnnotationTarget
 
 internal class WrongAnnotationTargetWithUseSiteTargetImpl(
-    override val actualTarget: String,
-    override val useSiteTarget: String,
+    override konst actualTarget: String,
+    override konst useSiteTarget: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.WrongAnnotationTargetWithUseSiteTarget
 
 internal class InapplicableTargetOnPropertyImpl(
-    override val useSiteDescription: String,
+    override konst useSiteDescription: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableTargetOnProperty
 
 internal class InapplicableTargetOnPropertyWarningImpl(
-    override val useSiteDescription: String,
+    override konst useSiteDescription: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableTargetOnPropertyWarning
 
 internal class InapplicableTargetPropertyImmutableImpl(
-    override val useSiteDescription: String,
+    override konst useSiteDescription: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableTargetPropertyImmutable
@@ -849,7 +849,7 @@ internal class InapplicableParamTargetImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableParamTarget
 
 internal class RedundantAnnotationTargetImpl(
-    override val useSiteDescription: String,
+    override konst useSiteDescription: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RedundantAnnotationTarget
@@ -890,14 +890,14 @@ internal class AnnotationInWhereClauseErrorImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.AnnotationInWhereClauseError
 
 internal class PluginAnnotationAmbiguityImpl(
-    override val typeFromCompilerPhase: KtType,
-    override val typeFromTypesPhase: KtType,
+    override konst typeFromCompilerPhase: KtType,
+    override konst typeFromTypesPhase: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.PluginAnnotationAmbiguity
 
 internal class AmbiguousAnnotationArgumentImpl(
-    override val symbols: List<KtSymbol>,
+    override konst symbols: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.AmbiguousAnnotationArgument
@@ -943,26 +943,26 @@ internal class RuntimeAnnotationOnExternalDeclarationImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.RuntimeAnnotationOnExternalDeclaration
 
 internal class NativeAnnotationsAllowedOnlyOnMemberOrExtensionFunImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NativeAnnotationsAllowedOnlyOnMemberOrExtensionFun
 
 internal class NativeIndexerKeyShouldBeStringOrNumberImpl(
-    override val kind: String,
+    override konst kind: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NativeIndexerKeyShouldBeStringOrNumber
 
 internal class NativeIndexerWrongParameterCountImpl(
-    override val parametersCount: Int,
-    override val kind: String,
+    override konst parametersCount: Int,
+    override konst kind: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NativeIndexerWrongParameterCount
 
 internal class NativeIndexerCanNotHaveDefaultArgumentsImpl(
-    override val kind: String,
+    override konst kind: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NativeIndexerCanNotHaveDefaultArguments
@@ -1008,29 +1008,29 @@ internal class JsNameProhibitedForExtensionPropertyImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.JsNameProhibitedForExtensionProperty
 
 internal class OptInUsageImpl(
-    override val optInMarkerFqName: FqName,
-    override val message: String,
+    override konst optInMarkerFqName: FqName,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OptInUsage
 
 internal class OptInUsageErrorImpl(
-    override val optInMarkerFqName: FqName,
-    override val message: String,
+    override konst optInMarkerFqName: FqName,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OptInUsageError
 
 internal class OptInOverrideImpl(
-    override val optInMarkerFqName: FqName,
-    override val message: String,
+    override konst optInMarkerFqName: FqName,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OptInOverride
 
 internal class OptInOverrideErrorImpl(
-    override val optInMarkerFqName: FqName,
-    override val message: String,
+    override konst optInMarkerFqName: FqName,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OptInOverrideError
@@ -1056,13 +1056,13 @@ internal class OptInWithoutArgumentsImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInWithoutArguments
 
 internal class OptInArgumentIsNotMarkerImpl(
-    override val notMarkerFqName: FqName,
+    override konst notMarkerFqName: FqName,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInArgumentIsNotMarker
 
 internal class OptInMarkerWithWrongTargetImpl(
-    override val target: String,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInMarkerWithWrongTarget
@@ -1073,7 +1073,7 @@ internal class OptInMarkerWithWrongRetentionImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInMarkerWithWrongRetention
 
 internal class OptInMarkerOnWrongTargetImpl(
-    override val target: String,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInMarkerOnWrongTarget
@@ -1089,87 +1089,87 @@ internal class OptInMarkerOnOverrideWarningImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OptInMarkerOnOverrideWarning
 
 internal class SubclassOptInInapplicableImpl(
-    override val target: String,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.SubclassOptInInapplicable
 
 internal class ExposedTypealiasExpandedTypeImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ExposedTypealiasExpandedType
 
 internal class ExposedFunctionReturnTypeImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ExposedFunctionReturnType
 
 internal class ExposedReceiverTypeImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ExposedReceiverType
 
 internal class ExposedPropertyTypeImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ExposedPropertyType
 
 internal class ExposedPropertyTypeInConstructorErrorImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ExposedPropertyTypeInConstructorError
 
 internal class ExposedPropertyTypeInConstructorWarningImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ExposedPropertyTypeInConstructorWarning
 
 internal class ExposedParameterTypeImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ExposedParameterType
 
 internal class ExposedSuperInterfaceImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ExposedSuperInterface
 
 internal class ExposedSuperClassImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ExposedSuperClass
 
 internal class ExposedTypeParameterBoundImpl(
-    override val elementVisibility: EffectiveVisibility,
-    override val restrictingDeclaration: KtSymbol,
-    override val restrictingVisibility: EffectiveVisibility,
+    override konst elementVisibility: EffectiveVisibility,
+    override konst restrictingDeclaration: KtSymbol,
+    override konst restrictingVisibility: EffectiveVisibility,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ExposedTypeParameterBound
@@ -1180,49 +1180,49 @@ internal class InapplicableInfixModifierImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InapplicableInfixModifier
 
 internal class RepeatedModifierImpl(
-    override val modifier: KtModifierKeywordToken,
+    override konst modifier: KtModifierKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.RepeatedModifier
 
 internal class RedundantModifierImpl(
-    override val redundantModifier: KtModifierKeywordToken,
-    override val conflictingModifier: KtModifierKeywordToken,
+    override konst redundantModifier: KtModifierKeywordToken,
+    override konst conflictingModifier: KtModifierKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.RedundantModifier
 
 internal class DeprecatedModifierImpl(
-    override val deprecatedModifier: KtModifierKeywordToken,
-    override val actualModifier: KtModifierKeywordToken,
+    override konst deprecatedModifier: KtModifierKeywordToken,
+    override konst actualModifier: KtModifierKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedModifier
 
 internal class DeprecatedModifierPairImpl(
-    override val deprecatedModifier: KtModifierKeywordToken,
-    override val conflictingModifier: KtModifierKeywordToken,
+    override konst deprecatedModifier: KtModifierKeywordToken,
+    override konst conflictingModifier: KtModifierKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedModifierPair
 
 internal class DeprecatedModifierForTargetImpl(
-    override val deprecatedModifier: KtModifierKeywordToken,
-    override val target: String,
+    override konst deprecatedModifier: KtModifierKeywordToken,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedModifierForTarget
 
 internal class RedundantModifierForTargetImpl(
-    override val redundantModifier: KtModifierKeywordToken,
-    override val target: String,
+    override konst redundantModifier: KtModifierKeywordToken,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.RedundantModifierForTarget
 
 internal class IncompatibleModifiersImpl(
-    override val modifier1: KtModifierKeywordToken,
-    override val modifier2: KtModifierKeywordToken,
+    override konst modifier1: KtModifierKeywordToken,
+    override konst modifier2: KtModifierKeywordToken,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.IncompatibleModifiers
@@ -1233,41 +1233,41 @@ internal class RedundantOpenInInterfaceImpl(
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.RedundantOpenInInterface
 
 internal class WrongModifierTargetImpl(
-    override val modifier: KtModifierKeywordToken,
-    override val target: String,
+    override konst modifier: KtModifierKeywordToken,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.WrongModifierTarget
 
 internal class OperatorModifierRequiredImpl(
-    override val functionSymbol: KtFunctionLikeSymbol,
-    override val name: String,
+    override konst functionSymbol: KtFunctionLikeSymbol,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OperatorModifierRequired
 
 internal class InfixModifierRequiredImpl(
-    override val functionSymbol: KtFunctionLikeSymbol,
+    override konst functionSymbol: KtFunctionLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InfixModifierRequired
 
 internal class WrongModifierContainingDeclarationImpl(
-    override val modifier: KtModifierKeywordToken,
-    override val target: String,
+    override konst modifier: KtModifierKeywordToken,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.WrongModifierContainingDeclaration
 
 internal class DeprecatedModifierContainingDeclarationImpl(
-    override val modifier: KtModifierKeywordToken,
-    override val target: String,
+    override konst modifier: KtModifierKeywordToken,
+    override konst target: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedModifierContainingDeclaration
 
 internal class InapplicableOperatorModifierImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InapplicableOperatorModifier
@@ -1333,7 +1333,7 @@ internal class DelegatedPropertyInsideValueClassImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DelegatedPropertyInsideValueClass
 
 internal class ValueClassHasInapplicableParameterTypeImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.ValueClassHasInapplicableParameterType
@@ -1364,7 +1364,7 @@ internal class SecondaryConstructorWithBodyInsideValueClassImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.SecondaryConstructorWithBodyInsideValueClass
 
 internal class ReservedMemberInsideValueClassImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.ReservedMemberInsideValueClass
@@ -1385,55 +1385,55 @@ internal class ValueClassCannotBeCloneableImpl(
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.ValueClassCannotBeCloneable
 
 internal class AnnotationOnIllegalMultiFieldValueClassTypedTargetImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.AnnotationOnIllegalMultiFieldValueClassTypedTarget
 
 internal class NoneApplicableImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NoneApplicable
 
 internal class InapplicableCandidateImpl(
-    override val candidate: KtSymbol,
+    override konst candidate: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InapplicableCandidate
 
 internal class TypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeMismatch
 
 internal class TypeInferenceOnlyInputTypesErrorImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeInferenceOnlyInputTypesError
 
 internal class ThrowableTypeMismatchImpl(
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ThrowableTypeMismatch
 
 internal class ConditionTypeMismatchImpl(
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ConditionTypeMismatch
 
 internal class ArgumentTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ArgumentTypeMismatch
@@ -1444,7 +1444,7 @@ internal class NullForNonnullTypeImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NullForNonnullType
 
 internal class InapplicableLateinitModifierImpl(
-    override val reason: String,
+    override konst reason: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.InapplicableLateinitModifier
@@ -1455,7 +1455,7 @@ internal class VarargOutsideParenthesesImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.VarargOutsideParentheses
 
 internal class NamedArgumentsNotAllowedImpl(
-    override val forbiddenNamedArgumentsTarget: ForbiddenNamedArgumentsTarget,
+    override konst forbiddenNamedArgumentsTarget: ForbiddenNamedArgumentsTarget,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtValueArgument>(firDiagnostic, token), KtFirDiagnostic.NamedArgumentsNotAllowed
@@ -1471,19 +1471,19 @@ internal class ArgumentPassedTwiceImpl(
 ) : KtAbstractFirDiagnostic<KtValueArgument>(firDiagnostic, token), KtFirDiagnostic.ArgumentPassedTwice
 
 internal class TooManyArgumentsImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TooManyArguments
 
 internal class NoValueForParameterImpl(
-    override val violatedParameter: KtSymbol,
+    override konst violatedParameter: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NoValueForParameter
 
 internal class NamedParameterNotFoundImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtValueArgument>(firDiagnostic, token), KtFirDiagnostic.NamedParameterNotFound
@@ -1494,16 +1494,16 @@ internal class NameForAmbiguousParameterImpl(
 ) : KtAbstractFirDiagnostic<KtValueArgument>(firDiagnostic, token), KtFirDiagnostic.NameForAmbiguousParameter
 
 internal class AssignmentTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.AssignmentTypeMismatch
 
 internal class ResultTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ResultTypeMismatch
@@ -1514,7 +1514,7 @@ internal class ManyLambdaExpressionArgumentsImpl(
 ) : KtAbstractFirDiagnostic<KtValueArgument>(firDiagnostic, token), KtFirDiagnostic.ManyLambdaExpressionArguments
 
 internal class NewInferenceNoInformationForParameterImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NewInferenceNoInformationForParameter
@@ -1525,13 +1525,13 @@ internal class SpreadOfNullableImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.SpreadOfNullable
 
 internal class AssigningSingleElementToVarargInNamedFormFunctionErrorImpl(
-    override val expectedArrayType: KtType,
+    override konst expectedArrayType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.AssigningSingleElementToVarargInNamedFormFunctionError
 
 internal class AssigningSingleElementToVarargInNamedFormFunctionWarningImpl(
-    override val expectedArrayType: KtType,
+    override konst expectedArrayType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.AssigningSingleElementToVarargInNamedFormFunctionWarning
@@ -1557,55 +1557,55 @@ internal class RedundantSpreadOperatorInNamedFormInFunctionImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.RedundantSpreadOperatorInNamedFormInFunction
 
 internal class InferenceUnsuccessfulForkImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InferenceUnsuccessfulFork
 
 internal class OverloadResolutionAmbiguityImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OverloadResolutionAmbiguity
 
 internal class AssignOperatorAmbiguityImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.AssignOperatorAmbiguity
 
 internal class IteratorAmbiguityImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.IteratorAmbiguity
 
 internal class HasNextFunctionAmbiguityImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.HasNextFunctionAmbiguity
 
 internal class NextAmbiguityImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NextAmbiguity
 
 internal class AmbiguousFunctionTypeKindImpl(
-    override val kinds: List<FunctionTypeKind>,
+    override konst kinds: List<FunctionTypeKind>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.AmbiguousFunctionTypeKind
 
 internal class NoContextReceiverImpl(
-    override val contextReceiverRepresentation: KtType,
+    override konst contextReceiverRepresentation: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NoContextReceiver
 
 internal class MultipleArgumentsApplicableForContextReceiverImpl(
-    override val contextReceiverRepresentation: KtType,
+    override konst contextReceiverRepresentation: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.MultipleArgumentsApplicableForContextReceiver
@@ -1636,15 +1636,15 @@ internal class ProjectionOnNonClassTypeArgumentImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ProjectionOnNonClassTypeArgument
 
 internal class UpperBoundViolatedImpl(
-    override val expectedUpperBound: KtType,
-    override val actualUpperBound: KtType,
+    override konst expectedUpperBound: KtType,
+    override konst actualUpperBound: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UpperBoundViolated
 
 internal class UpperBoundViolatedInTypealiasExpansionImpl(
-    override val expectedUpperBound: KtType,
-    override val actualUpperBound: KtType,
+    override konst expectedUpperBound: KtType,
+    override konst actualUpperBound: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UpperBoundViolatedInTypealiasExpansion
@@ -1655,21 +1655,21 @@ internal class TypeArgumentsNotAllowedImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeArgumentsNotAllowed
 
 internal class WrongNumberOfTypeArgumentsImpl(
-    override val expectedCount: Int,
-    override val classifier: KtClassLikeSymbol,
+    override konst expectedCount: Int,
+    override konst classifier: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.WrongNumberOfTypeArguments
 
 internal class NoTypeArgumentsOnRhsImpl(
-    override val expectedCount: Int,
-    override val classifier: KtClassLikeSymbol,
+    override konst expectedCount: Int,
+    override konst classifier: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.NoTypeArgumentsOnRhs
 
 internal class OuterClassArgumentsRequiredImpl(
-    override val outer: KtClassLikeSymbol,
+    override konst outer: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.OuterClassArgumentsRequired
@@ -1695,19 +1695,19 @@ internal class TypeParametersInEnumImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeParametersInEnum
 
 internal class ConflictingProjectionImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeProjection>(firDiagnostic, token), KtFirDiagnostic.ConflictingProjection
 
 internal class ConflictingProjectionInTypealiasExpansionImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ConflictingProjectionInTypealiasExpansion
 
 internal class RedundantProjectionImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeProjection>(firDiagnostic, token), KtFirDiagnostic.RedundantProjection
@@ -1743,31 +1743,31 @@ internal class InnerClassOfGenericThrowableSubclassImpl(
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.InnerClassOfGenericThrowableSubclass
 
 internal class KclassWithNullableTypeParameterInSignatureImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.KclassWithNullableTypeParameterInSignature
 
 internal class TypeParameterAsReifiedImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeParameterAsReified
 
 internal class TypeParameterAsReifiedArrayErrorImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeParameterAsReifiedArrayError
 
 internal class TypeParameterAsReifiedArrayWarningImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeParameterAsReifiedArrayWarning
 
 internal class ReifiedTypeForbiddenSubstitutionImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ReifiedTypeForbiddenSubstitution
@@ -1778,7 +1778,7 @@ internal class DefinitelyNonNullableAsReifiedImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DefinitelyNonNullableAsReified
 
 internal class FinalUpperBoundImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.FinalUpperBound
@@ -1804,14 +1804,14 @@ internal class RepeatedBoundImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.RepeatedBound
 
 internal class ConflictingUpperBoundsImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ConflictingUpperBounds
 
 internal class NameInConstraintIsNotATypeParameterImpl(
-    override val typeParameterName: Name,
-    override val typeParametersOwner: KtSymbol,
+    override konst typeParameterName: Name,
+    override konst typeParametersOwner: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtSimpleNameExpression>(firDiagnostic, token), KtFirDiagnostic.NameInConstraintIsNotATypeParameter
@@ -1837,10 +1837,10 @@ internal class TypeParameterOfPropertyNotUsedInReceiverImpl(
 ) : KtAbstractFirDiagnostic<KtTypeParameter>(firDiagnostic, token), KtFirDiagnostic.TypeParameterOfPropertyNotUsedInReceiver
 
 internal class ReturnTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
-    override val targetFunction: KtSymbol,
-    override val isMismatchDueToNullability: Boolean,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
+    override konst targetFunction: KtSymbol,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ReturnTypeMismatch
@@ -1886,42 +1886,42 @@ internal class DynamicReceiverNotAllowedImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.DynamicReceiverNotAllowed
 
 internal class IncompatibleTypesImpl(
-    override val typeA: KtType,
-    override val typeB: KtType,
+    override konst typeA: KtType,
+    override konst typeB: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.IncompatibleTypes
 
 internal class IncompatibleTypesWarningImpl(
-    override val typeA: KtType,
-    override val typeB: KtType,
+    override konst typeA: KtType,
+    override konst typeB: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.IncompatibleTypesWarning
 
 internal class TypeVarianceConflictErrorImpl(
-    override val typeParameter: KtTypeParameterSymbol,
-    override val typeParameterVariance: Variance,
-    override val variance: Variance,
-    override val containingType: KtType,
+    override konst typeParameter: KtTypeParameterSymbol,
+    override konst typeParameterVariance: Variance,
+    override konst variance: Variance,
+    override konst containingType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeVarianceConflictError
 
 internal class TypeVarianceConflictInExpandedTypeImpl(
-    override val typeParameter: KtTypeParameterSymbol,
-    override val typeParameterVariance: Variance,
-    override val variance: Variance,
-    override val containingType: KtType,
+    override konst typeParameter: KtTypeParameterSymbol,
+    override konst typeParameterVariance: Variance,
+    override konst variance: Variance,
+    override konst containingType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.TypeVarianceConflictInExpandedType
 
 internal class SmartcastImpossibleImpl(
-    override val desiredType: KtType,
-    override val subject: KtExpression,
-    override val description: String,
-    override val isCastToNotNull: Boolean,
+    override konst desiredType: KtType,
+    override konst subject: KtExpression,
+    override konst description: String,
+    override konst isCastToNotNull: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.SmartcastImpossible
@@ -1932,34 +1932,34 @@ internal class RedundantNullableImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.RedundantNullable
 
 internal class PlatformClassMappedToKotlinImpl(
-    override val kotlinClass: FqName,
+    override konst kotlinClass: FqName,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.PlatformClassMappedToKotlin
 
 internal class InferredTypeVariableIntoEmptyIntersectionErrorImpl(
-    override val typeVariableDescription: String,
-    override val incompatibleTypes: List<KtType>,
-    override val description: String,
-    override val causingTypes: String,
+    override konst typeVariableDescription: String,
+    override konst incompatibleTypes: List<KtType>,
+    override konst description: String,
+    override konst causingTypes: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InferredTypeVariableIntoEmptyIntersectionError
 
 internal class InferredTypeVariableIntoEmptyIntersectionWarningImpl(
-    override val typeVariableDescription: String,
-    override val incompatibleTypes: List<KtType>,
-    override val description: String,
-    override val causingTypes: String,
+    override konst typeVariableDescription: String,
+    override konst incompatibleTypes: List<KtType>,
+    override konst description: String,
+    override konst causingTypes: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InferredTypeVariableIntoEmptyIntersectionWarning
 
 internal class InferredTypeVariableIntoPossibleEmptyIntersectionImpl(
-    override val typeVariableDescription: String,
-    override val incompatibleTypes: List<KtType>,
-    override val description: String,
-    override val causingTypes: String,
+    override konst typeVariableDescription: String,
+    override konst incompatibleTypes: List<KtType>,
+    override konst description: String,
+    override konst causingTypes: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.InferredTypeVariableIntoPossibleEmptyIntersection
@@ -1980,7 +1980,7 @@ internal class NullableOnDefinitelyNotNullableImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.NullableOnDefinitelyNotNullable
 
 internal class ExtensionInClassReferenceNotAllowedImpl(
-    override val referencedDeclaration: KtCallableSymbol,
+    override konst referencedDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ExtensionInClassReferenceNotAllowed
@@ -2006,212 +2006,212 @@ internal class NullableTypeInClassLiteralLhsImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NullableTypeInClassLiteralLhs
 
 internal class ExpressionOfNullableTypeInClassLiteralLhsImpl(
-    override val lhsType: KtType,
+    override konst lhsType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ExpressionOfNullableTypeInClassLiteralLhs
 
 internal class NothingToOverrideImpl(
-    override val declaration: KtCallableSymbol,
+    override konst declaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.NothingToOverride
 
 internal class CannotOverrideInvisibleMemberImpl(
-    override val overridingMember: KtCallableSymbol,
-    override val baseMember: KtCallableSymbol,
+    override konst overridingMember: KtCallableSymbol,
+    override konst baseMember: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.CannotOverrideInvisibleMember
 
 internal class DataClassOverrideConflictImpl(
-    override val overridingMember: KtCallableSymbol,
-    override val baseMember: KtCallableSymbol,
+    override konst overridingMember: KtCallableSymbol,
+    override konst baseMember: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.DataClassOverrideConflict
 
 internal class CannotWeakenAccessPrivilegeImpl(
-    override val overridingVisibility: Visibility,
-    override val overridden: KtCallableSymbol,
-    override val containingClassName: Name,
+    override konst overridingVisibility: Visibility,
+    override konst overridden: KtCallableSymbol,
+    override konst containingClassName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.CannotWeakenAccessPrivilege
 
 internal class CannotChangeAccessPrivilegeImpl(
-    override val overridingVisibility: Visibility,
-    override val overridden: KtCallableSymbol,
-    override val containingClassName: Name,
+    override konst overridingVisibility: Visibility,
+    override konst overridden: KtCallableSymbol,
+    override konst containingClassName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.CannotChangeAccessPrivilege
 
 internal class OverridingFinalMemberImpl(
-    override val overriddenDeclaration: KtCallableSymbol,
-    override val containingClassName: Name,
+    override konst overriddenDeclaration: KtCallableSymbol,
+    override konst containingClassName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.OverridingFinalMember
 
 internal class ReturnTypeMismatchOnInheritanceImpl(
-    override val conflictingDeclaration1: KtCallableSymbol,
-    override val conflictingDeclaration2: KtCallableSymbol,
+    override konst conflictingDeclaration1: KtCallableSymbol,
+    override konst conflictingDeclaration2: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.ReturnTypeMismatchOnInheritance
 
 internal class PropertyTypeMismatchOnInheritanceImpl(
-    override val conflictingDeclaration1: KtCallableSymbol,
-    override val conflictingDeclaration2: KtCallableSymbol,
+    override konst conflictingDeclaration1: KtCallableSymbol,
+    override konst conflictingDeclaration2: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.PropertyTypeMismatchOnInheritance
 
 internal class VarTypeMismatchOnInheritanceImpl(
-    override val conflictingDeclaration1: KtCallableSymbol,
-    override val conflictingDeclaration2: KtCallableSymbol,
+    override konst conflictingDeclaration1: KtCallableSymbol,
+    override konst conflictingDeclaration2: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.VarTypeMismatchOnInheritance
 
 internal class ReturnTypeMismatchByDelegationImpl(
-    override val delegateDeclaration: KtCallableSymbol,
-    override val baseDeclaration: KtCallableSymbol,
+    override konst delegateDeclaration: KtCallableSymbol,
+    override konst baseDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.ReturnTypeMismatchByDelegation
 
 internal class PropertyTypeMismatchByDelegationImpl(
-    override val delegateDeclaration: KtCallableSymbol,
-    override val baseDeclaration: KtCallableSymbol,
+    override konst delegateDeclaration: KtCallableSymbol,
+    override konst baseDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.PropertyTypeMismatchByDelegation
 
 internal class VarOverriddenByValByDelegationImpl(
-    override val delegateDeclaration: KtCallableSymbol,
-    override val baseDeclaration: KtCallableSymbol,
+    override konst delegateDeclaration: KtCallableSymbol,
+    override konst baseDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.VarOverriddenByValByDelegation
 
 internal class ConflictingInheritedMembersImpl(
-    override val owner: KtClassLikeSymbol,
-    override val conflictingDeclarations: List<KtCallableSymbol>,
+    override konst owner: KtClassLikeSymbol,
+    override konst conflictingDeclarations: List<KtCallableSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.ConflictingInheritedMembers
 
 internal class AbstractMemberNotImplementedImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val missingDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst missingDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.AbstractMemberNotImplemented
 
 internal class AbstractMemberNotImplementedByEnumEntryImpl(
-    override val enumEntry: KtSymbol,
-    override val missingDeclarations: List<KtCallableSymbol>,
+    override konst enumEntry: KtSymbol,
+    override konst missingDeclarations: List<KtCallableSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtEnumEntry>(firDiagnostic, token), KtFirDiagnostic.AbstractMemberNotImplementedByEnumEntry
 
 internal class AbstractClassMemberNotImplementedImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val missingDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst missingDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.AbstractClassMemberNotImplemented
 
 internal class InvisibleAbstractMemberFromSuperErrorImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val invisibleDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst invisibleDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.InvisibleAbstractMemberFromSuperError
 
 internal class InvisibleAbstractMemberFromSuperWarningImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val invisibleDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst invisibleDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.InvisibleAbstractMemberFromSuperWarning
 
 internal class AmbiguousAnonymousTypeInferredImpl(
-    override val superTypes: List<KtType>,
+    override konst superTypes: List<KtType>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.AmbiguousAnonymousTypeInferred
 
 internal class ManyImplMemberNotImplementedImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val missingDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst missingDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.ManyImplMemberNotImplemented
 
 internal class ManyInterfacesMemberNotImplementedImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val missingDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst missingDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.ManyInterfacesMemberNotImplemented
 
 internal class OverridingFinalMemberByDelegationImpl(
-    override val delegatedDeclaration: KtCallableSymbol,
-    override val overriddenDeclaration: KtCallableSymbol,
+    override konst delegatedDeclaration: KtCallableSymbol,
+    override konst overriddenDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.OverridingFinalMemberByDelegation
 
 internal class DelegatedMemberHidesSupertypeOverrideImpl(
-    override val delegatedDeclaration: KtCallableSymbol,
-    override val overriddenDeclaration: KtCallableSymbol,
+    override konst delegatedDeclaration: KtCallableSymbol,
+    override konst overriddenDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtClassOrObject>(firDiagnostic, token), KtFirDiagnostic.DelegatedMemberHidesSupertypeOverride
 
 internal class ReturnTypeMismatchOnOverrideImpl(
-    override val function: KtCallableSymbol,
-    override val superFunction: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
+    override konst superFunction: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ReturnTypeMismatchOnOverride
 
 internal class PropertyTypeMismatchOnOverrideImpl(
-    override val property: KtCallableSymbol,
-    override val superProperty: KtCallableSymbol,
+    override konst property: KtCallableSymbol,
+    override konst superProperty: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.PropertyTypeMismatchOnOverride
 
 internal class VarTypeMismatchOnOverrideImpl(
-    override val variable: KtCallableSymbol,
-    override val superVariable: KtCallableSymbol,
+    override konst variable: KtCallableSymbol,
+    override konst superVariable: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.VarTypeMismatchOnOverride
 
 internal class VarOverriddenByValImpl(
-    override val overridingDeclaration: KtCallableSymbol,
-    override val overriddenDeclaration: KtCallableSymbol,
+    override konst overridingDeclaration: KtCallableSymbol,
+    override konst overriddenDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.VarOverriddenByVal
 
 internal class VarImplementedByInheritedValErrorImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val overridingDeclaration: KtCallableSymbol,
-    override val overriddenDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst overridingDeclaration: KtCallableSymbol,
+    override konst overriddenDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.VarImplementedByInheritedValError
 
 internal class VarImplementedByInheritedValWarningImpl(
-    override val classOrObject: KtClassLikeSymbol,
-    override val overridingDeclaration: KtCallableSymbol,
-    override val overriddenDeclaration: KtCallableSymbol,
+    override konst classOrObject: KtClassLikeSymbol,
+    override konst overridingDeclaration: KtCallableSymbol,
+    override konst overriddenDeclaration: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.VarImplementedByInheritedValWarning
@@ -2227,8 +2227,8 @@ internal class NonFinalMemberInObjectImpl(
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.NonFinalMemberInObject
 
 internal class VirtualMemberHiddenImpl(
-    override val declared: KtCallableSymbol,
-    override val overriddenContainer: KtClassLikeSymbol,
+    override konst declared: KtCallableSymbol,
+    override konst overriddenContainer: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.VirtualMemberHidden
@@ -2239,19 +2239,19 @@ internal class ManyCompanionObjectsImpl(
 ) : KtAbstractFirDiagnostic<KtObjectDeclaration>(firDiagnostic, token), KtFirDiagnostic.ManyCompanionObjects
 
 internal class ConflictingOverloadsImpl(
-    override val conflictingOverloads: List<KtSymbol>,
+    override konst conflictingOverloads: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ConflictingOverloads
 
 internal class RedeclarationImpl(
-    override val conflictingDeclarations: List<KtSymbol>,
+    override konst conflictingDeclarations: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.Redeclaration
 
 internal class PackageOrClassifierRedeclarationImpl(
-    override val conflictingDeclarations: List<KtSymbol>,
+    override konst conflictingDeclarations: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.PackageOrClassifierRedeclaration
@@ -2262,44 +2262,44 @@ internal class MethodOfAnyImplementedInInterfaceImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.MethodOfAnyImplementedInInterface
 
 internal class LocalObjectNotAllowedImpl(
-    override val objectName: Name,
+    override konst objectName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.LocalObjectNotAllowed
 
 internal class LocalInterfaceNotAllowedImpl(
-    override val interfaceName: Name,
+    override konst interfaceName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.LocalInterfaceNotAllowed
 
 internal class AbstractFunctionInNonAbstractClassImpl(
-    override val function: KtCallableSymbol,
-    override val containingClass: KtClassLikeSymbol,
+    override konst function: KtCallableSymbol,
+    override konst containingClass: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.AbstractFunctionInNonAbstractClass
 
 internal class AbstractFunctionWithBodyImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.AbstractFunctionWithBody
 
 internal class NonAbstractFunctionWithNoBodyImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.NonAbstractFunctionWithNoBody
 
 internal class PrivateFunctionWithNoBodyImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.PrivateFunctionWithNoBody
 
 internal class NonMemberFunctionNoBodyImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtFunction>(firDiagnostic, token), KtFirDiagnostic.NonMemberFunctionNoBody
@@ -2330,7 +2330,7 @@ internal class MultipleVarargParametersImpl(
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.MultipleVarargParameters
 
 internal class ForbiddenVarargParameterTypeImpl(
-    override val varargParameterType: KtType,
+    override konst varargParameterType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.ForbiddenVarargParameterType
@@ -2401,8 +2401,8 @@ internal class FunInterfaceWithSuspendFunctionImpl(
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.FunInterfaceWithSuspendFunction
 
 internal class AbstractPropertyInNonAbstractClassImpl(
-    override val property: KtCallableSymbol,
-    override val containingClass: KtClassLikeSymbol,
+    override konst property: KtCallableSymbol,
+    override konst containingClass: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtModifierListOwner>(firDiagnostic, token), KtFirDiagnostic.AbstractPropertyInNonAbstractClass
@@ -2543,7 +2543,7 @@ internal class ConstValWithDelegateImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ConstValWithDelegate
 
 internal class TypeCantBeUsedForConstValImpl(
-    override val constValType: KtType,
+    override konst constValType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtProperty>(firDiagnostic, token), KtFirDiagnostic.TypeCantBeUsedForConstVal
@@ -2559,28 +2559,28 @@ internal class ConstValWithNonConstInitializerImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ConstValWithNonConstInitializer
 
 internal class WrongSetterParameterTypeImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.WrongSetterParameterType
 
 internal class DelegateUsesExtensionPropertyTypeParameterErrorImpl(
-    override val usedTypeParameter: KtTypeParameterSymbol,
+    override konst usedTypeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtProperty>(firDiagnostic, token), KtFirDiagnostic.DelegateUsesExtensionPropertyTypeParameterError
 
 internal class DelegateUsesExtensionPropertyTypeParameterWarningImpl(
-    override val usedTypeParameter: KtTypeParameterSymbol,
+    override konst usedTypeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtProperty>(firDiagnostic, token), KtFirDiagnostic.DelegateUsesExtensionPropertyTypeParameterWarning
 
 internal class InitializerTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
-    override val isMismatchDueToNullability: Boolean,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
+    override konst isMismatchDueToNullability: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.InitializerTypeMismatch
@@ -2601,8 +2601,8 @@ internal class WrongSetterReturnTypeImpl(
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.WrongSetterReturnType
 
 internal class WrongGetterReturnTypeImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeReference>(firDiagnostic, token), KtFirDiagnostic.WrongGetterReturnType
@@ -2708,7 +2708,7 @@ internal class LateinitIntrinsicCallInInlineFunctionImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.LateinitIntrinsicCallInInlineFunction
 
 internal class LateinitIntrinsicCallOnNonAccessiblePropertyImpl(
-    override val declaration: KtSymbol,
+    override konst declaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.LateinitIntrinsicCallOnNonAccessibleProperty
@@ -2809,14 +2809,14 @@ internal class ActualFunctionWithDefaultArgumentsImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ActualFunctionWithDefaultArguments
 
 internal class DefaultArgumentsInExpectWithActualTypealiasImpl(
-    override val expectClassSymbol: KtClassLikeSymbol,
-    override val members: List<KtCallableSymbol>,
+    override konst expectClassSymbol: KtClassLikeSymbol,
+    override konst members: List<KtCallableSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtTypeAlias>(firDiagnostic, token), KtFirDiagnostic.DefaultArgumentsInExpectWithActualTypealias
 
 internal class ActualAnnotationConflictingDefaultArgumentValueImpl(
-    override val parameter: KtVariableLikeSymbol,
+    override konst parameter: KtVariableLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ActualAnnotationConflictingDefaultArgumentValue
@@ -2827,37 +2827,37 @@ internal class ExpectedFunctionSourceWithDefaultArgumentsNotFoundImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ExpectedFunctionSourceWithDefaultArgumentsNotFound
 
 internal class NoActualForExpectImpl(
-    override val declaration: KtSymbol,
-    override val module: FirModuleData,
-    override val compatibility: Map<ExpectActualCompatibility<FirBasedSymbol<*>>, List<KtSymbol>>,
+    override konst declaration: KtSymbol,
+    override konst module: FirModuleData,
+    override konst compatibility: Map<ExpectActualCompatibility<FirBasedSymbol<*>>, List<KtSymbol>>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.NoActualForExpect
 
 internal class ActualWithoutExpectImpl(
-    override val declaration: KtSymbol,
-    override val compatibility: Map<ExpectActualCompatibility<FirBasedSymbol<*>>, List<KtSymbol>>,
+    override konst declaration: KtSymbol,
+    override konst compatibility: Map<ExpectActualCompatibility<FirBasedSymbol<*>>, List<KtSymbol>>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.ActualWithoutExpect
 
 internal class AmbiguousActualsImpl(
-    override val declaration: KtSymbol,
-    override val candidates: List<KtSymbol>,
+    override konst declaration: KtSymbol,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.AmbiguousActuals
 
 internal class AmbiguousExpectsImpl(
-    override val declaration: KtSymbol,
-    override val modules: List<FirModuleData>,
+    override konst declaration: KtSymbol,
+    override konst modules: List<FirModuleData>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.AmbiguousExpects
 
 internal class NoActualClassMemberForExpectedClassImpl(
-    override val declaration: KtSymbol,
-    override val members: List<Pair<KtSymbol, Map<Incompatible<FirBasedSymbol<*>>, List<KtSymbol>>>>,
+    override konst declaration: KtSymbol,
+    override konst members: List<Pair<KtSymbol, Map<Incompatible<FirBasedSymbol<*>>, List<KtSymbol>>>>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.NoActualClassMemberForExpectedClass
@@ -2873,103 +2873,103 @@ internal class InitializerRequiredForDestructuringDeclarationImpl(
 ) : KtAbstractFirDiagnostic<KtDestructuringDeclaration>(firDiagnostic, token), KtFirDiagnostic.InitializerRequiredForDestructuringDeclaration
 
 internal class ComponentFunctionMissingImpl(
-    override val missingFunctionName: Name,
-    override val destructingType: KtType,
+    override konst missingFunctionName: Name,
+    override konst destructingType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ComponentFunctionMissing
 
 internal class ComponentFunctionAmbiguityImpl(
-    override val functionWithAmbiguityName: Name,
-    override val candidates: List<KtSymbol>,
+    override konst functionWithAmbiguityName: Name,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ComponentFunctionAmbiguity
 
 internal class ComponentFunctionOnNullableImpl(
-    override val componentFunctionName: Name,
+    override konst componentFunctionName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ComponentFunctionOnNullable
 
 internal class ComponentFunctionReturnTypeMismatchImpl(
-    override val componentFunctionName: Name,
-    override val destructingType: KtType,
-    override val expectedType: KtType,
+    override konst componentFunctionName: Name,
+    override konst destructingType: KtType,
+    override konst expectedType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ComponentFunctionReturnTypeMismatch
 
 internal class UninitializedVariableImpl(
-    override val variable: KtVariableSymbol,
+    override konst variable: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UninitializedVariable
 
 internal class UninitializedParameterImpl(
-    override val parameter: KtSymbol,
+    override konst parameter: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtSimpleNameExpression>(firDiagnostic, token), KtFirDiagnostic.UninitializedParameter
 
 internal class UninitializedEnumEntryImpl(
-    override val enumEntry: KtSymbol,
+    override konst enumEntry: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UninitializedEnumEntry
 
 internal class UninitializedEnumCompanionImpl(
-    override val enumClass: KtClassLikeSymbol,
+    override konst enumClass: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UninitializedEnumCompanion
 
 internal class ValReassignmentImpl(
-    override val variable: KtVariableLikeSymbol,
+    override konst variable: KtVariableLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ValReassignment
 
 internal class ValReassignmentViaBackingFieldErrorImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ValReassignmentViaBackingFieldError
 
 internal class ValReassignmentViaBackingFieldWarningImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ValReassignmentViaBackingFieldWarning
 
 internal class CapturedValInitializationImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.CapturedValInitialization
 
 internal class CapturedMemberValInitializationImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.CapturedMemberValInitialization
 
 internal class SetterProjectedOutImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtBinaryExpression>(firDiagnostic, token), KtFirDiagnostic.SetterProjectedOut
 
 internal class WrongInvocationKindImpl(
-    override val declaration: KtSymbol,
-    override val requiredRange: EventOccurrencesRange,
-    override val actualRange: EventOccurrencesRange,
+    override konst declaration: KtSymbol,
+    override konst requiredRange: EventOccurrencesRange,
+    override konst actualRange: EventOccurrencesRange,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.WrongInvocationKind
 
 internal class LeakedInPlaceLambdaImpl(
-    override val lambda: KtSymbol,
+    override konst lambda: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.LeakedInPlaceLambda
@@ -2985,21 +2985,21 @@ internal class VariableWithNoTypeNoInitializerImpl(
 ) : KtAbstractFirDiagnostic<KtVariableDeclaration>(firDiagnostic, token), KtFirDiagnostic.VariableWithNoTypeNoInitializer
 
 internal class InitializationBeforeDeclarationImpl(
-    override val property: KtSymbol,
+    override konst property: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.InitializationBeforeDeclaration
 
 internal class UnreachableCodeImpl(
-    override val reachable: List<PsiElement>,
-    override val unreachable: List<PsiElement>,
+    override konst reachable: List<PsiElement>,
+    override konst unreachable: List<PsiElement>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.UnreachableCode
 
 internal class SenselessComparisonImpl(
-    override val expression: KtExpression,
-    override val compareResult: Boolean,
+    override konst expression: KtExpression,
+    override konst compareResult: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.SenselessComparison
@@ -3015,30 +3015,30 @@ internal class TypecheckerHasRunIntoRecursiveProblemImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.TypecheckerHasRunIntoRecursiveProblem
 
 internal class UnsafeCallImpl(
-    override val receiverType: KtType,
-    override val receiverExpression: KtExpression?,
+    override konst receiverType: KtType,
+    override konst receiverExpression: KtExpression?,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnsafeCall
 
 internal class UnsafeImplicitInvokeCallImpl(
-    override val receiverType: KtType,
+    override konst receiverType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnsafeImplicitInvokeCall
 
 internal class UnsafeInfixCallImpl(
-    override val receiverExpression: KtExpression,
-    override val operator: String,
-    override val argumentExpression: KtExpression,
+    override konst receiverExpression: KtExpression,
+    override konst operator: String,
+    override konst argumentExpression: KtExpression,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UnsafeInfixCall
 
 internal class UnsafeOperatorCallImpl(
-    override val receiverExpression: KtExpression,
-    override val operator: String,
-    override val argumentExpression: KtExpression,
+    override konst receiverExpression: KtExpression,
+    override konst operator: String,
+    override konst argumentExpression: KtExpression,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UnsafeOperatorCall
@@ -3049,7 +3049,7 @@ internal class IteratorOnNullableImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.IteratorOnNullable
 
 internal class UnnecessarySafeCallImpl(
-    override val receiverType: KtType,
+    override konst receiverType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnnecessarySafeCall
@@ -3065,7 +3065,7 @@ internal class UnexpectedSafeCallImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.UnexpectedSafeCall
 
 internal class UnnecessaryNotNullAssertionImpl(
-    override val receiverType: KtType,
+    override konst receiverType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.UnnecessaryNotNullAssertion
@@ -3081,7 +3081,7 @@ internal class NotNullAssertionOnCallableReferenceImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NotNullAssertionOnCallableReference
 
 internal class UselessElvisImpl(
-    override val receiverType: KtType,
+    override konst receiverType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtBinaryExpression>(firDiagnostic, token), KtFirDiagnostic.UselessElvis
@@ -3092,7 +3092,7 @@ internal class UselessElvisRightIsNullImpl(
 ) : KtAbstractFirDiagnostic<KtBinaryExpression>(firDiagnostic, token), KtFirDiagnostic.UselessElvisRightIsNull
 
 internal class CannotCheckForErasedImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.CannotCheckForErased
@@ -3108,14 +3108,14 @@ internal class UselessCastImpl(
 ) : KtAbstractFirDiagnostic<KtBinaryExpressionWithTypeRHS>(firDiagnostic, token), KtFirDiagnostic.UselessCast
 
 internal class UncheckedCastImpl(
-    override val originalType: KtType,
-    override val targetType: KtType,
+    override konst originalType: KtType,
+    override konst targetType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtBinaryExpressionWithTypeRHS>(firDiagnostic, token), KtFirDiagnostic.UncheckedCast
 
 internal class UselessIsCheckImpl(
-    override val compileTimeCheckResult: Boolean,
+    override konst compileTimeCheckResult: Boolean,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.UselessIsCheck
@@ -3136,22 +3136,22 @@ internal class ExpectedConditionImpl(
 ) : KtAbstractFirDiagnostic<KtWhenCondition>(firDiagnostic, token), KtFirDiagnostic.ExpectedCondition
 
 internal class NoElseInWhenImpl(
-    override val missingWhenCases: List<WhenMissingCase>,
+    override konst missingWhenCases: List<WhenMissingCase>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtWhenExpression>(firDiagnostic, token), KtFirDiagnostic.NoElseInWhen
 
 internal class NonExhaustiveWhenStatementImpl(
-    override val type: String,
-    override val missingWhenCases: List<WhenMissingCase>,
+    override konst type: String,
+    override konst missingWhenCases: List<WhenMissingCase>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtWhenExpression>(firDiagnostic, token), KtFirDiagnostic.NonExhaustiveWhenStatement
 
-internal class InvalidIfAsExpressionImpl(
+internal class InkonstidIfAsExpressionImpl(
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
-) : KtAbstractFirDiagnostic<KtIfExpression>(firDiagnostic, token), KtFirDiagnostic.InvalidIfAsExpression
+) : KtAbstractFirDiagnostic<KtIfExpression>(firDiagnostic, token), KtFirDiagnostic.InkonstidIfAsExpression
 
 internal class ElseMisplacedInWhenImpl(
     firDiagnostic: KtPsiDiagnostic,
@@ -3159,7 +3159,7 @@ internal class ElseMisplacedInWhenImpl(
 ) : KtAbstractFirDiagnostic<KtWhenEntry>(firDiagnostic, token), KtFirDiagnostic.ElseMisplacedInWhen
 
 internal class IllegalDeclarationInWhenSubjectImpl(
-    override val illegalReason: String,
+    override konst illegalReason: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.IllegalDeclarationInWhenSubject
@@ -3185,19 +3185,19 @@ internal class ConfusingBranchConditionWarningImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.ConfusingBranchConditionWarning
 
 internal class TypeParameterIsNotAnExpressionImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtSimpleNameExpression>(firDiagnostic, token), KtFirDiagnostic.TypeParameterIsNotAnExpression
 
 internal class TypeParameterOnLhsOfDotImpl(
-    override val typeParameter: KtTypeParameterSymbol,
+    override konst typeParameter: KtTypeParameterSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtSimpleNameExpression>(firDiagnostic, token), KtFirDiagnostic.TypeParameterOnLhsOfDot
 
 internal class NoCompanionObjectImpl(
-    override val klass: KtClassLikeSymbol,
+    override konst klass: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NoCompanionObject
@@ -3208,13 +3208,13 @@ internal class ExpressionExpectedPackageFoundImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.ExpressionExpectedPackageFound
 
 internal class ErrorInContractDescriptionImpl(
-    override val reason: String,
+    override konst reason: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ErrorInContractDescription
 
 internal class ContractNotAllowedImpl(
-    override val reason: String,
+    override konst reason: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ContractNotAllowed
@@ -3245,43 +3245,43 @@ internal class NextMissingImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NextMissing
 
 internal class HasNextFunctionNoneApplicableImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.HasNextFunctionNoneApplicable
 
 internal class NextNoneApplicableImpl(
-    override val candidates: List<KtSymbol>,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NextNoneApplicable
 
 internal class DelegateSpecialFunctionMissingImpl(
-    override val expectedFunctionSignature: String,
-    override val delegateType: KtType,
-    override val description: String,
+    override konst expectedFunctionSignature: String,
+    override konst delegateType: KtType,
+    override konst description: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.DelegateSpecialFunctionMissing
 
 internal class DelegateSpecialFunctionAmbiguityImpl(
-    override val expectedFunctionSignature: String,
-    override val candidates: List<KtSymbol>,
+    override konst expectedFunctionSignature: String,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.DelegateSpecialFunctionAmbiguity
 
 internal class DelegateSpecialFunctionNoneApplicableImpl(
-    override val expectedFunctionSignature: String,
-    override val candidates: List<KtSymbol>,
+    override konst expectedFunctionSignature: String,
+    override konst candidates: List<KtSymbol>,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.DelegateSpecialFunctionNoneApplicable
 
 internal class DelegateSpecialFunctionReturnTypeMismatchImpl(
-    override val delegateFunction: String,
-    override val expectedType: KtType,
-    override val actualType: KtType,
+    override konst delegateFunction: String,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.DelegateSpecialFunctionReturnTypeMismatch
@@ -3301,72 +3301,72 @@ internal class ResolvedToUnderscoreNamedCatchParameterImpl(
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNameReferenceExpression>(firDiagnostic, token), KtFirDiagnostic.ResolvedToUnderscoreNamedCatchParameter
 
-internal class InvalidCharactersImpl(
-    override val message: String,
+internal class InkonstidCharactersImpl(
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
-) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.InvalidCharacters
+) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.InkonstidCharacters
 
 internal class DangerousCharactersImpl(
-    override val characters: String,
+    override konst characters: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedDeclaration>(firDiagnostic, token), KtFirDiagnostic.DangerousCharacters
 
 internal class EqualityNotApplicableImpl(
-    override val operator: String,
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst operator: String,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtBinaryExpression>(firDiagnostic, token), KtFirDiagnostic.EqualityNotApplicable
 
 internal class EqualityNotApplicableWarningImpl(
-    override val operator: String,
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst operator: String,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtBinaryExpression>(firDiagnostic, token), KtFirDiagnostic.EqualityNotApplicableWarning
 
 internal class IncompatibleEnumComparisonErrorImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.IncompatibleEnumComparisonError
 
 internal class IncompatibleEnumComparisonImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.IncompatibleEnumComparison
 
 internal class ForbiddenIdentityEqualsImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ForbiddenIdentityEquals
 
 internal class ForbiddenIdentityEqualsWarningImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ForbiddenIdentityEqualsWarning
 
 internal class DeprecatedIdentityEqualsImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.DeprecatedIdentityEquals
 
 internal class ImplicitBoxingInIdentityEqualsImpl(
-    override val leftType: KtType,
-    override val rightType: KtType,
+    override konst leftType: KtType,
+    override konst rightType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ImplicitBoxingInIdentityEquals
@@ -3377,20 +3377,20 @@ internal class IncDecShouldNotReturnUnitImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.IncDecShouldNotReturnUnit
 
 internal class AssignmentOperatorShouldReturnUnitImpl(
-    override val functionSymbol: KtFunctionLikeSymbol,
-    override val operator: String,
+    override konst functionSymbol: KtFunctionLikeSymbol,
+    override konst operator: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.AssignmentOperatorShouldReturnUnit
 
 internal class PropertyAsOperatorImpl(
-    override val property: KtVariableSymbol,
+    override konst property: KtVariableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.PropertyAsOperator
 
 internal class DslScopeViolationImpl(
-    override val calleeSymbol: KtSymbol,
+    override konst calleeSymbol: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DslScopeViolation
@@ -3406,7 +3406,7 @@ internal class RecursiveTypealiasExpansionImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.RecursiveTypealiasExpansion
 
 internal class TypealiasShouldExpandToClassImpl(
-    override val expandedType: KtType,
+    override konst expandedType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.TypealiasShouldExpandToClass
@@ -3517,19 +3517,19 @@ internal class AnonymousInitializerInInterfaceImpl(
 ) : KtAbstractFirDiagnostic<KtAnonymousInitializer>(firDiagnostic, token), KtFirDiagnostic.AnonymousInitializerInInterface
 
 internal class UsageIsNotInlinableImpl(
-    override val parameter: KtSymbol,
+    override konst parameter: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.UsageIsNotInlinable
 
 internal class NonLocalReturnNotAllowedImpl(
-    override val parameter: KtSymbol,
+    override konst parameter: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonLocalReturnNotAllowed
 
 internal class NotYetSupportedInInlineImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.NotYetSupportedInInline
@@ -3540,55 +3540,55 @@ internal class NothingToInlineImpl(
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.NothingToInline
 
 internal class NullableInlineParameterImpl(
-    override val parameter: KtSymbol,
-    override val function: KtSymbol,
+    override konst parameter: KtSymbol,
+    override konst function: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.NullableInlineParameter
 
 internal class RecursionInInlineImpl(
-    override val symbol: KtSymbol,
+    override konst symbol: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.RecursionInInline
 
 internal class NonPublicCallFromPublicInlineImpl(
-    override val inlineDeclaration: KtSymbol,
-    override val referencedDeclaration: KtSymbol,
+    override konst inlineDeclaration: KtSymbol,
+    override konst referencedDeclaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonPublicCallFromPublicInline
 
 internal class ProtectedConstructorCallFromPublicInlineImpl(
-    override val inlineDeclaration: KtSymbol,
-    override val referencedDeclaration: KtSymbol,
+    override konst inlineDeclaration: KtSymbol,
+    override konst referencedDeclaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ProtectedConstructorCallFromPublicInline
 
 internal class ProtectedCallFromPublicInlineErrorImpl(
-    override val inlineDeclaration: KtSymbol,
-    override val referencedDeclaration: KtSymbol,
+    override konst inlineDeclaration: KtSymbol,
+    override konst referencedDeclaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ProtectedCallFromPublicInlineError
 
 internal class ProtectedCallFromPublicInlineImpl(
-    override val inlineDeclaration: KtSymbol,
-    override val referencedDeclaration: KtSymbol,
+    override konst inlineDeclaration: KtSymbol,
+    override konst referencedDeclaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ProtectedCallFromPublicInline
 
 internal class PrivateClassMemberFromInlineImpl(
-    override val inlineDeclaration: KtSymbol,
-    override val referencedDeclaration: KtSymbol,
+    override konst inlineDeclaration: KtSymbol,
+    override konst referencedDeclaration: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.PrivateClassMemberFromInline
 
 internal class SuperCallFromPublicInlineImpl(
-    override val symbol: KtSymbol,
+    override konst symbol: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.SuperCallFromPublicInline
@@ -3608,12 +3608,12 @@ internal class NonInternalPublishedApiImpl(
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonInternalPublishedApi
 
-internal class InvalidDefaultFunctionalParameterForInlineImpl(
-    override val defaultValue: KtExpression,
-    override val parameter: KtSymbol,
+internal class InkonstidDefaultFunctionalParameterForInlineImpl(
+    override konst defaultValue: KtExpression,
+    override konst parameter: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
-) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.InvalidDefaultFunctionalParameterForInline
+) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.InkonstidDefaultFunctionalParameterForInline
 
 internal class ReifiedTypeParameterInOverrideImpl(
     firDiagnostic: KtPsiDiagnostic,
@@ -3636,13 +3636,13 @@ internal class InlineSuspendFunctionTypeUnsupportedImpl(
 ) : KtAbstractFirDiagnostic<KtParameter>(firDiagnostic, token), KtFirDiagnostic.InlineSuspendFunctionTypeUnsupported
 
 internal class InefficientEqualsOverridingInValueClassImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtNamedFunction>(firDiagnostic, token), KtFirDiagnostic.InefficientEqualsOverridingInValueClass
 
 internal class CannotAllUnderImportFromSingletonImpl(
-    override val objectName: Name,
+    override konst objectName: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtImportDirective>(firDiagnostic, token), KtFirDiagnostic.CannotAllUnderImportFromSingleton
@@ -3653,13 +3653,13 @@ internal class PackageCannotBeImportedImpl(
 ) : KtAbstractFirDiagnostic<KtImportDirective>(firDiagnostic, token), KtFirDiagnostic.PackageCannotBeImported
 
 internal class CannotBeImportedImpl(
-    override val name: Name,
+    override konst name: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtImportDirective>(firDiagnostic, token), KtFirDiagnostic.CannotBeImported
 
 internal class ConflictingImportImpl(
-    override val name: Name,
+    override konst name: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtImportDirective>(firDiagnostic, token), KtFirDiagnostic.ConflictingImport
@@ -3670,13 +3670,13 @@ internal class OperatorRenamedOnImportImpl(
 ) : KtAbstractFirDiagnostic<KtImportDirective>(firDiagnostic, token), KtFirDiagnostic.OperatorRenamedOnImport
 
 internal class IllegalSuspendFunctionCallImpl(
-    override val suspendCallable: KtSymbol,
+    override konst suspendCallable: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.IllegalSuspendFunctionCall
 
 internal class IllegalSuspendPropertyAccessImpl(
-    override val suspendCallable: KtSymbol,
+    override konst suspendCallable: KtSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.IllegalSuspendPropertyAccess
@@ -3782,8 +3782,8 @@ internal class JvmInlineWithoutValueClassImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.JvmInlineWithoutValueClass
 
 internal class JavaTypeMismatchImpl(
-    override val expectedType: KtType,
-    override val actualType: KtType,
+    override konst expectedType: KtType,
+    override konst actualType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.JavaTypeMismatch
@@ -3859,7 +3859,7 @@ internal class OverloadsPrivateImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.OverloadsPrivate
 
 internal class DeprecatedJavaAnnotationImpl(
-    override val kotlinName: FqName,
+    override konst kotlinName: FqName,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.DeprecatedJavaAnnotation
@@ -3885,8 +3885,8 @@ internal class PositionedValueArgumentForJavaAnnotationImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.PositionedValueArgumentForJavaAnnotation
 
 internal class RedundantRepeatableAnnotationImpl(
-    override val kotlinRepeatable: FqName,
-    override val javaRepeatable: FqName,
+    override konst kotlinRepeatable: FqName,
+    override konst javaRepeatable: FqName,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RedundantRepeatableAnnotation
@@ -3942,7 +3942,7 @@ internal class DelegationByInJvmRecordImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.DelegationByInJvmRecord
 
 internal class JvmRecordExtendsClassImpl(
-    override val superType: KtType,
+    override konst superType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.JvmRecordExtendsClass
@@ -3953,7 +3953,7 @@ internal class IllegalJavaLangRecordSupertypeImpl(
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.IllegalJavaLangRecordSupertype
 
 internal class JvmDefaultInDeclarationImpl(
-    override val annotation: String,
+    override konst annotation: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.JvmDefaultInDeclaration
@@ -3994,68 +3994,68 @@ internal class NonSourceRepeatedAnnotationImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.NonSourceRepeatedAnnotation
 
 internal class RepeatedAnnotationWithContainerImpl(
-    override val name: ClassId,
-    override val explicitContainerName: ClassId,
+    override konst name: ClassId,
+    override konst explicitContainerName: ClassId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatedAnnotationWithContainer
 
 internal class RepeatableContainerMustHaveValueArrayErrorImpl(
-    override val container: ClassId,
-    override val annotation: ClassId,
+    override konst container: ClassId,
+    override konst annotation: ClassId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerMustHaveValueArrayError
 
 internal class RepeatableContainerMustHaveValueArrayWarningImpl(
-    override val container: ClassId,
-    override val annotation: ClassId,
+    override konst container: ClassId,
+    override konst annotation: ClassId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerMustHaveValueArrayWarning
 
 internal class RepeatableContainerHasNonDefaultParameterErrorImpl(
-    override val container: ClassId,
-    override val nonDefault: Name,
+    override konst container: ClassId,
+    override konst nonDefault: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerHasNonDefaultParameterError
 
 internal class RepeatableContainerHasNonDefaultParameterWarningImpl(
-    override val container: ClassId,
-    override val nonDefault: Name,
+    override konst container: ClassId,
+    override konst nonDefault: Name,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerHasNonDefaultParameterWarning
 
 internal class RepeatableContainerHasShorterRetentionErrorImpl(
-    override val container: ClassId,
-    override val retention: String,
-    override val annotation: ClassId,
-    override val annotationRetention: String,
+    override konst container: ClassId,
+    override konst retention: String,
+    override konst annotation: ClassId,
+    override konst annotationRetention: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerHasShorterRetentionError
 
 internal class RepeatableContainerHasShorterRetentionWarningImpl(
-    override val container: ClassId,
-    override val retention: String,
-    override val annotation: ClassId,
-    override val annotationRetention: String,
+    override konst container: ClassId,
+    override konst retention: String,
+    override konst annotation: ClassId,
+    override konst annotationRetention: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerHasShorterRetentionWarning
 
 internal class RepeatableContainerTargetSetNotASubsetErrorImpl(
-    override val container: ClassId,
-    override val annotation: ClassId,
+    override konst container: ClassId,
+    override konst annotation: ClassId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerTargetSetNotASubsetError
 
 internal class RepeatableContainerTargetSetNotASubsetWarningImpl(
-    override val container: ClassId,
-    override val annotation: ClassId,
+    override konst container: ClassId,
+    override konst annotation: ClassId,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableContainerTargetSetNotASubsetWarning
@@ -4071,19 +4071,19 @@ internal class RepeatableAnnotationHasNestedClassNamedContainerWarningImpl(
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.RepeatableAnnotationHasNestedClassNamedContainerWarning
 
 internal class SuspensionPointInsideCriticalSectionImpl(
-    override val function: KtCallableSymbol,
+    override konst function: KtCallableSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.SuspensionPointInsideCriticalSection
 
 internal class InapplicableJvmFieldImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableJvmField
 
 internal class InapplicableJvmFieldWarningImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtAnnotationEntry>(firDiagnostic, token), KtFirDiagnostic.InapplicableJvmFieldWarning
@@ -4134,7 +4134,7 @@ internal class OverridingExternalFunWithOptionalParamsImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.OverridingExternalFunWithOptionalParams
 
 internal class OverridingExternalFunWithOptionalParamsWithFakeImpl(
-    override val function: KtFunctionLikeSymbol,
+    override konst function: KtFunctionLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.OverridingExternalFunWithOptionalParamsWithFake
@@ -4190,7 +4190,7 @@ internal class NestedExternalDeclarationImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NestedExternalDeclaration
 
 internal class WrongExternalDeclarationImpl(
-    override val classKind: String,
+    override konst classKind: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.WrongExternalDeclaration
@@ -4236,20 +4236,20 @@ internal class NonAbstractMemberOfExternalInterfaceImpl(
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.NonAbstractMemberOfExternalInterface
 
 internal class NonExternalDeclarationInInappropriateFileImpl(
-    override val type: KtType,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonExternalDeclarationInInappropriateFile
 
 internal class CannotCheckForExternalInterfaceImpl(
-    override val targetType: KtType,
+    override konst targetType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.CannotCheckForExternalInterface
 
 internal class UncheckedCastToExternalInterfaceImpl(
-    override val sourceType: KtType,
-    override val targetType: KtType,
+    override konst sourceType: KtType,
+    override konst targetType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.UncheckedCastToExternalInterface
@@ -4260,14 +4260,14 @@ internal class ExternalInterfaceAsClassLiteralImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.ExternalInterfaceAsClassLiteral
 
 internal class JsExternalInheritorsOnlyImpl(
-    override val parent: KtClassLikeSymbol,
-    override val kid: KtClassLikeSymbol,
+    override konst parent: KtClassLikeSymbol,
+    override konst kid: KtClassLikeSymbol,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtDeclaration>(firDiagnostic, token), KtFirDiagnostic.JsExternalInheritorsOnly
 
 internal class JsExternalArgumentImpl(
-    override val argType: KtType,
+    override konst argType: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtExpression>(firDiagnostic, token), KtFirDiagnostic.JsExternalArgument
@@ -4278,20 +4278,20 @@ internal class NestedJsExportImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NestedJsExport
 
 internal class WrongExportedDeclarationImpl(
-    override val kind: String,
+    override konst kind: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.WrongExportedDeclaration
 
 internal class NonExportableTypeImpl(
-    override val kind: String,
-    override val type: KtType,
+    override konst kind: String,
+    override konst type: KtType,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonExportableType
 
 internal class NonConsumableExportedIdentifierImpl(
-    override val name: String,
+    override konst name: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.NonConsumableExportedIdentifier
@@ -4307,13 +4307,13 @@ internal class SpreadOperatorInDynamicCallImpl(
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.SpreadOperatorInDynamicCall
 
 internal class WrongOperationWithDynamicImpl(
-    override val operation: String,
+    override konst operation: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<KtElement>(firDiagnostic, token), KtFirDiagnostic.WrongOperationWithDynamic
 
 internal class SyntaxImpl(
-    override val message: String,
+    override konst message: String,
     firDiagnostic: KtPsiDiagnostic,
     token: KtLifetimeToken,
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtFirDiagnostic.Syntax

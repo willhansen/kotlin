@@ -4,31 +4,31 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, when-expression -> paragraph 2 -> sentence 2
  * NUMBER: 2
- * DESCRIPTION: 'When' without bound value and with invalid list of the boolean conditions in 'when entry'.
+ * DESCRIPTION: 'When' without bound konstue and with inkonstid list of the boolean conditions in 'when entry'.
  */
 
 fun case_1() {
     when {
-        value == 21,, -> return ""
-        value is Int, ,value is String, -> return ""
-        value in -100..100, value in value, -> return ""
+        konstue == 21,, -> return ""
+        konstue is Int, ,konstue is String, -> return ""
+        konstue in -100..100, konstue in konstue, -> return ""
     }
     when {
-        value == 21, , -> return ""
-        value is Int, ,value is String -> return ""
-        value in -100..100, ,value in value -> return ""
+        konstue == 21, , -> return ""
+        konstue is Int, ,konstue is String -> return ""
+        konstue in -100..100, ,konstue in konstue -> return ""
     }
     when {
         , , -> return ""
     }
     when {
-        , value == 21 -> return ""
-        , value is Int, value is String -> return ""
-        , value in -100..100, value in value -> return ""
+        , konstue == 21 -> return ""
+        , konstue is Int, konstue is String -> return ""
+        , konstue in -100..100, konstue in konstue -> return ""
     }
     when {
-        value is Int value is String -> return ""
-        value in -100..100 value in value -> return ""
+        konstue is Int konstue is String -> return ""
+        konstue in -100..100 konstue in konstue -> return ""
     }
 
     return ""

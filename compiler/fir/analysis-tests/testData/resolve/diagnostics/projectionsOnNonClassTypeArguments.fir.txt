@@ -12,7 +12,7 @@ FILE: projectionsOnNonClassTypeArguments.kt
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval a1: R|A<kotlin/Int, B>| = R|/A.A|<in R|kotlin/Int|, out R|B|>()
-        lval a2: R|A<kotlin/Int, B>| = R|/A.A|<R|kotlin/Int|, R|B|>()
-        lval a3: R|A<kotlin/Any?, kotlin/Any?>| = R|/A.A|<*, *>()
+        lkonst a1: R|A<kotlin/Int, B>| = R|/A.A|<in R|kotlin/Int|, out R|B|>()
+        lkonst a2: R|A<kotlin/Int, B>| = R|/A.A|<R|kotlin/Int|, R|B|>()
+        lkonst a3: R|A<kotlin/Any?, kotlin/Any?>| = R|/A.A|<*, *>()
     }

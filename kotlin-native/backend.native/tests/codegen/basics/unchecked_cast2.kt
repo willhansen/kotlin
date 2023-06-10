@@ -10,7 +10,7 @@ import kotlin.test.*
 @Test
 fun runTest() {
     try {
-        val x = cast<String>(Any())
+        konst x = cast<String>(Any())
         println(x.length)
     } catch (e: Throwable) {
         println("Ok")

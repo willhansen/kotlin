@@ -8,14 +8,14 @@ package org.jetbrains.kotlin.backend.common.serialization
 import org.jetbrains.kotlin.ir.util.IdSignature
 import java.util.regex.Pattern
 
-internal val functionPattern = Pattern.compile("^K?(Suspend)?Function\\d+$")
+internal konst functionPattern = Pattern.compile("^K?(Suspend)?Function\\d+$")
 
-internal val functionTypeInterfacePackages = listOf("kotlin", "kotlin.coroutines", "kotlin.reflect")
+internal konst functionTypeInterfacePackages = listOf("kotlin", "kotlin.coroutines", "kotlin.reflect")
 
 fun checkIsFunctionTypeInterfacePackageFqName(fqName: String) = fqName in functionTypeInterfacePackages
 
 fun checkIsFunctionInterface(idSig: IdSignature?): Boolean {
-    val publicSig = idSig?.asPublic()
+    konst publicSig = idSig?.asPublic()
     return publicSig != null &&
             checkIsFunctionTypeInterfacePackageFqName(publicSig.packageFqName) &&
             publicSig.declarationFqName.isNotEmpty() &&

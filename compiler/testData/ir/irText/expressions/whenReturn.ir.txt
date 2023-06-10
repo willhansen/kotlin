@@ -3,36 +3,36 @@ FILE fqName:<root> fileName:/whenReturn.kt
     VALUE_PARAMETER name:grade index:0 type:kotlin.String
     BLOCK_BODY
       BLOCK type=kotlin.Unit origin=WHEN
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.String [val]
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:kotlin.String [konst]
           GET_VAR 'grade: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
         WHEN type=kotlin.Unit origin=WHEN
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-              arg0: GET_VAR 'val tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="A"
+              arg0: GET_VAR 'konst tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
+              arg1: CONST String type=kotlin.String konstue="A"
             then: RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value="Excellent"
+              CONST String type=kotlin.String konstue="Excellent"
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-              arg0: GET_VAR 'val tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="B"
+              arg0: GET_VAR 'konst tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
+              arg1: CONST String type=kotlin.String konstue="B"
             then: RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value="Good"
+              CONST String type=kotlin.String konstue="Good"
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-              arg0: GET_VAR 'val tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="C"
+              arg0: GET_VAR 'konst tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
+              arg1: CONST String type=kotlin.String konstue="C"
             then: RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value="Mediocre"
+              CONST String type=kotlin.String konstue="Mediocre"
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-              arg0: GET_VAR 'val tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
-              arg1: CONST String type=kotlin.String value="D"
+              arg0: GET_VAR 'konst tmp_0: kotlin.String declared in <root>.toString' type=kotlin.String origin=null
+              arg1: CONST String type=kotlin.String konstue="D"
             then: RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value="Fair"
+              CONST String type=kotlin.String konstue="Fair"
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
+            if: CONST Boolean type=kotlin.Boolean konstue=true
             then: RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-              CONST String type=kotlin.String value="Failure"
+              CONST String type=kotlin.String konstue="Failure"
       RETURN type=kotlin.Nothing from='public final fun toString (grade: kotlin.String): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="???"
+        CONST String type=kotlin.String konstue="???"

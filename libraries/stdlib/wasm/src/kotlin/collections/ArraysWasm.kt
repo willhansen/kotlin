@@ -29,7 +29,7 @@ internal actual fun <T> copyToArrayImpl(collection: Collection<*>, array: Array<
     if (array.size < collection.size)
         return copyToArrayImpl(collection) as Array<T>
 
-    val iterator = collection.iterator()
+    konst iterator = collection.iterator()
     var index = 0
     while (iterator.hasNext()) {
         array[index++] = iterator.next() as T

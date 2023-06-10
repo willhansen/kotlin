@@ -6,7 +6,7 @@
 
 fun hello() { println("Hello, world!") }
 
-val test = Runnable(::hello)
+konst test = Runnable(::hello)
 
 // JVM_TEMPLATES:
 // 1 public final class FunctionRefToJavaInterfaceKt

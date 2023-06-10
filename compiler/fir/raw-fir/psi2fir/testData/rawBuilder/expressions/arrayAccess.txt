@@ -1,5 +1,5 @@
 FILE: arrayAccess.kt
-    public? final? val p: <implicit> = IntegerLiteral(0)
+    public? final? konst p: <implicit> = IntegerLiteral(0)
         public? get(): <implicit>
     public? final? fun foo(): <implicit> {
         ^foo IntegerLiteral(1)
@@ -9,7 +9,7 @@ FILE: arrayAccess.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val v: IntArray = R|<local>/v|
+        public? final? [IsFromPrimaryConstructor=true] konst v: IntArray = R|<local>/v|
             public? [ContainingClassKey=Wrapper] get(): IntArray
 
     }

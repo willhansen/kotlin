@@ -5,7 +5,7 @@ fun foo() {}
 fun test() {
     myRun {
         try {
-            val x = 1
+            konst x = 1
         } catch(e: Exception) {
             foo()
         }

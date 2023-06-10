@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}testVal
 //   Public signature: /testVal|2839078120601828782[0]
-val testVal: Int
+konst testVal: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-testVal>(){}kotlin.Int
   //   Public signature: /testVal.<get-testVal>|-7988245952340984303[0]
@@ -29,7 +29,7 @@ var testVar: Int
 // CHECK:
 //   Mangled name: {}testValWithExplicitDefaultGet
 //   Public signature: /testValWithExplicitDefaultGet|-1362346025810080601[0]
-val testValWithExplicitDefaultGet: Int
+konst testValWithExplicitDefaultGet: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-testValWithExplicitDefaultGet>(){}kotlin.Int
   //   Public signature: /testValWithExplicitDefaultGet.<get-testValWithExplicitDefaultGet>|2648103895002657715[0]
@@ -105,7 +105,7 @@ lateinit var testLateinitVar: Any
 // CHECK:
 //   Mangled name: @kotlin.Any{}testExtVal
 //   Public signature: /testExtVal|-8237418459332608534[0]
-val Any.testExtVal: Int
+konst Any.testExtVal: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-testExtVal>@kotlin.Any(){}kotlin.Int
   //   Public signature: /testExtVal.<get-testExtVal>|8770503610838008181[0]
@@ -117,7 +117,7 @@ val Any.testExtVal: Int
 // CHECK:
 //   Mangled name: {}testValWithExplicitGet
 //   Public signature: /testValWithExplicitGet|-2760968258434476382[0]
-val testValWithExplicitGet: Int
+konst testValWithExplicitGet: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-testValWithExplicitGet>(){}kotlin.Int
   //   Public signature: /testValWithExplicitGet.<get-testValWithExplicitGet>|-5725471951034126732[0]

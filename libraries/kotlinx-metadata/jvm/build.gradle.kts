@@ -6,7 +6,7 @@ description = "Kotlin JVM metadata manipulation library"
 plugins {
     kotlin("jvm")
     id("jps-compatible")
-    id("org.jetbrains.kotlinx.binary-compatibility-validator")
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator")
 }
 
 /*
@@ -20,7 +20,7 @@ plugins {
  *      - `-PdeployRepoPassword=password`: (optional) the password to authenticate in the deployment repository
  */
 group = "org.jetbrains.kotlinx"
-val deployVersion = findProperty("kotlinxMetadataDeployVersion") as String?
+konst deployVersion = findProperty("kotlinxMetadataDeployVersion") as String?
 version = deployVersion ?: "0.1-SNAPSHOT"
 
 //kotlin {
@@ -32,7 +32,7 @@ sourceSets {
     "test" { projectDefault() }
 }
 
-val embedded by configurations
+konst embedded by configurations
 embedded.isTransitive = false
 configurations.getByName("compileOnly").extendsFrom(embedded)
 configurations.getByName("testApi").extendsFrom(embedded)
@@ -53,14 +53,14 @@ if (deployVersion != null) {
     publish()
 }
 
-val runtimeJar = runtimeJarWithRelocation {
+konst runtimeJar = runtimeJarWithRelocation {
     from(mainSourceSet.output)
     exclude("**/*.proto")
     relocate("org.jetbrains.kotlin", "kotlinx.metadata.internal")
 }
 
 tasks.apiBuild {
-    inputJar.value(runtimeJar.flatMap { it.archiveFile })
+    inputJar.konstue(runtimeJar.flatMap { it.archiveFile })
 }
 
 apiValidation {

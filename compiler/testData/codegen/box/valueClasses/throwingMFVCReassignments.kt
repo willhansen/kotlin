@@ -5,9 +5,9 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
-class PointBox(var value: DPoint)
+class PointBox(var konstue: DPoint)
 
 fun box(): String {
     var p = DPoint(1.0, 2.0)
@@ -19,14 +19,14 @@ fun box(): String {
         return "Partially reassigned variable"
     }
     
-    val box = PointBox(p)
+    konst box = PointBox(p)
 
     try {
-        box.value = DPoint(3.0, error("Failure"))
+        box.konstue = DPoint(3.0, error("Failure"))
     } catch (_: Exception) {
     }
     
-    if (box.value != DPoint(1.0, 2.0)) {
+    if (box.konstue != DPoint(1.0, 2.0)) {
         return "Partially reassigned field"
     }
     

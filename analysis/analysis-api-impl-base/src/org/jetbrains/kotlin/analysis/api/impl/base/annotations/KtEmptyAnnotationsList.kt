@@ -13,10 +13,10 @@ import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
 import org.jetbrains.kotlin.name.ClassId
 
-class KtEmptyAnnotationsList(override val token: KtLifetimeToken) : KtAnnotationsList() {
-    override val annotations: List<KtAnnotationApplicationWithArgumentsInfo> get() = withValidityAssertion { emptyList() }
+class KtEmptyAnnotationsList(override konst token: KtLifetimeToken) : KtAnnotationsList() {
+    override konst annotations: List<KtAnnotationApplicationWithArgumentsInfo> get() = withValidityAssertion { emptyList() }
 
-    override val annotationInfos: List<KtAnnotationApplicationInfo> get() = withValidityAssertion { emptyList() }
+    override konst annotationInfos: List<KtAnnotationApplicationInfo> get() = withValidityAssertion { emptyList() }
 
     override fun hasAnnotation(
         classId: ClassId,
@@ -28,5 +28,5 @@ class KtEmptyAnnotationsList(override val token: KtLifetimeToken) : KtAnnotation
         useSiteTargetFilter: AnnotationUseSiteTargetFilter,
     ): List<KtAnnotationApplicationWithArgumentsInfo> = withValidityAssertion { emptyList() }
 
-    override val annotationClassIds: Collection<ClassId> get() = withValidityAssertion { emptyList() }
+    override konst annotationClassIds: Collection<ClassId> get() = withValidityAssertion { emptyList() }
 }

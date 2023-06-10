@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("DEPRECATION", "TYPEALIAS_EXPANSION_DEPRECATION") // Everything is scheduled for removal
+@file:Suppress("DEPRECATION", "TYPEALIAS_EXPANSION_DEPRECATION") // Everything is scheduled for remokonst
 @file:OptIn(ExperimentalForeignApi::class)
 
 package kotlinx.wasm.jsinterop
@@ -30,7 +30,7 @@ typealias Object = Int
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
 typealias Pointer = Int
 
-private const val WASM_TARGET_IS_DEPRECATED = "K/N WASM target and all related API is deprecated for removal. " +
+private const konst WASM_TARGET_IS_DEPRECATED = "K/N WASM target and all related API is deprecated for remokonst. " +
         "See https://blog.jetbrains.com/kotlin/2023/02/update-regarding-kotlin-native-targets for additional details"
 
 /**
@@ -49,20 +49,20 @@ external public fun freeArena(arena: Arena)
 @RetainForTarget("wasm32")
 @GCUnsafeCall("Konan_js_pushIntToArena")
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
-external public fun pushIntToArena(arena: Arena, value: Int)
+external public fun pushIntToArena(arena: Arena, konstue: Int)
 
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
-const val upperWord = 0xffffffff.toLong() shl 32
-
-@ExportForCppRuntime
-@Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
-fun doubleUpper(value: Double): Int =
-    ((value.toBits() and upperWord) ushr 32) .toInt()
+const konst upperWord = 0xffffffff.toLong() shl 32
 
 @ExportForCppRuntime
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
-fun doubleLower(value: Double): Int =
-    (value.toBits() and 0x00000000ffffffff) .toInt()
+fun doubleUpper(konstue: Double): Int =
+    ((konstue.toBits() and upperWord) ushr 32) .toInt()
+
+@ExportForCppRuntime
+@Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
+fun doubleLower(konstue: Double): Int =
+    (konstue.toBits() and 0x00000000ffffffff) .toInt()
 
 @RetainForTarget("wasm32")
 @GCUnsafeCall("ReturnSlot_getDouble")
@@ -84,7 +84,7 @@ typealias KtFunction <R> = ((ArrayList<JsValue>)->R)
 
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
 fun <R> wrapFunction(func: KtFunction<R>): Int {
-    val ptr: Long = StableRef.create(func).asCPointer().toLong() 
+    konst ptr: Long = StableRef.create(func).asCPointer().toLong() 
     return ptr.toInt() // TODO: LP64 unsafe.
 }
 
@@ -92,22 +92,22 @@ fun <R> wrapFunction(func: KtFunction<R>): Int {
 @ExportForCppRuntime("Konan_js_runLambda")
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
 fun runLambda(pointer: Int, argumentsArena: Arena, argumentsArenaSize: Int): Int {
-    val arguments = arrayListOf<JsValue>()
+    konst arguments = arrayListOf<JsValue>()
     for (i in 0 until argumentsArenaSize) {
         arguments.add(JsValue(argumentsArena, i));
     }
-    val previousArena = ArenaManager.currentArena
+    konst previousArena = ArenaManager.currentArena
     ArenaManager.currentArena = argumentsArena
     // TODO: LP64 unsafe: wasm32 passes Int, not Long.
-    val func = pointer.toLong().toCPointer<CPointed>()!!.asStableRef<KtFunction<JsValue>>().get()
-    val result = func(arguments)
+    konst func = pointer.toLong().toCPointer<CPointed>()!!.asStableRef<KtFunction<JsValue>>().get()
+    konst result = func(arguments)
 
     ArenaManager.currentArena = previousArena
     return result.index
 }
 
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
-open class JsValue(val arena: Arena, val index: Object) {
+open class JsValue(konst arena: Arena, konst index: Object) {
     fun getInt(property: String): Int {
         return getInt(ArenaManager.currentArena, index, stringPointer(property), stringLengthBytes(property))
     }
@@ -123,7 +123,7 @@ open class JsArray(arena: Arena, index: Object): JsValue(arena, index) {
         // TODO: we could pass an integer index to index arrays.
         return getProperty(index.toString())
     }
-    val size: Int
+    konst size: Int
         get() = this.getInt("length")
 }
 
@@ -154,7 +154,7 @@ fun setter(obj: JsValue, property: String, string: String) {
 
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
 fun setter(obj: JsValue, property: String, lambda: KtFunction<Unit>) {
-    val pointer = wrapFunction(lambda);
+    konst pointer = wrapFunction(lambda);
     setFunction(obj.arena, obj.index, stringPointer(property), stringLengthBytes(property), pointer)
 }
 
@@ -170,7 +170,7 @@ fun JsValue.setter(property: String, string: String) {
 
 @Deprecated(WASM_TARGET_IS_DEPRECATED, level = DeprecationLevel.WARNING)
 object ArenaManager {
-    val globalArena = allocateArena()
+    konst globalArena = allocateArena()
 
     @Suppress("VARIABLE_IN_SINGLETON_WITHOUT_THREAD_LOCAL")
     var currentArena = globalArena

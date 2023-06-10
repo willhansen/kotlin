@@ -48,7 +48,7 @@ public abstract class AbstractIterator<T> : Iterator<T> {
      *
      * This callback method should call one of these two methods:
      *
-     * * [setNext] with the next value of the iteration
+     * * [setNext] with the next konstue of the iteration
      * * [done] to indicate there are no more elements
      *
      * Failure to call either method will result in the iteration terminating with a failed state
@@ -56,10 +56,10 @@ public abstract class AbstractIterator<T> : Iterator<T> {
     abstract protected fun computeNext(): Unit
 
     /**
-     * Sets the next value in the iteration, called from the [computeNext] function
+     * Sets the next konstue in the iteration, called from the [computeNext] function
      */
-    protected fun setNext(value: T): Unit {
-        nextValue = value
+    protected fun setNext(konstue: T): Unit {
+        nextValue = konstue
         state = State.Ready
     }
 

@@ -15,20 +15,20 @@ abstract class LLFirScopeSessionProvider {
     abstract fun getScopeSession(): ScopeSession
 
     companion object {
-        fun create(project: Project, invalidationTrackers: List<Any>): LLFirScopeSessionProvider = when {
-            invalidationTrackers.isEmpty() -> LLFirNonInvalidatableScopeSessionProvider()
-            else -> LLFirInvalidatableScopeSessionProvider(project, invalidationTrackers)
+        fun create(project: Project, inkonstidationTrackers: List<Any>): LLFirScopeSessionProvider = when {
+            inkonstidationTrackers.isEmpty() -> LLFirNonInkonstidatableScopeSessionProvider()
+            else -> LLFirInkonstidatableScopeSessionProvider(project, inkonstidationTrackers)
         }
     }
 }
 
-private class LLFirInvalidatableScopeSessionProvider(project: Project, invalidationTrackers: List<Any>) : LLFirScopeSessionProvider() {
+private class LLFirInkonstidatableScopeSessionProvider(project: Project, inkonstidationTrackers: List<Any>) : LLFirScopeSessionProvider() {
     // ScopeSession is thread-local, so we use Thread id as a key
     // We cannot use thread locals here as it may lead to memory leaks
-    private val cache = SoftCachedMap.create<Long, ScopeSession>(
+    private konst cache = SoftCachedMap.create<Long, ScopeSession>(
         project,
         SoftCachedMap.Kind.STRONG_KEYS_SOFT_VALUES,
-        invalidationTrackers
+        inkonstidationTrackers
     )
 
     override fun getScopeSession(): ScopeSession {
@@ -36,10 +36,10 @@ private class LLFirInvalidatableScopeSessionProvider(project: Project, invalidat
     }
 }
 
-private class LLFirNonInvalidatableScopeSessionProvider : LLFirScopeSessionProvider() {
+private class LLFirNonInkonstidatableScopeSessionProvider : LLFirScopeSessionProvider() {
     // ScopeSession is thread-local, so we use Thread id as a key
     // We cannot use thread locals here as it may lead to memory leaks
-    private val cache = ConcurrentHashMap<Long, ScopeSession>()
+    private konst cache = ConcurrentHashMap<Long, ScopeSession>()
 
     override fun getScopeSession(): ScopeSession {
         return cache.getOrPut(Thread.currentThread().id) { ScopeSession() }

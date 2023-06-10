@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 internal interface UsesGradleNodeModulesCache : Task {
     @get:Internal
-    val gradleNodeModules: Property<GradleNodeModulesCache>
+    konst gradleNodeModules: Property<GradleNodeModulesCache>
 }
 
 /**
@@ -32,27 +32,27 @@ internal interface UsesGradleNodeModulesCache : Task {
 abstract class GradleNodeModulesCache : AbstractNodeModulesCache() {
 
     @get:Inject
-    abstract val fs: FileSystemOperations
+    abstract konst fs: FileSystemOperations
 
-    override val type: String
+    override konst type: String
         get() = "gradle"
 
     @get:Inject
-    abstract val archiveOperations: ArchiveOperations
+    abstract konst archiveOperations: ArchiveOperations
 
     override fun buildImportedPackage(
         name: String,
         version: String,
         file: File
     ): File? {
-        val module = GradleNodeModuleBuilder(fs, archiveOperations, name, version, listOf(file), parameters.cacheDir.get().asFile)
+        konst module = GradleNodeModuleBuilder(fs, archiveOperations, name, version, listOf(file), parameters.cacheDir.get().asFile)
         module.visitArtifacts()
         return module.rebuild()
     }
 
     companion object {
-        private val serviceClass = GradleNodeModulesCache::class.java
-        private val serviceName = serviceClass.name
+        private konst serviceClass = GradleNodeModulesCache::class.java
+        private konst serviceName = serviceClass.name
 
         private fun registerIfAbsentImpl(
             project: Project,
@@ -64,7 +64,7 @@ abstract class GradleNodeModulesCache : AbstractNodeModulesCache() {
                 return it.service as Provider<GradleNodeModulesCache>
             }
 
-            val message = {
+            konst message = {
                 "Build service Gradle Node Modules should be already registered"
             }
 

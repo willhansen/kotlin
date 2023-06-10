@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val str = "123"
+    konst str = "123"
     var optimized = ""
     for (i in 0..str.length - 1) optimized += str[i]
 }

@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.backend.konan
 
 sealed class BinaryType<out T> {
-    class Primitive(val type: PrimitiveBinaryType) : BinaryType<Nothing>()
-    class Reference<T>(val types: Sequence<T>, val nullable: Boolean) : BinaryType<T>()
+    class Primitive(konst type: PrimitiveBinaryType) : BinaryType<Nothing>()
+    class Reference<T>(konst types: Sequence<T>, konst nullable: Boolean) : BinaryType<T>()
 }
 
 fun BinaryType<*>.primitiveBinaryTypeOrNull(): PrimitiveBinaryType? = when (this) {

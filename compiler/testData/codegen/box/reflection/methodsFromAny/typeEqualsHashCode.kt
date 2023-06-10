@@ -28,7 +28,7 @@ fun box(): String {
 
     assertNotEquals(::nullable.parameters.single().type, ::nullable.returnType)
 
-    val typeParam = A::class.members.single { it.name == "typeParam" }
+    konst typeParam = A::class.members.single { it.name == "typeParam" }
     check(typeParam.parameters.last().type, typeParam.returnType)
 
     return "OK"

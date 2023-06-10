@@ -19,31 +19,31 @@ import org.jetbrains.kotlin.gradle.plugin.internal.usedAtConfigurationTime
  *
  * In regular (non 'ClasspathMode'), the returned list is expected to have only one or zero elements.
  */
-internal val Project.failures: List<Throwable>
+internal konst Project.failures: List<Throwable>
     get() {
         /* Respecting special mode in IDE that catches exceptions and collects them outside of Project.state.failure */
-        val failuresFromIdeaSyncClasspathMode = if (ideaSyncClasspathModeUtil.isClasspathModeActive) ideaSyncClasspathModeUtil.exceptions
+        konst failuresFromIdeaSyncClasspathMode = if (ideaSyncClasspathModeUtil.isClasspathModeActive) ideaSyncClasspathModeUtil.exceptions
         else emptyList()
 
-        val regularFailures = listOfNotNull(project.state.failure)
+        konst regularFailures = listOfNotNull(project.state.failure)
         return regularFailures + failuresFromIdeaSyncClasspathMode
     }
 
 
 /**
  * Special Mode only active during IDEA sync (using the 'classpath button' instead of the 'reload button').
- * In this ide sync mode, Gradle is configured to actually catch exceptions during the buildscript evaluation.
+ * In this ide sync mode, Gradle is configured to actually catch exceptions during the buildscript ekonstuation.
  * Those exceptions will be collected into a special Gradle service.
  *
- * Accessing those exceptions here via internal APIs is necessary, because afterEvaluate based hooks
+ * Accessing those exceptions here via internal APIs is necessary, because afterEkonstuate based hooks
  * are still executed. The should *not* run if the project is in a 'bad' failure state.
  *
  * @see runProjectConfigurationHealthCheck
- * @see runProjectConfigurationHealthCheckWhenEvaluated
+ * @see runProjectConfigurationHealthCheckWhenEkonstuated
  */
-private val Project.ideaSyncClasspathModeUtil
+private konst Project.ideaSyncClasspathModeUtil
     get() = object {
-        val isClasspathModeActive: Boolean
+        konst isClasspathModeActive: Boolean
             /*
             ConfigurationTimePropertiesAccessorVariantFactory type is not known for plugin variants.
             Be lenient in cases where the factory is not available (e.g. functionalTests where just a blank project is used)
@@ -58,13 +58,13 @@ private val Project.ideaSyncClasspathModeUtil
                 false
             }
 
-        val exceptions: List<Exception>
+        konst exceptions: List<Exception>
             get() {
                 try {
-                    val classPathModeExceptionCollectionClass = Class.forName(
+                    konst classPathModeExceptionCollectionClass = Class.forName(
                         "org.gradle.kotlin.dsl.provider.ClassPathModeExceptionCollector"
                     )
-                    val exceptionCollector = (project as ProjectInternal).services.get(classPathModeExceptionCollectionClass)
+                    konst exceptionCollector = (project as ProjectInternal).services.get(classPathModeExceptionCollectionClass)
 
                     @Suppress("unchecked_cast")
                     return classPathModeExceptionCollectionClass.methods

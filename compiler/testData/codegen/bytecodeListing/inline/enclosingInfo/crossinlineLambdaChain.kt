@@ -11,11 +11,11 @@ inline fun test(crossinline z: () -> String) = { z() }
 import test.*
 
 fun box() {
-    val res = call {
+    konst res = call {
         test { "OK" }
     }
 
-    val res2 = call {
+    konst res2 = call {
         call {
             test { "OK" }
         }

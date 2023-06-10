@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.expressions.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
-val jvmArgumentNullabilityAssertions = makeIrFilePhase(
+konst jvmArgumentNullabilityAssertions = makeIrFilePhase(
     ::JvmArgumentNullabilityAssertionsLowering,
     name = "ArgumentNullabilityAssertions",
     description = "Transform nullability assertions on arguments according to the compiler settings",
@@ -33,11 +33,11 @@ private enum class AssertionScope {
 private class JvmArgumentNullabilityAssertionsLowering(context: JvmBackendContext) : FileLoweringPass,
     IrElementTransformer<AssertionScope> {
 
-    private val isWithUnifiedNullChecks = context.state.unifiedNullChecks
-    private val isCallAssertionsDisabled = context.state.isCallAssertionsDisabled
-    private val isReceiverAssertionsDisabled = context.state.isReceiverAssertionsDisabled
+    private konst isWithUnifiedNullChecks = context.state.unifiedNullChecks
+    private konst isCallAssertionsDisabled = context.state.isCallAssertionsDisabled
+    private konst isReceiverAssertionsDisabled = context.state.isReceiverAssertionsDisabled
 
-    private val specialBridgeMethods = SpecialBridgeMethods(context)
+    private konst specialBridgeMethods = SpecialBridgeMethods(context)
 
     override fun lower(irFile: IrFile) = irFile.transformChildren(this, AssertionScope.Enabled)
 
@@ -61,16 +61,16 @@ private class JvmArgumentNullabilityAssertionsLowering(context: JvmBackendContex
         // See KT-30908 for more details.
         expression.dispatchReceiver = expression.dispatchReceiver?.transform(this, AssertionScope.Disabled)
 
-        val receiverAssertionScope = if (
+        konst receiverAssertionScope = if (
             isReceiverAssertionsDisabled ||
             !isWithUnifiedNullChecks && expression.origin.isOperatorWithNoNullabilityAssertionsOnExtensionReceiver
         ) AssertionScope.Disabled else AssertionScope.Enabled
 
         expression.extensionReceiver = expression.extensionReceiver?.transform(this, receiverAssertionScope)
 
-        val parameterAssertionScope =
+        konst parameterAssertionScope =
             if (isCallToMethodWithTypeCheckBarrier(expression)) AssertionScope.Disabled else AssertionScope.Enabled
-        for (i in 0 until expression.valueArgumentsCount) {
+        for (i in 0 until expression.konstueArgumentsCount) {
             expression.getValueArgument(i)?.let { irArgument ->
                 expression.putValueArgument(i, irArgument.transform(this, parameterAssertionScope))
             }
@@ -86,24 +86,24 @@ private class JvmArgumentNullabilityAssertionsLowering(context: JvmBackendContex
 
     override fun visitSetField(expression: IrSetField, data: AssertionScope): IrExpression {
         expression.receiver = expression.receiver?.transform(this, AssertionScope.Disabled)
-        expression.value = expression.value.transform(this, data)
+        expression.konstue = expression.konstue.transform(this, data)
         return expression
     }
 
     private fun isCallToMethodWithTypeCheckBarrier(expression: IrMemberAccessExpression<*>): Boolean =
         (expression.symbol.owner as? IrSimpleFunction)
             ?.let {
-                val bridgeInfo = specialBridgeMethods.findSpecialWithOverride(it, includeSelf = true)
+                konst bridgeInfo = specialBridgeMethods.findSpecialWithOverride(it, includeSelf = true)
                 // The JVM BE adds null checks around platform dependent special bridge methods (Map.getOrDefault and the version of
                 // MutableMap.remove with two arguments).
                 bridgeInfo != null && !bridgeInfo.first.hasPlatformDependent()
             } == true
 
-    private val IrStatementOrigin?.isOperatorWithNoNullabilityAssertionsOnExtensionReceiver
+    private konst IrStatementOrigin?.isOperatorWithNoNullabilityAssertionsOnExtensionReceiver
         get() = this is IrStatementOrigin.COMPONENT_N || this in operatorsWithNoNullabilityAssertionsOnExtensionReceiver
 
     companion object {
-        private val operatorsWithNoNullabilityAssertionsOnExtensionReceiver = hashSetOf(
+        private konst operatorsWithNoNullabilityAssertionsOnExtensionReceiver = hashSetOf(
             IrStatementOrigin.PREFIX_INCR, IrStatementOrigin.POSTFIX_INCR,
             IrStatementOrigin.PREFIX_DECR, IrStatementOrigin.POSTFIX_DECR
         )

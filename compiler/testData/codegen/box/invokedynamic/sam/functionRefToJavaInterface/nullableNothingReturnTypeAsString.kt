@@ -20,7 +20,7 @@ fun test(s: String): Nothing? {
 }
 
 fun box(): String {
-    val q = Sam(::test).get("OK")
+    konst q = Sam(::test).get("OK")
     if (q != null)
         return "Failed: $q"
     return t

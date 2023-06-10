@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 final class FinalProperty {
-    inline val valProp: Int
+    inline konst konstProp: Int
         get() = 1
 
-    val valProp_1: Int
+    konst konstProp_1: Int
         inline get() = 1
 
     inline var varProp: Int
@@ -17,10 +17,10 @@ final class FinalProperty {
 
 
 open class OpenProperty {
-    <!DECLARATION_CANT_BE_INLINED!>inline<!> open val valProp: Int
+    <!DECLARATION_CANT_BE_INLINED!>inline<!> open konst konstProp: Int
         get() = 1
 
-    open val valProp_1: Int
+    open konst konstProp_1: Int
         <!DECLARATION_CANT_BE_INLINED!>inline<!> get() = 1
 
     <!DECLARATION_CANT_BE_INLINED!>inline<!> open var varProp: Int
@@ -34,6 +34,6 @@ open class OpenProperty {
 
 
 interface AbstractProperty {
-    <!DECLARATION_CANT_BE_INLINED!>inline<!> abstract val valProp: Int
+    <!DECLARATION_CANT_BE_INLINED!>inline<!> abstract konst konstProp: Int
     <!DECLARATION_CANT_BE_INLINED!>inline<!> abstract var varProp: Int
 }

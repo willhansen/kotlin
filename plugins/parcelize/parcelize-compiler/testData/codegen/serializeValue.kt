@@ -4,7 +4,7 @@
 import kotlinx.parcelize.*
 import android.os.Parcelable
 
-class Value(val x: Int)
+class Value(konst x: Int)
 
 @Parcelize
-class Test(val value: @RawValue Value) : Parcelable
+class Test(konst konstue: @RawValue Value) : Parcelable

@@ -18,13 +18,13 @@ class KotlinToolingVersionTest {
 
     @Test
     fun `test - kotlinToolingVersion is cached in project`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
         assertSame(project.kotlinToolingVersion, project.kotlinToolingVersion)
     }
 
     @Test
     fun `test - kotlinToolingVersion matches kotlinPluginVersion string`() {
-        val project = ProjectBuilder.builder().build()
+        konst project = ProjectBuilder.builder().build()
         assertEquals(project.getKotlinPluginVersion(), project.kotlinToolingVersion.toString())
     }
 }

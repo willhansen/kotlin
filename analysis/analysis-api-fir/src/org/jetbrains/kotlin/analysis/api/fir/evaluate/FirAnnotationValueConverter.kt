@@ -3,12 +3,12 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.analysis.api.fir.evaluate
+package org.jetbrains.kotlin.analysis.api.fir.ekonstuate
 
 import org.jetbrains.kotlin.analysis.api.annotations.*
 import org.jetbrains.kotlin.analysis.api.base.KtConstantValue
 import org.jetbrains.kotlin.analysis.api.base.KtConstantValueFactory
-import org.jetbrains.kotlin.analysis.api.components.KtConstantEvaluationMode
+import org.jetbrains.kotlin.analysis.api.components.KtConstantEkonstuationMode
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.analysis.checkers.getContainingClassSymbol
@@ -44,24 +44,24 @@ internal object FirAnnotationValueConverter {
         }
 
     private fun <T> FirConstExpression<T>.convertConstantExpression(): KtConstantAnnotationValue? {
-        val expression = psi as? KtElement
-        val type = (typeRef as? FirResolvedTypeRef)?.type
-        val constantValue = when {
-            value == null -> KtConstantValue.KtNullConstantValue(expression)
-            type == null -> KtConstantValueFactory.createConstantValue(value, psi as? KtElement)
-            type.isBoolean -> KtConstantValue.KtBooleanConstantValue(value as Boolean, expression)
-            type.isChar -> KtConstantValue.KtCharConstantValue((value as? Char) ?: (value as Number).toInt().toChar(), expression)
-            type.isByte -> KtConstantValue.KtByteConstantValue((value as Number).toByte(), expression)
-            type.isUByte -> KtConstantValue.KtUnsignedByteConstantValue((value as Number).toByte().toUByte(), expression)
-            type.isShort -> KtConstantValue.KtShortConstantValue((value as Number).toShort(), expression)
-            type.isUShort -> KtConstantValue.KtUnsignedShortConstantValue((value as Number).toShort().toUShort(), expression)
-            type.isInt -> KtConstantValue.KtIntConstantValue((value as Number).toInt(), expression)
-            type.isUInt -> KtConstantValue.KtUnsignedIntConstantValue((value as Number).toInt().toUInt(), expression)
-            type.isLong -> KtConstantValue.KtLongConstantValue((value as Number).toLong(), expression)
-            type.isULong -> KtConstantValue.KtUnsignedLongConstantValue((value as Number).toLong().toULong(), expression)
-            type.isString -> KtConstantValue.KtStringConstantValue(value.toString(), expression)
-            type.isFloat -> KtConstantValue.KtFloatConstantValue((value as Number).toFloat(), expression)
-            type.isDouble -> KtConstantValue.KtDoubleConstantValue((value as Number).toDouble(), expression)
+        konst expression = psi as? KtElement
+        konst type = (typeRef as? FirResolvedTypeRef)?.type
+        konst constantValue = when {
+            konstue == null -> KtConstantValue.KtNullConstantValue(expression)
+            type == null -> KtConstantValueFactory.createConstantValue(konstue, psi as? KtElement)
+            type.isBoolean -> KtConstantValue.KtBooleanConstantValue(konstue as Boolean, expression)
+            type.isChar -> KtConstantValue.KtCharConstantValue((konstue as? Char) ?: (konstue as Number).toInt().toChar(), expression)
+            type.isByte -> KtConstantValue.KtByteConstantValue((konstue as Number).toByte(), expression)
+            type.isUByte -> KtConstantValue.KtUnsignedByteConstantValue((konstue as Number).toByte().toUByte(), expression)
+            type.isShort -> KtConstantValue.KtShortConstantValue((konstue as Number).toShort(), expression)
+            type.isUShort -> KtConstantValue.KtUnsignedShortConstantValue((konstue as Number).toShort().toUShort(), expression)
+            type.isInt -> KtConstantValue.KtIntConstantValue((konstue as Number).toInt(), expression)
+            type.isUInt -> KtConstantValue.KtUnsignedIntConstantValue((konstue as Number).toInt().toUInt(), expression)
+            type.isLong -> KtConstantValue.KtLongConstantValue((konstue as Number).toLong(), expression)
+            type.isULong -> KtConstantValue.KtUnsignedLongConstantValue((konstue as Number).toLong().toULong(), expression)
+            type.isString -> KtConstantValue.KtStringConstantValue(konstue.toString(), expression)
+            type.isFloat -> KtConstantValue.KtFloatConstantValue((konstue as Number).toFloat(), expression)
+            type.isDouble -> KtConstantValue.KtDoubleConstantValue((konstue as Number).toDouble(), expression)
             else -> null
         }
 
@@ -72,12 +72,12 @@ internal object FirAnnotationValueConverter {
         session: FirSession,
     ): Pair<Collection<KtAnnotationValue>, KtElement?> {
         var representativePsi: KtElement? = null
-        val flattenedVarargs = buildList {
+        konst flattenedVarargs = buildList {
             for (expr in this@convertVarargsExpression) {
-                val converted = expr.convertConstantExpression(session) ?: continue
+                konst converted = expr.convertConstantExpression(session) ?: continue
 
                 if (expr is FirSpreadArgumentExpression || expr is FirNamedArgumentExpression) {
-                    addAll((converted as KtArrayAnnotationValue).values)
+                    addAll((converted as KtArrayAnnotationValue).konstues)
                 } else {
                     add(converted)
                 }
@@ -97,7 +97,7 @@ internal object FirAnnotationValueConverter {
     private fun FirExpression.convertConstantExpression(
         session: FirSession,
     ): KtAnnotationValue? {
-        val sourcePsi = psi as? KtElement
+        konst sourcePsi = psi as? KtElement
         return when (this) {
             is FirConstExpression<*> -> convertConstantExpression()
             is FirNamedArgumentExpression -> {
@@ -110,8 +110,8 @@ internal object FirAnnotationValueConverter {
 
             is FirVarargArgumentsExpression -> {
                 // Vararg arguments may have multiple independent expressions associated.
-                // Choose one to be the representative PSI value for the entire assembled argument.
-                val (annotationValues, representativePsi) = arguments.convertVarargsExpression(session)
+                // Choose one to be the representative PSI konstue for the entire assembled argument.
+                konst (annotationValues, representativePsi) = arguments.convertVarargsExpression(session)
                 KtArrayAnnotationValue(annotationValues, representativePsi ?: sourcePsi)
             }
 
@@ -121,12 +121,12 @@ internal object FirAnnotationValueConverter {
             }
 
             is FirFunctionCall -> {
-                val reference = calleeReference as? FirResolvedNamedReference ?: return null
-                when (val resolvedSymbol = reference.resolvedSymbol) {
+                konst reference = calleeReference as? FirResolvedNamedReference ?: return null
+                when (konst resolvedSymbol = reference.resolvedSymbol) {
                     is FirConstructorSymbol -> {
-                        val classSymbol = resolvedSymbol.getContainingClassSymbol(session) ?: return null
+                        konst classSymbol = resolvedSymbol.getContainingClassSymbol(session) ?: return null
                         if ((classSymbol.fir as? FirClass)?.classKind == ClassKind.ANNOTATION_CLASS) {
-                            val resultMap = mutableMapOf<Name, FirExpression>()
+                            konst resultMap = mutableMapOf<Name, FirExpression>()
                             resolvedArgumentMapping?.entries?.forEach { (arg, param) ->
                                 resultMap[param.name] = arg
                             }
@@ -159,8 +159,8 @@ internal object FirAnnotationValueConverter {
             }
 
             is FirPropertyAccessExpression -> {
-                val reference = calleeReference as? FirResolvedNamedReference ?: return null
-                when (val resolvedSymbol = reference.resolvedSymbol) {
+                konst reference = calleeReference as? FirResolvedNamedReference ?: return null
+                when (konst resolvedSymbol = reference.resolvedSymbol) {
                     is FirEnumEntrySymbol -> {
                         KtEnumEntryAnnotationValue(resolvedSymbol.callableId, sourcePsi)
                     }
@@ -176,11 +176,11 @@ internal object FirAnnotationValueConverter {
                 }
                 when {
                     symbol == null -> {
-                        val qualifierParts = mutableListOf<String?>()
+                        konst qualifierParts = mutableListOf<String?>()
 
                         fun process(expression: FirExpression) {
-                            val errorType = expression.typeRef.coneType as? ConeErrorType
-                            val unresolvedName = when (val diagnostic = errorType?.diagnostic) {
+                            konst errorType = expression.typeRef.coneType as? ConeErrorType
+                            konst unresolvedName = when (konst diagnostic = errorType?.diagnostic) {
                                 is ConeUnresolvedTypeQualifierError -> diagnostic.qualifier
                                 is ConeUnresolvedNameError -> diagnostic.qualifier
                                 else -> null
@@ -193,7 +193,7 @@ internal object FirAnnotationValueConverter {
 
                         process(argument)
 
-                        val unresolvedName = qualifierParts.asReversed().filterNotNull().takeIf { it.isNotEmpty() }?.joinToString(".")
+                        konst unresolvedName = qualifierParts.asReversed().filterNotNull().takeIf { it.isNotEmpty() }?.joinToString(".")
                         KtKClassAnnotationValue.KtErrorClassAnnotationValue(sourcePsi, unresolvedName)
                     }
                     symbol.isLocal -> KtKClassAnnotationValue.KtLocalKClassAnnotationValue(
@@ -206,7 +206,7 @@ internal object FirAnnotationValueConverter {
             }
 
             else -> null
-        } ?: FirCompileTimeConstantEvaluator.evaluate(this, KtConstantEvaluationMode.CONSTANT_EXPRESSION_EVALUATION)
+        } ?: FirCompileTimeConstantEkonstuator.ekonstuate(this, KtConstantEkonstuationMode.CONSTANT_EXPRESSION_EVALUATION)
             ?.convertConstantExpression()
     }
 }

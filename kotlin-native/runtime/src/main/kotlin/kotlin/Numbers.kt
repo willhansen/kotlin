@@ -11,44 +11,44 @@ import kotlin.native.internal.IntrinsicType
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 @GCUnsafeCall("Kotlin_Double_isNaN")
 public actual external fun Double.isNaN(): Boolean
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 @GCUnsafeCall("Kotlin_Float_isNaN")
 public actual external fun Float.isNaN(): Boolean
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 @GCUnsafeCall("Kotlin_Double_isInfinite")
 public actual external fun Double.isInfinite(): Boolean
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 @GCUnsafeCall("Kotlin_Float_isInfinite")
 public actual external fun Float.isInfinite(): Boolean
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 @GCUnsafeCall("Kotlin_Double_isFinite")
 public actual external fun Double.isFinite(): Boolean
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 @GCUnsafeCall("Kotlin_Float_isFinite")
 public actual external fun Float.isFinite(): Boolean
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout.
  */
 @SinceKotlin("1.2")
@@ -56,16 +56,16 @@ public actual external fun Float.isFinite(): Boolean
 public actual inline fun Double.toBits(): Long = if (isNaN()) Double.NaN.toRawBits() else toRawBits()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Long]
+ * Returns a bit representation of the specified floating-point konstue as [Long]
  * according to the IEEE 754 floating-point "double format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public actual inline fun Double.toRawBits(): Long = bits()
 
 /**
- * Returns the [Double] value corresponding to a given bit representation.
+ * Returns the [Double] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
@@ -76,7 +76,7 @@ public actual inline fun Double.Companion.fromBits(bits: Long): Double = kotlin.
 internal external fun fromBits(bits: Long): Double
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout.
  */
 @SinceKotlin("1.2")
@@ -84,16 +84,16 @@ internal external fun fromBits(bits: Long): Double
 public actual inline fun Float.toBits(): Int = if (isNaN()) Float.NaN.toRawBits() else toRawBits()
 
 /**
- * Returns a bit representation of the specified floating-point value as [Int]
+ * Returns a bit representation of the specified floating-point konstue as [Int]
  * according to the IEEE 754 floating-point "single format" bit layout,
- * preserving `NaN` values exact layout.
+ * preserving `NaN` konstues exact layout.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
 public actual inline fun Float.toRawBits(): Int = bits()
 
 /**
- * Returns the [Float] value corresponding to a given bit representation.
+ * Returns the [Float] konstue corresponding to a given bit representation.
  */
 @SinceKotlin("1.2")
 @kotlin.internal.InlineOnly
@@ -114,11 +114,11 @@ internal external fun fromBits(bits: Int): Float
 public actual external fun Int.countOneBits(): Int
 
 /**
- * Counts the number of consecutive most significant bits that are zero in the binary representation of [Int] [value].
- * Returns undefined result for zero [value].
+ * Counts the number of consecutive most significant bits that are zero in the binary representation of [Int] [konstue].
+ * Returns undefined result for zero [konstue].
  */
 @GCUnsafeCall("Kotlin_Int_countLeadingZeroBits")
-private external fun countLeadingZeroBits(value: Int): Int
+private external fun countLeadingZeroBits(konstue: Int): Int
 
 /**
  * Counts the number of consecutive most significant bits that are zero in the binary representation of this [Int] number.
@@ -129,11 +129,11 @@ public actual fun Int.countLeadingZeroBits(): Int =
         if (this == 0) 32 else countLeadingZeroBits(this)
 
 /**
- * Counts the number of consecutive least significant bits that are zero in the binary representation of [Int] [value].
- * Returns undefined result for zero [value].
+ * Counts the number of consecutive least significant bits that are zero in the binary representation of [Int] [konstue].
+ * Returns undefined result for zero [konstue].
  */
 @GCUnsafeCall("Kotlin_Int_countTrailingZeroBits")
-private external fun countTrailingZeroBits(value: Int): Int
+private external fun countTrailingZeroBits(konstue: Int): Int
 
 /**
  * Counts the number of consecutive least significant bits that are zero in the binary representation of this [Int] number.
@@ -202,11 +202,11 @@ public actual fun Int.rotateRight(bitCount: Int): Int =
 public actual external fun Long.countOneBits(): Int
 
 /**
- * Counts the number of consecutive most significant bits that are zero in the binary representation of [Long] [value].
- * Returns undefined result for zero [value].
+ * Counts the number of consecutive most significant bits that are zero in the binary representation of [Long] [konstue].
+ * Returns undefined result for zero [konstue].
  */
 @GCUnsafeCall("Kotlin_Long_countLeadingZeroBits")
-private external fun countLeadingZeroBits(value: Long): Int
+private external fun countLeadingZeroBits(konstue: Long): Int
 
 /**
  * Counts the number of consecutive most significant bits that are zero in the binary representation of this [Long] number.
@@ -217,11 +217,11 @@ public actual fun Long.countLeadingZeroBits(): Int =
         if (this == 0L) 64 else countLeadingZeroBits(this)
 
 /**
- * Counts the number of consecutive least significant bits that are zero in the binary representation of [Long] [value].
- * Returns undefined result for zero [value].
+ * Counts the number of consecutive least significant bits that are zero in the binary representation of [Long] [konstue].
+ * Returns undefined result for zero [konstue].
  */
 @GCUnsafeCall("Kotlin_Long_countTrailingZeroBits")
-private external fun countTrailingZeroBits(value: Long): Int
+private external fun countTrailingZeroBits(konstue: Long): Int
 
 /**
  * Counts the number of consecutive least significant bits that are zero in the binary representation of this [Long] number.

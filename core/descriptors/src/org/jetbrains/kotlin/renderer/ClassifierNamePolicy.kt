@@ -26,7 +26,7 @@ interface ClassifierNamePolicy {
         override fun renderClassifier(classifier: ClassifierDescriptor, renderer: DescriptorRenderer): String {
             if (classifier is TypeParameterDescriptor) return renderer.renderName(classifier.name, false)
 
-            val qualifiedNameElements = ArrayList<Name>()
+            konst qualifiedNameElements = ArrayList<Name>()
 
             // for nested classes qualified name should be used
             var current: DeclarationDescriptor? = classifier
@@ -54,11 +54,11 @@ interface ClassifierNamePolicy {
                 qualifiedNameForSourceCode(classifier)
 
         private fun qualifiedNameForSourceCode(descriptor: ClassifierDescriptor): String {
-            val nameString = descriptor.name.render()
+            konst nameString = descriptor.name.render()
             if (descriptor is TypeParameterDescriptor) {
                 return nameString
             }
-            val qualifier = qualifierName(descriptor.containingDeclaration)
+            konst qualifier = qualifierName(descriptor.containingDeclaration)
             return if (qualifier != null && qualifier != "") qualifier + "." + nameString else nameString
         }
 

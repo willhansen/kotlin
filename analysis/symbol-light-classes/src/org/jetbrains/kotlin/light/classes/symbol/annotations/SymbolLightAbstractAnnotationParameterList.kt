@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtElement
 internal sealed class SymbolLightAbstractAnnotationParameterList(
     parent: SymbolLightAbstractAnnotation,
 ) : KtLightElementBase(parent), PsiAnnotationParameterList {
-    override val kotlinOrigin: KtElement? get() = (parent as SymbolLightAbstractAnnotation).kotlinOrigin?.valueArgumentList
+    override konst kotlinOrigin: KtElement? get() = (parent as SymbolLightAbstractAnnotation).kotlinOrigin?.konstueArgumentList
 
     override fun accept(visitor: PsiElementVisitor) {
         if (visitor is JavaElementVisitor) {

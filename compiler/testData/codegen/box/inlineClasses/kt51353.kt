@@ -2,16 +2,16 @@
 // WITH_STDLIB
 // FILE: 1.kt
 
-val referenceFromOtherFile = O.A
+konst referenceFromOtherFile = O.A
 
 // FILE: 2.kt
 
 @JvmInline
-value class Z(val value: String)
+konstue class Z(konst konstue: String)
 
 object O {
-    val A = Z("OK")
-    val B = A
+    konst A = Z("OK")
+    konst B = A
 }
 
-fun box(): String = O.B.value
+fun box(): String = O.B.konstue

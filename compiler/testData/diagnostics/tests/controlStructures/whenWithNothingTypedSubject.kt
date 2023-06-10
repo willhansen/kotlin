@@ -4,6 +4,6 @@
 typealias MyNothing = Nothing
 
 fun foo(n: Nothing, n2: MyNothing) {
-    val a: Unit = when(n) {}
-    val b: Unit = when(n2) {}
+    konst a: Unit = when(n) {}
+    konst b: Unit = when(n2) {}
 }

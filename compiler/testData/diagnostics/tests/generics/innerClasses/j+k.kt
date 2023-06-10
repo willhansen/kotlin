@@ -21,7 +21,7 @@ fun main() {
     var outerStr: Outer<String> = Outer()
     outerStr.baz().checkType { _<Outer<String>.Inner<String>>() }
 
-    val strInt: Outer<String>.Inner<Int> = outerStr.Inner()
+    konst strInt: Outer<String>.Inner<Int> = outerStr.Inner()
 
     strInt.foo().checkType { _<String>() }
     strInt.bar().checkType { _<Int>() }

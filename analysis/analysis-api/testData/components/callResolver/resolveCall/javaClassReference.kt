@@ -1,3 +1,3 @@
 fun call() {
-    val someVal = <expr>Array<String></expr>::class.java
+    konst someVal = <expr>Array<String></expr>::class.java
 }

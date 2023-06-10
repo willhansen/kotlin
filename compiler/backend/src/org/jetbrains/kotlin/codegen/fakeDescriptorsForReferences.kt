@@ -32,9 +32,9 @@ fun createFreeFakeLambdaDescriptor(descriptor: FunctionDescriptor, typeApproxima
 
 private fun <D : CallableMemberDescriptor> createFreeDescriptor(descriptor: D, typeApproximator: TypeApproximator?): D {
     @Suppress("UNCHECKED_CAST")
-    val builder = descriptor.newCopyBuilder() as CallableMemberDescriptor.CopyBuilder<D>
+    konst builder = descriptor.newCopyBuilder() as CallableMemberDescriptor.CopyBuilder<D>
 
-    val typeParameters = ArrayList<TypeParameterDescriptor>(0)
+    konst typeParameters = ArrayList<TypeParameterDescriptor>(0)
     builder.setTypeParameters(typeParameters)
 
     var container: DeclarationDescriptor? = descriptor.containingDeclaration
@@ -47,7 +47,7 @@ private fun <D : CallableMemberDescriptor> createFreeDescriptor(descriptor: D, t
         container = container.containingDeclaration
     }
 
-    val approximated = typeApproximator?.approximate(descriptor, builder) ?: false
+    konst approximated = typeApproximator?.approximate(descriptor, builder) ?: false
 
     return if (typeParameters.isEmpty() && !approximated) descriptor else builder.build()!!
 }
@@ -55,10 +55,10 @@ private fun <D : CallableMemberDescriptor> createFreeDescriptor(descriptor: D, t
 private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, builder: CallableMemberDescriptor.CopyBuilder<*>): Boolean {
     var approximated = false
 
-    val returnType = descriptor.returnType
+    konst returnType = descriptor.returnType
     if (returnType != null) {
         // unwrap to avoid instances of DeferredType
-        val approximatedType = approximate(returnType.unwrap(), toSuper = true)
+        konst approximatedType = approximate(returnType.unwrap(), toSuper = true)
         if (approximatedType != null) {
             builder.setReturnType(approximatedType)
             approximated = true
@@ -67,9 +67,9 @@ private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, b
 
     if (builder !is FunctionDescriptor.CopyBuilder<*>) return approximated
 
-    val extensionReceiverParameter = descriptor.extensionReceiverParameter
+    konst extensionReceiverParameter = descriptor.extensionReceiverParameter
     if (extensionReceiverParameter != null) {
-        val approximatedExtensionReceiver = approximate(extensionReceiverParameter.type.unwrap(), toSuper = false)
+        konst approximatedExtensionReceiver = approximate(extensionReceiverParameter.type.unwrap(), toSuper = false)
         if (approximatedExtensionReceiver != null) {
             builder.setExtensionReceiverParameter(
                 extensionReceiverParameter.substituteTopLevelType(approximatedExtensionReceiver)
@@ -78,12 +78,12 @@ private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, b
         }
     }
 
-    var valueParameterApproximated = false
-    val newParameters = descriptor.valueParameters.map {
-        val approximatedType = approximate(it.type.unwrap(), toSuper = false)
+    var konstueParameterApproximated = false
+    konst newParameters = descriptor.konstueParameters.map {
+        konst approximatedType = approximate(it.type.unwrap(), toSuper = false)
         if (approximatedType != null) {
-            valueParameterApproximated = true
-            // invoking constructor explicitly as substitution on value parameters is not supported
+            konstueParameterApproximated = true
+            // invoking constructor explicitly as substitution on konstue parameters is not supported
             ValueParameterDescriptorImpl(
                 it.containingDeclaration, it.original, it.index, it.annotations,
                 it.name, outType = approximatedType, it.declaresDefaultValue(),
@@ -94,7 +94,7 @@ private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, b
         }
     }
 
-    if (valueParameterApproximated) {
+    if (konstueParameterApproximated) {
         builder.setValueParameters(newParameters)
         approximated = true
     }
@@ -103,7 +103,7 @@ private fun TypeApproximator.approximate(descriptor: CallableMemberDescriptor, b
 }
 
 private fun ReceiverParameterDescriptor.substituteTopLevelType(newType: KotlinType): ReceiverParameterDescriptor? {
-    val wrappedSubstitution = object : TypeSubstitution() {
+    konst wrappedSubstitution = object : TypeSubstitution() {
         override fun get(key: KotlinType): TypeProjection? = null
         override fun prepareTopLevelType(topLevelType: KotlinType, position: Variance): KotlinType = newType
     }
@@ -125,7 +125,7 @@ private fun TypeApproximator.approximate(type: UnwrappedType, toSuper: Boolean):
  * Only members used by [DescriptorSerializer.propertyProto] are implemented correctly in this property descriptor.
  */
 fun createFreeFakeLocalPropertyDescriptor(descriptor: LocalVariableDescriptor, typeApproximator: TypeApproximator?): PropertyDescriptor {
-    val property = PropertyDescriptorImpl.create(
+    konst property = PropertyDescriptorImpl.create(
         descriptor.containingDeclaration, descriptor.annotations, Modality.FINAL, descriptor.visibility, descriptor.isVar,
         descriptor.name, CallableMemberDescriptor.Kind.DECLARATION, descriptor.source, false, descriptor.isConst,
         false, false, false, descriptor.isDelegated
@@ -145,7 +145,7 @@ fun createFreeFakeLocalPropertyDescriptor(descriptor: LocalVariableDescriptor, t
         descriptor.setter?.run {
             PropertySetterDescriptorImpl(property, annotations, modality, visibility, true, isExternal, isInline, kind, null, source)
                 .apply {
-                    initialize(this@run.valueParameters.single())
+                    initialize(this@run.konstueParameters.single())
                 }
         }
     )

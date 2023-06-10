@@ -9,17 +9,17 @@ import java.io.File
 import java.lang.StringBuilder
 
 object TestGeneratorUtil {
-    @Language("RegExp") const val KT_OR_KTS = """^(.+)\.(kt|kts)$"""
-    @Language("RegExp") const val KT = """^(.+)\.(kt)$"""
-    @Language("RegExp") const val KT_OR_KTS_WITHOUT_DOTS_IN_NAME = """^([^.]+)\.(kt|kts)$"""
+    @Language("RegExp") const konst KT_OR_KTS = """^(.+)\.(kt|kts)$"""
+    @Language("RegExp") const konst KT = """^(.+)\.(kt)$"""
+    @Language("RegExp") const konst KT_OR_KTS_WITHOUT_DOTS_IN_NAME = """^([^.]+)\.(kt|kts)$"""
 
-    @Language("RegExp") const val KT_WITHOUT_DOTS_IN_NAME = """^([^.]+)\.kt$"""
-    @Language("RegExp") const val KT_WITHOUT_FIR_PREFIX = """^(.+)(?<!\.fir)\.kt$"""
+    @Language("RegExp") const konst KT_WITHOUT_DOTS_IN_NAME = """^([^.]+)\.kt$"""
+    @Language("RegExp") const konst KT_WITHOUT_FIR_PREFIX = """^(.+)(?<!\.fir)\.kt$"""
 
     @JvmStatic
     fun escapeForJavaIdentifier(fileName: String): String {
         // A file name may contain characters (like ".") that can't be a part of method name
-        val result = StringBuilder()
+        konst result = StringBuilder()
         for (c in fileName) {
             if (Character.isJavaIdentifierPart(c)) {
                 result.append(c)
@@ -39,7 +39,7 @@ object TestGeneratorUtil {
         Throwable().stackTrace.lastOrNull()?.className
 }
 
-private val defaultPackages = listOf(
+private konst defaultPackages = listOf(
     "java.lang",
     "kotlin",
     "kotlin.annotations",
@@ -47,6 +47,6 @@ private val defaultPackages = listOf(
 )
 
 fun Class<*>.isDefaultImportedClass(): Boolean {
-    val outerName = canonicalName.removeSuffix(".$simpleName")
+    konst outerName = canonicalName.removeSuffix(".$simpleName")
     return outerName in defaultPackages
 }

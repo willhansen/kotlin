@@ -11,7 +11,7 @@ public open class AnnotationRetentions {
         public/*package*/ constructor BaseClass()
     }
 
-    @kotlin.annotation.Retention(value = AnnotationRetention.BINARY) public final annotation class BinaryAnnotation : kotlin.Annotation {
+    @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) public final annotation class BinaryAnnotation : kotlin.Annotation {
         public constructor BinaryAnnotation()
     }
 
@@ -19,7 +19,7 @@ public open class AnnotationRetentions {
         public/*package*/ constructor BinaryClass()
     }
 
-    @kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class RuntimeAnnotation : kotlin.Annotation {
+    @kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class RuntimeAnnotation : kotlin.Annotation {
         public constructor RuntimeAnnotation()
     }
 
@@ -27,7 +27,7 @@ public open class AnnotationRetentions {
         public/*package*/ constructor RuntimeClass()
     }
 
-    @kotlin.annotation.Retention(value = AnnotationRetention.SOURCE) public final annotation class SourceAnnotation : kotlin.Annotation {
+    @kotlin.annotation.Retention(konstue = AnnotationRetention.SOURCE) public final annotation class SourceAnnotation : kotlin.Annotation {
         public constructor SourceAnnotation()
     }
 

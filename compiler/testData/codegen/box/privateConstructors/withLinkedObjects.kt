@@ -1,13 +1,13 @@
 // See also KT-6299
-public open class Outer private constructor(val p: Outer?) {
+public open class Outer private constructor(konst p: Outer?) {
     object Inner: Outer(null)
     object Other: Outer(Inner)
     object Another: Outer(Other)
 }
 
 fun box(): String {
-    val outer = Outer.Inner
-    val other = Outer.Other
-    val another = Outer.Another
+    konst outer = Outer.Inner
+    konst other = Outer.Other
+    konst another = Outer.Another
     return "OK"
 }

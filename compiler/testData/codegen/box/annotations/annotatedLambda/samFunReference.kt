@@ -24,7 +24,7 @@ import java.lang.reflect.Method
 import kotlin.test.assertEquals
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val x: String)
+annotation class Ann(konst x: String)
 
 fun testMethodNoAnnotations(method: Method, name: String) {
     assertEquals(0, method.getDeclaredAnnotations().size, "No method annotations expected `$name`")
@@ -34,7 +34,7 @@ fun testMethodNoAnnotations(method: Method, name: String) {
 }
 
 fun testClass(clazz: Class<*>, name: String) {
-    val invokes = clazz.getDeclaredMethods().single() { !it.isBridge() }
+    konst invokes = clazz.getDeclaredMethods().single() { !it.isBridge() }
     testMethodNoAnnotations(invokes, name)
 }
 
@@ -47,9 +47,9 @@ fun annotatedRunnable() {}
 fun box(): String {
     testClass(Test.applyABC(::annotatedABC), "1")
     testClass(Test.apply(::annotatedRunnable), "2")
-    val abcReference = ::annotatedABC
+    konst abcReference = ::annotatedABC
     testClass(Test.applyABC(abcReference), "3")
-    val runnableReference = ::annotatedRunnable
+    konst runnableReference = ::annotatedRunnable
     testClass(Test.apply(runnableReference), "4")
     return "OK"
 }

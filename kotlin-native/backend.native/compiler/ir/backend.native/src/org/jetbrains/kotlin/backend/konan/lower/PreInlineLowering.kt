@@ -26,15 +26,15 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
 /**
  * This pass runs before inlining and performs the following additional transformations over some operations:
- *     - Assertion call removal.
+ *     - Assertion call remokonst.
  *     - First phase of typeOf intrinsic lowering.
  */
-internal class PreInlineLowering(val context: Context) : BodyLoweringPass {
+internal class PreInlineLowering(konst context: Context) : BodyLoweringPass {
 
-    private val symbols get() = context.ir.symbols
+    private konst symbols get() = context.ir.symbols
 
-    private val asserts = symbols.asserts
-    private val enableAssertions = context.config.configuration.getBoolean(KonanConfigKeys.ENABLE_ASSERTIONS)
+    private konst asserts = symbols.asserts
+    private konst enableAssertions = context.config.configuration.getBoolean(KonanConfigKeys.ENABLE_ASSERTIONS)
 
     override fun lower(irBody: IrBody, container: IrDeclaration) = lower(irBody, container, container.file)
 

@@ -1,9 +1,9 @@
 // EXPECTED_REACHABLE_NODES: 1282
 fun box(): String {
-    val a = 'Q'.foo()
+    konst a = 'Q'.foo()
     if (a != "number") return "fail1: $a"
 
-    val b = 'W'.bar()
+    konst b = 'W'.bar()
     if (b != "object") return "fail2: $b"
 
     return "OK"

@@ -22,8 +22,8 @@ class TransitionDefinition<T> {
 fun <T> transitionDefinition(init: TransitionDefinition<T>.() -> Unit) = TransitionDefinition<T>().apply(init)
 
 fun main() {
-    val intProp = IntPropKey()
-    val defn = transitionDefinition {
+    konst intProp = IntPropKey()
+    konst defn = transitionDefinition {
         transition(1, 2) {
             intProp using tween {
 

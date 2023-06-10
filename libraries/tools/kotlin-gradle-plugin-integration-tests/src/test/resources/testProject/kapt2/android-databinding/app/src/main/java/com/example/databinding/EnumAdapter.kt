@@ -18,15 +18,15 @@ interface Displayable {
 @InverseBindingMethods(
         InverseBindingMethod(type = Spinner::class, attribute = "selectionEnum", method = "getSelectedItem", event = "app:selectionAttrChanged")
 )
-open class EnumAdapter<DispEnum>(val context: Context,
+open class EnumAdapter<DispEnum>(konst context: Context,
                                  enumClass: Class<DispEnum>,
                                  @IntegerRes var resource: Int = android.R.layout.simple_spinner_item,
                                  @IntegerRes var dropDownResource: Int = android.R.layout.simple_spinner_dropdown_item,
-                                 val isOptional: Boolean = false) :
+                                 konst isOptional: Boolean = false) :
         BaseAdapter() where DispEnum : Displayable, DispEnum : Enum<DispEnum>
 {
-    val inflater: LayoutInflater = LayoutInflater.from(context)
-    val konstants: Array<DispEnum> = enumClass.enumConstants
+    konst inflater: LayoutInflater = LayoutInflater.from(context)
+    konst konstants: Array<DispEnum> = enumClass.enumConstants
 
     override fun getItem(position: Int): DispEnum? {
         if (isOptional) {
@@ -48,8 +48,8 @@ open class EnumAdapter<DispEnum>(val context: Context,
     }
 
     private fun createViewFromResource(position: Int, convertView: View?, parent: ViewGroup, resource: Int): View {
-        val view = convertView ?: inflater.inflate(resource, parent, false)
-        val textView: TextView
+        konst view = convertView ?: inflater.inflate(resource, parent, false)
+        konst textView: TextView
         try {
             textView = view as TextView
         } catch (e: ClassCastException) {
@@ -57,7 +57,7 @@ open class EnumAdapter<DispEnum>(val context: Context,
             return view
         }
 
-        val enum = getItem(position)
+        konst enum = getItem(position)
         textView.text = enum?.displayString(context.resources) ?: "-----"
         return view
     }
@@ -74,7 +74,7 @@ open class EnumAdapter<DispEnum>(val context: Context,
 fun bindSpinnerEnum(spinner: Spinner, newValue: Enum<*>?,
                     itemSelectedListener: AdapterViewBindingAdapter.OnItemSelected?,
                     changeListener: InverseBindingListener?) {
-    val spinnerAdapter = spinner.adapter
+    konst spinnerAdapter = spinner.adapter
     if (spinnerAdapter !is EnumAdapter<*>) {
         throw UnsupportedOperationException("app:selectionEnum attribute on Spinner requires EnumAdapter")
     }
@@ -83,17 +83,17 @@ fun bindSpinnerEnum(spinner: Spinner, newValue: Enum<*>?,
     else
         spinner.onItemSelectedListener = AdapterViewBindingAdapter.OnItemSelectedComponentListener(itemSelectedListener, nothingingSelectedListener, changeListener)
 
-    val isOptional = spinnerAdapter.isOptional
+    konst isOptional = spinnerAdapter.isOptional
     if (!isOptional && newValue == null) {
-        throw IllegalStateException("Can't set a null value for app:selectionEnum, adapter.isOptional is false")
+        throw IllegalStateException("Can't set a null konstue for app:selectionEnum, adapter.isOptional is false")
     }
     if (spinner.selectedItem != newValue) {
-        val sel = if (isOptional) EnumAdapter.optionalPosition(newValue) else newValue!!.ordinal
+        konst sel = if (isOptional) EnumAdapter.optionalPosition(newValue) else newValue!!.ordinal
         spinner.setSelection(sel)
     }
 }
 
-val nothingingSelectedListener = object : AdapterViewBindingAdapter.OnNothingSelected {
+konst nothingingSelectedListener = object : AdapterViewBindingAdapter.OnNothingSelected {
     override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 }

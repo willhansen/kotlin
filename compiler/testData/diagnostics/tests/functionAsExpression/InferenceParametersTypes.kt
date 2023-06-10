@@ -14,6 +14,6 @@ fun test2(a: () -> List<Int>) {
     test2(fun () = listOf())
 }
 
-val a: (Int) -> Unit = fun(x) { checkSubtype<Int>(x) }
+konst a: (Int) -> Unit = fun(x) { checkSubtype<Int>(x) }
 
-val b: (Int) -> Unit = <!TYPE_MISMATCH!>fun(<!EXPECTED_PARAMETER_TYPE_MISMATCH!>x: String<!>) {}<!>
+konst b: (Int) -> Unit = <!TYPE_MISMATCH!>fun(<!EXPECTED_PARAMETER_TYPE_MISMATCH!>x: String<!>) {}<!>

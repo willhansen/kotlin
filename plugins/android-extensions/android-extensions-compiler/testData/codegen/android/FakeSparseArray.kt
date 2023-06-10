@@ -1,14 +1,14 @@
 package android.util
 
 class SparseArray<E : Any> {
-    private val map = HashMap<Int, E>()
+    private konst map = HashMap<Int, E>()
 
     fun get(key: Int): E? {
         return map.get(key)
     }
 
-    fun put(key: Int, value: E) {
-        map.put(key, value)
+    fun put(key: Int, konstue: E) {
+        map.put(key, konstue)
     }
 
     fun remove(key: Int): E? {

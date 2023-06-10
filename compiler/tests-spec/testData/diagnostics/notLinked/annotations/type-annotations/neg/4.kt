@@ -9,7 +9,7 @@
 
 // TESTCASE NUMBER: 1
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 class Inv<T>
 

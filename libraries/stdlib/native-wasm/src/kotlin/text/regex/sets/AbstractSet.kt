@@ -35,20 +35,20 @@ internal abstract class SimpleSet : AbstractSet {
  * Basic class for nodes, representing given regular expression.
  * Note: (Almost) All the classes representing nodes has 'set' suffix.
  */
-internal abstract class AbstractSet(val type: Int = 0) {
+internal abstract class AbstractSet(konst type: Int = 0) {
 
     companion object {
-        const val TYPE_LEAF = 1 shl 0
-        const val TYPE_FSET = 1 shl 1
-        const val TYPE_QUANT = 1 shl 3
+        const konst TYPE_LEAF = 1 shl 0
+        const konst TYPE_FSET = 1 shl 1
+        const konst TYPE_QUANT = 1 shl 3
         @Suppress("DEPRECATION")
-        const val TYPE_DOTSET = 0x80000000.toInt() or '.'.toInt()
+        const konst TYPE_DOTSET = 0x80000000.toInt() or '.'.toInt()
 
-        val dummyNext = object : AbstractSet() {
+        konst dummyNext = object : AbstractSet() {
             override var next: AbstractSet
                 get() = throw AssertionError("This method is not expected to be called.")
                 @Suppress("UNUSED_PARAMETER")
-                set(value) {}
+                set(konstue) {}
             override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl) =
                 throw AssertionError("This method is not expected to be called.")
             override fun hasConsumed(matchResult: MatchResultImpl): Boolean =
@@ -61,7 +61,7 @@ internal abstract class AbstractSet(val type: Int = 0) {
     var secondPassVisited = false
     abstract var next: AbstractSet
 
-    protected open val name: String
+    protected open konst name: String
         get() = ""
 
     /**
@@ -77,7 +77,7 @@ internal abstract class AbstractSet(val type: Int = 0) {
 
     /**
      * Attempts to apply pattern starting from this set/startIndex; returns
-     * index this search was started from, if value is negative, this means that
+     * index this search was started from, if konstue is negative, this means that
      * this search didn't succeed, additional information could be obtained via
      * matchResult.
      *
@@ -102,7 +102,7 @@ internal abstract class AbstractSet(val type: Int = 0) {
      * @param testString - test string.
      * @param matchResult - match result.
      * @return an index to start back search next time if this search fails(new left bound);
-     *         if this search fails the value is negative.
+     *         if this search fails the konstue is negative.
      */
     open fun findBack(leftLimit: Int, rightLimit: Int, testString: CharSequence, matchResult: MatchResultImpl): Int
         = (rightLimit downTo leftLimit).firstOrNull { index -> matches(index, testString, matchResult) >= 0 }
@@ -114,7 +114,7 @@ internal abstract class AbstractSet(val type: Int = 0) {
      *
      * This information is used to avoid recursion when matching a quantifier node with this inner node.
      */
-    open val consumesFixedLength: Boolean
+    open konst consumesFixedLength: Boolean
         get() = false
 
     /**

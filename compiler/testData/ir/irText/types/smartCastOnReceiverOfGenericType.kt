@@ -9,7 +9,7 @@ fun testFunction(a: Any, b: Any) {
 fun testProperty(a: Any, b: Any) {
     a as Cell<String>
     b as String
-    a.value = b
+    a.konstue = b
 }
 
 fun testInnerClass(a: Any, b: Any, c: Any) {
@@ -25,7 +25,7 @@ fun <T> testNonSubstitutedTypeParameter(a: Any, b: Any) {
     a.add(b)
 }
 
-class Cell<T>(var value: T)
+class Cell<T>(var konstue: T)
 
 class Outer<T1> {
     inner class Inner<T2> {

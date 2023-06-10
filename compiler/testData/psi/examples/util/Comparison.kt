@@ -7,7 +7,7 @@ enum class ComparisonResult {
 }
 
 fun <T> asMatchableComparison(cmp : Comparison<T>) : MatchableComparison<T> = {a, b ->
-  val res = cmp(a, b)
+  konst res = cmp(a, b)
   if (res == 0) return ComparisonResult.EQ
   if (res < 0) return ComparisonResult.LS
   return ComparisonResult.GR

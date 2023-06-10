@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.*
 
 internal class KotlinStaticDeclarationIndex {
-    internal val facadeFileMap: MutableMap<FqName, MutableSet<KtFile>> = mutableMapOf()
-    internal val multiFileClassPartMap: MutableMap<FqName, MutableSet<KtFile>> = mutableMapOf()
-    internal val scriptMap: MutableMap<FqName, MutableSet<KtScript>> = mutableMapOf()
-    internal val classMap: MutableMap<FqName, MutableSet<KtClassOrObject>> = mutableMapOf()
-    internal val typeAliasMap: MutableMap<FqName, MutableSet<KtTypeAlias>> = mutableMapOf()
-    internal val topLevelFunctionMap: MutableMap<FqName, MutableSet<KtNamedFunction>> = mutableMapOf()
-    internal val topLevelPropertyMap: MutableMap<FqName, MutableSet<KtProperty>> = mutableMapOf()
+    internal konst facadeFileMap: MutableMap<FqName, MutableSet<KtFile>> = mutableMapOf()
+    internal konst multiFileClassPartMap: MutableMap<FqName, MutableSet<KtFile>> = mutableMapOf()
+    internal konst scriptMap: MutableMap<FqName, MutableSet<KtScript>> = mutableMapOf()
+    internal konst classMap: MutableMap<FqName, MutableSet<KtClassOrObject>> = mutableMapOf()
+    internal konst typeAliasMap: MutableMap<FqName, MutableSet<KtTypeAlias>> = mutableMapOf()
+    internal konst topLevelFunctionMap: MutableMap<FqName, MutableSet<KtNamedFunction>> = mutableMapOf()
+    internal konst topLevelPropertyMap: MutableMap<FqName, MutableSet<KtProperty>> = mutableMapOf()
 }

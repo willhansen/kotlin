@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractHLSmartCastInfoTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile) as KtExpression
-        val actual = executeOnPooledThreadInReadAction {
+        konst expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile) as KtExpression
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
-                val smartCastInfo = expression.getSmartCastInfo()
+                konst smartCastInfo = expression.getSmartCastInfo()
                 buildString {
                     appendLine("expression: ${expression.text}")
                     appendLine("isStable: ${smartCastInfo?.isStable}")
                     appendLine("smartCastType: ${smartCastInfo?.smartCastType?.render(position = Variance.INVARIANT)}")
 
-                    val receiverSmartCasts = expression.getImplicitReceiverSmartCast()
+                    konst receiverSmartCasts = expression.getImplicitReceiverSmartCast()
                     for (receiverSmartCast in receiverSmartCasts) {
                         appendLine("receiver: ${receiverSmartCast.kind}")
                         appendLine("    smartCastType: ${receiverSmartCast.type.render(position = Variance.INVARIANT)}")

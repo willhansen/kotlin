@@ -13,5 +13,5 @@ KtSuccessCallInfo:
         symbol = var foo: kotlin.Int
         callableIdIfNonLocal = /JavaClass.foo
     simpleAccess = Write:
-      value = 42
+      konstue = 42
     typeArgumentsMapping = {}

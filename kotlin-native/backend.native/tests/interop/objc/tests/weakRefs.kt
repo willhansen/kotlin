@@ -14,7 +14,7 @@ import objcTests.*
 }
 
 private fun testWeakReference(block: () -> NSObject) {
-    val ref = autoreleasepool {
+    konst ref = autoreleasepool {
         createAndTestWeakReference(block)
     }
 
@@ -24,7 +24,7 @@ private fun testWeakReference(block: () -> NSObject) {
 }
 
 private fun createAndTestWeakReference(block: () -> NSObject): WeakReference<NSObject> {
-    val ref = createWeakReference(block)
+    konst ref = createWeakReference(block)
     assertNotNull(ref.get())
     assertEquals(ref.get()!!.hash(), ref.get()!!.hash())
     return ref

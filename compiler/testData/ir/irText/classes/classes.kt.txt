@@ -36,11 +36,11 @@ enum class TestEnumClass : Enum<TestEnumClass> {
 
   }
 
-  fun values(): Array<TestEnumClass> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<TestEnumClass> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): TestEnumClass /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): TestEnumClass /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<TestEnumClass>
+  konst entries: EnumEntries<TestEnumClass>
     get(): EnumEntries<TestEnumClass> /* Synthetic body for ENUM_ENTRIES */
 
 }

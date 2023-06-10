@@ -19,7 +19,7 @@ object SuspendTypeConversions : ParameterTypeConversion {
     ): Boolean {
         if (argument !is SimpleKotlinCallArgument) return true
 
-        val argumentType = argument.receiver.stableType
+        konst argumentType = argument.receiver.stableType
         if (argumentType.isSuspendFunctionType) return true
 
         if (!expectedParameterType.isSuspendFunctionType) return true
@@ -43,7 +43,7 @@ object SuspendTypeConversions : ParameterTypeConversion {
         parameter: ParameterDescriptor,
         expectedParameterType: UnwrappedType
     ): UnwrappedType {
-        val nonSuspendParameterType = createFunctionType(
+        konst nonSuspendParameterType = createFunctionType(
             candidate.callComponents.builtIns,
             expectedParameterType.annotations,
             expectedParameterType.getReceiverTypeFromFunctionType(),

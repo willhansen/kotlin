@@ -12,7 +12,7 @@ var Any?.isNotNull: Boolean
         }
         return this != null
     }
-    set(value) {
+    set(konstue) {
         <!WRONG_IMPLIES_CONDITION!><!CONTRACT_NOT_ALLOWED!>contract<!> {
             returns() implies (this@isNotNull != null)
             <!ERROR_IN_CONTRACT_DESCRIPTION!>require(<!SENSELESS_COMPARISON!>this != null<!>)<!>

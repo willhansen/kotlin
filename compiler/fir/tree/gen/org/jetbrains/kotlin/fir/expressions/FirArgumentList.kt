@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirArgumentList : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
-    abstract val arguments: List<FirExpression>
+    abstract override konst source: KtSourceElement?
+    abstract konst arguments: List<FirExpression>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitArgumentList(this, data)
 

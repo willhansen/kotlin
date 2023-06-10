@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.fir.render
 import org.jetbrains.kotlin.fir.types.FirTypeRefComparator
 
 object FirTypeParameterRefComparator : Comparator<FirTypeParameterRef> {
-    private val FirTypeParameterRef.priority : Int
+    private konst FirTypeParameterRef.priority : Int
         get() = when (this) {
             is FirConstructedClassTypeParameterRef -> 3
             is FirOuterClassTypeParameterRef -> 2
@@ -22,7 +22,7 @@ object FirTypeParameterRefComparator : Comparator<FirTypeParameterRef> {
         }
 
     override fun compare(a: FirTypeParameterRef, b: FirTypeParameterRef): Int {
-        val priorityDiff = a.priority - b.priority
+        konst priorityDiff = a.priority - b.priority
         if (priorityDiff != 0) {
             return priorityDiff
         }
@@ -43,20 +43,20 @@ object FirTypeParameterRefComparator : Comparator<FirTypeParameterRef> {
                 require(b is FirTypeParameter) {
                     "priority is inconsistent: ${a.render()} v.s. ${b.render()}"
                 }
-                val nameDiff = a.symbol.name.compareTo(b.symbol.name)
+                konst nameDiff = a.symbol.name.compareTo(b.symbol.name)
                 if (nameDiff != 0) {
                     return nameDiff
                 }
-                val varianceDiff = a.variance.ordinal - b.variance.ordinal
+                konst varianceDiff = a.variance.ordinal - b.variance.ordinal
                 if (varianceDiff != 0) {
                     return varianceDiff
                 }
-                val boundsSizeDiff = a.bounds.size - b.bounds.size
+                konst boundsSizeDiff = a.bounds.size - b.bounds.size
                 if (boundsSizeDiff != 0) {
                     return boundsSizeDiff
                 }
                 for ((aBound, bBound) in a.bounds.zip(b.bounds)) {
-                    val boundDiff = FirTypeRefComparator.compare(aBound, bBound)
+                    konst boundDiff = FirTypeRefComparator.compare(aBound, bBound)
                     if (boundDiff != 0) {
                         return boundDiff
                     }

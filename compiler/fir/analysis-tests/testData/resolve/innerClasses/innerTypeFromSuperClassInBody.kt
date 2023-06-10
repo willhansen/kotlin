@@ -6,7 +6,7 @@ abstract class A<X : CharSequence> {
 object B : A<String>() {
 
     fun bar() {
-        val y: Inner.() -> Unit = {}
+        konst y: Inner.() -> Unit = {}
         foo(y)
         baz(y)
     }

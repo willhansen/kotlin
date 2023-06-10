@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.diagnostics.rendering.Renderers.TO_STRING
 import java.util.regex.Pattern
 
 class TextDiagnostic(
-    override val name: String,
-    override val platform: String?,
-    val parameters: List<String>?,
+    override konst name: String,
+    override konst platform: String?,
+    konst parameters: List<String>?,
     inference: InferenceCompatibility?
 ) : AbstractTestDiagnostic {
     override var inferenceCompatibility = inference ?: InferenceCompatibility.ALL
 
-    val description: String
+    konst description: String
         get() = (if (platform != null) "$platform:" else "") + name
 
     enum class InferenceCompatibility constructor(internal var abbreviation: String?) {
@@ -48,7 +48,7 @@ class TextDiagnostic(
         if (this === other) return true
         if (other == null || javaClass != other.javaClass) return false
 
-        val that = other as TextDiagnostic?
+        konst that = other as TextDiagnostic?
 
         if (name != that!!.name) return false
         if (if (platform != null) platform != that.platform else that.platform != null) return false
@@ -66,7 +66,7 @@ class TextDiagnostic(
     }
 
     fun asString(withNewInference: Boolean = true, renderParameters: Boolean = true): String {
-        val result = StringBuilder()
+        konst result = StringBuilder()
         if (withNewInference && inferenceCompatibility.abbreviation != null) {
             result.append(inferenceCompatibility.abbreviation)
             result.append(";")
@@ -90,24 +90,24 @@ class TextDiagnostic(
     }
 
     companion object {
-        private val crossPlatformLineBreak = Pattern.compile("""\r?\n""")
+        private konst crossPlatformLineBreak = Pattern.compile("""\r?\n""")
 
         fun parseDiagnostic(text: String): TextDiagnostic {
-            val matcher = CheckerTestUtil.individualDiagnosticPattern.matcher(text)
+            konst matcher = CheckerTestUtil.individualDiagnosticPattern.matcher(text)
             if (!matcher.find())
                 throw IllegalArgumentException("Could not parse diagnostic: $text")
 
-            val inference = computeInferenceCompatibility(
+            konst inference = computeInferenceCompatibility(
                 extractDataBefore(
                     matcher.group(1),
                     ";"
                 )
             )
-            val platform =
+            konst platform =
                 extractDataBefore(matcher.group(2), ":")
 
-            val name = matcher.group(3)
-            val parameters = matcher.group(5) ?: return TextDiagnostic(
+            konst name = matcher.group(3)
+            konst parameters = matcher.group(5) ?: return TextDiagnostic(
                 name,
                 platform,
                 null,
@@ -123,7 +123,7 @@ class TextDiagnostic(
         }
 
         private fun computeInferenceCompatibility(abbreviation: String?): InferenceCompatibility {
-            return if (abbreviation == null) InferenceCompatibility.ALL else InferenceCompatibility.values().single { inference -> abbreviation == inference.abbreviation }
+            return if (abbreviation == null) InferenceCompatibility.ALL else InferenceCompatibility.konstues().single { inference -> abbreviation == inference.abbreviation }
         }
 
         private fun extractDataBefore(prefix: String?, anchor: String): String? {
@@ -139,19 +139,19 @@ class TextDiagnostic(
         }
 
         private fun asTextDiagnostic(actualDiagnostic: ActualDiagnostic): TextDiagnostic {
-            val diagnostic = actualDiagnostic.diagnostic
-            val renderer = when (diagnostic.factory) {
+            konst diagnostic = actualDiagnostic.diagnostic
+            konst renderer = when (diagnostic.factory) {
                 is DebugInfoDiagnosticFactory1 -> {
                     @Suppress("UNCHECKED_CAST")
                     DiagnosticWithParameters1Renderer("{0}", TO_STRING) as DiagnosticRenderer<Diagnostic>
                 }
                 else -> DefaultErrorMessages.getRendererForDiagnostic(diagnostic)
             }
-            val diagnosticName = actualDiagnostic.name
+            konst diagnosticName = actualDiagnostic.name
 
             if (renderer is AbstractDiagnosticWithParametersRenderer) {
-                val renderParameters = renderer.renderParameters(diagnostic)
-                val parameters = ContainerUtil.map(renderParameters, { it.toString() })
+                konst renderParameters = renderer.renderParameters(diagnostic)
+                konst parameters = ContainerUtil.map(renderParameters, { it.toString() })
                 return TextDiagnostic(
                     diagnosticName,
                     actualDiagnostic.platform,

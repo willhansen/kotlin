@@ -14,7 +14,7 @@ public interface BiFunction<T, U, R> {
 
 // FILE: main.kt
 fun main() {
-    val a = A<Int, String>()
+    konst a = A<Int, String>()
     a.foo(2, BiFunction { k, v -> null })
     a.foo(2) { k, v -> null } // See KT-12144
 }

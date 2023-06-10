@@ -31,12 +31,12 @@ import org.jetbrains.kotlin.types.TypeCheckerState.SupertypesPolicy.LowerIfFlexi
 import org.jetbrains.kotlin.types.TypeSystemCommonBackendContext
 import org.jetbrains.kotlin.types.model.*
 
-class ErrorTypeConstructor(val reason: String) : TypeConstructorMarker {
+class ErrorTypeConstructor(konst reason: String) : TypeConstructorMarker {
     override fun toString(): String = reason
 }
 
 interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, TypeCheckerProviderContext, TypeSystemCommonBackendContext {
-    val session: FirSession
+    konst session: FirSession
 
     override fun TypeConstructorMarker.isIntegerLiteralTypeConstructor(): Boolean {
         return this is ConeIntegerLiteralType
@@ -60,7 +60,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
         return name == SpecialNames.ANONYMOUS
     }
 
-    override val TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
+    override konst TypeVariableTypeConstructorMarker.typeParameter: TypeParameterMarker?
         get() {
             require(this is ConeTypeVariableTypeConstructor)
             return this.originalTypeParameter
@@ -243,7 +243,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
             is ConeTypeVariableTypeConstructor,
             is ConeIntersectionType -> 0
             is ConeClassLikeLookupTag -> {
-                when (val symbol = toSymbol(session)) {
+                when (konst symbol = toSymbol(session)) {
                     is FirAnonymousObjectSymbol -> symbol.fir.typeParameters.size
                     is FirRegularClassSymbol -> symbol.fir.typeParameters.size
                     is FirTypeAliasSymbol -> symbol.fir.typeParameters.size
@@ -257,7 +257,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun TypeConstructorMarker.getParameter(index: Int): TypeParameterMarker {
-        return when (val symbol = toClassLikeSymbol()) {
+        return when (konst symbol = toClassLikeSymbol()) {
             is FirAnonymousObjectSymbol -> symbol.fir.typeParameters[index].symbol.toLookupTag()
             is FirRegularClassSymbol -> symbol.fir.typeParameters[index].symbol.toLookupTag()
             is FirTypeAliasSymbol -> symbol.fir.typeParameters[index].symbol.toLookupTag()
@@ -266,7 +266,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun TypeConstructorMarker.getParameters(): List<ConeTypeParameterLookupTag> {
-        return when (val symbol = toClassLikeSymbol()) {
+        return when (konst symbol = toClassLikeSymbol()) {
             is FirAnonymousObjectSymbol -> symbol.fir.typeParameters.map { it.symbol.toLookupTag() }
             is FirRegularClassSymbol -> symbol.fir.typeParameters.map { it.symbol.toLookupTag() }
             is FirTypeAliasSymbol -> symbol.fir.typeParameters.map { it.symbol.toLookupTag() }
@@ -283,7 +283,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
             is ConeTypeVariableTypeConstructor -> emptyList()
             is ConeTypeParameterLookupTag -> bounds().map { it.coneType }
             is ConeClassLikeLookupTag -> {
-                when (val symbol = toClassLikeSymbol().also { it?.lazyResolveToPhase(FirResolvePhase.TYPES) }) {
+                when (konst symbol = toClassLikeSymbol().also { it?.lazyResolveToPhase(FirResolvePhase.TYPES) }) {
                     is FirClassSymbol<*> -> symbol.fir.superConeTypes
                     is FirTypeAliasSymbol -> listOfNotNull(symbol.fir.expandedConeType)
                     else -> listOf(session.builtinTypes.anyType.type)
@@ -364,10 +364,10 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun TypeConstructorMarker.isCommonFinalClassConstructor(): Boolean {
-        val symbol = toClassLikeSymbol() ?: return false
+        konst symbol = toClassLikeSymbol() ?: return false
         if (symbol is FirAnonymousObjectSymbol) return true
-        val classSymbol = symbol as? FirRegularClassSymbol ?: return false
-        val fir = classSymbol.fir
+        konst classSymbol = symbol as? FirRegularClassSymbol ?: return false
+        konst fir = classSymbol.fir
         return fir.modality == Modality.FINAL &&
                 fir.classKind != ClassKind.ENUM_ENTRY &&
                 fir.classKind != ClassKind.ANNOTATION_CLASS
@@ -411,7 +411,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
         if (this is ConeStubType) return true
         if (this is ConeDefinitelyNotNullType) return true
         require(this is ConeLookupTagBasedType)
-        val typeConstructor = this.typeConstructor()
+        konst typeConstructor = this.typeConstructor()
         return typeConstructor is ConeClassLikeLookupTag ||
                 typeConstructor is ConeTypeParameterLookupTag
     }
@@ -430,13 +430,13 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
 
     override fun KotlinTypeMarker.hasCustomAttributes(): Boolean {
         require(this is ConeKotlinType)
-        val compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
+        konst compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
         return this.attributes.any { it.key !in compilerAttributes && it !is CustomAnnotationTypeAttribute }
     }
 
     override fun KotlinTypeMarker.getCustomAttributes(): List<AnnotationMarker> {
         require(this is ConeKotlinType)
-        val compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
+        konst compilerAttributes = CompilerConeAttributes.classIdByCompilerAttributeKey
         return attributes.filterNot { it.key in compilerAttributes || it is CustomAnnotationTypeAttribute }
     }
 
@@ -481,7 +481,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
             // And while it seems reasonable to have similar semantics as for stub types, it would make some diagnostic test failing
             // Thus, we leave the same semantics only for stubs (similar to TypeUtils.isNullableType)
             is ConeStubType -> {
-                val symbol = (this.constructor.variable.defaultType.lookupTag.originalTypeParameter as? ConeTypeParameterLookupTag)?.symbol
+                konst symbol = (this.constructor.variable.defaultType.lookupTag.originalTypeParameter as? ConeTypeParameterLookupTag)?.symbol
                 symbol == null || symbol.allBoundsAreNullableOrUnresolved()
             }
             is ConeIntersectionType -> intersectedTypes.all { it.isNullableType() }
@@ -516,14 +516,14 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun TypeConstructorMarker.isFinalClassOrEnumEntryOrAnnotationClassConstructor(): Boolean {
-        val firRegularClass = toFirRegularClass() ?: return false
+        konst firRegularClass = toFirRegularClass() ?: return false
 
         // NB: This API is used to determine if a given type [isMostPreciseCovariantArgument] (at `typeMappingUtil.kt`),
         // affecting the upper bound wildcard when mapping the enclosing type to [PsiType]. See KT-57578 for more details.
         // The counterpart in K1, [ClassicTypeSystemContext], uses [ClassDescriptor.isFinalClass] in `ModalityUtils.kt`,
         // which filters out `enum` class. It seems [ClassDescriptor.isFinalOrEnum] is for truly `final` class.
         // That is, the overall API name---isFinalClassOr...---is misleading.
-        val classKind = firRegularClass.classKind
+        konst classKind = firRegularClass.classKind
         return classKind.isEnumEntry ||
                 classKind.isAnnotationClass ||
                 classKind.isObject ||
@@ -532,11 +532,11 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
 
     override fun KotlinTypeMarker.hasAnnotation(fqName: FqName): Boolean {
         require(this is ConeKotlinType)
-        val compilerAttribute = CompilerConeAttributes.compilerAttributeKeyByFqName[fqName]
+        konst compilerAttribute = CompilerConeAttributes.compilerAttributeKeyByFqName[fqName]
         if (compilerAttribute != null) {
             return compilerAttribute in attributes
         }
-        val customAnnotations = attributes.customAnnotations
+        konst customAnnotations = attributes.customAnnotations
         return customAnnotations.any {
             it.typeRef.coneTypeSafe<ConeKotlinType>()?.fullyExpandedType(session)?.classId?.asSingleFqName() == fqName
         }
@@ -545,17 +545,17 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     override fun KotlinTypeMarker.getAnnotationFirstArgumentValue(fqName: FqName): Any? {
         require(this is ConeKotlinType)
         // We don't check for compiler attributes because all of them doesn't have parameters
-        val customAnnotations = attributes.customAnnotations
-        val annotationCall = customAnnotations.firstOrNull {
+        konst customAnnotations = attributes.customAnnotations
+        konst annotationCall = customAnnotations.firstOrNull {
             it.typeRef.coneTypeSafe<ConeKotlinType>()?.fullyExpandedType(session)?.classId?.asSingleFqName() == fqName
         } ?: return null
-        val argument = when (val argument = annotationCall.argumentMapping.mapping.values.firstOrNull() ?: return null) {
+        konst argument = when (konst argument = annotationCall.argumentMapping.mapping.konstues.firstOrNull() ?: return null) {
             is FirVarargArgumentsExpression -> argument.arguments.firstOrNull()
             is FirArrayOfCall -> argument.arguments.firstOrNull()
             is FirNamedArgumentExpression -> argument.expression
             else -> argument
         } ?: return null
-        return (argument as? FirConstExpression<*>)?.value
+        return (argument as? FirConstExpression<*>)?.konstue
     }
 
     override fun TypeConstructorMarker.getTypeParameterClassifier(): TypeParameterMarker? {
@@ -563,19 +563,19 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun TypeConstructorMarker.isInlineClass(): Boolean {
-        val fields = getValueClassProperties() ?: return false
-        return this@ConeTypeContext.valueClassLoweringKind(fields) == ValueClassKind.Inline
+        konst fields = getValueClassProperties() ?: return false
+        return this@ConeTypeContext.konstueClassLoweringKind(fields) == ValueClassKind.Inline
     }
 
     override fun TypeConstructorMarker.isMultiFieldValueClass(): Boolean {
-        val fields = getValueClassProperties() ?: return false
-        return this@ConeTypeContext.valueClassLoweringKind(fields) == ValueClassKind.MultiField
+        konst fields = getValueClassProperties() ?: return false
+        return this@ConeTypeContext.konstueClassLoweringKind(fields) == ValueClassKind.MultiField
     }
 
     override fun TypeConstructorMarker.getValueClassProperties(): List<Pair<Name, SimpleTypeMarker>>? {
-        val firClass = toFirRegularClass() ?: return null
-        // NB: [FirRegularClass.valueClassRepresentation] is updated by [FirStatusResolveTransformer].
-        return firClass.valueClassRepresentation?.underlyingPropertyNamesToTypes
+        konst firClass = toFirRegularClass() ?: return null
+        // NB: [FirRegularClass.konstueClassRepresentation] is updated by [FirStatusResolveTransformer].
+        return firClass.konstueClassRepresentation?.underlyingPropertyNamesToTypes
     }
 
     override fun TypeConstructorMarker.isInnerClass(): Boolean {
@@ -623,7 +623,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     }
 
     override fun KotlinTypeMarker.isInterfaceOrAnnotationClass(): Boolean {
-        val classKind = typeConstructor().toFirRegularClass()?.classKind ?: return false
+        konst classKind = typeConstructor().toFirRegularClass()?.classKind ?: return false
         return classKind == ClassKind.ANNOTATION_CLASS || classKind == ClassKind.INTERFACE
     }
 
@@ -638,13 +638,13 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
     override fun substitutionSupertypePolicy(type: SimpleTypeMarker): TypeCheckerState.SupertypesPolicy {
         if (type.argumentsCount() == 0) return LowerIfFlexible
         require(type is ConeKotlinType)
-        val declaration = when (type) {
+        konst declaration = when (type) {
             is ConeClassLikeType -> type.lookupTag.toSymbol(session)?.fir
             else -> null
         }
 
-        val substitutor = if (declaration is FirTypeParameterRefsOwner) {
-            val substitution =
+        konst substitutor = if (declaration is FirTypeParameterRefsOwner) {
+            konst substitution =
                 declaration.typeParameters.zip(type.typeArguments).associate { (parameter, argument) ->
                     parameter.symbol to ((argument as? ConeKotlinTypeProjection)?.type
                         ?: session.builtinTypes.nullableAnyType.type)//StandardClassIds.Any(session.firSymbolProvider).constructType(emptyArray(), isNullable = true))
@@ -655,7 +655,7 @@ interface ConeTypeContext : TypeSystemContext, TypeSystemOptimizationContext, Ty
         }
         return object : DoCustomTransform() {
             override fun transformType(state: TypeCheckerState, type: KotlinTypeMarker): SimpleTypeMarker {
-                val lowerBound = type.lowerBoundIfFlexible()
+                konst lowerBound = type.lowerBoundIfFlexible()
                 require(lowerBound is ConeKotlinType)
                 return substitutor.substituteOrSelf(lowerBound) as SimpleTypeMarker
             }

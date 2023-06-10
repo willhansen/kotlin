@@ -16,10 +16,10 @@ import generators.unicode.toHexIntLiteral
  */
 internal class EqualDistanceMappingPattern private constructor(
     charCode: Int,
-    val categoryCode: String,
-    val mapping: Int
+    konst categoryCode: String,
+    konst mapping: Int
 ) : MappingPattern {
-    override val start = charCode
+    override konst start = charCode
     override var end = charCode
         private set
     var distance = 1
@@ -28,7 +28,7 @@ internal class EqualDistanceMappingPattern private constructor(
     override fun append(charCode: Int, categoryCode: String, mapping: Int): Boolean {
         require(charCode > end)
 
-        val distance = charCode - end
+        konst distance = charCode - end
         if (mapping == this.mapping
             && length < MAX_LENGTH
             && distance <= MAX_DISTANCE
@@ -54,8 +54,8 @@ internal class EqualDistanceMappingPattern private constructor(
     }
 
     companion object {
-        private const val MAX_DISTANCE = 15
-        private const val MAX_LENGTH = 255
+        private const konst MAX_DISTANCE = 15
+        private const konst MAX_LENGTH = 255
 
         fun from(charCode: Int, categoryCode: String, mapping: Int): EqualDistanceMappingPattern {
             return EqualDistanceMappingPattern(charCode, categoryCode, mapping)

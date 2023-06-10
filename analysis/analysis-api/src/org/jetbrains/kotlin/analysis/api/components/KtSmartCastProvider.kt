@@ -40,21 +40,21 @@ public interface KtSmartCastProviderMixIn : KtAnalysisSessionMixIn {
 }
 
 public data class KtSmartCastInfo(
-    private val _smartCastType: KtType,
-    private val _isStable: Boolean,
-    override val token: KtLifetimeToken
+    private konst _smartCastType: KtType,
+    private konst _isStable: Boolean,
+    override konst token: KtLifetimeToken
 ) : KtLifetimeOwner {
-    public val isStable: Boolean get() = withValidityAssertion { _isStable }
-    public val smartCastType: KtType get() = withValidityAssertion { _smartCastType }
+    public konst isStable: Boolean get() = withValidityAssertion { _isStable }
+    public konst smartCastType: KtType get() = withValidityAssertion { _smartCastType }
 }
 
 public data class KtImplicitReceiverSmartCast(
-    private val _type: KtType,
-    private val _kind: KtImplicitReceiverSmartCastKind,
-    override val token: KtLifetimeToken
+    private konst _type: KtType,
+    private konst _kind: KtImplicitReceiverSmartCastKind,
+    override konst token: KtLifetimeToken
 ) : KtLifetimeOwner {
-    public val type: KtType get() = withValidityAssertion { _type }
-    public val kind: KtImplicitReceiverSmartCastKind get() = withValidityAssertion { _kind }
+    public konst type: KtType get() = withValidityAssertion { _type }
+    public konst kind: KtImplicitReceiverSmartCastKind get() = withValidityAssertion { _kind }
 }
 
 public enum class KtImplicitReceiverSmartCastKind {

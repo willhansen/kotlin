@@ -2,39 +2,39 @@ FILE fqName:<root> fileName:/MultiList.kt
   CLASS CLASS name:Some modality:FINAL visibility:public [data] superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Some<T of <root>.Some>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
-    CONSTRUCTOR visibility:public <> (value:T of <root>.Some) returnType:<root>.Some<T of <root>.Some> [primary]
-      VALUE_PARAMETER name:value index:0 type:T of <root>.Some
+    CONSTRUCTOR visibility:public <> (konstue:T of <root>.Some) returnType:<root>.Some<T of <root>.Some> [primary]
+      VALUE_PARAMETER name:konstue index:0 type:T of <root>.Some
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Some modality:FINAL visibility:public [data] superTypes:[kotlin.Any]'
-    PROPERTY name:value visibility:public modality:FINAL [val]
-      FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]
+    PROPERTY name:konstue visibility:public modality:FINAL [konst]
+      FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]
         EXPRESSION_BODY
-          GET_VAR 'value: T of <root>.Some declared in <root>.Some.<init>' type=T of <root>.Some origin=INITIALIZE_PROPERTY_FROM_PARAMETER
-      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-value> visibility:public modality:FINAL <> ($this:<root>.Some<T of <root>.Some>) returnType:T of <root>.Some
-        correspondingProperty: PROPERTY name:value visibility:public modality:FINAL [val]
+          GET_VAR 'konstue: T of <root>.Some declared in <root>.Some.<init>' type=T of <root>.Some origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-konstue> visibility:public modality:FINAL <> ($this:<root>.Some<T of <root>.Some>) returnType:T of <root>.Some
+        correspondingProperty: PROPERTY name:konstue visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Some<T of <root>.Some>
         BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun <get-value> (): T of <root>.Some declared in <root>.Some'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
-              receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.<get-value>' type=<root>.Some<T of <root>.Some> origin=null
+          RETURN type=kotlin.Nothing from='public final fun <get-konstue> (): T of <root>.Some declared in <root>.Some'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+              receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.<get-konstue>' type=<root>.Some<T of <root>.Some> origin=null
     FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL <> ($this:<root>.Some<T of <root>.Some>) returnType:T of <root>.Some [operator]
       $this: VALUE_PARAMETER name:<this> type:<root>.Some<T of <root>.Some>
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun component1 (): T of <root>.Some declared in <root>.Some'
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
             receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.component1' type=<root>.Some<T of <root>.Some> origin=null
-    FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL <> ($this:<root>.Some<T of <root>.Some>, value:T of <root>.Some) returnType:<root>.Some<T of <root>.Some>
+    FUN GENERATED_DATA_CLASS_MEMBER name:copy visibility:public modality:FINAL <> ($this:<root>.Some<T of <root>.Some>, konstue:T of <root>.Some) returnType:<root>.Some<T of <root>.Some>
       $this: VALUE_PARAMETER name:<this> type:<root>.Some<T of <root>.Some>
-      VALUE_PARAMETER name:value index:0 type:T of <root>.Some
+      VALUE_PARAMETER name:konstue index:0 type:T of <root>.Some
         EXPRESSION_BODY
-          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+          GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
             receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.copy' type=<root>.Some<T of <root>.Some> origin=null
       BLOCK_BODY
-        RETURN type=kotlin.Nothing from='public final fun copy (value: T of <root>.Some): <root>.Some<T of <root>.Some> declared in <root>.Some'
-          CONSTRUCTOR_CALL 'public constructor <init> (value: T of <root>.Some) declared in <root>.Some' type=<root>.Some<T of <root>.Some> origin=null
+        RETURN type=kotlin.Nothing from='public final fun copy (konstue: T of <root>.Some): <root>.Some<T of <root>.Some> declared in <root>.Some'
+          CONSTRUCTOR_CALL 'public constructor <init> (konstue: T of <root>.Some) declared in <root>.Some' type=<root>.Some<T of <root>.Some> origin=null
             <class: T>: kotlin.Any
-            value: GET_VAR 'value: T of <root>.Some declared in <root>.Some.copy' type=T of <root>.Some origin=null
+            konstue: GET_VAR 'konstue: T of <root>.Some declared in <root>.Some.copy' type=T of <root>.Some origin=null
     FUN GENERATED_DATA_CLASS_MEMBER name:equals visibility:public modality:OPEN <> ($this:<root>.Some<T of <root>.Some>, other:kotlin.Any?) returnType:kotlin.Boolean [operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -47,28 +47,28 @@ FILE fqName:<root> fileName:/MultiList.kt
               arg0: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.equals' type=<root>.Some<T of <root>.Some> origin=null
               arg1: GET_VAR 'other: kotlin.Any? declared in <root>.Some.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Some'
-              CONST Boolean type=kotlin.Boolean value=true
+              CONST Boolean type=kotlin.Boolean konstue=true
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.Some<T of <root>.Some>
               GET_VAR 'other: kotlin.Any? declared in <root>.Some.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Some'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Some<T of <root>.Some> [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Some<T of <root>.Some> [konst]
           TYPE_OP type=<root>.Some<T of <root>.Some> origin=CAST typeOperand=<root>.Some<T of <root>.Some>
             GET_VAR 'other: kotlin.Any? declared in <root>.Some.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
               $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-                arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+                arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
                   receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.equals' type=<root>.Some<T of <root>.Some> origin=null
-                arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.Some<T of <root>.Some> declared in <root>.Some.equals' type=<root>.Some<T of <root>.Some> origin=null
+                arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.Some<T of <root>.Some> declared in <root>.Some.equals' type=<root>.Some<T of <root>.Some> origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Some'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Some'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.Some<T of <root>.Some>) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -78,14 +78,14 @@ FILE fqName:<root> fileName:/MultiList.kt
           WHEN type=kotlin.Int origin=null
             BRANCH
               if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+                arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
                   receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.hashCode' type=<root>.Some<T of <root>.Some> origin=null
-                arg1: CONST Null type=kotlin.Nothing? value=null
-              then: CONST Int type=kotlin.Int value=0
+                arg1: CONST Null type=kotlin.Nothing? konstue=null
+              then: CONST Int type=kotlin.Int konstue=0
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: CALL 'public open fun hashCode (): kotlin.Int declared in kotlin.Any' type=kotlin.Int origin=null
-                $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+                $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
                   receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.hashCode' type=<root>.Some<T of <root>.Some> origin=null
     FUN GENERATED_DATA_CLASS_MEMBER name:toString visibility:public modality:OPEN <> ($this:<root>.Some<T of <root>.Some>) returnType:kotlin.String
       overridden:
@@ -94,10 +94,10 @@ FILE fqName:<root> fileName:/MultiList.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.Some'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="Some(value="
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
+            CONST String type=kotlin.String konstue="Some(konstue="
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Some visibility:private [final]' type=T of <root>.Some origin=null
               receiver: GET_VAR '<this>: <root>.Some<T of <root>.Some> declared in <root>.Some.toString' type=<root>.Some<T of <root>.Some> origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"
   CLASS INTERFACE name:MyList modality:ABSTRACT visibility:public superTypes:[kotlin.collections.List<<root>.Some<T of <root>.MyList>>]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MyList<T of <root>.MyList>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
@@ -149,11 +149,11 @@ FILE fqName:<root> fileName:/MultiList.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.collections.List<E of kotlin.collections.List>
       VALUE_PARAMETER name:fromIndex index:0 type:kotlin.Int
       VALUE_PARAMETER name:toIndex index:1 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:ABSTRACT [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:ABSTRACT [fake_override,konst]
       overridden:
         public abstract size: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-size> visibility:public modality:ABSTRACT <> ($this:kotlin.collections.List<E of kotlin.collections.List>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:ABSTRACT [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:ABSTRACT [fake_override,konst]
         overridden:
           public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.List
         $this: VALUE_PARAMETER name:<this> type:kotlin.collections.List<E of kotlin.collections.List>
@@ -243,11 +243,11 @@ FILE fqName:<root> fileName:/MultiList.kt
       $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<E of java.util.ArrayList>
       VALUE_PARAMETER name:p0 index:0 type:kotlin.Int
       VALUE_PARAMETER name:p1 index:1 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
       overridden:
         public open size: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-size> visibility:public modality:OPEN <> ($this:java.util.ArrayList<E of java.util.ArrayList>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open fun <get-size> (): kotlin.Int declared in java.util.ArrayList
         $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<E of java.util.ArrayList>
@@ -437,11 +437,11 @@ FILE fqName:<root> fileName:/MultiList.kt
       $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<E of java.util.ArrayList>
       VALUE_PARAMETER name:p0 index:0 type:kotlin.Int
       VALUE_PARAMETER name:p1 index:1 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
       overridden:
         public open size: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-size> visibility:public modality:OPEN <> ($this:java.util.ArrayList<E of java.util.ArrayList>) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:size visibility:public modality:OPEN [fake_override,konst]
         overridden:
           public open fun <get-size> (): kotlin.Int declared in <root>.SomeList
         $this: VALUE_PARAMETER name:<this> type:java.util.ArrayList<E of java.util.ArrayList>

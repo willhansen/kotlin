@@ -17,7 +17,7 @@ fun test(): String {
     var res = "Fail"
 
     call {
-        val lambda ={
+        konst lambda ={
             res = "OK"
         }; lambda()
     }

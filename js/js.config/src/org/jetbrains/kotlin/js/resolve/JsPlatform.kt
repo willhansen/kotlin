@@ -29,6 +29,6 @@ import org.jetbrains.kotlin.resolve.TargetPlatform
 interface JsPlatform : TargetPlatform {
     companion object {
         @JvmField
-        val INSTANCE: JsPlatform = JsPlatforms.CompatJsPlatform
+        konst INSTANCE: JsPlatform = JsPlatforms.CompatJsPlatform
     }
 }

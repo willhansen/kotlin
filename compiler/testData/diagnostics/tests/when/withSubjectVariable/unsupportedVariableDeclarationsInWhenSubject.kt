@@ -6,12 +6,12 @@ fun String.bar(): Any = 42
 
 
 fun testSimpleValInWhenSubject() {
-    when (val y = foo()) {
+    when (konst y = foo()) {
     }
 }
 
 fun testValWithoutInitializerWhenSubject() {
-    when (<!ILLEGAL_DECLARATION_IN_WHEN_SUBJECT!>val y: Any<!>) {
+    when (<!ILLEGAL_DECLARATION_IN_WHEN_SUBJECT!>konst y: Any<!>) {
         is String -> <!DEBUG_INFO_SMARTCAST, UNINITIALIZED_VARIABLE!>y<!>.length
     }
 }
@@ -23,6 +23,6 @@ fun testVarInWhenSubject() {
 }
 
 fun testDelegatedValInWhenSubject() {
-    when (<!ILLEGAL_DECLARATION_IN_WHEN_SUBJECT!>val y by <!UNRESOLVED_REFERENCE!>lazy<!> { 42 }<!>) {
+    when (<!ILLEGAL_DECLARATION_IN_WHEN_SUBJECT!>konst y by <!UNRESOLVED_REFERENCE!>lazy<!> { 42 }<!>) {
     }
 }

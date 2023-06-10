@@ -35,12 +35,12 @@ object FirCallableReferenceChecker : FirQualifiedAccessExpressionChecker() {
         reporter: DiagnosticReporter
     ) {
         // UNRESOLVED_REFERENCE will be reported separately.
-        val reference = callableReferenceAccess.calleeReference.resolved ?: return
+        konst reference = callableReferenceAccess.calleeReference.resolved ?: return
 
-        val source = reference.source ?: return
+        konst source = reference.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
 
-        val referredSymbol = reference.resolvedSymbol
+        konst referredSymbol = reference.resolvedSymbol
         if (referredSymbol is FirConstructorSymbol && referredSymbol.getContainingClassSymbol(context.session)?.classKind == ClassKind.ANNOTATION_CLASS) {
             reporter.reportOn(source, FirErrors.CALLABLE_REFERENCE_TO_ANNOTATION_CONSTRUCTOR, context)
         }

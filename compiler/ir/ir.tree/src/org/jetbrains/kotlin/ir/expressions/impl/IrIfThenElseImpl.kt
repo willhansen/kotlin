@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrIfThenElseImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     override var origin: IrStatementOrigin? = null
 ) : IrWhen() {
-    override val branches: MutableList<IrBranch> = SmartList()
+    override konst branches: MutableList<IrBranch> = SmartList()
 }

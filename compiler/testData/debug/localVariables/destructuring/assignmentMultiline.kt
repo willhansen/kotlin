@@ -3,9 +3,9 @@
 
 // FILE: test.kt
 fun box(): String {
-    val p = "O" to "K"
+    konst p = "O" to "K"
 
-    val
+    konst
             (
         o
             ,

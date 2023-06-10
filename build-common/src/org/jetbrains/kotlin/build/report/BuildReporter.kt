@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.build.report.metrics.DoNothingBuildMetricsReporter
 import org.jetbrains.kotlin.build.report.metrics.RemoteBuildMetricsReporter
 
 open class BuildReporter(
-    protected open val icReporter: ICReporter,
-    protected open val buildMetricsReporter: BuildMetricsReporter
+    protected open konst icReporter: ICReporter,
+    protected open konst buildMetricsReporter: BuildMetricsReporter
 ) : ICReporter by icReporter, BuildMetricsReporter by buildMetricsReporter
 
 class RemoteBuildReporter(
-    override val icReporter: RemoteICReporter,
-    override val buildMetricsReporter: RemoteBuildMetricsReporter
+    override konst icReporter: RemoteICReporter,
+    override konst buildMetricsReporter: RemoteBuildMetricsReporter
 ) : BuildReporter(icReporter, buildMetricsReporter), RemoteReporter {
     override fun flush() {
         icReporter.flush()

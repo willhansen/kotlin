@@ -1,4 +1,4 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 fun box(): String {
     var s = ""
@@ -13,7 +13,7 @@ fun box(): String {
             s += x
         }
 
-        eval {
+        ekonst {
             foo("O")
             foo(foo, 1)
         }

@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
 
 open class KlibBasedMppIT : BaseGradleIT() {
     companion object {
-        private const val MODULE_GROUP = "com.example"
+        private const konst MODULE_GROUP = "com.example"
     }
 
     @Test
@@ -36,7 +36,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
             assertTrue { isDirectory }
             deleteRecursively()
         }
-        publishProjectDepAndAddDependency(validateHostSpecificPublication = false)
+        publishProjectDepAndAddDependency(konstidateHostSpecificPublication = false)
     }
 
     @Test
@@ -44,9 +44,9 @@ open class KlibBasedMppIT : BaseGradleIT() {
         // KT-41083
         // Publish a lib with host specific source sets depending on another lib with host-specific source sets
         setupWorkingDir()
-        val projectDepName = "dependency"
-        val publishedGroup = "published"
-        val producerProjectName = "producer"
+        konst projectDepName = "dependency"
+        konst publishedGroup = "published"
+        konst producerProjectName = "producer"
         embedProject(this, renameTo = projectDepName)
         projectDir.resolve("$projectDepName/src").walkTopDown().filter { it.extension == "kt" }.forEach { ktFile ->
             // Avoid FQN duplicates between producer & consumer
@@ -76,7 +76,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         // Then consume the published project. To do that, rename the modules so that Gradle chooses the published ones given the original
         // Maven coordinates and doesn't resolve them as project dependencies.
 
-        val localGroup = "local"
+        konst localGroup = "local"
         gradleBuildScript(projectDepName).appendText("""${"\n"}group = "$localGroup"""")
         gradleBuildScript().appendText(
             """
@@ -103,13 +103,13 @@ open class KlibBasedMppIT : BaseGradleIT() {
     @Test
     @Ignore("disable until kotlin/native dependency is updated to include KT-52226")
     fun testBuildWithPublishedDependency() = testBuildWithDependency {
-        publishProjectDepAndAddDependency(validateHostSpecificPublication = true)
+        publishProjectDepAndAddDependency(konstidateHostSpecificPublication = true)
     }
 
-    private fun Project.publishProjectDepAndAddDependency(validateHostSpecificPublication: Boolean) {
+    private fun Project.publishProjectDepAndAddDependency(konstidateHostSpecificPublication: Boolean) {
         build(":$dependencyModuleName:publish") {
             assertSuccessful()
-            if (validateHostSpecificPublication)
+            if (konstidateHostSpecificPublication)
                 checkPublishedHostSpecificMetadata(this@build)
         }
 
@@ -126,7 +126,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         gradleBuildScript(dependencyModuleName).appendText("\ngroup = \"some.other.group\"")
     }
 
-    private val dependencyModuleName = "project-dep"
+    private konst dependencyModuleName = "project-dep"
 
     private fun testBuildWithDependency(configureDependency: Project.() -> Unit) = with(Project("common-klib-lib-and-app")) {
         embedProject(Project("common-klib-lib-and-app"), renameTo = dependencyModuleName)
@@ -163,7 +163,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
             }
         """.trimIndent())
 
-        val tasksToExecute = listOf(
+        konst tasksToExecute = listOf(
             ":compileJvmAndJsMainKotlinMetadata",
             ":compileLinuxMainKotlinMetadata",
             ":compile${hostSpecificSourceSet.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}KotlinMetadata"
@@ -181,7 +181,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
             // Check that the common and JVM+JS source sets don't receive the Kotlin/Native stdlib in the classpath:
             run {
                 fun getClasspath(taskPath: String): Iterable<String> {
-                    val argsPrefix = " $taskPath Kotlin compiler args:"
+                    konst argsPrefix = " $taskPath Kotlin compiler args:"
                     return output.lines().single { argsPrefix in it }
                         .substringAfter("-classpath ").substringBefore(" -").split(File.pathSeparator)
                 }
@@ -194,7 +194,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         }
     }
 
-    private val hostSpecificSourceSet = when {
+    private konst hostSpecificSourceSet = when {
         HostManager.hostIsMac -> "iosMain"
         HostManager.hostIsLinux -> "embeddedMain"
         HostManager.hostIsMingw -> "windowsMain"
@@ -202,7 +202,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
     }
 
     private fun checkPublishedHostSpecificMetadata(compiledProject: CompiledProject) = with(compiledProject) {
-        val groupDir = project.projectDir.resolve("repo/com/example")
+        konst groupDir = project.projectDir.resolve("repo/com/example")
 
         assertTasksExecuted(
             ":$dependencyModuleName:compile${
@@ -224,7 +224,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         // Then check that in the host-specific modules, there's a metadata artifact that contains the host-specific source set but not the
         // common source sets:
 
-        val hostSpecificTargets = when {
+        konst hostSpecificTargets = when {
             HostManager.hostIsMac -> listOf("iosArm64", "iosX64")
             HostManager.hostIsLinux -> listOf("linuxMips32", "linuxMipsel32")
             HostManager.hostIsMingw -> listOf("mingwX64", "mingwX86")
@@ -232,7 +232,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         }
 
         hostSpecificTargets.forEach { targetName ->
-            val moduleName = "$dependencyModuleName-${targetName.lowercase(Locale.getDefault())}"
+            konst moduleName = "$dependencyModuleName-${targetName.lowercase(Locale.getDefault())}"
             ZipFile(groupDir.resolve("$moduleName/1.0/$moduleName-1.0-metadata.jar")).use { metadataJar ->
                 assertTrue { metadataJar.entries().asSequence().any { it.name.startsWith(hostSpecificSourceSet) } }
                 assertTrue { metadataJar.entries().asSequence().none { it.name.startsWith("commonMain") } }
@@ -246,7 +246,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
         }
     }
 
-    private val transitiveDepModuleName = "transitive-dep"
+    private konst transitiveDepModuleName = "transitive-dep"
 
     @Test
     fun testKotlinNativeImplPublishedDeps() =
@@ -292,7 +292,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
 
         setupDependencies(this@with)
 
-        val compileNativeMetadataTaskName = "compileLinuxMainKotlinMetadata"
+        konst compileNativeMetadataTaskName = "compileLinuxMainKotlinMetadata"
         build(":$compileNativeMetadataTaskName") {
             assertSuccessful()
         }
@@ -300,21 +300,21 @@ open class KlibBasedMppIT : BaseGradleIT() {
 
     @Test
     fun testAvoidSkippingSharedNativeSourceSetKt38746() = with(Project("hierarchical-all-native")) {
-        val targetNames = listOf(
+        konst targetNames = listOf(
             // Try different alphabetical ordering of the targets to ensure that the behavior doesn't depend on it, as with 'first target'
             listOf("a1", "a2", "a3"),
             listOf("a3", "a1", "a2"),
             listOf("a2", "a3", "a1"),
         )
-        val targetParamNames = listOf("mingwTargetName", "linuxTargetName", "macosTargetName", "currentHostTargetName")
+        konst targetParamNames = listOf("mingwTargetName", "linuxTargetName", "macosTargetName", "currentHostTargetName")
         for (names in targetNames) {
-            val currentHostTargetName = when {
+            konst currentHostTargetName = when {
                 HostManager.hostIsMingw -> names[0]
                 HostManager.hostIsLinux -> names[1]
                 HostManager.hostIsMac -> names[2]
                 else -> error("unexpected host")
             }
-            val params = targetParamNames.zip(names + currentHostTargetName) { k, v -> "-P$k=$v" }
+            konst params = targetParamNames.zip(names + currentHostTargetName) { k, v -> "-P$k=$v" }
             build(":clean", ":compileCurrentHostAndLinuxKotlinMetadata", *params.toTypedArray()) {
                 assertSuccessful()
                 assertTasksExecuted(":compileCurrentHostAndLinuxKotlinMetadata", ":compileAllNativeKotlinMetadata")
@@ -329,10 +329,10 @@ open class KlibBasedMppIT : BaseGradleIT() {
         checkModulesInClasspath: List<Regex> = emptyList(),
         checkModulesNotInClasspath: List<Regex> = emptyList()
     ) {
-        val subproject = taskPath.substringBeforeLast(":").takeIf { it.isNotEmpty() && it != taskPath }
-        val taskName = taskPath.removePrefix(subproject.orEmpty())
-        val taskClass = "org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool<*>"
-        val expression = """(tasks.getByName("$taskName") as $taskClass).libraries.toList()"""
+        konst subproject = taskPath.substringBeforeLast(":").takeIf { it.isNotEmpty() && it != taskPath }
+        konst taskName = taskPath.removePrefix(subproject.orEmpty())
+        konst taskClass = "org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompileTool<*>"
+        konst expression = """(tasks.getByName("$taskName") as $taskClass).libraries.toList()"""
         checkPrintedItems(subproject, expression, checkModulesInClasspath, checkModulesNotInClasspath)
     }
 
@@ -344,7 +344,7 @@ open class KlibBasedMppIT : BaseGradleIT() {
     ) = with(testCase) {
         setupWorkingDir()
 
-        val printingTaskName = "printItems${testBuildRunId++}"
+        konst printingTaskName = "printItems${testBuildRunId++}"
         gradleBuildScript(subproject).appendText(
             """
         ${'\n'}
@@ -358,9 +358,9 @@ open class KlibBasedMppIT : BaseGradleIT() {
         )
         build("${subproject?.prependIndent(":").orEmpty()}:$printingTaskName") {
             assertSuccessful()
-            val itemsLine = output.lines().single { "###$printingTaskName" in it }.substringAfter(printingTaskName)
+            konst itemsLine = output.lines().single { "###$printingTaskName" in it }.substringAfter(printingTaskName)
             // NOTE: This does not work for commonized libraries, they may contain the ',' naturally
-            val items = itemsLine.removeSurrounding("[", "]").split(", ").toSet()
+            konst items = itemsLine.removeSurrounding("[", "]").split(", ").toSet()
             checkAnyItemsContains.forEach { pattern ->
                 assertTrue(items.any { pattern in it }, "Couldn't find pattern `$pattern` in the output")
             }

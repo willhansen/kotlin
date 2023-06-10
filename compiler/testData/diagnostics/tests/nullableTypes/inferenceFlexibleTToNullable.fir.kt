@@ -31,20 +31,20 @@ public class Foo<T>  {
 
 // FILE: main.kt
 fun <T> bar(n: Number?, d: T, e: T) {
-    val a: Number = Foo.simpleId(n)
-    val b: Number? = Foo.simpleId(n)
-    val c = Foo.simpleId(n)
+    konst a: Number = Foo.simpleId(n)
+    konst b: Number? = Foo.simpleId(n)
+    konst c = Foo.simpleId(n)
 
-    val x4 = Foo(if (true) 10 else null)
-    val x5: Number = x4.produceT()
-    val x6: Number? = x4.produceT()
-    val x7 = x4.produceT()
-    val x8 = x4.produceNotNullT()
+    konst x4 = Foo(if (true) 10 else null)
+    konst x5: Number = x4.produceT()
+    konst x6: Number? = x4.produceT()
+    konst x7 = x4.produceT()
+    konst x8 = x4.produceNotNullT()
 
     x4.consumeT(x7)
 
-    val x9: T = Foo.simpleId(d)
-    val x10: T? = Foo.simpleId(d)
+    konst x9: T = Foo.simpleId(d)
+    konst x10: T? = Foo.simpleId(d)
 
     if (e != null) {
         var x11 = e

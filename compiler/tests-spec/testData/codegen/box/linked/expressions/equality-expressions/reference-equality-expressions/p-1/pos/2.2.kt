@@ -8,12 +8,12 @@
  * PRIMARY LINKS: expressions, equality-expressions, reference-equality-expressions -> paragraph 3 -> sentence 3
  * expressions, equality-expressions, reference-equality-expressions -> paragraph 2 -> sentence 1
  * NUMBER: 2
- * DESCRIPTION: check if two values are equal (===) by reference
+ * DESCRIPTION: check if two konstues are equal (===) by reference
  */
 
 fun box(): String {
-    val u1 = "foo"
-    val u2 = "foo"
+    konst u1 = "foo"
+    konst u2 = "foo"
     if (u1 === u2) {
         return ("OK")
     }

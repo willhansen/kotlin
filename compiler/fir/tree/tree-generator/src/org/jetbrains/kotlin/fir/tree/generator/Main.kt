@@ -15,7 +15,7 @@ import java.io.File
 
 
 fun main(args: Array<String>) {
-    val generationPath = args.firstOrNull()?.let { File(it) }
+    konst generationPath = args.firstOrNull()?.let { File(it) }
         ?: File("../../tree/gen").canonicalFile
 
     NodeConfigurator.configureFields()
@@ -23,8 +23,8 @@ fun main(args: Array<String>) {
     ImplementationConfigurator.configureImplementations()
     configureInterfacesAndAbstractClasses(FirTreeBuilder)
     BuilderConfigurator.configureBuilders()
-    val previouslyGeneratedFiles = collectPreviouslyGeneratedFiles(generationPath)
-    val generatedFiles = generateElements(FirTreeBuilder, generationPath)
+    konst previouslyGeneratedFiles = collectPreviouslyGeneratedFiles(generationPath)
+    konst generatedFiles = generateElements(FirTreeBuilder, generationPath)
     generatedFiles.forEach { GeneratorsFileUtil.writeFileIfContentChanged(it.file, it.newText, logNotChanged = false) }
     removeExtraFilesFromPreviousGeneration(previouslyGeneratedFiles, generatedFiles.map { it.file })
 }

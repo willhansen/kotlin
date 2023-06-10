@@ -11,22 +11,22 @@ enum class E {
 }
 
 
-val a0 = A.javaClass
-val a1 = test.A.javaClass
-val a2 = A.Companion.javaClass
-val a3 = A::class.java
-val a4 = test.A::class.java
-val a5 = A.Companion::class.java
+konst a0 = A.javaClass
+konst a1 = test.A.javaClass
+konst a2 = A.Companion.javaClass
+konst a3 = A::class.java
+konst a4 = test.A::class.java
+konst a5 = A.Companion::class.java
 
-val o0 = O.javaClass
-val o1 = O::class.java
+konst o0 = O.javaClass
+konst o1 = O::class.java
 
-val e0 = E.<!UNRESOLVED_REFERENCE!>javaClass<!>
-val e1 = E::class.java
-val e2 = E.ENTRY.javaClass
+konst e0 = E.<!UNRESOLVED_REFERENCE!>javaClass<!>
+konst e1 = E::class.java
+konst e2 = E.ENTRY.javaClass
 
-val int0 = Int.javaClass
-val int1 = Int::class.java
+konst int0 = Int.javaClass
+konst int1 = Int::class.java
 
-val string0 = String.javaClass
-val string1 = String::class.java
+konst string0 = String.javaClass
+konst string1 = String::class.java

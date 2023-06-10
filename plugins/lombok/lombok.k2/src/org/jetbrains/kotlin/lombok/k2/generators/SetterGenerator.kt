@@ -37,10 +37,10 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
-    private val lombokService: LombokService
+    private konst lombokService: LombokService
         get() = session.lombokService
 
-    private val cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
+    private konst cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
         session.firCachesFactory.createCache(::createSetters)
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
@@ -49,9 +49,9 @@ class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner
+        konst owner = context?.owner
         if (owner == null || !owner.isSuitableForSetters()) return emptyList()
-        val getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
+        konst getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
         return listOf(getter.symbol)
     }
 
@@ -60,12 +60,12 @@ class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
     }
 
     private fun createSetters(classSymbol: FirClassSymbol<*>): Map<Name, FirJavaMethod>? {
-        val fieldsWithSetter = computeFieldsWithSetters(classSymbol) ?: return null
-        val globalAccessors = lombokService.getAccessors(classSymbol)
+        konst fieldsWithSetter = computeFieldsWithSetters(classSymbol) ?: return null
+        konst globalAccessors = lombokService.getAccessors(classSymbol)
         return fieldsWithSetter.mapNotNull { (field, setterInfo) ->
-            val accessors = lombokService.getAccessorsIfAnnotated(field.symbol) ?: globalAccessors
-            val setterName = computeSetterName(field, setterInfo, accessors) ?: return@mapNotNull null
-            val function = buildJavaMethod {
+            konst accessors = lombokService.getAccessorsIfAnnotated(field.symbol) ?: globalAccessors
+            konst setterName = computeSetterName(field, setterInfo, accessors) ?: return@mapNotNull null
+            konst function = buildJavaMethod {
                 moduleData = field.moduleData
                 returnTypeRef = if (accessors.chain) {
                     buildResolvedTypeRef {
@@ -78,10 +78,10 @@ class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
                 dispatchReceiverType = classSymbol.defaultType()
                 name = setterName
                 symbol = FirNamedFunctionSymbol(CallableId(classSymbol.classId, setterName))
-                val visibility = setterInfo.visibility.toVisibility()
+                konst visibility = setterInfo.visibility.toVisibility()
                 status = FirResolvedDeclarationStatusImpl(visibility, Modality.OPEN, visibility.toEffectiveVisibility(classSymbol))
 
-                valueParameters += buildJavaValueParameter {
+                konstueParameters += buildJavaValueParameter {
                     moduleData = field.moduleData
                     containingFunctionSymbol = this@buildJavaMethod.symbol
                     returnTypeRef = field.returnTypeRef
@@ -101,7 +101,7 @@ class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
 
     @OptIn(SymbolInternals::class)
     private fun computeFieldsWithSetters(classSymbol: FirClassSymbol<*>): List<Pair<FirJavaField, Setter>>? {
-        val classSetter = lombokService.getSetter(classSymbol)
+        konst classSetter = lombokService.getSetter(classSymbol)
             ?: lombokService.getData(classSymbol)?.asSetter()
 
         return classSymbol.fir.declarations
@@ -113,8 +113,8 @@ class SetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
 
     private fun computeSetterName(field: FirJavaField, setterInfo: Setter, accessors: Accessors): Name? {
         if (setterInfo.visibility == AccessLevel.NONE) return null
-        val propertyName = field.toAccessorBaseName(accessors) ?: return null
-        val functionName = if (accessors.fluent) {
+        konst propertyName = field.toAccessorBaseName(accessors) ?: return null
+        konst functionName = if (accessors.fluent) {
             propertyName
         } else {
             AccessorNames.SET + propertyName.capitalize()

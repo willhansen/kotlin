@@ -18,13 +18,13 @@ inline fun <T> directRun(block: () -> T): T {
 }
 
 fun bad(): String {
-    val x: String? = null
+    konst x: String? = null
 
     x?.myRun { return "" }
 <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 
 fun ok(): String {
-    val x: String? = null
+    konst x: String? = null
 
     x?.run { return "non-null" } ?: return "null"
 }

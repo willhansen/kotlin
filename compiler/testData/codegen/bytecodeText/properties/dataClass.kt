@@ -1,6 +1,6 @@
 data class Test(
-    val x: String,
-    val y: String
+    konst x: String,
+    konst y: String
 )
 
 // 7 GETFIELD Test\.x

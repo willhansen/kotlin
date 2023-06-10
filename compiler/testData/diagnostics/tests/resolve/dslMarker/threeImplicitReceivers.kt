@@ -14,7 +14,7 @@ annotation class Ann3
 class A {
     operator fun B.invoke() {}
 
-    val B.y: D get() = D()
+    konst B.y: D get() = D()
 }
 
 class B
@@ -22,7 +22,7 @@ class B
 class C {
     operator fun D.invoke() {}
 
-    val D.x: B get() = B()
+    konst D.x: B get() = B()
 }
 
 class D

@@ -1,8 +1,8 @@
 class A {
     companion object {
-        fun values() = "O"
-        fun valueOf() = "K"
+        fun konstues() = "O"
+        fun konstueOf() = "K"
     }
 }
 
-fun box() = A.values() + A.valueOf()
+fun box() = A.konstues() + A.konstueOf()

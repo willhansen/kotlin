@@ -2,10 +2,10 @@ class Dummy {
   override fun equals(other: Any?) = true
 }
 
-data class A(val v: Any?)
+data class A(konst v: Any?)
 
 fun box() : String {
-  val a = A(Dummy())
-  val b: A? = null
+  konst a = A(Dummy())
+  konst b: A? = null
   return if(a != b && b != a) "OK" else "fail"
 }

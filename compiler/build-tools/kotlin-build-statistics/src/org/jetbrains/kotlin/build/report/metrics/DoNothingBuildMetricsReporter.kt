@@ -15,7 +15,7 @@ object DoNothingBuildMetricsReporter : BuildMetricsReporter {
     override fun addTimeMetricNs(time: BuildTime, durationNs: Long) {
     }
 
-    override fun addMetric(metric: BuildPerformanceMetric, value: Long) {
+    override fun addMetric(metric: BuildPerformanceMetric, konstue: Long) {
     }
 
     override fun addTimeMetric(metric: BuildPerformanceMetric) {
@@ -24,13 +24,13 @@ object DoNothingBuildMetricsReporter : BuildMetricsReporter {
     override fun addAttribute(attribute: BuildAttribute) {
     }
 
-    override fun addGcMetric(metric: String, value: GcMetric) {
+    override fun addGcMetric(metric: String, konstue: GcMetric) {
     }
 
-    override fun startGcMetric(name: String, value: GcMetric) {
+    override fun startGcMetric(name: String, konstue: GcMetric) {
     }
 
-    override fun endGcMetric(name: String, value: GcMetric) {
+    override fun endGcMetric(name: String, konstue: GcMetric) {
     }
 
     override fun getMetrics(): BuildMetrics =

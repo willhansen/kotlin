@@ -6,7 +6,7 @@
 class A
 
 fun box(): String {
-    val a = try {
+    konst a = try {
         A()
     } catch (e: NoClassDefFoundError) {
         null

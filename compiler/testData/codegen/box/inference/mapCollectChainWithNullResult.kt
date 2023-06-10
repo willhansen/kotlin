@@ -7,7 +7,7 @@ interface Flow<out T> {
 }
 
 interface FlowCollector<in T> {
-    fun emit(value: T)
+    fun emit(konstue: T)
 }
 
 fun <T> flow(block: FlowCollector<T>.() -> Unit): Flow<T> =
@@ -15,9 +15,9 @@ fun <T> flow(block: FlowCollector<T>.() -> Unit): Flow<T> =
         override fun collect(collector: FlowCollector<T>) = collector.block()
     }
 
-fun <T> Flow<T>.collect(action: (value: T) -> Unit): Unit =
+fun <T> Flow<T>.collect(action: (konstue: T) -> Unit): Unit =
     collect(object : FlowCollector<T> {
-        override fun emit(value: T) = action(value)
+        override fun emit(konstue: T) = action(konstue)
     })
 
 fun <T, R> Flow<T>.transform(transform: FlowCollector<R>.(T) -> Unit): Flow<R> =

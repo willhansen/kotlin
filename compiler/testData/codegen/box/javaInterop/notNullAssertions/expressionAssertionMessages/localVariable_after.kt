@@ -6,7 +6,7 @@ fun f(x: String) = "Fail 1"
 
 fun box(): String {
     return try {
-        val variable = J().s()
+        konst variable = J().s()
         f(variable)
     } catch (e: NullPointerException) {
         if (e.message == null)

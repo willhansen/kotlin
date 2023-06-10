@@ -10,8 +10,8 @@
 // FILE: serializableBoundInnerConstructorRef.kt
 import java.io.*
 
-class Outer(val s1: String) : Serializable {
-    inner class Inner (val s2: String) {
+class Outer(konst s1: String) : Serializable {
+    inner class Inner (konst s2: String) {
         fun test() = s1 + s2
     }
 }
@@ -22,7 +22,7 @@ fun box(): String {
 }
 
 fun <T> roundtrip(x: T): T {
-    val out1 = ByteArrayOutputStream()
+    konst out1 = ByteArrayOutputStream()
     ObjectOutputStream(out1).writeObject(x)
     return ObjectInputStream(ByteArrayInputStream(out1.toByteArray())).readObject() as T
 }

@@ -22,39 +22,39 @@ fun <S> Controller<S>.genericExtension() {}
 
 fun Controller<String>.safeExtension() {}
 
-val test1 = generate {
+konst test1 = generate {
     yield("foo")
     baseExtension()
 }
 
-val test2 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
+konst test2 = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>generate<!> {
     baseExtension()
 }
 
-val test3 = generate {
+konst test3 = generate {
     yield(42)
     outNullableAnyExtension()
 }
 
-val test4 = generate {
+konst test4 = generate {
     outNullableAnyExtension()
 }
 
-val test5 = generate {
+konst test5 = generate {
     yield(42)
     outAnyExtension()
 }
 
-val test6 = generate {
+konst test6 = generate {
     yield("bar")
     invNullableAnyExtension()
 }
 
-val test7 = generate {
+konst test7 = generate {
     yield("baz")
     genericExtension<Int>()
 }
 
-val test8 = generate {
+konst test8 = generate {
     safeExtension()
 }

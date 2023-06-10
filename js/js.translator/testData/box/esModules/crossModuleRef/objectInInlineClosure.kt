@@ -5,10 +5,10 @@
 package lib
 
 object O {
-    val result = "OK"
+    konst result = "OK"
 
     inline fun foo(): String {
-        val o = object {
+        konst o = object {
             fun bar() = O
         }
         return fetch(o.bar())

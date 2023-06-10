@@ -15,14 +15,14 @@ fun expectFail(f: () -> Unit): Nothing? {
 }
 
 fun box(): String {
-    val a1 = 0
-    val a2 = expectFail { 1 / 0 } ?: 0
-    val a3 = expectFail { 1 / a1 } ?: 0
-    val a4 = expectFail { 1 / a2 } ?: 0
-    val a5 = expectFail { 2 * (1 / 0) } ?: 0
-    val a6 = expectFail { 2 * 1 / 0 } ?: 0
+    konst a1 = 0
+    konst a2 = expectFail { 1 / 0 } ?: 0
+    konst a3 = expectFail { 1 / a1 } ?: 0
+    konst a4 = expectFail { 1 / a2 } ?: 0
+    konst a5 = expectFail { 2 * (1 / 0) } ?: 0
+    konst a6 = expectFail { 2 * 1 / 0 } ?: 0
 
-    val s1 = expectFail { "${2 * (1 / 0) }" } ?: "OK"
+    konst s1 = expectFail { "${2 * (1 / 0) }" } ?: "OK"
 
     return s1
 }

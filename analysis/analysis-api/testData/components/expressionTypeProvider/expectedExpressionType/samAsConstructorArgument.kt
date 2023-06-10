@@ -1,3 +1,3 @@
 fun test1() {
-    val thread1 = Thread({<caret> println("hello1") })
+    konst thread1 = Thread({<caret> println("hello1") })
 }

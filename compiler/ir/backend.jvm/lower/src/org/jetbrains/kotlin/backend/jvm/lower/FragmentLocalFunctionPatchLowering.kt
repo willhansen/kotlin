@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 // Used from CodeFragmentCompiler for IDE Debugger Plug-In
 @Suppress("unused")
-val fragmentLocalFunctionPatchLowering = makeIrFilePhase(
+konst fragmentLocalFunctionPatchLowering = makeIrFilePhase(
     ::FragmentLocalFunctionPatchLowering,
     name = "FragmentLocalFunctionPatching",
     description = "Rewrite calls to local functions to the appropriate, lifted function created by local declarations lowering.",
@@ -39,9 +39,9 @@ val fragmentLocalFunctionPatchLowering = makeIrFilePhase(
 // whether the captures of the local function are a subset of the captures of
 // the fragment, and if not, introduces additional captures to the fragment
 // wrapper. The captures are then supplied to the fragment wrapper as
-// parameters supplied at evaluation time.
+// parameters supplied at ekonstuation time.
 internal class FragmentLocalFunctionPatchLowering(
-    val context: JvmBackendContext
+    konst context: JvmBackendContext
 ) : IrElementTransformerVoidWithContext(), FileLoweringPass {
 
     lateinit var localDeclarationsData: Map<IrFunction, JvmBackendContext.LocalFunctionData>
@@ -57,23 +57,23 @@ internal class FragmentLocalFunctionPatchLowering(
         declaration.body?.transformChildrenVoid(object : IrElementTransformerVoidWithContext() {
             override fun visitCall(expression: IrCall): IrExpression {
                 expression.transformChildrenVoid(this)
-                val localDeclarationsDataKey = when (expression.symbol.owner.origin) {
+                konst localDeclarationsDataKey = when (expression.symbol.owner.origin) {
                     is IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER -> context.mapping.defaultArgumentsOriginalFunction[expression.symbol.owner]
                     else -> expression.symbol.owner
                 }
-                val localsData = localDeclarationsData[localDeclarationsDataKey] ?: return super.visitCall(expression)
-                val remappedTarget: LocalDeclarationsLowering.LocalFunctionContext = localsData.localContext
+                konst localsData = localDeclarationsData[localDeclarationsDataKey] ?: return super.visitCall(expression)
+                konst remappedTarget: LocalDeclarationsLowering.LocalFunctionContext = localsData.localContext
 
-                val irBuilder = context.createJvmIrBuilder(declaration.symbol)
+                konst irBuilder = context.createJvmIrBuilder(declaration.symbol)
                 return irBuilder.irCall(remappedTarget.transformedDeclaration).apply {
                     this.copyTypeArgumentsFrom(expression)
                     extensionReceiver = expression.extensionReceiver
                     dispatchReceiver = expression.dispatchReceiver
 
-                    remappedTarget.transformedDeclaration.valueParameters.map { newValueParameterDeclaration ->
-                        val oldParameter = localsData.newParameterToOld[newValueParameterDeclaration]
+                    remappedTarget.transformedDeclaration.konstueParameters.map { newValueParameterDeclaration ->
+                        konst oldParameter = localsData.newParameterToOld[newValueParameterDeclaration]
 
-                        val getValue = if (oldParameter != null) {
+                        konst getValue = if (oldParameter != null) {
                             // the parameter is an actual parameter to the local
                             // function, not a parameter corresponding to a
                             // capture introduced by a lowering: fetch
@@ -84,14 +84,14 @@ internal class FragmentLocalFunctionPatchLowering(
                         } else {
                             // The parameter is introduced by the lowering to
                             // private static function, so corresponds to a _capture_ by the local function
-                            val capturedValueSymbol =
+                            konst capturedValueSymbol =
                                 localsData.newParameterToCaptured[newValueParameterDeclaration]
                                     ?: error("Non-mapped parameter $newValueParameterDeclaration")
 
                             // We introduce a new parameter to the _fragment function_ surrounding the call to the
                             // lowered local function, and supply _that_ parameter to the corresponding _argument_ slot
                             // in the call to the lowered function.
-                            val newParameter = declaration.addValueParameter {
+                            konst newParameter = declaration.addValueParameter {
                                 type = capturedValueSymbol.owner.type
                                 name = capturedValueSymbol.owner.name
                             }

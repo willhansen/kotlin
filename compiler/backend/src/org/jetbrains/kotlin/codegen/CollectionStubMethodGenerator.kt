@@ -52,32 +52,32 @@ import java.util.*
  * Kotlin's read-only collections. This is required on JVM because Kotlin's read-only collections are mapped to mutable JDK collections
  */
 class CollectionStubMethodGenerator(
-    private val typeMapper: KotlinTypeMapper,
-    private val descriptor: ClassDescriptor
+    private konst typeMapper: KotlinTypeMapper,
+    private konst descriptor: ClassDescriptor
 ) {
     private data class TasksToGenerate(
-        val methodStubsToGenerate: Set<JvmMethodGenericSignature>,
-        val syntheticStubsToGenerate: Set<JvmMethodGenericSignature>,
-        val bridgesToGenerate: Set<FunctionDescriptor>
+        konst methodStubsToGenerate: Set<JvmMethodGenericSignature>,
+        konst syntheticStubsToGenerate: Set<JvmMethodGenericSignature>,
+        konst bridgesToGenerate: Set<FunctionDescriptor>
     )
 
     companion object {
-        private val NO_TASKS = TasksToGenerate(emptySet(), emptySet(), emptySet())
+        private konst NO_TASKS = TasksToGenerate(emptySet(), emptySet(), emptySet())
     }
 
     private fun computeTasksToGenerate(): TasksToGenerate {
         if (descriptor.kind == ClassKind.INTERFACE || descriptor is JavaClassDescriptor) return NO_TASKS
-        val superCollectionClasses = findRelevantSuperCollectionClasses()
+        konst superCollectionClasses = findRelevantSuperCollectionClasses()
         if (superCollectionClasses.isEmpty()) return NO_TASKS
 
-        val existingMethodsInSuperclasses = descriptor.getAllSuperclassesWithoutAny().flatMap { superClass ->
-            val tasksFromSuperClass = CollectionStubMethodGenerator(typeMapper, superClass).computeTasksToGenerate()
+        konst existingMethodsInSuperclasses = descriptor.getAllSuperclassesWithoutAny().flatMap { superClass ->
+            konst tasksFromSuperClass = CollectionStubMethodGenerator(typeMapper, superClass).computeTasksToGenerate()
             (tasksFromSuperClass.methodStubsToGenerate + tasksFromSuperClass.syntheticStubsToGenerate).map { stub -> stub.asmMethod }
         }
 
-        val methodStubsToGenerate = LinkedHashSet<JvmMethodGenericSignature>()
-        val syntheticStubsToGenerate = LinkedHashSet<JvmMethodGenericSignature>()
-        val bridgesToGenerate = LinkedHashSet<FunctionDescriptor>()
+        konst methodStubsToGenerate = LinkedHashSet<JvmMethodGenericSignature>()
+        konst syntheticStubsToGenerate = LinkedHashSet<JvmMethodGenericSignature>()
+        konst bridgesToGenerate = LinkedHashSet<FunctionDescriptor>()
 
         for ((readOnlyClass, mutableClass) in superCollectionClasses) {
             // To determine which method stubs we need to generate, we create a synthetic class (named 'child' here) which inherits from
@@ -85,17 +85,17 @@ class CollectionStubMethodGenerator(
             // built-in read-only/mutable class pair). We then construct and bind fake overrides in this synthetic class with the usual
             // override resolution process. Resulting fake overrides with originals in MutableCollection are considered as candidates for
             // method stubs or bridges to the actual implementation that happened to be present in the class
-            val (child, typeParameters) = createSyntheticSubclass()
+            konst (child, typeParameters) = createSyntheticSubclass()
             // If the original class has any type parameters, we copied them and now we need to substitute types of the newly created type
             // parameters as arguments for the type parameters of the original class
-            val parentType = newType(descriptor, typeParameters.map { TypeProjectionImpl(it.defaultType) })
+            konst parentType = newType(descriptor, typeParameters.map { TypeProjectionImpl(it.defaultType) })
 
             // Now we need to determine the arguments which should be substituted for the MutableCollection super class. To do that,
             // we look for type arguments which were substituted in the inheritance of the original class from Collection and use them
             // to construct the needed MutableCollection type. Since getAllSupertypes() may return several types which correspond to the
             // Collection class descriptor, we find the most specific one (which is guaranteed to exist by front-end)
-            val readOnlyCollectionType = TypeUtils.getAllSupertypes(parentType).findMostSpecificTypeForClass(readOnlyClass)
-            val mutableCollectionType = newType(mutableClass.declarationDescriptor as ClassDescriptor, readOnlyCollectionType.arguments)
+            konst readOnlyCollectionType = TypeUtils.getAllSupertypes(parentType).findMostSpecificTypeForClass(readOnlyClass)
+            konst mutableCollectionType = newType(mutableClass.declarationDescriptor as ClassDescriptor, readOnlyCollectionType.arguments)
 
             child.addSupertype(parentType)
             child.addSupertype(mutableCollectionType)
@@ -116,30 +116,30 @@ class CollectionStubMethodGenerator(
                     // errors when compiling Java against such classes because one of them doesn't seem to override the generic method
                     // declared in the Java Collection interface (can't override generic with erased). So we maintain an additional set of
                     // methods which need to be generated with the ACC_SYNTHETIC flag
-                    val overriddenMethod = method.findOverriddenFromDirectSuperClass(mutableClass)!!
-                    val originalSignature = overriddenMethod.original.signature()
+                    konst overriddenMethod = method.findOverriddenFromDirectSuperClass(mutableClass)!!
+                    konst originalSignature = overriddenMethod.original.signature()
 
-                    val commonSignature = if (overriddenMethod.isBuiltinWithSpecialDescriptorInJvm()) {
+                    konst commonSignature = if (overriddenMethod.isBuiltinWithSpecialDescriptorInJvm()) {
                         // Stubs for remove(Ljava/lang/Object;)Z and remove(I) should not be synthetic
                         // Otherwise Javac will not see it
-                        val overriddenMethodSignature = overriddenMethod.signature()
-                        val genericSignatureInfo = overriddenMethod.getSpecialSignatureInfo()
+                        konst overriddenMethodSignature = overriddenMethod.signature()
+                        konst genericSignatureInfo = overriddenMethod.getSpecialSignatureInfo()
 
-                        val specialGenericSignature =
+                        konst specialGenericSignature =
                             genericSignatureInfo?.replaceValueParametersIn(overriddenMethodSignature.genericsSignature)
                                 ?: overriddenMethodSignature.genericsSignature
 
-                        val (asmMethod, valueParameters) =
+                        konst (asmMethod, konstueParameters) =
                         // if current method has special generic signature,
                             // like `Collection.remove(E): Boolean` in Kotlin, use original signature to obtain `remove(Object)`
                             if (genericSignatureInfo?.isObjectReplacedWithTypeParameter == true)
-                                Pair(originalSignature.asmMethod, originalSignature.valueParameters)
+                                Pair(originalSignature.asmMethod, originalSignature.konstueParameters)
                             else
-                                Pair(overriddenMethodSignature.asmMethod, overriddenMethodSignature.valueParameters)
+                                Pair(overriddenMethodSignature.asmMethod, overriddenMethodSignature.konstueParameters)
 
                         JvmMethodGenericSignature(
                             asmMethod,
-                            valueParameters,
+                            konstueParameters,
                             specialGenericSignature
                         )
                     } else {
@@ -174,7 +174,7 @@ class CollectionStubMethodGenerator(
     }
 
     fun generate(functionCodegen: FunctionCodegen, v: ClassBuilder) {
-        val (methodStubsToGenerate, syntheticStubsToGenerate, bridgesToGenerate) = computeTasksToGenerate()
+        konst (methodStubsToGenerate, syntheticStubsToGenerate, bridgesToGenerate) = computeTasksToGenerate()
 
         for (signature in methodStubsToGenerate) {
             generateMethodStub(v, signature, synthetic = false)
@@ -196,14 +196,14 @@ class CollectionStubMethodGenerator(
                 }
 
     private data class CollectionClassPair(
-        val readOnlyClass: TypeConstructor,
-        val mutableClass: TypeConstructor
+        konst readOnlyClass: TypeConstructor,
+        konst mutableClass: TypeConstructor
     )
 
     private fun findRelevantSuperCollectionClasses(): Collection<CollectionClassPair> {
         fun pair(readOnlyClass: TypeConstructor, mutableClass: TypeConstructor) = CollectionClassPair(readOnlyClass, mutableClass)
 
-        val collectionClasses = with(descriptor.builtIns) {
+        konst collectionClasses = with(descriptor.builtIns) {
             listOf(
                 collection to mutableCollection,
                 set to mutableSet,
@@ -218,15 +218,15 @@ class CollectionStubMethodGenerator(
             }
         }
 
-        val allSuperClasses = TypeUtils.getAllSupertypes(descriptor.defaultType).mapTo(HashSet(), KotlinType::constructor)
+        konst allSuperClasses = TypeUtils.getAllSupertypes(descriptor.defaultType).mapTo(HashSet(), KotlinType::constructor)
 
-        val ourSuperCollectionClasses = collectionClasses.filter { (readOnlyClass, mutableClass) ->
+        konst ourSuperCollectionClasses = collectionClasses.filter { (readOnlyClass, mutableClass) ->
             readOnlyClass in allSuperClasses && mutableClass !in allSuperClasses
         }
         if (ourSuperCollectionClasses.isEmpty()) return emptySet()
 
         // Filter out built-in classes which are overridden by other built-in classes in the list, to avoid duplicating methods.
-        val redundantClasses = ourSuperCollectionClasses.flatMapTo(HashSet()) { (readOnlyClass) ->
+        konst redundantClasses = ourSuperCollectionClasses.flatMapTo(HashSet()) { (readOnlyClass) ->
             readOnlyClass.supertypes.map(KotlinType::constructor)
         }
         return ourSuperCollectionClasses.filter { (readOnlyClass) -> readOnlyClass !in redundantClasses }
@@ -236,12 +236,12 @@ class CollectionStubMethodGenerator(
         klass: ClassDescriptor,
         mutableCollectionTypeConstructor: TypeConstructor
     ): List<FunctionDescriptor> {
-        val result = ArrayList<FunctionDescriptor>()
+        konst result = ArrayList<FunctionDescriptor>()
 
         generateOverridesInAClass(klass, object : NonReportingOverrideStrategy() {
             override fun addFakeOverride(fakeOverride: CallableMemberDescriptor) {
                 if (fakeOverride !is FunctionDescriptor) return
-                val foundOverriddenFromDirectSuperClass =
+                konst foundOverriddenFromDirectSuperClass =
                     fakeOverride.findOverriddenFromDirectSuperClass(mutableCollectionTypeConstructor) ?: return
                 if (foundOverriddenFromDirectSuperClass.kind == DECLARATION) {
                     // For regular classes there should no be fake overrides having return types incompatible with return types of their
@@ -254,7 +254,7 @@ class CollectionStubMethodGenerator(
                     // `fun iterator(): CharIterator` defined in read-only collection
                     // The problem is that 'CharIterator' is not a subtype of 'MutableIterator' while from Java's point of view it is,
                     // so we must hack our subtyping a little bit
-                    val newDescriptor =
+                    konst newDescriptor =
                         if (READ_ONLY_ARE_EQUAL_TO_MUTABLE_TYPE_CHECKER.isSubtypeOf(
                                 fakeOverride.returnType!!,
                                 foundOverriddenFromDirectSuperClass.returnType!!
@@ -292,7 +292,7 @@ class CollectionStubMethodGenerator(
     }
 
     private fun Collection<KotlinType>.findMostSpecificTypeForClass(typeConstructor: TypeConstructor): KotlinType {
-        val types = this.filter { it.constructor == typeConstructor }
+        konst types = this.filter { it.constructor == typeConstructor }
         if (types.isEmpty()) error("No supertype of $typeConstructor in $this")
         if (types.size == 1) return types.first()
         // Find the first type in the list such that it's a subtype of every other type in that list
@@ -303,7 +303,7 @@ class CollectionStubMethodGenerator(
 
     private fun generateOverridesInAClass(classDescriptor: ClassDescriptor, strategy: OverridingStrategy) {
         @Suppress("UNCHECKED_CAST")
-        val membersFromSupertypesByName =
+        konst membersFromSupertypesByName =
             classDescriptor.typeConstructor.supertypes.flatMapTo(linkedSetOf()) { type ->
                 DescriptorUtils.getAllDescriptors(type.memberScope).filter {
                     it is PropertyDescriptor || it is SimpleFunctionDescriptor
@@ -316,7 +316,7 @@ class CollectionStubMethodGenerator(
     }
 
     private fun createSyntheticSubclass(): Pair<MutableClassDescriptor, List<TypeParameterDescriptor>> {
-        val child = MutableClassDescriptor(
+        konst child = MutableClassDescriptor(
             descriptor.containingDeclaration,
             ClassKind.CLASS,
             /* isInner = */ false,
@@ -328,8 +328,8 @@ class CollectionStubMethodGenerator(
 
         child.modality = Modality.FINAL
         child.visibility = DescriptorVisibilities.PUBLIC
-        val typeParameters = descriptor.typeConstructor.parameters
-        val newTypeParameters = ArrayList<TypeParameterDescriptor>(typeParameters.size)
+        konst typeParameters = descriptor.typeConstructor.parameters
+        konst newTypeParameters = ArrayList<TypeParameterDescriptor>(typeParameters.size)
         DescriptorSubstitutor.substituteTypeParameters(typeParameters, TypeSubstitution.EMPTY, child, newTypeParameters)
         child.setTypeParameterDescriptors(typeParameters)
         return Pair(child, newTypeParameters)
@@ -350,10 +350,10 @@ class CollectionStubMethodGenerator(
     private fun generateMethodStub(v: ClassBuilder, signature: JvmMethodGenericSignature, synthetic: Boolean) {
         assert(descriptor.kind != ClassKind.INTERFACE) { "No stubs should be generated for interface ${descriptor.fqNameUnsafe}" }
 
-        val access = ACC_PUBLIC or (if (synthetic) ACC_SYNTHETIC else 0)
-        val asmMethod = signature.asmMethod
-        val genericSignature = if (synthetic) null else signature.genericsSignature
-        val mv = v.newMethod(CollectionStub, access, asmMethod.name, asmMethod.descriptor, genericSignature, null)
+        konst access = ACC_PUBLIC or (if (synthetic) ACC_SYNTHETIC else 0)
+        konst asmMethod = signature.asmMethod
+        konst genericSignature = if (synthetic) null else signature.genericsSignature
+        konst mv = v.newMethod(CollectionStub, access, asmMethod.name, asmMethod.descriptor, genericSignature, null)
         mv.visitCode()
         AsmUtil.genThrow(
             InstructionAdapter(mv),
@@ -364,12 +364,12 @@ class CollectionStubMethodGenerator(
     }
 }
 
-private val READ_ONLY_ARE_EQUAL_TO_MUTABLE_TYPE_CHECKER = KotlinTypeCheckerImpl.withAxioms { x, y ->
-    val firstClass = x.declarationDescriptor as? ClassDescriptor ?: return@withAxioms x == y
-    val secondClass = y.declarationDescriptor as? ClassDescriptor ?: return@withAxioms x == y
+private konst READ_ONLY_ARE_EQUAL_TO_MUTABLE_TYPE_CHECKER = KotlinTypeCheckerImpl.withAxioms { x, y ->
+    konst firstClass = x.declarationDescriptor as? ClassDescriptor ?: return@withAxioms x == y
+    konst secondClass = y.declarationDescriptor as? ClassDescriptor ?: return@withAxioms x == y
 
-    val j2k = JavaToKotlinClassMapper
-    val firstReadOnly = if (j2k.isMutable(firstClass)) j2k.convertMutableToReadOnly(firstClass) else firstClass
-    val secondReadOnly = if (j2k.isMutable(secondClass)) j2k.convertMutableToReadOnly(secondClass) else secondClass
+    konst j2k = JavaToKotlinClassMapper
+    konst firstReadOnly = if (j2k.isMutable(firstClass)) j2k.convertMutableToReadOnly(firstClass) else firstClass
+    konst secondReadOnly = if (j2k.isMutable(secondClass)) j2k.convertMutableToReadOnly(secondClass) else secondClass
     firstReadOnly.typeConstructor == secondReadOnly.typeConstructor
 }

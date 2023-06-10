@@ -4,9 +4,9 @@
 // FULL_JDK
 
 fun box(): String {
-    val obj = "" as java.lang.Object
+    konst obj = "" as java.lang.Object
 
-    val e = IllegalArgumentException()
+    konst e = IllegalArgumentException()
     try {
         synchronized (obj) {
             throw e

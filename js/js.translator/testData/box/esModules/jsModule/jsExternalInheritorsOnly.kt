@@ -5,28 +5,28 @@
 @OptIn(ExperimentalStdlibApi::class)
 @JsExternalInheritorsOnly
 external interface ExternalInterfaceX {
-    val x: String
+    konst x: String
 }
 
 external interface ExternalInterfaceXY : ExternalInterfaceX {
-    val y: String
+    konst y: String
 }
 
 external interface ExternalInterfaceXYZ : ExternalInterfaceXY {
-    val z: String
+    konst z: String
 }
 
 external class ExternalXYZ() : ExternalInterfaceXYZ {
-    override val x: String
-    override val y: String
-    override val z: String
+    override konst x: String
+    override konst y: String
+    override konst z: String
 }
 
 external class ExternalClassNameSpace {
     interface NestedInterfaceXYZ : ExternalInterfaceXYZ {
-        override val x: String
-        override val y: String
-        override val z: String
+        override konst x: String
+        override konst y: String
+        override konst z: String
     }
 }
 
@@ -39,9 +39,9 @@ external object Creator: ExternalInterfaceXYZ {
 
     fun createNestedInterfaceXYZ(): ExternalClassNameSpace.NestedInterfaceXYZ
 
-    override val x: String
-    override val y: String
-    override val z: String
+    override konst x: String
+    override konst y: String
+    override konst z: String
 }
 
 fun checkX(x: ExternalInterfaceX, id: Int) = x.x == "X$id"

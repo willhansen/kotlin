@@ -15,8 +15,8 @@ import java.io.File
 
 class RuntimeLibraryInClasspathTest {
     companion object {
-        val coreLibraryPath = getSerializationLibraryJar("kotlinx.serialization.KSerializer")
-        val jsonLibraryPath = getSerializationLibraryJar("kotlinx.serialization.json.Json")
+        konst coreLibraryPath = getSerializationLibraryJar("kotlinx.serialization.KSerializer")
+        konst jsonLibraryPath = getSerializationLibraryJar("kotlinx.serialization.json.Json")
 
         private fun getSerializationLibraryJar(classToDetect: String): File? = try {
             PathUtil.getResourcePathForClass(Class.forName(classToDetect))
@@ -35,7 +35,7 @@ class RuntimeLibraryInClasspathTest {
 
     @Test
     fun testRuntimeHasSufficientVersion() {
-        val version = CommonVersionReader.getVersionsFromManifest(coreLibraryPath!!)
+        konst version = CommonVersionReader.getVersionsFromManifest(coreLibraryPath!!)
         assertTrue(version.currentCompilerMatchRequired(), "Runtime version too high")
         assertTrue(version.implementationVersionMatchSupported(), "Runtime version too low")
     }

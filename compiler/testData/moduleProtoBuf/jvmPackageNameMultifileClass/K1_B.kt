@@ -4,4 +4,4 @@
 @file:JvmMultifileClass
 package k1
 
-val v2 = Unit
+konst v2 = Unit

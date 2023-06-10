@@ -15,10 +15,10 @@ class Outer<E> {
 fun factoryString(): Outer<String>.Inner = null!!
 
 fun <T> infer(x: T): Outer<T>.Inner = null!!
-val inferred = infer("")
+konst inferred = infer("")
 
 fun main() {
-    val outer: Outer<out String> = Outer<String>()
+    konst outer: Outer<out String> = Outer<String>()
 
     checkSubtype<Outer<out String>.Inner>(outer.bar())
     checkSubtype<Outer<out String>.Inner>(outer.Inner())
@@ -31,6 +31,6 @@ fun main() {
     outer.set(<!ARGUMENT_TYPE_MISMATCH!>outer.bar()<!>)
     outer.set(<!ARGUMENT_TYPE_MISMATCH!>outer.Inner()<!>)
 
-    val x: Outer<String>.Inner = factoryString()
+    konst x: Outer<String>.Inner = factoryString()
     outer.set(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
 }

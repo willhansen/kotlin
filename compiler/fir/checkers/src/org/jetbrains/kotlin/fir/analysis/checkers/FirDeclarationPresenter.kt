@@ -92,7 +92,7 @@ interface FirDeclarationPresenter {
                 append(it.nullability.suffix)
             }
             is ConeIntegerLiteralConstantType -> {
-                append(it.value)
+                append(it.konstue)
                 append(it.nullability.suffix)
             }
             is ConeIntegerConstantOperatorType -> {
@@ -124,7 +124,7 @@ interface FirDeclarationPresenter {
                 appendRepresentation(it.bounds[0])
             }
             else -> {
-                val set = sortedSetOf<String>()
+                konst set = sortedSetOf<String>()
                 it.bounds.forEach { that ->
                     set.add(buildString { appendRepresentation(that) })
                 }
@@ -177,7 +177,7 @@ interface FirDeclarationPresenter {
         appendOperatorTag(it)
         appendRepresentation(it.symbol.callableId)
         append('(')
-        it.valueParameters.forEach {
+        it.konstueParameters.forEach {
             appendRepresentation(it)
             append(',')
         }
@@ -211,7 +211,7 @@ interface FirDeclarationPresenter {
         append(']')
         appendRepresentation(owner.symbol.classId)
         append('(')
-        it.valueParameters.forEach {
+        it.konstueParameters.forEach {
             appendRepresentation(it)
             append(',')
         }

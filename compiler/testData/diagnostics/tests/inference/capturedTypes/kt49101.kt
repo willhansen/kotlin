@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-class A<T: B<out Number>>(val x: T) {
+class A<T: B<out Number>>(konst x: T) {
     fun test() {
-        val y: Int = x.m<<!UPPER_BOUND_VIOLATED!>C<out Number><!>>()
+        konst y: Int = x.m<<!UPPER_BOUND_VIOLATED!>C<out Number><!>>()
     }
 
 }

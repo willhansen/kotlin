@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.fir.expressions.FirAnnotationCall
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.types.Variance
 
-open class Modifier(var modifiers: Long = ModifierFlag.NONE.value) {
-    val annotations: MutableList<FirAnnotationCall> = mutableListOf()
+open class Modifier(var modifiers: Long = ModifierFlag.NONE.konstue) {
+    konst annotations: MutableList<FirAnnotationCall> = mutableListOf()
 
     fun addModifier(modifier: LighterASTNode, isInClass: Boolean = false) {
-        when (val tokenType = modifier.tokenType) {
+        when (konst tokenType = modifier.tokenType) {
             KtTokens.CONST_KEYWORD -> {
                 // Specific case because CONST may exist both on parameter and property
                 setFlag(ModifierFlag.PROPERTY_CONST)
@@ -114,25 +114,25 @@ open class Modifier(var modifiers: Long = ModifierFlag.NONE.value) {
 
     fun hasConst(): Boolean = hasFlag(ModifierFlag.PARAMETER_CONST)
 
-    protected fun hasFlag(flag: ModifierFlag) = (modifiers and flag.value) == flag.value
+    protected fun hasFlag(flag: ModifierFlag) = (modifiers and flag.konstue) == flag.konstue
 
     protected fun setFlag(flag: ModifierFlag?) {
         if (flag != null) {
-            modifiers = modifiers or flag.value
+            modifiers = modifiers or flag.konstue
         }
     }
 
     override fun toString(): String {
-        val result = StringBuilder()
+        konst result = StringBuilder()
         var firstAppend = true
-        for (value in ModifierFlag.Values) {
-            if (hasFlag(value) && value != ModifierFlag.NONE) {
+        for (konstue in ModifierFlag.Values) {
+            if (hasFlag(konstue) && konstue != ModifierFlag.NONE) {
                 if (firstAppend) {
                     firstAppend = false
                 } else {
                     result.append(" ")
                 }
-                result.append(value.name)
+                result.append(konstue.name)
             }
         }
         return result.toString()

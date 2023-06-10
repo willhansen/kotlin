@@ -36,9 +36,9 @@
 
 package kotlin.math.fdlibm
 
-private const val one = 1.0
-private const val two = 2.0
-private const val tiny = 1.0e-300
+private const konst one = 1.0
+private const konst two = 2.0
+private const konst tiny = 1.0e-300
 
 internal fun tanh(x: Double): Double {
     var t: Double

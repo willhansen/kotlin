@@ -5,5 +5,5 @@ interface UsedInterface
 class UsedClass : UsedInterface
 
 fun reso<caret>lveMe() {
-    class Local(val u: UsedClass)
+    class Local(konst u: UsedClass)
 }

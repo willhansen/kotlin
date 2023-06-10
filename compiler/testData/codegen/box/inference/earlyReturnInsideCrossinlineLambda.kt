@@ -9,7 +9,7 @@ fun bar(): Int? = 42
 fun box(): String {
     return runReadAction {
         bar() ?: return@runReadAction "Failed"
-        val foo = Foo()
+        konst foo = Foo()
         foo.infer()
     }
 }

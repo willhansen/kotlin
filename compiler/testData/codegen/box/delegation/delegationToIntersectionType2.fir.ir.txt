@@ -53,7 +53,7 @@ FILE fqName:<root> fileName:/delegationToIntersectionType2.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.C
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun foo (): kotlin.String declared in <root>.C'
-          CONST String type=kotlin.String value="OK"
+          CONST String type=kotlin.String konstue="OK"
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A
@@ -83,7 +83,7 @@ FILE fqName:<root> fileName:/delegationToIntersectionType2.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.D
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun foo (): kotlin.String declared in <root>.D'
-          CONST String type=kotlin.String value="FAIL"
+          CONST String type=kotlin.String konstue="FAIL"
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A
@@ -104,7 +104,7 @@ FILE fqName:<root> fileName:/delegationToIntersectionType2.kt
     VALUE_PARAMETER name:c index:0 type:<root>.C
     VALUE_PARAMETER name:d index:1 type:<root>.D
     BLOCK_BODY
-      VAR name:intersection type:<root>.A [val]
+      VAR name:intersection type:<root>.A [konst]
         CALL 'public final fun select <T> (a: T of <root>.select, b: T of <root>.select): T of <root>.select declared in <root>' type=<root>.A origin=null
           <T>: <root>.A
           a: GET_VAR 'c: <root>.C declared in <root>.test' type=<root>.C origin=null
@@ -131,7 +131,7 @@ FILE fqName:<root> fileName:/delegationToIntersectionType2.kt
                             receiver: GET_VAR '<this>: <root>.test.<no name provided> declared in <root>.test.<no name provided>.foo' type=<root>.test.<no name provided> origin=null
                 FIELD DELEGATE name:$$delegate_0 type:<root>.A visibility:private [final]
                   EXPRESSION_BODY
-                    GET_VAR 'val intersection: <root>.A declared in <root>.test' type=<root>.A origin=null
+                    GET_VAR 'konst intersection: <root>.A declared in <root>.test' type=<root>.A origin=null
                 FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
                   overridden:
                     public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A

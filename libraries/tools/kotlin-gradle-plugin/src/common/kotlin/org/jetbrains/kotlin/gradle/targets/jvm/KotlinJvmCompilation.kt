@@ -24,36 +24,36 @@ open class KotlinJvmCompilation @Inject internal constructor(
 ) : AbstractKotlinCompilationToRunnableFiles<KotlinJvmOptions>(compilation),
     KotlinCompilationWithResources<KotlinJvmOptions> {
 
-    final override val target: KotlinJvmTarget = compilation.target as KotlinJvmTarget
+    final override konst target: KotlinJvmTarget = compilation.target as KotlinJvmTarget
 
-    override val compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
+    override konst compilerOptions: HasCompilerOptions<KotlinJvmCompilerOptions> =
         compilation.compilerOptions.castCompilerOptionsType()
 
     @Deprecated("Replaced with compileTaskProvider", replaceWith = ReplaceWith("compileTaskProvider"))
     @Suppress("UNCHECKED_CAST", "DEPRECATION")
-    override val compileKotlinTaskProvider: TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
+    override konst compileKotlinTaskProvider: TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
         get() = compilation.compileKotlinTaskProvider as TaskProvider<out org.jetbrains.kotlin.gradle.tasks.KotlinCompile>
 
     @Suppress("DEPRECATION")
     @Deprecated("Accessing task instance directly is deprecated", replaceWith = ReplaceWith("compileTaskProvider"))
-    override val compileKotlinTask: org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+    override konst compileKotlinTask: org.jetbrains.kotlin.gradle.tasks.KotlinCompile
         get() = compilation.compileKotlinTask as org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
     @Suppress("UNCHECKED_CAST")
-    override val compileTaskProvider: TaskProvider<out KotlinCompilationTask<KotlinJvmCompilerOptions>>
+    override konst compileTaskProvider: TaskProvider<out KotlinCompilationTask<KotlinJvmCompilerOptions>>
         get() = compilation.compileTaskProvider as TaskProvider<KotlinCompilationTask<KotlinJvmCompilerOptions>>
 
     /**
      * **Note**: requesting this too early (right after target creation and before any target configuration) may falsely return `null`
-     * value, but later target will be configured to run with Java enabled. If possible, please use [compileJavaTaskProviderSafe].
+     * konstue, but later target will be configured to run with Java enabled. If possible, please use [compileJavaTaskProviderSafe].
      */
-    val compileJavaTaskProvider: TaskProvider<out JavaCompile>?
+    konst compileJavaTaskProvider: TaskProvider<out JavaCompile>?
         get() = if (target.withJavaEnabled) {
-            val project = target.project
-            val javaSourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
+            konst project = target.project
+            konst javaSourceSets = project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSets
-            val javaSourceSet = javaSourceSets.getByName(compilationName)
+            konst javaSourceSet = javaSourceSets.getByName(compilationName)
             project.tasks.withType(JavaCompile::class.java).named(javaSourceSet.compileJavaTaskName)
         } else null
 
@@ -61,7 +61,7 @@ open class KotlinJvmCompilation @Inject internal constructor(
      * Alternative to [compileJavaTaskProvider] to safely receive [JavaCompile] task provider  when [KotlinJvmTarget.withJavaEnabled]
      * will be enabled after call to this method.
      */
-    internal val compileJavaTaskProviderSafe: Provider<JavaCompile> = target.project.providers
+    internal konst compileJavaTaskProviderSafe: Provider<JavaCompile> = target.project.providers
         .provider { if (target.withJavaEnabled) Unit else null }
         .map {
             project.javaSourceSets.getByName(compilationName).compileJavaTaskName
@@ -70,6 +70,6 @@ open class KotlinJvmCompilation @Inject internal constructor(
             project.tasks.named(it, JavaCompile::class.java)
         }
 
-    override val processResourcesTaskName: String
+    override konst processResourcesTaskName: String
         get() = compilation.processResourcesTaskName ?: error("Missing 'processResourcesTaskName'")
 }

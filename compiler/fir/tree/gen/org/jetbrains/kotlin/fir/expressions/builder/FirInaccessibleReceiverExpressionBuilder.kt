@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirInaccessibleReceiverExpressionBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override lateinit var typeRef: FirTypeRef
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var calleeReference: FirThisReference
 
     override fun build(): FirInaccessibleReceiverExpression {

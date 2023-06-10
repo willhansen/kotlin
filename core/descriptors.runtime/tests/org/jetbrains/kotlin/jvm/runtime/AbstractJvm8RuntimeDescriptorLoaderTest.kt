@@ -19,5 +19,5 @@ package org.jetbrains.kotlin.jvm.runtime
 import org.jetbrains.kotlin.test.TestJdkKind
 
 abstract class AbstractJvm8RuntimeDescriptorLoaderTest : AbstractJvmRuntimeDescriptorLoaderTest() {
-    override val defaultJdkKind: TestJdkKind = TestJdkKind.FULL_JDK
+    override konst defaultJdkKind: TestJdkKind = TestJdkKind.FULL_JDK
 }

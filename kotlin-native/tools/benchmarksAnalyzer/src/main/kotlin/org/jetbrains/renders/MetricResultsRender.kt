@@ -10,17 +10,17 @@ import org.jetbrains.report.BenchmarkResult
 
 // Report render to text format.
 class MetricResultsRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "metrics"
 
     override fun render(report: SummaryBenchmarksReport, onlyChanges: Boolean): String {
-        val results = report.detailedMetricReports.values.map { it.mergedReport }.map { report ->
+        konst results = report.detailedMetricReports.konstues.map { it.mergedReport }.map { report ->
             report.map { entry ->
                 buildString {
-                    val metric = entry.value.first!!.metric
+                    konst metric = entry.konstue.first!!.metric
                     append("{ \"benchmarkName\": \"${entry.key.removeSuffix(metric.suffix)}\",")
                     append("\"metric\": \"${metric}\",")
-                    append("\"value\": \"${entry.value.first!!.score}\" }")
+                    append("\"konstue\": \"${entry.konstue.first!!.score}\" }")
                 }
             }
         }.flatten().joinToString(", ")

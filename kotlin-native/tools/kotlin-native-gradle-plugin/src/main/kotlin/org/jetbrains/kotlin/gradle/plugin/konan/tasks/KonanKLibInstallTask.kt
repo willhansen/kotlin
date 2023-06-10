@@ -23,13 +23,13 @@ open class KonanKlibInstallTask : DefaultTask() {
     var repo: File = project.rootDir
 
     @get:Input
-    val repoPath
+    konst repoPath
         get() = repo.absolutePath
 
-    val installDir: Provider<File>
+    konst installDir: Provider<File>
         @OutputDirectory
         get() = project.provider {
-            val klibName = klib.get().nameWithoutExtension
+            konst klibName = klib.get().nameWithoutExtension
             project.file("${repo.absolutePath}/$klibName")
         }
 
@@ -38,7 +38,7 @@ open class KonanKlibInstallTask : DefaultTask() {
 
     @TaskAction
     fun exec() {
-        val args = listOf(
+        konst args = listOf(
                 "install", klib.get().absolutePath,
                 "-target", target,
                 "-repository", repo.absolutePath

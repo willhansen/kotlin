@@ -2,7 +2,7 @@
 package
 
 public final expect class A {
-    private expect final val bar: kotlin.String
+    private expect final konst bar: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     private final expect fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -21,7 +21,7 @@ package
 
 public final actual class A {
     public constructor A()
-    private final val bar: kotlin.String = ""
+    private final konst bar: kotlin.String = ""
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     private final fun foo(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

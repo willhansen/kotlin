@@ -15,19 +15,19 @@ import java.io.File
 private typealias Alias = String
 private typealias Fqn = String
 
-private const val CHECKERS_COMPONENT_INTERNAL_ANNOTATION = "@CheckersComponentInternal"
-private const val CHECKERS_COMPONENT_INTERNAL_FQN = "org.jetbrains.kotlin.fir.analysis.CheckersComponentInternal"
+private const konst CHECKERS_COMPONENT_INTERNAL_ANNOTATION = "@CheckersComponentInternal"
+private const konst CHECKERS_COMPONENT_INTERNAL_FQN = "org.jetbrains.kotlin.fir.analysis.CheckersComponentInternal"
 
 class Generator(
-    private val configuration: CheckersConfiguration,
+    private konst configuration: CheckersConfiguration,
     generationPath: File,
-    private val packageName: String,
-    private val abstractCheckerName: String
+    private konst packageName: String,
+    private konst abstractCheckerName: String
 ) {
-    private val generationPath: File = getGenerationPath(generationPath, packageName)
+    private konst generationPath: File = getGenerationPath(generationPath, packageName)
 
     private fun generateAliases() {
-        val filename = "${abstractCheckerName}Aliases.kt"
+        konst filename = "${abstractCheckerName}Aliases.kt"
         generationPath.resolve(filename).writeToFileUsingSmartPrinterIfFileContentChanged {
             printPackageAndCopyright()
             printGeneratedMessage()
@@ -37,7 +37,7 @@ class Generator(
                 .forEach { println("import $it") }
             println()
             for ((kClass, alias) in configuration.aliases) {
-                val typeParameters =
+                konst typeParameters =
                     if (kClass.typeParameters.isEmpty()) ""
                     else kClass.typeParameters.joinToString(separator = ",", prefix = "<", postfix = ">") { "*" }
                 println("typealias $alias = $abstractCheckerName<${kClass.simpleName}$typeParameters>")
@@ -46,7 +46,7 @@ class Generator(
     }
 
     private fun generateAbstractCheckersComponent() {
-        val filename = "${checkersComponentName}.kt"
+        konst filename = "${checkersComponentName}.kt"
         generationPath.resolve(filename).writeToFileUsingSmartPrinterIfFileContentChanged {
             printPackageAndCopyright()
             printImports()
@@ -56,28 +56,28 @@ class Generator(
             withIndent {
                 println("companion object {")
                 withIndent {
-                    println("val EMPTY: $checkersComponentName = object : $checkersComponentName() {}")
+                    println("konst EMPTY: $checkersComponentName = object : $checkersComponentName() {}")
                 }
                 println("}")
                 println()
 
-                for (alias in configuration.aliases.values) {
-                    println("open ${alias.valDeclaration} = emptySet()")
+                for (alias in configuration.aliases.konstues) {
+                    println("open ${alias.konstDeclaration} = emptySet()")
                 }
                 println()
 
                 for ((fieldName, classFqn) in configuration.additionalCheckers) {
-                    val fieldClassName = classFqn.simpleName
-                    println("open val $fieldName: ${fieldClassName.setType} = emptySet()")
+                    konst fieldClassName = classFqn.simpleName
+                    println("open konst $fieldName: ${fieldClassName.setType} = emptySet()")
                 }
                 if (configuration.additionalCheckers.isNotEmpty()) {
                     println()
                 }
 
                 for ((kClass, alias) in configuration.aliases) {
-                    print("$CHECKERS_COMPONENT_INTERNAL_ANNOTATION internal val ${alias.allFieldName}: ${alias.setType} by lazy { ${alias.fieldName}")
+                    print("$CHECKERS_COMPONENT_INTERNAL_ANNOTATION internal konst ${alias.allFieldName}: ${alias.setType} by lazy { ${alias.fieldName}")
                     for (parent in configuration.parentsMap.getValue(kClass)) {
-                        val parentAlias = configuration.aliases.getValue(parent)
+                        konst parentAlias = configuration.aliases.getValue(parent)
                         print(" + ${parentAlias.fieldName}")
                     }
                     println(" }")
@@ -88,8 +88,8 @@ class Generator(
     }
 
     private fun generateComposedComponent() {
-        val composedComponentName = "Composed$checkersComponentName"
-        val filename = "${composedComponentName}.kt"
+        konst composedComponentName = "Composed$checkersComponentName"
+        konst filename = "${composedComponentName}.kt"
         generationPath.resolve(filename).writeToFileUsingSmartPrinterIfFileContentChanged {
             printPackageAndCopyright()
             printImports()
@@ -97,14 +97,14 @@ class Generator(
             println("class $composedComponentName : $checkersComponentName() {")
             withIndent {
                 // public overrides
-                for (alias in configuration.aliases.values) {
-                    println("override ${alias.valDeclaration}")
+                for (alias in configuration.aliases.konstues) {
+                    println("override ${alias.konstDeclaration}")
                     withIndent {
                         println("get() = _${alias.fieldName}")
                     }
                 }
                 for ((fieldName, classFqn) in configuration.additionalCheckers) {
-                    println("override val $fieldName: ${classFqn.simpleName.setType}")
+                    println("override konst $fieldName: ${classFqn.simpleName.setType}")
                     withIndent {
                         println("get() = _$fieldName")
                     }
@@ -112,11 +112,11 @@ class Generator(
                 println()
 
                 // private mutable delegates
-                for (alias in configuration.aliases.values) {
-                    println("private val _${alias.fieldName}: ${alias.mutableSetType} = mutableSetOf()")
+                for (alias in configuration.aliases.konstues) {
+                    println("private konst _${alias.fieldName}: ${alias.mutableSetType} = mutableSetOf()")
                 }
                 for ((fieldName, classFqn) in configuration.additionalCheckers) {
-                    println("private val _$fieldName: ${classFqn.simpleName.mutableSetType} = mutableSetOf()")
+                    println("private konst _$fieldName: ${classFqn.simpleName.mutableSetType} = mutableSetOf()")
                 }
                 println()
 
@@ -124,7 +124,7 @@ class Generator(
                 println(CHECKERS_COMPONENT_INTERNAL_ANNOTATION)
                 println("fun register(checkers: $checkersComponentName) {")
                 withIndent {
-                    for (alias in configuration.aliases.values) {
+                    for (alias in configuration.aliases.konstues) {
                         println("_${alias.fieldName} += checkers.${alias.fieldName}")
                     }
                     for (fieldName in configuration.additionalCheckers.keys) {
@@ -144,8 +144,8 @@ class Generator(
     }
 
     private fun SmartPrinter.printImports() {
-        val imports = buildList {
-            addAll(configuration.additionalCheckers.values)
+        konst imports = buildList {
+            addAll(configuration.additionalCheckers.konstues)
             add(CHECKERS_COMPONENT_INTERNAL_FQN)
         }.sorted()
 
@@ -155,25 +155,25 @@ class Generator(
         println()
     }
 
-    private val Alias.valDeclaration: String
-        get() = "val $fieldName: $setType"
+    private konst Alias.konstDeclaration: String
+        get() = "konst $fieldName: $setType"
 
-    private val Alias.fieldName: String
+    private konst Alias.fieldName: String
         get() = removePrefix("Fir").replaceFirstChar(Char::lowercaseChar) + "s"
 
-    private val Alias.allFieldName: String
+    private konst Alias.allFieldName: String
         get() = "all${fieldName.replaceFirstChar(Char::uppercaseChar)}"
 
-    private val Alias.setType: String
+    private konst Alias.setType: String
         get() = "Set<$this>"
 
-    private val Alias.mutableSetType: String
+    private konst Alias.mutableSetType: String
         get() = "MutableSet<$this>"
 
-    private val Fqn.simpleName: String
+    private konst Fqn.simpleName: String
         get() = this.split(".").last()
 
-    private val checkersComponentName = abstractCheckerName.removePrefix("Fir") + "s"
+    private konst checkersComponentName = abstractCheckerName.removePrefix("Fir") + "s"
 
     fun generate() {
         generateAliases()

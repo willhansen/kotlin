@@ -17,19 +17,19 @@ import java.util.regex.Pattern
 typealias SpecTestInfoElements<T> = Map<T, SpecTestInfoElementContent>
 
 enum class CommonInfoElementType(
-    override val valuePattern: Pattern? = null,
-    override val required: Boolean = false
+    override konst konstuePattern: Pattern? = null,
+    override konst required: Boolean = false
 ) : SpecTestInfoElementType {
     UNEXPECTED_BEHAVIOUR,
-    ISSUES(valuePattern = issuesPattern),
+    ISSUES(konstuePattern = issuesPattern),
     DISCUSSION,
     NOTE,
     EXCEPTION
 }
 
 enum class CommonSpecTestFileInfoElementType(
-    override val valuePattern: Pattern? = null,
-    override val required: Boolean = false
+    override konst konstuePattern: Pattern? = null,
+    override konst required: Boolean = false
 ) : SpecTestInfoElementType {
     NUMBER(required = true),
     DESCRIPTION(required = true),
@@ -37,25 +37,25 @@ enum class CommonSpecTestFileInfoElementType(
 }
 
 enum class SpecTestCaseInfoElementType(
-    override val valuePattern: Pattern? = null,
-    override val required: Boolean = false
+    override konst konstuePattern: Pattern? = null,
+    override konst required: Boolean = false
 ) : SpecTestInfoElementType {
-    TESTCASE_NUMBER(valuePattern = testCaseNumberPattern, required = true),
-    RELEVANT_PLACES(valuePattern = relevantLinksPattern),
+    TESTCASE_NUMBER(konstuePattern = testCaseNumberPattern, required = true),
+    RELEVANT_PLACES(konstuePattern = relevantLinksPattern),
     UNSPECIFIED_BEHAVIOR
 }
 
 abstract class AbstractSpecTest(
-    val testArea: TestArea,
-    val testType: TestType,
-    val sections: List<String>,
-    val testNumber: Int,
-    val description: String,
-    val cases: SpecTestCasesSet,
-    val unexpectedBehavior: Boolean,
-    val issues: Set<String>,
-    val helpers: Set<String>?,
-    val exception: TestsExceptionType?
+    konst testArea: TestArea,
+    konst testType: TestType,
+    konst sections: List<String>,
+    konst testNumber: Int,
+    konst description: String,
+    konst cases: SpecTestCasesSet,
+    konst unexpectedBehavior: Boolean,
+    konst issues: Set<String>,
+    konst helpers: Set<String>?,
+    konst exception: TestsExceptionType?
 ) {
     companion object {
         private fun issuesToString(issues: Set<String>) = issues.joinToString(", ") { CommonPatterns.ISSUE_TRACKER + it }
@@ -64,7 +64,7 @@ abstract class AbstractSpecTest(
     abstract fun checkPathConsistency(pathMatcher: Matcher): Boolean
 
     protected fun getIssuesText(): String? {
-        val testCaseIssues = cases.byNumbers.flatMap { it.value.issues!! }
+        konst testCaseIssues = cases.byNumbers.flatMap { it.konstue.issues!! }
 
         return if (issues.isNotEmpty() || testCaseIssues.isNotEmpty()) {
             "LINKED ISSUES: ${issuesToString(issues + testCaseIssues)}"
@@ -72,8 +72,8 @@ abstract class AbstractSpecTest(
     }
 
     protected fun getUnexpectedBehaviourText(): String? {
-        val separatedTestCasesUnexpectedBehaviorNumber = cases.byNumbers.count { it.value.unexpectedBehavior }
-        val testCasesUnexpectedBehaviorNumber = when {
+        konst separatedTestCasesUnexpectedBehaviorNumber = cases.byNumbers.count { it.konstue.unexpectedBehavior }
+        konst testCasesUnexpectedBehaviorNumber = when {
             unexpectedBehavior -> cases.byNumbers.size
             separatedTestCasesUnexpectedBehaviorNumber != 0 -> separatedTestCasesUnexpectedBehaviorNumber
             else -> 0

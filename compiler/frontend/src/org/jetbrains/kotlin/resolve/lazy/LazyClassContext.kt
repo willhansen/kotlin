@@ -30,26 +30,26 @@ import org.jetbrains.kotlin.types.WrappedTypeFactory
 import org.jetbrains.kotlin.types.checker.NewKotlinTypeChecker
 
 interface LazyClassContext {
-    val declarationScopeProvider: DeclarationScopeProvider
-    val inferenceSession: InferenceSession?
+    konst declarationScopeProvider: DeclarationScopeProvider
+    konst inferenceSession: InferenceSession?
 
-    val storageManager: StorageManager
-    val trace: BindingTrace
-    val moduleDescriptor: ModuleDescriptor
-    val descriptorResolver: DescriptorResolver
-    val functionDescriptorResolver: FunctionDescriptorResolver
-    val typeResolver: TypeResolver
-    val declarationProviderFactory: DeclarationProviderFactory
-    val annotationResolver: AnnotationResolver
-    val lookupTracker: LookupTracker
-    val supertypeLoopChecker: SupertypeLoopChecker
-    val languageVersionSettings: LanguageVersionSettings
-    val syntheticResolveExtension: SyntheticResolveExtension
-    val delegationFilter: DelegationFilter
-    val wrappedTypeFactory: WrappedTypeFactory
-    val samConversionResolver: SamConversionResolver
-    val additionalClassPartsProvider: AdditionalClassPartsProvider
-    val sealedClassInheritorsProvider: SealedClassInheritorsProvider
+    konst storageManager: StorageManager
+    konst trace: BindingTrace
+    konst moduleDescriptor: ModuleDescriptor
+    konst descriptorResolver: DescriptorResolver
+    konst functionDescriptorResolver: FunctionDescriptorResolver
+    konst typeResolver: TypeResolver
+    konst declarationProviderFactory: DeclarationProviderFactory
+    konst annotationResolver: AnnotationResolver
+    konst lookupTracker: LookupTracker
+    konst supertypeLoopChecker: SupertypeLoopChecker
+    konst languageVersionSettings: LanguageVersionSettings
+    konst syntheticResolveExtension: SyntheticResolveExtension
+    konst delegationFilter: DelegationFilter
+    konst wrappedTypeFactory: WrappedTypeFactory
+    konst samConversionResolver: SamConversionResolver
+    konst additionalClassPartsProvider: AdditionalClassPartsProvider
+    konst sealedClassInheritorsProvider: SealedClassInheritorsProvider
 
     /**
      * Important notice!
@@ -66,5 +66,5 @@ interface LazyClassContext {
      *
      * See also KT-44898 for example of issues which might happen if the wrong typechecker is used in "platform view".
      */
-    val kotlinTypeCheckerOfOwnerModule: NewKotlinTypeChecker
+    konst kotlinTypeCheckerOfOwnerModule: NewKotlinTypeChecker
 }

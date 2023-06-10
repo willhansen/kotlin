@@ -1,8 +1,8 @@
 fun foo() {
-    val base = object {
+    konst base = object {
         fun bar() = object {
             fun buz() = foobar
         }
-        val foobar = ""
+        konst foobar = ""
     }
 }

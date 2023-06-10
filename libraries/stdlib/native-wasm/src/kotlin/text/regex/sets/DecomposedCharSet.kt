@@ -27,9 +27,9 @@ import kotlin.experimental.ExperimentalNativeApi
 /** Represents canonical decomposition of Unicode character. Is used when CANON_EQ flag of Pattern class is specified. */
 open internal class DecomposedCharSet(
         /** Decomposition of the Unicode codepoint */
-        private val decomposedChar: IntArray,
+        private konst decomposedChar: IntArray,
         /** Length of useful part of decomposedChar decomposedCharLength <= decomposedChar.length */
-        private val decomposedCharLength: Int
+        private konst decomposedCharLength: Int
 ) : SimpleSet() {
 
     /** Contains information about number of chars that were read for a codepoint last time */
@@ -37,8 +37,8 @@ open internal class DecomposedCharSet(
 
     /** UTF-16 encoding of decomposedChar */
     @OptIn(ExperimentalNativeApi::class)
-    private val decomposedCharUTF16: String by lazy {
-        val strBuff = StringBuilder()
+    private konst decomposedCharUTF16: String by lazy {
+        konst strBuff = StringBuilder()
 
         for (i in 0..decomposedCharLength - 1) {
             strBuff.append(Char.toChars(decomposedChar[i]))
@@ -46,12 +46,12 @@ open internal class DecomposedCharSet(
         return@lazy strBuff.toString()
     }
 
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = true
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
         var strIndex = startIndex
-        val rightBound = testString.length
+        konst rightBound = testString.length
 
         if (strIndex >= rightBound) {
             return -1
@@ -98,7 +98,7 @@ open internal class DecomposedCharSet(
 
             3 -> {
                 var i1 = Lexer.getCanonicalClass(decomposedCodePoint[1])
-                val i2 = Lexer.getCanonicalClass(decomposedCodePoint[2])
+                konst i2 = Lexer.getCanonicalClass(decomposedCodePoint[2])
 
                 if (i2 != 0 && i1 > i2) {
                     i1 = decomposedCodePoint[1]
@@ -121,7 +121,7 @@ open internal class DecomposedCharSet(
         return next.matches(strIndex, testString, matchResult)
     }
 
-    override val name: String
+    override konst name: String
         get() = "decomposed char: $decomposedChar"
 
     /** Reads Unicode codepoint from [testString] starting from [strIndex] until [rightBound]. */
@@ -130,11 +130,11 @@ open internal class DecomposedCharSet(
         var index = strIndex
 
         // We store information about number of codepoints we read at variable readCharsForCodePoint.
-        val curChar: Int
+        konst curChar: Int
         readCharsForCodePoint = 1
         if (index < rightBound - 1) {
-            val high = testString[index++]
-            val low = testString[index]
+            konst high = testString[index++]
+            konst low = testString[index]
 
             if (Char.isSurrogatePair(high, low)) {
                 curChar = Char.toCodePoint(high, low)

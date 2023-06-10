@@ -9,4 +9,4 @@ FILE fqName:<root> fileName:/coercionToUnitInLambdaReturnValue.kt
           FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.Unit
             BLOCK_BODY
               TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
-                CONST Int type=kotlin.Int value=42
+                CONST Int type=kotlin.Int konstue=42

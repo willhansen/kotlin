@@ -3,7 +3,7 @@
 import kotlin.reflect.KProperty
 
 interface T {
-  val a: Int <!DELEGATED_PROPERTY_IN_INTERFACE!>by Delegate()<!>
+  konst a: Int <!DELEGATED_PROPERTY_IN_INTERFACE!>by Delegate()<!>
 }
 
 class Delegate {

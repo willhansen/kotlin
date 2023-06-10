@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 import org.jetbrains.kotlin.name.Name
 
-class FirOnlyCallablesScope(val delegate: FirScope) : FirScope() {
+class FirOnlyCallablesScope(konst delegate: FirScope) : FirScope() {
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         return delegate.processFunctionsByName(name, processor)
     }
@@ -20,11 +20,11 @@ class FirOnlyCallablesScope(val delegate: FirScope) : FirScope() {
         return delegate.processPropertiesByName(name, processor)
     }
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = delegate.scopeOwnerLookupNames
 }
 
-class FirNameAwareOnlyCallablesScope(val delegate: FirContainingNamesAwareScope) : FirContainingNamesAwareScope() {
+class FirNameAwareOnlyCallablesScope(konst delegate: FirContainingNamesAwareScope) : FirContainingNamesAwareScope() {
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         return delegate.processFunctionsByName(name, processor)
     }
@@ -33,7 +33,7 @@ class FirNameAwareOnlyCallablesScope(val delegate: FirContainingNamesAwareScope)
         return delegate.processPropertiesByName(name, processor)
     }
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = delegate.scopeOwnerLookupNames
 
     override fun getCallableNames(): Set<Name> = delegate.getCallableNames()

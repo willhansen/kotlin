@@ -10,7 +10,7 @@ package kotlin.wasm.internal
 import kotlin.UnsupportedOperationException
 import kotlin.reflect.*
 
-internal open class KProperty0Impl<out R>(override val name: String, val returnType: KType, val getter: () -> R) : KProperty0<R> {
+internal open class KProperty0Impl<out R>(override konst name: String, konst returnType: KType, konst getter: () -> R) : KProperty0<R> {
     override fun get(): R {
         return getter()
     }
@@ -20,7 +20,7 @@ internal open class KProperty0Impl<out R>(override val name: String, val returnT
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KProperty0Impl<*>
+        konst otherKProperty = other as? KProperty0Impl<*>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter
     }
@@ -34,7 +34,7 @@ internal open class KProperty0Impl<out R>(override val name: String, val returnT
     }
 }
 
-internal open class KProperty1Impl<T, out R>(override val name: String, val returnType: KType, val getter: (T) -> R) : KProperty1<T, R> {
+internal open class KProperty1Impl<T, out R>(override konst name: String, konst returnType: KType, konst getter: (T) -> R) : KProperty1<T, R> {
     override fun get(receiver: T): R {
         return getter(receiver)
     }
@@ -44,7 +44,7 @@ internal open class KProperty1Impl<T, out R>(override val name: String, val retu
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KProperty1Impl<*, *>
+        konst otherKProperty = other as? KProperty1Impl<*, *>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter
     }
@@ -58,7 +58,7 @@ internal open class KProperty1Impl<T, out R>(override val name: String, val retu
     }
 }
 
-internal open class KProperty2Impl<T1, T2, out R>(override val name: String, val returnType: KType, val getter: (T1, T2) -> R) :
+internal open class KProperty2Impl<T1, T2, out R>(override konst name: String, konst returnType: KType, konst getter: (T1, T2) -> R) :
     KProperty2<T1, T2, R> {
     override fun get(receiver1: T1, receiver2: T2): R {
         return getter(receiver1, receiver2)
@@ -69,7 +69,7 @@ internal open class KProperty2Impl<T1, T2, out R>(override val name: String, val
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KProperty2Impl<*, *, *>
+        konst otherKProperty = other as? KProperty2Impl<*, *, *>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter
     }
@@ -83,14 +83,14 @@ internal open class KProperty2Impl<T1, T2, out R>(override val name: String, val
     }
 }
 
-internal class KMutableProperty0Impl<R>(name: String, returnType: KType, getter: () -> R, val setter: (R) -> Unit) :
+internal class KMutableProperty0Impl<R>(name: String, returnType: KType, getter: () -> R, konst setter: (R) -> Unit) :
     KProperty0Impl<R>(name, returnType, getter), KMutableProperty0<R> {
-    override fun set(value: R): Unit {
-        setter(value)
+    override fun set(konstue: R): Unit {
+        setter(konstue)
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KMutableProperty0Impl<*>
+        konst otherKProperty = other as? KMutableProperty0Impl<*>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter && setter == otherKProperty.setter
     }
@@ -104,14 +104,14 @@ internal class KMutableProperty0Impl<R>(name: String, returnType: KType, getter:
     }
 }
 
-internal class KMutableProperty1Impl<T, R>(name: String, returnType: KType, getter: (T) -> R, val setter: (T, R) -> Unit) :
+internal class KMutableProperty1Impl<T, R>(name: String, returnType: KType, getter: (T) -> R, konst setter: (T, R) -> Unit) :
     KProperty1Impl<T, R>(name, returnType, getter), KMutableProperty1<T, R> {
-    override fun set(receiver: T, value: R): Unit {
-        setter(receiver, value)
+    override fun set(receiver: T, konstue: R): Unit {
+        setter(receiver, konstue)
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KMutableProperty1Impl<*, *>
+        konst otherKProperty = other as? KMutableProperty1Impl<*, *>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter && setter == otherKProperty.setter
     }
@@ -125,14 +125,14 @@ internal class KMutableProperty1Impl<T, R>(name: String, returnType: KType, gett
     }
 }
 
-internal class KMutableProperty2Impl<T1, T2, R>(name: String, returnType: KType, getter: (T1, T2) -> R, val setter: (T1, T2, R) -> Unit) :
+internal class KMutableProperty2Impl<T1, T2, R>(name: String, returnType: KType, getter: (T1, T2) -> R, konst setter: (T1, T2, R) -> Unit) :
     KProperty2Impl<T1, T2, R>(name, returnType, getter), KMutableProperty2<T1, T2, R> {
-    override fun set(receiver1: T1, receiver2: T2, value: R): Unit {
-        setter(receiver1, receiver2, value)
+    override fun set(receiver1: T1, receiver2: T2, konstue: R): Unit {
+        setter(receiver1, receiver2, konstue)
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherKProperty = other as? KMutableProperty2Impl<*, *, *>
+        konst otherKProperty = other as? KMutableProperty2Impl<*, *, *>
         if (otherKProperty == null) return false
         return name == otherKProperty.name && getter == otherKProperty.getter && setter == otherKProperty.setter
     }
@@ -146,7 +146,7 @@ internal class KMutableProperty2Impl<T1, T2, R>(name: String, returnType: KType,
     }
 }
 
-internal open class KLocalDelegatedPropertyImpl<out R>(override val name: String, val returnType: KType) : KProperty0<R> {
+internal open class KLocalDelegatedPropertyImpl<out R>(override konst name: String, konst returnType: KType) : KProperty0<R> {
     override fun get(): R {
         throw UnsupportedOperationException("Not supported for local property reference.")
     }
@@ -162,7 +162,7 @@ internal open class KLocalDelegatedPropertyImpl<out R>(override val name: String
 
 internal class KLocalDelegatedMutablePropertyImpl<R>(name: String, returnType: KType) : KLocalDelegatedPropertyImpl<R>(name, returnType),
     KMutableProperty0<R> {
-    override fun set(value: R): Unit {
+    override fun set(konstue: R): Unit {
         throw UnsupportedOperationException("Not supported for local property reference.")
     }
 

@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class UInt(val a: Int) {
+inline class UInt(konst a: Int) {
     fun test() {
         takeNullable(this) // box
         takeAnyInside(this) // box
@@ -13,7 +13,7 @@ inline class UInt(val a: Int) {
 
 fun takeNullable(a: UInt?) {}
 
-// 1 valueOf
+// 1 konstueOf
 // 0 intValue
 
 // -- 1 before takeNullable

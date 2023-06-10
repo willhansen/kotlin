@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 abstract class AbstractKotlinNativeTargetPreset<T : KotlinNativeTarget>(
-    private val name: String,
-    val project: Project,
-    val konanTarget: KonanTarget
+    private konst name: String,
+    konst project: Project,
+    konst konanTarget: KonanTarget
 ) : KotlinTargetPreset<T> {
 
     init {
@@ -44,19 +44,19 @@ abstract class AbstractKotlinNativeTargetPreset<T : KotlinNativeTarget>(
     override fun createTarget(name: String): T {
         project.setupNativeCompiler(konanTarget)
 
-        val result = instantiateTarget(name).apply {
+        konst result = instantiateTarget(name).apply {
             targetName = name
             disambiguationClassifier = name
             preset = this@AbstractKotlinNativeTargetPreset
 
-            val compilationFactory = KotlinNativeCompilationFactory(this)
+            konst compilationFactory = KotlinNativeCompilationFactory(this)
             compilations = project.container(compilationFactory.itemClass, compilationFactory)
         }
 
         createTargetConfigurator().configureTarget(result)
 
         SingleActionPerProject.run(project, "setUpKotlinNativePlatformDependencies") {
-            project.whenEvaluated {
+            project.whenEkonstuated {
                 project.setupKotlinNativePlatformDependencies()
             }
         }
@@ -68,7 +68,7 @@ abstract class AbstractKotlinNativeTargetPreset<T : KotlinNativeTarget>(
 
         if (!konanTarget.enabledOnCurrentHost) {
             with(HostManager()) {
-                val supportedHosts = enabledByHost.filterValues { konanTarget in it }.keys
+                konst supportedHosts = enabledByHost.filterValues { konanTarget in it }.keys
                 DisabledNativeTargetsReporter.reportDisabledTarget(project, result, supportedHosts)
             }
         }
@@ -77,7 +77,7 @@ abstract class AbstractKotlinNativeTargetPreset<T : KotlinNativeTarget>(
     }
 
     companion object {
-        private const val KOTLIN_NATIVE_HOME_PRIVATE_PROPERTY = "konanHome"
+        private const konst KOTLIN_NATIVE_HOME_PRIVATE_PROPERTY = "konanHome"
     }
 
 }
@@ -113,8 +113,8 @@ open class KotlinNativeTargetWithSimulatorTestsPreset(name: String, project: Pro
         project.objects.newInstance(KotlinNativeTargetWithSimulatorTests::class.java, project, konanTarget)
 }
 
-internal val KonanTarget.isCurrentHost: Boolean
+internal konst KonanTarget.isCurrentHost: Boolean
     get() = this == HostManager.host
 
-internal val KonanTarget.enabledOnCurrentHost
+internal konst KonanTarget.enabledOnCurrentHost
     get() = HostManager().isEnabled(this)

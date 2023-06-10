@@ -14,28 +14,28 @@ interface Checker {
 class ShouldBeDisabled: Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         assert(l())
         return hit
     }
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         assert(l())
         return hit
     }
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         assert(l()) { "BOOYA" }
         return hit
     }
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         assert(l()) { "BOOYA" }
         return hit
     }
@@ -44,37 +44,37 @@ class ShouldBeDisabled: Checker {
 class ShouldBeEnabled: Checker {
     override fun checkTrue(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         assert(l())
         return hit
     }
 
     override fun checkFalse(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         assert(l())
         return hit
     }
 
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
         assert(l()) { "BOOYA" }
         return hit
     }
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
         assert(l()) { "BOOYA" }
         return hit
     }
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setPackageAssertionStatus("ordinary", v)
-    val c = loader.loadClass(if (v) "ordinary.ShouldBeEnabled" else "ordinary.ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "ordinary.ShouldBeEnabled" else "ordinary.ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

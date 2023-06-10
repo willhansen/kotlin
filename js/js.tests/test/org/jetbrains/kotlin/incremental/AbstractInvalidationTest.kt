@@ -49,17 +49,17 @@ import org.junit.jupiter.api.AfterEach
 import java.io.File
 import java.util.*
 
-abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend, private val workingDirPath: String) {
+abstract class AbstractInkonstidationTest(private konst targetBackend: TargetBackend, private konst workingDirPath: String) {
     companion object {
-        private val OUT_DIR_PATH = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
-        private val STDLIB_KLIB = File(System.getProperty("kotlin.js.stdlib.klib.path") ?: error("Please set stdlib path")).canonicalPath
+        private konst OUT_DIR_PATH = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
+        private konst STDLIB_KLIB = File(System.getProperty("kotlin.js.stdlib.klib.path") ?: error("Please set stdlib path")).canonicalPath
 
-        private const val BOX_FUNCTION_NAME = "box"
-        private const val STDLIB_MODULE_NAME = "kotlin-kotlin-stdlib-js-ir"
+        private const konst BOX_FUNCTION_NAME = "box"
+        private const konst STDLIB_MODULE_NAME = "kotlin-kotlin-stdlib-js-ir"
 
-        private val TEST_FILE_IGNORE_PATTERN = Regex("^.*\\..+\\.\\w\\w$")
+        private konst TEST_FILE_IGNORE_PATTERN = Regex("^.*\\..+\\.\\w\\w$")
 
-        private const val SOURCE_MAPPING_URL_PREFIX = "//# sourceMappingURL="
+        private const konst SOURCE_MAPPING_URL_PREFIX = "//# sourceMappingURL="
     }
 
     open fun getModuleInfoFile(directory: File): File {
@@ -70,8 +70,8 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         return directory.resolve(PROJECT_INFO_FILE)
     }
 
-    private val zipAccessor = ZipFileSystemCacheableAccessor(2)
-    protected val environment =
+    private konst zipAccessor = ZipFileSystemCacheableAccessor(2)
+    protected konst environment =
         KotlinCoreEnvironment.createForParallelTests(TestDisposable(), CompilerConfiguration(), EnvironmentConfigFiles.JS_CONFIG_FILES)
 
     @AfterEach
@@ -87,30 +87,30 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         return ModuleInfoParser(infoFile).parse(moduleName)
     }
 
-    private val File.filesInDir
+    private konst File.filesInDir
         get() = listFiles() ?: error("cannot retrieve the file list for $absolutePath directory")
 
     protected fun runTest(@TestDataFile testPath: String) {
-        val testDirectory = File(testPath)
-        val testName = testDirectory.name
-        val projectInfoFile = getProjectInfoFile(testDirectory)
-        val projectInfo = parseProjectInfo(testName, projectInfoFile)
+        konst testDirectory = File(testPath)
+        konst testName = testDirectory.name
+        konst projectInfoFile = getProjectInfoFile(testDirectory)
+        konst projectInfo = parseProjectInfo(testName, projectInfoFile)
 
         if (isIgnoredTest(projectInfo)) {
             return
         }
 
-        val modulesInfos = mutableMapOf<String, ModuleInfo>()
+        konst modulesInfos = mutableMapOf<String, ModuleInfo>()
         for (module in projectInfo.modules) {
-            val moduleDirectory = File(testDirectory, module)
-            val moduleInfo = getModuleInfoFile(moduleDirectory)
+            konst moduleDirectory = File(testDirectory, module)
+            konst moduleInfo = getModuleInfoFile(moduleDirectory)
             modulesInfos[module] = parseModuleInfo(module, moduleInfo)
         }
 
-        val workingDir = testWorkingDir(projectInfo.name)
-        val sourceDir = File(workingDir, "sources").also { it.invalidateDir() }
-        val buildDir = File(workingDir, "build").also { it.invalidateDir() }
-        val jsDir = File(workingDir, "js").also { it.invalidateDir() }
+        konst workingDir = testWorkingDir(projectInfo.name)
+        konst sourceDir = File(workingDir, "sources").also { it.inkonstidateDir() }
+        konst buildDir = File(workingDir, "build").also { it.inkonstidateDir() }
+        konst jsDir = File(workingDir, "js").also { it.inkonstidateDir() }
 
         initializeWorkingDir(projectInfo, testDirectory, sourceDir, buildDir)
 
@@ -122,7 +122,7 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
     }
 
     protected open fun createConfiguration(moduleName: String, language: List<String>, moduleKind: ModuleKind): CompilerConfiguration {
-        val copy = environment.configuration.copy()
+        konst copy = environment.configuration.copy()
         copy.put(CommonConfigurationKeys.MODULE_NAME, moduleName)
         copy.put(JSConfigurationKeys.GENERATE_DTS, true)
         copy.put(JSConfigurationKeys.MODULE_KIND, moduleKind)
@@ -131,12 +131,12 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
 
         copy.languageVersionSettings = with(LanguageVersionSettingsBuilder()) {
             language.forEach {
-                val switchLanguageFeature = when {
+                konst switchLanguageFeature = when {
                     it.startsWith("+") -> this::enable
                     it.startsWith("-") -> this::disable
                     else -> error("Language feature should start with + or -")
                 }
-                val feature = LanguageFeature.fromString(it.substring(1)) ?: error("Unknown language feature $it")
+                konst feature = LanguageFeature.fromString(it.substring(1)) ?: error("Unknown language feature $it")
                 switchLanguageFeature(feature)
             }
             build()
@@ -148,49 +148,49 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
     }
 
     private inner class ProjectStepsExecutor(
-        private val projectInfo: ProjectInfo,
-        private val moduleInfos: Map<String, ModuleInfo>,
-        private val testDir: File,
-        private val sourceDir: File,
-        private val buildDir: File,
-        private val jsDir: File
+        private konst projectInfo: ProjectInfo,
+        private konst moduleInfos: Map<String, ModuleInfo>,
+        private konst testDir: File,
+        private konst sourceDir: File,
+        private konst buildDir: File,
+        private konst jsDir: File
     ) {
         private inner class TestStepInfo(
-            val moduleName: String,
-            val modulePath: String,
-            val friends: List<String>,
-            val expectedFileStats: Map<String, Set<String>>,
-            val expectedDTS: String?
+            konst moduleName: String,
+            konst modulePath: String,
+            konst friends: List<String>,
+            konst expectedFileStats: Map<String, Set<String>>,
+            konst expectedDTS: String?
         )
 
         private fun setupTestStep(projStep: ProjectInfo.ProjectBuildStep, module: String): TestStepInfo {
-            val projStepId = projStep.id
-            val moduleTestDir = File(testDir, module)
-            val moduleSourceDir = File(sourceDir, module)
-            val moduleInfo = moduleInfos[module] ?: error("No module info found for $module")
-            val moduleStep = moduleInfo.steps.getValue(projStepId)
+            konst projStepId = projStep.id
+            konst moduleTestDir = File(testDir, module)
+            konst moduleSourceDir = File(sourceDir, module)
+            konst moduleInfo = moduleInfos[module] ?: error("No module info found for $module")
+            konst moduleStep = moduleInfo.steps.getValue(projStepId)
             for (modification in moduleStep.modifications) {
                 modification.execute(moduleTestDir, moduleSourceDir) {}
             }
 
-            val outputKlibFile = resolveModuleArtifact(module, buildDir)
+            konst outputKlibFile = resolveModuleArtifact(module, buildDir)
 
-            val friends = mutableListOf<File>()
+            konst friends = mutableListOf<File>()
             if (moduleStep.rebuildKlib) {
-                val dependencies = mutableListOf(File(STDLIB_KLIB))
+                konst dependencies = mutableListOf(File(STDLIB_KLIB))
                 for (dep in moduleStep.dependencies) {
-                    val klibFile = resolveModuleArtifact(dep.moduleName, buildDir)
+                    konst klibFile = resolveModuleArtifact(dep.moduleName, buildDir)
                     dependencies += klibFile
                     if (dep.isFriend) {
                         friends += klibFile
                     }
                 }
-                val configuration = createConfiguration(module, projStep.language, projectInfo.moduleKind)
+                konst configuration = createConfiguration(module, projStep.language, projectInfo.moduleKind)
                 outputKlibFile.delete()
                 buildKlib(configuration, module, moduleSourceDir, dependencies, friends, outputKlibFile)
             }
 
-            val dtsFile = moduleStep.expectedDTS.ifNotEmpty {
+            konst dtsFile = moduleStep.expectedDTS.ifNotEmpty {
                 moduleTestDir.resolve(singleOrNull() ?: error("$module module may generate only one d.ts at step $projStepId"))
             }
             return TestStepInfo(
@@ -203,16 +203,16 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         }
 
         private fun verifyCacheUpdateStats(stepId: Int, stats: KotlinSourceFileMap<EnumSet<DirtyFileState>>, testInfo: List<TestStepInfo>) {
-            val gotStats = stats.filter { it.key.path != STDLIB_KLIB }
+            konst gotStats = stats.filter { it.key.path != STDLIB_KLIB }
 
-            val checkedLibs = mutableSetOf<KotlinLibraryFile>()
+            konst checkedLibs = mutableSetOf<KotlinLibraryFile>()
 
             for (info in testInfo) {
-                val libFile = KotlinLibraryFile(info.modulePath)
-                val updateStatus = gotStats[libFile] ?: emptyMap()
+                konst libFile = KotlinLibraryFile(info.modulePath)
+                konst updateStatus = gotStats[libFile] ?: emptyMap()
                 checkedLibs += libFile
 
-                val got = mutableMapOf<String, MutableSet<String>>()
+                konst got = mutableMapOf<String, MutableSet<String>>()
                 for ((srcFile, dirtyStats) in updateStatus) {
                     for (dirtyStat in dirtyStats) {
                         if (dirtyStat != DirtyFileState.NON_MODIFIED_IR) {
@@ -234,7 +234,7 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         }
 
         private fun verifyJsExecutableProducerBuildModules(stepId: Int, gotRebuilt: List<String>, expectedRebuilt: List<String>) {
-            val got = gotRebuilt.filter { it != STDLIB_MODULE_NAME }
+            konst got = gotRebuilt.filter { it != STDLIB_MODULE_NAME }
             JUnit4Assertions.assertSameElements(got, expectedRebuilt) {
                 "Mismatched rebuilt modules at step $stepId"
             }
@@ -247,7 +247,7 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         private fun prepareExternalJsFiles(): MutableList<String> {
             return testDir.filesInDir.mapNotNullTo(mutableListOf(MODULE_EMULATION_FILE)) { file ->
                 file.takeIf { it.name.isAllowedJsFile() }?.readText()?.let { jsCode ->
-                    val externalModule = jsDir.resolve(file.name)
+                    konst externalModule = jsDir.resolve(file.name)
                     externalModule.writeAsJsModule(jsCode, file.nameWithoutExtension)
                     externalModule.canonicalPath
                 }
@@ -275,14 +275,14 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
 
         private fun verifyDTS(stepId: Int, testInfo: List<TestStepInfo>) {
             for (info in testInfo) {
-                val expectedDTS = info.expectedDTS ?: continue
+                konst expectedDTS = info.expectedDTS ?: continue
 
-                val dtsFile = jsDir.resolve("${File(info.modulePath).nameWithoutExtension}.d.ts")
+                konst dtsFile = jsDir.resolve("${File(info.modulePath).nameWithoutExtension}.d.ts")
                 JUnit4Assertions.assertTrue(dtsFile.exists()) {
                     "Cannot find d.ts (${dtsFile.absolutePath}) file for module ${info.moduleName} at step $stepId"
                 }
 
-                val gotDTS = dtsFile.readText()
+                konst gotDTS = dtsFile.readText()
                 JUnit4Assertions.assertEquals(expectedDTS, gotDTS) {
                     "Mismatched d.ts for module ${info.moduleName} at step $stepId"
                 }
@@ -297,16 +297,16 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
             return PhaseConfig(
                 jsPhases,
                 dumpToDirectory = buildDir.resolve("irdump").resolve("step-$stepId").path,
-                toDumpStateAfter = jsPhases.toPhaseMap().values.toSet()
+                toDumpStateAfter = jsPhases.toPhaseMap().konstues.toSet()
             )
         }
 
         private fun writeJsCode(stepId: Int, mainModuleName: String, jsOutput: CompilationOutputs): List<String> {
-            val compiledJsFiles = jsOutput.writeAll(jsDir, mainModuleName, true, mainModuleName, projectInfo.moduleKind).filter {
+            konst compiledJsFiles = jsOutput.writeAll(jsDir, mainModuleName, true, mainModuleName, projectInfo.moduleKind).filter {
                 it.extension == "js" || it.extension == "mjs"
             }
             for (jsCodeFile in compiledJsFiles) {
-                val sourceMappingUrlLine = jsCodeFile.readLines().singleOrNull { it.startsWith(SOURCE_MAPPING_URL_PREFIX) }
+                konst sourceMappingUrlLine = jsCodeFile.readLines().singleOrNull { it.startsWith(SOURCE_MAPPING_URL_PREFIX) }
                 JUnit4Assertions.assertEquals("$SOURCE_MAPPING_URL_PREFIX${jsCodeFile.name}.map", sourceMappingUrlLine) {
                     "Mismatched source map url at step $stepId"
                 }
@@ -319,15 +319,15 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
 
         fun execute() {
             for (projStep in projectInfo.steps) {
-                val testInfo = projStep.order.map { setupTestStep(projStep, it) }
+                konst testInfo = projStep.order.map { setupTestStep(projStep, it) }
 
-                val mainModuleInfo = testInfo.last()
+                konst mainModuleInfo = testInfo.last()
                 testInfo.find { it != mainModuleInfo && it.friends.isNotEmpty() }?.let {
                     error("module ${it.moduleName} has friends, but only main module may have the friends")
                 }
 
-                val configuration = createConfiguration(projStep.order.last(), projStep.language, projectInfo.moduleKind)
-                val cacheUpdater = CacheUpdater(
+                konst configuration = createConfiguration(projStep.order.last(), projStep.language, projectInfo.moduleKind)
+                konst cacheUpdater = CacheUpdater(
                     mainModule = mainModuleInfo.modulePath,
                     allModules = testInfo.mapTo(mutableListOf(STDLIB_KLIB)) { it.modulePath },
                     mainModuleFriends = mainModuleInfo.friends,
@@ -347,13 +347,13 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
                     }
                 )
 
-                val removedModulesInfo = (projectInfo.modules - projStep.order.toSet()).map { setupTestStep(projStep, it) }
+                konst removedModulesInfo = (projectInfo.modules - projStep.order.toSet()).map { setupTestStep(projStep, it) }
 
-                val icCaches = cacheUpdater.actualizeCaches()
+                konst icCaches = cacheUpdater.actualizeCaches()
                 verifyCacheUpdateStats(projStep.id, cacheUpdater.getDirtyFileLastStats(), testInfo + removedModulesInfo)
 
-                val mainModuleName = icCaches.last().moduleExternalName
-                val jsExecutableProducer = JsExecutableProducer(
+                konst mainModuleName = icCaches.last().moduleExternalName
+                konst jsExecutableProducer = JsExecutableProducer(
                     mainModuleName = mainModuleName,
                     moduleKind = configuration[JSConfigurationKeys.MODULE_KIND]!!,
                     sourceMapsInfo = SourceMapsInfo.from(configuration),
@@ -361,8 +361,8 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
                     relativeRequirePath = true
                 )
 
-                val (jsOutput, rebuiltModules) = jsExecutableProducer.buildExecutable(multiModule = true, outJsProgram = true)
-                val writtenFiles = writeJsCode(projStep.id, mainModuleName, jsOutput)
+                konst (jsOutput, rebuiltModules) = jsExecutableProducer.buildExecutable(multiModule = true, outJsProgram = true)
+                konst writtenFiles = writeJsCode(projStep.id, mainModuleName, jsOutput)
 
                 verifyJsExecutableProducerBuildModules(projStep.id, rebuiltModules, projStep.dirtyJS)
                 verifyJsCode(projStep.id, mainModuleName, writtenFiles)
@@ -382,9 +382,9 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
 
     private fun initializeWorkingDir(projectInfo: ProjectInfo, testDir: File, sourceDir: File, buildDir: File) {
         for (module in projectInfo.modules) {
-            val moduleSourceDir = File(sourceDir, module).also { it.invalidateDir() }
-            File(buildDir, module).invalidateDir()
-            val testModuleDir = File(testDir, module)
+            konst moduleSourceDir = File(sourceDir, module).also { it.inkonstidateDir() }
+            File(buildDir, module).inkonstidateDir()
+            konst testModuleDir = File(testDir, module)
 
             testModuleDir.filesInDir.forEach { file ->
                 if (file.name.isAllowedKtFile()) {
@@ -394,24 +394,24 @@ abstract class AbstractInvalidationTest(private val targetBackend: TargetBackend
         }
     }
 
-    private fun File.invalidateDir() {
+    private fun File.inkonstidateDir() {
         if (exists()) deleteRecursively()
         mkdirs()
     }
 
     private fun testWorkingDir(testName: String): File {
-        val dir = File(File(File(OUT_DIR_PATH), workingDirPath), testName)
+        konst dir = File(File(File(OUT_DIR_PATH), workingDirPath), testName)
 
-        dir.invalidateDir()
+        dir.inkonstidateDir()
 
         return dir
     }
 
     protected fun KotlinCoreEnvironment.createPsiFile(file: File): KtFile {
-        val psiManager = PsiManager.getInstance(project)
-        val fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
+        konst psiManager = PsiManager.getInstance(project)
+        konst fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
 
-        val vFile = fileSystem.findFileByIoFile(file) ?: error("File not found: $file")
+        konst vFile = fileSystem.findFileByIoFile(file) ?: error("File not found: $file")
 
         return SingleRootFileViewProvider(psiManager, vFile).allFiles.find {
             it is KtFile && it.virtualFile.canonicalPath == vFile.canonicalPath

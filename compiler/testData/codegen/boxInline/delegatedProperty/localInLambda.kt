@@ -9,7 +9,7 @@ class Delegate {
 }
 
 inline fun test(): String {
-    val b by Delegate()
+    konst b by Delegate()
 
     return run {
         b

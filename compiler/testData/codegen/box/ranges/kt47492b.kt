@@ -7,9 +7,9 @@ fun p() {}
 
 fun box(): String {
     try {
-        val h1 = 1
-        val h2 = 2L
-        val h3 = 3L
+        konst h1 = 1
+        konst h2 = 2L
+        konst h3 = 3L
     } catch (e: Exception) { throw e }
     var sum = 1
     for (i: Int? in a() downTo b())

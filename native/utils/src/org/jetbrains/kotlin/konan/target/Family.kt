@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.konan.target
 
 enum class Family(
-    val exeSuffix: String,
-    val dynamicPrefix: String,
-    val dynamicSuffix: String,
-    val staticPrefix: String,
-    val staticSuffix: String
+    konst exeSuffix: String,
+    konst dynamicPrefix: String,
+    konst dynamicSuffix: String,
+    konst staticPrefix: String,
+    konst staticSuffix: String
 ) {
     OSX("kexe", "lib", "dylib", "lib", "a"),
     IOS("kexe", "lib", "dylib", "lib", "a"),
@@ -22,6 +22,6 @@ enum class Family(
     WASM("wasm", "", "wasm", "", "wasm"),
     ZEPHYR("o", "lib", "a", "lib", "a");
 
-    val isAppleFamily: Boolean
+    konst isAppleFamily: Boolean
         get() = this == OSX || this == IOS || this == TVOS || this == WATCHOS
 }

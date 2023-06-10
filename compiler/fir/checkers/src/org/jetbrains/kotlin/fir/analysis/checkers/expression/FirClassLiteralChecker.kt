@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.resolve.checkers.OptInNames
 
 object FirClassLiteralChecker : FirGetClassCallChecker() {
     override fun check(expression: FirGetClassCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = expression.source ?: return
+        konst source = expression.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
-        val argument = expression.argument
+        konst argument = expression.argument
         if (argument is FirResolvedQualifier) {
-            val classId = argument.classId
+            konst classId = argument.classId
             if (classId == OptInNames.REQUIRES_OPT_IN_CLASS_ID || classId == OptInNames.OPT_IN_CLASS_ID) {
                 reporter.reportOn(argument.source, FirErrors.OPT_IN_CAN_ONLY_BE_USED_AS_ANNOTATION, context)
             }
@@ -44,9 +44,9 @@ object FirClassLiteralChecker : FirGetClassCallChecker() {
         // A<T?>?::class -> CLASS_LITERAL_EXPRESSION(REFERENCE_EXPRESSION TYPE_ARGUMENT_LIST QUEST COLONCOLON "class")
         //   where TYPE_ARGUMENT_LIST may have QUEST in it
         //
-        // Only the 2nd example is valid, and we want to check if token type QUEST doesn't exist at the same level as COLONCOLON.
-        val markedNullable = source.getChild(QUEST, depth = 1) != null
-        val isNullable = markedNullable ||
+        // Only the 2nd example is konstid, and we want to check if token type QUEST doesn't exist at the same level as COLONCOLON.
+        konst markedNullable = source.getChild(QUEST, depth = 1) != null
+        konst isNullable = markedNullable ||
                 (argument as? FirResolvedQualifier)?.isNullableLHSForCallableReference == true ||
                 argument.typeRef.coneType.isMarkedNullable ||
                 argument.typeRef.coneType.isNullableTypeParameter(context.session.typeContext)
@@ -74,12 +74,12 @@ object FirClassLiteralChecker : FirGetClassCallChecker() {
         if (argument !is FirResolvedQualifier) return
         // TODO: differentiate RESERVED_SYNTAX_IN_CALLABLE_REFERENCE_LHS
         if (argument.typeArguments.isNotEmpty() && !argument.typeRef.coneType.isAllowedInClassLiteral(context)) {
-            val symbol = argument.symbol
+            konst symbol = argument.symbol
             symbol?.lazyResolveToPhase(FirResolvePhase.TYPES)
             @OptIn(SymbolInternals::class)
-            val typeParameters = (symbol?.fir as? FirTypeParameterRefsOwner)?.typeParameters
+            konst typeParameters = (symbol?.fir as? FirTypeParameterRefsOwner)?.typeParameters
             // Among type parameter references, only count actual type parameter while discarding [FirOuterClassTypeParameterRef]
-            val expectedTypeArgumentSize = typeParameters?.count { it is FirTypeParameter } ?: 0
+            konst expectedTypeArgumentSize = typeParameters?.count { it is FirTypeParameter } ?: 0
             if (expectedTypeArgumentSize != argument.typeArguments.size) {
                 // Will be reported as WRONG_NUMBER_OF_TYPE_ARGUMENTS
                 return
@@ -90,7 +90,7 @@ object FirClassLiteralChecker : FirGetClassCallChecker() {
 
     private fun ConeKotlinType.isNullableTypeParameter(context: ConeInferenceContext): Boolean {
         if (this !is ConeTypeParameterType) return false
-        val typeParameter = lookupTag.typeParameterSymbol
+        konst typeParameter = lookupTag.typeParameterSymbol
         with(context) {
             return !typeParameter.isReified &&
                     // E.g., fun <T> f2(t: T): Any = t::class
@@ -98,14 +98,14 @@ object FirClassLiteralChecker : FirGetClassCallChecker() {
         }
     }
 
-    private val FirExpression.canBeDoubleColonLHSAsType: Boolean
+    private konst FirExpression.canBeDoubleColonLHSAsType: Boolean
         get() {
             return this is FirResolvedQualifier ||
                     this is FirResolvedReifiedParameterReference ||
                     safeAsTypeParameterSymbol != null
         }
 
-    private val FirExpression.safeAsTypeParameterSymbol: FirTypeParameterSymbol?
+    private konst FirExpression.safeAsTypeParameterSymbol: FirTypeParameterSymbol?
         get() {
             return (this as? FirQualifiedAccessExpression)?.calleeReference?.toResolvedTypeParameterSymbol()
         }

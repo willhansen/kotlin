@@ -3,8 +3,8 @@ class A {
 
     private var Int.foo: String
         get() = result
-        private set(value) {
-            result = value
+        private set(konstue) {
+            result = konstue
         }
 
     fun run(): String {

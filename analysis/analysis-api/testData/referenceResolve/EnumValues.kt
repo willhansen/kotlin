@@ -4,5 +4,5 @@ enum class E {
     LOL
 }
 
-val values = E.val<caret>ues()
+konst konstues = E.konst<caret>ues()
 

@@ -14,7 +14,7 @@ class D : A, B {
 }
 
 fun test(c: C, d: D): String {
-    val intersection = select(c, d)
+    konst intersection = select(c, d)
     return object: B by intersection {}.foo()
 }
 

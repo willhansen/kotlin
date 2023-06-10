@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirCheckedSafeCallSubjectBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     lateinit var originalReceiverRef: FirExpressionRef<FirExpression>
 
     override fun build(): FirCheckedSafeCallSubject {

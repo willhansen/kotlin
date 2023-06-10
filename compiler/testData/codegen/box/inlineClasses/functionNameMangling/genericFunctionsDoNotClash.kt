@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S1(val s1: String)
+konstue class S1(konst s1: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S2(val s2: String)
+konstue class S2(konst s2: String)
 
 object X1
 object X2

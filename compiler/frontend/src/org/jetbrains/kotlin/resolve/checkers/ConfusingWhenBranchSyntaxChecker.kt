@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.BindingTrace
 
 object ConfusingWhenBranchSyntaxChecker {
-    private val prohibitedTokens = TokenSet.create(
+    private konst prohibitedTokens = TokenSet.create(
         IN_KEYWORD, NOT_IN,
         LT, LTEQ, GT, GTEQ,
         EQEQ, EXCLEQ, EQEQEQ, EXCLEQEQEQ,
@@ -39,7 +39,7 @@ object ConfusingWhenBranchSyntaxChecker {
     private fun checkConditionExpression(rawExpression: KtExpression?, languageVersionSettings: LanguageVersionSettings, trace: BindingTrace) {
         if (rawExpression == null) return
         if (rawExpression is KtParenthesizedExpression) return
-        val shouldReport = when (val expression = KtPsiUtil.safeDeparenthesize(rawExpression)) {
+        konst shouldReport = when (konst expression = KtPsiUtil.safeDeparenthesize(rawExpression)) {
             is KtIsExpression -> true
             is KtBinaryExpression -> expression.operationToken in prohibitedTokens
             else -> false

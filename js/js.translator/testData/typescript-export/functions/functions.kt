@@ -64,7 +64,7 @@ inline fun inlineFun(x: Int, callback: (Int) -> Unit) {
 }
 
 @JsExport
-fun formatList(value: List<*>): String = value.joinToString(", ") { it.toString() }
+fun formatList(konstue: List<*>): String = konstue.joinToString(", ") { it.toString() }
 
 @JsExport
 fun createList(): List<*> = listOf(1, 2, 3)

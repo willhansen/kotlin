@@ -2,7 +2,7 @@
 
 class A<T> {
     operator fun get(index: Int): T = null!!
-    operator fun set(index: Int, value: T) {}
+    operator fun set(index: Int, konstue: T) {}
 }
 
 class B {

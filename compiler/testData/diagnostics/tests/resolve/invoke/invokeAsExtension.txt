@@ -1,6 +1,6 @@
 package
 
-public val B.foo: Foo
+public konst B.foo: Foo
 public fun test(/*0*/ a: A): kotlin.Unit
 public fun test(/*0*/ b: B): kotlin.Unit
 public fun test(/*0*/ d: D, /*1*/ c: C): kotlin.Unit
@@ -8,7 +8,7 @@ public fun test(/*0*/ foo: Foo): kotlin.Unit
 public operator fun Foo.invoke(): kotlin.Unit
 
 public interface A {
-    public abstract val foo: Foo
+    public abstract konst foo: Foo
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -27,7 +27,7 @@ public interface C {
 }
 
 public interface D {
-    public abstract val C.foo: Foo
+    public abstract konst C.foo: Foo
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open fun test(/*0*/ c: C): kotlin.Unit

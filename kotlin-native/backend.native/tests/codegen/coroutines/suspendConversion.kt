@@ -8,7 +8,7 @@ import kotlin.test.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
@@ -20,7 +20,7 @@ fun builder(c: suspend () -> Unit) {
 fun main() {
     var result = 0
 
-    val f: () -> Unit = { result = 42 }
+    konst f: () -> Unit = { result = 42 }
     builder(f)
 
     assertEquals(42, result)

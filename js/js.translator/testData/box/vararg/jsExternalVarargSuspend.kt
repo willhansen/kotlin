@@ -75,20 +75,20 @@ fun box(): String {
 
     builder {
         result += foo()[0]
-        val b = bar()
+        konst b = bar()
         result += b[0]
         result += b[1]
         result += b[2]
-        val q = qux()
+        konst q = qux()
         result += q[0]
         result += q[1]
-        val t = tef()
+        konst t = tef()
         result += t[0]
         result += t[1]
         result += t[2]
         result += t[3]
         result += t[4]
-        val bx = bux()
+        konst bx = bux()
         result += bx[0]
         result += bx[1]
         result += bx[2]
@@ -99,21 +99,21 @@ fun box(): String {
     result = ""
 
     builder {
-        val f = foo2()
+        konst f = foo2()
         result += f[0]
         result += f[1]
         result += f[2]
-        val b = bar2()
+        konst b = bar2()
         result += b[0]
         result += b[1]
         result += b[2]
         result += b[3]
         result += b[4]
-        val q = qux2()
+        konst q = qux2()
         result += q[0]
         result += q[1]
         result += q[2]
-        val t = tef2()
+        konst t = tef2()
         result += t[0]
         result += t[1]
         result += t[2]
@@ -121,7 +121,7 @@ fun box(): String {
         result += t[4]
         result += t[5]
         result += t[6]
-        val bx = bux2()
+        konst bx = bux2()
         result += bx[0]
         result += bx[1]
         result += bx[2]

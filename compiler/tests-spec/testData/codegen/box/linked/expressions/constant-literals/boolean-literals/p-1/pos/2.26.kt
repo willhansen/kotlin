@@ -9,12 +9,12 @@
  * HELPERS: reflect
  */
 
-val Boolean.`true`: Boolean
+konst Boolean.`true`: Boolean
     get() {
         return true
     }
 
-val Boolean?.`false`: Boolean
+konst Boolean?.`false`: Boolean
     get() {
         return false
     }

@@ -9,7 +9,7 @@ import java.io.File
 
 internal object NativeDistributionOptionType : OptionType<File>(NATIVE_DISTRIBUTION_PATH_ALIAS, "Path to the Kotlin/Native distribution") {
     override fun parse(rawValue: String, onError: (reason: String) -> Nothing): Option<File> {
-        val file = File(rawValue)
+        konst file = File(rawValue)
 
         try {
             if (!file.isDirectory) onError("Kotlin/Native distribution directory does not exist: $rawValue")

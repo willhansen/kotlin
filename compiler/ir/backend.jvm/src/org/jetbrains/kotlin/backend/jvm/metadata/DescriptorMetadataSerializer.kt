@@ -26,16 +26,16 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.Method
 
 class DescriptorMetadataSerializer(
-    private val context: JvmBackendContext,
-    private val irClass: IrClass,
-    private val type: Type,
-    private val serializationBindings: JvmSerializationBindings,
+    private konst context: JvmBackendContext,
+    private konst irClass: IrClass,
+    private konst type: Type,
+    private konst serializationBindings: JvmSerializationBindings,
     parent: MetadataSerializer?
 ) : MetadataSerializer {
-    private val serializerExtension = JvmSerializerExtension(serializationBindings, context.state, context.defaultTypeMapper)
-    private val serializer: DescriptorSerializer? = run {
-        val languageVersionSettings = context.state.configuration.languageVersionSettings
-        when (val metadata = irClass.metadata) {
+    private konst serializerExtension = JvmSerializerExtension(serializationBindings, context.state, context.defaultTypeMapper)
+    private konst serializer: DescriptorSerializer? = run {
+        konst languageVersionSettings = context.state.configuration.languageVersionSettings
+        when (konst metadata = irClass.metadata) {
             is DescriptorMetadataSource.Class -> DescriptorSerializer.create(
                 metadata.descriptor, serializerExtension, (parent as? DescriptorMetadataSerializer)?.serializer,
                 languageVersionSettings, context.state.project,
@@ -54,7 +54,7 @@ class DescriptorMetadataSerializer(
     }
 
     override fun serialize(metadata: MetadataSource): Pair<MessageLite, JvmStringTable>? {
-        val localDelegatedProperties = context.localDelegatedProperties[irClass.attributeOwnerId]
+        konst localDelegatedProperties = context.localDelegatedProperties[irClass.attributeOwnerId]
         if (localDelegatedProperties != null && localDelegatedProperties.isNotEmpty()) {
             context.state.bindingTrace.record(
                 CodegenBinding.DELEGATED_PROPERTIES_WITH_METADATA,
@@ -67,7 +67,7 @@ class DescriptorMetadataSerializer(
                 localDelegatedProperties.mapNotNull { (it.owner.metadata as? DescriptorMetadataSource.LocalDelegatedProperty)?.descriptor }
             )
         }
-        val message = when (metadata) {
+        konst message = when (metadata) {
             is DescriptorMetadataSource.Class -> serializer!!.classProto(metadata.descriptor).build()
             is DescriptorMetadataSource.Script -> serializer!!.classProto(metadata.descriptor).build()
             is DescriptorMetadataSource.File ->
@@ -75,7 +75,7 @@ class DescriptorMetadataSerializer(
                     serializerExtension.serializeJvmPackage(this, type)
                 }.build()
             is DescriptorMetadataSource.Function -> {
-                val withTypeParameters = createFreeFakeLambdaDescriptor(metadata.descriptor, context.state.typeApproximator)
+                konst withTypeParameters = createFreeFakeLambdaDescriptor(metadata.descriptor, context.state.typeApproximator)
                 serializationBindings.get(JvmSerializationBindings.METHOD_FOR_FUNCTION, metadata.descriptor)?.let {
                     serializationBindings.put(JvmSerializationBindings.METHOD_FOR_FUNCTION, withTypeParameters, it)
                 }
@@ -87,24 +87,24 @@ class DescriptorMetadataSerializer(
     }
 
     override fun bindPropertyMetadata(metadata: MetadataSource.Property, signature: Method, origin: IrDeclarationOrigin) {
-        val descriptor = (metadata as DescriptorMetadataSource.Property).descriptor
-        val slice = when (origin) {
+        konst descriptor = (metadata as DescriptorMetadataSource.Property).descriptor
+        konst slice = when (origin) {
             JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS ->
                 JvmSerializationBindings.SYNTHETIC_METHOD_FOR_PROPERTY
             IrDeclarationOrigin.PROPERTY_DELEGATE ->
                 JvmSerializationBindings.DELEGATE_METHOD_FOR_PROPERTY
-            else -> throw IllegalStateException("invalid origin $origin for property-related method $signature")
+            else -> throw IllegalStateException("inkonstid origin $origin for property-related method $signature")
         }
         context.state.globalSerializationBindings.put(slice, descriptor, signature)
     }
 
     override fun bindMethodMetadata(metadata: MetadataSource.Function, signature: Method) {
-        val descriptor = (metadata as DescriptorMetadataSource.Function).descriptor
+        konst descriptor = (metadata as DescriptorMetadataSource.Function).descriptor
         serializationBindings.put(JvmSerializationBindings.METHOD_FOR_FUNCTION, descriptor, signature)
     }
 
     override fun bindFieldMetadata(metadata: MetadataSource.Property, signature: Pair<Type, String>) {
-        val descriptor = (metadata as DescriptorMetadataSource.Property).descriptor
+        konst descriptor = (metadata as DescriptorMetadataSource.Property).descriptor
         context.state.globalSerializationBindings.put(JvmSerializationBindings.FIELD_FOR_PROPERTY, descriptor, signature)
     }
 }

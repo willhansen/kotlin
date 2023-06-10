@@ -24,7 +24,7 @@ public final class B : A {
 
     public final class D {
         public constructor D(/*0*/ x: B = ...)
-        public final val x: B
+        public final konst x: B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -32,7 +32,7 @@ public final class B : A {
 
     public final class E : P {
         public constructor E()
-        public final override /*1*/ /*fake_override*/ val z: B
+        public final override /*1*/ /*fake_override*/ konst z: B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -41,7 +41,7 @@ public final class B : A {
 
 public open class P {
     public constructor P(/*0*/ z: B)
-    public final val z: B
+    public final konst z: B
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

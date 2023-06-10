@@ -22,7 +22,7 @@ class B<T>(data: T) : A<T>(data)
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val tryVal =
+    konst tryVal =
         try {
             throwExceptionA(false)
             A("")
@@ -37,7 +37,7 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val tryVal =
+    konst tryVal =
         try {
             throwExceptionA(false)
             A("")
@@ -52,7 +52,7 @@ fun case2() {
 // TESTCASE NUMBER: 3
 
 fun case3() {
-    val tryVal =
+    konst tryVal =
         try {
             throwExceptionA(false)
             A(2)

@@ -1,18 +1,18 @@
 package unresolved
 
-class Pair<A, B>(val a: A, val b: B)
+class Pair<A, B>(konst a: A, konst b: B)
 
 fun testGenericArgumentsCount() {
-    val p1: Pair<!WRONG_NUMBER_OF_TYPE_ARGUMENTS!><Int><!> = Pair(2, 2)
-    val p2: <!WRONG_NUMBER_OF_TYPE_ARGUMENTS!>Pair<!> = Pair(2, 2)
+    konst p1: Pair<!WRONG_NUMBER_OF_TYPE_ARGUMENTS!><Int><!> = Pair(2, 2)
+    konst p2: <!WRONG_NUMBER_OF_TYPE_ARGUMENTS!>Pair<!> = Pair(2, 2)
 }
 
 fun testUnresolved() {
     if (<!UNRESOLVED_REFERENCE!>a<!> is String) {
-        val s = <!UNRESOLVED_REFERENCE!>a<!>
+        konst s = <!UNRESOLVED_REFERENCE!>a<!>
     }
     <!UNRESOLVED_REFERENCE!>foo<!>(<!UNRESOLVED_REFERENCE!>a<!>)
-    val s = "s"
+    konst s = "s"
     <!UNRESOLVED_REFERENCE!>foo<!>(s)
     foo1(<!UNRESOLVED_REFERENCE!>i<!>)
     s.<!UNRESOLVED_REFERENCE!>foo<!>()

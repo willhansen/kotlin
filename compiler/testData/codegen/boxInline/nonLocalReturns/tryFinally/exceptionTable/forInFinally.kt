@@ -21,7 +21,7 @@ public inline fun doCall(block: (i: Int)-> Int, fblock: (i: Int)-> Unit) : Int {
 import test.*
 
 class Holder {
-    var value: Int = 0
+    var konstue: Int = 0
 }
 
 fun test1(): Int {
@@ -43,18 +43,18 @@ fun test11(h: Holder): Int {
             {
                 return -100
             }, {
-                h.value += it
+                h.konstue += it
             })
 }
 
 
 fun box(): String {
-    val test1 = test1()
+    konst test1 = test1()
     if (test1 != 935) return "test1: ${test1}"
 
-    val h = Holder()
-    val test11 = test11(h)
-    if (test11 != -100 && h.value != 55) return "test11: ${test11} holder: ${h.value}"
+    konst h = Holder()
+    konst test11 = test11(h)
+    if (test11 != -100 && h.konstue != 55) return "test11: ${test11} holder: ${h.konstue}"
 
     return "OK"
 }

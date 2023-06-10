@@ -6,7 +6,7 @@ FILE: externalSerializers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val j: R|kotlin/Int| = R|<local>/j|
+        public final konst j: R|kotlin/Int| = R|<local>/j|
             public get(): R|kotlin/Int|
 
     }
@@ -15,10 +15,10 @@ FILE: externalSerializers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+        public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
             public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
-        public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|com/example/Data|): R|kotlin/Unit|
+        public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|com/example/Data|): R|kotlin/Unit|
 
         public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|com/example/Data|
 
@@ -28,23 +28,23 @@ FILE: externalSerializers.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
+        public final konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor|
             public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
-        public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|com/example/Data|): R|kotlin/Unit|
+        public final fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|com/example/Data|): R|kotlin/Unit|
 
         public final fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|com/example/Data|
 
     }
     public final fun box(): R|kotlin/String| {
-        lval encodedForClass: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|com/example/Data|>(R|com/example/ClassSerializer.ClassSerializer|(), R|com/example/Data.Data|(Int(1)))
+        lkonst encodedForClass: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|com/example/Data|>(R|com/example/ClassSerializer.ClassSerializer|(), R|com/example/Data.Data|(Int(1)))
         when () {
             !=(R|<local>/encodedForClass|, String({"j":1})) ->  {
                 ^box R|<local>/encodedForClass|
             }
         }
 
-        lval encodedForObject: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|com/example/Data|>(Q|com/example/ObjectSerializer|, R|com/example/Data.Data|(Int(2)))
+        lkonst encodedForObject: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|com/example/Data|>(Q|com/example/ObjectSerializer|, R|com/example/Data.Data|(Int(2)))
         when () {
             !=(R|<local>/encodedForObject|, String({"j":2})) ->  {
                 ^box R|<local>/encodedForObject|

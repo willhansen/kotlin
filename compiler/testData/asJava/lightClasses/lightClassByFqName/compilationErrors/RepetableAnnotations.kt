@@ -24,10 +24,10 @@ class Annotations {
 
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class S(val g: String)
+annotation class S(konst g: String)
 
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
-annotation class R(val s: String)
+annotation class R(konst s: String)
 
 // FIR_COMPARISON

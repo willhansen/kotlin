@@ -12,7 +12,7 @@ class A : B {
     constructor(): super()
 }
 
-val b1 = B()
-val b2 = B("1", "2", "3")
-val b3 = B("1", *array("2", "3"), "4")
-val b4 = B(1)
+konst b1 = B()
+konst b2 = B("1", "2", "3")
+konst b3 = B("1", *array("2", "3"), "4")
+konst b4 = B(1)

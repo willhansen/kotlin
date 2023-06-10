@@ -24,16 +24,16 @@ class DiagnosticMessagesTextHandler(
     testServices: TestServices
 ) : ClassicFrontendAnalysisHandler(testServices) {
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(DiagnosticsDirectives)
 
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper(moduleHeaderTemplate = "// -- Module: <%s> --")
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val resultDump = dumper.generateResultingDump()
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val expectedFile = testDataFile.withExtension(".diag.txt")
+        konst resultDump = dumper.generateResultingDump()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst expectedFile = testDataFile.withExtension(".diag.txt")
         assertions.assertEqualsToFile(expectedFile, resultDump)
     }
 
@@ -41,9 +41,9 @@ class DiagnosticMessagesTextHandler(
     override fun processModule(module: TestModule, info: ClassicFrontendOutputArtifact) {
         if (DiagnosticsDirectives.RENDER_DIAGNOSTICS_FULL_TEXT !in module.directives) return
 
-        val diagnosticsFullTextByteArrayStream = ByteArrayOutputStream()
-        val diagnosticsFullTextPrintStream = PrintStream(diagnosticsFullTextByteArrayStream)
-        val diagnosticsFullTextCollector =
+        konst diagnosticsFullTextByteArrayStream = ByteArrayOutputStream()
+        konst diagnosticsFullTextPrintStream = PrintStream(diagnosticsFullTextByteArrayStream)
+        konst diagnosticsFullTextCollector =
             GroupingMessageCollector(
                 PrintingMessageCollector(diagnosticsFullTextPrintStream, MessageRenderer.SYSTEM_INDEPENDENT_RELATIVE_PATHS, true),
                 false

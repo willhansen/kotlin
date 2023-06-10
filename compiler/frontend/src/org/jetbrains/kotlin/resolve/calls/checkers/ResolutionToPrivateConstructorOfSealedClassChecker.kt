@@ -18,11 +18,11 @@ object ResolutionToPrivateConstructorOfSealedClassChecker : CallChecker {
         // If AllowSealedInheritorsInDifferentFilesOfSamePackage disabled then all sealed constructors are private by default
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.AllowSealedInheritorsInDifferentFilesOfSamePackage)) return
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.UseConsistentRulesForPrivateConstructorsOfSealedClasses)) return
-        val descriptor = resolvedCall.resultingDescriptor as? ConstructorDescriptor ?: return
+        konst descriptor = resolvedCall.resultingDescriptor as? ConstructorDescriptor ?: return
         if (descriptor.visibility != DescriptorVisibilities.PRIVATE) return
         if (!descriptor.constructedClass.isSealed()) return
-        val containingDescriptor = context.scope.ownerDescriptor
-        val receiver = resolvedCall.dispatchReceiver ?: DescriptorVisibilities.ALWAYS_SUITABLE_RECEIVER
+        konst containingDescriptor = context.scope.ownerDescriptor
+        konst receiver = resolvedCall.dispatchReceiver ?: DescriptorVisibilities.ALWAYS_SUITABLE_RECEIVER
         if (DescriptorVisibilities.findInvisibleMember(receiver, descriptor, containingDescriptor, false) != null) {
             context.trace.report(Errors.RESOLUTION_TO_PRIVATE_CONSTRUCTOR_OF_SEALED_CLASS.on(reportOn))
         }

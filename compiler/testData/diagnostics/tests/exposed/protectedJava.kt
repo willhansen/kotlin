@@ -10,8 +10,8 @@ public abstract class Outer {
 // FILE: OuterDerived.kt
 
 class OuterDerived: Outer() {
-    // valid, My has better visibility
+    // konstid, My has better visibility
     protected class His: Outer.My()
-    // valid, My and Your have better visibility
+    // konstid, My and Your have better visibility
     override fun foo(my: Outer.My) = Outer.Your()
 }

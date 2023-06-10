@@ -1,9 +1,9 @@
-private val x = object {
+private konst x = object {
     fun foo(x: Int) = /* here we have not computed return type for "bar" */bar(x)
     fun bar(y: Int) = this.hashCode() + y > 0
 
-    val w get() = z
-    val z get() = this.hashCode() == 0
+    konst w get() = z
+    konst z get() = this.hashCode() == 0
 }
 
 fun useBoolean(b: Boolean) {}

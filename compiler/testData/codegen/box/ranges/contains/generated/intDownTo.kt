@@ -3,15 +3,15 @@
 
 
 
-val range0 = 1 downTo 3
-val range1 = 3 downTo 1
+konst range0 = 1 downTo 3
+konst range1 = 3 downTo 1
 
-val element0 = -1
-val element1 = 0
-val element2 = 1
-val element3 = 2
-val element4 = 3
-val element5 = 4
+konst element0 = -1
+konst element1 = 0
+konst element2 = 1
+konst element3 = 2
+konst element4 = 3
+konst element5 = 4
 
 fun box(): String {
     testR0xE0()

@@ -12,20 +12,20 @@ import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 class MissingSupertypesResolver(
     storageManager: StorageManager,
-    private val moduleDescriptor: ModuleDescriptor
+    private konst moduleDescriptor: ModuleDescriptor
 ) {
     fun getMissingSuperClassifiers(descriptor: ClassifierDescriptor) = missingClassifiers(descriptor)
 
-    private val missingClassifiers = storageManager.createMemoizedFunction { classifier: ClassifierDescriptor ->
+    private konst missingClassifiers = storageManager.createMemoizedFunction { classifier: ClassifierDescriptor ->
         doGetMissingClassifiers(classifier)
     }
 
     private fun doGetMissingClassifiers(descriptor: ClassifierDescriptor): Set<ClassifierDescriptor> {
-        val missingSuperClassifiers = mutableSetOf<ClassifierDescriptor>()
-        val type = descriptor.defaultType
+        konst missingSuperClassifiers = mutableSetOf<ClassifierDescriptor>()
+        konst type = descriptor.defaultType
 
         for (supertype in type.supertypes()) {
-            val supertypeDeclaration = supertype.constructor.declarationDescriptor
+            konst supertypeDeclaration = supertype.constructor.declarationDescriptor
 
             /*
             * TODO: expects are not checked, because findClassAcrossModuleDependencies does not work with actualization via type alias
@@ -34,8 +34,8 @@ class MissingSupertypesResolver(
             if (supertypeDeclaration !is ClassDescriptor || supertypeDeclaration.isExpect) continue
             if (supertypeDeclaration.visibility == DescriptorVisibilities.LOCAL) continue
 
-            val superTypeClassId = supertypeDeclaration.classId ?: continue
-            val dependency = moduleDescriptor.findClassAcrossModuleDependencies(superTypeClassId)
+            konst superTypeClassId = supertypeDeclaration.classId ?: continue
+            konst dependency = moduleDescriptor.findClassAcrossModuleDependencies(superTypeClassId)
 
             if (dependency == null || dependency is NotFoundClasses.MockClassDescriptor) {
                 missingSuperClassifiers.add(supertypeDeclaration)

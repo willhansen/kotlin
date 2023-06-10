@@ -1,4 +1,4 @@
-class A(val x: Int)
+class A(konst x: Int)
 
 operator fun A.compareTo(other: A) = x.compareTo(other.x)
 

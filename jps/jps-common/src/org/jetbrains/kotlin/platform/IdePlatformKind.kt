@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.platform.impl.WasmIdePlatformKind
 abstract class IdePlatformKind {
     abstract fun supportsTargetPlatform(platform: TargetPlatform): Boolean
 
-    abstract val defaultPlatform: TargetPlatform
+    abstract konst defaultPlatform: TargetPlatform
 
     @Suppress("DEPRECATION_ERROR", "DeprecatedCallableAddReplaceWith")
     @Deprecated(
@@ -31,9 +31,9 @@ abstract class IdePlatformKind {
 
     abstract fun platformByCompilerArguments(arguments: CommonCompilerArguments): TargetPlatform?
 
-    abstract val argumentsClass: Class<out CommonCompilerArguments>
+    abstract konst argumentsClass: Class<out CommonCompilerArguments>
 
-    abstract val name: String
+    abstract konst name: String
 
     abstract fun createArguments(): CommonCompilerArguments
 
@@ -44,13 +44,13 @@ abstract class IdePlatformKind {
 
     companion object {
         // We can't use the ApplicationExtensionDescriptor class directly because it's missing in the JPS process
-        private val extension = run {
+        private konst extension = run {
             if (isJps) return@run null
             ApplicationExtensionDescriptor("org.jetbrains.kotlin.idePlatformKind", IdePlatformKind::class.java)
         }
 
         // For using only in JPS
-        private val JPS_KINDS
+        private konst JPS_KINDS
             get() = listOf(
                 JvmIdePlatformKind,
                 JsIdePlatformKind,
@@ -59,8 +59,8 @@ abstract class IdePlatformKind {
                 NativeIdePlatformKind
             )
 
-        val ALL_KINDS by lazy {
-            val kinds = extension?.getInstances() ?: return@lazy JPS_KINDS
+        konst ALL_KINDS by lazy {
+            konst kinds = extension?.getInstances() ?: return@lazy JPS_KINDS
             require(kinds.isNotEmpty()) { "Platform kind list is empty" }
             kinds
         }
@@ -72,7 +72,7 @@ abstract class IdePlatformKind {
     }
 }
 
-val TargetPlatform.idePlatformKind: IdePlatformKind
+konst TargetPlatform.idePlatformKind: IdePlatformKind
     get() = IdePlatformKind.ALL_KINDS.filter { it.supportsTargetPlatform(this) }.let { list ->
         when {
             list.size == 1 -> list.first()

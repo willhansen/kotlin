@@ -24,19 +24,19 @@ fun d() {
 fun use(arg: Any) = arg
 
 fun f(cond: Boolean) {
-    val bar: Any
+    konst bar: Any
     do {
         if (cond) {
-            bar = "value"
+            bar = "konstue"
             break
         }
     } while (true)
     use(bar) // should work
 
-    val foo: Any
+    konst foo: Any
     while (true) {
         if (cond) {
-            foo = "value"
+            foo = "konstue"
             break
         }
     }

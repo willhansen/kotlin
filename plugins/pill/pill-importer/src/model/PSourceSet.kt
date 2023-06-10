@@ -8,11 +8,11 @@ package org.jetbrains.kotlin.pill.model
 import java.io.File
 
 data class PSourceSet(
-    val name: String,
-    val forTests: Boolean,
-    val sourceDirectories: List<File>,
-    val resourceDirectories: List<File>,
-    val kotlinOptions: PSourceRootKotlinOptions?,
-    val compileClasspathConfigurationName: String,
-    val runtimeClasspathConfigurationName: String
+    konst name: String,
+    konst forTests: Boolean,
+    konst sourceDirectories: List<File>,
+    konst resourceDirectories: List<File>,
+    konst kotlinOptions: PSourceRootKotlinOptions?,
+    konst compileClasspathConfigurationName: String,
+    konst runtimeClasspathConfigurationName: String
 )

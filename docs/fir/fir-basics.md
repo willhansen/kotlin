@@ -22,7 +22,7 @@ List of all FIR phases which exists in the compiler right now:
 - **SEALED_CLASS_INHERITORS**: At this stage, the compiler collects and records all inheritors of non-local sealed classes.
 - **TYPES**: At this stage, the compiler resolves all other explicitly written types in declaration headers, including:
     - explicit return types of members
-    - types of value parameters of functions
+    - types of konstue parameters of functions
     - extension receivers of members
     - bounds of type parameters
     - types of annotations (without resolution of annotation arguments)
@@ -55,7 +55,7 @@ There are three main kinds of FirElement:
 - [FirTypeRef](https://github.com/JetBrains/kotlin/blob/master/compiler/fir/tree/gen/org/jetbrains/kotlin/fir/types/FirTypeRef.kt) is a base class for any reference to the type in the user code. There is a difference between a type and a type reference in FIR. Type references are FIR elements inheriting `FirTypeRef` and contain actual ConeKotlinType..
   of [ConeKotlinType](https://github.com/JetBrains/kotlin/blob/master/compiler/fir/cones/src/org/jetbrains/kotlin/fir/types/ConeTypes.kt) is a similar concept to `KotlinType` from FE1.0. There are three main kinds of `FirTypeRef`:
     - unresolved type refs (`FirUserTypeRef`) represent types refs explicitly declared in source code but not yet resolved to a specific `ConeKotlinType`;
-    - implicit type refs (`FirImplicitTypeRef`) represent types refs not declared in code explicitly (`val x /*: FirImplicitTypeRef*/ = 1`);
+    - implicit type refs (`FirImplicitTypeRef`) represent types refs not declared in code explicitly (`konst x /*: FirImplicitTypeRef*/ = 1`);
     - resolved type refs (`FirResolvedTypeRef`) represent resolved type refs containing some specific cone type in `FirResolvedTypeRef.type`
       field.
 
@@ -63,12 +63,12 @@ All node types (including leaf nodes) accessible from plugins are abstract and t
 node you need to use special builder functions (one exist for every node) instead of calling a constructor of implementation:
 
 ```kotlin
-val myFunction = buildSimpleFunction {
+konst myFunction = buildSimpleFunction {
     name = Name.identifier("myFunction")
     ...
 }
 // instead of
-val myFunction = FirSimpleFunctionImpl(
+konst myFunction = FirSimpleFunctionImpl(
     name = Name.identifier("myFunction"),
     ...
 )
@@ -101,10 +101,10 @@ declaration directly. Suppose you got s function symbol you got by a symbol prov
 via the symbol itself, not via the corresponding FIR element. Such contract is required to provoke resolution of the corresponding declaration in Analysis API mode as in Analysis API all resolution is lazy.
 
 ```kotlin
-val functionSymbol: FirNamedFunctionSymbol = ...
-val returnType: FirResolvedTypeRef = functionSymbol.resolvedReturnTypeRef
+konst functionSymbol: FirNamedFunctionSymbol = ...
+konst returnType: FirResolvedTypeRef = functionSymbol.resolvedReturnTypeRef
 // instead of
-val returnType = functionSymbol.fir.returnTypeRef as FirResolvedTypeRef
+konst returnType = functionSymbol.fir.returnTypeRef as FirResolvedTypeRef
 ```
 
 Please don't forget to make sure that you are in the correct compiler phase which can guarantee that required declaration parts are resolved. For example, it's illegal to access resolved return type of some function in `STATUS` stage, because at this point of time implicit return types are not

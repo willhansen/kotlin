@@ -73,7 +73,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>repeated string classes_dirs = 1;</code>
-   * @param index The index of the value to return.
+   * @param index The index of the konstue to return.
    * @return The bytes of the classesDirs at the given index.
    */
   public com.google.protobuf.ByteString
@@ -215,34 +215,34 @@ private static final long serialVersionUID = 0L;
 
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(
       java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(
       com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
+      throws com.google.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmCompilationOutputProto parseFrom(java.io.InputStream input)
@@ -389,8 +389,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.setField(field, value);
+        java.lang.Object konstue) {
+      return super.setField(field, konstue);
     }
     @java.lang.Override
     public Builder clearField(
@@ -405,14 +405,14 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, java.lang.Object value) {
-      return super.setRepeatedField(field, index, value);
+        int index, java.lang.Object konstue) {
+      return super.setRepeatedField(field, index, konstue);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        java.lang.Object value) {
-      return super.addRepeatedField(field, value);
+        java.lang.Object konstue) {
+      return super.addRepeatedField(field, konstue);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -486,7 +486,7 @@ private static final long serialVersionUID = 0L;
             } // default:
           } // switch (tag)
         } // while (!done)
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.unwrapIOException();
       } finally {
         onChanged();
@@ -527,7 +527,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param index The index of the value to return.
+     * @param index The index of the konstue to return.
      * @return The bytes of the classesDirs at the given index.
      */
     public com.google.protobuf.ByteString
@@ -536,45 +536,45 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param index The index to set the value at.
-     * @param value The classesDirs to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The classesDirs to set.
      * @return This builder for chaining.
      */
     public Builder setClassesDirs(
-        int index, java.lang.String value) {
-      if (value == null) {
+        int index, java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   ensureClassesDirsIsMutable();
-      classesDirs_.set(index, value);
+      classesDirs_.set(index, konstue);
       onChanged();
       return this;
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param value The classesDirs to add.
+     * @param konstue The classesDirs to add.
      * @return This builder for chaining.
      */
     public Builder addClassesDirs(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   ensureClassesDirsIsMutable();
-      classesDirs_.add(value);
+      classesDirs_.add(konstue);
       onChanged();
       return this;
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param values The classesDirs to add.
+     * @param konstues The classesDirs to add.
      * @return This builder for chaining.
      */
     public Builder addAllClassesDirs(
-        java.lang.Iterable<java.lang.String> values) {
+        java.lang.Iterable<java.lang.String> konstues) {
       ensureClassesDirsIsMutable();
       com.google.protobuf.AbstractMessageLite.Builder.addAll(
-          values, classesDirs_);
+          konstues, classesDirs_);
       onChanged();
       return this;
     }
@@ -590,17 +590,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>repeated string classes_dirs = 1;</code>
-     * @param value The bytes of the classesDirs to add.
+     * @param konstue The bytes of the classesDirs to add.
      * @return This builder for chaining.
      */
     public Builder addClassesDirsBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       ensureClassesDirsIsMutable();
-      classesDirs_.add(value);
+      classesDirs_.add(konstue);
       onChanged();
       return this;
     }
@@ -648,16 +648,16 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string resources_dir = 2;</code>
-     * @param value The resourcesDir to set.
+     * @param konstue The resourcesDir to set.
      * @return This builder for chaining.
      */
     public Builder setResourcesDir(
-        java.lang.String value) {
-      if (value == null) {
+        java.lang.String konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-      resourcesDir_ = value;
+      resourcesDir_ = konstue;
       onChanged();
       return this;
     }
@@ -673,17 +673,17 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>optional string resources_dir = 2;</code>
-     * @param value The bytes for resourcesDir to set.
+     * @param konstue The bytes for resourcesDir to set.
      * @return This builder for chaining.
      */
     public Builder setResourcesDirBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
+        com.google.protobuf.ByteString konstue) {
+      if (konstue == null) {
     throw new NullPointerException();
   }
-  checkByteStringIsUtf8(value);
+  checkByteStringIsUtf8(konstue);
       bitField0_ |= 0x00000002;
-      resourcesDir_ = value;
+      resourcesDir_ = konstue;
       onChanged();
       return this;
     }
@@ -719,16 +719,16 @@ private static final long serialVersionUID = 0L;
     public IdeaKpmCompilationOutputProto parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
+        throws com.google.protobuf.InkonstidProtocolBufferException {
       Builder builder = newBuilder();
       try {
         builder.mergeFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+      } catch (com.google.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(builder.buildPartial());
       } catch (com.google.protobuf.UninitializedMessageException e) {
-        throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        throw e.asInkonstidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
       } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(e)
+        throw new com.google.protobuf.InkonstidProtocolBufferException(e)
             .setUnfinishedMessage(builder.buildPartial());
       }
       return builder.buildPartial();

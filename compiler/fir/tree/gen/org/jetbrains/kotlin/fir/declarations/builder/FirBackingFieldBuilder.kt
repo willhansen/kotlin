@@ -56,7 +56,7 @@ class FirBackingFieldBuilder : FirAnnotationContainerBuilder {
     var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     var containerSource: DeserializedContainerSource? = null
     var dispatchReceiverType: ConeSimpleKotlinType? = null
-    val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     lateinit var name: Name
     var delegate: FirExpression? = null
     var isVar: Boolean by kotlin.properties.Delegates.notNull<Boolean>()
@@ -67,8 +67,8 @@ class FirBackingFieldBuilder : FirAnnotationContainerBuilder {
     lateinit var symbol: FirBackingFieldSymbol
     lateinit var propertySymbol: FirPropertySymbol
     var initializer: FirExpression? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    val typeParameters: MutableList<FirTypeParameter> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst typeParameters: MutableList<FirTypeParameter> = mutableListOf()
     lateinit var status: FirDeclarationStatus
 
     @OptIn(FirImplementationDetail::class)

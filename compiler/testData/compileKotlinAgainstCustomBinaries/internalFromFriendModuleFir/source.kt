@@ -9,4 +9,4 @@ private fun test(i: InternalInterface): InternalTypealias {
     return i
 }
 
-private val x = InternalClassAlias
+private konst x = InternalClassAlias

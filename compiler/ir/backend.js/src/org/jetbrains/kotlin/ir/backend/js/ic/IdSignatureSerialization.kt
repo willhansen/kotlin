@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 import org.jetbrains.kotlin.protobuf.CodedInputStream
 import org.jetbrains.kotlin.protobuf.CodedOutputStream
 
-internal class IdSignatureSerialization(private val library: KotlinLibraryHeader) {
-    private enum class IdSignatureProtoType(val id: Int) {
+internal class IdSignatureSerialization(private konst library: KotlinLibraryHeader) {
+    private enum class IdSignatureProtoType(konst id: Int) {
         DECLARED_SIGNATURE(0),
         COMMON_SIGNATURE(1),
         COMPOSITE_SIGNATURE(2),
@@ -27,14 +27,14 @@ internal class IdSignatureSerialization(private val library: KotlinLibraryHeader
     }
 
     inner class FileIdSignatureSerialization(srcFile: KotlinSourceFile) : IdSignatureICSerializer, IdSignatureICDeserializer {
-        private val deserializer by lazy {
+        private konst deserializer by lazy {
             library.sourceFileDeserializers[srcFile] ?: notFoundIcError("signature deserializer", library.libraryFile, srcFile)
         }
 
-        internal val signatureToIndexMapping = hashMapOf<IdSignature, Int>()
+        internal konst signatureToIndexMapping = hashMapOf<IdSignature, Int>()
 
         override fun serializeIdSignature(out: CodedOutputStream, signature: IdSignature) {
-            val index = signatureToIndexMapping[signature]
+            konst index = signatureToIndexMapping[signature]
             if (index != null) {
                 out.writeInt32NoTag(IdSignatureProtoType.DECLARED_SIGNATURE.id)
                 out.writeInt32NoTag(index)
@@ -46,7 +46,7 @@ internal class IdSignatureSerialization(private val library: KotlinLibraryHeader
                     out.writeInt32NoTag(IdSignatureProtoType.COMMON_SIGNATURE.id)
                     out.writeStringNoTag(signature.packageFqName)
                     out.writeStringNoTag(signature.declarationFqName)
-                    val id = signature.id
+                    konst id = signature.id
                     if (id != null) {
                         out.writeBoolNoTag(true)
                         out.writeFixed64NoTag(id)
@@ -72,32 +72,32 @@ internal class IdSignatureSerialization(private val library: KotlinLibraryHeader
         }
 
         override fun deserializeIdSignature(input: CodedInputStream): IdSignature {
-            when (val signatureType = input.readInt32()) {
+            when (konst signatureType = input.readInt32()) {
                 IdSignatureProtoType.DECLARED_SIGNATURE.id -> {
-                    val index = input.readInt32()
-                    val signature = deserializer.deserializeIdSignature(index)
+                    konst index = input.readInt32()
+                    konst signature = deserializer.deserializeIdSignature(index)
                     signatureToIndexMapping[signature] = index
                     return signature
                 }
                 IdSignatureProtoType.COMMON_SIGNATURE.id -> {
-                    val packageFqName = input.readString()
-                    val declarationFqName = input.readString()
-                    val id = if (input.readBool()) {
+                    konst packageFqName = input.readString()
+                    konst declarationFqName = input.readString()
+                    konst id = if (input.readBool()) {
                         input.readFixed64()
                     } else {
                         null
                     }
-                    val mask = input.readInt64()
+                    konst mask = input.readInt64()
                     return IdSignature.CommonSignature(packageFqName, declarationFqName, id, mask)
                 }
                 IdSignatureProtoType.COMPOSITE_SIGNATURE.id -> {
-                    val containerSignature = deserializeIdSignature(input)
-                    val innerSignature = deserializeIdSignature(input)
+                    konst containerSignature = deserializeIdSignature(input)
+                    konst innerSignature = deserializeIdSignature(input)
                     return IdSignature.CompositeSignature(containerSignature, innerSignature)
                 }
                 IdSignatureProtoType.ACCESSOR_SIGNATURE.id -> {
-                    val propertySignature = deserializeIdSignature(input)
-                    val accessorSignature = deserializeIdSignature(input)
+                    konst propertySignature = deserializeIdSignature(input)
+                    konst accessorSignature = deserializeIdSignature(input)
                     if (accessorSignature !is IdSignature.CommonSignature) {
                         icError("can not read accessor signature")
                     }
@@ -110,7 +110,7 @@ internal class IdSignatureSerialization(private val library: KotlinLibraryHeader
         }
 
         override fun skipIdSignature(input: CodedInputStream) {
-            when (val signatureType = input.readInt32()) {
+            when (konst signatureType = input.readInt32()) {
                 IdSignatureProtoType.DECLARED_SIGNATURE.id -> {
                     input.readInt32()
                 }
@@ -137,7 +137,7 @@ internal class IdSignatureSerialization(private val library: KotlinLibraryHeader
         }
     }
 
-    private val fileSerializers = hashMapOf<KotlinSourceFile, FileIdSignatureSerialization>()
+    private konst fileSerializers = hashMapOf<KotlinSourceFile, FileIdSignatureSerialization>()
 
     fun getIdSignatureDeserializer(srcFile: KotlinSourceFile): IdSignatureICDeserializer {
         return fileSerializers.getOrPut(srcFile) { FileIdSignatureSerialization(srcFile) }

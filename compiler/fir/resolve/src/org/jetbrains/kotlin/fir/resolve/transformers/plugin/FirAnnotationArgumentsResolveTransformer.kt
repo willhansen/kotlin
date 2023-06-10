@@ -46,10 +46,10 @@ open class FirAnnotationArgumentsResolveTransformer(
     outerBodyResolveContext = outerBodyResolveContext,
     returnTypeCalculator = returnTypeCalculator,
 ) {
-    final override val expressionsTransformer: FirExpressionsResolveTransformer =
+    final override konst expressionsTransformer: FirExpressionsResolveTransformer =
         FirExpressionsResolveTransformerForSpecificAnnotations(this)
 
-    final override val declarationsTransformer: FirDeclarationsResolveTransformer =
+    final override konst declarationsTransformer: FirDeclarationsResolveTransformer =
         FirDeclarationsResolveTransformerForArgumentAnnotations(this)
 }
 
@@ -104,11 +104,11 @@ private class FirDeclarationsResolveTransformerForArgumentAnnotations(
         return constructor
     }
 
-    override fun transformValueParameter(valueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
-        valueParameter
+    override fun transformValueParameter(konstueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
+        konstueParameter
             .transformAnnotations(transformer, data)
             .transformReturnTypeRef(transformer, data)
-        return valueParameter
+        return konstueParameter
     }
 
     override fun transformProperty(property: FirProperty, data: ResolutionMode): FirProperty {
@@ -285,7 +285,7 @@ abstract class AbstractFirExpressionsResolveTransformerForAnnotations(transforme
 /**
  *  Set of enum class IDs that are resolved in COMPILER_REQUIRED_ANNOTATIONS phase that need to be rechecked here.
  */
-private val classIdsToCheck: Set<ClassId> = setOf(StandardClassIds.DeprecationLevel, StandardClassIds.AnnotationTarget)
+private konst classIdsToCheck: Set<ClassId> = setOf(StandardClassIds.DeprecationLevel, StandardClassIds.AnnotationTarget)
 
 private class FirExpressionsResolveTransformerForSpecificAnnotations(transformer: FirAbstractBodyResolveTransformerDispatcher) :
     AbstractFirExpressionsResolveTransformerForAnnotations(transformer) {
@@ -294,12 +294,12 @@ private class FirExpressionsResolveTransformerForSpecificAnnotations(transformer
         qualifiedAccessExpression: FirQualifiedAccessExpression,
         data: ResolutionMode
     ): FirStatement {
-        val calleeReference = qualifiedAccessExpression.calleeReference
+        konst calleeReference = qualifiedAccessExpression.calleeReference
         if (calleeReference is FirResolvedNamedReference &&
             calleeReference.resolvedSymbol.let { it is FirEnumEntrySymbol && it.containingClassLookupTag()?.classId in classIdsToCheck } &&
             qualifiedAccessExpression is FirPropertyAccessExpression
         ) {
-            val symbolFromCompilerPhase = calleeReference.resolvedSymbol
+            konst symbolFromCompilerPhase = calleeReference.resolvedSymbol
 
             (qualifiedAccessExpression.explicitReceiver as? FirResolvedQualifier)?.let {
                 qualifiedAccessExpression.replaceResolvedQualifierReceiver(it)
@@ -311,12 +311,12 @@ private class FirExpressionsResolveTransformerForSpecificAnnotations(transformer
                 name = calleeReference.name
             })
 
-            val resolved = super.transformQualifiedAccessExpression(qualifiedAccessExpression, data)
+            konst resolved = super.transformQualifiedAccessExpression(qualifiedAccessExpression, data)
 
             if (resolved is FirQualifiedAccessExpression) {
                 // The initial resolution must have been to an enum entry. Report ambiguity if symbolFromArgumentsPhase is different to
                 // original symbol including null (meaning we would resolve to something other than an enum entry).
-                val symbolFromArgumentsPhase = resolved.calleeReference.toResolvedBaseSymbol()
+                konst symbolFromArgumentsPhase = resolved.calleeReference.toResolvedBaseSymbol()
                 if (symbolFromCompilerPhase != symbolFromArgumentsPhase) {
                     resolved.replaceCalleeReference(buildErrorNamedReference {
                         source = resolved.calleeReference.source
@@ -335,7 +335,7 @@ private class FirExpressionsResolveTransformerForSpecificAnnotations(transformer
         var lastReceiver = buildPropertyAccessExpression {
             source = receiver.source
             this.calleeReference = buildSimpleNamedReference {
-                val classId = receiver.classId ?: return
+                konst classId = receiver.classId ?: return
                 name = classId.relativeClassName.shortName()
             }
         }

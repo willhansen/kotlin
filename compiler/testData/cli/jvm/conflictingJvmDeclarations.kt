@@ -1,5 +1,5 @@
 class Foo {
-    val x: Int
+    konst x: Int
         get() = 42
 
     @Suppress("CONFLICTING_JVM_DECLARATIONS")

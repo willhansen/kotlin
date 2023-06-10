@@ -14,7 +14,7 @@ class C1 {
 }
 
 fun test() {
-    val c = C()
+    konst c = C()
     c[0] += ""
     var c1 = C1()
     c1[0] <!ASSIGN_OPERATOR_AMBIGUITY!>+=<!> ""

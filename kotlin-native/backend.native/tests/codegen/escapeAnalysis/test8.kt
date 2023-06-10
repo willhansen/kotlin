@@ -5,7 +5,7 @@
 
 package codegen.escapeAnalysis.test8
 
-class F(val s: String) {
+class F(konst s: String) {
     var g = F("")
 }
 

@@ -44,7 +44,7 @@ fun box(): String {
                             Double.MAX_VALUE, Double.POSITIVE_INFINITY)) {
         assertEquals(d.toInt().toChar(), d.toChar())
 
-        val f = d.toFloat()
+        konst f = d.toFloat()
         assertEquals(f.toInt().toChar(), f.toChar())
     }
 

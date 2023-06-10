@@ -72,7 +72,7 @@
 
 ### Compiler
 
-- [`KT-36095`](https://youtrack.jetbrains.com/issue/KT-36095) 201: False positive OVERLOAD_RESOLUTION_AMBIGUITY with Java `Enum.valueOf` and `Enum.values()` reference
+- [`KT-36095`](https://youtrack.jetbrains.com/issue/KT-36095) 201: False positive OVERLOAD_RESOLUTION_AMBIGUITY with Java `Enum.konstueOf` and `Enum.konstues()` reference
 - [`KT-37040`](https://youtrack.jetbrains.com/issue/KT-37040) 'No explicit visibility in API mode' should not be reported on enum members
 - [`KT-37204`](https://youtrack.jetbrains.com/issue/KT-37204) AssertionError: "No delegated property metadata owner for" with lazy inside inline function
 
@@ -82,7 +82,7 @@
 
 ### IDE
 
-- [`KT-34759`](https://youtrack.jetbrains.com/issue/KT-34759) "PSI and index do not match" and high CPU usage when the library has `enum` with elements in quotes and `internal lazy val` in another part of code
+- [`KT-34759`](https://youtrack.jetbrains.com/issue/KT-34759) "PSI and index do not match" and high CPU usage when the library has `enum` with elements in quotes and `internal lazy konst` in another part of code
 - [`KT-37200`](https://youtrack.jetbrains.com/issue/KT-37200) StackOverflowError in LightMethodBuilder.equals when analysing Kotlin files
 - [`KT-37229`](https://youtrack.jetbrains.com/issue/KT-37229) java.lang.NoSuchMethodError: 'com.intellij.psi.impl.light.LightJavaModule, com.intellij.psi.impl.light.LightJavaModule.findModule after updating kotlin plugin to 1.3.70
 - [`KT-37273`](https://youtrack.jetbrains.com/issue/KT-37273) No error in editor when typing unresolved reference in super constructor lambda
@@ -100,7 +100,7 @@
 ### IDE. Inspections and Intentions
 
 - [`KT-36478`](https://youtrack.jetbrains.com/issue/KT-36478) IDE suggests to use 'OptIn' annotation when it is not available in the used version of kotlin-stdlib
-- [`KT-37294`](https://youtrack.jetbrains.com/issue/KT-37294) False positive "Unused unary operator" on negative long annotation value
+- [`KT-37294`](https://youtrack.jetbrains.com/issue/KT-37294) False positive "Unused unary operator" on negative long annotation konstue
 
 ### IDE. Navigation
 
@@ -157,7 +157,7 @@
 - [`KT-26435`](https://youtrack.jetbrains.com/issue/KT-26435) Bad frame merge after inline
 - [`KT-27825`](https://youtrack.jetbrains.com/issue/KT-27825) Gradually prohibit non-abstract classes containing abstract members invisible from that classes (internal/package-private)
 - [`KT-27999`](https://youtrack.jetbrains.com/issue/KT-27999) Generic type is fixed too early for lambda arguments
-- [`KT-28940`](https://youtrack.jetbrains.com/issue/KT-28940) Concurrency issue for lazy values with the post-computation phase
+- [`KT-28940`](https://youtrack.jetbrains.com/issue/KT-28940) Concurrency issue for lazy konstues with the post-computation phase
 - [`KT-29242`](https://youtrack.jetbrains.com/issue/KT-29242) Conditional with generic type Nothing inside inline function throws `java.lang.VerifyError: Bad return type`
 - [`KT-30244`](https://youtrack.jetbrains.com/issue/KT-30244) Unable to infer common return type for two postponed arguments
 - [`KT-30245`](https://youtrack.jetbrains.com/issue/KT-30245) Wrong type is inferred for lambda if it has expected type with an extension receiver
@@ -168,7 +168,7 @@
 - [`KT-31242`](https://youtrack.jetbrains.com/issue/KT-31242) "Can't find enclosing method" proguard compilation exception with inline and crossinline
 - [`KT-31411`](https://youtrack.jetbrains.com/issue/KT-31411) Support mode of compiler where it analyses source-set as platform one, but produces only metadata for that specific source-set
 - [`KT-31653`](https://youtrack.jetbrains.com/issue/KT-31653) Incorrect transformation of the try-catch cover when inlining
-- [`KT-31923`](https://youtrack.jetbrains.com/issue/KT-31923) Outer finally block inserted before return instruction is not excluded from catch interval of inner try (without finally) block
+- [`KT-31923`](https://youtrack.jetbrains.com/issue/KT-31923) Outer finally block inserted before return instruction is not excluded from catch interkonst of inner try (without finally) block
 - [`KT-31975`](https://youtrack.jetbrains.com/issue/KT-31975) No diagnostic on error type
 - [`KT-32106`](https://youtrack.jetbrains.com/issue/KT-32106) New type inference: IDE shows error but the code compiles succesfully
 - [`KT-32138`](https://youtrack.jetbrains.com/issue/KT-32138) New type inference: Invoking type-aliased extension function red in IDE, but compiles
@@ -208,7 +208,7 @@
 - [`KT-35168`](https://youtrack.jetbrains.com/issue/KT-35168) New type inference: "UninitializedPropertyAccessException: lateinit property subResolvedAtoms has not been initialized"
 - [`KT-35172`](https://youtrack.jetbrains.com/issue/KT-35172) New type inference: False positive type mismatch if nullable type after elvis and safe call inside lambda is returning (expected type is specified explicitly)
 - [`KT-35224`](https://youtrack.jetbrains.com/issue/KT-35224) New type inference: Java call candidate with varargs as Array<something> isn't present if SAM type was used in this call
-- [`KT-35262`](https://youtrack.jetbrains.com/issue/KT-35262) Suspend function with Unit return type returns non-unit value if it is derived from function with non-unit return type
+- [`KT-35262`](https://youtrack.jetbrains.com/issue/KT-35262) Suspend function with Unit return type returns non-unit konstue if it is derived from function with non-unit return type
 - [`KT-35426`](https://youtrack.jetbrains.com/issue/KT-35426) `IncompatibleClassChangeError: Method 'int java.lang.Object.hashCode()' must be Methodref constant` when invoking on super with explicit  generic type
 - [`KT-35843`](https://youtrack.jetbrains.com/issue/KT-35843) Emit type annotations in JVM bytecode with target 1.8+ on basic constructions
 - [`KT-36297`](https://youtrack.jetbrains.com/issue/KT-36297) New type inference: ClassNotFoundException: compiler emits reference to nonexisting class for code with nested inline lambdas
@@ -225,7 +225,7 @@
 - [`KT-27496`](https://youtrack.jetbrains.com/issue/KT-27496) Color Scheme: allow changing style for suspend function calls
 - [`KT-30806`](https://youtrack.jetbrains.com/issue/KT-30806) Add IntelliJ Color Scheme rules for property declarations
 - [`KT-34303`](https://youtrack.jetbrains.com/issue/KT-34303) IDE should suggest to import an extension iterator function when using for loop with a range
-- [`KT-34567`](https://youtrack.jetbrains.com/issue/KT-34567) Feature: Auto add val keyword on typing data/inline class ctor parameters
+- [`KT-34567`](https://youtrack.jetbrains.com/issue/KT-34567) Feature: Auto add konst keyword on typing data/inline class ctor parameters
 - [`KT-34667`](https://youtrack.jetbrains.com/issue/KT-34667) Add auto-import quickfix for overloaded generic function
 
 #### Performance Improvements
@@ -244,7 +244,7 @@
 #### Fixes
 
 - [`KT-10478`](https://youtrack.jetbrains.com/issue/KT-10478) Move-statement doesn't work for methods with single-expression body and lambda as returning type
-- [`KT-13344`](https://youtrack.jetbrains.com/issue/KT-13344) Reduce visual distraction of val keyword
+- [`KT-13344`](https://youtrack.jetbrains.com/issue/KT-13344) Reduce visual distraction of konst keyword
 - [`KT-14758`](https://youtrack.jetbrains.com/issue/KT-14758) Move statement up shouldn't move top level declarations above package and import directives
 - [`KT-23305`](https://youtrack.jetbrains.com/issue/KT-23305) We should be able to see platform-specific errors in common module
 - [`KT-24399`](https://youtrack.jetbrains.com/issue/KT-24399) No scrollbar in Kotlin compiler settings
@@ -258,7 +258,7 @@
 - [`KT-33820`](https://youtrack.jetbrains.com/issue/KT-33820) Stop using `com.intellij.codeInsight.AnnotationUtil#isJetbrainsAnnotation`
 - [`KT-33846`](https://youtrack.jetbrains.com/issue/KT-33846) Stop using `com.intellij.openapi.vfs.newvfs.BulkFileListener.Adapter`
 - [`KT-33888`](https://youtrack.jetbrains.com/issue/KT-33888) Bad indentation when copy-paste to trimIndent()
-- [`KT-34081`](https://youtrack.jetbrains.com/issue/KT-34081) Kotlin constants used in Java annotation attributes trigger "Attribute value must be constant" error
+- [`KT-34081`](https://youtrack.jetbrains.com/issue/KT-34081) Kotlin constants used in Java annotation attributes trigger "Attribute konstue must be constant" error
 - [`KT-34316`](https://youtrack.jetbrains.com/issue/KT-34316) UAST: reified methods no longer visible in UAST
 - [`KT-34337`](https://youtrack.jetbrains.com/issue/KT-34337) Descriptors Leak in UltraLightClasses
 - [`KT-34379`](https://youtrack.jetbrains.com/issue/KT-34379) "Implement members" with unspecified type argument: "AssertionError: 2 declarations in override fun"
@@ -266,7 +266,7 @@
 - [`KT-34914`](https://youtrack.jetbrains.com/issue/KT-34914) Analysis sometimes isn't rerun until an out of code block change
 - [`KT-35222`](https://youtrack.jetbrains.com/issue/KT-35222) SQL language is not injected to String array attribute of Java annotation
 - [`KT-35266`](https://youtrack.jetbrains.com/issue/KT-35266) Kotlin-specific setting "Optimize imports on the fly" is useless
-- [`KT-35454`](https://youtrack.jetbrains.com/issue/KT-35454) Weird implementation of KtUltraLightFieldImpl.isEquivalentTo
+- [`KT-35454`](https://youtrack.jetbrains.com/issue/KT-35454) Weird implementation of KtUltraLightFieldImpl.isEquikonstentTo
 - [`KT-35673`](https://youtrack.jetbrains.com/issue/KT-35673) ClassCastException on destructuring declaration with annotation
 - [`KT-36008`](https://youtrack.jetbrains.com/issue/KT-36008) IDEA 201: NSME: "com.intellij.openapi.progress.util.ProgressIndicatorUtils.awaitWithCheckCanceled(Future)" at org.jetbrains.kotlin.idea.util.ProgressIndicatorUtils.awaitWithCheckCanceled()
 
@@ -319,13 +319,13 @@
 
 #### Fixes
 
-- [`KT-12242`](https://youtrack.jetbrains.com/issue/KT-12242) Breakpoint in a class is not hit if the class was first accessed in Evaluate Expression
+- [`KT-12242`](https://youtrack.jetbrains.com/issue/KT-12242) Breakpoint in a class is not hit if the class was first accessed in Ekonstuate Expression
 - [`KT-16277`](https://youtrack.jetbrains.com/issue/KT-16277) Can't set breakpoint for object construction
 - [`KT-20342`](https://youtrack.jetbrains.com/issue/KT-20342) Step Over jumps to wrong position (KotlinUFile)
 - [`KT-30909`](https://youtrack.jetbrains.com/issue/KT-30909) "Kotlin variables" button looks inconsistent with panel style
-- [`KT-32704`](https://youtrack.jetbrains.com/issue/KT-32704) ISE "Descriptor can be left only if it is last" on calling function with expression body inside Evaluate Expression window
-- [`KT-32736`](https://youtrack.jetbrains.com/issue/KT-32736) Evaluate Expression on statement makes error or shows nothing
-- [`KT-32741`](https://youtrack.jetbrains.com/issue/KT-32741) "Anonymous functions with names are prohibited" on evaluating functions in Expression mode
+- [`KT-32704`](https://youtrack.jetbrains.com/issue/KT-32704) ISE "Descriptor can be left only if it is last" on calling function with expression body inside Ekonstuate Expression window
+- [`KT-32736`](https://youtrack.jetbrains.com/issue/KT-32736) Ekonstuate Expression on statement makes error or shows nothing
+- [`KT-32741`](https://youtrack.jetbrains.com/issue/KT-32741) "Anonymous functions with names are prohibited" on ekonstuating functions in Expression mode
 - [`KT-33303`](https://youtrack.jetbrains.com/issue/KT-33303) "Smart step into" doesn't work for library declarations
 - [`KT-33304`](https://youtrack.jetbrains.com/issue/KT-33304) Can't put a breakpoint to the first line in file
 - [`KT-33728`](https://youtrack.jetbrains.com/issue/KT-33728) Smart Step Into doesn't work for @InlineOnly functions
@@ -425,12 +425,12 @@
 - [`KT-32601`](https://youtrack.jetbrains.com/issue/KT-32601) Introduce variable in unformatted lambda causes PIEAE
 - [`KT-32999`](https://youtrack.jetbrains.com/issue/KT-32999) Renaming parameter does not rename usage in named argument in a different file
 - [`KT-33372`](https://youtrack.jetbrains.com/issue/KT-33372) Rename resource cause its content to be replaced
-- [`KT-34415`](https://youtrack.jetbrains.com/issue/KT-34415) Refactor > Change signature of an overridden actual function from a platform class: "org.jetbrains.kotlin.descriptors.InvalidModuleException: Accessing invalid module descriptor"
-- [`KT-34419`](https://youtrack.jetbrains.com/issue/KT-34419) Refactor > Change signature > add a function parameter: "org.jetbrains.kotlin.descriptors.InvalidModuleException: Accessing invalid module descriptor"
+- [`KT-34415`](https://youtrack.jetbrains.com/issue/KT-34415) Refactor > Change signature of an overridden actual function from a platform class: "org.jetbrains.kotlin.descriptors.InkonstidModuleException: Accessing inkonstid module descriptor"
+- [`KT-34419`](https://youtrack.jetbrains.com/issue/KT-34419) Refactor > Change signature > add a function parameter: "org.jetbrains.kotlin.descriptors.InkonstidModuleException: Accessing inkonstid module descriptor"
 - [`KT-34459`](https://youtrack.jetbrains.com/issue/KT-34459) Change method signature with unresolved lambda type leads to error
 - [`KT-34971`](https://youtrack.jetbrains.com/issue/KT-34971) Refactor / Copy for declarations from different sources throws IAE: "unexpected element" at CopyFilesOrDirectoriesHandler.getCommonParentDirectory()
-- [`KT-35689`](https://youtrack.jetbrains.com/issue/KT-35689) Change Signature:  "InvalidModuleException: Accessing invalid module descriptor" on attempt to change receiver type of a member abstract function
-- [`KT-35903`](https://youtrack.jetbrains.com/issue/KT-35903) Change Signature refactoring crashes by InvalidModuleException on simplest examples
+- [`KT-35689`](https://youtrack.jetbrains.com/issue/KT-35689) Change Signature:  "InkonstidModuleException: Accessing inkonstid module descriptor" on attempt to change receiver type of a member abstract function
+- [`KT-35903`](https://youtrack.jetbrains.com/issue/KT-35903) Change Signature refactoring crashes by InkonstidModuleException on simplest examples
 
 ### IDE. Run Configurations
 
@@ -469,7 +469,7 @@
 
 ### JS. Tools
 
-- [`KT-35198`](https://youtrack.jetbrains.com/issue/KT-35198) Kotlin/JS: with references to NPM/.kjsm library DCE produces invalid resulting JavaScript
+- [`KT-35198`](https://youtrack.jetbrains.com/issue/KT-35198) Kotlin/JS: with references to NPM/.kjsm library DCE produces inkonstid resulting JavaScript
 - [`KT-36349`](https://youtrack.jetbrains.com/issue/KT-36349) KJS: JS DCE use file's timestamps to compare files. It conflicts with gradle configuration 'preserveFileTimestamps = false'.
 
 ### JavaScript
@@ -513,7 +513,7 @@
 
 ### Tools. Gradle
 
-- [`KT-25206`](https://youtrack.jetbrains.com/issue/KT-25206) Delegate build/run to gradle results regularly in cannot delete proto.tab.value.s
+- [`KT-25206`](https://youtrack.jetbrains.com/issue/KT-25206) Delegate build/run to gradle results regularly in cannot delete proto.tab.konstue.s
 - [`KT-35181`](https://youtrack.jetbrains.com/issue/KT-35181) Make kapt Gradle tasks compatible with instant execution
 
 ### Tools. Gradle. JS
@@ -531,9 +531,9 @@
 
 - [`KT-30917`](https://youtrack.jetbrains.com/issue/KT-30917) Tests: Inner classes mapped incorrectly in short test fail message
 - [`KT-31894`](https://youtrack.jetbrains.com/issue/KT-31894) ithout Kotlin sources `browserRun` makes the build fail
-- [`KT-34946`](https://youtrack.jetbrains.com/issue/KT-34946) DCE require some/all transitive dependencies. Invalid compilation result otherwise
+- [`KT-34946`](https://youtrack.jetbrains.com/issue/KT-34946) DCE require some/all transitive dependencies. Inkonstid compilation result otherwise
 - [`KT-35318`](https://youtrack.jetbrains.com/issue/KT-35318) IllegalStateException on clean build with `left-pad` package and generateKotlinExternals=true
-- [`KT-35428`](https://youtrack.jetbrains.com/issue/KT-35428) Gradle dependency with invalid package.json
+- [`KT-35428`](https://youtrack.jetbrains.com/issue/KT-35428) Gradle dependency with inkonstid package.json
 - [`KT-35598`](https://youtrack.jetbrains.com/issue/KT-35598) Actualize NPM dependencies in 1.3.70
 - [`KT-35599`](https://youtrack.jetbrains.com/issue/KT-35599) Actualize Node and Yarn versions in 1.3.70
 - [`KT-36714`](https://youtrack.jetbrains.com/issue/KT-36714) Webpack output doesn't consider Kotlin/JS exports (library mode)
@@ -570,10 +570,10 @@
 - [`KT-32551`](https://youtrack.jetbrains.com/issue/KT-32551) Non-canonical modifiers order inspection is not applied during convertion of inner super class
 - [`KT-33637`](https://youtrack.jetbrains.com/issue/KT-33637) Property with getter is converted into incompailable code if backing field was not generated
 - [`KT-34673`](https://youtrack.jetbrains.com/issue/KT-34673) First comment in function (if, for, while) block is moved to declaration line of block
-- [`KT-35081`](https://youtrack.jetbrains.com/issue/KT-35081) Invalid code with block comment (Javadoc)
+- [`KT-35081`](https://youtrack.jetbrains.com/issue/KT-35081) Inkonstid code with block comment (Javadoc)
 - [`KT-35152`](https://youtrack.jetbrains.com/issue/KT-35152) J2K breaks formatting by moving subsequent single line comments to first column
 - [`KT-35395`](https://youtrack.jetbrains.com/issue/KT-35395) UninitializedPropertyAccessException through `org.jetbrains.kotlin.nj2k.conversions.ImplicitCastsConversion` when anonymous inner class passes itself as argument to outer method
-- [`KT-35431`](https://youtrack.jetbrains.com/issue/KT-35431) "Invalid PSI class com.intellij.psi.PsiLambdaParameterType" with lambda argument in erroneous code
+- [`KT-35431`](https://youtrack.jetbrains.com/issue/KT-35431) "Inkonstid PSI class com.intellij.psi.PsiLambdaParameterType" with lambda argument in erroneous code
 - [`KT-35476`](https://youtrack.jetbrains.com/issue/KT-35476) Expression with compound assignment logical operator is changing operator precedence without parentheses
 - [`KT-35478`](https://youtrack.jetbrains.com/issue/KT-35478) Single line comment before constructor results in wrong code
 - [`KT-35739`](https://youtrack.jetbrains.com/issue/KT-35739) Line break is not inserted for private property getter
@@ -584,13 +584,13 @@
 - [`KT-34274`](https://youtrack.jetbrains.com/issue/KT-34274) Add support for `@CompilerOptions` annotation in `kotlin-main-kts`
 - [`KT-34716`](https://youtrack.jetbrains.com/issue/KT-34716) Implement default cache in main-kts
 - [`KT-34893`](https://youtrack.jetbrains.com/issue/KT-34893) Update apache ivy version in kotlin-main-kts
-- [`KT-35413`](https://youtrack.jetbrains.com/issue/KT-35413) Implement "evaluate expression" command line parameter and functionality in the JVM cli compiler
-- [`KT-35415`](https://youtrack.jetbrains.com/issue/KT-35415) Implement script and expression evaluation in the `kotlin` runner
+- [`KT-35413`](https://youtrack.jetbrains.com/issue/KT-35413) Implement "ekonstuate expression" command line parameter and functionality in the JVM cli compiler
+- [`KT-35415`](https://youtrack.jetbrains.com/issue/KT-35415) Implement script and expression ekonstuation in the `kotlin` runner
 - [`KT-35416`](https://youtrack.jetbrains.com/issue/KT-35416) load main-kts script definition by default in the jvm compiler, if the jar is available
 
 ### Tools. kapt
 
-- [`KT-30164`](https://youtrack.jetbrains.com/issue/KT-30164) Default field value not transmitted to Java source model for mutable properties
+- [`KT-30164`](https://youtrack.jetbrains.com/issue/KT-30164) Default field konstue not transmitted to Java source model for mutable properties
 - [`KT-30368`](https://youtrack.jetbrains.com/issue/KT-30368) Deprecated information not transmitted to Java source model
 - [`KT-32832`](https://youtrack.jetbrains.com/issue/KT-32832) Turn worker API on by default
 - [`KT-33617`](https://youtrack.jetbrains.com/issue/KT-33617) Java 9+: "IllegalStateException: Should not be called!"
@@ -674,8 +674,8 @@
 - [`KT-18541`](https://youtrack.jetbrains.com/issue/KT-18541) Prohibit "tailrec" modifier on open functions
 - [`KT-19844`](https://youtrack.jetbrains.com/issue/KT-19844) Do not render type annotations on symbols rendered in diagnostic messages
 - [`KT-24913`](https://youtrack.jetbrains.com/issue/KT-24913) KotlinFrontEndException with local class in init of generic class
-- [`KT-28940`](https://youtrack.jetbrains.com/issue/KT-28940) Concurrency issue for lazy values with the post-computation phase
-- [`KT-31540`](https://youtrack.jetbrains.com/issue/KT-31540) Change initialization order of default values for tail recursive optimized functions
+- [`KT-28940`](https://youtrack.jetbrains.com/issue/KT-28940) Concurrency issue for lazy konstues with the post-computation phase
+- [`KT-31540`](https://youtrack.jetbrains.com/issue/KT-31540) Change initialization order of default konstues for tail recursive optimized functions
 
 ### Docs & Examples
 
@@ -689,7 +689,7 @@
 - [`KT-8581`](https://youtrack.jetbrains.com/issue/KT-8581) 'Move Statement' doesn't work for statement finished by semicolon
 - [`KT-9204`](https://youtrack.jetbrains.com/issue/KT-9204) Shorten references and some other IDE features have problem when package name clash with class name
 - [`KT-17993`](https://youtrack.jetbrains.com/issue/KT-17993) Annotations are colored the same as language keywords
-- [`KT-21037`](https://youtrack.jetbrains.com/issue/KT-21037) LazyLightClassMemberMatchingError$WrongMatch “Matched :BAR MemberIndex(index=0) to :BAR MemberIndex(index=1) in KtLightClassImpl” after duplicating values inside enum class
+- [`KT-21037`](https://youtrack.jetbrains.com/issue/KT-21037) LazyLightClassMemberMatchingError$WrongMatch “Matched :BAR MemberIndex(index=0) to :BAR MemberIndex(index=1) in KtLightClassImpl” after duplicating konstues inside enum class
 - [`KT-23305`](https://youtrack.jetbrains.com/issue/KT-23305) We should be able to see platform-specific errors in common module
 - [`KT-23461`](https://youtrack.jetbrains.com/issue/KT-23461) `Move statement up/down` attaches a comment block to the function being moved
 - [`KT-26960`](https://youtrack.jetbrains.com/issue/KT-26960) IDE doesn't report `actual` without `expect` placed into a custom platform-agnostic source set
@@ -704,7 +704,7 @@
 - [`KT-32544`](https://youtrack.jetbrains.com/issue/KT-32544) Support UltraLight classes for local/anonymous/enum classes
 - [`KT-32799`](https://youtrack.jetbrains.com/issue/KT-32799) 2019.2 RC (192.5728.74) Kotlin plugin exception during build searchable options (Directory index may not be queried for default project)
 - [`KT-33008`](https://youtrack.jetbrains.com/issue/KT-33008) IDEA does not report in MPP: Upper bound of a type parameter cannot be an array
-- [`KT-33316`](https://youtrack.jetbrains.com/issue/KT-33316) Kotlin Facet: make sure the order of allPlatforms value is fixed
+- [`KT-33316`](https://youtrack.jetbrains.com/issue/KT-33316) Kotlin Facet: make sure the order of allPlatforms konstue is fixed
 - [`KT-33561`](https://youtrack.jetbrains.com/issue/KT-33561) LazyLightClassMemberMatchingError when overloading synthetic member
 - [`KT-33584`](https://youtrack.jetbrains.com/issue/KT-33584) Make kotlin light classes return no-arg constructor when no-arg (or jpa) compiler plugin is enabled
 - [`KT-33775`](https://youtrack.jetbrains.com/issue/KT-33775) please remove usages of org.intellij.plugins.intelliLang.inject.InjectorUtils#putInjectedFileUserData(com.intellij.lang.injection.MultiHostRegistrar, com.intellij.openapi.util.Key<T>, T) deprecated eons ago
@@ -739,7 +739,7 @@
 - [`KT-27645`](https://youtrack.jetbrains.com/issue/KT-27645) Debugger breakpoints do not work in suspend function executed in SpringBoot controller (MVC and WebFlux)
 - [`KT-32687`](https://youtrack.jetbrains.com/issue/KT-32687) Disallow breakpoints for @InlineOnly function bodies
 - [`KT-32813`](https://youtrack.jetbrains.com/issue/KT-32813) Exception on invoking "Smart Step Into"
-- [`KT-32830`](https://youtrack.jetbrains.com/issue/KT-32830) NPE on changing class property in Evaluate Expression window
+- [`KT-32830`](https://youtrack.jetbrains.com/issue/KT-32830) NPE on changing class property in Ekonstuate Expression window
 - [`KT-33064`](https://youtrack.jetbrains.com/issue/KT-33064) “Read access is allowed from event dispatch thread or inside read-action only” from KotlinLineBreakpointType.createLineSourcePosition on adding new line before the current one while stopping on breakpoint
 - [`KT-11395`](https://youtrack.jetbrains.com/issue/KT-11395) Breakpoint inside lambda argument of InlineOnly function doesn't work
 
@@ -789,12 +789,12 @@
 - [`KT-28740`](https://youtrack.jetbrains.com/issue/KT-28740) AE “2 declarations in var bar: [ERROR : No type, no body]” after applying “Create actual class” quick fix for class with property which has not specified type
 - [`KT-28947`](https://youtrack.jetbrains.com/issue/KT-28947) Backing field has created after applying “Create expected class in common module...” intention
 - [`KT-30136`](https://youtrack.jetbrains.com/issue/KT-30136) False negative "Redundant explicit 'this'" with local variable
-- [`KT-30794`](https://youtrack.jetbrains.com/issue/KT-30794) Quickfix for unchecked cast produces invalid code
-- [`KT-31133`](https://youtrack.jetbrains.com/issue/KT-31133) Liveness analysis on enum does not take into account calls to 'values'
+- [`KT-30794`](https://youtrack.jetbrains.com/issue/KT-30794) Quickfix for unchecked cast produces inkonstid code
+- [`KT-31133`](https://youtrack.jetbrains.com/issue/KT-31133) Liveness analysis on enum does not take into account calls to 'konstues'
 - [`KT-31433`](https://youtrack.jetbrains.com/issue/KT-31433) Incorrect "Create expected class..." for class with supertype
 - [`KT-31475`](https://youtrack.jetbrains.com/issue/KT-31475) "Create expect..." should delete 'override' modifier
 - [`KT-31587`](https://youtrack.jetbrains.com/issue/KT-31587) Redundant `private` modifier before primary constructor after create `actual` class
-- [`KT-31921`](https://youtrack.jetbrains.com/issue/KT-31921) "Create expected ..."/"Create actual..." quick fix: `val` and `vararg` modifiers are misordered in the generated `expect`/`actual` declaration
+- [`KT-31921`](https://youtrack.jetbrains.com/issue/KT-31921) "Create expected ..."/"Create actual..." quick fix: `konst` and `vararg` modifiers are misordered in the generated `expect`/`actual` declaration
 - [`KT-31999`](https://youtrack.jetbrains.com/issue/KT-31999) "Variable declaration could be moved into `when`" inspection suggests to inline expression containing return (throw) statement
 - [`KT-32012`](https://youtrack.jetbrains.com/issue/KT-32012) Change parameter type quick fix: Don't use qualified name
 - [`KT-32468`](https://youtrack.jetbrains.com/issue/KT-32468) False positive SimplifiableCall "filter call could be simplified to filterIsInstance" with expression body function and explicit return type
@@ -833,7 +833,7 @@
 - [`KT-32965`](https://youtrack.jetbrains.com/issue/KT-32965) False positive "Redundant qualifier name" with nested enum member call
 - [`KT-33597`](https://youtrack.jetbrains.com/issue/KT-33597) False positive "Redundant qualifier name" with class property initialized with same-named object property
 - [`KT-33991`](https://youtrack.jetbrains.com/issue/KT-33991) False positive "Redundant qualifier name" with enum member function call
-- [`KT-34113`](https://youtrack.jetbrains.com/issue/KT-34113) False positive "Redundant qualifier name" with Enum.values() from a different Enum
+- [`KT-34113`](https://youtrack.jetbrains.com/issue/KT-34113) False positive "Redundant qualifier name" with Enum.konstues() from a different Enum
 
 ### IDE. KDoc
 
@@ -859,7 +859,7 @@
 
 - [`KT-24929`](https://youtrack.jetbrains.com/issue/KT-24929) 'Search for references' checkbox state isn't saved on move of kotlin file
 - [`KT-30342`](https://youtrack.jetbrains.com/issue/KT-30342) Move refactoring: suggest file name starting with an uppercase letter
-- [`KT-32426`](https://youtrack.jetbrains.com/issue/KT-32426) Invalid code format after "Pull Members Up" on function with comment and another indent
+- [`KT-32426`](https://youtrack.jetbrains.com/issue/KT-32426) Inkonstid code format after "Pull Members Up" on function with comment and another indent
 - [`KT-32496`](https://youtrack.jetbrains.com/issue/KT-32496) "Problems Detected" dialog message about conflicting declarations on moving file to another package is absolutely unreadable
 - [`KT-33059`](https://youtrack.jetbrains.com/issue/KT-33059) Exception [Assertion failed: Write access is allowed inside write-action only] in case of Move class to nonexistent folder
 - [`KT-33972`](https://youtrack.jetbrains.com/issue/KT-33972) Change signature should affect all hierarchy
@@ -908,7 +908,7 @@
 
 ### Reflection
 
-- [`KT-13936`](https://youtrack.jetbrains.com/issue/KT-13936) KotlinReflectionInternalError on invoking callBy on overridden member with inherited default argument value
+- [`KT-13936`](https://youtrack.jetbrains.com/issue/KT-13936) KotlinReflectionInternalError on invoking callBy on overridden member with inherited default argument konstue
 - [`KT-17860`](https://youtrack.jetbrains.com/issue/KT-17860) Improve KParameter.toString for receiver parameters
 
 ### Tools
@@ -962,7 +962,7 @@
 - [`KT-33105`](https://youtrack.jetbrains.com/issue/KT-33105) kapt+withJava in multiplatform module depending on other multiplatform fails on 1.3.50-eap-54
 - [`KT-33469`](https://youtrack.jetbrains.com/issue/KT-33469) Drop support for Gradle versions older than 4.3 in the Kotlin Gradle plugin
 - [`KT-33470`](https://youtrack.jetbrains.com/issue/KT-33470) Drop support for Gradle versions older than 4.9 in the Kotlin Gradle plugin
-- [`KT-33980`](https://youtrack.jetbrains.com/issue/KT-33980) Read the granular source sets metadata flag value once and cache it for the current Gradle build
+- [`KT-33980`](https://youtrack.jetbrains.com/issue/KT-33980) Read the granular source sets metadata flag konstue once and cache it for the current Gradle build
 - [`KT-34312`](https://youtrack.jetbrains.com/issue/KT-34312) UnsupportedOperationException on `requiresVisibilityOf` in the Kotlin Gradle plugin
 
 ### Tools. Gradle. JS
@@ -1065,7 +1065,7 @@
 - [`KT-31704`](https://youtrack.jetbrains.com/issue/KT-31704) [kotlin-scripting] passing `name` to String.toScriptSource make script compilation failed
 - [`KT-32234`](https://youtrack.jetbrains.com/issue/KT-32234) "Unable to derive module descriptor" when using Kotlin compiler (embeddable) in Java 9+ modular builds
 - [`KT-33529`](https://youtrack.jetbrains.com/issue/KT-33529) NCDF running kotlin script from command line
-- [`KT-33554`](https://youtrack.jetbrains.com/issue/KT-33554) Classpath not passed properly when evaluating standard script with `kotlinc`
+- [`KT-33554`](https://youtrack.jetbrains.com/issue/KT-33554) Classpath not passed properly when ekonstuating standard script with `kotlinc`
 - [`KT-33892`](https://youtrack.jetbrains.com/issue/KT-33892) REPL/Script: Implement mechanism for resolve top-level functions and properties from classloader
 - [`KT-34294`](https://youtrack.jetbrains.com/issue/KT-34294) SamWithReceiver cannot be used with new scripting API
 
@@ -1074,11 +1074,11 @@
 - [`KT-31291`](https://youtrack.jetbrains.com/issue/KT-31291) Incremental Kapt: IllegalArgumentException from `org.jetbrains.org.objectweb.asm.ClassVisitor.<init>`
 - [`KT-33028`](https://youtrack.jetbrains.com/issue/KT-33028) Kapt error "Unable to find package java.lang in classpath or bootclasspath" on JDK 11 with `-source 8`
 - [`KT-33050`](https://youtrack.jetbrains.com/issue/KT-33050) kapt does not honor source/target compatibility of enclosing project
-- [`KT-33052`](https://youtrack.jetbrains.com/issue/KT-33052) Kapt generates invalid java stubs for enum members with class bodies on JDK 11
+- [`KT-33052`](https://youtrack.jetbrains.com/issue/KT-33052) Kapt generates inkonstid java stubs for enum members with class bodies on JDK 11
 - [`KT-33056`](https://youtrack.jetbrains.com/issue/KT-33056) Incremental kapt is disabled due to `javaslang.match.PatternsProcessor` processor on classpath when Worker API is enabled
 - [`KT-33493`](https://youtrack.jetbrains.com/issue/KT-33493) 1.3.50, org.jetbrains.org.objectweb.asm.ClassVisitor.<init>
 - [`KT-33515`](https://youtrack.jetbrains.com/issue/KT-33515) Incremental kapt fails when I remove an annotated file
-- [`KT-33889`](https://youtrack.jetbrains.com/issue/KT-33889) Incremental KAPT: NoSuchMethodError: 'java.util.regex.Pattern com.sun.tools.javac.processing.JavacProcessingEnvironment.validImportStringToPattern(java.lang.String)'
+- [`KT-33889`](https://youtrack.jetbrains.com/issue/KT-33889) Incremental KAPT: NoSuchMethodError: 'java.util.regex.Pattern com.sun.tools.javac.processing.JavacProcessingEnvironment.konstidImportStringToPattern(java.lang.String)'
 - [`KT-33503`](https://youtrack.jetbrains.com/issue/KT-33503) Kapt, Spring Boot: "Could not resolve all files for configuration ':_classStructurekaptKotlin'"
 - [`KT-33800`](https://youtrack.jetbrains.com/issue/KT-33800) KAPT aptMode=compile fails to compile certain legitimate code
 
@@ -1088,7 +1088,7 @@
 
 - [`KT-12787`](https://youtrack.jetbrains.com/issue/KT-12787) Debugger: Generate line number at end of function (to set a breakpoint on the last line of the block)
 - [`KT-23675`](https://youtrack.jetbrains.com/issue/KT-23675) "Parameter specified as non-null is null: method org.jetbrains.kotlin.codegen.FrameMapBase.getIndex, parameter descriptor" when classes are defined inside an anonymous extension function and access a field of the extension function's `this` instance
-- [`KT-24596`](https://youtrack.jetbrains.com/issue/KT-24596) Refactor / Inline const property does not insert its value into usage in annotation
+- [`KT-24596`](https://youtrack.jetbrains.com/issue/KT-24596) Refactor / Inline const property does not insert its konstue into usage in annotation
 - [`KT-25497`](https://youtrack.jetbrains.com/issue/KT-25497) kotlinx.serialization - throws Backend Internal error exception during code generation of sealed classes
 - [`KT-28927`](https://youtrack.jetbrains.com/issue/KT-28927) "IllegalStateException: Arrays of class literals are not supported yet" in AnnotationDeserializer.resolveArrayElementType
 - [`KT-31070`](https://youtrack.jetbrains.com/issue/KT-31070) IndexOutOfBoundsException in Analyzer with @JvmOverloads constructor with 34+ parameters
@@ -1105,7 +1105,7 @@
 - [`KT-32434`](https://youtrack.jetbrains.com/issue/KT-32434) New type inference fails for Caffeine Cache
 - [`KT-32452`](https://youtrack.jetbrains.com/issue/KT-32452) Kotlin 1.3.40 - problem in IDE with new type inference and suspending method reference
 - [`KT-32407`](https://youtrack.jetbrains.com/issue/KT-32407) NI: "use property access syntax" intention causes freezes in editor
-- [`KT-33127`](https://youtrack.jetbrains.com/issue/KT-33127) Script result value is not calculated properly for the last expression
+- [`KT-33127`](https://youtrack.jetbrains.com/issue/KT-33127) Script result konstue is not calculated properly for the last expression
 - [`KT-33157`](https://youtrack.jetbrains.com/issue/KT-33157) Inline class with generic method is considered bad class by javac
 
 ### Docs & Examples
@@ -1160,31 +1160,31 @@
 
 #### Fixes
 
-- [`KT-8579`](https://youtrack.jetbrains.com/issue/KT-8579) Debugger: Evaluate expression fails at typed arrays
+- [`KT-8579`](https://youtrack.jetbrains.com/issue/KT-8579) Debugger: Ekonstuate expression fails at typed arrays
 - [`KT-10183`](https://youtrack.jetbrains.com/issue/KT-10183) Debugger: receiver properties are not shown inline in extension function
-- [`KT-11663`](https://youtrack.jetbrains.com/issue/KT-11663) Assignment is not possible in Evaluate expression
-- [`KT-11706`](https://youtrack.jetbrains.com/issue/KT-11706) Attempts to evaluate java method calls on 'Array' instance in debugger fail with NoSuchMethodError
-- [`KT-11888`](https://youtrack.jetbrains.com/issue/KT-11888) Evaluate Expression for expression with synchronized
+- [`KT-11663`](https://youtrack.jetbrains.com/issue/KT-11663) Assignment is not possible in Ekonstuate expression
+- [`KT-11706`](https://youtrack.jetbrains.com/issue/KT-11706) Attempts to ekonstuate java method calls on 'Array' instance in debugger fail with NoSuchMethodError
+- [`KT-11888`](https://youtrack.jetbrains.com/issue/KT-11888) Ekonstuate Expression for expression with synchronized
 - [`KT-11938`](https://youtrack.jetbrains.com/issue/KT-11938) Empty condition is marked as error
-- [`KT-13188`](https://youtrack.jetbrains.com/issue/KT-13188) Cannot evaluate expression with local extension function
+- [`KT-13188`](https://youtrack.jetbrains.com/issue/KT-13188) Cannot ekonstuate expression with local extension function
 - [`KT-14421`](https://youtrack.jetbrains.com/issue/KT-14421) Debugger: breakpoint set on trivial if/while is not hit
 - [`KT-15259`](https://youtrack.jetbrains.com/issue/KT-15259) Debug: closing brace of object definition is considered executable; ISE: "Don't call this method for local declarations: OBJECT_DECLARATION" at LazyDeclarationResolver.getMemberScopeDeclaredIn()
 - [`KT-19084`](https://youtrack.jetbrains.com/issue/KT-19084) Breakpoints on Debugger altering Result
 - [`KT-19556`](https://youtrack.jetbrains.com/issue/KT-19556) Kotlin exception while debugging IJ plugin code
-- [`KT-19980`](https://youtrack.jetbrains.com/issue/KT-19980) Debug: evaluation fails for setter of member extention property
-- [`KT-20560`](https://youtrack.jetbrains.com/issue/KT-20560) Evaluate expression doesn't work for super method call
+- [`KT-19980`](https://youtrack.jetbrains.com/issue/KT-19980) Debug: ekonstuation fails for setter of member extention property
+- [`KT-20560`](https://youtrack.jetbrains.com/issue/KT-20560) Ekonstuate expression doesn't work for super method call
 - [`KT-23526`](https://youtrack.jetbrains.com/issue/KT-23526) In *.kts scripts, debugger ignores breakpoints in top-level statements and members
 - [`KT-24914`](https://youtrack.jetbrains.com/issue/KT-24914) AS: Uninitialized yet lazy properties called on first debug point reach
-- [`KT-26742`](https://youtrack.jetbrains.com/issue/KT-26742) Debugger can't evaluate expected top-level function from common code
-- [`KT-30120`](https://youtrack.jetbrains.com/issue/KT-30120) False positive "Unused equals expression" in evaluate expression window
+- [`KT-26742`](https://youtrack.jetbrains.com/issue/KT-26742) Debugger can't ekonstuate expected top-level function from common code
+- [`KT-30120`](https://youtrack.jetbrains.com/issue/KT-30120) False positive "Unused equals expression" in ekonstuate expression window
 - [`KT-30730`](https://youtrack.jetbrains.com/issue/KT-30730) Missing tooltip for "Kotlin variables view" button
 - [`KT-30919`](https://youtrack.jetbrains.com/issue/KT-30919) Debugger's "Kotlin View" doesn't show variables inside lambdas
-- [`KT-30976`](https://youtrack.jetbrains.com/issue/KT-30976) Debugger: No access to receiver evaluating named parameters during call to extension function
+- [`KT-30976`](https://youtrack.jetbrains.com/issue/KT-30976) Debugger: No access to receiver ekonstuating named parameters during call to extension function
 - [`KT-31418`](https://youtrack.jetbrains.com/issue/KT-31418) java.lang.ClassCastException : java.lang.annotation.Annotation[] cannot be cast to byte[]
-- [`KT-31510`](https://youtrack.jetbrains.com/issue/KT-31510) isDumb should be used only under read action: KotlinEvaluator
+- [`KT-31510`](https://youtrack.jetbrains.com/issue/KT-31510) isDumb should be used only under read action: KotlinEkonstuator
 - [`KT-31702`](https://youtrack.jetbrains.com/issue/KT-31702) Debugger can't stop on breakpoint on `Unit` expression from coroutine context
-- [`KT-31709`](https://youtrack.jetbrains.com/issue/KT-31709) Evaluate: "IllegalArgumentException: Parameter specified as non-null is null: method org.jetbrains.kotlin.codegen.FrameMapBase.getIndex, parameter descriptor" with nested lambda member access
-- [`KT-24829`](https://youtrack.jetbrains.com/issue/KT-24829) Access to coroutineContext in 'Evaluate expression'
+- [`KT-31709`](https://youtrack.jetbrains.com/issue/KT-31709) Ekonstuate: "IllegalArgumentException: Parameter specified as non-null is null: method org.jetbrains.kotlin.codegen.FrameMapBase.getIndex, parameter descriptor" with nested lambda member access
+- [`KT-24829`](https://youtrack.jetbrains.com/issue/KT-24829) Access to coroutineContext in 'Ekonstuate expression'
 
 ### IDE. Gradle
 
@@ -1239,7 +1239,7 @@
 - [`KT-28595`](https://youtrack.jetbrains.com/issue/KT-28595) "Assignment should be lifted out of 'if'" false negative for different but compatible derived types
 - [`KT-29192`](https://youtrack.jetbrains.com/issue/KT-29192) "Convert property to function" with explicit generic type loses getter body
 - [`KT-29716`](https://youtrack.jetbrains.com/issue/KT-29716) With both explicit and implicit package prefixes "Package name does not match containing directory" inspection suggests not usable quick fix
-- [`KT-29731`](https://youtrack.jetbrains.com/issue/KT-29731) Don't suggest `Add val/var to parameter` at expect class constructor
+- [`KT-29731`](https://youtrack.jetbrains.com/issue/KT-29731) Don't suggest `Add konst/var to parameter` at expect class constructor
 - [`KT-30191`](https://youtrack.jetbrains.com/issue/KT-30191) "Lift out of if" intention isn't suggested for assignment of null
 - [`KT-30197`](https://youtrack.jetbrains.com/issue/KT-30197) ReplaceWith for deprecated function adds class literal/callable reference argument above unless it is used in substitution
 - [`KT-30627`](https://youtrack.jetbrains.com/issue/KT-30627) "Use property access syntax" produces red code if setter argument is a lambda with implicit SAM conversion
@@ -1249,7 +1249,7 @@
 - [`KT-31272`](https://youtrack.jetbrains.com/issue/KT-31272) Expand "create expected ..." quick fix highlighting also to a primary constructor
 - [`KT-31278`](https://youtrack.jetbrains.com/issue/KT-31278) Inappropriate "Remove redundant .let call" inspection
 - [`KT-31341`](https://youtrack.jetbrains.com/issue/KT-31341) Incorrect quickfix "Replace with Kotlin analog" for conversion to an extension, where the first argument is an expression with an operation
-- [`KT-31359`](https://youtrack.jetbrains.com/issue/KT-31359) "Invalid property key" inspection false positive for a bundle with several properties files
+- [`KT-31359`](https://youtrack.jetbrains.com/issue/KT-31359) "Inkonstid property key" inspection false positive for a bundle with several properties files
 - [`KT-31362`](https://youtrack.jetbrains.com/issue/KT-31362) 'Move variable declaration into `when`' quickfix comments left brace with EOL comment
 - [`KT-31443`](https://youtrack.jetbrains.com/issue/KT-31443) Remove braces intention places caret in a wrong place
 - [`KT-31446`](https://youtrack.jetbrains.com/issue/KT-31446) Incorrect quick fix “Create expected class" for inline class with parameter with actual
@@ -1269,14 +1269,14 @@
 - [`KT-32365`](https://youtrack.jetbrains.com/issue/KT-32365) "Convert to sealed class" intention should not be suggested when no "class" keyword
 - [`KT-32419`](https://youtrack.jetbrains.com/issue/KT-32419) Spurious 'while' has empty body warning when body has explanatory comment
 - [`KT-32506`](https://youtrack.jetbrains.com/issue/KT-32506) False negative "Remove redundant qualifier name" with `java.util.ArrayList<Int>()`
-- [`KT-32454`](https://youtrack.jetbrains.com/issue/KT-32454) "Replace Java static method with Kotlin analog": invalid quick fix on 'abs()' function
+- [`KT-32454`](https://youtrack.jetbrains.com/issue/KT-32454) "Replace Java static method with Kotlin analog": inkonstid quick fix on 'abs()' function
 - [`KT-26242`](https://youtrack.jetbrains.com/issue/KT-26242) "Create test" intention does nothing in common module
 - [`KT-27208`](https://youtrack.jetbrains.com/issue/KT-27208) IDEA reports about the need to declare abstract or implement abstract method, but this method is @JvmStatic in an interface companion
 - [`KT-27555`](https://youtrack.jetbrains.com/issue/KT-27555) `Create actual ...` quick fix does nothing if the corresponding source set directory isn't created yet
 - [`KT-28121`](https://youtrack.jetbrains.com/issue/KT-28121) IDE: Warn on java files under "src/main/kotlin" or "src/test/kotlin" source roots
 - [`KT-28295`](https://youtrack.jetbrains.com/issue/KT-28295) Use `languageSettings` for a quick fix to enable experimental features in multiplatform projects
 - [`KT-28529`](https://youtrack.jetbrains.com/issue/KT-28529) Don't suggest `commonMain` source set as a target of `create expected ...` quick fix for a member of `*Test` source set
-- [`KT-28746`](https://youtrack.jetbrains.com/issue/KT-28746) “Create actual class” quick fix creates invalid file when is called from files located in package directory but don't have package name
+- [`KT-28746`](https://youtrack.jetbrains.com/issue/KT-28746) “Create actual class” quick fix creates inkonstid file when is called from files located in package directory but don't have package name
 - [`KT-30622`](https://youtrack.jetbrains.com/issue/KT-30622) Add names to call arguments starting from given argument
 - [`KT-31404`](https://youtrack.jetbrains.com/issue/KT-31404) Redundant 'requireNotNull' or 'checkNotNull' inspection: don't remove first argument
 - [`KT-32705`](https://youtrack.jetbrains.com/issue/KT-32705) "Create expect" quick fix adds `actual` modifier to a `const`/`lateinit` declaration without a warning
@@ -1301,7 +1301,7 @@
 ### IDE. Refactorings
 
 - [`KT-29720`](https://youtrack.jetbrains.com/issue/KT-29720) Refactor / Move does not update package statement with implicit prefix
-- [`KT-30762`](https://youtrack.jetbrains.com/issue/KT-30762) Inline method produces invalid code for suspend functions with receiver
+- [`KT-30762`](https://youtrack.jetbrains.com/issue/KT-30762) Inline method produces inkonstid code for suspend functions with receiver
 - [`KT-30748`](https://youtrack.jetbrains.com/issue/KT-30748) 100+ Seconds UI Freeze on performing a Move Refactoring on a file with a lot of usages (KotlinOptimizeImports in thread dump)
 
 ### IDE. Scratch
@@ -1337,7 +1337,7 @@
 - [`KT-32326`](https://youtrack.jetbrains.com/issue/KT-32326) Gradle, test runner: support postponing test running error reporting at the end of the build
 - [`KT-32393`](https://youtrack.jetbrains.com/issue/KT-32393) Gradle, JS: Resolve projects lazily
 - [`KT-31560`](https://youtrack.jetbrains.com/issue/KT-31560) Gradle: provide descriptions for JS tasks
-- [`KT-31563`](https://youtrack.jetbrains.com/issue/KT-31563) Gradle/JS: npmResolve fails with "Invalid version" when user project's version does not match npm rules
+- [`KT-31563`](https://youtrack.jetbrains.com/issue/KT-31563) Gradle/JS: npmResolve fails with "Inkonstid version" when user project's version does not match npm rules
 - [`KT-31566`](https://youtrack.jetbrains.com/issue/KT-31566) Gradle/JS: with explicit call to `nodejs { testTask { useNodeJs() } }` configuration fails : "Could not find which method to invoke"
 - [`KT-31694`](https://youtrack.jetbrains.com/issue/KT-31694) Gradle, NPM, windows: creating symlink requires administrator privilege
 
@@ -1402,7 +1402,7 @@
 - [`KT-30691`](https://youtrack.jetbrains.com/issue/KT-30691) Gradle, JS tests: Parent operation with id 947 not available when all tests passed
 - [`KT-31917`](https://youtrack.jetbrains.com/issue/KT-31917) Gradle, JS: transitive dependency between compilations in same project doesn't work
 - [`KT-31985`](https://youtrack.jetbrains.com/issue/KT-31985) Gradle, JS: webpack not working on windows
-- [`KT-32072`](https://youtrack.jetbrains.com/issue/KT-32072) Gradle, JS: browser() in DSL triggers project.evaluate()
+- [`KT-32072`](https://youtrack.jetbrains.com/issue/KT-32072) Gradle, JS: browser() in DSL triggers project.ekonstuate()
 - [`KT-32204`](https://youtrack.jetbrains.com/issue/KT-32204) In an MPP, a dependency that is added to a non-root source set is incorrectly analyzed for source sets visibility
 - [`KT-32225`](https://youtrack.jetbrains.com/issue/KT-32225) In an MPP, if a dependency is added to a source set that does not take part in published compilations, it is not correctly analyzed in source set visibility inference
 - [`KT-32564`](https://youtrack.jetbrains.com/issue/KT-32564) Provide a flag to enable/disable hierarchical multiplatform mechanism in Gradle
@@ -1412,7 +1412,7 @@
 - [`KT-32210`](https://youtrack.jetbrains.com/issue/KT-32210) Kapt randomly fails with java.io.UTFDataFormatException
 - [`KT-32706`](https://youtrack.jetbrains.com/issue/KT-32706) Gradle target "jsBrowserWebpack" should use output of JS compile task as input
 - [`KT-32697`](https://youtrack.jetbrains.com/issue/KT-32697) [Tests] org.jetbrains.kotlin.gradle.SubpluginsIT
-- [`KT-33246`](https://youtrack.jetbrains.com/issue/KT-33246) Kotlin JS & Native tests + Gradle 5.6: No value has been specified for property 'binaryResultsDirectory'
+- [`KT-33246`](https://youtrack.jetbrains.com/issue/KT-33246) Kotlin JS & Native tests + Gradle 5.6: No konstue has been specified for property 'binaryResultsDirectory'
 
 
 ### Tools. Incremental Compile
@@ -1436,7 +1436,7 @@
 - [`KT-31252`](https://youtrack.jetbrains.com/issue/KT-31252) J2K: resulted file is not formatted
 - [`KT-31254`](https://youtrack.jetbrains.com/issue/KT-31254) J2K: resulted source uses full qualified references instead of imports
 - [`KT-31255`](https://youtrack.jetbrains.com/issue/KT-31255) J2K: redundant modifiers in resulted source
-- [`KT-31726`](https://youtrack.jetbrains.com/issue/KT-31726) New J2K converts annotation with array parameter to single value parameter
+- [`KT-31726`](https://youtrack.jetbrains.com/issue/KT-31726) New J2K converts annotation with array parameter to single konstue parameter
 - [`KT-31809`](https://youtrack.jetbrains.com/issue/KT-31809) "Attempt to modify PSI for non-committed Document!" exception and broken kotlin file after new J2K conversion
 - [`KT-31821`](https://youtrack.jetbrains.com/issue/KT-31821) J2K: IDEA Ultimate: local variable: CCE: "PsiLocalVariableImpl cannot be cast to class JvmAnnotatedElement" at JavaToJKTreeBuilder$DeclarationMapper.toJK()
 - [`KT-32436`](https://youtrack.jetbrains.com/issue/KT-32436) NewJ2K generic field is not initialized after convertion
@@ -1447,7 +1447,7 @@
 - [`KT-32602`](https://youtrack.jetbrains.com/issue/KT-32602) J2K: no conversion of `String.length()` method call to property access of existing String property
 - [`KT-32604`](https://youtrack.jetbrains.com/issue/KT-32604) kotlin.NotImplementedError exception occurs on converting Java call of toString method of data class to Kotlin
 - [`KT-32609`](https://youtrack.jetbrains.com/issue/KT-32609) New J2K: Comparable class is wrongly converted to Kotlin if parameter of compareTo marked with @NotNull annotation
-- [`KT-32693`](https://youtrack.jetbrains.com/issue/KT-32693) New J2K is throwing „Read access is allowed from event dispatch thread or inside read-action only“ on converting Java code inside Evaluate Expression window
+- [`KT-32693`](https://youtrack.jetbrains.com/issue/KT-32693) New J2K is throwing „Read access is allowed from event dispatch thread or inside read-action only“ on converting Java code inside Ekonstuate Expression window
 - [`KT-32702`](https://youtrack.jetbrains.com/issue/KT-32702) New J2K: lambda with method reference is converted to lamdba with excessive parameter declaration
 - [`KT-32835`](https://youtrack.jetbrains.com/issue/KT-32835) New J2K: NumberFormatException occurs on converting binary literals
 - [`KT-32837`](https://youtrack.jetbrains.com/issue/KT-32837) J2K: NumberFormatException occurs on converting literals with underscore characters
@@ -1467,7 +1467,7 @@
 
 ### Tools. Scripts
 
-- [`KT-28137`](https://youtrack.jetbrains.com/issue/KT-28137) Implement result/return value for the regular (non-REPL) scripts
+- [`KT-28137`](https://youtrack.jetbrains.com/issue/KT-28137) Implement result/return konstue for the regular (non-REPL) scripts
 
 ### Tools. kapt
 
@@ -1580,8 +1580,8 @@
 - [`KT-30737`](https://youtrack.jetbrains.com/issue/KT-30737) Try analysing callable reference preemptively
 - [`KT-30780`](https://youtrack.jetbrains.com/issue/KT-30780) Compiler crashes on 'private inline' function accessing private constant in 'inline class' (regression)
 - [`KT-30808`](https://youtrack.jetbrains.com/issue/KT-30808) NI: False negative SPREAD_OF_NULLABLE with USELESS_ELVIS_RIGHT_IS_NULL
-- [`KT-30816`](https://youtrack.jetbrains.com/issue/KT-30816) BasicJvmScriptEvaluator passes constructor parameters in incorrect order
-- [`KT-30826`](https://youtrack.jetbrains.com/issue/KT-30826) There isn't report about unsafe call in the new inference (by invalidating smartcast), NPE
+- [`KT-30816`](https://youtrack.jetbrains.com/issue/KT-30816) BasicJvmScriptEkonstuator passes constructor parameters in incorrect order
+- [`KT-30826`](https://youtrack.jetbrains.com/issue/KT-30826) There isn't report about unsafe call in the new inference (by inkonstidating smartcast), NPE
 - [`KT-30843`](https://youtrack.jetbrains.com/issue/KT-30843) Duplicate JVM class name for expect/actual classes in JvmMultifileClass-annotated file
 - [`KT-30853`](https://youtrack.jetbrains.com/issue/KT-30853) Compiler crashes with NewInference and Kotlinx.Coroutines Flow
 - [`KT-30927`](https://youtrack.jetbrains.com/issue/KT-30927) Data flow info isn't used for 'this' which is returned from lambda using labeled return
@@ -1601,7 +1601,7 @@
 - [`KT-29307`](https://youtrack.jetbrains.com/issue/KT-29307) New inference: false negative CONSTANT_EXPECTED_TYPE_MISMATCH with a Map
 - [`KT-29475`](https://youtrack.jetbrains.com/issue/KT-29475) IllegalArgumentException at getAbstractTypeFromDescriptor with deeply nested expression inside function named with a right parenthesis
 - [`KT-29996`](https://youtrack.jetbrains.com/issue/KT-29996) Properly report  errors on attempt to inline bytecode from class files compiled to 1.8 to one compiling to 1.6
-- [`KT-30289`](https://youtrack.jetbrains.com/issue/KT-30289) Don't generate annotations on synthetic methods for methods with default values for parameters
+- [`KT-30289`](https://youtrack.jetbrains.com/issue/KT-30289) Don't generate annotations on synthetic methods for methods with default konstues for parameters
 - [`KT-30410`](https://youtrack.jetbrains.com/issue/KT-30410) [NI] Front-end recursion problem while analyzing contract function with call expression of self in implies
 - [`KT-30411`](https://youtrack.jetbrains.com/issue/KT-30411) Fold recursive types to star-projected ones when inferring type variables
 - [`KT-30706`](https://youtrack.jetbrains.com/issue/KT-30706) Passing noinline lambda as (cross)inline parameter result in wrong state-machine
@@ -1646,12 +1646,12 @@
 - [`KT-13048`](https://youtrack.jetbrains.com/issue/KT-13048) "Strip trailing spaces on Save" should not strip trailing spaces inside multiline strings in Kotlin
 - [`KT-17375`](https://youtrack.jetbrains.com/issue/KT-17375) Optimize Imports does not remove unused import alias
 - [`KT-27385`](https://youtrack.jetbrains.com/issue/KT-27385) Uast: property references should resolve to getters/setters
-- [`KT-28627`](https://youtrack.jetbrains.com/issue/KT-28627) Invalid detection of Kotlin jvmTarget inside Idea/gradle build
+- [`KT-28627`](https://youtrack.jetbrains.com/issue/KT-28627) Inkonstid detection of Kotlin jvmTarget inside Idea/gradle build
 - [`KT-29267`](https://youtrack.jetbrains.com/issue/KT-29267) Enable ultra-light classes by default
 - [`KT-29892`](https://youtrack.jetbrains.com/issue/KT-29892) A lot of threads are waiting in KotlinConfigurationCheckerComponent
 - [`KT-30356`](https://youtrack.jetbrains.com/issue/KT-30356) Kotlin facet: all JVM 9+ target platforms are shown as "Target Platform = JVM 9" in Project Structure dialog
 - [`KT-30514`](https://youtrack.jetbrains.com/issue/KT-30514) Auto-import with "Add unambiguous imports on the fly" imports enum members from another package
-- [`KT-30583`](https://youtrack.jetbrains.com/issue/KT-30583) Kotlin light elements should be `isEquivalentTo` to it's origins
+- [`KT-30583`](https://youtrack.jetbrains.com/issue/KT-30583) Kotlin light elements should be `isEquikonstentTo` to it's origins
 - [`KT-30688`](https://youtrack.jetbrains.com/issue/KT-30688) Memory leak in the PerModulePackageCacheService.onTooComplexChange method
 - [`KT-30949`](https://youtrack.jetbrains.com/issue/KT-30949) Optimize Imports removes used import alias
 - [`KT-30957`](https://youtrack.jetbrains.com/issue/KT-30957) Kotlin UAST: USimpleNameReferenceExpression in "imports" for class' member resolves incorrectly to class, not to the member
@@ -1674,16 +1674,16 @@
 
 ### IDE. Debugger
 
-- [`KT-10636`](https://youtrack.jetbrains.com/issue/KT-10636) Debugger: can't evaluate call of function type parameter inside inline function
-- [`KT-18247`](https://youtrack.jetbrains.com/issue/KT-18247) Debugger: class level watches fail to evaluate outside of class instance context
+- [`KT-10636`](https://youtrack.jetbrains.com/issue/KT-10636) Debugger: can't ekonstuate call of function type parameter inside inline function
+- [`KT-18247`](https://youtrack.jetbrains.com/issue/KT-18247) Debugger: class level watches fail to ekonstuate outside of class instance context
 - [`KT-18263`](https://youtrack.jetbrains.com/issue/KT-18263) Settings / Debugger / Java Type Renderers: unqualified Kotlin class members in Java expressions are shown as errors
-- [`KT-23586`](https://youtrack.jetbrains.com/issue/KT-23586) Non-trivial properties autocompletion in evaluation window
-- [`KT-30216`](https://youtrack.jetbrains.com/issue/KT-30216) Evaluate expression: declarations annotated with Experimental (LEVEL.ERROR) fail due to compilation error
+- [`KT-23586`](https://youtrack.jetbrains.com/issue/KT-23586) Non-trivial properties autocompletion in ekonstuation window
+- [`KT-30216`](https://youtrack.jetbrains.com/issue/KT-30216) Ekonstuate expression: declarations annotated with Experimental (LEVEL.ERROR) fail due to compilation error
 - [`KT-30610`](https://youtrack.jetbrains.com/issue/KT-30610) Debugger: Variables view shows second `this` instance for inline function even from the same class as caller function
-- [`KT-30714`](https://youtrack.jetbrains.com/issue/KT-30714) Breakpoints are shown as invalid for classes that are not loaded yet
+- [`KT-30714`](https://youtrack.jetbrains.com/issue/KT-30714) Breakpoints are shown as inkonstid for classes that are not loaded yet
 - [`KT-30934`](https://youtrack.jetbrains.com/issue/KT-30934) "InvocationException: Exception occurred in target VM" on debugger breakpoint hit (with kotlintest)
 - [`KT-31266`](https://youtrack.jetbrains.com/issue/KT-31266) Kotlin debugger incompatibility with latest 192 nightly: KotlinClassWithDelegatedPropertyRenderer
-- [`KT-31785`](https://youtrack.jetbrains.com/issue/KT-31785) Exception on attempt to evaluate local function
+- [`KT-31785`](https://youtrack.jetbrains.com/issue/KT-31785) Exception on attempt to ekonstuate local function
 
 ### IDE. Gradle
 
@@ -1745,7 +1745,7 @@
 - [`KT-28485`](https://youtrack.jetbrains.com/issue/KT-28485) Incorrect parameter name after running "Add parameter to function" intention when argument variable is upper case const
 - [`KT-28619`](https://youtrack.jetbrains.com/issue/KT-28619) "Add braces to 'if' statement" moves end-of-line comment inside an `if` branch if statement inside `if` is block
 - [`KT-29556`](https://youtrack.jetbrains.com/issue/KT-29556) "Remove redundant 'let' call" doesn't rename parameter with convention `invoke` call
-- [`KT-29677`](https://youtrack.jetbrains.com/issue/KT-29677) "Specify type explicitly" intention produces invalid output for type escaped with backticks
+- [`KT-29677`](https://youtrack.jetbrains.com/issue/KT-29677) "Specify type explicitly" intention produces inkonstid output for type escaped with backticks
 - [`KT-29764`](https://youtrack.jetbrains.com/issue/KT-29764) "Convert property to function" intention doesn't warn about the property overloads at child class constructor
 - [`KT-29812`](https://youtrack.jetbrains.com/issue/KT-29812) False positive for HasPlatformType with member extension on 'dynamic'
 - [`KT-29869`](https://youtrack.jetbrains.com/issue/KT-29869) 'WhenWithOnlyElse': possibly useless inspection with false grey warning highlighting during editing the code
@@ -1836,7 +1836,7 @@
 
 ### JS. Tools
 
-- [`KT-31563`](https://youtrack.jetbrains.com/issue/KT-31563) Gradle/JS: npmResolve fails with "Invalid version" when user project's version does not match npm rules
+- [`KT-31563`](https://youtrack.jetbrains.com/issue/KT-31563) Gradle/JS: npmResolve fails with "Inkonstid version" when user project's version does not match npm rules
 - [`KT-31566`](https://youtrack.jetbrains.com/issue/KT-31566) Gradle/JS: with explicit call to `nodejs { testTask { useNodeJs() } }` configuration fails : "Could not find which method to invoke"
 - [`KT-31560`](https://youtrack.jetbrains.com/issue/KT-31560) Gradle: provide descriptions for JS tasks
 - [`KT-31564`](https://youtrack.jetbrains.com/issue/KT-31564) Gradle/JS: npmResolve reports warning "karma-webpack@3.0.5 has unmet peer dependency"
@@ -1999,14 +1999,14 @@
 
 - [`KT-7185`](https://youtrack.jetbrains.com/issue/KT-7185) Parse import directives in the middle of the file, report a diagnostic instead
 - [`KT-7237`](https://youtrack.jetbrains.com/issue/KT-7237) Parser recovery (angle bracket mismatch)
-- [`KT-11656`](https://youtrack.jetbrains.com/issue/KT-11656) Could not generate LightClass because of ISE from bridge generation on invalid code
+- [`KT-11656`](https://youtrack.jetbrains.com/issue/KT-11656) Could not generate LightClass because of ISE from bridge generation on inkonstid code
 - [`KT-13497`](https://youtrack.jetbrains.com/issue/KT-13497) Better recovery in comma-separated lists in case of missing comma
 - [`KT-13703`](https://youtrack.jetbrains.com/issue/KT-13703) Restore parser better when `class` is missing from `enum` declaration
-- [`KT-13731`](https://youtrack.jetbrains.com/issue/KT-13731) Recover parser on value parameter without a type
+- [`KT-13731`](https://youtrack.jetbrains.com/issue/KT-13731) Recover parser on konstue parameter without a type
 - [`KT-14227`](https://youtrack.jetbrains.com/issue/KT-14227) Incorrect code is generated when using MutableMap.set with plusAssign operator
 - [`KT-19389`](https://youtrack.jetbrains.com/issue/KT-19389) Couldn't inline method call 'with'
 - [`KT-20065`](https://youtrack.jetbrains.com/issue/KT-20065) "Cannot serialize error type: [ERROR : Unknown type parameter 0]" with generic typealias
-- [`KT-20322`](https://youtrack.jetbrains.com/issue/KT-20322) Debug: member value returned from suspending function is not updated immediately 
+- [`KT-20322`](https://youtrack.jetbrains.com/issue/KT-20322) Debug: member konstue returned from suspending function is not updated immediately 
 - [`KT-20780`](https://youtrack.jetbrains.com/issue/KT-20780) "Cannot serialize error type: [ERROR : Unknown type parameter 0]" with parameterized inner type alias
 - [`KT-21405`](https://youtrack.jetbrains.com/issue/KT-21405) Throwable “Rewrite at slice LEXICAL_SCOPE key: VALUE_PARAMETER_LIST” on editing string literal in kotlin-js module
 - [`KT-21775`](https://youtrack.jetbrains.com/issue/KT-21775) "Cannot serialize error type: [ERROR : Unknown type parameter 0]" with typealias used from a different module
@@ -2042,13 +2042,13 @@
 - [`KT-28855`](https://youtrack.jetbrains.com/issue/KT-28855) NoSuchMethodError with vararg of unsigned Int in generic class constructor
 - [`KT-28984`](https://youtrack.jetbrains.com/issue/KT-28984) Exception when subtype of kotlin.Function is used as an expected one for lambda or callable reference
 - [`KT-28993`](https://youtrack.jetbrains.com/issue/KT-28993) Incorrect behavior when two lambdas are passed outside a parenthesized argument list
-- [`KT-29144`](https://youtrack.jetbrains.com/issue/KT-29144) Interface with companion object generates invalid bytecode in progressive mode
+- [`KT-29144`](https://youtrack.jetbrains.com/issue/KT-29144) Interface with companion object generates inkonstid bytecode in progressive mode
 - [`KT-29228`](https://youtrack.jetbrains.com/issue/KT-29228) Intrinsify 'for' loop for unsigned integer ranges and progressions
 - [`KT-29324`](https://youtrack.jetbrains.com/issue/KT-29324) Warnings indexing jdk 11 classes
 - [`KT-29367`](https://youtrack.jetbrains.com/issue/KT-29367) New inference doesn't wrap annotated type from java to TypeWithEnhancement
 - [`KT-29507`](https://youtrack.jetbrains.com/issue/KT-29507) @field-targeted annotation on property with both getter and setter is absent from bytecode
 - [`KT-29705`](https://youtrack.jetbrains.com/issue/KT-29705) 'Rewrite at slice CONSTRUCTOR` of JS class while editing another JVM-class
-- [`KT-29792`](https://youtrack.jetbrains.com/issue/KT-29792) UnsupportedOperationException: Unsupported annotation argument type when using Java annotation with infinity or NaN as a default value
+- [`KT-29792`](https://youtrack.jetbrains.com/issue/KT-29792) UnsupportedOperationException: Unsupported annotation argument type when using Java annotation with infinity or NaN as a default konstue
 - [`KT-29891`](https://youtrack.jetbrains.com/issue/KT-29891) Kotlin doesn't allow to use local class literals as annotation arguments
 - [`KT-29912`](https://youtrack.jetbrains.com/issue/KT-29912) Crossinline nonsuspend lambda leads to KNPE during inlining
 - [`KT-29965`](https://youtrack.jetbrains.com/issue/KT-29965) Don't generate annotation on $default  method
@@ -2125,29 +2125,29 @@
 
 ### IDE. Debugger
 
-- [`KT-22250`](https://youtrack.jetbrains.com/issue/KT-22250) Evaluate: 'this' shows different values when evaluated as a variable/watch
-- [`KT-24829`](https://youtrack.jetbrains.com/issue/KT-24829) Access to coroutineContext in 'Evaluate expression'
-- [`KT-25220`](https://youtrack.jetbrains.com/issue/KT-25220) Evaluator: a instance of Pair returned instead of String ("Extract function" failed)
-- [`KT-25222`](https://youtrack.jetbrains.com/issue/KT-25222) Evaluate: ClassCastException: ObjectValue cannot be cast to IntValue ("Extract function" failed)
+- [`KT-22250`](https://youtrack.jetbrains.com/issue/KT-22250) Ekonstuate: 'this' shows different konstues when ekonstuated as a variable/watch
+- [`KT-24829`](https://youtrack.jetbrains.com/issue/KT-24829) Access to coroutineContext in 'Ekonstuate expression'
+- [`KT-25220`](https://youtrack.jetbrains.com/issue/KT-25220) Ekonstuator: a instance of Pair returned instead of String ("Extract function" failed)
+- [`KT-25222`](https://youtrack.jetbrains.com/issue/KT-25222) Ekonstuate: ClassCastException: ObjectValue cannot be cast to IntValue ("Extract function" failed)
 - [`KT-26913`](https://youtrack.jetbrains.com/issue/KT-26913) Change local variable name mangling ($receiver -> this_<label>)
 - [`KT-28087`](https://youtrack.jetbrains.com/issue/KT-28087) [Kotlin/JVM view] Inconsistent debugging data inside forEachIndexed
 - [`KT-28134`](https://youtrack.jetbrains.com/issue/KT-28134) Separate JVM/Kotlin views in "Variables" tool window
-- [`KT-28192`](https://youtrack.jetbrains.com/issue/KT-28192) Exception from KotlinEvaluator: cannot find local variable
-- [`KT-28680`](https://youtrack.jetbrains.com/issue/KT-28680) Missing `this` word completion in "Evaluate expression" window
+- [`KT-28192`](https://youtrack.jetbrains.com/issue/KT-28192) Exception from KotlinEkonstuator: cannot find local variable
+- [`KT-28680`](https://youtrack.jetbrains.com/issue/KT-28680) Missing `this` word completion in "Ekonstuate expression" window
 - [`KT-28728`](https://youtrack.jetbrains.com/issue/KT-28728) Async stack trace support for Kotlin coroutines
-- [`KT-21650`](https://youtrack.jetbrains.com/issue/KT-21650) Debugger: Can't evaluate value, resolution error
-- [`KT-23828`](https://youtrack.jetbrains.com/issue/KT-23828) Debugger: "Smart cast is impossible" when evaluating expression
-- [`KT-29661`](https://youtrack.jetbrains.com/issue/KT-29661) Evaluate expression: "Cannot find local variable" for variable name escaped with backticks
-- [`KT-29814`](https://youtrack.jetbrains.com/issue/KT-29814) Can't evaluate a property on star-projected type
+- [`KT-21650`](https://youtrack.jetbrains.com/issue/KT-21650) Debugger: Can't ekonstuate konstue, resolution error
+- [`KT-23828`](https://youtrack.jetbrains.com/issue/KT-23828) Debugger: "Smart cast is impossible" when ekonstuating expression
+- [`KT-29661`](https://youtrack.jetbrains.com/issue/KT-29661) Ekonstuate expression: "Cannot find local variable" for variable name escaped with backticks
+- [`KT-29814`](https://youtrack.jetbrains.com/issue/KT-29814) Can't ekonstuate a property on star-projected type
 - [`KT-29871`](https://youtrack.jetbrains.com/issue/KT-29871) Debugger in IDE does not handle correctly extensions.
-- [`KT-30182`](https://youtrack.jetbrains.com/issue/KT-30182) Incorrect KT elvis expression debugger evaluation
+- [`KT-30182`](https://youtrack.jetbrains.com/issue/KT-30182) Incorrect KT elvis expression debugger ekonstuation
 - [`KT-29189`](https://youtrack.jetbrains.com/issue/KT-29189) [BE] 'Step Over' falls through 'return when' (and 'return if') instead of executing individual branches
 - [`KT-29234`](https://youtrack.jetbrains.com/issue/KT-29234) ISE “@NotNull method org/jetbrains/kotlin/codegen/binding/CodegenBinding.anonymousClassForCallable must not return null” on debugging with breakpoints in Kotlin script file
-- [`KT-29423`](https://youtrack.jetbrains.com/issue/KT-29423) Unable to evaluate lambdas on jdk 9-11
+- [`KT-29423`](https://youtrack.jetbrains.com/issue/KT-29423) Unable to ekonstuate lambdas on jdk 9-11
 - [`KT-30220`](https://youtrack.jetbrains.com/issue/KT-30220) Empty variables view when breakpoint inside an lambda inside class
 - [`KT-30318`](https://youtrack.jetbrains.com/issue/KT-30318) KotlinCoroutinesAsyncStackTraceProvider slows down java debugging
 - [`KT-17811`](https://youtrack.jetbrains.com/issue/KT-17811) Couldn't inline method error for inline method with anonymous object initialization and reified type parameter
-- [`KT-30611`](https://youtrack.jetbrains.com/issue/KT-30611) Debugger: in projects with stdlib of 1.2.n version Frames view can't complete loading, EvaluateException: "Method threw 'java.lang.ClassNotFoundException' exception." at EvaluateExceptionUtil.createEvaluateException()
+- [`KT-30611`](https://youtrack.jetbrains.com/issue/KT-30611) Debugger: in projects with stdlib of 1.2.n version Frames view can't complete loading, EkonstuateException: "Method threw 'java.lang.ClassNotFoundException' exception." at EkonstuateExceptionUtil.createEkonstuateException()
 
 ### IDE. Decompiler
 
@@ -2211,7 +2211,7 @@
 #### Fixes
 
 - [`KT-7593`](https://youtrack.jetbrains.com/issue/KT-7593) On splitting property declaration for functional expression additional bracket added
-- [`KT-12273`](https://youtrack.jetbrains.com/issue/KT-12273) "Replace with operator" intention is suggested for some non-operator functions and produces invalid code
+- [`KT-12273`](https://youtrack.jetbrains.com/issue/KT-12273) "Replace with operator" intention is suggested for some non-operator functions and produces inkonstid code
 - [`KT-18715`](https://youtrack.jetbrains.com/issue/KT-18715) Replace if with elvis swallows comments
 - [`KT-19254`](https://youtrack.jetbrains.com/issue/KT-19254) Intention to convert object literal to class always creates a class named "O"
 - [`KT-25501`](https://youtrack.jetbrains.com/issue/KT-25501) "Replace overloaded operator with function call" changes semantics of increment and decrement operators
@@ -2224,14 +2224,14 @@
 - [`KT-28596`](https://youtrack.jetbrains.com/issue/KT-28596) "Can be replaced with binary operator" shouldn't be suggested when receiver or argument is floating point type
 - [`KT-28641`](https://youtrack.jetbrains.com/issue/KT-28641) "Remove useless cast" produces a dangling lambda ("Too many arguments" error)
 - [`KT-28698`](https://youtrack.jetbrains.com/issue/KT-28698) "Convert to apply" intention: include function calls with `this` passed as an argument
-- [`KT-28773`](https://youtrack.jetbrains.com/issue/KT-28773) Kotlin/JS: Wrong inspection to replace .equals() with == on dynamic values
+- [`KT-28773`](https://youtrack.jetbrains.com/issue/KT-28773) Kotlin/JS: Wrong inspection to replace .equals() with == on dynamic konstues
 - [`KT-28851`](https://youtrack.jetbrains.com/issue/KT-28851) 'Convert parameter to receiver' adds `Array<out T>` wrapper to `vararg` parameter and drops `override` modifier in implementations
 - [`KT-28969`](https://youtrack.jetbrains.com/issue/KT-28969) TYPE_MISMATCH in array vs non-array case: two quick fixes exist for annotation and none of them adds array literal
 - [`KT-28995`](https://youtrack.jetbrains.com/issue/KT-28995) "Add parameter to constructor" quickfix for first enum member changes arguments for all members
-- [`KT-29051`](https://youtrack.jetbrains.com/issue/KT-29051) "Add parameter to constructor" quickfix for not-first enum member: "PsiInvalidElementAccessException: Element: class org.jetbrains.kotlin.psi.KtStringTemplateExpression #kotlin  because: different providers"
+- [`KT-29051`](https://youtrack.jetbrains.com/issue/KT-29051) "Add parameter to constructor" quickfix for not-first enum member: "PsiInkonstidElementAccessException: Element: class org.jetbrains.kotlin.psi.KtStringTemplateExpression #kotlin  because: different providers"
 - [`KT-29052`](https://youtrack.jetbrains.com/issue/KT-29052) "Add parameter to constructor" quickfix for not-first enum member inserts FQN type for parameter
 - [`KT-29056`](https://youtrack.jetbrains.com/issue/KT-29056) KNPE in ConvertPrimaryConstructorToSecondary with missing property identifier
-- [`KT-29085`](https://youtrack.jetbrains.com/issue/KT-29085) False positive "Class member can have 'private' visibility" for a `const val` used in a public inline function
+- [`KT-29085`](https://youtrack.jetbrains.com/issue/KT-29085) False positive "Class member can have 'private' visibility" for a `const konst` used in a public inline function
 - [`KT-29093`](https://youtrack.jetbrains.com/issue/KT-29093) False positive inspection "Redundant lambda arrow" with nested lambdas
 - [`KT-29099`](https://youtrack.jetbrains.com/issue/KT-29099) "Convert to apply" intention is not available for a single function call
 - [`KT-29128`](https://youtrack.jetbrains.com/issue/KT-29128) False positive 'Explicitly given type is redundant here' when typealias is used
@@ -2248,7 +2248,7 @@
 - [`KT-30007`](https://youtrack.jetbrains.com/issue/KT-30007) False negative "Add import for '...'" in UserType
 - [`KT-19944`](https://youtrack.jetbrains.com/issue/KT-19944) multiplatform: Convert expect/actual function to property should keep the caret on the converted function
 - [`KT-27289`](https://youtrack.jetbrains.com/issue/KT-27289) "Create" quick fix on FQN does nothing with KNPE at KotlinRefactoringUtilKt$chooseContainerElement$1.renderText()
-- [`KT-29312`](https://youtrack.jetbrains.com/issue/KT-29312) "Make constructor parameter a property" produces wrong modifier order + exception "Invalid range specified"
+- [`KT-29312`](https://youtrack.jetbrains.com/issue/KT-29312) "Make constructor parameter a property" produces wrong modifier order + exception "Inkonstid range specified"
 - [`KT-29414`](https://youtrack.jetbrains.com/issue/KT-29414) "Main parameter is not necessary" inspection reports parameter of `main()` in object
 - [`KT-29499`](https://youtrack.jetbrains.com/issue/KT-29499) "Unsafe call of inline function with nullable extension receiver" inspection ignores inferred nullability
 - [`KT-29927`](https://youtrack.jetbrains.com/issue/KT-29927) Missing "Import members from" intention with type check operator in `when` branch
@@ -2279,7 +2279,7 @@
 
 ### IDE. Navigation
 
-- [`KT-26924`](https://youtrack.jetbrains.com/issue/KT-26924) Overriding Methods list has more values than it should be in case of inline class
+- [`KT-26924`](https://youtrack.jetbrains.com/issue/KT-26924) Overriding Methods list has more konstues than it should be in case of inline class
 - [`KT-28661`](https://youtrack.jetbrains.com/issue/KT-28661) "Is implemented in" gutter icon shows duplicate function implementations in inline classes
 - [`KT-28838`](https://youtrack.jetbrains.com/issue/KT-28838) Group by file structure doesn't work for text search in Kotlin
 
@@ -2349,7 +2349,7 @@
 - [`KT-27675`](https://youtrack.jetbrains.com/issue/KT-27675) Enable Kapt build cache by default
 - [`KT-27714`](https://youtrack.jetbrains.com/issue/KT-27714) Kotlin MPP Android targets don't have their attributes copied to the configurations of the compilations
 - [`KT-29761`](https://youtrack.jetbrains.com/issue/KT-29761) Inter-project IC does not work for kaptGenerateStubs* tasks on Android
-- [`KT-29823`](https://youtrack.jetbrains.com/issue/KT-29823) Update 'org.gradle.usage' attribute rules to support the 'JAVA_API_JARS' value
+- [`KT-29823`](https://youtrack.jetbrains.com/issue/KT-29823) Update 'org.gradle.usage' attribute rules to support the 'JAVA_API_JARS' konstue
 - [`KT-29964`](https://youtrack.jetbrains.com/issue/KT-29964) A universal Gradle DSL way of configuring all compilations of all targets doesn't work for Android target of a multiplatform project
 - [`KT-30276`](https://youtrack.jetbrains.com/issue/KT-30276) Warn if the Kotlin Gradle plugin is loaded multiple times
 - [`KT-30322`](https://youtrack.jetbrains.com/issue/KT-30322) Memory leak in CompilationSourceSetUtil
@@ -2373,9 +2373,9 @@
 
 ### Tools. Scripts
 
-- [`KT-29296`](https://youtrack.jetbrains.com/issue/KT-29296) Script evaluation - impossible to set base classloader to null
+- [`KT-29296`](https://youtrack.jetbrains.com/issue/KT-29296) Script ekonstuation - impossible to set base classloader to null
 - [`KT-27051`](https://youtrack.jetbrains.com/issue/KT-27051) Support dynamic versions in @file:DependsOn
-- [`KT-27815`](https://youtrack.jetbrains.com/issue/KT-27815) Compiler options in the scripting compilation configuration are ignored on compilation/evaluation
+- [`KT-27815`](https://youtrack.jetbrains.com/issue/KT-27815) Compiler options in the scripting compilation configuration are ignored on compilation/ekonstuation
 - [`KT-28593`](https://youtrack.jetbrains.com/issue/KT-28593) Idea tries to associate file type with the script definition discovery file
 - [`KT-29319`](https://youtrack.jetbrains.com/issue/KT-29319) scripts default jvmTarget causes inlining problems - default should be 1.8
 - [`KT-29741`](https://youtrack.jetbrains.com/issue/KT-29741) KJvmCompiledScript can not be deserialized KJvmCompiledModule if it's null
@@ -2385,7 +2385,7 @@
 
 - [`KT-26977`](https://youtrack.jetbrains.com/issue/KT-26977) kapt plugin applied in platform.jvm module preventing visibility of common code
 - [`KT-27506`](https://youtrack.jetbrains.com/issue/KT-27506) Kapt error "no interface expected here" in class implementing interface with secondary constructor
-- [`KT-28220`](https://youtrack.jetbrains.com/issue/KT-28220) kapt can generate invalid stub files for imports of enum constants
+- [`KT-28220`](https://youtrack.jetbrains.com/issue/KT-28220) kapt can generate inkonstid stub files for imports of enum constants
 - [`KT-28306`](https://youtrack.jetbrains.com/issue/KT-28306) Cannot extend an generic interface with function body while using kapt and correctErrorTypes in Kotlin 1.3
 - [`KT-23880`](https://youtrack.jetbrains.com/issue/KT-23880) Kapt: Support incremental annotation processors
 - [`KT-29302`](https://youtrack.jetbrains.com/issue/KT-29302) Java classes doesn't resolve Kotlin classes when kapt.use.worker.api = true
@@ -2465,7 +2465,7 @@
 #### New Features
 
 - [`KT-14416`](https://youtrack.jetbrains.com/issue/KT-14416) Support of @PolymorphicSignature in Kotlin compiler
-- [`KT-22704`](https://youtrack.jetbrains.com/issue/KT-22704) Allow expect annotations with actual typealias to Java to have default argument values both in expected and in actual
+- [`KT-22704`](https://youtrack.jetbrains.com/issue/KT-22704) Allow expect annotations with actual typealias to Java to have default argument konstues both in expected and in actual
 - [`KT-26165`](https://youtrack.jetbrains.com/issue/KT-26165) Support VarHandle in JVM codegen
 - [`KT-26999`](https://youtrack.jetbrains.com/issue/KT-26999) Inspection for unused main parameter in Kotlin 1.3
 
@@ -2473,7 +2473,7 @@
 
 - [`KT-16867`](https://youtrack.jetbrains.com/issue/KT-16867) Proguard can't unbox Kotlin enums to integers
 - [`KT-23466`](https://youtrack.jetbrains.com/issue/KT-23466) kotlin compiler opens-reads-closes .class files many times over
-- [`KT-25613`](https://youtrack.jetbrains.com/issue/KT-25613) Optimise boxing of inline class values inside string templates
+- [`KT-25613`](https://youtrack.jetbrains.com/issue/KT-25613) Optimise boxing of inline class konstues inside string templates
 
 #### Fixes
 
@@ -2488,7 +2488,7 @@
 - [`KT-20344`](https://youtrack.jetbrains.com/issue/KT-20344) Unused private setter created for property
 - [`KT-21862`](https://youtrack.jetbrains.com/issue/KT-21862) java.lang.NoSuchFieldError when calling isInitialized on a lateinit "field" of a companion object
 - [`KT-21946`](https://youtrack.jetbrains.com/issue/KT-21946) Compilation error during default lambda inlining when it returns anonymous object
-- [`KT-22154`](https://youtrack.jetbrains.com/issue/KT-22154) Warning: Stripped invalid locals information from 1 method when compiling with D8
+- [`KT-22154`](https://youtrack.jetbrains.com/issue/KT-22154) Warning: Stripped inkonstid locals information from 1 method when compiling with D8
 - [`KT-23369`](https://youtrack.jetbrains.com/issue/KT-23369) Internal compiler error in SMAPParser.parse
 - [`KT-23543`](https://youtrack.jetbrains.com/issue/KT-23543) Back-end (JVM) Internal error: Couldn't inline method
 - [`KT-23739`](https://youtrack.jetbrains.com/issue/KT-23739) CompilationException: Back-end (JVM) Internal error: Couldn't inline method call: Unmapped line number in inlined function
@@ -2504,7 +2504,7 @@
 - [`KT-25893`](https://youtrack.jetbrains.com/issue/KT-25893) crossinline suspend function leads to IllegalStateException: call to 'resume' before 'invoke' with coroutine or compile error
 - [`KT-25907`](https://youtrack.jetbrains.com/issue/KT-25907) "Backend Internal error" for a nullable loop variable with explicitly declared type in a for-loop over String
 - [`KT-25922`](https://youtrack.jetbrains.com/issue/KT-25922) Back-end Internal error : Couldn't inline method : Lambda inlining : invoke(Continuation) : Trying to access skipped parameter
-- [`KT-26126`](https://youtrack.jetbrains.com/issue/KT-26126) Front-end doesn't check that fun with contract and `callsInPlace` effect is an inline function; compiler crashes on val initialization
+- [`KT-26126`](https://youtrack.jetbrains.com/issue/KT-26126) Front-end doesn't check that fun with contract and `callsInPlace` effect is an inline function; compiler crashes on konst initialization
 - [`KT-26366`](https://youtrack.jetbrains.com/issue/KT-26366) UseExperimental with full qualified reference to marker annotation class is reported as error
 - [`KT-26384`](https://youtrack.jetbrains.com/issue/KT-26384) Compiler crash with nested multi-catch try, finally block and inline function
 - [`KT-26505`](https://youtrack.jetbrains.com/issue/KT-26505) Improve error message on missing script base class kotlin.script.templates.standard.ScriptTemplateWithArgs
@@ -2517,9 +2517,9 @@
 - [`KT-26658`](https://youtrack.jetbrains.com/issue/KT-26658) Trying to access skipped parameter exception in code with crossinline suspend lambda with suspend function with default parameter call
 - [`KT-26715`](https://youtrack.jetbrains.com/issue/KT-26715) NullPointerException for an inline class constructor reference
 - [`KT-26848`](https://youtrack.jetbrains.com/issue/KT-26848) Incorrect line in coroutine debug metadata for first suspension point
-- [`KT-26908`](https://youtrack.jetbrains.com/issue/KT-26908) Inline classes can't have a parameter with a default value (Platform declaration clash)
+- [`KT-26908`](https://youtrack.jetbrains.com/issue/KT-26908) Inline classes can't have a parameter with a default konstue (Platform declaration clash)
 - [`KT-26931`](https://youtrack.jetbrains.com/issue/KT-26931) NSME “InlineClass.foo-impl(LIFace;)I” on calling inherited method from inline class instance
-- [`KT-26932`](https://youtrack.jetbrains.com/issue/KT-26932) CCE “Foo cannot be cast to java.lang.String” when accessing underlying value of inline class through reflection
+- [`KT-26932`](https://youtrack.jetbrains.com/issue/KT-26932) CCE “Foo cannot be cast to java.lang.String” when accessing underlying konstue of inline class through reflection
 - [`KT-26998`](https://youtrack.jetbrains.com/issue/KT-26998) Default extension fun call in generic Kotlin interface with inline class substituted type of extension receiver fails with internal compiler error
 - [`KT-27025`](https://youtrack.jetbrains.com/issue/KT-27025) Inline class access to private companion object fun fails with VerifyError
 - [`KT-27070`](https://youtrack.jetbrains.com/issue/KT-27070) Delegated property with inline class type delegate fails with internal error in codegen
@@ -2530,12 +2530,12 @@
 - [`KT-27162`](https://youtrack.jetbrains.com/issue/KT-27162) Incorrect container is generated to callable reference classes for references to inline class members
 - [`KT-27259`](https://youtrack.jetbrains.com/issue/KT-27259) "Internal error: wrong code generated" for nullable inline class with an inline class underlying type
 - [`KT-27318`](https://youtrack.jetbrains.com/issue/KT-27318) Interface implementation by delegation to inline class type delegate fails with internal error in codegen
-- [`KT-27358`](https://youtrack.jetbrains.com/issue/KT-27358) Boxed inline class type default parameter values fail with CCE at run-time
-- [`KT-27416`](https://youtrack.jetbrains.com/issue/KT-27416) "IllegalStateException: Backend Internal error" for inline class with a function with default argument value
+- [`KT-27358`](https://youtrack.jetbrains.com/issue/KT-27358) Boxed inline class type default parameter konstues fail with CCE at run-time
+- [`KT-27416`](https://youtrack.jetbrains.com/issue/KT-27416) "IllegalStateException: Backend Internal error" for inline class with a function with default argument konstue
 - [`KT-27429`](https://youtrack.jetbrains.com/issue/KT-27429) "-java-parameters" compiler argument fails in constructor when there is an inline class parameter present
 - [`KT-27513`](https://youtrack.jetbrains.com/issue/KT-27513) Backend Internal Error when using inline method inside inline class
 - [`KT-27560`](https://youtrack.jetbrains.com/issue/KT-27560) Executing getter of property with type kotlin.reflect.KSuspendFunction1 throws MalformedParameterizedTypeException
-- [`KT-27705`](https://youtrack.jetbrains.com/issue/KT-27705) Internal compiler error (incorrect bytecode generated) when inner class constructor inside inline class references inline class primary val
+- [`KT-27705`](https://youtrack.jetbrains.com/issue/KT-27705) Internal compiler error (incorrect bytecode generated) when inner class constructor inside inline class references inline class primary konst
 - [`KT-27706`](https://youtrack.jetbrains.com/issue/KT-27706) Internal compiler error (incorrect bytecode generated) when inner class inside inline class accepts inline class parameter
 - [`KT-27732`](https://youtrack.jetbrains.com/issue/KT-27732) Using type inference on platform types corresponding to unsigned types causes compiler error
 - [`KT-27737`](https://youtrack.jetbrains.com/issue/KT-27737) CCE for delegated property of inline class type
@@ -2552,22 +2552,22 @@
 - [`KT-28405`](https://youtrack.jetbrains.com/issue/KT-28405) VE “Bad type on operand stack” at runtime on creating inline class with UIntArray inside
 - [`KT-28585`](https://youtrack.jetbrains.com/issue/KT-28585) Inline classes not properly boxed when accessing a `var` (from enclosing scope) from lambda
 - [`KT-28847`](https://youtrack.jetbrains.com/issue/KT-28847) Compilation fails with "AssertionError: Rewrite at slice FUNCTOR" on compiling complicated case with delegating property
-- [`KT-28879`](https://youtrack.jetbrains.com/issue/KT-28879) "AnalyzerException: Expected I, but found R" when compiling javaClass on inline class value
+- [`KT-28879`](https://youtrack.jetbrains.com/issue/KT-28879) "AnalyzerException: Expected I, but found R" when compiling javaClass on inline class konstue
 - [`KT-28920`](https://youtrack.jetbrains.com/issue/KT-28920) "AnalyzerException: Expected I, but found R" when compiling javaObjectType/javaPrimitiveType with inline classes
-- [`KT-28965`](https://youtrack.jetbrains.com/issue/KT-28965) Unsound smartcast to definitely not-null if value of one generic type is cast to other generic type
+- [`KT-28965`](https://youtrack.jetbrains.com/issue/KT-28965) Unsound smartcast to definitely not-null if konstue of one generic type is cast to other generic type
 - [`KT-28983`](https://youtrack.jetbrains.com/issue/KT-28983) Wrong mapping of flexible inline class type to primitive type
 
 ### IDE
 
 #### New Features
 
-- [`KT-25906`](https://youtrack.jetbrains.com/issue/KT-25906) Kotlin language injection doesn't evaluate constants in string templates
+- [`KT-25906`](https://youtrack.jetbrains.com/issue/KT-25906) Kotlin language injection doesn't ekonstuate constants in string templates
 - [`KT-27461`](https://youtrack.jetbrains.com/issue/KT-27461) Provide live template to generate `main()` with no parameters
 - [`KT-28371`](https://youtrack.jetbrains.com/issue/KT-28371) Automatically align ?: (elvis operator) after call on the new line
 
 #### Performance Improvements
 
-- [`KT-23738`](https://youtrack.jetbrains.com/issue/KT-23738) Provide stubs for annotation value argument list 
+- [`KT-23738`](https://youtrack.jetbrains.com/issue/KT-23738) Provide stubs for annotation konstue argument list 
 - [`KT-25410`](https://youtrack.jetbrains.com/issue/KT-25410) Opening Settings freezes the UI for 23 seconds
 - [`KT-27832`](https://youtrack.jetbrains.com/issue/KT-27832) Improve performance of KotlinGradleProjectResolverExtension
 - [`KT-28755`](https://youtrack.jetbrains.com/issue/KT-28755) Optimize searching constructor delegation calls
@@ -2630,26 +2630,26 @@
 - [`KT-23834`](https://youtrack.jetbrains.com/issue/KT-23834) Code completion and auto import do not suggest extension that differs from member only in type parameter
 - [`KT-25312`](https://youtrack.jetbrains.com/issue/KT-25312) Autocomplete for overridden members in `expected` class inserts extra `override` word
 - [`KT-26632`](https://youtrack.jetbrains.com/issue/KT-26632) Completion: "data class" instead of "data"
-- [`KT-27916`](https://youtrack.jetbrains.com/issue/KT-27916) Autocomplete val when auto-completing const
+- [`KT-27916`](https://youtrack.jetbrains.com/issue/KT-27916) Autocomplete konst when auto-completing const
 
 ### IDE. Debugger
 
 #### Fixes
 
-- [`KT-13268`](https://youtrack.jetbrains.com/issue/KT-13268) Can't quick evaluate expression with Alt + Click without get operator
+- [`KT-13268`](https://youtrack.jetbrains.com/issue/KT-13268) Can't quick ekonstuate expression with Alt + Click without get operator
 - [`KT-14075`](https://youtrack.jetbrains.com/issue/KT-14075) Debugger: Property syntax accesses private Java field rather than synthetic property accessor
 - [`KT-22366`](https://youtrack.jetbrains.com/issue/KT-22366) Debugger doesn't stop on certain expressions
-- [`KT-23585`](https://youtrack.jetbrains.com/issue/KT-23585) Evaluation of a static interface method call fails
+- [`KT-23585`](https://youtrack.jetbrains.com/issue/KT-23585) Ekonstuation of a static interface method call fails
 - [`KT-24343`](https://youtrack.jetbrains.com/issue/KT-24343) Debugger, Step Over: IllegalStateException on two consecutive breakpoints when first breakpoint is on an inline function call
-- [`KT-24959`](https://youtrack.jetbrains.com/issue/KT-24959) Evaluating my breakpoint condition fails with exception
+- [`KT-24959`](https://youtrack.jetbrains.com/issue/KT-24959) Ekonstuating my breakpoint condition fails with exception
 - [`KT-25667`](https://youtrack.jetbrains.com/issue/KT-25667) Exception in logs from WeakBytecodeDebugInfoStorage (NoStrataPositionManagerHelper)
-- [`KT-26795`](https://youtrack.jetbrains.com/issue/KT-26795) Debugger crashes with NullPointerException when evaluating const value in companion object
+- [`KT-26795`](https://youtrack.jetbrains.com/issue/KT-26795) Debugger crashes with NullPointerException when ekonstuating const konstue in companion object
 - [`KT-26798`](https://youtrack.jetbrains.com/issue/KT-26798) Check that step into works with overrides in inline classes
-- [`KT-27414`](https://youtrack.jetbrains.com/issue/KT-27414) Use "toString" to render values of inline classes in debugger
+- [`KT-27414`](https://youtrack.jetbrains.com/issue/KT-27414) Use "toString" to render konstues of inline classes in debugger
 - [`KT-27462`](https://youtrack.jetbrains.com/issue/KT-27462) Main without parameters just with inline fun call: Debug: last Step Over can't finish the process
 - [`KT-28028`](https://youtrack.jetbrains.com/issue/KT-28028) IDEA is unable to find sources during debugging
-- [`KT-28342`](https://youtrack.jetbrains.com/issue/KT-28342) Can't evaluate the synthetic 'field' variable
-- [`KT-28487`](https://youtrack.jetbrains.com/issue/KT-28487) ISE “resultValue is null: cannot find method generated_for_debugger_fun” on evaluating value of inline class
+- [`KT-28342`](https://youtrack.jetbrains.com/issue/KT-28342) Can't ekonstuate the synthetic 'field' variable
+- [`KT-28487`](https://youtrack.jetbrains.com/issue/KT-28487) ISE “resultValue is null: cannot find method generated_for_debugger_fun” on ekonstuating konstue of inline class
 
 ### IDE. Decompiler
 
@@ -2738,7 +2738,7 @@
 - [`KT-23693`](https://youtrack.jetbrains.com/issue/KT-23693) `Add missing actual members` quick fix doesn't work if there is already same-named function with the same signature
 - [`KT-23744`](https://youtrack.jetbrains.com/issue/KT-23744) "Kotlin library and Gradle plugin versions are different" inspection false positive for non-JVM dependencies
 - [`KT-24492`](https://youtrack.jetbrains.com/issue/KT-24492) "Call on collection type may be reduced" does not change labels from mapNotNull to map
-- [`KT-25536`](https://youtrack.jetbrains.com/issue/KT-25536) Use non-const Kotlin 'val' usage in Java code isn't reported on case labels (& assignments)
+- [`KT-25536`](https://youtrack.jetbrains.com/issue/KT-25536) Use non-const Kotlin 'konst' usage in Java code isn't reported on case labels (& assignments)
 - [`KT-25933`](https://youtrack.jetbrains.com/issue/KT-25933) ReplaceCallWithBinaryOperator should not suggest to replace 'equals' involving floating-point types
 - [`KT-25953`](https://youtrack.jetbrains.com/issue/KT-25953) Meaningless auto properties for Atomic classes
 - [`KT-25995`](https://youtrack.jetbrains.com/issue/KT-25995) "Simplify comparision" should try to apply "Simplify if expression" when necessary
@@ -2753,7 +2753,7 @@
 - [`KT-26710`](https://youtrack.jetbrains.com/issue/KT-26710) Should not report "implicit 'it' is shadowed" when outer `it` is not used
 - [`KT-26839`](https://youtrack.jetbrains.com/issue/KT-26839) Add braces to if statement produces code that is not formatted according to style
 - [`KT-26902`](https://youtrack.jetbrains.com/issue/KT-26902) Bad quickfix name for "Call on non-null type may be reduced"
-- [`KT-27016`](https://youtrack.jetbrains.com/issue/KT-27016) Replace 'if' with elvis operator w/ interface generates invalid code (breaks type inference)
+- [`KT-27016`](https://youtrack.jetbrains.com/issue/KT-27016) Replace 'if' with elvis operator w/ interface generates inkonstid code (breaks type inference)
 - [`KT-27034`](https://youtrack.jetbrains.com/issue/KT-27034) "Redundant SAM constructor" inspection shouldn't make all lambda gray (too much highlighting)
 - [`KT-27061`](https://youtrack.jetbrains.com/issue/KT-27061) False positive "Convert to secondary constructor" with delegation
 - [`KT-27071`](https://youtrack.jetbrains.com/issue/KT-27071) "Add non-null asserted (!!) call" places `!!` at wrong position with operator `get` (array indexing)
@@ -2772,10 +2772,10 @@
 - [`KT-27354`](https://youtrack.jetbrains.com/issue/KT-27354) False positive "Make 'Foo' open" for `data` class inheritance
 - [`KT-27408`](https://youtrack.jetbrains.com/issue/KT-27408) "Add braces to 'if' statement" moves end-of-line comment inside an `if` branch
 - [`KT-27486`](https://youtrack.jetbrains.com/issue/KT-27486) ConvertCallChainIntoSequence quick fix doesn't convert 'unzip' into 'Sequence'
-- [`KT-27539`](https://youtrack.jetbrains.com/issue/KT-27539) False positive `Redundant Companion reference` when val in companion is effectively shadowed by inherited val
+- [`KT-27539`](https://youtrack.jetbrains.com/issue/KT-27539) False positive `Redundant Companion reference` when konst in companion is effectively shadowed by inherited konst
 - [`KT-27584`](https://youtrack.jetbrains.com/issue/KT-27584) False positive "Move lambda argument out of parentheses" when implementing interface by delegation
 - [`KT-27590`](https://youtrack.jetbrains.com/issue/KT-27590) No “Change parameter” quick fix for changing argument type from UInt to Int
-- [`KT-27619`](https://youtrack.jetbrains.com/issue/KT-27619) Inspection "Invalid property key" should check whether reference is soft or not
+- [`KT-27619`](https://youtrack.jetbrains.com/issue/KT-27619) Inspection "Inkonstid property key" should check whether reference is soft or not
 - [`KT-27664`](https://youtrack.jetbrains.com/issue/KT-27664) Fix flaky problem in tests "Could not initialize class UnusedSymbolInspection"
 - [`KT-27699`](https://youtrack.jetbrains.com/issue/KT-27699) "Remove redundant spread operator" produces incorrect code
 - [`KT-27708`](https://youtrack.jetbrains.com/issue/KT-27708) IDE highlights internal constructors used only from Java as unused
@@ -2788,7 +2788,7 @@
 - [`KT-28200`](https://youtrack.jetbrains.com/issue/KT-28200) KNPE in TypeUtilsKt.getDataFlowAwareTypes
 - [`KT-28268`](https://youtrack.jetbrains.com/issue/KT-28268) Don't suggest "make abstract" quick fix for inline classes
 - [`KT-28286`](https://youtrack.jetbrains.com/issue/KT-28286) "Unused symbol" inspection: Interface is reported as "class"
-- [`KT-28341`](https://youtrack.jetbrains.com/issue/KT-28341) False positive "Introduce backing property" intention for `const` values
+- [`KT-28341`](https://youtrack.jetbrains.com/issue/KT-28341) False positive "Introduce backing property" intention for `const` konstues
 - [`KT-28381`](https://youtrack.jetbrains.com/issue/KT-28381) Forbid "move property to constructor" for expect classes
 - [`KT-28382`](https://youtrack.jetbrains.com/issue/KT-28382) Forbid "introduce backing property" for expect classes
 - [`KT-28383`](https://youtrack.jetbrains.com/issue/KT-28383) Exception during "move to companion" for expect class member
@@ -2798,8 +2798,8 @@
 - [`KT-28618`](https://youtrack.jetbrains.com/issue/KT-28618) Kotlin: convert anonymous function to lambda expression failed if no space at start of lambda expression
 - [`KT-28694`](https://youtrack.jetbrains.com/issue/KT-28694) "Assign backing field" quick fix adds empty line before created assignment
 - [`KT-28716`](https://youtrack.jetbrains.com/issue/KT-28716) KotlinDefaultHighlightingSettingsProvider suppresses inspections in non-kotlin files
-- [`KT-28744`](https://youtrack.jetbrains.com/issue/KT-28744) val-keyword went missing from constructor of inline class after applying “Create actual class...” intention
-- [`KT-28745`](https://youtrack.jetbrains.com/issue/KT-28745) val-keyword went missing from constructor of inline class after applying “Create expected class in common module...” intention
+- [`KT-28744`](https://youtrack.jetbrains.com/issue/KT-28744) konst-keyword went missing from constructor of inline class after applying “Create actual class...” intention
+- [`KT-28745`](https://youtrack.jetbrains.com/issue/KT-28745) konst-keyword went missing from constructor of inline class after applying “Create expected class in common module...” intention
 
 ### IDE. KDoc
 
@@ -2817,7 +2817,7 @@
 
 ### IDE. Navigation
 
-- [`KT-22637`](https://youtrack.jetbrains.com/issue/KT-22637) Go to actual declarations for enum values should choose correct value if they are written in one line
+- [`KT-22637`](https://youtrack.jetbrains.com/issue/KT-22637) Go to actual declarations for enum konstues should choose correct konstue if they are written in one line
 - [`KT-27494`](https://youtrack.jetbrains.com/issue/KT-27494) Create tooling tests for new-multiplatform
 - [`KT-28206`](https://youtrack.jetbrains.com/issue/KT-28206) Go to implementations on expect enum shows not only enum classes, but also all members
 - [`KT-28398`](https://youtrack.jetbrains.com/issue/KT-28398) Broken navigation to actual declaration of `println()` in non-gradle project
@@ -2867,7 +2867,7 @@
 ### JS. Tools
 
 - [`KT-27361`](https://youtrack.jetbrains.com/issue/KT-27361) Support NamedConstructor in idl2k
-- [`KT-28786`](https://youtrack.jetbrains.com/issue/KT-28786) Float values initialized incorrectly while translating from IDL
+- [`KT-28786`](https://youtrack.jetbrains.com/issue/KT-28786) Float konstues initialized incorrectly while translating from IDL
 - [`KT-28821`](https://youtrack.jetbrains.com/issue/KT-28821) Kotlin/JS missing ClipboardEvent definitions
 - [`KT-28864`](https://youtrack.jetbrains.com/issue/KT-28864) Better support for TrackEvent, MediaStreamTrackEvent and RTCTrackEvent in idl
 
@@ -2902,7 +2902,7 @@
 - [`KT-28251`](https://youtrack.jetbrains.com/issue/KT-28251) Stdlib: Deprecated ReplaceWith `kotlin.math.log` replacement instead of `kotlin.math.ln`
 - [`KT-28488`](https://youtrack.jetbrains.com/issue/KT-28488) Add clarification for COROUTINES_SUSPENDED documentation
 - [`KT-28572`](https://youtrack.jetbrains.com/issue/KT-28572) readLine() stumbles at surrogate pairs
-- [`KT-29187`](https://youtrack.jetbrains.com/issue/KT-29187) JS toTypedArray returns array of invalid type for LongArray and BooleanArray
+- [`KT-29187`](https://youtrack.jetbrains.com/issue/KT-29187) JS toTypedArray returns array of inkonstid type for LongArray and BooleanArray
 
 ### Reflection
 
@@ -2942,7 +2942,7 @@
 #### Performance Improvements
 
 - [`KT-24530`](https://youtrack.jetbrains.com/issue/KT-24530) Enable compile avoidance for kaptKotlin tasks
-- [`KT-28037`](https://youtrack.jetbrains.com/issue/KT-28037) In-process Kotlin compiler leaks thread local values
+- [`KT-28037`](https://youtrack.jetbrains.com/issue/KT-28037) In-process Kotlin compiler leaks thread local konstues
 
 #### Fixes
 
@@ -2971,7 +2971,7 @@
 ### Tools. JPS
 
 - [`KT-26980`](https://youtrack.jetbrains.com/issue/KT-26980) JPS Native warning is duplicated for test source sets
-- [`KT-27285`](https://youtrack.jetbrains.com/issue/KT-27285) MPP: invalid common -> platform dependency: JPS fails with Throwable "Cannot initialize Kotlin context: Cyclically dependent modules" at KotlinChunk.<init>()
+- [`KT-27285`](https://youtrack.jetbrains.com/issue/KT-27285) MPP: inkonstid common -> platform dependency: JPS fails with Throwable "Cannot initialize Kotlin context: Cyclically dependent modules" at KotlinChunk.<init>()
 - [`KT-27622`](https://youtrack.jetbrains.com/issue/KT-27622) JPS, JS: Resources marked as "kotlin-resource" are not copied to the out folder in a Kotlin-js project
 - [`KT-28095`](https://youtrack.jetbrains.com/issue/KT-28095) JPS: support -Xcommon-sources for multiplatform projects (JS)
 - [`KT-28316`](https://youtrack.jetbrains.com/issue/KT-28316) Report `Native is not yet supported in IDEA internal build system` on JPS build once per project/multiplatform module
@@ -3007,9 +3007,9 @@
 - [`KT-26817`](https://youtrack.jetbrains.com/issue/KT-26817) kapt 1.2.60+ ignores .java files that are symlinks
 - [`KT-27126`](https://youtrack.jetbrains.com/issue/KT-27126) kapt: class implementing List<T> generates bad stub
 - [`KT-27188`](https://youtrack.jetbrains.com/issue/KT-27188) kapt Gradle plugin fails in Java 10+ ("Cannot find tools.jar")
-- [`KT-27334`](https://youtrack.jetbrains.com/issue/KT-27334) [Kapt] Stub generator uses constant value in method annotation instead of constant name.
+- [`KT-27334`](https://youtrack.jetbrains.com/issue/KT-27334) [Kapt] Stub generator uses constant konstue in method annotation instead of constant name.
 - [`KT-27404`](https://youtrack.jetbrains.com/issue/KT-27404) Kapt does not call annotation processors on custom (e.g., androidTest) source sets if all dependencies are inherited from the main kapt configuration
-- [`KT-27487`](https://youtrack.jetbrains.com/issue/KT-27487) Previous value is passed to annotation parameter using annotation processing
+- [`KT-27487`](https://youtrack.jetbrains.com/issue/KT-27487) Previous konstue is passed to annotation parameter using annotation processing
 - [`KT-27711`](https://youtrack.jetbrains.com/issue/KT-27711) kapt: ArrayIndexOutOfBoundsException: 0
 - [`KT-27910`](https://youtrack.jetbrains.com/issue/KT-27910) Kapt lazy stub without explicit type that initializes an object expression breaks stubbing
 
@@ -3056,8 +3056,8 @@
 
 ### IDE. Debugger
 
-- [`KT-27540`](https://youtrack.jetbrains.com/issue/KT-27540) 2018.3 and 2019.1 Debugger: Evaluating anything fails with KNPE in LabelNormalizationMethodTransformer
-- [`KT-27833`](https://youtrack.jetbrains.com/issue/KT-27833) Evaluate exception in 183/191 with `asm-7.0-beta1`/'asm-7.0'
+- [`KT-27540`](https://youtrack.jetbrains.com/issue/KT-27540) 2018.3 and 2019.1 Debugger: Ekonstuating anything fails with KNPE in LabelNormalizationMethodTransformer
+- [`KT-27833`](https://youtrack.jetbrains.com/issue/KT-27833) Ekonstuate exception in 183/191 with `asm-7.0-beta1`/'asm-7.0'
 - [`KT-27965`](https://youtrack.jetbrains.com/issue/KT-27965) Sequence debugger does not work in Android Studio
 - [`KT-27980`](https://youtrack.jetbrains.com/issue/KT-27980) Kotlin sequence debugger throws IDE exception in IDEA 183
 
@@ -3069,7 +3069,7 @@
 ### IDE. Inspections and Intentions
 
 - [`KT-26481`](https://youtrack.jetbrains.com/issue/KT-26481) Flaky false positive "Receiver parameter is never used" for local extension function
-- [`KT-27357`](https://youtrack.jetbrains.com/issue/KT-27357) Function with inline class type value parameters is marked as unused by IDE
+- [`KT-27357`](https://youtrack.jetbrains.com/issue/KT-27357) Function with inline class type konstue parameters is marked as unused by IDE
 - [`KT-27434`](https://youtrack.jetbrains.com/issue/KT-27434) False positive "Unused symbol" inspection for functions and secondary constructors of inline classes
 - [`KT-27945`](https://youtrack.jetbrains.com/issue/KT-27945) Quick-fix whitespace bug in KtPrimaryConstructor.addAnnotationEntry()
 
@@ -3087,8 +3087,8 @@
 
 ### Tools. Gradle
 
-- [`KT-27160`](https://youtrack.jetbrains.com/issue/KT-27160) Kotlin Gradle plugin 1.3 resolves script configurations during project evaluation
-- [`KT-27803`](https://youtrack.jetbrains.com/issue/KT-27803) CInterop input configuration has 'java-api' as a Usage attribute value in new MPP
+- [`KT-27160`](https://youtrack.jetbrains.com/issue/KT-27160) Kotlin Gradle plugin 1.3 resolves script configurations during project ekonstuation
+- [`KT-27803`](https://youtrack.jetbrains.com/issue/KT-27803) CInterop input configuration has 'java-api' as a Usage attribute konstue in new MPP
 - [`KT-27984`](https://youtrack.jetbrains.com/issue/KT-27984) Kotlin Gradle Plugin: Circular dependency
 
 ### Tools. JPS
@@ -3111,7 +3111,7 @@
 
 ### IDE. Inspections and Intentions
 
-- [`KT-27619`](https://youtrack.jetbrains.com/issue/KT-27619) Inspection "Invalid property key" should check whether reference is soft or not
+- [`KT-27619`](https://youtrack.jetbrains.com/issue/KT-27619) Inspection "Inkonstid property key" should check whether reference is soft or not
 
 ## 1.3-RC4
 
@@ -3119,20 +3119,20 @@
 
 #### Fixes
 
-- [`KT-26858`](https://youtrack.jetbrains.com/issue/KT-26858) Inline class access to private companion object value fails with NSME
+- [`KT-26858`](https://youtrack.jetbrains.com/issue/KT-26858) Inline class access to private companion object konstue fails with NSME
 - [`KT-27030`](https://youtrack.jetbrains.com/issue/KT-27030) Non-capturing lambda in inline class members fails with internal error (NPE in genClosure)
 - [`KT-27031`](https://youtrack.jetbrains.com/issue/KT-27031) Inline extension lambda in inline class fun fails with internal error (wrong bytecode generated)
 - [`KT-27033`](https://youtrack.jetbrains.com/issue/KT-27033) Anonymous object in inline class fun fails with internal error (NPE in generateObjectLiteral/.../writeOuterClassAndEnclosingMethod)
-- [`KT-27096`](https://youtrack.jetbrains.com/issue/KT-27096) AnalyzerException: Error at instruction 71: Expected I, but found . when function takes unsigned type with default value and returns nullable inline class
+- [`KT-27096`](https://youtrack.jetbrains.com/issue/KT-27096) AnalyzerException: Error at instruction 71: Expected I, but found . when function takes unsigned type with default konstue and returns nullable inline class
 - [`KT-27130`](https://youtrack.jetbrains.com/issue/KT-27130) Suspension point is inside a critical section regression
 - [`KT-27132`](https://youtrack.jetbrains.com/issue/KT-27132) CCE when inline class is boxed
 - [`KT-27258`](https://youtrack.jetbrains.com/issue/KT-27258) Report diagnostic for suspension point inside critical section for crossinline suspend lambdas
 - [`KT-27393`](https://youtrack.jetbrains.com/issue/KT-27393) Incorrect inline class type coercion in '==' with generic call
 - [`KT-27484`](https://youtrack.jetbrains.com/issue/KT-27484) Suspension points in synchronized blocks checker crashes
 - [`KT-27502`](https://youtrack.jetbrains.com/issue/KT-27502) Boxed inline class backed by Any is not unboxed before method invocation
-- [`KT-27526`](https://youtrack.jetbrains.com/issue/KT-27526) Functional type with inline class argument and suspend modified expects unboxed value while it is boxed
+- [`KT-27526`](https://youtrack.jetbrains.com/issue/KT-27526) Functional type with inline class argument and suspend modified expects unboxed konstue while it is boxed
 - [`KT-27615`](https://youtrack.jetbrains.com/issue/KT-27615) Double wrap when inline class is printing if it was obtained from list/map
-- [`KT-27620`](https://youtrack.jetbrains.com/issue/KT-27620) Report error when using value of kotlin.Result type as an extension receiver with safe call
+- [`KT-27620`](https://youtrack.jetbrains.com/issue/KT-27620) Report error when using konstue of kotlin.Result type as an extension receiver with safe call
 
 ### IDE
 
@@ -3184,7 +3184,7 @@
 
 ### Tools. kapt
 
-- [`KT-27119`](https://youtrack.jetbrains.com/issue/KT-27119) kapt: val without explicit type that is assigned an object expression implementing a generic interface breaks compilation
+- [`KT-27119`](https://youtrack.jetbrains.com/issue/KT-27119) kapt: konst without explicit type that is assigned an object expression implementing a generic interface breaks compilation
 
 
 ## 1.3-RC3
@@ -3287,7 +3287,7 @@
 
 ### IDE. Hints
 
-- [`KT-26057`](https://youtrack.jetbrains.com/issue/KT-26057) (arguably) redundant hint shown for enum value when qualified with enum class
+- [`KT-26057`](https://youtrack.jetbrains.com/issue/KT-26057) (arguably) redundant hint shown for enum konstue when qualified with enum class
 
 ### IDE. Inspections and Intentions
 
@@ -3359,7 +3359,7 @@
 
 #### Performance Improvements
 
-- [`KT-26490`](https://youtrack.jetbrains.com/issue/KT-26490) Change boxing technique: instead of calling `valueOf`, allocate new wrapper type
+- [`KT-26490`](https://youtrack.jetbrains.com/issue/KT-26490) Change boxing technique: instead of calling `konstueOf`, allocate new wrapper type
 
 #### Fixes
 
@@ -3396,7 +3396,7 @@
 - [`KT-26580`](https://youtrack.jetbrains.com/issue/KT-26580) Add version to kotlin.coroutines.jvm.internal.DebugMetadata
 - [`KT-26659`](https://youtrack.jetbrains.com/issue/KT-26659) Prohibit using kotlin.Result as a return type and with special operators
 - [`KT-26687`](https://youtrack.jetbrains.com/issue/KT-26687) Stdlib contracts have no effect in common code
-- [`KT-26707`](https://youtrack.jetbrains.com/issue/KT-26707) companion val of primitive type is not treated as compile time constant
+- [`KT-26707`](https://youtrack.jetbrains.com/issue/KT-26707) companion konst of primitive type is not treated as compile time constant
 - [`KT-26720`](https://youtrack.jetbrains.com/issue/KT-26720) Write language version requirement on inline classes and on declarations that use inline classes
 - [`KT-26859`](https://youtrack.jetbrains.com/issue/KT-26859) Inline class misses unboxing when using indexer into an ArrayList
 - [`KT-26936`](https://youtrack.jetbrains.com/issue/KT-26936) Report warning instead of error on usages of Experimental/UseExperimental
@@ -3482,7 +3482,7 @@
 - [`KT-26289`](https://youtrack.jetbrains.com/issue/KT-26289) Redundant let with call expression: don't report for long call chains
 - [`KT-26306`](https://youtrack.jetbrains.com/issue/KT-26306) "Add annotation target" quick fix adds EXPRESSION annotation, but not SOURCE retention
 - [`KT-26343`](https://youtrack.jetbrains.com/issue/KT-26343) "Replace 'if' expression with elvis expression" produces wrong code in extension function with not null type parameter
-- [`KT-26353`](https://youtrack.jetbrains.com/issue/KT-26353) "Make variable immutable" is a bad name for a quickfix that changes 'var' to 'val'
+- [`KT-26353`](https://youtrack.jetbrains.com/issue/KT-26353) "Make variable immutable" is a bad name for a quickfix that changes 'var' to 'konst'
 - [`KT-26472`](https://youtrack.jetbrains.com/issue/KT-26472) "Maven dependency is incompatible with Kotlin 1.3+ and should be updated" inspection is not included into Kotlin Migration
 - [`KT-26492`](https://youtrack.jetbrains.com/issue/KT-26492) "Make private" on annotated annotation produces nasty new line
 - [`KT-26599`](https://youtrack.jetbrains.com/issue/KT-26599) "Foldable if-then" inspection marks if statements that cannot be folded using ?. operator
@@ -3496,7 +3496,7 @@
 - [`KT-26356`](https://youtrack.jetbrains.com/issue/KT-26356) New MPP doesn't work with Android projects
 - [`KT-26369`](https://youtrack.jetbrains.com/issue/KT-26369) Library dependencies don't transitively pass for custom source sets at new MPP import to IDE
 - [`KT-26414`](https://youtrack.jetbrains.com/issue/KT-26414) Remove old multiplatform modules templates from New Project/New Module wizard
-- [`KT-26517`](https://youtrack.jetbrains.com/issue/KT-26517) `Create actual ...` generates default constructor parameter values
+- [`KT-26517`](https://youtrack.jetbrains.com/issue/KT-26517) `Create actual ...` generates default constructor parameter konstues
 - [`KT-26585`](https://youtrack.jetbrains.com/issue/KT-26585) Stdlib annotations annotated with @OptionalExpectation are reported with false positive error in common module
 
 ### IDE. Navigation
@@ -3534,7 +3534,7 @@
 
 #### Performance Improvements
 
-- [`KT-18483`](https://youtrack.jetbrains.com/issue/KT-18483) Check to contains value in range can be dramatically slow
+- [`KT-18483`](https://youtrack.jetbrains.com/issue/KT-18483) Check to contains konstue in range can be dramatically slow
 
 #### Fixes
 
@@ -3624,7 +3624,7 @@
 - [`KT-25246`](https://youtrack.jetbrains.com/issue/KT-25246) Incorrect bytecode generated for secondary constructor in inline class + primitive array
 - [`KT-25278`](https://youtrack.jetbrains.com/issue/KT-25278) No smart cast for "returns() implies" contract when default argument is omitted
 - [`KT-25287`](https://youtrack.jetbrains.com/issue/KT-25287) Getter-targeted annotations on annotation constructor parameters are lost
-- [`KT-25293`](https://youtrack.jetbrains.com/issue/KT-25293) “Couldn't transform method node” error on compiling inline class with hashCode() method call when underlying value type is basic (number, char, boolean)
+- [`KT-25293`](https://youtrack.jetbrains.com/issue/KT-25293) “Couldn't transform method node” error on compiling inline class with hashCode() method call when underlying konstue type is basic (number, char, boolean)
 - [`KT-25299`](https://youtrack.jetbrains.com/issue/KT-25299) NoSuchMethodError Foo$Erased.hashCode(Ljava/lang/Object;) for hashCode(), toString() and equals() methods in inline classes
 - [`KT-25328`](https://youtrack.jetbrains.com/issue/KT-25328) “Couldn't transform method node” error on compiling inline class which is wrapping Unit type
 - [`KT-25330`](https://youtrack.jetbrains.com/issue/KT-25330) CCE “[Ljava.lang.Integer; cannot be cast to Foo” for inline class which is wrapping Array<T>
@@ -3655,7 +3655,7 @@
 ### IDE
 
 - [`KT-25316`](https://youtrack.jetbrains.com/issue/KT-25316) PARTIAL resolve mode doesn't work when effects system is enabled
-- [`KT-25611`](https://youtrack.jetbrains.com/issue/KT-25611) With Language / API version = "Latest stable" installing 1.3-M1 plugin upgrades actual values to 1.3
+- [`KT-25611`](https://youtrack.jetbrains.com/issue/KT-25611) With Language / API version = "Latest stable" installing 1.3-M1 plugin upgrades actual konstues to 1.3
 - [`KT-25681`](https://youtrack.jetbrains.com/issue/KT-25681) Remove "Coroutines (experimental)" settings from IDE and do not pass `-Xcoroutines` to JPS compiler (since 1.3)
 - [`KT-25714`](https://youtrack.jetbrains.com/issue/KT-25714) Kotlin plugin updater suggests plugins incompatible with current Studio build platform
 - [`KT-26239`](https://youtrack.jetbrains.com/issue/KT-26239) New MPP template: add `kotlin-test` libraries to the modules dependencies by default
@@ -3693,7 +3693,7 @@
 
 - [`KT-7566`](https://youtrack.jetbrains.com/issue/KT-7566) Annotate kotlin.test.Test.assertNotNull() so that safe dereference isn't required after it
 - [`KT-14397`](https://youtrack.jetbrains.com/issue/KT-14397) Make "smart cast" to non-null string working after isNullOrEmpty() check.
-- [`KT-19532`](https://youtrack.jetbrains.com/issue/KT-19532) Evaluation order for constructor call
+- [`KT-19532`](https://youtrack.jetbrains.com/issue/KT-19532) Ekonstuation order for constructor call
 - [`KT-22274`](https://youtrack.jetbrains.com/issue/KT-22274) Restrict statement labels applicability
 
 ### Libraries
@@ -3716,7 +3716,7 @@
 - [`KT-16097`](https://youtrack.jetbrains.com/issue/KT-16097) Index overflow when sequence has more than Int.MAX_VALUE elements
 - [`KT-17176`](https://youtrack.jetbrains.com/issue/KT-17176) Long/Int progressions with Long.MIN_VALUE and Int.MIN_VALUE step are weird
 - [`KT-19305`](https://youtrack.jetbrains.com/issue/KT-19305) IOStreams#readBytes is badly named
-- [`KT-19489`](https://youtrack.jetbrains.com/issue/KT-19489) Array.copyOfRange returns value violating declared type when bounds are out of range
+- [`KT-19489`](https://youtrack.jetbrains.com/issue/KT-19489) Array.copyOfRange returns konstue violating declared type when bounds are out of range
 - [`KT-21049`](https://youtrack.jetbrains.com/issue/KT-21049) Different behavior in split by regex at JVM and JS
 - [`KT-23799`](https://youtrack.jetbrains.com/issue/KT-23799) Discontinue deprecated artifacts distribution: kotlin-runtime, kotlin-jslib, kotlin-stdlib-jre7/8
 - [`KT-25274`](https://youtrack.jetbrains.com/issue/KT-25274) contract() function has internal visibility
@@ -3784,11 +3784,11 @@
 - [`KT-18987`](https://youtrack.jetbrains.com/issue/KT-18987) Unroll recursion in CoroutineImpl.resume
 - [`KT-11567`](https://youtrack.jetbrains.com/issue/KT-11567) Companion object INSTANCE field more visible than companion object class itself
 - [`KT-13764`](https://youtrack.jetbrains.com/issue/KT-13764) Support lambdas and function references for arities bigger than 22
-- [`KT-16615`](https://youtrack.jetbrains.com/issue/KT-16615) Do not generate ConstantValue attribute for non-const vals
+- [`KT-16615`](https://youtrack.jetbrains.com/issue/KT-16615) Do not generate ConstantValue attribute for non-const konsts
 - [`KT-25193`](https://youtrack.jetbrains.com/issue/KT-25193) Names of parameters from Java interface methods implemented by delegation are lost  
 - [`KT-25324`](https://youtrack.jetbrains.com/issue/KT-25324) VerifyError “Bad type on operand stack” on running code with call of array iterator for array of inline classes
 - [`KT-25325`](https://youtrack.jetbrains.com/issue/KT-25325) CCE “Foo cannot be cast to java.lang.String” for iterating over the list of inline classes
-- [`KT-25626`](https://youtrack.jetbrains.com/issue/KT-25626) Inline class values inside string literals don't use their own toString implementation
+- [`KT-25626`](https://youtrack.jetbrains.com/issue/KT-25626) Inline class konstues inside string literals don't use their own toString implementation
 
 #### Backend. JVM. Coroutines
 
@@ -3812,7 +3812,7 @@
 
 - [`KT-15807`](https://youtrack.jetbrains.com/issue/KT-15807) @JvmField is not applicable to interface companion properties
 - [`KT-16962`](https://youtrack.jetbrains.com/issue/KT-16962) Annotation classes cannot contain types or static fields because they cannot have a body
-- [`KT-23153`](https://youtrack.jetbrains.com/issue/KT-23153) Compiler allows to set non constant value as annotation parameter
+- [`KT-23153`](https://youtrack.jetbrains.com/issue/KT-23153) Compiler allows to set non constant konstue as annotation parameter
 - [`KT-23362`](https://youtrack.jetbrains.com/issue/KT-23362) Move coroutines to package kolin.coroutines for 1.3
 - [`KT-24861`](https://youtrack.jetbrains.com/issue/KT-24861) Fix loading kotlin.suspend compiled with LV=1.2 when release coroutines package is used
 - [`KT-25241`](https://youtrack.jetbrains.com/issue/KT-25241) Kotlin compiler doesn't warn about usage of lambda/reference with more than 22 parameters

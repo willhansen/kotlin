@@ -41,20 +41,20 @@ class SealedClassesInheritorsCaclulatorPreAnalysisHandler(
             return
         }
 
-        val ktFilesByModule = moduleStructure.modules.associateWith { testModule ->
+        konst ktFilesByModule = moduleStructure.modules.associateWith { testModule ->
             testServices.ktModuleProvider.getModuleFiles(testModule).filterIsInstance<KtFile>()
         }
 
         for ((testModule, ktFiles) in ktFilesByModule) {
             if (ktFiles.isEmpty()) continue
-            val project = testServices.compilerConfigurationProvider.getProject(testModule)
-            val projectStructureProvider = project.getService(ProjectStructureProvider::class.java)
-            val ktModule = ktFiles.map { projectStructureProvider.getModule(it, contextualModule = null) }.distinct().single()
+            konst project = testServices.compilerConfigurationProvider.getProject(testModule)
+            konst projectStructureProvider = project.getService(ProjectStructureProvider::class.java)
+            konst ktModule = ktFiles.map { projectStructureProvider.getModule(it, contextualModule = null) }.distinct().single()
 
-            val tmpFirResolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(ktModule)
-            val firFiles = ktFiles.map { it.getOrBuildFirFile(tmpFirResolveSession) }
-            val sealedInheritors = collectSealedClassInheritors(firFiles, tmpFirResolveSession)
-            val provider =
+            konst tmpFirResolveSession = LLFirResolveSessionService.getInstance(project).getFirResolveSessionNoCaching(ktModule)
+            konst firFiles = ktFiles.map { it.getOrBuildFirFile(tmpFirResolveSession) }
+            konst sealedInheritors = collectSealedClassInheritors(firFiles, tmpFirResolveSession)
+            konst provider =
                 project.getService(FirSealedClassInheritorsProcessorFactory::class.java) as LLFirSealedClassInheritorsProcessorFactoryForTests
             provider.registerInheritors(ktModule, sealedInheritors)
         }
@@ -65,14 +65,14 @@ class SealedClassesInheritorsCaclulatorPreAnalysisHandler(
         tmpFirResolveSession: LLFirResolveSession
     ): Map<ClassId, List<ClassId>> {
         firFiles.forEach { it.lazyResolveToPhase(FirResolvePhase.TYPES) }
-        val inheritorsCollector = FirSealedClassInheritorsProcessor.InheritorsCollector(tmpFirResolveSession.useSiteFirSession)
-        val sealedClassInheritorsMap = mutableMapOf<FirRegularClass, MutableList<ClassId>>()
+        konst inheritorsCollector = FirSealedClassInheritorsProcessor.InheritorsCollector(tmpFirResolveSession.useSiteFirSession)
+        konst sealedClassInheritorsMap = mutableMapOf<FirRegularClass, MutableList<ClassId>>()
         firFiles.forEach { it.accept(inheritorsCollector, sealedClassInheritorsMap) }
         return sealedClassInheritorsMap.mapKeys { (firClass, _) -> firClass.symbol.classId }
     }
 
     object Directives : SimpleDirectivesContainer() {
-        val DISABLE_SEALED_INHERITOR_CALCULATOR by directive(
+        konst DISABLE_SEALED_INHERITOR_CALCULATOR by directive(
             description = "Disable mock sealed class inheritor calculation",
             applicability = DirectiveApplicability.Global
         )

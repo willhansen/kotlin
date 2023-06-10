@@ -2,13 +2,13 @@
 // WITH_STDLIB
 // FILE: kt24258nn.kt
 
-val lazyNotNullString: String by lazy { J.nullNotNullString() }
+konst lazyNotNullString: String by lazy { J.nullNotNullString() }
 
 
 fun testLazyNullNotNullString() {
     try {
-        val s: String = lazyNotNullString
-        throw Exception("'val s: String = lazyNotNullString' should throw NullPointerException")
+        konst s: String = lazyNotNullString
+        throw Exception("'konst s: String = lazyNotNullString' should throw NullPointerException")
     } catch (e: NullPointerException) {
     }
 }

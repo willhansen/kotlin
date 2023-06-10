@@ -8,7 +8,7 @@ class Slot() {
 }
 
 fun box(): String {
-  val s = Slot()
+  konst s = Slot()
   s.increaseVitality(1000)
   return if (s.vitality == 11000) "OK" else "fail"
 }

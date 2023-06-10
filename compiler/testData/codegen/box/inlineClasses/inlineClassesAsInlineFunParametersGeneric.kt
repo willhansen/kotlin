@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val int: T)
+konstue class Z<T: Int>(konst int: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(val long: T)
+konstue class L<T: Long>(konst long: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val string: T)
+konstue class Str<T: String>(konst string: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Obj<T: Any>(val obj: T)
+konstue class Obj<T: Any>(konst obj: T)
 
 inline fun <R> s1Z(x: Z<Int>, fn: (Int, Z<Int>) -> R) = fn(1, x)
 inline fun <R> s1L(x: L<Long>, fn: (Int, L<Long>) -> R) = fn(1, x)

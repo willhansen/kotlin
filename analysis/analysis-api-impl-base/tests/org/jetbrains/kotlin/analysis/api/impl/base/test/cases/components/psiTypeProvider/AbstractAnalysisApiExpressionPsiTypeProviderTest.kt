@@ -21,16 +21,16 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractAnalysisApiExpressionPsiTypeProviderTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val declarationAtCaret = testServices.expressionMarkerProvider.getSelectedElement(ktFile) as KtExpression
-        val containingDeclaration = declarationAtCaret.parentOfType<KtDeclaration>()
+        konst declarationAtCaret = testServices.expressionMarkerProvider.getSelectedElement(ktFile) as KtExpression
+        konst containingDeclaration = declarationAtCaret.parentOfType<KtDeclaration>()
             ?: error("Can't find containing declaration for $declarationAtCaret")
-        val containingClass = getContainingKtLightClass(containingDeclaration, ktFile)
-        val psiContext = containingClass.findLightDeclarationContext(containingDeclaration)
+        konst containingClass = getContainingKtLightClass(containingDeclaration, ktFile)
+        konst psiContext = containingClass.findLightDeclarationContext(containingDeclaration)
             ?: error("Can't find psi context for $containingDeclaration")
-        val actual = analyze(ktFile) {
-            val returnType = declarationAtCaret.getKtType()
+        konst actual = analyze(ktFile) {
+            konst returnType = declarationAtCaret.getKtType()
                 ?: error("Not a typable expression ${declarationAtCaret::class} ${declarationAtCaret.text}")
-            val psiType = returnType.asPsiType(psiContext, allowErrorTypes = false)
+            konst psiType = returnType.asPsiType(psiContext, allowErrorTypes = false)
             buildString {
                 appendLine("KtType: ${returnType.render(position = Variance.INVARIANT)}")
                 appendLine("PsiType: $psiType")

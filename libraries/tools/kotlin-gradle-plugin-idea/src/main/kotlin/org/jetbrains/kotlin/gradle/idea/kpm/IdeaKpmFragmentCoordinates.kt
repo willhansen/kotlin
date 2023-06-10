@@ -9,23 +9,23 @@ import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import java.io.Serializable
 
 sealed interface IdeaKpmFragmentCoordinates : Serializable, IdeaKpmDependencyCoordinates {
-    val module: IdeaKpmModuleCoordinates
-    val fragmentName: String
+    konst module: IdeaKpmModuleCoordinates
+    konst fragmentName: String
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmFragmentCoordinatesImpl(
-    override val module: IdeaKpmModuleCoordinates,
-    override val fragmentName: String
+    override konst module: IdeaKpmModuleCoordinates,
+    override konst fragmentName: String
 ) : IdeaKpmFragmentCoordinates {
 
     override fun toString(): String = path
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 
-val IdeaKpmFragmentCoordinates.path: String
+konst IdeaKpmFragmentCoordinates.path: String
     get() = "${module.path}/$fragmentName"

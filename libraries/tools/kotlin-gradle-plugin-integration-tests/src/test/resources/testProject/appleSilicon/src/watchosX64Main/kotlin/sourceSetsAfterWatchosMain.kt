@@ -1,1 +1,1 @@
-actual val sourceSetsAfterWatchosMain: String = "watchosX64Main"
+actual konst sourceSetsAfterWatchosMain: String = "watchosX64Main"

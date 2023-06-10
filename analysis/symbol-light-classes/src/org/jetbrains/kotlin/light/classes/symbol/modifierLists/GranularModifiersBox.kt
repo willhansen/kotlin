@@ -23,7 +23,7 @@ internal typealias LazyModifiersComputer = (modifier: String) -> Map<String, Boo
 
 internal class GranularModifiersBox(
     initialValue: Map<String, Boolean> = emptyMap(),
-    private val computer: LazyModifiersComputer,
+    private konst computer: LazyModifiersComputer,
 ) : ModifiersBox {
     @Volatile
     private var modifiersMapReference: PersistentMap<String, Boolean> = initialValue.toPersistentHashMap()
@@ -31,32 +31,32 @@ internal class GranularModifiersBox(
     override fun hasModifier(modifier: String): Boolean {
         modifiersMapReference[modifier]?.let { return it }
 
-        val newValues = computer(modifier) ?: mapOf(modifier to false)
+        konst newValues = computer(modifier) ?: mapOf(modifier to false)
         do {
-            val currentMap = modifiersMapReference
+            konst currentMap = modifiersMapReference
             currentMap[modifier]?.let { return it }
 
-            val newMap = currentMap.putAll(newValues)
+            konst newMap = currentMap.putAll(newValues)
         } while (fieldUpdater.weakCompareAndSet(/* obj = */ this, /* expect = */ currentMap, /* update = */ newMap))
 
         return newValues[modifier] ?: error("Inconsistent state: $modifier")
     }
 
     companion object {
-        private val fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
+        private konst fieldUpdater = AtomicReferenceFieldUpdater.newUpdater(
             /* tclass = */ GranularModifiersBox::class.java,
             /* vclass = */ PersistentMap::class.java,
             /* fieldName = */ "modifiersMapReference",
         )
 
-        internal val VISIBILITY_MODIFIERS = setOf(PsiModifier.PUBLIC, PsiModifier.PACKAGE_LOCAL, PsiModifier.PROTECTED, PsiModifier.PRIVATE)
-        internal val VISIBILITY_MODIFIERS_MAP: PersistentMap<String, Boolean> =
+        internal konst VISIBILITY_MODIFIERS = setOf(PsiModifier.PUBLIC, PsiModifier.PACKAGE_LOCAL, PsiModifier.PROTECTED, PsiModifier.PRIVATE)
+        internal konst VISIBILITY_MODIFIERS_MAP: PersistentMap<String, Boolean> =
             VISIBILITY_MODIFIERS.keysToMap {
                 false
             }.toPersistentHashMap()
 
-        internal val MODALITY_MODIFIERS = setOf(PsiModifier.FINAL, PsiModifier.ABSTRACT)
-        internal val MODALITY_MODIFIERS_MAP: PersistentMap<String, Boolean> =
+        internal konst MODALITY_MODIFIERS = setOf(PsiModifier.FINAL, PsiModifier.ABSTRACT)
+        internal konst MODALITY_MODIFIERS_MAP: PersistentMap<String, Boolean> =
             MODALITY_MODIFIERS.keysToMap {
                 false
             }.toPersistentHashMap()
@@ -65,7 +65,7 @@ internal class GranularModifiersBox(
             ktModule: KtModule,
             declarationPointer: KtSymbolPointer<KtSymbolWithVisibility>,
         ): PersistentMap<String, Boolean> {
-            val visibility = declarationPointer.withSymbol(ktModule) {
+            konst visibility = declarationPointer.withSymbol(ktModule) {
                 it.toPsiVisibilityForMember()
             }
 
@@ -77,7 +77,7 @@ internal class GranularModifiersBox(
             declarationPointer: KtSymbolPointer<KtSymbolWithVisibility>,
             isTopLevel: Boolean,
         ): PersistentMap<String, Boolean> {
-            val visibility = declarationPointer.withSymbol(ktModule) {
+            konst visibility = declarationPointer.withSymbol(ktModule) {
                 it.toPsiVisibilityForClass(!isTopLevel)
             }
 
@@ -88,7 +88,7 @@ internal class GranularModifiersBox(
             ktModule: KtModule,
             declarationPointer: KtSymbolPointer<KtSymbolWithModality>,
         ): PersistentMap<String, Boolean> {
-            val modality = declarationPointer.withSymbol(ktModule) {
+            konst modality = declarationPointer.withSymbol(ktModule) {
                 it.computeSimpleModality()
             }
 

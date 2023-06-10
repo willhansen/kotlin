@@ -11,10 +11,10 @@ interface I<T: A> {
 }
 
 @JvmInline
-value class A(val x: Int, val y: Int): I<Nothing>
+konstue class A(konst x: Int, konst y: Int): I<Nothing>
 
 @JvmInline
-value class B(val x: Int, val y: Int): I<Nothing> {
+konstue class B(konst x: Int, konst y: Int): I<Nothing> {
     override fun f(x: Nothing) = println(this)
     override fun g(x: Nothing) = println(this)
     fun h(x: Nothing) = println(this)

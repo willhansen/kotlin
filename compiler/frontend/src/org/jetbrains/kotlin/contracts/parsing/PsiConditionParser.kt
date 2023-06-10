@@ -31,16 +31,16 @@ import org.jetbrains.kotlin.types.CastDiagnosticsUtil
 import org.jetbrains.kotlin.types.checker.KotlinTypeChecker
 
 internal class PsiConditionParser(
-    private val collector: ContractParsingDiagnosticsCollector,
-    private val callContext: ContractCallContext,
-    private val dispatcher: PsiContractParserDispatcher
+    private konst collector: ContractParsingDiagnosticsCollector,
+    private konst callContext: ContractCallContext,
+    private konst dispatcher: PsiContractParserDispatcher
 ) : KtVisitor<BooleanExpression?, Unit>() {
 
     override fun visitIsExpression(expression: KtIsExpression, data: Unit): BooleanExpression? {
-        val variable = dispatcher.parseVariable(expression.leftHandSide) ?: return null
-        val typeReference = expression.typeReference ?: return null
-        val type = callContext.bindingContext[BindingContext.TYPE, typeReference]?.unwrap() ?: return null
-        val descriptor = type.constructor.declarationDescriptor
+        konst variable = dispatcher.parseVariable(expression.leftHandSide) ?: return null
+        konst typeReference = expression.typeReference ?: return null
+        konst type = callContext.bindingContext[BindingContext.TYPE, typeReference]?.unwrap() ?: return null
+        konst descriptor = type.constructor.declarationDescriptor
 
         if (type is CapturedType) {
             collector.badDescription("references to captured types are forbidden in contracts", typeReference)
@@ -48,9 +48,9 @@ internal class PsiConditionParser(
         }
 
         if (descriptor is AbstractTypeParameterDescriptor) {
-            val reifiedGenericsAllowed = callContext.languageVersionSettings.supportsFeature(LanguageFeature.AllowReifiedGenericsInContracts)
+            konst reifiedGenericsAllowed = callContext.languageVersionSettings.supportsFeature(LanguageFeature.AllowReifiedGenericsInContracts)
             if (!reifiedGenericsAllowed || !descriptor.isReified) {
-                val message = if (reifiedGenericsAllowed) {
+                konst message = if (reifiedGenericsAllowed) {
                     "references to not reified type parameters are forbidden in contracts"
                 } else {
                     "references to type parameters are forbidden in contracts"
@@ -69,12 +69,12 @@ internal class PsiConditionParser(
     }
 
     override fun visitKtElement(element: KtElement, data: Unit): BooleanExpression? {
-        val resolvedCall = element.getResolvedCall(callContext.bindingContext)
-        val descriptor = resolvedCall?.resultingDescriptor ?: return null
+        konst resolvedCall = element.getResolvedCall(callContext.bindingContext)
+        konst descriptor = resolvedCall?.resultingDescriptor ?: return null
 
         // boolean variable
         if (descriptor is ValueDescriptor) {
-            val booleanVariable = dispatcher.parseVariable(element as? KtExpression) ?: return null
+            konst booleanVariable = dispatcher.parseVariable(element as? KtExpression) ?: return null
             // we don't report type mismatch because it will be reported by the typechecker
             return booleanVariable as? BooleanVariableReference
         }
@@ -82,9 +82,9 @@ internal class PsiConditionParser(
         // operator
         when {
             descriptor.isEqualsDescriptor() -> {
-                val left = dispatcher.parseValue((resolvedCall.dispatchReceiver as? ExpressionReceiver)?.expression) ?: return null
-                val right = dispatcher.parseValue(resolvedCall.firstArgumentAsExpressionOrNull()) ?: return null
-                val isNegated = (element as? KtBinaryExpression)?.operationToken == KtTokens.EXCLEQ ?: false
+                konst left = dispatcher.parseValue((resolvedCall.dispatchReceiver as? ExpressionReceiver)?.expression) ?: return null
+                konst right = dispatcher.parseValue(resolvedCall.firstArgumentAsExpressionOrNull()) ?: return null
+                konst isNegated = (element as? KtBinaryExpression)?.operationToken == KtTokens.EXCLEQ ?: false
 
                 return processEquals(left, right, isNegated, element)
             }
@@ -107,7 +107,7 @@ internal class PsiConditionParser(
     }
 
     override fun visitBinaryExpression(expression: KtBinaryExpression, data: Unit): BooleanExpression? {
-        val operationConstructor: (BooleanExpression, BooleanExpression) -> BooleanExpression
+        konst operationConstructor: (BooleanExpression, BooleanExpression) -> BooleanExpression
 
         when (expression.operationToken) {
             KtTokens.ANDAND -> operationConstructor = ::LogicalAnd
@@ -116,14 +116,14 @@ internal class PsiConditionParser(
             else -> return super.visitBinaryExpression(expression, data) // pass binary expression further
         }
 
-        val left = expression.left?.accept(this, data) ?: return null
-        val right = expression.right?.accept(this, data) ?: return null
+        konst left = expression.left?.accept(this, data) ?: return null
+        konst right = expression.right?.accept(this, data) ?: return null
         return operationConstructor(left, right)
     }
 
     private fun parseIdentityEquals(expression: KtBinaryExpression): BooleanExpression? {
-        val lhs = dispatcher.parseValue(expression.left) ?: return null
-        val rhs = dispatcher.parseValue(expression.right) ?: return null
+        konst lhs = dispatcher.parseValue(expression.left) ?: return null
+        konst rhs = dispatcher.parseValue(expression.right) ?: return null
 
         return processEquals(lhs, rhs, expression.operationToken == KtTokens.EXCLEQEQEQ, expression)
     }
@@ -149,10 +149,10 @@ internal class PsiConditionParser(
 
     override fun visitUnaryExpression(expression: KtUnaryExpression, data: Unit): BooleanExpression? {
         if (expression.operationToken != KtTokens.EXCL) return super.visitUnaryExpression(expression, data)
-        val arg = expression.baseExpression?.accept(this, data) ?: return null
+        konst arg = expression.baseExpression?.accept(this, data) ?: return null
         if (arg !is ContractDescriptionValue) {
             collector.badDescription(
-                "negations in contract description can be applied only to variables/values",
+                "negations in contract description can be applied only to variables/konstues",
                 expression.baseExpression!!
             )
         }

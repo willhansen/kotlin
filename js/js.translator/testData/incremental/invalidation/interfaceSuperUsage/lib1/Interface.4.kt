@@ -9,11 +9,11 @@ interface Interface {
                 it
             }
         }
-        set(value) {
-            myProperty = value
+        set(konstue) {
+            myProperty = konstue
         }
 
-    val someValue: Int
+    konst someValue: Int
         get() = 1
 
     fun someFunction(): Int = someValue

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import kotlin.reflect.KParameter
 
 internal object ReflectionObjectRenderer {
-    private val renderer = DescriptorRenderer.FQ_NAMES_IN_TYPES
+    private konst renderer = DescriptorRenderer.FQ_NAMES_IN_TYPES
 
     private fun StringBuilder.appendReceiverType(receiver: ReceiverParameterDescriptor?) {
         if (receiver != null) {
@@ -35,12 +35,12 @@ internal object ReflectionObjectRenderer {
     }
 
     private fun StringBuilder.appendReceivers(callable: CallableDescriptor) {
-        val dispatchReceiver = callable.instanceReceiverParameter
-        val extensionReceiver = callable.extensionReceiverParameter
+        konst dispatchReceiver = callable.instanceReceiverParameter
+        konst extensionReceiver = callable.extensionReceiverParameter
 
         appendReceiverType(dispatchReceiver)
 
-        val addParentheses = dispatchReceiver != null && extensionReceiver != null
+        konst addParentheses = dispatchReceiver != null && extensionReceiver != null
         if (addParentheses) append("(")
         appendReceiverType(extensionReceiver)
         if (addParentheses) append(")")
@@ -57,7 +57,7 @@ internal object ReflectionObjectRenderer {
     // TODO: include visibility
     fun renderProperty(descriptor: PropertyDescriptor): String {
         return buildString {
-            append(if (descriptor.isVar) "var " else "val ")
+            append(if (descriptor.isVar) "var " else "konst ")
             appendReceivers(descriptor)
             append(renderer.renderName(descriptor.name, true))
 
@@ -72,7 +72,7 @@ internal object ReflectionObjectRenderer {
             appendReceivers(descriptor)
             append(renderer.renderName(descriptor.name, true))
 
-            descriptor.valueParameters.joinTo(this, separator = ", ", prefix = "(", postfix = ")") {
+            descriptor.konstueParameters.joinTo(this, separator = ", ", prefix = "(", postfix = ")") {
                 renderType(it.type) // TODO: vararg
             }
 
@@ -85,7 +85,7 @@ internal object ReflectionObjectRenderer {
         return buildString {
             appendReceivers(invoke)
 
-            invoke.valueParameters.joinTo(this, separator = ", ", prefix = "(", postfix = ")") {
+            invoke.konstueParameters.joinTo(this, separator = ", ", prefix = "(", postfix = ")") {
                 renderType(it.type)
             }
 

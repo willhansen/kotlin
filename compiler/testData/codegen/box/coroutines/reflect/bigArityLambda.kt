@@ -24,7 +24,7 @@ suspend fun foo(
 fun box(): String {
     var res = "Fail"
     builder {
-        val f: suspend (C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C) -> String = {
+        konst f: suspend (C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C, C) -> String = {
             _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ ->
             "OK"
         }

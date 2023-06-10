@@ -6,8 +6,8 @@ import kotlin.test.*
 import kotlin.reflect.KClass
 
 fun box(): String {
-    val any = Array<Any>::class
-    val bare = Array::class
+    konst any = Array<Any>::class
+    konst bare = Array::class
 
     assertEquals<KClass<*>>(any, bare)
 

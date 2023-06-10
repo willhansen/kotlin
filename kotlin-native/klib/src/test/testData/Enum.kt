@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-enum class E(val x: Int = 0) {
+enum class E(konst x: Int = 0) {
     A,
     B,
     C(1) {
@@ -22,6 +22,6 @@ enum class E(val x: Int = 0) {
     };
 
     open fun enumFun(): Int = 0
-    val enumVal = 0
+    konst enumVal = 0
     var enumVar = ""
 }

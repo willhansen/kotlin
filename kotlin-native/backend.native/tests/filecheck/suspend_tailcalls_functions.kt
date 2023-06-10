@@ -6,7 +6,7 @@
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
@@ -267,7 +267,7 @@ suspend fun s22(): Int {
 // CHECK-LABEL: define %struct.ObjHeader* @"kfun:#s23#suspend(kotlin.Boolean;kotlin.coroutines.Continuation<kotlin.Unit>){}kotlin.Any
 suspend fun s23(f: Boolean) {
     // CHECK-NOT: call void @"kfun:$s23COROUTINE${{[0-9]*}}#<init>
-    val x = run {
+    konst x = run {
         if (f) {
             println("s23")
             sUnit()

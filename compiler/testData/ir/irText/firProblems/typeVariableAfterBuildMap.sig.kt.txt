@@ -5,7 +5,7 @@ abstract class Visibility {
   // CHECK:
   //   Mangled name: Visibility{}name
   //   Public signature: /Visibility.name|4231860309499509769[0]
-  val name: String
+  konst name: String
     // CHECK JVM_IR:
     //   Mangled name: Visibility#<get-name>(){}kotlin.String
     //   Public signature: /Visibility.name.<get-name>|-8006111524522882650[0]
@@ -17,7 +17,7 @@ abstract class Visibility {
   // CHECK:
   //   Mangled name: Visibility{}isPublicAPI
   //   Public signature: /Visibility.isPublicAPI|-3614707293274580028[0]
-  val isPublicAPI: Boolean
+  konst isPublicAPI: Boolean
     // CHECK JVM_IR:
     //   Mangled name: Visibility#<get-isPublicAPI>(){}kotlin.Boolean
     //   Public signature: /Visibility.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -42,7 +42,7 @@ abstract class Visibility {
   // CHECK:
   //   Mangled name: Visibility{}externalDisplayName
   //   Public signature: /Visibility.externalDisplayName|391049038221671391[0]
-  open val externalDisplayName: String
+  open konst externalDisplayName: String
     // CHECK JVM_IR:
     //   Mangled name: Visibility#<get-externalDisplayName>(){}kotlin.String
     //   Public signature: /Visibility.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -54,7 +54,7 @@ abstract class Visibility {
   // CHECK:
   //   Mangled name: Visibility{}internalDisplayName
   //   Public signature: /Visibility.internalDisplayName|363288575296777097[0]
-  open val internalDisplayName: String
+  open konst internalDisplayName: String
     // CHECK JVM_IR:
     //   Mangled name: Visibility#<get-internalDisplayName>(){}kotlin.String
     //   Public signature: /Visibility.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -72,7 +72,7 @@ object Visibilities {
   // CHECK:
   //   Mangled name: Visibilities{}ORDERED_VISIBILITIES
   //   Public signature: /Visibilities.ORDERED_VISIBILITIES|6079781139816677865[0]
-  private val ORDERED_VISIBILITIES: Map<Visibility, Int>
+  private konst ORDERED_VISIBILITIES: Map<Visibility, Int>
     // CHECK JVM_IR:
     //   Mangled name: Visibilities#<get-ORDERED_VISIBILITIES>(){}kotlin.collections.Map<Visibility,kotlin.Int>
     //   Public signature: /Visibilities.ORDERED_VISIBILITIES.<get-ORDERED_VISIBILITIES>|-1863707493423525823[0]
@@ -101,7 +101,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Inherited{}externalDisplayName
     //   Public signature: /Visibilities.Inherited.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Inherited#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Inherited.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -113,7 +113,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Inherited{}internalDisplayName
     //   Public signature: /Visibilities.Inherited.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Inherited#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Inherited.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -125,7 +125,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Inherited{}isPublicAPI
     //   Public signature: /Visibilities.Inherited.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Inherited#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Inherited.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -137,7 +137,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Inherited{}name
     //   Public signature: /Visibilities.Inherited.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Inherited#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Inherited.name.<get-name>|-8006111524522882650[0]
@@ -168,7 +168,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Internal{}externalDisplayName
     //   Public signature: /Visibilities.Internal.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Internal#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Internal.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -180,7 +180,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Internal{}internalDisplayName
     //   Public signature: /Visibilities.Internal.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Internal#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Internal.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -192,7 +192,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Internal{}isPublicAPI
     //   Public signature: /Visibilities.Internal.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Internal#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Internal.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -204,7 +204,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Internal{}name
     //   Public signature: /Visibilities.Internal.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Internal#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Internal.name.<get-name>|-8006111524522882650[0]
@@ -235,7 +235,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.InvisibleFake{}internalDisplayName
     //   Public signature: /Visibilities.InvisibleFake.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.InvisibleFake#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.InvisibleFake.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -247,7 +247,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.InvisibleFake{}isPublicAPI
     //   Public signature: /Visibilities.InvisibleFake.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.InvisibleFake#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.InvisibleFake.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -259,7 +259,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.InvisibleFake{}name
     //   Public signature: /Visibilities.InvisibleFake.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.InvisibleFake#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.InvisibleFake.name.<get-name>|-8006111524522882650[0]
@@ -271,7 +271,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.InvisibleFake{}externalDisplayName
     //   Public signature: /Visibilities.InvisibleFake.externalDisplayName|391049038221671391[0]
-    override val externalDisplayName: String
+    override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.InvisibleFake#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.InvisibleFake.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -302,7 +302,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Local{}externalDisplayName
     //   Public signature: /Visibilities.Local.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Local#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Local.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -314,7 +314,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Local{}internalDisplayName
     //   Public signature: /Visibilities.Local.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Local#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Local.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -326,7 +326,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Local{}isPublicAPI
     //   Public signature: /Visibilities.Local.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Local#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Local.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -338,7 +338,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Local{}name
     //   Public signature: /Visibilities.Local.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Local#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Local.name.<get-name>|-8006111524522882650[0]
@@ -369,7 +369,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Private{}externalDisplayName
     //   Public signature: /Visibilities.Private.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Private#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Private.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -381,7 +381,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Private{}internalDisplayName
     //   Public signature: /Visibilities.Private.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Private#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Private.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -393,7 +393,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Private{}isPublicAPI
     //   Public signature: /Visibilities.Private.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Private#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Private.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -405,7 +405,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Private{}name
     //   Public signature: /Visibilities.Private.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Private#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Private.name.<get-name>|-8006111524522882650[0]
@@ -436,7 +436,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.PrivateToThis{}externalDisplayName
     //   Public signature: /Visibilities.PrivateToThis.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.PrivateToThis#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.PrivateToThis.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -448,7 +448,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.PrivateToThis{}isPublicAPI
     //   Public signature: /Visibilities.PrivateToThis.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.PrivateToThis#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.PrivateToThis.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -460,7 +460,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.PrivateToThis{}name
     //   Public signature: /Visibilities.PrivateToThis.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.PrivateToThis#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.PrivateToThis.name.<get-name>|-8006111524522882650[0]
@@ -472,7 +472,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.PrivateToThis{}internalDisplayName
     //   Public signature: /Visibilities.PrivateToThis.internalDisplayName|363288575296777097[0]
-    override val internalDisplayName: String
+    override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.PrivateToThis#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.PrivateToThis.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -503,7 +503,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Protected{}externalDisplayName
     //   Public signature: /Visibilities.Protected.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Protected#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Protected.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -515,7 +515,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Protected{}internalDisplayName
     //   Public signature: /Visibilities.Protected.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Protected#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Protected.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -527,7 +527,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Protected{}isPublicAPI
     //   Public signature: /Visibilities.Protected.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Protected#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Protected.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -539,7 +539,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Protected{}name
     //   Public signature: /Visibilities.Protected.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Protected#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Protected.name.<get-name>|-8006111524522882650[0]
@@ -570,7 +570,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Public{}externalDisplayName
     //   Public signature: /Visibilities.Public.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Public#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Public.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -582,7 +582,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Public{}internalDisplayName
     //   Public signature: /Visibilities.Public.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Public#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Public.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -594,7 +594,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Public{}isPublicAPI
     //   Public signature: /Visibilities.Public.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Public#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Public.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -606,7 +606,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Public{}name
     //   Public signature: /Visibilities.Public.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Public#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Public.name.<get-name>|-8006111524522882650[0]
@@ -637,7 +637,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Unknown{}externalDisplayName
     //   Public signature: /Visibilities.Unknown.externalDisplayName|391049038221671391[0]
-    /* fake */ override val externalDisplayName: String
+    /* fake */ override konst externalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Unknown#<get-externalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Unknown.externalDisplayName.<get-externalDisplayName>|-6122052316113926396[0]
@@ -649,7 +649,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Unknown{}internalDisplayName
     //   Public signature: /Visibilities.Unknown.internalDisplayName|363288575296777097[0]
-    /* fake */ override val internalDisplayName: String
+    /* fake */ override konst internalDisplayName: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Unknown#<get-internalDisplayName>(){}kotlin.String
       //   Public signature: /Visibilities.Unknown.internalDisplayName.<get-internalDisplayName>|2525145903245032039[0]
@@ -661,7 +661,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Unknown{}isPublicAPI
     //   Public signature: /Visibilities.Unknown.isPublicAPI|-3614707293274580028[0]
-    /* fake */ override val isPublicAPI: Boolean
+    /* fake */ override konst isPublicAPI: Boolean
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Unknown#<get-isPublicAPI>(){}kotlin.Boolean
       //   Public signature: /Visibilities.Unknown.isPublicAPI.<get-isPublicAPI>|3495554365118712322[0]
@@ -673,7 +673,7 @@ object Visibilities {
     // CHECK:
     //   Mangled name: Visibilities.Unknown{}name
     //   Public signature: /Visibilities.Unknown.name|4231860309499509769[0]
-    /* fake */ override val name: String
+    /* fake */ override konst name: String
       // CHECK JVM_IR:
       //   Mangled name: Visibilities.Unknown#<get-name>(){}kotlin.String
       //   Public signature: /Visibilities.Unknown.name.<get-name>|-8006111524522882650[0]

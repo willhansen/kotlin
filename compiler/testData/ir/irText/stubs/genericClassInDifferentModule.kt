@@ -4,7 +4,7 @@
 // MODULE: m1
 // FILE: genericClassInDifferentModule_m1.kt
 
-abstract class Base<T>(val x: T) {
+abstract class Base<T>(konst x: T) {
     abstract fun <Y> foo(y: Y): T
 
     abstract var bar: T
@@ -22,5 +22,5 @@ class Derived1<T>(x: T) : Base<T>(x) {
 
     override var <Z> Z.exn: T
         get() = x
-        set(value) {}
+        set(konstue) {}
 }

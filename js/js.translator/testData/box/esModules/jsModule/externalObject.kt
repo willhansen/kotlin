@@ -4,7 +4,7 @@ package foo
 
 @JsModule("./externalObject.mjs")
 external object A {
-    val x: Int = definedExternally
+    konst x: Int = definedExternally
 
     fun foo(y: Int): Int = definedExternally
 }

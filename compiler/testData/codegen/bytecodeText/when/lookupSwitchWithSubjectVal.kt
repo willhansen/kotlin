@@ -1,5 +1,5 @@
 fun foo(x: Int): String {
-    return when (val y = x) {
+    return when (konst y = x) {
         100 -> "1"
         200 -> "2"
         300 -> "3"

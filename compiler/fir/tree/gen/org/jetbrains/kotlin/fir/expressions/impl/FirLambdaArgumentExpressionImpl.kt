@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirLambdaArgumentExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var expression: FirExpression,
 ) : FirLambdaArgumentExpression() {
-    override val typeRef: FirTypeRef get() = expression.typeRef
-    override val isSpread: Boolean get() = false
+    override konst typeRef: FirTypeRef get() = expression.typeRef
+    override konst isSpread: Boolean get() = false
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

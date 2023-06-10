@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.lombok.config.LombokAnnotations
 import org.jetbrains.kotlin.lombok.config.LombokConfig
 
-class ValueFieldModifier(val config: LombokConfig) {
+class ValueFieldModifier(konst config: LombokConfig) {
     fun modifyField(thisDescriptor: ClassDescriptor, propertyDescriptor: PropertyDescriptorImpl): PropertyDescriptorImpl? {
         // Explicit visibility
         if (propertyDescriptor.visibility != JavaDescriptorVisibilities.PACKAGE_VISIBILITY) return null

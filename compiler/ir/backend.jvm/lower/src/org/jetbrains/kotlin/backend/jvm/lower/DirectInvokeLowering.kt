@@ -28,22 +28,22 @@ import org.jetbrains.kotlin.ir.util.explicitParameters
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-internal val directInvokeLowering = makeIrFilePhase(
+internal konst directInvokeLowering = makeIrFilePhase(
     ::DirectInvokeLowering,
     name = "DirectInvokes",
     description = "Inline directly invoked lambdas and replace invoked function references with calls"
 )
 
-private class DirectInvokeLowering(private val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
+private class DirectInvokeLowering(private konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoidWithContext() {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val function = expression.symbol.owner
-        val receiver = expression.dispatchReceiver
+        konst function = expression.symbol.owner
+        konst receiver = expression.dispatchReceiver
         if (receiver == null || function.name != OperatorNameConventions.INVOKE)
             return super.visitCall(expression)
 
-        val result = when {
+        konst result = when {
             // TODO deal with type parameters somehow?
             // It seems we can't encounter them in the code written by user,
             // but this might be important later if we actually perform inlining and optimizations on IR.
@@ -64,17 +64,17 @@ private class DirectInvokeLowering(private val context: JvmBackendContext) : Fil
     }
 
     private fun visitLambdaInvoke(expression: IrCall, reference: IrFunctionReference): IrExpression {
-        val scope = currentScope!!.scope
-        val declarationParent = scope.getLocalDeclarationParent()
-        val function = reference.symbol.owner
-        if (expression.valueArgumentsCount == 0) {
+        konst scope = currentScope!!.scope
+        konst declarationParent = scope.getLocalDeclarationParent()
+        konst function = reference.symbol.owner
+        if (expression.konstueArgumentsCount == 0) {
             return function.inline(declarationParent)
         }
         return context.createIrBuilder(scope.scopeOwnerSymbol).run {
             at(expression)
             irBlock {
-                val arguments = function.explicitParameters.mapIndexed { index, parameter ->
-                    val argument = expression.getValueArgument(index)!!
+                konst arguments = function.explicitParameters.mapIndexed { index, parameter ->
+                    konst argument = expression.getValueArgument(index)!!
                     IrVariableImpl(
                         argument.startOffset, argument.endOffset, IrDeclarationOrigin.DEFINED, IrVariableSymbolImpl(), parameter.name,
                         parameter.type, isVar = false, isConst = false, isLateinit = false
@@ -90,11 +90,11 @@ private class DirectInvokeLowering(private val context: JvmBackendContext) : Fil
     }
 
     private fun visitFunctionReferenceInvoke(expression: IrCall, receiver: IrFunctionReference): IrExpression =
-        when (val irFun = receiver.symbol.owner) {
+        when (konst irFun = receiver.symbol.owner) {
             is IrSimpleFunction ->
                 IrCallImpl(
                     expression.startOffset, expression.endOffset, expression.type, irFun.symbol,
-                    typeArgumentsCount = irFun.typeParameters.size, valueArgumentsCount = irFun.valueParameters.size
+                    typeArgumentsCount = irFun.typeParameters.size, konstueArgumentsCount = irFun.konstueParameters.size
                 ).apply {
                     copyReceiverAndValueArgumentsForDirectInvoke(receiver, expression)
                 }
@@ -104,7 +104,7 @@ private class DirectInvokeLowering(private val context: JvmBackendContext) : Fil
                     expression.startOffset, expression.endOffset, expression.type, irFun.symbol,
                     typeArgumentsCount = irFun.typeParameters.size,
                     constructorTypeArgumentsCount = 0,
-                    valueArgumentsCount = irFun.valueParameters.size
+                    konstueArgumentsCount = irFun.konstueParameters.size
                 ).apply {
                     copyReceiverAndValueArgumentsForDirectInvoke(receiver, expression)
                 }
@@ -117,7 +117,7 @@ private class DirectInvokeLowering(private val context: JvmBackendContext) : Fil
         irFunRef: IrFunctionReference,
         irInvokeCall: IrFunctionAccessExpression
     ) {
-        val irFun = irFunRef.symbol.owner
+        konst irFun = irFunRef.symbol.owner
         var invokeArgIndex = 0
         if (irFun.dispatchReceiverParameter != null) {
             dispatchReceiver = irFunRef.dispatchReceiver ?: irInvokeCall.getValueArgument(invokeArgIndex++)
@@ -125,10 +125,10 @@ private class DirectInvokeLowering(private val context: JvmBackendContext) : Fil
         if (irFun.extensionReceiverParameter != null) {
             extensionReceiver = irFunRef.extensionReceiver ?: irInvokeCall.getValueArgument(invokeArgIndex++)
         }
-        if (invokeArgIndex + valueArgumentsCount != irInvokeCall.valueArgumentsCount) {
-            throw AssertionError("Mismatching value arguments: $invokeArgIndex arguments used for receivers\n${irInvokeCall.dump()}")
+        if (invokeArgIndex + konstueArgumentsCount != irInvokeCall.konstueArgumentsCount) {
+            throw AssertionError("Mismatching konstue arguments: $invokeArgIndex arguments used for receivers\n${irInvokeCall.dump()}")
         }
-        for (i in 0 until valueArgumentsCount) {
+        for (i in 0 until konstueArgumentsCount) {
             putValueArgument(i, irInvokeCall.getValueArgument(invokeArgIndex++))
         }
     }

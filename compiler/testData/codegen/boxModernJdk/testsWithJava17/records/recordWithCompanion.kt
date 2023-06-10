@@ -3,7 +3,7 @@
 
 @JvmRecord
 data class Tag(
-    val id: String,
+    konst id: String,
 ) {
     companion object
 }

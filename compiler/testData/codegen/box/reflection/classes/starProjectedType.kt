@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 class Foo<K, V>
 
 fun box(): String {
-    val foo = Foo::class.starProjectedType
+    konst foo = Foo::class.starProjectedType
     assertEquals(Foo::class, foo.classifier)
     assertEquals(listOf(KTypeProjection.STAR, KTypeProjection.STAR), foo.arguments)
     assertEquals(foo, Foo::class.createType(listOf(KTypeProjection.STAR, KTypeProjection.STAR)))
@@ -17,7 +17,7 @@ fun box(): String {
     assertEquals(String::class, String::class.starProjectedType.classifier)
     assertEquals(listOf(), String::class.starProjectedType.arguments)
 
-    val tp = Foo::class.typeParameters.first()
+    konst tp = Foo::class.typeParameters.first()
     assertEquals(tp.createType(), tp.starProjectedType)
 
     return "OK"

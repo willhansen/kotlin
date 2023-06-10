@@ -2,4 +2,4 @@
 @file:JvmMultifileClass
 package test
 
-val x = 1
+konst x = 1

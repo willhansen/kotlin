@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1287
 package foo
 
-val r = "OK"
+konst r = "OK"
 
 fun simple(s: String? = null): String {
     if (s != null) return s
@@ -11,7 +11,7 @@ fun simple(s: String? = null): String {
     }
 }
 
-val ok = "OK"
+konst ok = "OK"
 fun withClosure(s: String? = null): String {
     if (s != null) return s
 

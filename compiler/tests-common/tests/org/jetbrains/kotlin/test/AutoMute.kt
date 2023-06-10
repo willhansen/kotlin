@@ -16,9 +16,9 @@ internal inline fun RunNotifier.withAutoMuteListener(
     testKey: String,
     crossinline run: () -> Unit,
 ) {
-    val doAutoMute = DO_AUTO_MUTE
+    konst doAutoMute = DO_AUTO_MUTE
     if (doAutoMute != null) {
-        val autoMuteListener = object : RunListener() {
+        konst autoMuteListener = object : RunListener() {
             override fun testFailure(failure: Failure) {
                 doAutoMute.muteTest(testKey)
                 super.testFailure(failure)

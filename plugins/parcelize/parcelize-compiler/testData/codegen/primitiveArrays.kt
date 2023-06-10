@@ -11,18 +11,18 @@ import android.os.Parcelable
 
 @Parcelize
 data class Test(
-    val a: ByteArray,
-    val b: CharArray,
-    val c: ShortArray,
-    val d: IntArray,
-    val e: LongArray,
-    val f: ByteArray?,
-    val g: CharArray?,
-    val h: ShortArray?,
-    val i: IntArray?,
-    val j: LongArray?,
-    val k: FloatArray,
-    val l: DoubleArray,
-    val m: FloatArray?,
-    val n: DoubleArray?
+    konst a: ByteArray,
+    konst b: CharArray,
+    konst c: ShortArray,
+    konst d: IntArray,
+    konst e: LongArray,
+    konst f: ByteArray?,
+    konst g: CharArray?,
+    konst h: ShortArray?,
+    konst i: IntArray?,
+    konst j: LongArray?,
+    konst k: FloatArray,
+    konst l: DoubleArray,
+    konst m: FloatArray?,
+    konst n: DoubleArray?
 ) : Parcelable

@@ -1,5 +1,5 @@
-FILE fqName:<root> fileName:/valueClassEquals.kt
-  CLASS CLASS name:Z modality:FINAL visibility:public [value] superTypes:[kotlin.Any]
+FILE fqName:<root> fileName:/konstueClassEquals.kt
+  CLASS CLASS name:Z modality:FINAL visibility:public [konstue] superTypes:[kotlin.Any]
     annotations:
       JvmInline
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Z
@@ -7,13 +7,13 @@ FILE fqName:<root> fileName:/valueClassEquals.kt
       VALUE_PARAMETER name:s index:0 type:kotlin.String
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Z modality:FINAL visibility:public [value] superTypes:[kotlin.Any]'
-    PROPERTY name:s visibility:public modality:FINAL [val]
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Z modality:FINAL visibility:public [konstue] superTypes:[kotlin.Any]'
+    PROPERTY name:s visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 's: kotlin.String declared in <root>.Z.<init>' type=kotlin.String origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-s> visibility:public modality:FINAL <> ($this:<root>.Z) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:s visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:s visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Z
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-s> (): kotlin.String declared in <root>.Z'
@@ -26,11 +26,11 @@ FILE fqName:<root> fileName:/valueClassEquals.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.Z'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="Z("
-            CONST String type=kotlin.String value="s="
+            CONST String type=kotlin.String konstue="Z("
+            CONST String type=kotlin.String konstue="s="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: <root>.Z declared in <root>.Z.toString' type=<root>.Z origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"
     FUN GENERATED_SINGLE_FIELD_VALUE_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.Z) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -51,8 +51,8 @@ FILE fqName:<root> fileName:/valueClassEquals.kt
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.Z
               GET_VAR 'other: kotlin.Any? declared in <root>.Z.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Z'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Z [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.Z [konst]
           TYPE_OP type=<root>.Z origin=CAST typeOperand=<root>.Z
             GET_VAR 'other: kotlin.Any? declared in <root>.Z.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
@@ -62,17 +62,17 @@ FILE fqName:<root> fileName:/valueClassEquals.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
                   receiver: GET_VAR '<this>: <root>.Z declared in <root>.Z.equals' type=<root>.Z origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.Z declared in <root>.Z.equals' type=<root>.Z origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.Z declared in <root>.Z.equals' type=<root>.Z origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Z'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Z'
-          CONST Boolean type=kotlin.Boolean value=true
-  PROPERTY name:equals visibility:public modality:FINAL [val]
+          CONST Boolean type=kotlin.Boolean konstue=true
+  PROPERTY name:equals visibility:public modality:FINAL [konst]
     FIELD PROPERTY_BACKING_FIELD name:equals type:kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean> visibility:private [final,static]
       EXPRESSION_BODY
         FUNCTION_REFERENCE 'public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.Z' type=kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean> origin=null reflectionTarget=<same>
     FUN DEFAULT_PROPERTY_ACCESSOR name:<get-equals> visibility:public modality:FINAL <> () returnType:kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean>
-      correspondingProperty: PROPERTY name:equals visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:equals visibility:public modality:FINAL [konst]
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun <get-equals> (): kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean> declared in <root>'
           GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:equals type:kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean> visibility:private [final,static]' type=kotlin.reflect.KFunction2<<root>.Z, @[ParameterName(name = 'other')] kotlin.Any?, kotlin.Boolean> origin=null

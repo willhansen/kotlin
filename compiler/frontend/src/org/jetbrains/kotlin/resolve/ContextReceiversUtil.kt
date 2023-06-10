@@ -42,9 +42,9 @@ fun checkSubtypingBetweenContextReceivers(
         else -> this
     }
     for (i in 0 until contextReceiverTypes.lastIndex) {
-        val contextReceiverType = contextReceiverTypes[i].prepared()
+        konst contextReceiverType = contextReceiverTypes[i].prepared()
         for (j in (i + 1) until contextReceiverTypes.size) {
-            val anotherContextReceiverType = contextReceiverTypes[j].prepared()
+            konst anotherContextReceiverType = contextReceiverTypes[j].prepared()
             if (NewKotlinTypeChecker.Default.isSubtypeOf(contextReceiverType, anotherContextReceiverType) ||
                 NewKotlinTypeChecker.Default.isSubtypeOf(anotherContextReceiverType, contextReceiverType)
             ) {

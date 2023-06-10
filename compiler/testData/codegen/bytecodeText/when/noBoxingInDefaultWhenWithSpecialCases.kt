@@ -12,7 +12,7 @@ fun testLong(i: Long?) =
         else -> "other"
     }
 
-// 0 valueOf
-// 0 Integer.valueOf
-// 0 Long.valueOf
+// 0 konstueOf
+// 0 Integer.konstueOf
+// 0 Long.konstueOf
 // 0 areEqual

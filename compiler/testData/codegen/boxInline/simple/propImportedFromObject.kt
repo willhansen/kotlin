@@ -6,7 +6,7 @@ package test
 
 object Host {
 
-    inline val <reified T : Any>  T.foo: String
+    inline konst <reified T : Any>  T.foo: String
         get() = T::class.java.simpleName
 }
 

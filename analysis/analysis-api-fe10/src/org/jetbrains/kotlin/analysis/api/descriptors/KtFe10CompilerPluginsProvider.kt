@@ -19,7 +19,7 @@ class KtFe10CompilerPluginsProvider : KtCompilerPluginsProvider() {
 
     @OptIn(InternalNonStableExtensionPoints::class)
     override fun isPluginOfTypeRegistered(module: KtSourceModule, pluginType: CompilerPluginType): Boolean {
-        val extension = when (pluginType) {
+        konst extension = when (pluginType) {
             CompilerPluginType.ASSIGNMENT -> AssignResolutionAltererExtension
             else -> return false
         }

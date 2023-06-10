@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.psi.KtClassOrObject
 
 interface LeakingThisDescriptor {
-    val classOrObject: KtClassOrObject
+    konst classOrObject: KtClassOrObject
 
-    data class PropertyIsNull(val property: PropertyDescriptor, override val classOrObject: KtClassOrObject) : LeakingThisDescriptor
+    data class PropertyIsNull(konst property: PropertyDescriptor, override konst classOrObject: KtClassOrObject) : LeakingThisDescriptor
 
-    data class NonFinalClass(val klass: ClassDescriptor, override val classOrObject: KtClassOrObject) : LeakingThisDescriptor
+    data class NonFinalClass(konst klass: ClassDescriptor, override konst classOrObject: KtClassOrObject) : LeakingThisDescriptor
 
-    data class NonFinalProperty(val property: PropertyDescriptor, override val classOrObject: KtClassOrObject) : LeakingThisDescriptor
+    data class NonFinalProperty(konst property: PropertyDescriptor, override konst classOrObject: KtClassOrObject) : LeakingThisDescriptor
 
-    data class NonFinalFunction(val function: FunctionDescriptor, override val classOrObject: KtClassOrObject) : LeakingThisDescriptor
+    data class NonFinalFunction(konst function: FunctionDescriptor, override konst classOrObject: KtClassOrObject) : LeakingThisDescriptor
 }

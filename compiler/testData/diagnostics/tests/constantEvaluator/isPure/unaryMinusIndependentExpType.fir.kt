@@ -1,63 +1,63 @@
 package test
 
-// val p1: true
-val p1: Int = -1
+// konst p1: true
+konst p1: Int = -1
 
-// val p2: true
-val p2: Long = -1
+// konst p2: true
+konst p2: Long = -1
 
-// val p3: true
-val p3: Byte = -1
+// konst p3: true
+konst p3: Byte = -1
 
-// val p4: true
-val p4: Short = -1
+// konst p4: true
+konst p4: Short = -1
 
-// val l1: false
-val l1: Long = -1.toLong()
+// konst l1: false
+konst l1: Long = -1.toLong()
 
-// val l2: false
-val l2: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
+// konst l2: false
+konst l2: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
 
-// val l3: false
-val l3: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
+// konst l3: false
+konst l3: Int = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
 
-// val l4: false
-val l4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
-
-
-// val b1: false
-val b1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
-
-// val b2: false
-val b2: Int = -1.toByte()
-
-// val b3: false
-val b3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
-
-// val b4: false
-val b4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
+// konst l4: false
+konst l4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toLong()<!>
 
 
-// val i1: false
-val i1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+// konst b1: false
+konst b1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
 
-// val i2: false
-val i2: Int = -1.toInt()
+// konst b2: false
+konst b2: Int = -1.toByte()
 
-// val i3: false
-val i3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+// konst b3: false
+konst b3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
 
-// val i4: false
-val i4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+// konst b4: false
+konst b4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toByte()<!>
 
-// val s1: false
-val s1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
 
-// val s2: false
-val s2: Int = -1.toShort()
+// konst i1: false
+konst i1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
 
-// val s3: false
-val s3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+// konst i2: false
+konst i2: Int = -1.toInt()
 
-// val s4: false
-val s4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+// konst i3: false
+konst i3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+
+// konst i4: false
+konst i4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toInt()<!>
+
+// konst s1: false
+konst s1: Byte = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+
+// konst s2: false
+konst s2: Int = -1.toShort()
+
+// konst s3: false
+konst s3: Long = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>
+
+// konst s4: false
+konst s4: Short = <!INITIALIZER_TYPE_MISMATCH, TYPE_MISMATCH!>-1.toShort()<!>

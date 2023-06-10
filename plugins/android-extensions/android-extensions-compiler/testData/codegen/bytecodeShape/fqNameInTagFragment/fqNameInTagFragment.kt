@@ -4,8 +4,8 @@ import android.app.Fragment
 import kotlinx.android.synthetic.main.layout.*
 
 class MyFragment: Fragment() {
-    val button = this.MyButton
-    val button2 = MyButton
+    konst button = this.MyButton
+    konst button2 = MyButton
 }
 
 // 1 public _\$_findCachedViewById

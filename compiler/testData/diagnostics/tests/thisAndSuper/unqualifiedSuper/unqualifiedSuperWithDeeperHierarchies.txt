@@ -2,7 +2,7 @@ package
 
 public open class DeepBase : DeeperBase {
     public constructor DeepBase()
-    public open override /*1*/ /*fake_override*/ val deeperBaseProp: kotlin.Int
+    public open override /*1*/ /*fake_override*/ konst deeperBaseProp: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun deeperBaseFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -11,7 +11,7 @@ public open class DeepBase : DeeperBase {
 
 public final class DeepDerived : DeepBase, DeepInterface {
     public constructor DeepDerived()
-    public open override /*1*/ val deeperBaseProp: kotlin.Int
+    public open override /*1*/ konst deeperBaseProp: kotlin.Int
     public final fun callsSuperDeeperBaseFun(): kotlin.Unit
     public final fun callsSuperInterfaceFuns(): kotlin.Unit
     public open override /*1*/ fun deepInterfaceFun(): kotlin.Unit
@@ -33,7 +33,7 @@ public interface DeepInterface : DeeperInterface {
 
 public open class DeeperBase {
     public constructor DeeperBase()
-    public open val deeperBaseProp: kotlin.Int
+    public open konst deeperBaseProp: kotlin.Int
     public open fun deeperBaseFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -27,16 +27,16 @@
 /*∆*/ public open external class CompositionEvent : org.w3c.dom.events.UIEvent {
 /*∆*/     public constructor CompositionEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.CompositionEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val data: kotlin.String { get; }
+/*∆*/     public open konst data: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public companion object of CompositionEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -47,25 +47,25 @@
 /*∆*/ public open external class Event {
 /*∆*/     public constructor Event(type: kotlin.String, eventInitDict: org.w3c.dom.EventInit = ...)
 /*∆*/ 
-/*∆*/     public open val bubbles: kotlin.Boolean { get; }
+/*∆*/     public open konst bubbles: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val cancelable: kotlin.Boolean { get; }
+/*∆*/     public open konst cancelable: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val composed: kotlin.Boolean { get; }
+/*∆*/     public open konst composed: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val currentTarget: org.w3c.dom.events.EventTarget? { get; }
+/*∆*/     public open konst currentTarget: org.w3c.dom.events.EventTarget? { get; }
 /*∆*/ 
-/*∆*/     public open val defaultPrevented: kotlin.Boolean { get; }
+/*∆*/     public open konst defaultPrevented: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val eventPhase: kotlin.Short { get; }
+/*∆*/     public open konst eventPhase: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val isTrusted: kotlin.Boolean { get; }
+/*∆*/     public open konst isTrusted: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val target: org.w3c.dom.events.EventTarget? { get; }
+/*∆*/     public open konst target: org.w3c.dom.events.EventTarget? { get; }
 /*∆*/ 
-/*∆*/     public open val timeStamp: kotlin.Number { get; }
+/*∆*/     public open konst timeStamp: kotlin.Number { get; }
 /*∆*/ 
-/*∆*/     public open val type: kotlin.String { get; }
+/*∆*/     public open konst type: kotlin.String { get; }
 /*∆*/ 
 /*∆*/     public final fun composedPath(): kotlin.Array<org.w3c.dom.events.EventTarget>
 /*∆*/ 
@@ -78,13 +78,13 @@
 /*∆*/     public final fun stopPropagation(): kotlin.Unit
 /*∆*/ 
 /*∆*/     public companion object of Event {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -139,16 +139,16 @@
 /*∆*/ public open external class FocusEvent : org.w3c.dom.events.UIEvent {
 /*∆*/     public constructor FocusEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.FocusEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val relatedTarget: org.w3c.dom.events.EventTarget? { get; }
+/*∆*/     public open konst relatedTarget: org.w3c.dom.events.EventTarget? { get; }
 /*∆*/ 
 /*∆*/     public companion object of FocusEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -159,18 +159,18 @@
 /*∆*/ public open external class InputEvent : org.w3c.dom.events.UIEvent {
 /*∆*/     public constructor InputEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.InputEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val data: kotlin.String { get; }
+/*∆*/     public open konst data: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val isComposing: kotlin.Boolean { get; }
+/*∆*/     public open konst isComposing: kotlin.Boolean { get; }
 /*∆*/ 
 /*∆*/     public companion object of InputEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -183,48 +183,48 @@
 /*∆*/ public open external class KeyboardEvent : org.w3c.dom.events.UIEvent {
 /*∆*/     public constructor KeyboardEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.KeyboardEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val altKey: kotlin.Boolean { get; }
+/*∆*/     public open konst altKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val charCode: kotlin.Int { get; }
+/*∆*/     public open konst charCode: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val code: kotlin.String { get; }
+/*∆*/     public open konst code: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val ctrlKey: kotlin.Boolean { get; }
+/*∆*/     public open konst ctrlKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val isComposing: kotlin.Boolean { get; }
+/*∆*/     public open konst isComposing: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val key: kotlin.String { get; }
+/*∆*/     public open konst key: kotlin.String { get; }
 /*∆*/ 
-/*∆*/     public open val keyCode: kotlin.Int { get; }
+/*∆*/     public open konst keyCode: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val location: kotlin.Int { get; }
+/*∆*/     public open konst location: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val metaKey: kotlin.Boolean { get; }
+/*∆*/     public open konst metaKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val repeat: kotlin.Boolean { get; }
+/*∆*/     public open konst repeat: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val shiftKey: kotlin.Boolean { get; }
+/*∆*/     public open konst shiftKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val which: kotlin.Int { get; }
+/*∆*/     public open konst which: kotlin.Int { get; }
 /*∆*/ 
 /*∆*/     public final fun getModifierState(keyArg: kotlin.String): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public companion object of KeyboardEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_KEY_LOCATION_LEFT: kotlin.Int { get; }
+/*∆*/         public final konst DOM_KEY_LOCATION_LEFT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_KEY_LOCATION_NUMPAD: kotlin.Int { get; }
+/*∆*/         public final konst DOM_KEY_LOCATION_NUMPAD: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_KEY_LOCATION_RIGHT: kotlin.Int { get; }
+/*∆*/         public final konst DOM_KEY_LOCATION_RIGHT: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_KEY_LOCATION_STANDARD: kotlin.Int { get; }
+/*∆*/         public final konst DOM_KEY_LOCATION_STANDARD: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -243,52 +243,52 @@
 /*∆*/ public open external class MouseEvent : org.w3c.dom.events.UIEvent, org.w3c.dom.UnionElementOrMouseEvent {
 /*∆*/     public constructor MouseEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.MouseEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val altKey: kotlin.Boolean { get; }
+/*∆*/     public open konst altKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val button: kotlin.Short { get; }
+/*∆*/     public open konst button: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val buttons: kotlin.Short { get; }
+/*∆*/     public open konst buttons: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/     public open val clientX: kotlin.Int { get; }
+/*∆*/     public open konst clientX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val clientY: kotlin.Int { get; }
+/*∆*/     public open konst clientY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val ctrlKey: kotlin.Boolean { get; }
+/*∆*/     public open konst ctrlKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val metaKey: kotlin.Boolean { get; }
+/*∆*/     public open konst metaKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val offsetX: kotlin.Double { get; }
+/*∆*/     public open konst offsetX: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val offsetY: kotlin.Double { get; }
+/*∆*/     public open konst offsetY: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val pageX: kotlin.Double { get; }
+/*∆*/     public open konst pageX: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val pageY: kotlin.Double { get; }
+/*∆*/     public open konst pageY: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val region: kotlin.String? { get; }
+/*∆*/     public open konst region: kotlin.String? { get; }
 /*∆*/ 
-/*∆*/     public open val relatedTarget: org.w3c.dom.events.EventTarget? { get; }
+/*∆*/     public open konst relatedTarget: org.w3c.dom.events.EventTarget? { get; }
 /*∆*/ 
-/*∆*/     public open val screenX: kotlin.Int { get; }
+/*∆*/     public open konst screenX: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val screenY: kotlin.Int { get; }
+/*∆*/     public open konst screenY: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val shiftKey: kotlin.Boolean { get; }
+/*∆*/     public open konst shiftKey: kotlin.Boolean { get; }
 /*∆*/ 
-/*∆*/     public open val x: kotlin.Double { get; }
+/*∆*/     public open konst x: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val y: kotlin.Double { get; }
+/*∆*/     public open konst y: kotlin.Double { get; }
 /*∆*/ 
 /*∆*/     public final fun getModifierState(keyArg: kotlin.String): kotlin.Boolean
 /*∆*/ 
 /*∆*/     public companion object of MouseEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -313,18 +313,18 @@
 /*∆*/ public open external class UIEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor UIEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.UIEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val detail: kotlin.Int { get; }
+/*∆*/     public open konst detail: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val view: org.w3c.dom.Window? { get; }
+/*∆*/     public open konst view: org.w3c.dom.Window? { get; }
 /*∆*/ 
 /*∆*/     public companion object of UIEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 
@@ -337,28 +337,28 @@
 /*∆*/ public open external class WheelEvent : org.w3c.dom.events.MouseEvent {
 /*∆*/     public constructor WheelEvent(type: kotlin.String, eventInitDict: org.w3c.dom.events.WheelEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val deltaMode: kotlin.Int { get; }
+/*∆*/     public open konst deltaMode: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/     public open val deltaX: kotlin.Double { get; }
+/*∆*/     public open konst deltaX: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val deltaY: kotlin.Double { get; }
+/*∆*/     public open konst deltaY: kotlin.Double { get; }
 /*∆*/ 
-/*∆*/     public open val deltaZ: kotlin.Double { get; }
+/*∆*/     public open konst deltaZ: kotlin.Double { get; }
 /*∆*/ 
 /*∆*/     public companion object of WheelEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_DELTA_LINE: kotlin.Int { get; }
+/*∆*/         public final konst DOM_DELTA_LINE: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_DELTA_PAGE: kotlin.Int { get; }
+/*∆*/         public final konst DOM_DELTA_PAGE: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val DOM_DELTA_PIXEL: kotlin.Int { get; }
+/*∆*/         public final konst DOM_DELTA_PIXEL: kotlin.Int { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 

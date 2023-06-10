@@ -5,7 +5,7 @@
 fun foo(x: String = (object {}).javaClass.enclosingMethod.name) = x
 
 fun box(): String {
-    val f = foo()
+    konst f = foo()
     if (f != "bar\$default") return "Fail: $f"
     return "OK"
 }

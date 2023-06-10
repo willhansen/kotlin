@@ -1,7 +1,7 @@
 // IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND: JS_IR_ES6
 
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
 @TestAnn("class")
 class TestClass

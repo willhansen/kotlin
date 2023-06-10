@@ -10,7 +10,7 @@ abstract class IrBindableSymbolBase<B : IrSymbolOwner> :
     IrBindableSymbol<B>, IrSymbolBase() {
 
     private var _owner: B? = null
-    override val owner: B
+    override konst owner: B
         get() = _owner ?: throw IllegalStateException("")
 
     override fun bind(owner: B) {
@@ -27,32 +27,32 @@ abstract class IrSymbolBase : IrSymbol
 interface IrPropertySymbol : IrBindableSymbol<IrProperty>
 
 interface IrBindableSymbol<B : IrSymbolOwner> : IrSymbol {
-    override val owner: B
+    override konst owner: B
 
     fun bind(owner: B)
 }
 
 interface IrSymbol {
-    val owner: IrSymbolOwner
+    konst owner: IrSymbolOwner
 }
 
 interface IrSymbolOwner {
-    val symbol: IrSymbol
+    konst symbol: IrSymbol
 }
 
-class IrProperty(override val symbol: IrPropertySymbol, val name: String) : IrSymbolOwner
+class IrProperty(override konst symbol: IrPropertySymbol, konst name: String) : IrSymbolOwner
 
 // MODULE: main(lib)
 // FILE: FakeOverrideBuilder_main.kt
 
 fun link(declaration: IrSymbolOwner) {
-    val tempSymbol = IrPropertySymbolImpl()
+    konst tempSymbol = IrPropertySymbolImpl()
     tempSymbol.bind(declaration as IrProperty)
 }
 
 fun box(): String {
-    val symbol = IrPropertySymbolImpl()
-    val property = IrProperty(symbol, "OK")
+    konst symbol = IrPropertySymbolImpl()
+    konst property = IrProperty(symbol, "OK")
     symbol.bind(property)
     link(property)
     return symbol.owner.name

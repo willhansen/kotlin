@@ -58,7 +58,7 @@ public object Object : Obsolete {
 public final class Properties {
     public constructor Properties()
     public final var n: Obsolete
-    public final val x: Obsolete
+    public final konst x: Obsolete
     public final var y: Obsolete
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

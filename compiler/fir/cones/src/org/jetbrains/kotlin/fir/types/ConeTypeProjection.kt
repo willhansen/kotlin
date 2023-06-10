@@ -12,20 +12,20 @@ enum class ProjectionKind {
 }
 
 sealed class ConeTypeProjection : TypeArgumentMarker {
-    abstract val kind: ProjectionKind
+    abstract konst kind: ProjectionKind
 
     companion object {
-        val EMPTY_ARRAY = arrayOf<ConeTypeProjection>()
+        konst EMPTY_ARRAY = arrayOf<ConeTypeProjection>()
     }
 }
 
 object ConeStarProjection : ConeTypeProjection() {
-    override val kind: ProjectionKind
+    override konst kind: ProjectionKind
         get() = ProjectionKind.STAR
 }
 
 sealed class ConeKotlinTypeProjection : ConeTypeProjection() {
-    abstract val type: ConeKotlinType
+    abstract konst type: ConeKotlinType
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -42,28 +42,28 @@ sealed class ConeKotlinTypeProjection : ConeTypeProjection() {
     }
 }
 
-data class ConeKotlinTypeProjectionIn(override val type: ConeKotlinType) : ConeKotlinTypeProjection() {
-    override val kind: ProjectionKind
+data class ConeKotlinTypeProjectionIn(override konst type: ConeKotlinType) : ConeKotlinTypeProjection() {
+    override konst kind: ProjectionKind
         get() = ProjectionKind.IN
 }
 
-data class ConeKotlinTypeProjectionOut(override val type: ConeKotlinType) : ConeKotlinTypeProjection() {
-    override val kind: ProjectionKind
+data class ConeKotlinTypeProjectionOut(override konst type: ConeKotlinType) : ConeKotlinTypeProjection() {
+    override konst kind: ProjectionKind
         get() = ProjectionKind.OUT
 }
 
-data class ConeKotlinTypeConflictingProjection(override val type: ConeKotlinType) : ConeKotlinTypeProjection() {
-    override val kind: ProjectionKind
+data class ConeKotlinTypeConflictingProjection(override konst type: ConeKotlinType) : ConeKotlinTypeProjection() {
+    override konst kind: ProjectionKind
         get() = ProjectionKind.INVARIANT
 }
 
-val ConeTypeProjection.type: ConeKotlinType?
+konst ConeTypeProjection.type: ConeKotlinType?
     get() = when (this) {
         ConeStarProjection -> null
         is ConeKotlinTypeProjection -> type
     }
 
-val ConeTypeProjection.isStarProjection: Boolean
+konst ConeTypeProjection.isStarProjection: Boolean
     get() = this == ConeStarProjection
 
 fun ConeTypeProjection.replaceType(newType: ConeKotlinType?): ConeTypeProjection {

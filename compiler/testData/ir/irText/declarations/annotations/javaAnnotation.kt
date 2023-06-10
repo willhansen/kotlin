@@ -6,13 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface JavaAnn {
-    String value() default "";
+    String konstue() default "";
     int i() default 0;
 }
 
 // FILE: javaAnnotation.kt
 @JavaAnn fun test1() {}
 
-@JavaAnn(value="abc", i=123) fun test2() {}
+@JavaAnn(konstue="abc", i=123) fun test2() {}
 
-@JavaAnn(i=123, value="abc") fun test3() {}
+@JavaAnn(i=123, konstue="abc") fun test3() {}

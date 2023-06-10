@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 
-open class DeepVisitor<D>(val worker: DeclarationDescriptorVisitor<Boolean, D>) : DeclarationDescriptorVisitor<Boolean, D> {
+open class DeepVisitor<D>(konst worker: DeclarationDescriptorVisitor<Boolean, D>) : DeclarationDescriptorVisitor<Boolean, D> {
 
     open fun visitChildren(descriptors: Collection<DeclarationDescriptor>, data: D): Boolean {
         for (descriptor in descriptors) {

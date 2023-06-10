@@ -1,6 +1,6 @@
 fun test() {
-    val f = String::length
-    val s = "hello"
-    val g = <expr>s</expr>::length
+    konst f = String::length
+    konst s = "hello"
+    konst g = <expr>s</expr>::length
     f() + g() + String::length.invoke(s) + s::length.invoke()
 }

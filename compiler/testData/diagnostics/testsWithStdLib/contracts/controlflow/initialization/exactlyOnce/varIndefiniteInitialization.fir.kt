@@ -22,7 +22,7 @@ fun indefiniteVarReassignment(n: Int) {
 fun nonAnonymousLambdas() {
     // Named lambdas are not inlined, even in theory it could be done for some simple cases as this one
     var x: Int
-    val initializer = { x = 42 }
+    konst initializer = { x = 42 }
     myRun(initializer)
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }
@@ -45,7 +45,7 @@ fun branchingIndetermineFlow(a: Any) {
 fun funWithUnknownInvocations(block: () -> Unit) = block()
 
 fun nestedIndefiniteAssignment() {
-    val x: Int
+    konst x: Int
     funWithUnknownInvocations { myRun { <!CAPTURED_VAL_INITIALIZATION!>x<!> = 42 } }
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }

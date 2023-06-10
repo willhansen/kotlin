@@ -4,7 +4,7 @@
 
 expect interface Interface
 
-expect annotation class Anno(val prop: String)
+expect annotation class Anno(konst prop: String)
 
 expect object Object
 
@@ -17,7 +17,7 @@ expect enum class En { ENTRY }
 
 actual interface Interface
 
-actual annotation class Anno actual constructor(actual val prop: String)
+actual annotation class Anno actual constructor(actual konst prop: String)
 
 actual object Object
 

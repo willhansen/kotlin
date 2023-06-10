@@ -8,7 +8,7 @@ import static java.lang.annotation.ElementType.METHOD;
 
 @Target({FIELD, METHOD})
 public @interface JavaAnno() {
-    ElementType[] value();
+    ElementType[] konstue();
 }
 
 // FILE: test.kt
@@ -18,5 +18,5 @@ import java.lang.annotation.ElementType.METHOD
 
 class Test {
     @JavaAnno(FIELD, METHOD)
-    val f<caret>oo = ""
+    konst f<caret>oo = ""
 }

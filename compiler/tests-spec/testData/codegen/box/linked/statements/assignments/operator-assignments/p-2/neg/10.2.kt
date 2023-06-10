@@ -18,14 +18,14 @@ class B(var a: Int) {
     var div = false
     var divAssign = false
 
-    operator fun div(value: Int): B {
+    operator fun div(konstue: Int): B {
         div = true
-        return B(a / value)
+        return B(a / konstue)
     }
 
 }
 
 fun box() {
-    val b = B(1)
+    konst b = B(1)
     b /= 1 //error
 }

@@ -1,7 +1,7 @@
 // IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND: JS_IR_ES6
 // SKIP_MINIFICATION
-// This test uses eval, so DCE becomes impossible
+// This test uses ekonst, so DCE becomes impossible
 // MODULE: lib
 // FILE: lib.kt
 package foo
@@ -60,8 +60,8 @@ fun callInternalFunctions() {
 // FILE: main.kt
 package foo
 
-private val currentPackage: dynamic
-    get() = eval("\$module\$lib").foo
+private konst currentPackage: dynamic
+    get() = ekonst("\$module\$lib").foo
 
 private fun instantiate(classRef: dynamic, param: dynamic = js("undefined")) = js("new classRef(param)")
 

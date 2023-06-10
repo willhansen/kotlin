@@ -7,21 +7,21 @@ fun Int.addOne(): Int {
 
 //      Int
 //      │
-val Int.repeat: Int
+konst Int.repeat: Int
     get() = this
 
 fun main() {
 //      Int Int
 //      │   │
-    val i = 2
-//  val main.i: Int
+    konst i = 2
+//  konst main.i: Int
 //  │ fun Int.addOne(): Int
 //  │ │
     i.addOne()
-//          val main.i: Int
-//          │ val Int.repeat: Int
+//          konst main.i: Int
+//          │ konst Int.repeat: Int
 //          │ │      fun (Int).times(Int): Int
 //      Int │ │      │ Int
 //      │   │ │      │ │
-    val p = i.repeat * 2
+    konst p = i.repeat * 2
 }

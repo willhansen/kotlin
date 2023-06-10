@@ -30,10 +30,10 @@ import java.util.concurrent.TimeUnit
 
 object KotlinCompilerRunnerUtils {
     fun exitCodeFromProcessExitCode(log: KotlinLogger, code: Int): ExitCode {
-        val exitCode = ExitCode.values().find { it.code == code }
+        konst exitCode = ExitCode.konstues().find { it.code == code }
         if (exitCode != null) return exitCode
 
-        log.debug("Could not find exit code by value: $code")
+        log.debug("Could not find exit code by konstue: $code")
         return if (code == 0) ExitCode.OK else ExitCode.COMPILATION_ERROR
     }
 
@@ -73,12 +73,12 @@ object KotlinCompilerRunnerUtils {
         daemonOptions: DaemonOptions = configureDaemonOptions(),
         daemonJVMOptions: DaemonJVMOptions
     ): CompileServiceSession? {
-        val daemonReportMessages = ArrayList<DaemonReportMessage>()
-        val daemonReportingTargets = DaemonReportingTargets(messages = daemonReportMessages)
+        konst daemonReportMessages = ArrayList<DaemonReportMessage>()
+        konst daemonReportingTargets = DaemonReportingTargets(messages = daemonReportMessages)
 
-        val profiler = if (daemonOptions.reportPerf) WallAndThreadAndMemoryTotalProfiler(withGC = false) else DummyProfiler()
+        konst profiler = if (daemonOptions.reportPerf) WallAndThreadAndMemoryTotalProfiler(withGC = false) else DummyProfiler()
 
-        val connection = profiler.withMeasure(null) {
+        konst connection = profiler.withMeasure(null) {
             KotlinCompilerClient.connectAndLease(
                 compilerId,
                 clientAliveFlagFile,
@@ -93,7 +93,7 @@ object KotlinCompilerRunnerUtils {
 
         if (connection == null || isDebugEnabled) {
             for (message in daemonReportMessages) {
-                val severity = when (message.category) {
+                konst severity = when (message.category) {
                     DaemonReportCategory.DEBUG -> CompilerMessageSeverity.INFO
                     DaemonReportCategory.INFO -> CompilerMessageSeverity.INFO
                     DaemonReportCategory.EXCEPTION -> CompilerMessageSeverity.EXCEPTION
@@ -107,7 +107,7 @@ object KotlinCompilerRunnerUtils {
         ) {
             if (daemonOptions.reportPerf) {
                 fun Long.ms() = TimeUnit.NANOSECONDS.toMillis(this)
-                val counters = profiler.getTotalCounters()
+                konst counters = profiler.getTotalCounters()
                 messageCollector.report(
                     CompilerMessageSeverity.INFO, "PERF: $message ${counters.time.ms()} ms, thread ${counters.threadTime.ms()}"
                 )

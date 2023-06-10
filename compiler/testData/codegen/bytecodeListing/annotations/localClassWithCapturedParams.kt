@@ -1,9 +1,9 @@
-annotation class Simple(val value: String)
+annotation class Simple(konst konstue: String)
 
 fun localCaptured(): Any {
-    val z  = 1
-    class A(@Simple("K") val z: String) {
-        val x = z
+    konst z  = 1
+    class A(@Simple("K") konst z: String) {
+        konst x = z
     }
     return A("K")
 }

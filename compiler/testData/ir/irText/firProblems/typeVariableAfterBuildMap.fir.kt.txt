@@ -5,20 +5,20 @@ abstract class Visibility {
 
   }
 
-  val name: String
+  konst name: String
     field = name
     get
 
-  val isPublicAPI: Boolean
+  konst isPublicAPI: Boolean
     field = isPublicAPI
     get
 
-  open val internalDisplayName: String
+  open konst internalDisplayName: String
     open get(): String {
       return <this>.<get-name>()
     }
 
-  open val externalDisplayName: String
+  open konst externalDisplayName: String
     open get(): String {
       return <this>.<get-internalDisplayName>()
     }
@@ -54,7 +54,7 @@ object Visibilities {
 
     }
 
-    override val internalDisplayName: String
+    override konst internalDisplayName: String
       override get(): String {
         return "private/*private to this*/"
       }
@@ -141,7 +141,7 @@ object Visibilities {
       return true
     }
 
-    override val externalDisplayName: String
+    override konst externalDisplayName: String
       override get(): String {
         return "invisible (private in a supertype)"
       }
@@ -161,13 +161,13 @@ object Visibilities {
 
   }
 
-  private val ORDERED_VISIBILITIES: Map<Visibility, Int>
+  private konst ORDERED_VISIBILITIES: Map<Visibility, Int>
     field = buildMap<Visibility, Int>(builderAction = local fun MutableMap<Visibility, Int>.<anonymous>() {
-      $this$buildMap.put(key = PrivateToThis, value = 0) /*~> Unit */
-      $this$buildMap.put(key = Private, value = 0) /*~> Unit */
-      $this$buildMap.put(key = Internal, value = 1) /*~> Unit */
-      $this$buildMap.put(key = Protected, value = 1) /*~> Unit */
-      $this$buildMap.put(key = Public, value = 2) /*~> Unit */
+      $this$buildMap.put(key = PrivateToThis, konstue = 0) /*~> Unit */
+      $this$buildMap.put(key = Private, konstue = 0) /*~> Unit */
+      $this$buildMap.put(key = Internal, konstue = 1) /*~> Unit */
+      $this$buildMap.put(key = Protected, konstue = 1) /*~> Unit */
+      $this$buildMap.put(key = Public, konstue = 2) /*~> Unit */
     }
 )
     private get

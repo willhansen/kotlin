@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.metadata.serialization
 
-class Interner<T>(private val parent: Interner<T>? = null) {
-    private val firstIndex: Int = parent?.run { interned.size + firstIndex } ?: 0
-    private val interned = hashMapOf<T, Int>()
+class Interner<T>(private konst parent: Interner<T>? = null) {
+    private konst firstIndex: Int = parent?.run { interned.size + firstIndex } ?: 0
+    private konst interned = hashMapOf<T, Int>()
 
-    val allInternedObjects: List<T>
+    konst allInternedObjects: List<T>
         get() = interned.keys.sortedBy(interned::get)
 
-    val isEmpty: Boolean
+    konst isEmpty: Boolean
         get() = interned.isEmpty() && parent?.isEmpty != false
 
     private fun find(obj: T): Int? {

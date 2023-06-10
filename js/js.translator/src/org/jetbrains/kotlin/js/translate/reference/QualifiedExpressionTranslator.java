@@ -39,9 +39,9 @@ public final class QualifiedExpressionTranslator {
 
     @NotNull
     public static AccessTranslator getAccessTranslator(@NotNull KtQualifiedExpression expression,
-                                                       @NotNull TranslationContext context, boolean forceOrderOfEvaluation) {
+                                                       @NotNull TranslationContext context, boolean forceOrderOfEkonstuation) {
         JsExpression receiver = translateReceiver(expression, context);
-        if (forceOrderOfEvaluation && receiver != null) {
+        if (forceOrderOfEkonstuation && receiver != null) {
             receiver = context.defineTemporary(receiver);
         }
 

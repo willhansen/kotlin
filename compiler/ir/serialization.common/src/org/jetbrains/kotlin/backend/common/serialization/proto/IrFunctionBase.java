@@ -30,7 +30,7 @@ public final class IrFunctionBase extends
   private IrFunctionBase(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -107,10 +107,10 @@ public final class IrFunctionBase extends
           }
           case 50: {
             if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-              valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter>();
+              konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter>();
               mutable_bitField0_ |= 0x00000040;
             }
-            valueParameter_.add(input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.PARSER, extensionRegistry));
+            konstueParameter_.add(input.readMessage(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.PARSER, extensionRegistry));
             break;
           }
           case 56: {
@@ -125,17 +125,17 @@ public final class IrFunctionBase extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
         typeParameter_ = java.util.Collections.unmodifiableList(typeParameter_);
       }
       if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-        valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+        konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
       }
       try {
         unknownFieldsCodedOutput.flush();
@@ -152,7 +152,7 @@ public final class IrFunctionBase extends
     public IrFunctionBase parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrFunctionBase(input, extensionRegistry);
     }
   };
@@ -274,38 +274,38 @@ public final class IrFunctionBase extends
   }
 
   public static final int VALUE_PARAMETER_FIELD_NUMBER = 6;
-  private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> valueParameter_;
+  private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> konstueParameter_;
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   public java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> getValueParameterList() {
-    return valueParameter_;
+    return konstueParameter_;
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   public java.util.List<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameterOrBuilder> 
       getValueParameterOrBuilderList() {
-    return valueParameter_;
+    return konstueParameter_;
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   public int getValueParameterCount() {
-    return valueParameter_.size();
+    return konstueParameter_.size();
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getValueParameter(int index) {
-    return valueParameter_.get(index);
+    return konstueParameter_.get(index);
   }
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameterOrBuilder getValueParameterOrBuilder(
       int index) {
-    return valueParameter_.get(index);
+    return konstueParameter_.get(index);
   }
 
   public static final int BODY_FIELD_NUMBER = 7;
@@ -330,7 +330,7 @@ public final class IrFunctionBase extends
     dispatchReceiver_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance();
     extensionReceiver_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance();
     contextReceiverParametersCount_ = 0;
-    valueParameter_ = java.util.Collections.emptyList();
+    konstueParameter_ = java.util.Collections.emptyList();
     body_ = 0;
   }
   private byte memoizedIsInitialized = -1;
@@ -397,8 +397,8 @@ public final class IrFunctionBase extends
     if (((bitField0_ & 0x00000008) == 0x00000008)) {
       output.writeMessage(5, extensionReceiver_);
     }
-    for (int i = 0; i < valueParameter_.size(); i++) {
-      output.writeMessage(6, valueParameter_.get(i));
+    for (int i = 0; i < konstueParameter_.size(); i++) {
+      output.writeMessage(6, konstueParameter_.get(i));
     }
     if (((bitField0_ & 0x00000020) == 0x00000020)) {
       output.writeInt32(7, body_);
@@ -435,9 +435,9 @@ public final class IrFunctionBase extends
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
         .computeMessageSize(5, extensionReceiver_);
     }
-    for (int i = 0; i < valueParameter_.size(); i++) {
+    for (int i = 0; i < konstueParameter_.size(); i++) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-        .computeMessageSize(6, valueParameter_.get(i));
+        .computeMessageSize(6, konstueParameter_.get(i));
     }
     if (((bitField0_ & 0x00000020) == 0x00000020)) {
       size += org.jetbrains.kotlin.protobuf.CodedOutputStream
@@ -461,23 +461,23 @@ public final class IrFunctionBase extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parseFrom(java.io.InputStream input)
@@ -553,7 +553,7 @@ public final class IrFunctionBase extends
       bitField0_ = (bitField0_ & ~0x00000010);
       contextReceiverParametersCount_ = 0;
       bitField0_ = (bitField0_ & ~0x00000020);
-      valueParameter_ = java.util.Collections.emptyList();
+      konstueParameter_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000040);
       body_ = 0;
       bitField0_ = (bitField0_ & ~0x00000080);
@@ -606,10 +606,10 @@ public final class IrFunctionBase extends
       }
       result.contextReceiverParametersCount_ = contextReceiverParametersCount_;
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+        konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
         bitField0_ = (bitField0_ & ~0x00000040);
       }
-      result.valueParameter_ = valueParameter_;
+      result.konstueParameter_ = konstueParameter_;
       if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
         to_bitField0_ |= 0x00000020;
       }
@@ -645,13 +645,13 @@ public final class IrFunctionBase extends
       if (other.hasContextReceiverParametersCount()) {
         setContextReceiverParametersCount(other.getContextReceiverParametersCount());
       }
-      if (!other.valueParameter_.isEmpty()) {
-        if (valueParameter_.isEmpty()) {
-          valueParameter_ = other.valueParameter_;
+      if (!other.konstueParameter_.isEmpty()) {
+        if (konstueParameter_.isEmpty()) {
+          konstueParameter_ = other.konstueParameter_;
           bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           ensureValueParameterIsMutable();
-          valueParameter_.addAll(other.valueParameter_);
+          konstueParameter_.addAll(other.konstueParameter_);
         }
         
       }
@@ -710,7 +710,7 @@ public final class IrFunctionBase extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionBase) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -738,11 +738,11 @@ public final class IrFunctionBase extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
-      if (value == null) {
+    public Builder setBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      base_ = value;
+      base_ = konstue;
 
       bitField0_ |= 0x00000001;
       return this;
@@ -760,13 +760,13 @@ public final class IrFunctionBase extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase base = 1;</code>
      */
-    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase value) {
+    public Builder mergeBase(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase konstue) {
       if (((bitField0_ & 0x00000001) == 0x00000001) &&
           base_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.getDefaultInstance()) {
         base_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclarationBase.newBuilder(base_).mergeFrom(konstue).buildPartial();
       } else {
-        base_ = value;
+        base_ = konstue;
       }
 
       bitField0_ |= 0x00000001;
@@ -798,9 +798,9 @@ public final class IrFunctionBase extends
     /**
      * <code>required int64 name_type = 2;</code>
      */
-    public Builder setNameType(long value) {
+    public Builder setNameType(long konstue) {
       bitField0_ |= 0x00000002;
-      nameType_ = value;
+      nameType_ = konstue;
       
       return this;
     }
@@ -845,12 +845,12 @@ public final class IrFunctionBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder setTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.set(index, value);
+      typeParameter_.set(index, konstue);
 
       return this;
     }
@@ -867,12 +867,12 @@ public final class IrFunctionBase extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
-    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+    public Builder addTypeParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(value);
+      typeParameter_.add(konstue);
 
       return this;
     }
@@ -880,12 +880,12 @@ public final class IrFunctionBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder addTypeParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureTypeParameterIsMutable();
-      typeParameter_.add(index, value);
+      typeParameter_.add(index, konstue);
 
       return this;
     }
@@ -913,10 +913,10 @@ public final class IrFunctionBase extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter type_parameter = 3;</code>
      */
     public Builder addAllTypeParameter(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeParameter> konstues) {
       ensureTypeParameterIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, typeParameter_);
+          konstues, typeParameter_);
 
       return this;
     }
@@ -955,11 +955,11 @@ public final class IrFunctionBase extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter dispatch_receiver = 4;</code>
      */
-    public Builder setDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+    public Builder setDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      dispatchReceiver_ = value;
+      dispatchReceiver_ = konstue;
 
       bitField0_ |= 0x00000008;
       return this;
@@ -977,13 +977,13 @@ public final class IrFunctionBase extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter dispatch_receiver = 4;</code>
      */
-    public Builder mergeDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
+    public Builder mergeDispatchReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
       if (((bitField0_ & 0x00000008) == 0x00000008) &&
           dispatchReceiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance()) {
         dispatchReceiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(dispatchReceiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(dispatchReceiver_).mergeFrom(konstue).buildPartial();
       } else {
-        dispatchReceiver_ = value;
+        dispatchReceiver_ = konstue;
       }
 
       bitField0_ |= 0x00000008;
@@ -1015,11 +1015,11 @@ public final class IrFunctionBase extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter extension_receiver = 5;</code>
      */
-    public Builder setExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+    public Builder setExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      extensionReceiver_ = value;
+      extensionReceiver_ = konstue;
 
       bitField0_ |= 0x00000010;
       return this;
@@ -1037,13 +1037,13 @@ public final class IrFunctionBase extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter extension_receiver = 5;</code>
      */
-    public Builder mergeExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
+    public Builder mergeExtensionReceiver(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
       if (((bitField0_ & 0x00000010) == 0x00000010) &&
           extensionReceiver_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.getDefaultInstance()) {
         extensionReceiver_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(extensionReceiver_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.newBuilder(extensionReceiver_).mergeFrom(konstue).buildPartial();
       } else {
-        extensionReceiver_ = value;
+        extensionReceiver_ = konstue;
       }
 
       bitField0_ |= 0x00000010;
@@ -1075,9 +1075,9 @@ public final class IrFunctionBase extends
     /**
      * <code>optional int32 context_receiver_parameters_count = 8;</code>
      */
-    public Builder setContextReceiverParametersCount(int value) {
+    public Builder setContextReceiverParametersCount(int konstue) {
       bitField0_ |= 0x00000020;
-      contextReceiverParametersCount_ = value;
+      contextReceiverParametersCount_ = konstue;
       
       return this;
     }
@@ -1091,127 +1091,127 @@ public final class IrFunctionBase extends
       return this;
     }
 
-    private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> valueParameter_ =
+    private java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> konstueParameter_ =
       java.util.Collections.emptyList();
     private void ensureValueParameterIsMutable() {
       if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-        valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter>(valueParameter_);
+        konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter>(konstueParameter_);
         bitField0_ |= 0x00000040;
        }
     }
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> getValueParameterList() {
-      return java.util.Collections.unmodifiableList(valueParameter_);
+      return java.util.Collections.unmodifiableList(konstueParameter_);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public int getValueParameterCount() {
-      return valueParameter_.size();
+      return konstueParameter_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getValueParameter(int index) {
-      return valueParameter_.get(index);
+      return konstueParameter_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder setValueParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueParameterIsMutable();
-      valueParameter_.set(index, value);
+      konstueParameter_.set(index, konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder setValueParameter(
         int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.Builder builderForValue) {
       ensureValueParameterIsMutable();
-      valueParameter_.set(index, builderForValue.build());
+      konstueParameter_.set(index, builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
-    public Builder addValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+    public Builder addValueParameter(org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueParameterIsMutable();
-      valueParameter_.add(value);
+      konstueParameter_.add(konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder addValueParameter(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureValueParameterIsMutable();
-      valueParameter_.add(index, value);
+      konstueParameter_.add(index, konstue);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder addValueParameter(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.Builder builderForValue) {
       ensureValueParameterIsMutable();
-      valueParameter_.add(builderForValue.build());
+      konstueParameter_.add(builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder addValueParameter(
         int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter.Builder builderForValue) {
       ensureValueParameterIsMutable();
-      valueParameter_.add(index, builderForValue.build());
+      konstueParameter_.add(index, builderForValue.build());
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder addAllValueParameter(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> konstues) {
       ensureValueParameterIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, valueParameter_);
+          konstues, konstueParameter_);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder clearValueParameter() {
-      valueParameter_ = java.util.Collections.emptyList();
+      konstueParameter_ = java.util.Collections.emptyList();
       bitField0_ = (bitField0_ & ~0x00000040);
 
       return this;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
      */
     public Builder removeValueParameter(int index) {
       ensureValueParameterIsMutable();
-      valueParameter_.remove(index);
+      konstueParameter_.remove(index);
 
       return this;
     }
@@ -1232,9 +1232,9 @@ public final class IrFunctionBase extends
     /**
      * <code>optional int32 body = 7;</code>
      */
-    public Builder setBody(int value) {
+    public Builder setBody(int konstue) {
       bitField0_ |= 0x00000080;
-      body_ = value;
+      body_ = konstue;
       
       return this;
     }

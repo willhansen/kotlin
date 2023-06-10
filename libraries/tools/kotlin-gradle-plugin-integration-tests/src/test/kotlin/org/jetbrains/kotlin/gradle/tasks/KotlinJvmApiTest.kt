@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName
 import kotlin.io.path.createDirectories
 import kotlin.io.path.writeText
 
-@DisplayName("JVM API validation")
+@DisplayName("JVM API konstidation")
 class KotlinJvmApiTest : KGPBaseTest() {
     @DisplayName("Kotlin compilation can be set up using APIs")
     @JvmGradlePluginTests
@@ -49,7 +49,7 @@ class KotlinJvmApiTest : KGPBaseTest() {
                         """.trimIndent()
             }
 
-            val expectedOutput = projectPath.resolve("build/fooOutput/Foo.class")
+            konst expectedOutput = projectPath.resolve("build/fooOutput/Foo.class")
 
             build("foo") {
                 assertFileExists(expectedOutput)
@@ -106,8 +106,8 @@ class KotlinJvmApiTest : KGPBaseTest() {
                         """.trimIndent()
             }
 
-            val expectedOutputClass = projectPath.resolve("build/fooOutput/Foo.class")
-            val expectedOutputStubs = listOf(
+            konst expectedOutputClass = projectPath.resolve("build/fooOutput/Foo.class")
+            konst expectedOutputStubs = listOf(
                 projectPath.resolve("build/fooOutputStubs/Foo.java"),
                 projectPath.resolve("build/fooOutputStubs/Foo.kapt_metadata"),
                 projectPath.resolve("build/fooOutputStubs/error/NonExistentClass.java")

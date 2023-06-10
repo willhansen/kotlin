@@ -22,7 +22,7 @@ class BadProtectedMethodClass {
     protected fun foo() {}
 }
 
-class BadPrimaryGoodSecondary(private val id: Int) {
+class BadPrimaryGoodSecondary(private konst id: Int) {
     constructor(): this(3)
     @Test
     fun foo() {

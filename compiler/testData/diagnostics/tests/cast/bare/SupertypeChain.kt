@@ -12,6 +12,6 @@ interface B : A { fun b() }
 fun foo(): Parent<out B> = TODO()
 
 fun main() {
-    val w = foo() as? TableDerived ?: return
+    konst w = foo() as? TableDerived ?: return
     w.bar().b()
 }

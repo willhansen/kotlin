@@ -8,9 +8,9 @@ package org.jetbrains.kotlin.commonizer.cir
 import org.jetbrains.kotlin.types.Variance
 
 data class CirTypeParameter(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    val isReified: Boolean,
-    val variance: Variance,
-    val upperBounds: List<CirType>
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    konst isReified: Boolean,
+    konst variance: Variance,
+    konst upperBounds: List<CirType>
 ) : CirHasAnnotations, CirHasName

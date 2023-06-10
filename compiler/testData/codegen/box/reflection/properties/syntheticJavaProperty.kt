@@ -11,8 +11,8 @@ public class J {
         return stringProperty;
     }
 
-    public void setStringProperty(String value) {
-        stringProperty = value;
+    public void setStringProperty(String konstue) {
+        stringProperty = konstue;
     }
 }
 
@@ -22,7 +22,7 @@ import kotlin.reflect.*
 import kotlin.test.*
 
 fun box(): String {
-    val stringProperty = J::stringProperty
+    konst stringProperty = J::stringProperty
     assertEquals("property stringProperty (Kotlin reflection is not available)", stringProperty.toString())
     try {
         stringProperty.visibility

@@ -20,7 +20,7 @@ package test {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
-    @kotlin.annotation.Target(allowedTargets = {}) @kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) @kotlin.annotation.MustBeDocumented @javax.annotation.Nonnull @javax.annotation.meta.TypeQualifierDefault(value = {ElementType.METHOD, ElementType.PARAMETER, ElementType.PACKAGE}) public final annotation class NonNullApi : kotlin.Annotation {
+    @kotlin.annotation.Target(allowedTargets = {}) @kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) @kotlin.annotation.MustBeDocumented @javax.annotation.Nonnull @javax.annotation.meta.TypeQualifierDefault(konstue = {ElementType.METHOD, ElementType.PARAMETER, ElementType.PACKAGE}) public final annotation class NonNullApi : kotlin.Annotation {
         public constructor NonNullApi()
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

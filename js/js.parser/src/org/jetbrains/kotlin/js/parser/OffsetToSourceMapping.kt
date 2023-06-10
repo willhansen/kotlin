@@ -19,15 +19,15 @@ package org.jetbrains.kotlin.js.parser
 import com.google.gwt.dev.js.rhino.CodePosition
 
 class OffsetToSourceMapping(text: String) {
-    private val data: IntArray
+    private konst data: IntArray
 
     init {
         var i = 0
-        val lineSeparators = mutableListOf<Int>()
+        konst lineSeparators = mutableListOf<Int>()
         lineSeparators += 0
         while (i < text.length) {
-            val c = text[i++]
-            val isNewLine = when (c) {
+            konst c = text[i++]
+            konst isNewLine = when (c) {
                 '\r' -> {
                     if (i < text.length && text[i] == '\n') {
                         ++i
@@ -46,7 +46,7 @@ class OffsetToSourceMapping(text: String) {
     }
 
     operator fun get(offset: Int): CodePosition {
-        val lineNumber = data.binarySearch(offset).let { if (it >= 0) it else -it - 2 }
+        konst lineNumber = data.binarySearch(offset).let { if (it >= 0) it else -it - 2 }
         return CodePosition(lineNumber, offset - data[lineNumber])
     }
 }

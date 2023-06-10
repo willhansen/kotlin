@@ -3,9 +3,9 @@ compiler/testData/javaModules/severalModulesWithTheSameName/main/usage.kt:2:8: e
 import bar.Bar
        ^
 compiler/testData/javaModules/severalModulesWithTheSameName/main/usage.kt:6:12: error: unresolved reference: Bar
-    val b: Bar = Bar()
+    konst b: Bar = Bar()
            ^
 compiler/testData/javaModules/severalModulesWithTheSameName/main/usage.kt:6:18: error: unresolved reference: Bar
-    val b: Bar = Bar()
+    konst b: Bar = Bar()
                  ^
 COMPILATION_ERROR

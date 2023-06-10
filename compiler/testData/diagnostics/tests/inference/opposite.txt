@@ -16,8 +16,8 @@ package a {
 
     public final class Relation</*0*/ Source : a.Persistent, /*1*/ Target : a.Persistent> {
         public constructor Relation</*0*/ Source : a.Persistent, /*1*/ Target : a.Persistent>(/*0*/ sources: a.PersistentFactory<Source>, /*1*/ targets: a.PersistentFactory<Target>)
-        public final val sources: a.PersistentFactory<Source>
-        public final val targets: a.PersistentFactory<Target>
+        public final konst sources: a.PersistentFactory<Source>
+        public final konst targets: a.PersistentFactory<Target>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final fun opposite(): a.Relation<Target, Source>

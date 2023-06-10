@@ -6,18 +6,18 @@
 // FILE: lib.kt
 
 @JsExport
-enum class Foo(val constructorParameter: String) {
+enum class Foo(konst constructorParameter: String) {
     A("aConstructorParameter"),
     B("bConstructorParameter");
 
-    val foo = ordinal
+    konst foo = ordinal
 
-    fun bar(value: String) = value
+    fun bar(konstue: String) = konstue
 
     fun bay() = name
 
     companion object {
-        val baz = "baz"
+        konst baz = "baz"
     }
 }
 
@@ -32,9 +32,9 @@ enum class Bar {
         fun huh() = "huh"
     };
 
-    val foo = ordinal
+    konst foo = ordinal
 
-    fun bar(value: String) = value
+    fun bar(konstue: String) = konstue
 
     fun bay() = name
 }
@@ -82,11 +82,11 @@ export function box() {
     if (Bar.B.constructor.prototype.hasOwnProperty('d')) return "fail17"
     if (Bar.B.constructor.prototype.hasOwnProperty('huh')) return "fail18"
 
-    if (Foo.valueOf("A") !== Foo.A) return "fail19"
-    if (Foo.valueOf("B") !== Foo.B) return "fail20"
+    if (Foo.konstueOf("A") !== Foo.A) return "fail19"
+    if (Foo.konstueOf("B") !== Foo.B) return "fail20"
 
-    if (Foo.values().indexOf(Foo.A) === -1) return "fail21"
-    if (Foo.values().indexOf(Foo.B) === -1) return "fail22"
+    if (Foo.konstues().indexOf(Foo.A) === -1) return "fail21"
+    if (Foo.konstues().indexOf(Foo.B) === -1) return "fail22"
 
     if (Foo.A.name !== "A") return "fail23"
     if (Foo.B.name !== "B") return "fail24"

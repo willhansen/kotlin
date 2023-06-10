@@ -23,26 +23,26 @@ function getPropertyRefClass(obj, setter, cache) {
 
 var propertyRefClassMetadataCache = [
     {
-        mutable: { value: null, implementedInterface: function () {
+        mutable: { konstue: null, implementedInterface: function () {
             return Kotlin.kotlin.reflect.KMutableProperty0 }
         },
-        immutable: { value: null, implementedInterface: function () {
+        immutable: { konstue: null, implementedInterface: function () {
             return Kotlin.kotlin.reflect.KProperty0 }
         }
     },
     {
-        mutable: { value: null, implementedInterface: function () {
+        mutable: { konstue: null, implementedInterface: function () {
             return Kotlin.kotlin.reflect.KMutableProperty1 }
         },
-        immutable: { value: null, implementedInterface: function () {
+        immutable: { konstue: null, implementedInterface: function () {
             return Kotlin.kotlin.reflect.KProperty1 }
         }
     }
 ];
 
 function getPropertyRefMetadata(cache) {
-    if (cache.value === null) {
-        cache.value = {
+    if (cache.konstue === null) {
+        cache.konstue = {
             interfaces: [cache.implementedInterface()],
             baseClass: null,
             functions: {},
@@ -51,5 +51,5 @@ function getPropertyRefMetadata(cache) {
             staticMembers: {}
         };
     }
-    return cache.value;
+    return cache.konstue;
 }

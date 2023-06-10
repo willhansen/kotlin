@@ -6,8 +6,8 @@ FILE: settersGetters.kt
 
         public final var foo: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/String|): R|kotlin/Unit| {
-                this@R|/SomeClass|.F|/SomeClass.foo| = R|<local>/value|
+            public set(konstue: R|kotlin/String|): R|kotlin/Unit| {
+                this@R|/SomeClass|.F|/SomeClass.foo| = R|<local>/konstue|
             }
 
     }

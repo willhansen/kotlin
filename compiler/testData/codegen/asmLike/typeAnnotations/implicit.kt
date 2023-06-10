@@ -8,7 +8,7 @@
 package foo
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnn(val name: String)
+annotation class TypeAnn(konst name: String)
 
 @Target(AnnotationTarget.TYPE)
 @Retention(AnnotationRetention.BINARY)
@@ -29,12 +29,12 @@ class Kotlin {
     fun foo4() = { foo2() }()
 
     fun foo5() {
-        val lambda = @JvmSerializableLambda { foo2() }
+        konst lambda = @JvmSerializableLambda { foo2() }
         lambda()
     }
 
     fun foo6() {
-        val indyLambda = { foo2() }
+        konst indyLambda = { foo2() }
         indyLambda()
     }
 }

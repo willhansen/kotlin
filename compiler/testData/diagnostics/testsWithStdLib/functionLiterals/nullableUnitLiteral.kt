@@ -1,10 +1,10 @@
 // FULL_JDK
 
 fun test() {
-    val closeable: java.io.Closeable? = null
-    val closeF = fun() { closeable?.close() }
-    val closeFB = fun(): Unit = <!TYPE_MISMATCH!>closeable?.close()<!>
-    val closeFR = fun() { return <!TYPE_MISMATCH!>closeable?.close()<!> }
-    val closeL = { closeable?.close() }
-    val closeLR = label@ { return@label closeable?.close() }
+    konst closeable: java.io.Closeable? = null
+    konst closeF = fun() { closeable?.close() }
+    konst closeFB = fun(): Unit = <!TYPE_MISMATCH!>closeable?.close()<!>
+    konst closeFR = fun() { return <!TYPE_MISMATCH!>closeable?.close()<!> }
+    konst closeL = { closeable?.close() }
+    konst closeLR = label@ { return@label closeable?.close() }
 }

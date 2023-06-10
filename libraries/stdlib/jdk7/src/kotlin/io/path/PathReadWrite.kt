@@ -206,7 +206,7 @@ public inline fun Path.forEachLine(charset: Charset = Charsets.UTF_8, action: (l
  * Constructs a new InputStream of this file and returns it as a result.
  *
  * The [options] parameter determines how the file is opened. If no options are present then it is
- * equivalent to opening the file with the [READ][StandardOpenOption.READ] option.
+ * equikonstent to opening the file with the [READ][StandardOpenOption.READ] option.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)
@@ -220,7 +220,7 @@ public inline fun Path.inputStream(vararg options: OpenOption): InputStream {
  * Constructs a new OutputStream of this file and returns it as a result.
  *
  * The [options] parameter determines how the file is opened. If no options are present then it is
- * equivalent to opening the file with the [CREATE][StandardOpenOption.CREATE],
+ * equikonstent to opening the file with the [CREATE][StandardOpenOption.CREATE],
  * [TRUNCATE_EXISTING][StandardOpenOption.TRUNCATE_EXISTING], and [WRITE][StandardOpenOption.WRITE]
  * options.
  */
@@ -254,7 +254,7 @@ public inline fun Path.readLines(charset: Charset = Charsets.UTF_8): List<String
  * the processing is complete.
 
  * @param charset character set to use for reading text, UTF-8 by default.
- * @return the value returned by [block].
+ * @return the konstue returned by [block].
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalPathApi::class)

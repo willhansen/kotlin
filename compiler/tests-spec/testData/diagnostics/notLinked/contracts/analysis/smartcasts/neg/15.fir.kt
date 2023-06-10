@@ -11,9 +11,9 @@ fun case_1_1(cond: Boolean): Any {
     contract { returns(true) implies cond }
     return cond
 }
-fun case_1_2(value: Any): Boolean {
-    contract { returns(true) implies (value is Boolean) }
-    return value is Boolean
+fun case_1_2(konstue: Any): Boolean {
+    contract { returns(true) implies (konstue is Boolean) }
+    return konstue is Boolean
 }
 
 // TESTCASE NUMBER: 2
@@ -27,22 +27,22 @@ fun case_2(cond: Boolean): Any {
 import contracts.*
 
 // TESTCASE NUMBER: 1
-fun case_1(value: Any) {
-    if (contracts.case_1_2(contracts.case_1_1(value is Char))) {
-        <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value.<!UNRESOLVED_REFERENCE!>category<!>)
+fun case_1(konstue: Any) {
+    if (contracts.case_1_2(contracts.case_1_1(konstue is Char))) {
+        <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue.<!UNRESOLVED_REFERENCE!>category<!>)
     }
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value: Any) {
-    if (contracts.case_2(value is Char) is Boolean) {
-        <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value.<!UNRESOLVED_REFERENCE!>category<!>)
+fun case_2(konstue: Any) {
+    if (contracts.case_2(konstue is Char) is Boolean) {
+        <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue.<!UNRESOLVED_REFERENCE!>category<!>)
     }
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value: String?) {
-    if (<!USELESS_IS_CHECK!>!value.isNullOrEmpty() is Boolean<!>) {
-        value<!UNSAFE_CALL!>.<!>length
+fun case_3(konstue: String?) {
+    if (<!USELESS_IS_CHECK!>!konstue.isNullOrEmpty() is Boolean<!>) {
+        konstue<!UNSAFE_CALL!>.<!>length
     }
 }

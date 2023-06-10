@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.wasm.test.diagnostics.AbstractDiagnosticsWasmTest
 fun main(args: Array<String>) {
     System.setProperty("java.awt.headless", "true")
 
-    val jvmOnlyBoxTests = listOf(
+    konst jvmOnlyBoxTests = listOf(
         "compileKotlinAgainstKotlin",
     )
 
     generateTestGroupSuite(args) {
-        val jsTranslatorTestPattern = "^([^_](.+))\\.kt$"
+        konst jsTranslatorTestPattern = "^([^_](.+))\\.kt$"
         testGroup("wasm/wasm.tests/tests-gen", "js/js.translator/testData", testRunnerMethodName = "runTest0") {
             testClass<AbstractJsTranslatorWasmTest> {
                 model("box/main", pattern = jsTranslatorTestPattern, targetBackend = TargetBackend.WASM)

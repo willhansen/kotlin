@@ -23,8 +23,8 @@ public class User {
 // FILE: test.kt
 
 fun test() {
-    val userBuilder: User.SpecialUserBuilder = User.createBuilder()
-    val user = userBuilder
+    konst userBuilder: User.SpecialUserBuilder = User.createBuilder()
+    konst user = userBuilder
         .setCreated(10)
         .setName("John")
         .setAge(42)
@@ -32,5 +32,5 @@ fun test() {
 }
 
 fun testToBuilder(user: User) {
-    val userBuilder: User.SpecialUserBuilder = user.toBuilder()
+    konst userBuilder: User.SpecialUserBuilder = user.toBuilder()
 }

@@ -6,7 +6,7 @@ FILE: external.kt
 
     }
     public? final? external fun foo(): String
-    public? final? external val x: Int
+    public? final? external konst x: Int
         public? external get(): Int
     public? final? class NotExternal : R|kotlin/Any| {
         public? constructor(): R|NotExternal| {
@@ -17,9 +17,9 @@ FILE: external.kt
 
         public? final? var y: Int
             public? external get(): Int
-            public? set(value: Int): R|kotlin/Unit| { LAZY_BLOCK }
+            public? set(konstue: Int): R|kotlin/Unit| { LAZY_BLOCK }
 
     }
     public? final? var z: Int
         public? external get(): Int
-        public? external set(value: Int): R|kotlin/Unit|
+        public? external set(konstue: Int): R|kotlin/Unit|

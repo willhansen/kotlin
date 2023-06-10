@@ -28,7 +28,7 @@ import kotlin.annotation.AnnotationTarget.*
 annotation class A
 
 fun box(): String {
-    val targets = A::class.java.getAnnotation(java.lang.annotation.Target::class.java).value
+    konst targets = A::class.java.getAnnotation(java.lang.annotation.Target::class.java).konstue
     if (targets.toList().toString() != "[TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, ANNOTATION_TYPE]")
         return "Fail: Java annotation target list should not contain TYPE_USE/TYPE_PARAMETER: ${targets.toList()}"
 

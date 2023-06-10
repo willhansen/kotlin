@@ -2,8 +2,8 @@
 // JVM_TARGET: 11
 
 fun box() {
-    val z = "0"
-    val result = z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
+    konst z = "0"
+    konst result = z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +

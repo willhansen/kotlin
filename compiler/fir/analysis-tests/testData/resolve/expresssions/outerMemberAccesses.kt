@@ -6,40 +6,40 @@ public class Base {
 
 // FILE: O.kt
 
-open class Wrapper(val b: Boolean)
+open class Wrapper(konst b: Boolean)
 
 object O {
-    private class Derived(private val bar: Int) : Base() {
-        private inner class Some(val z: Boolean) {
+    private class Derived(private konst bar: Int) : Base() {
+        private inner class Some(konst z: Boolean) {
             fun test() {
-                val x = bar
-                val o = object : Wrapper(z) {
+                konst x = bar
+                konst o = object : Wrapper(z) {
                     fun local() {
-                        val y = foo()
+                        konst y = foo()
                     }
-                    val oo = object {
-                        val zz = z
+                    konst oo = object {
+                        konst zz = z
                     }
                 }
             }
         }
         fun test() {
-            val x = bar
-            val o = object {
+            konst x = bar
+            konst o = object {
                 fun local() {
-                    val y = foo()
+                    konst y = foo()
                 }
             }
         }
     }
 }
 
-class Generator(val codegen: Any) {
+class Generator(konst codegen: Any) {
     private fun gen(): Any =
         object : Wrapper(true) {
             private fun invokeFunction() {
-                val c = codegen
-                val cc = codegen.hashCode()
+                konst c = codegen
+                konst cc = codegen.hashCode()
             }
         }
 }

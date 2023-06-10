@@ -1,5 +1,5 @@
 interface UsageInfo {
-    val usage: PsiElement
+    konst usage: PsiElement
 }
 
 interface PsiElement
@@ -17,7 +17,7 @@ fun <T> Array<out T>.filterNot(f: (T) -> Boolean): List<T> {
 fun <T> Array<T>.toList(): List<T>? = null
 
 fun foo(element: PsiElement, usages: Array<UsageInfo>) {
-    val adjusted = if (element is KtParameter) usages.filterNot {
+    konst adjusted = if (element is KtParameter) usages.filterNot {
         it.usage is KtLightMethod
     } else usages.toList()
 }

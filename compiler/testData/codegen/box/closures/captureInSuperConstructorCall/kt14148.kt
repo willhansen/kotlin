@@ -2,9 +2,9 @@ interface Test {
     fun test(): String
 }
 
-open class Base(val test: Test)
+open class Base(konst test: Test)
 
-open class Outer(val x: String) {
+open class Outer(konst x: String) {
     open inner class Inner
 
     inner class JavacBug : Base(

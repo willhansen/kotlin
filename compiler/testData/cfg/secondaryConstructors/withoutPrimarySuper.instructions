@@ -15,10 +15,10 @@ sink:
 =====================
 == A ==
 class A : B {
-    val x: Int
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): super(11) {
         x = 1
@@ -67,10 +67,10 @@ L0:
     r(11) -> <v0>
     mark(super(11))
     call(super(11), <init>|<v0>) -> <v1>
-    v(val x: Int)
+    v(konst x: Int)
     v(var y: Int)
-    v(val z: Int)
-    v(val v = -1)
+    v(konst z: Int)
+    v(konst v = -1)
     r(1) -> <v2>
     mark(-1)
     call(-1, unaryMinus|<v2>) -> <v3>
@@ -111,17 +111,17 @@ L0:
     v(b: Int = 3)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>, r(3) -> <v1>]
     r(3) -> <v1>
-L2 [after default value for parameter b]:
+L2 [after default konstue for parameter b]:
     magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>    PREV:[jmp?(L2), r(3) -> <v1>]
     merge(b: Int = 3|<v1>, <v2>) -> <v3>
     w(b|<v3>)
     r(b) -> <v4>
     mark(super(b))
     call(super(b), <init>|<v4>) -> <v5>
-    v(val x: Int)
+    v(konst x: Int)
     v(var y: Int)
-    v(val z: Int)
-    v(val v = -1)
+    v(konst z: Int)
+    v(konst v = -1)
     r(1) -> <v6>
     mark(-1)
     call(-1, unaryMinus|<v6>) -> <v7>
@@ -162,7 +162,7 @@ L0:
     v(b: Int = 4)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](b: Int = 4) -> <v2>, r(4) -> <v1>]
     r(4) -> <v1>
-L2 [after default value for parameter b]:
+L2 [after default konstue for parameter b]:
     magic[FAKE_INITIALIZER](b: Int = 4) -> <v2>    PREV:[jmp?(L2), r(4) -> <v1>]
     merge(b: Int = 4|<v1>, <v2>) -> <v3>
     w(b|<v3>)
@@ -192,7 +192,7 @@ L0:
     v(b: Int = 6)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](b: Int = 6) -> <v2>, r(6) -> <v1>]
     r(6) -> <v1>
-L2 [after default value for parameter b]:
+L2 [after default konstue for parameter b]:
     magic[FAKE_INITIALIZER](b: Int = 6) -> <v2>    PREV:[jmp?(L2), r(6) -> <v1>]
     merge(b: Int = 6|<v1>, <v2>) -> <v3>
     w(b|<v3>)

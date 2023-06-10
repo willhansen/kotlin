@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R(private val r: Int) {
+konstue class R(private konst r: Int) {
     fun test() = ok()
 
     companion object {

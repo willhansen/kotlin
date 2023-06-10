@@ -5,7 +5,7 @@
 
 if (typeof String.prototype.startsWith === "undefined") {
     Object.defineProperty(String.prototype, "startsWith", {
-        value: function (searchString, position) {
+        konstue: function (searchString, position) {
             position = position || 0;
             return this.lastIndexOf(searchString, position) === position;
         }
@@ -13,7 +13,7 @@ if (typeof String.prototype.startsWith === "undefined") {
 }
 if (typeof String.prototype.endsWith === "undefined") {
     Object.defineProperty(String.prototype, "endsWith", {
-        value: function (searchString, position) {
+        konstue: function (searchString, position) {
             var subjectString = this.toString();
             if (position === undefined || position > subjectString.length) {
                 position = subjectString.length;
@@ -256,7 +256,7 @@ if (typeof ArrayBuffer.isView === "undefined") {
 if (typeof Array.prototype.fill === "undefined") {
     // Polyfill from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill#Polyfill
     Object.defineProperty(Array.prototype, 'fill', {
-        value: function (value) {
+        konstue: function (konstue) {
 
             // Steps 1-2.
             if (this == null) {
@@ -289,7 +289,7 @@ if (typeof Array.prototype.fill === "undefined") {
 
             // Step 12.
             while (k < finalValue) {
-                O[k] = value;
+                O[k] = konstue;
                 k++;
             }
 
@@ -318,12 +318,12 @@ if (typeof Array.prototype.fill === "undefined") {
         var TypedArray = arrays[i];
         if (typeof TypedArray.prototype.fill === "undefined") {
             Object.defineProperty(TypedArray.prototype, 'fill', {
-                value: Array.prototype.fill
+                konstue: Array.prototype.fill
             });
         }
         if (typeof TypedArray.prototype.slice === "undefined") {
             Object.defineProperty(TypedArray.prototype, 'slice', {
-                value: typedArraySlice
+                konstue: typedArraySlice
             });
         }
     }
@@ -334,7 +334,7 @@ if (typeof Array.prototype.fill === "undefined") {
     } catch (e) {
         var apply = Function.prototype.apply;
         Object.defineProperty(Function.prototype, 'apply', {
-            value: function(self, array) {
+            konstue: function(self, array) {
                 return apply.call(this, self, [].slice.call(array));
             }
         });
@@ -346,7 +346,7 @@ if (typeof Array.prototype.fill === "undefined") {
         var TypedArray = arrays[i];
         if (typeof TypedArray.prototype.map === "undefined") {
             Object.defineProperty(TypedArray.prototype, 'map', {
-                value: function(callback, self) {
+                konstue: function(callback, self) {
                     return [].slice.call(this).map(callback, self);
                 }
             });
@@ -373,7 +373,7 @@ if (typeof Array.prototype.fill === "undefined") {
         var TypedArray = arrays[i];
         if (typeof TypedArray.prototype.sort === "undefined") {
             Object.defineProperty(TypedArray.prototype, 'sort', {
-                value: function(compareFunction) {
+                konstue: function(compareFunction) {
                     return Array.prototype.sort.call(this, compareFunction || totalOrderComparator);
                 }
             });

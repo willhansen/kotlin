@@ -165,7 +165,7 @@ public class ResolutionResultsHandler {
                 if (severityLevel.contains(ARGUMENTS_MAPPING_ERROR)) {
                     @SuppressWarnings("unchecked")
                     OverloadingConflictResolver<MutableResolvedCall<D>> myResolver = (OverloadingConflictResolver) overloadingConflictResolver;
-                    return recordFailedInfo(tracing, trace, myResolver.filterOutEquivalentCalls(new LinkedHashSet<>(thisLevel)));
+                    return recordFailedInfo(tracing, trace, myResolver.filterOutEquikonstentCalls(new LinkedHashSet<>(thisLevel)));
                 }
                 OverloadResolutionResultsImpl<D> results = chooseAndReportMaximallySpecific(
                         thisLevel, false, checkArgumentsMode, languageVersionSettings);

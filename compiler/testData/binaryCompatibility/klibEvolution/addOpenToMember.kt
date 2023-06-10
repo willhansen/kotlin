@@ -4,7 +4,7 @@
 
 open class X {
     fun foo(): String = "final method"
-    val bar: String = "final property"
+    konst bar: String = "final property"
 }
 
 class Y: X()
@@ -14,12 +14,12 @@ class Y: X()
 
 open class X {
     open fun foo(): String = "open method"
-    open val bar: String = "open property"
+    open konst bar: String = "open property"
 }
 
 class Y: X() {
     override fun foo(): String = "derived method"
-    override val bar: String = "derived property"
+    override konst bar: String = "derived property"
 }
 
 // MODULE: mainLib(lib)

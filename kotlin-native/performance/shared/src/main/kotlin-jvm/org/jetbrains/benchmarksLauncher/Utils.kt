@@ -27,8 +27,8 @@ actual fun writeToFile(fileName: String, text: String) {
 }
 
 // Wrapper for assert funtion in stdlib.
-actual fun assert(value: Boolean) {
-    kotlin.assert(value)
+actual fun assert(konstue: Boolean) {
+    kotlin.assert(konstue)
 }
 
 // Wrapper for measureNanoTime funtion in stdlib.
@@ -50,8 +50,8 @@ actual fun nanoTime(): Long = System.nanoTime()
 actual class Blackhole {
     actual companion object {
         actual var consumer = 0
-        actual fun consume(value: Any) {
-            consumer += value.hashCode()
+        actual fun consume(konstue: Any) {
+            consumer += konstue.hashCode()
         }
     }
 }

@@ -1,8 +1,8 @@
 class Outer {
     class Nested {
         companion object {
-            val O = "O"
-            val K = "K"
+            konst O = "O"
+            konst K = "K"
         }
     }
     

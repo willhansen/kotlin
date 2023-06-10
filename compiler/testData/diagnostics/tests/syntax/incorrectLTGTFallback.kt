@@ -4,7 +4,7 @@
 
 @Target(AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Ann(val x: String)
+annotation class Ann(konst x: String)
 fun <T> foo(x: (T) -> T) {}
 
 fun main() {

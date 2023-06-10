@@ -39,7 +39,7 @@ class FirAnnotationCallBuilder : FirCallBuilder, FirAnnotationContainerBuilder, 
     override var source: KtSourceElement? = null
     var useSiteTarget: AnnotationUseSiteTarget? = null
     var annotationTypeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     override var argumentList: FirArgumentList = FirEmptyArgumentList
     lateinit var calleeReference: FirReference
     var argumentMapping: FirAnnotationArgumentMapping = FirEmptyAnnotationArgumentMapping
@@ -67,7 +67,7 @@ class FirAnnotationCallBuilder : FirCallBuilder, FirAnnotationContainerBuilder, 
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirAnnotationCallBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)
@@ -83,7 +83,7 @@ inline fun buildAnnotationCallCopy(original: FirAnnotationCall, init: FirAnnotat
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirAnnotationCallBuilder()
+    konst copyBuilder = FirAnnotationCallBuilder()
     copyBuilder.source = original.source
     copyBuilder.useSiteTarget = original.useSiteTarget
     copyBuilder.annotationTypeRef = original.annotationTypeRef

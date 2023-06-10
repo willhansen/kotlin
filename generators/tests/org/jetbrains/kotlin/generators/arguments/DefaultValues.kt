@@ -21,13 +21,13 @@ import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
 open class DefaultValues(
-    val defaultValue: String,
-    val type: KType,
-    val kotlinOptionsType: KType,
-    val possibleValues: List<String>? = null,
-    val fromKotlinOptionConverterProp: String? = null,
-    val toKotlinOptionConverterProp: String? = null,
-    val toArgumentConverter: String? = toKotlinOptionConverterProp
+    konst defaultValue: String,
+    konst type: KType,
+    konst kotlinOptionsType: KType,
+    konst possibleValues: List<String>? = null,
+    konst fromKotlinOptionConverterProp: String? = null,
+    konst toKotlinOptionConverterProp: String? = null,
+    konst toArgumentConverter: String? = toKotlinOptionConverterProp
 ) {
     open class DefaultBoolean(defaultValue: Boolean) : DefaultValues(defaultValue.toString(), typeOf<Boolean>(), typeOf<Boolean>())
 
@@ -50,7 +50,7 @@ open class DefaultValues(
         "null",
         typeOf<KotlinVersionDsl?>(),
         typeOf<String?>(),
-        possibleValues = LanguageVersion.values()
+        possibleValues = LanguageVersion.konstues()
             .filterNot { it.isUnsupported }
             .map { "\"${it.description}\"" },
         fromKotlinOptionConverterProp = """
@@ -65,7 +65,7 @@ open class DefaultValues(
         "null",
         typeOf<KotlinVersionDsl?>(),
         typeOf<String?>(),
-        possibleValues = LanguageVersion.values()
+        possibleValues = LanguageVersion.konstues()
             .map(ApiVersion.Companion::createByLanguageVersion)
             .filterNot { it.isUnsupported }
             .map { "\"${it.description}\"" },

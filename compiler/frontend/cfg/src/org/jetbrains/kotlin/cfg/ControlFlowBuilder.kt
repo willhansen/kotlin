@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.cfg
 
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 import org.jetbrains.kotlin.cfg.pseudocode.Pseudocode
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.*
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.*
 import org.jetbrains.kotlin.contracts.description.EventOccurrencesRange
 import org.jetbrains.kotlin.descriptors.ValueParameterDescriptor
 import org.jetbrains.kotlin.psi.*
@@ -32,8 +32,8 @@ interface ControlFlowBuilder {
 
     fun exitSubroutine(subroutine: KtElement, eventOccurrencesRange: EventOccurrencesRange? = null): Pseudocode
 
-    val currentSubroutine: KtElement
-    val returnSubroutine: KtElement
+    konst currentSubroutine: KtElement
+    konst returnSubroutine: KtElement
 
     // Scopes
     fun enterBlockScope(block: KtElement)
@@ -80,7 +80,7 @@ interface ControlFlowBuilder {
 
     fun enterLoopBody(expression: KtLoopExpression)
     fun exitLoopBody(expression: KtLoopExpression)
-    val currentLoop: KtLoopExpression?
+    konst currentLoop: KtLoopExpression?
 
     // Try-Finally
     fun enterTryFinally(trigger: GenerationTrigger)
@@ -89,11 +89,11 @@ interface ControlFlowBuilder {
 
     fun repeatPseudocode(startLabel: Label, finishLabel: Label)
 
-    // Reading values
+    // Reading konstues
     fun mark(element: KtElement)
 
     fun getBoundValue(element: KtElement?): PseudoValue?
-    fun bindValue(value: PseudoValue, element: KtElement)
+    fun bindValue(konstue: PseudoValue, element: KtElement)
     fun newValue(element: KtElement?): PseudoValue
 
     fun loadUnit(expression: KtExpression)
@@ -105,7 +105,7 @@ interface ControlFlowBuilder {
 
     fun magic(
         instructionElement: KtElement,
-        valueElement: KtElement?,
+        konstueElement: KtElement?,
         inputValues: List<PseudoValue>,
         kind: MagicKind
     ): MagicInstruction
@@ -122,7 +122,7 @@ interface ControlFlowBuilder {
     ): ReadValueInstruction
 
     fun call(
-        valueElement: KtElement,
+        konstueElement: KtElement,
         resolvedCall: ResolvedCall<*>,
         receiverValues: Map<PseudoValue, ReceiverValue>,
         arguments: Map<PseudoValue, ValueParameterDescriptor>

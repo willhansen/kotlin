@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 
 
 interface IdeaKotlinExtrasSerializer<T : Any> {
-    fun serialize(context: IdeaKotlinSerializationContext, value: T): ByteArray?
+    fun serialize(context: IdeaKotlinSerializationContext, konstue: T): ByteArray?
     fun deserialize(context: IdeaKotlinSerializationContext, data: ByteArray): T?
 
     companion object {

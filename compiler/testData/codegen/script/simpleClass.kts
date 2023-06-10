@@ -1,7 +1,7 @@
-class SimpleClass(val s: String) {
+class SimpleClass(konst s: String) {
     fun foo() = s
 }
 
-val rv = SimpleClass("OK").foo()
+konst rv = SimpleClass("OK").foo()
 
 // expected: rv: OK

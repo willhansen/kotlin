@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.assignment.plugin
 
 object AssignmentPluginNames {
-    const val PLUGIN_ID = "org.jetbrains.kotlin.assignment"
-    const val ANNOTATION_OPTION_NAME = "annotation"
+    const konst PLUGIN_ID = "org.jetbrains.kotlin.assignment"
+    const konst ANNOTATION_OPTION_NAME = "annotation"
 }

@@ -18,11 +18,11 @@ package org.jetbrains.ring
 
 open class IntArrayBenchmark {
     private var _data: IntArray? = null
-    val data: IntArray
+    konst data: IntArray
         get() = _data!!
 
     init {
-        val list = IntArray(BENCHMARK_SIZE)
+        konst list = IntArray(BENCHMARK_SIZE)
         var index = 0
         for (n in intValues(BENCHMARK_SIZE))
             list[index++] = n
@@ -36,7 +36,7 @@ open class IntArrayBenchmark {
 
     //Benchmark
     fun copyManual(): ArrayList<Int> {
-        val list = ArrayList<Int>(data.size)
+        konst list = ArrayList<Int>(data.size)
         for (item in data) {
             list.add(item)
         }
@@ -60,11 +60,11 @@ open class IntArrayBenchmark {
 
     //Benchmark
     fun filterAndMapManual(): ArrayList<String> {
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         for (it in data) {
             if (filterLoad(it)) {
-                val value = mapLoad(it)
-                list.add(value)
+                konst konstue = mapLoad(it)
+                list.add(konstue)
             }
         }
         return list
@@ -87,7 +87,7 @@ open class IntArrayBenchmark {
 
     //Benchmark
     fun filterManual(): ArrayList<Int> {
-        val list = ArrayList<Int>()
+        konst list = ArrayList<Int>()
         for (it in data) {
             if (filterLoad(it))
                 list.add(it)
@@ -97,7 +97,7 @@ open class IntArrayBenchmark {
 
     //Benchmark
     fun filterSomeManual(): ArrayList<Int> {
-        val list = ArrayList<Int>()
+        konst list = ArrayList<Int>()
         for (it in data) {
             if (filterSome(it))
                 list.add(it)
@@ -148,7 +148,7 @@ open class IntArrayBenchmark {
 
     //Benchmark
     fun countFilteredPrime(): Int {
-        val res = data.count { filterPrime(it) }
+        konst res = data.count { filterPrime(it) }
         //println(res)
         return res
     }

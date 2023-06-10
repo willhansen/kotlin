@@ -34,13 +34,13 @@ public class ReflectProperties {
 
         public abstract T invoke();
 
-        protected Object escape(T value) {
-            return value == null ? NULL_VALUE : value;
+        protected Object escape(T konstue) {
+            return konstue == null ? NULL_VALUE : konstue;
         }
 
         @SuppressWarnings("unchecked")
-        protected T unescape(Object value) {
-            return value == NULL_VALUE ? null : (T) value;
+        protected T unescape(Object konstue) {
+            return konstue == NULL_VALUE ? null : (T) konstue;
         }
     }
 
@@ -48,18 +48,18 @@ public class ReflectProperties {
     // including simultaneously from different threads
     public static class LazySoftVal<T> extends Val<T> implements Function0<T> {
         private final Function0<T> initializer;
-        private volatile SoftReference<Object> value = null;
+        private volatile SoftReference<Object> konstue = null;
 
         public LazySoftVal(@Nullable T initialValue, @NotNull Function0<T> initializer) {
             this.initializer = initializer;
             if (initialValue != null) {
-                this.value = new SoftReference<Object>(escape(initialValue));
+                this.konstue = new SoftReference<Object>(escape(initialValue));
             }
         }
 
         @Override
         public T invoke() {
-            SoftReference<Object> cached = value;
+            SoftReference<Object> cached = konstue;
             if (cached != null) {
                 Object result = cached.get();
                 if (result != null) {
@@ -68,7 +68,7 @@ public class ReflectProperties {
             }
 
             T result = initializer.invoke();
-            value = new SoftReference<Object>(escape(result));
+            konstue = new SoftReference<Object>(escape(result));
 
             return result;
         }

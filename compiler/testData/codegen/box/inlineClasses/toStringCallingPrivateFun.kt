@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val x: String) {
+konstue class IC(konst x: String) {
     private fun privateFun() = x
     override fun toString() = privateFun()
 }
 
 fun box(): String {
-    val x: Any = IC("OK")
+    konst x: Any = IC("OK")
     return x.toString()
 }

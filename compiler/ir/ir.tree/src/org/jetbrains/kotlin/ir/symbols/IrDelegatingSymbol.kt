@@ -30,18 +30,18 @@ abstract class IrDelegatingSymbol<DelegateSymbol, Owner, Descriptor>(var delegat
         where DelegateSymbol : IrBindableSymbol<Descriptor, Owner>,
               Owner : IrSymbolOwner,
               Descriptor : DeclarationDescriptor {
-    override val owner: Owner get() = delegate.owner
+    override konst owner: Owner get() = delegate.owner
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: Descriptor get() = delegate.descriptor
+    override konst descriptor: Descriptor get() = delegate.descriptor
 
     @ObsoleteDescriptorBasedAPI
-    override val hasDescriptor: Boolean
+    override konst hasDescriptor: Boolean
         get() = delegate.hasDescriptor
 
-    override val isBound: Boolean get() = delegate.isBound
+    override konst isBound: Boolean get() = delegate.isBound
 
-    override val signature: IdSignature?
+    override konst signature: IdSignature?
         get() = delegate.signature
 
     override fun bind(owner: Owner) = delegate.bind(owner)
@@ -54,8 +54,8 @@ abstract class IrDelegatingSymbol<DelegateSymbol, Owner, Descriptor>(var delegat
 
     override var privateSignature: IdSignature?
         get() = delegate.privateSignature
-        set(value) {
-            delegate.privateSignature = value
+        set(konstue) {
+            delegate.privateSignature = konstue
         }
 }
 

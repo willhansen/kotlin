@@ -6,7 +6,7 @@ public interface SamInterface {
 
 // FILE: test.kt
 
-class Wrapper(val si: SamInterface?)
+class Wrapper(konst si: SamInterface?)
 
 fun test(w: Wrapper?) {
     Wrapper(w?.let { it.si })

@@ -27,12 +27,12 @@ fun ConeClassLikeType.fullyExpandedType(
     },
 ): ConeClassLikeType {
     if (this is ConeClassLikeTypeImpl) {
-        val (cachedSession, cachedExpandedType) = cachedExpandedType
+        konst (cachedSession, cachedExpandedType) = cachedExpandedType
         if (cachedSession === useSiteSession && cachedExpandedType != null) {
             return cachedExpandedType
         }
 
-        val computedExpandedType = fullyExpandedTypeNoCache(useSiteSession, expandedConeType)
+        konst computedExpandedType = fullyExpandedTypeNoCache(useSiteSession, expandedConeType)
         this.cachedExpandedType = WeakPair(useSiteSession, computedExpandedType)
         return computedExpandedType
     }
@@ -61,7 +61,7 @@ private fun ConeClassLikeType.fullyExpandedTypeNoCache(
     useSiteSession: FirSession,
     expandedConeType: (FirTypeAlias) -> ConeClassLikeType?,
 ): ConeClassLikeType {
-    val directExpansionType = directExpansionType(useSiteSession, expandedConeType) ?: return this
+    konst directExpansionType = directExpansionType(useSiteSession, expandedConeType) ?: return this
     return directExpansionType.fullyExpandedType(useSiteSession, expandedConeType)
 }
 
@@ -72,10 +72,10 @@ fun ConeClassLikeType.directExpansionType(
         alias.expandedConeType
     },
 ): ConeClassLikeType? {
-    val typeAliasSymbol = lookupTag.toSymbol(useSiteSession) as? FirTypeAliasSymbol ?: return null
-    val typeAlias = typeAliasSymbol.fir
+    konst typeAliasSymbol = lookupTag.toSymbol(useSiteSession) as? FirTypeAliasSymbol ?: return null
+    konst typeAlias = typeAliasSymbol.fir
 
-    val resultType = expandedConeType(typeAlias)
+    konst resultType = expandedConeType(typeAlias)
         ?.applyNullabilityFrom(useSiteSession, this)
         ?.applyAttributesFrom(this)
         ?: return null
@@ -95,7 +95,7 @@ private fun ConeClassLikeType.applyNullabilityFrom(
 private fun ConeClassLikeType.applyAttributesFrom(
     abbreviation: ConeClassLikeType
 ): ConeClassLikeType {
-    val combinedAttributes = attributes.add(abbreviation.attributes)
+    konst combinedAttributes = attributes.add(abbreviation.attributes)
     return withAttributes(combinedAttributes)
 }
 
@@ -108,20 +108,20 @@ private fun mapTypeAliasArguments(
     if (typeAlias.typeParameters.isNotEmpty() && abbreviatedType.typeArguments.isEmpty()) {
         return resultingType.lookupTag.constructClassType(emptyArray(), resultingType.isNullable)
     }
-    val typeAliasMap = typeAlias.typeParameters.map { it.symbol }.zip(abbreviatedType.typeArguments).toMap()
+    konst typeAliasMap = typeAlias.typeParameters.map { it.symbol }.zip(abbreviatedType.typeArguments).toMap()
 
-    val substitutor = object : AbstractConeSubstitutor(useSiteSession.typeContext) {
+    konst substitutor = object : AbstractConeSubstitutor(useSiteSession.typeContext) {
         override fun substituteType(type: ConeKotlinType): ConeKotlinType? {
             return null
         }
 
         override fun substituteArgument(projection: ConeTypeProjection, index: Int): ConeTypeProjection? {
-            val type = (projection as? ConeKotlinTypeProjection)?.type ?: return null
-            val symbol = (type as? ConeTypeParameterType)?.lookupTag?.symbol ?: return super.substituteArgument(
+            konst type = (projection as? ConeKotlinTypeProjection)?.type ?: return null
+            konst symbol = (type as? ConeTypeParameterType)?.lookupTag?.symbol ?: return super.substituteArgument(
                 projection,
                 index
             )
-            val mappedProjection = typeAliasMap[symbol] ?: return super.substituteArgument(projection, index)
+            konst mappedProjection = typeAliasMap[symbol] ?: return super.substituteArgument(projection, index)
             var mappedType = (mappedProjection as? ConeKotlinTypeProjection)?.type.updateNullabilityIfNeeded(type)
             mappedType = when (mappedType) {
                 is ConeErrorType,

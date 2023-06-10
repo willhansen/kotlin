@@ -3,17 +3,17 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L(val x: Long)
+konstue class L(konst x: Long)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String)
+konstue class S(konst x: String)
 
-val Z.xx get() = x
-val L.xx get() = x
-val S.xx get() = x
+konst Z.xx get() = x
+konst L.xx get() = x
+konst S.xx get() = x
 
 fun box(): String {
     if ((Z::xx).get(Z(42)) != 42) throw AssertionError()

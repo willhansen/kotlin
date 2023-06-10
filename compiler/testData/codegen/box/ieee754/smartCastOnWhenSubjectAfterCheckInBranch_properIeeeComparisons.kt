@@ -15,10 +15,10 @@ fun testD(x: Any) =
     }
 
 fun box(): String {
-    val tf = testF(-0.0F)
+    konst tf = testF(-0.0F)
     if (tf != "0.0") return "Fail 1: $tf"
 
-    val td = testD(-0.0)
+    konst td = testD(-0.0)
     if (td != "0.0") return "Fail 2: $td"
 
     return "OK"

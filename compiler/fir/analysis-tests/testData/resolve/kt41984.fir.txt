@@ -10,11 +10,11 @@ FILE: main.kt
             super<R|A<kotlin/Any, V>|>()
         }
 
-        public open override fun take(value: R|V|): R|kotlin/String| {
+        public open override fun take(konstue: R|V|): R|kotlin/String| {
             ^take String()
         }
 
-        public open override fun takeInv(value: R|Inv<V>|): R|kotlin/String| {
+        public open override fun takeInv(konstue: R|Inv<V>|): R|kotlin/String| {
             ^takeInv String()
         }
 

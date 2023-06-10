@@ -5,5 +5,5 @@ class X
 operator fun <T> X.component1(): T = TODO()
 
 fun test() {
-    val (y) = <!COMPONENT_FUNCTION_MISSING!>X()<!>
+    konst (y) = <!COMPONENT_FUNCTION_MISSING!>X()<!>
 }

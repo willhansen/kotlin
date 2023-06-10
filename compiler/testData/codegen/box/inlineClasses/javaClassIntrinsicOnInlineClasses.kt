@@ -6,16 +6,16 @@
 package root
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt(val x: Int)
+konstue class IcInt(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong(val l: Long)
+konstue class IcLong(konst l: Long)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny(val a: Any?)
+konstue class IcAny(konst a: Any?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverIc(val o: IcLong)
+konstue class IcOverIc(konst o: IcLong)
 
 fun check(c: Class<*>, s: String) {
     if (c.toString() != s) error("Fail, expected: $s, actual: $c")
@@ -26,10 +26,10 @@ inline fun <reified T> reifiedCheck(asString: String) {
 }
 
 fun box(): String {
-    val i = IcInt(0)
-    val l = IcLong(0)
-    val a = IcAny("foo")
-    val o = IcOverIc(IcLong(0))
+    konst i = IcInt(0)
+    konst l = IcLong(0)
+    konst a = IcAny("foo")
+    konst o = IcOverIc(IcLong(0))
 
     check(i.javaClass, "class root.IcInt")
     check(l.javaClass, "class root.IcLong")
@@ -49,19 +49,19 @@ fun box(): String {
     reifiedCheck<IcOverIc>("class root.IcOverIc")
     reifiedCheck<UInt>("class kotlin.UInt")
 
-    val arrI = arrayOf(i)
+    konst arrI = arrayOf(i)
     check(arrI[0].javaClass, "class root.IcInt")
 
-    val arrL = arrayOf(l)
+    konst arrL = arrayOf(l)
     check(arrL[0].javaClass, "class root.IcLong")
 
-    val arrA = arrayOf(a)
+    konst arrA = arrayOf(a)
     check(arrA[0].javaClass, "class root.IcAny")
 
-    val arrO = arrayOf(o)
+    konst arrO = arrayOf(o)
     check(arrO[0].javaClass, "class root.IcOverIc")
 
-    val arrU = arrayOf(1u)
+    konst arrU = arrayOf(1u)
     check(arrU[0].javaClass, "class kotlin.UInt")
 
     return "OK"

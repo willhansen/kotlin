@@ -10,15 +10,15 @@
  * DESCRIPTION: check if a property has a setter, it is called using the right-hand side expression as its argument;If the left-hand side of an assignment refers to a mutable property through the usage of safe navigation operator (?.)
  */
 
-val valToSet = 5
+konst konstToSet = 5
 
 class C() {
     var counter = 0
 }
 
 fun box(): String {
-    val c :C?= C()
-    c?.counter = valToSet
-    if (c?.counter == valToSet) return "OK"
+    konst c :C?= C()
+    c?.counter = konstToSet
+    if (c?.counter == konstToSet) return "OK"
     return "NOK"
 }

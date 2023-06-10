@@ -1,5 +1,5 @@
 fun <T> test(): String {
-    val x = object {
+    konst x = object {
         fun <S> foo() = "OK"
     }
     return x.foo<Any>()

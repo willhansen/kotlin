@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 interface KlibMetadataModuleDescriptorFactory {
 
-    val descriptorFactory: KlibModuleDescriptorFactory
-    val packageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory
-    val flexibleTypeDeserializer: FlexibleTypeDeserializer
-    val platformDependentTypeTransformer: PlatformDependentTypeTransformer
+    konst descriptorFactory: KlibModuleDescriptorFactory
+    konst packageFragmentsFactory: KlibMetadataDeserializedPackageFragmentsFactory
+    konst flexibleTypeDeserializer: FlexibleTypeDeserializer
+    konst platformDependentTypeTransformer: PlatformDependentTypeTransformer
 
     fun createDescriptor(
         library: KotlinLibrary,

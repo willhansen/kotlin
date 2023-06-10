@@ -36,16 +36,16 @@ interface PreprocessedVirtualFileFactoryExtension {
     fun createPreprocessedLightFile(file: LightVirtualFile?): LightVirtualFile?
 }
 
-class PreprocessedFileCreator(val project: Project) {
+class PreprocessedFileCreator(konst project: Project) {
 
-    private val validExts: Array<PreprocessedVirtualFileFactoryExtension> by lazy {
+    private konst konstidExts: Array<PreprocessedVirtualFileFactoryExtension> by lazy {
         PreprocessedVirtualFileFactoryExtension.getInstances(project).filterNot { it.isPassThrough() }.toTypedArray()
     }
 
-    fun create(file: VirtualFile): VirtualFile = validExts.firstNotNullOfOrNull { it.createPreprocessedFile(file) } ?: file
+    fun create(file: VirtualFile): VirtualFile = konstidExts.firstNotNullOfOrNull { it.createPreprocessedFile(file) } ?: file
 
     // unused now, but could be used in the IDE at some point
     fun createLight(file: LightVirtualFile): LightVirtualFile =
-        validExts.firstNotNullOfOrNull { it.createPreprocessedLightFile(file) } ?: file
+        konstidExts.firstNotNullOfOrNull { it.createPreprocessedLightFile(file) } ?: file
 }
 

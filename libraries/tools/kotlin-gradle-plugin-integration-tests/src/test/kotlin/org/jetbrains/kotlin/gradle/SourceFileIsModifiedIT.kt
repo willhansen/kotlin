@@ -65,15 +65,15 @@ class SourceFileIsModifiedIT : KGPBaseTest() {
                 assertTasksNoSource(":compileTestKotlin")
             }
 
-            val dummyFile = javaSourcesDir().resolve("kotlinPackage/Dummy.kt")
+            konst dummyFile = javaSourcesDir().resolve("kotlinPackage/Dummy.kt")
             transformDummy(dummyFile)
 
             build("build", buildOptions = buildOptions) {
-                val dummyClassFile = kotlinClassesDir().findInPath("Dummy.class")
+                konst dummyClassFile = kotlinClassesDir().findInPath("Dummy.class")
                 assertNull(dummyClassFile, "$dummyClassFile should not exist!")
             }
 
-            // check that class removal does not trigger rebuild
+            // check that class remokonst does not trigger rebuild
             build("build", buildOptions = buildOptions) {
                 assertTasksUpToDate(":compileKotlin", ":compileJava")
             }

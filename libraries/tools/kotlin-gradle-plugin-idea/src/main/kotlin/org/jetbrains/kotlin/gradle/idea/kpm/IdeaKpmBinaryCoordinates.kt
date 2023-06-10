@@ -8,20 +8,20 @@ package org.jetbrains.kotlin.gradle.idea.kpm
 import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 
 sealed interface IdeaKpmBinaryCoordinates : IdeaKpmDependencyCoordinates {
-    val group: String
-    val module: String
-    val version: String
-    val kotlinModuleName: String?
-    val kotlinFragmentName: String?
+    konst group: String
+    konst module: String
+    konst version: String
+    konst kotlinModuleName: String?
+    konst kotlinFragmentName: String?
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmBinaryCoordinatesImpl(
-    override val group: String,
-    override val module: String,
-    override val version: String,
-    override val kotlinModuleName: String? = null,
-    override val kotlinFragmentName: String? = null
+    override konst group: String,
+    override konst module: String,
+    override konst version: String,
+    override konst kotlinModuleName: String? = null,
+    override konst kotlinFragmentName: String? = null
 ) : IdeaKpmBinaryCoordinates {
 
     override fun toString(): String {
@@ -31,6 +31,6 @@ data class IdeaKpmBinaryCoordinatesImpl(
     }
 
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

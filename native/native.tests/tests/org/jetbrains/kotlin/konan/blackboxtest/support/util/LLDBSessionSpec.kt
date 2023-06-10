@@ -10,25 +10,25 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.assertTrue
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 import java.io.File
 
-private class Step(val command: String, val body: List<String>) {
+private class Step(konst command: String, konst body: List<String>) {
     companion object {
         fun parse(block: String, expectedPrefix: String): Step {
-            val lines = block.lines()
+            konst lines = block.lines()
 
-            val commandWithPrefix = lines.first()
+            konst commandWithPrefix = lines.first()
             assertTrue(commandWithPrefix.startsWith(expectedPrefix)) {
                 "The command should start with $expectedPrefix. Got: $commandWithPrefix"
             }
 
-            val command = commandWithPrefix.removePrefix(expectedPrefix).trimStart()
-            val body = lines.drop(1).filterNot(String::isBlank)
+            konst command = commandWithPrefix.removePrefix(expectedPrefix).trimStart()
+            konst body = lines.drop(1).filterNot(String::isBlank)
 
             return Step(command, body)
         }
     }
 }
 
-internal class LLDBSessionSpec private constructor(private val expectedSteps: List<Step>) {
+internal class LLDBSessionSpec private constructor(private konst expectedSteps: List<Step>) {
     fun generateCLIArguments(prettyPrinters: File): List<String> = buildList {
         this += "-b"
         this += "-o"
@@ -40,17 +40,17 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
     }
 
     fun checkLLDBOutput(output: String, nativeTargets: KotlinNativeTargets): Boolean {
-        val blocks = output.split(LLDB_OUTPUT_SEPARATOR).filterNot(String::isBlank)
+        konst blocks = output.split(LLDB_OUTPUT_SEPARATOR).filterNot(String::isBlank)
 
-        val meaningfulBlocks = if (nativeTargets.testTarget == nativeTargets.hostTarget) {
+        konst meaningfulBlocks = if (nativeTargets.testTarget == nativeTargets.hostTarget) {
             // TODO: why are these two leading blocks only checked for the host target?
 
-            val createTargetBlock = blocks.getOrElse(0) { "" }
+            konst createTargetBlock = blocks.getOrElse(0) { "" }
             assertTrue(createTargetBlock.startsWith("(lldb) target create")) {
                 "Missing block \"target create\". Got: $createTargetBlock"
             }
 
-            val commandScriptBlock = blocks.getOrElse(1) { "" }
+            konst commandScriptBlock = blocks.getOrElse(1) { "" }
             assertTrue(commandScriptBlock.startsWith("(lldb) command script import")) {
                 "Missing block \"command script import\". Got: $commandScriptBlock"
             }
@@ -60,7 +60,7 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
             blocks.drop(2).dropLast(1)
         }
 
-        val recordedSteps = meaningfulBlocks.map { block -> Step.parse(block, LLDB_COMMAND_PREFIX) }
+        konst recordedSteps = meaningfulBlocks.map { block -> Step.parse(block, LLDB_COMMAND_PREFIX) }
         assertTrue(expectedSteps.size == recordedSteps.size) {
             """
                 The number of responses do not match the number of commands.
@@ -78,7 +78,7 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
                 """.trimIndent()
             }
 
-            val mismatch = findMismatch(expectedStep.body, recordedStep.body)
+            konst mismatch = findMismatch(expectedStep.body, recordedStep.body)
             if (mismatch != null) {
                 fail {
                     buildString {
@@ -95,9 +95,9 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
     }
 
     private fun findMismatch(patterns: List<String>, actualLines: List<String>): String? {
-        val indices = mutableListOf<Int>()
+        konst indices = mutableListOf<Int>()
         for (pattern in patterns) {
-            val idx = actualLines.indexOfFirst { match(pattern, it) }
+            konst idx = actualLines.indexOfFirst { match(pattern, it) }
             if (idx == -1) {
                 return pattern
             }
@@ -108,13 +108,13 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
     }
 
     private fun match(pattern: String, line: String): Boolean {
-        val chunks = pattern.split(LINE_WILDCARD)
+        konst chunks = pattern.split(LINE_WILDCARD)
             .filter { it.isNotBlank() }
             .map { it.trim() }
         assertTrue(chunks.isNotEmpty())
-        val trimmedLine = line.trim()
+        konst trimmedLine = line.trim()
 
-        val indices = chunks.map { trimmedLine.indexOf(it) }
+        konst indices = chunks.map { trimmedLine.indexOf(it) }
         if (indices.any { it == -1 } || indices != indices.sorted()) return false
         if (!(trimmedLine.startsWith(chunks.first()) || pattern.startsWith("[..]"))) return false
         if (!(trimmedLine.endsWith(chunks.last()) || pattern.endsWith("[..]"))) return false
@@ -122,13 +122,13 @@ internal class LLDBSessionSpec private constructor(private val expectedSteps: Li
     }
 
     companion object {
-        private const val LLDB_COMMAND_PREFIX = "(lldb)"
-        private const val SPEC_COMMAND_PREFIX = ">"
+        private const konst LLDB_COMMAND_PREFIX = "(lldb)"
+        private const konst SPEC_COMMAND_PREFIX = ">"
 
-        private val LLDB_OUTPUT_SEPARATOR = """(?=\(lldb\))""".toRegex()
-        private val SPEC_BLOCK_SEPARATOR = "(?=^>)".toRegex(RegexOption.MULTILINE)
+        private konst LLDB_OUTPUT_SEPARATOR = """(?=\(lldb\))""".toRegex()
+        private konst SPEC_BLOCK_SEPARATOR = "(?=^>)".toRegex(RegexOption.MULTILINE)
 
-        private val LINE_WILDCARD = """\s*\[\.\.]\s*""".toRegex()
+        private konst LINE_WILDCARD = """\s*\[\.\.]\s*""".toRegex()
 
         fun parse(lldbSpec: String): LLDBSessionSpec = LLDBSessionSpec(
             lldbSpec.split(SPEC_BLOCK_SEPARATOR)

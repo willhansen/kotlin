@@ -9,7 +9,7 @@
  * EXCEPTION: runtime
  */
 
-open class Bar(val x: Int)
+open class Bar(konst x: Int)
 
 open class Foo {
      companion object : Bar(Companion.x)

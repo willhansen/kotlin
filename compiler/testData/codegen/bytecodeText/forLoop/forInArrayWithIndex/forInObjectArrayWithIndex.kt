@@ -7,16 +7,16 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val arr = arrayOf("a", "b", "c", "d")
+konst arr = arrayOf("a", "b", "c", "d")
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((index, x) in arr.withIndex()) {
         s.append("$index:$x;")
     }
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "0:a;1:b;2:c;3:d;") "OK" else "fail: '$ss'"
 }
 

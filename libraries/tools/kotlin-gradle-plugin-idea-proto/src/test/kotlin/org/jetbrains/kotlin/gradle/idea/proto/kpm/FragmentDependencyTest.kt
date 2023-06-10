@@ -17,11 +17,11 @@ import kotlin.test.Test
 
 class FragmentDependencyTest : AbstractSerializationTest<IdeaKpmFragmentDependency>() {
 
-    override fun serialize(value: IdeaKpmFragmentDependency) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmFragmentDependency) = konstue.toByteArray(this)
 
     override fun deserialize(data: ByteArray) = IdeaKpmFragmentDependency(data)
 
-    private val coordinates = IdeaKpmFragmentCoordinatesImpl(
+    private konst coordinates = IdeaKpmFragmentCoordinatesImpl(
         module = IdeaKpmModuleCoordinatesImpl(
             buildId = "buildId",
             projectPath = "projectPath",

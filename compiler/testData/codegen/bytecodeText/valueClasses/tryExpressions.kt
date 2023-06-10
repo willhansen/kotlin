@@ -5,7 +5,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 fun tryExpr() = try {
     DPoint(0.0, 1.0)
@@ -23,7 +23,7 @@ fun tryBody() {
     } finally {
         DPoint(4.0, 5.0)
     }
-    val x: DPoint = try {
+    konst x: DPoint = try {
         DPoint(0.0, 1.0)
     } catch(_: Throwable) {
         DPoint(2.0, 3.0)

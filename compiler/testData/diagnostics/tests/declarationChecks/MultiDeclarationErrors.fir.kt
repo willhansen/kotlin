@@ -10,8 +10,8 @@ class MyClass2 {}
 <!CONFLICTING_OVERLOADS!>fun MyClass2.component1()<!> = 1.3
 
 fun test(mc1: MyClass, mc2: MyClass2) {
-    val (a, b) = <!COMPONENT_FUNCTION_MISSING!>mc1<!>
-    val (c) = mc2
+    konst (a, b) = <!COMPONENT_FUNCTION_MISSING!>mc1<!>
+    konst (c) = mc2
 
     //a,b,c are error types
     use(a, b, c)

@@ -20,7 +20,7 @@ package base {
 
     public final class Derived : base.Intermediate {
         public constructor Derived()
-        invisible_fake final override /*1*/ /*fake_override*/ val a: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst a: kotlin.String
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
         public/*package*/ final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -48,7 +48,7 @@ package base {
 
     public open class Intermediate : base.BaseJava {
         public constructor Intermediate()
-        private final val a: kotlin.String = ""
+        private final konst a: kotlin.String = ""
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
         public/*package*/ final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -63,9 +63,9 @@ package derived {
 
     public final class Derived : derived.Intermediate {
         public constructor Derived()
-        invisible_fake final override /*1*/ /*fake_override*/ val a: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst a: kotlin.String
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
-        invisible_fake final override /*1*/ /*fake_override*/ val b: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst b: kotlin.String
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public final fun bar(): kotlin.String!
         public final fun baz(): kotlin.reflect.KMutableProperty0<kotlin.String!>
@@ -77,9 +77,9 @@ package derived {
 
     public final class DerivedAlias : derived.Alias /* = derived.Intermediate */ {
         public constructor DerivedAlias()
-        invisible_fake final override /*1*/ /*fake_override*/ val a: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst a: kotlin.String
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
-        invisible_fake final override /*1*/ /*fake_override*/ val b: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst b: kotlin.String
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.reflect.KMutableProperty0<kotlin.String!>
@@ -90,7 +90,7 @@ package derived {
     public final class DerivedPublic : derived.IntermediatePublic {
         public constructor DerivedPublic()
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
-        public final override /*1*/ /*fake_override*/ val a: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst a: kotlin.String
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun foo(): kotlin.reflect.KMutableProperty0<kotlin.String!>
@@ -100,7 +100,7 @@ package derived {
 
     public final class DerivedWithoutBackingField : derived.IntermediateWithoutField {
         public constructor DerivedWithoutBackingField()
-        invisible_fake final override /*1*/ /*fake_override*/ val a: kotlin.String
+        invisible_fake final override /*1*/ /*fake_override*/ konst a: kotlin.String
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -121,9 +121,9 @@ package derived {
 
     public open class Intermediate : base.BaseJava {
         public constructor Intermediate()
-        private final val a: kotlin.String = ""
+        private final konst a: kotlin.String = ""
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
-        private final val b: kotlin.String = ""
+        private final konst b: kotlin.String = ""
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -132,7 +132,7 @@ package derived {
 
     public open class IntermediatePublic : base.BaseJava {
         public constructor IntermediatePublic()
-        public final val a: kotlin.String = ""
+        public final konst a: kotlin.String = ""
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -142,7 +142,7 @@ package derived {
 
     public open class IntermediateWithoutField : base.BaseJava {
         public constructor IntermediateWithoutField()
-        private final val a: kotlin.String
+        private final konst a: kotlin.String
         protected/*protected and package*/ final override /*1*/ /*fake_override*/ var a: kotlin.String!
         invisible_fake final override /*1*/ /*fake_override*/ var b: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result<T>(val isSuccess: Boolean)
+konstue class Result<T>(konst isSuccess: Boolean)
 
 fun interface ResultHandler<T> {
     fun onResult(result: Result<T>)

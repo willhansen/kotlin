@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.utils.isDirectiveDefined
 
 class ForeignAnnotationAgainstCompiledJavaTestSuppressor(testServices: TestServices) : MetaTestConfigurator(testServices) {
     override fun shouldSkipTest(): Boolean {
-        val testFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testFile = testServices.moduleStructure.originalTestDataFiles.first()
         return testFile.isDirectiveDefined("// ${SOURCE_RETENTION_ANNOTATIONS.name}")
     }
 }

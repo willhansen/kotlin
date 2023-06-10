@@ -5,7 +5,7 @@ FILE: initBlock.kt
         }
 
         init {
-            lval x: R|kotlin/Int| = Int(1)
+            lkonst x: R|kotlin/Int| = Int(1)
         }
 
     }
@@ -15,9 +15,9 @@ FILE: initBlock.kt
         }
 
         init {
-            lval x: R|kotlin/Int| = Int(1)
+            lkonst x: R|kotlin/Int| = Int(1)
             throw R|java/lang/Exception.Exception|()
-            lval y: R|kotlin/Int| = Int(2)
+            lkonst y: R|kotlin/Int| = Int(2)
         }
 
     }

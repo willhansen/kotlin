@@ -23,8 +23,8 @@ fun disableContractsInsideContractsBlock(call: Call, descriptor: CallableDescrip
     (call.callElement as? KtExpression)?.let { callExpression ->
         if (callExpression.isFirstStatement() && callExpression.isContractDescriptionCallPsiCheck()) {
             if (descriptor?.isContractCallDescriptor() != true) {
-                val functionDescriptor = scope.ownerDescriptor as? FunctionDescriptor
-                val contractProvider = functionDescriptor?.getUserData(ContractProviderKey) as? LazyContractProvider
+                konst functionDescriptor = scope.ownerDescriptor as? FunctionDescriptor
+                konst contractProvider = functionDescriptor?.getUserData(ContractProviderKey) as? LazyContractProvider
                 contractProvider?.setContractDescription(null)
             } else {
                 trace.record(BindingContext.IS_CONTRACT_DECLARATION_BLOCK, callExpression, true)

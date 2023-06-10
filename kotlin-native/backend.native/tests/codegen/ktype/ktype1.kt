@@ -25,7 +25,7 @@ class Outer<T> {
 
 object Object
 
-private val pkg = "codegen.ktype.ktype1"
+private konst pkg = "codegen.ktype.ktype1"
 
 @Test
 fun testBasics1() {
@@ -39,7 +39,7 @@ fun testBasics1() {
 
 @Test
 fun testInner() {
-    val innerKType = kType<Outer<D>.Inner<String>>()
+    konst innerKType = kType<Outer<D>.Inner<String>>()
     assertEquals(Outer.Inner::class, innerKType.classifier)
     assertEquals(String::class, innerKType.arguments.first().type!!.classifier)
     assertEquals(D::class, innerKType.arguments.last().type!!.classifier)
@@ -47,8 +47,8 @@ fun testInner() {
 
 @Test
 fun testAnonymousObject() {
-    val obj = object {}
-    val objType = kType(obj)
+    konst obj = object {}
+    konst objType = kType(obj)
 
     assertEquals("(non-denotable type)", objType.toString())
     assertEquals(obj::class, objType.classifier)

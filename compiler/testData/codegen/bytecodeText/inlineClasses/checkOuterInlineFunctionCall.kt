@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val a: String) {
+inline class Foo(konst a: String) {
     fun test(): String {
         return notInlineFun() + inlineFun()
     }

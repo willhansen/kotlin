@@ -3,7 +3,7 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val x = fooCase1()
+    konst x = fooCase1()
     x checkType { check<Case1>() }
 }
 
@@ -13,19 +13,19 @@ fun fooCase1(): Case1 = TODO()
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val x = fooCase2()
+    konst x = fooCase2()
     x checkType { check<Case1>() }
 }
 
 fun fooCase2(): Case1 {
-    val x = ""
+    konst x = ""
     return Case1()
-    val y = ""
+    konst y = ""
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val x = object : Case13 {
+    konst x = object : Case13 {
         override fun fooCase3(): Int {
             return 1
             "str"
@@ -43,7 +43,7 @@ interface Case13 {
 
 // TESTCASE NUMBER: 4
 fun case4() {
-    val x = fooCase4()
+    konst x = fooCase4()
     x checkType { check<kotlin.Unit>() }
 }
 

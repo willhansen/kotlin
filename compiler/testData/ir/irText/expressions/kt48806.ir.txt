@@ -5,37 +5,37 @@ FILE fqName:<root> fileName:/kt48806.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:test_1 visibility:public modality:FINAL [val]
+    PROPERTY name:test_1 visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:test_1 type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           TRY type=kotlin.Int
             try: BLOCK type=kotlin.Nothing origin=null
               THROW type=kotlin.Nothing
                 CONSTRUCTOR_CALL 'public constructor <init> () declared in java.lang.RuntimeException' type=java.lang.RuntimeException origin=null
-            CATCH parameter=val e: java.lang.Exception{ kotlin.Exception } declared in <root>.A.test_1
-              VAR CATCH_PARAMETER name:e type:java.lang.Exception{ kotlin.Exception } [val]
+            CATCH parameter=konst e: java.lang.Exception{ kotlin.Exception } declared in <root>.A.test_1
+              VAR CATCH_PARAMETER name:e type:java.lang.Exception{ kotlin.Exception } [konst]
               BLOCK type=kotlin.Int origin=null
-                CONST Int type=kotlin.Int value=1
+                CONST Int type=kotlin.Int konstue=1
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test_1> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:test_1 visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:test_1 visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-test_1> (): kotlin.Int declared in <root>.A'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:test_1 type:kotlin.Int visibility:private [final]' type=kotlin.Int origin=null
               receiver: GET_VAR '<this>: <root>.A declared in <root>.A.<get-test_1>' type=<root>.A origin=null
-    PROPERTY name:test_2 visibility:public modality:FINAL [val]
+    PROPERTY name:test_2 visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:test_2 type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           TRY type=kotlin.Int
             try: BLOCK type=kotlin.Int origin=null
-              CONST Int type=kotlin.Int value=1
-            CATCH parameter=val e: java.lang.Exception{ kotlin.Exception } declared in <root>.A.test_2
-              VAR CATCH_PARAMETER name:e type:java.lang.Exception{ kotlin.Exception } [val]
+              CONST Int type=kotlin.Int konstue=1
+            CATCH parameter=konst e: java.lang.Exception{ kotlin.Exception } declared in <root>.A.test_2
+              VAR CATCH_PARAMETER name:e type:java.lang.Exception{ kotlin.Exception } [konst]
               BLOCK type=kotlin.Nothing origin=null
                 THROW type=kotlin.Nothing
                   CONSTRUCTOR_CALL 'public constructor <init> () declared in java.lang.RuntimeException' type=java.lang.RuntimeException origin=null
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-test_2> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:test_2 visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:test_2 visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-test_2> (): kotlin.Int declared in <root>.A'

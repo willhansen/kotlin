@@ -2,9 +2,9 @@
 import kotlin.test.*
 
 fun check(x: Int, left: Int, right: Int): Boolean {
-    val result = x in left..right
-    val manual = x >= left && x <= right
-    val range = left..right
+    konst result = x in left..right
+    konst manual = x >= left && x <= right
+    konst range = left..right
     assertTrue(result == manual, "Failed: optimized === manual for $range")
     assertTrue(result == checkUnoptimized(x, range), "Failed: optimized === unoptimized for $range")
     return result
@@ -23,8 +23,8 @@ fun box(): String {
     assertTrue(check(Int.MIN_VALUE, Int.MIN_VALUE, Int.MIN_VALUE))
     assertTrue(check(Int.MAX_VALUE, Int.MIN_VALUE, Int.MAX_VALUE))
 
-    var value = 0
-    assertTrue(++value in 1..1)
-    assertTrue(++value !in 1..1)
+    var konstue = 0
+    assertTrue(++konstue in 1..1)
+    assertTrue(++konstue !in 1..1)
     return "OK"
 }

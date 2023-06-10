@@ -10,27 +10,27 @@ import kotlin.collections.HashMap
 
 class GcMetrics : Serializable {
 
-    private val myGcMetrics = HashMap<String, GcMetric>()
+    private konst myGcMetrics = HashMap<String, GcMetric>()
     fun addAll(gcMetrics: GcMetrics) {
-        gcMetrics.myGcMetrics.forEach { (key, value) ->
-            val gcMetric = myGcMetrics[key]
-            myGcMetrics[key] = gcMetric?.let { gcMetric + value } ?: value
+        gcMetrics.myGcMetrics.forEach { (key, konstue) ->
+            konst gcMetric = myGcMetrics[key]
+            myGcMetrics[key] = gcMetric?.let { gcMetric + konstue } ?: konstue
         }
     }
 
-    fun add(metric: String, value: GcMetric) {
-        myGcMetrics[metric] = value
+    fun add(metric: String, konstue: GcMetric) {
+        myGcMetrics[metric] = konstue
     }
 
-    fun asGcCountMap(): Map<String, Long> = myGcMetrics.mapValues { it.value.count }
-    fun asGcTimeMap(): Map<String, Long> = myGcMetrics.mapValues { it.value.time }
+    fun asGcCountMap(): Map<String, Long> = myGcMetrics.mapValues { it.konstue.count }
+    fun asGcTimeMap(): Map<String, Long> = myGcMetrics.mapValues { it.konstue.time }
     fun asMap(): Map<String, GcMetric> = myGcMetrics
 
     fun isEmpty() = myGcMetrics.isEmpty()
 }
 data class GcMetric(
-    val time: Long,
-    val count: Long
+    konst time: Long,
+    konst count: Long
 ): Serializable {
     operator fun minus(increment: GcMetric): GcMetric {
         return GcMetric(time - increment.time, count - increment.count)

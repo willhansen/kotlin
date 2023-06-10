@@ -42,30 +42,30 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 class FirFieldImpl @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
     override var status: FirDeclarationStatus,
     override var returnTypeRef: FirTypeRef,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val name: Name,
+    override konst name: Name,
     override var initializer: FirExpression?,
-    override val isVar: Boolean,
+    override konst isVar: Boolean,
     override var backingField: FirBackingField?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val symbol: FirFieldSymbol,
+    override konst symbol: FirFieldSymbol,
 ) : FirField() {
-    override val receiverParameter: FirReceiverParameter? get() = null
-    override val delegate: FirExpression? get() = null
-    override val isVal: Boolean get() = !isVar
-    override val getter: FirPropertyAccessor? get() = null
-    override val setter: FirPropertyAccessor? get() = null
+    override konst receiverParameter: FirReceiverParameter? get() = null
+    override konst delegate: FirExpression? get() = null
+    override konst isVal: Boolean get() = !isVar
+    override konst getter: FirPropertyAccessor? get() = null
+    override konst setter: FirPropertyAccessor? get() = null
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
 
     init {

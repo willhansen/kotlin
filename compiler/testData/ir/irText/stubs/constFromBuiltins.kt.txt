@@ -1,3 +1,3 @@
-val test: Int
+konst test: Int
   field = -2147483648
   get

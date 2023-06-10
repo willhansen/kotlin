@@ -4,7 +4,7 @@ FILE: selfReferenceToCompanionObject.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val fn: R|() -> kotlin/String| = R|<local>/fn|
+        public final konst fn: R|() -> kotlin/String| = R|<local>/fn|
             public get(): R|() -> kotlin/String|
 
     }
@@ -36,10 +36,10 @@ FILE: selfReferenceToCompanionObject.kt
             super<R|kotlin/Enum<Test>|>()
         }
 
-        public final val x: R|kotlin/String| = R|<local>/x|
+        public final konst x: R|kotlin/String| = R|<local>/x|
             public get(): R|kotlin/String|
 
-        public final val closure1: R|() -> kotlin/String| = R|<local>/closure1|
+        public final konst closure1: R|() -> kotlin/String| = R|<local>/closure1|
             public get(): R|() -> kotlin/String|
 
         public final static enum entry FOO: R|Test| = object : R|Test| {
@@ -53,33 +53,33 @@ FILE: selfReferenceToCompanionObject.kt
                 ))
             }
 
-            public open override val y: R|kotlin/String| = String(K)
+            public open override konst y: R|kotlin/String| = String(K)
                 public get(): R|kotlin/String|
 
-            public final val closure2: R|() -> kotlin/String| = fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
+            public final konst closure2: R|() -> kotlin/String| = fun <anonymous>(): R|kotlin/String| <inline=Unknown>  {
                 ^ this@R|/<anonymous>|.R|/<anonymous>.y|
             }
 
                 public get(): R|() -> kotlin/String|
 
-            public open override val z: R|kotlin/String| = this@R|/<anonymous>|.R|/<anonymous>.closure2|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/String|>|()
+            public open override konst z: R|kotlin/String| = this@R|/<anonymous>|.R|/<anonymous>.closure2|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/String|>|()
                 public get(): R|kotlin/String|
 
         }
 
-        public abstract val y: R|kotlin/String|
+        public abstract konst y: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public abstract val z: R|kotlin/String|
+        public abstract konst z: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public final static fun values(): R|kotlin/Array<Test>| {
+        public final static fun konstues(): R|kotlin/Array<Test>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|Test| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|Test| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<Test>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<Test>|
             public get(): R|kotlin/enums/EnumEntries<Test>|
 
     }

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.testbase.project
 
 abstract class IncrementalCompilationBaseIT : KGPBaseTest() {
 
-    protected abstract val defaultProjectName: String
+    protected abstract konst defaultProjectName: String
 
     open fun defaultProject(
         gradleVersion: GradleVersion,
@@ -27,7 +27,7 @@ abstract class IncrementalCompilationBaseIT : KGPBaseTest() {
         test = test
     )
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(
         incremental = true,
         logLevel = LogLevel.DEBUG
     )

@@ -11,14 +11,14 @@ FILE: localClassAccessesContainingClass.kt
                 }
 
                 public final fun bar(): R|kotlin/Unit| {
-                    lval x: R|kotlin/String| = this@R|/Outer|.R|/Outer.y|
+                    lkonst x: R|kotlin/String| = this@R|/Outer|.R|/Outer.y|
                 }
 
             }
 
         }
 
-        public final val y: R|kotlin/String| = String()
+        public final konst y: R|kotlin/String| = String()
             public get(): R|kotlin/String|
 
     }

@@ -27,10 +27,10 @@ import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.serialization.js.ModuleKind
 
 class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass {
-    private val transformer = ReferenceTransformer(context)
-    private val moduleKind = context.configuration[JSConfigurationKeys.MODULE_KIND]!!
-    private val isEscapedIdentifiersResolved =
-        context.configuration.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInvalidCharsIdentifiersEscaping)
+    private konst transformer = ReferenceTransformer(context)
+    private konst moduleKind = context.configuration[JSConfigurationKeys.MODULE_KIND]!!
+    private konst isEscapedIdentifiersResolved =
+        context.configuration.languageVersionSettings.supportsFeature(LanguageFeature.JsAllowInkonstidCharsIdentifiersEscaping)
 
     override fun lower(irFile: IrFile) {
         if (!isEscapedIdentifiersResolved || moduleKind != ModuleKind.PLAIN) return
@@ -42,18 +42,18 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
         irBody.transformChildrenVoid(transformer)
     }
 
-    private class ReferenceTransformer(val context: JsIrBackendContext) : IrElementTransformerVoid() {
-        private val globalThisReceiver
+    private class ReferenceTransformer(konst context: JsIrBackendContext) : IrElementTransformerVoid() {
+        private konst globalThisReceiver
             get() = IrCallImpl(
                 startOffset = UNDEFINED_OFFSET,
                 endOffset = UNDEFINED_OFFSET,
                 type = context.dynamicType,
                 symbol = context.intrinsics.globalThis.owner.getter!!.symbol,
                 typeArgumentsCount = 0,
-                valueArgumentsCount = 0,
+                konstueArgumentsCount = 0,
             )
 
-        private val IrFunction.dummyDispatchReceiverParameter
+        private konst IrFunction.dummyDispatchReceiverParameter
             get() = context.irFactory.createValueParameter(
                 startOffset, endOffset,
                 origin,
@@ -69,7 +69,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
             ).also { it.parent = this }
 
         override fun visitGetValue(expression: IrGetValue): IrExpression {
-            val owner = expression.symbol.owner
+            konst owner = expression.symbol.owner
 
             return if (
                 !owner.isEffectivelyExternal() ||
@@ -83,7 +83,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
         }
 
         override fun visitSetValue(expression: IrSetValue): IrExpression {
-            val field = expression.symbol.owner
+            konst field = expression.symbol.owner
 
             return if (
                 !field.isEffectivelyExternal() ||
@@ -95,7 +95,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
                     startOffset = expression.startOffset,
                     endOffset = expression.endOffset,
                     receiver = field.wrapInGlobalThis(expression),
-                    value = expression.value,
+                    konstue = expression.konstue,
                     type = expression.type,
                     origin = null,
                     superQualifierSymbol = null,
@@ -105,7 +105,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
         }
 
         override fun visitGetObjectValue(expression: IrGetObjectValue): IrExpression {
-            val owner = expression.symbol.owner
+            konst owner = expression.symbol.owner
 
             return if (
                 !owner.isEffectivelyExternal() ||
@@ -118,10 +118,10 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
         }
 
         override fun visitCall(expression: IrCall): IrExpression {
-            val function = expression.symbol.owner.realOverrideTarget
-            val property = function.correspondingPropertySymbol?.owner ?: function
+            konst function = expression.symbol.owner.realOverrideTarget
+            konst property = function.correspondingPropertySymbol?.owner ?: function
 
-            val updatedCall = if (
+            konst updatedCall = if (
                 expression.dispatchReceiver != null ||
                 !property.isEffectivelyExternal() ||
                 !property.needToBeWrappedWithGlobalThis()
@@ -152,7 +152,7 @@ class EscapedIdentifiersLowering(context: JsIrBackendContext) : BodyLoweringPass
                 receiver = globalThisReceiver
             )
 
-        private fun IrValueDeclaration.isThisReceiver(): Boolean = this !is IrVariable && when (val p = parent) {
+        private fun IrValueDeclaration.isThisReceiver(): Boolean = this !is IrVariable && when (konst p = parent) {
             is IrSimpleFunction -> this === p.dispatchReceiverParameter
             is IrClass -> this === p.thisReceiver
             else -> false

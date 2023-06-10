@@ -63,7 +63,7 @@ FILE: notNull.kt
             )
         }
 
-        lval y: R|kotlin/String?| = R|<local>/x|
+        lkonst y: R|kotlin/String?| = R|<local>/x|
         when () {
             !=(R|<local>/y|, Null(null)) ->  {
                 ^test4 Boolean(true)

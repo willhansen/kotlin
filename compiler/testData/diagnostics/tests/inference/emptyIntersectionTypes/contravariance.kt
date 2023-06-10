@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // WITH_STDLIB
 
-fun expandMaskConditionsAndUpdateVariableNodes(validOffsets: Collection<Int>) {}
+fun expandMaskConditionsAndUpdateVariableNodes(konstidOffsets: Collection<Int>) {}
 
 fun main(x: List<Int>, y: Int) {
     expandMaskConditionsAndUpdateVariableNodes(

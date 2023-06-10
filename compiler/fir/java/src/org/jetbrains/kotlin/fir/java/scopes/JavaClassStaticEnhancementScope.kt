@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.name.Name
 class JavaClassStaticEnhancementScope(
     session: FirSession,
     owner: FirRegularClassSymbol,
-    private val useSiteStaticScope: JavaClassStaticUseSiteScope,
+    private konst useSiteStaticScope: JavaClassStaticUseSiteScope,
 ) : FirContainingNamesAwareScope() {
-    private val signatureEnhancement = FirSignatureEnhancement(owner.fir, session) {
+    private konst signatureEnhancement = FirSignatureEnhancement(owner.fir, session) {
         emptyList()
     }
 
@@ -31,7 +31,7 @@ class JavaClassStaticEnhancementScope(
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         useSiteStaticScope.processFunctionsByName(name) process@{ original ->
-            val enhancedFunction = signatureEnhancement.enhancedFunction(original, name)
+            konst enhancedFunction = signatureEnhancement.enhancedFunction(original, name)
             if (enhancedFunction is FirNamedFunctionSymbol) {
                 processor(enhancedFunction)
             }
@@ -46,7 +46,7 @@ class JavaClassStaticEnhancementScope(
 
     override fun processDeclaredConstructors(processor: (FirConstructorSymbol) -> Unit) {
         useSiteStaticScope.processDeclaredConstructors process@{ original ->
-            val function = signatureEnhancement.enhancedFunction(original, name = null)
+            konst function = signatureEnhancement.enhancedFunction(original, name = null)
             processor(function as FirConstructorSymbol)
         }
     }

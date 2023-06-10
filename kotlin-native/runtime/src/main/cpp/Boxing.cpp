@@ -22,7 +22,7 @@
 template<class T>
 struct KBox {
   ObjHeader header;
-  const T value;
+  const T konstue;
 };
 
 // Keep naming of these in sync with codegen part.
@@ -54,13 +54,13 @@ extern KBox<KLong>    LONG_CACHE[];
 namespace {
 
 template<class T>
-inline bool isInRange(T value, T from, T to) {
-  return value >= from && value <= to;
+inline bool isInRange(T konstue, T from, T to) {
+  return konstue >= from && konstue <= to;
 }
 
 template<class T>
-OBJ_GETTER(getCachedBox, T value, KBox<T> cache[], T from) {
-  uint64_t index = value - from;
+OBJ_GETTER(getCachedBox, T konstue, KBox<T> cache[], T from) {
+  uint64_t index = konstue - from;
   RETURN_OBJ(&cache[index].header);
 }
 
@@ -68,54 +68,54 @@ OBJ_GETTER(getCachedBox, T value, KBox<T> cache[], T from) {
 
 extern "C" {
 
-bool inBooleanBoxCache(KBoolean value) {
-  return isInRange(value, BOOLEAN_RANGE_FROM, BOOLEAN_RANGE_TO);
+bool inBooleanBoxCache(KBoolean konstue) {
+  return isInRange(konstue, BOOLEAN_RANGE_FROM, BOOLEAN_RANGE_TO);
 }
 
-bool inByteBoxCache(KByte value) {
-  return isInRange(value, BYTE_RANGE_FROM, BYTE_RANGE_TO);
+bool inByteBoxCache(KByte konstue) {
+  return isInRange(konstue, BYTE_RANGE_FROM, BYTE_RANGE_TO);
 }
 
-bool inCharBoxCache(KChar value) {
-  return isInRange(value, CHAR_RANGE_FROM, CHAR_RANGE_TO);
+bool inCharBoxCache(KChar konstue) {
+  return isInRange(konstue, CHAR_RANGE_FROM, CHAR_RANGE_TO);
 }
 
-bool inShortBoxCache(KShort value) {
-  return isInRange(value, SHORT_RANGE_FROM, SHORT_RANGE_TO);
+bool inShortBoxCache(KShort konstue) {
+  return isInRange(konstue, SHORT_RANGE_FROM, SHORT_RANGE_TO);
 }
 
-bool inIntBoxCache(KInt value) {
-  return isInRange(value, INT_RANGE_FROM, INT_RANGE_TO);
+bool inIntBoxCache(KInt konstue) {
+  return isInRange(konstue, INT_RANGE_FROM, INT_RANGE_TO);
 }
 
-bool inLongBoxCache(KLong value) {
-  return isInRange(value, LONG_RANGE_FROM, LONG_RANGE_TO);
+bool inLongBoxCache(KLong konstue) {
+  return isInRange(konstue, LONG_RANGE_FROM, LONG_RANGE_TO);
 }
 
-OBJ_GETTER(getCachedBooleanBox, KBoolean value) {
-  RETURN_RESULT_OF(getCachedBox, value, BOOLEAN_CACHE, BOOLEAN_RANGE_FROM);
+OBJ_GETTER(getCachedBooleanBox, KBoolean konstue) {
+  RETURN_RESULT_OF(getCachedBox, konstue, BOOLEAN_CACHE, BOOLEAN_RANGE_FROM);
 }
 
-OBJ_GETTER(getCachedByteBox, KByte value) {
-  // Remember that KByte can't handle values >= 127
+OBJ_GETTER(getCachedByteBox, KByte konstue) {
+  // Remember that KByte can't handle konstues >= 127
   // so it can't be used as indexing type.
-  RETURN_RESULT_OF(getCachedBox, value, BYTE_CACHE, BYTE_RANGE_FROM);
+  RETURN_RESULT_OF(getCachedBox, konstue, BYTE_CACHE, BYTE_RANGE_FROM);
 }
 
-OBJ_GETTER(getCachedCharBox, KChar value) {
-  RETURN_RESULT_OF(getCachedBox, value, CHAR_CACHE, CHAR_RANGE_FROM);
+OBJ_GETTER(getCachedCharBox, KChar konstue) {
+  RETURN_RESULT_OF(getCachedBox, konstue, CHAR_CACHE, CHAR_RANGE_FROM);
 }
 
-OBJ_GETTER(getCachedShortBox, KShort value) {
-  RETURN_RESULT_OF(getCachedBox, value, SHORT_CACHE, SHORT_RANGE_FROM);
+OBJ_GETTER(getCachedShortBox, KShort konstue) {
+  RETURN_RESULT_OF(getCachedBox, konstue, SHORT_CACHE, SHORT_RANGE_FROM);
 }
 
-OBJ_GETTER(getCachedIntBox, KInt value) {
-  RETURN_RESULT_OF(getCachedBox, value, INT_CACHE, INT_RANGE_FROM);
+OBJ_GETTER(getCachedIntBox, KInt konstue) {
+  RETURN_RESULT_OF(getCachedBox, konstue, INT_CACHE, INT_RANGE_FROM);
 }
 
-OBJ_GETTER(getCachedLongBox, KLong value) {
-  RETURN_RESULT_OF(getCachedBox, value, LONG_CACHE, LONG_RANGE_FROM);
+OBJ_GETTER(getCachedLongBox, KLong konstue) {
+  RETURN_RESULT_OF(getCachedBox, konstue, LONG_CACHE, LONG_RANGE_FROM);
 }
 
 }

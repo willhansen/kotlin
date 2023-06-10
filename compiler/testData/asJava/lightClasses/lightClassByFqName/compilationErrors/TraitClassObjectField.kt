@@ -2,7 +2,7 @@
 
 interface TraitClassObjectField {
     companion object {
-        const val x: String? = ""
-        private val y: String? = { "" }()
+        const konst x: String? = ""
+        private konst y: String? = { "" }()
     }
 }

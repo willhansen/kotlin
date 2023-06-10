@@ -3,43 +3,43 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZArrayMap(val storage: IntArray) : Map<Z, Z> {
-    override val size: Int
+konstue class ZArrayMap(konst storage: IntArray) : Map<Z, Z> {
+    override konst size: Int
         get() = storage.size
 
-    private class MapEntry(val i: Int, val si: Int): Map.Entry<Z, Z> {
-        override val key: Z get() = Z(i)
-        override val value: Z get() = Z(si)
+    private class MapEntry(konst i: Int, konst si: Int): Map.Entry<Z, Z> {
+        override konst key: Z get() = Z(i)
+        override konst konstue: Z get() = Z(si)
     }
 
-    private class MapEntrySet(val storage: IntArray) : AbstractSet<Map.Entry<Z, Z>>() {
+    private class MapEntrySet(konst storage: IntArray) : AbstractSet<Map.Entry<Z, Z>>() {
         private inner class MyIterator : Iterator<Map.Entry<Z, Z>> {
             var index = 0
             override fun hasNext(): Boolean = index < size
             override fun next(): Map.Entry<Z, Z> = MapEntry(index, storage[index++])
         }
 
-        override val size: Int
+        override konst size: Int
             get() = storage.size
 
         override fun iterator(): Iterator<Map.Entry<Z, Z>> = MyIterator()
     }
 
-    override val entries: Set<Map.Entry<Z, Z>>
+    override konst entries: Set<Map.Entry<Z, Z>>
         get() = MapEntrySet(storage)
 
-    override val keys: Set<Z>
+    override konst keys: Set<Z>
         get() = (0 until size).mapTo(HashSet()) { Z(it) }
 
-    override val values: Collection<Z>
+    override konst konstues: Collection<Z>
         get() = storage.mapTo(ArrayList()) { Z(it) }
 
     override fun containsKey(key: Z): Boolean = key.x in (0 until size)
 
-    override fun containsValue(value: Z): Boolean = storage.contains(value.x)
+    override fun containsValue(konstue: Z): Boolean = storage.contains(konstue.x)
 
     override fun get(key: Z) = storage.getOrNull(key.x)?.let { Z(it) }
 
@@ -47,7 +47,7 @@ value class ZArrayMap(val storage: IntArray) : Map<Z, Z> {
 }
 
 fun box(): String {
-    val zm = ZArrayMap(IntArray(5))
+    konst zm = ZArrayMap(IntArray(5))
 
     zm.containsKey(Z(0))
     zm.containsValue(Z(0))

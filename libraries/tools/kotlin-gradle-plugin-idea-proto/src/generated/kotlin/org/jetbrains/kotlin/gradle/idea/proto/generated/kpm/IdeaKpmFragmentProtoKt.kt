@@ -10,7 +10,7 @@ object IdeaKpmFragmentProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmFragmentProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmFragmentProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmFragmentProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmFragmentProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmFragmentProtoKt {
       @JvmName("getCoordinates")
       get() = _builder.getCoordinates()
       @JvmName("setCoordinates")
-      set(value) {
-        _builder.setCoordinates(value)
+      set(konstue) {
+        _builder.setCoordinates(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto coordinates = 2;</code>
@@ -71,7 +71,7 @@ object IdeaKpmFragmentProtoKt {
     fun hasCoordinates(): kotlin.Boolean {
       return _builder.hasCoordinates()
     }
-    val IdeaKpmFragmentProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto?
+    konst IdeaKpmFragmentProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto?
       get() = _builder.coordinatesOrNull
 
     /**
@@ -83,58 +83,58 @@ object IdeaKpmFragmentProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
      */
-     val platforms: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>
+     konst platforms: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getPlatformsList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
-     * @param value The platforms to add.
+     * @param konstue The platforms to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addPlatforms")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
-      _builder.addPlatforms(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
+      _builder.addPlatforms(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
-     * @param value The platforms to add.
+     * @param konstue The platforms to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignPlatforms")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
-     * @param values The platforms to add.
+     * @param konstues The platforms to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllPlatforms")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto>) {
-      _builder.addAllPlatforms(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto>) {
+      _builder.addAllPlatforms(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
-     * @param values The platforms to add.
+     * @param konstues The platforms to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllPlatforms")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
-     * @param index The index to set the value at.
-     * @param value The platforms to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The platforms to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setPlatforms")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
-      _builder.setPlatforms(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto, PlatformsProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto) {
+      _builder.setPlatforms(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmPlatformProto platforms = 3;</code>
@@ -153,8 +153,8 @@ object IdeaKpmFragmentProtoKt {
       @JvmName("getLanguageSettings")
       get() = _builder.getLanguageSettings()
       @JvmName("setLanguageSettings")
-      set(value) {
-        _builder.setLanguageSettings(value)
+      set(konstue) {
+        _builder.setLanguageSettings(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto language_settings = 4;</code>
@@ -169,7 +169,7 @@ object IdeaKpmFragmentProtoKt {
     fun hasLanguageSettings(): kotlin.Boolean {
       return _builder.hasLanguageSettings()
     }
-    val IdeaKpmFragmentProtoKt.Dsl.languageSettingsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto?
+    konst IdeaKpmFragmentProtoKt.Dsl.languageSettingsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto?
       get() = _builder.languageSettingsOrNull
 
     /**
@@ -181,58 +181,58 @@ object IdeaKpmFragmentProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
      */
-     val dependencies: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>
+     konst dependencies: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getDependenciesList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
-     * @param value The dependencies to add.
+     * @param konstue The dependencies to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addDependencies")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
-      _builder.addDependencies(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
+      _builder.addDependencies(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
-     * @param value The dependencies to add.
+     * @param konstue The dependencies to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignDependencies")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
-     * @param values The dependencies to add.
+     * @param konstues The dependencies to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllDependencies")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto>) {
-      _builder.addAllDependencies(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto>) {
+      _builder.addAllDependencies(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
-     * @param values The dependencies to add.
+     * @param konstues The dependencies to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllDependencies")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
-     * @param index The index to set the value at.
-     * @param value The dependencies to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The dependencies to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setDependencies")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
-      _builder.setDependencies(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto, DependenciesProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto) {
+      _builder.setDependencies(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmDependencyProto dependencies = 5;</code>
@@ -253,58 +253,58 @@ object IdeaKpmFragmentProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
      */
-     val sourceDirectories: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>
+     konst sourceDirectories: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getSourceDirectoriesList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
-     * @param value The sourceDirectories to add.
+     * @param konstue The sourceDirectories to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addSourceDirectories")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
-      _builder.addSourceDirectories(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
+      _builder.addSourceDirectories(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
-     * @param value The sourceDirectories to add.
+     * @param konstue The sourceDirectories to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignSourceDirectories")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
-     * @param values The sourceDirectories to add.
+     * @param konstues The sourceDirectories to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllSourceDirectories")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto>) {
-      _builder.addAllSourceDirectories(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto>) {
+      _builder.addAllSourceDirectories(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
-     * @param values The sourceDirectories to add.
+     * @param konstues The sourceDirectories to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllSourceDirectories")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
-     * @param index The index to set the value at.
-     * @param value The sourceDirectories to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The sourceDirectories to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setSourceDirectories")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
-      _builder.setSourceDirectories(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto, SourceDirectoriesProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto) {
+      _builder.setSourceDirectories(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContentRootProto source_directories = 6;</code>
@@ -321,12 +321,12 @@ object IdeaKpmFragmentProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto?
   get() = if (hasCoordinates()) getCoordinates() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.languageSettingsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProtoOrBuilder.languageSettingsOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmLanguageSettingsProto?
   get() = if (hasLanguageSettings()) getLanguageSettings() else null
 

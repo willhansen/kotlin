@@ -6,10 +6,10 @@
 package org.jetbrains.kotlin.types
 
 enum class Variance(
-        val label: String,
-        val allowsInPosition: Boolean,
-        val allowsOutPosition: Boolean,
-        private val superpositionFactor: Int
+        konst label: String,
+        konst allowsInPosition: Boolean,
+        konst allowsOutPosition: Boolean,
+        private konst superpositionFactor: Int
 ) {
     INVARIANT("", true, true, 0),
     IN_VARIANCE("in", true, false, -1),
@@ -23,7 +23,7 @@ enum class Variance(
             }
 
     fun superpose(other: Variance): Variance {
-        val r = this.superpositionFactor * other.superpositionFactor
+        konst r = this.superpositionFactor * other.superpositionFactor
         return when (r) {
             0 -> INVARIANT
             -1 -> IN_VARIANCE

@@ -32,16 +32,16 @@ import java.io.File
  * Additional dirty files should be added only through [FSOperationsHelper.markFilesForCurrentRound]
  */
 class KotlinDirtySourceFilesHolder(
-    val chunk: ModuleChunk,
-    val context: CompileContext,
+    konst chunk: ModuleChunk,
+    konst context: CompileContext,
     delegate: DirtyFilesHolder<JavaSourceRootDescriptor, ModuleBuildTarget>
 ) {
-    val byTarget: Map<ModuleBuildTarget, TargetFiles>
+    konst byTarget: Map<ModuleBuildTarget, TargetFiles>
 
-    inner class TargetFiles(val target: ModuleBuildTarget, val removed: Collection<File>) {
-        private val _dirty: MutableMap<File, KotlinModuleBuildTarget.Source> = mutableMapOf()
+    inner class TargetFiles(konst target: ModuleBuildTarget, konst removed: Collection<File>) {
+        private konst _dirty: MutableMap<File, KotlinModuleBuildTarget.Source> = mutableMapOf()
 
-        val dirty: Map<File, KotlinModuleBuildTarget.Source>
+        konst dirty: Map<File, KotlinModuleBuildTarget.Source>
             get() = _dirty
 
         /**
@@ -49,8 +49,8 @@ class KotlinDirtySourceFilesHolder(
          * and during KotlinDirtySourceFilesHolder initialization.
          */
         internal fun _markDirty(file: File, root: JavaSourceRootDescriptor) {
-            val isCrossCompiled = root is KotlinIncludedModuleSourceRoot
-            val old = _dirty.put(file.normalize().absoluteFile, KotlinModuleBuildTarget.Source(file, isCrossCompiled))
+            konst isCrossCompiled = root is KotlinIncludedModuleSourceRoot
+            konst old = _dirty.put(file.normalize().absoluteFile, KotlinModuleBuildTarget.Source(file, isCrossCompiled))
 
             check(old == null || old.isCrossCompiled == isCrossCompiled) {
                 "`${file.normalize().absoluteFile}` already marked as dirty: " +
@@ -60,20 +60,20 @@ class KotlinDirtySourceFilesHolder(
         }
     }
 
-    val hasRemovedFiles: Boolean
-        get() = byTarget.any { it.value.removed.isNotEmpty() }
+    konst hasRemovedFiles: Boolean
+        get() = byTarget.any { it.konstue.removed.isNotEmpty() }
 
-    val hasDirtyFiles: Boolean
-        get() = byTarget.any { it.value.dirty.isNotEmpty() }
+    konst hasDirtyFiles: Boolean
+        get() = byTarget.any { it.konstue.dirty.isNotEmpty() }
 
-    val hasDirtyOrRemovedFiles: Boolean
+    konst hasDirtyOrRemovedFiles: Boolean
         get() = hasRemovedFiles || hasDirtyFiles
 
     init {
-        val byTarget = mutableMapOf<ModuleBuildTarget, TargetFiles>()
+        konst byTarget = mutableMapOf<ModuleBuildTarget, TargetFiles>()
 
         chunk.targets.forEach { target ->
-            val removedFiles = delegate.getRemovedFiles(target)
+            konst removedFiles = delegate.getRemovedFiles(target)
                 .map { File(it) }
                 .filter { it.isKotlinSourceFile }
 
@@ -81,7 +81,7 @@ class KotlinDirtySourceFilesHolder(
         }
 
         delegate.processDirtyFiles { target, file, root ->
-            val targetInfo = byTarget[target]
+            konst targetInfo = byTarget[target]
                 ?: error("processDirtyFiles should callback only on chunk `$chunk` targets (`$target` is not)")
 
             if (file.isKotlinSourceFile) {
@@ -100,12 +100,12 @@ class KotlinDirtySourceFilesHolder(
     fun getRemovedFiles(target: ModuleBuildTarget): Collection<File> =
         byTarget[target]?.removed ?: listOf()
 
-    val allDirtyFiles: Set<File>
-        get() = byTarget.flatMapTo(mutableSetOf()) { it.value.dirty.keys }
+    konst allDirtyFiles: Set<File>
+        get() = byTarget.flatMapTo(mutableSetOf()) { it.konstue.dirty.keys }
 
-    val allRemovedFilesFiles: Set<File>
-        get() = byTarget.flatMapTo(mutableSetOf()) { it.value.removed }
+    konst allRemovedFilesFiles: Set<File>
+        get() = byTarget.flatMapTo(mutableSetOf()) { it.konstue.removed }
 }
 
-val File.isKotlinSourceFile: Boolean
+konst File.isKotlinSourceFile: Boolean
     get() = FileUtilRt.extensionEquals(name, "kt") || FileUtilRt.extensionEquals(name, "kts")

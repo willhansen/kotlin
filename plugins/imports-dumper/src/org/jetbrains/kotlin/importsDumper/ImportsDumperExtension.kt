@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.resolve.jvm.extensions.AnalysisHandlerExtension
 import java.io.File
 
 class ImportsDumperExtension(destinationPath: String) : AnalysisHandlerExtension {
-    private val destination: File = File(destinationPath)
+    private konst destination: File = File(destinationPath)
 
     override fun doAnalysis(
         project: Project,
@@ -31,14 +31,14 @@ class ImportsDumperExtension(destinationPath: String) : AnalysisHandlerExtension
         bindingTrace: BindingTrace,
         componentProvider: ComponentProvider
     ): AnalysisResult {
-        val filePathToImports: MutableMap<String, List<String>> = mutableMapOf()
+        konst filePathToImports: MutableMap<String, List<String>> = mutableMapOf()
 
         for (file in files) {
             filePathToImports[file.virtualFilePath] = file.importDirectives.map { it.text }
         }
 
-        val serializer = LinkedHashMapSerializer(StringSerializer, StringSerializer.list)
-        val jsonStringWithImports = Json(JsonConfiguration.Stable).toJson(serializer, filePathToImports)
+        konst serializer = LinkedHashMapSerializer(StringSerializer, StringSerializer.list)
+        konst jsonStringWithImports = Json(JsonConfiguration.Stable).toJson(serializer, filePathToImports)
 
         destination.writeText(jsonStringWithImports.toString())
 

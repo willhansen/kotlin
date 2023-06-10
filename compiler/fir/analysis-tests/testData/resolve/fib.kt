@@ -3,7 +3,7 @@ fun fibIterative(n: Int): Int {
     var current = 1
     var prev = 1
     for (i in 2..n) {
-        val temp = current
+        konst temp = current
         current += prev
         prev = temp
     }

@@ -41,35 +41,35 @@ object ProtectedSyntheticExtensionCallChecker : CallChecker {
         reportOn: PsiElement,
         context: CallCheckerContext
     ): Pair<FunctionDescriptor, DiagnosticFactory3<PsiElement, DeclarationDescriptor, DescriptorVisibility, DeclarationDescriptor>> {
-        val callPosition = context.resolutionContext.callPosition
-        val isLeftSide = callPosition is CallPosition.PropertyAssignment
+        konst callPosition = context.resolutionContext.callPosition
+        konst isLeftSide = callPosition is CallPosition.PropertyAssignment
                 && (callPosition.leftPart as? KtQualifiedExpression)?.selectorExpression == reportOn
-        val getMethod = descriptor.getMethod
-        val setMethod = descriptor.setMethod
-        val isImprovingDiagnosticsEnabled =
+        konst getMethod = descriptor.getMethod
+        konst setMethod = descriptor.setMethod
+        konst isImprovingDiagnosticsEnabled =
             context.languageVersionSettings.supportsFeature(LanguageFeature.ImproveReportingDiagnosticsOnProtectedMembersOfBaseClass)
-        val needToTakeSetter = isImprovingDiagnosticsEnabled && isLeftSide
-        val suitableDescriptor = if (needToTakeSetter && setMethod != null) setMethod else getMethod
+        konst needToTakeSetter = isImprovingDiagnosticsEnabled && isLeftSide
+        konst suitableDescriptor = if (needToTakeSetter && setMethod != null) setMethod else getMethod
 
         return suitableDescriptor to if (needToTakeSetter && setMethod != null) Errors.INVISIBLE_SETTER else Errors.INVISIBLE_MEMBER
     }
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
 
         if (descriptor !is SyntheticJavaPropertyDescriptor) return
 
-        val (sourceFunction, error) = computeSuitableDescriptorAndError(descriptor, reportOn, context)
+        konst (sourceFunction, error) = computeSuitableDescriptorAndError(descriptor, reportOn, context)
 
-        val from = context.scope.ownerDescriptor
+        konst from = context.scope.ownerDescriptor
 
         // Already reported
         if (!DescriptorVisibilityUtils.isVisibleIgnoringReceiver(descriptor, from, context.languageVersionSettings)) return
 
         if (resolvedCall.dispatchReceiver != null && resolvedCall.extensionReceiver !is ReceiverValue) return
 
-        val receiverValue = resolvedCall.extensionReceiver as ReceiverValue
-        val receiverTypes = listOf(receiverValue.type) + context.dataFlowInfo.getStableTypes(
+        konst receiverValue = resolvedCall.extensionReceiver as ReceiverValue
+        konst receiverTypes = listOf(receiverValue.type) + context.dataFlowInfo.getStableTypes(
             context.dataFlowValueFactory.createDataFlowValue(
                 receiverValue, context.trace.bindingContext, context.scope.ownerDescriptor
             ),

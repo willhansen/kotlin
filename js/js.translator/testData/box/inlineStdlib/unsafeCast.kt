@@ -6,9 +6,9 @@ package foo
 
 fun box(): String {
     // dynamic unsafeCast
-    val result = js("\"OK\"").unsafeCast<String>()
+    konst result = js("\"OK\"").unsafeCast<String>()
     // Any unsafeCast
-    val intOk = result.unsafeCast<Int>()
+    konst intOk = result.unsafeCast<Int>()
 
     return result
 }

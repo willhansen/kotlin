@@ -23,13 +23,13 @@ import java.io.File
 abstract class DefFileTask : DefaultTask() {
 
     @get:Nested
-    abstract val pod: Property<CocoapodsDependency>
+    abstract konst pod: Property<CocoapodsDependency>
 
     @get:Input
-    abstract val useLibraries: Property<Boolean>
+    abstract konst useLibraries: Property<Boolean>
 
     @get:OutputFile
-    val outputFile: File
+    konst outputFile: File
         get() = project.cocoapodsBuildDirs.defs.resolve("${pod.get().moduleName}.def")
 
     @TaskAction

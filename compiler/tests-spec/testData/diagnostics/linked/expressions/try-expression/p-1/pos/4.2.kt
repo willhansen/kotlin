@@ -27,7 +27,7 @@ class Case2 {
     class finally(e: Exception) {}
 
     fun case2() {
-        val c = finally(java.lang.Exception())
+        konst c = finally(java.lang.Exception())
     }
 }
 
@@ -45,7 +45,7 @@ class Case4 {
     class finally() {}
 
     fun case4() {
-        val c = finally()
+        konst c = finally()
     }
 }
 
@@ -55,7 +55,7 @@ class Case5() {
     interface finally
 
     fun case5(){
-        val c = object :finally{}
+        konst c = object :finally{}
     }
 }
 

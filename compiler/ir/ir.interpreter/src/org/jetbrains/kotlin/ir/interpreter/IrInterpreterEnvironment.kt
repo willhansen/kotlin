@@ -24,20 +24,20 @@ import org.jetbrains.kotlin.ir.util.properties
 import org.jetbrains.kotlin.platform.isJs
 
 class IrInterpreterEnvironment(
-    val irBuiltIns: IrBuiltIns,
-    val configuration: IrInterpreterConfiguration = IrInterpreterConfiguration(),
+    konst irBuiltIns: IrBuiltIns,
+    konst configuration: IrInterpreterConfiguration = IrInterpreterConfiguration(),
 ) {
-    internal val callStack: CallStack = CallStack()
-    internal val irExceptions = mutableListOf<IrClass>()
+    internal konst callStack: CallStack = CallStack()
+    internal konst irExceptions = mutableListOf<IrClass>()
     internal var mapOfEnums = mutableMapOf<IrSymbol, Complex>()
     internal var mapOfObjects = mutableMapOf<IrSymbol, Complex>()
     internal var javaClassToIrClass = mutableMapOf<Class<*>, IrClass>()
     private var functionCache = mutableMapOf<CacheFunctionSignature, IrFunctionSymbol>()
 
-    internal val kTypeParameterClass by lazy { irBuiltIns.kClassClass.getIrClassOfReflectionFromList("typeParameters")!! }
-    internal val kParameterClass by lazy { irBuiltIns.kFunctionClass.getIrClassOfReflectionFromList("parameters")!! }
-    internal val kTypeProjectionClass by lazy { kTypeClass.getIrClassOfReflectionFromList("arguments")!! }
-    internal val kTypeClass: IrClassSymbol by lazy {
+    internal konst kTypeParameterClass by lazy { irBuiltIns.kClassClass.getIrClassOfReflectionFromList("typeParameters")!! }
+    internal konst kParameterClass by lazy { irBuiltIns.kFunctionClass.getIrClassOfReflectionFromList("parameters")!! }
+    internal konst kTypeProjectionClass by lazy { kTypeClass.getIrClassOfReflectionFromList("arguments")!! }
+    internal konst kTypeClass: IrClassSymbol by lazy {
         // here we use fallback to `Any` because `KType` cannot be found on JS/Native by this way
         // but still this class is used to represent type arguments in interpreter
         irBuiltIns.kClassClass.getIrClassOfReflectionFromList("supertypes") ?: irBuiltIns.anyClass
@@ -48,15 +48,15 @@ class IrInterpreterEnvironment(
     }
 
     private data class CacheFunctionSignature(
-        val symbol: IrFunctionSymbol,
+        konst symbol: IrFunctionSymbol,
 
         // must create different invoke function for function expression with and without receivers
-        val hasDispatchReceiver: Boolean,
-        val hasExtensionReceiver: Boolean,
+        konst hasDispatchReceiver: Boolean,
+        konst hasExtensionReceiver: Boolean,
 
         // must create different default functions for constructor call and delegating call;
         // their symbols are the same but calls are different, so default function must return different calls
-        val fromDelegatingCall: Boolean
+        konst fromDelegatingCall: Boolean
     )
 
     private constructor(environment: IrInterpreterEnvironment) : this(environment.irBuiltIns, configuration = environment.configuration) {
@@ -101,37 +101,37 @@ class IrInterpreterEnvironment(
     /**
      * Convert object from outer world to state
      */
-    internal fun convertToState(value: Any?, irType: IrType): State {
-        return when (value) {
-            is Proxy -> value.state
-            is State -> value
+    internal fun convertToState(konstue: Any?, irType: IrType): State {
+        return when (konstue) {
+            is Proxy -> konstue.state
+            is State -> konstue
             is Boolean, is Char, is Byte, is Short, is Int, is Long, is String, is Float, is Double, is Array<*>, is ByteArray,
-            is CharArray, is ShortArray, is IntArray, is LongArray, is FloatArray, is DoubleArray, is BooleanArray -> Primitive(value, irType)
+            is CharArray, is ShortArray, is IntArray, is LongArray, is FloatArray, is DoubleArray, is BooleanArray -> Primitive(konstue, irType)
             null -> Primitive.nullStateOfType(irType)
-            else -> irType.classOrNull?.owner?.let { Wrapper(value, it, this) }
-                ?: Wrapper(value, this.javaClassToIrClass[value::class.java]!!, this)
+            else -> irType.classOrNull?.owner?.let { Wrapper(konstue, it, this) }
+                ?: Wrapper(konstue, this.javaClassToIrClass[konstue::class.java]!!, this)
         }
     }
 
     internal fun stateToIrExpression(state: State, original: IrExpression): IrExpression {
-        val start = original.startOffset
-        val end = original.endOffset
-        val type = original.type.makeNotNull()
+        konst start = original.startOffset
+        konst end = original.endOffset
+        konst type = original.type.makeNotNull()
         return when (state) {
             is Primitive<*> -> when {
-                configuration.platform.isJs() && state.value is Float -> IrConstImpl.float(start, end, type, state.value)
-                configuration.platform.isJs() && state.value is Double -> IrConstImpl.double(start, end, type, state.value)
-                state.value == null || type.isPrimitiveType() || type.isString() -> state.value.toIrConst(type, start, end)
+                configuration.platform.isJs() && state.konstue is Float -> IrConstImpl.float(start, end, type, state.konstue)
+                configuration.platform.isJs() && state.konstue is Double -> IrConstImpl.double(start, end, type, state.konstue)
+                state.konstue == null || type.isPrimitiveType() || type.isString() -> state.konstue.toIrConst(type, start, end)
                 else -> original // TODO support for arrays
             }
             is ExceptionState -> {
-                val message = if (configuration.printOnlyExceptionMessage) state.getShortDescription() else "\n" + state.getFullDescription()
+                konst message = if (configuration.printOnlyExceptionMessage) state.getShortDescription() else "\n" + state.getFullDescription()
                 IrErrorExpressionImpl(original.startOffset, original.endOffset, original.type, message)
             }
             is Complex -> {
-                val stateType = state.irClass.defaultType
+                konst stateType = state.irClass.defaultType
                 when {
-                    stateType.isUnsignedType() -> (state.fields.values.single() as Primitive<*>).value.toIrConst(type, start, end)
+                    stateType.isUnsignedType() -> (state.fields.konstues.single() as Primitive<*>).konstue.toIrConst(type, start, end)
                     else -> original
                 }
             }
@@ -140,8 +140,8 @@ class IrInterpreterEnvironment(
     }
 
     private fun IrClassSymbol.getIrClassOfReflectionFromList(name: String): IrClassSymbol? {
-        val property = this.owner.properties.singleOrNull { it.name.asString() == name }
-        val list = property?.getter?.returnType as? IrSimpleType
+        konst property = this.owner.properties.singleOrNull { it.name.asString() == name }
+        konst list = property?.getter?.returnType as? IrSimpleType
         return list?.arguments?.single()?.typeOrNull?.classOrNull
     }
 }

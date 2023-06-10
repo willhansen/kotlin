@@ -178,8 +178,8 @@ public final class org/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturi
 	public static final field RC Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
 	public static final field SNAPSHOT Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
 	public static final field STABLE Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
-	public static fun values ()[Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/tooling/core/KotlinToolingVersion$Maturity;
 }
 
 public final class org/jetbrains/kotlin/tooling/core/KotlinToolingVersionKt {

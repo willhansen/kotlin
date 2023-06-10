@@ -12,7 +12,7 @@ repositories {
 }
 
 kotlin {
-    val js = js("nodeJs")
+    konst js = js("nodeJs")
 
     targets.all {
         mavenPublication(Action<MavenPublication> {
@@ -23,7 +23,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 api(kotlin("stdlib-common"))
             }

@@ -15,7 +15,7 @@ import kotlin.test.assertTrue
 
 fun assertNodeContainsSerialVersionUID(node: KClass<*>) {
     if (!node.java.isInterface && !Modifier.isAbstract(node.java.modifiers)) {
-        val serialVersionUID = assertNotNull(
+        konst serialVersionUID = assertNotNull(
             node.java.getDeclaredFieldOrNull("serialVersionUID"),
             "Expected ${node.displayName()} to declare 'serialVersionUID' field"
         )

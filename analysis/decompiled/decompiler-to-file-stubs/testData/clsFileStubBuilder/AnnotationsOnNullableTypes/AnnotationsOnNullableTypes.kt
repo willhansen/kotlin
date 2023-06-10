@@ -11,15 +11,15 @@ public class AnnotationsOnNullableTypes {
 
     fun returnArgument(): B<@A C?> = null!!
 
-    val lambdaType: @A() (() -> C)? = null
+    konst lambdaType: @A() (() -> C)? = null
 
-    val lambdaParameter: (@A C?) -> C = null!!
+    konst lambdaParameter: (@A C?) -> C = null!!
 
-    val lambdaReturnValue: () -> @A C? = null!!
+    konst lambdaReturnValue: () -> @A C? = null!!
 
-    val lambdaReceiver: (@A C?).() -> C = null!!
+    konst lambdaReceiver: (@A C?).() -> C = null!!
 
-    val lambdaTypeWithNullableReceiver: @A C?.() -> C = null!!
+    konst lambdaTypeWithNullableReceiver: @A C?.() -> C = null!!
 
     fun @receiver:A C?.functionWithAnnotatedReceiver() {}
 }

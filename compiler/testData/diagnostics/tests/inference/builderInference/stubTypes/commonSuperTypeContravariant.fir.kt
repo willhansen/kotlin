@@ -32,7 +32,7 @@ fun <E> select3(x: E?, y: In<E?>): E = x!!
 fun <E> select4(x: E?, y: In<E>): E = x!!
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select1(get(), getIn())<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select1(get(), Test.foo(getIn()))<!>
@@ -69,7 +69,7 @@ fun test() {
         }
         ""
     }
-    val ret2 = build {
+    konst ret2 = build {
         emit(if (true) "" else null)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select2(get(), getIn())<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select2(get(), Test.foo(getIn()))<!>

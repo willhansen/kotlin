@@ -27,13 +27,13 @@ abstract class AbstractFirLoadBinariesTest : AbstractFirResolveWithSessionTestCa
         moduleDescriptor: ModuleDescriptor,
         testDataPath: String
     ) {
-        val declarationNames = DescriptorUtils.getAllDescriptors(moduleDescriptor.getPackage(packageFqName).memberScope)
+        konst declarationNames = DescriptorUtils.getAllDescriptors(moduleDescriptor.getPackage(packageFqName).memberScope)
             .mapTo(sortedSetOf()) { it.name }
 
-        val provider = session.symbolProvider
+        konst provider = session.symbolProvider
 
-        val builder = StringBuilder()
-        val firRenderer = FirRenderer(builder)
+        konst builder = StringBuilder()
+        konst firRenderer = FirRenderer(builder)
 
         for (name in declarationNames) {
             for (symbol in provider.getTopLevelCallableSymbols(packageFqName, name)) {
@@ -43,7 +43,7 @@ abstract class AbstractFirLoadBinariesTest : AbstractFirResolveWithSessionTestCa
         }
 
         for (name in declarationNames) {
-            val classLikeSymbol = provider.getClassLikeSymbolByClassId(ClassId.topLevel(packageFqName.child(name))) ?: continue
+            konst classLikeSymbol = provider.getClassLikeSymbolByClassId(ClassId.topLevel(packageFqName.child(name))) ?: continue
             firRenderer.renderElementAsString(classLikeSymbol.fir)
             builder.appendLine()
         }

@@ -35,13 +35,13 @@ interface KotlinScope {
      */
     fun declareProperty(receiver: String?, name: String): String?
 
-    val mappingBridgeGenerator: MappingBridgeGenerator
+    konst mappingBridgeGenerator: MappingBridgeGenerator
 }
 
 data class Classifier(
-        val pkg: String,
-        val topLevelName: String,
-        private val nestedNames: List<String> = emptyList()
+        konst pkg: String,
+        konst topLevelName: String,
+        private konst nestedNames: List<String> = emptyList()
 ) {
 
     companion object {
@@ -52,7 +52,7 @@ data class Classifier(
         }
     }
 
-    val isTopLevel: Boolean get() = this.nestedNames.isEmpty()
+    konst isTopLevel: Boolean get() = this.nestedNames.isEmpty()
 
     fun nested(name: String): Classifier {
         assert(!name.contains('.'))
@@ -68,7 +68,7 @@ data class Classifier(
         }
     }
 
-    val fqName: String get() = buildString {
+    konst fqName: String get() = buildString {
         if (pkg.isNotEmpty()) {
             append(pkg)
             append('.')
@@ -77,7 +77,7 @@ data class Classifier(
     }
 }
 
-val Classifier.type
+konst Classifier.type
     get() = KotlinClassifierType(this, arguments = emptyList(), nullable = false, underlyingType = null)
 
 fun Classifier.typeWith(vararg arguments: KotlinTypeArgument) =
@@ -98,7 +98,7 @@ object StarProjection : KotlinTypeArgument {
 }
 
 interface KotlinType : KotlinTypeArgument {
-    val classifier: Classifier
+    konst classifier: Classifier
     fun makeNullableAsSpecified(nullable: Boolean): KotlinType
 }
 
@@ -106,10 +106,10 @@ interface KotlinType : KotlinTypeArgument {
  * @property underlyingType is non-null if this type is an alias to another type.
  */
 data class KotlinClassifierType(
-        override val classifier: Classifier,
-        val arguments: List<KotlinTypeArgument>,
-        val nullable: Boolean,
-        val underlyingType: KotlinType?
+        override konst classifier: Classifier,
+        konst arguments: List<KotlinTypeArgument>,
+        konst nullable: Boolean,
+        konst underlyingType: KotlinType?
 ) : KotlinType {
 
     override fun makeNullableAsSpecified(nullable: Boolean) = if (this.nullable == nullable) {
@@ -134,9 +134,9 @@ data class KotlinClassifierType(
 fun KotlinType.makeNullable() = this.makeNullableAsSpecified(true)
 
 data class KotlinFunctionType(
-        val parameterTypes: List<KotlinType>,
-        val returnType: KotlinType,
-        val nullable: Boolean = false
+        konst parameterTypes: List<KotlinType>,
+        konst returnType: KotlinType,
+        konst nullable: Boolean = false
 ) : KotlinType {
 
     override fun makeNullableAsSpecified(nullable: Boolean) = if (this.nullable == nullable) {
@@ -145,7 +145,7 @@ data class KotlinFunctionType(
         this.copy(nullable = nullable)
     }
 
-    override val classifier by lazy {
+    override konst classifier by lazy {
         Classifier.topLevel("kotlin", "Function${parameterTypes.size}")
     }
 
@@ -161,75 +161,75 @@ data class KotlinFunctionType(
     }
 }
 
-internal val cnamesStructsPackageName = "cnames.structs"
-internal val objcnamesClassesPackageName = "objcnames.classes"
-internal val objcnamesProtocolsPackageName = "objcnames.protocols"
+internal konst cnamesStructsPackageName = "cnames.structs"
+internal konst objcnamesClassesPackageName = "objcnames.classes"
+internal konst objcnamesProtocolsPackageName = "objcnames.protocols"
 
 object KotlinTypes {
-    val independent = Classifier.topLevel("kotlin.native.internal", "Independent")
+    konst independent = Classifier.topLevel("kotlin.native.internal", "Independent")
 
-    val boolean by BuiltInType
-    val byte by BuiltInType
-    val short by BuiltInType
-    val int by BuiltInType
-    val long by BuiltInType
-    val uByte by BuiltInType
-    val uShort by BuiltInType
-    val uInt by BuiltInType
-    val uLong by BuiltInType
-    val float by BuiltInType
-    val double by BuiltInType
-    val unit by BuiltInType
-    val string by BuiltInType
-    val any by BuiltInType
+    konst boolean by BuiltInType
+    konst byte by BuiltInType
+    konst short by BuiltInType
+    konst int by BuiltInType
+    konst long by BuiltInType
+    konst uByte by BuiltInType
+    konst uShort by BuiltInType
+    konst uInt by BuiltInType
+    konst uLong by BuiltInType
+    konst float by BuiltInType
+    konst double by BuiltInType
+    konst unit by BuiltInType
+    konst string by BuiltInType
+    konst any by BuiltInType
 
-    val list by CollectionClassifier
-    val mutableList by CollectionClassifier
-    val set by CollectionClassifier
-    val map by CollectionClassifier
+    konst list by CollectionClassifier
+    konst mutableList by CollectionClassifier
+    konst set by CollectionClassifier
+    konst map by CollectionClassifier
 
-    val nativePtr by InteropType
-    val vector128 by KotlinNativeType
+    konst nativePtr by InteropType
+    konst vector128 by KotlinNativeType
 
-    val cOpaque by InteropType
-    val cOpaquePointer by InteropType
-    val cOpaquePointerVar by InteropType
+    konst cOpaque by InteropType
+    konst cOpaquePointer by InteropType
+    konst cOpaquePointerVar by InteropType
 
-    val booleanVarOf by InteropClassifier
+    konst booleanVarOf by InteropClassifier
 
-    val objCObject by InteropClassifier
-    val objCObjectMeta by InteropClassifier
-    val objCClass by InteropClassifier
-    val objCClassOf by InteropClassifier
-    val objCProtocol by InteropClassifier
+    konst objCObject by InteropClassifier
+    konst objCObjectMeta by InteropClassifier
+    konst objCClass by InteropClassifier
+    konst objCClassOf by InteropClassifier
+    konst objCProtocol by InteropClassifier
 
-    val cValuesRef by InteropClassifier
+    konst cValuesRef by InteropClassifier
 
-    val cPointed by InteropClassifier
-    val cPointer by InteropClassifier
-    val cPointerVar by InteropClassifier
-    val cArrayPointer by InteropClassifier
-    val cArrayPointerVar by InteropClassifier
-    val cPointerVarOf by InteropClassifier
+    konst cPointed by InteropClassifier
+    konst cPointer by InteropClassifier
+    konst cPointerVar by InteropClassifier
+    konst cArrayPointer by InteropClassifier
+    konst cArrayPointerVar by InteropClassifier
+    konst cPointerVarOf by InteropClassifier
 
-    val cFunction by InteropClassifier
+    konst cFunction by InteropClassifier
 
-    val objCObjectVar by InteropClassifier
+    konst objCObjectVar by InteropClassifier
 
-    val objCObjectBase by InteropClassifier
-    val objCObjectBaseMeta by InteropClassifier
+    konst objCObjectBase by InteropClassifier
+    konst objCObjectBaseMeta by InteropClassifier
 
-    val objCBlockVar by InteropClassifier
-    val objCNotImplementedVar by InteropClassifier
+    konst objCBlockVar by InteropClassifier
+    konst objCNotImplementedVar by InteropClassifier
 
-    val cValue by InteropClassifier
+    konst cValue by InteropClassifier
 
-    private open class ClassifierAtPackage(val pkg: String) {
+    private open class ClassifierAtPackage(konst pkg: String) {
         operator fun getValue(thisRef: KotlinTypes, property: KProperty<*>): Classifier =
                 Classifier.topLevel(pkg, property.name.replaceFirstChar(Char::uppercaseChar))
     }
 
-    private open class TypeAtPackage(val pkg: String) {
+    private open class TypeAtPackage(konst pkg: String) {
         operator fun getValue(thisRef: KotlinTypes, property: KProperty<*>): KotlinClassifierType =
                 Classifier.topLevel(pkg, property.name.replaceFirstChar(Char::uppercaseChar)).type
     }
@@ -243,13 +243,13 @@ object KotlinTypes {
 }
 
 abstract class KotlinFile(
-        val pkg: String,
+        konst pkg: String,
         namesToBeDeclared: List<String>
 ) : KotlinScope {
 
     // Note: all names are related to classifiers currently.
 
-    private val namesToBeDeclared: Set<String>
+    private konst namesToBeDeclared: Set<String>
 
     init {
         this.namesToBeDeclared = mutableSetOf()
@@ -263,8 +263,8 @@ abstract class KotlinFile(
         }
     }
 
-    private val importedNameToPkg = mutableMapOf<String, String>()
-    private val declaredProperties = mutableSetOf<String>()
+    private konst importedNameToPkg = mutableMapOf<String, String>()
+    private konst declaredProperties = mutableSetOf<String>()
 
     override fun reference(classifier: Classifier): String = if (classifier.topLevelName in namesToBeDeclared) {
         if (classifier.pkg == this.pkg) {
@@ -294,7 +294,7 @@ abstract class KotlinFile(
         return importedNameToPkg.getOrPut(classifier.topLevelName) { classifier.pkg } == classifier.pkg
     }
 
-    private val alreadyDeclared = mutableSetOf<String>()
+    private konst alreadyDeclared = mutableSetOf<String>()
 
     override fun declare(classifier: Classifier): String {
         if (classifier.pkg != this.pkg) {
@@ -307,7 +307,7 @@ abstract class KotlinFile(
             )
         }
 
-        val topLevelName = classifier.topLevelName
+        konst topLevelName = classifier.topLevelName
         if (topLevelName in alreadyDeclared) {
             throw IllegalStateException("'$topLevelName' is already declared")
         }
@@ -317,7 +317,7 @@ abstract class KotlinFile(
     }
 
     override fun declareProperty(receiver: String?, name: String): String? {
-        val fullName = receiver?.let { "$it.${name}" } ?: name
+        konst fullName = receiver?.let { "$it.${name}" } ?: name
         return if (fullName in declaredProperties || name in namesToBeDeclared || name in importedNameToPkg) {
             null
             // TODO: using original global name should be preferred to importing the clashed name.
@@ -339,7 +339,7 @@ abstract class KotlinFile(
 }
 
 internal fun getTopLevelPropertyDeclarationName(scope: KotlinScope, property: PropertyStub): String {
-    val receiverName = property.receiverType?.underlyingTypeFqName
+    konst receiverName = property.receiverType?.underlyingTypeFqName
     return getTopLevelPropertyDeclarationName(scope, receiverName, property.name)
 }
 

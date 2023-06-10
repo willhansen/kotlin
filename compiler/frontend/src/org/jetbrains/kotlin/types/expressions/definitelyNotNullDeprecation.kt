@@ -19,9 +19,9 @@ fun KtOperationExpression.reportDeprecatedDefinitelyNotNullSyntax(
     rhs: KtTypeReference?,
     context: ExpressionTypingContext
 ) {
-    val nextLeaf = nextLeaf()
+    konst nextLeaf = nextLeaf()
     if (nextLeaf is LeafPsiElement && nextLeaf.elementType === KtTokens.EXCLEXCL && rhs?.typeElement is KtUserType) {
-        val parent = PsiTreeUtil.findCommonParent(nextLeaf, this)
+        konst parent = PsiTreeUtil.findCommonParent(nextLeaf, this)
         if (parent is KtPostfixExpression && parent.operationToken === KtTokens.EXCLEXCL) {
             context.trace.report(Errors.DEPRECATED_SYNTAX_WITH_DEFINITELY_NOT_NULL.on((parent as KtPostfixExpression?)!!))
         }

@@ -2,10 +2,10 @@
 // TARGET_BACKEND: JVM_IR
 
 class A {
-    val o = "O"
+    konst o = "O"
 }
 class B {
-    val k = "K"
+    konst k = "K"
 }
 
 context(B) fun A.f(a: Any, b: Any) = o + k

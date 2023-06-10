@@ -9,4 +9,4 @@ class ResolveMe(
 open class A
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)

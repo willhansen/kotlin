@@ -10,7 +10,7 @@ object IdeaKpmContainerProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmContainerProtoKt {
       @JvmName("getSchemaVersionMajor")
       get() = _builder.getSchemaVersionMajor()
       @JvmName("setSchemaVersionMajor")
-      set(value) {
-        _builder.setSchemaVersionMajor(value)
+      set(konstue) {
+        _builder.setSchemaVersionMajor(konstue)
       }
     /**
      * <code>optional uint32 schema_version_major = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmContainerProtoKt {
       @JvmName("getSchemaVersionMinor")
       get() = _builder.getSchemaVersionMinor()
       @JvmName("setSchemaVersionMinor")
-      set(value) {
-        _builder.setSchemaVersionMinor(value)
+      set(konstue) {
+        _builder.setSchemaVersionMinor(konstue)
       }
     /**
      * <code>optional uint32 schema_version_minor = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmContainerProtoKt {
       @JvmName("getSchemaVersionPatch")
       get() = _builder.getSchemaVersionPatch()
       @JvmName("setSchemaVersionPatch")
-      set(value) {
-        _builder.setSchemaVersionPatch(value)
+      set(konstue) {
+        _builder.setSchemaVersionPatch(konstue)
       }
     /**
      * <code>optional uint32 schema_version_patch = 3;</code>
@@ -103,58 +103,58 @@ object IdeaKpmContainerProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
      */
-     val schemaInfos: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>
+     konst schemaInfos: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getSchemaInfosList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
-     * @param value The schemaInfos to add.
+     * @param konstue The schemaInfos to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addSchemaInfos")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
-      _builder.addSchemaInfos(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
+      _builder.addSchemaInfos(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
-     * @param value The schemaInfos to add.
+     * @param konstue The schemaInfos to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignSchemaInfos")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
-     * @param values The schemaInfos to add.
+     * @param konstues The schemaInfos to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllSchemaInfos")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto>) {
-      _builder.addAllSchemaInfos(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto>) {
+      _builder.addAllSchemaInfos(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
-     * @param values The schemaInfos to add.
+     * @param konstues The schemaInfos to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllSchemaInfos")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
-     * @param index The index to set the value at.
-     * @param value The schemaInfos to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The schemaInfos to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setSchemaInfos")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
-      _builder.setSchemaInfos(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto, SchemaInfosProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto) {
+      _builder.setSchemaInfos(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmSchemaInfoProto schema_infos = 4;</code>
@@ -173,8 +173,8 @@ object IdeaKpmContainerProtoKt {
       @JvmName("getProject")
       get() = _builder.getProject()
       @JvmName("setProject")
-      set(value) {
-        _builder.setProject(value)
+      set(konstue) {
+        _builder.setProject(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto project = 24;</code>
@@ -189,7 +189,7 @@ object IdeaKpmContainerProtoKt {
     fun hasProject(): kotlin.Boolean {
       return _builder.hasProject()
     }
-    val IdeaKpmContainerProtoKt.Dsl.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto?
+    konst IdeaKpmContainerProtoKt.Dsl.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto?
       get() = _builder.projectOrNull
   }
 }
@@ -197,6 +197,6 @@ object IdeaKpmContainerProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProtoOrBuilder.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmContainerProtoOrBuilder.projectOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmProjectProto?
   get() = if (hasProject()) getProject() else null
 

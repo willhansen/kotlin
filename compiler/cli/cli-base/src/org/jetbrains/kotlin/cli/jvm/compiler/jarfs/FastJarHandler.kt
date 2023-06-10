@@ -13,22 +13,22 @@ import java.io.RandomAccessFile
 import java.nio.channels.FileChannel
 import kotlin.collections.HashMap
 
-class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
-    private val myRoot: VirtualFile?
-    internal val file = File(path)
+class FastJarHandler(konst fileSystem: FastJarFileSystem, path: String) {
+    private konst myRoot: VirtualFile?
+    internal konst file = File(path)
 
-    private val cachedManifest: ByteArray?
+    private konst cachedManifest: ByteArray?
 
     init {
-        val entries: List<ZipEntryDescription>
+        konst entries: List<ZipEntryDescription>
         RandomAccessFile(file, "r").use { randomAccessFile ->
-            val mappedByteBuffer = randomAccessFile.channel.map(FileChannel.MapMode.READ_ONLY, 0, randomAccessFile.length())
+            konst mappedByteBuffer = randomAccessFile.channel.map(FileChannel.MapMode.READ_ONLY, 0, randomAccessFile.length())
             try {
                 entries = try {
                     mappedByteBuffer.parseCentralDirectory()
                 } catch (e: Exception) {
                     // copying the behavior of ArchiveHandler (and therefore ZipHandler)
-                    // TODO: consider propagating to compiler error or warning, but take into account that both javac and K1 simply ignore invalid jars in such cases
+                    // TODO: consider propagating to compiler error or warning, but take into account that both javac and K1 simply ignore inkonstid jars in such cases
                     Logger.getInstance(this::class.java).warn("Error while reading zip file: ${file.path}: $e", e)
                     emptyList()
                 }
@@ -46,7 +46,7 @@ class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
 
         // ByteArrayCharSequence should not be used instead of String
         // because the former class does not support equals/hashCode properly
-        val filesByRelativePath = HashMap<String, FastJarVirtualFile>(entries.size)
+        konst filesByRelativePath = HashMap<String, FastJarVirtualFile>(entries.size)
         filesByRelativePath[""] = myRoot
 
         for (entryDescription in entries) {
@@ -57,15 +57,15 @@ class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
             }
         }
 
-        for (node in filesByRelativePath.values) {
+        for (node in filesByRelativePath.konstues) {
             node.initChildrenArrayFromList()
         }
     }
 
     private fun createFile(entry: ZipEntryDescription, directories: MutableMap<String, FastJarVirtualFile>): FastJarVirtualFile {
-        val (parentName, shortName) = entry.relativePath.splitPath()
+        konst (parentName, shortName) = entry.relativePath.splitPath()
 
-        val parentFile = getOrCreateDirectory(parentName, directories)
+        konst parentFile = getOrCreateDirectory(parentName, directories)
         if ("." == shortName) {
             return parentFile
         }
@@ -80,8 +80,8 @@ class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
 
     private fun getOrCreateDirectory(entryName: CharSequence, directories: MutableMap<String, FastJarVirtualFile>): FastJarVirtualFile {
         return directories.getOrPut(entryName.toString()) {
-            val (parentPath, shortName) = entryName.splitPath()
-            val parentFile = getOrCreateDirectory(parentPath, directories)
+            konst (parentPath, shortName) = entryName.splitPath()
+            konst parentFile = getOrCreateDirectory(parentPath, directories)
 
             FastJarVirtualFile(this, shortName, -1, parentFile, entryDescription = null)
         }
@@ -103,7 +103,7 @@ class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
     }
 
     fun contentsToByteArray(zipEntryDescription: ZipEntryDescription): ByteArray {
-        val relativePath = zipEntryDescription.relativePath
+        konst relativePath = zipEntryDescription.relativePath
         if (StringUtil.equals(relativePath, MANIFEST_PATH)) return cachedManifest ?: throw FileNotFoundException("$file!/$relativePath")
         return fileSystem.cachedOpenFileHandles[file].use {
             synchronized(it) {
@@ -113,4 +113,4 @@ class FastJarHandler(val fileSystem: FastJarFileSystem, path: String) {
     }
 }
 
-private const val MANIFEST_PATH = "META-INF/MANIFEST.MF"
+private const konst MANIFEST_PATH = "META-INF/MANIFEST.MF"

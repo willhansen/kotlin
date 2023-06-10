@@ -1,4 +1,4 @@
-class C(val i: Int) {
+class C(konst i: Int) {
 }
 
 operator fun C.component1() = i + 1
@@ -13,7 +13,7 @@ fun doTest(l : Array<C>): String {
 }
 
 fun box(): String {
-  val l = Array<C>(3, {x -> C(x)})
-  val s = doTest(l)
+  konst l = Array<C>(3, {x -> C(x)})
+  konst s = doTest(l)
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

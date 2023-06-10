@@ -18,7 +18,7 @@ import kotlin.test.fail
 class KT41506WithJavaSourceSet {
     @Test
     fun `test that arbitrary compilation can be created with java enabled in Multiplatform project`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm {
                     compilations.create("integrationTest")
@@ -26,9 +26,9 @@ class KT41506WithJavaSourceSet {
                 }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
-        val jvmTarget = project.multiplatformExtension.targets.getByName("jvm") as KotlinJvmTarget
+        konst jvmTarget = project.multiplatformExtension.targets.getByName("jvm") as KotlinJvmTarget
         if ("integrationTest" !in jvmTarget.compilations.names) {
             fail("Expected jvm compilation 'integrationTest' is not found")
         }

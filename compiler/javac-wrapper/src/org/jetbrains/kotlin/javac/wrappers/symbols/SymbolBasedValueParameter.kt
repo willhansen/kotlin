@@ -26,27 +26,27 @@ import javax.lang.model.element.VariableElement
 
 class SymbolBasedValueParameter(
         element: VariableElement,
-        private val elementName : String,
-        override val isVararg : Boolean,
+        private konst elementName : String,
+        override konst isVararg : Boolean,
         javac: JavacWrapper
 ) : SymbolBasedElement<VariableElement>(element, javac), JavaValueParameter {
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = element.annotationMirrors.map { SymbolBasedAnnotation(it, javac) }
 
     override fun findAnnotation(fqName: FqName) =
             element.findAnnotation(fqName, javac)
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() =  javac.isDeprecated(element)
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(elementName)
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val type: JavaType
+    override konst type: JavaType
         get() = SymbolBasedType.create(element.asType(), javac)
 
 }

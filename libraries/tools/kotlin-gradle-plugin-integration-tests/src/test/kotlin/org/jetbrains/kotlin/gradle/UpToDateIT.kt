@@ -69,7 +69,7 @@ class UpToDateIT : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -89,8 +89,8 @@ class UpToDateIT : KGPBaseTest() {
         }
     }
 
-    private val emptyMutation = object : ProjectMutation {
-        override val name = "emptyMutation"
+    private konst emptyMutation = object : ProjectMutation {
+        override konst name = "emptyMutation"
 
         override fun initProject(project: TestProject) = Unit
         override fun mutateProject(project: TestProject) = Unit
@@ -100,17 +100,17 @@ class UpToDateIT : KGPBaseTest() {
         }
     }
 
-    private val compilerClasspathMutation = object : ProjectMutation {
-        override val name = "compilerClasspathMutation"
+    private konst compilerClasspathMutation = object : ProjectMutation {
+        override konst name = "compilerClasspathMutation"
 
-        private val compilerClasspathRegex = "compiler_cp=\\[(.*)]".toRegex()
+        private konst compilerClasspathRegex = "compiler_cp=\\[(.*)]".toRegex()
         lateinit var originalCompilerCp: List<String>
-        val originalPaths get() = originalCompilerCp.map { it.replace("\\", "/") }.joinToString(", ") { "'$it'" }
+        konst originalPaths get() = originalCompilerCp.map { it.replace("\\", "/") }.joinToString(", ") { "'$it'" }
 
         override fun initProject(project: TestProject) = with(project) {
-            val pluginSuffix = "kotlin_gradle_plugin_common"
+            konst pluginSuffix = "kotlin_gradle_plugin_common"
             buildGradle.appendText(
-                "\nafterEvaluate { println 'compiler_cp=' + compileKotlin.getDefaultCompilerClasspath\$$pluginSuffix().toList() }"
+                "\nafterEkonstuate { println 'compiler_cp=' + compileKotlin.getDefaultCompilerClasspath\$$pluginSuffix().toList() }"
             )
             build("clean") {
                 originalCompilerCp = compilerClasspathRegex.find(output)!!.groupValues[1].split(", ")
@@ -122,7 +122,7 @@ class UpToDateIT : KGPBaseTest() {
                 // Add Kapt to the project to test its input checks as well:
                 apply plugin: 'kotlin-kapt'
                 compileKotlin.getDefaultCompilerClasspath${'$'}$pluginSuffix().setFrom(files($originalPaths).toList())
-                afterEvaluate {
+                afterEkonstuate {
                     kaptGenerateStubsKotlin.getDefaultCompilerClasspath${'$'}$pluginSuffix().setFrom(files($originalPaths).toList())
                 }
                 """.trimIndent()
@@ -131,9 +131,9 @@ class UpToDateIT : KGPBaseTest() {
 
         override fun mutateProject(project: TestProject) = with(project) {
             buildGradle.modify {
-                val modifiedClasspath = originalCompilerCp.map {
-                    val file = File(it)
-                    val newFile = projectPath.resolve(file.nameWithoutExtension + "-1.jar").toFile()
+                konst modifiedClasspath = originalCompilerCp.map {
+                    konst file = File(it)
+                    konst newFile = projectPath.resolve(file.nameWithoutExtension + "-1.jar").toFile()
                     file.copyTo(newFile)
                     newFile.absolutePath
                 }.reversed()
@@ -152,8 +152,8 @@ class UpToDateIT : KGPBaseTest() {
         }
     }
 
-    private val subpluginOptionMutation = object : ProjectMutation {
-        override val name: String get() = "subpluginOptionMutation"
+    private konst subpluginOptionMutation = object : ProjectMutation {
+        override konst name: String get() = "subpluginOptionMutation"
 
         override fun initProject(project: TestProject) = with(project) {
             buildGradle.appendText(
@@ -174,8 +174,8 @@ class UpToDateIT : KGPBaseTest() {
         }
     }
 
-    private val subpluginOptionMutationWithKapt = object : ProjectMutation {
-        override val name: String get() = "subpluginOptionMutationWithKapt"
+    private konst subpluginOptionMutationWithKapt = object : ProjectMutation {
+        override konst name: String get() = "subpluginOptionMutationWithKapt"
 
         override fun initProject(project: TestProject) = with(project) {
             buildGradle.appendText(
@@ -197,15 +197,15 @@ class UpToDateIT : KGPBaseTest() {
         }
     }
 
-    private val externalOutputMutation = object : ProjectMutation {
-        override val name = "externalOutputMutation"
+    private konst externalOutputMutation = object : ProjectMutation {
+        override konst name = "externalOutputMutation"
 
         override fun initProject(project: TestProject) = Unit
 
         lateinit var helloWorldKtClass: Path
 
         override fun mutateProject(project: TestProject) = with(project) {
-            val kotlinOutputPath = kotlinClassesDir()
+            konst kotlinOutputPath = kotlinClassesDir()
 
             helloWorldKtClass = kotlinOutputPath.resolve("demo/KotlinGreetingJoiner.class")
             assertTrue(helloWorldKtClass.exists())
@@ -222,32 +222,32 @@ class UpToDateIT : KGPBaseTest() {
         fun initProject(project: TestProject)
         fun mutateProject(project: TestProject)
         fun checkAfterRebuild(buildResult: BuildResult)
-        val name: String
+        konst name: String
     }
 
     private fun propertyMutationChain(
         path: String,
-        vararg values: String
-    ): Set<OptionMutation> = values
+        vararg konstues: String
+    ): Set<OptionMutation> = konstues
         .drop(1)
-        .mapIndexed { index, value ->
-            val actualIndex = index + 1
+        .mapIndexed { index, konstue ->
+            konst actualIndex = index + 1
             OptionMutation(
                 path,
-                values[actualIndex - 1],
-                value,
+                konstues[actualIndex - 1],
+                konstue,
                 index == 0
             )
         }
         .toSet()
 
     private inner class OptionMutation(
-        private val path: String,
-        private val oldValue: String,
-        private val newValue: String,
-        private val shouldInit: Boolean = true
+        private konst path: String,
+        private konst oldValue: String,
+        private konst newValue: String,
+        private konst shouldInit: Boolean = true
     ) : ProjectMutation {
-        override val name = "OptionMutation(path='$path', oldValue='$oldValue', newValue='$newValue')"
+        override konst name = "OptionMutation(path='$path', oldValue='$oldValue', newValue='$newValue')"
 
         override fun initProject(project: TestProject) = with(project) {
             if (shouldInit) {

@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.config.CommonConfigurationKeys
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.config.languageVersionSettings
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.descriptors.impl.ModuleDescriptorImpl
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporterFactory
@@ -74,23 +74,23 @@ class Fir2IrJsResultsConverter(
         module: TestModule,
         inputArtifact: FirOutputArtifact
     ): IrBackendInput {
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
 
         lateinit var mainIrPart: IrModuleFragment
-        val dependentIrParts = mutableListOf<IrModuleFragment>()
-        val sourceFiles = mutableListOf<KtSourceFile>()
-        val firFilesAndComponentsBySourceFile = mutableMapOf<KtSourceFile, Pair<FirFile, Fir2IrComponents>>()
+        konst dependentIrParts = mutableListOf<IrModuleFragment>()
+        konst sourceFiles = mutableListOf<KtSourceFile>()
+        konst firFilesAndComponentsBySourceFile = mutableMapOf<KtSourceFile, Pair<FirFile, Fir2IrComponents>>()
         lateinit var mainPluginContext: IrPluginContext
         var irBuiltIns: IrBuiltInsOverFir? = null
 
-        val commonMemberStorage = Fir2IrCommonMemberStorage(IdSignatureDescriptor(JsManglerDesc), FirJsKotlinMangler())
+        konst commonMemberStorage = Fir2IrCommonMemberStorage(IdSignatureDescriptor(JsManglerDesc), FirJsKotlinMangler())
 
-        val irMangler = JsManglerIr
+        konst irMangler = JsManglerIr
 
         for ((index, part) in inputArtifact.partsForDependsOnModules.withIndex()) {
-            val (irModuleFragment, components, pluginContext) =
+            konst (irModuleFragment, components, pluginContext) =
                 part.firAnalyzerFacade.convertToJsIr(
-                    part.firFiles.values,
+                    part.firFiles.konstues,
                     fir2IrExtensions = Fir2IrExtensions.Default,
                     module,
                     configuration,
@@ -109,14 +109,14 @@ class Fir2IrJsResultsConverter(
                 mainIrPart = irModuleFragment
             }
 
-            sourceFiles.addAll(part.firFiles.mapNotNull { it.value.sourceFile })
+            sourceFiles.addAll(part.firFiles.mapNotNull { it.konstue.sourceFile })
 
-            for (firFile in part.firFiles.values) {
+            for (firFile in part.firFiles.konstues) {
                 firFilesAndComponentsBySourceFile[firFile.sourceFile!!] = firFile to components
             }
         }
 
-        val metadataVersion = configuration.metadataVersion(module.languageVersionSettings.languageVersion)
+        konst metadataVersion = configuration.metadataVersion(module.languageVersionSettings.languageVersion)
 
         var actualizedExpectDeclarations: Set<FirDeclaration>? = null
 
@@ -133,7 +133,7 @@ class Fir2IrJsResultsConverter(
             irMangler = irMangler,
             firMangler = commonMemberStorage.firSignatureComposer.mangler,
         ) { file, irActualizedResult ->
-            val (firFile, components) = firFilesAndComponentsBySourceFile[file]
+            konst (firFile, components) = firFilesAndComponentsBySourceFile[file]
                 ?: error("cannot find FIR file by source file ${file.name} (${file.path})")
             if (actualizedExpectDeclarations == null && irActualizedResult != null) {
                 actualizedExpectDeclarations = irActualizedResult.extractFirDeclarations()
@@ -167,14 +167,14 @@ fun AbstractFirAnalyzerFacade.convertToJsIr(
 ): Fir2IrResult {
     this as FirAnalyzerFacade
     // TODO: consider avoiding repeated libraries resolution
-    val libraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
-    val (dependencies, builtIns) = loadResolvedLibraries(libraries, configuration.languageVersionSettings, testServices)
+    konst libraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
+    konst (dependencies, builtIns) = loadResolvedLibraries(libraries, configuration.languageVersionSettings, testServices)
 
-    val fir2IrConfiguration = Fir2IrConfiguration(
+    konst fir2IrConfiguration = Fir2IrConfiguration(
         languageVersionSettings = configuration.languageVersionSettings,
         linkViaSignatures = generateSignatures,
-        evaluatedConstTracker = configuration
-            .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EvaluatedConstTracker.create()),
+        ekonstuatedConstTracker = configuration
+            .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EkonstuatedConstTracker.create()),
     )
     return Fir2IrConverter.createModuleFragmentWithSignaturesIfNeeded(
         session, scopeSession, firFiles.toList(),
@@ -198,15 +198,15 @@ private fun loadResolvedLibraries(
     testServices: TestServices
 ): Pair<List<ModuleDescriptor>, KotlinBuiltIns?> {
     var builtInsModule: KotlinBuiltIns? = null
-    val dependencies = mutableListOf<ModuleDescriptorImpl>()
+    konst dependencies = mutableListOf<ModuleDescriptorImpl>()
 
     return resolvedLibraries.map { resolvedLibrary ->
         // resolvedLibrary.library.libraryName in fact resolves to (modified) file path, which is confising and maybe should be refactored
         testServices.jsLibraryProvider.getOrCreateStdlibByPath(resolvedLibrary.library.libraryName) {
             // TODO: check safety of the approach of creating a separate storage manager per library
-            val storageManager = LockBasedStorageManager("ModulesStructure")
+            konst storageManager = LockBasedStorageManager("ModulesStructure")
 
-            val moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
+            konst moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
                 resolvedLibrary.library,
                 languageVersionSettings,
                 storageManager,
@@ -219,7 +219,7 @@ private fun loadResolvedLibraries(
 
             Pair(moduleDescriptor, resolvedLibrary.library)
         }.also {
-            val isBuiltIns = resolvedLibrary.library.unresolvedDependencies.isEmpty()
+            konst isBuiltIns = resolvedLibrary.library.unresolvedDependencies.isEmpty()
             if (isBuiltIns) builtInsModule = it.builtIns
         }
     } to builtInsModule

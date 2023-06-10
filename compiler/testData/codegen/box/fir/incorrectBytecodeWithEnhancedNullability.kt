@@ -20,15 +20,15 @@ public class Utils {
 // FILE: main.kt
 
 class KtModifierListOwner
-class A(val index: Int) {
+class A(konst index: Int) {
     companion object {
-        val PUBLIC = A(1)
-        val PRIVATE = A(2)
+        konst PUBLIC = A(1)
+        konst PRIVATE = A(2)
     }
 }
 
 fun test(visibility: A): String {
-    val parentVisibility = Utils.resolveVisibilityFromModifiers(visibility)
+    konst parentVisibility = Utils.resolveVisibilityFromModifiers(visibility)
     if (Utils.compare(parentVisibility, visibility) ?: 0 < 0) {
         return "OK"
     }

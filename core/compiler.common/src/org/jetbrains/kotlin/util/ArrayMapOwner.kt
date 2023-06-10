@@ -15,11 +15,11 @@ import kotlin.reflect.KProperty
 annotation class Protected
 
 abstract class AbstractArrayMapOwner<K : Any, V : Any> : Iterable<V> {
-    protected abstract val arrayMap: ArrayMap<V>
-    protected abstract val typeRegistry: TypeRegistry<K, V>
+    protected abstract konst arrayMap: ArrayMap<V>
+    protected abstract konst typeRegistry: TypeRegistry<K, V>
 
     abstract class AbstractArrayMapAccessor<K : Any, V : Any, T : V>(
-        protected val id: Int
+        protected konst id: Int
     ) {
         protected fun extractValue(thisRef: AbstractArrayMapOwner<K, V>): T? {
             @Suppress("UNCHECKED_CAST")
@@ -27,10 +27,10 @@ abstract class AbstractArrayMapOwner<K : Any, V : Any> : Iterable<V> {
         }
     }
 
-    protected abstract fun registerComponent(keyQualifiedName: String, value: V)
+    protected abstract fun registerComponent(keyQualifiedName: String, konstue: V)
 
-    protected fun registerComponent(tClass: KClass<out K>, value: V) {
-        registerComponent(tClass.qualifiedName!!, value)
+    protected fun registerComponent(tClass: KClass<out K>, konstue: V) {
+        registerComponent(tClass.qualifiedName!!, konstue)
     }
 
     final override fun iterator(): Iterator<V> = arrayMap.iterator()
@@ -43,9 +43,9 @@ abstract class AbstractArrayMapOwner<K : Any, V : Any> : Iterable<V> {
 }
 
 class ArrayMapAccessor<K : Any, V : Any, T : V>(
-    private val keyQualifiedName: String,
+    private konst keyQualifiedName: String,
     id: Int,
-    val default: T? = null
+    konst default: T? = null
 ) : AbstractArrayMapOwner.AbstractArrayMapAccessor<K, V, T>(id), ReadOnlyProperty<AbstractArrayMapOwner<K, V>, V> {
     override fun getValue(thisRef: AbstractArrayMapOwner<K, V>, property: KProperty<*>): T {
         return extractValue(thisRef)
@@ -63,8 +63,8 @@ class NullableArrayMapAccessor<K : Any, V : Any, T : V>(
 }
 
 abstract class TypeRegistry<K : Any, V : Any> {
-    private val idPerType = ConcurrentHashMap<String, Int>()
-    private val idCounter = AtomicInteger(0)
+    private konst idPerType = ConcurrentHashMap<String, Int>()
+    private konst idCounter = AtomicInteger(0)
 
     fun <T : V, KK : K> generateAccessor(kClass: KClass<KK>, default: T? = null): ArrayMapAccessor<K, V, T> {
         return ArrayMapAccessor(kClass.qualifiedName!!, getId(kClass), default)
@@ -106,6 +106,6 @@ abstract class TypeRegistry<K : Any, V : Any> {
         return idPerType
     }
 
-    protected val indices: Collection<Int>
-        get() = idPerType.values
+    protected konst indices: Collection<Int>
+        get() = idPerType.konstues
 }

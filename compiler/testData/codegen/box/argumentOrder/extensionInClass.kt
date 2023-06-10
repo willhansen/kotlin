@@ -10,8 +10,8 @@ class Z {
 
     fun test(): String {
         var invokeOrder = "";
-        val expectedResult = "1_0_1_L"
-        val expectedInvokeOrder = "1_0_L"
+        konst expectedResult = "1_0_1_L"
+        konst expectedInvokeOrder = "1_0_L"
         var l = 1L
         var i = 0
 

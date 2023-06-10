@@ -10,10 +10,10 @@ import org.jetbrains.dokka.plugability.configuration
 import org.jetbrains.dokka.transformers.documentation.DocumentableTransformer
 import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 
-class VersionFilterTransformer(private val dokkaContext: DokkaContext) :
+class VersionFilterTransformer(private konst dokkaContext: DokkaContext) :
     DocumentableTransformer {
 
-    private val targetVersion =
+    private konst targetVersion =
         configuration<VersionFilterPlugin, VersionFilterConfiguration>(dokkaContext)?.targetVersion?.let {
             SinceKotlinVersion(
                 it
@@ -111,7 +111,7 @@ class VersionFilterTransformer(private val dokkaContext: DokkaContext) :
         this.takeUnless { classlikes.isEmpty() && functions.isEmpty() && properties.isEmpty() }
 
     private fun Documentable.filterSourceSets(): Set<DokkaConfiguration.DokkaSourceSet> = this.sourceSets.filter {
-        val currentVersion = getVersionFromCustomTag(it)
+        konst currentVersion = getVersionFromCustomTag(it)
         targetVersion == null || currentVersion == null || currentVersion <= targetVersion
     }.toSet()
 

@@ -1,9 +1,9 @@
 // !DIAGNOSTICS: +UNUSED_EXPRESSION
 
-val flag = true
+konst flag = true
 
 // type of lambda was checked by txt
-val a = b@ { // () -> Unit
+konst a = b@ { // () -> Unit
     if (flag) return@b
     else 54
 }

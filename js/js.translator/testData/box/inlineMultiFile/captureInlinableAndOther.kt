@@ -10,10 +10,10 @@ package foo
 import test.*
 
 fun box(): String {
-    val result = doWork({11})
+    konst result = doWork({11})
     if (result != 11) return "test1: ${result}"
 
-    val result2 = doWork({12; result+1})
+    konst result2 = doWork({12; result+1})
     if (result2 != 12) return "test2: ${result2}"
 
     return "OK"
@@ -25,7 +25,7 @@ package test
 
 
 inline fun <R> doWork(crossinline job: ()-> R) : R {
-    val k = 10;
+    konst k = 10;
     return notInline({k; job()})
 }
 

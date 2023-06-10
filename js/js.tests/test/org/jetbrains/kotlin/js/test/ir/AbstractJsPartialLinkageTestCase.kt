@@ -60,17 +60,17 @@ abstract class AbstractJsPartialLinkageNoICES6TestCase : AbstractJsPartialLinkag
 abstract class AbstractJsPartialLinkageWithICTestCase : AbstractJsPartialLinkageTestCase(CompilerType.K1_WITH_IC)
 abstract class AbstractFirJsPartialLinkageNoICTestCase : AbstractJsPartialLinkageTestCase(CompilerType.K2_NO_IC)
 
-abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) {
-    enum class CompilerType(val testModeName: String, val es6Mode: Boolean) {
+abstract class AbstractJsPartialLinkageTestCase(konst compilerType: CompilerType) {
+    enum class CompilerType(konst testModeName: String, konst es6Mode: Boolean) {
         K1_NO_IC("JS_NO_IC", false),
         K1_NO_IC_WITH_ES6("JS_NO_IC", true),
         K1_WITH_IC("JS_WITH_IC", false),
         K2_NO_IC("JS_NO_IC", false)
     }
 
-    private val zipAccessor = ZipFileSystemCacheableAccessor(2)
-    private val buildDir = createTempDirectory().toFile().also { it.mkdirs() }
-    private val environment =
+    private konst zipAccessor = ZipFileSystemCacheableAccessor(2)
+    private konst buildDir = createTempDirectory().toFile().also { it.mkdirs() }
+    private konst environment =
         KotlinCoreEnvironment.createForParallelTests(TestDisposable(), CompilerConfiguration(), EnvironmentConfigFiles.JS_CONFIG_FILES)
 
 
@@ -81,7 +81,7 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
     }
 
     private fun createConfig(moduleName: String): CompilerConfiguration {
-        val config = environment.configuration.copy()
+        konst config = environment.configuration.copy()
         config.put(CommonConfigurationKeys.MODULE_NAME, moduleName)
         config.put(JSConfigurationKeys.MODULE_KIND, ModuleKind.PLAIN)
         config.put(JSConfigurationKeys.PROPERTY_LAZY_INITIALIZATION, true)
@@ -93,10 +93,10 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
     }
 
     private inner class JsTestConfiguration(testPath: String) : PartialLinkageTestUtils.TestConfiguration {
-        override val testDir: File = File(testPath).absoluteFile
-        override val buildDir: File get() = this@AbstractJsPartialLinkageTestCase.buildDir
-        override val stdlibFile: File get() = File("libraries/stdlib/js-ir/build/classes/kotlin/js/main").absoluteFile
-        override val testModeName get() = this@AbstractJsPartialLinkageTestCase.compilerType.testModeName
+        override konst testDir: File = File(testPath).absoluteFile
+        override konst buildDir: File get() = this@AbstractJsPartialLinkageTestCase.buildDir
+        override konst stdlibFile: File get() = File("libraries/stdlib/js-ir/build/classes/kotlin/js/main").absoluteFile
+        override konst testModeName get() = this@AbstractJsPartialLinkageTestCase.compilerType.testModeName
 
         override fun buildKlib(
             moduleName: String,
@@ -134,13 +134,13 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
     }
 
     private fun buildKlibWithK1(moduleName: String, moduleSourceDir: File, dependencies: Dependencies, klibFile: File) {
-        val config = createConfig(moduleName)
-        val ktFiles = environment.createPsiFiles(moduleSourceDir)
+        konst config = createConfig(moduleName)
+        konst ktFiles = environment.createPsiFiles(moduleSourceDir)
 
-        val regularDependencies = dependencies.regularDependencies.map { it.libraryFile.absolutePath }
-        val friendDependencies = dependencies.friendDependencies.map { it.libraryFile.absolutePath }
+        konst regularDependencies = dependencies.regularDependencies.map { it.libraryFile.absolutePath }
+        konst friendDependencies = dependencies.friendDependencies.map { it.libraryFile.absolutePath }
 
-        val moduleStructure = prepareAnalyzedSourceModule(
+        konst moduleStructure = prepareAnalyzedSourceModule(
             environment.project,
             ktFiles,
             config,
@@ -149,10 +149,10 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             AnalyzerWithCompilerReport(config)
         )
 
-        val moduleSourceFiles = (moduleStructure.mainModule as MainModule.SourceFiles).files
-        val icData = moduleStructure.compilerConfiguration.incrementalDataProvider?.getSerializedData(moduleSourceFiles) ?: emptyList()
-        val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
-        val (moduleFragment, _) = generateIrForKlibSerialization(
+        konst moduleSourceFiles = (moduleStructure.mainModule as MainModule.SourceFiles).files
+        konst icData = moduleStructure.compilerConfiguration.incrementalDataProvider?.getSerializedData(moduleSourceFiles) ?: emptyList()
+        konst expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+        konst (moduleFragment, _) = generateIrForKlibSerialization(
             environment.project,
             moduleSourceFiles,
             config,
@@ -166,7 +166,7 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             moduleStructure.getModuleDescriptor(it)
         }
 
-        val metadataSerializer =
+        konst metadataSerializer =
             KlibMetadataIncrementalSerializer(config, moduleStructure.project, moduleStructure.jsFrontEndResult.hasErrors)
 
         generateKLib(
@@ -183,15 +183,15 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
     }
 
     private fun buildKlibWithK2(moduleName: String, moduleSourceDir: File, dependencies: Dependencies, klibFile: File) {
-        val config = createConfig(moduleName)
-        val ktFiles = environment.createPsiFiles(moduleSourceDir)
+        konst config = createConfig(moduleName)
+        konst ktFiles = environment.createPsiFiles(moduleSourceDir)
 
-        val regularDependencies = dependencies.regularDependencies.map { it.libraryFile.absolutePath }
-        val friendDependencies = dependencies.friendDependencies.map { it.libraryFile.absolutePath }
+        konst regularDependencies = dependencies.regularDependencies.map { it.libraryFile.absolutePath }
+        konst friendDependencies = dependencies.friendDependencies.map { it.libraryFile.absolutePath }
 
-        val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+        konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
 
-        val moduleStructure = ModulesStructure(
+        konst moduleStructure = ModulesStructure(
             project = environment.project,
             mainModule = MainModule.SourceFiles(ktFiles),
             compilerConfiguration = config,
@@ -199,10 +199,10 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             friendDependenciesPaths = friendDependencies
         )
 
-        val outputStream = ByteArrayOutputStream()
-        val messageCollector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
+        konst outputStream = ByteArrayOutputStream()
+        konst messageCollector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
 
-        val analyzedOutput = compileModuleToAnalyzedFirWithPsi(
+        konst analyzedOutput = compileModuleToAnalyzedFirWithPsi(
             moduleStructure = moduleStructure,
             ktFiles = ktFiles,
             libraries = regularDependencies,
@@ -212,10 +212,10 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             lookupTracker = null
         )
 
-        val fir2IrActualizedResult = transformFirToIr(moduleStructure, analyzedOutput.output, diagnosticsReporter)
+        konst fir2IrActualizedResult = transformFirToIr(moduleStructure, analyzedOutput.output, diagnosticsReporter)
 
         if (analyzedOutput.reportCompilationErrors(moduleStructure, diagnosticsReporter, messageCollector)) {
-            val messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
+            konst messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
             throw AssertionError("The following errors occurred compiling test:\n$messages")
         }
 
@@ -230,46 +230,46 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
         )
 
         if (messageCollector.hasErrors()) {
-            val messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
+            konst messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
             throw AssertionError("The following errors occurred serializing test klib:\n$messages")
         }
     }
 
     private fun buildBinaryAndRun(mainModuleKlibFile: File, allDependencies: Dependencies) {
-        val configuration = createConfig(MAIN_MODULE_NAME)
+        konst configuration = createConfig(MAIN_MODULE_NAME)
         configuration.setupPartialLinkageConfig(PartialLinkageConfig(PartialLinkageMode.ENABLE, PartialLinkageLogLevel.WARNING))
 
-        val compilationOutputs = when (compilerType) {
+        konst compilationOutputs = when (compilerType) {
             CompilerType.K1_NO_IC, CompilerType.K1_NO_IC_WITH_ES6, CompilerType.K2_NO_IC ->
                 buildBinaryNoIC(configuration, mainModuleKlibFile, allDependencies, compilerType.es6Mode)
             CompilerType.K1_WITH_IC -> buildBinaryWithIC(configuration, mainModuleKlibFile, allDependencies)
         }
 
-        val binariesDir = File(buildDir, BIN_DIR_NAME).also { it.mkdirs() }
+        konst binariesDir = File(buildDir, BIN_DIR_NAME).also { it.mkdirs() }
 
-        // key = module name, value = list of produced JS files
-        val producedBinaries: Map<String, List<File>> = compilationOutputs
+        // key = module name, konstue = list of produced JS files
+        konst producedBinaries: Map<String, List<File>> = compilationOutputs
             .writeAll(binariesDir, MAIN_MODULE_NAME, false, MAIN_MODULE_NAME, ModuleKind.PLAIN)
             .filter { file -> file.extension == "js" }
             .groupByTo(linkedMapOf()) { file -> file.nameWithoutExtension.toInnerName() }
 
-        // key = module name, value = list of JS files out of test data
-        val providedBinaries: Map<String, List<File>> =
+        // key = module name, konstue = list of JS files out of test data
+        konst providedBinaries: Map<String, List<File>> =
             (allDependencies.regularDependencies.asSequence().map { it.libraryFile } + mainModuleKlibFile)
                 .mapNotNull { klibFile ->
-                    val moduleName = if (klibFile.extension == "klib") klibFile.nameWithoutExtension else return@mapNotNull null
-                    val outputDir = klibFile.parentFile
+                    konst moduleName = if (klibFile.extension == "klib") klibFile.nameWithoutExtension else return@mapNotNull null
+                    konst outputDir = klibFile.parentFile
 
-                    val providedJsFiles = outputDir.listFiles()?.filter { it.isFile && it.extension == "js" }.orEmpty()
+                    konst providedJsFiles = outputDir.listFiles()?.filter { it.isFile && it.extension == "js" }.orEmpty()
                     if (providedJsFiles.isEmpty()) return@mapNotNull null
 
                     moduleName to providedJsFiles
                 }.toMap()
 
-        val unexpectedModuleNames = providedBinaries.keys - producedBinaries.keys
+        konst unexpectedModuleNames = providedBinaries.keys - producedBinaries.keys
         check(unexpectedModuleNames.isEmpty()) { "Unexpected module names: $unexpectedModuleNames" }
 
-        val allBinaries: List<File> = buildList {
+        konst allBinaries: List<File> = buildList {
             producedBinaries.forEach { (moduleName, producedJsFiles) ->
                 this += providedBinaries[moduleName].orEmpty()
                 this += producedJsFiles
@@ -285,8 +285,8 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
         allDependencies: Dependencies,
         es6mode: Boolean
     ): CompilationOutputs {
-        val klib = MainModule.Klib(mainModuleKlibFile.path)
-        val moduleStructure = ModulesStructure(
+        konst klib = MainModule.Klib(mainModuleKlibFile.path)
+        konst moduleStructure = ModulesStructure(
             environment.project,
             klib,
             configuration,
@@ -294,7 +294,7 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             allDependencies.friendDependencies.map { it.libraryFile.path }
         )
 
-        val ir = compile(
+        konst ir = compile(
             moduleStructure,
             PhaseConfig(jsPhases),
             IrFactoryImplForJsIC(WholeWorldStageController()),
@@ -303,12 +303,12 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
             es6mode = es6mode
         )
 
-        val transformer = IrModuleToJsTransformer(
+        konst transformer = IrModuleToJsTransformer(
             backendContext = ir.context,
             mainArguments = emptyList()
         )
 
-        val compiledResult = transformer.generateModule(
+        konst compiledResult = transformer.generateModule(
             modules = ir.allModules,
             modes = setOf(TranslationMode.PER_MODULE_DEV),
             relativeRequirePath = false
@@ -323,7 +323,7 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
         allDependencies: Dependencies
     ): CompilationOutputs {
         // TODO: what about friend dependencies?
-        val cacheUpdater = CacheUpdater(
+        konst cacheUpdater = CacheUpdater(
             mainModule = mainModuleKlibFile.absolutePath,
             allModules = allDependencies.regularDependencies.map { it.libraryFile.path },
             mainModuleFriends = emptyList(),
@@ -335,10 +335,10 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
                 JsIrCompilerWithIC(mainModule, cfg, JsGenerationGranularity.PER_MODULE, PhaseConfig(jsPhases), setOf(BOX_FUN_FQN))
             }
         )
-        val icCaches = cacheUpdater.actualizeCaches()
+        konst icCaches = cacheUpdater.actualizeCaches()
 
-        val mainModuleName = icCaches.last().moduleExternalName
-        val jsExecutableProducer = JsExecutableProducer(
+        konst mainModuleName = icCaches.last().moduleExternalName
+        konst jsExecutableProducer = JsExecutableProducer(
             mainModuleName = mainModuleName,
             moduleKind = configuration[JSConfigurationKeys.MODULE_KIND]!!,
             sourceMapsInfo = SourceMapsInfo.from(configuration),
@@ -349,17 +349,17 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
         return jsExecutableProducer.buildExecutable(multiModule = true, outJsProgram = true).compilationOut
     }
 
-    private val IrModuleFragment.exportName get() = "kotlin_${name.asStringStripSpecialMarkers()}"
+    private konst IrModuleFragment.exportName get() = "kotlin_${name.asStringStripSpecialMarkers()}"
     private fun String.toInnerName() = if (startsWith("kotlin_")) substringAfter("kotlin_") else this
 
     private fun KotlinCoreEnvironment.createPsiFiles(sourceDir: File): List<KtFile> {
-        val psiManager = PsiManager.getInstance(project)
-        val fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
+        konst psiManager = PsiManager.getInstance(project)
+        konst fileSystem = VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL) as CoreLocalFileSystem
 
         return sourceDir.walkTopDown().filter { file ->
             file.isFile && file.extension == "kt"
         }.flatMap { file ->
-            val virtualFile = fileSystem.findFileByIoFile(file) ?: error("VirtualFile for $file not found")
+            konst virtualFile = fileSystem.findFileByIoFile(file) ?: error("VirtualFile for $file not found")
             SingleRootFileViewProvider(psiManager, virtualFile).allFiles
         }.filterIsInstance<KtFile>().toList()
     }
@@ -367,14 +367,14 @@ abstract class AbstractJsPartialLinkageTestCase(val compilerType: CompilerType) 
     private fun File.binJsFile(name: String): File = File(this, "$name.js")
 
     private fun executeAndCheckBinaries(mainModuleName: String, dependencies: Collection<File>) {
-        val checker = V8IrJsTestChecker
+        konst checker = V8IrJsTestChecker
 
-        val filePaths = dependencies.map { it.canonicalPath }
+        konst filePaths = dependencies.map { it.canonicalPath }
         checker.check(filePaths, mainModuleName, null, BOX_FUN_FQN.asString(), "OK", withModuleSystem = false)
     }
 
     companion object {
-        private const val BIN_DIR_NAME = "_bins_js"
-        private val BOX_FUN_FQN = FqName("box")
+        private const konst BIN_DIR_NAME = "_bins_js"
+        private konst BOX_FUN_FQN = FqName("box")
     }
 }

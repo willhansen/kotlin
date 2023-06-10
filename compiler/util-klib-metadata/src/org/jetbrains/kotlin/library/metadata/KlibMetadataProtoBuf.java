@@ -65,7 +65,7 @@ public final class KlibMetadataProtoBuf {
      * <code>optional int32 flags = 2;</code>
      *
      * <pre>
-     *Possible values are listed in KlibMetadataHeaderFlags class.
+     *Possible konstues are listed in KlibMetadataHeaderFlags class.
      * </pre>
      */
     boolean hasFlags();
@@ -73,7 +73,7 @@ public final class KlibMetadataProtoBuf {
      * <code>optional int32 flags = 2;</code>
      *
      * <pre>
-     *Possible values are listed in KlibMetadataHeaderFlags class.
+     *Possible konstues are listed in KlibMetadataHeaderFlags class.
      * </pre>
      */
     int getFlags();
@@ -201,7 +201,7 @@ public final class KlibMetadataProtoBuf {
     private Header(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -297,10 +297,10 @@ public final class KlibMetadataProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
@@ -330,7 +330,7 @@ public final class KlibMetadataProtoBuf {
       public Header parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Header(input, extensionRegistry);
       }
     };
@@ -389,7 +389,7 @@ public final class KlibMetadataProtoBuf {
      * <code>optional int32 flags = 2;</code>
      *
      * <pre>
-     *Possible values are listed in KlibMetadataHeaderFlags class.
+     *Possible konstues are listed in KlibMetadataHeaderFlags class.
      * </pre>
      */
     public boolean hasFlags() {
@@ -399,7 +399,7 @@ public final class KlibMetadataProtoBuf {
      * <code>optional int32 flags = 2;</code>
      *
      * <pre>
-     *Possible values are listed in KlibMetadataHeaderFlags class.
+     *Possible konstues are listed in KlibMetadataHeaderFlags class.
      * </pre>
      */
     public int getFlags() {
@@ -718,23 +718,23 @@ public final class KlibMetadataProtoBuf {
 
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parseFrom(java.io.InputStream input)
@@ -971,7 +971,7 @@ public final class KlibMetadataProtoBuf {
         org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.Header) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -1027,12 +1027,12 @@ public final class KlibMetadataProtoBuf {
        * <code>required string module_name = 1;</code>
        */
       public Builder setModuleName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        moduleName_ = value;
+        moduleName_ = konstue;
         
         return this;
       }
@@ -1049,12 +1049,12 @@ public final class KlibMetadataProtoBuf {
        * <code>required string module_name = 1;</code>
        */
       public Builder setModuleNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        moduleName_ = value;
+        moduleName_ = konstue;
         
         return this;
       }
@@ -1064,7 +1064,7 @@ public final class KlibMetadataProtoBuf {
        * <code>optional int32 flags = 2;</code>
        *
        * <pre>
-       *Possible values are listed in KlibMetadataHeaderFlags class.
+       *Possible konstues are listed in KlibMetadataHeaderFlags class.
        * </pre>
        */
       public boolean hasFlags() {
@@ -1074,7 +1074,7 @@ public final class KlibMetadataProtoBuf {
        * <code>optional int32 flags = 2;</code>
        *
        * <pre>
-       *Possible values are listed in KlibMetadataHeaderFlags class.
+       *Possible konstues are listed in KlibMetadataHeaderFlags class.
        * </pre>
        */
       public int getFlags() {
@@ -1084,12 +1084,12 @@ public final class KlibMetadataProtoBuf {
        * <code>optional int32 flags = 2;</code>
        *
        * <pre>
-       *Possible values are listed in KlibMetadataHeaderFlags class.
+       *Possible konstues are listed in KlibMetadataHeaderFlags class.
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000002;
-        flags_ = value;
+        flags_ = konstue;
         
         return this;
       }
@@ -1097,7 +1097,7 @@ public final class KlibMetadataProtoBuf {
        * <code>optional int32 flags = 2;</code>
        *
        * <pre>
-       *Possible values are listed in KlibMetadataHeaderFlags class.
+       *Possible konstues are listed in KlibMetadataHeaderFlags class.
        * </pre>
        */
       public Builder clearFlags() {
@@ -1123,11 +1123,11 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable strings = 4;</code>
        */
-      public Builder setStrings(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable value) {
-        if (value == null) {
+      public Builder setStrings(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        strings_ = value;
+        strings_ = konstue;
 
         bitField0_ |= 0x00000004;
         return this;
@@ -1145,13 +1145,13 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable strings = 4;</code>
        */
-      public Builder mergeStrings(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable value) {
+      public Builder mergeStrings(org.jetbrains.kotlin.metadata.ProtoBuf.StringTable konstue) {
         if (((bitField0_ & 0x00000004) == 0x00000004) &&
             strings_ != org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.getDefaultInstance()) {
           strings_ =
-            org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.newBuilder(strings_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.metadata.ProtoBuf.StringTable.newBuilder(strings_).mergeFrom(konstue).buildPartial();
         } else {
-          strings_ = value;
+          strings_ = konstue;
         }
 
         bitField0_ |= 0x00000004;
@@ -1183,11 +1183,11 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_names = 5;</code>
        */
-      public Builder setQualifiedNames(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable value) {
-        if (value == null) {
+      public Builder setQualifiedNames(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
-        qualifiedNames_ = value;
+        qualifiedNames_ = konstue;
 
         bitField0_ |= 0x00000008;
         return this;
@@ -1205,13 +1205,13 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_names = 5;</code>
        */
-      public Builder mergeQualifiedNames(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable value) {
+      public Builder mergeQualifiedNames(org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable konstue) {
         if (((bitField0_ & 0x00000008) == 0x00000008) &&
             qualifiedNames_ != org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.getDefaultInstance()) {
           qualifiedNames_ =
-            org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.newBuilder(qualifiedNames_).mergeFrom(value).buildPartial();
+            org.jetbrains.kotlin.metadata.ProtoBuf.QualifiedNameTable.newBuilder(qualifiedNames_).mergeFrom(konstue).buildPartial();
         } else {
-          qualifiedNames_ = value;
+          qualifiedNames_ = konstue;
         }
 
         bitField0_ |= 0x00000008;
@@ -1274,12 +1274,12 @@ public final class KlibMetadataProtoBuf {
        * </pre>
        */
       public Builder setAnnotation(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.set(index, value);
+        annotation_.set(index, konstue);
 
         return this;
       }
@@ -1304,12 +1304,12 @@ public final class KlibMetadataProtoBuf {
        * Annotations on the whole module
        * </pre>
        */
-      public Builder addAnnotation(org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+      public Builder addAnnotation(org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.add(value);
+        annotation_.add(konstue);
 
         return this;
       }
@@ -1321,12 +1321,12 @@ public final class KlibMetadataProtoBuf {
        * </pre>
        */
       public Builder addAnnotation(
-          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.ProtoBuf.Annotation konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureAnnotationIsMutable();
-        annotation_.add(index, value);
+        annotation_.add(index, konstue);
 
         return this;
       }
@@ -1366,10 +1366,10 @@ public final class KlibMetadataProtoBuf {
        * </pre>
        */
       public Builder addAllAnnotation(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Annotation> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.ProtoBuf.Annotation> konstues) {
         ensureAnnotationIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, annotation_);
+            konstues, annotation_);
 
         return this;
       }
@@ -1437,12 +1437,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string package_fragment_name = 7;</code>
        */
       public Builder setPackageFragmentName(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensurePackageFragmentNameIsMutable();
-        packageFragmentName_.set(index, value);
+        packageFragmentName_.set(index, konstue);
         
         return this;
       }
@@ -1450,12 +1450,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string package_fragment_name = 7;</code>
        */
       public Builder addPackageFragmentName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensurePackageFragmentNameIsMutable();
-        packageFragmentName_.add(value);
+        packageFragmentName_.add(konstue);
         
         return this;
       }
@@ -1463,10 +1463,10 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string package_fragment_name = 7;</code>
        */
       public Builder addAllPackageFragmentName(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensurePackageFragmentNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, packageFragmentName_);
+            konstues, packageFragmentName_);
         
         return this;
       }
@@ -1483,12 +1483,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string package_fragment_name = 7;</code>
        */
       public Builder addPackageFragmentNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensurePackageFragmentNameIsMutable();
-        packageFragmentName_.add(value);
+        packageFragmentName_.add(konstue);
         
         return this;
       }
@@ -1530,12 +1530,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string empty_package = 8;</code>
        */
       public Builder setEmptyPackage(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEmptyPackageIsMutable();
-        emptyPackage_.set(index, value);
+        emptyPackage_.set(index, konstue);
         
         return this;
       }
@@ -1543,12 +1543,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string empty_package = 8;</code>
        */
       public Builder addEmptyPackage(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEmptyPackageIsMutable();
-        emptyPackage_.add(value);
+        emptyPackage_.add(konstue);
         
         return this;
       }
@@ -1556,10 +1556,10 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string empty_package = 8;</code>
        */
       public Builder addAllEmptyPackage(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureEmptyPackageIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, emptyPackage_);
+            konstues, emptyPackage_);
         
         return this;
       }
@@ -1576,12 +1576,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated string empty_package = 8;</code>
        */
       public Builder addEmptyPackageBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureEmptyPackageIsMutable();
-        emptyPackage_.add(value);
+        emptyPackage_.add(konstue);
         
         return this;
       }
@@ -1617,12 +1617,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.library.metadata.File file = 9;</code>
        */
       public Builder setFile(
-          int index, org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureFileIsMutable();
-        file_.set(index, value);
+        file_.set(index, konstue);
 
         return this;
       }
@@ -1639,12 +1639,12 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.library.metadata.File file = 9;</code>
        */
-      public Builder addFile(org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File value) {
-        if (value == null) {
+      public Builder addFile(org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureFileIsMutable();
-        file_.add(value);
+        file_.add(konstue);
 
         return this;
       }
@@ -1652,12 +1652,12 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.library.metadata.File file = 9;</code>
        */
       public Builder addFile(
-          int index, org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File value) {
-        if (value == null) {
+          int index, org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         ensureFileIsMutable();
-        file_.add(index, value);
+        file_.add(index, konstue);
 
         return this;
       }
@@ -1685,10 +1685,10 @@ public final class KlibMetadataProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.library.metadata.File file = 9;</code>
        */
       public Builder addAllFile(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File> konstues) {
         ensureFileIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, file_);
+            konstues, file_);
 
         return this;
       }
@@ -1767,7 +1767,7 @@ public final class KlibMetadataProtoBuf {
     private File(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -1798,10 +1798,10 @@ public final class KlibMetadataProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -1819,7 +1819,7 @@ public final class KlibMetadataProtoBuf {
       public File parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new File(input, extensionRegistry);
       }
     };
@@ -1922,23 +1922,23 @@ public final class KlibMetadataProtoBuf {
 
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parseFrom(java.io.InputStream input)
@@ -2062,7 +2062,7 @@ public final class KlibMetadataProtoBuf {
         org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.File) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -2118,12 +2118,12 @@ public final class KlibMetadataProtoBuf {
        * <code>required string name = 1;</code>
        */
       public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        name_ = value;
+        name_ = konstue;
         
         return this;
       }
@@ -2140,12 +2140,12 @@ public final class KlibMetadataProtoBuf {
        * <code>required string name = 1;</code>
        */
       public Builder setNameBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000001;
-        name_ = value;
+        name_ = konstue;
         
         return this;
       }
@@ -2201,7 +2201,7 @@ public final class KlibMetadataProtoBuf {
     private DescriptorUniqId(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -2231,10 +2231,10 @@ public final class KlibMetadataProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         try {
@@ -2252,7 +2252,7 @@ public final class KlibMetadataProtoBuf {
       public DescriptorUniqId parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new DescriptorUniqId(input, extensionRegistry);
       }
     };
@@ -2328,23 +2328,23 @@ public final class KlibMetadataProtoBuf {
 
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parseFrom(java.io.InputStream input)
@@ -2466,7 +2466,7 @@ public final class KlibMetadataProtoBuf {
         org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.library.metadata.KlibMetadataProtoBuf.DescriptorUniqId) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -2494,9 +2494,9 @@ public final class KlibMetadataProtoBuf {
       /**
        * <code>required int64 index = 1;</code>
        */
-      public Builder setIndex(long value) {
+      public Builder setIndex(long konstue) {
         bitField0_ |= 0x00000001;
-        index_ = value;
+        index_ = konstue;
         
         return this;
       }

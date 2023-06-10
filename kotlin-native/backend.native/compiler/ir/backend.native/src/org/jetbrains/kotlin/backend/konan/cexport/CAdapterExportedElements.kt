@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.backend.konan.cexport
 
 internal data class CAdapterExportedElements(
-        val typeTranslator: CAdapterTypeTranslator,
-        val scopes: MutableList<ExportedElementScope>,
+        konst typeTranslator: CAdapterTypeTranslator,
+        konst scopes: MutableList<ExportedElementScope>,
 )

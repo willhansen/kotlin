@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.gradle.utils.markResolvable
 import org.jetbrains.kotlin.gradle.plugin.usageByName
 import org.jetbrains.kotlin.gradle.utils.named
 
-private const val KOTLIN_KLIB_COMMONIZER_EMBEDDABLE = "kotlin-klib-commonizer-embeddable"
+private const konst KOTLIN_KLIB_COMMONIZER_EMBEDDABLE = "kotlin-klib-commonizer-embeddable"
 
 internal fun GradleCliCommonizer(commonizerToolRunner: KotlinNativeCommonizerToolRunner): CliCommonizer {
     return CliCommonizer(CliCommonizer.Executor { arguments ->

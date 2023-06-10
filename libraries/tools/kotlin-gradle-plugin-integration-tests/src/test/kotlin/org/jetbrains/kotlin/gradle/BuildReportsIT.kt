@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 @DisplayName("Build reports")
 @JvmGradlePluginTests
 class BuildReportsIT : KGPBaseTest() {
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(
             buildReport = listOf(BuildReportType.FILE)
         )
 
-    private val GradleProject.reportFile: Path
+    private konst GradleProject.reportFile: Path
         get() = projectPath.getSingleFileInDir("build/reports/kotlin-build")
 
     @DisplayName("Build report is created")
@@ -47,7 +47,7 @@ class BuildReportsIT : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Build report output property accepts only certain values")
+    @DisplayName("Build report output property accepts only certain konstues")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -56,13 +56,13 @@ class BuildReportsIT : KGPBaseTest() {
     @GradleTest
     fun testBuildReportOutputProperty(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            buildAndFail("assemble", "-Pkotlin.build.report.output=file,invalid") {
+            buildAndFail("assemble", "-Pkotlin.build.report.output=file,inkonstid") {
                 assertOutputContains("Unknown output type:")
             }
         }
     }
 
-    @DisplayName("Build metrics produces valid report")
+    @DisplayName("Build metrics produces konstid report")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -73,7 +73,7 @@ class BuildReportsIT : KGPBaseTest() {
         testBuildReportInFile("simpleProject", "assemble", gradleVersion)
     }
 
-    @DisplayName("Build metrics produces valid report for mpp-jvm")
+    @DisplayName("Build metrics produces konstid report for mpp-jvm")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -84,7 +84,7 @@ class BuildReportsIT : KGPBaseTest() {
         testBuildReportInFile("mppJvmWithJava", "assemble", gradleVersion)
     }
 
-    @DisplayName("Build metrics produces valid report for mpp-js")
+    @DisplayName("Build metrics produces konstid report for mpp-js")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -95,7 +95,7 @@ class BuildReportsIT : KGPBaseTest() {
         testBuildReportInFile("kotlin-js-package-module-name", "assemble", gradleVersion)
     }
 
-    @DisplayName("Build metrics produces valid report for JS project")
+    @DisplayName("Build metrics produces konstid report for JS project")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -114,7 +114,7 @@ class BuildReportsIT : KGPBaseTest() {
                 assertBuildReportPathIsPrinted()
             }
             //Should contains build metrics for all compile kotlin tasks
-            validateBuildReportFile(KotlinVersion.DEFAULT.version)
+            konstidateBuildReportFile(KotlinVersion.DEFAULT.version)
         }
 
         project(project, gradleVersion, buildOptions = defaultBuildOptions.copy(languageVersion = languageVersion)) {
@@ -122,11 +122,11 @@ class BuildReportsIT : KGPBaseTest() {
                 assertBuildReportPathIsPrinted()
             }
             //Should contains build metrics for all compile kotlin tasks
-            validateBuildReportFile(languageVersion)
+            konstidateBuildReportFile(languageVersion)
         }
     }
 
-    private fun TestProject.validateBuildReportFile(kotlinLanguageVersion: String) {
+    private fun TestProject.konstidateBuildReportFile(kotlinLanguageVersion: String) {
         assertFileContains(
             reportFile,
             "Time metrics:",
@@ -188,7 +188,7 @@ class BuildReportsIT : KGPBaseTest() {
         }
     }
 
-    @DisplayName("validation")
+    @DisplayName("konstidation")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -214,8 +214,8 @@ class BuildReportsIT : KGPBaseTest() {
     @GradleTest
     fun testDeprecatedAndNewSingleBuildMetricsFile(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val newMetricsPath = projectPath.resolve("metrics.bin")
-            val deprecatedMetricsPath = projectPath.resolve("deprecated_metrics.bin")
+            konst newMetricsPath = projectPath.resolve("metrics.bin")
+            konst deprecatedMetricsPath = projectPath.resolve("deprecated_metrics.bin")
             build(
                 "compileKotlin", "-Pkotlin.build.report.single_file=${newMetricsPath.pathString}",
                 "-Pkotlin.internal.single.build.metrics.file=${deprecatedMetricsPath.pathString}"
@@ -234,7 +234,7 @@ class BuildReportsIT : KGPBaseTest() {
     @GradleTest
     fun testSingleBuildMetricsFileSmoke(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
-            val metricsFile = projectPath.resolve("metrics.bin").toFile()
+            konst metricsFile = projectPath.resolve("metrics.bin").toFile()
             build(
                 "compileKotlin",
                 "-Pkotlin.build.report.output=SINGLE_FILE",
@@ -249,7 +249,7 @@ class BuildReportsIT : KGPBaseTest() {
         }
     }
 
-    @DisplayName("custom value limit")
+    @DisplayName("custom konstue limit")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],
@@ -261,10 +261,10 @@ class BuildReportsIT : KGPBaseTest() {
             build(
                 "compileKotlin",
                 "-Pkotlin.build.report.output=BUILD_SCAN",
-                "-Pkotlin.build.report.build_scan.custom_values_limit=0",
+                "-Pkotlin.build.report.build_scan.custom_konstues_limit=0",
                 "--scan"
             ) {
-                assertOutputContains("Can't add any more custom values into build scan")
+                assertOutputContains("Can't add any more custom konstues into build scan")
             }
         }
     }
@@ -281,14 +281,14 @@ class BuildReportsIT : KGPBaseTest() {
             build(
                 "compileKotlin",
                 "-Pkotlin.build.report.output=BUILD_SCAN",
-                "-Pkotlin.build.report.build_scan.custom_values_limit=0",
+                "-Pkotlin.build.report.build_scan.custom_konstues_limit=0",
             ) {
-                assertOutputDoesNotContain("Can't add any more custom values into build scan")
+                assertOutputDoesNotContain("Can't add any more custom konstues into build scan")
             }
         }
     }
 
-    private val kotlinErrorPath = ".gradle/kotlin/errors"
+    private konst kotlinErrorPath = ".gradle/kotlin/errors"
 
     @DisplayName("Error file is created")
     @GradleTestVersions(
@@ -300,12 +300,12 @@ class BuildReportsIT : KGPBaseTest() {
     fun testErrorsFileSmokeTest(gradleVersion: GradleVersion) {
         project("simpleProject", gradleVersion) {
 
-            val lookupsTab = projectPath.resolve("build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab")
+            konst lookupsTab = projectPath.resolve("build/kotlin/compileKotlin/cacheable/caches-jvm/lookups/lookups.tab")
             buildGradle.appendText(
                 """
                     tasks.named("compileKotlin") {
                         doLast {
-                            new File("${lookupsTab.toUri().path}").write("Invalid contents")
+                            new File("${lookupsTab.toUri().path}").write("Inkonstid contents")
                         }
                     }
                 """.trimIndent()
@@ -313,18 +313,18 @@ class BuildReportsIT : KGPBaseTest() {
             build("compileKotlin") {
                 assertTrue { projectPath.resolve(kotlinErrorPath).listDirectoryEntries().isEmpty() }
             }
-            val kotlinFile = kotlinSourcesDir().resolve("helloWorld.kt")
+            konst kotlinFile = kotlinSourcesDir().resolve("helloWorld.kt")
             kotlinFile.modify { it.replace("ArrayList", "skjfghsjk") }
             buildAndFail("compileKotlin") {
-                val buildErrorDir = projectPath.resolve(kotlinErrorPath).toFile()
-                val files = buildErrorDir.listFiles()
+                konst buildErrorDir = projectPath.resolve(kotlinErrorPath).toFile()
+                konst files = buildErrorDir.listFiles()
                 assertTrue { files?.first()?.exists() ?: false }
                 files?.first()?.bufferedReader().use { reader ->
-                    val kotlinVersion = reader?.readLine()
+                    konst kotlinVersion = reader?.readLine()
                     assertTrue("kotlin version should be in the error file") {
                         kotlinVersion != null && kotlinVersion.trim().equals("kotlin version: ${buildOptions.kotlinVersion}")
                     }
-                    val errorMessage = reader?.readLine()
+                    konst errorMessage = reader?.readLine()
                     assertTrue("Error message should start with 'error message: ' to parse it on IDEA side") {
                         errorMessage != null && errorMessage.trim().startsWith("error message:")
                     }
@@ -346,7 +346,7 @@ class BuildReportsIT : KGPBaseTest() {
             build("compileKotlin") {
                 assertTrue { projectPath.resolve(kotlinErrorPath).listDirectoryEntries().isEmpty() }
             }
-            val kotlinFile = kotlinSourcesDir().resolve("helloWorld.kt")
+            konst kotlinFile = kotlinSourcesDir().resolve("helloWorld.kt")
             kotlinFile.modify { it.replace("ArrayList", "skjfghsjk") }
             buildAndFail("compileKotlin") {
                 assertTrue { projectPath.resolve(kotlinErrorPath).listDirectoryEntries().isEmpty() }
@@ -354,7 +354,7 @@ class BuildReportsIT : KGPBaseTest() {
         }
     }
 
-    @DisplayName("build scan metrics validation")
+    @DisplayName("build scan metrics konstidation")
     @GradleTestVersions(
         minVersion = TestVersions.Gradle.MIN_SUPPORTED,
         additionalVersions = [TestVersions.Gradle.G_7_6, TestVersions.Gradle.G_8_0],

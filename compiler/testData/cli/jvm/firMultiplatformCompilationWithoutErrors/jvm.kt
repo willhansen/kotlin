@@ -4,6 +4,6 @@ actual interface A {
 }
 
 fun test(): String {
-    val a = getA()
+    konst a = getA()
     return a.foo() + a.bar()
 }

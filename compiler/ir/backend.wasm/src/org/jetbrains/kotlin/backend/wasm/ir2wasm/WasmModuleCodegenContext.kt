@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 import org.jetbrains.kotlin.wasm.ir.*
 
 class WasmModuleCodegenContext(
-    val backendContext: WasmBackendContext,
-    private val wasmFragment: WasmCompiledModuleFragment
+    konst backendContext: WasmBackendContext,
+    private konst wasmFragment: WasmCompiledModuleFragment
 ) {
-    private val typeTransformer =
+    private konst typeTransformer =
         WasmTypeTransformer(this, backendContext.irBuiltIns)
 
-    val scratchMemAddr: WasmSymbol<Int>
+    konst scratchMemAddr: WasmSymbol<Int>
         get() = wasmFragment.scratchMemAddr
 
-    val stringPoolSize: WasmSymbol<Int>
+    konst stringPoolSize: WasmSymbol<Int>
         get() = wasmFragment.stringPoolSize
 
     fun transformType(irType: IrType): WasmType {
@@ -59,8 +59,8 @@ class WasmModuleCodegenContext(
     }
 
     fun referenceStringLiteralAddressAndId(string: String): Pair<WasmSymbol<Int>, WasmSymbol<Int>> {
-        val address = wasmFragment.stringLiteralAddress.reference(string)
-        val id = wasmFragment.stringLiteralPoolId.reference(string)
+        konst address = wasmFragment.stringLiteralAddress.reference(string)
+        konst id = wasmFragment.stringLiteralPoolId.reference(string)
         return address to id
     }
 
@@ -107,11 +107,11 @@ class WasmModuleCodegenContext(
         wasmFragment.functionTypes.define(irFunction, wasmFunctionType)
     }
 
-    private val classMetadataCache = mutableMapOf<IrClassSymbol, ClassMetadata>()
+    private konst classMetadataCache = mutableMapOf<IrClassSymbol, ClassMetadata>()
     fun getClassMetadata(irClass: IrClassSymbol): ClassMetadata =
         classMetadataCache.getOrPut(irClass) {
-            val superClass = irClass.owner.getSuperClass(backendContext.irBuiltIns)
-            val superClassMetadata = superClass?.let { getClassMetadata(it.symbol) }
+            konst superClass = irClass.owner.getSuperClass(backendContext.irBuiltIns)
+            konst superClassMetadata = superClass?.let { getClassMetadata(it.symbol) }
             ClassMetadata(
                 irClass.owner,
                 superClassMetadata,
@@ -119,7 +119,7 @@ class WasmModuleCodegenContext(
             )
         }
 
-    private val interfaceMetadataCache = mutableMapOf<IrClassSymbol, InterfaceMetadata>()
+    private konst interfaceMetadataCache = mutableMapOf<IrClassSymbol, InterfaceMetadata>()
     fun getInterfaceMetadata(irClass: IrClassSymbol): InterfaceMetadata =
         interfaceMetadataCache.getOrPut(irClass) { InterfaceMetadata(irClass.owner, backendContext.irBuiltIns) }
 
@@ -139,7 +139,7 @@ class WasmModuleCodegenContext(
         irClass: IrClassSymbol,
         from: WasmCompiledModuleFragment.ReferencableAndDefinable<IrClassSymbol, WasmTypeDeclaration>
     ): WasmSymbol<WasmTypeDeclaration> {
-        val type = irClass.defaultType
+        konst type = irClass.defaultType
         require(!type.isNothing()) {
             "Can't reference Nothing type"
         }
@@ -163,7 +163,7 @@ class WasmModuleCodegenContext(
         wasmFragment.classITableGcType.defined.keys.contains(irClass)
 
     fun referenceClassITableInterfaceSlot(irClass: IrClassSymbol): WasmSymbol<Int> {
-        val type = irClass.defaultType
+        konst type = irClass.defaultType
         require(!type.isNothing()) {
             "Can't reference Nothing type"
         }
@@ -181,9 +181,9 @@ class WasmModuleCodegenContext(
         wasmFragment.typeIds.reference(irClass)
 
     fun getStructFieldRef(field: IrField): WasmSymbol<Int> {
-        val klass = field.parentAsClass
-        val metadata = getClassMetadata(klass.symbol)
-        val fieldId = metadata.fields.indexOf(field) + 2 //Implicit vtable and vtable field
+        konst klass = field.parentAsClass
+        konst metadata = getClassMetadata(klass.symbol)
+        konst fieldId = metadata.fields.indexOf(field) + 2 //Implicit vtable and vtable field
         return WasmSymbol(fieldId)
     }
 

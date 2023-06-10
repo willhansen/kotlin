@@ -38,7 +38,7 @@ import kotlin.concurrent.AtomicNativePtr
  */
 // Not @FreezingIsDeprecated: every `Worker.execute` uses this.
 @ObsoleteWorkersApi
-public enum class TransferMode(val value: Int) {
+public enum class TransferMode(konst konstue: Int) {
     /**
      * Reachability check is performed.
      */
@@ -59,26 +59,26 @@ public enum class TransferMode(val value: Int) {
 @ObsoleteWorkersApi
 public class DetachedObjectGraph<T> internal constructor(pointer: NativePtr) {
     @PublishedApi
-    internal val stable = AtomicNativePtr(pointer)
+    internal konst stable = AtomicNativePtr(pointer)
 
     /**
      * Creates stable pointer to object, ensuring associated object subgraph is disjoint in specified mode
      * ([TransferMode.SAFE] by default).
-     * Raw value returned by [asCPointer] could be stored to a C variable or passed to another Kotlin machine.
+     * Raw konstue returned by [asCPointer] could be stored to a C variable or passed to another Kotlin machine.
      */
     public constructor(mode: TransferMode = TransferMode.SAFE, producer: () -> T)
-        : this(detachObjectGraphInternal(mode.value, producer as () -> Any?))
+        : this(detachObjectGraphInternal(mode.konstue, producer as () -> Any?))
 
     /**
-     * Restores detached object graph from the value stored earlier in a C raw pointer.
+     * Restores detached object graph from the konstue stored earlier in a C raw pointer.
      */
     public constructor(pointer: COpaquePointer?) : this(pointer?.rawValue ?: NativePtr.NULL)
 
     /**
-     * Returns raw C pointer value, usable for interoperability with C scenarious.
+     * Returns raw C pointer konstue, usable for interoperability with C scenarious.
      */
     @ExperimentalForeignApi
-    public fun asCPointer(): COpaquePointer? = interpretCPointer<COpaque>(stable.value)
+    public fun asCPointer(): COpaquePointer? = interpretCPointer<COpaque>(stable.konstue)
 }
 
 /**
@@ -92,8 +92,8 @@ public class DetachedObjectGraph<T> internal constructor(pointer: NativePtr) {
 public inline fun <reified T> DetachedObjectGraph<T>.attach(): T {
     var rawStable: NativePtr
     do {
-        rawStable = stable.value
+        rawStable = stable.konstue
     } while (!stable.compareAndSet(rawStable, NativePtr.NULL))
-    val result = attachObjectGraphInternal(rawStable) as T
+    konst result = attachObjectGraphInternal(rawStable) as T
     return result
 }

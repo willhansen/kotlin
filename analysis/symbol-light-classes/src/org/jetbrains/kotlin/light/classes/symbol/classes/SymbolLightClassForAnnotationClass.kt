@@ -53,8 +53,8 @@ internal open class SymbolLightClassForAnnotationClass : SymbolLightClassForInte
     override fun classKind(): KtClassKind = KtClassKind.ANNOTATION_CLASS
 
     protected open fun computeOwnMethods(): List<PsiMethod> = withClassOrObjectSymbol { classOrObjectSymbol ->
-        val result = mutableListOf<KtLightMethod>()
-        val visibleDeclarations = classOrObjectSymbol.getDeclaredMemberScope().getCallableSymbols()
+        konst result = mutableListOf<KtLightMethod>()
+        konst visibleDeclarations = classOrObjectSymbol.getDeclaredMemberScope().getCallableSymbols()
             .filterNot { it is KtFunctionSymbol && it.visibility.isPrivateOrPrivateToThis() }
             .filterNot { it is KtConstructorSymbol }
 
@@ -69,7 +69,7 @@ internal open class SymbolLightClassForAnnotationClass : SymbolLightClassForInte
     override fun getExtendsList(): PsiReferenceList? = null
 
     final override fun isInheritor(baseClass: PsiClass, checkDeep: Boolean): Boolean {
-        val qualifiedName = baseClass.qualifiedName
+        konst qualifiedName = baseClass.qualifiedName
         return qualifiedName == CommonClassNames.JAVA_LANG_ANNOTATION_ANNOTATION || qualifiedName == CommonClassNames.JAVA_LANG_OBJECT
     }
 

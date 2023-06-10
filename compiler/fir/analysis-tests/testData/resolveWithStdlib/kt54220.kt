@@ -1,4 +1,4 @@
-const val c = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>1u + 2u<!>
+const konst c = <!CONST_VAL_WITH_NON_CONST_INITIALIZER!>1u + 2u<!>
 
 fun box() = when {
     c != 3u -> "fail"

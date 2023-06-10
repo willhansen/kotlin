@@ -9,17 +9,17 @@
 package foo
 
 fun test1(): Int {
-    val res = My(111).performWithFail<My, Int>(
+    konst res = My(111).performWithFail<My, Int>(
             {
                 throw RuntimeExceptionWithValue()
             }, {
-                it.value
+                it.konstue
             })
     return res
 }
 
 fun test11(): Int {
-    val res = My(111).performWithFail2<My, Int>(
+    konst res = My(111).performWithFail2<My, Int>(
             {
                 try {
                     throw RuntimeExceptionWithValue("1")
@@ -28,8 +28,8 @@ fun test11(): Int {
                 }
             },
             { ex, thizz ->
-                if (ex.value == "2") {
-                    thizz.value
+                if (ex.konstue == "2") {
+                    thizz.konstue
                 } else {
                     -11111
                 }
@@ -38,23 +38,23 @@ fun test11(): Int {
 }
 
 fun test2(): Int {
-    val res = My(111).performWithFail<My, Int>(
+    konst res = My(111).performWithFail<My, Int>(
             {
-                it.value
+                it.konstue
             },
             {
-                it.value + 1
+                it.konstue + 1
             })
     return res
 }
 
 fun test22(): Int {
-    val res = My(111).performWithFail2<My, Int>(
+    konst res = My(111).performWithFail2<My, Int>(
             {
                 try {
                     throw RuntimeExceptionWithValue("1")
                 } catch (e: RuntimeExceptionWithValue) {
-                    it.value
+                    it.konstue
                     111
                 }
             },
@@ -68,7 +68,7 @@ fun test22(): Int {
 
 fun test3(): Int {
     try {
-        val res = My(111).performWithFail<My, Int>(
+        konst res = My(111).performWithFail<My, Int>(
                 {
                     throw RuntimeExceptionWithValue("-1")
                 }, {
@@ -76,13 +76,13 @@ fun test3(): Int {
                 })
         return res
     } catch (e: RuntimeExceptionWithValue) {
-        return e.value.toInt2()!!
+        return e.konstue.toInt2()!!
     }
 }
 
 fun test33(): Int {
     try {
-        val res = My(111).performWithFail2<My, Int>(
+        konst res = My(111).performWithFail2<My, Int>(
                 {
                     try {
                         throw RuntimeExceptionWithValue("-1")
@@ -91,7 +91,7 @@ fun test33(): Int {
                     }
                 },
                 { ex, thizz ->
-                    if (ex.value == "-2") {
+                    if (ex.konstue == "-2") {
                         throw RuntimeExceptionWithValue("-3")
                     } else {
                         -11111
@@ -99,7 +99,7 @@ fun test33(): Int {
                 })
         return res
     } catch (e: RuntimeExceptionWithValue) {
-        return e.value.toInt2()!!
+        return e.konstue.toInt2()!!
     }
 }
 
@@ -120,7 +120,7 @@ fun box(): String {
 // FILE: b.kt
 package foo
 
-class My(val value: Int)
+class My(konst konstue: Int)
 
 inline fun <T, R> T.performWithFail(job: (T)-> R, failJob: (T) -> R): R {
     try {
@@ -144,4 +144,4 @@ external object Number {
 
 inline fun String.toInt2(): Int = this.toInt()
 
-class RuntimeExceptionWithValue(val value: String = "") : RuntimeException()
+class RuntimeExceptionWithValue(konst konstue: String = "") : RuntimeException()

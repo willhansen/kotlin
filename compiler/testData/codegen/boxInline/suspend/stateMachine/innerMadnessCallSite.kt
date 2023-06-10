@@ -9,7 +9,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
-    val l: suspend () -> Unit = {
+    konst l: suspend () -> Unit = {
         c()
         c()
     }
@@ -29,13 +29,13 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     builder {
         crossinlineMe {
-            val sr = object: SuspendRunnable {
+            konst sr = object: SuspendRunnable {
                 override suspend fun run() {
-                    val l : suspend () -> Unit = {
-                        val sr = object: SuspendRunnable {
+                    konst l : suspend () -> Unit = {
+                        konst sr = object: SuspendRunnable {
                             override suspend fun run() {
-                                val l : suspend () -> Unit = {
-                                    val sr = object: SuspendRunnable {
+                                konst l : suspend () -> Unit = {
+                                    konst sr = object: SuspendRunnable {
                                         override suspend fun run() {
                                             StateMachineChecker.suspendHere()
                                             StateMachineChecker.suspendHere()

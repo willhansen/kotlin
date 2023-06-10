@@ -33,32 +33,32 @@ import java.io.File
 import java.util.*
 
 class CliJavaModuleFinder(
-    private val jdkHome: File?,
-    private val messageCollector: MessageCollector?,
-    private val javaFileManager: KotlinCliJavaFileManager,
+    private konst jdkHome: File?,
+    private konst messageCollector: MessageCollector?,
+    private konst javaFileManager: KotlinCliJavaFileManager,
     project: Project,
-    private val jdkRelease: Int?
+    private konst jdkRelease: Int?
 ) : JavaModuleFinder {
 
-    private val jrtFileSystemRoot = jdkHome?.path?.let { path ->
+    private konst jrtFileSystemRoot = jdkHome?.path?.let { path ->
         VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.JRT_PROTOCOL)?.findFileByPath(path + URLUtil.JAR_SEPARATOR)
     }
 
-    private val modulesRoot = jrtFileSystemRoot?.findChild("modules")
+    private konst modulesRoot = jrtFileSystemRoot?.findChild("modules")
 
-    private val userModules = linkedMapOf<String, JavaModule>()
+    private konst userModules = linkedMapOf<String, JavaModule>()
 
-    private val allScope = GlobalSearchScope.allScope(project)
+    private konst allScope = GlobalSearchScope.allScope(project)
 
-    private val ctSymFile: VirtualFile? by lazy {
+    private konst ctSymFile: VirtualFile? by lazy {
         if (jdkHome == null) return@lazy reportError("JDK_HOME path is not specified in compiler configuration")
 
-        val jdkRootFile = StandardFileSystems.local().findFileByPath(jdkHome.path)
+        konst jdkRootFile = StandardFileSystems.local().findFileByPath(jdkHome.path)
             ?: return@lazy reportError("Can't create virtual file for JDK root under ${jdkHome.path}")
 
-        val lib = jdkRootFile.findChild("lib") ?: return@lazy reportError("Can't find `lib` folder under JDK root: ${jdkHome.path}")
+        konst lib = jdkRootFile.findChild("lib") ?: return@lazy reportError("Can't find `lib` folder under JDK root: ${jdkHome.path}")
 
-        val ctSym = lib.findChild("ct.sym")
+        konst ctSym = lib.findChild("ct.sym")
             ?: return@lazy reportError(
                 "This JDK does not have the 'ct.sym' file required for the '-Xjdk-release=$jdkRelease' option: ${jdkHome.path}"
             )
@@ -66,7 +66,7 @@ class CliJavaModuleFinder(
         ctSym
     }
 
-    private val ctSymRootFolder: VirtualFile? by lazy {
+    private konst ctSymRootFolder: VirtualFile? by lazy {
         if (ctSymFile != null) {
             StandardFileSystems.jar()?.findFileByPath(ctSymFile?.path + URLUtil.JAR_SEPARATOR)
                 ?: reportError("Can't open `ct.sym` as jar file, file path: ${ctSymFile?.path} ")
@@ -75,7 +75,7 @@ class CliJavaModuleFinder(
         }
     }
 
-    private val compilationJdkVersion by lazy {
+    private konst compilationJdkVersion by lazy {
         // Observe all JDK codes from folder name chars in ct.sym file,
         //  there should be maximal one corresponding to used compilation JDK
         ctSymRootFolder?.children?.maxOf {
@@ -86,29 +86,29 @@ class CliJavaModuleFinder(
         } ?: -1
     }
 
-    val ctSymModules by lazy {
+    konst ctSymModules by lazy {
         collectModuleRoots()
     }
 
-    private val isCompilationJDK12OrLater
+    private konst isCompilationJDK12OrLater
         get() = compilationJdkVersion >= 12
 
-    private val useLastJdkApi: Boolean
+    private konst useLastJdkApi: Boolean
         get() = jdkRelease == null || jdkRelease == compilationJdkVersion
 
     fun addUserModule(module: JavaModule) {
         userModules.putIfAbsent(module.name, module)
     }
 
-    val allObservableModules: Sequence<JavaModule>
-        get() = systemModules + userModules.values
+    konst allObservableModules: Sequence<JavaModule>
+        get() = systemModules + userModules.konstues
 
     //Cache system modules for JDK 9-11 to preserve virtual files as one folder could be mapped to several modules
-    private val systemModulesCache = mutableMapOf<String, JavaModule.Explicit>()
+    private konst systemModulesCache = mutableMapOf<String, JavaModule.Explicit>()
 
-    val systemModules: Sequence<JavaModule.Explicit>
+    konst systemModules: Sequence<JavaModule.Explicit>
         get() = if (useLastJdkApi) modulesRoot?.children.orEmpty().asSequence().mapNotNull(this::findSystemModule) else
-            ctSymModules.values.asSequence().mapNotNull { findSystemModule(it, true) }
+            ctSymModules.konstues.asSequence().mapNotNull { findSystemModule(it, true) }
 
     override fun findModule(name: String): JavaModule? =
         when {
@@ -117,9 +117,9 @@ class CliJavaModuleFinder(
         } ?: userModules[name]
 
     private fun findSystemModule(moduleRoot: VirtualFile, useSig: Boolean = false): JavaModule.Explicit? {
-        val file = moduleRoot.findChild(if (useSig) PsiJavaModule.MODULE_INFO_CLASS + ".sig" else PsiJavaModule.MODULE_INFO_CLS_FILE)
+        konst file = moduleRoot.findChild(if (useSig) PsiJavaModule.MODULE_INFO_CLASS + ".sig" else PsiJavaModule.MODULE_INFO_CLS_FILE)
             ?: return null
-        val moduleInfo = JavaModuleInfo.read(file, javaFileManager, allScope) ?: return null
+        konst moduleInfo = JavaModuleInfo.read(file, javaFileManager, allScope) ?: return null
         return systemModulesCache.getOrPut(moduleInfo.moduleName) {
             JavaModule.Explicit(
                 moduleInfo,
@@ -143,7 +143,7 @@ class CliJavaModuleFinder(
         filterModules: Boolean,
         moduleInfo: JavaModuleInfo
     ): JavaModule.Root {
-        val packageParts =
+        konst packageParts =
             if (!filterPackages) emptyMap()
             else hashMapOf<String, Boolean>().also { parts ->
                 moduleInfo.exports.forEach {
@@ -157,7 +157,7 @@ class CliJavaModuleFinder(
                 }
             }
 
-        val moduleFolders =
+        konst moduleFolders =
             if (filterModules)
                 listFoldersForRelease.filter { virtualFile -> virtualFile.name == moduleInfo.moduleName }
             else
@@ -183,11 +183,11 @@ class CliJavaModuleFinder(
         !fileName.contains("-") && fileName.contains(codeFor(release)) // skip `*-modules`
 
 
-    val nonModuleRoot: JavaModule.Root by lazy {
+    konst nonModuleRoot: JavaModule.Root by lazy {
         createModuleFromSignature(false, false, JavaModuleInfo("*", emptyList(), emptyList(), emptyList()))
     }
 
-    private val listFoldersForRelease: List<VirtualFile> by lazy {
+    private konst listFoldersForRelease: List<VirtualFile> by lazy {
         if (ctSymRootFolder == null) emptyList()
         else ctSymRootFolder!!.children.filter { matchesRelease(it.name, jdkRelease!!) }.flatMap {
             if (isCompilationJDK12OrLater)
@@ -201,7 +201,7 @@ class CliJavaModuleFinder(
     }
 
     private fun collectModuleRoots(): Map<String, VirtualFile> {
-        val result = mutableMapOf<String, VirtualFile>()
+        konst result = mutableMapOf<String, VirtualFile>()
         if (isCompilationJDK12OrLater) {
             listFoldersForRelease.forEach { modulesRoot ->
                 modulesRoot.findChild("module-info.sig")?.let {

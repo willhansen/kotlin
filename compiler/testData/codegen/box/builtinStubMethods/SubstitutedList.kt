@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 
 class MyList: List<String> {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(o: String): Boolean = false
     override fun iterator(): Iterator<String> = throw Error()
@@ -25,7 +25,7 @@ fun expectUoe(block: () -> Any) {
 }
 
 fun box(): String {
-    val list = MyList() as java.util.List<String>
+    konst list = MyList() as java.util.List<String>
 
     expectUoe { list.add("") }
     expectUoe { list.remove("") }

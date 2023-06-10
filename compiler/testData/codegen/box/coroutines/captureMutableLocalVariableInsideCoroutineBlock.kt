@@ -8,17 +8,17 @@ import kotlin.test.*
 
 fun testLaziness() {
     var sharedVar = -2
-    val result = sequence {
+    konst result = sequence {
         while (true) {
             when (sharedVar) {
                 -1 -> return@sequence
-                -2 -> error("Invalid state: -2")
+                -2 -> error("Inkonstid state: -2")
                 else -> yield(sharedVar)
             }
         }
     }
 
-    val iterator = result.iterator()
+    konst iterator = result.iterator()
 
     sharedVar = 1
     assertTrue(iterator.hasNext())

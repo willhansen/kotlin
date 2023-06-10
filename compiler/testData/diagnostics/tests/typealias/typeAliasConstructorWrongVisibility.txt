@@ -1,17 +1,17 @@
 package
 
-public val test1: MyAlias /* = MyClass */
-public val test1a: MyClass
-public val test2: MyAlias /* = MyClass */
-public val test2a: MyClass
-public val test3: MyAlias /* = MyClass */
-public val test3a: MyClass
+public konst test1: MyAlias /* = MyClass */
+public konst test1a: MyClass
+public konst test2: MyAlias /* = MyClass */
+public konst test2a: MyClass
+public konst test3: MyAlias /* = MyClass */
+public konst test3a: MyClass
 
 public open class MyClass {
     public constructor MyClass(/*0*/ x: kotlin.Double)
     private constructor MyClass(/*0*/ x: kotlin.Int)
     protected constructor MyClass(/*0*/ x: kotlin.String)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -19,13 +19,13 @@ public open class MyClass {
 
 public final class MyDerived : MyClass {
     public constructor MyDerived()
-    public final val test4: MyAlias /* = MyClass */
-    public final val test4a: MyClass
-    public final val test5: MyAlias /* = MyClass */
-    public final val test5a: MyClass
-    public final val test6: MyAlias /* = MyClass */
-    public final val test6a: MyClass
-    public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+    public final konst test4: MyAlias /* = MyClass */
+    public final konst test4a: MyClass
+    public final konst test5: MyAlias /* = MyClass */
+    public final konst test5a: MyClass
+    public final konst test6: MyAlias /* = MyClass */
+    public final konst test6a: MyClass
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

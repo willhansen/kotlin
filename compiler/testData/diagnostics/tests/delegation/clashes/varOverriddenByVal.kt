@@ -6,19 +6,19 @@ interface IVar {
 interface IDerived : IVar
 
 interface IVal {
-    val foo: Int
+    konst foo: Int
 }
 
 class CVal : IVal {
-    override val foo: Int get() = 42
+    override konst foo: Int get() = 42
 }
 
 interface IValT<T> {
-    val foo: T
+    konst foo: T
 }
 
 class CValT<T> : IValT<T> {
-    override val foo: T get() = null!!
+    override konst foo: T get() = null!!
 }
 
 abstract <!VAR_OVERRIDDEN_BY_VAL_BY_DELEGATION!>class Test1<!> : IVar, IVal by CVal()

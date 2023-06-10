@@ -3,7 +3,7 @@ package test
 public open class ReferenceCycleThroughAnnotation {
     public constructor ReferenceCycleThroughAnnotation()
 
-    @test.ReferenceCycleThroughAnnotation.C(value = test.ReferenceCycleThroughAnnotation.B::class) public open inner class A</*0*/ T : kotlin.Any!> {
+    @test.ReferenceCycleThroughAnnotation.C(konstue = test.ReferenceCycleThroughAnnotation.B::class) public open inner class A</*0*/ T : kotlin.Any!> {
         public constructor A</*0*/ T : kotlin.Any!>()
         public open fun foo(): kotlin.Unit
     }
@@ -13,7 +13,7 @@ public open class ReferenceCycleThroughAnnotation {
     }
 
     public final annotation class C : kotlin.Annotation {
-        public constructor C(/*0*/ value: kotlin.reflect.KClass<*>)
-        public final val value: kotlin.reflect.KClass<*>
+        public constructor C(/*0*/ konstue: kotlin.reflect.KClass<*>)
+        public final konst konstue: kotlin.reflect.KClass<*>
     }
 }

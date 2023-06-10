@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 
 abstract class ScriptLikeContext(
-    val typeMapper: KotlinTypeMapper,
+    konst typeMapper: KotlinTypeMapper,
     contextDescriptor: ClassDescriptor,
     parentContext: CodegenContext<*>?
 ) : ClassContext(typeMapper, contextDescriptor, OwnerKind.IMPLEMENTATION, parentContext, null) {

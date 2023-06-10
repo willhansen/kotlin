@@ -17,19 +17,19 @@ class ScriptExtraImportsProviderExtension : ExtraImportsProviderExtension {
 
     // initially copied from org.jetbrains.kotlin.resolve.lazy.FileScopeFactory.DefaultImportImpl, but kept separate to simplify dependencies
     // and allow easier extension
-    private class ScriptExtraImportImpl(private val importPath: ImportPath) : KtImportInfo {
-        override val isAllUnder: Boolean get() = importPath.isAllUnder
+    private class ScriptExtraImportImpl(private konst importPath: ImportPath) : KtImportInfo {
+        override konst isAllUnder: Boolean get() = importPath.isAllUnder
 
-        override val importContent = KtImportInfo.ImportContent.FqNameBased(importPath.fqName)
+        override konst importContent = KtImportInfo.ImportContent.FqNameBased(importPath.fqName)
 
-        override val aliasName: String? get() = importPath.alias?.asString()
+        override konst aliasName: String? get() = importPath.alias?.asString()
 
-        override val importedFqName: FqName? get() = importPath.fqName
+        override konst importedFqName: FqName? get() = importPath.fqName
     }
 
     override fun getExtraImports(ktFile: KtFile): Collection<KtImportInfo> =
         ktFile.takeIf { runReadAction { it.isScript() } }?.let { file ->
-            val refinedConfiguration = ScriptDependenciesProvider.getInstance(file.project)
+            konst refinedConfiguration = ScriptDependenciesProvider.getInstance(file.project)
                 ?.getScriptConfiguration(file.originalFile as KtFile)
             refinedConfiguration?.defaultImports?.map {
                 ScriptExtraImportImpl(

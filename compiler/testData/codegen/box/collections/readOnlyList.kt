@@ -19,7 +19,7 @@ public class J {
 // FILE: test.kt
 
 open class KList<E> : List<E> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {

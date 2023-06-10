@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.psi2ir.descriptors.IrBuiltInsOverDescriptors
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class JsIrCompilerWithIC(
-    private val mainModule: IrModuleFragment,
+    private konst mainModule: IrModuleFragment,
     configuration: CompilerConfiguration,
     granularity: JsGenerationGranularity,
-    private val phaseConfig: PhaseConfig,
+    private konst phaseConfig: PhaseConfig,
     exportedDeclarations: Set<FqName> = emptySet(),
     es6mode: Boolean = false
 ) : JsIrCompilerICInterface {
-    private val context: JsIrBackendContext
+    private konst context: JsIrBackendContext
 
     init {
-        val irBuiltIns = mainModule.irBuiltins
-        val symbolTable = (irBuiltIns as IrBuiltInsOverDescriptors).symbolTable
+        konst irBuiltIns = mainModule.irBuiltins
+        konst symbolTable = (irBuiltIns as IrBuiltInsOverDescriptors).symbolTable
 
         context = JsIrBackendContext(
             mainModule.descriptor,
@@ -54,7 +54,7 @@ class JsIrCompilerWithIC(
         dirtyFiles: Collection<IrFile>,
         mainArguments: List<String>?
     ): List<() -> JsIrProgramFragment> {
-        val shouldGeneratePolyfills = context.configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
+        konst shouldGeneratePolyfills = context.configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
 
         allModules.forEach {
             if (shouldGeneratePolyfills) {
@@ -67,7 +67,7 @@ class JsIrCompilerWithIC(
 
         lowerPreservingTags(allModules, context, phaseConfig, context.irFactory.stageController as WholeWorldStageController)
 
-        val transformer = IrModuleToJsTransformer(context, mainArguments)
+        konst transformer = IrModuleToJsTransformer(context, mainArguments)
         return transformer.makeIrFragmentsGenerators(dirtyFiles, allModules)
     }
 }
@@ -81,7 +81,7 @@ fun lowerPreservingTags(
     // Lower all the things
     controller.currentStage = 0
 
-    val phaserState = PhaserState<Iterable<IrModuleFragment>>()
+    konst phaserState = PhaserState<Iterable<IrModuleFragment>>()
 
     loweringList.forEachIndexed { i, lowering ->
         controller.currentStage = i + 1

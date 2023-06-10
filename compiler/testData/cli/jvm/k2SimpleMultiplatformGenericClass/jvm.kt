@@ -1,3 +1,3 @@
-actual class AtomicRef<T> constructor(value: T) {
-    actual val value: T = value
+actual class AtomicRef<T> constructor(konstue: T) {
+    actual konst konstue: T = konstue
 }

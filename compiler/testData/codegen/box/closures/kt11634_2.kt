@@ -2,7 +2,7 @@ interface A {
     fun foo(): String
 }
 
-class AImpl(val z: String) : A {
+class AImpl(konst z: String) : A {
     override fun foo(): String = z
 }
 
@@ -17,7 +17,7 @@ class AWrapperFabric : AFabric() {
     }
 
     fun createMyA(): A {
-        val z = "OK"
+        konst z = "OK"
         return object : A by super.createA(z) {}
     }
 }

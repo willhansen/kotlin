@@ -31,8 +31,8 @@ public abstract class KotlinModificationTrackerFactory {
      *
      * Consider the following example #1:
      * ```
-     * val x = 10<caret>
-     * val z = x
+     * konst x = 10<caret>
+     * konst z = x
      * ```
      * If we change initializer of `x` to `"str"` the return type of `x` will become 'String' instead of initial `Int`.
      * This will change the return type of `z` as it does not have explicit type specified. So, it is an **OOBM**.
@@ -40,8 +40,8 @@ public abstract class KotlinModificationTrackerFactory {
      *
      * Consider example #2:
      *  ```
-     * val x: Int = 10<caret>
-     * val z = x
+     * konst x: Int = 10<caret>
+     * konst z = x
      * ```
      * If we change 10 to "str" as in example #1, it would not change type of z, so it is not **OOBM**.
      *
@@ -72,7 +72,7 @@ public abstract class KotlinModificationTrackerFactory {
     public abstract fun createModuleStateTracker(module: KtModule): KtModuleStateTracker
 
     /**
-     * Increments modification trackers to invalidate caches. If [includeBinaryTrackers] is `false`, binary module-related modification
+     * Increments modification trackers to inkonstidate caches. If [includeBinaryTrackers] is `false`, binary module-related modification
      * trackers will not be incremented (such as library trackers, SDK tracker, built-ins tracker, and so on).
      */
     @TestOnly
@@ -85,20 +85,20 @@ public abstract class KotlinModificationTrackerFactory {
 }
 
 /**
- * Represents current state of [KtModule] validity, can be created via [org.jetbrains.kotlin.analysis.providers.KotlinModificationTrackerFactory.createModuleStateTracker]
+ * Represents current state of [KtModule] konstidity, can be created via [org.jetbrains.kotlin.analysis.providers.KotlinModificationTrackerFactory.createModuleStateTracker]
  */
 public interface KtModuleStateTracker {
     /**
-     * If the module is still valid (i.e., it was not removed)
+     * If the module is still konstid (i.e., it was not removed)
      */
-    public val isValid: Boolean
+    public konst isValid: Boolean
 
     /**
      * Represents modification tracker of modified roots similar to the [ModificationTracker].
      *
      * If the [isValid] == `false`, when behaviour is unspecified
      */
-    public val rootModificationCount: Long
+    public konst rootModificationCount: Long
 }
 
 /**

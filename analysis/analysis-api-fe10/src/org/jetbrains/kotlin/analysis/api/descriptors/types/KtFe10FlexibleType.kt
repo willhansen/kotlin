@@ -17,17 +17,17 @@ import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
 import org.jetbrains.kotlin.types.FlexibleType
 
 internal class KtFe10FlexibleType(
-    override val fe10Type: FlexibleType,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: FlexibleType,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFlexibleType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val lowerBound: KtType
+    override konst lowerBound: KtType
         get() = withValidityAssertion { fe10Type.lowerBound.toKtType(analysisContext) }
 
-    override val upperBound: KtType
+    override konst upperBound: KtType
         get() = withValidityAssertion { fe10Type.upperBound.toKtType(analysisContext) }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 }

@@ -33,7 +33,7 @@ object FirPropertyInitializationAnalyzer : AbstractFirPropertyInitializationChec
     }
 }
 
-val FirDeclaration.evaluatedInPlace: Boolean
+konst FirDeclaration.ekonstuatedInPlace: Boolean
     get() = when (this) {
         is FirAnonymousFunction -> invocationKind.isInPlace
         is FirAnonymousObject -> classKind != ClassKind.ENUM_ENTRY
@@ -48,15 +48,15 @@ val FirDeclaration.evaluatedInPlace: Boolean
  *   not mean that it's safe to access this property in any place:
  *
  * class A {
- *     val b = a // a is not initialized here
- *     val a = 10
- *     val c = a // but initialized here
+ *     konst b = a // a is not initialized here
+ *     konst a = 10
+ *     konst c = a // but initialized here
  * }
  */
 
 @OptIn(SymbolInternals::class)
 fun FirPropertySymbol.requiresInitialization(isForClassInitialization: Boolean): Boolean {
-    val hasImplicitBackingField = !hasExplicitBackingField && hasBackingField
+    konst hasImplicitBackingField = !hasExplicitBackingField && hasBackingField
     return when {
         this is FirSyntheticPropertySymbol -> false
         isForClassInitialization -> hasDelegate || hasImplicitBackingField
@@ -70,8 +70,8 @@ fun PropertyInitializationInfoData.checkPropertyAccesses(
     reporter: DiagnosticReporter
 ) {
     // If a property has an initializer (or does not need one), then any reads are OK while any writes are OK
-    // if it's a `var` and bad if it's a `val`. `FirReassignmentAndInvisibleSetterChecker` does this without a CFG.
-    val filtered = properties.filterTo(mutableSetOf()) { it.requiresInitialization(isForClassInitialization) }
+    // if it's a `var` and bad if it's a `konst`. `FirReassignmentAndInvisibleSetterChecker` does this without a CFG.
+    konst filtered = properties.filterTo(mutableSetOf()) { it.requiresInitialization(isForClassInitialization) }
     if (filtered.isEmpty()) return
 
     checkPropertyAccesses(
@@ -100,7 +100,7 @@ private fun PropertyInitializationInfoData.checkPropertyAccesses(
             //  Also this is currently indistinguishable from x = 1; f({}, {}).
 
             node is VariableDeclarationNode -> {
-                val symbol = node.fir.symbol
+                konst symbol = node.fir.symbol
                 if (scope != null && receiver == null && node.fir.isVal && symbol in properties) {
                     // It's OK to initialize this variable from a nested called-in-place function, but not from
                     // a non-called-in-place function or a non-anonymous-object class initializer.
@@ -109,13 +109,13 @@ private fun PropertyInitializationInfoData.checkPropertyAccesses(
             }
 
             node is VariableAssignmentNode -> {
-                val symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: continue
+                konst symbol = node.fir.calleeReference?.toResolvedPropertySymbol() ?: continue
                 if (!symbol.fir.isVal || node.fir.unwrapLValue()?.hasCorrectReceiver() != true || symbol !in properties) continue
 
-                if (getValue(node).values.any { it[symbol]?.canBeRevisited() == true }) {
+                if (getValue(node).konstues.any { it[symbol]?.canBeRevisited() == true }) {
                     reporter.reportOn(node.fir.lValue.source, FirErrors.VAL_REASSIGNMENT, symbol, context)
                 } else if (scope != scopes[symbol]) {
-                    val error = if (receiver != null)
+                    konst error = if (receiver != null)
                         FirErrors.CAPTURED_MEMBER_VAL_INITIALIZATION
                     else
                         FirErrors.CAPTURED_VAL_INITIALIZATION
@@ -125,16 +125,16 @@ private fun PropertyInitializationInfoData.checkPropertyAccesses(
 
             node is QualifiedAccessNode -> {
                 if (doNotReportUninitializedVariable) continue
-                val symbol = node.fir.calleeReference.toResolvedPropertySymbol() ?: continue
+                konst symbol = node.fir.calleeReference.toResolvedPropertySymbol() ?: continue
                 if (!symbol.isLateInit && node.fir.hasCorrectReceiver() && symbol in properties &&
-                    getValue(node).values.any { it[symbol]?.isDefinitelyVisited() != true }
+                    getValue(node).konstues.any { it[symbol]?.isDefinitelyVisited() != true }
                 ) {
                     reporter.reportOn(node.fir.source, FirErrors.UNINITIALIZED_VARIABLE, symbol, context)
                 }
             }
 
             // In the class case, subgraphs of the exit node are member functions, which are considered to not
-            // be part of initialization, so any val is considered to be initialized there and the CFG is not
+            // be part of initialization, so any konst is considered to be initialized there and the CFG is not
             // needed. The errors on reassignments will be emitted by `FirReassignmentAndInvisibleSetterChecker`.
             node is CFGNodeWithSubgraphs<*> && (receiver == null || node !== graph.exitNode) -> {
                 for (subGraph in node.subGraphs) {
@@ -143,10 +143,10 @@ private fun PropertyInitializationInfoData.checkPropertyAccesses(
                      *   even if they may be not initialized at this point, because if lambda is not in-place,
                      *   then it most likely will be called after object will be initialized
                      */
-                    val doNotReportForSubGraph = doNotReportUninitializedVariable ||
+                    konst doNotReportForSubGraph = doNotReportUninitializedVariable ||
                             (isForClassInitialization && subGraph.kind.doNotReportUninitializedVariableForClassInitialization)
 
-                    val newScope = subGraph.declaration?.takeIf { !it.evaluatedInPlace } ?: scope
+                    konst newScope = subGraph.declaration?.takeIf { !it.ekonstuatedInPlace } ?: scope
                     checkPropertyAccesses(
                         subGraph, properties, context, reporter, newScope,
                         isForClassInitialization, doNotReportForSubGraph, scopes
@@ -157,7 +157,7 @@ private fun PropertyInitializationInfoData.checkPropertyAccesses(
     }
 }
 
-private val Kind.doNotReportUninitializedVariableForClassInitialization: Boolean
+private konst Kind.doNotReportUninitializedVariableForClassInitialization: Boolean
     get() = when (this) {
         Kind.AnonymousFunction, Kind.LocalFunction -> true
         else -> false

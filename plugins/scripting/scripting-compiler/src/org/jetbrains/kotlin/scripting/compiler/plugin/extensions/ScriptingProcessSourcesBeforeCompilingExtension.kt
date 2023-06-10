@@ -20,22 +20,22 @@ import org.jetbrains.kotlin.scripting.definitions.ScriptDefinitionProvider
 import org.jetbrains.kotlin.scripting.resolve.KtFileScriptSource
 import kotlin.script.experimental.api.*
 
-class ScriptingProcessSourcesBeforeCompilingExtension(val project: Project) : ProcessSourcesBeforeCompilingExtension {
+class ScriptingProcessSourcesBeforeCompilingExtension(konst project: Project) : ProcessSourcesBeforeCompilingExtension {
 
     override fun processSources(sources: Collection<KtFile>, configuration: CompilerConfiguration): Collection<KtFile> {
-        val versionSettings = configuration.languageVersionSettings
-        val shouldSkipStandaloneScripts = versionSettings.supportsFeature(LanguageFeature.SkipStandaloneScriptsInSourceRoots)
-        val definitionProvider by lazy(LazyThreadSafetyMode.NONE) { ScriptDefinitionProvider.getInstance(project) }
-        val messageCollector = configuration.getNotNull(MESSAGE_COLLECTOR_KEY)
+        konst versionSettings = configuration.languageVersionSettings
+        konst shouldSkipStandaloneScripts = versionSettings.supportsFeature(LanguageFeature.SkipStandaloneScriptsInSourceRoots)
+        konst definitionProvider by lazy(LazyThreadSafetyMode.NONE) { ScriptDefinitionProvider.getInstance(project) }
+        konst messageCollector = configuration.getNotNull(MESSAGE_COLLECTOR_KEY)
 
         fun KtFile.isStandaloneScript(): Boolean {
-            val scriptDefinition = definitionProvider?.findDefinition(KtFileScriptSource(this))
+            konst scriptDefinition = definitionProvider?.findDefinition(KtFileScriptSource(this))
             return scriptDefinition?.compilationConfiguration?.get(ScriptCompilationConfiguration.isStandalone) ?: true
         }
 
         if (configuration.getBoolean(CommonConfigurationKeys.ALLOW_ANY_SCRIPTS_IN_SOURCE_ROOTS)) return sources
         // TODO: see comment at LazyScriptDefinitionProvider.Companion.getNonScriptFilenameSuffixes
-        val nonScriptFilenameSuffixes = arrayOf(".${KotlinFileType.EXTENSION}", ".${JavaFileType.DEFAULT_EXTENSION}")
+        konst nonScriptFilenameSuffixes = arrayOf(".${KotlinFileType.EXTENSION}", ".${JavaFileType.DEFAULT_EXTENSION}")
         // filter out scripts that are not suitable for source roots, according to the compiler configuration and script definitions
         return sources.filter { ktFile ->
             when {

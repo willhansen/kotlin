@@ -26,12 +26,12 @@ FILE fqName:<root> fileName:/AllCandidates.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MyCandidate modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:resolvedCall visibility:public modality:FINAL [val]
+    PROPERTY name:resolvedCall visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:resolvedCall type:<root>.ResolvedCall<*> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'resolvedCall: <root>.ResolvedCall<*> declared in <root>.MyCandidate.<init>' type=<root>.ResolvedCall<*> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-resolvedCall> visibility:public modality:FINAL <> ($this:<root>.MyCandidate) returnType:<root>.ResolvedCall<*>
-        correspondingProperty: PROPERTY name:resolvedCall visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:resolvedCall visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.MyCandidate
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-resolvedCall> (): <root>.ResolvedCall<*> declared in <root>.MyCandidate'

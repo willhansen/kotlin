@@ -65,8 +65,8 @@ public final class PatternBuilder {
         String[] subPatterns = stringWithPattern.split("\\.");
         List<NamePredicate> checkers = Lists.newArrayList();
         for (String subPattern : subPatterns) {
-            String[] validNames = subPattern.split("\\|");
-            checkers.add(new NamePredicate(validNames));
+            String[] konstidNames = subPattern.split("\\|");
+            checkers.add(new NamePredicate(konstidNames));
         }
         return checkers;
     }
@@ -83,8 +83,8 @@ public final class PatternBuilder {
 
         String[] subPatterns = stringWithPattern.split("\\,");
         for (String subPattern : subPatterns) {
-            String[] validNames = subPattern.split("\\|");
-            checkers.add(new NamePredicate(validNames));
+            String[] konstidNames = subPattern.split("\\|");
+            checkers.add(new NamePredicate(konstidNames));
         }
         return checkers;
     }
@@ -153,13 +153,13 @@ public final class PatternBuilder {
 
             private boolean checkAllArgumentsValidIfNeeded(@NotNull FunctionDescriptor descriptor) {
                 if (argumentCheckers != null) {
-                    List<ValueParameterDescriptor> valueParameterDescriptors = descriptor.getValueParameters();
-                    if (valueParameterDescriptors.size() != argumentCheckers.size()) {
+                    List<ValueParameterDescriptor> konstueParameterDescriptors = descriptor.getValueParameters();
+                    if (konstueParameterDescriptors.size() != argumentCheckers.size()) {
                         return false;
                     }
-                    for (int i = 0; i < valueParameterDescriptors.size(); i++) {
-                        ValueParameterDescriptor valueParameterDescriptor = valueParameterDescriptors.get(i);
-                        Name name = DescriptorUtilsKt.getNameIfStandardType(valueParameterDescriptor.getType());
+                    for (int i = 0; i < konstueParameterDescriptors.size(); i++) {
+                        ValueParameterDescriptor konstueParameterDescriptor = konstueParameterDescriptors.get(i);
+                        Name name = DescriptorUtilsKt.getNameIfStandardType(konstueParameterDescriptor.getType());
                         NamePredicate namePredicate = argumentCheckers.get(i);
                         if (!namePredicate.test(name)) return false;
                     }

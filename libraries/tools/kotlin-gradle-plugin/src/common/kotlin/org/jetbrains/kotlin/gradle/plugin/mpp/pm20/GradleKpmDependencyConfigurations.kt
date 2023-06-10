@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.gradle.plugin.mpp.pm20
 import org.gradle.api.artifacts.Configuration
 
 interface GradleKpmDependencyConfigurations {
-    val apiConfiguration: Configuration
-    val implementationConfiguration: Configuration
-    val compileOnlyConfiguration: Configuration
-    val runtimeOnlyConfiguration: Configuration
+    konst apiConfiguration: Configuration
+    konst implementationConfiguration: Configuration
+    konst compileOnlyConfiguration: Configuration
+    konst runtimeOnlyConfiguration: Configuration
 }

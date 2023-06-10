@@ -29,10 +29,10 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class IteratorNext : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable {
-        val type = AsmUtil.unboxType(method.returnType)
+        konst type = AsmUtil.unboxType(method.returnType)
         return object : IntrinsicCallable(type, listOf(), AsmTypes.OBJECT_TYPE, null) {
             override fun invokeIntrinsic(v: InstructionAdapter) {
-                val primitiveClassName = getKotlinPrimitiveClassName(returnType)
+                konst primitiveClassName = getKotlinPrimitiveClassName(returnType)
                 v.invokevirtual(
                         getPrimitiveIteratorType(primitiveClassName).internalName,
                         "next${primitiveClassName.asString()}",
@@ -51,7 +51,7 @@ class IteratorNext : IntrinsicMethod() {
 
         // "Char" -> type for kotlin.collections.CharIterator
         fun getPrimitiveIteratorType(primitiveClassName: Name): Type {
-            val iteratorName = Name.identifier(primitiveClassName.asString() + "Iterator")
+            konst iteratorName = Name.identifier(primitiveClassName.asString() + "Iterator")
             return Type.getObjectType(COLLECTIONS_PACKAGE_FQ_NAME.child(iteratorName).internalNameWithoutInnerClasses)
         }
     }

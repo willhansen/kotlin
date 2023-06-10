@@ -16,7 +16,7 @@ annotation class ImplicitIntegerCoercion
 import kotlin.internal.ImplicitIntegerCoercion
 
 expect class Signed
-expect value class Unsigned internal constructor(internal val data: Signed)
+expect konstue class Unsigned internal constructor(internal konst data: Signed)
 
 class FooUnsigned {
     constructor(@ImplicitIntegerCoercion x: Unsigned) {}

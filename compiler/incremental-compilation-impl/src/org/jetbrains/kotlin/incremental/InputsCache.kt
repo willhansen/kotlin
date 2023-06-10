@@ -26,15 +26,15 @@ import java.io.File
 
 class InputsCache(
     workingDir: File,
-    private val icContext: IncrementalCompilationContext,
+    private konst icContext: IncrementalCompilationContext,
 ) : BasicMapsOwner(workingDir) {
     companion object {
-        private const val SOURCE_SNAPSHOTS = "source-snapshot"
-        private const val SOURCE_TO_OUTPUT_FILES = "source-to-output"
+        private const konst SOURCE_SNAPSHOTS = "source-snapshot"
+        private const konst SOURCE_TO_OUTPUT_FILES = "source-to-output"
     }
 
-    internal val sourceSnapshotMap = registerMap(FileSnapshotMap(SOURCE_SNAPSHOTS.storageFile, icContext))
-    private val sourceToOutputMap = registerMap(SourceToOutputFilesMap(SOURCE_TO_OUTPUT_FILES.storageFile, icContext))
+    internal konst sourceSnapshotMap = registerMap(FileSnapshotMap(SOURCE_SNAPSHOTS.storageFile, icContext))
+    private konst sourceToOutputMap = registerMap(SourceToOutputFilesMap(SOURCE_TO_OUTPUT_FILES.storageFile, icContext))
 
     fun removeOutputForSourceFiles(sources: Iterable<File>) {
         for (sourceFile in sources) {
@@ -52,7 +52,7 @@ class InputsCache(
     // generatedFiles can contain multiple entries with the same source file
     // for example Kapt3 IC will generate a .java stub and .class stub for each source file
     fun registerOutputForSourceFiles(generatedFiles: List<GeneratedFile>) {
-        val sourceToOutput = MultiMap<File, File>()
+        konst sourceToOutput = MultiMap<File, File>()
 
         for (generatedFile in generatedFiles) {
             for (source in generatedFile.sourceFiles) {

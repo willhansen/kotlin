@@ -13,7 +13,7 @@ import org.gradle.api.tasks.Internal
 interface KotlinCompile<out T : KotlinCommonOptions> : Task {
 
     @get:Internal
-    val kotlinOptions: T
+    konst kotlinOptions: T
 
     fun kotlinOptions(fn: T.() -> Unit) {
         kotlinOptions.fn()

@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 fun <T: Any> underlying(a: IC<T>): T? = bar(a) {
-    it.value
+    it.konstue
 }
 
 fun <T: Any> extension(a: IC<T>): T? = bar(a) {
@@ -23,17 +23,17 @@ fun interface FunIFace<T, R> {
     fun call(ic: T): R
 }
 
-fun <T, R> bar(value: T, f: FunIFace<T, R>): R {
-    return f.call(value)
+fun <T, R> bar(konstue: T, f: FunIFace<T, R>): R {
+    return f.call(konstue)
 }
 
-fun <T: Any> IC<T>.extensionValue(): T? = value
+fun <T: Any> IC<T>.extensionValue(): T? = konstue
 
-fun <T: Any> normalValue(ic: IC<T>): T? = ic.value
+fun <T: Any> normalValue(ic: IC<T>): T? = ic.konstue
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: Any>(val value: T?) {
-    fun dispatchValue(): T? = value
+konstue class IC<T: Any>(konst konstue: T?) {
+    fun dispatchValue(): T? = konstue
 }
 
 fun box(): String {

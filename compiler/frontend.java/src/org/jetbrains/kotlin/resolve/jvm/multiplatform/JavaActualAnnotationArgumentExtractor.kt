@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.resolve.jvm.multiplatform
 import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.builtins.jvm.JavaToKotlinClassMap
 import org.jetbrains.kotlin.descriptors.ValueParameterDescriptor
-import org.jetbrains.kotlin.load.java.components.JavaPropertyInitializerEvaluatorImpl
+import org.jetbrains.kotlin.load.java.components.JavaPropertyInitializerEkonstuatorImpl
 import org.jetbrains.kotlin.load.java.sources.JavaSourceElement
 import org.jetbrains.kotlin.load.java.structure.*
 import org.jetbrains.kotlin.name.ClassId
@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.types.typeUtil.builtIns
 
 class JavaActualAnnotationArgumentExtractor : ExpectedActualDeclarationChecker.ActualAnnotationArgumentExtractor {
     override fun extractDefaultValue(parameter: ValueParameterDescriptor, expectedType: KotlinType): ConstantValue<*>? {
-        val element = (parameter.source as? JavaSourceElement)?.javaElement
+        konst element = (parameter.source as? JavaSourceElement)?.javaElement
         return (element as? JavaMethod)?.annotationParameterDefaultValue?.convert(expectedType)
     }
 
@@ -31,8 +31,8 @@ class JavaActualAnnotationArgumentExtractor : ExpectedActualDeclarationChecker.A
     // KClassValue/AnnotationValue are untied from descriptors/types, because here we do not have an instance of LazyJavaResolverContext.
     private fun JavaAnnotationArgument.convert(expectedType: KotlinType): ConstantValue<*>? {
         return when (this) {
-            is JavaLiteralAnnotationArgument -> value?.let {
-                JavaPropertyInitializerEvaluatorImpl.convertLiteralValue(it, expectedType)
+            is JavaLiteralAnnotationArgument -> konstue?.let {
+                JavaPropertyInitializerEkonstuatorImpl.convertLiteralValue(it, expectedType)
             }
             is JavaEnumValueAnnotationArgument -> {
                 enumClassId?.let { enumClassId ->
@@ -42,7 +42,7 @@ class JavaActualAnnotationArgumentExtractor : ExpectedActualDeclarationChecker.A
                 }
             }
             is JavaArrayAnnotationArgument -> {
-                val elementType = expectedType.builtIns.getArrayElementType(expectedType)
+                konst elementType = expectedType.builtIns.getArrayElementType(expectedType)
                 ConstantValueFactory.createArrayValue(getElements().mapNotNull { it.convert(elementType) }, expectedType)
             }
             is JavaAnnotationAsAnnotationArgument -> {
@@ -66,7 +66,7 @@ class JavaActualAnnotationArgumentExtractor : ExpectedActualDeclarationChecker.A
         }
         return when (type) {
             is JavaPrimitiveType -> {
-                val primitiveType = type.type
+                konst primitiveType = type.type
                 // void.class is not representable in Kotlin, we approximate it by Unit::class
                     ?: return KClassValue(ClassId.topLevel(StandardNames.FqNames.unit.toSafe()), 0)
                 if (arrayDimensions > 0) {
@@ -76,9 +76,9 @@ class JavaActualAnnotationArgumentExtractor : ExpectedActualDeclarationChecker.A
                 }
             }
             is JavaClassifierType -> {
-                val fqName = FqName(type.classifierQualifiedName)
+                konst fqName = FqName(type.classifierQualifiedName)
                 // TODO: support nested classes somehow
-                val classId = JavaToKotlinClassMap.mapJavaToKotlin(fqName) ?: ClassId.topLevel(fqName)
+                konst classId = JavaToKotlinClassMap.mapJavaToKotlin(fqName) ?: ClassId.topLevel(fqName)
                 KClassValue(classId, arrayDimensions)
             }
             else -> null

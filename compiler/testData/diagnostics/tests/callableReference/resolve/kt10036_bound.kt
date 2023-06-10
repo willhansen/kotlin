@@ -6,7 +6,7 @@ class OverloadTest {
     fun foo(bar: Any?) {}
 }
 
-inline fun <T : Any> OverloadTest.overload(value: T?, function: (T) -> Unit) {
+inline fun <T : Any> OverloadTest.overload(konstue: T?, function: (T) -> Unit) {
 }
 
-fun OverloadTest.overloadBoolean(value: Boolean?) = overload(value, OverloadTest()::foo)
+fun OverloadTest.overloadBoolean(konstue: Boolean?) = overload(konstue, OverloadTest()::foo)

@@ -28,7 +28,7 @@ class InlinedLocalFunctionDeclarationInstruction(
     element: KtElement,
     body: Pseudocode,
     blockScope: BlockScope,
-    val kind: EventOccurrencesRange
+    konst kind: EventOccurrencesRange
 ) : LocalFunctionDeclarationInstruction(element, body, blockScope) {
     override fun createCopy(): InstructionImpl = InlinedLocalFunctionDeclarationInstruction(element, body.copy(), blockScope, kind)
 

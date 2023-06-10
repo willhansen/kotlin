@@ -15,7 +15,7 @@ public class Foo<P> extends Bar<Integer, Integer> {
 fun <P> takeFoo(foo: Foo<P>) {}
 
 fun main(x: Foo<*>?) {
-    val y = Foo.bar
+    konst y = Foo.bar
     if (y !is Foo<*>?) return
     if (y == null) return
     if (x != y) return

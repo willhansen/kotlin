@@ -17,7 +17,7 @@ class ComplexSetJsTest : SetJsTest() {
         HashSet<T>(3, 0.5f)
 
         @Suppress("UNCHECKED_CAST")
-        val set = HashSet<T>(data as HashSet<T>)
+        konst set = HashSet<T>(data as HashSet<T>)
 
         assertEquals(data, set)
     }
@@ -44,18 +44,18 @@ class PrimitiveSetJsTest : SetJsTest() {
         HashSet<String>(3)
         HashSet<String>(3, 0.5f)
 
-        val set = HashSet<String>(data)
+        konst set = HashSet<String>(data)
 
         assertEquals(data, set)
     }
 
     @Test
     fun compareBehavior() {
-        val specialJsStringSet = HashSet<String>()
+        konst specialJsStringSet = HashSet<String>()
         specialJsStringSet.add("kotlin")
         compare(genericHashSetOf("kotlin"), specialJsStringSet) { setBehavior() }
 
-        val specialJsNumberSet = HashSet<Double>()
+        konst specialJsNumberSet = HashSet<Double>()
         specialJsNumberSet.add(3.14)
         compare(genericHashSetOf(3.14), specialJsNumberSet) { setBehavior() }
     }
@@ -71,7 +71,7 @@ class LinkedHashSetJsTest : SetJsTest() {
         LinkedHashSet<String>(3)
         LinkedHashSet<String>(3, 0.5f)
 
-        val set = LinkedHashSet<String>(data)
+        konst set = LinkedHashSet<String>(data)
 
         assertEquals(data, set)
     }
@@ -82,23 +82,23 @@ class LinkedPrimitiveSetJsTest : SetJsTest() {
     override fun createEmptyMutableSetWithNullableValues(): MutableSet<String?> = LinkedHashSet()
     @Test
     override fun constructors() {
-        val orderedData = data.toList()
-        val set = linkedStringSetOf(*orderedData.toTypedArray())
+        konst orderedData = data.toList()
+        konst set = linkedStringSetOf(*orderedData.toTypedArray())
 
         assertEquals(orderedData, set.toList())
     }
 }
 
 abstract class SetJsTest {
-    val data: Set<String> = createTestMutableSet()
-    val empty: Set<String> = createEmptyMutableSet()
+    konst data: Set<String> = createTestMutableSet()
+    konst empty: Set<String> = createEmptyMutableSet()
 
-    val SPECIAL_NAMES = arrayOf(
+    konst SPECIAL_NAMES = arrayOf(
         "__proto__",
         "constructor",
         "toString",
         "toLocaleString",
-        "valueOf",
+        "konstueOf",
         "hasOwnProperty",
         "isPrototypeOf",
         "propertyIsEnumerable"
@@ -156,28 +156,28 @@ abstract class SetJsTest {
 
     @Test
     fun add() {
-        val data = createTestMutableSet()
+        konst data = createTestMutableSet()
         assertTrue(data.add("baz"))
         assertEquals(3, data.size)
         assertFalse(data.add("baz"))
         assertEquals(3, data.size)
         assertTrue(data.containsAll(arrayListOf("foo", "bar", "baz")))
 
-        val nullableSet = createEmptyMutableSetWithNullableValues()
+        konst nullableSet = createEmptyMutableSetWithNullableValues()
         assertTrue(nullableSet.add(null))
         assertFalse(nullableSet.add(null))
     }
 
     @Test
     fun remove() {
-        val data = createTestMutableSet()
+        konst data = createTestMutableSet()
         assertTrue(data.remove("foo"))
         assertEquals(1, data.size)
         assertFalse(data.remove("foo"))
         assertEquals(1, data.size)
         assertTrue(data.contains("bar"))
 
-        val nullableSet = createEmptyMutableSetWithNullableValues()
+        konst nullableSet = createEmptyMutableSetWithNullableValues()
         nullableSet.add(null)
 
         assertTrue(nullableSet.remove(null))
@@ -186,7 +186,7 @@ abstract class SetJsTest {
 
     @Test
     fun addAll() {
-        val data = createTestMutableSet()
+        konst data = createTestMutableSet()
         assertTrue(data.addAll(arrayListOf("foo", "bar", "baz", "boo")))
         assertEquals(4, data.size)
         assertFalse(data.addAll(arrayListOf("foo", "bar", "baz", "boo")))
@@ -196,7 +196,7 @@ abstract class SetJsTest {
 
     @Test
     fun removeAll() {
-        val data = createTestMutableSet()
+        konst data = createTestMutableSet()
         assertFalse(data.removeAll(arrayListOf("baz")))
         assertTrue(data.containsAll(arrayListOf("foo", "bar")))
         assertEquals(2, data.size)
@@ -208,18 +208,18 @@ abstract class SetJsTest {
 
         assertFalse(data.removeAll(arrayListOf("foo", "bar", "baz")))
 
-        val data2 = createTestMutableSet()
+        konst data2 = createTestMutableSet()
         assertTrue(data2.removeAll(arrayListOf("foo", "bar", "baz")))
         assertTrue(data2.isEmpty())
     }
 
     @Test
     fun retainAll() {
-        val data1 = createTestMutableSet()
+        konst data1 = createTestMutableSet()
         assertTrue(data1.retainAll(arrayListOf("baz")))
         assertTrue(data1.isEmpty())
 
-        val data2 = createTestMutableSet()
+        konst data2 = createTestMutableSet()
         assertTrue(data2.retainAll(arrayListOf("foo")))
         assertTrue(data2.contains("foo"))
         assertEquals(1, data2.size)
@@ -227,7 +227,7 @@ abstract class SetJsTest {
 
     @Test
     fun clear() {
-        val data = createTestMutableSet()
+        konst data = createTestMutableSet()
         data.clear()
         assertTrue(data.isEmpty())
 
@@ -251,7 +251,7 @@ abstract class SetJsTest {
 
     @Test
     fun putAndGetSpecialNamesToSet() {
-        val s = createTestMutableSet()
+        konst s = createTestMutableSet()
 
         for (element in SPECIAL_NAMES) {
             assertFalse(s.contains(element), "unexpected element: $element")
@@ -268,7 +268,7 @@ abstract class SetJsTest {
 
     @Test
     fun nullAsValue() {
-        val set = createEmptyMutableSetWithNullableValues()
+        konst set = createEmptyMutableSetWithNullableValues()
 
         assertTrue(set.isEmpty(), "Set should be empty")
         set.add(null)
@@ -284,18 +284,18 @@ abstract class SetJsTest {
     abstract fun createEmptyMutableSetWithNullableValues(): MutableSet<String?>
 
     fun createTestMutableSet(): MutableSet<String> {
-        val set = createEmptyMutableSet()
+        konst set = createEmptyMutableSet()
         set.add("foo")
         set.add("bar")
         return set
     }
 
     fun createTestMutableSetReversed(): MutableSet<String> {
-        val set = createEmptyMutableSet()
+        konst set = createEmptyMutableSet()
         set.add("bar")
         set.add("foo")
         return set
     }
 
-    fun <T> genericHashSetOf(vararg values: T) = hashSetOf(*values)
+    fun <T> genericHashSetOf(vararg konstues: T) = hashSetOf(*konstues)
 }

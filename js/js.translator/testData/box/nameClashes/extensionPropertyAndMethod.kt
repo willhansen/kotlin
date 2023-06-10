@@ -5,7 +5,7 @@ class A
 
 fun A.bar() = 23
 
-val A.bar: Int
+konst A.bar: Int
     get() = 42
 
 fun box(): String {

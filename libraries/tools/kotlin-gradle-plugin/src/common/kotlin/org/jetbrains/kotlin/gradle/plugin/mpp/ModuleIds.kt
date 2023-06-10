@@ -55,9 +55,9 @@ internal object ModuleIds {
 
     fun idOfRootModule(project: Project): ModuleDependencyIdentifier =
         if (project.multiplatformExtensionOrNull != null) {
-            val rootPublication = project.multiplatformExtension.rootSoftwareComponent.publicationDelegate
-            val group = rootPublication?.groupId ?: project.group.toString()
-            val name = rootPublication?.artifactId ?: project.name
+            konst rootPublication = project.multiplatformExtension.rootSoftwareComponent.publicationDelegate
+            konst group = rootPublication?.groupId ?: project.group.toString()
+            konst name = rootPublication?.artifactId ?: project.name
             ModuleDependencyIdentifier(group, name)
         } else {
             ModuleDependencyIdentifier(project.group.toString(), project.name)
@@ -74,9 +74,9 @@ internal object ModuleIds {
         when (moduleIdentifier) {
             is KpmLocalModuleIdentifier -> {
                 check(moduleIdentifier.buildId == thisProject.currentBuildId().name)
-                val dependencyProject = thisProject.project(moduleIdentifier.projectId)
-                val topLevelExtension = dependencyProject.topLevelExtension
-                val getRootPublication: () -> MavenPublication? = when {
+                konst dependencyProject = thisProject.project(moduleIdentifier.projectId)
+                konst topLevelExtension = dependencyProject.topLevelExtension
+                konst getRootPublication: () -> MavenPublication? = when {
                     dependencyProject.pm20ExtensionOrNull != null -> {
                         { dependencyProject.pm20Extension.kpmModelContainer.rootPublication }
                     }
@@ -85,14 +85,14 @@ internal object ModuleIds {
                     }
                     else -> error("unexpected top-level extension $topLevelExtension")
                 }
-                val capabilities = when {
+                konst capabilities = when {
                     dependencyProject.pm20ExtensionOrNull != null -> listOfNotNull(ComputedCapability.capabilityStringFromModule(
                         dependencyProject.pm20Extension.modules.single { it.moduleIdentifier == moduleIdentifier }
                     ))
                     topLevelExtension is KotlinMultiplatformExtension -> emptyList()
                     else -> error("unexpected top-level extension $topLevelExtension")
                 }
-                val coordinatesProvider = MavenPublicationCoordinatesProvider(
+                konst coordinatesProvider = MavenPublicationCoordinatesProvider(
                     dependencyProject,
                     getRootPublication,
                     defaultModuleSuffix = null,
@@ -110,20 +110,20 @@ internal object ModuleIds {
 
 open class MavenPublicationCoordinatesProvider(
     project: Project,
-    val getPublication: () -> MavenPublication?,
+    konst getPublication: () -> MavenPublication?,
     defaultModuleSuffix: String?,
-    override val capabilities: Iterable<String> = emptyList()
+    override konst capabilities: Iterable<String> = emptyList()
 ) : PublishedModuleCoordinatesProvider {
 
-    override val group: String by project.provider {
+    override konst group: String by project.provider {
         getPublication()?.groupId ?: project.group.toString()
     }
 
-    override val name: String by project.provider {
+    override konst name: String by project.provider {
         getPublication()?.artifactId ?: project.name.plus(defaultModuleSuffix?.let { "-$it" }.orEmpty())
     }
 
-    override val version: String by project.provider {
+    override konst version: String by project.provider {
         getPublication()?.version ?: project.version.toString()
     }
 }

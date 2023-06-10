@@ -1,5 +1,5 @@
 private @ @[Ann1(1)] @Ann3("2") class A(
-        @ private val x: Int,
+        @ private konst x: Int,
         @ private var y: Int,
         @ open z: Int
 ) {
@@ -23,6 +23,6 @@ private @ @[Ann1(1)] @Ann3("2") class A(
         for (@ x in 1..100) {}
     }
 
-    val x: Int
+    konst x: Int
         @ private @ open get() = 1
 }

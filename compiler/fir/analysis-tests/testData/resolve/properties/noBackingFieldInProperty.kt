@@ -1,15 +1,15 @@
 // ISSUE: KT-41977
 
 class A {
-    val field: String = "" // (1)
+    konst field: String = "" // (1)
 
-    val x
+    konst x
         get() = field.length // should be ok, resolve to (1)
 }
 
 class B {
-    val field: String = ""
+    konst field: String = ""
 
-    <!MUST_BE_INITIALIZED!>val x: Int<!>
+    <!MUST_BE_INITIALIZED!>konst x: Int<!>
         get() = field.<!UNRESOLVED_REFERENCE!>length<!> // should be an error
 }

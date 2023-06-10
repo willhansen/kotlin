@@ -24,12 +24,12 @@ import org.jetbrains.kotlin.resolve.source.getPsi
 
 object DeprecatedSinceKotlinAnnotationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val deprecatedSinceAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.deprecatedSinceKotlin) ?: return
-        val deprecatedSinceAnnotationPsi = deprecatedSinceAnnotation.source.getPsi() as? KtAnnotationEntry ?: return
+        konst deprecatedSinceAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.deprecatedSinceKotlin) ?: return
+        konst deprecatedSinceAnnotationPsi = deprecatedSinceAnnotation.source.getPsi() as? KtAnnotationEntry ?: return
 
-        val deprecatedAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.deprecated)
+        konst deprecatedAnnotation = descriptor.annotations.findAnnotation(StandardNames.FqNames.deprecated)
 
-        val deprecatedSinceAnnotationName = deprecatedSinceAnnotationPsi.typeReference ?: return
+        konst deprecatedSinceAnnotationName = deprecatedSinceAnnotationPsi.typeReference ?: return
 
         if (descriptor.fqNameOrNull()?.isSubpackageOf(StandardNames.BUILT_INS_PACKAGE_FQ_NAME) == false) {
             context.trace.report(
@@ -70,9 +70,9 @@ object DeprecatedSinceKotlinAnnotationChecker : DeclarationChecker {
         fun AnnotationDescriptor.getCheckedSinceVersion(name: String) =
             getSinceVersion(name).also { checkVersion(it, name, context, deprecatedSinceAnnotationName) }
 
-        val warningSince = deprecatedSinceAnnotation.getCheckedSinceVersion("warningSince")
-        val errorSince = deprecatedSinceAnnotation.getCheckedSinceVersion("errorSince")
-        val hiddenSince = deprecatedSinceAnnotation.getCheckedSinceVersion("hiddenSince")
+        konst warningSince = deprecatedSinceAnnotation.getCheckedSinceVersion("warningSince")
+        konst errorSince = deprecatedSinceAnnotation.getCheckedSinceVersion("errorSince")
+        konst hiddenSince = deprecatedSinceAnnotation.getCheckedSinceVersion("hiddenSince")
 
         if (!lessOrNull(warningSince, errorSince) || !lessOrNull(errorSince, hiddenSince) || !lessOrNull(warningSince, hiddenSince)) {
             context.trace.report(
@@ -90,7 +90,7 @@ object DeprecatedSinceKotlinAnnotationChecker : DeclarationChecker {
         context: DeclarationCheckerContext,
         reportOn: PsiElement
     ) {
-        val argumentValue = (argumentValue(name) as? StringValue)?.value
+        konst argumentValue = (argumentValue(name) as? StringValue)?.konstue
         if (argumentValue != null && (parsedVersion == null || !argumentValue.matches(RequireKotlinConstants.VERSION_REGEX))) {
             context.trace.reportDiagnosticOnce(
                 Errors.ILLEGAL_KOTLIN_VERSION_STRING_VALUE.on(

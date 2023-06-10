@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.resolve.ModuleAnnotationsResolver
 
 class CliModuleAnnotationsResolver : ModuleAnnotationsResolver {
-    private val packagePartProviders = mutableListOf<PackagePartProvider>()
+    private konst packagePartProviders = mutableListOf<PackagePartProvider>()
 
     fun addPackagePartProvider(packagePartProvider: PackagePartProvider) {
         packagePartProviders += packagePartProvider
@@ -22,7 +22,7 @@ class CliModuleAnnotationsResolver : ModuleAnnotationsResolver {
     override fun getAnnotationsOnContainingModule(descriptor: DeclarationDescriptor): List<ClassId> {
         getAnnotationsOnContainingJsModule(descriptor)?.let { return it }
 
-        val moduleName = getJvmModuleNameForDeserializedDescriptor(descriptor) ?: return emptyList()
+        konst moduleName = getJvmModuleNameForDeserializedDescriptor(descriptor) ?: return emptyList()
         return packagePartProviders.flatMap { it.getAnnotationsOnBinaryModule(moduleName) }
     }
 }

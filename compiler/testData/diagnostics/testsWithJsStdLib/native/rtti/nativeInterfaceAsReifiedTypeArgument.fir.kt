@@ -13,7 +13,7 @@ operator inline fun <reified T> C.plus(other: T) = this
 fun bar() {
     foo(C())
 
-    val c: I = C()
+    konst c: I = C()
     foo(c)
     foo<I>(C())
 

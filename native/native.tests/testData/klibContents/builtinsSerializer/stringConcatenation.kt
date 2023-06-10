@@ -1,6 +1,6 @@
 object Obj {
-    const val O = "O"
-    val concat = "${O}K"
+    const konst O = "O"
+    konst concat = "${O}K"
 }
 
 @Deprecated("${Obj.O}/{id}")

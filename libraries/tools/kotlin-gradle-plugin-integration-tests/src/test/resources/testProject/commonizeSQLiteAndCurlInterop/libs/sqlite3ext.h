@@ -42,7 +42,7 @@ struct sqlite3_api_routines {
   const char * (*bind_parameter_name)(sqlite3_stmt*,int);
   int  (*bind_text)(sqlite3_stmt*,int,const char*,int n,void(*)(void*));
   int  (*bind_text16)(sqlite3_stmt*,int,const void*,int,void(*)(void*));
-  int  (*bind_value)(sqlite3_stmt*,int,const sqlite3_value*);
+  int  (*bind_konstue)(sqlite3_stmt*,int,const sqlite3_konstue*);
   int  (*busy_handler)(sqlite3*,int(*)(void*,int),void*);
   int  (*busy_timeout)(sqlite3*,int ms);
   int  (*changes)(sqlite3*);
@@ -71,7 +71,7 @@ struct sqlite3_api_routines {
   const unsigned char * (*column_text)(sqlite3_stmt*,int iCol);
   const void * (*column_text16)(sqlite3_stmt*,int iCol);
   int  (*column_type)(sqlite3_stmt*,int iCol);
-  sqlite3_value* (*column_value)(sqlite3_stmt*,int iCol);
+  sqlite3_konstue* (*column_konstue)(sqlite3_stmt*,int iCol);
   void * (*commit_hook)(sqlite3*,int(*)(void*),void*);
   int  (*complete)(const char*sql);
   int  (*complete16)(const void*sql);
@@ -80,12 +80,12 @@ struct sqlite3_api_routines {
   int  (*create_collation16)(sqlite3*,const void*,int,void*,
                              int(*)(void*,int,const void*,int,const void*));
   int  (*create_function)(sqlite3*,const char*,int,int,void*,
-                          void (*xFunc)(sqlite3_context*,int,sqlite3_value**),
-                          void (*xStep)(sqlite3_context*,int,sqlite3_value**),
+                          void (*xFunc)(sqlite3_context*,int,sqlite3_konstue**),
+                          void (*xStep)(sqlite3_context*,int,sqlite3_konstue**),
                           void (*xFinal)(sqlite3_context*));
   int  (*create_function16)(sqlite3*,const void*,int,int,void*,
-                            void (*xFunc)(sqlite3_context*,int,sqlite3_value**),
-                            void (*xStep)(sqlite3_context*,int,sqlite3_value**),
+                            void (*xFunc)(sqlite3_context*,int,sqlite3_konstue**),
+                            void (*xStep)(sqlite3_context*,int,sqlite3_konstue**),
                             void (*xFinal)(sqlite3_context*));
   int (*create_module)(sqlite3*,const char*,const sqlite3_module*,void*);
   int  (*data_count)(sqlite3_stmt*pStmt);
@@ -129,7 +129,7 @@ struct sqlite3_api_routines {
   void  (*result_text16)(sqlite3_context*,const void*,int,void(*)(void*));
   void  (*result_text16be)(sqlite3_context*,const void*,int,void(*)(void*));
   void  (*result_text16le)(sqlite3_context*,const void*,int,void(*)(void*));
-  void  (*result_value)(sqlite3_context*,sqlite3_value*);
+  void  (*result_konstue)(sqlite3_context*,sqlite3_konstue*);
   void * (*rollback_hook)(sqlite3*,void(*)(void*),void*);
   int  (*set_authorizer)(sqlite3*,int(*)(void*,int,const char*,const char*,
                          const char*,const char*),void*);
@@ -145,18 +145,18 @@ struct sqlite3_api_routines {
   void * (*update_hook)(sqlite3*,void(*)(void*,int ,char const*,char const*,
                                          sqlite_int64),void*);
   void * (*user_data)(sqlite3_context*);
-  const void * (*value_blob)(sqlite3_value*);
-  int  (*value_bytes)(sqlite3_value*);
-  int  (*value_bytes16)(sqlite3_value*);
-  double  (*value_double)(sqlite3_value*);
-  int  (*value_int)(sqlite3_value*);
-  sqlite_int64  (*value_int64)(sqlite3_value*);
-  int  (*value_numeric_type)(sqlite3_value*);
-  const unsigned char * (*value_text)(sqlite3_value*);
-  const void * (*value_text16)(sqlite3_value*);
-  const void * (*value_text16be)(sqlite3_value*);
-  const void * (*value_text16le)(sqlite3_value*);
-  int  (*value_type)(sqlite3_value*);
+  const void * (*konstue_blob)(sqlite3_konstue*);
+  int  (*konstue_bytes)(sqlite3_konstue*);
+  int  (*konstue_bytes16)(sqlite3_konstue*);
+  double  (*konstue_double)(sqlite3_konstue*);
+  int  (*konstue_int)(sqlite3_konstue*);
+  sqlite_int64  (*konstue_int64)(sqlite3_konstue*);
+  int  (*konstue_numeric_type)(sqlite3_konstue*);
+  const unsigned char * (*konstue_text)(sqlite3_konstue*);
+  const void * (*konstue_text16)(sqlite3_konstue*);
+  const void * (*konstue_text16be)(sqlite3_konstue*);
+  const void * (*konstue_text16le)(sqlite3_konstue*);
+  int  (*konstue_type)(sqlite3_konstue*);
   char *(*vmprintf)(const char*,va_list);
   /* Added ??? */
   int (*overload_function)(sqlite3*, const char *zFuncName, int nArg);
@@ -214,8 +214,8 @@ struct sqlite3_api_routines {
   const char *(*compileoption_get)(int);
   int (*compileoption_used)(const char*);
   int (*create_function_v2)(sqlite3*,const char*,int,int,void*,
-                            void (*xFunc)(sqlite3_context*,int,sqlite3_value**),
-                            void (*xStep)(sqlite3_context*,int,sqlite3_value**),
+                            void (*xFunc)(sqlite3_context*,int,sqlite3_konstue**),
+                            void (*xStep)(sqlite3_context*,int,sqlite3_konstue**),
                             void (*xFinal)(sqlite3_context*),
                             void(*xDestroy)(void*));
   int (*db_config)(sqlite3*,int,...);
@@ -266,12 +266,12 @@ struct sqlite3_api_routines {
                          void(*)(void*), unsigned char);
   int (*strglob)(const char*,const char*);
   /* Version 3.8.11 and later */
-  sqlite3_value *(*value_dup)(const sqlite3_value*);
-  void (*value_free)(sqlite3_value*);
+  sqlite3_konstue *(*konstue_dup)(const sqlite3_konstue*);
+  void (*konstue_free)(sqlite3_konstue*);
   int (*result_zeroblob64)(sqlite3_context*,sqlite3_uint64);
   int (*bind_zeroblob64)(sqlite3_stmt*, int, sqlite3_uint64);
   /* Version 3.9.0 and later */
-  unsigned int (*value_subtype)(sqlite3_value*);
+  unsigned int (*konstue_subtype)(sqlite3_konstue*);
   void (*result_subtype)(sqlite3_context*,unsigned int);
   /* Version 3.10.0 and later */
   int (*status64)(int,sqlite3_int64*,sqlite3_int64*,int);
@@ -291,9 +291,9 @@ struct sqlite3_api_routines {
                       sqlite3_stmt**,const void**);
   int (*bind_pointer)(sqlite3_stmt*,int,void*,const char*,void(*)(void*));
   void (*result_pointer)(sqlite3_context*,void*,const char*,void(*)(void*));
-  void *(*value_pointer)(sqlite3_value*,const char*);
+  void *(*konstue_pointer)(sqlite3_konstue*,const char*);
   int (*vtab_nochange)(sqlite3_context*);
-  int (*value_nochange)(sqlite3_value*);
+  int (*konstue_nochange)(sqlite3_konstue*);
   const char *(*vtab_collation)(sqlite3_index_info*,int);
   /* Version 3.24.0 and later */
   int (*keyword_count)(void);
@@ -309,19 +309,19 @@ struct sqlite3_api_routines {
   void (*str_reset)(sqlite3_str*);
   int (*str_errcode)(sqlite3_str*);
   int (*str_length)(sqlite3_str*);
-  char *(*str_value)(sqlite3_str*);
+  char *(*str_konstue)(sqlite3_str*);
   /* Version 3.25.0 and later */
   int (*create_window_function)(sqlite3*,const char*,int,int,void*,
-                            void (*xStep)(sqlite3_context*,int,sqlite3_value**),
+                            void (*xStep)(sqlite3_context*,int,sqlite3_konstue**),
                             void (*xFinal)(sqlite3_context*),
                             void (*xValue)(sqlite3_context*),
-                            void (*xInv)(sqlite3_context*,int,sqlite3_value**),
+                            void (*xInv)(sqlite3_context*,int,sqlite3_konstue**),
                             void(*xDestroy)(void*));
   /* Version 3.26.0 and later */
   const char *(*normalized_sql)(sqlite3_stmt*);
   /* Version 3.28.0 and later */
   int (*stmt_isexplain)(sqlite3_stmt*);
-  int (*value_frombind)(sqlite3_value*);
+  int (*konstue_frombind)(sqlite3_konstue*);
   /* Version 3.30.0 and later */
   int (*drop_modules)(sqlite3*,const char**);
   /* Version 3.31.0 and later */
@@ -357,7 +357,7 @@ typedef int (*sqlite3_loadext_entry)(
 ** (part of the main SQLite library - not an extension) so that
 ** it can get access to the sqlite3_api_routines structure
 ** definition.  But the main library does not want to redefine
-** the API.  So the redefinition macros are only valid if the
+** the API.  So the redefinition macros are only konstid if the
 ** SQLITE_CORE macros is undefined.
 */
 #if !defined(SQLITE_CORE) && !defined(SQLITE_OMIT_LOAD_EXTENSION)
@@ -375,7 +375,7 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_bind_parameter_name    sqlite3_api->bind_parameter_name
 #define sqlite3_bind_text              sqlite3_api->bind_text
 #define sqlite3_bind_text16            sqlite3_api->bind_text16
-#define sqlite3_bind_value             sqlite3_api->bind_value
+#define sqlite3_bind_konstue             sqlite3_api->bind_konstue
 #define sqlite3_busy_handler           sqlite3_api->busy_handler
 #define sqlite3_busy_timeout           sqlite3_api->busy_timeout
 #define sqlite3_changes                sqlite3_api->changes
@@ -402,7 +402,7 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_column_text            sqlite3_api->column_text
 #define sqlite3_column_text16          sqlite3_api->column_text16
 #define sqlite3_column_type            sqlite3_api->column_type
-#define sqlite3_column_value           sqlite3_api->column_value
+#define sqlite3_column_konstue           sqlite3_api->column_konstue
 #define sqlite3_commit_hook            sqlite3_api->commit_hook
 #define sqlite3_complete               sqlite3_api->complete
 #define sqlite3_complete16             sqlite3_api->complete16
@@ -459,7 +459,7 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_result_text16          sqlite3_api->result_text16
 #define sqlite3_result_text16be        sqlite3_api->result_text16be
 #define sqlite3_result_text16le        sqlite3_api->result_text16le
-#define sqlite3_result_value           sqlite3_api->result_value
+#define sqlite3_result_konstue           sqlite3_api->result_konstue
 #define sqlite3_rollback_hook          sqlite3_api->rollback_hook
 #define sqlite3_set_authorizer         sqlite3_api->set_authorizer
 #define sqlite3_set_auxdata            sqlite3_api->set_auxdata
@@ -474,18 +474,18 @@ typedef int (*sqlite3_loadext_entry)(
 #endif
 #define sqlite3_update_hook            sqlite3_api->update_hook
 #define sqlite3_user_data              sqlite3_api->user_data
-#define sqlite3_value_blob             sqlite3_api->value_blob
-#define sqlite3_value_bytes            sqlite3_api->value_bytes
-#define sqlite3_value_bytes16          sqlite3_api->value_bytes16
-#define sqlite3_value_double           sqlite3_api->value_double
-#define sqlite3_value_int              sqlite3_api->value_int
-#define sqlite3_value_int64            sqlite3_api->value_int64
-#define sqlite3_value_numeric_type     sqlite3_api->value_numeric_type
-#define sqlite3_value_text             sqlite3_api->value_text
-#define sqlite3_value_text16           sqlite3_api->value_text16
-#define sqlite3_value_text16be         sqlite3_api->value_text16be
-#define sqlite3_value_text16le         sqlite3_api->value_text16le
-#define sqlite3_value_type             sqlite3_api->value_type
+#define sqlite3_konstue_blob             sqlite3_api->konstue_blob
+#define sqlite3_konstue_bytes            sqlite3_api->konstue_bytes
+#define sqlite3_konstue_bytes16          sqlite3_api->konstue_bytes16
+#define sqlite3_konstue_double           sqlite3_api->konstue_double
+#define sqlite3_konstue_int              sqlite3_api->konstue_int
+#define sqlite3_konstue_int64            sqlite3_api->konstue_int64
+#define sqlite3_konstue_numeric_type     sqlite3_api->konstue_numeric_type
+#define sqlite3_konstue_text             sqlite3_api->konstue_text
+#define sqlite3_konstue_text16           sqlite3_api->konstue_text16
+#define sqlite3_konstue_text16be         sqlite3_api->konstue_text16be
+#define sqlite3_konstue_text16le         sqlite3_api->konstue_text16le
+#define sqlite3_konstue_type             sqlite3_api->konstue_type
 #define sqlite3_vmprintf               sqlite3_api->vmprintf
 #define sqlite3_vsnprintf              sqlite3_api->xvsnprintf
 #define sqlite3_overload_function      sqlite3_api->overload_function
@@ -579,12 +579,12 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_result_text64          sqlite3_api->result_text64
 #define sqlite3_strglob                sqlite3_api->strglob
 /* Version 3.8.11 and later */
-#define sqlite3_value_dup              sqlite3_api->value_dup
-#define sqlite3_value_free             sqlite3_api->value_free
+#define sqlite3_konstue_dup              sqlite3_api->konstue_dup
+#define sqlite3_konstue_free             sqlite3_api->konstue_free
 #define sqlite3_result_zeroblob64      sqlite3_api->result_zeroblob64
 #define sqlite3_bind_zeroblob64        sqlite3_api->bind_zeroblob64
 /* Version 3.9.0 and later */
-#define sqlite3_value_subtype          sqlite3_api->value_subtype
+#define sqlite3_konstue_subtype          sqlite3_api->konstue_subtype
 #define sqlite3_result_subtype         sqlite3_api->result_subtype
 /* Version 3.10.0 and later */
 #define sqlite3_status64               sqlite3_api->status64
@@ -602,10 +602,10 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_prepare16_v3           sqlite3_api->prepare16_v3
 #define sqlite3_bind_pointer           sqlite3_api->bind_pointer
 #define sqlite3_result_pointer         sqlite3_api->result_pointer
-#define sqlite3_value_pointer          sqlite3_api->value_pointer
+#define sqlite3_konstue_pointer          sqlite3_api->konstue_pointer
 /* Version 3.22.0 and later */
 #define sqlite3_vtab_nochange          sqlite3_api->vtab_nochange
-#define sqlite3_value_nochange         sqlite3_api->value_nochange
+#define sqlite3_konstue_nochange         sqlite3_api->konstue_nochange
 #define sqlite3_vtab_collation         sqlite3_api->vtab_collation
 /* Version 3.24.0 and later */
 #define sqlite3_keyword_count          sqlite3_api->keyword_count
@@ -621,14 +621,14 @@ typedef int (*sqlite3_loadext_entry)(
 #define sqlite3_str_reset              sqlite3_api->str_reset
 #define sqlite3_str_errcode            sqlite3_api->str_errcode
 #define sqlite3_str_length             sqlite3_api->str_length
-#define sqlite3_str_value              sqlite3_api->str_value
+#define sqlite3_str_konstue              sqlite3_api->str_konstue
 /* Version 3.25.0 and later */
 #define sqlite3_create_window_function sqlite3_api->create_window_function
 /* Version 3.26.0 and later */
 #define sqlite3_normalized_sql         sqlite3_api->normalized_sql
 /* Version 3.28.0 and later */
 #define sqlite3_stmt_isexplain         sqlite3_api->stmt_isexplain
-#define sqlite3_value_frombind         sqlite3_api->value_frombind
+#define sqlite3_konstue_frombind         sqlite3_api->konstue_frombind
 /* Version 3.30.0 and later */
 #define sqlite3_drop_modules           sqlite3_api->drop_modules
 /* Version 3.31.0 and later */

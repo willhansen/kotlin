@@ -4,8 +4,8 @@ import android.app.Activity
 import kotlinx.android.synthetic.main.layout.*
 
 fun Activity.a() {
-    val x = login
-    val y = this.login
+    konst x = login
+    konst y = this.login
 }
 
 // 2 GETSTATIC test/R\$id\.login

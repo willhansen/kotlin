@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.commonizer.utils.isNull
 class ValueParameterCommonizer(returnTypeCommonizer: TypeCommonizer) :
     AbstractStandardCommonizer<CirValueParameter, CirValueParameter?>() {
     private lateinit var name: CirName
-    private val returnTypeCommonizer = returnTypeCommonizer.asCommonizer()
+    private konst returnTypeCommonizer = returnTypeCommonizer.asCommonizer()
     private var varargElementType: CirType? = null
     private var isCrossinline = true
     private var isNoinline = true
@@ -38,7 +38,7 @@ class ValueParameterCommonizer(returnTypeCommonizer: TypeCommonizer) :
     }
 
     override fun doCommonizeWith(next: CirValueParameter): Boolean {
-        val result = !next.declaresDefaultValue
+        konst result = !next.declaresDefaultValue
                 && varargElementType.isNull() == next.varargElementType.isNull()
                 && returnTypeCommonizer.commonizeWith(next.returnType)
 

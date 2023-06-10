@@ -19,12 +19,12 @@ package org.jetbrains.kotlin.cfg
 import org.jetbrains.kotlin.psi.KtLoopExpression
 
 class LoopInfo(
-    override val element: KtLoopExpression,
+    override konst element: KtLoopExpression,
     entryPoint: Label,
     exitPoint: Label,
-    val bodyEntryPoint: Label,
-    val bodyExitPoint: Label,
-    val conditionEntryPoint: Label
+    konst bodyEntryPoint: Label,
+    konst bodyExitPoint: Label,
+    konst conditionEntryPoint: Label
 ) : BreakableBlockInfo(element, entryPoint, exitPoint) {
 
     init {

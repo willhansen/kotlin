@@ -3,7 +3,7 @@ enum class En { A, B, С }
 fun box() {
     var r = ""
 
-    val en: En = En.A
+    konst en: En = En.A
     when (en) {
         En.A -> { r = "when-1" }
         En.B -> {}
@@ -18,7 +18,7 @@ fun box() {
 
 
     // nullable variable
-    val en2: Any? = En.A
+    konst en2: Any? = En.A
     if (en2 is En) {
         when (en2) {
             En.A -> { r = "when-3" }
@@ -35,7 +35,7 @@ fun box() {
 
 
     // not nullable variable
-    val en1: Any = En.A
+    konst en1: Any = En.A
     if (en1 is En) {
         when (en1) {
             En.A -> { r = "when-5" }

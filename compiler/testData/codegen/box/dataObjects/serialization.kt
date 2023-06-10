@@ -16,7 +16,7 @@ fun box(): String {
     ByteArrayOutputStream().use { baos ->
         ObjectOutputStream(baos).use { oos -> oos.writeObject(SerializableDataObject) }
         ByteArrayInputStream(baos.toByteArray()).use { bais ->
-            val deseialized = ObjectInputStream(bais).readObject()
+            konst deseialized = ObjectInputStream(bais).readObject()
             assertEquals(SerializableDataObject, deseialized)
             assertNotSame(deseialized, SerializableDataObject)
         }

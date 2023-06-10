@@ -16,7 +16,7 @@ fun foo2() {
     }
 }
 
-val p1 = (<!NESTED_JS_EXPORT!>@JsExport<!> fun () {})
+konst p1 = (<!NESTED_JS_EXPORT!>@JsExport<!> fun () {})
 
 <!WRONG_ANNOTATION_TARGET!>@JsExport<!>
 class C2

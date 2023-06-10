@@ -8,25 +8,25 @@ repositories {
 }
 
 kotlin {
-    val jvmWithoutJava = jvm("jvmWithoutJava")
-    val jvmWithJava = targetFromPreset(presets["jvmWithJava"])
-    val js = js {
+    konst jvmWithoutJava = jvm("jvmWithoutJava")
+    konst jvmWithJava = targetFromPreset(presets["jvmWithJava"])
+    konst js = js {
         nodejs()
     }
-    val macos64 = macosX64("macos64")
-    val linux64 = linuxX64("linux64")
-    val mingw64 = mingwX64("mingw64")
+    konst macos64 = macosX64("macos64")
+    konst linux64 = linuxX64("linux64")
+    konst mingw64 = mingwX64("mingw64")
 
     sourceSets {
-        val commonTest by getting {
+        konst commonTest by getting {
         	dependencies {
         		implementation(kotlin("test-common"))
         		implementation(kotlin("test-annotations-common"))
         	}
         }
 
-        val main by getting
-        val jvmWithoutJavaMain = jvmWithoutJava.compilations["main"].defaultSourceSet
+        konst main by getting
+        konst jvmWithoutJavaMain = jvmWithoutJava.compilations["main"].defaultSourceSet
         configure(listOf(main, jvmWithoutJavaMain)) {
         	dependencies {
         		implementation(kotlin("stdlib"))
@@ -34,8 +34,8 @@ kotlin {
         	}
         }
 
-        val test by getting
-        val jvmWithoutJavaTest = jvmWithoutJava.compilations["test"].defaultSourceSet
+        konst test by getting
+        konst jvmWithoutJavaTest = jvmWithoutJava.compilations["test"].defaultSourceSet
         configure(listOf(test, jvmWithoutJavaTest)) {
         	dependencies {
         		implementation(kotlin("test-junit"))
@@ -48,7 +48,7 @@ kotlin {
         	}
         }
 
-		val nativeMain by creating
+		konst nativeMain by creating
 		configure(listOf(macos64, linux64, mingw64)) {
             compilations["main"].defaultSourceSet.dependsOn(nativeMain)
 		}

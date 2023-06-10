@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.util.withIndent
 import java.io.File
 
 fun printTransformer(elements: List<Element>, generationPath: File): GeneratedFile {
-    val dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
-    val file = File(dir, "FirTransformer.kt")
-    val stringBuilder = StringBuilder()
+    konst dir = File(generationPath, VISITOR_PACKAGE.replace(".", "/"))
+    konst file = File(dir, "FirTransformer.kt")
+    konst stringBuilder = StringBuilder()
     SmartPrinter(stringBuilder).apply {
         printCopyright()
         println("package $VISITOR_PACKAGE")
@@ -31,7 +31,7 @@ fun printTransformer(elements: List<Element>, generationPath: File): GeneratedFi
             println()
             for (element in elements) {
                 if (element == AbstractFirTreeBuilder.baseFirElement) continue
-                val varName = element.safeDecapitalizedName
+                konst varName = element.safeDecapitalizedName
                 print("open fun ")
                 element.typeParameters.takeIf { it.isNotBlank() }?.let { print(it) }
                 println(
@@ -46,7 +46,7 @@ fun printTransformer(elements: List<Element>, generationPath: File): GeneratedFi
             }
 
             for (element in elements) {
-                val varName = element.safeDecapitalizedName
+                konst varName = element.safeDecapitalizedName
                 print("final override fun ")
                 element.typeParameters.takeIf { it.isNotBlank() }?.let { print(it) }
 

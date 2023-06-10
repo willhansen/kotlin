@@ -65,9 +65,9 @@ fun a(
 
   }
 
-  for (val x in foo) a
+  for (konst x in foo) a
     for (x in foo) a
-      for (val x : Int in foo) a
+      for (konst x : Int in foo) a
         for (x : Int in foo) {}
 
   while (true) {}

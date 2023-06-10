@@ -7,6 +7,6 @@ class Foo {
 }
 
 fun test() {
-    val a = ::Foo
+    konst a = ::Foo
     checkSubtype<() -> Foo>(a)
 }

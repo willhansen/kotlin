@@ -1,7 +1,7 @@
 package
 
-public val l0: (A) -> kotlin.Unit
-public val l1: (A) -> kotlin.Unit
+public konst l0: (A) -> kotlin.Unit
+public konst l1: (A) -> kotlin.Unit
 public fun bar(/*0*/ a: A): kotlin.Unit
 public fun foo(/*0*/ a: A): kotlin.Unit
 public fun foo(/*0*/ b: B): kotlin.Unit

@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.resolve.multiplatform.OptionalAnnotationUtil
 
-internal val processOptionalAnnotationsPhase = makeIrModulePhase(
+internal konst processOptionalAnnotationsPhase = makeIrModulePhase(
     ::ProcessOptionalAnnotations,
     name = "ProcessOptionalAnnotations",
     description = "Record metadata of @OptionalExpectation-annotated classes to backend-specific storage, later written to .kotlin_module"
 )
 
-class ProcessOptionalAnnotations(private val context: JvmBackendContext) : FileLoweringPass {
+class ProcessOptionalAnnotations(private konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         for (declaration in irFile.declarations) {
             if (declaration !is IrClass || !declaration.isOptionalAnnotationClass) continue
@@ -30,7 +30,7 @@ class ProcessOptionalAnnotations(private val context: JvmBackendContext) : FileL
 
     private fun IrClass.registerOptionalAnnotations() {
         // TODO FirMetadataSource.Class
-        val metadataSource = (metadata as? DescriptorMetadataSource.Class)?.descriptor ?: return
+        konst metadataSource = (metadata as? DescriptorMetadataSource.Class)?.descriptor ?: return
         if (!OptionalAnnotationUtil.shouldGenerateExpectClass(metadataSource)) return
         context.state.factory.packagePartRegistry.optionalAnnotations += metadataSource
 

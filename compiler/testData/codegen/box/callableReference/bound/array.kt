@@ -6,6 +6,6 @@ class B : A() {
 }
 
 fun box() : String {
-    val b = B()
+    konst b = B()
     return (b::f).get()
 }

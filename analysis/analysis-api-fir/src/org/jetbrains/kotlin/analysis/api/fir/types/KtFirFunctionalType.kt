@@ -28,37 +28,37 @@ import org.jetbrains.kotlin.fir.types.impl.ConeClassLikeTypeImpl
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFirFunctionalType(
-    override val coneType: ConeClassLikeTypeImpl,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeClassLikeTypeImpl,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtFunctionalType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val classId: ClassId get() = withValidityAssertion { coneType.lookupTag.classId }
-    override val classSymbol: KtClassLikeSymbol by cached {
+    override konst classId: ClassId get() = withValidityAssertion { coneType.lookupTag.classId }
+    override konst classSymbol: KtClassLikeSymbol by cached {
         builder.classifierBuilder.buildClassLikeSymbolByLookupTag(coneType.lookupTag)
             ?: errorWithFirSpecificEntries("Class was not found", coneType = coneType)
     }
-    override val ownTypeArguments: List<KtTypeProjection> get() = withValidityAssertion { qualifiers.last().typeArguments }
+    override konst ownTypeArguments: List<KtTypeProjection> get() = withValidityAssertion { qualifiers.last().typeArguments }
 
-    override val qualifiers: List<KtClassTypeQualifier.KtResolvedClassTypeQualifier> by cached {
+    override konst qualifiers: List<KtClassTypeQualifier.KtResolvedClassTypeQualifier> by cached {
         UsualClassTypeQualifierBuilder.buildQualifiers(coneType, builder)
     }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
-    override val isSuspend: Boolean get() = withValidityAssertion { coneType.isSuspendOrKSuspendFunctionType(builder.rootSession) }
+    override konst isSuspend: Boolean get() = withValidityAssertion { coneType.isSuspendOrKSuspendFunctionType(builder.rootSession) }
 
-    override val isReflectType: Boolean
+    override konst isReflectType: Boolean
         get() = withValidityAssertion { coneType.functionTypeKind(builder.rootSession)?.isReflectType == true }
 
-    override val arity: Int get() = withValidityAssertion { parameterTypes.size }
+    override konst arity: Int get() = withValidityAssertion { parameterTypes.size }
 
     @OptIn(KtAnalysisApiInternals::class)
-    override val contextReceivers: List<KtContextReceiver> by cached {
+    override konst contextReceivers: List<KtContextReceiver> by cached {
         coneType.contextReceiversTypes(builder.rootSession)
             .map {
                 // Context receivers in function types may not have labels, hence the `null` label.
@@ -66,19 +66,19 @@ internal class KtFirFunctionalType(
             }
     }
 
-    override val hasContextReceivers: Boolean get() = withValidityAssertion { contextReceivers.isNotEmpty() }
+    override konst hasContextReceivers: Boolean get() = withValidityAssertion { contextReceivers.isNotEmpty() }
 
-    override val receiverType: KtType? by cached {
+    override konst receiverType: KtType? by cached {
         coneType.receiverType(builder.rootSession)?.buildKtType()
     }
 
-    override val hasReceiver: Boolean get() = withValidityAssertion { receiverType != null }
+    override konst hasReceiver: Boolean get() = withValidityAssertion { receiverType != null }
 
-    override val parameterTypes: List<KtType> by cached {
-        coneType.valueParameterTypesWithoutReceivers(builder.rootSession).map { it.buildKtType() }
+    override konst parameterTypes: List<KtType> by cached {
+        coneType.konstueParameterTypesWithoutReceivers(builder.rootSession).map { it.buildKtType() }
     }
 
-    override val returnType: KtType by cached {
+    override konst returnType: KtType by cached {
         coneType.returnType(builder.rootSession).buildKtType()
     }
 

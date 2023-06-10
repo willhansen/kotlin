@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
 interface CheckerContext {
-    val trace: BindingTrace
+    konst trace: BindingTrace
 
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
 
-    val deprecationResolver: DeprecationResolver
+    konst deprecationResolver: DeprecationResolver
 
-    val moduleDescriptor: ModuleDescriptor
+    konst moduleDescriptor: ModuleDescriptor
 }

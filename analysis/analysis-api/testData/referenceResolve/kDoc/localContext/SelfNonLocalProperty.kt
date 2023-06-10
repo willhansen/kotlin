@@ -2,7 +2,7 @@ class C {
     /**
      * [a<caret>a]
      */
-    val aa: Int = 1
+    konst aa: Int = 1
 
-    val bb: Int = 10
+    konst bb: Int = 10
 }

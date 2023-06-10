@@ -15,14 +15,14 @@ fun test_1(
 }
 
 fun test_2() {
-    val x = producePositiveInt()
+    konst x = producePositiveInt()
     takePositive(x)
     takeNegative(<!ILLEGAL_NUMBER_SIGN!>x<!>) // should be error
     takeAny(x)
 }
 
 fun test_3() {
-    val x = produceBoxedPositiveInt().value
+    konst x = produceBoxedPositiveInt().konstue
     takePositive(x)
     takeNegative(<!ILLEGAL_NUMBER_SIGN!>x<!>) // should be error
     takeAny(x)

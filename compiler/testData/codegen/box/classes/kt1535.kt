@@ -14,10 +14,10 @@ class Broken() : Function0<String> {
 }
 
 fun box(): String {
-  val works1: ()->Any = Works();
+  konst works1: ()->Any = Works();
   works1()
 
-  val broken1: ()->String = Broken();
+  konst broken1: ()->String = Broken();
   broken1()
 
   return "OK"

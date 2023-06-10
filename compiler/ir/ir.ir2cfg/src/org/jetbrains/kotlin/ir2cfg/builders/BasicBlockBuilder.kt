@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.ir2cfg.graph.BasicBlock
 
 interface BasicBlockBuilder {
 
-    val incoming: BlockConnectorBuilder?
+    konst incoming: BlockConnectorBuilder?
 
     fun add(element: IrStatement)
 
-    val last: IrStatement?
+    konst last: IrStatement?
 
     fun build(): BasicBlock
 }

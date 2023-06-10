@@ -21,7 +21,7 @@ public enum E {
 import test.E
 
 fun box(): String {
-    val instances = E.INSTANCES
+    konst instances = E.INSTANCES
     if (E.foo != 42)
         return "Wrong foo ${E.foo}"
     if (instances.size != 1)

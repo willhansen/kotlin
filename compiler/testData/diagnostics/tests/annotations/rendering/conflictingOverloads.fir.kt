@@ -4,7 +4,7 @@
 annotation class An
 
 @An
-data class A(@An val x: @An Int) {
+data class A(@An konst x: @An Int) {
     @An
     fun copy(@An x: @An Int) = x
 }

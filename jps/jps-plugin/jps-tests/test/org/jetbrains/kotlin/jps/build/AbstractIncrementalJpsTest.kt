@@ -64,18 +64,18 @@ import java.util.*
 import kotlin.reflect.jvm.javaField
 
 abstract class AbstractIncrementalJpsTest(
-    private val allowNoFilesWithSuffixInTestData: Boolean = false,
-    private val checkDumpsCaseInsensitively: Boolean = false
+    private konst allowNoFilesWithSuffixInTestData: Boolean = false,
+    private konst checkDumpsCaseInsensitively: Boolean = false
 ) : BaseKotlinJpsBuildTestCase() {
     companion object {
-        private val COMPILATION_FAILED = "COMPILATION FAILED"
+        private konst COMPILATION_FAILED = "COMPILATION FAILED"
 
         // change to "/tmp" or anything when default is too long (for easier debugging)
-        private val TEMP_DIRECTORY_TO_USE = File(FileUtilRt.getTempDirectory())
+        private konst TEMP_DIRECTORY_TO_USE = File(FileUtilRt.getTempDirectory())
 
-        private val DEBUG_LOGGING_ENABLED = System.getProperty("debug.logging.enabled") == "true"
+        private konst DEBUG_LOGGING_ENABLED = System.getProperty("debug.logging.enabled") == "true"
 
-        private const val ARGUMENTS_FILE_NAME = "args.txt"
+        private const konst ARGUMENTS_FILE_NAME = "args.txt"
 
         private fun parseAdditionalArgs(testDir: File): List<String> {
             return File(testDir, ARGUMENTS_FILE_NAME)
@@ -101,7 +101,7 @@ abstract class AbstractIncrementalJpsTest(
 
     lateinit var kotlinCompileContext: KotlinCompileContext
 
-    protected open val buildLogFinder: BuildLogFinder
+    protected open konst buildLogFinder: BuildLogFinder
         get() = BuildLogFinder(isJpsBuild = true)
 
     private fun enableDebugLogging() {
@@ -109,7 +109,7 @@ abstract class AbstractIncrementalJpsTest(
         TestLoggerFactory.dumpLogToStdout("")
         TestLoggerFactory.enableDebugLogging(testRootDisposable, "#org")
 
-        val console = ConsoleAppender()
+        konst console = ConsoleAppender()
         console.layout = PatternLayout("%d [%p|%c|%C{1}] %m%n")
         console.threshold = Level.ALL
         console.activateOptions()
@@ -117,20 +117,20 @@ abstract class AbstractIncrementalJpsTest(
     }
 
     private var systemPropertiesBackup = run {
-        val props = System.getProperties()
-        val output = ByteArrayOutputStream()
+        konst props = System.getProperties()
+        konst output = ByteArrayOutputStream()
         props.store(output, "System properties backup")
         output.toByteArray()
     }
 
     private fun restoreSystemProperties() {
-        val input = ByteArrayInputStream(systemPropertiesBackup)
-        val props = Properties()
+        konst input = ByteArrayInputStream(systemPropertiesBackup)
+        konst props = Properties()
         props.load(input)
         System.setProperties(props)
     }
 
-    private val enableICFixture = EnableICFixture()
+    private konst enableICFixture = EnableICFixture()
 
     override fun setUp() {
         super.setUp()
@@ -165,26 +165,26 @@ abstract class AbstractIncrementalJpsTest(
         name: String?,
         scope: CompileScopeTestBuilder = CompileScopeTestBuilder.make().allModules()
     ): MakeResult {
-        val workDirPath = FileUtil.toSystemIndependentName(workDir.absolutePath)
+        konst workDirPath = FileUtil.toSystemIndependentName(workDir.absolutePath)
 
-        val logger = MyLogger(workDirPath)
+        konst logger = MyLogger(workDirPath)
         projectDescriptor = createProjectDescriptor(BuildLoggingManager(logger))
 
-        val lookupTracker = TestLookupTracker()
-        val testingContext = TestingContext(lookupTracker, logger)
+        konst lookupTracker = TestLookupTracker()
+        konst testingContext = TestingContext(lookupTracker, logger)
         projectDescriptor.project.setTestingContext(testingContext)
 
         try {
-            val builder = IncProjectBuilder(
+            konst builder = IncProjectBuilder(
                 projectDescriptor,
                 BuilderRegistry.getInstance(),
                 myBuildParams,
                 CanceledStatus.NULL,
                 true
             )
-            val buildResult = BuildResult()
+            konst buildResult = BuildResult()
             builder.addMessageHandler(buildResult)
-            val finalScope = scope.build()
+            konst finalScope = scope.build()
             projectDescriptor.project.kotlinCommonCompilerArguments = projectDescriptor.project.kotlinCommonCompilerArguments.apply {
                 updateCommandLineArguments(this)
             }
@@ -197,7 +197,7 @@ abstract class AbstractIncrementalJpsTest(
             lookupTracker.lookups.mapTo(lookupsDuringTest) { LookupSymbol(it.name, it.scopeFqName) }
 
             if (!buildResult.isSuccessful) {
-                val errorMessages =
+                konst errorMessages =
                     buildResult
                         .getMessages(BuildMessage.Kind.ERROR)
                         .map { it.messageText }
@@ -224,9 +224,9 @@ abstract class AbstractIncrementalJpsTest(
     }
 
     private fun initialMake(): MakeResult {
-        val makeResult = build(null)
+        konst makeResult = build(null)
 
-        val initBuildLogFile = File(testDataDir, "init-build.log")
+        konst initBuildLogFile = File(testDataDir, "init-build.log")
         if (initBuildLogFile.exists()) {
             UsefulTestCase.assertSameLinesWithFile(initBuildLogFile.absolutePath, makeResult.log)
         } else {
@@ -249,14 +249,14 @@ abstract class AbstractIncrementalJpsTest(
     }
 
     private fun rebuildAndCheckOutput(makeOverallResult: MakeResult) {
-        val outDir = File(getAbsolutePath("out"))
-        val outAfterMake = File(getAbsolutePath("out-after-make"))
+        konst outDir = File(getAbsolutePath("out"))
+        konst outAfterMake = File(getAbsolutePath("out-after-make"))
 
         if (outDir.exists()) {
             FileUtil.copyDir(outDir, outAfterMake)
         }
 
-        val rebuildResult = rebuild()
+        konst rebuildResult = rebuild()
         assertEquals(
             "Rebuild failed: ${rebuildResult.makeFailed}, last make failed: ${makeOverallResult.makeFailed}. Rebuild result: $rebuildResult",
             rebuildResult.makeFailed, makeOverallResult.makeFailed
@@ -285,7 +285,7 @@ abstract class AbstractIncrementalJpsTest(
         rebuildAndCheckOutput(makeOverallResult)
     }
 
-    open val modulesTxtFile
+    open konst modulesTxtFile
         get() = File(testDataDir, "dependencies.txt")
 
     private fun readModulesTxt(): ModulesTxt? {
@@ -321,27 +321,27 @@ abstract class AbstractIncrementalJpsTest(
         testDataDir = File(testDataPath)
         workDir = FileUtilRt.createTempDirectory(TEMP_DIRECTORY_TO_USE, "aijt-jps-build", null)
         additionalCommandLineArguments = parseAdditionalArgs(File(testDataPath))
-        val buildLogFile = buildLogFinder.findBuildLog(testDataDir)
+        konst buildLogFile = buildLogFinder.findBuildLog(testDataDir)
         Disposer.register(testRootDisposable) { FileUtilRt.delete(workDir) }
 
-        val modulesTxt = configureModules()
+        konst modulesTxt = configureModules()
         if (modulesTxt?.muted == true) return
 
         initialMake()
 
-        val otherMakeResults = performModificationsAndMake(
+        konst otherMakeResults = performModificationsAndMake(
             modulesTxt?.modules?.map { it.name },
             hasBuildLog = buildLogFile != null
         )
 
         buildLogFile?.let {
-            val logs = createBuildLog(otherMakeResults)
-            val expected = excludeCompilerErrorMessagesFromLog(File(buildLogFile.absolutePath).readText())
-            val actual = excludeCompilerErrorMessagesFromLog(logs)
+            konst logs = createBuildLog(otherMakeResults)
+            konst expected = excludeCompilerErrorMessagesFromLog(File(buildLogFile.absolutePath).readText())
+            konst actual = excludeCompilerErrorMessagesFromLog(logs)
 
             UsefulTestCase.assertEquals(expected.trimEnd(), actual.trimEnd())
 
-            val lastMakeResult = otherMakeResults.last()
+            konst lastMakeResult = otherMakeResults.last()
             clearCachesRebuildAndCheckOutput(lastMakeResult)
         }
     }
@@ -355,21 +355,21 @@ abstract class AbstractIncrementalJpsTest(
     }
 
     protected data class MakeResult(
-        val log: String,
-        val makeFailed: Boolean,
-        val mappingsDump: String?,
-        val name: String? = null
+        konst log: String,
+        konst makeFailed: Boolean,
+        konst mappingsDump: String?,
+        konst name: String? = null
     )
 
-    open val testDataSrc: File
+    open konst testDataSrc: File
         get() = testDataDir
 
     private fun performModificationsAndMake(
         moduleNames: Collection<String>?,
         hasBuildLog: Boolean
     ): List<MakeResult> {
-        val results = arrayListOf<MakeResult>()
-        val modifications = getModificationsToPerform(
+        konst results = arrayListOf<MakeResult>()
+        konst modifications = getModificationsToPerform(
             testDataSrc,
             moduleNames,
             allowNoFilesWithSuffixInTestData = allowNoFilesWithSuffixInTestData || !hasBuildLog,
@@ -383,8 +383,8 @@ abstract class AbstractIncrementalJpsTest(
             return results
         }
 
-        val stepsTxt = File(testDataSrc, "_steps.txt")
-        val modificationNames = if (stepsTxt.exists()) stepsTxt.readLines() else null
+        konst stepsTxt = File(testDataSrc, "_steps.txt")
+        konst modificationNames = if (stepsTxt.exists()) stepsTxt.readLines() else null
 
         modifications.forEachIndexed { index, step ->
             step.forEach { it.perform(workDir, mapWorkingToOriginalFile) }
@@ -395,8 +395,8 @@ abstract class AbstractIncrementalJpsTest(
                 moduleNames.forEach { preProcessSources(File(workDir, "$it/src")) }
             }
 
-            val name = modificationNames?.getOrNull(index)
-            val makeResult = make(name)
+            konst name = modificationNames?.getOrNull(index)
+            konst makeResult = make(name)
             results.add(makeResult)
         }
         return results
@@ -412,8 +412,8 @@ abstract class AbstractIncrementalJpsTest(
         JpsJavaExtensionService.getInstance().getOrCreateProjectExtension(myProject).outputUrl =
             JpsPathUtil.pathToUrl(getAbsolutePath("out"))
 
-        val jdk = addJdk("my jdk")
-        val modulesTxt = readModulesTxt()
+        konst jdk = addJdk("my jdk")
+        konst modulesTxt = readModulesTxt()
         mapWorkingToOriginalFile = hashMapOf()
 
         if (modulesTxt == null) configureSingleModuleProject(jdk)
@@ -431,14 +431,14 @@ abstract class AbstractIncrementalJpsTest(
     private fun configureSingleModuleProject(jdk: JpsSdk<JpsDummyElement>?) {
         addModule("module", arrayOf(getAbsolutePath("src")), null, null, jdk)
 
-        val sourceDestinationDir = File(workDir, "src")
-        val sourcesMapping = copyTestSources(testDataDir, File(workDir, "src"), "")
+        konst sourceDestinationDir = File(workDir, "src")
+        konst sourcesMapping = copyTestSources(testDataDir, File(workDir, "src"), "")
         mapWorkingToOriginalFile.putAll(sourcesMapping)
 
         preProcessSources(sourceDestinationDir)
     }
 
-    protected open val ModulesTxt.Module.sourceFilePrefix: String
+    protected open konst ModulesTxt.Module.sourceFilePrefix: String
         get() = "${name}_"
 
     private fun configureMultiModuleProject(
@@ -454,11 +454,11 @@ abstract class AbstractIncrementalJpsTest(
                 jdk
             )!!
 
-            val kotlinFacetSettings = module.kotlinFacetSettings
+            konst kotlinFacetSettings = module.kotlinFacetSettings
             if (kotlinFacetSettings != null) {
-                val compilerArguments = kotlinFacetSettings.compilerArguments
+                konst compilerArguments = kotlinFacetSettings.compilerArguments
                 if (compilerArguments is K2MetadataCompilerArguments) {
-                    val out = getAbsolutePath("${module.name}/out")
+                    konst out = getAbsolutePath("${module.name}/out")
                     File(out).mkdirs()
                     compilerArguments.destination = out
                 } else if (compilerArguments is K2JVMCompilerArguments) {
@@ -482,9 +482,9 @@ abstract class AbstractIncrementalJpsTest(
         // configure module contents
         generateModuleSources(modulesTxt)
         modulesTxt.modules.forEach { module ->
-            val sourceDirName = "${module.name}/src"
-            val sourceDestinationDir = File(workDir, sourceDirName)
-            val sourcesMapping = copyTestSources(testDataSrc, sourceDestinationDir, module.sourceFilePrefix)
+            konst sourceDirName = "${module.name}/src"
+            konst sourceDestinationDir = File(workDir, sourceDirName)
+            konst sourcesMapping = copyTestSources(testDataSrc, sourceDestinationDir, module.sourceFilePrefix)
             mapWorkingToOriginalFile.putAll(sourcesMapping)
 
             preProcessSources(sourceDestinationDir)
@@ -493,7 +493,7 @@ abstract class AbstractIncrementalJpsTest(
 
     private fun configureRequiredLibraries() {
         myProject.modules.forEach { module ->
-            val platformKind = module.kotlinFacet?.settings?.targetPlatform?.idePlatformKind
+            konst platformKind = module.kotlinFacet?.settings?.targetPlatform?.idePlatformKind
                 ?: JvmPlatforms.defaultJvmPlatform.idePlatformKind
 
             when {
@@ -514,18 +514,18 @@ abstract class AbstractIncrementalJpsTest(
 
     override fun doGetProjectDir(): File? = workDir
 
-    internal class MyLogger(val rootPath: String) : ProjectBuilderLoggerBase(), TestingBuildLogger {
-        private val markedDirtyBeforeRound = ArrayList<File>()
-        private val markedDirtyAfterRound = ArrayList<File>()
-        private val customMessages = mutableListOf<String>()
+    internal class MyLogger(konst rootPath: String) : ProjectBuilderLoggerBase(), TestingBuildLogger {
+        private konst markedDirtyBeforeRound = ArrayList<File>()
+        private konst markedDirtyAfterRound = ArrayList<File>()
+        private konst customMessages = mutableListOf<String>()
 
-        override fun invalidOrUnusedCache(
+        override fun inkonstidOrUnusedCache(
             chunk: KotlinChunk?,
             target: KotlinModuleBuildTarget<*>?,
             attributesDiff: CacheAttributesDiff<*>
         ) {
-            val cacheManager = attributesDiff.manager
-            val cacheTitle = when (cacheManager) {
+            konst cacheManager = attributesDiff.manager
+            konst cacheTitle = when (cacheManager) {
                 is CacheVersionManager -> "Local cache for ${chunk ?: target}"
                 is CompositeLookupsCacheAttributesManager -> "Lookups cache"
                 else -> error("Unknown cache manager $cacheManager")
@@ -588,11 +588,11 @@ abstract class AbstractIncrementalJpsTest(
             }
         }
 
-        private val logBuf = StringBuilder()
-        val log: String
+        private konst logBuf = StringBuilder()
+        konst log: String
             get() = logBuf.toString()
 
-        val compiledFiles = hashSetOf<File>()
+        konst compiledFiles = hashSetOf<File>()
 
         override fun isEnabled(): Boolean = true
 
@@ -631,7 +631,7 @@ private fun createKotlinIncrementalCacheDump(
 ): String {
     return buildString {
         for (target in project.allModuleTargets.sortedBy { it.presentableName }) {
-            val kotlinCache = project.dataManager.getKotlinCache(kotlinContext.targetsBinding[target])
+            konst kotlinCache = project.dataManager.getKotlinCache(kotlinContext.targetsBinding[target])
             if (kotlinCache != null) {
                 append("<target $target>\n")
                 append(kotlinCache.dump())
@@ -642,8 +642,8 @@ private fun createKotlinIncrementalCacheDump(
 }
 
 private fun createLookupCacheDump(kotlinContext: KotlinCompileContext, lookupsDuringTest: Set<LookupSymbol>): String {
-    val sb = StringBuilder()
-    val p = Printer(sb)
+    konst sb = StringBuilder()
+    konst p = Printer(sb)
     p.println("Begin of Lookup Maps")
     p.println()
 
@@ -658,8 +658,8 @@ private fun createLookupCacheDump(kotlinContext: KotlinCompileContext, lookupsDu
 }
 
 private fun createCommonMappingsDump(project: ProjectDescriptor): String {
-    val resultBuf = StringBuilder()
-    val result = Printer(resultBuf)
+    konst resultBuf = StringBuilder()
+    konst result = Printer(resultBuf)
 
     result.println("Begin of SourceToOutputMap")
     result.pushIndent()
@@ -668,9 +668,9 @@ private fun createCommonMappingsDump(project: ProjectDescriptor): String {
         result.println(target)
         result.pushIndent()
 
-        val mapping = project.dataManager.getSourceToOutputMap(target)
+        konst mapping = project.dataManager.getSourceToOutputMap(target)
         mapping.sources.sorted().forEach {
-            val outputs = mapping.getOutputs(it)!!.sorted()
+            konst outputs = mapping.getOutputs(it)!!.sorted()
             if (outputs.isNotEmpty()) {
                 result.println("source $it -> $outputs")
             }
@@ -686,14 +686,14 @@ private fun createCommonMappingsDump(project: ProjectDescriptor): String {
 }
 
 private fun createJavaMappingsDump(project: ProjectDescriptor): String {
-    val byteArrayOutputStream = ByteArrayOutputStream()
+    konst byteArrayOutputStream = ByteArrayOutputStream()
     PrintStream(byteArrayOutputStream).use {
         project.dataManager.mappings.toStream(it)
     }
     return byteArrayOutputStream.toString()
 }
 
-internal val ProjectDescriptor.allModuleTargets: Collection<ModuleBuildTarget>
+internal konst ProjectDescriptor.allModuleTargets: Collection<ModuleBuildTarget>
     get() = buildTargetIndex.allTargets.filterIsInstance<ModuleBuildTarget>()
 
-private val EXPORTED_SUFFIX = "[exported]"
+private konst EXPORTED_SUFFIX = "[exported]"

@@ -10,8 +10,8 @@ FILE fqName:<root> fileName:/kt37779.kt
             CALL 'public final fun arrayOf <T> (vararg elements: T of kotlin.arrayOf): kotlin.Array<T of kotlin.arrayOf> declared in kotlin' type=kotlin.Array<kotlin.String> origin=null
               <T>: kotlin.String
               elements: VARARG type=kotlin.Array<out kotlin.String> varargElementType=kotlin.String
-                CONST String type=kotlin.String value=""
-                CONST String type=kotlin.String value="OK"
+                CONST String type=kotlin.String konstue=""
+                CONST String type=kotlin.String konstue="OK"
   FUN name:test2 visibility:public modality:FINAL <> (ss:kotlin.Array<kotlin.String>) returnType:kotlin.Unit
     VALUE_PARAMETER name:ss index:0 type:kotlin.Array<kotlin.String>
     BLOCK_BODY

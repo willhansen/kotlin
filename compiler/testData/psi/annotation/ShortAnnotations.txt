@@ -182,7 +182,7 @@ KtFile: ShortAnnotations.kt
     PsiElement(IDENTIFIER)('zoo')
   PsiWhiteSpace(' ')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('c')
     PsiWhiteSpace(' ')
@@ -436,7 +436,7 @@ KtFile: ShortAnnotations.kt
         PsiElement(IDENTIFIER)('zoo')
       PsiWhiteSpace(' ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('c')
         PsiWhiteSpace(' ')
@@ -607,7 +607,7 @@ KtFile: ShortAnnotations.kt
                     REFERENCE_EXPRESSION
                       PsiElement(IDENTIFIER)('zoo')
           PsiWhiteSpace(' ')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('a')
           PsiWhiteSpace(' ')
@@ -670,7 +670,7 @@ KtFile: ShortAnnotations.kt
             PsiElement(IDENTIFIER)('zoo')
           PsiWhiteSpace(' ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('a')
             PsiWhiteSpace(' ')

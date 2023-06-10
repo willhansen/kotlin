@@ -5,7 +5,7 @@ class C {
 
   }
 
-  val result: String
+  konst result: String
     field = "OK"
     get
 

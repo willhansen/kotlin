@@ -7,13 +7,13 @@
 interface Interface {
     fun foo() {}
     fun ambiguous() {}
-    val ambiguousProp: Int
+    konst ambiguousProp: Int
         get() = 222
 }
 
 interface AnotherInterface {
     fun ambiguous() {}
-    val ambiguousProp: Int
+    konst ambiguousProp: Int
         get() = 333
 }
 
@@ -22,7 +22,7 @@ interface DerivedInterface: Interface, AnotherInterface {
     override fun ambiguous() {
         <!AMBIGUOUS_SUPER!>super<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>ambiguous<!>()
     }
-    override val ambiguousProp: Int
+    override konst ambiguousProp: Int
         get() = <!AMBIGUOUS_SUPER!>super<!>.<!DEBUG_INFO_MISSING_UNRESOLVED!>ambiguousProp<!>
 }
 

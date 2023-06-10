@@ -18,7 +18,7 @@ fun case1() {
 
 fun case2() {
     try {
-        val a = throwException()
+        konst a = throwException()
     }catch (e: Exception) {
         "a"
     }

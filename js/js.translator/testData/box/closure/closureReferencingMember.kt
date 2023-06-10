@@ -30,7 +30,7 @@ fun foo(f: () -> Unit) {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.f()
     if (a.i != 6) return "fail1: ${a.i}"
     if (a.bar() != 32) return "fail2: ${a.bar()}"

@@ -12,7 +12,7 @@ annotation class Ann
 fun <@Ann R : @Ann Any> f3(a: Array<@Ann R>): Array<@Ann R?> =  null!!
 
 fun test2(a: @Ann Array<in @Ann Int>) {
-    val r: Array<in Int?> = f3(<!ARGUMENT_TYPE_MISMATCH("kotlin/Array<@R|Ann|()  R>; @R|Ann|()  kotlin/Array<in @R|Ann|()  kotlin/Int>")!>a<!>)
+    konst r: Array<in Int?> = f3(<!ARGUMENT_TYPE_MISMATCH("kotlin/Array<@R|Ann|()  R>; @R|Ann|()  kotlin/Array<in @R|Ann|()  kotlin/Int>")!>a<!>)
 }
 
 
@@ -22,4 +22,4 @@ var test3: Int = 0
 
 fun f4(fn: (@Ann Int, @Ann Int) -> Unit) {}
 
-val test4 = f4 <!ARGUMENT_TYPE_MISMATCH("kotlin/Function2<@R|Ann|()  kotlin/Int, @R|Ann|()  kotlin/Int, kotlin/Unit>; kotlin/Function1<@R|Ann|()  kotlin/Int, kotlin/Unit>")!>{ single -> }<!>
+konst test4 = f4 <!ARGUMENT_TYPE_MISMATCH("kotlin/Function2<@R|Ann|()  kotlin/Int, @R|Ann|()  kotlin/Int, kotlin/Unit>; kotlin/Function1<@R|Ann|()  kotlin/Int, kotlin/Unit>")!>{ single -> }<!>

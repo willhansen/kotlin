@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.fir.diagnostics
 
 interface ConeDiagnostic {
-    val reason: String
+    konst reason: String
 }
 
-class ConeStubDiagnostic(val original: ConeDiagnostic) : ConeDiagnostic {
-    override val reason: String get() = original.reason
+class ConeStubDiagnostic(konst original: ConeDiagnostic) : ConeDiagnostic {
+    override konst reason: String get() = original.reason
 }

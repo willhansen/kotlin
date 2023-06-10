@@ -3,7 +3,7 @@ package foo
 @example.ExampleAnnotation
 class A {
     @field:example.ExampleAnnotation
-    val valA: String = "text"
+    konst konstA: String = "text"
 
     @example.ExampleAnnotation
     fun funA() {}

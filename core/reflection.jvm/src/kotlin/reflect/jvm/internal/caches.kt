@@ -13,8 +13,8 @@ import kotlin.reflect.full.createType
 import kotlin.reflect.KDeclarationContainer
 
 
-private val K_CLASS_CACHE = createCache { KClassImpl(it) }
-private val K_PACKAGE_CACHE = createCache { KPackageImpl(it) }
+private konst K_CLASS_CACHE = createCache { KClassImpl(it) }
+private konst K_PACKAGE_CACHE = createCache { KPackageImpl(it) }
 
 // This function is invoked on each reflection access to Java classes, properties, etc. Performance is critical here.
 @Suppress("UNCHECKED_CAST")
@@ -33,17 +33,17 @@ internal fun clearCaches() {
 // typeOf-related caches
 
 // Without type arguments and nullability
-private val CACHE_FOR_BASE_CLASSIFIERS = createCache {
+private konst CACHE_FOR_BASE_CLASSIFIERS = createCache {
     getOrCreateKotlinClass(it).createType(emptyList(), false, emptyList())
 }
 
-private val CACHE_FOR_NULLABLE_BASE_CLASSIFIERS = createCache {
+private konst CACHE_FOR_NULLABLE_BASE_CLASSIFIERS = createCache {
     getOrCreateKotlinClass(it).createType(emptyList(), true, emptyList())
 }
 
 private typealias Key = Pair<List<KTypeProjection>, Boolean>
 // Class -> ((type arguments, is nullable) -> type)
-private val CACHE_FOR_GENERIC_CLASSIFIERS = createCache<ConcurrentHashMap<Key, KType>> {
+private konst CACHE_FOR_GENERIC_CLASSIFIERS = createCache<ConcurrentHashMap<Key, KType>> {
     ConcurrentHashMap()
 }
 
@@ -64,7 +64,7 @@ private fun <T : Any> getOrCreateKTypeWithTypeArguments(
     arguments: List<KTypeProjection>,
     isMarkedNullable: Boolean
 ): KType {
-    val cache = CACHE_FOR_GENERIC_CLASSIFIERS.get(jClass)
+    konst cache = CACHE_FOR_GENERIC_CLASSIFIERS.get(jClass)
     return cache.getOrPut(arguments to isMarkedNullable) {
         getOrCreateKotlinClass(jClass).createType(arguments, isMarkedNullable, emptyList())
     }

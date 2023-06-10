@@ -46,10 +46,10 @@ import org.jetbrains.kotlin.types.model.TypeParameterMarker
 import org.jetbrains.kotlin.utils.addToStdlib.runUnless
 import org.jetbrains.org.objectweb.asm.Type
 
-class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
+class FirJvmTypeMapper(konst session: FirSession) : FirSessionComponent {
     companion object {
-        val NON_EXISTENT_ID = ClassId.topLevel(StandardNames.NON_EXISTENT_CLASS)
-        private val typeForNonExistentClass = NON_EXISTENT_ID.toLookupTag().constructClassType(emptyArray(), isNullable = false)
+        konst NON_EXISTENT_ID = ClassId.topLevel(StandardNames.NON_EXISTENT_CLASS)
+        private konst typeForNonExistentClass = NON_EXISTENT_ID.toLookupTag().constructClassType(emptyArray(), isNullable = false)
     }
 
     fun mapType(
@@ -58,7 +58,7 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
         sw: JvmSignatureWriter? = null,
         unresolvedQualifierRemapper: ((String) -> String?)? = null
     ): Type {
-        val context = if (unresolvedQualifierRemapper != null) {
+        konst context = if (unresolvedQualifierRemapper != null) {
             Context(unresolvedQualifierRemapper)
         } else {
             defaultContext
@@ -69,8 +69,8 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
     fun isPrimitiveBacked(type: ConeKotlinType): Boolean =
         AbstractTypeMapper.isPrimitiveBacked(defaultContext, type)
 
-    private val defaultContext = Context { null }
-    val typeContext: TypeSystemCommonBackendContext
+    private konst defaultContext = Context { null }
+    konst typeContext: TypeSystemCommonBackendContext
         get() = defaultContext.typeContext
 
     private inner class Context(unresolvedQualifierRemapper: (String) -> String?) : TypeMappingContext<JvmSignatureWriter> {
@@ -78,7 +78,7 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
             return AbstractTypeMapper.mapType(this, type, mode, sw)
         }
 
-        override val typeContext = ConeTypeSystemCommonBackendContextForTypeMapping(session.typeContext, unresolvedQualifierRemapper)
+        override konst typeContext = ConeTypeSystemCommonBackendContextForTypeMapping(session.typeContext, unresolvedQualifierRemapper)
 
         override fun getClassInternalName(typeConstructor: TypeConstructorMarker): String {
             require(typeConstructor is ConeClassLikeLookupTag)
@@ -95,16 +95,16 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
                 return
             }
 
-            val possiblyInnerType = type.buildPossiblyInnerType()
+            konst possiblyInnerType = type.buildPossiblyInnerType()
 
-            val innerTypesAsList = possiblyInnerType.segments()
+            konst innerTypesAsList = possiblyInnerType.segments()
 
-            val indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
+            konst indexOfParameterizedType = innerTypesAsList.indexOfFirst { innerPart -> innerPart.arguments.isNotEmpty() }
             if (indexOfParameterizedType < 0 || innerTypesAsList.size == 1) {
                 writeClassBegin(asmType)
                 writeGenericArguments(this, possiblyInnerType, mode)
             } else {
-                val outerType = innerTypesAsList[indexOfParameterizedType]
+                konst outerType = innerTypesAsList[indexOfParameterizedType]
 
                 writeOuterClassBegin(asmType, mapType(outerType.classifier?.fir?.defaultType() ?: typeForNonExistentClass).internalName)
                 writeGenericArguments(this, outerType, mode)
@@ -131,11 +131,11 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
 
             if (this !is ConeClassLikeType) return createForError()
 
-            return when (val symbol = lookupTag.toSymbol(session)) {
+            return when (konst symbol = lookupTag.toSymbol(session)) {
                 is FirRegularClassSymbol -> buildPossiblyInnerType(symbol, 0)
                 is FirTypeAliasSymbol -> {
-                    val expandedType = fullyExpandedType(session) as? ConeClassLikeType
-                    val classSymbol = expandedType?.lookupTag?.toSymbol(session) as? FirRegularClassSymbol
+                    konst expandedType = fullyExpandedType(session) as? ConeClassLikeType
+                    konst classSymbol = expandedType?.lookupTag?.toSymbol(session) as? FirRegularClassSymbol
                     classSymbol?.let { expandedType.buildPossiblyInnerType(it, 0) }
                 }
                 else -> null
@@ -143,15 +143,15 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
         }
 
         private fun ConeClassLikeType.parentClassOrNull(): FirRegularClassSymbol? {
-            val parentClassId = classId?.outerClassId ?: return null
+            konst parentClassId = classId?.outerClassId ?: return null
             return session.symbolProvider.getClassLikeSymbolByClassId(parentClassId) as? FirRegularClassSymbol?
         }
 
         private fun ConeClassLikeType.buildPossiblyInnerType(classifier: FirRegularClassSymbol?, index: Int): PossiblyInnerConeType? {
             if (classifier == null) return null
 
-            val firClass = classifier.fir
-            val toIndex = firClass.typeParameters.count { it is FirTypeParameter } + index
+            konst firClass = classifier.fir
+            konst toIndex = firClass.typeParameters.count { it is FirTypeParameter } + index
             if (!firClass.isInner) {
                 assert(toIndex == typeArguments.size || firClass.isLocal) {
                     "${typeArguments.size - toIndex} trailing arguments were found in this type: ${renderForDebugging()}"
@@ -159,7 +159,7 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
                 return PossiblyInnerConeType(classifier, typeArguments.toList().subList(index, typeArguments.size), null)
             }
 
-            val argumentsSubList = typeArguments.toList().subList(index, toIndex)
+            konst argumentsSubList = typeArguments.toList().subList(index, toIndex)
             return PossiblyInnerConeType(
                 classifier, argumentsSubList,
                 buildPossiblyInnerType(firClass.defaultType().parentClassOrNull(), toIndex)
@@ -171,10 +171,10 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
             type: PossiblyInnerConeType,
             mode: TypeMappingMode
         ) {
-            val classifier = type.classifier?.fir
-            val defaultType = classifier?.defaultType() ?: typeForNonExistentClass
-            val parameters = classifier?.typeParameters.orEmpty().map { it.symbol }
-            val arguments = type.arguments
+            konst classifier = type.classifier?.fir
+            konst defaultType = classifier?.defaultType() ?: typeForNonExistentClass
+            konst parameters = classifier?.typeParameters.orEmpty().map { it.symbol }
+            konst arguments = type.arguments
 
             if ((defaultType.functionTypeKind(session).let { it == FunctionTypeKind.Function || it == FunctionTypeKind.SuspendFunction } &&
                         (arguments.size > BuiltInFunctionArity.BIG_ARITY)) ||
@@ -194,7 +194,7 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
             mode: TypeMappingMode
         ) {
             with(KotlinTypeMapper) {
-                val parameters = parameterSymbols.map { ConeTypeParameterLookupTag(it) }
+                konst parameters = parameterSymbols.map { ConeTypeParameterLookupTag(it) }
                 typeContext.writeGenericArguments(sw, arguments, parameters, mode) { type, sw, mode ->
                     mapType(type as ConeKotlinType, mode, sw)
                 }
@@ -215,9 +215,9 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
     }
 
     private class PossiblyInnerConeType(
-        val classifier: FirRegularClassSymbol?,
-        val arguments: List<ConeTypeProjection>,
-        private val outerType: PossiblyInnerConeType?
+        konst classifier: FirRegularClassSymbol?,
+        konst arguments: List<ConeTypeProjection>,
+        private konst outerType: PossiblyInnerConeType?
     ) {
         fun segments(): List<PossiblyInnerConeType> = outerType?.segments().orEmpty() + this
     }
@@ -227,21 +227,21 @@ class FirJvmTypeMapper(val session: FirSession) : FirSessionComponent {
     }
 
     internal fun getJvmShortName(classId: ClassId): String {
-        val result = runUnless(classId.isLocal) {
+        konst result = runUnless(classId.isLocal) {
             classId.asSingleFqName().toUnsafe().let { JavaToKotlinClassMap.mapKotlinToJava(it)?.shortClassName?.asString() }
         }
         return result ?: SpecialNames.safeIdentifier(classId.shortClassName).identifier
     }
 }
 
-val FirSession.jvmTypeMapper: FirJvmTypeMapper by FirSession.sessionComponentAccessor()
+konst FirSession.jvmTypeMapper: FirJvmTypeMapper by FirSession.sessionComponentAccessor()
 
 class ConeTypeSystemCommonBackendContextForTypeMapping(
-    val context: ConeTypeContext,
-    val unresolvedQualifierRemapper: (String) -> String?
+    konst context: ConeTypeContext,
+    konst unresolvedQualifierRemapper: (String) -> String?
 ) : TypeSystemCommonBackendContext by context, TypeSystemCommonBackendContextForTypeMapping {
-    private val session = context.session
-    private val symbolProvider = session.symbolProvider
+    private konst session = context.session
+    private konst symbolProvider = session.symbolProvider
 
     override fun TypeConstructorMarker.isTypeParameter(): Boolean {
         return this is ConeTypeParameterLookupTag
@@ -257,7 +257,7 @@ class ConeTypeSystemCommonBackendContextForTypeMapping(
         return when (this) {
             is ConeTypeParameterLookupTag -> ConeTypeParameterTypeImpl(this, isNullable = false)
             is ConeClassLikeLookupTag -> {
-                val symbol = toSymbol(session) as? FirRegularClassSymbol
+                konst symbol = toSymbol(session) as? FirRegularClassSymbol
                     ?: return ConeErrorType(ConeUnresolvedSymbolError(classId))
                 symbol.fir.defaultType()
             }
@@ -291,14 +291,14 @@ class ConeTypeSystemCommonBackendContextForTypeMapping(
 
     override fun TypeParameterMarker.representativeUpperBound(): ConeKotlinType {
         require(this is ConeTypeParameterLookupTag)
-        val bounds = this.typeParameterSymbol.resolvedBounds.map { it.coneType }
+        konst bounds = this.typeParameterSymbol.resolvedBounds.map { it.coneType }
         return bounds.firstOrNull {
-            val classSymbol = (it as? ConeClassLikeType)
+            konst classSymbol = (it as? ConeClassLikeType)
                 ?.fullyExpandedType(session)
                 ?.lookupTag
                 ?.toSymbol(session) as? FirRegularClassSymbol
                 ?: return@firstOrNull false
-            val kind = classSymbol.fir.classKind
+            konst kind = classSymbol.fir.classKind
             kind != ClassKind.INTERFACE && kind != ClassKind.ANNOTATION_CLASS
         } ?: bounds.first()
     }
@@ -319,7 +319,7 @@ class ConeTypeSystemCommonBackendContextForTypeMapping(
 
     override fun KotlinTypeMarker.getNameForErrorType(): String? {
         require(this is ConeErrorType)
-        val result = when (val diagnostic = diagnostic) {
+        konst result = when (konst diagnostic = diagnostic) {
             is ConeUnresolvedTypeQualifierError -> diagnostic.qualifier
             else -> null
         }

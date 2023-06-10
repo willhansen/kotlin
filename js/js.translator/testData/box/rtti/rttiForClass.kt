@@ -10,12 +10,12 @@ open class B : A()
 open class C : B()
 
 fun box(): String {
-    val a: Any = A()
-    val b: Any = B()
-    val c: Any = C()
+    konst a: Any = A()
+    konst b: Any = B()
+    konst c: Any = C()
     if (a !is A) return "a !is A"
 
-    val t = a is A
+    konst t = a is A
     if (!t) return "t = a is A; t != true"
 
     if (b !is A) return "b !is A"

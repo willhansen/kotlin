@@ -16,15 +16,15 @@ import org.jetbrains.kotlinx.serialization.compiler.diagnostic.RuntimeVersions
 import org.jetbrains.kotlinx.serialization.compiler.resolve.SerialEntityNames
 
 class FirVersionReader(session: FirSession) : FirExtensionSessionComponent(session) {
-    val runtimeVersions: RuntimeVersions? by session.firCachesFactory.createLazyValue lazy@{
-        val markerClass = session.symbolProvider.getClassLikeSymbolByClassId(SerialEntityNames.KSERIALIZER_CLASS_ID) ?: return@lazy null
+    konst runtimeVersions: RuntimeVersions? by session.firCachesFactory.createLazyValue lazy@{
+        konst markerClass = session.symbolProvider.getClassLikeSymbolByClassId(SerialEntityNames.KSERIALIZER_CLASS_ID) ?: return@lazy null
         CommonVersionReader.computeRuntimeVersions(markerClass.sourceElement)
     }
 
-    val canSupportInlineClasses by session.firCachesFactory.createLazyValue lazy@{
+    konst canSupportInlineClasses by session.firCachesFactory.createLazyValue lazy@{
         CommonVersionReader.canSupportInlineClasses(runtimeVersions)
     }
 }
 
-val FirSession.versionReader: FirVersionReader by FirSession.sessionComponentAccessor()
+konst FirSession.versionReader: FirVersionReader by FirSession.sessionComponentAccessor()
 

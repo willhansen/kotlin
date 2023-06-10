@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -MISSING_CONSTRUCTOR_KEYWORD
 
-class C(val a: String) {}
+class C(konst a: String) {}
 
-interface T1<!CONSTRUCTOR_IN_INTERFACE!>(val x: String)<!> {}
+interface T1<!CONSTRUCTOR_IN_INTERFACE!>(konst x: String)<!> {}
 
 interface T2 <!CONSTRUCTOR_IN_INTERFACE!>constructor()<!> {}
 
@@ -11,7 +11,7 @@ interface T3 private <!CONSTRUCTOR_IN_INTERFACE!>constructor(a: Int)<!> {}
 
 interface T4 {
     <!CONSTRUCTOR_IN_INTERFACE!>constructor(a: Int)<!> {
-        val b: Int = 1
+        konst b: Int = 1
     }
 }
 

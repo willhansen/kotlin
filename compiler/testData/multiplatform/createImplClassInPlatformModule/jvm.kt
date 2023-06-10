@@ -1,7 +1,7 @@
 actual class Foo(x: Int) {
     constructor() : this(0)
 
-    val x: Int = x
+    konst x: Int = x
 }
 
-val y = Foo(42).x
+konst y = Foo(42).x

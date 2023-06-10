@@ -29,11 +29,11 @@ import kotlin.io.path.extension
 import kotlin.io.path.nameWithoutExtension
 
 object AnalysisApiFe10TestConfigurator : AnalysisApiTestConfigurator() {
-    override val analyseInDependentSession: Boolean get() = false
+    override konst analyseInDependentSession: Boolean get() = false
 
-    override val frontendKind: FrontendKind get() = FrontendKind.Fe10
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fe10
 
-    override val testPrefix: String
+    override konst testPrefix: String
         get() = "descriptors"
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
@@ -42,7 +42,7 @@ object AnalysisApiFe10TestConfigurator : AnalysisApiTestConfigurator() {
         }
     }
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
         AnalysisApiBaseTestServiceRegistrar,
         AnalysisApiDecompiledCodeTestServiceRegistrar,
         AnalysisApiFe10TestServiceRegistrar,
@@ -57,15 +57,15 @@ object AnalysisApiFe10TestConfigurator : AnalysisApiTestConfigurator() {
     }
 
     override fun prepareFilesInModule(files: List<PsiFile>, module: TestModule, testServices: TestServices) {
-        val compilerConfigurationProvider = testServices.compilerConfigurationProvider
-        val compilerConfiguration = compilerConfigurationProvider.getCompilerConfiguration(module)
-        val project = compilerConfigurationProvider.getProject(module)
-        val packageProviderFactory = compilerConfigurationProvider.getPackagePartProviderFactory(module)
+        konst compilerConfigurationProvider = testServices.compilerConfigurationProvider
+        konst compilerConfiguration = compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst project = compilerConfigurationProvider.getProject(module)
+        konst packageProviderFactory = compilerConfigurationProvider.getPackagePartProviderFactory(module)
         JvmResolveUtil.analyze(project, files.filterIsInstance<KtFile>(), compilerConfiguration, packageProviderFactory)
     }
 
     override fun preprocessTestDataPath(path: Path): Path {
-        val newPath = path.resolveSibling(path.nameWithoutExtension + "." + testPrefix + "." + path.extension)
+        konst newPath = path.resolveSibling(path.nameWithoutExtension + "." + testPrefix + "." + path.extension)
         if (newPath.toFile().exists()) return newPath
         return path
     }

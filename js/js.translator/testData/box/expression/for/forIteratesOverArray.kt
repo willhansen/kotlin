@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1294
 package foo
 
-val a1 = arrayOfNulls<Int>(10)
+konst a1 = arrayOfNulls<Int>(10)
 
 fun box(): String {
     var c = 0

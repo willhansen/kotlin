@@ -9,7 +9,7 @@ suspend fun String.wrongExtension(x: Any) = 1
 suspend fun Controller.controllerReceiver() = 1
 
 class Controller {
-    // is still valid
+    // is still konstid
     suspend fun oldConvention(x: Continuation<Int>) {
 
     }

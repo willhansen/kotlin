@@ -6,27 +6,27 @@
 import kotlin.reflect.KProperty
 
 interface Abstract {
-    val x: Int
+    konst x: Int
 }
 
 @JvmInline
-value class A(override val x: Int, val y: Int): Abstract {
+konstue class A(override konst x: Int, konst y: Int): Abstract {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): Int {
         return x + y
     }
 }
 
 class B(var x: A, var y: A?) {
-    val a by lazy { A(-100, -200) }
-    val b by A(-100, -200)
-    val c by ::a
+    konst a by lazy { A(-100, -200) }
+    konst b by A(-100, -200)
+    konst c by ::a
 }
 
 class C(a: A): Abstract by a
 
 fun box(): String {
-    val a = A(1, 2)
-    val b = B(a, a)
+    konst a = A(1, 2)
+    konst b = B(a, a)
     
     require(b.x == b.y)
     require(b.x.x == b.y?.x)

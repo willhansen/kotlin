@@ -2,10 +2,10 @@
 package foo
 
 open class Base {
-    val i: Int
-    val i2: Int
-    val i3: Int
-    val bs: String
+    konst i: Int
+    konst i2: Int
+    konst i3: Int
+    konst bs: String
 
     constructor(ii1: Int, ii2: Int) {
         i = ii1
@@ -23,13 +23,13 @@ open class Base {
     }
 }
 
-class Test(val tt: String) : Base(18) {
+class Test(konst tt: String) : Base(18) {
 
     override fun foo() = tt
 }
 
 fun box(): String {
 
-    val t = Test("OK")
+    konst t = Test("OK")
     return t.foo()
 }

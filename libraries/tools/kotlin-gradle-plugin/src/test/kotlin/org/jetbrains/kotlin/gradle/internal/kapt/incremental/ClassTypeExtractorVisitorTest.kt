@@ -20,31 +20,31 @@ class ClassTypeExtractorVisitorTest {
 
     @Test
     fun testSupertypes() {
-        val src = """
+        konst src = """
             public class A extends B implements java.lang.Runnable {
               public void run() {}
             }
 
             class B {}
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(setOf("B", "java/lang/Runnable"), abiTypes)
         assertEquals(emptySet<String>(), privateTypes)
     }
 
     @Test
     fun testObjectIgnored() {
-        val src = """
+        konst src = """
             public class A {}
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(emptySet<String>(), abiTypes)
         assertEquals(emptySet<String>(), privateTypes)
     }
 
     @Test
     fun testMethod() {
-        val src = """
+        konst src = """
             public class A {
               public String process(Cloneable c) {
                 Runnable ignored = null;
@@ -59,14 +59,14 @@ class ClassTypeExtractorVisitorTest {
               }
             }
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(setOf("java/lang/String", "java/lang/Cloneable"), abiTypes)
         assertEquals(setOf("java/util/HashSet", "java/util/ArrayList"), privateTypes)
     }
 
     @Test
     fun testField() {
-        val src = """
+        konst src = """
             public class A {
               public String first;
               protected String second;
@@ -75,14 +75,14 @@ class ClassTypeExtractorVisitorTest {
               public int ignored;
             }
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(setOf("java/lang/String"), abiTypes)
         assertEquals(setOf("java/lang/Runnable"), privateTypes)
     }
 
     @Test
     fun testClassAnnotations() {
-        val src = """
+        konst src = """
             import java.lang.annotation.*;
 
             @Annotation
@@ -91,17 +91,17 @@ class ClassTypeExtractorVisitorTest {
             class B {}
             @interface Annotation {}
 
-            @Target(value=ElementType.TYPE_USE)
+            @Target(konstue=ElementType.TYPE_USE)
             @interface TypeAnnotation {}
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(setOf("B", "Annotation", "TypeAnnotation"), abiTypes)
         assertEquals(emptySet<String>(), privateTypes)
     }
 
     @Test
     fun testMemberAnnotations() {
-        val src = """
+        konst src = """
             import java.lang.annotation.*;
 
             public class A {
@@ -116,19 +116,19 @@ class ClassTypeExtractorVisitorTest {
             @interface MethodAnnotation {}
             @interface ParameterAnnotation {}
         """.trimIndent()
-        val (abiTypes, privateTypes) = extractTypesFor(src)
+        konst (abiTypes, privateTypes) = extractTypesFor(src)
         assertEquals(setOf("FieldAnnotation", "MethodAnnotation", "ParameterAnnotation", "java/lang/String"), abiTypes)
         assertEquals(emptySet<String>(), privateTypes)
     }
 
     private fun extractTypesFor(source: String, className: String = "A"): Pair<Set<String>, Set<String>> {
-        val src = tmp.newFolder().resolve("$className.java")
+        konst src = tmp.newFolder().resolve("$className.java")
         src.writeText(source)
 
-        val output = tmp.newFolder()
+        konst output = tmp.newFolder()
         compileSources(listOf(src), output)
-        val classFile = output.walk().filter { it.name == "$className.class" }.single()
-        val extractor = ClassTypeExtractorVisitor(object : ClassVisitor(Opcodes.API_VERSION) {})
+        konst classFile = output.walk().filter { it.name == "$className.class" }.single()
+        konst extractor = ClassTypeExtractorVisitor(object : ClassVisitor(Opcodes.API_VERSION) {})
 
         classFile.inputStream().use {
             ClassReader(it.readBytes()).accept(extractor, ClassReader.SKIP_CODE or ClassReader.SKIP_DEBUG or ClassReader.SKIP_FRAMES)

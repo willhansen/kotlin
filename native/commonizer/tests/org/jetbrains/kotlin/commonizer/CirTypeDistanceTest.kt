@@ -14,11 +14,11 @@ import kotlin.test.assertTrue
 
 class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
 
-    private val target = LeafCommonizerTarget("a")
+    private konst target = LeafCommonizerTarget("a")
 
     fun `test sample 0`() {
 
-        val root = createCirTreeRootFromSourceCode(
+        konst root = createCirTreeRootFromSourceCode(
             """
             class A
             typealias B = A
@@ -27,22 +27,22 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
         """.trimIndent()
         )
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = TargetDependent(target to CirClassifierIndex(root)),
             targetDependencies = TargetDependent(target to CirProvidedClassifiers.EMPTY),
             commonizedNodes = CirCommonizedClassifierNodes.default(),
             commonDependencies = CirProvidedClassifiers.EMPTY
         )
 
-        val idOfA = CirEntityId.create("A")
-        val idOfB = CirEntityId.create("B")
-        val idOfC = CirEntityId.create("C")
-        val idOfD = CirEntityId.create("D")
+        konst idOfA = CirEntityId.create("A")
+        konst idOfB = CirEntityId.create("B")
+        konst idOfC = CirEntityId.create("C")
+        konst idOfD = CirEntityId.create("D")
 
-        val typeA = mockClassType("A")
-        val typeB = mockTAType("B") { typeA }
-        val typeC = mockTAType("C") { typeB }
-        val typeD = mockTAType("D") { typeC }
+        konst typeA = mockClassType("A")
+        konst typeB = mockTAType("B") { typeA }
+        konst typeC = mockTAType("C") { typeB }
+        konst typeD = mockTAType("D") { typeC }
 
 
         assertEquals(
@@ -92,7 +92,7 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
     }
 
     fun `test sample 1 - unreachable types`() {
-        val root = createCirTreeRootFromSourceCode(
+        konst root = createCirTreeRootFromSourceCode(
             """
             class X
             class Y
@@ -102,24 +102,24 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
             """.trimIndent()
         )
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = TargetDependent(target to CirClassifierIndex(root)),
             targetDependencies = TargetDependent(target to CirProvidedClassifiers.EMPTY),
             commonizedNodes = CirCommonizedClassifierNodes.default(),
             commonDependencies = CirProvidedClassifiers.EMPTY
         )
 
-        val idOfX = CirEntityId.create("X")
-        val idOfY = CirEntityId.create("Y")
-        val idOfA = CirEntityId.create("A")
-        val idOfB = CirEntityId.create("B")
-        val idOfC = CirEntityId.create("C")
+        konst idOfX = CirEntityId.create("X")
+        konst idOfY = CirEntityId.create("Y")
+        konst idOfA = CirEntityId.create("A")
+        konst idOfB = CirEntityId.create("B")
+        konst idOfC = CirEntityId.create("C")
 
-        val typeX = mockClassType("X")
-        val typeY = mockClassType("Y")
-        val typeA = mockTAType("A") { typeX }
-        val typeB = mockTAType("B") { typeY }
-        val typeC = mockTAType("C") { typeB }
+        konst typeX = mockClassType("X")
+        konst typeY = mockClassType("Y")
+        konst typeA = mockTAType("A") { typeX }
+        konst typeB = mockTAType("B") { typeY }
+        konst typeC = mockTAType("C") { typeB }
 
         assertUnreachable(typeDistance(classifiers, target, typeX, idOfY))
         assertUnreachable(typeDistance(classifiers, target, typeY, idOfX))
@@ -133,7 +133,7 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
     }
 
     fun `test sample 2 - indirect backwards reachable types`() {
-        val root = createCirTreeRootFromSourceCode(
+        konst root = createCirTreeRootFromSourceCode(
             """
             class X
             typealias A = X
@@ -142,17 +142,17 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
             """.trimIndent()
         )
 
-        val idOfX = CirEntityId.create("X")
-        val idOfA = CirEntityId.create("A")
-        val idOfB = CirEntityId.create("B")
-        val idOfC = CirEntityId.create("C")
+        konst idOfX = CirEntityId.create("X")
+        konst idOfA = CirEntityId.create("A")
+        konst idOfB = CirEntityId.create("B")
+        konst idOfC = CirEntityId.create("C")
 
-        val typeX = mockClassType("X")
-        val typeA = mockTAType("A") { typeX }
-        val typeB = mockTAType("B") { typeX }
-        val typeC = mockTAType("C") { typeB }
+        konst typeX = mockClassType("X")
+        konst typeA = mockTAType("A") { typeX }
+        konst typeB = mockTAType("B") { typeX }
+        konst typeC = mockTAType("C") { typeB }
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = TargetDependent(target to CirClassifierIndex(root)),
             targetDependencies = TargetDependent(target to CirProvidedClassifiers.EMPTY),
             commonizedNodes = CirCommonizedClassifierNodes.default(),
@@ -212,7 +212,7 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
             )
         }
 
-        val root = createCirTreeRoot {
+        konst root = createCirTreeRoot {
             dependency { commonDependencies() }
             dependency { targetDependencies() }
             source(
@@ -224,30 +224,30 @@ class CirTypeDistanceTest : KtInlineSourceCommonizerTestCase() {
             )
         }
 
-        val classifiers = CirKnownClassifiers(
+        konst classifiers = CirKnownClassifiers(
             classifierIndices = TargetDependent(target to CirClassifierIndex(root)),
             commonDependencies = createCirProvidedClassifiers { commonDependencies() },
             targetDependencies = TargetDependent(target to createCirProvidedClassifiers { targetDependencies() }),
             commonizedNodes = CirCommonizedClassifierNodes.default()
         )
 
-        val idOfX = CirEntityId.create("X")
-        val idOfY = CirEntityId.create("Y")
-        val idOfZ = CirEntityId.create("Z")
-        val idOfA = CirEntityId.create("A")
-        val idOfB = CirEntityId.create("B")
-        val idOfC = CirEntityId.create("C")
-        val idOfD = CirEntityId.create("D")
-        val idOfE = CirEntityId.create("E")
+        konst idOfX = CirEntityId.create("X")
+        konst idOfY = CirEntityId.create("Y")
+        konst idOfZ = CirEntityId.create("Z")
+        konst idOfA = CirEntityId.create("A")
+        konst idOfB = CirEntityId.create("B")
+        konst idOfC = CirEntityId.create("C")
+        konst idOfD = CirEntityId.create("D")
+        konst idOfE = CirEntityId.create("E")
 
-        val typeX = mockClassType("X")
-        val typeY = mockClassType("Y")
-        val typeZ = mockClassType("Z")
-        val typeA = mockTAType("A") { typeX }
-        val typeB = mockTAType("B") { typeY }
-        val typeC = mockTAType("C") { typeA }
-        val typeD = mockTAType("D") { typeC }
-        val typeE = mockTAType("E") { typeZ }
+        konst typeX = mockClassType("X")
+        konst typeY = mockClassType("Y")
+        konst typeZ = mockClassType("Z")
+        konst typeA = mockTAType("A") { typeX }
+        konst typeB = mockTAType("B") { typeY }
+        konst typeC = mockTAType("C") { typeA }
+        konst typeD = mockTAType("D") { typeC }
+        konst typeE = mockTAType("E") { typeZ }
 
         assertEquals(
             CirTypeDistance(1), typeDistance(classifiers, target, typeA, idOfX)

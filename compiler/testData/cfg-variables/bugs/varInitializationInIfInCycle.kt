@@ -1,6 +1,6 @@
 fun foo(numbers: Collection<Int>) {
     for (i in numbers) {
-        val b: Boolean
+        konst b: Boolean
         if (1 < 2) {
             b = false
         }

@@ -32,22 +32,22 @@ class AA2 : <!FINAL_SUPERTYPE, SUPERTYPE_NOT_INITIALIZED!>Foo<<!UNRESOLVED_REFER
 fun <`_`> bar(): Foo<<!UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!>> = TODO()
 
 fun test() {
-    val x1 = foo<Int, (<!UNRESOLVED_REFERENCE!>_<!>) -> Unit> { { <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> } }
-    val x2 = foo<Int, (Int) -> <!UNRESOLVED_REFERENCE!>_<!>> { { it } }
-    val x3 = foo<Int, ((<!UNRESOLVED_REFERENCE!>_<!>)) -> <!UNRESOLVED_REFERENCE!>_<!>> { { <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> } }
-    val x4 = <!FUNCTION_CALL_EXPECTED, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NO_VALUE_FOR_PARAMETER!>foo<!><!DEBUG_INFO_MISSING_UNRESOLVED!><<!>Int<!SYNTAX!>, _ -> Float><!> { { <!UNRESOLVED_REFERENCE!>it<!> } }
-    val x5 = foo<Int, Foo<(<!UNRESOLVED_REFERENCE!>_<!>) -> Float>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
-    val x6 = foo<Int, Foo<(<!UNRESOLVED_REFERENCE!>_<!>) -> <!UNRESOLVED_REFERENCE!>_<!>>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
-    val x7 = foo<Int, Foo<(Int) -> <!UNRESOLVED_REFERENCE!>_<!>>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
+    konst x1 = foo<Int, (<!UNRESOLVED_REFERENCE!>_<!>) -> Unit> { { <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> } }
+    konst x2 = foo<Int, (Int) -> <!UNRESOLVED_REFERENCE!>_<!>> { { it } }
+    konst x3 = foo<Int, ((<!UNRESOLVED_REFERENCE!>_<!>)) -> <!UNRESOLVED_REFERENCE!>_<!>> { { <!DEBUG_INFO_ELEMENT_WITH_ERROR_TYPE!>it<!> } }
+    konst x4 = <!FUNCTION_CALL_EXPECTED, NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER, NO_VALUE_FOR_PARAMETER!>foo<!><!DEBUG_INFO_MISSING_UNRESOLVED!><<!>Int<!SYNTAX!>, _ -> Float><!> { { <!UNRESOLVED_REFERENCE!>it<!> } }
+    konst x5 = foo<Int, Foo<(<!UNRESOLVED_REFERENCE!>_<!>) -> Float>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
+    konst x6 = foo<Int, Foo<(<!UNRESOLVED_REFERENCE!>_<!>) -> <!UNRESOLVED_REFERENCE!>_<!>>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
+    konst x7 = foo<Int, Foo<(Int) -> <!UNRESOLVED_REFERENCE!>_<!>>> { <!TYPE_MISMATCH!>{ <!TYPE_MISMATCH!>it<!> }<!> }
 
-    val z32: Pair<<!UNRESOLVED_REFERENCE!>_<!>, Float> = 1 to 1f
-    val z34: Pair<((<!UNRESOLVED_REFERENCE!>_<!>)), Float> = 1 to 1f
+    konst z32: Pair<<!UNRESOLVED_REFERENCE!>_<!>, Float> = 1 to 1f
+    konst z34: Pair<((<!UNRESOLVED_REFERENCE!>_<!>)), Float> = 1 to 1f
 
-    val x8: (Float) -> Int = { x: <!UNRESOLVED_REFERENCE!>_<!> -> 10 }
-    val x9: (Foo<Float>) -> Int = { x: Foo<<!UNRESOLVED_REFERENCE!>_<!>> -> 10 }
+    konst x8: (Float) -> Int = { x: <!UNRESOLVED_REFERENCE!>_<!> -> 10 }
+    konst x9: (Foo<Float>) -> Int = { x: Foo<<!UNRESOLVED_REFERENCE!>_<!>> -> 10 }
 
-    val x10 = object : <!UNRESOLVED_REFERENCE!>_<!> {}
-    val x11 = object : <!FINAL_SUPERTYPE!>Foo<<!UNRESOLVED_REFERENCE!>_<!>><!>() {}
+    konst x10 = object : <!UNRESOLVED_REFERENCE!>_<!> {}
+    konst x11 = object : <!FINAL_SUPERTYPE!>Foo<<!UNRESOLVED_REFERENCE!>_<!>><!>() {}
 
     if (x11 is <!UNRESOLVED_REFERENCE!>_<!>) { }
     if (x11 is <!INCOMPATIBLE_TYPES!>Foo<<!UNRESOLVED_REFERENCE!>_<!>><!>) { }
@@ -55,12 +55,12 @@ fun test() {
     x10 as <!UNRESOLVED_REFERENCE!>_<!>
     x10 <!CAST_NEVER_SUCCEEDS!>as<!> Foo<<!UNRESOLVED_REFERENCE!>_<!>>
 
-    val x12: Foo<@<!UNRESOLVED_REFERENCE!>_<!> Int>? = null
-    val x13: Foo<@<!UNRESOLVED_REFERENCE!>_<!>() Int>? = null
-    val x14: Foo<@Anno(<!UNRESOLVED_REFERENCE!>_<!>) Int>? = null
+    konst x12: Foo<@<!UNRESOLVED_REFERENCE!>_<!> Int>? = null
+    konst x13: Foo<@<!UNRESOLVED_REFERENCE!>_<!>() Int>? = null
+    konst x14: Foo<@Anno(<!UNRESOLVED_REFERENCE!>_<!>) Int>? = null
 
-    val x15: <!UNRESOLVED_REFERENCE!>_<!><<!UNRESOLVED_REFERENCE!>_<!>>? = null
+    konst x15: <!UNRESOLVED_REFERENCE!>_<!><<!UNRESOLVED_REFERENCE!>_<!>>? = null
 }
 
 @Target(AnnotationTarget.TYPE)
-annotation class Anno(val x: Int)
+annotation class Anno(konst x: Int)

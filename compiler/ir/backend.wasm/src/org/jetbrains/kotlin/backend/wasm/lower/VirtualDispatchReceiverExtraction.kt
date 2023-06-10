@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * During Wasm code generation, dispatch receiver can be used multiple times.
  * Move it to temporary variable if it is complex or can have side effects.
  */
-class VirtualDispatchReceiverExtraction(val context: CommonBackendContext) : FileLoweringPass {
+class VirtualDispatchReceiverExtraction(konst context: CommonBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -47,8 +47,8 @@ class VirtualDispatchReceiverExtraction(val context: CommonBackendContext) : Fil
         irFunction.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitCall(expression: IrCall): IrExpression {
                 expression.transformChildrenVoid(this)
-                val function = expression.symbol.owner.realOverrideTarget
-                val receiver = expression.dispatchReceiver
+                konst function = expression.symbol.owner.realOverrideTarget
+                konst receiver = expression.dispatchReceiver
                 if (receiver == null || !function.isOverridable)
                     return expression
                 // TODO: Keep other simple receivers without side effects
@@ -57,7 +57,7 @@ class VirtualDispatchReceiverExtraction(val context: CommonBackendContext) : Fil
                     return expression
                 return with(context.createIrBuilder(irFunction.symbol)) {
                     irBlock(expression) {
-                        val tmp = createTmpVariable(receiver)
+                        konst tmp = createTmpVariable(receiver)
                         expression.dispatchReceiver = irGet(tmp)
                         +expression
                     }

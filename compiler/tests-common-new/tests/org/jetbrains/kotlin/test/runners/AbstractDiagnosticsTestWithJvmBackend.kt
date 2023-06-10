@@ -43,11 +43,11 @@ import java.io.File
 
 abstract class AbstractDiagnosticsTestWithJvmBackend<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>> :
     AbstractKotlinCompilerTest() {
-    abstract val targetFrontend: FrontendKind<R>
-    abstract val targetBackend: TargetBackend
-    abstract val frontend: Constructor<FrontendFacade<R>>
-    abstract val converter: Constructor<Frontend2BackendConverter<R, I>>
-    abstract val backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
+    abstract konst targetFrontend: FrontendKind<R>
+    abstract konst targetBackend: TargetBackend
+    abstract konst frontend: Constructor<FrontendFacade<R>>
+    abstract konst converter: Constructor<Frontend2BackendConverter<R, I>>
+    abstract konst backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
 
     override fun TestConfigurationBuilder.configuration() {
         globalDefaults {
@@ -114,61 +114,61 @@ abstract class AbstractDiagnosticsTestWithJvmBackend<R : ResultingArtifact.Front
 
 abstract class AbstractDiagnosticsTestWithOldJvmBackend :
     AbstractDiagnosticsTestWithJvmBackend<ClassicFrontendOutputArtifact, ClassicBackendInput>() {
-    override val targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
+    override konst targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
         get() = FrontendKinds.ClassicFrontend
 
-    override val targetBackend: TargetBackend
+    override konst targetBackend: TargetBackend
         get() = TargetBackend.JVM_OLD
 
-    override val frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
+    override konst converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, ClassicBackendInput>>
         get() = ::ClassicFrontend2ClassicBackendConverter
 
-    override val backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<ClassicBackendInput, BinaryArtifacts.Jvm>>
         get() = ::ClassicJvmBackendFacade
 }
 
 abstract class AbstractDiagnosticsTestWithJvmIrBackend :
     AbstractDiagnosticsTestWithJvmBackend<ClassicFrontendOutputArtifact, IrBackendInput>() {
-    override val targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
+    override konst targetFrontend: FrontendKind<ClassicFrontendOutputArtifact>
         get() = FrontendKinds.ClassicFrontend
 
-    override val targetBackend: TargetBackend
+    override konst targetBackend: TargetBackend
         get() = TargetBackend.JVM_IR
 
-    override val frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
+    override konst frontend: Constructor<FrontendFacade<ClassicFrontendOutputArtifact>>
         get() = ::ClassicFrontendFacade
 
-    override val converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
+    override konst converter: Constructor<Frontend2BackendConverter<ClassicFrontendOutputArtifact, IrBackendInput>>
         get() = ::ClassicFrontend2IrConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 }
 
 abstract class AbstractFirDiagnosticsTestWithJvmIrBackendBase(
-    val parser: FirParser
+    konst parser: FirParser
 ) : AbstractDiagnosticsTestWithJvmBackend<FirOutputArtifact, IrBackendInput>() {
-    override val targetFrontend: FrontendKind<FirOutputArtifact>
+    override konst targetFrontend: FrontendKind<FirOutputArtifact>
         get() = FrontendKinds.FIR
 
-    override val targetBackend: TargetBackend
+    override konst targetBackend: TargetBackend
         get() = TargetBackend.JVM_IR
 
-    override val frontend: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontend: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
 
-    override val converter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst converter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrJvmResultsConverter
 
-    override val backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
+    override konst backendFacade: Constructor<BackendFacade<IrBackendInput, BinaryArtifacts.Jvm>>
         get() = ::JvmIrBackendFacade
 
     override fun runTest(filePath: String) {
-        val wholeFile = File(filePath)
-        val wholeText = wholeFile.readText()
+        konst wholeFile = File(filePath)
+        konst wholeText = wholeFile.readText()
         // TODO: test infrastructure shouldn't allow to run such tests anyway
         if (InTextDirectivesUtils.isDirectiveDefined(wholeText, "// TARGET_BACKEND: JVM_OLD")) return
         super.runTest(filePath)

@@ -5,7 +5,7 @@
 fun cond() = true
 
 fun test(iae: IllegalAccessException?, cnfe: ClassNotFoundException?) {
-    val reflective = if (cond()) iae else cnfe
+    konst reflective = if (cond()) iae else cnfe
 }
 
 fun box(): String {

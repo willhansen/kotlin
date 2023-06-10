@@ -1,6 +1,6 @@
 package
 
-public val c: kotlin.Int
+public konst c: kotlin.Int
 
 public final class Delegate {
     public constructor Delegate()

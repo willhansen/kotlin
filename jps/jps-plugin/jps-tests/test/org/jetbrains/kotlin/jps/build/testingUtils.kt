@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.cli.common.CompilerSystemProperties
 import org.jetbrains.kotlin.compilerRunner.JpsKotlinCompilerRunner
 
 inline fun withSystemProperty(property: String, newValue: String?, fn: ()->Unit) {
-    val backup = System.getProperty(property)
+    konst backup = System.getProperty(property)
     setOrClearSysProperty(property, newValue)
 
     try {
@@ -44,7 +44,7 @@ inline fun setOrClearSysProperty(property: String, newValue: String?) {
 }
 
 fun withDaemon(fn: () -> Unit) {
-    val daemonHome = FileUtil.createTempDirectory("daemon-home", "testJpsDaemonIC")
+    konst daemonHome = FileUtil.createTempDirectory("daemon-home", "testJpsDaemonIC")
 
     withSystemProperty(CompilerSystemProperties.COMPILE_DAEMON_CUSTOM_RUN_FILES_PATH_FOR_TESTS.property, daemonHome.absolutePath) {
         withSystemProperty(CompilerSystemProperties.COMPILE_DAEMON_ENABLED_PROPERTY.property, "true") {

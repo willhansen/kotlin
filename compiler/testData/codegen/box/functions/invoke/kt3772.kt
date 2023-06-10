@@ -9,13 +9,13 @@ class B {
 }
 
 open class C
-val C.attr: A get() = A()
+konst C.attr: A get() = A()
 
 open class D: C()
-val D.attr: B get() = B()
+konst D.attr: B get() = B()
 
 
 fun box(): String {
-    val d = D()
+    konst d = D()
     return if (d.attr {} == 2) "OK" else "fail"
 }

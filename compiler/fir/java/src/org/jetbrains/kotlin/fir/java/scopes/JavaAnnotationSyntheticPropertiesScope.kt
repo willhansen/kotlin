@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.fir.declarations.resolvePhase
 
 class JavaAnnotationSyntheticPropertiesScope(
-    private val session: FirSession,
+    private konst session: FirSession,
     owner: FirRegularClassSymbol,
-    private val delegateScope: JavaClassMembersEnhancementScope
+    private konst delegateScope: JavaClassMembersEnhancementScope
 ) : FirTypeScope() {
-    private val classId: ClassId = owner.classId
-    private val names: Set<Name> = owner.fir.declarations.mapNotNullTo(mutableSetOf()) { (it as? FirSimpleFunction)?.name }
-    private val syntheticPropertiesCache = mutableMapOf<FirNamedFunctionSymbol, FirVariableSymbol<*>>()
+    private konst classId: ClassId = owner.classId
+    private konst names: Set<Name> = owner.fir.declarations.mapNotNullTo(mutableSetOf()) { (it as? FirSimpleFunction)?.name }
+    private konst syntheticPropertiesCache = mutableMapOf<FirNamedFunctionSymbol, FirVariableSymbol<*>>()
 
     override fun processDeclaredConstructors(processor: (FirConstructorSymbol) -> Unit) {
         delegateScope.processDeclaredConstructors(processor)
@@ -43,11 +43,11 @@ class JavaAnnotationSyntheticPropertiesScope(
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
         if (name !in names) return
         delegateScope.processFunctionsByName(name) { functionSymbol ->
-            val function = functionSymbol.fir
-            val symbol = syntheticPropertiesCache.getOrPut(functionSymbol) {
-                val callableId = CallableId(classId, name)
+            konst function = functionSymbol.fir
+            konst symbol = syntheticPropertiesCache.getOrPut(functionSymbol) {
+                konst callableId = CallableId(classId, name)
                 FirJavaOverriddenSyntheticPropertySymbol(callableId, callableId).also {
-                    val accessor = FirSyntheticPropertyAccessor(function, isGetter = true, it)
+                    konst accessor = FirSyntheticPropertyAccessor(function, isGetter = true, it)
                     FirSyntheticProperty(
                         session.nullableModuleData ?: function.moduleData,
                         name,

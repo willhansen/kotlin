@@ -47,7 +47,7 @@ import java.util.regex.Pattern
 
 abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
     companion object {
-        private val renderer = DescriptorRenderer.withOptions {
+        private konst renderer = DescriptorRenderer.withOptions {
             withDefinedIn = false
             excludedAnnotationClasses = setOf(
                 FqName(ExpectedLoadErrorsUtil.ANNOTATION_CLASS_NAME)
@@ -62,28 +62,28 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
         }
     }
 
-    protected open val defaultJdkKind: TestJdkKind = TestJdkKind.MOCK_JDK
+    protected open konst defaultJdkKind: TestJdkKind = TestJdkKind.MOCK_JDK
 
     // NOTE: this test does a dirty hack of text substitution to make all annotations defined in source code retain at runtime.
     // Specifically each @interface in Java sources is extended by @java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
     // Also type related annotations are removed from Java because they are invisible at runtime
     protected fun doTest(fileName: String) {
-        val file = File(fileName)
-        val text = FileUtil.loadFile(file, true)
+        konst file = File(fileName)
+        konst text = FileUtil.loadFile(file, true)
 
         if (InTextDirectivesUtils.isDirectiveDefined(text, "SKIP_IN_RUNTIME_TEST")) return
 
-        val jdkKind =
+        konst jdkKind =
             if (InTextDirectivesUtils.isDirectiveDefined(text, "FULL_JDK")) TestJdkKind.FULL_JDK
             else defaultJdkKind
 
         compileFile(file, text, jdkKind)
 
-        val classLoader = URLClassLoader(arrayOf(tmpdir.toURI().toURL()), ForTestCompileRuntime.runtimeAndReflectJarClassLoader())
+        konst classLoader = URLClassLoader(arrayOf(tmpdir.toURI().toURL()), ForTestCompileRuntime.runtimeAndReflectJarClassLoader())
 
-        val actual = createReflectedPackageView(classLoader)
+        konst actual = createReflectedPackageView(classLoader)
 
-        val comparatorConfiguration = Configuration(
+        konst comparatorConfiguration = Configuration(
             /* checkPrimaryConstructors = */ fileName.endsWith(".kt"),
             /* checkPropertyAccessors = */ true,
             /* includeMethodsOfKotlinAny = */ false,
@@ -94,17 +94,17 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
             errorTypesForbidden(), renderer
         )
 
-        val differentResultFile = KotlinTestUtils.replaceExtension(file, "runtime.txt")
+        konst differentResultFile = KotlinTestUtils.replaceExtension(file, "runtime.txt")
         if (differentResultFile.exists()) {
-            RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptorWithFile(actual, comparatorConfiguration, differentResultFile)
+            RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptorWithFile(actual, comparatorConfiguration, differentResultFile)
             return
         }
 
-        val expected = LoadDescriptorUtil.loadTestPackageAndBindingContextFromJavaRoot(
+        konst expected = LoadDescriptorUtil.loadTestPackageAndBindingContextFromJavaRoot(
             tmpdir, testRootDisposable, jdkKind, ConfigurationKind.ALL, true, false, false, false, null
         ).first
 
-        RecursiveDescriptorComparatorAdaptor.validateAndCompareDescriptors(expected, actual, comparatorConfiguration, null)
+        RecursiveDescriptorComparatorAdaptor.konstidateAndCompareDescriptors(expected, actual, comparatorConfiguration, null)
     }
 
     private fun DeclarationDescriptor.isJavaAnnotationConstructor() =
@@ -114,15 +114,15 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
 
     @OptIn(ObsoleteTestInfrastructure::class)
     private fun compileFile(file: File, text: String, jdkKind: TestJdkKind) {
-        val fileName = file.name
+        konst fileName = file.name
         when {
             fileName.endsWith(".java") -> {
-                val sources = TestFiles.createTestFiles(
+                konst sources = TestFiles.createTestFiles(
                     fileName,
                     text,
                     object : TestFileFactoryNoModules<File>() {
                         override fun create(fileName: String, text: String, directives: Directives): File {
-                            val targetFile = File(tmpdir, fileName)
+                            konst targetFile = File(tmpdir, fileName)
                             targetFile.writeText(adaptJavaSource(text))
                             return targetFile
                         }
@@ -131,7 +131,7 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
                 LoadDescriptorUtil.compileJavaWithAnnotationsJar(sources, tmpdir, emptyList(), null, false)
             }
             fileName.endsWith(".kt") -> {
-                val environment = KotlinTestUtils.createEnvironmentWithJdkAndNullabilityAnnotationsFromIdea(
+                konst environment = KotlinTestUtils.createEnvironmentWithJdkAndNullabilityAnnotationsFromIdea(
                     testRootDisposable, ConfigurationKind.ALL, jdkKind
                 )
 
@@ -140,35 +140,35 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
                 for (root in environment.configuration.getList(CLIConfigurationKeys.CONTENT_ROOTS)) {
                     LOG.info("root: $root")
                 }
-                val ktFile = KtTestUtil.createFile(file.path, text, environment.project)
+                konst ktFile = KtTestUtil.createFile(file.path, text, environment.project)
                 GenerationUtils.compileFileTo(ktFile, environment, tmpdir)
             }
         }
     }
 
     private fun createReflectedPackageView(classLoader: URLClassLoader): SyntheticPackageViewForTest {
-        val moduleData = RuntimeModuleData.create(classLoader)
-        val module = moduleData.module
+        konst moduleData = RuntimeModuleData.create(classLoader)
+        konst module = moduleData.module
 
-        val generatedPackageDir = File(tmpdir, LoadDescriptorUtil.TEST_PACKAGE_FQNAME.pathSegments().single().asString())
-        val allClassFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.class"), generatedPackageDir)
+        konst generatedPackageDir = File(tmpdir, LoadDescriptorUtil.TEST_PACKAGE_FQNAME.pathSegments().single().asString())
+        konst allClassFiles = FileUtil.findFilesByMask(Pattern.compile(".*\\.class"), generatedPackageDir)
 
-        val packageScopes = arrayListOf<MemberScope>()
-        val classes = arrayListOf<ClassDescriptor>()
+        konst packageScopes = arrayListOf<MemberScope>()
+        konst classes = arrayListOf<ClassDescriptor>()
         for (classFile in allClassFiles) {
-            val className = classFile.toRelativeString(tmpdir).substringBeforeLast(".class").replace('/', '.').replace('\\', '.')
+            konst className = classFile.toRelativeString(tmpdir).substringBeforeLast(".class").replace('/', '.').replace('\\', '.')
 
-            val klass = classLoader.loadClass(className).sure { "Couldn't load class $className" }
-            val binaryClass = ReflectKotlinClass.create(klass)
-            val header = binaryClass?.classHeader
+            konst klass = classLoader.loadClass(className).sure { "Couldn't load class $className" }
+            konst binaryClass = ReflectKotlinClass.create(klass)
+            konst header = binaryClass?.classHeader
 
             if (header?.kind == KotlinClassHeader.Kind.FILE_FACADE || header?.kind == KotlinClassHeader.Kind.MULTIFILE_CLASS) {
                 packageScopes.add(moduleData.packagePartScopeCache.getPackagePartScope(binaryClass))
             } else if (header == null || header.kind == KotlinClassHeader.Kind.CLASS) {
                 // Either a normal Kotlin class or a Java class
-                val classId = klass.classId
+                konst classId = klass.classId
                 if (!classId.isLocal) {
-                    val classDescriptor = module.findClassAcrossModuleDependencies(classId).sure { "Couldn't resolve class $className" }
+                    konst classDescriptor = module.findClassAcrossModuleDependencies(classId).sure { "Couldn't resolve class $className" }
                     if (DescriptorUtils.isTopLevelDeclaration(classDescriptor)) {
                         classes.add(classDescriptor)
                     }
@@ -182,8 +182,8 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
     }
 
     private fun adaptJavaSource(text: String): String {
-        val typeAnnotations = arrayOf("NotNull", "Nullable", "ReadOnly", "Mutable")
-        val adaptedSource = typeAnnotations.fold(text) { result, annotation -> result.replace("@$annotation", "") }
+        konst typeAnnotations = arrayOf("NotNull", "Nullable", "ReadOnly", "Mutable")
+        konst adaptedSource = typeAnnotations.fold(text) { result, annotation -> result.replace("@$annotation", "") }
         if ("@Retention" !in adaptedSource) {
             return adaptedSource.replace(
                 "@interface",
@@ -194,24 +194,24 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
     }
 
     private class SyntheticPackageViewForTest(
-        override val module: ModuleDescriptor,
+        override konst module: ModuleDescriptor,
         packageScopes: List<MemberScope>,
         classes: List<ClassifierDescriptor>
     ) : PackageViewDescriptor {
-        private val scope: MemberScope
+        private konst scope: MemberScope
 
         init {
-            val list = ArrayList<MemberScope>(packageScopes.size + 1)
+            konst list = ArrayList<MemberScope>(packageScopes.size + 1)
             list.add(ScopeWithClassifiers(classes))
             list.addAll(packageScopes)
             scope = ChainedMemberScope.create("synthetic package view for test", list)
         }
 
-        override val fqName: FqName
+        override konst fqName: FqName
             get() = LoadDescriptorUtil.TEST_PACKAGE_FQNAME
-        override val memberScope: MemberScope
+        override konst memberScope: MemberScope
             get() = scope
-        override val fragments: List<PackageFragmentDescriptor> = listOf(
+        override konst fragments: List<PackageFragmentDescriptor> = listOf(
             object : PackageFragmentDescriptorImpl(module, fqName) {
                 override fun getMemberScope(): MemberScope = scope
             }
@@ -224,12 +224,12 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
         override fun getOriginal() = throw UnsupportedOperationException()
         override fun acceptVoid(visitor: DeclarationDescriptorVisitor<Void, Void>?) = throw UnsupportedOperationException()
         override fun getName() = throw UnsupportedOperationException()
-        override val annotations: Annotations
+        override konst annotations: Annotations
             get() = throw UnsupportedOperationException()
     }
 
     private class ScopeWithClassifiers(classifiers: List<ClassifierDescriptor>) : MemberScopeImpl() {
-        private val classifierMap = HashMap<Name, ClassifierDescriptor>()
+        private konst classifierMap = HashMap<Name, ClassifierDescriptor>()
 
         init {
             for (classifier in classifiers) {
@@ -250,7 +250,7 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
         override fun getContributedDescriptors(
             kindFilter: DescriptorKindFilter,
             nameFilter: (Name) -> Boolean
-        ): Collection<DeclarationDescriptor> = classifierMap.values
+        ): Collection<DeclarationDescriptor> = classifierMap.konstues
 
         override fun printScopeStructure(p: Printer) {
             p.println("runtime descriptor loader test")
@@ -259,4 +259,4 @@ abstract class AbstractJvmRuntimeDescriptorLoaderTest : TestCaseWithTmpdir() {
 
 }
 
-private val LOG = Logger.getInstance(KotlinMultiFileTestWithJava::class.java)
+private konst LOG = Logger.getInstance(KotlinMultiFileTestWithJava::class.java)

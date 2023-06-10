@@ -45,7 +45,7 @@ KtFunctionSymbol:
   typeParameters: [
     KtTypeParameterSymbol(T)
   ]
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

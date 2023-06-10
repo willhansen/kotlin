@@ -7,9 +7,9 @@ package codegen.`object`.initialization
 
 import kotlin.test.*
 
-open class A(val a:Int, val b:Int)
+open class A(konst a:Int, konst b:Int)
 
-open class B(val c:Int, d:Int):A(c, d)
+open class B(konst c:Int, d:Int):A(c, d)
 
 open class C(i:Int, j:Int):B(i + j, 42)
 
@@ -24,7 +24,7 @@ fun foo(i:Int) : Unit {}
 
 
 fun foo(i:Int, j:Int):Int {
-   val c = D(i, j)
+   konst c = D(i, j)
    return c.c
 }
 

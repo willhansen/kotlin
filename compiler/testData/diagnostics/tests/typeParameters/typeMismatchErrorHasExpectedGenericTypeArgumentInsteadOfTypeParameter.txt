@@ -1,6 +1,6 @@
 package
 
-public val a: Foo
+public konst a: Foo
 public fun </*0*/ T> foo(/*0*/ it: T): kotlin.Unit
 public fun main(): kotlin.Unit
 public fun </*0*/ MY_TYPE_PARAM : I> myRun(/*0*/ action: () -> MY_TYPE_PARAM): MY_TYPE_PARAM

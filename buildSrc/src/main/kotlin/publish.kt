@@ -12,7 +12,7 @@ import org.gradle.kotlin.dsl.accessors.runtime.addDependencyTo
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-val NamedDomainObjectContainer<Configuration>.publishedRuntime: NamedDomainObjectProvider<Configuration> get() = named("publishedRuntime")
+konst NamedDomainObjectContainer<Configuration>.publishedRuntime: NamedDomainObjectProvider<Configuration> get() = named("publishedRuntime")
 
 fun DependencyHandler.publishedRuntime(dependencyNotation: Any): Dependency? =
     add("publishedRuntime", dependencyNotation)
@@ -24,7 +24,7 @@ fun DependencyHandler.publishedRuntime(
     addDependencyTo(this, "publishedRuntime", dependencyNotation, dependencyConfiguration)
 
 
-val NamedDomainObjectContainer<Configuration>.publishedCompile: NamedDomainObjectProvider<Configuration> get() = named("publishedCompile")
+konst NamedDomainObjectContainer<Configuration>.publishedCompile: NamedDomainObjectProvider<Configuration> get() = named("publishedCompile")
 
 fun DependencyHandler.publishedCompile(dependencyNotation: Any): Dependency? =
     add("publishedCompile", dependencyNotation)

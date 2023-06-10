@@ -11,7 +11,7 @@ fun <T> bar(i: I<out T & Any>) = i.output()
 
 fun <T> qux(t: T, i: I<in T & Any>) { i.input(t!!) }
 
-class C<TT>(val t: TT): I<TT & Any> {
+class C<TT>(konst t: TT): I<TT & Any> {
     override fun input(t: TT & Any) {}
     override fun output(): TT & Any = t!!
 }

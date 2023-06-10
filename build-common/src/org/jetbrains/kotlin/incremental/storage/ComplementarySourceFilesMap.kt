@@ -19,12 +19,12 @@ class ComplementarySourceFilesMap(
     }
 
     operator fun get(sourceFile: File): Collection<File> {
-        val paths = storage[pathConverter.toPath(sourceFile)].orEmpty()
+        konst paths = storage[pathConverter.toPath(sourceFile)].orEmpty()
         return pathConverter.toFiles(paths)
     }
 
-    override fun dumpValue(value: Collection<String>) =
-        value.dumpCollection()
+    override fun dumpValue(konstue: Collection<String>) =
+        konstue.dumpCollection()
 
     fun remove(file: File): Collection<File> =
         get(file).also { storage.remove(pathConverter.toPath(file)) }

@@ -16,10 +16,10 @@ fun main() {
 
     takeSuspend(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id { it }<!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>{ x -> x }<!>)
 
-    val x1: suspend (Int) -> Unit = takeSuspend(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id { it }<!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>{ x -> x }<!>)
+    konst x1: suspend (Int) -> Unit = takeSuspend(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id { it }<!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>{ x -> x }<!>)
 
     // Here, the error should be
-    val x2: (Int) -> Unit = <!TYPE_MISMATCH!>takeSuspend(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id <!TYPE_MISMATCH!>{ it }<!><!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{ x -> x }<!>)<!>
-    val x3: suspend (Int) -> Unit = takeSimpleFunction(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id <!TYPE_MISMATCH!>{ it }<!><!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{ x -> x }<!>)
-    val x4: (Int) -> Unit = <!TYPE_MISMATCH, TYPE_MISMATCH!>takeSimpleFunction(<!TYPE_MISMATCH!>id<suspend (Int) -> Unit> {}<!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{}<!>)<!>
+    konst x2: (Int) -> Unit = <!TYPE_MISMATCH!>takeSuspend(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id <!TYPE_MISMATCH!>{ it }<!><!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{ x -> x }<!>)<!>
+    konst x3: suspend (Int) -> Unit = takeSimpleFunction(<!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit")!>id <!TYPE_MISMATCH!>{ it }<!><!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{ x -> x }<!>)
+    konst x4: (Int) -> Unit = <!TYPE_MISMATCH, TYPE_MISMATCH!>takeSimpleFunction(<!TYPE_MISMATCH!>id<suspend (Int) -> Unit> {}<!>, <!DEBUG_INFO_EXPRESSION_TYPE("suspend (kotlin.Int) -> kotlin.Unit"), TYPE_MISMATCH!>{}<!>)<!>
 }

@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.js.config.RuntimeDiagnostic
 import org.jetbrains.kotlin.name.FqName
 
 class CompilerResult(
-    val outputs: Map<TranslationMode, CompilationOutputs>,
+    konst outputs: Map<TranslationMode, CompilationOutputs>,
 )
 
 class LoweredIr(
-    val context: JsIrBackendContext,
-    val mainModule: IrModuleFragment,
-    val allModules: List<IrModuleFragment>,
-    val moduleFragmentToUniqueName: Map<IrModuleFragment, String>,
+    konst context: JsIrBackendContext,
+    konst mainModule: IrModuleFragment,
+    konst allModules: List<IrModuleFragment>,
+    konst moduleFragmentToUniqueName: Map<IrModuleFragment, String>,
 )
 
 fun compile(
@@ -51,7 +51,7 @@ fun compile(
     granularity: JsGenerationGranularity = JsGenerationGranularity.WHOLE_PROGRAM,
 ): LoweredIr {
 
-    val (moduleFragment: IrModuleFragment, dependencyModules, irBuiltIns, symbolTable, deserializer, moduleToName) =
+    konst (moduleFragment: IrModuleFragment, dependencyModules, irBuiltIns, symbolTable, deserializer, moduleToName) =
         loadIr(depsDescriptors, irFactory, verifySignatures, filesToLower, loadFunctionInterfacesIntoStdlib = true)
 
     return compileIr(
@@ -92,16 +92,16 @@ fun compileIr(
     safeExternalBooleanDiagnostic: RuntimeDiagnostic?,
     granularity: JsGenerationGranularity,
 ): LoweredIr {
-    val moduleDescriptor = moduleFragment.descriptor
-    val irFactory = symbolTable.irFactory
-    val shouldGeneratePolyfills = configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
+    konst moduleDescriptor = moduleFragment.descriptor
+    konst irFactory = symbolTable.irFactory
+    konst shouldGeneratePolyfills = configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
 
-    val allModules = when (mainModule) {
+    konst allModules = when (mainModule) {
         is MainModule.SourceFiles -> dependencyModules + listOf(moduleFragment)
         is MainModule.Klib -> dependencyModules
     }
 
-    val context = JsIrBackendContext(
+    konst context = JsIrBackendContext(
         moduleDescriptor,
         irBuiltIns,
         symbolTable,
@@ -117,7 +117,7 @@ fun compileIr(
     )
 
     // Load declarations referenced during `context` initialization
-    val irProviders = listOf(irLinker)
+    konst irProviders = listOf(irLinker)
     ExternalDependenciesGenerator(symbolTable, irProviders).generateUnboundSymbolsAsDependencies()
 
     irLinker.postProcess(inOrAfterLinkageStep = true)

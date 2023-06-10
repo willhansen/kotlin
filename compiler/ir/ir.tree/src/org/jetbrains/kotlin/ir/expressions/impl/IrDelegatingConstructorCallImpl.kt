@@ -28,18 +28,18 @@ import org.jetbrains.kotlin.ir.util.initializeParameterArguments
 import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 
 class IrDelegatingConstructorCallImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrConstructorSymbol,
+    override konst symbol: IrConstructorSymbol,
     typeArgumentsCount: Int,
-    valueArgumentsCount: Int,
+    konstueArgumentsCount: Int,
 ) : IrDelegatingConstructorCall() {
     override var origin: IrStatementOrigin? = null
 
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(valueArgumentsCount)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(konstueArgumentsCount)
 
     override var contextReceiversCount = 0
 
@@ -51,8 +51,8 @@ class IrDelegatingConstructorCallImpl(
             type: IrType,
             symbol: IrConstructorSymbol,
             typeArgumentsCount: Int = symbol.descriptor.typeParametersCount,
-            valueArgumentsCount: Int = symbol.descriptor.valueParameters.size + symbol.descriptor.contextReceiverParameters.size
-        ) = IrDelegatingConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount)
+            konstueArgumentsCount: Int = symbol.descriptor.konstueParameters.size + symbol.descriptor.contextReceiverParameters.size
+        ) = IrDelegatingConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount)
 
         fun fromSymbolOwner(
             startOffset: Int,
@@ -60,7 +60,7 @@ class IrDelegatingConstructorCallImpl(
             type: IrType,
             symbol: IrConstructorSymbol,
             typeArgumentsCount: Int = symbol.owner.allTypeParameters.size,
-            valueArgumentsCount: Int = symbol.owner.valueParameters.size
-        ) = IrDelegatingConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, valueArgumentsCount)
+            konstueArgumentsCount: Int = symbol.owner.konstueParameters.size
+        ) = IrDelegatingConstructorCallImpl(startOffset, endOffset, type, symbol, typeArgumentsCount, konstueArgumentsCount)
     }
 }

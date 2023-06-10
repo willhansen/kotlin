@@ -27,15 +27,15 @@ import kotlin.concurrent.withLock
 import kotlin.reflect.KClass
 
 abstract class AnalysisApiTestConfigurator {
-    open val testPrefix: String? get() = null
+    open konst testPrefix: String? get() = null
 
-    abstract val frontendKind: FrontendKind
+    abstract konst frontendKind: FrontendKind
 
-    abstract val analyseInDependentSession: Boolean
+    abstract konst analyseInDependentSession: Boolean
 
     abstract fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable)
 
-    abstract val serviceRegistrars: List<AnalysisApiTestServiceRegistrar>
+    abstract konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar>
 
     open fun prepareFilesInModule(files: List<PsiFile>, module: TestModule, testServices: TestServices) {}
 
@@ -67,7 +67,7 @@ abstract class AnalysisApiTestConfigurator {
 
 object ApplicationServiceRegistrar {
     fun register(application: MockApplication, registrars: List<AnalysisApiTestServiceRegistrar>, testServices: TestServices) {
-        val lock = application.lock
+        konst lock = application.lock
         for (registrar in registrars) {
             if (lock.readLock().withLock { application.isRegistrarRegistered(registrar) }) {
                 continue
@@ -84,7 +84,7 @@ object ApplicationServiceRegistrar {
     private fun Application.isRegistrarRegistered(registrar: AnalysisApiTestServiceRegistrar): Boolean =
         serviceRegistered[registrar::class] == true
 
-    private val Application.lock
+    private konst Application.lock
             by NotNullableUserDataProperty<Application, ReadWriteLock>(
                 Key("TestApplicationServicesRegistrarLock"),
                 ReentrantReadWriteLock(),

@@ -27,18 +27,18 @@ fun wrapScopeWithJvmMapped(
     memberRequiredPhase: FirResolvePhase?,
 ): FirContainingNamesAwareScope {
     if (klass !is FirRegularClass) return declaredMemberScope
-    val classId = klass.classId
-    val kotlinUnsafeFqName = classId.asSingleFqName().toUnsafe()
-    val javaClassId = JavaToKotlinClassMap.mapKotlinToJava(kotlinUnsafeFqName)
+    konst classId = klass.classId
+    konst kotlinUnsafeFqName = classId.asSingleFqName().toUnsafe()
+    konst javaClassId = JavaToKotlinClassMap.mapKotlinToJava(kotlinUnsafeFqName)
         ?: return declaredMemberScope
-    val symbolProvider = useSiteSession.symbolProvider
-    val javaClass = symbolProvider.getClassLikeSymbolByClassId(javaClassId)?.fir as? FirRegularClass
+    konst symbolProvider = useSiteSession.symbolProvider
+    konst javaClass = symbolProvider.getClassLikeSymbolByClassId(javaClassId)?.fir as? FirRegularClass
         ?: return declaredMemberScope
 
     // We don't add additional built-in members to function types and kotlin.Any (see JvmBuiltInsCustomizer.getJavaAnalogue)
     if (klass.symbol.toLookupTag().isSomeFunctionType(useSiteSession) || classId == StandardClassIds.Any) return declaredMemberScope
 
-    val javaClassUseSiteScope = javaClass.unsubstitutedScope(
+    konst javaClassUseSiteScope = javaClass.unsubstitutedScope(
         useSiteSession,
         scopeSession,
         withForcedTypeCalculator = false,

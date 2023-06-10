@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.psi.psiUtil.getParentOfTypeAndBranch
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstance
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
-val KtSimpleNameExpression.mainReference: KtSimpleNameReference
+konst KtSimpleNameExpression.mainReference: KtSimpleNameReference
     get() = references.firstIsInstance()
 
-val KtReferenceExpression.mainReference: KtReference
+konst KtReferenceExpression.mainReference: KtReference
     get() = if (this is KtSimpleNameExpression) mainReference else references.firstIsInstance()
 
-val KDocName.mainReference: KDocReference
+konst KDocName.mainReference: KDocReference
     get() = references.firstIsInstance()
 
-val KtElement.mainReference: KtReference?
+konst KtElement.mainReference: KtReference?
     get() = when (this) {
         is KtReferenceExpression -> mainReference
         is KDocName -> mainReference
@@ -35,9 +35,9 @@ val KtElement.mainReference: KtReference?
 
 // Navigation element of the resolved reference
 // For property accessor return enclosing property
-val PsiReference.unwrappedTargets: Set<PsiElement>
+konst PsiReference.unwrappedTargets: Set<PsiElement>
     get() {
-        fun PsiElement.adjust(): PsiElement? = when (val target = unwrapped?.originalElement) {
+        fun PsiElement.adjust(): PsiElement? = when (konst target = unwrapped?.originalElement) {
             is KtPropertyAccessor -> target.getNonStrictParentOfType<KtProperty>()
             else -> target
         }
@@ -49,8 +49,8 @@ val PsiReference.unwrappedTargets: Set<PsiElement>
     }
 
 fun KtFunction.getCalleeByLambdaArgument(): KtSimpleNameExpression? {
-    val argument = getParentOfTypeAndBranch<KtValueArgument> { getArgumentExpression() } ?: return null
-    val callExpression = when (argument) {
+    konst argument = getParentOfTypeAndBranch<KtValueArgument> { getArgumentExpression() } ?: return null
+    konst callExpression = when (argument) {
         is KtLambdaArgument -> argument.parent as? KtCallExpression
         else -> (argument.parent as? KtValueArgumentList)?.parent as? KtCallExpression
     } ?: return null

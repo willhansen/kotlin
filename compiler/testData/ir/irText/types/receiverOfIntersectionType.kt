@@ -18,17 +18,17 @@ class B: I, J {
 }
 
 fun testIntersection(a: A, b: B) {
-    val v = if (true) a else b
+    konst v = if (true) a else b
     v.ff()
 }
 
 fun testFlexible1() {
-    val v = if (true) Java.a() else Java.b()
+    konst v = if (true) Java.a() else Java.b()
     v.ff()
 }
 
 fun testFlexible2(a: A, b: B) {
-    val v = if (true) Java.id(a) else Java.id(b)
+    konst v = if (true) Java.id(a) else Java.id(b)
     v.ff()
 }
 

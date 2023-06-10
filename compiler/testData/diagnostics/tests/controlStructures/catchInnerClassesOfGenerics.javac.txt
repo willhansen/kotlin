@@ -16,8 +16,8 @@ public final class Outer {
 
         public final inner class ErrorInnerExn /*captured type parameters: /*0*/ T*/ : kotlin.Exception /* = java.lang.Exception */ {
             public constructor ErrorInnerExn()
-            public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-            public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+            public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+            public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
             public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -37,7 +37,7 @@ public final class Outer {
 
 public final class OuterGeneric</*0*/ T> {
     public constructor OuterGeneric</*0*/ T>()
-    public final val errorAnonymousObjectExn: kotlin.Exception /* = java.lang.Exception */
+    public final konst errorAnonymousObjectExn: kotlin.Exception /* = java.lang.Exception */
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo(): kotlin.Unit
     public final fun </*0*/ X> genericFoo(): kotlin.Unit
@@ -46,8 +46,8 @@ public final class OuterGeneric</*0*/ T> {
 
     public final inner class ErrorInnerExn /*captured type parameters: /*0*/ T*/ : kotlin.Exception /* = java.lang.Exception */ {
         public constructor ErrorInnerExn()
-        public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-        public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+        public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+        public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
         public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -71,8 +71,8 @@ public final class OuterGeneric</*0*/ T> {
 
         public final inner class ErrorInnerExn2 /*captured type parameters: /*0*/ T*/ : kotlin.Exception /* = java.lang.Exception */ {
             public constructor ErrorInnerExn2()
-            public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-            public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+            public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+            public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
             public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -91,8 +91,8 @@ public final class OuterGeneric</*0*/ T> {
 
     public final class OkNestedExn : kotlin.Exception /* = java.lang.Exception */ {
         public constructor OkNestedExn()
-        public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-        public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+        public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+        public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
         public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ p0: kotlin.Throwable!): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!

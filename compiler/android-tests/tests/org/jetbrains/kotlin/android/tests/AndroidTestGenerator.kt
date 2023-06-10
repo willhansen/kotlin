@@ -26,13 +26,13 @@ import org.jetbrains.kotlin.test.services.sourceFileProvider
 import java.io.File
 import java.util.regex.Pattern
 
-private val FILE_NAME_ANNOTATIONS = arrayOf("@file:JvmName", "@file:kotlin.jvm.JvmName")
+private konst FILE_NAME_ANNOTATIONS = arrayOf("@file:JvmName", "@file:kotlin.jvm.JvmName")
 
-private val packagePattern = Pattern.compile("(?m)^\\s*package[ |\t]+([\\w|\\.]*)")
+private konst packagePattern = Pattern.compile("(?m)^\\s*package[ |\t]+([\\w|\\.]*)")
 
-private val importPattern = Pattern.compile("import[ |\t]([\\w|]*\\.)")
+private konst importPattern = Pattern.compile("import[ |\t]([\\w|]*\\.)")
 
-private data class OldPackageAndNew(val oldFqName: FqName, val newFqName: FqName)
+private data class OldPackageAndNew(konst oldFqName: FqName, konst newFqName: FqName)
 
 internal fun patchFilesAndAddTest(
     testFile: File,
@@ -40,14 +40,14 @@ internal fun patchFilesAndAddTest(
     services: TestServices,
     filesHolder: CodegenTestsOnAndroidGenerator.FilesWriter
 ): FqName {
-    val newPackagePrefix = testFile.path.replace("\\\\|-|\\.|/".toRegex(), "_")
-    val oldPackage = Ref<FqName>()
-    val isJvmName = Ref<Boolean>(false)
-    val testFiles = module.files
-    val isSingle = testFiles.size == 1
-    val resultFiles = testFiles.map {
-        val fileName = if (isSingle) it.name else testFile.name.substringBeforeLast(".kt") + "/" + it.name
-        val content = services.sourceFileProvider.getContentOfSourceFile(it)
+    konst newPackagePrefix = testFile.path.replace("\\\\|-|\\.|/".toRegex(), "_")
+    konst oldPackage = Ref<FqName>()
+    konst isJvmName = Ref<Boolean>(false)
+    konst testFiles = module.files
+    konst isSingle = testFiles.size == 1
+    konst resultFiles = testFiles.map {
+        konst fileName = if (isSingle) it.name else testFile.name.substringBeforeLast(".kt") + "/" + it.name
+        konst content = services.sourceFileProvider.getContentOfSourceFile(it)
         TestClassInfo(
             fileName,
             changePackage(newPackagePrefix, content, oldPackage, isJvmName),
@@ -56,23 +56,23 @@ internal fun patchFilesAndAddTest(
             getGeneratedClassName(File(fileName), content, newPackagePrefix, oldPackage.get())
         )
     }
-    val packages =
+    konst packages =
         resultFiles.map { OldPackageAndNew(it.oldPackage, it.newPackagePartClassId.parent()) }
             .sortedByDescending { it.oldFqName.asString().length }
 
-    //If files contain any val or var declaration with same name as any package name
+    //If files contain any konst or var declaration with same name as any package name
     // then use old conservative renaming scheme, otherwise use aggressive one
     // with old package renaming to new one (except some cases for default package)
     //  Example for conservative switch:
     //      package foo
     //      ...
-    //      val foo = ....
-    //      class A(val foo ...)
+    //      konst foo = ....
+    //      class A(konst foo ...)
     //      fun foo()= { var foo ...}
-    val conservativeRenameScheme = resultFiles.any { file ->
+    konst conservativeRenameScheme = resultFiles.any { file ->
         packages.any {
             if (it.oldFqName.isRoot || !it.oldFqName.parent().isRoot) false
-            else file.content.contains("(val|var)\\s+${it.oldFqName.asString()}[^A-Za-z0-9_.]".toRegex())
+            else file.content.contains("(konst|var)\\s+${it.oldFqName.asString()}[^A-Za-z0-9_.]".toRegex())
         }
     }
 
@@ -111,7 +111,7 @@ internal fun patchFilesAndAddTest(
         }
     }
 
-    val boxFiles = resultFiles.filter { hasBoxMethod(it.content) }
+    konst boxFiles = resultFiles.filter { hasBoxMethod(it.content) }
     if (boxFiles.size != 1) {
         println("Several box methods in $testFile")
     }
@@ -128,23 +128,23 @@ private fun hasBoxMethod(text: String): Boolean {
     return text.contains("fun box()")
 }
 
-class TestClassInfo(val name: String, var content: String, val oldPackage: FqName, val isJvmName: Boolean, val newPackagePartClassId: FqName) {
-    val newPackage = newPackagePartClassId.parent()
+class TestClassInfo(konst name: String, var content: String, konst oldPackage: FqName, konst isJvmName: Boolean, konst newPackagePartClassId: FqName) {
+    konst newPackage = newPackagePartClassId.parent()
 }
 
 
 private fun changePackage(newPackagePrefix: String, text: String, oldPackage: Ref<FqName>, isJvmName: Ref<Boolean>): String {
-    val matcher = packagePattern.matcher(text)
+    konst matcher = packagePattern.matcher(text)
     if (matcher.find()) {
-        val oldPackageName = matcher.toMatchResult().group(1)
+        konst oldPackageName = matcher.toMatchResult().group(1)
         oldPackage.set(FqName(oldPackageName))
         return matcher.replaceAll("package $newPackagePrefix.$oldPackageName")
     } else {
         oldPackage.set(FqName.ROOT)
-        val packageDirective = "package $newPackagePrefix;\n"
+        konst packageDirective = "package $newPackagePrefix;\n"
         if (text.contains("@file:")) {
-            val index = text.lastIndexOf("@file:")
-            val packageDirectiveIndex = text.indexOf("\n", index)
+            konst index = text.lastIndexOf("@file:")
+            konst packageDirectiveIndex = text.indexOf("\n", index)
             isJvmName.set(true)
             return text.substring(0, packageDirectiveIndex + 1) + packageDirective + text.substring(packageDirectiveIndex + 1)
         } else {
@@ -161,12 +161,12 @@ private fun getGeneratedClassName(file: File, text: String, newPackagePrefix: St
     }
     for (annotation in FILE_NAME_ANNOTATIONS) {
         if (text.contains(annotation)) {
-            val indexOf = text.indexOf(annotation)
-            val startIndex = text.indexOf("(\"", indexOf)
-            val endIndex = text.indexOf("\")", indexOf)
-            // "start", "end" can be -1 in case when we use some const val in argument place
+            konst indexOf = text.indexOf(annotation)
+            konst startIndex = text.indexOf("(\"", indexOf)
+            konst endIndex = text.indexOf("\")", indexOf)
+            // "start", "end" can be -1 in case when we use some const konst in argument place
             if (startIndex != -1 && endIndex != -1) {
-                val annotationParameter = text.substring(startIndex + 2, endIndex)
+                konst annotationParameter = text.substring(startIndex + 2, endIndex)
                 return packageFqName.child(Name.identifier(annotationParameter))
             }
         }
@@ -199,7 +199,7 @@ private fun patchRootPartNamesInStrings(
 private fun patchPackages(newPackage: FqName, oldPackage: FqName, text: String): String {
     if (oldPackage.isRoot) return text
 
-    val regexp = "([^A-Za-z0-9.])" + (oldPackage.asString() + ".").replace(".", "\\.")
+    konst regexp = "([^A-Za-z0-9.])" + (oldPackage.asString() + ".").replace(".", "\\.")
     return text.replace(
         regexp.toRegex(), "$1" + newPackage.asString() + "."
     )
@@ -214,10 +214,10 @@ private fun String.patchImports(oldPackage: FqName, newPackage: FqName): String 
 
 private fun String.patchSelfImports(newPackage: FqName): String {
     var newText = this;
-    val matcher = importPattern.matcher(this)
+    konst matcher = importPattern.matcher(this)
     while (matcher.find()) {
-        val possibleSelfImport = matcher.toMatchResult().group(1)
-        val classOrObjectPattern = Pattern.compile("[\\s|^](class|object)\\s$possibleSelfImport[\\s|\\(|{|;|:]")
+        konst possibleSelfImport = matcher.toMatchResult().group(1)
+        konst classOrObjectPattern = Pattern.compile("[\\s|^](class|object)\\s$possibleSelfImport[\\s|\\(|{|;|:]")
         if (classOrObjectPattern.matcher(newText).find()) {
             newText = newText.replace(
                 "import $possibleSelfImport",

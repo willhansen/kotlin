@@ -1,33 +1,33 @@
 interface T {
-    open val baz: String
+    open konst baz: String
         get() = "T.baz"
 }
 
 open class A {
-    open val bar: String
+    open konst bar: String
         get() = "OK"
-    open val boo: String
+    open konst boo: String
         get() = "OK"
 }
 
 open class B : A(), T {
-    override val bar: String
+    override konst bar: String
         get() = "B"
-    override val baz: String
+    override konst baz: String
         get() = "B.baz"
     inner class E {
-        val bar: String
+        konst bar: String
             get() = super<A>@B.bar + super@B.bar + super@B.baz
     }
 }
 
 class C : B() {
-    override val bar: String
+    override konst bar: String
         get() = "C"
-    override val boo: String
+    override konst boo: String
         get() = "C"
     inner class D {
-        val bar: String
+        konst bar: String
             get() = super<B>@C.bar + super<B>@C.boo
     }
 }

@@ -17,7 +17,7 @@ public class Inv<T> {
 // FILE: test.kt
 
 fun test(inv: Inv<String>) {
-    val m: ((String) -> String) -> Inv<String> = inv::map
+    konst m: ((String) -> String) -> Inv<String> = inv::map
     take(inv::map)
 }
 

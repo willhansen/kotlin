@@ -31,7 +31,7 @@ abstract class FirLazyDeclarationResolver : FirSessionComponent {
     }
 
     inline fun disableLazyResolveContractChecksInside(action: () -> Unit) {
-        val current = lazyResolveContractChecksEnabled
+        konst current = lazyResolveContractChecksEnabled
         lazyResolveContractChecksEnabled = false
         try {
             action()
@@ -55,9 +55,9 @@ class FirLazyResolveContractViolationException(
      """.trimIndent()
 )
 
-val FirSession.lazyDeclarationResolver: FirLazyDeclarationResolver by FirSession.sessionComponentAccessor()
+konst FirSession.lazyDeclarationResolver: FirLazyDeclarationResolver by FirSession.sessionComponentAccessor()
 
-private val FirDeclaration.lazyDeclarationResolver get() = moduleData.session.lazyDeclarationResolver
+private konst FirDeclaration.lazyDeclarationResolver get() = moduleData.session.lazyDeclarationResolver
 
 /**
  * Lazy resolve [FirBasedSymbol] to [FirResolvePhase].

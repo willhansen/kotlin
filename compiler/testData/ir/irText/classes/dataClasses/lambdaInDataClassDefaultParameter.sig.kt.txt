@@ -5,7 +5,7 @@ data class A {
   // CHECK:
   //   Mangled name: A{}runA
   //   Public signature: /A.runA|-603860279021396892[0]
-  val runA: @ExtensionFunctionType Function2<A, String, Unit>
+  konst runA: @ExtensionFunctionType Function2<A, String, Unit>
     // CHECK JVM_IR:
     //   Mangled name: A#<get-runA>(){}kotlin.Function2<A,kotlin.String,kotlin.Unit>
     //   Public signature: /A.runA.<get-runA>|-7395660359918443631[0]
@@ -67,7 +67,7 @@ data class B {
   // CHECK:
   //   Mangled name: B{}x
   //   Public signature: /B.x|-8060530855978347579[0]
-  val x: Any
+  konst x: Any
     // CHECK JVM_IR:
     //   Mangled name: B#<get-x>(){}kotlin.Any
     //   Public signature: /B.x.<get-x>|98409022523676208[0]

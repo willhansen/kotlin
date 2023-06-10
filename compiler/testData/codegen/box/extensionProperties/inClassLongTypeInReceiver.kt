@@ -4,20 +4,20 @@ class Test {
 
     var Double.foo: String
         get() = doubleStorage
-        set(value) {
-            doubleStorage = value
+        set(konstue) {
+            doubleStorage = konstue
         }
 
     var Long.bar: String
         get() = longStorage
-        set(value) {
-            longStorage = value
+        set(konstue) {
+            longStorage = konstue
         }
 
     fun test(): String {
-        val d = 1.0
+        konst d = 1.0
         d.foo = "O"
-        val l = 1L
+        konst l = 1L
         l.bar = "K"
         return d.foo + l.bar
     }

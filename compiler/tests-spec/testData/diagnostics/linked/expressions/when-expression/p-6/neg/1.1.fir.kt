@@ -1,8 +1,8 @@
 // SKIP_TXT
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Any): String {
-    when (value_1) {
+fun case_1(konstue_1: Any): String {
+    when (konstue_1) {
         <!NO_COMPANION_OBJECT!>EmptyClass<!> -> return ""
     }
 
@@ -10,8 +10,8 @@ fun case_1(value_1: Any): String {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Any): String {
-    when (value_1) {
+fun case_2(konstue_1: Any): String {
+    when (konstue_1) {
         <!NO_COMPANION_OBJECT!>Any<!> -> return ""
     }
 
@@ -19,8 +19,8 @@ fun case_2(value_1: Any): String {
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: Any): String {
-    when (value_1) {
+fun case_3(konstue_1: Any): String {
+    when (konstue_1) {
         <!NO_COMPANION_OBJECT!>Nothing<!> -> return ""
     }
 

@@ -5,7 +5,7 @@
 internal open external class JsError(message: String) : Throwable
 
 fun box(): String {
-    val interfaceWithBoolean: InterfaceWithBoolean = js("{}")
+    konst interfaceWithBoolean: InterfaceWithBoolean = js("{}")
     try {
         C().c = interfaceWithBoolean.foo
     } catch (e: JsError) {
@@ -22,20 +22,20 @@ abstract class A<T> {
         return this.asDynamic()["attr"].unsafeCast<T>()
     }
 
-    open fun set(value: T) {
-        this.asDynamic()["attr"] = value
+    open fun set(konstue: T) {
+        this.asDynamic()["attr"] = konstue
     }
 }
 
 class B : A<Boolean>() {
-    override fun set(value: Boolean) {
-        if (value) {
-            this.asDynamic()["attr"] = value
+    override fun set(konstue: Boolean) {
+        if (konstue) {
+            this.asDynamic()["attr"] = konstue
         }
     }
 }
 
-val b: A<Boolean> = B()
+konst b: A<Boolean> = B()
 
 class C {
     var c: Boolean

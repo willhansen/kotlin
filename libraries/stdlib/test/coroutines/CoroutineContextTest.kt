@@ -9,15 +9,15 @@ import kotlin.test.*
 import kotlin.coroutines.*
 
 class CoroutineContextTest {
-    data class CtxA(val i: Int) : AbstractCoroutineContextElement(CtxA) {
+    data class CtxA(konst i: Int) : AbstractCoroutineContextElement(CtxA) {
         companion object Key : CoroutineContext.Key<CtxA>
     }
 
-    data class CtxB(val i: Int) : AbstractCoroutineContextElement(CtxB) {
+    data class CtxB(konst i: Int) : AbstractCoroutineContextElement(CtxB) {
         companion object Key : CoroutineContext.Key<CtxB>
     }
 
-    data class CtxC(val i: Int) : AbstractCoroutineContextElement(CtxC) {
+    data class CtxC(konst i: Int) : AbstractCoroutineContextElement(CtxC) {
         companion object Key : CoroutineContext.Key<CtxC>
     }
 
@@ -112,9 +112,9 @@ class CoroutineContextTest {
 
     @Test
     fun testPlusCombined() {
-        val ctx1 = CtxA(1) + CtxB(2)
-        val ctx2 = CtxB(3) + CtxC(4)
-        val ctx = ctx1 + ctx2
+        konst ctx1 = CtxA(1) + CtxB(2)
+        konst ctx2 = CtxB(3) + CtxC(4)
+        konst ctx = ctx1 + ctx2
         assertContents(ctx, CtxA(1), CtxB(3), CtxC(4))
         assertEquals("[CtxA(i=1), CtxB(i=3), CtxC(i=4)]", ctx.toString())
         assertEquals(CtxA(1), ctx[CtxA])
@@ -142,10 +142,10 @@ class CoroutineContextTest {
 
     @Test
     fun testEquals() {
-        val ctx1 = CtxA(1) + CtxB(2) + CtxC(3)
-        val ctx2 = CtxB(2) + CtxC(3) + CtxA(1) // same
-        val ctx3 = CtxC(3) + CtxA(1) + CtxB(2) // same
-        val ctx4 = CtxA(1) + CtxB(2) + CtxC(4) // different
+        konst ctx1 = CtxA(1) + CtxB(2) + CtxC(3)
+        konst ctx2 = CtxB(2) + CtxC(3) + CtxA(1) // same
+        konst ctx3 = CtxC(3) + CtxA(1) + CtxB(2) // same
+        konst ctx4 = CtxA(1) + CtxB(2) + CtxC(4) // different
         assertEquals(ctx1, ctx2)
         assertEquals(ctx1, ctx3)
         assertEquals(ctx2, ctx3)
@@ -155,7 +155,7 @@ class CoroutineContextTest {
     }
 
     private fun assertContents(ctx: CoroutineContext, vararg elements: CoroutineContext.Element) {
-        val set = ctx.fold(setOf<CoroutineContext>()) { a, b -> a + b }
+        konst set = ctx.fold(setOf<CoroutineContext>()) { a, b -> a + b }
         assertEquals(listOf(*elements), set.toList())
         for (elem in elements)
             assertTrue(ctx[elem.key] == elem)
@@ -165,15 +165,15 @@ class CoroutineContextTest {
     @Test
     fun testBasicOperations() {
         checkContents(EmptyCoroutineContext)
-        val de1 = DataElement(1)
-        val de2 = DataElement(2)
+        konst de1 = DataElement(1)
+        konst de2 = DataElement(2)
         checkContents(de1, de1)
         checkContents(de2, de2)
         checkContents(de1 + de2, de2)
         checkContents(de2 + de1, de1)
-        val oe3 = OtherElement(3)
-        val oe4 = OtherElement(4)
-        val de1oe3 = de1 + oe3
+        konst oe3 = OtherElement(3)
+        konst oe4 = OtherElement(4)
+        konst de1oe3 = de1 + oe3
         checkContents(de1oe3, de1, oe3)
         checkContents(de1oe3 + de2, de2, oe3)
         checkContents(de1oe3 + oe4, de1, oe4)
@@ -183,11 +183,11 @@ class CoroutineContextTest {
 
     @Test
     fun testWrapperEquality() {
-        val we1 = WrapperElement("1")
-        val we2 = WrapperElement("2")
+        konst we1 = WrapperElement("1")
+        konst we2 = WrapperElement("2")
         checkContents(we1, we1)
         checkContents(we2, we2)
-        val we1we2 = we1 + we2
+        konst we1we2 = we1 + we2
         checkContents(we1we2, we1, we2)
         checkContents(we1we2.minusKey(WrapperKey("1")), we2)
         checkContents(we1we2.minusKey(WrapperKey("2")), we1)
@@ -195,10 +195,10 @@ class CoroutineContextTest {
 
     @Test
     fun testInterceptor() {
-        val de1 = DataElement(1)
-        val oe2 = OtherElement(2)
-        val we3 = WrapperElement("3")
-        val cci = CustomContinuationInterceptor()
+        konst de1 = DataElement(1)
+        konst oe2 = OtherElement(2)
+        konst we3 = WrapperElement("3")
+        konst cci = CustomContinuationInterceptor()
         // Make sure it works properly with any position of ContinuationInterceptor in the context
         checkContentsAndRemoves(de1 + oe2 + we3 + cci, de1, oe2, we3, cci)
         checkContentsAndRemoves(de1 + oe2 + cci + we3, de1, oe2, we3, cci)
@@ -214,13 +214,13 @@ class CoroutineContextTest {
     }
 
     private fun checkContents(context: CoroutineContext, vararg es: CoroutineContext.Element) {
-        val size = context.fold(0) { c, _ -> c + 1 }
+        konst size = context.fold(0) { c, _ -> c + 1 }
         assertEquals(es.size, size)
         for (e in es) {
-            val key = e.key
+            konst key = e.key
             assertSame(e, context[key])
         }
-        val set = mutableSetOf<CoroutineContext.Element>()
+        konst set = mutableSetOf<CoroutineContext.Element>()
         context.fold(set) { s, e -> s.apply { add(e) } }
         assertEquals(set, es.toSet())
         when (es.size) {
@@ -229,22 +229,22 @@ class CoroutineContextTest {
         }
     }
 
-    class DataElement(val data: Int) : AbstractCoroutineContextElement(Key) {
+    class DataElement(konst data: Int) : AbstractCoroutineContextElement(Key) {
         companion object Key : CoroutineContext.Key<DataElement>
     }
 
-    class OtherElement(val data: Int) : AbstractCoroutineContextElement(Key) {
+    class OtherElement(konst data: Int) : AbstractCoroutineContextElement(Key) {
         companion object Key : CoroutineContext.Key<DataElement>
     }
 
-    data class WrapperKey(val key: String) : CoroutineContext.Key<WrapperElement>
+    data class WrapperKey(konst key: String) : CoroutineContext.Key<WrapperElement>
 
     class WrapperElement(key: String) : CoroutineContext.Element {
-        override val key = WrapperKey(key)
+        override konst key = WrapperKey(key)
     }
 
     class CustomContinuationInterceptor : ContinuationInterceptor {
-        override val key: CoroutineContext.Key<*>
+        override konst key: CoroutineContext.Key<*>
             get() = ContinuationInterceptor
 
         override fun <T> interceptContinuation(continuation: Continuation<T>): Continuation<T> =

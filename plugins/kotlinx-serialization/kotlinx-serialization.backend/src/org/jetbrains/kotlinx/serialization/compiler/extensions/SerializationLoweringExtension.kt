@@ -53,38 +53,38 @@ fun ClassLoweringPass.runOnFileInOrder(irFile: IrFile) {
 }
 
 
-class SerializationPluginContext(baseContext: IrPluginContext, val metadataPlugin: SerializationDescriptorSerializerPlugin?) :
+class SerializationPluginContext(baseContext: IrPluginContext, konst metadataPlugin: SerializationDescriptorSerializerPlugin?) :
     IrPluginContext by baseContext, SerializationBaseContext {
 
-    internal val copiedStaticWriteSelf: MutableMap<IrSimpleFunction, IrSimpleFunction> = ConcurrentHashMap()
+    internal konst copiedStaticWriteSelf: MutableMap<IrSimpleFunction, IrSimpleFunction> = ConcurrentHashMap()
 
     // Kotlin built-in declarations
-    internal val arrayValueGetter = irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
+    internal konst arrayValueGetter = irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
         .single { it.name.asString() == "get" }
 
-    internal val intArrayOfFunctionSymbol =
+    internal konst intArrayOfFunctionSymbol =
         referenceFunctions(CallableId(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, Name.identifier("intArrayOf"))).first()
 
     // Kotlin stdlib declarations
-    internal val jvmFieldClassSymbol = referenceClass(StandardClassIds.Annotations.JvmField)!!
+    internal konst jvmFieldClassSymbol = referenceClass(StandardClassIds.Annotations.JvmField)!!
 
-    internal val lazyModeClass = referenceClass(ClassId.topLevel(SerializationDependencies.LAZY_MODE_FQ))!!.owner
-    internal val lazyModePublicationEnumEntry =
+    internal konst lazyModeClass = referenceClass(ClassId.topLevel(SerializationDependencies.LAZY_MODE_FQ))!!.owner
+    internal konst lazyModePublicationEnumEntry =
         lazyModeClass.enumEntries().single { it.name == SerializationDependencies.LAZY_PUBLICATION_MODE_NAME }
     // There can be several transitive dependencies on kotlin-stdlib in IDE sources,
     // as well as several definitions of stdlib functions, including `kotlin.lazy`;
-    // in that case `referenceFunctions` might return more than one valid definition of the same function.
-    internal val lazyFunctionSymbol =
+    // in that case `referenceFunctions` might return more than one konstid definition of the same function.
+    internal konst lazyFunctionSymbol =
         referenceFunctions(CallableId(StandardNames.BUILT_INS_PACKAGE_FQ_NAME, Name.identifier("lazy"))).first {
-            it.owner.valueParameters.size == 2 && it.owner.valueParameters[0].type == lazyModeClass.defaultType
+            it.owner.konstueParameters.size == 2 && it.owner.konstueParameters[0].type == lazyModeClass.defaultType
         }
-    internal val lazyClass = referenceClass(ClassId.topLevel(SerializationDependencies.LAZY_FQ))!!.owner
-    internal val lazyValueGetter = lazyClass.getPropertyGetter("value")!!
+    internal konst lazyClass = referenceClass(ClassId.topLevel(SerializationDependencies.LAZY_FQ))!!.owner
+    internal konst lazyValueGetter = lazyClass.getPropertyGetter("konstue")!!
 
-    internal val jsExportIgnoreClass: IrClass? by lazy {
-        val pkg = SerializationJsDependenciesClassIds.jsExportIgnore.packageFqName
-        val jsExportName = SerializationJsDependenciesClassIds.jsExportIgnore.parentClassId!!.shortClassName
-        val jsExportIgnoreFqName = SerializationJsDependenciesClassIds.jsExportIgnore.asSingleFqName()
+    internal konst jsExportIgnoreClass: IrClass? by lazy {
+        konst pkg = SerializationJsDependenciesClassIds.jsExportIgnore.packageFqName
+        konst jsExportName = SerializationJsDependenciesClassIds.jsExportIgnore.parentClassId!!.shortClassName
+        konst jsExportIgnoreFqName = SerializationJsDependenciesClassIds.jsExportIgnore.asSingleFqName()
 
         getClassFromRuntimeOrNull(jsExportName.identifier, pkg)
             ?.owner
@@ -92,14 +92,14 @@ class SerializationPluginContext(baseContext: IrPluginContext, val metadataPlugi
     }
 
     // serialization runtime declarations
-    internal val enumSerializerFactoryFunc = baseContext.referenceFunctions(
+    internal konst enumSerializerFactoryFunc = baseContext.referenceFunctions(
         CallableId(
             SerializationPackages.internalPackageFqName,
             SerialEntityNames.ENUM_SERIALIZER_FACTORY_FUNC_NAME
         )
     ).singleOrNull()
 
-    internal val annotatedEnumSerializerFactoryFunc = baseContext.referenceFunctions(
+    internal konst annotatedEnumSerializerFactoryFunc = baseContext.referenceFunctions(
         CallableId(
             SerializationPackages.internalPackageFqName,
             SerialEntityNames.ANNOTATED_ENUM_SERIALIZER_FACTORY_FUNC_NAME
@@ -109,10 +109,10 @@ class SerializationPluginContext(baseContext: IrPluginContext, val metadataPlugi
     /**
      * @return `null` if there is no serialization runtime in the classpath
      */
-    internal val kSerializerClass = referenceClass(SerialEntityNames.KSERIALIZER_CLASS_ID)?.owner
+    internal konst kSerializerClass = referenceClass(SerialEntityNames.KSERIALIZER_CLASS_ID)?.owner
 
-    // evaluated properties
-    override val runtimeHasEnumSerializerFactoryFunctions = enumSerializerFactoryFunc != null && annotatedEnumSerializerFactoryFunc != null
+    // ekonstuated properties
+    override konst runtimeHasEnumSerializerFactoryFunctions = enumSerializerFactoryFunc != null && annotatedEnumSerializerFactoryFunc != null
 
     override fun referenceClassId(classId: ClassId): IrClassSymbol? = referenceClass(classId)
 }
@@ -138,10 +138,10 @@ private class SerializerClassLowering(
     metadataPlugin: SerializationDescriptorSerializerPlugin?,
     moduleFragment: IrModuleFragment
 ) : IrElementTransformerVoid(), ClassLoweringPass {
-    val context: SerializationPluginContext = SerializationPluginContext(baseContext, metadataPlugin)
+    konst context: SerializationPluginContext = SerializationPluginContext(baseContext, metadataPlugin)
 
     // Lazy to avoid creating generator in non-JVM backends
-    private val serialInfoJvmGenerator by lazy(LazyThreadSafetyMode.NONE) { SerialInfoImplJvmIrGenerator(context, moduleFragment) }
+    private konst serialInfoJvmGenerator by lazy(LazyThreadSafetyMode.NONE) { SerialInfoImplJvmIrGenerator(context, moduleFragment) }
 
     override fun lower(irClass: IrClass) {
         irClass.runPluginSafe {
@@ -159,7 +159,7 @@ private class SerializerClassLowering(
 private class SerializerClassPreLowering(
     baseContext: IrPluginContext
 ) : IrElementTransformerVoid(), ClassLoweringPass {
-    val context: SerializationPluginContext = SerializationPluginContext(baseContext, null)
+    konst context: SerializationPluginContext = SerializationPluginContext(baseContext, null)
 
     override fun lower(irClass: IrClass) {
         irClass.runPluginSafe {
@@ -175,7 +175,7 @@ enum class SerializationIntrinsicsState {
 }
 
 open class SerializationLoweringExtension @JvmOverloads constructor(
-    private val metadataPlugin: SerializationDescriptorSerializerPlugin? = null
+    private konst metadataPlugin: SerializationDescriptorSerializerPlugin? = null
 ) : IrGenerationExtension {
 
     private var intrinsicsState = SerializationIntrinsicsState.NORMAL
@@ -190,14 +190,14 @@ open class SerializationLoweringExtension @JvmOverloads constructor(
         moduleFragment: IrModuleFragment,
         pluginContext: IrPluginContext
     ) {
-        val pass1 = SerializerClassPreLowering(pluginContext)
-        val pass2 = SerializerClassLowering(pluginContext, metadataPlugin, moduleFragment)
+        konst pass1 = SerializerClassPreLowering(pluginContext)
+        konst pass2 = SerializerClassLowering(pluginContext, metadataPlugin, moduleFragment)
         moduleFragment.files.forEach(pass1::runOnFileInOrder)
         moduleFragment.files.forEach(pass2::runOnFileInOrder)
     }
 
     override fun getPlatformIntrinsicExtension(backendContext: BackendContext): IrIntrinsicExtension? {
-        val ctx = backendContext as? JvmBackendContext ?: return null
+        konst ctx = backendContext as? JvmBackendContext ?: return null
         if (!canEnableIntrinsics(ctx)) return null
         return SerializationJvmIrIntrinsicSupport(
             ctx,
@@ -209,7 +209,7 @@ open class SerializationLoweringExtension @JvmOverloads constructor(
             SerializationIntrinsicsState.FORCE_ENABLED -> true
             SerializationIntrinsicsState.DISABLED -> false
             SerializationIntrinsicsState.NORMAL -> {
-                val requiredFunctionsFromRuntime = ctx.irPluginContext?.referenceFunctions(
+                konst requiredFunctionsFromRuntime = ctx.irPluginContext?.referenceFunctions(
                     CallableId(
                         SerializationPackages.packageFqName,
                         Name.identifier(SerializationJvmIrIntrinsicSupport.noCompiledSerializerMethodName)

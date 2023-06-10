@@ -31,34 +31,34 @@ private fun extractConstantValue(descriptor: DeclarationDescriptor, type: String
         descriptor.annotations
                 .findAnnotation(cEnumEntryValueAnnotationName.child(Name.identifier(type)))
                 ?.allValueArguments
-                ?.getValue(Name.identifier("value"))
+                ?.getValue(Name.identifier("konstue"))
 
-private val cEnumEntryValueAnnotationName = FqName("kotlinx.cinterop.internal.ConstantValue")
+private konst cEnumEntryValueAnnotationName = FqName("kotlinx.cinterop.internal.ConstantValue")
 
-private val cEnumEntryValueTypes = setOf(
+private konst cEnumEntryValueTypes = setOf(
         "Byte", "Short", "Int", "Long",
         "UByte", "UShort", "UInt", "ULong"
 )
 
 internal class CEnumClassGenerator(
-        val context: GeneratorContext,
-        private val cEnumCompanionGenerator: CEnumCompanionGenerator,
-        private val cEnumVarClassGenerator: CEnumVarClassGenerator
+        konst context: GeneratorContext,
+        private konst cEnumCompanionGenerator: CEnumCompanionGenerator,
+        private konst cEnumVarClassGenerator: CEnumVarClassGenerator
 ) : DescriptorToIrTranslationMixin {
 
-    override val irBuiltIns: IrBuiltIns = context.irBuiltIns
-    override val symbolTable: SymbolTable = context.symbolTable
-    override val typeTranslator: TypeTranslator = context.typeTranslator
-    override val postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
+    override konst irBuiltIns: IrBuiltIns = context.irBuiltIns
+    override konst symbolTable: SymbolTable = context.symbolTable
+    override konst typeTranslator: TypeTranslator = context.typeTranslator
+    override konst postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
 
-    private val enumClassMembersGenerator = EnumClassMembersGenerator(DeclarationGenerator(context))
+    private konst enumClassMembersGenerator = EnumClassMembersGenerator(DeclarationGenerator(context))
 
     /**
      * Searches for an IR class for [classDescriptor] in symbol table.
      * Generates one if absent.
      */
     fun findOrGenerateCEnum(classDescriptor: ClassDescriptor, parent: IrDeclarationContainer): IrClass {
-        val irClassSymbol = symbolTable.referenceClass(classDescriptor)
+        konst irClassSymbol = symbolTable.referenceClass(classDescriptor)
         return if (!irClassSymbol.isBound) {
             provideIrClassForCEnum(classDescriptor).also {
                 it.patchDeclarationParents(parent)
@@ -86,13 +86,13 @@ internal class CEnumClassGenerator(
             }
 
     /**
-     * Creates `value` property that stores integral value of the enum.
+     * Creates `konstue` property that stores integral konstue of the enum.
      */
     private fun createValueProperty(irClass: IrClass): IrProperty {
-        val propertyDescriptor = irClass.descriptor
-                .findDeclarationByName<PropertyDescriptor>("value")
-                ?: error("No `value` property in ${irClass.name}")
-        val irProperty = createProperty(propertyDescriptor)
+        konst propertyDescriptor = irClass.descriptor
+                .findDeclarationByName<PropertyDescriptor>("konstue")
+                ?: error("No `konstue` property in ${irClass.name}")
+        konst irProperty = createProperty(propertyDescriptor)
         symbolTable.withScope(irProperty) {
             irProperty.backingField = symbolTable.declareField(
                     SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, IrDeclarationOrigin.PROPERTY_BACKING_FIELD,
@@ -100,12 +100,12 @@ internal class CEnumClassGenerator(
             ).also {
                 postLinkageSteps.add {
                     it.initializer = irBuilder(irBuiltIns, it.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).run {
-                        irExprBody(irGet(irClass.primaryConstructor!!.valueParameters[0]))
+                        irExprBody(irGet(irClass.primaryConstructor!!.konstueParameters[0]))
                     }
                 }
             }
         }
-        val getter = irProperty.getter!!
+        konst getter = irProperty.getter!!
         getter.correspondingPropertySymbol = irProperty.symbol
         postLinkageSteps.add {
             getter.body = irBuilder(irBuiltIns, getter.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).irBlockBody {
@@ -121,18 +121,18 @@ internal class CEnumClassGenerator(
     }
 
     private fun createEnumEntry(enumDescriptor: ClassDescriptor, entryDescriptor: ClassDescriptor): IrEnumEntry {
-        val enumEntry = symbolTable.declareEnumEntry(
+        konst enumEntry = symbolTable.declareEnumEntry(
                 SYNTHETIC_OFFSET, SYNTHETIC_OFFSET,
                 IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB, entryDescriptor
         )
-        val constructorSymbol = symbolTable.referenceConstructor(enumDescriptor.unsubstitutedPrimaryConstructor!!)
+        konst constructorSymbol = symbolTable.referenceConstructor(enumDescriptor.unsubstitutedPrimaryConstructor!!)
         postLinkageSteps.add {
             enumEntry.initializerExpression = IrExpressionBodyImpl(IrEnumConstructorCallImpl(
                     SYNTHETIC_OFFSET, SYNTHETIC_OFFSET,
                     type = irBuiltIns.unitType,
                     symbol = constructorSymbol,
                     typeArgumentsCount = 0,
-                    valueArgumentsCount = constructorSymbol.owner.valueParameters.size
+                    konstueArgumentsCount = constructorSymbol.owner.konstueParameters.size
             ).also {
                 it.putValueArgument(0, extractEnumEntryValue(entryDescriptor))
             })
@@ -142,10 +142,10 @@ internal class CEnumClassGenerator(
 
     /**
      * Every enum entry that came from metadata-based interop library is annotated with
-     * [kotlinx.cinterop.internal.ConstantValue] annotation that holds internal constant value of the
+     * [kotlinx.cinterop.internal.ConstantValue] annotation that holds internal constant konstue of the
      * corresponding entry.
      *
-     * This function extracts value from the annotation.
+     * This function extracts konstue from the annotation.
      */
     private fun extractEnumEntryValue(entryDescriptor: ClassDescriptor): IrExpression =
             cEnumEntryValueTypes.firstNotNullOfOrNull { extractConstantValue(entryDescriptor, it) }?.let {
@@ -153,12 +153,12 @@ internal class CEnumClassGenerator(
             } ?: error("Enum entry $entryDescriptor has no appropriate @$cEnumEntryValueAnnotationName annotation!")
 
     private fun createEnumPrimaryConstructor(descriptor: ClassDescriptor): IrConstructor {
-        val irConstructor = createConstructor(descriptor.unsubstitutedPrimaryConstructor!!)
-        val builtIns = (irBuiltIns as IrBuiltInsOverDescriptors).builtIns
-        val enumConstructor = builtIns.enum.constructors.single()
-        val constructorSymbol = symbolTable.referenceConstructor(enumConstructor)
-        val classSymbol = symbolTable.referenceClass(descriptor)
-        val type = descriptor.defaultType.toIrType()
+        konst irConstructor = createConstructor(descriptor.unsubstitutedPrimaryConstructor!!)
+        konst builtIns = (irBuiltIns as IrBuiltInsOverDescriptors).builtIns
+        konst enumConstructor = builtIns.enum.constructors.single()
+        konst constructorSymbol = symbolTable.referenceConstructor(enumConstructor)
+        konst classSymbol = symbolTable.referenceClass(descriptor)
+        konst type = descriptor.defaultType.toIrType()
         postLinkageSteps.add {
             irConstructor.body = irBuilder(irBuiltIns, irConstructor.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
                     .irBlockBody {
@@ -167,7 +167,7 @@ internal class CEnumClassGenerator(
                                 context.irBuiltIns.unitType,
                                 constructorSymbol,
                                 typeArgumentsCount = 1, // kotlin.Enum<T> has a single type parameter.
-                                valueArgumentsCount = constructorSymbol.owner.valueParameters.size
+                                konstueArgumentsCount = constructorSymbol.owner.konstueParameters.size
                         ).apply {
                             putTypeArgument(0, type)
                         }

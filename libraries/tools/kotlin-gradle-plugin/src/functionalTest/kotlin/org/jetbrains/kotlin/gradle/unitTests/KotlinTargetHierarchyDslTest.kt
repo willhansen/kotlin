@@ -21,8 +21,8 @@ import kotlin.test.*
 class KotlinTargetHierarchyDslTest {
 
 
-    private val project = buildProjectWithMPP()
-    private val kotlin = project.multiplatformExtension
+    private konst project = buildProjectWithMPP()
+    private konst kotlin = project.multiplatformExtension
 
 
     @Test
@@ -158,14 +158,14 @@ class KotlinTargetHierarchyDslTest {
             kotlin.linuxX64()
         }
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.getByName("nativeMain")
-        val nativeTest = kotlin.sourceSets.getByName("nativeTest")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
-        val linuxTest = kotlin.sourceSets.getByName("linuxTest")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.getByName("nativeMain")
+        konst nativeTest = kotlin.sourceSets.getByName("nativeTest")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst linuxTest = kotlin.sourceSets.getByName("linuxTest")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
         assertEquals(
             setOf(commonMain, commonTest, nativeMain, nativeTest, linuxMain, linuxTest, linuxX64Main, linuxX64Test),
@@ -189,11 +189,11 @@ class KotlinTargetHierarchyDslTest {
 
     @Test
     fun `test - hierarchy - jvm and android`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             setMultiplatformAndroidSourceSetLayoutVersion(2)
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         assertAndroidSdkAvailable()
         project.androidLibrary { compileSdk = 31 }
@@ -210,7 +210,7 @@ class KotlinTargetHierarchyDslTest {
         kotlin.androidTarget()
         kotlin.jvm()
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             stringSetOf("jvmAndAndroidMain"),
@@ -243,7 +243,7 @@ class KotlinTargetHierarchyDslTest {
 
     @Test
     fun `test - hierarchy apply - extend`() {
-        val descriptor = KotlinTargetHierarchyDescriptor {
+        konst descriptor = KotlinTargetHierarchyDescriptor {
             group("common") {
                 group("base")
             }
@@ -375,7 +375,7 @@ class KotlinTargetHierarchyDslTest {
 
     @Test
     fun `test - hierarchy set - extend - with new root`() {
-        val descriptor = KotlinTargetHierarchyDescriptor {
+        konst descriptor = KotlinTargetHierarchyDescriptor {
             group("common") {
                 group("base")
             }
@@ -483,11 +483,11 @@ private fun KotlinMultiplatformExtension.dependingSourceSetNames(sourceSet: Kotl
 
 /* StringSet: Special Set implementation, which makes it easy to copy and paste after assertions fail */
 
-private fun stringSetOf(vararg values: String) = StringSet(values.toSet())
+private fun stringSetOf(vararg konstues: String) = StringSet(konstues.toSet())
 
 private fun Iterable<String>.toStringSet() = StringSet(this.toSet())
 
-private data class StringSet(private val set: Set<String>) : Set<String> by set {
+private data class StringSet(private konst set: Set<String>) : Set<String> by set {
     override fun toString(): String {
         return "stringSetOf(" + set.joinToString(", ") { "\"$it\"" } + ")"
     }

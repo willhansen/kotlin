@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirComparisonExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val operation: FirOperation,
+    override konst operation: FirOperation,
     override var compareToCall: FirFunctionCall,
 ) : FirComparisonExpression() {
     override var typeRef: FirTypeRef = FirImplicitBooleanTypeRef(null)

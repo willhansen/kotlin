@@ -28,11 +28,11 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         run {
             doCompile
             code = """
-                data class AClass(val memx: Int, val memy: String)
-                data class BClass(val memz: String, val mema: AClass)
-                val foobar = 42
+                data class AClass(konst memx: Int, konst memy: String)
+                data class BClass(konst memz: String, konst mema: AClass)
+                konst foobar = 42
                 var foobaz = "string"
-                val v = BClass("KKK", AClass(5, "25"))
+                konst v = BClass("KKK", AClass(5, "25"))
             """.trimIndent()
         }
 
@@ -79,14 +79,14 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
             }
         }
 
-        testNoVariants("val x1 = 42")
-        testNoVariants("val x2 = 42.42")
-        testNoVariants("val x3 = 'v'")
-        testNoVariants("val x4 = \"str42\"")
+        testNoVariants("konst x1 = 42")
+        testNoVariants("konst x2 = 42.42")
+        testNoVariants("konst x3 = 'v'")
+        testNoVariants("konst x4 = \"str42\"")
 
-        testNoVariants("val x5 = 40 + 41 * 42")
-        testNoVariants("val x6 = 40 + 41 * 42", 16) // after 41
-        testNoVariants("val x7 = 40 + 41 * 42", 11) // after 40
+        testNoVariants("konst x5 = 40 + 41 * 42")
+        testNoVariants("konst x6 = 40 + 41 * 42", 16) // after 41
+        testNoVariants("konst x7 = 40 + 41 * 42", 11) // after 40
         testNoVariants("6 * (2 + 5)")
 
         testNoVariants("\"aBc\".capitalize()")
@@ -116,7 +116,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
             code = """
                 fun _sf(_someInt: Int = 42, _someString: String = "s") = 1
                 fun String.f(_bar: Int) = _bar
-                class C(val _xyz: Int)
+                class C(konst _xyz: Int)
             """.trimIndent()
         }
         run {
@@ -147,10 +147,10 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
     @Test
     fun testCompletionInsideFunctions() = test {
         run {
-            val statement = "val a = _f"
+            konst statement = "konst a = _f"
             code = """
                 fun dontCompleteMe(_foo: Int, bar: String) {
-                    val _foo2 = ""
+                    konst _foo2 = ""
                     $statement
                 }
             """.trimIndent()
@@ -200,17 +200,17 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         run {
             doCompile
             code = """
-                class AClass(val c_prop_x: Int) {
+                class AClass(konst c_prop_x: Int) {
                     fun filter(xxx: (AClass).() -> Boolean): AClass {
                         return this
                     }
                 }
-                val AClass.c_prop_y: Int
+                konst AClass.c_prop_y: Int
                     get() = c_prop_x * c_prop_x
                 
                 fun AClass.c_meth_z(v: Int) = v * c_prop_y
-                val df = AClass(10)
-                val c_zzz = "some string"
+                konst df = AClass(10)
+                konst c_zzz = "some string"
             """.trimIndent()
         }
 
@@ -245,8 +245,8 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         run {
             doCompile
             code = """
-                class AClass(val `c_prop   x y z`: Int)
-                val df = AClass(33)
+                class AClass(konst `c_prop   x y z`: Int)
+                konst df = AClass(33)
             """.trimIndent()
         }
 
@@ -264,11 +264,11 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         run {
             doCompile
             code = """
-                data class AClass(val memx: Int, val memy: String)
-                data class BClass(val memz: String, val mema: AClass)
-                val foobar = 42
+                data class AClass(konst memx: Int, konst memy: String)
+                data class BClass(konst memz: String, konst mema: AClass)
+                konst foobar = 42
                 var foobaz = "string"
-                val v = BClass("KKK", AClass(5, "25"))
+                konst v = BClass("KKK", AClass(5, "25"))
             """.trimIndent()
             expect {
                 errors.mode = ComparisonType.EQUALS
@@ -277,9 +277,9 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
 
         run {
             code = """
-                val a = AClass("42", 3.14)
-                val b: Int = "str"
-                val c = foob
+                konst a = AClass("42", 3.14)
+                konst b: Int = "str"
+                konst c = foob
             """.trimIndent()
             expect {
                 addError(1, 16, 1, 20, "Type mismatch: inferred type is String but Int was expected", "ERROR")
@@ -311,8 +311,8 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
                 if (i == 5) doCompile
                 if (i % 2 == 1) doErrorCheck
 
-                val value = "a".repeat(i)
-                code = "val ddddd = \"$value\""
+                konst konstue = "a".repeat(i)
+                code = "konst ddddd = \"$konstue\""
                 cursor = 13 + i
             }
         }
@@ -330,7 +330,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
     fun testAnalyze() = test {
         run {
             code = """
-                val foo = 42
+                konst foo = 42
                 foo
             """.trimIndent()
             expect {
@@ -344,8 +344,8 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
     fun testNameFilter() = test {
         run {
             code = """
-                val xxxyyy = 42
-                val yyyxxx = 43
+                konst xxxyyy = 42
+                konst yyyxxx = 43
             """.trimIndent()
             doCompile
         }
@@ -377,7 +377,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         for (i in 1..2)
             run {
                 code = """
-                    val xxxyyy = 42
+                    konst xxxyyy = 42
                 """.trimIndent()
                 doCompile
             }
@@ -447,17 +447,17 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         run {
             code = """
                 open class Base {
-                    private val xyz1: Float = 7.0f
-                    protected val xyz2: Int = 42
-                    internal val xyz3: String = ""
-                    public val xyz4: Byte = 8
+                    private konst xyz1: Float = 7.0f
+                    protected konst xyz2: Int = 42
+                    internal konst xyz3: String = ""
+                    public konst xyz4: Byte = 8
                 }
             """.trimIndent()
             doCompile
         }
 
         run {
-            val definition = "val c = x"
+            konst definition = "konst c = x"
             code = """
                 object : Base() {
                     fun g() {
@@ -490,14 +490,14 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         // This test normally completes in about 5-10s
         // Log should show slow _linear_ compilation time growth
 
-        val compileWriter = System.out.writer()
+        konst compileWriter = System.out.writer()
 
         for (i in 1..120) {
             run {
                 code = """
                     import kotlin.math.*
-                    val dataFrame = mapOf("x" to sin(3.0))
-                    val e = "str"
+                    konst dataFrame = mapOf("x" to sin(3.0))
+                    konst e = "str"
                 """.trimIndent()
                 doCompile
 
@@ -511,7 +511,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         // This test normally completes in about 8-13s
         // Removing skip* configuration parameters should slow down the test (2-3 times)
 
-        val conf = ScriptCompilationConfiguration {
+        konst conf = ScriptCompilationConfiguration {
             jvm {
                 updateClasspath(classpathFromClass<TestReceiver1>())
             }
@@ -520,14 +520,14 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
             skipExtensionsResolutionForImplicitsExceptInnermost(KotlinType(TestReceiver2::class))
         }
 
-        val writer = System.out.writer()
+        konst writer = System.out.writer()
         for (i in 1..200) {
             run(longCompilationRun(writer, i, conf))
             run {
                 compilationConfiguration = conf
 
                 code = """
-                    val x = xyz
+                    konst x = xyz
                 """.trimIndent()
                 cursor = 11
 
@@ -542,7 +542,7 @@ class ReplCompletionAndErrorsAnalysisTest : TestCase() {
         }
     }
 
-    private val setupDefaultImportsCompletionRun: TestRunConfigurator = {
+    private konst setupDefaultImportsCompletionRun: TestRunConfigurator = {
         compilationConfiguration = ScriptCompilationConfiguration {
             defaultImports(listOf("kotlin.math.atan"))
         }
@@ -564,8 +564,8 @@ class IdeServicesLongRunningTest1 : TestCase() {
         // This test normally completes in about 15-25s
         // Log should show slow _linear_ compilation/completion time growth
 
-        val compileWriter = System.out.writer() // FileWriter("$csvDir/compilations.csv")
-        val completeWriter = System.out.writer() // FileWriter("$csvDir/completions.csv")
+        konst compileWriter = System.out.writer() // FileWriter("$csvDir/compilations.csv")
+        konst completeWriter = System.out.writer() // FileWriter("$csvDir/completions.csv")
 
         for (i in 1..230) {
             run(longCompilationRun(compileWriter, i))
@@ -580,7 +580,7 @@ class IdeServicesLongRunningTest2 : TestCase() {
     fun testLongRunningCompilation() = test {
         // This test normally completes in about 10-20s
 
-        val writer = System.out.writer()
+        konst writer = System.out.writer()
         for (i in 1..500) {
             run(longCompilationRun(writer, i))
         }
@@ -588,10 +588,10 @@ class IdeServicesLongRunningTest2 : TestCase() {
 }
 
 @Suppress("unused")
-class TestReceiver1(val xyz1: Int = 42)
+class TestReceiver1(konst xyz1: Int = 42)
 
 @Suppress("unused")
-class TestReceiver2(val xyz2: Int = 42)
+class TestReceiver2(konst xyz2: Int = 42)
 
 private fun longCompilationRun(writer: Writer, i: Int, conf: ScriptCompilationConfiguration? = null): TestRunConfigurator {
     return {
@@ -600,8 +600,8 @@ private fun longCompilationRun(writer: Writer, i: Int, conf: ScriptCompilationCo
         }
 
         code = """
-            val dataFrame = mapOf("x" to 45)
-            val e = "str"
+            konst dataFrame = mapOf("x" to 45)
+            konst e = "str"
         """.trimIndent()
         doCompile
 
@@ -616,7 +616,7 @@ private fun longCompletionRun(writer: Writer, i: Int, conf: ScriptCompilationCon
         }
 
         code = """
-            val x = mapOf("a" to dataFrame., "b" to 12, e to 42)
+            konst x = mapOf("a" to dataFrame., "b" to 12, e to 42)
         """.trimIndent()
         cursor = 31
 

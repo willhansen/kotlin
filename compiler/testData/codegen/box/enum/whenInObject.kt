@@ -6,7 +6,7 @@ interface I {
     fun f(e: E): String
 }
 
-val obj = object: I {
+konst obj = object: I {
     override fun f(e: E) = when(e) {
         E.OK -> "OK"
         E.NOT_OK -> "NOT OK"

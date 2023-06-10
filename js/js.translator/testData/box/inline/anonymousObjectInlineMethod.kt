@@ -4,7 +4,7 @@ package foo
 // CHECK_BREAKS_COUNT: function=add count=0 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=add name=$l$block count=0 TARGET_BACKENDS=JS_IR
 fun add(a: Int, b: Int): Int {
-    val o = object {
+    konst o = object {
         inline fun add(a: Int, b: Int): Int = a + b
     }
 

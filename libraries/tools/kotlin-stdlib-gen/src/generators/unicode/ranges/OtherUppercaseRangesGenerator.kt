@@ -14,10 +14,10 @@ import java.io.File
 import java.io.FileWriter
 
 internal class OtherUppercaseRangesGenerator(
-    private val outputFile: File,
-    private val target: KotlinTarget
+    private konst outputFile: File,
+    private konst target: KotlinTarget
 ) {
-    private val otherUpperRanges = mutableListOf<IntRange>()
+    private konst otherUpperRanges = mutableListOf<IntRange>()
 
     fun appendLine(line: PropertyLine) {
         // In Native the Other_Uppercase code points are also used to perform String.lowercase()
@@ -37,8 +37,8 @@ internal class OtherUppercaseRangesGenerator(
     }
 
     fun isOtherUppercaseImpl(): String {
-        val indent = "    ".repeat(5)
-        val builder = StringBuilder()
+        konst indent = "    ".repeat(5)
+        konst builder = StringBuilder()
 
         for (i in otherUpperRanges.indices) {
             if (i != 0) {

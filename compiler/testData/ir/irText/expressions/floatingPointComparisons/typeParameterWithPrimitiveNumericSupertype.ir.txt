@@ -13,8 +13,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
               arg0: GET_VAR 'x: kotlin.Any declared in <root>.test0' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test0 declared in <root>.test0' type=T of <root>.test0 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test1 visibility:public modality:FINAL <T> (x:kotlin.Any, y:T of <root>.test1) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Float] reified:false
     VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -30,8 +30,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                 GET_VAR 'x: kotlin.Any declared in <root>.test1' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test1 declared in <root>.test1' type=T of <root>.test1 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test2 visibility:public modality:FINAL <T> (x:kotlin.Any, y:T of <root>.test2) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Double] reified:false
     VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -48,8 +48,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                   GET_VAR 'x: kotlin.Any declared in <root>.test2' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test2 declared in <root>.test2' type=T of <root>.test2 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test3 visibility:public modality:FINAL <T> (x:kotlin.Any, y:T of <root>.test3) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Float] reified:false
     VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -66,8 +66,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                   GET_VAR 'x: kotlin.Any declared in <root>.test3' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test3 declared in <root>.test3' type=T of <root>.test3 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test4 visibility:public modality:FINAL <T> (x:kotlin.Any, y:T of <root>.test4) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Float?] reified:false
     VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -84,8 +84,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                   GET_VAR 'x: kotlin.Any declared in <root>.test4' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test4 declared in <root>.test4' type=T of <root>.test4 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test5 visibility:public modality:FINAL <T, R> (x:kotlin.Any, y:R of <root>.test5) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Float?] reified:false
     TYPE_PARAMETER name:R index:1 variance: superTypes:[T of <root>.test5] reified:false
@@ -103,8 +103,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                   GET_VAR 'x: kotlin.Any declared in <root>.test5' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: R of <root>.test5 declared in <root>.test5' type=R of <root>.test5 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   FUN name:test6 visibility:public modality:FINAL <T> (x:kotlin.Any, y:T of <root>.test6) returnType:kotlin.Boolean
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Number] reified:false
     VALUE_PARAMETER name:x index:0 type:kotlin.Any
@@ -119,8 +119,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
               arg0: GET_VAR 'x: kotlin.Any declared in <root>.test6' type=kotlin.Any origin=null
               arg1: GET_VAR 'y: T of <root>.test6 declared in <root>.test6' type=T of <root>.test6 origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Boolean type=kotlin.Boolean value=false
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Boolean type=kotlin.Boolean konstue=false
   CLASS CLASS name:F modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.F<T of <root>.F>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Float] reified:false
@@ -144,8 +144,8 @@ FILE fqName:<root> fileName:/typeParameterWithPrimitiveNumericSupertype.kt
                 arg1: TYPE_OP type=kotlin.Double origin=IMPLICIT_CAST typeOperand=kotlin.Double
                   GET_VAR 'y: kotlin.Any declared in <root>.F.testCapturedType' type=kotlin.Any origin=null
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
-              then: CONST Boolean type=kotlin.Boolean value=false
+              if: CONST Boolean type=kotlin.Boolean konstue=true
+              then: CONST Boolean type=kotlin.Boolean konstue=false
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

@@ -7,18 +7,18 @@ fun box(): String {
             logged("j;", 2.let { it })
     )
 
-    val result = log.toString()
+    konst result = log.toString()
     if (result != "i;j;Foo.<clinit>;Foo.<init>;Inner.<init>;") return "Fail: '$result'"
 
     return "OK"
 }
 
 // FILE: util.kt
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun <T> logged(msg: String, value: T): T {
+fun <T> logged(msg: String, konstue: T): T {
     log.append(msg)
-    return value
+    return konstue
 }
 
 // FILE: Foo.kt
@@ -35,7 +35,7 @@ open class Foo {
 }
 
 class Outer {
-    inner class Inner(val x: Int, val y: Int) : Foo() {
+    inner class Inner(konst x: Int, konst y: Int) : Foo() {
         init {
             log.append("Inner.<init>;")
         }

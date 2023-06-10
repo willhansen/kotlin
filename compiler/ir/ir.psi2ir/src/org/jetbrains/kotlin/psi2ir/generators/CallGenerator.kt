@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.types.KotlinType
 
 internal class CallGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
     fun generateCall(startOffset: Int, endOffset: Int, call: CallBuilder, origin: IrStatementOrigin? = null): IrExpression {
-        val descriptor = call.descriptor
+        konst descriptor = call.descriptor
 
         if (descriptor.original.isSamConstructor()) {
             return generateSamConstructorCall(descriptor, startOffset, endOffset, call)
@@ -65,8 +65,8 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         endOffset: Int,
         call: CallBuilder
     ): IrExpression {
-        val targetKotlinType = descriptor.returnType!!
-        val targetType = targetKotlinType.toIrType()
+        konst targetKotlinType = descriptor.returnType!!
+        konst targetType = targetKotlinType.toIrType()
 
         return IrTypeOperatorCallImpl(
             startOffset, endOffset,
@@ -89,7 +89,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         smartCastIrType: IrType? = null
     ): IrExpression {
         context.fragmentContext?.capturedDescriptorToFragmentParameterMap?.get(descriptor)?.let {
-            val getValue = IrGetValueImpl(startOffset, endOffset, it.descriptor.type.toIrType(), it, origin)
+            konst getValue = IrGetValueImpl(startOffset, endOffset, it.descriptor.type.toIrType(), it, origin)
             return if (smartCastIrType != null) {
                 IrTypeOperatorCallImpl(startOffset, endOffset, smartCastIrType, IrTypeOperator.IMPLICIT_CAST, smartCastIrType, getValue)
             } else {
@@ -102,20 +102,20 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
             is TypeAliasDescriptor ->
                 generateValueReference(startOffset, endOffset, descriptor.classDescriptor!!, null, origin, smartCastIrType)
             is ClassDescriptor -> {
-                val classValueType = descriptor.classValueType!!
+                konst classValueType = descriptor.classValueType!!
                 statementGenerator.generateSingletonReference(descriptor, startOffset, endOffset, classValueType)
             }
             is PropertyDescriptor -> {
-                val irCall = generateCall(startOffset, endOffset, statementGenerator.pregenerateCall(resolvedCall!!))
+                konst irCall = generateCall(startOffset, endOffset, statementGenerator.pregenerateCall(resolvedCall!!))
                 if (smartCastIrType != null)
                     IrTypeOperatorCallImpl(startOffset, endOffset, smartCastIrType, IrTypeOperator.IMPLICIT_CAST, smartCastIrType, irCall)
                 else
                     irCall
             }
             is SyntheticFieldDescriptor -> {
-                val receiver = statementGenerator.generateBackingFieldReceiver(startOffset, endOffset, resolvedCall, descriptor)
-                val field = statementGenerator.context.symbolTable.referenceField(descriptor.propertyDescriptor)
-                val fieldType = descriptor.propertyDescriptor.type.toIrType()
+                konst receiver = statementGenerator.generateBackingFieldReceiver(startOffset, endOffset, resolvedCall, descriptor)
+                konst field = statementGenerator.context.symbolTable.referenceField(descriptor.propertyDescriptor)
+                konst fieldType = descriptor.propertyDescriptor.type.toIrType()
                 IrGetFieldImpl(startOffset, endOffset, field, fieldType, receiver?.load())
             }
             is VariableDescriptor ->
@@ -134,8 +134,8 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         irType: IrType? = null
     ) =
         if (descriptor is LocalVariableDescriptor && descriptor.isDelegated) {
-            val getterDescriptor = descriptor.getter!!
-            val getterSymbol = context.symbolTable.referenceSimpleFunction(getterDescriptor.original)
+            konst getterDescriptor = descriptor.getter!!
+            konst getterSymbol = context.symbolTable.referenceSimpleFunction(getterDescriptor.original)
             IrCallImpl.fromSymbolDescriptor(
                 startOffset, endOffset, descriptor.type.toIrType(), getterSymbol, origin = origin ?: IrStatementOrigin.GET_LOCAL_PROPERTY
             ).apply {
@@ -143,7 +143,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                 putTypeArguments(typeArguments) { it.toIrType() }
             }
         } else {
-            val getValue =
+            konst getValue =
                 IrGetValueImpl(startOffset, endOffset, descriptor.type.toIrType(), context.symbolTable.referenceValue(descriptor), origin)
             if (irType != null) {
                 IrTypeOperatorCallImpl(startOffset, endOffset, irType, IrTypeOperator.IMPLICIT_CAST, irType, getValue)
@@ -154,10 +154,10 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
 
     fun generateDelegatingConstructorCall(startOffset: Int, endOffset: Int, call: CallBuilder): IrExpression =
         call.callReceiver.call { dispatchReceiver, extensionReceiver, contextReceivers ->
-            val descriptor = call.descriptor as? ClassConstructorDescriptor
+            konst descriptor = call.descriptor as? ClassConstructorDescriptor
                 ?: throw AssertionError("Class constructor expected: ${call.descriptor}")
-            val constructorSymbol = context.symbolTable.referenceConstructor(descriptor.original)
-            val irCall = IrDelegatingConstructorCallImpl.fromSymbolDescriptor(
+            konst constructorSymbol = context.symbolTable.referenceConstructor(descriptor.original)
+            konst irCall = IrDelegatingConstructorCallImpl.fromSymbolDescriptor(
                 startOffset, endOffset,
                 context.irBuiltIns.unitType,
                 constructorSymbol
@@ -172,20 +172,20 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         }
 
     fun generateEnumConstructorSuperCall(startOffset: Int, endOffset: Int, call: CallBuilder): IrExpression {
-        val constructorDescriptor = call.descriptor
+        konst constructorDescriptor = call.descriptor
         if (constructorDescriptor !is ClassConstructorDescriptor) throw AssertionError("Constructor expected: $constructorDescriptor")
-        val classDescriptor = constructorDescriptor.containingDeclaration
+        konst classDescriptor = constructorDescriptor.containingDeclaration
         if (classDescriptor.kind != ClassKind.ENUM_CLASS) throw AssertionError("Enum class constructor expected: $classDescriptor")
 
         return call.callReceiver.call { dispatchReceiver, extensionReceiver, contextReceivers ->
             if (dispatchReceiver != null) throw AssertionError("Dispatch receiver should be null: $dispatchReceiver")
             if (extensionReceiver != null) throw AssertionError("Extension receiver should be null: $extensionReceiver")
             if (contextReceivers.isNotEmpty()) throw AssertionError("Context receivers should be empty: $contextReceivers")
-            val descriptor = constructorDescriptor.original
-            val constructorSymbol = context.symbolTable.referenceConstructor(descriptor)
-            val returnType = constructorDescriptor.returnType.toIrType()
-            val irCall = IrEnumConstructorCallImpl(
-                startOffset, endOffset, returnType, constructorSymbol, descriptor.typeParametersCount, descriptor.valueParameters.size
+            konst descriptor = constructorDescriptor.original
+            konst constructorSymbol = context.symbolTable.referenceConstructor(descriptor)
+            konst returnType = constructorDescriptor.returnType.toIrType()
+            konst irCall = IrEnumConstructorCallImpl(
+                startOffset, endOffset, returnType, constructorSymbol, descriptor.typeParametersCount, descriptor.konstueParameters.size
             )
             context.callToSubstitutedDescriptorMap[irCall] = constructorDescriptor
             addParametersToCall(startOffset, endOffset, call, irCall, irCall.type, emptyList())
@@ -198,15 +198,15 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         endOffset: Int,
         call: CallBuilder
     ): IrExpression {
-        val getMethodDescriptor = descriptor.unwrappedGetMethod
-        val irType = descriptor.type.toIrType()
+        konst getMethodDescriptor = descriptor.unwrappedGetMethod
+        konst irType = descriptor.type.toIrType()
 
         return if (getMethodDescriptor == null) {
-            val superQualifierSymbol = (call.superQualifier ?: descriptor.containingDeclaration as? ClassDescriptor)?.let {
+            konst superQualifierSymbol = (call.superQualifier ?: descriptor.containingDeclaration as? ClassDescriptor)?.let {
                 if (it is ScriptDescriptor) null // otherwise it creates a reference to script as class; TODO: check if correct
                 else context.symbolTable.referenceClass(it)
             }
-            val fieldSymbol =
+            konst fieldSymbol =
                 context.symbolTable.referenceField(context.extensions.remapDebuggerFieldPropertyDescriptor(descriptor.resolveFakeOverride().original))
             call.callReceiver.call { dispatchReceiverValue, extensionReceiverValue, _ ->
                 IrGetFieldImpl(
@@ -219,11 +219,11 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                 ).also { context.callToSubstitutedDescriptorMap[it] = descriptor }
             }
         } else {
-            val superQualifierSymbol = call.superQualifier?.let { context.symbolTable.referenceClass(it) }
+            konst superQualifierSymbol = call.superQualifier?.let { context.symbolTable.referenceClass(it) }
             call.callReceiver.adjustForCallee(getMethodDescriptor)
                 .call { dispatchReceiverValue, extensionReceiverValue, contextReceiverValues ->
                     if (descriptor.isDynamic()) {
-                        val dispatchReceiver = getDynamicExpressionReceiver(dispatchReceiverValue, extensionReceiverValue, descriptor)
+                        konst dispatchReceiver = getDynamicExpressionReceiver(dispatchReceiverValue, extensionReceiverValue, descriptor)
 
                         IrDynamicMemberExpressionImpl(
                             startOffset, endOffset,
@@ -232,7 +232,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                             dispatchReceiver
                         )
                     } else {
-                        val getterSymbol = context.symbolTable.referenceSimpleFunction(getMethodDescriptor.original)
+                        konst getterSymbol = context.symbolTable.referenceSimpleFunction(getMethodDescriptor.original)
                         IrCallImpl(
                             startOffset, endOffset,
                             irType,
@@ -249,7 +249,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                             putTypeArguments(call.typeArguments) { it.toIrType() }
                             dispatchReceiver = dispatchReceiverValue?.load()
                             extensionReceiver = extensionReceiverValue?.load()
-                            val contextReceivers = contextReceiverValues.map { it.load() }
+                            konst contextReceivers = contextReceiverValues.map { it.load() }
                             contextReceiversCount = contextReceivers.size
                             addParametersToCall(startOffset, endOffset, call, this, irType, contextReceivers)
                         }
@@ -263,7 +263,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         extensionReceiverValue: IntermediateValue?,
         referencedDescriptor: DeclarationDescriptor
     ): IrExpression {
-        val dispatchReceiver = dispatchReceiverValue?.load()
+        konst dispatchReceiver = dispatchReceiverValue?.load()
             ?: throw AssertionError("Dynamic member reference $referencedDescriptor should have a dispatch receiver")
         if (dispatchReceiver.type !is IrDynamicType) {
             throw AssertionError(
@@ -286,8 +286,8 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         call: CallBuilder
     ): IrExpression =
         call.callReceiver.call { dispatchReceiverValue, extensionReceiverValue, contextReceiverValues ->
-            val irType = constructorDescriptor.returnType.toIrType()
-            val originalSymbol = context.symbolTable.referenceConstructor(constructorDescriptor.original)
+            konst irType = constructorDescriptor.returnType.toIrType()
+            konst originalSymbol = context.symbolTable.referenceConstructor(constructorDescriptor.original)
 
             IrConstructorCallImpl.fromSymbolDescriptor(
                 startOffset, endOffset,
@@ -299,7 +299,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                 putTypeArguments(call.typeArguments) { it.toIrType() }
                 dispatchReceiver = dispatchReceiverValue?.load()
                 extensionReceiver = extensionReceiverValue?.load()
-                val contextReceivers = contextReceiverValues.map { it.load() }
+                konst contextReceivers = contextReceiverValues.map { it.load() }
                 addParametersToCall(startOffset, endOffset, call, this, irType, contextReceivers)
             }
         }
@@ -311,11 +311,11 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         origin: IrStatementOrigin?,
         call: CallBuilder
     ): IrExpression {
-        val builder = CallExpressionBuilder { dispatchReceiverValue, extensionReceiverValue, contextReceiverValues ->
+        konst builder = CallExpressionBuilder { dispatchReceiverValue, extensionReceiverValue, contextReceiverValues ->
             if (functionDescriptor.isDynamic()) {
                 generateDynamicFunctionCall(startOffset, endOffset, functionDescriptor, call, dispatchReceiverValue, extensionReceiverValue)
             } else {
-                val originalSymbol = context.symbolTable.referenceSimpleFunction(functionDescriptor.original)
+                konst originalSymbol = context.symbolTable.referenceSimpleFunction(functionDescriptor.original)
                 IrCallImpl.fromSymbolDescriptor(
                     startOffset, endOffset,
                     functionDescriptor.returnType!!.toIrType(),
@@ -327,7 +327,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                     putTypeArguments(call.typeArguments) { it.toIrType() }
                     dispatchReceiver = dispatchReceiverValue?.load()
                     extensionReceiver = extensionReceiverValue?.load()
-                    val contextReceivers = contextReceiverValues.map { it.load() }
+                    konst contextReceivers = contextReceiverValues.map { it.load() }
                     contextReceiversCount = contextReceivers.size
                     addParametersToCall(startOffset, endOffset, call, this, type, contextReceivers)
                 }
@@ -364,7 +364,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                 })
             }
 
-        val dynamicReceiver = getDynamicExpressionReceiver(dispatchReceiverValue, extensionReceiverValue, functionDescriptor)
+        konst dynamicReceiver = getDynamicExpressionReceiver(dispatchReceiverValue, extensionReceiverValue, functionDescriptor)
 
         return when {
             call.original.isImplicitInvoke() ->
@@ -373,11 +373,11 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
                 makeDynamicOperatorExpressionWithArguments(IrDynamicOperator.ARRAY_ACCESS, dynamicReceiver)
             call.original.isImplicitSet() ->
                 makeDynamicOperatorExpression(IrDynamicOperator.EQ).apply {
-                    val args = call.getValueArgumentsInParameterOrder()
-                    val arg0 = args[0]
+                    konst args = call.getValueArgumentsInParameterOrder()
+                    konst arg0 = args[0]
                         ?: throw AssertionError("No index argument in dynamic array set: ${call.original.call.callElement.text}")
-                    val arg1 = args[1]
-                        ?: throw AssertionError("No value argument in dynamic array set: ${call.original.call.callElement.text}")
+                    konst arg1 = args[1]
+                        ?: throw AssertionError("No konstue argument in dynamic array set: ${call.original.call.callElement.text}")
                     left =
                         makeDynamicOperatorExpression(IrDynamicOperator.ARRAY_ACCESS).apply {
                             left = dynamicReceiver
@@ -410,9 +410,9 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         return if (call.isValueArgumentReorderingRequired()) {
             generateCallWithArgumentReordering(irCall, startOffset, endOffset, call, irResultType, contextReceivers.size)
         } else {
-            val valueArguments = call.getValueArgumentsInParameterOrder()
-            for ((index, valueArgument) in valueArguments.withIndex()) {
-                irCall.putValueArgument(index + contextReceivers.size, valueArgument)
+            konst konstueArguments = call.getValueArgumentsInParameterOrder()
+            for ((index, konstueArgument) in konstueArguments.withIndex()) {
+                irCall.putValueArgument(index + contextReceivers.size, konstueArgument)
             }
             irCall
         }
@@ -426,7 +426,7 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         irResultType: IrType,
         contextReceiversCount: Int
     ): IrExpression {
-        val irBlock = IrBlockImpl(startOffset, endOffset, irResultType, IrStatementOrigin.ARGUMENTS_REORDERING_FOR_CALL)
+        konst irBlock = IrBlockImpl(startOffset, endOffset, irResultType, IrStatementOrigin.ARGUMENTS_REORDERING_FOR_CALL)
 
         fun IrExpression.freeze(nameHint: String) =
             if (isUnchanging())
@@ -437,16 +437,16 @@ internal class CallGenerator(statementGenerator: StatementGenerator) : Statement
         irCall.dispatchReceiver = irCall.dispatchReceiver?.freeze("\$this")
         irCall.extensionReceiver = irCall.extensionReceiver?.freeze("\$receiver")
 
-        val resolvedCall = call.original
-        val valueParameters = resolvedCall.resultingDescriptor.valueParameters
-        val valueArgumentsToIndex = HashMap<ResolvedValueArgument, Int>()
-        for ((index, valueArgument) in resolvedCall.valueArgumentsByIndex!!.withIndex()) {
-            valueArgumentsToIndex[valueArgument] = index
+        konst resolvedCall = call.original
+        konst konstueParameters = resolvedCall.resultingDescriptor.konstueParameters
+        konst konstueArgumentsToIndex = HashMap<ResolvedValueArgument, Int>()
+        for ((index, konstueArgument) in resolvedCall.konstueArgumentsByIndex!!.withIndex()) {
+            konstueArgumentsToIndex[konstueArgument] = index
         }
-        for (valueArgument in resolvedCall.valueArguments.values) {
-            val index = valueArgumentsToIndex[valueArgument]!!
-            val irArgument = call.getValueArgument(valueParameters[index]) ?: continue
-            irCall.putValueArgument(index + contextReceiversCount, irArgument.freeze(valueParameters[index].name.asString()))
+        for (konstueArgument in resolvedCall.konstueArguments.konstues) {
+            konst index = konstueArgumentsToIndex[konstueArgument]!!
+            konst irArgument = call.getValueArgument(konstueParameters[index]) ?: continue
+            irCall.putValueArgument(index + contextReceiversCount, irArgument.freeze(konstueParameters[index].name.asString()))
         }
         irBlock.statements.add(irCall)
         return irBlock

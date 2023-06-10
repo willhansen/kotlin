@@ -11,32 +11,32 @@ import org.jetbrains.kotlin.konan.properties.Properties
 import org.jetbrains.kotlin.konan.properties.saveToFile
 import org.jetbrains.kotlin.library.*
 
-const val KLIB_DEFAULT_COMPONENT_NAME = "default"
+const konst KLIB_DEFAULT_COMPONENT_NAME = "default"
 
 open class KotlinLibraryLayoutForWriter(
-    override val libFile: File,
-    val unzippedDir: File,
-    override val component: String = KLIB_DEFAULT_COMPONENT_NAME
+    override konst libFile: File,
+    konst unzippedDir: File,
+    override konst component: String = KLIB_DEFAULT_COMPONENT_NAME
 ) : KotlinLibraryLayout, MetadataKotlinLibraryLayout, IrKotlinLibraryLayout {
-    override val componentDir: File
+    override konst componentDir: File
         get() = File(unzippedDir, component)
-    override val pre_1_4_manifest: File
+    override konst pre_1_4_manifest: File
         get() = File(unzippedDir, KLIB_MANIFEST_FILE_NAME)
 }
 
 class BaseWriterImpl(
-    val libraryLayout: KotlinLibraryLayoutForWriter,
+    konst libraryLayout: KotlinLibraryLayoutForWriter,
     moduleName: String,
     _versions: KotlinLibraryVersioning,
     builtInsPlatform: BuiltInsPlatform,
     nativeTargets: List<String> = emptyList(),
-    val nopack: Boolean = false,
-    val shortName: String? = null
+    konst nopack: Boolean = false,
+    konst shortName: String? = null
 ) : BaseWriter {
 
-    val klibFile = libraryLayout.libFile.canonicalFile
-    val manifestProperties = Properties()
-    override val versions: KotlinLibraryVersioning = _versions
+    konst klibFile = libraryLayout.libFile.canonicalFile
+    konst manifestProperties = Properties()
+    override konst versions: KotlinLibraryVersioning = _versions
 
     init {
         // TODO: figure out the proper policy here.
@@ -62,7 +62,7 @@ class BaseWriterImpl(
             // make sure there are no leftovers from the .def file.
             return
         } else {
-            val newValue = libraries.map { it.uniqueName }.toSpaceSeparatedString()
+            konst newValue = libraries.map { it.uniqueName }.toSpaceSeparatedString()
             manifestProperties.setProperty(KLIB_PROPERTY_DEPENDS, newValue)
             libraries.forEach { it ->
                 if (it.versions.libraryVersion != null) {
@@ -98,8 +98,8 @@ class KotlinLibraryWriterImpl(
     nativeTargets: List<String>,
     nopack: Boolean = false,
     shortName: String? = null,
-    val layout: KotlinLibraryLayoutForWriter,
-    val base: BaseWriter = BaseWriterImpl(layout, moduleName, versions, builtInsPlatform, nativeTargets, nopack, shortName),
+    konst layout: KotlinLibraryLayoutForWriter,
+    konst base: BaseWriter = BaseWriterImpl(layout, moduleName, versions, builtInsPlatform, nativeTargets, nopack, shortName),
     metadata: MetadataWriter = MetadataWriterImpl(layout),
     ir: IrWriter = IrMonoliticWriterImpl(layout)
 //    ir: IrWriter = IrPerFileWriterImpl(layout)
@@ -121,11 +121,11 @@ fun buildKotlinLibrary(
     nativeTargets: List<String> = emptyList()
 ): KotlinLibraryLayout {
 
-    val klibFile = File(output)
-    val unzippedKlibDir = if (nopack) klibFile.also { it.isDirectory } else org.jetbrains.kotlin.konan.file.createTempDir(moduleName)
-    val layout = KotlinLibraryLayoutForWriter(klibFile, unzippedKlibDir)
-    val irWriter = if (perFile) IrPerFileWriterImpl(layout) else IrMonoliticWriterImpl(layout)
-    val library = KotlinLibraryWriterImpl(
+    konst klibFile = File(output)
+    konst unzippedKlibDir = if (nopack) klibFile.also { it.isDirectory } else org.jetbrains.kotlin.konan.file.createTempDir(moduleName)
+    konst layout = KotlinLibraryLayoutForWriter(klibFile, unzippedKlibDir)
+    konst irWriter = if (perFile) IrPerFileWriterImpl(layout) else IrMonoliticWriterImpl(layout)
+    konst library = KotlinLibraryWriterImpl(
         moduleName,
         versions,
         builtInsPlatform,
@@ -150,8 +150,8 @@ fun buildKotlinLibrary(
 }
 
 class KotlinLibraryOnlyIrWriter(output: String, moduleName: String, versions: KotlinLibraryVersioning, platform: BuiltInsPlatform, nativeTargets: List<String>, perFile: Boolean) {
-    val outputDir = File(output)
-    val library = createLibrary(perFile, moduleName, versions, platform, nativeTargets, outputDir)
+    konst outputDir = File(output)
+    konst library = createLibrary(perFile, moduleName, versions, platform, nativeTargets, outputDir)
 
     private fun createLibrary(
         perFile: Boolean,
@@ -161,12 +161,12 @@ class KotlinLibraryOnlyIrWriter(output: String, moduleName: String, versions: Ko
         nativeTargets: List<String>,
         directory: File
     ): KotlinLibraryWriterImpl {
-        val layout = KotlinLibraryLayoutForWriter(directory, directory)
-        val irWriter = if (perFile) IrPerFileWriterImpl(layout) else IrMonoliticWriterImpl(layout)
+        konst layout = KotlinLibraryLayoutForWriter(directory, directory)
+        konst irWriter = if (perFile) IrPerFileWriterImpl(layout) else IrMonoliticWriterImpl(layout)
         return KotlinLibraryWriterImpl(moduleName, versions, platform, nativeTargets, nopack = true, layout = layout, ir = irWriter)
     }
 
-    fun invalidate() {
+    fun inkonstidate() {
         outputDir.deleteRecursively()
         library.layout.irDir.mkdirs()
     }
@@ -180,7 +180,7 @@ enum class BuiltInsPlatform {
     JVM, JS, NATIVE, WASM, COMMON;
 
     companion object {
-        fun parseFromString(name: String): BuiltInsPlatform? = values().firstOrNull { it.name == name }
+        fun parseFromString(name: String): BuiltInsPlatform? = konstues().firstOrNull { it.name == name }
     }
 }
 

@@ -3,7 +3,7 @@ fun box(): String {
 
     fun changeToOK() { result = "OK" }
 
-    val ok = ::changeToOK
+    konst ok = ::changeToOK
     ok()
     return result
 }

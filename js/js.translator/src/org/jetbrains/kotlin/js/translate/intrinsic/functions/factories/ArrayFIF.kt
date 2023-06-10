@@ -42,22 +42,22 @@ import java.util.*
 
 object ArrayFIF : CompositeFIF() {
     @JvmField
-    val GET_INTRINSIC = intrinsify { callInfo, arguments, _ ->
+    konst GET_INTRINSIC = intrinsify { callInfo, arguments, _ ->
         assert(arguments.size == 1) { "Array get expression must have one argument." }
-        val (indexExpression) = arguments
+        konst (indexExpression) = arguments
         JsArrayAccess(callInfo.dispatchReceiver, indexExpression)
     }
 
     @JvmField
-    val SET_INTRINSIC = intrinsify { callInfo, arguments, _ ->
+    konst SET_INTRINSIC = intrinsify { callInfo, arguments, _ ->
         assert(arguments.size == 2) { "Array set expression must have two arguments." }
-        val (indexExpression, value) = arguments
-        val arrayAccess = JsArrayAccess(callInfo.dispatchReceiver, indexExpression)
-        JsAstUtils.assignment(arrayAccess, value)
+        konst (indexExpression, konstue) = arguments
+        konst arrayAccess = JsArrayAccess(callInfo.dispatchReceiver, indexExpression)
+        JsAstUtils.assignment(arrayAccess, konstue)
     }
 
     @JvmField
-    val LENGTH_PROPERTY_INTRINSIC = BuiltInPropertyIntrinsic("length")
+    konst LENGTH_PROPERTY_INTRINSIC = BuiltInPropertyIntrinsic("length")
 
     @JvmStatic
     fun typedArraysEnabled(config: JsConfig) = config.configuration.get(JSConfigurationKeys.TYPED_ARRAYS_ENABLED, true)
@@ -78,14 +78,14 @@ object ArrayFIF : CompositeFIF() {
     fun castOrCreatePrimitiveArray(ctx: TranslationContext, type: KotlinType, arg: JsArrayLiteral): JsExpression {
         if (type.isMarkedNullable) return arg
 
-        val unsignedPrimitiveType = unsignedPrimitiveToSigned(type)
+        konst unsignedPrimitiveType = unsignedPrimitiveToSigned(type)
 
         if (unsignedPrimitiveType != null) {
-            val conversionFunction = "to${unsignedPrimitiveType.typeName}"
+            konst conversionFunction = "to${unsignedPrimitiveType.typeName}"
             arg.expressions.replaceAll { JsInvocation(JsNameRef(conversionFunction, it)) }
         }
 
-        val primitiveType = unsignedPrimitiveType ?: KotlinBuiltIns.getPrimitiveType(type)?.takeUnless { type.isMarkedNullable}
+        konst primitiveType = unsignedPrimitiveType ?: KotlinBuiltIns.getPrimitiveType(type)?.takeUnless { type.isMarkedNullable}
 
         if (primitiveType == null || !typedArraysEnabled(ctx.config)) return arg
 
@@ -97,7 +97,7 @@ object ArrayFIF : CompositeFIF() {
         }
     }
 
-    private val TYPED_ARRAY_MAP = EnumMap(mapOf(BYTE to "Int8",
+    private konst TYPED_ARRAY_MAP = EnumMap(mapOf(BYTE to "Int8",
                                                 SHORT to "Int16",
                                                 INT to "Int32",
                                                 FLOAT to "Float32",
@@ -108,20 +108,20 @@ object ArrayFIF : CompositeFIF() {
         return JsNew(JsNameRef(TYPED_ARRAY_MAP[type] + "Array"), listOf(arg))
     }
 
-    private val PrimitiveType.lowerCaseName
+    private konst PrimitiveType.lowerCaseName
         get() = typeName.asString().lowercase()
 
     fun getTag(descriptor: CallableDescriptor, config: JsConfig): String? {
         if (descriptor !is ConstructorDescriptor) return null
-        val constructedClass = descriptor.constructedClass
+        konst constructedClass = descriptor.constructedClass
         if (!KotlinBuiltIns.isArrayOrPrimitiveArray(constructedClass)) return null
 
-        if (descriptor.valueParameters.size != 2) return null
-        val (sizeParam, functionParam) = descriptor.valueParameters
+        if (descriptor.konstueParameters.size != 2) return null
+        konst (sizeParam, functionParam) = descriptor.konstueParameters
         if (!KotlinBuiltIns.isInt(sizeParam.type) || !functionParam.type.isBuiltinFunctionalType) return null
         if (functionParam.type.getValueParameterTypesFromFunctionType().size != 1) return null
 
-        val primitiveType = KotlinBuiltIns.getPrimitiveArrayElementType(constructedClass.defaultType)
+        konst primitiveType = KotlinBuiltIns.getPrimitiveArrayElementType(constructedClass.defaultType)
         return if (typedArraysEnabled(config) && primitiveType != null) {
             if (primitiveType in TYPED_ARRAY_MAP) {
                 "kotlin.fillArray"
@@ -141,20 +141,20 @@ object ArrayFIF : CompositeFIF() {
     }
 
     init {
-        val arrayName = StandardNames.FqNames.array.shortName()
+        konst arrayName = StandardNames.FqNames.array.shortName()
 
-        val arrayTypeNames = mutableListOf(arrayName)
-        PrimitiveType.values().mapTo(arrayTypeNames) { it.arrayTypeName }
+        konst arrayTypeNames = mutableListOf(arrayName)
+        PrimitiveType.konstues().mapTo(arrayTypeNames) { it.arrayTypeName }
 
-        val arrays = NamePredicate(arrayTypeNames)
+        konst arrays = NamePredicate(arrayTypeNames)
         add(pattern(arrays, "get"), GET_INTRINSIC)
         add(pattern(arrays, "set"), SET_INTRINSIC)
         add(pattern(arrays, "<get-size>"), LENGTH_PROPERTY_INTRINSIC)
 
-        for (type in PrimitiveType.values()) {
+        for (type in PrimitiveType.konstues()) {
             add(pattern(NamePredicate(type.arrayTypeName), "<init>(Int)"), intrinsify { _, arguments, context ->
                 assert(arguments.size == 1) { "Array <init>(Int) expression must have one argument." }
-                val (size) = arguments
+                konst (size) = arguments
 
                 if (typedArraysEnabled(context.config)) {
                     if (type in TYPED_ARRAY_MAP) {
@@ -166,7 +166,7 @@ object ArrayFIF : CompositeFIF() {
                     }
                 }
                 else {
-                    val initValue = when (type) {
+                    konst initValue = when (type) {
                         BOOLEAN -> JsBooleanLiteral(false)
                         LONG -> JsNameRef(Namer.LONG_ZERO, Namer.kotlinLong())
                         else -> JsIntLiteral(0)
@@ -178,7 +178,7 @@ object ArrayFIF : CompositeFIF() {
             add(pattern(NamePredicate(type.arrayTypeName), "<init>(Int,Function1)"), createConstructorIntrinsic(type))
 
             add(pattern(NamePredicate(type.arrayTypeName), "iterator"), intrinsify { callInfo, _, context ->
-                val receiver = callInfo.dispatchReceiver
+                konst receiver = callInfo.dispatchReceiver
                 if (typedArraysEnabled(context.config)) {
                     JsAstUtils.invokeKotlinFunction("${type.lowerCaseName}ArrayIterator", receiver!!)
                 }
@@ -193,16 +193,16 @@ object ArrayFIF : CompositeFIF() {
 
         add(pattern(Namer.KOTLIN_LOWER_NAME, "arrayOfNulls"), KotlinFunctionIntrinsic("newArray", JsNullLiteral()))
 
-        val arrayFactoryMethodNames = arrayTypeNames.map { Name.identifier(decapitalize(it.asString() + "Of")) }
-        val arrayFactoryMethods = pattern(Namer.KOTLIN_LOWER_NAME, NamePredicate(arrayFactoryMethodNames))
+        konst arrayFactoryMethodNames = arrayTypeNames.map { Name.identifier(decapitalize(it.asString() + "Of")) }
+        konst arrayFactoryMethods = pattern(Namer.KOTLIN_LOWER_NAME, NamePredicate(arrayFactoryMethodNames))
         add(arrayFactoryMethods, intrinsify { _, arguments, _ -> arguments[0] })
     }
 
     private fun createConstructorIntrinsic(type: PrimitiveType?): FunctionIntrinsic {
         return intrinsify { callInfo, arguments, context ->
             assert(arguments.size == 2) { "Array <init>(Int,Function1) expression must have two arguments." }
-            val (size, fn) = arguments
-            val invocation = if (typedArraysEnabled(context.config) && type != null) {
+            konst (size, fn) = arguments
+            konst invocation = if (typedArraysEnabled(context.config) && type != null) {
                 if (type in TYPED_ARRAY_MAP) {
                     JsAstUtils.invokeKotlinFunction("fillArray", createTypedArray(type, size), fn)
                 }
@@ -214,8 +214,8 @@ object ArrayFIF : CompositeFIF() {
                 JsAstUtils.invokeKotlinFunction(if (type == CHAR) "untypedCharArrayF" else "newArrayF", size, fn)
             }
             invocation.isInline = true
-            val descriptor = callInfo.resolvedCall.resultingDescriptor.original
-            val resolvedDescriptor = when (descriptor) {
+            konst descriptor = callInfo.resolvedCall.resultingDescriptor.original
+            konst resolvedDescriptor = when (descriptor) {
                 is TypeAliasConstructorDescriptor -> descriptor.underlyingConstructorDescriptor
                 else -> descriptor
             }

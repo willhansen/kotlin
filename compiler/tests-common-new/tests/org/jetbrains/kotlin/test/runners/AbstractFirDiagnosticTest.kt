@@ -42,7 +42,7 @@ import org.jetbrains.kotlin.test.services.service
 import org.jetbrains.kotlin.test.services.sourceProviders.AdditionalDiagnosticsSourceFilesProvider
 import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSourceFilesProvider
 
-abstract class AbstractFirDiagnosticTestBase(val parser: FirParser) : AbstractKotlinCompilerTest() {
+abstract class AbstractFirDiagnosticTestBase(konst parser: FirParser) : AbstractKotlinCompilerTest() {
     override fun TestConfigurationBuilder.configuration() {
         baseFirDiagnosticTestConfiguration()
         enableLazyResolvePhaseChecking()
@@ -79,12 +79,12 @@ abstract class AbstractFirLightTreeDiagnosticsTest : AbstractFirDiagnosticTestBa
 }
 
 class LightTreeSyntaxDiagnosticsReporterHolder : TestService {
-    val reporter = SimpleDiagnosticsCollector()
+    konst reporter = SimpleDiagnosticsCollector()
 }
 
-val TestServices.lightTreeSyntaxDiagnosticsReporterHolder: LightTreeSyntaxDiagnosticsReporterHolder? by TestServices.nullableTestServiceAccessor()
+konst TestServices.lightTreeSyntaxDiagnosticsReporterHolder: LightTreeSyntaxDiagnosticsReporterHolder? by TestServices.nullableTestServiceAccessor()
 
-abstract class AbstractFirWithActualizerDiagnosticsTest(val parser: FirParser) : AbstractKotlinCompilerWithTargetBackendTest(TargetBackend.JVM_IR) {
+abstract class AbstractFirWithActualizerDiagnosticsTest(konst parser: FirParser) : AbstractKotlinCompilerWithTargetBackendTest(TargetBackend.JVM_IR) {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         with(builder) {
@@ -226,7 +226,7 @@ fun TestConfigurationBuilder.baseFirDiagnosticTestConfiguration(
 }
 
 class FirLazyDeclarationResolverWithPhaseCheckingSessionComponentRegistrar : FirSessionComponentRegistrar() {
-    private val lazyResolver = FirCompilerLazyDeclarationResolverWithPhaseChecking()
+    private konst lazyResolver = FirCompilerLazyDeclarationResolverWithPhaseChecking()
 
     @OptIn(org.jetbrains.kotlin.fir.SessionConfiguration::class)
     override fun registerAdditionalComponent(session: FirSession) {

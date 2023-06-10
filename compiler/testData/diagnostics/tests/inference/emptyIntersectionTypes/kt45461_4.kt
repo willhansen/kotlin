@@ -6,6 +6,6 @@ class Bar<T> {
 }
 
 fun <K : CharSequence> main() {
-    val foo = Foo<K>()
+    konst foo = Foo<K>()
     Bar<String>().takeFoo(foo) // error in 1.3.72, no error in 1.4.31
 }

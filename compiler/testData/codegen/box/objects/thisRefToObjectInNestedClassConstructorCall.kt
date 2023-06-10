@@ -1,4 +1,4 @@
-open class Base(val s: String)
+open class Base(konst s: String)
 
 object Host {
     class Derived : Base(this.foo())

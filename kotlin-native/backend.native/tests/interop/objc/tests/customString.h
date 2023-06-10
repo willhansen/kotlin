@@ -1,16 +1,16 @@
 #import <Foundation/NSString.h>
 
 @interface CustomString : NSString
-- (instancetype)initWithValue:(int)value;
-@property int value;
+- (instancetype)initWithValue:(int)konstue;
+@property int konstue;
 @end
 
-CustomString* _Nonnull createCustomString(int value) {
-    return [[CustomString alloc] initWithValue:value];
+CustomString* _Nonnull createCustomString(int konstue) {
+    return [[CustomString alloc] initWithValue:konstue];
 }
 
 int getCustomStringValue(CustomString* str) {
-    return str.value;
+    return str.konstue;
 }
 
 extern BOOL customStringDeallocated;

@@ -3,7 +3,7 @@ fun interface MyRunnable {
 }
 
 <!FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS!>fun<!> interface WithProperty {
-    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>val<!> x: Int
+    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>konst<!> x: Int
 }
 
 <!FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS!>fun<!> interface TwoAbstract : MyRunnable {
@@ -24,7 +24,7 @@ fun foo3(m: TwoAbstract) {}
 fun foo4(m: Derived) {}
 
 fun main() {
-    val f = { t: Int -> t > 1}
+    konst f = { t: Int -> t > 1}
 
     foo1 { x -> x > 1 }
     foo1(f)

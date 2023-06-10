@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.StandardClassIds
 
 fun FirFunction.computeJvmSignature(typeConversion: (FirTypeRef) -> ConeKotlinType? = FirTypeRef::coneTypeSafe): String? {
-    val containingClass = containingClassLookupTag() ?: return null
+    konst containingClass = containingClassLookupTag() ?: return null
 
     return SignatureBuildingComponents.signature(containingClass.classId, computeJvmDescriptor(typeConversion = typeConversion))
 }
@@ -44,7 +44,7 @@ fun FirFunction.computeJvmDescriptor(
     }
 
     append("(")
-    for (parameter in valueParameters) {
+    for (parameter in konstueParameters) {
         typeConversion(parameter.returnTypeRef)?.let { appendConeType(it, typeConversion, mutableSetOf()) }
     }
     append(")")
@@ -58,7 +58,7 @@ fun FirFunction.computeJvmDescriptor(
     }
 }
 
-private val PRIMITIVE_TYPE_SIGNATURE: Map<String, String> = mapOf(
+private konst PRIMITIVE_TYPE_SIGNATURE: Map<String, String> = mapOf(
     "Boolean" to "Z",
     "Byte" to "B",
     "Char" to "C",
@@ -69,12 +69,12 @@ private val PRIMITIVE_TYPE_SIGNATURE: Map<String, String> = mapOf(
     "Double" to "D",
 )
 
-private val PRIMITIVE_TYPE_ARRAYS_SIGNATURE: Map<String, String> =
+private konst PRIMITIVE_TYPE_ARRAYS_SIGNATURE: Map<String, String> =
     PRIMITIVE_TYPE_SIGNATURE.map { (name, desc) ->
         "${name}Array" to "[$desc"
     }.toMap()
 
-private val PRIMITIVE_TYPE_OR_ARRAY_SIGNATURE: Map<String, String> = PRIMITIVE_TYPE_SIGNATURE + PRIMITIVE_TYPE_ARRAYS_SIGNATURE
+private konst PRIMITIVE_TYPE_OR_ARRAY_SIGNATURE: Map<String, String> = PRIMITIVE_TYPE_SIGNATURE + PRIMITIVE_TYPE_ARRAYS_SIGNATURE
 
 fun ConeKotlinType.computeJvmDescriptorRepresentation(
     typeConversion: (FirTypeRef) -> ConeKotlinType? = FirTypeRef::coneTypeSafe
@@ -87,7 +87,7 @@ private fun StringBuilder.appendConeType(
     visitedTypeParameters: MutableSet<FirTypeParameterSymbol>,
 ) {
     (coneType as? ConeClassLikeType)?.let {
-        val classId = it.lookupTag.classId
+        konst classId = it.lookupTag.classId
         if (classId.packageFqName.toString() == "kotlin") {
             PRIMITIVE_TYPE_OR_ARRAY_SIGNATURE[classId.shortClassName.identifier]?.let { signature ->
                 append(signature)
@@ -97,9 +97,9 @@ private fun StringBuilder.appendConeType(
     }
 
     fun appendClassLikeType(type: ConeClassLikeType) {
-        val baseClassId = type.lookupTag.classId
+        konst baseClassId = type.lookupTag.classId
         // TODO: what about primitive arrays?
-        val classId = JavaToKotlinClassMap.mapKotlinToJava(baseClassId.asSingleFqName().toUnsafe()) ?: baseClassId
+        konst classId = JavaToKotlinClassMap.mapKotlinToJava(baseClassId.asSingleFqName().toUnsafe()) ?: baseClassId
         if (classId == StandardClassIds.Array) {
             append("[")
             type.typeArguments.forEach { typeArg ->
@@ -128,7 +128,7 @@ private fun StringBuilder.appendConeType(
 
             if (visitedTypeParameters.add(coneType.lookupTag.typeParameterSymbol)) {
                 coneType.lookupTag.typeParameterSymbol.fir.bounds.firstNotNullOfOrNull {
-                    val converted = typeConversion(it)
+                    konst converted = typeConversion(it)
                     if (converted != null) it to converted else null
                 }?.let { (firBound, coneBound) ->
                     // TODO: pretty sure Java type conversion does not produce either of these
@@ -146,16 +146,16 @@ private fun StringBuilder.appendConeType(
     }
 }
 
-private val unitClassId = ClassId.topLevel(FqName("kotlin.Unit"))
+private konst unitClassId = ClassId.topLevel(FqName("kotlin.Unit"))
 
 private fun FirTypeRef.isVoid(): Boolean {
     return when (this) {
         is FirJavaTypeRef -> {
-            val type = type
+            konst type = type
             type is JavaPrimitiveType && type.type == null
         }
         is FirResolvedTypeRef -> {
-            val type = type
+            konst type = type
             type is ConeClassLikeType && type.lookupTag.classId == unitClassId
         }
         else -> false

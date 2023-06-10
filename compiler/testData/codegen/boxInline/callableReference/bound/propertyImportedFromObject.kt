@@ -3,7 +3,7 @@
 package test
 
 object Foo {
-    val a: String = "OK"
+    konst a: String = "OK"
 }
 
 inline fun test(s: () -> String): String {

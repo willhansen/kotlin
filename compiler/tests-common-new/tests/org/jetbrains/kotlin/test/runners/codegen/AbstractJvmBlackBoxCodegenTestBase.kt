@@ -36,12 +36,12 @@ import org.jetbrains.kotlin.test.services.configuration.JavaForeignAnnotationTyp
 import org.jetbrains.kotlin.test.services.configuration.JvmForeignAnnotationsConfigurator
 
 abstract class AbstractJvmBlackBoxCodegenTestBase<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>>(
-    val targetFrontend: FrontendKind<R>,
+    konst targetFrontend: FrontendKind<R>,
     targetBackend: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
-    abstract val frontendFacade: Constructor<FrontendFacade<R>>
-    abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
-    abstract val backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
+    abstract konst frontendFacade: Constructor<FrontendFacade<R>>
+    abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
+    abstract konst backendFacade: Constructor<BackendFacade<I, BinaryArtifacts.Jvm>>
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForTest(targetFrontend, frontendFacade, frontendToBackendConverter, backendFacade)

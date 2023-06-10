@@ -22,15 +22,15 @@ class KT46273JvmTargetAndOrphanTestSourceSetTest : MultiplatformExtensionTest() 
     fun `test KT-46273`() {
         kotlin.jvm()
 
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
         commonTest.dependencies {
             implementation(kotlin("test"))
         }
 
-        val orphanTestSourceSet = kotlin.sourceSets.create("orphanTest") as DefaultKotlinSourceSet
+        konst orphanTestSourceSet = kotlin.sourceSets.create("orphanTest") as DefaultKotlinSourceSet
         orphanTestSourceSet.dependsOn(commonTest)
 
-        project.evaluate()
+        project.ekonstuate()
 
         /*
         Previously failed with:

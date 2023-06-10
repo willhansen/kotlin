@@ -11,7 +11,7 @@ inline fun <T> runIf(f: (T) -> T, start: T, stop: T, secondStart: T) : T {
 
 
 inline fun <T> runIf2(f: (T) -> T, start: T, stop: T, secondStart: T) : T {
-    val result = f(start)
+    konst result = f(start)
     if (result == stop) {
         return result
     }

@@ -34,7 +34,7 @@ public abstract class KtVariableLikeSignature<out S : KtVariableLikeSymbol> : Kt
      *
      * // source code
      * fun test() {
-     *   val action = foo()
+     *   konst action = foo()
      *   action("") // this call
      * }
      * ```
@@ -47,13 +47,13 @@ public abstract class KtVariableLikeSignature<out S : KtVariableLikeSymbol> : Kt
      *
      * @see org.jetbrains.kotlin.analysis.api.fir.KtSymbolByFirBuilder.unwrapUseSiteSubstitutionOverride
      */
-    public val name: Name
+    public konst name: Name
         get() = withValidityAssertion {
             // The case where PSI is null is when calling `invoke()` on a variable with functional type, e.g. `x(1)` below:
             //
             //   fun foo(x: (item: Int) -> Unit) { x(1) }
             //   fun bar(x: Function1<@ParameterName("item") Int, Unit>) { x(1) }
-            val nameCanBeDeclaredInAnnotation = symbol.psi == null
+            konst nameCanBeDeclaredInAnnotation = symbol.psi == null
 
             runIf(nameCanBeDeclaredInAnnotation) { getValueFromParameterNameAnnotation() } ?: symbol.name
         }
@@ -61,18 +61,18 @@ public abstract class KtVariableLikeSignature<out S : KtVariableLikeSymbol> : Kt
     abstract override fun substitute(substitutor: KtSubstitutor): KtVariableLikeSignature<S>
 
     private fun getValueFromParameterNameAnnotation(): Name? {
-        val resultingAnnotation = findParameterNameAnnotation() ?: return null
-        val parameterNameArgument = resultingAnnotation.arguments
+        konst resultingAnnotation = findParameterNameAnnotation() ?: return null
+        konst parameterNameArgument = resultingAnnotation.arguments
             .singleOrNull { it.name == StandardClassIds.Annotations.ParameterNames.parameterNameName }
 
-        val constantArgumentValue = parameterNameArgument?.expression as? KtConstantAnnotationValue ?: return null
+        konst constantArgumentValue = parameterNameArgument?.expression as? KtConstantAnnotationValue ?: return null
 
-        return (constantArgumentValue.constantValue.value as? String)?.let(Name::identifier)
+        return (constantArgumentValue.constantValue.konstue as? String)?.let(Name::identifier)
     }
 
     private fun findParameterNameAnnotation(): KtAnnotationApplicationWithArgumentsInfo? {
-        val allParameterNameAnnotations = returnType.annotationsByClassId(StandardNames.FqNames.parameterNameClassId)
-        val (explicitAnnotations, implicitAnnotations) = allParameterNameAnnotations.partition { it.psi != null }
+        konst allParameterNameAnnotations = returnType.annotationsByClassId(StandardNames.FqNames.parameterNameClassId)
+        konst (explicitAnnotations, implicitAnnotations) = allParameterNameAnnotations.partition { it.psi != null }
 
         return if (explicitAnnotations.isNotEmpty()) {
             explicitAnnotations.first()

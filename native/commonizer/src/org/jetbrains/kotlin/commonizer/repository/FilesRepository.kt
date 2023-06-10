@@ -13,11 +13,11 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import java.io.File
 
 internal class FilesRepository(
-    private val libraryFiles: Set<File>,
-    private val libraryLoader: NativeLibraryLoader
+    private konst libraryFiles: Set<File>,
+    private konst libraryLoader: NativeLibraryLoader
 ) : Repository {
 
-    private val librariesByKonanTargets: Map<Set<KonanTarget>, Set<NativeLibrary>> by lazy {
+    private konst librariesByKonanTargets: Map<Set<KonanTarget>, Set<NativeLibrary>> by lazy {
         libraryFiles
             .map(libraryLoader::invoke)
             .groupBy { library ->
@@ -31,8 +31,8 @@ internal class FilesRepository(
         return librariesByKonanTargets[target.konanTargets].orEmpty()
     }
 
-    private fun konanTargetOrThrow(value: String): KonanTarget {
-        return KonanTarget.predefinedTargets[value] ?: error("Unexpected KonanTarget $value")
+    private fun konanTargetOrThrow(konstue: String): KonanTarget {
+        return KonanTarget.predefinedTargets[konstue] ?: error("Unexpected KonanTarget $konstue")
     }
 }
 

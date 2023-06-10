@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 import org.jetbrains.kotlin.psi
 import org.jetbrains.kotlin.psi.KtCallableReferenceExpression
 
-class Psi2FirMapper(val map: MutableMap<PsiElement, MutableList<FirElement>>) : FirVisitorVoid() {
+class Psi2FirMapper(konst map: MutableMap<PsiElement, MutableList<FirElement>>) : FirVisitorVoid() {
     override fun visitElement(element: FirElement) {
-        val psi = element.psi
+        konst psi = element.psi
         if (psi != null) {
             if (map.putIfAbsent(psi, mutableListOf(element)) != null) {
                 map[psi]?.add(element)
@@ -29,7 +29,7 @@ class Psi2FirMapper(val map: MutableMap<PsiElement, MutableList<FirElement>>) : 
         visitElement(callableReferenceAccess.dispatchReceiver)
         callableReferenceAccess.explicitReceiver?.let { visitElement(it) }
 
-        val psi = (callableReferenceAccess.calleeReference.psi as? KtCallableReferenceExpression)?.children?.last()
+        konst psi = (callableReferenceAccess.calleeReference.psi as? KtCallableReferenceExpression)?.children?.last()
             ?: return callableReferenceAccess.calleeReference.accept(this)
         if (map.putIfAbsent(psi, mutableListOf(callableReferenceAccess.calleeReference)) != null) {
             map[psi]?.add(callableReferenceAccess.calleeReference)

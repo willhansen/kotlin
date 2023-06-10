@@ -14,21 +14,21 @@ annotation class Z
 enum class E
 
 annotation class Anno(
-        val b: Byte,
-        val s: String,
-        val ss: Array<String>,
-        val z: Z,
-        val zs: Array<Z>,
-        val e: E,
-        val es: Array<E>,
-        val k: KClass<*>,
-        val ka: Array<KClass<*>>
+        konst b: Byte,
+        konst s: String,
+        konst ss: Array<String>,
+        konst z: Z,
+        konst zs: Array<Z>,
+        konst e: E,
+        konst es: Array<E>,
+        konst k: KClass<*>,
+        konst ka: Array<KClass<*>>
 )
 
 fun tmp(): Array<Class<*>> = null!!
 
 fun box(): String {
-    val t = Anno::class.constructors.single().parameters.map { it.type.javaType }
+    konst t = Anno::class.constructors.single().parameters.map { it.type.javaType }
 
     assertEquals(Byte::class.java, t[0])
     assertEquals(String::class.java, t[1])
@@ -42,7 +42,7 @@ fun box(): String {
     assertEquals(Class::class.java, (t[7] as ParameterizedType).rawType)
 
     assertTrue(t[8] is GenericArrayType)
-    val e = (t[8] as GenericArrayType).genericComponentType
+    konst e = (t[8] as GenericArrayType).genericComponentType
     assertTrue(e is ParameterizedType)
     assertEquals(Class::class.java, (e as ParameterizedType).rawType)
 

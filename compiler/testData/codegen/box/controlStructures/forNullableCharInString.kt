@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val str = "abcd"
+    konst str = "abcd"
     var r = ""
     for (c: Char? in str) {
         r = r + c ?: "?"

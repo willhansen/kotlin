@@ -26,7 +26,7 @@ abstract class MySettingsListener<S extends MyComparableSettings> {}
 // FILE: test.kt
 
 fun test() {
-    val a = MySettings.getSettings()
+    konst a = MySettings.getSettings()
     a.getLinkedProjectsSettings()
     a.linkedProjectsSettings
 }

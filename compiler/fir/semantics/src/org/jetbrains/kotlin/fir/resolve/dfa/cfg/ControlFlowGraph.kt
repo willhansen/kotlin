@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.fir.resolve.dfa.cfg
 
 import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 
-class ControlFlowGraph(val declaration: FirDeclaration?, val name: String, val kind: Kind) {
+class ControlFlowGraph(konst declaration: FirDeclaration?, konst name: String, konst kind: Kind) {
     @set:CfgInternals
     var nodeCount = 0
 
@@ -20,10 +20,10 @@ class ControlFlowGraph(val declaration: FirDeclaration?, val name: String, val k
     @set:CfgInternals
     lateinit var exitNode: CFGNode<*>
 
-    val isSubGraph: Boolean
+    konst isSubGraph: Boolean
         get() = enterNode.previousNodes.isNotEmpty()
 
-    val subGraphs: List<ControlFlowGraph>
+    konst subGraphs: List<ControlFlowGraph>
         get() = nodes.flatMap { (it as? CFGNodeWithSubgraphs<*>)?.subGraphs ?: emptyList() }
 
     @CfgInternals
@@ -61,16 +61,16 @@ class ControlFlowGraph(val declaration: FirDeclaration?, val name: String, val k
 }
 
 data class Edge(
-    val label: EdgeLabel,
-    val kind: EdgeKind,
+    konst label: EdgeLabel,
+    konst kind: EdgeKind,
 ) {
     companion object {
-        val Normal_Forward = Edge(NormalPath, EdgeKind.Forward)
-        private val Normal_DeadForward = Edge(NormalPath, EdgeKind.DeadForward)
-        private val Normal_DfgForward = Edge(NormalPath, EdgeKind.DfgForward)
-        private val Normal_CfgForward = Edge(NormalPath, EdgeKind.CfgForward)
-        private val Normal_CfgBackward = Edge(NormalPath, EdgeKind.CfgBackward)
-        private val Normal_DeadBackward = Edge(NormalPath, EdgeKind.DeadBackward)
+        konst Normal_Forward = Edge(NormalPath, EdgeKind.Forward)
+        private konst Normal_DeadForward = Edge(NormalPath, EdgeKind.DeadForward)
+        private konst Normal_DfgForward = Edge(NormalPath, EdgeKind.DfgForward)
+        private konst Normal_CfgForward = Edge(NormalPath, EdgeKind.CfgForward)
+        private konst Normal_CfgBackward = Edge(NormalPath, EdgeKind.CfgBackward)
+        private konst Normal_DeadBackward = Edge(NormalPath, EdgeKind.DeadBackward)
 
         fun create(label: EdgeLabel, kind: EdgeKind): Edge =
             when (label) {
@@ -92,23 +92,23 @@ data class Edge(
 }
 
 sealed interface EdgeLabel {
-    val label: String?
+    konst label: String?
 }
 
 object NormalPath : EdgeLabel {
-    override val label: String? get() = null
+    override konst label: String? get() = null
 }
 
 object UncaughtExceptionPath : EdgeLabel {
-    override val label: String get() = "onUncaughtException"
+    override konst label: String get() = "onUncaughtException"
 }
 
 enum class EdgeKind(
-    val usedInDfa: Boolean, // propagate flow to alive nodes
-    val usedInDeadDfa: Boolean, // propagate flow to dead nodes
-    val usedInCfa: Boolean,
-    val isBack: Boolean,
-    val isDead: Boolean
+    konst usedInDfa: Boolean, // propagate flow to alive nodes
+    konst usedInDeadDfa: Boolean, // propagate flow to dead nodes
+    konst usedInCfa: Boolean,
+    konst isBack: Boolean,
+    konst isDead: Boolean
 ) {
     Forward(usedInDfa = true, usedInDeadDfa = true, usedInCfa = true, isBack = false, isDead = false),
     DeadForward(usedInDfa = false, usedInDeadDfa = true, usedInCfa = true, isBack = false, isDead = true),
@@ -118,28 +118,28 @@ enum class EdgeKind(
     DeadBackward(usedInDfa = false, usedInDeadDfa = false, usedInCfa = true, isBack = true, isDead = true)
 }
 
-private val CFGNode<*>.previousNodeCount
+private konst CFGNode<*>.previousNodeCount
     get() = previousNodes.count { it.owner == owner && !edgeFrom(it).kind.isBack }
 
 private fun ControlFlowGraph.orderNodes(): List<CFGNode<*>> {
     // NOTE: this produces a BFS order. If desired, a DFS order can be created instead by using a linked list,
     // iterating over `followingNodes` in reverse order, and inserting new nodes at the current iteration point.
-    val result = ArrayList<CFGNode<*>>(nodeCount).apply { add(enterNode) }
-    val countdowns = IntArray(nodeCount)
+    konst result = ArrayList<CFGNode<*>>(nodeCount).apply { add(enterNode) }
+    konst countdowns = IntArray(nodeCount)
     var i = 0
     while (i < result.size) {
-        val node = result[i++]
+        konst node = result[i++]
         for (next in node.followingNodes) {
             if (next.owner != this) {
                 // Assume nodes in this graph can be ordered in isolation. If necessary, dead edges
                 // should be used to go around subgraphs that always execute.
             } else if (next.previousNodes.size == 1) {
                 // Fast path: assume `next.previousNodes` is `listOf(node)`, and the edge is forward.
-                // In tests, the consistency checker will validate this assumption.
+                // In tests, the consistency checker will konstidate this assumption.
                 result.add(next)
             } else if (!node.edgeTo(next).kind.isBack) {
                 // Can only read a 0 if never seen this node before.
-                val remaining = countdowns[next.id].let { if (it == 0) next.previousNodeCount else it } - 1
+                konst remaining = countdowns[next.id].let { if (it == 0) next.previousNodeCount else it } - 1
                 if (remaining == 0) {
                     result.add(next)
                 }

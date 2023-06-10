@@ -13,7 +13,7 @@ kotlin {
     linuxX64()
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation(project(":producer"))
             }

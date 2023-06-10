@@ -38,7 +38,7 @@ fun <T : CharSequence?> foo(x: T) {
     }
 
     if (1 == 1) {
-        val y = x!!
+        konst y = x!!
         bar1(<!DEBUG_INFO_SMARTCAST!>x<!>)
         bar1<CharSequence>(<!DEBUG_INFO_SMARTCAST!>x<!>)
         bar2(<!DEBUG_INFO_SMARTCAST!>x<!>)

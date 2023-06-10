@@ -4,7 +4,7 @@
 // Case that was found in kotlinx.coroutines
 
 fun test1() {
-    val flow = combine(
+    konst flow = combine(
         flowOf("1"),
         flowOf(2)
     ) { arr -> arr.joinToString() }
@@ -17,7 +17,7 @@ public inline fun <reified T, R> combine(
     crossinline transform: suspend (Array<T>) -> R
 ): Flow<R> = TODO()
 
-fun <T> flowOf(value: T): Flow<T> = TODO()
+fun <T> flowOf(konstue: T): Flow<T> = TODO()
 interface Flow<out T>
 
 fun box(): String {

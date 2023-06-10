@@ -116,11 +116,11 @@ public actual fun ByteArray.decodeToString(): String {
  *
  * @param startIndex the beginning (inclusive) of the subrange to decode, 0 by default.
  * @param endIndex the end (exclusive) of the subrange to decode, size of this array by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed byte sequence or replace it by the replacement char `\uFFFD`.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the size of this array.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if the byte array contains malformed UTF-8 byte sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
@@ -128,10 +128,10 @@ public actual fun ByteArray.decodeToString(): String {
 public actual fun ByteArray.decodeToString(
     startIndex: Int = 0,
     endIndex: Int = this.size,
-    throwOnInvalidSequence: Boolean = false
+    throwOnInkonstidSequence: Boolean = false
 ): String {
     AbstractList.checkBoundsIndexes(startIndex, endIndex, this.size)
-    return decodeUtf8(this, startIndex, endIndex, throwOnInvalidSequence)
+    return decodeUtf8(this, startIndex, endIndex, throwOnInkonstidSequence)
 }
 
 /**
@@ -150,11 +150,11 @@ public actual fun String.encodeToByteArray(): ByteArray {
  *
  * @param startIndex the beginning (inclusive) of the substring to encode, 0 by default.
  * @param endIndex the end (exclusive) of the substring to encode, length of this string by default.
- * @param throwOnInvalidSequence specifies whether to throw an exception on malformed char sequence or replace.
+ * @param throwOnInkonstidSequence specifies whether to throw an exception on malformed char sequence or replace.
  *
  * @throws IndexOutOfBoundsException if [startIndex] is less than zero or [endIndex] is greater than the length of this string.
  * @throws IllegalArgumentException if [startIndex] is greater than [endIndex].
- * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInvalidSequence] is true.
+ * @throws CharacterCodingException if this string contains malformed char sequence and [throwOnInkonstidSequence] is true.
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
@@ -162,10 +162,10 @@ public actual fun String.encodeToByteArray(): ByteArray {
 public actual fun String.encodeToByteArray(
     startIndex: Int = 0,
     endIndex: Int = this.length,
-    throwOnInvalidSequence: Boolean = false
+    throwOnInkonstidSequence: Boolean = false
 ): ByteArray {
     AbstractList.checkBoundsIndexes(startIndex, endIndex, length)
-    return encodeUtf8(this, startIndex, endIndex, throwOnInvalidSequence)
+    return encodeUtf8(this, startIndex, endIndex, throwOnInkonstidSequence)
 }
 
 /**
@@ -220,7 +220,7 @@ internal actual inline fun String.nativeLastIndexOf(str: String, fromIndex: Int)
 @kotlin.js.JsPolyfill("""
 if (typeof String.prototype.startsWith === "undefined") {
     Object.defineProperty(String.prototype, "startsWith", {
-        value: function (searchString, position) {
+        konstue: function (searchString, position) {
             position = position || 0;
             return this.lastIndexOf(searchString, position) === position;
         }
@@ -233,7 +233,7 @@ internal inline fun String.nativeStartsWith(s: String, position: Int): Boolean =
 @kotlin.js.JsPolyfill("""
 if (typeof String.prototype.endsWith === "undefined") {
     Object.defineProperty(String.prototype, "endsWith", {
-        value: function (searchString, position) {
+        konstue: function (searchString, position) {
             var subjectString = this.toString();
             if (position === undefined || position > subjectString.length) {
                 position = subjectString.length;
@@ -278,9 +278,9 @@ internal inline fun String.nativeReplace(pattern: RegExp, replacement: String): 
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun String.compareTo(other: String, ignoreCase: Boolean = false): Int {
     if (ignoreCase) {
-        val n1 = this.length
-        val n2 = other.length
-        val min = minOf(n1, n2)
+        konst n1 = this.length
+        konst n2 = other.length
+        konst min = minOf(n1, n2)
         if (min == 0) return n1 - n2
         for (index in 0 until min) {
             var thisChar = this[index]
@@ -331,8 +331,8 @@ public actual fun CharSequence?.contentEquals(other: CharSequence?, ignoreCase: 
 }
 
 
-private val STRING_CASE_INSENSITIVE_ORDER = Comparator<String> { a, b -> a.compareTo(b, ignoreCase = true) }
+private konst STRING_CASE_INSENSITIVE_ORDER = Comparator<String> { a, b -> a.compareTo(b, ignoreCase = true) }
 
 @SinceKotlin("1.2")
-public actual val String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
+public actual konst String.Companion.CASE_INSENSITIVE_ORDER: Comparator<String>
     get() = STRING_CASE_INSENSITIVE_ORDER

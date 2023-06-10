@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 
 // FILE: Z.kt
-inline class Z(val x: Int) {
+inline class Z(konst x: Int) {
     constructor(x: Long) : this(x.toInt())
     constructor(s: String) : this(s.length)
     constructor(a: Int, b: Int) : this(a + b)

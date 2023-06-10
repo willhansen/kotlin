@@ -291,7 +291,7 @@ public class TypeUtils {
     /**
      * A work-around of the generic nullability problem in the type checker
      * Semantics should be the same as `!isSubtype(T, Any)`
-     * @return true if a value of this type can be null
+     * @return true if a konstue of this type can be null
      */
     public static boolean isNullableType(@NotNull KotlinType type) {
         if (type.isMarkedNullable()) {
@@ -494,7 +494,7 @@ public class TypeUtils {
     @NotNull
     public static KotlinType getDefaultPrimitiveNumberType(@NotNull IntegerValueTypeConstructor numberValueTypeConstructor) {
         KotlinType type = getDefaultPrimitiveNumberType(numberValueTypeConstructor.getSupertypes());
-        assert type != null : "Strange number value type constructor: " + numberValueTypeConstructor + ". " +
+        assert type != null : "Strange number konstue type constructor: " + numberValueTypeConstructor + ". " +
                               "Super types doesn't contain double, int or long: " + numberValueTypeConstructor.getSupertypes();
         return type;
     }

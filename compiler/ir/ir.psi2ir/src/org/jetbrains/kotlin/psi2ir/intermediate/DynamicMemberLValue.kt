@@ -15,17 +15,17 @@ import org.jetbrains.kotlin.ir.expressions.right
 import org.jetbrains.kotlin.ir.types.IrType
 
 internal class DynamicMemberLValue(
-    private val context: IrGeneratorContext,
-    private val startOffset: Int,
-    private val endOffset: Int,
-    override val type: IrType,
-    private val memberName: String,
-    private val receiver: CallReceiver
+    private konst context: IrGeneratorContext,
+    private konst startOffset: Int,
+    private konst endOffset: Int,
+    override konst type: IrType,
+    private konst memberName: String,
+    private konst receiver: CallReceiver
 ) : LValue, AssignmentReceiver {
 
     override fun load(): IrExpression =
         receiver.call { dispatchReceiverValue, extensionReceiverValue, _ ->
-            val dynamicReceiver = getDynamicReceiver(dispatchReceiverValue, extensionReceiverValue)
+            konst dynamicReceiver = getDynamicReceiver(dispatchReceiverValue, extensionReceiverValue)
 
             IrDynamicMemberExpressionImpl(
                 startOffset, endOffset,
@@ -37,7 +37,7 @@ internal class DynamicMemberLValue(
 
     override fun store(irExpression: IrExpression): IrExpression =
         receiver.call { dispatchReceiverValue, extensionReceiverValue, _ ->
-            val dynamicReceiver = getDynamicReceiver(dispatchReceiverValue, extensionReceiverValue)
+            konst dynamicReceiver = getDynamicReceiver(dispatchReceiverValue, extensionReceiverValue)
 
             IrDynamicOperatorExpressionImpl(
                 startOffset, endOffset,

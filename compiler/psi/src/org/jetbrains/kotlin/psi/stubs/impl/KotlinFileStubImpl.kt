@@ -33,11 +33,11 @@ import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 class KotlinFileStubImpl(
     ktFile: KtFile?,
-    private val packageName: String,
-    private val isScript: Boolean,
-    private val facadeFqNameString: String?,
-    val partSimpleName: String?,
-    val facadePartSimpleNames: List<String>?,
+    private konst packageName: String,
+    private konst isScript: Boolean,
+    private konst facadeFqNameString: String?,
+    konst partSimpleName: String?,
+    konst facadePartSimpleNames: List<String>?,
 ) : PsiFileStubImpl<KtFile>(ktFile), KotlinFileStub, PsiClassHolderFileStub<KtFile> {
 
     constructor(ktFile: KtFile?, packageName: String, isScript: Boolean) : this(
@@ -51,10 +51,10 @@ class KotlinFileStubImpl(
 
     private fun String.relativeToPackage() = getPackageFqName().child(Name.identifier(this))
 
-    val partFqName: FqName?
+    konst partFqName: FqName?
         get() = partSimpleName?.relativeToPackage()
 
-    val facadeFqName: FqName?
+    konst facadeFqName: FqName?
         get() = facadeFqNameString?.let(::FqName)
 
     override fun getPackageFqName(): FqName = FqName(packageName)
@@ -68,7 +68,7 @@ class KotlinFileStubImpl(
     }
 
     override fun findImportsByAlias(alias: String): List<KotlinImportDirectiveStub> {
-        val importList = childrenStubs.firstOrNull { it.stubType == IMPORT_LIST } ?: return emptyList()
+        konst importList = childrenStubs.firstOrNull { it.stubType == IMPORT_LIST } ?: return emptyList()
         return importList.childrenStubs.filterIsInstance<KotlinImportDirectiveStub>().filter {
             it.childrenStubs.firstIsInstanceOrNull<KotlinImportAliasStub>()?.getName() == alias
         }

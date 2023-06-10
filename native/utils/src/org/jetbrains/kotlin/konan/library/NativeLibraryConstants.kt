@@ -7,15 +7,15 @@ package org.jetbrains.kotlin.konan.library
 
 import java.io.File
 
-const val KONAN_STDLIB_NAME = "stdlib"
+const konst KONAN_STDLIB_NAME = "stdlib"
 
-const val KONAN_DISTRIBUTION_KLIB_DIR = "klib"
-const val KONAN_DISTRIBUTION_COMMON_LIBS_DIR = "common"
-const val KONAN_DISTRIBUTION_PLATFORM_LIBS_DIR = "platform"
-const val KONAN_DISTRIBUTION_COMMONIZED_LIBS_DIR = "commonized"
-const val KLIB_INTEROP_IR_PROVIDER_IDENTIFIER = "kotlin.native.cinterop"
+const konst KONAN_DISTRIBUTION_KLIB_DIR = "klib"
+const konst KONAN_DISTRIBUTION_COMMON_LIBS_DIR = "common"
+const konst KONAN_DISTRIBUTION_PLATFORM_LIBS_DIR = "platform"
+const konst KONAN_DISTRIBUTION_COMMONIZED_LIBS_DIR = "commonized"
+const konst KLIB_INTEROP_IR_PROVIDER_IDENTIFIER = "kotlin.native.cinterop"
 
-const val KONAN_DISTRIBUTION_SOURCES_DIR = "sources"
+const konst KONAN_DISTRIBUTION_SOURCES_DIR = "sources"
 
 fun konanCommonLibraryPath(libraryName: String) =
     File(KONAN_DISTRIBUTION_KLIB_DIR, KONAN_DISTRIBUTION_COMMON_LIBS_DIR).resolve(libraryName)
@@ -24,4 +24,4 @@ fun konanPlatformLibraryPath(libraryName: String, platform: String) =
     File(KONAN_DISTRIBUTION_KLIB_DIR, KONAN_DISTRIBUTION_PLATFORM_LIBS_DIR).resolve(platform).resolve(libraryName)
 
 // Used to provide unique names for platform libraries according to KT-36720.
-const val KONAN_PLATFORM_LIBS_NAME_PREFIX = "org.jetbrains.kotlin.native.platform."
+const konst KONAN_PLATFORM_LIBS_NAME_PREFIX = "org.jetbrains.kotlin.native.platform."

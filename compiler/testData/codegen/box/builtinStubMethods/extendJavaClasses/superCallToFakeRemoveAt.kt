@@ -11,7 +11,7 @@ class Test : IntArrayList() {
 }
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     t.add(1)
     t.removeAt(0)
     // Just check that there's no exception (e.g., NSME)

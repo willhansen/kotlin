@@ -7,10 +7,10 @@ public interface My {
 // FILE: test.kt
 
 class Your {
-    val x = My() {
+    konst x = My() {
         arg: String? ->
         var y = arg
-        val z: String
+        konst z: String
         if (y != null) z = <!DEBUG_INFO_SMARTCAST!>y<!>
         else z = "42"
         z

@@ -10,7 +10,7 @@ interface Logger {
 }
 
 interface WithLogger {
-    val logger: Logger
+    konst logger: Logger
 }
 
 object DummyLogger : Logger {

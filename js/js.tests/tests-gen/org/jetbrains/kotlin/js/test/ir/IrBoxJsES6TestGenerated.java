@@ -1615,15 +1615,15 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Test
-        @TestMetadata("delegationEvaluationOrder1.kt")
-        public void testDelegationEvaluationOrder1() throws Exception {
-            runTest("js/js.translator/testData/box/delegation/delegationEvaluationOrder1.kt");
+        @TestMetadata("delegationEkonstuationOrder1.kt")
+        public void testDelegationEkonstuationOrder1() throws Exception {
+            runTest("js/js.translator/testData/box/delegation/delegationEkonstuationOrder1.kt");
         }
 
         @Test
-        @TestMetadata("delegationEvaluationOrder2.kt")
-        public void testDelegationEvaluationOrder2() throws Exception {
-            runTest("js/js.translator/testData/box/delegation/delegationEvaluationOrder2.kt");
+        @TestMetadata("delegationEkonstuationOrder2.kt")
+        public void testDelegationEkonstuationOrder2() throws Exception {
+            runTest("js/js.translator/testData/box/delegation/delegationEkonstuationOrder2.kt");
         }
 
         @Test
@@ -3347,246 +3347,246 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Nested
-        @TestMetadata("js/js.translator/testData/box/expression/evaluationOrder")
+        @TestMetadata("js/js.translator/testData/box/expression/ekonstuationOrder")
         @TestDataPath("$PROJECT_ROOT")
-        public class EvaluationOrder {
+        public class EkonstuationOrder {
             @Test
             @TestMetadata("2dangerousInExpression.kt")
             public void test2dangerousInExpression() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/2dangerousInExpression.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/2dangerousInExpression.kt");
             }
 
             @Test
-            public void testAllFilesPresentInEvaluationOrder() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/expression/evaluationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
+            public void testAllFilesPresentInEkonstuationOrder() throws Exception {
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/expression/ekonstuationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
             }
 
             @Test
             @TestMetadata("andAndWithBreakContinueReturn.kt")
             public void testAndAndWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/andAndWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/andAndWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("andAndWithSideEffect.kt")
             public void testAndAndWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/andAndWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/andAndWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("andAndWithTmpVarRhs.kt")
             public void testAndAndWithTmpVarRhs() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/andAndWithTmpVarRhs.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/andAndWithTmpVarRhs.kt");
             }
 
             @Test
             @TestMetadata("assignToArrayElementWithSideEffect.kt")
             public void testAssignToArrayElementWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/assignToArrayElementWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/assignToArrayElementWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("assignToDotQualifiedWithSideEffect.kt")
             public void testAssignToDotQualifiedWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/assignToDotQualifiedWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/assignToDotQualifiedWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("booleanAndOr.kt")
             public void testBooleanAndOr() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/booleanAndOr.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/booleanAndOr.kt");
             }
 
             @Test
             @TestMetadata("callArgs.kt")
             public void testCallArgs() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/callArgs.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/callArgs.kt");
             }
 
             @Test
             @TestMetadata("callVarargs.kt")
             public void testCallVarargs() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/callVarargs.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/callVarargs.kt");
             }
 
             @Test
             @TestMetadata("callWithBreakContinueReturn.kt")
             public void testCallWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/callWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/callWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("castWithBreakContinueReturn.kt")
             public void testCastWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/castWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/castWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("compareToIntrinsicWithSideEffect.kt")
             public void testCompareToIntrinsicWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/compareToIntrinsicWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/compareToIntrinsicWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("concatWithTerminator.kt")
             public void testConcatWithTerminator() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/concatWithTerminator.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/concatWithTerminator.kt");
             }
 
             @Test
             @TestMetadata("dangerousInline.kt")
             public void testDangerousInline() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/dangerousInline.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/dangerousInline.kt");
             }
 
             @Test
             @TestMetadata("dangerousInsideDangerous.kt")
             public void testDangerousInsideDangerous() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/dangerousInsideDangerous.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/dangerousInsideDangerous.kt");
             }
 
             @Test
             @TestMetadata("deepExpression.kt")
             public void testDeepExpression() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/deepExpression.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/deepExpression.kt");
             }
 
             @Test
             @TestMetadata("delegationCtorWithExpression.kt")
             public void testDelegationCtorWithExpression() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/delegationCtorWithExpression.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/delegationCtorWithExpression.kt");
             }
 
             @Test
             @TestMetadata("elvisComplex.kt")
             public void testElvisComplex() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/elvisComplex.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/elvisComplex.kt");
             }
 
             @Test
             @TestMetadata("elvisWithBreakContinueReturn.kt")
             public void testElvisWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/elvisWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/elvisWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("emptyLoopWithBreakContinueReturnInCondition.kt")
             public void testEmptyLoopWithBreakContinueReturnInCondition() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/emptyLoopWithBreakContinueReturnInCondition.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/emptyLoopWithBreakContinueReturnInCondition.kt");
             }
 
             @Test
             @TestMetadata("equalsIntrinsicWithSideEffect.kt")
             public void testEqualsIntrinsicWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/equalsIntrinsicWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/equalsIntrinsicWithSideEffect.kt");
             }
 
             @Test
-            @TestMetadata("evaluationOrder1.kt")
-            public void testEvaluationOrder1() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/evaluationOrder1.kt");
+            @TestMetadata("ekonstuationOrder1.kt")
+            public void testEkonstuationOrder1() throws Exception {
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/ekonstuationOrder1.kt");
             }
 
             @Test
-            @TestMetadata("evaluationOrder2.kt")
-            public void testEvaluationOrder2() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/evaluationOrder2.kt");
+            @TestMetadata("ekonstuationOrder2.kt")
+            public void testEkonstuationOrder2() throws Exception {
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/ekonstuationOrder2.kt");
             }
 
             @Test
             @TestMetadata("ifAsFunArgument.kt")
             public void testIfAsFunArgument() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/ifAsFunArgument.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/ifAsFunArgument.kt");
             }
 
             @Test
             @TestMetadata("ifAsPlusArgument.kt")
             public void testIfAsPlusArgument() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/ifAsPlusArgument.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/ifAsPlusArgument.kt");
             }
 
             @Test
             @TestMetadata("ifWithComplex.kt")
             public void testIfWithComplex() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/ifWithComplex.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/ifWithComplex.kt");
             }
 
             @Test
             @TestMetadata("intrinsicComplex.kt")
             public void testIntrinsicComplex() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/intrinsicComplex.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/intrinsicComplex.kt");
             }
 
             @Test
             @TestMetadata("intrinsicWithBreakContinueReturn.kt")
             public void testIntrinsicWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/intrinsicWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/intrinsicWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("literalFunctionAsArgumentWithSideEffect.kt")
             public void testLiteralFunctionAsArgumentWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/literalFunctionAsArgumentWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/literalFunctionAsArgumentWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("loopWithBreakContinueReturnInCondition.kt")
             public void testLoopWithBreakContinueReturnInCondition() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/loopWithBreakContinueReturnInCondition.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/loopWithBreakContinueReturnInCondition.kt");
             }
 
             @Test
             @TestMetadata("orOrWithBreakContinueReturn.kt")
             public void testOrOrWithBreakContinueReturn() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/orOrWithBreakContinueReturn.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/orOrWithBreakContinueReturn.kt");
             }
 
             @Test
             @TestMetadata("orOrWithSideEffect.kt")
             public void testOrOrWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/orOrWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/orOrWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("reassignmentLhsCaching.kt")
             public void testReassignmentLhsCaching() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/reassignmentLhsCaching.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/reassignmentLhsCaching.kt");
             }
 
             @Test
             @TestMetadata("secondaryConstructorTemporaryVars.kt")
             public void testSecondaryConstructorTemporaryVars() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/secondaryConstructorTemporaryVars.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/secondaryConstructorTemporaryVars.kt");
             }
 
             @Test
             @TestMetadata("singleComponentDestructuring.kt")
             public void testSingleComponentDestructuring() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/singleComponentDestructuring.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/singleComponentDestructuring.kt");
             }
 
             @Test
             @TestMetadata("throwableDelegation.kt")
             public void testThrowableDelegation() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/throwableDelegation.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/throwableDelegation.kt");
             }
 
             @Test
             @TestMetadata("whenAsMinusArgument.kt")
             public void testWhenAsMinusArgument() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/whenAsMinusArgument.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/whenAsMinusArgument.kt");
             }
 
             @Test
             @TestMetadata("whenJsLiteralWithSideEffect.kt")
             public void testWhenJsLiteralWithSideEffect() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/whenJsLiteralWithSideEffect.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/whenJsLiteralWithSideEffect.kt");
             }
 
             @Test
             @TestMetadata("whenWithComplexConditions.kt")
             public void testWhenWithComplexConditions() throws Exception {
-                runTest("js/js.translator/testData/box/expression/evaluationOrder/whenWithComplexConditions.kt");
+                runTest("js/js.translator/testData/box/expression/ekonstuationOrder/whenWithComplexConditions.kt");
             }
         }
 
@@ -4320,9 +4320,9 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
             }
 
             @Test
-            @TestMetadata("stringInterpolationEvaluationOrder.kt")
-            public void testStringInterpolationEvaluationOrder() throws Exception {
-                runTest("js/js.translator/testData/box/expression/misc/stringInterpolationEvaluationOrder.kt");
+            @TestMetadata("stringInterpolationEkonstuationOrder.kt")
+            public void testStringInterpolationEkonstuationOrder() throws Exception {
+                runTest("js/js.translator/testData/box/expression/misc/stringInterpolationEkonstuationOrder.kt");
             }
 
             @Test
@@ -4706,9 +4706,9 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
             }
 
             @Test
-            @TestMetadata("whenEvaluatesArgumentOnlyOnce.kt")
-            public void testWhenEvaluatesArgumentOnlyOnce() throws Exception {
-                runTest("js/js.translator/testData/box/expression/when/whenEvaluatesArgumentOnlyOnce.kt");
+            @TestMetadata("whenEkonstuatesArgumentOnlyOnce.kt")
+            public void testWhenEkonstuatesArgumentOnlyOnce() throws Exception {
+                runTest("js/js.translator/testData/box/expression/when/whenEkonstuatesArgumentOnlyOnce.kt");
             }
 
             @Test
@@ -5279,15 +5279,15 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Test
-        @TestMetadata("valOverride.kt")
+        @TestMetadata("konstOverride.kt")
         public void testValOverride() throws Exception {
-            runTest("js/js.translator/testData/box/inheritance/valOverride.kt");
+            runTest("js/js.translator/testData/box/inheritance/konstOverride.kt");
         }
 
         @Test
-        @TestMetadata("valuePassedToAncestorConstructor.kt")
+        @TestMetadata("konstuePassedToAncestorConstructor.kt")
         public void testValuePassedToAncestorConstructor() throws Exception {
-            runTest("js/js.translator/testData/box/inheritance/valuePassedToAncestorConstructor.kt");
+            runTest("js/js.translator/testData/box/inheritance/konstuePassedToAncestorConstructor.kt");
         }
 
         @Test
@@ -5952,336 +5952,336 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
     }
 
     @Nested
-    @TestMetadata("js/js.translator/testData/box/inlineEvaluationOrder")
+    @TestMetadata("js/js.translator/testData/box/inlineEkonstuationOrder")
     @TestDataPath("$PROJECT_ROOT")
-    public class InlineEvaluationOrder {
+    public class InlineEkonstuationOrder {
         @Test
-        public void testAllFilesPresentInInlineEvaluationOrder() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/inlineEvaluationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
+        public void testAllFilesPresentInInlineEkonstuationOrder() throws Exception {
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("js/js.translator/testData/box/inlineEkonstuationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.JS_IR_ES6, true);
         }
 
         @Test
         @TestMetadata("alsoWithReassingment.kt")
         public void testAlsoWithReassingment() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/alsoWithReassingment.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/alsoWithReassingment.kt");
         }
 
         @Test
         @TestMetadata("argumentOfCall.kt")
         public void testArgumentOfCall() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/argumentOfCall.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/argumentOfCall.kt");
         }
 
         @Test
         @TestMetadata("argumentOfCallMultipleInlineCalls.kt")
         public void testArgumentOfCallMultipleInlineCalls() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/argumentOfCallMultipleInlineCalls.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/argumentOfCallMultipleInlineCalls.kt");
         }
 
         @Test
         @TestMetadata("argumentOfInlineCall.kt")
         public void testArgumentOfInlineCall() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/argumentOfInlineCall.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/argumentOfInlineCall.kt");
         }
 
         @Test
         @TestMetadata("argumentOfNew.kt")
         public void testArgumentOfNew() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/argumentOfNew.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/argumentOfNew.kt");
         }
 
         @Test
         @TestMetadata("arrayAccess1.kt")
         public void testArrayAccess1() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayAccess1.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayAccess1.kt");
         }
 
         @Test
         @TestMetadata("arrayAccess2.kt")
         public void testArrayAccess2() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayAccess2.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayAccess2.kt");
         }
 
         @Test
         @TestMetadata("arrayAccess3.kt")
         public void testArrayAccess3() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayAccess3.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayAccess3.kt");
         }
 
         @Test
         @TestMetadata("arrayAccessLhsDecomposed.kt")
         public void testArrayAccessLhsDecomposed() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayAccessLhsDecomposed.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayAccessLhsDecomposed.kt");
         }
 
         @Test
         @TestMetadata("arrayLiteral.kt")
         public void testArrayLiteral() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayLiteral.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayLiteral.kt");
         }
 
         @Test
         @TestMetadata("arrayLiteralMultipleInlineCalls.kt")
         public void testArrayLiteralMultipleInlineCalls() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayLiteralMultipleInlineCalls.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayLiteralMultipleInlineCalls.kt");
         }
 
         @Test
         @TestMetadata("arrayLiteralNested.kt")
         public void testArrayLiteralNested() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/arrayLiteralNested.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/arrayLiteralNested.kt");
         }
 
         @Test
         @TestMetadata("assignment.kt")
         public void testAssignment() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/assignment.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/assignment.kt");
         }
 
         @Test
         @TestMetadata("binaryOperator.kt")
         public void testBinaryOperator() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/binaryOperator.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/binaryOperator.kt");
         }
 
         @Test
         @TestMetadata("binaryOperatorMultipleInlineCalls.kt")
         public void testBinaryOperatorMultipleInlineCalls() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/binaryOperatorMultipleInlineCalls.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/binaryOperatorMultipleInlineCalls.kt");
         }
 
         @Test
         @TestMetadata("callQualifier.kt")
         public void testCallQualifier() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/callQualifier.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/callQualifier.kt");
         }
 
         @Test
         @TestMetadata("callQualifierComplex.kt")
         public void testCallQualifierComplex() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/callQualifierComplex.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/callQualifierComplex.kt");
         }
 
         @Test
         @TestMetadata("capturedVarAsArgument.kt")
         public void testCapturedVarAsArgument() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/capturedVarAsArgument.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/capturedVarAsArgument.kt");
         }
 
         @Test
         @TestMetadata("conditional.kt")
         public void testConditional() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/conditional.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/conditional.kt");
         }
 
         @Test
         @TestMetadata("conditionalElvis.kt")
         public void testConditionalElvis() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/conditionalElvis.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/conditionalElvis.kt");
         }
 
         @Test
         @TestMetadata("conditionalNested.kt")
         public void testConditionalNested() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/conditionalNested.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/conditionalNested.kt");
         }
 
         @Test
         @TestMetadata("conditionalTestExpression.kt")
         public void testConditionalTestExpression() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/conditionalTestExpression.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/conditionalTestExpression.kt");
         }
 
         @Test
         @TestMetadata("conditionalTestExpressionElvis.kt")
         public void testConditionalTestExpressionElvis() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/conditionalTestExpressionElvis.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/conditionalTestExpressionElvis.kt");
         }
 
         @Test
         @TestMetadata("continueInExtractedDoWhile.kt")
         public void testContinueInExtractedDoWhile() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/continueInExtractedDoWhile.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/continueInExtractedDoWhile.kt");
         }
 
         @Test
         @TestMetadata("doWhile.kt")
         public void testDoWhile() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/doWhile.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/doWhile.kt");
         }
 
         @Test
         @TestMetadata("doWhileComplex.kt")
         public void testDoWhileComplex() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/doWhileComplex.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/doWhileComplex.kt");
         }
 
         @Test
         @TestMetadata("for.kt")
         public void testFor() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/for.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/for.kt");
         }
 
         @Test
         @TestMetadata("if.kt")
         public void testIf() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/if.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/if.kt");
         }
 
         @Test
         @TestMetadata("inlineFunctionAsParameterOfQualifiedCall.kt")
         public void testInlineFunctionAsParameterOfQualifiedCall() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/inlineFunctionAsParameterOfQualifiedCall.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/inlineFunctionAsParameterOfQualifiedCall.kt");
         }
 
         @Test
         @TestMetadata("lambdaPropertyExtracted.kt")
         public void testLambdaPropertyExtracted() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/lambdaPropertyExtracted.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/lambdaPropertyExtracted.kt");
         }
 
         @Test
         @TestMetadata("lambdaWithClosure.kt")
         public void testLambdaWithClosure() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/lambdaWithClosure.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/lambdaWithClosure.kt");
         }
 
         @Test
         @TestMetadata("logicalAnd.kt")
         public void testLogicalAnd() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/logicalAnd.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/logicalAnd.kt");
         }
 
         @Test
         @TestMetadata("logicalAndOrMultipleInlineCalls.kt")
         public void testLogicalAndOrMultipleInlineCalls() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/logicalAndOrMultipleInlineCalls.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/logicalAndOrMultipleInlineCalls.kt");
         }
 
         @Test
         @TestMetadata("logicalOr.kt")
         public void testLogicalOr() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/logicalOr.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/logicalOr.kt");
         }
 
         @Test
         @TestMetadata("methodCallQualifierWithSideEffect.kt")
         public void testMethodCallQualifierWithSideEffect() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/methodCallQualifierWithSideEffect.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/methodCallQualifierWithSideEffect.kt");
         }
 
         @Test
         @TestMetadata("methodDecomposedWithBind.kt")
         public void testMethodDecomposedWithBind() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/methodDecomposedWithBind.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/methodDecomposedWithBind.kt");
         }
 
         @Test
         @TestMetadata("methodInlineCallQualifierWithSideEffect.kt")
         public void testMethodInlineCallQualifierWithSideEffect() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/methodInlineCallQualifierWithSideEffect.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/methodInlineCallQualifierWithSideEffect.kt");
         }
 
         @Test
         @TestMetadata("multiDeclaration.kt")
         public void testMultiDeclaration() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/multiDeclaration.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/multiDeclaration.kt");
         }
 
         @Test
         @TestMetadata("multiDeclarationComplex.kt")
         public void testMultiDeclarationComplex() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/multiDeclarationComplex.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/multiDeclarationComplex.kt");
         }
 
         @Test
         @TestMetadata("nestedContinueInExtractedDoWhile.kt")
         public void testNestedContinueInExtractedDoWhile() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/nestedContinueInExtractedDoWhile.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/nestedContinueInExtractedDoWhile.kt");
         }
 
         @Test
         @TestMetadata("nestedInlineCall.kt")
         public void testNestedInlineCall() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/nestedInlineCall.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/nestedInlineCall.kt");
         }
 
         @Test
         @TestMetadata("propertiesInitializationOrder.kt")
         public void testPropertiesInitializationOrder() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertiesInitializationOrder.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertiesInitializationOrder.kt");
         }
 
         @Test
         @TestMetadata("propertiesInitializationOrderSimple.kt")
         public void testPropertiesInitializationOrderSimple() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertiesInitializationOrderSimple.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertiesInitializationOrderSimple.kt");
         }
 
         @Test
         @TestMetadata("propertyAccessAfterModification.kt")
         public void testPropertyAccessAfterModification() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyAccessAfterModification.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyAccessAfterModification.kt");
         }
 
         @Test
         @TestMetadata("propertyAccessAndInitializer.kt")
         public void testPropertyAccessAndInitializer() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyAccessAndInitializer.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyAccessAndInitializer.kt");
         }
 
         @Test
         @TestMetadata("propertyAccessExternalWithSideEffect.kt")
         public void testPropertyAccessExternalWithSideEffect() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyAccessExternalWithSideEffect.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyAccessExternalWithSideEffect.kt");
         }
 
         @Test
         @TestMetadata("propertyAccessWithSideEffect.kt")
         public void testPropertyAccessWithSideEffect() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyAccessWithSideEffect.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyAccessWithSideEffect.kt");
         }
 
         @Test
         @TestMetadata("propertyWithSideEffectExtracted.kt")
         public void testPropertyWithSideEffectExtracted() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyWithSideEffectExtracted.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyWithSideEffectExtracted.kt");
         }
 
         @Test
         @TestMetadata("propertyWithSideEffectPassedToInlineFunction.kt")
         public void testPropertyWithSideEffectPassedToInlineFunction() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/propertyWithSideEffectPassedToInlineFunction.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/propertyWithSideEffectPassedToInlineFunction.kt");
         }
 
         @Test
         @TestMetadata("temporaryVarNonTrivial.kt")
         public void testTemporaryVarNonTrivial() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/temporaryVarNonTrivial.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/temporaryVarNonTrivial.kt");
         }
 
         @Test
         @TestMetadata("ternaryConditional.kt")
         public void testTernaryConditional() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/ternaryConditional.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/ternaryConditional.kt");
         }
 
         @Test
         @TestMetadata("while.kt")
         public void testWhile() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/while.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/while.kt");
         }
 
         @Test
         @TestMetadata("whileComplex.kt")
         public void testWhileComplex() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/whileComplex.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/whileComplex.kt");
         }
 
         @Test
         @TestMetadata("whileConditionExtracted.kt")
         public void testWhileConditionExtracted() throws Exception {
-            runTest("js/js.translator/testData/box/inlineEvaluationOrder/whileConditionExtracted.kt");
+            runTest("js/js.translator/testData/box/inlineEkonstuationOrder/whileConditionExtracted.kt");
         }
     }
 
@@ -6777,15 +6777,15 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Test
-        @TestMetadata("valAssignment.kt")
+        @TestMetadata("konstAssignment.kt")
         public void testValAssignment() throws Exception {
-            runTest("js/js.translator/testData/box/inlineSizeReduction/valAssignment.kt");
+            runTest("js/js.translator/testData/box/inlineSizeReduction/konstAssignment.kt");
         }
 
         @Test
-        @TestMetadata("valDeclaration.kt")
+        @TestMetadata("konstDeclaration.kt")
         public void testValDeclaration() throws Exception {
-            runTest("js/js.translator/testData/box/inlineSizeReduction/valDeclaration.kt");
+            runTest("js/js.translator/testData/box/inlineSizeReduction/konstDeclaration.kt");
         }
 
         @Test
@@ -8435,9 +8435,9 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Test
-        @TestMetadata("eval.kt")
-        public void testEval() throws Exception {
-            runTest("js/js.translator/testData/box/native/eval.kt");
+        @TestMetadata("ekonst.kt")
+        public void testEkonst() throws Exception {
+            runTest("js/js.translator/testData/box/native/ekonst.kt");
         }
 
         @Test
@@ -8615,9 +8615,9 @@ public class IrBoxJsES6TestGenerated extends AbstractIrBoxJsES6Test {
         }
 
         @Test
-        @TestMetadata("valueClass.kt")
+        @TestMetadata("konstueClass.kt")
         public void testValueClass() throws Exception {
-            runTest("js/js.translator/testData/box/native/valueClass.kt");
+            runTest("js/js.translator/testData/box/native/konstueClass.kt");
         }
 
         @Test

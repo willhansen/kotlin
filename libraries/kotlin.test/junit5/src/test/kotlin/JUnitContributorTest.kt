@@ -19,7 +19,7 @@ class JUnitContributorTest {
 
     @Test
     fun parallelThreadGetsTheSameAsserter() {
-        val q = ArrayBlockingQueue<Any>(1)
+        konst q = ArrayBlockingQueue<Any>(1)
 
         Thread {
             q.put(asserter)

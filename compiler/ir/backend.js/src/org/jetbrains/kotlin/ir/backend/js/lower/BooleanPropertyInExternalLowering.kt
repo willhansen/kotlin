@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.js.config.RuntimeDiagnostic
 
 class BooleanPropertyInExternalLowering(
-    private val context: JsIrBackendContext
+    private konst context: JsIrBackendContext
 ) : BodyLoweringPass {
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -37,25 +37,25 @@ class BooleanPropertyInExternalLowering(
     }
 
     private class ExternalBooleanPropertyProcessor(
-        private val context: JsIrBackendContext
+        private konst context: JsIrBackendContext
     ) : IrElementTransformerVoid() {
 
-        private val safeExternalBoolean
+        private konst safeExternalBoolean
             get() = context.safeExternalBoolean
 
-        private val safeExternalBooleanDiagnostic
+        private konst safeExternalBooleanDiagnostic
             get() = context.safeExternalBooleanDiagnostic
 
-        private val booleanType
+        private konst booleanType
             get() = context.irBuiltIns.booleanType
 
 
         override fun visitCall(expression: IrCall): IrExpression {
             expression.transformChildrenVoid(this)
 
-            val symbol = expression.symbol
-            val callee = symbol.owner
-            val property = callee.correspondingPropertySymbol?.owner ?: return expression
+            konst symbol = expression.symbol
+            konst callee = symbol.owner
+            konst property = callee.correspondingPropertySymbol?.owner ?: return expression
 
             if (!property.isEffectivelyExternal()) return expression
 
@@ -63,7 +63,7 @@ class BooleanPropertyInExternalLowering(
 
             if (callee.returnType != booleanType) return expression
 
-            val function = safeExternalBooleanDiagnostic?.diagnosticMethod()
+            konst function = safeExternalBooleanDiagnostic?.diagnosticMethod()
 
             if (!safeExternalBoolean && function == null) return expression
 
@@ -76,8 +76,8 @@ class BooleanPropertyInExternalLowering(
             }
 
             return context.createIrBuilder(symbol).irBlock {
-                val tmp = createTmpVariable(expression)
-                val call = JsIrBuilder.buildCall(
+                konst tmp = createTmpVariable(expression)
+                konst call = JsIrBuilder.buildCall(
                     target = function!!
                 ).apply {
                     putValueArgument(
@@ -89,7 +89,7 @@ class BooleanPropertyInExternalLowering(
 
                 +call
 
-                val newBooleanGet = if (safeExternalBoolean) {
+                konst newBooleanGet = if (safeExternalBoolean) {
                     JsIrBuilder.buildCall(
                         target = this@ExternalBooleanPropertyProcessor.context.intrinsics.jsNativeBoolean
                     ).apply {

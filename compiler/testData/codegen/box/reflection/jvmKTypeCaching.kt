@@ -7,9 +7,9 @@ class A
 
 fun box(): String {
     return synchronized(ReflectionFactoryImpl::class.java) {
-        val clz = A::class
+        konst clz = A::class
         System.gc()
-        val clz2 = A::class
+        konst clz2 = A::class
         if (clz === clz2) return@synchronized "OK"
         return@synchronized "Fail"
     }

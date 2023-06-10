@@ -227,7 +227,7 @@ public class ExpressionTypingVisitorForStatements extends ExpressionTypingVisito
         } else if (!ArgumentTypeResolver.isFunctionLiteralOrCallableReference(right, context) &&
                    !context.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
         ) {
-            // Cache the type info for the right hand side so that we don't evaluate it twice if there is no valid plusAssign.
+            // Cache the type info for the right hand side so that we don't ekonstuate it twice if there is no konstid plusAssign.
             // We skip over function literals and references, since ArgumentTypeResolver will only resolve the shape of the
             // function type before attempting to resolve the call.
             facade.getTypeInfo(right, context.replaceContextDependency(ContextDependency.DEPENDENT));
@@ -474,7 +474,7 @@ public class ExpressionTypingVisitorForStatements extends ExpressionTypingVisito
             if (left != null && expectedType != null && rightType != null) {
                 DataFlowValue leftValue = components.dataFlowValueFactory.createDataFlowValue(left, expectedType, context);
                 DataFlowValue rightValue = components.dataFlowValueFactory.createDataFlowValue(right, rightType, context);
-                // We cannot say here anything new about rightValue except it has the same value as leftValue
+                // We cannot say here anything new about rightValue except it has the same konstue as leftValue
                 resultInfo = resultInfo.replaceDataFlowInfo(dataFlowInfo.assign(leftValue, rightValue, components.languageVersionSettings));
                 NewSchemeOfIntegerOperatorResolutionChecker.checkArgument(expectedType, right, context.trace, components.moduleDescriptor);
             }

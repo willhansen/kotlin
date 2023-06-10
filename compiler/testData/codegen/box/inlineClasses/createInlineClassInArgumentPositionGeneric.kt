@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsInt<T: Int>(val value: T) {
+konstue class AsInt<T: Int>(konst konstue: T) {
     override fun toString(): String {
-        return "asInt: ${value.toString()}"
+        return "asInt: ${konstue.toString()}"
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class AsAny<T: Any>(val value: T) {
+konstue class AsAny<T: Any>(konst konstue: T) {
     override fun toString(): String {
-        return "asAny: ${value.toString()}"
+        return "asAny: ${konstue.toString()}"
     }
 }
 

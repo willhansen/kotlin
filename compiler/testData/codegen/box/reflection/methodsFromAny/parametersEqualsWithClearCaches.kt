@@ -6,12 +6,12 @@ import kotlin.reflect.KMutableProperty
 import kotlin.test.assertEquals
 
 inline fun check(message: String, generate: () -> Any?) {
-    val x1: Any?
-    val x2: Any?
+    konst x1: Any?
+    konst x2: Any?
     try {
         x1 = generate()
 
-        // Force clear the internal maps, as if the weak values in them are garbage-collected.
+        // Force clear the internal maps, as if the weak konstues in them are garbage-collected.
         synchronized(kotlin.reflect.jvm.internal.ReflectionFactoryImpl::class.java) {
             kotlin.reflect.jvm.internal.ReflectionFactoryImpl.clearCaches()
         }
@@ -31,13 +31,13 @@ class C(c: Any) {
 
     var <X> X.x: X
         get() = this
-        set(value) {}
+        set(konstue) {}
 }
 
 fun box(): String {
     check("constructor parameter") { C::class.constructors.single().parameters.single() }
     check("instance parameter") { C::class.members.single { it.name == "a" }.parameters[0] }
-    check("value parameter") { C::class.members.single { it.name == "a" }.parameters[1] }
+    check("konstue parameter") { C::class.members.single { it.name == "a" }.parameters[1] }
 
     check("extension receiver parameter") { (C::class.members.single { it.name == "x" } as KMutableProperty<*>).parameters[1] }
 

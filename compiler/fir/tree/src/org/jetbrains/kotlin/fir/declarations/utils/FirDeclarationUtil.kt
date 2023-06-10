@@ -11,33 +11,33 @@ import org.jetbrains.kotlin.fir.types.coneTypeSafe
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
-val FirTypeAlias.expandedConeType: ConeClassLikeType? get() = expandedTypeRef.coneTypeSafe()
+konst FirTypeAlias.expandedConeType: ConeClassLikeType? get() = expandedTypeRef.coneTypeSafe()
 
-val FirClassLikeDeclaration.classId: ClassId
+konst FirClassLikeDeclaration.classId: ClassId
     get() = symbol.classId
 
-val FirClass.superConeTypes: List<ConeClassLikeType> get() = superTypeRefs.mapNotNull { it.coneTypeSafe() }
+konst FirClass.superConeTypes: List<ConeClassLikeType> get() = superTypeRefs.mapNotNull { it.coneTypeSafe() }
 
-val FirClass.anonymousInitializers: List<FirAnonymousInitializer>
+konst FirClass.anonymousInitializers: List<FirAnonymousInitializer>
     get() = declarations.filterIsInstance<FirAnonymousInitializer>()
 
-val FirClass.delegateFields: List<FirField>
+konst FirClass.delegateFields: List<FirField>
     get() = declarations.filterIsInstance<FirField>().filter { it.isSynthetic }
 
-inline val FirDeclaration.isJava: Boolean
+inline konst FirDeclaration.isJava: Boolean
     get() = origin is FirDeclarationOrigin.Java
-inline val FirDeclaration.isJavaSource: Boolean
+inline konst FirDeclaration.isJavaSource: Boolean
     get() = origin == FirDeclarationOrigin.Java.Source
-inline val FirDeclaration.isFromLibrary: Boolean
+inline konst FirDeclaration.isFromLibrary: Boolean
     get() = origin == FirDeclarationOrigin.Library || origin == FirDeclarationOrigin.Java.Library
-inline val FirDeclaration.isPrecompiled: Boolean
+inline konst FirDeclaration.isPrecompiled: Boolean
     get() = origin == FirDeclarationOrigin.Precompiled
-inline val FirDeclaration.isSynthetic: Boolean
+inline konst FirDeclaration.isSynthetic: Boolean
     get() = origin == FirDeclarationOrigin.Synthetic
 
 // NB: This function checks transitive localness. That is,
 // if a declaration `isNonLocal`, then its parent also `isNonLocal`.
-val FirDeclaration.isNonLocal
+konst FirDeclaration.isNonLocal
     get() = when (this) {
         is FirFile -> true
         is FirCallableDeclaration -> !symbol.callableId.isLocal
@@ -45,9 +45,9 @@ val FirDeclaration.isNonLocal
         else -> false
     }
 
-val FirCallableDeclaration.isExtension get() = receiverParameter != null
+konst FirCallableDeclaration.isExtension get() = receiverParameter != null
 
-val FirMemberDeclaration.nameOrSpecialName: Name
+konst FirMemberDeclaration.nameOrSpecialName: Name
     get() = when (this) {
         is FirCallableDeclaration ->
             this.symbol.callableId.callableName

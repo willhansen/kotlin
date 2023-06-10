@@ -41,24 +41,24 @@ import org.jetbrains.kotlin.name.Name
  * be accessed.
  */
 internal class KtFirPsiJavaClassSymbol(
-    override val psi: PsiClass,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst psi: PsiClass,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtFirNamedClassOrObjectSymbolBase(), KtFirPsiSymbol<PsiClass, FirRegularClassSymbol> {
     /**
      * [javaClass] is used to defer some properties to the compiler's view of a Java class.
      */
-    private val javaClass: JavaClass = JavaClassImpl(JavaElementSourceFactory.getInstance(analysisSession.project).createPsiSource(psi))
+    private konst javaClass: JavaClass = JavaClassImpl(JavaElementSourceFactory.getInstance(analysisSession.project).createPsiSource(psi))
 
-    override val name: Name = withValidityAssertion { javaClass.name }
+    override konst name: Name = withValidityAssertion { javaClass.name }
 
-    override val classIdIfNonLocal: ClassId = withValidityAssertion {
+    override konst classIdIfNonLocal: ClassId = withValidityAssertion {
         psi.classIdIfNonLocal ?: error("${KtFirPsiJavaClassSymbol::class.simpleName} requires a non-local PSI class.")
     }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { KtSymbolOrigin.JAVA }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion {
             when {
                 classIdIfNonLocal.outerClassId != null -> KtSymbolKind.CLASS_MEMBER
@@ -67,28 +67,28 @@ internal class KtFirPsiJavaClassSymbol(
         }
 
     @OptIn(KtAnalysisApiInternals::class)
-    override val classKind: KtClassKind
+    override konst classKind: KtClassKind
         get() = withValidityAssertion { javaClass.classKind.toKtClassKind(isCompanionObject = false) }
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion { javaClass.modality }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { javaClass.visibility }
 
-    override val isInner: Boolean
+    override konst isInner: Boolean
         get() = withValidityAssertion { classIdIfNonLocal.outerClassId != null && !javaClass.isStatic }
 
-    val outerClass: KtFirPsiJavaClassSymbol?
+    konst outerClass: KtFirPsiJavaClassSymbol?
         get() = psi.containingClass?.let { KtFirPsiJavaClassSymbol(it, analysisSession) }
 
-    override val typeParameters: List<KtTypeParameterSymbol> by cached {
+    override konst typeParameters: List<KtTypeParameterSymbol> by cached {
         // The parent Java class might contribute type parameters to the Java type parameter stack, but for this KtSymbol, parent type 
         // parameters aren't relevant.
         psi.typeParameters.mapIndexed { index, psiTypeParameter ->
             KtFirPsiJavaTypeParameterSymbol(psiTypeParameter, analysisSession) {
-                // `psi.typeParameters` should align with the list of regular `FirTypeParameter`s, making the use of `index` valid.
-                val firTypeParameter = firSymbol.fir.typeParameters.filterIsInstance<FirTypeParameter>().getOrNull(index)
+                // `psi.typeParameters` should align with the list of regular `FirTypeParameter`s, making the use of `index` konstid.
+                konst firTypeParameter = firSymbol.fir.typeParameters.filterIsInstance<FirTypeParameter>().getOrNull(index)
                 require(firTypeParameter != null) {
                     "The FIR symbol's ${FirTypeParameter::class.simpleName}s should have an entry at $index."
                 }
@@ -97,29 +97,29 @@ internal class KtFirPsiJavaClassSymbol(
         }
     }
 
-    val annotationSimpleNames: List<String?>
+    konst annotationSimpleNames: List<String?>
         get() = psi.annotations.map { it.nameReferenceElement?.referenceName }
 
-    val hasAnnotations: Boolean
+    konst hasAnnotations: Boolean
         get() = psi.annotations.isNotEmpty()
 
-    override val isData: Boolean get() = withValidityAssertion { false }
-    override val isInline: Boolean get() = withValidityAssertion { false }
-    override val isFun: Boolean get() = withValidityAssertion { false }
-    override val isExternal: Boolean get() = withValidityAssertion { false }
-    override val companionObject: KtNamedClassOrObjectSymbol? get() = withValidityAssertion { null }
+    override konst isData: Boolean get() = withValidityAssertion { false }
+    override konst isInline: Boolean get() = withValidityAssertion { false }
+    override konst isFun: Boolean get() = withValidityAssertion { false }
+    override konst isExternal: Boolean get() = withValidityAssertion { false }
+    override konst companionObject: KtNamedClassOrObjectSymbol? get() = withValidityAssertion { null }
 
-    override val contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { emptyList() }
+    override konst contextReceivers: List<KtContextReceiver> get() = withValidityAssertion { emptyList() }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Slow Operations (requiring access to the underlying FIR class symbol)
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    override val hasLazyFirSymbol: Boolean get() = true
+    override konst hasLazyFirSymbol: Boolean get() = true
 
-    override val firSymbol: FirRegularClassSymbol by cached {
-        val module = analysisSession.getModule(psi)
-        val provider = analysisSession.firResolveSession.getSessionFor(module).firClassByPsiClassProvider
-        val firClassSymbol = provider.getFirClass(psi)
+    override konst firSymbol: FirRegularClassSymbol by cached {
+        konst module = analysisSession.getModule(psi)
+        konst provider = analysisSession.firResolveSession.getSessionFor(module).firClassByPsiClassProvider
+        konst firClassSymbol = provider.getFirClass(psi)
 
         require(firClassSymbol != null) {
             "A FIR class symbol should be available for ${KtFirPsiJavaClassSymbol::class.simpleName} `$classIdIfNonLocal`."
@@ -127,7 +127,7 @@ internal class KtFirPsiJavaClassSymbol(
         firClassSymbol
     }
 
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst annotationsList: KtAnnotationsList by cached {
         if (hasAnnotations) KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         else KtEmptyAnnotationsList(token)
     }

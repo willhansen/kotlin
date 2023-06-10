@@ -8,7 +8,7 @@ public interface I extends Boo {
 // FILE: Baz.kt
 public interface Foo {
     companion object {
-        public val EMPTY: Foo = object : Foo{}
+        public konst EMPTY: Foo = object : Foo{}
     }
 }
 

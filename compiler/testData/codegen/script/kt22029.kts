@@ -1,10 +1,10 @@
 
-data class Pair(val first: Int, val second: Int)
+data class Pair(konst first: Int, konst second: Int)
 
 inline fun <T> run(fn: () -> T) = fn()
 
-val fstSec = 42
+konst fstSec = 42
 
-val (fst, snd) = run { Pair(fstSec, fstSec) }
+konst (fst, snd) = run { Pair(fstSec, fstSec) }
 
 // expected: fst: 42

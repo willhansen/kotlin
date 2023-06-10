@@ -35,14 +35,14 @@ object FirExpressionAnnotationChecker : FirBasicExpressionChecker() {
                     expression.source?.kind == KtFakeSourceElementKind.DesugaredForLoop)
         ) return
 
-        val annotations = expression.annotations
+        konst annotations = expression.annotations
         if (annotations.isEmpty()) return
 
-        val annotationsMap = hashMapOf<ConeKotlinType, MutableList<AnnotationUseSiteTarget?>>()
+        konst annotationsMap = hashMapOf<ConeKotlinType, MutableList<AnnotationUseSiteTarget?>>()
 
         for (annotation in annotations) {
-            val useSiteTarget = annotation.useSiteTarget ?: expression.getDefaultUseSiteTarget(annotation, context)
-            val existingTargetsForAnnotation = annotationsMap.getOrPut(annotation.annotationTypeRef.coneType) { arrayListOf() }
+            konst useSiteTarget = annotation.useSiteTarget ?: expression.getDefaultUseSiteTarget(annotation, context)
+            konst existingTargetsForAnnotation = annotationsMap.getOrPut(annotation.annotationTypeRef.coneType) { arrayListOf() }
 
             if (KotlinTarget.EXPRESSION !in annotation.getAllowedAnnotationTargets(context.session)) {
                 reporter.reportOn(annotation.source, FirErrors.WRONG_ANNOTATION_TARGET, "expression", context)

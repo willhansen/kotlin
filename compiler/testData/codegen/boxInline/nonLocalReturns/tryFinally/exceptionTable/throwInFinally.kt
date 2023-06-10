@@ -28,22 +28,22 @@ public inline fun <R> doCall2(block: ()-> R, exception: (e: Exception)-> Unit, f
 import test.*
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
 fun test0(h: Holder): String {
     try {
-        val localResult = doCall (
+        konst localResult = doCall (
                 {
-                    h.value += "OK_NON_LOCAL"
+                    h.konstue += "OK_NON_LOCAL"
                     return "OK_NON_LOCAL"
                 },
                 {
-                    h.value += ", OK_EXCEPTION"
+                    h.konstue += ", OK_EXCEPTION"
                     "OK_EXCEPTION"
                 },
                 {
-                    h.value += ", OK_FINALLY"
+                    h.konstue += ", OK_FINALLY"
                     throw RuntimeException("FINALLY")
                     "OK_FINALLY"
                 })
@@ -62,18 +62,18 @@ fun test0(h: Holder): String {
 
 fun test1(h: Holder): String {
     try {
-        val localResult = doCall (
+        konst localResult = doCall (
                 {
-                    h.value += "OK_LOCAL"
+                    h.konstue += "OK_LOCAL"
                     throw RuntimeException("FAIL")
                     "OK_LOCAL"
                 },
                 {
-                    h.value += ", OK_EXCEPTION"
+                    h.konstue += ", OK_EXCEPTION"
                     "OK_EXCEPTION"
                 },
                 {
-                    h.value += ", OK_FINALLY"
+                    h.konstue += ", OK_FINALLY"
                     throw RuntimeException("FINALLY")
                     "OK_FINALLY"
                 })
@@ -90,18 +90,18 @@ fun test1(h: Holder): String {
 
 fun test2(h: Holder): String {
 
-    val localResult = doCall (
+    konst localResult = doCall (
             {
-                h.value += "OK_LOCAL"
+                h.konstue += "OK_LOCAL"
                 throw RuntimeException()
                 "OK_LOCAL"
             },
             {
-                h.value += ", OK_EXCEPTION"
+                h.konstue += ", OK_EXCEPTION"
                 "OK_EXCEPTION"
             },
             {
-                h.value += ", OK_FINALLY"
+                h.konstue += ", OK_FINALLY"
                 "OK_FINALLY"
             })
 
@@ -110,19 +110,19 @@ fun test2(h: Holder): String {
 
 fun test3(h: Holder): String {
     try {
-        val localResult = doCall (
+        konst localResult = doCall (
                 {
-                    h.value += "OK_LOCAL"
+                    h.konstue += "OK_LOCAL"
                     throw RuntimeException("FAIL")
                     "OK_LOCAL"
                 },
                 {
-                    h.value += ", OK_EXCEPTION"
+                    h.konstue += ", OK_EXCEPTION"
                     throw RuntimeException("FAIL_EX")
                     "OK_EXCEPTION"
                 },
                 {
-                    h.value += ", OK_FINALLY"
+                    h.konstue += ", OK_FINALLY"
                     throw RuntimeException("FINALLY")
                     "OK_FINALLY"
                 })
@@ -139,19 +139,19 @@ fun test3(h: Holder): String {
 
 fun test4(h: Holder): String {
     try {
-        val localResult = doCall2 (
+        konst localResult = doCall2 (
                 {
-                    h.value += "OK_LOCAL"
+                    h.konstue += "OK_LOCAL"
                     throw RuntimeException("FAIL")
                     "OK_LOCAL"
                 },
                 {
-                    h.value += ", OK_EXCEPTION"
+                    h.konstue += ", OK_EXCEPTION"
                     throw RuntimeException("EXCEPTION")
                     "OK_EXCEPTION"
                 },
                 {
-                    h.value += ", OK_FINALLY"
+                    h.konstue += ", OK_FINALLY"
                     "OK_FINALLY"
                 })
     } catch (e: RuntimeException) {
@@ -170,26 +170,26 @@ fun test4(h: Holder): String {
 
 fun box(): String {
     var h = Holder()
-    val test0 = test0(h)
-    if (test0 != "CATCHED_EXCEPTION" || h.value != "OK_NON_LOCAL, OK_FINALLY") return "test0: ${test0}, holder: ${h.value}"
+    konst test0 = test0(h)
+    if (test0 != "CATCHED_EXCEPTION" || h.konstue != "OK_NON_LOCAL, OK_FINALLY") return "test0: ${test0}, holder: ${h.konstue}"
 
 
     h = Holder()
-    val test1 = test1(h)
-    if (test1 != "CATCHED_EXCEPTION" || h.value != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test1: ${test1}, holder: ${h.value}"
+    konst test1 = test1(h)
+    if (test1 != "CATCHED_EXCEPTION" || h.konstue != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test1: ${test1}, holder: ${h.konstue}"
 
     h = Holder()
-    val test2 = test2(h)
-    if (test2 != "OK_FINALLY" || h.value != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test2: ${test2}, holder: ${h.value}"
+    konst test2 = test2(h)
+    if (test2 != "OK_FINALLY" || h.konstue != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test2: ${test2}, holder: ${h.konstue}"
 
 
     h = Holder()
-    val test3 = test3(h)
-    if (test3 != "CATCHED_EXCEPTION" || h.value != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test3: ${test3}, holder: ${h.value}"
+    konst test3 = test3(h)
+    if (test3 != "CATCHED_EXCEPTION" || h.konstue != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test3: ${test3}, holder: ${h.konstue}"
 
     h = Holder()
-    val test4 = test4(h)
-    if (test4 != "CATCHED_EXCEPTION" || h.value != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test4: ${test4}, holder: ${h.value}"
+    konst test4 = test4(h)
+    if (test4 != "CATCHED_EXCEPTION" || h.konstue != "OK_LOCAL, OK_EXCEPTION, OK_FINALLY") return "test4: ${test4}, holder: ${h.konstue}"
 
     return "OK"
 }

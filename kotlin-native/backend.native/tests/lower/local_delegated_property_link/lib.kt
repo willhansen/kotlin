@@ -1,5 +1,5 @@
 fun foo(): String{
-    val bar: String by lazy {
+    konst bar: String by lazy {
         "OK"
     }
 

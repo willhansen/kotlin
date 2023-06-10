@@ -22,8 +22,8 @@ fun setBooleanRes(x: Boolean) {
 
 fun box(): String {
     builder {
-        val a = booleanArrayOf(true)
-        val x = a[0]
+        konst a = booleanArrayOf(true)
+        konst x = a[0]
         suspendHere()
         setBooleanRes(x)
     }

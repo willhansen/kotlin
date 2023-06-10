@@ -17,10 +17,10 @@ public class JvmMethodGenericSignature extends JvmMethodSignature {
 
     public JvmMethodGenericSignature(
             @NotNull Method asmMethod,
-            @NotNull List<JvmMethodParameterSignature> valueParameters,
+            @NotNull List<JvmMethodParameterSignature> konstueParameters,
             @Nullable String genericsSignature
     ) {
-        super(asmMethod, valueParameters);
+        super(asmMethod, konstueParameters);
         this.genericsSignature = genericsSignature;
     }
 

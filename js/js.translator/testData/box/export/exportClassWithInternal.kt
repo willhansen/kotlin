@@ -1,25 +1,25 @@
 // FILE: lib.kt
 @JsExport
-class Foo(internal val constructorParameter: String) {
-    internal val nonDefaultAccessor: String
+class Foo(internal konst constructorParameter: String) {
+    internal konst nonDefaultAccessor: String
         get() = "hello"
 
-    internal val defaultAccessor: String = constructorParameter + "!"
+    internal konst defaultAccessor: String = constructorParameter + "!"
 }
 
 @JsExport
-enum class Bar(internal val constructorParameter: String) {
+enum class Bar(internal konst constructorParameter: String) {
     A("a");
 
-    internal val nonDefaultAccessor: String
+    internal konst nonDefaultAccessor: String
         get() = "hello"
 
-    internal val defaultAccessor: String = constructorParameter + "!"
+    internal konst defaultAccessor: String = constructorParameter + "!"
 }
 
 // FILE: main.kt
 fun box(): String {
-    val foo = Foo("foo")
+    konst foo = Foo("foo")
     if (foo.constructorParameter != "foo") return "fail1"
     if (foo.nonDefaultAccessor != "hello") return "fail2"
     if (foo.defaultAccessor != "foo!") return "fail3"

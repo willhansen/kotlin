@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.BindingContext
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassDescriptor
 
 abstract class LightClassGenerationSupport {
@@ -28,12 +28,12 @@ abstract class LightClassGenerationSupport {
 
     protected abstract fun getUltraLightClassSupport(element: KtElement): KtUltraLightSupport
 
-    fun createConstantEvaluator(expression: KtExpression): ConstantExpressionEvaluator = getUltraLightClassSupport(expression).run {
-        ConstantExpressionEvaluator(moduleDescriptor, languageVersionSettings, expression.project)
+    fun createConstantEkonstuator(expression: KtExpression): ConstantExpressionEkonstuator = getUltraLightClassSupport(expression).run {
+        ConstantExpressionEkonstuator(moduleDescriptor, languageVersionSettings, expression.project)
     }
 
     fun createUltraLightClassForFacade(facadeClassFqName: FqName, files: Collection<KtFile>): KtUltraLightClassForFacade {
-        val filesToSupports: List<Pair<KtFile, KtUltraLightSupport>> = files.map {
+        konst filesToSupports: List<Pair<KtFile, KtUltraLightSupport>> = files.map {
             it to getUltraLightClassSupport(it)
         }
 
@@ -46,7 +46,7 @@ abstract class LightClassGenerationSupport {
 
     fun createUltraLightClass(element: KtClassOrObject): KtUltraLightClass = getUltraLightClassSupport(element).let { support ->
         if (support.languageVersionSettings.getFlag(AnalysisFlags.eagerResolveOfLightClasses)) {
-            val descriptor = resolveToDescriptor(element)
+            konst descriptor = resolveToDescriptor(element)
             (descriptor as? LazyClassDescriptor)?.forceResolveAllContents()
         }
 

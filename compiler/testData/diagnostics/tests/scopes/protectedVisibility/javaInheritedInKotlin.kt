@@ -35,7 +35,7 @@ class KotlinClass : JavaClass() {
 class KotlinClass2 : JavaClass() {
     override fun foo() {}
 
-    val field: String = "abc"
+    konst field: String = "abc"
 }
 
 fun test(a: KotlinClass, b: KotlinClass2) {

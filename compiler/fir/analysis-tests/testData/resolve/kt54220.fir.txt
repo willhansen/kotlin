@@ -1,5 +1,5 @@
 FILE: kt54220.kt
-    public final const val c: R|kotlin/String| = ERROR_EXPR(Unsigned integers need stdlib).R|kotlin/plus|(ERROR_EXPR(Unsigned integers need stdlib))
+    public final const konst c: R|kotlin/String| = ERROR_EXPR(Unsigned integers need stdlib).R|kotlin/plus|(ERROR_EXPR(Unsigned integers need stdlib))
         public get(): R|kotlin/String|
     public final fun box(): R|kotlin/String| {
         ^box when () {

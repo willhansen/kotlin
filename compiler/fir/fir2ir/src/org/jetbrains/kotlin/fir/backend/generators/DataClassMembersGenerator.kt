@@ -58,7 +58,7 @@ import org.jetbrains.kotlin.util.OperatorNameConventions.TO_STRING
  * fir own logic that traverses class hierarchies in fir elements. Also, this one creates and passes IR elements, instead of providing how
  * to declare them, to [DataClassMembersGenerator].
  */
-class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrComponents by components {
+class DataClassMembersGenerator(konst components: Fir2IrComponents) : Fir2IrComponents by components {
 
     fun generateSingleFieldValueClassMembers(klass: FirClass, irClass: IrClass): List<FirDeclaration> =
         MyDataClassMethodsGenerator(irClass, klass.symbol.toLookupTag(), IrDeclarationOrigin.GENERATED_SINGLE_FIELD_VALUE_CLASS_MEMBER)
@@ -80,11 +80,11 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
             .generateCopyBody(irFunction)
 
     private inner class MyDataClassMethodsGenerator(
-        val irClass: IrClass,
-        val lookupTag: ConeClassLikeLookupTag,
-        val origin: IrDeclarationOrigin
+        konst irClass: IrClass,
+        konst lookupTag: ConeClassLikeLookupTag,
+        konst origin: IrDeclarationOrigin
     ) {
-        private val irDataClassMembersGenerator = object : DataClassMembersGenerator(
+        private konst irDataClassMembersGenerator = object : DataClassMembersGenerator(
             IrGeneratorContextBase(components.irBuiltIns),
             components.symbolTable,
             irClass,
@@ -111,7 +111,7 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                 return components.irBuiltIns.anyType
             }
 
-            inner class Fir2IrHashCodeFunctionInfo(override val symbol: IrSimpleFunctionSymbol) : HashCodeFunctionInfo {
+            inner class Fir2IrHashCodeFunctionInfo(override konst symbol: IrSimpleFunctionSymbol) : HashCodeFunctionInfo {
                 override fun commitSubstituted(irMemberAccessExpression: IrMemberAccessExpression<*>) {
                     // TODO
                 }
@@ -119,23 +119,23 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
 
             private fun getHashCodeFunction(klass: IrClass): IrSimpleFunctionSymbol =
                 klass.functions.singleOrNull {
-                    it.name.asString() == "hashCode" && it.valueParameters.isEmpty() && it.extensionReceiverParameter == null
+                    it.name.asString() == "hashCode" && it.konstueParameters.isEmpty() && it.extensionReceiverParameter == null
                 }?.symbol
                     ?: context.irBuiltIns.anyClass.functions.single { it.owner.name.asString() == "hashCode" }
 
 
-            val IrTypeParameter.erasedUpperBound: IrClass
+            konst IrTypeParameter.erasedUpperBound: IrClass
                 get() {
                     // Pick the (necessarily unique) non-interface upper bound if it exists
                     for (type in superTypes) {
-                        val irClass = type.classOrNull?.owner ?: continue
+                        konst irClass = type.classOrNull?.owner ?: continue
                         if (!irClass.isInterface && !irClass.isAnnotationClass) return irClass
                     }
 
                     // Otherwise, choose either the first IrClass supertype or recurse.
                     // In the first case, all supertypes are interface types and the choice was arbitrary.
                     // In the second case, there is only a single supertype.
-                    return when (val firstSuper = superTypes.first().classifierOrNull?.owner) {
+                    return when (konst firstSuper = superTypes.first().classifierOrNull?.owner) {
                         is IrClass -> firstSuper
                         is IrTypeParameter -> firstSuper.erasedUpperBound
                         else -> error("unknown supertype kind $firstSuper")
@@ -144,8 +144,8 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
 
 
             override fun getHashCodeFunctionInfo(type: IrType): HashCodeFunctionInfo {
-                val classifier = type.classifierOrNull
-                val symbol = when {
+                konst classifier = type.classifierOrNull
+                konst symbol = when {
                     classifier.isArrayOrPrimitiveArray -> context.irBuiltIns.dataClassArrayMemberHashCodeSymbol
                     classifier is IrClassSymbol -> getHashCodeFunction(classifier.owner)
                     classifier is IrTypeParameterSymbol -> getHashCodeFunction(classifier.owner.erasedUpperBound)
@@ -164,49 +164,49 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
             )
 
 
-        private val FirSimpleFunction.matchesEqualsSignature: Boolean
-            get() = valueParameters.size == 1 &&
-                    valueParameters[0].returnTypeRef.toIrType(components.typeConverter) == components.irBuiltIns.anyNType &&
+        private konst FirSimpleFunction.matchesEqualsSignature: Boolean
+            get() = konstueParameters.size == 1 &&
+                    konstueParameters[0].returnTypeRef.toIrType(components.typeConverter) == components.irBuiltIns.anyNType &&
                     returnTypeRef.toIrType(components.typeConverter) == components.irBuiltIns.booleanType
 
-        private val FirSimpleFunction.matchesHashCodeSignature: Boolean
-            get() = valueParameters.isEmpty() &&
+        private konst FirSimpleFunction.matchesHashCodeSignature: Boolean
+            get() = konstueParameters.isEmpty() &&
                     returnTypeRef.toIrType(components.typeConverter) == components.irBuiltIns.intType
 
-        private val FirSimpleFunction.matchesToStringSignature: Boolean
-            get() = valueParameters.isEmpty() &&
+        private konst FirSimpleFunction.matchesToStringSignature: Boolean
+            get() = konstueParameters.isEmpty() &&
                     returnTypeRef.toIrType(components.typeConverter) == components.irBuiltIns.stringType
 
-        private val FirSimpleFunction.matchesDataClassSyntheticMemberSignatures: Boolean
+        private konst FirSimpleFunction.matchesDataClassSyntheticMemberSignatures: Boolean
             get() = (this.name == EQUALS && matchesEqualsSignature) ||
                     (this.name == HASHCODE_NAME && matchesHashCodeSignature) ||
                     (this.name == TO_STRING && matchesToStringSignature)
 
         fun generate(klass: FirClass): List<FirDeclaration> {
-            val propertyParametersCount = irClass.primaryConstructor?.explicitParameters?.size ?: 0
-            val properties = irClass.properties.filter { it.backingField != null }.take(propertyParametersCount).toList()
+            konst propertyParametersCount = irClass.primaryConstructor?.explicitParameters?.size ?: 0
+            konst properties = irClass.properties.filter { it.backingField != null }.take(propertyParametersCount).toList()
 
-            val result = mutableListOf<FirDeclaration>()
+            konst result = mutableListOf<FirDeclaration>()
 
-            val contributedFunctionsInThisType = klass.declarations.mapNotNull {
+            konst contributedFunctionsInThisType = klass.declarations.mapNotNull {
                 if (it is FirSimpleFunction && it.matchesDataClassSyntheticMemberSignatures) {
                     it.name
                 } else
                     null
             }
-            val scope = klass.unsubstitutedScope(
+            konst scope = klass.unsubstitutedScope(
                 components.session,
                 components.scopeSession,
                 withForcedTypeCalculator = true,
                 memberRequiredPhase = null,
             )
-            val contributedFunctionsInSupertypes =
+            konst contributedFunctionsInSupertypes =
                 buildMap<Name, FirSimpleFunction> {
                     for (name in listOf(EQUALS, HASHCODE_NAME, TO_STRING)) {
                         // We won't synthesize a function if there is a user-contributed one.
                         if (contributedFunctionsInThisType.contains(name)) continue
                         scope.processFunctionsByName(name) {
-                            val declaration = it.fir
+                            konst declaration = it.fir
                             if (declaration.matchesDataClassSyntheticMemberSignatures && declaration.modality != Modality.FINAL) {
                                 putIfAbsent(declaration.name, declaration)
                             }
@@ -214,10 +214,10 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                     }
                 }
 
-            val equalsContributedFunction = contributedFunctionsInSupertypes[EQUALS]
+            konst equalsContributedFunction = contributedFunctionsInSupertypes[EQUALS]
             if (equalsContributedFunction != null) {
                 result.add(equalsContributedFunction)
-                val equalsFunction = createSyntheticIrFunction(
+                konst equalsFunction = createSyntheticIrFunction(
                     EQUALS,
                     components.irBuiltIns.booleanType,
                     isExpect = klass.isExpect,
@@ -228,10 +228,10 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                 irClass.declarations.add(equalsFunction)
             }
 
-            val hashcodeNameContributedFunction = contributedFunctionsInSupertypes[HASHCODE_NAME]
+            konst hashcodeNameContributedFunction = contributedFunctionsInSupertypes[HASHCODE_NAME]
             if (hashcodeNameContributedFunction != null) {
                 result.add(hashcodeNameContributedFunction)
-                val hashCodeFunction = createSyntheticIrFunction(
+                konst hashCodeFunction = createSyntheticIrFunction(
                     HASHCODE_NAME,
                     components.irBuiltIns.intType,
                     isExpect = klass.isExpect
@@ -240,10 +240,10 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                 irClass.declarations.add(hashCodeFunction)
             }
 
-            val toStringContributedFunction = contributedFunctionsInSupertypes[TO_STRING]
+            konst toStringContributedFunction = contributedFunctionsInSupertypes[TO_STRING]
             if (toStringContributedFunction != null) {
                 result.add(toStringContributedFunction)
-                val toStringFunction = createSyntheticIrFunction(
+                konst toStringFunction = createSyntheticIrFunction(
                     TO_STRING,
                     components.irBuiltIns.stringType,
                     isExpect = klass.isExpect
@@ -257,9 +257,9 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
 
         fun generateComponentBody(irFunction: IrFunction) {
             irFunction.origin = origin
-            val index = DataClassResolver.getComponentIndex(irFunction.name.asString())
-            val valueParameter = irClass.primaryConstructor!!.valueParameters[index - 1]
-            val irProperty = irDataClassMembersGenerator.getProperty(null, valueParameter)!!
+            konst index = DataClassResolver.getComponentIndex(irFunction.name.asString())
+            konst konstueParameter = irClass.primaryConstructor!!.konstueParameters[index - 1]
+            konst irProperty = irDataClassMembersGenerator.getProperty(null, konstueParameter)!!
             irDataClassMembersGenerator.generateComponentFunction(irFunction, irProperty)
         }
 
@@ -275,8 +275,8 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
             otherParameterNeeded: Boolean = false,
             isOperator: Boolean = false,
         ): IrFunction {
-            val functionSymbol = FirNamedFunctionSymbol(CallableId(lookupTag.classId, name))
-            val firFunction = buildSimpleFunction {
+            konst functionSymbol = FirNamedFunctionSymbol(CallableId(lookupTag.classId, name))
+            konst firFunction = buildSimpleFunction {
                 origin = FirDeclarationOrigin.Synthetic
                 this.name = name
                 this.symbol = functionSymbol
@@ -289,7 +289,7 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                     else -> error("Unexpected synthetic data class function return type: $returnType")
                 }
                 if (otherParameterNeeded) {
-                    this.valueParameters.add(
+                    this.konstueParameters.add(
                         buildValueParameter {
                             this.name = Name.identifier("other")
                             origin = FirDeclarationOrigin.Synthetic
@@ -307,7 +307,7 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                     (1..irClass.typeParameters.size).map { ConeStarProjection }.toTypedArray(), isNullable = false
                 )
             }
-            val signature = if (lookupTag.classId.isLocal) null else components.signatureComposer.composeSignature(firFunction)
+            konst signature = if (lookupTag.classId.isLocal) null else components.signatureComposer.composeSignature(firFunction)
             return components.declarationStorage.declareIrSimpleFunction(signature) { symbol ->
                 components.irFactory.createFunction(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, symbol, name, DescriptorVisibilities.PUBLIC, Modality.OPEN, returnType,
@@ -315,10 +315,10 @@ class DataClassMembersGenerator(val components: Fir2IrComponents) : Fir2IrCompon
                     isInfix = false, isExpect = false, isFakeOverride = false,
                 ).apply {
                     if (otherParameterNeeded) {
-                        val irValueParameter = createSyntheticIrParameter(
-                            this, firFunction.valueParameters.first().name, components.irBuiltIns.anyNType
+                        konst irValueParameter = createSyntheticIrParameter(
+                            this, firFunction.konstueParameters.first().name, components.irBuiltIns.anyNType
                         )
-                        this.valueParameters = listOf(irValueParameter)
+                        this.konstueParameters = listOf(irValueParameter)
                     }
                     metadata = FirMetadataSource.Function(
                         firFunction

@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.psi.KtClassInitializer
 
 class KtFe10PsiClassInitializerSymbol(
-    override val psi: KtClassInitializer,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtClassInitializer,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtClassInitializerSymbol(), KtFe10Symbol {
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion {
             return if (psi.containingKtFile.isCompiled) {
                 KtSymbolOrigin.LIBRARY
@@ -35,7 +35,7 @@ class KtFe10PsiClassInitializerSymbol(
             }
         }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { KtSymbolKind.CLASS_MEMBER }
 
     context(KtAnalysisSession)
@@ -43,8 +43,8 @@ class KtFe10PsiClassInitializerSymbol(
         KtPsiBasedSymbolPointer.createForSymbolFromSource(this) ?: KtFe10NeverRestoringSymbolPointer()
     }
 
-    override val typeParameters: List<KtTypeParameterSymbol> get() = withValidityAssertion { emptyList() }
-    override val annotationsList: KtAnnotationsList get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
+    override konst typeParameters: List<KtTypeParameterSymbol> get() = withValidityAssertion { emptyList() }
+    override konst annotationsList: KtAnnotationsList get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
 
     override fun equals(other: Any?): Boolean = isEqualTo(other)
     override fun hashCode(): Int = calculateHashCode()

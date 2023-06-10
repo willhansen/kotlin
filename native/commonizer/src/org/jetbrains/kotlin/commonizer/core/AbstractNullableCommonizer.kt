@@ -11,9 +11,9 @@ package org.jetbrains.kotlin.commonizer.core
  * - or all commonized elements are non-null and can be commonized according to the wrapped commonized
  */
 abstract class AbstractNullableCommonizer<T : Any, R : Any, WT, WR>(
-    private val wrappedCommonizerFactory: () -> Commonizer<WT, WR>,
-    private val extractor: (T) -> WT,
-    private val builder: (WR) -> R
+    private konst wrappedCommonizerFactory: () -> Commonizer<WT, WR>,
+    private konst extractor: (T) -> WT,
+    private konst builder: (WR) -> R
 ) : Commonizer<T?, R?> {
     private enum class State {
         EMPTY,
@@ -25,7 +25,7 @@ abstract class AbstractNullableCommonizer<T : Any, R : Any, WT, WR>(
     private var state = State.EMPTY
     private lateinit var wrapped: Commonizer<WT, WR>
 
-    final override val result: R?
+    final override konst result: R?
         get() = when (state) {
             State.EMPTY -> failInEmptyState()
             State.ERROR -> failInErrorState()

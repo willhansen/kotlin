@@ -14,23 +14,23 @@ import org.jetbrains.kotlin.analysis.api.lifetime.withValidityAssertion
 import kotlin.reflect.KClass
 
 public interface KtDiagnostic : KtLifetimeOwner {
-    public val severity: Severity
-    public val factoryName: String?
-    public val defaultMessage: String
+    public konst severity: Severity
+    public konst factoryName: String?
+    public konst defaultMessage: String
 }
 
 public interface KtDiagnosticWithPsi<out PSI : PsiElement> : KtDiagnostic {
-    public val psi: PSI
-    public val textRanges: Collection<TextRange>
-    public val diagnosticClass: KClass<out KtDiagnosticWithPsi<PSI>>
+    public konst psi: PSI
+    public konst textRanges: Collection<TextRange>
+    public konst diagnosticClass: KClass<out KtDiagnosticWithPsi<PSI>>
 }
 
 public class KtNonBoundToPsiErrorDiagnostic(
-    override val factoryName: String?,
-    override val defaultMessage: String,
-    override val token: KtLifetimeToken,
+    override konst factoryName: String?,
+    override konst defaultMessage: String,
+    override konst token: KtLifetimeToken,
 ) : KtDiagnostic {
-    override val severity: Severity get() = withValidityAssertion { Severity.ERROR }
+    override konst severity: Severity get() = withValidityAssertion { Severity.ERROR }
 }
 
 public fun KtDiagnostic.getDefaultMessageWithFactoryName(): String =

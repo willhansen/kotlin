@@ -13,9 +13,9 @@ import kotlin.experimental.ExperimentalNativeApi
 // Deprecate in favour of KT-57152 when it's provided.
 @ExperimentalNativeApi
 public fun <T> MutableList<T>.replaceAll(transformation: (T) -> T) {
-    val it = listIterator()
+    konst it = listIterator()
     while (it.hasNext()) {
-        val element = it.next()
+        konst element = it.next()
         it.set(transformation(element))
     }
 }

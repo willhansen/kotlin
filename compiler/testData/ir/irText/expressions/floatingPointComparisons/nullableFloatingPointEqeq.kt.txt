@@ -5,7 +5,7 @@ fun testDD(x: Double?, y: Double?): Boolean {
 fun testDF(x: Double?, y: Any?): Boolean {
   return when {
     y is Float? -> ieee754equals(arg0 = x, arg1 = { // BLOCK
-      val tmp0_safe_receiver: Any? = y
+      konst tmp0_safe_receiver: Any? = y
       when {
         EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
         else -> tmp0_safe_receiver /*as Float */.toDouble()
@@ -18,7 +18,7 @@ fun testDF(x: Double?, y: Any?): Boolean {
 fun testDI(x: Double?, y: Any?): Boolean {
   return when {
     y is Int? -> ieee754equals(arg0 = x, arg1 = { // BLOCK
-      val tmp0_safe_receiver: Any? = y
+      konst tmp0_safe_receiver: Any? = y
       when {
         EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
         else -> tmp0_safe_receiver /*as Int */.toDouble()
@@ -34,7 +34,7 @@ fun testDI2(x: Any?, y: Any?): Boolean {
       x is Int? -> y is Double
       else -> false
     } -> ieee754equals(arg0 = { // BLOCK
-      val tmp0_safe_receiver: Any? = x
+      konst tmp0_safe_receiver: Any? = x
       when {
         EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
         else -> tmp0_safe_receiver /*as Int */.toDouble()

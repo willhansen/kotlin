@@ -15,7 +15,7 @@ class N() : ArrayList<Any>(), Tr {
 }
 
 fun box(): String {
-    val n = N()
+    konst n = N()
     n.add("239")
     if (n.get(0) == "239" && n.get(1) == "239_239__") return "OK";
     return "fail";

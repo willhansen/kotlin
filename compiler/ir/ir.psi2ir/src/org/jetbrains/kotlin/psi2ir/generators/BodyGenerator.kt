@@ -44,24 +44,24 @@ internal interface LoopResolver {
 }
 
 internal class BodyGenerator(
-    val scopeOwnerSymbol: IrSymbol,
-    override val context: GeneratorContext,
-    private val parentLoopResolver: LoopResolver?
+    konst scopeOwnerSymbol: IrSymbol,
+    override konst context: GeneratorContext,
+    private konst parentLoopResolver: LoopResolver?
 ) : GeneratorWithScope, LoopResolver {
 
-    val scopeOwner: DeclarationDescriptor get() = scopeOwnerSymbol.descriptor
+    konst scopeOwner: DeclarationDescriptor get() = scopeOwnerSymbol.descriptor
 
-    private val typeTranslator = context.typeTranslator
+    private konst typeTranslator = context.typeTranslator
     private fun KotlinType.toIrType() = typeTranslator.translateType(this)
 
-    override val scope = Scope(scopeOwnerSymbol)
-    private val loopTable = HashMap<KtLoopExpression, IrLoop>()
+    override konst scope = Scope(scopeOwnerSymbol)
+    private konst loopTable = HashMap<KtLoopExpression, IrLoop>()
 
     fun generateFunctionBody(ktBody: KtExpression): IrBody {
-        val irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
+        konst irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
 
         if (context.configuration.skipBodies) {
-            val irBody =
+            konst irBody =
                 IrErrorExpressionImpl(
                     ktBody.startOffsetSkippingComments,
                     ktBody.endOffset,
@@ -72,12 +72,12 @@ internal class BodyGenerator(
             return irBlockBody
         }
 
-        val statementGenerator = createStatementGenerator()
+        konst statementGenerator = createStatementGenerator()
 
         if (ktBody is KtBlockExpression) {
             statementGenerator.generateStatements(ktBody.statements, irBlockBody)
         } else {
-            val irBody = statementGenerator.generateStatement(ktBody)
+            konst irBody = statementGenerator.generateStatement(ktBody)
             irBlockBody.statements.add(
                 if (ktBody.isUsedAsExpression(context.bindingContext) && irBody is IrExpression)
                     generateReturnExpression(irBody.endOffset, irBody.endOffset, irBody)
@@ -93,35 +93,35 @@ internal class BodyGenerator(
         context.irFactory.createExpressionBody(createStatementGenerator().generateExpression(ktExpression))
 
     fun generateLambdaBody(ktFun: KtFunctionLiteral, lambdaDescriptor: SimpleFunctionDescriptor): IrBody {
-        val statementGenerator = createStatementGenerator()
+        konst statementGenerator = createStatementGenerator()
 
-        val ktBody = ktFun.bodyExpression!!
-        val irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
+        konst ktBody = ktFun.bodyExpression!!
+        konst irBlockBody = context.irFactory.createBlockBody(ktBody.startOffsetSkippingComments, ktBody.endOffset)
 
-        for (ktParameter in ktFun.valueParameters) {
-            val ktDestructuringDeclaration = ktParameter.destructuringDeclaration ?: continue
-            val valueParameter = getOrFail(BindingContext.VALUE_PARAMETER, ktParameter)
-            val parameterValue = VariableLValue(
+        for (ktParameter in ktFun.konstueParameters) {
+            konst ktDestructuringDeclaration = ktParameter.destructuringDeclaration ?: continue
+            konst konstueParameter = getOrFail(BindingContext.VALUE_PARAMETER, ktParameter)
+            konst parameterValue = VariableLValue(
                 context,
                 ktDestructuringDeclaration.startOffsetSkippingComments, ktDestructuringDeclaration.endOffset,
-                context.symbolTable.referenceValue(valueParameter),
-                valueParameter.type.toIrType(),
+                context.symbolTable.referenceValue(konstueParameter),
+                konstueParameter.type.toIrType(),
                 IrStatementOrigin.DESTRUCTURING_DECLARATION
             )
             statementGenerator.declareComponentVariablesInBlock(ktDestructuringDeclaration, irBlockBody, parameterValue, parameterValue)
         }
 
-        val ktBodyStatements = ktBody.statements
+        konst ktBodyStatements = ktBody.statements
         if (ktBodyStatements.isNotEmpty()) {
             for (ktStatement in ktBodyStatements.dropLast(1)) {
                 irBlockBody.statements.add(statementGenerator.generateStatement(ktStatement))
             }
-            val ktReturnedValue = ktBodyStatements.last()
-            val irReturnedValue = statementGenerator.generateStatement(ktReturnedValue)
+            konst ktReturnedValue = ktBodyStatements.last()
+            konst irReturnedValue = statementGenerator.generateStatement(ktReturnedValue)
             irBlockBody.statements.add(
-                // We used to determine whether the last expression in a lambda is used as a return value with 'isUsedAsResultOfLambda',
+                // We used to determine whether the last expression in a lambda is used as a return konstue with 'isUsedAsResultOfLambda',
                 // but it's in fact rather unreliable (see, for example, KT-51306).
-                // Instead, we just check whether lambda is expected to return a non-Unit value,
+                // Instead, we just check whether lambda is expected to return a non-Unit konstue,
                 // and check that the last expression is not 'return' or 'throw'.
                 if (!lambdaDescriptor.returnType!!.isUnit() &&
                     irReturnedValue is IrExpression &&
@@ -148,7 +148,7 @@ internal class BodyGenerator(
     }
 
     private fun generateReturnExpression(startOffset: Int, endOffset: Int, returnValue: IrExpression): IrReturnImpl {
-        val returnTarget = scopeOwnerSymbol.owner as? IrFunction ?: throw AssertionError("'return' in a non-callable: $scopeOwner")
+        konst returnTarget = scopeOwnerSymbol.owner as? IrFunction ?: throw AssertionError("'return' in a non-callable: $scopeOwner")
         return IrReturnImpl(
             startOffset, endOffset, context.irBuiltIns.nothingType,
             returnTarget.symbol,
@@ -157,7 +157,7 @@ internal class BodyGenerator(
     }
 
     fun generateSecondaryConstructorBody(ktConstructor: KtSecondaryConstructor): IrBody {
-        val irBlockBody = context.irFactory.createBlockBody(ktConstructor.startOffsetSkippingComments, ktConstructor.endOffset)
+        konst irBlockBody = context.irFactory.createBlockBody(ktConstructor.startOffsetSkippingComments, ktConstructor.endOffset)
 
         generateDelegatingConstructorCall(irBlockBody, ktConstructor)
 
@@ -169,14 +169,14 @@ internal class BodyGenerator(
     }
 
     private fun generateDelegatingConstructorCall(irBlockBody: IrBlockBody, ktConstructor: KtSecondaryConstructor) {
-        val constructorDescriptor = scopeOwner as ClassConstructorDescriptor
+        konst constructorDescriptor = scopeOwner as ClassConstructorDescriptor
 
-        val statementGenerator = createStatementGenerator()
-        val ktDelegatingConstructorCall = ktConstructor.getDelegationCall()
-        val delegatingConstructorResolvedCall = getResolvedCall(ktDelegatingConstructorCall)
+        konst statementGenerator = createStatementGenerator()
+        konst ktDelegatingConstructorCall = ktConstructor.getDelegationCall()
+        konst delegatingConstructorResolvedCall = getResolvedCall(ktDelegatingConstructorCall)
 
         if (delegatingConstructorResolvedCall == null) {
-            val classDescriptor = constructorDescriptor.containingDeclaration
+            konst classDescriptor = constructorDescriptor.containingDeclaration
             if (classDescriptor.kind == ClassKind.ENUM_CLASS) {
                 generateEnumSuperConstructorCall(irBlockBody, ktConstructor, classDescriptor)
             } else {
@@ -185,8 +185,8 @@ internal class BodyGenerator(
             return
         }
 
-        val delegatingConstructorCall = statementGenerator.pregenerateCall(delegatingConstructorResolvedCall)
-        val irDelegatingConstructorCall = CallGenerator(statementGenerator).generateDelegatingConstructorCall(
+        konst delegatingConstructorCall = statementGenerator.pregenerateCall(delegatingConstructorResolvedCall)
+        konst irDelegatingConstructorCall = CallGenerator(statementGenerator).generateDelegatingConstructorCall(
             ktDelegatingConstructorCall.startOffsetSkippingComments, ktDelegatingConstructorCall.endOffset,
             delegatingConstructorCall
         )
@@ -204,11 +204,11 @@ internal class BodyGenerator(
     }
 
     fun generatePrimaryConstructorBody(ktClassOrObject: KtPureClassOrObject, irConstructor: IrConstructor): IrBody {
-        val irBlockBody = context.irFactory.createBlockBody(ktClassOrObject.pureStartOffset, ktClassOrObject.pureEndOffset)
+        konst irBlockBody = context.irFactory.createBlockBody(ktClassOrObject.pureStartOffset, ktClassOrObject.pureEndOffset)
 
         generateSuperConstructorCall(irBlockBody, ktClassOrObject)
 
-        val classDescriptor = (scopeOwner as ClassConstructorDescriptor).containingDeclaration
+        konst classDescriptor = (scopeOwner as ClassConstructorDescriptor).containingDeclaration
         if (classDescriptor.contextReceivers.isNotEmpty()) {
             generateSetContextReceiverFieldForPrimaryConstructorBody(classDescriptor, irConstructor, irBlockBody)
         }
@@ -224,11 +224,11 @@ internal class BodyGenerator(
     }
 
     fun generateSecondaryConstructorBodyWithNestedInitializers(ktConstructor: KtSecondaryConstructor): IrBody {
-        val irBlockBody = context.irFactory.createBlockBody(ktConstructor.startOffsetSkippingComments, ktConstructor.endOffset)
+        konst irBlockBody = context.irFactory.createBlockBody(ktConstructor.startOffsetSkippingComments, ktConstructor.endOffset)
 
         generateDelegatingConstructorCall(irBlockBody, ktConstructor)
 
-        val classDescriptor = getOrFail(BindingContext.CONSTRUCTOR, ktConstructor).containingDeclaration as ClassDescriptor
+        konst classDescriptor = getOrFail(BindingContext.CONSTRUCTOR, ktConstructor).containingDeclaration as ClassDescriptor
         irBlockBody.statements.add(
             IrInstanceInitializerCallImpl(
                 ktConstructor.startOffsetSkippingComments, ktConstructor.endOffset,
@@ -245,7 +245,7 @@ internal class BodyGenerator(
     }
 
     private fun generateSuperConstructorCall(body: IrBlockBody, ktClassOrObject: KtPureClassOrObject) {
-        val classDescriptor = ktClassOrObject.findClassDescriptor(context.bindingContext)
+        konst classDescriptor = ktClassOrObject.findClassDescriptor(context.bindingContext)
 
         context.extensions.createCustomSuperConstructorCall(ktClassOrObject, classDescriptor, context)?.let {
             body.statements.add(it)
@@ -263,15 +263,15 @@ internal class BodyGenerator(
             }
 
             else -> {
-                val statementGenerator = createStatementGenerator()
+                konst statementGenerator = createStatementGenerator()
 
                 // synthetic inheritance is not supported yet
                 (ktClassOrObject as? KtClassOrObject)?.getSuperTypeList()?.let { ktSuperTypeList ->
                     for (ktSuperTypeListEntry in ktSuperTypeList.entries) {
                         if (ktSuperTypeListEntry is KtSuperTypeCallEntry) {
-                            val resolvedCall = getResolvedCall(ktSuperTypeListEntry) ?: continue
-                            val superConstructorCall = statementGenerator.pregenerateCall(resolvedCall)
-                            val irSuperConstructorCall = CallGenerator(statementGenerator).generateDelegatingConstructorCall(
+                            konst resolvedCall = getResolvedCall(ktSuperTypeListEntry) ?: continue
+                            konst superConstructorCall = statementGenerator.pregenerateCall(resolvedCall)
+                            konst irSuperConstructorCall = CallGenerator(statementGenerator).generateDelegatingConstructorCall(
                                 ktSuperTypeListEntry.startOffsetSkippingComments, ktSuperTypeListEntry.endOffset, superConstructorCall
                             )
                             body.statements.add(irSuperConstructorCall)
@@ -282,7 +282,7 @@ internal class BodyGenerator(
 
                 // If we are here, we didn't find a superclass entry in super types.
                 // Thus, super class should be Any.
-                val superClass = classDescriptor.getSuperClassOrAny()
+                konst superClass = classDescriptor.getSuperClassOrAny()
                 if (context.configuration.generateBodies) {
                     assert(KotlinBuiltIns.isAny(superClass)) {
                         "$classDescriptor: Super class should be any: $superClass"
@@ -294,7 +294,7 @@ internal class BodyGenerator(
     }
 
     private fun generateAnySuperConstructorCall(body: IrBlockBody, ktElement: KtPureElement) {
-        val anyConstructor = context.irBuiltIns.anyClass.descriptor.constructors.single()
+        konst anyConstructor = context.irBuiltIns.anyClass.descriptor.constructors.single()
         body.statements.add(
             IrDelegatingConstructorCallImpl.fromSymbolDescriptor(
                 ktElement.pureStartOffset, ktElement.pureEndOffset,
@@ -305,7 +305,7 @@ internal class BodyGenerator(
     }
 
     private fun generateEnumSuperConstructorCall(body: IrBlockBody, ktElement: KtElement, classDescriptor: ClassDescriptor) {
-        val enumConstructor = context.irBuiltIns.enumClass.descriptor.constructors.single()
+        konst enumConstructor = context.irBuiltIns.enumClass.descriptor.constructors.single()
         body.statements.add(
             IrEnumConstructorCallImpl.fromSymbolDescriptor(
                 ktElement.startOffsetSkippingComments, ktElement.endOffset,
@@ -324,7 +324,7 @@ internal class BodyGenerator(
 
     fun generateEnumEntryInitializer(ktEnumEntry: KtEnumEntry, enumEntryDescriptor: ClassDescriptor): IrExpression {
         if (ktEnumEntry.declarations.isNotEmpty()) {
-            val enumEntryConstructor = enumEntryDescriptor.unsubstitutedPrimaryConstructor!!
+            konst enumEntryConstructor = enumEntryDescriptor.unsubstitutedPrimaryConstructor!!
             return IrEnumConstructorCallImpl.fromSymbolDescriptor(
                 ktEnumEntry.startOffsetSkippingComments, ktEnumEntry.endOffset,
                 context.irBuiltIns.unitType,
@@ -340,15 +340,15 @@ internal class BodyGenerator(
         ktEnumEntry: KtEnumEntry,
         enumClassDescriptor: ClassDescriptor
     ): IrExpression {
-        val statementGenerator = createStatementGenerator()
+        konst statementGenerator = createStatementGenerator()
 
         // Entry constructor with argument(s)
-        val ktSuperCallElement = ktEnumEntry.superTypeListEntries.firstOrNull()
+        konst ktSuperCallElement = ktEnumEntry.superTypeListEntries.firstOrNull()
         if (ktSuperCallElement != null) {
             return statementGenerator.generateEnumConstructorCall(getResolvedCall(ktSuperCallElement)!!, ktEnumEntry)
         }
 
-        val enumDefaultConstructorCall = getResolvedCall(ktEnumEntry)
+        konst enumDefaultConstructorCall = getResolvedCall(ktEnumEntry)
             ?: throw AssertionError("No default constructor call for enum entry $enumClassDescriptor")
         return statementGenerator.generateEnumConstructorCall(enumDefaultConstructorCall, ktEnumEntry)
     }
@@ -367,13 +367,13 @@ internal class BodyGenerator(
         irConstructor: IrConstructor,
         irBlockBody: IrBlockBody
     ) {
-        val thisAsReceiverParameter = classDescriptor.thisAsReceiverParameter
+        konst thisAsReceiverParameter = classDescriptor.thisAsReceiverParameter
         for ((index, receiverDescriptor) in classDescriptor.contextReceivers.withIndex()) {
-            val irValueParameter = irConstructor.valueParameters[index]
+            konst irValueParameter = irConstructor.konstueParameters[index]
             irBlockBody.statements.add(
                 IrSetFieldImpl(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET,
-                    context.additionalDescriptorStorage.getSyntheticField(receiverDescriptor.value).symbol,
+                    context.additionalDescriptorStorage.getSyntheticField(receiverDescriptor.konstue).symbol,
                     IrGetValueImpl(
                         UNDEFINED_OFFSET,
                         UNDEFINED_OFFSET,

@@ -12,7 +12,7 @@ fun testFor(expected: Int, d: dynamic, case: String) {
 
 fun testIterator(expected: Int, d: dynamic, case: String) {
     var actual = 0
-    val it = d.iterator()
+    konst it = d.iterator()
     while (it.hasNext()) {
         actual += it.next() as Int
     }

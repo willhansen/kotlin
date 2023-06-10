@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.build.report.ICReporter
 import org.jetbrains.kotlin.build.report.debug
 import org.jetbrains.kotlin.build.report.metrics.BuildMetricsReporter
 
-class ClasspathSnapshotBuildReporter(private val buildReporter: BuildReporter) :
+class ClasspathSnapshotBuildReporter(private konst buildReporter: BuildReporter) :
     ICReporter by buildReporter, BuildMetricsReporter by buildReporter {
 
     override fun report(message: () -> String, severity: ICReporter.ReportSeverity) {

@@ -12,7 +12,7 @@ fun test(a: A<String>) {
 }
 
 fun test2(a: A<String>) {
-    val b = a as MutableString
+    konst b = a as MutableString
     b.add("")
 }
 

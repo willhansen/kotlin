@@ -42,14 +42,14 @@ fun KtDeclaration.resolveToFirSymbol(
  * Creates [FirBasedSymbol] by [KtDeclaration] .
  * returned [FirDeclaration] will be resolved at least to [phase]
  *
- * If resulted [FirBasedSymbol] is not subtype of [S], throws [InvalidFirElementTypeException]
+ * If resulted [FirBasedSymbol] is not subtype of [S], throws [InkonstidFirElementTypeException]
  */
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 inline fun <reified S : FirBasedSymbol<*>> KtDeclaration.resolveToFirSymbolOfType(
     firResolveSession: LLFirResolveSession,
     phase: FirResolvePhase = FirResolvePhase.RAW_FIR,
 ): @kotlin.internal.NoInfer S {
-    val symbol = resolveToFirSymbol(firResolveSession, phase)
+    konst symbol = resolveToFirSymbol(firResolveSession, phase)
     if (symbol !is S) {
         throwUnexpectedFirElementError(symbol, this, S::class)
     }
@@ -93,7 +93,7 @@ fun KtFile.collectDiagnosticsForFile(
  * Returned [FirElement] is guaranteed to be resolved to [FirResolvePhase.BODY_RESOLVE] phase
  * This operation could be performance affective because it create FIleStructureElement and resolve non-local declaration into BODY phase.
  *
- * The `null` value is returned iff FIR tree does not have corresponding element
+ * The `null` konstue is returned iff FIR tree does not have corresponding element
  */
 fun KtElement.getOrBuildFir(
     firResolveSession: LLFirResolveSession,
@@ -109,14 +109,14 @@ inline fun <reified E : FirElement> KtElement.getOrBuildFirSafe(
 ) = getOrBuildFir(firResolveSession) as? E
 
 /**
- * Get a [FirElement] which was created by [KtElement], but only if it is subtype of [E], throws [InvalidFirElementTypeException] otherwise
+ * Get a [FirElement] which was created by [KtElement], but only if it is subtype of [E], throws [InkonstidFirElementTypeException] otherwise
  * Returned [FirElement] is guaranteed to be resolved to [FirResolvePhase.BODY_RESOLVE] phase
  * This operation could be performance affective because it create FIleStructureElement and resolve non-local declaration into BODY phase
  */
 inline fun <reified E : FirElement> KtElement.getOrBuildFirOfType(
     firResolveSession: LLFirResolveSession,
 ): E {
-    val fir = getOrBuildFir(firResolveSession)
+    konst fir = getOrBuildFir(firResolveSession)
     if (fir is E) return fir
     throwUnexpectedFirElementError(fir, this, E::class)
 }

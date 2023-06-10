@@ -24,7 +24,7 @@ open class KonanException(message: String = "", cause: Throwable? = null) : Exce
 /**
  * An error occurred during external tool invocation. Such as non-zero exit code.
  */
-class KonanExternalToolFailure(message: String, val toolName: String, cause: Throwable? = null) : KonanException(message, cause)
+class KonanExternalToolFailure(message: String, konst toolName: String, cause: Throwable? = null) : KonanException(message, cause)
 
 /**
  * An exception indicating a failed attempt to access some parts of Xcode (e.g. get SDK paths or version).
@@ -38,14 +38,14 @@ class MissingXcodeException(message: String, cause: Throwable? = null) : KonanEx
  */
 class ForeignExceptionMode {
     companion object {
-        val manifestKey = "foreignExceptionMode"
-        val default = Mode.TERMINATE
-        fun byValue(value: String?): Mode = value?.let {
-            Mode.values().find { it.value == value }
-                    ?: throw IllegalArgumentException("Illegal ForeignExceptionMode $value")
+        konst manifestKey = "foreignExceptionMode"
+        konst default = Mode.TERMINATE
+        fun byValue(konstue: String?): Mode = konstue?.let {
+            Mode.konstues().find { it.konstue == konstue }
+                    ?: throw IllegalArgumentException("Illegal ForeignExceptionMode $konstue")
         } ?: default
     }
-    enum class Mode(val value: String) {
+    enum class Mode(konst konstue: String) {
         TERMINATE("terminate"),
         OBJC_WRAP("objc-wrap")
     }

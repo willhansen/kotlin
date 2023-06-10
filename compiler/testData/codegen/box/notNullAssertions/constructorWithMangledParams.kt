@@ -9,9 +9,9 @@ import kotlin.reflect.jvm.isAccessible
 
 
 @JvmInline
-value class IC(val str: String)
+konstue class IC(konst str: String)
 
-class A(val a: IC, val x : String) {
+class A(konst a: IC, konst x : String) {
     fun foo() = "$a$x"
 
     private constructor(x: IC) : this(IC(""), "")
@@ -29,7 +29,7 @@ inline fun assertThrowsExpectedException(block: () -> Unit): Boolean {
 fun box(): String {
     if (!assertThrowsExpectedException { ::A.call(null, "").foo() }) return "Fail 1"
     if (!assertThrowsExpectedException { ::A.call(IC(""), null).foo() }) return "Fail 2"
-    val privateConstructor = A::class.constructors.single { it.parameters.size == 1 }
+    konst privateConstructor = A::class.constructors.single { it.parameters.size == 1 }
     privateConstructor.also { it.isAccessible = true }.call(null).foo()
     return "OK"
 }

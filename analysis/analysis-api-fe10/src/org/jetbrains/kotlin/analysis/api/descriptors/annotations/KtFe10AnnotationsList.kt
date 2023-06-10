@@ -22,33 +22,33 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.name.ClassId
 
 internal class KtFe10AnnotationsList private constructor(
-    private val fe10Annotations: Annotations,
-    private val annotationsToIgnore: Set<ClassId>,
-    private val analysisContext: Fe10AnalysisContext
+    private konst fe10Annotations: Annotations,
+    private konst annotationsToIgnore: Set<ClassId>,
+    private konst analysisContext: Fe10AnalysisContext
 ) : KtAnnotationsList() {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisContext.token
 
-    override val annotations: List<KtAnnotationApplicationWithArgumentsInfo>
+    override konst annotations: List<KtAnnotationApplicationWithArgumentsInfo>
         get() = withValidityAssertion {
             mapNotIgnoredAnnotationsWithIndex { index, annotation ->
                 annotation.toKtAnnotationApplication(analysisContext, index)
             }
         }
 
-    override val annotationInfos: List<KtAnnotationApplicationInfo>
+    override konst annotationInfos: List<KtAnnotationApplicationInfo>
         get() = withValidityAssertion {
             mapNotIgnoredAnnotationsWithIndex { index, annotation ->
                 annotation.toKtAnnotationInfo(index)
             }
         }
 
-    override val annotationClassIds: Collection<ClassId>
+    override konst annotationClassIds: Collection<ClassId>
         get() {
             withValidityAssertion {
-                val result = mutableListOf<ClassId>()
+                konst result = mutableListOf<ClassId>()
                 for (annotation in fe10Annotations) {
-                    val classId = annotation.classIdForAnnotation ?: continue
+                    konst classId = annotation.classIdForAnnotation ?: continue
                     if (classId in annotationsToIgnore) continue
                     result += classId
                 }

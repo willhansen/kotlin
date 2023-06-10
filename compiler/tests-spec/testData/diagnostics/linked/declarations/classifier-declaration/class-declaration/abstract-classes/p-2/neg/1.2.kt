@@ -15,9 +15,9 @@
 package testPackCase1
 private abstract class Base {
 
-    abstract val a: Any
+    abstract konst a: Any
     abstract var b: Any
-    internal abstract val c: Any
+    internal abstract konst c: Any
     internal abstract var d: Any
 
 
@@ -26,16 +26,16 @@ private abstract class Base {
 }
 
 fun case1() {
-    val impl = object : Base() {
+    konst impl = object : Base() {
         override var a: Any
             get() = TODO()
-            set(value) {}
-        override <!VAR_OVERRIDDEN_BY_VAL!>val<!> b: Any
+            set(konstue) {}
+        override <!VAR_OVERRIDDEN_BY_VAL!>konst<!> b: Any
             get() = TODO()
         override var c: Any
             get() = TODO()
-            set(value) {}
-        override <!VAR_OVERRIDDEN_BY_VAL!>val<!> d: Any
+            set(konstue) {}
+        override <!VAR_OVERRIDDEN_BY_VAL!>konst<!> d: Any
             get() = TODO()
 
         override fun foo() {}
@@ -55,9 +55,9 @@ fun case1() {
 package testPackCase2
 private abstract class Base {
 
-    abstract val a: Any
+    abstract konst a: Any
     abstract var b: Any
-    internal abstract val c: Any
+    internal abstract konst c: Any
     internal abstract var d: Any
 
 
@@ -68,15 +68,15 @@ private abstract class Base {
 
 
 fun case2() {
-    val impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Base() {
+    konst impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Base() {
         override var b: Any
             get() = TODO()
-            set(value) {}
-        override val c: Any
+            set(konstue) {}
+        override konst c: Any
             get() = TODO()
         override var d: Any
             get() = TODO()
-            set(value) {}
+            set(konstue) {}
 
         override fun foo() {
             TODO()
@@ -94,9 +94,9 @@ fun case2() {
 package testPackCase3
 private abstract class Base {
 
-    abstract val a: Any
+    abstract konst a: Any
     abstract var b: Any
-    internal abstract val c: Any
+    internal abstract konst c: Any
     internal abstract var d: Any
 
 
@@ -105,15 +105,15 @@ private abstract class Base {
 }
 
 fun case3() {
-    val impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Base() {
+    konst impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Base() {
         override var b: Any
             get() = TODO()
-            set(value) {}
-        override val c: Any
+            set(konstue) {}
+        override konst c: Any
             get() = TODO()
         override var d: Any
             get() = TODO()
-            set(value) {}
+            set(konstue) {}
 
         override fun foo() {}
 

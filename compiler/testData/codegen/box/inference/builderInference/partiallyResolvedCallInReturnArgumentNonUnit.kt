@@ -9,7 +9,7 @@ fun foo() =
     }
 
 
-class Out<out V>(val v: V)
+class Out<out V>(konst v: V)
 class Box<R> {
     var boxed: R? = null
 

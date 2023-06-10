@@ -60,7 +60,7 @@ public class A6 {
 
 @Target(AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ClassHolder(val value: kotlin.reflect.KClass<*>)
+annotation class ClassHolder(konst konstue: kotlin.reflect.KClass<*>)
 
 public class A7 {
     public class B7 {
@@ -71,13 +71,13 @@ public class A7 {
 }
 
 @JvmInline
-public value class A8(private val value: Int) {
+public konstue class A8(private konst konstue: Int) {
     @JvmInline
-    public value class B8(private val value: Int) {
+    public konstue class B8(private konst konstue: Int) {
         @JvmInline
-        public value class C8(private val value: Int) {
+        public konstue class C8(private konst konstue: Int) {
             @JvmInline
-            public value class D8(private val value: Int)
+            public konstue class D8(private konst konstue: Int)
         }
     }
 }
@@ -95,13 +95,13 @@ class X {
     }
     fun f3(x: Any): Any? = x as? A3.B3.C3
     fun f4(): String {
-        val x = listOf<A4.B4.C4>()
+        konst x = listOf<A4.B4.C4>()
         return x.toString()
     }
 
     class Y {
         fun f5(): String {
-            val x: A5.B5.C5? = null
+            konst x: A5.B5.C5? = null
             return x.toString()
         }
         fun f6(): A6.B6.C6? = null

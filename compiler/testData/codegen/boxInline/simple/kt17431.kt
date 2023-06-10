@@ -3,16 +3,16 @@
 // FILE: 1.kt
 package test
 
-class WeakReference<T>(val value: T)
+class WeakReference<T>(konst konstue: T)
 
 inline fun <K, V> MutableMap<K, WeakReference<V>>.getOrPutWeak(key: K, defaultValue: ()->V): V {
-    val value = get(key)?.value
-    return if (value == null) {
-        val answer = defaultValue()
+    konst konstue = get(key)?.konstue
+    return if (konstue == null) {
+        konst answer = defaultValue()
         put(key, WeakReference(answer))
         answer
     } else {
-        value
+        konstue
     }
 }
 
@@ -26,9 +26,9 @@ class LabelHolder {
         return "hello".label
     }
 
-    private val labels = hashMapOf<String?, WeakReference<String>>()
+    private konst labels = hashMapOf<String?, WeakReference<String>>()
 
-    private val String?.label: String
+    private konst String?.label: String
         get(): String = labels.getOrPutWeak(this) { "OK" }
 }
 

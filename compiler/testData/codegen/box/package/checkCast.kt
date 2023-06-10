@@ -1,7 +1,7 @@
-class C(val x: Int) {
+class C(konst x: Int) {
   override fun equals(rhs: Any?): Boolean {
     if (rhs is C) {
-      val rhsC = rhs as C
+      konst rhsC = rhs as C
       return rhsC.x == x
     }
     return false
@@ -9,7 +9,7 @@ class C(val x: Int) {
 }
 
 fun box(): String {
-  val c1 = C(10)
-  val c2 = C(10)
+  konst c1 = C(10)
+  konst c2 = C(10)
   return if (c1 == c2) "OK" else "fail"
 }

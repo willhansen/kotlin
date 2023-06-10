@@ -67,16 +67,16 @@ public interface IrFunctionBaseOrBuilder extends
   int getContextReceiverParametersCount();
 
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter> 
       getValueParameterList();
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter getValueParameter(int index);
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter value_parameter = 6;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrValueParameter konstue_parameter = 6;</code>
    */
   int getValueParameterCount();
 

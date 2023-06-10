@@ -41,7 +41,7 @@ class MetadataPackageFragmentProvider(
     finder: KotlinMetadataFinder,
     moduleDescriptor: ModuleDescriptor,
     notFoundClasses: NotFoundClasses,
-    private val metadataPartProvider: MetadataPartProvider,
+    private konst metadataPartProvider: MetadataPartProvider,
     contractDeserializer: ContractDeserializer,
     kotlinTypeChecker: NewKotlinTypeChecker,
     samConversionResolver: SamConversionResolver,
@@ -80,10 +80,10 @@ class MetadataPackageFragment(
     fqName: FqName,
     storageManager: StorageManager,
     module: ModuleDescriptor,
-    private val metadataPartProvider: MetadataPartProvider,
-    private val finder: KotlinMetadataFinder
+    private konst metadataPartProvider: MetadataPartProvider,
+    private konst finder: KotlinMetadataFinder
 ) : DeserializedPackageFragment(fqName, storageManager, module) {
-    override val classDataFinder = MetadataClassDataFinder(finder)
+    override konst classDataFinder = MetadataClassDataFinder(finder)
 
     private lateinit var components: DeserializationComponents
 
@@ -91,16 +91,16 @@ class MetadataPackageFragment(
         this.components = components
     }
 
-    private val memberScope = storageManager.createLazyValue { computeMemberScope() }
+    private konst memberScope = storageManager.createLazyValue { computeMemberScope() }
 
     private fun computeMemberScope(): MemberScope {
         // For each .kotlin_metadata file which represents a package part, add a separate deserialized scope
         // with top level callables and type aliases (but no classes) only from that part
-        val packageParts = metadataPartProvider.findMetadataPackageParts(fqName.asString())
-        val scopes = arrayListOf<DeserializedPackageMemberScope>()
+        konst packageParts = metadataPartProvider.findMetadataPackageParts(fqName.asString())
+        konst scopes = arrayListOf<DeserializedPackageMemberScope>()
         for (partName in packageParts) {
-            val stream = finder.findMetadata(ClassId(fqName, Name.identifier(partName))) ?: continue
-            val (proto, nameResolver, version) = readProto(stream)
+            konst stream = finder.findMetadata(ClassId(fqName, Name.identifier(partName))) ?: continue
+            konst (proto, nameResolver, version) = readProto(stream)
 
             scopes.add(
                 DeserializedPackageMemberScope(
@@ -142,7 +142,7 @@ class MetadataPackageFragment(
     }
 
     companion object {
-        const val METADATA_FILE_EXTENSION = "kotlin_metadata"
-        const val DOT_METADATA_FILE_EXTENSION = ".$METADATA_FILE_EXTENSION"
+        const konst METADATA_FILE_EXTENSION = "kotlin_metadata"
+        const konst DOT_METADATA_FILE_EXTENSION = ".$METADATA_FILE_EXTENSION"
     }
 }

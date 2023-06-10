@@ -1,12 +1,12 @@
 package
 
 package foo {
-    public val foo.A.e: kotlin.Int
-    public val foo.B.r: kotlin.Int
+    public konst foo.A.e: kotlin.Int
+    public konst foo.B.r: kotlin.Int
 
     public open class A {
         public constructor A()
-        public final val foo.B.w: kotlin.Int
+        public final konst foo.B.w: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -14,7 +14,7 @@ package foo {
 
     public final class B {
         public constructor B()
-        public final val foo.A.f: kotlin.Int
+        public final konst foo.A.f: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

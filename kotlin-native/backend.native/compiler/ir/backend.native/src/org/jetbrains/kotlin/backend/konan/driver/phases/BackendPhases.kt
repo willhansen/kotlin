@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.ir.util.file
 import org.jetbrains.kotlin.name.FqName
 
 internal data class SpecialBackendChecksInput(
-        val irModule: IrModuleFragment,
-        val symbols: KonanSymbols,
+        konst irModule: IrModuleFragment,
+        konst symbols: KonanSymbols,
 ) : KotlinBackendIrHolder {
-    override val kotlinIr: IrElement
+    override konst kotlinIr: IrElement
         get() = irModule
 }
 
-internal val SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PsiToIrContext, SpecialBackendChecksInput>(
+internal konst SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PsiToIrContext, SpecialBackendChecksInput>(
         "SpecialBackendChecks",
         "Special backend checks",
         preactions = getDefaultIrActions(),
@@ -41,11 +41,11 @@ internal val SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PsiToIrC
     SpecialBackendChecksTraversal(context, input.symbols, input.irModule.irBuiltins).lower(input.irModule)
 }
 
-internal val K2SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PhaseContext, Fir2IrOutput>(
+internal konst K2SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PhaseContext, Fir2IrOutput>(
         "SpecialBackendChecks",
         "Special backend checks",
 ) { context, input ->
-    val moduleFragment = input.irModuleFragment
+    konst moduleFragment = input.irModuleFragment
     SpecialBackendChecksTraversal(
             context,
             input.symbols,
@@ -53,9 +53,9 @@ internal val K2SpecialBackendChecksPhase = createSimpleNamedCompilerPhase<PhaseC
     ).lower(moduleFragment)
 }
 
-internal val CopyDefaultValuesToActualPhase = createSimpleNamedCompilerPhase<PhaseContext, IrModuleFragment>(
+internal konst CopyDefaultValuesToActualPhase = createSimpleNamedCompilerPhase<PhaseContext, IrModuleFragment>(
         name = "CopyDefaultValuesToActual",
-        description = "Copy default values from expect to actual declarations",
+        description = "Copy default konstues from expect to actual declarations",
         preactions = getDefaultIrActions(),
         postactions = getDefaultIrActions(),
 ) { _, input ->
@@ -70,15 +70,15 @@ internal fun <T : PhaseContext> PhaseEngine<T>.runK2SpecialBackendChecks(fir2IrO
     runPhase(K2SpecialBackendChecksPhase, fir2IrOutput)
 }
 
-internal val EntryPointPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
+internal konst EntryPointPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
         name = "addEntryPoint",
         description = "Add entry point for program",
         preactions = getDefaultIrActions(),
         postactions = getDefaultIrActions(),
 ) { context, module ->
-    val parent = context.context
-    val entryPoint = parent.ir.symbols.entryPoint!!.owner
-    val file: IrFile = if (context.llvmModuleSpecification.containsDeclaration(entryPoint)) {
+    konst parent = context.context
+    konst entryPoint = parent.ir.symbols.entryPoint!!.owner
+    konst file: IrFile = if (context.llvmModuleSpecification.containsDeclaration(entryPoint)) {
         entryPoint.file
     } else {
         // `main` function is compiled to other LLVM module.

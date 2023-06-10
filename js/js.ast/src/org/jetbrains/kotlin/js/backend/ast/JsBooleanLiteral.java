@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.js.backend.ast;
 import org.jetbrains.annotations.NotNull;
 
 public final class JsBooleanLiteral extends JsLiteral.JsValueLiteral {
-    private final boolean value;
+    private final boolean konstue;
 
-    public JsBooleanLiteral(boolean value) {
-        this.value = value;
+    public JsBooleanLiteral(boolean konstue) {
+        this.konstue = konstue;
     }
 
     public static boolean isTrue(@NotNull JsExpression expression) {
@@ -34,7 +34,7 @@ public final class JsBooleanLiteral extends JsLiteral.JsValueLiteral {
     }
 
     public boolean getValue() {
-    return value;
+    return konstue;
   }
 
     @Override
@@ -51,6 +51,6 @@ public final class JsBooleanLiteral extends JsLiteral.JsValueLiteral {
     @NotNull
     @Override
     public JsBooleanLiteral deepCopy() {
-        return new JsBooleanLiteral(value).withMetadataFrom(this);
+        return new JsBooleanLiteral(konstue).withMetadataFrom(this);
     }
 }

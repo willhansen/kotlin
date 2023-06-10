@@ -13,7 +13,7 @@ import org.junit.Test
 class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test simple parameterized class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -45,7 +45,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized type alias - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -81,7 +81,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized type alias - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -117,7 +117,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized type alias - 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -156,7 +156,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized type alias - 3`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -201,7 +201,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized type alias - 4`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -236,7 +236,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
 
 
     fun `test type alias from dependencies parameterized with library source type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             registerDependency("(a, b)") {
@@ -284,7 +284,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized function - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
@@ -308,7 +308,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized function - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -333,7 +333,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized function - 2`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -361,7 +361,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test parameterized function - 3`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -391,7 +391,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test member function - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -425,7 +425,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test member function - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -466,7 +466,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
 
     @Suppress("unused") // https://youtrack.jetbrains.com/issue/KT-48850
     fun `KT-48850 - test non-commonizable type alias arguments - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -496,7 +496,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
 
     @Suppress("unused") // https://youtrack.jetbrains.com/issue/KT-48850
     fun `KT-48850 - test non-commonizable type alias arguments - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
@@ -527,7 +527,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test nested arguments`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource """
                 class X<T>
@@ -552,7 +552,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test nested arguments - with typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource """
                 class X<T>
@@ -583,7 +583,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test KT-51686 - type argument is parameterized class`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource """
                 class CPointer<T>
@@ -620,7 +620,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test KT-51686 - type argument is parameterized class - nullability - 0`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource """
                 class A
@@ -651,7 +651,7 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test KT-51686 - type argument is parameterized class - nullability - 1`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             "a" withSource """
                 class A<T>
@@ -659,16 +659,16 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
                 typealias TA1<T> = X<T>
                 typealias TA2<T> = X<T>?
                                 
-                val p1: A<TA1<Unit>> get() = null!!
-                val p2: A<TA1<Unit?> get() = null!!
-                val p3: A<TA1<Unit>?> get() = null!!
-                val p4: A<TA2<Unit>> get() = null!!
-                val p5: A<TA2<Unit?>> get() = null!!
-                val p6: A<TA2<Unit>?> get() = null!!
-                val p7: A<TA1<Unit>>? get() = null!!
-                val p8: TA2<A<Unit>> get() = null!!
-                val p9: TA2<A<Unit>?> get() = null!!
-                val p10: TA2<Unit> get() = null!!
+                konst p1: A<TA1<Unit>> get() = null!!
+                konst p2: A<TA1<Unit?> get() = null!!
+                konst p3: A<TA1<Unit>?> get() = null!!
+                konst p4: A<TA2<Unit>> get() = null!!
+                konst p5: A<TA2<Unit?>> get() = null!!
+                konst p6: A<TA2<Unit>?> get() = null!!
+                konst p7: A<TA1<Unit>>? get() = null!!
+                konst p8: TA2<A<Unit>> get() = null!!
+                konst p9: TA2<A<Unit>?> get() = null!!
+                konst p10: TA2<Unit> get() = null!!
                 fun<T> f1(): A<TA1<TA2<T>>> = null!! 
             """.trimIndent()
 
@@ -678,16 +678,16 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
                 typealias TA1<T> = X<T>
                 typealias TA2<T> = X<T>?
                                 
-                val p1: A<TA1<Unit>> get() = null!!
-                val p2: A<TA1<Unit?> get() = null!!
-                val p3: A<TA1<Unit>?> get() = null!!
-                val p4: A<TA2<Unit>> get() = null!!
-                val p5: A<TA2<Unit?>> get() = null!!
-                val p6: A<TA2<Unit>?> get() = null!!
-                val p7: A<TA1<Unit>>? get() = null!!
-                val p8: TA2<A<Unit>> get() = null!!
-                val p9: TA2<A<Unit>?> get() = null!!
-                val p10: TA2<Unit> get() = null!!
+                konst p1: A<TA1<Unit>> get() = null!!
+                konst p2: A<TA1<Unit?> get() = null!!
+                konst p3: A<TA1<Unit>?> get() = null!!
+                konst p4: A<TA2<Unit>> get() = null!!
+                konst p5: A<TA2<Unit?>> get() = null!!
+                konst p6: A<TA2<Unit>?> get() = null!!
+                konst p7: A<TA1<Unit>>? get() = null!!
+                konst p8: TA2<A<Unit>> get() = null!!
+                konst p9: TA2<A<Unit>?> get() = null!!
+                konst p10: TA2<Unit> get() = null!!
                 fun<T> f1(): A<TA1<TA2<T>>> = null!! 
             """.trimIndent()
         }
@@ -699,16 +699,16 @@ class ParameterizedTypesCommonizationTest : AbstractInlineSourcesCommonizationTe
                 typealias TA1<T> = X<T>
                 typealias TA2<T> = X<T>?
                 
-                expect val p1: A<TA1<Unit>> 
-                expect val p2: A<TA1<Unit?> 
-                expect val p3: A<TA1<Unit>?>
-                expect val p4: A<TA2<Unit>?>
-                expect val p5: A<TA2<Unit?>?>
-                expect val p6: A<TA2<Unit>?>
-                expect val p7: A<TA1<Unit>>?
-                expect val p8: TA2<A<Unit>>?
-                expect val p9: TA2<A<Unit>?>?
-                expect val p10: TA2<Unit>?
+                expect konst p1: A<TA1<Unit>> 
+                expect konst p2: A<TA1<Unit?> 
+                expect konst p3: A<TA1<Unit>?>
+                expect konst p4: A<TA2<Unit>?>
+                expect konst p5: A<TA2<Unit?>?>
+                expect konst p6: A<TA2<Unit>?>
+                expect konst p7: A<TA1<Unit>>?
+                expect konst p8: TA2<A<Unit>>?
+                expect konst p9: TA2<A<Unit>?>?
+                expect konst p10: TA2<Unit>?
                 expect fun<T> f1(): A<TA1<TA2<T>?>>
             """.trimIndent()
         )

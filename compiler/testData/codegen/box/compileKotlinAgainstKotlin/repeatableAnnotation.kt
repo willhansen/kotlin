@@ -7,7 +7,7 @@
 // FILE: A.kt
 
 @Repeatable
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 // MODULE: main(lib)
 // FILE: box.kt
@@ -18,6 +18,6 @@ class C {
 }
 
 fun box(): String {
-    val a = C::class.java.getDeclaredMethod("f").getAnnotationsByType(A::class.java)
-    return a[0].value + a[1].value
+    konst a = C::class.java.getDeclaredMethod("f").getAnnotationsByType(A::class.java)
+    return a[0].konstue + a[1].konstue
 }

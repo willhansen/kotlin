@@ -4,7 +4,7 @@ public fun test(/*0*/ x: A): kotlin.Unit
 
 public abstract class A {
     public constructor A()
-    protected abstract val bar: kotlin.String
+    protected abstract konst bar: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     protected abstract fun foo(): kotlin.String
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -12,7 +12,7 @@ public abstract class A {
 }
 
 public interface B {
-    public abstract val bar: kotlin.String
+    public abstract konst bar: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public abstract fun foo(): kotlin.String
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

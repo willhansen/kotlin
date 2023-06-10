@@ -1,7 +1,7 @@
 // FILE: main.kt
 import other.A as AAA
 
-val a<caret_onAirContext> = 5
+konst a<caret_onAirContext> = 5
 
 // FILE: other/other.kt
 package other

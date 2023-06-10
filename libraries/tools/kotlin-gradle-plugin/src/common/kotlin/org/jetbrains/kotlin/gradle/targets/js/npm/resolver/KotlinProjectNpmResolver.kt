@@ -27,9 +27,9 @@ class KotlinProjectNpmResolver(
     project: Project,
     var resolver: KotlinRootNpmResolver
 ) : Serializable {
-    val projectPath by lazy { project.path }
+    konst projectPath by lazy { project.path }
 
-    private val byCompilation = mutableMapOf<String, KotlinCompilationNpmResolver>()
+    private konst byCompilation = mutableMapOf<String, KotlinCompilationNpmResolver>()
 
     operator fun get(compilation: KotlinJsCompilation): KotlinCompilationNpmResolver {
         return byCompilation[compilation.disambiguatedName] ?: error("$compilation was not registered in $this")
@@ -41,15 +41,15 @@ class KotlinProjectNpmResolver(
 
     private var resolution: KotlinProjectNpmResolution? = null
 
-    val compilationResolvers: Collection<KotlinCompilationNpmResolver>
-        get() = byCompilation.values
+    konst compilationResolvers: Collection<KotlinCompilationNpmResolver>
+        get() = byCompilation.konstues
 
     init {
         project.addContainerListeners()
     }
 
     private fun Project.addContainerListeners() {
-        val kotlin = kotlinExtensionOrNull
+        konst kotlin = kotlinExtensionOrNull
             ?: error("NpmResolverPlugin should be applied after kotlin plugin")
 
         when (kotlin) {
@@ -99,8 +99,8 @@ class KotlinProjectNpmResolver(
     fun close(): KotlinProjectNpmResolution {
         return resolution ?: KotlinProjectNpmResolution(
             byCompilation
-                .map { (key, value) ->
-                    value.close()?.let { key to it }
+                .map { (key, konstue) ->
+                    konstue.close()?.let { key to it }
                 }
                 .filterNotNull()
                 .toMap(),

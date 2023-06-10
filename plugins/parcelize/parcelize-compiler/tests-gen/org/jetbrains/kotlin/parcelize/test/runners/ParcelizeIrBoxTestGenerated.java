@@ -494,14 +494,14 @@ public class ParcelizeIrBoxTestGenerated extends AbstractParcelizeIrBoxTest {
     }
 
     @Test
-    @TestMetadata("valueClassWrapper.kt")
+    @TestMetadata("konstueClassWrapper.kt")
     public void testValueClassWrapper() throws Exception {
-        runTest("plugins/parcelize/parcelize-compiler/testData/box/valueClassWrapper.kt");
+        runTest("plugins/parcelize/parcelize-compiler/testData/box/konstueClassWrapper.kt");
     }
 
     @Test
-    @TestMetadata("valueClasses.kt")
+    @TestMetadata("konstueClasses.kt")
     public void testValueClasses() throws Exception {
-        runTest("plugins/parcelize/parcelize-compiler/testData/box/valueClasses.kt");
+        runTest("plugins/parcelize/parcelize-compiler/testData/box/konstueClasses.kt");
     }
 }

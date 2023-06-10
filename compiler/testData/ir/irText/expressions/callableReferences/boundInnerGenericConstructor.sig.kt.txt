@@ -11,7 +11,7 @@ class Foo<T : Any?> {
     // CHECK:
     //   Mangled name: test.Foo.Inner{}a
     //   Public signature: test/Foo.Inner.a|-1200697420457237799[0]
-    val a: T
+    konst a: T
       // CHECK JVM_IR:
       //   Mangled name: test.Foo.Inner#<get-a>(){}2:0
       //   Public signature: test/Foo.Inner.a.<get-a>|6634660852321063487[0]
@@ -23,7 +23,7 @@ class Foo<T : Any?> {
     // CHECK:
     //   Mangled name: test.Foo.Inner{}b
     //   Public signature: test/Foo.Inner.b|772347207915745207[0]
-    val b: P
+    konst b: P
       // CHECK JVM_IR:
       //   Mangled name: test.Foo.Inner#<get-b>(){}1:0
       //   Public signature: test/Foo.Inner.b.<get-b>|-8930371436958509614[0]

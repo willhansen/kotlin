@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.tooling.core.mutableExtrasOf
 import java.io.Serializable
 
 data class IdeaKotlinSourceDependency(
-    val type: Type,
-    override val coordinates: IdeaKotlinSourceCoordinates,
-    override val extras: MutableExtras = mutableExtrasOf()
+    konst type: Type,
+    override konst coordinates: IdeaKotlinSourceCoordinates,
+    override konst extras: MutableExtras = mutableExtrasOf()
 ) : IdeaKotlinDependency {
 
     @IdeaKotlinModel
@@ -20,11 +20,11 @@ data class IdeaKotlinSourceDependency(
         Regular, Friend, DependsOn;
 
         internal companion object {
-            const val serialVersionUID = 0L
+            const konst serialVersionUID = 0L
         }
     }
 
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

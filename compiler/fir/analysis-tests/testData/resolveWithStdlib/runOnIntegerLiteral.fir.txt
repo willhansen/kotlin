@@ -4,7 +4,7 @@ FILE: runOnIntegerLiteral.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int|
+        public final konst x: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
         init {

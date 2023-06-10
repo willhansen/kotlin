@@ -2,7 +2,7 @@
 package foo
 
 class Test() {
-    val p = "OK"
+    konst p = "OK"
 }
 
 fun box(): String {

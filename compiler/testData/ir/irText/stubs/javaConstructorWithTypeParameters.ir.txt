@@ -10,7 +10,7 @@ FILE fqName:<root> fileName:/javaConstructorWithTypeParameters.kt
         CONSTRUCTOR_CALL 'public constructor <init> <X1> (x1: @[FlexibleNullability] X1 of <root>.J1.<init>?) declared in <root>.J1' type=<root>.J1<kotlin.Int> origin=null
           <class: T1>: @[FlexibleNullability] kotlin.Int?
           <X1>: @[FlexibleNullability] kotlin.Int?
-          x1: CONST Int type=kotlin.Int value=1
+          x1: CONST Int type=kotlin.Int konstue=1
   FUN name:test3 visibility:public modality:FINAL <> (j1:<root>.J1<kotlin.Any>) returnType:<root>.J1.J2<kotlin.Int, kotlin.Any>
     VALUE_PARAMETER name:j1 index:0 type:<root>.J1<kotlin.Any>
     BLOCK_BODY
@@ -26,4 +26,4 @@ FILE fqName:<root> fileName:/javaConstructorWithTypeParameters.kt
           <class: T2>: @[FlexibleNullability] kotlin.Int?
           <X2>: @[FlexibleNullability] kotlin.Int?
           $outer: GET_VAR 'j1: <root>.J1<kotlin.Any> declared in <root>.test4' type=<root>.J1<kotlin.Any> origin=null
-          x2: CONST Int type=kotlin.Int value=1
+          x2: CONST Int type=kotlin.Int konstue=1

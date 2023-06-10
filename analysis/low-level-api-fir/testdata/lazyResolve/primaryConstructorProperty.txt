@@ -6,7 +6,7 @@ FILE: [ResolvedTo(RAW_FIR)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -21,7 +21,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -36,7 +36,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -51,7 +51,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -66,7 +66,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -81,7 +81,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val prop: Int = R|<local>/prop|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst prop: Int = R|<local>/prop|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
         public? final? [ResolvedTo(RAW_FIR)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -96,7 +96,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -111,7 +111,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -126,7 +126,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -141,7 +141,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -156,7 +156,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -171,7 +171,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -186,7 +186,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(STATUS)] fun foo(): <implicit> { LAZY_BLOCK }
@@ -201,7 +201,7 @@ FILE: [ResolvedTo(IMPORTS)] primaryConstructorProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val prop: R|kotlin/Int| = R|<local>/prop|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst prop: R|kotlin/Int| = R|<local>/prop|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
         public final [ResolvedTo(BODY_RESOLVE)] fun foo(): R|kotlin/String| {

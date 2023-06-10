@@ -1,16 +1,16 @@
 == O ==
 object O {
-    val y = 1
+    konst y = 1
 }
 ---------------------
 1   <v0>: Int   NEW: r(1) -> <v0>
 =====================
 == E ==
-enum class E(val x: Int) {
+enum class E(konst x: Int) {
     E1(0)
 }
 ---------------------
-      <v0>: Int      NEW: magic[FAKE_INITIALIZER](val x: Int) -> <v0>
+      <v0>: Int      NEW: magic[FAKE_INITIALIZER](konst x: Int) -> <v0>
       <v1>: {<: E}   NEW: magic[FAKE_INITIALIZER](E1(0)) -> <v1>
 0     <v2>: Int      NEW: r(0) -> <v2>
 (0)   <v3>: *        NEW: call((0), <init>|<v2>) -> <v3>
@@ -18,7 +18,7 @@ enum class E(val x: Int) {
 == C ==
 class C {
     companion object {
-        val z = 2
+        konst z = 2
     }
 }
 ---------------------

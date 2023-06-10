@@ -32,7 +32,7 @@ fun f4(u: OptIn0 /* TODO */) {}
 
 // Usages as ::class literals should be errors
 
-annotation class VarargKClasses(vararg val k: KClass<*>)
+annotation class VarargKClasses(vararg konst k: KClass<*>)
 
 @VarargKClasses(
     <!OPT_IN_CAN_ONLY_BE_USED_AS_ANNOTATION!>RequiresOptIn<!>::class,
@@ -50,7 +50,7 @@ annotation class Marker {
     class NestedClass
 
     companion object {
-        const val value = 42
+        const konst konstue = 42
     }
 }
 
@@ -66,7 +66,7 @@ fun f9(m: Marker0) {}
 // Usages of markers as qualifiers are errors as well (we can lift this restriction for select cases)
 
 fun f10(m: Marker.NestedClass) {
-    Marker.value
+    Marker.konstue
 }
 
 // FILE: usage-from-other-file.kt

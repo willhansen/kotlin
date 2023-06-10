@@ -36,17 +36,17 @@ fun zzz(a: A<Int, Int>) {
 }
 
 @Test fun runTest() {
-    val b = B()
+    konst b = B()
     zzz(b)
-    val a = A<Int, Int>()
+    konst a = A<Int, Int>()
     zzz(a)
     println(b.z)
     println(b.q)
-    val i1: I1<Int> = b
+    konst i1: I1<Int> = b
     i1.foo(56, 42)
     println(b.z)
     println(b.q)
-    val i2: I2<Int> = b
+    konst i2: I2<Int> = b
     i2.foo(156, 142)
     println(b.z)
     println(b.q)

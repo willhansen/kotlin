@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.checkers.diagnostics
 
-data class PositionalTextDiagnostic(val diagnostic: TextDiagnostic, val start: Int, val end: Int)
+data class PositionalTextDiagnostic(konst diagnostic: TextDiagnostic, konst start: Int, konst end: Int)

@@ -19,23 +19,23 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-/** Return the negated value if the expression is const, otherwise call unaryMinus(). */
+/** Return the negated konstue if the expression is const, otherwise call unaryMinus(). */
 internal fun IrExpression.negate(): IrExpression {
-    return when (val value = (this as? IrConst<*>)?.value as? Number) {
-        is Int -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Int, -value)
-        is Long -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Long, -value)
+    return when (konst konstue = (this as? IrConst<*>)?.konstue as? Number) {
+        is Int -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Int, -konstue)
+        is Long -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Long, -konstue)
         else -> {
             // This expression's type could be Nothing from an exception throw, in which case the unary minus function will not exist.
             if (type.isNothing()) return this
 
-            val unaryMinusFun = type.getClass()!!.functions.single {
+            konst unaryMinusFun = type.getClass()!!.functions.single {
                 it.name == OperatorNameConventions.UNARY_MINUS &&
-                        it.valueParameters.isEmpty()
+                        it.konstueParameters.isEmpty()
             }
             IrCallImpl(
                 startOffset, endOffset, unaryMinusFun.returnType,
                 unaryMinusFun.symbol,
-                valueArgumentsCount = 0,
+                konstueArgumentsCount = 0,
                 typeArgumentsCount = 0
             ).apply {
                 dispatchReceiver = this@negate
@@ -46,19 +46,19 @@ internal fun IrExpression.negate(): IrExpression {
 
 /** Return `this - 1` if the expression is const, otherwise call dec(). */
 internal fun IrExpression.decrement(): IrExpression {
-    return when (val thisValue = (this as? IrConst<*>)?.value) {
+    return when (konst thisValue = (this as? IrConst<*>)?.konstue) {
         is Int -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Int, thisValue - 1)
         is Long -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Long, thisValue - 1)
         is Char -> IrConstImpl(startOffset, endOffset, type, IrConstKind.Char, thisValue - 1)
         else -> {
-            val decFun = type.getClass()!!.functions.single {
+            konst decFun = type.getClass()!!.functions.single {
                 it.name == OperatorNameConventions.DEC &&
-                        it.valueParameters.isEmpty()
+                        it.konstueParameters.isEmpty()
             }
             IrCallImpl(
                 startOffset, endOffset, type,
                 decFun.symbol,
-                valueArgumentsCount = 0,
+                konstueArgumentsCount = 0,
                 typeArgumentsCount = 0
             ).apply {
                 dispatchReceiver = this@decrement
@@ -67,7 +67,7 @@ internal fun IrExpression.decrement(): IrExpression {
     }
 }
 
-internal val IrExpression.canChangeValueDuringExecution: Boolean
+internal konst IrExpression.canChangeValueDuringExecution: Boolean
     get() = when (this) {
         is IrGetValue ->
             !this.symbol.owner.isImmutable
@@ -79,7 +79,7 @@ internal val IrExpression.canChangeValueDuringExecution: Boolean
             true
     }
 
-internal val IrExpression.canHaveSideEffects: Boolean
+internal konst IrExpression.canHaveSideEffects: Boolean
     get() = !isTrivial()
 
 private fun Any?.toByte(): Byte? =
@@ -124,8 +124,8 @@ private fun Any?.toDouble(): Double? =
         else -> null
     }
 
-internal val IrExpression.constLongValue: Long?
-    get() = if (this is IrConst<*>) value.toLong() else null
+internal konst IrExpression.constLongValue: Long?
+    get() = if (this is IrConst<*>) konstue.toLong() else null
 
 /**
  * If [expression] can have side effects ([IrExpression.canHaveSideEffects]), this function creates a temporary local variable for that
@@ -146,11 +146,11 @@ internal fun DeclarationIrBuilder.createTemporaryVariableIfNecessary(
     }
 
 /**
- * If [expression] can change value during execution ([IrExpression.canChangeValueDuringExecution]),
+ * If [expression] can change konstue during execution ([IrExpression.canChangeValueDuringExecution]),
  * this function creates a temporary local variable for that expression and returns that variable and an [IrGetValue] for it.
  * Otherwise, it returns no variable and [expression].
- * Note that a variable expression doesn't have side effects per se, but can change value during execution,
- * so if it's denotes a value that would be used in a loop (say, a loop bound), it should be cached in a temporary at the loop header.
+ * Note that a variable expression doesn't have side effects per se, but can change konstue during execution,
+ * so if it's denotes a konstue that would be used in a loop (say, a loop bound), it should be cached in a temporary at the loop header.
  *
  * This helps reduce local variable usage.
  */
@@ -171,29 +171,29 @@ internal fun IrExpression.castIfNecessary(targetClass: IrClass) =
         // This expression's type could be Nothing from an exception throw.
         type == targetClass.defaultType || type.isNothing() -> this
         this is IrConst<*> && targetClass.defaultType.isPrimitiveType() -> { // TODO: convert unsigned too?
-            val targetType = targetClass.defaultType
+            konst targetType = targetClass.defaultType
             when (targetType.getPrimitiveType()) {
-                PrimitiveType.BYTE -> IrConstImpl.byte(startOffset, endOffset, targetType, value.toByte()!!)
-                PrimitiveType.SHORT -> IrConstImpl.short(startOffset, endOffset, targetType, value.toShort()!!)
-                PrimitiveType.INT -> IrConstImpl.int(startOffset, endOffset, targetType, value.toInt()!!)
-                PrimitiveType.LONG -> IrConstImpl.long(startOffset, endOffset, targetType, value.toLong()!!)
-                PrimitiveType.FLOAT -> IrConstImpl.float(startOffset, endOffset, targetType, value.toFloat()!!)
-                PrimitiveType.DOUBLE -> IrConstImpl.double(startOffset, endOffset, targetType, value.toDouble()!!)
+                PrimitiveType.BYTE -> IrConstImpl.byte(startOffset, endOffset, targetType, konstue.toByte()!!)
+                PrimitiveType.SHORT -> IrConstImpl.short(startOffset, endOffset, targetType, konstue.toShort()!!)
+                PrimitiveType.INT -> IrConstImpl.int(startOffset, endOffset, targetType, konstue.toInt()!!)
+                PrimitiveType.LONG -> IrConstImpl.long(startOffset, endOffset, targetType, konstue.toLong()!!)
+                PrimitiveType.FLOAT -> IrConstImpl.float(startOffset, endOffset, targetType, konstue.toFloat()!!)
+                PrimitiveType.DOUBLE -> IrConstImpl.double(startOffset, endOffset, targetType, konstue.toDouble()!!)
                 else -> error("Cannot cast expression of type ${type.render()} to ${targetType.render()}")
             }
         }
         else -> {
-            val numberCastFunctionName = Name.identifier("to${targetClass.name.asString()}")
-            val classifier = type.getClass() ?: error("Has to be a class ${type.render()}")
-            val castFun = classifier.functions.single {
+            konst numberCastFunctionName = Name.identifier("to${targetClass.name.asString()}")
+            konst classifier = type.getClass() ?: error("Has to be a class ${type.render()}")
+            konst castFun = classifier.functions.single {
                 it.name == numberCastFunctionName &&
-                        it.dispatchReceiverParameter != null && it.extensionReceiverParameter == null && it.valueParameters.isEmpty()
+                        it.dispatchReceiverParameter != null && it.extensionReceiverParameter == null && it.konstueParameters.isEmpty()
             }
             IrCallImpl(
                 startOffset, endOffset,
                 castFun.returnType, castFun.symbol,
                 typeArgumentsCount = 0,
-                valueArgumentsCount = 0
+                konstueArgumentsCount = 0
             ).apply { dispatchReceiver = this@castIfNecessary }
         }
     }

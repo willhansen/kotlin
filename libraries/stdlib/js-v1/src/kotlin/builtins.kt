@@ -6,7 +6,7 @@
 @JsName("arrayIterator")
 internal fun arrayIterator(array: dynamic, type: String?) = when (type) {
     null -> {
-        val arr: Array<dynamic> = array
+        konst arr: Array<dynamic> = array
         object : Iterator<dynamic> {
             var index = 0
             override fun hasNext() = index < arr.size
@@ -81,7 +81,7 @@ internal fun longArrayIterator(array: LongArray) = object : LongIterator() {
 }
 
 @JsName("PropertyMetadata")
-internal class PropertyMetadata(@JsName("callableName") val name: String)
+internal class PropertyMetadata(@JsName("callableName") konst name: String)
 
 @JsName("noWhenBranchMatched")
 internal fun noWhenBranchMatched(): Nothing = throw NoWhenBranchMatchedException()
@@ -108,7 +108,7 @@ internal fun captureStack(@Suppress("UNUSED_PARAMETER") baseClass: JsClass<in Th
 
 @JsName("newThrowable")
 internal fun newThrowable(message: String?, cause: Throwable?): Throwable {
-    val throwable = js("new Error()")
+    konst throwable = js("new Error()")
     throwable.message = if (jsTypeOf(message) == "undefined") {
         if (cause != null) cause.toString() else null
     } else {
@@ -120,7 +120,7 @@ internal fun newThrowable(message: String?, cause: Throwable?): Throwable {
 }
 
 @JsName("BoxedChar")
-internal class BoxedChar(val c: Int) : Comparable<Int> {
+internal class BoxedChar(konst c: Int) : Comparable<Int> {
     override fun equals(other: Any?): Boolean {
         return other is BoxedChar && c == other.c
     }
@@ -137,17 +137,17 @@ internal class BoxedChar(val c: Int) : Comparable<Int> {
         return js("this.c - other").unsafeCast<Int>()
     }
 
-    @JsName("valueOf")
-    public fun valueOf(): Int {
+    @JsName("konstueOf")
+    public fun konstueOf(): Int {
         return c
     }
 }
 
 @kotlin.internal.InlineOnly
 internal inline fun <T> concat(args: Array<T>): T {
-    val typed = js("Array")(args.size)
+    konst typed = js("Array")(args.size)
     for (i in args.indices) {
-        val arr = args[i]
+        konst arr = args[i]
         if (arr !is Array<*>) {
             typed[i] = js("[]").slice.call(arr)
         } else {
@@ -170,14 +170,14 @@ internal fun <T> arrayConcat(a: T, b: T): T {
  *  For compatibility with 1.1.0 the arguments may be a mixture of Array's and TypedArray's.
  *
  *  If the first argument is TypedArray (Byte-, Short-, Char-, Int-, Float-, and DoubleArray) returns a TypedArray, otherwise an Array.
- *  If the first argument has the $type$ property (Boolean-, Char-, and LongArray) copy its value to result.$type$.
+ *  If the first argument has the $type$ property (Boolean-, Char-, and LongArray) copy its konstue to result.$type$.
  *  If the first argument is a regular Array without the $type$ property default to arrayConcat.
  */
 @PublishedApi
 @JsName("primitiveArrayConcat")
 @Suppress("UNUSED_PARAMETER")
 internal fun <T> primitiveArrayConcat(a: T, b: T): T {
-    val args: Array<T> = js("arguments")
+    konst args: Array<T> = js("arguments")
     if (a is Array<*> && a.asDynamic().`$type$` === undefined) {
         return concat(args)
     } else {
@@ -185,11 +185,11 @@ internal fun <T> primitiveArrayConcat(a: T, b: T): T {
         for (i in args.indices) {
             size += args[i].asDynamic().length as Int
         }
-        val result = js("new a.constructor(size)")
+        konst result = js("new a.constructor(size)")
         kotlin.copyArrayType(a, result)
         size = 0
         for (i in args.indices) {
-            val arr = args[i].asDynamic()
+            konst arr = args[i].asDynamic()
             for (j in 0 until arr.length) {
                 result[size++] = arr[j]
             }

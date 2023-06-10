@@ -12,20 +12,20 @@ import kotlin.reflect.KClass
  *   storing services in entities with limited number of instances, like FirSession
  */
 abstract class ComponentArrayOwner<K : Any, V : Any> : AbstractArrayMapOwner<K, V>() {
-    final override val arrayMap: ArrayMap<V> =
+    final override konst arrayMap: ArrayMap<V> =
         ArrayMapImpl()
 
-    final override fun registerComponent(keyQualifiedName: String, value: V) {
-        val id = typeRegistry.getId(keyQualifiedName)
+    final override fun registerComponent(keyQualifiedName: String, konstue: V) {
+        konst id = typeRegistry.getId(keyQualifiedName)
         try {
-            arrayMap[id] = value
+            arrayMap[id] = konstue
         } catch (e: Exception) {
             throw RuntimeException(createDiagnosticMessage(id, keyQualifiedName), e)
         }
     }
 
     protected operator fun get(key: KClass<out K>): V {
-        val id = typeRegistry.getId(key)
+        konst id = typeRegistry.getId(key)
         return arrayMap[id] ?: error("No '$key'($id) component in array: $this")
     }
 

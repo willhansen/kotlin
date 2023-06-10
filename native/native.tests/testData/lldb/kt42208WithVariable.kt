@@ -2,7 +2,7 @@
 // LLDB_TRACE: kt42208WithVariable.txt
 // FILE: kt42208-1.kt
 fun main() {
-    val a = foo()
+    konst a = foo()
     a()
     a()
     a()
@@ -10,7 +10,7 @@ fun main() {
 // FILE: kt42208-2.kt
 // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 class A
-val list = mutableListOf<A>()
+konst list = mutableListOf<A>()
 inline fun foo() = { ->
     list.add(A())
 }

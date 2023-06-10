@@ -8,7 +8,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.IntArray
         symbol = kotlin/intArrayOf(vararg elements: kotlin.Int): kotlin.IntArray
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = elements
             receiverType = null

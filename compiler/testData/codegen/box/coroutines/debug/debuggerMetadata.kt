@@ -14,7 +14,7 @@ suspend fun getSpilledToVariable() = suspendCoroutineUninterceptedOrReturn<Array
 }
 
 fun Array<String>.toMap(): Map<String, String> {
-    val res = hashMapOf<String, String>()
+    konst res = hashMapOf<String, String>()
     for (i in 0..(size - 1) step 2) {
         res[get(i)] = get(i + 1)
     }
@@ -32,23 +32,23 @@ suspend fun dummy() {}
 
 suspend fun named(): String {
     dummy()
-    val s1 = ""
-    val s2 = ""
-    val s3 = ""
-    val s4 = ""
-    val s5 = ""
-    val s6 = ""
-    val s7 = ""
-    val s8 = ""
-    val s9 = ""
-    val map = getSpilledToVariable().toMap()
+    konst s1 = ""
+    konst s2 = ""
+    konst s3 = ""
+    konst s4 = ""
+    konst s5 = ""
+    konst s6 = ""
+    konst s7 = ""
+    konst s8 = ""
+    konst s9 = ""
+    konst map = getSpilledToVariable().toMap()
     println(s1 + s2 + s3 + s4 + s5 + s6 + s7 + s8 + s9)
     return map["L$0"] + map["L$1"] + map["L$2"] + map["L$3"] + map["L$4"] + map["L$5"] + map["L$6"] + map["L$7"] + map["L$8"]
 }
 
 suspend fun suspended() {
     dummy()
-    val ss = ""
+    konst ss = ""
     suspendHere()
     println(ss)
 }
@@ -78,7 +78,7 @@ fun box(): String {
     }
     builder {
         dummy()
-        val a = ""
+        konst a = ""
         res = getSpilledToVariable().toMap()["L$0"] ?: "lambda fail"
         println(a)
     }

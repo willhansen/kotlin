@@ -52,13 +52,13 @@ import java.lang.invoke.LambdaMetafactory
 //
 // The latter two correspond to the instanceof/checkcast instructions on the JVM, except for
 // the presence of reified type parameters.
-internal val typeOperatorLowering = makeIrFilePhase(
+internal konst typeOperatorLowering = makeIrFilePhase(
     ::TypeOperatorLowering,
     name = "TypeOperatorLowering",
     description = "Lower IrTypeOperatorCalls to (implicit) casts and instanceof checks"
 )
 
-private class TypeOperatorLowering(private val backendContext: JvmBackendContext) :
+private class TypeOperatorLowering(private konst backendContext: JvmBackendContext) :
     FileLoweringPass, IrBuildingTransformer(backendContext) {
 
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
@@ -70,10 +70,10 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
             type.isReifiedTypeParameter ->
                 irIs(argument, type)
             argument.type.isNullable() && type.isNullable() -> {
-                irLetS(argument, irType = context.irBuiltIns.anyNType) { valueSymbol ->
+                irLetS(argument, irType = context.irBuiltIns.anyNType) { konstueSymbol ->
                     context.oror(
-                        irEqualsNull(irGet(valueSymbol.owner)),
-                        irIs(irGet(valueSymbol.owner), type.makeNotNull())
+                        irEqualsNull(irGet(konstueSymbol.owner)),
+                        irIs(irGet(konstueSymbol.owner), type.makeNotNull())
                     )
                 }
             }
@@ -96,11 +96,11 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
             else -> {
                 with(builder) {
                     irLetS(argument, irType = context.irBuiltIns.anyNType) { tmp ->
-                        val message = irString("null cannot be cast to non-null type ${type.render()}")
+                        konst message = irString("null cannot be cast to non-null type ${type.render()}")
                         if (backendContext.state.unifiedNullChecks) {
                             // Avoid branching to improve code coverage (KT-27427).
                             // We have to generate a null check here, because even if argument is of non-null type,
-                            // it can be uninitialized value, which is 'null' for reference types in JMM.
+                            // it can be uninitialized konstue, which is 'null' for reference types in JMM.
                             // Most of such null checks will never actually throw, but we can't do anything about it.
                             irBlock(resultType = type) {
                                 +irCall(backendContext.ir.symbols.checkNotNullWithMessage).apply {
@@ -155,11 +155,11 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         }
 
     private fun IrValueDeclaration.isDefinitelyNotNullVal(): Boolean {
-        val irVariable = this as? IrVariable ?: return false
+        konst irVariable = this as? IrVariable ?: return false
         return !irVariable.isVar && irVariable.initializer?.isDefinitelyNotNull() == true
     }
 
-    private val jvmIndyLambdaMetafactoryIntrinsic = backendContext.ir.symbols.indyLambdaMetafactoryIntrinsic
+    private konst jvmIndyLambdaMetafactoryIntrinsic = backendContext.ir.symbols.indyLambdaMetafactoryIntrinsic
 
     private fun JvmIrBuilder.jvmMethodHandle(handle: Handle) =
         irCall(backendContext.ir.symbols.jvmMethodHandle).apply {
@@ -190,7 +190,7 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     /**
      * @see java.lang.invoke.LambdaMetafactory.metafactory
      */
-    private val jdkMetafactoryHandle =
+    private konst jdkMetafactoryHandle =
         Handle(
             Opcodes.H_INVOKESTATIC,
             "java/lang/invoke/LambdaMetafactory",
@@ -209,7 +209,7 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     /**
      * @see java.lang.invoke.LambdaMetafactory.altMetafactory
      */
-    private val jdkAltMetafactoryHandle =
+    private konst jdkAltMetafactoryHandle =
         Handle(
             Opcodes.H_INVOKESTATIC,
             "java/lang/invoke/LambdaMetafactory",
@@ -234,19 +234,19 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     }
 
     private class SerializableMethodRefInfo(
-        val samType: IrType,
-        val samMethodSymbol: IrSimpleFunctionSymbol,
-        val implFunSymbol: IrFunctionSymbol,
-        val instanceFunSymbol: IrFunctionSymbol,
-        val requiredBridges: Collection<IrSimpleFunction>,
-        val dynamicCallSymbol: IrSimpleFunctionSymbol
+        konst samType: IrType,
+        konst samMethodSymbol: IrSimpleFunctionSymbol,
+        konst implFunSymbol: IrFunctionSymbol,
+        konst instanceFunSymbol: IrFunctionSymbol,
+        konst requiredBridges: Collection<IrSimpleFunction>,
+        konst dynamicCallSymbol: IrSimpleFunctionSymbol
     )
 
     private class ClassContext {
-        val serializableMethodRefInfos = ArrayList<SerializableMethodRefInfo>()
+        konst serializableMethodRefInfos = ArrayList<SerializableMethodRefInfo>()
     }
 
-    private val classContextStack = ArrayDeque<ClassContext>()
+    private konst classContextStack = ArrayDeque<ClassContext>()
 
     private fun enterClass(): ClassContext {
         return ClassContext().also {
@@ -266,8 +266,8 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     }
 
     override fun visitClass(declaration: IrClass): IrStatement {
-        val context = enterClass()
-        val result = super.visitClass(declaration)
+        konst context = enterClass()
+        konst result = super.visitClass(declaration)
         if (context.serializableMethodRefInfos.isNotEmpty()) {
             generateDeserializeLambdaMethod(declaration, context.serializableMethodRefInfos)
         }
@@ -276,9 +276,9 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     }
 
     private data class DeserializedLambdaInfo(
-        val functionalInterfaceClass: String,
-        val implMethodHandle: Handle,
-        val functionalInterfaceMethod: Method
+        konst functionalInterfaceClass: String,
+        konst implMethodHandle: Handle,
+        konst functionalInterfaceMethod: Method
     )
 
     private fun generateDeserializeLambdaMethod(
@@ -286,7 +286,7 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         serializableMethodRefInfos: List<SerializableMethodRefInfo>
     ) {
         //  fun `$deserializeLambda$`(lambda: java.lang.invoke.SerializedLambda): Object {
-        //      val tmp = lambda.getImplMethodName()
+        //      konst tmp = lambda.getImplMethodName()
         //      when {
         //          ...
         //          tmp == NAME_i -> {
@@ -304,28 +304,28 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         //          }
         //          ...
         //      }
-        //      throw IllegalArgumentException("Invalid lambda deserialization")
+        //      throw IllegalArgumentException("Inkonstid lambda deserialization")
         //  }
 
-        val groupedByImplMethodName = HashMap<String, HashMap<DeserializedLambdaInfo, SerializableMethodRefInfo>>()
+        konst groupedByImplMethodName = HashMap<String, HashMap<DeserializedLambdaInfo, SerializableMethodRefInfo>>()
         for (serializableMethodRefInfo in serializableMethodRefInfos) {
-            val deserializedLambdaInfo = mapDeserializedLambda(serializableMethodRefInfo)
-            val implMethodName = deserializedLambdaInfo.implMethodHandle.name
-            val byDeserializedLambdaInfo = groupedByImplMethodName.getOrPut(implMethodName) { HashMap() }
+            konst deserializedLambdaInfo = mapDeserializedLambda(serializableMethodRefInfo)
+            konst implMethodName = deserializedLambdaInfo.implMethodHandle.name
+            konst byDeserializedLambdaInfo = groupedByImplMethodName.getOrPut(implMethodName) { HashMap() }
             byDeserializedLambdaInfo[deserializedLambdaInfo] = serializableMethodRefInfo
         }
 
-        val deserializeLambdaFun = backendContext.irFactory.buildFun {
+        konst deserializeLambdaFun = backendContext.irFactory.buildFun {
             name = Name.identifier("\$deserializeLambda\$")
             visibility = DescriptorVisibilities.PRIVATE
             origin = JvmLoweredDeclarationOrigin.DESERIALIZE_LAMBDA_FUN
         }
         deserializeLambdaFun.parent = irClass
-        val lambdaParameter = deserializeLambdaFun.addValueParameter("lambda", backendContext.ir.symbols.serializedLambda.irType)
+        konst lambdaParameter = deserializeLambdaFun.addValueParameter("lambda", backendContext.ir.symbols.serializedLambda.irType)
         deserializeLambdaFun.returnType = backendContext.irBuiltIns.anyType
         deserializeLambdaFun.body = backendContext.createJvmIrBuilder(deserializeLambdaFun.symbol, UNDEFINED_OFFSET, UNDEFINED_OFFSET).run {
             irBlockBody {
-                val tmp = irTemporary(
+                konst tmp = irTemporary(
                     irCall(backendContext.ir.symbols.serializedLambda.getImplMethodName).apply {
                         dispatchReceiver = irGet(lambdaParameter)
                     }
@@ -356,8 +356,8 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
                             //  irCall(backendContext.irBuiltIns.anyClass.getSimpleFunction("toString")!!).apply {
                             //      dispatchReceiver = irGet(lambdaParameter)
                             //  }
-                            // for debugging "Invalid lambda deserialization" exceptions.
-                            irString("Invalid lambda deserialization")
+                            // for debugging "Inkonstid lambda deserialization" exceptions.
+                            irString("Inkonstid lambda deserialization")
                         )
                     }
                 )
@@ -378,9 +378,9 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         lambdaParameter: IrValueParameter,
         deserializedLambdaInfo: DeserializedLambdaInfo
     ): IrExpression {
-        val functionalInterfaceClass = deserializedLambdaInfo.functionalInterfaceClass
-        val implMethodHandle = deserializedLambdaInfo.implMethodHandle
-        val samMethod = deserializedLambdaInfo.functionalInterfaceMethod
+        konst functionalInterfaceClass = deserializedLambdaInfo.functionalInterfaceClass
+        konst implMethodHandle = deserializedLambdaInfo.implMethodHandle
+        konst samMethod = deserializedLambdaInfo.functionalInterfaceMethod
 
         fun irGetLambdaProperty(getter: IrSimpleFunction) =
             irCall(getter).apply { dispatchReceiver = irGet(lambdaParameter) }
@@ -413,7 +413,7 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         )
     }
 
-    private val equalsAny = backendContext.irBuiltIns.anyClass.getSimpleFunction("equals")!!
+    private konst equalsAny = backendContext.irBuiltIns.anyClass.getSimpleFunction("equals")!!
 
     private fun JvmIrBuilder.irObjectEquals(receiver: IrExpression, arg: IrExpression) =
         irCall(equalsAny).apply {
@@ -437,17 +437,17 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         lambdaParameter: IrValueParameter,
         info: SerializableMethodRefInfo
     ): IrExpression {
-        val dynamicCall = irCall(info.dynamicCallSymbol)
-        for ((index, dynamicValueParameter) in info.dynamicCallSymbol.owner.valueParameters.withIndex()) {
-            val capturedArg = irCall(backendContext.ir.symbols.serializedLambda.getCapturedArg).also { call ->
+        konst dynamicCall = irCall(info.dynamicCallSymbol)
+        for ((index, dynamicValueParameter) in info.dynamicCallSymbol.owner.konstueParameters.withIndex()) {
+            konst capturedArg = irCall(backendContext.ir.symbols.serializedLambda.getCapturedArg).also { call ->
                 call.dispatchReceiver = irGet(lambdaParameter)
                 call.putValueArgument(0, irInt(index))
             }
-            val expectedType = dynamicValueParameter.type
-            val downcastArg =
+            konst expectedType = dynamicValueParameter.type
+            konst downcastArg =
                 if (expectedType.isInlineClassType()) {
                     // Inline class type arguments are stored as their underlying representation.
-                    val unboxedType = expectedType.unboxInlineClass()
+                    konst unboxedType = expectedType.unboxInlineClass()
                     irCall(backendContext.ir.symbols.unsafeCoerceIntrinsic).also { coercion ->
                         coercion.putTypeArgument(0, unboxedType)
                         coercion.putTypeArgument(1, expectedType)
@@ -471,41 +471,41 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         fun fail(message: String): Nothing =
             throw AssertionError("$message, call:\n${call.dump()}")
 
-        val startOffset = call.startOffset
-        val endOffset = call.endOffset
+        konst startOffset = call.startOffset
+        konst endOffset = call.endOffset
 
-        val samType = call.getTypeArgument(0) as? IrSimpleType
+        konst samType = call.getTypeArgument(0) as? IrSimpleType
             ?: fail("'samType' is expected to be a simple type")
 
-        val samMethodRef = call.getValueArgument(0) as? IrRawFunctionReference
+        konst samMethodRef = call.getValueArgument(0) as? IrRawFunctionReference
             ?: fail("'samMethodType' should be 'IrRawFunctionReference'")
-        val implFunRef = call.getValueArgument(1) as? IrFunctionReference
+        konst implFunRef = call.getValueArgument(1) as? IrFunctionReference
             ?: fail("'implMethodReference' is expected to be 'IrFunctionReference'")
-        val implFunSymbol = implFunRef.symbol
-        val instanceMethodRef = call.getValueArgument(2) as? IrRawFunctionReference
+        konst implFunSymbol = implFunRef.symbol
+        konst instanceMethodRef = call.getValueArgument(2) as? IrRawFunctionReference
             ?: fail("'instantiatedMethodType' is expected to be 'IrRawFunctionReference'")
 
-        val extraOverriddenMethods = run {
-            val extraOverriddenMethodVararg = call.getValueArgument(3) as? IrVararg
+        konst extraOverriddenMethods = run {
+            konst extraOverriddenMethodVararg = call.getValueArgument(3) as? IrVararg
                 ?: fail("'extraOverriddenMethodTypes' is expected to be 'IrVararg'")
             extraOverriddenMethodVararg.elements.map {
-                val ref = it as? IrRawFunctionReference
+                konst ref = it as? IrRawFunctionReference
                     ?: fail("'extraOverriddenMethodTypes' elements are expected to be 'IrRawFunctionReference'")
                 ref.symbol.owner as? IrSimpleFunction
                     ?: fail("Extra overridden method is expected to be 'IrSimpleFunction': ${ref.symbol.owner.render()}")
             }
         }
 
-        val shouldBeSerializable = call.getBooleanConstArgument(4)
+        konst shouldBeSerializable = call.getBooleanConstArgument(4)
 
-        val samMethod = samMethodRef.symbol.owner as? IrSimpleFunction
+        konst samMethod = samMethodRef.symbol.owner as? IrSimpleFunction
             ?: fail("SAM method is expected to be 'IrSimpleFunction': ${samMethodRef.symbol.owner.render()}")
-        val instanceMethod = instanceMethodRef.symbol.owner as? IrSimpleFunction
+        konst instanceMethod = instanceMethodRef.symbol.owner as? IrSimpleFunction
             ?: fail("Instance method is expected to be 'IrSimpleFunction': ${instanceMethodRef.symbol.owner.render()}")
 
-        val dynamicCall = wrapClosureInDynamicCall(samType, samMethod, implFunRef)
+        konst dynamicCall = wrapClosureInDynamicCall(samType, samMethod, implFunRef)
 
-        val requiredBridges = getOverriddenMethodsRequiringBridges(instanceMethod, samMethod, extraOverriddenMethods)
+        konst requiredBridges = getOverriddenMethodsRequiringBridges(instanceMethod, samMethod, extraOverriddenMethods)
 
         if (shouldBeSerializable) {
             getClassContext().serializableMethodRefInfos.add(
@@ -529,12 +529,12 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         requiredBridges: Collection<IrSimpleFunction>,
         dynamicCall: IrCall
     ): IrCall {
-        val samMethodType = jvmOriginalMethodType(samMethodSymbol)
-        val implFunRawRef = irRawFunctionReference(context.irBuiltIns.anyType, implFunSymbol)
-        val instanceMethodType = jvmOriginalMethodType(instanceMethodSymbol)
+        konst samMethodType = jvmOriginalMethodType(samMethodSymbol)
+        konst implFunRawRef = irRawFunctionReference(context.irBuiltIns.anyType, implFunSymbol)
+        konst instanceMethodType = jvmOriginalMethodType(instanceMethodSymbol)
 
         var bootstrapMethod = jdkMetafactoryHandle
-        val bootstrapMethodArguments = arrayListOf<IrExpression>(
+        konst bootstrapMethodArguments = arrayListOf<IrExpression>(
             samMethodType,
             implFunRawRef,
             instanceMethodType
@@ -588,17 +588,17 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         samMethod: IrSimpleFunction,
         extraOverriddenMethods: List<IrSimpleFunction>
     ): Collection<IrSimpleFunction> {
-        val jvmInstanceMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(instanceMethod)
-        val jvmSamMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(samMethod)
+        konst jvmInstanceMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(instanceMethod)
+        konst jvmSamMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(samMethod)
 
-        val signatureToNonFakeOverride = LinkedHashMap<Method, IrSimpleFunction>()
+        konst signatureToNonFakeOverride = LinkedHashMap<Method, IrSimpleFunction>()
         for (overridden in extraOverriddenMethods) {
-            val jvmOverriddenMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(overridden)
+            konst jvmOverriddenMethod = backendContext.defaultMethodSignatureMapper.mapAsmMethod(overridden)
             if (jvmOverriddenMethod != jvmInstanceMethod && jvmOverriddenMethod != jvmSamMethod) {
                 signatureToNonFakeOverride[jvmOverriddenMethod] = overridden
             }
         }
-        return signatureToNonFakeOverride.values
+        return signatureToNonFakeOverride.konstues
     }
 
     private fun wrapClosureInDynamicCall(
@@ -609,18 +609,18 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         fun fail(message: String): Nothing =
             throw AssertionError("$message, targetRef:\n${targetRef.dump()}")
 
-        val dynamicCallArguments = ArrayList<IrExpression>()
+        konst dynamicCallArguments = ArrayList<IrExpression>()
 
-        val irDynamicCallTarget = backendContext.irFactory.buildFun {
+        konst irDynamicCallTarget = backendContext.irFactory.buildFun {
             origin = JvmLoweredDeclarationOrigin.INVOKEDYNAMIC_CALL_TARGET
             name = samMethod.name
             returnType = erasedSamType
         }.apply {
             parent = backendContext.ir.symbols.kotlinJvmInternalInvokeDynamicPackage
 
-            val targetFun = targetRef.symbol.owner
-            val refDispatchReceiver = targetRef.dispatchReceiver
-            val refExtensionReceiver = targetRef.extensionReceiver
+            konst targetFun = targetRef.symbol.owner
+            konst refDispatchReceiver = targetRef.dispatchReceiver
+            konst refExtensionReceiver = targetRef.extensionReceiver
 
             var syntheticParameterIndex = 0
             var argumentStart = 0
@@ -637,10 +637,10 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
                     }
                 }
                 is IrConstructor -> {
-                    // At this point, outer class instances in inner class constructors are represented as regular value parameters.
-                    // However, in a function reference to such constructors, bound receiver value is stored as a dispatch receiver.
+                    // At this point, outer class instances in inner class constructors are represented as regular konstue parameters.
+                    // However, in a function reference to such constructors, bound receiver konstue is stored as a dispatch receiver.
                     if (refDispatchReceiver != null) {
-                        addValueParameter("p${syntheticParameterIndex++}", targetFun.valueParameters[0].type)
+                        addValueParameter("p${syntheticParameterIndex++}", targetFun.konstueParameters[0].type)
                         dynamicCallArguments.add(refDispatchReceiver)
                         argumentStart++
                     }
@@ -650,21 +650,21 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
                 }
             }
 
-            val samMethodValueParametersCount = samMethod.valueParameters.size +
+            konst samMethodValueParametersCount = samMethod.konstueParameters.size +
                     if (samMethod.extensionReceiverParameter != null && refExtensionReceiver == null) 1 else 0
-            val targetFunValueParametersCount = targetFun.valueParameters.size
+            konst targetFunValueParametersCount = targetFun.konstueParameters.size
             for (i in argumentStart until targetFunValueParametersCount - samMethodValueParametersCount) {
-                val targetFunValueParameter = targetFun.valueParameters[i]
+                konst targetFunValueParameter = targetFun.konstueParameters[i]
                 addValueParameter("p${syntheticParameterIndex++}", targetFunValueParameter.type)
-                val capturedValueArgument = targetRef.getValueArgument(i)
-                    ?: fail("Captured value argument #$i (${targetFunValueParameter.render()}) not provided")
+                konst capturedValueArgument = targetRef.getValueArgument(i)
+                    ?: fail("Captured konstue argument #$i (${targetFunValueParameter.render()}) not provided")
                 dynamicCallArguments.add(capturedValueArgument)
             }
         }
 
-        if (dynamicCallArguments.size != irDynamicCallTarget.valueParameters.size) {
+        if (dynamicCallArguments.size != irDynamicCallTarget.konstueParameters.size) {
             throw AssertionError(
-                "Dynamic call target value parameters (${irDynamicCallTarget.valueParameters.size}) " +
+                "Dynamic call target konstue parameters (${irDynamicCallTarget.konstueParameters.size}) " +
                         "don't match dynamic call arguments (${dynamicCallArguments.size}):\n" +
                         "irDynamicCallTarget:\n" +
                         irDynamicCallTarget.dump() +
@@ -715,15 +715,15 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
                         expression.argument.transformVoid(),
                         IrStatementOrigin.SAFE_CALL,
                         irType = context.irBuiltIns.anyNType
-                    ) { valueSymbol ->
-                        val thenPart =
-                            if (valueSymbol.owner.type.isInlineClassType())
-                                lowerCast(irGet(valueSymbol.owner), expression.typeOperand)
+                    ) { konstueSymbol ->
+                        konst thenPart =
+                            if (konstueSymbol.owner.type.isInlineClassType())
+                                lowerCast(irGet(konstueSymbol.owner), expression.typeOperand)
                             else
-                                irGet(valueSymbol.owner)
+                                irGet(konstueSymbol.owner)
                         irIfThenElse(
                             expression.type,
-                            lowerInstanceOf(irGet(valueSymbol.owner), expression.typeOperand.makeNotNull()),
+                            lowerInstanceOf(irGet(konstueSymbol.owner), expression.typeOperand.makeNotNull()),
                             thenPart,
                             irNull(expression.type)
                         )
@@ -737,21 +737,21 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
                 irNot(lowerInstanceOf(expression.argument.transformVoid(), expression.typeOperand))
 
             IrTypeOperator.IMPLICIT_NOTNULL -> {
-                val text = computeNotNullAssertionText(expression)
+                konst text = computeNotNullAssertionText(expression)
 
-                irLetS(expression.argument.transformVoid(), irType = context.irBuiltIns.anyNType) { valueSymbol ->
+                irLetS(expression.argument.transformVoid(), irType = context.irBuiltIns.anyNType) { konstueSymbol ->
                     irComposite(resultType = expression.type) {
                         if (text != null) {
                             +irCall(checkExpressionValueIsNotNull).apply {
-                                putValueArgument(0, irGet(valueSymbol.owner))
+                                putValueArgument(0, irGet(konstueSymbol.owner))
                                 putValueArgument(1, irString(text.trimForRuntimeAssertion()))
                             }
                         } else {
                             +irCall(backendContext.ir.symbols.checkNotNull).apply {
-                                putValueArgument(0, irGet(valueSymbol.owner))
+                                putValueArgument(0, irGet(konstueSymbol.owner))
                             }
                         }
-                        +irGet(valueSymbol.owner)
+                        +irGet(konstueSymbol.owner)
                     }
                 }
             }
@@ -765,21 +765,21 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
 
     private fun IrBuilderWithScope.computeNotNullAssertionText(typeOperatorCall: IrTypeOperatorCall): String? {
         if (backendContext.state.noSourceCodeInNotNullAssertionExceptions) {
-            return when (val argument = typeOperatorCall.argument) {
+            return when (konst argument = typeOperatorCall.argument) {
                 is IrCall -> "${argument.symbol.owner.name.asString()}(...)"
                 is IrGetField -> argument.symbol.owner.name.asString()
                 else -> null
             }
         }
 
-        val owner = scope.scopeOwnerSymbol.owner
+        konst owner = scope.scopeOwnerSymbol.owner
         if (owner is IrFunction && owner.isDelegated())
             return "${owner.name.asString()}(...)"
 
-        val declarationParent = parent as? IrDeclaration
-        val sourceView = declarationParent?.let(::sourceViewFor)
-        val (startOffset, endOffset) = typeOperatorCall.extents()
-        return if (sourceView?.validSourcePosition(startOffset, endOffset) == true) {
+        konst declarationParent = parent as? IrDeclaration
+        konst sourceView = declarationParent?.let(::sourceViewFor)
+        konst (startOffset, endOffset) = typeOperatorCall.extents()
+        return if (sourceView?.konstidSourcePosition(startOffset, endOffset) == true) {
             sourceView.subSequence(startOffset, endOffset).toString()
         } else {
             // Fallback for inconsistent line numbers
@@ -793,7 +793,7 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
         origin == IrDeclarationOrigin.DELEGATED_PROPERTY_ACCESSOR ||
                 origin == IrDeclarationOrigin.DELEGATED_MEMBER
 
-    private fun CharSequence.validSourcePosition(startOffset: Int, endOffset: Int): Boolean =
+    private fun CharSequence.konstidSourcePosition(startOffset: Int, endOffset: Int): Boolean =
         startOffset in 0 until endOffset && endOffset < length
 
     private fun IrElement.extents(): Pair<Int, Int> {
@@ -814,10 +814,10 @@ private class TypeOperatorLowering(private val backendContext: JvmBackendContext
     private fun sourceViewFor(declaration: IrDeclaration): CharSequence? =
         declaration.fileParent.getKtFile()?.viewProvider?.contents
 
-    private val throwTypeCastException: IrSimpleFunctionSymbol =
+    private konst throwTypeCastException: IrSimpleFunctionSymbol =
         backendContext.ir.symbols.throwTypeCastException
 
-    private val checkExpressionValueIsNotNull: IrSimpleFunctionSymbol =
+    private konst checkExpressionValueIsNotNull: IrSimpleFunctionSymbol =
         if (backendContext.state.unifiedNullChecks)
             backendContext.ir.symbols.checkNotNullExpressionValue
         else

@@ -2,7 +2,7 @@
 
 var sideEffect = ""
 
-open class A(var value: Int) {
+open class A(var konstue: Int) {
     init {
         sideEffect += "init A###"
     }
@@ -31,12 +31,12 @@ class B : A {
 }
 
 fun box(): String {
-    val bs1 = B(14)
+    konst bs1 = B(14)
     assertEquals("init A###init class B###ctor to A###", sideEffect)
 
     sideEffect = ""
 
-    val bs2 = B()
+    konst bs2 = B()
     assertEquals("init A###init class B###ctor to A###ctor to B###", sideEffect)
 
     return "OK"

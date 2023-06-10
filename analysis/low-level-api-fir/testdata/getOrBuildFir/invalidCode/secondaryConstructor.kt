@@ -1,5 +1,5 @@
 annotation class JsQualifier : kotlin.Annotation {
-    public constructor JsQualifier(<expr>value</expr>: kotlin.String)
+    public constructor JsQualifier(<expr>konstue</expr>: kotlin.String)
 
-    public final val value: kotlin.String { get; }
+    public final konst konstue: kotlin.String { get; }
 }

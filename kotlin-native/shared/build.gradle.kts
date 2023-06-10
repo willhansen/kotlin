@@ -23,7 +23,7 @@ plugins {
     id("kotlin")
 }
 
-val rootBuildDirectory by extra(file(".."))
+konst rootBuildDirectory by extra(file(".."))
 apply(from = "../gradle/loadRootProperties.gradle")
 
 group = "org.jetbrains.kotlin"
@@ -60,7 +60,7 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 
-val isCompositeBootstrap = project.extraProperties.has("kotlin.native.build.composite-bootstrap")
+konst isCompositeBootstrap = project.extraProperties.has("kotlin.native.build.composite-bootstrap")
 
 /**
  * Depending on the `kotlin.native.build.composite-bootstrap` property returns either coordinates or the project dependency.
@@ -70,7 +70,7 @@ val isCompositeBootstrap = project.extraProperties.has("kotlin.native.build.comp
  * TODO: finalize merge of this project with kotlin-native-utils to get rid of this hack
  */
 fun compositeDependency(coordinates: String, subproject: String = ""): Any {
-    val parts = coordinates.split(':')
+    konst parts = coordinates.split(':')
     check(parts.size == 3) {
         "Full dependency coordinates should be specified group:name:version"
     }
@@ -89,11 +89,11 @@ dependencies {
     api(compositeDependency("org.jetbrains.kotlin:kotlin-util-io:${project.bootstrapKotlinVersion}"))
 
     if (!isCompositeBootstrap) {
-        val versionProperties = Properties()
+        konst versionProperties = Properties()
         project.rootProject.projectDir.resolve("gradle/versions.properties").inputStream().use { propInput ->
             versionProperties.load(propInput)
         }
-        val platformVersion = versionProperties["versions.junit-bom"]
+        konst platformVersion = versionProperties["versions.junit-bom"]
         testApi(platform("org.junit:junit-bom:$platformVersion"))
         testApi("org.junit.jupiter:junit-jupiter")
     }

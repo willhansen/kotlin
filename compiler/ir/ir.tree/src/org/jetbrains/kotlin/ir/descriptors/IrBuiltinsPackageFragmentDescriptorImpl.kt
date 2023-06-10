@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 class IrBuiltinsPackageFragmentDescriptorImpl(
-    val containingModule: ModuleDescriptor,
-    override val fqName: FqName
+    konst containingModule: ModuleDescriptor,
+    override konst fqName: FqName
 ) : PackageFragmentDescriptor {
-    private val shortName = fqName.shortName()
+    private konst shortName = fqName.shortName()
 
     override fun getName(): Name = shortName
 
@@ -36,7 +36,7 @@ class IrBuiltinsPackageFragmentDescriptorImpl(
 
     override fun getOriginal(): DeclarationDescriptorWithSource = this
     override fun getSource(): SourceElement = SourceElement.NO_SOURCE
-    override val annotations: Annotations = Annotations.EMPTY
+    override konst annotations: Annotations = Annotations.EMPTY
 
     override fun <R : Any?, D : Any?> accept(visitor: DeclarationDescriptorVisitor<R, D>, data: D): R {
         return visitor.visitPackageFragmentDescriptor(this, data)

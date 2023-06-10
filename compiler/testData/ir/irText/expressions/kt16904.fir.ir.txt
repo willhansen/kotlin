@@ -5,12 +5,12 @@ FILE fqName:<root> fileName:/kt16904.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:A modality:ABSTRACT visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:<root>.B visibility:private [final]
         EXPRESSION_BODY
           CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.B' type=<root>.B origin=null
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.A) returnType:<root>.B
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): <root>.B declared in <root>.A'
@@ -19,7 +19,7 @@ FILE fqName:<root> fileName:/kt16904.kt
     PROPERTY name:y visibility:public modality:FINAL [var]
       FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.Int visibility:private
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=0
+          CONST Int type=kotlin.Int konstue=0
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-y> visibility:public modality:FINAL <> ($this:<root>.A) returnType:kotlin.Int
         correspondingProperty: PROPERTY name:y visibility:public modality:FINAL [var]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
@@ -34,7 +34,7 @@ FILE fqName:<root> fileName:/kt16904.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:y type:kotlin.Int visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.A declared in <root>.A.<set-y>' type=<root>.A origin=null
-            value: GET_VAR '<set-?>: kotlin.Int declared in <root>.A.<set-y>' type=kotlin.Int origin=null
+            konstue: GET_VAR '<set-?>: kotlin.Int declared in <root>.A.<set-y>' type=kotlin.Int origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any
@@ -80,18 +80,18 @@ FILE fqName:<root> fileName:/kt16904.kt
         CALL 'public final fun plusAssign (x: kotlin.Int): kotlin.Unit declared in <root>.B' type=kotlin.Unit origin=null
           $this: CALL 'public final fun <get-x> (): <root>.B declared in <root>.Test1' type=<root>.B origin=GET_PROPERTY
             $this: GET_VAR '<this>: <root>.Test1 declared in <root>.Test1' type=<root>.Test1 origin=null
-          x: CONST Int type=kotlin.Int value=42
+          x: CONST Int type=kotlin.Int konstue=42
         CALL 'public final fun <set-y> (<set-?>: kotlin.Int): kotlin.Unit declared in <root>.Test1' type=kotlin.Unit origin=EQ
           $this: GET_VAR '<this>: <root>.Test1 declared in <root>.Test1' type=<root>.Test1 origin=null
           <set-?>: CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=null
             $this: CALL 'public final fun <get-y> (): kotlin.Int declared in <root>.Test1' type=kotlin.Int origin=GET_PROPERTY
               $this: GET_VAR '<this>: <root>.Test1 declared in <root>.Test1' type=<root>.Test1 origin=null
-            other: CONST Int type=kotlin.Int value=42
-    PROPERTY FAKE_OVERRIDE name:x visibility:public modality:FINAL [fake_override,val]
+            other: CONST Int type=kotlin.Int konstue=42
+    PROPERTY FAKE_OVERRIDE name:x visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final x: <root>.B
       FUN FAKE_OVERRIDE name:<get-x> visibility:public modality:FINAL <> ($this:<root>.A) returnType:<root>.B [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:x visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:x visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-x> (): <root>.B declared in <root>.A
         $this: VALUE_PARAMETER name:<this> type:<root>.A
@@ -132,7 +132,7 @@ FILE fqName:<root> fileName:/kt16904.kt
       BLOCK_BODY
         SET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:field type:kotlin.Int visibility:public' type=kotlin.Unit origin=EQ
           receiver: GET_VAR '<this>: <root>.Test2 declared in <root>.Test2' type=<root>.Test2 origin=null
-          value: CONST Int type=kotlin.Int value=42
+          konstue: CONST Int type=kotlin.Int konstue=42
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.J

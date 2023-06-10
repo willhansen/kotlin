@@ -1,10 +1,10 @@
 package
 
-public val tesLHSTypeFQN: kotlin.reflect.KClass<___.____>
-public val testCallableRefLHSType: kotlin.reflect.KFunction1<___, kotlin.String>
-public val testCallableRefLHSType2: kotlin.reflect.KFunction1<___, kotlin.String>
-public val testClassLiteralLHSType: kotlin.reflect.KClass<___>
-public val testClassLiteralLHSType2: kotlin.reflect.KClass<___>
+public konst tesLHSTypeFQN: kotlin.reflect.KClass<___.____>
+public konst testCallableRefLHSType: kotlin.reflect.KFunction1<___, kotlin.String>
+public konst testCallableRefLHSType2: kotlin.reflect.KFunction1<___, kotlin.String>
+public konst testClassLiteralLHSType: kotlin.reflect.KClass<___>
+public konst testClassLiteralLHSType2: kotlin.reflect.KClass<___>
 
 public final class ___ {
     public constructor ___()

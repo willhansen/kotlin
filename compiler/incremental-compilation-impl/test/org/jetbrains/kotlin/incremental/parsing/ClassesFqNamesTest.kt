@@ -132,11 +132,11 @@ class ClassesFqNamesTest : KtUsefulTestCase() {
     }
 
     private fun doTest(expectedClasses: Set<String>, code: String) {
-        val testKt = File(workingDir, "test.kt")
+        konst testKt = File(workingDir, "test.kt")
         testKt.writeText(code)
 
-        val expected = expectedClasses.sorted().joinToString("\n")
-        val actual = classesFqNames(setOf(testKt)).sorted().joinToString("\n")
+        konst expected = expectedClasses.sorted().joinToString("\n")
+        konst actual = classesFqNames(setOf(testKt)).sorted().joinToString("\n")
         assertEquals(expected, actual)
     }
 }

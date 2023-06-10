@@ -24,7 +24,7 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
         BLOCK_BODY
           SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private' type=kotlin.Unit origin=null
             receiver: GET_VAR '<this>: <root>.MyContainer declared in <root>.MyContainer.<set-s>' type=<root>.MyContainer origin=null
-            value: GET_VAR '<set-?>: kotlin.String declared in <root>.MyContainer.<set-s>' type=kotlin.String origin=null
+            konstue: GET_VAR '<set-?>: kotlin.String declared in <root>.MyContainer.<set-s>' type=kotlin.String origin=null
     FUN GENERATED_DATA_CLASS_MEMBER name:component1 visibility:public modality:FINAL <> ($this:<root>.MyContainer) returnType:kotlin.String [operator]
       $this: VALUE_PARAMETER name:<this> type:<root>.MyContainer
       BLOCK_BODY
@@ -53,14 +53,14 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
               arg0: GET_VAR '<this>: <root>.MyContainer declared in <root>.MyContainer.equals' type=<root>.MyContainer origin=null
               arg1: GET_VAR 'other: kotlin.Any? declared in <root>.MyContainer.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyContainer'
-              CONST Boolean type=kotlin.Boolean value=true
+              CONST Boolean type=kotlin.Boolean konstue=true
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.MyContainer
               GET_VAR 'other: kotlin.Any? declared in <root>.MyContainer.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyContainer'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.MyContainer [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.MyContainer [konst]
           TYPE_OP type=<root>.MyContainer origin=CAST typeOperand=<root>.MyContainer
             GET_VAR 'other: kotlin.Any? declared in <root>.MyContainer.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
@@ -70,11 +70,11 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private' type=kotlin.String origin=null
                   receiver: GET_VAR '<this>: <root>.MyContainer declared in <root>.MyContainer.equals' type=<root>.MyContainer origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private' type=kotlin.String origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.MyContainer declared in <root>.MyContainer.equals' type=<root>.MyContainer origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.MyContainer declared in <root>.MyContainer.equals' type=<root>.MyContainer origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyContainer'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.MyContainer'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.MyContainer) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -91,10 +91,10 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.MyContainer'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="MyContainer(s="
+            CONST String type=kotlin.String konstue="MyContainer(s="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:s type:kotlin.String visibility:private' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: <root>.MyContainer declared in <root>.MyContainer.toString' type=<root>.MyContainer origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"
   FUN name:get visibility:public modality:FINAL <> ($receiver:<root>.MyContainer, $context_receiver_0:kotlin.Int, index:kotlin.Int) returnType:kotlin.String? [operator]
     contextReceiverParametersCount: 1
     $receiver: VALUE_PARAMETER name:<this> type:<root>.MyContainer
@@ -108,24 +108,24 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
               BRANCH
                 if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
                   arg0: GET_VAR 'index: kotlin.Int declared in <root>.get' type=kotlin.Int origin=null
-                  arg1: CONST Int type=kotlin.Int value=0
+                  arg1: CONST Int type=kotlin.Int konstue=0
                 then: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
                   arg0: GET_VAR '$context_receiver_0: kotlin.Int declared in <root>.get' type=kotlin.Int origin=null
-                  arg1: CONST Int type=kotlin.Int value=42
+                  arg1: CONST Int type=kotlin.Int konstue=42
               BRANCH
-                if: CONST Boolean type=kotlin.Boolean value=true
-                then: CONST Boolean type=kotlin.Boolean value=false
+                if: CONST Boolean type=kotlin.Boolean konstue=true
+                then: CONST Boolean type=kotlin.Boolean konstue=false
             then: CALL 'public final fun <get-s> (): kotlin.String declared in <root>.MyContainer' type=kotlin.String origin=GET_PROPERTY
               $this: GET_VAR '<this>: <root>.MyContainer declared in <root>.get' type=<root>.MyContainer origin=null
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST Null type=kotlin.Nothing? value=null
-  FUN name:set visibility:public modality:FINAL <> ($receiver:<root>.MyContainer, $context_receiver_0:kotlin.Int, index:kotlin.Int, value:kotlin.String) returnType:kotlin.Unit [operator]
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST Null type=kotlin.Nothing? konstue=null
+  FUN name:set visibility:public modality:FINAL <> ($receiver:<root>.MyContainer, $context_receiver_0:kotlin.Int, index:kotlin.Int, konstue:kotlin.String) returnType:kotlin.Unit [operator]
     contextReceiverParametersCount: 1
     $receiver: VALUE_PARAMETER name:<this> type:<root>.MyContainer
     VALUE_PARAMETER name:$context_receiver_0 index:0 type:kotlin.Int
     VALUE_PARAMETER name:index index:1 type:kotlin.Int
-    VALUE_PARAMETER name:value index:2 type:kotlin.String
+    VALUE_PARAMETER name:konstue index:2 type:kotlin.String
     BLOCK_BODY
       WHEN type=kotlin.Unit origin=IF
         BRANCH
@@ -134,51 +134,51 @@ FILE fqName:<root> fileName:/arrayAccessOperators.kt
               if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
                 $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                   arg0: GET_VAR 'index: kotlin.Int declared in <root>.set' type=kotlin.Int origin=null
-                  arg1: CONST Int type=kotlin.Int value=0
-              then: CONST Boolean type=kotlin.Boolean value=true
+                  arg1: CONST Int type=kotlin.Int konstue=0
+              then: CONST Boolean type=kotlin.Boolean konstue=true
             BRANCH
-              if: CONST Boolean type=kotlin.Boolean value=true
+              if: CONST Boolean type=kotlin.Boolean konstue=true
               then: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
                 $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
                   arg0: GET_VAR '$context_receiver_0: kotlin.Int declared in <root>.set' type=kotlin.Int origin=null
-                  arg1: CONST Int type=kotlin.Int value=42
-          then: RETURN type=kotlin.Nothing from='public final fun set ($context_receiver_0: kotlin.Int, index: kotlin.Int, value: kotlin.String): kotlin.Unit declared in <root>'
+                  arg1: CONST Int type=kotlin.Int konstue=42
+          then: RETURN type=kotlin.Nothing from='public final fun set ($context_receiver_0: kotlin.Int, index: kotlin.Int, konstue: kotlin.String): kotlin.Unit declared in <root>'
             GET_OBJECT 'CLASS IR_EXTERNAL_DECLARATION_STUB OBJECT name:Unit modality:FINAL visibility:public superTypes:[kotlin.Any]' type=kotlin.Unit
       CALL 'public final fun <set-s> (<set-?>: kotlin.String): kotlin.Unit declared in <root>.MyContainer' type=kotlin.Unit origin=EQ
         $this: GET_VAR '<this>: <root>.MyContainer declared in <root>.set' type=<root>.MyContainer origin=null
-        <set-?>: GET_VAR 'value: kotlin.String declared in <root>.set' type=kotlin.String origin=null
+        <set-?>: GET_VAR 'konstue: kotlin.String declared in <root>.set' type=kotlin.String origin=null
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public final fun with <T, R> (receiver: T of kotlin.with, block: @[ExtensionFunctionType] kotlin.Function1<T of kotlin.with, R of kotlin.with>): R of kotlin.with declared in kotlin' type=kotlin.String origin=null
           <T>: kotlin.Int
           <R>: kotlin.String
-          receiver: CONST Int type=kotlin.Int value=42
+          receiver: CONST Int type=kotlin.Int konstue=42
           block: FUN_EXPR type=@[ExtensionFunctionType] kotlin.Function1<kotlin.Int, kotlin.String> origin=LAMBDA
             FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> ($receiver:kotlin.Int) returnType:kotlin.String
               $receiver: VALUE_PARAMETER name:$this$with type:kotlin.Int
               BLOCK_BODY
-                VAR name:myContainer type:<root>.MyContainer [val]
+                VAR name:myContainer type:<root>.MyContainer [konst]
                   CONSTRUCTOR_CALL 'public constructor <init> (s: kotlin.String) declared in <root>.MyContainer' type=<root>.MyContainer origin=null
-                    s: CONST String type=kotlin.String value="fail"
-                CALL 'public final fun set ($context_receiver_0: kotlin.Int, index: kotlin.Int, value: kotlin.String): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
-                  $receiver: GET_VAR 'val myContainer: <root>.MyContainer declared in <root>.box.<anonymous>' type=<root>.MyContainer origin=null
+                    s: CONST String type=kotlin.String konstue="fail"
+                CALL 'public final fun set ($context_receiver_0: kotlin.Int, index: kotlin.Int, konstue: kotlin.String): kotlin.Unit declared in <root>' type=kotlin.Unit origin=null
+                  $receiver: GET_VAR 'konst myContainer: <root>.MyContainer declared in <root>.box.<anonymous>' type=<root>.MyContainer origin=null
                   $context_receiver_0: GET_VAR '$this$with: kotlin.Int declared in <root>.box.<anonymous>' type=kotlin.Int origin=null
-                  index: CONST Int type=kotlin.Int value=0
-                  value: CONST String type=kotlin.String value="OK"
+                  index: CONST Int type=kotlin.Int konstue=0
+                  konstue: CONST String type=kotlin.String konstue="OK"
                 RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.box'
                   BLOCK type=kotlin.String origin=ELVIS
-                    VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlin.String? [val]
+                    VAR IR_TEMPORARY_VARIABLE name:tmp_1 type:kotlin.String? [konst]
                       CALL 'public final fun get ($context_receiver_0: kotlin.Int, index: kotlin.Int): kotlin.String? declared in <root>' type=kotlin.String? origin=null
-                        $receiver: GET_VAR 'val myContainer: <root>.MyContainer declared in <root>.box.<anonymous>' type=<root>.MyContainer origin=null
+                        $receiver: GET_VAR 'konst myContainer: <root>.MyContainer declared in <root>.box.<anonymous>' type=<root>.MyContainer origin=null
                         $context_receiver_0: GET_VAR '$this$with: kotlin.Int declared in <root>.box.<anonymous>' type=kotlin.Int origin=null
-                        index: CONST Int type=kotlin.Int value=0
+                        index: CONST Int type=kotlin.Int konstue=0
                     WHEN type=kotlin.String origin=ELVIS
                       BRANCH
                         if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
-                          arg0: GET_VAR 'val tmp_1: kotlin.String? declared in <root>.box.<anonymous>' type=kotlin.String? origin=null
-                          arg1: CONST Null type=kotlin.Nothing? value=null
-                        then: CONST String type=kotlin.String value="fail"
+                          arg0: GET_VAR 'konst tmp_1: kotlin.String? declared in <root>.box.<anonymous>' type=kotlin.String? origin=null
+                          arg1: CONST Null type=kotlin.Nothing? konstue=null
+                        then: CONST String type=kotlin.String konstue="fail"
                       BRANCH
-                        if: CONST Boolean type=kotlin.Boolean value=true
-                        then: GET_VAR 'val tmp_1: kotlin.String? declared in <root>.box.<anonymous>' type=kotlin.String? origin=null
+                        if: CONST Boolean type=kotlin.Boolean konstue=true
+                        then: GET_VAR 'konst tmp_1: kotlin.String? declared in <root>.box.<anonymous>' type=kotlin.String? origin=null

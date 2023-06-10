@@ -2,11 +2,11 @@
 // WITH_STDLIB
 
 
-val MaxI = Int.MAX_VALUE
-val MaxL = Long.MAX_VALUE
+konst MaxI = Int.MAX_VALUE
+konst MaxL = Long.MAX_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
+    konst list1 = ArrayList<Int>()
     for (i in 0 downTo MaxI step 3) {
         list1.add(i)
         if (list1.size > 23) break
@@ -15,7 +15,7 @@ fun box(): String {
         return "Wrong elements for 0 downTo MaxI step 3: $list1"
     }
 
-    val list2 = ArrayList<Long>()
+    konst list2 = ArrayList<Long>()
     for (i in 0 downTo MaxL step 3) {
         list2.add(i)
         if (list2.size > 23) break

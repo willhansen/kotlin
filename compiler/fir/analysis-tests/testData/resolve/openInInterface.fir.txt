@@ -5,29 +5,29 @@ FILE: openInInterface.kt
         public open fun bar(): R|kotlin/Unit| {
         }
 
-        public abstract val x: R|kotlin/Int|
+        public abstract konst x: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
-        public open val y: R|kotlin/Int| = Int(1)
+        public open konst y: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
-        public open val z: R|kotlin/Int|
+        public open konst z: R|kotlin/Int|
             public get(): R|kotlin/Int| {
                 ^ Int(1)
             }
 
         public abstract var xx: R|kotlin/Int|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         public open var yy: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         public open var zz: R|kotlin/Int|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/Some|.F|/Some.zz| = R|<local>/value|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/Some|.F|/Some.zz| = R|<local>/konstue|
             }
 
     }

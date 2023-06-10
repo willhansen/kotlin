@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.psi.psiUtil.collectDescendantsOfType
 import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class AbstractSymbolByPsiTest : AbstractSymbolTest() {
-    override val defaultRendererOption: PrettyRendererOption get() = PrettyRendererOption.BODY_WITH_MEMBERS
+    override konst defaultRendererOption: PrettyRendererOption get() = PrettyRendererOption.BODY_WITH_MEMBERS
 
     override fun KtAnalysisSession.collectSymbols(ktFile: KtFile, testServices: TestServices): SymbolsData {
-        val allDeclarationSymbols = ktFile.collectDescendantsOfType<KtDeclaration> { it.isValidForSymbolCreation }.map { declaration ->
+        konst allDeclarationSymbols = ktFile.collectDescendantsOfType<KtDeclaration> { it.isValidForSymbolCreation }.map { declaration ->
             declaration.getSymbol()
         }
 
@@ -24,7 +24,7 @@ abstract class AbstractSymbolByPsiTest : AbstractSymbolTest() {
         )
     }
 
-    private val KtDeclaration.isValidForSymbolCreation
+    private konst KtDeclaration.isValidForSymbolCreation
         get() = when (this) {
             is KtBackingField -> false
             is KtDestructuringDeclaration -> false

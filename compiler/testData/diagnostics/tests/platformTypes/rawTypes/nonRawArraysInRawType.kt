@@ -15,7 +15,7 @@ public class Generic<T> {
 
 // FILE: main.kt
 fun main() {
-    val generic = Generic.create()
+    konst generic = Generic.create()
 
     for (x in generic.foo) {
         x.length // Arrays don't become raw

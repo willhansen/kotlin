@@ -15,14 +15,14 @@ public class Exec {
 annotation class SamWithReceiver
 
 fun test() {
-    val e = Exec()
+    konst e = Exec()
 
     e.exec {
         System.out.println("Hello, world!")
     }
 
     e.exec {
-        val a: String = <!NO_THIS!>this<!>
+        konst a: String = <!NO_THIS!>this<!>
         System.out.println(a)
     }
 }

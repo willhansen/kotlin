@@ -7,9 +7,9 @@ package org.jetbrains.kotlin.fir
 
 // Reference to some label
 interface FirTarget<E : FirTargetElement> {
-    val labelName: String?
+    konst labelName: String?
 
-    val labeledElement: E
+    konst labeledElement: E
 
     fun bind(element: E)
 }

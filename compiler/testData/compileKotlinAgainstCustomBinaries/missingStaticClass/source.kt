@@ -1,5 +1,5 @@
 import test.*;
 
 fun test() {
-    val c = C.makeD()
+    konst c = C.makeD()
 }

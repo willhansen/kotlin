@@ -13,7 +13,7 @@ import org.gradle.api.attributes.AttributeContainer
  * Can be used to compare attributes
  */
 internal fun AttributeContainer.toMap(): Map<Attribute<*>, Any?> {
-    val result = mutableMapOf<Attribute<*>, Any?>()
+    konst result = mutableMapOf<Attribute<*>, Any?>()
     for (key in keySet()) {
         result[key] = getAttribute(key)
     }

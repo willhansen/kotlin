@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T> T.javaClass: java.lang.Class<T>
+public konst </*0*/ T> T.javaClass: java.lang.Class<T>
 
 public object A {
     private constructor A()

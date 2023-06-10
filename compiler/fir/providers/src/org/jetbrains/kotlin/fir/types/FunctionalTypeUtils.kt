@@ -36,7 +36,7 @@ fun ConeKotlinType.functionTypeKind(session: FirSession): FunctionTypeKind? {
 }
 
 private fun ConeClassLikeLookupTag.functionTypeKind(session: FirSession): FunctionTypeKind? {
-    val classId = classId
+    konst classId = classId
     return session.functionTypeService.getKindByClassNamePrefix(classId.packageFqName, classId.shortClassName.asString())
 }
 
@@ -45,7 +45,7 @@ private inline fun ConeKotlinType.isFunctionTypeWithPredicate(
     errorOnNotFunctionType: Boolean = false,
     predicate: (FunctionTypeKind) -> Boolean
 ): Boolean {
-    val kind = functionTypeKind(session)
+    konst kind = functionTypeKind(session)
         ?: if (errorOnNotFunctionType) error("$this is not a function type") else return false
     return predicate(kind)
 }
@@ -94,9 +94,9 @@ fun ConeKotlinType.isNotBasicFunctionType(session: FirSession): Boolean {
  * KSuspendFunction/K[Custom]Function -> KFunction
  */
 fun ConeKotlinType.customFunctionTypeToSimpleFunctionType(session: FirSession): ConeClassLikeType {
-    val kind = functionTypeKind(session)
+    konst kind = functionTypeKind(session)
     require(kind != null && kind != FunctionTypeKind.Function && kind != FunctionTypeKind.KFunction)
-    val newKind = if (kind.isReflectType) {
+    konst newKind = if (kind.isReflectType) {
         FunctionTypeKind.KFunction
     } else {
         FunctionTypeKind.Function
@@ -110,14 +110,14 @@ fun ConeKotlinType.customFunctionTypeToSimpleFunctionType(session: FirSession): 
  * K[Custom]Function -> [Custom]Function
  */
 fun ConeKotlinType.reflectFunctionTypeToNonReflectFunctionType(session: FirSession): ConeClassLikeType {
-    val kind = functionTypeKind(session)
+    konst kind = functionTypeKind(session)
     require(kind != null && kind.isReflectType)
     return createFunctionTypeWithNewKind(session, kind.nonReflectKind())
 }
 
 private fun ConeKotlinType.createFunctionTypeWithNewKind(session: FirSession, kind: FunctionTypeKind): ConeClassLikeType {
-    val expandedType = fullyExpandedType(session)
-    val functionTypeId = ClassId(kind.packageFqName, kind.numberedClassName(expandedType.typeArguments.size - 1))
+    konst expandedType = fullyExpandedType(session)
+    konst functionTypeId = ClassId(kind.packageFqName, kind.numberedClassName(expandedType.typeArguments.size - 1))
     return functionTypeId.toLookupTag().constructClassType(
         expandedType.typeArguments,
         isNullable = false,
@@ -159,7 +159,7 @@ private fun ConeKotlinType.findSubtypeOfBasicFunctionTypeImpl(
         }
 
         is ConeTypeParameterType -> {
-            val bounds = lookupTag.typeParameterSymbol.resolvedBounds.map { it.coneType }
+            konst bounds = lookupTag.typeParameterSymbol.resolvedBounds.map { it.coneType }
             runUnless(bounds.any { it.isNotBasicFunctionType(session) }) {
                 bounds.find { it.findSubtypeOfBasicFunctionTypeImpl(session, expectedFunctionType) != null }
             }
@@ -176,7 +176,7 @@ private fun ConeKotlinType.isSubtypeOfFunctionType(session: FirSession, expected
 
 fun ConeClassLikeType.findBaseInvokeSymbol(session: FirSession, scopeSession: ScopeSession): FirNamedFunctionSymbol? {
     require(this.isSomeFunctionType(session))
-    val functionN = (lookupTag.toSymbol(session)?.fir as? FirClass) ?: return null
+    konst functionN = (lookupTag.toSymbol(session)?.fir as? FirClass) ?: return null
     var baseInvokeSymbol: FirNamedFunctionSymbol? = null
     functionN.unsubstitutedScope(
         session,
@@ -196,15 +196,15 @@ fun ConeKotlinType.findContributedInvokeSymbol(
     expectedFunctionType: ConeClassLikeType,
     shouldCalculateReturnTypesOfFakeOverrides: Boolean
 ): FirFunctionSymbol<*>? {
-    val baseInvokeSymbol = expectedFunctionType.findBaseInvokeSymbol(session, scopeSession) ?: return null
+    konst baseInvokeSymbol = expectedFunctionType.findBaseInvokeSymbol(session, scopeSession) ?: return null
 
-    val fakeOverrideTypeCalculator = if (shouldCalculateReturnTypesOfFakeOverrides) {
+    konst fakeOverrideTypeCalculator = if (shouldCalculateReturnTypesOfFakeOverrides) {
         FakeOverrideTypeCalculator.Forced
     } else {
         FakeOverrideTypeCalculator.DoNothing
     }
 
-    val scope = scope(
+    konst scope = scope(
         useSiteSession = session,
         scopeSession = scopeSession,
         fakeOverrideTypeCalculator = fakeOverrideTypeCalculator,
@@ -213,7 +213,7 @@ fun ConeKotlinType.findContributedInvokeSymbol(
 
     var declaredInvoke: FirNamedFunctionSymbol? = null
     scope.processFunctionsByName(OperatorNameConventions.INVOKE) { functionSymbol ->
-        if (functionSymbol.fir.valueParameters.size == baseInvokeSymbol.fir.valueParameters.size) {
+        if (functionSymbol.fir.konstueParameters.size == baseInvokeSymbol.fir.konstueParameters.size) {
             declaredInvoke = functionSymbol
             return@processFunctionsByName
         }
@@ -240,7 +240,7 @@ fun ConeKotlinType.findContributedInvokeSymbol(
 fun ConeKotlinType.contextReceiversTypes(session: FirSession): List<ConeKotlinType> {
     if (!isSomeFunctionType(session)) return emptyList()
     return fullyExpandedType(session).let { expanded ->
-        val contextReceivers = expanded.typeArguments.take(expanded.contextReceiversNumberForFunctionType)
+        konst contextReceivers = expanded.typeArguments.take(expanded.contextReceiversNumberForFunctionType)
         contextReceivers.map { it.typeOrDefault(session.builtinTypes.nothingType.type) }
     }
 }
@@ -258,18 +258,18 @@ fun ConeKotlinType.returnType(session: FirSession): ConeKotlinType {
     return fullyExpandedType(session).typeArguments.last().typeOrDefault(session.builtinTypes.nullableAnyType.type)
 }
 
-fun ConeKotlinType.valueParameterTypesWithoutReceivers(session: FirSession): List<ConeKotlinType> {
+fun ConeKotlinType.konstueParameterTypesWithoutReceivers(session: FirSession): List<ConeKotlinType> {
     require(this is ConeClassLikeType)
     // TODO: add requirement
-    val expandedType = fullyExpandedType(session)
+    konst expandedType = fullyExpandedType(session)
 
-    val receiversNumber = expandedType.contextReceiversNumberForFunctionType + if (expandedType.isExtensionFunctionType) 1 else 0
-    val valueParameters = expandedType.typeArguments.drop(receiversNumber).dropLast(1)
+    konst receiversNumber = expandedType.contextReceiversNumberForFunctionType + if (expandedType.isExtensionFunctionType) 1 else 0
+    konst konstueParameters = expandedType.typeArguments.drop(receiversNumber).dropLast(1)
 
-    return valueParameters.map { it.typeOrDefault(session.builtinTypes.nothingType.type) }
+    return konstueParameters.map { it.typeOrDefault(session.builtinTypes.nothingType.type) }
 }
 
-fun ConeKotlinType.valueParameterTypesIncludingReceiver(session: FirSession): List<ConeKotlinType> {
+fun ConeKotlinType.konstueParameterTypesIncludingReceiver(session: FirSession): List<ConeKotlinType> {
     require(this is ConeClassLikeType)
     // TODO: add requirement
     return fullyExpandedType(session).typeArguments.dropLast(1).map { it.typeOrDefault(session.builtinTypes.nothingType.type) }

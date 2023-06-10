@@ -8,6 +8,6 @@ class A
 class B
 
 fun box(): String {
-    val ref1 = take(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>) // error before 1.6.20; ok, resolved to (3) since 1.6.20
+    konst ref1 = take(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>) // error before 1.6.20; ok, resolved to (3) since 1.6.20
     return "OK"
 }

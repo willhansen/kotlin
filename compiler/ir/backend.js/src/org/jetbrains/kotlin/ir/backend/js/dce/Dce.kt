@@ -24,16 +24,16 @@ fun eliminateDeadDeclarations(
     context: JsIrBackendContext,
     removeUnusedAssociatedObjects: Boolean = true,
 ) {
-    val allRoots = buildRoots(modules, context)
+    konst allRoots = buildRoots(modules, context)
 
-    val printReachabilityInfo =
+    konst printReachabilityInfo =
         context.configuration.getBoolean(JSConfigurationKeys.PRINT_REACHABILITY_INFO) ||
                 java.lang.Boolean.getBoolean("kotlin.js.ir.dce.print.reachability.info")
 
-    val usefulDeclarationProcessor = JsUsefulDeclarationProcessor(context, printReachabilityInfo, removeUnusedAssociatedObjects)
-    val usefulDeclarations = usefulDeclarationProcessor.collectDeclarations(allRoots)
+    konst usefulDeclarationProcessor = JsUsefulDeclarationProcessor(context, printReachabilityInfo, removeUnusedAssociatedObjects)
+    konst usefulDeclarations = usefulDeclarationProcessor.collectDeclarations(allRoots)
 
-    val uselessDeclarationsProcessor =
+    konst uselessDeclarationsProcessor =
         UselessDeclarationsRemover(removeUnusedAssociatedObjects, usefulDeclarations, context, context.dceRuntimeDiagnostic)
 
     modules.forEach { module ->
@@ -59,7 +59,7 @@ private fun IrDeclaration.addRootsTo(
         }
 
         isEffectivelyExternal() -> {
-            val correspondingProperty = when (this) {
+            konst correspondingProperty = when (this) {
                 is IrField -> correspondingPropertySymbol?.owner
                 is IrSimpleFunction -> correspondingPropertySymbol?.owner
                 else -> null
@@ -82,7 +82,7 @@ private fun IrDeclaration.addRootsTo(
         }
 
         this is IrSimpleFunction -> {
-            val correspondingProperty = correspondingPropertySymbol?.owner ?: return
+            konst correspondingProperty = correspondingPropertySymbol?.owner ?: return
             if (correspondingProperty.isExported(context)) {
                 acceptVoid(nestedVisitor)
             }
@@ -91,7 +91,7 @@ private fun IrDeclaration.addRootsTo(
 }
 
 private fun buildRoots(modules: Iterable<IrModuleFragment>, context: JsIrBackendContext): List<IrDeclaration> = buildList {
-    val declarationsCollector = object : IrElementVisitorVoid {
+    konst declarationsCollector = object : IrElementVisitorVoid {
         override fun visitElement(element: IrElement): Unit = element.acceptChildrenVoid(this)
         override fun visitBody(body: IrBody): Unit = Unit // Skip
 
@@ -101,14 +101,14 @@ private fun buildRoots(modules: Iterable<IrModuleFragment>, context: JsIrBackend
         }
     }
 
-    val allFiles = (modules.flatMap { it.files } + context.packageLevelJsModules + context.externalPackageFragment.values)
+    konst allFiles = (modules.flatMap { it.files } + context.packageLevelJsModules + context.externalPackageFragment.konstues)
     allFiles.forEach { file ->
         file.declarations.forEach { declaration ->
             declaration.addRootsTo(declarationsCollector, context)
         }
     }
 
-    val dceRuntimeDiagnostic = context.dceRuntimeDiagnostic
+    konst dceRuntimeDiagnostic = context.dceRuntimeDiagnostic
     if (dceRuntimeDiagnostic != null) {
         dceRuntimeDiagnostic.unreachableDeclarationMethod(context).owner.acceptVoid(declarationsCollector)
     }
@@ -122,7 +122,7 @@ private fun buildRoots(modules: Iterable<IrModuleFragment>, context: JsIrBackend
     }
 
     addIfNotNull(context.intrinsics.void.owner.backingField)
-    addAll(context.testFunsPerFile.values)
+    addAll(context.testFunsPerFile.konstues)
     addAll(context.additionalExportedDeclarations)
 }
 

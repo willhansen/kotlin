@@ -2,7 +2,7 @@
 package foo
 
 class Test() {
-    val a: Int
+    konst a: Int
         get() {
             return 5;
         }

@@ -48,8 +48,8 @@ private fun TestProject.assertConsecutiveBuildsProduceSameBinaries() {
 
     buildGradleKts.appendText(
         """
-        val repo1 = buildDir.resolve("repo1")
-        val repo2 = buildDir.resolve("repo2")
+        konst repo1 = buildDir.resolve("repo1")
+        konst repo2 = buildDir.resolve("repo2")
 
         publishing {
             repositories {
@@ -70,10 +70,10 @@ private fun TestProject.assertConsecutiveBuildsProduceSameBinaries() {
         }
     }
 
-    val repo1 = projectPath.resolve("build/repo1").toFile()
-    val repo2 = projectPath.resolve("build/repo2").toFile()
+    konst repo1 = projectPath.resolve("build/repo1").toFile()
+    konst repo2 = projectPath.resolve("build/repo2").toFile()
 
-    val diffs = diff(repo1, repo2).filter { diff -> "maven-metadata" !in diff.fileName }
+    konst diffs = diff(repo1, repo2).filter { diff -> "maven-metadata" !in diff.fileName }
     if (diffs.isNotEmpty()) {
         fail(
             buildString {
@@ -87,11 +87,11 @@ private fun TestProject.assertConsecutiveBuildsProduceSameBinaries() {
 }
 
 private sealed class Diff {
-    data class MissingFile(val file: File) : Diff()
-    data class DifferentContent(val first: File, val second: File) : Diff()
-    data class TypeMismatch(val directory: File, val file: File) : Diff()
+    data class MissingFile(konst file: File) : Diff()
+    data class DifferentContent(konst first: File, konst second: File) : Diff()
+    data class TypeMismatch(konst directory: File, konst file: File) : Diff()
 
-    val fileName: String
+    konst fileName: String
         get() = when (this) {
             is DifferentContent -> first.name
             is MissingFile -> file.name
@@ -101,7 +101,7 @@ private sealed class Diff {
 
 private fun diff(firstRoot: File, secondRoot: File): Set<Diff> {
     return firstRoot.walkTopDown().flatMap { firstFile ->
-        val secondFile = secondRoot.resolve(firstFile.relativeTo(firstRoot))
+        konst secondFile = secondRoot.resolve(firstFile.relativeTo(firstRoot))
 
         if (!secondFile.exists()) {
             return@flatMap listOf(Diff.MissingFile(secondFile))
@@ -115,7 +115,7 @@ private fun diff(firstRoot: File, secondRoot: File): Set<Diff> {
 
             /* Check if all children in the second directory are also present in firstFile */
             return@flatMap secondFile.listFiles().orEmpty().mapNotNull { secondFileChild ->
-                val firstFileChild = firstRoot.resolve(secondFileChild.relativeTo(secondRoot))
+                konst firstFileChild = firstRoot.resolve(secondFileChild.relativeTo(secondRoot))
                 if (!firstFileChild.exists()) Diff.MissingFile(firstFileChild)
                 else null
             }

@@ -8,7 +8,7 @@
  * SPEC VERSION: 0.1-300
  * MAIN LINK: expressions, constant-literals, boolean-literals -> paragraph 1 -> sentence 2
  * NUMBER: 1
- * DESCRIPTION: checking of type for Boolean values: possible to use as identifiers if surround with backticks
+ * DESCRIPTION: checking of type for Boolean konstues: possible to use as identifiers if surround with backticks
  * HELPERS: checkType
  */
 
@@ -17,8 +17,8 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val `false` : Any = false
-    val `true` : Any = true
+    konst `false` : Any = false
+    konst `true` : Any = true
 }
 
 // TESTCASE NUMBER: 2

@@ -1,8 +1,8 @@
 data class A(var string: String)
 
 fun box(): String {
-    val a = A("Fail")
+    konst a = A("Fail")
     a.string = "OK"
-    val (result) = a
+    konst (result) = a
     return result
 }

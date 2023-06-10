@@ -8,6 +8,6 @@ public class SomeJavaClass {
 // FILE: SameJavaFieldReferences.kt
 
 fun foo() {
-    val ref1 = SomeJavaClass::someJavaField
-    val ref2 = SomeJavaClass::someJavaField
+    konst ref1 = SomeJavaClass::someJavaField
+    konst ref2 = SomeJavaClass::someJavaField
 }

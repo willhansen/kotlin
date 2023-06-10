@@ -6,15 +6,15 @@
 
 
 
-val range0 = 1.0F..<3.0F
-val range1 = 3.0F..<1.0F
+konst range0 = 1.0F..<3.0F
+konst range1 = 3.0F..<1.0F
 
-val element0 = -1F
-val element1 = 0F
-val element2 = 1F
-val element3 = 2F
-val element4 = 3F
-val element5 = 4F
+konst element0 = -1F
+konst element1 = 0F
+konst element2 = 1F
+konst element3 = 2F
+konst element4 = 3F
+konst element5 = 4F
 
 fun box(): String {
     testR0xE0()

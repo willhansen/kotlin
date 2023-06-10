@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.js.translate.context.Namer
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
 class ReturnReplacingVisitor(
-        private val resultRef: JsNameRef?,
-        private val breakLabel: JsNameRef?,
-        private val function: JsFunction,
-        private val isSuspend: Boolean
+        private konst resultRef: JsNameRef?,
+        private konst breakLabel: JsNameRef?,
+        private konst function: JsFunction,
+        private konst isSuspend: Boolean
 ) : JsVisitorWithContextImpl() {
 
     /**
@@ -44,7 +44,7 @@ class ReturnReplacingVisitor(
 
         ctx.removeMe()
 
-        val returnReplacement = getReturnReplacement(x.expression)
+        konst returnReplacement = getReturnReplacement(x.expression)
         if (returnReplacement != null) {
             if (returnReplacement.source == null) {
                 returnReplacement.source = x.source
@@ -59,8 +59,8 @@ class ReturnReplacingVisitor(
 
     private fun getReturnReplacement(returnExpression: JsExpression?): JsExpression? {
         return if (returnExpression != null) {
-            val assignment = resultRef?.let { lhs ->
-                val rhs = processCoroutineResult(returnExpression)!!
+            konst assignment = resultRef?.let { lhs ->
+                konst rhs = processCoroutineResult(returnExpression)!!
                 JsAstUtils.assignment(lhs, rhs).apply { synthetic = true }
             }
             assignment ?: processCoroutineResult(returnExpression)
@@ -72,7 +72,7 @@ class ReturnReplacingVisitor(
 
     private fun processCoroutineResult(expression: JsExpression?): JsExpression? {
         if (!isSuspend || expression.isStateMachineResult()) return expression
-        val lhs = JsNameRef("\$\$coroutineResult\$\$", JsAstUtils.stateMachineReceiver()).apply { coroutineResult = true }
+        konst lhs = JsNameRef("\$\$coroutineResult\$\$", JsAstUtils.stateMachineReceiver()).apply { coroutineResult = true }
         return JsAstUtils.assignment(lhs, expression ?: Namer.getUndefinedExpression())
     }
 }

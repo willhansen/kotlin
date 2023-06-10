@@ -17,18 +17,18 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.resolve.sam.createSamConstructorFunction
 import org.jetbrains.kotlin.resolve.sam.getSingleAbstractMethodOrNull
 
-class KtFe10DescSamConstructorSymbolPointer(private val classId: ClassId) : KtSymbolPointer<KtSamConstructorSymbol>() {
+class KtFe10DescSamConstructorSymbolPointer(private konst classId: ClassId) : KtSymbolPointer<KtSamConstructorSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtSamConstructorSymbol? {
         check(analysisSession is KtFe10AnalysisSession)
-        val analysisContext = analysisSession.analysisContext
+        konst analysisContext = analysisSession.analysisContext
 
-        val samInterface = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId)
+        konst samInterface = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId)
         if (samInterface == null || getSingleAbstractMethodOrNull(samInterface) == null) {
             return null
         }
 
-        val constructorDescriptor = createSamConstructorFunction(
+        konst constructorDescriptor = createSamConstructorFunction(
             samInterface.containingDeclaration,
             samInterface,
             analysisContext.resolveSession.samConversionResolver,

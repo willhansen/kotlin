@@ -1,7 +1,7 @@
 // p.A
 package p
 
-class A(val y: Int) {
+class A(konst y: Int) {
     override fun equals(other: Any?): Boolean {
         return super.equals(other)
     }

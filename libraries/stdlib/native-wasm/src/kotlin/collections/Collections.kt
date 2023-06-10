@@ -69,14 +69,14 @@ public actual fun <T, K> Grouping<T, K>.eachCount(): Map<K, Int> = eachCountTo(m
 // Copied from JS.
 
 /**
- * Fills the list with the provided [value].
+ * Fills the list with the provided [konstue].
  *
- * Each element in the list gets replaced with the [value].
+ * Each element in the list gets replaced with the [konstue].
  */
 @SinceKotlin("1.2")
-public actual fun <T> MutableList<T>.fill(value: T): Unit {
+public actual fun <T> MutableList<T>.fill(konstue: T): Unit {
     for (index in 0..lastIndex) {
-        this[index] = value
+        this[index] = konstue
     }
 }
 
@@ -88,8 +88,8 @@ public actual fun <T> MutableList<T>.fill(value: T): Unit {
 @SinceKotlin("1.2")
 public actual fun <T> MutableList<T>.shuffle(): Unit {
     for (i in lastIndex downTo 1) {
-        val j = Random.nextInt(i + 1)
-        val copy = this[i]
+        konst j = Random.nextInt(i + 1)
+        konst copy = this[i]
         this[i] = this[j]
         this[j] = copy
     }

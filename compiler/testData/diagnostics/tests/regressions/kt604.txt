@@ -22,7 +22,7 @@ public final class DefaultChannelPipeline : ChannelPipeline {
 
 public final class StandardPipelineFactory : ChannelPipelineFactory {
     public constructor StandardPipelineFactory(/*0*/ config: ChannelPipeline.() -> kotlin.Unit)
-    public final val config: ChannelPipeline.() -> kotlin.Unit
+    public final konst config: ChannelPipeline.() -> kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ fun getPipeline(): ChannelPipeline
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

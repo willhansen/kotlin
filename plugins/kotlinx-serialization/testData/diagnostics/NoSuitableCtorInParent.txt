@@ -3,8 +3,8 @@ package
 @kotlinx.serialization.Serializable public final class Derived : NonSerializableParent {
     @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "This synthesized declaration should not be used directly", replaceWith = kotlin.ReplaceWith(expression = "", imports = {})) public /*synthesized*/ constructor Derived(/*0*/ seen1: kotlin.Int, /*1*/ someData: kotlin.String?, /*2*/ serializationConstructorMarker: kotlinx.serialization.internal.SerializationConstructorMarker?)
     public constructor Derived(/*0*/ someData: kotlin.String)
-    public final override /*1*/ /*fake_override*/ val arg: kotlin.Int
-    public final val someData: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst arg: kotlin.Int
+    public final konst someData: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -12,12 +12,12 @@ package
 
     @kotlin.Deprecated(level = DeprecationLevel.HIDDEN, message = "This synthesized declaration should not be used directly", replaceWith = kotlin.ReplaceWith(expression = "", imports = {})) public object `$serializer` : kotlinx.serialization.internal.GeneratedSerializer<Derived> {
         private constructor `$serializer`()
-        public open override /*1*/ /*synthesized*/ val descriptor: kotlinx.serialization.descriptors.SerialDescriptor
+        public open override /*1*/ /*synthesized*/ konst descriptor: kotlinx.serialization.descriptors.SerialDescriptor
         public open override /*1*/ /*synthesized*/ fun childSerializers(): kotlin.Array<kotlinx.serialization.KSerializer<*>>
         public open override /*1*/ /*synthesized*/ fun deserialize(/*0*/ decoder: kotlinx.serialization.encoding.Decoder): Derived
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
-        public open override /*1*/ /*synthesized*/ fun serialize(/*0*/ encoder: kotlinx.serialization.encoding.Encoder, /*1*/ value: Derived): kotlin.Unit
+        public open override /*1*/ /*synthesized*/ fun serialize(/*0*/ encoder: kotlinx.serialization.encoding.Encoder, /*1*/ konstue: Derived): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
         public open override /*1*/ /*fake_override*/ fun typeParametersSerializers(): kotlin.Array<kotlinx.serialization.KSerializer<*>>
     }
@@ -33,7 +33,7 @@ package
 
 public open class NonSerializableParent {
     public constructor NonSerializableParent(/*0*/ arg: kotlin.Int)
-    public final val arg: kotlin.Int
+    public final konst arg: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

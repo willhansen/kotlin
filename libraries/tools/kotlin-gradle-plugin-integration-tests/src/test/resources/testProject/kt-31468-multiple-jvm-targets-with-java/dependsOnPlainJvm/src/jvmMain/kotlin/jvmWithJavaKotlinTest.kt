@@ -1,5 +1,5 @@
 package test
 
 fun main() {
-    val kotlin = PlainJvmKotlin()
+    konst kotlin = PlainJvmKotlin()
 }

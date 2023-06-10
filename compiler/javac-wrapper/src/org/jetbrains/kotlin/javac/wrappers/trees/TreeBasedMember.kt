@@ -26,17 +26,17 @@ import org.jetbrains.kotlin.name.FqName
 abstract class TreeBasedMember<out T : JCTree>(
         tree: T,
         compilationUnit: CompilationUnitTree,
-        override val containingClass: JavaClass,
+        override konst containingClass: JavaClass,
         javac: JavacWrapper
 ) : TreeBasedElement<T>(tree, compilationUnit, javac), JavaMember {
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecatedInJavaDoc(tree, compilationUnit)
 
-    override val annotations: Collection<TreeBasedAnnotation> by lazy {
+    override konst annotations: Collection<TreeBasedAnnotation> by lazy {
         tree.annotations().map { TreeBasedAnnotation(it, compilationUnit, javac, containingClass) } }
 
     override fun findAnnotation(fqName: FqName) =

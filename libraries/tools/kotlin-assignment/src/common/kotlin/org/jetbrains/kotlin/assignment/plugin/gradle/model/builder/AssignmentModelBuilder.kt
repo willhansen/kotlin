@@ -23,7 +23,7 @@ class AssignmentModelBuilder : ToolingModelBuilder {
 
     override fun buildAll(modelName: String, project: Project): Any {
         require(canBuild(modelName)) { "buildAll(\"$modelName\") has been called while canBeBuild is false" }
-        val extension = project.extensions.getByType(AssignmentExtension::class.java)
+        konst extension = project.extensions.getByType(AssignmentExtension::class.java)
         return AssignmentImpl(project.name, extension.myAnnotations)
     }
 }

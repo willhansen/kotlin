@@ -1,12 +1,12 @@
 fun box(): String {
-    val b: Byte = 42
-    val c: Char = 'z'
-    val s: Short = 239
-    val i: Int = -1
-    val j: Long = -42L
-    val f: Float = 3.14f
-    val d: Double = -2.72
-    val z: Boolean = true
+    konst b: Byte = 42
+    konst c: Char = 'z'
+    konst s: Short = 239
+    konst i: Int = -1
+    konst j: Long = -42L
+    konst f: Float = 3.14f
+    konst d: Double = -2.72
+    konst z: Boolean = true
 
     b.equals(b)
     b == b

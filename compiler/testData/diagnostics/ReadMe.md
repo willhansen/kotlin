@@ -11,7 +11,7 @@ To test not only the presence of the diagnostic but also the arguments which wil
 
     return <!TYPE_MISMATCH(String; Nothing)!>"OK"<!>
 
-Note: if you're unsure what text should be added for the parameters, just leave the parentheses empty and the failed test will present the actual values in the assertion message.
+Note: if you're unsure what text should be added for the parameters, just leave the parentheses empty and the failed test will present the actual konstues in the assertion message.
 
 ## Directives
 

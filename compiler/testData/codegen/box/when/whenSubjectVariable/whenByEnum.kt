@@ -11,7 +11,7 @@ enum class Season {
 }
 
 fun bar1(x : Season) : String {
-    return when (val xx = x) {
+    return when (konst xx = x) {
         Season.WINTER, Season.SPRING -> "winter_spring $xx"
         Season.SUMMER -> "summer"
         else -> "autumn"
@@ -19,7 +19,7 @@ fun bar1(x : Season) : String {
 }
 
 fun bar2(x : Season) : String {
-    return when (val xx = x) {
+    return when (konst xx = x) {
         Season.WINTER, Season.SPRING -> "winter_spring $xx"
         Season.SUMMER -> "summer"
         Season.AUTUMN -> "autumn"

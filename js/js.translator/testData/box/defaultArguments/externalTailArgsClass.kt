@@ -8,10 +8,10 @@ external class TailArgs(
     p4: String = definedExternally,
 )
 
-external val ctorArgs: Array<String>
+external konst ctorArgs: Array<String>
 
 fun box(): String {
-    val p2 = "p2"
+    konst p2 = "p2"
 
     TailArgs()
     if (ctorArgs.size != 0) return "fail2: $ctorArgs arguments instead 0"

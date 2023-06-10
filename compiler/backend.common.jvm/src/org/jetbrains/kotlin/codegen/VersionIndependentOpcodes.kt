@@ -9,5 +9,5 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 
 // This object should help compiling against different ASM versions in different bunch versions
 object VersionIndependentOpcodes {
-    const val ACC_RECORD = Opcodes.ACC_RECORD
+    const konst ACC_RECORD = Opcodes.ACC_RECORD
 }

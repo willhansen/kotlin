@@ -9,20 +9,20 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val s: String)
+konstue class Z(konst s: String)
 
 fun box(): String {
-    val a = Z("a")
-    val b = Z("b")
+    konst a = Z("a")
+    konst b = Z("b")
 
-    val equals = Z::equals
+    konst equals = Z::equals
     assertTrue(equals.call(a, a))
     assertFalse(equals.call(a, b))
 
-    val hashCode = Z::hashCode
+    konst hashCode = Z::hashCode
     assertEquals(a.s.hashCode(), hashCode.call(a))
 
-    val toString = Z::toString
+    konst toString = Z::toString
     assertEquals("Z(s=${a.s})", toString.call(a))
 
     return "OK"

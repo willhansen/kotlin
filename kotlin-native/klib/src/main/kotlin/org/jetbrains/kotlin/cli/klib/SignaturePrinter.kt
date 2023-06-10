@@ -7,9 +7,9 @@ import org.jetbrains.kotlin.utils.Printer
 
 class SignaturePrinter(
         out: Appendable,
-        private val signatureRenderer: IdSignatureRenderer
+        private konst signatureRenderer: IdSignatureRenderer
 ) {
-    private val printer = Printer(out)
+    private konst printer = Printer(out)
 
     fun print(module: ModuleDescriptor) {
         module.accept(PrinterVisitor(), Unit)

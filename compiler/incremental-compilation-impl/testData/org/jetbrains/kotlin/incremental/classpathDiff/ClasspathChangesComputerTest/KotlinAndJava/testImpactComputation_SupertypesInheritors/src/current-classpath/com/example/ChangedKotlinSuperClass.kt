@@ -1,6 +1,6 @@
 package com.example;
 
 open class ChangedKotlinSuperClass {
-    val changedProperty = ""
+    konst changedProperty = ""
     fun changedFunction() = ""
 }

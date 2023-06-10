@@ -23,25 +23,25 @@ import org.jetbrains.kotlin.resolve.diagnostics.Diagnostics
 import org.jetbrains.org.objectweb.asm.Type
 
 internal class LightClassDataProviderForClassOrObject(
-    private val classOrObject: KtClassOrObject
+    private konst classOrObject: KtClassOrObject
 ) : CachedValueProvider<Diagnostics> {
     private fun computeLightClassData(): Diagnostics {
-        val file = classOrObject.containingKtFile
-        val packageFqName = file.packageFqName
-        val cliSupport = LightClassGenerationSupport.getInstance(classOrObject.project) as CliLightClassGenerationSupport
+        konst file = classOrObject.containingKtFile
+        konst packageFqName = file.packageFqName
+        konst cliSupport = LightClassGenerationSupport.getInstance(classOrObject.project) as CliLightClassGenerationSupport
 
         //force resolve companion for light class generation
         cliSupport.traceHolder.bindingContext.get(BindingContext.CLASS, classOrObject)?.companionObjectDescriptor
 
-        val (_, bindingContext, diagnostics) = extraJvmDiagnosticsFromBackend(
+        konst (_, bindingContext, diagnostics) = extraJvmDiagnosticsFromBackend(
             packageFqName,
             listOf(file),
             ClassFilterForClassOrObject(classOrObject),
             cliSupport.context,
         ) { state, files ->
-            val packageCodegen = state.factory.forPackage(packageFqName, files)
-            val packagePartType = Type.getObjectType(JvmFileClassUtil.getFileClassInternalName(file))
-            val context = state.rootContext.intoPackagePart(packageCodegen.packageFragment, packagePartType, file)
+            konst packageCodegen = state.factory.forPackage(packageFqName, files)
+            konst packagePartType = Type.getObjectType(JvmFileClassUtil.getFileClassInternalName(file))
+            konst context = state.rootContext.intoPackagePart(packageCodegen.packageFragment, packagePartType, file)
             MemberCodegen.genClassOrObject(context, getOutermostClassOrObject(classOrObject), state, null)
             state.factory.done()
         }
@@ -50,7 +50,7 @@ internal class LightClassDataProviderForClassOrObject(
     }
 
     override fun compute(): CachedValueProvider.Result<Diagnostics> {
-        val trackerService = KotlinModificationTrackerService.getInstance(classOrObject.project)
+        konst trackerService = KotlinModificationTrackerService.getInstance(classOrObject.project)
         return CachedValueProvider.Result.create(
             computeLightClassData(),
             if (classOrObject.safeIsLocal()) trackerService.modificationTracker else trackerService.outOfBlockModificationTracker
@@ -60,7 +60,7 @@ internal class LightClassDataProviderForClassOrObject(
     override fun toString(): String = this::class.java.name + " for " + classOrObject.name
 }
 
-private class ClassFilterForClassOrObject(private val classOrObject: KtClassOrObject) : GenerationState.GenerateClassFilter() {
+private class ClassFilterForClassOrObject(private konst classOrObject: KtClassOrObject) : GenerationState.GenerateClassFilter() {
 
     override fun shouldGeneratePackagePart(ktFile: KtFile) = true
     override fun shouldAnnotateClass(processingClassOrObject: KtClassOrObject) = shouldGenerateClass(processingClassOrObject)
@@ -88,7 +88,7 @@ private class ClassFilterForClassOrObject(private val classOrObject: KtClassOrOb
         // We generate all enclosing classes
 
         if (classOrObject.safeIsLocal() && processingClassOrObject.safeIsLocal()) {
-            val commonParent = PsiTreeUtil.findCommonParent(classOrObject, processingClassOrObject)
+            konst commonParent = PsiTreeUtil.findCommonParent(classOrObject, processingClassOrObject)
             return commonParent != null && commonParent !is PsiFile
         }
 

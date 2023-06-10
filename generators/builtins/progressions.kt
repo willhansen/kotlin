@@ -25,22 +25,22 @@ class GenerateProgressions(out: PrintWriter) : BuiltInsSourceGenerator(out) {
 
     override fun getPackage() = "kotlin.ranges"
     private fun generateDiscreteBody(kind: ProgressionKind) {
-        val t = kind.capitalized
-        val progression = "${t}Progression"
+        konst t = kind.capitalized
+        konst progression = "${t}Progression"
 
-        val incrementType = progressionIncrementType(kind)
+        konst incrementType = progressionIncrementType(kind)
         fun compare(v: String) = areEqualNumbers(v)
 
-        val zero = when (kind) {
+        konst zero = when (kind) {
             LONG -> "0L"
             else -> "0"
         }
-        val checkZero = """if (step == $zero) throw kotlin.IllegalArgumentException("Step must be non-zero.")"""
+        konst checkZero = """if (step == $zero) throw kotlin.IllegalArgumentException("Step must be non-zero.")"""
 
-        val stepMinValue = "$incrementType.MIN_VALUE"
-        val checkMin = """if (step == $stepMinValue) throw kotlin.IllegalArgumentException("Step must be greater than $stepMinValue to avoid overflow on negation.")"""
+        konst stepMinValue = "$incrementType.MIN_VALUE"
+        konst checkMin = """if (step == $stepMinValue) throw kotlin.IllegalArgumentException("Step must be greater than $stepMinValue to avoid overflow on negation.")"""
 
-        val hashCode = "=\n" + when (kind) {
+        konst hashCode = "=\n" + when (kind) {
             CHAR ->
                 "        if (isEmpty()) -1 else (31 * (31 * first.code + last.code) + step)"
             INT ->
@@ -48,18 +48,18 @@ class GenerateProgressions(out: PrintWriter) : BuiltInsSourceGenerator(out) {
             LONG ->
                 "        if (isEmpty()) -1 else (31 * (31 * ${hashLong("first")} + ${hashLong("last")}) + ${hashLong("step")}).toInt()"
         }
-        val elementToIncrement = when (kind) {
+        konst elementToIncrement = when (kind) {
             CHAR -> ".code"
             else -> ""
         }
-        val incrementToElement = when (kind) {
+        konst incrementToElement = when (kind) {
             CHAR -> ".toChar()"
             else -> ""
         }
 
         out.println(
                 """/**
- * A progression of values of type `$t`.
+ * A progression of konstues of type `$t`.
  */
 public open class $progression
     internal constructor
@@ -76,17 +76,17 @@ public open class $progression
     /**
      * The first element in the progression.
      */
-    public val first: $t = start
+    public konst first: $t = start
 
     /**
      * The last element in the progression.
      */
-    public val last: $t = getProgressionLastElement(start$elementToIncrement, endInclusive$elementToIncrement, step)$incrementToElement
+    public konst last: $t = getProgressionLastElement(start$elementToIncrement, endInclusive$elementToIncrement, step)$incrementToElement
 
     /**
      * The step of the progression.
      */
-    public val step: $incrementType = step
+    public konst step: $incrementType = step
 
     override fun iterator(): ${t}Iterator = ${t}ProgressionIterator(first, last, step)
 
@@ -110,7 +110,7 @@ public open class $progression
         /**
          * Creates $progression within the specified bounds of a closed range.
          *
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `$stepMinValue` and not equal to zero.
@@ -125,7 +125,7 @@ public open class $progression
     override fun generateBody() {
         out.println("import kotlin.internal.getProgressionLastElement")
         out.println()
-        for (kind in ProgressionKind.values()) {
+        for (kind in ProgressionKind.konstues()) {
             generateDiscreteBody(kind)
         }
     }

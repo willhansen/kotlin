@@ -1,14 +1,14 @@
 fun test(a: Any) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (a) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (a) {
         is Int -> 1
         is String -> 2
     }
 
-    val y = when (a) {
+    konst y = when (a) {
         else -> 1
     }
 
-    val z = when (a) {
+    konst z = when (a) {
         is Int -> 1
         is String -> 2
         else -> 3

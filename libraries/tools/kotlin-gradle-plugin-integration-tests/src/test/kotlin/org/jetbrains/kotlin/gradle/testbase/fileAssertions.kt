@@ -45,7 +45,7 @@ fun assertFileExistsInTree(
     pathToTreeRoot: Path,
     fileName: String
 ) {
-    val foundFile = pathToTreeRoot
+    konst foundFile = pathToTreeRoot
         .toFile()
         .walk()
         .find {
@@ -78,7 +78,7 @@ fun assertFileNotExistsInTree(
     pathToTreeRoot: Path,
     fileName: String
 ) {
-    val foundFile = pathToTreeRoot
+    konst foundFile = pathToTreeRoot
         .toFile()
         .walk()
         .find {
@@ -138,8 +138,8 @@ fun assertDirectoryExists(
 fun assertDirectoriesExist(
     vararg dirPaths: Path
 ) {
-    val (exist, notExist) = dirPaths.partition { it.exists() }
-    val notDirectories = exist.filterNot { it.isDirectory() }
+    konst (exist, notExist) = dirPaths.partition { it.exists() }
+    konst notDirectories = exist.filterNot { it.isDirectory() }
 
     assert(notExist.isEmpty() && notDirectories.isEmpty()) {
         buildString {
@@ -183,8 +183,8 @@ fun assertFileContains(
     vararg expectedText: String
 ) {
     assertFileExists(file)
-    val text = file.readText()
-    val textNotInTheFile = expectedText.filterNot { text.contains(it) }
+    konst text = file.readText()
+    konst textNotInTheFile = expectedText.filterNot { text.contains(it) }
     assert(textNotInTheFile.isEmpty()) {
         """
         |$file does not contain:
@@ -205,8 +205,8 @@ fun assertFileDoesNotContain(
     vararg unexpectedText: String
 ) {
     assertFileExists(file)
-    val text = file.readText()
-    val textInTheFile = unexpectedText.filter { text.contains(it) }
+    konst text = file.readText()
+    konst textInTheFile = unexpectedText.filter { text.contains(it) }
     assert(textInTheFile.isEmpty()) {
         """
         |$file contains lines which it should not contain:
@@ -220,8 +220,8 @@ fun assertFileDoesNotContain(
 }
 
 fun assertSameFiles(expected: Iterable<Path>, actual: Iterable<Path>, messagePrefix: String) {
-    val expectedSet = expected.map { it.toString().normalizePath() }.toSet()
-    val actualSet = actual.map { it.toString().normalizePath() }.toSet()
+    konst expectedSet = expected.map { it.toString().normalizePath() }.toSet()
+    konst actualSet = actual.map { it.toString().normalizePath() }.toSet()
     asserter.assertTrue(lazyMessage = {
         messagePrefix +
                 "Actual set does not exactly match expected set.\n" +
@@ -231,8 +231,8 @@ fun assertSameFiles(expected: Iterable<Path>, actual: Iterable<Path>, messagePre
 }
 
 fun assertContainsFiles(expected: Iterable<Path>, actual: Iterable<Path>, messagePrefix: String) {
-    val expectedSet = expected.map { it.toString().normalizePath() }.toSet()
-    val actualSet = actual.map { it.toString().normalizePath() }.toSet()
+    konst expectedSet = expected.map { it.toString().normalizePath() }.toSet()
+    konst actualSet = actual.map { it.toString().normalizePath() }.toSet()
     asserter.assertTrue(lazyMessage = {
         messagePrefix +
                 "Actual set does not contain all of expected set.\n" +
@@ -258,11 +258,11 @@ fun assertFilesContentEquals(expected: Path, actual: Path) {
 }
 
 class GradleVariantAssertions(
-    val variantJson: JsonObject
+    konst variantJson: JsonObject
 ) {
     fun assertAttributesEquals(expected: Map<String, String>) {
-        val attributesJson = variantJson.getAsJsonObject("attributes")
-        val actual = attributesJson.keySet().associateWith { attributesJson.get(it).asString }
+        konst attributesJson = variantJson.getAsJsonObject("attributes")
+        konst actual = attributesJson.keySet().associateWith { attributesJson.get(it).asString }
 
         assertEquals(expected.toSortedStringWithLines(), actual.toSortedStringWithLines())
     }
@@ -272,15 +272,15 @@ class GradleVariantAssertions(
 
 private fun Map<String, Any?>.toSortedStringWithLines() = entries
     .sortedBy { it.key }
-    .joinToString("\n") { (key, value) -> "'$key' => '$value'" }
+    .joinToString("\n") { (key, konstue) -> "'$key' => '$konstue'" }
 
 fun assertGradleVariant(gradleModuleFile: Path, variantName: String, code: GradleVariantAssertions.() -> Unit) {
-    val moduleJson = JsonParser.parseString(gradleModuleFile.readText()).asJsonObject
-    val variants = moduleJson.getAsJsonArray("variants")
-    val variantJson = variants.find { it.asJsonObject.get("name").asString == variantName }
+    konst moduleJson = JsonParser.parseString(gradleModuleFile.readText()).asJsonObject
+    konst variants = moduleJson.getAsJsonArray("variants")
+    konst variantJson = variants.find { it.asJsonObject.get("name").asString == variantName }
 
     if (variantJson == null) {
-        val existingVariants = variants.map { it.asJsonObject.get("name").asString }
+        konst existingVariants = variants.map { it.asJsonObject.get("name").asString }
         throw AssertionError("Variant with name '$variantName' doesn't exist; Existing variants: $existingVariants")
     }
 

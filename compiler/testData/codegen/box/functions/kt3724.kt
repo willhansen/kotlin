@@ -3,13 +3,13 @@ class Comment() {
 }
 
 fun new(body: Comment.() -> Unit) : Comment {
-    val c = Comment()
+    konst c = Comment()
     c.body()
     return c
 }
 
-open class Request(val handler : Any.() -> Comment) {
-    val s = handler().article
+open class Request(konst handler : Any.() -> Comment) {
+    konst s = handler().article
 }
 
 

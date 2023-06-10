@@ -1,7 +1,7 @@
 var x = 1
 
 fun box() {
-    val y: Number = 1
+    konst y: Number = 1
     x == y
 }
 

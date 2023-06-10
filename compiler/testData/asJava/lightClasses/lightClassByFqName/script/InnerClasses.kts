@@ -1,7 +1,7 @@
 // InnerClasses
 
-class Bar(val a: Int) {
-    val b: Int = { 0 }()
+class Bar(konst a: Int) {
+    konst b: Int = { 0 }()
 
     fun getAPlusB() = a + b
 

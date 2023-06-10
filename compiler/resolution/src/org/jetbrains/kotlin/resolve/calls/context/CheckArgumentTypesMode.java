@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.resolve.calls.context;
 
 public enum CheckArgumentTypesMode {
     /**
-     * Check value argument types for particular call.
+     * Check konstue argument types for particular call.
      */
     CHECK_VALUE_ARGUMENTS,
     /**

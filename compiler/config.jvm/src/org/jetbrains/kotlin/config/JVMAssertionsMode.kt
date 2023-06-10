@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.config
 
-enum class JVMAssertionsMode(val description: String) {
+enum class JVMAssertionsMode(konst description: String) {
     ALWAYS_ENABLE("always-enable"),
     ALWAYS_DISABLE("always-disable"),
     JVM("jvm"),
@@ -13,10 +13,10 @@ enum class JVMAssertionsMode(val description: String) {
 
     companion object {
         @JvmField
-        val DEFAULT = LEGACY
+        konst DEFAULT = LEGACY
 
         @JvmStatic
-        fun fromStringOrNull(string: String?) = values().find { it.description == string }
+        fun fromStringOrNull(string: String?) = konstues().find { it.description == string }
 
         @JvmStatic
         fun fromString(string: String?) = fromStringOrNull(string) ?: DEFAULT

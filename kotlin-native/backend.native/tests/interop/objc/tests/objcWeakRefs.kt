@@ -6,7 +6,7 @@ import kotlin.test.*
 import objcTests.*
 
 @Test fun testObjCWeakRef() {
-    val deallocListener = DeallocListener()
+    konst deallocListener = DeallocListener()
     assertFalse(deallocListener.deallocated)
 
     // [deallocListener.deallocExecutorIsNil()] calls deallocExecutor getter, which retains the result and either
@@ -24,7 +24,7 @@ import objcTests.*
 private fun testObjCWeakRef0(deallocListener: DeallocListener) = withWorker {
     assertTrue(deallocListener.deallocExecutorIsNil())
 
-    val obj = object : DeallocExecutor() {}
+    konst obj = object : DeallocExecutor() {}
     deallocListener.deallocExecutor = obj
     obj.deallocListener = deallocListener
 

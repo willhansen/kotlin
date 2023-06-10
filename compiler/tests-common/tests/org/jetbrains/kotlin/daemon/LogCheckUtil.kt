@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.daemon
 /**
  * holder of a [regex] and optional [matchCheck] for additional checks on match result
  */
-class LinePattern(val regex: Regex, val matchCheck: (MatchResult) -> Boolean = { true })
+class LinePattern(konst regex: Regex, konst matchCheck: (MatchResult) -> Boolean = { true })
 fun LinePattern(regex: String, matchCheck: (MatchResult) -> Boolean = { true }) = LinePattern(regex.toRegex(), matchCheck)
 
 /**
@@ -29,22 +29,22 @@ fun LinePattern(regex: String, matchCheck: (MatchResult) -> Boolean = { true }) 
 fun Sequence<String>.ifNotContainsSequence(patternsIter: Iterator<LinePattern>,
                                                     body: (LinePattern, Int) -> Unit) : Unit {
     class Accumulator(it: Iterator<LinePattern>) {
-        val iter = EndBoundIteratorWithValue(it)
+        konst iter = EndBoundIteratorWithValue(it)
         var lineNo = 1
         var lastMatchedLineNo = 0
         fun nextLineAndPattern(): Accumulator { iter.traverseNext(); lastMatchedLineNo = lineNo; return nextLine() }
         fun nextLine(): Accumulator { lineNo++; return this }
     }
-    val res = fold(Accumulator(patternsIter))
+    konst res = fold(Accumulator(patternsIter))
                    { acc, line ->
                        when {
                            !acc.iter.isValid() -> return@fold acc
-                           acc.iter.value.regex.find(line)?.let { acc.iter.value.matchCheck(it) } ?: false -> acc.nextLineAndPattern()
+                           acc.iter.konstue.regex.find(line)?.let { acc.iter.konstue.matchCheck(it) } ?: false -> acc.nextLineAndPattern()
                            else -> acc.nextLine()
                        }
                    }
     if (res.iter.isValid()) {
-        body(res.iter.value, res.lastMatchedLineNo)
+        body(res.iter.konstue, res.lastMatchedLineNo)
     }
 }
 
@@ -70,17 +70,17 @@ fun Sequence<String>.ifNotContainsSequence(vararg patterns: LinePattern,
 
 
 // emulates Stepanov's / STL iterator, but with "embedded" end check via isValid:
-// iterator points to a current value and upon init points to the first element or is invalid
+// iterator points to a current konstue and upon init points to the first element or is inkonstid
 // allows to express some algorithms more concisely
-private class EndBoundIteratorWithValue<T: Any, Iter: Iterator<T>>(val base: Iter) {
-    private var _value: T? = base.nextOrNull()
+private class EndBoundIteratorWithValue<T: Any, Iter: Iterator<T>>(konst base: Iter) {
+    private var _konstue: T? = base.nextOrNull()
 
-    val value: T get() = _value ?: throw Exception("Dereferencing invalid iterator")
+    konst konstue: T get() = _konstue ?: throw Exception("Dereferencing inkonstid iterator")
 
-    fun isValid(): Boolean = _value != null
+    fun isValid(): Boolean = _konstue != null
 
     fun traverseNext(): EndBoundIteratorWithValue<T, Iter> {
-        _value = base.nextOrNull()
+        _konstue = base.nextOrNull()
         return this
     }
 }

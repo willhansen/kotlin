@@ -1,7 +1,7 @@
 fun bar() {
-    val x = A().x
-    val foo = A().foo()
-    val y = A.y
-    val bar = A.bar()
-    val baz = baz()
+    konst x = A().x
+    konst foo = A().foo()
+    konst y = A.y
+    konst bar = A.bar()
+    konst baz = baz()
 }

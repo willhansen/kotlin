@@ -28,13 +28,13 @@ open class D8Exec : AbstractExecTask<D8Exec>(D8Exec::class.java) {
     @PathSensitive(PathSensitivity.ABSOLUTE)
     @InputFile
     @NormalizeLineEndings
-    val inputFileProperty: RegularFileProperty = project.newFileProperty()
+    konst inputFileProperty: RegularFileProperty = project.newFileProperty()
 
     override fun exec() {
-        val newArgs = mutableListOf<String>()
+        konst newArgs = mutableListOf<String>()
         newArgs.addAll(d8Args)
         if (inputFileProperty.isPresent) {
-            val inputFile = inputFileProperty.asFile.get()
+            konst inputFile = inputFileProperty.asFile.get()
             workingDir = inputFile.parentFile
             newArgs.add("--module")
             newArgs.add(inputFile.canonicalPath)
@@ -55,9 +55,9 @@ open class D8Exec : AbstractExecTask<D8Exec>(D8Exec::class.java) {
             name: String,
             configuration: D8Exec.() -> Unit = {}
         ): TaskProvider<D8Exec> {
-            val target = compilation.target
-            val project = target.project
-            val d8 = D8RootPlugin.apply(project.rootProject)
+            konst target = compilation.target
+            konst project = target.project
+            konst d8 = D8RootPlugin.apply(project.rootProject)
             return project.registerTask(
                 name
             ) {

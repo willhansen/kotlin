@@ -27,7 +27,7 @@ internal fun ModuleDescriptor.getIncludedLibraryDescriptors(konanConfig: KonanCo
 
 private fun ModuleDescriptor.getDescriptorsFromLibraries(libraries: Set<KonanLibrary>) =
     allDependencyModules.filter {
-        when (val origin = it.klibModuleOrigin) {
+        when (konst origin = it.klibModuleOrigin) {
             CurrentKlibModuleOrigin, SyntheticModulesOrigin -> false
             is DeserializedKlibModuleOrigin -> origin.library in libraries
         }
@@ -74,7 +74,7 @@ private sealed class FeaturedLibrariesReporter {
     abstract fun reportIllegalKind(library: KonanLibrary)
     abstract fun reportNotIncludedLibraries(includedLibraries: List<KonanLibrary>, remainingFeaturedLibraries: Set<File>)
 
-    protected val KonanLibrary.reportedKind: String
+    protected konst KonanLibrary.reportedKind: String
         get() = when {
             isInterop -> "Interop"
             isDefault -> "Default"
@@ -86,7 +86,7 @@ private sealed class FeaturedLibrariesReporter {
         override fun reportNotIncludedLibraries(includedLibraries: List<KonanLibrary>, remainingFeaturedLibraries: Set<File>) {}
     }
 
-    abstract class BaseReporter(val configuration: CompilerConfiguration) : FeaturedLibrariesReporter() {
+    abstract class BaseReporter(konst configuration: CompilerConfiguration) : FeaturedLibrariesReporter() {
         protected abstract fun illegalKindMessage(kind: String, libraryName: String): String
         protected abstract fun notIncludedLibraryMessageTitle(): String
 
@@ -98,7 +98,7 @@ private sealed class FeaturedLibrariesReporter {
         }
 
         override fun reportNotIncludedLibraries(includedLibraries: List<KonanLibrary>, remainingFeaturedLibraries: Set<File>) {
-            val message = buildString {
+            konst message = buildString {
                 appendLine(notIncludedLibraryMessageTitle())
                 remainingFeaturedLibraries.forEach { appendLine(it) }
                 appendLine()
@@ -110,9 +110,9 @@ private sealed class FeaturedLibrariesReporter {
         }
     }
 
-    private class IncludedLibrariesReporter(val configuration: CompilerConfiguration) : FeaturedLibrariesReporter() {
+    private class IncludedLibrariesReporter(konst configuration: CompilerConfiguration) : FeaturedLibrariesReporter() {
         override fun reportIllegalKind(library: KonanLibrary) = with(library) {
-            val message = "$reportedKind library $libraryName cannot be passed with -Xinclude " +
+            konst message = "$reportedKind library $libraryName cannot be passed with -Xinclude " +
                     "(library path: ${libraryFile.absolutePath})"
             configuration.report(CompilerMessageSeverity.STRONG_WARNING, message)
         }
@@ -167,13 +167,13 @@ private fun getFeaturedLibraries(
     reporter: FeaturedLibrariesReporter,
     allowDefaultLibs: Boolean
 ) : List<KonanLibrary> {
-    val remainingFeaturedLibraries = featuredLibraryFiles.toMutableSet()
-    val result = mutableListOf<KonanLibrary>()
+    konst remainingFeaturedLibraries = featuredLibraryFiles.toMutableSet()
+    konst result = mutableListOf<KonanLibrary>()
     //TODO: please add type checks before cast.
-    val libraries = resolvedLibraries.getFullList(null).map { it as KonanLibrary }
+    konst libraries = resolvedLibraries.getFullList(null).map { it as KonanLibrary }
 
     for (library in libraries) {
-        val libraryFile = library.libraryFile
+        konst libraryFile = library.libraryFile
         if (libraryFile in featuredLibraryFiles) {
             remainingFeaturedLibraries -= libraryFile
             if (library.isInterop || (!allowDefaultLibs && library.isDefault)) {

@@ -1,1 +1,1 @@
-val a = <expr>Any()</expr>
+konst a = <expr>Any()</expr>

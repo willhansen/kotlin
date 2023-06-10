@@ -9,18 +9,18 @@ import org.jetbrains.skiko.skia.native.*
 import platform.posix.printf
 
 fun main() {
-    val a = Data()
+    konst a = Data()
     a.setData(17)
-    val b = Data(19)
-    val c = Data(a)
-    val d = Data(a, b)
-    val e = Data(200).foo(a, b)!!
+    konst b = Data(19)
+    konst c = Data(a)
+    konst d = Data(a, b)
+    konst e = Data(200).foo(a, b)!!
 
-    val a1 = a.checkData(17) != 0
-    val b1 = b.checkData(119) != 0
-    val c1 = c.checkData(217) != 0
-    val d1 = d.checkData(436) != 0
-    val e1 = e.checkData(536) != 0
+    konst a1 = a.checkData(17) != 0
+    konst b1 = b.checkData(119) != 0
+    konst c1 = c.checkData(217) != 0
+    konst d1 = d.checkData(436) != 0
+    konst e1 = e.checkData(536) != 0
 
     // Use printf instead of println to avoid messages
     // appearing out of order with the native code.

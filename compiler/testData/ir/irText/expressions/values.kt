@@ -3,7 +3,7 @@
 
 enum class Enum { A }
 object A
-val a = 0
+konst a = 0
 class Z {
     companion object
 }

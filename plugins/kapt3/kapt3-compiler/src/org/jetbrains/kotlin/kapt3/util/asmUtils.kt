@@ -30,7 +30,7 @@ internal fun isFinal(access: Int) = (access and Opcodes.ACC_FINAL) != 0
 internal fun isStatic(access: Int) = (access and Opcodes.ACC_STATIC) != 0
 internal fun isAbstract(access: Int) = (access and Opcodes.ACC_ABSTRACT) != 0
 
-private const val LONG_DEPRECATED = Opcodes.ACC_DEPRECATED.toLong()
+private const konst LONG_DEPRECATED = Opcodes.ACC_DEPRECATED.toLong()
 internal fun isDeprecated(access: Long) = (access and LONG_DEPRECATED) != 0L
 
 internal fun ClassNode.isInterface() = (access and Opcodes.ACC_INTERFACE) != 0
@@ -52,15 +52,15 @@ internal fun MethodNode.isJvmOverloadsGenerated(): Boolean {
 
 // Constant from DefaultParameterValueSubstitutor can't be used in Maven build because of ProGuard
 // rename this as well
-private val ANNOTATION_TYPE_DESCRIPTOR_FOR_JVMOVERLOADS_GENERATED_METHODS: String =
+private konst ANNOTATION_TYPE_DESCRIPTOR_FOR_JVMOVERLOADS_GENERATED_METHODS: String =
     Type.getObjectType("synthetic/kotlin/jvm/GeneratedByJvmOverloads").descriptor
 
 private fun AnnotationNode.isJvmOverloadsGenerated(): Boolean {
     return this.desc == ANNOTATION_TYPE_DESCRIPTOR_FOR_JVMOVERLOADS_GENERATED_METHODS
 }
 
-val ClassNode.className: String
+konst ClassNode.className: String
     get() = Type.getObjectType(name).className
 
-val ClassNode.simpleName: String
+konst ClassNode.simpleName: String
     get() = name.substringAfterLast('/').substringAfterLast('$')

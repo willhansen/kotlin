@@ -33,10 +33,10 @@ private class PrivateClass {
 
 // Helpers
 
-val CALEE_NAME = RegExp("""((?:equals|hashCode|toString)[^(]*)""")
+konst CALEE_NAME = RegExp("""((?:equals|hashCode|toString)[^(]*)""")
 
 fun <T> Function0<T>.extractNames(): Array<String> {
-    val names = CALEE_NAME.exec(this.toString())
+    konst names = CALEE_NAME.exec(this.toString())
 
     if (names == null || names.size != 2) {
         throw Exception("Cannot extract function name, $names for actual = \"$this\"")
@@ -50,19 +50,19 @@ fun <T> Function0<T>.extractNames(): Array<String> {
 var testGroup = ""
 
 fun test(expected: String, f: () -> Unit) {
-    val actual = f.extractNames()
+    konst actual = f.extractNames()
 
     if (expected != actual[1]) {
         fail("Failed on '$testGroup' group: expected = \"$expected\", actual[1] = \"${actual[1]}\"\n actual = $actual")
     }
 }
 
-val STABLE_EQUALS = "equals"
-val STABLE_HASH_CODE = "hashCode"
-val STABLE_TO_STRING = "toString"
-val STABLE_EQUALS_2 = "equals_oaftn8$"
-val STABLE_HASH_CODE_2 = "hashCode_za3lpa$"
-val STABLE_TO_STRING_2 = "toString_61zpoe$"
+konst STABLE_EQUALS = "equals"
+konst STABLE_HASH_CODE = "hashCode"
+konst STABLE_TO_STRING = "toString"
+konst STABLE_EQUALS_2 = "equals_oaftn8$"
+konst STABLE_HASH_CODE_2 = "hashCode_za3lpa$"
+konst STABLE_TO_STRING_2 = "toString_61zpoe$"
 
 fun box(): String {
     testGroup = "Public Class"

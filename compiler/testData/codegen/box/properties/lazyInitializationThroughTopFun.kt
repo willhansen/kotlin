@@ -5,7 +5,7 @@
 // FILE: A.kt
 var result: String? = null
 
-val a = "a".let {
+konst a = "a".let {
     result = "OK"
     it + "a"
 }
@@ -15,6 +15,6 @@ fun foo() =
 
 // FILE: main.kt
 fun box(): String {
-    val foo = foo()
+    konst foo = foo()
     return result!!
 }

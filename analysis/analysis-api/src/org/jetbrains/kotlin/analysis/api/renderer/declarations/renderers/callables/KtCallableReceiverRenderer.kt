@@ -23,7 +23,7 @@ public interface KtCallableReceiverRenderer {
                     annotationRenderer.renderAnnotations(symbol, printer)
                 },
                 {
-                    val receiverType = declarationTypeApproximator.approximateType(symbol.type, Variance.IN_VARIANCE)
+                    konst receiverType = declarationTypeApproximator.approximateType(symbol.type, Variance.IN_VARIANCE)
                     typeRenderer.renderType(receiverType, printer)
                 },
             )

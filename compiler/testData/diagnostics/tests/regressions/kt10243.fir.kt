@@ -1,11 +1,11 @@
-val f: Boolean = true
+konst f: Boolean = true
 private fun doUpdateRegularTasks() {
     try {
         while (f) {
-            val xmlText = <!UNRESOLVED_REFERENCE!>getText<!>()
+            konst xmlText = <!UNRESOLVED_REFERENCE!>getText<!>()
             if (xmlText == null) {}
             else {
-                xmlText.<!UNRESOLVED_REFERENCE!>value<!> = 0 // !!!
+                xmlText.<!UNRESOLVED_REFERENCE!>konstue<!> = 0 // !!!
             }
         }
 

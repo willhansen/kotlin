@@ -47,14 +47,14 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
         if (otherKind == thisKind) {
             if (thisKind in PrimitiveType.floatingPoint) {
                 """
-                    // if any of values in NaN both comparisons return false
+                    // if any of konstues in NaN both comparisons return false
                     if (this > $parameterName) return 1
                     if (this < $parameterName) return -1
             
-                    val thisBits = this.toBits()
-                    val otherBits = $parameterName.toBits()
+                    konst thisBits = this.toBits()
+                    konst otherBits = $parameterName.toBits()
             
-                    // Canonical NaN bit representation is higher than any other value's bit representation
+                    // Canonical NaN bit representation is higher than any other konstue's bit representation
                     return thisBits.compareTo(otherBits)
                 """.trimIndent().addAsMultiLineBody()
             } else {
@@ -64,8 +64,8 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
         }
 
         modifySignature { isInline = thisKind !in PrimitiveType.floatingPoint }
-        val thisCasted = "this" + thisKind.castToIfNecessary(otherKind)
-        val otherCasted = parameterName + otherKind.castToIfNecessary(thisKind)
+        konst thisCasted = "this" + thisKind.castToIfNecessary(otherKind)
+        konst otherCasted = parameterName + otherKind.castToIfNecessary(thisKind)
         if (thisKind == PrimitiveType.FLOAT && otherKind == PrimitiveType.DOUBLE) {
             "-${otherCasted}.compareTo(this)"
         } else {
@@ -74,16 +74,16 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
     }
 
     override fun MethodBuilder.modifyGeneratedBinaryOperation(thisKind: PrimitiveType, otherKind: PrimitiveType) {
-        val sign = operatorSign(this.methodName)
+        konst sign = operatorSign(this.methodName)
 
         if (thisKind != PrimitiveType.BYTE && thisKind != PrimitiveType.SHORT && thisKind == otherKind) {
             return setAsExternal()
         }
 
         modifySignature { isInline = true }
-        val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
-        val thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
-        val otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(returnTypeAsPrimitive)
+        konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
+        konst thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
+        konst otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(returnTypeAsPrimitive)
         "$thisCasted $sign $otherCasted".addAsSingleLineBody(bodyOnNewLine = true)
     }
 
@@ -95,16 +95,16 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
         }
 
         modifySignature { isInline = true }
-        val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
-        val thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
-        val sign = if (methodName == "unaryMinus") "-" else ""
+        konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
+        konst thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
+        konst sign = if (methodName == "unaryMinus") "-" else ""
         "$sign$thisCasted".addAsSingleLineBody(bodyOnNewLine = true)
     }
 
     override fun MethodBuilder.modifyGeneratedRangeTo(thisKind: PrimitiveType) {
-        val rangeType = PrimitiveType.valueOf(returnType.replace("Range", "").uppercase())
-        val thisCasted = "this" + thisKind.castToIfNecessary(rangeType)
-        val otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(rangeType)
+        konst rangeType = PrimitiveType.konstueOf(returnType.replace("Range", "").uppercase())
+        konst thisCasted = "this" + thisKind.castToIfNecessary(rangeType)
+        konst otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(rangeType)
         "return ${returnType}($thisCasted, $otherCasted)".addAsMultiLineBody()
     }
 
@@ -121,7 +121,7 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
     }
 
     override fun MethodBuilder.modifyGeneratedConversions(thisKind: PrimitiveType) {
-        val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
+        konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
         when {
             returnTypeAsPrimitive == thisKind -> {
                 modifySignature { isInline = true }
@@ -129,7 +129,7 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
             }
             thisKind !in PrimitiveType.floatingPoint -> {
                 modifySignature { isExternal = true }
-                val intrinsicType = when {
+                konst intrinsicType = when {
                     returnTypeAsPrimitive in PrimitiveType.floatingPoint -> "SIGNED_TO_FLOAT"
                     returnTypeAsPrimitive.byteSize < thisKind.byteSize -> "INT_TRUNCATE"
                     returnTypeAsPrimitive.byteSize > thisKind.byteSize -> "SIGN_EXTEND"
@@ -160,7 +160,7 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
     }
 
     override fun MethodBuilder.modifyGeneratedEquals(thisKind: PrimitiveType) {
-        val additionalCheck = if (thisKind in PrimitiveType.floatingPoint) {
+        konst additionalCheck = if (thisKind in PrimitiveType.floatingPoint) {
             "toBits() == other.toBits()"
         } else {
             "kotlin.native.internal.areEqualByValue(this, $parameterName)"
@@ -170,11 +170,11 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
 
     override fun MethodBuilder.modifyGeneratedToString(thisKind: PrimitiveType) {
         if (thisKind in PrimitiveType.floatingPoint) {
-            appendDoc("Returns the string representation of this [${thisKind.capitalized}] value.\n")
+            appendDoc("Returns the string representation of this [${thisKind.capitalized}] konstue.\n")
             """
             Note that the representation format is unstable and may change in a future release.
-            However, it is guaranteed that the returned string is valid for converting back to [${thisKind.capitalized}]
-            using [String.to${thisKind.capitalized}], and will result in the same numeric value.
+            However, it is guaranteed that the returned string is konstid for converting back to [${thisKind.capitalized}]
+            using [String.to${thisKind.capitalized}], and will result in the same numeric konstue.
             The exact bit pattern of a `NaN` ${thisKind.name.lowercase()} is not guaranteed to be preserved though.
             """.trimIndent().let { appendDoc(it) }
 
@@ -213,7 +213,7 @@ class NativePrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(w
     private fun ClassBuilder.generateCustomEquals(thisKind: PrimitiveType) {
         method {
             annotations += "Deprecated(\"Provided for binary compatibility\", level = DeprecationLevel.HIDDEN)"
-            annotations += "kotlin.internal.IntrinsicConstEvaluation"
+            annotations += "kotlin.internal.IntrinsicConstEkonstuation"
             signature {
                 methodName = "equals"
                 parameter {

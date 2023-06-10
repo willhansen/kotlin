@@ -6,4 +6,4 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.IgnoredOnParcel
 
 @Parcelize
-class A(@IgnoredOnParcel val x: String = "OK") : Parcelable
+class A(@IgnoredOnParcel konst x: String = "OK") : Parcelable

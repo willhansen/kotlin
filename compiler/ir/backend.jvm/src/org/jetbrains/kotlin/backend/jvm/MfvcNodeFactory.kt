@@ -52,10 +52,10 @@ fun createLeafMfvcNode(
 ): LeafMfvcNode {
     require(!type.needsMfvcFlattening()) { "${type.render()} requires flattening" }
 
-    val fullMethodName = NameableMfvcNodeImpl.makeFullMethodName(methodFullNameMode, nameParts)
-    val fullFieldName = NameableMfvcNodeImpl.makeFullFieldName(nameParts)
+    konst fullMethodName = NameableMfvcNodeImpl.makeFullMethodName(methodFullNameMode, nameParts)
+    konst fullFieldName = NameableMfvcNodeImpl.makeFullFieldName(nameParts)
 
-    val field = oldPropertyBackingField?.let { oldBackingField ->
+    konst field = oldPropertyBackingField?.let { oldBackingField ->
         context.irFactory.buildField {
             updateFrom(oldBackingField)
             this.name = fullFieldName
@@ -68,7 +68,7 @@ fun createLeafMfvcNode(
         }
     }
 
-    val unboxMethod = makeUnboxMethod(
+    konst unboxMethod = makeUnboxMethod(
         context,
         fullMethodName,
         type,
@@ -86,19 +86,19 @@ fun createLeafMfvcNode(
 fun IrClass.isKotlinExternalStub() = origin == IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB
 
 @OptIn(ExperimentalContracts::class)
-private fun IrClass.throwWhenNotExternalIsNull(value: Any?) {
+private fun IrClass.throwWhenNotExternalIsNull(konstue: Any?) {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
-    if (value == null) throw IllegalStateException("$name is not external but has no primary constructor:\n${dump()}")
+    if (konstue == null) throw IllegalStateException("$name is not external but has no primary constructor:\n${dump()}")
 }
 
 @OptIn(ExperimentalContracts::class)
-fun RootMfvcNode.throwWhenNotExternalIsNull(value: Any?) {
+fun RootMfvcNode.throwWhenNotExternalIsNull(konstue: Any?) {
     contract {
-        returns() implies (value != null)
+        returns() implies (konstue != null)
     }
-    mfvc.throwWhenNotExternalIsNull(value)
+    mfvc.throwWhenNotExternalIsNull(konstue)
 }
 
 private fun makeUnboxMethod(
@@ -113,7 +113,7 @@ private fun makeUnboxMethod(
     modality: Modality,
     makeOptimizedExpression: IrBuilderWithScope.(receiver: IrValueDeclaration?) -> IrExpression,
 ): IrSimpleFunction {
-    val res = oldGetter ?: context.irFactory.buildFun {
+    konst res = oldGetter ?: context.irFactory.buildFun {
         this.name = fullMethodName
         this.origin = JvmLoweredDeclarationOrigin.SYNTHETIC_MULTI_FIELD_VALUE_CLASS_MEMBER
         this.returnType = type
@@ -129,12 +129,12 @@ private fun makeUnboxMethod(
     return res.apply {
         if (!parent.isKotlinExternalStub()) {
             body = with(context.createJvmIrBuilder(this.symbol)) {
-                val receiver = dispatchReceiverParameter
+                konst receiver = dispatchReceiverParameter
                 if (defaultMethodsImplementationSourceNode.hasPureUnboxMethod) {
                     irExprBody(makeOptimizedExpression(receiver))
                 } else {
-                    val receiverExpression: IrExpression? = receiver?.let { irGet(it) }
-                    val unboxMethodsToCall = when (defaultMethodsImplementationSourceNode) {
+                    konst receiverExpression: IrExpression? = receiver?.let { irGet(it) }
+                    konst unboxMethodsToCall = when (defaultMethodsImplementationSourceNode) {
                         DefaultUnboxFunctionImplementation -> error("$defaultMethodsImplementationSourceNode is expected to be pure")
                         ExternalUnboxFunctionImplementation -> error("${parent.render()} is expected to be external")
                         is DelegatingUnboxFunctionImplementation -> listOf(defaultMethodsImplementationSourceNode.node.unboxMethod)
@@ -143,7 +143,7 @@ private fun makeUnboxMethod(
                             (defaultMethodsImplementationSourceNode.node as? NameableMfvcNode)?.unboxMethod
                         )
                     }
-                    val expression = unboxMethodsToCall.fold(receiverExpression) { arg, f -> irCall(f).apply { dispatchReceiver = arg } }
+                    konst expression = unboxMethodsToCall.fold(receiverExpression) { arg, f -> irCall(f).apply { dispatchReceiver = arg } }
                     irExprBody(expression!!)
                 }
             }
@@ -153,22 +153,22 @@ private fun makeUnboxMethod(
 
 
 sealed class UnboxFunctionImplementation {
-    abstract val hasPureUnboxMethod: Boolean
+    abstract konst hasPureUnboxMethod: Boolean
 
     object DefaultUnboxFunctionImplementation : UnboxFunctionImplementation() {
-        override val hasPureUnboxMethod: Boolean get() = true
+        override konst hasPureUnboxMethod: Boolean get() = true
     }
 
     object ExternalUnboxFunctionImplementation : UnboxFunctionImplementation() {
-        override val hasPureUnboxMethod: Boolean get() = false
+        override konst hasPureUnboxMethod: Boolean get() = false
     }
 
-    data class DelegatingUnboxFunctionImplementation(val node: NameableMfvcNode) : UnboxFunctionImplementation() {
-        override val hasPureUnboxMethod: Boolean = node.hasPureUnboxMethod
+    data class DelegatingUnboxFunctionImplementation(konst node: NameableMfvcNode) : UnboxFunctionImplementation() {
+        override konst hasPureUnboxMethod: Boolean = node.hasPureUnboxMethod
     }
 
-    data class CustomUnboxFunctionImplementation(val getter: IrSimpleFunction, val node: MfvcNode) : UnboxFunctionImplementation() {
-        override val hasPureUnboxMethod: Boolean get() = false
+    data class CustomUnboxFunctionImplementation(konst getter: IrSimpleFunction, konst node: MfvcNode) : UnboxFunctionImplementation() {
+        override konst hasPureUnboxMethod: Boolean get() = false
     }
 
     operator fun get(name: Name): UnboxFunctionImplementation {
@@ -241,21 +241,21 @@ fun createIntermediateMfvcNode(
     oldPropertyBackingField: IrField?,
 ): IntermediateMfvcNode {
     require(type.needsMfvcFlattening()) { "${type.render()} does not require flattening" }
-    val valueClass = type.erasedUpperBound
-    val representation = valueClass.multiFieldValueClassRepresentation!!
+    konst konstueClass = type.erasedUpperBound
+    konst representation = konstueClass.multiFieldValueClassRepresentation!!
 
-    val replacements = context.multiFieldValueClassReplacements
-    val rootNode = replacements.getRootMfvcNode(valueClass)
+    konst replacements = context.multiFieldValueClassReplacements
+    konst rootNode = replacements.getRootMfvcNode(konstueClass)
 
-    val oldField = oldGetter?.correspondingPropertySymbol?.owner?.backingFieldIfNotDelegate
+    konst oldField = oldGetter?.correspondingPropertySymbol?.owner?.backingFieldIfNotDelegate
 
-    val shadowBackingFieldProperty = if (oldField == null) oldGetter?.getGetterField()?.correspondingPropertySymbol?.owner else null
-    val useOldGetter = oldGetter != null && (oldField == null || !oldGetter.isDefaultGetter(oldField))
+    konst shadowBackingFieldProperty = if (oldField == null) oldGetter?.getGetterField()?.correspondingPropertySymbol?.owner else null
+    konst useOldGetter = oldGetter != null && (oldField == null || !oldGetter.isDefaultGetter(oldField))
 
-    val subnodes = representation.underlyingPropertyNamesToTypes.map { (name, type) ->
-        val newType = type.substitute(typeArguments) as IrSimpleType
-        val newTypeArguments = typeArguments.toMutableMap().apply { putAll(makeTypeArgumentsFromType(newType)) }
-        val newDefaultMethodsImplementationSourceNode = when {
+    konst subnodes = representation.underlyingPropertyNamesToTypes.map { (name, type) ->
+        konst newType = type.substitute(typeArguments) as IrSimpleType
+        konst newTypeArguments = typeArguments.toMutableMap().apply { putAll(makeTypeArgumentsFromType(newType)) }
+        konst newDefaultMethodsImplementationSourceNode = when {
             defaultMethodsImplementationSourceNode != null -> defaultMethodsImplementationSourceNode[name]
             shadowBackingFieldProperty != null -> DelegatingUnboxFunctionImplementation(
                 replacements.getMfvcPropertyNode(shadowBackingFieldProperty)!!
@@ -280,10 +280,10 @@ fun createIntermediateMfvcNode(
         )
     }
 
-    val fullMethodName = NameableMfvcNodeImpl.makeFullMethodName(methodFullNameMode, nameParts)
+    konst fullMethodName = NameableMfvcNodeImpl.makeFullMethodName(methodFullNameMode, nameParts)
 
-    val unboxMethod: IrSimpleFunction
-    val unboxFunctionImplementation: UnboxFunctionImplementation
+    konst unboxMethod: IrSimpleFunction
+    konst unboxFunctionImplementation: UnboxFunctionImplementation
     if (useOldGetter) {
         unboxMethod = oldGetter!!
         unboxFunctionImplementation = defaultMethodsImplementationSourceNode ?: CustomUnboxFunctionImplementation(unboxMethod, rootNode)
@@ -292,9 +292,9 @@ fun createIntermediateMfvcNode(
         unboxMethod = makeUnboxMethod(
             context, fullMethodName, type, parent, overriddenNode, static, unboxFunctionImplementation, oldGetter, modality
         ) { receiver ->
-            val valueArguments = subnodes.flatMap { it.fields!! }
+            konst konstueArguments = subnodes.flatMap { it.fields!! }
                 .map { field -> irGetField(if (field.isStatic) null else irGet(receiver!!), field) }
-            rootNode.makeBoxedExpression(this, typeArguments, valueArguments, registerPossibleExtraBoxCreation = {})
+            rootNode.makeBoxedExpression(this, typeArguments, konstueArguments, registerPossibleExtraBoxCreation = {})
         }
     }
     return IntermediateMfvcNode(type, methodFullNameMode, nameParts, subnodes, unboxMethod, unboxFunctionImplementation, rootNode)
@@ -304,11 +304,11 @@ fun collectPropertiesAfterLowering(irClass: IrClass, context: JvmBackendContext)
     LinkedHashSet(collectPropertiesOrFieldsAfterLowering(irClass, context).map { (it as Property).property })
 
 sealed class IrPropertyOrIrField {
-    data class Property(val property: IrProperty) : IrPropertyOrIrField() {
+    data class Property(konst property: IrProperty) : IrPropertyOrIrField() {
         override fun toString(): String = property.dump()
     }
 
-    data class Field(val field: IrField) : IrPropertyOrIrField() {
+    data class Field(konst field: IrField) : IrPropertyOrIrField() {
         override fun toString(): String = field.dump()
     }
 }
@@ -316,7 +316,7 @@ sealed class IrPropertyOrIrField {
 fun collectPropertiesOrFieldsAfterLowering(irClass: IrClass, context: JvmBackendContext): LinkedHashSet<IrPropertyOrIrField> =
     LinkedHashSet<IrPropertyOrIrField>().apply {
         fun handleField(element: IrField) {
-            val property = element.correspondingPropertySymbol?.owner
+            konst property = element.correspondingPropertySymbol?.owner
             if (
                 property != null && !property.isDelegated &&
                 !context.multiFieldValueClassReplacements.getFieldsToRemove(element.parentAsClass).contains(element)
@@ -352,34 +352,34 @@ private fun IrProperty.isStatic(currentContainer: IrDeclarationContainer) =
 
 fun getRootNode(context: JvmBackendContext, mfvc: IrClass): RootMfvcNode {
     require(mfvc.isMultiFieldValueClass) { "${mfvc.defaultType.render()} does not require flattening" }
-    val oldPrimaryConstructor = mfvc.primaryConstructor
-    val oldFields = mfvc.declarations.mapNotNull { it as? IrField ?: (it as? IrProperty)?.backingField }.filter { !it.isStatic }
-    val representation = mfvc.multiFieldValueClassRepresentation!!
-    val properties = collectPropertiesAfterLowering(mfvc, context).associateBy { it.isStatic(mfvc) to it.name }
+    konst oldPrimaryConstructor = mfvc.primaryConstructor
+    konst oldFields = mfvc.declarations.mapNotNull { it as? IrField ?: (it as? IrProperty)?.backingField }.filter { !it.isStatic }
+    konst representation = mfvc.multiFieldValueClassRepresentation!!
+    konst properties = collectPropertiesAfterLowering(mfvc, context).associateBy { it.isStatic(mfvc) to it.name }
 
-    val subnodes = makeRootMfvcNodeSubnodes(representation, properties, context, mfvc)
+    konst subnodes = makeRootMfvcNodeSubnodes(representation, properties, context, mfvc)
 
-    val leaves = subnodes.leaves
-    val fields = subnodes.fields
+    konst leaves = subnodes.leaves
+    konst fields = subnodes.fields
 
-    val newPrimaryConstructor = oldPrimaryConstructor?.let { makeMfvcPrimaryConstructor(context, it, mfvc, leaves, fields) }
-    val primaryConstructorImpl = oldPrimaryConstructor?.let {
+    konst newPrimaryConstructor = oldPrimaryConstructor?.let { makeMfvcPrimaryConstructor(context, it, mfvc, leaves, fields) }
+    konst primaryConstructorImpl = oldPrimaryConstructor?.let {
         makePrimaryConstructorImpl(context, it, mfvc, leaves, subnodes)
     }
-    val boxMethod = makeBoxMethod(context, mfvc, leaves, newPrimaryConstructor)
+    konst boxMethod = makeBoxMethod(context, mfvc, leaves, newPrimaryConstructor)
 
-    val customEqualsAny = mfvc.functions.singleOrNull {
+    konst customEqualsAny = mfvc.functions.singleOrNull {
         it.isEquals() && it.origin != IrDeclarationOrigin.GENERATED_MULTI_FIELD_VALUE_CLASS_MEMBER
     }
 
-    val customEqualsMfvc = mfvc.functions.singleOrNull {
+    konst customEqualsMfvc = mfvc.functions.singleOrNull {
         it.name == OperatorNameConventions.EQUALS &&
                 it.contextReceiverParametersCount == 0 &&
                 it.extensionReceiverParameter == null &&
-                it.valueParameters.singleOrNull()?.type?.erasedUpperBound == mfvc
+                it.konstueParameters.singleOrNull()?.type?.erasedUpperBound == mfvc
     }
 
-    val specializedEqualsMethod = makeSpecializedEqualsMethod(context, mfvc, oldFields, customEqualsAny, customEqualsMfvc)
+    konst specializedEqualsMethod = makeSpecializedEqualsMethod(context, mfvc, oldFields, customEqualsAny, customEqualsMfvc)
 
     return RootMfvcNode(
         mfvc, subnodes, oldPrimaryConstructor, newPrimaryConstructor, primaryConstructorImpl, boxMethod,
@@ -398,7 +398,7 @@ private fun makeSpecializedEqualsMethod(
     parent = mfvc
     createDispatchReceiverParameter()
 
-    val other = addValueParameter {
+    konst other = addValueParameter {
         name = Name.identifier("other")
         type = mfvc.defaultType.upperBound
     }
@@ -410,9 +410,9 @@ private fun makeSpecializedEqualsMethod(
                     putValueArgument(0, irGet(other))
                 })
             } else {
-                val leftArgs = oldFields.map { irGetField(irGet(dispatchReceiverParameter!!), it) }
-                val rightArgs = oldFields.map { irGetField(irGet(other), it) }
-                val conjunctions = leftArgs.zip(rightArgs) { l, r -> irEquals(l, r) }
+                konst leftArgs = oldFields.map { irGetField(irGet(dispatchReceiverParameter!!), it) }
+                konst rightArgs = oldFields.map { irGetField(irGet(other), it) }
+                konst conjunctions = leftArgs.zip(rightArgs) { l, r -> irEquals(l, r) }
                 irExprBody(conjunctions.reduce { acc, current ->
                     irCall(context.irBuiltIns.andandSymbol).apply {
                         putValueArgument(0, acc)
@@ -436,11 +436,11 @@ private fun makeBoxMethod(
 }.apply {
     parent = mfvc
     copyTypeParametersFrom(mfvc)
-    val mapping = mfvc.typeParameters.zip(typeParameters) { classTypeParameter, functionTypeParameter ->
+    konst mapping = mfvc.typeParameters.zip(typeParameters) { classTypeParameter, functionTypeParameter ->
         classTypeParameter.symbol to functionTypeParameter.defaultType
     }.toMap()
     returnType = returnType.substitute(mapping)
-    val parameters = leaves.map { leaf -> addValueParameter(leaf.fullFieldName, leaf.type.substitute(mapping)) }
+    konst parameters = leaves.map { leaf -> addValueParameter(leaf.fullFieldName, leaf.type.substitute(mapping)) }
     if (!mfvc.isKotlinExternalStub()) {
         body = with(context.createJvmIrBuilder(this.symbol)) {
             mfvc.throwWhenNotExternalIsNull(newPrimaryConstructor)
@@ -471,12 +471,12 @@ private fun makePrimaryConstructorImpl(
     for (leaf in leaves) {
         addValueParameter(leaf.fullFieldName, leaf.type.substitute(mfvc.typeParameters, typeParameters.map { it.defaultType }))
     }
-    for ((index, oldParameter) in oldPrimaryConstructor.valueParameters.withIndex()) {
-        val node = subnodes[index]
-        val subnodesIndices = subnodes.subnodeIndices
+    for ((index, oldParameter) in oldPrimaryConstructor.konstueParameters.withIndex()) {
+        konst node = subnodes[index]
+        konst subnodesIndices = subnodes.subnodeIndices
         if (node is LeafMfvcNode) {
-            val newIndex = subnodesIndices[node]!!.first
-            valueParameters[newIndex].annotations = oldParameter.annotations
+            konst newIndex = subnodesIndices[node]!!.first
+            konstueParameters[newIndex].annotations = oldParameter.annotations
         }
     }
     annotations = oldPrimaryConstructor.annotations
@@ -502,8 +502,8 @@ private fun makeMfvcPrimaryConstructor(
 }.apply {
     require(oldPrimaryConstructor.typeParameters.isEmpty()) { "Constructors do not support type parameters yet" }
     this.parent = mfvc
-    val parameters = leaves.map { addValueParameter(it.fullFieldName, it.type) }
-    val irConstructor = this@apply
+    konst parameters = leaves.map { addValueParameter(it.fullFieldName, it.type) }
+    konst irConstructor = this@apply
     if (!mfvc.isKotlinExternalStub()) {
         body = context.createIrBuilder(irConstructor.symbol).irBlockBody(irConstructor) {
             +irDelegatingConstructorCall(context.irBuiltIns.anyClass.owner.constructors.single())
@@ -520,12 +520,12 @@ private fun makeRootMfvcNodeSubnodes(
     context: JvmBackendContext,
     mfvc: IrClass
 ) = representation.underlyingPropertyNamesToTypes.map { (name, type) ->
-    val typeArguments = makeTypeArgumentsFromType(type)
-    val oldProperty = properties[false to name]!!
-    val oldBackingField = oldProperty.backingFieldIfNotDelegate
-    val oldGetter = oldProperty.getterIfDeclared(mfvc)
-    val overriddenNode = oldGetter?.let { getOverriddenNode(context.multiFieldValueClassReplacements, it) as IntermediateMfvcNode? }
-    val static = oldProperty.isStatic(mfvc)
+    konst typeArguments = makeTypeArgumentsFromType(type)
+    konst oldProperty = properties[false to name]!!
+    konst oldBackingField = oldProperty.backingFieldIfNotDelegate
+    konst oldGetter = oldProperty.getterIfDeclared(mfvc)
+    konst overriddenNode = oldGetter?.let { getOverriddenNode(context.multiFieldValueClassReplacements, it) as IntermediateMfvcNode? }
+    konst static = oldProperty.isStatic(mfvc)
     createNameableMfvcNodes(
         mfvc,
         context,
@@ -562,15 +562,15 @@ fun createIntermediateNodeForMfvcPropertyOfRegularClass(
     context: JvmBackendContext,
     oldProperty: IrProperty,
 ): IntermediateMfvcNode {
-    val oldGetter = oldProperty.getterIfDeclared(parent)
-    val oldField = oldProperty.backingFieldIfNotDelegate
-    val type = oldProperty.getter?.returnType ?: oldField?.type ?: error("Either getter or field must exist")
+    konst oldGetter = oldProperty.getterIfDeclared(parent)
+    konst oldField = oldProperty.backingFieldIfNotDelegate
+    konst type = oldProperty.getter?.returnType ?: oldField?.type ?: error("Either getter or field must exist")
     require(type is IrSimpleType && type.needsMfvcFlattening()) { "Expected MFVC but got ${type.render()}" }
-    val fieldAnnotations = oldField?.annotations ?: listOf()
-    val static = oldProperty.isStatic(parent)
-    val overriddenNode = oldGetter?.let { getOverriddenNode(context.multiFieldValueClassReplacements, it) as IntermediateMfvcNode? }
-    val modality = if (oldGetter == null || oldGetter.modality == Modality.FINAL) Modality.FINAL else oldGetter.modality
-    val defaultMethodsImplementationSourceNode = if (parent.isKotlinExternalStub()) ExternalUnboxFunctionImplementation else null
+    konst fieldAnnotations = oldField?.annotations ?: listOf()
+    konst static = oldProperty.isStatic(parent)
+    konst overriddenNode = oldGetter?.let { getOverriddenNode(context.multiFieldValueClassReplacements, it) as IntermediateMfvcNode? }
+    konst modality = if (oldGetter == null || oldGetter.modality == Modality.FINAL) Modality.FINAL else oldGetter.modality
+    konst defaultMethodsImplementationSourceNode = if (parent.isKotlinExternalStub()) ExternalUnboxFunctionImplementation else null
     return createIntermediateMfvcNode(
         parent, context, type, makeTypeArgumentsFromType(type), MethodFullNameMode.Getter, listOf(oldProperty.name),
         fieldAnnotations, static, overriddenNode, defaultMethodsImplementationSourceNode, oldGetter, modality, oldField
@@ -584,7 +584,7 @@ fun createIntermediateNodeForStandaloneMfvcField(
     context: JvmBackendContext,
     oldField: IrField,
 ): IntermediateMfvcNode {
-    val type = oldField.type
+    konst type = oldField.type
     require(type is IrSimpleType && type.needsMfvcFlattening()) { "Expected MFVC but got ${type.render()}" }
     return createIntermediateMfvcNode(
         parent, context, type, makeTypeArgumentsFromType(type), MethodFullNameMode.Getter, listOf(oldField.name),
@@ -600,4 +600,4 @@ private fun getOverriddenNode(replacements: MemoizedMultiFieldValueClassReplacem
 private fun IrProperty.getterIfDeclared(parent: IrDeclarationContainer): IrSimpleFunction? =
     getter?.takeIf { it in parent.declarations || this in parent.declarations }
 
-private val IrProperty.backingFieldIfNotDelegate get() = backingField?.takeUnless { isDelegated }
+private konst IrProperty.backingFieldIfNotDelegate get() = backingField?.takeUnless { isDelegated }

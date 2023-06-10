@@ -23,10 +23,10 @@ abstract class KtDestructuringDeclarationReference(
         .map { it.element }
         .first { it is KtDestructuringDeclarationEntry }
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() {
-            val destructuringParent = element.parent as? KtDestructuringDeclaration ?: return emptyList()
-            val componentIndex = destructuringParent.entries.indexOf(element) + 1
+            konst destructuringParent = element.parent as? KtDestructuringDeclaration ?: return emptyList()
+            konst componentIndex = destructuringParent.entries.indexOf(element) + 1
             return listOf(Name.identifier("component$componentIndex"))
         }
 }

@@ -32,11 +32,11 @@ import org.jetbrains.kotlin.psi.KtObjectDeclaration
 
 internal class SymbolLightFieldForObject private constructor(
     containingClass: SymbolLightClassForClassLike<*>,
-    private val name: String,
+    private konst name: String,
     lightMemberOrigin: LightMemberOrigin?,
-    private val objectSymbolPointer: KtSymbolPointer<KtNamedClassOrObjectSymbol>,
-    override val kotlinOrigin: KtObjectDeclaration?,
-    private val isCompanion: Boolean,
+    private konst objectSymbolPointer: KtSymbolPointer<KtNamedClassOrObjectSymbol>,
+    override konst kotlinOrigin: KtObjectDeclaration?,
+    private konst isCompanion: Boolean,
 ) : SymbolLightField(containingClass, lightMemberOrigin) {
     internal constructor(
         ktAnalysisSession: KtAnalysisSession,
@@ -59,7 +59,7 @@ internal class SymbolLightFieldForObject private constructor(
 
     override fun getName(): String = name
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = if (isCompanion) {
@@ -84,7 +84,7 @@ internal class SymbolLightFieldForObject private constructor(
         return GranularModifiersBox.computeVisibilityForClass(ktModule, objectSymbolPointer, isTopLevel = false)
     }
 
-    private val _isDeprecated: Boolean by lazyPub {
+    private konst _isDeprecated: Boolean by lazyPub {
         withObjectDeclarationSymbol { objectSymbol ->
             objectSymbol.hasDeprecatedAnnotation()
         }
@@ -94,7 +94,7 @@ internal class SymbolLightFieldForObject private constructor(
 
     override fun getModifierList(): PsiModifierList = _modifierList
 
-    private val _type: PsiType by lazyPub {
+    private konst _type: PsiType by lazyPub {
         withObjectDeclarationSymbol { objectSymbol ->
             objectSymbol.buildSelfClassType()
                 .asPsiType(this@SymbolLightFieldForObject, allowErrorTypes = true)

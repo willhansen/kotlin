@@ -12,7 +12,7 @@ inline fun <reified T : Enum<T>> String?.enumOrNull(): T? {
     return enumValues<T>().firstOrNull { it.name == this }
 }
 
-inline fun <reified T : Enum<T>> String?.enumOrThrow(handleNull: () -> Throwable = { IllegalArgumentException("Enum type ${T::class.java} not contain value=$this") }): T {
+inline fun <reified T : Enum<T>> String?.enumOrThrow(handleNull: () -> Throwable = { IllegalArgumentException("Enum type ${T::class.java} not contain konstue=$this") }): T {
     return this.enumOrNull<T>() ?: throw handleNull()
 }
 

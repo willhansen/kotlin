@@ -3,21 +3,21 @@
 class A
 
 fun test(foo: A.() -> Int, a: A) {
-    val b: Int = foo(a)
-    val c: Int = (foo)(a)
+    konst b: Int = foo(a)
+    konst c: Int = (foo)(a)
 }
 
 class B {
-    val foo: A.() -> Int = null!!
+    konst foo: A.() -> Int = null!!
 
     init {
-        val b: Int = foo(A())
+        konst b: Int = foo(A())
     }
 }
 
 fun foo(): A.() -> Int {
-    val b: Int = foo()(A())
-    val c: Int = (foo())(A())
+    konst b: Int = foo()(A())
+    konst c: Int = (foo())(A())
 
     return null!!
 }

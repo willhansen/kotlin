@@ -10,18 +10,18 @@ private class C {
 
 private typealias TA = C
 
-private val test1: C = C()
-private val test1co: C.Companion = C
+private konst test1: C = C()
+private konst test1co: C.Companion = C
 
-private val test2: TA = TA()
-private val test2co = TA
+private konst test2: TA = TA()
+private konst test2co = TA
 
 // FILE: file2.kt
-private val test1: <!INVISIBLE_REFERENCE!>C<!> = <!INVISIBLE_REFERENCE!>C<!>()
-private val test1co: <!INVISIBLE_REFERENCE!>C.Companion<!> = <!INVISIBLE_REFERENCE!>C<!>
+private konst test1: <!INVISIBLE_REFERENCE!>C<!> = <!INVISIBLE_REFERENCE!>C<!>()
+private konst test1co: <!INVISIBLE_REFERENCE!>C.Companion<!> = <!INVISIBLE_REFERENCE!>C<!>
 
-private val test2: <!INVISIBLE_REFERENCE!>TA<!> = <!INVISIBLE_REFERENCE!>TA<!>()
-private val test2co = <!INVISIBLE_REFERENCE!>TA<!>
+private konst test2: <!INVISIBLE_REFERENCE!>TA<!> = <!INVISIBLE_REFERENCE!>TA<!>()
+private konst test2co = <!INVISIBLE_REFERENCE!>TA<!>
 
 private class C
 private typealias TA = Int

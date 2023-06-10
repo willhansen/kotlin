@@ -19,9 +19,9 @@ open class JvmScriptCompiler(
     compilerProxy: ScriptCompilerProxy? = null
 ) : ScriptCompiler {
 
-    val hostConfiguration = baseHostConfiguration.withDefaultsFrom(defaultJvmScriptingHostConfiguration)
+    konst hostConfiguration = baseHostConfiguration.withDefaultsFrom(defaultJvmScriptingHostConfiguration)
 
-    val compilerProxy: ScriptCompilerProxy = compilerProxy ?: ScriptJvmCompilerIsolated(hostConfiguration)
+    konst compilerProxy: ScriptCompilerProxy = compilerProxy ?: ScriptJvmCompilerIsolated(hostConfiguration)
 
     override suspend operator fun invoke(
         script: SourceCode,

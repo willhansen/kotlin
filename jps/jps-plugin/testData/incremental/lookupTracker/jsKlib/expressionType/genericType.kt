@@ -5,11 +5,11 @@ package foo
 /*p:foo*/fun <T> identity(): (T) -> T = /*p:kotlin(Function1) p:kotlin(Nothing)*/null as (T) -> T
 
 /*p:foo*/fun <T> compute(f: () -> T) {
-    val result = f()
+    konst result = f()
 }
 
-/*p:foo*/class Bar<T>(val t: T) {
+/*p:foo*/class Bar<T>(konst t: T) {
     init {
-        val a = /*c:foo.Bar c:foo.Bar(T)*/t
+        konst a = /*c:foo.Bar c:foo.Bar(T)*/t
     }
 }

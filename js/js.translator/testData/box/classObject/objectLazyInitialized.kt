@@ -32,11 +32,11 @@ object O2 {
 object O3 : Mixin()
 
 object O4 {
-    val someValue = initCall()
+    konst someValue = initCall()
 }
 
 object O5 {
-    val someValue = O3.also { log = "O5 also" }
+    konst someValue = O3.also { log = "O5 also" }
 }
 
 fun box(): String {

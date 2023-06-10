@@ -21,7 +21,7 @@ fun builder(c: suspend () -> Unit) {
 fun box(): String {
     assertEquals(listOf("abc#3", "cde#3", "xyz#10"), J().foo())
 
-    val result = mutableListOf<String>()
+    konst result = mutableListOf<String>()
     builder {
         result.add(suspendHere())
         result.add(suspendHere("cde"))

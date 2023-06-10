@@ -1,3 +1,3 @@
 package some. // Hello
 
-val a = 12
+konst a = 12

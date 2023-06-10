@@ -26,8 +26,8 @@ import javax.lang.model.element.TypeParameterElement
 import javax.lang.model.type.*
 
 sealed class SymbolBasedType<out T : TypeMirror>(
-    val typeMirror: T,
-    val javac: JavacWrapper
+    konst typeMirror: T,
+    konst javac: JavacWrapper
 ) : JavaType, JavaAnnotationOwner {
 
     companion object {
@@ -40,10 +40,10 @@ sealed class SymbolBasedType<out T : TypeMirror>(
         }
     }
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = typeMirror.annotationMirrors.map { SymbolBasedAnnotation(it, javac) }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecated(typeMirror)
 
     override fun findAnnotation(fqName: FqName) = typeMirror.findAnnotation(fqName, javac)
@@ -61,7 +61,7 @@ class SymbolBasedPrimitiveType(
     javac: JavacWrapper
 ) : SymbolBasedType<TypeMirror>(typeMirror, javac), JavaPrimitiveType {
 
-    override val type: PrimitiveType?
+    override konst type: PrimitiveType?
         get() = if (typeMirror.kind == TypeKind.VOID) null else JvmPrimitiveType.get(typeMirror.toString()).primitiveType
 
 }
@@ -71,16 +71,16 @@ class SymbolBasedClassifierType<out T : TypeMirror>(
     javac: JavacWrapper
 ) : SymbolBasedType<T>(typeMirror, javac), JavaClassifierType {
 
-    private val isFake get() = classifier is FakeSymbolBasedClass
+    private konst isFake get() = classifier is FakeSymbolBasedClass
 
     // TODO: we should replace this with a "link" to classifier, not an actual classifier itself
     // It should be something like ConeClassifierLookupTag (see compiler:fir:cones)
-    override val classifier: JavaClassifier?
+    override konst classifier: JavaClassifier?
             by lazy {
                 when (typeMirror.kind) {
                     TypeKind.DECLARED -> ((typeMirror as DeclaredType).asElement() as Symbol.ClassSymbol).let { symbol ->
                         // try to find cached javaClass
-                        val classId = symbol.computeClassId()
+                        konst classId = symbol.computeClassId()
                         classId?.let { javac.findClass(it) } ?: FakeSymbolBasedClass(symbol, javac, classId, symbol.classfile)
                     }
                     TypeKind.TYPEVAR -> SymbolBasedTypeParameter((typeMirror as TypeVariable).asElement() as TypeParameterElement, javac)
@@ -88,11 +88,11 @@ class SymbolBasedClassifierType<out T : TypeMirror>(
                 }
             }
 
-    override val typeArguments: List<JavaType>
+    override konst typeArguments: List<JavaType>
         get() {
             if (typeMirror.kind != TypeKind.DECLARED || isFake) return emptyList()
 
-            val arguments = arrayListOf<JavaType>()
+            konst arguments = arrayListOf<JavaType>()
             var type = typeMirror as DeclaredType
             var staticType = false
 
@@ -107,7 +107,7 @@ class SymbolBasedClassifierType<out T : TypeMirror>(
             return arguments
         }
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = when {
             typeMirror !is DeclaredType -> false
             isFake -> false
@@ -115,13 +115,13 @@ class SymbolBasedClassifierType<out T : TypeMirror>(
             else -> typeMirror.typeArguments.isEmpty() || (classifier as? JavaClass)?.typeParameters?.size != typeMirror.typeArguments.size
         }
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = typeMirror.toString()
 
-    override val presentableText: String
+    override konst presentableText: String
         get() = typeMirror.toString()
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = !isFake && super.isDeprecatedInJavaDoc
 }
 
@@ -130,13 +130,13 @@ class SymbolBasedWildcardType(
     javac: JavacWrapper
 ) : SymbolBasedType<WildcardType>(typeMirror, javac), JavaWildcardType {
 
-    override val bound: JavaType?
+    override konst bound: JavaType?
         get() {
-            val boundMirror = typeMirror.extendsBound ?: typeMirror.superBound
+            konst boundMirror = typeMirror.extendsBound ?: typeMirror.superBound
             return boundMirror?.let { create(it, javac) }
         }
 
-    override val isExtends: Boolean
+    override konst isExtends: Boolean
         get() = typeMirror.extendsBound != null
 
 }
@@ -146,7 +146,7 @@ class SymbolBasedArrayType(
     javac: JavacWrapper
 ) : SymbolBasedType<ArrayType>(typeMirror, javac), JavaArrayType {
 
-    override val componentType: JavaType
+    override konst componentType: JavaType
         get() = create(typeMirror.componentType, javac)
 
 }

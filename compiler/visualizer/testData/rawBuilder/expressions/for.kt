@@ -5,7 +5,7 @@ fun foo() {
 //       │    ││ │
     for (i in 1..10) {
 //      fun io/println(Int): Unit
-//      │       val foo.i: Int
+//      │       konst foo.i: Int
 //      │       │
         println(i)
     }
@@ -21,13 +21,13 @@ fun fooLabeled() {
 //              │    ││ │
     label@ for (i in 1..10) {
 //      Unit
-//      │   val fooLabeled.i: Int
+//      │   konst fooLabeled.i: Int
 //      │   │ EQ operator call
 //      │   │ │  Int
 //      │   │ │  │
         if (i == 5) continue@label
 //      fun io/println(Int): Unit
-//      │       val fooLabeled.i: Int
+//      │       konst fooLabeled.i: Int
 //      │       │
         println(i)
     }
@@ -46,19 +46,19 @@ fun bar(list: List<String>) {
 //       │          │    │       │  │
     for (element in list.subList(0, 10)) {
 //      fun io/println(Any?): Unit
-//      │       val bar.element: String
+//      │       konst bar.element: String
 //      │       │
         println(element)
     }
 //                  bar.list: collections/List<String>
 //                  │    fun (collections/List<E>).subList(Int, Int): collections/List<E>
 //                  │    │                fun io/println(Any?): Unit
-//       String     │    │       Int Int  │       val bar.element: String
+//       String     │    │       Int Int  │       konst bar.element: String
 //       │          │    │       │   │    │       │
     for (element in list.subList(10, 20)) println(element)
 }
 
-data class Some(val x: Int, val y: Int)
+data class Some(konst x: Int, konst y: Int)
 
 //           collections/Set<Some>
 //           │
@@ -68,8 +68,8 @@ fun baz(set: Set<Some>) {
 //        │  │     │
     for ((x, y) in set) {
 //      fun io/println(Any?): Unit
-//      │             val baz.x: Int
-//      │             │      val baz.y: Int
+//      │             konst baz.x: Int
+//      │             │      konst baz.y: Int
 //      │             │      │
         println("x = $x y = $y")
     }
@@ -82,7 +82,7 @@ fun withParameter(list: List<Some>) {
 //       │          │
     for (s: Some in list) {
 //      fun io/println(Any?): Unit
-//      │       val withParameter.s: Some
+//      │       konst withParameter.s: Some
 //      │       │
         println(s)
     }

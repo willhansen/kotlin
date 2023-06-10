@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.ir.generator.util.GeneratedFile
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 import java.io.File
 
-private val visitorTypeName = ClassName(VISITOR_PACKAGE, "IrElementVisitor")
-private val visitorVoidTypeName = ClassName(VISITOR_PACKAGE, "IrElementVisitorVoid")
-private val transformerTypeName = ClassName(VISITOR_PACKAGE, "IrElementTransformer")
-private val typeTransformerVoidTypeName = ClassName(VISITOR_PACKAGE, "IrTypeTransformerVoid")
+private konst visitorTypeName = ClassName(VISITOR_PACKAGE, "IrElementVisitor")
+private konst visitorVoidTypeName = ClassName(VISITOR_PACKAGE, "IrElementVisitorVoid")
+private konst transformerTypeName = ClassName(VISITOR_PACKAGE, "IrElementTransformer")
+private konst typeTransformerVoidTypeName = ClassName(VISITOR_PACKAGE, "IrTypeTransformerVoid")
 
 fun printVisitor(generationPath: File, model: Model): GeneratedFile {
-    val visitorType = TypeSpec.interfaceBuilder(visitorTypeName).apply {
-        val r = TypeVariableName("R", KModifier.OUT)
-        val d = TypeVariableName("D", KModifier.IN)
+    konst visitorType = TypeSpec.interfaceBuilder(visitorTypeName).apply {
+        konst r = TypeVariableName("R", KModifier.OUT)
+        konst d = TypeVariableName("D", KModifier.IN)
         addTypeVariable(r)
         addTypeVariable(d)
 
@@ -48,9 +48,9 @@ fun printVisitor(generationPath: File, model: Model): GeneratedFile {
 }
 
 fun printVisitorVoid(generationPath: File, model: Model): GeneratedFile {
-    val dataType = NOTHING.copy(nullable = true)
+    konst dataType = NOTHING.copy(nullable = true)
 
-    val visitorType = TypeSpec.interfaceBuilder(visitorVoidTypeName).apply {
+    konst visitorType = TypeSpec.interfaceBuilder(visitorVoidTypeName).apply {
         addSuperinterface(visitorTypeName.parameterizedBy(UNIT, dataType))
 
         fun buildVisitFun(element: Element) = FunSpec.builder(element.visitFunName).apply {
@@ -81,8 +81,8 @@ fun printVisitorVoid(generationPath: File, model: Model): GeneratedFile {
 }
 
 fun printTransformer(generationPath: File, model: Model): GeneratedFile {
-    val visitorType = TypeSpec.interfaceBuilder(transformerTypeName).apply {
-        val d = TypeVariableName("D", KModifier.IN)
+    konst visitorType = TypeSpec.interfaceBuilder(transformerTypeName).apply {
+        konst d = TypeVariableName("D", KModifier.IN)
         addTypeVariable(d)
 
         addSuperinterface(visitorTypeName.parameterizedBy(model.rootElement.toPoetStarParameterized(), d))
@@ -94,7 +94,7 @@ fun printTransformer(generationPath: File, model: Model): GeneratedFile {
         }
 
         for (element in model.elements) {
-            val returnType = element.getTransformExplicitType()
+            konst returnType = element.getTransformExplicitType()
             if (element.transformByChildren) {
                 addFunction(buildVisitFun(element).apply {
                     addStatement("${element.visitorParam}.transformChildren(this, data)")
@@ -116,11 +116,11 @@ fun printTransformer(generationPath: File, model: Model): GeneratedFile {
 }
 
 fun printTypeVisitor(generationPath: File, model: Model): GeneratedFile {
-    val transformTypeFunName = "transformType"
+    konst transformTypeFunName = "transformType"
 
     fun FunSpec.Builder.addVisitTypeStatement(element: Element, field: Field) {
-        val visitorParam = element.visitorParam
-        val access = "$visitorParam.${field.name}"
+        konst visitorParam = element.visitorParam
+        konst access = "$visitorParam.${field.name}"
         when (field) {
             is SingleField -> addStatement("$access = $transformTypeFunName($visitorParam, $access, data)")
             is ListField -> {
@@ -136,14 +136,14 @@ fun printTypeVisitor(generationPath: File, model: Model): GeneratedFile {
     }
 
     fun Element.getFieldsWithIrTypeType(insideParent: Boolean = false): List<Field> {
-        val parentsFields = elementParents.flatMap { it.element.getFieldsWithIrTypeType(insideParent = true) }
+        konst parentsFields = elementParents.flatMap { it.element.getFieldsWithIrTypeType(insideParent = true) }
         if (insideParent && this.visitorParent != null) {
             return parentsFields
         }
 
-        val irTypeFields = this.fields
+        konst irTypeFields = this.fields
             .filter {
-                val type = when (it) {
+                konst type = when (it) {
                     is SingleField -> it.type
                     is ListField -> it.elementType
                 }
@@ -153,14 +153,14 @@ fun printTypeVisitor(generationPath: File, model: Model): GeneratedFile {
         return irTypeFields + parentsFields
     }
 
-    val visitorType = TypeSpec.interfaceBuilder(typeTransformerVoidTypeName).apply {
-        val d = TypeVariableName("D", KModifier.IN)
+    konst visitorType = TypeSpec.interfaceBuilder(typeTransformerVoidTypeName).apply {
+        konst d = TypeVariableName("D", KModifier.IN)
         addTypeVariable(d)
         addSuperinterface(transformerTypeName.parameterizedBy(d))
 
-        val abstractVisitFun = FunSpec.builder(transformTypeFunName).apply {
-            val poetNullableIrType = irTypeType.toPoet().copy(nullable = true)
-            val typeVariable = TypeVariableName("Type", poetNullableIrType)
+        konst abstractVisitFun = FunSpec.builder(transformTypeFunName).apply {
+            konst poetNullableIrType = irTypeType.toPoet().copy(nullable = true)
+            konst typeVariable = TypeVariableName("Type", poetNullableIrType)
             addTypeVariable(typeVariable)
             addParameter("container", model.rootElement.toPoet())
             addParameter("type", typeVariable)
@@ -176,15 +176,15 @@ fun printTypeVisitor(generationPath: File, model: Model): GeneratedFile {
         }
 
         for (element in model.elements) {
-            val irTypeFields = element.getFieldsWithIrTypeType()
+            konst irTypeFields = element.getFieldsWithIrTypeType()
             if (irTypeFields.isEmpty()) continue
 
-            val returnType = element.getTransformExplicitType()
+            konst returnType = element.getTransformExplicitType()
             element.visitorParent?.let { _ ->
                 addFunction(buildVisitFun(element).apply {
                     returns(returnType.toPoetStarParameterized())
 
-                    val visitorParam = element.visitorParam
+                    konst visitorParam = element.visitorParam
                     when (element.name) {
                         IrTree.memberAccessExpression.name -> {
                             if (irTypeFields.singleOrNull()?.name != "typeArguments") {
@@ -200,7 +200,7 @@ fun printTypeVisitor(generationPath: File, model: Model): GeneratedFile {
                             endControlFlow()
                         }
                         IrTree.`class`.name -> {
-                            beginControlFlow("$visitorParam.valueClassRepresentation?.mapUnderlyingType {")
+                            beginControlFlow("$visitorParam.konstueClassRepresentation?.mapUnderlyingType {")
                             addStatement("$transformTypeFunName($visitorParam, it, data)")
                             endControlFlow()
                             irTypeFields.forEach { addVisitTypeStatement(element, it) }

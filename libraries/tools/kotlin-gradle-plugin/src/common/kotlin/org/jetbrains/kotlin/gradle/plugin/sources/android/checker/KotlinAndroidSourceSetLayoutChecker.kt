@@ -36,7 +36,7 @@ internal fun KotlinAndroidSourceSetLayoutChecker(
 }
 
 private class CompositeKotlinAndroidSourceSetLayoutChecker(
-    private val checkers: List<KotlinAndroidSourceSetLayoutChecker>
+    private konst checkers: List<KotlinAndroidSourceSetLayoutChecker>
 ) : KotlinAndroidSourceSetLayoutChecker {
 
     override fun checkBeforeLayoutApplied(

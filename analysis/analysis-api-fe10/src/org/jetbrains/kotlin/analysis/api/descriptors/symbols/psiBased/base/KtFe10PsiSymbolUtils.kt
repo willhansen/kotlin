@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.error.ErrorUtils
 
-internal val KtDeclaration.ktVisibility: Visibility?
+internal konst KtDeclaration.ktVisibility: Visibility?
     get() = when {
         hasModifier(KtTokens.PUBLIC_KEYWORD) -> Visibilities.Public
         hasModifier(KtTokens.PROTECTED_KEYWORD) -> Visibilities.Protected
@@ -38,14 +38,14 @@ internal val KtDeclaration.ktVisibility: Visibility?
         else -> null
     }
 
-internal val KtDeclaration.ktModality: Modality?
+internal konst KtDeclaration.ktModality: Modality?
     get() = when {
         hasModifier(KtTokens.ABSTRACT_KEYWORD) -> Modality.ABSTRACT
         hasModifier(KtTokens.FINAL_KEYWORD) -> Modality.FINAL
         hasModifier(KtTokens.SEALED_KEYWORD) -> Modality.SEALED
         hasModifier(KtTokens.OPEN_KEYWORD) -> {
             if (this is KtCallableDeclaration && !hasBody()) {
-                val parentDeclaration = this.getElementParentDeclaration()
+                konst parentDeclaration = this.getElementParentDeclaration()
                 if (parentDeclaration is KtClass && parentDeclaration.isInterface()) {
                     Modality.ABSTRACT
                 } else {
@@ -57,7 +57,7 @@ internal val KtDeclaration.ktModality: Modality?
         else -> null
     }
 
-internal val KtElement.ktSymbolKind: KtSymbolKind
+internal konst KtElement.ktSymbolKind: KtSymbolKind
     get() {
         if (this is KtPropertyAccessor) {
             return KtSymbolKind.ACCESSOR
@@ -74,10 +74,10 @@ internal val KtElement.ktSymbolKind: KtSymbolKind
         return KtSymbolKind.LOCAL
     }
 
-internal val KtDeclaration.callableIdIfNonLocal: CallableId?
+internal konst KtDeclaration.callableIdIfNonLocal: CallableId?
     get() = calculateCallableId(allowLocal = false)
 
-internal val KtElement.ktSymbolOrigin: KtSymbolOrigin
+internal konst KtElement.ktSymbolOrigin: KtSymbolOrigin
     get() {
         return if (containingKtFile.isCompiled) {
             KtSymbolOrigin.LIBRARY
@@ -87,13 +87,13 @@ internal val KtElement.ktSymbolOrigin: KtSymbolOrigin
     }
 
 internal fun KtDeclaration.calculateCallableId(allowLocal: Boolean): CallableId? {
-    val selfName = this.name ?: return null
-    val containingFile = this.containingKtFile
+    konst selfName = this.name ?: return null
+    konst containingFile = this.containingKtFile
 
     var current = this.getElementParentDeclaration()
 
-    val localName = mutableListOf<String>()
-    val className = mutableListOf<String>()
+    konst localName = mutableListOf<String>()
+    konst className = mutableListOf<String>()
 
     while (current != null) {
         when (current) {
@@ -125,12 +125,12 @@ internal fun KtDeclaration.calculateCallableId(allowLocal: Boolean): CallableId?
 internal fun PsiElement.getResolutionScope(bindingContext: BindingContext): LexicalScope? {
     for (parent in parentsWithSelf) {
         if (parent is KtElement) {
-            val scope = bindingContext[BindingContext.LEXICAL_SCOPE, parent]
+            konst scope = bindingContext[BindingContext.LEXICAL_SCOPE, parent]
             if (scope != null) return scope
         }
 
         if (parent is KtClassBody) {
-            val classDescriptor = bindingContext[BindingContext.CLASS, parent.getParent()] as? ClassDescriptorWithResolutionScopes
+            konst classDescriptor = bindingContext[BindingContext.CLASS, parent.getParent()] as? ClassDescriptorWithResolutionScopes
             if (classDescriptor != null) {
                 return classDescriptor.scopeForMemberDeclarationResolution
             }
@@ -145,6 +145,6 @@ internal fun PsiElement.getResolutionScope(bindingContext: BindingContext): Lexi
 
 
 internal fun KtFe10Symbol.createErrorType(): KtType {
-    val type = ErrorUtils.createErrorType(ErrorTypeKind.UNAVAILABLE_TYPE_FOR_DECLARATION, psi.toString())
+    konst type = ErrorUtils.createErrorType(ErrorTypeKind.UNAVAILABLE_TYPE_FOR_DECLARATION, psi.toString())
     return KtFe10ClassErrorType(type, analysisContext)
 }

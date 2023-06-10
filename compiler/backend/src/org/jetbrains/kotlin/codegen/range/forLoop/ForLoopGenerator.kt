@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.org.objectweb.asm.Label
 
 interface ForLoopGenerator {
-    val forExpression: KtForExpression
+    konst forExpression: KtForExpression
     fun beforeLoop()
     fun checkEmptyLoop(loopExit: Label)
     fun checkPreCondition(loopExit: Label)

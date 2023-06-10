@@ -8,20 +8,20 @@ class Controller<T> {
 
 fun <S> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     apply {
         yield(4)
     }
 }
 
-val test2 = generate {
+konst test2 = generate {
     yield(B)
     apply {
         yield(C)
     }
 }
 
-val test3 = generate {
+konst test3 = generate {
     this.let {
         yield(B)
     }

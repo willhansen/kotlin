@@ -10,23 +10,23 @@ package a
 
 import kotlin.reflect.KClass
 
-annotation class A(val kClass: KClass<*> = Int::class)
+annotation class A(konst kClass: KClass<*> = Int::class)
 
 annotation class OtherArrays(
-    val doublesArray: DoubleArray = [],
-    val enumArray: Array<kotlin.text.RegexOption> = [],
-    val annotationsArray: Array<JvmStatic> = [],
-    val namesArray: Array<JvmName> = [JvmName("foo")]
+    konst doublesArray: DoubleArray = [],
+    konst enumArray: Array<kotlin.text.RegexOption> = [],
+    konst annotationsArray: Array<JvmStatic> = [],
+    konst namesArray: Array<JvmName> = [JvmName("foo")]
 )
 
 annotation class UnsignedValue(
-    val uint: UInt = 2147483657U // Int.MAX_VALUE + 10
+    konst uint: UInt = 2147483657U // Int.MAX_VALUE + 10
 )
 
 annotation class Outer(
-    val array: Array<Inner> = [Inner(1), Inner(2)]
+    konst array: Array<Inner> = [Inner(1), Inner(2)]
 ) {
-    annotation class Inner(val v: Int = 0)
+    annotation class Inner(konst v: Int = 0)
 }
 
 // MODULE: app(lib)
@@ -52,7 +52,7 @@ class C {
 }
 
 fun box(): String {
-    val a = C().one()
+    konst a = C().one()
     assertEquals(Int::class, a.kClass)
     assertEquals(
         """@kotlin.Metadata(bytecodeVersion=[1, 0, 3], data1=[], data2=[], extraInt=0, extraString=, kind=1, metadataVersion=[], packageName=)""",
@@ -62,7 +62,7 @@ fun box(): String {
         """@kotlin.Deprecated(level=WARNING, message=foo, replaceWith=@kotlin.ReplaceWith(expression=, imports=[]))""",
         C().three().toString()
     )
-    val otherArraysStr = C().four().toString()
+    konst otherArraysStr = C().four().toString()
     // K1 and K2 have different properties order after metadata deserialization
     assertTrue(
         otherArraysStr == """@a.OtherArrays(doublesArray=[], enumArray=[], annotationsArray=[], namesArray=[@kotlin.jvm.JvmName(name=foo)])""" ||

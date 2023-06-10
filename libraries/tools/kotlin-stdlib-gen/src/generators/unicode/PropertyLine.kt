@@ -10,9 +10,9 @@ internal class PropertyLine(properties: List<String>) {
         require(properties.size == 2)
     }
 
-    val rangeStart: String = properties[0].split("..").first()
-    val rangeEnd: String = properties[0].split("..").last()
-    val property: String = properties[1].takeWhile { it != ' ' }
+    konst rangeStart: String = properties[0].split("..").first()
+    konst rangeEnd: String = properties[0].split("..").last()
+    konst property: String = properties[1].takeWhile { it != ' ' }
 
     fun intRange(): IntRange {
         return rangeStart.hexToInt()..rangeEnd.hexToInt()

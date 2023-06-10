@@ -6,7 +6,7 @@
 package kotlin.native.internal
 
 /**
- * Returns undefined value of type `T`.
+ * Returns undefined konstue of type `T`.
  * This method is unsafe and should be used with care.
  */
 @GCUnsafeCall("Kotlin_native_internal_undefined")

@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /** Builds a [HeaderInfo] for iteration over iterables using the `get / []` operator and an index. */
 abstract class IndexedGetIterationHandler(
-    protected val context: CommonBackendContext,
-    private val canCacheLast: Boolean
+    protected konst context: CommonBackendContext,
+    private konst canCacheLast: Boolean
 ) : HeaderInfoHandler<IrExpression, Nothing?> {
     override fun build(expression: IrExpression, data: Nothing?, scopeOwner: IrSymbol): HeaderInfo? =
         with(context.createIrBuilder(scopeOwner, expression.startOffset, expression.endOffset)) {
@@ -41,16 +41,16 @@ abstract class IndexedGetIterationHandler(
             //
             // ...then we will break program behaviour if `A` is an expression with side-effect. Instead, we lower it to:
             //
-            //   val a = A
+            //   konst a = A
             //   for (i in a.indices) { f(a[i]) }
             //
             // This also ensures that the semantics of re-assignment of array variables used in the loop is consistent with the semantics
             // proposed in https://youtrack.jetbrains.com/issue/KT-21354.
-            val objectVariable = scope.createTmpVariable(
+            konst objectVariable = scope.createTmpVariable(
                 expression, nameHint = "indexedObject"
             )
 
-            val last = irCall(expression.type.sizePropertyGetter).apply {
+            konst last = irCall(expression.type.sizePropertyGetter).apply {
                 dispatchReceiver = irGet(objectVariable)
             }
 
@@ -65,31 +65,31 @@ abstract class IndexedGetIterationHandler(
             )
         }
 
-    abstract val IrType.sizePropertyGetter: IrSimpleFunction
+    abstract konst IrType.sizePropertyGetter: IrSimpleFunction
 
-    abstract val IrType.getFunction: IrSimpleFunction
+    abstract konst IrType.getFunction: IrSimpleFunction
 }
 
 /** Builds a [HeaderInfo] for arrays. */
 internal class ArrayIterationHandler(context: CommonBackendContext) : IndexedGetIterationHandler(context, canCacheLast = true) {
-    private val supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
+    private konst supportsUnsignedArrays = context.optimizeLoopsOverUnsignedArrays
 
     override fun matchIterable(expression: IrExpression): Boolean {
         if (expression.type.isArrayType()) return true
 
-        val callee = (expression as? IrCall)?.symbol?.owner ?: return false
-        return callee.valueParameters.isEmpty() &&
+        konst callee = (expression as? IrCall)?.symbol?.owner ?: return false
+        return callee.konstueParameters.isEmpty() &&
                 callee.extensionReceiverParameter?.type?.let { it.isArray() || it.isPrimitiveArray() } == true &&
                 callee.kotlinFqName == FqName("kotlin.collections.reversed")
     }
 
-    override val IrType.sizePropertyGetter
+    override konst IrType.sizePropertyGetter
         get() = getClass()!!.getPropertyGetter("size")!!.owner
 
     private fun IrType.isArrayType() =
         isArray() || isPrimitiveArray() || (supportsUnsignedArrays && isUnsignedArray())
 
-    private val IrType.getFunctionName: Name
+    private konst IrType.getFunctionName: Name
         get() = context.ir.symbols.getWithoutBoundCheckName.let {
             if (isArrayType() && it != null) {
                 it
@@ -98,19 +98,19 @@ internal class ArrayIterationHandler(context: CommonBackendContext) : IndexedGet
             }
         }
 
-    override val IrType.getFunction
+    override konst IrType.getFunction
         get() = getClass()!!.functions.single {
             it.name == getFunctionName &&
-                    it.valueParameters.size == 1 &&
-                    it.valueParameters[0].type.isInt()
+                    it.konstueParameters.size == 1 &&
+                    it.konstueParameters[0].type.isInt()
         }
 }
 
 /**
  * Builds a [HeaderInfo] for iteration over characters in a [CharSequence].
  *
- * Note: The value for "last" can NOT be cached (i.e., stored in a variable) because the size/length can change within the loop. This means
- * that "last" is re-evaluated with each iteration of the loop.
+ * Note: The konstue for "last" can NOT be cached (i.e., stored in a variable) because the size/length can change within the loop. This means
+ * that "last" is re-ekonstuated with each iteration of the loop.
  */
 internal open class CharSequenceIterationHandler(
     context: CommonBackendContext,
@@ -123,31 +123,31 @@ internal open class CharSequenceIterationHandler(
     // The behavior of this iterator is well-defined and can be lowered. CharSequences can have their own iterators, either as a member or
     // extension function, and the behavior of those custom iterators is unknown.
     override fun matchIteratorCall(call: IrCall): Boolean {
-        val callee = call.symbol.owner
-        return callee.valueParameters.isEmpty() &&
+        konst callee = call.symbol.owner
+        return callee.konstueParameters.isEmpty() &&
                 callee.extensionReceiverParameter?.type?.isCharSequence() == true &&
                 callee.kotlinFqName == FqName("kotlin.text.${OperatorNameConventions.ITERATOR}")
     }
 
-    override val IrType.sizePropertyGetter: IrSimpleFunction
+    override konst IrType.sizePropertyGetter: IrSimpleFunction
         get() = context.ir.symbols.charSequence.getPropertyGetter("length")!!.owner
 
-    override val IrType.getFunction: IrSimpleFunction
+    override konst IrType.getFunction: IrSimpleFunction
         get() = context.ir.symbols.charSequence.getSimpleFunction(OperatorNameConventions.GET.asString())!!.owner
 }
 
 /**
  * Builds a [HeaderInfo] for iteration over characters in a [String].
  *
- * Note: The value for "last" CAN be cached for Strings as they are immutable and the size/length cannot change.
+ * Note: The konstue for "last" CAN be cached for Strings as they are immutable and the size/length cannot change.
  */
 internal class StringIterationHandler(context: CommonBackendContext) : CharSequenceIterationHandler(context, canCacheLast = true) {
     override fun matchIterable(expression: IrExpression): Boolean =
         expression.type.isString()
 
-    override val IrType.sizePropertyGetter: IrSimpleFunction
+    override konst IrType.sizePropertyGetter: IrSimpleFunction
         get() = context.ir.symbols.string.getPropertyGetter("length")!!.owner
 
-    override val IrType.getFunction: IrSimpleFunction
+    override konst IrType.getFunction: IrSimpleFunction
         get() = context.ir.symbols.string.getSimpleFunction(OperatorNameConventions.GET.asString())!!.owner
 }

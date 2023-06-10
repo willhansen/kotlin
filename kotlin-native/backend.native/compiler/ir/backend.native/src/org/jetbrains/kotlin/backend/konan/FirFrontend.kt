@@ -32,21 +32,21 @@ internal inline fun <F> PhaseContext.firFrontend(
         noinline fileBelongsToModule: (F, String) -> Boolean,
         buildResolveAndCheckFir: (FirSession, List<F>, BaseDiagnosticsCollector) -> ModuleCompilerAnalyzedOutput,
 ): FirOutput {
-    val configuration = input.configuration
-    val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-    val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
-    val renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
+    konst configuration = input.configuration
+    konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+    konst renderDiagnosticNames = configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
 
     // FIR
-    val extensionRegistrars = FirExtensionRegistrar.getInstances(input.project)
-    val mainModuleName = Name.special("<${config.moduleId}>")
-    val syntaxErrors = files.fold(false) { errorsFound, file -> fileHasSyntaxErrors(file) or errorsFound }
-    val binaryModuleData = BinaryModuleData.initialize(mainModuleName, CommonPlatforms.defaultCommonPlatform, NativePlatformAnalyzerServices)
-    val dependencyList = DependencyListForCliModule.build(binaryModuleData) {
-        val (interopLibs, regularLibs) = config.resolvedLibraries.getFullList().partition { it.isInterop }
+    konst extensionRegistrars = FirExtensionRegistrar.getInstances(input.project)
+    konst mainModuleName = Name.special("<${config.moduleId}>")
+    konst syntaxErrors = files.fold(false) { errorsFound, file -> fileHasSyntaxErrors(file) or errorsFound }
+    konst binaryModuleData = BinaryModuleData.initialize(mainModuleName, CommonPlatforms.defaultCommonPlatform, NativePlatformAnalyzerServices)
+    konst dependencyList = DependencyListForCliModule.build(binaryModuleData) {
+        konst (interopLibs, regularLibs) = config.resolvedLibraries.getFullList().partition { it.isInterop }
         dependencies(regularLibs.map { it.libraryFile.absolutePath })
         if (interopLibs.isNotEmpty()) {
-            val interopModuleData =
+            konst interopModuleData =
                     BinaryModuleData.createDependencyModuleData(
                             Name.special("<regular interop dependencies of $mainModuleName>"),
                             CommonPlatforms.defaultCommonPlatform, NativePlatformAnalyzerServices,
@@ -58,9 +58,9 @@ internal inline fun <F> PhaseContext.firFrontend(
         dependsOnDependencies(config.refinesModuleFiles.map { it.absolutePath })
         // TODO: !!! dependencies module data?
     }
-    val resolvedLibraries: List<KotlinResolvedLibrary> = config.resolvedLibraries.getFullResolvedList()
+    konst resolvedLibraries: List<KotlinResolvedLibrary> = config.resolvedLibraries.getFullResolvedList()
 
-    val sessionsWithSources = prepareNativeSessions(
+    konst sessionsWithSources = prepareNativeSessions(
             files,
             configuration,
             mainModuleName,
@@ -75,7 +75,7 @@ internal inline fun <F> PhaseContext.firFrontend(
             },
     )
 
-    val outputs = sessionsWithSources.map { (session, sources) ->
+    konst outputs = sessionsWithSources.map { (session, sources) ->
         buildResolveAndCheckFir(session, sources, diagnosticsReporter).also {
             if (shouldPrintFiles()) {
                 it.fir.forEach { file -> println(file.render()) }
@@ -92,11 +92,11 @@ internal inline fun <F> PhaseContext.firFrontend(
 }
 
 internal fun PhaseContext.firFrontendWithPsi(input: KotlinCoreEnvironment): FirOutput {
-    val configuration = input.configuration
-    val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst configuration = input.configuration
+    konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
     // FIR
 
-    val ktFiles = input.getSourceFiles()
+    konst ktFiles = input.getSourceFiles()
     return firFrontend(
             input,
             ktFiles,
@@ -112,13 +112,13 @@ internal fun PhaseContext.firFrontendWithPsi(input: KotlinCoreEnvironment): FirO
 }
 
 internal fun PhaseContext.firFrontendWithLightTree(input: KotlinCoreEnvironment): FirOutput {
-    val configuration = input.configuration
-    val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst configuration = input.configuration
+    konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
     // FIR
 
-    val groupedSources = collectSources(configuration, input.project, messageCollector)
+    konst groupedSources = collectSources(configuration, input.project, messageCollector)
 
-    val ktSourceFiles = mutableListOf<KtSourceFile>().apply {
+    konst ktSourceFiles = mutableListOf<KtSourceFile>().apply {
         addAll(groupedSources.commonSources)
         addAll(groupedSources.platformSources)
     }

@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.fir.symbols.impl.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-val FirReference.resolved: FirResolvedNamedReference? get() = this as? FirResolvedNamedReference
+konst FirReference.resolved: FirResolvedNamedReference? get() = this as? FirResolvedNamedReference
 
 @Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE",)
 inline fun <reified T : FirBasedSymbol<*>> FirReference.toResolvedSymbol(
     discardErrorReference: Boolean = false
 ): @kotlin.internal.NoInfer T? {
-    val resolvedReference = resolved ?: return null
+    konst resolvedReference = resolved ?: return null
     if (discardErrorReference && resolvedReference is FirResolvedErrorReference) {
         return null
     }

@@ -4,7 +4,7 @@ class O : Function2<Int, String, Unit> {
 }
 
 fun test() {
-    val a = fun(o: O) {
+    konst a = fun(o: O) {
     }
     a <!ARGUMENT_TYPE_MISMATCH!>{}<!>
 }
@@ -13,5 +13,5 @@ fun test() {
 }
 
 fun test2() {
-    val f: Ext = <!INITIALIZER_TYPE_MISMATCH!>{}<!>
+    konst f: Ext = <!INITIALIZER_TYPE_MISMATCH!>{}<!>
 }

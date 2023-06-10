@@ -26,7 +26,7 @@ fun optimizeProgramByIr(
 }
 
 fun optimizeFragmentByJsAst(fragment: JsIrProgramFragment) {
-    val optimizer = object : RecursiveJsVisitor() {
+    konst optimizer = object : RecursiveJsVisitor() {
         override fun visitFunction(x: JsFunction) {
             FunctionPostProcessor(x).apply()
         }
@@ -38,7 +38,7 @@ fun optimizeFragmentByJsAst(fragment: JsIrProgramFragment) {
     }
 
     fragment.declarations.statements.forEach { it.accept(optimizer) }
-    fragment.classes.values.forEach { klass ->
+    fragment.classes.konstues.forEach { klass ->
         klass.postDeclarationBlock.statements.forEach { it.accept(optimizer)}
         klass.preDeclarationBlock.statements.forEach { it.accept(optimizer)}
     }

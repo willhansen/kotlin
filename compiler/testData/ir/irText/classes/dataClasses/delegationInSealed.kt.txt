@@ -12,11 +12,11 @@ sealed class A : CharSequence {
 
     }
 
-    val c: CharSequence
+    konst c: CharSequence
       field = c
       get
 
-    override val length: Int
+    override konst length: Int
       override get(): Int {
         return <this>.#c.<get-length>()
       }
@@ -52,7 +52,7 @@ sealed class A : CharSequence {
       when {
         other !is B -> return false
       }
-      val tmp0_other_with_cast: B = other as B
+      konst tmp0_other_with_cast: B = other as B
       when {
         EQEQ(arg0 = <this>.#c, arg1 = tmp0_other_with_cast.#c).not() -> return false
       }

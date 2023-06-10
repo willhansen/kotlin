@@ -2,7 +2,7 @@
 
 import java.util.*
 
-val someMap = WeakHashMap<Any?, Any?>()
+konst someMap = WeakHashMap<Any?, Any?>()
 
 fun foo() {
     someMap[""]

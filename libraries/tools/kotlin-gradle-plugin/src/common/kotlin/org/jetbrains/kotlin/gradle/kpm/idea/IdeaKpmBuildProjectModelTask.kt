@@ -28,9 +28,9 @@ internal fun Project.locateOrRegisterIdeaKpmBuildProjectModelTask(): TaskProvide
 internal open class IdeaKpmBuildProjectModelTask : DefaultTask() {
 
     @OutputDirectory
-    val outputDirectory = project.buildDir.resolve("IdeaKpmProject")
+    konst outputDirectory = project.buildDir.resolve("IdeaKpmProject")
 
-    private val builder = project.pm20Extension.ideaKpmProjectModelBuilder
+    private konst builder = project.pm20Extension.ideaKpmProjectModelBuilder
 
     init {
         doNotTrackStateCompat("Should always re-run to produce updated models")
@@ -40,28 +40,28 @@ internal open class IdeaKpmBuildProjectModelTask : DefaultTask() {
     protected fun buildIdeaKpmProjectModel() {
         outputDirectory.mkdirs()
 
-        val model = builder.buildIdeaKpmProject()
-        val serializationContext = builder.buildSerializationContext()
-        val textFile = outputDirectory.resolve("model.txt")
+        konst model = builder.buildIdeaKpmProject()
+        konst serializationContext = builder.buildSerializationContext()
+        konst textFile = outputDirectory.resolve("model.txt")
         textFile.writeText(model.toString())
 
-        val javaIoSerializableBinaryFile = outputDirectory.resolve("model.java.bin")
+        konst javaIoSerializableBinaryFile = outputDirectory.resolve("model.java.bin")
         javaIoSerializableBinaryFile.writeBytes(ByteArrayOutputStream().use { byteArrayOutputStream ->
             ObjectOutputStream(byteArrayOutputStream).use { objectOutputStream -> objectOutputStream.writeObject(model) }
             byteArrayOutputStream.toByteArray()
         })
 
-        val protoBinaryFile = outputDirectory.resolve("model.proto.bin")
+        konst protoBinaryFile = outputDirectory.resolve("model.proto.bin")
         if (protoBinaryFile.exists()) protoBinaryFile.delete()
         protoBinaryFile.outputStream().use { stream ->
             model.writeTo(stream, serializationContext)
         }
 
-        val jsonFile = outputDirectory.resolve("model.json")
+        konst jsonFile = outputDirectory.resolve("model.json")
         jsonFile.writeText(GsonBuilder().setLenient().setPrettyPrinting().create().toJson(model))
     }
 
     companion object {
-        const val defaultTaskName = "buildIdeaKpmProjectModel"
+        const konst defaultTaskName = "buildIdeaKpmProjectModel"
     }
 }

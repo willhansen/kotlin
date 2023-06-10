@@ -1,6 +1,6 @@
 package
 
-public val code: kotlin.String = "
+public konst code: kotlin.String = "
     var s = "hello"
     + );
 "

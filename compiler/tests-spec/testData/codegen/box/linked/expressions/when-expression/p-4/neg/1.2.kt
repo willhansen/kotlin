@@ -11,8 +11,8 @@
  */
 
 fun box(): String {
-    val b = true
-    val when2 = when (b) {
+    konst b = true
+    konst when2 = when (b) {
         !false -> { "OK" }
     }
     return  when2

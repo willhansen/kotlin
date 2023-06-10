@@ -13,9 +13,9 @@ interface ObservableSet<T> : Set<T> {
 interface MutableObservableSet<T> : ObservableSet<T>, MutableSet<T>
 
 internal class MutableObservableSetImpl<T>(vararg elements: T) : MutableObservableSet<T> {
-    private val underlying = mutableSetOf(*elements)
-    private val whenObjectAddedActions = mutableListOf<(T) -> Unit>()
-    private val forAllActions = mutableListOf<(T) -> Unit>()
+    private konst underlying = mutableSetOf(*elements)
+    private konst whenObjectAddedActions = mutableListOf<(T) -> Unit>()
+    private konst forAllActions = mutableListOf<(T) -> Unit>()
 
     override fun whenObjectAdded(action: (T) -> Unit) {
         whenObjectAddedActions.add(action)
@@ -26,7 +26,7 @@ internal class MutableObservableSetImpl<T>(vararg elements: T) : MutableObservab
         underlying.toList().forEach(action)
     }
 
-    override val size: Int
+    override konst size: Int
         get() = underlying.size
 
     override fun clear() {
@@ -34,7 +34,7 @@ internal class MutableObservableSetImpl<T>(vararg elements: T) : MutableObservab
     }
 
     override fun addAll(elements: Collection<T>): Boolean {
-        val elementsToAdd = elements.toSet() - underlying
+        konst elementsToAdd = elements.toSet() - underlying
         elementsToAdd.forEach(this::add)
         return elementsToAdd.isNotEmpty()
     }

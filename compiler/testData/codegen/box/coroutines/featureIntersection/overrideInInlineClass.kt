@@ -16,13 +16,13 @@ interface Digest {
     suspend fun build(): String
 }
 
-inline class DigestImpl(val delegate: Delegate) : Digest {
+inline class DigestImpl(konst delegate: Delegate) : Digest {
     override suspend fun build(): String = delegate.build()
 }
 
 fun box(): String {
     var res = "FAIL"
-    val digest: Digest = DigestImpl(Delegate())
+    konst digest: Digest = DigestImpl(Delegate())
     builder {
         res = digest.build()
     }

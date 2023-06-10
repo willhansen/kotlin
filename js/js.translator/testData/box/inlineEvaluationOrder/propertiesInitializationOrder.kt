@@ -1,9 +1,9 @@
 // EXPECTED_REACHABLE_NODES: 1288
 package foo
 
-class A(val x: Int = fizz(1) + 1) {
-    val y = buzz(x) + 1
-    val z: Int
+class A(konst x: Int = fizz(1) + 1) {
+    konst y = buzz(x) + 1
+    konst z: Int
 
     init {
         z = fizz(x) + buzz(y)
@@ -11,7 +11,7 @@ class A(val x: Int = fizz(1) + 1) {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     assertEquals(2, a.x)
     assertEquals(3, a.y)
     assertEquals(5, a.z)

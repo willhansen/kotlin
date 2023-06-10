@@ -12,8 +12,8 @@ inline fun <reified K> In<K>.ofType(y: Any?) =
     y is K
 
 fun test() {
-    val a1 = arrayOf(In<Int>())
-    val a2 = arrayOf(In<String>())
-    val a3 = arrayOf(In<Int>())
+    konst a1 = arrayOf(In<Int>())
+    konst a2 = arrayOf(In<String>())
+    konst a3 = arrayOf(In<Int>())
     foo(a1, a2, a3)
 }

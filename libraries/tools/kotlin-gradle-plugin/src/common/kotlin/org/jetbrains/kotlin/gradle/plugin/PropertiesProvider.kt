@@ -63,10 +63,10 @@ import java.io.File
 import java.util.*
 
 @OptIn(UnsafeApi::class)
-internal class PropertiesProvider private constructor(private val project: Project) {
-    private val localProperties: Properties by lazy {
+internal class PropertiesProvider private constructor(private konst project: Project) {
+    private konst localProperties: Properties by lazy {
         Properties().apply {
-            val localPropertiesFile = File(project.rootDir, "local.properties")
+            konst localPropertiesFile = File(project.rootDir, "local.properties")
             if (localPropertiesFile.isFile) {
                 localPropertiesFile.inputStream().use {
                     load(it)
@@ -76,16 +76,16 @@ internal class PropertiesProvider private constructor(private val project: Proje
     }
 
     @Deprecated(message = "Please use kotlin.build.report.output=SINGLE_FILE and kotlin.build.report.single_file ")
-    val singleBuildMetricsFile: File?
+    konst singleBuildMetricsFile: File?
         get() = this.property("kotlin.internal.single.build.metrics.file")?.let { File(it) }
 
-    val buildReportSingleFile: File?
+    konst buildReportSingleFile: File?
         get() = this.property(PropertyNames.KOTLIN_BUILD_REPORT_SINGLE_FILE)?.let { File(it) }
 
     @Deprecated(message = "Please use kotlin.build.report.output instead ")
-    val buildReportEnabled: Boolean
+    konst buildReportEnabled: Boolean
         get() {
-            val propValue = booleanProperty("kotlin.build.report.enable")?.also {
+            konst propValue = booleanProperty("kotlin.build.report.enable")?.also {
                 SingleWarningPerBuild.show(
                     project,
                     """
@@ -98,101 +98,101 @@ internal class PropertiesProvider private constructor(private val project: Proje
             return propValue ?: false
         }
 
-    val buildReportOutputs: List<String>
+    konst buildReportOutputs: List<String>
         get() = this.property("kotlin.build.report.output")?.split(",") ?: emptyList()
 
-    val buildReportLabel: String?
+    konst buildReportLabel: String?
         get() = this.property("kotlin.build.report.label")
 
-    val buildReportFileOutputDir: File?
+    konst buildReportFileOutputDir: File?
         get() = this.property("kotlin.build.report.file.output_dir")?.let { File(it) }
 
-    val buildReportHttpUrl: String?
+    konst buildReportHttpUrl: String?
         get() = this.property(PropertyNames.KOTLIN_BUILD_REPORT_HTTP_URL)
 
-    val buildReportHttpUser: String?
+    konst buildReportHttpUser: String?
         get() = this.property("kotlin.build.report.http.user")
 
-    val buildReportHttpPassword: String?
+    konst buildReportHttpPassword: String?
         get() = this.property("kotlin.build.report.http.password")
 
-    val buildReportHttpVerboseEnvironment: Boolean
+    konst buildReportHttpVerboseEnvironment: Boolean
         get() = property("kotlin.build.report.http.verbose_environment")?.toBoolean() ?: false
 
-    val buildReportHttpIncludeGitBranchName: Boolean
+    konst buildReportHttpIncludeGitBranchName: Boolean
         get() = property("kotlin.build.report.http.include_git_branch.name")?.toBoolean() ?: false
 
-    val buildReportIncludeCompilerArguments: Boolean
+    konst buildReportIncludeCompilerArguments: Boolean
         get() = booleanProperty("kotlin.build.report.include_compiler_arguments") ?: true
 
-    val buildReportBuildScanCustomValuesLimit: Int
-        get() = property("kotlin.build.report.build_scan.custom_values_limit")?.toInt() ?: 1000
+    konst buildReportBuildScanCustomValuesLimit: Int
+        get() = property("kotlin.build.report.build_scan.custom_konstues_limit")?.toInt() ?: 1000
 
-    val buildReportBuildScanMetrics: String?
+    konst buildReportBuildScanMetrics: String?
         get() = property("kotlin.build.report.build_scan.metrics")
 
-    val buildReportMetrics: Boolean
+    konst buildReportMetrics: Boolean
         get() = booleanProperty("kotlin.build.report.metrics") ?: false
 
-    val buildReportVerbose: Boolean
+    konst buildReportVerbose: Boolean
         get() = booleanProperty("kotlin.build.report.verbose") ?: false
 
     @Deprecated("Please use \"kotlin.build.report.file.output_dir\" property instead")
-    val buildReportDir: File?
+    konst buildReportDir: File?
         get() = this.property("kotlin.build.report.dir")?.let { File(it) }
 
-    val incrementalJvm: Boolean?
+    konst incrementalJvm: Boolean?
         get() = booleanProperty("kotlin.incremental")
 
-    val incrementalJs: Boolean?
+    konst incrementalJs: Boolean?
         get() = booleanProperty("kotlin.incremental.js")
 
-    val incrementalJsKlib: Boolean?
+    konst incrementalJsKlib: Boolean?
         get() = booleanProperty("kotlin.incremental.js.klib")
 
-    val incrementalJsIr: Boolean
+    konst incrementalJsIr: Boolean
         get() = booleanProperty("kotlin.incremental.js.ir") ?: true
 
-    val incrementalNative: Boolean?
+    konst incrementalNative: Boolean?
         get() = booleanProperty(PropertyNames.KOTLIN_NATIVE_INCREMENTAL_COMPILATION)
 
-    val jsIrOutputGranularity: KotlinJsIrOutputGranularity
+    konst jsIrOutputGranularity: KotlinJsIrOutputGranularity
         get() = this.property("kotlin.js.ir.output.granularity")?.let { KotlinJsIrOutputGranularity.byArgument(it) }
             ?: KotlinJsIrOutputGranularity.PER_MODULE
 
-    val jsIrGeneratedTypeScriptValidationDevStrategy: KotlinIrJsGeneratedTSValidationStrategy
-        get() = this.property("kotlin.js.ir.development.typescript.validation.strategy")?.let {
+    konst jsIrGeneratedTypeScriptValidationDevStrategy: KotlinIrJsGeneratedTSValidationStrategy
+        get() = this.property("kotlin.js.ir.development.typescript.konstidation.strategy")?.let {
             KotlinIrJsGeneratedTSValidationStrategy.byArgument(
                 it
             )
         } ?: KotlinIrJsGeneratedTSValidationStrategy.IGNORE
 
-    val jsIrGeneratedTypeScriptValidationProdStrategy: KotlinIrJsGeneratedTSValidationStrategy
-        get() = this.property("kotlin.js.ir.production.typescript.validation.strategy")?.let {
+    konst jsIrGeneratedTypeScriptValidationProdStrategy: KotlinIrJsGeneratedTSValidationStrategy
+        get() = this.property("kotlin.js.ir.production.typescript.konstidation.strategy")?.let {
             KotlinIrJsGeneratedTSValidationStrategy.byArgument(
                 it
             )
         } ?: KotlinIrJsGeneratedTSValidationStrategy.IGNORE
 
-    val incrementalMultiplatform: Boolean?
+    konst incrementalMultiplatform: Boolean?
         get() = booleanProperty("kotlin.incremental.multiplatform")
 
-    val usePreciseJavaTracking: Boolean?
+    konst usePreciseJavaTracking: Boolean?
         get() = booleanProperty("kotlin.incremental.usePreciseJavaTracking")
 
-    val useClasspathSnapshot: Boolean
+    konst useClasspathSnapshot: Boolean
         get() {
-            val reporter = KotlinBuildStatsService.getInstance()
+            konst reporter = KotlinBuildStatsService.getInstance()
             // The feature should be controlled by a Gradle property.
             // Currently, we also allow it to be controlled by a system property to make it easier to test the feature during development.
             // TODO: Remove the system property later.
 
-            val gradleProperty = booleanProperty(CompilerSystemProperties.COMPILE_INCREMENTAL_WITH_ARTIFACT_TRANSFORM.property)
+            konst gradleProperty = booleanProperty(CompilerSystemProperties.COMPILE_INCREMENTAL_WITH_ARTIFACT_TRANSFORM.property)
             if (gradleProperty != null) {
                 reporter?.report(StringMetrics.USE_CLASSPATH_SNAPSHOT, gradleProperty.toString())
                 return gradleProperty
             }
-            val systemProperty = CompilerSystemProperties.COMPILE_INCREMENTAL_WITH_ARTIFACT_TRANSFORM.value?.toBooleanLenient()
+            konst systemProperty = CompilerSystemProperties.COMPILE_INCREMENTAL_WITH_ARTIFACT_TRANSFORM.konstue?.toBooleanLenient()
             if (systemProperty != null) {
                 reporter?.report(StringMetrics.USE_CLASSPATH_SNAPSHOT, systemProperty.toString())
                 return systemProperty
@@ -201,84 +201,84 @@ internal class PropertiesProvider private constructor(private val project: Proje
             return true
         }
 
-    val useKotlinAbiSnapshot: Boolean
+    konst useKotlinAbiSnapshot: Boolean
         get() = booleanProperty(KOTLIN_ABI_SNAPSHOT) ?: false
 
-    val useK2: Boolean?
+    konst useK2: Boolean?
         get() = booleanProperty("kotlin.useK2")
 
-    val keepMppDependenciesIntactInPoms: Boolean?
+    konst keepMppDependenciesIntactInPoms: Boolean?
         get() = booleanProperty("kotlin.mpp.keepMppDependenciesIntactInPoms")
 
-    val ignorePluginLoadedInMultipleProjects: Boolean?
+    konst ignorePluginLoadedInMultipleProjects: Boolean?
         get() = booleanProperty("kotlin.pluginLoadedInMultipleProjects.ignore")
 
-    val keepAndroidBuildTypeAttribute: Boolean
+    konst keepAndroidBuildTypeAttribute: Boolean
         get() = booleanProperty("kotlin.android.buildTypeAttribute.keep") ?: false
 
-    val enableGranularSourceSetsMetadata: Boolean?
+    konst enableGranularSourceSetsMetadata: Boolean?
         get() = booleanProperty(KOTLIN_MPP_ENABLE_GRANULAR_SOURCE_SETS_METADATA)
 
-    val hierarchicalStructureSupport: Boolean
+    konst hierarchicalStructureSupport: Boolean
         get() = booleanProperty(KOTLIN_MPP_HIERARCHICAL_STRUCTURE_SUPPORT) ?: mppHierarchicalStructureByDefault
 
-    val nativeDependencyPropagation: Boolean?
+    konst nativeDependencyPropagation: Boolean?
         get() = booleanProperty(KOTLIN_NATIVE_DEPENDENCY_PROPAGATION)
 
     var mpp13XFlagsSetByPlugin: Boolean
         get() = booleanProperty("kotlin.internal.mpp.13X.flags.setByPlugin") ?: false
-        set(value) {
-            project.extensions.extraProperties.set("kotlin.internal.mpp.13X.flags.setByPlugin", "$value")
+        set(konstue) {
+            project.extensions.extraProperties.set("kotlin.internal.mpp.13X.flags.setByPlugin", "$konstue")
         }
 
-    val mppHierarchicalStructureByDefault: Boolean
+    konst mppHierarchicalStructureByDefault: Boolean
         get() = booleanProperty(KOTLIN_MPP_HIERARCHICAL_STRUCTURE_BY_DEFAULT) ?: true
 
-    val enableCompatibilityMetadataVariant: Boolean
+    konst enableCompatibilityMetadataVariant: Boolean
         get() {
             return (booleanProperty(KOTLIN_MPP_ENABLE_COMPATIBILITY_METADATA_VARIANT) ?: !mppHierarchicalStructureByDefault)
         }
 
-    val enableKotlinToolingMetadataArtifact: Boolean
+    konst enableKotlinToolingMetadataArtifact: Boolean
         get() = booleanProperty("kotlin.mpp.enableKotlinToolingMetadataArtifact") ?: true
 
-    val mppEnableOptimisticNumberCommonization: Boolean
+    konst mppEnableOptimisticNumberCommonization: Boolean
         get() = booleanProperty(KOTLIN_MPP_ENABLE_OPTIMISTIC_NUMBER_COMMONIZATION) ?: true
 
-    val mppEnablePlatformIntegerCommonization: Boolean
+    konst mppEnablePlatformIntegerCommonization: Boolean
         get() = booleanProperty(KOTLIN_MPP_ENABLE_PLATFORM_INTEGER_COMMONIZATION) ?: false
 
-    val wasmStabilityNoWarn: Boolean
+    konst wasmStabilityNoWarn: Boolean
         get() = booleanProperty("kotlin.wasm.stability.nowarn") ?: false
 
-    val jsCompilerNoWarn: Boolean
+    konst jsCompilerNoWarn: Boolean
         get() = booleanProperty("$jsCompilerProperty.nowarn") ?: false
 
-    val ignoreDisabledNativeTargets: Boolean?
+    konst ignoreDisabledNativeTargets: Boolean?
         get() = booleanProperty(DisabledNativeTargetsReporter.DISABLE_WARNING_PROPERTY_NAME)
 
-    val ignoreAbsentAndroidMultiplatformTarget: Boolean
+    konst ignoreAbsentAndroidMultiplatformTarget: Boolean
         get() = booleanProperty("kotlin.mpp.absentAndroidTarget.nowarn") ?: false
 
-    val ignoreAndroidGradlePluginCompatibilityIssues: Boolean
+    konst ignoreAndroidGradlePluginCompatibilityIssues: Boolean
         get() = booleanProperty(KOTLIN_MPP_ANDROID_GRADLE_PLUGIN_COMPATIBILITY_NO_WARN) ?: false
 
-    val mppAndroidSourceSetLayoutVersion: Int?
+    konst mppAndroidSourceSetLayoutVersion: Int?
         get() = this.property(KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION)?.toIntOrNull()
 
-    val ignoreMppAndroidSourceSetLayoutVersion: Boolean
+    konst ignoreMppAndroidSourceSetLayoutVersion: Boolean
         get() = booleanProperty(KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION_1_NO_WARN) ?: false
 
-    val ignoreMppAndroidSourceSetLayoutV2AndroidStyleDirs: Boolean
+    konst ignoreMppAndroidSourceSetLayoutV2AndroidStyleDirs: Boolean
         get() = booleanProperty(KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_ANDROID_STYLE_NO_WARN) ?: false
 
-    val ignoreDisabledCInteropCommonization: Boolean
+    konst ignoreDisabledCInteropCommonization: Boolean
         get() = booleanProperty("$KOTLIN_MPP_ENABLE_CINTEROP_COMMONIZATION.nowarn") ?: false
 
-    val ignoreIncorrectNativeDependencies: Boolean?
+    konst ignoreIncorrectNativeDependencies: Boolean?
         get() = booleanProperty(KOTLIN_NATIVE_IGNORE_INCORRECT_DEPENDENCIES)
 
-    val ignoreHmppDeprecationWarnings: Boolean?
+    konst ignoreHmppDeprecationWarnings: Boolean?
         get() = booleanProperty(KOTLIN_MPP_DEPRECATED_PROPERTIES_NO_WARN)
 
     /**
@@ -287,7 +287,7 @@ internal class PropertiesProvider private constructor(private val project: Proje
      * By default individual test tasks will not fail build if this task will be executed,
      * also individual html and xml reports will replaced by one consolidated html report.
      */
-    val individualTaskReports: Boolean
+    konst individualTaskReports: Boolean
         get() = booleanProperty("kotlin.tests.individualTaskReports") ?: false
 
     /**
@@ -295,7 +295,7 @@ internal class PropertiesProvider private constructor(private val project: Proje
      *  - light - Doesn't include platform libraries and generates them at the user side. For 1.3 corresponds to the restricted distribution.
      *  - prebuilt - Includes all platform libraries.
      */
-    val nativeDistributionType: String?
+    konst nativeDistributionType: String?
         get() = this.property("kotlin.native.distribution.type")
 
     /**
@@ -303,7 +303,7 @@ internal class PropertiesProvider private constructor(private val project: Proje
      *
      * When Kotlin/native will try to download native compiler, it will append compiler version and os type to this url.
      */
-    val nativeBaseDownloadUrl: String
+    konst nativeBaseDownloadUrl: String
         get() = this.property("kotlin.native.distribution.baseDownloadUrl") ?: NativeCompilerDownloader.BASE_DOWNLOAD_URL
 
     /**
@@ -311,32 +311,32 @@ internal class PropertiesProvider private constructor(private val project: Proje
      *
      * Makes downloader search for bundles in maven repositories specified in the project.
      */
-    val nativeDownloadFromMaven: Boolean
+    konst nativeDownloadFromMaven: Boolean
         get() = this.booleanProperty("kotlin.native.distribution.downloadFromMaven") ?: false
 
     /**
      * A property that was used to choose a restricted distribution in 1.3.
      */
-    val nativeDeprecatedRestricted: Boolean?
+    konst nativeDeprecatedRestricted: Boolean?
         get() = booleanProperty("kotlin.native.restrictedDistribution")
 
     /**
      * Allows a user to force a particular cinterop mode for platform libraries generation. Available modes: sourcecode, metadata.
      * A main purpose of this property is working around potential problems with the metadata mode.
      */
-    val nativePlatformLibrariesMode: String?
+    konst nativePlatformLibrariesMode: String?
         get() = this.property("kotlin.native.platform.libraries.mode")
 
     /**
      * Allows a user to provide a local Kotlin/Native distribution instead of a downloaded one.
      */
-    val nativeHome: String?
+    konst nativeHome: String?
         get() = propertyWithDeprecatedVariant(KOTLIN_NATIVE_HOME, "org.jetbrains.kotlin.native.home")
 
     /**
      * Allows a user to override Kotlin/Native version.
      */
-    val nativeVersion: String?
+    konst nativeVersion: String?
         get() = propertyWithDeprecatedVariant("kotlin.native.version", "org.jetbrains.kotlin.native.version")
 
     /**
@@ -348,25 +348,25 @@ internal class PropertiesProvider private constructor(private val project: Proje
      *
      * Ignored if kotlin.native.home is specified.
      */
-    val nativeReinstall: Boolean
+    konst nativeReinstall: Boolean
         get() = booleanProperty("kotlin.native.reinstall") ?: false
 
     /**
      * Allows a user to specify additional arguments of a JVM executing a K/N compiler.
      */
-    val nativeJvmArgs: String?
+    konst nativeJvmArgs: String?
         get() = propertyWithDeprecatedVariant("kotlin.native.jvmArgs", "org.jetbrains.kotlin.native.jvmArgs")
 
     /**
      * Allows a user to specify free compiler arguments for K/N linker.
      */
-    val nativeLinkArgs: List<String>
+    konst nativeLinkArgs: List<String>
         get() = this.property("kotlin.native.linkArgs").orEmpty().split(' ').filterNot { it.isBlank() }
 
     /**
      * Forces to run a compilation in a separate JVM.
      */
-    val nativeDisableCompilerDaemon: Boolean?
+    konst nativeDisableCompilerDaemon: Boolean?
         get() = booleanProperty("kotlin.native.disableCompilerDaemon")
 
     /**
@@ -374,15 +374,15 @@ internal class PropertiesProvider private constructor(private val project: Proje
      * allowing to apply backend-agnostic compiler plugin artifacts.
      * Will be default after proper migration.
      */
-    val nativeUseEmbeddableCompilerJar: Boolean
+    konst nativeUseEmbeddableCompilerJar: Boolean
         get() = booleanProperty("kotlin.native.useEmbeddableCompilerJar") ?: true
 
     /**
      * Allows a user to set project-wide options that will be passed to the K/N compiler via -Xbinary flag.
      * E.g. setting kotlin.native.binary.memoryModel=experimental results in passing -Xbinary=memoryModel=experimental to the compiler.
-     * @return a map: property name without `kotlin.native.binary.` prefix -> property value
+     * @return a map: property name without `kotlin.native.binary.` prefix -> property konstue
      */
-    val nativeBinaryOptions: Map<String, String>
+    konst nativeBinaryOptions: Map<String, String>
         get() = propertiesWithPrefix(KOTLIN_NATIVE_BINARY_OPTION_PREFIX).mapKeys { (key, _) ->
             key.removePrefix(KOTLIN_NATIVE_BINARY_OPTION_PREFIX)
         }
@@ -390,13 +390,13 @@ internal class PropertiesProvider private constructor(private val project: Proje
     /**
      * Forces K/N compiler to print messages which could be parsed by Xcode
      */
-    val nativeUseXcodeMessageStyle: Boolean?
+    konst nativeUseXcodeMessageStyle: Boolean?
         get() = booleanProperty(KOTLIN_NATIVE_USE_XCODE_MESSAGE_STYLE)
 
     /**
      * Allows a user to specify additional arguments of a JVM executing KLIB commonizer.
      */
-    val commonizerJvmArgs: List<String>
+    konst commonizerJvmArgs: List<String>
         get() = propertyWithDeprecatedVariant("kotlin.mpp.commonizerJvmArgs", "kotlin.commonizer.jvmArgs")
             ?.split("\\s+".toRegex())
             .orEmpty()
@@ -404,29 +404,29 @@ internal class PropertiesProvider private constructor(private val project: Proje
     /**
      * Enables experimental commonization of user defined c-interop libraries.
      */
-    val enableCInteropCommonization: Boolean
+    konst enableCInteropCommonization: Boolean
         get() = booleanProperty(KOTLIN_MPP_ENABLE_CINTEROP_COMMONIZATION) ?: false
 
 
-    val commonizerLogLevel: String?
+    konst commonizerLogLevel: String?
         get() = this.property("kotlin.mpp.commonizerLogLevel")
 
-    val enableNativeDistributionCommonizationCache: Boolean
+    konst enableNativeDistributionCommonizationCache: Boolean
         get() = booleanProperty("kotlin.mpp.enableNativeDistributionCommonizationCache") ?: true
 
-    val enableIntransitiveMetadataConfiguration: Boolean
+    konst enableIntransitiveMetadataConfiguration: Boolean
         get() = booleanProperty(KOTLIN_MPP_ENABLE_INTRANSITIVE_METADATA_CONFIGURATION) ?: false
 
-    val enableKgpDependencyResolution: Boolean?
+    konst enableKgpDependencyResolution: Boolean?
         get() = booleanProperty(KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION)
 
-    val enableSlowIdeSourcesJarResolver: Boolean
+    konst enableSlowIdeSourcesJarResolver: Boolean
         get() = booleanProperty(KOTLIN_MPP_IMPORT_ENABLE_SLOW_SOURCES_JAR_RESOLVER) ?: true
 
     /**
      * Dependencies caching strategy for all targets that support caches.
      */
-    val nativeCacheKind: NativeCacheKind?
+    konst nativeCacheKind: NativeCacheKind?
         get() = this.property("kotlin.native.cacheKind")?.let { NativeCacheKind.byCompilerArgument(it) }
 
     /**
@@ -438,111 +438,111 @@ internal class PropertiesProvider private constructor(private val project: Proje
     /**
      * Dependencies caching orchestration machinery.
      */
-    val nativeCacheOrchestration: NativeCacheOrchestration?
+    konst nativeCacheOrchestration: NativeCacheOrchestration?
         get() = this.property(PropertyNames.KOTLIN_NATIVE_CACHE_ORCHESTRATION)?.let { NativeCacheOrchestration.byCompilerArgument(it) }
 
     /**
      * Native backend threads.
      */
-    val nativeParallelThreads: Int?
+    konst nativeParallelThreads: Int?
         get() = this.property(PropertyNames.KOTLIN_NATIVE_PARALLEL_THREADS)?.toInt()
 
     /**
      * Ignore overflow in [org.jetbrains.kotlin.gradle.internal.testing.TCServiceMessageOutputStreamHandler]
      */
-    val ignoreTcsmOverflow: Boolean
+    konst ignoreTcsmOverflow: Boolean
         get() = booleanProperty(IGNORE_TCSM_OVERFLOW) ?: false
 
-    val errorJsGenerateExternals: Boolean?
+    konst errorJsGenerateExternals: Boolean?
         get() = booleanProperty("kotlin.js.generate.externals")
 
     /**
      * Use Kotlin/JS backend compiler type
      */
-    val jsCompiler: KotlinJsCompilerType?
+    konst jsCompiler: KotlinJsCompilerType?
         get() = this.property(jsCompilerProperty)?.let { KotlinJsCompilerType.byArgumentOrNull(it) }
 
     /**
      * Use Kotlin/JS backend compiler publishing attribute
      */
-    val publishJsCompilerAttribute: Boolean
+    konst publishJsCompilerAttribute: Boolean
         get() = this.booleanProperty("$jsCompilerProperty.publish.attribute") ?: true
 
     /**
      * Use Kotlin/JS backend compiler type
      */
-    val jsGenerateExecutableDefault: Boolean
+    konst jsGenerateExecutableDefault: Boolean
         get() = (booleanProperty("kotlin.js.generate.executable.default") ?: true).also {
             KotlinBuildStatsService.getInstance()
                 ?.report(StringMetrics.JS_GENERATE_EXECUTABLE_DEFAULT, it.toString())
         }
 
-    val stdlibDefaultDependency: Boolean
+    konst stdlibDefaultDependency: Boolean
         get() = booleanProperty(KOTLIN_STDLIB_DEFAULT_DEPENDENCY) ?: true
 
-    val stdlibJdkVariantsVersionAlignment: Boolean
+    konst stdlibJdkVariantsVersionAlignment: Boolean
         get() = booleanProperty(KOTLIN_STDLIB_JDK_VARIANTS_VERSION_ALIGNMENT) ?: true
 
-    val stdlibDomApiIncluded: Boolean
+    konst stdlibDomApiIncluded: Boolean
         get() = booleanProperty(KOTLIN_JS_STDLIB_DOM_API_INCLUDED) ?: true
 
-    val kotlinTestInferJvmVariant: Boolean
+    konst kotlinTestInferJvmVariant: Boolean
         get() = booleanProperty("kotlin.test.infer.jvm.variant") ?: true
 
-    val kotlinOptionsSuppressFreeArgsModificationWarning: Boolean
+    konst kotlinOptionsSuppressFreeArgsModificationWarning: Boolean
         get() = booleanProperty(PropertyNames.KOTLIN_OPTIONS_SUPPRESS_FREEARGS_MODIFICATION_WARNING) ?: false
 
-    val jvmTargetValidationMode: JvmTargetValidationMode
+    konst jvmTargetValidationMode: JvmTargetValidationMode
         get() = enumProperty(
-            "kotlin.jvm.target.validation.mode",
+            "kotlin.jvm.target.konstidation.mode",
             if (GradleVersion.current().baseVersion >= GradleVersion.version("8.0")) JvmTargetValidationMode.ERROR else JvmTargetValidationMode.WARNING
         )
 
-    val kotlinDaemonJvmArgs: String?
+    konst kotlinDaemonJvmArgs: String?
         get() = this.property("kotlin.daemon.jvmargs")
 
-    val kotlinCompilerExecutionStrategy: KotlinCompilerExecutionStrategy
+    konst kotlinCompilerExecutionStrategy: KotlinCompilerExecutionStrategy
         get() = KotlinCompilerExecutionStrategy.fromProperty(
             this.property("kotlin.compiler.execution.strategy")?.toLowerCaseAsciiOnly()
         )
 
-    val kotlinDaemonUseFallbackStrategy: Boolean
+    konst kotlinDaemonUseFallbackStrategy: Boolean
         get() = booleanProperty("kotlin.daemon.useFallbackStrategy") ?: true
 
-    val preciseCompilationResultsBackup: Boolean
+    konst preciseCompilationResultsBackup: Boolean
         get() = booleanProperty(KOTLIN_COMPILER_USE_PRECISE_COMPILATION_RESULTS_BACKUP) ?: false
 
     /**
      * This property should be enabled together with [preciseCompilationResultsBackup]
      */
-    val keepIncrementalCompilationCachesInMemory: Boolean
+    konst keepIncrementalCompilationCachesInMemory: Boolean
         get() = booleanProperty(KOTLIN_COMPILER_KEEP_INCREMENTAL_COMPILATION_CACHES_IN_MEMORY) ?: false
 
-    val suppressExperimentalICOptimizationsWarning: Boolean
+    konst suppressExperimentalICOptimizationsWarning: Boolean
         get() = booleanProperty(KOTLIN_SUPPRESS_EXPERIMENTAL_IC_OPTIMIZATIONS_WARNING) ?: false
 
-    val createDefaultMultiplatformPublications: Boolean
+    konst createDefaultMultiplatformPublications: Boolean
         get() = booleanProperty(KOTLIN_CREATE_DEFAULT_MULTIPLATFORM_PUBLICATIONS) ?: true
 
-    val runKotlinCompilerViaBuildToolsApi: Boolean
+    konst runKotlinCompilerViaBuildToolsApi: Boolean
         get() = booleanProperty(KOTLIN_RUN_COMPILER_VIA_BUILD_TOOLS_API) ?: false
 
-    val allowLegacyMppDependencies: Boolean
+    konst allowLegacyMppDependencies: Boolean
         get() = booleanProperty(KOTLIN_MPP_ALLOW_LEGACY_DEPENDENCIES) ?: false
 
-    val kotlinExperimentalTryK2: Provider<Boolean> = project.providers
+    konst kotlinExperimentalTryK2: Provider<Boolean> = project.providers
         .provider<Boolean> {
             booleanProperty(KOTLIN_EXPERIMENTAL_TRY_K2)
         }
         .orElse(false)
 
-    val internalVerboseDiagnostics: Boolean
+    konst internalVerboseDiagnostics: Boolean
         get() = booleanProperty(KOTLIN_INTERNAL_VERBOSE_DIAGNOSTICS) ?: false
 
-    val suppressedGradlePluginWarnings: List<String>
+    konst suppressedGradlePluginWarnings: List<String>
         get() = property(PropertyNames.KOTLIN_SUPPRESS_GRADLE_PLUGIN_WARNINGS)?.split(",").orEmpty()
 
-    val suppressedGradlePluginErrors: List<String>
+    konst suppressedGradlePluginErrors: List<String>
         get() = property(PropertyNames.KOTLIN_SUPPRESS_GRADLE_PLUGIN_ERRORS)?.split(",").orEmpty()
 
     /**
@@ -553,7 +553,7 @@ internal class PropertiesProvider private constructor(private val project: Proje
         target?.name?.prefixIfNot("$KOTLIN_JS_KARMA_BROWSERS.")?.let(::property) ?: property(KOTLIN_JS_KARMA_BROWSERS)
 
     private fun propertyWithDeprecatedVariant(propName: String, deprecatedPropName: String): String? {
-        val deprecatedProperty = this.property(deprecatedPropName)
+        konst deprecatedProperty = this.property(deprecatedPropName)
         if (deprecatedProperty != null) {
             SingleWarningPerBuild.show(project, "Project property '$deprecatedPropName' is deprecated. Please use '$propName' instead.")
         }
@@ -585,70 +585,70 @@ internal class PropertiesProvider private constructor(private val project: Proje
         }
 
     private fun propertiesWithPrefix(prefix: String): Map<String, String> {
-        val result: MutableMap<String, String> = mutableMapOf()
-        project.properties.forEach { (name, value) ->
-            if (name.startsWith(prefix) && value is String) {
-                result.put(name, value)
+        konst result: MutableMap<String, String> = mutableMapOf()
+        project.properties.forEach { (name, konstue) ->
+            if (name.startsWith(prefix) && konstue is String) {
+                result.put(name, konstue)
             }
         }
-        localProperties.forEach { (name, value) ->
-            if (name is String && name.startsWith(prefix) && value is String) {
+        localProperties.forEach { (name, konstue) ->
+            if (name is String && name.startsWith(prefix) && konstue is String) {
                 // Project properties have higher priority.
-                result.putIfAbsent(name, value)
+                result.putIfAbsent(name, konstue)
             }
         }
         return result
     }
 
     object PropertyNames {
-        const val KOTLIN_STDLIB_DEFAULT_DEPENDENCY = "kotlin.stdlib.default.dependency"
-        const val KOTLIN_STDLIB_JDK_VARIANTS_VERSION_ALIGNMENT = "kotlin.stdlib.jdk.variants.version.alignment"
-        const val KOTLIN_JS_STDLIB_DOM_API_INCLUDED = "kotlin.js.stdlib.dom.api.included"
-        const val KOTLIN_MPP_ENABLE_GRANULAR_SOURCE_SETS_METADATA = "kotlin.mpp.enableGranularSourceSetsMetadata"
-        const val KOTLIN_MPP_ENABLE_COMPATIBILITY_METADATA_VARIANT = "kotlin.mpp.enableCompatibilityMetadataVariant"
-        const val KOTLIN_MPP_ENABLE_CINTEROP_COMMONIZATION = "kotlin.mpp.enableCInteropCommonization"
-        const val KOTLIN_MPP_HIERARCHICAL_STRUCTURE_BY_DEFAULT = "kotlin.internal.mpp.hierarchicalStructureByDefault"
-        const val KOTLIN_MPP_HIERARCHICAL_STRUCTURE_SUPPORT = "kotlin.mpp.hierarchicalStructureSupport"
-        const val KOTLIN_MPP_DEPRECATED_PROPERTIES_NO_WARN = "kotlin.mpp.deprecatedProperties.nowarn"
-        const val KOTLIN_MPP_ANDROID_GRADLE_PLUGIN_COMPATIBILITY_NO_WARN = "kotlin.mpp.androidGradlePluginCompatibility.nowarn"
-        const val KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION = "kotlin.mpp.androidSourceSetLayoutVersion"
-        const val KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION_1_NO_WARN = "${KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION}1.nowarn"
-        const val KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_ANDROID_STYLE_NO_WARN = "kotlin.mpp.androidSourceSetLayoutV2AndroidStyleDirs.nowarn"
-        const val KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION = "kotlin.mpp.import.enableKgpDependencyResolution"
-        const val KOTLIN_MPP_IMPORT_ENABLE_SLOW_SOURCES_JAR_RESOLVER = "kotlin.mpp.import.enableSlowSourcesJarResolver"
-        const val KOTLIN_MPP_ENABLE_INTRANSITIVE_METADATA_CONFIGURATION = "kotlin.mpp.enableIntransitiveMetadataConfiguration"
-        const val KOTLIN_NATIVE_DEPENDENCY_PROPAGATION = "kotlin.native.enableDependencyPropagation"
-        const val KOTLIN_NATIVE_CACHE_ORCHESTRATION = "kotlin.native.cacheOrchestration"
-        const val KOTLIN_NATIVE_PARALLEL_THREADS = "kotlin.native.parallelThreads"
-        const val KOTLIN_NATIVE_INCREMENTAL_COMPILATION = "kotlin.incremental.native"
-        const val KOTLIN_MPP_ENABLE_OPTIMISTIC_NUMBER_COMMONIZATION = "kotlin.mpp.enableOptimisticNumberCommonization"
-        const val KOTLIN_MPP_ENABLE_PLATFORM_INTEGER_COMMONIZATION = "kotlin.mpp.enablePlatformIntegerCommonization"
-        const val KOTLIN_ABI_SNAPSHOT = "kotlin.incremental.classpath.snapshot.enabled"
-        const val KOTLIN_JS_KARMA_BROWSERS = "kotlin.js.browser.karma.browsers"
-        const val KOTLIN_BUILD_REPORT_SINGLE_FILE = "kotlin.build.report.single_file"
-        const val KOTLIN_BUILD_REPORT_HTTP_URL = "kotlin.build.report.http.url"
-        const val KOTLIN_OPTIONS_SUPPRESS_FREEARGS_MODIFICATION_WARNING = "kotlin.options.suppressFreeCompilerArgsModificationWarning"
-        const val KOTLIN_NATIVE_USE_XCODE_MESSAGE_STYLE = "kotlin.native.useXcodeMessageStyle"
-        const val KOTLIN_COMPILER_USE_PRECISE_COMPILATION_RESULTS_BACKUP = "kotlin.compiler.preciseCompilationResultsBackup"
-        const val KOTLIN_COMPILER_KEEP_INCREMENTAL_COMPILATION_CACHES_IN_MEMORY = "kotlin.compiler.keepIncrementalCompilationCachesInMemory"
-        const val KOTLIN_SUPPRESS_EXPERIMENTAL_IC_OPTIMIZATIONS_WARNING = "kotlin.compiler.suppressExperimentalICOptimizationsWarning"
-        const val KOTLIN_CREATE_DEFAULT_MULTIPLATFORM_PUBLICATIONS = "kotlin.internal.mpp.createDefaultMultiplatformPublications"
-        const val KOTLIN_RUN_COMPILER_VIA_BUILD_TOOLS_API = "kotlin.compiler.runViaBuildToolsApi"
-        const val KOTLIN_MPP_ALLOW_LEGACY_DEPENDENCIES = "kotlin.mpp.allow.legacy.dependencies"
-        const val KOTLIN_EXPERIMENTAL_TRY_K2 = "kotlin.experimental.tryK2"
-        const val KOTLIN_INTERNAL_VERBOSE_DIAGNOSTICS = "kotlin.internal.verboseDiagnostics"
-        const val KOTLIN_SUPPRESS_GRADLE_PLUGIN_WARNINGS = "kotlin.suppressGradlePluginWarnings"
-        const val KOTLIN_SUPPRESS_GRADLE_PLUGIN_ERRORS = "kotlin.internal.suppressGradlePluginErrors"
+        const konst KOTLIN_STDLIB_DEFAULT_DEPENDENCY = "kotlin.stdlib.default.dependency"
+        const konst KOTLIN_STDLIB_JDK_VARIANTS_VERSION_ALIGNMENT = "kotlin.stdlib.jdk.variants.version.alignment"
+        const konst KOTLIN_JS_STDLIB_DOM_API_INCLUDED = "kotlin.js.stdlib.dom.api.included"
+        const konst KOTLIN_MPP_ENABLE_GRANULAR_SOURCE_SETS_METADATA = "kotlin.mpp.enableGranularSourceSetsMetadata"
+        const konst KOTLIN_MPP_ENABLE_COMPATIBILITY_METADATA_VARIANT = "kotlin.mpp.enableCompatibilityMetadataVariant"
+        const konst KOTLIN_MPP_ENABLE_CINTEROP_COMMONIZATION = "kotlin.mpp.enableCInteropCommonization"
+        const konst KOTLIN_MPP_HIERARCHICAL_STRUCTURE_BY_DEFAULT = "kotlin.internal.mpp.hierarchicalStructureByDefault"
+        const konst KOTLIN_MPP_HIERARCHICAL_STRUCTURE_SUPPORT = "kotlin.mpp.hierarchicalStructureSupport"
+        const konst KOTLIN_MPP_DEPRECATED_PROPERTIES_NO_WARN = "kotlin.mpp.deprecatedProperties.nowarn"
+        const konst KOTLIN_MPP_ANDROID_GRADLE_PLUGIN_COMPATIBILITY_NO_WARN = "kotlin.mpp.androidGradlePluginCompatibility.nowarn"
+        const konst KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION = "kotlin.mpp.androidSourceSetLayoutVersion"
+        const konst KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION_1_NO_WARN = "${KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_VERSION}1.nowarn"
+        const konst KOTLIN_MPP_ANDROID_SOURCE_SET_LAYOUT_ANDROID_STYLE_NO_WARN = "kotlin.mpp.androidSourceSetLayoutV2AndroidStyleDirs.nowarn"
+        const konst KOTLIN_MPP_IMPORT_ENABLE_KGP_DEPENDENCY_RESOLUTION = "kotlin.mpp.import.enableKgpDependencyResolution"
+        const konst KOTLIN_MPP_IMPORT_ENABLE_SLOW_SOURCES_JAR_RESOLVER = "kotlin.mpp.import.enableSlowSourcesJarResolver"
+        const konst KOTLIN_MPP_ENABLE_INTRANSITIVE_METADATA_CONFIGURATION = "kotlin.mpp.enableIntransitiveMetadataConfiguration"
+        const konst KOTLIN_NATIVE_DEPENDENCY_PROPAGATION = "kotlin.native.enableDependencyPropagation"
+        const konst KOTLIN_NATIVE_CACHE_ORCHESTRATION = "kotlin.native.cacheOrchestration"
+        const konst KOTLIN_NATIVE_PARALLEL_THREADS = "kotlin.native.parallelThreads"
+        const konst KOTLIN_NATIVE_INCREMENTAL_COMPILATION = "kotlin.incremental.native"
+        const konst KOTLIN_MPP_ENABLE_OPTIMISTIC_NUMBER_COMMONIZATION = "kotlin.mpp.enableOptimisticNumberCommonization"
+        const konst KOTLIN_MPP_ENABLE_PLATFORM_INTEGER_COMMONIZATION = "kotlin.mpp.enablePlatformIntegerCommonization"
+        const konst KOTLIN_ABI_SNAPSHOT = "kotlin.incremental.classpath.snapshot.enabled"
+        const konst KOTLIN_JS_KARMA_BROWSERS = "kotlin.js.browser.karma.browsers"
+        const konst KOTLIN_BUILD_REPORT_SINGLE_FILE = "kotlin.build.report.single_file"
+        const konst KOTLIN_BUILD_REPORT_HTTP_URL = "kotlin.build.report.http.url"
+        const konst KOTLIN_OPTIONS_SUPPRESS_FREEARGS_MODIFICATION_WARNING = "kotlin.options.suppressFreeCompilerArgsModificationWarning"
+        const konst KOTLIN_NATIVE_USE_XCODE_MESSAGE_STYLE = "kotlin.native.useXcodeMessageStyle"
+        const konst KOTLIN_COMPILER_USE_PRECISE_COMPILATION_RESULTS_BACKUP = "kotlin.compiler.preciseCompilationResultsBackup"
+        const konst KOTLIN_COMPILER_KEEP_INCREMENTAL_COMPILATION_CACHES_IN_MEMORY = "kotlin.compiler.keepIncrementalCompilationCachesInMemory"
+        const konst KOTLIN_SUPPRESS_EXPERIMENTAL_IC_OPTIMIZATIONS_WARNING = "kotlin.compiler.suppressExperimentalICOptimizationsWarning"
+        const konst KOTLIN_CREATE_DEFAULT_MULTIPLATFORM_PUBLICATIONS = "kotlin.internal.mpp.createDefaultMultiplatformPublications"
+        const konst KOTLIN_RUN_COMPILER_VIA_BUILD_TOOLS_API = "kotlin.compiler.runViaBuildToolsApi"
+        const konst KOTLIN_MPP_ALLOW_LEGACY_DEPENDENCIES = "kotlin.mpp.allow.legacy.dependencies"
+        const konst KOTLIN_EXPERIMENTAL_TRY_K2 = "kotlin.experimental.tryK2"
+        const konst KOTLIN_INTERNAL_VERBOSE_DIAGNOSTICS = "kotlin.internal.verboseDiagnostics"
+        const konst KOTLIN_SUPPRESS_GRADLE_PLUGIN_WARNINGS = "kotlin.suppressGradlePluginWarnings"
+        const konst KOTLIN_SUPPRESS_GRADLE_PLUGIN_ERRORS = "kotlin.internal.suppressGradlePluginErrors"
     }
 
     companion object {
-        internal const val KOTLIN_NATIVE_HOME = "kotlin.native.home"
+        internal const konst KOTLIN_NATIVE_HOME = "kotlin.native.home"
 
-        private const val CACHED_PROVIDER_EXT_NAME = "kotlin.properties.provider"
+        private const konst CACHED_PROVIDER_EXT_NAME = "kotlin.properties.provider"
 
-        internal const val KOTLIN_NATIVE_IGNORE_INCORRECT_DEPENDENCIES = "kotlin.native.ignoreIncorrectDependencies"
+        internal const konst KOTLIN_NATIVE_IGNORE_INCORRECT_DEPENDENCIES = "kotlin.native.ignoreIncorrectDependencies"
 
-        private const val KOTLIN_NATIVE_BINARY_OPTION_PREFIX = "kotlin.native.binary."
+        private const konst KOTLIN_NATIVE_BINARY_OPTION_PREFIX = "kotlin.native.binary."
 
         operator fun invoke(project: Project): PropertiesProvider =
             with(project.extensions.extraProperties) {
@@ -659,6 +659,6 @@ internal class PropertiesProvider private constructor(private val project: Proje
                     ?: PropertiesProvider(project) // Fallback if multiple class loaders are involved
             }
 
-        internal val Project.kotlinPropertiesProvider get() = invoke(this)
+        internal konst Project.kotlinPropertiesProvider get() = invoke(this)
     }
 }

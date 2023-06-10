@@ -6,7 +6,7 @@ tailrec fun <T, A> Iterator<T>.foldl(acc : A, foldFunction : (e : T, acc : A) ->
         else foldl(foldFunction(next(), acc), foldFunction)
 
 fun box() : String {
-    val sum = (1..1000000).iterator().foldl(0) { e : Int, acc : Long ->
+    konst sum = (1..1000000).iterator().foldl(0) { e : Int, acc : Long ->
         acc + e
     }
 

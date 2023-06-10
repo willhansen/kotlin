@@ -11,7 +11,7 @@ inline fun <T : A> foo(a: Any) = (a as? T != null).toString()[0]
 import test.*
 
 fun box(): String {
-    val s = "" + foo<B>(Any()) + foo<B>(object : A {}) + foo<B>(B())
+    konst s = "" + foo<B>(Any()) + foo<B>(object : A {}) + foo<B>(B())
     if (s != "ftt") return "fail: $s"
     return "OK"
 }

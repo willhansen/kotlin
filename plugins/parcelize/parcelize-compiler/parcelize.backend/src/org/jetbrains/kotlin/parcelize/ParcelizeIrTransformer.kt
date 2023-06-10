@@ -41,7 +41,7 @@ class ParcelizeIrTransformer(
     context: IrPluginContext,
     androidSymbols: AndroidSymbols
 ) : ParcelizeIrTransformerBase(context, androidSymbols) {
-    private val symbolMap = mutableMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
+    private konst symbolMap = mutableMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
 
     fun transform(moduleFragment: IrModuleFragment) {
         moduleFragment.accept(this, null)
@@ -52,11 +52,11 @@ class ParcelizeIrTransformer(
         moduleFragment.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitCall(expression: IrCall): IrExpression {
                 // Handle the `parcelableCreator` intrinsic
-                val callee = expression.symbol.owner
+                konst callee = expression.symbol.owner
                 if (
                     callee.dispatchReceiverParameter == null
                     && callee.extensionReceiverParameter == null
-                    && callee.valueParameters.isEmpty()
+                    && callee.konstueParameters.isEmpty()
                     && callee.isInline
                     && callee.fqNameWhenAvailable?.asString() == "kotlinx.parcelize.ParcelableCreatorKt.parcelableCreator"
                     && callee.typeParameters.singleOrNull()?.let {
@@ -71,11 +71,11 @@ class ParcelizeIrTransformer(
                 }
 
                 // Remap calls to `describeContents` and `writeToParcel`
-                val remappedSymbol = symbolMap[expression.symbol]
+                konst remappedSymbol = symbolMap[expression.symbol]
                     ?: return super.visitCall(expression)
                 return IrCallImpl(
                     expression.startOffset, expression.endOffset, expression.type, remappedSymbol,
-                    expression.typeArgumentsCount, expression.valueArgumentsCount, expression.origin,
+                    expression.typeArgumentsCount, expression.konstueArgumentsCount, expression.origin,
                     expression.superQualifierSymbol
                 ).apply {
                     copyTypeAndValueArgumentsFrom(expression)
@@ -83,14 +83,14 @@ class ParcelizeIrTransformer(
             }
 
             override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
-                val remappedSymbol = symbolMap[expression.symbol]
-                val remappedReflectionTarget = expression.reflectionTarget?.let { symbolMap[it] }
+                konst remappedSymbol = symbolMap[expression.symbol]
+                konst remappedReflectionTarget = expression.reflectionTarget?.let { symbolMap[it] }
                 if (remappedSymbol == null && remappedReflectionTarget == null)
                     return super.visitFunctionReference(expression)
 
                 return IrFunctionReferenceImpl(
                     expression.startOffset, expression.endOffset, expression.type, remappedSymbol ?: expression.symbol,
-                    expression.typeArgumentsCount, expression.valueArgumentsCount, remappedReflectionTarget,
+                    expression.typeArgumentsCount, expression.konstueArgumentsCount, remappedReflectionTarget,
                     expression.origin
                 ).apply {
                     copyTypeAndValueArgumentsFrom(expression)
@@ -117,15 +117,15 @@ class ParcelizeIrTransformer(
         if (!declaration.isParcelize || declaration.modality == Modality.SEALED)
             return
 
-        val parcelableProperties = declaration.parcelableProperties
+        konst parcelableProperties = declaration.parcelableProperties
 
         // If the companion extends Parceler, it can override parts of the generated implementation.
-        val parcelerObject = declaration.companionObject()?.takeIf {
+        konst parcelerObject = declaration.companionObject()?.takeIf {
             it.isSubclassOfFqName(PARCELER_FQN.asString())
         }
 
         if (declaration.descriptor.hasSyntheticDescribeContents()) {
-            val describeContents = declaration.addOverride(
+            konst describeContents = declaration.addOverride(
                 PARCELABLE_FQN,
                 DESCRIBE_CONTENTS_NAME.identifier,
                 context.irBuiltIns.intType,
@@ -147,15 +147,15 @@ class ParcelizeIrTransformer(
         }
 
         if (declaration.descriptor.hasSyntheticWriteToParcel()) {
-            val writeToParcel = declaration.addOverride(
+            konst writeToParcel = declaration.addOverride(
                 PARCELABLE_FQN,
                 WRITE_TO_PARCEL_NAME.identifier,
                 context.irBuiltIns.unitType,
                 modality = Modality.OPEN
             ).apply {
-                val receiverParameter = dispatchReceiverParameter!!
-                val parcelParameter = addValueParameter("out", androidSymbols.androidOsParcel.defaultType)
-                val flagsParameter = addValueParameter(FLAGS_NAME, context.irBuiltIns.intType)
+                konst receiverParameter = dispatchReceiverParameter!!
+                konst parcelParameter = addValueParameter("out", androidSymbols.androidOsParcel.defaultType)
+                konst flagsParameter = addValueParameter(FLAGS_NAME, context.irBuiltIns.intType)
 
                 // We need to defer the construction of the writer, since it may refer to the [writeToParcel] methods in other
                 // @Parcelize classes in the current module, which might not be constructed yet at this point.

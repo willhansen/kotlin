@@ -41,7 +41,7 @@ kotlin.target {
 
 kotlin.target.compilations.create("benchmark") {
     defaultSourceSet.dependencies {
-        val main by kotlin.target.compilations
+        konst main by kotlin.target.compilations
         implementation(main.compileDependencyFiles + main.output.classesDirs)
         runtimeOnly(files(main.runtimeDependencyFiles))
     }

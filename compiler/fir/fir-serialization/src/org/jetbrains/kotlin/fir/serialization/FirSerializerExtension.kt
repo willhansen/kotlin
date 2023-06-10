@@ -18,19 +18,19 @@ import org.jetbrains.kotlin.metadata.serialization.MutableVersionRequirementTabl
 import org.jetbrains.kotlin.name.FqName
 
 abstract class FirSerializerExtension {
-    abstract val session: FirSession
+    abstract konst session: FirSession
 
-    abstract val stringTable: FirElementAwareStringTable
+    abstract konst stringTable: FirElementAwareStringTable
 
-    abstract val metadataVersion: BinaryVersion
+    abstract konst metadataVersion: BinaryVersion
 
-    val annotationSerializer by lazy { FirAnnotationSerializer(session, stringTable, constValueProvider) }
+    konst annotationSerializer by lazy { FirAnnotationSerializer(session, stringTable, constValueProvider) }
 
-    protected abstract val constValueProvider: ConstValueProvider?
+    protected abstract konst constValueProvider: ConstValueProvider?
 
     @OptIn(ConstValueProviderInternals::class)
     internal inline fun <T> processFile(firFile: FirFile, crossinline action: () -> T): T {
-        val previousFile = constValueProvider?.processingFirFile
+        konst previousFile = constValueProvider?.processingFirFile
         constValueProvider?.processingFirFile = firFile
         return try {
             action()

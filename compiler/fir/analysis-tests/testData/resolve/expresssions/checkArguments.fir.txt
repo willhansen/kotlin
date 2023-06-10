@@ -24,10 +24,10 @@ FILE: checkArguments.kt
         ^bar R|<local>/b|
     }
     public final fun foo(): R|kotlin/Unit| {
-        lval a: R|A| = R|/A.A|()
-        lval b: R|B| = R|/B.B|()
-        lval c: R|C| = R|/C.C|()
-        lval ra: R|A| = R|/bar|(R|<local>/a|)
-        lval rb: R|B| = R|/bar|(R|<local>/b|)
-        lval rc: R|B| = R|/bar|(R|<local>/c|)
+        lkonst a: R|A| = R|/A.A|()
+        lkonst b: R|B| = R|/B.B|()
+        lkonst c: R|C| = R|/C.C|()
+        lkonst ra: R|A| = R|/bar|(R|<local>/a|)
+        lkonst rb: R|B| = R|/bar|(R|<local>/b|)
+        lkonst rc: R|B| = R|/bar|(R|<local>/c|)
     }

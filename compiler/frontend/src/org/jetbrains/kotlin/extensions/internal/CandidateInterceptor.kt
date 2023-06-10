@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValueWithSmartCastI
 
 @OptIn(InternalNonStableExtensionPoints::class)
 class CandidateInterceptor(project: Project) {
-    private val extensions = getInstances(project)
+    private konst extensions = getInstances(project)
 
     fun interceptResolvedCallAtomCandidate(
         candidateDescriptor: CallableDescriptor,

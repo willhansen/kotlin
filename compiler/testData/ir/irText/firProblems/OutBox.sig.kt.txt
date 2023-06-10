@@ -5,7 +5,7 @@ class Box<out T : Foo> {
   // CHECK:
   //   Mangled name: Box{}foo
   //   Public signature: /Box.foo|1688079488202778848[0]
-  val foo: T
+  konst foo: T
     // CHECK JVM_IR:
     //   Mangled name: Box#<get-foo>(){}1:0
     //   Public signature: /Box.foo.<get-foo>|3855223738271342790[0]
@@ -19,7 +19,7 @@ class Box<out T : Foo> {
   // CHECK:
   //   Mangled name: Box{}str
   //   Public signature: /Box.str|4033248252607519654[0]
-  val str: String
+  konst str: String
     // CHECK JVM_IR:
     //   Mangled name: Box#<get-str>(){}kotlin.String
     //   Public signature: /Box.str.<get-str>|7048381576567484853[0]

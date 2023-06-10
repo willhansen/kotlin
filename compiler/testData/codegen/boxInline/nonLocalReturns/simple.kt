@@ -12,7 +12,7 @@ import test.*
 
 fun test1(local: Int, nonLocal: String, doNonLocal: Boolean): String {
 
-    val localResult = doCall {
+    konst localResult = doCall {
         if (doNonLocal) {
             return nonLocal
         }
@@ -29,7 +29,7 @@ fun test1(local: Int, nonLocal: String, doNonLocal: Boolean): String {
 
 fun test2(local: Int, nonLocal: String, doNonLocal: Boolean): String {
 
-    val localResult = doCall {
+    konst localResult = doCall {
         if (doNonLocal) {
             return@test2 nonLocal
         }

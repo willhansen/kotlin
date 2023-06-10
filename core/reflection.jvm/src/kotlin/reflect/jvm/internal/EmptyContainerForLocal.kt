@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.name.Name
 import kotlin.reflect.KCallable
 
 internal object EmptyContainerForLocal : KDeclarationContainerImpl() {
-    override val jClass: Class<*>
+    override konst jClass: Class<*>
         get() = fail()
 
-    override val members: Collection<KCallable<*>>
+    override konst members: Collection<KCallable<*>>
         get() = fail()
 
-    override val constructorDescriptors: Collection<ConstructorDescriptor>
+    override konst constructorDescriptors: Collection<ConstructorDescriptor>
         get() = fail()
 
     override fun getProperties(name: Name): Collection<PropertyDescriptor> = fail()

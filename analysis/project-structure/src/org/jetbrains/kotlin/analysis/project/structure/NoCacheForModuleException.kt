@@ -12,10 +12,10 @@ package org.jetbrains.kotlin.analysis.project.structure
  * TODO: This can be caused by the problem described in KT-51240. When the problem is fixed, this exception will probably become redundant.
  */
 public class NoCacheForModuleException(
-    private val missingModule: KtModule,
-    private val existingModules: Set<KtModule>
+    private konst missingModule: KtModule,
+    private konst existingModules: Set<KtModule>
 ) : NoSuchElementException() {
-    override val message: String
+    override konst message: String
         get() = "No cache was found for module '${missingModule.moduleDescription}'! " +
                 "Caches exist for the following modules: ${existingModules.map { it.moduleDescription }}"
 }

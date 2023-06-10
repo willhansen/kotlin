@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.cfg.pseudocode.instructions.eval
+package org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst
 
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.KtElementInstruction
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 
 interface InstructionWithValue : KtElementInstruction {
-    val outputValue: PseudoValue?
+    konst outputValue: PseudoValue?
 }

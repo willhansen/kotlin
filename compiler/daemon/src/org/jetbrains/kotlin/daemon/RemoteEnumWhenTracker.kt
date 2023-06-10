@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.daemon.common.withMeasure
 import org.jetbrains.kotlin.incremental.components.EnumWhenTracker
 
 class RemoteEnumWhenTracker(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
-    val profiler: Profiler = DummyProfiler()
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    konst profiler: Profiler = DummyProfiler()
 ): EnumWhenTracker {
     override fun report(whenExpressionFilePath: String, enumClassFqName: String) {
         profiler.withMeasure(this) {

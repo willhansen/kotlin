@@ -2,10 +2,10 @@
 fun f() {
     class LocalClass() {
         fun f() {
-            val x = ""
+            konst x = ""
 
             fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
         }
     }
@@ -13,10 +13,10 @@ fun f() {
 ---------------------
 L0:
   1 <START>
-  2 mark({ class LocalClass() { fun f() { val x = "" fun loc() { val x3 = "" } } } })
+  2 mark({ class LocalClass() { fun f() { konst x = "" fun loc() { konst x3 = "" } } } })
     jmp?(L2)                                                                             NEXT:[<END>, jmp?(L3)]
-    jmp?(L3)                                                                             NEXT:[<END>, d(fun f() { val x = "" fun loc() { val x3 = "" } })]
-    d(fun f() { val x = "" fun loc() { val x3 = "" } })                                  NEXT:[<SINK>]
+    jmp?(L3)                                                                             NEXT:[<END>, d(fun f() { konst x = "" fun loc() { konst x3 = "" } })]
+    d(fun f() { konst x = "" fun loc() { konst x3 = "" } })                                  NEXT:[<SINK>]
 L1:
 L2 [after local class]:
 L3 [after local declaration]:
@@ -24,43 +24,43 @@ L3 [after local declaration]:
 error:
     <ERROR>                                                                              PREV:[]
 sink:
-    <SINK>                                                                               PREV:[<ERROR>, <END>, d(fun f() { val x = "" fun loc() { val x3 = "" } })]
+    <SINK>                                                                               PREV:[<ERROR>, <END>, d(fun f() { konst x = "" fun loc() { konst x3 = "" } })]
 =====================
 == f ==
 fun f() {
-            val x = ""
+            konst x = ""
 
             fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
         }
 ---------------------
 L4:
   3 <START>
-  4 mark({ val x = "" fun loc() { val x3 = "" } })
-    v(val x = "")
+  4 mark({ konst x = "" fun loc() { konst x3 = "" } })
+    v(konst x = "")
     mark("")
     r("") -> <v0>
     w(x|<v0>)
-    jmp?(L6)                                          NEXT:[<END>, d(fun loc() { val x3 = "" })]
-    d(fun loc() { val x3 = "" })                      NEXT:[<SINK>]
+    jmp?(L6)                                          NEXT:[<END>, d(fun loc() { konst x3 = "" })]
+    d(fun loc() { konst x3 = "" })                      NEXT:[<SINK>]
 L5:
 L6 [after local declaration]:
   3 <END>                                             NEXT:[<SINK>]                                            PREV:[jmp?(L6)]
 error:
     <ERROR>                                           PREV:[]
 sink:
-    <SINK>                                            PREV:[<ERROR>, <END>, d(fun loc() { val x3 = "" })]
+    <SINK>                                            PREV:[<ERROR>, <END>, d(fun loc() { konst x3 = "" })]
 =====================
 == loc ==
 fun loc() {
-                val x3 = ""
+                konst x3 = ""
             }
 ---------------------
 L7:
   5 <START>
-  6 mark({ val x3 = "" })
-    v(val x3 = "")
+  6 mark({ konst x3 = "" })
+    v(konst x3 = "")
     mark("")
     r("") -> <v0>
     w(x3|<v0>)

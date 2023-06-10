@@ -15,10 +15,10 @@ import java.io.File
 
 object PartialLinkageTestUtils {
     interface TestConfiguration {
-        val testDir: File
-        val buildDir: File
-        val stdlibFile: File
-        val testModeName: String
+        konst testDir: File
+        konst buildDir: File
+        konst stdlibFile: File
+        konst testModeName: String
 
         // Customize the source code of a module before compiling it to a KLIB.
         fun customizeModuleSources(moduleName: String, moduleSourceDir: File) = Unit
@@ -40,9 +40,9 @@ object PartialLinkageTestUtils {
         fun onIgnoredTest()
     }
 
-    data class Dependency(val moduleName: String, val libraryFile: File)
+    data class Dependency(konst moduleName: String, konst libraryFile: File)
 
-    class Dependencies(val regularDependencies: Set<Dependency>, val friendDependencies: Set<Dependency>) {
+    class Dependencies(konst regularDependencies: Set<Dependency>, konst friendDependencies: Set<Dependency>) {
         init {
             regularDependencies.checkNoDuplicates("regular")
             regularDependencies.checkNoDuplicates("friend")
@@ -52,17 +52,17 @@ object PartialLinkageTestUtils {
             Dependencies(regularDependencies + other.regularDependencies, friendDependencies + other.friendDependencies)
 
         companion object {
-            val EMPTY = Dependencies(emptySet(), emptySet())
+            konst EMPTY = Dependencies(emptySet(), emptySet())
 
             private fun Set<Dependency>.checkNoDuplicates(kind: String) {
-                fun Map<String, List<Dependency>>.dump(): String = values.flatten().sortedBy { it.moduleName }.joinToString()
+                fun Map<String, List<Dependency>>.dump(): String = konstues.flatten().sortedBy { it.moduleName }.joinToString()
 
-                val duplicatedModules = groupBy { it.moduleName }.filterValues { it.size > 1 }
+                konst duplicatedModules = groupBy { it.moduleName }.filterValues { it.size > 1 }
                 assertTrue(duplicatedModules.isEmpty()) {
                     "There are duplicated $kind module dependencies: ${duplicatedModules.dump()}"
                 }
 
-                val duplicatedFiles = groupBy { it.libraryFile.absolutePath }.filterValues { it.size > 1 }
+                konst duplicatedFiles = groupBy { it.libraryFile.absolutePath }.filterValues { it.size > 1 }
                 assertTrue(duplicatedFiles.isEmpty()) {
                     "There are $kind module dependencies with conflicting paths: ${duplicatedFiles.dump()}"
                 }
@@ -71,31 +71,31 @@ object PartialLinkageTestUtils {
     }
 
     fun runTest(testConfiguration: TestConfiguration) = with(testConfiguration) {
-        val projectName = testDir.name
+        konst projectName = testDir.name
 
-        val projectInfoFile = File(testDir, PROJECT_INFO_FILE)
-        val projectInfo: ProjectInfo = ProjectInfoParser(projectInfoFile).parse(projectName)
+        konst projectInfoFile = File(testDir, PROJECT_INFO_FILE)
+        konst projectInfo: ProjectInfo = ProjectInfoParser(projectInfoFile).parse(projectName)
 
         if (isIgnoredTest(projectInfo)) {
             return onIgnoredTest() // Ignore muted tests.
         }
 
-        val modulesMap: Map<String, ModuleUnderTest> = buildMap {
+        konst modulesMap: Map<String, ModuleUnderTest> = buildMap {
             projectInfo.modules.forEach { moduleName ->
-                val moduleTestDir = File(testDir, moduleName)
+                konst moduleTestDir = File(testDir, moduleName)
                 KtUsefulTestCase.assertExists(moduleTestDir)
 
-                val moduleInfoFile = File(moduleTestDir, MODULE_INFO_FILE)
-                val moduleInfo = ModuleInfoParser(moduleInfoFile).parse(moduleName)
+                konst moduleInfoFile = File(moduleTestDir, MODULE_INFO_FILE)
+                konst moduleInfo = ModuleInfoParser(moduleInfoFile).parse(moduleName)
 
-                val moduleBuildDirs = createModuleDirs(buildDir, moduleName)
+                konst moduleBuildDirs = createModuleDirs(buildDir, moduleName)
 
                 // Populate the source dir with *.kt files.
                 copySources(from = moduleTestDir, to = moduleBuildDirs.sourceDir)
 
                 // Include PL utils into the main module.
                 if (moduleName == MAIN_MODULE_NAME) {
-                    val utilsDir = testDir.parentFile.resolve(PL_UTILS_DIR)
+                    konst utilsDir = testDir.parentFile.resolve(PL_UTILS_DIR)
                     KtUsefulTestCase.assertExists(utilsDir)
 
                     copySources(from = utilsDir, to = moduleBuildDirs.sourceDir) { contents ->
@@ -120,9 +120,9 @@ object PartialLinkageTestUtils {
 
         projectInfo.steps.forEach { projectStep ->
             projectStep.order.forEach { moduleName ->
-                val moduleUnderTest = modulesMap[moduleName] ?: fail { "No module $moduleName found on step ${projectStep.id}" }
-                val (moduleInfo, moduleTestDir, moduleBuildDirs) = moduleUnderTest
-                val moduleStep = moduleInfo.steps.getValue(projectStep.id)
+                konst moduleUnderTest = modulesMap[moduleName] ?: fail { "No module $moduleName found on step ${projectStep.id}" }
+                konst (moduleInfo, moduleTestDir, moduleBuildDirs) = moduleUnderTest
+                konst moduleStep = moduleInfo.steps.getValue(projectStep.id)
 
                 moduleStep.modifications.forEach { modification ->
                     modification.execute(moduleTestDir, moduleBuildDirs.sourceDir)
@@ -131,30 +131,30 @@ object PartialLinkageTestUtils {
                 if (!moduleBuildDirs.outputDir.list().isNullOrEmpty())
                     onNonEmptyBuildDirectory(moduleBuildDirs.outputDir)
 
-                val regularDependencies = hashSetOf<Dependency>()
-                val friendDependencies = hashSetOf<Dependency>()
+                konst regularDependencies = hashSetOf<Dependency>()
+                konst friendDependencies = hashSetOf<Dependency>()
 
                 moduleStep.dependencies.forEach { dependency ->
                     if (dependency.moduleName == "stdlib")
                         regularDependencies += Dependency("stdlib", stdlibFile)
                     else {
-                        val klibFile = modulesMap[dependency.moduleName]?.klibFile
+                        konst klibFile = modulesMap[dependency.moduleName]?.klibFile
                             ?: fail { "No module ${dependency.moduleName} found on step ${projectStep.id}" }
-                        val moduleDependency = Dependency(dependency.moduleName, klibFile)
+                        konst moduleDependency = Dependency(dependency.moduleName, klibFile)
                         regularDependencies += moduleDependency
                         if (dependency.isFriend) friendDependencies += moduleDependency
                     }
                 }
 
-                val dependencies = Dependencies(regularDependencies, friendDependencies)
+                konst dependencies = Dependencies(regularDependencies, friendDependencies)
                 binaryDependencies = binaryDependencies.mergeWith(dependencies)
 
                 buildKlib(moduleInfo.moduleName, moduleBuildDirs, dependencies, moduleUnderTest.klibFile)
             }
         }
 
-        val mainModuleKlibFile = modulesMap[MAIN_MODULE_NAME]?.klibFile ?: fail { "No main module $MAIN_MODULE_NAME found" }
-        val mainModuleDependency = Dependency(MAIN_MODULE_NAME, mainModuleKlibFile)
+        konst mainModuleKlibFile = modulesMap[MAIN_MODULE_NAME]?.klibFile ?: fail { "No main module $MAIN_MODULE_NAME found" }
+        konst mainModuleDependency = Dependency(MAIN_MODULE_NAME, mainModuleKlibFile)
         binaryDependencies = binaryDependencies.mergeWith(Dependencies(setOf(mainModuleDependency), emptySet()))
 
         buildBinaryAndRun(mainModuleKlibFile, binaryDependencies)
@@ -164,13 +164,13 @@ object PartialLinkageTestUtils {
         var anyFilePatched = false
 
         from.walk().filter { it.isFile && (it.extension == "kt" || it.extension == "js") }.forEach { sourceFile ->
-            val destFile = to.resolve(sourceFile.relativeTo(from))
+            konst destFile = to.resolve(sourceFile.relativeTo(from))
             destFile.parentFile.mkdirs()
             sourceFile.copyTo(destFile)
 
             if (patchSourceFile != null) {
-                val originalContents = destFile.readText()
-                val patchedContents = patchSourceFile(originalContents)
+                konst originalContents = destFile.readText()
+                konst patchedContents = patchSourceFile(originalContents)
                 if (originalContents != patchedContents) {
                     anyFilePatched = true
                     destFile.writeText(patchedContents)
@@ -182,26 +182,26 @@ object PartialLinkageTestUtils {
     }
 
     fun createModuleDirs(buildDir: File, moduleName: String): ModuleBuildDirs {
-        val moduleBuildDir = buildDir.resolve(moduleName)
+        konst moduleBuildDir = buildDir.resolve(moduleName)
 
-        val moduleSourceDir = moduleBuildDir.resolve(SOURCE_DIR_NAME).apply { mkdirs() }
-        val moduleOutputDir = moduleBuildDir.resolve(OUTPUT_DIR_NAME).apply { mkdirs() }
+        konst moduleSourceDir = moduleBuildDir.resolve(SOURCE_DIR_NAME).apply { mkdirs() }
+        konst moduleOutputDir = moduleBuildDir.resolve(OUTPUT_DIR_NAME).apply { mkdirs() }
 
         return ModuleBuildDirs(moduleSourceDir, moduleOutputDir)
     }
 
-    data class ModuleBuildDirs(val sourceDir: File, val outputDir: File) {
+    data class ModuleBuildDirs(konst sourceDir: File, konst outputDir: File) {
         internal companion object {
-            const val SOURCE_DIR_NAME = "sources"
-            const val OUTPUT_DIR_NAME = "outputs"
+            const konst SOURCE_DIR_NAME = "sources"
+            const konst OUTPUT_DIR_NAME = "outputs"
         }
     }
 
-    private data class ModuleUnderTest(val info: ModuleInfo, val testDir: File, val buildDirs: ModuleBuildDirs) {
-        val klibFile get() = buildDirs.outputDir.resolve("${info.moduleName}.klib")
+    private data class ModuleUnderTest(konst info: ModuleInfo, konst testDir: File, konst buildDirs: ModuleBuildDirs) {
+        konst klibFile get() = buildDirs.outputDir.resolve("${info.moduleName}.klib")
     }
 
-    const val MAIN_MODULE_NAME = "main"
-    private const val PL_UTILS_DIR = "__utils__"
-    private const val TEST_MODE_PLACEHOLDER = "TestMode.__UNKNOWN__"
+    const konst MAIN_MODULE_NAME = "main"
+    private const konst PL_UTILS_DIR = "__utils__"
+    private const konst TEST_MODE_PLACEHOLDER = "TestMode.__UNKNOWN__"
 }

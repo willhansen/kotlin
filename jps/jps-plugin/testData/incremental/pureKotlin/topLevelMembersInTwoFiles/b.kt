@@ -14,10 +14,10 @@ var simpleVar = prop1
 
 var fieldlessVar: String
     get() = ""
-    set(value) {}
+    set(konstue) {}
 
 @Deprecated("")
-val fieldlessValWithAnnotation: String
+konst fieldlessValWithAnnotation: String
     get() = ""
 
 var delegated: String by kotlin.properties.Delegates.notNull()

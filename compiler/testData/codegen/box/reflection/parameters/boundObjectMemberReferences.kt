@@ -12,7 +12,7 @@ object Host {
 }
 
 fun box(): String {
-    val fooParams = Host::foo.parameters
+    konst fooParams = Host::foo.parameters
 
     assertEquals(2, fooParams.size)
 

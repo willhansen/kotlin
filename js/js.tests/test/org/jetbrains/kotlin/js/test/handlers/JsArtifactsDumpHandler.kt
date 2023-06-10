@@ -20,23 +20,23 @@ import java.io.File
 class JsArtifactsDumpHandler(testServices: TestServices) : AfterAnalysisChecker(testServices) {
 
     override fun check(failedAssertions: List<WrappedException>) {
-        val originalFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val allDirectives = testServices.moduleStructure.allDirectives
+        konst originalFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst allDirectives = testServices.moduleStructure.allDirectives
 
-        val stopFile = File(allDirectives[JsEnvironmentConfigurationDirectives.PATH_TO_TEST_DIR].first())
-        val pathToRootOutputDir = allDirectives[JsEnvironmentConfigurationDirectives.PATH_TO_ROOT_OUTPUT_DIR].first()
-        val testGroupOutputDirPrefix = allDirectives[JsEnvironmentConfigurationDirectives.TEST_GROUP_OUTPUT_DIR_PREFIX].first()
+        konst stopFile = File(allDirectives[JsEnvironmentConfigurationDirectives.PATH_TO_TEST_DIR].first())
+        konst pathToRootOutputDir = allDirectives[JsEnvironmentConfigurationDirectives.PATH_TO_ROOT_OUTPUT_DIR].first()
+        konst testGroupOutputDirPrefix = allDirectives[JsEnvironmentConfigurationDirectives.TEST_GROUP_OUTPUT_DIR_PREFIX].first()
 
-        val testGroupOutputDirForCompilation = File(pathToRootOutputDir + "out/" + testGroupOutputDirPrefix)
-        val testGroupOutputDirForMinification = File(pathToRootOutputDir + "out-min/" + testGroupOutputDirPrefix)
-        val testGroupOutputDirForPerModuleCompilation = File(pathToRootOutputDir + "out-per-module/" + testGroupOutputDirPrefix)
-        val testGroupOutputDirForPerModuleMinification = File(pathToRootOutputDir + "out-per-module-min/" + testGroupOutputDirPrefix)
+        konst testGroupOutputDirForCompilation = File(pathToRootOutputDir + "out/" + testGroupOutputDirPrefix)
+        konst testGroupOutputDirForMinification = File(pathToRootOutputDir + "out-min/" + testGroupOutputDirPrefix)
+        konst testGroupOutputDirForPerModuleCompilation = File(pathToRootOutputDir + "out-per-module/" + testGroupOutputDirPrefix)
+        konst testGroupOutputDirForPerModuleMinification = File(pathToRootOutputDir + "out-per-module-min/" + testGroupOutputDirPrefix)
 
-        val outputDir = getOutputDir(originalFile, testGroupOutputDirForCompilation, stopFile)
-        val dceOutputDir = getOutputDir(originalFile, testGroupOutputDirForMinification, stopFile)
-        val perModuleOutputDir = getOutputDir(originalFile, testGroupOutputDirForPerModuleCompilation, stopFile)
-        val preModuleDceOutputDir = getOutputDir(originalFile, testGroupOutputDirForPerModuleMinification, stopFile)
-        val minOutputDir = File(dceOutputDir, originalFile.nameWithoutExtension)
+        konst outputDir = getOutputDir(originalFile, testGroupOutputDirForCompilation, stopFile)
+        konst dceOutputDir = getOutputDir(originalFile, testGroupOutputDirForMinification, stopFile)
+        konst perModuleOutputDir = getOutputDir(originalFile, testGroupOutputDirForPerModuleCompilation, stopFile)
+        konst preModuleDceOutputDir = getOutputDir(originalFile, testGroupOutputDirForPerModuleMinification, stopFile)
+        konst minOutputDir = File(dceOutputDir, originalFile.nameWithoutExtension)
 
         copy(JsEnvironmentConfigurator.getJsArtifactsOutputDir(testServices), outputDir)
         copy(JsEnvironmentConfigurator.getJsArtifactsOutputDir(testServices, TranslationMode.FULL_PROD_MINIMIZED_NAMES), dceOutputDir)

@@ -28,10 +28,10 @@ object TestsJsonMapGenerator {
     }
 
     private fun JsonObject.getOrCreateSpecTestObject(specPlace: SpecPlace, testArea: TestArea, testType: TestType): JsonArray {
-        val sections = "${testArea.testDataPath}/$LINKED_TESTS_PATH/${specPlace.sections.joinToString("/")}"
-        val testsBySection = getOrCreate<JsonObject>(sections)
-        val testsByParagraph = testsBySection.getOrCreate<JsonObject>(specPlace.paragraphNumber.toString())
-        val testsByType = testsByParagraph.getOrCreate<JsonObject>(testType.type)
+        konst sections = "${testArea.testDataPath}/$LINKED_TESTS_PATH/${specPlace.sections.joinToString("/")}"
+        konst testsBySection = getOrCreate<JsonObject>(sections)
+        konst testsByParagraph = testsBySection.getOrCreate<JsonObject>(specPlace.paragraphNumber.toString())
+        konst testsByType = testsByParagraph.getOrCreate<JsonObject>(testType.type)
 
         return testsByType.getOrCreate(specPlace.sentenceNumber.toString())
     }
@@ -54,7 +54,7 @@ object TestsJsonMapGenerator {
             addProperty("path", testFile?.path)
             addProperty(
                 "unexpectedBehaviour",
-                test.unexpectedBehavior || test.cases.byNumbers.any { it.value.unexpectedBehavior }
+                test.unexpectedBehavior || test.cases.byNumbers.any { it.konstue.unexpectedBehavior }
             )
             addProperty("linkType", linkType.toString())
             test.helpers?.run { addProperty("helpers", test.helpers.joinToString()) }
@@ -65,15 +65,15 @@ object TestsJsonMapGenerator {
         testsMap: JsonObject,
         testOrigin: TestOrigin,
     ) {
-        val isImplementationTest = testOrigin == TestOrigin.IMPLEMENTATION
-        TestArea.values().forEach { testArea ->
+        konst isImplementationTest = testOrigin == TestOrigin.IMPLEMENTATION
+        TestArea.konstues().forEach { testArea ->
             File(testOrigin.getFilePath(testArea)).walkTopDown()
                 .forEach testFiles@{ file ->
                     if (!file.isFile || file.extension != "kt" || file.isCustomTestData) return@testFiles
                     if (isImplementationTest && !LinkedSpecTestPatterns.testInfoPattern.matcher(file.readText()).find())
                         return@testFiles
 
-                    val (specTest, _) = CommonParser.parseSpecTest(
+                    konst (specTest, _) = CommonParser.parseSpecTest(
                         file.canonicalPath,
                         mapOf("main.kt" to file.readText()),
                         isImplementationTest
@@ -102,15 +102,15 @@ object TestsJsonMapGenerator {
     }
 
     fun buildTestsMapPerSection() {
-        val testsMap = JsonObject().apply {
+        konst testsMap = JsonObject().apply {
             collectInfoFromTests(this, TestOrigin.SPEC)
             collectInfoFromTests(this, TestOrigin.IMPLEMENTATION)
         }
 
-        val gson = GsonBuilder().setPrettyPrinting().create()
+        konst gson = GsonBuilder().setPrettyPrinting().create()
 
         testsMap.keySet().forEach { testPath ->
-            val testMapFolder = "${GeneralConfiguration.SPEC_TESTDATA_PATH}/$testPath"
+            konst testMapFolder = "${GeneralConfiguration.SPEC_TESTDATA_PATH}/$testPath"
 
             File(testMapFolder).mkdirs()
             File("$testMapFolder/$TESTS_MAP_FILENAME").writeText(gson.toJson(testsMap.get(testPath)))

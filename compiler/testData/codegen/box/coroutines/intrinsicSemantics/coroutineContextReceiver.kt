@@ -21,12 +21,12 @@ class Controller {
         var fromSuspension: String? = null
 
         c.startCoroutine(this, object : Continuation<String> {
-            override val context: CoroutineContext
+            override konst context: CoroutineContext
                 get() = EmptyCoroutineContext
 
-            override fun resumeWith(value: Result<String>) {
+            override fun resumeWith(konstue: Result<String>) {
                 fromSuspension = try {
-                    value.getOrThrow()
+                    konstue.getOrThrow()
                 } catch (exception: Throwable) {
                     "Exception: " + exception.message!!
                 }
@@ -38,7 +38,7 @@ class Controller {
 }
 
 fun box(): String {
-    val c = Controller()
+    konst c = Controller()
     var res = c.builder { controllerSuspendHere() }
     if (res != "OK") {
         return "fail 1 $res"

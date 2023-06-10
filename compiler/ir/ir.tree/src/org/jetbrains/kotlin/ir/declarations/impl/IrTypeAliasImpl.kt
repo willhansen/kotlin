@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
 class IrTypeAliasImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
-    override val symbol: IrTypeAliasSymbol,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    override konst symbol: IrTypeAliasSymbol,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     override var expandedType: IrType,
     override var isActual: Boolean,
     override var origin: IrDeclarationOrigin,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrTypeAlias() {
     init {
         symbol.bind(this)
@@ -33,7 +33,7 @@ class IrTypeAliasImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: TypeAliasDescriptor
+    override konst descriptor: TypeAliasDescriptor
         get() = symbol.descriptor
 
     override var typeParameters: List<IrTypeParameter> = emptyList()

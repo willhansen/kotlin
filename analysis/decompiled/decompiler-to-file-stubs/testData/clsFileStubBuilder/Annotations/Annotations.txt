@@ -155,7 +155,7 @@ PsiJetFileStubImpl[package=]
         PROPERTY_ACCESSOR[hasBlockBody=true, hasBody=true, isGetter=false]
           MODIFIER_LIST[public final]
           VALUE_PARAMETER_LIST
-            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=value]
+            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=konstue]
               MODIFIER_LIST[]
                 ANNOTATION_ENTRY[hasValueArguments=false, shortName=a]
                   CONSTRUCTOR_CALLEE
@@ -184,7 +184,7 @@ PsiJetFileStubImpl[package=]
                   USER_TYPE
                     REFERENCE_EXPRESSION[referencedName=a]
           VALUE_PARAMETER_LIST
-            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=value]
+            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=konstue]
               TYPE_REFERENCE
                 NULLABLE_TYPE
                   USER_TYPE
@@ -208,7 +208,7 @@ PsiJetFileStubImpl[package=]
         PROPERTY_ACCESSOR[hasBlockBody=true, hasBody=true, isGetter=false]
           MODIFIER_LIST[private final]
           VALUE_PARAMETER_LIST
-            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=value]
+            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=konstue]
               TYPE_REFERENCE
                 USER_TYPE
                   USER_TYPE

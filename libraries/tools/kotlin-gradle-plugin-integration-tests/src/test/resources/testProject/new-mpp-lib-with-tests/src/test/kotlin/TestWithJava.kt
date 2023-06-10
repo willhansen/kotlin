@@ -10,6 +10,6 @@ class TestWithJava {
 	}
 
 	companion object {
-		val seesJavaTestClass = TestJava::class
+		konst seesJavaTestClass = TestJava::class
 	}
 }

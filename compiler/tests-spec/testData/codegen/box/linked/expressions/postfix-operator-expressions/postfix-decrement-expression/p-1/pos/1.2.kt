@@ -15,10 +15,10 @@
 
 fun box(): String {
     var a1 = A()
-    val res1: A = --a1
+    konst res1: A = --a1
 
     var a2 = A()
-    val res2: A = a2--
+    konst res2: A = a2--
 
     return if (res1.i == -1 && res2.i == 0) "OK"
     else "NOK"

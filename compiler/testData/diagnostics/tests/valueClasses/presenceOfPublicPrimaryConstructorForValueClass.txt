@@ -4,17 +4,17 @@ package kotlin {
 
     package kotlin.jvm {
 
-        @kotlin.jvm.JvmInline public final value class ConstructorWithDefaultVisibility {
+        @kotlin.jvm.JvmInline public final konstue class ConstructorWithDefaultVisibility {
             public constructor ConstructorWithDefaultVisibility(/*0*/ x: kotlin.Int)
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
         }
 
-        @kotlin.jvm.JvmInline public final value class InternalConstructor {
+        @kotlin.jvm.JvmInline public final konstue class InternalConstructor {
             internal constructor InternalConstructor(/*0*/ x: kotlin.Int)
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -27,25 +27,25 @@ package kotlin {
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
         }
 
-        @kotlin.jvm.JvmInline public final value class PrivateConstructor {
+        @kotlin.jvm.JvmInline public final konstue class PrivateConstructor {
             private constructor PrivateConstructor(/*0*/ x: kotlin.Int)
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
         }
 
-        @kotlin.jvm.JvmInline public final value class ProtectedConstructor {
+        @kotlin.jvm.JvmInline public final konstue class ProtectedConstructor {
             protected constructor ProtectedConstructor(/*0*/ x: kotlin.Int)
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
         }
 
-        @kotlin.jvm.JvmInline public final value class PublicConstructor {
+        @kotlin.jvm.JvmInline public final konstue class PublicConstructor {
             public constructor PublicConstructor(/*0*/ x: kotlin.Int)
-            public final val x: kotlin.Int
+            public final konst x: kotlin.Int
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

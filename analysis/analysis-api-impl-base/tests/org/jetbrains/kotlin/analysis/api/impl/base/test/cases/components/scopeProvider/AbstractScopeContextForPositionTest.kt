@@ -20,14 +20,14 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractScopeContextForPositionTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val ktFile = ktFiles.first()
-        val element = testServices.expressionMarkerProvider.getSelectedElementOfType<KtElement>(ktFile)
+        konst ktFile = ktFiles.first()
+        konst element = testServices.expressionMarkerProvider.getSelectedElementOfType<KtElement>(ktFile)
 
         analyseForTest(element) { elementToAnalyze ->
-            val scopeContext = ktFile.getScopeContextForPosition(elementToAnalyze)
+            konst scopeContext = ktFile.getScopeContextForPosition(elementToAnalyze)
 
-            val scopeContextStringRepresentation = renderForTests(elementToAnalyze, scopeContext)
-            val scopeContextStringRepresentationPretty = renderForTests(elementToAnalyze, scopeContext, printPretty = true)
+            konst scopeContextStringRepresentation = renderForTests(elementToAnalyze, scopeContext)
+            konst scopeContextStringRepresentationPretty = renderForTests(elementToAnalyze, scopeContext, printPretty = true)
 
             testServices.assertions.assertEqualsToTestDataFileSibling(scopeContextStringRepresentation)
             testServices.assertions.assertEqualsToTestDataFileSibling(scopeContextStringRepresentationPretty, extension = ".pretty.txt")

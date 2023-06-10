@@ -1,4 +1,4 @@
-FILE: validSubtraction.kt
+FILE: konstidSubtraction.kt
     public final fun foo(): R|kotlin/Unit| {
         lvar x: R|kotlin/Int| = Int(0)
         R|<local>/x| = R|<local>/x|.R|kotlin/Int.minus|(Int(1))

@@ -4,19 +4,19 @@ package n
 
 abstract class Buggy {
 
-    abstract val coll : Collection<Int>
+    abstract konst coll : Collection<Int>
 
     fun getThree(): Int? {
         return coll.find{ it > 3 }  // works fine
     }
 
-    val anotherThree : Int
+    konst anotherThree : Int
         get() = <!RETURN_TYPE_MISMATCH!>coll.find{ it > 3 }<!> // does not work here
 
-    val yetAnotherThree : Int
+    konst yetAnotherThree : Int
         get() = <!RETURN_TYPE_MISMATCH!>coll.find({ v:Int -> v > 3 })<!> // neither here
 
-    val extendedGetter : Int
+    konst extendedGetter : Int
         get() {
             return <!RETURN_TYPE_MISMATCH!>coll.find{ it > 3 }<!>  // not even here!
         }

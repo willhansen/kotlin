@@ -12,8 +12,8 @@ import com.intellij.openapi.vfs.VirtualFile
 import java.io.InputStream
 
 class CtSymClassVirtualFile(
-    private val parent: VirtualFile?,
-    private val file: VirtualFile
+    private konst parent: VirtualFile?,
+    private konst file: VirtualFile
 ): VirtualFile() {
     override fun getName() = file.name
 

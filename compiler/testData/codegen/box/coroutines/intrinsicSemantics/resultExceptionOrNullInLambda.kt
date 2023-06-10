@@ -10,7 +10,7 @@ fun myRun(c: () -> Unit) {
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 fun box(): String {
     var contiuation: Continuation<Unit>? = null
-    val c: suspend () -> Unit = {
+    konst c: suspend () -> Unit = {
         suspendCoroutine {
             contiuation = it
         }

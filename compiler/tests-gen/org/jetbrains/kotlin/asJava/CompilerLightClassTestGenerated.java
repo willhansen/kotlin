@@ -164,14 +164,14 @@ public class CompilerLightClassTestGenerated extends AbstractCompilerLightClassT
         runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/InlineReified.kt");
     }
 
-    @TestMetadata("InvalidJavaIdentifierAsAnnotationArgument.kt")
-    public void testInvalidJavaIdentifierAsAnnotationArgument() throws Exception {
-        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/InvalidJavaIdentifierAsAnnotationArgument.kt");
+    @TestMetadata("InkonstidJavaIdentifierAsAnnotationArgument.kt")
+    public void testInkonstidJavaIdentifierAsAnnotationArgument() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/InkonstidJavaIdentifierAsAnnotationArgument.kt");
     }
 
-    @TestMetadata("InvalidJavaIdentifierAsPropertyInitializer.kt")
-    public void testInvalidJavaIdentifierAsPropertyInitializer() throws Exception {
-        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/InvalidJavaIdentifierAsPropertyInitializer.kt");
+    @TestMetadata("InkonstidJavaIdentifierAsPropertyInitializer.kt")
+    public void testInkonstidJavaIdentifierAsPropertyInitializer() throws Exception {
+        runTest("compiler/testData/asJava/lightClasses/lightClassByFqName/InkonstidJavaIdentifierAsPropertyInitializer.kt");
     }
 
     @TestMetadata("JavaBetween.kt")

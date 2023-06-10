@@ -58,10 +58,10 @@ open class FirValueParameterBuilder : FirAnnotationContainerBuilder {
     open var deprecationsProvider: DeprecationsProvider = UnresolvedDeprecationProvider
     open var containerSource: DeserializedContainerSource? = null
     open var dispatchReceiverType: ConeSimpleKotlinType? = null
-    open val contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
+    open konst contextReceivers: MutableList<FirContextReceiver> = mutableListOf()
     open lateinit var name: Name
     open var backingField: FirBackingField? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     open lateinit var symbol: FirValueParameterSymbol
     open var defaultValue: FirExpression? = null
     open lateinit var containingFunctionSymbol: FirFunctionSymbol<*>
@@ -108,7 +108,7 @@ inline fun buildValueParameterCopy(original: FirValueParameter, init: FirValuePa
     contract {
         callsInPlace(init, kotlin.contracts.InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirValueParameterBuilder()
+    konst copyBuilder = FirValueParameterBuilder()
     copyBuilder.source = original.source
     copyBuilder.resolvePhase = original.resolvePhase
     copyBuilder.moduleData = original.moduleData

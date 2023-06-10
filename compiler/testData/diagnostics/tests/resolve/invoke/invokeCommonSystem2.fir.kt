@@ -6,7 +6,7 @@ interface Res<E>
 
 operator fun <F> Res<F>.invoke(f: F): F = TODO()
 
-val <X> Box<in X>.foo: Res<X> get() = TODO()
+konst <X> Box<in X>.foo: Res<X> get() = TODO()
 
 fun foo(p: Box<in Any?>) {
     p.foo("").<!UNRESOLVED_REFERENCE!>length<!>

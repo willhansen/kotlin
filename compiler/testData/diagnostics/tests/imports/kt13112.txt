@@ -32,7 +32,7 @@ package mypackage {
 
         public final data class Baz {
             public constructor Baz(/*0*/ myField: kotlin.Int)
-            public final val myField: kotlin.Int
+            public final konst myField: kotlin.Int
             public final operator /*synthesized*/ fun component1(): kotlin.Int
             public final /*synthesized*/ fun copy(/*0*/ myField: kotlin.Int = ...): mypackage.nestedpackage.Baz
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -48,7 +48,7 @@ package mypackage {
 
             public final class FooNest {
                 public constructor FooNest()
-                public final val bar: mypackage.nestedpackage.Bar
+                public final konst bar: mypackage.nestedpackage.Bar
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public final fun myFun(): kotlin.collections.List<mypackage.nestedpackage.Baz>

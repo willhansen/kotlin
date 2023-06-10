@@ -4,7 +4,7 @@ class A {
 }
 
 fun test(b: Boolean) {
-    val a: A?
+    konst a: A?
     if (b) {
         a = A()
         a.foo()

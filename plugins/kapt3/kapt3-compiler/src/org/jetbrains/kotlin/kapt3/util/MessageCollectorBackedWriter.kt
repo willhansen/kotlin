@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.cli.common.messages.MessageCollector
 import java.io.Writer
 
 class MessageCollectorBackedWriter(
-    private val messageCollector: MessageCollector,
-    private val severity: CompilerMessageSeverity
+    private konst messageCollector: MessageCollector,
+    private konst severity: CompilerMessageSeverity
 ) : Writer() {
     override fun write(buffer: CharArray, offset: Int, length: Int) {
-        val message = String(buffer, offset, length).trim().trim('\n', '\r')
+        konst message = String(buffer, offset, length).trim().trim('\n', '\r')
         if (message.isNotEmpty()) {
             messageCollector.report(severity, message)
         }

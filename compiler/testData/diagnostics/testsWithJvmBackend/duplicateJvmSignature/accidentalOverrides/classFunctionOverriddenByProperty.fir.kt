@@ -3,6 +3,6 @@ open class B {
 }
 
 class C : B() {
-    <!ACCIDENTAL_OVERRIDE!>val x: Int<!>
+    <!ACCIDENTAL_OVERRIDE!>konst x: Int<!>
         get() = 1
 }

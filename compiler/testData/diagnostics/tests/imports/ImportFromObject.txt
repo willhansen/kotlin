@@ -4,8 +4,8 @@ package a {
 
     public open class Base {
         public constructor Base()
-        public final val p: kotlin.Int = 1
-        public final val kotlin.Int.ext: kotlin.Int
+        public final konst p: kotlin.Int = 1
+        public final konst kotlin.Int.ext: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final fun f(): kotlin.Unit
         public final fun </*0*/ T> g(/*0*/ t: T): kotlin.Unit
@@ -23,9 +23,9 @@ package a {
 
     public object K : a.Base, a.BaseI<kotlin.Int> {
         private constructor K()
-        public final val own: kotlin.String = ""
-        public final override /*1*/ /*fake_override*/ val p: kotlin.Int
-        public final override /*1*/ /*fake_override*/ val kotlin.Int.ext: kotlin.Int
+        public final konst own: kotlin.String = ""
+        public final override /*1*/ /*fake_override*/ konst p: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst kotlin.Int.ext: kotlin.Int
         public open override /*2*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final override /*1*/ /*fake_override*/ fun f(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun fromI(): kotlin.Int
@@ -59,7 +59,7 @@ package a {
 
     public object S {
         private constructor S()
-        public final val prop: kotlin.String = ""
+        public final konst prop: kotlin.String = ""
         public final var kotlin.String.ext: kotlin.Int
         public final fun A(/*0*/ c: kotlin.Int): a.S.A
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

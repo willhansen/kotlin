@@ -3,7 +3,7 @@
 
 import kotlin.test.assertEquals
 
-inline class A(val x: Int)
+inline class A(konst x: Int)
 
 fun test1(x: A = A(0)) = "OK"
 

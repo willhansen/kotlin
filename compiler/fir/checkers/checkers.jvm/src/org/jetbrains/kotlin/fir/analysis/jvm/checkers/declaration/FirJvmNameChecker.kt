@@ -27,23 +27,23 @@ import org.jetbrains.kotlin.name.StandardClassIds
 object FirJvmNameChecker : FirBasicDeclarationChecker() {
 
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val jvmName = declaration.findJvmNameAnnotation() ?: return
-        val name = jvmName.findArgumentByName(StandardNames.NAME) ?: return
+        konst jvmName = declaration.findJvmNameAnnotation() ?: return
+        konst name = jvmName.findArgumentByName(StandardNames.NAME) ?: return
 
         if (name.typeRef.coneType != context.session.builtinTypes.stringType.type) {
             return
         }
 
-        val value = (name as? FirConstExpression<*>)?.value as? String ?: return
+        konst konstue = (name as? FirConstExpression<*>)?.konstue as? String ?: return
 
-        if (!Name.isValidIdentifier(value)) {
+        if (!Name.isValidIdentifier(konstue)) {
             reporter.reportOn(jvmName.source, FirJvmErrors.ILLEGAL_JVM_NAME, context)
         }
 
         if (declaration is FirFunction && !context.isRenamableFunction(declaration)) {
             reporter.reportOn(jvmName.source, FirJvmErrors.INAPPLICABLE_JVM_NAME, context)
         } else if (declaration is FirCallableDeclaration) {
-            val containingClass = declaration.getContainingClass(context.session)
+            konst containingClass = declaration.getContainingClass(context.session)
 
             if (
                 declaration.isOverride ||
@@ -62,12 +62,12 @@ object FirJvmNameChecker : FirBasicDeclarationChecker() {
     }
 
     private fun CheckerContext.isRenamableFunction(function: FirFunction): Boolean {
-        val containingClass = function.getContainingClassSymbol(session)
+        konst containingClass = function.getContainingClassSymbol(session)
         return containingClass != null || !function.symbol.callableId.isLocal
     }
 
     private fun FirRegularClass.isValueClassThatRequiresMangling(): Boolean {
-        // value classes have inline modifiers in FIR
+        // konstue classes have inline modifiers in FIR
         return isInline && name != StandardClassIds.Result.shortClassName
     }
 }

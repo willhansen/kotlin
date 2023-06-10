@@ -9,9 +9,9 @@ package
 
 public final data class Foo {
     public constructor Foo(/*0*/ @NoTarget @Param @Both p1: kotlin.Int, /*1*/ @NoTarget @Both p2: kotlin.String, /*2*/ p3: kotlin.Boolean)
-    @Prop public final val p1: kotlin.Int
-    public final val p2: kotlin.String
-    @NoTarget @Both public final val p3: kotlin.Boolean
+    @Prop public final konst p1: kotlin.Int
+    public final konst p2: kotlin.String
+    @NoTarget @Both public final konst p3: kotlin.Boolean
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): kotlin.String
     public final operator /*synthesized*/ fun component3(): kotlin.Boolean

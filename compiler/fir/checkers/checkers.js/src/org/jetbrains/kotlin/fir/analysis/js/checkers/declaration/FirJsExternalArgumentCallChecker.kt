@@ -22,12 +22,12 @@ import org.jetbrains.kotlin.name.JsStandardClassIds.Annotations.JsExternalArgume
 
 object FirJsExternalArgumentCallChecker : FirCallChecker() {
     override fun check(expression: FirCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val arguments = expression.resolvedArgumentMapping ?: return
+        konst arguments = expression.resolvedArgumentMapping ?: return
         for ((argument, parameter) in arguments) {
             if (parameter.hasAnnotation(JsExternalArgument, context.session)) {
-                val unwrappedArg = argument.unwrapArgument()
-                val type = unwrappedArg.typeRef.coneTypeOrNull ?: continue
-                val symbol = type.toRegularClassSymbol(context.session)
+                konst unwrappedArg = argument.unwrapArgument()
+                konst type = unwrappedArg.typeRef.coneTypeOrNull ?: continue
+                konst symbol = type.toRegularClassSymbol(context.session)
                 if (symbol?.isEffectivelyExternal(context.session) == false || type is ConeDynamicType) {
                     reporter.reportOn(
                         unwrappedArg.source,

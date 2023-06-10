@@ -15,10 +15,10 @@ class Obs<Y> {
 }
 
 fun box(): String {
-    val o: Obs<CharSequence> = Obs()
+    konst o: Obs<CharSequence> = Obs()
 
-    val inv = o.lift(SwOperator())
-    val signature = inv.javaClass.genericSuperclass.toString()
+    konst inv = o.lift(SwOperator())
+    konst signature = inv.javaClass.genericSuperclass.toString()
 
     if (signature != "test.Inv<java.util.List<? extends java.lang.CharSequence>>") return "fail 1: $signature"
 

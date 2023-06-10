@@ -14,11 +14,11 @@ import kotlin.test.Test
 public class CliCommonizerTest {
 
     @get:Rule
-    public val temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
+    public konst temporaryOutputDirectory: TemporaryFolder = TemporaryFolder()
 
     @Test
     public fun invokeCliWithEmptyArguments() {
-        val commonizer = CliCommonizer(this::class.java.classLoader)
+        konst commonizer = CliCommonizer(this::class.java.classLoader)
         commonizer.commonizeLibraries(
             konanHome = konanHome,
             inputLibraries = emptySet(),

@@ -2,7 +2,7 @@
 
 class Inv<T>
 
-inline class UInt(val value: Int)
+inline class UInt(konst konstue: Int)
 
 object Test {
     fun asNotNullTypeArgument(i: Inv<UInt>) {}

@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 
-inline class Test(val x: Int = 42)
+inline class Test(konst x: Int = 42)

@@ -90,13 +90,13 @@ CODE_FENCE_END=("```" | "~~~")
         return TokenType.WHITE_SPACE;
     }
 
-    /* Example: @return[x] The return value of function x
+    /* Example: @return[x] The return konstue of function x
                        ^^^
     */
     {CODE_LINK} { yybegin(TAG_TEXT_BEGINNING);
                   return KDocTokens.MARKDOWN_LINK; }
 
-    /* Example: @param aaa The value of aaa
+    /* Example: @param aaa The konstue of aaa
                        ^^^
     */
     {QUALIFIED_NAME} {
@@ -118,7 +118,7 @@ CODE_FENCE_END=("```" | "~~~")
         return TokenType.WHITE_SPACE;
     }
 
-    /* Example: @return[x] The return value of function x
+    /* Example: @return[x] The return konstue of function x
                        ^^^
     */
     {CODE_LINK} { yybegin(CONTENTS);

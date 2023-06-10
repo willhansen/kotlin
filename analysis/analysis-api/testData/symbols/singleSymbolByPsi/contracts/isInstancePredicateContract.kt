@@ -7,11 +7,11 @@ import kotlin.contracts.contract
 class Foo
 
 @OptIn(ExperimentalContracts::class)
-fun isInstancePredicateContract(value: Any) {
+fun isInstancePredicateContract(konstue: Any) {
     contr<caret>act {
-        returns() implies (value is Foo)
+        returns() implies (konstue is Foo)
     }
-    if (value !is Foo) {
+    if (konstue !is Foo) {
         throw IllegalStateException()
     }
 }

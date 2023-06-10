@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature
 
 class ClosureGenerationStrategy(
         state: GenerationState,
-        val declaration: KtDeclarationWithBody
+        konst declaration: KtDeclarationWithBody
 ) : FunctionGenerationStrategy.FunctionDefault(state, declaration) {
 
     override fun doGenerateBody(codegen: ExpressionCodegen, signature: JvmMethodSignature) {
         initializeVariablesForDestructuredLambdaParameters(
-            codegen, codegen.context.functionDescriptor.valueParameters, codegen.context.methodEndLabel)
+            codegen, codegen.context.functionDescriptor.konstueParameters, codegen.context.methodEndLabel)
         if (declaration is KtFunctionLiteral) {
             recordCallLabelForLambdaArgument(declaration, state.bindingTrace)
         }

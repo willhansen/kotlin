@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.test.services.TestService
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
-class KaptOptionsProvider(private val testServices: TestServices) : TestService {
-    private val cache: MutableMap<TestModule, KaptOptions> = mutableMapOf()
+class KaptOptionsProvider(private konst testServices: TestServices) : TestService {
+    private konst cache: MutableMap<TestModule, KaptOptions> = mutableMapOf()
 
     fun registerKaptOptions(module: TestModule, builder: KaptOptions.Builder.() -> Unit) {
         if (module in cache) {
             testServices.assertions.fail { "KaptOptions for module $module already registered" }
         }
-        val options = KaptOptions.Builder().apply(builder).build()
+        konst options = KaptOptions.Builder().apply(builder).build()
         cache[module] = options
     }
 
@@ -27,4 +27,4 @@ class KaptOptionsProvider(private val testServices: TestServices) : TestService 
     }
 }
 
-val TestServices.kaptOptionsProvider: KaptOptionsProvider by TestServices.testServiceAccessor()
+konst TestServices.kaptOptionsProvider: KaptOptionsProvider by TestServices.testServiceAccessor()

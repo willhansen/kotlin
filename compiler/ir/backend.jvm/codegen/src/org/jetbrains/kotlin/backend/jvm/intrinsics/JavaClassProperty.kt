@@ -26,26 +26,26 @@ import org.jetbrains.kotlin.resolve.jvm.AsmTypes
 import org.jetbrains.org.objectweb.asm.Type
 
 object JavaClassProperty : IntrinsicMethod() {
-    private fun invokeGetClass(value: PromisedValue) {
-        value.mv.invokevirtual("java/lang/Object", "getClass", "()Ljava/lang/Class;", false)
+    private fun invokeGetClass(konstue: PromisedValue) {
+        konstue.mv.invokevirtual("java/lang/Object", "getClass", "()Ljava/lang/Class;", false)
     }
 
-    fun invokeWith(value: PromisedValue, wrapPrimitives: Boolean) =
+    fun invokeWith(konstue: PromisedValue, wrapPrimitives: Boolean) =
         when {
-            value.type == Type.VOID_TYPE ->
-                invokeGetClass(value.materializedAt(AsmTypes.UNIT_TYPE, value.codegen.context.irBuiltIns.unitType))
-            value.irType.classOrNull?.owner?.isSingleFieldValueClass == true ->
-                invokeGetClass(value.materializedAtBoxed(value.irType))
-            isPrimitive(value.type) -> {
-                value.discard()
+            konstue.type == Type.VOID_TYPE ->
+                invokeGetClass(konstue.materializedAt(AsmTypes.UNIT_TYPE, konstue.codegen.context.irBuiltIns.unitType))
+            konstue.irType.classOrNull?.owner?.isSingleFieldValueClass == true ->
+                invokeGetClass(konstue.materializedAtBoxed(konstue.irType))
+            isPrimitive(konstue.type) -> {
+                konstue.discard()
                 if (wrapPrimitives) {
-                    value.mv.aconst(boxType(value.type))
+                    konstue.mv.aconst(boxType(konstue.type))
                 } else {
-                    value.mv.getstatic(boxType(value.type).internalName, "TYPE", "Ljava/lang/Class;")
+                    konstue.mv.getstatic(boxType(konstue.type).internalName, "TYPE", "Ljava/lang/Class;")
                 }
             }
             else ->
-                invokeGetClass(value.materialized())
+                invokeGetClass(konstue.materialized())
         }
 
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue {

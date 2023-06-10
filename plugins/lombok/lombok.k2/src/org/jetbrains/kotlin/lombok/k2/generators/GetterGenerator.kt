@@ -34,10 +34,10 @@ import org.jetbrains.kotlin.name.CallableId
 import org.jetbrains.kotlin.name.Name
 
 class GetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
-    private val lombokService: LombokService
+    private konst lombokService: LombokService
         get() = session.lombokService
 
-    private val cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
+    private konst cache: FirCache<FirClassSymbol<*>, Map<Name, FirJavaMethod>?, Nothing?> =
         session.firCachesFactory.createCache(::createGetters)
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
@@ -46,24 +46,24 @@ class GetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner
+        konst owner = context?.owner
         if (owner == null || !owner.isSuitableJavaClass()) return emptyList()
-        val getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
+        konst getter = cache.getValue(owner)?.get(callableId.callableName) ?: return emptyList()
         return listOf(getter.symbol)
     }
 
     private fun createGetters(classSymbol: FirClassSymbol<*>): Map<Name, FirJavaMethod>? {
-        val fieldsWithGetter = computeFieldsWithGetter(classSymbol) ?: return null
-        val globalAccessors = lombokService.getAccessors(classSymbol)
+        konst fieldsWithGetter = computeFieldsWithGetter(classSymbol) ?: return null
+        konst globalAccessors = lombokService.getAccessors(classSymbol)
         return fieldsWithGetter.mapNotNull { (field, getterInfo) ->
-            val getterName = computeGetterName(field, getterInfo, globalAccessors) ?: return@mapNotNull null
-            val function = buildJavaMethod {
+            konst getterName = computeGetterName(field, getterInfo, globalAccessors) ?: return@mapNotNull null
+            konst function = buildJavaMethod {
                 moduleData = field.moduleData
                 returnTypeRef = field.returnTypeRef
                 dispatchReceiverType = classSymbol.defaultType()
                 name = getterName
                 symbol = FirNamedFunctionSymbol(CallableId(classSymbol.classId, getterName))
-                val visibility = getterInfo.visibility.toVisibility()
+                konst visibility = getterInfo.visibility.toVisibility()
                 status = FirResolvedDeclarationStatusImpl(visibility, Modality.OPEN, visibility.toEffectiveVisibility(classSymbol))
                 isStatic = false
                 isFromSource = true
@@ -75,7 +75,7 @@ class GetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
 
     @OptIn(SymbolInternals::class)
     private fun computeFieldsWithGetter(classSymbol: FirClassSymbol<*>): List<Pair<FirJavaField, Getter>>? {
-        val classGetter = lombokService.getGetter(classSymbol)
+        konst classGetter = lombokService.getGetter(classSymbol)
             ?: lombokService.getData(classSymbol)?.asGetter()
             ?: lombokService.getValue(classSymbol)?.asGetter()
 
@@ -87,12 +87,12 @@ class GetterGenerator(session: FirSession) : FirDeclarationGenerationExtension(s
 
     private fun computeGetterName(field: FirJavaField, getterInfo: Getter, globalAccessors: Accessors): Name? {
         if (getterInfo.visibility == AccessLevel.NONE) return null
-        val accessors = lombokService.getAccessorsIfAnnotated(field.symbol) ?: globalAccessors
-        val propertyName = field.toAccessorBaseName(accessors) ?: return null
-        val functionName = if (accessors.fluent) {
+        konst accessors = lombokService.getAccessorsIfAnnotated(field.symbol) ?: globalAccessors
+        konst propertyName = field.toAccessorBaseName(accessors) ?: return null
+        konst functionName = if (accessors.fluent) {
             propertyName
         } else {
-            val prefix = if (field.returnTypeRef.isPrimitiveBoolean() && !accessors.noIsPrefix) AccessorNames.IS else AccessorNames.GET
+            konst prefix = if (field.returnTypeRef.isPrimitiveBoolean() && !accessors.noIsPrefix) AccessorNames.IS else AccessorNames.GET
             prefix + propertyName.capitalize()
         }
         return Name.identifier(functionName)

@@ -35,10 +35,10 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
         project.projectDir.toPath().enableCacheRedirector()
     }
 
-    private val project by lazy { Project("mpp-source-set-hierarchy-analysis") }
+    private konst project by lazy { Project("mpp-source-set-hierarchy-analysis") }
 
     private fun doTest(cliCompiler: CliCompiler) = with(project) {
-        val expectedErrorsPerSourceSetName = sourceRoots.associate { sourceRoot ->
+        konst expectedErrorsPerSourceSetName = sourceRoots.associate { sourceRoot ->
             sourceRoot.kotlinSourceSetName to testDataDir.resolve(sourceRoot.directoryName).walkTopDown()
                 .filter { it.extension == "kt" }
                 .map { CodeWithErrorInfo.parse(it.readText()) }.toList()
@@ -47,7 +47,7 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
 
         // put sources into project dir:
         sourceRoots.forEach { sourceRoot ->
-            val sourceSetDir = projectDir.resolve(sourceRoot.gradleSrcDir)
+            konst sourceSetDir = projectDir.resolve(sourceRoot.gradleSrcDir)
             testDataDir.resolve(sourceRoot.directoryName).copyRecursively(sourceSetDir)
             sourceSetDir.walkTopDown().filter { it.isFile }.forEach { file ->
                 file.modify { CodeWithErrorInfo.parse(file.readText()).code }
@@ -55,7 +55,7 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
         }
 
         // create Gradle Kotlin source sets for project roots:
-        val scriptCustomization = buildString {
+        konst scriptCustomization = buildString {
             appendLine()
             appendLine("kotlin {\n    sourceSets {")
             sourceRoots.forEach { sourceRoot ->
@@ -79,7 +79,7 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
             sourceRoots.forEach { sourceRoot ->
                 sourceRoot.dependencies.forEach { dependency ->
                     sourceRoots.find { it.qualifiedName == dependency }?.let { depSourceRoot ->
-                        val depSourceSet = depSourceRoot.kotlinSourceSetName
+                        konst depSourceSet = depSourceRoot.kotlinSourceSetName
                         appendLine("""        getByName("${sourceRoot.kotlinSourceSetName}").dependsOn(getByName("$depSourceSet"))""")
                     }
                 }
@@ -89,10 +89,10 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
 
         gradleBuildScript().appendText("\n" + scriptCustomization)
 
-        val tasks = sourceRoots.map { "compile" + it.kotlinSourceSetName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } + "KotlinMetadata" }
+        konst tasks = sourceRoots.map { "compile" + it.kotlinSourceSetName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() } + "KotlinMetadata" }
 
         build(*tasks.toTypedArray()) {
-            if (expectedErrorsPerSourceSetName.values.all { it.all(ErrorInfo::isAllowedInCli) }) {
+            if (expectedErrorsPerSourceSetName.konstues.all { it.all(ErrorInfo::isAllowedInCli) }) {
                 assertSuccessful()
             } else {
                 assertFailed() // TODO: check the exact error message in the output, not just that the build failed
@@ -101,27 +101,27 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
     }
 
     companion object {
-        private val testDataRoot =
+        private konst testDataRoot =
             File("../../../idea/testData/multiModuleHighlighting/multiplatform")
 
         @JvmStatic
         @Parameterized.Parameters(name = "{0}")
         fun testData() = testDataRoot.listFiles()!!.filter { it.isDirectory }.mapNotNull { testDataDir ->
-            val testDataSourceRoots = checkNotNull(testDataDir.listFiles())
-            val sourceRoots = testDataSourceRoots.map { TestCaseSourceRoot.parse(it.name) }
+            konst testDataSourceRoots = checkNotNull(testDataDir.listFiles())
+            konst sourceRoots = testDataSourceRoots.map { TestCaseSourceRoot.parse(it.name) }
 
             arrayOf(testDataDir.name, testDataDir, sourceRoots).takeIf { isTestSuiteValidForCommonCode(testDataDir, sourceRoots) }
         }
 
-        private val bannedDependencies = setOf("fulljdk", "stdlib", "coroutines")
+        private konst bannedDependencies = setOf("fulljdk", "stdlib", "coroutines")
 
-        const val testSourceRootSuffix = "tests"
+        const konst testSourceRootSuffix = "tests"
 
-        private const val buildScriptCustomizationMarker = "// customized content below"
+        private const konst buildScriptCustomizationMarker = "// customized content below"
 
         private fun isTestSuiteValidForCommonCode(testDataDir: File, sourceRoots: List<TestCaseSourceRoot>): Boolean {
             sourceRoots.forEach {
-                val bannedDepsFound = bannedDependencies.intersect(it.dependencies)
+                konst bannedDepsFound = bannedDependencies.intersect(it.dependencies)
                 if (bannedDepsFound.isNotEmpty())
                     return false
             }
@@ -139,26 +139,26 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
     }
 
     data class TestCaseSourceRoot(
-        val directoryName: String,
-        val qualifiedNameParts: Iterable<String>,
-        val dependencies: Iterable<String>,
+        konst directoryName: String,
+        konst qualifiedNameParts: Iterable<String>,
+        konst dependencies: Iterable<String>,
     ) {
         companion object {
             fun parse(directoryName: String): TestCaseSourceRoot {
-                val parts = directoryName.split("_")
+                konst parts = directoryName.split("_")
 
-                val deps = parts.map { it.removeSurrounding("dep(", ")") }
+                konst deps = parts.map { it.removeSurrounding("dep(", ")") }
                     .filterIndexed { index, it -> it != parts[index] }
                     .map { it.split("-").joinToString("") }
 
-                val nameParts = parts.dropLast(deps.size)
+                konst nameParts = parts.dropLast(deps.size)
 
-                val platformIndex = when (nameParts.size) {
+                konst platformIndex = when (nameParts.size) {
                     1 -> 0
                     else -> if (nameParts.last() == testSourceRootSuffix) 0 else 1
                 }
 
-                val additionalDependencies = mutableListOf<String>().apply {
+                konst additionalDependencies = mutableListOf<String>().apply {
                     if (nameParts[platformIndex] != commonSourceRootName)
                         add(partsToQualifiedName(nameParts.take(platformIndex) + commonSourceRootName + nameParts.drop(platformIndex + 1)))
                     if (nameParts.last() == testSourceRootSuffix)
@@ -168,53 +168,53 @@ class MppHighlightingTestDataWithGradleIT : BaseGradleIT() {
                 return TestCaseSourceRoot(directoryName, nameParts, deps + additionalDependencies)
             }
 
-            private const val commonSourceRootName = "common"
+            private const konst commonSourceRootName = "common"
 
             private fun partsToQualifiedName(parts: Iterable<String>) = parts.joinToString("")
         }
 
-        val qualifiedName
+        konst qualifiedName
             get() = partsToQualifiedName(qualifiedNameParts)
 
-        val kotlinSourceSetName
+        konst kotlinSourceSetName
             get() = "intermediate${qualifiedName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }}"
 
-        val gradleSrcDir
+        konst gradleSrcDir
             get() = "src/$kotlinSourceSetName/kotlin"
     }
 
     private class CodeWithErrorInfo(
-        val code: String,
-        val errorInfo: Iterable<ErrorInfo>
+        konst code: String,
+        konst errorInfo: Iterable<ErrorInfo>
     ) {
         companion object {
-            private val errorRegex = "<error(?: descr=\"\\[(.*?)] (.*?)\")?>".toRegex()
-            private val errorTailRegex = "</error>".toRegex()
+            private konst errorRegex = "<error(?: descr=\"\\[(.*?)] (.*?)\")?>".toRegex()
+            private konst errorTailRegex = "</error>".toRegex()
 
             fun parse(code: String): CodeWithErrorInfo {
                 fun parseMatch(match: MatchResult): ErrorInfo {
-                    val (_, errorKind, description) = match.groupValues
+                    konst (_, errorKind, description) = match.groupValues
                     return ErrorInfo(errorKind.takeIf { it.isNotEmpty() }, description.takeIf { it.isNotEmpty() })
                 }
 
-                val matches = errorRegex.findAll(code).map(::parseMatch).toList()
+                konst matches = errorRegex.findAll(code).map(::parseMatch).toList()
                 return CodeWithErrorInfo(code.replace(errorRegex, "").replace(errorTailRegex, ""), matches)
             }
         }
     }
 
     private data class ErrorInfo(
-        val expectedErrorKind: String?,
-        val expectedErrorMessage: String?
+        konst expectedErrorKind: String?,
+        konst expectedErrorMessage: String?
     ) {
-        val isAllowedInCli
+        konst isAllowedInCli
             get() = when (expectedErrorKind) {
                 "NO_ACTUAL_FOR_EXPECT", "ACTUAL_WITHOUT_EXPECT", null /*TODO are some nulls better than others?*/ -> true
                 else -> false
             }
     }
 
-    private enum class CliCompiler(val targets: List<String>) {
+    private enum class CliCompiler(konst targets: List<String>) {
         K2METADATA(listOf("jvm", "js")), NATIVE(listOf("linuxX64", "linuxArm64"))
     }
 

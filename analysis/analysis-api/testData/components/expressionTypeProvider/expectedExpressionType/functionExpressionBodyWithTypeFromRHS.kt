@@ -1,4 +1,4 @@
-val av = "foo"
+konst av = "foo"
 
 fun foo() = a<caret>v
 

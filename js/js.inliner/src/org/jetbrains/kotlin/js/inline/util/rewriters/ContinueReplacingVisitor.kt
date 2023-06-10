@@ -18,14 +18,14 @@ package org.jetbrains.kotlin.js.inline.util.rewriters
 
 import org.jetbrains.kotlin.js.backend.ast.*
 
-class ContinueReplacingVisitor(val loopLabelName: JsName?, val guardLabelName: JsName) : JsVisitorWithContextImpl() {
+class ContinueReplacingVisitor(konst loopLabelName: JsName?, konst guardLabelName: JsName) : JsVisitorWithContextImpl() {
     var loopNestingLevel = 0
 
     override fun visit(x: JsFunction, ctx: JsContext<JsNode>) = false
 
     override fun visit(x: JsContinue, ctx: JsContext<JsNode>): Boolean {
-        val target = x.label?.name
-        val shouldReplace = if (target == null) loopNestingLevel == 0 else target == loopLabelName
+        konst target = x.label?.name
+        konst shouldReplace = if (target == null) loopNestingLevel == 0 else target == loopLabelName
         assert(loopNestingLevel >= 0)
         if (shouldReplace) {
             ctx.replaceMe(JsBreak(guardLabelName.makeRef()))

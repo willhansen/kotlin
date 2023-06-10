@@ -1,8 +1,8 @@
 // FILE: 1.kt
 fun foo(x: Any?, y: Any?) = null
 
-inline fun test(value: Any?): String? {
-    return foo(null, if (value != null) value else return null)
+inline fun test(konstue: Any?): String? {
+    return foo(null, if (konstue != null) konstue else return null)
 }
 
 // FILE: 2.kt

@@ -12,6 +12,6 @@ fun main() {
     Runtime.getRuntime().traceInstructions(true)
 
     // The new overload for toArray that was added in JDK 11 (https://bugs.openjdk.org/browse/JDK-8060192)
-    val array: Array<String> = listOf("").toArray { arrayOf("other") }
+    konst array: Array<String> = listOf("").toArray { arrayOf("other") }
 }
 

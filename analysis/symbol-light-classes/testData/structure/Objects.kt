@@ -22,9 +22,9 @@ object ObjectWithClassAndJavaInterface : NonBaseClass(), Runnable {
     override fun run() {}
 }
 
-val a = object : BaseClass() {}
-val b = object : NonBaseClass() {}
-val c = object : BaseInterface {}
-val d = object : NonBaseInterface {}
-val e: NonBaseInterface = object : BaseClass(), NonBaseInterface, AnotherInterface {}
-val f: AnotherInterface = object : BaseInterface, AnotherInterface {}
+konst a = object : BaseClass() {}
+konst b = object : NonBaseClass() {}
+konst c = object : BaseInterface {}
+konst d = object : NonBaseInterface {}
+konst e: NonBaseInterface = object : BaseClass(), NonBaseInterface, AnotherInterface {}
+konst f: AnotherInterface = object : BaseInterface, AnotherInterface {}

@@ -12,17 +12,17 @@ import kotlin.reflect.KClass
 
 abstract class FirExpressionResolutionExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("ExpressionResolutionExtension")
+        konst NAME = FirExtensionPointName("ExpressionResolutionExtension")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirExpressionResolutionExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirExpressionResolutionExtension::class
 
     abstract fun addNewImplicitReceivers(functionCall: FirFunctionCall): List<ConeKotlinType>
 
     fun interface Factory : FirExtension.Factory<FirExpressionResolutionExtension>
 }
 
-val FirExtensionService.expressionResolutionExtensions: List<FirExpressionResolutionExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.expressionResolutionExtensions: List<FirExpressionResolutionExtension> by FirExtensionService.registeredExtensions()

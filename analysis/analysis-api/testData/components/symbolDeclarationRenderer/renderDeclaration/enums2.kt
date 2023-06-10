@@ -4,7 +4,7 @@ object O1 : Some
 
 object O2 : Some
 
-enum class SomeEnum(val x: Some) {
+enum class SomeEnum(konst x: Some) {
     FIRST(O1) {
         override fun check(y: Some): Boolean = true
     },

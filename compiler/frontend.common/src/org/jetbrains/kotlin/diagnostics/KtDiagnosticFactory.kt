@@ -17,12 +17,12 @@ import kotlin.reflect.KClass
 annotation class InternalDiagnosticFactoryMethod
 
 sealed class AbstractKtDiagnosticFactory(
-    val name: String,
-    val severity: Severity,
-    val defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
-    val psiType: KClass<*>
+    konst name: String,
+    konst severity: Severity,
+    konst defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
+    konst psiType: KClass<*>
 ) {
-    abstract val ktRenderer: KtDiagnosticRenderer
+    abstract konst ktRenderer: KtDiagnosticRenderer
 
     override fun toString(): String {
         return name
@@ -35,7 +35,7 @@ class KtDiagnosticFactory0(
     defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
     psiType: KClass<*>
 ) : AbstractKtDiagnosticFactory(name, severity, defaultPositioningStrategy, psiType) {
-    override val ktRenderer: KtDiagnosticRenderer = SimpleKtDiagnosticRenderer("")
+    override konst ktRenderer: KtDiagnosticRenderer = SimpleKtDiagnosticRenderer("")
 
     @InternalDiagnosticFactoryMethod
     fun on(
@@ -58,7 +58,7 @@ class KtDiagnosticFactory1<A>(
     defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
     psiType: KClass<*>
 ) : AbstractKtDiagnosticFactory(name, severity, defaultPositioningStrategy, psiType) {
-    override val ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters1Renderer(
+    override konst ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters1Renderer(
         "{0}",
         KtDiagnosticRenderers.TO_STRING
     )
@@ -93,7 +93,7 @@ class KtDiagnosticFactory2<A, B>(
     defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
     psiType: KClass<*>
 ) : AbstractKtDiagnosticFactory(name, severity, defaultPositioningStrategy, psiType) {
-    override val ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters2Renderer(
+    override konst ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters2Renderer(
         "{0}, {1}",
         KtDiagnosticRenderers.TO_STRING,
         KtDiagnosticRenderers.TO_STRING
@@ -131,7 +131,7 @@ class KtDiagnosticFactory3<A, B, C>(
     defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
     psiType: KClass<*>
 ) : AbstractKtDiagnosticFactory(name, severity, defaultPositioningStrategy, psiType) {
-    override val ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters3Renderer(
+    override konst ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters3Renderer(
         "{0}, {1}, {2}",
         KtDiagnosticRenderers.TO_STRING,
         KtDiagnosticRenderers.TO_STRING,
@@ -172,7 +172,7 @@ class KtDiagnosticFactory4<A, B, C, D>(
     defaultPositioningStrategy: AbstractSourceElementPositioningStrategy,
     psiType: KClass<*>
 ) : AbstractKtDiagnosticFactory(name, severity, defaultPositioningStrategy, psiType) {
-    override val ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters4Renderer(
+    override konst ktRenderer: KtDiagnosticRenderer = KtDiagnosticWithParameters4Renderer(
         "{0}, {1}, {2}, {3}",
         KtDiagnosticRenderers.TO_STRING,
         KtDiagnosticRenderers.TO_STRING,
@@ -213,9 +213,9 @@ class KtDiagnosticFactory4<A, B, C, D>(
 // ------------------------------ factories for deprecation ------------------------------
 
 sealed class KtDiagnosticFactoryForDeprecation<F : AbstractKtDiagnosticFactory>(
-    val deprecatingFeature: LanguageFeature,
-    val warningFactory: F,
-    val errorFactory: F
+    konst deprecatingFeature: LanguageFeature,
+    konst warningFactory: F,
+    konst errorFactory: F
 )
 
 class KtDiagnosticFactoryForDeprecation0(

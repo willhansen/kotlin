@@ -17,8 +17,8 @@ abstract class IrFileWriter {
     protected abstract fun writeData(dataOutput: DataOutput)
 
     fun writeIntoFile(path: String) {
-        val fileStream = FileOutputStream(path)
-        val dataOutputStream = DataOutputStream(fileStream)
+        konst fileStream = FileOutputStream(path)
+        konst dataOutputStream = DataOutputStream(fileStream)
 
         writeData(dataOutputStream)
 
@@ -32,8 +32,8 @@ abstract class IrMemoryWriter {
     protected abstract fun writeData(dataOutput: DataOutput)
 
     fun writeIntoMemory(): ByteArray {
-        val memoryStream = ByteArrayOutputStream()
-        val dataOutputStream = DataOutputStream(memoryStream)
+        konst memoryStream = ByteArrayOutputStream()
+        konst dataOutputStream = DataOutputStream(memoryStream)
 
         writeData(dataOutputStream)
 
@@ -45,7 +45,7 @@ abstract class IrMemoryWriter {
 }
 
 
-class IrArrayWriter(private val data: List<ByteArray>) : IrFileWriter() {
+class IrArrayWriter(private konst data: List<ByteArray>) : IrFileWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -54,7 +54,7 @@ class IrArrayWriter(private val data: List<ByteArray>) : IrFileWriter() {
     }
 }
 
-class IrMemoryArrayWriter(private val data: List<ByteArray>) : IrMemoryWriter() {
+class IrMemoryArrayWriter(private konst data: List<ByteArray>) : IrMemoryWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -63,18 +63,18 @@ class IrMemoryArrayWriter(private val data: List<ByteArray>) : IrMemoryWriter() 
     }
 }
 
-class IrMemoryStringWriter(private val data: List<String>) : IrMemoryWriter() {
+class IrMemoryStringWriter(private konst data: List<String>) : IrMemoryWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
-        val transformedData = data.map(WobblyTF8::encode)
+        konst transformedData = data.map(WobblyTF8::encode)
 
         transformedData.forEach { dataOutput.writeInt(it.size) }
         transformedData.forEach { dataOutput.write(it) }
     }
 }
 
-class IrMemoryIntArrayWriter(private val data: List<Int>) : IrMemoryWriter() {
+class IrMemoryIntArrayWriter(private konst data: List<Int>) : IrMemoryWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -82,7 +82,7 @@ class IrMemoryIntArrayWriter(private val data: List<Int>) : IrMemoryWriter() {
     }
 }
 
-class IrMemoryLongArrayWriter(private val data: List<Long>) : IrMemoryWriter() {
+class IrMemoryLongArrayWriter(private konst data: List<Long>) : IrMemoryWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -90,7 +90,7 @@ class IrMemoryLongArrayWriter(private val data: List<Long>) : IrMemoryWriter() {
     }
 }
 
-class IrByteArrayWriter(private val data: List<ByteArray>) : IrFileWriter() {
+class IrByteArrayWriter(private konst data: List<ByteArray>) : IrFileWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -99,7 +99,7 @@ class IrByteArrayWriter(private val data: List<ByteArray>) : IrFileWriter() {
     }
 }
 
-class IrTableWriter(private val data: List<Pair<Long, ByteArray>>) : IrFileWriter() {
+class IrTableWriter(private konst data: List<Pair<Long, ByteArray>>) : IrFileWriter() {
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(data.size)
 
@@ -116,10 +116,10 @@ class IrTableWriter(private val data: List<Pair<Long, ByteArray>>) : IrFileWrite
     }
 }
 
-class IrDeclarationWriter(private val declarations: List<SerializedDeclaration>) : IrFileWriter() {
+class IrDeclarationWriter(private konst declarations: List<SerializedDeclaration>) : IrFileWriter() {
 
-    private val SINGLE_INDEX_RECORD_SIZE = 3 * Int.SIZE_BYTES
-    private val INDEX_HEADER_SIZE = Int.SIZE_BYTES
+    private konst SINGLE_INDEX_RECORD_SIZE = 3 * Int.SIZE_BYTES
+    private konst INDEX_HEADER_SIZE = Int.SIZE_BYTES
 
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(declarations.size)
@@ -140,10 +140,10 @@ class IrDeclarationWriter(private val declarations: List<SerializedDeclaration>)
 
 }
 
-class IrMemoryDeclarationWriter(private val declarations: List<SerializedDeclaration>) : IrMemoryWriter() {
+class IrMemoryDeclarationWriter(private konst declarations: List<SerializedDeclaration>) : IrMemoryWriter() {
 
-    private val SINGLE_INDEX_RECORD_SIZE = 3 * Int.SIZE_BYTES
-    private val INDEX_HEADER_SIZE = Int.SIZE_BYTES
+    private konst SINGLE_INDEX_RECORD_SIZE = 3 * Int.SIZE_BYTES
+    private konst INDEX_HEADER_SIZE = Int.SIZE_BYTES
 
     override fun writeData(dataOutput: DataOutput) {
         dataOutput.writeInt(declarations.size)

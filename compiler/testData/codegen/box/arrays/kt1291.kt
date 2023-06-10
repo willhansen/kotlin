@@ -10,7 +10,7 @@ fun <In, Out> Iterator<In>.select(f: (In) -> Out) : Iterator<Out> {
     return Selector(this, f);
 }
 
-class Selector<In, Out>(val source: Iterator<In>, val f: (In) -> Out) : Iterator<Out> {
+class Selector<In, Out>(konst source: Iterator<In>, konst f: (In) -> Out) : Iterator<Out> {
     override fun hasNext(): Boolean = source.hasNext()
 
     override fun next(): Out {

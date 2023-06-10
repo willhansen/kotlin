@@ -17,8 +17,8 @@ class A {
 }
 
 fun box(): String {
-    val method = A::class.java.getDeclaredMethod("a", B::class.java)
-    val genericParameterTypes = method.getGenericParameterTypes()
+    konst method = A::class.java.getDeclaredMethod("a", B::class.java)
+    konst genericParameterTypes = method.getGenericParameterTypes()
 
     if (genericParameterTypes.size != 1) return "Wrong number of generic parameters"
 

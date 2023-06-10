@@ -18,7 +18,7 @@ expect class C(e: E = E.O) {
 // FILE: platform.kt
 
 actual class C actual constructor(e: E) {
-    val result = e.name
+    konst result = e.name
 
     actual enum class E {
         O, K

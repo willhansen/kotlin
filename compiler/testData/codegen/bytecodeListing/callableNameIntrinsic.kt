@@ -1,13 +1,13 @@
 class A {
-    val a = ""
+    konst a = ""
     fun b() = ""
 
     fun test() {
-        val a = A::a.name
-        val b = A::b.name
-        val c = ::A.name
+        konst a = A::a.name
+        konst b = A::b.name
+        konst c = ::A.name
 
-        val d = this::a.name
-        val e = A()::b.name
+        konst d = this::a.name
+        konst e = A()::b.name
     }
 }

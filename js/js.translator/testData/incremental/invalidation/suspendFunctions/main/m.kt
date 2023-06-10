@@ -1,6 +1,6 @@
 suspend fun suspendBox(): Int {
-    val x = fooX()
-    val y = fooY()
+    konst x = fooX()
+    konst y = fooY()
     return x + y
 }
 

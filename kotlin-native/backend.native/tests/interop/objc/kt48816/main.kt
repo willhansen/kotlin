@@ -17,13 +17,13 @@ class B
 // The compilation should fail with the above;
 // but anyway try to actually use the code, just to ensure it doesn't get DCEd:
 
-val B.uuid: NSUUID get() = fail()
-val B.date: NSDate get() = fail()
+konst B.uuid: NSUUID get() = fail()
+konst B.date: NSDate get() = fail()
 
 fun test1() {
-    val uuidProperty = B::uuid
-    val dateProperty = B::date
-    val usage = Usage()
+    konst uuidProperty = B::uuid
+    konst dateProperty = B::date
+    konst usage = Usage()
     with(usage) {
         assertNull(uuidProperty.getValue(usage, uuidProperty))
         assertNull(dateProperty.getValue(usage, dateProperty))
@@ -40,7 +40,7 @@ open class Base2 {
 class Usage2 : Base2()
 
 fun test2() {
-    val usage = Usage2()
+    konst usage = Usage2()
     assertNull(usage.getValue(Property<MyClass1>()))
     assertNull(usage.getValue(Property<MyClass2>()))
 }

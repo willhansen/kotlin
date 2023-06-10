@@ -22,9 +22,9 @@ internal fun getCacheDirectory(
     resolvedConfiguration: LazyResolvedConfiguration,
     partialLinkageMode: String
 ): File {
-    val moduleCacheDirectory = File(rootCacheDirectory, dependency.selected.moduleVersion?.name ?: "undefined")
-    val versionCacheDirectory = File(moduleCacheDirectory, dependency.selected.moduleVersion?.version ?: "undefined")
-    val uniqueName = artifact
+    konst moduleCacheDirectory = File(rootCacheDirectory, dependency.selected.moduleVersion?.name ?: "undefined")
+    konst versionCacheDirectory = File(moduleCacheDirectory, dependency.selected.moduleVersion?.version ?: "undefined")
+    konst uniqueName = artifact
         ?.let {
             if (libraryFilter(it))
                 it.file
@@ -36,9 +36,9 @@ internal fun getCacheDirectory(
         }
         ?.uniqueName
 
-    val cacheDirectory = if (uniqueName != null) {
-        val digest = MessageDigest.getInstance("SHA-256")
-        val hash = digest.digest(uniqueName.toByteArray(StandardCharsets.UTF_8)).toHexString()
+    konst cacheDirectory = if (uniqueName != null) {
+        konst digest = MessageDigest.getInstance("SHA-256")
+        konst hash = digest.digest(uniqueName.toByteArray(StandardCharsets.UTF_8)).toHexString()
         versionCacheDirectory.resolve(hash)
     } else versionCacheDirectory
 
@@ -52,7 +52,7 @@ private fun computeDependenciesHash(
     resolvedConfiguration: LazyResolvedConfiguration,
     partialLinkageMode: String
 ): String {
-    val hashedValue = buildString {
+    konst hashedValue = buildString {
         if (PartialLinkageMode.resolveMode(partialLinkageMode)?.isEnabled == true)
             append("#__PL__#")
 
@@ -64,8 +64,8 @@ private fun computeDependenciesHash(
             .joinTo(this, separator = "|")
     }
 
-    val digest = MessageDigest.getInstance("SHA-256")
-    val hash = digest.digest(hashedValue.toByteArray(StandardCharsets.UTF_8))
+    konst digest = MessageDigest.getInstance("SHA-256")
+    konst hash = digest.digest(hashedValue.toByteArray(StandardCharsets.UTF_8))
     return hash.toHexString()
 }
 
@@ -80,7 +80,7 @@ internal fun getDependenciesCacheDirectories(
         .flatMap { childDependency ->
             resolvedConfiguration.getArtifacts(childDependency).map {
                 if (libraryFilter(it)) {
-                    val cacheDirectory = getCacheDirectory(
+                    konst cacheDirectory = getCacheDirectory(
                         rootCacheDirectory = rootCacheDirectory,
                         dependency = childDependency,
                         artifact = if (considerArtifact) it else null,
@@ -99,7 +99,7 @@ internal fun getDependenciesCacheDirectories(
 }
 
 internal fun getAllDependencies(dependency: ResolvedDependencyResult): Set<ResolvedDependencyResult> {
-    val allDependencies = mutableSetOf<ResolvedDependencyResult>()
+    konst allDependencies = mutableSetOf<ResolvedDependencyResult>()
 
     fun traverseAllDependencies(dependency: ResolvedDependencyResult) {
         if (dependency in allDependencies)
@@ -112,7 +112,7 @@ internal fun getAllDependencies(dependency: ResolvedDependencyResult): Set<Resol
     return allDependencies
 }
 
-internal class GradleLoggerAdapter(private val gradleLogger: Logger) : org.jetbrains.kotlin.util.Logger {
+internal class GradleLoggerAdapter(private konst gradleLogger: Logger) : org.jetbrains.kotlin.util.Logger {
     override fun log(message: String) = gradleLogger.info(message)
     override fun warning(message: String) = gradleLogger.warn(message)
     override fun error(message: String) = kotlin.error(message)

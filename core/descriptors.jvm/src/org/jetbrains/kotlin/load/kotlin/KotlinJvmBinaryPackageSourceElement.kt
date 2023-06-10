@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.load.java.lazy.descriptors.LazyJavaPackageFragment
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedMemberDescriptor
 
 class KotlinJvmBinaryPackageSourceElement(
-    private val packageFragment: LazyJavaPackageFragment
+    private konst packageFragment: LazyJavaPackageFragment
 ) : SourceElement {
     override fun toString() = "$packageFragment: ${packageFragment.binaryClasses.keys}"
 
     override fun getContainingFile(): SourceFile = SourceFile.NO_SOURCE_FILE
 
     fun getRepresentativeBinaryClass(): KotlinJvmBinaryClass {
-        return packageFragment.binaryClasses.values.first()
+        return packageFragment.binaryClasses.konstues.first()
     }
 
     fun getContainingBinaryClass(descriptor: DeserializedMemberDescriptor): KotlinJvmBinaryClass? {
-        val name = descriptor.getImplClassNameForDeserialized() ?: return null
+        konst name = descriptor.getImplClassNameForDeserialized() ?: return null
         return packageFragment.binaryClasses[name.internalName]
     }
 }

@@ -1,4 +1,4 @@
 package test
 
-val x = 0
-val y = x
+konst x = 0
+konst y = x

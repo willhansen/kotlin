@@ -5,24 +5,24 @@
 
 package org.jetbrains.kotlin.ir
 
-const val UNDEFINED_OFFSET: Int = -1
-const val UNDEFINED_LINE_NUMBER: Int = UNDEFINED_OFFSET
-const val UNDEFINED_COLUMN_NUMBER: Int = UNDEFINED_OFFSET
+const konst UNDEFINED_OFFSET: Int = -1
+const konst UNDEFINED_LINE_NUMBER: Int = UNDEFINED_OFFSET
+const konst UNDEFINED_COLUMN_NUMBER: Int = UNDEFINED_OFFSET
 
 data class SourceRangeInfo(
-    val filePath: String,
-    val startOffset: Int,
-    val startLineNumber: Int,
-    val startColumnNumber: Int,
-    val endOffset: Int,
-    val endLineNumber: Int,
-    val endColumnNumber: Int
+    konst filePath: String,
+    konst startOffset: Int,
+    konst startLineNumber: Int,
+    konst startColumnNumber: Int,
+    konst endOffset: Int,
+    konst endLineNumber: Int,
+    konst endColumnNumber: Int
 )
 
 interface IrFileEntry {
-    val name: String
-    val maxOffset: Int
-    val supportsDebugInfo: Boolean get() = true
+    konst name: String
+    konst maxOffset: Int
+    konst supportsDebugInfo: Boolean get() = true
     fun getSourceRangeInfo(beginOffset: Int, endOffset: Int): SourceRangeInfo
     fun getLineNumber(offset: Int): Int
     fun getColumnNumber(offset: Int): Int

@@ -3,9 +3,9 @@
 
 import kotlin.reflect.KProperty
 
-class UsefulClass(val param: Int = 2) {
+class UsefulClass(konst param: Int = 2) {
     operator fun getValue(instance: Any, property: KProperty<*>) : Int = 1
-    operator fun setValue(instance: Any, property: KProperty<*>, value: Int) {}
+    operator fun setValue(instance: Any, property: KProperty<*>, konstue: Int) {}
 
     @Deprecated("message")
     fun member() {}
@@ -20,11 +20,11 @@ class Invocable {
 }
 
 object InvocableHolder {
-    val invocable = Invocable()
+    konst invocable = Invocable()
 }
 
 fun invoker() {
-    val invocable = Invocable()
+    konst invocable = Invocable()
     <!DEPRECATION!>invocable<!>()
     InvocableHolder.<!DEPRECATION!>invocable<!>()
 }
@@ -40,13 +40,13 @@ fun reflection() = ::<!DEPRECATION!>Obsolete<!>
 fun reflection2() = UsefulClass::<!DEPRECATION!>member<!>
 
 class Initializer {
-    val x = <!DEPRECATION!>Obsolete<!>()
+    konst x = <!DEPRECATION!>Obsolete<!>()
 }
 
 @Deprecated("does nothing good")
 fun Any.doNothing() = this.toString()  // "this" should not be marked as deprecated despite it referes to deprecated function
 
 class Delegation {
-    val x by <!DEPRECATION!>Obsolete<!>()
+    konst x by <!DEPRECATION!>Obsolete<!>()
     var y by <!DEPRECATION!>Obsolete<!>()
 }

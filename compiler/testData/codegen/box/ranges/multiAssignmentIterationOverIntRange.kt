@@ -9,8 +9,8 @@ operator fun Int.component2(): Int {
 }
 
 fun box(): String {
-    val strings = arrayListOf<String>()
-    val squares = arrayListOf<Int>()
+    konst strings = arrayListOf<String>()
+    konst squares = arrayListOf<Int>()
 
     for ((str, sq) in 1..3) {
         strings.add(str)

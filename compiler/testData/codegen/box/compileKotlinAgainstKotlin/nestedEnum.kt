@@ -13,7 +13,7 @@ class A {
 // FILE: B.kt
 
 fun box(): String {
-    val str = aaa.A.E.A
+    konst str = aaa.A.E.A
     if (str.toString() != "A") {
         return "Fail $str"
     }

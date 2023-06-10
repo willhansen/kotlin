@@ -18,14 +18,14 @@ class B(var a: Int) {
     var rem = false
     var remAssign = false
 
-    operator fun rem(value: Int): B {
+    operator fun rem(konstue: Int): B {
         rem = true
-        return B(a % value)
+        return B(a % konstue)
     }
 
 }
 
 fun box() {
-    val b = B(1)
+    konst b = B(1)
     b %= 1 //error
 }

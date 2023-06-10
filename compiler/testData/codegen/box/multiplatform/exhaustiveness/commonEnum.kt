@@ -9,7 +9,7 @@ enum class Base {
 }
 
 fun testCommon(base: Base) {
-    val x = when (base) { // must be Ok
+    konst x = when (base) { // must be Ok
         Base.A -> 1
         Base.B -> 2
     }
@@ -19,7 +19,7 @@ fun testCommon(base: Base) {
 // FILE: main.kt
 
 fun testPlatform(base: Base) {
-    val x = when (base) { // must be OK
+    konst x = when (base) { // must be OK
         Base.A -> 1
         Base.B -> 2
     }

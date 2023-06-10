@@ -13,75 +13,75 @@ import org.jetbrains.kotlin.tooling.core.emptyExtras
 import java.io.Serializable
 
 sealed interface IdeaKpmPlatform : Serializable {
-    val extras: Extras
+    konst extras: Extras
 }
 
 sealed interface IdeaKpmJvmPlatform : IdeaKpmPlatform {
-    val jvmTarget: String
+    konst jvmTarget: String
 }
 
 sealed interface IdeaKpmNativePlatform : IdeaKpmPlatform {
-    val konanTarget: String
+    konst konanTarget: String
 }
 
 sealed interface IdeaKpmJsPlatform : IdeaKpmPlatform {
-    val isIr: Boolean
+    konst isIr: Boolean
 }
 
 sealed interface IdeaKpmWasmPlatform : IdeaKpmPlatform
 
 sealed interface IdeaKpmUnknownPlatform : IdeaKpmPlatform
 
-val IdeaKpmPlatform.isWasm get() = this is IdeaKpmWasmPlatform
-val IdeaKpmPlatform.isNative get() = this is IdeaKpmNativePlatform
-val IdeaKpmPlatform.isJvm get() = this is IdeaKpmJvmPlatform
-val IdeaKpmPlatform.isJs get() = this is IdeaKpmJsPlatform
-val IdeaKpmPlatform.isUnknown get() = this is IdeaKpmUnknownPlatform
+konst IdeaKpmPlatform.isWasm get() = this is IdeaKpmWasmPlatform
+konst IdeaKpmPlatform.isNative get() = this is IdeaKpmNativePlatform
+konst IdeaKpmPlatform.isJvm get() = this is IdeaKpmJvmPlatform
+konst IdeaKpmPlatform.isJs get() = this is IdeaKpmJsPlatform
+konst IdeaKpmPlatform.isUnknown get() = this is IdeaKpmUnknownPlatform
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmJvmPlatformImpl(
-    override val jvmTarget: String,
-    override val extras: Extras = emptyExtras()
+    override konst jvmTarget: String,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmJvmPlatform {
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmNativePlatformImpl(
-    override val konanTarget: String,
-    override val extras: Extras = emptyExtras()
+    override konst konanTarget: String,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmNativePlatform {
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmJsPlatformImpl(
-    override val isIr: Boolean,
-    override val extras: Extras = emptyExtras()
+    override konst isIr: Boolean,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmJsPlatform {
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmWasmPlatformImpl(
-    override val extras: Extras = emptyExtras()
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmWasmPlatform {
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmUnknownPlatformImpl(
-    override val extras: Extras = emptyExtras()
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmUnknownPlatform {
     internal companion object {
-        const val serialVersionUID = 0L
+        const konst serialVersionUID = 0L
     }
 }

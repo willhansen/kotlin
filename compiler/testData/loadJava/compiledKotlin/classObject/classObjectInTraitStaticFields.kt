@@ -5,12 +5,12 @@ interface Test {
 
     companion object {
 
-        public val prop1 : Int = { 10 }()
+        public konst prop1 : Int = { 10 }()
 
         public var  prop2 : Int = { 11 }()
             protected set
 
-        public val prop3: Int = { 12 }()
+        public konst prop3: Int = { 12 }()
             get() {
                 return field
             }
@@ -28,6 +28,6 @@ interface Test {
                 field++
             }
 
-        public const val constProp8: Int = 80
+        public const konst constProp8: Int = 80
     }
 }

@@ -1,5 +1,5 @@
 class A<T : Any?> {
-  private /* final field */ val contextReceiverField0: T
+  private /* final field */ konst contextReceiverField0: T
   constructor($context_receiver_0: T) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0
@@ -10,7 +10,7 @@ class A<T : Any?> {
 }
 
 class B<P : Any?> {
-  private /* final field */ val contextReceiverField0: Collection<P>
+  private /* final field */ konst contextReceiverField0: Collection<P>
   constructor($context_receiver_0: Collection<P>) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0

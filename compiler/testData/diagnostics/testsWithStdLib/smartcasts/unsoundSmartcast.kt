@@ -28,7 +28,7 @@ operator fun MutableList<Int>.set(i1: Int, i2: Int, el: Int) = 10
 fun test4() {
     var x: MutableList<Int>? = mutableListOf(1)
     x!!
-    val y = <!DEBUG_INFO_SMARTCAST!>x<!>[if (true) { x = null; 0 } else 0, <!DEBUG_INFO_SMARTCAST!>x<!>[0]]
+    konst y = <!DEBUG_INFO_SMARTCAST!>x<!>[if (true) { x = null; 0 } else 0, <!DEBUG_INFO_SMARTCAST!>x<!>[0]]
 }
 
 operator fun Int.invoke(y: Int, z: Int) {}

@@ -84,7 +84,7 @@ abstract class AnnotationResolver {
 
     abstract fun getAnnotationArgumentValue(
         trace: BindingTrace,
-        valueParameter: ValueParameterDescriptor,
+        konstueParameter: ValueParameterDescriptor,
         resolvedArgument: ResolvedValueArgument
     ): ConstantValue<*>?
 }

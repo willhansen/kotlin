@@ -22,9 +22,9 @@ internal fun Project.includeCommonizedCInteropMetadata(
 }
 
 internal suspend fun Project.includeCommonizedCInteropMetadata(metadataKlib: Zip, compilation: KotlinSharedNativeCompilation) {
-    val commonizerTask = commonizeCInteropTask?.get() ?: return
-    val commonizerDependencyToken = CInteropCommonizerDependent.from(compilation) ?: return
-    val outputDirectory = commonizerTask.commonizedOutputDirectory(commonizerDependencyToken) ?: return
+    konst commonizerTask = commonizeCInteropTask?.get() ?: return
+    konst commonizerDependencyToken = CInteropCommonizerDependent.from(compilation) ?: return
+    konst outputDirectory = commonizerTask.commonizedOutputDirectory(commonizerDependencyToken) ?: return
 
     metadataKlib.from(outputDirectory) { spec ->
         spec.into(cinteropMetadataDirectoryPath(compilation.defaultSourceSetName))

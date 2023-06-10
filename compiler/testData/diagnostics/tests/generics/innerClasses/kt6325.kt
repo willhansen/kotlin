@@ -12,7 +12,7 @@ class Outer<T> {
 }
 
 fun test0() {
-    val inner: Outer<Int>.Inner<String> = Outer<Int>().Inner<String>()
+    konst inner: Outer<Int>.Inner<String> = Outer<Int>().Inner<String>()
     Outer<Int>().Inner<String>().foo(1, "") // type mismatch on second argument
 }
 

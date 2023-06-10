@@ -4,7 +4,7 @@ fun interface A {
     private fun privateFun() {}
     private var privateProperty: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 
     companion object {
         fun s(a: A) {

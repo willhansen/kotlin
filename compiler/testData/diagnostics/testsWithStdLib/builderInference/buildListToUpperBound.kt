@@ -4,7 +4,7 @@
 
 fun box(): String {
     <!INFERRED_INTO_DECLARED_UPPER_BOUNDS!>buildList<!> {
-        val foo = { first() }
+        konst foo = { first() }
         add(0, foo)
     }
     return "OK"

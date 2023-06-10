@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.module
 
 abstract class PackageFragmentDescriptorImpl(
         module: ModuleDescriptor,
-        final override val fqName: FqName
+        final override konst fqName: FqName
 ) : DeclarationDescriptorNonRootImpl(module, Annotations.EMPTY, fqName.shortNameOrSpecial(), SourceElement.NO_SOURCE),
         PackageFragmentDescriptor {
     // Not inlined in order to not capture ref on 'module'
-    private val debugString: String = "package $fqName of $module"
+    private konst debugString: String = "package $fqName of $module"
 
     override fun <R, D> accept(visitor: DeclarationDescriptorVisitor<R, D>, data: D): R =
             visitor.visitPackageFragmentDescriptor(this, data)

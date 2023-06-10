@@ -19,22 +19,22 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 import org.jetbrains.kotlin.ir.util.ReferenceSymbolTable
 
 class IrSymbolDeserializer(
-    val symbolTable: ReferenceSymbolTable,
-    val libraryFile: IrLibraryFile,
-    val fileSymbol: IrFileSymbol,
-    val actuals: List<Actual>,
-    val enqueueLocalTopLevelDeclaration: (IdSignature) -> Unit,
-    val handleExpectActualMapping: (IdSignature, IrSymbol) -> IrSymbol,
+    konst symbolTable: ReferenceSymbolTable,
+    konst libraryFile: IrLibraryFile,
+    konst fileSymbol: IrFileSymbol,
+    konst actuals: List<Actual>,
+    konst enqueueLocalTopLevelDeclaration: (IdSignature) -> Unit,
+    konst handleExpectActualMapping: (IdSignature, IrSymbol) -> IrSymbol,
     internationService: IrInterningService,
-    val symbolProcessor: IrSymbolDeserializer.(IrSymbol, IdSignature) -> IrSymbol = { s, _ -> s },
+    konst symbolProcessor: IrSymbolDeserializer.(IrSymbol, IdSignature) -> IrSymbol = { s, _ -> s },
     fileSignature: IdSignature.FileSignature = IdSignature.FileSignature(fileSymbol),
-    val deserializePublicSymbol: (IdSignature, BinarySymbolData.SymbolKind) -> IrSymbol
+    konst deserializePublicSymbol: (IdSignature, BinarySymbolData.SymbolKind) -> IrSymbol
 ) {
-    val deserializedSymbols: MutableMap<IdSignature, IrSymbol> = hashMapOf()
+    konst deserializedSymbols: MutableMap<IdSignature, IrSymbol> = hashMapOf()
 
     fun deserializeIrSymbol(idSig: IdSignature, symbolKind: BinarySymbolData.SymbolKind): IrSymbol {
         return deserializedSymbols.getOrPut(idSig) {
-            val symbol = referenceDeserializedSymbol(symbolKind, idSig)
+            konst symbol = referenceDeserializedSymbol(symbolKind, idSig)
 
             handleExpectActualMapping(idSig, symbol)
         }
@@ -68,24 +68,24 @@ class IrSymbolDeserializer(
     }
 
     fun deserializeIrSymbolToDeclare(code: Long): Pair<IrSymbol, IdSignature> {
-        val symbolData = parseSymbolData(code)
-        val signature = deserializeIdSignature(symbolData.signatureId)
+        konst symbolData = parseSymbolData(code)
+        konst signature = deserializeIdSignature(symbolData.signatureId)
         return Pair(deserializeIrSymbolData(signature, symbolData.kind), signature)
     }
 
     fun parseSymbolData(code: Long): BinarySymbolData = BinarySymbolData.decode(code)
 
-    private val symbolCache = HashMap<Long, IrSymbol>()
+    private konst symbolCache = HashMap<Long, IrSymbol>()
 
     fun deserializeIrSymbol(code: Long): IrSymbol {
         return symbolCache.getOrPut(code) {
-            val symbolData = parseSymbolData(code)
-            val signature = deserializeIdSignature(symbolData.signatureId)
+            konst symbolData = parseSymbolData(code)
+            konst signature = deserializeIdSignature(symbolData.signatureId)
             deserializeIrSymbolData(signature, symbolData.kind)
         }
     }
 
-    val signatureDeserializer = IdSignatureDeserializer(libraryFile, fileSignature, internationService)
+    konst signatureDeserializer = IdSignatureDeserializer(libraryFile, fileSignature, internationService)
 
     fun deserializeIdSignature(index: Int): IdSignature {
         return signatureDeserializer.deserializeIdSignature(index)

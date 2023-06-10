@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_PARAMETER -UNUSED_VARIABLE -NOTHING_TO_INLINE
 
-inline val z: Int
+inline konst z: Int
     get()  {
 
     <!NOT_YET_SUPPORTED_IN_INLINE!>class<!> A {

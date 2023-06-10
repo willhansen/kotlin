@@ -11,15 +11,15 @@ import kotlin.reflect.KType
 
 internal fun SmartPrinter.printTypeWithShortNames(type: KType, shouldRenderFqName: (KType) -> Boolean = { false }) {
     fun typeConversion(type: KType): String {
-        val nullableSuffix = if (type.isMarkedNullable) "?" else ""
-        val simpleName = if (shouldRenderFqName(type)) {
+        konst nullableSuffix = if (type.isMarkedNullable) "?" else ""
+        konst simpleName = if (shouldRenderFqName(type)) {
             type.qualifiedName
         } else {
             type.simpleName
         }
         return if (type.arguments.isEmpty()) simpleName + nullableSuffix
         else simpleName + type.arguments.joinToString(separator = ", ", prefix = "<", postfix = ">") {
-            when (val typeArgument = it.type) {
+            when (konst typeArgument = it.type) {
                 null -> "*"
                 else -> typeConversion(typeArgument)
             } + nullableSuffix
@@ -28,8 +28,8 @@ internal fun SmartPrinter.printTypeWithShortNames(type: KType, shouldRenderFqNam
     print(typeConversion(type))
 }
 
-val KType.simpleName: String
+konst KType.simpleName: String
     get() = (classifier as KClass<*>).simpleName!!
 
-val KType.qualifiedName: String
+konst KType.qualifiedName: String
     get() = (classifier as KClass<*>).qualifiedName!!

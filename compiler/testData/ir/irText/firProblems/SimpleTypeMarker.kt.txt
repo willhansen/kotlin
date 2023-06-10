@@ -17,7 +17,7 @@ class SimpleType : SimpleTypeMarker {
 
 interface User {
   fun SimpleTypeMarker.bar(): String {
-    require(value = <this> is SimpleType)
+    require(konstue = <this> is SimpleType)
     return <this> /*as SimpleType */.foo()
   }
 
@@ -31,7 +31,7 @@ class UserImpl {
   }
 
   fun SimpleTypeMarker.bar(): String {
-    require(value = <this> is SimpleType)
+    require(konstue = <this> is SimpleType)
     return <this> /*as SimpleType */.foo()
   }
 

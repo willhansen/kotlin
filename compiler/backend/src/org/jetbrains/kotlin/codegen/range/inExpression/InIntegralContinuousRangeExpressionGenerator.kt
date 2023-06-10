@@ -31,12 +31,12 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class InIntegralContinuousRangeExpressionGenerator(
     operatorReference: KtSimpleNameExpression,
-    private val rangeContainsTypeInfo: RangeContainsTypeInfo,
-    private val boundedValue: BoundedValue,
-    private val comparisonGenerator: ComparisonGenerator,
-    private val frameMap: FrameMap
+    private konst rangeContainsTypeInfo: RangeContainsTypeInfo,
+    private konst boundedValue: BoundedValue,
+    private konst comparisonGenerator: ComparisonGenerator,
+    private konst frameMap: FrameMap
 ) : InExpressionGenerator {
-    private val isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
+    private konst isNotIn = operatorReference.getReferencedNameElementType() == KtTokens.NOT_IN
 
     override fun generate(argument: StackValue): BranchedValue =
         gen(argument).let { if (isNotIn) Invert(it) else it }
@@ -55,8 +55,8 @@ class InIntegralContinuousRangeExpressionGenerator(
             private fun genJumpIfTrue(v: InstructionAdapter, jumpLabel: Label) {
                 // if (arg is in range) goto jumpLabel
                 frameMap.useTmpVar(operandType) { arg1Var ->
-                    val exitLabel1 = Label()
-                    val exitLabel2 = Label()
+                    konst exitLabel1 = Label()
+                    konst exitLabel2 = Label()
 
                     boundedValue.putHighLow(v, operandType)
 
@@ -97,7 +97,7 @@ class InIntegralContinuousRangeExpressionGenerator(
                 // if (arg is NOT in range) goto jumpLabel
 
                 frameMap.useTmpVar(operandType) { arg1Var ->
-                    val cmpHighLabel = Label()
+                    konst cmpHighLabel = Label()
 
                     boundedValue.putHighLow(v, operandType)
 
@@ -135,10 +135,10 @@ class InIntegralContinuousRangeExpressionGenerator(
             }
 
             private fun putCoercedArgumentOnStack(v: InstructionAdapter) {
-                val argumentKotlinType = rangeContainsTypeInfo.valueParameterType
-                val rangeElementKotlinType = rangeContainsTypeInfo.rangeElementType
+                konst argumentKotlinType = rangeContainsTypeInfo.konstueParameterType
+                konst rangeElementKotlinType = rangeContainsTypeInfo.rangeElementType
 
-                val coercedValue = when {
+                konst coercedValue = when {
                     KotlinBuiltIns.isUInt(rangeElementKotlinType) ->
                         coerceUnsignedToUInt(arg1, argumentKotlinType, rangeElementKotlinType)
                     KotlinBuiltIns.isULong(rangeElementKotlinType) ->

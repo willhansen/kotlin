@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.types.Variance
 fun Element.toPoet() = ClassName(packageName, typeName)
 fun Element.toPoetSelfParameterized() = toPoet().parameterizedByIfAny(poetTypeVariables)
 fun Element.toPoetStarParameterized() = toPoet().parameterizedByIfAny(List(params.size) { STAR })
-val Element.poetTypeVariables get() = params.map { TypeVariableName(it.name) }
+konst Element.poetTypeVariables get() = params.map { TypeVariableName(it.name) }
 
 fun TypeRef.toPoet(): TypeName {
     return when (this) {
@@ -39,11 +39,11 @@ private fun ParametrizedTypeRef<*, *>.typeArgsToPoet(): List<TypeName> {
     }
 
     fun fromPositional(args: Map<PositionTypeParameterRef, TypeRef>): List<TypeName> {
-        val num = args.keys.maxOfOrNull { it.index }!!
+        konst num = args.keys.maxOfOrNull { it.index }!!
         return (0..num).map { i -> args[PositionTypeParameterRef(i)]?.toPoet() ?: STAR }
     }
 
-    val positional = args.keys.filterIsInstance<PositionTypeParameterRef>()
+    konst positional = args.keys.filterIsInstance<PositionTypeParameterRef>()
     if (positional.size == args.size) {
         @Suppress("UNCHECKED_CAST")
         return fromPositional(args as Map<PositionTypeParameterRef, TypeRef>)
@@ -51,8 +51,8 @@ private fun ParametrizedTypeRef<*, *>.typeArgsToPoet(): List<TypeName> {
         check(positional.isEmpty()) { "Can't yet handle mixed index-name args" }
         this as ElementRef // Named args must only be used with generated elements (for now)
 
-        val args = args.entries
-            .associate { p -> PositionTypeParameterRef(element.params.withIndex().single { it.value.name == p.key.name }.index) to p.value }
+        konst args = args.entries
+            .associate { p -> PositionTypeParameterRef(element.params.withIndex().single { it.konstue.name == p.key.name }.index) to p.konstue }
         return fromPositional(args)
     }
 }
@@ -65,7 +65,7 @@ fun TypeVariable.toPoet() = TypeVariableName(
     }
 )
 
-val ClassOrElementRef.typeKind: TypeKind
+konst ClassOrElementRef.typeKind: TypeKind
     get() = when (this) {
         is ElementRef -> element.kind!!.typeKind
         is ClassRef<*> -> kind

@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.test.model.ResultingArtifact
 import org.jetbrains.kotlin.test.model.TestFile
 
 data class ClassicFrontendOutputArtifact(
-    val allKtFiles: Map<TestFile, KtFile>,
-    val analysisResult: AnalysisResult,
-    val project: Project,
-    val languageVersionSettings: LanguageVersionSettings
+    konst allKtFiles: Map<TestFile, KtFile>,
+    konst analysisResult: AnalysisResult,
+    konst project: Project,
+    konst languageVersionSettings: LanguageVersionSettings
 ) : ResultingArtifact.FrontendOutput<ClassicFrontendOutputArtifact>() {
-    override val kind: FrontendKinds.ClassicFrontend
+    override konst kind: FrontendKinds.ClassicFrontend
         get() = FrontendKinds.ClassicFrontend
 
-    val ktFiles: Map<TestFile, KtFile> = allKtFiles.filterKeys { !it.isAdditional }
+    konst ktFiles: Map<TestFile, KtFile> = allKtFiles.filterKeys { !it.isAdditional }
 }

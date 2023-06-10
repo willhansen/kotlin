@@ -2,17 +2,17 @@
 
 interface A {
     fun foo(): Any
-    val x: Any
+    konst x: Any
 }
 
 interface B {
     fun foo(): Any
-    val x: Any
+    konst x: Any
 }
 
 interface C : A, B
 
 interface D : C {
     override fun foo(): Any
-    override val x: Any
+    override konst x: Any
 }

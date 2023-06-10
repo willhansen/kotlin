@@ -3,7 +3,7 @@ package foo
 
 object A {
     object B {
-        val lambda = { "OK" }
+        konst lambda = { "OK" }
     }
 }
 

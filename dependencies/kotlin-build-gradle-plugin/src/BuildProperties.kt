@@ -11,16 +11,16 @@ import java.io.File
 import java.util.*
 
 interface PropertiesProvider {
-    val rootProjectDir: File
+    konst rootProjectDir: File
     fun getProperty(key: String): Any?
     fun getSystemProperty(key: String): String?
 }
 
 class KotlinBuildProperties(
-    private val propertiesProvider: PropertiesProvider
+    private konst propertiesProvider: PropertiesProvider
 ) {
-    private val localProperties: Properties = Properties()
-    private val rootProperties: Properties = Properties()
+    private konst localProperties: Properties = Properties()
+    private konst rootProperties: Properties = Properties()
 
     init {
         loadPropertyFile("local.properties", localProperties)
@@ -28,7 +28,7 @@ class KotlinBuildProperties(
     }
 
     private fun loadPropertyFile(fileName: String, propertiesDestination: Properties) {
-        val propertiesFile = propertiesProvider.rootProjectDir.resolve(fileName)
+        konst propertiesFile = propertiesProvider.rootProjectDir.resolve(fileName)
         if (propertiesFile.isFile) {
             propertiesFile.reader().use(propertiesDestination::load)
         }
@@ -38,77 +38,77 @@ class KotlinBuildProperties(
         localProperties.getProperty(key) ?: propertiesProvider.getProperty(key) ?: rootProperties.getProperty(key)
 
     fun getBoolean(key: String, default: Boolean = false): Boolean {
-        val value = this.getOrNull(key)?.toString() ?: return default
-        if (value.isEmpty()) return true // has property without value means 'true'
-        return value.trim().toBoolean()
+        konst konstue = this.getOrNull(key)?.toString() ?: return default
+        if (konstue.isEmpty()) return true // has property without konstue means 'true'
+        return konstue.trim().toBoolean()
     }
 
-    val isJpsBuildEnabled: Boolean = getBoolean("jpsBuild")
+    konst isJpsBuildEnabled: Boolean = getBoolean("jpsBuild")
 
-    val isInIdeaSync: Boolean = propertiesProvider.getSystemProperty("idea.sync.active")?.toBoolean() == true
+    konst isInIdeaSync: Boolean = propertiesProvider.getSystemProperty("idea.sync.active")?.toBoolean() == true
 
-    val isInJpsBuildIdeaSync: Boolean
+    konst isInJpsBuildIdeaSync: Boolean
         get() = isJpsBuildEnabled && isInIdeaSync
 
-    val isTeamcityBuild: Boolean = getBoolean("teamcity") || System.getenv("TEAMCITY_VERSION") != null
+    konst isTeamcityBuild: Boolean = getBoolean("teamcity") || System.getenv("TEAMCITY_VERSION") != null
 
-    val buildCacheUrl: String? = getOrNull("kotlin.build.cache.url") as String?
+    konst buildCacheUrl: String? = getOrNull("kotlin.build.cache.url") as String?
 
-    val pushToBuildCache: Boolean = getBoolean("kotlin.build.cache.push", false)
+    konst pushToBuildCache: Boolean = getBoolean("kotlin.build.cache.push", false)
 
-    val localBuildCacheEnabled: Boolean = getBoolean("kotlin.build.cache.local.enabled", !isTeamcityBuild)
+    konst localBuildCacheEnabled: Boolean = getBoolean("kotlin.build.cache.local.enabled", !isTeamcityBuild)
 
-    val localBuildCacheDirectory: String? = getOrNull("kotlin.build.cache.local.directory") as String?
+    konst localBuildCacheDirectory: String? = getOrNull("kotlin.build.cache.local.directory") as String?
 
-    val buildScanServer: String? = getOrNull("kotlin.build.scan.url") as String?
+    konst buildScanServer: String? = getOrNull("kotlin.build.scan.url") as String?
 
-    val buildCacheUser: String? = getOrNull("kotlin.build.cache.user") as String?
+    konst buildCacheUser: String? = getOrNull("kotlin.build.cache.user") as String?
 
-    val buildCachePassword: String? = getOrNull("kotlin.build.cache.password") as String?
+    konst buildCachePassword: String? = getOrNull("kotlin.build.cache.password") as String?
 
-    val buildGradlePluginVersion: String? = getOrNull("kotlin.build.gradlePlugin.version") as String?
+    konst buildGradlePluginVersion: String? = getOrNull("kotlin.build.gradlePlugin.version") as String?
 
-    val kotlinBootstrapVersion: String? = getOrNull("bootstrap.kotlin.default.version") as String?
+    konst kotlinBootstrapVersion: String? = getOrNull("bootstrap.kotlin.default.version") as String?
 
-    val defaultSnapshotVersion: String? = getOrNull("defaultSnapshotVersion") as String?
+    konst defaultSnapshotVersion: String? = getOrNull("defaultSnapshotVersion") as String?
 
-    val customBootstrapVersion: String? = getOrNull("bootstrap.kotlin.version") as String?
+    konst customBootstrapVersion: String? = getOrNull("bootstrap.kotlin.version") as String?
 
-    val customBootstrapRepo: String? = getOrNull("bootstrap.kotlin.repo") as String?
+    konst customBootstrapRepo: String? = getOrNull("bootstrap.kotlin.repo") as String?
 
-    val localBootstrap: Boolean = getBoolean("bootstrap.local")
+    konst localBootstrap: Boolean = getBoolean("bootstrap.local")
 
-    val localBootstrapVersion: String? = getOrNull("bootstrap.local.version") as String?
+    konst localBootstrapVersion: String? = getOrNull("bootstrap.local.version") as String?
 
-    val localBootstrapPath: String? = getOrNull("bootstrap.local.path") as String?
+    konst localBootstrapPath: String? = getOrNull("bootstrap.local.path") as String?
 
-    val useFir: Boolean = getBoolean("kotlin.build.useFir")
+    konst useFir: Boolean = getBoolean("kotlin.build.useFir")
 
-    val useFirForLibraries: Boolean = getBoolean("kotlin.build.useFirForLibraries")
+    konst useFirForLibraries: Boolean = getBoolean("kotlin.build.useFirForLibraries")
 
-    val useFirIdeaPlugin: Boolean = getBoolean("idea.fir.plugin")
+    konst useFirIdeaPlugin: Boolean = getBoolean("idea.fir.plugin")
 
-    val teamCityBootstrapVersion: String? = getOrNull("bootstrap.teamcity.kotlin.version") as String?
+    konst teamCityBootstrapVersion: String? = getOrNull("bootstrap.teamcity.kotlin.version") as String?
 
-    val teamCityBootstrapBuildNumber: String? = getOrNull("bootstrap.teamcity.build.number") as String?
+    konst teamCityBootstrapBuildNumber: String? = getOrNull("bootstrap.teamcity.build.number") as String?
 
-    val teamCityBootstrapProject: String? = getOrNull("bootstrap.teamcity.project") as String?
+    konst teamCityBootstrapProject: String? = getOrNull("bootstrap.teamcity.project") as String?
 
-    val teamCityBootstrapUrl: String? = getOrNull("bootstrap.teamcity.url") as String?
+    konst teamCityBootstrapUrl: String? = getOrNull("bootstrap.teamcity.url") as String?
 
-    val rootProjectDir: File = propertiesProvider.rootProjectDir
+    konst rootProjectDir: File = propertiesProvider.rootProjectDir
 
-    val isKotlinNativeEnabled: Boolean = getBoolean("kotlin.native.enabled")
+    konst isKotlinNativeEnabled: Boolean = getBoolean("kotlin.native.enabled")
 
-    val renderDiagnosticNames: Boolean = getBoolean("kotlin.build.render.diagnostic.names")
+    konst renderDiagnosticNames: Boolean = getBoolean("kotlin.build.render.diagnostic.names")
 
-    val isCacheRedirectorEnabled: Boolean = getBoolean("cacheRedirectorEnabled")
+    konst isCacheRedirectorEnabled: Boolean = getBoolean("cacheRedirectorEnabled")
 }
 
-private const val extensionName = "kotlinBuildProperties"
+private const konst extensionName = "kotlinBuildProperties"
 
-class ProjectProperties(val project: Project) : PropertiesProvider {
-    override val rootProjectDir: File
+class ProjectProperties(konst project: Project) : PropertiesProvider {
+    override konst rootProjectDir: File
         get() = project.rootProject.projectDir.let { if (it.name == "buildSrc") it.parentFile else it }
 
     override fun getProperty(key: String): Any? = project.findProperty(key)
@@ -116,18 +116,18 @@ class ProjectProperties(val project: Project) : PropertiesProvider {
     override fun getSystemProperty(key: String) = project.providers.systemProperty(key).forUseAtConfigurationTime().orNull
 }
 
-val Project.kotlinBuildProperties: KotlinBuildProperties
+konst Project.kotlinBuildProperties: KotlinBuildProperties
     get() = rootProject.extensions.findByName(extensionName) as KotlinBuildProperties?
         ?: KotlinBuildProperties(ProjectProperties(rootProject)).also {
             rootProject.extensions.add(extensionName, it)
         }
 
-class SettingsProperties(val settings: Settings) : PropertiesProvider {
-    override val rootProjectDir: File
+class SettingsProperties(konst settings: Settings) : PropertiesProvider {
+    override konst rootProjectDir: File
         get() = settings.rootDir.let { if (it.name == "buildSrc") it.parentFile else it }
 
     override fun getProperty(key: String): Any? {
-        val obj = (settings as DynamicObjectAware).asDynamicObject
+        konst obj = (settings as DynamicObjectAware).asDynamicObject
         return if (obj.hasProperty(key)) obj.getProperty(key) else null
     }
 
@@ -136,7 +136,7 @@ class SettingsProperties(val settings: Settings) : PropertiesProvider {
 
 fun getKotlinBuildPropertiesForSettings(settings: Any) = (settings as Settings).kotlinBuildProperties
 
-val Settings.kotlinBuildProperties: KotlinBuildProperties
+konst Settings.kotlinBuildProperties: KotlinBuildProperties
     get() = extensions.findByName(extensionName) as KotlinBuildProperties?
         ?: KotlinBuildProperties(SettingsProperties(this)).also {
             extensions.add(extensionName, it)

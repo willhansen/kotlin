@@ -19,4 +19,4 @@ package javax.persistence
 annotation class Entity
 
 @Entity
-class NoArgClass(val a: String)
+class NoArgClass(konst a: String)

@@ -32,7 +32,7 @@ KtFile: PackageNewLineRecovery.kt
               REFERENCE_EXPRESSION
                 PsiElement(IDENTIFIER)('test')
     PsiWhiteSpace(' ')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')

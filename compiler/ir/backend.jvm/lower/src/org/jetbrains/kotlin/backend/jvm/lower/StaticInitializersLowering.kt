@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.ir.util.patchDeclarationParents
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.name.Name
 
-class StaticInitializersLowering(override val context: JvmBackendContext) : InitializersLoweringBase(context), ClassLoweringPass {
+class StaticInitializersLowering(override konst context: JvmBackendContext) : InitializersLoweringBase(context), ClassLoweringPass {
     override fun lower(irClass: IrClass) {
-        val staticInitializerStatements = extractInitializers(irClass) {
+        konst staticInitializerStatements = extractInitializers(irClass) {
             // JVM implementations are required to generate initializers for all static fields with ConstantValue,
             // so don't add any to <clinit>.
             (it is IrField && it.isStatic && it.constantValue() == null) || (it is IrAnonymousInitializer && it.isStatic)
@@ -54,6 +54,6 @@ class StaticInitializersLowering(override val context: JvmBackendContext) : Init
     }
 
     companion object {
-        val clinitName = Name.special("<clinit>")
+        konst clinitName = Name.special("<clinit>")
     }
 }

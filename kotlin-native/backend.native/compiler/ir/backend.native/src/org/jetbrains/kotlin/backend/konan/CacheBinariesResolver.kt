@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.konan.target.LinkerOutputKind
  */
 internal fun shouldPerformPreLink(config: KonanConfig, caches: ResolvedCacheBinaries, linkerOutputKind: LinkerOutputKind): Boolean {
     // Pre-link is only useful when producing static library. Otherwise its just a waste of time.
-    val isStaticLibrary = linkerOutputKind == LinkerOutputKind.STATIC_LIBRARY &&
+    konst isStaticLibrary = linkerOutputKind == LinkerOutputKind.STATIC_LIBRARY &&
             config.isFinalBinary
-    val enabled = config.cacheSupport.preLinkCaches
-    val nonEmptyCaches = caches.static.isNotEmpty()
+    konst enabled = config.cacheSupport.preLinkCaches
+    konst nonEmptyCaches = caches.static.isNotEmpty()
     return isStaticLibrary && enabled && nonEmptyCaches
 }
 
@@ -24,7 +24,7 @@ internal fun shouldPerformPreLink(config: KonanConfig, caches: ResolvedCacheBina
  * [static] is a list of static libraries (e.g. "libcache.a")
  * [dynamic] is a list of dynamic libraries (e.g. "libcache.dylib")
  */
-internal class ResolvedCacheBinaries(val static: List<String>, val dynamic: List<String>) {
+internal class ResolvedCacheBinaries(konst static: List<String>, konst dynamic: List<String>) {
     fun isEmpty(): Boolean = static.isEmpty() && dynamic.isEmpty()
 }
 
@@ -35,16 +35,16 @@ internal fun resolveCacheBinaries(
         cachedLibraries: CachedLibraries,
         dependenciesTrackingResult: DependenciesTrackingResult,
 ): ResolvedCacheBinaries {
-    val staticCaches = mutableListOf<String>()
-    val dynamicCaches = mutableListOf<String>()
+    konst staticCaches = mutableListOf<String>()
+    konst dynamicCaches = mutableListOf<String>()
 
     dependenciesTrackingResult.allCachedBitcodeDependencies.forEach { dependency ->
-        val library = dependency.library
-        val cache = cachedLibraries.getLibraryCache(library)
+        konst library = dependency.library
+        konst cache = cachedLibraries.getLibraryCache(library)
                 // Maybe turn it into a warning and continue linkage without caches?
                 ?: error("Library $library is expected to be cached")
 
-        val list = when (cache.kind) {
+        konst list = when (cache.kind) {
             CachedLibraries.Kind.DYNAMIC -> dynamicCaches
             CachedLibraries.Kind.STATIC -> staticCaches
         }

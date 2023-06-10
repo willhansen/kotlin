@@ -1,6 +1,6 @@
 // KT-6026 Exception on instantiating a nested class in an anonymous object
 
-val oo = object {
+konst oo = object {
     // Forbidden in KT-13510
     <!NESTED_CLASS_NOT_ALLOWED!>class Nested<!>
 

@@ -27,25 +27,25 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import javax.tools.JavaFileObject
 
-class TreeBasedPackage(val name: String, val javac: JavacWrapper, val unit: JCTree.JCCompilationUnit) : JavaPackage, MapBasedJavaAnnotationOwner {
+class TreeBasedPackage(konst name: String, konst javac: JavacWrapper, konst unit: JCTree.JCCompilationUnit) : JavaPackage, MapBasedJavaAnnotationOwner {
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = FqName(name)
 
-    override val subPackages: Collection<JavaPackage>
+    override konst subPackages: Collection<JavaPackage>
         get() = javac.findSubPackages(fqName)
 
-    val virtualFile: VirtualFile? by lazy {
+    konst virtualFile: VirtualFile? by lazy {
         javac.toVirtualFile(unit.sourceFile)
     }
 
     override fun getClasses(nameFilter: (Name) -> Boolean) =
             javac.findClassesFromPackage(fqName).filter { nameFilter(it.fqName!!.shortName()) }
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = javac.getPackageAnnotationsFromSources(fqName).map { TreeBasedAnnotation(it, unit, javac, this) }
 
-    override val annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
+    override konst annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
 
     override fun equals(other: Any?) = (other as? TreeBasedPackage)?.name == name
 

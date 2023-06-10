@@ -1,6 +1,6 @@
 class A {
     companion object {
-        val s = "OK"
+        konst s = "OK"
         var v = "NOT OK"
     }
 

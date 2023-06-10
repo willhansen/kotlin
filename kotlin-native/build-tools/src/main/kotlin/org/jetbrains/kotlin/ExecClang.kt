@@ -29,25 +29,25 @@ import java.io.File
 import javax.inject.Inject
 
 abstract class ExecClang @Inject constructor(
-        private val platformManager: PlatformManager,
+        private konst platformManager: PlatformManager,
 ) {
 
     @get:Inject
-    protected abstract val fileOperations: FileOperations
+    protected abstract konst fileOperations: FileOperations
     @get:Inject
-    protected abstract val execOperations: ExecOperations
+    protected abstract konst execOperations: ExecOperations
 
     private fun clangArgsForCppRuntime(target: KonanTarget): List<String> {
         return platformManager.platform(target).clang.clangArgsForKonanSources.asList()
     }
 
     fun clangArgsForCppRuntime(targetName: String?): List<String> {
-        val target = platformManager.targetManager(targetName).target
+        konst target = platformManager.targetManager(targetName).target
         return clangArgsForCppRuntime(target)
     }
 
     fun resolveExecutable(executableOrNull: String?): String {
-        val executable = executableOrNull ?: "clang"
+        konst executable = executableOrNull ?: "clang"
 
         if (listOf("clang", "clang++").contains(executable)) {
             return "${platformManager.hostPlatform.absoluteLlvmHome}/bin/$executable"
@@ -57,11 +57,11 @@ abstract class ExecClang @Inject constructor(
     }
 
     fun resolveToolchainExecutable(target: KonanTarget, executableOrNull: String?): String {
-        val executable = executableOrNull ?: "clang"
+        konst executable = executableOrNull ?: "clang"
 
         if (listOf("clang", "clang++").contains(executable)) {
             // TODO: This is copied from `BitcodeCompiler`. Consider sharing the code instead.
-            val platform = platformManager.platform(target)
+            konst platform = platformManager.platform(target)
             return if (target.family.isAppleFamily) {
                 "${platform.absoluteTargetToolchain}/usr/bin/$executable"
             } else {
@@ -98,7 +98,7 @@ abstract class ExecClang @Inject constructor(
      * 2. We call Clang from toolchain in case of Apple target.
      */
     fun execClangForCompilerTests(target: KonanTarget, action: Action<in ExecSpec>): ExecResult {
-        val defaultArgs = platformManager.platform(target).clang.clangArgs.toList()
+        konst defaultArgs = platformManager.platform(target).clang.clangArgs.toList()
         return execOperations.exec {
             action.execute(this)
             executable = if (target.family.isAppleFamily) {
@@ -117,7 +117,7 @@ abstract class ExecClang @Inject constructor(
     }
 
     fun execToolchainClang(target: KonanTarget, action: Action<in ExecSpec>): ExecResult {
-        val extendedAction = Action<ExecSpec> {
+        konst extendedAction = Action<ExecSpec> {
             action.execute(this)
             executable = resolveToolchainExecutable(target, executable)
         }
@@ -125,11 +125,11 @@ abstract class ExecClang @Inject constructor(
     }
 
     private fun execClang(defaultArgs: List<String>, action: Action<in ExecSpec>): ExecResult {
-        val extendedAction = Action<ExecSpec> {
+        konst extendedAction = Action<ExecSpec> {
             action.execute(this)
             executable = resolveExecutable(executable)
 
-            val hostPlatform = platformManager.hostPlatform
+            konst hostPlatform = platformManager.hostPlatform
             environment["PATH"] = fileOperations.configurableFiles(hostPlatform.clang.clangPaths).asPath +
                     File.pathSeparator + environment["PATH"]
             args = args + defaultArgs

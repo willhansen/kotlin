@@ -38,11 +38,11 @@ abstract class AbstractDiagnosticsTestWithJsStdLibAndBackendCompilation : Abstra
             separateModules: Boolean,
             jvmTarget: JvmTarget
     ): JsAnalysisResult {
-        val analysisResult = super.analyzeModuleContents(moduleContext, files, moduleTrace, languageVersionSettings, separateModules, jvmTarget)
-        val diagnostics = analysisResult.bindingTrace.bindingContext.diagnostics
+        konst analysisResult = super.analyzeModuleContents(moduleContext, files, moduleTrace, languageVersionSettings, separateModules, jvmTarget)
+        konst diagnostics = analysisResult.bindingTrace.bindingContext.diagnostics
 
         if (!hasError(diagnostics)) {
-            val translator = K2JSTranslator(config, false)
+            konst translator = K2JSTranslator(config, false)
             translator.translate(object : JsConfig.Reporter() {}, files, MainCallParameters.noCall(), analysisResult)
         }
 

@@ -1,9 +1,9 @@
 package test
 
-class C(val s : String) {
+class C(konst s : String) {
     fun A.a(): String {
         class B {
-            val b : String
+            konst b : String
                 get() = this@a.s + this@C.s
         }
         return B().b
@@ -14,7 +14,7 @@ class C(val s : String) {
     }
 }
 
-class A(val s: String) {
+class A(konst s: String) {
 
 
 }

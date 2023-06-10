@@ -13,7 +13,7 @@ public class DiagnosticFactory0<E> {
 
 // FILE: test.kt
 
-class SimpleDiagnostic<E>(val element: E)
+class SimpleDiagnostic<E>(konst element: E)
 interface KtAnnotationEntry
 
 fun foo(error: DiagnosticFactory0<in KtAnnotationEntry>, entry: KtAnnotationEntry) {

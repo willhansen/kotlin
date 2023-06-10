@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
 object Agp7AddKotlinSourcesToAndroidSourceSetConfigurator: KotlinAndroidSourceSetConfigurator {
     override fun configure(target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, androidSourceSet: AndroidSourceSet) {
-        val androidKotlinSourceDirectorySet = androidSourceSet.javaClass.getMethod("getKotlin")
+        konst androidKotlinSourceDirectorySet = androidSourceSet.javaClass.getMethod("getKotlin")
             .invoke(androidSourceSet) as AndroidSourceDirectorySet
 
         androidKotlinSourceDirectorySet.setSrcDirs(listOf(target.project.provider { kotlinSourceSet.kotlin.srcDirs }))

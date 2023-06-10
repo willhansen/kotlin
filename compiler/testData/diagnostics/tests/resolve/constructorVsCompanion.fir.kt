@@ -4,7 +4,7 @@ class B {
     private companion object
 }
 
-class C(val x: Int)
+class C(konst x: Int)
 
 class D private constructor() {
     companion object
@@ -16,8 +16,8 @@ class E private constructor() {
     }
 }
 
-val a = <!NO_COMPANION_OBJECT!>A<!>
-val <!EXPOSED_PROPERTY_TYPE!>b<!> = B
-val c = <!NO_COMPANION_OBJECT!>C<!>
-val d = D
-val e = E(42)
+konst a = <!NO_COMPANION_OBJECT!>A<!>
+konst <!EXPOSED_PROPERTY_TYPE!>b<!> = B
+konst c = <!NO_COMPANION_OBJECT!>C<!>
+konst d = D
+konst e = E(42)

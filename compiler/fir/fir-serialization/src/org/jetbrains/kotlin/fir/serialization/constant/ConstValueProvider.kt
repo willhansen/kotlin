@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.fir.serialization.constant
 
 import org.jetbrains.kotlin.constant.ConstantValue
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirFile
 import org.jetbrains.kotlin.fir.expressions.FirExpression
@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.expressions.FirExpression
 annotation class ConstValueProviderInternals
 
 abstract class ConstValueProvider {
-    abstract val session: FirSession
-    abstract val evaluatedConstTracker: EvaluatedConstTracker
+    abstract konst session: FirSession
+    abstract konst ekonstuatedConstTracker: EkonstuatedConstTracker
 
     var processingFirFile: FirFile? = null
         @ConstValueProviderInternals

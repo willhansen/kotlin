@@ -25,23 +25,23 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 object SelfCallInNestedObjectConstructorChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val candidateDescriptor = resolvedCall.candidateDescriptor
-        val call = resolvedCall.call
+        konst candidateDescriptor = resolvedCall.candidateDescriptor
+        konst call = resolvedCall.call
 
         if (candidateDescriptor !is ConstructorDescriptor || !isSuperOrDelegatingConstructorCall(call)) return
-        val constructedObject = context.resolutionContext.scope.ownerDescriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst constructedObject = context.resolutionContext.scope.ownerDescriptor.containingDeclaration as? ClassDescriptor ?: return
         if (constructedObject.kind != ClassKind.OBJECT) return
-        val containingClass = constructedObject.containingDeclaration as? ClassDescriptor ?: return
+        konst containingClass = constructedObject.containingDeclaration as? ClassDescriptor ?: return
         if (candidateDescriptor.constructedClass == containingClass) {
-            val visitor = Visitor(containingClass, context.trace, context.languageVersionSettings)
-            resolvedCall.call.valueArgumentList?.accept(visitor)
+            konst visitor = Visitor(containingClass, context.trace, context.languageVersionSettings)
+            resolvedCall.call.konstueArgumentList?.accept(visitor)
         }
     }
 
     private class Visitor(
-        val containingClass: ClassDescriptor,
-        val trace: BindingTrace,
-        val languageVersionSettings: LanguageVersionSettings
+        konst containingClass: ClassDescriptor,
+        konst trace: BindingTrace,
+        konst languageVersionSettings: LanguageVersionSettings
     ) : KtVisitorVoid() {
         override fun visitKtElement(element: KtElement) {
             element.acceptChildren(this, null)
@@ -53,8 +53,8 @@ object SelfCallInNestedObjectConstructorChecker : CallChecker {
         }
 
         private fun checkArgument(argumentExpression: KtExpression) {
-            val call = argumentExpression.getCall(trace.bindingContext) ?: return
-            val resolvedCall = call.getResolvedCall(trace.bindingContext) ?: return
+            konst call = argumentExpression.getCall(trace.bindingContext) ?: return
+            konst resolvedCall = call.getResolvedCall(trace.bindingContext) ?: return
             checkReceiver(resolvedCall.dispatchReceiver, argumentExpression)
         }
 
@@ -62,8 +62,8 @@ object SelfCallInNestedObjectConstructorChecker : CallChecker {
             receiver: ReceiverValue?,
             argument: KtExpression
         ) {
-            val receiverType = receiver?.type ?: return
-            val receiverClass = receiverType.constructor.declarationDescriptor as? ClassDescriptor ?: return
+            konst receiverType = receiver?.type ?: return
+            konst receiverClass = receiverType.constructor.declarationDescriptor as? ClassDescriptor ?: return
             if (DescriptorUtils.isSubclass(receiverClass, containingClass)) {
                 trace.report(Errors.SELF_CALL_IN_NESTED_OBJECT_CONSTRUCTOR.on(languageVersionSettings, argument))
             }

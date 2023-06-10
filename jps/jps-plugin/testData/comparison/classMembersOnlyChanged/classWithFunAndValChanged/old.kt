@@ -10,13 +10,13 @@ class ClassWithFunRemoved {
 }
 
 class ClassWithValAndFunAddedAndRemoved {
-    public val valRemoved: Int = 10
+    public konst konstRemoved: Int = 10
     fun funRemoved() {}
     public fun unchangedFun() {}
 }
 
 class ClassWithValConvertedToVar {
-    public val value: Int = 10
+    public konst konstue: Int = 10
     public fun unchangedFun() {}
 }
 

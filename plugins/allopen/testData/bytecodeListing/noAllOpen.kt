@@ -1,4 +1,4 @@
 class Test {
-    val prop: String = ""
+    konst prop: String = ""
     fun method() {}
 }

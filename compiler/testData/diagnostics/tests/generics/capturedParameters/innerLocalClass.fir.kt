@@ -5,9 +5,9 @@ private class Outer<E> {
         private fun <G> foo() = {
             fun baz() = {
                 class Local {
-                    val e: E = magic()
-                    val f: F = magic()
-                    val g: G = magic()
+                    konst e: E = magic()
+                    konst f: F = magic()
+                    konst g: G = magic()
                 }
                 Local()
             }

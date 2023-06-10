@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ULong<T: Long>(val l: T)
+konstue class ULong<T: Long>(konst l: T)
 
 fun nonLocal(): ULong<Long>? {
-    val u1 = ULong(1)
+    konst u1 = ULong(1)
 
     run {
         return u1 // box
@@ -18,7 +18,7 @@ fun nonLocal(): ULong<Long>? {
 fun foo(): Boolean = true
 
 fun labeled(): ULong<Long>? {
-    val u = ULong(2)
+    konst u = ULong(2)
     return run {
         if (foo()) return@run u
         ULong(-1) // box

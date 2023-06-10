@@ -20,6 +20,6 @@ class Bar {
 }
 
 fun box(): String {
-    val bar = Bar()
+    konst bar = Bar()
     return if (bar.v == 0) "OK" else "FAIL: ${bar.v}"
 }

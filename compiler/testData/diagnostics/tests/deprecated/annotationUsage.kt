@@ -3,7 +3,7 @@
 annotation class obsolete()
 
 @Deprecated("text")
-annotation class obsoleteWithParam(val text: String)
+annotation class obsoleteWithParam(konst text: String)
 
 @<!DEPRECATION!>obsolete<!> class Obsolete
 

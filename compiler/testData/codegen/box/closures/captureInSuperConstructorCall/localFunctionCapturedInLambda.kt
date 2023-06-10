@@ -1,7 +1,7 @@
-open class Base(val fn: () -> String)
+open class Base(konst fn: () -> String)
 
 fun box(): String {
-    val x = "O"
+    konst x = "O"
 
     fun localFn() = x
 

@@ -8,13 +8,13 @@ class Delegate {
     }
 }
 
-val a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
+konst a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
 
 class Foo {
-    val a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
+    konst a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
 }
 
 fun foo() {
-    val a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
+    konst a: Int by <!DELEGATE_SPECIAL_FUNCTION_MISSING!>Delegate()<!>
 }
 

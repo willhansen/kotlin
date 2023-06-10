@@ -132,8 +132,8 @@ class BasicAssertionsTest {
     @Test
     fun testAssertNotNullLambdaFails() {
         checkFailedAssertion {
-            val value: String? = null
-            assertNotNull(value) {
+            konst konstue: String? = null
+            assertNotNull(konstue) {
                 it.substring(0, 0)
             }
         }
@@ -167,17 +167,17 @@ class BasicAssertionsTest {
     @Test
     fun testContracts() {
         open class S
-        class P(val str: String = "P") : S()
+        class P(konst str: String = "P") : S()
 
-        val s: S = P()
-        val p: Any = P("A")
+        konst s: S = P()
+        konst p: Any = P("A")
 
         assertTrue(s is P)
         assertEquals("P", s.str)
         assertFalse(p !is P)
         assertEquals("A", p.str)
 
-        val nullableT: P? = P("N")
+        konst nullableT: P? = P("N")
         assertNotNull(nullableT)
         assertEquals("N", nullableT.str)
     }

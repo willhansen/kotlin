@@ -27,7 +27,7 @@ package kotlin.text.regex
  */
 internal class EmptySet(override var next: AbstractSet) : LeafSet() {
 
-    override val charCount = 0
+    override konst charCount = 0
 
     override fun accepts(startIndex: Int, testString: CharSequence): Int = 0
 
@@ -62,7 +62,7 @@ internal class EmptySet(override var next: AbstractSet) : LeafSet() {
     }
 
 
-    override val name: String
+    override konst name: String
             get()= "<Empty set>"
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {

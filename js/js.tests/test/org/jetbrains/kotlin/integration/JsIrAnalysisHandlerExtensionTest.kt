@@ -28,45 +28,45 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 private data class TestKtFile(
-    val name: String,
-    val content: String
+    konst name: String,
+    konst content: String
 )
 
-private val classNotFound = TestKtFile("C.kt", "class C : ClassNotFound")
-private val repeatedAnalysis = TestKtFile("D.kt", "class D : Generated")
+private konst classNotFound = TestKtFile("C.kt", "class C : ClassNotFound")
+private konst repeatedAnalysis = TestKtFile("D.kt", "class D : Generated")
 
 class JsIrAnalysisHandlerExtensionTest : TestCaseWithTmpdir() {
 
     // Writes the service file only; CustomComponentRegistrar is already in classpath.
     private fun writePlugin(): String {
-        val jarFile = tmpdir.resolve("plugin.jar")
+        konst jarFile = tmpdir.resolve("plugin.jar")
         ZipOutputStream(jarFile.outputStream()).use {
-            val entry = ZipEntry("META-INF/services/org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar")
+            konst entry = ZipEntry("META-INF/services/org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar")
             it.putNextEntry(entry)
             it.write(CustomComponentRegistrar::class.java.name.toByteArray())
         }
         return jarFile.absolutePath
     }
 
-    private val jsirStdlib: String?
+    private konst jsirStdlib: String?
         get() = System.getProperty("kotlin.js.full.stdlib.path")
 
-    private val wasmStdlib: String?
+    private konst wasmStdlib: String?
         get() = System.getProperty("kotlin.wasm.stdlib.path")
 
-    private val outjs: String
+    private konst outjs: String
         get() = tmpdir.resolve("out.js").absolutePath
 
-    private val outklib: String
+    private konst outklib: String
         get() = tmpdir.resolve("out.klib").absolutePath
 
     private fun runTest(compiler: CLITool<*>, src: TestKtFile, libs: String, outFile: String, extras: List<String> = emptyList()) {
-        val mainKt = tmpdir.resolve(src.name).apply {
+        konst mainKt = tmpdir.resolve(src.name).apply {
             writeText(src.content)
         }
-        val plugin = writePlugin()
-        val outputFile = File(outFile)
-        val args = listOf(
+        konst plugin = writePlugin()
+        konst outputFile = File(outFile)
+        konst args = listOf(
             "-Xplugin=$plugin",
             "-libraries", libs,
             "-ir-output-dir", outputFile.parentFile.path,
@@ -123,12 +123,12 @@ private class CustomAnalysisHandler : AnalysisHandlerExtension {
         bindingTrace: BindingTrace,
         componentProvider: ComponentProvider
     ): AnalysisResult? {
-        val filenames = files.map { it.name }
+        konst filenames = files.map { it.name }
         if (repeatedAnalysis.name in filenames) {
             if ("Generated.kt" in filenames) {
                 return null
             } else {
-                val outDir = File(files.single { it.name == repeatedAnalysis.name }.virtualFilePath).parentFile
+                konst outDir = File(files.single { it.name == repeatedAnalysis.name }.virtualFilePath).parentFile
                 outDir.resolve("Generated.kt").apply {
                     writeText("interface Generated")
                 }

@@ -12,14 +12,14 @@ import java.io.Reader
 import java.util.*
 
 data class PodBuildSettingsProperties(
-    internal val buildDir: String,
-    internal val configuration: String,
-    val configurationBuildDir: String,
-    internal val podsTargetSrcRoot: String,
-    internal val cflags: String? = null,
-    internal val headerPaths: String? = null,
-    internal val publicHeadersFolderPath: String? = null,
-    internal val frameworkPaths: String? = null
+    internal konst buildDir: String,
+    internal konst configuration: String,
+    konst configurationBuildDir: String,
+    internal konst podsTargetSrcRoot: String,
+    internal konst cflags: String? = null,
+    internal konst headerPaths: String? = null,
+    internal konst publicHeadersFolderPath: String? = null,
+    internal konst frameworkPaths: String? = null
 ) {
 
     fun writeSettings(
@@ -44,14 +44,14 @@ data class PodBuildSettingsProperties(
     }
 
     companion object {
-        const val BUILD_DIR = "BUILD_DIR"
-        const val CONFIGURATION = "CONFIGURATION"
-        const val CONFIGURATION_BUILD_DIR = "CONFIGURATION_BUILD_DIR"
-        const val PODS_TARGET_SRCROOT = "PODS_TARGET_SRCROOT"
-        const val OTHER_CFLAGS = "OTHER_CFLAGS"
-        const val HEADER_SEARCH_PATHS = "HEADER_SEARCH_PATHS"
-        const val PUBLIC_HEADERS_FOLDER_PATH = "PUBLIC_HEADERS_FOLDER_PATH"
-        const val FRAMEWORK_SEARCH_PATHS = "FRAMEWORK_SEARCH_PATHS"
+        const konst BUILD_DIR = "BUILD_DIR"
+        const konst CONFIGURATION = "CONFIGURATION"
+        const konst CONFIGURATION_BUILD_DIR = "CONFIGURATION_BUILD_DIR"
+        const konst PODS_TARGET_SRCROOT = "PODS_TARGET_SRCROOT"
+        const konst OTHER_CFLAGS = "OTHER_CFLAGS"
+        const konst HEADER_SEARCH_PATHS = "HEADER_SEARCH_PATHS"
+        const konst PUBLIC_HEADERS_FOLDER_PATH = "PUBLIC_HEADERS_FOLDER_PATH"
+        const konst FRAMEWORK_SEARCH_PATHS = "FRAMEWORK_SEARCH_PATHS"
 
         fun readSettingsFromReader(reader: Reader): PodBuildSettingsProperties {
             with(Properties()) {

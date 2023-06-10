@@ -2,7 +2,7 @@
 package foo
 
 open class C(a: Int) {
-    val b = a
+    konst b = a
 }
 
 class D(c: Int) : C(c + 2) {

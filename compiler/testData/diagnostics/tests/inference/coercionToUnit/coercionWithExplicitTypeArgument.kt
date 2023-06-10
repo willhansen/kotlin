@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_VARIABLE
 
 fun foo() {
-    val f = myRun<Unit> {
+    konst f = myRun<Unit> {
         123
     }
 }

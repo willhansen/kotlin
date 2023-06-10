@@ -16,16 +16,16 @@
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val b = B(1)
+    konst b = B(1)
     b += 1
 }
 
 class B(var a: Int) {
-    operator fun plus(value: Int): B {
-        a= a + value
+    operator fun plus(konstue: Int): B {
+        a= a + konstue
         return this
     }
-    operator fun plusAssign(value: Int): Unit {
-        a= a + value
+    operator fun plusAssign(konstue: Int): Unit {
+        a= a + konstue
     }
 }

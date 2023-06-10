@@ -13,8 +13,8 @@ enum class Interest { SIGHT, CULTURE, PARK, ENTERTAINMENT }
 
 class PlaceAbsenceException(message: String): Exception(message) {}
 
-data class RouteCost(val moneyCost: Double, val timeCost: Double, val interests: Set<Interest>, val transport: Set<Transport>): Cost {
-    private val comparator = compareBy<RouteCost>({ it.moneyCost }, { it.timeCost }, { it.interests.size }, { it.transport.size })
+data class RouteCost(konst moneyCost: Double, konst timeCost: Double, konst interests: Set<Interest>, konst transport: Set<Transport>): Cost {
+    private konst comparator = compareBy<RouteCost>({ it.moneyCost }, { it.timeCost }, { it.interests.size }, { it.transport.size })
 
     override operator fun plus(other: Cost) =
             if (other is RouteCost) {
@@ -43,34 +43,34 @@ data class RouteCost(val moneyCost: Double, val timeCost: Double, val interests:
 
 internal var placeCounter = 0u
 
-data class Place(val geoCoordinateX: Double, val geoCoordinateY: Double, val name: String, val interestCategory: Interest) {
-    private val comparator = compareBy<Place>({ it.geoCoordinateX }, { it.geoCoordinateY })
+data class Place(konst geoCoordinateX: Double, konst geoCoordinateY: Double, konst name: String, konst interestCategory: Interest) {
+    private konst comparator = compareBy<Place>({ it.geoCoordinateX }, { it.geoCoordinateY })
 
-    val id: UInt
+    konst id: UInt
     init {
         id = placeCounter
         placeCounter++
     }
 
-    val fullDescription: String
+    konst fullDescription: String
         get() = "Place $name($geoCoordinateX;$geoCoordinateY)"
 
     fun compareTo(other: Place) =
             comparator.compare(this, other)
 }
 
-data class Path(val from: Place, val to: Place, val cost: RouteCost)
+data class Path(konst from: Place, konst to: Place, konst cost: RouteCost)
 
 class CityMap {
-    data class RouteId(val id: UInt, val from: UInt, val to: UInt)
-    private val graph = Multigraph<Place>()
+    data class RouteId(konst id: UInt, konst from: UInt, konst to: UInt)
+    private konst graph = Multigraph<Place>()
 
-    val allPlaces: Set<Place>
+    konst allPlaces: Set<Place>
         get() = graph.allVertexes
-    val allRoutes: List<RouteId>
+    konst allRoutes: List<RouteId>
         get() {
-            val edges = graph.allEdges
-            val result = mutableListOf<RouteId>()
+            konst edges = graph.allEdges
+            konst result = mutableListOf<RouteId>()
             edges.forEach {
                 result.add(RouteId(it, graph.getFrom(it).id, graph.getTo(it).id))
             }
@@ -104,7 +104,7 @@ class CityMap {
     }
 
     fun getRoutes(start: Place, finish: Place, limits: RouteCost): List<List<Path>> {
-        val result = graph.searchRoutesWithLimits(start, finish, limits)
+        konst result = graph.searchRoutesWithLimits(start, finish, limits)
         return result.map {
             it.map {
                 Path(graph.getFrom(it), graph.getTo(it), graph.getCost(it) as RouteCost)

@@ -2,6 +2,6 @@
 object O
 
 fun Any.foo() = 42
-val Any?.bar: Int get() = 239
+konst Any?.bar: Int get() = 239
 
-val x = O.foo() + O.bar
+konst x = O.foo() + O.bar

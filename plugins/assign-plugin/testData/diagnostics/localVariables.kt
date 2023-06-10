@@ -13,13 +13,13 @@ data class StringProperty(var v: String) {
     fun get(): String = v
 }
 
-fun `should not work with local val for different type`() {
-    val property = StringProperty("OK")
+fun `should not work with local konst for different type`() {
+    konst property = StringProperty("OK")
     <!VAL_REASSIGNMENT!>property<!> = <!TYPE_MISMATCH!>"Fail"<!>
 }
 
-fun `should not work with local val for same type`() {
-    val property = StringProperty("OK")
+fun `should not work with local konst for same type`() {
+    konst property = StringProperty("OK")
     <!VAL_REASSIGNMENT!>property<!> = StringProperty("Fail")
 }
 

@@ -2,10 +2,10 @@
 package foo
 
 class B {
-    val d = "OK"
+    konst d = "OK"
 
     fun f(): String {
-        val c = object {
+        konst c = object {
             fun foo(): String {
                 return d
             }

@@ -10,7 +10,7 @@ fun test() {
 
 class A() {
   public companion object {
-    val d = 3
+    konst d = 3
     private object f {
 
     }
@@ -25,6 +25,6 @@ class B {
 
 class CCC() {
   private companion object {
-    val classObjectVar = 3
+    konst classObjectVar = 3
   }
 }

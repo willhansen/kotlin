@@ -45,8 +45,8 @@ import org.jetbrains.kotlin.serialization.js.PackagesWithHeaderMetadata
 import org.jetbrains.kotlin.utils.JsMetadataVersion
 
 abstract class AbstractTopDownAnalyzerFacadeForWeb {
-    abstract val analyzerServices: PlatformDependentAnalyzerServices
-    abstract val platform: TargetPlatform
+    abstract konst analyzerServices: PlatformDependentAnalyzerServices
+    abstract konst platform: TargetPlatform
 
     fun analyzeFiles(
         files: Collection<KtFile>,
@@ -62,34 +62,34 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
             "Can't simultaneously use custom built-ins module and set current module as built-ins"
         }
 
-        val builtIns = when {
+        konst builtIns = when {
             thisIsBuiltInsModule -> DefaultBuiltIns(loadBuiltInsFromCurrentClassLoader = false)
             customBuiltInsModule != null -> customBuiltInsModule.builtIns
             else -> JsPlatformAnalyzerServices.builtIns
         }
 
-        val moduleName = configuration[CommonConfigurationKeys.MODULE_NAME]!!
-        val context = ContextForNewModule(
+        konst moduleName = configuration[CommonConfigurationKeys.MODULE_NAME]!!
+        konst context = ContextForNewModule(
             ProjectContext(project, "TopDownAnalyzer for JS"),
             Name.special("<$moduleName>"),
             builtIns,
             platform = platform
         )
 
-        val additionalPackages = mutableListOf<PackageFragmentProvider>()
+        konst additionalPackages = mutableListOf<PackageFragmentProvider>()
 
         if (thisIsBuiltInsModule) {
             builtIns.builtInsModule = context.module
             additionalPackages += functionInterfacePackageFragmentProvider(context.storageManager, context.module)
         }
 
-        val dependencies = mutableSetOf(context.module) + moduleDescriptors + builtIns.builtInsModule
+        konst dependencies = mutableSetOf(context.module) + moduleDescriptors + builtIns.builtInsModule
         @Suppress("UNCHECKED_CAST")
         context.module.setDependencies(dependencies.toList() as List<ModuleDescriptorImpl>, friendModuleDescriptors.toSet() as Set<ModuleDescriptorImpl>)
 
-        val moduleKind = configuration.get(JSConfigurationKeys.MODULE_KIND, ModuleKind.PLAIN)
+        konst moduleKind = configuration.get(JSConfigurationKeys.MODULE_KIND, ModuleKind.PLAIN)
 
-        val trace = BindingTraceContext()
+        konst trace = BindingTraceContext()
         trace.record(MODULE_KIND, context.module, moduleKind)
         return analyzeFilesWithGivenTrace(files, trace, context, configuration, targetEnvironment, project, additionalPackages)
     }
@@ -110,16 +110,16 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
         project: Project,
         additionalPackages: List<PackageFragmentProvider> = emptyList(),
     ): JsAnalysisResult {
-        val lookupTracker = configuration.get(CommonConfigurationKeys.LOOKUP_TRACKER) ?: LookupTracker.DO_NOTHING
-        val expectActualTracker = configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_TRACKER) ?: ExpectActualTracker.DoNothing
-        val inlineConstTracker = configuration.get(CommonConfigurationKeys.INLINE_CONST_TRACKER) ?: InlineConstTracker.DoNothing
-        val enumWhenTracker = configuration.get(CommonConfigurationKeys.ENUM_WHEN_TRACKER) ?: EnumWhenTracker.DoNothing
-        val languageVersionSettings = configuration.languageVersionSettings
-        val packageFragment = configuration[JSConfigurationKeys.INCREMENTAL_DATA_PROVIDER]?.let {
+        konst lookupTracker = configuration.get(CommonConfigurationKeys.LOOKUP_TRACKER) ?: LookupTracker.DO_NOTHING
+        konst expectActualTracker = configuration.get(CommonConfigurationKeys.EXPECT_ACTUAL_TRACKER) ?: ExpectActualTracker.DoNothing
+        konst inlineConstTracker = configuration.get(CommonConfigurationKeys.INLINE_CONST_TRACKER) ?: InlineConstTracker.DoNothing
+        konst enumWhenTracker = configuration.get(CommonConfigurationKeys.ENUM_WHEN_TRACKER) ?: EnumWhenTracker.DoNothing
+        konst languageVersionSettings = configuration.languageVersionSettings
+        konst packageFragment = configuration[JSConfigurationKeys.INCREMENTAL_DATA_PROVIDER]?.let {
             loadIncrementalCacheMetadata(it, moduleContext, lookupTracker, languageVersionSettings)
         }
 
-        val container = createContainerForJS(
+        konst container = createContainerForJS(
             moduleContext, trace,
             FileBasedDeclarationProviderFactory(moduleContext.storageManager, files),
             languageVersionSettings,
@@ -133,7 +133,7 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
             platform
         )
 
-        val analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
+        konst analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
 
         // Mimic the behavior in the jvm frontend. The extensions have 2 chances to override the normal analysis:
         // * If any of the extensions returns a non-null result, it. Otherwise do the normal analysis.
@@ -153,7 +153,7 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
             is JsAnalysisResult -> result
             else -> {
                 // AnalysisHandlerExtension returns a BindingContext, not BindingTrace. Therefore, synthesize one here.
-                val bindingTrace = DelegatingBindingTrace(result.bindingContext, "DelegatingBindingTrace by AnalysisHandlerExtension")
+                konst bindingTrace = DelegatingBindingTrace(result.bindingContext, "DelegatingBindingTrace by AnalysisHandlerExtension")
                 when (result) {
                     is AnalysisResult.RetryWithAdditionalRoots -> JsAnalysisResult.RetryWithAdditionalRoots(
                         bindingTrace,
@@ -196,8 +196,8 @@ abstract class AbstractTopDownAnalyzerFacadeForWeb {
 
 object TopDownAnalyzerFacadeForJS : AbstractTopDownAnalyzerFacadeForWeb() {
 
-    override val analyzerServices: PlatformDependentAnalyzerServices = JsPlatformAnalyzerServices
-    override val platform: TargetPlatform = JsPlatforms.defaultJsPlatform
+    override konst analyzerServices: PlatformDependentAnalyzerServices = JsPlatformAnalyzerServices
+    override konst platform: TargetPlatform = JsPlatforms.defaultJsPlatform
 
     override fun loadIncrementalCacheMetadata(
         incrementalData: IncrementalDataProvider,
@@ -205,9 +205,9 @@ object TopDownAnalyzerFacadeForJS : AbstractTopDownAnalyzerFacadeForWeb() {
         lookupTracker: LookupTracker,
         languageVersionSettings: LanguageVersionSettings
     ): PackageFragmentProvider {
-        val metadata = PackagesWithHeaderMetadata(
+        konst metadata = PackagesWithHeaderMetadata(
             incrementalData.headerMetadata,
-            incrementalData.compiledPackageParts.values.map { it.metadata },
+            incrementalData.compiledPackageParts.konstues.map { it.metadata },
             JsMetadataVersion(*incrementalData.metadataVersion)
         )
         return KotlinJavascriptSerializationUtil.readDescriptors(

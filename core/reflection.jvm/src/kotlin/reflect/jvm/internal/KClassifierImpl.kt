@@ -19,5 +19,5 @@ package kotlin.reflect.jvm.internal
 import org.jetbrains.kotlin.descriptors.ClassifierDescriptor
 
 internal interface KClassifierImpl {
-    val descriptor: ClassifierDescriptor
+    konst descriptor: ClassifierDescriptor
 }

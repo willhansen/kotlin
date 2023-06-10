@@ -4,18 +4,18 @@
  */
 
 import org.junit.Assert
-import kotlin.reflect.full.valueParameters
+import kotlin.reflect.full.konstueParameters
 
 class ScalaInteropTest {
 
     @org.junit.Test
     fun parametersInInnerClassConstructor() {
-        val inner = Outer().Inner("123")
+        konst inner = Outer().Inner("123")
         Assert.assertEquals("123", inner.name())
 
-        val valueParameters = inner::class.constructors.single().valueParameters
-        Assert.assertEquals(1, valueParameters.size)
-        val annotations = valueParameters[0].annotations
+        konst konstueParameters = inner::class.constructors.single().konstueParameters
+        Assert.assertEquals(1, konstueParameters.size)
+        konst annotations = konstueParameters[0].annotations
         Assert.assertEquals(1, annotations.size)
         Assert.assertEquals("Foo", annotations[0].annotationClass.simpleName)
     }

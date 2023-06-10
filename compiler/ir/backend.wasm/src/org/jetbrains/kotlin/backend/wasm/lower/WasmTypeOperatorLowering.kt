@@ -25,15 +25,15 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
 
-class WasmTypeOperatorLowering(val context: WasmBackendContext) : FileLoweringPass {
+class WasmTypeOperatorLowering(konst context: WasmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(WasmBaseTypeOperatorTransformer(context))
     }
 }
 
-class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrElementTransformerVoidWithContext() {
-    private val symbols = context.wasmSymbols
-    private val builtIns = context.irBuiltIns
+class WasmBaseTypeOperatorTransformer(konst context: WasmBackendContext) : IrElementTransformerVoidWithContext() {
+    private konst symbols = context.wasmSymbols
+    private konst builtIns = context.irBuiltIns
 
     private lateinit var builder: DeclarationIrBuilder
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement {
@@ -60,7 +60,7 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
 
     override fun visitVariable(declaration: IrVariable): IrStatement {
         // Some IR passes, notable for-loops-lowering assumes implicit cast during variable initialization
-        val initializer = declaration.initializer
+        konst initializer = declaration.initializer
         if (initializer != null &&
             initializer.type != declaration.type
         ) {
@@ -76,8 +76,8 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
         inverted: Boolean
     ): IrExpression {
         return builder.irComposite(resultType = builtIns.booleanType) {
-            val argument = cacheValue(expression.argument)
-            val check = generateTypeCheck(argument, expression.typeOperand)
+            konst argument = cacheValue(expression.argument)
+            konst check = generateTypeCheck(argument, expression.typeOperand)
             if (inverted) {
                 +builder.irNot(check)
             } else {
@@ -86,38 +86,38 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
         }
     }
 
-    private fun IrBlockBuilder.cacheValue(value: IrExpression): () -> IrExpression {
-        if (value.isPure(true) && value.isTrivial()) {
-            return { value.deepCopyWithSymbols() }
+    private fun IrBlockBuilder.cacheValue(konstue: IrExpression): () -> IrExpression {
+        if (konstue.isPure(true) && konstue.isTrivial()) {
+            return { konstue.deepCopyWithSymbols() }
         }
-        val tmpVal = createTmpVariable(value)
+        konst tmpVal = createTmpVariable(konstue)
         return { builder.irGet(tmpVal) }
     }
 
     private fun IrType.isInlined(): Boolean =
         context.inlineClassesUtils.isTypeInlined(this)
 
-    private val IrType.eraseToClassOrInterface: IrClass
+    private konst IrType.eraseToClassOrInterface: IrClass
         get() = this.erasedUpperBound ?: builtIns.anyClass.owner
 
     private fun generateTypeCheck(
-        valueProvider: () -> IrExpression,
+        konstueProvider: () -> IrExpression,
         toType: IrType
     ): IrExpression {
-        val toNotNullable = toType.makeNotNull()
-        val valueInstance: IrExpression = valueProvider()
-        val fromType = valueInstance.type
+        konst toNotNullable = toType.makeNotNull()
+        konst konstueInstance: IrExpression = konstueProvider()
+        konst fromType = konstueInstance.type
 
-        // Inlined values have no type information on runtime.
+        // Inlined konstues have no type information on runtime.
         // But since they are final we can compute type checks on compile time.
         if (fromType.isInlined()) {
-            val result = fromType.eraseToClassOrInterface.isSubclassOf(toType.eraseToClassOrInterface)
+            konst result = fromType.eraseToClassOrInterface.isSubclassOf(toType.eraseToClassOrInterface)
             return builder.irBoolean(result)
         }
 
-        val instanceCheck = generateTypeCheckNonNull(valueInstance, toNotNullable)
-        val isFromNullable = valueInstance.type.isNullable()
-        val isToNullable = toType.isNullable()
+        konst instanceCheck = generateTypeCheckNonNull(konstueInstance, toNotNullable)
+        konst isFromNullable = konstueInstance.type.isNullable()
+        konst isToNullable = toType.isNullable()
 
         return when {
             !isFromNullable -> instanceCheck
@@ -125,7 +125,7 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
             else ->
                 builder.irIfThenElse(
                     type = builtIns.booleanType,
-                    condition = builder.irEqualsNull(valueProvider()),
+                    condition = builder.irEqualsNull(konstueProvider()),
                     thenPart = builder.irBoolean(isToNullable),
                     elsePart = instanceCheck
                 )
@@ -148,7 +148,7 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
 
     private fun generateTypeCheckNonNull(argument: IrExpression, toType: IrType): IrExpression {
         assert(!toType.isMarkedNullable())
-        val classOrInterface = toType.eraseToClassOrInterface
+        konst classOrInterface = toType.eraseToClassOrInterface
         return when {
             classOrInterface.isExternal -> {
                 if (classOrInterface.kind == ClassKind.INTERFACE)
@@ -163,19 +163,19 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
         }
     }
 
-    private fun narrowType(fromType: IrType, toType: IrType, value: IrExpression): IrExpression {
-        if (fromType == toType) return value
+    private fun narrowType(fromType: IrType, toType: IrType, konstue: IrExpression): IrExpression {
+        if (fromType == toType) return konstue
 
         if (toType == builtIns.nothingNType) {
             return builder.irComposite(resultType = builtIns.nothingNType) {
-                +value
+                +konstue
                 +builder.irNull()
             }
         }
 
         // A bit of a hack. Inliner tends to insert null casts from nothing to any. It's hard to express in wasm, so we simply replace
         // them with single const null.
-        if (toType == builtIns.anyNType && fromType == builtIns.nothingNType && value is IrConst<*> && value.kind == IrConstKind.Null) {
+        if (toType == builtIns.anyNType && fromType == builtIns.nothingNType && konstue is IrConst<*> && konstue.kind == IrConstKind.Null) {
             return builder.irNull(builtIns.nothingNType)
         }
 
@@ -186,7 +186,7 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
                 toType,
                 typeArguments = listOf(fromType, toType)
             ).also {
-                it.putValueArgument(0, value)
+                it.putValueArgument(0, konstue)
             }
         }
 
@@ -196,25 +196,25 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
                 toType,
                 typeArguments = listOf(fromType, toType)
             ).also {
-                it.putValueArgument(0, value)
+                it.putValueArgument(0, konstue)
             }
         }
 
-        val fromClass = fromType.eraseToClassOrInterface
-        val toClass = toType.eraseToClassOrInterface
+        konst fromClass = fromType.eraseToClassOrInterface
+        konst toClass = toType.eraseToClassOrInterface
 
         if (fromClass.isExternal && toClass.isExternal) {
-            return value
+            return konstue
         }
 
-        if (value.isNullConst() && fromClass.isExternal != toClass.isExternal) {
-            value.type = toType
-            return value
+        if (konstue.isNullConst() && fromClass.isExternal != toClass.isExternal) {
+            konstue.type = toType
+            return konstue
         }
 
         if (fromClass.isExternal && !toClass.isExternal) {
-            val narrowingToAny = builder.irCall(symbols.jsInteropAdapters.jsToKotlinAnyAdapter).also {
-                it.putValueArgument(0, value)
+            konst narrowingToAny = builder.irCall(symbols.jsInteropAdapters.jsToKotlinAnyAdapter).also {
+                it.putValueArgument(0, konstue)
             }
             // Continue narrowing from Any to expected type
             return narrowType(context.irBuiltIns.anyType, toType, narrowingToAny)
@@ -222,31 +222,31 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
 
         if (toClass.isExternal && !fromClass.isExternal) {
             return builder.irCall(symbols.jsInteropAdapters.kotlinToJsAnyAdapter).also {
-                it.putValueArgument(0, value)
+                it.putValueArgument(0, konstue)
             }
         }
 
         if (fromClass.isSubclassOf(toClass)) {
-            return value
+            return konstue
         }
 
         if (toType.isNothing()) {
             // Casting to nothing is unreachable...
             return builder.irComposite(resultType = context.irBuiltIns.nothingType) {
-                +value  // ... but we have to evaluate an argument
+                +konstue  // ... but we have to ekonstuate an argument
                 +irCall(symbols.wasmUnreachable)
             }
         }
 
         if (toType == symbols.voidType) {
-            return builder.irCall(symbols.findVoidConsumer(value.type)).apply {
-                putValueArgument(0, value)
+            return builder.irCall(symbols.findVoidConsumer(konstue.type)).apply {
+                putValueArgument(0, konstue)
             }
         }
 
         return builder.irCall(symbols.refCastNull, type = toType).apply {
             putTypeArgument(0, toType)
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
     }
 
@@ -254,26 +254,26 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
         expression: IrTypeOperatorCall,
         isSafe: Boolean
     ): IrExpression {
-        val toType = expression.typeOperand
-        val fromType = expression.argument.type
+        konst toType = expression.typeOperand
+        konst fromType = expression.argument.type
 
         if (fromType.eraseToClassOrInterface.isSubclassOf(expression.type.eraseToClassOrInterface)) {
             return narrowType(fromType, expression.type, expression.argument)
         }
 
-        val failResult = if (isSafe) {
+        konst failResult = if (isSafe) {
             builder.irNull()
         } else {
             builder.irCall(context.ir.symbols.throwTypeCastException)
         }
 
         return builder.irComposite(resultType = expression.type) {
-            val argument = cacheValue(expression.argument)
-            val narrowArg = narrowType(fromType, expression.type, argument())
-            val check = generateTypeCheck(argument, toType)
+            konst argument = cacheValue(expression.argument)
+            konst narrowArg = narrowType(fromType, expression.type, argument())
+            konst check = generateTypeCheck(argument, toType)
             if (check is IrConst<*>) {
-                val value = check.value as Boolean
-                if (value) {
+                konst konstue = check.konstue as Boolean
+                if (konstue) {
                     +narrowArg
                 } else {
                     +failResult
@@ -293,15 +293,15 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
         narrowType(
             fromType = expression.argument.type,
             toType = expression.typeOperand,
-            value = expression.argument
+            konstue = expression.argument
         )
 
     private fun generateTypeCheckWithTypeParameter(argument: IrExpression, toType: IrType): IrExpression {
-        val typeParameter = toType.classifierOrNull?.owner as? IrTypeParameter
+        konst typeParameter = toType.classifierOrNull?.owner as? IrTypeParameter
             ?: error("expected type parameter, but got $toType")
 
         return typeParameter.superTypes.fold(builder.irTrue() as IrExpression) { r, t ->
-            val check = generateTypeCheckNonNull(argument.shallowCopy(), t.makeNotNull())
+            konst check = generateTypeCheckNonNull(argument.shallowCopy(), t.makeNotNull())
             builder.irCall(symbols.booleanAnd).apply {
                 putValueArgument(0, r)
                 putValueArgument(1, check)
@@ -317,9 +317,9 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
     }
 
     private fun generateIsSubClass(argument: IrExpression, toType: IrType): IrExpression {
-        val fromType = argument.type
-        val fromTypeErased = fromType.getRuntimeClass(context.irBuiltIns)
-        val toTypeErased = toType.getRuntimeClass(context.irBuiltIns)
+        konst fromType = argument.type
+        konst fromTypeErased = fromType.getRuntimeClass(context.irBuiltIns)
+        konst toTypeErased = toType.getRuntimeClass(context.irBuiltIns)
         if (fromTypeErased.isSubclassOf(toTypeErased)) {
             return builder.irTrue()
         }
@@ -334,13 +334,13 @@ class WasmBaseTypeOperatorTransformer(val context: WasmBackendContext) : IrEleme
     }
 
     private fun generateIsExternalClass(argument: IrExpression, klass: IrClass): IrExpression {
-        val instanceCheckFunction = context.mapping.wasmExternalClassToInstanceCheck[klass]!!
-        val wrappedInstanceCheckIfAny = context.mapping.wasmJsInteropFunctionToWrapper[instanceCheckFunction] ?: instanceCheckFunction
+        konst instanceCheckFunction = context.mapping.wasmExternalClassToInstanceCheck[klass]!!
+        konst wrappedInstanceCheckIfAny = context.mapping.wasmJsInteropFunctionToWrapper[instanceCheckFunction] ?: instanceCheckFunction
 
         return builder.irCall(wrappedInstanceCheckIfAny).also {
             it.putValueArgument(
                 index = 0,
-                valueArgument = narrowType(argument.type, context.irBuiltIns.anyType, argument) //TODO("Why we need it?)
+                konstueArgument = narrowType(argument.type, context.irBuiltIns.anyType, argument) //TODO("Why we need it?)
             )
         }
     }

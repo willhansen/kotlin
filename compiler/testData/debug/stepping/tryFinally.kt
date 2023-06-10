@@ -7,7 +7,7 @@ fun foo() {
         "FINALLY"
     }
     
-    val t = try {
+    konst t = try {
         mightThrow2()
     } finally {
         "FINALLY2"
@@ -37,7 +37,7 @@ fun box() {
 // The JVM backend steps back to line 11 when leaving the
 // `mightThrow2` call. The JVM_IR backend does not. The
 // JVM_IR behavior is consistent with what happens for the
-// try-finally where the value is discarded which seems good.
+// try-finally where the konstue is discarded which seems good.
 
 // EXPECTATIONS JVM JVM_IR
 // test.kt:29 box

@@ -2,13 +2,13 @@
 
 // FILE: test.kt
 fun box(): String {
-    val
+    konst
             o
             =
         "O"
 
 
-    val k = "K"
+    konst k = "K"
 
     return o + k
 }

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.load.java.NULLABLE_ANNOTATIONS
 import java.util.*
 
 internal class NullabilityAnnotationsTracker : AnnotationsChangeTracker() {
-    private val annotations =
+    private konst annotations =
         (NULLABLE_ANNOTATIONS + JAVAX_NONNULL_ANNOTATION + NOT_NULL_ANNOTATIONS).mapTo(HashSet()) { it.internalNameWithoutInnerClasses }
             .toTypedArray()
 
@@ -35,7 +35,7 @@ internal class NullabilityAnnotationsTracker : AnnotationsChangeTracker() {
         annotationsDiff: Difference.Specifier<ClassType, Difference>,
         paramAnnotationsDiff: Difference.Specifier<ParamAnnotation, Difference>
     ): Set<Recompile> {
-        val changedAnnotations = annotationsDiff.addedOrRemoved() +
+        konst changedAnnotations = annotationsDiff.addedOrRemoved() +
                 paramAnnotationsDiff.addedOrRemoved().map { it.type }
 
         return handleNullAnnotationsChanges(context, method, changedAnnotations)
@@ -54,15 +54,15 @@ internal class NullabilityAnnotationsTracker : AnnotationsChangeTracker() {
         protoMember: ProtoEntity,
         annotations: Sequence<TypeRepr.ClassType>
     ): Set<Recompile> {
-        val n = this.annotations.size
-        val nullabilityAnnotations = IntOpenHashSet(n)
+        konst n = this.annotations.size
+        konst nullabilityAnnotations = IntOpenHashSet(n)
         for (i in 0 until n) {
             nullabilityAnnotations.add(context.get(this.annotations.get(i)))
         }
 
-        val changedNullAnnotation = annotations.firstOrNull { nullabilityAnnotations.contains(it.className) }
+        konst changedNullAnnotation = annotations.firstOrNull { nullabilityAnnotations.contains(it.className) }
 
-        val result = EnumSet.noneOf(Recompile::class.java)
+        konst result = EnumSet.noneOf(Recompile::class.java)
         if (changedNullAnnotation != null) {
             result.add(Recompile.USAGES)
 

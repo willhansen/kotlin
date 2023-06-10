@@ -11,7 +11,7 @@ import java.lang.Exception
 // TODO: Consider redesigning experimental targets support (e.g. by getting rid of such separation at all).
 open class HostManager(
     subTargetProvider: SubTargetProvider = SubTargetProvider.NoSubTargets,
-    private val experimental: Boolean = false
+    private konst experimental: Boolean = false
 ) {
 
     constructor(
@@ -21,12 +21,12 @@ open class HostManager(
 
     fun targetManager(userRequest: String? = null): TargetManager = TargetManagerImpl(userRequest, this)
 
-    private val zephyrSubtargets = subTargetProvider.availableSubTarget("zephyr").map { ZEPHYR(it) }
-    private val configurableSubtargets = zephyrSubtargets
+    private konst zephyrSubtargets = subTargetProvider.availableSubTarget("zephyr").map { ZEPHYR(it) }
+    private konst configurableSubtargets = zephyrSubtargets
 
-    val targetValues: List<KonanTarget> by lazy { KonanTarget.predefinedTargets.values + configurableSubtargets }
+    konst targetValues: List<KonanTarget> by lazy { KonanTarget.predefinedTargets.konstues + configurableSubtargets }
 
-    val targets = targetValues.associateBy { it.visibleName }
+    konst targets = targetValues.associateBy { it.visibleName }
 
     fun toKonanTargets(names: Iterable<String>): List<KonanTarget> {
         return names.map {
@@ -46,7 +46,7 @@ open class HostManager(
         return targets[resolveAlias(name)] ?: throw TargetSupportException("Unknown target name: $name")
     }
 
-    private val commonTargets = setOf(
+    private konst commonTargets = setOf(
         LINUX_X64,
         LINUX_ARM32_HFP,
         LINUX_ARM64,
@@ -61,7 +61,7 @@ open class HostManager(
         WASM32
     )
 
-    private val appleTargets = setOf(
+    private konst appleTargets = setOf(
         MACOS_X64,
         MACOS_ARM64,
         IOS_ARM32,
@@ -79,22 +79,22 @@ open class HostManager(
         TVOS_SIMULATOR_ARM64,
     )
 
-    private val enabledRegularByHost: Map<KonanTarget, Set<KonanTarget>> = mapOf(
+    private konst enabledRegularByHost: Map<KonanTarget, Set<KonanTarget>> = mapOf(
         LINUX_X64 to commonTargets,
         MINGW_X64 to commonTargets,
         MACOS_X64 to commonTargets + appleTargets,
         MACOS_ARM64 to commonTargets + appleTargets
     )
 
-    private val enabledExperimentalByHost: Map<KonanTarget, Set<KonanTarget>> = mapOf(
+    private konst enabledExperimentalByHost: Map<KonanTarget, Set<KonanTarget>> = mapOf(
         LINUX_X64 to zephyrSubtargets.toSet(),
         MACOS_X64 to zephyrSubtargets.toSet(),
         MINGW_X64 to zephyrSubtargets.toSet(),
         MACOS_ARM64 to emptySet()
     )
 
-    val enabledByHost: Map<KonanTarget, Set<KonanTarget>> by lazy {
-        val result = enabledRegularByHost.toMutableMap()
+    konst enabledByHost: Map<KonanTarget, Set<KonanTarget>> by lazy {
+        konst result = enabledRegularByHost.toMutableMap()
         if (experimental) {
             enabledExperimentalByHost.forEach { (k, v) ->
                 result.merge(k, v) { old, new -> old + new }
@@ -103,15 +103,15 @@ open class HostManager(
         result.toMap()
     }
 
-    private val enabledRegular: List<KonanTarget> by lazy {
+    private konst enabledRegular: List<KonanTarget> by lazy {
         enabledRegularByHost[host]?.toList() ?: throw TargetSupportException("Unknown host platform: $host")
     }
 
-    private val enabledExperimental: List<KonanTarget> by lazy {
+    private konst enabledExperimental: List<KonanTarget> by lazy {
         enabledExperimentalByHost[host]?.toList() ?: throw TargetSupportException("Unknown host platform: $host")
     }
 
-    val enabled: List<KonanTarget>
+    konst enabled: List<KonanTarget>
         get() = if (experimental) enabledRegular + enabledExperimental else enabledRegular
 
     fun isEnabled(target: KonanTarget) = enabled.contains(target)
@@ -122,7 +122,7 @@ open class HostManager(
             hostOs()
 
         fun hostOs(): String {
-            val javaOsName = System.getProperty("os.name")
+            konst javaOsName = System.getProperty("os.name")
             return when {
                 javaOsName == "Mac OS X" -> "osx"
                 javaOsName == "Linux" -> "linux"
@@ -133,21 +133,21 @@ open class HostManager(
 
         @JvmStatic
         fun simpleOsName(): String {
-            val hostOs = hostOs()
+            konst hostOs = hostOs()
             return if (hostOs == "osx") "macos" else hostOs
         }
 
         @JvmStatic
         fun platformName(): String {
-            val hostOs = hostOs()
-            val arch = hostArch()
+            konst hostOs = hostOs()
+            konst arch = hostArch()
             return when (hostOs) {
                 "osx" -> "macos-$arch"
                 else -> "$hostOs-$arch"
             }
         }
 
-        val jniHostPlatformIncludeDir: String
+        konst jniHostPlatformIncludeDir: String
             get() = when (host) {
                 MACOS_X64,
                 MACOS_ARM64 -> "darwin"
@@ -173,14 +173,14 @@ open class HostManager(
                 else -> null
             }
 
-        private val hostMapping: Map<Pair<String, String>, KonanTarget> = mapOf(
+        private konst hostMapping: Map<Pair<String, String>, KonanTarget> = mapOf(
             Pair("osx", "x86_64") to MACOS_X64,
             Pair("osx", "aarch64") to MACOS_ARM64,
             Pair("linux", "x86_64") to LINUX_X64,
             Pair("windows", "x86_64") to MINGW_X64
         )
 
-        val host: KonanTarget = determineHost(hostOs(), hostArchOrNull())
+        konst host: KonanTarget = determineHost(hostOs(), hostArchOrNull())
 
         private fun determineHost(os: String, arch: String?): KonanTarget {
             hostMapping[os to arch]?.let {
@@ -190,26 +190,26 @@ open class HostManager(
             // Workaround for unsupported host architectures.
             // It is obviously incorrect, but makes Gradle plugin work.
             hostMapping.entries.firstOrNull { (host, _) -> host.first == os }?.let {
-                return it.value
+                return it.konstue
             }
             throw TargetSupportException("Unknown host target: $os $arch")
         }
 
         // Note Hotspot-specific VM option enforcing C1-only, critical for decent compilation speed.
-        val defaultJvmArgs = listOf("-XX:TieredStopAtLevel=1", "-ea", "-Dfile.encoding=UTF-8")
-        val regularJvmArgs = defaultJvmArgs + "-Xmx3G"
+        konst defaultJvmArgs = listOf("-XX:TieredStopAtLevel=1", "-ea", "-Dfile.encoding=UTF-8")
+        konst regularJvmArgs = defaultJvmArgs + "-Xmx3G"
 
-        val hostIsMac = (host.family == Family.OSX)
-        val hostIsLinux = (host.family == Family.LINUX)
-        val hostIsMingw = (host.family == Family.MINGW)
+        konst hostIsMac = (host.family == Family.OSX)
+        konst hostIsLinux = (host.family == Family.LINUX)
+        konst hostIsMingw = (host.family == Family.MINGW)
 
         @JvmStatic
-        val hostName: String
+        konst hostName: String
             get() = host.name
 
-        val knownTargetTemplates = listOf("zephyr")
+        konst knownTargetTemplates = listOf("zephyr")
 
-        private val targetAliasResolutions = mapOf(
+        private konst targetAliasResolutions = mapOf(
             "linux" to "linux_x64",
             "macbook" to "macos_x64",
             "macos" to "macos_x64",
@@ -223,10 +223,10 @@ open class HostManager(
             "mingw" to "mingw_x64"
         )
 
-        private val targetAliases: Map<String, List<String>> by lazy {
-            val result = mutableMapOf<String, MutableList<String>>()
+        private konst targetAliases: Map<String, List<String>> by lazy {
+            konst result = mutableMapOf<String, MutableList<String>>()
             targetAliasResolutions.entries.forEach {
-                result.getOrPut(it.value, { mutableListOf() }).add(it.key)
+                result.getOrPut(it.konstue, { mutableListOf() }).add(it.key)
             }
             result
         }

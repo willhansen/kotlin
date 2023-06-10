@@ -1,20 +1,20 @@
 // EXPECTED_REACHABLE_NODES: 1312
 package foo
 
-data class Holder<T>(val v: T)
+data class Holder<T>(konst v: T)
 
-data class Dat(val start: String, val end: String)
+data class Dat(konst start: String, konst end: String)
 
-data class Dat2(val start: String, val end: String)
+data class Dat2(konst start: String, konst end: String)
 
-class Obj(val start: String, val end: String)
+class Obj(konst start: String, konst end: String)
 
 fun box(): String {
-    val d1 = Dat("a", "b")
-    val d2 = Dat("a", "b")
-    val d3 = Dat("a", "c")
+    konst d1 = Dat("a", "b")
+    konst d2 = Dat("a", "b")
+    konst d3 = Dat("a", "c")
 
-    val otherD1 = Dat2("a", "b")
+    konst otherD1 = Dat2("a", "b")
 
     assertEquals(d1, d1)
     assertEquals(d1, d2)
@@ -38,7 +38,7 @@ fun box(): String {
     assertNotEquals(ho1, ho2)
     assertNotEquals(ho1, ho3)
 
-    val d1any: Any = d1
+    konst d1any: Any = d1
     assertTrue(d1any != "")
 
     return "OK"

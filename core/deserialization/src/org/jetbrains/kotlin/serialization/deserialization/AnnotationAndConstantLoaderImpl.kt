@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.types.KotlinType
 class AnnotationAndConstantLoaderImpl(
     module: ModuleDescriptor,
     notFoundClasses: NotFoundClasses,
-    private val protocol: SerializerExtensionProtocol
+    private konst protocol: SerializerExtensionProtocol
 ) : AnnotationAndConstantLoader<AnnotationDescriptor, ConstantValue<*>> {
-    private val deserializer = AnnotationDeserializer(module, notFoundClasses)
+    private konst deserializer = AnnotationDeserializer(module, notFoundClasses)
 
     override fun loadClassAnnotations(container: ProtoContainer.Class): List<AnnotationDescriptor> {
-        val annotations = container.classProto.getExtension(protocol.classAnnotation).orEmpty()
+        konst annotations = container.classProto.getExtension(protocol.classAnnotation).orEmpty()
         return annotations.map { proto -> deserializer.deserializeAnnotation(proto, container.nameResolver) }
     }
 
@@ -48,7 +48,7 @@ class AnnotationAndConstantLoaderImpl(
         proto: MessageLite,
         kind: AnnotatedCallableKind
     ): List<AnnotationDescriptor> {
-        val annotations = when (proto) {
+        konst annotations = when (proto) {
             is ProtoBuf.Constructor -> proto.getExtension(protocol.constructorAnnotation)
             is ProtoBuf.Function -> proto.getExtension(protocol.functionAnnotation)
             is ProtoBuf.Property -> when (kind) {
@@ -65,21 +65,21 @@ class AnnotationAndConstantLoaderImpl(
     }
 
     override fun loadPropertyBackingFieldAnnotations(container: ProtoContainer, proto: ProtoBuf.Property): List<AnnotationDescriptor> {
-        val annotations = protocol.propertyBackingFieldAnnotation?.let { proto.getExtension(it) }.orEmpty()
+        konst annotations = protocol.propertyBackingFieldAnnotation?.let { proto.getExtension(it) }.orEmpty()
         return annotations.map { annotationProto ->
             deserializer.deserializeAnnotation(annotationProto, container.nameResolver)
         }
     }
 
     override fun loadPropertyDelegateFieldAnnotations(container: ProtoContainer, proto: ProtoBuf.Property): List<AnnotationDescriptor> {
-        val annotations = protocol.propertyDelegatedFieldAnnotation?.let {proto.getExtension(it) }.orEmpty()
+        konst annotations = protocol.propertyDelegatedFieldAnnotation?.let {proto.getExtension(it) }.orEmpty()
         return annotations.map { annotationProto ->
             deserializer.deserializeAnnotation(annotationProto, container.nameResolver)
         }
     }
 
     override fun loadEnumEntryAnnotations(container: ProtoContainer, proto: ProtoBuf.EnumEntry): List<AnnotationDescriptor> {
-        val annotations = proto.getExtension(protocol.enumEntryAnnotation).orEmpty()
+        konst annotations = proto.getExtension(protocol.enumEntryAnnotation).orEmpty()
         return annotations.map { annotationProto ->
             deserializer.deserializeAnnotation(annotationProto, container.nameResolver)
         }
@@ -92,7 +92,7 @@ class AnnotationAndConstantLoaderImpl(
         parameterIndex: Int,
         proto: ProtoBuf.ValueParameter
     ): List<AnnotationDescriptor> {
-        val annotations = proto.getExtension(protocol.parameterAnnotation).orEmpty()
+        konst annotations = proto.getExtension(protocol.parameterAnnotation).orEmpty()
         return annotations.map { annotationProto ->
             deserializer.deserializeAnnotation(annotationProto, container.nameResolver)
         }
@@ -103,7 +103,7 @@ class AnnotationAndConstantLoaderImpl(
         proto: MessageLite,
         kind: AnnotatedCallableKind
     ): List<AnnotationDescriptor> {
-        val annotations = when (proto) {
+        konst annotations = when (proto) {
             is ProtoBuf.Function -> protocol.functionExtensionReceiverAnnotation?.let { proto.getExtension(it) }
             is ProtoBuf.Property -> when (kind) {
                 AnnotatedCallableKind.PROPERTY, AnnotatedCallableKind.PROPERTY_GETTER, AnnotatedCallableKind.PROPERTY_SETTER -> {
@@ -127,8 +127,8 @@ class AnnotationAndConstantLoaderImpl(
     }
 
     override fun loadPropertyConstant(container: ProtoContainer, proto: ProtoBuf.Property, expectedType: KotlinType): ConstantValue<*>? {
-        val value = proto.getExtensionOrNull(protocol.compileTimeValue) ?: return null
-        return deserializer.resolveValue(expectedType, value, container.nameResolver)
+        konst konstue = proto.getExtensionOrNull(protocol.compileTimeValue) ?: return null
+        return deserializer.resolveValue(expectedType, konstue, container.nameResolver)
     }
 
     override fun loadAnnotationDefaultValue(

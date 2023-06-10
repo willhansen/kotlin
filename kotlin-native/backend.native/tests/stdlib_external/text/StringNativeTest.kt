@@ -59,33 +59,33 @@ class StringNativeTest {
                 return code.toString(16).padStart(4, '0')
             }
 
-            val sigma = '\u03A3'
-            val lowerSigma = '\u03C3'
-            val specialLowerSigma = '\u03C2'
+            konst sigma = '\u03A3'
+            konst lowerSigma = '\u03C3'
+            konst specialLowerSigma = '\u03C2'
 
             // Build a string of the form: [cased][other](caseIgnorable*)(sigma)(caseIgnorable*)[other][cased]
             for (precedingCaseIgnorable in 0..5) {
                 for (succeedingCaseIgnorable in 0..5) {
-                    val caseIgnorableBefore = caseIgnorable(precedingCaseIgnorable)
-                    val caseIgnorableAfter = caseIgnorable(succeedingCaseIgnorable)
-                    val sigmaNearby = caseIgnorableBefore + sigma + caseIgnorableAfter
-                    val lowerSigmaNearby = caseIgnorableBefore + lowerSigma + caseIgnorableAfter
-                    val specialSigmaNearby = caseIgnorableBefore + specialLowerSigma + caseIgnorableAfter
+                    konst caseIgnorableBefore = caseIgnorable(precedingCaseIgnorable)
+                    konst caseIgnorableAfter = caseIgnorable(succeedingCaseIgnorable)
+                    konst sigmaNearby = caseIgnorableBefore + sigma + caseIgnorableAfter
+                    konst lowerSigmaNearby = caseIgnorableBefore + lowerSigma + caseIgnorableAfter
+                    konst specialSigmaNearby = caseIgnorableBefore + specialLowerSigma + caseIgnorableAfter
 
                     for (mask in 0 until (1 shl 4)) {
-                        val casedBefore = cased().repeat((mask shr 0) and 1)
-                        val casedAfter = cased().repeat((mask shr 1) and 1)
-                        val otherBefore = other().repeat((mask shr 2) and 1)
-                        val otherAfter = other().repeat((mask shr 3) and 1)
+                        konst casedBefore = cased().repeat((mask shr 0) and 1)
+                        konst casedAfter = cased().repeat((mask shr 1) and 1)
+                        konst otherBefore = other().repeat((mask shr 2) and 1)
+                        konst otherAfter = other().repeat((mask shr 3) and 1)
 
-                        val resultSigmaNearby =
+                        konst resultSigmaNearby =
                                 if (otherBefore.isEmpty() && casedBefore.isNotEmpty() && (otherAfter.isNotEmpty() || casedAfter.isEmpty()))
                                     specialSigmaNearby
                                 else
                                     lowerSigmaNearby
 
-                        val actual = (casedBefore + otherBefore + sigmaNearby + otherAfter + casedAfter).lowercase()
-                        val expected = casedBefore.lowercase() + otherBefore + resultSigmaNearby + otherAfter + casedAfter.lowercase()
+                        konst actual = (casedBefore + otherBefore + sigmaNearby + otherAfter + casedAfter).lowercase()
+                        konst expected = casedBefore.lowercase() + otherBefore + resultSigmaNearby + otherAfter + casedAfter.lowercase()
 
                         assertEquals(
                                 expected,

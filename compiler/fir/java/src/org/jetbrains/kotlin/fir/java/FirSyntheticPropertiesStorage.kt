@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.name.Name
 typealias SyntheticPropertiesCache = FirCache<Name, FirSyntheticPropertySymbol?, Pair<JavaClassUseSiteMemberScope, ResultOfIntersection<FirPropertySymbol>>>
 
 class FirSyntheticPropertiesStorage(session: FirSession) : FirSessionComponent {
-    private val cachesFactory = session.firCachesFactory
+    private konst cachesFactory = session.firCachesFactory
 
-    val cacheByOwner: FirCache<FirRegularClass, SyntheticPropertiesCache, Nothing?> =
+    konst cacheByOwner: FirCache<FirRegularClass, SyntheticPropertiesCache, Nothing?> =
         cachesFactory.createCache { _ ->
             cachesFactory.createCache { _, (scope, intersection) ->
                 scope.syntheticPropertyFromOverride(intersection)
@@ -30,4 +30,4 @@ class FirSyntheticPropertiesStorage(session: FirSession) : FirSessionComponent {
         }
 }
 
-val FirSession.syntheticPropertiesStorage: FirSyntheticPropertiesStorage by FirSession.sessionComponentAccessor()
+konst FirSession.syntheticPropertiesStorage: FirSyntheticPropertiesStorage by FirSession.sessionComponentAccessor()

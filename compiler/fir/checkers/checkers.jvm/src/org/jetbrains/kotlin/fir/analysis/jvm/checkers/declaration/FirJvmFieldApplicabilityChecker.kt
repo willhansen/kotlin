@@ -38,12 +38,12 @@ import org.jetbrains.kotlin.name.StandardClassIds
 
 object FirJvmFieldApplicabilityChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val session = context.session
-        val annotation = declaration.backingField?.getAnnotationByClassId(JVM_FIELD_ANNOTATION_CLASS_ID, session)
+        konst session = context.session
+        konst annotation = declaration.backingField?.getAnnotationByClassId(JVM_FIELD_ANNOTATION_CLASS_ID, session)
             ?: return
-        val containingClassSymbol = declaration.containingClassLookupTag()?.toFirRegularClassSymbol(session)
+        konst containingClassSymbol = declaration.containingClassLookupTag()?.toFirRegularClassSymbol(session)
 
-        val problem = when {
+        konst problem = when {
             declaration.delegate != null -> DELEGATE
             !declaration.hasBackingField -> return
             declaration.isOverridable(containingClassSymbol) -> NOT_FINAL
@@ -70,7 +70,7 @@ object FirJvmFieldApplicabilityChecker : FirPropertyChecker() {
             else -> return
         }
 
-        val factory = if (declaration.fromPrimaryConstructor == true &&
+        konst factory = if (declaration.fromPrimaryConstructor == true &&
             !context.session.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitJvmFieldOnOverrideFromInterfaceInPrimaryConstructor)
         ) {
             FirJvmErrors.INAPPLICABLE_JVM_FIELD_WARNING
@@ -82,7 +82,7 @@ object FirJvmFieldApplicabilityChecker : FirPropertyChecker() {
     }
 
     private fun FirTypeRef.isInlineClassThatRequiresMangling(session: FirSession): Boolean {
-        val symbol = this.coneType.toRegularClassSymbol(session) ?: return false
+        konst symbol = this.coneType.toRegularClassSymbol(session) ?: return false
         return symbol.isInline && !symbol.isDontMangleClass()
     }
 
@@ -105,7 +105,7 @@ object FirJvmFieldApplicabilityChecker : FirPropertyChecker() {
             return false
         }
 
-        val outerClassKind = getContainingDeclarationSymbol(session)?.classKind
+        konst outerClassKind = getContainingDeclarationSymbol(session)?.classKind
         return outerClassKind == ClassKind.INTERFACE || outerClassKind == ClassKind.ANNOTATION_CLASS
     }
 

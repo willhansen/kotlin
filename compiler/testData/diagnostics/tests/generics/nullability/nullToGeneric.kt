@@ -4,8 +4,8 @@
 fun <E> bar(x: E) {}
 
 fun <T> foo(): T {
-    val x1: T = <!NULL_FOR_NONNULL_TYPE!>null<!>
-    val x2: T? = null
+    konst x1: T = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    konst x2: T? = null
 
     bar<T>(<!NULL_FOR_NONNULL_TYPE!>null<!>)
     bar<T?>(null)
@@ -21,8 +21,8 @@ class A<F> {
     fun xyz(x: F) {}
 
     fun foo(): F {
-        val x1: F = <!NULL_FOR_NONNULL_TYPE!>null<!>
-        val x2: F? = null
+        konst x1: F = <!NULL_FOR_NONNULL_TYPE!>null<!>
+        konst x2: F? = null
 
         xyz(<!NULL_FOR_NONNULL_TYPE!>null<!>)
         bar<F?>(null)

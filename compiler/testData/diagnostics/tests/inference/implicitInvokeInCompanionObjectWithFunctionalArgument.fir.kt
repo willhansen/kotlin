@@ -8,9 +8,9 @@ class TestClass {
 }
 
 fun test(s: String): String {
-    val a = TestClass { "K" }
+    konst a = TestClass { "K" }
     a checkType { _<String>() }
 
-    val b = TestClass { return s }
+    konst b = TestClass { return s }
     b checkType { _<Nothing>() }
 }

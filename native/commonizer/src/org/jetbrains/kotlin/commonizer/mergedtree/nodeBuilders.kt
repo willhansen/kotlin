@@ -73,7 +73,7 @@ internal fun buildFunctionNode(
     size = size,
     nodeRelationship = nodeRelationship,
     commonizerProducer = {
-        val typeCommonizer = TypeCommonizer(classifiers, settings)
+        konst typeCommonizer = TypeCommonizer(classifiers, settings)
         FunctionCommonizer(typeCommonizer, FunctionOrPropertyBaseCommonizer(classifiers, settings, typeCommonizer)).asCommonizer()
     },
     nodeProducer = ::CirFunctionNode
@@ -91,7 +91,7 @@ internal fun buildClassNode(
     size = size,
     nodeRelationship = nodeRelationship,
     commonizerProducer = {
-        val typeCommonizer = TypeCommonizer(classifiers, settings)
+        konst typeCommonizer = TypeCommonizer(classifiers, settings)
         ClassCommonizer(typeCommonizer, ClassSuperTypeCommonizer(classifiers, typeCommonizer))
     },
     recursionMarker = CirClassRecursionMarker,
@@ -144,11 +144,11 @@ private fun <T : CirDeclaration, R : CirDeclaration, N : CirNode<T, R>> buildNod
     recursionMarker: R? = null,
     nodeProducer: (CommonizedGroup<T>, NullableLazyValue<R>) -> N
 ): N {
-    val targetDeclarations = CommonizedGroup<T>(size)
+    konst targetDeclarations = CommonizedGroup<T>(size)
 
-    val commonComputable = { commonize(nodeRelationship, targetDeclarations, commonizerProducer()) }
+    konst commonComputable = { commonize(nodeRelationship, targetDeclarations, commonizerProducer()) }
 
-    val commonLazyValue = if (recursionMarker != null)
+    konst commonLazyValue = if (recursionMarker != null)
         storageManager.createRecursionTolerantNullableLazyValue(commonComputable, recursionMarker)
     else
         storageManager.createNullableLazyValue(commonComputable)

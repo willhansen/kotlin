@@ -10,14 +10,14 @@ import kotlin.test.*
 @Suppress("NOTHING_TO_INLINE")
 inline fun <T, C : MutableCollection<in T>> foo(destination: C, predicate: (T) -> Boolean): C {
     for (element in destination) {
-        val value = element as T
-        if (!predicate(value)) destination.add(value)
+        konst konstue = element as T
+        if (!predicate(konstue)) destination.add(konstue)
     }
     return destination
 }
 
 fun bar(): Boolean {
-    val result = foo <Int, MutableList<Int>> (mutableListOf(1, 2, 3)) { true }
+    konst result = foo <Int, MutableList<Int>> (mutableListOf(1, 2, 3)) { true }
     return result.isEmpty()
 }
 

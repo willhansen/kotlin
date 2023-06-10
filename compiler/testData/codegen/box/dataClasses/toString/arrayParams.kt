@@ -4,7 +4,7 @@
 // TODO: muted automatically, investigate should it be ran for JS or not
 // IGNORE_BACKEND: JS
 
-data class A(val x: Array<Int>?, val y: IntArray?)
+data class A(konst x: Array<Int>?, konst y: IntArray?)
 
 fun box(): String {
     var ts = A(Array<Int>(2, {it}), IntArray(3)).toString()

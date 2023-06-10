@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.ir.util.isAnnotationClass
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-internal val annotationPhase = makeIrFilePhase<JvmBackendContext>(
+internal konst annotationPhase = makeIrFilePhase<JvmBackendContext>(
     { AnnotationLowering() },
     name = "Annotation",
     description = "Remove constructors of annotation classes"

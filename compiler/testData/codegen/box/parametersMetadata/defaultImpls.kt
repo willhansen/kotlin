@@ -10,12 +10,12 @@ interface Test {
 
 
 fun box(): String {
-    val testMethod = Class.forName("Test\$DefaultImpls").declaredMethods.single()
-    val parameters = testMethod.getParameters()
+    konst testMethod = Class.forName("Test\$DefaultImpls").declaredMethods.single()
+    konst parameters = testMethod.getParameters()
 
     if (!parameters[0].isSynthetic()) return "wrong modifier on receiver parameter: ${parameters[0].modifiers}"
 
-    if (parameters[1].modifiers != 0) return "wrong modifier on value parameter: ${parameters[1].modifiers}"
+    if (parameters[1].modifiers != 0) return "wrong modifier on konstue parameter: ${parameters[1].modifiers}"
 
     return parameters[1].name
 }

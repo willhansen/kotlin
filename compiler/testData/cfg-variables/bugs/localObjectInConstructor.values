@@ -5,7 +5,7 @@ fun println(obj: Any?) {}
 =====================
 == Demo0 ==
 class Demo0 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             println(state) // Ok
         }
@@ -29,7 +29,7 @@ println(state)             <v2>: *       NEW: call(println(state), println|<v1>)
 =====================
 == Demo1 ==
 class Demo1 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -98,7 +98,7 @@ println(state)                                     <v8>: *         NEW: call(pri
 =====================
 == Demo2 ==
 class Demo2 {
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true
@@ -141,7 +141,7 @@ println(state)                                                        <v11>: *  
 =====================
 == Demo3 ==
 class Demo3 {
-    private val some = run {
+    private konst some = run {
         if (state)
             state = true
 
@@ -192,7 +192,7 @@ f()   <v2>: {<: T}         NEW: call(f(), invoke|<v1>) -> <v2>
 =====================
 == Demo4 ==
 class Demo4 {
-    private val some = exec {
+    private konst some = exec {
         if (state)
             state = true
 
@@ -229,7 +229,7 @@ if (state) state = true println(state) // must be initialized   <v8>: *         
 class Demo5 {
     private var state: Boolean = true
 
-    private val some = object {
+    private konst some = object {
         fun foo() {
             if (state)
                 state = true

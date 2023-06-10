@@ -3,12 +3,12 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
-class Test(val x: S<String>, val y: S<String>) {
+class Test(konst x: S<String>, konst y: S<String>) {
     constructor(x: S<String>) : this(x, S("K"))
 
-    val test = x.string + y.string
+    konst test = x.string + y.string
 }
 
 fun box() = Test(S("O")).test

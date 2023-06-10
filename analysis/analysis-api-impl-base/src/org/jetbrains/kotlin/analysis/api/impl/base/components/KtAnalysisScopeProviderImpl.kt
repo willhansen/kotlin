@@ -22,16 +22,16 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.psiUtil.contains
 
 class KtAnalysisScopeProviderImpl(
-    override val analysisSession: KtAnalysisSession,
-    override val token: KtLifetimeToken,
-    private val shadowedScope: GlobalSearchScope
+    override konst analysisSession: KtAnalysisSession,
+    override konst token: KtLifetimeToken,
+    private konst shadowedScope: GlobalSearchScope
 ) : KtAnalysisScopeProvider() {
 
-    private val baseResolveScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst baseResolveScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
         KotlinResolutionScopeProvider.getInstance(analysisSession.useSiteModule.project).getResolutionScope(analysisSession.useSiteModule)
     }
 
-    private val resolveScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst resolveScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
         KtAnalysisScopeProviderResolveScope(baseResolveScope, analysisSession.useSiteModule, shadowedScope)
     }
 
@@ -43,15 +43,15 @@ class KtAnalysisScopeProviderImpl(
     }
 
     private fun PsiElement.isFromGeneratedModule(): Boolean {
-        val ktFile = containingFile as? KtFile ?: return false
+        konst ktFile = containingFile as? KtFile ?: return false
         return ktFile.virtualFile?.isFromGeneratedModule(analysisSession.useSiteModule) == true
     }
 }
 
 private class KtAnalysisScopeProviderResolveScope(
-    private val base: GlobalSearchScope,
-    private val useSiteModule: KtModule,
-    private val shadowed: GlobalSearchScope,
+    private konst base: GlobalSearchScope,
+    private konst useSiteModule: KtModule,
+    private konst shadowed: GlobalSearchScope,
 ) : GlobalSearchScope() {
     override fun getProject(): Project? = base.project
     override fun isSearchInModuleContent(aModule: Module): Boolean = base.isSearchInModuleContent(aModule)
@@ -65,7 +65,7 @@ private class KtAnalysisScopeProviderResolveScope(
 
 @OptIn(KtModuleStructureInternals::class)
 private fun VirtualFile.isFromGeneratedModule(useSiteModule: KtModule): Boolean {
-    val analysisContextModule = analysisExtensionFileContextModule ?: return false
+    konst analysisContextModule = analysisExtensionFileContextModule ?: return false
     if (analysisContextModule == useSiteModule) return true
     return analysisContextModule in useSiteModule.allDirectDependencies()
 }

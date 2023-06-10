@@ -19,7 +19,7 @@ import kotlin.collections.MutableMap.MutableEntry
  */
 public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
     private companion object {
-        private val Empty = LinkedHashMap<Nothing, Nothing>(0).also { it.isReadOnly = true }
+        private konst Empty = LinkedHashMap<Nothing, Nothing>(0).also { it.isReadOnly = true }
     }
 
     /**
@@ -34,7 +34,7 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
      * small modifications. Paying a small storage cost only if you use
      * LinkedHashMap and minimizing code size seemed like a better tradeoff
      */
-    private inner class ChainEntry<K, V>(key: K, value: V) : AbstractMutableMap.SimpleEntry<K, V>(key, value) {
+    private inner class ChainEntry<K, V>(key: K, konstue: V) : AbstractMutableMap.SimpleEntry<K, V>(key, konstue) {
         internal var next: ChainEntry<K, V>? = null
         internal var prev: ChainEntry<K, V>? = null
 
@@ -66,7 +66,7 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
 //                checkStructuralChange(map, this)
                 if (!hasNext()) throw NoSuchElementException()
 
-                val current = next!!
+                konst current = next!!
                 last = current
                 next = current.next.takeIf { it !== head }
                 return current
@@ -102,7 +102,7 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
             return false
         }
 
-        override val size: Int get() = this@LinkedHashMap.size
+        override konst size: Int get() = this@LinkedHashMap.size
 
         override fun checkIsMutable(): Unit = this@LinkedHashMap.checkIsMutable()
     }
@@ -124,14 +124,14 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
         // This entry is not in the list.
         check(next == null && prev == null)
 
-        val _head = head
+        konst _head = head
         if (_head == null) {
             head = this
             next = this
             prev = this
         } else {
-            // Chain is valid.
-            val _tail = checkNotNull(_head.prev)
+            // Chain is konstid.
+            konst _tail = checkNotNull(_head.prev)
             // Update me.
             prev = _tail
             next = _head
@@ -165,7 +165,7 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
    * duplicate the key here to eliminate changes to HashMap and minimize the
    * code here, at the expense of additional space.
    */
-    private val map: HashMap<K, ChainEntry<K, V>>
+    private konst map: HashMap<K, ChainEntry<K, V>>
 
     private var isReadOnly: Boolean = false
 
@@ -245,10 +245,10 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
 
     actual override fun containsKey(key: K): Boolean = map.containsKey(key)
 
-    actual override fun containsValue(value: V): Boolean {
+    actual override fun containsValue(konstue: V): Boolean {
         var node: ChainEntry<K, V> = head ?: return false
         do {
-            if (node.value == value) {
+            if (node.konstue == konstue) {
                 return true
             }
             node = node.next!!
@@ -259,34 +259,34 @@ public actual open class LinkedHashMap<K, V> : HashMap<K, V>, MutableMap<K, V> {
 
     internal override fun createEntrySet(): MutableSet<MutableMap.MutableEntry<K, V>> = EntrySet()
 
-    actual override operator fun get(key: K): V? = map.get(key)?.value
+    actual override operator fun get(key: K): V? = map.get(key)?.konstue
 
-    actual override fun put(key: K, value: V): V? {
+    actual override fun put(key: K, konstue: V): V? {
         checkIsMutable()
 
-        val old = map.get(key)
+        konst old = map.get(key)
         if (old == null) {
-            val newEntry = ChainEntry(key, value)
+            konst newEntry = ChainEntry(key, konstue)
             map.put(key, newEntry)
             newEntry.addToEnd()
             return null
         } else {
-            return old.setValue(value)
+            return old.setValue(konstue)
         }
     }
 
     actual override fun remove(key: K): V? {
         checkIsMutable()
 
-        val entry = map.remove(key)
+        konst entry = map.remove(key)
         if (entry != null) {
             entry.remove()
-            return entry.value
+            return entry.konstue
         }
         return null
     }
 
-    actual override val size: Int get() = map.size
+    actual override konst size: Int get() = map.size
 
     internal override fun checkIsMutable() {
         if (isReadOnly) throw UnsupportedOperationException()

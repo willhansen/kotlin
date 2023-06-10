@@ -189,7 +189,7 @@ public class JvmCodegenUtil {
             }
 
             if (isAnnotationValue || !isDebuggerContext(context)) {
-                // Unless we are evaluating expression in debugger context, only properties of the same class can be directly accessed
+                // Unless we are ekonstuating expression in debugger context, only properties of the same class can be directly accessed
                 return false;
             }
             else {

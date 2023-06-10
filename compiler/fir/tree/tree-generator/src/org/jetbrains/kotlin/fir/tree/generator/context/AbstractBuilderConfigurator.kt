@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.fir.tree.generator.util.DummyDelegate
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTreeBuilder: T) {
+abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(konst firTreeBuilder: T) {
     abstract class BuilderConfigurationContext {
-        abstract val builder: Builder
+        abstract konst builder: Builder
 
         private fun getField(name: String): FieldWithDefault {
             return builder[name]
@@ -32,22 +32,22 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
             useTypes(noReceiverExpressionType)
         }
 
-        fun default(field: String, value: String) {
+        fun default(field: String, konstue: String) {
             default(field) {
-                this.value = value
+                this.konstue = konstue
             }
         }
 
         fun defaultTrue(field: String) {
             default(field) {
-                value = "true"
+                konstue = "true"
             }
         }
 
         fun defaultFalse(vararg fields: String) {
             for (field in fields) {
                 default(field) {
-                    value = "false"
+                    konstue = "false"
                 }
             }
         }
@@ -55,7 +55,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
         fun defaultNull(vararg fields: String) {
             for (field in fields) {
                 default(field) {
-                    value = "null"
+                    konstue = "null"
                 }
                 require(getField(field).nullable) {
                     "$field is not nullable field"
@@ -67,19 +67,19 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
             DefaultValueContext(getField(field)).apply(init).applyConfiguration()
         }
 
-        inner class DefaultValueContext(private val field: FieldWithDefault) {
-            var value: String? = null
+        inner class DefaultValueContext(private konst field: FieldWithDefault) {
+            var konstue: String? = null
             var notNull: Boolean? = null
 
             fun applyConfiguration() {
-                if (value != null) field.defaultValueInBuilder = value
+                if (konstue != null) field.defaultValueInBuilder = konstue
                 if (notNull != null) field.notNull = notNull!!
             }
         }
     }
 
 
-    class IntermediateBuilderConfigurationContext(override val builder: IntermediateBuilder) : BuilderConfigurationContext() {
+    class IntermediateBuilderConfigurationContext(override konst builder: IntermediateBuilder) : BuilderConfigurationContext() {
         inner class Fields {
             // fields from <element>
             infix fun from(element: Element): ExceptConfigurator {
@@ -91,9 +91,9 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
                 return ExceptConfigurator()
             }
 
-            inner class Helper(val fieldName: String) {
+            inner class Helper(konst fieldName: String) {
                 infix fun from(element: Element) {
-                    val field = element[fieldName] ?: throw IllegalArgumentException("Element $element doesn't have field $fieldName")
+                    konst field = element[fieldName] ?: throw IllegalArgumentException("Element $element doesn't have field $fieldName")
                     builder.fields += FieldWithDefault(field)
                 }
             }
@@ -112,20 +112,20 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
             }
         }
 
-        val fields = Fields()
-        val parents: MutableList<IntermediateBuilder> get() = builder.parents
+        konst fields = Fields()
+        konst parents: MutableList<IntermediateBuilder> get() = builder.parents
 
         var materializedElement: Element
             get() = throw IllegalArgumentException()
-            set(value) {
-                builder.materializedElement = value
+            set(konstue) {
+                builder.materializedElement = konstue
             }
 
     }
 
     inner class IntermediateBuilderDelegateProvider(
-        private val name: String?,
-        private val block: IntermediateBuilderConfigurationContext.() -> Unit
+        private konst name: String?,
+        private konst block: IntermediateBuilderConfigurationContext.() -> Unit
     ) {
         lateinit var builder: IntermediateBuilder
 
@@ -133,7 +133,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
             thisRef: Nothing?,
             prop: KProperty<*>
         ): ReadOnlyProperty<Nothing?, IntermediateBuilder> {
-            val name = name ?: "Fir${prop.name.replaceFirstChar(Char::uppercaseChar)}"
+            konst name = name ?: "Fir${prop.name.replaceFirstChar(Char::uppercaseChar)}"
             builder = IntermediateBuilder(name).apply {
                 firTreeBuilder.intermediateBuilders += this
                 IntermediateBuilderConfigurationContext(this).block()
@@ -142,8 +142,8 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
         }
     }
 
-    inner class LeafBuilderConfigurationContext(override val builder: LeafBuilder) : BuilderConfigurationContext() {
-        val parents: MutableList<IntermediateBuilder> get() = builder.parents
+    inner class LeafBuilderConfigurationContext(override konst builder: LeafBuilder) : BuilderConfigurationContext() {
+        konst parents: MutableList<IntermediateBuilder> get() = builder.parents
 
         fun openBuilder() {
             builder.isOpen = true
@@ -159,8 +159,8 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
     }
 
     fun builder(element: Element, type: String? = null, init: LeafBuilderConfigurationContext.() -> Unit) {
-        val implementation = element.extractImplementation(type)
-        val builder = implementation.builder
+        konst implementation = element.extractImplementation(type)
+        konst builder = implementation.builder
         requireNotNull(builder)
         LeafBuilderConfigurationContext(builder).apply(init)
     }
@@ -168,7 +168,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
     private fun Element.extractImplementation(type: String?): Implementation {
         return if (type == null) {
             allImplementations.filter { it.kind?.hasLeafBuilder == true }.singleOrNull() ?: this@AbstractBuilderConfigurator.run {
-                val message = buildString {
+                konst message = buildString {
                     appendLine("${this@extractImplementation} has multiple implementations:")
                     for (implementation in allImplementations) {
                         appendLine("  - ${implementation.type}")
@@ -179,7 +179,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
             }
         } else {
             allImplementations.firstOrNull { it.type == type } ?: this@AbstractBuilderConfigurator.run {
-                val message = buildString {
+                konst message = buildString {
                     appendLine("${this@extractImplementation} has not implementation $type. Existing implementations:")
                     for (implementation in allImplementations) {
                         appendLine("  - ${implementation.type}")
@@ -192,7 +192,7 @@ abstract class AbstractBuilderConfigurator<T : AbstractFirTreeBuilder>(val firTr
     }
 
     fun noBuilder(element: Element, type: String? = null) {
-        val implementation = element.extractImplementation(type)
+        konst implementation = element.extractImplementation(type)
         implementation.builder = null
     }
 }

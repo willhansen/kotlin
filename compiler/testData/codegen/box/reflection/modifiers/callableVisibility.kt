@@ -21,11 +21,11 @@ open class Foo<in T> {
     fun getPrivateFun() = this::privateFun
     fun getPrivateToThisFun(): KFunction<*> = this::privateToThisFun
 
-    public val publicVal = Unit
-    protected val protectedVar = Unit
-    internal val internalVal = Unit
-    private val privateVal = Unit
-    private val privateToThisVal: T? = null
+    public konst publicVal = Unit
+    protected konst protectedVar = Unit
+    internal konst internalVal = Unit
+    private konst privateVal = Unit
+    private konst privateToThisVal: T? = null
 
     fun getProtectedVar() = this::protectedVar
     fun getPrivateVal() = this::privateVal
@@ -38,7 +38,7 @@ open class Foo<in T> {
 }
 
 fun box(): String {
-    val f = Foo<String>()
+    konst f = Foo<String>()
 
     assertEquals(KVisibility.PUBLIC, f::publicFun.visibility)
     assertEquals(KVisibility.PROTECTED, f.getProtectedFun().visibility)

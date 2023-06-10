@@ -53,7 +53,7 @@ public class Val<T> {
 
 // FILE: My.kt
 
-open class Wrapper<out T: Base>(val v: T)
+open class Wrapper<out T: Base>(konst v: T)
 
 class DerivedWrapper(v: Derived<*>): Wrapper<Derived<*>>(v)
 
@@ -68,9 +68,9 @@ object MyBase {
     fun exoticWrapper(x: Int) = ExoticWrapper(exotic(x))
 }
 
-class My(val x: Int) {
-    val wrapper/*: Wrapper<*>*/ by Properties.calcVal {
-        val y = x + 1
+class My(konst x: Int) {
+    konst wrapper/*: Wrapper<*>*/ by Properties.calcVal {
+        konst y = x + 1
         when {
             y > 0 -> MyBase.derivedWrapper()
             x < 0 -> MyBase.exoticWrapper(x)

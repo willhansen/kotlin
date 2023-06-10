@@ -65,7 +65,7 @@ fun Project.generator(fqName: String, sourceSet: SourceSet? = null, configure: J
 }
 
 fun Project.getBooleanProperty(name: String): Boolean? = this.findProperty(name)?.let {
-    val v = it.toString()
+    konst v = it.toString()
     if (v.isBlank()) true
     else v.toBoolean()
 }
@@ -84,11 +84,11 @@ fun Task.singleOutputFile(): File = when (this) {
     else -> outputs.files.singleFile
 }
 
-val Project.isConfigurationCacheDisabled
+konst Project.isConfigurationCacheDisabled
     get() = (gradle.startParameter as? org.gradle.api.internal.StartParameterInternal)?.configurationCache?.get() != true
 
-val Project.isIdeaActive
+konst Project.isIdeaActive
     get() = providers.systemProperty("idea.active").isPresent
 
-val Project.intellijCommunityDir: File
+konst Project.intellijCommunityDir: File
     get() = rootDir.resolve("intellij/community").takeIf { it.isDirectory } ?: rootDir.resolve("intellij")

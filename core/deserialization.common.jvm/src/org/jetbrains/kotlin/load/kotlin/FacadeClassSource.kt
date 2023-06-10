@@ -8,6 +8,6 @@ package org.jetbrains.kotlin.load.kotlin
 import org.jetbrains.kotlin.resolve.jvm.JvmClassName
 
 interface FacadeClassSource {
-    val className: JvmClassName
-    val facadeClassName: JvmClassName?
+    konst className: JvmClassName
+    konst facadeClassName: JvmClassName?
 }

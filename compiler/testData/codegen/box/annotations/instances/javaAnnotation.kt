@@ -10,7 +10,7 @@ public @interface A {}
 // FILE: B.java
 
 public @interface B {
-    String value();
+    String konstue();
 }
 
 // FILE: C.java
@@ -23,21 +23,21 @@ public @interface C {
 // FILE: D.java
 
 public @interface D {
-    String value() default "hello";
+    String konstue() default "hello";
 }
 
 // FILE: b.kt
 
 fun box(): String {
-    val a = A()
-    val b = B("OK")
-    assert(b.value == "OK")
-    val c = C(v2 = "v2", v1 = intArrayOf(1))
+    konst a = A()
+    konst b = B("OK")
+    assert(b.konstue == "OK")
+    konst c = C(v2 = "v2", v1 = intArrayOf(1))
     assert(c.v2 == "v2")
     // TODO(KT-47702): Looks like we have to force users either to pass default java parameters explicitly
-    // or hack LazyJavaClassDescriptor/JavaPropertyDescriptor to load annotation param default value,
+    // or hack LazyJavaClassDescriptor/JavaPropertyDescriptor to load annotation param default konstue,
     // because it is not stored currently anywhere.
-    // val d = D()
-    val d = D("OK").value
+    // konst d = D()
+    konst d = D("OK").konstue
     return d
 }

@@ -41,13 +41,13 @@ import org.jetbrains.kotlin.types.Variance
  * `String` and `Int` are unrelated classes.
  *
  * The above example only goes over covariant type arguments. For contravariant types, the checker simply checks whether the range formed by
- * covariant and contravariant bounds is empty. For example, a range like `[Collection, List]` is empty and hence invalid because `List` is
+ * covariant and contravariant bounds is empty. For example, a range like `[Collection, List]` is empty and hence inkonstid because `List` is
  * not a super class/interface of `Collection`
  */
 object ConeTypeCompatibilityChecker {
 
-    private val javaClassClassId = ClassId.fromString("java/lang/Class")
-    private val kotlinClassClassId = ClassId.fromString("kotlin/reflect/KClass")
+    private konst javaClassClassId = ClassId.fromString("java/lang/Class")
+    private konst kotlinClassClassId = ClassId.fromString("kotlin/reflect/KClass")
 
 
     /**
@@ -61,7 +61,7 @@ object ConeTypeCompatibilityChecker {
         SOFT_INCOMPATIBLE,
 
         /**
-         * The given types are definitely incompatible. If the established contracts of Kotlin code are respected, values of the given
+         * The given types are definitely incompatible. If the established contracts of Kotlin code are respected, konstues of the given
          * types can never be considered equal.
          */
         HARD_INCOMPATIBLE,
@@ -77,7 +77,7 @@ object ConeTypeCompatibilityChecker {
             return b.intersectedTypes.minOf { isCompatible(a, it) }
         }
 
-        return when (val intersectionType = intersectTypesOrNull(listOf(a, b))) {
+        return when (konst intersectionType = intersectTypesOrNull(listOf(a, b))) {
             is ConeIntersectionType -> intersectionType.intersectedTypes.getCompatibility(this)
             else -> if (intersectionType?.isNothing == true) Compatibility.HARD_INCOMPATIBLE else Compatibility.COMPATIBLE
         }
@@ -88,7 +88,7 @@ object ConeTypeCompatibilityChecker {
         if (all { with(ctx) { it.isNullableType() } }) return Compatibility.COMPATIBLE
 
         // Next can simply focus on the type hierarchy and don't need to worry about nullability.
-        val compatibilityUpperBound = when {
+        konst compatibilityUpperBound = when {
             all {
                 it.isPrimitive
             } -> Compatibility.SOFT_INCOMPATIBLE // TODO: remove after KT-46383 is fixed
@@ -125,7 +125,7 @@ object ConeTypeCompatibilityChecker {
         compatibilityUpperBound: Compatibility,
         checkedTypeParameters: MutableSet<FirTypeParameterSymbol> = mutableSetOf(),
     ): Compatibility {
-        val upperBoundClasses: Set<FirClassWithSuperClasses> = upperBounds.mapNotNull { it.toFirClassWithSuperClasses(this) }.toSet()
+        konst upperBoundClasses: Set<FirClassWithSuperClasses> = upperBounds.mapNotNull { it.toFirClassWithSuperClasses(this) }.toSet()
 
         // Following if condition is an optimization: if we ignore the subtyping relation and treat all upper bounds as unrelated
         // classes/interfaces, yet the types are deemed compatible for sure, then we just bail out early.
@@ -139,12 +139,12 @@ object ConeTypeCompatibilityChecker {
         // TODO: Due to KT-49358, we skip any checks on Java and Kotlin refection class.
         if (upperBounds.any { it.classId == javaClassClassId || it.classId == kotlinClassClassId }) return Compatibility.COMPATIBLE
 
-        val leafClassesOrInterfaces = computeLeafClassesOrInterfaces(upperBoundClasses)
+        konst leafClassesOrInterfaces = computeLeafClassesOrInterfaces(upperBoundClasses)
         this.areClassesOrInterfacesCompatible(leafClassesOrInterfaces, compatibilityUpperBound)?.let { return it }
 
         // Check if the range formed by upper bounds and lower bounds is empty.
         if (!lowerBounds.all { lowerBoundType ->
-                val classesSatisfyingLowerBounds =
+                konst classesSatisfyingLowerBounds =
                     lowerBoundType.toFirClassWithSuperClasses(this)?.thisAndAllSuperClasses ?: emptySet()
                 leafClassesOrInterfaces.all { it in classesSatisfyingLowerBounds }
             }
@@ -156,15 +156,15 @@ object ConeTypeCompatibilityChecker {
 
         // Base types are compatible. Now we check type parameters.
 
-        val typeArgumentMapping = mutableMapOf<FirTypeParameterSymbol, BoundTypeArguments>().apply {
+        konst typeArgumentMapping = mutableMapOf<FirTypeParameterSymbol, BoundTypeArguments>().apply {
             for (type in upperBounds) {
                 collectTypeArgumentMapping(type, this@getCompatibility, compatibilityUpperBound)
             }
         }
         var result = Compatibility.COMPATIBLE
-        val typeArgsCompatibility = typeArgumentMapping.asSequence()
+        konst typeArgsCompatibility = typeArgumentMapping.asSequence()
             .map { (paramRef, boundTypeArguments) ->
-                val (upper, lower, compatibility) = boundTypeArguments
+                konst (upper, lower, compatibility) = boundTypeArguments
                 if (paramRef in checkedTypeParameters) {
                     // if we are already checking this type parameter, simply bail out to prevent infinite recursion.
                     Compatibility.COMPATIBLE
@@ -187,9 +187,9 @@ object ConeTypeCompatibilityChecker {
      * output a list of leaf classes or interfaces in the class hierarchy.
      */
     private fun computeLeafClassesOrInterfaces(upperBoundClasses: Set<FirClassWithSuperClasses>): Set<FirClassWithSuperClasses> {
-        val isLeaf = mutableMapOf<FirClassWithSuperClasses, Boolean>()
+        konst isLeaf = mutableMapOf<FirClassWithSuperClasses, Boolean>()
         upperBoundClasses.associateWithTo(isLeaf) { true }  // implementation of keysToMap actually ends up creating 2 maps so this is better
-        val queue = ArrayDeque(upperBoundClasses)
+        konst queue = ArrayDeque(upperBoundClasses)
         while (queue.isNotEmpty()) {
             for (superClass in queue.removeFirst().superClasses) {
                 when (isLeaf[superClass]) {
@@ -217,7 +217,7 @@ object ConeTypeCompatibilityChecker {
         classesOrInterfaces: Collection<FirClassWithSuperClasses>,
         compatibilityUpperBound: Compatibility
     ): Compatibility? {
-        val classes = classesOrInterfaces.filter { !it.isInterface }
+        konst classes = classesOrInterfaces.filter { !it.isInterface }
         // Java force single inheritance, so any pair of unrelated classes are incompatible.
         if (classes.size >= 2) {
             return if (classes.any { it.getHasPredefinedEqualityContract(this) }) {
@@ -226,7 +226,7 @@ object ConeTypeCompatibilityChecker {
                 Compatibility.SOFT_INCOMPATIBLE
             }
         }
-        val finalClass = classes.firstOrNull { it.isFinal } ?: return null
+        konst finalClass = classes.firstOrNull { it.isFinal } ?: return null
         // One final class and some other unrelated interface are not compatible
         if (classesOrInterfaces.size > classes.size) {
             return if (finalClass.getHasPredefinedEqualityContract(this)) {
@@ -276,11 +276,11 @@ object ConeTypeCompatibilityChecker {
         ctx: ConeInferenceContext,
         compatibilityUpperBound: Compatibility
     ) {
-        val queue = ArrayDeque<TypeArgumentMapping>()
+        konst queue = ArrayDeque<TypeArgumentMapping>()
         queue.addLast(coneType.toTypeArgumentMapping(ctx) ?: return)
         while (queue.isNotEmpty()) {
-            val (typeParameterOwner, mapping) = queue.removeFirst()
-            val superTypes = typeParameterOwner.getSuperTypes()
+            konst (typeParameterOwner, mapping) = queue.removeFirst()
+            konst superTypes = typeParameterOwner.getSuperTypes()
             for (superType in superTypes) {
                 queue.addLast(superType.toTypeArgumentMapping(ctx, mapping) ?: continue)
             }
@@ -295,10 +295,10 @@ object ConeTypeCompatibilityChecker {
         ctx: ConeInferenceContext,
         envMapping: Map<FirTypeParameterSymbol, BoundTypeArgument> = emptyMap(),
     ): TypeArgumentMapping? {
-        val typeParameterOwner = getClassLikeElement(ctx) ?: return null
-        val mapping = buildMap<FirTypeParameterSymbol, BoundTypeArgument> {
+        konst typeParameterOwner = getClassLikeElement(ctx) ?: return null
+        konst mapping = buildMap<FirTypeParameterSymbol, BoundTypeArgument> {
             typeArguments.forEachIndexed { index, coneTypeProjection ->
-                val typeParameter = typeParameterOwner.getTypeParameter(index) ?: return@forEachIndexed
+                konst typeParameter = typeParameterOwner.getTypeParameter(index) ?: return@forEachIndexed
                 var boundTypeArgument: BoundTypeArgument = when (coneTypeProjection) {
                     // Ignore star since it doesn't provide any constraints.
                     ConeStarProjection -> return@forEachIndexed
@@ -314,10 +314,10 @@ object ConeTypeCompatibilityChecker {
                             else -> BoundTypeArgument(coneTypeProjection.type, Variance.INVARIANT)
                         }
                 }
-                val coneKotlinType = boundTypeArgument.type
+                konst coneKotlinType = boundTypeArgument.type
                 if (coneKotlinType is ConeTypeParameterType) {
-                    val envTypeParameter = coneKotlinType.lookupTag.typeParameterSymbol
-                    val envTypeArgument = envMapping[envTypeParameter]
+                    konst envTypeParameter = coneKotlinType.lookupTag.typeParameterSymbol
+                    konst envTypeArgument = envMapping[envTypeParameter]
                     if (envTypeArgument != null) {
                         boundTypeArgument = envTypeArgument
                     }
@@ -336,9 +336,9 @@ object ConeTypeCompatibilityChecker {
         compatibilityUpperBound: Compatibility,
     ) {
         computeIfAbsent(parameter) {
-            // the semantic of type parameter in Enum and KClass are fixed: values of types with incompatible type parameters are always
+            // the semantic of type parameter in Enum and KClass are fixed: konstues of types with incompatible type parameters are always
             // incompatible.
-            val compatibilityUpperBoundForTypeArg =
+            konst compatibilityUpperBoundForTypeArg =
                 if ((ctx.prohibitComparisonOfIncompatibleEnums && typeParameterOwner.classId == StandardClassIds.Enum) ||
                     (ctx.prohibitComparisonOfIncompatibleClasses && typeParameterOwner.classId == StandardClassIds.KClass)
                 ) {
@@ -348,7 +348,7 @@ object ConeTypeCompatibilityChecker {
                 }
             BoundTypeArguments(mutableSetOf(), mutableSetOf(), compatibilityUpperBoundForTypeArg)
         }.let {
-            val type = boundTypeArgument.type
+            konst type = boundTypeArgument.type
             if (boundTypeArgument.variance.allowsInPosition) {
                 it.lower += type.collectLowerBounds()
             }
@@ -379,18 +379,18 @@ object ConeTypeCompatibilityChecker {
 
     /** A class declaration and the arguments bound to the declared type parameters. */
     private data class TypeArgumentMapping(
-        val typeParameterOwner: FirClassLikeSymbol<*>,
-        val mapping: Map<FirTypeParameterSymbol, BoundTypeArgument>
+        konst typeParameterOwner: FirClassLikeSymbol<*>,
+        konst mapping: Map<FirTypeParameterSymbol, BoundTypeArgument>
     )
 
     /** A single bound type argument to a type parameter declared in a class. */
-    private data class BoundTypeArgument(val type: ConeKotlinType, val variance: Variance)
+    private data class BoundTypeArgument(konst type: ConeKotlinType, konst variance: Variance)
 
     /** Accumulated type arguments bound to a type parameter declared in a class. */
     private data class BoundTypeArguments(
-        val upper: MutableSet<ConeClassLikeType>,
-        val lower: MutableSet<ConeClassLikeType>,
-        val compatibilityUpperBound: Compatibility
+        konst upper: MutableSet<ConeClassLikeType>,
+        konst lower: MutableSet<ConeClassLikeType>,
+        konst compatibilityUpperBound: Compatibility
     )
 
     private fun ConeClassLikeType.toFirClassWithSuperClasses(ctx: ConeInferenceContext): FirClassWithSuperClasses? {
@@ -399,34 +399,34 @@ object ConeTypeCompatibilityChecker {
 
     private fun ConeClassLikeLookupTag.toFirClassWithSuperClasses(
         ctx: ConeInferenceContext
-    ): FirClassWithSuperClasses? = when (val klass = ctx.symbolProvider.getSymbolByLookupTag(this)) {
+    ): FirClassWithSuperClasses? = when (konst klass = ctx.symbolProvider.getSymbolByLookupTag(this)) {
         is FirTypeAliasSymbol -> klass.fullyExpandedClass(ctx.session)?.let { FirClassWithSuperClasses(it, ctx) }
         is FirClassSymbol<*> -> FirClassWithSuperClasses(klass, ctx)
         else -> null
     }
 
-    private data class FirClassWithSuperClasses(val firClass: FirClassSymbol<*>, val ctx: ConeInferenceContext) {
-        val isInterface: Boolean get() = firClass.isInterface
+    private data class FirClassWithSuperClasses(konst firClass: FirClassSymbol<*>, konst ctx: ConeInferenceContext) {
+        konst isInterface: Boolean get() = firClass.isInterface
 
-        val superClasses: Set<FirClassWithSuperClasses> by lazy {
+        konst superClasses: Set<FirClassWithSuperClasses> by lazy {
             firClass.resolvedSuperTypes.mapNotNull { (it as? ConeClassLikeType)?.lookupTag?.toFirClassWithSuperClasses(ctx) }.toSet()
         }
 
-        val thisAndAllSuperClasses: Set<FirClassWithSuperClasses> by lazy {
-            val queue = ArrayDeque<FirClassWithSuperClasses>()
+        konst thisAndAllSuperClasses: Set<FirClassWithSuperClasses> by lazy {
+            konst queue = ArrayDeque<FirClassWithSuperClasses>()
             queue.addLast(this)
             buildSet {
                 add(this@FirClassWithSuperClasses)
                 while (queue.isNotEmpty()) {
-                    val current = queue.removeFirst()
-                    val superTypes = current.superClasses
+                    konst current = queue.removeFirst()
+                    konst superTypes = current.superClasses
                     superTypes.filterNotTo(queue) { it in this@buildSet }
                     addAll(superTypes)
                 }
             }
         }
 
-        val isFinal: Boolean get() = firClass.isFinal
+        konst isFinal: Boolean get() = firClass.isFinal
 
         /**
          * The following are considered to have a predefined equality contract:
@@ -446,7 +446,7 @@ object ConeTypeCompatibilityChecker {
                     (firClass is FirRegularClassSymbol && (firClass.isData || firClass.isInline))
         }
 
-        private val FirClassSymbol<*>.isFinal: Boolean
+        private konst FirClassSymbol<*>.isFinal: Boolean
             get() {
                 return when (this) {
                     is FirAnonymousObjectSymbol -> true
@@ -456,9 +456,9 @@ object ConeTypeCompatibilityChecker {
             }
     }
 
-    private val ConeInferenceContext.prohibitComparisonOfIncompatibleEnums: Boolean
+    private konst ConeInferenceContext.prohibitComparisonOfIncompatibleEnums: Boolean
         get() = session.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitComparisonOfIncompatibleEnums)
 
-    private val ConeInferenceContext.prohibitComparisonOfIncompatibleClasses: Boolean
+    private konst ConeInferenceContext.prohibitComparisonOfIncompatibleClasses: Boolean
         get() = session.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitComparisonOfIncompatibleClasses)
 }

@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.psiUtil.containingClassOrObject
 import org.jetbrains.kotlin.resolve.BindingContext
 
 interface KtFe10Reference : KtReference {
-    override val resolver: ResolveCache.PolyVariantResolver<KtReference>
+    override konst resolver: ResolveCache.PolyVariantResolver<KtReference>
         get() = KtFe10PolyVariantResolver
 
     fun resolveToDescriptors(bindingContext: BindingContext): Collection<DeclarationDescriptor> = getTargetDescriptors(bindingContext)
@@ -24,11 +24,11 @@ interface KtFe10Reference : KtReference {
     fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor>
 
     fun isReferenceToImportAlias(alias: KtImportAlias): Boolean {
-        val importDirective = alias.importDirective ?: return false
-        val importedFqName = importDirective.importedFqName ?: return false
-        val helper = KtFe10ReferenceResolutionHelper.getInstance()
-        val importedDescriptors = helper.resolveImportReference(importDirective.containingKtFile, importedFqName)
-        val importableTargets = unwrappedTargets.mapNotNull {
+        konst importDirective = alias.importDirective ?: return false
+        konst importedFqName = importDirective.importedFqName ?: return false
+        konst helper = KtFe10ReferenceResolutionHelper.getInstance()
+        konst importedDescriptors = helper.resolveImportReference(importDirective.containingKtFile, importedFqName)
+        konst importableTargets = unwrappedTargets.mapNotNull {
             when {
                 it is KtConstructor<*> -> it.containingClassOrObject
                 it is PsiMethod && it.isConstructor -> it.containingClass
@@ -36,8 +36,8 @@ interface KtFe10Reference : KtReference {
             }
         }
 
-        val project = element.project
-        val resolveScope = element.resolveScope
+        konst project = element.project
+        konst resolveScope = element.resolveScope
 
         return importedDescriptors.any {
             helper.findPsiDeclarations(it, project, resolveScope).any { declaration ->
@@ -49,7 +49,7 @@ interface KtFe10Reference : KtReference {
 //    TODO: Implement KtSymbolBasedReference and uncomment the following implementation after FE10 analysis API is made available in IDE
 //    override fun KtAnalysisSession.resolveToSymbols(): Collection<KtSymbol> {
 //        require(this is KtFe10AnalysisSession)
-//        val bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(element)
+//        konst bindingContext = KtFe10ReferenceResolutionHelper.getInstance().partialAnalyze(element)
 //        return getTargetDescriptors(bindingContext).mapNotNull { descriptor ->
 //            descriptor.toKtSymbol(analysisContext)
 //        }

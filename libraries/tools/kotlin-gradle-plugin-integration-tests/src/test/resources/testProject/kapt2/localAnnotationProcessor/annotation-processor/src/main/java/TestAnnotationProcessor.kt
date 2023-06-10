@@ -17,21 +17,21 @@ annotation class TestAnnotation
 @SupportedOptions(TestAnnotationProcessor.KAPT_KOTLIN_GENERATED_OPTION_NAME)
 class TestAnnotationProcessor : AbstractProcessor() {
     companion object {
-        const val KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
+        const konst KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
     }
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
-        val annotatedElements = roundEnv.getElementsAnnotatedWith(TestAnnotation::class.java)
+        konst annotatedElements = roundEnv.getElementsAnnotatedWith(TestAnnotation::class.java)
         if (annotatedElements.isEmpty()) return false
 
-        val kaptKotlinGeneratedDir = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: run {
+        konst kaptKotlinGeneratedDir = processingEnv.options[KAPT_KOTLIN_GENERATED_OPTION_NAME] ?: run {
             processingEnv.messager.printMessage(ERROR, "Can't find the target directory for generated Kotlin files.")
             return false
         }
 
-        val generatedKtFile = kotlinFile("test.generated") {
+        konst generatedKtFile = kotlinFile("test.generated") {
             for (element in annotatedElements) {
-                val typeElement = element.toTypeElementOrNull() ?: continue
+                konst typeElement = element.toTypeElementOrNull() ?: continue
 
                 property("simpleClassName") {
                     receiverType(typeElement.qualifiedName.toString())
@@ -67,7 +67,7 @@ class TestAnnotationProcessor : AbstractProcessor() {
 
     fun Element.toTypeElementOrNull(): TypeElement? {
         if (this !is TypeElement) {
-            processingEnv.messager.printMessage(ERROR, "Invalid element type, class expected", this)
+            processingEnv.messager.printMessage(ERROR, "Inkonstid element type, class expected", this)
             return null
         }
 

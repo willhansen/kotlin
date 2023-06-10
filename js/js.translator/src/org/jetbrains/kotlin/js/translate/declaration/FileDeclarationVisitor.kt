@@ -27,14 +27,14 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtProperty
 import org.jetbrains.kotlin.resolve.BindingContext
 
-class FileDeclarationVisitor(private val context: TranslationContext) : AbstractDeclarationVisitor() {
+class FileDeclarationVisitor(private konst context: TranslationContext) : AbstractDeclarationVisitor() {
     override fun visitProperty(expression: KtProperty, context: TranslationContext) {
-        val propertyDescriptor = BindingUtils.getPropertyDescriptor(context.bindingContext(), expression)
+        konst propertyDescriptor = BindingUtils.getPropertyDescriptor(context.bindingContext(), expression)
 
-        val innerName = context.getInnerNameForDescriptor(propertyDescriptor)
-        val backingFieldRequired = context.bindingContext()[BindingContext.BACKING_FIELD_REQUIRED, propertyDescriptor] ?: false
+        konst innerName = context.getInnerNameForDescriptor(propertyDescriptor)
+        konst backingFieldRequired = context.bindingContext()[BindingContext.BACKING_FIELD_REQUIRED, propertyDescriptor] ?: false
         if (backingFieldRequired || expression.delegateExpression != null) {
-            val initializer = context.translateDelegateOrInitializerExpression(expression)
+            konst initializer = context.translateDelegateOrInitializerExpression(expression)
             context.addDeclarationStatement(JsAstUtils.newVar(innerName, null))
             if (initializer != null) {
                 context.addTopLevelStatement(JsAstUtils.assignment(innerName.makeRef(), initializer).makeStmt())

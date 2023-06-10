@@ -7,7 +7,7 @@ expect class Foo2
 
 expect fun foo2(): Int
 
-expect val s: String
+expect konst s: String
 
 expect open class Foo3
 
@@ -18,7 +18,7 @@ expect open class Foo3
 interface Foo1
 <!ACTUAL_WITHOUT_EXPECT!>actual interface Foo2<!>
 
-<!ACTUAL_WITHOUT_EXPECT!>actual var s: String = "value"<!>
+<!ACTUAL_WITHOUT_EXPECT!>actual var s: String = "konstue"<!>
 
 fun foo2(): Int = 0
 

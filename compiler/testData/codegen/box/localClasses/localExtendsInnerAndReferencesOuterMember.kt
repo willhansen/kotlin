@@ -1,9 +1,9 @@
 class A {
     fun box(): String {
         class Local : Inner() {
-            val u = foo()
+            konst u = foo()
         }
-        val u = Local().u
+        konst u = Local().u
         return if (u == 42) "OK" else "Fail $u"
     }
 

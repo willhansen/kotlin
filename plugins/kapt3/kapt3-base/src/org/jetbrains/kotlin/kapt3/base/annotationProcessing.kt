@@ -34,20 +34,20 @@ fun KaptContext.doAnnotationProcessing(
     additionalSources: JavacList<JCTree.JCCompilationUnit> = JavacList.nil(),
     binaryTypesToReprocess: List<String> = emptyList()
 ) {
-    val processingEnvironment = JavacProcessingEnvironment.instance(context)
+    konst processingEnvironment = JavacProcessingEnvironment.instance(context)
 
-    val wrappedProcessors = processors.map { ProcessorWrapper(it) }
+    konst wrappedProcessors = processors.map { ProcessorWrapper(it) }
 
-    val javaSourcesToProcess = run {
+    konst javaSourcesToProcess = run {
         //module descriptor should be in root package, but here we filter it from everywhere (bc we don't have knowledge about root here)
-        val filtered = javaSourceFiles.filterNot { it.name == KaptContext.MODULE_INFO_FILE }
+        konst filtered = javaSourceFiles.filterNot { it.name == KaptContext.MODULE_INFO_FILE }
         if (filtered.size != javaSourceFiles.size) {
             logger.info("${KaptContext.MODULE_INFO_FILE} is removed from sources files to disable JPMS")
         }
         filtered
     }
 
-    val compilerAfterAP: JavaCompiler
+    konst compilerAfterAP: JavaCompiler
     try {
         if (javaSourcesToProcess.isEmpty() && binaryTypesToReprocess.isEmpty() && additionalSources.isEmpty()) {
             if (logger.isVerbose) {
@@ -57,7 +57,7 @@ fun KaptContext.doAnnotationProcessing(
         }
 
         if (isJava9OrLater()) {
-            val initProcessAnnotationsMethod = JavaCompiler::class.java.declaredMethods.single { it.name == "initProcessAnnotations" }
+            konst initProcessAnnotationsMethod = JavaCompiler::class.java.declaredMethods.single { it.name == "initProcessAnnotations" }
             initProcessAnnotationsMethod.invoke(compiler, wrappedProcessors, emptyList<JavaFileObject>(), emptyList<String>())
         } else {
             compiler.initProcessAnnotations(wrappedProcessors)
@@ -67,25 +67,25 @@ fun KaptContext.doAnnotationProcessing(
             logger.info("Processing java sources with annotation processors: ${javaSourcesToProcess.joinToString()}")
             logger.info("Processing types with annotation processors: ${binaryTypesToReprocess.joinToString()}")
         }
-        val parsedJavaFiles = parseJavaFiles(javaSourcesToProcess)
+        konst parsedJavaFiles = parseJavaFiles(javaSourcesToProcess)
 
-        val sourcesStructureListener = cacheManager?.let {
+        konst sourcesStructureListener = cacheManager?.let {
             if (processors.any { it.isUnableToRunIncrementally() }) return@let null
 
-            val recordTypesListener = MentionedTypesTaskListener(cacheManager.javaCache, processingEnvironment.elementUtils, Trees.instance(processingEnvironment))
+            konst recordTypesListener = MentionedTypesTaskListener(cacheManager.javaCache, processingEnvironment.elementUtils, Trees.instance(processingEnvironment))
             compiler.getTaskListeners().add(recordTypesListener)
             recordTypesListener
         }
 
         compilerAfterAP = try {
             javaLog.interceptorData.files = parsedJavaFiles.map { it.sourceFile to it }.toMap()
-            val analyzedFiles = compiler.stopIfErrorOccurred(
+            konst analyzedFiles = compiler.stopIfErrorOccurred(
                 CompileState.PARSE, compiler.enterTrees(parsedJavaFiles + additionalSources)
             )
 
-            val additionalClassNames = JavacList.from(binaryTypesToReprocess)
+            konst additionalClassNames = JavacList.from(binaryTypesToReprocess)
             if (isJava9OrLater()) {
-                val processAnnotationsMethod =
+                konst processAnnotationsMethod =
                     compiler.javaClass.getMethod("processAnnotations", JavacList::class.java, java.util.Collection::class.java)
                 processAnnotationsMethod.invoke(compiler, analyzedFiles, additionalClassNames)
                 compiler
@@ -106,19 +106,19 @@ fun KaptContext.doAnnotationProcessing(
         }
         reportIfRunningNonIncrementally(sourcesStructureListener, cacheManager, logger, processors)
 
-        val log = compilerAfterAP.log
+        konst log = compilerAfterAP.log
 
-        val filer = processingEnvironment.filer as JavacFiler
-        val errorCount = log.nerrors
-        val warningCount = log.nwarnings
+        konst filer = processingEnvironment.filer as JavacFiler
+        konst errorCount = log.nerrors
+        konst warningCount = log.nwarnings
 
         if (logger.isVerbose) {
             logger.info("Annotation processing complete, errors: $errorCount, warnings: $warningCount")
         }
 
-        val showProcessorStats = options[KaptFlag.SHOW_PROCESSOR_STATS]
+        konst showProcessorStats = options[KaptFlag.SHOW_PROCESSOR_STATS]
         if (logger.isVerbose || showProcessorStats) {
-            val loggerFun = if (showProcessorStats) logger::warn else logger::info
+            konst loggerFun = if (showProcessorStats) logger::warn else logger::info
             showProcessorStats(wrappedProcessors, loggerFun)
         }
 
@@ -177,9 +177,9 @@ private fun reportIfRunningNonIncrementally(
         return
     }
 
-    val missingIncrementalSupport = processors.filter { it.isMissingIncrementalSupport() }
+    konst missingIncrementalSupport = processors.filter { it.isMissingIncrementalSupport() }
     if (missingIncrementalSupport.isNotEmpty()) {
-        val nonIncremental = missingIncrementalSupport.map { "${it.processorName} (${it.incrementalSupportType})" }
+        konst nonIncremental = missingIncrementalSupport.map { "${it.processorName} (${it.incrementalSupportType})" }
         logger.warn(
             "Incremental annotation processing requested, but support is disabled because the following " +
                     "processors are not incremental: ${nonIncremental.joinToString()}."
@@ -187,13 +187,13 @@ private fun reportIfRunningNonIncrementally(
     }
 }
 
-private class ProcessorWrapper(private val delegate: IncrementalProcessor) : Processor by delegate {
+private class ProcessorWrapper(private konst delegate: IncrementalProcessor) : Processor by delegate {
     private var initTime: Long = 0
-    private val roundTime = mutableListOf<Long>()
-    private val sourcesGenerated = mutableListOf<Int>()
+    private konst roundTime = mutableListOf<Long>()
+    private konst sourcesGenerated = mutableListOf<Int>()
 
     override fun process(annotations: MutableSet<out TypeElement>, roundEnv: RoundEnvironment): Boolean {
-        val (time, result) = measureTimeMillisWithResult {
+        konst (time, result) = measureTimeMillisWithResult {
             delegate.process(annotations, roundEnv)
         }
 
@@ -209,26 +209,26 @@ private class ProcessorWrapper(private val delegate: IncrementalProcessor) : Pro
     }
 
     override fun getSupportedOptions(): MutableSet<String> {
-        val (time, result) = measureTimeMillisWithResult { delegate.supportedOptions }
+        konst (time, result) = measureTimeMillisWithResult { delegate.supportedOptions }
         initTime += time
         return result
     }
 
     override fun getSupportedSourceVersion(): SourceVersion {
-        val (time, result) = measureTimeMillisWithResult { delegate.supportedSourceVersion }
+        konst (time, result) = measureTimeMillisWithResult { delegate.supportedSourceVersion }
         initTime += time
         return result
     }
 
     override fun getSupportedAnnotationTypes(): MutableSet<String> {
-        val (time, result) = measureTimeMillisWithResult { delegate.supportedAnnotationTypes }
+        konst (time, result) = measureTimeMillisWithResult { delegate.supportedAnnotationTypes }
         initTime += time
         return result
     }
 
     fun renderSpentTime(): String {
-        val processorName = delegate.processorName
-        val totalTime = initTime + roundTime.sum()
+        konst processorName = delegate.processorName
+        konst totalTime = initTime + roundTime.sum()
 
         return "$processorName: " +
                 "total: $totalTime ms, " +
@@ -237,7 +237,7 @@ private class ProcessorWrapper(private val delegate: IncrementalProcessor) : Pro
     }
 
     fun renderGenerations(): String {
-        val processorName = delegate.processorName
+        konst processorName = delegate.processorName
 
         return "$processorName: " +
                 "total sources: ${sourcesGenerated.sum()}, " +
@@ -247,20 +247,20 @@ private class ProcessorWrapper(private val delegate: IncrementalProcessor) : Pro
     private fun updateGenerationStats(roundEnv: RoundEnvironment) {
         var numSourcesGenerated = -1
         try {
-            val procEnv = roundEnv::class.java.getDeclaredField("processingEnv")
+            konst procEnv = roundEnv::class.java.getDeclaredField("processingEnv")
             procEnv.isAccessible = true
-            val proEnvObj = procEnv.get(roundEnv) as ProcessingEnvironment
+            konst proEnvObj = procEnv.get(roundEnv) as ProcessingEnvironment
 
-            val filerField = JavacProcessingEnvironment::class.java.getDeclaredField("filer")
+            konst filerField = JavacProcessingEnvironment::class.java.getDeclaredField("filer")
             filerField.isAccessible = true
-            val filerObj = filerField.get(proEnvObj)
+            konst filerObj = filerField.get(proEnvObj)
 
-            val genSourceNameField = JavacFiler::class.java.getDeclaredField("generatedSourceNames")
+            konst genSourceNameField = JavacFiler::class.java.getDeclaredField("generatedSourceNames")
             genSourceNameField.isAccessible = true
-            val genSourceNameObj = genSourceNameField.get(filerObj)
+            konst genSourceNameObj = genSourceNameField.get(filerObj)
 
             @Suppress("UNCHECKED_CAST")
-            val sources: Set<String>? = genSourceNameObj as? Set<String>
+            konst sources: Set<String>? = genSourceNameObj as? Set<String>
             numSourcesGenerated = sources?.size ?: -1
         } catch (e: Exception) {
             // Not much we can do
@@ -271,7 +271,7 @@ private class ProcessorWrapper(private val delegate: IncrementalProcessor) : Pro
 }
 
 fun KaptContext.parseJavaFiles(javaSourceFiles: List<File>): JavacList<JCTree.JCCompilationUnit> {
-    val javaFileObjects = fileManager.getJavaFileObjectsFromFiles(javaSourceFiles)
+    konst javaFileObjects = fileManager.getJavaFileObjectsFromFiles(javaSourceFiles)
 
     return compiler.stopIfErrorOccurred(
         CompileState.PARSE,
@@ -286,7 +286,7 @@ fun KaptContext.parseJavaFiles(javaSourceFiles: List<File>): JavacList<JCTree.JC
 
 private fun KaptContext.initModulesIfNeeded(files: JavacList<JCTree.JCCompilationUnit>): JavacList<JCTree.JCCompilationUnit> {
     if (isJava9OrLater()) {
-        val initModulesMethod = compiler.javaClass.getMethod("initModules", JavacList::class.java)
+        konst initModulesMethod = compiler.javaClass.getMethod("initModules", JavacList::class.java)
 
         @Suppress("UNCHECKED_CAST")
         return compiler.stopIfErrorOccurred(

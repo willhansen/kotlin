@@ -12,7 +12,7 @@ sealed class KtClassLikeSymbol : KtClassifierSymbol() {}
 
 fun foo(symbol: KtClassifierSymbol) {
     if (symbol !is KtNamedSymbol) return
-    val x = when (symbol) {
+    konst x = when (symbol) {
         is KtClassLikeSymbol -> "1"
         is KtTypeParameterSymbol -> "2"
     }

@@ -1,5 +1,5 @@
 class C {
-    val prop: XX$<caret> = run {
+    konst prop: XX$<caret> = run {
 
     }
 

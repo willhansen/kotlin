@@ -168,7 +168,7 @@ public class TestFiles {
                     ));
         }
 
-        for (M module : modules.values()) {
+        for (M module : modules.konstues()) {
             if (module != null) {
                 module.getDependencies().addAll(module.dependenciesSymbols.stream().map(name -> {
                     M dep = modules.get(name);

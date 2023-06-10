@@ -2,12 +2,12 @@
 // KJS_WITH_FULL_RUNTIME
 
 fun box(): String {
-    val size = 2
-    val a = Array(size) { "$it" }
-    val data = Iterable { a.iterator() }
+    konst size = 2
+    konst a = Array(size) { "$it" }
+    konst data = Iterable { a.iterator() }
 
-    val dataChunked = data.chunked(size).single()
-    val expectedSingleChunk = data.toList()
+    konst dataChunked = data.chunked(size).single()
+    konst expectedSingleChunk = data.toList()
     if (expectedSingleChunk != dataChunked)
         return "Fail"
 

@@ -41,7 +41,7 @@ sourceSets {
 
 projectTest {
     dependsOn(":dist")
-    val jdkHome = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_1_8)
+    konst jdkHome = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_1_8)
     doFirst {
         environment("kotlin.tests.android.timeout", "45")
         environment("JAVA_HOME", jdkHome.get())
@@ -59,7 +59,7 @@ projectTest {
     useAndroidEmulator(this)
 }
 
-val generateAndroidTests by generator("org.jetbrains.kotlin.android.tests.CodegenTestsOnAndroidGenerator") {
+konst generateAndroidTests by generator("org.jetbrains.kotlin.android.tests.CodegenTestsOnAndroidGenerator") {
     workingDir = rootDir
     dependsOn(rootProject.tasks.named("dist"))
 }

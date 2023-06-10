@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class Str(val s: String)
+konstue class Str(konst s: String)
 
 @JvmOverloads
 fun test(so: String = "O", sk: String = "K") = Str(so + sk)

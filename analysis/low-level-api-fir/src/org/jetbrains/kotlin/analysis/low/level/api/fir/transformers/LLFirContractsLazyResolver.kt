@@ -29,7 +29,7 @@ internal object LLFirContractsLazyResolver : LLFirLazyResolver(FirResolvePhase.C
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirContractsTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirContractsTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -57,7 +57,7 @@ private class LLFirContractsTargetResolver(
     scopeSession,
     FirResolvePhase.CONTRACTS
 ) {
-    override val transformer = FirContractResolveTransformer(session, scopeSession)
+    override konst transformer = FirContractResolveTransformer(session, scopeSession)
 
     override fun doLazyResolveUnderLock(target: FirElementWithResolveState) {
         when (target) {

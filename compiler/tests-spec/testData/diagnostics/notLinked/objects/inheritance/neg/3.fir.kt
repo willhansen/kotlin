@@ -8,7 +8,7 @@
  */
 
 // TESTCASE NUMBER: 3
-open class Foo(val prop: Int) {
+open class Foo(konst prop: Int) {
     object MyObject : Foo(MyObject.prop)
 }
 

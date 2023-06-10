@@ -27,7 +27,7 @@ fun threeLayersReturn(x: Int?): Int? {
     // So, in fact, middle never finished normally
     // Hence 'y = 54' in middle is unreachable, and middle doesn't performs definite initialization
     // Hence, outer doesn't performs definite initialization
-    val y: Int
+    konst y: Int
     myRun outer@ {
         myRun middle@ {
             x.myLet inner@ {

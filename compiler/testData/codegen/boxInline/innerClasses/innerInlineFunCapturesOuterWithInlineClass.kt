@@ -1,5 +1,5 @@
 // FILE: 1.kt
-class E<T>(val x: T) {
+class E<T>(konst x: T) {
     inner class Inner {
         inline fun foo(): T = x
     }
@@ -7,6 +7,6 @@ class E<T>(val x: T) {
 
 // FILE: 2.kt
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 fun box(): String = E(IC("OK")).Inner().foo().s

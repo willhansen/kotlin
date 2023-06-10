@@ -1,5 +1,5 @@
-val foo = 1
+konst foo = 1
 
-val jsSpecificProperty = 42
-val jsAndJvmSpecificProperty = 42 * 2
-val jsAndNativeSpecificProperty = 42 * 3
+konst jsSpecificProperty = 42
+konst jsAndJvmSpecificProperty = 42 * 2
+konst jsAndNativeSpecificProperty = 42 * 3

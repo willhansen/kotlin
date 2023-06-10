@@ -2,20 +2,20 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
-class BoxT<T>(val boxed: T)
-class BoxT2<T: Any>(val boxed: T?)
-class BoxAny(val boxed: Any?)
-class BoxFoo(val boxed: IFoo?)
+class BoxT<T>(konst boxed: T)
+class BoxT2<T: Any>(konst boxed: T?)
+class BoxAny(konst boxed: Any?)
+class BoxFoo(konst boxed: IFoo?)
 
 interface IFoo
 
 interface Marker
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt(val i: Int): Marker
+konstue class IcInt(konst i: Int): Marker
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I32<T: IcInt>(val value: T?) : IFoo where T: Marker
+konstue class I32<T: IcInt>(konst konstue: T?) : IFoo where T: Marker
 
 fun <T: IcInt> boxToTypeParameter(x: I32<T>?) where T: Marker = BoxT(x)
 fun <T: IcInt> boxToTypeParameter2(x: I32<T>?) where T: Marker = BoxT2(x)

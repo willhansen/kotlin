@@ -83,12 +83,12 @@ class LambdaExpressionElementType extends IErrorCounterReparseableElementType {
         }
 
         KtFunctionLiteral literal = lambdaExpression.getFunctionLiteral();
-        KtParameterList valueParameterList = literal.getValueParameterList();
-        if (valueParameterList == null || valueParameterList.getParameters().size() <= 1) {
+        KtParameterList konstueParameterList = literal.getValueParameterList();
+        if (konstueParameterList == null || konstueParameterList.getParameters().size() <= 1) {
             return false;
         }
 
-        PsiElement comma = valueParameterList.getFirstComma();
+        PsiElement comma = konstueParameterList.getFirstComma();
         if (comma == null) {
             return false;
         }

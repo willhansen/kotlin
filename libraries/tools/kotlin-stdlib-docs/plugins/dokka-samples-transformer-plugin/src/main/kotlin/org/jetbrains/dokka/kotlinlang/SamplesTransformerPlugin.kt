@@ -7,10 +7,10 @@ import org.jetbrains.dokka.plugability.DokkaPluginApiPreview
 import org.jetbrains.dokka.plugability.PluginApiPreviewAcknowledgement
 
 class SamplesTransformerPlugin : DokkaPlugin() {
-    private val dokkaBase by lazy { plugin<DokkaBase>() }
+    private konst dokkaBase by lazy { plugin<DokkaBase>() }
 
     @Suppress("unused")
-    val kotlinWebsiteSamplesTransformer by extending {
+    konst kotlinWebsiteSamplesTransformer by extending {
         CoreExtensions.pageTransformer providing ::KotlinWebsiteSamplesTransformer override dokkaBase.defaultSamplesTransformer order {
             before(dokkaBase.pageMerger)
         }

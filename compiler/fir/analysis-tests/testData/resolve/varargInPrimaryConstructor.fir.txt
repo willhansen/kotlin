@@ -4,15 +4,15 @@ FILE: varargInPrimaryConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val strings: R|kotlin/Array<out kotlin/String>| = R|<local>/strings|
+        public final konst strings: R|kotlin/Array<out kotlin/String>| = R|<local>/strings|
             public get(): R|kotlin/Array<out kotlin/String>|
 
     }
     public final fun test_1(foo: R|Foo|): R|kotlin/Unit| {
          {
-            lval <iterator>: R|kotlin/collections/Iterator<kotlin/String>| = R|<local>/foo|.R|/Foo.strings|.R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<CapturedType(out kotlin/String)>|>|()
+            lkonst <iterator>: R|kotlin/collections/Iterator<kotlin/String>| = R|<local>/foo|.R|/Foo.strings|.R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<CapturedType(out kotlin/String)>|>|()
             while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.hasNext: R|kotlin/Boolean|>|()) {
-                lval s: R|kotlin/String| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/String|>|()
+                lkonst s: R|kotlin/String| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/String|>|()
                  {
                     R|<local>/s|.R|kotlin/String.length|
                 }
@@ -24,9 +24,9 @@ FILE: varargInPrimaryConstructor.kt
     }
     public final fun test_2(vararg strings: R|kotlin/Array<out kotlin/String>|): R|kotlin/Unit| {
          {
-            lval <iterator>: R|kotlin/collections/Iterator<kotlin/String>| = R|<local>/strings|.R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<CapturedType(out kotlin/String)>|>|()
+            lkonst <iterator>: R|kotlin/collections/Iterator<kotlin/String>| = R|<local>/strings|.R|SubstitutionOverride<kotlin/Array.iterator: R|kotlin/collections/Iterator<CapturedType(out kotlin/String)>|>|()
             while(R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.hasNext: R|kotlin/Boolean|>|()) {
-                lval s: R|kotlin/String| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/String|>|()
+                lkonst s: R|kotlin/String| = R|<local>/<iterator>|.R|SubstitutionOverride<kotlin/collections/Iterator.next: R|kotlin/String|>|()
                  {
                     R|<local>/s|.R|kotlin/String.length|
                 }

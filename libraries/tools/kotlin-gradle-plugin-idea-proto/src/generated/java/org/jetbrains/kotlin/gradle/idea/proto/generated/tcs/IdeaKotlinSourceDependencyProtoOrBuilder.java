@@ -29,7 +29,7 @@ public interface IdeaKotlinSourceDependencyProtoOrBuilder extends
   boolean hasType();
   /**
    * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto.Type type = 2;</code>
-   * @return The enum numeric value on the wire for type.
+   * @return The enum numeric konstue on the wire for type.
    */
   int getTypeValue();
   /**

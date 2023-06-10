@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.fir.types.ConeFlexibleType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirFlexibleType(
-    override val coneType: ConeFlexibleType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeFlexibleType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtFlexibleType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
+    override konst token: KtLifetimeToken get() = builder.token
 
-    override val lowerBound: KtType get() = withValidityAssertion { builder.typeBuilder.buildKtType(coneType.lowerBound) }
-    override val upperBound: KtType get() = withValidityAssertion { builder.typeBuilder.buildKtType(coneType.upperBound) }
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst lowerBound: KtType get() = withValidityAssertion { builder.typeBuilder.buildKtType(coneType.lowerBound) }
+    override konst upperBound: KtType get() = withValidityAssertion { builder.typeBuilder.buildKtType(coneType.upperBound) }
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
-    override val nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
+    override konst nullability: KtTypeNullability get() = withValidityAssertion { coneType.nullability.asKtNullability() }
 
     override fun asStringForDebugging(): String = withValidityAssertion { coneType.renderForDebugging() }
     override fun equals(other: Any?) = typeEquals(other)

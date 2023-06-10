@@ -10,7 +10,7 @@ interface Foo<T> {
 
 interface FooDerived: Foo<Derived>
 
-class Derived(val value: String)
+class Derived(konst konstue: String)
 
 class Test : FooDerived {
     override fun foo(a: Derived): Derived {
@@ -19,5 +19,5 @@ class Test : FooDerived {
 }
 
 fun box(): String {
-    return Test().foo(Derived("OK")).value
+    return Test().foo(Derived("OK")).konstue
 }

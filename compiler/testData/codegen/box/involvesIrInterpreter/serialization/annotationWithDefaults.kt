@@ -10,19 +10,19 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.FIELD)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class IntegerNumberValid(
-    val message: String = <!EVALUATED("Has illegal integer number value")!>"Has illegal integer number value"<!>,
-    val groups: Array<KClass<*>> = [],
+    konst message: String = <!EVALUATED("Has illegal integer number konstue")!>"Has illegal integer number konstue"<!>,
+    konst groups: Array<KClass<*>> = [],
 
-    val minimum: Long = Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>,
-    val maximum: Long = Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>,
+    konst minimum: Long = Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>,
+    konst maximum: Long = Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>,
 
-    val minMaxArray: LongArray = longArrayOf(Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>, Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>),
-    val minMaxArrayCollection: LongArray = [Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>, Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>],
+    konst minMaxArray: LongArray = longArrayOf(Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>, Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>),
+    konst minMaxArrayCollection: LongArray = [Long.<!EVALUATED("-9223372036854775808")!>MIN_VALUE<!>, Long.<!EVALUATED("9223372036854775807")!>MAX_VALUE<!>],
 )
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
-annotation class AnnotationWithDefault(val str: String = "Str" <!EVALUATED("String")!>+ "ing"<!>)
+annotation class AnnotationWithDefault(konst str: String = "Str" <!EVALUATED("String")!>+ "ing"<!>)
 
 @AnnotationWithDefault()
 class A

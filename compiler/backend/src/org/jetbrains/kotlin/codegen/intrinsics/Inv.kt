@@ -24,7 +24,7 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class Inv : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable {
-        val intermediateResultType = numberFunctionOperandType(method.returnType)
+        konst intermediateResultType = numberFunctionOperandType(method.returnType)
         return createUnaryIntrinsicCallable(method) {
             if (returnType == Type.LONG_TYPE) {
                 it.lconst(-1)

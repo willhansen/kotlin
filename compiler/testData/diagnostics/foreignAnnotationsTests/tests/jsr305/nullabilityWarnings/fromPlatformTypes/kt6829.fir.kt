@@ -12,7 +12,7 @@ public class J {
 
 // FILE: k.kt
 fun foo(collection: Collection<J>) {
-    val mapped = collection.map { it.method() }
+    konst mapped = collection.map { it.method() }
     mapped[0].length
 }
 

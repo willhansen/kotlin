@@ -25,15 +25,15 @@ import org.jetbrains.kotlin.ir.IrElement
  * IR facilities during phase pre- and postprocessing.
  */
 interface BackendContextHolder<C : CommonBackendContext> {
-    val backendContext: C
+    konst backendContext: C
 }
 
 /**
  * Adapter interface that can be implemented by phase context, input or output
- * to enable IR validation, dumping and possibly other pre- and postprocessing.
+ * to enable IR konstidation, dumping and possibly other pre- and postprocessing.
  */
 interface KotlinBackendIrHolder {
-    val kotlinIr: IrElement
+    konst kotlinIr: IrElement
 }
 
 private fun <Context : PhaseContext> findBackendContext(context: Context): CommonBackendContext? = when {
@@ -59,31 +59,31 @@ private fun <Context : PhaseContext, Data> getIrValidator(): Action<Data, Contex
         fun(state: ActionState, data: Data, context: Context) {
             if (context.config.irVerificationMode == IrVerificationMode.NONE) return
 
-            val backendContext: CommonBackendContext? = findBackendContext(context)
+            konst backendContext: CommonBackendContext? = findBackendContext(context)
             if (backendContext == null) {
                 context.messageCollector.report(CompilerMessageSeverity.LOGGING,
                         "Cannot verify IR ${state.beforeOrAfter} ${state.phase}: insufficient context.")
                 return
             }
-            val element = findKotlinBackendIr(context, data)
+            konst element = findKotlinBackendIr(context, data)
             if (element == null) {
                 context.messageCollector.report(CompilerMessageSeverity.LOGGING,
                         "Cannot verify IR ${state.beforeOrAfter} ${state.phase}: IR not found.")
                 return
             }
-            val validatorConfig = IrValidatorConfig(
+            konst konstidatorConfig = IrValidatorConfig(
                     abortOnError = context.config.irVerificationMode == IrVerificationMode.ERROR,
                     ensureAllNodesAreDifferent = true,
                     checkTypes = true,
                     checkDescriptors = false
             )
             try {
-                element.accept(IrValidator(backendContext, validatorConfig), null)
+                element.accept(IrValidator(backendContext, konstidatorConfig), null)
                 element.checkDeclarationParents()
             } catch (t: Throwable) {
                 // TODO: Add reference to source.
-                if (validatorConfig.abortOnError)
-                    throw IllegalStateException("Failed IR validation ${state.beforeOrAfter} ${state.phase}", t)
+                if (konstidatorConfig.abortOnError)
+                    throw IllegalStateException("Failed IR konstidation ${state.beforeOrAfter} ${state.phase}", t)
                 else context.reportCompilationWarning("[IR VALIDATION] ${state.beforeOrAfter} ${state.phase}: ${t.message}")
             }
         }
@@ -91,13 +91,13 @@ private fun <Context : PhaseContext, Data> getIrValidator(): Action<Data, Contex
 private fun <Data, Context : PhaseContext> getIrDumper(): Action<Data, Context> =
         fun(state: ActionState, data: Data, context: Context) {
             if (!state.isDumpNeeded()) return
-            val backendContext: CommonBackendContext? = findBackendContext(context)
+            konst backendContext: CommonBackendContext? = findBackendContext(context)
             if (backendContext == null) {
                 context.messageCollector.report(CompilerMessageSeverity.WARNING,
                         "Cannot dump IR ${state.beforeOrAfter} ${state.phase}: insufficient context.")
                 return
             }
-            val element = findKotlinBackendIr(context, data)
+            konst element = findKotlinBackendIr(context, data)
             if (element == null) {
                 context.messageCollector.report(CompilerMessageSeverity.WARNING,
                         "Cannot dump IR ${state.beforeOrAfter} ${state.phase}: IR not found.")

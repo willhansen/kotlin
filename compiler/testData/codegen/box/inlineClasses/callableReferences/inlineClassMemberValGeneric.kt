@@ -3,18 +3,18 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T) {
-    val xx get() = x
+konstue class Z<T: Int>(konst x: T) {
+    konst xx get() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class L<T: Long>(val x: T) {
-    val xx get() = x
+konstue class L<T: Long>(konst x: T) {
+    konst xx get() = x
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val x: T) {
-    val xx get() = x
+konstue class S<T: String>(konst x: T) {
+    konst xx get() = x
 }
 
 fun box(): String {

@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int
+konst test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -33,7 +33,7 @@ class Host {
   // CHECK:
   //   Mangled name: Host{}testMember1
   //   Public signature: /Host.testMember1|-6927948367741148766[0]
-  val testMember1: Int
+  konst testMember1: Int
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-testMember1>(){}kotlin.Int
     //   Public signature: /Host.testMember1.<get-testMember1>|-5459388376303709502[0]
@@ -72,7 +72,7 @@ class InPrimaryCtor<T : Any?> {
   // CHECK:
   //   Mangled name: InPrimaryCtor{}testInPrimaryCtor1
   //   Public signature: /InPrimaryCtor.testInPrimaryCtor1|8162816596808715257[0]
-  val testInPrimaryCtor1: T
+  konst testInPrimaryCtor1: T
     // CHECK JVM_IR:
     //   Mangled name: InPrimaryCtor#<get-testInPrimaryCtor1>(){}1:0
     //   Public signature: /InPrimaryCtor.testInPrimaryCtor1.<get-testInPrimaryCtor1>|-3259454449312875389[0]

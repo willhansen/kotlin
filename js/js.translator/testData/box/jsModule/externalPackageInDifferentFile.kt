@@ -5,20 +5,20 @@
 package foo
 
 external class A(x: Int = definedExternally) {
-    val x: Int
+    konst x: Int
 
     fun foo(y: Int): Int = definedExternally
 }
 
 external object B {
-    val x: Int = definedExternally
+    konst x: Int = definedExternally
 
     fun foo(y: Int): Int = definedExternally
 }
 
 external fun foo(y: Int): Int = definedExternally
 
-external val bar: Int = definedExternally
+external konst bar: Int = definedExternally
 
 external var mbar: Int = definedExternally
 
@@ -33,7 +33,7 @@ external object C {
 package foo
 
 fun box(): String {
-    val a = A(23)
+    konst a = A(23)
     assertEquals(23, a.x)
     assertEquals(65, a.foo(42))
 

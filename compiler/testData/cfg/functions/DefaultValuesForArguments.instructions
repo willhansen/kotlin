@@ -6,7 +6,7 @@ L0:
     v(i: Int = 1)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](i: Int = 1) -> <v1>, r(1) -> <v0>]
     r(1) -> <v0>
-L2 [after default value for parameter i]:
+L2 [after default konstue for parameter i]:
     magic[FAKE_INITIALIZER](i: Int = 1) -> <v1>    PREV:[jmp?(L2), r(1) -> <v0>]
     merge(i: Int = 1|<v0>, <v1>) -> <v2>
     w(i|<v2>)

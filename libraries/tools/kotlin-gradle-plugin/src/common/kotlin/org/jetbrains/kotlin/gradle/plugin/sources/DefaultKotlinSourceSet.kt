@@ -24,54 +24,54 @@ import java.io.File
 import java.util.*
 import javax.inject.Inject
 
-const val METADATA_CONFIGURATION_NAME_SUFFIX = "DependenciesMetadata"
+const konst METADATA_CONFIGURATION_NAME_SUFFIX = "DependenciesMetadata"
 
 abstract class DefaultKotlinSourceSet @Inject constructor(
-    final override val project: Project,
-    val displayName: String
+    final override konst project: Project,
+    konst displayName: String
 ) : AbstractKotlinSourceSet() {
 
-    override val extras: MutableExtras = mutableExtrasOf()
+    override konst extras: MutableExtras = mutableExtrasOf()
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = disambiguateName(API)
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = disambiguateName(IMPLEMENTATION)
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = disambiguateName(COMPILE_ONLY)
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = disambiguateName(RUNTIME_ONLY)
 
     @Deprecated("KT-55312")
-    override val apiMetadataConfigurationName: String
+    override konst apiMetadataConfigurationName: String
         get() = lowerCamelCaseName(apiConfigurationName, METADATA_CONFIGURATION_NAME_SUFFIX)
 
     @Deprecated("KT-55312")
-    override val implementationMetadataConfigurationName: String
+    override konst implementationMetadataConfigurationName: String
         get() = lowerCamelCaseName(implementationConfigurationName, METADATA_CONFIGURATION_NAME_SUFFIX)
 
     @Deprecated("KT-55312")
-    override val compileOnlyMetadataConfigurationName: String
+    override konst compileOnlyMetadataConfigurationName: String
         get() = lowerCamelCaseName(compileOnlyConfigurationName, METADATA_CONFIGURATION_NAME_SUFFIX)
 
     @Deprecated(message = "KT-55230: RuntimeOnly scope is not supported for metadata dependency transformation")
-    override val runtimeOnlyMetadataConfigurationName: String
+    override konst runtimeOnlyMetadataConfigurationName: String
         get() = lowerCamelCaseName(runtimeOnlyConfigurationName, METADATA_CONFIGURATION_NAME_SUFFIX)
 
     /**
      * Dependencies added to this configuration will not be exposed to any other source set.
      */
-    val intransitiveMetadataConfigurationName: String
+    konst intransitiveMetadataConfigurationName: String
         get() = lowerCamelCaseName(disambiguateName(INTRANSITIVE), METADATA_CONFIGURATION_NAME_SUFFIX)
 
-    override val kotlin: SourceDirectorySet = createDefaultSourceDirectorySet(project, "$name Kotlin source")
+    override konst kotlin: SourceDirectorySet = createDefaultSourceDirectorySet(project, "$name Kotlin source")
 
-    override val languageSettings: LanguageSettingsBuilder = DefaultLanguageSettingsBuilder()
+    override konst languageSettings: LanguageSettingsBuilder = DefaultLanguageSettingsBuilder()
 
-    override val resources: SourceDirectorySet = createDefaultSourceDirectorySet(project, "$name resources")
+    override konst resources: SourceDirectorySet = createDefaultSourceDirectorySet(project, "$name resources")
 
     override fun kotlin(configure: SourceDirectorySet.() -> Unit): SourceDirectorySet = kotlin.apply {
         configure(this)
@@ -96,21 +96,21 @@ abstract class DefaultKotlinSourceSet @Inject constructor(
         dependencies { configure.execute(this) }
 
     override fun afterDependsOnAdded(other: KotlinSourceSet) {
-        project.runProjectConfigurationHealthCheckWhenEvaluated {
+        project.runProjectConfigurationHealthCheckWhenEkonstuated {
             defaultSourceSetLanguageSettingsChecker.runAllChecks(this@DefaultKotlinSourceSet, other)
         }
     }
 
     override fun toString(): String = "source set $name"
 
-    private val explicitlyAddedCustomSourceFilesExtensions = ArrayList<String>()
+    private konst explicitlyAddedCustomSourceFilesExtensions = ArrayList<String>()
 
-    override val customSourceFilesExtensions: Iterable<String>
+    override konst customSourceFilesExtensions: Iterable<String>
         get() = Iterable {
-            val fromExplicitFilters = kotlin.filter.includes.mapNotNull { pattern ->
+            konst fromExplicitFilters = kotlin.filter.includes.mapNotNull { pattern ->
                 pattern.substringAfterLast('.')
             }
-            val merged = (fromExplicitFilters + explicitlyAddedCustomSourceFilesExtensions).filterNot { extension ->
+            konst merged = (fromExplicitFilters + explicitlyAddedCustomSourceFilesExtensions).filterNot { extension ->
                 DEFAULT_KOTLIN_SOURCE_FILES_EXTENSIONS.any { extension.equals(it, ignoreCase = true) }
                         || extension.any { it == '\\' || it == '/' }
             }.distinct()
@@ -122,13 +122,13 @@ abstract class DefaultKotlinSourceSet @Inject constructor(
     }
 
 
-    private val _requiresVisibilityOf = mutableSetOf<KotlinSourceSet>()
+    private konst _requiresVisibilityOf = mutableSetOf<KotlinSourceSet>()
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
-    override val requiresVisibilityOf: MutableSet<KotlinSourceSet>
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
+    override konst requiresVisibilityOf: MutableSet<KotlinSourceSet>
         get() = Collections.unmodifiableSet(_requiresVisibilityOf)
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     override fun requiresVisibilityOf(other: KotlinSourceSet) {
         _requiresVisibilityOf += other
     }
@@ -136,14 +136,14 @@ abstract class DefaultKotlinSourceSet @Inject constructor(
     //region IDE import for Granular source sets metadata
 
     data class MetadataDependencyTransformation(
-        val groupId: String?,
-        val moduleName: String,
-        val projectPath: String?,
-        val projectStructureMetadata: KotlinProjectStructureMetadata?,
-        val allVisibleSourceSets: Set<String>,
+        konst groupId: String?,
+        konst moduleName: String,
+        konst projectPath: String?,
+        konst projectStructureMetadata: KotlinProjectStructureMetadata?,
+        konst allVisibleSourceSets: Set<String>,
         /** If empty, then this source set does not see any 'new' source sets of the dependency, compared to its dependsOn parents, but it
          * still does see all what the dependsOn parents see. */
-        val useFilesForSourceSets: Map<String, Iterable<File>>
+        konst useFilesForSourceSets: Map<String, Iterable<File>>
     )
 
     @Suppress("unused", "UNUSED_PARAMETER") // Used in IDE import, [configurationName] is kept for backward compatibility
@@ -154,13 +154,13 @@ abstract class DefaultKotlinSourceSet @Inject constructor(
     fun getAdditionalVisibleSourceSets(): List<KotlinSourceSet> = getVisibleSourceSetsFromAssociateCompilations(this)
 
     internal fun getDependenciesTransformation(): Iterable<MetadataDependencyTransformation> {
-        val metadataDependencyResolutionByModule =
+        konst metadataDependencyResolutionByModule =
             metadataTransformation.metadataDependencyResolutionsOrEmpty
                 .associateBy { ModuleIds.fromComponent(project, it.dependency) }
 
         return metadataDependencyResolutionByModule.mapNotNull { (groupAndName, resolution) ->
-            val (group, name) = groupAndName
-            val projectPath = resolution.dependency.currentBuildProjectIdOrNull?.projectPath
+            konst (group, name) = groupAndName
+            konst projectPath = resolution.dependency.currentBuildProjectIdOrNull?.projectPath
             when (resolution) {
                 // No metadata transformation leads to original dependency being used during import
                 is MetadataDependencyResolution.KeepOriginalDependency -> null
@@ -185,7 +185,7 @@ abstract class DefaultKotlinSourceSet @Inject constructor(
     //endregion
 }
 
-internal val defaultSourceSetLanguageSettingsChecker =
+internal konst defaultSourceSetLanguageSettingsChecker =
     FragmentConsistencyChecker<KotlinSourceSet>(
         unitsName = "source sets",
         name = { name },
@@ -197,17 +197,17 @@ internal val defaultSourceSetLanguageSettingsChecker =
 
 
 internal fun KotlinSourceSet.disambiguateName(simpleName: String): String {
-    val nameParts = listOfNotNull(this.name.takeIf { it != "main" }, simpleName)
+    konst nameParts = listOfNotNull(this.name.takeIf { it != "main" }, simpleName)
     return lowerCamelCaseName(*nameParts.toTypedArray())
 }
 
 internal fun createDefaultSourceDirectorySet(project: Project, name: String?): SourceDirectorySet =
     project.objects.sourceDirectorySet(name!!, name)
 
-val Iterable<KotlinSourceSet>.dependsOnClosure: Set<KotlinSourceSet>
+konst Iterable<KotlinSourceSet>.dependsOnClosure: Set<KotlinSourceSet>
     get() = flatMap { it.internal.dependsOnClosure }.toSet() - this.toSet()
 
-val Iterable<KotlinSourceSet>.withDependsOnClosure: Set<KotlinSourceSet>
+konst Iterable<KotlinSourceSet>.withDependsOnClosure: Set<KotlinSourceSet>
     get() = flatMap { it.internal.withDependsOnClosure }.toSet()
 
 fun KotlinMultiplatformExtension.findSourceSetsDependingOn(sourceSet: KotlinSourceSet): Set<KotlinSourceSet> {

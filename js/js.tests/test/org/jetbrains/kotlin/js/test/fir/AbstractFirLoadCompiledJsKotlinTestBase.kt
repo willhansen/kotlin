@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.test.runners.AbstractKotlinCompilerWithTargetBackend
 abstract class AbstractFirLoadCompiledJsKotlinTestBase<F : ResultingArtifact.FrontendOutput<F>> :
     AbstractKotlinCompilerWithTargetBackendTest(TargetBackend.JS_IR)
 {
-    protected abstract val frontendKind: FrontendKind<F>
-    protected abstract val frontendFacade: Constructor<FrontendFacade<F>>
-    protected abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<F, IrBackendInput>>
+    protected abstract konst frontendKind: FrontendKind<F>
+    protected abstract konst frontendFacade: Constructor<FrontendFacade<F>>
+    protected abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<F, IrBackendInput>>
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForJsCodegenTest(
@@ -42,11 +42,11 @@ abstract class AbstractFirLoadCompiledJsKotlinTestBase<F : ResultingArtifact.Fro
 }
 
 open class AbstractFirLoadK2CompiledJsKotlinTest : AbstractFirLoadCompiledJsKotlinTestBase<FirOutputArtifact>() {
-    override val frontendKind: FrontendKind<FirOutputArtifact>
+    override konst frontendKind: FrontendKind<FirOutputArtifact>
         get() = FrontendKinds.FIR
-    override val frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
+    override konst frontendFacade: Constructor<FrontendFacade<FirOutputArtifact>>
         get() = ::FirFrontendFacade
-    override val frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
+    override konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<FirOutputArtifact, IrBackendInput>>
         get() = ::Fir2IrResultsConverter
 
     override fun configure(builder: TestConfigurationBuilder) {

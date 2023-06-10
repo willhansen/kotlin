@@ -5,13 +5,13 @@ import kotlin.test.*
 fun two() = 2
 
 fun box(): String {
-    val uintList = mutableListOf<UInt>()
+    konst uintList = mutableListOf<UInt>()
     for (i in 1u until 9u step two()) {
         uintList += i
     }
     assertEquals(listOf(1u, 3u, 5u, 7u), uintList)
 
-    val ulongList = mutableListOf<ULong>()
+    konst ulongList = mutableListOf<ULong>()
     for (i in 1uL until 9uL step two().toLong()) {
         ulongList += i
     }

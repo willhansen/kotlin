@@ -16,7 +16,7 @@ public abstract class JavaClass : BaseClass, JavaInterface {
     public open fun getSomething(): kotlin.Int
     public abstract override /*2*/ /*fake_override*/ fun getX(): kotlin.Int
     public open override /*2*/ /*fake_override*/ fun hashCode(): kotlin.Int
-    public open fun setSomething(/*0*/ value: kotlin.Int): kotlin.Unit
+    public open fun setSomething(/*0*/ konstue: kotlin.Int): kotlin.Unit
     public open override /*2*/ /*fake_override*/ fun toString(): kotlin.String
 }
 

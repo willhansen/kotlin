@@ -33,7 +33,7 @@ internal class SourceToFqNameMap(
 ) : AbstractSourceToOutputMap<FqName>(FqNameTransformer, storageFile, icContext)
 
 internal abstract class AbstractSourceToOutputMap<Name>(
-    private val nameTransformer: NameTransformer<Name>,
+    private konst nameTransformer: NameTransformer<Name>,
     storageFile: File,
     icContext: IncrementalCompilationContext,
 ) : AppendableBasicStringMap<Collection<String>>(storageFile, PathStringDescriptor, StringCollectionExternalizer, icContext) {
@@ -54,8 +54,8 @@ internal abstract class AbstractSourceToOutputMap<Name>(
     fun getFqNames(sourceFile: File): Collection<FqName> =
         storage[pathConverter.toPath(sourceFile)].orEmpty().map(nameTransformer::asFqName)
 
-    override fun dumpValue(value: Collection<String>) =
-        value.dumpCollection()
+    override fun dumpValue(konstue: Collection<String>) =
+        konstue.dumpCollection()
 
     private fun remove(path: String) {
         storage.remove(path)

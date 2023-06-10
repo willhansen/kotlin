@@ -10,13 +10,13 @@ import org.jetbrains.kotlin.commonizer.utils.appendHashCode
 import org.jetbrains.kotlin.commonizer.utils.hashCode
 
 class CirValueParameter private constructor(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    val returnType: CirType,
-    val varargElementType: CirType?,
-    val declaresDefaultValue: Boolean,
-    val isCrossinline: Boolean,
-    val isNoinline: Boolean
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    konst returnType: CirType,
+    konst varargElementType: CirType?,
+    konst declaresDefaultValue: Boolean,
+    konst isCrossinline: Boolean,
+    konst isNoinline: Boolean
 ) : CirHasAnnotations, CirHasName {
     // See also org.jetbrains.kotlin.types.KotlinType.cachedHashCode
     private var cachedHashCode = 0
@@ -60,7 +60,7 @@ class CirValueParameter private constructor(
     }
 
     companion object {
-        private val interner = Interner<CirValueParameter>()
+        private konst interner = Interner<CirValueParameter>()
 
         fun createInterned(
             annotations: List<CirAnnotation>,

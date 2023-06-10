@@ -21,7 +21,7 @@ FILE: singletonConstructors.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val x: <ERROR TYPE REF: HIDDEN: /B.B is deprecated with DeprecationLevel.HIDDEN> = <HIDDEN: /B.B is deprecated with DeprecationLevel.HIDDEN>#()
+        private final konst x: <ERROR TYPE REF: HIDDEN: /B.B is deprecated with DeprecationLevel.HIDDEN> = <HIDDEN: /B.B is deprecated with DeprecationLevel.HIDDEN>#()
             private get(): <ERROR TYPE REF: HIDDEN: /B.B is deprecated with DeprecationLevel.HIDDEN>
 
     }
@@ -61,13 +61,13 @@ FILE: singletonConstructors.kt
             <Unresolved name: X>#()
         }
 
-        public final static fun values(): R|kotlin/Array<E>| {
+        public final static fun konstues(): R|kotlin/Array<E>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|E| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|E| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<E>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<E>|
             public get(): R|kotlin/enums/EnumEntries<E>|
 
     }

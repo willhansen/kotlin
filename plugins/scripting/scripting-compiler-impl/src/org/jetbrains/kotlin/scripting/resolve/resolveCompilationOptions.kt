@@ -12,12 +12,12 @@ import kotlin.script.experimental.util.PropertiesCollection
 /**
  * Classes for which instances extensions should not be resolved if they are used in implicit context
  */
-val ScriptCompilationConfigurationKeys.skipExtensionsResolutionForImplicits
+konst ScriptCompilationConfigurationKeys.skipExtensionsResolutionForImplicits
         by PropertiesCollection.key<Collection<KotlinType>>(emptyList())
 
 /**
  * Extensions resolution for these classes in implicit context of their instances will be done only for innermost instance
  * in scopes chain. Instances of each class in collection are handled separately.
  */
-val ScriptCompilationConfigurationKeys.skipExtensionsResolutionForImplicitsExceptInnermost
+konst ScriptCompilationConfigurationKeys.skipExtensionsResolutionForImplicitsExceptInnermost
         by PropertiesCollection.key<Collection<KotlinType>>(emptyList())

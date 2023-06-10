@@ -5,7 +5,7 @@ fun box(): String {
         state += inc
     }
 
-    val inc = ::incrementState
+    konst inc = ::incrementState
     inc(12)
     inc(-5)
     inc(27)

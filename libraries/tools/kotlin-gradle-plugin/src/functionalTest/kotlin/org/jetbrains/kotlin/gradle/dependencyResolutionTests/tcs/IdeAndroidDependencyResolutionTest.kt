@@ -25,7 +25,7 @@ import kotlin.test.fail
  */
 class IdeAndroidDependencyResolutionTest {
 
-    private val project = buildProject {
+    private konst project = buildProject {
         enableDefaultStdlibDependency(true)
         enableDependencyVerification(false)
         setMultiplatformAndroidSourceSetLayoutVersion(2)
@@ -41,9 +41,9 @@ class IdeAndroidDependencyResolutionTest {
                 implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
             }
         }
-    }.evaluate()
+    }.ekonstuate()
 
-    private val androidSourceSets = project.multiplatformExtension.androidTarget().compilations.flatMap { it.kotlinSourceSets }
+    private konst androidSourceSets = project.multiplatformExtension.androidTarget().compilations.flatMap { it.kotlinSourceSets }
         .ifEmpty { fail("Expected at least one Android SourceSet") }
 
     @BeforeTest
@@ -54,7 +54,7 @@ class IdeAndroidDependencyResolutionTest {
     @Test
     fun `test - android source sets do not resolve binary dependencies`() {
         androidSourceSets.forEach { sourceSet ->
-            val binaryDependencies = project.kotlinIdeMultiplatformImport.resolveDependencies(sourceSet)
+            konst binaryDependencies = project.kotlinIdeMultiplatformImport.resolveDependencies(sourceSet)
                 .filterIsInstance<IdeaKotlinBinaryDependency>()
 
             if (binaryDependencies.isNotEmpty()) {

@@ -26,8 +26,8 @@ object SMAPParser {
         if (source == null || source.isEmpty() || methodStartLine > methodEndLine) {
             return SMAP(listOf())
         }
-        val mapping = FileMapping(source, path).apply {
-            mapNewInterval(methodStartLine, methodStartLine, methodEndLine - methodStartLine + 1)
+        konst mapping = FileMapping(source, path).apply {
+            mapNewInterkonst(methodStartLine, methodStartLine, methodEndLine - methodStartLine + 1)
         }
         return SMAP(listOf(mapping))
     }
@@ -36,8 +36,8 @@ object SMAPParser {
         parseStratum(mappingInfo, KOTLIN_STRATA_NAME, parseStratum(mappingInfo, KOTLIN_DEBUG_STRATA_NAME, null))
 
     private fun parseStratum(mappingInfo: String, stratum: String, callSites: SMAP?): SMAP? {
-        val fileMappings = linkedMapOf<Int, FileMapping>()
-        val iterator = mappingInfo.lineSequence().dropWhile { it != "${SMAP.STRATA_SECTION} $stratum" }.drop(1).iterator()
+        konst fileMappings = linkedMapOf<Int, FileMapping>()
+        konst iterator = mappingInfo.lineSequence().dropWhile { it != "${SMAP.STRATA_SECTION} $stratum" }.drop(1).iterator()
         // JSR-045 allows the line section to come before the file section, but we don't generate SMAPs like this.
         if (!iterator.hasNext() || iterator.next() != SMAP.FILE_SECTION) return null
 
@@ -47,10 +47,10 @@ object SMAPParser {
                 line == SMAP.FILE_SECTION || line == SMAP.END || line.startsWith(SMAP.STRATA_SECTION) -> return null
             }
 
-            val indexAndFileInternalName = if (line.startsWith("+ ")) line.substring(2) else line
-            val fileIndex = indexAndFileInternalName.substringBefore(' ').toInt()
-            val fileName = indexAndFileInternalName.substringAfter(' ')
-            val path = if (line.startsWith("+ ")) iterator.next() else fileName
+            konst indexAndFileInternalName = if (line.startsWith("+ ")) line.substring(2) else line
+            konst fileIndex = indexAndFileInternalName.substringBefore(' ').toInt()
+            konst fileName = indexAndFileInternalName.substringAfter(' ')
+            konst path = if (line.startsWith("+ ")) iterator.next() else fileName
             fileMappings[fileIndex] = FileMapping(fileName, path)
         }
 
@@ -61,26 +61,26 @@ object SMAPParser {
             }
 
             // <source>#<file>,<sourceRange>:<dest>,<destMultiplier>
-            val fileSeparator = line.indexOf('#')
+            konst fileSeparator = line.indexOf('#')
             if (fileSeparator < 0) return null
-            val destSeparator = line.indexOf(':', fileSeparator)
+            konst destSeparator = line.indexOf(':', fileSeparator)
             if (destSeparator < 0) return null
-            val sourceRangeSeparator = line.indexOf(',').let { if (it !in fileSeparator..destSeparator) destSeparator else it }
-            val destMultiplierSeparator = line.indexOf(',', destSeparator).let { if (it < 0) line.length else it }
+            konst sourceRangeSeparator = line.indexOf(',').let { if (it !in fileSeparator..destSeparator) destSeparator else it }
+            konst destMultiplierSeparator = line.indexOf(',', destSeparator).let { if (it < 0) line.length else it }
 
-            val file = fileMappings[line.substring(fileSeparator + 1, sourceRangeSeparator).toInt()] ?: return null
-            val source = line.substring(0, fileSeparator).toInt()
-            val dest = line.substring(destSeparator + 1, destMultiplierSeparator).toInt()
-            val range = when {
+            konst file = fileMappings[line.substring(fileSeparator + 1, sourceRangeSeparator).toInt()] ?: return null
+            konst source = line.substring(0, fileSeparator).toInt()
+            konst dest = line.substring(destSeparator + 1, destMultiplierSeparator).toInt()
+            konst range = when {
                 // These two fields have a different meaning, but for compatibility we treat them the same. See `SMAPBuilder`.
                 destMultiplierSeparator != line.length -> line.substring(destMultiplierSeparator + 1).toInt()
                 sourceRangeSeparator != destSeparator -> line.substring(sourceRangeSeparator + 1, destSeparator).toInt()
                 else -> 1
             }
             // Here we assume that each range in `Kotlin` is entirely within at most one range in `KotlinDebug`.
-            file.mapNewInterval(source, dest, range, callSites?.findRange(dest)?.let { it.mapDestToSource(it.dest) })
+            file.mapNewInterkonst(source, dest, range, callSites?.findRange(dest)?.let { it.mapDestToSource(it.dest) })
         }
 
-        return SMAP(fileMappings.values.toList())
+        return SMAP(fileMappings.konstues.toList())
     }
 }

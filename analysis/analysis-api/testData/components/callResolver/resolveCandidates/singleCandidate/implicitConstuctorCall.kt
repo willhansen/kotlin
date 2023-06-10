@@ -1,5 +1,5 @@
 class A
 
 fun call() {
-    val a = <expr>A()</expr>
+    konst a = <expr>A()</expr>
 }

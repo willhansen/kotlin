@@ -51,19 +51,19 @@ fun TypeSystemCommonBackendContext.isMostPreciseCovariantArgument(type: KotlinTy
     !canHaveSubtypesIgnoringNullability(type)
 
 private fun TypeSystemCommonBackendContext.canHaveSubtypesIgnoringNullability(kotlinType: KotlinTypeMarker): Boolean {
-    val constructor = kotlinType.typeConstructor()
+    konst constructor = kotlinType.typeConstructor()
 
     if (!constructor.isClassTypeConstructor() || !constructor.isFinalClassOrEnumEntryOrAnnotationClassConstructor()) return true
 
     for (i in 0 until constructor.parametersCount()) {
-        val parameter = constructor.getParameter(i)
-        val argument = kotlinType.getArgument(i)
+        konst parameter = constructor.getParameter(i)
+        konst argument = kotlinType.getArgument(i)
         if (argument.isStarProjection()) return true
 
-        val projectionKind = argument.getVariance().convertVariance()
-        val type = argument.getType()
+        konst projectionKind = argument.getVariance().convertVariance()
+        konst type = argument.getType()
 
-        val effectiveVariance = getEffectiveVariance(parameter.getVariance().convertVariance(), projectionKind)
+        konst effectiveVariance = getEffectiveVariance(parameter.getVariance().convertVariance(), projectionKind)
         if (effectiveVariance == Variance.OUT_VARIANCE && !isMostPreciseCovariantArgument(type)) return true
         if (effectiveVariance == Variance.IN_VARIANCE && !isMostPreciseContravariantArgument(type)) return true
     }
@@ -71,7 +71,7 @@ private fun TypeSystemCommonBackendContext.canHaveSubtypesIgnoringNullability(ko
     return false
 }
 
-val CallableDescriptor?.isMethodWithDeclarationSiteWildcards: Boolean
+konst CallableDescriptor?.isMethodWithDeclarationSiteWildcards: Boolean
     get() {
         if (this !is CallableMemberDescriptor) return false
         return original.firstOverridden(useOriginal = true) {
@@ -79,11 +79,11 @@ val CallableDescriptor?.isMethodWithDeclarationSiteWildcards: Boolean
         } != null
     }
 
-val FqName?.isMethodWithDeclarationSiteWildcardsFqName: Boolean
+konst FqName?.isMethodWithDeclarationSiteWildcardsFqName: Boolean
     get() = this in METHODS_WITH_DECLARATION_SITE_WILDCARDS
 
 private fun FqName.child(name: String): FqName = child(Name.identifier(name))
-private val METHODS_WITH_DECLARATION_SITE_WILDCARDS = setOf(
+private konst METHODS_WITH_DECLARATION_SITE_WILDCARDS = setOf(
     FqNames.mutableCollection.child("addAll"),
     FqNames.mutableList.child("addAll"),
     FqNames.mutableMap.child("putAll")
@@ -130,7 +130,7 @@ fun TypeSystemCommonBackendContext.extractTypeMappingModeFromAnnotation(
     isForAnnotationParameter: Boolean,
     mapTypeAliases: Boolean
 ): TypeMappingMode? {
-    val suppressWildcards =
+    konst suppressWildcards =
         outerType.suppressWildcardsMode(this) ?: callableSuppressWildcardsMode ?: return null
 
     if (outerType.argumentsCount() == 0) return TypeMappingMode.DEFAULT
@@ -156,7 +156,7 @@ private fun KotlinTypeMarker.suppressWildcardsMode(typeSystem: TypeSystemCommonB
     }
 
 private fun AnnotationDescriptor.suppressWildcardsMode(): Boolean? =
-    allValueArguments.values.firstOrNull()?.value as? Boolean ?: true
+    allValueArguments.konstues.firstOrNull()?.konstue as? Boolean ?: true
 
-val JVM_SUPPRESS_WILDCARDS_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSuppressWildcards")
-val JVM_WILDCARD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmWildcard")
+konst JVM_SUPPRESS_WILDCARDS_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSuppressWildcards")
+konst JVM_WILDCARD_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmWildcard")

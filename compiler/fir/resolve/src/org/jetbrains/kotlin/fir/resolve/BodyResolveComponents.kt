@@ -18,33 +18,33 @@ import org.jetbrains.kotlin.fir.resolve.transformers.ReturnTypeCalculator
 import org.jetbrains.kotlin.fir.scopes.FirScope
 import org.jetbrains.kotlin.fir.types.FirTypeRef
 
-data class SessionHolderImpl(override val session: FirSession, override val scopeSession: ScopeSession) : SessionHolder {
+data class SessionHolderImpl(override konst session: FirSession, override konst scopeSession: ScopeSession) : SessionHolder {
     companion object {
         fun createWithEmptyScopeSession(session: FirSession): SessionHolderImpl = SessionHolderImpl(session, ScopeSession())
     }
 }
 
 abstract class BodyResolveComponents : SessionHolder {
-    abstract val returnTypeCalculator: ReturnTypeCalculator
-    abstract val implicitReceiverStack: ImplicitReceiverStack
-    abstract val containingDeclarations: List<FirDeclaration>
-    abstract val fileImportsScope: List<FirScope>
-    abstract val towerDataElements: List<FirTowerDataElement>
-    abstract val towerDataContext: FirTowerDataContext
-    abstract val localScopes: FirLocalScopes
-    abstract val noExpectedType: FirTypeRef
-    abstract val symbolProvider: FirSymbolProvider
-    abstract val file: FirFile
-    abstract val container: FirDeclaration
-    abstract val resolutionStageRunner: ResolutionStageRunner
-    abstract val samResolver: FirSamResolver
-    abstract val callResolver: FirCallResolver
-    abstract val callCompleter: FirCallCompleter
-    abstract val doubleColonExpressionResolver: FirDoubleColonExpressionResolver
-    abstract val syntheticCallGenerator: FirSyntheticCallGenerator
-    abstract val dataFlowAnalyzer: FirDataFlowAnalyzer
-    abstract val outerClassManager: FirOuterClassManager
-    abstract val integerLiteralAndOperatorApproximationTransformer: IntegerLiteralAndOperatorApproximationTransformer
+    abstract konst returnTypeCalculator: ReturnTypeCalculator
+    abstract konst implicitReceiverStack: ImplicitReceiverStack
+    abstract konst containingDeclarations: List<FirDeclaration>
+    abstract konst fileImportsScope: List<FirScope>
+    abstract konst towerDataElements: List<FirTowerDataElement>
+    abstract konst towerDataContext: FirTowerDataContext
+    abstract konst localScopes: FirLocalScopes
+    abstract konst noExpectedType: FirTypeRef
+    abstract konst symbolProvider: FirSymbolProvider
+    abstract konst file: FirFile
+    abstract konst container: FirDeclaration
+    abstract konst resolutionStageRunner: ResolutionStageRunner
+    abstract konst samResolver: FirSamResolver
+    abstract konst callResolver: FirCallResolver
+    abstract konst callCompleter: FirCallCompleter
+    abstract konst doubleColonExpressionResolver: FirDoubleColonExpressionResolver
+    abstract konst syntheticCallGenerator: FirSyntheticCallGenerator
+    abstract konst dataFlowAnalyzer: FirDataFlowAnalyzer
+    abstract konst outerClassManager: FirOuterClassManager
+    abstract konst integerLiteralAndOperatorApproximationTransformer: IntegerLiteralAndOperatorApproximationTransformer
 }
 
 // --------------------------------------- Utils ---------------------------------------

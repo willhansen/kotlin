@@ -9,11 +9,11 @@
  * EXCEPTION: runtime
  */
 
-open class Bar(val x: Int)
+open class Bar(konst x: Int)
 
 open class Foo {
     companion object : Bar(Foo.prop) {
-        val prop: Int = 10
+        konst prop: Int = 10
     }
 }
 

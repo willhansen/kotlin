@@ -34,7 +34,7 @@ public final class IrStatement extends
   private IrStatement(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -142,10 +142,10 @@ public final class IrStatement extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -163,7 +163,7 @@ public final class IrStatement extends
     public IrStatement parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrStatement(input, extensionRegistry);
     }
   };
@@ -185,12 +185,12 @@ public final class IrStatement extends
     CATCH(6),
     SYNTHETIC_BODY(7),
     STATEMENT_NOT_SET(0);
-    private int value = 0;
-    private StatementCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private StatementCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static StatementCase valueOf(int value) {
-      switch (value) {
+    public static StatementCase konstueOf(int konstue) {
+      switch (konstue) {
         case 2: return DECLARATION;
         case 3: return EXPRESSION;
         case 4: return BLOCK_BODY;
@@ -203,13 +203,13 @@ public final class IrStatement extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public StatementCase
   getStatementCase() {
-    return StatementCase.valueOf(
+    return StatementCase.konstueOf(
         statementCase_);
   }
 
@@ -458,23 +458,23 @@ public final class IrStatement extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parseFrom(java.io.InputStream input)
@@ -686,7 +686,7 @@ public final class IrStatement extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -700,7 +700,7 @@ public final class IrStatement extends
     private java.lang.Object statement_;
     public StatementCase
         getStatementCase() {
-      return StatementCase.valueOf(
+      return StatementCase.konstueOf(
           statementCase_);
     }
 
@@ -728,9 +728,9 @@ public final class IrStatement extends
     /**
      * <code>required int64 coordinates = 1;</code>
      */
-    public Builder setCoordinates(long value) {
+    public Builder setCoordinates(long konstue) {
       bitField0_ |= 0x00000001;
-      coordinates_ = value;
+      coordinates_ = konstue;
       
       return this;
     }
@@ -762,11 +762,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 2;</code>
      */
-    public Builder setDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
-      if (value == null) {
+    public Builder setDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 2;
       return this;
@@ -784,13 +784,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration declaration = 2;</code>
      */
-    public Builder mergeDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration value) {
+    public Builder mergeDeclaration(org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration konstue) {
       if (statementCase_ == 2 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDeclaration) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 2;
@@ -826,11 +826,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 3;</code>
      */
-    public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 3;
       return this;
@@ -848,13 +848,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 3;</code>
      */
-    public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (statementCase_ == 3 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 3;
@@ -890,11 +890,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody block_body = 4;</code>
      */
-    public Builder setBlockBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody value) {
-      if (value == null) {
+    public Builder setBlockBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 4;
       return this;
@@ -912,13 +912,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody block_body = 4;</code>
      */
-    public Builder mergeBlockBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody value) {
+    public Builder mergeBlockBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody konstue) {
       if (statementCase_ == 4 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrBlockBody) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 4;
@@ -954,11 +954,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch branch = 5;</code>
      */
-    public Builder setBranch(org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch value) {
-      if (value == null) {
+    public Builder setBranch(org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 5;
       return this;
@@ -976,13 +976,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch branch = 5;</code>
      */
-    public Builder mergeBranch(org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch value) {
+    public Builder mergeBranch(org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch konstue) {
       if (statementCase_ == 5 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrBranch) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 5;
@@ -1018,11 +1018,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch catch = 6;</code>
      */
-    public Builder setCatch(org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch value) {
-      if (value == null) {
+    public Builder setCatch(org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 6;
       return this;
@@ -1040,13 +1040,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch catch = 6;</code>
      */
-    public Builder mergeCatch(org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch value) {
+    public Builder mergeCatch(org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch konstue) {
       if (statementCase_ == 6 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrCatch) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 6;
@@ -1082,11 +1082,11 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody synthetic_body = 7;</code>
      */
-    public Builder setSyntheticBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody value) {
-      if (value == null) {
+    public Builder setSyntheticBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      statement_ = value;
+      statement_ = konstue;
 
       statementCase_ = 7;
       return this;
@@ -1104,13 +1104,13 @@ public final class IrStatement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody synthetic_body = 7;</code>
      */
-    public Builder mergeSyntheticBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody value) {
+    public Builder mergeSyntheticBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody konstue) {
       if (statementCase_ == 7 &&
           statement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody.getDefaultInstance()) {
         statement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBody) statement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        statement_ = value;
+        statement_ = konstue;
       }
 
       statementCase_ = 7;

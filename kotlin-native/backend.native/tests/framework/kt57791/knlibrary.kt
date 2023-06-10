@@ -12,7 +12,7 @@ internal class FooImplUnused : Foo {
 }
 
 fun foobar(foo: Foo): Boolean {
-    val s = foo.bar()
+    konst s = foo.bar()
     if (s == null)
         return false
     return s == "zzz"

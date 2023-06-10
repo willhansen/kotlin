@@ -5,16 +5,16 @@ enum class SomeEnum {
 }
 
 annotation class MyAnnotation(
-    val intValue: Int,
-    val stringValue: String,
-    val enumValue: SomeEnum,
-    val kClasses: Array<out KClass<*>>,
-    val annotation: MyOtherAnnotation
+    konst intValue: Int,
+    konst stringValue: String,
+    konst enumValue: SomeEnum,
+    konst kClasses: Array<out KClass<*>>,
+    konst annotation: MyOtherAnnotation
 )
-annotation class MyOtherAnnotation(val intValue: Int, val stringValue: String)
+annotation class MyOtherAnnotation(konst intValue: Int, konst stringValue: String)
 
-const val constInt = 10
-const val constString = ""
+const konst constInt = 10
+const konst constString = ""
 
 @MyAnnotation(
     intValue = 10,

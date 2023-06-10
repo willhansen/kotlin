@@ -9,7 +9,7 @@ class A {
 
 var A.a1: Int
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
 @Ann
 class B {
@@ -18,7 +18,7 @@ class B {
 
 var B.b1: Int
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
 fun foo(x: A.() -> Unit) {}
 fun bar(x: B.() -> Unit) {}

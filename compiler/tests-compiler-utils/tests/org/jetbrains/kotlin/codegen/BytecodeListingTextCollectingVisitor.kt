@@ -10,11 +10,11 @@ import org.jetbrains.org.objectweb.asm.*
 import org.jetbrains.org.objectweb.asm.tree.ClassNode
 
 class BytecodeListingTextCollectingVisitor(
-    val filter: Filter,
-    val withSignatures: Boolean,
+    konst filter: Filter,
+    konst withSignatures: Boolean,
     api: Int = Opcodes.API_VERSION,
-    val withAnnotations: Boolean = true,
-    val sortDeclarations: Boolean = true,
+    konst withAnnotations: Boolean = true,
+    konst sortDeclarations: Boolean = true,
 ) : ClassVisitor(api) {
     companion object {
         @JvmOverloads
@@ -27,23 +27,23 @@ class BytecodeListingTextCollectingVisitor(
         ) = factory.getClassFiles()
             .sortedBy { it.relativePath }
             .mapNotNull {
-                val cr = ClassReader(it.asByteArray())
-                val node = ClassNode(Opcodes.API_VERSION)
+                konst cr = ClassReader(it.asByteArray())
+                konst node = ClassNode(Opcodes.API_VERSION)
                 cr.accept(node, ClassReader.SKIP_CODE)
-                val visitor = BytecodeListingTextCollectingVisitor(filter, withSignatures, withAnnotations = withAnnotations, sortDeclarations = sortDeclarations)
+                konst visitor = BytecodeListingTextCollectingVisitor(filter, withSignatures, withAnnotations = withAnnotations, sortDeclarations = sortDeclarations)
                 node.accept(visitor)
 
                 if (!filter.shouldWriteClass(node)) null else visitor.text
             }.joinToString("\n\n", postfix = "\n")
 
-        private val CLASS_OR_FIELD_OR_METHOD = setOf(ModifierTarget.CLASS, ModifierTarget.FIELD, ModifierTarget.METHOD)
-        private val CLASS_OR_METHOD = setOf(ModifierTarget.CLASS, ModifierTarget.METHOD)
-        private val FIELD_ONLY = setOf(ModifierTarget.FIELD)
-        private val METHOD_ONLY = setOf(ModifierTarget.METHOD)
-        private val FIELD_OR_METHOD = setOf(ModifierTarget.FIELD, ModifierTarget.METHOD)
+        private konst CLASS_OR_FIELD_OR_METHOD = setOf(ModifierTarget.CLASS, ModifierTarget.FIELD, ModifierTarget.METHOD)
+        private konst CLASS_OR_METHOD = setOf(ModifierTarget.CLASS, ModifierTarget.METHOD)
+        private konst FIELD_ONLY = setOf(ModifierTarget.FIELD)
+        private konst METHOD_ONLY = setOf(ModifierTarget.METHOD)
+        private konst FIELD_OR_METHOD = setOf(ModifierTarget.FIELD, ModifierTarget.METHOD)
 
         // TODO ACC_MANDATED - requires reading Parameters attribute, which we don't generate by default
-        internal val MODIFIERS =
+        internal konst MODIFIERS =
             arrayOf(
                 Modifier("public", Opcodes.ACC_PUBLIC, CLASS_OR_FIELD_OR_METHOD),
                 Modifier("protected", Opcodes.ACC_PROTECTED, CLASS_OR_FIELD_OR_METHOD),
@@ -85,10 +85,10 @@ class BytecodeListingTextCollectingVisitor(
         }
     }
 
-    private class Declaration(val text: String, val annotations: MutableList<String> = arrayListOf())
+    private class Declaration(konst text: String, konst annotations: MutableList<String> = arrayListOf())
 
-    private val declarationsInsideClass = arrayListOf<Declaration>()
-    private val classAnnotations = arrayListOf<String>()
+    private konst declarationsInsideClass = arrayListOf<Declaration>()
+    private konst classAnnotations = arrayListOf<String>()
     private var className = ""
     private var classAccess = 0
     private var classSignature: String? = ""
@@ -106,10 +106,10 @@ class BytecodeListingTextCollectingVisitor(
     }
 
     internal class Modifier(
-        val text: String,
-        private val mask: Int,
-        private val applicableTo: Set<ModifierTarget>,
-        private val excludedMask: Int = 0
+        konst text: String,
+        private konst mask: Int,
+        private konst applicableTo: Set<ModifierTarget>,
+        private konst excludedMask: Int = 0
     ) {
         fun hasModifier(access: Int, target: ModifierTarget) =
             access and mask != 0 &&
@@ -141,7 +141,7 @@ class BytecodeListingTextCollectingVisitor(
         }
     }
 
-    val text: String
+    konst text: String
         get() = StringBuilder().apply {
             if (classAnnotations.isNotEmpty()) {
                 append(classAnnotations.joinToString("\n", postfix = "\n"))
@@ -155,7 +155,7 @@ class BytecodeListingTextCollectingVisitor(
             append(className)
             if (declarationsInsideClass.isNotEmpty()) {
                 append(" {\n")
-                val orderedDeclarations =
+                konst orderedDeclarations =
                     if (sortDeclarations) declarationsInsideClass.sortedBy { it.text } else declarationsInsideClass
                 for (declaration in orderedDeclarations) {
                     append("    ").append(declaration.annotations.joinToString("")).append(declaration.text).append("\n")
@@ -183,13 +183,13 @@ class BytecodeListingTextCollectingVisitor(
             return null
         }
 
-        val returnType = Type.getReturnType(desc).className
-        val parameterTypes = Type.getArgumentTypes(desc).map { it.className }
-        val methodAnnotations = arrayListOf<String>()
-        val parameterAnnotations = hashMapOf<Int, MutableList<String>>()
+        konst returnType = Type.getReturnType(desc).className
+        konst parameterTypes = Type.getArgumentTypes(desc).map { it.className }
+        konst methodAnnotations = arrayListOf<String>()
+        konst parameterAnnotations = hashMapOf<Int, MutableList<String>>()
 
         handleModifiers(ModifierTarget.METHOD, access, methodAnnotations)
-        val methodParamCount = Type.getArgumentTypes(desc).size
+        konst methodParamCount = Type.getArgumentTypes(desc).size
 
         return object : MethodVisitor(Opcodes.API_VERSION) {
             private var visibleAnnotableParameterCount = methodParamCount
@@ -208,11 +208,11 @@ class BytecodeListingTextCollectingVisitor(
                 }
 
             override fun visitEnd() {
-                val parameterWithAnnotations = parameterTypes.mapIndexed { index, parameter ->
-                    val annotations = parameterAnnotations.getOrElse(index, { emptyList() }).joinToString("")
+                konst parameterWithAnnotations = parameterTypes.mapIndexed { index, parameter ->
+                    konst annotations = parameterAnnotations.getOrElse(index, { emptyList() }).joinToString("")
                     "${annotations}p$index: $parameter"
                 }.joinToString()
-                val signatureIfRequired = if (withSignatures) "<$signature> " else ""
+                konst signatureIfRequired = if (withSignatures) "<$signature> " else ""
                 declarationsInsideClass.add(
                     Declaration("${signatureIfRequired}method $name($parameterWithAnnotations): $returnType", methodAnnotations)
                 )
@@ -230,14 +230,14 @@ class BytecodeListingTextCollectingVisitor(
         }
     }
 
-    override fun visitField(access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor? {
+    override fun visitField(access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor? {
         if (!filter.shouldWriteField(access, name, desc)) {
             return null
         }
 
-        val type = Type.getType(desc).className
-        val fieldSignature = if (withSignatures) "<$signature> " else ""
-        val fieldDeclaration = Declaration("field $fieldSignature$name: $type")
+        konst type = Type.getType(desc).className
+        konst fieldSignature = if (withSignatures) "<$signature> " else ""
+        konst fieldDeclaration = Declaration("field $fieldSignature$name: $type")
         declarationsInsideClass.add(fieldDeclaration)
         handleModifiers(ModifierTarget.FIELD, access)
 
@@ -258,35 +258,35 @@ class BytecodeListingTextCollectingVisitor(
 
     private fun visitAnnotationImpl(end: (List<String>) -> Unit): AnnotationVisitor? =
         if (!withAnnotations) null else object : AnnotationVisitor(Opcodes.API_VERSION) {
-            private val arguments = mutableListOf<String>()
+            private konst arguments = mutableListOf<String>()
 
-            override fun visit(name: String?, value: Any) {
-                val rendered = when (value) {
-                    is String -> "\"$value\""
-                    is Type -> "${value.className}::class"
-                    is BooleanArray -> value.contentToString()
-                    is CharArray -> value.contentToString()
-                    is ByteArray -> value.contentToString()
-                    is ShortArray -> value.contentToString()
-                    is IntArray -> value.contentToString()
-                    is FloatArray -> value.contentToString()
-                    is LongArray -> value.contentToString()
-                    is DoubleArray -> value.contentToString()
-                    else -> value.toString()
+            override fun visit(name: String?, konstue: Any) {
+                konst rendered = when (konstue) {
+                    is String -> "\"$konstue\""
+                    is Type -> "${konstue.className}::class"
+                    is BooleanArray -> konstue.contentToString()
+                    is CharArray -> konstue.contentToString()
+                    is ByteArray -> konstue.contentToString()
+                    is ShortArray -> konstue.contentToString()
+                    is IntArray -> konstue.contentToString()
+                    is FloatArray -> konstue.contentToString()
+                    is LongArray -> konstue.contentToString()
+                    is DoubleArray -> konstue.contentToString()
+                    else -> konstue.toString()
                 }
                 arguments +=
                     if (name != null) "$name=$rendered" else rendered
             }
 
-            override fun visitEnum(name: String?, descriptor: String, value: String) {
+            override fun visitEnum(name: String?, descriptor: String, konstue: String) {
                 // Do not render enum class name to reduce verbosity.
                 arguments +=
-                    if (name != null) "$name=$value" else value
+                    if (name != null) "$name=$konstue" else konstue
             }
 
             override fun visitAnnotation(name: String?, descriptor: String): AnnotationVisitor? =
                 visitAnnotationImpl { args ->
-                    val rendered = renderAnnotation(descriptor, args)
+                    konst rendered = renderAnnotation(descriptor, args)
                     arguments +=
                         if (name != null) "$name=$rendered" else rendered
                 }
@@ -302,7 +302,7 @@ class BytecodeListingTextCollectingVisitor(
         }
 
     private fun renderAnnotation(desc: String, args: List<String>): String {
-        val name = Type.getType(desc).className
+        konst name = Type.getType(desc).className
         return renderAnnotationArguments(args, name)
     }
 
@@ -311,7 +311,7 @@ class BytecodeListingTextCollectingVisitor(
         // generates it in the light analysis mode (since method bodies are not analyzed and we don't know if there's an inline call there).
         if (desc == "Lkotlin/jvm/internal/SourceDebugExtension;") return null
 
-        val name = Type.getType(desc).className
+        konst name = Type.getType(desc).className
 
         // Don't render contents of @Metadata/@DebugMetadata because they're binary.
         if (desc == "Lkotlin/Metadata;" || desc == "Lkotlin/coroutines/jvm/internal/DebugMetadata;") return name

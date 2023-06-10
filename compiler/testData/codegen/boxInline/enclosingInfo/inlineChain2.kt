@@ -13,15 +13,15 @@ inline fun test(crossinline z: () -> String) = { z() }
 import test.*
 
 fun box(): String {
-    val res = call {
+    konst res = call {
         test { "OK" }
     }
 
-    // Check that Java reflection doesn't crash. Actual values are tested in bytecodeListing/inline/enclosingInfo/.
+    // Check that Java reflection doesn't crash. Actual konstues are tested in bytecodeListing/inline/enclosingInfo/.
     res.javaClass.enclosingMethod
     res.javaClass.enclosingClass
 
-    val res2 = call {
+    konst res2 = call {
         call {
             test { "OK" }
         }

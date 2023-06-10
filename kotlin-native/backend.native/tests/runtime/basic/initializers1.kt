@@ -16,7 +16,7 @@ class TestClass {
 }
 
 @Test fun runTest() {
-    val t1 = TestClass()
-    val t2 = TestClass()
+    konst t1 = TestClass()
+    konst t2 = TestClass()
     println("Done")
 }

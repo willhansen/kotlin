@@ -19,22 +19,22 @@ import org.jetbrains.kotlin.resolve.calls.model.PostponedResolvedAtomMarker
 import org.jetbrains.kotlin.types.model.*
 
 class VariableFixationFinder(
-    private val trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
-    private val languageVersionSettings: LanguageVersionSettings,
+    private konst trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
+    private konst languageVersionSettings: LanguageVersionSettings,
 ) {
     interface Context : TypeSystemInferenceExtensionContext {
-        val notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
-        val fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
-        val postponedTypeVariables: List<TypeVariableMarker>
-        val constraintsFromAllForkPoints: MutableList<Pair<IncorporationConstraintPosition, ForkPointData>>
+        konst notFixedTypeVariables: Map<TypeConstructorMarker, VariableWithConstraints>
+        konst fixedTypeVariables: Map<TypeConstructorMarker, KotlinTypeMarker>
+        konst postponedTypeVariables: List<TypeVariableMarker>
+        konst constraintsFromAllForkPoints: MutableList<Pair<IncorporationConstraintPosition, ForkPointData>>
 
         fun isReified(variable: TypeVariableMarker): Boolean
     }
 
     data class VariableForFixation(
-        val variable: TypeConstructorMarker,
-        val hasProperConstraint: Boolean,
-        val hasOnlyTrivialProperConstraint: Boolean = false
+        konst variable: TypeConstructorMarker,
+        konst hasProperConstraint: Boolean,
+        konst hasOnlyTrivialProperConstraint: Boolean = false
     )
 
     fun findFirstVariableForFixation(
@@ -59,10 +59,10 @@ class VariableFixationFinder(
         READY_FOR_FIXATION_REIFIED,
     }
 
-    private val inferenceCompatibilityModeEnabled: Boolean
+    private konst inferenceCompatibilityModeEnabled: Boolean
         get() = languageVersionSettings.supportsFeature(LanguageFeature.InferenceCompatibility)
 
-    private val isTypeInferenceForSelfTypesSupported: Boolean
+    private konst isTypeInferenceForSelfTypesSupported: Boolean
         get() = languageVersionSettings.supportsFeature(LanguageFeature.TypeInferenceOnCallsWithSelfTypes)
 
     private fun Context.getTypeVariableReadiness(
@@ -110,7 +110,7 @@ class VariableFixationFinder(
         typeVariable: TypeConstructorMarker,
     ): Boolean {
         return with(context) {
-            val dependencyProvider = TypeVariableDependencyInformationProvider(
+            konst dependencyProvider = TypeVariableDependencyInformationProvider(
                 notFixedTypeVariables, emptyList(), topLevelType = null, context
             )
             when (getTypeVariableReadiness(typeVariable, dependencyProvider)) {
@@ -122,13 +122,13 @@ class VariableFixationFinder(
 
     private fun Context.variableHasTrivialOrNonProperConstraints(variable: TypeConstructorMarker): Boolean {
         return notFixedTypeVariables[variable]?.constraints?.all { constraint ->
-            val isProperConstraint = isProperArgumentConstraint(constraint)
+            konst isProperConstraint = isProperArgumentConstraint(constraint)
             isProperConstraint && trivialConstraintTypeInferenceOracle.isNotInterestingConstraint(constraint) || !isProperConstraint
         } ?: false
     }
 
     private fun Context.variableHasOnlyIncorporatedConstraintsFromDeclaredUpperBound(variable: TypeConstructorMarker): Boolean {
-        val constraints = notFixedTypeVariables[variable]?.constraints ?: return false
+        konst constraints = notFixedTypeVariables[variable]?.constraints ?: return false
 
         return constraints.filter { isProperArgumentConstraint(it) }.all { it.position.isFromDeclaredUpperBound }
     }
@@ -141,11 +141,11 @@ class VariableFixationFinder(
     ): VariableForFixation? {
         if (allTypeVariables.isEmpty()) return null
 
-        val dependencyProvider = TypeVariableDependencyInformationProvider(
+        konst dependencyProvider = TypeVariableDependencyInformationProvider(
             notFixedTypeVariables, postponedArguments, topLevelType.takeIf { completionMode == PARTIAL }, this
         )
 
-        val candidate =
+        konst candidate =
             allTypeVariables.maxByOrNull { getTypeVariableReadiness(it, dependencyProvider) } ?: return null
 
         return when (getTypeVariableReadiness(candidate, dependencyProvider)) {
@@ -160,7 +160,7 @@ class VariableFixationFinder(
 
     private fun Context.hasDependencyToOtherTypeVariables(typeVariable: TypeConstructorMarker): Boolean {
         for (constraint in notFixedTypeVariables[typeVariable]?.constraints ?: return false) {
-            val dependencyPresenceCondition = { type: KotlinTypeMarker ->
+            konst dependencyPresenceCondition = { type: KotlinTypeMarker ->
                 type.typeConstructor() != typeVariable && notFixedTypeVariables.containsKey(type.typeConstructor())
             }
             if (constraint.type.lowerBoundIfFlexible().argumentsCount() != 0 && constraint.type.contains(dependencyPresenceCondition))
@@ -170,9 +170,9 @@ class VariableFixationFinder(
     }
 
     private fun Context.variableHasProperArgumentConstraints(variable: TypeConstructorMarker): Boolean {
-        val constraints = notFixedTypeVariables[variable]?.constraints ?: return false
+        konst constraints = notFixedTypeVariables[variable]?.constraints ?: return false
         // temporary hack to fail calls which contain callable references resolved though OI with uninferred type parameters
-        val areThereConstraintsWithUninferredTypeParameter = constraints.any { c -> c.type.contains { it.isUninferredParameter() } }
+        konst areThereConstraintsWithUninferredTypeParameter = constraints.any { c -> c.type.contains { it.isUninferredParameter() } }
         return constraints.any { isProperArgumentConstraint(it) } && !areThereConstraintsWithUninferredTypeParameter
     }
 
@@ -188,7 +188,7 @@ class VariableFixationFinder(
         notFixedTypeVariables[variable]?.typeVariable?.let { isReified(it) } ?: false
 
     private fun Context.variableHasLowerNonNothingProperConstraint(variable: TypeConstructorMarker): Boolean {
-        val constraints = notFixedTypeVariables[variable]?.constraints ?: return false
+        konst constraints = notFixedTypeVariables[variable]?.constraints ?: return false
 
         return constraints.any {
             it.kind.isLower() && isProperArgumentConstraint(it) && !it.type.typeConstructor().isNothingConstructor()
@@ -196,13 +196,13 @@ class VariableFixationFinder(
     }
 
     private fun Context.isSelfTypeConstraint(constraint: Constraint): Boolean {
-        val typeConstructor = constraint.type.typeConstructor()
+        konst typeConstructor = constraint.type.typeConstructor()
         return constraint.position.from is DeclaredUpperBoundConstraintPosition<*>
                 && (hasRecursiveTypeParametersWithGivenSelfType(typeConstructor) || isRecursiveTypeParameter(typeConstructor))
     }
 
     private fun Context.areAllProperConstraintsSelfTypeBased(variable: TypeConstructorMarker): Boolean {
-        val constraints = notFixedTypeVariables[variable]?.constraints?.takeIf { it.isNotEmpty() } ?: return false
+        konst constraints = notFixedTypeVariables[variable]?.constraints?.takeIf { it.isNotEmpty() } ?: return false
 
         var hasSelfTypeConstraint = false
         var hasOtherProperConstraint = false
@@ -226,23 +226,23 @@ inline fun TypeSystemInferenceExtensionContext.isProperTypeForFixation(type: Kot
 
 fun TypeSystemInferenceExtensionContext.extractProjectionsForAllCapturedTypes(baseType: KotlinTypeMarker): Set<KotlinTypeMarker> {
     if (baseType.isFlexible()) {
-        val flexibleType = baseType.asFlexibleType()!!
+        konst flexibleType = baseType.asFlexibleType()!!
         return buildSet {
             addAll(extractProjectionsForAllCapturedTypes(flexibleType.lowerBound()))
             addAll(extractProjectionsForAllCapturedTypes(flexibleType.upperBound()))
         }
     }
-    val simpleBaseType = baseType.asSimpleType()?.originalIfDefinitelyNotNullable()
+    konst simpleBaseType = baseType.asSimpleType()?.originalIfDefinitelyNotNullable()
 
     return buildSet {
-        val projectionType = if (simpleBaseType is CapturedTypeMarker) {
-            val typeArgument = simpleBaseType.typeConstructorProjection().takeIf { !it.isStarProjection() } ?: return@buildSet
+        konst projectionType = if (simpleBaseType is CapturedTypeMarker) {
+            konst typeArgument = simpleBaseType.typeConstructorProjection().takeIf { !it.isStarProjection() } ?: return@buildSet
             typeArgument.getType().also(::add)
         } else baseType
-        val argumentsCount = projectionType.argumentsCount().takeIf { it != 0 } ?: return@buildSet
+        konst argumentsCount = projectionType.argumentsCount().takeIf { it != 0 } ?: return@buildSet
 
         for (i in 0 until argumentsCount) {
-            val typeArgument = projectionType.getArgument(i).takeIf { !it.isStarProjection() } ?: continue
+            konst typeArgument = projectionType.getArgument(i).takeIf { !it.isStarProjection() } ?: continue
             addAll(extractProjectionsForAllCapturedTypes(typeArgument.getType()))
         }
     }
@@ -251,7 +251,7 @@ fun TypeSystemInferenceExtensionContext.extractProjectionsForAllCapturedTypes(ba
 fun TypeSystemInferenceExtensionContext.containsTypeVariable(type: KotlinTypeMarker, typeVariable: TypeConstructorMarker): Boolean {
     if (type.contains { it.typeConstructor().unwrapStubTypeVariableConstructor() == typeVariable }) return true
 
-    val typeProjections = extractProjectionsForAllCapturedTypes(type)
+    konst typeProjections = extractProjectionsForAllCapturedTypes(type)
 
     return typeProjections.any { typeProjectionsType ->
         typeProjectionsType.contains { it.typeConstructor().unwrapStubTypeVariableConstructor() == typeVariable }

@@ -26,9 +26,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirErrorExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val diagnostic: ConeDiagnostic,
+    override konst diagnostic: ConeDiagnostic,
     override var expression: FirExpression?,
     override var nonExpressionElement: FirElement?,
 ) : FirErrorExpression() {

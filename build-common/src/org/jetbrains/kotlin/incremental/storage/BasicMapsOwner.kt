@@ -20,14 +20,14 @@ import org.jetbrains.annotations.TestOnly
 import java.io.File
 import java.io.IOException
 
-open class BasicMapsOwner(val cachesDir: File) {
-    private val maps = arrayListOf<BasicMap<*, *, *>>()
+open class BasicMapsOwner(konst cachesDir: File) {
+    private konst maps = arrayListOf<BasicMap<*, *, *>>()
 
     companion object {
-        val CACHE_EXTENSION = "tab"
+        konst CACHE_EXTENSION = "tab"
     }
 
-    protected val String.storageFile: File
+    protected konst String.storageFile: File
         get() = File(cachesDir, this + "." + CACHE_EXTENSION)
 
     @Synchronized
@@ -50,7 +50,7 @@ open class BasicMapsOwner(val cachesDir: File) {
 
     @Synchronized
     private fun forEachMapSafe(actionName: String, action: (BasicMap<*, *, *>) -> Unit) {
-        val actionExceptions = LinkedHashMap<String, Exception>()
+        konst actionExceptions = LinkedHashMap<String, Exception>()
         maps.forEach {
             try {
                 action(it)
@@ -59,9 +59,9 @@ open class BasicMapsOwner(val cachesDir: File) {
             }
         }
         if (actionExceptions.isNotEmpty()) {
-            val desc = "Could not $actionName incremental caches in $cachesDir: ${actionExceptions.keys.joinToString(", ")}"
-            val allIOExceptions = actionExceptions.all { it is IOException }
-            val ex = if (allIOExceptions) IOException(desc) else Exception(desc)
+            konst desc = "Could not $actionName incremental caches in $cachesDir: ${actionExceptions.keys.joinToString(", ")}"
+            konst allIOExceptions = actionExceptions.all { it is IOException }
+            konst ex = if (allIOExceptions) IOException(desc) else Exception(desc)
             actionExceptions.forEach { (_, e) -> ex.addSuppressed(e) }
             throw ex
         }

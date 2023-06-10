@@ -10,7 +10,7 @@ import java.io.File
 class GradleStyleMessageRenderer : MessageRenderer {
 
     override fun render(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?): String {
-        val prefix = when (severity) {
+        konst prefix = when (severity) {
             CompilerMessageSeverity.WARNING, CompilerMessageSeverity.STRONG_WARNING -> "w"
             CompilerMessageSeverity.ERROR, CompilerMessageSeverity.EXCEPTION -> "e"
             CompilerMessageSeverity.LOGGING, CompilerMessageSeverity.OUTPUT -> "v"
@@ -21,7 +21,7 @@ class GradleStyleMessageRenderer : MessageRenderer {
             append("$prefix: ")
 
             location?.apply {
-                val fileUri = File(path).toPath().toUri()
+                konst fileUri = File(path).toPath().toUri()
                 append("$fileUri")
                 if (line > 0 && column > 0) {
                     append(":$line:$column ")

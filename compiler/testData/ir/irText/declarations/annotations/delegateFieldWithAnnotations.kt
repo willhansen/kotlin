@@ -8,4 +8,4 @@
 annotation class Ann
 
 @delegate:Ann
-val test1 by lazy { 42 }
+konst test1 by lazy { 42 }

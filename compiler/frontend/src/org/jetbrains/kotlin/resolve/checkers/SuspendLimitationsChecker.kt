@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.types.getAbbreviation
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 object SuspendLimitationsChecker : DeclarationChecker {
-    private val UNSUPPORTED_OPERATOR_NAMES = setOf(
+    private konst UNSUPPORTED_OPERATOR_NAMES = setOf(
         OperatorNameConventions.CONTAINS,
         OperatorNameConventions.GET, OperatorNameConventions.SET,
         OperatorNameConventions.PROVIDE_DELEGATE, OperatorNameConventions.GET_VALUE, OperatorNameConventions.SET_VALUE
@@ -52,6 +52,6 @@ object SuspendLimitationsChecker : DeclarationChecker {
     }
 }
 
-private val KOTLIN_TEST_TEST_FQNAME = FqName("kotlin.test.Test")
+private konst KOTLIN_TEST_TEST_FQNAME = FqName("kotlin.test.Test")
 private fun AnnotationDescriptor.isKotlinTestAnnotation() =
     fqName == KOTLIN_TEST_TEST_FQNAME || abbreviationFqName == KOTLIN_TEST_TEST_FQNAME

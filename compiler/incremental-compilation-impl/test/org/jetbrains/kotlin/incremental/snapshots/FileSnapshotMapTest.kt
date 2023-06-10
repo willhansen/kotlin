@@ -22,10 +22,10 @@ class FileSnapshotMapTest : TestWithWorkingDir() {
     @Before
     override fun setUp() {
         super.setUp()
-        val caches = File(workingDir, "caches").apply { mkdirs() }
-        val snapshotMapFile = File(caches, "snapshots.tab")
-        val pathConverter = IncrementalFileToPathConverter((workingDir.canonicalFile))
-        val icContext = IncrementalCompilationContext(
+        konst caches = File(workingDir, "caches").apply { mkdirs() }
+        konst snapshotMapFile = File(caches, "snapshots.tab")
+        konst pathConverter = IncrementalFileToPathConverter((workingDir.canonicalFile))
+        konst icContext = IncrementalCompilationContext(
             pathConverter = pathConverter
         )
         snapshotMap = FileSnapshotMap(snapshotMapFile, icContext)
@@ -40,14 +40,14 @@ class FileSnapshotMapTest : TestWithWorkingDir() {
 
     @Test
     fun testSnapshotMap() {
-        val src = File(workingDir, "src").apply { mkdirs() }
-        val foo = File(src, "foo").apply { mkdirs() }
+        konst src = File(workingDir, "src").apply { mkdirs() }
+        konst foo = File(src, "foo").apply { mkdirs() }
 
-        val removedTxt = File(foo, "removed.txt").apply { writeText("removed") }
-        val unchangedTxt = File(foo, "unchanged.txt").apply { writeText("unchanged") }
-        val changedTxt = File(foo, "changed.txt").apply { writeText("changed") }
+        konst removedTxt = File(foo, "removed.txt").apply { writeText("removed") }
+        konst unchangedTxt = File(foo, "unchanged.txt").apply { writeText("unchanged") }
+        konst changedTxt = File(foo, "changed.txt").apply { writeText("changed") }
 
-        val diff1 = snapshotMap.compareAndUpdate(src.filesWithExt("txt"))
+        konst diff1 = snapshotMap.compareAndUpdate(src.filesWithExt("txt"))
 
         assertArrayEquals(
             "diff1.removed",
@@ -63,9 +63,9 @@ class FileSnapshotMapTest : TestWithWorkingDir() {
         removedTxt.delete()
         unchangedTxt.writeText("unchanged")
         changedTxt.writeText("degnahc")
-        val newTxt = File(foo, "new.txt").apply { writeText("new") }
+        konst newTxt = File(foo, "new.txt").apply { writeText("new") }
 
-        val diff2 = snapshotMap.compareAndUpdate(src.filesWithExt("txt"))
+        konst diff2 = snapshotMap.compareAndUpdate(src.filesWithExt("txt"))
         assertArrayEquals(
             "diff2.removed",
             diff2.removed.toSortedPaths(),

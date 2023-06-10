@@ -8,16 +8,16 @@ package kotlin.coroutines
 import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 
 @SinceKotlin("1.3")
-internal abstract class CoroutineImpl(private val resultContinuation: Continuation<Any?>?) : Continuation<Any?> {
+internal abstract class CoroutineImpl(private konst resultContinuation: Continuation<Any?>?) : Continuation<Any?> {
     protected var state = 0
     protected var exceptionState = 0
     protected var result: Any? = null
     protected var exception: Throwable? = null
     protected var finallyPath: Array<Int>? = null
 
-    private val _context: CoroutineContext? = resultContinuation?.context
+    private konst _context: CoroutineContext? = resultContinuation?.context
 
-    public override val context: CoroutineContext get() = _context!!
+    public override konst context: CoroutineContext get() = _context!!
 
     private var intercepted_: Continuation<Any?>? = null
 
@@ -43,7 +43,7 @@ internal abstract class CoroutineImpl(private val resultContinuation: Continuati
                 }
 
                 try {
-                    val outcome = doResume()
+                    konst outcome = doResume()
                     if (outcome === COROUTINE_SUSPENDED) return
                     currentResult = outcome
                     currentException = null
@@ -54,7 +54,7 @@ internal abstract class CoroutineImpl(private val resultContinuation: Continuati
 
                 releaseIntercepted() // this state machine instance is terminating
 
-                val completion = resultContinuation!!
+                konst completion = resultContinuation!!
 
                 if (completion is CoroutineImpl) {
                     // unrolling recursion via loop
@@ -73,7 +73,7 @@ internal abstract class CoroutineImpl(private val resultContinuation: Continuati
     }
 
     private fun releaseIntercepted() {
-        val intercepted = intercepted_
+        konst intercepted = intercepted_
         if (intercepted != null && intercepted !== this) {
             context[ContinuationInterceptor]!!.releaseInterceptedContinuation(intercepted)
         }
@@ -86,13 +86,13 @@ internal abstract class CoroutineImpl(private val resultContinuation: Continuati
         throw UnsupportedOperationException("create(Continuation) has not been overridden")
     }
 
-    public open fun create(value: Any?, completion: Continuation<*>): Continuation<Unit> {
+    public open fun create(konstue: Any?, completion: Continuation<*>): Continuation<Unit> {
         throw UnsupportedOperationException("create(Any?;Continuation) has not been overridden")
     }
 }
 
 internal object CompletedContinuation : Continuation<Any?> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = error("This continuation is already complete")
 
     override fun resumeWith(result: Result<Any?>) {

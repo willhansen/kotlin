@@ -9,7 +9,7 @@ class SS {
 }
 
 fun box(): String {
-    val ss = SS()
+    konst ss = SS()
     ss.setS("OK")
     return ss.getS()
 }

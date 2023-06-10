@@ -3,7 +3,7 @@
 fun foo() {}
 fun foo(s: String) {}
 
-val x1 = ::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>
-val x2: () -> Unit = ::foo
-val x3: (String) -> Unit = ::foo
-val x4: (Int) -> Unit = ::<!NONE_APPLICABLE!>foo<!>
+konst x1 = ::<!OVERLOAD_RESOLUTION_AMBIGUITY!>foo<!>
+konst x2: () -> Unit = ::foo
+konst x3: (String) -> Unit = ::foo
+konst x4: (Int) -> Unit = ::<!NONE_APPLICABLE!>foo<!>

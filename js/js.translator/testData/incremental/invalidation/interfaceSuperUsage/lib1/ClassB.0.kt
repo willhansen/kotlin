@@ -1,9 +1,9 @@
 class ClassB : Interface {
     override var someVar: Int?
         get() = super.someVar
-        set(value) {
-            super.someVar = value
+        set(konstue) {
+            super.someVar = konstue
         }
 
-    val x = 1
+    konst x = 1
 }

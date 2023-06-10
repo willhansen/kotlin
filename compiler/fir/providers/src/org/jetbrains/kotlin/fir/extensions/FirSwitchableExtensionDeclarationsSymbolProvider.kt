@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.name.Name
  * This is also legal, because plugins can not generate annotation classes which can influence other plugins or this plugin itself
  */
 class FirSwitchableExtensionDeclarationsSymbolProvider private constructor(
-    private val delegate: FirExtensionDeclarationsSymbolProvider
+    private konst delegate: FirExtensionDeclarationsSymbolProvider
 ) : FirSymbolProvider(delegate.session) {
     companion object {
         fun createIfNeeded(session: FirSession): FirSwitchableExtensionDeclarationsSymbolProvider? =
@@ -34,7 +34,7 @@ class FirSwitchableExtensionDeclarationsSymbolProvider private constructor(
 
     private var disabled: Boolean = false
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProvider() {
         override fun getPackageNamesWithTopLevelCallables(): Set<String>? =
             if (disabled) null else delegate.symbolNamesProvider.getPackageNamesWithTopLevelCallables()
 
@@ -84,4 +84,4 @@ class FirSwitchableExtensionDeclarationsSymbolProvider private constructor(
     }
 }
 
-val FirSession.generatedDeclarationsSymbolProvider: FirSwitchableExtensionDeclarationsSymbolProvider? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.generatedDeclarationsSymbolProvider: FirSwitchableExtensionDeclarationsSymbolProvider? by FirSession.nullableSessionComponentAccessor()

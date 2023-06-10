@@ -17,19 +17,19 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 
-class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractOverrideChecker() {
-    private val context = session.typeContext
+class FirStandardOverrideChecker(private konst session: FirSession) : FirAbstractOverrideChecker() {
+    private konst context = session.typeContext
 
     private fun isEqualTypes(substitutedCandidateType: ConeKotlinType, substitutedBaseType: ConeKotlinType): Boolean {
         return with(context) {
-            val baseIsFlexible = substitutedBaseType.isFlexible()
-            val candidateIsFlexible = substitutedCandidateType.isFlexible()
+            konst baseIsFlexible = substitutedBaseType.isFlexible()
+            konst candidateIsFlexible = substitutedCandidateType.isFlexible()
             if (baseIsFlexible == candidateIsFlexible) {
                 return AbstractTypeChecker.equalTypes(context, substitutedCandidateType, substitutedBaseType)
             }
-            val lowerBound: SimpleTypeMarker
-            val upperBound: SimpleTypeMarker
-            val type: KotlinTypeMarker
+            konst lowerBound: SimpleTypeMarker
+            konst upperBound: SimpleTypeMarker
+            konst type: KotlinTypeMarker
             if (baseIsFlexible) {
                 lowerBound = substitutedBaseType.lowerBoundIfFlexible()
                 upperBound = substitutedBaseType.upperBoundIfFlexible()
@@ -44,8 +44,8 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
     }
 
     private fun isEqualTypes(candidateType: ConeKotlinType, baseType: ConeKotlinType, substitutor: ConeSubstitutor): Boolean {
-        val substitutedCandidateType = substitutor.substituteOrSelf(candidateType)
-        val substitutedBaseType = substitutor.substituteOrSelf(baseType)
+        konst substitutedCandidateType = substitutor.substituteOrSelf(candidateType)
+        konst substitutedBaseType = substitutor.substituteOrSelf(baseType)
         return isEqualTypes(substitutedCandidateType, substitutedBaseType)
     }
 
@@ -59,8 +59,8 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
     }
 
     private fun maybeEqualErrorTypes(ref1: FirErrorTypeRef, ref2: FirErrorTypeRef): Boolean {
-        val delegated1 = ref1.delegatedTypeRef as? FirUserTypeRef ?: return false
-        val delegated2 = ref2.delegatedTypeRef as? FirUserTypeRef ?: return false
+        konst delegated1 = ref1.delegatedTypeRef as? FirUserTypeRef ?: return false
+        konst delegated2 = ref2.delegatedTypeRef as? FirUserTypeRef ?: return false
         if (delegated1.qualifier.size != delegated2.qualifier.size) return false
         return delegated1.qualifier.zip(delegated2.qualifier).all { (l, r) -> l.name == r.name }
     }
@@ -77,8 +77,8 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
         baseTypeParameter: FirTypeParameter,
         substitutor: ConeSubstitutor
     ): Boolean {
-        val substitutedOverrideType = substitutor.substituteOrSelf(overrideBound.coneType)
-        val substitutedBaseType = substitutor.substituteOrSelf(baseBound.coneType)
+        konst substitutedOverrideType = substitutor.substituteOrSelf(overrideBound.coneType)
+        konst substitutedBaseType = substitutor.substituteOrSelf(baseBound.coneType)
 
         if (isEqualTypes(substitutedOverrideType, substitutedBaseType)) return true
 
@@ -104,7 +104,7 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
     ): ConeSubstitutor? {
         overrideCandidate.lazyResolveToPhase(FirResolvePhase.TYPES)
         baseDeclaration.lazyResolveToPhase(FirResolvePhase.TYPES)
-        val substitutor = buildSubstitutorForOverridesCheck(overrideCandidate, baseDeclaration, session) ?: return null
+        konst substitutor = buildSubstitutorForOverridesCheck(overrideCandidate, baseDeclaration, session) ?: return null
         if (
             overrideCandidate.typeParameters.isNotEmpty() &&
             overrideCandidate.typeParameters.zip(baseDeclaration.typeParameters).any { (override, base) ->
@@ -124,9 +124,9 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
     override fun isOverriddenFunction(overrideCandidate: FirSimpleFunction, baseDeclaration: FirSimpleFunction): Boolean {
         if (Visibilities.isPrivate(baseDeclaration.visibility)) return false
 
-        if (overrideCandidate.valueParameters.size != baseDeclaration.valueParameters.size) return false
+        if (overrideCandidate.konstueParameters.size != baseDeclaration.konstueParameters.size) return false
 
-        val substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration) ?: return false
+        konst substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration) ?: return false
 
         overrideCandidate.lazyResolveToPhase(FirResolvePhase.TYPES)
         baseDeclaration.lazyResolveToPhase(FirResolvePhase.TYPES)
@@ -137,7 +137,7 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
             )
         ) return false
 
-        return overrideCandidate.valueParameters.zip(baseDeclaration.valueParameters).all { (memberParam, selfParam) ->
+        return overrideCandidate.konstueParameters.zip(baseDeclaration.konstueParameters).all { (memberParam, selfParam) ->
             isEqualTypes(memberParam.returnTypeRef, selfParam.returnTypeRef, substitutor)
         }
     }
@@ -149,7 +149,7 @@ class FirStandardOverrideChecker(private val session: FirSession) : FirAbstractO
         if (Visibilities.isPrivate(baseDeclaration.visibility)) return false
 
         if (overrideCandidate !is FirProperty) return false
-        val substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration) ?: return false
+        konst substitutor = buildTypeParametersSubstitutorIfCompatible(overrideCandidate, baseDeclaration) ?: return false
         overrideCandidate.lazyResolveToPhase(FirResolvePhase.TYPES)
         baseDeclaration.lazyResolveToPhase(FirResolvePhase.TYPES)
         return isEqualReceiverTypes(overrideCandidate.receiverParameter?.typeRef, baseDeclaration.receiverParameter?.typeRef, substitutor)

@@ -2,7 +2,7 @@ abstract class AnyVisitor {
     abstract fun visit(arg: Wrapper)
 }
 
-class Wrapper(val tag: String)
+class Wrapper(konst tag: String)
 
 fun Wrapper.accept(visitor: AnyVisitor) {
     visitor.visit(this)

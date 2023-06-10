@@ -1,5 +1,5 @@
 class C {
-    val <T
+    konst <T
 }
 
 class D

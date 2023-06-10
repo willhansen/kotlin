@@ -7,7 +7,7 @@ interface Flow<T> {
 }
 
 interface FlowCollector<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 inline fun <T> flow(crossinline body: suspend FlowCollector<T>.() -> Unit): Flow<T> =
@@ -17,7 +17,7 @@ inline fun <T> flow(crossinline body: suspend FlowCollector<T>.() -> Unit): Flow
 
 suspend inline fun <T> Flow<T>.collect(crossinline body: suspend (T) -> Unit) =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = body(value)
+        override suspend fun emit(konstue: T) = body(konstue)
     })
 
 inline fun <T> Flow<T>.filter(crossinline predicate: suspend (T) -> Boolean): Flow<T> =

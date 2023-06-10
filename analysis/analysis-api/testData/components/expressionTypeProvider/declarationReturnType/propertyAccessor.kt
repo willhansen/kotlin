@@ -1,9 +1,9 @@
 var i: Int
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
 class A {
-    val j: Int
+    konst j: Int
         get() = 2
-        set(value) {}
+        set(konstue) {}
 }

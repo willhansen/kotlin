@@ -13,16 +13,16 @@ import kotlin.concurrent.*
 import kotlin.concurrent.AtomicInt
 import kotlinx.cinterop.convert
 
-data class Job(val index: Int, var input: Int, var counter: Int)
+data class Job(konst index: Int, var input: Int, var counter: Int)
 
 fun initJobs(count: Int) = Array<Job?>(count) { i -> Job(i, i * 2, i)}
 
 @Test fun runTest0() {
-    val workers = Array(100, { _ -> Worker.start() })
-    val jobs = initJobs(workers.size)
-    val futures = Array(workers.size, { workerIndex ->
+    konst workers = Array(100, { _ -> Worker.start() })
+    konst jobs = initJobs(workers.size)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, {
-            val job = jobs[workerIndex]
+            konst job = jobs[workerIndex]
             jobs[workerIndex] = null
             job!!
         }) { job ->
@@ -30,10 +30,10 @@ fun initJobs(count: Int) = Array<Job?>(count) { i -> Job(i, i * 2, i)}
             job
         }
     })
-    val futureSet = futures.toSet()
+    konst futureSet = futures.toSet()
     var consumed = 0
     while (consumed < futureSet.size) {
-        val ready = waitForMultipleFutures(futureSet, 10000)
+        konst ready = waitForMultipleFutures(futureSet, 10000)
         ready.forEach {
             it.consume { job ->
                 assertEquals(job.index * 3, job.counter)
@@ -49,38 +49,38 @@ fun initJobs(count: Int) = Array<Job?>(count) { i -> Job(i, i * 2, i)}
     println("OK")
 }
 
-val COUNT = 2
+konst COUNT = 2
 
 @SharedImmutable
-val counters = Array(COUNT) { AtomicInt(0) }
+konst counters = Array(COUNT) { AtomicInt(0) }
 
 @Test fun runTest1() {
-  val workers = Array(COUNT) { Worker.start() }
+  konst workers = Array(COUNT) { Worker.start() }
   // Ensure processQueue() can only be called on current Worker.
   workers.forEach {
       assertFailsWith<IllegalStateException> {
           it.processQueue()
       }
   }
-  val futures = Array(workers.size) { workerIndex ->
+  konst futures = Array(workers.size) { workerIndex ->
       workers[workerIndex].execute(TransferMode.SAFE, {
           workerIndex
       }) {
           index ->
-          assertEquals(0, counters[index].value)
+          assertEquals(0, counters[index].konstue)
           // Process following request.
           while (!Worker.current!!.processQueue()) {}
           // Ensure it has an effect.
-          assertEquals(1, counters[index].value)
+          assertEquals(1, counters[index].konstue)
           // No more non-terminating tasks in this worker queue.
           assertEquals(false, Worker.current!!.processQueue())
       }
   }
-  val futures2 = Array(workers.size) { workerIndex ->
+  konst futures2 = Array(workers.size) { workerIndex ->
       workers[workerIndex].execute(TransferMode.SAFE, {
           workerIndex
       }) { index ->
-          assertEquals(0, counters[index].value)
+          assertEquals(0, counters[index].konstue)
           counters[index].incrementAndGet()
       }
   }
@@ -97,8 +97,8 @@ val counters = Array(COUNT) { AtomicInt(0) }
 }
 
 @Test fun runTest2() {
-    val workers = Array(COUNT) { Worker.start() }
-    val futures = Array(workers.size) { workerIndex ->
+    konst workers = Array(COUNT) { Worker.start() }
+    konst futures = Array(workers.size) { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { null }) {
             // Here we processed termination request.
             assertEquals(false, Worker.current.processQueue())

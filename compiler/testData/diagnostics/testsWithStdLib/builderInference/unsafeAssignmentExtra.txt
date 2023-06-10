@@ -7,7 +7,7 @@ public fun </*0*/ T : kotlin.Any> Foo<T>.change(/*0*/ block: Foo<T>.() -> kotlin
 
 public interface Foo</*0*/ T : kotlin.Any> {
     public abstract var a: T
-    public abstract val b: kotlin.Array<T>
+    public abstract konst b: kotlin.Array<T>
     public abstract fun accept(/*0*/ arg: T): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -17,7 +17,7 @@ public interface Foo</*0*/ T : kotlin.Any> {
 public final class FooImpl</*0*/ T : kotlin.Any> : Foo<T> {
     public constructor FooImpl</*0*/ T : kotlin.Any>()
     public abstract override /*1*/ /*fake_override*/ var a: T
-    public abstract override /*1*/ /*fake_override*/ val b: kotlin.Array<T>
+    public abstract override /*1*/ /*fake_override*/ konst b: kotlin.Array<T>
     public abstract override /*1*/ /*fake_override*/ fun accept(/*0*/ arg: T): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -15,11 +15,11 @@ import javax.tools.StandardLocation
 class KotlinFilerGeneratingProcessor : AbstractProcessor() {
 
     override fun process(annotations: MutableSet<out TypeElement>?, roundEnv: RoundEnvironment): Boolean {
-        val annotatedWith = roundEnv.getElementsAnnotatedWith(KotlinFilerGenerated::class.java)
+        konst annotatedWith = roundEnv.getElementsAnnotatedWith(KotlinFilerGenerated::class.java)
 
         for (element in annotatedWith) {
-            val packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
-            val simpleName = element.simpleName.toString()
+            konst packageName = processingEnv.elementUtils.getPackageOf(element).qualifiedName.toString()
+            konst simpleName = element.simpleName.toString()
 
             processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, packageName, "${simpleName}Generated.kt", element)
                 .openWriter().use {

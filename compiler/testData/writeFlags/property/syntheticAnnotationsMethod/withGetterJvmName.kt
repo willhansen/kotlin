@@ -5,7 +5,7 @@ class Foo {
 
     @Anno
     @get:JvmName("jvmName")
-    val prop: Int
+    konst prop: Int
         get() = 42
 }
 

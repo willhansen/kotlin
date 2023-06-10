@@ -5,7 +5,7 @@
 // FILE: common.kt
 
 @OptionalExpectation
-expect annotation class Anno(val s: String)
+expect annotation class Anno(konst s: String)
 
 // FILE: jvm.kt
 
@@ -32,14 +32,14 @@ private fun check(element: AnnotatedElement) {
 }
 
 private fun check(annotations: Array<Annotation>) {
-    val filtered = annotations.filterNot { it.annotationClass.java.name == "kotlin.Metadata" }
+    konst filtered = annotations.filterNot { it.annotationClass.java.name == "kotlin.Metadata" }
     if (filtered.isNotEmpty()) {
         throw AssertionError("Annotations should be empty: $filtered")
     }
 }
 
 fun box(): String {
-    val foo = Foo::class.java
+    konst foo = Foo::class.java
     check(foo)
     check(Foo.Nested::class.java)
     check(foo.declaredMethods.single { it.name == "bar" })

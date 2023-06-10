@@ -133,7 +133,7 @@ fun box(): String {
     if (6000000.p6 != 606060606) return "test6: ${6000000.p6}"
 
 
-    val a = A()
+    konst a = A()
 
     a.p7 = 7
     if (a.p7 != 70707) return "test7: ${a.p7}"

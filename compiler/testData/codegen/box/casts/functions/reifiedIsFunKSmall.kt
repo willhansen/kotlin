@@ -9,7 +9,7 @@ fun fn0() {}
 fun fn1(x: Any) {}
 
 inline fun <reified T> assertReifiedIs(x: Any, type: String) {
-    val answer: Boolean
+    konst answer: Boolean
     try {
         answer = x is T
     }
@@ -20,7 +20,7 @@ inline fun <reified T> assertReifiedIs(x: Any, type: String) {
 }
 
 inline fun <reified T> assertReifiedIsNot(x: Any, type: String) {
-    val answer: Boolean
+    konst answer: Boolean
     try {
         answer = x !is T
     }
@@ -31,8 +31,8 @@ inline fun <reified T> assertReifiedIsNot(x: Any, type: String) {
 }
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
     assertReifiedIs<Function0<*>>(f0, "Function0<*>")
     assertReifiedIs<Function1<*, *>>(f1, "Function1<*, *>")

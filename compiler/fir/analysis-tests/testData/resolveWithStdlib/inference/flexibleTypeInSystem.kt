@@ -10,7 +10,7 @@ public enum JavaEnum {
 
 import java.util.EnumMap
 
-val enumMap = EnumMap(
+konst enumMap = EnumMap(
     mapOf(
         JavaEnum.A to "A"
     )

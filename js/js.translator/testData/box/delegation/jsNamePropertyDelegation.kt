@@ -5,21 +5,21 @@ import kotlin.reflect.KProperty
 
 @JsExport
 class A {
-    @JsName("xx") val x: Int by B(23)
+    @JsName("xx") konst x: Int by B(23)
 
-    @get:JsName("getYY") val y: Int by B(42)
+    @get:JsName("getYY") konst y: Int by B(42)
 }
 
-class B(val value: Int) {
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int = value
+class B(konst konstue: Int) {
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): Int = konstue
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     assertEquals(23, a.x)
     assertEquals(42, a.y)
 
-    val d: dynamic = a
+    konst d: dynamic = a
     assertEquals(23, d.xx)
     assertEquals(42, d.getYY())
 

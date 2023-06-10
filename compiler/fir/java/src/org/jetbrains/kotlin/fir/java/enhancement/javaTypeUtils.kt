@@ -23,7 +23,7 @@ internal fun ConeKotlinType.enhance(session: FirSession, qualifiers: IndexedJava
 // the size of each subtree so that we can quickly skip to the next type argument; e.g. result[1] will
 // give 3 for B<C, D>, indicating that E<F> is at 1 + 3 = 4.
 private fun ConeKotlinType.computeSubtreeSizes(result: MutableList<Int>): Int {
-    val index = result.size
+    konst index = result.size
     result.add(0) // reserve space at index
     result[index] = 1 + typeArguments.sumOf {
         // Star projections take up one (empty) entry.
@@ -48,10 +48,10 @@ private fun ConeKotlinType.enhanceConeKotlinType(
             // TODO: support not loosing information for warnings here, too
             if (qualifiers(index).isNullabilityQualifierForWarning) return null
 
-            val lowerResult = lowerBound.enhanceInflexibleType(
+            konst lowerResult = lowerBound.enhanceInflexibleType(
                 session, TypeComponentPosition.FLEXIBLE_LOWER, qualifiers, index, subtreeSizes
             )
-            val upperResult = upperBound.enhanceInflexibleType(
+            konst upperResult = upperBound.enhanceInflexibleType(
                 session, TypeComponentPosition.FLEXIBLE_UPPER, qualifiers, index, subtreeSizes
             )
 
@@ -88,26 +88,26 @@ private fun ConeSimpleKotlinType.enhanceInflexibleType(
         return original.enhanceInflexibleType(session, position, qualifiers, index, subtreeSizes, isFromDefinitelyNotNullType = true)
     }
 
-    val shouldEnhance = position.shouldEnhance()
+    konst shouldEnhance = position.shouldEnhance()
     if ((!shouldEnhance && typeArguments.isEmpty()) || this !is ConeLookupTagBasedType) {
         return null
     }
 
-    val effectiveQualifiers = qualifiers(index)
-    val enhancedTag = lookupTag.enhanceMutability(effectiveQualifiers, position)
+    konst effectiveQualifiers = qualifiers(index)
+    konst enhancedTag = lookupTag.enhanceMutability(effectiveQualifiers, position)
 
     // TODO: implement warnings (see KT-57307)
-    val nullabilityFromQualifiers = effectiveQualifiers.nullability
+    konst nullabilityFromQualifiers = effectiveQualifiers.nullability
         .takeIf { shouldEnhance && !effectiveQualifiers.isNullabilityQualifierForWarning }
-    val enhancedIsNullable = when (nullabilityFromQualifiers) {
+    konst enhancedIsNullable = when (nullabilityFromQualifiers) {
         NullabilityQualifier.NULLABLE -> true
         NullabilityQualifier.NOT_NULL -> false
         else -> isNullable
     }
 
     var globalArgIndex = index + 1
-    val enhancedArguments = typeArguments.map { arg ->
-        val argIndex = globalArgIndex.also { globalArgIndex += subtreeSizes[it] }
+    konst enhancedArguments = typeArguments.map { arg ->
+        konst argIndex = globalArgIndex.also { globalArgIndex += subtreeSizes[it] }
         arg.type?.enhanceConeKotlinType(session, qualifiers, argIndex, subtreeSizes)?.let {
             when (arg.kind) {
                 ProjectionKind.IN -> ConeKotlinTypeProjectionIn(it)
@@ -118,14 +118,14 @@ private fun ConeSimpleKotlinType.enhanceInflexibleType(
         }
     }
 
-    val shouldAddAttribute = nullabilityFromQualifiers == NullabilityQualifier.NOT_NULL && !hasEnhancedNullability
+    konst shouldAddAttribute = nullabilityFromQualifiers == NullabilityQualifier.NOT_NULL && !hasEnhancedNullability
     if (lookupTag == enhancedTag && enhancedIsNullable == isNullable && !shouldAddAttribute && enhancedArguments.all { it == null }) {
         return null // absolutely no changes
     }
 
-    val mergedArguments = Array(typeArguments.size) { enhancedArguments[it] ?: typeArguments[it] }
-    val mergedAttributes = if (shouldAddAttribute) attributes + CompilerConeAttributes.EnhancedNullability else attributes
-    val enhancedType = enhancedTag.constructType(mergedArguments, enhancedIsNullable, mergedAttributes)
+    konst mergedArguments = Array(typeArguments.size) { enhancedArguments[it] ?: typeArguments[it] }
+    konst mergedAttributes = if (shouldAddAttribute) attributes + CompilerConeAttributes.EnhancedNullability else attributes
+    konst enhancedType = enhancedTag.constructType(mergedArguments, enhancedIsNullable, mergedAttributes)
     return if (effectiveQualifiers.definitelyNotNull || (isFromDefinitelyNotNullType && nullabilityFromQualifiers == null))
         ConeDefinitelyNotNullType.create(enhancedType, session.typeContext) ?: enhancedType
     else
@@ -141,13 +141,13 @@ private fun ConeClassifierLookupTag.enhanceMutability(
 
     when (qualifiers.mutability) {
         MutabilityQualifier.READ_ONLY -> {
-            val readOnlyId = classId.mutableToReadOnly()
+            konst readOnlyId = classId.mutableToReadOnly()
             if (position == TypeComponentPosition.FLEXIBLE_LOWER && readOnlyId != null) {
                 return readOnlyId.toLookupTag()
             }
         }
         MutabilityQualifier.MUTABLE -> {
-            val mutableId = classId.readOnlyToMutable()
+            konst mutableId = classId.readOnlyToMutable()
             if (position == TypeComponentPosition.FLEXIBLE_UPPER && mutableId != null) {
                 return mutableId.toLookupTag()
             }

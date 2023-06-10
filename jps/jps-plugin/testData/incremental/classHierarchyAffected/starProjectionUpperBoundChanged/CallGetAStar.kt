@@ -1,3 +1,3 @@
 class CallGetAStar {
-    val a = getAStar()
+    konst a = getAStar()
 }

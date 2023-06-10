@@ -7,6 +7,6 @@ package codegen.`object`.constructor
 
 class A()
 
-class B(val a:Int)
+class B(konst a:Int)
 
-class C(val a:Int, b:Int)
+class C(konst a:Int, b:Int)

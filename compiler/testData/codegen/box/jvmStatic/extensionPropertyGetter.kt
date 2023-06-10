@@ -4,16 +4,16 @@
 // KT-42990
 
 object O {
-    val todo: String = TODO()
+    konst todo: String = TODO()
 
     fun test(): Int = Bar(todo.bar).result
 
-    val String.bar: Int
+    konst String.bar: Int
         @JvmStatic
         get() = 42
 }
 
-class Bar(val result: Int)
+class Bar(konst result: Int)
 
 fun box(): String = try {
     O.test()

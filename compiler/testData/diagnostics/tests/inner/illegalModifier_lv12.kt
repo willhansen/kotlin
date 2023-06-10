@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !LANGUAGE: +InnerClassInEnumEntryClass
 <!WRONG_MODIFIER_TARGET!>inner<!> fun foo() {}
-<!WRONG_MODIFIER_TARGET!>inner<!> val prop = 42
+<!WRONG_MODIFIER_TARGET!>inner<!> konst prop = 42
 
 <!WRONG_MODIFIER_CONTAINING_DECLARATION!>inner<!> class A
 <!WRONG_MODIFIER_TARGET!>inner<!> interface B
@@ -41,6 +41,6 @@ class P {
     }
 }
 
-val R = object {
+konst R = object {
     inner class S
 }

@@ -14,20 +14,20 @@ import org.jetbrains.kotlin.commonizer.utils.firstNonNull
 import org.jetbrains.kotlin.storage.NullableLazyValue
 
 interface CirNode<T : CirDeclaration, R : CirDeclaration> {
-    val targetDeclarations: CommonizedGroup<T>
-    val commonDeclaration: NullableLazyValue<R>
+    konst targetDeclarations: CommonizedGroup<T>
+    konst commonDeclaration: NullableLazyValue<R>
 
     fun <T, R> accept(visitor: CirNodeVisitor<T, R>, data: T): R
 
     companion object {
-        inline val CirNode<*, *>.indices: IntRange get() = 0..targetDeclarations.size
+        inline konst CirNode<*, *>.indices: IntRange get() = 0..targetDeclarations.size
 
-        inline val CirNode<*, *>.targetIndices: List<Int> get() = indices - indexOfCommon
+        inline konst CirNode<*, *>.targetIndices: List<Int> get() = indices - indexOfCommon
 
-        inline val CirNode<*, *>.indexOfCommon: Int
+        inline konst CirNode<*, *>.indexOfCommon: Int
             get() = targetDeclarations.size
 
-        internal inline val CirNode<*, *>.dimension: Int
+        internal inline konst CirNode<*, *>.dimension: Int
             get() = targetDeclarations.size + 1
 
         fun toString(node: CirNode<*, *>) = buildString {
@@ -46,17 +46,17 @@ interface CirNode<T : CirDeclaration, R : CirDeclaration> {
 }
 
 interface CirClassifierNode<T : CirClassifier, R : CirClassifier> : CirNode<T, R> {
-    val classifierName: CirName
+    konst classifierName: CirName
         get() = targetDeclarations.firstNonNull<CirClassifier>().name
 }
 
 interface CirNodeWithLiftingUp<T : CirDeclaration, R : CirDeclaration> : CirNode<T, R> {
-    val isLiftedUp: Boolean
+    konst isLiftedUp: Boolean
         get() = (commonDeclaration() as? CirLiftedUpDeclaration)?.isLiftedUp == true
 }
 
 interface CirNodeWithMembers<T : CirDeclaration, R : CirDeclaration> : CirNode<T, R> {
-    val properties: MutableMap<PropertyApproximationKey, CirPropertyNode>
-    val functions: MutableMap<FunctionApproximationKey, CirFunctionNode>
-    val classes: MutableMap<CirName, CirClassNode>
+    konst properties: MutableMap<PropertyApproximationKey, CirPropertyNode>
+    konst functions: MutableMap<FunctionApproximationKey, CirFunctionNode>
+    konst classes: MutableMap<CirName, CirClassNode>
 }

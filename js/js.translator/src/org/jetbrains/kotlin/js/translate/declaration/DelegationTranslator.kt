@@ -39,30 +39,30 @@ class DelegationTranslator(
         context: TranslationContext
 ) : AbstractTranslator(context) {
 
-    private val classDescriptor: ClassDescriptor =
+    private konst classDescriptor: ClassDescriptor =
             BindingUtils.getClassDescriptor(context.bindingContext(), classDeclaration)
 
-    private val delegationBySpecifiers =
+    private konst delegationBySpecifiers =
             classDeclaration.superTypeListEntries.filterIsInstance<KtDelegatedSuperTypeEntry>()
 
-    private class Field (val name: JsName, val generateField: Boolean)
-    private val fields = mutableMapOf<KtDelegatedSuperTypeEntry, Field>()
+    private class Field (konst name: JsName, konst generateField: Boolean)
+    private konst fields = mutableMapOf<KtDelegatedSuperTypeEntry, Field>()
 
     init {
         for (specifier in delegationBySpecifiers) {
-            val expression = specifier.delegateExpression ?:
+            konst expression = specifier.delegateExpression ?:
                              throw IllegalArgumentException("delegate expression should not be null: ${specifier.text}")
-            val propertyDescriptor = CodegenUtil.getDelegatePropertyIfAny(expression, classDescriptor, bindingContext())
+            konst propertyDescriptor = CodegenUtil.getDelegatePropertyIfAny(expression, classDescriptor, bindingContext())
 
             if (CodegenUtil.isFinalPropertyWithBackingField(propertyDescriptor, bindingContext())) {
-                val delegateName = context.getNameForDescriptor(propertyDescriptor!!)
+                konst delegateName = context.getNameForDescriptor(propertyDescriptor!!)
                 fields[specifier] = Field(delegateName, false)
             }
             else {
-                val classFqName = DescriptorUtils.getFqName(classDescriptor)
-                val idForMangling = classFqName.asString()
-                val suggestedName = NameSuggestion.getStableMangledName(Namer.getDelegatePrefix(), idForMangling)
-                val delegateName = context.getScopeForDescriptor(classDescriptor).declareFreshName("${suggestedName}_0")
+                konst classFqName = DescriptorUtils.getFqName(classDescriptor)
+                konst idForMangling = classFqName.asString()
+                konst suggestedName = NameSuggestion.getStableMangledName(Namer.getDelegatePrefix(), idForMangling)
+                konst delegateName = context.getScopeForDescriptor(classDescriptor).declareFreshName("${suggestedName}_0")
                 fields[specifier] = Field(delegateName, true)
             }
         }
@@ -70,13 +70,13 @@ class DelegationTranslator(
 
     fun addInitCode(statements: MutableList<JsStatement>) {
         for (specifier in delegationBySpecifiers) {
-            val field = fields[specifier]!!
+            konst field = fields[specifier]!!
             if (field.generateField) {
-                val expression = specifier.delegateExpression!!
-                val context = context().innerBlock()
-                val delegateInitExpr = Translation.translateAsExpression(expression, context)
+                konst expression = specifier.delegateExpression!!
+                konst context = context().innerBlock()
+                konst delegateInitExpr = Translation.translateAsExpression(expression, context)
                 statements += context.dynamicContext().jsBlock().statements
-                val lhs = JsAstUtils.pureFqn(field.name, JsThisRef())
+                konst lhs = JsAstUtils.pureFqn(field.name, JsThisRef())
                 statements += JsAstUtils.assignment(lhs, delegateInitExpr)
                         .apply { source = specifier }
                         .makeStmt()
@@ -114,14 +114,14 @@ class DelegationTranslator(
             descriptor: PropertyDescriptor,
             delegateName: JsName
     ) {
-        val propertyName: String = descriptor.name.asString()
+        konst propertyName: String = descriptor.name.asString()
 
         fun generateDelegateGetterFunction(getterDescriptor: PropertyGetterDescriptor): JsFunction {
-            val delegateRef = JsNameRef(delegateName, JsThisRef())
+            konst delegateRef = JsNameRef(delegateName, JsThisRef())
 
-            val returnExpression: JsExpression = if (DescriptorUtils.isExtension(descriptor)) {
-                val getterName = context().getNameForDescriptor(getterDescriptor)
-                val receiver = Namer.getReceiverParameterName()
+            konst returnExpression: JsExpression = if (DescriptorUtils.isExtension(descriptor)) {
+                konst getterName = context().getNameForDescriptor(getterDescriptor)
+                konst receiver = Namer.getReceiverParameterName()
                 JsInvocation(JsNameRef(getterName, delegateRef), JsNameRef(receiver))
             }
             else {
@@ -130,36 +130,36 @@ class DelegationTranslator(
 
             returnExpression.source(specifier)
 
-            val jsFunction = simpleReturnFunction(context().getScopeForDescriptor(getterDescriptor.containingDeclaration), returnExpression)
+            konst jsFunction = simpleReturnFunction(context().getScopeForDescriptor(getterDescriptor.containingDeclaration), returnExpression)
             jsFunction.source = specifier
             if (DescriptorUtils.isExtension(descriptor)) {
-                val receiverName = jsFunction.scope.declareName(Namer.getReceiverParameterName())
+                konst receiverName = jsFunction.scope.declareName(Namer.getReceiverParameterName())
                 jsFunction.parameters.add(JsParameter(receiverName))
             }
             return jsFunction
         }
 
         fun generateDelegateSetterFunction(setterDescriptor: PropertySetterDescriptor): JsFunction {
-            val jsFunction = JsFunction(context().program().rootScope,
+            konst jsFunction = JsFunction(context().program().rootScope,
                                         "setter for " + setterDescriptor.name.asString())
             jsFunction.source = specifier
 
-            assert(setterDescriptor.valueParameters.size == 1) { "Setter must have 1 parameter" }
-            val defaultParameter = JsParameter(JsScope.declareTemporary())
-            val defaultParameterRef = defaultParameter.name.makeRef()
+            assert(setterDescriptor.konstueParameters.size == 1) { "Setter must have 1 parameter" }
+            konst defaultParameter = JsParameter(JsScope.declareTemporary())
+            konst defaultParameterRef = defaultParameter.name.makeRef()
 
-            val delegateRef = JsNameRef(delegateName, JsThisRef())
+            konst delegateRef = JsNameRef(delegateName, JsThisRef())
 
             // TODO: remove explicit type annotation when Kotlin compiler works this out
-            val setExpression: JsExpression = if (DescriptorUtils.isExtension(descriptor)) {
-                val setterName = context().getNameForDescriptor(setterDescriptor)
-                val setterNameRef = JsNameRef(setterName, delegateRef)
-                val extensionFunctionReceiverName = jsFunction.scope.declareName(Namer.getReceiverParameterName())
+            konst setExpression: JsExpression = if (DescriptorUtils.isExtension(descriptor)) {
+                konst setterName = context().getNameForDescriptor(setterDescriptor)
+                konst setterNameRef = JsNameRef(setterName, delegateRef)
+                konst extensionFunctionReceiverName = jsFunction.scope.declareName(Namer.getReceiverParameterName())
                 jsFunction.parameters.add(JsParameter(extensionFunctionReceiverName))
                 JsInvocation(setterNameRef, JsNameRef(extensionFunctionReceiverName), defaultParameterRef)
             }
             else {
-                val propertyNameRef = JsNameRef(propertyName, delegateRef)
+                konst propertyNameRef = JsNameRef(propertyName, delegateRef)
                 JsAstUtils.assignment(propertyNameRef, defaultParameterRef)
             }
 
@@ -172,28 +172,28 @@ class DelegationTranslator(
                 translateFunctionAsEcma5PropertyDescriptor(function, accessorDescriptor, context())
 
         fun generateDelegateGetter(): JsPropertyInitializer {
-            val getterDescriptor = descriptor.getter ?: throw IllegalStateException("Getter descriptor should not be null")
+            konst getterDescriptor = descriptor.getter ?: throw IllegalStateException("Getter descriptor should not be null")
             return generateDelegateAccessor(getterDescriptor, generateDelegateGetterFunction(getterDescriptor))
         }
 
         fun generateDelegateSetter(): JsPropertyInitializer {
-            val setterDescriptor = descriptor.setter ?: throw IllegalStateException("Setter descriptor should not be null")
+            konst setterDescriptor = descriptor.setter ?: throw IllegalStateException("Setter descriptor should not be null")
             return generateDelegateAccessor(setterDescriptor, generateDelegateSetterFunction(setterDescriptor))
         }
 
         // TODO: same logic as in AbstractDeclarationVisitor
         if (descriptor.isExtensionProperty || TranslationUtils.shouldAccessViaFunctions(descriptor)) {
-            val getter = descriptor.getter!!
+            konst getter = descriptor.getter!!
             context().addDeclarationStatement(context().addFunctionToPrototype(
                     classDescriptor, getter, generateDelegateGetterFunction(getter)))
             if (descriptor.isVar) {
-                val setter = descriptor.setter!!
+                konst setter = descriptor.setter!!
                 context().addDeclarationStatement(
                         context().addFunctionToPrototype(classDescriptor, setter, generateDelegateSetterFunction(setter)))
             }
         }
         else {
-            val literal = JsObjectLiteral(true)
+            konst literal = JsObjectLiteral(true)
             literal.propertyInitializers += JsPropertyInitializer(JsStringLiteral("configurable"), JsBooleanLiteral(true))
             literal.propertyInitializers.addGetterAndSetter(descriptor, ::generateDelegateGetter, ::generateDelegateSetter)
             context().addAccessorsToPrototype(classDescriptor, descriptor, literal)
@@ -207,8 +207,8 @@ class DelegationTranslator(
             overriddenDescriptor: FunctionDescriptor,
             delegateName: JsName
     ) {
-        val delegateRef = JsNameRef(delegateName, JsThisRef())
-        val statement = generateDelegateCall(classDescriptor, descriptor, overriddenDescriptor, delegateRef, context().newDeclaration(overriddenDescriptor), true, specifier)
+        konst delegateRef = JsNameRef(delegateName, JsThisRef())
+        konst statement = generateDelegateCall(classDescriptor, descriptor, overriddenDescriptor, delegateRef, context().newDeclaration(overriddenDescriptor), true, specifier)
         context().addDeclarationStatement(statement)
     }
 }

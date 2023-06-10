@@ -29,7 +29,7 @@ fun case_3(): Boolean? {
 fun case4() {
     contract {
         myRun {
-            val s: String
+            konst s: String
             run {
                 s = "hello"
             }

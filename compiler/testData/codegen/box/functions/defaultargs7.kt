@@ -1,4 +1,4 @@
-class A(val expected: Int) {
+class A(konst expected: Int) {
     fun foo(x: Int, y: Int = x + 20, z: Int = y * 2) = z == expected
 }
 

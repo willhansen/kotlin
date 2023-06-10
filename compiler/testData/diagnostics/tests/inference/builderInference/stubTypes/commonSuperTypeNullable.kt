@@ -32,7 +32,7 @@ fun <U> id(x: U): U? = x
 fun <E> select(vararg x: E): E? = x[0]
 
 fun test() {
-    val ret = build {
+    konst ret = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("TypeVariable(R)?")!>Test.foo(get())<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<TypeVariable(R)>?")!>Test.foo(getInv())<!>
@@ -57,7 +57,7 @@ fun test() {
         }
         ""
     }
-    val ret2 = build {
+    konst ret2 = build {
         emit("1")
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select(get(), null)<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String?")!>select(Test.<!IMPLICIT_NOTHING_TYPE_ARGUMENT_IN_RETURN_POSITION!>foo<!>(null), Test.foo(get()))<!>

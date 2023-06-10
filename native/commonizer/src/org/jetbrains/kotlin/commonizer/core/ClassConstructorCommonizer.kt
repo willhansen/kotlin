@@ -14,22 +14,22 @@ class ClassConstructorCommonizer(
     typeCommonizer: TypeCommonizer,
 ) : AbstractStandardCommonizer<CirClassConstructor, CirClassConstructor?>() {
     private var isPrimary = false
-    private val visibility = VisibilityCommonizer.equalizing()
-    private val typeParameterListCommonizer = TypeParameterListCommonizer(typeCommonizer)
-    private val valueParametersCommonizer = CallableValueParametersCommonizer(typeCommonizer)
-    private val annotationsCommonizer: AnnotationsCommonizer = AnnotationsCommonizer()
+    private konst visibility = VisibilityCommonizer.equalizing()
+    private konst typeParameterListCommonizer = TypeParameterListCommonizer(typeCommonizer)
+    private konst konstueParametersCommonizer = CallableValueParametersCommonizer(typeCommonizer)
+    private konst annotationsCommonizer: AnnotationsCommonizer = AnnotationsCommonizer()
 
     override fun commonizationResult(): CirClassConstructor? {
-        val valueParameters = valueParametersCommonizer.result ?: return null
-        valueParameters.patchCallables()
+        konst konstueParameters = konstueParametersCommonizer.result ?: return null
+        konstueParameters.patchCallables()
 
         return CirClassConstructor.create(
             annotations = annotationsCommonizer.result,
             typeParameters = typeParameterListCommonizer.result ?: return null,
             visibility = visibility.result,
             containingClass = CONTAINING_CLASS_DOES_NOT_MATTER, // does not matter
-            valueParameters = valueParameters.valueParameters,
-            hasStableParameterNames = valueParameters.hasStableParameterNames,
+            konstueParameters = konstueParameters.konstueParameters,
+            hasStableParameterNames = konstueParameters.hasStableParameterNames,
             isPrimary = isPrimary
         )
     }
@@ -44,15 +44,15 @@ class ClassConstructorCommonizer(
                 && isPrimary == next.isPrimary
                 && visibility.commonizeWith(next)
                 && typeParameterListCommonizer.commonizeWith(next.typeParameters)
-                && valueParametersCommonizer.commonizeWith(next)
+                && konstueParametersCommonizer.commonizeWith(next)
                 && annotationsCommonizer.commonizeWith(next.annotations)
     }
 
     companion object {
-        private val CONTAINING_CLASS_DOES_NOT_MATTER = object : CirContainingClass {
-            override val modality get() = Modality.FINAL
-            override val kind get() = ClassKind.CLASS
-            override val isData get() = false
+        private konst CONTAINING_CLASS_DOES_NOT_MATTER = object : CirContainingClass {
+            override konst modality get() = Modality.FINAL
+            override konst kind get() = ClassKind.CLASS
+            override konst isData get() = false
         }
     }
 }

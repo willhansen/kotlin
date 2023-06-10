@@ -30,7 +30,7 @@ public final class IrTypeAbbreviation extends
   private IrTypeAbbreviation(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -94,10 +94,10 @@ public final class IrTypeAbbreviation extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -121,7 +121,7 @@ public final class IrTypeAbbreviation extends
     public IrTypeAbbreviation parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrTypeAbbreviation(input, extensionRegistry);
     }
   };
@@ -330,23 +330,23 @@ public final class IrTypeAbbreviation extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parseFrom(java.io.InputStream input)
@@ -521,7 +521,7 @@ public final class IrTypeAbbreviation extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeAbbreviation) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -564,12 +564,12 @@ public final class IrTypeAbbreviation extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder setAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.set(index, value);
+      annotation_.set(index, konstue);
 
       return this;
     }
@@ -586,12 +586,12 @@ public final class IrTypeAbbreviation extends
     /**
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
-    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+    public Builder addAnnotation(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(value);
+      annotation_.add(konstue);
 
       return this;
     }
@@ -599,12 +599,12 @@ public final class IrTypeAbbreviation extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder addAnnotation(
-        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+        int index, org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
       ensureAnnotationIsMutable();
-      annotation_.add(index, value);
+      annotation_.add(index, konstue);
 
       return this;
     }
@@ -632,10 +632,10 @@ public final class IrTypeAbbreviation extends
      * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall annotation = 1;</code>
      */
     public Builder addAllAnnotation(
-        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> values) {
+        java.lang.Iterable<? extends org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall> konstues) {
       ensureAnnotationIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, annotation_);
+          konstues, annotation_);
 
       return this;
     }
@@ -674,9 +674,9 @@ public final class IrTypeAbbreviation extends
     /**
      * <code>required int64 type_alias = 2;</code>
      */
-    public Builder setTypeAlias(long value) {
+    public Builder setTypeAlias(long konstue) {
       bitField0_ |= 0x00000002;
-      typeAlias_ = value;
+      typeAlias_ = konstue;
       
       return this;
     }
@@ -706,9 +706,9 @@ public final class IrTypeAbbreviation extends
     /**
      * <code>required bool has_question_mark = 3;</code>
      */
-    public Builder setHasQuestionMark(boolean value) {
+    public Builder setHasQuestionMark(boolean konstue) {
       bitField0_ |= 0x00000004;
-      hasQuestionMark_ = value;
+      hasQuestionMark_ = konstue;
       
       return this;
     }
@@ -768,9 +768,9 @@ public final class IrTypeAbbreviation extends
      * </pre>
      */
     public Builder setArgument(
-        int index, long value) {
+        int index, long konstue) {
       ensureArgumentIsMutable();
-      argument_.set(index, value);
+      argument_.set(index, konstue);
       
       return this;
     }
@@ -781,9 +781,9 @@ public final class IrTypeAbbreviation extends
      * 0 - STAR, otherwise [63..2 - IrType index | 1..0 - Variance]
      * </pre>
      */
-    public Builder addArgument(long value) {
+    public Builder addArgument(long konstue) {
       ensureArgumentIsMutable();
-      argument_.add(value);
+      argument_.add(konstue);
       
       return this;
     }
@@ -795,10 +795,10 @@ public final class IrTypeAbbreviation extends
      * </pre>
      */
     public Builder addAllArgument(
-        java.lang.Iterable<? extends java.lang.Long> values) {
+        java.lang.Iterable<? extends java.lang.Long> konstues) {
       ensureArgumentIsMutable();
       org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-          values, argument_);
+          konstues, argument_);
       
       return this;
     }

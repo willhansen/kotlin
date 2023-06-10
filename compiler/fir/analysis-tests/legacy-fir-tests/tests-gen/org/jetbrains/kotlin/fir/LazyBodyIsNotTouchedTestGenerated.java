@@ -1267,9 +1267,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
             runTest("compiler/fir/analysis-tests/testData/resolve/checkers/internalSuperCallFromInlineFun.kt");
         }
 
-        @TestMetadata("invalidLhsOfClassLiteral.kt")
-        public void testInvalidLhsOfClassLiteral() throws Exception {
-            runTest("compiler/fir/analysis-tests/testData/resolve/checkers/invalidLhsOfClassLiteral.kt");
+        @TestMetadata("inkonstidLhsOfClassLiteral.kt")
+        public void testInkonstidLhsOfClassLiteral() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/checkers/inkonstidLhsOfClassLiteral.kt");
         }
 
         @TestMetadata("notUselessCast_1.kt")
@@ -1732,9 +1732,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
             runTest("compiler/fir/analysis-tests/testData/resolve/diagnostics/upperBoundViolated.kt");
         }
 
-        @TestMetadata("valOnAnnotationParameter.kt")
+        @TestMetadata("konstOnAnnotationParameter.kt")
         public void testValOnAnnotationParameter() throws Exception {
-            runTest("compiler/fir/analysis-tests/testData/resolve/diagnostics/valOnAnnotationParameter.kt");
+            runTest("compiler/fir/analysis-tests/testData/resolve/diagnostics/konstOnAnnotationParameter.kt");
         }
 
         @TestMetadata("compiler/fir/analysis-tests/testData/resolve/diagnostics/functionAsExpression")
@@ -2466,9 +2466,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
                 runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/illegalMultipleOperatorsMiddle.kt");
             }
 
-            @TestMetadata("invalidSubtraction.kt")
-            public void testInvalidSubtraction() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/invalidSubtraction.kt");
+            @TestMetadata("inkonstidSubtraction.kt")
+            public void testInkonstidSubtraction() throws Exception {
+                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/inkonstidSubtraction.kt");
             }
 
             @TestMetadata("list.kt")
@@ -2526,14 +2526,14 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
                 runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/simpleAssign.kt");
             }
 
-            @TestMetadata("validAddition.kt")
+            @TestMetadata("konstidAddition.kt")
             public void testValidAddition() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/validAddition.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/konstidAddition.kt");
             }
 
-            @TestMetadata("validSubtraction.kt")
+            @TestMetadata("konstidSubtraction.kt")
             public void testValidSubtraction() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/validSubtraction.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/canBeReplacedWithOperatorAssignment/konstidSubtraction.kt");
             }
         }
 
@@ -2720,9 +2720,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
                 runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/unused/usedInAnnotationArguments.kt");
             }
 
-            @TestMetadata("valueIsNeverRead.kt")
+            @TestMetadata("konstueIsNeverRead.kt")
             public void testValueIsNeverRead() throws Exception {
-                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/unused/valueIsNeverRead.kt");
+                runTest("compiler/fir/analysis-tests/testData/resolve/extendedCheckers/unused/konstueIsNeverRead.kt");
             }
         }
 
@@ -3346,9 +3346,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
             runTest("compiler/fir/analysis-tests/testData/resolve/problems/innerClassHierarchy.kt");
         }
 
-        @TestMetadata("invalidCode.kt")
-        public void testInvalidCode() throws Exception {
-            runTest("compiler/fir/analysis-tests/testData/resolve/problems/invalidCode.kt");
+        @TestMetadata("inkonstidCode.kt")
+        public void testInkonstidCode() throws Exception {
+            runTest("compiler/fir/analysis-tests/testData/resolve/problems/inkonstidCode.kt");
         }
 
         @TestMetadata("javaClassWithEmptyAnnotationName.kt")
@@ -3912,9 +3912,9 @@ public class LazyBodyIsNotTouchedTestGenerated extends AbstractLazyBodyIsNotTouc
             runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/unstableSmartcastAndAmbiguity.kt");
         }
 
-        @TestMetadata("valCapturedInLambda.kt")
+        @TestMetadata("konstCapturedInLambda.kt")
         public void testValCapturedInLambda() throws Exception {
-            runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/valCapturedInLambda.kt");
+            runTest("compiler/fir/analysis-tests/testData/resolve/smartcasts/konstCapturedInLambda.kt");
         }
 
         @TestMetadata("compiler/fir/analysis-tests/testData/resolve/smartcasts/booleans")

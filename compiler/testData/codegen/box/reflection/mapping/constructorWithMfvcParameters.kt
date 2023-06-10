@@ -7,14 +7,14 @@ import kotlin.reflect.jvm.kotlinFunction
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val x1: UInt, val x2: Int)
+konstue class Z(konst x1: UInt, konst x2: Int)
 
-class Test(val x: Z)
+class Test(konst x: Z)
 
 fun box(): String {
-    val kctor1 = Test::class.primaryConstructor ?: throw AssertionError("No primary constructor")
-    val jctor1 = kctor1.javaConstructor ?: throw AssertionError("No javaConstructor for $kctor1")
-    val kctor2 = jctor1.kotlinFunction ?: throw AssertionError("No kotlinFunction for $jctor1")
+    konst kctor1 = Test::class.primaryConstructor ?: throw AssertionError("No primary constructor")
+    konst jctor1 = kctor1.javaConstructor ?: throw AssertionError("No javaConstructor for $kctor1")
+    konst kctor2 = jctor1.kotlinFunction ?: throw AssertionError("No kotlinFunction for $jctor1")
 
     assertEquals(kctor1, kctor2)
     assertEquals("[x]", kctor2.parameters.map { it.name }.toString())

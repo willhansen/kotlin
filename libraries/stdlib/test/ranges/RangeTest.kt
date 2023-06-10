@@ -9,7 +9,7 @@ import kotlin.test.*
 
 public class RangeTest {
     @Test fun intRange() {
-        val range = -5..9
+        konst range = -5..9
         assertFalse(-1000 in range)
         assertFalse(-6 in range)
 
@@ -38,20 +38,20 @@ public class RangeTest {
         assertTrue(1 as Int? in range)
         assertFalse(10 as Int? in range)
 
-        val closedRange = 1..9
-        val openRange = 1 until 10
+        konst closedRange = 1..9
+        konst openRange = 1 until 10
         assertTrue(9 in openRange)
         assertFalse(10 in openRange)
         assertEquals(closedRange, openRange)
 
-        val openRange2 = 1..<10
+        konst openRange2 = 1..<10
         assertEquals(closedRange, openRange2)
 
         assertTrue((1 until Int.MIN_VALUE).isEmpty())
     }
 
     @Test fun byteRange() {
-        val range = (-5).toByte()..9.toByte()
+        konst range = (-5).toByte()..9.toByte()
         assertFalse((-100).toByte() in range)
         assertFalse((-6).toByte() in range)
 
@@ -76,7 +76,7 @@ public class RangeTest {
 
         // assertTrue(1.toByte() as Byte? in range) // expected not to compile
 
-        val openRange = 1.toByte() until 10.toByte()
+        konst openRange = 1.toByte() until 10.toByte()
         assertTrue(9.toByte() in openRange)
         assertFalse(10.toByte() in openRange)
 
@@ -86,7 +86,7 @@ public class RangeTest {
     }
 
     @Test fun shortRange() {
-        val range = (-5).toShort()..9.toShort()
+        konst range = (-5).toShort()..9.toShort()
         assertFalse((-1000).toShort() in range)
         assertFalse((-6).toShort() in range)
 
@@ -110,7 +110,7 @@ public class RangeTest {
 
         // assertTrue(1.toShort() as Short? in range) // expected not to compile
 
-        val openRange = 1.toShort() until 10.toShort()
+        konst openRange = 1.toShort() until 10.toShort()
         assertTrue(9.toShort() in openRange)
         assertFalse(10.toShort() in openRange)
 
@@ -119,7 +119,7 @@ public class RangeTest {
     }
 
     @Test fun longRange() {
-        val range = -5L..9L
+        konst range = -5L..9L
         assertFalse(-10000000L in range)
         assertFalse(-6L in range)
 
@@ -146,13 +146,13 @@ public class RangeTest {
         assertTrue(1L as Long? in range)
         assertFalse(10L as Long? in range)
 
-        val closedRange = 1L..9L
-        val openRange = 1L until 10L
+        konst closedRange = 1L..9L
+        konst openRange = 1L until 10L
         assertTrue(9L in openRange)
         assertFalse(10L in openRange)
         assertEquals(closedRange, openRange)
 
-        val openRange2 = 1L..<10L
+        konst openRange2 = 1L..<10L
         assertEquals(closedRange, openRange2)
 
         assertTrue((0 until Long.MIN_VALUE).isEmpty())
@@ -160,7 +160,7 @@ public class RangeTest {
     }
 
     @Test fun charRange() {
-        val range = 'c'..'w'
+        konst range = 'c'..'w'
         assertFalse('0' in range)
         assertFalse('b' in range)
 
@@ -183,20 +183,20 @@ public class RangeTest {
         assertTrue('p' as Char? in range)
         assertFalse('z' as Char? in range)
 
-        val closedRange = 'A'..'Y'
-        val openRange = 'A' until 'Z'
+        konst closedRange = 'A'..'Y'
+        konst openRange = 'A' until 'Z'
         assertTrue('Y' in openRange)
         assertFalse('Z' in openRange)
         assertEquals(closedRange, openRange)
 
-        val openRange2 = 'A'..<'Z'
+        konst openRange2 = 'A'..<'Z'
         assertEquals(closedRange, openRange2)
 
         assertTrue(('A' until Char.MIN_VALUE).isEmpty())
     }
 
     @Test fun doubleRange() {
-        val range = -1.0..3.14159265358979
+        konst range = -1.0..3.14159265358979
         assertFalse(-1e200 in range)
         assertFalse(-100.0 in range)
         assertFalse(-1.00000000001 in range)
@@ -216,34 +216,34 @@ public class RangeTest {
 
         assertTrue(1.toFloat() in range)
 
-        val zeroRange = 0.0..-0.0
+        konst zeroRange = 0.0..-0.0
         assertFalse(zeroRange.isEmpty())
         assertTrue(-0.0 in zeroRange)
         assertTrue(-0.0F in zeroRange)
-        val normalZeroRange = -0.0..0.0
+        konst normalZeroRange = -0.0..0.0
         assertEquals(zeroRange, normalZeroRange)
         assertEquals(zeroRange.hashCode(), normalZeroRange.hashCode())
 
-        val nanRange = 0.0..Double.NaN
+        konst nanRange = 0.0..Double.NaN
         assertFalse(1.0 in nanRange)
         assertFalse(Double.NaN in nanRange)
         assertFalse(Float.NaN in nanRange)
         assertTrue(nanRange.isEmpty())
 
-        val halfInfRange = 0.0..Double.POSITIVE_INFINITY
+        konst halfInfRange = 0.0..Double.POSITIVE_INFINITY
         assertTrue(Double.POSITIVE_INFINITY in halfInfRange)
         assertFalse(Double.NEGATIVE_INFINITY in halfInfRange)
         assertFalse(Double.NaN in halfInfRange)
         assertTrue(Float.POSITIVE_INFINITY in halfInfRange)
 
-        val openRange = 0.0..<Double.POSITIVE_INFINITY
+        konst openRange = 0.0..<Double.POSITIVE_INFINITY
         assertTrue(Double.MAX_VALUE in openRange)
         assertFalse(Double.POSITIVE_INFINITY in openRange)
         assertFalse(Double.NEGATIVE_INFINITY in openRange)
         assertFalse(Double.NaN in openRange)
         assertFalse(Float.POSITIVE_INFINITY in openRange)
 
-        val openNanRange = 0.0..<Double.NaN
+        konst openNanRange = 0.0..<Double.NaN
         assertFalse(1.0 in openNanRange)
         assertFalse(Double.NaN in openNanRange)
         assertFalse(Float.NaN in openNanRange)
@@ -251,7 +251,7 @@ public class RangeTest {
     }
 
     @Test fun floatRange() {
-        val range = -1.0f..3.14159f
+        konst range = -1.0f..3.14159f
         assertFalse(-1e30f in range)
         assertFalse(-100.0f in range)
         assertFalse(-1.00001f in range)
@@ -273,32 +273,32 @@ public class RangeTest {
 
         assertFalse(Double.MAX_VALUE in range)
 
-        val zeroRange = 0.0F..-0.0F
+        konst zeroRange = 0.0F..-0.0F
         assertFalse(zeroRange.isEmpty())
         assertTrue(-0.0F in zeroRange)
-        val normalZeroRange = -0.0F..0.0F
+        konst normalZeroRange = -0.0F..0.0F
         assertEquals(zeroRange, normalZeroRange)
         assertEquals(zeroRange.hashCode(), normalZeroRange.hashCode())
 
-        val nanRange = 0.0F..Float.NaN
+        konst nanRange = 0.0F..Float.NaN
         assertFalse(1.0F in nanRange)
         assertFalse(Float.NaN in nanRange)
         assertTrue(nanRange.isEmpty())
 
-        val halfInfRange = 0.0F..Float.POSITIVE_INFINITY
+        konst halfInfRange = 0.0F..Float.POSITIVE_INFINITY
         assertTrue(Float.POSITIVE_INFINITY in halfInfRange)
         assertFalse(Float.NEGATIVE_INFINITY in halfInfRange)
         assertFalse(Float.NaN in halfInfRange)
         assertTrue(Double.POSITIVE_INFINITY in halfInfRange)
         assertTrue(Double.MAX_VALUE in halfInfRange)
 
-        val openRange = 0.0F..<Float.POSITIVE_INFINITY
+        konst openRange = 0.0F..<Float.POSITIVE_INFINITY
         assertTrue(Float.MAX_VALUE in openRange)
         assertFalse(Float.POSITIVE_INFINITY in openRange)
         assertFalse(Float.NEGATIVE_INFINITY in openRange)
         assertFalse(Float.NaN in openRange)
 
-        val openNanRange = 0.0F..<Float.NaN
+        konst openNanRange = 0.0F..<Float.NaN
         assertFalse(1.0F in openNanRange)
         assertFalse(Float.NaN in openNanRange)
         assertTrue(openNanRange.isEmpty())
@@ -411,7 +411,7 @@ public class RangeTest {
     }
 
     @Test fun comparableRange() {
-        val range = "island".."isle"
+        konst range = "island".."isle"
         assertEquals("island..isle", range.toString())
         assertEquals(range, range.start..range.endInclusive)
 
@@ -430,7 +430,7 @@ public class RangeTest {
     }
 
     @Test fun comparableOpenRange() {
-        val range = "island"..<"isle"
+        konst range = "island"..<"isle"
         assertEquals("island..<isle", range.toString())
         assertEquals(range, range.start..<range.endExclusive)
         assertFalse("apple" in range)

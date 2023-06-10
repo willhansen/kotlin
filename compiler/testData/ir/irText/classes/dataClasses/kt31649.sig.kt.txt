@@ -5,7 +5,7 @@ data class TestData {
   // CHECK:
   //   Mangled name: TestData{}nn
   //   Public signature: /TestData.nn|4910025065134137180[0]
-  val nn: Nothing?
+  konst nn: Nothing?
     // CHECK JVM_IR:
     //   Mangled name: TestData#<get-nn>(){}kotlin.Nothing?
     //   Public signature: /TestData.nn.<get-nn>|-7894820649903816930[0]
@@ -63,11 +63,11 @@ data class TestData {
 // CHECK:
 //   Mangled name: TestInline
 //   Public signature: /TestInline|null[0]
-value class TestInline {
+konstue class TestInline {
   // CHECK:
   //   Mangled name: TestInline{}nn
   //   Public signature: /TestInline.nn|4910025065134137180[0]
-  val nn: Nothing?
+  konst nn: Nothing?
     // CHECK JVM_IR:
     //   Mangled name: TestInline#<get-nn>(){}kotlin.Nothing?
     //   Public signature: /TestInline.nn.<get-nn>|-7894820649903816930[0]

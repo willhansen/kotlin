@@ -61,38 +61,38 @@ import java.io.File
 class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
 
     private class TestModule(
-        val project: Project,
-        val _name: String, val kotlinFiles: List<KtFile>, val javaFilesScope: GlobalSearchScope,
-        val _dependencies: TestModule.() -> List<TestModule>
+        konst project: Project,
+        konst _name: String, konst kotlinFiles: List<KtFile>, konst javaFilesScope: GlobalSearchScope,
+        konst _dependencies: TestModule.() -> List<TestModule>
     ) : TrackableModuleInfo {
         override fun createModificationTracker(): ModificationTracker = ModificationTracker.NEVER_CHANGED
 
         override fun dependencies() = _dependencies()
-        override val name = Name.special("<$_name>")
+        override konst name = Name.special("<$_name>")
 
-        override val platform: TargetPlatform
+        override konst platform: TargetPlatform
             get() = JvmPlatforms.unspecifiedJvmPlatform
 
-        override val analyzerServices: PlatformDependentAnalyzerServices
+        override konst analyzerServices: PlatformDependentAnalyzerServices
             get() = JvmPlatformAnalyzerServices
     }
 
     fun testJavaEntitiesBelongToCorrectModule() {
-        val moduleDirs = File(PATH_TO_TEST_ROOT_DIR).listFiles { it -> it.isDirectory }!!
-        val environment = createEnvironment(moduleDirs)
-        val modules = setupModules(environment, moduleDirs)
-        val projectContext = ProjectContext(environment.project, "MultiModuleJavaAnalysisTest")
-        val builtIns = JvmBuiltIns(projectContext.storageManager, JvmBuiltIns.Kind.FROM_CLASS_LOADER)
-        val platformParameters = JvmPlatformParameters(
+        konst moduleDirs = File(PATH_TO_TEST_ROOT_DIR).listFiles { it -> it.isDirectory }!!
+        konst environment = createEnvironment(moduleDirs)
+        konst modules = setupModules(environment, moduleDirs)
+        konst projectContext = ProjectContext(environment.project, "MultiModuleJavaAnalysisTest")
+        konst builtIns = JvmBuiltIns(projectContext.storageManager, JvmBuiltIns.Kind.FROM_CLASS_LOADER)
+        konst platformParameters = JvmPlatformParameters(
             packagePartProviderFactory = { PackagePartProvider.Empty },
             moduleByJavaClass = { javaClass ->
-                val moduleName = javaClass.name.asString().lowercase().first().toString()
+                konst moduleName = javaClass.name.asString().lowercase().first().toString()
                 modules.first { it._name == moduleName }
             },
             useBuiltinsProviderForModule = { false }
         )
 
-        val resolverForProject = object : AbstractResolverForProject<TestModule>(
+        konst resolverForProject = object : AbstractResolverForProject<TestModule>(
             "test",
             projectContext,
             modules
@@ -132,18 +132,18 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
     }
 
     private fun createEnvironment(moduleDirs: Array<File>): KotlinCoreEnvironment {
-        val configuration =
+        konst configuration =
                 KotlinTestUtils.newConfiguration(ConfigurationKind.JDK_ONLY, TestJdkKind.MOCK_JDK, emptyList(), moduleDirs.toList())
         return KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
     }
 
     private fun setupModules(environment: KotlinCoreEnvironment, moduleDirs: Array<File>): List<TestModule> {
-        val project = environment.project
-        val modules = HashMap<String, TestModule>()
+        konst project = environment.project
+        konst modules = HashMap<String, TestModule>()
         for (dir in moduleDirs) {
-            val name = dir.name
-            val kotlinFiles = KotlinTestUtils.loadToKtFiles(environment, dir.listFiles { it -> it.extension == "kt" }?.toList().orEmpty())
-            val javaFilesScope = object : DelegatingGlobalSearchScope(GlobalSearchScope.allScope(project)) {
+            konst name = dir.name
+            konst kotlinFiles = KotlinTestUtils.loadToKtFiles(environment, dir.listFiles { it -> it.extension == "kt" }?.toList().orEmpty())
+            konst javaFilesScope = object : DelegatingGlobalSearchScope(GlobalSearchScope.allScope(project)) {
                 override fun contains(file: VirtualFile): Boolean {
                     if (file !in myBaseScope!!) return false
                     if (file.isDirectory) return true
@@ -159,13 +159,13 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
                 }
             }
         }
-        return modules.values.toList()
+        return modules.konstues.toList()
     }
 
     private fun performChecks(resolverForProject: ResolverForProject<TestModule>, modules: List<TestModule>) {
         modules.forEach {
             module ->
-            val moduleDescriptor = resolverForProject.descriptorForModule(module)
+            konst moduleDescriptor = resolverForProject.descriptorForModule(module)
 
             checkClassInPackage(moduleDescriptor, "test", "Kotlin${module._name.uppercase()}")
             checkClassInPackage(moduleDescriptor, "custom", "${module._name.uppercase()}Class")
@@ -173,9 +173,9 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
     }
 
     private fun checkClassInPackage(moduleDescriptor: ModuleDescriptor, packageName: String, className: String) {
-        val kotlinPackage = moduleDescriptor.getPackage(FqName(packageName))
-        val kotlinClassName = Name.identifier(className)
-        val kotlinClass = kotlinPackage.memberScope.getContributedClassifier(kotlinClassName, NoLookupLocation.FROM_TEST) as ClassDescriptor
+        konst kotlinPackage = moduleDescriptor.getPackage(FqName(packageName))
+        konst kotlinClassName = Name.identifier(className)
+        konst kotlinClass = kotlinPackage.memberScope.getContributedClassifier(kotlinClassName, NoLookupLocation.FROM_TEST) as ClassDescriptor
         checkClass(kotlinClass)
     }
 
@@ -188,28 +188,28 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
     }
 
     private fun checkCallable(callable: CallableDescriptor) {
-        val name = callable.name.asString()
+        konst name = callable.name.asString()
         if (name in setOf("equals", "hashCode", "toString")) return
 
-        val returnType = callable.returnType!!
+        konst returnType = callable.returnType!!
         if (!KotlinBuiltIns.isUnit(returnType)) {
             checkDescriptor(returnType.constructor.declarationDescriptor!!, callable)
         }
 
-        callable.valueParameters.map {
+        callable.konstueParameters.map {
             it.type.constructor.declarationDescriptor!!
         }.forEach { checkDescriptor(it, callable) }
 
         callable.annotations.forEach {
-            val annotationClassDescriptor = it.annotationClass!!
+            konst annotationClassDescriptor = it.annotationClass!!
             checkDescriptor(annotationClassDescriptor, callable)
 
             Assert.assertEquals(
-                    "Annotation value arguments number is not equal to number of parameters in $callable",
-                    annotationClassDescriptor.constructors.single().valueParameters.size, it.allValueArguments.size)
+                    "Annotation konstue arguments number is not equal to number of parameters in $callable",
+                    annotationClassDescriptor.constructors.single().konstueParameters.size, it.allValueArguments.size)
 
             it.allValueArguments.forEach {
-                val argument = it.value
+                konst argument = it.konstue
                 if (argument is EnumValue) {
                     Assert.assertEquals("Enum entry name should be <module-name>X", "X", argument.enumEntryName.identifier.last().toString())
                 }
@@ -230,9 +230,9 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
     private fun checkDescriptor(referencedDescriptor: ClassifierDescriptor, context: DeclarationDescriptor) {
         assert(!ErrorUtils.isError(referencedDescriptor)) { "Error descriptor: $referencedDescriptor" }
 
-        val descriptorName = referencedDescriptor.name.asString()
-        val expectedModuleName = "<${descriptorName.lowercase().first()}>"
-        val moduleName = referencedDescriptor.module.name.asString()
+        konst descriptorName = referencedDescriptor.name.asString()
+        konst expectedModuleName = "<${descriptorName.lowercase().first()}>"
+        konst moduleName = referencedDescriptor.module.name.asString()
         Assert.assertEquals(
                 "Java class $descriptorName in $context should be in module $expectedModuleName, but instead was in $moduleName",
                 expectedModuleName, moduleName
@@ -240,6 +240,6 @@ class MultiModuleJavaAnalysisCustomTest : KtUsefulTestCase() {
     }
 
     companion object {
-        val PATH_TO_TEST_ROOT_DIR = "compiler/testData/multiModule/java/custom"
+        konst PATH_TO_TEST_ROOT_DIR = "compiler/testData/multiModule/java/custom"
     }
 }

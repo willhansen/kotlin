@@ -14,7 +14,7 @@ public final class Bar {
 
 public final class Baz {
     @kotlin.Suppress(names = {"INVISIBLE_MEMBER", "INVISIBLE_REFERENCE"}) @kotlin.internal.LowPriorityInOverloadResolution public constructor Baz(/*0*/ x: Foo)
-    public final val x: Foo
+    public final konst x: Foo
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -22,7 +22,7 @@ public final class Baz {
 
 public final class Foo {
     public constructor Foo()
-    @kotlin.Suppress(names = {"INVISIBLE_MEMBER", "INVISIBLE_REFERENCE"}) @kotlin.internal.LowPriorityInOverloadResolution public final val test: Bar
+    @kotlin.Suppress(names = {"INVISIBLE_MEMBER", "INVISIBLE_REFERENCE"}) @kotlin.internal.LowPriorityInOverloadResolution public final konst test: Bar
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

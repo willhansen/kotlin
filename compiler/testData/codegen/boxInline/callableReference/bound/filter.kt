@@ -10,13 +10,13 @@ inline fun stub(f: () -> String): String = f()
 
 import test.*
 
-class A(val z: String) {
+class A(konst z: String) {
     fun filter(s: String) = z == s
 }
 
 
 fun box(): String {
-    val a = A("OK")
-    val s = arrayOf("OK")
+    konst a = A("OK")
+    konst s = arrayOf("OK")
     return s.filter(a::filter).first()
 }

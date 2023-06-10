@@ -10,4 +10,4 @@ fun testFun() = 12
 // FILE: using.kt
 package test
 
-val t = testFun()
+konst t = testFun()

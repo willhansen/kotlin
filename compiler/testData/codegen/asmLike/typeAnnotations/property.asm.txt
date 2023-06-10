@@ -56,7 +56,7 @@ public final class foo/Kotlin : java/lang/Object {
       @Lfoo/TypeAnn;([name="1"]) : FIELD, null
       @Lfoo/TypeAnnBinary;([]) : FIELD, null // invisible
 
-    private final java.lang.String valProp
+    private final java.lang.String konstProp
       @Lorg/jetbrains/annotations/NotNull;([]) // invisible
       @Lfoo/TypeAnn;([name="1"]) : FIELD, null
       @Lfoo/TypeAnnBinary;([]) : FIELD, null // invisible

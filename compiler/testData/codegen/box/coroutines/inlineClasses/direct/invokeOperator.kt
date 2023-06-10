@@ -8,27 +8,27 @@ fun builder(c: suspend () -> Unit) {
     })
 }
 
-inline class IC(val a: Any?)
+inline class IC(konst a: Any?)
 
 class GetResult {
     suspend operator fun invoke() = IC("OK")
 }
 
-inline class IC1(val a: String) {
+inline class IC1(konst a: String) {
     suspend operator fun invoke() = IC(a)
 }
 
 fun box(): String {
     var res = "FAIL 1"
     builder {
-        val getResult = GetResult()
+        konst getResult = GetResult()
         res = getResult().a as String
     }
     if (res != "OK") return "FAIL 1 $res"
 
     res = "FAIL 2"
     builder {
-        val getResult = GetResult()
+        konst getResult = GetResult()
         res = getResult.invoke().a as String
     }
     if (res != "OK") return "FAIL 2 $res"
@@ -41,14 +41,14 @@ fun box(): String {
 
     res = "FAIL 4"
     builder {
-        val getResult = IC1("OK")
+        konst getResult = IC1("OK")
         res = getResult().a as String
     }
     if (res != "OK") return "FAIL 4 $res"
 
     res = "FAIL 5"
     builder {
-        val getResult = IC1("OK")
+        konst getResult = IC1("OK")
         res = getResult.invoke().a as String
     }
     if (res != "OK") return "FAIL 5 $res"

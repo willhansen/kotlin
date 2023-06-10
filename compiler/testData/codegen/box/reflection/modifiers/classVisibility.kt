@@ -27,7 +27,7 @@ fun box(): String {
     class Local
     assertEquals(null, Local::class.visibility)
 
-    val anonymous = object {}
+    konst anonymous = object {}
     assertEquals(null, anonymous::class.visibility)
 
     return "OK"

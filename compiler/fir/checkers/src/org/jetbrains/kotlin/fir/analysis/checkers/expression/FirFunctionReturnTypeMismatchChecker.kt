@@ -25,12 +25,12 @@ import org.jetbrains.kotlin.fir.types.*
 object FirFunctionReturnTypeMismatchChecker : FirReturnExpressionChecker() {
     override fun check(expression: FirReturnExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.source == null) return
-        val targetElement = expression.target.labeledElement
+        konst targetElement = expression.target.labeledElement
         if (targetElement is FirErrorFunction || targetElement is FirAnonymousFunction && targetElement.isLambda) {
             return
         }
 
-        val sourceKind = expression.source?.kind
+        konst sourceKind = expression.source?.kind
         if (
             !targetElement.symbol.hasExplicitReturnType &&
             sourceKind != KtRealSourceElementKind &&
@@ -38,11 +38,11 @@ object FirFunctionReturnTypeMismatchChecker : FirReturnExpressionChecker() {
         ) {
             return
         }
-        val resultExpression = expression.result
+        konst resultExpression = expression.result
         // To avoid duplications with NO_ELSE_IN_WHEN or INVALID_IF_AS_EXPRESSION
         if (resultExpression is FirWhenExpression && !resultExpression.isExhaustive) return
 
-        val functionReturnType = if (targetElement is FirConstructor)
+        konst functionReturnType = if (targetElement is FirConstructor)
             context.session.builtinTypes.unitType.coneType
         else
             targetElement.returnTypeRef.coneType
@@ -53,14 +53,14 @@ object FirFunctionReturnTypeMismatchChecker : FirReturnExpressionChecker() {
             return
         }
 
-        val typeContext = context.session.typeContext
-        val returnExpressionType = resultExpression.typeRef.coneType
+        konst typeContext = context.session.typeContext
+        konst returnExpressionType = resultExpression.typeRef.coneType
 
         if (!isSubtypeForTypeMismatch(typeContext, subtype = returnExpressionType, supertype = functionReturnType)) {
             if (resultExpression.isNullLiteral && functionReturnType.nullability == ConeNullability.NOT_NULL) {
                 reporter.reportOn(resultExpression.source, NULL_FOR_NONNULL_TYPE, context)
             } else {
-                val isDueToNullability =
+                konst isDueToNullability =
                     context.session.typeContext.isTypeMismatchDueToNullability(returnExpressionType, functionReturnType)
                 if (resultExpression is FirSmartCastExpression && !resultExpression.isStable &&
                     isSubtypeForTypeMismatch(typeContext, subtype = resultExpression.smartcastType.coneType, supertype = functionReturnType)

@@ -26,11 +26,11 @@ internal fun <Psi : PsiElement> collectAugments(element: PsiElement, type: Class
 
 fun getParentForLocalDeclaration(classOrObject: KtClassOrObject): PsiElement? {
     fun <T : PsiMember> wrapMember(member: T, forceWrapping: Boolean, wrapper: (T, PsiClass) -> T): T? {
-        val containingClass = member.containingClass ?: return null
+        konst containingClass = member.containingClass ?: return null
 
         if (containingClass is KtLightClassForFacade) {
-            val facadeClassName = classOrObject.containingFile.name
-            val wrappedClass = object : LightClass(containingClass, KotlinLanguage.INSTANCE) {
+            konst facadeClassName = classOrObject.containingFile.name
+            konst wrappedClass = object : LightClass(containingClass, KotlinLanguage.INSTANCE) {
                 override fun getName(): String = facadeClassName
             }
 
@@ -60,14 +60,14 @@ fun getParentForLocalDeclaration(classOrObject: KtClassOrObject): PsiElement? {
     fun map(declaration: KtElement): PsiElement? {
         when (declaration) {
             is KtFunction -> {
-                val psiMethod = LightClassUtil.getLightClassMethod(declaration)
+                konst psiMethod = LightClassUtil.getLightClassMethod(declaration)
                 if (psiMethod != null) {
                     return wrapMethod(psiMethod, declaration.name ?: psiMethod.name, forceWrapping = false)
                 }
             }
 
             is KtPropertyAccessor -> {
-                val psiMethod = LightClassUtil.getLightClassAccessorMethod(declaration)
+                konst psiMethod = LightClassUtil.getLightClassAccessorMethod(declaration)
                 if (psiMethod != null) {
                     return wrapMethod(psiMethod, forceWrapping = true)
                 }
@@ -75,13 +75,13 @@ fun getParentForLocalDeclaration(classOrObject: KtClassOrObject): PsiElement? {
 
             is KtProperty -> {
                 if (!declaration.isLocal) {
-                    val propertyMethods = LightClassUtil.getLightClassPropertyMethods(declaration)
-                    val psiMethod = propertyMethods.getter
+                    konst propertyMethods = LightClassUtil.getLightClassPropertyMethods(declaration)
+                    konst psiMethod = propertyMethods.getter
                     if (psiMethod != null) {
                         return wrapMethod(psiMethod, forceWrapping = true)
                     }
 
-                    val psiField = propertyMethods.backingField
+                    konst psiField = propertyMethods.backingField
                     if (psiField != null) {
                         return wrapField(psiField, forceWrapping = false)
                     }
@@ -89,8 +89,8 @@ fun getParentForLocalDeclaration(classOrObject: KtClassOrObject): PsiElement? {
             }
 
             is KtAnonymousInitializer -> {
-                val parent = declaration.parent
-                val grandparent = parent.parent
+                konst parent = declaration.parent
+                konst grandparent = parent.parent
 
                 if (parent is KtClassBody && grandparent is KtClassOrObject) {
                     return grandparent.toLightClass()

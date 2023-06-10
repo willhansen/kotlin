@@ -24,7 +24,7 @@ class Containter {
 // FILE: main.kt
 
 fun test_OK(base: Base) {
-    val x = when (base) {
+    konst x = when (base) {
         is Base.A -> 1
         is B -> 2
         is Containter.C -> 3
@@ -33,7 +33,7 @@ fun test_OK(base: Base) {
 }
 
 fun test_error_1(base: Base) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
         is B -> 2
         is Containter.C -> 3
         is Containter.D -> 4
@@ -41,7 +41,7 @@ fun test_error_1(base: Base) {
 }
 
 fun test_error_2(base: Base) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
         is Base.A -> 1
         is Containter.C -> 3
         is Containter.D -> 4
@@ -49,7 +49,7 @@ fun test_error_2(base: Base) {
 }
 
 fun test_error_3(base: Base) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
         is Base.A -> 1
         is B -> 2
         is Containter.D -> 4
@@ -57,7 +57,7 @@ fun test_error_3(base: Base) {
 }
 
 fun test_error_4(base: Base) {
-    val x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
+    konst x = <!NO_ELSE_IN_WHEN!>when<!> (base) {
         is Base.A -> 1
         is B -> 2
         is Containter.C -> 3

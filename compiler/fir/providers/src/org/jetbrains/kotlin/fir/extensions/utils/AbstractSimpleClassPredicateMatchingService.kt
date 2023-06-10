@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
  *   "is this class or some of its superclasses matches specific predicate or not?"
  */
 abstract class AbstractSimpleClassPredicateMatchingService(session: FirSession) : FirExtensionSessionComponent(session) {
-    protected abstract val predicate: DeclarationPredicate
+    protected abstract konst predicate: DeclarationPredicate
 
     final override fun FirDeclarationPredicateRegistrar.registerPredicates() {
         register(predicate)
@@ -31,14 +31,14 @@ abstract class AbstractSimpleClassPredicateMatchingService(session: FirSession) 
         return cache.getValue(symbol)
     }
 
-    private val cache: FirCache<FirRegularClassSymbol, Boolean, Nothing?> = session.firCachesFactory.createCache { symbol, _ ->
+    private konst cache: FirCache<FirRegularClassSymbol, Boolean, Nothing?> = session.firCachesFactory.createCache { symbol, _ ->
         symbol.annotated()
     }
 
     private fun FirRegularClassSymbol.annotated(): Boolean {
         if (session.predicateBasedProvider.matches(predicate, this)) return true
         return resolvedSuperTypes.any {
-            val superSymbol = it.toRegularClassSymbol(session) ?: return@any false
+            konst superSymbol = it.toRegularClassSymbol(session) ?: return@any false
             cache.getValue(superSymbol)
         }
     }

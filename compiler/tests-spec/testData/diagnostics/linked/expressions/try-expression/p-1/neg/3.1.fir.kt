@@ -9,7 +9,7 @@ class ExcB() : Exception()
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    try <!SYNTAX!><!>val a = ""
+    try <!SYNTAX!><!>konst a = ""
         <!UNRESOLVED_REFERENCE!>catch<!>(<!UNRESOLVED_REFERENCE!>e<!><!SYNTAX!>: Exception<!>) {}
     }<!SYNTAX!><!>
 
@@ -17,7 +17,7 @@ fun case1() {
 
 fun case2() {
     try {
-        val a = ""
+        konst a = ""
     } catch (e: Exception)<!SYNTAX!><!>
 }
 
@@ -25,7 +25,7 @@ fun case2() {
 
 fun case3() {
     try {
-        val a = ""
+        konst a = ""
         throwException()
     } catch (e: java.lang.IllegalArgumentException) {
 
@@ -56,7 +56,7 @@ fun case5() {
 
 fun case6() {
     try {
-        val a = ""
+        konst a = ""
         throwException()
     } catch (e: java.lang.IllegalArgumentException) {
     } catch (e: ExcA)<!SYNTAX!><!>

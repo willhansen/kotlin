@@ -22,21 +22,21 @@ fun assertIsDirectory(file: File) {
 }
 
 fun assertModulesAreEqual(reference: SerializedMetadata, generated: SerializedMetadata, target: CommonizerTarget) {
-    val referenceModule = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(reference))
-    val generatedModule = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(generated))
+    konst referenceModule = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(reference))
+    konst generatedModule = KlibModuleMetadata.read(SerializedMetadataLibraryProvider(generated))
 
-    when (val result = MetadataDeclarationsComparator.compare(referenceModule, generatedModule)) {
+    when (konst result = MetadataDeclarationsComparator.compare(referenceModule, generatedModule)) {
         is Result.Success -> Unit
         is Result.Failure -> {
-            val mismatches = result.mismatches
+            konst mismatches = result.mismatches
                 .filter(FILTER_OUT_ACCEPTABLE_MISMATCHES)
                 .sortedBy { it::class.java.simpleName + "_" + it.kind }
 
             if (mismatches.isEmpty()) return
 
-            val digitCount = mismatches.size.toString().length
+            konst digitCount = mismatches.size.toString().length
 
-            val failureMessage = buildString {
+            konst failureMessage = buildString {
                 appendLine(
                     "${mismatches.size} mismatches found while comparing reference module ${referenceModule.name} (A) " +
                             "and generated module ${generatedModule.name} (B) for target ${target.identityString}:"
@@ -51,13 +51,13 @@ fun assertModulesAreEqual(reference: SerializedMetadata, generated: SerializedMe
     }
 }
 
-private val FILTER_OUT_ACCEPTABLE_MISMATCHES: (Mismatch) -> Boolean = { mismatch ->
+private konst FILTER_OUT_ACCEPTABLE_MISMATCHES: (Mismatch) -> Boolean = { mismatch ->
     var isAcceptableMismatch = false // don't filter it out by default
 
     when (mismatch) {
         is Mismatch.MissingEntity -> when (mismatch.kind) {
             EntityKind.TypeKind.ABBREVIATED -> {
-                val usefulPath = mismatch.path
+                konst usefulPath = mismatch.path
                     .dropWhile { it !is PathElement.Package }
                     .drop(1)
 
@@ -90,8 +90,8 @@ private val FILTER_OUT_ACCEPTABLE_MISMATCHES: (Mismatch) -> Boolean = { mismatch
         is Mismatch.DifferentValues -> when (mismatch.kind) {
             EntityKind.FlagKind.REGULAR, EntityKind.FlagKind.GETTER, EntityKind.FlagKind.SETTER -> {
                 if (mismatch.name == "HAS_ANNOTATIONS"
-                    && mismatch.valueA == true
-                    && mismatch.valueB == false
+                    && mismatch.konstueA == true
+                    && mismatch.konstueB == false
                     && (mismatch.path.last() as? PathElement.Property)?.propertyA?.annotations.isNullOrEmpty()
                 ) {
                     // backing or delegate field annotations were not serialized (KT-44625) but the corresponding flag was raised, it's OK

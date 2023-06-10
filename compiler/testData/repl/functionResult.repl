@@ -1,5 +1,5 @@
 >>> { 1 + 2 }
 () -> kotlin.Int
->>> val x = { "abc" }
+>>> konst x = { "abc" }
 >>> x
 () -> kotlin.String

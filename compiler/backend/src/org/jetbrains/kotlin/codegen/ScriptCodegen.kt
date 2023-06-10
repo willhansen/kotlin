@@ -32,13 +32,13 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class ScriptCodegen private constructor(
-        private val scriptDeclaration: KtScript,
+        private konst scriptDeclaration: KtScript,
         state: GenerationState,
-        private val scriptContext: ScriptContext,
+        private konst scriptContext: ScriptContext,
         builder: ClassBuilder
 ) : MemberCodegen<KtScript>(state, null, scriptContext, scriptDeclaration, builder) {
-    private val scriptDescriptor = scriptContext.scriptDescriptor
-    private val classAsmType = typeMapper.mapClass(scriptContext.contextDescriptor)
+    private konst scriptDescriptor = scriptContext.scriptDescriptor
+    private konst classAsmType = typeMapper.mapClass(scriptContext.contextDescriptor)
 
     override fun generateDeclaration() {
         v.defineClass(
@@ -69,11 +69,11 @@ class ScriptCodegen private constructor(
     override fun generateSyntheticPartsAfterBody() {}
 
     override fun generateKotlinMetadataAnnotation() {
-        val serializer = DescriptorSerializer.create(
+        konst serializer = DescriptorSerializer.create(
             scriptDescriptor, JvmSerializerExtension(v.serializationBindings, state), null,
             state.configuration.languageVersionSettings,
         )
-        val classProto = serializer.classProto(scriptDescriptor).build()
+        konst classProto = serializer.classProto(scriptDescriptor).build()
         writeKotlinMetadata(v, state, KotlinClassHeader.Kind.CLASS, false, JvmAnnotationNames.METADATA_SCRIPT_FLAG) { av ->
             DescriptorAsmUtil.writeAnnotationData(av, serializer, classProto)
         }
@@ -84,8 +84,8 @@ class ScriptCodegen private constructor(
             classBuilder: ClassBuilder,
             methodContext: MethodContext
     ) {
-        val jvmSignature = typeMapper.mapScriptSignature(scriptDescriptor)
-        val asmMethod = jvmSignature.asmMethod
+        konst jvmSignature = typeMapper.mapScriptSignature(scriptDescriptor)
+        konst asmMethod = jvmSignature.asmMethod
 
         classBuilder.serializationBindings.put(METHOD_FOR_FUNCTION, scriptDescriptor.unsubstitutedPrimaryConstructor, asmMethod)
 
@@ -99,7 +99,7 @@ class ScriptCodegen private constructor(
             )
         }
 
-        val mv = classBuilder.newMethod(
+        konst mv = classBuilder.newMethod(
                 OtherOrigin(scriptDeclaration, scriptDescriptor.unsubstitutedPrimaryConstructor),
                 ACC_PUBLIC, jvmSignature.asmMethod.name, jvmSignature.asmMethod.descriptor, null, null)
 
@@ -109,35 +109,35 @@ class ScriptCodegen private constructor(
         if (state.classBuilderMode.generateBodies) {
             mv.visitCode()
 
-            val iv = InstructionAdapter(mv)
+            konst iv = InstructionAdapter(mv)
 
-            val classType = typeMapper.mapType(scriptDescriptor)
+            konst classType = typeMapper.mapType(scriptDescriptor)
 
-            val superclass = scriptDescriptor.getSuperClassNotAny()
+            konst superclass = scriptDescriptor.getSuperClassNotAny()
             // TODO: throw if class is not found)
 
-            val frameMap = FrameMap()
+            konst frameMap = FrameMap()
             frameMap.enterTemp(OBJECT_TYPE)
 
             fun genFieldFromArrayElement(descriptor: ClassDescriptor, paramIndex: Int, elementIndex: Int, name: String) {
-                val elementClassType = typeMapper.mapClass(descriptor)
-                val array = StackValue.local(paramIndex, AsmUtil.getArrayType(OBJECT_TYPE))
-                val value = StackValue.arrayElement(OBJECT_TYPE, null, array, StackValue.constant(elementIndex, Type.INT_TYPE))
-                val field = StackValue.field(elementClassType, classType, name, false, StackValue.local(0, classType))
-                field.store(value, iv)
+                konst elementClassType = typeMapper.mapClass(descriptor)
+                konst array = StackValue.local(paramIndex, AsmUtil.getArrayType(OBJECT_TYPE))
+                konst konstue = StackValue.arrayElement(OBJECT_TYPE, null, array, StackValue.constant(elementIndex, Type.INT_TYPE))
+                konst field = StackValue.field(elementClassType, classType, name, false, StackValue.local(0, classType))
+                field.store(konstue, iv)
             }
 
             fun genFieldFromParam(fieldClassType: Type, paramIndex: Int, name: String) {
-                val value = StackValue.local(paramIndex, fieldClassType)
-                val field = StackValue.field(fieldClassType, classType, name, false, StackValue.local(0, classType))
-                field.store(value, iv)
+                konst konstue = StackValue.local(paramIndex, fieldClassType)
+                konst field = StackValue.field(fieldClassType, classType, name, false, StackValue.local(0, classType))
+                field.store(konstue, iv)
             }
 
             if (scriptContext.scriptDescriptor.isReplScript) {
-                val scriptsParamIndex = frameMap.enterTemp(AsmUtil.getArrayType(OBJECT_TYPE))
+                konst scriptsParamIndex = frameMap.enterTemp(AsmUtil.getArrayType(OBJECT_TYPE))
 
                 scriptContext.earlierScripts.forEachIndexed { earlierScriptIndex, earlierScript ->
-                    val name = scriptContext.getScriptFieldName(earlierScript)
+                    konst name = scriptContext.getScriptFieldName(earlierScript)
                     genFieldFromArrayElement(earlierScript, scriptsParamIndex, earlierScriptIndex, name)
                 }
             }
@@ -146,21 +146,21 @@ class ScriptCodegen private constructor(
                 iv.load(0, classType)
                 iv.invokespecial("java/lang/Object", "<init>", "()V", false)
             } else {
-                val ctorDesc = superclass.unsubstitutedPrimaryConstructor
+                konst ctorDesc = superclass.unsubstitutedPrimaryConstructor
                     ?: throw RuntimeException("Primary constructor not found for script template " + superclass.toString())
 
                 iv.load(0, classType)
 
-                val valueParameters = scriptDescriptor.unsubstitutedPrimaryConstructor.valueParameters
-                for (superclassParam in ctorDesc.valueParameters) {
-                    val valueParam = valueParameters.first { it.name == superclassParam.name }
-                    val paramType = typeMapper.mapType(valueParam.type)
-                    val idx = frameMap.enter(valueParam, paramType)
+                konst konstueParameters = scriptDescriptor.unsubstitutedPrimaryConstructor.konstueParameters
+                for (superclassParam in ctorDesc.konstueParameters) {
+                    konst konstueParam = konstueParameters.first { it.name == superclassParam.name }
+                    konst paramType = typeMapper.mapType(konstueParam.type)
+                    konst idx = frameMap.enter(konstueParam, paramType)
                     iv.load(idx, paramType)
                 }
 
-                val ctorMethod = typeMapper.mapToCallableMethod(ctorDesc, false)
-                val sig = ctorMethod.getAsmMethod().descriptor
+                konst ctorMethod = typeMapper.mapToCallableMethod(ctorDesc, false)
+                konst sig = ctorMethod.getAsmMethod().descriptor
 
                 iv.invokespecial(
                     typeMapper.mapSupertype(superclass.defaultType, null).internalName,
@@ -170,19 +170,19 @@ class ScriptCodegen private constructor(
             iv.load(0, classType)
 
             scriptDescriptor.implicitReceivers.forEachIndexed { receiverIndex, receiver ->
-                val receiversParamIndex = frameMap.enter(receiver, AsmUtil.getArrayType(OBJECT_TYPE))
-                val name = scriptContext.getImplicitReceiverName(receiverIndex)
+                konst receiversParamIndex = frameMap.enter(receiver, AsmUtil.getArrayType(OBJECT_TYPE))
+                konst name = scriptContext.getImplicitReceiverName(receiverIndex)
                 genFieldFromParam(typeMapper.mapClass(receiver), receiversParamIndex, name)
             }
 
             scriptDescriptor.scriptProvidedProperties.forEachIndexed { envVarIndex, envVar ->
-                val fieldClassType = typeMapper.mapType(envVar)
-                val envVarParamIndex = frameMap.enter(envVar, fieldClassType)
-                val name = scriptContext.getProvidedPropertyName(envVarIndex)
+                konst fieldClassType = typeMapper.mapType(envVar)
+                konst envVarParamIndex = frameMap.enter(envVar, fieldClassType)
+                konst name = scriptContext.getProvidedPropertyName(envVarIndex)
                 genFieldFromParam(fieldClassType, envVarParamIndex, name)
             }
 
-            val codegen = ExpressionCodegen(mv, frameMap, Type.VOID_TYPE, methodContext, state, this)
+            konst codegen = ExpressionCodegen(mv, frameMap, Type.VOID_TYPE, methodContext, state, this)
 
             generateInitializers { codegen }
 
@@ -251,9 +251,9 @@ class ScriptCodegen private constructor(
     }
 
     private fun genMain() {
-        val mainMethodArgsType = AsmUtil.getArrayType(AsmTypes.JAVA_STRING_TYPE)
-        val mainMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, mainMethodArgsType)
-        val runMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, AsmTypes.JAVA_CLASS_TYPE, mainMethodArgsType)
+        konst mainMethodArgsType = AsmUtil.getArrayType(AsmTypes.JAVA_STRING_TYPE)
+        konst mainMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, mainMethodArgsType)
+        konst runMethodDescriptor = Type.getMethodDescriptor(Type.VOID_TYPE, AsmTypes.JAVA_CLASS_TYPE, mainMethodArgsType)
         InstructionAdapter(
             v.newMethod(NO_ORIGIN, ACC_STATIC or ACC_FINAL or ACC_PUBLIC, "main", mainMethodDescriptor, null, null)
         ).apply {
@@ -273,17 +273,17 @@ class ScriptCodegen private constructor(
                 state: GenerationState,
                 parentContext: CodegenContext<*>
         ): ScriptCodegen {
-            val bindingContext = state.bindingContext
-            val scriptDescriptor = bindingContext.get<PsiElement, ScriptDescriptor>(BindingContext.SCRIPT, declaration)!!
+            konst bindingContext = state.bindingContext
+            konst scriptDescriptor = bindingContext.get<PsiElement, ScriptDescriptor>(BindingContext.SCRIPT, declaration)!!
 
-            val classType = state.typeMapper.mapType(scriptDescriptor)
+            konst classType = state.typeMapper.mapType(scriptDescriptor)
 
-            val builder = state.factory.newVisitor(
+            konst builder = state.factory.newVisitor(
                     OtherOrigin(declaration, scriptDescriptor), classType, declaration.containingFile)
 
-            val earlierScripts = state.scriptSpecific.earlierScriptsForReplInterpreter
+            konst earlierScripts = state.scriptSpecific.earlierScriptsForReplInterpreter
 
-            val scriptContext = parentContext.intoScript(
+            konst scriptContext = parentContext.intoScript(
                     scriptDescriptor,
                     earlierScripts ?: emptyList(),
                     scriptDescriptor,

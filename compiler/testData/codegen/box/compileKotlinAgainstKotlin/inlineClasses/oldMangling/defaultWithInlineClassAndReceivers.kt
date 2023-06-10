@@ -5,10 +5,10 @@
 // FILE: A.kt
 package z
 
-inline class Z(val s: String)
+inline class Z(konst s: String)
 
 class X {
-    fun Int.foo(z: Z, value: String = "OK") = value
+    fun Int.foo(z: Z, konstue: String = "OK") = konstue
 }
 
 // MODULE: main(lib)

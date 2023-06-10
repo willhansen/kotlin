@@ -24,11 +24,11 @@ import java.io.File
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
-private const val testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/collectDependencies"
+private const konst testDataPath = "plugins/scripting/scripting-compiler/testData/compiler/collectDependencies"
 
 class CollectScriptCompilationDependenciesTest : TestCase() {
 
-    protected val testRootDisposable: Disposable = TestDisposable()
+    protected konst testRootDisposable: Disposable = TestDisposable()
 
     fun testCascadeImport() {
         runTest("imp_imp_leaf.req1.kts", listOf("imp_leaf.req1.kts", "leaf.req1.kts"))
@@ -59,7 +59,7 @@ class CollectScriptCompilationDependenciesTest : TestCase() {
     }
 
     private fun runTest(scriptFile: String, expectedDependencies: List<String>, classPath: List<File> = emptyList()) {
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.MOCK_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.NO_KOTLIN_REFLECT, TestJdkKind.MOCK_JDK).apply {
             updateWithBaseCompilerArguments()
             add(
                 ScriptingConfigurationKeys.SCRIPT_DEFINITIONS,
@@ -75,16 +75,16 @@ class CollectScriptCompilationDependenciesTest : TestCase() {
 
             loadScriptingPlugin(this)
         }
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
-        val expectedSources = (expectedDependencies + scriptFile).sorted()
-        val actualSources = environment.getSourceFiles().map { it.name }.sorted()
+        konst expectedSources = (expectedDependencies + scriptFile).sorted()
+        konst actualSources = environment.getSourceFiles().map { it.name }.sorted()
 
         TestCase.assertEquals(expectedSources, actualSources)
 
         if (classPath.isNotEmpty()) {
 
-            val actualClasspath = environment.configuration.jvmClasspathRoots
+            konst actualClasspath = environment.configuration.jvmClasspathRoots
 
             TestCase.assertTrue("expect that $actualClasspath contains $classPath", actualClasspath.containsAll(classPath))
         }

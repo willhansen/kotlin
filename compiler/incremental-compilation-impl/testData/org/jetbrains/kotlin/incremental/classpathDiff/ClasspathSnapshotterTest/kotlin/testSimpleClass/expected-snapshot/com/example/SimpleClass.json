@@ -50,23 +50,23 @@
     },
     "className$delegate": {
       "initializer": {},
-      "_value": {}
+      "_konstue": {}
     },
     "protoMapValue$delegate": {
       "initializer": {},
-      "_value": {}
+      "_konstue": {}
     },
     "protoData$delegate": {
       "initializer": {},
-      "_value": {}
+      "_konstue": {}
     },
     "companionObject$delegate": {
       "initializer": {},
-      "_value": {}
+      "_konstue": {}
     },
     "constantsInCompanionObject$delegate": {
       "initializer": {},
-      "_value": {}
+      "_konstue": {}
     }
   },
   "supertypes": [

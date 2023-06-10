@@ -47,21 +47,21 @@ import java.util.*
 import java.util.regex.Pattern
 
 data class DiagnosticsRenderingConfiguration(
-    val platform: String?,
-    val withNewInference: Boolean,
-    val languageVersionSettings: LanguageVersionSettings?,
-    val skipDebugInfoDiagnostics: Boolean = false,
+    konst platform: String?,
+    konst withNewInference: Boolean,
+    konst languageVersionSettings: LanguageVersionSettings?,
+    konst skipDebugInfoDiagnostics: Boolean = false,
 )
 
 object CheckerTestUtil {
-    const val NEW_INFERENCE_PREFIX = "NI"
-    const val OLD_INFERENCE_PREFIX = "OI"
+    const konst NEW_INFERENCE_PREFIX = "NI"
+    const konst OLD_INFERENCE_PREFIX = "OI"
 
-    private const val IGNORE_DIAGNOSTIC_PARAMETER = "IGNORE"
-    private const val INDIVIDUAL_DIAGNOSTIC = """(\w+;)?(\w+:)?(\w+)(\{[\w;]+})?(?:\(((?:".*?")(?:,\s*".*?")*)\))?"""
+    private const konst IGNORE_DIAGNOSTIC_PARAMETER = "IGNORE"
+    private const konst INDIVIDUAL_DIAGNOSTIC = """(\w+;)?(\w+:)?(\w+)(\{[\w;]+})?(?:\(((?:".*?")(?:,\s*".*?")*)\))?"""
 
-    val rangeStartOrEndPattern = Pattern.compile("(<!$INDIVIDUAL_DIAGNOSTIC(,\\s*$INDIVIDUAL_DIAGNOSTIC)*!>)|(<!>)")
-    val individualDiagnosticPattern: Pattern = Pattern.compile(INDIVIDUAL_DIAGNOSTIC)
+    konst rangeStartOrEndPattern = Pattern.compile("(<!$INDIVIDUAL_DIAGNOSTIC(,\\s*$INDIVIDUAL_DIAGNOSTIC)*!>)|(<!>)")
+    konst individualDiagnosticPattern: Pattern = Pattern.compile(INDIVIDUAL_DIAGNOSTIC)
 
     fun getDiagnosticsIncludingSyntaxErrors(
         bindingContext: BindingContext,
@@ -74,7 +74,7 @@ object CheckerTestUtil {
         moduleDescriptor: ModuleDescriptorImpl?,
         diagnosedRanges: MutableMap<IntRange, MutableSet<String>>? = null
     ): List<ActualDiagnostic> {
-        val result = getDiagnosticsIncludingSyntaxErrors(
+        konst result = getDiagnosticsIncludingSyntaxErrors(
             bindingContext,
             root,
             markDynamicCalls,
@@ -85,7 +85,7 @@ object CheckerTestUtil {
             diagnosedRanges
         )
 
-        val sortedBindings = implementingModulesBindings.sortedBy { it.first.oldFashionedDescription }
+        konst sortedBindings = implementingModulesBindings.sortedBy { it.first.oldFashionedDescription }
 
         for ((platform, second) in sortedBindings) {
             assert(!platform.isCommon()) { "Implementing module must have a specific platform: $platform" }
@@ -117,7 +117,7 @@ object CheckerTestUtil {
         moduleDescriptor: ModuleDescriptorImpl?,
         diagnosedRanges: MutableMap<IntRange, MutableSet<String>>? = null
     ): MutableList<ActualDiagnostic> {
-        val diagnostics: MutableList<ActualDiagnostic> = mutableListOf()
+        konst diagnostics: MutableList<ActualDiagnostic> = mutableListOf()
 
         bindingContext.diagnostics.forEach { diagnostic ->
             if (PsiTreeUtil.isAncestor(root, diagnostic.psiElement, false)) {
@@ -157,7 +157,7 @@ object CheckerTestUtil {
         moduleDescriptor: ModuleDescriptorImpl?,
         diagnosedRanges: Map<IntRange, MutableSet<String>>?
     ): List<ActualDiagnostic> {
-        val debugAnnotations = mutableListOf<ActualDiagnostic>()
+        konst debugAnnotations = mutableListOf<ActualDiagnostic>()
 
         DebugInfoUtil.markDebugAnnotations(
             root,
@@ -174,7 +174,7 @@ object CheckerTestUtil {
         // this code is used in tests and in internal action 'copy current file as diagnostic test'
         //noinspection unchecked
 
-        val factoryListForDiagnosticsOnExpression = listOf(
+        konst factoryListForDiagnosticsOnExpression = listOf(
             BindingContext.EXPRESSION_TYPE_INFO to listOf(DebugInfoDiagnosticFactory1.EXPRESSION_TYPE),
             BindingContext.SMARTCAST to listOf(DebugInfoDiagnosticFactory0.SMARTCAST),
             BindingContext.IMPLICIT_RECEIVER_SMARTCAST to listOf(DebugInfoDiagnosticFactory0.IMPLICIT_RECEIVER_SMARTCAST),
@@ -183,7 +183,7 @@ object CheckerTestUtil {
             BindingContext.IMPLICIT_EXHAUSTIVE_WHEN to listOf(DebugInfoDiagnosticFactory0.IMPLICIT_EXHAUSTIVE)
         )
 
-        val factoryListForDiagnosticsOnCall = listOf(
+        konst factoryListForDiagnosticsOnCall = listOf(
             BindingContext.RESOLVED_CALL to listOf(DebugInfoDiagnosticFactory1.CALL, DebugInfoDiagnosticFactory1.CALLABLE_OWNER)
         )
 
@@ -238,11 +238,11 @@ object CheckerTestUtil {
     ) {
         if (factory !is DiagnosticFactory<*>) return
 
-        val needRender = !factory.withExplicitDefinitionOnly
+        konst needRender = !factory.withExplicitDefinitionOnly
                 || diagnosedRanges?.get(element.startOffset..element.endOffset)?.contains(factory.name) == true
 
         if (PsiTreeUtil.isAncestor(root, element, false) && needRender) {
-            val diagnostic = factory.createDiagnostic(
+            konst diagnostic = factory.createDiagnostic(
                 element,
                 bindingContext,
                 dataFlowValueFactory,
@@ -258,13 +258,13 @@ object CheckerTestUtil {
         actual: Collection<ActualDiagnostic>,
         callbacks: DiagnosticDiffCallbacks
     ): Map<AbstractTestDiagnostic, TextDiagnostic> {
-        val diagnosticToExpectedDiagnostic = mutableMapOf<AbstractTestDiagnostic, TextDiagnostic>()
+        konst diagnosticToExpectedDiagnostic = mutableMapOf<AbstractTestDiagnostic, TextDiagnostic>()
 
         assertSameFile(actual)
 
-        val expectedDiagnostics = expected.iterator()
-        val sortedDiagnosticDescriptors = getActualSortedDiagnosticDescriptors(actual)
-        val actualDiagnostics = sortedDiagnosticDescriptors.iterator()
+        konst expectedDiagnostics = expected.iterator()
+        konst sortedDiagnosticDescriptors = getActualSortedDiagnosticDescriptors(actual)
+        konst actualDiagnostics = sortedDiagnosticDescriptors.iterator()
         var currentExpected = safeAdvance(expectedDiagnostics)
         var currentActual = safeAdvance(actualDiagnostics)
 
@@ -283,10 +283,10 @@ object CheckerTestUtil {
                 continue
             }
 
-            val expectedStart = currentExpected.start
-            val actualStart = currentActual.start
-            val expectedEnd = currentExpected.end
-            val actualEnd = currentActual.end
+            konst expectedStart = currentExpected.start
+            konst actualStart = currentActual.start
+            konst expectedEnd = currentExpected.end
+            konst actualEnd = currentActual.end
 
             when {
                 expectedStart < actualStart -> {
@@ -324,19 +324,19 @@ object CheckerTestUtil {
         currentActual: ActualDiagnosticDescriptor,
         diagnosticToInput: MutableMap<AbstractTestDiagnostic, TextDiagnostic>
     ) {
-        val expectedStart = currentExpected.start
-        val expectedEnd = currentExpected.end
-        val actualStart = currentActual.start
-        val actualEnd = currentActual.end
+        konst expectedStart = currentExpected.start
+        konst expectedEnd = currentExpected.end
+        konst actualStart = currentActual.start
+        konst actualEnd = currentActual.end
         assert(expectedStart == actualStart && expectedEnd == actualEnd)
 
-        val actualDiagnostics = currentActual.textDiagnosticsMap
-        val expectedDiagnostics = currentExpected.getDiagnostics()
-        val diagnosticNames = HashSet<String>()
+        konst actualDiagnostics = currentActual.textDiagnosticsMap
+        konst expectedDiagnostics = currentExpected.getDiagnostics()
+        konst diagnosticNames = HashSet<String>()
 
         for (expectedDiagnostic in expectedDiagnostics) {
             var actualDiagnosticEntry = actualDiagnostics.entries.firstOrNull { entry ->
-                val actualDiagnostic = entry.value
+                konst actualDiagnostic = entry.konstue
                 expectedDiagnostic.description == actualDiagnostic.description
                         && expectedDiagnostic.inferenceCompatibility.isCompatible(actualDiagnostic.inferenceCompatibility)
                         && expectedDiagnostic.parameters == actualDiagnostic.parameters
@@ -344,7 +344,7 @@ object CheckerTestUtil {
 
             if (actualDiagnosticEntry == null) {
                 actualDiagnosticEntry = actualDiagnostics.entries.firstOrNull { entry ->
-                    val actualDiagnostic = entry.value
+                    konst actualDiagnostic = entry.konstue
                     expectedDiagnostic.description == actualDiagnostic.description
                             && expectedDiagnostic.inferenceCompatibility.isCompatible(actualDiagnostic.inferenceCompatibility)
                 }
@@ -355,8 +355,8 @@ object CheckerTestUtil {
                 continue
             }
 
-            val actualDiagnostic = actualDiagnosticEntry.key
-            val actualTextDiagnostic = actualDiagnosticEntry.value
+            konst actualDiagnostic = actualDiagnosticEntry.key
+            konst actualTextDiagnostic = actualDiagnosticEntry.konstue
 
             if (!compareTextDiagnostic(expectedDiagnostic, actualTextDiagnostic))
                 callbacks.wrongParametersDiagnostic(expectedDiagnostic, actualTextDiagnostic, expectedStart, expectedEnd)
@@ -369,7 +369,7 @@ object CheckerTestUtil {
         }
 
         for (unexpectedDiagnostic in actualDiagnostics.keys) {
-            val textDiagnostic = actualDiagnostics[unexpectedDiagnostic]
+            konst textDiagnostic = actualDiagnostics[unexpectedDiagnostic]
 
             if (hasExplicitDefinitionOnlyOption(unexpectedDiagnostic) && !diagnosticNames.contains(unexpectedDiagnostic.name))
                 continue
@@ -398,7 +398,7 @@ object CheckerTestUtil {
 
     private fun assertSameFile(actual: Collection<ActualDiagnostic>) {
         if (actual.isEmpty()) return
-        val file = actual.first().file
+        konst file = actual.first().file
         for (actualDiagnostic in actual) {
             assert(actualDiagnostic.file == file) { "All diagnostics should come from the same file: " + actualDiagnostic.file + ", " + file }
         }
@@ -428,18 +428,18 @@ object CheckerTestUtil {
         ranges: MutableList<DiagnosedRange>,
         rangesToDiagnosticNames: MutableMap<IntRange, MutableSet<String>>? = null
     ): String {
-        val matcher = rangeStartOrEndPattern.matcher(text)
-        val opened = Stack<DiagnosedRange>()
+        konst matcher = rangeStartOrEndPattern.matcher(text)
+        konst opened = Stack<DiagnosedRange>()
         var offsetCompensation = 0
 
         while (matcher.find()) {
-            val effectiveOffset = matcher.start() - offsetCompensation
-            val matchedText = matcher.group()
+            konst effectiveOffset = matcher.start() - offsetCompensation
+            konst matchedText = matcher.group()
             if (matchedText == "<!>") {
                 opened.pop().end = effectiveOffset
             } else {
-                val diagnosticTypeMatcher = individualDiagnosticPattern.matcher(matchedText)
-                val range = DiagnosedRange(effectiveOffset)
+                konst diagnosticTypeMatcher = individualDiagnosticPattern.matcher(matchedText)
+                konst range = DiagnosedRange(effectiveOffset)
                 while (diagnosticTypeMatcher.find())
                     range.addDiagnostic(diagnosticTypeMatcher.group())
                 opened.push(range)
@@ -454,7 +454,7 @@ object CheckerTestUtil {
 
         if (rangesToDiagnosticNames != null) {
             ranges.forEach {
-                val range = it.start..it.end
+                konst range = it.start..it.end
                 rangesToDiagnosticNames.putIfAbsent(range, mutableSetOf())
                 rangesToDiagnosticNames[range]!! += it.getDiagnostics().map { it.name }
             }
@@ -467,7 +467,7 @@ object CheckerTestUtil {
         if (diagnostic !is ActualDiagnostic)
             return false
 
-        val factory = diagnostic.diagnostic.factory
+        konst factory = diagnostic.diagnostic.factory
         return factory is DebugInfoDiagnosticFactory && (factory as DebugInfoDiagnosticFactory).withExplicitDefinitionOnly
     }
 
@@ -491,28 +491,28 @@ object CheckerTestUtil {
         withNewInferenceDirective: Boolean,
         renderDiagnosticMessages: Boolean
     ): StringBuffer {
-        val text = getFileText(psiFile)
-        val result = StringBuffer()
-        val diagnosticsFiltered = diagnostics.filter { actualDiagnostic -> psiFile == actualDiagnostic.file }
+        konst text = getFileText(psiFile)
+        konst result = StringBuffer()
+        konst diagnosticsFiltered = diagnostics.filter { actualDiagnostic -> psiFile == actualDiagnostic.file }
         if (diagnosticsFiltered.isEmpty() && uncheckedDiagnostics.isEmpty()) {
             result.append(text)
             return result
         }
 
-        val diagnosticDescriptors = getSortedDiagnosticDescriptors(diagnosticsFiltered, uncheckedDiagnostics)
+        konst diagnosticDescriptors = getSortedDiagnosticDescriptors(diagnosticsFiltered, uncheckedDiagnostics)
         if (diagnosticDescriptors.isEmpty()) return result
-        val opened = Stack<AbstractDiagnosticDescriptor>()
-        val iterator = diagnosticDescriptors.listIterator()
+        konst opened = Stack<AbstractDiagnosticDescriptor>()
+        konst iterator = diagnosticDescriptors.listIterator()
         var currentDescriptor: AbstractDiagnosticDescriptor? = iterator.next()
 
         for (i in 0 until text.length) {
-            val c = text[i]
+            konst c = text[i]
             while (!opened.isEmpty() && i == opened.peek().end) {
                 closeDiagnosticString(result)
                 opened.pop()
             }
             while (currentDescriptor != null && i == currentDescriptor.start) {
-                val isSkip = openDiagnosticsString(
+                konst isSkip = openDiagnosticsString(
                     result,
                     currentDescriptor,
                     diagnosticToExpectedDiagnostic,
@@ -532,7 +532,7 @@ object CheckerTestUtil {
         if (currentDescriptor != null) {
             assert(currentDescriptor.start == text.length)
             assert(currentDescriptor.end == text.length)
-            val isSkip = openDiagnosticsString(
+            konst isSkip = openDiagnosticsString(
                 result,
                 currentDescriptor,
                 diagnosticToExpectedDiagnostic,
@@ -562,19 +562,19 @@ object CheckerTestUtil {
         renderDiagnosticMessages: Boolean
     ): Boolean {
         var isSkip = true
-        val diagnosticsAsText = mutableListOf<String>()
+        konst diagnosticsAsText = mutableListOf<String>()
 
         when (currentDescriptor) {
             is TextDiagnosticDescriptor -> diagnosticsAsText.add(currentDescriptor.textDiagnostic.asString())
             is ActualDiagnosticDescriptor -> {
-                val diagnostics = currentDescriptor.diagnostics
+                konst diagnostics = currentDescriptor.diagnostics
 
                 for (diagnostic in diagnostics) {
-                    val expectedDiagnostic = diagnosticToExpectedDiagnostic[diagnostic]
-                    val actualTextDiagnostic = TextDiagnostic.asTextDiagnostic(diagnostic)
+                    konst expectedDiagnostic = diagnosticToExpectedDiagnostic[diagnostic]
+                    konst actualTextDiagnostic = TextDiagnostic.asTextDiagnostic(diagnostic)
 
                     if (expectedDiagnostic != null || !hasExplicitDefinitionOnlyOption(diagnostic)) {
-                        val shouldRenderParameters =
+                        konst shouldRenderParameters =
                             renderDiagnosticMessages || expectedDiagnostic?.parameters != null
 
                         diagnosticsAsText.add(
@@ -604,8 +604,8 @@ object CheckerTestUtil {
         diagnostics: Collection<ActualDiagnostic>,
         uncheckedDiagnostics: Collection<PositionalTextDiagnostic>
     ): List<AbstractDiagnosticDescriptor> {
-        val validDiagnostics = diagnostics.filter { actualDiagnostic -> actualDiagnostic.diagnostic.isValid }
-        val diagnosticDescriptors = groupDiagnosticsByTextRange(validDiagnostics, uncheckedDiagnostics)
+        konst konstidDiagnostics = diagnostics.filter { actualDiagnostic -> actualDiagnostic.diagnostic.isValid }
+        konst diagnosticDescriptors = groupDiagnosticsByTextRange(konstidDiagnostics, uncheckedDiagnostics)
         diagnosticDescriptors.sortWith(Comparator { d1: AbstractDiagnosticDescriptor, d2: AbstractDiagnosticDescriptor ->
             if (d1.start != d2.start) d1.start - d2.start else d2.end - d1.end
         })
@@ -616,23 +616,23 @@ object CheckerTestUtil {
         diagnostics: Collection<ActualDiagnostic>,
         uncheckedDiagnostics: Collection<PositionalTextDiagnostic>
     ): MutableList<AbstractDiagnosticDescriptor> {
-        val diagnosticsGroupedByRanges = LinkedListMultimap.create<TextRange, AbstractTestDiagnostic>()
+        konst diagnosticsGroupedByRanges = LinkedListMultimap.create<TextRange, AbstractTestDiagnostic>()
 
         for (actualDiagnostic in diagnostics) {
-            val diagnostic = actualDiagnostic.diagnostic
+            konst diagnostic = actualDiagnostic.diagnostic
             for (textRange in diagnostic.textRanges) {
                 diagnosticsGroupedByRanges.put(textRange, actualDiagnostic)
             }
         }
 
         for ((diagnostic, start, end) in uncheckedDiagnostics) {
-            val range = TextRange(start, end)
+            konst range = TextRange(start, end)
             diagnosticsGroupedByRanges.put(range, diagnostic)
         }
 
         return diagnosticsGroupedByRanges.keySet().map { range ->
-            val abstractDiagnostics = diagnosticsGroupedByRanges.get(range)
-            val needSortingByName =
+            konst abstractDiagnostics = diagnosticsGroupedByRanges.get(range)
+            konst needSortingByName =
                 abstractDiagnostics.any { diagnostic -> diagnostic.inferenceCompatibility != TextDiagnostic.InferenceCompatibility.ALL }
 
             if (needSortingByName) {
@@ -653,29 +653,29 @@ object CheckerTestUtil {
         moduleDescriptor: ModuleDescriptorImpl?
     ): Pair<KotlinType?, Set<KotlinType>?> {
         if (expression is KtCallableDeclaration) {
-            val descriptor = bindingContext[BindingContext.DECLARATION_TO_DESCRIPTOR, expression] as? CallableDescriptor
+            konst descriptor = bindingContext[BindingContext.DECLARATION_TO_DESCRIPTOR, expression] as? CallableDescriptor
             if (descriptor != null) {
                 return Pair(descriptor.returnType, null)
             }
         }
 
-        val expressionTypeInfo =
+        konst expressionTypeInfo =
             bindingContext[BindingContext.EXPRESSION_TYPE_INFO, expression as KtExpression] ?: noTypeInfo(DataFlowInfo.EMPTY)
-        val expressionType = expression.getType(bindingContext)
-        val result = expressionType ?: return Pair(null, null)
+        konst expressionType = expression.getType(bindingContext)
+        konst result = expressionType ?: return Pair(null, null)
 
         if (dataFlowValueFactory == null || moduleDescriptor == null)
             return Pair(expressionType, null)
 
-        val dataFlowValue = dataFlowValueFactory.createDataFlowValue(expression, expressionType, bindingContext, moduleDescriptor)
-        val types = expressionTypeInfo.dataFlowInfo.getStableTypes(dataFlowValue, languageVersionSettings!!)
+        konst dataFlowValue = dataFlowValueFactory.createDataFlowValue(expression, expressionType, bindingContext, moduleDescriptor)
+        konst types = expressionTypeInfo.dataFlowInfo.getStableTypes(dataFlowValue, languageVersionSettings!!)
 
         if (!types.isNullOrEmpty())
             return Pair(result, types)
 
-        val smartCast = bindingContext[BindingContext.SMARTCAST, expression]
+        konst smartCast = bindingContext[BindingContext.SMARTCAST, expression]
         if (smartCast != null && expression is KtReferenceExpression) {
-            val declaredType = (bindingContext[BindingContext.REFERENCE_TARGET, expression] as? CallableDescriptor)?.returnType
+            konst declaredType = (bindingContext[BindingContext.REFERENCE_TARGET, expression] as? CallableDescriptor)?.returnType
             if (declaredType != null) {
                 return Pair(result, setOf(declaredType))
             }
@@ -687,20 +687,20 @@ object CheckerTestUtil {
         if (element !is KtExpression)
             return null to TypeOfCall.OTHER.nameToRender
 
-        val call = element.getCall(bindingContext)
-        val typeOfCall = getTypeOfCall(element, bindingContext)
-        val fqNameUnsafe = bindingContext[BindingContext.RESOLVED_CALL, call]?.candidateDescriptor?.fqNameUnsafe
+        konst call = element.getCall(bindingContext)
+        konst typeOfCall = getTypeOfCall(element, bindingContext)
+        konst fqNameUnsafe = bindingContext[BindingContext.RESOLVED_CALL, call]?.candidateDescriptor?.fqNameUnsafe
 
         return fqNameUnsafe to typeOfCall
     }
 
     private fun getTypeOfCall(expression: KtExpression, bindingContext: BindingContext): String {
-        val resolvedCall = expression.getResolvedCall(bindingContext) ?: return TypeOfCall.UNRESOLVED.nameToRender
+        konst resolvedCall = expression.getResolvedCall(bindingContext) ?: return TypeOfCall.UNRESOLVED.nameToRender
 
         if (resolvedCall is VariableAsFunctionResolvedCall)
             return TypeOfCall.VARIABLE_THROUGH_INVOKE.nameToRender
 
-        return when (val functionDescriptor = resolvedCall.candidateDescriptor) {
+        return when (konst functionDescriptor = resolvedCall.candidateDescriptor) {
             is PropertyDescriptor -> {
                 TypeOfCall.PROPERTY_GETTER.nameToRender
             }
@@ -716,7 +716,7 @@ object CheckerTestUtil {
     }
 }
 
-enum class TypeOfCall(val nameToRender: String) {
+enum class TypeOfCall(konst nameToRender: String) {
     VARIABLE_THROUGH_INVOKE("variable&invoke"),
     PROPERTY_GETTER("variable"),
     FUNCTION("function"),

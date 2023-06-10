@@ -1,4 +1,4 @@
-abstract class My(val v: Int) {
+abstract class My(konst v: Int) {
     // Ok: variable is just abstract
     abstract var x: Int
 

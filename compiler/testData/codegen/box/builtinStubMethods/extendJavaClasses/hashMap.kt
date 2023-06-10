@@ -5,8 +5,8 @@
 class A : HashMap<String, Double>()
 
 fun box(): String {
-    val a = A()
-    val b = A()
+    konst a = A()
+    konst b = A()
 
     a.put("", 0.0)
     a.remove("")
@@ -15,7 +15,7 @@ fun box(): String {
     a.clear()
 
     a.keys
-    a.values
+    a.konstues
     a.entries
 
     return "OK"

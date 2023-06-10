@@ -77,8 +77,8 @@ class SerializeAndDeserializeTest {
 }
 
 private fun assertDeserializedMatchesOrigin(origin: KotlinToolingMetadata) {
-    val json = origin.toJsonString()
-    val deserialized = KotlinToolingMetadata.parseJsonOrThrow(json)
+    konst json = origin.toJsonString()
+    konst deserialized = KotlinToolingMetadata.parseJsonOrThrow(json)
     assertEquals(origin, deserialized)
 }
 

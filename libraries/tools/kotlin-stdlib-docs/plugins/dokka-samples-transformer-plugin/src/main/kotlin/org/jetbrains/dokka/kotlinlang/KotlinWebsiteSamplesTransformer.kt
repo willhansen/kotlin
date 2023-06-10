@@ -20,13 +20,13 @@ import java.io.StringWriter
 class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer(context) {
 
     private class SampleBuilder : KtTreeVisitorVoid() {
-        val builder = StringBuilder()
-        val text: String
+        konst builder = StringBuilder()
+        konst text: String
             get() = builder.toString()
 
-        val errors = mutableListOf<ConvertError>()
+        konst errors = mutableListOf<ConvertError>()
 
-        data class ConvertError(val e: Exception, val text: String, val loc: String)
+        data class ConvertError(konst e: Exception, konst text: String, konst loc: String)
 
         fun KtValueArgument.extractStringArgumentValue() =
             (getArgumentExpression() as KtStringTemplateExpression)
@@ -34,7 +34,7 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
 
 
         fun convertAssertPrints(expression: KtCallExpression) {
-            val (argument, commentArgument) = expression.valueArguments
+            konst (argument, commentArgument) = expression.konstueArguments
             builder.apply {
                 append("println(")
                 append(argument.text)
@@ -44,11 +44,11 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
         }
 
         fun convertAssertTrueFalse(expression: KtCallExpression, expectedResult: Boolean) {
-            val (argument) = expression.valueArguments
+            konst (argument) = expression.konstueArguments
             builder.apply {
-                expression.valueArguments.getOrNull(1)?.let {
+                expression.konstueArguments.getOrNull(1)?.let {
                     append("// ${it.extractStringArgumentValue()}")
-                    val ws = expression.prevLeaf { it is PsiWhiteSpace }
+                    konst ws = expression.prevLeaf { it is PsiWhiteSpace }
                     append(ws?.text ?: "\n")
                 }
                 append("println(\"")
@@ -60,21 +60,21 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
         }
 
         fun convertAssertFails(expression: KtCallExpression) {
-            val valueArguments = expression.valueArguments
+            konst konstueArguments = expression.konstueArguments
 
-            val funcArgument: KtValueArgument
-            val message: KtValueArgument?
+            konst funcArgument: KtValueArgument
+            konst message: KtValueArgument?
 
-            if (valueArguments.size == 1) {
+            if (konstueArguments.size == 1) {
                 message = null
-                funcArgument = valueArguments.first()
+                funcArgument = konstueArguments.first()
             } else {
-                message = valueArguments.first()
-                funcArgument = valueArguments.last()
+                message = konstueArguments.first()
+                funcArgument = konstueArguments.last()
             }
 
             builder.apply {
-                val argument = funcArgument.extractFunctionalArgumentText()
+                konst argument = funcArgument.extractFunctionalArgumentText()
                 append(argument.lines().joinToString(separator = "\n") { "// $it" })
                 append(" // ")
                 if (message != null) {
@@ -92,10 +92,10 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
         }
 
         fun convertAssertFailsWith(expression: KtCallExpression) {
-            val (funcArgument) = expression.valueArguments
-            val (exceptionType) = expression.typeArguments
+            konst (funcArgument) = expression.konstueArguments
+            konst (exceptionType) = expression.typeArguments
             builder.apply {
-                val argument = funcArgument.extractFunctionalArgumentText()
+                konst argument = funcArgument.extractFunctionalArgumentText()
                 append(argument.lines().joinToString(separator = "\n") { "// $it" })
                 append(" // will fail with ")
                 append(exceptionType.text)
@@ -114,11 +114,11 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
         }
 
         private fun reportProblemConvertingElement(element: PsiElement, e: Exception) {
-            val text = element.text
-            val document = PsiDocumentManager.getInstance(element.project).getDocument(element.containingFile)
+            konst text = element.text
+            konst document = PsiDocumentManager.getInstance(element.project).getDocument(element.containingFile)
 
-            val lineInfo = if (document != null) {
-                val lineNumber = document.getLineNumber(element.startOffset)
+            konst lineInfo = if (document != null) {
+                konst lineNumber = document.getLineNumber(element.startOffset)
                 "$lineNumber, ${element.startOffset - document.getLineStartOffset(lineNumber)}"
             } else {
                 "offset: ${element.startOffset}"
@@ -148,12 +148,12 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
     }
 
     private fun PsiElement.buildSampleText(): String {
-        val sampleBuilder = SampleBuilder()
+        konst sampleBuilder = SampleBuilder()
         this.accept(sampleBuilder)
 
         sampleBuilder.errors.forEach {
-            val sw = StringWriter()
-            val pw = PrintWriter(sw)
+            konst sw = StringWriter()
+            konst pw = PrintWriter(sw)
             it.e.printStackTrace(pw)
 
             this@KotlinWebsiteSamplesTransformer.context.logger.error("${containingFile.name}: (${it.loc}): Exception thrown while converting \n```\n${it.text}\n```\n$sw")
@@ -161,11 +161,11 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
         return sampleBuilder.text
     }
 
-    val importsToIgnore = arrayOf("samples.*", "samples.Sample").map { ImportPath.fromString(it) }
+    konst importsToIgnore = arrayOf("samples.*", "samples.Sample").map { ImportPath.fromString(it) }
 
     override fun processImports(psiElement: PsiElement): String {
-        val psiFile = psiElement.containingFile
-        return when(val text = psiFile.safeAs<KtFile>()?.importList) {
+        konst psiFile = psiElement.containingFile
+        return when(konst text = psiFile.safeAs<KtFile>()?.importList) {
             is KtImportList -> text.let {
                 it.allChildren.filter {
                     it !is KtImportDirective || it.importPath !in importsToIgnore
@@ -176,16 +176,16 @@ class KotlinWebsiteSamplesTransformer(context: DokkaContext): SamplesTransformer
     }
 
     override fun processBody(psiElement: PsiElement): String {
-        val text = processSampleBody(psiElement).trim { it == '\n' || it == '\r' }.trimEnd()
-        val lines = text.split("\n")
-        val indent = lines.filter(String::isNotBlank).map { it.takeWhile(Char::isWhitespace).count() }.minOrNull() ?: 0
+        konst text = processSampleBody(psiElement).trim { it == '\n' || it == '\r' }.trimEnd()
+        konst lines = text.split("\n")
+        konst indent = lines.filter(String::isNotBlank).map { it.takeWhile(Char::isWhitespace).count() }.minOrNull() ?: 0
         return lines.joinToString("\n") { it.drop(indent) }
     }
 
     private fun processSampleBody(psiElement: PsiElement) = when (psiElement) {
         is KtDeclarationWithBody -> {
-            val bodyExpression = psiElement.bodyExpression
-            val bodyExpressionText = bodyExpression!!.buildSampleText()
+            konst bodyExpression = psiElement.bodyExpression
+            konst bodyExpressionText = bodyExpression!!.buildSampleText()
             when (bodyExpression) {
                 is KtBlockExpression -> bodyExpressionText.removeSurrounding("{", "}")
                 else -> bodyExpressionText

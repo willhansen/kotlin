@@ -2,7 +2,7 @@
 @file:Suppress("AMBIGUOUS_ANONYMOUS_TYPE_INFERRED")
 
 open class CrashMe {
-    private val notReally = object : Runnable {
+    private konst notReally = object : Runnable {
         override fun run() {
             throw UnsupportedOperationException()
         }

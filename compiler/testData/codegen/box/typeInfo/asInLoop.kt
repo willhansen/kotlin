@@ -3,9 +3,9 @@
 import java.io.*
 
 fun foo(args: Array<String>) {
-  val reader = BufferedReader(InputStreamReader(System.`in`))
+  konst reader = BufferedReader(InputStreamReader(System.`in`))
   while(true) {
-    val cmd = reader.readLine() as String
+    konst cmd = reader.readLine() as String
   }
 }
 

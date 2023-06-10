@@ -17,13 +17,13 @@ import org.jetbrains.kotlin.fir.expressions.impl.FirNoReceiverExpression
 
 object FirBreakOrContinueJumpsAcrossFunctionBoundaryChecker : FirLoopJumpChecker() {
     override fun check(expression: FirLoopJump, context: CheckerContext, reporter: DiagnosticReporter) {
-        val allowInlined = context.languageVersionSettings.supportsFeature(LanguageFeature.BreakContinueInInlineLambdas)
-        val errorPathElements = ArrayDeque<FirElement>()
+        konst allowInlined = context.languageVersionSettings.supportsFeature(LanguageFeature.BreakContinueInInlineLambdas)
+        konst errorPathElements = ArrayDeque<FirElement>()
 
         fun findPathAndCheck(element: FirElement?): Boolean {
             fun findPathAndCheckWithAddingErrorElement(errorElement: FirElement, checkElement: FirElement?): Boolean {
                 errorPathElements.addLast(errorElement)
-                val result = findPathAndCheck(checkElement)
+                konst result = findPathAndCheck(checkElement)
                 errorPathElements.removeLast()
                 return result
             }
@@ -35,7 +35,7 @@ object FirBreakOrContinueJumpsAcrossFunctionBoundaryChecker : FirLoopJumpChecker
             when (element) {
                 expression -> {
                     if (errorPathElements.isNotEmpty()) {
-                        val hasNonInline = errorPathElements.any {
+                        konst hasNonInline = errorPathElements.any {
                             when(it) {
                                 is FirAnonymousFunction -> it.inlineStatus != InlineStatus.Inline
                                 is FirAnonymousFunctionExpression -> it.anonymousFunction.inlineStatus != InlineStatus.Inline
@@ -97,7 +97,7 @@ object FirBreakOrContinueJumpsAcrossFunctionBoundaryChecker : FirLoopJumpChecker
                     }
 
                     if (element is FirConstructor) {
-                        val argumentList = element.delegatedConstructor?.argumentList
+                        konst argumentList = element.delegatedConstructor?.argumentList
                         if (argumentList != null) {
                             errorPathElements.addLast(element)
                             for (argument in argumentList.arguments) {
@@ -122,7 +122,7 @@ object FirBreakOrContinueJumpsAcrossFunctionBoundaryChecker : FirLoopJumpChecker
     }
 
     private fun FirExpression.tryInline(): FirExpression {
-        val anonymousFunctionExpression = (((this as? FirLambdaArgumentExpression)?.expression) ?: this) as? FirAnonymousFunctionExpression
+        konst anonymousFunctionExpression = (((this as? FirLambdaArgumentExpression)?.expression) ?: this) as? FirAnonymousFunctionExpression
         return anonymousFunctionExpression?.anonymousFunction?.body ?: this
     }
 }

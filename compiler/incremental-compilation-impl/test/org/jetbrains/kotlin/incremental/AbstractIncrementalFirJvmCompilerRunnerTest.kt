@@ -27,6 +27,6 @@ abstract class AbstractIncrementalFirJvmCompilerRunnerTest : AbstractIncremental
             languageVersion = "2.0"
         }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = BuildLogFinder(isGradleEnabled = true, isFirEnabled = true) // TODO: investigate cases that need isGradleEnabled - the combination looks fragile
 }

@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-data class XY(val x: Int, val y: Int)
+data class XY(konst x: Int, konst y: Int)
 
 fun foo(list: List<XY>) {
     for ((x1, y1) in list) {

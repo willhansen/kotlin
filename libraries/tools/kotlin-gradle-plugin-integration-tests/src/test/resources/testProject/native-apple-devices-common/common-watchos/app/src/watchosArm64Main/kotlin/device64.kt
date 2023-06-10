@@ -1,3 +1,3 @@
 package common.watchos.app
 
-actual val bitness: Int = 64
+actual konst bitness: Int = 64

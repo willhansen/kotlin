@@ -2,10 +2,10 @@
 
 class Outer {
     private companion object {
-        val result = "OK"
+        konst result = "OK"
     }
 
-    val test: String
+    konst test: String
 
     init {
         test = result

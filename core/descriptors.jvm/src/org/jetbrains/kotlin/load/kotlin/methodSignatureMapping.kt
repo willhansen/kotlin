@@ -29,7 +29,7 @@ fun FunctionDescriptor.computeJvmDescriptor(withReturnType: Boolean = true, with
         appendErasedType(it.type)
     }
 
-    for (parameter in valueParameters) {
+    for (parameter in konstueParameters) {
         appendErasedType(parameter.type)
     }
 
@@ -65,14 +65,14 @@ fun PropertyDescriptor.computeJvmDescriptorWithoutName() = buildString {
 fun forceSingleValueParameterBoxing(f: CallableDescriptor): Boolean {
     if (f !is FunctionDescriptor) return false
 
-    if (f.name.asString() != "remove" || f.valueParameters.size != 1 || f.isFromJavaOrBuiltins()) return false
-    if ((f.original.valueParameters.single().type.mapToJvmType() as? JvmType.Primitive)?.jvmPrimitiveType != JvmPrimitiveType.INT) return false
+    if (f.name.asString() != "remove" || f.konstueParameters.size != 1 || f.isFromJavaOrBuiltins()) return false
+    if ((f.original.konstueParameters.single().type.mapToJvmType() as? JvmType.Primitive)?.jvmPrimitiveType != JvmPrimitiveType.INT) return false
 
-    val overridden =
+    konst overridden =
         BuiltinMethodsWithSpecialGenericSignature.getOverriddenBuiltinFunctionWithErasedValueParametersInJava(f)
             ?: return false
 
-    val overriddenParameterType = overridden.original.valueParameters.single().type.mapToJvmType()
+    konst overriddenParameterType = overridden.original.konstueParameters.single().type.mapToJvmType()
     return overridden.containingDeclaration.fqNameUnsafe == StandardNames.FqNames.mutableCollection.toUnsafe()
             && overriddenParameterType is JvmType.Object && overriddenParameterType.internalName == "java/lang/Object"
 }
@@ -81,7 +81,7 @@ fun forceSingleValueParameterBoxing(f: CallableDescriptor): Boolean {
 internal fun CallableDescriptor.computeJvmSignature(): String? = signatures {
     if (DescriptorUtils.isLocal(this@computeJvmSignature)) return null
 
-    val classDescriptor = containingDeclaration as? ClassDescriptor ?: return null
+    konst classDescriptor = containingDeclaration as? ClassDescriptor ?: return null
     if (classDescriptor.name.isSpecial) return null
 
     signature(
@@ -90,7 +90,7 @@ internal fun CallableDescriptor.computeJvmSignature(): String? = signatures {
     )
 }
 
-internal val ClassDescriptor.internalName: String
+internal konst ClassDescriptor.internalName: String
     get() {
         JavaToKotlinClassMap.mapKotlinToJava(fqNameSafe.toUnsafe())?.let {
             return JvmClassName.byClassId(it).internalName
@@ -108,22 +108,22 @@ internal fun KotlinType.mapToJvmType(): JvmType =
 
 sealed class JvmType {
     // null means 'void'
-    class Primitive(val jvmPrimitiveType: JvmPrimitiveType?) : JvmType()
+    class Primitive(konst jvmPrimitiveType: JvmPrimitiveType?) : JvmType()
 
-    class Object(val internalName: String) : JvmType()
-    class Array(val elementType: JvmType) : JvmType()
+    class Object(konst internalName: String) : JvmType()
+    class Array(konst elementType: JvmType) : JvmType()
 
     override fun toString() = JvmTypeFactoryImpl.toString(this)
 
     companion object {
-        internal val BOOLEAN = Primitive(JvmPrimitiveType.BOOLEAN)
-        internal val CHAR = Primitive(JvmPrimitiveType.CHAR)
-        internal val BYTE = Primitive(JvmPrimitiveType.BYTE)
-        internal val SHORT = Primitive(JvmPrimitiveType.SHORT)
-        internal val INT = Primitive(JvmPrimitiveType.INT)
-        internal val FLOAT = Primitive(JvmPrimitiveType.FLOAT)
-        internal val LONG = Primitive(JvmPrimitiveType.LONG)
-        internal val DOUBLE = Primitive(JvmPrimitiveType.DOUBLE)
+        internal konst BOOLEAN = Primitive(JvmPrimitiveType.BOOLEAN)
+        internal konst CHAR = Primitive(JvmPrimitiveType.CHAR)
+        internal konst BYTE = Primitive(JvmPrimitiveType.BYTE)
+        internal konst SHORT = Primitive(JvmPrimitiveType.SHORT)
+        internal konst INT = Primitive(JvmPrimitiveType.INT)
+        internal konst FLOAT = Primitive(JvmPrimitiveType.FLOAT)
+        internal konst LONG = Primitive(JvmPrimitiveType.LONG)
+        internal konst DOUBLE = Primitive(JvmPrimitiveType.DOUBLE)
     }
 }
 
@@ -139,9 +139,9 @@ private object JvmTypeFactoryImpl : JvmTypeFactory<JvmType> {
 
     override fun createFromString(representation: String): JvmType {
         assert(representation.isNotEmpty()) { "empty string as JvmType" }
-        val firstChar = representation[0]
+        konst firstChar = representation[0]
 
-        JvmPrimitiveType.values().firstOrNull { it.desc[0] == firstChar }?.let {
+        JvmPrimitiveType.konstues().firstOrNull { it.desc[0] == firstChar }?.let {
             return JvmType.Primitive(it)
         }
 
@@ -180,7 +180,7 @@ private object JvmTypeFactoryImpl : JvmTypeFactory<JvmType> {
             is JvmType.Object -> "L" + type.internalName + ";"
         }
 
-    override val javaLangClassType: JvmType
+    override konst javaLangClassType: JvmType
         get() = createObjectType("java/lang/Class")
 
 }

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.backend.common.serialization.mangle
 
-enum class MangleConstant(val prefix: Char, val separator: Char, val suffix: Char) {
+enum class MangleConstant(konst prefix: Char, konst separator: Char, konst suffix: Char) {
     VALUE_PARAMETERS('(', ';', ')'),
     TYPE_PARAMETERS('{', ';', '}'),
     UPPER_BOUNDS('<', '&', '>'),
@@ -13,39 +13,39 @@ enum class MangleConstant(val prefix: Char, val separator: Char, val suffix: Cha
     FLEXIBLE_TYPE('[', '~', ']');
 
     companion object {
-        const val VAR_ARG_MARK = "..."
-        const val STAR_MARK = '*'
-        const val Q_MARK = '?'
-        const val ENHANCED_NULLABILITY_MARK = "{EnhancedNullability}"
-        const val DYNAMIC_MARK = "<dynamic>"
-        const val ERROR_MARK = "<ERROR CLASS>"
-        const val ERROR_DECLARATION = "<ERROR DECLARATION>"
-        const val STATIC_MEMBER_MARK = "#static"
-        const val SUSPEND_FUNCTION_MARK = "#suspend"
-        const val TYPE_PARAMETER_MARKER_NAME = "<TP>"
-        const val TYPE_PARAMETER_MARKER_NAME_SETTER = "<STP>"
-        const val BACKING_FIELD_NAME = "<BF>"
-        const val ANON_INIT_NAME_PREFIX = "<ANI>"
-        const val ENUM_ENTRY_CLASS_NAME = "<EEC>"
+        const konst VAR_ARG_MARK = "..."
+        const konst STAR_MARK = '*'
+        const konst Q_MARK = '?'
+        const konst ENHANCED_NULLABILITY_MARK = "{EnhancedNullability}"
+        const konst DYNAMIC_MARK = "<dynamic>"
+        const konst ERROR_MARK = "<ERROR CLASS>"
+        const konst ERROR_DECLARATION = "<ERROR DECLARATION>"
+        const konst STATIC_MEMBER_MARK = "#static"
+        const konst SUSPEND_FUNCTION_MARK = "#suspend"
+        const konst TYPE_PARAMETER_MARKER_NAME = "<TP>"
+        const konst TYPE_PARAMETER_MARKER_NAME_SETTER = "<STP>"
+        const konst BACKING_FIELD_NAME = "<BF>"
+        const konst ANON_INIT_NAME_PREFIX = "<ANI>"
+        const konst ENUM_ENTRY_CLASS_NAME = "<EEC>"
 
-        const val VARIANCE_SEPARATOR = '|'
-        const val UPPER_BOUND_SEPARATOR = '§'
-        const val FQN_SEPARATOR = '.'
-        const val INDEX_SEPARATOR = ':'
+        const konst VARIANCE_SEPARATOR = '|'
+        const konst UPPER_BOUND_SEPARATOR = '§'
+        const konst FQN_SEPARATOR = '.'
+        const konst INDEX_SEPARATOR = ':'
 
-        const val PLATFORM_FUNCTION_MARKER = '%'
+        const konst PLATFORM_FUNCTION_MARKER = '%'
 
-        const val CONTEXT_RECEIVER_PREFIX = '!'
-        const val EXTENSION_RECEIVER_PREFIX = '@'
-        const val FUNCTION_NAME_PREFIX = '#'
-        const val TYPE_PARAM_INDEX_PREFIX = '@'
+        const konst CONTEXT_RECEIVER_PREFIX = '!'
+        const konst EXTENSION_RECEIVER_PREFIX = '@'
+        const konst FUNCTION_NAME_PREFIX = '#'
+        const konst TYPE_PARAM_INDEX_PREFIX = '@'
 
-        const val LOCAL_DECLARATION_INDEX_PREFIX = '$'
+        const konst LOCAL_DECLARATION_INDEX_PREFIX = '$'
 
-        const val JAVA_FIELD_SUFFIX = "#jf"
+        const konst JAVA_FIELD_SUFFIX = "#jf"
 
-        const val FUN_PREFIX = "kfun"
-        const val CLASS_PREFIX = "kclass"
-        const val FIELD_PREFIX = "kfield"
+        const konst FUN_PREFIX = "kfun"
+        const konst CLASS_PREFIX = "kclass"
+        const konst FIELD_PREFIX = "kfield"
     }
 }

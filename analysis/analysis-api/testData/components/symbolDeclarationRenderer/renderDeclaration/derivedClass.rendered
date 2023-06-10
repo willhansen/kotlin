@@ -1,5 +1,5 @@
 open class Base<T>(x: T) {
-  val x: T
+  konst x: T
 }
 
 class Derived<T : Any>(x: T) : Base<T>()

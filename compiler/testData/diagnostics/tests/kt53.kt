@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-val <T> T.foo : T?
+konst <T> T.foo : T?
     get() = null
 
 fun test(): Int? {

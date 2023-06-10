@@ -41,9 +41,9 @@ import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfo
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowValueFactory
 
 class EffectSystem(
-    val languageVersionSettings: LanguageVersionSettings,
-    val dataFlowValueFactory: DataFlowValueFactory,
-    val builtIns: KotlinBuiltIns
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst dataFlowValueFactory: DataFlowValueFactory,
+    konst builtIns: KotlinBuiltIns
 ) {
     fun getDataFlowInfoForFinishedCall(
         resolvedCall: ResolvedCall<*>,
@@ -53,10 +53,10 @@ class EffectSystem(
         if (!languageVersionSettings.supportsFeature(LanguageFeature.UseReturnsEffect)) return DataFlowInfo.EMPTY
 
         // Prevent launch of effect system machinery on pointless cases (constants/enums/constructors/etc.)
-        val callExpression = resolvedCall.call.callElement as? KtCallExpression ?: return DataFlowInfo.EMPTY
+        konst callExpression = resolvedCall.call.callElement as? KtCallExpression ?: return DataFlowInfo.EMPTY
         if (callExpression is KtDeclaration) return DataFlowInfo.EMPTY
 
-        val resultContextInfo = getContextInfoWhen(ESReturns(ESConstants.wildcard), callExpression, bindingTrace, moduleDescriptor)
+        konst resultContextInfo = getContextInfoWhen(ESReturns(ESConstants.wildcard), callExpression, bindingTrace, moduleDescriptor)
 
         return resultContextInfo.toDataFlowInfo(languageVersionSettings, builtIns)
     }
@@ -70,15 +70,15 @@ class EffectSystem(
         if (!languageVersionSettings.supportsFeature(LanguageFeature.UseReturnsEffect)) return ConditionalDataFlowInfo.EMPTY
         if (leftExpression == null || rightExpression == null) return ConditionalDataFlowInfo.EMPTY
 
-        val leftComputation =
+        konst leftComputation =
             getNonTrivialComputation(leftExpression, bindingTrace, moduleDescriptor) ?: return ConditionalDataFlowInfo.EMPTY
-        val rightComputation =
+        konst rightComputation =
             getNonTrivialComputation(rightExpression, bindingTrace, moduleDescriptor) ?: return ConditionalDataFlowInfo.EMPTY
 
-        val effects = EqualsFunctor(false).invokeWithArguments(leftComputation, rightComputation)
+        konst effects = EqualsFunctor(false).invokeWithArguments(leftComputation, rightComputation)
 
-        val equalsContextInfo = InfoCollector(ESReturns(ESConstants.trueValue), builtIns).collectFromSchema(effects)
-        val notEqualsContextInfo = InfoCollector(ESReturns(ESConstants.falseValue), builtIns).collectFromSchema(effects)
+        konst equalsContextInfo = InfoCollector(ESReturns(ESConstants.trueValue), builtIns).collectFromSchema(effects)
+        konst notEqualsContextInfo = InfoCollector(ESReturns(ESConstants.falseValue), builtIns).collectFromSchema(effects)
 
         return ConditionalDataFlowInfo(
             equalsContextInfo.toDataFlowInfo(languageVersionSettings, builtIns),
@@ -90,27 +90,27 @@ class EffectSystem(
         if (!languageVersionSettings.supportsFeature(LanguageFeature.UseCallsInPlaceEffect)) return
 
         // Prevent launch of effect system machinery on pointless cases (constants/enums/constructors/etc.)
-        val callExpression = resolvedCall.call.callElement as? KtCallExpression ?: return
+        konst callExpression = resolvedCall.call.callElement as? KtCallExpression ?: return
         if (callExpression is KtDeclaration) return
 
-        val resultingContextInfo = getContextInfoWhen(ESReturns(ESConstants.wildcard), callExpression, bindingTrace, moduleDescriptor)
+        konst resultingContextInfo = getContextInfoWhen(ESReturns(ESConstants.wildcard), callExpression, bindingTrace, moduleDescriptor)
         for (effect in resultingContextInfo.firedEffects) {
-            val callsEffect = effect as? ESCalls ?: continue
-            val lambdaExpression = (callsEffect.callable as? ESLambda)?.lambda ?: continue
+            konst callsEffect = effect as? ESCalls ?: continue
+            konst lambdaExpression = (callsEffect.callable as? ESLambda)?.lambda ?: continue
             bindingTrace.record(BindingContext.LAMBDA_INVOCATIONS, lambdaExpression, callsEffect.kind)
         }
     }
 
     fun extractDataFlowInfoFromCondition(
         condition: KtExpression?,
-        value: Boolean,
+        konstue: Boolean,
         bindingTrace: BindingTrace,
         moduleDescriptor: ModuleDescriptor
     ): DataFlowInfo {
         if (!languageVersionSettings.supportsFeature(LanguageFeature.UseReturnsEffect)) return DataFlowInfo.EMPTY
         if (condition == null) return DataFlowInfo.EMPTY
 
-        return getContextInfoWhen(ESReturns(ESConstants.booleanValue(value)), condition, bindingTrace, moduleDescriptor)
+        return getContextInfoWhen(ESReturns(ESConstants.booleanValue(konstue)), condition, bindingTrace, moduleDescriptor)
             .toDataFlowInfo(languageVersionSettings, moduleDescriptor.builtIns)
     }
 
@@ -120,16 +120,16 @@ class EffectSystem(
         bindingTrace: BindingTrace,
         moduleDescriptor: ModuleDescriptor
     ): MutableContextInfo {
-        val isInContractBlock = expression.parentsWithSelf.filterIsInstance<KtExpression>().any {
+        konst isInContractBlock = expression.parentsWithSelf.filterIsInstance<KtExpression>().any {
             bindingTrace.bindingContext[BindingContext.IS_CONTRACT_DECLARATION_BLOCK, it] == true
         }
         if (isInContractBlock) return MutableContextInfo.EMPTY
-        val computation = getNonTrivialComputation(expression, bindingTrace, moduleDescriptor) ?: return MutableContextInfo.EMPTY
+        konst computation = getNonTrivialComputation(expression, bindingTrace, moduleDescriptor) ?: return MutableContextInfo.EMPTY
         return InfoCollector(observedEffect, builtIns).collectFromSchema(computation.effects)
     }
 
     private fun getNonTrivialComputation(expression: KtExpression, trace: BindingTrace, moduleDescriptor: ModuleDescriptor): Computation? {
-        val visitor = EffectsExtractingVisitor(trace, moduleDescriptor, dataFlowValueFactory, languageVersionSettings)
+        konst visitor = EffectsExtractingVisitor(trace, moduleDescriptor, dataFlowValueFactory, languageVersionSettings)
         return visitor.extractOrGetCached(expression).takeUnless { it == UNKNOWN_COMPUTATION }
     }
 }

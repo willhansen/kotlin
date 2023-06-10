@@ -26,7 +26,7 @@ class A {
         c2++
         return 1
     }
-    val b: B
+    konst b: B
         get() {
             c3++
             return B()
@@ -46,32 +46,32 @@ class B {
 }
 
 fun box(): String {
-    val n1 = getNullA()?.someFun()
+    konst n1 = getNullA()?.someFun()
     if (n1 != null || toStr() != "10000") {
         return "Bad call getNullA()?.someFun(). result: $n1, counters: ${toStr()}"
     }
 
-    val n2 = getNullA()?.b?.invoke()
+    konst n2 = getNullA()?.b?.invoke()
     if (n2 != null || toStr() != "20000") {
         return "Bad call getNullA()?.b(). result: $n2, counters: ${toStr()}"
     }
 
-    val n3 = getNullA()?.extFun()
+    konst n3 = getNullA()?.extFun()
     if (n3 != null || toStr() != "30000") {
         return "Bad call getNullA()?.extFun(). result: $n3, counters: ${toStr()}"
     }
 
-    val i1 = getA()?.someFun()
+    konst i1 = getA()?.someFun()
     if (i1 != 1 || toStr() != "41000") {
         return "Bad call getA()?.someFun(). result: $i1, counters: ${toStr()}"
     }
 
-    val i2 = getA()?.b?.invoke()
+    konst i2 = getA()?.b?.invoke()
     if (i2 != 2 || toStr() != "51101") {
         return "Bad call getA()?.b(). result: $i2, counters: ${toStr()}"
     }
 
-    val i3 = getA()?.extFun()
+    konst i3 = getA()?.extFun()
     if (i3 != 3 || toStr() != "61111") {
         return "Bad call getA()?.extFun(). result: $i3, counters: ${toStr()}"
     }

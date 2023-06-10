@@ -1,3 +1,3 @@
 object O {
-    val INSTANCE: O = null!!
+    konst INSTANCE: O = null!!
 }

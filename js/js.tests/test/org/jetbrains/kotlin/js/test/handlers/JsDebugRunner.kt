@@ -47,31 +47,31 @@ import java.util.logging.Logger
  * supported.
  *
  */
-class JsDebugRunner(testServices: TestServices, private val localVariables: Boolean) : AbstractJsArtifactsCollector(testServices) {
+class JsDebugRunner(testServices: TestServices, private konst localVariables: Boolean) : AbstractJsArtifactsCollector(testServices) {
 
-    private val logger = Logger.getLogger(this::class.java.name)
+    private konst logger = Logger.getLogger(this::class.java.name)
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (someAssertionWasFailed) return
 
-        val globalDirectives = testServices.moduleStructure.allDirectives
-        val esModules = JsEnvironmentConfigurationDirectives.ES_MODULES in globalDirectives
+        konst globalDirectives = testServices.moduleStructure.allDirectives
+        konst esModules = JsEnvironmentConfigurationDirectives.ES_MODULES in globalDirectives
 
         if (esModules) return
 
         // This file generated in the FULL mode should be self-sufficient.
-        val jsFilePath = getAllFilesForRunner(testServices, modulesToArtifact)[TranslationMode.FULL_DEV]?.single()
+        konst jsFilePath = getAllFilesForRunner(testServices, modulesToArtifact)[TranslationMode.FULL_DEV]?.single()
             ?: error("Only FULL translation mode is supported")
 
-        val mainModule = JsEnvironmentConfigurator.getMainModule(testServices)
+        konst mainModule = JsEnvironmentConfigurator.getMainModule(testServices)
 
-        val sourceMapFile = File("$jsFilePath.map")
-        val sourceMap = when (val parseResult = SourceMapParser.parse(sourceMapFile)) {
-            is SourceMapSuccess -> parseResult.value
+        konst sourceMapFile = File("$jsFilePath.map")
+        konst sourceMap = when (konst parseResult = SourceMapParser.parse(sourceMapFile)) {
+            is SourceMapSuccess -> parseResult.konstue
             is SourceMapError -> error(parseResult.message)
         }
 
-        val numberOfAttempts = 5
+        konst numberOfAttempts = 5
         retry(
             numberOfAttempts,
             action = { runGeneratedCode(jsFilePath, sourceMap, mainModule) },
@@ -92,14 +92,14 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
         sourceMap: SourceMap,
         mainModule: TestModule,
     ) {
-        val originalFile = mainModule.files.first { !it.isAdditional }.originalFile
-        val debuggerFacade = NodeJsDebuggerFacade(jsFilePath, localVariables)
+        konst originalFile = mainModule.files.first { !it.isAdditional }.originalFile
+        konst debuggerFacade = NodeJsDebuggerFacade(jsFilePath, localVariables)
 
-        val jsFile = File(jsFilePath)
+        konst jsFile = File(jsFilePath)
 
-        val jsFileURI = jsFile.makeURI()
+        konst jsFileURI = jsFile.makeURI()
 
-        val loggedItems = mutableListOf<SteppingTestLoggedData>()
+        konst loggedItems = mutableListOf<SteppingTestLoggedData>()
 
         debuggerFacade.run {
             debugger.resume()
@@ -110,7 +110,7 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
 
             suspend fun repeatedlyStepInto(action: suspend (Debugger.CallFrame) -> Boolean) {
                 while (true) {
-                    val topMostCallFrame = waitForPauseEvent().callFrames[0]
+                    konst topMostCallFrame = waitForPauseEvent().callFrames[0]
                     if (!action(topMostCallFrame)) break
                     debugger.stepInto()
                     waitForResumeEvent()
@@ -150,7 +150,7 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
         topMostCallFrame: Debugger.CallFrame,
         loggedItems: MutableList<SteppingTestLoggedData>
     ) {
-        val originalFunctionName = topMostCallFrame.functionLocation?.let {
+        konst originalFunctionName = topMostCallFrame.functionLocation?.let {
             sourceMap.segmentForGeneratedLocation(it.lineNumber, it.columnNumber)?.name
         }
         sourceMap.segmentForGeneratedLocation(
@@ -158,8 +158,8 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
             topMostCallFrame.location.columnNumber
         )?.let { (_, sourceFile, sourceLine, _, _) ->
             if (sourceFile == null || sourceLine < 0) return@let
-            val testFileName = testFileNameFromMappedLocation(sourceFile, sourceLine) ?: return
-            val expectation = formatAsSteppingTestExpectation(
+            konst testFileName = testFileNameFromMappedLocation(sourceFile, sourceLine) ?: return
+            konst expectation = formatAsSteppingTestExpectation(
                 testFileName,
                 sourceLine + 1,
                 originalFunctionName ?: topMostCallFrame.functionName,
@@ -176,7 +176,7 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
      * This function maps a location in the original test file to the name specified in a `// FILE:` comment.
      */
     private fun testFileNameFromMappedLocation(originalFilePath: String, originalFileLineNumber: Int): String? {
-        val originalFile = File(originalFilePath)
+        konst originalFile = File(originalFilePath)
         return testServices.moduleStructure.modules.asSequence().flatMap { module -> module.files.asSequence().filter { !it.isAdditional } }
             .findLast {
                 it.originalFile.absolutePath == originalFile.absolutePath && it.startLineNumberInOriginalFile <= originalFileLineNumber
@@ -190,16 +190,16 @@ class JsDebugRunner(testServices: TestServices, private val localVariables: Bool
  *
  * @param jsFilePath the test file to execute and debug.
  */
-private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariables: Boolean) {
+private class NodeJsDebuggerFacade(jsFilePath: String, private konst localVariables: Boolean) {
 
-    private val inspector =
+    private konst inspector =
         NodeJsInspectorClient("js/js.tests/test/org/jetbrains/kotlin/js/test/debugger/stepping_test_executor.js", listOf(jsFilePath))
 
-    private val scriptUrls = mutableMapOf<Runtime.ScriptId, String>()
+    private konst scriptUrls = mutableMapOf<Runtime.ScriptId, String>()
 
     private var pausedEvent: Debugger.Event.Paused? = null
 
-    private val sourceCache = mutableMapOf<URI, String>()
+    private konst sourceCache = mutableMapOf<URI, String>()
 
     init {
         inspector.onEvent { event ->
@@ -238,7 +238,7 @@ private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariable
         }
     }
 
-    inner class Context(private val underlying: NodeJsInspectorClientContext) : NodeJsInspectorClientContext by underlying {
+    inner class Context(private konst underlying: NodeJsInspectorClientContext) : NodeJsInspectorClientContext by underlying {
 
         fun scriptUrlByScriptId(scriptId: Runtime.ScriptId) = scriptUrls[scriptId] ?: error("unknown scriptId $scriptId")
 
@@ -255,28 +255,28 @@ private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariable
             callFrame: Debugger.CallFrame
         ): List<LocalVariableRecord>? {
             if (!localVariables) return null
-            val functionScope = callFrame.scopeChain.find { it.type in setOf(Debugger.ScopeType.LOCAL, Debugger.ScopeType.CLOSURE) }
+            konst functionScope = callFrame.scopeChain.find { it.type in setOf(Debugger.ScopeType.LOCAL, Debugger.ScopeType.CLOSURE) }
                 ?: return null
-            val scopeStart = functionScope.startLocation?.toCodePosition() ?: error("Missing scope location")
-            val scopeEnd = functionScope.endLocation?.toCodePosition() ?: error("Missing scope location")
-            val jsFileURI = jsFile.makeURI()
+            konst scopeStart = functionScope.startLocation?.toCodePosition() ?: error("Missing scope location")
+            konst scopeEnd = functionScope.endLocation?.toCodePosition() ?: error("Missing scope location")
+            konst jsFileURI = jsFile.makeURI()
             require(URI(scriptUrlByScriptId(functionScope.startLocation.scriptId)) == jsFileURI) {
-                "Invalid scope location: $scopeStart. Expected scope location to be in $jsFile"
+                "Inkonstid scope location: $scopeStart. Expected scope location to be in $jsFile"
             }
 
-            val sourceText = sourceCache.getOrPut(jsFileURI, jsFile::readText)
+            konst sourceText = sourceCache.getOrPut(jsFileURI, jsFile::readText)
 
-            val scopeText = sourceText.let {
+            konst scopeText = sourceText.let {
                 it.substring(it.offsetOf(scopeStart), it.offsetOf(scopeEnd))
             }
 
-            val prefix = "function"
+            konst prefix = "function"
 
-            // Function scope starts with an open paren, so we need to add the keyword to make it valid JavaScript.
+            // Function scope starts with an open paren, so we need to add the keyword to make it konstid JavaScript.
             // TODO: This will not work with arrows. As of 2022 we don't generate them, but we might in the future.
-            val parseableScopeText = prefix + scopeText
-            val scope = JsProgram().scope
-            val jsFunction = parseFunction(
+            konst parseableScopeText = prefix + scopeText
+            konst scope = JsProgram().scope
+            konst jsFunction = parseFunction(
                 parseableScopeText,
                 jsFile.name,
                 CodePosition(scopeStart.line, scopeStart.offset - prefix.length),
@@ -285,7 +285,7 @@ private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariable
                 scope
             ) ?: error("Could not parse scope: \n$parseableScopeText")
 
-            val variables = mutableListOf<SourceInfoAwareJsNode /* JsVars.JsVar | JsParameter */>()
+            konst variables = mutableListOf<SourceInfoAwareJsNode /* JsVars.JsVar | JsParameter */>()
 
             object : JsVisitor() {
                 override fun visitElement(node: JsNode) {
@@ -303,13 +303,13 @@ private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariable
                 }
             }.accept(jsFunction)
 
-            val nameMapping = variables.mapNotNull { variable ->
+            konst nameMapping = variables.mapNotNull { variable ->
                 if (variable !is HasName) error("Unexpected JsNode: $variable")
 
                 // Filter out variables declared in nested functions
                 if (!jsFunction.scope.hasOwnName(variable.name.toString())) return@mapNotNull null
 
-                val location = variable.source
+                konst location = variable.source
                 if (location !is JsLocation?) error("JsLocation expected. Found instead: $location")
                 if (location == null)
                     null
@@ -320,26 +320,26 @@ private class NodeJsDebuggerFacade(jsFilePath: String, private val localVariable
 
             if (nameMapping.isEmpty()) return emptyList()
 
-            val expression = nameMapping.joinToString(separator = ",", prefix = "[", postfix = "]") { (_, generatedName) ->
+            konst expression = nameMapping.joinToString(separator = ",", prefix = "[", postfix = "]") { (_, generatedName) ->
                 "__makeValueDescriptionForSteppingTests($generatedName)"
             }
-            val evaluationResult = debugger.evaluateOnCallFrame(callFrame.callFrameId, expression, returnByValue = true)
-            if (evaluationResult.exceptionDetails != null) {
-                evaluationResult.exceptionDetails.rethrow()
+            konst ekonstuationResult = debugger.ekonstuateOnCallFrame(callFrame.callFrameId, expression, returnByValue = true)
+            if (ekonstuationResult.exceptionDetails != null) {
+                ekonstuationResult.exceptionDetails.rethrow()
             }
 
-            val valueDescriptions =
-                Json.Default.decodeFromJsonElement<List<ValueDescription?>>(evaluationResult.result.value ?: error("missing value"))
+            konst konstueDescriptions =
+                Json.Default.decodeFromJsonElement<List<ValueDescription?>>(ekonstuationResult.result.konstue ?: error("missing konstue"))
 
             return nameMapping.mapIndexedNotNull { i, (originalName, _) ->
-                valueDescriptions[i]?.toLocalVariableRecord(originalName)
+                konstueDescriptions[i]?.toLocalVariableRecord(originalName)
             }
         }
 
         private fun Runtime.ExceptionDetails.rethrow(): Nothing {
             if (exception?.description != null) error(exception.description)
             if (scriptId == null) error(text)
-            val scriptURL = scriptUrls[scriptId] ?: url ?: error(text)
+            konst scriptURL = scriptUrls[scriptId] ?: url ?: error(text)
             error("$text ($scriptURL:$lineNumber:$columnNumber)")
         }
     }
@@ -354,11 +354,11 @@ private fun Debugger.Location.toCodePosition() = CodePosition(lineNumber, column
 
 private fun SourceMap.segmentForGeneratedLocation(lineNumber: Int, columnNumber: Int?): SourceMapSegment? {
 
-    val group = groups.getOrNull(lineNumber)?.takeIf { it.segments.isNotEmpty() } ?: return null
+    konst group = groups.getOrNull(lineNumber)?.takeIf { it.segments.isNotEmpty() } ?: return null
     return if (columnNumber == null || columnNumber <= group.segments[0].generatedColumnNumber) {
         group.segments[0]
     } else {
-        val candidateIndex = group.segments.indexOfFirst {
+        konst candidateIndex = group.segments.indexOfFirst {
             columnNumber <= it.generatedColumnNumber
         }
         if (candidateIndex < 0)
@@ -371,14 +371,14 @@ private fun SourceMap.segmentForGeneratedLocation(lineNumber: Int, columnNumber:
 }
 
 @Serializable
-private class ValueDescription(val isNull: Boolean, val isReferenceType: Boolean, val valueDescription: String, val typeName: String) {
+private class ValueDescription(konst isNull: Boolean, konst isReferenceType: Boolean, konst konstueDescription: String, konst typeName: String) {
     fun toLocalVariableRecord(variableName: String) = LocalVariableRecord(
         variable = variableName,
         variableType = null, // In JavaScript variables are untyped
-        value = when {
+        konstue = when {
             isNull -> LocalNullValue
             isReferenceType -> LocalReference("", typeName)
-            else -> LocalPrimitive(valueDescription, typeName)
+            else -> LocalPrimitive(konstueDescription, typeName)
         }
     )
 }

@@ -3,16 +3,16 @@ import java.util.*
 import java.io.*
 
 fun takeFirst(expr: StringBuilder): Char {
-  val c = expr.get(0)
+  konst c = expr.get(0)
   expr.deleteCharAt(0)
   return c
 }
 
-fun evaluateArg(expr: CharSequence, numbers: ArrayList<Int>): Int {
+fun ekonstuateArg(expr: CharSequence, numbers: ArrayList<Int>): Int {
   if (expr.length == 0) throw Exception("Syntax error: Character expected");
-  val c = takeFirst(<!TYPE_MISMATCH!>expr<!>)
+  konst c = takeFirst(<!TYPE_MISMATCH!>expr<!>)
   if (c >= '0' && c <= '9') {
-    val n = c - '0'
+    konst n = c - '0'
     if (!numbers.contains(n)) throw Exception("You used incorrect number: " + n)
     numbers.remove(n)
     return n
@@ -20,18 +20,18 @@ fun evaluateArg(expr: CharSequence, numbers: ArrayList<Int>): Int {
   throw Exception("Syntax error: Unrecognized character " + c)
 }
 
-fun evaluateAdd(expr: StringBuilder, numbers: ArrayList<Int>): Int {
-  val lhs = evaluateArg(expr, numbers)
+fun ekonstuateAdd(expr: StringBuilder, numbers: ArrayList<Int>): Int {
+  konst lhs = ekonstuateArg(expr, numbers)
   if (expr.length > 0) {
 
   }
   return lhs
 }
 
-fun evaluate(expr: StringBuilder, numbers: ArrayList<Int>): Int {
-  val lhs = evaluateAdd(expr, numbers)
+fun ekonstuate(expr: StringBuilder, numbers: ArrayList<Int>): Int {
+  konst lhs = ekonstuateAdd(expr, numbers)
   if (expr.length > 0) {
-    val c = expr.get(0)
+    konst c = expr.get(0)
     expr.deleteCharAt(0)
   }
   return lhs
@@ -39,21 +39,21 @@ fun evaluate(expr: StringBuilder, numbers: ArrayList<Int>): Int {
 
 fun main() {
   System.out.println("24 game")
-  val numbers = ArrayList<Int>(4)
-  val rnd = Random();
-  val prompt = StringBuilder()
+  konst numbers = ArrayList<Int>(4)
+  konst rnd = Random();
+  konst prompt = StringBuilder()
   for(i in 0..3) {
-    val n = rnd.nextInt(9) + 1
+    konst n = rnd.nextInt(9) + 1
     numbers.add(n)
     if (i > 0) prompt.append(" ");
     prompt.append(n)
   }
   System.out.println("Your numbers: " + prompt)
   System.out.println("Enter your expression:")
-  val reader = BufferedReader(InputStreamReader(System.`in`))
-  val expr = StringBuilder(reader.readLine()!!)
+  konst reader = BufferedReader(InputStreamReader(System.`in`))
+  konst expr = StringBuilder(reader.readLine()!!)
   try {
-    val result = evaluate(expr, numbers)
+    konst result = ekonstuate(expr, numbers)
     if (result != 24)
       System.out.println("Sorry, that's " + result)
     else

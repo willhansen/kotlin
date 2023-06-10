@@ -3,7 +3,7 @@ fun test(y: Array<in Array<String>>) {
 }
 
 fun box() : String {
-    val x : Array<Array<*>> = kotlin.arrayOf(kotlin.arrayOf(1))
+    konst x : Array<Array<*>> = kotlin.arrayOf(kotlin.arrayOf(1))
     test(x)
     return x[0][0] as String
 }

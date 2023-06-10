@@ -15,28 +15,28 @@ import org.w3c.dom.events.*
 public external interface WebGLContextAttributes : JsAny {
     var alpha: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var depth: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var stencil: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var antialias: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var premultipliedAlpha: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var preserveDrawingBuffer: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var preferLowPowerToHighPerformance: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var failIfMajorPerformanceCaveat: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -83,25 +83,25 @@ public external abstract class WebGLUniformLocation : JsAny
  * Exposes the JavaScript [WebGLActiveInfo](https://developer.mozilla.org/en/docs/Web/API/WebGLActiveInfo) to Kotlin
  */
 public external abstract class WebGLActiveInfo : JsAny {
-    open val size: Int
-    open val type: Int
-    open val name: String
+    open konst size: Int
+    open konst type: Int
+    open konst name: String
 }
 
 /**
  * Exposes the JavaScript [WebGLShaderPrecisionFormat](https://developer.mozilla.org/en/docs/Web/API/WebGLShaderPrecisionFormat) to Kotlin
  */
 public external abstract class WebGLShaderPrecisionFormat : JsAny {
-    open val rangeMin: Int
-    open val rangeMax: Int
-    open val precision: Int
+    open konst rangeMin: Int
+    open konst rangeMax: Int
+    open konst precision: Int
 }
 
 @Suppress("NESTED_CLASS_IN_EXTERNAL_INTERFACE")
 public external interface WebGLRenderingContextBase : JsAny {
-    val canvas: HTMLCanvasElement
-    val drawingBufferWidth: Int
-    val drawingBufferHeight: Int
+    konst canvas: HTMLCanvasElement
+    konst drawingBufferWidth: Int
+    konst drawingBufferHeight: Int
     fun getContextAttributes(): WebGLContextAttributes?
     fun isContextLost(): Boolean
     fun getSupportedExtensions(): JsArray<JsString>?
@@ -195,7 +195,7 @@ public external interface WebGLRenderingContextBase : JsAny {
     fun polygonOffset(factor: Float, units: Float)
     fun readPixels(x: Int, y: Int, width: Int, height: Int, format: Int, type: Int, pixels: ArrayBufferView?)
     fun renderbufferStorage(target: Int, internalformat: Int, width: Int, height: Int)
-    fun sampleCoverage(value: Float, invert: Boolean)
+    fun sampleCoverage(konstue: Float, invert: Boolean)
     fun scissor(x: Int, y: Int, width: Int, height: Int)
     fun shaderSource(shader: WebGLShader?, source: String)
     fun stencilFunc(func: Int, ref: Int, mask: Int)
@@ -234,323 +234,323 @@ public external interface WebGLRenderingContextBase : JsAny {
     fun uniform4i(location: WebGLUniformLocation?, x: Int, y: Int, z: Int, w: Int)
     fun uniform4iv(location: WebGLUniformLocation?, v: Int32Array)
     fun uniform4iv(location: WebGLUniformLocation?, v: JsArray<JsNumber>)
-    fun uniformMatrix2fv(location: WebGLUniformLocation?, transpose: Boolean, value: Float32Array)
-    fun uniformMatrix2fv(location: WebGLUniformLocation?, transpose: Boolean, value: JsArray<JsNumber>)
-    fun uniformMatrix3fv(location: WebGLUniformLocation?, transpose: Boolean, value: Float32Array)
-    fun uniformMatrix3fv(location: WebGLUniformLocation?, transpose: Boolean, value: JsArray<JsNumber>)
-    fun uniformMatrix4fv(location: WebGLUniformLocation?, transpose: Boolean, value: Float32Array)
-    fun uniformMatrix4fv(location: WebGLUniformLocation?, transpose: Boolean, value: JsArray<JsNumber>)
+    fun uniformMatrix2fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: Float32Array)
+    fun uniformMatrix2fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: JsArray<JsNumber>)
+    fun uniformMatrix3fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: Float32Array)
+    fun uniformMatrix3fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: JsArray<JsNumber>)
+    fun uniformMatrix4fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: Float32Array)
+    fun uniformMatrix4fv(location: WebGLUniformLocation?, transpose: Boolean, konstue: JsArray<JsNumber>)
     fun useProgram(program: WebGLProgram?)
-    fun validateProgram(program: WebGLProgram?)
+    fun konstidateProgram(program: WebGLProgram?)
     fun vertexAttrib1f(index: Int, x: Float)
-    fun vertexAttrib1fv(index: Int, values: JsAny?)
+    fun vertexAttrib1fv(index: Int, konstues: JsAny?)
     fun vertexAttrib2f(index: Int, x: Float, y: Float)
-    fun vertexAttrib2fv(index: Int, values: JsAny?)
+    fun vertexAttrib2fv(index: Int, konstues: JsAny?)
     fun vertexAttrib3f(index: Int, x: Float, y: Float, z: Float)
-    fun vertexAttrib3fv(index: Int, values: JsAny?)
+    fun vertexAttrib3fv(index: Int, konstues: JsAny?)
     fun vertexAttrib4f(index: Int, x: Float, y: Float, z: Float, w: Float)
-    fun vertexAttrib4fv(index: Int, values: JsAny?)
+    fun vertexAttrib4fv(index: Int, konstues: JsAny?)
     fun vertexAttribPointer(index: Int, size: Int, type: Int, normalized: Boolean, stride: Int, offset: Int)
     fun viewport(x: Int, y: Int, width: Int, height: Int)
 
     companion object {
-        val DEPTH_BUFFER_BIT: Int
-        val STENCIL_BUFFER_BIT: Int
-        val COLOR_BUFFER_BIT: Int
-        val POINTS: Int
-        val LINES: Int
-        val LINE_LOOP: Int
-        val LINE_STRIP: Int
-        val TRIANGLES: Int
-        val TRIANGLE_STRIP: Int
-        val TRIANGLE_FAN: Int
-        val ZERO: Int
-        val ONE: Int
-        val SRC_COLOR: Int
-        val ONE_MINUS_SRC_COLOR: Int
-        val SRC_ALPHA: Int
-        val ONE_MINUS_SRC_ALPHA: Int
-        val DST_ALPHA: Int
-        val ONE_MINUS_DST_ALPHA: Int
-        val DST_COLOR: Int
-        val ONE_MINUS_DST_COLOR: Int
-        val SRC_ALPHA_SATURATE: Int
-        val FUNC_ADD: Int
-        val BLEND_EQUATION: Int
-        val BLEND_EQUATION_RGB: Int
-        val BLEND_EQUATION_ALPHA: Int
-        val FUNC_SUBTRACT: Int
-        val FUNC_REVERSE_SUBTRACT: Int
-        val BLEND_DST_RGB: Int
-        val BLEND_SRC_RGB: Int
-        val BLEND_DST_ALPHA: Int
-        val BLEND_SRC_ALPHA: Int
-        val CONSTANT_COLOR: Int
-        val ONE_MINUS_CONSTANT_COLOR: Int
-        val CONSTANT_ALPHA: Int
-        val ONE_MINUS_CONSTANT_ALPHA: Int
-        val BLEND_COLOR: Int
-        val ARRAY_BUFFER: Int
-        val ELEMENT_ARRAY_BUFFER: Int
-        val ARRAY_BUFFER_BINDING: Int
-        val ELEMENT_ARRAY_BUFFER_BINDING: Int
-        val STREAM_DRAW: Int
-        val STATIC_DRAW: Int
-        val DYNAMIC_DRAW: Int
-        val BUFFER_SIZE: Int
-        val BUFFER_USAGE: Int
-        val CURRENT_VERTEX_ATTRIB: Int
-        val FRONT: Int
-        val BACK: Int
-        val FRONT_AND_BACK: Int
-        val CULL_FACE: Int
-        val BLEND: Int
-        val DITHER: Int
-        val STENCIL_TEST: Int
-        val DEPTH_TEST: Int
-        val SCISSOR_TEST: Int
-        val POLYGON_OFFSET_FILL: Int
-        val SAMPLE_ALPHA_TO_COVERAGE: Int
-        val SAMPLE_COVERAGE: Int
-        val NO_ERROR: Int
-        val INVALID_ENUM: Int
-        val INVALID_VALUE: Int
-        val INVALID_OPERATION: Int
-        val OUT_OF_MEMORY: Int
-        val CW: Int
-        val CCW: Int
-        val LINE_WIDTH: Int
-        val ALIASED_POINT_SIZE_RANGE: Int
-        val ALIASED_LINE_WIDTH_RANGE: Int
-        val CULL_FACE_MODE: Int
-        val FRONT_FACE: Int
-        val DEPTH_RANGE: Int
-        val DEPTH_WRITEMASK: Int
-        val DEPTH_CLEAR_VALUE: Int
-        val DEPTH_FUNC: Int
-        val STENCIL_CLEAR_VALUE: Int
-        val STENCIL_FUNC: Int
-        val STENCIL_FAIL: Int
-        val STENCIL_PASS_DEPTH_FAIL: Int
-        val STENCIL_PASS_DEPTH_PASS: Int
-        val STENCIL_REF: Int
-        val STENCIL_VALUE_MASK: Int
-        val STENCIL_WRITEMASK: Int
-        val STENCIL_BACK_FUNC: Int
-        val STENCIL_BACK_FAIL: Int
-        val STENCIL_BACK_PASS_DEPTH_FAIL: Int
-        val STENCIL_BACK_PASS_DEPTH_PASS: Int
-        val STENCIL_BACK_REF: Int
-        val STENCIL_BACK_VALUE_MASK: Int
-        val STENCIL_BACK_WRITEMASK: Int
-        val VIEWPORT: Int
-        val SCISSOR_BOX: Int
-        val COLOR_CLEAR_VALUE: Int
-        val COLOR_WRITEMASK: Int
-        val UNPACK_ALIGNMENT: Int
-        val PACK_ALIGNMENT: Int
-        val MAX_TEXTURE_SIZE: Int
-        val MAX_VIEWPORT_DIMS: Int
-        val SUBPIXEL_BITS: Int
-        val RED_BITS: Int
-        val GREEN_BITS: Int
-        val BLUE_BITS: Int
-        val ALPHA_BITS: Int
-        val DEPTH_BITS: Int
-        val STENCIL_BITS: Int
-        val POLYGON_OFFSET_UNITS: Int
-        val POLYGON_OFFSET_FACTOR: Int
-        val TEXTURE_BINDING_2D: Int
-        val SAMPLE_BUFFERS: Int
-        val SAMPLES: Int
-        val SAMPLE_COVERAGE_VALUE: Int
-        val SAMPLE_COVERAGE_INVERT: Int
-        val COMPRESSED_TEXTURE_FORMATS: Int
-        val DONT_CARE: Int
-        val FASTEST: Int
-        val NICEST: Int
-        val GENERATE_MIPMAP_HINT: Int
-        val BYTE: Int
-        val UNSIGNED_BYTE: Int
-        val SHORT: Int
-        val UNSIGNED_SHORT: Int
-        val INT: Int
-        val UNSIGNED_INT: Int
-        val FLOAT: Int
-        val DEPTH_COMPONENT: Int
-        val ALPHA: Int
-        val RGB: Int
-        val RGBA: Int
-        val LUMINANCE: Int
-        val LUMINANCE_ALPHA: Int
-        val UNSIGNED_SHORT_4_4_4_4: Int
-        val UNSIGNED_SHORT_5_5_5_1: Int
-        val UNSIGNED_SHORT_5_6_5: Int
-        val FRAGMENT_SHADER: Int
-        val VERTEX_SHADER: Int
-        val MAX_VERTEX_ATTRIBS: Int
-        val MAX_VERTEX_UNIFORM_VECTORS: Int
-        val MAX_VARYING_VECTORS: Int
-        val MAX_COMBINED_TEXTURE_IMAGE_UNITS: Int
-        val MAX_VERTEX_TEXTURE_IMAGE_UNITS: Int
-        val MAX_TEXTURE_IMAGE_UNITS: Int
-        val MAX_FRAGMENT_UNIFORM_VECTORS: Int
-        val SHADER_TYPE: Int
-        val DELETE_STATUS: Int
-        val LINK_STATUS: Int
-        val VALIDATE_STATUS: Int
-        val ATTACHED_SHADERS: Int
-        val ACTIVE_UNIFORMS: Int
-        val ACTIVE_ATTRIBUTES: Int
-        val SHADING_LANGUAGE_VERSION: Int
-        val CURRENT_PROGRAM: Int
-        val NEVER: Int
-        val LESS: Int
-        val EQUAL: Int
-        val LEQUAL: Int
-        val GREATER: Int
-        val NOTEQUAL: Int
-        val GEQUAL: Int
-        val ALWAYS: Int
-        val KEEP: Int
-        val REPLACE: Int
-        val INCR: Int
-        val DECR: Int
-        val INVERT: Int
-        val INCR_WRAP: Int
-        val DECR_WRAP: Int
-        val VENDOR: Int
-        val RENDERER: Int
-        val VERSION: Int
-        val NEAREST: Int
-        val LINEAR: Int
-        val NEAREST_MIPMAP_NEAREST: Int
-        val LINEAR_MIPMAP_NEAREST: Int
-        val NEAREST_MIPMAP_LINEAR: Int
-        val LINEAR_MIPMAP_LINEAR: Int
-        val TEXTURE_MAG_FILTER: Int
-        val TEXTURE_MIN_FILTER: Int
-        val TEXTURE_WRAP_S: Int
-        val TEXTURE_WRAP_T: Int
-        val TEXTURE_2D: Int
-        val TEXTURE: Int
-        val TEXTURE_CUBE_MAP: Int
-        val TEXTURE_BINDING_CUBE_MAP: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_X: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_X: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_Y: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_Y: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_Z: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_Z: Int
-        val MAX_CUBE_MAP_TEXTURE_SIZE: Int
-        val TEXTURE0: Int
-        val TEXTURE1: Int
-        val TEXTURE2: Int
-        val TEXTURE3: Int
-        val TEXTURE4: Int
-        val TEXTURE5: Int
-        val TEXTURE6: Int
-        val TEXTURE7: Int
-        val TEXTURE8: Int
-        val TEXTURE9: Int
-        val TEXTURE10: Int
-        val TEXTURE11: Int
-        val TEXTURE12: Int
-        val TEXTURE13: Int
-        val TEXTURE14: Int
-        val TEXTURE15: Int
-        val TEXTURE16: Int
-        val TEXTURE17: Int
-        val TEXTURE18: Int
-        val TEXTURE19: Int
-        val TEXTURE20: Int
-        val TEXTURE21: Int
-        val TEXTURE22: Int
-        val TEXTURE23: Int
-        val TEXTURE24: Int
-        val TEXTURE25: Int
-        val TEXTURE26: Int
-        val TEXTURE27: Int
-        val TEXTURE28: Int
-        val TEXTURE29: Int
-        val TEXTURE30: Int
-        val TEXTURE31: Int
-        val ACTIVE_TEXTURE: Int
-        val REPEAT: Int
-        val CLAMP_TO_EDGE: Int
-        val MIRRORED_REPEAT: Int
-        val FLOAT_VEC2: Int
-        val FLOAT_VEC3: Int
-        val FLOAT_VEC4: Int
-        val INT_VEC2: Int
-        val INT_VEC3: Int
-        val INT_VEC4: Int
-        val BOOL: Int
-        val BOOL_VEC2: Int
-        val BOOL_VEC3: Int
-        val BOOL_VEC4: Int
-        val FLOAT_MAT2: Int
-        val FLOAT_MAT3: Int
-        val FLOAT_MAT4: Int
-        val SAMPLER_2D: Int
-        val SAMPLER_CUBE: Int
-        val VERTEX_ATTRIB_ARRAY_ENABLED: Int
-        val VERTEX_ATTRIB_ARRAY_SIZE: Int
-        val VERTEX_ATTRIB_ARRAY_STRIDE: Int
-        val VERTEX_ATTRIB_ARRAY_TYPE: Int
-        val VERTEX_ATTRIB_ARRAY_NORMALIZED: Int
-        val VERTEX_ATTRIB_ARRAY_POINTER: Int
-        val VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: Int
-        val IMPLEMENTATION_COLOR_READ_TYPE: Int
-        val IMPLEMENTATION_COLOR_READ_FORMAT: Int
-        val COMPILE_STATUS: Int
-        val LOW_FLOAT: Int
-        val MEDIUM_FLOAT: Int
-        val HIGH_FLOAT: Int
-        val LOW_INT: Int
-        val MEDIUM_INT: Int
-        val HIGH_INT: Int
-        val FRAMEBUFFER: Int
-        val RENDERBUFFER: Int
-        val RGBA4: Int
-        val RGB5_A1: Int
-        val RGB565: Int
-        val DEPTH_COMPONENT16: Int
-        val STENCIL_INDEX: Int
-        val STENCIL_INDEX8: Int
-        val DEPTH_STENCIL: Int
-        val RENDERBUFFER_WIDTH: Int
-        val RENDERBUFFER_HEIGHT: Int
-        val RENDERBUFFER_INTERNAL_FORMAT: Int
-        val RENDERBUFFER_RED_SIZE: Int
-        val RENDERBUFFER_GREEN_SIZE: Int
-        val RENDERBUFFER_BLUE_SIZE: Int
-        val RENDERBUFFER_ALPHA_SIZE: Int
-        val RENDERBUFFER_DEPTH_SIZE: Int
-        val RENDERBUFFER_STENCIL_SIZE: Int
-        val FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: Int
-        val FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: Int
-        val FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: Int
-        val FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: Int
-        val COLOR_ATTACHMENT0: Int
-        val DEPTH_ATTACHMENT: Int
-        val STENCIL_ATTACHMENT: Int
-        val DEPTH_STENCIL_ATTACHMENT: Int
-        val NONE: Int
-        val FRAMEBUFFER_COMPLETE: Int
-        val FRAMEBUFFER_INCOMPLETE_ATTACHMENT: Int
-        val FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: Int
-        val FRAMEBUFFER_INCOMPLETE_DIMENSIONS: Int
-        val FRAMEBUFFER_UNSUPPORTED: Int
-        val FRAMEBUFFER_BINDING: Int
-        val RENDERBUFFER_BINDING: Int
-        val MAX_RENDERBUFFER_SIZE: Int
-        val INVALID_FRAMEBUFFER_OPERATION: Int
-        val UNPACK_FLIP_Y_WEBGL: Int
-        val UNPACK_PREMULTIPLY_ALPHA_WEBGL: Int
-        val CONTEXT_LOST_WEBGL: Int
-        val UNPACK_COLORSPACE_CONVERSION_WEBGL: Int
-        val BROWSER_DEFAULT_WEBGL: Int
+        konst DEPTH_BUFFER_BIT: Int
+        konst STENCIL_BUFFER_BIT: Int
+        konst COLOR_BUFFER_BIT: Int
+        konst POINTS: Int
+        konst LINES: Int
+        konst LINE_LOOP: Int
+        konst LINE_STRIP: Int
+        konst TRIANGLES: Int
+        konst TRIANGLE_STRIP: Int
+        konst TRIANGLE_FAN: Int
+        konst ZERO: Int
+        konst ONE: Int
+        konst SRC_COLOR: Int
+        konst ONE_MINUS_SRC_COLOR: Int
+        konst SRC_ALPHA: Int
+        konst ONE_MINUS_SRC_ALPHA: Int
+        konst DST_ALPHA: Int
+        konst ONE_MINUS_DST_ALPHA: Int
+        konst DST_COLOR: Int
+        konst ONE_MINUS_DST_COLOR: Int
+        konst SRC_ALPHA_SATURATE: Int
+        konst FUNC_ADD: Int
+        konst BLEND_EQUATION: Int
+        konst BLEND_EQUATION_RGB: Int
+        konst BLEND_EQUATION_ALPHA: Int
+        konst FUNC_SUBTRACT: Int
+        konst FUNC_REVERSE_SUBTRACT: Int
+        konst BLEND_DST_RGB: Int
+        konst BLEND_SRC_RGB: Int
+        konst BLEND_DST_ALPHA: Int
+        konst BLEND_SRC_ALPHA: Int
+        konst CONSTANT_COLOR: Int
+        konst ONE_MINUS_CONSTANT_COLOR: Int
+        konst CONSTANT_ALPHA: Int
+        konst ONE_MINUS_CONSTANT_ALPHA: Int
+        konst BLEND_COLOR: Int
+        konst ARRAY_BUFFER: Int
+        konst ELEMENT_ARRAY_BUFFER: Int
+        konst ARRAY_BUFFER_BINDING: Int
+        konst ELEMENT_ARRAY_BUFFER_BINDING: Int
+        konst STREAM_DRAW: Int
+        konst STATIC_DRAW: Int
+        konst DYNAMIC_DRAW: Int
+        konst BUFFER_SIZE: Int
+        konst BUFFER_USAGE: Int
+        konst CURRENT_VERTEX_ATTRIB: Int
+        konst FRONT: Int
+        konst BACK: Int
+        konst FRONT_AND_BACK: Int
+        konst CULL_FACE: Int
+        konst BLEND: Int
+        konst DITHER: Int
+        konst STENCIL_TEST: Int
+        konst DEPTH_TEST: Int
+        konst SCISSOR_TEST: Int
+        konst POLYGON_OFFSET_FILL: Int
+        konst SAMPLE_ALPHA_TO_COVERAGE: Int
+        konst SAMPLE_COVERAGE: Int
+        konst NO_ERROR: Int
+        konst INVALID_ENUM: Int
+        konst INVALID_VALUE: Int
+        konst INVALID_OPERATION: Int
+        konst OUT_OF_MEMORY: Int
+        konst CW: Int
+        konst CCW: Int
+        konst LINE_WIDTH: Int
+        konst ALIASED_POINT_SIZE_RANGE: Int
+        konst ALIASED_LINE_WIDTH_RANGE: Int
+        konst CULL_FACE_MODE: Int
+        konst FRONT_FACE: Int
+        konst DEPTH_RANGE: Int
+        konst DEPTH_WRITEMASK: Int
+        konst DEPTH_CLEAR_VALUE: Int
+        konst DEPTH_FUNC: Int
+        konst STENCIL_CLEAR_VALUE: Int
+        konst STENCIL_FUNC: Int
+        konst STENCIL_FAIL: Int
+        konst STENCIL_PASS_DEPTH_FAIL: Int
+        konst STENCIL_PASS_DEPTH_PASS: Int
+        konst STENCIL_REF: Int
+        konst STENCIL_VALUE_MASK: Int
+        konst STENCIL_WRITEMASK: Int
+        konst STENCIL_BACK_FUNC: Int
+        konst STENCIL_BACK_FAIL: Int
+        konst STENCIL_BACK_PASS_DEPTH_FAIL: Int
+        konst STENCIL_BACK_PASS_DEPTH_PASS: Int
+        konst STENCIL_BACK_REF: Int
+        konst STENCIL_BACK_VALUE_MASK: Int
+        konst STENCIL_BACK_WRITEMASK: Int
+        konst VIEWPORT: Int
+        konst SCISSOR_BOX: Int
+        konst COLOR_CLEAR_VALUE: Int
+        konst COLOR_WRITEMASK: Int
+        konst UNPACK_ALIGNMENT: Int
+        konst PACK_ALIGNMENT: Int
+        konst MAX_TEXTURE_SIZE: Int
+        konst MAX_VIEWPORT_DIMS: Int
+        konst SUBPIXEL_BITS: Int
+        konst RED_BITS: Int
+        konst GREEN_BITS: Int
+        konst BLUE_BITS: Int
+        konst ALPHA_BITS: Int
+        konst DEPTH_BITS: Int
+        konst STENCIL_BITS: Int
+        konst POLYGON_OFFSET_UNITS: Int
+        konst POLYGON_OFFSET_FACTOR: Int
+        konst TEXTURE_BINDING_2D: Int
+        konst SAMPLE_BUFFERS: Int
+        konst SAMPLES: Int
+        konst SAMPLE_COVERAGE_VALUE: Int
+        konst SAMPLE_COVERAGE_INVERT: Int
+        konst COMPRESSED_TEXTURE_FORMATS: Int
+        konst DONT_CARE: Int
+        konst FASTEST: Int
+        konst NICEST: Int
+        konst GENERATE_MIPMAP_HINT: Int
+        konst BYTE: Int
+        konst UNSIGNED_BYTE: Int
+        konst SHORT: Int
+        konst UNSIGNED_SHORT: Int
+        konst INT: Int
+        konst UNSIGNED_INT: Int
+        konst FLOAT: Int
+        konst DEPTH_COMPONENT: Int
+        konst ALPHA: Int
+        konst RGB: Int
+        konst RGBA: Int
+        konst LUMINANCE: Int
+        konst LUMINANCE_ALPHA: Int
+        konst UNSIGNED_SHORT_4_4_4_4: Int
+        konst UNSIGNED_SHORT_5_5_5_1: Int
+        konst UNSIGNED_SHORT_5_6_5: Int
+        konst FRAGMENT_SHADER: Int
+        konst VERTEX_SHADER: Int
+        konst MAX_VERTEX_ATTRIBS: Int
+        konst MAX_VERTEX_UNIFORM_VECTORS: Int
+        konst MAX_VARYING_VECTORS: Int
+        konst MAX_COMBINED_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_VERTEX_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_FRAGMENT_UNIFORM_VECTORS: Int
+        konst SHADER_TYPE: Int
+        konst DELETE_STATUS: Int
+        konst LINK_STATUS: Int
+        konst VALIDATE_STATUS: Int
+        konst ATTACHED_SHADERS: Int
+        konst ACTIVE_UNIFORMS: Int
+        konst ACTIVE_ATTRIBUTES: Int
+        konst SHADING_LANGUAGE_VERSION: Int
+        konst CURRENT_PROGRAM: Int
+        konst NEVER: Int
+        konst LESS: Int
+        konst EQUAL: Int
+        konst LEQUAL: Int
+        konst GREATER: Int
+        konst NOTEQUAL: Int
+        konst GEQUAL: Int
+        konst ALWAYS: Int
+        konst KEEP: Int
+        konst REPLACE: Int
+        konst INCR: Int
+        konst DECR: Int
+        konst INVERT: Int
+        konst INCR_WRAP: Int
+        konst DECR_WRAP: Int
+        konst VENDOR: Int
+        konst RENDERER: Int
+        konst VERSION: Int
+        konst NEAREST: Int
+        konst LINEAR: Int
+        konst NEAREST_MIPMAP_NEAREST: Int
+        konst LINEAR_MIPMAP_NEAREST: Int
+        konst NEAREST_MIPMAP_LINEAR: Int
+        konst LINEAR_MIPMAP_LINEAR: Int
+        konst TEXTURE_MAG_FILTER: Int
+        konst TEXTURE_MIN_FILTER: Int
+        konst TEXTURE_WRAP_S: Int
+        konst TEXTURE_WRAP_T: Int
+        konst TEXTURE_2D: Int
+        konst TEXTURE: Int
+        konst TEXTURE_CUBE_MAP: Int
+        konst TEXTURE_BINDING_CUBE_MAP: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_X: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_X: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_Y: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_Y: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_Z: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_Z: Int
+        konst MAX_CUBE_MAP_TEXTURE_SIZE: Int
+        konst TEXTURE0: Int
+        konst TEXTURE1: Int
+        konst TEXTURE2: Int
+        konst TEXTURE3: Int
+        konst TEXTURE4: Int
+        konst TEXTURE5: Int
+        konst TEXTURE6: Int
+        konst TEXTURE7: Int
+        konst TEXTURE8: Int
+        konst TEXTURE9: Int
+        konst TEXTURE10: Int
+        konst TEXTURE11: Int
+        konst TEXTURE12: Int
+        konst TEXTURE13: Int
+        konst TEXTURE14: Int
+        konst TEXTURE15: Int
+        konst TEXTURE16: Int
+        konst TEXTURE17: Int
+        konst TEXTURE18: Int
+        konst TEXTURE19: Int
+        konst TEXTURE20: Int
+        konst TEXTURE21: Int
+        konst TEXTURE22: Int
+        konst TEXTURE23: Int
+        konst TEXTURE24: Int
+        konst TEXTURE25: Int
+        konst TEXTURE26: Int
+        konst TEXTURE27: Int
+        konst TEXTURE28: Int
+        konst TEXTURE29: Int
+        konst TEXTURE30: Int
+        konst TEXTURE31: Int
+        konst ACTIVE_TEXTURE: Int
+        konst REPEAT: Int
+        konst CLAMP_TO_EDGE: Int
+        konst MIRRORED_REPEAT: Int
+        konst FLOAT_VEC2: Int
+        konst FLOAT_VEC3: Int
+        konst FLOAT_VEC4: Int
+        konst INT_VEC2: Int
+        konst INT_VEC3: Int
+        konst INT_VEC4: Int
+        konst BOOL: Int
+        konst BOOL_VEC2: Int
+        konst BOOL_VEC3: Int
+        konst BOOL_VEC4: Int
+        konst FLOAT_MAT2: Int
+        konst FLOAT_MAT3: Int
+        konst FLOAT_MAT4: Int
+        konst SAMPLER_2D: Int
+        konst SAMPLER_CUBE: Int
+        konst VERTEX_ATTRIB_ARRAY_ENABLED: Int
+        konst VERTEX_ATTRIB_ARRAY_SIZE: Int
+        konst VERTEX_ATTRIB_ARRAY_STRIDE: Int
+        konst VERTEX_ATTRIB_ARRAY_TYPE: Int
+        konst VERTEX_ATTRIB_ARRAY_NORMALIZED: Int
+        konst VERTEX_ATTRIB_ARRAY_POINTER: Int
+        konst VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: Int
+        konst IMPLEMENTATION_COLOR_READ_TYPE: Int
+        konst IMPLEMENTATION_COLOR_READ_FORMAT: Int
+        konst COMPILE_STATUS: Int
+        konst LOW_FLOAT: Int
+        konst MEDIUM_FLOAT: Int
+        konst HIGH_FLOAT: Int
+        konst LOW_INT: Int
+        konst MEDIUM_INT: Int
+        konst HIGH_INT: Int
+        konst FRAMEBUFFER: Int
+        konst RENDERBUFFER: Int
+        konst RGBA4: Int
+        konst RGB5_A1: Int
+        konst RGB565: Int
+        konst DEPTH_COMPONENT16: Int
+        konst STENCIL_INDEX: Int
+        konst STENCIL_INDEX8: Int
+        konst DEPTH_STENCIL: Int
+        konst RENDERBUFFER_WIDTH: Int
+        konst RENDERBUFFER_HEIGHT: Int
+        konst RENDERBUFFER_INTERNAL_FORMAT: Int
+        konst RENDERBUFFER_RED_SIZE: Int
+        konst RENDERBUFFER_GREEN_SIZE: Int
+        konst RENDERBUFFER_BLUE_SIZE: Int
+        konst RENDERBUFFER_ALPHA_SIZE: Int
+        konst RENDERBUFFER_DEPTH_SIZE: Int
+        konst RENDERBUFFER_STENCIL_SIZE: Int
+        konst FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: Int
+        konst FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: Int
+        konst FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: Int
+        konst FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: Int
+        konst COLOR_ATTACHMENT0: Int
+        konst DEPTH_ATTACHMENT: Int
+        konst STENCIL_ATTACHMENT: Int
+        konst DEPTH_STENCIL_ATTACHMENT: Int
+        konst NONE: Int
+        konst FRAMEBUFFER_COMPLETE: Int
+        konst FRAMEBUFFER_INCOMPLETE_ATTACHMENT: Int
+        konst FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: Int
+        konst FRAMEBUFFER_INCOMPLETE_DIMENSIONS: Int
+        konst FRAMEBUFFER_UNSUPPORTED: Int
+        konst FRAMEBUFFER_BINDING: Int
+        konst RENDERBUFFER_BINDING: Int
+        konst MAX_RENDERBUFFER_SIZE: Int
+        konst INVALID_FRAMEBUFFER_OPERATION: Int
+        konst UNPACK_FLIP_Y_WEBGL: Int
+        konst UNPACK_PREMULTIPLY_ALPHA_WEBGL: Int
+        konst CONTEXT_LOST_WEBGL: Int
+        konst UNPACK_COLORSPACE_CONVERSION_WEBGL: Int
+        konst BROWSER_DEFAULT_WEBGL: Int
     }
 }
 
@@ -559,303 +559,303 @@ public external interface WebGLRenderingContextBase : JsAny {
  */
 public external abstract class WebGLRenderingContext : WebGLRenderingContextBase, RenderingContext, JsAny {
     companion object {
-        val DEPTH_BUFFER_BIT: Int
-        val STENCIL_BUFFER_BIT: Int
-        val COLOR_BUFFER_BIT: Int
-        val POINTS: Int
-        val LINES: Int
-        val LINE_LOOP: Int
-        val LINE_STRIP: Int
-        val TRIANGLES: Int
-        val TRIANGLE_STRIP: Int
-        val TRIANGLE_FAN: Int
-        val ZERO: Int
-        val ONE: Int
-        val SRC_COLOR: Int
-        val ONE_MINUS_SRC_COLOR: Int
-        val SRC_ALPHA: Int
-        val ONE_MINUS_SRC_ALPHA: Int
-        val DST_ALPHA: Int
-        val ONE_MINUS_DST_ALPHA: Int
-        val DST_COLOR: Int
-        val ONE_MINUS_DST_COLOR: Int
-        val SRC_ALPHA_SATURATE: Int
-        val FUNC_ADD: Int
-        val BLEND_EQUATION: Int
-        val BLEND_EQUATION_RGB: Int
-        val BLEND_EQUATION_ALPHA: Int
-        val FUNC_SUBTRACT: Int
-        val FUNC_REVERSE_SUBTRACT: Int
-        val BLEND_DST_RGB: Int
-        val BLEND_SRC_RGB: Int
-        val BLEND_DST_ALPHA: Int
-        val BLEND_SRC_ALPHA: Int
-        val CONSTANT_COLOR: Int
-        val ONE_MINUS_CONSTANT_COLOR: Int
-        val CONSTANT_ALPHA: Int
-        val ONE_MINUS_CONSTANT_ALPHA: Int
-        val BLEND_COLOR: Int
-        val ARRAY_BUFFER: Int
-        val ELEMENT_ARRAY_BUFFER: Int
-        val ARRAY_BUFFER_BINDING: Int
-        val ELEMENT_ARRAY_BUFFER_BINDING: Int
-        val STREAM_DRAW: Int
-        val STATIC_DRAW: Int
-        val DYNAMIC_DRAW: Int
-        val BUFFER_SIZE: Int
-        val BUFFER_USAGE: Int
-        val CURRENT_VERTEX_ATTRIB: Int
-        val FRONT: Int
-        val BACK: Int
-        val FRONT_AND_BACK: Int
-        val CULL_FACE: Int
-        val BLEND: Int
-        val DITHER: Int
-        val STENCIL_TEST: Int
-        val DEPTH_TEST: Int
-        val SCISSOR_TEST: Int
-        val POLYGON_OFFSET_FILL: Int
-        val SAMPLE_ALPHA_TO_COVERAGE: Int
-        val SAMPLE_COVERAGE: Int
-        val NO_ERROR: Int
-        val INVALID_ENUM: Int
-        val INVALID_VALUE: Int
-        val INVALID_OPERATION: Int
-        val OUT_OF_MEMORY: Int
-        val CW: Int
-        val CCW: Int
-        val LINE_WIDTH: Int
-        val ALIASED_POINT_SIZE_RANGE: Int
-        val ALIASED_LINE_WIDTH_RANGE: Int
-        val CULL_FACE_MODE: Int
-        val FRONT_FACE: Int
-        val DEPTH_RANGE: Int
-        val DEPTH_WRITEMASK: Int
-        val DEPTH_CLEAR_VALUE: Int
-        val DEPTH_FUNC: Int
-        val STENCIL_CLEAR_VALUE: Int
-        val STENCIL_FUNC: Int
-        val STENCIL_FAIL: Int
-        val STENCIL_PASS_DEPTH_FAIL: Int
-        val STENCIL_PASS_DEPTH_PASS: Int
-        val STENCIL_REF: Int
-        val STENCIL_VALUE_MASK: Int
-        val STENCIL_WRITEMASK: Int
-        val STENCIL_BACK_FUNC: Int
-        val STENCIL_BACK_FAIL: Int
-        val STENCIL_BACK_PASS_DEPTH_FAIL: Int
-        val STENCIL_BACK_PASS_DEPTH_PASS: Int
-        val STENCIL_BACK_REF: Int
-        val STENCIL_BACK_VALUE_MASK: Int
-        val STENCIL_BACK_WRITEMASK: Int
-        val VIEWPORT: Int
-        val SCISSOR_BOX: Int
-        val COLOR_CLEAR_VALUE: Int
-        val COLOR_WRITEMASK: Int
-        val UNPACK_ALIGNMENT: Int
-        val PACK_ALIGNMENT: Int
-        val MAX_TEXTURE_SIZE: Int
-        val MAX_VIEWPORT_DIMS: Int
-        val SUBPIXEL_BITS: Int
-        val RED_BITS: Int
-        val GREEN_BITS: Int
-        val BLUE_BITS: Int
-        val ALPHA_BITS: Int
-        val DEPTH_BITS: Int
-        val STENCIL_BITS: Int
-        val POLYGON_OFFSET_UNITS: Int
-        val POLYGON_OFFSET_FACTOR: Int
-        val TEXTURE_BINDING_2D: Int
-        val SAMPLE_BUFFERS: Int
-        val SAMPLES: Int
-        val SAMPLE_COVERAGE_VALUE: Int
-        val SAMPLE_COVERAGE_INVERT: Int
-        val COMPRESSED_TEXTURE_FORMATS: Int
-        val DONT_CARE: Int
-        val FASTEST: Int
-        val NICEST: Int
-        val GENERATE_MIPMAP_HINT: Int
-        val BYTE: Int
-        val UNSIGNED_BYTE: Int
-        val SHORT: Int
-        val UNSIGNED_SHORT: Int
-        val INT: Int
-        val UNSIGNED_INT: Int
-        val FLOAT: Int
-        val DEPTH_COMPONENT: Int
-        val ALPHA: Int
-        val RGB: Int
-        val RGBA: Int
-        val LUMINANCE: Int
-        val LUMINANCE_ALPHA: Int
-        val UNSIGNED_SHORT_4_4_4_4: Int
-        val UNSIGNED_SHORT_5_5_5_1: Int
-        val UNSIGNED_SHORT_5_6_5: Int
-        val FRAGMENT_SHADER: Int
-        val VERTEX_SHADER: Int
-        val MAX_VERTEX_ATTRIBS: Int
-        val MAX_VERTEX_UNIFORM_VECTORS: Int
-        val MAX_VARYING_VECTORS: Int
-        val MAX_COMBINED_TEXTURE_IMAGE_UNITS: Int
-        val MAX_VERTEX_TEXTURE_IMAGE_UNITS: Int
-        val MAX_TEXTURE_IMAGE_UNITS: Int
-        val MAX_FRAGMENT_UNIFORM_VECTORS: Int
-        val SHADER_TYPE: Int
-        val DELETE_STATUS: Int
-        val LINK_STATUS: Int
-        val VALIDATE_STATUS: Int
-        val ATTACHED_SHADERS: Int
-        val ACTIVE_UNIFORMS: Int
-        val ACTIVE_ATTRIBUTES: Int
-        val SHADING_LANGUAGE_VERSION: Int
-        val CURRENT_PROGRAM: Int
-        val NEVER: Int
-        val LESS: Int
-        val EQUAL: Int
-        val LEQUAL: Int
-        val GREATER: Int
-        val NOTEQUAL: Int
-        val GEQUAL: Int
-        val ALWAYS: Int
-        val KEEP: Int
-        val REPLACE: Int
-        val INCR: Int
-        val DECR: Int
-        val INVERT: Int
-        val INCR_WRAP: Int
-        val DECR_WRAP: Int
-        val VENDOR: Int
-        val RENDERER: Int
-        val VERSION: Int
-        val NEAREST: Int
-        val LINEAR: Int
-        val NEAREST_MIPMAP_NEAREST: Int
-        val LINEAR_MIPMAP_NEAREST: Int
-        val NEAREST_MIPMAP_LINEAR: Int
-        val LINEAR_MIPMAP_LINEAR: Int
-        val TEXTURE_MAG_FILTER: Int
-        val TEXTURE_MIN_FILTER: Int
-        val TEXTURE_WRAP_S: Int
-        val TEXTURE_WRAP_T: Int
-        val TEXTURE_2D: Int
-        val TEXTURE: Int
-        val TEXTURE_CUBE_MAP: Int
-        val TEXTURE_BINDING_CUBE_MAP: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_X: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_X: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_Y: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_Y: Int
-        val TEXTURE_CUBE_MAP_POSITIVE_Z: Int
-        val TEXTURE_CUBE_MAP_NEGATIVE_Z: Int
-        val MAX_CUBE_MAP_TEXTURE_SIZE: Int
-        val TEXTURE0: Int
-        val TEXTURE1: Int
-        val TEXTURE2: Int
-        val TEXTURE3: Int
-        val TEXTURE4: Int
-        val TEXTURE5: Int
-        val TEXTURE6: Int
-        val TEXTURE7: Int
-        val TEXTURE8: Int
-        val TEXTURE9: Int
-        val TEXTURE10: Int
-        val TEXTURE11: Int
-        val TEXTURE12: Int
-        val TEXTURE13: Int
-        val TEXTURE14: Int
-        val TEXTURE15: Int
-        val TEXTURE16: Int
-        val TEXTURE17: Int
-        val TEXTURE18: Int
-        val TEXTURE19: Int
-        val TEXTURE20: Int
-        val TEXTURE21: Int
-        val TEXTURE22: Int
-        val TEXTURE23: Int
-        val TEXTURE24: Int
-        val TEXTURE25: Int
-        val TEXTURE26: Int
-        val TEXTURE27: Int
-        val TEXTURE28: Int
-        val TEXTURE29: Int
-        val TEXTURE30: Int
-        val TEXTURE31: Int
-        val ACTIVE_TEXTURE: Int
-        val REPEAT: Int
-        val CLAMP_TO_EDGE: Int
-        val MIRRORED_REPEAT: Int
-        val FLOAT_VEC2: Int
-        val FLOAT_VEC3: Int
-        val FLOAT_VEC4: Int
-        val INT_VEC2: Int
-        val INT_VEC3: Int
-        val INT_VEC4: Int
-        val BOOL: Int
-        val BOOL_VEC2: Int
-        val BOOL_VEC3: Int
-        val BOOL_VEC4: Int
-        val FLOAT_MAT2: Int
-        val FLOAT_MAT3: Int
-        val FLOAT_MAT4: Int
-        val SAMPLER_2D: Int
-        val SAMPLER_CUBE: Int
-        val VERTEX_ATTRIB_ARRAY_ENABLED: Int
-        val VERTEX_ATTRIB_ARRAY_SIZE: Int
-        val VERTEX_ATTRIB_ARRAY_STRIDE: Int
-        val VERTEX_ATTRIB_ARRAY_TYPE: Int
-        val VERTEX_ATTRIB_ARRAY_NORMALIZED: Int
-        val VERTEX_ATTRIB_ARRAY_POINTER: Int
-        val VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: Int
-        val IMPLEMENTATION_COLOR_READ_TYPE: Int
-        val IMPLEMENTATION_COLOR_READ_FORMAT: Int
-        val COMPILE_STATUS: Int
-        val LOW_FLOAT: Int
-        val MEDIUM_FLOAT: Int
-        val HIGH_FLOAT: Int
-        val LOW_INT: Int
-        val MEDIUM_INT: Int
-        val HIGH_INT: Int
-        val FRAMEBUFFER: Int
-        val RENDERBUFFER: Int
-        val RGBA4: Int
-        val RGB5_A1: Int
-        val RGB565: Int
-        val DEPTH_COMPONENT16: Int
-        val STENCIL_INDEX: Int
-        val STENCIL_INDEX8: Int
-        val DEPTH_STENCIL: Int
-        val RENDERBUFFER_WIDTH: Int
-        val RENDERBUFFER_HEIGHT: Int
-        val RENDERBUFFER_INTERNAL_FORMAT: Int
-        val RENDERBUFFER_RED_SIZE: Int
-        val RENDERBUFFER_GREEN_SIZE: Int
-        val RENDERBUFFER_BLUE_SIZE: Int
-        val RENDERBUFFER_ALPHA_SIZE: Int
-        val RENDERBUFFER_DEPTH_SIZE: Int
-        val RENDERBUFFER_STENCIL_SIZE: Int
-        val FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: Int
-        val FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: Int
-        val FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: Int
-        val FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: Int
-        val COLOR_ATTACHMENT0: Int
-        val DEPTH_ATTACHMENT: Int
-        val STENCIL_ATTACHMENT: Int
-        val DEPTH_STENCIL_ATTACHMENT: Int
-        val NONE: Int
-        val FRAMEBUFFER_COMPLETE: Int
-        val FRAMEBUFFER_INCOMPLETE_ATTACHMENT: Int
-        val FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: Int
-        val FRAMEBUFFER_INCOMPLETE_DIMENSIONS: Int
-        val FRAMEBUFFER_UNSUPPORTED: Int
-        val FRAMEBUFFER_BINDING: Int
-        val RENDERBUFFER_BINDING: Int
-        val MAX_RENDERBUFFER_SIZE: Int
-        val INVALID_FRAMEBUFFER_OPERATION: Int
-        val UNPACK_FLIP_Y_WEBGL: Int
-        val UNPACK_PREMULTIPLY_ALPHA_WEBGL: Int
-        val CONTEXT_LOST_WEBGL: Int
-        val UNPACK_COLORSPACE_CONVERSION_WEBGL: Int
-        val BROWSER_DEFAULT_WEBGL: Int
+        konst DEPTH_BUFFER_BIT: Int
+        konst STENCIL_BUFFER_BIT: Int
+        konst COLOR_BUFFER_BIT: Int
+        konst POINTS: Int
+        konst LINES: Int
+        konst LINE_LOOP: Int
+        konst LINE_STRIP: Int
+        konst TRIANGLES: Int
+        konst TRIANGLE_STRIP: Int
+        konst TRIANGLE_FAN: Int
+        konst ZERO: Int
+        konst ONE: Int
+        konst SRC_COLOR: Int
+        konst ONE_MINUS_SRC_COLOR: Int
+        konst SRC_ALPHA: Int
+        konst ONE_MINUS_SRC_ALPHA: Int
+        konst DST_ALPHA: Int
+        konst ONE_MINUS_DST_ALPHA: Int
+        konst DST_COLOR: Int
+        konst ONE_MINUS_DST_COLOR: Int
+        konst SRC_ALPHA_SATURATE: Int
+        konst FUNC_ADD: Int
+        konst BLEND_EQUATION: Int
+        konst BLEND_EQUATION_RGB: Int
+        konst BLEND_EQUATION_ALPHA: Int
+        konst FUNC_SUBTRACT: Int
+        konst FUNC_REVERSE_SUBTRACT: Int
+        konst BLEND_DST_RGB: Int
+        konst BLEND_SRC_RGB: Int
+        konst BLEND_DST_ALPHA: Int
+        konst BLEND_SRC_ALPHA: Int
+        konst CONSTANT_COLOR: Int
+        konst ONE_MINUS_CONSTANT_COLOR: Int
+        konst CONSTANT_ALPHA: Int
+        konst ONE_MINUS_CONSTANT_ALPHA: Int
+        konst BLEND_COLOR: Int
+        konst ARRAY_BUFFER: Int
+        konst ELEMENT_ARRAY_BUFFER: Int
+        konst ARRAY_BUFFER_BINDING: Int
+        konst ELEMENT_ARRAY_BUFFER_BINDING: Int
+        konst STREAM_DRAW: Int
+        konst STATIC_DRAW: Int
+        konst DYNAMIC_DRAW: Int
+        konst BUFFER_SIZE: Int
+        konst BUFFER_USAGE: Int
+        konst CURRENT_VERTEX_ATTRIB: Int
+        konst FRONT: Int
+        konst BACK: Int
+        konst FRONT_AND_BACK: Int
+        konst CULL_FACE: Int
+        konst BLEND: Int
+        konst DITHER: Int
+        konst STENCIL_TEST: Int
+        konst DEPTH_TEST: Int
+        konst SCISSOR_TEST: Int
+        konst POLYGON_OFFSET_FILL: Int
+        konst SAMPLE_ALPHA_TO_COVERAGE: Int
+        konst SAMPLE_COVERAGE: Int
+        konst NO_ERROR: Int
+        konst INVALID_ENUM: Int
+        konst INVALID_VALUE: Int
+        konst INVALID_OPERATION: Int
+        konst OUT_OF_MEMORY: Int
+        konst CW: Int
+        konst CCW: Int
+        konst LINE_WIDTH: Int
+        konst ALIASED_POINT_SIZE_RANGE: Int
+        konst ALIASED_LINE_WIDTH_RANGE: Int
+        konst CULL_FACE_MODE: Int
+        konst FRONT_FACE: Int
+        konst DEPTH_RANGE: Int
+        konst DEPTH_WRITEMASK: Int
+        konst DEPTH_CLEAR_VALUE: Int
+        konst DEPTH_FUNC: Int
+        konst STENCIL_CLEAR_VALUE: Int
+        konst STENCIL_FUNC: Int
+        konst STENCIL_FAIL: Int
+        konst STENCIL_PASS_DEPTH_FAIL: Int
+        konst STENCIL_PASS_DEPTH_PASS: Int
+        konst STENCIL_REF: Int
+        konst STENCIL_VALUE_MASK: Int
+        konst STENCIL_WRITEMASK: Int
+        konst STENCIL_BACK_FUNC: Int
+        konst STENCIL_BACK_FAIL: Int
+        konst STENCIL_BACK_PASS_DEPTH_FAIL: Int
+        konst STENCIL_BACK_PASS_DEPTH_PASS: Int
+        konst STENCIL_BACK_REF: Int
+        konst STENCIL_BACK_VALUE_MASK: Int
+        konst STENCIL_BACK_WRITEMASK: Int
+        konst VIEWPORT: Int
+        konst SCISSOR_BOX: Int
+        konst COLOR_CLEAR_VALUE: Int
+        konst COLOR_WRITEMASK: Int
+        konst UNPACK_ALIGNMENT: Int
+        konst PACK_ALIGNMENT: Int
+        konst MAX_TEXTURE_SIZE: Int
+        konst MAX_VIEWPORT_DIMS: Int
+        konst SUBPIXEL_BITS: Int
+        konst RED_BITS: Int
+        konst GREEN_BITS: Int
+        konst BLUE_BITS: Int
+        konst ALPHA_BITS: Int
+        konst DEPTH_BITS: Int
+        konst STENCIL_BITS: Int
+        konst POLYGON_OFFSET_UNITS: Int
+        konst POLYGON_OFFSET_FACTOR: Int
+        konst TEXTURE_BINDING_2D: Int
+        konst SAMPLE_BUFFERS: Int
+        konst SAMPLES: Int
+        konst SAMPLE_COVERAGE_VALUE: Int
+        konst SAMPLE_COVERAGE_INVERT: Int
+        konst COMPRESSED_TEXTURE_FORMATS: Int
+        konst DONT_CARE: Int
+        konst FASTEST: Int
+        konst NICEST: Int
+        konst GENERATE_MIPMAP_HINT: Int
+        konst BYTE: Int
+        konst UNSIGNED_BYTE: Int
+        konst SHORT: Int
+        konst UNSIGNED_SHORT: Int
+        konst INT: Int
+        konst UNSIGNED_INT: Int
+        konst FLOAT: Int
+        konst DEPTH_COMPONENT: Int
+        konst ALPHA: Int
+        konst RGB: Int
+        konst RGBA: Int
+        konst LUMINANCE: Int
+        konst LUMINANCE_ALPHA: Int
+        konst UNSIGNED_SHORT_4_4_4_4: Int
+        konst UNSIGNED_SHORT_5_5_5_1: Int
+        konst UNSIGNED_SHORT_5_6_5: Int
+        konst FRAGMENT_SHADER: Int
+        konst VERTEX_SHADER: Int
+        konst MAX_VERTEX_ATTRIBS: Int
+        konst MAX_VERTEX_UNIFORM_VECTORS: Int
+        konst MAX_VARYING_VECTORS: Int
+        konst MAX_COMBINED_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_VERTEX_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_TEXTURE_IMAGE_UNITS: Int
+        konst MAX_FRAGMENT_UNIFORM_VECTORS: Int
+        konst SHADER_TYPE: Int
+        konst DELETE_STATUS: Int
+        konst LINK_STATUS: Int
+        konst VALIDATE_STATUS: Int
+        konst ATTACHED_SHADERS: Int
+        konst ACTIVE_UNIFORMS: Int
+        konst ACTIVE_ATTRIBUTES: Int
+        konst SHADING_LANGUAGE_VERSION: Int
+        konst CURRENT_PROGRAM: Int
+        konst NEVER: Int
+        konst LESS: Int
+        konst EQUAL: Int
+        konst LEQUAL: Int
+        konst GREATER: Int
+        konst NOTEQUAL: Int
+        konst GEQUAL: Int
+        konst ALWAYS: Int
+        konst KEEP: Int
+        konst REPLACE: Int
+        konst INCR: Int
+        konst DECR: Int
+        konst INVERT: Int
+        konst INCR_WRAP: Int
+        konst DECR_WRAP: Int
+        konst VENDOR: Int
+        konst RENDERER: Int
+        konst VERSION: Int
+        konst NEAREST: Int
+        konst LINEAR: Int
+        konst NEAREST_MIPMAP_NEAREST: Int
+        konst LINEAR_MIPMAP_NEAREST: Int
+        konst NEAREST_MIPMAP_LINEAR: Int
+        konst LINEAR_MIPMAP_LINEAR: Int
+        konst TEXTURE_MAG_FILTER: Int
+        konst TEXTURE_MIN_FILTER: Int
+        konst TEXTURE_WRAP_S: Int
+        konst TEXTURE_WRAP_T: Int
+        konst TEXTURE_2D: Int
+        konst TEXTURE: Int
+        konst TEXTURE_CUBE_MAP: Int
+        konst TEXTURE_BINDING_CUBE_MAP: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_X: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_X: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_Y: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_Y: Int
+        konst TEXTURE_CUBE_MAP_POSITIVE_Z: Int
+        konst TEXTURE_CUBE_MAP_NEGATIVE_Z: Int
+        konst MAX_CUBE_MAP_TEXTURE_SIZE: Int
+        konst TEXTURE0: Int
+        konst TEXTURE1: Int
+        konst TEXTURE2: Int
+        konst TEXTURE3: Int
+        konst TEXTURE4: Int
+        konst TEXTURE5: Int
+        konst TEXTURE6: Int
+        konst TEXTURE7: Int
+        konst TEXTURE8: Int
+        konst TEXTURE9: Int
+        konst TEXTURE10: Int
+        konst TEXTURE11: Int
+        konst TEXTURE12: Int
+        konst TEXTURE13: Int
+        konst TEXTURE14: Int
+        konst TEXTURE15: Int
+        konst TEXTURE16: Int
+        konst TEXTURE17: Int
+        konst TEXTURE18: Int
+        konst TEXTURE19: Int
+        konst TEXTURE20: Int
+        konst TEXTURE21: Int
+        konst TEXTURE22: Int
+        konst TEXTURE23: Int
+        konst TEXTURE24: Int
+        konst TEXTURE25: Int
+        konst TEXTURE26: Int
+        konst TEXTURE27: Int
+        konst TEXTURE28: Int
+        konst TEXTURE29: Int
+        konst TEXTURE30: Int
+        konst TEXTURE31: Int
+        konst ACTIVE_TEXTURE: Int
+        konst REPEAT: Int
+        konst CLAMP_TO_EDGE: Int
+        konst MIRRORED_REPEAT: Int
+        konst FLOAT_VEC2: Int
+        konst FLOAT_VEC3: Int
+        konst FLOAT_VEC4: Int
+        konst INT_VEC2: Int
+        konst INT_VEC3: Int
+        konst INT_VEC4: Int
+        konst BOOL: Int
+        konst BOOL_VEC2: Int
+        konst BOOL_VEC3: Int
+        konst BOOL_VEC4: Int
+        konst FLOAT_MAT2: Int
+        konst FLOAT_MAT3: Int
+        konst FLOAT_MAT4: Int
+        konst SAMPLER_2D: Int
+        konst SAMPLER_CUBE: Int
+        konst VERTEX_ATTRIB_ARRAY_ENABLED: Int
+        konst VERTEX_ATTRIB_ARRAY_SIZE: Int
+        konst VERTEX_ATTRIB_ARRAY_STRIDE: Int
+        konst VERTEX_ATTRIB_ARRAY_TYPE: Int
+        konst VERTEX_ATTRIB_ARRAY_NORMALIZED: Int
+        konst VERTEX_ATTRIB_ARRAY_POINTER: Int
+        konst VERTEX_ATTRIB_ARRAY_BUFFER_BINDING: Int
+        konst IMPLEMENTATION_COLOR_READ_TYPE: Int
+        konst IMPLEMENTATION_COLOR_READ_FORMAT: Int
+        konst COMPILE_STATUS: Int
+        konst LOW_FLOAT: Int
+        konst MEDIUM_FLOAT: Int
+        konst HIGH_FLOAT: Int
+        konst LOW_INT: Int
+        konst MEDIUM_INT: Int
+        konst HIGH_INT: Int
+        konst FRAMEBUFFER: Int
+        konst RENDERBUFFER: Int
+        konst RGBA4: Int
+        konst RGB5_A1: Int
+        konst RGB565: Int
+        konst DEPTH_COMPONENT16: Int
+        konst STENCIL_INDEX: Int
+        konst STENCIL_INDEX8: Int
+        konst DEPTH_STENCIL: Int
+        konst RENDERBUFFER_WIDTH: Int
+        konst RENDERBUFFER_HEIGHT: Int
+        konst RENDERBUFFER_INTERNAL_FORMAT: Int
+        konst RENDERBUFFER_RED_SIZE: Int
+        konst RENDERBUFFER_GREEN_SIZE: Int
+        konst RENDERBUFFER_BLUE_SIZE: Int
+        konst RENDERBUFFER_ALPHA_SIZE: Int
+        konst RENDERBUFFER_DEPTH_SIZE: Int
+        konst RENDERBUFFER_STENCIL_SIZE: Int
+        konst FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE: Int
+        konst FRAMEBUFFER_ATTACHMENT_OBJECT_NAME: Int
+        konst FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL: Int
+        konst FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE: Int
+        konst COLOR_ATTACHMENT0: Int
+        konst DEPTH_ATTACHMENT: Int
+        konst STENCIL_ATTACHMENT: Int
+        konst DEPTH_STENCIL_ATTACHMENT: Int
+        konst NONE: Int
+        konst FRAMEBUFFER_COMPLETE: Int
+        konst FRAMEBUFFER_INCOMPLETE_ATTACHMENT: Int
+        konst FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT: Int
+        konst FRAMEBUFFER_INCOMPLETE_DIMENSIONS: Int
+        konst FRAMEBUFFER_UNSUPPORTED: Int
+        konst FRAMEBUFFER_BINDING: Int
+        konst RENDERBUFFER_BINDING: Int
+        konst MAX_RENDERBUFFER_SIZE: Int
+        konst INVALID_FRAMEBUFFER_OPERATION: Int
+        konst UNPACK_FLIP_Y_WEBGL: Int
+        konst UNPACK_PREMULTIPLY_ALPHA_WEBGL: Int
+        konst CONTEXT_LOST_WEBGL: Int
+        konst UNPACK_COLORSPACE_CONVERSION_WEBGL: Int
+        konst BROWSER_DEFAULT_WEBGL: Int
     }
 }
 
@@ -863,20 +863,20 @@ public external abstract class WebGLRenderingContext : WebGLRenderingContextBase
  * Exposes the JavaScript [WebGLContextEvent](https://developer.mozilla.org/en/docs/Web/API/WebGLContextEvent) to Kotlin
  */
 public external open class WebGLContextEvent(type: String, eventInit: WebGLContextEventInit = definedExternally) : Event, JsAny {
-    open val statusMessage: String
+    open konst statusMessage: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface WebGLContextEventInit : EventInit, JsAny {
     var statusMessage: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -886,11 +886,11 @@ public fun WebGLContextEventInit(statusMessage: String? = "", bubbles: Boolean? 
  * Exposes the JavaScript [ArrayBuffer](https://developer.mozilla.org/en/docs/Web/API/ArrayBuffer) to Kotlin
  */
 public external open class ArrayBuffer(length: Int) : BufferDataSource, JsAny {
-    open val byteLength: Int
+    open konst byteLength: Int
     fun slice(begin: Int, end: Int = definedExternally): ArrayBuffer
 
     companion object {
-        fun isView(value: JsAny?): Boolean
+        fun isView(konstue: JsAny?): Boolean
     }
 }
 
@@ -898,9 +898,9 @@ public external open class ArrayBuffer(length: Int) : BufferDataSource, JsAny {
  * Exposes the JavaScript [ArrayBufferView](https://developer.mozilla.org/en/docs/Web/API/ArrayBufferView) to Kotlin
  */
 public external interface ArrayBufferView : BufferDataSource, JsAny {
-    val buffer: ArrayBuffer
-    val byteOffset: Int
-    val byteLength: Int
+    konst buffer: ArrayBuffer
+    konst byteOffset: Int
+    konst byteLength: Int
 }
 
 /**
@@ -911,16 +911,16 @@ public external open class Int8Array : ArrayBufferView, JsAny {
     constructor(array: Int8Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Int8Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Int8Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -930,9 +930,9 @@ internal fun getMethodImplForInt8Array(obj: Int8Array, index: Int): Byte { js("r
 public operator fun Int8Array.get(index: Int): Byte = getMethodImplForInt8Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForInt8Array(obj: Int8Array, index: Int, value: Byte) { js("obj[index] = value;") }
+internal fun setMethodImplForInt8Array(obj: Int8Array, index: Int, konstue: Byte) { js("obj[index] = konstue;") }
 
-public operator fun Int8Array.set(index: Int, value: Byte) = setMethodImplForInt8Array(this, index, value)
+public operator fun Int8Array.set(index: Int, konstue: Byte) = setMethodImplForInt8Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Uint8Array](https://developer.mozilla.org/en/docs/Web/API/Uint8Array) to Kotlin
@@ -942,16 +942,16 @@ public external open class Uint8Array : ArrayBufferView, JsAny {
     constructor(array: Uint8Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Uint8Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Uint8Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -961,9 +961,9 @@ internal fun getMethodImplForUint8Array(obj: Uint8Array, index: Int): Byte { js(
 public operator fun Uint8Array.get(index: Int): Byte = getMethodImplForUint8Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForUint8Array(obj: Uint8Array, index: Int, value: Byte) { js("obj[index] = value;") }
+internal fun setMethodImplForUint8Array(obj: Uint8Array, index: Int, konstue: Byte) { js("obj[index] = konstue;") }
 
-public operator fun Uint8Array.set(index: Int, value: Byte) = setMethodImplForUint8Array(this, index, value)
+public operator fun Uint8Array.set(index: Int, konstue: Byte) = setMethodImplForUint8Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Uint8ClampedArray](https://developer.mozilla.org/en/docs/Web/API/Uint8ClampedArray) to Kotlin
@@ -973,16 +973,16 @@ public external open class Uint8ClampedArray : ArrayBufferView, JsAny {
     constructor(array: Uint8ClampedArray)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Uint8ClampedArray, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Uint8ClampedArray
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -992,9 +992,9 @@ internal fun getMethodImplForUint8ClampedArray(obj: Uint8ClampedArray, index: In
 public operator fun Uint8ClampedArray.get(index: Int): Byte = getMethodImplForUint8ClampedArray(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForUint8ClampedArray(obj: Uint8ClampedArray, index: Int, value: Byte) { js("obj[index] = value;") }
+internal fun setMethodImplForUint8ClampedArray(obj: Uint8ClampedArray, index: Int, konstue: Byte) { js("obj[index] = konstue;") }
 
-public operator fun Uint8ClampedArray.set(index: Int, value: Byte) = setMethodImplForUint8ClampedArray(this, index, value)
+public operator fun Uint8ClampedArray.set(index: Int, konstue: Byte) = setMethodImplForUint8ClampedArray(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Int16Array](https://developer.mozilla.org/en/docs/Web/API/Int16Array) to Kotlin
@@ -1004,16 +1004,16 @@ public external open class Int16Array : ArrayBufferView, JsAny {
     constructor(array: Int16Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Int16Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Int16Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1023,9 +1023,9 @@ internal fun getMethodImplForInt16Array(obj: Int16Array, index: Int): Short { js
 public operator fun Int16Array.get(index: Int): Short = getMethodImplForInt16Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForInt16Array(obj: Int16Array, index: Int, value: Short) { js("obj[index] = value;") }
+internal fun setMethodImplForInt16Array(obj: Int16Array, index: Int, konstue: Short) { js("obj[index] = konstue;") }
 
-public operator fun Int16Array.set(index: Int, value: Short) = setMethodImplForInt16Array(this, index, value)
+public operator fun Int16Array.set(index: Int, konstue: Short) = setMethodImplForInt16Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Uint16Array](https://developer.mozilla.org/en/docs/Web/API/Uint16Array) to Kotlin
@@ -1035,16 +1035,16 @@ public external open class Uint16Array : ArrayBufferView, JsAny {
     constructor(array: Uint16Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Uint16Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Uint16Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1054,9 +1054,9 @@ internal fun getMethodImplForUint16Array(obj: Uint16Array, index: Int): Short { 
 public operator fun Uint16Array.get(index: Int): Short = getMethodImplForUint16Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForUint16Array(obj: Uint16Array, index: Int, value: Short) { js("obj[index] = value;") }
+internal fun setMethodImplForUint16Array(obj: Uint16Array, index: Int, konstue: Short) { js("obj[index] = konstue;") }
 
-public operator fun Uint16Array.set(index: Int, value: Short) = setMethodImplForUint16Array(this, index, value)
+public operator fun Uint16Array.set(index: Int, konstue: Short) = setMethodImplForUint16Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Int32Array](https://developer.mozilla.org/en/docs/Web/API/Int32Array) to Kotlin
@@ -1066,16 +1066,16 @@ public external open class Int32Array : ArrayBufferView, JsAny {
     constructor(array: Int32Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Int32Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Int32Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1085,9 +1085,9 @@ internal fun getMethodImplForInt32Array(obj: Int32Array, index: Int): Int { js("
 public operator fun Int32Array.get(index: Int): Int = getMethodImplForInt32Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForInt32Array(obj: Int32Array, index: Int, value: Int) { js("obj[index] = value;") }
+internal fun setMethodImplForInt32Array(obj: Int32Array, index: Int, konstue: Int) { js("obj[index] = konstue;") }
 
-public operator fun Int32Array.set(index: Int, value: Int) = setMethodImplForInt32Array(this, index, value)
+public operator fun Int32Array.set(index: Int, konstue: Int) = setMethodImplForInt32Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Uint32Array](https://developer.mozilla.org/en/docs/Web/API/Uint32Array) to Kotlin
@@ -1097,16 +1097,16 @@ public external open class Uint32Array : ArrayBufferView, JsAny {
     constructor(array: Uint32Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Uint32Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Uint32Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1116,9 +1116,9 @@ internal fun getMethodImplForUint32Array(obj: Uint32Array, index: Int): Int { js
 public operator fun Uint32Array.get(index: Int): Int = getMethodImplForUint32Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForUint32Array(obj: Uint32Array, index: Int, value: Int) { js("obj[index] = value;") }
+internal fun setMethodImplForUint32Array(obj: Uint32Array, index: Int, konstue: Int) { js("obj[index] = konstue;") }
 
-public operator fun Uint32Array.set(index: Int, value: Int) = setMethodImplForUint32Array(this, index, value)
+public operator fun Uint32Array.set(index: Int, konstue: Int) = setMethodImplForUint32Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Float32Array](https://developer.mozilla.org/en/docs/Web/API/Float32Array) to Kotlin
@@ -1128,16 +1128,16 @@ public external open class Float32Array : ArrayBufferView, JsAny {
     constructor(array: Float32Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Float32Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Float32Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1147,9 +1147,9 @@ internal fun getMethodImplForFloat32Array(obj: Float32Array, index: Int): Float 
 public operator fun Float32Array.get(index: Int): Float = getMethodImplForFloat32Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForFloat32Array(obj: Float32Array, index: Int, value: Float) { js("obj[index] = value;") }
+internal fun setMethodImplForFloat32Array(obj: Float32Array, index: Int, konstue: Float) { js("obj[index] = konstue;") }
 
-public operator fun Float32Array.set(index: Int, value: Float) = setMethodImplForFloat32Array(this, index, value)
+public operator fun Float32Array.set(index: Int, konstue: Float) = setMethodImplForFloat32Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [Float64Array](https://developer.mozilla.org/en/docs/Web/API/Float64Array) to Kotlin
@@ -1159,16 +1159,16 @@ public external open class Float64Array : ArrayBufferView, JsAny {
     constructor(array: Float64Array)
     constructor(array: JsArray<JsNumber>)
     constructor(buffer: ArrayBuffer, byteOffset: Int = definedExternally, length: Int = definedExternally)
-    open val length: Int
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    open konst length: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun set(array: Float64Array, offset: Int = definedExternally)
     fun set(array: JsArray<JsNumber>, offset: Int = definedExternally)
     fun subarray(start: Int, end: Int): Float64Array
 
     companion object {
-        val BYTES_PER_ELEMENT: Int
+        konst BYTES_PER_ELEMENT: Int
     }
 }
 
@@ -1178,17 +1178,17 @@ internal fun getMethodImplForFloat64Array(obj: Float64Array, index: Int): Double
 public operator fun Float64Array.get(index: Int): Double = getMethodImplForFloat64Array(this, index)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForFloat64Array(obj: Float64Array, index: Int, value: Double) { js("obj[index] = value;") }
+internal fun setMethodImplForFloat64Array(obj: Float64Array, index: Int, konstue: Double) { js("obj[index] = konstue;") }
 
-public operator fun Float64Array.set(index: Int, value: Double) = setMethodImplForFloat64Array(this, index, value)
+public operator fun Float64Array.set(index: Int, konstue: Double) = setMethodImplForFloat64Array(this, index, konstue)
 
 /**
  * Exposes the JavaScript [DataView](https://developer.mozilla.org/en/docs/Web/API/DataView) to Kotlin
  */
 public external open class DataView(buffer: ArrayBuffer, byteOffset: Int = definedExternally, byteLength: Int = definedExternally) : ArrayBufferView, JsAny {
-    override val buffer: ArrayBuffer
-    override val byteOffset: Int
-    override val byteLength: Int
+    override konst buffer: ArrayBuffer
+    override konst byteOffset: Int
+    override konst byteLength: Int
     fun getInt8(byteOffset: Int): Byte
     fun getUint8(byteOffset: Int): Byte
     fun getInt16(byteOffset: Int, littleEndian: Boolean = definedExternally): Short
@@ -1197,14 +1197,14 @@ public external open class DataView(buffer: ArrayBuffer, byteOffset: Int = defin
     fun getUint32(byteOffset: Int, littleEndian: Boolean = definedExternally): Int
     fun getFloat32(byteOffset: Int, littleEndian: Boolean = definedExternally): Float
     fun getFloat64(byteOffset: Int, littleEndian: Boolean = definedExternally): Double
-    fun setInt8(byteOffset: Int, value: Byte)
-    fun setUint8(byteOffset: Int, value: Byte)
-    fun setInt16(byteOffset: Int, value: Short, littleEndian: Boolean = definedExternally)
-    fun setUint16(byteOffset: Int, value: Short, littleEndian: Boolean = definedExternally)
-    fun setInt32(byteOffset: Int, value: Int, littleEndian: Boolean = definedExternally)
-    fun setUint32(byteOffset: Int, value: Int, littleEndian: Boolean = definedExternally)
-    fun setFloat32(byteOffset: Int, value: Float, littleEndian: Boolean = definedExternally)
-    fun setFloat64(byteOffset: Int, value: Double, littleEndian: Boolean = definedExternally)
+    fun setInt8(byteOffset: Int, konstue: Byte)
+    fun setUint8(byteOffset: Int, konstue: Byte)
+    fun setInt16(byteOffset: Int, konstue: Short, littleEndian: Boolean = definedExternally)
+    fun setUint16(byteOffset: Int, konstue: Short, littleEndian: Boolean = definedExternally)
+    fun setInt32(byteOffset: Int, konstue: Int, littleEndian: Boolean = definedExternally)
+    fun setUint32(byteOffset: Int, konstue: Int, littleEndian: Boolean = definedExternally)
+    fun setFloat32(byteOffset: Int, konstue: Float, littleEndian: Boolean = definedExternally)
+    fun setFloat64(byteOffset: Int, konstue: Double, littleEndian: Boolean = definedExternally)
 }
 
 public external interface BufferDataSource

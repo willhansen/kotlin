@@ -2,7 +2,7 @@
 // MODULE: main
 // FILE: externals.kt
 
-class C(val x: Int)
+class C(konst x: Int)
 
 @JsExport
 fun makeC(x: Int): JsReference<C> = C(x).toJsReference()

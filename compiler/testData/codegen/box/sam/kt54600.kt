@@ -15,7 +15,7 @@ fun foo(filter: ((String) -> Boolean)?): String {
 public class J {
     public J(Condition<? super String> filter) {
         if (filter != null) {
-            filter.value("");
+            filter.konstue("");
         }
     }
 }
@@ -23,5 +23,5 @@ public class J {
 // FILE: Condition.java
 
 public interface Condition<T> {
-    boolean value(T t);
+    boolean konstue(T t);
 }

@@ -27,37 +27,37 @@ class Arrays {
 
         @Sample
         fun arrayOrEmpty() {
-            val nullArray: Array<Any>? = null
+            konst nullArray: Array<Any>? = null
             assertPrints(nullArray.orEmpty().contentToString(), "[]")
 
-            val array: Array<Char>? = arrayOf('a', 'b', 'c')
+            konst array: Array<Char>? = arrayOf('a', 'b', 'c')
             assertPrints(array.orEmpty().contentToString(), "[a, b, c]")
         }
 
         @Sample
         fun arrayIsNullOrEmpty() {
-            val nullArray: Array<Any>? = null
+            konst nullArray: Array<Any>? = null
             assertTrue(nullArray.isNullOrEmpty())
 
-            val emptyArray: Array<Any>? = emptyArray<Any>()
+            konst emptyArray: Array<Any>? = emptyArray<Any>()
             assertTrue(emptyArray.isNullOrEmpty())
 
-            val array: Array<Char>? = arrayOf('a', 'b', 'c')
+            konst array: Array<Char>? = arrayOf('a', 'b', 'c')
             assertFalse(array.isNullOrEmpty())
         }
 
         @Sample
         fun arrayIfEmpty() {
-            val emptyArray: Array<Any> = emptyArray()
+            konst emptyArray: Array<Any> = emptyArray()
 
-            val emptyOrNull: Array<Any>? = emptyArray.ifEmpty { null }
+            konst emptyOrNull: Array<Any>? = emptyArray.ifEmpty { null }
             assertPrints(emptyOrNull, "null")
 
-            val emptyOrDefault: Array<Any> = emptyArray.ifEmpty { arrayOf("default") }
+            konst emptyOrDefault: Array<Any> = emptyArray.ifEmpty { arrayOf("default") }
             assertPrints(emptyOrDefault.contentToString(), "[default]")
 
-            val nonEmptyArray = arrayOf(1)
-            val sameArray = nonEmptyArray.ifEmpty { arrayOf(2) }
+            konst nonEmptyArray = arrayOf(1)
+            konst sameArray = nonEmptyArray.ifEmpty { arrayOf(2) }
             assertTrue(nonEmptyArray === sameArray)
         }
     }
@@ -66,9 +66,9 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitives() {
-            val charCodes = intArrayOf(72, 69, 76, 76, 79)
+            konst charCodes = intArrayOf(72, 69, 76, 76, 79)
 
-            val byCharCode = charCodes.associate { it to Char(it) }
+            konst byCharCode = charCodes.associate { it to Char(it) }
 
             // 76=L only occurs once because only the last pair with the same key gets added
             assertPrints(byCharCode, "{72=H, 69=E, 76=L, 79=O}")
@@ -77,9 +77,9 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitivesBy() {
-            val charCodes = intArrayOf(72, 69, 76, 76, 79)
+            konst charCodes = intArrayOf(72, 69, 76, 76, 79)
 
-            val byChar = charCodes.associateBy { Char(it) }
+            konst byChar = charCodes.associateBy { Char(it) }
 
             // L=76 only occurs once because only the last pair with the same key gets added
             assertPrints(byChar, "{H=72, E=69, L=76, O=79}")
@@ -87,9 +87,9 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitivesByWithValueTransform() {
-            val charCodes = intArrayOf(65, 65, 66, 67, 68, 69)
+            konst charCodes = intArrayOf(65, 65, 66, 67, 68, 69)
 
-            val byUpperCase = charCodes.associateBy({ Char(it) }, { Char(it + 32) })
+            konst byUpperCase = charCodes.associateBy({ Char(it) }, { Char(it + 32) })
 
             // A=a only occurs once because only the last pair with the same key gets added
             assertPrints(byUpperCase, "{A=a, B=b, C=c, D=d, E=e}")
@@ -97,8 +97,8 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitivesByTo() {
-            val charCodes = intArrayOf(72, 69, 76, 76, 79)
-            val byChar = mutableMapOf<Char, Int>()
+            konst charCodes = intArrayOf(72, 69, 76, 76, 79)
+            konst byChar = mutableMapOf<Char, Int>()
 
             assertTrue(byChar.isEmpty())
             charCodes.associateByTo(byChar) { Char(it) }
@@ -110,9 +110,9 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitivesByToWithValueTransform() {
-            val charCodes = intArrayOf(65, 65, 66, 67, 68, 69)
+            konst charCodes = intArrayOf(65, 65, 66, 67, 68, 69)
 
-            val byUpperCase = mutableMapOf<Char, Char>()
+            konst byUpperCase = mutableMapOf<Char, Char>()
             charCodes.associateByTo(byUpperCase, { Char(it) }, { Char(it + 32) })
 
             // A=a only occurs once because only the last pair with the same key gets added
@@ -121,9 +121,9 @@ class Arrays {
 
         @Sample
         fun associateArrayOfPrimitivesTo() {
-            val charCodes = intArrayOf(72, 69, 76, 76, 79)
+            konst charCodes = intArrayOf(72, 69, 76, 76, 79)
 
-            val byChar = mutableMapOf<Int, Char>()
+            konst byChar = mutableMapOf<Int, Char>()
             charCodes.associateTo(byChar) { it to Char(it) }
 
             // 76=L only occurs once because only the last pair with the same key gets added
@@ -132,7 +132,7 @@ class Arrays {
 
         @Sample
         fun flattenArray() {
-            val deepArray = arrayOf(
+            konst deepArray = arrayOf(
                 arrayOf(1),
                 arrayOf(2, 3),
                 arrayOf(4, 5, 6)
@@ -143,14 +143,14 @@ class Arrays {
 
         @Sample
         fun unzipArray() {
-            val array = arrayOf(1 to 'a', 2 to 'b', 3 to 'c')
+            konst array = arrayOf(1 to 'a', 2 to 'b', 3 to 'c')
             assertPrints(array.unzip(), "([1, 2, 3], [a, b, c])")
         }
 
         @Sample
         fun partitionArrayOfPrimitives() {
-            val array = intArrayOf(1, 2, 3, 4, 5)
-            val (even, odd) = array.partition { it % 2 == 0 }
+            konst array = intArrayOf(1, 2, 3, 4, 5)
+            konst (even, odd) = array.partition { it % 2 == 0 }
             assertPrints(even, "[2, 4]")
             assertPrints(odd, "[1, 3, 5]")
         }
@@ -160,14 +160,14 @@ class Arrays {
 
         @Sample
         fun contentToString() {
-            val array = arrayOf("apples", "oranges", "lime")
+            konst array = arrayOf("apples", "oranges", "lime")
 
             assertPrints(array.contentToString(), "[apples, oranges, lime]")
         }
 
         @Sample
         fun contentDeepToString() {
-            val matrix = arrayOf(
+            konst matrix = arrayOf(
                 intArrayOf(3, 7, 9),
                 intArrayOf(0, 1, 0),
                 intArrayOf(2, 4, 8)
@@ -181,26 +181,26 @@ class Arrays {
 
         @Sample
         fun copyOf() {
-            val array = arrayOf("apples", "oranges", "limes")
-            val arrayCopy = array.copyOf()
+            konst array = arrayOf("apples", "oranges", "limes")
+            konst arrayCopy = array.copyOf()
             assertPrints(arrayCopy.contentToString(), "[apples, oranges, limes]")
         }
 
         @Sample
         fun resizingCopyOf() {
-            val array = arrayOf("apples", "oranges", "limes")
-            val arrayCopyPadded = array.copyOf(5)
+            konst array = arrayOf("apples", "oranges", "limes")
+            konst arrayCopyPadded = array.copyOf(5)
             assertPrints(arrayCopyPadded.contentToString(), "[apples, oranges, limes, null, null]")
-            val arrayCopyTruncated = array.copyOf(2)
+            konst arrayCopyTruncated = array.copyOf(2)
             assertPrints(arrayCopyTruncated.contentToString(), "[apples, oranges]")
         }
 
         @Sample
         fun resizedPrimitiveCopyOf() {
-            val array = intArrayOf(1, 2, 3)
-            val arrayCopyPadded = array.copyOf(5)
+            konst array = intArrayOf(1, 2, 3)
+            konst arrayCopyPadded = array.copyOf(5)
             assertPrints(arrayCopyPadded.contentToString(), "[1, 2, 3, 0, 0]")
-            val arrayCopyTruncated = array.copyOf(2)
+            konst arrayCopyTruncated = array.copyOf(2)
             assertPrints(arrayCopyTruncated.contentToString(), "[1, 2]")
         }
     }
@@ -209,7 +209,7 @@ class Arrays {
 
         @Sample
         fun sortArray() {
-            val intArray = intArrayOf(4, 3, 2, 1)
+            konst intArray = intArrayOf(4, 3, 2, 1)
 
             // before sorting
             assertPrints(intArray.joinToString(), "4, 3, 2, 1")
@@ -222,12 +222,12 @@ class Arrays {
 
         @Sample
         fun sortArrayOfComparable() {
-            class Person(val firstName: String, val lastName: String) : Comparable<Person> {
+            class Person(konst firstName: String, konst lastName: String) : Comparable<Person> {
                 override fun compareTo(other: Person): Int = this.lastName.compareTo(other.lastName)
                 override fun toString(): String = "$firstName $lastName"
             }
 
-            val people = arrayOf(
+            konst people = arrayOf(
                 Person("Ragnar", "Lodbrok"),
                 Person("Bjorn", "Ironside"),
                 Person("Sweyn", "Forkbeard")
@@ -245,7 +245,7 @@ class Arrays {
 
         @Sample
         fun sortRangeOfArray() {
-            val intArray = intArrayOf(4, 3, 2, 1)
+            konst intArray = intArrayOf(4, 3, 2, 1)
 
             // before sorting
             assertPrints(intArray.joinToString(), "4, 3, 2, 1")
@@ -258,12 +258,12 @@ class Arrays {
 
         @Sample
         fun sortRangeOfArrayOfComparable() {
-            class Person(val firstName: String, val lastName: String) : Comparable<Person> {
+            class Person(konst firstName: String, konst lastName: String) : Comparable<Person> {
                 override fun compareTo(other: Person): Int = this.lastName.compareTo(other.lastName)
                 override fun toString(): String = "$firstName $lastName"
             }
 
-            val people = arrayOf(
+            konst people = arrayOf(
                 Person("Ragnar", "Lodbrok"),
                 Person("Bjorn", "Ironside"),
                 Person("Sweyn", "Forkbeard")

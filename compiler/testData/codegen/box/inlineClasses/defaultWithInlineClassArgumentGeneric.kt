@@ -6,6 +6,6 @@ fun box() = A(0).f()
 
 // FILE: b.kt
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Int>(val i: T)
+konstue class A<T: Int>(konst i: T)
 
 fun <T: Int> A<T>.f(xs: Array<String> = Array<String>(1) { "OK" }) = xs[i]

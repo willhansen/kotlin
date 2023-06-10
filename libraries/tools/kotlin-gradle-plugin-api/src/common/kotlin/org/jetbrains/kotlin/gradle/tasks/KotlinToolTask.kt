@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerToolOptions
 
 interface KotlinToolTask<out TO : KotlinCommonCompilerToolOptions> : Task {
     @get:Nested
-    val toolOptions: TO
+    konst toolOptions: TO
 
     fun toolOptions(configure: TO.() -> Unit) {
         configure(toolOptions)

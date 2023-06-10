@@ -9,43 +9,43 @@ import org.gradle.api.Project
 import org.gradle.api.logging.Logging
 
 /**
- * This class encapsulated logic which should be invoked during not before the script evaluation is ready and
+ * This class encapsulated logic which should be invoked during not before the script ekonstuation is ready and
  * not earlier than the task is configured
  */
-internal class RunOnceAfterEvaluated(private val name: String, private val action: () -> (Unit)) {
-    private val logger = Logging.getLogger(this.javaClass)!!
+internal class RunOnceAfterEkonstuated(private konst name: String, private konst action: () -> (Unit)) {
+    private konst logger = Logging.getLogger(this.javaClass)!!
     private var executed = false
     private var configured = false
-    private var evaluated = false
+    private var ekonstuated = false
 
     private fun execute() {
-        logger.debug("[$name] RunOnceAfterEvaluated - execute executed=$executed evaluated=$evaluated configured=$configured")
+        logger.debug("[$name] RunOnceAfterEkonstuated - execute executed=$executed ekonstuated=$ekonstuated configured=$configured")
         if (!executed) {
-            logger.debug("[$name] RunOnceAfterEvaluated - EXECUTING executed=$executed evaluated=$evaluated configured=$configured")
+            logger.debug("[$name] RunOnceAfterEkonstuated - EXECUTING executed=$executed ekonstuated=$ekonstuated configured=$configured")
             action()
         }
         executed = true
     }
 
-    fun onEvaluated() {
-        logger.debug("[$name] RunOnceAfterEvaluated - onEvaluated executed=$executed evaluated=$evaluated configured=$configured")
-        evaluated = true
+    fun onEkonstuated() {
+        logger.debug("[$name] RunOnceAfterEkonstuated - onEkonstuated executed=$executed ekonstuated=$ekonstuated configured=$configured")
+        ekonstuated = true
         if (configured) {
             execute()
         }
     }
 
     fun onConfigure() {
-        logger.debug("[$name] RunOnceAfterEvaluated - onConfigure executed=$executed evaluated=$evaluated configured=$configured")
+        logger.debug("[$name] RunOnceAfterEkonstuated - onConfigure executed=$executed ekonstuated=$ekonstuated configured=$configured")
         configured = true
-        if (evaluated) {
+        if (ekonstuated) {
             execute()
         }
     }
 }
 
-internal fun Project.runOnceAfterEvaluated(name: String, action: () -> (Unit)) {
-    val runOnce = RunOnceAfterEvaluated(name, action)
-    whenEvaluated { runOnce.onEvaluated() }
+internal fun Project.runOnceAfterEkonstuated(name: String, action: () -> (Unit)) {
+    konst runOnce = RunOnceAfterEkonstuated(name, action)
+    whenEkonstuated { runOnce.onEkonstuated() }
     runOnce.onConfigure()
 }

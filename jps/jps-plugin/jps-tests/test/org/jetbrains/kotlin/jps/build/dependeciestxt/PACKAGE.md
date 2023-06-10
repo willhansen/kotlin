@@ -15,8 +15,8 @@ p2 -> c [expectedBy]
 ## Format
 
 File contains declarations of modules and dependencies:
-  - Module: `module_name [flag1, key1=value1, ...]`
-  - Dependency: `source_module_name -> target_module_name [flag1, key1=value1, ...]`
+  - Module: `module_name [flag1, key1=konstue1, ...]`
+  - Dependency: `source_module_name -> target_module_name [flag1, key1=konstue1, ...]`
   
 Referring to undefined module is allowed (`jvm` module will be created at this case).
 This modules can be defined after reference. Several declarations for same module is not allowed.

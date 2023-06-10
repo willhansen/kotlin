@@ -10,16 +10,16 @@ import org.gradle.tooling.BuildController
 import org.gradle.tooling.model.gradle.BasicGradleProject
 import java.io.Serializable
 
-class ModelFetcherBuildAction<T>(private val modelType: Class<T>) : BuildAction<ModelContainer<T>>, Serializable {
+class ModelFetcherBuildAction<T>(private konst modelType: Class<T>) : BuildAction<ModelContainer<T>>, Serializable {
 
     override fun execute(controller: BuildController): ModelContainer<T> {
-        val modelContainer = ModelContainer<T>()
+        konst modelContainer = ModelContainer<T>()
         modelContainer.populateModels(controller, controller.buildModel.rootProject)
         return modelContainer
     }
 
     private fun ModelContainer<T>.populateModels(controller: BuildController, gradleProject: BasicGradleProject) {
-        val model = controller.findModel(gradleProject, modelType)
+        konst model = controller.findModel(gradleProject, modelType)
         if (model != null && !hasModel(gradleProject.path)) {
             addModel(gradleProject.path, model)
         }

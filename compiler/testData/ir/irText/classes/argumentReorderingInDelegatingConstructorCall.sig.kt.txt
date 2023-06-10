@@ -5,7 +5,7 @@ open class Base {
   // CHECK:
   //   Mangled name: Base{}x
   //   Public signature: /Base.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Base#<get-x>(){}kotlin.Int
     //   Public signature: /Base.x.<get-x>|4966956098150895696[0]
@@ -17,7 +17,7 @@ open class Base {
   // CHECK:
   //   Mangled name: Base{}y
   //   Public signature: /Base.y|3625903257357557171[0]
-  val y: Int
+  konst y: Int
     // CHECK JVM_IR:
     //   Mangled name: Base#<get-y>(){}kotlin.Int
     //   Public signature: /Base.y.<get-y>|-6745575372101973707[0]
@@ -45,7 +45,7 @@ class Test1 : Base {
   // CHECK:
   //   Mangled name: Test1{}x
   //   Public signature: /Test1.x|-8060530855978347579[0]
-  /* fake */ override val x: Int
+  /* fake */ override konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-x>(){}kotlin.Int
     //   Public signature: /Test1.x.<get-x>|4966956098150895696[0]
@@ -57,7 +57,7 @@ class Test1 : Base {
   // CHECK:
   //   Mangled name: Test1{}y
   //   Public signature: /Test1.y|3625903257357557171[0]
-  /* fake */ override val y: Int
+  /* fake */ override konst y: Int
     // CHECK JVM_IR:
     //   Mangled name: Test1#<get-y>(){}kotlin.Int
     //   Public signature: /Test1.y.<get-y>|-6745575372101973707[0]
@@ -84,7 +84,7 @@ class Test2 : Base {
   // CHECK:
   //   Mangled name: Test2{}x
   //   Public signature: /Test2.x|-8060530855978347579[0]
-  /* fake */ override val x: Int
+  /* fake */ override konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-x>(){}kotlin.Int
     //   Public signature: /Test2.x.<get-x>|4966956098150895696[0]
@@ -96,7 +96,7 @@ class Test2 : Base {
   // CHECK:
   //   Mangled name: Test2{}y
   //   Public signature: /Test2.y|3625903257357557171[0]
-  /* fake */ override val y: Int
+  /* fake */ override konst y: Int
     // CHECK JVM_IR:
     //   Mangled name: Test2#<get-y>(){}kotlin.Int
     //   Public signature: /Test2.y.<get-y>|-6745575372101973707[0]

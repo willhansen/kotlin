@@ -57,7 +57,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     @GradleTest
     @DisplayName("KotlinCompile task should use build cache when using provided JDK")
     internal fun customJdkBuildCache(gradleVersion: GradleVersion) {
-        val buildCache = workingDir.resolve("custom-jdk-build-cache")
+        konst buildCache = workingDir.resolve("custom-jdk-build-cache")
         project(
             projectName = "simple".fullProjectName,
             gradleVersion = gradleVersion,
@@ -104,7 +104,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     @DisplayName("Kotlin compile task should reuse build cache when toolchain is set and build is happening on different JDKs")
     @GradleTest
     internal fun differentBuildJDKBuildCacheHit(gradleVersion: GradleVersion) {
-        val buildCache = workingDir.resolve("custom-jdk-build-cache")
+        konst buildCache = workingDir.resolve("custom-jdk-build-cache")
         project(
             projectName = "simple".fullProjectName,
             gradleVersion = gradleVersion,
@@ -137,7 +137,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     @GradleTest
     @DisplayName("Kotlin compile task should not use build cache on using different JDK versions")
     internal fun differentJdkBuildCacheMiss(gradleVersion: GradleVersion) {
-        val buildCache = workingDir.resolve("custom-jdk-build-cache")
+        konst buildCache = workingDir.resolve("custom-jdk-build-cache")
         project(
             projectName = "simple".fullProjectName,
             gradleVersion = gradleVersion,
@@ -221,7 +221,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     @DisplayName("Kapt tasks with custom JDK should be cacheable")
     @GradleTest
     internal fun kaptTasksWithCustomJdkCacheable(gradleVersion: GradleVersion) {
-        val buildCache = workingDir.resolve("custom-jdk-build-cache")
+        konst buildCache = workingDir.resolve("custom-jdk-build-cache")
         project(
             projectName = "simpleWithKapt".fullProjectName,
             gradleVersion = gradleVersion,
@@ -270,7 +270,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     @DisplayName("Kapt tasks with default JDK and different isolation modes should be cacheable")
     @GradleTest
     internal fun kaptCacheableOnSwitchingIsolationModeAndDefaultJDK(gradleVersion: GradleVersion) {
-        val buildCache = workingDir.resolve("custom-jdk-build-cache")
+        konst buildCache = workingDir.resolve("custom-jdk-build-cache")
         project(
             projectName = "simpleWithKapt".fullProjectName,
             gradleVersion = gradleVersion,
@@ -363,7 +363,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -428,7 +428,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -487,7 +487,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
             )
 
             build("build", buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)) {
-                val compilerArgs = output.lineSequence()
+                konst compilerArgs = output.lineSequence()
                     .filter { it.contains(":compileKotlin Kotlin compiler args:") }
                     .first()
                 assert(compilerArgs.contains("-jvm-target 11")) {
@@ -575,7 +575,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -587,7 +587,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
                         def actualJvmTarget = compilerOptions.jvmTarget.orNull
                         if (actualJvmTarget != org.jetbrains.kotlin.gradle.dsl.JvmTarget.DEFAULT) {
                             //noinspection GroovyAssignabilityCheck
-                            throw new GradleException("Expected `jvmTarget` value is 'JvmTarget.DEFAULT' but the actual value was ${'$'}actualJvmTarget")
+                            throw new GradleException("Expected `jvmTarget` konstue is 'JvmTarget.DEFAULT' but the actual konstue was ${'$'}actualJvmTarget")
                         }
                     }
                 }
@@ -645,7 +645,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
                      jvmToolchain(8)
                  }
                  
-                 afterEvaluate {
+                 afterEkonstuate {
                      def toolchain = project.extensions.getByType(JavaPluginExtension.class).toolchain
                      def service = project.extensions.getByType(JavaToolchainService.class)
                      //noinspection GroovyUnusedAssignment
@@ -768,14 +768,14 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
     // replace required for windows paths so Groovy will not complain about unexpected char '\'
     private fun getJdk9Path(): String = getJdk9().javaHome.absolutePath.replace("\\", "\\\\")
     private fun getJdk11Path(): String = getJdk11().javaHome.absolutePath.replace("\\", "\\\\")
-    private val JavaInfo.javaHomeRealPath
+    private konst JavaInfo.javaHomeRealPath
         get() = javaHome
             .toPath()
             .toRealPath()
             .toAbsolutePath()
             .toString()
 
-    private val String.fullProjectName get() = "kotlin-java-toolchain/$this"
+    private konst String.fullProjectName get() = "kotlin-java-toolchain/$this"
 
     private fun TestProject.setJvmTarget(
         jvmTarget: String
@@ -853,7 +853,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
                       )
                  }
             
-            afterEvaluate {
+            afterEkonstuate {
                 logger.info("Toolchain jdk path: ${'$'}{defaultLauncher.get().metadata.installationPath.asFile.absolutePath}")
             }
             """.trimIndent()
@@ -876,7 +876,7 @@ class KotlinJavaToolchainTest : KGPBaseTest() {
                 }
             }
             
-            afterEvaluate {
+            afterEkonstuate {
                 def toolchain = project.extensions.getByType(JavaPluginExtension.class).toolchain
                 def service = project.extensions.getByType(JavaToolchainService.class)
                 //noinspection GroovyUnusedAssignment

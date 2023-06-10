@@ -4,13 +4,13 @@ package a
 
 interface T {
     <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> fun foo()
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> val b : Int
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> konst b : Int
 
     <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> fun bar() {}
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> val c : Int
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> konst c : Int
        get() = 42
 
-    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> val d = <!PROPERTY_INITIALIZER_IN_INTERFACE!>1<!>
+    <!WRONG_MODIFIER_CONTAINING_DECLARATION!>final<!> konst d = <!PROPERTY_INITIALIZER_IN_INTERFACE!>1<!>
 }
 
 class A {

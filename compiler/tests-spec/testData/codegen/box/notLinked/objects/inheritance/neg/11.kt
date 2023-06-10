@@ -11,9 +11,9 @@
 
 object MyObject : Foo(prop)
 
-open class Foo(val x: MyObject) {
+open class Foo(konst x: MyObject) {
     companion object {
-        val prop = MyObject
+        konst prop = MyObject
     }
 }
 

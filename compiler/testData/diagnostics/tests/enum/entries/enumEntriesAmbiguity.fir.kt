@@ -6,4 +6,4 @@ enum class Ambiguous {
     first, entries;
 }
 
-val e = Ambiguous.entries.ordinal
+konst e = Ambiguous.entries.ordinal

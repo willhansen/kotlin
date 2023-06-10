@@ -24,28 +24,28 @@ namespace gc {
 
 using SchedulerType = compiler::GCSchedulerType;
 
-// NOTE: When changing default values, reflect them in GC.kt as well.
+// NOTE: When changing default konstues, reflect them in GC.kt as well.
 struct GCSchedulerConfig {
     // Only used when useGCTimer() is false. How many regular safepoints will trigger slow path.
     std::atomic<int32_t> threshold = 100000;
     // How many object bytes a thread must allocate to trigger slow path.
     std::atomic<int64_t> allocationThresholdBytes = 10 * 1024;
     std::atomic<bool> autoTune = true;
-    // The target interval between collections when Kotlin code is idle. GC will be triggered
-    // by timer no sooner than this value and no later than twice this value since the previous collection.
-    std::atomic<int64_t> regularGcIntervalMicroseconds = 10 * 1000 * 1000;
+    // The target interkonst between collections when Kotlin code is idle. GC will be triggered
+    // by timer no sooner than this konstue and no later than twice this konstue since the previous collection.
+    std::atomic<int64_t> regularGcInterkonstMicroseconds = 10 * 1000 * 1000;
     // How many object bytes must be in the heap to trigger collection. Autotunes when autoTune is true.
     std::atomic<int64_t> targetHeapBytes = 1024 * 1024;
     // The rate at which targetHeapBytes changes when autoTune = true. Concretely: if after the collection
     // N object bytes remain in the heap, the next targetHeapBytes will be N / targetHeapUtilization capped
     // between minHeapBytes and maxHeapBytes.
     std::atomic<double> targetHeapUtilization = 0.5;
-    // The minimum value of targetHeapBytes for autoTune = true
+    // The minimum konstue of targetHeapBytes for autoTune = true
     std::atomic<int64_t> minHeapBytes = 1024 * 1024;
-    // The maximum value of targetHeapBytes for autoTune = true
+    // The maximum konstue of targetHeapBytes for autoTune = true
     std::atomic<int64_t> maxHeapBytes = std::numeric_limits<int64_t>::max();
 
-    std::chrono::microseconds regularGcInterval() const { return std::chrono::microseconds(regularGcIntervalMicroseconds.load()); }
+    std::chrono::microseconds regularGcInterkonst() const { return std::chrono::microseconds(regularGcInterkonstMicroseconds.load()); }
 };
 
 class GCSchedulerThreadData;
@@ -145,7 +145,7 @@ public:
     GCScheduler() noexcept = default;
 
     GCSchedulerConfig& config() noexcept { return config_; }
-    // Only valid after `SetScheduleGC` is called.
+    // Only konstid after `SetScheduleGC` is called.
     GCSchedulerData& gcData() noexcept {
         RuntimeAssert(gcData_ != nullptr, "Cannot be called before SetScheduleGC");
         return *gcData_;

@@ -18,11 +18,11 @@ import kotlin.reflect.full.safeCast
 
 interface KotlinJsr223InvocableScriptEngine : Invocable {
 
-    val invokeWrapper: InvokeWrapper?
+    konst invokeWrapper: InvokeWrapper?
 
-    val backwardInstancesHistory: Sequence<Any>
+    konst backwardInstancesHistory: Sequence<Any>
 
-    val baseClassLoader: ClassLoader
+    konst baseClassLoader: ClassLoader
 
     override fun invokeFunction(name: String?, vararg args: Any?): Any? {
         if (name == null) throw AssertionError("function name cannot be null")
@@ -38,12 +38,12 @@ interface KotlinJsr223InvocableScriptEngine : Invocable {
     private fun invokeImpl(possibleReceivers: Sequence<Any>, name: String, args: Array<out Any?>): Any? {
         // TODO: cache the method lookups?
 
-        val (fn, mapping) = possibleReceivers.mapNotNull { instance ->
-            val candidates = instance::class.functions.filter { it.name == name }
+        konst (fn, mapping) = possibleReceivers.mapNotNull { instance ->
+            konst candidates = instance::class.functions.filter { it.name == name }
             candidates.findMapping(listOf(instance) + args)
         }.filterNotNull().firstOrNull() ?: throw NoSuchMethodException("no suitable function '$name' found")
 
-        val res = try {
+        konst res = try {
             if (invokeWrapper != null) {
                 invokeWrapper!!.invoke {
                     fn.callBy(mapping)
@@ -74,7 +74,7 @@ interface KotlinJsr223InvocableScriptEngine : Invocable {
 
         // TODO: cache the method lookups?
 
-        val proxy = Proxy.newProxyInstance(baseClassLoader, arrayOf(clasz)) { _, method, args ->
+        konst proxy = Proxy.newProxyInstance(baseClassLoader, arrayOf(clasz)) { _, method, args ->
             invokeImpl(possibleReceivers, method.name, args ?: emptyArray())
         }
         return clasz.kotlin.safeCast(proxy)
@@ -83,7 +83,7 @@ interface KotlinJsr223InvocableScriptEngine : Invocable {
 
 private fun Iterable<KFunction<*>>.findMapping(args: List<Any?>): Pair<KFunction<*>, Map<KParameter, Any?>>? {
     for (fn in this) {
-        val mapping = tryCreateCallableMapping(fn, args)
+        konst mapping = tryCreateCallableMapping(fn, args)
         if (mapping != null) return fn to mapping
     }
     return null

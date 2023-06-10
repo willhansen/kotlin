@@ -5,7 +5,7 @@ class A {
 }
 
 fun main() {
-    val a = A()
+    konst a = A()
     <!OPERATOR_MODIFIER_REQUIRED!>a[1]<!>++
     a[1] <!UNRESOLVED_REFERENCE!>+=<!> 3
     <!OPERATOR_MODIFIER_REQUIRED!>a[1]<!> = a[1] + 3

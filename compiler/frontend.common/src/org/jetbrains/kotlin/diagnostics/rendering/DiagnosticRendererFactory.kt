@@ -17,21 +17,21 @@ fun interface DiagnosticRendererFactory {
 
 abstract class BaseDiagnosticRendererFactory : DiagnosticRendererFactory {
     override operator fun invoke(diagnostic: KtDiagnostic): KtDiagnosticRenderer? {
-        val factory = diagnostic.factory
+        konst factory = diagnostic.factory
         @Suppress("UNCHECKED_CAST")
         return MAP[factory]
     }
 
-    abstract val MAP: KtDiagnosticFactoryToRendererMap
+    abstract konst MAP: KtDiagnosticFactoryToRendererMap
 }
 
 object RootDiagnosticRendererFactory: DiagnosticRendererFactory {
-    private val factories = linkedSetOf<DiagnosticRendererFactory>()
-    private val lock = ReentrantLock()
+    private konst factories = linkedSetOf<DiagnosticRendererFactory>()
+    private konst lock = ReentrantLock()
 
     override operator fun invoke(diagnostic: KtDiagnostic): KtDiagnosticRenderer = lock.withLock {
         for (factory in factories) {
-            val renderer = factory(diagnostic)
+            konst renderer = factory(diagnostic)
             if (renderer != null) return renderer
         }
         diagnostic.factory.ktRenderer

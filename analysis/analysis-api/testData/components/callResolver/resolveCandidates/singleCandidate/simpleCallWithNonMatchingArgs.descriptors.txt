@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /foo(): kotlin.Unit
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /foo
     typeArgumentsMapping = {}
     argumentMapping = {}

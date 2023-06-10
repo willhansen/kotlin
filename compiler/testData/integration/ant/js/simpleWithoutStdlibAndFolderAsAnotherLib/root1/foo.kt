@@ -5,7 +5,7 @@ import library.sample.*
 var ok = "FAIL"
 
 fun main() {
-    val x = ClassA().value
+    konst x = ClassA().konstue
     if (x == 100) {
         ok = "OK"
     }

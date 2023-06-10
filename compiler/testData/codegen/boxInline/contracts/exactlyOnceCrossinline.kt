@@ -10,7 +10,7 @@ public inline fun myrun(crossinline block: () -> Unit): Unit {
     contract {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
-    val l = { block() }
+    konst l = { block() }
     l()
 }
 
@@ -19,7 +19,7 @@ public inline fun myrun(crossinline block: () -> Unit): Unit {
 import test.*
 
 fun box(): String {
-    val x: Long
+    konst x: Long
     myrun {
         x = 42L
     }

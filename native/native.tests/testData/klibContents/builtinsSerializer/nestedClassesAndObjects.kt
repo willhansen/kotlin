@@ -5,31 +5,31 @@ class ClassA {
         fun memberFromB(): Int = 100
 
         class BC {
-            val memberFromBB: Int = 150
+            konst memberFromBB: Int = 150
         }
 
         object BO {
-            val memberFromBO: Int = 175
+            konst memberFromBO: Int = 175
         }
     }
 
     inner class classC {
-        val memberFromC: Int = 200
+        konst memberFromC: Int = 200
     }
 }
 
 class E {
     companion object {
-        val stat: Int = 250
+        konst stat: Int = 250
 
         class D {
-            val memberFromD: Int = 275
+            konst memberFromD: Int = 275
         }
     }
 }
 
 class F {
     object ObjA {
-        val memberFromObjA: Int = 300
+        konst memberFromObjA: Int = 300
     }
 }

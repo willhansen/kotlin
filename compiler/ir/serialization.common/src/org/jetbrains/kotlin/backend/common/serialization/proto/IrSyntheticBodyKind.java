@@ -36,10 +36,10 @@ public enum IrSyntheticBodyKind
   public static final int ENUM_ENTRIES_VALUE = 3;
 
 
-  public final int getNumber() { return value; }
+  public final int getNumber() { return konstue; }
 
-  public static IrSyntheticBodyKind valueOf(int value) {
-    switch (value) {
+  public static IrSyntheticBodyKind konstueOf(int konstue) {
+    switch (konstue) {
       case 1: return ENUM_VALUES;
       case 2: return ENUM_VALUEOF;
       case 3: return ENUM_ENTRIES;
@@ -55,14 +55,14 @@ public enum IrSyntheticBodyKind
       internalValueMap =
         new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<IrSyntheticBodyKind>() {
           public IrSyntheticBodyKind findValueByNumber(int number) {
-            return IrSyntheticBodyKind.valueOf(number);
+            return IrSyntheticBodyKind.konstueOf(number);
           }
         };
 
-  private final int value;
+  private final int konstue;
 
-  private IrSyntheticBodyKind(int index, int value) {
-    this.value = value;
+  private IrSyntheticBodyKind(int index, int konstue) {
+    this.konstue = konstue;
   }
 
   // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.backend.common.serialization.proto.IrSyntheticBodyKind)

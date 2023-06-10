@@ -15,7 +15,7 @@ fun <T> testCollectionSize(c: Collection<T>) = assertEquals(0, c.size)
 fun <T> testCollectionIsEmpty(c: Collection<T>) = assertTrue(c.isEmpty())
 fun <T> testCollectionContains(c: Collection<T>) = assertTrue(c.contains(1 as Any?))
 fun <T> testCollectionIterator(c: Collection<T>) {
-    val it = c.iterator()
+    konst it = c.iterator()
     while (it.hasNext()) {
         assertEquals(1, it.next() as Any?)
     }
@@ -33,7 +33,7 @@ fun <T> testMutableCollectionRemove(c: MutableCollection<T>, t: T) {
 }
 fun <T> testMutableCollectionIterator(c: MutableCollection<T>, t: T) {
     c.add(t)
-    val it = c.iterator()
+    konst it = c.iterator()
     while (it.hasNext()) {
         it.next()
         it.remove()
@@ -79,9 +79,9 @@ fun testCollection() {
 fun <T> testListGet(l: List<T>, t: T) = assertEquals(t, l.get(0))
 fun <T> testListIndexOf(l: List<T>, t: T) = assertEquals(0, l.indexOf(t))
 fun <T> testListIterator(l: List<T>, t1 : T, t2 : T) {
-    val indexes = arrayListOf<Int>()
-    val result = arrayListOf<T>()
-    val it = l.listIterator()
+    konst indexes = arrayListOf<Int>()
+    konst result = arrayListOf<T>()
+    konst it = l.listIterator()
     while (it.hasNext()) {
         indexes.add(it.nextIndex())
         result.add(it.next())
@@ -100,7 +100,7 @@ fun <T> testMutableListSet(l: MutableList<T>, t: T) {
     assertEquals(arrayListOf(t), l)
 }
 fun <T> testMutableListIterator(l: MutableList<T>, t1: T, t2: T, t3: T) {
-    val it = l.listIterator()
+    konst it = l.listIterator()
     while (it.hasNext()) {
         it.next()
         it.add(t3)
@@ -120,11 +120,11 @@ fun testList() {
 
 fun <K, V> testMapContainsKey(map: Map<K, V>, k: K) = assertTrue(map.containsKey(k))
 fun <K, V> testMapKeys(map: Map<K, V>, k1: K, k2: K) = assertEqualCollections(hashSetOf(k1, k2), map.keys)
-fun <K, V> testMapValues(map: Map<K, V>, v1: V, v2: V) = assertEqualCollections(hashSetOf(v1, v2), map.values)
+fun <K, V> testMapValues(map: Map<K, V>, v1: V, v2: V) = assertEqualCollections(hashSetOf(v1, v2), map.konstues)
 fun <K, V> testMapEntrySet(map: Map<K, V>, k : K, v: V) {
     for (entry in map.entries) {
         assertEquals(k, entry.key)
-        assertEquals(v, entry.value)
+        assertEquals(v, entry.konstue)
     }
 }
 fun <K, V> testMutableMapEntry(map: MutableMap<K, V>, k1 : K, v: V) {

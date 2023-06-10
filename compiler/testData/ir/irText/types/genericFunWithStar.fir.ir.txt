@@ -81,7 +81,7 @@ FILE fqName:<root> fileName:/genericFunWithStar.kt
             $this: GET_VAR '<this>: <root>.Box<T of <root>.Box> declared in <root>.Box.bar' type=<root>.Box<T of <root>.Box> origin=null
             tSerializer: CALL 'public final fun get (index: kotlin.Int): T of kotlin.Array declared in kotlin.Array' type=<root>.I<*> origin=null
               $this: GET_VAR 'serializers: kotlin.Array<out <root>.I<*>> declared in <root>.Box.bar' type=kotlin.Array<out <root>.I<*>> origin=null
-              index: CONST Int type=kotlin.Int value=0
+              index: CONST Int type=kotlin.Int konstue=0
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.IFoo

@@ -13,7 +13,7 @@ import org.jetbrains.org.objectweb.asm.Label
 
 object AndAnd : IntrinsicMethod() {
 
-    private class BooleanConjunction(val arg0: IrExpression, val arg1: IrExpression, codegen: ExpressionCodegen, val data: BlockInfo) :
+    private class BooleanConjunction(konst arg0: IrExpression, konst arg1: IrExpression, codegen: ExpressionCodegen, konst data: BlockInfo) :
         BooleanValue(codegen) {
 
         override fun jumpIfFalse(target: Label) {
@@ -22,14 +22,14 @@ object AndAnd : IntrinsicMethod() {
         }
 
         override fun jumpIfTrue(target: Label) {
-            val stayLabel = Label()
+            konst stayLabel = Label()
             arg0.accept(codegen, data).coerceToBoolean().jumpIfFalse(stayLabel)
             arg1.accept(codegen, data).coerceToBoolean().jumpIfTrue(target)
             mv.visitLabel(stayLabel)
         }
 
         override fun discard() {
-            val end = Label()
+            konst end = Label()
             arg0.accept(codegen, data).coerceToBoolean().jumpIfFalse(end)
             arg1.accept(codegen, data).discard()
             mv.visitLabel(end)
@@ -37,7 +37,7 @@ object AndAnd : IntrinsicMethod() {
     }
 
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue? {
-        val (left, right) = expression.receiverAndArgs()
+        konst (left, right) = expression.receiverAndArgs()
         return BooleanConjunction(left, right, codegen, data)
     }
 }

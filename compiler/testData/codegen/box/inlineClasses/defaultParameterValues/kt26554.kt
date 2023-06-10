@@ -2,17 +2,17 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses
 
-data class RGBA(val rgba: Int)
+data class RGBA(konst rgba: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class RgbaArray(val array: IntArray) {
-    val size: Int get() = array.size
+konstue class RgbaArray(konst array: IntArray) {
+    konst size: Int get() = array.size
 
-    fun fill(value: RGBA, start: Int = 0, end: Int = this.size): Unit = array.fill(value.rgba, start, end)
+    fun fill(konstue: RGBA, start: Int = 0, end: Int = this.size): Unit = array.fill(konstue.rgba, start, end)
 }
 
 fun box(): String {
-    val rgbas = RgbaArray(IntArray(10))
+    konst rgbas = RgbaArray(IntArray(10))
     rgbas.fill(RGBA(123456))
     for (i in rgbas.array.indices) {
         if (rgbas.array[i] != 123456) throw AssertionError()

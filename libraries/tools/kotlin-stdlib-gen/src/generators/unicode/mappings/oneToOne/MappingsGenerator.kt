@@ -16,9 +16,9 @@ import java.io.File
 import java.io.FileWriter
 
 internal class MappingsGenerator private constructor(
-    private val outputFile: File,
-    private val mappingsBuilder: MappingsBuilder,
-    private val mappingsWriter: MappingsWriter,
+    private konst outputFile: File,
+    private konst mappingsBuilder: MappingsBuilder,
+    private konst mappingsWriter: MappingsWriter,
 ) {
 
     init {
@@ -30,7 +30,7 @@ internal class MappingsGenerator private constructor(
     }
 
     fun generate() {
-        val mappings = mappingsBuilder.build()
+        konst mappings = mappingsBuilder.build()
 
         FileWriter(outputFile).use { writer ->
             writer.writeHeader(outputFile, "kotlin.text")
@@ -43,20 +43,20 @@ internal class MappingsGenerator private constructor(
 
     companion object {
         fun forUppercase(outputFile: File, target: KotlinTarget): MappingsGenerator {
-            val builder = UppercaseMappingsBuilder()
-            val writer = UppercaseMappingsWriter(RangesWritingStrategy.of(target, "Uppercase"))
+            konst builder = UppercaseMappingsBuilder()
+            konst writer = UppercaseMappingsWriter(RangesWritingStrategy.of(target, "Uppercase"))
             return MappingsGenerator(outputFile, builder, writer)
         }
 
         fun forLowercase(outputFile: File, target: KotlinTarget): MappingsGenerator {
-            val builder = LowercaseMappingsBuilder()
-            val writer = LowercaseMappingsWriter(RangesWritingStrategy.of(target, "Lowercase"))
+            konst builder = LowercaseMappingsBuilder()
+            konst writer = LowercaseMappingsWriter(RangesWritingStrategy.of(target, "Lowercase"))
             return MappingsGenerator(outputFile, builder, writer)
         }
 
         fun forTitlecase(outputFile: File): MappingsGenerator {
-            val builder = TitlecaseMappingsBuilder()
-            val writer = TitlecaseMappingsWriter()
+            konst builder = TitlecaseMappingsBuilder()
+            konst writer = TitlecaseMappingsWriter()
             return MappingsGenerator(outputFile, builder, writer)
         }
     }

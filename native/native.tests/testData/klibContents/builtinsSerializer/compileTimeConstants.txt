@@ -1,29 +1,29 @@
     class Class constructor() {
-        val arrayConst: Any = {1.toByte(), 2.toByte()}
-        val booleanConst: Boolean = true
-        val byteConst: Byte = 10.toByte()
-        val charConst: Char = \u0041 ('A')
-        val doubleConst: Double = 3.0.toDouble()
-        val enumConst: Weapon? = Weapon.ROCK
-        val floatConst: Float = 2.0.toFloat()
-        val intConst: Int = 30
-        val longConst: Long = 40.toLong()
-        val shortConst: Short = 20.toShort()
-        val stringConst: String = "abcd"
+        konst arrayConst: Any = {1.toByte(), 2.toByte()}
+        konst booleanConst: Boolean = true
+        konst byteConst: Byte = 10.toByte()
+        konst charConst: Char = \u0041 ('A')
+        konst doubleConst: Double = 3.0.toDouble()
+        konst enumConst: Weapon? = Weapon.ROCK
+        konst floatConst: Float = 2.0.toFloat()
+        konst intConst: Int = 30
+        konst longConst: Long = 40.toLong()
+        konst shortConst: Short = 20.toShort()
+        konst stringConst: String = "abcd"
     }
     enum class Weapon private constructor() : Enum<Weapon> {
         enum entry ROCK
         enum entry PAPER
         enum entry SCISSORS
     }
-    val arrayConst: Any = {1.toByte(), 2.toByte()}
-    val booleanConst: Boolean = true
-    val byteConst: Byte = 10.toByte()
-    val charConst: Char = \u0041 ('A')
-    val doubleConst: Double = 3.0.toDouble()
-    val enumConst: Weapon? = Weapon.ROCK
-    val floatConst: Float = 2.0.toFloat()
-    val intConst: Int = 30
-    val longConst: Long = 40.toLong()
-    val shortConst: Short = 20.toShort()
-    val stringConst: String = "abcd"
+    konst arrayConst: Any = {1.toByte(), 2.toByte()}
+    konst booleanConst: Boolean = true
+    konst byteConst: Byte = 10.toByte()
+    konst charConst: Char = \u0041 ('A')
+    konst doubleConst: Double = 3.0.toDouble()
+    konst enumConst: Weapon? = Weapon.ROCK
+    konst floatConst: Float = 2.0.toFloat()
+    konst intConst: Int = 30
+    konst longConst: Long = 40.toLong()
+    konst shortConst: Short = 20.toShort()
+    konst stringConst: String = "abcd"

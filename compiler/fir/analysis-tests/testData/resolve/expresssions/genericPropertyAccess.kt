@@ -1,4 +1,4 @@
-abstract class Base<T>(val x: T) {
+abstract class Base<T>(konst x: T) {
     abstract fun foo(): T
 }
 

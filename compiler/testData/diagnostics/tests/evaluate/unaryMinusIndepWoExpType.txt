@@ -1,11 +1,11 @@
 package
 
-public val p1: kotlin.Int = -1
-public val p2: kotlin.Long = -1.toLong()
-public val p3: kotlin.Byte = -1.toByte()
-public val p4: kotlin.Int = -1
-public val p5: kotlin.Short = -1.toShort()
-public val p6: kotlin.Long = -1111111111111111111.toLong()
+public konst p1: kotlin.Int = -1
+public konst p2: kotlin.Long = -1.toLong()
+public konst p3: kotlin.Byte = -1.toByte()
+public konst p4: kotlin.Int = -1
+public konst p5: kotlin.Short = -1.toShort()
+public konst p6: kotlin.Long = -1111111111111111111.toLong()
 public fun fooByte(/*0*/ p: kotlin.Byte): kotlin.Byte
 public fun fooInt(/*0*/ p: kotlin.Int): kotlin.Int
 public fun fooLong(/*0*/ p: kotlin.Long): kotlin.Long

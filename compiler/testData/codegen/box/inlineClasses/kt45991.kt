@@ -20,14 +20,14 @@ fun ex1(res: Result<Int>) {
     )
 }
 
-val ex2_: (Result<Int>) -> Unit = { res ->
+konst ex2_: (Result<Int>) -> Unit = { res ->
     res.fold(
         onSuccess = { result += "Ex $it\n" },
         onFailure = {},
     )
 }
 
-val ex2: (Result<Int>) -> Unit = { res ->
+konst ex2: (Result<Int>) -> Unit = { res ->
     res.fold(
         onSuccess = { ex2_(Result.success(it)) },
         onFailure = { ex2_(Result.failure(it)) }
@@ -35,14 +35,14 @@ val ex2: (Result<Int>) -> Unit = { res ->
 }
 
 
-val ex3_: (Result<Int>) -> Unit = { res ->
+konst ex3_: (Result<Int>) -> Unit = { res ->
     res.fold(
         onSuccess = { result += "Ex $it\n" },
         onFailure = {},
     )
 }
 
-val ex3: (Result<Int>) -> Unit = { res ->
+konst ex3: (Result<Int>) -> Unit = { res ->
     res.fold(
         onSuccess = { ex3_(res) },
         onFailure = { ex3_(Result.failure(it)) }

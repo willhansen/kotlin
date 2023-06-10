@@ -48,15 +48,15 @@ private fun shouldEnforceFramePointer(context: Context): Boolean {
 }
 
 private fun enforceFramePointer(llvmFunction: LLVMValueRef, context: Context) {
-    val target = context.config.target
+    konst target = context.config.target
 
     // Matches Clang behaviour.
-    val omitLeafFp = when {
+    konst omitLeafFp = when {
         target.architecture == Architecture.ARM64 -> true
         else -> false
     }
 
-    val fpKind = if (omitLeafFp) {
+    konst fpKind = if (omitLeafFp) {
         "non-leaf"
     } else {
         "all"
@@ -71,28 +71,28 @@ interface LlvmAttribute {
 
 // We use sealed class instead of enum because there are attributes with parameters
 // that we might want to use later. For example, align(<n>).
-sealed class LlvmParameterAttribute(private val llvmAttributeName: String) : LlvmAttribute {
+sealed class LlvmParameterAttribute(private konst llvmAttributeName: String) : LlvmAttribute {
 
     override fun asAttributeKindId(): LLVMAttributeKindId = llvmAttributeKindIdCache.getOrPut(this) {
         getLlvmAttributeKindId(llvmAttributeName)
     }
 
     companion object {
-        private val llvmAttributeKindIdCache = mutableMapOf<LlvmParameterAttribute, LLVMAttributeKindId>()
+        private konst llvmAttributeKindIdCache = mutableMapOf<LlvmParameterAttribute, LLVMAttributeKindId>()
     }
 
     object SignExt : LlvmParameterAttribute("signext")
     object ZeroExt : LlvmParameterAttribute("zeroext")
 }
 
-sealed class LlvmFunctionAttribute(private val llvmAttributeName: String) : LlvmAttribute {
+sealed class LlvmFunctionAttribute(private konst llvmAttributeName: String) : LlvmAttribute {
 
     override fun asAttributeKindId(): LLVMAttributeKindId = llvmAttributeKindIdCache.getOrPut(this) {
         getLlvmAttributeKindId(llvmAttributeName)
     }
 
     companion object {
-        private val llvmAttributeKindIdCache = mutableMapOf<LlvmFunctionAttribute, LLVMAttributeKindId>()
+        private konst llvmAttributeKindIdCache = mutableMapOf<LlvmFunctionAttribute, LLVMAttributeKindId>()
     }
 
     object NoUnwind : LlvmFunctionAttribute("nounwind")

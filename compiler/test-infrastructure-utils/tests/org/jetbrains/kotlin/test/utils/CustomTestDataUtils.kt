@@ -7,31 +7,31 @@ package org.jetbrains.kotlin.test.utils
 
 import java.io.File
 
-private const val KT = ".kt"
-private const val KTS = ".kts"
+private const konst KT = ".kt"
+private const konst KTS = ".kts"
 
 // Prefixes are chosen such that LL FIR test data cannot be mistaken for FIR test data.
-private const val FIR_PREFIX = ".fir"
-private const val LL_FIR_PREFIX = ".ll"
+private const konst FIR_PREFIX = ".fir"
+private const konst LL_FIR_PREFIX = ".ll"
 
-const val CUSTOM_TEST_DATA_EXTENSION_PATTERN = "^(.+)\\.(reversed|fir|ll)\\.kts?\$"
+const konst CUSTOM_TEST_DATA_EXTENSION_PATTERN = "^(.+)\\.(reversed|fir|ll)\\.kts?\$"
 
-val File.isFirTestData: Boolean
+konst File.isFirTestData: Boolean
     get() = isCustomTestDataWithPrefix(FIR_PREFIX)
 
 /**
  * @see File.llFirTestDataFile
  */
-val File.isLLFirTestData: Boolean
+konst File.isLLFirTestData: Boolean
     get() = isCustomTestDataWithPrefix(LL_FIR_PREFIX)
 
-val File.isCustomTestData: Boolean
+konst File.isCustomTestData: Boolean
     get() = isFirTestData || isLLFirTestData
 
 private fun File.isCustomTestDataWithPrefix(prefix: String): Boolean =
     name.endsWith("$prefix$KT") || name.endsWith("$prefix$KTS")
 
-val File.firTestDataFile: File
+konst File.firTestDataFile: File
     get() = getCustomTestDataFileWithPrefix(FIR_PREFIX)
 
 /**
@@ -39,7 +39,7 @@ val File.firTestDataFile: File
  * legally diverge from the output of the K2 compiler, such as when the compiler's error behavior is deliberately unspecified. (For an
  * example, see `kotlinJavaKotlinCycle.ll.kt`.)
  */
-val File.llFirTestDataFile: File
+konst File.llFirTestDataFile: File
     get() = getCustomTestDataFileWithPrefix(LL_FIR_PREFIX)
 
 private fun File.getCustomTestDataFileWithPrefix(prefix: String): File =
@@ -47,20 +47,20 @@ private fun File.getCustomTestDataFileWithPrefix(prefix: String): File =
     else {
         // Because `File` can be `.ll.kt` or `.fir.kt` test data, we have to go off `originalTestDataFileName`, which removes the prefix
         // intelligently.
-        val originalName = originalTestDataFileName
-        val customName =
+        konst originalName = originalTestDataFileName
+        konst customName =
             if (originalName.endsWith(KTS)) "${originalName.removeSuffix(KTS)}$prefix$KTS"
             else "${originalName.removeSuffix(KT)}$prefix$KT"
         parentFile.resolve(customName)
     }
 
-val File.originalTestDataFile: File
+konst File.originalTestDataFile: File
     get() {
-        val originalName = originalTestDataFileName
+        konst originalName = originalTestDataFileName
         return if (originalName != name) parentFile.resolve(originalName) else this
     }
 
-val File.originalTestDataFileName: String
+konst File.originalTestDataFileName: String
     get() = when {
         isLLFirTestData -> getOriginalTestDataFileNameFromPrefix(LL_FIR_PREFIX)
         isFirTestData -> getOriginalTestDataFileNameFromPrefix(FIR_PREFIX)

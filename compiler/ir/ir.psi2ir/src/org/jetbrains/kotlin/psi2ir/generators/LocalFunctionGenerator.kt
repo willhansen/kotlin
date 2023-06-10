@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.resolve.bindingContextUtil.isInlineableFunctionLiter
 internal class LocalFunctionGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
 
     fun generateLambda(ktLambda: KtLambdaExpression): IrStatement {
-        val ktFun = ktLambda.functionLiteral
-        val lambdaExpressionType = getTypeInferredByFrontendOrFail(ktLambda).toIrType()
-        val loopResolver = if (context.languageVersionSettings.supportsFeature(LanguageFeature.BreakContinueInInlineLambdas)
+        konst ktFun = ktLambda.functionLiteral
+        konst lambdaExpressionType = getTypeInferredByFrontendOrFail(ktLambda).toIrType()
+        konst loopResolver = if (context.languageVersionSettings.supportsFeature(LanguageFeature.BreakContinueInInlineLambdas)
             && isInlineableFunctionLiteral(ktLambda, context.bindingContext)
         )
             statementGenerator.bodyGenerator
         else null
-        val irLambdaFunction = FunctionGenerator(context).generateLambdaFunctionDeclaration(ktFun, loopResolver)
+        konst irLambdaFunction = FunctionGenerator(context).generateLambdaFunctionDeclaration(ktFun, loopResolver)
 
         return IrFunctionExpressionImpl(
             ktLambda.startOffset, ktLambda.endOffset,
@@ -48,10 +48,10 @@ internal class LocalFunctionGenerator(statementGenerator: StatementGenerator) : 
     }
 
     fun generateFunction(ktFun: KtNamedFunction): IrStatement {
-        val irFun = generateFunctionDeclaration(ktFun)
+        konst irFun = generateFunctionDeclaration(ktFun)
         if (ktFun.name != null) return irFun
 
-        val funExpressionType = getTypeInferredByFrontendOrFail(ktFun).toIrType()
+        konst funExpressionType = getTypeInferredByFrontendOrFail(ktFun).toIrType()
         return IrFunctionExpressionImpl(
             ktFun.startOffset, ktFun.endOffset,
             funExpressionType,

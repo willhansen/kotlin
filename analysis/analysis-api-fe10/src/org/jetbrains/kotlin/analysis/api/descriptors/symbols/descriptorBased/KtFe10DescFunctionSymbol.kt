@@ -36,67 +36,67 @@ import org.jetbrains.kotlin.resolve.calls.inference.returnTypeOrNothing
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 
 internal class KtFe10DescFunctionSymbol private constructor(
-    override val descriptor: FunctionDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: FunctionDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtFunctionSymbol(), KtFe10DescMemberSymbol<FunctionDescriptor> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val contractEffects: List<KtContractEffectDeclaration> by cached {
+    override konst contractEffects: List<KtContractEffectDeclaration> by cached {
         descriptor.getUserData(ContractProviderKey)?.getContractDescription()?.effects
             ?.map { it.effectDeclarationToAnalysisApi(analysisContext) }
             .orEmpty()
     }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { descriptor.ktSymbolKind }
 
-    override val isSuspend: Boolean
+    override konst isSuspend: Boolean
         get() = withValidityAssertion { descriptor.isSuspend }
 
-    override val isOperator: Boolean
+    override konst isOperator: Boolean
         get() = withValidityAssertion { descriptor.isOperator }
 
-    override val isExternal: Boolean
+    override konst isExternal: Boolean
         get() = withValidityAssertion { descriptor.isExternal }
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = withValidityAssertion { descriptor.isInline }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { descriptor.isExplicitOverride }
 
-    override val isInfix: Boolean
+    override konst isInfix: Boolean
         get() = withValidityAssertion { descriptor.isInfix }
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = withValidityAssertion { descriptor is JavaCallableMemberDescriptor && DescriptorUtils.isStaticDeclaration(descriptor) }
 
-    override val isBuiltinFunctionInvoke: Boolean
+    override konst isBuiltinFunctionInvoke: Boolean
         get() = withValidityAssertion { callableIdIfNonLocal in kotlinFunctionInvokeCallableIds }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { descriptor.ktHasStableParameterNames }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { descriptor.callableIdIfNotLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnTypeOrNothing.toKtType(analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor.createContextReceivers(analysisContext) }
 
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { descriptor.isExtension }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { descriptor.typeParameters.map { KtFe10DescTypeParameterSymbol(it, analysisContext) } }
 
     context(KtAnalysisSession)
@@ -105,9 +105,9 @@ internal class KtFe10DescFunctionSymbol private constructor(
             return it
         }
 
-        val callableId = descriptor.callableIdIfNotLocal
+        konst callableId = descriptor.callableIdIfNotLocal
         if (callableId != null) {
-            val signature = descriptor.getSymbolPointerSignature()
+            konst signature = descriptor.getSymbolPointerSignature()
             return KtFe10DescFunctionLikeSymbolPointer(callableId, signature)
         }
 

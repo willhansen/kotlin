@@ -1,6 +1,6 @@
 class D {
     companion object {
-        protected val F: String = "OK"
+        protected konst F: String = "OK"
     }
 
     inner class E {

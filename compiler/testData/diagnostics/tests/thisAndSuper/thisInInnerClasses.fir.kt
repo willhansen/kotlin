@@ -1,11 +1,11 @@
 // !CHECK_TYPE
 
-class A(val a:Int) {
+class A(konst a:Int) {
 
   inner class B() {
-    val x = checkSubtype<B>(this@B)
-    val y = checkSubtype<A>(this@A)
-    val z = checkSubtype<B>(this)
-    val Int.xx : Int get() = checkSubtype<Int>(this)
+    konst x = checkSubtype<B>(this@B)
+    konst y = checkSubtype<A>(this@A)
+    konst z = checkSubtype<B>(this)
+    konst Int.xx : Int get() = checkSubtype<Int>(this)
   }
 }

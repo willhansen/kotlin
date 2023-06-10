@@ -20,8 +20,8 @@ export type CliArgValues = {
 export type CliArgDescription = {
     keys: string[],
     help: string,
-    values?: string[],
-    valuesHelp?: string[],
+    konstues?: string[],
+    konstuesHelp?: string[],
     default?: string,
     single?: true
 }
@@ -45,12 +45,12 @@ export class CliArgsParser {
             println('  ' + data.keys.join(', '));
             const indent = '    ';
             println(`${indent}${data.help}`);
-            if (data.values && data.valuesHelp) {
-                println(`${indent}Possible values:`);
-                for (let i = 0; i < data.values.length; i++) {
-                    const value = data.values[i];
-                    const help = data.valuesHelp[i];
-                    println(`${indent} - "${value}": ${help}`)
+            if (data.konstues && data.konstuesHelp) {
+                println(`${indent}Possible konstues:`);
+                for (let i = 0; i < data.konstues.length; i++) {
+                    const konstue = data.konstues[i];
+                    const help = data.konstuesHelp[i];
+                    println(`${indent} - "${konstue}": ${help}`)
                 }
             }
             if (data.default) println(`${indent}By default: ${data.default}`);
@@ -86,18 +86,18 @@ export class CliArgsParser {
                     const argDescription = description.args[argName];
                     if (argDescription.keys.indexOf(arg) != -1) {
                         if (args.length == 0) {
-                            this.badArgsExit("Missed value after option " + arg);
+                            this.badArgsExit("Missed konstue after option " + arg);
                         }
 
-                        const value = args.shift() as string;
-                        if (argDescription.values && argDescription.values.indexOf(value) == -1) {
-                            this.badArgsExit("Unsupported value for option " + arg);
+                        const konstue = args.shift() as string;
+                        if (argDescription.konstues && argDescription.konstues.indexOf(konstue) == -1) {
+                            this.badArgsExit("Unsupported konstue for option " + arg);
                         }
 
                         if (argDescription.single) {
-                            result[argName] = value;
+                            result[argName] = konstue;
                         } else {
-                            (result[argName] as string[]).push(value);
+                            (result[argName] as string[]).push(konstue);
                         }
 
                         continue args;
@@ -137,12 +137,12 @@ export function getDefaultCliDescription(): CliDescription {
                 keys: ['--ignoredTestSuites'],
                 help: "How to deal with ignored test suites",
                 single: true,
-                values: [
+                konstues: [
                     IgnoredTestSuitesReporting.skip,
                     IgnoredTestSuitesReporting.reportAsIgnoredTest,
                     IgnoredTestSuitesReporting.reportAllInnerTestsAsIgnored
                 ],
-                valuesHelp: [
+                konstuesHelp: [
                     "don't report ignored test suites",
                     "useful to speedup large ignored test suites",
                     "will cause visiting all inner tests",

@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.load.java
 
 data class JavaNullabilityAnnotationsStatus(
-    val reportLevelBefore: ReportLevel,
-    val sinceVersion: KotlinVersion? = KotlinVersion(1, 0),
-    val reportLevelAfter: ReportLevel = reportLevelBefore,
+    konst reportLevelBefore: ReportLevel,
+    konst sinceVersion: KotlinVersion? = KotlinVersion(1, 0),
+    konst reportLevelAfter: ReportLevel = reportLevelBefore,
 ) {
     companion object {
-        val DEFAULT = JavaNullabilityAnnotationsStatus(ReportLevel.STRICT)
+        konst DEFAULT = JavaNullabilityAnnotationsStatus(ReportLevel.STRICT)
     }
 }

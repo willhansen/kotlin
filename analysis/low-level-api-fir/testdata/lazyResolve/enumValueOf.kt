@@ -1,4 +1,4 @@
-// MEMBER_NAME_FILTER: valueOf
+// MEMBER_NAME_FILTER: konstueOf
 package one
 
 enum class M<caret>yEnum {

@@ -15,76 +15,76 @@ interface OnlyInputTypeConstraintPosition
 
 sealed class ConstraintPosition
 
-abstract class ExplicitTypeParameterConstraintPosition<T>(val typeArgument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
+abstract class ExplicitTypeParameterConstraintPosition<T>(konst typeArgument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "TypeParameter $typeArgument"
 }
 
-abstract class InjectedAnotherStubTypeConstraintPosition<T>(private val builderInferenceLambdaOfInjectedStubType: T) : ConstraintPosition(),
+abstract class InjectedAnotherStubTypeConstraintPosition<T>(private konst builderInferenceLambdaOfInjectedStubType: T) : ConstraintPosition(),
     OnlyInputTypeConstraintPosition {
     override fun toString(): String = "Injected from $builderInferenceLambdaOfInjectedStubType builder inference call"
 }
 
 abstract class BuilderInferenceSubstitutionConstraintPosition<L>(
-    private val builderInferenceLambda: L,
-    val initialConstraint: InitialConstraint,
-    val isFromNotSubstitutedDeclaredUpperBound: Boolean = false
+    private konst builderInferenceLambda: L,
+    konst initialConstraint: InitialConstraint,
+    konst isFromNotSubstitutedDeclaredUpperBound: Boolean = false
 ) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "Incorporated builder inference constraint $initialConstraint " +
             "into $builderInferenceLambda call"
 }
 
-abstract class ExpectedTypeConstraintPosition<T>(val topLevelCall: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
+abstract class ExpectedTypeConstraintPosition<T>(konst topLevelCall: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "ExpectedType for call $topLevelCall"
 }
 
-abstract class DeclaredUpperBoundConstraintPosition<T>(val typeParameter: T) : ConstraintPosition() {
+abstract class DeclaredUpperBoundConstraintPosition<T>(konst typeParameter: T) : ConstraintPosition() {
     override fun toString(): String = "DeclaredUpperBound $typeParameter"
 }
 
-abstract class ArgumentConstraintPosition<out T>(val argument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
+abstract class ArgumentConstraintPosition<out T>(konst argument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "Argument $argument"
 }
 
-abstract class CallableReferenceConstraintPosition<out T>(val call: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
+abstract class CallableReferenceConstraintPosition<out T>(konst call: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "Callable reference $call"
 }
 
-abstract class ReceiverConstraintPosition<T>(val argument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
+abstract class ReceiverConstraintPosition<T>(konst argument: T) : ConstraintPosition(), OnlyInputTypeConstraintPosition {
     override fun toString(): String = "Receiver $argument"
 }
 
-abstract class FixVariableConstraintPosition<T>(val variable: TypeVariableMarker, val resolvedAtom: T) : ConstraintPosition() {
+abstract class FixVariableConstraintPosition<T>(konst variable: TypeVariableMarker, konst resolvedAtom: T) : ConstraintPosition() {
     override fun toString(): String = "Fix variable $variable"
 }
 
-abstract class KnownTypeParameterConstraintPosition<T : KotlinTypeMarker>(val typeArgument: T) : ConstraintPosition() {
+abstract class KnownTypeParameterConstraintPosition<T : KotlinTypeMarker>(konst typeArgument: T) : ConstraintPosition() {
     override fun toString(): String = "TypeArgument $typeArgument"
 }
 
 abstract class LHSArgumentConstraintPosition<T, R>(
-    val argument: T,
-    val receiver: R
+    konst argument: T,
+    konst receiver: R
 ) : ConstraintPosition() {
     override fun toString(): String {
         return "LHS receiver $receiver"
     }
 }
 
-abstract class LambdaArgumentConstraintPosition<T>(val lambda: T) : ConstraintPosition() {
+abstract class LambdaArgumentConstraintPosition<T>(konst lambda: T) : ConstraintPosition() {
     override fun toString(): String {
         return "LambdaArgument $lambda"
     }
 }
 
-open class DelegatedPropertyConstraintPosition<T>(val topLevelCall: T) : ConstraintPosition() {
+open class DelegatedPropertyConstraintPosition<T>(konst topLevelCall: T) : ConstraintPosition() {
     override fun toString(): String = "Constraint from call $topLevelCall for delegated property"
 }
 
 data class IncorporationConstraintPosition(
-    val initialConstraint: InitialConstraint,
+    konst initialConstraint: InitialConstraint,
     var isFromDeclaredUpperBound: Boolean = false
 ) : ConstraintPosition() {
-    val from: ConstraintPosition get() = initialConstraint.position
+    konst from: ConstraintPosition get() = initialConstraint.position
 
     override fun toString(): String = "Incorporate $initialConstraint from position $from"
 }
@@ -98,18 +98,18 @@ object SimpleConstraintSystemConstraintPosition : ConstraintPosition()
 
 // ------------------------------------------------ Errors ------------------------------------------------
 
-sealed class ConstraintSystemError(val applicability: CandidateApplicability)
+sealed class ConstraintSystemError(konst applicability: CandidateApplicability)
 
 sealed interface NewConstraintMismatch {
-    val lowerType: KotlinTypeMarker
-    val upperType: KotlinTypeMarker
-    val position: IncorporationConstraintPosition
+    konst lowerType: KotlinTypeMarker
+    konst upperType: KotlinTypeMarker
+    konst position: IncorporationConstraintPosition
 }
 
 class NewConstraintError(
-    override val lowerType: KotlinTypeMarker,
-    override val upperType: KotlinTypeMarker,
-    override val position: IncorporationConstraintPosition,
+    override konst lowerType: KotlinTypeMarker,
+    override konst upperType: KotlinTypeMarker,
+    override konst position: IncorporationConstraintPosition,
 ) : ConstraintSystemError(if (position.from is ReceiverConstraintPosition<*>) INAPPLICABLE_WRONG_RECEIVER else INAPPLICABLE),
     NewConstraintMismatch {
     override fun toString(): String {
@@ -118,57 +118,57 @@ class NewConstraintError(
 }
 
 class NewConstraintWarning(
-    override val lowerType: KotlinTypeMarker,
-    override val upperType: KotlinTypeMarker,
-    override val position: IncorporationConstraintPosition,
+    override konst lowerType: KotlinTypeMarker,
+    override konst upperType: KotlinTypeMarker,
+    override konst position: IncorporationConstraintPosition,
 ) : ConstraintSystemError(RESOLVED), NewConstraintMismatch
 
 class CapturedTypeFromSubtyping(
-    val typeVariable: TypeVariableMarker,
-    val constraintType: KotlinTypeMarker,
-    val position: ConstraintPosition
+    konst typeVariable: TypeVariableMarker,
+    konst constraintType: KotlinTypeMarker,
+    konst position: ConstraintPosition
 ) : ConstraintSystemError(INAPPLICABLE)
 
 open class NotEnoughInformationForTypeParameter<T>(
-    val typeVariable: TypeVariableMarker,
-    val resolvedAtom: T,
-    val couldBeResolvedWithUnrestrictedBuilderInference: Boolean
+    konst typeVariable: TypeVariableMarker,
+    konst resolvedAtom: T,
+    konst couldBeResolvedWithUnrestrictedBuilderInference: Boolean
 ) : ConstraintSystemError(INAPPLICABLE)
 
-class InferredIntoDeclaredUpperBounds(val typeVariable: TypeVariableMarker) : ConstraintSystemError(RESOLVED)
+class InferredIntoDeclaredUpperBounds(konst typeVariable: TypeVariableMarker) : ConstraintSystemError(RESOLVED)
 
 class ConstrainingTypeIsError(
-    val typeVariable: TypeVariableMarker,
-    val constraintType: KotlinTypeMarker,
-    val position: IncorporationConstraintPosition
+    konst typeVariable: TypeVariableMarker,
+    konst constraintType: KotlinTypeMarker,
+    konst position: IncorporationConstraintPosition
 ) : ConstraintSystemError(INAPPLICABLE)
 
-class NoSuccessfulFork(val position: IncorporationConstraintPosition) : ConstraintSystemError(INAPPLICABLE)
+class NoSuccessfulFork(konst position: IncorporationConstraintPosition) : ConstraintSystemError(INAPPLICABLE)
 
 sealed interface InferredEmptyIntersection {
-    val incompatibleTypes: List<KotlinTypeMarker>
-    val causingTypes: List<KotlinTypeMarker>
-    val typeVariable: TypeVariableMarker
-    val kind: EmptyIntersectionTypeKind
+    konst incompatibleTypes: List<KotlinTypeMarker>
+    konst causingTypes: List<KotlinTypeMarker>
+    konst typeVariable: TypeVariableMarker
+    konst kind: EmptyIntersectionTypeKind
 }
 
 class InferredEmptyIntersectionWarning(
-    override val incompatibleTypes: List<KotlinTypeMarker>,
-    override val causingTypes: List<KotlinTypeMarker>,
-    override val typeVariable: TypeVariableMarker,
-    override val kind: EmptyIntersectionTypeKind,
+    override konst incompatibleTypes: List<KotlinTypeMarker>,
+    override konst causingTypes: List<KotlinTypeMarker>,
+    override konst typeVariable: TypeVariableMarker,
+    override konst kind: EmptyIntersectionTypeKind,
 ) : ConstraintSystemError(RESOLVED), InferredEmptyIntersection
 
 class InferredEmptyIntersectionError(
-    override val incompatibleTypes: List<KotlinTypeMarker>,
-    override val causingTypes: List<KotlinTypeMarker>,
-    override val typeVariable: TypeVariableMarker,
-    override val kind: EmptyIntersectionTypeKind,
+    override konst incompatibleTypes: List<KotlinTypeMarker>,
+    override konst causingTypes: List<KotlinTypeMarker>,
+    override konst typeVariable: TypeVariableMarker,
+    override konst kind: EmptyIntersectionTypeKind,
 ) : ConstraintSystemError(INAPPLICABLE), InferredEmptyIntersection
 
-class OnlyInputTypesDiagnostic(val typeVariable: TypeVariableMarker) : ConstraintSystemError(INAPPLICABLE)
+class OnlyInputTypesDiagnostic(konst typeVariable: TypeVariableMarker) : ConstraintSystemError(INAPPLICABLE)
 
-class LowerPriorityToPreserveCompatibility(val needToReportWarning: Boolean) :
+class LowerPriorityToPreserveCompatibility(konst needToReportWarning: Boolean) :
     ConstraintSystemError(RESOLVED_NEED_PRESERVE_COMPATIBILITY)
 
 fun Constraint.isExpectedTypePosition() =

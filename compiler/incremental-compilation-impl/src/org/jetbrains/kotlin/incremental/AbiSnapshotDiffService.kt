@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.metadata.deserialization.Flags
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.resolve.sam.SAM_LOOKUP_NAME
 
-//TODO(valtman) Should be in gradle daemon.
+//TODO(konsttman) Should be in gradle daemon.
 class AbiSnapshotDiffService() {
 
     companion object {
         //Store list of changed lookups
-        private val diffCache: MutableMap<Pair<AbiSnapshot, AbiSnapshot>, DirtyData> = mutableMapOf()
+        private konst diffCache: MutableMap<Pair<AbiSnapshot, AbiSnapshot>, DirtyData> = mutableMapOf()
 
-        //TODO(valtman) move out from Kotlin daemon
+        //TODO(konsttman) move out from Kotlin daemon
         fun compareJarsInternal(
             oldSnapshot: AbiSnapshot, newSnapshot: AbiSnapshot,
             caches: IncrementalCacheCommon
@@ -28,14 +28,14 @@ class AbiSnapshotDiffService() {
 
         fun doCompute(snapshot: AbiSnapshot, actual: AbiSnapshot, caches: IncrementalCacheCommon, scopes: Collection<String>): DirtyData {
 
-            val dirtyFqNames = mutableListOf<FqName>()
-            val dirtyLookupSymbols = mutableListOf<LookupSymbol>()
+            konst dirtyFqNames = mutableListOf<FqName>()
+            konst dirtyLookupSymbols = mutableListOf<LookupSymbol>()
 
             for ((fqName, protoData) in snapshot.protos) {
                 if (!inScope(fqName, scopes)) continue
-                val newProtoData = actual.protos[fqName]
+                konst newProtoData = actual.protos[fqName]
                 if (newProtoData == null) {
-                    val (fqNames, symbols) = addProtoInfo(protoData, fqName)
+                    konst (fqNames, symbols) = addProtoInfo(protoData, fqName)
                     dirtyFqNames.addAll(fqNames)
                     dirtyLookupSymbols.addAll(symbols)
                 } else {
@@ -44,21 +44,21 @@ class AbiSnapshotDiffService() {
                             protoData.nameResolver, newProtoData.nameResolver,
                             protoData.proto.typeTable, newProtoData.proto.typeTable
                         )
-                        val diff = DifferenceCalculatorForClass(protoData, newProtoData).difference()
+                        konst diff = DifferenceCalculatorForClass(protoData, newProtoData).difference()
 
                         if (diff.isClassAffected) {
-                            //TODO(valtman) get cache to mark dirty all subtypes if subclass affected
-//                            val fqNames = if (!diff.areSubclassesAffected) listOf(fqName) else withSubtypes(fqName, caches)
+                            //TODO(konsttman) get cache to mark dirty all subtypes if subclass affected
+//                            konst fqNames = if (!diff.areSubclassesAffected) listOf(fqName) else withSubtypes(fqName, caches)
                             dirtyFqNames.add(fqName)
                             assert(!fqName.isRoot) { "$fqName is root" }
 
-                            val scope = fqName.parent().asString()
-                            val name = fqName.shortName().identifier
+                            konst scope = fqName.parent().asString()
+                            konst name = fqName.shortName().identifier
                             dirtyLookupSymbols.add(LookupSymbol(name, scope))
                         }
                         for (member in diff.changedMembersNames) {
-                            //TODO(valtman) mark dirty symbols for subclasses
-                            val subtypeFqNames = withSubtypes(fqName, listOf(caches))
+                            //TODO(konsttman) mark dirty symbols for subclasses
+                            konst subtypeFqNames = withSubtypes(fqName, listOf(caches))
                             dirtyFqNames.addAll(subtypeFqNames)
 
                             for (subtypeFqName in subtypeFqNames) {
@@ -68,12 +68,12 @@ class AbiSnapshotDiffService() {
                         }
 
                     } else if (protoData is PackagePartProtoData && newProtoData is PackagePartProtoData) {
-                        val diff = DifferenceCalculatorForPackageFacade(protoData, newProtoData).difference()
+                        konst diff = DifferenceCalculatorForPackageFacade(protoData, newProtoData).difference()
                         for (member in diff.changedMembersNames) {
                             dirtyLookupSymbols.add(LookupSymbol(member, fqName.asString()))
                         }
                     } else {
-                        //TODO(valtman) is it a valid case
+                        //TODO(konsttman) is it a konstid case
                         throw IllegalStateException("package proto and class proto have the same fqName: $fqName")
                     }
                 }
@@ -82,19 +82,19 @@ class AbiSnapshotDiffService() {
 //                fqNames.addAll(snapshot.protos.keys.removeAll(actual.protos.keys))
             DirtyData(dirtyLookupSymbols, dirtyFqNames)
             // .removeAll(actual.protos.keys)
-            val oldFqNames = snapshot.protos.keys
+            konst oldFqNames = snapshot.protos.keys
             dirtyFqNames.addAll(actual.protos.keys.filter { !oldFqNames.contains(it) })
             return DirtyData(dirtyLookupSymbols, dirtyFqNames)
 
         }
 
-        //TODO(valtman) change to return type
+        //TODO(konsttman) change to return type
         private fun addProtoInfo(
             protoData: ProtoData,
             fqName: FqName,
         ) : Pair<List<FqName>, List<LookupSymbol>>{
-            val fqNames = ArrayList<FqName>()
-            val symbols = ArrayList<LookupSymbol>()
+            konst fqNames = ArrayList<FqName>()
+            konst symbols = ArrayList<LookupSymbol>()
             when (protoData) {
                 is ClassProtoData -> {
                     fqNames.add(fqName)

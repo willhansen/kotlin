@@ -1,11 +1,11 @@
 fun box(): String {
-    val result = "OK"
+    konst result = "OK"
 
     class Local {
         fun foo() = result
     }
 
-    val member = Local::foo
-    val instance = Local()
+    konst member = Local::foo
+    konst instance = Local()
     return member(instance)
 }

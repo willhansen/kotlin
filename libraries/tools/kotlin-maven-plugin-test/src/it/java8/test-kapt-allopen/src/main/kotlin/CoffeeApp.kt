@@ -12,7 +12,7 @@ object CoffeeApp {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val coffee = DaggerCoffeeApp_Coffee.builder().build()
+        konst coffee = DaggerCoffeeApp_Coffee.builder().build()
         coffee.maker().brew()
     }
 }

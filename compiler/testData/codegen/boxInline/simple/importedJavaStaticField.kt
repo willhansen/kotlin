@@ -4,7 +4,7 @@
 import java.util.Locale
 
 inline fun inlineFun(): String {
-    val root = Locale.ROOT
+    konst root = Locale.ROOT
     return "OK"
 }
 

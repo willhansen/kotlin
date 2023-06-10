@@ -19,8 +19,8 @@ class WholeWorldStageController : StageController() {
     private var index: Int = 0
 
     override fun <T> restrictTo(declaration: IrDeclaration, fn: () -> T): T {
-        val previousCurrentDeclaration = currentDeclaration
-        val previousIndex = index
+        konst previousCurrentDeclaration = currentDeclaration
+        konst previousIndex = index
 
         currentDeclaration = declaration
         index = 0
@@ -34,9 +34,9 @@ class WholeWorldStageController : StageController() {
     }
 
     override fun <T> withInitialIr(block: () -> T): T {
-        val oldStage = currentStage
+        konst oldStage = currentStage
         currentStage = 0
-        val oldCurrentDeclaration = currentDeclaration
+        konst oldCurrentDeclaration = currentDeclaration
         currentDeclaration = null
         return try {
             block()

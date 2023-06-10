@@ -39,12 +39,12 @@ import kotlin.script.templates.ScriptTemplateDefinition
 
 class ScriptGenTest : CodegenTestCase() {
     companion object {
-        private val FIB_SCRIPT_DEFINITION =
+        private konst FIB_SCRIPT_DEFINITION =
             ScriptDefinition.FromLegacy(
                 defaultJvmScriptingHostConfiguration,
                 KotlinScriptDefinitionFromAnnotatedTemplate(ScriptWithIntParam::class)
             )
-        private val NO_PARAM_SCRIPT_DEFINITION =
+        private konst NO_PARAM_SCRIPT_DEFINITION =
             ScriptDefinition.FromLegacy(
                 defaultJvmScriptingHostConfiguration,
                 KotlinScriptDefinitionFromAnnotatedTemplate(Any::class)
@@ -69,37 +69,37 @@ class ScriptGenTest : CodegenTestCase() {
     fun testLanguage() {
         setUpEnvironment("scriptCustom/fib.lang.kts")
 
-        val aClass = generateClass("Fib_lang")
-        val constructor = aClass.getConstructor(Integer.TYPE)
-        val result = aClass.getDeclaredField("result")
+        konst aClass = generateClass("Fib_lang")
+        konst constructor = aClass.getConstructor(Integer.TYPE)
+        konst result = aClass.getDeclaredField("result")
         result.isAccessible = true
-        val script = constructor.newInstance(5)
+        konst script = constructor.newInstance(5)
         assertEquals(8, result.get(script))
     }
 
     fun testLanguageWithPackage() {
         setUpEnvironment("scriptCustom/fibwp.lang.kts")
 
-        val aClass = generateClass("test.Fibwp_lang")
-        val constructor = aClass.getConstructor(Integer.TYPE)
-        val result = aClass.getDeclaredField("result")
+        konst aClass = generateClass("test.Fibwp_lang")
+        konst constructor = aClass.getConstructor(Integer.TYPE)
+        konst result = aClass.getDeclaredField("result")
         result.isAccessible = true
-        val script = constructor.newInstance(5)
+        konst script = constructor.newInstance(5)
         assertEquals(8, result.get(script))
     }
 
     fun testDependentScripts() {
         setUpEnvironment(listOf("scriptCustom/fibwp.lang.kts", "scriptCustom/fibwprunner.kts"))
 
-        val aClass = generateClass("Fibwprunner")
-        val constructor = aClass.getConstructor()
-        val result = aClass.getDeclaredField("result")
+        konst aClass = generateClass("Fibwprunner")
+        konst constructor = aClass.getConstructor()
+        konst result = aClass.getDeclaredField("result")
         result.isAccessible = true
-        val resultMethod = aClass.getDeclaredMethod("getResult")
+        konst resultMethod = aClass.getDeclaredMethod("getResult")
         assertTrue(resultMethod.modifiers and Opcodes.ACC_FINAL != 0)
         assertTrue(resultMethod.modifiers and Opcodes.ACC_PUBLIC != 0)
         assertTrue(result.modifiers and Opcodes.ACC_PRIVATE != 0)
-        val script = constructor.newInstance()
+        konst script = constructor.newInstance()
         assertEquals(8, result.get(script))
         assertEquals(8, resultMethod.invoke(script))
     }
@@ -107,18 +107,18 @@ class ScriptGenTest : CodegenTestCase() {
     fun testScriptWhereMethodHasClosure() {
         setUpEnvironment("scriptCustom/methodWithClosure.lang.kts")
 
-        val aClass = generateClass("MethodWithClosure_lang")
-        val constructor = aClass.getConstructor(Integer.TYPE)
-        val script = constructor.newInstance(239)
-        val fib = aClass.getMethod("method")
-        val invoke = fib.invoke(script)
+        konst aClass = generateClass("MethodWithClosure_lang")
+        konst constructor = aClass.getConstructor(Integer.TYPE)
+        konst script = constructor.newInstance(239)
+        konst fib = aClass.getMethod("method")
+        konst invoke = fib.invoke(script)
         assertEquals(239, invoke as Int / 2)
     }
 
     fun testNameSanitation() {
         setUpEnvironment("scriptCustom/1#@2.kts")
 
-        val aClass = generateClass("_1__2")
+        konst aClass = generateClass("_1__2")
         assertEquals("OK", aClass.getDeclaredMethod("getResult")(aClass.newInstance()))
     }
 
@@ -127,7 +127,7 @@ class ScriptGenTest : CodegenTestCase() {
     }
 
     private fun setUpEnvironment(sourcePaths: List<String>) {
-        val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
+        konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.FULL_JDK).apply {
             put(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, false))
             add(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS, FIB_SCRIPT_DEFINITION)
             add(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS, NO_PARAM_SCRIPT_DEFINITION)
@@ -146,4 +146,4 @@ class ScriptGenTest : CodegenTestCase() {
 
 @Suppress("unused")
 @ScriptTemplateDefinition(scriptFilePattern = ".*\\.lang\\.kts")
-abstract class ScriptWithIntParam(val num: Int)
+abstract class ScriptWithIntParam(konst num: Int)

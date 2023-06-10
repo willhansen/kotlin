@@ -3,7 +3,7 @@
 package Test
 
 interface ByteArray {
-    val array: ByteArray
+    konst array: ByteArray
 }
 
 // FILE: main.kt
@@ -14,5 +14,5 @@ import <!UNRESOLVED_IMPORT!>test<!>.*
 
 interface My {
     // Should be kotlin.ByteArray
-    val array: ByteArray
+    konst array: ByteArray
 }

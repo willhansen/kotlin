@@ -24,42 +24,42 @@ class KtConstantExpressionElementType(@NonNls debugName: String) :
     ) {
 
     override fun shouldCreateStub(node: ASTNode): Boolean {
-        val parent = node.treeParent ?: return false
+        konst parent = node.treeParent ?: return false
         if (parent.elementType != KtStubElementTypes.VALUE_ARGUMENT) return false
 
         return super.shouldCreateStub(node)
     }
 
     override fun createStub(psi: KtConstantExpression, parentStub: StubElement<*>?): KotlinConstantExpressionStub {
-        val elementType = psi.node.elementType as? KtConstantExpressionElementType
+        konst elementType = psi.node.elementType as? KtConstantExpressionElementType
             ?: throw IllegalStateException("Stub element type is expected for constant")
 
-        val value = psi.text ?: ""
+        konst konstue = psi.text ?: ""
 
         return KotlinConstantExpressionStubImpl(
             parentStub,
             elementType,
             constantElementTypeToKind(elementType),
-            StringRef.fromString(value)
+            StringRef.fromString(konstue)
         )
     }
 
     override fun serialize(stub: KotlinConstantExpressionStub, dataStream: StubOutputStream) {
         dataStream.writeInt(stub.kind().ordinal)
-        dataStream.writeName(stub.value())
+        dataStream.writeName(stub.konstue())
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): KotlinConstantExpressionStub {
-        val kindOrdinal = dataStream.readInt()
-        val value = dataStream.readName() ?: StringRef.fromString("")
+        konst kindOrdinal = dataStream.readInt()
+        konst konstue = dataStream.readName() ?: StringRef.fromString("")
 
-        val valueKind = ConstantValueKind.values()[kindOrdinal]
+        konst konstueKind = ConstantValueKind.konstues()[kindOrdinal]
 
         return KotlinConstantExpressionStubImpl(
             parentStub,
-            kindToConstantElementType(valueKind),
-            valueKind,
-            value
+            kindToConstantElementType(konstueKind),
+            konstueKind,
+            konstue
         )
     }
 

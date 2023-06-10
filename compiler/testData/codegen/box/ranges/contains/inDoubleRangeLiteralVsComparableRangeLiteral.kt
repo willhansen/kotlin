@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
-val DOUBLE_RANGE = 0.0 .. -0.0
+konst DOUBLE_RANGE = 0.0 .. -0.0
 
-val PZERO = 0.0 as Comparable<Any>
-val NZERO = -0.0 as Comparable<Any>
-val COMPARABLE_RANGE = PZERO .. NZERO
+konst PZERO = 0.0 as Comparable<Any>
+konst NZERO = -0.0 as Comparable<Any>
+konst COMPARABLE_RANGE = PZERO .. NZERO
 
 fun box(): String {
     if (!(0.0 in DOUBLE_RANGE)) return "fail 1 in Double"

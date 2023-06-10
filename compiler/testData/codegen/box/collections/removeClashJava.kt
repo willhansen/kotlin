@@ -2,7 +2,7 @@
 // WITH_STDLIB
 // FILE: removeClashJava.kt
 class Queue<T>() : Collection<T> {
-    override val size: Int = 1
+    override konst size: Int = 1
     override fun contains(element: T): Boolean = TODO()
     override fun containsAll(elements: Collection<T>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()
@@ -12,7 +12,7 @@ class Queue<T>() : Collection<T> {
 }
 
 fun box(): String {
-    val q = Queue<String>()
+    konst q = Queue<String>()
     J.testRemove(q)
     return q.remove("OK") as String
 }

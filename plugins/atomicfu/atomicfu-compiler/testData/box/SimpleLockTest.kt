@@ -3,8 +3,8 @@ import kotlin.test.*
 
 class SimpleLockTest {
     fun withLock() {
-        val lock = SimpleLock()
-        val result = lock.withLock {
+        konst lock = SimpleLock()
+        konst result = lock.withLock {
             "OK"
         }
         assertEquals("OK", result)
@@ -12,7 +12,7 @@ class SimpleLockTest {
 }
 
 class SimpleLock {
-    private val _locked = atomic(0)
+    private konst _locked = atomic(0)
 
     fun <T> withLock(block: () -> T): T {
         // this contrieves construct triggers Kotlin compiler to reuse local variable slot #2 for
@@ -24,13 +24,13 @@ class SimpleLock {
                 return block()
             }
         } finally {
-            _locked.value = 0
+            _locked.konstue = 0
         }
     }
 }
 
 fun box(): String {
-    val testClass = SimpleLockTest()
+    konst testClass = SimpleLockTest()
     testClass.withLock()
     return "OK"
 }

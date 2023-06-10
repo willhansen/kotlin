@@ -53,7 +53,7 @@ public abstract interface RegularInterface /* RegularInterface*/ {
 @kotlin.jvm.JvmInline()
 public final class Some /* Some*/ {
   @org.jetbrains.annotations.NotNull()
-  private final java.lang.String value;
+  private final java.lang.String konstue;
 
   @org.jetbrains.annotations.NotNull()
   public final java.lang.String getValue();//  getValue()

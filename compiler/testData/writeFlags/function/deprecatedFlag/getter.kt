@@ -1,5 +1,5 @@
 class MyClass() {
-    val test: Int
+    konst test: Int
         @Deprecated("") get(): Int { return 0 }
 }
 

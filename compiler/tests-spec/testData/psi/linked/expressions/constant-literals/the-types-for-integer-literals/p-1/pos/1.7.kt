@@ -7,5 +7,5 @@
  * DESCRIPTION: Binary prefix only suffixed by the long literal mark.
  */
 
-val value = 0bL
-val value = 0BL
+konst konstue = 0bL
+konst konstue = 0BL

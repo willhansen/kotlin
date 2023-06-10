@@ -20,10 +20,10 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 
 open class CommonizerIT : BaseGradleIT() {
-    override val defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
+    override konst defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
 
     companion object {
-        private const val commonizerOutput = "Preparing commonized Kotlin/Native libraries"
+        private const konst commonizerOutput = "Preparing commonized Kotlin/Native libraries"
     }
 
     @Test
@@ -77,8 +77,8 @@ open class CommonizerIT : BaseGradleIT() {
                 assertSuccessful()
             }
 
-            val buildGradleKts = projectFile("build.gradle.kts")
-            val originalBuildGradleKtsContent = buildGradleKts.readText()
+            konst buildGradleKts = projectFile("build.gradle.kts")
+            konst originalBuildGradleKtsContent = buildGradleKts.readText()
 
             buildGradleKts.writeText(originalBuildGradleKtsContent.replace("curl", "curl2"))
             build(":commonize") {
@@ -138,8 +138,8 @@ open class CommonizerIT : BaseGradleIT() {
     fun `test commonizeCurlInterop copyCommonizeCInteropForIde`() {
         with(preparedProject("commonizeCurlInterop")) {
             setupWorkingDir()
-            val expectedOutputDirectoryForIde = projectDir.resolve(".gradle/kotlin/commonizer")
-            val expectedOutputDirectoryForBuild = projectDir.resolve("build/classes/kotlin/commonizer")
+            konst expectedOutputDirectoryForIde = projectDir.resolve(".gradle/kotlin/commonizer")
+            konst expectedOutputDirectoryForBuild = projectDir.resolve("build/classes/kotlin/commonizer")
 
             build(":copyCommonizeCInteropForIde") {
                 assertSuccessful()
@@ -269,7 +269,7 @@ open class CommonizerIT : BaseGradleIT() {
     }
 
     private fun `test single native platform`(project: String) {
-        val posixInIntransitiveMetadataConfigurationRegex = Regex(""".*intransitiveMetadataConfiguration:.*([pP])osix""")
+        konst posixInIntransitiveMetadataConfigurationRegex = Regex(""".*intransitiveMetadataConfiguration:.*([pP])osix""")
 
         fun CompiledProject.containsPosixInIntransitiveMetadataConfiguration(): Boolean =
             output.lineSequence().any { line ->
@@ -341,7 +341,7 @@ open class CommonizerIT : BaseGradleIT() {
     @Test
     fun `test KT-46248 single supported native target dependency propagation - cinterop`() {
         fun CompiledProject.containsCinteropDependency(): Boolean {
-            val nativeMainContainsCInteropDependencyRegex = Regex(""".*Dependency:.*cinterop-dummy.*""")
+            konst nativeMainContainsCInteropDependencyRegex = Regex(""".*Dependency:.*cinterop-dummy.*""")
             return output.lineSequence().any { line ->
                 line.matches(nativeMainContainsCInteropDependencyRegex)
             }
@@ -375,7 +375,7 @@ open class CommonizerIT : BaseGradleIT() {
     @Test
     fun `test KT-48856 single native target dependency propagation - test source set - cinterop`() {
         fun CompiledProject.containsCinteropDependency(): Boolean {
-            val nativeMainContainsCInteropDependencyRegex = Regex(""".*Dependency:.*cinterop-sampleInterop.*""")
+            konst nativeMainContainsCInteropDependencyRegex = Regex(""".*Dependency:.*cinterop-sampleInterop.*""")
             return output.lineSequence().any { line ->
                 line.matches(nativeMainContainsCInteropDependencyRegex)
             }
@@ -425,16 +425,16 @@ open class CommonizerIT : BaseGradleIT() {
     private fun `test multiple cinterops with test source sets and compilations`(testSourceSetsDependingOnMain: Boolean) {
         with(Project("commonizeMultipleCInteropsWithTests", minLogLevel = INFO)) {
 
-            val isUnix = HostManager.hostIsMac || HostManager.hostIsLinux
-            val isMac = HostManager.hostIsMac
-            val isWindows = HostManager.hostIsMingw
+            konst isUnix = HostManager.hostIsMac || HostManager.hostIsLinux
+            konst isMac = HostManager.hostIsMac
+            konst isWindows = HostManager.hostIsMingw
 
             fun CompiledProject.assertTestSourceSetsDependingOnMainParameter() {
-                val message = "testSourceSetsDependingOnMain is set"
+                konst message = "testSourceSetsDependingOnMain is set"
                 if (testSourceSetsDependingOnMain) assertContains(message) else assertNotContains(message)
             }
 
-            val testSourceSetsDependingOnMainParameterOption = defaultBuildOptions()
+            konst testSourceSetsDependingOnMainParameterOption = defaultBuildOptions()
                 .withFreeCommandLineArgument("-PtestSourceSetsDependingOnMain=$testSourceSetsDependingOnMain")
 
             reportSourceSetCommonizerDependencies(this, options = testSourceSetsDependingOnMainParameterOption) {
@@ -584,11 +584,11 @@ open class CommonizerIT : BaseGradleIT() {
     fun `test KT-48118 c-interops available in commonMain`() {
         with(Project("commonize-kt-48118-c-interop-in-common-main")) {
             reportSourceSetCommonizerDependencies(this) {
-                val upperMain = getCommonizerDependencies("upperMain")
+                konst upperMain = getCommonizerDependencies("upperMain")
                 upperMain.withoutNativeDistributionDependencies().assertDependencyFilesMatches(".*cinterop-dummy")
                 upperMain.onlyNativeDistributionDependencies().assertNotEmpty()
 
-                val commonMain = getCommonizerDependencies("commonMain")
+                konst commonMain = getCommonizerDependencies("commonMain")
                 commonMain.withoutNativeDistributionDependencies().assertDependencyFilesMatches(".*cinterop-dummy")
                 commonMain.onlyNativeDistributionDependencies().assertNotEmpty()
             }
@@ -630,12 +630,12 @@ open class CommonizerIT : BaseGradleIT() {
     fun `test KT-48138 commonizing c-interops when nativeTest and nativeMain have different targets`() {
         with(Project("commonize-kt-48138-nativeMain-nativeTest-different-targets")) {
             reportSourceSetCommonizerDependencies(this) {
-                val nativeMain = getCommonizerDependencies("nativeMain")
+                konst nativeMain = getCommonizerDependencies("nativeMain")
                 nativeMain.withoutNativeDistributionDependencies().assertDependencyFilesMatches(".*cinterop-dummy")
                 nativeMain.onlyNativeDistributionDependencies().assertNotEmpty()
                 nativeMain.assertTargetOnAllDependencies(CommonizerTarget(LINUX_X64, LINUX_ARM64, MINGW_X64))
 
-                val nativeTest = getCommonizerDependencies("nativeTest")
+                konst nativeTest = getCommonizerDependencies("nativeTest")
                 nativeTest.onlyNativeDistributionDependencies().assertNotEmpty()
                 nativeTest.withoutNativeDistributionDependencies().assertDependencyFilesMatches(".*cinterop-dummy")
                 nativeTest.assertTargetOnAllDependencies(CommonizerTarget(LINUX_X64, LINUX_ARM64))
@@ -665,7 +665,7 @@ open class CommonizerIT : BaseGradleIT() {
     @Test
     fun `test KT-52243 cinterop caching`() {
         with(preparedProject("commonizeCurlInterop")) {
-            val localBuildCacheDir = projectDir.resolve("local-build-cache-dir").also { assertTrue(it.mkdirs()) }
+            konst localBuildCacheDir = projectDir.resolve("local-build-cache-dir").also { assertTrue(it.mkdirs()) }
             gradleSettingsScript().appendText(
                 """
                 
@@ -734,10 +734,10 @@ open class CommonizerIT : BaseGradleIT() {
         return Project(name).apply {
             setupWorkingDir()
             projectDir.walkTopDown().filter { it.name.startsWith("build.gradle") }.forEach { buildFile ->
-                val originalText = buildFile.readText()
-                val preparedText = originalText
-                    .replace("<targetA>", CommonizableTargets.targetA.value)
-                    .replace("<targetB>", CommonizableTargets.targetB.value)
+                konst originalText = buildFile.readText()
+                konst preparedText = originalText
+                    .replace("<targetA>", CommonizableTargets.targetA.konstue)
+                    .replace("<targetB>", CommonizableTargets.targetB.konstue)
                 buildFile.writeText(preparedText)
             }
         }
@@ -748,21 +748,21 @@ open class CommonizerIT : BaseGradleIT() {
     }
 }
 
-private data class TargetSubstitution(val value: String, val isCompilable: Boolean, val isExecutable: Boolean) {
-    override fun toString(): String = value
+private data class TargetSubstitution(konst konstue: String, konst isCompilable: Boolean, konst isExecutable: Boolean) {
+    override fun toString(): String = konstue
 }
 
 private object CommonizableTargets {
-    private val os = OperatingSystem.current()
+    private konst os = OperatingSystem.current()
 
-    val targetA = when {
+    konst targetA = when {
         os.isMacOsX -> TargetSubstitution("macosX64", isCompilable = true, isExecutable = true)
         os.isLinux -> TargetSubstitution("linuxX64", isCompilable = true, isExecutable = true)
         os.isWindows -> TargetSubstitution("mingwX64", isCompilable = true, isExecutable = false)
         else -> fail("Unsupported os: ${os.name}")
     }
 
-    val targetB = when {
+    konst targetB = when {
         os.isMacOsX -> TargetSubstitution("linuxX64", isCompilable = true, isExecutable = false)
         os.isLinux -> TargetSubstitution("linuxArm64", isCompilable = true, isExecutable = false)
         os.isWindows -> TargetSubstitution("mingwX86", isCompilable = true, isExecutable = false)

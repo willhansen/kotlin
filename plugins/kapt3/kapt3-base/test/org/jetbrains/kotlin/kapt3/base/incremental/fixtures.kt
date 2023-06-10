@@ -20,7 +20,7 @@ import javax.lang.model.util.Elements
 import javax.tools.StandardLocation
 import javax.tools.ToolProvider
 
-val TEST_DATA_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental")
+konst TEST_DATA_DIR = File("plugins/kapt3/kapt3-base/testData/runner/incremental")
 
 fun runAnnotationProcessing(
     srcFiles: List<File>,
@@ -29,10 +29,10 @@ fun runAnnotationProcessing(
     classpath: List<File> = emptyList(),
     listener: (Elements, Trees) -> TaskListener? = { _, _ -> null }
 ) {
-    val compiler = ToolProvider.getSystemJavaCompiler()
+    konst compiler = ToolProvider.getSystemJavaCompiler()
     compiler.getStandardFileManager(null, null, null).use { fileManager ->
-        val javaSrcs = fileManager.getJavaFileObjectsFromFiles(srcFiles)
-        val compilationTask =
+        konst javaSrcs = fileManager.getJavaFileObjectsFromFiles(srcFiles)
+        konst compilationTask =
             compiler.getTask(
                 null,
                 fileManager,
@@ -42,7 +42,7 @@ fun runAnnotationProcessing(
                 javaSrcs
             ) as JavacTaskImpl
 
-        val taskListener = listener(compilationTask.elements, Trees.instance(compilationTask))
+        konst taskListener = listener(compilationTask.elements, Trees.instance(compilationTask))
         taskListener?.let { compilationTask.addTaskListener(it) }
 
         compilationTask.setProcessors(processor)
@@ -51,9 +51,9 @@ fun runAnnotationProcessing(
 }
 
 fun compileSources(srcFiles: Iterable<File>, outputDir: File) {
-    val compiler = ToolProvider.getSystemJavaCompiler()
+    konst compiler = ToolProvider.getSystemJavaCompiler()
     compiler.getStandardFileManager(null, null, null).use { fileManager ->
-        val compilationTask =
+        konst compilationTask =
             compiler.getTask(
                 null,
                 fileManager,
@@ -74,7 +74,7 @@ fun SimpleProcessor.toNonIncremental() =
 
 fun DynamicProcessor.toDynamic() = IncrementalProcessor(this, DeclaredProcType.DYNAMIC, WriterBackedKaptLogger(isVerbose = true))
 
-open class SimpleProcessor(private val wrongOrigin: Boolean = false, private val generatedSuffix: String = "") : AbstractProcessor() {
+open class SimpleProcessor(private konst wrongOrigin: Boolean = false, private konst generatedSuffix: String = "") : AbstractProcessor() {
     lateinit var filer: Filer
 
     override fun init(processingEnv: ProcessingEnvironment?) {
@@ -90,7 +90,7 @@ open class SimpleProcessor(private val wrongOrigin: Boolean = false, private val
         roundEnv.getElementsAnnotatedWith(annotations.single()).forEach {
             it as TypeElement
 
-            val generatedName = "${it.qualifiedName}Generated$generatedSuffix"
+            konst generatedName = "${it.qualifiedName}Generated$generatedSuffix"
             filer.createSourceFile(generatedName, it.takeUnless { wrongOrigin }).openWriter().use { it.write("") }
         }
 
@@ -102,7 +102,7 @@ open class SimpleProcessor(private val wrongOrigin: Boolean = false, private val
     }
 }
 
-class DynamicProcessor(private val kind: RuntimeProcType) : SimpleProcessor() {
+class DynamicProcessor(private konst kind: RuntimeProcType) : SimpleProcessor() {
     override fun getSupportedOptions(): MutableSet<String> {
         return mutableSetOf("org.gradle.annotation.processing.${kind.name}")
     }
@@ -116,7 +116,7 @@ class SimpleCreatingClassFilesAndResources : SimpleProcessor() {
         roundEnv.getElementsAnnotatedWith(annotations.single()).forEach {
             it as TypeElement
 
-            val generatedName = "${it.qualifiedName}Generated"
+            konst generatedName = "${it.qualifiedName}Generated"
             filer.createClassFile("${generatedName}Class", it).openWriter().use { it.write("") }
             filer.createResource(StandardLocation.SOURCE_OUTPUT, "test", "${it.simpleName}GeneratedResource", it).openWriter().use { it.write("") }
         }
@@ -131,7 +131,7 @@ class SimpleGeneratingIfTypeDoesNotExist: SimpleProcessor() {
 
         roundEnv.getElementsAnnotatedWith(annotations.single()).forEach { element ->
             element as TypeElement
-            val generatedName = "${element.qualifiedName}Generated"
+            konst generatedName = "${element.qualifiedName}Generated"
 
             if (processingEnv.elementUtils.getTypeElement(generatedName) == null) {
                 filer.createSourceFile(generatedName, element).openWriter().use {

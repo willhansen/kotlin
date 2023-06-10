@@ -26,64 +26,64 @@ import kotlin.reflect.full.memberProperties
 
 @Target(AnnotationTarget.PROPERTY)
 annotation class Argument(
-    val value: String,
-    val shortName: String = "",
-    val deprecatedName: String = "",
+    konst konstue: String,
+    konst shortName: String = "",
+    konst deprecatedName: String = "",
     @property:RawDelimiter
-    val delimiter: String = Delimiters.default,
-    val valueDescription: String = "",
-    val description: String
+    konst delimiter: String = Delimiters.default,
+    konst konstueDescription: String = "",
+    konst description: String
 ) {
     @RequiresOptIn(
-        message = "The raw delimiter value needs to be resolved. See 'resolvedDelimiter'. Using the raw value requires opt-in",
+        message = "The raw delimiter konstue needs to be resolved. See 'resolvedDelimiter'. Using the raw konstue requires opt-in",
         level = RequiresOptIn.Level.ERROR
     )
     annotation class RawDelimiter
 
     object Delimiters {
-        const val default = ","
-        const val none = ""
-        const val pathSeparator = "<path_separator>"
+        const konst default = ","
+        const konst none = ""
+        const konst pathSeparator = "<path_separator>"
     }
 }
 
-val Argument.isAdvanced: Boolean
-    get() = value.startsWith(ADVANCED_ARGUMENT_PREFIX) && value.length > ADVANCED_ARGUMENT_PREFIX.length
+konst Argument.isAdvanced: Boolean
+    get() = konstue.startsWith(ADVANCED_ARGUMENT_PREFIX) && konstue.length > ADVANCED_ARGUMENT_PREFIX.length
 
 @OptIn(Argument.RawDelimiter::class)
-val Argument.resolvedDelimiter: String?
+konst Argument.resolvedDelimiter: String?
     get() = when (delimiter) {
         Argument.Delimiters.none -> null
         Argument.Delimiters.pathSeparator -> File.pathSeparator
         else -> delimiter
     }
 
-private const val ADVANCED_ARGUMENT_PREFIX = "-X"
-private const val FREE_ARGS_DELIMITER = "--"
+private const konst ADVANCED_ARGUMENT_PREFIX = "-X"
+private const konst FREE_ARGS_DELIMITER = "--"
 
 data class ArgumentParseErrors(
-    val unknownArgs: MutableList<String> = SmartList(),
+    konst unknownArgs: MutableList<String> = SmartList(),
 
-    val unknownExtraFlags: MutableList<String> = SmartList(),
+    konst unknownExtraFlags: MutableList<String> = SmartList(),
 
     // Names of extra (-X...) arguments which have been passed in an obsolete form ("-Xaaa bbb", instead of "-Xaaa=bbb")
-    val extraArgumentsPassedInObsoleteForm: MutableList<String> = SmartList(),
+    konst extraArgumentsPassedInObsoleteForm: MutableList<String> = SmartList(),
 
-    // Non-boolean arguments which have been passed multiple times, possibly with different values.
-    // The key in the map is the name of the argument, the value is the last passed value.
-    val duplicateArguments: MutableMap<String, String> = mutableMapOf(),
+    // Non-boolean arguments which have been passed multiple times, possibly with different konstues.
+    // The key in the map is the name of the argument, the konstue is the last passed konstue.
+    konst duplicateArguments: MutableMap<String, String> = mutableMapOf(),
 
-    // Arguments where [Argument.deprecatedName] was used; the key is the deprecated name, the value is the new name ([Argument.value])
-    val deprecatedArguments: MutableMap<String, String> = mutableMapOf(),
+    // Arguments where [Argument.deprecatedName] was used; the key is the deprecated name, the konstue is the new name ([Argument.konstue])
+    konst deprecatedArguments: MutableMap<String, String> = mutableMapOf(),
 
     var argumentWithoutValue: String? = null,
 
     var booleanArgumentWithValue: String? = null,
 
-    val argfileErrors: MutableList<String> = SmartList(),
+    konst argfileErrors: MutableList<String> = SmartList(),
 
     // Reports from internal arguments parsers
-    val internalArgumentsParsingProblems: MutableList<String> = SmartList()
+    konst internalArgumentsParsingProblems: MutableList<String> = SmartList()
 )
 
 inline fun <reified T : CommonToolArguments> parseCommandLineArguments(args: List<String>): T {
@@ -91,9 +91,9 @@ inline fun <reified T : CommonToolArguments> parseCommandLineArguments(args: Lis
 }
 
 fun <T : CommonToolArguments> parseCommandLineArguments(clazz: KClass<T>, args: List<String>): T {
-    val constructor = clazz.java.constructors.find { it.parameters.isEmpty() }
+    konst constructor = clazz.java.constructors.find { it.parameters.isEmpty() }
         ?: error("Missing empty constructor on '${clazz.java.name}")
-    val arguments = clazz.cast(constructor.newInstance())
+    konst arguments = clazz.cast(constructor.newInstance())
     parseCommandLineArguments(args, arguments)
     return arguments
 }
@@ -101,13 +101,13 @@ fun <T : CommonToolArguments> parseCommandLineArguments(clazz: KClass<T>, args: 
 
 // Parses arguments into the passed [result] object. Errors related to the parsing will be collected into [CommonToolArguments.errors].
 fun <A : CommonToolArguments> parseCommandLineArguments(args: List<String>, result: A, overrideArguments: Boolean = false) {
-    val errors = lazy { result.errors ?: ArgumentParseErrors().also { result.errors = it } }
-    val preprocessed = preprocessCommandLineArguments(args, errors)
+    konst errors = lazy { result.errors ?: ArgumentParseErrors().also { result.errors = it } }
+    konst preprocessed = preprocessCommandLineArguments(args, errors)
     parsePreprocessedCommandLineArguments(preprocessed, result, errors, overrideArguments)
 }
 
 fun <A : CommonToolArguments> parseCommandLineArgumentsFromEnvironment(arguments: A) {
-    val settingsFromEnvironment = CompilerSystemProperties.LANGUAGE_VERSION_SETTINGS.value?.takeIf { it.isNotEmpty() }
+    konst settingsFromEnvironment = CompilerSystemProperties.LANGUAGE_VERSION_SETTINGS.konstue?.takeIf { it.isNotEmpty() }
         ?.split(Regex("""\s"""))
         ?.filterNot { it.isBlank() }
         ?: return
@@ -120,16 +120,16 @@ private fun <A : CommonToolArguments> parsePreprocessedCommandLineArguments(
     errors: Lazy<ArgumentParseErrors>,
     overrideArguments: Boolean
 ) {
-    data class ArgumentField(val property: KMutableProperty1<A, Any?>, val argument: Argument)
+    data class ArgumentField(konst property: KMutableProperty1<A, Any?>, konst argument: Argument)
 
     @Suppress("UNCHECKED_CAST")
-    val properties = result::class.memberProperties.mapNotNull { property ->
+    konst properties = result::class.memberProperties.mapNotNull { property ->
         if (property !is KMutableProperty1<*, *>) return@mapNotNull null
-        val argument = property.annotations.firstOrNull { it is Argument } as Argument? ?: return@mapNotNull null
+        konst argument = property.annotations.firstOrNull { it is Argument } as Argument? ?: return@mapNotNull null
         ArgumentField(property as KMutableProperty1<A, Any?>, argument)
     }
 
-    val visitedArgs = mutableSetOf<String>()
+    konst visitedArgs = mutableSetOf<String>()
     var freeArgsStarted = false
 
     fun ArgumentField.matches(arg: String): Boolean {
@@ -137,28 +137,28 @@ private fun <A : CommonToolArguments> parsePreprocessedCommandLineArguments(
             return true
         }
 
-        val deprecatedName = argument.deprecatedName
+        konst deprecatedName = argument.deprecatedName
         if (deprecatedName.isNotEmpty() && (deprecatedName == arg || arg.startsWith("$deprecatedName="))) {
-            errors.value.deprecatedArguments[deprecatedName] = argument.value
+            errors.konstue.deprecatedArguments[deprecatedName] = argument.konstue
             return true
         }
 
-        if (argument.value == arg) {
+        if (argument.konstue == arg) {
             if (argument.isAdvanced && property.returnType.classifier != Boolean::class) {
-                errors.value.extraArgumentsPassedInObsoleteForm.add(arg)
+                errors.konstue.extraArgumentsPassedInObsoleteForm.add(arg)
             }
             return true
         }
 
-        return arg.startsWith(argument.value + "=")
+        return arg.startsWith(argument.konstue + "=")
     }
 
-    val freeArgs = ArrayList<String>()
-    val internalArguments = ArrayList<InternalArgument>()
+    konst freeArgs = ArrayList<String>()
+    konst internalArguments = ArrayList<InternalArgument>()
 
     var i = 0
     loop@ while (i < args.size) {
-        val arg = args[i++]
+        konst arg = args[i++]
 
         if (freeArgsStarted) {
             freeArgs.add(arg)
@@ -170,16 +170,16 @@ private fun <A : CommonToolArguments> parsePreprocessedCommandLineArguments(
         }
 
         if (arg.startsWith(InternalArgumentParser.INTERNAL_ARGUMENT_PREFIX)) {
-            val matchingParsers = InternalArgumentParser.PARSERS.filter { it.canParse(arg) }
+            konst matchingParsers = InternalArgumentParser.PARSERS.filter { it.canParse(arg) }
             assert(matchingParsers.size <= 1) { "Internal error: internal argument $arg can be ambiguously parsed by parsers ${matchingParsers.joinToString()}" }
 
-            val parser = matchingParsers.firstOrNull()
+            konst parser = matchingParsers.firstOrNull()
 
             if (parser == null) {
-                errors.value.unknownExtraFlags += arg
+                errors.konstue.unknownExtraFlags += arg
             } else {
-                val newInternalArgument = parser.parseInternalArgument(arg, errors.value) ?: continue
-                // Manual language feature setting overrides the previous value of the same feature setting, if it exists.
+                konst newInternalArgument = parser.parseInternalArgument(arg, errors.konstue) ?: continue
+                // Manual language feature setting overrides the previous konstue of the same feature setting, if it exists.
                 internalArguments.removeIf {
                     (it as? ManualLanguageFeatureSetting)?.languageFeature ==
                             (newInternalArgument as? ManualLanguageFeatureSetting)?.languageFeature
@@ -190,36 +190,36 @@ private fun <A : CommonToolArguments> parsePreprocessedCommandLineArguments(
             continue
         }
 
-        val argumentField = properties.firstOrNull { it.matches(arg) }
+        konst argumentField = properties.firstOrNull { it.matches(arg) }
         if (argumentField == null) {
             when {
-                arg.startsWith(ADVANCED_ARGUMENT_PREFIX) -> errors.value.unknownExtraFlags.add(arg)
-                arg.startsWith("-") -> errors.value.unknownArgs.add(arg)
+                arg.startsWith(ADVANCED_ARGUMENT_PREFIX) -> errors.konstue.unknownExtraFlags.add(arg)
+                arg.startsWith("-") -> errors.konstue.unknownArgs.add(arg)
                 else -> freeArgs.add(arg)
             }
             continue
         }
 
-        val (property, argument) = argumentField
-        val value: Any = when {
+        konst (property, argument) = argumentField
+        konst konstue: Any = when {
             argumentField.property.returnType.classifier == Boolean::class -> {
-                if (arg.startsWith(argument.value + "=")) {
+                if (arg.startsWith(argument.konstue + "=")) {
                     // Can't use toBooleanStrict yet because this part of the compiler is used in Gradle and needs API version 1.4.
-                    when (arg.substring(argument.value.length + 1)) {
+                    when (arg.substring(argument.konstue.length + 1)) {
                         "true" -> true
                         "false" -> false
-                        else -> true.also { errors.value.booleanArgumentWithValue = arg }
+                        else -> true.also { errors.konstue.booleanArgumentWithValue = arg }
                     }
                 } else true
             }
-            arg.startsWith(argument.value + "=") -> {
-                arg.substring(argument.value.length + 1)
+            arg.startsWith(argument.konstue + "=") -> {
+                arg.substring(argument.konstue.length + 1)
             }
             arg.startsWith(argument.deprecatedName + "=") -> {
                 arg.substring(argument.deprecatedName.length + 1)
             }
             i == args.size -> {
-                errors.value.argumentWithoutValue = arg
+                errors.konstue.argumentWithoutValue = arg
                 break@loop
             }
             else -> {
@@ -228,12 +228,12 @@ private fun <A : CommonToolArguments> parsePreprocessedCommandLineArguments(
         }
 
         if ((argumentField.property.returnType.classifier as? KClass<*>)?.java?.isArray == false
-            && !visitedArgs.add(argument.value) && value is String && property.get(result) != value
+            && !visitedArgs.add(argument.konstue) && konstue is String && property.get(result) != konstue
         ) {
-            errors.value.duplicateArguments[argument.value] = value
+            errors.konstue.duplicateArguments[argument.konstue] = konstue
         }
 
-        updateField(property, result, value, argument.resolvedDelimiter, overrideArguments)
+        updateField(property, result, konstue, argument.resolvedDelimiter, overrideArguments)
     }
 
     result.freeArgs += freeArgs
@@ -244,7 +244,7 @@ private fun <A : CommonToolArguments> A.updateInternalArguments(
     newInternalArguments: ArrayList<InternalArgument>,
     overrideArguments: Boolean
 ) {
-    val filteredExistingArguments = if (overrideArguments) {
+    konst filteredExistingArguments = if (overrideArguments) {
         internalArguments.filter { existingArgument ->
             existingArgument !is ManualLanguageFeatureSetting ||
                     newInternalArguments.none {
@@ -259,20 +259,20 @@ private fun <A : CommonToolArguments> A.updateInternalArguments(
 private fun <A : CommonToolArguments> updateField(
     property: KMutableProperty1<A, Any?>,
     result: A,
-    value: Any,
+    konstue: Any,
     delimiter: String?,
     overrideArguments: Boolean
 ) {
     when (property.returnType.classifier) {
-        Boolean::class, String::class -> property.set(result, value)
+        Boolean::class, String::class -> property.set(result, konstue)
         Array<String>::class -> {
-            val newElements = if (delimiter.isNullOrEmpty()) {
-                arrayOf(value as String)
+            konst newElements = if (delimiter.isNullOrEmpty()) {
+                arrayOf(konstue as String)
             } else {
-                (value as String).split(delimiter).toTypedArray()
+                (konstue as String).split(delimiter).toTypedArray()
             }
             @Suppress("UNCHECKED_CAST")
-            val oldValue = property.get(result) as Array<String>?
+            konst oldValue = property.get(result) as Array<String>?
             property.set(result, if (oldValue != null && !overrideArguments) arrayOf(*oldValue, *newElements) else newElements)
         }
         else -> throw IllegalStateException("Unsupported argument type: ${property.returnType}")
@@ -282,16 +282,16 @@ private fun <A : CommonToolArguments> updateField(
 /**
  * @return error message if arguments are parsed incorrectly, null otherwise
  */
-fun validateArguments(errors: ArgumentParseErrors?): String? {
+fun konstidateArguments(errors: ArgumentParseErrors?): String? {
     if (errors == null) return null
     if (errors.argumentWithoutValue != null) {
-        return "No value passed for argument ${errors.argumentWithoutValue}"
+        return "No konstue passed for argument ${errors.argumentWithoutValue}"
     }
     errors.booleanArgumentWithValue?.let { arg ->
-        return "No value expected for boolean argument ${arg.substringBefore('=')}. Please remove the value: $arg"
+        return "No konstue expected for boolean argument ${arg.substringBefore('=')}. Please remove the konstue: $arg"
     }
     if (errors.unknownArgs.isNotEmpty()) {
-        return "Invalid argument: ${errors.unknownArgs.first()}"
+        return "Inkonstid argument: ${errors.unknownArgs.first()}"
     }
     return null
 }

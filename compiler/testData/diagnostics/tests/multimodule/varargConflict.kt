@@ -6,7 +6,7 @@
 package p
 
 public fun foo(a: Int) {}
-public fun foo(vararg values: Int) {}
+public fun foo(vararg konstues: Int) {}
 
 // MODULE: m2
 // FILE: b.kt
@@ -14,7 +14,7 @@ public fun foo(vararg values: Int) {}
 package p
 
 public fun foo(a: Int) {}
-public fun foo(vararg values: Int) {}
+public fun foo(vararg konstues: Int) {}
 
 // MODULE: m3(m1, m2)
 // FILE: c.kt

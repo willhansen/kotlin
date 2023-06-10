@@ -25,10 +25,10 @@ internal class TeamCityLogger : BaseTestLogger() {
         }
     }.toString()
 
-    private val TestCase.tcName
+    private konst TestCase.tcName
         get() = name.escapeForTC()
 
-    private val TestSuite.tcName
+    private konst TestSuite.tcName
         get() = name.escapeForTC()
 
     private fun finish(testCase: TestCase, durationMs: Long) =
@@ -45,7 +45,7 @@ internal class TeamCityLogger : BaseTestLogger() {
 
     override fun ignoreSuite(suite: TestSuite) {
         startSuite(suite)
-        suite.testCases.values.forEach { ignore(it) }
+        suite.testCases.konstues.forEach { ignore(it) }
         finishSuite(suite, 0L)
     }
 
@@ -53,8 +53,8 @@ internal class TeamCityLogger : BaseTestLogger() {
 
     override fun pass(testCase: TestCase, timeMillis: Long) = finish(testCase, timeMillis)
     override fun fail(testCase: TestCase, e: Throwable, timeMillis: Long) {
-        val stackTrace = e.dumpStackTrace().escapeForTC()
-        val message = e.message?.escapeForTC()
+        konst stackTrace = e.dumpStackTrace().escapeForTC()
+        konst message = e.message?.escapeForTC()
         report("testFailed name='${testCase.tcName}' message='$message' details='$stackTrace'")
         finish(testCase, timeMillis)
     }

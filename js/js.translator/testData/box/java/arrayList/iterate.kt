@@ -5,7 +5,7 @@ package foo
 
 fun box(): String {
     var i = 0
-    val arr = ArrayList<Int>();
+    konst arr = ArrayList<Int>();
     while (i++ < 10) {
         arr.add(i);
     }

@@ -25,10 +25,10 @@ public class JavaClass {
 // FILE: main.kt
 
 class A(
-    val c: Int? = 0,
+    konst c: Int? = 0,
     myType: (() -> Int)? = null
 ) {
-    val arguments: A by JavaClass.lazySoft {
+    konst arguments: A by JavaClass.lazySoft {
         A(myType = if (false) null else fun(): Int { return c!! })
     }
 }

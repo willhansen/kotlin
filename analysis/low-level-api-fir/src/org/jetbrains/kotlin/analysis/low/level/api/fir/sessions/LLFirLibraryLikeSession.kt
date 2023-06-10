@@ -16,7 +16,7 @@ abstract class LLFirLibraryLikeSession(
     dependencyTracker: ModificationTracker,
     builtinTypes: BuiltinTypes,
 ) : LLFirSession(ktModule, dependencyTracker, builtinTypes, Kind.Library) {
-    private val scopeSessionProvider = LLFirScopeSessionProvider.create(project, invalidationTrackers = emptyList())
+    private konst scopeSessionProvider = LLFirScopeSessionProvider.create(project, inkonstidationTrackers = emptyList())
 
     override fun getScopeSession(): ScopeSession {
         return scopeSessionProvider.getScopeSession()

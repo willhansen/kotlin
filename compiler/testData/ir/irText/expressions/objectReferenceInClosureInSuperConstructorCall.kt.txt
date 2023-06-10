@@ -5,7 +5,7 @@ abstract class Base {
 
   }
 
-  val lambda: Function0<Any>
+  konst lambda: Function0<Any>
     field = lambda
     get
 

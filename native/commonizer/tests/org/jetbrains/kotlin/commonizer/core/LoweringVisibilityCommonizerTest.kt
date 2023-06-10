@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.descriptors.Visibility
 import org.junit.Test
 
 abstract class LoweringVisibilityCommonizerTest(
-    private val areMembersVirtual: Boolean
+    private konst areMembersVirtual: Boolean
 ) : AbstractCommonizerTest<CirHasVisibility, Visibility>() {
 
     @Test
@@ -49,20 +49,20 @@ abstract class LoweringVisibilityCommonizerTest(
     final override fun createCommonizer() = VisibilityCommonizer.lowering()
 
     protected fun Visibility.toMock() = object : CirFunctionOrProperty {
-        override val annotations get() = unsupported()
-        override val name get() = unsupported()
-        override val typeParameters get() = unsupported()
-        override val visibility = this@toMock
-        override val modality get() = if (areMembersVirtual) Modality.OPEN else Modality.FINAL
-        override val containingClass = if (areMembersVirtual)
+        override konst annotations get() = unsupported()
+        override konst name get() = unsupported()
+        override konst typeParameters get() = unsupported()
+        override konst visibility = this@toMock
+        override konst modality get() = if (areMembersVirtual) Modality.OPEN else Modality.FINAL
+        override konst containingClass = if (areMembersVirtual)
             object : CirContainingClass {
-                override val modality get() = Modality.OPEN
-                override val kind get() = ClassKind.CLASS
-                override val isData get() = false
+                override konst modality get() = Modality.OPEN
+                override konst kind get() = ClassKind.CLASS
+                override konst isData get() = false
             } else null
-        override val extensionReceiver get() = unsupported()
-        override val returnType get() = unsupported()
-        override val kind get() = unsupported()
+        override konst extensionReceiver get() = unsupported()
+        override konst returnType get() = unsupported()
+        override konst kind get() = unsupported()
     }
 
     class NonVirtualMembers : LoweringVisibilityCommonizerTest(false) {

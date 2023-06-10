@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.plugin.mpp.pm20
 import org.gradle.api.attributes.Bundling
 import org.gradle.api.attributes.Category
 
-val DefaultKotlinCompileDependenciesDefinition = GradleKpmConfigurationSetup(
+konst DefaultKotlinCompileDependenciesDefinition = GradleKpmConfigurationSetup(
     provider = GradleKpmConfigurationProvider {
         project.configurations.maybeCreate(disambiguateName("compileDependencies")).apply {
             isCanBeConsumed = false
@@ -22,7 +22,7 @@ val DefaultKotlinCompileDependenciesDefinition = GradleKpmConfigurationSetup(
     attributes = GradleKpmPlatformAttributes + GradleKpmConsumerApiUsageAttribute
 )
 
-val DefaultKotlinRuntimeDependenciesDefinition = GradleKpmConfigurationSetup(
+konst DefaultKotlinRuntimeDependenciesDefinition = GradleKpmConfigurationSetup(
     provider = GradleKpmConfigurationProvider {
         project.configurations.maybeCreate(disambiguateName("runtimeDependencies")).apply {
             isCanBeConsumed = false
@@ -37,7 +37,7 @@ val DefaultKotlinRuntimeDependenciesDefinition = GradleKpmConfigurationSetup(
     }
 )
 
-val DefaultKotlinApiElementsDefinition = GradleKpmConfigurationSetup(
+konst DefaultKotlinApiElementsDefinition = GradleKpmConfigurationSetup(
     provider = GradleKpmConfigurationProvider {
         project.configurations.maybeCreate(disambiguateName("apiElements")).apply {
             isCanBeResolved = false
@@ -53,7 +53,7 @@ val DefaultKotlinApiElementsDefinition = GradleKpmConfigurationSetup(
     },
 )
 
-val DefaultKotlinRuntimeElementsDefinition = GradleKpmConfigurationSetup(
+konst DefaultKotlinRuntimeElementsDefinition = GradleKpmConfigurationSetup(
     provider = GradleKpmConfigurationProvider {
         project.configurations.maybeCreate(disambiguateName("runtimeElements")).apply {
             isCanBeResolved = false
@@ -73,7 +73,7 @@ val DefaultKotlinRuntimeElementsDefinition = GradleKpmConfigurationSetup(
     capabilities = GradleKpmModuleCapability
 )
 
-val DefaultKotlinHostSpecificMetadataElementsDefinition = GradleKpmConfigurationSetup(
+konst DefaultKotlinHostSpecificMetadataElementsDefinition = GradleKpmConfigurationSetup(
     provider = GradleKpmConfigurationProvider {
         project.configurations.maybeCreate(disambiguateName("hostSpecificMetadataElements")).apply {
             isCanBeResolved = false

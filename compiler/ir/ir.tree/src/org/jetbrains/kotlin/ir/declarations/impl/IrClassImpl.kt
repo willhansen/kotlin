@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
 open class IrClassImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    final override val symbol: IrClassSymbol,
+    final override konst symbol: IrClassSymbol,
     override var name: Name,
     override var kind: ClassKind,
     override var visibility: DescriptorVisibility,
@@ -30,8 +30,8 @@ open class IrClassImpl(
     override var isValue: Boolean = false,
     override var isExpect: Boolean = false,
     override var isFun: Boolean = false,
-    override val source: SourceElement = SourceElement.NO_SOURCE,
-    override val factory: IrFactory = IrFactoryImpl
+    override konst source: SourceElement = SourceElement.NO_SOURCE,
+    override konst factory: IrFactory = IrFactoryImpl
 ) : IrClass() {
     init {
         symbol.bind(this)
@@ -41,18 +41,18 @@ open class IrClassImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ClassDescriptor
+    override konst descriptor: ClassDescriptor
         get() = symbol.descriptor
 
     override var thisReceiver: IrValueParameter? = null
 
-    override val declarations: MutableList<IrDeclaration> = ArrayList()
+    override konst declarations: MutableList<IrDeclaration> = ArrayList()
 
     override var typeParameters: List<IrTypeParameter> = emptyList()
 
     override var superTypes: List<IrType> = emptyList()
 
-    override var valueClassRepresentation: ValueClassRepresentation<IrSimpleType>? = null
+    override var konstueClassRepresentation: ValueClassRepresentation<IrSimpleType>? = null
 
     override var metadata: MetadataSource? = null
 

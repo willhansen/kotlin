@@ -19,21 +19,21 @@ fun <T> runOnce(block: () -> T): T {
     return block();
 };
 
-fun valueReassignment() {
-    val x: Int
+fun konstueReassignment() {
+    konst x: Int
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
     runTwice { <!VAL_REASSIGNMENT!>x<!> = 42 }
     x.inc()
 }
 
 fun shadowing() {
-    val x: Int
-    runTwice { val x: Int; x = 42; x.inc() }
+    konst x: Int
+    runTwice { konst x: Int; x = 42; x.inc() }
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 }
 
 fun branchingFlow(a: Any?) {
-    val x: Int
+    konst x: Int
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
     if (a is String) {
         runTwice { <!VAL_REASSIGNMENT!>x<!> = 42 }
@@ -45,7 +45,7 @@ fun branchingFlow(a: Any?) {
 }
 
 fun branchingFlowWithMissingBranches(a: Any?) {
-    val x: Int
+    konst x: Int
     if (a is String) {
         runTwice { <!VAL_REASSIGNMENT!>x<!> = 42 }
     }
@@ -54,7 +54,7 @@ fun branchingFlowWithMissingBranches(a: Any?) {
 }
 
 fun repeatingFlow(n: Int) {
-    val x: Int
+    konst x: Int
     <!UNINITIALIZED_VARIABLE!>x<!>.inc()
 
     for (i in 1..n) {
@@ -65,7 +65,7 @@ fun repeatingFlow(n: Int) {
 }
 
 fun repeatingFlow2(n: Int) {
-    val x: Int
+    konst x: Int
 
     for (i in 1..n) {
         runTwice { <!VAL_REASSIGNMENT!>x<!> = 42 }

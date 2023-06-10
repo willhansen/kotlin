@@ -45,7 +45,7 @@ Also the [JavaScript back-end](https://github.com/JetBrains/kotlin/blob/master/j
 
 You can also [contribute to Kotlin/Native](../kotlin-native/README.md).
 
-If you want to contribute a new language feature, it is important to discuss it through a [KEEP](https://github.com/Kotlin/KEEP) first and get an approval from the language designers. This way you'll make sure your work will be in line with the overall language evolution plan and no other design decisions or considerations will block its acceptance.
+If you want to contribute a new language feature, it is important to discuss it through a [KEEP](https://github.com/Kotlin/KEEP) first and get an approkonst from the language designers. This way you'll make sure your work will be in line with the overall language evolution plan and no other design decisions or considerations will block its acceptance.
 
 ## Submitting patches
 

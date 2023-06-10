@@ -43,11 +43,11 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
     session: FirSession,
     project: Project,
     providers: List<LLFirKotlinSymbolProvider>,
-    private val declarationProvider: KotlinDeclarationProvider,
+    private konst declarationProvider: KotlinDeclarationProvider,
 ) : LLFirSelectingCombinedSymbolProvider<LLFirKotlinSymbolProvider>(session, project, providers) {
-    override val symbolNamesProvider: FirSymbolNamesProvider = FirCompositeCachedSymbolNamesProvider.fromSymbolProviders(session, providers)
+    override konst symbolNamesProvider: FirSymbolNamesProvider = FirCompositeCachedSymbolNamesProvider.fromSymbolProviders(session, providers)
 
-    private val classifierCache = NullableCaffeineCache<ClassId, FirClassLikeSymbol<*>> { it.maximumSize(500) }
+    private konst classifierCache = NullableCaffeineCache<ClassId, FirClassLikeSymbol<*>> { it.maximumSize(500) }
 
     override fun getClassLikeSymbolByClassId(classId: ClassId): FirClassLikeSymbol<*>? {
         if (!symbolNamesProvider.mayHaveTopLevelClassifier(classId)) return null
@@ -57,8 +57,8 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
 
     @OptIn(FirSymbolProviderInternals::class)
     private fun computeClassLikeSymbolByClassId(classId: ClassId): FirClassLikeSymbol<*>? {
-        val candidates = declarationProvider.getAllClassesByClassId(classId) + declarationProvider.getAllTypeAliasesByClassId(classId)
-        val (ktClass, provider) = selectFirstElementInClasspathOrder(candidates) { it } ?: return null
+        konst candidates = declarationProvider.getAllClassesByClassId(classId) + declarationProvider.getAllTypeAliasesByClassId(classId)
+        konst (ktClass, provider) = selectFirstElementInClasspathOrder(candidates) { it } ?: return null
         return provider.getClassLikeSymbolByClassId(classId, ktClass)
     }
 
@@ -98,7 +98,7 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
     ) {
         if (!symbolNamesProvider.mayHaveTopLevelCallable(packageFqName, name)) return
 
-        val callableId = CallableId(packageFqName, name)
+        konst callableId = CallableId(packageFqName, name)
 
         getCallables(callableId)
             .groupBy { getModule(it) }
@@ -106,7 +106,7 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
                 // If `ktModule` cannot be found in the map, `callables` cannot be processed by any of the available providers, because none
                 // of them belong to the correct module. We can skip in that case, because iterating through all providers wouldn't lead to
                 // any results for `callables`.
-                val provider = providersByKtModule[ktModule] ?: return@forEach
+                konst provider = providersByKtModule[ktModule] ?: return@forEach
                 provider.provide(callableId, callables)
             }
     }
@@ -116,7 +116,7 @@ internal class LLFirCombinedKotlinSymbolProvider private constructor(
     companion object {
         fun merge(session: LLFirSession, project: Project, providers: List<LLFirKotlinSymbolProvider>): FirSymbolProvider? =
             if (providers.size > 1) {
-                val declarationProvider = project.mergeDeclarationProviders(providers.map { it.declarationProvider })
+                konst declarationProvider = project.mergeDeclarationProviders(providers.map { it.declarationProvider })
                 LLFirCombinedKotlinSymbolProvider(session, project, providers, declarationProvider)
             } else providers.singleOrNull()
     }

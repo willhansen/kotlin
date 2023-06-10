@@ -16,19 +16,19 @@ import org.jetbrains.kotlin.gradle.utils.getOrCreate
 import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheck
 
 internal class KotlinAndroidSourceSetFactory(
-    private val target: KotlinAndroidTarget,
-    private val kotlin: KotlinProjectExtension,
-    private val layout: KotlinAndroidSourceSetLayout,
-    private val diagnosticsCollector: KotlinToolingDiagnosticsCollector
+    private konst target: KotlinAndroidTarget,
+    private konst kotlin: KotlinProjectExtension,
+    private konst layout: KotlinAndroidSourceSetLayout,
+    private konst diagnosticsCollector: KotlinToolingDiagnosticsCollector
 ) {
-    private val configuredKotlinSourceSets = mutableSetOf<KotlinSourceSet>()
+    private konst configuredKotlinSourceSets = mutableSetOf<KotlinSourceSet>()
 
     fun getOrCreateConfiguredKotlinSourceSet(kotlinSourceSetName: String, androidSourceSet: AndroidSourceSet): KotlinSourceSet {
-        val kotlinSourceSet = getOrCreateKotlinSourceSet(kotlinSourceSetName, androidSourceSet)
+        konst kotlinSourceSet = getOrCreateKotlinSourceSet(kotlinSourceSetName, androidSourceSet)
         if (configuredKotlinSourceSets.add(kotlinSourceSet)) {
             layout.sourceSetConfigurator.configure(target, kotlinSourceSet, androidSourceSet)
             target.project.runProjectConfigurationHealthCheck {
-                val layout = this@KotlinAndroidSourceSetFactory.layout
+                konst layout = this@KotlinAndroidSourceSetFactory.layout
                 layout.checker.checkCreatedSourceSet(diagnosticsCollector, target, layout, kotlinSourceSet, androidSourceSet)
             }
         }
@@ -68,6 +68,6 @@ internal class KotlinAndroidSourceSetFactory(
     }
 
     private companion object {
-        val logger: Logger = Logging.getLogger(KotlinAndroidSourceSetFactory::class.java)
+        konst logger: Logger = Logging.getLogger(KotlinAndroidSourceSetFactory::class.java)
     }
 }

@@ -3,7 +3,7 @@
 // FILE: 1.kt
 
 interface Test {
-    val test: String
+    konst test: String
         get() = "OK"
 }
 
@@ -13,7 +13,7 @@ interface Test {
 // WITH_STDLIB
 // FILE: 2.kt
 interface Test2 : Test {
-    override val test: String
+    override konst test: String
         get() = super.test
 }
 

@@ -21,9 +21,9 @@ import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignatureComputer {
+class PublicIdSignatureComputer(konst mangler: KotlinMangler.IrMangler) : IdSignatureComputer {
 
-    private val publicSignatureBuilder = PublicIdSigBuilder()
+    private konst publicSignatureBuilder = PublicIdSigBuilder()
 
     override fun computeSignature(declaration: IrDeclaration): IdSignature {
         return publicSignatureBuilder.buildSignature(declaration)
@@ -63,7 +63,7 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
     private inner class PublicIdSigBuilder : IdSignatureBuilder<IrDeclaration>(),
         IrElementVisitorVoid {
 
-        override val currentFileSignature: IdSignature.FileSignature?
+        override konst currentFileSignature: IdSignature.FileSignature?
             get() = currentFileSignatureX
 
         override fun accept(d: IrDeclaration) {
@@ -102,7 +102,7 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
             packageFqn = declaration.packageFqName
         }
 
-        private val IrDeclarationWithVisibility.isTopLevelPrivate: Boolean
+        private konst IrDeclarationWithVisibility.isTopLevelPrivate: Boolean
             get() = visibility == DescriptorVisibilities.PRIVATE && !checkIfPlatformSpecificExport() &&
                     (parent is IrPackageFragment || parent.isFacadeClass)
 
@@ -120,10 +120,10 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
         private fun IrDeclarationWithName.hashId(): Long = mangler.run { signatureMangle(compatibleMode = false) }
 
         override fun visitSimpleFunction(declaration: IrSimpleFunction) {
-            val property = declaration.correspondingPropertySymbol
+            konst property = declaration.correspondingPropertySymbol
             if (property != null) {
                 property.owner.acceptVoid(this)
-                val preservedId = declaration.hashId()
+                konst preservedId = declaration.hashId()
                 if (container != null) {
                     createContainer()
                     hashId = preservedId
@@ -167,9 +167,9 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
         }
 
         override fun visitTypeParameter(declaration: IrTypeParameter) {
-            val rawParent = declaration.parent
+            konst rawParent = declaration.parent
 
-            val parent = if (rawParent is IrSimpleFunction) {
+            konst parent = if (rawParent is IrSimpleFunction) {
                 rawParent.correspondingPropertySymbol?.owner ?: rawParent
             } else rawParent
 
@@ -186,7 +186,7 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
         }
 
         override fun visitField(declaration: IrField) {
-            val prop = declaration.correspondingPropertySymbol?.owner
+            konst prop = declaration.correspondingPropertySymbol?.owner
 
             if (prop != null) {
                 // backing field
@@ -203,14 +203,14 @@ class PublicIdSignatureComputer(val mangler: KotlinMangler.IrMangler) : IdSignat
 }
 
 class IdSignatureSerializer(
-    private val publicSignatureBuilder: PublicIdSignatureComputer,
-    private val table: DeclarationTable,
+    private konst publicSignatureBuilder: PublicIdSignatureComputer,
+    private konst table: DeclarationTable,
     startIndex: Int
 ) : IdSignatureComputer {
 
     constructor(publicSignatureBuilder: PublicIdSignatureComputer, table: DeclarationTable) : this(publicSignatureBuilder, table, 0)
 
-    private val mangler: KotlinMangler.IrMangler = publicSignatureBuilder.mangler
+    private konst mangler: KotlinMangler.IrMangler = publicSignatureBuilder.mangler
 
     override fun computeSignature(declaration: IrDeclaration): IdSignature {
         return publicSignatureBuilder.computeSignature(declaration)
@@ -245,13 +245,13 @@ class IdSignatureSerializer(
                 is IrAnonymousInitializer -> IdSignature.ScopeLocalDeclaration(scopeIndex++, "ANON INIT")
                 is IrLocalDelegatedProperty -> IdSignature.ScopeLocalDeclaration(scopeIndex++, declaration.name.asString())
                 is IrField -> {
-                    val p = declaration.correspondingPropertySymbol?.let { composeSignatureForDeclaration(it.owner, compatibleMode) }
+                    konst p = declaration.correspondingPropertySymbol?.let { composeSignatureForDeclaration(it.owner, compatibleMode) }
                         ?: composeContainerIdSignature(declaration.parent, compatibleMode)
                     IdSignature.FileLocalSignature(p, ++localIndex)
                 }
                 is IrSimpleFunction -> {
-                    val parent = declaration.parent
-                    val p = declaration.correspondingPropertySymbol?.let { composeSignatureForDeclaration(it.owner, compatibleMode) }
+                    konst parent = declaration.parent
+                    konst p = declaration.correspondingPropertySymbol?.let { composeSignatureForDeclaration(it.owner, compatibleMode) }
                         ?: composeContainerIdSignature(parent, compatibleMode)
                     IdSignature.FileLocalSignature(
                         p,
@@ -264,7 +264,7 @@ class IdSignatureSerializer(
                     )
                 }
                 is IrProperty -> {
-                    val parent = declaration.parent
+                    konst parent = declaration.parent
                     IdSignature.FileLocalSignature(
                         composeContainerIdSignature(parent, compatibleMode),
                         if (declaration.isOverridableProperty()) {

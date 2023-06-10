@@ -363,7 +363,7 @@ TEST_F(GCSchedulerDataOnSafePointsTest, CollectOnTargetHeapReached) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = (mutatorsCount + 1) * 10;
     GCSchedulerDataOnSafepointsTestApi<mutatorsCount> schedulerTestApi(config);
@@ -400,7 +400,7 @@ TEST_F(GCSchedulerDataOnSafePointsTest, CollectOnTimeoutReached) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = std::numeric_limits<size_t>::max();
     GCSchedulerDataOnSafepointsTestApi<mutatorsCount> schedulerTestApi(config);
@@ -428,7 +428,7 @@ TEST_F(GCSchedulerDataOnSafePointsTest, FullTimeoutAfterLastGC) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = 10;
     GCSchedulerDataOnSafepointsTestApi<mutatorsCount> schedulerTestApi(config);
@@ -459,7 +459,7 @@ TEST_F(GCSchedulerDataOnSafePointsTest, DoNotTuneTargetHeap) {
     constexpr int mutatorsCount = 1;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = 10;
     GCSchedulerDataOnSafepointsTestApi<mutatorsCount> schedulerTestApi(config);
@@ -477,7 +477,7 @@ TEST_F(GCSchedulerDataOnSafePointsTest, TuneTargetHeap) {
     constexpr int mutatorsCount = 1;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = true;
     config.targetHeapBytes = 10;
     config.targetHeapUtilization = 0.5;
@@ -546,7 +546,7 @@ TEST_F(GCSchedulerDataWithTimerTest, CollectOnTargetHeapReached) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = (mutatorsCount + 1) * 10;
     GCSchedulerDataWithTimerTestApi<mutatorsCount> schedulerTestApi(config);
@@ -583,7 +583,7 @@ TEST_F(GCSchedulerDataWithTimerTest, CollectOnTimeoutReached) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = std::numeric_limits<size_t>::max();
     GCSchedulerDataWithTimerTestApi<mutatorsCount> schedulerTestApi(config);
@@ -603,7 +603,7 @@ TEST_F(GCSchedulerDataWithTimerTest, FullTimeoutAfterLastGC) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = 10;
     GCSchedulerDataWithTimerTestApi<mutatorsCount> schedulerTestApi(config);
@@ -628,7 +628,7 @@ TEST_F(GCSchedulerDataWithTimerTest, DoNotTuneTargetHeap) {
     constexpr int mutatorsCount = 1;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = 10;
     GCSchedulerDataWithTimerTestApi<mutatorsCount> schedulerTestApi(config);
@@ -646,7 +646,7 @@ TEST_F(GCSchedulerDataWithTimerTest, TuneTargetHeap) {
     constexpr int mutatorsCount = 1;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = true;
     config.targetHeapBytes = 10;
     config.targetHeapUtilization = 0.5;
@@ -715,7 +715,7 @@ TEST_F(GCSchedulerDataWithTimerTest, DoNotCollectOnTimerInBackground) {
     constexpr int mutatorsCount = kDefaultThreadCount;
 
     GCSchedulerConfig config;
-    config.regularGcIntervalMicroseconds = 10;
+    config.regularGcInterkonstMicroseconds = 10;
     config.autoTune = false;
     config.targetHeapBytes = std::numeric_limits<size_t>::max();
     GCSchedulerDataWithTimerTestApi<mutatorsCount> schedulerTestApi(config);

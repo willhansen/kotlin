@@ -30,35 +30,35 @@ import kotlin.reflect.KVariance
 
 internal class KTypeParameterImpl(
     container: KTypeParameterOwnerImpl?,
-    override val descriptor: TypeParameterDescriptor,
+    override konst descriptor: TypeParameterDescriptor,
 ) : KTypeParameter, KClassifierImpl {
-    override val name: String
+    override konst name: String
         get() = descriptor.name.asString()
 
-    override val upperBounds: List<KType> by ReflectProperties.lazySoft { descriptor.upperBounds.map(::KTypeImpl) }
+    override konst upperBounds: List<KType> by ReflectProperties.lazySoft { descriptor.upperBounds.map(::KTypeImpl) }
 
-    override val variance: KVariance
+    override konst variance: KVariance
         get() = when (descriptor.variance) {
             Variance.INVARIANT -> KVariance.INVARIANT
             Variance.IN_VARIANCE -> KVariance.IN
             Variance.OUT_VARIANCE -> KVariance.OUT
         }
 
-    override val isReified: Boolean
+    override konst isReified: Boolean
         get() = descriptor.isReified
 
-    private val container: KTypeParameterOwnerImpl = container ?: run {
-        when (val declaration = descriptor.containingDeclaration) {
+    private konst container: KTypeParameterOwnerImpl = container ?: run {
+        when (konst declaration = descriptor.containingDeclaration) {
             is ClassDescriptor -> {
                 declaration.toKClassImpl()
             }
             is CallableMemberDescriptor -> {
-                val callableContainerClass = when (val callableContainer = declaration.containingDeclaration) {
+                konst callableContainerClass = when (konst callableContainer = declaration.containingDeclaration) {
                     is ClassDescriptor -> {
                         callableContainer.toKClassImpl()
                     }
                     else -> {
-                        val deserializedMember = declaration as? DeserializedMemberDescriptor
+                        konst deserializedMember = declaration as? DeserializedMemberDescriptor
                             ?: throw KotlinReflectionInternalError("Non-class callable descriptor must be deserialized: $declaration")
                         deserializedMember.getContainerClass().kotlin as KClassImpl<*>
                     }
@@ -74,7 +74,7 @@ internal class KTypeParameterImpl(
             ?: throw KotlinReflectionInternalError("Type parameter container is not resolved: $containingDeclaration")
 
     private fun DeserializedMemberDescriptor.getContainerClass(): Class<*> {
-        val jvmPackagePartSource = containerSource as? JvmPackagePartSource
+        konst jvmPackagePartSource = containerSource as? JvmPackagePartSource
         return (jvmPackagePartSource?.knownJvmBinaryClass as? ReflectKotlinClass)?.klass
             ?: throw KotlinReflectionInternalError("Container of deserialized member is not resolved: $this")
     }

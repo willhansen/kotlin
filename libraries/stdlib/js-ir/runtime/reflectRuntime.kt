@@ -47,7 +47,7 @@ private fun metadataObject(): Metadata {
     return classMeta(VOID, VOID, VOID, VOID)
 }
 
-private val propertyRefClassMetadataCache: Array<Array<dynamic>> = arrayOf<Array<dynamic>>(
+private konst propertyRefClassMetadataCache: Array<Array<dynamic>> = arrayOf<Array<dynamic>>(
     //                 immutable     ,     mutable
     arrayOf<dynamic>(metadataObject(), metadataObject()), // 0
     arrayOf<dynamic>(metadataObject(), metadataObject()), // 1

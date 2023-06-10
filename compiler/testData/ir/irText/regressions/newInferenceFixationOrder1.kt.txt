@@ -15,6 +15,6 @@ fun test(): Inv2<String, Int> {
 }
 
 fun box(): String {
-  val x: Inv2<String, Int> = test()
+  konst x: Inv2<String, Int> = test()
   return "OK"
 }

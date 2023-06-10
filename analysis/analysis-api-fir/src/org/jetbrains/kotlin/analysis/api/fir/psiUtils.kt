@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.declarations.FirDeclaration
 import org.jetbrains.kotlin.fir.psi
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 
-private val allowedFakeElementKinds = setOf(
+private konst allowedFakeElementKinds = setOf(
     KtFakeSourceElementKind.FromUseSiteTarget,
     KtFakeSourceElementKind.PropertyFromParameter,
     KtFakeSourceElementKind.ItLambdaParameter,
@@ -23,7 +23,7 @@ private val allowedFakeElementKinds = setOf(
     KtFakeSourceElementKind.ImplicitConstructor,
 )
 
-internal fun FirElement.getAllowedPsi() = when (val source = source) {
+internal fun FirElement.getAllowedPsi() = when (konst source = source) {
     null -> null
     is KtRealPsiSourceElement -> source.psi
     is KtFakeSourceElement -> if (source.kind in allowedFakeElementKinds) psi else null
@@ -38,7 +38,7 @@ fun FirBasedSymbol<*>.findPsi(): PsiElement? =
 
 /**
  * Finds [PsiElement] which will be used as go-to referenced element for [KtPsiReference]
- * For data classes & enums generated members like `copy` `componentN`, `values` it will return corresponding enum/data class
+ * For data classes & enums generated members like `copy` `componentN`, `konstues` it will return corresponding enum/data class
  * Otherwise, behaves the same way as [findPsi] returns exact PSI declaration corresponding to passed [FirDeclaration]
  */
 fun FirDeclaration.findReferencePsi(): PsiElement? {

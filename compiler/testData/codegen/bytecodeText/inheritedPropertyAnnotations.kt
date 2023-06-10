@@ -1,7 +1,7 @@
 annotation class Ann
 
 abstract class Base {
-    @Ann val x: Int = 0
+    @Ann konst x: Int = 0
 }
 
 class Derived : Base()

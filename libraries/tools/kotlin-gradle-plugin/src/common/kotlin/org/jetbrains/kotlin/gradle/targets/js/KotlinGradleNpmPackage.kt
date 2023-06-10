@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import java.io.Serializable
 
-data class KotlinGradleNpmPackage(val simpleModuleName: String) : Serializable {
+data class KotlinGradleNpmPackage(konst simpleModuleName: String) : Serializable {
     fun createDependency(project: Project): Dependency =
         project.dependencies.create("org.jetbrains.kotlin:kotlin-$simpleModuleName")
 }

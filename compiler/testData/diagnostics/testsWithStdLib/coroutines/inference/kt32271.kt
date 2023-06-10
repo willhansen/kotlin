@@ -8,9 +8,9 @@ typealias CancellationLambda = () -> Unit
 class Scope {
     suspend fun <T> performAndWait(block: suspend CoroutineScope.() -> T): T {
         return CoroutineWorker().run {
-            val result = threadSafeSuspendCallback<T> { completion ->
-                val workItem = WorkItem {
-                    val result = runCatching {
+            konst result = threadSafeSuspendCallback<T> { completion ->
+                konst workItem = WorkItem {
+                    konst result = runCatching {
                         block()
                     }
                     completion(result)
@@ -22,7 +22,7 @@ class Scope {
     }
 
     class WorkItem(
-        val block: suspend CoroutineScope.() -> Unit
+        konst block: suspend CoroutineScope.() -> Unit
     )
 }
 

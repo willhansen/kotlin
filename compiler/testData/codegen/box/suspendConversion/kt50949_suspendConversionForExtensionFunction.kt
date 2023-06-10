@@ -2,7 +2,7 @@
 // IGNORE_BACKEND: JVM
 
 fun box(): String {
-    val foo: String.(suspend () -> Unit) -> String = { this }
-    val f: () -> Unit = {}
+    konst foo: String.(suspend () -> Unit) -> String = { this }
+    konst f: () -> Unit = {}
     return "OK".foo(f)
 }

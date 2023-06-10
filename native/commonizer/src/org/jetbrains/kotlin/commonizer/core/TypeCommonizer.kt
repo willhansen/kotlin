@@ -11,24 +11,24 @@ import org.jetbrains.kotlin.commonizer.mergedtree.CirKnownClassifiers
 import org.jetbrains.kotlin.commonizer.utils.safeCastValues
 
 class TypeCommonizer(
-    private val classifiers: CirKnownClassifiers,
-    private val settings: CommonizerSettings,
-    val context: Context = Context.default,
+    private konst classifiers: CirKnownClassifiers,
+    private konst settings: CommonizerSettings,
+    konst context: Context = Context.default,
 ) : NullableSingleInvocationCommonizer<CirType> {
 
-    private val classOrTypeAliasTypeCommonizer = ClassOrTypeAliasTypeCommonizer(this, classifiers, settings)
-    private val flexibleTypeCommonizer = FlexibleTypeAssociativeCommonizer(this)
+    private konst classOrTypeAliasTypeCommonizer = ClassOrTypeAliasTypeCommonizer(this, classifiers, settings)
+    private konst flexibleTypeCommonizer = FlexibleTypeAssociativeCommonizer(this)
 
-    override fun invoke(values: List<CirType>): CirType? {
-        values.safeCastValues<CirType, CirClassOrTypeAliasType>()?.let { types ->
+    override fun invoke(konstues: List<CirType>): CirType? {
+        konstues.safeCastValues<CirType, CirClassOrTypeAliasType>()?.let { types ->
             return classOrTypeAliasTypeCommonizer(types)
         }
 
-        values.safeCastValues<CirType, CirTypeParameterType>()?.let { types ->
+        konstues.safeCastValues<CirType, CirTypeParameterType>()?.let { types ->
             return TypeParameterTypeCommonizer.commonize(types)
         }
 
-        values.safeCastValues<CirType, CirFlexibleType>()?.let { types ->
+        konstues.safeCastValues<CirType, CirFlexibleType>()?.let { types ->
             return flexibleTypeCommonizer(types)
         }
 
@@ -36,9 +36,9 @@ class TypeCommonizer(
     }
 
     data class Context(
-        val enableCovariantNullabilityCommonization: Boolean = false,
-        val enableForwardTypeAliasSubstitution: Boolean = true,
-        val enableBackwardsTypeAliasSubstitution: Boolean = true,
+        konst enableCovariantNullabilityCommonization: Boolean = false,
+        konst enableForwardTypeAliasSubstitution: Boolean = true,
+        konst enableBackwardsTypeAliasSubstitution: Boolean = true,
     ) {
 
         fun withCovariantNullabilityCommonizationEnabled(enabled: Boolean = true): Context {
@@ -61,7 +61,7 @@ class TypeCommonizer(
         }
 
         companion object {
-            val default = Context()
+            konst default = Context()
         }
     }
 
@@ -85,11 +85,11 @@ private object TypeParameterTypeCommonizer : AssociativeCommonizer<CirTypeParame
 }
 
 private class FlexibleTypeAssociativeCommonizer(
-    private val typeCommonizer: TypeCommonizer
+    private konst typeCommonizer: TypeCommonizer
 ) : NullableSingleInvocationCommonizer<CirFlexibleType> {
-    override fun invoke(values: List<CirFlexibleType>): CirFlexibleType? {
-        val lowerBound = typeCommonizer(values.map { it.lowerBound }) ?: return null
-        val upperBound = typeCommonizer(values.map { it.upperBound }) ?: return null
+    override fun invoke(konstues: List<CirFlexibleType>): CirFlexibleType? {
+        konst lowerBound = typeCommonizer(konstues.map { it.lowerBound }) ?: return null
+        konst upperBound = typeCommonizer(konstues.map { it.upperBound }) ?: return null
         return CirFlexibleType(
             lowerBound = lowerBound as CirSimpleType,
             upperBound = upperBound as CirSimpleType

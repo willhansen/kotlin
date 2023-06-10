@@ -10,17 +10,17 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-class Section<T : Parcelable>(val title: String, val faTitle: T) : Parcelable
+class Section<T : Parcelable>(konst title: String, konst faTitle: T) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = Section<Bundle>("title", Bundle())
+    konst test = Section<Bundle>("title", Bundle())
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<Section<Bundle>>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<Section<Bundle>>().createFromParcel(parcel)
 
     assert(test.title == test2.title)
     assert(test2.faTitle.size() == 0)

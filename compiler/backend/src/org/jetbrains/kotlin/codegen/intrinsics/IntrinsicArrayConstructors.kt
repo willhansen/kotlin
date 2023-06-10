@@ -40,25 +40,25 @@ internal object IntrinsicArrayConstructors {
     fun isEmptyArray(descriptor: FunctionDescriptor): Boolean =
         descriptor.name.asString() == "emptyArray" && descriptor.containingDeclaration.isBuiltInsPackage
 
-    private val DeclarationDescriptor.isBuiltInsPackage: Boolean
+    private konst DeclarationDescriptor.isBuiltInsPackage: Boolean
         get() = this is PackageFragmentDescriptor && fqName == StandardNames.BUILT_INS_PACKAGE_FQ_NAME
 
     fun generateArrayConstructorBody(method: Method): MethodNode {
-        val node = MethodNode(
+        konst node = MethodNode(
             Opcodes.ASM6, Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC or Opcodes.ACC_FINAL, method.name, method.descriptor, null, null
         )
 
-        val arrayType = method.returnType
-        val elementType = AsmUtil.correctElementType(arrayType)
+        konst arrayType = method.returnType
+        konst elementType = AsmUtil.correctElementType(arrayType)
 
-        val size = StackValue.local(0, Type.INT_TYPE)
-        val lambda = StackValue.local(1, AsmTypes.FUNCTION1)
-        val loopIndex = StackValue.local(2, Type.INT_TYPE)
-        val array = StackValue.local(3, arrayType)
+        konst size = StackValue.local(0, Type.INT_TYPE)
+        konst lambda = StackValue.local(1, AsmTypes.FUNCTION1)
+        konst loopIndex = StackValue.local(2, Type.INT_TYPE)
+        konst array = StackValue.local(3, arrayType)
 
         /*
         inline fun <reified T> Array(size: Int, init: (Int) -> T): Array<T> {
-            val result = arrayOfNulls<T>(size)
+            konst result = arrayOfNulls<T>(size)
             for (i in 0 until size) {
                 result[i] = init(i)
             }
@@ -66,7 +66,7 @@ internal object IntrinsicArrayConstructors {
         }
          */
 
-        val iv = InstructionAdapter(node)
+        konst iv = InstructionAdapter(node)
         size.put(iv)
         if (elementType.sort == Type.OBJECT) {
             ReifiedTypeInliner.putReifiedOperationMarker(ReifiedTypeInliner.OperationKind.NEW_ARRAY, ReificationArgument("T", true, 0), iv)
@@ -74,11 +74,11 @@ internal object IntrinsicArrayConstructors {
         iv.newarray(elementType)
         array.store(StackValue.onStack(arrayType), iv)
         loopIndex.store(StackValue.constant(0), iv)
-        val begin = Label()
+        konst begin = Label()
         iv.visitLabel(begin)
         loopIndex.put(iv)
         size.put(iv)
-        val end = Label()
+        konst end = Label()
         iv.ificmpge(end)
         array.put(iv)
         loopIndex.put(iv)
@@ -101,7 +101,7 @@ internal object IntrinsicArrayConstructors {
     }
 
     fun generateEmptyArrayBody(method: Method): MethodNode {
-        val node = MethodNode(
+        konst node = MethodNode(
             Opcodes.ASM6, Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC or Opcodes.ACC_FINAL, method.name, method.descriptor, null, null
         )
 
@@ -109,7 +109,7 @@ internal object IntrinsicArrayConstructors {
         inline fun <reified T> emptyArray(): Array<T> = arrayOfNulls<T>(0) as Array<T>
          */
 
-        val iv = InstructionAdapter(node)
+        konst iv = InstructionAdapter(node)
         iv.iconst(0)
         ReifiedTypeInliner.putReifiedOperationMarker(ReifiedTypeInliner.OperationKind.NEW_ARRAY, ReificationArgument("T", true, 0), iv)
         iv.newarray(AsmTypes.OBJECT_TYPE)
@@ -120,7 +120,7 @@ internal object IntrinsicArrayConstructors {
     }
 
     fun generateArrayOfBody(method: Method): MethodNode {
-        val node = MethodNode(
+        konst node = MethodNode(
             Opcodes.ASM6, Opcodes.ACC_PUBLIC or Opcodes.ACC_STATIC or Opcodes.ACC_FINAL, method.name, method.descriptor, null, null
         )
 
@@ -128,7 +128,7 @@ internal object IntrinsicArrayConstructors {
         inline fun <reified T> arrayOf(vararg elements: T): Array<T> = elements as Array<T>
          */
 
-        val iv = InstructionAdapter(node)
+        konst iv = InstructionAdapter(node)
         iv.load(0, AsmTypes.OBJECT_TYPE)
         iv.areturn(AsmTypes.OBJECT_TYPE)
         iv.visitMaxs(1, 1)

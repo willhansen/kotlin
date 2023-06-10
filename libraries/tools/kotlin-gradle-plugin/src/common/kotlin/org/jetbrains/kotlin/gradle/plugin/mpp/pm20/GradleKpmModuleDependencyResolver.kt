@@ -19,34 +19,34 @@ import org.jetbrains.kotlin.gradle.utils.getOrPutRootProjectProperty
 import org.jetbrains.kotlin.project.model.*
 
 class GradleKpmModuleDependencyResolver(
-    private val gradleComponentResultResolver: GradleKpmComponentResultCachingResolver,
-    private val projectStructureMetadataModuleBuilder: ProjectStructureMetadataModuleBuilder,
-    private val projectModuleBuilder: GradleProjectModuleBuilder
+    private konst gradleComponentResultResolver: GradleKpmComponentResultCachingResolver,
+    private konst projectStructureMetadataModuleBuilder: ProjectStructureMetadataModuleBuilder,
+    private konst projectModuleBuilder: GradleProjectModuleBuilder
 ) : KpmModuleDependencyResolver {
 
     override fun resolveDependency(requestingModule: KpmModule, moduleDependency: KpmModuleDependency): KpmModule? {
         require(requestingModule is GradleKpmModule)
-        val project = requestingModule.project
+        konst project = requestingModule.project
 
-        val component = gradleComponentResultResolver.resolveModuleDependencyAsComponentResult(requestingModule, moduleDependency)
-        val id = component?.id
+        konst component = gradleComponentResultResolver.resolveModuleDependencyAsComponentResult(requestingModule, moduleDependency)
+        konst id = component?.id
 
         //FIXME multiple?
-        val classifier = moduleClassifiersFromCapabilities(component?.variants?.flatMap { it.capabilities }.orEmpty()).single()
+        konst classifier = moduleClassifiersFromCapabilities(component?.variants?.flatMap { it.capabilities }.orEmpty()).single()
 
         return when {
             id is ProjectComponentIdentifier && id.build.isCurrentBuild ->
                 projectModuleBuilder.buildModulesFromProject(project.project(id.projectPath))
                     .find { it.moduleIdentifier.moduleClassifier == classifier }
             id is ModuleComponentIdentifier -> {
-                val metadata = getProjectStructureMetadata(
+                konst metadata = getProjectStructureMetadata(
                     project,
                     component,
                     // TODO: consistent choice of configurations across multiple resolvers?
                     configurationToResolveMetadataDependencies(requestingModule),
                     moduleDependency.moduleIdentifier
                 ) ?: return null
-                val result = projectStructureMetadataModuleBuilder.getModule(component, metadata)
+                konst result = projectStructureMetadataModuleBuilder.getModule(component, metadata)
                 result
             }
             else -> null
@@ -55,11 +55,11 @@ class GradleKpmModuleDependencyResolver(
 
     companion object {
         fun getForCurrentBuild(project: Project): KpmModuleDependencyResolver {
-            val extraPropertyName = "org.jetbrains.kotlin.dependencyResolution.moduleResolver.${project.getKotlinPluginVersion()}"
+            konst extraPropertyName = "org.jetbrains.kotlin.dependencyResolution.moduleResolver.${project.getKotlinPluginVersion()}"
             return project.getOrPutRootProjectProperty(extraPropertyName) {
-                val componentResultResolver = GradleKpmComponentResultCachingResolver.getForCurrentBuild(project)
-                val metadataModuleBuilder = ProjectStructureMetadataModuleBuilder()
-                val projectModuleBuilder = GradleProjectModuleBuilder(true)
+                konst componentResultResolver = GradleKpmComponentResultCachingResolver.getForCurrentBuild(project)
+                konst metadataModuleBuilder = ProjectStructureMetadataModuleBuilder()
+                konst projectModuleBuilder = GradleProjectModuleBuilder(true)
                 GradleKpmCachingModuleDependencyResolver(
                     GradleKpmModuleDependencyResolver(componentResultResolver, metadataModuleBuilder, projectModuleBuilder)
                 )
@@ -74,7 +74,7 @@ internal fun buildSyntheticPlainModule(
     resolvedComponentResult: ResolvedComponentResult,
     singleVariantName: String,
 ): GradleKpmExternalPlainModule {
-    val moduleDependency = resolvedComponentResult.toKpmModuleDependency()
+    konst moduleDependency = resolvedComponentResult.toKpmModuleDependency()
     return GradleKpmExternalPlainModule(KpmBasicModule(moduleDependency.moduleIdentifier).apply {
         KpmBasicVariant(this@apply, singleVariantName, DefaultLanguageSettingsBuilder()).apply {
             fragments.add(this)
@@ -87,20 +87,20 @@ internal fun buildSyntheticPlainModule(
     })
 }
 
-internal class GradleKpmExternalPlainModule(private val moduleData: KpmBasicModule) : KpmModule by moduleData {
+internal class GradleKpmExternalPlainModule(private konst moduleData: KpmBasicModule) : KpmModule by moduleData {
     override fun toString(): String = "external plain $moduleData"
 
-    val singleVariant: KpmVariant
+    konst singleVariant: KpmVariant
         get() = moduleData.variants.singleOrNull()
             ?: error("synthetic $moduleData was expected to have a single variant, got: ${moduleData.variants}")
 }
 
 internal class GradleKpmExternalImportedModule(
-    private val moduleData: KpmBasicModule,
-    val projectStructureMetadata: KotlinProjectStructureMetadata,
-    val hostSpecificFragments: Set<KpmFragment>
+    private konst moduleData: KpmBasicModule,
+    konst projectStructureMetadata: KotlinProjectStructureMetadata,
+    konst hostSpecificFragments: Set<KpmFragment>
 ) : KpmModule by moduleData {
-    val hasLegacyMetadataModule = !projectStructureMetadata.isPublishedAsRoot
+    konst hasLegacyMetadataModule = !projectStructureMetadata.isPublishedAsRoot
 
     override fun toString(): String = "imported $moduleData"
 }
@@ -112,19 +112,19 @@ internal fun ComponentIdentifier.matchesModule(module: KpmModule): Boolean =
     matchesModuleIdentifier(module.moduleIdentifier)
 
 internal fun ResolvedComponentResult.toKpmModuleIdentifiers(): List<KpmModuleIdentifier> {
-    val classifiers = moduleClassifiersFromCapabilities(variants.flatMap { it.capabilities })
+    konst classifiers = moduleClassifiersFromCapabilities(variants.flatMap { it.capabilities })
     return classifiers.map { moduleClassifier -> toKpmModuleIdentifier(moduleClassifier) }
 }
 
 internal fun ResolvedVariantResult.toKpmModuleIdentifiers(): List<KpmModuleIdentifier> {
-    val classifiers = moduleClassifiersFromCapabilities(capabilities)
+    konst classifiers = moduleClassifiersFromCapabilities(capabilities)
     return classifiers.map { moduleClassifier -> toKpmModuleIdentifier(moduleClassifier) }
 }
 
 // FIXME this mapping doesn't have enough information to choose auxiliary modules
 internal fun ResolvedComponentResult.toSingleKpmModuleIdentifier(): KpmModuleIdentifier {
-    val classifiers = moduleClassifiersFromCapabilities(variants.flatMap { it.capabilities })
-    val moduleClassifier = classifiers.single() // FIXME handle multiple capabilities
+    konst classifiers = moduleClassifiersFromCapabilities(variants.flatMap { it.capabilities })
+    konst moduleClassifier = classifiers.single() // FIXME handle multiple capabilities
     return toKpmModuleIdentifier(moduleClassifier)
 }
 
@@ -132,7 +132,7 @@ internal fun ResolvedVariantResult.toSingleKpmModuleIdentifier(): KpmModuleIdent
     ?: error("Unexpected amount of KPM Identifiers from '$this'. Only single Module Identifier was expected")
 
 private fun ResolvedComponentResult.toKpmModuleIdentifier(moduleClassifier: String?): KpmModuleIdentifier {
-    return when (val id = id) {
+    return when (konst id = id) {
         is ProjectComponentIdentifier -> KpmLocalModuleIdentifier(id.build.name, id.projectPath, moduleClassifier)
         is ModuleComponentIdentifier -> id.toSingleKpmModuleIdentifier()
         else -> KpmMavenModuleIdentifier(moduleVersion?.group.orEmpty(), moduleVersion?.name.orEmpty(), moduleClassifier)
@@ -140,7 +140,7 @@ private fun ResolvedComponentResult.toKpmModuleIdentifier(moduleClassifier: Stri
 }
 
 private fun ResolvedVariantResult.toKpmModuleIdentifier(moduleClassifier: String?): KpmModuleIdentifier {
-    return when (val id = owner) {
+    return when (konst id = owner) {
         is ProjectComponentIdentifier -> KpmLocalModuleIdentifier(id.build.name, id.projectPath, moduleClassifier)
         is ModuleComponentIdentifier -> id.toSingleKpmModuleIdentifier()
         else -> error("Unexpected component identifier '$id' of type ${id.javaClass}")
@@ -148,12 +148,12 @@ private fun ResolvedVariantResult.toKpmModuleIdentifier(moduleClassifier: String
 }
 
 internal fun moduleClassifiersFromCapabilities(capabilities: Iterable<Capability>): Iterable<String?> {
-    val classifierCapabilities = capabilities.filter { it.name.contains("..") }
+    konst classifierCapabilities = capabilities.filter { it.name.contains("..") }
     return if (classifierCapabilities.none()) listOf(null) else classifierCapabilities.map { it.name.substringAfterLast("..") /*FIXME invent a more stable scheme*/ }
 }
 
 internal fun ComponentSelector.toKpmModuleIdentifiers(): Iterable<KpmModuleIdentifier> {
-    val moduleClassifiers = moduleClassifiersFromCapabilities(requestedCapabilities)
+    konst moduleClassifiers = moduleClassifiersFromCapabilities(requestedCapabilities)
     return when (this) {
         is ProjectComponentSelector -> moduleClassifiers.map { KpmLocalModuleIdentifier(buildName, projectPath, it) }
         is ModuleComponentSelector -> moduleClassifiers.map { KpmMavenModuleIdentifier(moduleIdentifier.group, moduleIdentifier.name, it) }
@@ -163,7 +163,7 @@ internal fun ComponentSelector.toKpmModuleIdentifiers(): Iterable<KpmModuleIdent
 
 internal fun ResolvedComponentResult.toKpmModuleDependency(): KpmModuleDependency = KpmModuleDependency(toSingleKpmModuleIdentifier())
 internal fun ComponentSelector.toKpmModuleDependency(): KpmModuleDependency {
-    val moduleId = toKpmModuleIdentifiers().single() // FIXME handle multiple
+    konst moduleId = toKpmModuleIdentifiers().single() // FIXME handle multiple
     return KpmModuleDependency(moduleId)
 }
 
@@ -173,11 +173,11 @@ internal fun ComponentIdentifier.matchesModuleDependency(moduleDependency: KpmMo
 internal fun ComponentIdentifier.matchesModuleIdentifier(id: KpmModuleIdentifier): Boolean =
     when (id) {
         is KpmLocalModuleIdentifier -> {
-            val projectId = this as? ProjectComponentIdentifier
+            konst projectId = this as? ProjectComponentIdentifier
             projectId?.build?.name == id.buildId && projectId.projectPath == id.projectId
         }
         is KpmMavenModuleIdentifier -> {
-            val componentId = this as? ModuleComponentIdentifier
+            konst componentId = this as? ModuleComponentIdentifier
             componentId?.toSingleKpmModuleIdentifier() == id
         }
         else -> false

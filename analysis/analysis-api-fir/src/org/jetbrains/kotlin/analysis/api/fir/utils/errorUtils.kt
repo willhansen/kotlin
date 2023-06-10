@@ -20,12 +20,12 @@ fun ExceptionAttachmentBuilder.withSymbolAttachment(name: String, symbol: KtSymb
         withEntry(name, symbol) { DebugSymbolRenderer(renderExtra = true).render(it) }
     }
 
-    val psi = symbol.psi
-    val psiModule = psi?.let(analysisSession::getModule)
+    konst psi = symbol.psi
+    konst psiModule = psi?.let(analysisSession::getModule)
     withPsiEntry("${name}Psi", psi, psiModule)
 
     if (symbol is KtFirSymbol<*>) {
-        val symbolFir = symbol.firSymbol.fir
+        konst symbolFir = symbol.firSymbol.fir
         withFirEntry("${name}Fir", symbolFir)
     }
 }

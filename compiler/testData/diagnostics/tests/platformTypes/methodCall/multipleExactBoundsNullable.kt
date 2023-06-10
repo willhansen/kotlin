@@ -15,7 +15,7 @@ class MyMap<K, V> extends AbstractMap<K, V> {
 // FILE: main.kt
 
 interface ResolverForProject<M1> {
-    val exposeM: M1 get() = null!!
+    konst exposeM: M1 get() = null!!
 }
 
 class ResolverForProjectImpl<M>(
@@ -28,8 +28,8 @@ interface WithFoo {
 }
 
 fun <M2: WithFoo> foo(delegateResolver: ResolverForProject<M2?>): ResolverForProject<M2?> {
-    val descriptorByModule = MyMap<M2, String>()
-    val result = ResolverForProjectImpl(descriptorByModule, delegateResolver)
+    konst descriptorByModule = MyMap<M2, String>()
+    konst result = ResolverForProjectImpl(descriptorByModule, delegateResolver)
     result.exposeM.foo() // M is not M2?
     result.exposeM?.foo() // no warning, M is not M2, hense M is M2!
 

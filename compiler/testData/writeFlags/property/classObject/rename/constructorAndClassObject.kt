@@ -1,7 +1,7 @@
-class Test(val prop: String) {
+class Test(konst prop: String) {
 
   companion object {
-    public const val prop : String = "CO";
+    public const konst prop : String = "CO";
   }
 
 }

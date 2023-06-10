@@ -13,12 +13,12 @@ class CXString(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var data: COpaquePointer?
-        get() = memberAt<COpaquePointerVar>(0).value
-        set(value) { memberAt<COpaquePointerVar>(0).value = value }
+        get() = memberAt<COpaquePointerVar>(0).konstue
+        set(konstue) { memberAt<COpaquePointerVar>(0).konstue = konstue }
     
     var private_flags: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("Strings", "Count")
@@ -28,12 +28,12 @@ class CXStringSet(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var Strings: CPointer<CXString>?
-        get() = memberAt<CPointerVar<CXString>>(0).value
-        set(value) { memberAt<CPointerVar<CXString>>(0).value = value }
+        get() = memberAt<CPointerVar<CXString>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXString>>(0).konstue = konstue }
     
     var Count: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
 }
 
 class CXVirtualFileOverlayImpl(rawPtr: NativePtr) : COpaque(rawPtr) {
@@ -55,16 +55,16 @@ class CXUnsavedFile(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var Filename: CPointer<ByteVar>?
-        get() = memberAt<CPointerVar<ByteVar>>(0).value
-        set(value) { memberAt<CPointerVar<ByteVar>>(0).value = value }
+        get() = memberAt<CPointerVar<ByteVar>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<ByteVar>>(0).konstue = konstue }
     
     var Contents: CPointer<ByteVar>?
-        get() = memberAt<CPointerVar<ByteVar>>(8).value
-        set(value) { memberAt<CPointerVar<ByteVar>>(8).value = value }
+        get() = memberAt<CPointerVar<ByteVar>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<ByteVar>>(8).konstue = konstue }
     
     var Length: Int
-        get() = memberAt<IntVar>(16).value
-        set(value) { memberAt<IntVar>(16).value = value }
+        get() = memberAt<IntVar>(16).konstue
+        set(konstue) { memberAt<IntVar>(16).konstue = konstue }
 }
 
 @CNaturalStruct("Major", "Minor", "Subminor")
@@ -74,16 +74,16 @@ class CXVersion(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(12, 4)
     
     var Major: Int
-        get() = memberAt<IntVar>(0).value
-        set(value) { memberAt<IntVar>(0).value = value }
+        get() = memberAt<IntVar>(0).konstue
+        set(konstue) { memberAt<IntVar>(0).konstue = konstue }
     
     var Minor: Int
-        get() = memberAt<IntVar>(4).value
-        set(value) { memberAt<IntVar>(4).value = value }
+        get() = memberAt<IntVar>(4).konstue
+        set(konstue) { memberAt<IntVar>(4).konstue = konstue }
     
     var Subminor: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("data")
@@ -93,7 +93,7 @@ class CXFileUniqueID(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     @CLength(3)
-    val data: CArrayPointer<LongVar>
+    konst data: CArrayPointer<LongVar>
         get() = arrayMemberAt(0)
 }
 
@@ -104,12 +104,12 @@ class CXSourceLocation(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     @CLength(2)
-    val ptr_data: CArrayPointer<COpaquePointerVar>
+    konst ptr_data: CArrayPointer<COpaquePointerVar>
         get() = arrayMemberAt(0)
     
     var int_data: Int
-        get() = memberAt<IntVar>(16).value
-        set(value) { memberAt<IntVar>(16).value = value }
+        get() = memberAt<IntVar>(16).konstue
+        set(konstue) { memberAt<IntVar>(16).konstue = konstue }
 }
 
 @CNaturalStruct("ptr_data", "begin_int_data", "end_int_data")
@@ -119,16 +119,16 @@ class CXSourceRange(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     @CLength(2)
-    val ptr_data: CArrayPointer<COpaquePointerVar>
+    konst ptr_data: CArrayPointer<COpaquePointerVar>
         get() = arrayMemberAt(0)
     
     var begin_int_data: Int
-        get() = memberAt<IntVar>(16).value
-        set(value) { memberAt<IntVar>(16).value = value }
+        get() = memberAt<IntVar>(16).konstue
+        set(konstue) { memberAt<IntVar>(16).konstue = konstue }
     
     var end_int_data: Int
-        get() = memberAt<IntVar>(20).value
-        set(value) { memberAt<IntVar>(20).value = value }
+        get() = memberAt<IntVar>(20).konstue
+        set(konstue) { memberAt<IntVar>(20).konstue = konstue }
 }
 
 @CNaturalStruct("count", "ranges")
@@ -138,12 +138,12 @@ class CXSourceRangeList(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var count: Int
-        get() = memberAt<IntVar>(0).value
-        set(value) { memberAt<IntVar>(0).value = value }
+        get() = memberAt<IntVar>(0).konstue
+        set(konstue) { memberAt<IntVar>(0).konstue = konstue }
     
     var ranges: CPointer<CXSourceRange>?
-        get() = memberAt<CPointerVar<CXSourceRange>>(8).value
-        set(value) { memberAt<CPointerVar<CXSourceRange>>(8).value = value }
+        get() = memberAt<CPointerVar<CXSourceRange>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CXSourceRange>>(8).konstue = konstue }
 }
 
 @CNaturalStruct("kind", "amount")
@@ -153,12 +153,12 @@ class CXTUResourceUsageEntry(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(8, 4)
     
     var kind: CXTUResourceUsageKind
-        get() = memberAt<CXTUResourceUsageKind.Var>(0).value
-        set(value) { memberAt<CXTUResourceUsageKind.Var>(0).value = value }
+        get() = memberAt<CXTUResourceUsageKind.Var>(0).konstue
+        set(konstue) { memberAt<CXTUResourceUsageKind.Var>(0).konstue = konstue }
     
     var amount: Int
-        get() = memberAt<IntVar>(4).value
-        set(value) { memberAt<IntVar>(4).value = value }
+        get() = memberAt<IntVar>(4).konstue
+        set(konstue) { memberAt<IntVar>(4).konstue = konstue }
 }
 
 @CNaturalStruct("data", "numEntries", "entries")
@@ -168,16 +168,16 @@ class CXTUResourceUsage(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var data: COpaquePointer?
-        get() = memberAt<COpaquePointerVar>(0).value
-        set(value) { memberAt<COpaquePointerVar>(0).value = value }
+        get() = memberAt<COpaquePointerVar>(0).konstue
+        set(konstue) { memberAt<COpaquePointerVar>(0).konstue = konstue }
     
     var numEntries: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
     
     var entries: CPointer<CXTUResourceUsageEntry>?
-        get() = memberAt<CPointerVar<CXTUResourceUsageEntry>>(16).value
-        set(value) { memberAt<CPointerVar<CXTUResourceUsageEntry>>(16).value = value }
+        get() = memberAt<CPointerVar<CXTUResourceUsageEntry>>(16).konstue
+        set(konstue) { memberAt<CPointerVar<CXTUResourceUsageEntry>>(16).konstue = konstue }
 }
 
 @CNaturalStruct("kind", "xdata", "data")
@@ -187,15 +187,15 @@ class CXCursor(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(32, 8)
     
     var kind: CXCursorKind
-        get() = memberAt<CXCursorKind.Var>(0).value
-        set(value) { memberAt<CXCursorKind.Var>(0).value = value }
+        get() = memberAt<CXCursorKind.Var>(0).konstue
+        set(konstue) { memberAt<CXCursorKind.Var>(0).konstue = konstue }
     
     var xdata: Int
-        get() = memberAt<IntVar>(4).value
-        set(value) { memberAt<IntVar>(4).value = value }
+        get() = memberAt<IntVar>(4).konstue
+        set(konstue) { memberAt<IntVar>(4).konstue = konstue }
     
     @CLength(3)
-    val data: CArrayPointer<COpaquePointerVar>
+    konst data: CArrayPointer<COpaquePointerVar>
         get() = arrayMemberAt(8)
 }
 
@@ -205,23 +205,23 @@ class CXPlatformAvailability(rawPtr: NativePtr) : CStructVar(rawPtr) {
     @Deprecated("Use sizeOf\u003CT\u003E() or alignOf\u003CT\u003E() instead.", ReplaceWith(""), DeprecationLevel.WARNING)
     companion object : CStructVar.Type(72, 8)
     
-    val Platform: CXString
+    konst Platform: CXString
         get() = memberAt(0)
     
-    val Introduced: CXVersion
+    konst Introduced: CXVersion
         get() = memberAt(16)
     
-    val Deprecated: CXVersion
+    konst Deprecated: CXVersion
         get() = memberAt(28)
     
-    val Obsoleted: CXVersion
+    konst Obsoleted: CXVersion
         get() = memberAt(40)
     
     var Unavailable: Int
-        get() = memberAt<IntVar>(52).value
-        set(value) { memberAt<IntVar>(52).value = value }
+        get() = memberAt<IntVar>(52).konstue
+        set(konstue) { memberAt<IntVar>(52).konstue = konstue }
     
-    val Message: CXString
+    konst Message: CXString
         get() = memberAt(56)
 }
 
@@ -235,11 +235,11 @@ class CXType(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var kind: CXTypeKind
-        get() = memberAt<CXTypeKind.Var>(0).value
-        set(value) { memberAt<CXTypeKind.Var>(0).value = value }
+        get() = memberAt<CXTypeKind.Var>(0).konstue
+        set(konstue) { memberAt<CXTypeKind.Var>(0).konstue = konstue }
     
     @CLength(2)
-    val data: CArrayPointer<COpaquePointerVar>
+    konst data: CArrayPointer<COpaquePointerVar>
         get() = arrayMemberAt(8)
 }
 
@@ -250,12 +250,12 @@ class CXToken(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     @CLength(4)
-    val int_data: CArrayPointer<IntVar>
+    konst int_data: CArrayPointer<IntVar>
         get() = arrayMemberAt(0)
     
     var ptr_data: COpaquePointer?
-        get() = memberAt<COpaquePointerVar>(16).value
-        set(value) { memberAt<COpaquePointerVar>(16).value = value }
+        get() = memberAt<COpaquePointerVar>(16).konstue
+        set(konstue) { memberAt<COpaquePointerVar>(16).konstue = konstue }
 }
 
 @CNaturalStruct("CursorKind", "CompletionString")
@@ -265,12 +265,12 @@ class CXCompletionResult(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var CursorKind: CXCursorKind
-        get() = memberAt<CXCursorKind.Var>(0).value
-        set(value) { memberAt<CXCursorKind.Var>(0).value = value }
+        get() = memberAt<CXCursorKind.Var>(0).konstue
+        set(konstue) { memberAt<CXCursorKind.Var>(0).konstue = konstue }
     
     var CompletionString: CXCompletionString?
-        get() = memberAt<CXCompletionStringVar>(8).value
-        set(value) { memberAt<CXCompletionStringVar>(8).value = value }
+        get() = memberAt<CXCompletionStringVar>(8).konstue
+        set(konstue) { memberAt<CXCompletionStringVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("Results", "NumResults")
@@ -280,12 +280,12 @@ class CXCodeCompleteResults(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var Results: CPointer<CXCompletionResult>?
-        get() = memberAt<CPointerVar<CXCompletionResult>>(0).value
-        set(value) { memberAt<CPointerVar<CXCompletionResult>>(0).value = value }
+        get() = memberAt<CPointerVar<CXCompletionResult>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXCompletionResult>>(0).konstue = konstue }
     
     var NumResults: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("context", "visit")
@@ -295,12 +295,12 @@ class CXCursorAndRangeVisitor(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var context: COpaquePointer?
-        get() = memberAt<COpaquePointerVar>(0).value
-        set(value) { memberAt<COpaquePointerVar>(0).value = value }
+        get() = memberAt<COpaquePointerVar>(0).konstue
+        set(konstue) { memberAt<COpaquePointerVar>(0).konstue = konstue }
     
     var visit: CPointer<CFunction<(COpaquePointer?, CValue<CXCursor>, CValue<CXSourceRange>) -> CXVisitorResult>>?
-        get() = memberAt<CPointerVar<CFunction<(COpaquePointer?, CValue<CXCursor>, CValue<CXSourceRange>) -> CXVisitorResult>>>(8).value
-        set(value) { memberAt<CPointerVar<CFunction<(COpaquePointer?, CValue<CXCursor>, CValue<CXSourceRange>) -> CXVisitorResult>>>(8).value = value }
+        get() = memberAt<CPointerVar<CFunction<(COpaquePointer?, CValue<CXCursor>, CValue<CXSourceRange>) -> CXVisitorResult>>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(COpaquePointer?, CValue<CXCursor>, CValue<CXSourceRange>) -> CXVisitorResult>>>(8).konstue = konstue }
 }
 
 @CNaturalStruct("ptr_data", "int_data")
@@ -310,12 +310,12 @@ class CXIdxLoc(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     @CLength(2)
-    val ptr_data: CArrayPointer<COpaquePointerVar>
+    konst ptr_data: CArrayPointer<COpaquePointerVar>
         get() = arrayMemberAt(0)
     
     var int_data: Int
-        get() = memberAt<IntVar>(16).value
-        set(value) { memberAt<IntVar>(16).value = value }
+        get() = memberAt<IntVar>(16).konstue
+        set(konstue) { memberAt<IntVar>(16).konstue = konstue }
 }
 
 @CNaturalStruct("hashLoc", "filename", "file", "isImport", "isAngled", "isModuleImport")
@@ -324,28 +324,28 @@ class CXIdxIncludedFileInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     @Deprecated("Use sizeOf\u003CT\u003E() or alignOf\u003CT\u003E() instead.", ReplaceWith(""), DeprecationLevel.WARNING)
     companion object : CStructVar.Type(56, 8)
     
-    val hashLoc: CXIdxLoc
+    konst hashLoc: CXIdxLoc
         get() = memberAt(0)
     
     var filename: CPointer<ByteVar>?
-        get() = memberAt<CPointerVar<ByteVar>>(24).value
-        set(value) { memberAt<CPointerVar<ByteVar>>(24).value = value }
+        get() = memberAt<CPointerVar<ByteVar>>(24).konstue
+        set(konstue) { memberAt<CPointerVar<ByteVar>>(24).konstue = konstue }
     
     var file: CXFile?
-        get() = memberAt<CXFileVar>(32).value
-        set(value) { memberAt<CXFileVar>(32).value = value }
+        get() = memberAt<CXFileVar>(32).konstue
+        set(konstue) { memberAt<CXFileVar>(32).konstue = konstue }
     
     var isImport: Int
-        get() = memberAt<IntVar>(40).value
-        set(value) { memberAt<IntVar>(40).value = value }
+        get() = memberAt<IntVar>(40).konstue
+        set(konstue) { memberAt<IntVar>(40).konstue = konstue }
     
     var isAngled: Int
-        get() = memberAt<IntVar>(44).value
-        set(value) { memberAt<IntVar>(44).value = value }
+        get() = memberAt<IntVar>(44).konstue
+        set(konstue) { memberAt<IntVar>(44).konstue = konstue }
     
     var isModuleImport: Int
-        get() = memberAt<IntVar>(48).value
-        set(value) { memberAt<IntVar>(48).value = value }
+        get() = memberAt<IntVar>(48).konstue
+        set(konstue) { memberAt<IntVar>(48).konstue = konstue }
 }
 
 @CNaturalStruct("file", "module", "loc", "isImplicit")
@@ -355,19 +355,19 @@ class CXIdxImportedASTFileInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(48, 8)
     
     var file: CXFile?
-        get() = memberAt<CXFileVar>(0).value
-        set(value) { memberAt<CXFileVar>(0).value = value }
+        get() = memberAt<CXFileVar>(0).konstue
+        set(konstue) { memberAt<CXFileVar>(0).konstue = konstue }
     
     var module: CXModule?
-        get() = memberAt<CXModuleVar>(8).value
-        set(value) { memberAt<CXModuleVar>(8).value = value }
+        get() = memberAt<CXModuleVar>(8).konstue
+        set(konstue) { memberAt<CXModuleVar>(8).konstue = konstue }
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(16)
     
     var isImplicit: Int
-        get() = memberAt<IntVar>(40).value
-        set(value) { memberAt<IntVar>(40).value = value }
+        get() = memberAt<IntVar>(40).konstue
+        set(konstue) { memberAt<IntVar>(40).konstue = konstue }
 }
 
 @CNaturalStruct("kind", "cursor", "loc")
@@ -377,13 +377,13 @@ class CXIdxAttrInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(64, 8)
     
     var kind: CXIdxAttrKind
-        get() = memberAt<CXIdxAttrKindVar>(0).value
-        set(value) { memberAt<CXIdxAttrKindVar>(0).value = value }
+        get() = memberAt<CXIdxAttrKindVar>(0).konstue
+        set(konstue) { memberAt<CXIdxAttrKindVar>(0).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(8)
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(40)
 }
 
@@ -394,35 +394,35 @@ class CXIdxEntityInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(80, 8)
     
     var kind: CXIdxEntityKind
-        get() = memberAt<CXIdxEntityKind.Var>(0).value
-        set(value) { memberAt<CXIdxEntityKind.Var>(0).value = value }
+        get() = memberAt<CXIdxEntityKind.Var>(0).konstue
+        set(konstue) { memberAt<CXIdxEntityKind.Var>(0).konstue = konstue }
     
     var templateKind: CXIdxEntityCXXTemplateKind
-        get() = memberAt<CXIdxEntityCXXTemplateKindVar>(4).value
-        set(value) { memberAt<CXIdxEntityCXXTemplateKindVar>(4).value = value }
+        get() = memberAt<CXIdxEntityCXXTemplateKindVar>(4).konstue
+        set(konstue) { memberAt<CXIdxEntityCXXTemplateKindVar>(4).konstue = konstue }
     
     var lang: CXIdxEntityLanguage
-        get() = memberAt<CXIdxEntityLanguageVar>(8).value
-        set(value) { memberAt<CXIdxEntityLanguageVar>(8).value = value }
+        get() = memberAt<CXIdxEntityLanguageVar>(8).konstue
+        set(konstue) { memberAt<CXIdxEntityLanguageVar>(8).konstue = konstue }
     
     var name: CPointer<ByteVar>?
-        get() = memberAt<CPointerVar<ByteVar>>(16).value
-        set(value) { memberAt<CPointerVar<ByteVar>>(16).value = value }
+        get() = memberAt<CPointerVar<ByteVar>>(16).konstue
+        set(konstue) { memberAt<CPointerVar<ByteVar>>(16).konstue = konstue }
     
     var USR: CPointer<ByteVar>?
-        get() = memberAt<CPointerVar<ByteVar>>(24).value
-        set(value) { memberAt<CPointerVar<ByteVar>>(24).value = value }
+        get() = memberAt<CPointerVar<ByteVar>>(24).konstue
+        set(konstue) { memberAt<CPointerVar<ByteVar>>(24).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(32)
     
     var attributes: CPointer<CPointerVar<CXIdxAttrInfo>>?
-        get() = memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(64).value
-        set(value) { memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(64).value = value }
+        get() = memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(64).konstue
+        set(konstue) { memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(64).konstue = konstue }
     
     var numAttributes: Int
-        get() = memberAt<IntVar>(72).value
-        set(value) { memberAt<IntVar>(72).value = value }
+        get() = memberAt<IntVar>(72).konstue
+        set(konstue) { memberAt<IntVar>(72).konstue = konstue }
 }
 
 @CNaturalStruct("cursor")
@@ -431,7 +431,7 @@ class CXIdxContainerInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     @Deprecated("Use sizeOf\u003CT\u003E() or alignOf\u003CT\u003E() instead.", ReplaceWith(""), DeprecationLevel.WARNING)
     companion object : CStructVar.Type(32, 8)
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(0)
 }
 
@@ -442,17 +442,17 @@ class CXIdxIBOutletCollectionAttrInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(72, 8)
     
     var attrInfo: CPointer<CXIdxAttrInfo>?
-        get() = memberAt<CPointerVar<CXIdxAttrInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxAttrInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxAttrInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxAttrInfo>>(0).konstue = konstue }
     
     var objcClass: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue = konstue }
     
-    val classCursor: CXCursor
+    konst classCursor: CXCursor
         get() = memberAt(16)
     
-    val classLoc: CXIdxLoc
+    konst classLoc: CXIdxLoc
         get() = memberAt(48)
 }
 
@@ -463,54 +463,54 @@ class CXIdxDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(128, 8)
     
     var entityInfo: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(8)
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(40)
     
     var semanticContainer: CPointer<CXIdxContainerInfo>?
-        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(64).value
-        set(value) { memberAt<CPointerVar<CXIdxContainerInfo>>(64).value = value }
+        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(64).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxContainerInfo>>(64).konstue = konstue }
     
     var lexicalContainer: CPointer<CXIdxContainerInfo>?
-        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(72).value
-        set(value) { memberAt<CPointerVar<CXIdxContainerInfo>>(72).value = value }
+        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(72).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxContainerInfo>>(72).konstue = konstue }
     
     var isRedeclaration: Int
-        get() = memberAt<IntVar>(80).value
-        set(value) { memberAt<IntVar>(80).value = value }
+        get() = memberAt<IntVar>(80).konstue
+        set(konstue) { memberAt<IntVar>(80).konstue = konstue }
     
     var isDefinition: Int
-        get() = memberAt<IntVar>(84).value
-        set(value) { memberAt<IntVar>(84).value = value }
+        get() = memberAt<IntVar>(84).konstue
+        set(konstue) { memberAt<IntVar>(84).konstue = konstue }
     
     var isContainer: Int
-        get() = memberAt<IntVar>(88).value
-        set(value) { memberAt<IntVar>(88).value = value }
+        get() = memberAt<IntVar>(88).konstue
+        set(konstue) { memberAt<IntVar>(88).konstue = konstue }
     
     var declAsContainer: CPointer<CXIdxContainerInfo>?
-        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(96).value
-        set(value) { memberAt<CPointerVar<CXIdxContainerInfo>>(96).value = value }
+        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(96).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxContainerInfo>>(96).konstue = konstue }
     
     var isImplicit: Int
-        get() = memberAt<IntVar>(104).value
-        set(value) { memberAt<IntVar>(104).value = value }
+        get() = memberAt<IntVar>(104).konstue
+        set(konstue) { memberAt<IntVar>(104).konstue = konstue }
     
     var attributes: CPointer<CPointerVar<CXIdxAttrInfo>>?
-        get() = memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(112).value
-        set(value) { memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(112).value = value }
+        get() = memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(112).konstue
+        set(konstue) { memberAt<CPointerVar<CPointerVar<CXIdxAttrInfo>>>(112).konstue = konstue }
     
     var numAttributes: Int
-        get() = memberAt<IntVar>(120).value
-        set(value) { memberAt<IntVar>(120).value = value }
+        get() = memberAt<IntVar>(120).konstue
+        set(konstue) { memberAt<IntVar>(120).konstue = konstue }
     
     var flags: Int
-        get() = memberAt<IntVar>(124).value
-        set(value) { memberAt<IntVar>(124).value = value }
+        get() = memberAt<IntVar>(124).konstue
+        set(konstue) { memberAt<IntVar>(124).konstue = konstue }
 }
 
 @CNaturalStruct("declInfo", "kind")
@@ -520,12 +520,12 @@ class CXIdxObjCContainerDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var declInfo: CPointer<CXIdxDeclInfo>?
-        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue = konstue }
     
     var kind: CXIdxObjCContainerKind
-        get() = memberAt<CXIdxObjCContainerKindVar>(8).value
-        set(value) { memberAt<CXIdxObjCContainerKindVar>(8).value = value }
+        get() = memberAt<CXIdxObjCContainerKindVar>(8).konstue
+        set(konstue) { memberAt<CXIdxObjCContainerKindVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("base", "cursor", "loc")
@@ -535,13 +535,13 @@ class CXIdxBaseClassInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(64, 8)
     
     var base: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(8)
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(40)
 }
 
@@ -552,13 +552,13 @@ class CXIdxObjCProtocolRefInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(64, 8)
     
     var protocol: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(0).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(8)
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(40)
 }
 
@@ -569,12 +569,12 @@ class CXIdxObjCProtocolRefListInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(16, 8)
     
     var protocols: CPointer<CPointerVar<CXIdxObjCProtocolRefInfo>>?
-        get() = memberAt<CPointerVar<CPointerVar<CXIdxObjCProtocolRefInfo>>>(0).value
-        set(value) { memberAt<CPointerVar<CPointerVar<CXIdxObjCProtocolRefInfo>>>(0).value = value }
+        get() = memberAt<CPointerVar<CPointerVar<CXIdxObjCProtocolRefInfo>>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CPointerVar<CXIdxObjCProtocolRefInfo>>>(0).konstue = konstue }
     
     var numProtocols: Int
-        get() = memberAt<IntVar>(8).value
-        set(value) { memberAt<IntVar>(8).value = value }
+        get() = memberAt<IntVar>(8).konstue
+        set(konstue) { memberAt<IntVar>(8).konstue = konstue }
 }
 
 @CNaturalStruct("containerInfo", "superInfo", "protocols")
@@ -584,16 +584,16 @@ class CXIdxObjCInterfaceDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var containerInfo: CPointer<CXIdxObjCContainerDeclInfo>?
-        get() = memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).konstue = konstue }
     
     var superInfo: CPointer<CXIdxBaseClassInfo>?
-        get() = memberAt<CPointerVar<CXIdxBaseClassInfo>>(8).value
-        set(value) { memberAt<CPointerVar<CXIdxBaseClassInfo>>(8).value = value }
+        get() = memberAt<CPointerVar<CXIdxBaseClassInfo>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxBaseClassInfo>>(8).konstue = konstue }
     
     var protocols: CPointer<CXIdxObjCProtocolRefListInfo>?
-        get() = memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(16).value
-        set(value) { memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(16).value = value }
+        get() = memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(16).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(16).konstue = konstue }
 }
 
 @CNaturalStruct("containerInfo", "objcClass", "classCursor", "classLoc", "protocols")
@@ -603,22 +603,22 @@ class CXIdxObjCCategoryDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(80, 8)
     
     var containerInfo: CPointer<CXIdxObjCContainerDeclInfo>?
-        get() = memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxObjCContainerDeclInfo>>(0).konstue = konstue }
     
     var objcClass: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue = konstue }
     
-    val classCursor: CXCursor
+    konst classCursor: CXCursor
         get() = memberAt(16)
     
-    val classLoc: CXIdxLoc
+    konst classLoc: CXIdxLoc
         get() = memberAt(48)
     
     var protocols: CPointer<CXIdxObjCProtocolRefListInfo>?
-        get() = memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(72).value
-        set(value) { memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(72).value = value }
+        get() = memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(72).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxObjCProtocolRefListInfo>>(72).konstue = konstue }
 }
 
 @CNaturalStruct("declInfo", "getter", "setter")
@@ -628,16 +628,16 @@ class CXIdxObjCPropertyDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var declInfo: CPointer<CXIdxDeclInfo>?
-        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue = konstue }
     
     var getter: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(8).konstue = konstue }
     
     var setter: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(16).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(16).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(16).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(16).konstue = konstue }
 }
 
 @CNaturalStruct("declInfo", "bases", "numBases")
@@ -647,16 +647,16 @@ class CXIdxCXXClassDeclInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(24, 8)
     
     var declInfo: CPointer<CXIdxDeclInfo>?
-        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).value
-        set(value) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).value = value }
+        get() = memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxDeclInfo>>(0).konstue = konstue }
     
     var bases: CPointer<CPointerVar<CXIdxBaseClassInfo>>?
-        get() = memberAt<CPointerVar<CPointerVar<CXIdxBaseClassInfo>>>(8).value
-        set(value) { memberAt<CPointerVar<CPointerVar<CXIdxBaseClassInfo>>>(8).value = value }
+        get() = memberAt<CPointerVar<CPointerVar<CXIdxBaseClassInfo>>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CPointerVar<CXIdxBaseClassInfo>>>(8).konstue = konstue }
     
     var numBases: Int
-        get() = memberAt<IntVar>(16).value
-        set(value) { memberAt<IntVar>(16).value = value }
+        get() = memberAt<IntVar>(16).konstue
+        set(konstue) { memberAt<IntVar>(16).konstue = konstue }
 }
 
 @CNaturalStruct("kind", "cursor", "loc", "referencedEntity", "parentEntity", "container", "role")
@@ -666,30 +666,30 @@ class CXIdxEntityRefInfo(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(96, 8)
     
     var kind: CXIdxEntityRefKind
-        get() = memberAt<CXIdxEntityRefKindVar>(0).value
-        set(value) { memberAt<CXIdxEntityRefKindVar>(0).value = value }
+        get() = memberAt<CXIdxEntityRefKindVar>(0).konstue
+        set(konstue) { memberAt<CXIdxEntityRefKindVar>(0).konstue = konstue }
     
-    val cursor: CXCursor
+    konst cursor: CXCursor
         get() = memberAt(8)
     
-    val loc: CXIdxLoc
+    konst loc: CXIdxLoc
         get() = memberAt(40)
     
     var referencedEntity: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(64).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(64).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(64).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(64).konstue = konstue }
     
     var parentEntity: CPointer<CXIdxEntityInfo>?
-        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(72).value
-        set(value) { memberAt<CPointerVar<CXIdxEntityInfo>>(72).value = value }
+        get() = memberAt<CPointerVar<CXIdxEntityInfo>>(72).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxEntityInfo>>(72).konstue = konstue }
     
     var container: CPointer<CXIdxContainerInfo>?
-        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(80).value
-        set(value) { memberAt<CPointerVar<CXIdxContainerInfo>>(80).value = value }
+        get() = memberAt<CPointerVar<CXIdxContainerInfo>>(80).konstue
+        set(konstue) { memberAt<CPointerVar<CXIdxContainerInfo>>(80).konstue = konstue }
     
     var role: CXSymbolRole
-        get() = memberAt<CXSymbolRoleVar>(88).value
-        set(value) { memberAt<CXSymbolRoleVar>(88).value = value }
+        get() = memberAt<CXSymbolRoleVar>(88).konstue
+        set(konstue) { memberAt<CXSymbolRoleVar>(88).konstue = konstue }
 }
 
 @CNaturalStruct("abortQuery", "diagnostic", "enteredMainFile", "ppIncludedFile", "importedASTFile", "startedTranslationUnit", "indexDeclaration", "indexEntityReference")
@@ -699,36 +699,36 @@ class IndexerCallbacks(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(64, 8)
     
     var abortQuery: CPointer<CFunction<(CXClientData?, COpaquePointer?) -> Int>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> Int>>>(0).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> Int>>>(0).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> Int>>>(0).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> Int>>>(0).konstue = konstue }
     
     var diagnostic: CPointer<CFunction<(CXClientData?, CXDiagnosticSet?, COpaquePointer?) -> Unit>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CXDiagnosticSet?, COpaquePointer?) -> Unit>>>(8).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CXDiagnosticSet?, COpaquePointer?) -> Unit>>>(8).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CXDiagnosticSet?, COpaquePointer?) -> Unit>>>(8).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CXDiagnosticSet?, COpaquePointer?) -> Unit>>>(8).konstue = konstue }
     
     var enteredMainFile: CPointer<CFunction<(CXClientData?, CXFile?, COpaquePointer?) -> CXIdxClientFile?>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CXFile?, COpaquePointer?) -> CXIdxClientFile?>>>(16).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CXFile?, COpaquePointer?) -> CXIdxClientFile?>>>(16).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CXFile?, COpaquePointer?) -> CXIdxClientFile?>>>(16).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CXFile?, COpaquePointer?) -> CXIdxClientFile?>>>(16).konstue = konstue }
     
     var ppIncludedFile: CPointer<CFunction<(CXClientData?, CPointer<CXIdxIncludedFileInfo>?) -> CXIdxClientFile?>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxIncludedFileInfo>?) -> CXIdxClientFile?>>>(24).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxIncludedFileInfo>?) -> CXIdxClientFile?>>>(24).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxIncludedFileInfo>?) -> CXIdxClientFile?>>>(24).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxIncludedFileInfo>?) -> CXIdxClientFile?>>>(24).konstue = konstue }
     
     var importedASTFile: CPointer<CFunction<(CXClientData?, CPointer<CXIdxImportedASTFileInfo>?) -> CXIdxClientASTFile?>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxImportedASTFileInfo>?) -> CXIdxClientASTFile?>>>(32).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxImportedASTFileInfo>?) -> CXIdxClientASTFile?>>>(32).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxImportedASTFileInfo>?) -> CXIdxClientASTFile?>>>(32).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxImportedASTFileInfo>?) -> CXIdxClientASTFile?>>>(32).konstue = konstue }
     
     var startedTranslationUnit: CPointer<CFunction<(CXClientData?, COpaquePointer?) -> CXIdxClientContainer?>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> CXIdxClientContainer?>>>(40).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> CXIdxClientContainer?>>>(40).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> CXIdxClientContainer?>>>(40).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, COpaquePointer?) -> CXIdxClientContainer?>>>(40).konstue = konstue }
     
     var indexDeclaration: CPointer<CFunction<(CXClientData?, CPointer<CXIdxDeclInfo>?) -> Unit>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxDeclInfo>?) -> Unit>>>(48).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxDeclInfo>?) -> Unit>>>(48).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxDeclInfo>?) -> Unit>>>(48).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxDeclInfo>?) -> Unit>>>(48).konstue = konstue }
     
     var indexEntityReference: CPointer<CFunction<(CXClientData?, CPointer<CXIdxEntityRefInfo>?) -> Unit>>?
-        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxEntityRefInfo>?) -> Unit>>>(56).value
-        set(value) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxEntityRefInfo>?) -> Unit>>>(56).value = value }
+        get() = memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxEntityRefInfo>?) -> Unit>>>(56).konstue
+        set(konstue) { memberAt<CPointerVar<CFunction<(CXClientData?, CPointer<CXIdxEntityRefInfo>?) -> Unit>>>(56).konstue = konstue }
 }
 
 @CNaturalStruct("typeOpaquePtr")
@@ -738,35 +738,35 @@ class CXTypeAttributes(rawPtr: NativePtr) : CStructVar(rawPtr) {
     companion object : CStructVar.Type(8, 8)
     
     var typeOpaquePtr: COpaquePointer?
-        get() = memberAt<COpaquePointerVar>(0).value
-        set(value) { memberAt<COpaquePointerVar>(0).value = value }
+        get() = memberAt<COpaquePointerVar>(0).konstue
+        set(konstue) { memberAt<COpaquePointerVar>(0).konstue = konstue }
 }
 
-enum class CXErrorCode(value: Int) : CEnum {
+enum class CXErrorCode(konstue: Int) : CEnum {
     CXError_Success(0),
     CXError_Failure(1),
     CXError_Crashed(2),
-    CXError_InvalidArguments(3),
+    CXError_InkonstidArguments(3),
     CXError_ASTReadError(4),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXErrorCode = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXErrorCode = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXErrorCode
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXErrorCode
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXAvailabilityKind(value: Int) : CEnum {
+enum class CXAvailabilityKind(konstue: Int) : CEnum {
     CXAvailability_Available(0),
     CXAvailability_Deprecated(1),
     CXAvailability_NotAvailable(2),
@@ -776,27 +776,27 @@ enum class CXAvailabilityKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXAvailabilityKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXAvailabilityKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXAvailabilityKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXAvailabilityKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXCursor_ExceptionSpecificationKind(value: Int) : CEnum {
+enum class CXCursor_ExceptionSpecificationKind(konstue: Int) : CEnum {
     CXCursor_ExceptionSpecificationKind_None(0),
     CXCursor_ExceptionSpecificationKind_DynamicNone(1),
     CXCursor_ExceptionSpecificationKind_Dynamic(2),
     CXCursor_ExceptionSpecificationKind_MSAny(3),
     CXCursor_ExceptionSpecificationKind_BasicNoexcept(4),
     CXCursor_ExceptionSpecificationKind_ComputedNoexcept(5),
-    CXCursor_ExceptionSpecificationKind_Unevaluated(6),
+    CXCursor_ExceptionSpecificationKind_Unekonstuated(6),
     CXCursor_ExceptionSpecificationKind_Uninstantiated(7),
     CXCursor_ExceptionSpecificationKind_Unparsed(8),
     CXCursor_ExceptionSpecificationKind_NoThrow(9),
@@ -805,20 +805,20 @@ enum class CXCursor_ExceptionSpecificationKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXCursor_ExceptionSpecificationKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXCursor_ExceptionSpecificationKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXCursor_ExceptionSpecificationKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXCursor_ExceptionSpecificationKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXDiagnosticSeverity(value: Int) : CEnum {
+enum class CXDiagnosticSeverity(konstue: Int) : CEnum {
     CXDiagnostic_Ignored(0),
     CXDiagnostic_Note(1),
     CXDiagnostic_Warning(2),
@@ -829,66 +829,66 @@ enum class CXDiagnosticSeverity(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXDiagnosticSeverity = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXDiagnosticSeverity = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXDiagnosticSeverity
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXDiagnosticSeverity
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXLoadDiag_Error(value: Int) : CEnum {
+enum class CXLoadDiag_Error(konstue: Int) : CEnum {
     CXLoadDiag_None(0),
     CXLoadDiag_Unknown(1),
     CXLoadDiag_CannotLoad(2),
-    CXLoadDiag_InvalidFile(3),
+    CXLoadDiag_InkonstidFile(3),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXLoadDiag_Error = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXLoadDiag_Error = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXLoadDiag_Error
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXLoadDiag_Error
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXSaveError(value: Int) : CEnum {
+enum class CXSaveError(konstue: Int) : CEnum {
     CXSaveError_None(0),
     CXSaveError_Unknown(1),
     CXSaveError_TranslationErrors(2),
-    CXSaveError_InvalidTU(3),
+    CXSaveError_InkonstidTU(3),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXSaveError = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXSaveError = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXSaveError
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXSaveError
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXTUResourceUsageKind(value: Int) : CEnum {
+enum class CXTUResourceUsageKind(konstue: Int) : CEnum {
     CXTUResourceUsage_AST(1),
     CXTUResourceUsage_Identifiers(2),
     CXTUResourceUsage_Selectors(3),
@@ -907,33 +907,33 @@ enum class CXTUResourceUsageKind(value: Int) : CEnum {
     
     companion object {
         
-        val CXTUResourceUsage_MEMORY_IN_BYTES_BEGIN: CXTUResourceUsageKind
+        konst CXTUResourceUsage_MEMORY_IN_BYTES_BEGIN: CXTUResourceUsageKind
             get() = CXTUResourceUsage_AST
         
-        val CXTUResourceUsage_First: CXTUResourceUsageKind
+        konst CXTUResourceUsage_First: CXTUResourceUsageKind
             get() = CXTUResourceUsage_AST
         
-        val CXTUResourceUsage_MEMORY_IN_BYTES_END: CXTUResourceUsageKind
+        konst CXTUResourceUsage_MEMORY_IN_BYTES_END: CXTUResourceUsageKind
             get() = CXTUResourceUsage_Preprocessor_HeaderSearch
         
-        val CXTUResourceUsage_Last: CXTUResourceUsageKind
+        konst CXTUResourceUsage_Last: CXTUResourceUsageKind
             get() = CXTUResourceUsage_Preprocessor_HeaderSearch
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXTUResourceUsageKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXTUResourceUsageKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXTUResourceUsageKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXTUResourceUsageKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXCursorKind(value: Int) : CEnum {
+enum class CXCursorKind(konstue: Int) : CEnum {
     CXCursor_UnexposedDecl(1),
     CXCursor_StructDecl(2),
     CXCursor_UnionDecl(3),
@@ -984,10 +984,10 @@ enum class CXCursorKind(value: Int) : CEnum {
     CXCursor_LabelRef(48),
     CXCursor_OverloadedDeclRef(49),
     CXCursor_VariableRef(50),
-    CXCursor_InvalidFile(70),
+    CXCursor_InkonstidFile(70),
     CXCursor_NoDeclFound(71),
     CXCursor_NotImplemented(72),
-    CXCursor_InvalidCode(73),
+    CXCursor_InkonstidCode(73),
     CXCursor_UnexposedExpr(100),
     CXCursor_DeclRefExpr(101),
     CXCursor_MemberRefExpr(102),
@@ -1185,76 +1185,76 @@ enum class CXCursorKind(value: Int) : CEnum {
     
     companion object {
         
-        val CXCursor_FirstDecl: CXCursorKind
+        konst CXCursor_FirstDecl: CXCursorKind
             get() = CXCursor_UnexposedDecl
         
-        val CXCursor_LastDecl: CXCursorKind
+        konst CXCursor_LastDecl: CXCursorKind
             get() = CXCursor_CXXAccessSpecifier
         
-        val CXCursor_FirstRef: CXCursorKind
+        konst CXCursor_FirstRef: CXCursorKind
             get() = CXCursor_ObjCSuperClassRef
         
-        val CXCursor_LastRef: CXCursorKind
+        konst CXCursor_LastRef: CXCursorKind
             get() = CXCursor_VariableRef
         
-        val CXCursor_FirstInvalid: CXCursorKind
-            get() = CXCursor_InvalidFile
+        konst CXCursor_FirstInkonstid: CXCursorKind
+            get() = CXCursor_InkonstidFile
         
-        val CXCursor_LastInvalid: CXCursorKind
-            get() = CXCursor_InvalidCode
+        konst CXCursor_LastInkonstid: CXCursorKind
+            get() = CXCursor_InkonstidCode
         
-        val CXCursor_FirstExpr: CXCursorKind
+        konst CXCursor_FirstExpr: CXCursorKind
             get() = CXCursor_UnexposedExpr
         
-        val CXCursor_LastExpr: CXCursorKind
+        konst CXCursor_LastExpr: CXCursorKind
             get() = CXCursor_CXXAddrspaceCastExpr
         
-        val CXCursor_FirstStmt: CXCursorKind
+        konst CXCursor_FirstStmt: CXCursorKind
             get() = CXCursor_UnexposedStmt
         
-        val CXCursor_AsmStmt: CXCursorKind
+        konst CXCursor_AsmStmt: CXCursorKind
             get() = CXCursor_GCCAsmStmt
         
-        val CXCursor_LastStmt: CXCursorKind
+        konst CXCursor_LastStmt: CXCursorKind
             get() = CXCursor_OMPScanDirective
         
-        val CXCursor_FirstAttr: CXCursorKind
+        konst CXCursor_FirstAttr: CXCursorKind
             get() = CXCursor_UnexposedAttr
         
-        val CXCursor_LastAttr: CXCursorKind
+        konst CXCursor_LastAttr: CXCursorKind
             get() = CXCursor_AlignedAttr
         
-        val CXCursor_FirstPreprocessing: CXCursorKind
+        konst CXCursor_FirstPreprocessing: CXCursorKind
             get() = CXCursor_PreprocessingDirective
         
-        val CXCursor_MacroInstantiation: CXCursorKind
+        konst CXCursor_MacroInstantiation: CXCursorKind
             get() = CXCursor_MacroExpansion
         
-        val CXCursor_LastPreprocessing: CXCursorKind
+        konst CXCursor_LastPreprocessing: CXCursorKind
             get() = CXCursor_InclusionDirective
         
-        val CXCursor_FirstExtraDecl: CXCursorKind
+        konst CXCursor_FirstExtraDecl: CXCursorKind
             get() = CXCursor_ModuleImportDecl
         
-        val CXCursor_FriendDecl: CXCursorKind
+        konst CXCursor_FriendDecl: CXCursorKind
             get() = CXCursor_LastExtraDecl
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXCursorKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXCursorKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXCursorKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXCursorKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXLinkageKind(value: Int) : CEnum {
-    CXLinkage_Invalid(0),
+enum class CXLinkageKind(konstue: Int) : CEnum {
+    CXLinkage_Inkonstid(0),
     CXLinkage_NoLinkage(1),
     CXLinkage_Internal(2),
     CXLinkage_UniqueExternal(3),
@@ -1264,21 +1264,21 @@ enum class CXLinkageKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXLinkageKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXLinkageKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXLinkageKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXLinkageKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXVisibilityKind(value: Int) : CEnum {
-    CXVisibility_Invalid(0),
+enum class CXVisibilityKind(konstue: Int) : CEnum {
+    CXVisibility_Inkonstid(0),
     CXVisibility_Hidden(1),
     CXVisibility_Protected(2),
     CXVisibility_Default(3),
@@ -1287,21 +1287,21 @@ enum class CXVisibilityKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXVisibilityKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXVisibilityKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXVisibilityKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXVisibilityKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXLanguageKind(value: Int) : CEnum {
-    CXLanguage_Invalid(0),
+enum class CXLanguageKind(konstue: Int) : CEnum {
+    CXLanguage_Inkonstid(0),
     CXLanguage_C(1),
     CXLanguage_ObjC(2),
     CXLanguage_CPlusPlus(3),
@@ -1310,21 +1310,21 @@ enum class CXLanguageKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXLanguageKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXLanguageKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXLanguageKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXLanguageKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXTypeKind(value: Int) : CEnum {
-    CXType_Invalid(0),
+enum class CXTypeKind(konstue: Int) : CEnum {
+    CXType_Inkonstid(0),
     CXType_Unexposed(1),
     CXType_Void(2),
     CXType_Bool(3),
@@ -1446,27 +1446,27 @@ enum class CXTypeKind(value: Int) : CEnum {
     
     companion object {
         
-        val CXType_FirstBuiltin: CXTypeKind
+        konst CXType_FirstBuiltin: CXTypeKind
             get() = CXType_Void
         
-        val CXType_LastBuiltin: CXTypeKind
+        konst CXType_LastBuiltin: CXTypeKind
             get() = CXType_BFloat16
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXTypeKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXTypeKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXTypeKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXTypeKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXCallingConv(value: Int) : CEnum {
+enum class CXCallingConv(konstue: Int) : CEnum {
     CXCallingConv_Default(0),
     CXCallingConv_C(1),
     CXCallingConv_X86StdCall(2),
@@ -1484,30 +1484,30 @@ enum class CXCallingConv(value: Int) : CEnum {
     CXCallingConv_PreserveMost(14),
     CXCallingConv_PreserveAll(15),
     CXCallingConv_AArch64VectorCall(16),
-    CXCallingConv_Invalid(100),
+    CXCallingConv_Inkonstid(100),
     CXCallingConv_Unexposed(200),
     ;
     
     companion object {
         
-        val CXCallingConv_X86_64Win64: CXCallingConv
+        konst CXCallingConv_X86_64Win64: CXCallingConv
             get() = CXCallingConv_Win64
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXCallingConv = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXCallingConv = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXCallingConv
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXCallingConv
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXTemplateArgumentKind(value: Int) : CEnum {
+enum class CXTemplateArgumentKind(konstue: Int) : CEnum {
     CXTemplateArgumentKind_Null(0),
     CXTemplateArgumentKind_Type(1),
     CXTemplateArgumentKind_Declaration(2),
@@ -1517,27 +1517,27 @@ enum class CXTemplateArgumentKind(value: Int) : CEnum {
     CXTemplateArgumentKind_TemplateExpansion(6),
     CXTemplateArgumentKind_Expression(7),
     CXTemplateArgumentKind_Pack(8),
-    CXTemplateArgumentKind_Invalid(9),
+    CXTemplateArgumentKind_Inkonstid(9),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXTemplateArgumentKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXTemplateArgumentKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXTemplateArgumentKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXTemplateArgumentKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CX_CXXAccessSpecifier(value: Int) : CEnum {
-    CX_CXXInvalidAccessSpecifier(0),
+enum class CX_CXXAccessSpecifier(konstue: Int) : CEnum {
+    CX_CXXInkonstidAccessSpecifier(0),
     CX_CXXPublic(1),
     CX_CXXProtected(2),
     CX_CXXPrivate(3),
@@ -1546,21 +1546,21 @@ enum class CX_CXXAccessSpecifier(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CX_CXXAccessSpecifier = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CX_CXXAccessSpecifier = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CX_CXXAccessSpecifier
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CX_CXXAccessSpecifier
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CX_StorageClass(value: Int) : CEnum {
-    CX_SC_Invalid(0),
+enum class CX_StorageClass(konstue: Int) : CEnum {
+    CX_SC_Inkonstid(0),
     CX_SC_None(1),
     CX_SC_Extern(2),
     CX_SC_Static(3),
@@ -1573,20 +1573,20 @@ enum class CX_StorageClass(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CX_StorageClass = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CX_StorageClass = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CX_StorageClass
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CX_StorageClass
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXChildVisitResult(value: Int) : CEnum {
+enum class CXChildVisitResult(konstue: Int) : CEnum {
     CXChildVisit_Break(0),
     CXChildVisit_Continue(1),
     CXChildVisit_Recurse(2),
@@ -1595,20 +1595,20 @@ enum class CXChildVisitResult(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXChildVisitResult = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXChildVisitResult = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXChildVisitResult
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXChildVisitResult
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXTokenKind(value: Int) : CEnum {
+enum class CXTokenKind(konstue: Int) : CEnum {
     CXToken_Punctuation(0),
     CXToken_Keyword(1),
     CXToken_Identifier(2),
@@ -1619,20 +1619,20 @@ enum class CXTokenKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXTokenKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXTokenKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXTokenKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXTokenKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXCompletionChunkKind(value: Int) : CEnum {
+enum class CXCompletionChunkKind(konstue: Int) : CEnum {
     CXCompletionChunk_Optional(0),
     CXCompletionChunk_TypedText(1),
     CXCompletionChunk_Text(2),
@@ -1659,46 +1659,46 @@ enum class CXCompletionChunkKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXCompletionChunkKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXCompletionChunkKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXCompletionChunkKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXCompletionChunkKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXEvalResultKind(value: Int) : CEnum {
-    CXEval_UnExposed(0),
-    CXEval_Int(1),
-    CXEval_Float(2),
-    CXEval_ObjCStrLiteral(3),
-    CXEval_StrLiteral(4),
-    CXEval_CFStr(5),
-    CXEval_Other(6),
+enum class CXEkonstResultKind(konstue: Int) : CEnum {
+    CXEkonst_UnExposed(0),
+    CXEkonst_Int(1),
+    CXEkonst_Float(2),
+    CXEkonst_ObjCStrLiteral(3),
+    CXEkonst_StrLiteral(4),
+    CXEkonst_CFStr(5),
+    CXEkonst_Other(6),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXEvalResultKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXEkonstResultKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXEvalResultKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXEkonstResultKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXVisitorResult(value: Int) : CEnum {
+enum class CXVisitorResult(konstue: Int) : CEnum {
     CXVisit_Break(0),
     CXVisit_Continue(1),
     ;
@@ -1706,42 +1706,42 @@ enum class CXVisitorResult(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXVisitorResult = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXVisitorResult = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXVisitorResult
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXVisitorResult
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXResult(value: Int) : CEnum {
+enum class CXResult(konstue: Int) : CEnum {
     CXResult_Success(0),
-    CXResult_Invalid(1),
+    CXResult_Inkonstid(1),
     CXResult_VisitBreak(2),
     ;
     
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXResult = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXResult = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXResult
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXResult
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXIdxEntityKind(value: Int) : CEnum {
+enum class CXIdxEntityKind(konstue: Int) : CEnum {
     CXIdxEntity_Unexposed(0),
     CXIdxEntity_Typedef(1),
     CXIdxEntity_Function(2),
@@ -1774,20 +1774,20 @@ enum class CXIdxEntityKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXIdxEntityKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXIdxEntityKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXIdxEntityKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXIdxEntityKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
-enum class CXNullabilityKind(value: Int) : CEnum {
+enum class CXNullabilityKind(konstue: Int) : CEnum {
     CXNullabilityKind_Nullable(0),
     CXNullabilityKind_NonNull(1),
     CXNullabilityKind_Unspecified(2),
@@ -1796,16 +1796,16 @@ enum class CXNullabilityKind(value: Int) : CEnum {
     companion object {
         
         @Deprecated("Will be removed.", ReplaceWith(""), DeprecationLevel.WARNING)
-        fun byValue(value: Int): CXNullabilityKind = values().find { it.value == value }!!
+        fun byValue(konstue: Int): CXNullabilityKind = konstues().find { it.konstue == konstue }!!
     }
     
-    override open val value: Int = value
+    override open konst konstue: Int = konstue
     class Var(rawPtr: NativePtr) : CEnumVar(rawPtr) {
         @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
         companion object : Type(sizeOf<IntVar>().toInt())
-        var value: CXNullabilityKind
-            get() = byValue(this.reinterpret<IntVar>().value)
-            set(value) { this.reinterpret<IntVar>().value = value.value }
+        var konstue: CXNullabilityKind
+            get() = byValue(this.reinterpret<IntVar>().konstue)
+            set(konstue) { this.reinterpret<IntVar>().konstue = konstue.konstue }
     }
 }
 
@@ -1910,7 +1910,7 @@ fun clang_CXIndex_setInvocationEmissionPathOption(arg0: CXIndex?, Path: String?)
 }
 
 fun clang_getFileName(SFile: CXFile?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge20(SFile.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -1948,7 +1948,7 @@ fun clang_File_isEqual(file1: CXFile?, file2: CXFile?): Int {
 }
 
 fun clang_File_tryGetRealPathName(file: CXFile?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge27(file.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -1956,7 +1956,7 @@ fun clang_File_tryGetRealPathName(file: CXFile?): CValue<CXString> {
 }
 
 fun clang_getNullLocation(): CValue<CXSourceLocation> {
-    val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
     try {
         kniBridge28(kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -1970,7 +1970,7 @@ fun clang_equalLocations(loc1: CValue<CXSourceLocation>, loc2: CValue<CXSourceLo
 }
 
 fun clang_getLocation(tu: CXTranslationUnit?, file: CXFile?, line: Int, column: Int): CValue<CXSourceLocation> {
-    val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
     try {
         kniBridge30(tu.rawValue, file.rawValue, line, column, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -1978,7 +1978,7 @@ fun clang_getLocation(tu: CXTranslationUnit?, file: CXFile?, line: Int, column: 
 }
 
 fun clang_getLocationForOffset(tu: CXTranslationUnit?, file: CXFile?, offset: Int): CValue<CXSourceLocation> {
-    val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
     try {
         kniBridge31(tu.rawValue, file.rawValue, offset, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -1998,7 +1998,7 @@ fun clang_Location_isFromMainFile(location: CValue<CXSourceLocation>): Int {
 }
 
 fun clang_getNullRange(): CValue<CXSourceRange> {
-    val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
     try {
         kniBridge34(kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2007,7 +2007,7 @@ fun clang_getNullRange(): CValue<CXSourceRange> {
 
 fun clang_getRange(begin: CValue<CXSourceLocation>, end: CValue<CXSourceLocation>): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge35(begin.getPointer(memScope).rawValue, end.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2059,7 +2059,7 @@ fun clang_getFileLocation(location: CValue<CXSourceLocation>, file: CValuesRef<C
 
 fun clang_getRangeStart(range: CValue<CXSourceRange>): CValue<CXSourceLocation> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
         try {
             kniBridge43(range.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2069,7 +2069,7 @@ fun clang_getRangeStart(range: CValue<CXSourceRange>): CValue<CXSourceLocation> 
 
 fun clang_getRangeEnd(range: CValue<CXSourceRange>): CValue<CXSourceLocation> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
         try {
             kniBridge44(range.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2130,7 +2130,7 @@ fun clang_disposeDiagnostic(Diagnostic: CXDiagnostic?): Unit {
 }
 
 fun clang_formatDiagnostic(Diagnostic: CXDiagnostic?, Options: Int): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge57(Diagnostic.rawValue, Options, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2146,7 +2146,7 @@ fun clang_getDiagnosticSeverity(arg0: CXDiagnostic?): CXDiagnosticSeverity {
 }
 
 fun clang_getDiagnosticLocation(arg0: CXDiagnostic?): CValue<CXSourceLocation> {
-    val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
     try {
         kniBridge60(arg0.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2154,7 +2154,7 @@ fun clang_getDiagnosticLocation(arg0: CXDiagnostic?): CValue<CXSourceLocation> {
 }
 
 fun clang_getDiagnosticSpelling(arg0: CXDiagnostic?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge61(arg0.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2163,7 +2163,7 @@ fun clang_getDiagnosticSpelling(arg0: CXDiagnostic?): CValue<CXString> {
 
 fun clang_getDiagnosticOption(Diag: CXDiagnostic?, Disable: CValuesRef<CXString>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge62(Diag.rawValue, Disable?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2176,7 +2176,7 @@ fun clang_getDiagnosticCategory(arg0: CXDiagnostic?): Int {
 }
 
 fun clang_getDiagnosticCategoryName(Category: Int): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge64(Category, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2184,7 +2184,7 @@ fun clang_getDiagnosticCategoryName(Category: Int): CValue<CXString> {
 }
 
 fun clang_getDiagnosticCategoryText(arg0: CXDiagnostic?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge65(arg0.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2196,7 +2196,7 @@ fun clang_getDiagnosticNumRanges(arg0: CXDiagnostic?): Int {
 }
 
 fun clang_getDiagnosticRange(Diagnostic: CXDiagnostic?, Range: Int): CValue<CXSourceRange> {
-    val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+    konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
     try {
         kniBridge67(Diagnostic.rawValue, Range, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2209,7 +2209,7 @@ fun clang_getDiagnosticNumFixIts(Diagnostic: CXDiagnostic?): Int {
 
 fun clang_getDiagnosticFixIt(Diagnostic: CXDiagnostic?, FixIt: Int, ReplacementRange: CValuesRef<CXSourceRange>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge69(Diagnostic.rawValue, FixIt, ReplacementRange?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2218,7 +2218,7 @@ fun clang_getDiagnosticFixIt(Diagnostic: CXDiagnostic?, FixIt: Int, ReplacementR
 }
 
 fun clang_getTranslationUnitSpelling(CTUnit: CXTranslationUnit?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge70(CTUnit.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2294,11 +2294,11 @@ fun clang_reparseTranslationUnit(TU: CXTranslationUnit?, num_unsaved_files: Int,
 }
 
 fun clang_getTUResourceUsageName(kind: CXTUResourceUsageKind): CPointer<ByteVar>? {
-    return interpretCPointer<ByteVar>(kniBridge84(kind.value))
+    return interpretCPointer<ByteVar>(kniBridge84(kind.konstue))
 }
 
 fun clang_getCXTUResourceUsage(TU: CXTranslationUnit?): CValue<CXTUResourceUsage> {
-    val kniRetVal = nativeHeap.alloc<CXTUResourceUsage>()
+    konst kniRetVal = nativeHeap.alloc<CXTUResourceUsage>()
     try {
         kniBridge85(TU.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2320,7 +2320,7 @@ fun clang_TargetInfo_dispose(Info: CXTargetInfo?): Unit {
 }
 
 fun clang_TargetInfo_getTriple(Info: CXTargetInfo?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge89(Info.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2332,7 +2332,7 @@ fun clang_TargetInfo_getPointerWidth(Info: CXTargetInfo?): Int {
 }
 
 fun clang_getNullCursor(): CValue<CXCursor> {
-    val kniRetVal = nativeHeap.alloc<CXCursor>()
+    konst kniRetVal = nativeHeap.alloc<CXCursor>()
     try {
         kniBridge91(kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2340,7 +2340,7 @@ fun clang_getNullCursor(): CValue<CXCursor> {
 }
 
 fun clang_getTranslationUnitCursor(arg0: CXTranslationUnit?): CValue<CXCursor> {
-    val kniRetVal = nativeHeap.alloc<CXCursor>()
+    konst kniRetVal = nativeHeap.alloc<CXCursor>()
     try {
         kniBridge92(arg0.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -2372,29 +2372,29 @@ fun clang_getCursorKind(arg0: CValue<CXCursor>): CXCursorKind {
 }
 
 fun clang_isDeclaration(arg0: CXCursorKind): Int {
-    return kniBridge97(arg0.value)
+    return kniBridge97(arg0.konstue)
 }
 
-fun clang_isInvalidDeclaration(arg0: CValue<CXCursor>): Int {
+fun clang_isInkonstidDeclaration(arg0: CValue<CXCursor>): Int {
     memScoped {
         return kniBridge98(arg0.getPointer(memScope).rawValue)
     }
 }
 
 fun clang_isReference(arg0: CXCursorKind): Int {
-    return kniBridge99(arg0.value)
+    return kniBridge99(arg0.konstue)
 }
 
 fun clang_isExpression(arg0: CXCursorKind): Int {
-    return kniBridge100(arg0.value)
+    return kniBridge100(arg0.konstue)
 }
 
 fun clang_isStatement(arg0: CXCursorKind): Int {
-    return kniBridge101(arg0.value)
+    return kniBridge101(arg0.konstue)
 }
 
 fun clang_isAttribute(arg0: CXCursorKind): Int {
-    return kniBridge102(arg0.value)
+    return kniBridge102(arg0.konstue)
 }
 
 fun clang_Cursor_hasAttrs(C: CValue<CXCursor>): Int {
@@ -2403,20 +2403,20 @@ fun clang_Cursor_hasAttrs(C: CValue<CXCursor>): Int {
     }
 }
 
-fun clang_isInvalid(arg0: CXCursorKind): Int {
-    return kniBridge104(arg0.value)
+fun clang_isInkonstid(arg0: CXCursorKind): Int {
+    return kniBridge104(arg0.konstue)
 }
 
 fun clang_isTranslationUnit(arg0: CXCursorKind): Int {
-    return kniBridge105(arg0.value)
+    return kniBridge105(arg0.konstue)
 }
 
 fun clang_isPreprocessing(arg0: CXCursorKind): Int {
-    return kniBridge106(arg0.value)
+    return kniBridge106(arg0.konstue)
 }
 
 fun clang_isUnexposed(arg0: CXCursorKind): Int {
-    return kniBridge107(arg0.value)
+    return kniBridge107(arg0.konstue)
 }
 
 fun clang_getCursorLinkage(cursor: CValue<CXCursor>): CXLinkageKind {
@@ -2489,7 +2489,7 @@ fun clang_CXCursorSet_insert(cset: CXCursorSet?, cursor: CValue<CXCursor>): Int 
 
 fun clang_getCursorSemanticParent(cursor: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge120(cursor.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2499,7 +2499,7 @@ fun clang_getCursorSemanticParent(cursor: CValue<CXCursor>): CValue<CXCursor> {
 
 fun clang_getCursorLexicalParent(cursor: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge121(cursor.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2527,7 +2527,7 @@ fun clang_getIncludedFile(cursor: CValue<CXCursor>): CXFile? {
 
 fun clang_getCursor(arg0: CXTranslationUnit?, arg1: CValue<CXSourceLocation>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge125(arg0.rawValue, arg1.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2537,7 +2537,7 @@ fun clang_getCursor(arg0: CXTranslationUnit?, arg1: CValue<CXSourceLocation>): C
 
 fun clang_getCursorLocation(arg0: CValue<CXCursor>): CValue<CXSourceLocation> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
         try {
             kniBridge126(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2547,7 +2547,7 @@ fun clang_getCursorLocation(arg0: CValue<CXCursor>): CValue<CXSourceLocation> {
 
 fun clang_getCursorExtent(arg0: CValue<CXCursor>): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge127(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2557,7 +2557,7 @@ fun clang_getCursorExtent(arg0: CValue<CXCursor>): CValue<CXSourceRange> {
 
 fun clang_getCursorType(C: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge128(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2567,7 +2567,7 @@ fun clang_getCursorType(C: CValue<CXCursor>): CValue<CXType> {
 
 fun clang_getTypeSpelling(CT: CValue<CXType>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge129(CT.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2577,7 +2577,7 @@ fun clang_getTypeSpelling(CT: CValue<CXType>): CValue<CXString> {
 
 fun clang_getTypedefDeclUnderlyingType(C: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge130(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2587,7 +2587,7 @@ fun clang_getTypedefDeclUnderlyingType(C: CValue<CXCursor>): CValue<CXType> {
 
 fun clang_getEnumDeclIntegerType(C: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge131(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2621,7 +2621,7 @@ fun clang_Cursor_getNumArguments(C: CValue<CXCursor>): Int {
 
 fun clang_Cursor_getArgument(C: CValue<CXCursor>, i: Int): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge136(C.getPointer(memScope).rawValue, i, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2643,7 +2643,7 @@ fun clang_Cursor_getTemplateArgumentKind(C: CValue<CXCursor>, I: Int): CXTemplat
 
 fun clang_Cursor_getTemplateArgumentType(C: CValue<CXCursor>, I: Int): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge139(C.getPointer(memScope).rawValue, I, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2671,7 +2671,7 @@ fun clang_equalTypes(A: CValue<CXType>, B: CValue<CXType>): Int {
 
 fun clang_getCanonicalType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge143(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2723,7 +2723,7 @@ fun clang_getAddressSpace(T: CValue<CXType>): Int {
 
 fun clang_getTypedefName(CT: CValue<CXType>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge151(CT.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2733,7 +2733,7 @@ fun clang_getTypedefName(CT: CValue<CXType>): CValue<CXString> {
 
 fun clang_getPointeeType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge152(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2743,7 +2743,7 @@ fun clang_getPointeeType(T: CValue<CXType>): CValue<CXType> {
 
 fun clang_getTypeDeclaration(T: CValue<CXType>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge153(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2753,7 +2753,7 @@ fun clang_getTypeDeclaration(T: CValue<CXType>): CValue<CXCursor> {
 
 fun clang_getDeclObjCTypeEncoding(C: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge154(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2763,7 +2763,7 @@ fun clang_getDeclObjCTypeEncoding(C: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_Type_getObjCEncoding(type: CValue<CXType>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge155(type.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2772,9 +2772,9 @@ fun clang_Type_getObjCEncoding(type: CValue<CXType>): CValue<CXString> {
 }
 
 fun clang_getTypeKindSpelling(K: CXTypeKind): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
-        kniBridge156(K.value, kniRetVal.rawPtr)
+        kniBridge156(K.konstue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
     } finally { nativeHeap.free(kniRetVal) }
 }
@@ -2787,7 +2787,7 @@ fun clang_getFunctionTypeCallingConv(T: CValue<CXType>): CXCallingConv {
 
 fun clang_getResultType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge158(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2809,7 +2809,7 @@ fun clang_getNumArgTypes(T: CValue<CXType>): Int {
 
 fun clang_getArgType(T: CValue<CXType>, i: Int): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge161(T.getPointer(memScope).rawValue, i, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2819,7 +2819,7 @@ fun clang_getArgType(T: CValue<CXType>, i: Int): CValue<CXType> {
 
 fun clang_Type_getObjCObjectBaseType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge162(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2835,7 +2835,7 @@ fun clang_Type_getNumObjCProtocolRefs(T: CValue<CXType>): Int {
 
 fun clang_Type_getObjCProtocolDecl(T: CValue<CXType>, i: Int): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge164(T.getPointer(memScope).rawValue, i, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2851,7 +2851,7 @@ fun clang_Type_getNumObjCTypeArgs(T: CValue<CXType>): Int {
 
 fun clang_Type_getObjCTypeArg(T: CValue<CXType>, i: Int): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge166(T.getPointer(memScope).rawValue, i, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2867,7 +2867,7 @@ fun clang_isFunctionTypeVariadic(T: CValue<CXType>): Int {
 
 fun clang_getCursorResultType(C: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge168(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2889,7 +2889,7 @@ fun clang_isPODType(T: CValue<CXType>): Int {
 
 fun clang_getElementType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge171(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2905,7 +2905,7 @@ fun clang_getNumElements(T: CValue<CXType>): Long {
 
 fun clang_getArrayElementType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge173(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2921,7 +2921,7 @@ fun clang_getArraySize(T: CValue<CXType>): Long {
 
 fun clang_Type_getNamedType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge175(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2949,7 +2949,7 @@ fun clang_Type_getAlignOf(T: CValue<CXType>): Long {
 
 fun clang_Type_getClassType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge179(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2971,7 +2971,7 @@ fun clang_Type_getOffsetOf(T: CValue<CXType>, S: String?): Long {
 
 fun clang_Type_getModifiedType(T: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge182(T.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -2981,7 +2981,7 @@ fun clang_Type_getModifiedType(T: CValue<CXType>): CValue<CXType> {
 
 fun clang_Type_getValueType(CT: CValue<CXType>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge183(CT.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3021,7 +3021,7 @@ fun clang_Type_getNumTemplateArguments(T: CValue<CXType>): Int {
 
 fun clang_Type_getTemplateArgumentAsType(T: CValue<CXType>, i: Int): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge189(T.getPointer(memScope).rawValue, i, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3067,7 +3067,7 @@ fun clang_getNumOverloadedDecls(cursor: CValue<CXCursor>): Int {
 
 fun clang_getOverloadedDecl(cursor: CValue<CXCursor>, index: Int): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge196(cursor.getPointer(memScope).rawValue, index, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3077,7 +3077,7 @@ fun clang_getOverloadedDecl(cursor: CValue<CXCursor>, index: Int): CValue<CXCurs
 
 fun clang_getIBOutletCollectionType(arg0: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge197(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3093,7 +3093,7 @@ fun clang_visitChildren(parent: CValue<CXCursor>, visitor: CXCursorVisitor?, cli
 
 fun clang_getCursorUSR(arg0: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge199(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3103,7 +3103,7 @@ fun clang_getCursorUSR(arg0: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_constructUSR_ObjCClass(class_name: String?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge200(class_name?.cstr?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3113,7 +3113,7 @@ fun clang_constructUSR_ObjCClass(class_name: String?): CValue<CXString> {
 
 fun clang_constructUSR_ObjCCategory(class_name: String?, category_name: String?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge201(class_name?.cstr?.getPointer(memScope).rawValue, category_name?.cstr?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3123,7 +3123,7 @@ fun clang_constructUSR_ObjCCategory(class_name: String?, category_name: String?)
 
 fun clang_constructUSR_ObjCProtocol(protocol_name: String?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge202(protocol_name?.cstr?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3133,7 +3133,7 @@ fun clang_constructUSR_ObjCProtocol(protocol_name: String?): CValue<CXString> {
 
 fun clang_constructUSR_ObjCIvar(name: String?, classUSR: CValue<CXString>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge203(name?.cstr?.getPointer(memScope).rawValue, classUSR.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3143,7 +3143,7 @@ fun clang_constructUSR_ObjCIvar(name: String?, classUSR: CValue<CXString>): CVal
 
 fun clang_constructUSR_ObjCMethod(name: String?, isInstanceMethod: Int, classUSR: CValue<CXString>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge204(name?.cstr?.getPointer(memScope).rawValue, isInstanceMethod, classUSR.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3153,7 +3153,7 @@ fun clang_constructUSR_ObjCMethod(name: String?, isInstanceMethod: Int, classUSR
 
 fun clang_constructUSR_ObjCProperty(property: String?, classUSR: CValue<CXString>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge205(property?.cstr?.getPointer(memScope).rawValue, classUSR.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3163,7 +3163,7 @@ fun clang_constructUSR_ObjCProperty(property: String?, classUSR: CValue<CXString
 
 fun clang_getCursorSpelling(arg0: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge206(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3173,7 +3173,7 @@ fun clang_getCursorSpelling(arg0: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_Cursor_getSpellingNameRange(arg0: CValue<CXCursor>, pieceIndex: Int, options: Int): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge207(arg0.getPointer(memScope).rawValue, pieceIndex, options, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3201,7 +3201,7 @@ fun clang_PrintingPolicy_dispose(Policy: CXPrintingPolicy?): Unit {
 
 fun clang_getCursorPrettyPrinted(Cursor: CValue<CXCursor>, Policy: CXPrintingPolicy?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge212(Cursor.getPointer(memScope).rawValue, Policy.rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3211,7 +3211,7 @@ fun clang_getCursorPrettyPrinted(Cursor: CValue<CXCursor>, Policy: CXPrintingPol
 
 fun clang_getCursorDisplayName(arg0: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge213(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3221,7 +3221,7 @@ fun clang_getCursorDisplayName(arg0: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_getCursorReferenced(arg0: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge214(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3231,7 +3231,7 @@ fun clang_getCursorReferenced(arg0: CValue<CXCursor>): CValue<CXCursor> {
 
 fun clang_getCursorDefinition(arg0: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge215(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3247,7 +3247,7 @@ fun clang_isCursorDefinition(arg0: CValue<CXCursor>): Int {
 
 fun clang_getCanonicalCursor(arg0: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge217(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3269,7 +3269,7 @@ fun clang_Cursor_isDynamicCall(C: CValue<CXCursor>): Int {
 
 fun clang_Cursor_getReceiverType(C: CValue<CXCursor>): CValue<CXType> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXType>()
+        konst kniRetVal = nativeHeap.alloc<CXType>()
         try {
             kniBridge220(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3285,7 +3285,7 @@ fun clang_Cursor_getObjCPropertyAttributes(C: CValue<CXCursor>, reserved: Int): 
 
 fun clang_Cursor_getObjCPropertyGetterName(C: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge222(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3295,7 +3295,7 @@ fun clang_Cursor_getObjCPropertyGetterName(C: CValue<CXCursor>): CValue<CXString
 
 fun clang_Cursor_getObjCPropertySetterName(C: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge223(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3329,7 +3329,7 @@ fun clang_Cursor_isExternalSymbol(C: CValue<CXCursor>, language: CValuesRef<CXSt
 
 fun clang_Cursor_getCommentRange(C: CValue<CXCursor>): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge228(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3339,7 +3339,7 @@ fun clang_Cursor_getCommentRange(C: CValue<CXCursor>): CValue<CXSourceRange> {
 
 fun clang_Cursor_getRawCommentText(C: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge229(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3349,7 +3349,7 @@ fun clang_Cursor_getRawCommentText(C: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_Cursor_getBriefCommentText(C: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge230(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3359,7 +3359,7 @@ fun clang_Cursor_getBriefCommentText(C: CValue<CXCursor>): CValue<CXString> {
 
 fun clang_Cursor_getMangling(arg0: CValue<CXCursor>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge231(arg0.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3398,7 +3398,7 @@ fun clang_Module_getParent(Module: CXModule?): CXModule? {
 }
 
 fun clang_Module_getName(Module: CXModule?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge238(Module.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3406,7 +3406,7 @@ fun clang_Module_getName(Module: CXModule?): CValue<CXString> {
 }
 
 fun clang_Module_getFullName(Module: CXModule?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge239(Module.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3505,7 +3505,7 @@ fun clang_getTemplateCursorKind(C: CValue<CXCursor>): CXCursorKind {
 
 fun clang_getSpecializedCursorTemplate(C: CValue<CXCursor>): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge256(C.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3515,7 +3515,7 @@ fun clang_getSpecializedCursorTemplate(C: CValue<CXCursor>): CValue<CXCursor> {
 
 fun clang_getCursorReferenceNameRange(C: CValue<CXCursor>, NameFlags: Int, PieceIndex: Int): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge257(C.getPointer(memScope).rawValue, NameFlags, PieceIndex, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3537,7 +3537,7 @@ fun clang_getTokenKind(arg0: CValue<CXToken>): CXTokenKind {
 
 fun clang_getTokenSpelling(arg0: CXTranslationUnit?, arg1: CValue<CXToken>): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge260(arg0.rawValue, arg1.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3547,7 +3547,7 @@ fun clang_getTokenSpelling(arg0: CXTranslationUnit?, arg1: CValue<CXToken>): CVa
 
 fun clang_getTokenLocation(arg0: CXTranslationUnit?, arg1: CValue<CXToken>): CValue<CXSourceLocation> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
         try {
             kniBridge261(arg0.rawValue, arg1.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3557,7 +3557,7 @@ fun clang_getTokenLocation(arg0: CXTranslationUnit?, arg1: CValue<CXToken>): CVa
 
 fun clang_getTokenExtent(arg0: CXTranslationUnit?, arg1: CValue<CXToken>): CValue<CXSourceRange> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceRange>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceRange>()
         try {
             kniBridge262(arg0.rawValue, arg1.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3584,9 +3584,9 @@ fun clang_disposeTokens(TU: CXTranslationUnit?, Tokens: CValuesRef<CXToken>?, Nu
 }
 
 fun clang_getCursorKindSpelling(Kind: CXCursorKind): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
-        kniBridge266(Kind.value, kniRetVal.rawPtr)
+        kniBridge266(Kind.konstue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
     } finally { nativeHeap.free(kniRetVal) }
 }
@@ -3612,7 +3612,7 @@ fun clang_getCompletionChunkKind(completion_string: CXCompletionString?, chunk_n
 }
 
 fun clang_getCompletionChunkText(completion_string: CXCompletionString?, chunk_number: Int): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge271(completion_string.rawValue, chunk_number, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3640,7 +3640,7 @@ fun clang_getCompletionNumAnnotations(completion_string: CXCompletionString?): I
 }
 
 fun clang_getCompletionAnnotation(completion_string: CXCompletionString?, annotation_number: Int): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge277(completion_string.rawValue, annotation_number, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3649,7 +3649,7 @@ fun clang_getCompletionAnnotation(completion_string: CXCompletionString?, annota
 
 fun clang_getCompletionParent(completion_string: CXCompletionString?, kind: CValuesRef<CXCursorKind.Var>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge278(completion_string.rawValue, kind?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3658,7 +3658,7 @@ fun clang_getCompletionParent(completion_string: CXCompletionString?, kind: CVal
 }
 
 fun clang_getCompletionBriefComment(completion_string: CXCompletionString?): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge279(completion_string.rawValue, kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3679,7 +3679,7 @@ fun clang_getCompletionNumFixIts(results: CValuesRef<CXCodeCompleteResults>?, co
 
 fun clang_getCompletionFixIt(results: CValuesRef<CXCodeCompleteResults>?, completion_index: Int, fixit_index: Int, replacement_range: CValuesRef<CXSourceRange>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge282(results?.getPointer(memScope).rawValue, completion_index, fixit_index, replacement_range?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3735,7 +3735,7 @@ fun clang_codeCompleteGetContainerKind(Results: CValuesRef<CXCodeCompleteResults
 
 fun clang_codeCompleteGetContainerUSR(Results: CValuesRef<CXCodeCompleteResults>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge291(Results?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3745,7 +3745,7 @@ fun clang_codeCompleteGetContainerUSR(Results: CValuesRef<CXCodeCompleteResults>
 
 fun clang_codeCompleteGetObjCSelector(Results: CValuesRef<CXCodeCompleteResults>?): CValue<CXString> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXString>()
+        konst kniRetVal = nativeHeap.alloc<CXString>()
         try {
             kniBridge292(Results?.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3754,7 +3754,7 @@ fun clang_codeCompleteGetObjCSelector(Results: CValuesRef<CXCodeCompleteResults>
 }
 
 fun clang_getClangVersion(): CValue<CXString> {
-    val kniRetVal = nativeHeap.alloc<CXString>()
+    konst kniRetVal = nativeHeap.alloc<CXString>()
     try {
         kniBridge293(kniRetVal.rawPtr)
         return kniRetVal.readValue()
@@ -3769,41 +3769,41 @@ fun clang_getInclusions(tu: CXTranslationUnit?, visitor: CXInclusionVisitor?, cl
     return kniBridge295(tu.rawValue, visitor.rawValue, client_data.rawValue)
 }
 
-fun clang_Cursor_Evaluate(C: CValue<CXCursor>): CXEvalResult? {
+fun clang_Cursor_Ekonstuate(C: CValue<CXCursor>): CXEkonstResult? {
     memScoped {
         return interpretCPointer<COpaque>(kniBridge296(C.getPointer(memScope).rawValue))
     }
 }
 
-fun clang_EvalResult_getKind(E: CXEvalResult?): CXEvalResultKind {
-    return CXEvalResultKind.byValue(kniBridge297(E.rawValue))
+fun clang_EkonstResult_getKind(E: CXEkonstResult?): CXEkonstResultKind {
+    return CXEkonstResultKind.byValue(kniBridge297(E.rawValue))
 }
 
-fun clang_EvalResult_getAsInt(E: CXEvalResult?): Int {
+fun clang_EkonstResult_getAsInt(E: CXEkonstResult?): Int {
     return kniBridge298(E.rawValue)
 }
 
-fun clang_EvalResult_getAsLongLong(E: CXEvalResult?): Long {
+fun clang_EkonstResult_getAsLongLong(E: CXEkonstResult?): Long {
     return kniBridge299(E.rawValue)
 }
 
-fun clang_EvalResult_isUnsignedInt(E: CXEvalResult?): Int {
+fun clang_EkonstResult_isUnsignedInt(E: CXEkonstResult?): Int {
     return kniBridge300(E.rawValue)
 }
 
-fun clang_EvalResult_getAsUnsigned(E: CXEvalResult?): Long {
+fun clang_EkonstResult_getAsUnsigned(E: CXEkonstResult?): Long {
     return kniBridge301(E.rawValue)
 }
 
-fun clang_EvalResult_getAsDouble(E: CXEvalResult?): Double {
+fun clang_EkonstResult_getAsDouble(E: CXEkonstResult?): Double {
     return kniBridge302(E.rawValue)
 }
 
-fun clang_EvalResult_getAsStr(E: CXEvalResult?): CPointer<ByteVar>? {
+fun clang_EkonstResult_getAsStr(E: CXEkonstResult?): CPointer<ByteVar>? {
     return interpretCPointer<ByteVar>(kniBridge303(E.rawValue))
 }
 
-fun clang_EvalResult_dispose(E: CXEvalResult?): Unit {
+fun clang_EkonstResult_dispose(E: CXEkonstResult?): Unit {
     return kniBridge304(E.rawValue)
 }
 
@@ -3846,7 +3846,7 @@ fun clang_findIncludesInFile(TU: CXTranslationUnit?, file: CXFile?, visitor: CVa
 }
 
 fun clang_index_isEntityObjCContainerKind(arg0: CXIdxEntityKind): Int {
-    return kniBridge312(arg0.value)
+    return kniBridge312(arg0.konstue)
 }
 
 fun clang_index_getObjCContainerDeclInfo(arg0: CValuesRef<CXIdxDeclInfo>?): CPointer<CXIdxObjCContainerDeclInfo>? {
@@ -3949,7 +3949,7 @@ fun clang_indexLoc_getFileLocation(loc: CValue<CXIdxLoc>, indexFile: CValuesRef<
 
 fun clang_indexLoc_getCXSourceLocation(loc: CValue<CXIdxLoc>): CValue<CXSourceLocation> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXSourceLocation>()
+        konst kniRetVal = nativeHeap.alloc<CXSourceLocation>()
         try {
             kniBridge330(loc.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3971,7 +3971,7 @@ fun clang_Cursor_getAttributeSpelling(cursor: CValue<CXCursor>): CPointer<ByteVa
 
 fun clang_getDeclTypeAttributes(cursor: CValue<CXCursor>): CValue<CXTypeAttributes> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
+        konst kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
         try {
             kniBridge333(cursor.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3981,7 +3981,7 @@ fun clang_getDeclTypeAttributes(cursor: CValue<CXCursor>): CValue<CXTypeAttribut
 
 fun clang_getResultTypeAttributes(typeAttributes: CValue<CXTypeAttributes>): CValue<CXTypeAttributes> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
+        konst kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
         try {
             kniBridge334(typeAttributes.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -3991,7 +3991,7 @@ fun clang_getResultTypeAttributes(typeAttributes: CValue<CXTypeAttributes>): CVa
 
 fun clang_getCursorResultTypeAttributes(cursor: CValue<CXCursor>): CValue<CXTypeAttributes> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
+        konst kniRetVal = nativeHeap.alloc<CXTypeAttributes>()
         try {
             kniBridge335(cursor.getPointer(memScope).rawValue, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -4013,7 +4013,7 @@ fun clang_Type_getNumProtocols(type: CValue<CXType>): Int {
 
 fun clang_Type_getProtocol(type: CValue<CXType>, index: Int): CValue<CXCursor> {
     memScoped {
-        val kniRetVal = nativeHeap.alloc<CXCursor>()
+        konst kniRetVal = nativeHeap.alloc<CXCursor>()
         try {
             kniBridge338(type.getPointer(memScope).rawValue, index, kniRetVal.rawPtr)
             return kniRetVal.readValue()
@@ -4039,13 +4039,13 @@ fun clang_Cursor_isObjCConsumingSelfMethod(cursor: CValue<CXCursor>): Int {
     }
 }
 
-val CINDEX_VERSION_MAJOR: Int get() = 0
+konst CINDEX_VERSION_MAJOR: Int get() = 0
 
-val CINDEX_VERSION_MINOR: Int get() = 61
+konst CINDEX_VERSION_MINOR: Int get() = 61
 
-val CINDEX_VERSION: Int get() = 61
+konst CINDEX_VERSION: Int get() = 61
 
-val CINDEX_VERSION_STRING: String get() = "0.61"
+konst CINDEX_VERSION_STRING: String get() = "0.61"
 
 typealias CXVirtualFileOverlayVar = CPointerVarOf<CXVirtualFileOverlay>
 
@@ -4119,9 +4119,9 @@ typealias CXInclusionVisitorVar = CPointerVarOf<CXInclusionVisitor>
 
 typealias CXInclusionVisitor = CPointer<CFunction<(CXFile?, CPointer<CXSourceLocation>?, Int, CXClientData?) -> Unit>>
 
-typealias CXEvalResultVar = CPointerVarOf<CXEvalResult>
+typealias CXEkonstResultVar = CPointerVarOf<CXEkonstResult>
 
-typealias CXEvalResult = COpaquePointer
+typealias CXEkonstResult = COpaquePointer
 
 typealias CXRemappingVar = CPointerVarOf<CXRemapping>
 
@@ -4152,437 +4152,437 @@ typealias CXFieldVisitorVar = CPointerVarOf<CXFieldVisitor>
 typealias CXFieldVisitor = CPointer<CFunction<(CValue<CXCursor>, CXClientData?) -> CXVisitorResult>>
 
 
-val CXGlobalOpt_None: CXGlobalOptFlags get() = 0
+konst CXGlobalOpt_None: CXGlobalOptFlags get() = 0
 
-val CXGlobalOpt_ThreadBackgroundPriorityForIndexing: CXGlobalOptFlags get() = 1
+konst CXGlobalOpt_ThreadBackgroundPriorityForIndexing: CXGlobalOptFlags get() = 1
 
-val CXGlobalOpt_ThreadBackgroundPriorityForEditing: CXGlobalOptFlags get() = 2
+konst CXGlobalOpt_ThreadBackgroundPriorityForEditing: CXGlobalOptFlags get() = 2
 
-val CXGlobalOpt_ThreadBackgroundPriorityForAll: CXGlobalOptFlags get() = 3
+konst CXGlobalOpt_ThreadBackgroundPriorityForAll: CXGlobalOptFlags get() = 3
 
 typealias CXGlobalOptFlagsVar = IntVarOf<CXGlobalOptFlags>
 
 typealias CXGlobalOptFlags = Int
 
 
-val CXDiagnostic_DisplaySourceLocation: CXDiagnosticDisplayOptions get() = 1
+konst CXDiagnostic_DisplaySourceLocation: CXDiagnosticDisplayOptions get() = 1
 
-val CXDiagnostic_DisplayColumn: CXDiagnosticDisplayOptions get() = 2
+konst CXDiagnostic_DisplayColumn: CXDiagnosticDisplayOptions get() = 2
 
-val CXDiagnostic_DisplaySourceRanges: CXDiagnosticDisplayOptions get() = 4
+konst CXDiagnostic_DisplaySourceRanges: CXDiagnosticDisplayOptions get() = 4
 
-val CXDiagnostic_DisplayOption: CXDiagnosticDisplayOptions get() = 8
+konst CXDiagnostic_DisplayOption: CXDiagnosticDisplayOptions get() = 8
 
-val CXDiagnostic_DisplayCategoryId: CXDiagnosticDisplayOptions get() = 16
+konst CXDiagnostic_DisplayCategoryId: CXDiagnosticDisplayOptions get() = 16
 
-val CXDiagnostic_DisplayCategoryName: CXDiagnosticDisplayOptions get() = 32
+konst CXDiagnostic_DisplayCategoryName: CXDiagnosticDisplayOptions get() = 32
 
 typealias CXDiagnosticDisplayOptionsVar = IntVarOf<CXDiagnosticDisplayOptions>
 
 typealias CXDiagnosticDisplayOptions = Int
 
 
-val CXTranslationUnit_None: CXTranslationUnit_Flags get() = 0
+konst CXTranslationUnit_None: CXTranslationUnit_Flags get() = 0
 
-val CXTranslationUnit_DetailedPreprocessingRecord: CXTranslationUnit_Flags get() = 1
+konst CXTranslationUnit_DetailedPreprocessingRecord: CXTranslationUnit_Flags get() = 1
 
-val CXTranslationUnit_Incomplete: CXTranslationUnit_Flags get() = 2
+konst CXTranslationUnit_Incomplete: CXTranslationUnit_Flags get() = 2
 
-val CXTranslationUnit_PrecompiledPreamble: CXTranslationUnit_Flags get() = 4
+konst CXTranslationUnit_PrecompiledPreamble: CXTranslationUnit_Flags get() = 4
 
-val CXTranslationUnit_CacheCompletionResults: CXTranslationUnit_Flags get() = 8
+konst CXTranslationUnit_CacheCompletionResults: CXTranslationUnit_Flags get() = 8
 
-val CXTranslationUnit_ForSerialization: CXTranslationUnit_Flags get() = 16
+konst CXTranslationUnit_ForSerialization: CXTranslationUnit_Flags get() = 16
 
-val CXTranslationUnit_CXXChainedPCH: CXTranslationUnit_Flags get() = 32
+konst CXTranslationUnit_CXXChainedPCH: CXTranslationUnit_Flags get() = 32
 
-val CXTranslationUnit_SkipFunctionBodies: CXTranslationUnit_Flags get() = 64
+konst CXTranslationUnit_SkipFunctionBodies: CXTranslationUnit_Flags get() = 64
 
-val CXTranslationUnit_IncludeBriefCommentsInCodeCompletion: CXTranslationUnit_Flags get() = 128
+konst CXTranslationUnit_IncludeBriefCommentsInCodeCompletion: CXTranslationUnit_Flags get() = 128
 
-val CXTranslationUnit_CreatePreambleOnFirstParse: CXTranslationUnit_Flags get() = 256
+konst CXTranslationUnit_CreatePreambleOnFirstParse: CXTranslationUnit_Flags get() = 256
 
-val CXTranslationUnit_KeepGoing: CXTranslationUnit_Flags get() = 512
+konst CXTranslationUnit_KeepGoing: CXTranslationUnit_Flags get() = 512
 
-val CXTranslationUnit_SingleFileParse: CXTranslationUnit_Flags get() = 1024
+konst CXTranslationUnit_SingleFileParse: CXTranslationUnit_Flags get() = 1024
 
-val CXTranslationUnit_LimitSkipFunctionBodiesToPreamble: CXTranslationUnit_Flags get() = 2048
+konst CXTranslationUnit_LimitSkipFunctionBodiesToPreamble: CXTranslationUnit_Flags get() = 2048
 
-val CXTranslationUnit_IncludeAttributedTypes: CXTranslationUnit_Flags get() = 4096
+konst CXTranslationUnit_IncludeAttributedTypes: CXTranslationUnit_Flags get() = 4096
 
-val CXTranslationUnit_VisitImplicitAttributes: CXTranslationUnit_Flags get() = 8192
+konst CXTranslationUnit_VisitImplicitAttributes: CXTranslationUnit_Flags get() = 8192
 
-val CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles: CXTranslationUnit_Flags get() = 16384
+konst CXTranslationUnit_IgnoreNonErrorsFromIncludedFiles: CXTranslationUnit_Flags get() = 16384
 
-val CXTranslationUnit_RetainExcludedConditionalBlocks: CXTranslationUnit_Flags get() = 32768
+konst CXTranslationUnit_RetainExcludedConditionalBlocks: CXTranslationUnit_Flags get() = 32768
 
 typealias CXTranslationUnit_FlagsVar = IntVarOf<CXTranslationUnit_Flags>
 
 typealias CXTranslationUnit_Flags = Int
 
 
-val CXSaveTranslationUnit_None: CXSaveTranslationUnit_Flags get() = 0
+konst CXSaveTranslationUnit_None: CXSaveTranslationUnit_Flags get() = 0
 
 typealias CXSaveTranslationUnit_FlagsVar = IntVarOf<CXSaveTranslationUnit_Flags>
 
 typealias CXSaveTranslationUnit_Flags = Int
 
 
-val CXReparse_None: CXReparse_Flags get() = 0
+konst CXReparse_None: CXReparse_Flags get() = 0
 
 typealias CXReparse_FlagsVar = IntVarOf<CXReparse_Flags>
 
 typealias CXReparse_Flags = Int
 
 
-val CXTLS_None: CXTLSKind get() = 0
+konst CXTLS_None: CXTLSKind get() = 0
 
-val CXTLS_Dynamic: CXTLSKind get() = 1
+konst CXTLS_Dynamic: CXTLSKind get() = 1
 
-val CXTLS_Static: CXTLSKind get() = 2
+konst CXTLS_Static: CXTLSKind get() = 2
 
 typealias CXTLSKindVar = IntVarOf<CXTLSKind>
 
 typealias CXTLSKind = Int
 
 
-val CXTypeNullability_NonNull: CXTypeNullabilityKind get() = 0
+konst CXTypeNullability_NonNull: CXTypeNullabilityKind get() = 0
 
-val CXTypeNullability_Nullable: CXTypeNullabilityKind get() = 1
+konst CXTypeNullability_Nullable: CXTypeNullabilityKind get() = 1
 
-val CXTypeNullability_Unspecified: CXTypeNullabilityKind get() = 2
+konst CXTypeNullability_Unspecified: CXTypeNullabilityKind get() = 2
 
-val CXTypeNullability_Invalid: CXTypeNullabilityKind get() = 3
+konst CXTypeNullability_Inkonstid: CXTypeNullabilityKind get() = 3
 
 typealias CXTypeNullabilityKindVar = IntVarOf<CXTypeNullabilityKind>
 
 typealias CXTypeNullabilityKind = Int
 
 
-val CXTypeLayoutError_Invalid: CXTypeLayoutError get() = -1
+konst CXTypeLayoutError_Inkonstid: CXTypeLayoutError get() = -1
 
-val CXTypeLayoutError_Incomplete: CXTypeLayoutError get() = -2
+konst CXTypeLayoutError_Incomplete: CXTypeLayoutError get() = -2
 
-val CXTypeLayoutError_Dependent: CXTypeLayoutError get() = -3
+konst CXTypeLayoutError_Dependent: CXTypeLayoutError get() = -3
 
-val CXTypeLayoutError_NotConstantSize: CXTypeLayoutError get() = -4
+konst CXTypeLayoutError_NotConstantSize: CXTypeLayoutError get() = -4
 
-val CXTypeLayoutError_InvalidFieldName: CXTypeLayoutError get() = -5
+konst CXTypeLayoutError_InkonstidFieldName: CXTypeLayoutError get() = -5
 
-val CXTypeLayoutError_Undeduced: CXTypeLayoutError get() = -6
+konst CXTypeLayoutError_Undeduced: CXTypeLayoutError get() = -6
 
 typealias CXTypeLayoutErrorVar = IntVarOf<CXTypeLayoutError>
 
 typealias CXTypeLayoutError = Int
 
 
-val CXRefQualifier_None: CXRefQualifierKind get() = 0
+konst CXRefQualifier_None: CXRefQualifierKind get() = 0
 
-val CXRefQualifier_LValue: CXRefQualifierKind get() = 1
+konst CXRefQualifier_LValue: CXRefQualifierKind get() = 1
 
-val CXRefQualifier_RValue: CXRefQualifierKind get() = 2
+konst CXRefQualifier_RValue: CXRefQualifierKind get() = 2
 
 typealias CXRefQualifierKindVar = IntVarOf<CXRefQualifierKind>
 
 typealias CXRefQualifierKind = Int
 
 
-val CXPrintingPolicy_Indentation: CXPrintingPolicyProperty get() = 0
+konst CXPrintingPolicy_Indentation: CXPrintingPolicyProperty get() = 0
 
-val CXPrintingPolicy_SuppressSpecifiers: CXPrintingPolicyProperty get() = 1
+konst CXPrintingPolicy_SuppressSpecifiers: CXPrintingPolicyProperty get() = 1
 
-val CXPrintingPolicy_SuppressTagKeyword: CXPrintingPolicyProperty get() = 2
+konst CXPrintingPolicy_SuppressTagKeyword: CXPrintingPolicyProperty get() = 2
 
-val CXPrintingPolicy_IncludeTagDefinition: CXPrintingPolicyProperty get() = 3
+konst CXPrintingPolicy_IncludeTagDefinition: CXPrintingPolicyProperty get() = 3
 
-val CXPrintingPolicy_SuppressScope: CXPrintingPolicyProperty get() = 4
+konst CXPrintingPolicy_SuppressScope: CXPrintingPolicyProperty get() = 4
 
-val CXPrintingPolicy_SuppressUnwrittenScope: CXPrintingPolicyProperty get() = 5
+konst CXPrintingPolicy_SuppressUnwrittenScope: CXPrintingPolicyProperty get() = 5
 
-val CXPrintingPolicy_SuppressInitializers: CXPrintingPolicyProperty get() = 6
+konst CXPrintingPolicy_SuppressInitializers: CXPrintingPolicyProperty get() = 6
 
-val CXPrintingPolicy_ConstantArraySizeAsWritten: CXPrintingPolicyProperty get() = 7
+konst CXPrintingPolicy_ConstantArraySizeAsWritten: CXPrintingPolicyProperty get() = 7
 
-val CXPrintingPolicy_AnonymousTagLocations: CXPrintingPolicyProperty get() = 8
+konst CXPrintingPolicy_AnonymousTagLocations: CXPrintingPolicyProperty get() = 8
 
-val CXPrintingPolicy_SuppressStrongLifetime: CXPrintingPolicyProperty get() = 9
+konst CXPrintingPolicy_SuppressStrongLifetime: CXPrintingPolicyProperty get() = 9
 
-val CXPrintingPolicy_SuppressLifetimeQualifiers: CXPrintingPolicyProperty get() = 10
+konst CXPrintingPolicy_SuppressLifetimeQualifiers: CXPrintingPolicyProperty get() = 10
 
-val CXPrintingPolicy_SuppressTemplateArgsInCXXConstructors: CXPrintingPolicyProperty get() = 11
+konst CXPrintingPolicy_SuppressTemplateArgsInCXXConstructors: CXPrintingPolicyProperty get() = 11
 
-val CXPrintingPolicy_Bool: CXPrintingPolicyProperty get() = 12
+konst CXPrintingPolicy_Bool: CXPrintingPolicyProperty get() = 12
 
-val CXPrintingPolicy_Restrict: CXPrintingPolicyProperty get() = 13
+konst CXPrintingPolicy_Restrict: CXPrintingPolicyProperty get() = 13
 
-val CXPrintingPolicy_Alignof: CXPrintingPolicyProperty get() = 14
+konst CXPrintingPolicy_Alignof: CXPrintingPolicyProperty get() = 14
 
-val CXPrintingPolicy_UnderscoreAlignof: CXPrintingPolicyProperty get() = 15
+konst CXPrintingPolicy_UnderscoreAlignof: CXPrintingPolicyProperty get() = 15
 
-val CXPrintingPolicy_UseVoidForZeroParams: CXPrintingPolicyProperty get() = 16
+konst CXPrintingPolicy_UseVoidForZeroParams: CXPrintingPolicyProperty get() = 16
 
-val CXPrintingPolicy_TerseOutput: CXPrintingPolicyProperty get() = 17
+konst CXPrintingPolicy_TerseOutput: CXPrintingPolicyProperty get() = 17
 
-val CXPrintingPolicy_PolishForDeclaration: CXPrintingPolicyProperty get() = 18
+konst CXPrintingPolicy_PolishForDeclaration: CXPrintingPolicyProperty get() = 18
 
-val CXPrintingPolicy_Half: CXPrintingPolicyProperty get() = 19
+konst CXPrintingPolicy_Half: CXPrintingPolicyProperty get() = 19
 
-val CXPrintingPolicy_MSWChar: CXPrintingPolicyProperty get() = 20
+konst CXPrintingPolicy_MSWChar: CXPrintingPolicyProperty get() = 20
 
-val CXPrintingPolicy_IncludeNewlines: CXPrintingPolicyProperty get() = 21
+konst CXPrintingPolicy_IncludeNewlines: CXPrintingPolicyProperty get() = 21
 
-val CXPrintingPolicy_MSVCFormatting: CXPrintingPolicyProperty get() = 22
+konst CXPrintingPolicy_MSVCFormatting: CXPrintingPolicyProperty get() = 22
 
-val CXPrintingPolicy_ConstantsAsWritten: CXPrintingPolicyProperty get() = 23
+konst CXPrintingPolicy_ConstantsAsWritten: CXPrintingPolicyProperty get() = 23
 
-val CXPrintingPolicy_SuppressImplicitBase: CXPrintingPolicyProperty get() = 24
+konst CXPrintingPolicy_SuppressImplicitBase: CXPrintingPolicyProperty get() = 24
 
-val CXPrintingPolicy_FullyQualifiedName: CXPrintingPolicyProperty get() = 25
+konst CXPrintingPolicy_FullyQualifiedName: CXPrintingPolicyProperty get() = 25
 
-val CXPrintingPolicy_LastProperty: CXPrintingPolicyProperty get() = 25
+konst CXPrintingPolicy_LastProperty: CXPrintingPolicyProperty get() = 25
 
 typealias CXPrintingPolicyPropertyVar = IntVarOf<CXPrintingPolicyProperty>
 
 typealias CXPrintingPolicyProperty = Int
 
 
-val CXObjCPropertyAttr_noattr: CXObjCPropertyAttrKind get() = 0
+konst CXObjCPropertyAttr_noattr: CXObjCPropertyAttrKind get() = 0
 
-val CXObjCPropertyAttr_readonly: CXObjCPropertyAttrKind get() = 1
+konst CXObjCPropertyAttr_readonly: CXObjCPropertyAttrKind get() = 1
 
-val CXObjCPropertyAttr_getter: CXObjCPropertyAttrKind get() = 2
+konst CXObjCPropertyAttr_getter: CXObjCPropertyAttrKind get() = 2
 
-val CXObjCPropertyAttr_assign: CXObjCPropertyAttrKind get() = 4
+konst CXObjCPropertyAttr_assign: CXObjCPropertyAttrKind get() = 4
 
-val CXObjCPropertyAttr_readwrite: CXObjCPropertyAttrKind get() = 8
+konst CXObjCPropertyAttr_readwrite: CXObjCPropertyAttrKind get() = 8
 
-val CXObjCPropertyAttr_retain: CXObjCPropertyAttrKind get() = 16
+konst CXObjCPropertyAttr_retain: CXObjCPropertyAttrKind get() = 16
 
-val CXObjCPropertyAttr_copy: CXObjCPropertyAttrKind get() = 32
+konst CXObjCPropertyAttr_copy: CXObjCPropertyAttrKind get() = 32
 
-val CXObjCPropertyAttr_nonatomic: CXObjCPropertyAttrKind get() = 64
+konst CXObjCPropertyAttr_nonatomic: CXObjCPropertyAttrKind get() = 64
 
-val CXObjCPropertyAttr_setter: CXObjCPropertyAttrKind get() = 128
+konst CXObjCPropertyAttr_setter: CXObjCPropertyAttrKind get() = 128
 
-val CXObjCPropertyAttr_atomic: CXObjCPropertyAttrKind get() = 256
+konst CXObjCPropertyAttr_atomic: CXObjCPropertyAttrKind get() = 256
 
-val CXObjCPropertyAttr_weak: CXObjCPropertyAttrKind get() = 512
+konst CXObjCPropertyAttr_weak: CXObjCPropertyAttrKind get() = 512
 
-val CXObjCPropertyAttr_strong: CXObjCPropertyAttrKind get() = 1024
+konst CXObjCPropertyAttr_strong: CXObjCPropertyAttrKind get() = 1024
 
-val CXObjCPropertyAttr_unsafe_unretained: CXObjCPropertyAttrKind get() = 2048
+konst CXObjCPropertyAttr_unsafe_unretained: CXObjCPropertyAttrKind get() = 2048
 
-val CXObjCPropertyAttr_class: CXObjCPropertyAttrKind get() = 4096
+konst CXObjCPropertyAttr_class: CXObjCPropertyAttrKind get() = 4096
 
 typealias CXObjCPropertyAttrKindVar = IntVarOf<CXObjCPropertyAttrKind>
 
 typealias CXObjCPropertyAttrKind = Int
 
 
-val CXObjCDeclQualifier_None: CXObjCDeclQualifierKind get() = 0
+konst CXObjCDeclQualifier_None: CXObjCDeclQualifierKind get() = 0
 
-val CXObjCDeclQualifier_In: CXObjCDeclQualifierKind get() = 1
+konst CXObjCDeclQualifier_In: CXObjCDeclQualifierKind get() = 1
 
-val CXObjCDeclQualifier_Inout: CXObjCDeclQualifierKind get() = 2
+konst CXObjCDeclQualifier_Inout: CXObjCDeclQualifierKind get() = 2
 
-val CXObjCDeclQualifier_Out: CXObjCDeclQualifierKind get() = 4
+konst CXObjCDeclQualifier_Out: CXObjCDeclQualifierKind get() = 4
 
-val CXObjCDeclQualifier_Bycopy: CXObjCDeclQualifierKind get() = 8
+konst CXObjCDeclQualifier_Bycopy: CXObjCDeclQualifierKind get() = 8
 
-val CXObjCDeclQualifier_Byref: CXObjCDeclQualifierKind get() = 16
+konst CXObjCDeclQualifier_Byref: CXObjCDeclQualifierKind get() = 16
 
-val CXObjCDeclQualifier_Oneway: CXObjCDeclQualifierKind get() = 32
+konst CXObjCDeclQualifier_Oneway: CXObjCDeclQualifierKind get() = 32
 
 typealias CXObjCDeclQualifierKindVar = IntVarOf<CXObjCDeclQualifierKind>
 
 typealias CXObjCDeclQualifierKind = Int
 
 
-val CXNameRange_WantQualifier: CXNameRefFlags get() = 1
+konst CXNameRange_WantQualifier: CXNameRefFlags get() = 1
 
-val CXNameRange_WantTemplateArgs: CXNameRefFlags get() = 2
+konst CXNameRange_WantTemplateArgs: CXNameRefFlags get() = 2
 
-val CXNameRange_WantSinglePiece: CXNameRefFlags get() = 4
+konst CXNameRange_WantSinglePiece: CXNameRefFlags get() = 4
 
 typealias CXNameRefFlagsVar = IntVarOf<CXNameRefFlags>
 
 typealias CXNameRefFlags = Int
 
 
-val CXCodeComplete_IncludeMacros: CXCodeComplete_Flags get() = 1
+konst CXCodeComplete_IncludeMacros: CXCodeComplete_Flags get() = 1
 
-val CXCodeComplete_IncludeCodePatterns: CXCodeComplete_Flags get() = 2
+konst CXCodeComplete_IncludeCodePatterns: CXCodeComplete_Flags get() = 2
 
-val CXCodeComplete_IncludeBriefComments: CXCodeComplete_Flags get() = 4
+konst CXCodeComplete_IncludeBriefComments: CXCodeComplete_Flags get() = 4
 
-val CXCodeComplete_SkipPreamble: CXCodeComplete_Flags get() = 8
+konst CXCodeComplete_SkipPreamble: CXCodeComplete_Flags get() = 8
 
-val CXCodeComplete_IncludeCompletionsWithFixIts: CXCodeComplete_Flags get() = 16
+konst CXCodeComplete_IncludeCompletionsWithFixIts: CXCodeComplete_Flags get() = 16
 
 typealias CXCodeComplete_FlagsVar = IntVarOf<CXCodeComplete_Flags>
 
 typealias CXCodeComplete_Flags = Int
 
 
-val CXCompletionContext_Unexposed: CXCompletionContext get() = 0
+konst CXCompletionContext_Unexposed: CXCompletionContext get() = 0
 
-val CXCompletionContext_AnyType: CXCompletionContext get() = 1
+konst CXCompletionContext_AnyType: CXCompletionContext get() = 1
 
-val CXCompletionContext_AnyValue: CXCompletionContext get() = 2
+konst CXCompletionContext_AnyValue: CXCompletionContext get() = 2
 
-val CXCompletionContext_ObjCObjectValue: CXCompletionContext get() = 4
+konst CXCompletionContext_ObjCObjectValue: CXCompletionContext get() = 4
 
-val CXCompletionContext_ObjCSelectorValue: CXCompletionContext get() = 8
+konst CXCompletionContext_ObjCSelectorValue: CXCompletionContext get() = 8
 
-val CXCompletionContext_CXXClassTypeValue: CXCompletionContext get() = 16
+konst CXCompletionContext_CXXClassTypeValue: CXCompletionContext get() = 16
 
-val CXCompletionContext_DotMemberAccess: CXCompletionContext get() = 32
+konst CXCompletionContext_DotMemberAccess: CXCompletionContext get() = 32
 
-val CXCompletionContext_ArrowMemberAccess: CXCompletionContext get() = 64
+konst CXCompletionContext_ArrowMemberAccess: CXCompletionContext get() = 64
 
-val CXCompletionContext_ObjCPropertyAccess: CXCompletionContext get() = 128
+konst CXCompletionContext_ObjCPropertyAccess: CXCompletionContext get() = 128
 
-val CXCompletionContext_EnumTag: CXCompletionContext get() = 256
+konst CXCompletionContext_EnumTag: CXCompletionContext get() = 256
 
-val CXCompletionContext_UnionTag: CXCompletionContext get() = 512
+konst CXCompletionContext_UnionTag: CXCompletionContext get() = 512
 
-val CXCompletionContext_StructTag: CXCompletionContext get() = 1024
+konst CXCompletionContext_StructTag: CXCompletionContext get() = 1024
 
-val CXCompletionContext_ClassTag: CXCompletionContext get() = 2048
+konst CXCompletionContext_ClassTag: CXCompletionContext get() = 2048
 
-val CXCompletionContext_Namespace: CXCompletionContext get() = 4096
+konst CXCompletionContext_Namespace: CXCompletionContext get() = 4096
 
-val CXCompletionContext_NestedNameSpecifier: CXCompletionContext get() = 8192
+konst CXCompletionContext_NestedNameSpecifier: CXCompletionContext get() = 8192
 
-val CXCompletionContext_ObjCInterface: CXCompletionContext get() = 16384
+konst CXCompletionContext_ObjCInterface: CXCompletionContext get() = 16384
 
-val CXCompletionContext_ObjCProtocol: CXCompletionContext get() = 32768
+konst CXCompletionContext_ObjCProtocol: CXCompletionContext get() = 32768
 
-val CXCompletionContext_ObjCCategory: CXCompletionContext get() = 65536
+konst CXCompletionContext_ObjCCategory: CXCompletionContext get() = 65536
 
-val CXCompletionContext_ObjCInstanceMessage: CXCompletionContext get() = 131072
+konst CXCompletionContext_ObjCInstanceMessage: CXCompletionContext get() = 131072
 
-val CXCompletionContext_ObjCClassMessage: CXCompletionContext get() = 262144
+konst CXCompletionContext_ObjCClassMessage: CXCompletionContext get() = 262144
 
-val CXCompletionContext_ObjCSelectorName: CXCompletionContext get() = 524288
+konst CXCompletionContext_ObjCSelectorName: CXCompletionContext get() = 524288
 
-val CXCompletionContext_MacroName: CXCompletionContext get() = 1048576
+konst CXCompletionContext_MacroName: CXCompletionContext get() = 1048576
 
-val CXCompletionContext_NaturalLanguage: CXCompletionContext get() = 2097152
+konst CXCompletionContext_NaturalLanguage: CXCompletionContext get() = 2097152
 
-val CXCompletionContext_IncludedFile: CXCompletionContext get() = 4194304
+konst CXCompletionContext_IncludedFile: CXCompletionContext get() = 4194304
 
-val CXCompletionContext_Unknown: CXCompletionContext get() = 8388607
+konst CXCompletionContext_Unknown: CXCompletionContext get() = 8388607
 
 typealias CXCompletionContextVar = IntVarOf<CXCompletionContext>
 
 typealias CXCompletionContext = Int
 
 
-val CXIdxEntityLang_None: CXIdxEntityLanguage get() = 0
+konst CXIdxEntityLang_None: CXIdxEntityLanguage get() = 0
 
-val CXIdxEntityLang_C: CXIdxEntityLanguage get() = 1
+konst CXIdxEntityLang_C: CXIdxEntityLanguage get() = 1
 
-val CXIdxEntityLang_ObjC: CXIdxEntityLanguage get() = 2
+konst CXIdxEntityLang_ObjC: CXIdxEntityLanguage get() = 2
 
-val CXIdxEntityLang_CXX: CXIdxEntityLanguage get() = 3
+konst CXIdxEntityLang_CXX: CXIdxEntityLanguage get() = 3
 
-val CXIdxEntityLang_Swift: CXIdxEntityLanguage get() = 4
+konst CXIdxEntityLang_Swift: CXIdxEntityLanguage get() = 4
 
 typealias CXIdxEntityLanguageVar = IntVarOf<CXIdxEntityLanguage>
 
 typealias CXIdxEntityLanguage = Int
 
 
-val CXIdxEntity_NonTemplate: CXIdxEntityCXXTemplateKind get() = 0
+konst CXIdxEntity_NonTemplate: CXIdxEntityCXXTemplateKind get() = 0
 
-val CXIdxEntity_Template: CXIdxEntityCXXTemplateKind get() = 1
+konst CXIdxEntity_Template: CXIdxEntityCXXTemplateKind get() = 1
 
-val CXIdxEntity_TemplatePartialSpecialization: CXIdxEntityCXXTemplateKind get() = 2
+konst CXIdxEntity_TemplatePartialSpecialization: CXIdxEntityCXXTemplateKind get() = 2
 
-val CXIdxEntity_TemplateSpecialization: CXIdxEntityCXXTemplateKind get() = 3
+konst CXIdxEntity_TemplateSpecialization: CXIdxEntityCXXTemplateKind get() = 3
 
 typealias CXIdxEntityCXXTemplateKindVar = IntVarOf<CXIdxEntityCXXTemplateKind>
 
 typealias CXIdxEntityCXXTemplateKind = Int
 
 
-val CXIdxAttr_Unexposed: CXIdxAttrKind get() = 0
+konst CXIdxAttr_Unexposed: CXIdxAttrKind get() = 0
 
-val CXIdxAttr_IBAction: CXIdxAttrKind get() = 1
+konst CXIdxAttr_IBAction: CXIdxAttrKind get() = 1
 
-val CXIdxAttr_IBOutlet: CXIdxAttrKind get() = 2
+konst CXIdxAttr_IBOutlet: CXIdxAttrKind get() = 2
 
-val CXIdxAttr_IBOutletCollection: CXIdxAttrKind get() = 3
+konst CXIdxAttr_IBOutletCollection: CXIdxAttrKind get() = 3
 
 typealias CXIdxAttrKindVar = IntVarOf<CXIdxAttrKind>
 
 typealias CXIdxAttrKind = Int
 
 
-val CXIdxDeclFlag_Skipped: CXIdxDeclInfoFlags get() = 1
+konst CXIdxDeclFlag_Skipped: CXIdxDeclInfoFlags get() = 1
 
 typealias CXIdxDeclInfoFlagsVar = IntVarOf<CXIdxDeclInfoFlags>
 
 typealias CXIdxDeclInfoFlags = Int
 
 
-val CXIdxObjCContainer_ForwardRef: CXIdxObjCContainerKind get() = 0
+konst CXIdxObjCContainer_ForwardRef: CXIdxObjCContainerKind get() = 0
 
-val CXIdxObjCContainer_Interface: CXIdxObjCContainerKind get() = 1
+konst CXIdxObjCContainer_Interface: CXIdxObjCContainerKind get() = 1
 
-val CXIdxObjCContainer_Implementation: CXIdxObjCContainerKind get() = 2
+konst CXIdxObjCContainer_Implementation: CXIdxObjCContainerKind get() = 2
 
 typealias CXIdxObjCContainerKindVar = IntVarOf<CXIdxObjCContainerKind>
 
 typealias CXIdxObjCContainerKind = Int
 
 
-val CXIdxEntityRef_Direct: CXIdxEntityRefKind get() = 1
+konst CXIdxEntityRef_Direct: CXIdxEntityRefKind get() = 1
 
-val CXIdxEntityRef_Implicit: CXIdxEntityRefKind get() = 2
+konst CXIdxEntityRef_Implicit: CXIdxEntityRefKind get() = 2
 
 typealias CXIdxEntityRefKindVar = IntVarOf<CXIdxEntityRefKind>
 
 typealias CXIdxEntityRefKind = Int
 
 
-val CXSymbolRole_None: CXSymbolRole get() = 0
+konst CXSymbolRole_None: CXSymbolRole get() = 0
 
-val CXSymbolRole_Declaration: CXSymbolRole get() = 1
+konst CXSymbolRole_Declaration: CXSymbolRole get() = 1
 
-val CXSymbolRole_Definition: CXSymbolRole get() = 2
+konst CXSymbolRole_Definition: CXSymbolRole get() = 2
 
-val CXSymbolRole_Reference: CXSymbolRole get() = 4
+konst CXSymbolRole_Reference: CXSymbolRole get() = 4
 
-val CXSymbolRole_Read: CXSymbolRole get() = 8
+konst CXSymbolRole_Read: CXSymbolRole get() = 8
 
-val CXSymbolRole_Write: CXSymbolRole get() = 16
+konst CXSymbolRole_Write: CXSymbolRole get() = 16
 
-val CXSymbolRole_Call: CXSymbolRole get() = 32
+konst CXSymbolRole_Call: CXSymbolRole get() = 32
 
-val CXSymbolRole_Dynamic: CXSymbolRole get() = 64
+konst CXSymbolRole_Dynamic: CXSymbolRole get() = 64
 
-val CXSymbolRole_AddressOf: CXSymbolRole get() = 128
+konst CXSymbolRole_AddressOf: CXSymbolRole get() = 128
 
-val CXSymbolRole_Implicit: CXSymbolRole get() = 256
+konst CXSymbolRole_Implicit: CXSymbolRole get() = 256
 
 typealias CXSymbolRoleVar = IntVarOf<CXSymbolRole>
 
 typealias CXSymbolRole = Int
 
 
-val CXIndexOpt_None: CXIndexOptFlags get() = 0
+konst CXIndexOpt_None: CXIndexOptFlags get() = 0
 
-val CXIndexOpt_SuppressRedundantRefs: CXIndexOptFlags get() = 1
+konst CXIndexOpt_SuppressRedundantRefs: CXIndexOptFlags get() = 1
 
-val CXIndexOpt_IndexFunctionLocalSymbols: CXIndexOptFlags get() = 2
+konst CXIndexOpt_IndexFunctionLocalSymbols: CXIndexOptFlags get() = 2
 
-val CXIndexOpt_IndexImplicitTemplateInstantiations: CXIndexOptFlags get() = 4
+konst CXIndexOpt_IndexImplicitTemplateInstantiations: CXIndexOptFlags get() = 4
 
-val CXIndexOpt_SuppressWarnings: CXIndexOptFlags get() = 8
+konst CXIndexOpt_SuppressWarnings: CXIndexOptFlags get() = 8
 
-val CXIndexOpt_SkipParsedBodiesInSession: CXIndexOptFlags get() = 16
+konst CXIndexOpt_SkipParsedBodiesInSession: CXIndexOptFlags get() = 16
 
 typealias CXIndexOptFlagsVar = IntVarOf<CXIndexOptFlags>
 
@@ -4929,4 +4929,4 @@ private external fun kniBridge338(p0: NativePtr, p1: Int, p2: NativePtr): Unit
 private external fun kniBridge339(p0: NativePtr): Int
 private external fun kniBridge340(p0: NativePtr): Int
 private external fun kniBridge341(p0: NativePtr): Int
-private val loadLibrary = loadKonanLibrary("clangstubs")
+private konst loadLibrary = loadKonanLibrary("clangstubs")

@@ -30,16 +30,16 @@ abstract class ResolutionPart {
     abstract fun KotlinResolutionCandidate.process(): String
 
     // helper functions
-    //protected inline val KotlinResolutionCandidate.candidateDescriptor get() = resolvedCall.candidateDescriptor
+    //protected inline konst KotlinResolutionCandidate.candidateDescriptor get() = resolvedCall.candidateDescriptor
 }
 
-class KotlinResolutionCandidate(val resolvedCall: Atom)
+class KotlinResolutionCandidate(konst resolvedCall: Atom)
 
-class Atom(val candidateDescriptor: CallableDescriptor)
+class Atom(konst candidateDescriptor: CallableDescriptor)
 
 object Owner : ResolutionPart() {
     override fun KotlinResolutionCandidate.process(): String {
-        val candidateDescriptor = resolvedCall.candidateDescriptor
+        konst candidateDescriptor = resolvedCall.candidateDescriptor
         if (candidateDescriptor is MemberDescriptor && candidateDescriptor.modality != null) {
             return "OK"
         }

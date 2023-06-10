@@ -7,7 +7,7 @@ internal fun test(a: Int, b: Int): Int {
     var res = 0
 
     with (a + b) {
-        val t = this
+        konst t = this
 
         repeat(t) {
             res += t - b

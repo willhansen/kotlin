@@ -1,8 +1,8 @@
 package
 
 package kt606_dependents {
-    public val x: kotlin.Int
-    public val kotlin.Int.ext: () -> kotlin.Int
+    public konst x: kotlin.Int
+    public konst kotlin.Int.ext: () -> kotlin.Int
 
     public interface AutoCloseable {
         public abstract fun close(): kotlin.Unit

@@ -3,10 +3,10 @@ plugins {
     kotlin("jvm")
 }
 
-val allTestsRuntime by configurations.creating
-val testApi by configurations
+konst allTestsRuntime by configurations.creating
+konst testApi by configurations
 testApi.extendsFrom(allTestsRuntime)
-val embeddableTestRuntime by configurations.creating {
+konst embeddableTestRuntime by configurations.creating {
     extendsFrom(allTestsRuntime)
 }
 

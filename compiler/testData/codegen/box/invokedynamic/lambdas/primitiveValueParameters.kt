@@ -7,8 +7,8 @@
 // 1 java/lang/invoke/LambdaMetafactory
 
 fun box(): String {
-    val lam = { i: Int -> i + 40 }
-    val test = lam(2)
+    konst lam = { i: Int -> i + 40 }
+    konst test = lam(2)
     if (test != 42) return "Failed: test=$test"
 
     return "OK"

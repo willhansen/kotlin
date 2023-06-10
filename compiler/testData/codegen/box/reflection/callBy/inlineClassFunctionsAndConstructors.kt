@@ -3,8 +3,8 @@
 
 import kotlin.test.assertEquals
 
-inline class S(val value: String) {
-    operator fun plus(other: S): S = S(this.value + other.value)
+inline class S(konst konstue: String) {
+    operator fun plus(other: S): S = S(this.konstue + other.konstue)
 }
 
 class C {
@@ -14,7 +14,7 @@ class C {
 fun topLevel(c: S, d: S = S("d")): S = c + d
 
 class D(e: S, f: S = S("f")) {
-    val result = e + f
+    konst result = e + f
 }
 
 fun S.extension(h: S = S("h")): S = this + h
@@ -34,10 +34,10 @@ fun box(): String {
     assertEquals(S("gh"), S("g").extension())
     assertEquals(S("gh"), S::extension.callBy(S::extension.parameters.filter { it.name != "h" }.associateWith { S("g") }))
 
-    val boundMember = C()::member
+    konst boundMember = C()::member
     assertEquals(S("ab"), boundMember.callBy(boundMember.parameters.associateWith { S(it.name!!) }))
 
-    val boundExtension = S("g")::extension
+    konst boundExtension = S("g")::extension
     assertEquals(S("gh"), boundExtension.callBy(boundExtension.parameters.associateWith { S(it.name!!) }))
 
     return "OK"

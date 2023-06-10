@@ -97,10 +97,10 @@ interface SyntheticScope {
 
 @DefaultImplementation(impl = FunInterfaceConstructorsScopeProvider::class)
 interface SyntheticScopes {
-    val scopes: Collection<SyntheticScope>
+    konst scopes: Collection<SyntheticScope>
 
     object Empty : SyntheticScopes {
-        override val scopes: Collection<SyntheticScope> = emptyList()
+        override konst scopes: Collection<SyntheticScope> = emptyList()
     }
 }
 

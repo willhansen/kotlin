@@ -16,12 +16,12 @@ import kotlin.test.*
 class CirTreeFunctionDeserializerTest : AbstractCirTreeDeserializerTest() {
 
     fun `test simple function`() {
-        val module = createCirTreeFromSourceCode("fun x() = Unit")
-        val function = module.assertSingleFunction()
+        konst module = createCirTreeFromSourceCode("fun x() = Unit")
+        konst function = module.assertSingleFunction()
 
         assertNull(function.containingClass, "Expected function to *not* have containing class")
         assertEquals(Visibilities.Public, function.visibility, "Expected function to be public")
-        val returnType = function.returnType as? CirClassType ?: kotlin.test.fail("Expected return type being class")
+        konst returnType = function.returnType as? CirClassType ?: kotlin.test.fail("Expected return type being class")
         assertFalse(returnType.isMarkedNullable, "Expected return type *not* being marked nullable")
         assertEquals("kotlin/Unit", returnType.classifierId.toString())
         assertEquals(Modality.FINAL, function.modality, "Expected function to be final")
@@ -29,19 +29,19 @@ class CirTreeFunctionDeserializerTest : AbstractCirTreeDeserializerTest() {
     }
 
     fun `test generic function`() {
-        val module = createCirTreeFromSourceCode("""fun <T: Any> T.isHappy(): Boolean = true""")
-        val function = module.assertSingleFunction()
+        konst module = createCirTreeFromSourceCode("""fun <T: Any> T.isHappy(): Boolean = true""")
+        konst function = module.assertSingleFunction()
 
-        val extensionReceiver = assertNotNull(function.extensionReceiver, "Expected function being extension receiver")
-        val extensionReceiverType = extensionReceiver.type as? CirTypeParameterType
+        konst extensionReceiver = assertNotNull(function.extensionReceiver, "Expected function being extension receiver")
+        konst extensionReceiverType = extensionReceiver.type as? CirTypeParameterType
             ?: kotlin.test.fail("Expected receiver type ${CirTypeParameterType::class.simpleName}")
         assertFalse(extensionReceiverType.isMarkedNullable, "Expected extensionReceiverType *not* being marked nullable")
 
-        val typeParameter = function.typeParameters.singleOrNull()
+        konst typeParameter = function.typeParameters.singleOrNull()
             ?: kotlin.test.fail("Expected a single type parameter. Found ${function.typeParameters}")
         assertFalse(typeParameter.isReified, "Expected type parameter *not* being reified")
 
-        val upperBound = assertIs<CirClassType>(
+        konst upperBound = assertIs<CirClassType>(
             typeParameter.upperBounds.singleOrNull()
                 ?: kotlin.test.fail("Expected a single upper bound. Found ${typeParameter.upperBounds}")
         )
@@ -50,7 +50,7 @@ class CirTreeFunctionDeserializerTest : AbstractCirTreeDeserializerTest() {
     }
 
     fun `test function with outer object`() {
-        val module = createCirTreeFromSourceCode(
+        konst module = createCirTreeFromSourceCode(
             """
             object Parent {
                 fun x(): String = "Hello, you're reading a test"
@@ -58,11 +58,11 @@ class CirTreeFunctionDeserializerTest : AbstractCirTreeDeserializerTest() {
             """
         )
 
-        val parent = module.assertSingleClass()
-        val function = parent.functions.singleOrNull()
+        konst parent = module.assertSingleClass()
+        konst function = parent.functions.singleOrNull()
             ?: kotlin.test.fail("Expected single function in parent. Found ${parent.functions.map { it.name }}")
 
-        val containingClass = assertIs<CirClass>(kotlin.test.assertNotNull(function.containingClass))
+        konst containingClass = assertIs<CirClass>(kotlin.test.assertNotNull(function.containingClass))
         assertEquals(ClassKind.OBJECT, containingClass.kind, "Expected containing class being object")
         assertEquals("Parent", containingClass.name.toStrippedString())
     }

@@ -9,7 +9,7 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.descriptors.*
 
 
-class Data(val j: Int)
+class Data(konst j: Int)
 
 @Serializer(forClass = Data::class)
 object ObjectSerializer
@@ -18,10 +18,10 @@ object ObjectSerializer
 class ClassSerializer
 
 fun box(): String {
-    val encodedForClass = Json.encodeToString(ClassSerializer(), Data(1))
+    konst encodedForClass = Json.encodeToString(ClassSerializer(), Data(1))
     if (encodedForClass != """{"j":1}""") return encodedForClass
 
-    val encodedForObject = Json.encodeToString(ObjectSerializer, Data(2))
+    konst encodedForObject = Json.encodeToString(ObjectSerializer, Data(2))
     if (encodedForObject != """{"j":2}""") return encodedForObject
 
     return "OK"

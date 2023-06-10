@@ -2,6 +2,6 @@
 enum class <!CONFLICTING_JVM_DECLARATIONS, CONFLICTING_JVM_DECLARATIONS!>E<!> {
     A;
 
-    <!CONFLICTING_JVM_DECLARATIONS!>fun values(): Array<E><!> = null!!
-    <!CONFLICTING_JVM_DECLARATIONS!>fun valueOf(s: String): E<!> = null!!
+    <!CONFLICTING_JVM_DECLARATIONS!>fun konstues(): Array<E><!> = null!!
+    <!CONFLICTING_JVM_DECLARATIONS!>fun konstueOf(s: String): E<!> = null!!
 }

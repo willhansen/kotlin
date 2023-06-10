@@ -30,9 +30,9 @@ import java.util.*
 
 class SwitchCodegenProvider
 private constructor(
-    private val bindingContext: BindingContext,
-    private val shouldInlineConstVals: Boolean,
-    private val codegen: ExpressionCodegen?
+    private konst bindingContext: BindingContext,
+    private konst shouldInlineConstVals: Boolean,
+    private konst codegen: ExpressionCodegen?
 ) {
     constructor(state: GenerationState) : this(state.bindingContext, state.shouldInlineConstVals, null)
     constructor(codegen: ExpressionCodegen) : this(codegen.bindingContext, codegen.state.shouldInlineConstVals, codegen)
@@ -41,8 +41,8 @@ private constructor(
         expression.entries.all { entry ->
             entry.conditions.all { condition ->
                 if (condition !is KtWhenConditionWithExpression) return false
-                val patternExpression = condition.expression ?: return false
-                val constant =
+                konst patternExpression = condition.expression ?: return false
+                konst constant =
                     ExpressionCodegen.getCompileTimeConstant(patternExpression, bindingContext, shouldInlineConstVals) ?: return false
                 predicate.invoke(constant)
             }
@@ -63,7 +63,7 @@ private constructor(
     private fun ArrayList<ConstantValue<*>?>.addConstantsFromConditions(entry: KtWhenEntry) {
         for (condition in entry.conditions) {
             if (condition !is KtWhenConditionWithExpression) continue
-            val patternExpression = condition.expression ?: throw AssertionError("expression in when should not be null")
+            konst patternExpression = condition.expression ?: throw AssertionError("expression in when should not be null")
             add(ExpressionCodegen.getCompileTimeConstant(patternExpression, bindingContext, shouldInlineConstVals))
         }
     }
@@ -73,17 +73,17 @@ private constructor(
         isStatement: Boolean,
         isExhaustive: Boolean
     ): SwitchCodegen? {
-        val codegen = codegen ?: throw AssertionError("Can't create SwitchCodegen in this context")
+        konst codegen = codegen ?: throw AssertionError("Can't create SwitchCodegen in this context")
 
         if (!isThereConstantEntriesButNulls(expression)) {
             return null
         }
 
-        val subjectType =
+        konst subjectType =
             expression.subjectVariable?.let { codegen.expressionType(it.initializer) }
                 ?: codegen.expressionType(expression.subjectExpression)
 
-        val mapping = codegen.bindingContext.get(CodegenBinding.MAPPING_FOR_WHEN_BY_ENUM, expression)
+        konst mapping = codegen.bindingContext.get(CodegenBinding.MAPPING_FOR_WHEN_BY_ENUM, expression)
 
         return when {
             mapping != null ->

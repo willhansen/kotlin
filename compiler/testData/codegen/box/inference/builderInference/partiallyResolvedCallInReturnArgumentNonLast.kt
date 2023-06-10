@@ -3,7 +3,7 @@
 // IGNORE_BACKEND_K2: JVM_IR
 // FIR status: KT-58742
 
-class Out<out V>(val v: V)
+class Out<out V>(konst v: V)
 class Box<R> {
     var boxed: R? = null
 

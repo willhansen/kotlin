@@ -17,11 +17,11 @@ export function configureFiltering(
     const exclude: KotlinTestsFilter[] = [];
 
     function collectWildcards(
-        value: string[],
+        konstue: string[],
         positive: KotlinTestsFilter[],
         negative: KotlinTestsFilter[]
     ) {
-        flatMap(value, (t: string) => t.split(','))
+        flatMap(konstue, (t: string) => t.split(','))
             .map(t => {
                 if (t.length && t[0] == '!') {
                     pushIfNotNull(negative, newKotlinTestsFilter(t.substring(1)))

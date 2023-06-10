@@ -35,12 +35,12 @@ import java.io.File
 import java.io.PrintStream
 
 class JpsKotlinCompilerRunner {
-    private val log: KotlinLogger = JpsKotlinLogger(KotlinBuilder.LOG)
+    private konst log: KotlinLogger = JpsKotlinLogger(KotlinBuilder.LOG)
 
     private var compilerSettings: CompilerSettings? = null
 
     private inline fun withCompilerSettings(settings: CompilerSettings, fn: () -> Unit) {
-        val old = compilerSettings
+        konst old = compilerSettings
         try {
             compilerSettings = settings
             fn()
@@ -85,7 +85,7 @@ class JpsKotlinCompilerRunner {
             return _jpsCompileServiceSession
         }
 
-        const val FAIL_ON_FALLBACK_PROPERTY = "test.kotlin.jps.compiler.runner.fail.on.fallback"
+        const konst FAIL_ON_FALLBACK_PROPERTY = "test.kotlin.jps.compiler.runner.fail.on.fallback"
     }
 
     fun classesFqNamesByFiles(
@@ -114,9 +114,9 @@ class JpsKotlinCompilerRunner {
         classpath: Collection<String>,
         sourceFiles: Collection<File>
     ) {
-        val arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2MetadataArguments))
+        konst arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2MetadataArguments))
 
-        val classpathSet = arguments.classpath?.split(File.pathSeparator)?.toMutableSet() ?: mutableSetOf()
+        konst classpathSet = arguments.classpath?.split(File.pathSeparator)?.toMutableSet() ?: mutableSetOf()
         classpathSet.addAll(classpath)
         arguments.classpath = classpath.joinToString(File.pathSeparator)
         arguments.freeArgs = sourceFiles.map { it.absolutePath }
@@ -134,7 +134,7 @@ class JpsKotlinCompilerRunner {
         environment: JpsCompilerEnvironment,
         moduleFile: File
     ) {
-        val arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2jvmArguments))
+        konst arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2jvmArguments))
         setupK2JvmArguments(moduleFile, arguments)
         withCompilerSettings(compilerSettings) {
             runCompiler(KotlinCompilerClass.JVM, arguments, environment)
@@ -156,7 +156,7 @@ class JpsKotlinCompilerRunner {
         log.debug("K2JS: common arguments: " + ArgumentUtils.convertArgumentsToStringList(commonArguments))
         log.debug("K2JS: JS arguments: " + ArgumentUtils.convertArgumentsToStringList(k2jsArguments))
 
-        val arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2jsArguments))
+        konst arguments = mergeBeans(commonArguments, XmlSerializerUtil.createCopy(k2jsArguments))
         log.debug("K2JS: merged arguments: " + ArgumentUtils.convertArgumentsToStringList(arguments))
 
         setupK2JsArguments(outputFile, allSourceFiles, commonSources, libraries, friendModules, arguments)
@@ -198,15 +198,15 @@ class JpsKotlinCompilerRunner {
         compilerArgs: CommonCompilerArguments,
         environment: JpsCompilerEnvironment
     ): Int? {
-        val targetPlatform = when (compilerClassName) {
+        konst targetPlatform = when (compilerClassName) {
             KotlinCompilerClass.JVM -> CompileService.TargetPlatform.JVM
             KotlinCompilerClass.JS -> CompileService.TargetPlatform.JS
             KotlinCompilerClass.METADATA -> CompileService.TargetPlatform.METADATA
             else -> throw IllegalArgumentException("Unknown compiler type $compilerClassName")
         }
-        val compilerMode = CompilerMode.JPS_COMPILER
-        val verbose = compilerArgs.verbose
-        val options = CompilationOptions(
+        konst compilerMode = CompilerMode.JPS_COMPILER
+        konst verbose = compilerArgs.verbose
+        konst options = CompilationOptions(
             compilerMode,
             targetPlatform,
             reportCategories(verbose),
@@ -239,30 +239,30 @@ class JpsKotlinCompilerRunner {
         fn: (sessionId: Int, daemon: CompileService) -> CompileService.CallResult<T>
     ): T? {
         log.debug("Try to connect to daemon")
-        val connection = getDaemonConnection(environment)
+        konst connection = getDaemonConnection(environment)
         if (connection == null) {
             log.info("Could not connect to daemon")
             return null
         }
 
-        val (daemon, sessionId) = connection
-        val res = fn(sessionId, daemon)
+        konst (daemon, sessionId) = connection
+        konst res = fn(sessionId, daemon)
         // TODO: consider implementing connection retry, instead of fallback here
         return res.takeUnless { it is CompileService.CallResult.Dying }?.get()
     }
 
     private fun withAdditionalCompilerArgs(compilerArgs: CommonCompilerArguments): Array<String> {
-        val allArgs = ArgumentUtils.convertArgumentsToStringList(compilerArgs) +
+        konst allArgs = ArgumentUtils.convertArgumentsToStringList(compilerArgs) +
                 (compilerSettings?.additionalArgumentsAsList ?: emptyList())
         return allArgs.toTypedArray()
     }
 
     private fun reportCategories(verbose: Boolean): Array<Int> {
-        val categories =
+        konst categories =
             if (!verbose) {
                 arrayOf(ReportCategory.COMPILER_MESSAGE, ReportCategory.EXCEPTION)
             } else {
-                ReportCategory.values()
+                ReportCategory.konstues()
             }
 
         return categories.map { it.code }.toTypedArray()
@@ -288,23 +288,23 @@ class JpsKotlinCompilerRunner {
         // otherwise fallback to in-process
         log.info("Compile in-process")
 
-        val stream = ByteArrayOutputStream()
-        val out = PrintStream(stream)
+        konst stream = ByteArrayOutputStream()
+        konst out = PrintStream(stream)
 
         // the property should be set at least for parallel builds to avoid parallel building problems (racing between destroying and using environment)
         // unfortunately it cannot be currently set by default globally, because it breaks many tests
         // since there is no reliable way so far to detect running under tests, switching it on only for parallel builds
         if (System.getProperty(GlobalOptions.COMPILE_PARALLEL_OPTION, "false").toBoolean())
-            CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.value = "true"
+            CompilerSystemProperties.KOTLIN_COMPILER_ENVIRONMENT_KEEPALIVE_PROPERTY.konstue = "true"
 
-        val rc = environment.withProgressReporter { progress ->
+        konst rc = environment.withProgressReporter { progress ->
             progress.compilationStarted()
             CompilerRunnerUtil.invokeExecMethod(compilerClassName, withAdditionalCompilerArgs(compilerArgs), environment, out)
         }
 
         // exec() returns an ExitCode object, class of which is loaded with a different class loader,
         // so we take it's contents through reflection
-        val exitCode = ExitCode.valueOf(getReturnCodeFromObject(rc))
+        konst exitCode = ExitCode.konstueOf(getReturnCodeFromObject(rc))
         processCompilerOutput(environment.messageCollector, environment.outputItemsCollector, stream, exitCode)
     }
 
@@ -346,19 +346,19 @@ class JpsKotlinCompilerRunner {
     private fun getDaemonConnection(environment: JpsCompilerEnvironment): CompileServiceSession? =
         getOrCreateDaemonConnection {
             environment.progressReporter.progress("connecting to daemon")
-            val libPath = CompilerRunnerUtil.getLibPath(environment.kotlinPaths, environment.messageCollector)
-            val compilerPath = File(libPath, "kotlin-compiler.jar")
-            val daemonJarPath = File(libPath, "kotlin-daemon.jar")
-            val toolsJarPath = CompilerRunnerUtil.jdkToolsJar
-            val compilerId = CompilerId.makeCompilerId(listOfNotNull(compilerPath, toolsJarPath, daemonJarPath))
-            val daemonOptions = configureDaemonOptions()
-            val additionalJvmParams = mutableListOf<String>()
+            konst libPath = CompilerRunnerUtil.getLibPath(environment.kotlinPaths, environment.messageCollector)
+            konst compilerPath = File(libPath, "kotlin-compiler.jar")
+            konst daemonJarPath = File(libPath, "kotlin-daemon.jar")
+            konst toolsJarPath = CompilerRunnerUtil.jdkToolsJar
+            konst compilerId = CompilerId.makeCompilerId(listOfNotNull(compilerPath, toolsJarPath, daemonJarPath))
+            konst daemonOptions = configureDaemonOptions()
+            konst additionalJvmParams = mutableListOf<String>()
 
             @Suppress("DEPRECATION")
             IncrementalCompilation.toJvmArgs(additionalJvmParams)
 
-            val clientFlagFile = KotlinCompilerClient.getOrCreateClientFlagFile(daemonOptions)
-            val sessionFlagFile = makeAutodeletingFlagFile("compiler-jps-session-", File(daemonOptions.runFilesPathOrDefault))
+            konst clientFlagFile = KotlinCompilerClient.getOrCreateClientFlagFile(daemonOptions)
+            konst sessionFlagFile = makeAutodeletingFlagFile("compiler-jps-session-", File(daemonOptions.runFilesPathOrDefault))
 
             environment.withProgressReporter { progress ->
                 progress.progress("connecting to daemon")

@@ -2,7 +2,7 @@ package
 
 public final external class C {
     public constructor C()
-    private final val b: kotlin.String
+    private final konst b: kotlin.String
     private final var c: kotlin.Float
     private final var d: kotlin.Float
     public final var e: kotlin.Float
@@ -14,7 +14,7 @@ public final external class C {
 
 public external object O {
     private constructor O()
-    private final val b: kotlin.String
+    private final konst b: kotlin.String
     private final var c: kotlin.Float
     private final var d: kotlin.Float
     private final fun a(): kotlin.Int
@@ -31,7 +31,7 @@ public final external class Outer {
 
     public final class Inner {
         public constructor Inner()
-        private final val b: kotlin.String
+        private final konst b: kotlin.String
         private final var c: kotlin.Float
         private final var d: kotlin.Float
         private final fun a(): kotlin.Int

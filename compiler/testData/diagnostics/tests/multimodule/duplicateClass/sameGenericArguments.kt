@@ -7,7 +7,7 @@ package p
 
 public class A<T>
 public class M1 {
-    public val a: A<Int> = A()
+    public konst a: A<Int> = A()
 }
 
 // MODULE: m2

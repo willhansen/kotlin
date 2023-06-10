@@ -12,7 +12,7 @@ fun foo(
 }
 
 fun box(): String {
-    val ref = ::foo
+    konst ref = ::foo
     if (ref is Function0<*>) return "Fail 0"
     if (ref is Function1<*, *>) return "Fail 1"
     if (ref !is Function30<*, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *, *>) return "Fail 30"

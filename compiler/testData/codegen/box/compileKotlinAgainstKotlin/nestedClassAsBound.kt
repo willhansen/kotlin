@@ -2,7 +2,7 @@
 // FILE: Q.kt
 class Q<T : Q.S> {
     open class S {
-        val ok = "OK"
+        konst ok = "OK"
     }
 }
 // MODULE: main(lib)

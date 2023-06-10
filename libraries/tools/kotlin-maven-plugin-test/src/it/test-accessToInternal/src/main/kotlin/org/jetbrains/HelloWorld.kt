@@ -24,13 +24,13 @@ internal fun getGreeting() : String {
     return "Hello, World!"
 }
 
-internal val CONST = "CONST"
+internal konst CONST = "CONST"
 
 open class PublicClass {
     internal fun foo(): String = "foo"
-    internal val bar: String = "bar"
+    internal konst bar: String = "bar"
     open internal fun baz(): String = "PublicClass.baz()"
 }
 
-internal data class InternalDataClass(val x: Int, val y: Int)
+internal data class InternalDataClass(konst x: Int, konst y: Int)
 

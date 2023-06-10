@@ -6,20 +6,20 @@ import checkSubtype
 
 //KT-2234 'period!!' has type Int?
 
-class Pair<A, B>(val a: A, val b: B)
+class Pair<A, B>(konst a: A, konst b: B)
 
 fun main() {
-    val d : Long = 1
-    val period : Int? = null
+    konst d : Long = 1
+    konst period : Int? = null
     if (period != null) Pair(d, checkSubtype<Int>(period<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)) else Pair(d, 1)
     if (period != null) Pair(d, checkSubtype<Int>(<!DEBUG_INFO_SMARTCAST!>period<!>)) else Pair(d, 1)
 }
 
 fun foo() {
-    val x : Int? = 3
+    konst x : Int? = 3
     if (x != null)  {
-        val u = checkSubtype<Int>(x<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)
-        val y = checkSubtype<Int>(<!DEBUG_INFO_SMARTCAST!>x<!>)
-        val z : Int = y
+        konst u = checkSubtype<Int>(x<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)
+        konst y = checkSubtype<Int>(<!DEBUG_INFO_SMARTCAST!>x<!>)
+        konst z : Int = y
     }
 }

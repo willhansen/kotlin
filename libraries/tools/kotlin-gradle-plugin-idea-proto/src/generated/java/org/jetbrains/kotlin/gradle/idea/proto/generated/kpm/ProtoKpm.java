@@ -274,7 +274,7 @@ public final class ProtoKpm {
       ".org.jetbrains.kotlin.gradle.idea.proto." +
       "generated.kpm.IdeaKpmCompilationOutputPr" +
       "otoH\002\210\001\001\0328\n\026VariantAttributesEntry\022\013\n\003ke" +
-      "y\030\001 \001(\t\022\r\n\005value\030\002 \001(\t:\0028\001B\013\n\t_fragmentB" +
+      "y\030\001 \001(\t\022\r\n\005konstue\030\002 \001(\t:\0028\001B\013\n\t_fragmentB" +
       "\013\n\t_platformB\025\n\023_compilation_output\"\262\003\n\022" +
       "IdeaKpmModuleProto\022V\n\006extras\030\001 \001(\0132A.org" +
       ".jetbrains.kotlin.gradle.idea.proto.gene" +

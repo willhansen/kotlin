@@ -6,7 +6,7 @@ enum class IssueState {
         fun s()  = "OK"
 
         inner class D {
-            val k = s()
+            konst k = s()
         }
     };
 

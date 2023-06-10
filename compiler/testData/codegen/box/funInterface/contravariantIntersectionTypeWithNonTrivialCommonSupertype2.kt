@@ -8,7 +8,7 @@ interface A : Top, Unrelated
 interface B : Top, Unrelated
 
 fun box(): String {
-    val g = when ("".length) {
+    konst g = when ("".length) {
         0 -> G<A>()
         else -> G<B>()
     }

@@ -34,14 +34,14 @@ sink:
 =====================
 == foo ==
 fun foo(): String {
-    val x = fn()?.let { throw Exception() } ?: "unreachable?"
+    konst x = fn()?.let { throw Exception() } ?: "unreachable?"
     return x
 }
 ---------------------
 L0:
   1 <START>
-  2 mark({ val x = fn()?.let { throw Exception() } ?: "unreachable?" return x })
-    v(val x = fn()?.let { throw Exception() } ?: "unreachable?")
+  2 mark({ konst x = fn()?.let { throw Exception() } ?: "unreachable?" return x })
+    v(konst x = fn()?.let { throw Exception() } ?: "unreachable?")
     mark(fn()?.let { throw Exception() })
     jf(L2)                                                                          NEXT:[mark(fn()?.let { throw Exception() } ?: "unreachable?"), mark(fn())]
     mark(fn())
@@ -90,15 +90,15 @@ sink:
 =====================
 == bar ==
 fun bar(): String {
-    val x = fn() ?: return ""
-    val y = x?.let { throw Exception() } ?: "unreachable"
+    konst x = fn() ?: return ""
+    konst y = x?.let { throw Exception() } ?: "unreachable"
     return y
 }
 ---------------------
 L0:
   1 <START>
-  2 mark({ val x = fn() ?: return "" val y = x?.let { throw Exception() } ?: "unreachable" return y })
-    v(val x = fn() ?: return "")
+  2 mark({ konst x = fn() ?: return "" konst y = x?.let { throw Exception() } ?: "unreachable" return y })
+    v(konst x = fn() ?: return "")
     mark(fn())
     call(fn(), fn) -> <v0>
     mark(fn() ?: return "")
@@ -109,7 +109,7 @@ L0:
 L2 [after elvis operator]:
     merge(fn() ?: return ""|<v0>, !<v2>) -> <v3>                                                          PREV:[jt(L2|<v0>)]
     w(x|<v3>)
-    v(val y = x?.let { throw Exception() } ?: "unreachable")
+    v(konst y = x?.let { throw Exception() } ?: "unreachable")
     mark(x?.let { throw Exception() })
     jf(L3)                                                                                                NEXT:[jmp(error), r(x) -> <v4>]
     r(x) -> <v4>

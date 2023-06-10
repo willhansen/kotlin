@@ -29,7 +29,7 @@ object ZImpl : IZ {
 }
 
 fun box(): String {
-    val zz = implZZ(ZImpl) { result += "K" }
+    konst zz = implZZ(ZImpl) { result += "K" }
     zz.z()
     zz.zz()
     return result

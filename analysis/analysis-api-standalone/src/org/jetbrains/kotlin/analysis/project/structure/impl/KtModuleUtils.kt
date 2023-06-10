@@ -68,7 +68,7 @@ internal fun getSourceFilePaths(
 ): Set<String> {
     return buildSet {
         compilerConfig.javaSourceRoots.forEach { srcRoot ->
-            val path = Paths.get(srcRoot)
+            konst path = Paths.get(srcRoot)
             if (Files.isDirectory(path)) {
                 // E.g., project/app/src
                 collectSourceFilePaths(path, this)
@@ -110,7 +110,7 @@ private fun collectSourceFilePaths(
             override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {
                 if (!Files.isRegularFile(file) || !Files.isReadable(file))
                     return FileVisitResult.CONTINUE
-                val ext = getFileExtension(file.fileName.toString())
+                konst ext = getFileExtension(file.fileName.toString())
                 if (ext == KotlinFileType.EXTENSION ||
                     ext == KotlinParserDefinition.STD_SCRIPT_SUFFIX ||
                     ext == JavaFileType.DEFAULT_EXTENSION
@@ -124,7 +124,7 @@ private fun collectSourceFilePaths(
                 // TODO: report or log [IOException]?
                 // NB: this intentionally swallows the exception, hence fail-safe.
                 // Skipping subtree doesn't make any sense, since this is not a directory.
-                // Skipping sibling may drop valid file paths afterward, so we just continue.
+                // Skipping sibling may drop konstid file paths afterward, so we just continue.
                 return FileVisitResult.CONTINUE
             }
         }
@@ -135,12 +135,12 @@ internal inline fun <reified T : PsiFileSystemItem> getPsiFilesFromPaths(
     project: Project,
     paths: Collection<String>,
 ): List<T> {
-    val fs = StandardFileSystems.local()
-    val psiManager = PsiManager.getInstance(project)
+    konst fs = StandardFileSystems.local()
+    konst psiManager = PsiManager.getInstance(project)
     return buildList {
         for (path in paths) {
-            val vFile = fs.findFileByPath(path) ?: continue
-            val psiFileSystemItem =
+            konst vFile = fs.findFileByPath(path) ?: continue
+            konst psiFileSystemItem =
                 if (vFile.isDirectory)
                     psiManager.findDirectory(vFile) as? T
                 else
@@ -155,11 +155,11 @@ internal fun buildKtModuleProviderByCompilerConfiguration(
     project: Project,
     ktFiles: List<KtFile>,
 ): ProjectStructureProvider = buildProjectStructureProvider {
-    val (scriptFiles, ordinaryFiles) = ktFiles.partition { it.isScript() }
-    val platform = JvmPlatforms.defaultJvmPlatform
+    konst (scriptFiles, ordinaryFiles) = ktFiles.partition { it.isScript() }
+    konst platform = JvmPlatforms.defaultJvmPlatform
 
     fun KtModuleBuilder.addModuleDependencies(moduleName: String) {
-        val libraryRoots = compilerConfig.jvmModularRoots + compilerConfig.jvmClasspathRoots
+        konst libraryRoots = compilerConfig.jvmModularRoots + compilerConfig.jvmClasspathRoots
         addRegularDependency(
             buildKtLibraryModule {
                 contentScope = ProjectScope.getLibrariesScope(project)
@@ -170,10 +170,10 @@ internal fun buildKtModuleProviderByCompilerConfiguration(
             }
         )
         compilerConfig.get(JVMConfigurationKeys.JDK_HOME)?.let { jdkHome ->
-            val vfm = VirtualFileManager.getInstance()
-            val jdkHomePath = jdkHome.toPath()
-            val jdkHomeVirtualFile = vfm.findFileByNioPath(jdkHomePath)
-            val binaryRoots = LibraryUtils.findClassesFromJdkHome(jdkHomePath).map {
+            konst vfm = VirtualFileManager.getInstance()
+            konst jdkHomePath = jdkHome.toPath()
+            konst jdkHomeVirtualFile = vfm.findFileByNioPath(jdkHomePath)
+            konst binaryRoots = LibraryUtils.findClassesFromJdkHome(jdkHomePath).map {
                 Paths.get(URLUtil.extractPath(it))
             }
             addRegularDependency(
@@ -188,7 +188,7 @@ internal fun buildKtModuleProviderByCompilerConfiguration(
         }
     }
 
-    val configLanguageVersionSettings = compilerConfig[CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS]
+    konst configLanguageVersionSettings = compilerConfig[CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS]
 
     for (scriptFile in scriptFiles) {
         buildKtScriptModule {

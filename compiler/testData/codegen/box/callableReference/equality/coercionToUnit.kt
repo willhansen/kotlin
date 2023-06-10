@@ -24,7 +24,7 @@ private fun captureStringBound(f: () -> String): Any = f
 private fun captureUnitBound(f: () -> Unit): Any = f
 
 fun box(): String {
-    val v0 = V()
+    konst v0 = V()
     
     checkEqual(captureString(V::target), captureString(V::target))
     checkEqual(captureString(V::target), captureStringFromOtherFile())
@@ -41,7 +41,7 @@ fun box(): String {
     checkNotEqual(captureStringBound(v0::target), captureUnitBound(v0::target))
     checkNotEqual(captureString(V::target), captureUnitBoundFromOtherFile(v0))
 
-    val v1 = V()
+    konst v1 = V()
     checkNotEqual(captureStringBound(v0::target), captureStringBound(v1::target))
     checkNotEqual(captureUnitBound(v0::target), captureUnitBound(v1::target))
 

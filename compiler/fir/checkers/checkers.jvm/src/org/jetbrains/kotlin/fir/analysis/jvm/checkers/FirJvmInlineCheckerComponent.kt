@@ -30,7 +30,7 @@ class FirJvmInlineCheckerComponent : FirInlineCheckerPlatformSpecificComponent()
         }
     }
 
-    override val inlineVisitor get() = ::JvmInlineVisitor
+    override konst inlineVisitor get() = ::JvmInlineVisitor
 
     override fun checkSuspendFunctionalParameterWithDefaultValue(
         param: FirValueParameter,
@@ -40,7 +40,7 @@ class FirJvmInlineCheckerComponent : FirInlineCheckerPlatformSpecificComponent()
         reporter.reportOn(
             param.source,
             FirErrors.NOT_YET_SUPPORTED_IN_INLINE,
-            "Suspend functional parameters with default values",
+            "Suspend functional parameters with default konstues",
             context
         )
     }
@@ -51,18 +51,18 @@ class FirJvmInlineCheckerComponent : FirInlineCheckerPlatformSpecificComponent()
         reporter: DiagnosticReporter,
         overriddenSymbols: List<FirCallableSymbol<out FirCallableDeclaration>>,
     ) {
-        val paramsWithDefaults = overriddenSymbols.flatMap {
+        konst paramsWithDefaults = overriddenSymbols.flatMap {
             if (it !is FirFunctionSymbol<*>) return@flatMap emptyList<Int>()
-            it.valueParameterSymbols.mapIndexedNotNull { idx, param ->
+            it.konstueParameterSymbols.mapIndexedNotNull { idx, param ->
                 idx.takeIf { param.hasDefaultValue }
             }
         }.toSet()
-        function.valueParameters.forEachIndexed { idx, param ->
+        function.konstueParameters.forEachIndexed { idx, param ->
             if (param.defaultValue == null && paramsWithDefaults.contains(idx)) {
                 reporter.reportOn(
                     param.source,
                     FirErrors.NOT_YET_SUPPORTED_IN_INLINE,
-                    "Functional parameters with inherited default values",
+                    "Functional parameters with inherited default konstues",
                     context
                 )
             }

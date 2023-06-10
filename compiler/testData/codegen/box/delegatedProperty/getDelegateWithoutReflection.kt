@@ -13,7 +13,7 @@ object Delegate {
     operator fun getValue(instance: Any?, property: KProperty<*>) = ""
 }
 
-val foo: String by Delegate
+konst foo: String by Delegate
 
 fun box(): String {
     try {

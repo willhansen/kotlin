@@ -20,7 +20,7 @@ public interface KtFunctionalTypeRenderer {
     public object AS_FUNCTIONAL_TYPE : KtFunctionalTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtFunctionalType, printer: PrettyPrinter): Unit = printer {
-            val annotationsRendered = checkIfPrinted { annotationsRenderer.renderAnnotations(type, this) }
+            konst annotationsRendered = checkIfPrinted { annotationsRenderer.renderAnnotations(type, this) }
             if (annotationsRendered) printer.append(" ")
             if (annotationsRendered || type.nullability == KtTypeNullability.NULLABLE) append("(")
             " ".separated(
@@ -66,7 +66,7 @@ public interface KtFunctionalTypeRenderer {
     public object AS_CLASS_TYPE_FOR_REFLECTION_TYPES : KtFunctionalTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtFunctionalType, printer: PrettyPrinter): Unit {
-            val renderer = if (type.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE
+            konst renderer = if (type.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE
             renderer.renderType(type, printer)
         }
     }
@@ -74,9 +74,9 @@ public interface KtFunctionalTypeRenderer {
     public object AS_FULLY_EXPANDED_CLASS_TYPE_FOR_REFELCTION_TYPES : KtFunctionalTypeRenderer {
         context(KtAnalysisSession, KtTypeRenderer)
         override fun renderType(type: KtFunctionalType, printer: PrettyPrinter) {
-            val fullyExpandedType = type.fullyExpandedType
+            konst fullyExpandedType = type.fullyExpandedType
             if (fullyExpandedType is KtFunctionalType) {
-                val renderer = if (fullyExpandedType.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE
+                konst renderer = if (fullyExpandedType.isReflectType) AS_CLASS_TYPE else AS_FUNCTIONAL_TYPE
                 renderer.renderType(fullyExpandedType, printer)
             } else {
                 renderType(fullyExpandedType, printer)

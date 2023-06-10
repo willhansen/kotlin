@@ -14,10 +14,10 @@ FILE: annotationClassMember.kt
         public final fun foo(): R|kotlin/Unit| {
         }
 
-        public final val bar: R|kotlin/Nothing?|
+        public final konst bar: R|kotlin/Nothing?|
             public get(): R|kotlin/Nothing?|
 
-        public final val baz: R|kotlin/Unit|
+        public final konst baz: R|kotlin/Unit|
             public get(): R|kotlin/Unit| {
                 ^ Q|kotlin/Unit|
             }

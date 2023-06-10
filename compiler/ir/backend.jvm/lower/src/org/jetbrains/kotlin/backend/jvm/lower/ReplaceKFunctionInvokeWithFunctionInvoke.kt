@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-internal val replaceKFunctionInvokeWithFunctionInvokePhase = makeIrFilePhase<JvmBackendContext>(
+internal konst replaceKFunctionInvokeWithFunctionInvokePhase = makeIrFilePhase<JvmBackendContext>(
     { ReplaceKFunctionInvokeWithFunctionInvoke() },
     name = "ReplaceKFunctionInvokeWithFunctionInvoke",
     description = "Replace KFunction{n}.invoke with Function{n}.invoke"
@@ -41,26 +41,26 @@ private class ReplaceKFunctionInvokeWithFunctionInvoke : FileLoweringPass, IrEle
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         if (callee.name != OperatorNameConventions.INVOKE) return super.visitCall(expression)
 
-        val parentClass = callee.parent as? IrClass ?: return super.visitCall(expression)
+        konst parentClass = callee.parent as? IrClass ?: return super.visitCall(expression)
         if (!parentClass.defaultType.isKFunction() && !parentClass.defaultType.isKSuspendFunction()) {
             implicitCastKFunctionReceiverIntoFunctionIfNeeded(expression, parentClass)
             return super.visitCall(expression)
         }
 
         // The single overridden function of KFunction{n}.invoke must be Function{n}.invoke.
-        val newCallee = callee.overriddenSymbols.single()
+        konst newCallee = callee.overriddenSymbols.single()
         return expression.run {
             IrCallImpl.fromSymbolOwner(startOffset, endOffset, type, newCallee).apply {
                 copyTypeArgumentsFrom(expression)
                 dispatchReceiver = expression.dispatchReceiver?.transform(this@ReplaceKFunctionInvokeWithFunctionInvoke, null)?.let {
-                    val newType = newCallee.owner.parentAsClass.defaultType
+                    konst newType = newCallee.owner.parentAsClass.defaultType
                     IrTypeOperatorCallImpl(startOffset, endOffset, newType, IrTypeOperator.IMPLICIT_CAST, newType, it)
                 }
                 extensionReceiver = expression.extensionReceiver?.transform(this@ReplaceKFunctionInvokeWithFunctionInvoke, null)
-                for (i in 0 until valueArgumentsCount) {
+                for (i in 0 until konstueArgumentsCount) {
                     putValueArgument(i, expression.getValueArgument(i)?.transform(this@ReplaceKFunctionInvokeWithFunctionInvoke, null))
                 }
             }
@@ -69,9 +69,9 @@ private class ReplaceKFunctionInvokeWithFunctionInvoke : FileLoweringPass, IrEle
 
     // This method suppose to cover case when we have `Function{n}.invoke` but receiver has type of `KFunction`
     private fun implicitCastKFunctionReceiverIntoFunctionIfNeeded(expression: IrCall, parentClass: IrClass) {
-        val receiver = expression.dispatchReceiver
+        konst receiver = expression.dispatchReceiver
         if (receiver != null && (receiver.type.isKFunction() || receiver.type.isKSuspendFunction())) {
-            val newType = parentClass.defaultType
+            konst newType = parentClass.defaultType
 
             expression.dispatchReceiver = IrTypeOperatorCallImpl(
                 expression.startOffset, expression.endOffset, newType, IrTypeOperator.IMPLICIT_CAST, newType, receiver.transform(this, null)

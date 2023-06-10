@@ -1,7 +1,7 @@
 FILE: [ResolvedTo(IMPORTS)] annonymousClass.kt
     [ResolvedTo(BODY_RESOLVE)] annotations container
     public final [ResolvedTo(BODY_RESOLVE)] fun x(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval x: R|<anonymous>| = object : R|kotlin/Any| {
+        [ResolvedTo(BODY_RESOLVE)] lkonst x: R|<anonymous>| = object : R|kotlin/Any| {
             private [ResolvedTo(BODY_RESOLVE)] constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }

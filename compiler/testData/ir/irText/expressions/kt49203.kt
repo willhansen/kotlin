@@ -1,10 +1,10 @@
 // SKIP_KT_DUMP
 
 class X {
-    var value = ""
+    var konstue = ""
 
     operator fun plusAssign(data: String) {
-        value += data
+        konstue += data
     }
 }
 

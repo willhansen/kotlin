@@ -12,17 +12,17 @@
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val x: Int = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    konst x: Int = <!NULL_FOR_NONNULL_TYPE!>null<!>
 }
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val x: Any = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    konst x: Any = <!NULL_FOR_NONNULL_TYPE!>null<!>
 }
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val x: Nothing = <!NULL_FOR_NONNULL_TYPE!>null<!>
+    konst x: Nothing = <!NULL_FOR_NONNULL_TYPE!>null<!>
 }
 
 // TESTCASE NUMBER: 4
@@ -42,7 +42,7 @@ fun case_6() {
 
 // TESTCASE NUMBER: 7
 fun case_7() {
-    val x: Int
+    konst x: Int
     x = <!NULL_FOR_NONNULL_TYPE!>null<!>
 }
 
@@ -54,8 +54,8 @@ fun case_8() {
 
 // TESTCASE NUMBER: 9
 fun case_9() {
-    val x = null
-    val y: Int = <!DEBUG_INFO_CONSTANT, TYPE_MISMATCH!>x<!>
+    konst x = null
+    konst y: Int = <!DEBUG_INFO_CONSTANT, TYPE_MISMATCH!>x<!>
 }
 
 // TESTCASE NUMBER: 10

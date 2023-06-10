@@ -4,4 +4,4 @@ fun doChain1(s: String?) = s?.drop2()?.length == 1
 
 fun doChain2(s: String?) = 1 == s?.drop2()?.length
 
-// 0 valueOf
+// 0 konstueOf

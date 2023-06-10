@@ -10,11 +10,11 @@ import com.intellij.psi.*
 
 // Based on com.intellij.psi.impl.light.LightParameter
 open class LightParameter @JvmOverloads constructor(
-    private val myName: String,
+    private konst myName: String,
     type: PsiType,
-    val method: KtLightMethod,
+    konst method: KtLightMethod,
     language: Language?,
-    private val myVarArgs: Boolean = type is PsiEllipsisType
+    private konst myVarArgs: Boolean = type is PsiEllipsisType
 ) : LightVariableBuilder(method.manager, myName, type, language),
     PsiParameter {
     override fun getDeclarationScope(): KtLightMethod = method
@@ -32,7 +32,7 @@ open class LightParameter @JvmOverloads constructor(
     override fun getName(): String = myName
 
     companion object {
-        val EMPTY_ARRAY = arrayOfNulls<LightParameter>(0)
+        konst EMPTY_ARRAY = arrayOfNulls<LightParameter>(0)
     }
 
 }

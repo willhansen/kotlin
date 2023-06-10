@@ -7,7 +7,7 @@ linkerOpts = -lwinhttp
 depends = posix windows
 ---
 // Note that some of definitions can overlap with definitions from platform.windows
-// Some of them have the same value (e.g. SECURITY_FLAG_IGNORE_UNKNOWN_CA),
+// Some of them have the same konstue (e.g. SECURITY_FLAG_IGNORE_UNKNOWN_CA),
 // Others do not (INTERNET_SCHEME_HTTP).
 // To make things simple and correct, we don't try to undefine them.
 // In case of collision, users can import declaration explicitly

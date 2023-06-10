@@ -3,9 +3,9 @@ package foo
 
 var global: String = ""
 
-fun <T> bar(s: String, value: T): T {
+fun <T> bar(s: String, konstue: T): T {
     global += s
-    return value
+    return konstue
 }
 
 fun <T> baz(vararg args: T): String {

@@ -30,7 +30,7 @@ class MySet : Set<String> {
   // CHECK:
   //   Mangled name: MySet{}size
   //   Public signature: /MySet.size|-6253659984320132064[0]
-  override val size: Int
+  override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: MySet#<get-size>(){}kotlin.Int
     //   Public signature: /MySet.size.<get-size>|-3941649985161900780[0]

@@ -12,7 +12,7 @@ class A {
 // FILE: 1.kt
 
 fun box(): String {
-    val args = arrayOf("Fail")
+    konst args = arrayOf("Fail")
     (A::main).let { it(args) }
     return args[0]
 }

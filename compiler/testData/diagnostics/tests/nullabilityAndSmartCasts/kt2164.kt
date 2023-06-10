@@ -4,7 +4,7 @@ package kt2164
 fun foo(x: Int): Int = x + 1
 
 fun main() {
-    val x: Int? = null
+    konst x: Int? = null
 
     foo(<!TYPE_MISMATCH!>x<!>)
 
@@ -30,7 +30,7 @@ fun main() {
     foo(x<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>)
     foo(<!DEBUG_INFO_SMARTCAST!>x<!>)
 
-    val y: Int? = null
+    konst y: Int? = null
     y!!
     y<!UNNECESSARY_NOT_NULL_ASSERTION!>!!<!>
     foo(<!DEBUG_INFO_SMARTCAST!>y<!>)

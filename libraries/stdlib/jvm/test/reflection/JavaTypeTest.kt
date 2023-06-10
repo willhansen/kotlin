@@ -132,8 +132,8 @@ class JavaTypeTest {
 
     @Test
     fun <U1, U2, U3 : U2> functionTypeVariables() where U2 : Number, U2 : Comparable<*> {
-        val m = this::class.java.declaredMethods.single { it.name == "functionTypeVariables" }
-        val tvs = m.typeParameters
+        konst m = this::class.java.declaredMethods.single { it.name == "functionTypeVariables" }
+        konst tvs = m.typeParameters
         parameterized(javaTypeOf<Set<U1>>()) { type ->
             typeVariable(type.actualTypeArguments.single()) { tv ->
                 assertEquals("U1", tv.name)
@@ -148,7 +148,7 @@ class JavaTypeTest {
         parameterized(javaTypeOf<Set<U2>>()) { type ->
             typeVariable(type.actualTypeArguments.single()) { tv ->
                 assertEquals("U2", tv.name)
-                val bounds = tv.bounds.toList()
+                konst bounds = tv.bounds.toList()
                 assertEquals(2, bounds.size)
                 assertEquals(Number::class.java, bounds[0])
                 parameterized(bounds[1]) { comparable ->
@@ -180,8 +180,8 @@ class JavaTypeTest {
 
     @Test
     fun classTypeVariables() {
-        val t1 = T1<Int, Int, Int>()
-        val tvs = T1::class.java.typeParameters
+        konst t1 = T1<Int, Int, Int>()
+        konst tvs = T1::class.java.typeParameters
         parameterized(t1.setOfV1()) { type ->
             typeVariable(type.actualTypeArguments.single()) { tv ->
                 assertEquals("V1", tv.name)
@@ -196,7 +196,7 @@ class JavaTypeTest {
         parameterized(t1.setOfV2()) { type ->
             typeVariable(type.actualTypeArguments.single()) { tv ->
                 assertEquals("V2", tv.name)
-                val bounds = tv.bounds.toList()
+                konst bounds = tv.bounds.toList()
                 assertEquals(2, bounds.size)
                 assertEquals(Number::class.java, bounds[0])
                 parameterized(bounds[1]) { comparable ->
@@ -258,7 +258,7 @@ class JavaTypeTest {
 
     @Test
     fun nestedTypes() {
-        val nestedGenericType = javaTypeOf<T3.Nested<IntRange>>()
+        konst nestedGenericType = javaTypeOf<T3.Nested<IntRange>>()
         parameterized(nestedGenericType) { type ->
             assertEquals(listOf(IntRange::class.java), type.actualTypeArguments.toList())
             assertEquals(T3::class.java, type.ownerType)
@@ -268,7 +268,7 @@ class JavaTypeTest {
         assertNotEquals(javaTypeOf<T3.Nested<String>>(), javaTypeOf<T3.Nested<Int>>())
 
 
-        val innerGenericType = javaTypeOf<T3<String, Unit>.Inner<IntRange>>()
+        konst innerGenericType = javaTypeOf<T3<String, Unit>.Inner<IntRange>>()
         parameterized(innerGenericType) { type ->
             assertEquals(listOf(IntRange::class.java), type.actualTypeArguments.toList())
             parameterized(type.ownerType) { ownerType ->
@@ -281,7 +281,7 @@ class JavaTypeTest {
         assertNotEquals(javaTypeOf<T3<String, Unit>.Inner<String>>(), javaTypeOf<T3<String, String>.Inner<String>>())
 
 
-        val deepInnerType = javaTypeOf<T3<Any, Int>.Inner<Char>.NonGeneric.DeepInner<Byte, Short>>()
+        konst deepInnerType = javaTypeOf<T3<Any, Int>.Inner<Char>.NonGeneric.DeepInner<Byte, Short>>()
         parameterized(deepInnerType) { deepInnerType ->
             assertEquals(listOf(Byte::class.javaObjectType, Short::class.javaObjectType), deepInnerType.actualTypeArguments.toList())
             parameterized(deepInnerType.ownerType) { nonGenericType ->
@@ -309,7 +309,7 @@ class JavaTypeTest {
     fun primitiveUpperBound() {
         parameterized(T4<Int>().setOfI()) { setOfI ->
             typeVariable(setOfI.actualTypeArguments.single()) { i ->
-                val bound = i.bounds.single()
+                konst bound = i.bounds.single()
                 assertEquals(Int::class.javaObjectType, bound)
                 assertNotEquals(Int::class.javaPrimitiveType, bound)
             }
@@ -332,7 +332,7 @@ class JavaTypeTest {
         block(type)
     }
 
-    private val Type.typeName: String
+    private konst Type.typeName: String
         // Calling getTypeName() via reflection because the interface method Type.getTypeName has only appeared in JDK 8.
         get() = (this::class.java.getDeclaredMethod("getTypeName").apply { isAccessible = true })(this) as String
 
@@ -352,7 +352,7 @@ class JavaTypeTest {
     private fun wildcardExtends(type: Type, block: (upperBound: Type) -> Unit) {
         wildcard(type) { argument ->
             assertEquals(emptyList(), argument.lowerBounds.toList())
-            val bound = argument.upperBounds.singleOrNull() ?: fail("Type is not an extends-wildcard: $type (${type::class.java.name})")
+            konst bound = argument.upperBounds.singleOrNull() ?: fail("Type is not an extends-wildcard: $type (${type::class.java.name})")
             block(bound)
         }
     }
@@ -361,7 +361,7 @@ class JavaTypeTest {
     private fun wildcardSuper(type: Type, block: (lowerBound: Type) -> Unit) {
         wildcard(type) { argument ->
             assertEquals(listOf(Any::class.java), argument.upperBounds.toList())
-            val bound = argument.lowerBounds.singleOrNull() ?: fail("Type is not a super-wildcard: $type (${type::class.java.name})")
+            konst bound = argument.lowerBounds.singleOrNull() ?: fail("Type is not a super-wildcard: $type (${type::class.java.name})")
             block(bound)
         }
     }

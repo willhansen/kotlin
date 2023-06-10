@@ -17,8 +17,8 @@ fun string(): String = null!!
 fun nullableString(): String? = null!!
 
 fun check(subCallable: KCallable<*>, superCallable: KCallable<*>) {
-    val subtype = subCallable.returnType
-    val supertype = superCallable.returnType
+    konst subtype = subCallable.returnType
+    konst supertype = superCallable.returnType
     assertTrue(subtype.isSubtypeOf(supertype))
     assertTrue(supertype.isSupertypeOf(subtype))
 }

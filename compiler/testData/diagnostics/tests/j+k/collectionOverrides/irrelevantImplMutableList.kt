@@ -111,7 +111,7 @@ public class A extends AImpl implements List<String> {
 class X : A()
 
 fun main() {
-    val x = X()
+    konst x = X()
     x[0]
     x.size
     x.remove("")

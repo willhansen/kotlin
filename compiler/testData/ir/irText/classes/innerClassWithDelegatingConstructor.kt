@@ -1,5 +1,5 @@
 class Outer {
-    inner class Inner(val x: Int) {
+    inner class Inner(konst x: Int) {
         constructor() : this(0)
     }
 }

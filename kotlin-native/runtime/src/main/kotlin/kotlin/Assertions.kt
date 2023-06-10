@@ -8,23 +8,23 @@ package kotlin
 import kotlin.experimental.ExperimentalNativeApi
 
 /**
- * Throws an [AssertionError] if the [value] is false
+ * Throws an [AssertionError] if the [konstue] is false
  * and runtime assertions have been enabled during compilation.
  */
 @Suppress("NOTHING_TO_INLINE")
 @ExperimentalNativeApi
-public inline fun assert(value: Boolean) {
-    assert(value) { "Assertion failed" }
+public inline fun assert(konstue: Boolean) {
+    assert(konstue) { "Assertion failed" }
 }
 
 /**
- * Throws an [AssertionError] calculated by [lazyMessage] if the [value] is false
+ * Throws an [AssertionError] calculated by [lazyMessage] if the [konstue] is false
  * and runtime assertions have been enabled during compilation.
  */
 @ExperimentalNativeApi
-public inline fun assert(value: Boolean, lazyMessage: () -> Any) {
-    if (!value) {
-        val message = lazyMessage()
+public inline fun assert(konstue: Boolean, lazyMessage: () -> Any) {
+    if (!konstue) {
+        konst message = lazyMessage()
         throw AssertionError(message)
     }
 }

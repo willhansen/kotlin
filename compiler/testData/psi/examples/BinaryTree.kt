@@ -1,13 +1,13 @@
 class BinaryTree<T> : IMutableSet<T> {
   private class TreeNode(
-    var value : T, var parent : TreeNode
+    var konstue : T, var parent : TreeNode
   ) {
     var left : TreeNode
     var right : TreeNode
 
   }
 
-  private val compare : MatchableComparison<T>
+  private konst compare : MatchableComparison<T>
   private var root : TreeNode
   private var version = 0
 
@@ -27,7 +27,7 @@ class BinaryTree<T> : IMutableSet<T> {
 
     fun contains(node : TreeNode, item : T) : Boolean {
       if (node == null) return false
-      when(compare(item, node.value)) {
+      when(compare(item, node.konstue)) {
         EQ -> true
         LS -> contains(node.left, item)
         GT -> contains(node.right, item)
@@ -46,14 +46,14 @@ class BinaryTree<T> : IMutableSet<T> {
     // In principle, this has access to item anyway, but then it's unreachable code
     // BAD: the naive implementation of ref will create H(T) ref objects, but can be optimized to create only one
     fun add(node : Ref<TreeNode?>, parent : TreeNode) : Boolean {
-      if (node.value == null) {
-        node.value = TreeNode(item, parent)
+      if (node.konstue == null) {
+        node.konstue = TreeNode(item, parent)
         return true
       }
-      when (compare(item, node.value.value)) {
+      when (compare(item, node.konstue.konstue)) {
         EQ -> false
-        LS -> add(ref node.value.left, node)
-        GT -> add(ref node.value.right, node)
+        LS -> add(ref node.konstue.left, node)
+        GT -> add(ref node.konstue.right, node)
       }
     }
 
@@ -63,7 +63,7 @@ class BinaryTree<T> : IMutableSet<T> {
         root = TreeNode(item, null)
         return true
       }
-      when (compare(item, node.value)) {
+      when (compare(item, node.konstue)) {
         EQ -> return false
         LS ->
           if (node.left == null) {
@@ -80,7 +80,7 @@ class BinaryTree<T> : IMutableSet<T> {
   }
 
   override fun remove(item : T) : Boolean {
-    val toRemove = find(root, item)
+    konst toRemove = find(root, item)
     if (toRemove == null) return false
     remove(toRemove)
     size--
@@ -89,7 +89,7 @@ class BinaryTree<T> : IMutableSet<T> {
 
     fun find(node : TreeNode) : TreeNode {
       if (node == null) return null
-      when (compare(item, node.value)) {
+      when (compare(item, node.konstue)) {
         EQ -> node
         LS -> find(node.left)
         GT -> find(node.right)
@@ -103,8 +103,8 @@ class BinaryTree<T> : IMutableSet<T> {
       //is TreeNode  #(null, right) -> replace(node, right)
       //is TreeNode  #(left, null) -> replace(node, left)
       //is TreeNode  #(left, right) -> {
-      //  val min = min(node.right)
-      //  node.value = min.value
+      //  konst min = min(node.right)
+      //  node.konstue = min.konstue
       //  remove(min)
       //}
     }
@@ -130,9 +130,9 @@ class BinaryTree<T> : IMutableSet<T> {
   override fun iterator() : IIterator<T> = mutableIterator()
 
   override fun mutableIterator() : IMutableIterator<T> = object : IMutableIterator {
-    val version = BinaryTree.this.version
-    val down = Stack<TreeNode>()
-    val up = Stack<TreeNode>()
+    konst version = BinaryTree.this.version
+    konst down = Stack<TreeNode>()
+    konst up = Stack<TreeNode>()
     var lastNode : TreeNode
 
     init {
@@ -146,13 +146,13 @@ class BinaryTree<T> : IMutableSet<T> {
       checkVersion()
 
       lastNode = nextNode()
-      return lastNode.value
+      return lastNode.konstue
     }
 
     private fun nextNode() : TreeNode {
       while (true) {
         if (!down.isEmpty) {
-          val curNode = down.pop()
+          konst curNode = down.pop()
           if (curNode.left != null) {
             up.push(curNode)
             down.push(curNode.left)
@@ -163,7 +163,7 @@ class BinaryTree<T> : IMutableSet<T> {
             return curNode;
           }
         } else {
-          val curNode = up.pop()
+          konst curNode = up.pop()
           if (curNode.right != null) {
             down.push(curNode.right)
           }
@@ -172,7 +172,7 @@ class BinaryTree<T> : IMutableSet<T> {
       }
     }
 
-    override val hasNext : Boolean
+    override konst hasNext : Boolean
       get() = !down.isEmpty || !up.isEmpty
 
 

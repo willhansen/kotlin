@@ -3,8 +3,8 @@
 // MODULE: lib
 // FILE: 2.kt
 abstract class A {
-    @JvmField val value: String = "OK"
-    fun f() = value
+    @JvmField konst konstue: String = "OK"
+    fun f() = konstue
 }
 
 abstract class B : A()
@@ -20,8 +20,8 @@ fun box(): String = D().f()
 
 // FILE: 2.kt
 abstract class A {
-    @JvmField val value: String = "OK"
-    fun f() = value
+    @JvmField konst konstue: String = "OK"
+    fun f() = konstue
 }
 
 abstract class B : A()

@@ -2,11 +2,11 @@
 // IGNORE_BACKEND: JS_IR
 // IGNORE_BACKEND: JS_IR_ES6
 
-abstract class Visibility(val name: String, val isPublicAPI: Boolean) {
-    open val internalDisplayName: String
+abstract class Visibility(konst name: String, konst isPublicAPI: Boolean) {
+    open konst internalDisplayName: String
         get() = name
 
-    open val externalDisplayName: String
+    open konst externalDisplayName: String
         get() = internalDisplayName
 
     abstract fun mustCheckInImports(): Boolean
@@ -18,7 +18,7 @@ object Visibilities {
     }
 
     object PrivateToThis : Visibility("private_to_this", isPublicAPI = false) {
-        override val internalDisplayName: String
+        override konst internalDisplayName: String
             get() = "private/*private to this*/"
 
         override fun mustCheckInImports(): Boolean = true
@@ -49,7 +49,7 @@ object Visibilities {
     object InvisibleFake : Visibility("invisible_fake", isPublicAPI = false) {
         override fun mustCheckInImports(): Boolean = true
 
-        override val externalDisplayName: String
+        override konst externalDisplayName: String
             get() = "invisible (private in a supertype)"
     }
 
@@ -59,7 +59,7 @@ object Visibilities {
         }
     }
 
-    private val ORDERED_VISIBILITIES: Map<Visibility, Int> = buildMap {
+    private konst ORDERED_VISIBILITIES: Map<Visibility, Int> = buildMap {
         put(PrivateToThis, 0)
         put(Private, 0)
         put(Internal, 1)

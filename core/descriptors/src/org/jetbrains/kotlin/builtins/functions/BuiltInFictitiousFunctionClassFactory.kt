@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.storage.StorageManager
  * Produces descriptors representing the fictitious classes for function types, such as kotlin.Function1 or kotlin.reflect.KFunction2.
  */
 class BuiltInFictitiousFunctionClassFactory(
-        private val storageManager: StorageManager,
-        private val module: ModuleDescriptor
+        private konst storageManager: StorageManager,
+        private konst module: ModuleDescriptor
 ) : ClassDescriptorFactory {
     @OptIn(AllowedToUsedOnlyInK1::class)
     override fun shouldCreateClass(packageFqName: FqName, name: Name): Boolean {
-        val string = name.asString()
+        konst string = name.asString()
         return (string.startsWith("Function") || string.startsWith("KFunction") ||
                 string.startsWith("SuspendFunction") || string.startsWith("KSuspendFunction")) // an optimization
                && FunctionTypeKindExtractor.Default.getFunctionalClassKindWithArity(packageFqName, string) != null
@@ -45,17 +45,17 @@ class BuiltInFictitiousFunctionClassFactory(
     override fun createClass(classId: ClassId): ClassDescriptor? {
         if (classId.isLocal || classId.isNestedClass) return null
 
-        val className = classId.relativeClassName.asString()
+        konst className = classId.relativeClassName.asString()
         if ("Function" !in className) return null // An optimization
 
-        val packageFqName = classId.packageFqName
-        val (kind, arity) = FunctionTypeKindExtractor.Default.getFunctionalClassKindWithArity(packageFqName, className) ?: return null
+        konst packageFqName = classId.packageFqName
+        konst (kind, arity) = FunctionTypeKindExtractor.Default.getFunctionalClassKindWithArity(packageFqName, className) ?: return null
 
 
-        val builtInsFragments = module.getPackage(packageFqName).fragments.filterIsInstance<BuiltInsPackageFragment>()
+        konst builtInsFragments = module.getPackage(packageFqName).fragments.filterIsInstance<BuiltInsPackageFragment>()
 
         // JS IR backend uses separate FunctionInterfacePackageFragment for function interfaces
-        val containingPackageFragment =
+        konst containingPackageFragment =
             builtInsFragments.filterIsInstance<FunctionInterfacePackageFragment>().firstOrNull() ?: builtInsFragments.first()
 
         return FunctionClassDescriptor(storageManager, containingPackageFragment, kind, arity)

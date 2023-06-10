@@ -19,9 +19,9 @@ fun testGroupSuite(
     return TestGroupSuite(DefaultTargetBackendComputer).apply(init)
 }
 
-class TestGroupSuite(val targetBackendComputer: TargetBackendComputer) {
-    private val _testGroups = mutableListOf<TestGroup>()
-    val testGroups: List<TestGroup>
+class TestGroupSuite(konst targetBackendComputer: TargetBackendComputer) {
+    private konst _testGroups = mutableListOf<TestGroup>()
+    konst testGroups: List<TestGroup>
         get() = _testGroups
 
     fun testGroup(
@@ -42,15 +42,15 @@ class TestGroupSuite(val targetBackendComputer: TargetBackendComputer) {
 }
 
 class TestGroup(
-    private val testsRoot: String,
-    val testDataRoot: String,
-    val testRunnerMethodName: String,
-    val additionalRunnerArguments: List<String> = emptyList(),
-    val annotations: List<AnnotationModel> = emptyList(),
-    val targetBackendComputer: TargetBackendComputer
+    private konst testsRoot: String,
+    konst testDataRoot: String,
+    konst testRunnerMethodName: String,
+    konst additionalRunnerArguments: List<String> = emptyList(),
+    konst annotations: List<AnnotationModel> = emptyList(),
+    konst targetBackendComputer: TargetBackendComputer
 ) {
-    private val _testClasses: MutableList<TestClass> = mutableListOf()
-    val testClasses: List<TestClass>
+    private konst _testClasses: MutableList<TestClass> = mutableListOf()
+    konst testClasses: List<TestClass>
         get() = _testClasses
 
     inline fun <reified T> testClass(
@@ -59,7 +59,7 @@ class TestGroup(
         annotations: List<AnnotationModel> = emptyList(),
         noinline init: TestClass.() -> Unit
     ) {
-        val testKClass = T::class
+        konst testKClass = T::class
         testClass(testKClass, testKClass.java.name, suiteTestClassName, useJunit4, annotations, init)
     }
 
@@ -75,20 +75,20 @@ class TestGroup(
     }
 
     inner class TestClass(
-        val testKClass: KClass<*>,
-        val baseTestClassName: String,
-        val suiteTestClassName: String,
-        val useJunit4: Boolean,
-        val annotations: List<AnnotationModel>,
-        val targetBackendComputer: TargetBackendComputer
+        konst testKClass: KClass<*>,
+        konst baseTestClassName: String,
+        konst suiteTestClassName: String,
+        konst useJunit4: Boolean,
+        konst annotations: List<AnnotationModel>,
+        konst targetBackendComputer: TargetBackendComputer
     ) {
-        val testDataRoot: String
+        konst testDataRoot: String
             get() = this@TestGroup.testDataRoot
-        val baseDir: String
+        konst baseDir: String
             get() = this@TestGroup.testsRoot
 
-        val testModels = ArrayList<TestClassModel>()
-        private val methodModels = mutableListOf<MethodModel>()
+        konst testModels = ArrayList<TestClassModel>()
+        private konst methodModels = mutableListOf<MethodModel>()
 
         fun method(method: MethodModel) {
             methodModels += method
@@ -104,7 +104,7 @@ class TestGroup(
             testMethod: String = "doTest",
             singleClass: Boolean = false, // if true then tests from subdirectories will be flattened to single class
             testClassName: String? = null, // specific name for generated test class
-            // which backend will be used in test. Specifying value may affect some test with
+            // which backend will be used in test. Specifying konstue may affect some test with
             // directives TARGET_BACKEND/DONT_TARGET_EXACT_BACKEND won't be generated
             targetBackend: TargetBackend? = null,
             excludeDirs: List<String> = listOf(),
@@ -113,11 +113,11 @@ class TestGroup(
             skipIgnored: Boolean = false, // pretty meaningless flag, affects only few test names in one test runner
             deep: Int? = null, // specifies how deep recursive search will follow directory with testdata
         ) {
-            val rootFile = File("$testDataRoot/$relativeRootPath")
-            val compiledPattern = Pattern.compile(pattern)
-            val compiledExcludedPattern = excludedPattern?.let { Pattern.compile(it) }
-            val className = testClassName ?: TestGeneratorUtil.fileNameToJavaIdentifier(rootFile)
-            val realTargetBackend = targetBackendComputer.compute(targetBackend, testKClass)
+            konst rootFile = File("$testDataRoot/$relativeRootPath")
+            konst compiledPattern = Pattern.compile(pattern)
+            konst compiledExcludedPattern = excludedPattern?.let { Pattern.compile(it) }
+            konst className = testClassName ?: TestGeneratorUtil.fileNameToJavaIdentifier(rootFile)
+            konst realTargetBackend = targetBackendComputer.compute(targetBackend, testKClass)
             testModels.add(
                 if (singleClass) {
                     if (excludeDirs.isNotEmpty()) error("excludeDirs is unsupported for SingleClassTestModel yet")

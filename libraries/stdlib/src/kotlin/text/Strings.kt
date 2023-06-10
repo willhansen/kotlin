@@ -81,8 +81,8 @@ public inline fun CharSequence.trim(predicate: (Char) -> Boolean): CharSequence 
     var startFound = false
 
     while (startIndex <= endIndex) {
-        val index = if (!startFound) startIndex else endIndex
-        val match = predicate(this[index])
+        konst index = if (!startFound) startIndex else endIndex
+        konst match = predicate(this[index])
 
         if (!startFound) {
             if (!match)
@@ -219,7 +219,7 @@ public fun CharSequence.padStart(length: Int, padChar: Char = ' '): CharSequence
     if (length <= this.length)
         return this.subSequence(0, this.length)
 
-    val sb = StringBuilder(length)
+    konst sb = StringBuilder(length)
     for (i in 1..(length - this.length))
         sb.append(padChar)
     sb.append(this)
@@ -254,7 +254,7 @@ public fun CharSequence.padEnd(length: Int, padChar: Char = ' '): CharSequence {
     if (length <= this.length)
         return this.subSequence(0, this.length)
 
-    val sb = StringBuilder(length)
+    konst sb = StringBuilder(length)
     sb.append(this)
     for (i in 1..(length - this.length))
         sb.append(padChar)
@@ -367,15 +367,15 @@ public inline fun <C, R> C.ifBlank(defaultValue: () -> R): R where C : CharSeque
     if (isBlank()) defaultValue() else this
 
 /**
- * Returns the range of valid character indices for this char sequence.
+ * Returns the range of konstid character indices for this char sequence.
  */
-public val CharSequence.indices: IntRange
+public konst CharSequence.indices: IntRange
     get() = 0..length - 1
 
 /**
  * Returns the index of the last character in the char sequence or -1 if it is empty.
  */
-public val CharSequence.lastIndex: Int
+public konst CharSequence.lastIndex: Int
     get() = this.length - 1
 
 /**
@@ -427,7 +427,7 @@ public fun CharSequence.substring(range: IntRange): String = subSequence(range.s
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringBefore(delimiter: Char, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(0, index)
 }
 
@@ -436,7 +436,7 @@ public fun String.substringBefore(delimiter: Char, missingDelimiterValue: String
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringBefore(delimiter: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(0, index)
 }
 
@@ -445,7 +445,7 @@ public fun String.substringBefore(delimiter: String, missingDelimiterValue: Stri
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringAfter(delimiter: Char, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(index + 1, length)
 }
 
@@ -454,7 +454,7 @@ public fun String.substringAfter(delimiter: Char, missingDelimiterValue: String 
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringAfter(delimiter: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(index + delimiter.length, length)
 }
 
@@ -463,7 +463,7 @@ public fun String.substringAfter(delimiter: String, missingDelimiterValue: Strin
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringBeforeLast(delimiter: Char, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(0, index)
 }
 
@@ -472,7 +472,7 @@ public fun String.substringBeforeLast(delimiter: Char, missingDelimiterValue: St
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringBeforeLast(delimiter: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(0, index)
 }
 
@@ -481,7 +481,7 @@ public fun String.substringBeforeLast(delimiter: String, missingDelimiterValue: 
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringAfterLast(delimiter: Char, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(index + 1, length)
 }
 
@@ -490,7 +490,7 @@ public fun String.substringAfterLast(delimiter: Char, missingDelimiterValue: Str
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.substringAfterLast(delimiter: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else substring(index + delimiter.length, length)
 }
 
@@ -503,7 +503,7 @@ public fun String.substringAfterLast(delimiter: String, missingDelimiterValue: S
 public fun CharSequence.replaceRange(startIndex: Int, endIndex: Int, replacement: CharSequence): CharSequence {
     if (endIndex < startIndex)
         throw IndexOutOfBoundsException("End index ($endIndex) is less than start index ($startIndex).")
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     sb.appendRange(this, 0, startIndex)
     sb.append(replacement)
     sb.appendRange(this, endIndex, length)
@@ -552,7 +552,7 @@ public fun CharSequence.removeRange(startIndex: Int, endIndex: Int): CharSequenc
     if (endIndex == startIndex)
         return this.subSequence(0, length)
 
-    val sb = StringBuilder(length - (endIndex - startIndex))
+    konst sb = StringBuilder(length - (endIndex - startIndex))
     sb.appendRange(this, 0, startIndex)
     sb.appendRange(this, endIndex, length)
     return sb
@@ -672,7 +672,7 @@ public fun String.removeSurrounding(delimiter: CharSequence): String = removeSur
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceBefore(delimiter: Char, replacement: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(0, index, replacement)
 }
 
@@ -681,7 +681,7 @@ public fun String.replaceBefore(delimiter: Char, replacement: String, missingDel
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceBefore(delimiter: String, replacement: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(0, index, replacement)
 }
 
@@ -690,7 +690,7 @@ public fun String.replaceBefore(delimiter: String, replacement: String, missingD
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceAfter(delimiter: Char, replacement: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(index + 1, length, replacement)
 }
 
@@ -699,7 +699,7 @@ public fun String.replaceAfter(delimiter: Char, replacement: String, missingDeli
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceAfter(delimiter: String, replacement: String, missingDelimiterValue: String = this): String {
-    val index = indexOf(delimiter)
+    konst index = indexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(index + delimiter.length, length, replacement)
 }
 
@@ -708,7 +708,7 @@ public fun String.replaceAfter(delimiter: String, replacement: String, missingDe
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceAfterLast(delimiter: String, replacement: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(index + delimiter.length, length, replacement)
 }
 
@@ -717,7 +717,7 @@ public fun String.replaceAfterLast(delimiter: String, replacement: String, missi
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceAfterLast(delimiter: Char, replacement: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(index + 1, length, replacement)
 }
 
@@ -726,7 +726,7 @@ public fun String.replaceAfterLast(delimiter: Char, replacement: String, missing
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceBeforeLast(delimiter: Char, replacement: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(0, index, replacement)
 }
 
@@ -735,7 +735,7 @@ public fun String.replaceBeforeLast(delimiter: Char, replacement: String, missin
  * If the string does not contain the delimiter, returns [missingDelimiterValue] which defaults to the original string.
  */
 public fun String.replaceBeforeLast(delimiter: String, replacement: String, missingDelimiterValue: String = this): String {
-    val index = lastIndexOf(delimiter)
+    konst index = lastIndexOf(delimiter)
     return if (index == -1) missingDelimiterValue else replaceRange(0, index, replacement)
 }
 
@@ -883,7 +883,7 @@ public fun CharSequence.endsWith(suffix: CharSequence, ignoreCase: Boolean = fal
  * @sample samples.text.Strings.commonPrefixWith
  */
 public fun CharSequence.commonPrefixWith(other: CharSequence, ignoreCase: Boolean = false): String {
-    val shortestLength = minOf(this.length, other.length)
+    konst shortestLength = minOf(this.length, other.length)
 
     var i = 0
     while (i < shortestLength && this[i].equals(other[i], ignoreCase = ignoreCase)) {
@@ -904,9 +904,9 @@ public fun CharSequence.commonPrefixWith(other: CharSequence, ignoreCase: Boolea
  * @sample samples.text.Strings.commonSuffixWith
  */
 public fun CharSequence.commonSuffixWith(other: CharSequence, ignoreCase: Boolean = false): String {
-    val thisLength = this.length
-    val otherLength = other.length
-    val shortestLength = minOf(thisLength, otherLength)
+    konst thisLength = this.length
+    konst otherLength = other.length
+    konst shortestLength = minOf(thisLength, otherLength)
 
     var i = 0
     while (i < shortestLength && this[thisLength - i - 1].equals(other[otherLength - i - 1], ignoreCase = ignoreCase)) {
@@ -931,12 +931,12 @@ public fun CharSequence.commonSuffixWith(other: CharSequence, ignoreCase: Boolea
  */
 public fun CharSequence.indexOfAny(chars: CharArray, startIndex: Int = 0, ignoreCase: Boolean = false): Int {
     if (!ignoreCase && chars.size == 1 && this is String) {
-        val char = chars.single()
+        konst char = chars.single()
         return nativeIndexOf(char, startIndex)
     }
 
     for (index in startIndex.coerceAtLeast(0)..lastIndex) {
-        val charAtIndex = get(index)
+        konst charAtIndex = get(index)
         if (chars.any { it.equals(charAtIndex, ignoreCase) })
             return index
     }
@@ -954,13 +954,13 @@ public fun CharSequence.indexOfAny(chars: CharArray, startIndex: Int = 0, ignore
  */
 public fun CharSequence.lastIndexOfAny(chars: CharArray, startIndex: Int = lastIndex, ignoreCase: Boolean = false): Int {
     if (!ignoreCase && chars.size == 1 && this is String) {
-        val char = chars.single()
+        konst char = chars.single()
         return nativeLastIndexOf(char, startIndex)
     }
 
 
     for (index in startIndex.coerceAtMost(lastIndex) downTo 0) {
-        val charAtIndex = get(index)
+        konst charAtIndex = get(index)
         if (chars.any { it.equals(charAtIndex, ignoreCase) })
             return index
     }
@@ -970,7 +970,7 @@ public fun CharSequence.lastIndexOfAny(chars: CharArray, startIndex: Int = lastI
 
 
 private fun CharSequence.indexOf(other: CharSequence, startIndex: Int, endIndex: Int, ignoreCase: Boolean, last: Boolean = false): Int {
-    val indices = if (!last)
+    konst indices = if (!last)
         startIndex.coerceAtLeast(0)..endIndex.coerceAtMost(length)
     else
         startIndex.coerceAtMost(lastIndex) downTo endIndex.coerceAtLeast(0)
@@ -991,22 +991,22 @@ private fun CharSequence.indexOf(other: CharSequence, startIndex: Int, endIndex:
 
 private fun CharSequence.findAnyOf(strings: Collection<String>, startIndex: Int, ignoreCase: Boolean, last: Boolean): Pair<Int, String>? {
     if (!ignoreCase && strings.size == 1) {
-        val string = strings.single()
-        val index = if (!last) indexOf(string, startIndex) else lastIndexOf(string, startIndex)
+        konst string = strings.single()
+        konst index = if (!last) indexOf(string, startIndex) else lastIndexOf(string, startIndex)
         return if (index < 0) null else index to string
     }
 
-    val indices = if (!last) startIndex.coerceAtLeast(0)..length else startIndex.coerceAtMost(lastIndex) downTo 0
+    konst indices = if (!last) startIndex.coerceAtLeast(0)..length else startIndex.coerceAtMost(lastIndex) downTo 0
 
     if (this is String) {
         for (index in indices) {
-            val matchingString = strings.firstOrNull { it.regionMatches(0, this, index, it.length, ignoreCase) }
+            konst matchingString = strings.firstOrNull { it.regionMatches(0, this, index, it.length, ignoreCase) }
             if (matchingString != null)
                 return index to matchingString
         }
     } else {
         for (index in indices) {
-            val matchingString = strings.firstOrNull { it.regionMatchesImpl(0, this, index, it.length, ignoreCase) }
+            konst matchingString = strings.firstOrNull { it.regionMatchesImpl(0, this, index, it.length, ignoreCase) }
             if (matchingString != null)
                 return index to matchingString
         }
@@ -1169,10 +1169,10 @@ public inline operator fun CharSequence.contains(regex: Regex): Boolean = regex.
 
 
 private class DelimitedRangesSequence(
-    private val input: CharSequence,
-    private val startIndex: Int,
-    private val limit: Int,
-    private val getNextMatch: CharSequence.(currentIndex: Int) -> Pair<Int, Int>?
+    private konst input: CharSequence,
+    private konst startIndex: Int,
+    private konst limit: Int,
+    private konst getNextMatch: CharSequence.(currentIndex: Int) -> Pair<Int, Int>?
 ) : Sequence<IntRange> {
 
     override fun iterator(): Iterator<IntRange> = object : Iterator<IntRange> {
@@ -1191,12 +1191,12 @@ private class DelimitedRangesSequence(
                     nextItem = currentStartIndex..input.lastIndex
                     nextSearchIndex = -1
                 } else {
-                    val match = input.getNextMatch(nextSearchIndex)
+                    konst match = input.getNextMatch(nextSearchIndex)
                     if (match == null) {
                         nextItem = currentStartIndex..input.lastIndex
                         nextSearchIndex = -1
                     } else {
-                        val (index, length) = match
+                        konst (index, length) = match
                         nextItem = currentStartIndex until index
                         currentStartIndex = index + length
                         nextSearchIndex = currentStartIndex + if (length == 0) 1 else 0
@@ -1211,7 +1211,7 @@ private class DelimitedRangesSequence(
                 calcNext()
             if (nextState == 0)
                 throw NoSuchElementException()
-            val result = nextItem as IntRange
+            konst result = nextItem as IntRange
             // Clean next to avoid keeping reference on yielded instance
             nextItem = null
             nextState = -1
@@ -1231,7 +1231,7 @@ private class DelimitedRangesSequence(
  *
  * @param delimiters One or more characters to be used as delimiters.
  * @param startIndex The index to start searching delimiters from.
- *  No range having its start value less than [startIndex] is returned.
+ *  No range having its start konstue less than [startIndex] is returned.
  *  [startIndex] is coerced to be non-negative and not greater than length of this string.
  * @param ignoreCase `true` to ignore character case when matching a delimiter. By default `false`.
  * @param limit The maximum number of substrings to return. Zero by default means no limit is set.
@@ -1250,7 +1250,7 @@ private fun CharSequence.rangesDelimitedBy(delimiters: CharArray, startIndex: In
  *
  * @param delimiters One or more strings to be used as delimiters.
  * @param startIndex The index to start searching delimiters from.
- *  No range having its start value less than [startIndex] is returned.
+ *  No range having its start konstue less than [startIndex] is returned.
  *  [startIndex] is coerced to be non-negative and not greater than length of this string.
  * @param ignoreCase `true` to ignore character case when matching a delimiter. By default `false`.
  * @param limit The maximum number of substrings to return. Zero by default means no limit is set.
@@ -1261,7 +1261,7 @@ private fun CharSequence.rangesDelimitedBy(delimiters: CharArray, startIndex: In
  */
 private fun CharSequence.rangesDelimitedBy(delimiters: Array<out String>, startIndex: Int = 0, ignoreCase: Boolean = false, limit: Int = 0): Sequence<IntRange> {
     requireNonNegativeLimit(limit)
-    val delimitersList = delimiters.asList()
+    konst delimitersList = delimiters.asList()
 
     return DelimitedRangesSequence(this, startIndex, limit, { currentIndex -> findAnyOf(delimitersList, currentIndex, ignoreCase = ignoreCase, last = false)?.let { it.first to it.second.length } })
 
@@ -1300,7 +1300,7 @@ public fun CharSequence.splitToSequence(vararg delimiters: String, ignoreCase: B
  */
 public fun CharSequence.split(vararg delimiters: String, ignoreCase: Boolean = false, limit: Int = 0): List<String> {
     if (delimiters.size == 1) {
-        val delimiter = delimiters[0]
+        konst delimiter = delimiters[0]
         if (!delimiter.isEmpty()) {
             return split(delimiter, ignoreCase, limit)
         }
@@ -1351,8 +1351,8 @@ private fun CharSequence.split(delimiter: String, ignoreCase: Boolean, limit: In
         return listOf(this.toString())
     }
 
-    val isLimited = limit > 0
-    val result = ArrayList<String>(if (isLimited) limit.coerceAtMost(10) else 10)
+    konst isLimited = limit > 0
+    konst result = ArrayList<String>(if (isLimited) limit.coerceAtMost(10) else 10)
     do {
         result.add(substring(currentOffset, nextIndex))
         currentOffset = nextIndex + delimiter.length
@@ -1368,7 +1368,7 @@ private fun CharSequence.split(delimiter: String, ignoreCase: Boolean, limit: In
 /**
  * Splits this char sequence to a list of strings around matches of the given regular expression.
  *
- * @param limit Non-negative value specifying the maximum number of substrings to return.
+ * @param limit Non-negative konstue specifying the maximum number of substrings to return.
  * Zero by default means no limit is set.
  */
 @kotlin.internal.InlineOnly
@@ -1377,7 +1377,7 @@ public inline fun CharSequence.split(regex: Regex, limit: Int = 0): List<String>
 /**
  * Splits this char sequence to a sequence of strings around matches of the given regular expression.
  *
- * @param limit Non-negative value specifying the maximum number of substrings to return.
+ * @param limit Non-negative konstue specifying the maximum number of substrings to return.
  * Zero by default means no limit is set.
  * @sample samples.text.Strings.splitToSequence
  */
@@ -1466,7 +1466,7 @@ internal fun CharSequence?.contentEqualsImpl(other: CharSequence?): Boolean {
 public fun String.toBooleanStrict(): Boolean = when (this) {
     "true" -> true
     "false" -> false
-    else -> throw IllegalArgumentException("The string doesn't represent a boolean value: $this")
+    else -> throw IllegalArgumentException("The string doesn't represent a boolean konstue: $this")
 }
 
 /**

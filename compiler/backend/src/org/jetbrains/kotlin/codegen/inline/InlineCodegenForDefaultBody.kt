@@ -17,15 +17,15 @@ import org.jetbrains.org.objectweb.asm.Label
 import org.jetbrains.org.objectweb.asm.Type
 
 class InlineCodegenForDefaultBody(
-    private val function: FunctionDescriptor,
+    private konst function: FunctionDescriptor,
     codegen: ExpressionCodegen,
-    val state: GenerationState,
-    private val jvmSignature: JvmMethodSignature,
-    private val sourceCompilerForInline: PsiSourceCompilerForInline
+    konst state: GenerationState,
+    private konst jvmSignature: JvmMethodSignature,
+    private konst sourceCompilerForInline: PsiSourceCompilerForInline
 ) : CallGenerator {
-    private val sourceMapper: SourceMapper = codegen.parentCodegen.orCreateSourceMapper
+    private konst sourceMapper: SourceMapper = codegen.parentCodegen.orCreateSourceMapper
 
-    private val methodStartLabel = linkedLabel()
+    private konst methodStartLabel = linkedLabel()
 
     init {
         assert(InlineUtil.isInline(function)) {
@@ -38,10 +38,10 @@ class InlineCodegenForDefaultBody(
 
     override fun genCallInner(callableMethod: Callable, resolvedCall: ResolvedCall<*>?, callDefault: Boolean, codegen: ExpressionCodegen) {
         assert(!callDefault) { "inlining default stub into another default stub" }
-        val (node, smap) = sourceCompilerForInline.compileInlineFunction(jvmSignature)
-        val childSourceMapper = SourceMapCopier(sourceMapper, smap)
+        konst (node, smap) = sourceCompilerForInline.compileInlineFunction(jvmSignature)
+        konst childSourceMapper = SourceMapCopier(sourceMapper, smap)
 
-        val argsSize =
+        konst argsSize =
             (Type.getArgumentsAndReturnSizes(jvmSignature.asmMethod.descriptor) ushr 2) - if (callableMethod.isStaticCall()) 1 else 0
         // `$default` is only for Kotlin use so it has no `$$forInline` version - this *is* what the inliner will use.
         node.preprocessSuspendMarkers(forInline = true, keepFakeContinuation = false)
@@ -56,7 +56,7 @@ class InlineCodegenForDefaultBody(
     }
 
     override fun genValueAndPut(
-        valueParameterDescriptor: ValueParameterDescriptor?,
+        konstueParameterDescriptor: ValueParameterDescriptor?,
         argumentExpression: KtExpression,
         parameterType: JvmKotlinType,
         parameterIndex: Int
@@ -64,12 +64,12 @@ class InlineCodegenForDefaultBody(
         throw UnsupportedOperationException("Shouldn't be called")
     }
 
-    override fun putValueIfNeeded(parameterType: JvmKotlinType, value: StackValue, kind: ValueKind, parameterIndex: Int) {
+    override fun putValueIfNeeded(parameterType: JvmKotlinType, konstue: StackValue, kind: ValueKind, parameterIndex: Int) {
         //original method would be inlined directly into default impl body without any inline magic
         //so we no need to load variables on stack to further method call
     }
 
-    override fun putCapturedValueOnStack(stackValue: StackValue, valueType: Type, paramIndex: Int) {
+    override fun putCapturedValueOnStack(stackValue: StackValue, konstueType: Type, paramIndex: Int) {
         throw UnsupportedOperationException("Shouldn't be called")
     }
 
@@ -81,7 +81,7 @@ class InlineCodegenForDefaultBody(
         throw UnsupportedOperationException("Shouldn't be called")
     }
 
-    override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, valueParameterTypes: List<Type>) {
+    override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, konstueParameterTypes: List<Type>) {
         throw UnsupportedOperationException("Shouldn't be called")
     }
 }

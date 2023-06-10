@@ -11,12 +11,12 @@ FILE: Main.kt
         ^getStrings Null(null)!!
     }
     public final fun testFromKotlin(): R|kotlin/Unit| {
-        lval values: R|kotlin/Array<kotlin/String>| = R|/getStrings|()
-        lval list: R|kotlin/collections/List<kotlin/String>| = R|/myListOf|<R|kotlin/String|>(vararg(*R|<local>/values|))
+        lkonst konstues: R|kotlin/Array<kotlin/String>| = R|/getStrings|()
+        lkonst list: R|kotlin/collections/List<kotlin/String>| = R|/myListOf|<R|kotlin/String|>(vararg(*R|<local>/konstues|))
         R|/takeStrings|(R|<local>/list|)
     }
     public final fun testFromJava(): R|kotlin/Unit| {
-        lval values: R|ft<kotlin/Array<kotlin/String!>, kotlin/Array<out kotlin/String!>?>| = Q|Utils|.R|/Utils.getStrings|()
-        lval list: R|kotlin/collections/List<kotlin/String!>| = R|/myListOf|<R|kotlin/String!|>(vararg(*R|<local>/values|))
+        lkonst konstues: R|ft<kotlin/Array<kotlin/String!>, kotlin/Array<out kotlin/String!>?>| = Q|Utils|.R|/Utils.getStrings|()
+        lkonst list: R|kotlin/collections/List<kotlin/String!>| = R|/myListOf|<R|kotlin/String!|>(vararg(*R|<local>/konstues|))
         R|/takeStrings|(R|<local>/list|)
     }

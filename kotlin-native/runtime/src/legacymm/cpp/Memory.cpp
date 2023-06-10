@@ -124,20 +124,20 @@ static_assert(sizeof(ContainerHeader) % kObjectAlignment == 0, "sizeof(Container
 // release candidates set).
 constexpr size_t kGcThreshold = 8 * 1024;
 // Ergonomic thresholds.
-// If GC to computations time ratio is above that value,
+// If GC to computations time ratio is above that konstue,
 // increase GC threshold by 1.5 times.
 constexpr double kGcToComputeRatioThreshold = 0.5;
-// Never exceed this value when increasing GC threshold.
+// Never exceed this konstue when increasing GC threshold.
 constexpr size_t kMaxErgonomicThreshold = 32 * 1024;
 // Threshold of size for toFree set, triggering actual cycle collector.
 constexpr size_t kMaxToFreeSizeThreshold = 8 * 1024;
-// Never exceed this value when increasing size for toFree set, triggering actual cycle collector.
+// Never exceed this konstue when increasing size for toFree set, triggering actual cycle collector.
 constexpr size_t kMaxErgonomicToFreeSizeThreshold = 8 * 1024 * 1024;
 // How many elements in finalizer queue allowed before cleaning it up.
 constexpr int32_t kFinalizerQueueThreshold = 32;
 // If allocated that much memory since last GC - force new GC.
 constexpr size_t kMaxGcAllocThreshold = 8 * 1024 * 1024;
-// If the ratio of GC collection cycles time to program execution time is greater this value,
+// If the ratio of GC collection cycles time to program execution time is greater this konstue,
 // increase GC threshold for cycles collection.
 constexpr double kGcCollectCyclesLoadRatio = 0.3;
 // Minimum time of cycles collection to change thresholds.
@@ -362,8 +362,8 @@ public:
     return -1;
   }
 
-  static double percents(uint64_t value, uint64_t all) {
-   return all == 0 ? 0 : ((double)value / (double)all) * 100.0;
+  static double percents(uint64_t konstue, uint64_t all) {
+   return all == 0 ? 0 : ((double)konstue / (double)all) * 100.0;
   }
 
   void printStatistic() {
@@ -515,7 +515,7 @@ void ObjHeader::SetAssociatedObject(void* obj) {
 }
 
 void* ObjHeader::CasAssociatedObject(void* expectedObj, void* obj) {
-    return __sync_val_compare_and_swap(&this->meta_object()->associatedObject_, expectedObj, obj);
+    return __sync_konst_compare_and_swap(&this->meta_object()->associatedObject_, expectedObj, obj);
 }
 
 
@@ -1276,8 +1276,8 @@ void depthFirstTraversal(ContainerHeader* start, bool* hasCycles,
           // Mark GRAY.
           objContainer->setSeen();
           // Here we do rather interesting trick: when doing DFS we postpone processing references going from
-          // FreezableAtomic, so that in 'order' referred value will be seen as not actually belonging
-          // to the same SCC (unless there are other edges not going through FreezableAtomic reaching the same value).
+          // FreezableAtomic, so that in 'order' referred konstue will be seen as not actually belonging
+          // to the same SCC (unless there are other edges not going through FreezableAtomic reaching the same konstue).
           if (isFreezableAtomic(container)) {
             toVisit.push_back(objContainer);
           } else {
@@ -2193,11 +2193,11 @@ void setHeapRef(ObjHeader** location, const ObjHeader* object) {
 
 void zeroHeapRef(ObjHeader** location) {
   MEMORY_LOG("ZeroHeapRef %p\n", location)
-  auto* value = *location;
-  if (!isNullOrMarker(value)) {
-    UPDATE_REF_EVENT(memoryState, value, nullptr, location, 0);
+  auto* konstue = *location;
+  if (!isNullOrMarker(konstue)) {
+    UPDATE_REF_EVENT(memoryState, konstue, nullptr, location, 0);
     *location = nullptr;
-    ReleaseHeapRef(value);
+    ReleaseHeapRef(konstue);
   }
 }
 
@@ -2280,8 +2280,8 @@ void updateStackRef(ObjHeader** location, const ObjHeader* object) {
 }
 
 template <bool Strict>
-void updateReturnRef(ObjHeader** returnSlot, const ObjHeader* value) {
-  updateStackRef<Strict>(returnSlot, value);
+void updateReturnRef(ObjHeader** returnSlot, const ObjHeader* konstue) {
+  updateStackRef<Strict>(returnSlot, konstue);
 }
 
 void updateHeapRefIfNull(ObjHeader** location, const ObjHeader* object) {
@@ -2294,7 +2294,7 @@ void updateHeapRefIfNull(ObjHeader** location, const ObjHeader* object) {
     }
 #else
     addHeapRef(const_cast<ObjHeader*>(object));
-    auto old = __sync_val_compare_and_swap(location, nullptr, const_cast<ObjHeader*>(object));
+    auto old = __sync_konst_compare_and_swap(location, nullptr, const_cast<ObjHeader*>(object));
     if (old != nullptr) {
       // Failed to store, was not null.
      ReleaseHeapRef(const_cast<ObjHeader*>(object));
@@ -2375,10 +2375,10 @@ OBJ_GETTER(allocArrayInstance, const TypeInfo* type_info, int32_t elements) {
 }
 
 /**
- * We keep thread affinity and reference value based cookie in the atomic references, so that
- * repeating read operation of the same value do not lead to the repeating rememberNewContainer() operation.
- * We must invalidate cookie after the local GC, as otherwise fact that container of the `value` is retained
- * may change, if the last reference to the value read is lost during GC and we re-read same value from
+ * We keep thread affinity and reference konstue based cookie in the atomic references, so that
+ * repeating read operation of the same konstue do not lead to the repeating rememberNewContainer() operation.
+ * We must inkonstidate cookie after the local GC, as otherwise fact that container of the `konstue` is retained
+ * may change, if the last reference to the konstue read is lost during GC and we re-read same konstue from
  * the same atomic reference. Thus we also include GC epoque into the cookie.
  */
 inline int32_t computeCookie() {
@@ -2425,7 +2425,7 @@ void setHeapRefLocked(ObjHeader** location, ObjHeader* newValue, int32_t* spinlo
   if (g_hasCyclicCollector)
     cyclicMutateAtomicRoot(newValue);
 #endif  // USE_CYCLIC_GC
-  // We do not use UpdateRef() here to avoid having ReleaseRef() on old value under the lock.
+  // We do not use UpdateRef() here to avoid having ReleaseRef() on old konstue under the lock.
   SetHeapRef(location, newValue);
   *cookie = computeCookie();
   unlock(spinlock);
@@ -2436,33 +2436,33 @@ void setHeapRefLocked(ObjHeader** location, ObjHeader* newValue, int32_t* spinlo
 OBJ_GETTER(readHeapRefLocked, ObjHeader** location, int32_t* spinlock, int32_t* cookie) {
   MEMORY_LOG("ReadHeapRefLocked: %p\n", location)
   lock(spinlock);
-  ObjHeader* value = *location;
+  ObjHeader* konstue = *location;
   auto realCookie = computeCookie();
   bool shallRemember = *cookie != realCookie;
   if (shallRemember) *cookie = realCookie;
-  UpdateReturnRef(OBJ_RESULT, value);
+  UpdateReturnRef(OBJ_RESULT, konstue);
 #if USE_GC
-  if (IsStrictMemoryModel() && shallRemember && value != nullptr) {
-    auto* container = containerFor(value);
+  if (IsStrictMemoryModel() && shallRemember && konstue != nullptr) {
+    auto* container = containerFor(konstue);
     rememberNewContainer(container);
   }
 #endif  // USE_GC
   unlock(spinlock);
-  return value;
+  return konstue;
 }
 
 OBJ_GETTER(readHeapRefNoLock, ObjHeader* object, KInt index) {
   MEMORY_LOG("ReadHeapRefNoLock: %p index %d\n", object, index)
   ObjHeader** location = reinterpret_cast<ObjHeader**>(
     reinterpret_cast<uintptr_t>(object) + object->type_info()->objOffsets_[index]);
-  ObjHeader* value = *location;
+  ObjHeader* konstue = *location;
 #if USE_GC
-  if (IsStrictMemoryModel() && (value != nullptr)) {
+  if (IsStrictMemoryModel() && (konstue != nullptr)) {
     // Maybe not so good to do that under lock.
-    rememberNewContainer(containerFor(value));
+    rememberNewContainer(containerFor(konstue));
   }
 #endif  // USE_GC
-  RETURN_OBJ(value);
+  RETURN_OBJ(konstue);
 }
 
 template <bool Strict>
@@ -2472,7 +2472,7 @@ void enterFrame(ObjHeader** start, int parameters, int count) {
   if (Strict) {
     frame->previous = currentFrame;
     currentFrame = frame;
-    // TODO: maybe compress in single value somehow.
+    // TODO: maybe compress in single konstue somehow.
     frame->parameters = parameters;
     frame->count = count;
   }
@@ -2552,10 +2552,10 @@ void startGC() {
   }
 }
 
-void setGCThreshold(KInt value) {
-  RuntimeAssert(value > 0, "Must be handled by the caller");
-  GC_LOG("setGCThreshold %d\n", value)
-  initGcThreshold(memoryState, value);
+void setGCThreshold(KInt konstue) {
+  RuntimeAssert(konstue > 0, "Must be handled by the caller");
+  GC_LOG("setGCThreshold %d\n", konstue)
+  initGcThreshold(memoryState, konstue);
 }
 
 KInt getGCThreshold() {
@@ -2563,10 +2563,10 @@ KInt getGCThreshold() {
   return memoryState->gcThreshold;
 }
 
-void setGCCollectCyclesThreshold(KLong value) {
-  RuntimeAssert(value > 0, "Must be handled by the caller");
-  GC_LOG("setGCCollectCyclesThreshold %lld\n", value)
-  initGcCollectCyclesThreshold(memoryState, value);
+void setGCCollectCyclesThreshold(KLong konstue) {
+  RuntimeAssert(konstue > 0, "Must be handled by the caller");
+  GC_LOG("setGCCollectCyclesThreshold %lld\n", konstue)
+  initGcCollectCyclesThreshold(memoryState, konstue);
 }
 
 KInt getGCCollectCyclesThreshold() {
@@ -2574,11 +2574,11 @@ KInt getGCCollectCyclesThreshold() {
   return memoryState->gcCollectCyclesThreshold;
 }
 
-void setGCThresholdAllocations(KLong value) {
-  RuntimeAssert(value > 0, "Must be handled by the caller");
-  GC_LOG("setGCThresholdAllocations %lld\n", value)
+void setGCThresholdAllocations(KLong konstue) {
+  RuntimeAssert(konstue > 0, "Must be handled by the caller");
+  GC_LOG("setGCThresholdAllocations %lld\n", konstue)
 
-  memoryState->allocSinceLastGcThreshold = value;
+  memoryState->allocSinceLastGcThreshold = konstue;
 }
 
 KLong getGCThresholdAllocations() {
@@ -2586,9 +2586,9 @@ KLong getGCThresholdAllocations() {
   return memoryState->allocSinceLastGcThreshold;
 }
 
-void setTuneGCThreshold(KBoolean value) {
-  GC_LOG("setTuneGCThreshold %d\n", value)
-  memoryState->gcErgonomics = value;
+void setTuneGCThreshold(KBoolean konstue) {
+  GC_LOG("setTuneGCThreshold %d\n", konstue)
+  memoryState->gcErgonomics = konstue;
 }
 
 KBoolean getTuneGCThreshold() {
@@ -2795,7 +2795,7 @@ void freezeCyclic(ObjHeader* root,
       // color and similar attributes shall not be used.
       MEMORY_LOG("freezing %p\n", container)
       container->freeze();
-      // We set refcount of original container to zero, so that it is seen as such after removal
+      // We set refcount of original container to zero, so that it is seen as such after remokonst
       // meta-object, where aggregating container is stored.
       container->setRefCount(0);
     }
@@ -3065,7 +3065,7 @@ MetaObjHeader* ObjHeader::createMetaObject(ObjHeader* object) {
 #if KONAN_NO_THREADS
   *location = reinterpret_cast<TypeInfo*>(meta);
 #else
-  TypeInfo* old = __sync_val_compare_and_swap(location, typeInfo, reinterpret_cast<TypeInfo*>(meta));
+  TypeInfo* old = __sync_konst_compare_and_swap(location, typeInfo, reinterpret_cast<TypeInfo*>(meta));
   if (old != typeInfo) {
     // Someone installed a new meta-object since the check.
     std_support::allocator_delete(objectAllocator, meta);
@@ -3365,11 +3365,11 @@ RUNTIME_NOTHROW void UpdateHeapRefsInsideOneArrayRelaxed(const ArrayHeader* arra
   updateHeapRefsInsideOneArray<false>(array, fromIndex, toIndex, count);
 }
 
-RUNTIME_NOTHROW void UpdateReturnRefStrict(ObjHeader** returnSlot, const ObjHeader* value) {
-  updateReturnRef<true>(returnSlot, value);
+RUNTIME_NOTHROW void UpdateReturnRefStrict(ObjHeader** returnSlot, const ObjHeader* konstue) {
+  updateReturnRef<true>(returnSlot, konstue);
 }
-RUNTIME_NOTHROW void UpdateReturnRefRelaxed(ObjHeader** returnSlot, const ObjHeader* value) {
-  updateReturnRef<false>(returnSlot, value);
+RUNTIME_NOTHROW void UpdateReturnRefRelaxed(ObjHeader** returnSlot, const ObjHeader* konstue) {
+  updateReturnRef<false>(returnSlot, konstue);
 }
 
 RUNTIME_NOTHROW void ZeroArrayRefs(ArrayHeader* array) {
@@ -3469,9 +3469,9 @@ void Kotlin_native_internal_GC_start(KRef) {
 #endif
 }
 
-void Kotlin_native_internal_GC_setThreshold(KRef, KInt value) {
+void Kotlin_native_internal_GC_setThreshold(KRef, KInt konstue) {
 #if USE_GC
-  setGCThreshold(value);
+  setGCThreshold(konstue);
 #endif
 }
 
@@ -3483,9 +3483,9 @@ KInt Kotlin_native_internal_GC_getThreshold(KRef) {
 #endif
 }
 
-void Kotlin_native_internal_GC_setCollectCyclesThreshold(KRef, KLong value) {
+void Kotlin_native_internal_GC_setCollectCyclesThreshold(KRef, KLong konstue) {
 #if USE_GC
-  setGCCollectCyclesThreshold(value);
+  setGCCollectCyclesThreshold(konstue);
 #endif
 }
 
@@ -3497,9 +3497,9 @@ KLong Kotlin_native_internal_GC_getCollectCyclesThreshold(KRef) {
 #endif
 }
 
-void Kotlin_native_internal_GC_setThresholdAllocations(KRef, KLong value) {
+void Kotlin_native_internal_GC_setThresholdAllocations(KRef, KLong konstue) {
 #if USE_GC
-  setGCThresholdAllocations(value);
+  setGCThresholdAllocations(konstue);
 #endif
 }
 
@@ -3511,9 +3511,9 @@ KLong Kotlin_native_internal_GC_getThresholdAllocations(KRef) {
 #endif
 }
 
-void Kotlin_native_internal_GC_setTuneThreshold(KRef, KBoolean value) {
+void Kotlin_native_internal_GC_setTuneThreshold(KRef, KBoolean konstue) {
 #if USE_GC
-  setTuneGCThreshold(value);
+  setTuneGCThreshold(konstue);
 #endif
 }
 
@@ -3542,11 +3542,11 @@ OBJ_GETTER(Kotlin_native_internal_GC_findCycle, KRef, KRef root) {
 #endif
 }
 
-KLong Kotlin_native_internal_GC_getRegularGCIntervalMicroseconds(KRef) {
+KLong Kotlin_native_internal_GC_getRegularGCInterkonstMicroseconds(KRef) {
     return 0;
 }
 
-void Kotlin_native_internal_GC_setRegularGCIntervalMicroseconds(KRef, KLong) {}
+void Kotlin_native_internal_GC_setRegularGCInterkonstMicroseconds(KRef, KLong) {}
 
 KLong Kotlin_native_internal_GC_getTargetHeapBytes(KRef) {
     return 0;
@@ -3606,7 +3606,7 @@ void MutationCheck(ObjHeader* obj) {
   if (obj->local()) return;
   auto* container = containerFor(obj);
   if (container == nullptr || container->frozen())
-    ThrowInvalidMutabilityException(obj);
+    ThrowInkonstidMutabilityException(obj);
 }
 
 RUNTIME_NOTHROW void CheckLifetimesConstraint(ObjHeader* obj, ObjHeader* pointee) {
@@ -3678,11 +3678,11 @@ KBoolean Kotlin_native_internal_GC_getCyclicCollector(KRef gc) {
 #endif  // USE_CYCLIC_GC
 }
 
-void Kotlin_native_internal_GC_setCyclicCollector(KRef gc, KBoolean value) {
+void Kotlin_native_internal_GC_setCyclicCollector(KRef gc, KBoolean konstue) {
 #if USE_CYCLIC_GC
-  g_hasCyclicCollector = value;
+  g_hasCyclicCollector = konstue;
 #else
-  if (value)
+  if (konstue)
     ThrowIllegalArgumentException();
 #endif  // USE_CYCLIC_GC
 }

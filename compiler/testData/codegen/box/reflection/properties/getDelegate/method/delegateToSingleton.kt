@@ -7,12 +7,12 @@ import kotlin.reflect.jvm.isAccessible
 import kotlin.test.assertEquals
 
 object Store {
-    private val map = mutableMapOf<Pair<Any?, KProperty<*>>, String?>()
+    private konst map = mutableMapOf<Pair<Any?, KProperty<*>>, String?>()
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>): String? = map[thisRef to property]
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String?) {
-        map[thisRef to property] = value
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String?) {
+        map[thisRef to property] = konstue
     }
 }
 

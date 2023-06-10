@@ -33,7 +33,7 @@ false   <v0>: Boolean   NEW: r(false) -> <v0>
 =====================
 == test ==
 fun test() {
-    val x: Int
+    konst x: Int
 
     if (getBoolean())
         myRun {
@@ -72,7 +72,7 @@ if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) 
 x                                                                                                                                                                                                                                            <v6>: Int               NEW: r(x) -> <v6>
 inc()                                                                                                                                                                                                                                        <v7>: *                 NEW: call(inc(), inc|<v6>) -> <v7>
 x.inc()                                                                                                                                                                                                                                      <v7>: *                 COPY
-{ val x: Int if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) { x = 42 } else { x = 43 } } break } while (getBoolean()) myRun { x.inc() } myRun { x = 42 } break } x = 42 } else myRun { x = 42 } x.inc() }   <v7>: *                 COPY
+{ konst x: Int if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) { x = 42 } else { x = 43 } } break } while (getBoolean()) myRun { x.inc() } myRun { x = 42 } break } x = 42 } else myRun { x = 42 } x.inc() }   <v7>: *                 COPY
 =====================
 == inlined anonymous_1 ==
 {

@@ -30,14 +30,14 @@ import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 
-internal val mainMethodGenerationPhase = makeIrFilePhase(
+internal konst mainMethodGenerationPhase = makeIrFilePhase(
     ::MainMethodGenerationLowering,
     name = "MainMethodGeneration",
     description = "Generate main bridges to parameterless mains, and wrappers for suspend mains.",
     prerequisite = setOf(jvmOverloadsAnnotationPhase)
 )
 
-private class MainMethodGenerationLowering(private val context: JvmBackendContext) : ClassLoweringPass {
+private class MainMethodGenerationLowering(private konst context: JvmBackendContext) : ClassLoweringPass {
 
     /**
      * This pass finds extended main methods and introduces a regular
@@ -95,7 +95,7 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
     private fun IrSimpleFunction.isParameterlessMainMethod(): Boolean =
         typeParameters.isEmpty() &&
                 extensionReceiverParameter == null &&
-                valueParameters.isEmpty() &&
+                konstueParameters.isEmpty() &&
                 returnType.isUnit() &&
                 name.asString() == "main"
 
@@ -103,10 +103,10 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
         if ((getJvmNameFromAnnotation() ?: name.asString()) != "main") return false
         if (!returnType.isUnit()) return false
 
-        val parameter = allParameters.singleOrNull() ?: return false
+        konst parameter = allParameters.singleOrNull() ?: return false
         if (!parameter.type.isArray() && !parameter.type.isNullableArray()) return false
 
-        val argType = (parameter.type as IrSimpleType).arguments.first()
+        konst argType = (parameter.type as IrSimpleType).arguments.first()
         return when (argType) {
             is IrTypeProjection -> {
                 (argType.variance != Variance.IN_VARIANCE) && argType.type.isStringClassType()
@@ -123,7 +123,7 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
             modality = Modality.OPEN
             origin = JvmLoweredDeclarationOrigin.GENERATED_EXTENDED_MAIN
         }.apply {
-            val args = addValueParameter {
+            konst args = addValueParameter {
                 name = Name.identifier("args")
                 type = context.irBuiltIns.arrayClass.typeWith(context.irBuiltIns.stringType)
             }
@@ -135,9 +135,9 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
         args: IrValueParameter?,
         newMain: IrSimpleFunction
     ): IrExpression {
-        val backendContext = this@MainMethodGenerationLowering.context
+        konst backendContext = this@MainMethodGenerationLowering.context
         return irBlock {
-            val wrapperConstructor = backendContext.irFactory.buildClass {
+            konst wrapperConstructor = backendContext.irFactory.buildClass {
                 name = Name.special("<main-wrapper>")
                 visibility = JavaDescriptorVisibilities.PACKAGE_VISIBILITY
                 modality = Modality.FINAL
@@ -147,15 +147,15 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
 
                 wrapper.createImplicitParameterDeclarationWithWrappedDescriptor()
 
-                val lambdaSuperClass = backendContext.ir.symbols.lambdaClass
-                val functionClass = backendContext.ir.symbols.getJvmSuspendFunctionClass(0)
+                konst lambdaSuperClass = backendContext.ir.symbols.lambdaClass
+                konst functionClass = backendContext.ir.symbols.getJvmSuspendFunctionClass(0)
 
                 wrapper.superTypes += lambdaSuperClass.defaultType
                 wrapper.superTypes += functionClass.typeWith(backendContext.irBuiltIns.anyNType)
                 wrapper.parent = newMain
 
-                val stringArrayType = backendContext.irBuiltIns.arrayClass.typeWith(backendContext.irBuiltIns.stringType)
-                val argsField = args?.let {
+                konst stringArrayType = backendContext.irBuiltIns.arrayClass.typeWith(backendContext.irBuiltIns.stringType)
+                konst argsField = args?.let {
                     wrapper.addField {
                         name = Name.identifier("args")
                         type = stringArrayType
@@ -165,7 +165,7 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
                 }
 
                 wrapper.addFunction("invoke", backendContext.irBuiltIns.anyNType, isSuspend = true).also { invoke ->
-                    val invokeToOverride = functionClass.functions.single()
+                    konst invokeToOverride = functionClass.functions.single()
 
                     invoke.overriddenSymbols += invokeToOverride
                     invoke.body = backendContext.createIrBuilder(invoke.symbol).irBlockBody {
@@ -181,8 +181,8 @@ private class MainMethodGenerationLowering(private val context: JvmBackendContex
                     isPrimary = true
                     visibility = JavaDescriptorVisibilities.PACKAGE_VISIBILITY
                 }.also { constructor ->
-                    val superClassConstructor = lambdaSuperClass.owner.constructors.single()
-                    val param = args?.let { constructor.addValueParameter("args", stringArrayType) }
+                    konst superClassConstructor = lambdaSuperClass.owner.constructors.single()
+                    konst param = args?.let { constructor.addValueParameter("args", stringArrayType) }
 
                     constructor.body = backendContext.createIrBuilder(constructor.symbol).irBlockBody {
                         +irDelegatingConstructorCall(superClassConstructor).also {

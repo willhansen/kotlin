@@ -15,14 +15,14 @@ interface ExtraImportsProviderExtension {
         "org.jetbrains.kotlin.extraImportsProviderExtension", ExtraImportsProviderExtension::class.java
     ) {
 
-        private class CompoundExtraImportsProviderExtension(val instances: List<ExtraImportsProviderExtension>) : ExtraImportsProviderExtension {
+        private class CompoundExtraImportsProviderExtension(konst instances: List<ExtraImportsProviderExtension>) : ExtraImportsProviderExtension {
             override fun getExtraImports(ktFile: KtFile): Collection<KtImportInfo> = instances.flatMap {
                 withLinkageErrorLogger(it) { getExtraImports(ktFile) }
             }
         }
 
         fun getInstance(project: Project): ExtraImportsProviderExtension {
-            val instances = getInstances(project)
+            konst instances = getInstances(project)
             return instances.singleOrNull() ?: CompoundExtraImportsProviderExtension(instances)
         }
     }

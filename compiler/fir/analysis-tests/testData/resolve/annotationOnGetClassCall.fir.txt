@@ -4,10 +4,10 @@ FILE: annotationOnGetClassCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Long| = R|<local>/x|
+        public final konst x: R|kotlin/Long| = R|<local>/x|
             public get(): R|kotlin/Long|
 
-        public final val s: R|kotlin/String| = R|<local>/s|
+        public final konst s: R|kotlin/String| = R|<local>/s|
             public get(): R|kotlin/String|
 
     }

@@ -68,7 +68,7 @@ fun box(): String {
     if (test3({"start"}) != "start12") return "fail3: ${test3({"start"})}"
 
     var captured1 = "sta";
-    val captured2 = "rt";
+    konst captured2 = "rt";
     if (test1({captured1 + captured2}) != "start12") return "fail4: ${test1({captured1 + captured2})}"
     if (test2({captured1 + captured2}) != "start2") return "fail5: ${test2({captured1 + captured2})}"
     if (test3({captured1 + captured2}) != "start12") return "fail6: ${test3({captured1 + captured2})}"

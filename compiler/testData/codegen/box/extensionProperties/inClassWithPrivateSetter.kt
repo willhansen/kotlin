@@ -8,7 +8,7 @@ class Test {
         }
 
     fun test(): String {
-        val i = 1
+        konst i = 1
         i.foo = "OK"
         return i.foo
     }

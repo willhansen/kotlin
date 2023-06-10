@@ -3,14 +3,14 @@
 // FILE: lib.kt
 interface A {
     fun foo(): Any
-    val x: Int
-    val y: Int
+    konst x: Int
+    konst y: Int
 }
 
 interface B {
     fun foo(): Any
-    val x: String
-    val y: Int
+    konst x: String
+    konst y: Int
 }
 
 // FILE: C.java
@@ -37,6 +37,6 @@ public abstract class E implements A, B {
 // FILE: main.kt
 
 fun test(d: D) {
-    val a = d.x
-    val b = d.y
+    konst a = d.x
+    konst b = d.y
 }

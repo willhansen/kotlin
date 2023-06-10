@@ -2,11 +2,11 @@
 // KT-451 Incorrect character literals cause assertion failures
 
 fun ff() {
-    val b = <!EMPTY_CHARACTER_LITERAL!>''<!>
-    val c = <!TOO_MANY_CHARACTERS_IN_CHARACTER_LITERAL!>'23'<!>
-    val d = <!INCORRECT_CHARACTER_LITERAL!>'a<!>
-    val e = <!INCORRECT_CHARACTER_LITERAL!>'ab<!>
-    val f = '<!ILLEGAL_ESCAPE!>\<!>'
+    konst b = <!EMPTY_CHARACTER_LITERAL!>''<!>
+    konst c = <!TOO_MANY_CHARACTERS_IN_CHARACTER_LITERAL!>'23'<!>
+    konst d = <!INCORRECT_CHARACTER_LITERAL!>'a<!>
+    konst e = <!INCORRECT_CHARACTER_LITERAL!>'ab<!>
+    konst f = '<!ILLEGAL_ESCAPE!>\<!>'
 }
 
 fun test() {

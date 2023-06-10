@@ -1,6 +1,6 @@
 FILE: exclExclInference.fir.kt
     public final fun foo(): R|kotlin/Unit| {
-        lval x: R|kotlin/String?|
+        lkonst x: R|kotlin/String?|
         R|<local>/x| = R|/materialize|<R|kotlin/String?|>()!!
         R|<local>/x|.R|kotlin/String.length|
     }

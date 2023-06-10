@@ -22,9 +22,9 @@ fun foo3(): Unit {
 }
 
 fun box(): String {
-    val u1 = foo1()
-    val u2 = foo2()
-    val u3 = foo3()
+    konst u1 = foo1()
+    konst u2 = foo2()
+    konst u3 = foo3()
     if (u1 === u2 && u1 === u3 && u2 === u3) {
         return ( "OK")
     }

@@ -10,7 +10,7 @@ suspend fun suspendThere(v: Any?): String = suspendCoroutineUninterceptedOrRetur
 }
 
 
-class A<T>(val arg: T) {
+class A<T>(konst arg: T) {
     var result = ""
     inline suspend fun foo() {
         result = suspendThere(arg)
@@ -22,7 +22,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val a = A<String>("OK")
+    konst a = A<String>("OK")
     builder {
         a.foo()
     }

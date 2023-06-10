@@ -7,5 +7,5 @@ class Data {
 }
 
 fun use() {
-    val (<!DEPRECATION!>x<!>, y) = Data()
+    konst (<!DEPRECATION!>x<!>, y) = Data()
 }

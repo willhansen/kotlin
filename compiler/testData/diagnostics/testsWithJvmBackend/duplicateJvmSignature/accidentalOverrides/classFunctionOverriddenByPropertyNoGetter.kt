@@ -4,5 +4,5 @@ open class B {
 }
 
 class C : B() {
-    <!ACCIDENTAL_OVERRIDE!>val x: Int<!> = 1
+    <!ACCIDENTAL_OVERRIDE!>konst x: Int<!> = 1
 }

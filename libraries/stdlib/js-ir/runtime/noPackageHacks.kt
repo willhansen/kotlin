@@ -7,10 +7,10 @@
  */
 @PublishedApi
 internal fun <T> arrayConcat(vararg args: T): T {
-    val len = args.size
-    val typed = js("Array(len)").unsafeCast<Array<T>>()
+    konst len = args.size
+    konst typed = js("Array(len)").unsafeCast<Array<T>>()
     for (i in 0 .. (len - 1)) {
-        val arr = args[i]
+        konst arr = args[i]
         if (arr !is Array<*>) {
             typed[i] = js("[]").slice.call(arr)
         } else {
@@ -28,15 +28,15 @@ internal fun <T> primitiveArrayConcat(vararg args: T): T {
     for (i in 0 .. (args.size - 1)) {
         size_local += args[i].unsafeCast<Array<Any?>>().size
     }
-    val a = args[0]
-    val result = js("new a.constructor(size_local)").unsafeCast<Array<Any?>>()
+    konst a = args[0]
+    konst result = js("new a.constructor(size_local)").unsafeCast<Array<Any?>>()
     if (a.asDynamic().`$type$` != null) {
         withType(a.asDynamic().`$type$`, result)
     }
 
     size_local = 0
     for (i in 0 .. (args.size - 1)) {
-        val arr = args[i].unsafeCast<Array<Any?>>()
+        konst arr = args[i].unsafeCast<Array<Any?>>()
         for (j in 0 .. (arr.size - 1)) {
             result[size_local++] = arr[j]
         }
@@ -45,7 +45,7 @@ internal fun <T> primitiveArrayConcat(vararg args: T): T {
 }
 
 internal fun <T> taggedArrayCopy(array: dynamic): T {
-    val res = array.slice()
+    konst res = array.slice()
     res.`$type$` = array.`$type$`
     return res.unsafeCast<T>()
 }

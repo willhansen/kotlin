@@ -65,7 +65,7 @@ public actual fun UShortArray.elementAt(index: Int): UShort {
 @ExperimentalUnsignedTypes
 public actual fun UIntArray.asList(): List<UInt> {
     return object : AbstractList<UInt>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UInt): Boolean = this@asList.contains(element)
         override fun get(index: Int): UInt {
@@ -92,7 +92,7 @@ public actual fun UIntArray.asList(): List<UInt> {
 @ExperimentalUnsignedTypes
 public actual fun ULongArray.asList(): List<ULong> {
     return object : AbstractList<ULong>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: ULong): Boolean = this@asList.contains(element)
         override fun get(index: Int): ULong {
@@ -119,7 +119,7 @@ public actual fun ULongArray.asList(): List<ULong> {
 @ExperimentalUnsignedTypes
 public actual fun UByteArray.asList(): List<UByte> {
     return object : AbstractList<UByte>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UByte): Boolean = this@asList.contains(element)
         override fun get(index: Int): UByte {
@@ -146,7 +146,7 @@ public actual fun UByteArray.asList(): List<UByte> {
 @ExperimentalUnsignedTypes
 public actual fun UShortArray.asList(): List<UShort> {
     return object : AbstractList<UShort>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: UShort): Boolean = this@asList.contains(element)
         override fun get(index: Int): UShort {

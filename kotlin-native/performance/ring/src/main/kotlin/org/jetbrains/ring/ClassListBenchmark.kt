@@ -18,11 +18,11 @@ package org.jetbrains.ring
 
 open class ClassListBenchmark {
     private var _data: ArrayList<Value>? = null
-    val data: ArrayList<Value>
+    konst data: ArrayList<Value>
         get() = _data!!
 
     init {
-        val list = ArrayList<Value>(BENCHMARK_SIZE)
+        konst list = ArrayList<Value>(BENCHMARK_SIZE)
         for (n in classValues(BENCHMARK_SIZE))
             list.add(n)
         _data = list
@@ -35,7 +35,7 @@ open class ClassListBenchmark {
 
     //Benchmark
     fun copyManual(): List<Value> {
-        val list = ArrayList<Value>(data.size)
+        konst list = ArrayList<Value>(data.size)
         for (item in data) {
             list.add(item)
         }
@@ -49,12 +49,12 @@ open class ClassListBenchmark {
 
     //Benchmark
     fun filterAndCountWithLambda(): Int {
-        return data.filter { it.value % 2 == 0 }.count()
+        return data.filter { it.konstue % 2 == 0 }.count()
     }
 
     //Benchmark
     fun filterWithLambda(): List<Value> {
-        return data.filter { it.value % 2 == 0 }
+        return data.filter { it.konstue % 2 == 0 }
     }
 
     //Benchmark
@@ -64,17 +64,17 @@ open class ClassListBenchmark {
 
     //Benchmark
     fun countWithLambda(): Int {
-        return data.count { it.value % 2 == 0 }
+        return data.count { it.konstue % 2 == 0 }
     }
 
     //Benchmark
     fun filterAndMapWithLambda(): List<String> {
-        return data.filter { it.value % 2 == 0 }.map { it.toString() }
+        return data.filter { it.konstue % 2 == 0 }.map { it.toString() }
     }
 
     //Benchmark
     fun filterAndMapWithLambdaAsSequence(): List<String> {
-        return data.asSequence().filter { it.value % 2 == 0 }.map { it.toString() }.toList()
+        return data.asSequence().filter { it.konstue % 2 == 0 }.map { it.toString() }.toList()
     }
 
     //Benchmark
@@ -84,11 +84,11 @@ open class ClassListBenchmark {
 
     //Benchmark
     fun filterAndMapManual(): ArrayList<String> {
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         for (it in data) {
             if (filterLoad(it)) {
-                val value = mapLoad(it)
-                list.add(value)
+                konst konstue = mapLoad(it)
+                list.add(konstue)
             }
         }
         return list
@@ -101,7 +101,7 @@ open class ClassListBenchmark {
 
     //Benchmark
     fun filterManual(): List<Value> {
-        val list = ArrayList<Value>()
+        konst list = ArrayList<Value>()
         for (it in data) {
             if (filterLoad(it))
                 list.add(it)

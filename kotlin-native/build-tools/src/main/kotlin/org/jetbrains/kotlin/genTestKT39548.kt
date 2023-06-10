@@ -3,25 +3,25 @@ package org.jetbrains.kotlin
 import java.io.File
 
 fun genTestKT39548(file: File) {
-    val longName = StringBuilder().apply {
+    konst longName = StringBuilder().apply {
         repeat(10_000_000) {
             append('a')
         }
     }
 
-    val text = """
+    konst text = """
             import kotlin.test.*
 
             fun $longName(): Int = 42
-            fun <T> same(value: T): T = value
-            val globalInt1: Int = same(1)
-            val globalStringA: String = same("a")
-            @ThreadLocal val threadLocalInt2: Int = same(2)
-            @ThreadLocal val threadLocalStringB: String = same("b")
+            fun <T> same(konstue: T): T = konstue
+            konst globalInt1: Int = same(1)
+            konst globalStringA: String = same("a")
+            @ThreadLocal konst threadLocalInt2: Int = same(2)
+            @ThreadLocal konst threadLocalStringB: String = same("b")
 
             fun main() {
                 // Ensure function don't get DCEd:
-                val resultOfFunctionWithLongName = $longName()
+                konst resultOfFunctionWithLongName = $longName()
                 assertEquals(42, resultOfFunctionWithLongName)
 
                 // Check that top-level initializers did run as expected:

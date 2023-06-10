@@ -40,7 +40,7 @@ import javax.inject.Inject
 
 @CacheableTask
 abstract class KotlinCompileCommon @Inject constructor(
-    override val compilerOptions: KotlinMultiplatformCommonCompilerOptions,
+    override konst compilerOptions: KotlinMultiplatformCommonCompilerOptions,
     workerExecutor: WorkerExecutor,
     objectFactory: ObjectFactory
 ) : AbstractKotlinCompile<K2MetadataCompilerArguments>(objectFactory, workerExecutor),
@@ -51,14 +51,14 @@ abstract class KotlinCompileCommon @Inject constructor(
         compilerOptions.verbose.convention(logger.isDebugEnabled)
     }
 
-    override val kotlinOptions: KotlinMultiplatformCommonOptions = KotlinMultiplatformCommonOptionsCompat(
+    override konst kotlinOptions: KotlinMultiplatformCommonOptions = KotlinMultiplatformCommonOptionsCompat(
         { this },
         compilerOptions
     )
 
     /**
      * Workaround for those "nasty" plugins that are adding 'freeCompilerArgs' on task execution phase.
-     * With properties api it is not possible to update property value after task configuration is finished.
+     * With properties api it is not possible to update property konstue after task configuration is finished.
      *
      * Marking it as `@Internal` as anyway on the configuration phase, when Gradle does task inputs snapshot,
      * this input will always be empty.
@@ -94,7 +94,7 @@ abstract class KotlinCompileCommon @Inject constructor(
 
             KotlinCommonCompilerOptionsHelper.fillCompilerArguments(compilerOptions, args)
 
-            val localExecutionTimeFreeCompilerArgs = executionTimeFreeCompilerArgs
+            konst localExecutionTimeFreeCompilerArgs = executionTimeFreeCompilerArgs
             if (localExecutionTimeFreeCompilerArgs != null) {
                 args.freeArgs = localExecutionTimeFreeCompilerArgs
             }
@@ -124,21 +124,21 @@ abstract class KotlinCompileCommon @Inject constructor(
     @get:IgnoreEmptyDirectories
     @get:InputFiles
     @get:NormalizeLineEndings
-    internal val refinesMetadataPaths: ConfigurableFileCollection = objectFactory.fileCollection()
+    internal konst refinesMetadataPaths: ConfigurableFileCollection = objectFactory.fileCollection()
 
     @get:Internal
-    internal val expectActualLinker = objectFactory.property(Boolean::class.java)
+    internal konst expectActualLinker = objectFactory.property(Boolean::class.java)
 
     override fun callCompilerAsync(
         args: K2MetadataCompilerArguments,
         inputChanges: InputChanges,
         taskOutputsBackup: TaskOutputsBackup?
     ) {
-        val gradlePrintingMessageCollector = GradlePrintingMessageCollector(logger, args.allWarningsAsErrors)
-        val gradleMessageCollector = GradleErrorMessageCollector(gradlePrintingMessageCollector)
-        val outputItemCollector = OutputItemsCollectorImpl()
-        val compilerRunner = compilerRunner.get()
-        val environment = GradleCompilerEnvironment(
+        konst gradlePrintingMessageCollector = GradlePrintingMessageCollector(logger, args.allWarningsAsErrors)
+        konst gradleMessageCollector = GradleErrorMessageCollector(gradlePrintingMessageCollector)
+        konst outputItemCollector = OutputItemsCollectorImpl()
+        konst compilerRunner = compilerRunner.get()
+        konst environment = GradleCompilerEnvironment(
             defaultCompilerClasspath, gradleMessageCollector, outputItemCollector,
             reportingSettings = reportingSettings(),
             outputFiles = allOutputFiles()

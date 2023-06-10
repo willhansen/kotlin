@@ -18,9 +18,9 @@ import org.w3c.xhr.*
  * Exposes the JavaScript [Blob](https://developer.mozilla.org/en/docs/Web/API/Blob) to Kotlin
  */
 public external open class Blob(blobParts: JsArray<JsAny?> = definedExternally, options: BlobPropertyBag = definedExternally) : MediaProvider, ImageBitmapSource, JsAny {
-    open val size: JsNumber
-    open val type: String
-    open val isClosed: Boolean
+    open konst size: JsNumber
+    open konst type: String
+    open konst isClosed: Boolean
     fun slice(start: Int = definedExternally, end: Int = definedExternally, contentType: String = definedExternally): Blob
     fun close()
 }
@@ -28,7 +28,7 @@ public external open class Blob(blobParts: JsArray<JsAny?> = definedExternally, 
 public external interface BlobPropertyBag : JsAny {
     var type: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -38,14 +38,14 @@ public fun BlobPropertyBag(type: String? = ""): BlobPropertyBag { js("return { t
  * Exposes the JavaScript [File](https://developer.mozilla.org/en/docs/Web/API/File) to Kotlin
  */
 public external open class File(fileBits: JsArray<JsAny?>, fileName: String, options: FilePropertyBag = definedExternally) : Blob, JsAny {
-    open val name: String
-    open val lastModified: Int
+    open konst name: String
+    open konst lastModified: Int
 }
 
 public external interface FilePropertyBag : BlobPropertyBag, JsAny {
     var lastModified: Int?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -67,9 +67,9 @@ public operator fun FileList.get(index: Int): File? = getMethodImplForFileList(t
  * Exposes the JavaScript [FileReader](https://developer.mozilla.org/en/docs/Web/API/FileReader) to Kotlin
  */
 public external open class FileReader : EventTarget, JsAny {
-    open val readyState: Short
-    open val result: JsAny?
-    open val error: JsAny?
+    open konst readyState: Short
+    open konst result: JsAny?
+    open konst error: JsAny?
     var onloadstart: ((ProgressEvent) -> JsAny?)?
     var onprogress: ((ProgressEvent) -> JsAny?)?
     var onload: ((Event) -> JsAny?)?
@@ -83,9 +83,9 @@ public external open class FileReader : EventTarget, JsAny {
     fun abort()
 
     companion object {
-        val EMPTY: Short
-        val LOADING: Short
-        val DONE: Short
+        konst EMPTY: Short
+        konst LOADING: Short
+        konst DONE: Short
     }
 }
 

@@ -1,7 +1,7 @@
 fun foo() {
-    val (x, private data @ann @[ann] y) = pair
-    val (@[ann], x) = pair
+    konst (x, private data @ann @[ann] y) = pair
+    konst (@[ann], x) = pair
 
-    @Volatile val (@ann x, y) = 1
-    @Volatile val (@ann x, y = 1
+    @Volatile konst (@ann x, y) = 1
+    @Volatile konst (@ann x, y = 1
 }

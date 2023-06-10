@@ -9,16 +9,16 @@ import kotlin.js.Promise            // TODO - migrate to multiplatform.
 import kotlin.js.json               // TODO - migrate to multiplatform.
 
 // Network connector to work with basic url requests.
-class UrlNetworkConnector(private val host: String, private val port: Int? = null) : NetworkConnector() {
+class UrlNetworkConnector(private konst host: String, private konst port: Int? = null) : NetworkConnector() {
 
-    private val url = "$host${port?.let { ":$port" } ?: ""}"
+    private konst url = "$host${port?.let { ":$port" } ?: ""}"
 
     override fun <T : String?> sendBaseRequest(method: RequestMethod, path: String, user: String?, password: String?,
                                                     acceptJsonContentType: Boolean, body: String?,
                                                     errorHandler: (url: String, response: dynamic) -> Nothing?): Promise<T> {
-        val fullUrl = "$url/$path"
-        val request = require("node-fetch")
-        val headers = mutableListOf<Pair<String, String>>()
+        konst fullUrl = "$url/$path"
+        konst request = require("node-fetch")
+        konst headers = mutableListOf<Pair<String, String>>()
         if (user != null && password != null) {
             headers.add("Authorization" to getAuth(user, password))
         }

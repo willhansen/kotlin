@@ -10,11 +10,11 @@ class TopLevel {
 
     <!NESTED_EXTERNAL_DECLARATION!>external fun bar(): Int<!>
 
-    val x = "a"
+    konst x = "a"
 
-    <!NESTED_EXTERNAL_DECLARATION!>external val y: String<!>
+    <!NESTED_EXTERNAL_DECLARATION!>external konst y: String<!>
 
-    val O.u: String get() = "O.u"
+    konst O.u: String get() = "O.u"
 }
 
 external class TopLevelNative {
@@ -26,9 +26,9 @@ external class TopLevelNative {
 
     <!NESTED_EXTERNAL_DECLARATION!>external fun bar(): Int<!>
 
-    val x: String = definedExternally
+    konst x: String = definedExternally
 
-    <!NESTED_EXTERNAL_DECLARATION!>external val y: String<!>
+    <!NESTED_EXTERNAL_DECLARATION!>external konst y: String<!>
 }
 
 fun topLevelFun() {

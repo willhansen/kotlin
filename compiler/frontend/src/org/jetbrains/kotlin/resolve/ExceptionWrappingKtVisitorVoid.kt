@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtVisitorVoid
 import org.jetbrains.kotlin.util.KotlinFrontEndException
 
-class ExceptionWrappingKtVisitorVoid(private val delegate: KtVisitorVoid) : KtVisitorVoid() {
+class ExceptionWrappingKtVisitorVoid(private konst delegate: KtVisitorVoid) : KtVisitorVoid() {
     override fun visitElement(element: PsiElement) {
         element.accept(delegate)
     }
@@ -35,7 +35,7 @@ class ExceptionWrappingKtVisitorVoid(private val delegate: KtVisitorVoid) : KtVi
         } catch (e: KotlinFrontEndException) {
             throw e
         } catch (t: Throwable) {
-            val name = try {
+            konst name = try {
                 dcl.name
             } catch (e: Throwable) {
                 "- error: ${e.message}"

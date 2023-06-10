@@ -10,8 +10,8 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 @Test fun runTest() {
-    val array = ByteArray(17)
-    val results = mutableSetOf<Any>()
+    konst array = ByteArray(17)
+    konst results = mutableSetOf<Any>()
     var counter = 0
     assertFailsWith<IndexOutOfBoundsException> {
         results += array.getShortAt(16)
@@ -53,22 +53,22 @@ import kotlin.native.concurrent.*
 
     if (Platform.isFreezingEnabled) {
         array.freeze()
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setShortAt(0, 2.toShort())
         }
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setCharAt(0, 'a')
         }
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setIntAt(0, 2)
         }
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setLongAt(0, 2)
         }
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setFloatAt(0, 1.0f)
         }
-        assertFailsWith<InvalidMutabilityException> {
+        assertFailsWith<InkonstidMutabilityException> {
             array.setDoubleAt(0, 1.0)
         }
     }

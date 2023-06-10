@@ -46,7 +46,7 @@ class YarnWorkspaces : YarnBasics() {
         npmProjects: Collection<PreparedKotlinCompilationNpmResolution>,
         resolutions: Map<String, String>
     ) {
-        val rootPackageJsonFile = preparedFiles(nodeJs).single()
+        konst rootPackageJsonFile = preparedFiles(nodeJs).single()
 
         saveRootProjectWorkspacesPackageJson(
             rootProjectName,
@@ -66,7 +66,7 @@ class YarnWorkspaces : YarnBasics() {
         npmProjects: Collection<PreparedKotlinCompilationNpmResolution>,
         cliArgs: List<String>
     ) {
-        val nodeJsWorldDir = nodeJs.rootPackageDir
+        konst nodeJsWorldDir = nodeJs.rootPackageDir
 
         yarnExec(
             services,
@@ -87,12 +87,12 @@ class YarnWorkspaces : YarnBasics() {
         resolutions: Map<String, String>,
         rootPackageJsonFile: File
     ) {
-        val nodeJsWorldDir = rootPackageJsonFile.parentFile
-        val rootPackageJson = PackageJson(rootProjectName, rootProjectVersion)
+        konst nodeJsWorldDir = rootPackageJsonFile.parentFile
+        konst rootPackageJson = PackageJson(rootProjectName, rootProjectVersion)
         rootPackageJson.private = true
 
-        val npmProjectWorkspaces = npmProjects.map { it.npmProjectDir.relativeTo(nodeJsWorldDir).path }
-        val importedProjectWorkspaces =
+        konst npmProjectWorkspaces = npmProjects.map { it.npmProjectDir.relativeTo(nodeJsWorldDir).path }
+        konst importedProjectWorkspaces =
             YarnImportedPackagesVersionResolver(logger, npmProjects, nodeJsWorldDir).resolveAndUpdatePackages()
 
         rootPackageJson.workspaces = npmProjectWorkspaces + importedProjectWorkspaces

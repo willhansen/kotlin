@@ -5,8 +5,8 @@ package test
 class C {
     var x: () -> Unit
         inline get() = {}
-        inline set(crossinline value) {
-            bar { value() }
+        inline set(crossinline konstue) {
+            bar { konstue() }
         }
 
     fun bar(i: I) = i.foo()
@@ -21,7 +21,7 @@ import test.*
 
 fun box(): String {
     var result = "fail"
-    val c = C()
+    konst c = C()
     c.x = { result = "OK" }
     return result
 }

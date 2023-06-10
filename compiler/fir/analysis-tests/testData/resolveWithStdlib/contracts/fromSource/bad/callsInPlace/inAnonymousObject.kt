@@ -10,10 +10,10 @@ fun foo(a: () -> Unit, b: () -> Unit, c: () -> Unit, d: () -> Unit) {
         callsInPlace(d, InvocationKind.AT_MOST_ONCE)
     }<!>
 
-    val obj = object : Runnable {
+    konst obj = object : Runnable {
 
-        val leakedVal = <!LEAKED_IN_PLACE_LAMBDA!>a<!>
-        val leaked: Any
+        konst leakedVal = <!LEAKED_IN_PLACE_LAMBDA!>a<!>
+        konst leaked: Any
 
         init {
             leaked = <!LEAKED_IN_PLACE_LAMBDA!>b<!>

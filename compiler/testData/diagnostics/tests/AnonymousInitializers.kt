@@ -4,7 +4,7 @@ interface NoC {
 
   }
 
-  val a : Int get() = 1
+  konst a : Int get() = 1
 
   <!ANONYMOUS_INITIALIZER_IN_INTERFACE!>init<!> {
 
@@ -12,16 +12,16 @@ interface NoC {
 }
 
 class WithC() {
-  val x : Int = 1
+  konst x : Int = 1
   init {
-    val b = x
+    konst b = x
 
   }
 
-  val a : Int get() = 1
+  konst a : Int get() = 1
 
   init {
-    val z = <!UNRESOLVED_REFERENCE!>b<!>
-    val zz = x
+    konst z = <!UNRESOLVED_REFERENCE!>b<!>
+    konst zz = x
   }
 }

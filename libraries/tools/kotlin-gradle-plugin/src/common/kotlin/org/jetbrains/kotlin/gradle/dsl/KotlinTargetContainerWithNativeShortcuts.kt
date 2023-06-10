@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 interface KotlinTargetContainerWithNativeShortcuts : KotlinTargetContainerWithPresetFunctions, KotlinSourceSetContainer {
 
-    private data class DefaultSourceSets(val main: KotlinSourceSet, val test: KotlinSourceSet)
+    private data class DefaultSourceSets(konst main: KotlinSourceSet, konst test: KotlinSourceSet)
 
     private fun KotlinNativeTarget.defaultSourceSets(): DefaultSourceSets =
         DefaultSourceSets(
@@ -48,8 +48,8 @@ interface KotlinTargetContainerWithNativeShortcuts : KotlinTargetContainerWithPr
         children: List<DefaultSourceSets>,
         parent: DefaultSourceSets? = null
     ): DefaultSourceSets {
-        val main = createIntermediateSourceSet("${namePrefix}Main", children.map { it.main }, parent?.main)
-        val test = createIntermediateSourceSet("${namePrefix}Test", children.map { it.test }, parent?.test)
+        konst main = createIntermediateSourceSet("${namePrefix}Main", children.map { it.main }, parent?.main)
+        konst test = createIntermediateSourceSet("${namePrefix}Test", children.map { it.test }, parent?.test)
         return DefaultSourceSets(main, test)
     }
 
@@ -57,7 +57,7 @@ interface KotlinTargetContainerWithNativeShortcuts : KotlinTargetContainerWithPr
         namePrefix: String = "ios",
         configure: KotlinNativeTarget.() -> Unit = {}
     ) {
-        val targets = listOf(
+        konst targets = listOf(
             iosArm64("${namePrefix}Arm64"),
             iosX64("${namePrefix}X64")
         )
@@ -74,7 +74,7 @@ interface KotlinTargetContainerWithNativeShortcuts : KotlinTargetContainerWithPr
         namePrefix: String = "tvos",
         configure: KotlinNativeTarget.() -> Unit
     ) {
-        val targets = listOf(
+        konst targets = listOf(
             tvosArm64("${namePrefix}Arm64"),
             tvosX64("${namePrefix}X64")
         )
@@ -91,12 +91,12 @@ interface KotlinTargetContainerWithNativeShortcuts : KotlinTargetContainerWithPr
         namePrefix: String = "watchos",
         configure: KotlinNativeTarget.() -> Unit = {}
     ) {
-        val device32 = watchosArm32("${namePrefix}Arm32")
-        val device64 = watchosArm64("${namePrefix}Arm64")
-        val simulatorX64 = watchosX64("${namePrefix}X64")
-        val deviceTargets = listOf(device32, device64)
+        konst device32 = watchosArm32("${namePrefix}Arm32")
+        konst device64 = watchosArm64("${namePrefix}Arm64")
+        konst simulatorX64 = watchosX64("${namePrefix}X64")
+        konst deviceTargets = listOf(device32, device64)
 
-        val deviceSourceSets = createIntermediateSourceSets(
+        konst deviceSourceSets = createIntermediateSourceSets(
             "${namePrefix}Device",
             deviceTargets.defaultSourceSets()
         )

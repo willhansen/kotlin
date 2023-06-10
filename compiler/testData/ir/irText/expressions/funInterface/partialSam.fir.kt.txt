@@ -16,7 +16,7 @@ class J {
 
 }
 
-val fsi: Fn<String, Int>
+konst fsi: Fn<String, Int>
   field = { // BLOCK
     local class <no name provided> : Fn<String, Int> {
       constructor() /* primary */ {
@@ -35,7 +35,7 @@ val fsi: Fn<String, Int>
   }
   get
 
-val fis: Fn<Int, String>
+konst fis: Fn<Int, String>
   field = { // BLOCK
     local class <no name provided> : Fn<Int, String> {
       constructor() /* primary */ {

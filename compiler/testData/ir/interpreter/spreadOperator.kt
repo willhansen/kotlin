@@ -1,5 +1,5 @@
 // this hack is used to ensure that iterator will be resolved first
-@CompileTimeCalculation internal class IntProgressionIterator(first: Int, last: Int, val step: Int) : IntIterator()
+@CompileTimeCalculation internal class IntProgressionIterator(first: Int, last: Int, konst step: Int) : IntIterator()
 @CompileTimeCalculation public class IntRange(start: Int, endInclusive: Int) : IntProgression(start, endInclusive, 1), ClosedRange<Int>
 
 @CompileTimeCalculation
@@ -29,12 +29,12 @@ fun customArrayConcatenation(vararg array: Any?): String {
     return result
 }
 
-const val a1 = <!EVALUATED: `6`!>varargSum(3, 1, 2, 3)<!>
-const val a2 = <!EVALUATED: `3`!>varargSum(num = *intArrayOf(1, 2, 3), quantityToSum = 2)<!>
-const val a3 = <!EVALUATED: `21`!>varargSum(6, *intArrayOf(1, 2), 3, *intArrayOf(4, 5, 6))<!>
+const konst a1 = <!EVALUATED: `6`!>varargSum(3, 1, 2, 3)<!>
+const konst a2 = <!EVALUATED: `3`!>varargSum(num = *intArrayOf(1, 2, 3), quantityToSum = 2)<!>
+const konst a3 = <!EVALUATED: `21`!>varargSum(6, *intArrayOf(1, 2), 3, *intArrayOf(4, 5, 6))<!>
 
-const val b1 = <!EVALUATED: `6`!>sumWithVarargAtFirst(1, 2, 3)<!>
-const val b2 = <!EVALUATED: `6`!>sumWithVarargAtFirst(quantityToSum = 3, num = *intArrayOf(1, 2, 3))<!>
+const konst b1 = <!EVALUATED: `6`!>sumWithVarargAtFirst(1, 2, 3)<!>
+const konst b2 = <!EVALUATED: `6`!>sumWithVarargAtFirst(quantityToSum = 3, num = *intArrayOf(1, 2, 3))<!>
 
-const val c1 = <!EVALUATED: `1 2 3`!>concatenation(*arrayOf("1", " "), "2", *arrayOf(" ", "3"))<!>
-const val c2 = <!EVALUATED: `1 2.0 3 -1 -2.0 `!>customArrayConcatenation(*arrayOf(1, 2.0), "3", *arrayOf(-1, -2.0))<!>
+const konst c1 = <!EVALUATED: `1 2 3`!>concatenation(*arrayOf("1", " "), "2", *arrayOf(" ", "3"))<!>
+const konst c2 = <!EVALUATED: `1 2.0 3 -1 -2.0 `!>customArrayConcatenation(*arrayOf(1, 2.0), "3", *arrayOf(-1, -2.0))<!>

@@ -1,4 +1,4 @@
-KtFile: InvalidCharAfterPropertyName.kt
+KtFile: InkonstidCharAfterPropertyName.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
@@ -12,7 +12,7 @@ KtFile: InvalidCharAfterPropertyName.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('prop')
         PsiElement(COLON)(':')

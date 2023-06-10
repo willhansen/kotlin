@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.types.KtTypeRenderer
 import org.jetbrains.kotlin.analysis.api.renderer.types.renderers.*
 
 public object KtTypeRendererForSource {
-    public val WITH_QUALIFIED_NAMES: KtTypeRenderer = KtTypeRenderer {
+    public konst WITH_QUALIFIED_NAMES: KtTypeRenderer = KtTypeRenderer {
         capturedTypeRenderer = KtCapturedTypeRenderer.AS_PROJECTION
         definitelyNotNullTypeRenderer = KtDefinitelyNotNullTypeRenderer.AS_TYPE_INTERSECTION
         dynamicTypeRenderer = KtDynamicTypeRenderer.AS_DYNAMIC_WORD
@@ -34,7 +34,7 @@ public object KtTypeRendererForSource {
         keywordRenderer = KtKeywordRenderer.AS_WORD
     }
 
-    public val WITH_SHORT_NAMES: KtTypeRenderer = WITH_QUALIFIED_NAMES.with {
+    public konst WITH_SHORT_NAMES: KtTypeRenderer = WITH_QUALIFIED_NAMES.with {
         classIdRenderer = KtClassTypeQualifierRenderer.WITH_SHORT_NAMES_WITH_NESTED_CLASSIFIERS
         annotationsRenderer = KtAnnotationRendererForSource.WITH_SHORT_NAMES
     }

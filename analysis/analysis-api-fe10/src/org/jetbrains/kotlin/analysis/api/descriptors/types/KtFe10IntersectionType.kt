@@ -20,22 +20,22 @@ import org.jetbrains.kotlin.types.SimpleType
 import org.jetbrains.kotlin.types.typeUtil.makeNullable
 
 internal class KtFe10IntersectionType(
-    override val fe10Type: SimpleType,
-    private val supertypes: Collection<KotlinType>,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: SimpleType,
+    private konst supertypes: Collection<KotlinType>,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtIntersectionType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val conjuncts: List<KtType> by cached {
-        val result = ArrayList<KtType>(supertypes.size)
-        val isNullable = fe10Type.isMarkedNullable
+    override konst conjuncts: List<KtType> by cached {
+        konst result = ArrayList<KtType>(supertypes.size)
+        konst isNullable = fe10Type.isMarkedNullable
         for (supertype in supertypes) {
-            val mappedSupertype = if (isNullable) supertype.makeNullable() else supertype
+            konst mappedSupertype = if (isNullable) supertype.makeNullable() else supertype
             result += mappedSupertype.toKtType(analysisContext)
         }
         return@cached result
     }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 }

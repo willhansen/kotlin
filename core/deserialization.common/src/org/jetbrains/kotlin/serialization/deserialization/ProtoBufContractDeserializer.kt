@@ -17,19 +17,19 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
         owner: Owner
     ): KtEffectDeclaration<Type, Diagnostic>? {
         if (proto.hasConclusionOfConditionalEffect()) {
-            val conclusion = loadExpression(proto.conclusionOfConditionalEffect, owner) ?: return null
-            val effect = loadSimpleEffect(proto, owner) ?: return null
+            konst conclusion = loadExpression(proto.conclusionOfConditionalEffect, owner) ?: return null
+            konst effect = loadSimpleEffect(proto, owner) ?: return null
             return KtConditionalEffectDeclaration(effect, conclusion)
         }
         return loadSimpleEffect(proto, owner)
     }
 
     private fun loadSimpleEffect(proto: ProtoBuf.Effect, owner: Owner): KtEffectDeclaration<Type, Diagnostic>? {
-        val type: ProtoBuf.Effect.EffectType = if (proto.hasEffectType()) proto.effectType else return null
+        konst type: ProtoBuf.Effect.EffectType = if (proto.hasEffectType()) proto.effectType else return null
         return when(type) {
             ProtoBuf.Effect.EffectType.RETURNS_CONSTANT -> {
-                val argument = proto.effectConstructorArgumentList.firstOrNull()
-                val returnValue = if (argument == null) {
+                konst argument = proto.effectConstructorArgumentList.firstOrNull()
+                konst returnValue = if (argument == null) {
                     getWildcard()
                 } else {
                     @Suppress("UNCHECKED_CAST")
@@ -41,9 +41,9 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
                 KtReturnsEffectDeclaration(getNotNull())
             }
             ProtoBuf.Effect.EffectType.CALLS -> {
-                val argument = proto.effectConstructorArgumentList.firstOrNull() ?: return null
-                val callable = extractVariable(argument, owner) ?: return null
-                val invocationKind = if (proto.hasKind())
+                konst argument = proto.effectConstructorArgumentList.firstOrNull() ?: return null
+                konst callable = extractVariable(argument, owner) ?: return null
+                konst invocationKind = if (proto.hasKind())
                     proto.kind.toDescriptorInvocationKind()
                 else
                     EventOccurrencesRange.UNKNOWN
@@ -53,11 +53,11 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
     }
 
     private fun loadExpression(proto: ProtoBuf.Expression, owner: Owner): KtBooleanExpression<Type, Diagnostic>? {
-        val primitiveType = getPrimitiveType(proto)
-        val primitiveExpression = extractPrimitiveExpression(proto, primitiveType, owner)
+        konst primitiveType = getPrimitiveType(proto)
+        konst primitiveExpression = extractPrimitiveExpression(proto, primitiveType, owner)
 
-        val complexType = getComplexType(proto)
-        val childs: MutableList<KtBooleanExpression<Type, Diagnostic>> = mutableListOf()
+        konst complexType = getComplexType(proto)
+        konst childs: MutableList<KtBooleanExpression<Type, Diagnostic>> = mutableListOf()
         childs.addIfNotNull(primitiveExpression)
 
         return when (complexType) {
@@ -76,7 +76,7 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
     }
 
     private fun extractPrimitiveExpression(proto: ProtoBuf.Expression, primitiveType: PrimitiveExpressionType?, owner: Owner): KtBooleanExpression<Type, Diagnostic>? {
-        val isInverted = Flags.IS_NEGATED.get(proto.flags)
+        konst isInverted = Flags.IS_NEGATED.get(proto.flags)
 
         return when (primitiveType) {
             PrimitiveExpressionType.VALUE_PARAMETER_REFERENCE, PrimitiveExpressionType.RECEIVER_REFERENCE -> {
@@ -87,13 +87,13 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
                 (loadConstant(proto.constantValue) as? KtBooleanConstantReference<Type, Diagnostic>)?.invertIfNecessary(isInverted)
 
             PrimitiveExpressionType.INSTANCE_CHECK -> {
-                val variable = extractVariable(proto, owner) ?: return null
-                val type = extractType(proto) ?: return null
+                konst variable = extractVariable(proto, owner) ?: return null
+                konst type = extractType(proto) ?: return null
                 KtIsInstancePredicate(variable, type, isInverted)
             }
 
             PrimitiveExpressionType.NULLABILITY_CHECK -> {
-                val variable = extractVariable(proto, owner) ?: return null
+                konst variable = extractVariable(proto, owner) ?: return null
                 KtIsNullPredicate(variable, isInverted)
             }
 
@@ -107,7 +107,7 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
     private fun extractVariable(proto: ProtoBuf.Expression, owner: Owner): KtValueParameterReference<Type, Diagnostic>? {
         if (!proto.hasValueParameterReference()) return null
 
-        return extractVariable(proto.valueParameterReference - 1, owner)
+        return extractVariable(proto.konstueParameterReference - 1, owner)
     }
 
     private fun ProtoBuf.Effect.InvocationKind.toDescriptorInvocationKind(): EventOccurrencesRange = when (this) {
@@ -116,11 +116,11 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
         ProtoBuf.Effect.InvocationKind.AT_LEAST_ONCE -> EventOccurrencesRange.AT_LEAST_ONCE
     }
 
-    abstract fun extractVariable(valueParameterIndex: Int, owner: Owner): KtValueParameterReference<Type, Diagnostic>?
+    abstract fun extractVariable(konstueParameterIndex: Int, owner: Owner): KtValueParameterReference<Type, Diagnostic>?
 
     abstract fun extractType(proto: ProtoBuf.Expression): Type?
 
-    abstract fun loadConstant(value: ProtoBuf.Expression.ConstantValue): KtConstantReference<Type, Diagnostic>
+    abstract fun loadConstant(konstue: ProtoBuf.Expression.ConstantValue): KtConstantReference<Type, Diagnostic>
 
 
     abstract fun getNotNull(): KtConstantReference<Type, Diagnostic> 
@@ -129,8 +129,8 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
 
 
     private fun getComplexType(proto: ProtoBuf.Expression): ComplexExpressionType? {
-        val isOrSequence = proto.orArgumentCount != 0
-        val isAndSequence = proto.andArgumentCount != 0
+        konst isOrSequence = proto.orArgumentCount != 0
+        konst isAndSequence = proto.andArgumentCount != 0
         return when {
             isOrSequence && isAndSequence -> null
             isOrSequence -> ComplexExpressionType.OR_SEQUENCE
@@ -140,8 +140,8 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
     }
 
     private fun getPrimitiveType(proto: ProtoBuf.Expression): PrimitiveExpressionType? {
-        // Expected to be one element, but can be empty (unknown expression) or contain several elements (invalid data)
-        val expressionTypes: MutableList<PrimitiveExpressionType> = mutableListOf()
+        // Expected to be one element, but can be empty (unknown expression) or contain several elements (inkonstid data)
+        konst expressionTypes: MutableList<PrimitiveExpressionType> = mutableListOf()
 
         // Check for predicates
         when {
@@ -152,18 +152,18 @@ abstract class ProtoBufContractDeserializer<Type, Diagnostic, Owner> {
                 expressionTypes.add(PrimitiveExpressionType.NULLABILITY_CHECK)
         }
 
-        // If message contains correct predicate, then predicate's type overrides type of value,
+        // If message contains correct predicate, then predicate's type overrides type of konstue,
         // even is message has one
         if (expressionTypes.isNotEmpty()) {
             return expressionTypes.singleOrNull() 
         }
 
-        // Otherwise, check if it is a value
+        // Otherwise, check if it is a konstue
         when {
-            proto.hasValueParameterReference() && proto.valueParameterReference > 0 ->
+            proto.hasValueParameterReference() && proto.konstueParameterReference > 0 ->
                 expressionTypes.add(PrimitiveExpressionType.VALUE_PARAMETER_REFERENCE)
 
-            proto.hasValueParameterReference() && proto.valueParameterReference == 0 ->
+            proto.hasValueParameterReference() && proto.konstueParameterReference == 0 ->
                 expressionTypes.add(PrimitiveExpressionType.RECEIVER_REFERENCE)
 
             proto.hasConstantValue() -> expressionTypes.add(PrimitiveExpressionType.CONSTANT)

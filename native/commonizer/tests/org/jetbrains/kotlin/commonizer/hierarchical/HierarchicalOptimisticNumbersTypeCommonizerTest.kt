@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.commonizer.*
 class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test Byte and Byte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -27,7 +27,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Byte and Short - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -45,7 +45,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Byte and Int - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -63,7 +63,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Byte and Long - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -81,7 +81,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Short and Byte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -99,7 +99,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Short and Short - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -116,7 +116,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Short and Int - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -134,7 +134,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Short and Long - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -152,7 +152,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Int and Byte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -170,7 +170,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Int and Short - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -188,7 +188,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Int and Int - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -205,7 +205,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Int and Long - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -223,7 +223,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Long and Byte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -241,7 +241,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Long and Short - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -259,7 +259,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Long and Int - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -277,7 +277,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Long and Long - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -294,7 +294,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UByte and UByte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -311,7 +311,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UByte and UShort - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -329,7 +329,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UByte and UInt - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -347,7 +347,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UByte and ULong - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -365,7 +365,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UShort and UByte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -383,7 +383,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UShort and UShort - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -400,7 +400,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UShort and UInt - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -418,7 +418,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UShort and ULong - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -436,7 +436,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UInt and UByte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -454,7 +454,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UInt and UShort - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -472,7 +472,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UInt and UInt - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -489,7 +489,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UInt and ULong - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -507,7 +507,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test ULong and UByte - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -525,7 +525,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test ULong and UShort - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -543,7 +543,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test ULong and UInt - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -561,7 +561,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test ULong and ULong - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -573,7 +573,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UInt and Long - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -585,7 +585,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test UIntVarOf and ULongVarOf - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -602,7 +602,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test IntVarOf and LongVarOf - typealias`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -619,7 +619,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test Int and Long - typealias chain`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -655,7 +655,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test function with pure number types parameter`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             simpleSingleSourceTarget("a", "fun x(p: Int) {}")
@@ -673,8 +673,8 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
         result.assertCommonized("(a, b)", "")
     }
 
-    fun `test function with aliased number value parameter`() {
-        val result = commonize {
+    fun `test function with aliased number konstue parameter`() {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
@@ -704,38 +704,38 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test property with pure number return type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
             registerDependency("a", "b", "(a, b)") { unsignedIntegers() }
-            simpleSingleSourceTarget("a", "val x: UInt = null!!")
-            simpleSingleSourceTarget("b", "val x: ULong = null!!")
+            simpleSingleSourceTarget("a", "konst x: UInt = null!!")
+            simpleSingleSourceTarget("b", "konst x: ULong = null!!")
         }
 
         result.assertCommonized(
             "(a, b)", """
             @UnsafeNumber(["a: kotlin.UInt", "b: kotlin.ULong"])
-            expect val x: kotlin.UInt
+            expect konst x: kotlin.UInt
             """.trimIndent()
         )
     }
 
     fun `test property with aliased number return type`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     typealias X = UShort
-                    val x: X = null!!
+                    konst x: X = null!!
                 """.trimIndent()
             )
             simpleSingleSourceTarget(
                 "b", """
                     typealias X = ULong
-                    val x: X = null!!
+                    konst x: X = null!!
                 """.trimIndent()
             )
         }
@@ -745,13 +745,13 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
                 @UnsafeNumber(["a: kotlin.UShort", "b: kotlin.ULong"])
                 typealias X = UShort
                 @UnsafeNumber(["a: kotlin.UShort", "b: kotlin.ULong"])
-                expect val x: X 
+                expect konst x: X 
             """.trimIndent()
         )
     }
 
     fun `test multilevel hierarchy`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(e, f)", "(c, d, e, f)", "(a, b, c, d, e, f)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)", "(c, d)", "(e, f)", "(c, d, e, f)", "(a, b, c, d, e, f)")
@@ -800,7 +800,7 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
 
     // return types, unlike parameter types, don't participate in function signature, and therefore can be commonized optimistically
     fun `test optimistic commonization in function return types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency(("(a, b)"))
@@ -836,23 +836,23 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
     }
 
     fun `test optimistic commonization in property return types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency(("(a, b)"))
 
             "a" withSource """
-                val explicitReturnType: Short
+                konst explicitReturnType: Short
                     get() = 42
                 
-                val implicitReturnType = 42
+                konst implicitReturnType = 42
             """.trimIndent()
 
             "b" withSource """
-                val explicitReturnType: Long 
+                konst explicitReturnType: Long 
                     get() = 42L
                 
-                val implicitReturnType = 42L
+                konst implicitReturnType = 42L
             """.trimIndent()
         }
 
@@ -861,16 +861,16 @@ class HierarchicalOptimisticNumbersTypeCommonizerTest : AbstractInlineSourcesCom
             import kotlinx.cinterop.*
             
             @UnsafeNumber(["a: kotlin.Short", "b: kotlin.Long"])
-            expect val explicitReturnType: Short
+            expect konst explicitReturnType: Short
             
             @UnsafeNumber(["a: kotlin.Int", "b: kotlin.Long"])
-            expect val implicitReturnType: Int
+            expect konst implicitReturnType: Int
         """.trimIndent()
         )
     }
 
     fun `test optimistic commonization inside parameterized types`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
             setting(OptimisticNumberCommonizationEnabledKey, true)
             registerFakeStdlibIntegersDependency("(a, b)", "(c, d)", "(a, b, c, d)")

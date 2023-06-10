@@ -10,7 +10,7 @@ public enum A {
 // FILE: test.kt
 
 fun main() {
-    val c: A = A.ENTRY
-    val c2: String? = c.ENTRY
-    val c3: String? = A.ANOTHER.ENTRY
+    konst c: A = A.ENTRY
+    konst c2: String? = c.ENTRY
+    konst c3: String? = A.ANOTHER.ENTRY
 }

@@ -31,7 +31,7 @@ public fun Any?.toString(): String
 public operator fun String?.plus(other: Any?): String
 
 /**
- * Returns an array of objects of the given type with the given [size], initialized with null values.
+ * Returns an array of objects of the given type with the given [size], initialized with null konstues.
  */
 public fun <reified @PureReifiable T> arrayOfNulls(size: Int): Array<T?>
 
@@ -76,7 +76,7 @@ public fun shortArrayOf(vararg elements: Short): ShortArray
 public fun byteArrayOf(vararg elements: Byte): ByteArray
 
 /**
- * Returns an array containing the specified boolean values.
+ * Returns an array containing the specified boolean konstues.
  */
 public fun booleanArrayOf(vararg elements: Boolean): BooleanArray
 

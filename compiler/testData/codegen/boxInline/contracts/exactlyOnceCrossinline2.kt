@@ -34,7 +34,7 @@ inline fun baz(crossinline exactly_once: () -> Unit) {
 import test.*
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.foo()
     return a.res
 }

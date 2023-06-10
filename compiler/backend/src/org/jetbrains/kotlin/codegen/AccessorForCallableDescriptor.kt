@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.descriptors.CallableMemberDescriptor
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 
 interface AccessorForCallableDescriptor<T : CallableMemberDescriptor> {
-    val calleeDescriptor: T
+    konst calleeDescriptor: T
 
-    val superCallTarget: ClassDescriptor?
+    konst superCallTarget: ClassDescriptor?
 
-    val accessorKind: AccessorKind
+    konst accessorKind: AccessorKind
 }

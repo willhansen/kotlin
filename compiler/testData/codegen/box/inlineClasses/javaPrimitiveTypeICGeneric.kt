@@ -6,30 +6,30 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class I<T: Int>(val x: T)
+konstue class I<T: Int>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class JLI<T: java.lang.Integer>(val x: T)
+konstue class JLI<T: java.lang.Integer>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class U<T: Unit?>(val x: T)
+konstue class U<T: Unit?>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class U2<T: Unit>(val x: T?)
+konstue class U2<T: Unit>(konst x: T?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class N<T: Nothing?>(val x: T)
+konstue class N<T: Nothing?>(konst x: T)
 
-val icUnit = U(Unit)
-val icUnit2 = U2(Unit)
-val icNull = N(null)
+konst icUnit = U(Unit)
+konst icUnit2 = U2(Unit)
+konst icNull = N(null)
 
-val anyIcUnit: Any = icUnit
-val anyIcUnit2: Any = icUnit2
-val anyIcNull: Any = icNull
+konst anyIcUnit: Any = icUnit
+konst anyIcUnit2: Any = icUnit2
+konst anyIcNull: Any = icNull
 
-val z = I(42)
-val jli = JLI(java.lang.Integer(42))
+konst z = I(42)
+konst jli = JLI(java.lang.Integer(42))
 
 fun box(): String {
     assertEquals(null, icUnit::class.javaPrimitiveType)

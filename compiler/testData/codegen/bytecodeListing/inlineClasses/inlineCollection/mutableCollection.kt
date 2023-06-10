@@ -1,7 +1,7 @@
 // IGNORE_ANNOTATIONS
 
-inline class InlineMutableCollection<T>(private val mc: MutableCollection<T>) : MutableCollection<T> {
-    override val size: Int get() = mc.size
+inline class InlineMutableCollection<T>(private konst mc: MutableCollection<T>) : MutableCollection<T> {
+    override konst size: Int get() = mc.size
     override fun contains(element: T): Boolean = mc.contains(element)
     override fun containsAll(elements: Collection<T>): Boolean = mc.containsAll(elements)
     override fun isEmpty(): Boolean = mc.isEmpty()

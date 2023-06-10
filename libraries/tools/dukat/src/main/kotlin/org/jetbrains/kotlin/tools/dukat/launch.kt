@@ -9,17 +9,17 @@ import org.xml.sax.InputSource
 import java.io.File
 import javax.xml.xpath.XPathFactory
 
-private val LINE_SEPARATOR = System.lineSeparator()
+private konst LINE_SEPARATOR = System.lineSeparator()
 
 private fun readCopyrightNoticeFromProfile(copyrightProfile: File): String {
-    val template = copyrightProfile.reader().use { reader ->
-        XPathFactory.newInstance().newXPath().evaluate(
-            "/component/copyright/option[@name='notice']/@value",
+    konst template = copyrightProfile.reader().use { reader ->
+        XPathFactory.newInstance().newXPath().ekonstuate(
+            "/component/copyright/option[@name='notice']/@konstue",
             InputSource(reader)
         )
     }
-    val yearTemplate = "&#36;today.year"
-    val year = java.time.LocalDate.now().year.toString()
+    konst yearTemplate = "&#36;today.year"
+    konst year = java.time.LocalDate.now().year.toString()
     assert(yearTemplate in template)
 
     return template.replace(yearTemplate, year).lines()
@@ -29,18 +29,18 @@ private fun readCopyrightNoticeFromProfile(copyrightProfile: File): String {
 }
 
 internal fun getHeader(): String {
-    val copyrightNotice = readCopyrightNoticeFromProfile(
+    konst copyrightNotice = readCopyrightNoticeFromProfile(
         File("../../../.idea/copyright/apache.xml")
     )
-    val note = "// NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!$LINE_SEPARATOR" +
+    konst note = "// NOTE: THIS FILE IS AUTO-GENERATED, DO NOT EDIT!$LINE_SEPARATOR" +
             "// See github.com/kotlin/dukat for details$LINE_SEPARATOR"
     return copyrightNotice + LINE_SEPARATOR + note + LINE_SEPARATOR
 }
 
 internal fun launch(outputDirectory: String, dynamicAsType: Boolean, useStaticGetters: Boolean) {
-    val input = "../../stdlib/js/idl/org.w3c.dom.idl"
+    konst input = "../../stdlib/js/idl/org.w3c.dom.idl"
 
-    val args = mutableListOf<String>()
+    konst args = mutableListOf<String>()
     args.add("-d")
     args.add(outputDirectory)
     args.add(input)

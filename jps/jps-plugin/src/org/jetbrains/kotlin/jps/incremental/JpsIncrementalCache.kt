@@ -61,8 +61,8 @@ class JpsIncrementalJsCache(
 }
 
 private class KotlinIncrementalStorageProvider(
-    private val target: KotlinModuleBuildTarget<*>,
-    private val paths: BuildDataPaths
+    private konst target: KotlinModuleBuildTarget<*>,
+    private konst paths: BuildDataPaths
 ) : StorageProvider<JpsIncrementalCache>() {
     init {
         check(target.hasCaches)

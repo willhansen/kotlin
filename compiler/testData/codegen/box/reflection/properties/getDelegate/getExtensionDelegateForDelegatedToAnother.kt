@@ -7,8 +7,8 @@ import kotlin.test.assertEquals
 
 class A
 
-val A.x: Int get() = 1
-val A.y: Int by A::x
+konst A.x: Int get() = 1
+konst A.y: Int by A::x
 
 fun box(): String {
     assertEquals(A::x, A::y.apply { isAccessible = true }.getExtensionDelegate())

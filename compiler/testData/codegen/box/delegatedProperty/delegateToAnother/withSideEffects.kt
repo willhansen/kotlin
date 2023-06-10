@@ -2,12 +2,12 @@
 var result = "Fail"
 
 object O {
-    val z = 42
+    konst z = 42
     init { result = "OK" }
 }
 
 class A {
-    val x by O::z
+    konst x by O::z
 }
 
 fun box(): String {

@@ -21,6 +21,6 @@ fun testLong2(a: Long, b: Long?) = a != b
 // 2 shortValue
 // 2 intValue
 // 2 longValue
-// 2 valueOf
-// 2 Boolean.valueOf
+// 2 konstueOf
+// 2 Boolean.konstueOf
 // 2 areEqual

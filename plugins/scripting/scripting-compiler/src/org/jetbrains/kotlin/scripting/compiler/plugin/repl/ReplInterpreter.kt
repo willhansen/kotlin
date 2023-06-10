@@ -9,7 +9,7 @@ import com.intellij.core.JavaCoreProjectEnvironment
 import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.messages.*
 import org.jetbrains.kotlin.cli.common.repl.ReplClassLoader
-import org.jetbrains.kotlin.cli.common.repl.ReplEvalResult
+import org.jetbrains.kotlin.cli.common.repl.ReplEkonstResult
 import org.jetbrains.kotlin.cli.jvm.compiler.EnvironmentConfigFiles
 import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.cli.jvm.compiler.messageCollector
@@ -29,24 +29,24 @@ import kotlin.script.experimental.api.*
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.impl.internalScriptingRunSuspend
-import kotlin.script.experimental.jvm.BasicJvmReplEvaluator
+import kotlin.script.experimental.jvm.BasicJvmReplEkonstuator
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.jvm.util.renderError
 
 class ReplInterpreter(
     projectEnvironment: JavaCoreProjectEnvironment,
-    private val configuration: CompilerConfiguration,
-    private val replConfiguration: ReplConfiguration
+    private konst configuration: CompilerConfiguration,
+    private konst replConfiguration: ReplConfiguration
 ) {
-    private val hostConfiguration: ScriptingHostConfiguration
-    private val compilationConfiguration: ScriptCompilationConfiguration
-    private val evaluationConfiguration: ScriptEvaluationConfiguration
+    private konst hostConfiguration: ScriptingHostConfiguration
+    private konst compilationConfiguration: ScriptCompilationConfiguration
+    private konst ekonstuationConfiguration: ScriptEkonstuationConfiguration
 
-    private val replState: JvmReplCompilerState<*>
+    private konst replState: JvmReplCompilerState<*>
 
     companion object {
-        private val REPL_LINE_AS_SCRIPT_DEFINITION = object : KotlinScriptDefinition(Any::class) {
-            override val name = "Kotlin REPL"
+        private konst REPL_LINE_AS_SCRIPT_DEFINITION = object : KotlinScriptDefinition(Any::class) {
+            override konst name = "Kotlin REPL"
         }
 
     }
@@ -54,14 +54,14 @@ class ReplInterpreter(
     init {
         hostConfiguration = defaultJvmScriptingHostConfiguration
 
-        val environment = (projectEnvironment as? KotlinCoreEnvironment.ProjectEnvironment)?.let {
+        konst environment = (projectEnvironment as? KotlinCoreEnvironment.ProjectEnvironment)?.let {
             KotlinCoreEnvironment.createForProduction(it, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
         }
             ?: KotlinCoreEnvironment.createForProduction(
                 projectEnvironment.parentDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES
             )
 
-        val context =
+        konst context =
             createCompilationContextFromEnvironment(
                 ScriptCompilationConfigurationFromDefinition(hostConfiguration, REPL_LINE_AS_SCRIPT_DEFINITION),
                 environment,
@@ -69,7 +69,7 @@ class ReplInterpreter(
             )
 
         compilationConfiguration = context.baseScriptCompilationConfiguration
-        evaluationConfiguration = ScriptEvaluationConfigurationFromDefinition(hostConfiguration, REPL_LINE_AS_SCRIPT_DEFINITION).with {
+        ekonstuationConfiguration = ScriptEkonstuationConfigurationFromDefinition(hostConfiguration, REPL_LINE_AS_SCRIPT_DEFINITION).with {
             scriptExecutionWrapper<Any> { replConfiguration.executionInterceptor.execute(it) }
         }
 
@@ -86,19 +86,19 @@ class ReplInterpreter(
         )
     }
 
-    private val compiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>(hostConfiguration, replState)
-    private val evaluator = BasicJvmReplEvaluator()
+    private konst compiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>(hostConfiguration, replState)
+    private konst ekonstuator = BasicJvmReplEkonstuator()
 
-    private val lineNumber = AtomicInteger()
+    private konst lineNumber = AtomicInteger()
 
     private fun nextSnippet(code: String) =
         code.toScriptSource(
             "Line_${lineNumber.getAndIncrement()}.${compilationConfiguration[ScriptCompilationConfiguration.fileExtension]}"
         )
 
-    private val previousIncompleteLines = arrayListOf<String>()
+    private konst previousIncompleteLines = arrayListOf<String>()
 
-    private val classpathRoots = configuration.getList(CLIConfigurationKeys.CONTENT_ROOTS).mapNotNull { root ->
+    private konst classpathRoots = configuration.getList(CLIConfigurationKeys.CONTENT_ROOTS).mapNotNull { root ->
         when (root) {
             is JvmModulePathRoot -> root.file // TODO: only add required modules
             is JvmClasspathRoot -> root.file
@@ -106,7 +106,7 @@ class ReplInterpreter(
         }
     }
 
-    private val classLoader =
+    private konst classLoader =
         ReplClassLoader(
             URLClassLoader(
                 classpathRoots.map { it.toURI().toURL() }.toTypedArray(),
@@ -114,16 +114,16 @@ class ReplInterpreter(
             )
         )
 
-    private val messageCollector = object : MessageCollector {
+    private konst messageCollector = object : MessageCollector {
         private var hasErrors = false
-        private val messageRenderer = MessageRenderer.WITHOUT_PATHS
+        private konst messageRenderer = MessageRenderer.WITHOUT_PATHS
 
         override fun clear() {
             hasErrors = false
         }
 
         override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
-            val msg = messageRenderer.render(severity, message, location).trimEnd()
+            konst msg = messageRenderer.render(severity, message, location).trimEnd()
             with(replConfiguration.writer) {
                 when (severity) {
                     CompilerMessageSeverity.EXCEPTION -> sendInternalErrorReport(msg)
@@ -143,11 +143,11 @@ class ReplInterpreter(
         override fun hasErrors(): Boolean = hasErrors
     }
 
-    fun eval(line: String): ReplEvalResult {
-        val fullText = (previousIncompleteLines + line).joinToString(separator = "\n")
+    fun ekonst(line: String): ReplEkonstResult {
+        konst fullText = (previousIncompleteLines + line).joinToString(separator = "\n")
 
         try {
-            val snippet = nextSnippet(fullText)
+            konst snippet = nextSnippet(fullText)
 
             fun SourceCode.Location.toCompilerMessageLocation() =
                 CompilerMessageLocation.create(
@@ -158,7 +158,7 @@ class ReplInterpreter(
 
             fun ResultWithDiagnostics<*>.reportToMessageCollector() {
                 for (it in reports) {
-                    val diagnosticSeverity = when (it.severity) {
+                    konst diagnosticSeverity = when (it.severity) {
                         ScriptDiagnostic.Severity.ERROR -> CompilerMessageSeverity.ERROR
                         ScriptDiagnostic.Severity.FATAL -> CompilerMessageSeverity.EXCEPTION
                         ScriptDiagnostic.Severity.WARNING -> CompilerMessageSeverity.WARNING
@@ -169,32 +169,32 @@ class ReplInterpreter(
             }
 
             @Suppress("DEPRECATION_ERROR")
-            val evalRes: ReplEvalResult = internalScriptingRunSuspend {
-                when (val compileResult = compiler.compile(listOf(snippet), compilationConfiguration)) {
+            konst ekonstRes: ReplEkonstResult = internalScriptingRunSuspend {
+                when (konst compileResult = compiler.compile(listOf(snippet), compilationConfiguration)) {
                     is ResultWithDiagnostics.Failure -> {
-                        val incompleteReport = compileResult.reports.find { it.code == ScriptDiagnostic.incompleteCode }
+                        konst incompleteReport = compileResult.reports.find { it.code == ScriptDiagnostic.incompleteCode }
                         if (incompleteReport != null)
-                            ReplEvalResult.Incomplete(incompleteReport.message)
+                            ReplEkonstResult.Incomplete(incompleteReport.message)
                         else {
                             compileResult.reportToMessageCollector()
-                            ReplEvalResult.Error.CompileTime("")
+                            ReplEkonstResult.Error.CompileTime("")
                         }
                     }
                     is ResultWithDiagnostics.Success -> {
                         compileResult.reportToMessageCollector()
-                        val evalResult = evaluator.eval(compileResult.value, evaluationConfiguration)
-                        when (evalResult) {
+                        konst ekonstResult = ekonstuator.ekonst(compileResult.konstue, ekonstuationConfiguration)
+                        when (ekonstResult) {
                             is ResultWithDiagnostics.Success -> {
-                                when (val evalValue = evalResult.value.get().result) {
-                                    is ResultValue.Unit -> ReplEvalResult.UnitResult()
-                                    is ResultValue.Value -> ReplEvalResult.ValueResult(evalValue.name, evalValue.value, evalValue.type, evalValue.scriptInstance)
-                                    is ResultValue.Error -> ReplEvalResult.Error.Runtime(evalValue.renderError())
-                                    else -> ReplEvalResult.Error.Runtime("Error: snippet is not evaluated")
+                                when (konst ekonstValue = ekonstResult.konstue.get().result) {
+                                    is ResultValue.Unit -> ReplEkonstResult.UnitResult()
+                                    is ResultValue.Value -> ReplEkonstResult.ValueResult(ekonstValue.name, ekonstValue.konstue, ekonstValue.type, ekonstValue.scriptInstance)
+                                    is ResultValue.Error -> ReplEkonstResult.Error.Runtime(ekonstValue.renderError())
+                                    else -> ReplEkonstResult.Error.Runtime("Error: snippet is not ekonstuated")
                                 }
                             }
                             else -> {
-                                evalResult.reportToMessageCollector()
-                                ReplEvalResult.Error.Runtime("")
+                                ekonstResult.reportToMessageCollector()
+                                ReplEkonstResult.Error.Runtime("")
                             }
                         }
                     }
@@ -202,13 +202,13 @@ class ReplInterpreter(
             }
 
             when {
-                evalRes !is ReplEvalResult.Incomplete -> previousIncompleteLines.clear()
+                ekonstRes !is ReplEkonstResult.Incomplete -> previousIncompleteLines.clear()
                 replConfiguration.allowIncompleteLines -> previousIncompleteLines.add(line)
-                else -> return ReplEvalResult.Error.CompileTime("incomplete code")
+                else -> return ReplEkonstResult.Error.CompileTime("incomplete code")
             }
-            return evalRes
+            return ekonstRes
         } catch (e: Throwable) {
-            val writer = PrintWriter(System.err)
+            konst writer = PrintWriter(System.err)
             classLoader.dumpClasses(writer)
             writer.flush()
             throw e

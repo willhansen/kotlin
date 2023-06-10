@@ -1,6 +1,6 @@
 class Clazz {
     companion object {
-        val a = object {
+        konst a = object {
             fun run(x: String) = x
         }
     }

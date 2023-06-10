@@ -24,8 +24,8 @@ import java.util.Map;
 @SuppressWarnings({"unchecked", "NullableProblems", "rawtypes"})
 public abstract class CallableReference implements KCallable, Serializable {
     // This field is not volatile intentionally:
-    // 1) It's fine if the value is computed multiple times in different threads;
-    // 2) An uninitialized value cannot be observed in this field from other thread because only already initialized or safely initialized
+    // 1) It's fine if the konstue is computed multiple times in different threads;
+    // 2) An uninitialized konstue cannot be observed in this field from other thread because only already initialized or safely initialized
     //    objects are written to it. The latter is guaranteed because both KFunctionImpl and KPropertyImpl have at least one final field.
     private transient KCallable reflected;
 

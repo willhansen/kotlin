@@ -16,10 +16,10 @@ interface I {
 }
 
 fun box(): String {
-    val a = foo("1").get()
+    konst a = foo("1").get()
     if (a != "foo_String(1)") return "fail1: $a"
 
-    val b = foo(2).get()
+    konst b = foo(2).get()
     if (b != "foo_Int(2)") return "fail2: $b"
 
     return "OK"

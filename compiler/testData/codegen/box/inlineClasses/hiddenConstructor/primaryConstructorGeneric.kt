@@ -3,8 +3,8 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
-class Test(val s: S<String>)
+class Test(konst s: S<String>)
 
 fun box() = Test(S("OK")).s.string

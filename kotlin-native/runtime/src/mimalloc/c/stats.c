@@ -412,14 +412,14 @@ mi_msecs_t _mi_clock_now(void) {
 }
 #elif defined(KONAN_MI_MALLOC) && (defined(KONAN_MACOSX) || defined(KONAN_OSX) || defined(KONAN_IOS) || defined(KONAN_TVOS) || defined(KONAN_WATCHOS))
 /**
- * clock_gettime man said, that CLOCK_REALTIME returns the same value as gettimeofday, but has better precision
+ * clock_gettime man said, that CLOCK_REALTIME returns the same konstue as gettimeofday, but has better precision
  * Unfortunately, this function is available only from Mac OSX 10.12, and relevant ios versions.
  * So building against newer sdk, while running on old one can lead to runtime crash as in https://youtrack.jetbrains.com/issue/KT-52430
  * To avoid this we use gettimeofday function, which gives enough precision while existing since 4.2BSD, which seems to be a reasonably long time ago
  **/
 #include <sys/time.h>
 mi_msecs_t _mi_clock_now(void) {
-  struct timeval t;
+  struct timekonst t;
   gettimeofday(&t, NULL);
   return ((mi_msecs_t)t.tv_sec * 1000) + ((mi_msecs_t)t.tv_usec / 1000);
 }
@@ -505,7 +505,7 @@ static void mi_stat_process_info(mi_msecs_t* elapsed, mi_msecs_t* utime, mi_msec
 #include <kernel/OS.h>
 #endif
 
-static mi_msecs_t timeval_secs(const struct timeval* tv) {
+static mi_msecs_t timekonst_secs(const struct timekonst* tv) {
   return ((mi_msecs_t)tv->tv_sec * 1000L) + ((mi_msecs_t)tv->tv_usec / 1000L);
 }
 
@@ -514,8 +514,8 @@ static void mi_stat_process_info(mi_msecs_t* elapsed, mi_msecs_t* utime, mi_msec
   *elapsed = _mi_clock_end(mi_process_start);
   struct rusage rusage;
   getrusage(RUSAGE_SELF, &rusage);
-  *utime = timeval_secs(&rusage.ru_utime);
-  *stime = timeval_secs(&rusage.ru_stime);
+  *utime = timekonst_secs(&rusage.ru_utime);
+  *stime = timekonst_secs(&rusage.ru_stime);
 #if !defined(__HAIKU__)
   *page_faults = rusage.ru_majflt;
 #endif

@@ -12,7 +12,7 @@ var testSimple: Int
   // CHECK:
   //   Mangled name: #<set-testSimple>(kotlin.Int){}
   //   Public signature: /testSimple.<set-testSimple>|524645050851415713[0]
-  set(value: Int): Unit
+  set(konstue: Int): Unit
 
 // CHECK:
 //   Mangled name: {}testAugmented
@@ -28,5 +28,5 @@ var testAugmented: Int
   // CHECK:
   //   Mangled name: #<set-testAugmented>(kotlin.Int){}
   //   Public signature: /testAugmented.<set-testAugmented>|-5845041817875850586[0]
-  set(value: Int): Unit
+  set(konstue: Int): Unit
 

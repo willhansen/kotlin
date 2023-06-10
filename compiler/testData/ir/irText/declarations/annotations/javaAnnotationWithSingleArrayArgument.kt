@@ -7,11 +7,11 @@
 // FILE: A.java
 
 public class A {
-    @Annos(value = @Anno(token = "OK"))
-    @Strings(value = "OK")
-    @Ints(value = 42)
-    @Enums(value = E.EA)
-    @Classes(value = double.class)
+    @Annos(konstue = @Anno(token = "OK"))
+    @Strings(konstue = "OK")
+    @Ints(konstue = 42)
+    @Enums(konstue = E.EA)
+    @Classes(konstue = double.class)
     public void test() {}
 }
 
@@ -19,13 +19,13 @@ public class A {
 
 import kotlin.reflect.KClass
 
-annotation class Anno(val token: String)
+annotation class Anno(konst token: String)
 enum class E { EA }
 
-annotation class Annos(val value: Array<Anno>)
-annotation class Strings(val value: Array<String>)
-annotation class Ints(val value: IntArray)
-annotation class Enums(val value: Array<E>)
-annotation class Classes(val value: Array<KClass<*>>)
+annotation class Annos(konst konstue: Array<Anno>)
+annotation class Strings(konst konstue: Array<String>)
+annotation class Ints(konst konstue: IntArray)
+annotation class Enums(konst konstue: Array<E>)
+annotation class Classes(konst konstue: Array<KClass<*>>)
 
 class C : A()

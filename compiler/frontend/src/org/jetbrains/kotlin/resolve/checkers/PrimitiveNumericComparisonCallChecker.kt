@@ -20,29 +20,29 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.*
 
 class PrimitiveNumericComparisonInfo(
-    val comparisonType: KotlinType,
-    val leftPrimitiveType: KotlinType,
-    val rightPrimitiveType: KotlinType,
-    val leftType: KotlinType,
-    val rightType: KotlinType
+    konst comparisonType: KotlinType,
+    konst leftPrimitiveType: KotlinType,
+    konst rightPrimitiveType: KotlinType,
+    konst leftType: KotlinType,
+    konst rightType: KotlinType
 )
 
 object PrimitiveNumericComparisonCallChecker : CallChecker {
 
-    private val comparisonOperatorTokens = setOf(KtTokens.EQEQ, KtTokens.EXCLEQ, KtTokens.LT, KtTokens.LTEQ, KtTokens.GT, KtTokens.GTEQ)
+    private konst comparisonOperatorTokens = setOf(KtTokens.EQEQ, KtTokens.EXCLEQ, KtTokens.LT, KtTokens.LTEQ, KtTokens.GT, KtTokens.GTEQ)
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         // Primitive number comparisons only take part in binary operator convention resolution
-        val binaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
+        konst binaryExpression = resolvedCall.call.callElement as? KtBinaryExpression ?: return
         if (!comparisonOperatorTokens.contains(binaryExpression.operationReference.getReferencedNameElementType())) return
 
         if (!resolvedCall.isStandardComparison()) return
 
-        val leftExpr = binaryExpression.left ?: return
-        val rightExpr = binaryExpression.right ?: return
+        konst leftExpr = binaryExpression.left ?: return
+        konst rightExpr = binaryExpression.right ?: return
 
-        val leftTypes = context.getStableTypesForExpression(leftExpr)
-        val rightTypes = context.getStableTypesForExpression(rightExpr)
+        konst leftTypes = context.getStableTypesForExpression(leftExpr)
+        konst rightTypes = context.getStableTypesForExpression(rightExpr)
 
         inferPrimitiveNumericComparisonType(context.trace, leftTypes, rightTypes, binaryExpression)
     }
@@ -53,11 +53,11 @@ object PrimitiveNumericComparisonCallChecker : CallChecker {
         rightTypes: List<KotlinType>,
         comparison: KtExpression
     ) {
-        val leftPrimitiveOrNullableType = leftTypes.findPrimitiveOrNullablePrimitiveType() ?: return
-        val rightPrimitiveOrNullableType = rightTypes.findPrimitiveOrNullablePrimitiveType() ?: return
-        val leftPrimitiveType = leftPrimitiveOrNullableType.makeNotNullable()
-        val rightPrimitiveType = rightPrimitiveOrNullableType.makeNotNullable()
-        val leastCommonType = leastCommonPrimitiveNumericType(leftPrimitiveType, rightPrimitiveType)
+        konst leftPrimitiveOrNullableType = leftTypes.findPrimitiveOrNullablePrimitiveType() ?: return
+        konst rightPrimitiveOrNullableType = rightTypes.findPrimitiveOrNullablePrimitiveType() ?: return
+        konst leftPrimitiveType = leftPrimitiveOrNullableType.makeNotNullable()
+        konst rightPrimitiveType = rightPrimitiveOrNullableType.makeNotNullable()
+        konst leastCommonType = leastCommonPrimitiveNumericType(leftPrimitiveType, rightPrimitiveType)
 
         trace.record(
             BindingContext.PRIMITIVE_NUMERIC_COMPARISON_INFO,
@@ -76,8 +76,8 @@ object PrimitiveNumericComparisonCallChecker : CallChecker {
                 KotlinBuiltIns.isUnderKotlinPackage(resultingDescriptor)
 
     private fun leastCommonPrimitiveNumericType(t1: KotlinType, t2: KotlinType): KotlinType {
-        val pt1 = t1.promoteIntegerTypeToIntIfRequired()
-        val pt2 = t2.promoteIntegerTypeToIntIfRequired()
+        konst pt1 = t1.promoteIntegerTypeToIntIfRequired()
+        konst pt2 = t2.promoteIntegerTypeToIntIfRequired()
 
         return when {
             pt1.isDouble() || pt2.isDouble() -> t1.builtIns.doubleType
@@ -96,12 +96,12 @@ object PrimitiveNumericComparisonCallChecker : CallChecker {
         }
 
     private fun CallCheckerContext.getStableTypesForExpression(expression: KtExpression): List<KotlinType> {
-        val type = trace.bindingContext.getType(expression) ?: return emptyList()
-        val dataFlowValue = dataFlowValueFactory.createDataFlowValue(
+        konst type = trace.bindingContext.getType(expression) ?: return emptyList()
+        konst dataFlowValue = dataFlowValueFactory.createDataFlowValue(
             expression, type, trace.bindingContext, resolutionContext.scope.ownerDescriptor
         )
-        val dataFlowInfo = trace.get(BindingContext.EXPRESSION_TYPE_INFO, expression)?.dataFlowInfo ?: return emptyList()
-        val stableTypes = dataFlowInfo.getStableTypes(dataFlowValue, languageVersionSettings)
+        konst dataFlowInfo = trace.get(BindingContext.EXPRESSION_TYPE_INFO, expression)?.dataFlowInfo ?: return emptyList()
+        konst stableTypes = dataFlowInfo.getStableTypes(dataFlowValue, languageVersionSettings)
         return listOf(type) + stableTypes
     }
 

@@ -22,27 +22,27 @@ import org.jetbrains.kotlin.js.backend.ast.metadata.imported
 
 
 fun removeUnusedImports(fragment: JsProgramFragment, code: JsBlock) {
-    val usedImports = mutableSetOf<JsName>()
+    konst usedImports = mutableSetOf<JsName>()
 
     collectUsedImports(code, usedImports)
 
     fragment.nameBindings.retainAll { !it.name.imported || it.name in usedImports }
 
-    val existingTags = fragment.nameBindings.map { it.key }.toSet()
+    konst existingTags = fragment.nameBindings.map { it.key }.toSet()
 
     fragment.imports.entries.retainAll { (k, _) -> k in existingTags }
 }
 
 private fun collectUsedImports(root: JsNode, to: MutableSet<JsName>): Set<JsName> {
-    val collector = UsedImportsCollector(to)
+    konst collector = UsedImportsCollector(to)
     root.accept(collector)
 
     // See StaticContext.getVariableForPropertyMetadata
     // TODO Find a better way
-    val removedPseudoImports = mutableSetOf<JsName>()
+    konst removedPseudoImports = mutableSetOf<JsName>()
     NodeRemover(JsVars::class.java) { statement ->
         if (statement.vars.size == 1) {
-            val name = statement.vars[0].name
+            konst name = statement.vars[0].name
             (name.imported && name !in collector.usedImports).also {
                 if (it) removedPseudoImports += name
             }
@@ -59,9 +59,9 @@ private fun collectUsedImports(root: JsNode, to: MutableSet<JsName>): Set<JsName
     return collector.usedImports
 }
 
-private class UsedImportsCollector(val usedImports: MutableSet<JsName>) : RecursiveJsVisitor() {
+private class UsedImportsCollector(konst usedImports: MutableSet<JsName>) : RecursiveJsVisitor() {
 
-    val pseudoImports = mutableListOf<JsVars.JsVar>()
+    konst pseudoImports = mutableListOf<JsVars.JsVar>()
 
     override fun visit(x: JsVars.JsVar) {
         if (x.name.imported) {
@@ -72,7 +72,7 @@ private class UsedImportsCollector(val usedImports: MutableSet<JsName>) : Recurs
     }
 
     override fun visitNameRef(nameRef: JsNameRef) {
-        val name = nameRef.name
+        konst name = nameRef.name
         if (name != null && name.imported) {
             usedImports += name
         }

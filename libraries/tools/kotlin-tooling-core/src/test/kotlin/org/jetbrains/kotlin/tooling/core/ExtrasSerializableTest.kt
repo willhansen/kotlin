@@ -18,8 +18,8 @@ class ExtrasSerializableTest {
 
     @Test
     fun `test - serialize deserialize - MutableExtras`() {
-        val extras = mutableExtrasOf(extrasKeyOf<String>() withValue "hello")
-        val deserializedExtras = extras.serialize().deserialize<Extras>()
+        konst extras = mutableExtrasOf(extrasKeyOf<String>() withValue "hello")
+        konst deserializedExtras = extras.serialize().deserialize<Extras>()
         assertNotSame(extras, deserializedExtras)
         assertEquals(extras, deserializedExtras)
     }
@@ -32,8 +32,8 @@ class ExtrasSerializableTest {
 
     @Test
     fun `test - serialize deserialize - ImmutableExtras`() {
-        val extras = extrasOf(extrasKeyOf<String>() withValue "hello")
-        val deserializedExtras = extras.serialize().deserialize<Extras>()
+        konst extras = extrasOf(extrasKeyOf<String>() withValue "hello")
+        konst deserializedExtras = extras.serialize().deserialize<Extras>()
         assertNotSame(extras, deserializedExtras)
         assertEquals(extras, deserializedExtras)
         assertSame(extras.javaClass, deserializedExtras.javaClass)

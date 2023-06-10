@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}I0
 //   Public signature: /I0|3638397844945051376[0]
-const val I0: Int
+const konst I0: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-I0>(){}kotlin.Int
   //   Public signature: /I0.<get-I0>|-6746694356593193165[0]
@@ -13,7 +13,7 @@ const val I0: Int
 // CHECK:
 //   Mangled name: {}I1
 //   Public signature: /I1|84494794639401383[0]
-const val I1: Int
+const konst I1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-I1>(){}kotlin.Int
   //   Public signature: /I1.<get-I1>|-8819240179982204215[0]
@@ -25,7 +25,7 @@ const val I1: Int
 // CHECK:
 //   Mangled name: {}I2
 //   Public signature: /I2|-5820322169900540552[0]
-const val I2: Int
+const konst I2: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-I2>(){}kotlin.Int
   //   Public signature: /I2.<get-I2>|-4989683773709385937[0]
@@ -37,7 +37,7 @@ const val I2: Int
 // CHECK:
 //   Mangled name: {}STR1
 //   Public signature: /STR1|-6743560849647323388[0]
-const val STR1: String
+const konst STR1: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-STR1>(){}kotlin.String
   //   Public signature: /STR1.<get-STR1>|-2293085048547070941[0]
@@ -49,7 +49,7 @@ const val STR1: String
 // CHECK:
 //   Mangled name: {}STR2
 //   Public signature: /STR2|373630768127354084[0]
-const val STR2: String
+const konst STR2: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-STR2>(){}kotlin.String
   //   Public signature: /STR2.<get-STR2>|1585456442054637269[0]
@@ -61,7 +61,7 @@ const val STR2: String
 // CHECK:
 //   Mangled name: {}STR3
 //   Public signature: /STR3|-2584825627971705247[0]
-const val STR3: String
+const konst STR3: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-STR3>(){}kotlin.String
   //   Public signature: /STR3.<get-STR3>|-7307022761040876675[0]
@@ -73,7 +73,7 @@ const val STR3: String
 // CHECK:
 //   Mangled name: {}STR4
 //   Public signature: /STR4|-8283585211440994945[0]
-const val STR4: String
+const konst STR4: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-STR4>(){}kotlin.String
   //   Public signature: /STR4.<get-STR4>|-2113476242053901162[0]

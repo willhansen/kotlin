@@ -5,11 +5,11 @@ fun test(): Array<Int> {
 
     foo(<!UNSUPPORTED!>[""]<!>)
 
-    val p = <!UNSUPPORTED!>[1, 2]<!> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+<!> [3, 4]
+    konst p = <!UNSUPPORTED!>[1, 2]<!> <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>+<!> [3, 4]
 
     return <!UNSUPPORTED!>[1, 2]<!>
 }
 
 fun foo(a: Array<String> = <!UNSUPPORTED!>[""]<!>) {}
 
-class A(val a: Array<Int> = <!UNSUPPORTED!>[]<!>)
+class A(konst a: Array<Int> = <!UNSUPPORTED!>[]<!>)

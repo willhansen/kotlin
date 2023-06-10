@@ -21,7 +21,7 @@ KtFunctionSymbol:
     KtTypeParameterSymbol(TT1)
     KtTypeParameterSymbol(TT2)
   ]
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol(tT1)
     KtValueParameterSymbol(tT2)
   ]
@@ -84,7 +84,7 @@ KtFunctionSymbol:
   returnType: kotlin/Boolean
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol(other)
   ]
   visibility: Public
@@ -111,7 +111,7 @@ KtFunctionSymbol:
   returnType: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): kotlin/Any
   deprecationStatus: null
@@ -136,7 +136,7 @@ KtFunctionSymbol:
   returnType: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): kotlin/Any
   deprecationStatus: null
@@ -153,6 +153,6 @@ KtConstructorSymbol:
   returnType: test/MyClass
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   deprecationStatus: null

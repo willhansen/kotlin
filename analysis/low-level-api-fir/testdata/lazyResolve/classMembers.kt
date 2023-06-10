@@ -3,13 +3,13 @@ class A {
         receive(functionWithLazyBody())
     }
 
-    val x: Int = 10
+    konst x: Int = 10
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
-    fun receive(value: String) {}
+    fun receive(konstue: String) {}
 
     fun functionWithLazyBody(): String {
         return "42"

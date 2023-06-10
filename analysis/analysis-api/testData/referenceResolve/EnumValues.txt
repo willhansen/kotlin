@@ -1,2 +1,2 @@
 Resolved to:
-0: (in test.E) fun values(): kotlin.Array<test.E>
+0: (in test.E) fun konstues(): kotlin.Array<test.E>

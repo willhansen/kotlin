@@ -5,11 +5,11 @@ class Box<out T : Foo> {
 
   }
 
-  val foo: T
+  konst foo: T
     field = foo
     get
 
-  val str: String
+  konst str: String
     get(): String {
       var foo: Foo = <this>.<get-foo>()
       when {

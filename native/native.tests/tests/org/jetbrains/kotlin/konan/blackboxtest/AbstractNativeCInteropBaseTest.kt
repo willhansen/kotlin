@@ -8,5 +8,5 @@ package org.jetbrains.kotlin.konan.blackboxtest
 import org.jetbrains.kotlin.konan.blackboxtest.support.settings.*
 
 abstract class AbstractNativeCInteropBaseTest : AbstractNativeSimpleTest() {
-    internal val kotlinNativeClassLoader: KotlinNativeClassLoader get() = testRunSettings.get()
+    internal konst kotlinNativeClassLoader: KotlinNativeClassLoader get() = testRunSettings.get()
 }

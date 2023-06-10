@@ -1,5 +1,5 @@
 expression: CLASS_INITIALIZER
 text: init {
-        "value"
+        "konstue"
     }
 isUsedAsExpression: false

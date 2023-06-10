@@ -11,13 +11,13 @@ object Scope {
         fun <T> take(f: () -> T): T = f()
 
         fun test() {
-            val r1 = take(::foo)
+            konst r1 = take(::foo)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>r1<!>
 
-            val r2 = ::foo
+            konst r2 = ::foo
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KFunction0<kotlin.Int>")!>r2<!>
 
-            val r3 = foo()
+            konst r3 = foo()
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>r3<!>
         }
     }

@@ -35,20 +35,20 @@ public class RecursiveDescriptorComparatorAdaptor {
         RecursiveDescriptorComparator.compareDescriptors(expected, actual, configuration, txtFile, assertions);
     }
 
-    public static void validateAndCompareDescriptorWithFile(
+    public static void konstidateAndCompareDescriptorWithFile(
             @NotNull DeclarationDescriptor actual,
             @NotNull RecursiveDescriptorComparator.Configuration configuration,
             @NotNull File txtFile
     ) {
-        RecursiveDescriptorComparator.validateAndCompareDescriptorWithFile(actual, configuration, txtFile, assertions);
+        RecursiveDescriptorComparator.konstidateAndCompareDescriptorWithFile(actual, configuration, txtFile, assertions);
     }
 
-    public static void validateAndCompareDescriptors(
+    public static void konstidateAndCompareDescriptors(
             @NotNull DeclarationDescriptor expected,
             @NotNull DeclarationDescriptor actual,
             @NotNull RecursiveDescriptorComparator.Configuration configuration,
             @Nullable File txtFile
     ) {
-        RecursiveDescriptorComparator.validateAndCompareDescriptors(expected, actual, configuration, txtFile, assertions);
+        RecursiveDescriptorComparator.konstidateAndCompareDescriptors(expected, actual, configuration, txtFile, assertions);
     }
 }

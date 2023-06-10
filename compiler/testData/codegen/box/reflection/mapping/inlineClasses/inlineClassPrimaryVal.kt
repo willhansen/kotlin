@@ -4,24 +4,24 @@
 import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 
-inline class Z1(val publicX: Int) {
+inline class Z1(konst publicX: Int) {
     companion object {
-        val publicXRef = Z1::publicX
-        val publicXBoundRef = Z1(42)::publicX
+        konst publicXRef = Z1::publicX
+        konst publicXBoundRef = Z1(42)::publicX
     }
 }
 
-inline class Z2(internal val internalX: Int) {
+inline class Z2(internal konst internalX: Int) {
     companion object {
-        val internalXRef = Z2::internalX
-        val internalXBoundRef = Z2(42)::internalX
+        konst internalXRef = Z2::internalX
+        konst internalXBoundRef = Z2(42)::internalX
     }
 }
 
-inline class Z3(private val privateX: Int) {
+inline class Z3(private konst privateX: Int) {
     companion object {
-        val privateXRef = Z3::privateX
-        val privateXBoundRef = Z3(42)::privateX
+        konst privateXRef = Z3::privateX
+        konst privateXBoundRef = Z3(42)::privateX
     }
 }
 

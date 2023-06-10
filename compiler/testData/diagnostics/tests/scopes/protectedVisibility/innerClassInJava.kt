@@ -21,5 +21,5 @@ class Foo : BaseClass() {
         super.ProtSubClass()
     }
 
-    private val v1: BaseClass.ProtSubClass = ProtSubClass()
+    private konst v1: BaseClass.ProtSubClass = ProtSubClass()
 }

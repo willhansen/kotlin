@@ -42,14 +42,14 @@ object FirNativeSessionFactory : FirAbstractSessionFactory() {
             },
             createKotlinScopeProvider = { FirKotlinScopeProvider() },
             createProviders = { session, builtinsModuleData, kotlinScopeProvider ->
-                val forwardDeclarationsModuleData = BinaryModuleData.createDependencyModuleData(
+                konst forwardDeclarationsModuleData = BinaryModuleData.createDependencyModuleData(
                     Name.special("<forward declarations>"),
                     moduleDataProvider.platform,
                     moduleDataProvider.analyzerServices,
                 ).apply {
                     bindSession(session)
                 }
-                val kotlinLibraries = resolvedLibraries.map { it.library }
+                konst kotlinLibraries = resolvedLibraries.map { it.library }
                 listOfNotNull(
                     KlibBasedSymbolProvider(session, moduleDataProvider, kotlinScopeProvider, kotlinLibraries),
                     NativeForwardDeclarationsSymbolProvider(session, forwardDeclarationsModuleData, kotlinScopeProvider, kotlinLibraries),

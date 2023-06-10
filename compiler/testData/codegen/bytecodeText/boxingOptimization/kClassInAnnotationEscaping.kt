@@ -1,7 +1,7 @@
 import kotlin.reflect.KClass
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val arg: KClass<*>)
+annotation class Ann(konst arg: KClass<*>)
 
 class OK
 
@@ -10,9 +10,9 @@ class OK
 var escape: KClass<*>? = null
 
 fun test1(): String {
-    val arg = MyClass::class.java.getAnnotation(Ann::class.java).arg
+    konst arg = MyClass::class.java.getAnnotation(Ann::class.java).arg
     escape = arg
-    val argSimpleName = arg.java.getSimpleName()
+    konst argSimpleName = arg.java.getSimpleName()
     return argSimpleName
 }
 

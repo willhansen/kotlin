@@ -1,6 +1,6 @@
 FILE: arrayAssignment.kt
     public? final? fun test(): R|kotlin/Unit| {
-        lval x: <implicit> = intArrayOf#(IntegerLiteral(1), IntegerLiteral(2), IntegerLiteral(3))
+        lkonst x: <implicit> = intArrayOf#(IntegerLiteral(1), IntegerLiteral(2), IntegerLiteral(3))
         x#.set#(IntegerLiteral(1), IntegerLiteral(0))
     }
     public? final? fun foo(): <implicit> {

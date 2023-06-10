@@ -13,7 +13,7 @@ class Foo {
 
     operator fun Bar.invoke(): Foo { return <!RETURN_TYPE_MISMATCH!>this<!> } // (2)
 
-    val x: Bar = Bar()
+    konst x: Bar = Bar()
 
     fun bar() = x() // Should resolve to invoke (1)
 }

@@ -11,7 +11,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiInvalidElementAccessException;
+import com.intellij.psi.PsiInkonstidElementAccessException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.kotlin.psi.KtExpression;
@@ -30,7 +30,7 @@ public class PsiDiagnosticUtils {
             file = element.getContainingFile();
             offset = element.getTextOffset();
         }
-        catch (PsiInvalidElementAccessException invalidException) {
+        catch (PsiInkonstidElementAccessException inkonstidException) {
             // ignore
         }
 

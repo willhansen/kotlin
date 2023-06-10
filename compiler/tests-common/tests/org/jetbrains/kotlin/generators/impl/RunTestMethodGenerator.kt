@@ -13,18 +13,18 @@ import org.jetbrains.kotlin.utils.Printer
 import java.util.function.Function
 
 object RunTestMethodGenerator : MethodGenerator<RunTestMethodModel>() {
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = RunTestMethodModel.Kind
 
     override fun generateBody(method: RunTestMethodModel, p: Printer) {
         with(method) {
-            val modifiedTestMethodName =
+            konst modifiedTestMethodName =
                 if (withTransformer) "path -> ${testMethodName}WithTransformer(path, transformer)" else "this::$testMethodName"
             if (!isWithTargetBackend()) {
                 p.println("KotlinTestUtils.$testRunnerMethodName($modifiedTestMethodName, this, testDataFilePath);")
             } else {
-                val className = TargetBackend::class.java.simpleName
-                val additionalArguments = if (additionalRunnerArguments.isNotEmpty())
+                konst className = TargetBackend::class.java.simpleName
+                konst additionalArguments = if (additionalRunnerArguments.isNotEmpty())
                     additionalRunnerArguments.joinToString(separator = ", ", prefix = ", ")
                 else ""
                 p.println("KotlinTestUtils.$testRunnerMethodName($modifiedTestMethodName, $className.$targetBackend, testDataFilePath$additionalArguments);")
@@ -33,7 +33,7 @@ object RunTestMethodGenerator : MethodGenerator<RunTestMethodModel>() {
     }
 
     override fun generateSignature(method: RunTestMethodModel, p: Printer) {
-        val optionalTransformer = if (method.withTransformer) ", ${Function::class.java.canonicalName}<String, String> transformer" else ""
+        konst optionalTransformer = if (method.withTransformer) ", ${Function::class.java.canonicalName}<String, String> transformer" else ""
         p.print("private void ${method.name}(String testDataFilePath${optionalTransformer}) throws Exception")
     }
 }

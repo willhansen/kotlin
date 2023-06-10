@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val string: T)
+konstue class S<T: String>(konst string: T)
 
 fun foo(s: S<String>): String {
-    val anon = object {
+    konst anon = object {
         fun bar() = s.string
     }
     return anon.bar()

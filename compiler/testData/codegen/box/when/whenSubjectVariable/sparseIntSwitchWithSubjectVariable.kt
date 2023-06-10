@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 fun sparse(x: Int): Int {
-    return when (val xx = (x % 4) * 100) {
+    return when (konst xx = (x % 4) * 100) {
         100 -> 1
         200 -> xx / 100
         300 -> 3

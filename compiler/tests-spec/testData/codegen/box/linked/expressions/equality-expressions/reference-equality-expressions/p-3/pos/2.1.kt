@@ -29,7 +29,7 @@ fun box(): String {
     }
 
     var flag2 = false
-    val x = null
+    konst x = null
     if (null === x) {
         if (x === null)
             flag2 = true
@@ -40,7 +40,7 @@ fun box(): String {
         flag3 = true
 
     var flag4 = false
-    val s: String? = null
+    konst s: String? = null
     if (s === JavaClass.NULL_VALUE)
         if (JavaClass.NULL_VALUE === s)
             flag4 = true

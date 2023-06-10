@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val d = Demo(15)
+    konst d = Demo(15)
     when (stepId) {
         0, 2 -> {
             if (!testEquals(d, Demo(15))) return "Fail equals"

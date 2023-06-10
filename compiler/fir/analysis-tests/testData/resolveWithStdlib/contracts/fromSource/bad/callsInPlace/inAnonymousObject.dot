@@ -45,7 +45,7 @@ digraph inAnonymousObject_kt {
                 18 [label="Exit class <anonymous object>" style="filled" fillcolor=red];
             }
             19 [label="Exit anonymous object expression"];
-            20 [label="Variable declaration: lval obj: R|<anonymous>|"];
+            20 [label="Variable declaration: lkonst obj: R|<anonymous>|"];
             21 [label="Access variable R|<local>/obj|"];
             22 [label="Function call: R|<local>/obj|.R|/<anonymous>.run|()" style="filled" fillcolor=yellow];
             23 [label="Function call: R|<local>/d|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()" style="filled" fillcolor=yellow];

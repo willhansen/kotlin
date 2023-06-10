@@ -8,10 +8,10 @@ fun <T> List<T>.foo() = "foo"
 fun List<Int>.foo() = "fooInt"
 
 fun box(): String {
-    val strings = listOf("", "").foo()
+    konst strings = listOf("", "").foo()
     if (strings != "foo") return "Fail: $strings"
 
-    val ints = listOf(1, 2).foo()
+    konst ints = listOf(1, 2).foo()
     if (ints != "fooInt") return "Fail: $ints"
 
     return "OK"

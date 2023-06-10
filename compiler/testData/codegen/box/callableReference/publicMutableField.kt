@@ -10,8 +10,8 @@ public class A {
 // FILE: 1.kt
 
 fun box(): String {
-    val a = A()
-    val f = A::field
+    konst a = A()
+    konst f = A::field
     if (f.get(a) != 239) return "Fail 1: ${f.get(a)}"
     f.set(a, 42)
     if (f.get(a) != 42) return "Fail 2: ${f.get(a)}"

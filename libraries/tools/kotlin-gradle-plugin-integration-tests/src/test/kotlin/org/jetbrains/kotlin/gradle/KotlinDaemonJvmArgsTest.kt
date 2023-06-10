@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName
 
 @DisplayName("Kotlin daemon JVM args")
 class KotlinDaemonJvmArgsTest : KGPDaemonsBaseTest() {
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
 
     @GradleTest

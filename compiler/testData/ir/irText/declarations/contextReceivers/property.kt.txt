@@ -8,7 +8,7 @@ interface B {
 
 }
 
-val c: Int
+konst c: Int
   get($context_receiver_0: A, $context_receiver_1: B): Int {
     return $context_receiver_0.a().plus(other = $context_receiver_1.b())
   }

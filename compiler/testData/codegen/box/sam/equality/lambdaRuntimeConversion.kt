@@ -7,7 +7,7 @@ fun checkNotEqual(x: Any, y: Any) {
 
 private fun id(f: Runnable): Any = f
 
-val lambda = {}
+konst lambda = {}
 
 fun box(): String {
     // Since 1.0, SAM wrappers for Java do not implement equals/hashCode

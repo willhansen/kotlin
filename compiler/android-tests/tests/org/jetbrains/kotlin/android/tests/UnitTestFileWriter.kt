@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.utils.Printer
 import java.io.File
 import java.io.FileWriter
 
-class TestInfo(val name: String, val fqName: FqName, val file: File)
+class TestInfo(konst name: String, konst fqName: FqName, konst file: File)
 
 class UnitTestFileWriter(
-    private val flavourFolder: String,
-    private val flavourName: String,
-    private val generatedTestNames: MutableSet<String>
+    private konst flavourFolder: String,
+    private konst flavourName: String,
+    private konst generatedTestNames: MutableSet<String>
 ) {
-    private val infos = arrayListOf<TestInfo>()
+    private konst infos = arrayListOf<TestInfo>()
 
     fun addTests(info: List<TestInfo>) {
         infos.addAll(info)
@@ -29,7 +29,7 @@ class UnitTestFileWriter(
 
     fun generate() {
         FileWriter(File(flavourFolder, flavourName.replaceFirstChar(Char::uppercaseChar) + ".java").also { it.parentFile.mkdirs() }).use { suite ->
-            val p = Printer(suite)
+            konst p = Printer(suite)
             p.println(
                 """package ${CodegenTestsOnAndroidGenerator.testClassPackage};
                 |

@@ -28,16 +28,16 @@ import org.jetbrains.kotlin.resolve.multiplatform.findCompatibleActualsForExpect
  * generating bytecode for a single source file, the number of source files to compile should be kept low. Stubbing helps with that.)
  */
 internal fun IrModuleFragment.stubOrphanedExpectSymbols(stubGenerator: DeclarationStubGenerator) {
-    val transformer = StubOrphanedExpectSymbolTransformer(stubGenerator)
+    konst transformer = StubOrphanedExpectSymbolTransformer(stubGenerator)
     files.forEach(transformer::visitFile)
 }
 
-private class StubOrphanedExpectSymbolTransformer(val stubGenerator: DeclarationStubGenerator) : ExpectSymbolTransformer() {
+private class StubOrphanedExpectSymbolTransformer(konst stubGenerator: DeclarationStubGenerator) : ExpectSymbolTransformer() {
 
-    private val stubbedClasses = mutableMapOf<ClassDescriptor, IrClassSymbol>()
-    private val stubbedProperties = mutableMapOf<PropertyDescriptor, ActualPropertyResult>()
-    private val stubbedConstructors = mutableMapOf<ClassConstructorDescriptor, IrConstructorSymbol>()
-    private val stubbedFunctions = mutableMapOf<FunctionDescriptor, IrSimpleFunctionSymbol>()
+    private konst stubbedClasses = mutableMapOf<ClassDescriptor, IrClassSymbol>()
+    private konst stubbedProperties = mutableMapOf<PropertyDescriptor, ActualPropertyResult>()
+    private konst stubbedConstructors = mutableMapOf<ClassConstructorDescriptor, IrConstructorSymbol>()
+    private konst stubbedFunctions = mutableMapOf<FunctionDescriptor, IrSimpleFunctionSymbol>()
 
     override fun getActualClass(descriptor: ClassDescriptor): IrClassSymbol? {
         if (!descriptor.isOrphanedExpect()) return null
@@ -51,10 +51,10 @@ private class StubOrphanedExpectSymbolTransformer(val stubGenerator: Declaration
         if (!descriptor.isOrphanedExpect()) return null
 
         return stubbedProperties.getOrPut(descriptor) {
-            val irProperty =
+            konst irProperty =
                 stubGenerator.generatePropertyStub(FakeActualPropertyDescriptor(descriptor)).apply { ensureClassParent(descriptor) }
-            val irGetter = descriptor.getter?.let(::getActualFunction)
-            val irSetter = descriptor.setter?.let(::getActualFunction)
+            konst irGetter = descriptor.getter?.let(::getActualFunction)
+            konst irSetter = descriptor.setter?.let(::getActualFunction)
             ActualPropertyResult(irProperty.symbol, irGetter, irSetter)
         }
     }

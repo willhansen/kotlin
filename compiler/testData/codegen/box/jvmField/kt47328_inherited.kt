@@ -2,20 +2,20 @@
 // TARGET_BACKEND: JVM
 // WITH_STDLIB
 
-interface A { val x: Int }
+interface A { konst x: Int }
 
-open class B(@JvmField override val x: Int): A
+open class B(@JvmField override konst x: Int): A
 
 class BB(x: Int) : B(x)
 
-class C<D: A>(@JvmField val d: D)
+class C<D: A>(@JvmField konst d: D)
 
-class E(c: C<BB>) { val ax = c.d.x }
+class E(c: C<BB>) { konst ax = c.d.x }
 // CHECK_BYTECODE_TEXT
 // 1 GETFIELD BB\.x \: I
 
 fun box(): String {
-    val e = E(C(BB(42)))
+    konst e = E(C(BB(42)))
     if (e.ax != 42)
         return "Failed: ${e.ax}"
     return "OK"

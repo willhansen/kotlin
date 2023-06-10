@@ -3,7 +3,7 @@
 import kotlin.experimental.ExperimentalTypeInference
 
 interface SendChannel<in T> {
-    suspend fun send(value: T)
+    suspend fun send(konstue: T)
 }
 
 @OptIn(ExperimentalTypeInference::class)

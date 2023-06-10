@@ -38,7 +38,7 @@ import org.jetbrains.kotlin.name.SpecialNames
 import org.jetbrains.kotlin.psi.KtTypeParameterListOwner
 import java.util.*
 
-internal fun <L : Any> L.invalidAccess(): Nothing =
+internal fun <L : Any> L.inkonstidAccess(): Nothing =
     error("Cls delegate shouldn't be accessed for symbol light classes! Qualified name: ${javaClass.name}")
 
 internal fun KtAnalysisSession.mapType(
@@ -46,7 +46,7 @@ internal fun KtAnalysisSession.mapType(
     psiContext: PsiElement,
     mode: KtTypeMappingMode
 ): PsiClassType? {
-    val psiTypeElement = type.asPsiTypeElement(
+    konst psiTypeElement = type.asPsiTypeElement(
         psiContext,
         allowErrorTypes = true,
         mode,
@@ -64,7 +64,7 @@ internal enum class NullabilityType {
 }
 
 //todo get rid of NullabilityType as it corresponds to KtTypeNullability
-internal val KtType.nullabilityType: NullabilityType
+internal konst KtType.nullabilityType: NullabilityType
     get() = when (nullability) {
         KtTypeNullability.NULLABLE -> NullabilityType.Nullable
         KtTypeNullability.NON_NULLABLE -> NullabilityType.NotNull
@@ -106,23 +106,23 @@ private fun Visibility.toPsiVisibilityForClass(isNested: Boolean): String = when
     }
 }
 
-internal fun basicIsEquivalentTo(`this`: PsiElement?, that: PsiElement?): Boolean {
+internal fun basicIsEquikonstentTo(`this`: PsiElement?, that: PsiElement?): Boolean {
     if (`this` == null || that == null) return false
     if (`this` == that) return true
 
     if (`this` !is KtLightElement<*, *>) return false
     if (that !is KtLightElement<*, *>) return false
-    if (`this`.kotlinOrigin?.isEquivalentTo(that.kotlinOrigin) == true) return true
+    if (`this`.kotlinOrigin?.isEquikonstentTo(that.kotlinOrigin) == true) return true
 
-    val thisMemberOrigin = (`this` as? KtLightMember<*>)?.lightMemberOrigin ?: return false
-    if (thisMemberOrigin.isEquivalentTo(that)) return true
+    konst thisMemberOrigin = (`this` as? KtLightMember<*>)?.lightMemberOrigin ?: return false
+    if (thisMemberOrigin.isEquikonstentTo(that)) return true
 
-    val thatMemberOrigin = (that as? KtLightMember<*>)?.lightMemberOrigin ?: return false
-    return thisMemberOrigin.isEquivalentTo(thatMemberOrigin)
+    konst thatMemberOrigin = (that as? KtLightMember<*>)?.lightMemberOrigin ?: return false
+    return thisMemberOrigin.isEquikonstentTo(thatMemberOrigin)
 }
 
-internal fun KtLightElement<*, *>.isOriginEquivalentTo(that: PsiElement?): Boolean {
-    return kotlinOrigin?.isEquivalentTo(that) == true
+internal fun KtLightElement<*, *>.isOriginEquikonstentTo(that: PsiElement?): Boolean {
+    return kotlinOrigin?.isEquikonstentTo(that) == true
 }
 
 internal fun KtAnalysisSession.getTypeNullability(ktType: KtType): NullabilityType {
@@ -135,7 +135,7 @@ internal fun KtAnalysisSession.getTypeNullability(ktType: KtType): NullabilityTy
 
     if (ktType is KtTypeParameterType) {
         if (ktType.isMarkedNullable) return NullabilityType.Nullable
-        val subtypeOfNullableSuperType = ktType.symbol.upperBounds.all { upperBound -> upperBound.canBeNull }
+        konst subtypeOfNullableSuperType = ktType.symbol.upperBounds.all { upperBound -> upperBound.canBeNull }
         return if (!subtypeOfNullableSuperType) NullabilityType.NotNull else NullabilityType.Unknown
     }
     if (ktType !is KtNonErrorClassType) return NullabilityType.NotNull
@@ -145,7 +145,7 @@ internal fun KtAnalysisSession.getTypeNullability(ktType: KtType): NullabilityTy
     return ktType.nullabilityType
 }
 
-internal val KtType.isUnit get() = isClassTypeWithClassId(DefaultTypeClassIds.UNIT)
+internal konst KtType.isUnit get() = isClassTypeWithClassId(DefaultTypeClassIds.UNIT)
 
 internal fun KtType.isClassTypeWithClassId(classId: ClassId): Boolean {
     if (this !is KtNonErrorClassType) return false
@@ -172,7 +172,7 @@ private fun escapeString(s: String): String = buildString {
 internal fun KtAnnotationValue.toAnnotationMemberValue(parent: PsiElement): PsiAnnotationMemberValue? = when (this) {
     is KtArrayAnnotationValue ->
         SymbolPsiArrayInitializerMemberValue(sourcePsi, parent) { arrayLiteralParent ->
-            values.mapNotNull { element -> element.toAnnotationMemberValue(arrayLiteralParent) }
+            konstues.mapNotNull { element -> element.toAnnotationMemberValue(arrayLiteralParent) }
         }
 
     is KtAnnotationApplicationValue ->
@@ -198,8 +198,8 @@ internal fun KtAnnotationValue.toAnnotationMemberValue(parent: PsiElement): PsiA
 }
 
 private fun KtEnumEntryAnnotationValue.asPsiReferenceExpression(parent: PsiElement): SymbolPsiReference? {
-    val fqName = this.callableId?.asSingleFqName()?.asString() ?: return null
-    val psiReference = parent.project.withElementFactorySafe {
+    konst fqName = this.callableId?.asSingleFqName()?.asString() ?: return null
+    konst psiReference = parent.project.withElementFactorySafe {
         createReferenceFromText(fqName, parent)
     } ?: return null
 
@@ -207,23 +207,23 @@ private fun KtEnumEntryAnnotationValue.asPsiReferenceExpression(parent: PsiEleme
 }
 
 private fun KtKClassAnnotationValue.toAnnotationMemberValue(parent: PsiElement): SymbolPsiClassObjectAccessExpression? {
-    val typeString = when (this) {
+    konst typeString = when (this) {
         is KtKClassAnnotationValue.KtNonLocalKClassAnnotationValue -> classId.asSingleFqName().asString()
         is KtKClassAnnotationValue.KtLocalKClassAnnotationValue -> null
         is KtKClassAnnotationValue.KtErrorClassAnnotationValue -> unresolvedQualifierName
     } ?: return null
 
-    val psiType = psiType(
+    konst psiType = psiType(
         kotlinFqName = typeString,
         context = parent,
-        boxPrimitiveType = false, /* TODO value.arrayNestedness > 0*/
+        boxPrimitiveType = false, /* TODO konstue.arrayNestedness > 0*/
     ).let(TypeConversionUtil::erasure)
 
     return SymbolPsiClassObjectAccessExpression(sourcePsi, parent, psiType)
 }
 
 private fun KtConstantValue.asStringForPsiExpression(): String =
-    when (val value = value) {
+    when (konst konstue = konstue) {
         Double.NEGATIVE_INFINITY -> "-1.0 / 0.0"
         Double.NaN -> "0.0 / 0.0"
         Double.POSITIVE_INFINITY -> "1.0 / 0.0"
@@ -231,22 +231,22 @@ private fun KtConstantValue.asStringForPsiExpression(): String =
         Float.NaN -> "0.0F / 0.0F"
         Float.POSITIVE_INFINITY -> "1.0F / 0.0F"
         '\'' -> "'\\''"
-        is Char -> "'${escapeString(value.toString())}'"
-        is String -> "\"${escapeString(value)}\""
-        is Long -> "${value}L"
-        is Float -> "${value}f"
-        else -> value.toString()
+        is Char -> "'${escapeString(konstue.toString())}'"
+        is String -> "\"${escapeString(konstue)}\""
+        is Long -> "${konstue}L"
+        is Float -> "${konstue}f"
+        else -> konstue.toString()
     }
 
 internal fun KtConstantValue.createPsiExpression(parent: PsiElement): PsiExpression? {
-    val asString = asStringForPsiExpression()
+    konst asString = asStringForPsiExpression()
     return parent.project.withElementFactorySafe {
         createExpressionFromText(asString, parent)
     }
 }
 
 internal inline fun <T> Project.withElementFactorySafe(crossinline action: PsiElementFactory.() -> T): T? {
-    val instance = PsiElementFactory.getInstance(this)
+    konst instance = PsiElementFactory.getInstance(this)
     return try {
         instance.action()
     } catch (_: IncorrectOperationException) {
@@ -286,11 +286,11 @@ internal inline fun <T : KtSymbol, R> KtSymbolPointer<T>.withSymbol(
     crossinline action: KtAnalysisSession.(T) -> R,
 ): R = analyzeForLightClasses(ktModule) { action(this, restoreSymbolOrThrowIfDisposed()) }
 
-internal val KtPropertySymbol.isConstOrJvmField: Boolean get() = isConst || isJvmField
-internal val KtPropertySymbol.isJvmField: Boolean get() = backingFieldSymbol?.hasJvmFieldAnnotation() == true
-internal val KtPropertySymbol.isConst: Boolean get() = (this as? KtKotlinPropertySymbol)?.isConst == true
-internal val KtPropertySymbol.isLateInit: Boolean get() = (this as? KtKotlinPropertySymbol)?.isLateInit == true
-internal val KtPropertySymbol.canHaveNonPrivateField: Boolean get() = isConstOrJvmField || isLateInit
+internal konst KtPropertySymbol.isConstOrJvmField: Boolean get() = isConst || isJvmField
+internal konst KtPropertySymbol.isJvmField: Boolean get() = backingFieldSymbol?.hasJvmFieldAnnotation() == true
+internal konst KtPropertySymbol.isConst: Boolean get() = (this as? KtKotlinPropertySymbol)?.isConst == true
+internal konst KtPropertySymbol.isLateInit: Boolean get() = (this as? KtKotlinPropertySymbol)?.isLateInit == true
+internal konst KtPropertySymbol.canHaveNonPrivateField: Boolean get() = isConstOrJvmField || isLateInit
 
 internal inline fun <reified T> Collection<T>.toArrayIfNotEmptyOrDefault(default: Array<T>): Array<T> {
     return if (isNotEmpty()) toTypedArray() else default

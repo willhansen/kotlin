@@ -14,53 +14,53 @@ import java.io.File
 
 object TestIdeaKotlinInstances {
 
-    val extrasWithIntAndStrings = extrasOf(
+    konst extrasWithIntAndStrings = extrasOf(
         extrasKeyOf<Int>() withValue 1,
         extrasKeyOf<String>() withValue "Cash"
     )
 
-    val simpleProjectCoordinates = IdeaKotlinProjectCoordinates(
+    konst simpleProjectCoordinates = IdeaKotlinProjectCoordinates(
         buildId = "myBuildId",
         projectPath = "my:project:path",
         projectName = "myProjectName"
     )
 
-    val simpleBinaryCoordinates = IdeaKotlinBinaryCoordinates(
+    konst simpleBinaryCoordinates = IdeaKotlinBinaryCoordinates(
         group = "myGroup",
         module = "myModule",
         version = "myVersion",
         sourceSetName = "mySourceSetName"
     )
 
-    val simpleSourceCoordinates = IdeaKotlinSourceCoordinates(
+    konst simpleSourceCoordinates = IdeaKotlinSourceCoordinates(
         project = simpleProjectCoordinates,
         sourceSetName = "mySourceSetName"
     )
 
-    val simpleUnresolvedBinaryDependency = IdeaKotlinUnresolvedBinaryDependency(
+    konst simpleUnresolvedBinaryDependency = IdeaKotlinUnresolvedBinaryDependency(
         cause = "myCause",
         coordinates = simpleBinaryCoordinates,
         extras = extrasWithIntAndStrings.toMutableExtras()
     )
 
-    val simpleClasspath = IdeaKotlinClasspath(setOf(File("myFirstFile.klib"), File("mySecondFile.jar").absoluteFile))
+    konst simpleClasspath = IdeaKotlinClasspath(setOf(File("myFirstFile.klib"), File("mySecondFile.jar").absoluteFile))
 
-    val emptyClasspath = IdeaKotlinClasspath()
+    konst emptyClasspath = IdeaKotlinClasspath()
 
-    val simpleResolvedBinaryDependency = IdeaKotlinResolvedBinaryDependency(
+    konst simpleResolvedBinaryDependency = IdeaKotlinResolvedBinaryDependency(
         binaryType = IdeaKotlinBinaryDependency.KOTLIN_COMPILE_BINARY_TYPE,
         classpath = simpleClasspath,
         coordinates = simpleBinaryCoordinates,
         extras = extrasWithIntAndStrings.toMutableExtras()
     )
 
-    val simpleSourceDependency = IdeaKotlinSourceDependency(
+    konst simpleSourceDependency = IdeaKotlinSourceDependency(
         coordinates = simpleSourceCoordinates,
         type = IdeaKotlinSourceDependency.Type.Regular,
         extras = extrasWithIntAndStrings.toMutableExtras()
     )
 
-    val simpleProjectArtifactDependency = IdeaKotlinProjectArtifactDependency(
+    konst simpleProjectArtifactDependency = IdeaKotlinProjectArtifactDependency(
         coordinates = simpleProjectCoordinates,
         type = IdeaKotlinSourceDependency.Type.Regular,
         extras = extrasWithIntAndStrings.toMutableExtras()

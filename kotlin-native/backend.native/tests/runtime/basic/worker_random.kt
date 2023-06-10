@@ -14,24 +14,24 @@ import kotlin.test.*
 
 @Test
 fun testRandomWorkers() {
-    val seed = getTimeMillis()
-    val workers = Array(5, { _ -> Worker.start() })
+    konst seed = getTimeMillis()
+    konst workers = Array(5, { _ -> Worker.start() })
 
-    val attempts = 3
-    val results = Array(attempts, { ArrayList<Int>() } )
+    konst attempts = 3
+    konst results = Array(attempts, { ArrayList<Int>() } )
     for (attempt in 0 until attempts) {
         // Produce a list of random numbers in each worker
-        val futures = Array(workers.size, { workerIndex ->
+        konst futures = Array(workers.size, { workerIndex ->
             workers[workerIndex].execute(TransferMode.SAFE, { workerIndex }) {
                 input ->
                 Array(10, { Random.nextInt() }).toList()
             }
         })
         // Now collect all results into current attempt's list
-        val futureSet = futures.toSet()
+        konst futureSet = futures.toSet()
         var finished = 0
         while (finished < futureSet.size) {
-            val ready = waitForMultipleFutures(futureSet, 10000)
+            konst ready = waitForMultipleFutures(futureSet, 10000)
             ready.forEach { results[attempt].addAll(it.result) }
             finished += ready.size
         }

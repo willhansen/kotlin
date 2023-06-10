@@ -26,12 +26,12 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 class FirIntegerConstantOperatorScope(
-    val session: FirSession,
-    val scopeSession: ScopeSession,
-    val isUnsigned: Boolean
+    konst session: FirSession,
+    konst scopeSession: ScopeSession,
+    konst isUnsigned: Boolean
 ) : FirTypeScope() {
-    private val baseScope: FirTypeScope = run {
-        val baseType = when (isUnsigned) {
+    private konst baseScope: FirTypeScope = run {
+        konst baseType = when (isUnsigned) {
             true -> session.builtinTypes.uIntType
             false -> session.builtinTypes.intType
         }.type
@@ -44,23 +44,23 @@ class FirIntegerConstantOperatorScope(
         ) ?: error("Scope for $baseType not found")
     }
 
-    private val mappedFunctions = mutableMapOf<Name, FirNamedFunctionSymbol>()
+    private konst mappedFunctions = mutableMapOf<Name, FirNamedFunctionSymbol>()
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
         // Constant conversion for those unary operators works only for signed integers
-        val isUnaryOperator = !isUnsigned && (name in ConvertibleIntegerOperators.unaryOperatorNames)
-        val isBinaryOperator = name in ConvertibleIntegerOperators.binaryOperatorsNames
+        konst isUnaryOperator = !isUnsigned && (name in ConvertibleIntegerOperators.unaryOperatorNames)
+        konst isBinaryOperator = name in ConvertibleIntegerOperators.binaryOperatorsNames
         if (!isUnaryOperator && !isBinaryOperator) {
             return baseScope.processFunctionsByName(name, processor)
         }
-        val requiresUnsignedOperand = isUnsigned && name !in binaryOperatorsWithSignedArgument
-        val wrappedSymbol = mappedFunctions.getOrPut(name) {
-            val allFunctions = baseScope.getFunctions(name)
-            val functionSymbol = allFunctions.first {
+        konst requiresUnsignedOperand = isUnsigned && name !in binaryOperatorsWithSignedArgument
+        konst wrappedSymbol = mappedFunctions.getOrPut(name) {
+            konst allFunctions = baseScope.getFunctions(name)
+            konst functionSymbol = allFunctions.first {
                 // unary operators have only one overload
                 if (isUnaryOperator) return@first true
 
-                val coneType = it.fir.valueParameters.first().returnTypeRef.coneType
+                konst coneType = it.fir.konstueParameters.first().returnTypeRef.coneType
                 if (requiresUnsignedOperand) {
                     coneType.isUInt
                 } else {
@@ -74,8 +74,8 @@ class FirIntegerConstantOperatorScope(
     }
 
     private fun wrapIntOperator(originalSymbol: FirNamedFunctionSymbol): FirNamedFunctionSymbol {
-        val originalFunction = originalSymbol.fir
-        val wrappedFunction = buildSimpleFunctionCopy(originalFunction) {
+        konst originalFunction = originalSymbol.fir
+        konst wrappedFunction = buildSimpleFunctionCopy(originalFunction) {
             symbol = FirNamedFunctionSymbol(originalSymbol.callableId)
             origin = FirDeclarationOrigin.WrappedIntegerOperator
             returnTypeRef = buildResolvedTypeRef {
@@ -137,7 +137,7 @@ fun ScopeSession.getOrBuildScopeForIntegerConstantOperatorType(
     }
 }
 
-private val INTEGER_CONSTANT_OPERATOR_SCOPE = scopeSessionKey<Boolean, FirIntegerConstantOperatorScope>()
+private konst INTEGER_CONSTANT_OPERATOR_SCOPE = scopeSessionKey<Boolean, FirIntegerConstantOperatorScope>()
 
 private object OriginalForWrappedIntegerOperator : FirDeclarationDataKey()
 private object IsUnsignedForWrappedIntegerOperator : FirDeclarationDataKey()

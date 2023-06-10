@@ -3,7 +3,7 @@
 // MODULE: m1
 // FILE: A.kt
 
-open class Base(val x: Any)
+open class Base(konst x: Any)
 
 // MODULE: m2(m1)
 // FILE: B.kt

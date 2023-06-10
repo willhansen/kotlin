@@ -17,7 +17,7 @@ public final class SimpleClass<in T#0 /* A */> : kotlin/Any {
 
   // field: p:I
   // getter: getP()I
-  public final val p: kotlin/Int
+  public final konst p: kotlin/Int
     public final get
 
   // field: x:J

@@ -15,7 +15,7 @@
 package flow
 
 interface FlowCollector<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow<T : Any> {
@@ -31,9 +31,9 @@ public inline fun <T : Any> flow(crossinline block: suspend FlowCollector<T>.() 
 
 suspend inline fun <T : Any> Flow<T>.collect(crossinline action: suspend (T) -> Unit) {
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) {
-            action(value)
-            action(value)
+        override suspend fun emit(konstue: T) {
+            action(konstue)
+            action(konstue)
         }
     })
 }
@@ -55,7 +55,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 suspend fun check() {
-    val f: Unit = flow<Int> {
+    konst f: Unit = flow<Int> {
         emit(1)
     }.flowWith {
         StateMachineChecker.suspendHere()

@@ -682,14 +682,14 @@ public class IncrementalJvmCompilerRunnerTestGenerated extends AbstractIncrement
             runTest("jps/jps-plugin/testData/incremental/pureKotlin/traitClassObjectConstantChanged/");
         }
 
-        @TestMetadata("valAddCustomAccessor")
+        @TestMetadata("konstAddCustomAccessor")
         public void testValAddCustomAccessor() throws Exception {
-            runTest("jps/jps-plugin/testData/incremental/pureKotlin/valAddCustomAccessor/");
+            runTest("jps/jps-plugin/testData/incremental/pureKotlin/konstAddCustomAccessor/");
         }
 
-        @TestMetadata("valRemoveCustomAccessor")
+        @TestMetadata("konstRemoveCustomAccessor")
         public void testValRemoveCustomAccessor() throws Exception {
-            runTest("jps/jps-plugin/testData/incremental/pureKotlin/valRemoveCustomAccessor/");
+            runTest("jps/jps-plugin/testData/incremental/pureKotlin/konstRemoveCustomAccessor/");
         }
     }
 

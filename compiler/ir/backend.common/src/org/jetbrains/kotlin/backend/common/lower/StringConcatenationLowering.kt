@@ -41,30 +41,30 @@ class StringConcatenationLowering(context: CommonBackendContext) : FileLoweringP
         irFile.transformChildrenVoid(this)
     }
 
-    private val irBuiltIns = context.irBuiltIns
-    private val symbols = context.ir.symbols
+    private konst irBuiltIns = context.irBuiltIns
+    private konst symbols = context.ir.symbols
 
-    private val typesWithSpecialAppendFunction = irBuiltIns.primitiveIrTypes + irBuiltIns.stringType
+    private konst typesWithSpecialAppendFunction = irBuiltIns.primitiveIrTypes + irBuiltIns.stringType
 
-    private val nameAppend = Name.identifier("append")
+    private konst nameAppend = Name.identifier("append")
 
-    private val stringBuilder = context.ir.symbols.stringBuilder.owner
+    private konst stringBuilder = context.ir.symbols.stringBuilder.owner
 
     //TODO: calculate and pass string length to the constructor.
-    private val constructor = stringBuilder.constructors.single {
-        it.valueParameters.isEmpty()
+    private konst constructor = stringBuilder.constructors.single {
+        it.konstueParameters.isEmpty()
     }
 
-    private val defaultAppendFunction = stringBuilder.functions.single {
+    private konst defaultAppendFunction = stringBuilder.functions.single {
         it.name == nameAppend &&
-                it.valueParameters.size == 1 &&
-                it.valueParameters.single().type.isNullableAny()
+                it.konstueParameters.size == 1 &&
+                it.konstueParameters.single().type.isNullableAny()
     }
 
-    private val appendFunctions: Map<IrType, IrSimpleFunction?> =
+    private konst appendFunctions: Map<IrType, IrSimpleFunction?> =
         typesWithSpecialAppendFunction.map { type ->
             type to stringBuilder.functions.toList().atMostOne {
-                it.name == nameAppend && it.valueParameters.singleOrNull()?.type == type
+                it.name == nameAppend && it.konstueParameters.singleOrNull()?.type == type
             }
         }.toMap()
 
@@ -76,12 +76,12 @@ class StringConcatenationLowering(context: CommonBackendContext) : FileLoweringP
         expression.transformChildrenVoid(this)
 
         builder.at(expression)
-        val arguments = expression.arguments
+        konst arguments = expression.arguments
         return when {
             arguments.isEmpty() -> builder.irString("")
 
             arguments.size == 1 -> {
-                val argument = arguments[0]
+                konst argument = arguments[0]
                 if (argument.type.isNullable())
                     builder.irCall(symbols.extensionToString).apply {
                         extensionReceiver = argument
@@ -104,9 +104,9 @@ class StringConcatenationLowering(context: CommonBackendContext) : FileLoweringP
                     }
 
             else -> builder.irBlock(expression) {
-                val stringBuilderImpl = createTmpVariable(irCall(constructor))
+                konst stringBuilderImpl = createTmpVariable(irCall(constructor))
                 expression.arguments.forEach { arg ->
-                    val appendFunction = typeToAppendFunction(arg.type)
+                    konst appendFunction = typeToAppendFunction(arg.type)
                     +irCall(appendFunction).apply {
                         dispatchReceiver = irGet(stringBuilderImpl)
                         putValueArgument(0, arg)

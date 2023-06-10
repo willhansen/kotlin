@@ -32,7 +32,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /AbstractModule.install(<dispatch receiver>: AbstractModule, builder: ft<AbstractModule.Builder<*>, AbstractModule.Builder<*>?>): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = builder
             receiverType = null

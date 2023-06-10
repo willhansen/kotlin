@@ -13,12 +13,12 @@ FILE fqName:<root> fileName:/TypeParameterInNestedClass.kt
         BLOCK_BODY
           DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
           INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Builder modality:FINAL visibility:public superTypes:[kotlin.Any]'
-      PROPERTY name:action visibility:private modality:FINAL [val]
+      PROPERTY name:action visibility:private modality:FINAL [konst]
         FIELD PROPERTY_BACKING_FIELD name:action type:kotlin.coroutines.SuspendFunction0<B of <root>.Retry.Builder> visibility:private [final]
           EXPRESSION_BODY
             GET_VAR 'action: kotlin.coroutines.SuspendFunction0<B of <root>.Retry.Builder> declared in <root>.Retry.Builder.<init>' type=kotlin.coroutines.SuspendFunction0<B of <root>.Retry.Builder> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
         FUN DEFAULT_PROPERTY_ACCESSOR name:<get-action> visibility:private modality:FINAL <> ($this:<root>.Retry.Builder<B of <root>.Retry.Builder>) returnType:kotlin.coroutines.SuspendFunction0<B of <root>.Retry.Builder>
-          correspondingProperty: PROPERTY name:action visibility:private modality:FINAL [val]
+          correspondingProperty: PROPERTY name:action visibility:private modality:FINAL [konst]
           $this: VALUE_PARAMETER name:<this> type:<root>.Retry.Builder<B of <root>.Retry.Builder>
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='private final fun <get-action> (): kotlin.coroutines.SuspendFunction0<B of <root>.Retry.Builder> declared in <root>.Retry.Builder'

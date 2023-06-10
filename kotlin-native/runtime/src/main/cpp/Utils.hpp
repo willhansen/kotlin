@@ -56,17 +56,17 @@ protected:
     ~Pinned() = default;
 };
 
-// A helper that scopley assigns a value to a variable. The variable will
-// be set to its original value upon destruction of the AutoReset instance.
+// A helper that scopley assigns a konstue to a variable. The variable will
+// be set to its original konstue upon destruction of the AutoReset instance.
 // Note that an AutoReset instance must have a shorter lifetime than
-// the variable it works with to avoid invalid memory access.
+// the variable it works with to avoid inkonstid memory access.
 template<typename T1, typename T2>
 class AutoReset final : private Pinned {
-    static_assert(std::is_assignable<T1&, T2>::value);
+    static_assert(std::is_assignable<T1&, T2>::konstue);
 
 public:
-    AutoReset(T1* variable, T2 value) : variable_(variable), oldValue_(*variable) {
-        *variable_ = value;
+    AutoReset(T1* variable, T2 konstue) : variable_(variable), oldValue_(*variable) {
+        *variable_ = konstue;
     }
 
     ~AutoReset() {
@@ -78,7 +78,7 @@ private:
     T2 oldValue_;
 };
 
-size_t CombineHash(size_t seed, size_t value);
+size_t CombineHash(size_t seed, size_t konstue);
 
 #define ownerOf(type, field, ref) *reinterpret_cast<type*>(reinterpret_cast<char*>(&ref) - offsetof(type, field))
 

@@ -5,7 +5,7 @@ package foo
 
 @JsExport
 object A {
-    private val foo: Int
+    private konst foo: Int
         get() = 23
 
     fun bar(): Int {

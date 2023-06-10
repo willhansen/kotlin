@@ -9,7 +9,7 @@ FILE: main.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val FIELD: R|kotlin/Int| = Int(1)
+            public final konst FIELD: R|kotlin/Int| = Int(1)
                 public get(): R|kotlin/Int|
 
         }

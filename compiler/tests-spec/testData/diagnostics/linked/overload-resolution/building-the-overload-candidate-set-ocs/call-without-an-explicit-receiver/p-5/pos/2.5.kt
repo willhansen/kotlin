@@ -68,7 +68,7 @@ class A {
 package libPackageCase2
 import testsCase2.*
 
-val Case2.emptyArray: A
+konst Case2.emptyArray: A
     get() = A()
 
 public fun <T> emptyArray(): Array<T> = TODO()
@@ -106,7 +106,7 @@ class A {
 package libPackageCase3
 import testsCase3.*
 
-val Case3.emptyArray: A
+konst Case3.emptyArray: A
     get() = A()
 
 fun <T> emptyArray(): Array<T> = TODO()

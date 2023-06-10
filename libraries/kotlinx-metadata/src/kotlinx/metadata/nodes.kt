@@ -17,17 +17,17 @@ interface KmDeclarationContainer {
     /**
      * Functions in the container.
      */
-    val functions: MutableList<KmFunction>
+    konst functions: MutableList<KmFunction>
 
     /**
      * Properties in the container.
      */
-    val properties: MutableList<KmProperty>
+    konst properties: MutableList<KmProperty>
 
     /**
      * Type aliases in the container.
      */
-    val typeAliases: MutableList<KmTypeAlias>
+    konst typeAliases: MutableList<KmTypeAlias>
 }
 
 /**
@@ -48,32 +48,32 @@ class KmClass : KmClassVisitor(), KmDeclarationContainer {
     /**
      * Type parameters of the class.
      */
-    val typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
+    konst typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
 
     /**
      * Supertypes of the class.
      */
-    val supertypes: MutableList<KmType> = ArrayList(1)
+    konst supertypes: MutableList<KmType> = ArrayList(1)
 
     /**
      * Functions in the class.
      */
-    override val functions: MutableList<KmFunction> = ArrayList()
+    override konst functions: MutableList<KmFunction> = ArrayList()
 
     /**
      * Properties in the class.
      */
-    override val properties: MutableList<KmProperty> = ArrayList()
+    override konst properties: MutableList<KmProperty> = ArrayList()
 
     /**
      * Type aliases in the class.
      */
-    override val typeAliases: MutableList<KmTypeAlias> = ArrayList(0)
+    override konst typeAliases: MutableList<KmTypeAlias> = ArrayList(0)
 
     /**
      * Constructors of the class.
      */
-    val constructors: MutableList<KmConstructor> = ArrayList(1)
+    konst constructors: MutableList<KmConstructor> = ArrayList(1)
 
     /**
      * Name of the companion object of this class, if it has one.
@@ -83,17 +83,17 @@ class KmClass : KmClassVisitor(), KmDeclarationContainer {
     /**
      * Names of nested classes of this class.
      */
-    val nestedClasses: MutableList<String> = ArrayList(0)
+    konst nestedClasses: MutableList<String> = ArrayList(0)
 
     /**
      * Names of enum entries, if this class is an enum class.
      */
-    val enumEntries: MutableList<String> = ArrayList(0)
+    konst enumEntries: MutableList<String> = ArrayList(0)
 
     /**
      * Names of direct subclasses of this class, if this class is `sealed`.
      */
-    val sealedSubclasses: MutableList<ClassName> = ArrayList(0)
+    konst sealedSubclasses: MutableList<ClassName> = ArrayList(0)
 
     /**
      * Name of the underlying property, if this class is `inline`.
@@ -109,14 +109,14 @@ class KmClass : KmClassVisitor(), KmDeclarationContainer {
      * Types of context receivers of the class.
      */
     @ExperimentalContextReceivers
-    val contextReceiverTypes: MutableList<KmType> = ArrayList(0)
+    konst contextReceiverTypes: MutableList<KmType> = ArrayList(0)
 
     /**
      * Version requirements on this class.
      */
-    val versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
+    konst versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
 
-    private val extensions: List<KmClassExtension> =
+    private konst extensions: List<KmClassExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createClassExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -229,19 +229,19 @@ class KmPackage : KmPackageVisitor(), KmDeclarationContainer {
     /**
      * Functions in the package fragment.
      */
-    override val functions: MutableList<KmFunction> = ArrayList()
+    override konst functions: MutableList<KmFunction> = ArrayList()
 
     /**
      * Properties in the package fragment.
      */
-    override val properties: MutableList<KmProperty> = ArrayList()
+    override konst properties: MutableList<KmProperty> = ArrayList()
 
     /**
      * Type aliases in the package fragment.
      */
-    override val typeAliases: MutableList<KmTypeAlias> = ArrayList(0)
+    override konst typeAliases: MutableList<KmTypeAlias> = ArrayList(0)
 
-    private val extensions: List<KmPackageExtension> =
+    private konst extensions: List<KmPackageExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createPackageExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -311,19 +311,19 @@ class KmConstructor(var flags: Flags) : KmConstructorVisitor() {
     /**
      * Value parameters of the constructor.
      */
-    val valueParameters: MutableList<KmValueParameter> = ArrayList()
+    konst konstueParameters: MutableList<KmValueParameter> = ArrayList()
 
     /**
      * Version requirements on the constructor.
      */
-    val versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
+    konst versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
 
-    private val extensions: List<KmConstructorExtension> =
+    private konst extensions: List<KmConstructorExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createConstructorExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitValueParameter(flags: Flags, name: String): KmValueParameterVisitor =
-        KmValueParameter(flags, name).addTo(valueParameters)
+        KmValueParameter(flags, name).addTo(konstueParameters)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitVersionRequirement(): KmVersionRequirementVisitor =
@@ -340,7 +340,7 @@ class KmConstructor(var flags: Flags) : KmConstructorVisitor() {
      */
     @Deprecated(VISITOR_API_MESSAGE)
     fun accept(visitor: KmConstructorVisitor) {
-        valueParameters.forEach { visitor.visitValueParameter(it.flags, it.name)?.let(it::accept) }
+        konstueParameters.forEach { visitor.visitValueParameter(it.flags, it.name)?.let(it::accept) }
         versionRequirements.forEach { visitor.visitVersionRequirement()?.let(it::accept) }
         extensions.forEach { visitor.visitExtensions(it.type)?.let(it::accept) }
         visitor.visitEnd()
@@ -361,7 +361,7 @@ class KmFunction(
     /**
      * Type parameters of the function.
      */
-    val typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
+    konst typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
 
     /**
      * Type of the receiver of the function, if this is an extension function.
@@ -372,12 +372,12 @@ class KmFunction(
      * Types of context receivers of the function.
      */
     @ExperimentalContextReceivers
-    val contextReceiverTypes: MutableList<KmType> = ArrayList(0)
+    konst contextReceiverTypes: MutableList<KmType> = ArrayList(0)
 
     /**
      * Value parameters of the function.
      */
-    val valueParameters: MutableList<KmValueParameter> = ArrayList()
+    konst konstueParameters: MutableList<KmValueParameter> = ArrayList()
 
     /**
      * Return type of the function.
@@ -387,7 +387,7 @@ class KmFunction(
     /**
      * Version requirements on the function.
      */
-    val versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
+    konst versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
 
     /**
      * Contract of the function.
@@ -395,7 +395,7 @@ class KmFunction(
     @ExperimentalContracts
     var contract: KmContract? = null
 
-    private val extensions: List<KmFunctionExtension> =
+    private konst extensions: List<KmFunctionExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createFunctionExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -413,7 +413,7 @@ class KmFunction(
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitValueParameter(flags: Flags, name: String): KmValueParameterVisitor =
-        KmValueParameter(flags, name).addTo(valueParameters)
+        KmValueParameter(flags, name).addTo(konstueParameters)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitReturnType(flags: Flags): KmTypeVisitor =
@@ -443,7 +443,7 @@ class KmFunction(
         typeParameters.forEach { visitor.visitTypeParameter(it.flags, it.name, it.id, it.variance)?.let(it::accept) }
         receiverParameterType?.let { visitor.visitReceiverParameterType(it.flags)?.let(it::accept) }
         contextReceiverTypes.forEach { visitor.visitContextReceiverType(it.flags)?.let(it::accept) }
-        valueParameters.forEach { visitor.visitValueParameter(it.flags, it.name)?.let(it::accept) }
+        konstueParameters.forEach { visitor.visitValueParameter(it.flags, it.name)?.let(it::accept) }
         visitor.visitReturnType(returnType.flags)?.let(returnType::accept)
         versionRequirements.forEach { visitor.visitVersionRequirement()?.let(it::accept) }
         @OptIn(ExperimentalContracts::class) contract?.let { visitor.visitContract()?.let(it::accept) }
@@ -472,7 +472,7 @@ class KmProperty(
     /**
      * Type parameters of the property.
      */
-    val typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
+    konst typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
 
     /**
      * Type of the receiver of the property, if this is an extension property.
@@ -483,7 +483,7 @@ class KmProperty(
      * Types of context receivers of the property.
      */
     @ExperimentalContextReceivers
-    val contextReceiverTypes: MutableList<KmType> = ArrayList(0)
+    konst contextReceiverTypes: MutableList<KmType> = ArrayList(0)
 
     /**
      * Value parameter of the setter of this property, if this is a `var` property.
@@ -498,9 +498,9 @@ class KmProperty(
     /**
      * Version requirements on the property.
      */
-    val versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
+    konst versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
 
-    private val extensions: List<KmPropertyExtension> =
+    private konst extensions: List<KmPropertyExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createPropertyExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -565,7 +565,7 @@ class KmTypeAlias(
     /**
      * Type parameters of the type alias.
      */
-    val typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
+    konst typeParameters: MutableList<KmTypeParameter> = ArrayList(0)
 
     /**
      * Underlying type of the type alias, i.e. the type in the right-hand side of the type alias declaration.
@@ -581,14 +581,14 @@ class KmTypeAlias(
     /**
      * Annotations on the type alias.
      */
-    val annotations: MutableList<KmAnnotation> = ArrayList(0)
+    konst annotations: MutableList<KmAnnotation> = ArrayList(0)
 
     /**
      * Version requirements on the type alias.
      */
-    val versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
+    konst versionRequirements: MutableList<KmVersionRequirement> = ArrayList(0)
 
-    private val extensions: List<KmTypeAliasExtension> =
+    private konst extensions: List<KmTypeAliasExtension> =
         MetadataExtensions.INSTANCES.mapNotNull(MetadataExtensions::createTypeAliasExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -634,10 +634,10 @@ class KmTypeAlias(
 }
 
 /**
- * Represents a value parameter of a Kotlin constructor, function or property setter.
+ * Represents a konstue parameter of a Kotlin constructor, function or property setter.
  *
- * @property flags value parameter flags, consisting of [Flag.ValueParameter] flags
- * @property name the name of the value parameter
+ * @property flags konstue parameter flags, consisting of [Flag.ValueParameter] flags
+ * @property name the name of the konstue parameter
  */
 @Suppress("DEPRECATION")
 class KmValueParameter(
@@ -645,17 +645,17 @@ class KmValueParameter(
     var name: String
 ) : KmValueParameterVisitor() {
     /**
-     * Type of the value parameter.
+     * Type of the konstue parameter.
      * If this is a `vararg` parameter of type `X`, returns the type `Array<out X>`.
      */
     lateinit var type: KmType
 
     /**
-     * Type of the `vararg` value parameter, or `null` if this is not a `vararg` parameter.
+     * Type of the `vararg` konstue parameter, or `null` if this is not a `vararg` parameter.
      */
     var varargElementType: KmType? = null
 
-    private val extensions: List<KmValueParameterExtension> =
+    private konst extensions: List<KmValueParameterExtension> =
         MetadataExtensions.INSTANCES.mapNotNull(MetadataExtensions::createValueParameterExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -671,9 +671,9 @@ class KmValueParameter(
         extensions.singleOfType(type)
 
     /**
-     * Populates the given visitor with data in this value parameter.
+     * Populates the given visitor with data in this konstue parameter.
      *
-     * @param visitor the visitor which will visit data in this value parameter
+     * @param visitor the visitor which will visit data in this konstue parameter
      */
     @Deprecated(VISITOR_API_MESSAGE)
     fun accept(visitor: KmValueParameterVisitor) {
@@ -703,9 +703,9 @@ class KmTypeParameter(
     /**
      * Upper bounds of the type parameter.
      */
-    val upperBounds: MutableList<KmType> = ArrayList(1)
+    konst upperBounds: MutableList<KmType> = ArrayList(1)
 
-    private val extensions: List<KmTypeParameterExtension> =
+    private konst extensions: List<KmTypeParameterExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createTypeParameterExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -744,7 +744,7 @@ class KmType(var flags: Flags) : KmTypeVisitor() {
     /**
      * Arguments of the type, if the type's classifier is a class or a type alias.
      */
-    val arguments: MutableList<KmTypeProjection> = ArrayList(0)
+    konst arguments: MutableList<KmTypeProjection> = ArrayList(0)
 
     /**
      * Abbreviation of this type. Note that all types are expanded for metadata produced by the Kotlin compiler. For example:
@@ -776,7 +776,7 @@ class KmType(var flags: Flags) : KmTypeVisitor() {
      */
     var flexibleTypeUpperBound: KmFlexibleTypeUpperBound? = null
 
-    private val extensions: List<KmTypeExtension> =
+    private konst extensions: List<KmTypeExtension> =
         MetadataExtensions.INSTANCES.map(MetadataExtensions::createTypeExtension)
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -827,7 +827,7 @@ class KmType(var flags: Flags) : KmTypeVisitor() {
      */
     @Deprecated(VISITOR_API_MESSAGE)
     fun accept(visitor: KmTypeVisitor) {
-        when (val classifier = classifier) {
+        when (konst classifier = classifier) {
             is KmClassifier.Class -> visitor.visitClass(classifier.name)
             is KmClassifier.TypeParameter -> visitor.visitTypeParameter(classifier.id)
             is KmClassifier.TypeAlias -> visitor.visitTypeAlias(classifier.name)
@@ -835,7 +835,7 @@ class KmType(var flags: Flags) : KmTypeVisitor() {
         arguments.forEach { argument ->
             if (argument == KmTypeProjection.STAR) visitor.visitStarProjection()
             else {
-                val (variance, type) = argument
+                konst (variance, type) = argument
                 if (variance == null || type == null)
                     throw InconsistentKotlinMetadataException("Variance and type must be set for non-star type projection")
                 visitor.visitArgument(type.flags, variance)?.let(type::accept)
@@ -920,7 +920,7 @@ class KmContract : KmContractVisitor() {
     /**
      * Effects of this contract.
      */
-    val effects: MutableList<KmEffect> = ArrayList(1)
+    konst effects: MutableList<KmEffect> = ArrayList(1)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visitEffect(type: KmEffectType, invocationKind: KmEffectInvocationKind?): KmEffectVisitor =
@@ -955,13 +955,13 @@ class KmEffect(
     var invocationKind: KmEffectInvocationKind?
 ) : KmEffectVisitor() {
     /**
-     * Arguments of the effect constructor, i.e. the constant value for the [KmEffectType.RETURNS_CONSTANT] effect,
+     * Arguments of the effect constructor, i.e. the constant konstue for the [KmEffectType.RETURNS_CONSTANT] effect,
      * or the parameter reference for the [KmEffectType.CALLS] effect.
      */
-    val constructorArguments: MutableList<KmEffectExpression> = ArrayList(1)
+    konst constructorArguments: MutableList<KmEffectExpression> = ArrayList(1)
 
     /**
-     * Conclusion of the effect. If this value is set, the effect represents an implication with this value as the right-hand side.
+     * Conclusion of the effect. If this konstue is set, the effect represents an implication with this konstue as the right-hand side.
      */
     var conclusion: KmEffectExpression? = null
 
@@ -1001,13 +1001,13 @@ class  KmEffectExpression : KmEffectExpressionVisitor() {
     var flags: Flags = flagsOf()
 
     /**
-     * Optional 1-based index of the value parameter of the function, for effects which assert something about
+     * Optional 1-based index of the konstue parameter of the function, for effects which assert something about
      * the function parameters. The index 0 means the extension receiver parameter.
      */
     var parameterIndex: Int? = null
 
     /**
-     * Constant value used in the effect expression.
+     * Constant konstue used in the effect expression.
      */
     var constantValue: KmConstantValue? = null
 
@@ -1020,13 +1020,13 @@ class  KmEffectExpression : KmEffectExpressionVisitor() {
      * Arguments of an `&&`-expression. If this list is non-empty, the resulting effect expression is a conjunction of this expression
      * and elements of the list.
      */
-    val andArguments: MutableList<KmEffectExpression> = ArrayList(0)
+    konst andArguments: MutableList<KmEffectExpression> = ArrayList(0)
 
     /**
      * Arguments of an `||`-expression. If this list is non-empty, the resulting effect expression is a disjunction of this expression
      * and elements of the list.
      */
-    val orArguments: MutableList<KmEffectExpression> = ArrayList(0)
+    konst orArguments: MutableList<KmEffectExpression> = ArrayList(0)
 
     @Deprecated(VISITOR_API_MESSAGE)
     override fun visit(flags: Flags, parameterIndex: Int?) {
@@ -1035,8 +1035,8 @@ class  KmEffectExpression : KmEffectExpressionVisitor() {
     }
 
     @Deprecated(VISITOR_API_MESSAGE)
-    override fun visitConstantValue(value: Any?) {
-        constantValue = KmConstantValue(value)
+    override fun visitConstantValue(konstue: Any?) {
+        constantValue = KmConstantValue(konstue)
     }
 
     @Deprecated(VISITOR_API_MESSAGE)
@@ -1059,7 +1059,7 @@ class  KmEffectExpression : KmEffectExpressionVisitor() {
     @Deprecated(VISITOR_API_MESSAGE)
     fun accept(visitor: KmEffectExpressionVisitor) {
         visitor.visit(flags, parameterIndex)
-        constantValue?.let { visitor.visitConstantValue(it.value) }
+        constantValue?.let { visitor.visitConstantValue(it.konstue) }
         isInstanceType?.let { visitor.visitIsInstanceType(it.flags)?.let(it::accept) }
         andArguments.forEach { visitor.visitAndArgument()?.let(it::accept) }
         orArguments.forEach { visitor.visitOrArgument()?.let(it::accept) }
@@ -1077,14 +1077,14 @@ sealed class KmClassifier {
      *
      * @property name the name of the class
      */
-    data class Class(val name: ClassName) : KmClassifier()
+    data class Class(konst name: ClassName) : KmClassifier()
 
     /**
      * Represents a type parameter used as a classifier in a type.
      *
      * @property id id of the type parameter
      */
-    data class TypeParameter(val id: Int) : KmClassifier()
+    data class TypeParameter(konst id: Int) : KmClassifier()
 
     /**
      * Represents a type alias used as a classifier in a type. Note that all types are expanded for metadata produced
@@ -1092,7 +1092,7 @@ sealed class KmClassifier {
      *
      * @property name the name of the type alias
      */
-    data class TypeAlias(val name: ClassName) : KmClassifier()
+    data class TypeAlias(konst name: ClassName) : KmClassifier()
 }
 
 /**
@@ -1109,7 +1109,7 @@ data class KmTypeProjection(var variance: KmVariance?, var type: KmType?) {
          * For example, in `MutableMap<in String?, *>`, `*` is the star projection which is the second type argument of the type.
          */
         @JvmField
-        val STAR = KmTypeProjection(null, null)
+        konst STAR = KmTypeProjection(null, null)
     }
 }
 
@@ -1129,19 +1129,19 @@ data class KmFlexibleTypeUpperBound(var type: KmType, var typeFlexibilityId: Str
  * @property minor the minor component of the version (e.g. "2" in "1.2.3")
  * @property patch the patch component of the version (e.g. "3" in "1.2.3")
  */
-data class KmVersion(val major: Int, val minor: Int, val patch: Int) {
+data class KmVersion(konst major: Int, konst minor: Int, konst patch: Int) {
     override fun toString(): String = "$major.$minor.$patch"
 }
 
 /**
- * Represents a constant value used in an effect expression.
+ * Represents a constant konstue used in an effect expression.
  *
  * Contracts are an internal feature of the standard Kotlin library, and their behavior and/or binary format
  * may change in a subsequent release.
  *
- * @property value the constant value. May be `true`, `false` or `null`
+ * @property konstue the constant konstue. May be `true`, `false` or `null`
  */
-data class KmConstantValue(val value: Any?)
+data class KmConstantValue(konst konstue: Any?)
 
 internal fun <T> T.addTo(collection: MutableCollection<T>): T {
     collection.add(this)

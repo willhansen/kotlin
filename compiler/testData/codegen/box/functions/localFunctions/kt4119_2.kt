@@ -1,7 +1,7 @@
 fun box(): String {
     infix fun Int.foo(a: Int): Int = a + 2
 
-    val s = object {
+    konst s = object {
         fun test(): Int {
             return 1 foo 1
         }

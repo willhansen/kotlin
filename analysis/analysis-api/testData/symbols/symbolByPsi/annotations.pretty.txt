@@ -1,7 +1,7 @@
 annotation class Anno(param1: kotlin.String, param2: kotlin.Int) {
-  val param1: kotlin.String
+  konst param1: kotlin.String
 
-  val param2: kotlin.Int
+  konst param2: kotlin.Int
 }
 
 @Anno(param1 = "param", param2 = 2)

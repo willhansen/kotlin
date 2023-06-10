@@ -1,6 +1,6 @@
 == A ==
 class A {
-    val x: Int
+    konst x: Int
     constructor() {
         if (1 == 1) {
             return
@@ -32,7 +32,7 @@ L0:
   1 <START>
     mark()
     call(, <init>) -> <v0>
-    v(val x: Int)
+    v(konst x: Int)
   2 mark({ if (1 == 1) { return } else null!! x = 1 })
     mark(if (1 == 1) { return } else null!!)
     r(1) -> <v1>

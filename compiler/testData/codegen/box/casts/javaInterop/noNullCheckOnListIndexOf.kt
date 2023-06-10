@@ -7,6 +7,6 @@ public class A {
 
 // FILE: test.kt
 fun box(): String {
-    val l = listOf<A>()
+    konst l = listOf<A>()
     return if (l.indexOf(A.nil()) == -1) "OK" else "Fail"
 }

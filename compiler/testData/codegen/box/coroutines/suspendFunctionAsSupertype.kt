@@ -47,7 +47,7 @@ abstract class Abstract2 : suspend (String) -> Int {
 
 fun objectLiteral1(): String? {
     failure = "FAIL OBJECT LITERAL 1"
-    val o: suspend () -> Int = object : suspend () -> Int {
+    konst o: suspend () -> Int = object : suspend () -> Int {
         override suspend fun invoke(): Int {
             failure = null
             return 42
@@ -59,7 +59,7 @@ fun objectLiteral1(): String? {
 
 fun objectLiteral2(): String? {
     failure = "FAIL OBJECT LITERAL 2"
-    val o: suspend (String) -> Int = object : suspend (String) -> Int {
+    konst o: suspend (String) -> Int = object : suspend (String) -> Int {
         override suspend fun invoke(p: String): Int {
             failure = null
             return p.length
@@ -125,7 +125,7 @@ fun localClass2(): String? {
 
 fun inherited1(): String? {
     failure = "FAIL INHERITED 1"
-    val o = object : I {
+    konst o = object : I {
         override suspend fun invoke(p: String): Int {
             failure = null
             return p.length
@@ -137,7 +137,7 @@ fun inherited1(): String? {
 
 fun inherited2(): String? {
     failure = "FAIL INHERITED 2"
-    val o = object : I, Abstract1() {
+    konst o = object : I, Abstract1() {
         override suspend fun invoke(p: String): Int {
             failure = null
             return p.length
@@ -149,13 +149,13 @@ fun inherited2(): String? {
 
 fun inherited3(): String? {
     failure = "FAIL INHERITED 3"
-    val o = object : I, Abstract2() {}
+    konst o = object : I, Abstract2() {}
     o.startCoroutine("Hello", Continuation(EmptyCoroutineContext) { it.getOrThrow() })
     return failure
 }
 
 fun box(): String {
-    val failures = listOfNotNull(
+    konst failures = listOfNotNull(
         objectLiteral1(),
         objectLiteral2(),
         topLevelClass1(),

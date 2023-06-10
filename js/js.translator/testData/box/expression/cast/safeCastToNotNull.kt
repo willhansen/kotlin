@@ -5,9 +5,9 @@ class A
 class B
 
 fun box(): String {
-    val a: Any? = A()
-    val nil: Any? = null
-    val b: Any? = B()
+    konst a: Any? = A()
+    konst nil: Any? = null
+    konst b: Any? = B()
 
     assertEquals(a, a as? A, "a")
     assertEquals(null, nil as? A, "nil")

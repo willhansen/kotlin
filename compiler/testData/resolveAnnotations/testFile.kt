@@ -5,7 +5,7 @@ package test
 import test.MyEnum.*
 import kotlin.reflect.KClass
 
-@ANNOTATION class MyClass @ANNOTATION constructor(@ANNOTATION param: Int, @ANNOTATION val consProp: Int) {
+@ANNOTATION class MyClass @ANNOTATION constructor(@ANNOTATION param: Int, @ANNOTATION konst consProp: Int) {
     @ANNOTATION companion object {
     }
 
@@ -37,7 +37,7 @@ import kotlin.reflect.KClass
 @ANNOTATION fun topFoo(@ANNOTATION param: Int) {
 }
 
-val funLiteral = {(@ANNOTATION a: Int) -> a }
+konst funLiteral = {(@ANNOTATION a: Int) -> a }
 
 
 annotation class AnnString(a: String)

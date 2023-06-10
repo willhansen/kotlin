@@ -1,7 +1,7 @@
 import Foo.bar0 as bar
 
 object Foo {
-    val bar0 = "OK"
+    konst bar0 = "OK"
 
     fun test() = bar0
 }

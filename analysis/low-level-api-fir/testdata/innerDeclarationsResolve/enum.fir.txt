@@ -5,7 +5,7 @@ FILE: [ResolvedTo(IMPORTS)] enum.kt
             super<R|kotlin/Enum<Enum>|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/Int| = R|<local>/x|
+        public final [ResolvedTo(BODY_RESOLVE)] konst x: R|kotlin/Int| = R|<local>/x|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
 
         public final static [ResolvedTo(BODY_RESOLVE)] enum entry A: R|Enum| = object : R|Enum| {
@@ -15,13 +15,13 @@ FILE: [ResolvedTo(IMPORTS)] enum.kt
 
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] fun values(): R|kotlin/Array<Enum>| {
+        public final static [ResolvedTo(BODY_RESOLVE)] fun konstues(): R|kotlin/Array<Enum>| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] fun valueOf([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/String|): R|Enum| {
+        public final static [ResolvedTo(BODY_RESOLVE)] fun konstueOf([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/String|): R|Enum| {
         }
 
-        public final static [ResolvedTo(BODY_RESOLVE)] val entries: R|kotlin/enums/EnumEntries<Enum>|
+        public final static [ResolvedTo(BODY_RESOLVE)] konst entries: R|kotlin/enums/EnumEntries<Enum>|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/enums/EnumEntries<Enum>|
 
     }

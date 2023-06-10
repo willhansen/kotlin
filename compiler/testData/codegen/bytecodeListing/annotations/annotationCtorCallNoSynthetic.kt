@@ -1,7 +1,7 @@
 // WITH_STDLIB
 // !LANGUAGE: +InstantiationOfAnnotationClasses
 
-annotation class Foo(val bar: Bar)
+annotation class Foo(konst bar: Bar)
 
 annotation class Bar
 

@@ -2,4 +2,4 @@
 
 import java.util.*
 
-val x: SortedSet<Int> = TreeSet()
+konst x: SortedSet<Int> = TreeSet()

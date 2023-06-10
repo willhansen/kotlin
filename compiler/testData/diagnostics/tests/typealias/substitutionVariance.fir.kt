@@ -19,7 +19,7 @@ typealias Inv2<T> = Inv<in T>
 typealias Inv3<T> = Inv<out T>
 typealias Inv4<T> = Inv<*>
 
-val inv1: Inv1<Int> = Inv<Int>()
+konst inv1: Inv1<Int> = Inv<Int>()
 
 fun inInv_Inv(x: In1<Int>) = x
 fun inInv_In(x: In1<<!REDUNDANT_PROJECTION!>in<!> Int>) = x

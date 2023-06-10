@@ -29,52 +29,52 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 import org.jetbrains.kotlin.platform.jvm.isJvm
 
 object NoArgConfigurationKeys {
-    val ANNOTATION: CompilerConfigurationKey<List<String>> =
+    konst ANNOTATION: CompilerConfigurationKey<List<String>> =
         CompilerConfigurationKey.create("annotation qualified name")
 
-    val PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
+    konst PRESET: CompilerConfigurationKey<List<String>> = CompilerConfigurationKey.create("annotation preset")
 
-    val INVOKE_INITIALIZERS: CompilerConfigurationKey<Boolean> = CompilerConfigurationKey.create(
+    konst INVOKE_INITIALIZERS: CompilerConfigurationKey<Boolean> = CompilerConfigurationKey.create(
         "invoke instance initializers in a no-arg constructor"
     )
 }
 
 class NoArgCommandLineProcessor : CommandLineProcessor {
     companion object {
-        val ANNOTATION_OPTION = CliOption(
+        konst ANNOTATION_OPTION = CliOption(
             ANNOTATION_OPTION_NAME, "<fqname>", "Annotation qualified names",
             required = false, allowMultipleOccurrences = true
         )
 
-        val PRESET_OPTION = CliOption(
+        konst PRESET_OPTION = CliOption(
             "preset", "<name>", "Preset name (${SUPPORTED_PRESETS.keys.joinToString()})",
             required = false, allowMultipleOccurrences = true
         )
 
-        val INVOKE_INITIALIZERS_OPTION = CliOption(
+        konst INVOKE_INITIALIZERS_OPTION = CliOption(
             INVOKE_INITIALIZERS_OPTION_NAME, "true/false",
             "Invoke instance initializers in a no-arg constructor",
             required = false, allowMultipleOccurrences = false
         )
     }
 
-    override val pluginId = PLUGIN_ID
-    override val pluginOptions = listOf(ANNOTATION_OPTION, PRESET_OPTION, INVOKE_INITIALIZERS_OPTION)
+    override konst pluginId = PLUGIN_ID
+    override konst pluginOptions = listOf(ANNOTATION_OPTION, PRESET_OPTION, INVOKE_INITIALIZERS_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) = when (option) {
-        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, value)
-        PRESET_OPTION -> configuration.appendList(PRESET, value)
-        INVOKE_INITIALIZERS_OPTION -> configuration.put(INVOKE_INITIALIZERS, value == "true")
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) = when (option) {
+        ANNOTATION_OPTION -> configuration.appendList(ANNOTATION, konstue)
+        PRESET_OPTION -> configuration.appendList(PRESET, konstue)
+        INVOKE_INITIALIZERS_OPTION -> configuration.put(INVOKE_INITIALIZERS, konstue == "true")
         else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
     }
 }
 
 class NoArgComponentRegistrar : CompilerPluginRegistrar() {
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 
     override fun ExtensionStorage.registerExtensions(configuration: CompilerConfiguration) {
-        val annotations = configuration.get(ANNOTATION).orEmpty().toMutableList()
+        konst annotations = configuration.get(ANNOTATION).orEmpty().toMutableList()
         configuration.get(PRESET)?.forEach { preset ->
             SUPPORTED_PRESETS[preset]?.let { annotations += it }
         }
@@ -104,8 +104,8 @@ class NoArgComponentRegistrar : CompilerPluginRegistrar() {
 }
 
 private class CliNoArgComponentContainerContributor(
-    private val annotations: List<String>,
-    private val useIr: Boolean,
+    private konst annotations: List<String>,
+    private konst useIr: Boolean,
 ) : StorageComponentContainerContributor {
     override fun registerModuleComponents(
         container: StorageComponentContainer, platform: TargetPlatform, moduleDescriptor: ModuleDescriptor

@@ -6,7 +6,7 @@ fun <T : Any?> Any.castExtFun(): T {
   return <this> as T
 }
 
-val <T : Any?> T.castExtVal: T
+konst <T : Any?> T.castExtVal: T
   get(): T {
     return <this> as T
   }
@@ -34,12 +34,12 @@ class Host<T : Any?> {
     return <this> as TF
   }
 
-  val Any.castMemberExtVal: T
+  konst Any.castMemberExtVal: T
     get(): T {
       return <this> as T
     }
 
-  val <TV : Any?> TV.castGenericMemberExtVal: TV
+  konst <TV : Any?> TV.castGenericMemberExtVal: TV
     get(): TV {
       return <this> as TV
     }

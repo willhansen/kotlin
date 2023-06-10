@@ -20,14 +20,14 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class JvmPackagePartSource(
-    override val className: JvmClassName,
-    override val facadeClassName: JvmClassName?,
+    override konst className: JvmClassName,
+    override konst facadeClassName: JvmClassName?,
     packageProto: ProtoBuf.Package,
     nameResolver: NameResolver,
-    override val incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
-    override val isPreReleaseInvisible: Boolean = false,
-    override val abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
-    val knownJvmBinaryClass: KotlinJvmBinaryClass? = null
+    override konst incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
+    override konst isPreReleaseInvisible: Boolean = false,
+    override konst abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
+    konst knownJvmBinaryClass: KotlinJvmBinaryClass? = null
 ) : DeserializedContainerSource, FacadeClassSource {
     constructor(
         kotlinClass: KotlinJvmBinaryClass,
@@ -49,16 +49,16 @@ class JvmPackagePartSource(
         kotlinClass
     )
 
-    val moduleName =
+    konst moduleName =
         packageProto.getExtensionOrNull(JvmProtoBuf.packageModuleName)?.let(nameResolver::getString)
             ?: JvmProtoBufUtil.DEFAULT_MODULE_NAME
 
-    override val presentableString: String
+    override konst presentableString: String
         get() = "Class '${classId.asSingleFqName().asString()}'"
 
-    val simpleName: Name get() = Name.identifier(className.internalName.substringAfterLast('/'))
+    konst simpleName: Name get() = Name.identifier(className.internalName.substringAfterLast('/'))
 
-    val classId: ClassId get() = ClassId(className.packageFqName, simpleName)
+    konst classId: ClassId get() = ClassId(className.packageFqName, simpleName)
 
     override fun toString() = "${this::class.java.simpleName}: $className"
 

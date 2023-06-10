@@ -19,7 +19,7 @@ FILE: delegatedSuperType.kt
 
         private final field $$delegate_0: R|A| = R|<local>/b|
 
-        public final val b: R|B| = R|<local>/b|
+        public final konst b: R|B| = R|<local>/b|
             public get(): R|B|
 
     }

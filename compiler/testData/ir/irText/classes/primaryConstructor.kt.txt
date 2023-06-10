@@ -5,11 +5,11 @@ class Test1 {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
@@ -22,11 +22,11 @@ class Test2 {
 
   }
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -39,11 +39,11 @@ class Test3 {
 
   }
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
-  val x: Int
+  konst x: Int
     get
 
   init {

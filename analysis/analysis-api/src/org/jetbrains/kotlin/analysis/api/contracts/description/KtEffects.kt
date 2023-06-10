@@ -21,17 +21,17 @@ public sealed interface KtContractEffectDeclaration : KtLifetimeOwner
  * Represents [kotlin.contracts.ContractBuilder.callsInPlace].
  */
 public class KtContractCallsInPlaceContractEffectDeclaration(
-    private val _valueParameterReference: KtContractParameterValue,
-    private val _occurrencesRange: EventOccurrencesRange,
+    private konst _konstueParameterReference: KtContractParameterValue,
+    private konst _occurrencesRange: EventOccurrencesRange,
 ) : KtContractEffectDeclaration {
-    override val token: KtLifetimeToken get() = _valueParameterReference.token
+    override konst token: KtLifetimeToken get() = _konstueParameterReference.token
 
-    public val valueParameterReference: KtContractParameterValue get() = withValidityAssertion { _valueParameterReference }
-    public val occurrencesRange: EventOccurrencesRange get() = withValidityAssertion { _occurrencesRange }
+    public konst konstueParameterReference: KtContractParameterValue get() = withValidityAssertion { _konstueParameterReference }
+    public konst occurrencesRange: EventOccurrencesRange get() = withValidityAssertion { _occurrencesRange }
 
-    override fun hashCode(): Int = Objects.hashCode(_valueParameterReference, _occurrencesRange)
+    override fun hashCode(): Int = Objects.hashCode(_konstueParameterReference, _occurrencesRange)
     override fun equals(other: Any?): Boolean =
-        other is KtContractCallsInPlaceContractEffectDeclaration && other._valueParameterReference == _valueParameterReference &&
+        other is KtContractCallsInPlaceContractEffectDeclaration && other._konstueParameterReference == _konstueParameterReference &&
                 other._occurrencesRange == _occurrencesRange
 }
 
@@ -39,13 +39,13 @@ public class KtContractCallsInPlaceContractEffectDeclaration(
  * Represents [kotlin.contracts.SimpleEffect.implies].
  */
 public class KtContractConditionalContractEffectDeclaration(
-    private val _effect: KtContractEffectDeclaration,
-    private val _condition: KtContractBooleanExpression
+    private konst _effect: KtContractEffectDeclaration,
+    private konst _condition: KtContractBooleanExpression
 ) : KtContractEffectDeclaration {
-    override val token: KtLifetimeToken get() = _effect.token
+    override konst token: KtLifetimeToken get() = _effect.token
 
-    public val effect: KtContractEffectDeclaration get() = withValidityAssertion { _effect }
-    public val condition: KtContractBooleanExpression get() = withValidityAssertion { _condition }
+    public konst effect: KtContractEffectDeclaration get() = withValidityAssertion { _effect }
+    public konst condition: KtContractBooleanExpression get() = withValidityAssertion { _condition }
 
     override fun hashCode(): Int = Objects.hashCode(_effect, _condition)
     override fun equals(other: Any?): Boolean =
@@ -60,30 +60,30 @@ public sealed class KtContractReturnsContractEffectDeclaration : KtContractEffec
      * Represent [kotlin.contracts.ContractBuilder.returnsNotNull].
      */
     public class KtContractReturnsNotNullEffectDeclaration(
-        override val token: KtLifetimeToken
+        override konst token: KtLifetimeToken
     ) : KtContractReturnsContractEffectDeclaration() {
         override fun equals(other: Any?): Boolean = other is KtContractReturnsNotNullEffectDeclaration
         override fun hashCode(): Int = javaClass.hashCode()
     }
 
     /**
-     * Represents [kotlin.contracts.ContractBuilder.returns] with a `value` argument.
+     * Represents [kotlin.contracts.ContractBuilder.returns] with a `konstue` argument.
      */
     public class KtContractReturnsSpecificValueEffectDeclaration(
-        private val _value: KtContractConstantValue
+        private konst _konstue: KtContractConstantValue
     ) : KtContractReturnsContractEffectDeclaration() {
-        override val token: KtLifetimeToken get() = _value.token
-        public val value: KtContractConstantValue get() = withValidityAssertion { _value }
+        override konst token: KtLifetimeToken get() = _konstue.token
+        public konst konstue: KtContractConstantValue get() = withValidityAssertion { _konstue }
 
-        override fun equals(other: Any?): Boolean = other is KtContractReturnsSpecificValueEffectDeclaration && other._value == _value
-        override fun hashCode(): Int = _value.hashCode()
+        override fun equals(other: Any?): Boolean = other is KtContractReturnsSpecificValueEffectDeclaration && other._konstue == _konstue
+        override fun hashCode(): Int = _konstue.hashCode()
     }
 
     /**
      * Represents [kotlin.contracts.ContractBuilder.returns] without arguments.
      */
     public class KtContractReturnsSuccessfullyEffectDeclaration(
-        override val token: KtLifetimeToken
+        override konst token: KtLifetimeToken
     ) : KtContractReturnsContractEffectDeclaration() {
         override fun equals(other: Any?): Boolean = other is KtContractReturnsSuccessfullyEffectDeclaration
         override fun hashCode(): Int = javaClass.hashCode()

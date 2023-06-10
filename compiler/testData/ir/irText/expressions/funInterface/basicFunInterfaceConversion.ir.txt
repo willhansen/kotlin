@@ -31,4 +31,4 @@ FILE fqName:<root> fileName:/basicFunInterfaceConversion.kt
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.String
                 BLOCK_BODY
                   RETURN type=kotlin.Nothing from='local final fun <anonymous> (): kotlin.String declared in <root>.test'
-                    CONST String type=kotlin.String value="OK"
+                    CONST String type=kotlin.String konstue="OK"

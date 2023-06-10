@@ -13,7 +13,7 @@ public class A {
 
 // FILE: main.kt
 
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 @Ann(A.X)
 fun main1() {}
@@ -21,6 +21,6 @@ fun main1() {}
 @Ann(A.Y)
 fun main2() {}
 
-val q = A()
+konst q = A()
 @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>q.z<!>)
 fun main3() {}

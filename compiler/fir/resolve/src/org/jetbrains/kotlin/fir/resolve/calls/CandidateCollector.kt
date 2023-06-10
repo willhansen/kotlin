@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.resolve.calls.tower.isSuccess
 import org.jetbrains.kotlin.resolve.calls.tower.shouldStopResolve
 
 open class CandidateCollector(
-    val components: BodyResolveComponents,
-    private val resolutionStageRunner: ResolutionStageRunner
+    konst components: BodyResolveComponents,
+    private konst resolutionStageRunner: ResolutionStageRunner
 ) {
-    private val groupNumbers = mutableListOf<TowerGroup>()
-    private val candidates = mutableListOf<Candidate>()
+    private konst groupNumbers = mutableListOf<TowerGroup>()
+    private konst candidates = mutableListOf<Candidate>()
 
     var currentApplicability = CandidateApplicability.HIDDEN
         private set
@@ -31,7 +31,7 @@ open class CandidateCollector(
     }
 
     open fun consumeCandidate(group: TowerGroup, candidate: Candidate, context: ResolutionContext): CandidateApplicability {
-        val applicability = resolutionStageRunner.processCandidate(candidate, context)
+        konst applicability = resolutionStageRunner.processCandidate(candidate, context)
 
         if (applicability > currentApplicability || (applicability == currentApplicability && group < bestGroup)) {
             // Only throw away previous candidates if the new one is successful. If we don't find a successful candidate, we keep all
@@ -57,9 +57,9 @@ open class CandidateCollector(
     open fun shouldStopAtTheGroup(group: TowerGroup): Boolean =
         shouldStopResolve && bestGroup < group
 
-    val shouldStopResolve: Boolean
+    konst shouldStopResolve: Boolean
         get() = currentApplicability.shouldStopResolve
 
-    val isSuccess: Boolean
+    konst isSuccess: Boolean
         get() = currentApplicability.isSuccess
 }

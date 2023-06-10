@@ -8,12 +8,12 @@ package a
 
 import kotlin.reflect.jvm.isAccessible
 
-inline class S(val s: String)
+inline class S(konst s: String)
 
 class Host {
     companion object {
-        private val ok = S("OK")
-        val ref = ::ok.apply { isAccessible = true }
+        private konst ok = S("OK")
+        konst ref = ::ok.apply { isAccessible = true }
     }
 }
 

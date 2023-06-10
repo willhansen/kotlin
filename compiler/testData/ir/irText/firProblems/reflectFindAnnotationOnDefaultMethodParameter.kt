@@ -4,13 +4,13 @@
 // FULL_JDK
 
 fun box(): String {
-    val impl = object : I {
+    konst impl = object : I {
     }
 
-    val method = impl.javaClass.getMethod("m", String::class.java)
-    val parameter = method.parameters[0]
+    konst method = impl.javaClass.getMethod("m", String::class.java)
+    konst parameter = method.parameters[0]
 
-    val size = parameter.annotations.size
+    konst size = parameter.annotations.size
     if (size == 1) return "OK"
     return "ERR: $size"
 }

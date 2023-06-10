@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirVariableAssignment : FirPureAbstractElement(), FirStatement {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract val lValue: FirExpression
-    abstract val rValue: FirExpression
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst lValue: FirExpression
+    abstract konst rValue: FirExpression
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitVariableAssignment(this, data)
 

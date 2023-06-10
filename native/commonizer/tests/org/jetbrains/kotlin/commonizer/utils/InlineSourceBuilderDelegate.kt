@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.commonizer.tree.CirTreeModule
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 
 internal interface InlineSourceBuilderDelegate : InlineSourceBuilder {
-    val inlineSourceBuilder: InlineSourceBuilder
+    konst inlineSourceBuilder: InlineSourceBuilder
 
     override fun createCirTree(module: InlineSourceBuilder.Module): CirTreeModule {
         return inlineSourceBuilder.createCirTree(module)

@@ -3,89 +3,89 @@
 // TARGET_BACKEND: JS_IR
 fun <T> T.id() = this
 
-const val minusOneVal = <!EVALUATED("-1.0")!>-1.0f<!>
-const val oneVal = <!EVALUATED("1.0")!>1.0f<!>
-const val twoVal = <!EVALUATED("2.0")!>2.0f<!>
-const val threeVal = <!EVALUATED("3.0")!>3.0f<!>
-const val fourVal = <!EVALUATED("4.0")!>4.0f<!>
-const val oneAndAHalf = <!EVALUATED("1.5")!>1.5f<!>
+const konst minusOneVal = <!EVALUATED("-1.0")!>-1.0f<!>
+const konst oneVal = <!EVALUATED("1.0")!>1.0f<!>
+const konst twoVal = <!EVALUATED("2.0")!>2.0f<!>
+const konst threeVal = <!EVALUATED("3.0")!>3.0f<!>
+const konst fourVal = <!EVALUATED("4.0")!>4.0f<!>
+const konst oneAndAHalf = <!EVALUATED("1.5")!>1.5f<!>
 
-const val byteVal = 2.<!EVALUATED("2")!>toByte()<!>
-const val shortVal = 2.<!EVALUATED("2")!>toShort()<!>
-const val intVal = <!EVALUATED("2")!>2<!>
-const val longVal = <!EVALUATED("2")!>2L<!>
-const val floatVal = <!EVALUATED("2.0")!>2.0f<!>
-const val doubleVal = <!EVALUATED("2.0")!>2.0<!>
+const konst byteVal = 2.<!EVALUATED("2")!>toByte()<!>
+const konst shortVal = 2.<!EVALUATED("2")!>toShort()<!>
+const konst intVal = <!EVALUATED("2")!>2<!>
+const konst longVal = <!EVALUATED("2")!>2L<!>
+const konst floatVal = <!EVALUATED("2.0")!>2.0f<!>
+const konst doubleVal = <!EVALUATED("2.0")!>2.0<!>
 
-const val compareTo1 = oneVal.<!EVALUATED("-1")!>compareTo(twoVal)<!>
-const val compareTo2 = twoVal.<!EVALUATED("0")!>compareTo(twoVal)<!>
-const val compareTo3 = threeVal.<!EVALUATED("1")!>compareTo(twoVal)<!>
-const val compareTo4 = twoVal.<!EVALUATED("0")!>compareTo(byteVal)<!>
-const val compareTo5 = twoVal.<!EVALUATED("0")!>compareTo(shortVal)<!>
-const val compareTo6 = twoVal.<!EVALUATED("0")!>compareTo(intVal)<!>
-const val compareTo7 = twoVal.<!EVALUATED("0")!>compareTo(longVal)<!>
-const val compareTo8 = twoVal.<!EVALUATED("0")!>compareTo(doubleVal)<!>
+const konst compareTo1 = oneVal.<!EVALUATED("-1")!>compareTo(twoVal)<!>
+const konst compareTo2 = twoVal.<!EVALUATED("0")!>compareTo(twoVal)<!>
+const konst compareTo3 = threeVal.<!EVALUATED("1")!>compareTo(twoVal)<!>
+const konst compareTo4 = twoVal.<!EVALUATED("0")!>compareTo(byteVal)<!>
+const konst compareTo5 = twoVal.<!EVALUATED("0")!>compareTo(shortVal)<!>
+const konst compareTo6 = twoVal.<!EVALUATED("0")!>compareTo(intVal)<!>
+const konst compareTo7 = twoVal.<!EVALUATED("0")!>compareTo(longVal)<!>
+const konst compareTo8 = twoVal.<!EVALUATED("0")!>compareTo(doubleVal)<!>
 
-const val plus1 = oneVal.<!EVALUATED("3.0")!>plus(twoVal)<!>
-const val plus2 = twoVal.<!EVALUATED("4.0")!>plus(twoVal)<!>
-const val plus3 = threeVal.<!EVALUATED("5.0")!>plus(twoVal)<!>
-const val plus4 = twoVal.<!EVALUATED("4.0")!>plus(byteVal)<!>
-const val plus5 = twoVal.<!EVALUATED("4.0")!>plus(shortVal)<!>
-const val plus6 = twoVal.<!EVALUATED("4.0")!>plus(intVal)<!>
-const val plus7 = twoVal.<!EVALUATED("4.0")!>plus(longVal)<!>
-const val plus8 = twoVal.<!EVALUATED("4.0")!>plus(doubleVal)<!>
+const konst plus1 = oneVal.<!EVALUATED("3.0")!>plus(twoVal)<!>
+const konst plus2 = twoVal.<!EVALUATED("4.0")!>plus(twoVal)<!>
+const konst plus3 = threeVal.<!EVALUATED("5.0")!>plus(twoVal)<!>
+const konst plus4 = twoVal.<!EVALUATED("4.0")!>plus(byteVal)<!>
+const konst plus5 = twoVal.<!EVALUATED("4.0")!>plus(shortVal)<!>
+const konst plus6 = twoVal.<!EVALUATED("4.0")!>plus(intVal)<!>
+const konst plus7 = twoVal.<!EVALUATED("4.0")!>plus(longVal)<!>
+const konst plus8 = twoVal.<!EVALUATED("4.0")!>plus(doubleVal)<!>
 
-const val minus1 = oneVal.<!EVALUATED("-1.0")!>minus(twoVal)<!>
-const val minus2 = twoVal.<!EVALUATED("0.0")!>minus(twoVal)<!>
-const val minus3 = threeVal.<!EVALUATED("1.0")!>minus(twoVal)<!>
-const val minus4 = twoVal.<!EVALUATED("0.0")!>minus(byteVal)<!>
-const val minus5 = twoVal.<!EVALUATED("0.0")!>minus(shortVal)<!>
-const val minus6 = twoVal.<!EVALUATED("0.0")!>minus(intVal)<!>
-const val minus7 = twoVal.<!EVALUATED("0.0")!>minus(longVal)<!>
-const val minus8 = twoVal.<!EVALUATED("0.0")!>minus(doubleVal)<!>
+const konst minus1 = oneVal.<!EVALUATED("-1.0")!>minus(twoVal)<!>
+const konst minus2 = twoVal.<!EVALUATED("0.0")!>minus(twoVal)<!>
+const konst minus3 = threeVal.<!EVALUATED("1.0")!>minus(twoVal)<!>
+const konst minus4 = twoVal.<!EVALUATED("0.0")!>minus(byteVal)<!>
+const konst minus5 = twoVal.<!EVALUATED("0.0")!>minus(shortVal)<!>
+const konst minus6 = twoVal.<!EVALUATED("0.0")!>minus(intVal)<!>
+const konst minus7 = twoVal.<!EVALUATED("0.0")!>minus(longVal)<!>
+const konst minus8 = twoVal.<!EVALUATED("0.0")!>minus(doubleVal)<!>
 
-const val times1 = oneVal.<!EVALUATED("2.0")!>times(twoVal)<!>
-const val times2 = twoVal.<!EVALUATED("4.0")!>times(twoVal)<!>
-const val times3 = threeVal.<!EVALUATED("6.0")!>times(twoVal)<!>
-const val times4 = twoVal.<!EVALUATED("4.0")!>times(byteVal)<!>
-const val times5 = twoVal.<!EVALUATED("4.0")!>times(shortVal)<!>
-const val times6 = twoVal.<!EVALUATED("4.0")!>times(intVal)<!>
-const val times7 = twoVal.<!EVALUATED("4.0")!>times(longVal)<!>
-const val times8 = twoVal.<!EVALUATED("4.0")!>times(doubleVal)<!>
+const konst times1 = oneVal.<!EVALUATED("2.0")!>times(twoVal)<!>
+const konst times2 = twoVal.<!EVALUATED("4.0")!>times(twoVal)<!>
+const konst times3 = threeVal.<!EVALUATED("6.0")!>times(twoVal)<!>
+const konst times4 = twoVal.<!EVALUATED("4.0")!>times(byteVal)<!>
+const konst times5 = twoVal.<!EVALUATED("4.0")!>times(shortVal)<!>
+const konst times6 = twoVal.<!EVALUATED("4.0")!>times(intVal)<!>
+const konst times7 = twoVal.<!EVALUATED("4.0")!>times(longVal)<!>
+const konst times8 = twoVal.<!EVALUATED("4.0")!>times(doubleVal)<!>
 
-const val div1 = oneVal.<!EVALUATED("0.5")!>div(twoVal)<!>
-const val div2 = twoVal.<!EVALUATED("1.0")!>div(twoVal)<!>
-const val div3 = threeVal.<!EVALUATED("1.5")!>div(twoVal)<!>
-const val div4 = twoVal.<!EVALUATED("1.0")!>div(byteVal)<!>
-const val div5 = twoVal.<!EVALUATED("1.0")!>div(shortVal)<!>
-const val div6 = twoVal.<!EVALUATED("1.0")!>div(intVal)<!>
-const val div7 = twoVal.<!EVALUATED("1.0")!>div(longVal)<!>
-const val div8 = twoVal.<!EVALUATED("1.0")!>div(doubleVal)<!>
+const konst div1 = oneVal.<!EVALUATED("0.5")!>div(twoVal)<!>
+const konst div2 = twoVal.<!EVALUATED("1.0")!>div(twoVal)<!>
+const konst div3 = threeVal.<!EVALUATED("1.5")!>div(twoVal)<!>
+const konst div4 = twoVal.<!EVALUATED("1.0")!>div(byteVal)<!>
+const konst div5 = twoVal.<!EVALUATED("1.0")!>div(shortVal)<!>
+const konst div6 = twoVal.<!EVALUATED("1.0")!>div(intVal)<!>
+const konst div7 = twoVal.<!EVALUATED("1.0")!>div(longVal)<!>
+const konst div8 = twoVal.<!EVALUATED("1.0")!>div(doubleVal)<!>
 
-const val rem1 = oneVal.<!EVALUATED("1.0")!>rem(twoVal)<!>
-const val rem2 = twoVal.<!EVALUATED("0.0")!>rem(twoVal)<!>
-const val rem3 = threeVal.<!EVALUATED("1.0")!>rem(twoVal)<!>
-const val rem4 = twoVal.<!EVALUATED("0.0")!>rem(byteVal)<!>
-const val rem5 = twoVal.<!EVALUATED("0.0")!>rem(shortVal)<!>
-const val rem6 = twoVal.<!EVALUATED("0.0")!>rem(intVal)<!>
-const val rem7 = twoVal.<!EVALUATED("0.0")!>rem(longVal)<!>
-const val rem8 = twoVal.<!EVALUATED("0.0")!>rem(doubleVal)<!>
+const konst rem1 = oneVal.<!EVALUATED("1.0")!>rem(twoVal)<!>
+const konst rem2 = twoVal.<!EVALUATED("0.0")!>rem(twoVal)<!>
+const konst rem3 = threeVal.<!EVALUATED("1.0")!>rem(twoVal)<!>
+const konst rem4 = twoVal.<!EVALUATED("0.0")!>rem(byteVal)<!>
+const konst rem5 = twoVal.<!EVALUATED("0.0")!>rem(shortVal)<!>
+const konst rem6 = twoVal.<!EVALUATED("0.0")!>rem(intVal)<!>
+const konst rem7 = twoVal.<!EVALUATED("0.0")!>rem(longVal)<!>
+const konst rem8 = twoVal.<!EVALUATED("0.0")!>rem(doubleVal)<!>
 
-const val unaryPlus1 = oneVal.<!EVALUATED("1.0")!>unaryPlus()<!>
-const val unaryPlus2 = minusOneVal.<!EVALUATED("-1.0")!>unaryPlus()<!>
-const val unaryMinus1 = oneVal.<!EVALUATED("-1.0")!>unaryMinus()<!>
-const val unaryMinus2 = minusOneVal.<!EVALUATED("1.0")!>unaryMinus()<!>
+const konst unaryPlus1 = oneVal.<!EVALUATED("1.0")!>unaryPlus()<!>
+const konst unaryPlus2 = minusOneVal.<!EVALUATED("-1.0")!>unaryPlus()<!>
+const konst unaryMinus1 = oneVal.<!EVALUATED("-1.0")!>unaryMinus()<!>
+const konst unaryMinus2 = minusOneVal.<!EVALUATED("1.0")!>unaryMinus()<!>
 
-const val convert1 = oneVal.<!EVALUATED("")!>toChar()<!>
-const val convert2 = oneVal.<!EVALUATED("1")!>toInt()<!>
-const val convert3 = oneVal.<!EVALUATED("1")!>toLong()<!>
-const val convert4 = oneVal.<!EVALUATED("1.0")!>toFloat()<!>
-const val convert5 = oneVal.<!EVALUATED("1.0")!>toDouble()<!>
+const konst convert1 = oneVal.<!EVALUATED("")!>toChar()<!>
+const konst convert2 = oneVal.<!EVALUATED("1")!>toInt()<!>
+const konst convert3 = oneVal.<!EVALUATED("1")!>toLong()<!>
+const konst convert4 = oneVal.<!EVALUATED("1.0")!>toFloat()<!>
+const konst convert5 = oneVal.<!EVALUATED("1.0")!>toDouble()<!>
 
-const val equals1 = <!EVALUATED("false")!>oneVal == twoVal<!>
-const val equals2 = <!EVALUATED("true")!>twoVal == twoVal<!>
-const val equals3 = <!EVALUATED("false")!>threeVal == twoVal<!>
-const val equals4 = <!EVALUATED("false")!>fourVal == twoVal<!>
+const konst equals1 = <!EVALUATED("false")!>oneVal == twoVal<!>
+const konst equals2 = <!EVALUATED("true")!>twoVal == twoVal<!>
+const konst equals3 = <!EVALUATED("false")!>threeVal == twoVal<!>
+const konst equals4 = <!EVALUATED("false")!>fourVal == twoVal<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

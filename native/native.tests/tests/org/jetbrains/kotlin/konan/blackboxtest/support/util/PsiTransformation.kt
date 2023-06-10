@@ -15,7 +15,7 @@ internal fun PsiElement.ensureSurroundedByWhiteSpace(): PsiElement =
     ensureHasWhiteSpaceBefore().ensureHasWhiteSpaceAfter()
 
 private fun PsiElement.ensureHasWhiteSpaceBefore(): PsiElement {
-    val (fileBoundaryReached, whiteSpaceBefore) = whiteSpaceBefore()
+    konst (fileBoundaryReached, whiteSpaceBefore) = whiteSpaceBefore()
     if (!fileBoundaryReached and !whiteSpaceBefore.endsWith(" ")) {
         parent.addBefore(KtPsiFactory(project).createWhiteSpace(" "), this)
     }
@@ -23,7 +23,7 @@ private fun PsiElement.ensureHasWhiteSpaceBefore(): PsiElement {
 }
 
 private fun PsiElement.ensureHasWhiteSpaceAfter(): PsiElement {
-    val (fileBoundaryReached, whiteSpaceAfter) = whiteSpaceAfter()
+    konst (fileBoundaryReached, whiteSpaceAfter) = whiteSpaceAfter()
     if (!fileBoundaryReached and !whiteSpaceAfter.startsWith(" ")) {
         parent.addAfter(KtPsiFactory(project).createWhiteSpace(" "), this)
     }
@@ -33,7 +33,7 @@ private fun PsiElement.ensureHasWhiteSpaceAfter(): PsiElement {
 private fun PsiElement.whiteSpaceBefore(): Pair<Boolean, String> {
     var fileBoundaryReached = false
 
-    fun PsiElement.prevWhiteSpace(): PsiWhiteSpace? = when (val prevLeaf = prevLeaf(skipEmptyElements = true)) {
+    fun PsiElement.prevWhiteSpace(): PsiWhiteSpace? = when (konst prevLeaf = prevLeaf(skipEmptyElements = true)) {
         null -> {
             fileBoundaryReached = true
             null
@@ -41,7 +41,7 @@ private fun PsiElement.whiteSpaceBefore(): Pair<Boolean, String> {
         else -> prevLeaf as? PsiWhiteSpace
     }
 
-    val whiteSpace = buildString {
+    konst whiteSpace = buildString {
         generateSequence(prevWhiteSpace()) { it.prevWhiteSpace() }.toList().asReversed().forEach { append(it.text) }
     }
 
@@ -51,7 +51,7 @@ private fun PsiElement.whiteSpaceBefore(): Pair<Boolean, String> {
 private fun PsiElement.whiteSpaceAfter(): Pair<Boolean, String> {
     var fileBoundaryReached = false
 
-    fun PsiElement.nextWhiteSpace(): PsiWhiteSpace? = when (val nextLeaf = nextLeaf(skipEmptyElements = true)) {
+    fun PsiElement.nextWhiteSpace(): PsiWhiteSpace? = when (konst nextLeaf = nextLeaf(skipEmptyElements = true)) {
         null -> {
             fileBoundaryReached = true
             null
@@ -59,7 +59,7 @@ private fun PsiElement.whiteSpaceAfter(): Pair<Boolean, String> {
         else -> nextLeaf as? PsiWhiteSpace
     }
 
-    val whiteSpace = buildString {
+    konst whiteSpace = buildString {
         generateSequence(nextWhiteSpace()) { it.nextWhiteSpace() }.forEach { append(it.text) }
     }
 

@@ -30,10 +30,10 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
         kotlin.linuxArm64()
         kotlin.linuxX64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxMain = kotlin.sourceSets.create("linuxMain") as DefaultKotlinSourceSet
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxMain = kotlin.sourceSets.create("linuxMain") as DefaultKotlinSourceSet
 
         linuxMain.dependsOn(commonMain)
         linuxArm64Main.dependsOn(linuxMain)
@@ -50,14 +50,14 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
-        val linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
-        val nativeMain = kotlin.sourceSets.create("nativeMain") as DefaultKotlinSourceSet
-        val nativeTest = kotlin.sourceSets.create("nativeTest") as DefaultKotlinSourceSet
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+        konst linuxArm64Test = kotlin.sourceSets.getByName("linuxArm64Test")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst nativeMain = kotlin.sourceSets.create("nativeMain") as DefaultKotlinSourceSet
+        konst nativeTest = kotlin.sourceSets.create("nativeTest") as DefaultKotlinSourceSet
 
         nativeMain.dependsOn(commonMain)
         linuxX64Main.dependsOn(nativeMain)
@@ -67,8 +67,8 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
         linuxX64Test.dependsOn(nativeTest)
         linuxArm64Test.dependsOn(nativeTest)
 
-        project.evaluate()
-        val nativeTestTransformationTask = project.locateOrRegisterCInteropMetadataDependencyTransformationTask(nativeTest)
+        project.ekonstuate()
+        konst nativeTestTransformationTask = project.locateOrRegisterCInteropMetadataDependencyTransformationTask(nativeTest)
 
         assertNotNull(nativeTestTransformationTask, "Expected transformation task registered for 'nativeTest'")
         assertEquals(
@@ -92,21 +92,21 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
         kotlin.linuxX64()
         kotlin.jvm()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain") as DefaultKotlinSourceSet
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst linuxArm64Main = kotlin.sourceSets.getByName("linuxArm64Main")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain") as DefaultKotlinSourceSet
 
         linuxMain.dependsOn(commonMain)
         linuxArm64Main.dependsOn(linuxMain)
         linuxX64Main.dependsOn(linuxMain)
 
-        project.evaluate()
+        project.ekonstuate()
 
         listOf(
             "commonMain", "jvmMain", "linuxArm64Main", "linuxX64Main"
         ).map { sourceSetName -> kotlin.sourceSets.getByName(sourceSetName) }.forEach { sourceSet ->
-            val task = project.locateOrRegisterCInteropMetadataDependencyTransformationTask(sourceSet as DefaultKotlinSourceSet)
+            konst task = project.locateOrRegisterCInteropMetadataDependencyTransformationTask(sourceSet as DefaultKotlinSourceSet)
                 ?: return@forEach
 
             assertFalse(
@@ -115,7 +115,7 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
             )
         }
 
-        val linuxMainTask = project.locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(linuxMain)
+        konst linuxMainTask = project.locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(linuxMain)
             ?: fail("Expected transformation task registered for 'linuxMain'")
 
         assertTrue(
@@ -135,16 +135,16 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
                 linuxX64()
                 linuxArm64()
             }
-        }.also { it.evaluate() }
+        }.also { it.ekonstuate() }
 
         fun Project.transformationTaskOutputs(): Set<File> {
-            val kotlin = multiplatformExtension
-            val nativeMain = kotlin.sourceSets.findByName("nativeMain") ?: fail("Expected source set 'nativeMain")
-            val cinteropTransformationTaskProvider = locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(
+            konst kotlin = multiplatformExtension
+            konst nativeMain = kotlin.sourceSets.findByName("nativeMain") ?: fail("Expected source set 'nativeMain")
+            konst cinteropTransformationTaskProvider = locateOrRegisterCInteropMetadataDependencyTransformationTaskForIde(
                 nativeMain as DefaultKotlinSourceSet
             ) ?: fail("Expected transformation task registered for '$nativeMain'")
-            val cinteropTransformationTask = cinteropTransformationTaskProvider.get()
-            val projectRootDir = rootDir
+            konst cinteropTransformationTask = cinteropTransformationTaskProvider.get()
+            konst projectRootDir = rootDir
             return cinteropTransformationTask
                 .outputs
                 .files
@@ -155,10 +155,10 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
         }
 
         fun assertTasksOutputsDoesntIntersect(a: Project, b: Project) {
-            val outputsA = a.transformationTaskOutputs()
-            val outputsB = b.transformationTaskOutputs()
+            konst outputsA = a.transformationTaskOutputs()
+            konst outputsB = b.transformationTaskOutputs()
 
-            val intersection = outputsA intersect outputsB
+            konst intersection = outputsA intersect outputsB
 
             assertTrue(
                 actual = intersection.isEmpty(),
@@ -168,18 +168,18 @@ class CInteropMetadataDependencyTransformationTaskTest : MultiplatformExtensionT
             )
         }
 
-        val rootProject = ProjectBuilder.builder().build()
-        val projectFoo = projectWithCinterops("foo", rootProject)
-        val projectFooBar = projectWithCinterops("bar", projectFoo)
-        val projectFooFoo = projectWithCinterops("foo", projectFoo)
-        val projectBar = projectWithCinterops("bar", rootProject)
+        konst rootProject = ProjectBuilder.builder().build()
+        konst projectFoo = projectWithCinterops("foo", rootProject)
+        konst projectFooBar = projectWithCinterops("bar", projectFoo)
+        konst projectFooFoo = projectWithCinterops("foo", projectFoo)
+        konst projectBar = projectWithCinterops("bar", rootProject)
 
         assertTasksOutputsDoesntIntersect(projectFoo, projectBar)
         assertTasksOutputsDoesntIntersect(projectFoo, projectFooBar)
         assertTasksOutputsDoesntIntersect(projectFoo, projectFooFoo)
 
         // KT-56087
-        // val projectFooDotBar = projectWithCinterops("foo.bar", rootProject)
+        // konst projectFooDotBar = projectWithCinterops("foo.bar", rootProject)
         // assertTasksOutputsDoesntIntersect(projectFooBar, projectFooDotBar)
     }
 }

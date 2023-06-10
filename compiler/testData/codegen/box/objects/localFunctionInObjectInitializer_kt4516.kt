@@ -1,7 +1,7 @@
 // KJS_WITH_FULL_RUNTIME
 
 object O {
-    val mmmap = HashMap<String, Int>();
+    konst mmmap = HashMap<String, Int>();
 
     init {
         fun doStuff() {
@@ -12,7 +12,7 @@ object O {
 }
 
 fun box(): String {
-    val r = O.mmmap["two"]
+    konst r = O.mmmap["two"]
     if (r != 2) return "Fail: $r"
     return "OK"
 }

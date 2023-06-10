@@ -22,7 +22,7 @@ enum class C {
     constructor()
 }
 
-enum class D(val prop: Int) {
+enum class D(konst prop: Int) {
     X(123) {
         override fun f() = 1
     },

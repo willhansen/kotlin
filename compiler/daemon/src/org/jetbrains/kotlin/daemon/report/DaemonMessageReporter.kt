@@ -28,22 +28,22 @@ fun DaemonMessageReporter(
         compilationOptions: CompilationOptions
 ): DaemonMessageReporter =
         if (ReportCategory.DAEMON_MESSAGE.code in compilationOptions.reportCategories) {
-            val mySeverity = ReportSeverity.fromCode(compilationOptions.reportSeverity)
+            konst mySeverity = ReportSeverity.fromCode(compilationOptions.reportSeverity)
             DaemonMessageReporterImpl(servicesFacade, mySeverity)
         }
         else {
             DummyDaemonMessageReporter
         }
 
-internal class DaemonMessageReporterPrintStreamAdapter(private val out: PrintStream): DaemonMessageReporter {
+internal class DaemonMessageReporterPrintStreamAdapter(private konst out: PrintStream): DaemonMessageReporter {
     override fun report(severity: ReportSeverity, message: String) {
         out.print("[Kotlin compile daemon][$severity] $message")
     }
 }
 
 private class DaemonMessageReporterImpl(
-        private val servicesFacade: CompilerServicesFacadeBase,
-        private val mySeverity: ReportSeverity
+        private konst servicesFacade: CompilerServicesFacadeBase,
+        private konst mySeverity: ReportSeverity
 ): DaemonMessageReporter {
     override fun report(severity: ReportSeverity, message: String) {
         if (severity.code <= mySeverity.code) {

@@ -6,8 +6,8 @@ public fun unchangedFun2() {}
 
 private fun addedFun2(): Int = 10
 
-private val addedVal2: String = "A"
+private konst addedVal2: String = "A"
 
-private val changedVal2: String = ""
+private konst changedVal2: String = ""
 
 private fun changedFun2(arg: String) {}

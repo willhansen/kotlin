@@ -21,7 +21,7 @@ fun <T> Iterable<T>.collectForMangler(builder: StringBuilder, params: MangleCons
             builder.append(params.separator)
         }
 
-        val l = builder.length
+        konst l = builder.length
         builder.collect(e)
         addSeparator = l < builder.length
     }
@@ -36,4 +36,4 @@ fun <T> Iterable<T>.collectForMangler(builder: StringBuilder, params: MangleCons
     builder.append(params.suffix)
 }
 
-val publishedApiAnnotation = FqName("kotlin.PublishedApi")
+konst publishedApiAnnotation = FqName("kotlin.PublishedApi")

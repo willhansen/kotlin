@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.ir.expressions.impl.IrFunctionReferenceImpl
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
 class ProvisionalFunctionExpressionLoweringContext(
-    val startOffset: Int? = null,
-    val endOffset: Int? = null
+    konst startOffset: Int? = null,
+    konst endOffset: Int? = null
 )
 class ProvisionalFunctionExpressionLowering :
     IrElementTransformer<ProvisionalFunctionExpressionLoweringContext>,
@@ -51,11 +51,11 @@ class ProvisionalFunctionExpressionLowering :
     override fun visitFunctionExpression(expression: IrFunctionExpression, data: ProvisionalFunctionExpressionLoweringContext): IrElement {
         expression.transformChildren(this, ProvisionalFunctionExpressionLoweringContext())
 
-        val startOffset = data.startOffset ?: expression.startOffset
-        val endOffset = data.endOffset ?: expression.endOffset
-        val type = expression.type
-        val origin = expression.origin
-        val function = expression.function
+        konst startOffset = data.startOffset ?: expression.startOffset
+        konst endOffset = data.endOffset ?: expression.endOffset
+        konst type = expression.type
+        konst origin = expression.origin
+        konst function = expression.function
 
         return IrBlockImpl(
             startOffset, endOffset, type, origin,
@@ -65,7 +65,7 @@ class ProvisionalFunctionExpressionLowering :
                     startOffset, endOffset, type,
                     function.symbol,
                     typeArgumentsCount = 0,
-                    valueArgumentsCount = function.valueParameters.size,
+                    konstueArgumentsCount = function.konstueParameters.size,
                     reflectionTarget = null,
                     origin = origin
                 ).copyAttributes(expression)

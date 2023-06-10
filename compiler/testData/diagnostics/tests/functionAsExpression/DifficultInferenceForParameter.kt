@@ -4,5 +4,5 @@
 fun <T> foo(f : (T) -> T) : T = throw Exception()
 
 fun test() {
-    val a : Int = foo(fun (x) = x)
+    konst a : Int = foo(fun (x) = x)
 }

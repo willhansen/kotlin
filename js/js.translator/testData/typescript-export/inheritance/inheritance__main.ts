@@ -26,8 +26,8 @@ class A2Impl extends A2 {
     get bar(): string {
         return this._bar
     }
-    set bar(value: string) {
-        this._bar = value
+    set bar(konstue: string) {
+        this._bar = konstue
     }
     get baz(): string {
         return "bazA2"

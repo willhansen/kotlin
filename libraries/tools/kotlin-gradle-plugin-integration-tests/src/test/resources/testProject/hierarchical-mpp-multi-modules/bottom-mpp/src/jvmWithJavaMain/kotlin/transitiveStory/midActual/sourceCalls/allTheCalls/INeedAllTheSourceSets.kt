@@ -13,29 +13,29 @@ import transitiveStory.bottomActual.jApiCall.JApiCallerInJVM18
 class INeedAllTheSourceSets {
     // ========= api calls ==========
     // java
-    val jApiOne = JavaApiContainer()
+    konst jApiOne = JavaApiContainer()
 
     // kotlin
-    val kApiOne = KotlinApiContainer()
+    konst kApiOne = KotlinApiContainer()
 
     // ========= mpp-bottom-actual calls ==========
     // common source set
-    val interCallOne = regularTLfunInTheBottomActualCommmon("Some string from `mpp-mid-actual` module")
-    val interCallTwo = BottomActualDeclarations.inTheCompanionOfBottomActualDeclarations
-    val interCallThree = BottomActualDeclarations().simpleVal
+    konst interCallOne = regularTLfunInTheBottomActualCommmon("Some string from `mpp-mid-actual` module")
+    konst interCallTwo = BottomActualDeclarations.inTheCompanionOfBottomActualDeclarations
+    konst interCallThree = BottomActualDeclarations().simpleVal
 
     // intermediate source set
-    val interCallFour = InBottomActualIntermediate().p
-    val interCallFive = IntermediateMPPClassInBottomActual()
+    konst interCallFour = InBottomActualIntermediate().p
+    konst interCallFive = IntermediateMPPClassInBottomActual()
 
     // ========= jvm18 source set (attempt to) ==========
     // java
-    val interCallSix = JApiCallerInJVM18()
+    konst interCallSix = JApiCallerInJVM18()
 
     // kotlin
-    val interCallSeven = Jvm18KApiInheritor()
-    val interCallEight = Jvm18JApiInheritor()
-    val interCallNine = IntermediateMPPClassInBottomActual()
+    konst interCallSeven = Jvm18KApiInheritor()
+    konst interCallEight = Jvm18JApiInheritor()
+    konst interCallNine = IntermediateMPPClassInBottomActual()
 }
 
 

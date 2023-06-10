@@ -38,11 +38,11 @@ public abstract class SoftCachedMap<K : Any, V : Any> {
 }
 
 private class SoftCachedMapWithTrackers<K : Any, V : Any>(
-    private val project: Project,
+    private konst project: Project,
     kind: Kind,
-    private val trackers: Array<Any>
+    private konst trackers: Array<Any>
 ) : SoftCachedMap<K, V>() {
-    private val cache = when (kind) {
+    private konst cache = when (kind) {
         Kind.SOFT_KEYS_SOFT_VALUES -> ContainerUtil.createConcurrentSoftMap<K, CachedValue<V>>()
         Kind.STRONG_KEYS_SOFT_VALUES -> ConcurrentHashMap<K, CachedValue<V>>()
     }
@@ -52,7 +52,7 @@ private class SoftCachedMapWithTrackers<K : Any, V : Any>(
     }
 
     override fun clearCachedValues() {
-        cache.values.forEach {
+        cache.konstues.forEach {
             (it as? CachedValueBase<*>)?.clear()
         }
     }
@@ -62,12 +62,12 @@ private class SoftCachedMapWithTrackers<K : Any, V : Any>(
             CachedValuesManager.getManager(project).createCachedValue {
                 CachedValueProvider.Result(create(), *trackers)
             }
-        }.value
+        }.konstue
     }
 }
 
 private class SoftCachedMapWithoutTrackers<K : Any, V : Any>(kind: Kind) : SoftCachedMap<K, V>() {
-    private val cache = when (kind) {
+    private konst cache = when (kind) {
         Kind.SOFT_KEYS_SOFT_VALUES -> ContainerUtil.createConcurrentSoftKeySoftValueMap<K, V>()
         Kind.STRONG_KEYS_SOFT_VALUES -> ContainerUtil.createSoftValueMap<K, V>()
     }

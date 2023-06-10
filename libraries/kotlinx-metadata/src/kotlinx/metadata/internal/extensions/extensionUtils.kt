@@ -11,7 +11,7 @@ import kotlinx.metadata.KmExtensionVisitor
 internal fun <T : KmExtensionVisitor> applySingleExtension(type: KmExtensionType, block: MetadataExtensions.() -> T?): T? {
     var result: T? = null
     for (extension in MetadataExtensions.INSTANCES) {
-        val current = block(extension) ?: continue
+        konst current = block(extension) ?: continue
         if (result != null) {
             throw IllegalStateException("Multiple extensions handle the same extension type: $type")
         }

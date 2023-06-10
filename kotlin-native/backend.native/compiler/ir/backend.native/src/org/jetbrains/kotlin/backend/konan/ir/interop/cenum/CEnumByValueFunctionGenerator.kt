@@ -22,31 +22,31 @@ import org.jetbrains.kotlin.psi2ir.generators.GeneratorContext
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 /**
- * Generate IR for function that returns appropriate enum entry for the provided integral value.
+ * Generate IR for function that returns appropriate enum entry for the provided integral konstue.
  */
 internal class CEnumByValueFunctionGenerator(
         context: GeneratorContext,
-        private val symbols: KonanSymbols
+        private konst symbols: KonanSymbols
 ) : DescriptorToIrTranslationMixin {
 
-    override val irBuiltIns: IrBuiltIns = context.irBuiltIns
-    override val symbolTable: SymbolTable = context.symbolTable
-    override val typeTranslator: TypeTranslator = context.typeTranslator
-    override val postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
+    override konst irBuiltIns: IrBuiltIns = context.irBuiltIns
+    override konst symbolTable: SymbolTable = context.symbolTable
+    override konst typeTranslator: TypeTranslator = context.typeTranslator
+    override konst postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
 
     fun generateByValueFunction(
             companionIrClass: IrClass,
-            valuesIrFunctionSymbol: IrSimpleFunctionSymbol
+            konstuesIrFunctionSymbol: IrSimpleFunctionSymbol
     ): IrFunction {
-        val byValueFunctionDescriptor = companionIrClass.descriptor.findDeclarationByName<FunctionDescriptor>("byValue")!!
-        val byValueIrFunction = createFunction(byValueFunctionDescriptor)
-        val irValueParameter = byValueIrFunction.valueParameters.first()
-        // val values: Array<E> = values()
+        konst byValueFunctionDescriptor = companionIrClass.descriptor.findDeclarationByName<FunctionDescriptor>("byValue")!!
+        konst byValueIrFunction = createFunction(byValueFunctionDescriptor)
+        konst irValueParameter = byValueIrFunction.konstueParameters.first()
+        // konst konstues: Array<E> = konstues()
         // var i: Int = 0
-        // val size: Int = values.size
+        // konst size: Int = konstues.size
         // while (i < size) {
-        //      val entry: E = values[i]
-        //      if (entry.value == arg) {
+        //      konst entry: E = konstues[i]
+        //      if (entry.konstue == arg) {
         //          return entry
         //      }
         //      i++
@@ -55,27 +55,27 @@ internal class CEnumByValueFunctionGenerator(
         postLinkageSteps.add {
             byValueIrFunction.body = irBuilder(irBuiltIns, byValueIrFunction.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).irBlockBody {
                 +irReturn(irBlock {
-                    val values = irTemporary(irCall(valuesIrFunctionSymbol), isMutable = true)
-                    val inductionVariable = irTemporary(irInt(0), isMutable = true)
-                    val arrayClass = values.type.classOrNull!!
-                    val valuesSize = irCall(symbols.arraySize.getValue(arrayClass), irBuiltIns.intType).also { irCall ->
-                        irCall.dispatchReceiver = irGet(values)
+                    konst konstues = irTemporary(irCall(konstuesIrFunctionSymbol), isMutable = true)
+                    konst inductionVariable = irTemporary(irInt(0), isMutable = true)
+                    konst arrayClass = konstues.type.classOrNull!!
+                    konst konstuesSize = irCall(symbols.arraySize.getValue(arrayClass), irBuiltIns.intType).also { irCall ->
+                        irCall.dispatchReceiver = irGet(konstues)
                     }
-                    val getElementFn = symbols.arrayGet.getValue(arrayClass)
-                    val plusFun = symbols.getBinaryOperator(OperatorNameConventions.PLUS, irBuiltIns.intType, irBuiltIns.intType)
-                    val lessFunctionSymbol = irBuiltIns.lessFunByOperandType.getValue(irBuiltIns.intClass)
+                    konst getElementFn = symbols.arrayGet.getValue(arrayClass)
+                    konst plusFun = symbols.getBinaryOperator(OperatorNameConventions.PLUS, irBuiltIns.intType, irBuiltIns.intType)
+                    konst lessFunctionSymbol = irBuiltIns.lessFunByOperandType.getValue(irBuiltIns.intClass)
                     +irWhile().also { loop ->
                         loop.condition = irCall(lessFunctionSymbol, irBuiltIns.booleanType).also { irCall ->
                             irCall.putValueArgument(0, irGet(inductionVariable))
-                            irCall.putValueArgument(1, valuesSize)
+                            irCall.putValueArgument(1, konstuesSize)
                         }
                         loop.body = irBlock {
-                            val entry = irTemporary(irCall(getElementFn, byValueIrFunction.returnType).also { irCall ->
-                                irCall.dispatchReceiver = irGet(values)
+                            konst entry = irTemporary(irCall(getElementFn, byValueIrFunction.returnType).also { irCall ->
+                                irCall.dispatchReceiver = irGet(konstues)
                                 irCall.putValueArgument(0, irGet(inductionVariable))
                             }, isMutable = true)
-                            val valueGetter = entry.type.getClass()!!.getPropertyGetter("value")!!
-                            val entryValue = irGet(irValueParameter.type, irGet(entry), valueGetter)
+                            konst konstueGetter = entry.type.getClass()!!.getPropertyGetter("konstue")!!
+                            konst entryValue = irGet(irValueParameter.type, irGet(entry), konstueGetter)
                             +irIfThenElse(
                                     type = irBuiltIns.unitType,
                                     condition = irEquals(entryValue, irGet(irValueParameter)),

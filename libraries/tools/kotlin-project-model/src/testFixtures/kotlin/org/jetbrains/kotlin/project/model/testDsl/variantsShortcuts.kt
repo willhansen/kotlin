@@ -22,7 +22,7 @@ fun TestKpmModule.android(configure: TestKpmVariant.() -> Unit = { }) =
     variant("android", KotlinPlatformTypeAttribute.ANDROID_JVM, configure = configure)
 
 fun TestKpmModule.nativeVariant(name: String, nativeTarget: String, configure: TestKpmVariant.() -> Unit = { }): TestKpmVariant {
-    val variant = variant(name, KotlinPlatformTypeAttribute.NATIVE)
+    konst variant = variant(name, KotlinPlatformTypeAttribute.NATIVE)
     variant.variantAttributes[KotlinNativeTargetAttribute] = nativeTarget
     variant.configure()
     return variant

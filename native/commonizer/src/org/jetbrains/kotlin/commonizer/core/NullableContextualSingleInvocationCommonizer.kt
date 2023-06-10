@@ -6,14 +6,14 @@
 package org.jetbrains.kotlin.commonizer.core
 
 interface NullableContextualSingleInvocationCommonizer<T, R : Any> {
-    operator fun invoke(values: List<T>): R?
+    operator fun invoke(konstues: List<T>): R?
 }
 
 fun <T, R : Any> NullableContextualSingleInvocationCommonizer<T, R>.asCommonizer(): Commonizer<T, R?> =
     object : Commonizer<T, R?> {
-        private val collectedValues = mutableListOf<T>()
+        private konst collectedValues = mutableListOf<T>()
 
-        override val result: R?
+        override konst result: R?
             get() = this@asCommonizer.invoke(collectedValues)
 
         override fun commonizeWith(next: T): Boolean {

@@ -39,7 +39,7 @@ public interface KtSubstitutor : KtLifetimeOwner {
     /**
      * [KtSubstitutor] which does nothing on a type and always returns the type intact
      */
-    public class Empty(override val token: KtLifetimeToken) : KtSubstitutor {
+    public class Empty(override konst token: KtLifetimeToken) : KtSubstitutor {
         override fun substituteOrNull(type: KtType): KtType? = withValidityAssertion { null }
 
         override fun substitute(type: KtType): KtType = withValidityAssertion { type }

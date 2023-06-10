@@ -14,15 +14,15 @@ import generators.unicode.hexToInt
  * The base class of character ranges builders.
  */
 internal abstract class RangesBuilder {
-    private val ranges = mutableListOf<RangePattern>()
+    private konst ranges = mutableListOf<RangePattern>()
     private var lastAppendedCharCode = -1
 
     /**
      * Appends a line from the UnicodeData.txt file.
      */
     fun append(char: String, name: String, categoryCode: String) {
-        val charCode = char.hexToInt()
-        val categoryId = categoryId(categoryCode)
+        konst charCode = char.hexToInt()
+        konst categoryId = categoryId(categoryCode)
 
         when {
             name.endsWith(", First>") -> rangeFirst(charCode, categoryId)
@@ -45,12 +45,12 @@ internal abstract class RangesBuilder {
 
         var index = ranges.lastIndex
         while (index > 0) {
-            val previous = ranges[index - 1]
-            val previousEnd = previous.rangeEnd()
-            val previousEndCategory = previous.categoryIdOf(previousEnd)
-            val current = ranges[index]
+            konst previous = ranges[index - 1]
+            konst previousEnd = previous.rangeEnd()
+            konst previousEndCategory = previous.categoryIdOf(previousEnd)
+            konst current = ranges[index]
             if (current.prepend(previousEnd, previousEndCategory)) {
-                val newPrevious = removeLast(previous)
+                konst newPrevious = removeLast(previous)
                 if (newPrevious != null) {
                     ranges[index - 1] = newPrevious
                 } else {
@@ -118,10 +118,10 @@ internal abstract class RangesBuilder {
             return
         }
 
-        val lastRange = ranges.last()
+        konst lastRange = ranges.last()
 
         if (!lastRange.append(charCode, categoryId)) {
-            val newLastRange = evolveLastRange(lastRange, charCode, categoryId)
+            konst newLastRange = evolveLastRange(lastRange, charCode, categoryId)
             if (newLastRange != null) {
                 ranges[ranges.lastIndex] = newLastRange
             } else {
@@ -133,7 +133,7 @@ internal abstract class RangesBuilder {
     /**
      * Category id used for unassigned chars.
      */
-    protected val unassignedCategoryId: String
+    protected konst unassignedCategoryId: String
         get() = categoryId(CharCategory.UNASSIGNED.code)
 
 
@@ -154,10 +154,10 @@ internal abstract class RangesBuilder {
             return null
         }
 
-        val rangeStart = range.rangeStart()
+        konst rangeStart = range.rangeStart()
         var result = createRange(rangeStart, range.categoryIdOf(rangeStart))
         for (code in rangeStart + 1 until range.rangeEnd()) {
-            val categoryId = range.categoryIdOf(code)
+            konst categoryId = range.categoryIdOf(code)
             if (!shouldSkip(categoryId)) {
                 result = if (result.append(code, categoryId)) result else evolveLastRange(result, code, categoryId)!!
             }
@@ -178,7 +178,7 @@ internal abstract class RangesBuilder {
     /**
      * The function to use to transform periodic ranges with period equal to 1 to an Int representation.
      */
-    protected open val makeOnePeriodCategory: (Array<String>) -> Int = { 0 }
+    protected open konst makeOnePeriodCategory: (Array<String>) -> Int = { 0 }
 
     /**
      * Appends the [charCode] with the specified [categoryId] to the [lastRange] and returns the resulting range,

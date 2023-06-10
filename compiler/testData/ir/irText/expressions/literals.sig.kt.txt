@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int
+konst test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -13,7 +13,7 @@ val test1: Int
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Int
+konst test2: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Int
   //   Public signature: /test2.<get-test2>|-8779933517717592707[0]
@@ -25,7 +25,7 @@ val test2: Int
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: Boolean
+konst test3: Boolean
   // CHECK JVM_IR:
   //   Mangled name: #<get-test3>(){}kotlin.Boolean
   //   Public signature: /test3.<get-test3>|-4495679483591984624[0]
@@ -37,7 +37,7 @@ val test3: Boolean
 // CHECK:
 //   Mangled name: {}test4
 //   Public signature: /test4|-9115637610245762085[0]
-val test4: Boolean
+konst test4: Boolean
   // CHECK JVM_IR:
   //   Mangled name: #<get-test4>(){}kotlin.Boolean
   //   Public signature: /test4.<get-test4>|-1669012261506491766[0]
@@ -49,7 +49,7 @@ val test4: Boolean
 // CHECK:
 //   Mangled name: {}test5
 //   Public signature: /test5|4734809624271551895[0]
-val test5: String
+konst test5: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-test5>(){}kotlin.String
   //   Public signature: /test5.<get-test5>|-4328606172995874356[0]
@@ -61,7 +61,7 @@ val test5: String
 // CHECK:
 //   Mangled name: {}test6
 //   Public signature: /test6|-2606527149405855403[0]
-val test6: Nothing?
+konst test6: Nothing?
   // CHECK JVM_IR:
   //   Mangled name: #<get-test6>(){}kotlin.Nothing?
   //   Public signature: /test6.<get-test6>|6358003219398795330[0]
@@ -73,7 +73,7 @@ val test6: Nothing?
 // CHECK:
 //   Mangled name: {}test7
 //   Public signature: /test7|1362036650170262859[0]
-val test7: Long
+konst test7: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-test7>(){}kotlin.Long
   //   Public signature: /test7.<get-test7>|-8274692998932432118[0]
@@ -85,7 +85,7 @@ val test7: Long
 // CHECK:
 //   Mangled name: {}test8
 //   Public signature: /test8|5640428216506241852[0]
-val test8: Long
+konst test8: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-test8>(){}kotlin.Long
   //   Public signature: /test8.<get-test8>|-5011755774110501884[0]
@@ -97,7 +97,7 @@ val test8: Long
 // CHECK:
 //   Mangled name: {}test9
 //   Public signature: /test9|2260604978975893973[0]
-val test9: Double
+konst test9: Double
   // CHECK JVM_IR:
   //   Mangled name: #<get-test9>(){}kotlin.Double
   //   Public signature: /test9.<get-test9>|-3169226270054479849[0]
@@ -109,7 +109,7 @@ val test9: Double
 // CHECK:
 //   Mangled name: {}test10
 //   Public signature: /test10|7722044079085065924[0]
-val test10: Double
+konst test10: Double
   // CHECK JVM_IR:
   //   Mangled name: #<get-test10>(){}kotlin.Double
   //   Public signature: /test10.<get-test10>|-7075326798963060579[0]
@@ -121,7 +121,7 @@ val test10: Double
 // CHECK:
 //   Mangled name: {}test11
 //   Public signature: /test11|-454677644144124961[0]
-val test11: Float
+konst test11: Float
   // CHECK JVM_IR:
   //   Mangled name: #<get-test11>(){}kotlin.Float
   //   Public signature: /test11.<get-test11>|-4693352942290004291[0]
@@ -133,7 +133,7 @@ val test11: Float
 // CHECK:
 //   Mangled name: {}test12
 //   Public signature: /test12|2262878138601795216[0]
-val test12: Float
+konst test12: Float
   // CHECK JVM_IR:
   //   Mangled name: #<get-test12>(){}kotlin.Float
   //   Public signature: /test12.<get-test12>|-5200207810195031983[0]
@@ -145,7 +145,7 @@ val test12: Float
 // CHECK:
 //   Mangled name: {}test13
 //   Public signature: /test13|-3048520423764566251[0]
-val test13: Char
+konst test13: Char
   // CHECK JVM_IR:
   //   Mangled name: #<get-test13>(){}kotlin.Char
   //   Public signature: /test13.<get-test13>|-7552934425637710367[0]
@@ -157,7 +157,7 @@ val test13: Char
 // CHECK:
 //   Mangled name: {}testB
 //   Public signature: /testB|-4103209441471670288[0]
-val testB: Byte
+konst testB: Byte
   // CHECK JVM_IR:
   //   Mangled name: #<get-testB>(){}kotlin.Byte
   //   Public signature: /testB.<get-testB>|4960377474465802772[0]
@@ -169,7 +169,7 @@ val testB: Byte
 // CHECK:
 //   Mangled name: {}testS
 //   Public signature: /testS|-8011761141900080315[0]
-val testS: Short
+konst testS: Short
   // CHECK JVM_IR:
   //   Mangled name: #<get-testS>(){}kotlin.Short
   //   Public signature: /testS.<get-testS>|-6367854356791483176[0]
@@ -181,7 +181,7 @@ val testS: Short
 // CHECK:
 //   Mangled name: {}testI
 //   Public signature: /testI|8992125378794908852[0]
-val testI: Int
+konst testI: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-testI>(){}kotlin.Int
   //   Public signature: /testI.<get-testI>|4280540041845255030[0]
@@ -193,7 +193,7 @@ val testI: Int
 // CHECK:
 //   Mangled name: {}testL
 //   Public signature: /testL|6948716296317389571[0]
-val testL: Long
+konst testL: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-testL>(){}kotlin.Long
   //   Public signature: /testL.<get-testL>|-6376959304814241397[0]

@@ -7,13 +7,13 @@ package org.jetbrains.kotlin.generators.model
 
 import org.jetbrains.kotlin.test.TargetBackend
 
-abstract class TransformingTestMethodModel(val source: SimpleTestMethodModel, val transformer: String) : MethodModel {
-    override val kind: MethodModel.Kind
+abstract class TransformingTestMethodModel(konst source: SimpleTestMethodModel, konst transformer: String) : MethodModel {
+    override konst kind: MethodModel.Kind
         get() = Kind
-    abstract override val name: String
-    override val dataString: String
+    abstract override konst name: String
+    override konst dataString: String
         get() = source.dataString
-    override val tags: List<String>
+    override konst tags: List<String>
         get() = source.tags
 
     object TransformerFunctionsClassPlaceHolder
@@ -21,7 +21,7 @@ abstract class TransformingTestMethodModel(val source: SimpleTestMethodModel, va
 
     override fun imports(): Collection<Class<*>> = super.imports() + TransformerFunctionsClassPlaceHolder::class.java
 
-    internal val registerInConstructor
+    internal konst registerInConstructor
         get() = source.targetBackend == TargetBackend.NATIVE
     // Native tests load sources before runTest call if more than 1 test is called, so we need to register it before.
 

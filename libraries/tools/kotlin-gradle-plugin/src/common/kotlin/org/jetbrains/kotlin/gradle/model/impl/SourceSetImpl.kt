@@ -14,17 +14,17 @@ import java.io.Serializable
  * Implementation of the [SourceSet] interface.
  */
 data class SourceSetImpl(
-    override val name: String,
-    override val type: SourceSet.SourceSetType,
-    override val friendSourceSets: Collection<String>,
-    override val sourceDirectories: Collection<File>,
-    override val resourcesDirectories: Collection<File>,
-    override val classesOutputDirectory: File,
-    override val resourcesOutputDirectory: File,
-    override val compilerArguments: CompilerArguments
+    override konst name: String,
+    override konst type: SourceSet.SourceSetType,
+    override konst friendSourceSets: Collection<String>,
+    override konst sourceDirectories: Collection<File>,
+    override konst resourcesDirectories: Collection<File>,
+    override konst classesOutputDirectory: File,
+    override konst resourcesOutputDirectory: File,
+    override konst compilerArguments: CompilerArguments
 ) : SourceSet, Serializable {
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

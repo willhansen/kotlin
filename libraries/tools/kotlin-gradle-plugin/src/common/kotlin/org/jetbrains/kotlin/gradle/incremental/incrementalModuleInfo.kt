@@ -21,28 +21,28 @@ import org.jetbrains.kotlin.incremental.IncrementalModuleInfo
  * or rely on some static stats.
  */
 interface IncrementalModuleInfoProvider {
-    val info: IncrementalModuleInfo
+    konst info: IncrementalModuleInfo
 }
 
 internal interface UsesIncrementalModuleInfoBuildService : Task {
     @get:Internal
-    val incrementalModuleInfoProvider: Property<IncrementalModuleInfoProvider>
+    konst incrementalModuleInfoProvider: Property<IncrementalModuleInfoProvider>
 }
 
 /** A build service used to provide [IncrementalModuleInfo] instance for all tasks. */
 abstract class IncrementalModuleInfoBuildService : BuildService<IncrementalModuleInfoBuildService.Parameters>,
     IncrementalModuleInfoProvider {
     abstract class Parameters : BuildServiceParameters {
-        abstract val info: Property<IncrementalModuleInfo>
+        abstract konst info: Property<IncrementalModuleInfo>
     }
 
-    override val info: IncrementalModuleInfo
+    override konst info: IncrementalModuleInfo
         get() = parameters.info.get()
 
     companion object {
         // Use class name + class loader in case there are multiple class loaders in the same build
         private fun getServiceName(): String {
-            val clazz = IncrementalModuleInfoBuildService::class.java
+            konst clazz = IncrementalModuleInfoBuildService::class.java
             return clazz.canonicalName + "_" + clazz.classLoader.hashCode()
         }
 

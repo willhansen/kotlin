@@ -6,25 +6,25 @@
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val p1: Int,
-        val p2: Short,
-        val p3: Byte,
-        val p4: Int,
-        val p5: Int,
-        val p6: Int
+        konst p1: Int,
+        konst p2: Short,
+        konst p3: Byte,
+        konst p4: Int,
+        konst p5: Int,
+        konst p6: Int
 )
 
-val prop1: Int = 1 or 1
-val prop2: Short = 1 and 1
-val prop3: Byte = 1 xor 1
-val prop4: Int = 1 shl 1
-val prop5: Int = 1 shr 1
-val prop6: Int = 1 ushr 1
+konst prop1: Int = 1 or 1
+konst prop2: Short = 1 and 1
+konst prop3: Byte = 1 xor 1
+konst prop4: Int = 1 shl 1
+konst prop5: Int = 1 shr 1
+konst prop6: Int = 1 ushr 1
 
 @Ann(1 or 1, 1 and 1, 1 xor 1, 1 shl 1, 1 shr 1, 1 ushr 1) class MyClass
 
 fun box(): String {
-    val annotation = MyClass::class.java.getAnnotation(Ann::class.java)!!
+    konst annotation = MyClass::class.java.getAnnotation(Ann::class.java)!!
     if (annotation.p1 != prop1) return "fail 1, expected = ${prop1}, actual = ${annotation.p1}"
     if (annotation.p2 != prop2) return "fail 2, expected = ${prop2}, actual = ${annotation.p2}"
     if (annotation.p3 != prop3) return "fail 3, expected = ${prop3}, actual = ${annotation.p3}"

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.ir.util.IrMessageLogger
 import org.jetbrains.kotlin.library.SerializedIrFile
 import org.jetbrains.kotlin.library.SerializedIrModule
 
-abstract class IrModuleSerializer<F : IrFileSerializer>(protected val messageLogger: IrMessageLogger, protected val compatibilityMode: CompatibilityMode, protected val normalizeAbsolutePaths: Boolean, protected val sourceBaseDirs: Collection<String>) {
+abstract class IrModuleSerializer<F : IrFileSerializer>(protected konst messageLogger: IrMessageLogger, protected konst compatibilityMode: CompatibilityMode, protected konst normalizeAbsolutePaths: Boolean, protected konst sourceBaseDirs: Collection<String>) {
     abstract fun createSerializerForFile(file: IrFile): F
 
     /**
@@ -24,12 +24,12 @@ abstract class IrModuleSerializer<F : IrFileSerializer>(protected val messageLog
         true
 
     private fun serializeIrFile(file: IrFile): SerializedIrFile {
-        val fileSerializer = createSerializerForFile(file)
+        konst fileSerializer = createSerializerForFile(file)
         return fileSerializer.serializeIrFile(file)
     }
 
     fun serializedIrModule(module: IrModuleFragment): SerializedIrModule {
-        val serializedFiles = module.files
+        konst serializedFiles = module.files
             .filter { it.packageFragmentDescriptor !is FunctionInterfacePackageFragment }
             .filter(this::backendSpecificFileFilter)
             .map(this::serializeIrFile)

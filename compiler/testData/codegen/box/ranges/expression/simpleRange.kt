@@ -4,8 +4,8 @@
 
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
-    val range1 = 3..9
+    konst list1 = ArrayList<Int>()
+    konst range1 = 3..9
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -14,8 +14,8 @@ fun box(): String {
         return "Wrong elements for 3..9: $list1"
     }
 
-    val list2 = ArrayList<Int>()
-    val range2 = 3.toByte()..9.toByte()
+    konst list2 = ArrayList<Int>()
+    konst range2 = 3.toByte()..9.toByte()
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break
@@ -24,8 +24,8 @@ fun box(): String {
         return "Wrong elements for 3.toByte()..9.toByte(): $list2"
     }
 
-    val list3 = ArrayList<Int>()
-    val range3 = 3.toShort()..9.toShort()
+    konst list3 = ArrayList<Int>()
+    konst range3 = 3.toShort()..9.toShort()
     for (i in range3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -34,8 +34,8 @@ fun box(): String {
         return "Wrong elements for 3.toShort()..9.toShort(): $list3"
     }
 
-    val list4 = ArrayList<Long>()
-    val range4 = 3L..9L
+    konst list4 = ArrayList<Long>()
+    konst range4 = 3L..9L
     for (i in range4) {
         list4.add(i)
         if (list4.size > 23) break
@@ -44,8 +44,8 @@ fun box(): String {
         return "Wrong elements for 3L..9L: $list4"
     }
 
-    val list5 = ArrayList<Char>()
-    val range5 = 'c'..'g'
+    konst list5 = ArrayList<Char>()
+    konst range5 = 'c'..'g'
     for (i in range5) {
         list5.add(i)
         if (list5.size > 23) break

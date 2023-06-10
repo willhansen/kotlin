@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-class A(val a: A) {
+class A(konst a: A) {
     <!NO_TAIL_CALLS_FOUND!>tailrec<!> fun foo1() {
         a.<!NON_TAIL_RECURSIVE_CALL!>foo1<!>()
     }

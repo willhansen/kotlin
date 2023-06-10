@@ -17,15 +17,15 @@ import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
 internal class RunnerWithExecutor(
-    private val executor: Executor,
-    private val testRun: TestRun
+    private konst executor: Executor,
+    private konst testRun: TestRun
 ) : AbstractRunner<Unit>() {
-    private val executable get() = testRun.executable
+    private konst executable get() = testRun.executable
 
-    private val outputFilter: TestOutputFilter
+    private konst outputFilter: TestOutputFilter
         get() = if (testRun.runParameters.has<TestRunParameter.WithTCTestLogger>()) TCTestOutputFilter else TestOutputFilter.NO_FILTERING
 
-    private val programArgs = mutableListOf<String>().apply {
+    private konst programArgs = mutableListOf<String>().apply {
         testRun.runParameters.forEach { it.applyTo(this) }
     }
 
@@ -36,10 +36,10 @@ internal class RunnerWithExecutor(
             } ?: ByteArrayInputStream(byteArrayOf())
 
     override fun buildRun() = AbstractRun {
-        val stdin = inputStreamFromTestParameter()
-        val stdout = ByteArrayOutputStream()
-        val stderr = ByteArrayOutputStream()
-        val request = ExecuteRequest(
+        konst stdin = inputStreamFromTestParameter()
+        konst stdout = ByteArrayOutputStream()
+        konst stderr = ByteArrayOutputStream()
+        konst request = ExecuteRequest(
             executableAbsolutePath = executable.executableFile.absolutePath,
             args = programArgs,
             stdin = stdin,
@@ -47,7 +47,7 @@ internal class RunnerWithExecutor(
             stderr = stderr,
             timeout = testRun.checks.executionTimeoutCheck.timeout
         )
-        val response = executor.execute(request)
+        konst response = executor.execute(request)
         RunResult(
             exitCode = response.exitCode,
             timeout = request.timeout,

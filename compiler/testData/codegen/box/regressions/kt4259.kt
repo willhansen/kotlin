@@ -3,8 +3,8 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val s: String? = "a"
-    val o: Char? = s?.get(0)
-    val c: Any? = o?.javaClass
+    konst s: String? = "a"
+    konst o: Char? = s?.get(0)
+    konst c: Any? = o?.javaClass
     return if (c !=  null) "OK"  else "fail"
 }

@@ -14,22 +14,22 @@ import org.jetbrains.kotlin.ir.expressions.IrErrorExpression
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreter
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterConfiguration
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterEnvironment
-import org.jetbrains.kotlin.ir.interpreter.checker.EvaluationMode
+import org.jetbrains.kotlin.ir.interpreter.checker.EkonstuationMode
 import org.jetbrains.kotlin.ir.interpreter.transformer.transformConst
 
-class ConstEvaluationLowering(
-    val context: CommonBackendContext,
-    private val suppressErrors: Boolean = context.configuration.getBoolean(CommonConfigurationKeys.IGNORE_CONST_OPTIMIZATION_ERRORS),
+class ConstEkonstuationLowering(
+    konst context: CommonBackendContext,
+    private konst suppressErrors: Boolean = context.configuration.getBoolean(CommonConfigurationKeys.IGNORE_CONST_OPTIMIZATION_ERRORS),
     configuration: IrInterpreterConfiguration = IrInterpreterConfiguration(printOnlyExceptionMessage = true),
-    private val onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
-    private val onError: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
+    private konst onWarning: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
+    private konst onError: (IrFile, IrElement, IrErrorExpression) -> Unit = { _, _, _ -> },
 ) : FileLoweringPass {
-    private val interpreter = IrInterpreter(IrInterpreterEnvironment(context.irBuiltIns, configuration), emptyMap())
-    private val evaluatedConstTracker = context.configuration[CommonConfigurationKeys.EVALUATED_CONST_TRACKER]
+    private konst interpreter = IrInterpreter(IrInterpreterEnvironment(context.irBuiltIns, configuration), emptyMap())
+    private konst ekonstuatedConstTracker = context.configuration[CommonConfigurationKeys.EVALUATED_CONST_TRACKER]
 
     override fun lower(irFile: IrFile) {
         irFile.transformConst(
-            interpreter, mode = EvaluationMode.ONLY_INTRINSIC_CONST, evaluatedConstTracker, onWarning, onError, suppressErrors
+            interpreter, mode = EkonstuationMode.ONLY_INTRINSIC_CONST, ekonstuatedConstTracker, onWarning, onError, suppressErrors
         )
     }
 }

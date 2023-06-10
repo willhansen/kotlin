@@ -15,4 +15,4 @@ abstract class AbstractLoadJava17Test : AbstractLoadJavaTest() {
     override fun getAdditionalJavacArgs(): List<String> = ADDITIONAL_JAVAC_ARGS_FOR_17
 }
 
-val ADDITIONAL_JAVAC_ARGS_FOR_17  = listOf("--release", "17")
+konst ADDITIONAL_JAVAC_ARGS_FOR_17  = listOf("--release", "17")

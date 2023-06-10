@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.test.services.impl.TestModuleStructureImpl
 
 @Suppress("warnings")
 abstract class CommonRecompileModuleJsBackendFacade<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>>(
-    val testServices: TestServices,
-    val backendKind: TargetBackend
+    konst testServices: TestServices,
+    konst backendKind: TargetBackend
 ) : AbstractTestFacade<BinaryArtifacts.Js, BinaryArtifacts.Js>() {
-    override val inputKind: ArtifactKinds.Js
+    override konst inputKind: ArtifactKinds.Js
         get() = ArtifactKinds.Js
-    override val outputKind: ArtifactKinds.Js
+    override konst outputKind: ArtifactKinds.Js
         get() = ArtifactKinds.Js
 
     abstract fun TestConfigurationBuilder.configure(module: TestModule)
@@ -32,10 +32,10 @@ abstract class CommonRecompileModuleJsBackendFacade<R : ResultingArtifact.Fronte
 
     @OptIn(TestInfrastructureInternals::class)
     override fun transform(module: TestModule, inputArtifact: BinaryArtifacts.Js): BinaryArtifacts.Js {
-        val filesToRecompile = module.files.filter { RECOMPILE in it.directives }
+        konst filesToRecompile = module.files.filter { RECOMPILE in it.directives }
 
-        val builder = testServices.testConfiguration.originalBuilder
-        val incrementalConfiguration = testConfiguration(builder.testDataPath) {
+        konst builder = testServices.testConfiguration.originalBuilder
+        konst incrementalConfiguration = testConfiguration(builder.testDataPath) {
             assertions = builder.assertions
             testInfo = builder.testInfo
             startingArtifactFactory = builder.startingArtifactFactory
@@ -50,21 +50,21 @@ abstract class CommonRecompileModuleJsBackendFacade<R : ResultingArtifact.Fronte
             configure(module)
         }
 
-        val moduleStructure = testServices.moduleStructure
-        val incrementalModule = module.copy(files = filesToRecompile)
-        val incrementalModuleStructure = TestModuleStructureImpl(
+        konst moduleStructure = testServices.moduleStructure
+        konst incrementalModule = module.copy(files = filesToRecompile)
+        konst incrementalModuleStructure = TestModuleStructureImpl(
             moduleStructure.modules.map {
                 if (it != module) return@map it
                 else incrementalModule
             },
             moduleStructure.originalTestDataFiles
         )
-        val incrementalRunner = TestRunner(incrementalConfiguration)
-        val incrementalDependencyProvider = testServices.dependencyProvider.copy().also {
+        konst incrementalRunner = TestRunner(incrementalConfiguration)
+        konst incrementalDependencyProvider = testServices.dependencyProvider.copy().also {
             it.unregisterAllArtifacts(module)
         } as DependencyProviderImpl
 
-        val incrementalServices = incrementalConfiguration.testServices
+        konst incrementalServices = incrementalConfiguration.testServices
         incrementalServices.registerDependencyProvider(incrementalDependencyProvider)
         incrementalServices.register(TestModuleStructure::class, incrementalModuleStructure)
         incrementalServices.register(TemporaryDirectoryManager::class, testServices.temporaryDirectoryManager)
@@ -73,7 +73,7 @@ abstract class CommonRecompileModuleJsBackendFacade<R : ResultingArtifact.Fronte
 
         incrementalRunner.processModule(incrementalModule, incrementalDependencyProvider)
         incrementalRunner.reportFailures(incrementalServices)
-        val incrementalArtifact = incrementalDependencyProvider.getArtifact(incrementalModule, ArtifactKinds.Js)
+        konst incrementalArtifact = incrementalDependencyProvider.getArtifact(incrementalModule, ArtifactKinds.Js)
         return BinaryArtifacts.Js.IncrementalJsArtifact(inputArtifact, incrementalArtifact)
     }
 

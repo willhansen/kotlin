@@ -26,11 +26,11 @@ import org.jetbrains.org.objectweb.asm.Label
 class ForInSimpleProgressionLoopGenerator(
     codegen: ExpressionCodegen,
     forExpression: KtForExpression,
-    private val startValue: StackValue,
-    private val isStartInclusive: Boolean,
-    private val endValue: StackValue,
-    private val isEndInclusive: Boolean,
-    private val inverseBoundsEvaluationOrder: Boolean,
+    private konst startValue: StackValue,
+    private konst isStartInclusive: Boolean,
+    private konst endValue: StackValue,
+    private konst isEndInclusive: Boolean,
+    private konst inverseBoundsEkonstuationOrder: Boolean,
     comparisonGenerator: ComparisonGenerator,
     step: Int
 ) : AbstractForInRangeLoopGenerator(codegen, forExpression, step, comparisonGenerator) {
@@ -39,7 +39,7 @@ class ForInSimpleProgressionLoopGenerator(
         codegen: ExpressionCodegen,
         forExpression: KtForExpression,
         boundedValue: BoundedValue,
-        inverseBoundsEvaluationOrder: Boolean,
+        inverseBoundsEkonstuationOrder: Boolean,
         comparisonGenerator: ComparisonGenerator,
         step: Int
     ) : this(
@@ -48,7 +48,7 @@ class ForInSimpleProgressionLoopGenerator(
         isStartInclusive = if (step == 1) boundedValue.isLowInclusive else boundedValue.isHighInclusive,
         endValue = if (step == 1) boundedValue.highBound else boundedValue.lowBound,
         isEndInclusive = if (step == 1) boundedValue.isHighInclusive else boundedValue.isLowInclusive,
-        inverseBoundsEvaluationOrder = inverseBoundsEvaluationOrder,
+        inverseBoundsEkonstuationOrder = inverseBoundsEkonstuationOrder,
         comparisonGenerator = comparisonGenerator,
         step = step
     )
@@ -59,22 +59,22 @@ class ForInSimpleProgressionLoopGenerator(
             forExpression: KtForExpression,
             boundedValue: BoundedValue,
             comparisonGenerator: ComparisonGenerator,
-            inverseBoundsEvaluationOrder: Boolean = false
+            inverseBoundsEkonstuationOrder: Boolean = false
         ) =
-            ForInSimpleProgressionLoopGenerator(codegen, forExpression, boundedValue, inverseBoundsEvaluationOrder, comparisonGenerator, 1)
+            ForInSimpleProgressionLoopGenerator(codegen, forExpression, boundedValue, inverseBoundsEkonstuationOrder, comparisonGenerator, 1)
 
         fun fromBoundedValueWithStepMinus1(
             codegen: ExpressionCodegen,
             forExpression: KtForExpression,
             boundedValue: BoundedValue,
             comparisonGenerator: ComparisonGenerator,
-            inverseBoundsEvaluationOrder: Boolean = false
+            inverseBoundsEkonstuationOrder: Boolean = false
         ) =
-            ForInSimpleProgressionLoopGenerator(codegen, forExpression, boundedValue, inverseBoundsEvaluationOrder, comparisonGenerator, -1)
+            ForInSimpleProgressionLoopGenerator(codegen, forExpression, boundedValue, inverseBoundsEkonstuationOrder, comparisonGenerator, -1)
     }
 
     override fun storeRangeStartAndEnd() {
-        if (inverseBoundsEvaluationOrder) {
+        if (inverseBoundsEkonstuationOrder) {
             StackValue.local(endVar, asmElementType).store(endValue, v)
             loopParameter().store(startValue, v)
         } else {

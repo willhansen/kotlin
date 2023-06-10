@@ -30,7 +30,7 @@ class KtDiagnosticReporterWithImplicitIrBasedContext(
     languageVersionSettings: LanguageVersionSettings
 ) : KtDiagnosticReporterWithContext(diagnosticReporter, languageVersionSettings) {
 
-    private val suppressCache = IrBasedSuppressCache()
+    private konst suppressCache = IrBasedSuppressCache()
 
     private fun IrElement.toSourceElement(containingIrFile: IrFile) =
         (PsiSourceManager.findPsiElement(this, containingIrFile)?.let(::KtRealPsiSourceElement)
@@ -74,8 +74,8 @@ class KtDiagnosticReporterWithImplicitIrBasedContext(
 
     internal inner class DiagnosticContextWithSuppressionImpl(
         sourceElement: AbstractKtSourceElement?,
-        private val irElement: IrElement,
-        private val containingFile: IrFile
+        private konst irElement: IrElement,
+        private konst containingFile: IrFile
     ) : DiagnosticContextImpl(sourceElement, containingFile.path) {
 
         override fun isDiagnosticSuppressed(diagnostic: KtDiagnostic): Boolean =
@@ -87,27 +87,27 @@ class KtDiagnosticReporterWithImplicitIrBasedContext(
 
 internal class IrBasedSuppressCache : AbstractKotlinSuppressCache<IrElement>() {
 
-    private val annotatedAncestorsPerRoot = mutableMapOf<IrElement, MutableMap<IrElement, IrElement>>()
+    private konst annotatedAncestorsPerRoot = mutableMapOf<IrElement, MutableMap<IrElement, IrElement>>()
 
-    private val annotationKeys = mutableMapOf<IrElement, Set<String>>()
+    private konst annotationKeys = mutableMapOf<IrElement, Set<String>>()
 
     @Synchronized
     private fun ensureRootProcessed(rootElement: IrElement) =
         annotatedAncestorsPerRoot.getOrPut(rootElement) {
-            val visitor = AnnotatedTreeVisitor()
+            konst visitor = AnnotatedTreeVisitor()
             rootElement.accept(visitor, Stack())
             visitor.annotatedAncestors
         }
 
     private inner class AnnotatedTreeVisitor : IrElementVisitor<Unit, Stack<IrElement>> {
 
-        val annotatedAncestors = mutableMapOf<IrElement, IrElement>()
+        konst annotatedAncestors = mutableMapOf<IrElement, IrElement>()
 
         override fun visitElement(element: IrElement, data: Stack<IrElement>) {
             if (data.isNotEmpty()) {
                 annotatedAncestors[element] = data.peek()
             }
-            val isAnnotated = collectSuppressAnnotationKeys(element)
+            konst isAnnotated = collectSuppressAnnotationKeys(element)
             if (isAnnotated) {
                 data.push(element)
             }
@@ -124,15 +124,15 @@ internal class IrBasedSuppressCache : AbstractKotlinSuppressCache<IrElement>() {
                 buildList {
                     fun addIfStringConst(irConst: IrConst<*>) {
                         if (irConst.kind == IrConstKind.String) {
-                            add((irConst.value as String).lowercase())
+                            add((irConst.konstue as String).lowercase())
                         }
                     }
 
-                    for (i in 0 until it.valueArgumentsCount) {
-                        when (val arg = it.getValueArgument(i)) {
+                    for (i in 0 until it.konstueArgumentsCount) {
+                        when (konst arg = it.getValueArgument(i)) {
                             is IrConst<*> -> addIfStringConst(arg)
                             is IrConstantArray -> arg.elements.filterIsInstance<IrConstantPrimitive>().forEach {
-                                addIfStringConst(it.value)
+                                addIfStringConst(it.konstue)
                             }
                             // TODO: consider leaving only this branch
                             is IrVararg -> arg.elements.filterIsInstance<IrConst<*>>().forEach {
@@ -147,11 +147,11 @@ internal class IrBasedSuppressCache : AbstractKotlinSuppressCache<IrElement>() {
     }
 
     override fun getClosestAnnotatedAncestorElement(element: IrElement, rootElement: IrElement, excludeSelf: Boolean): IrElement? {
-        val annotatedAncestors = ensureRootProcessed(rootElement)
+        konst annotatedAncestors = ensureRootProcessed(rootElement)
         return if (!excludeSelf && annotationKeys.containsKey(element)) element else annotatedAncestors[element]
     }
 
     override fun getSuppressingStrings(annotated: IrElement): Set<String> = annotationKeys[annotated].orEmpty()
 }
 
-private val SUPPRESS = FqName("kotlin.Suppress")
+private konst SUPPRESS = FqName("kotlin.Suppress")

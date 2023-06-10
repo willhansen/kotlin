@@ -8,11 +8,11 @@ open class Test {
         return text
     }
 
-    open fun getTestNoSuspendInvalid(`te xt`: String): String {
+    open fun getTestNoSuspendInkonstid(`te xt`: String): String {
         return `te xt`
     }
 
-    open suspend fun getTestInvalid(`te xt`: String): String {
+    open suspend fun getTestInkonstid(`te xt`: String): String {
         return `te xt`
     }
 }

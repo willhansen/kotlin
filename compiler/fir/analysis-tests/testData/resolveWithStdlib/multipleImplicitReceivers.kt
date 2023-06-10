@@ -4,7 +4,7 @@ object A
 object B
 
 interface IFoo {
-    val A.foo: B get() = B
+    konst A.foo: B get() = B
 }
 
 interface IInvoke {

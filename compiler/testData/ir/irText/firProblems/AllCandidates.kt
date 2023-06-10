@@ -28,7 +28,7 @@ public class OverloadResolutionResultsImpl<D> {
 
 class ResolvedCall<C>
 
-class MyCandidate(val resolvedCall: ResolvedCall<*>)
+class MyCandidate(konst resolvedCall: ResolvedCall<*>)
 
 private fun <A> allCandidatesResult(allCandidates: Collection<MyCandidate>) =
     OverloadResolutionResultsImpl.nameNotFound<A>().apply {

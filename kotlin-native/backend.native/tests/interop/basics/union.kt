@@ -7,24 +7,24 @@ import kotlin.test.*
 
 fun main() {
     memScoped {
-        val basicUnion = alloc<BasicUnion>()
-        for (value in Short.MIN_VALUE..Short.MAX_VALUE) {
-            basicUnion.ll = value.toLong()
-            val expected =  if (Platform.isLittleEndian) {
-                value
+        konst basicUnion = alloc<BasicUnion>()
+        for (konstue in Short.MIN_VALUE..Short.MAX_VALUE) {
+            basicUnion.ll = konstue.toLong()
+            konst expected =  if (Platform.isLittleEndian) {
+                konstue
             } else {
-                value.toLong() ushr (Long.SIZE_BITS - Short.SIZE_BITS)
+                konstue.toLong() ushr (Long.SIZE_BITS - Short.SIZE_BITS)
             }
             assertEquals(expected.toShort(), basicUnion.s)
         }
     }
     memScoped {
-        val struct = alloc<StructWithUnion>()
+        konst struct = alloc<StructWithUnion>()
         struct.`as`.i = Float.NaN.toRawBits()
         assertEquals(Float.NaN, struct.`as`.f)
     }
     memScoped {
-        val union = alloc<Packed>()
+        konst union = alloc<Packed>()
         union.b = 1u
         var expected = if (Platform.isLittleEndian) {
             1u

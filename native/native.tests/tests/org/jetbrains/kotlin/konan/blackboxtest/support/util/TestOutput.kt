@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.util.TCTestReportParseSta
 import java.text.ParseException
 
 internal class TestReport(
-    val passedTests: Collection<TestName>,
-    val failedTests: Collection<TestName>,
-    val ignoredTests: Collection<TestName>
+    konst passedTests: Collection<TestName>,
+    konst failedTests: Collection<TestName>,
+    konst ignoredTests: Collection<TestName>
 ) {
     fun isEmpty(): Boolean = passedTests.isEmpty() && failedTests.isEmpty() && ignoredTests.isEmpty()
 }
@@ -22,10 +22,10 @@ internal class TestReport(
 internal interface TestOutputFilter {
     fun filter(testOutput: String): FilteredOutput
 
-    data class FilteredOutput(val filteredOutput: String, val testReport: TestReport?)
+    data class FilteredOutput(konst filteredOutput: String, konst testReport: TestReport?)
 
     companion object {
-        val NO_FILTERING = object : TestOutputFilter {
+        konst NO_FILTERING = object : TestOutputFilter {
             override fun filter(testOutput: String) = FilteredOutput(testOutput, null)
         }
     }
@@ -42,7 +42,7 @@ internal interface TestOutputFilter {
  */
 internal object TCTestOutputFilter : TestOutputFilter {
     override fun filter(testOutput: String): TestOutputFilter.FilteredOutput {
-        val callback = TCTestMessageParserCallback()
+        konst callback = TCTestMessageParserCallback()
         ServiceMessagesParser().parse(testOutput, callback)
         callback.finish()
 
@@ -70,15 +70,15 @@ private class TCTestMessageParserCallback : ServiceMessageParserCallback {
     private var afterMessage = false
     private var state: State = State.Begin
 
-    val passedTests = mutableListOf<TestName>()
-    val failedTests = mutableListOf<TestName>()
-    val ignoredTests = mutableListOf<TestName>()
+    konst passedTests = mutableListOf<TestName>()
+    konst failedTests = mutableListOf<TestName>()
+    konst ignoredTests = mutableListOf<TestName>()
 
-    val nonTestOutput = StringBuilder()
-    val errors = mutableListOf<String>()
+    konst nonTestOutput = StringBuilder()
+    konst errors = mutableListOf<String>()
 
     override fun regularText(text: String) {
-        val actualText = if (afterMessage) {
+        konst actualText = if (afterMessage) {
             if (text.startsWith("\r\n"))
                 text.removePrefix("\r\n")
             else
@@ -125,7 +125,7 @@ private class TCTestMessageParserCallback : ServiceMessageParserCallback {
                 is State.TestFinished -> State.TestStarted(state.testSuite, message.simpleTestName)
                 else -> unexpectedMessage()
             }
-            is TestFailed -> when (val s = state) {
+            is TestFailed -> when (konst s = state) {
                 is State.TestStarted -> {
                     nonTestOutput.append(message.stacktrace)
                     State.TestFailed(s.testSuite, message.simpleTestName).also { failedTests += it.testName }
@@ -165,11 +165,11 @@ private class TCTestMessageParserCallback : ServiceMessageParserCallback {
 private sealed interface TCTestReportParseState {
     object Begin : State
 
-    class TestSuiteStarted(val testSuiteName: String) : State
+    class TestSuiteStarted(konst testSuiteName: String) : State
     object TestSuiteFinished : State
 
-    sealed class TestState(val testSuite: TestSuiteStarted, val simpleTestName: String) : State {
-        val testName: TestName get() = TestName("${testSuite.testSuiteName}.$simpleTestName")
+    sealed class TestState(konst testSuite: TestSuiteStarted, konst simpleTestName: String) : State {
+        konst testName: TestName get() = TestName("${testSuite.testSuiteName}.$simpleTestName")
     }
 
     class TestIgnored(testSuite: TestSuiteStarted, simpleTestName: String) : TestState(testSuite, simpleTestName)
@@ -178,7 +178,7 @@ private sealed interface TCTestReportParseState {
     class TestFinished(testSuite: TestSuiteStarted, simpleTestName: String) : TestState(testSuite, simpleTestName)
 }
 
-private inline val State.testSuite: State.TestSuiteStarted
+private inline konst State.testSuite: State.TestSuiteStarted
     get() = if (this is State.TestSuiteStarted) this else (this as State.TestState).testSuite
 
-private inline val BaseTestMessage.simpleTestName get() = testName
+private inline konst BaseTestMessage.simpleTestName get() = testName

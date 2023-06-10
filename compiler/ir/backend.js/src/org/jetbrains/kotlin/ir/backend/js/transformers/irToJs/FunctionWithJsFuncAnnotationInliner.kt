@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.ir.backend.js.utils.JsGenerationContext
 import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.js.backend.ast.*
 
-class FunctionWithJsFuncAnnotationInliner(private val jsFuncCall: IrCall, private val context: JsGenerationContext) {
-    private val function = getJsFunctionImplementation()
-    private val replacements = collectReplacementsForCall()
+class FunctionWithJsFuncAnnotationInliner(private konst jsFuncCall: IrCall, private konst context: JsGenerationContext) {
+    private konst function = getJsFunctionImplementation()
+    private konst replacements = collectReplacementsForCall()
 
     fun generateResultStatement(): List<JsStatement> =
         function.body.statements.also {
@@ -24,7 +24,7 @@ class FunctionWithJsFuncAnnotationInliner(private val jsFuncCall: IrCall, privat
             ?: compilationException("JS function not found", jsFuncCall)
 
     private fun collectReplacementsForCall(): Map<JsName, JsExpression> {
-        val translatedArguments = List(jsFuncCall.valueArgumentsCount) {
+        konst translatedArguments = List(jsFuncCall.konstueArgumentsCount) {
             jsFuncCall.getValueArgument(it)!!
                 .accept(IrElementToJsExpressionTransformer(), context)
         }
@@ -35,13 +35,13 @@ class FunctionWithJsFuncAnnotationInliner(private val jsFuncCall: IrCall, privat
     }
 }
 
-private class JsNameRemappingTransformer(private val replacements: Map<JsName, JsExpression>) : JsVisitorWithContextImpl() {
-    private val JsName.replacement: JsExpression? get() = replacements[this]
+private class JsNameRemappingTransformer(private konst replacements: Map<JsName, JsExpression>) : JsVisitorWithContextImpl() {
+    private konst JsName.replacement: JsExpression? get() = replacements[this]
 
     override fun visit(nameRef: JsNameRef, ctx: JsContext<JsNode>): Boolean {
         super.visit(nameRef, ctx)
         if (nameRef.qualifier != null) return true
-        val replacement = nameRef.name?.replacement ?: return true
+        konst replacement = nameRef.name?.replacement ?: return true
         ctx.replaceMe(replacement)
         return false
     }

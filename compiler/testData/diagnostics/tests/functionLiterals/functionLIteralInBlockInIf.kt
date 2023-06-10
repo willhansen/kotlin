@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 fun test() {
-    val a = if (true) {
-        val x = 1
+    konst a = if (true) {
+        konst x = 1
         ({ x })
     } else {
         { 2 }

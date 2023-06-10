@@ -6,10 +6,10 @@ class A {
     }
 }
 
-val xx = A()
+konst xx = A()
 
 fun test() {
-    val x = A
+    konst x = A
     A.foo()
     A.X.foo()
 

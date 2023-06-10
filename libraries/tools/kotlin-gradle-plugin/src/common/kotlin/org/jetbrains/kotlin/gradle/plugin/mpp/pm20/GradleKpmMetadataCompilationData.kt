@@ -24,36 +24,36 @@ import org.jetbrains.kotlin.konan.target.HostManager
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
 interface GradleKpmMetadataCompilationData<T : KotlinCommonOptions> : GradleKpmCompilationData<T> {
-    val isActive: Boolean
+    konst isActive: Boolean
 }
 
 interface GradleKpmCommonFragmentMetadataCompilationData : GradleKpmMetadataCompilationData<KotlinMultiplatformCommonOptions>
 
 internal abstract class GradleKpmAbstractFragmentMetadataCompilationData<T : KotlinCommonOptions>(
-    final override val project: Project,
-    val fragment: GradleKpmFragment,
-    private val module: GradleKpmModule,
-    private val compileAllTask: TaskProvider<DefaultTask>,
-    val metadataCompilationRegistry: MetadataCompilationRegistry,
-    private val resolvedMetadataFiles: Lazy<Iterable<ResolvedMetadataFilesProvider>>
+    final override konst project: Project,
+    konst fragment: GradleKpmFragment,
+    private konst module: GradleKpmModule,
+    private konst compileAllTask: TaskProvider<DefaultTask>,
+    konst metadataCompilationRegistry: MetadataCompilationRegistry,
+    private konst resolvedMetadataFiles: Lazy<Iterable<ResolvedMetadataFilesProvider>>
 ) : GradleKpmMetadataCompilationData<T> {
 
-    override val owner
+    override konst owner
         get() = project.topLevelExtension
 
-    override val compilationPurpose: String
+    override konst compilationPurpose: String
         get() = fragment.fragmentName
 
-    override val compilationClassifier: String
+    override konst compilationClassifier: String
         get() = lowerCamelCaseName(module.name, "metadata")
 
-    override val kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
+    override konst kotlinSourceDirectoriesByFragmentName: Map<String, SourceDirectorySet>
         get() = mapOf(fragment.fragmentName to fragment.kotlinSourceRoots)
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = lowerCamelCaseName("compile", fragment.disambiguateName(""), "KotlinMetadata")
 
-    override val compileAllTaskName: String
+    override konst compileAllTaskName: String
         get() = compileAllTask.name
 
     override var compileDependencyFiles: FileCollection by project.newProperty {
@@ -61,30 +61,30 @@ internal abstract class GradleKpmAbstractFragmentMetadataCompilationData<T : Kot
             | See KotlinMetadataTargetConfigurator::configureMetadataDependenciesForCompilation for reference""".trimMargin())
     }
 
-    override val output: KotlinCompilationOutput = DefaultKotlinCompilationOutput(
+    override konst output: KotlinCompilationOutput = DefaultKotlinCompilationOutput(
         project,
         project.provider { project.buildDir.resolve("processedResources/${fragment.disambiguateName("metadata")}") }
     )
 
-    final override val languageSettings: LanguageSettingsBuilder = fragment.languageSettings
+    final override konst languageSettings: LanguageSettingsBuilder = fragment.languageSettings
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.common
 
-    override val moduleName: String
+    override konst moduleName: String
         get() { // FIXME deduplicate with ownModuleName
-            val baseName = project.archivesName.orNull
+            konst baseName = project.archivesName.orNull
                 ?: project.name
-            val suffix = if (module.moduleClassifier == null) "" else "_${module.moduleClassifier}"
+            konst suffix = if (module.moduleClassifier == null) "" else "_${module.moduleClassifier}"
             return filterModuleName("$baseName$suffix")
         }
 
 
-    override val friendPaths: Iterable<FileCollection>
+    override konst friendPaths: Iterable<FileCollection>
         get() = metadataCompilationRegistry.run {
             fragment.refinesClosure
                 .map {
-                    val compilation = metadataCompilationRegistry.getForFragmentOrNull(it)
+                    konst compilation = metadataCompilationRegistry.getForFragmentOrNull(it)
                         ?: return@map project.files()
                     compilation.output.classesDirs
                 }
@@ -107,16 +107,16 @@ internal open class GradleKpmCommonFragmentMetadataCompilationDataImpl(
     resolvedMetadataFiles
 ), GradleKpmCommonFragmentMetadataCompilationData {
 
-    override val isActive: Boolean
+    override konst isActive: Boolean
         get() = !fragment.isNativeShared() &&
                 fragment.containingVariants.run {
                     !all { it.platformType in setOf(KotlinPlatformType.androidJvm, KotlinPlatformType.jvm) } &&
                             mapTo(hashSetOf()) { it.platformType }.size > 1
                 }
 
-    override val compilerOptions: HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> =
+    override konst compilerOptions: HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> =
         object : HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> {
-            override val options: KotlinMultiplatformCommonCompilerOptions = project.objects
+            override konst options: KotlinMultiplatformCommonCompilerOptions = project.objects
                 .newInstance(KotlinMultiplatformCommonCompilerOptionsDefault::class.java)
                 .configureExperimentalTryK2(project)
         }
@@ -124,8 +124,8 @@ internal open class GradleKpmCommonFragmentMetadataCompilationDataImpl(
 
     @Suppress("DEPRECATION")
     @Deprecated("Replaced with compilerOptions.options", replaceWith = ReplaceWith("compilerOptions.options"))
-    override val kotlinOptions: KotlinMultiplatformCommonOptions = object : KotlinMultiplatformCommonOptions {
-        override val options: KotlinMultiplatformCommonCompilerOptions
+    override konst kotlinOptions: KotlinMultiplatformCommonOptions = object : KotlinMultiplatformCommonOptions {
+        override konst options: KotlinMultiplatformCommonCompilerOptions
             get() = compilerOptions.options
     }
 }
@@ -158,24 +158,24 @@ internal open class GradleKpmNativeFragmentMetadataCompilationDataImpl(
     resolvedMetadataFiles
 ), GradleKpmNativeFragmentMetadataCompilationData {
 
-    override val compileKotlinTaskName: String
+    override konst compileKotlinTaskName: String
         get() = lowerCamelCaseName("compile", fragment.disambiguateName(""), "KotlinNativeMetadata")
 
-    override val isActive: Boolean
+    override konst isActive: Boolean
         get() = fragment.isNativeShared() && fragment.containingVariants.count() > 1
 
-    override val compilerOptions: HasCompilerOptions<KotlinCommonCompilerOptions> = NativeCompilerOptions(project)
+    override konst compilerOptions: HasCompilerOptions<KotlinCommonCompilerOptions> = NativeCompilerOptions(project)
 
     @Suppress("DEPRECATION")
     @Deprecated("Replaced with compilerOptions.options", replaceWith = ReplaceWith("compilerOptions.options"))
-    override val kotlinOptions: KotlinCommonOptions = object : KotlinCommonOptions {
-        override val options: KotlinCommonCompilerOptions
+    override konst kotlinOptions: KotlinCommonOptions = object : KotlinCommonOptions {
+        override konst options: KotlinCommonCompilerOptions
             get() = compilerOptions.options
     }
 
-    override val konanTarget: KonanTarget
+    override konst konanTarget: KonanTarget
         get() {
-            val nativeVariants =
+            konst nativeVariants =
                 fragment.containingVariants.filterIsInstance<GradleKpmNativeVariantInternal>()
             return nativeVariants.firstOrNull { it.konanTarget.enabledOnCurrentHost }?.konanTarget
                 ?: nativeVariants.firstOrNull()?.konanTarget
@@ -187,15 +187,15 @@ internal open class GradleKpmNativeFragmentMetadataCompilationDataImpl(
         "Please declare explicit dependency on kotlinx-cli. This option has no longer effect since 1.9.0",
         level = DeprecationLevel.ERROR
     )
-    override val enableEndorsedLibs: Boolean
+    override konst enableEndorsedLibs: Boolean
         get() = false
 }
 
 // TODO think about more generic case: a fragment that can be compiled by an arbitrary compiler
 //      what tasks should we create? should there be a generic task for that?
 internal class MetadataCompilationRegistry {
-    private val commonCompilationDataPerFragment = LinkedHashMap<GradleKpmFragment, GradleKpmCommonFragmentMetadataCompilationDataImpl>()
-    private val nativeCompilationDataPerFragment = LinkedHashMap<GradleKpmFragment, GradleKpmNativeFragmentMetadataCompilationDataImpl>()
+    private konst commonCompilationDataPerFragment = LinkedHashMap<GradleKpmFragment, GradleKpmCommonFragmentMetadataCompilationDataImpl>()
+    private konst nativeCompilationDataPerFragment = LinkedHashMap<GradleKpmFragment, GradleKpmNativeFragmentMetadataCompilationDataImpl>()
 
     fun registerCommon(fragment: GradleKpmFragment, compilationData: GradleKpmCommonFragmentMetadataCompilationDataImpl) {
         commonCompilationDataPerFragment.compute(fragment) { _, existing ->
@@ -218,12 +218,12 @@ internal class MetadataCompilationRegistry {
             it.isActive
         }
 
-    private val withAllCommonCallbacks = mutableListOf<(GradleKpmAbstractFragmentMetadataCompilationData<*>) -> Unit>()
-    private val withAllNativeCallbacks = mutableListOf<(GradleKpmAbstractFragmentMetadataCompilationData<*>) -> Unit>()
+    private konst withAllCommonCallbacks = mutableListOf<(GradleKpmAbstractFragmentMetadataCompilationData<*>) -> Unit>()
+    private konst withAllNativeCallbacks = mutableListOf<(GradleKpmAbstractFragmentMetadataCompilationData<*>) -> Unit>()
 
     fun withAll(action: (GradleKpmAbstractFragmentMetadataCompilationData<*>) -> Unit) {
-        commonCompilationDataPerFragment.forEach { action(it.value) }
-        nativeCompilationDataPerFragment.forEach { action(it.value) }
+        commonCompilationDataPerFragment.forEach { action(it.konstue) }
+        nativeCompilationDataPerFragment.forEach { action(it.konstue) }
         withAllCommonCallbacks += action
         withAllNativeCallbacks += action
     }

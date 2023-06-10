@@ -57,19 +57,19 @@ public final class ClassWithConstContainer /* ClassWithConstContainer*/ {
   public static final ClassWithConstContainer.Companion Companion;
 
   @org.jetbrains.annotations.NotNull()
-  public static final java.lang.String str = "one" /* initializer type: java.lang.String */ /* constant value one */;
+  public static final java.lang.String str = "one" /* initializer type: java.lang.String */ /* constant konstue one */;
 
-  public static final double complexFloat = 5.118281745910645 /* initializer type: double */ /* constant value 5.118281745910645 */;
+  public static final double complexFloat = 5.118281745910645 /* initializer type: double */ /* constant konstue 5.118281745910645 */;
 
-  public static final double e = 2.7182818284 /* initializer type: double */ /* constant value 2.7182818284 */;
+  public static final double e = 2.7182818284 /* initializer type: double */ /* constant konstue 2.7182818284 */;
 
-  public static final float eFloat = 2.7182817f /* initializer type: float */ /* constant value 2.7182817 */;
+  public static final float eFloat = 2.7182817f /* initializer type: float */ /* constant konstue 2.7182817 */;
 
-  public static final int one = 1 /* initializer type: int */ /* constant value 1 */;
+  public static final int one = 1 /* initializer type: int */ /* constant konstue 1 */;
 
-  public static final long complexLong = 2L /* initializer type: long */ /* constant value 2 */;
+  public static final long complexLong = 2L /* initializer type: long */ /* constant konstue 2 */;
 
-  public static final long oneLong = 1L /* initializer type: long */ /* constant value 1 */;
+  public static final long oneLong = 1L /* initializer type: long */ /* constant konstue 1 */;
 
   public  ClassWithConstContainer();//  .ctor()
 
@@ -128,19 +128,19 @@ public final class ConstContainer /* ConstContainer*/ {
   public static final ConstContainer INSTANCE;
 
   @org.jetbrains.annotations.NotNull()
-  public static final java.lang.String str = "one" /* initializer type: java.lang.String */ /* constant value one */;
+  public static final java.lang.String str = "one" /* initializer type: java.lang.String */ /* constant konstue one */;
 
-  public static final double complexFloat = 5.118281745910645 /* initializer type: double */ /* constant value 5.118281745910645 */;
+  public static final double complexFloat = 5.118281745910645 /* initializer type: double */ /* constant konstue 5.118281745910645 */;
 
-  public static final double e = 2.7182818284 /* initializer type: double */ /* constant value 2.7182818284 */;
+  public static final double e = 2.7182818284 /* initializer type: double */ /* constant konstue 2.7182818284 */;
 
-  public static final float eFloat = 2.7182817f /* initializer type: float */ /* constant value 2.7182817 */;
+  public static final float eFloat = 2.7182817f /* initializer type: float */ /* constant konstue 2.7182817 */;
 
-  public static final int one = 1 /* initializer type: int */ /* constant value 1 */;
+  public static final int one = 1 /* initializer type: int */ /* constant konstue 1 */;
 
-  public static final long complexLong = 2L /* initializer type: long */ /* constant value 2 */;
+  public static final long complexLong = 2L /* initializer type: long */ /* constant konstue 2 */;
 
-  public static final long oneLong = 1L /* initializer type: long */ /* constant value 1 */;
+  public static final long oneLong = 1L /* initializer type: long */ /* constant konstue 1 */;
 
   private  ConstContainer();//  .ctor()
 }

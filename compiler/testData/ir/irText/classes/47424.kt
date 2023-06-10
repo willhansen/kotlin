@@ -13,11 +13,11 @@ interface Bb<T : Bb<T>> : Ab<T>, Ba
 
 
 interface Ca {
-    val b: Ba
+    konst b: Ba
 }
 
 interface Cb {
-    val b: Bb<*>
+    konst b: Bb<*>
 }
 
 interface C : Cb, Ca

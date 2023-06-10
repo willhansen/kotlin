@@ -14,15 +14,15 @@ import org.gradle.api.services.BuildServiceParameters
 import org.gradle.api.services.BuildServiceSpec
 import kotlin.reflect.KClass
 
-val Gradle.projectCacheDir
+konst Gradle.projectCacheDir
     get() = startParameter.projectCacheDir ?: this.rootProject.projectDir.resolve(".gradle")
 
-internal val Project.compositeBuildRootProject: Project get() = generateSequence(project.gradle) { it.parent }.last().rootProject
+internal konst Project.compositeBuildRootProject: Project get() = generateSequence(project.gradle) { it.parent }.last().rootProject
 
 internal fun <T : BuildService<P>, P : BuildServiceParameters> Gradle.registerClassLoaderScopedBuildService(
     serviceClass: KClass<T>,
     configureAction: Action<BuildServiceSpec<P>> = Action { },
 ): Provider<T> {
-    val serviceName = "${serviceClass.simpleName}_${serviceClass.java.classLoader.hashCode()}"
+    konst serviceName = "${serviceClass.simpleName}_${serviceClass.java.classLoader.hashCode()}"
     return sharedServices.registerIfAbsent(serviceName, serviceClass.java, configureAction)
 }

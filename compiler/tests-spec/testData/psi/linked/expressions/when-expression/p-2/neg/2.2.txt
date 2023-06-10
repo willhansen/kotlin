@@ -23,7 +23,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -50,7 +50,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -66,7 +66,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -90,7 +90,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -110,13 +110,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           PsiElement(ARROW)('->')
@@ -139,7 +139,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -167,7 +167,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -183,7 +183,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -206,7 +206,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -228,13 +228,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace(' ')
           PsiElement(ARROW)('->')
           PsiWhiteSpace(' ')
@@ -285,7 +285,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(EQEQ)('==')
@@ -309,7 +309,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -323,7 +323,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -349,7 +349,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -369,13 +369,13 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
           PsiWhiteSpace(' ')
           PsiElement(ARROW)('->')
           PsiWhiteSpace(' ')
@@ -397,7 +397,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             IS_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(is)('is')
@@ -408,7 +408,7 @@ KtFile: 2.2.kt
                     PsiElement(IDENTIFIER)('Int')
           PsiWhiteSpace(' ')
           PsiErrorElement:Expecting '->'
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
           PsiErrorElement:Expecting an element
             <empty list>
         PsiWhiteSpace(' ')
@@ -434,7 +434,7 @@ KtFile: 2.2.kt
           WHEN_CONDITION_WITH_EXPRESSION
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(in)('in')
@@ -453,13 +453,13 @@ KtFile: 2.2.kt
                       PsiElement(INTEGER_LITERAL)('100')
                   PsiWhiteSpace(' ')
                   OPERATION_REFERENCE
-                    PsiElement(IDENTIFIER)('value')
+                    PsiElement(IDENTIFIER)('konstue')
                   PsiWhiteSpace(' ')
                   PsiErrorElement:Expecting an element
                     PsiElement(in)('in')
                 PsiWhiteSpace(' ')
                 OPERATION_REFERENCE
-                  PsiElement(IDENTIFIER)('value')
+                  PsiElement(IDENTIFIER)('konstue')
                 PsiErrorElement:Expecting an element
                   <empty list>
           PsiWhiteSpace(' ')

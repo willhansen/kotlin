@@ -71,7 +71,7 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
     @NotNull
     private Map<TypeParameterDescriptor, KotlinType> typeArguments;
     @NotNull
-    private final Map<ValueParameterDescriptor, ResolvedValueArgument> valueArguments;
+    private final Map<ValueParameterDescriptor, ResolvedValueArgument> konstueArguments;
     private final MutableDataFlowInfoForArguments dataFlowInfoForArguments;
     @NotNull
     private final Map<ValueArgument, ArgumentMatchImpl> argumentToParameterMap;
@@ -101,7 +101,7 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
         this.tracing = tracing;
         this.dataFlowInfoForArguments = dataFlowInfoForArguments;
         this.typeArguments = createTypeArgumentsMap(candidateDescriptor);
-        this.valueArguments = createValueArgumentsMap(candidateDescriptor);
+        this.konstueArguments = createValueArgumentsMap(candidateDescriptor);
         this.argumentToParameterMap = createArgumentsToParameterMap(candidateDescriptor);
     }
 
@@ -126,7 +126,7 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
         this.tracing = tracing;
         this.dataFlowInfoForArguments = dataFlowInfoForArguments;
         this.typeArguments = createTypeArgumentsMap(candidateDescriptor);
-        this.valueArguments = createValueArgumentsMap(candidateDescriptor);
+        this.konstueArguments = createValueArgumentsMap(candidateDescriptor);
         this.argumentToParameterMap = createArgumentsToParameterMap(candidateDescriptor);
     }
 
@@ -225,15 +225,15 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
 
         List<ValueParameterDescriptor> substitutedParameters = resultingDescriptor.getValueParameters();
 
-        Collection<Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>> valueArgumentsBeforeSubstitution =
-                new SmartList<>(valueArguments.entrySet());
+        Collection<Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>> konstueArgumentsBeforeSubstitution =
+                new SmartList<>(konstueArguments.entrySet());
 
-        valueArguments.clear();
+        konstueArguments.clear();
 
-        for (Map.Entry<ValueParameterDescriptor, ResolvedValueArgument> entry : valueArgumentsBeforeSubstitution) {
+        for (Map.Entry<ValueParameterDescriptor, ResolvedValueArgument> entry : konstueArgumentsBeforeSubstitution) {
             ValueParameterDescriptor substitutedVersion = substitutedParameters.get(entry.getKey().getIndex());
             assert substitutedVersion != null : entry.getKey();
-            valueArguments.put(substitutedVersion, entry.getValue());
+            konstueArguments.put(substitutedVersion, entry.getValue());
         }
 
         Collection<Map.Entry<ValueArgument, ArgumentMatchImpl>> unsubstitutedArgumentMappings =
@@ -242,9 +242,9 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
         argumentToParameterMap.clear();
         for (Map.Entry<ValueArgument, ArgumentMatchImpl> entry : unsubstitutedArgumentMappings) {
             ArgumentMatchImpl argumentMatch = entry.getValue();
-            ValueParameterDescriptor valueParameterDescriptor = argumentMatch.getValueParameter();
-            ValueParameterDescriptor substitutedVersion = substitutedParameters.get(valueParameterDescriptor.getIndex());
-            assert substitutedVersion != null : valueParameterDescriptor;
+            ValueParameterDescriptor konstueParameterDescriptor = argumentMatch.getValueParameter();
+            ValueParameterDescriptor substitutedVersion = substitutedParameters.get(konstueParameterDescriptor.getIndex());
+            assert substitutedVersion != null : konstueParameterDescriptor;
             argumentToParameterMap.put(entry.getKey(), argumentMatch.replaceValueParameter(substitutedVersion));
         }
     }
@@ -268,11 +268,11 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
     }
 
     @Override
-    public void recordValueArgument(@NotNull ValueParameterDescriptor valueParameter, @NotNull ResolvedValueArgument valueArgument) {
-        assert !valueArguments.containsKey(valueParameter) : valueParameter + " -> " + valueArgument;
-        valueArguments.put(valueParameter, valueArgument);
-        for (ValueArgument argument : valueArgument.getArguments()) {
-            argumentToParameterMap.put(argument, new ArgumentMatchImpl(valueParameter));
+    public void recordValueArgument(@NotNull ValueParameterDescriptor konstueParameter, @NotNull ResolvedValueArgument konstueArgument) {
+        assert !konstueArguments.containsKey(konstueParameter) : konstueParameter + " -> " + konstueArgument;
+        konstueArguments.put(konstueParameter, konstueArgument);
+        for (ValueArgument argument : konstueArgument.getArguments()) {
+            argumentToParameterMap.put(argument, new ArgumentMatchImpl(konstueParameter));
         }
     }
 
@@ -303,7 +303,7 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
     @Override
     @NotNull
     public Map<ValueParameterDescriptor, ResolvedValueArgument> getValueArguments() {
-        return valueArguments;
+        return konstueArguments;
     }
 
     @Nullable
@@ -314,10 +314,10 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
             arguments.add(null);
         }
 
-        for (Map.Entry<ValueParameterDescriptor, ResolvedValueArgument> entry : valueArguments.entrySet()) {
+        for (Map.Entry<ValueParameterDescriptor, ResolvedValueArgument> entry : konstueArguments.entrySet()) {
             ValueParameterDescriptor parameterDescriptor = entry.getKey();
-            ResolvedValueArgument value = entry.getValue();
-            ResolvedValueArgument oldValue = arguments.set(parameterDescriptor.getIndex(), value);
+            ResolvedValueArgument konstue = entry.getValue();
+            ResolvedValueArgument oldValue = arguments.set(parameterDescriptor.getIndex(), konstue);
             if (oldValue != null) {
                 return null;
             }
@@ -334,18 +334,18 @@ public class ResolvedCallImpl<D extends CallableDescriptor> implements MutableRe
     }
 
     @Override
-    public void recordArgumentMatchStatus(@NotNull ValueArgument valueArgument, @NotNull ArgumentMatchStatus matchStatus) {
-        ArgumentMatchImpl argumentMatch = argumentToParameterMap.get(valueArgument);
+    public void recordArgumentMatchStatus(@NotNull ValueArgument konstueArgument, @NotNull ArgumentMatchStatus matchStatus) {
+        ArgumentMatchImpl argumentMatch = argumentToParameterMap.get(konstueArgument);
         argumentMatch.recordMatchStatus(matchStatus);
     }
 
     @NotNull
     @Override
-    public ArgumentMapping getArgumentMapping(@NotNull ValueArgument valueArgument) {
-        ArgumentMatch argumentMatch = argumentToParameterMap.get(valueArgument);
+    public ArgumentMapping getArgumentMapping(@NotNull ValueArgument konstueArgument) {
+        ArgumentMatch argumentMatch = argumentToParameterMap.get(konstueArgument);
         if (argumentMatch == null) {
             if (ArgumentMappingKt.isReallySuccess(this)) {
-                LOG.error("ArgumentUnmapped for " + valueArgument + " in successfully resolved call: " + call.getCallElement().getText());
+                LOG.error("ArgumentUnmapped for " + konstueArgument + " in successfully resolved call: " + call.getCallElement().getText());
             }
             return ArgumentUnmapped.INSTANCE;
         }

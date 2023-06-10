@@ -10,9 +10,9 @@
     localFun()
     run(::localFun)
 
-    val localFun2 = fun() {}
+    konst localFun2 = fun() {}
     run(localFun2)
 
-    val lambda = {}
+    konst lambda = {}
     run(lambda)
 }

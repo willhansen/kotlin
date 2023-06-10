@@ -23,10 +23,10 @@ RUNTIME_NOTHROW OBJ_GETTER(Kotlin_getExceptionObject, void* holder);
 
 // The functions below are implemented in Kotlin (at package kotlin.native.internal).
 
-// Throws null pointer exception. Context is evaluated from caller's address.
+// Throws null pointer exception. Context is ekonstuated from caller's address.
 void RUNTIME_NORETURN ThrowNullPointerException();
 // Throws array index out of bounds exception.
-// Context is evaluated from caller's address.
+// Context is ekonstuated from caller's address.
 void RUNTIME_NORETURN ThrowArrayIndexOutOfBoundsException();
 // Throws class cast exception.
 void RUNTIME_NORETURN ThrowClassCastException(const ObjHeader* instance, const TypeInfo* type_info);
@@ -42,7 +42,7 @@ void RUNTIME_NORETURN ThrowNotImplementedError();
 void RUNTIME_NORETURN ThrowCharacterCodingException();
 void RUNTIME_NORETURN ThrowIllegalArgumentException();
 void RUNTIME_NORETURN ThrowIllegalStateException();
-void RUNTIME_NORETURN ThrowInvalidMutabilityException(KConstRef where);
+void RUNTIME_NORETURN ThrowInkonstidMutabilityException(KConstRef where);
 void RUNTIME_NORETURN ThrowIncorrectDereferenceException();
 void RUNTIME_NORETURN ThrowFileFailedToInitializeException(KRef reason);
 void RUNTIME_NORETURN ThrowIllegalObjectSharingException(KConstNativePtr typeInfo, KConstNativePtr address);

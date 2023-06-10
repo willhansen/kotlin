@@ -25,7 +25,7 @@ internal object MultiplatformAndroidResourceDirConfigurator : KotlinAndroidSourc
             return
         }
 
-        val project = target.project
+        konst project = target.project
 
         androidSourceSet.resources.srcDirs(kotlinSourceSet.resources.srcDirs)
         if (androidSourceSet.resources.srcDirs.isNotEmpty()) {

@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.gradle.android
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.GradleKpmModule
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.KotlinPm20ProjectExtension
 
-val KotlinPm20ProjectExtension.instrumentedTest
+konst KotlinPm20ProjectExtension.instrumentedTest
     get() = modules.maybeCreate("instrumentedTest")
 
 fun KotlinPm20ProjectExtension.instrumentedTest(configure: GradleKpmModule.() -> Unit) {

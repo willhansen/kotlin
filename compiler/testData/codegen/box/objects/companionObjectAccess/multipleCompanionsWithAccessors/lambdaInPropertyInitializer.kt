@@ -30,5 +30,5 @@ package c
 import b.B
 
 class C : B() {
-    val test = { getO() + getK() }
+    konst test = { getO() + getK() }
 }

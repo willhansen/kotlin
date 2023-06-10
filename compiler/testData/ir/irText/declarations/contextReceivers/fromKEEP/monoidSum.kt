@@ -5,15 +5,15 @@ interface Semigroup<T> {
 }
 
 interface Monoid<T> : Semigroup<T> {
-    val unit: T
+    konst unit: T
 }
 object IntMonoid : Monoid<Int> {
     override fun Int.combine(other: Int): Int = this + other
-    override val unit: Int = 0
+    override konst unit: Int = 0
 }
 object StringMonoid : Monoid<String> {
     override fun String.combine(other: String): String = this + other
-    override val unit: String = ""
+    override konst unit: String = ""
 }
 
 context(Monoid<T>)

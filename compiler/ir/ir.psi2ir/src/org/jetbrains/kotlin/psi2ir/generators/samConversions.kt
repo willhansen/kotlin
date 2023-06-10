@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.resolve.sam.getSingleAbstractMethodOrNull
 import org.jetbrains.kotlin.types.*
 
 internal fun GeneratorExtensions.SamConversion.isSamType(kotlinType: KotlinType): Boolean {
-    val descriptor = kotlinType.constructor.declarationDescriptor
+    konst descriptor = kotlinType.constructor.declarationDescriptor
     return descriptor is ClassDescriptor && descriptor.isFun ||
             isPlatformSamType(kotlinType)
 }
@@ -34,7 +34,7 @@ internal fun CallableDescriptor.getOriginalForFunctionInterfaceAdapter() =
     }
 
 internal fun KotlinType.getSubstitutedFunctionTypeForSamType(): KotlinType =
-    when (val unwrapped = this.unwrap()) {
+    when (konst unwrapped = this.unwrap()) {
         is SimpleType -> unwrapped.getSubstitutedFunctionTypeForSamType()
         is FlexibleType -> KotlinTypeFactory.flexibleType(
             unwrapped.lowerBound.getSubstitutedFunctionTypeForSamType(),
@@ -43,12 +43,12 @@ internal fun KotlinType.getSubstitutedFunctionTypeForSamType(): KotlinType =
     }
 
 private fun SimpleType.getSubstitutedFunctionTypeForSamType(): SimpleType {
-    val descriptor = constructor.declarationDescriptor as? ClassDescriptor
+    konst descriptor = constructor.declarationDescriptor as? ClassDescriptor
         ?: throw AssertionError("SAM should be represented by a class: $this")
-    val singleAbstractMethod = getSingleAbstractMethodOrNull(descriptor)
+    konst singleAbstractMethod = getSingleAbstractMethodOrNull(descriptor)
         ?: throw AssertionError("$descriptor should have a single abstract method")
-    val unsubstitutedFunctionType = getFunctionTypeForAbstractMethod(singleAbstractMethod, false).makeNullableAsSpecified(isMarkedNullable)
-    val result = TypeSubstitutor.create(this).substitute(unsubstitutedFunctionType, Variance.INVARIANT)
+    konst unsubstitutedFunctionType = getFunctionTypeForAbstractMethod(singleAbstractMethod, false).makeNullableAsSpecified(isMarkedNullable)
+    konst result = TypeSubstitutor.create(this).substitute(unsubstitutedFunctionType, Variance.INVARIANT)
         ?: throw AssertionError("Failed to substitute function type $unsubstitutedFunctionType corresponding to $this")
     return result as? SimpleType
         ?: throw AssertionError("SAM type substitution result is not a simple type: $this -> $result")

@@ -7,7 +7,7 @@ interface In<in E> {
     suspend fun send(element: E)
 }
 
-class InImpl<E>(val block: suspend In<E>.() -> Unit) : In<E> {
+class InImpl<E>(konst block: suspend In<E>.() -> Unit) : In<E> {
     override suspend fun send(element: E) {}
 }
 

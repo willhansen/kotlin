@@ -12,11 +12,11 @@ public class BaseJava {
 
 // FILE: Derived.kt
 open class Derived : BaseJava() {
-    private val a = "FAIL"
+    private konst a = "FAIL"
 }
 
 fun <T : Derived> test(t: T): String {
-    val first = t.a
+    konst first = t.a
     if (first != "OK") return first
     if (t::a.get() != "OK") return t::a.get()
     t.a = "12"

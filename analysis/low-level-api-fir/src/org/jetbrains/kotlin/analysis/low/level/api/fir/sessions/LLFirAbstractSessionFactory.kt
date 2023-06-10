@@ -50,8 +50,8 @@ import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
 @OptIn(PrivateSessionConstructor::class, SessionConfiguration::class)
-internal abstract class LLFirAbstractSessionFactory(protected val project: Project) {
-    private val globalResolveComponents: LLFirGlobalResolveComponents
+internal abstract class LLFirAbstractSessionFactory(protected konst project: Project) {
+    private konst globalResolveComponents: LLFirGlobalResolveComponents
         get() = LLFirGlobalResolveComponents.getInstance(project)
 
     abstract fun createSourcesSession(module: KtSourceModule): LLFirSourcesSession
@@ -59,20 +59,20 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     abstract fun createBinaryLibrarySession(module: KtBinaryModule): LLFirLibrarySession
 
     fun createScriptSession(module: KtScriptModule): LLFirScriptSession {
-        val platform = module.platform
-        val builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
-        val languageVersionSettings = wrapLanguageVersionSettings(module.languageVersionSettings)
-        val scopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
+        konst platform = module.platform
+        konst builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
+        konst languageVersionSettings = wrapLanguageVersionSettings(module.languageVersionSettings)
+        konst scopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
 
-        val components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
+        konst components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
 
-        val dependencies = collectSourceModuleDependencies(module)
-        val dependencyTracker = createSourceModuleDependencyTracker(module, dependencies)
+        konst dependencies = collectSourceModuleDependencies(module)
+        konst dependencyTracker = createSourceModuleDependencyTracker(module, dependencies)
 
-        val session = LLFirScriptSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
+        konst session = LLFirScriptSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
         components.session = session
 
-        val moduleData = createModuleData(session)
+        konst moduleData = createModuleData(session)
 
         return session.apply {
             registerModuleData(moduleData)
@@ -85,7 +85,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerResolveComponents()
             registerJavaSpecificResolveComponents()
 
-            val provider = LLFirProvider(
+            konst provider = LLFirProvider(
                 this,
                 components,
                 canContainKotlinPackage = true,
@@ -96,12 +96,12 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(FirProvider::class, provider)
             register(FirLazyDeclarationResolver::class, LLFirLazyDeclarationResolver())
 
-            val dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
+            konst dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
                 addDependencySymbolProvidersTo(session, dependencies, this)
                 add(builtinsSession.symbolProvider)
             })
 
-            val javaSymbolProvider = LLFirJavaSymbolProvider(this, moduleData, project, provider.searchScope)
+            konst javaSymbolProvider = LLFirJavaSymbolProvider(this, moduleData, project, provider.searchScope)
             register(JavaSymbolProvider::class, javaSymbolProvider)
 
             register(
@@ -122,11 +122,11 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(FirJvmTypeMapper::class, FirJvmTypeMapper(this))
 
             FirSessionConfigurator(this).apply {
-                val hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {}
-                val scriptDefinition = module.file.findScriptDefinition()
+                konst hostConfiguration = ScriptingHostConfiguration(defaultJvmScriptingHostConfiguration) {}
+                konst scriptDefinition = module.file.findScriptDefinition()
                     ?: error("Cannot load script definition for ${module.file.virtualFilePath}")
 
-                val extensionRegistrar = FirScriptingCompilerExtensionIdeRegistrar(
+                konst extensionRegistrar = FirScriptingCompilerExtensionIdeRegistrar(
                     hostConfiguration,
                     scriptDefinitionSources = emptyList(),
                     scriptDefinitions = listOf(scriptDefinition)
@@ -141,16 +141,16 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     }
 
     fun createNotUnderContentRootResolvableSession(module: KtNotUnderContentRootModule): LLFirNonUnderContentRootResolvableModuleSession {
-        val builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(JvmPlatforms.unspecifiedJvmPlatform)
-        val languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT
-        val scopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
-        val components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
+        konst builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(JvmPlatforms.unspecifiedJvmPlatform)
+        konst languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT
+        konst scopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
+        konst components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
 
-        val dependencyTracker = builtinsSession.modificationTracker
-        val session = LLFirNonUnderContentRootResolvableModuleSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
+        konst dependencyTracker = builtinsSession.modificationTracker
+        konst session = LLFirNonUnderContentRootResolvableModuleSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
         components.session = session
 
-        val moduleData = createModuleData(session)
+        konst moduleData = createModuleData(session)
 
         return session.apply {
             registerModuleData(moduleData)
@@ -163,9 +163,9 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerResolveComponents()
             registerJavaSpecificResolveComponents()
 
-            val ktFile = module.file as? KtFile
+            konst ktFile = module.file as? KtFile
 
-            val provider = LLFirProvider(
+            konst provider = LLFirProvider(
                 this,
                 components,
                 canContainKotlinPackage = true,
@@ -176,7 +176,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(FirProvider::class, provider)
             register(FirLazyDeclarationResolver::class, LLFirLazyDeclarationResolver())
 
-            val dependencyProvider = LLFirDependenciesSymbolProvider(this, listOf(builtinsSession.symbolProvider))
+            konst dependencyProvider = LLFirDependenciesSymbolProvider(this, listOf(builtinsSession.symbolProvider))
 
             register(
                 FirSymbolProvider::class,
@@ -199,12 +199,12 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     }
 
     protected class SourceSessionCreationContext(
-        val moduleData: LLFirModuleData,
-        val contentScope: GlobalSearchScope,
-        val firProvider: LLFirProvider,
-        val dependencyProvider: LLFirDependenciesSymbolProvider,
-        val syntheticFunctionInterfaceProvider: FirExtensionSyntheticFunctionInterfaceProvider?,
-        val switchableExtensionDeclarationsSymbolProvider: FirSwitchableExtensionDeclarationsSymbolProvider?,
+        konst moduleData: LLFirModuleData,
+        konst contentScope: GlobalSearchScope,
+        konst firProvider: LLFirProvider,
+        konst dependencyProvider: LLFirDependenciesSymbolProvider,
+        konst syntheticFunctionInterfaceProvider: FirExtensionSyntheticFunctionInterfaceProvider?,
+        konst switchableExtensionDeclarationsSymbolProvider: FirSwitchableExtensionDeclarationsSymbolProvider?,
     )
 
     protected fun doCreateSourcesSession(
@@ -212,18 +212,18 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
         scopeProvider: FirKotlinScopeProvider = FirKotlinScopeProvider(),
         additionalSessionConfiguration: LLFirSourcesSession.(context: SourceSessionCreationContext) -> Unit,
     ): LLFirSourcesSession {
-        val platform = module.platform
-        val builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
-        val languageVersionSettings = wrapLanguageVersionSettings(module.languageVersionSettings)
+        konst platform = module.platform
+        konst builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
+        konst languageVersionSettings = wrapLanguageVersionSettings(module.languageVersionSettings)
 
-        val components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
+        konst components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
 
-        val dependencies = collectSourceModuleDependencies(module)
-        val dependencyTracker = createSourceModuleDependencyTracker(module, dependencies)
-        val session = LLFirSourcesSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
+        konst dependencies = collectSourceModuleDependencies(module)
+        konst dependencyTracker = createSourceModuleDependencyTracker(module, dependencies)
+        konst session = LLFirSourcesSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
         components.session = session
 
-        val moduleData = createModuleData(session)
+        konst moduleData = createModuleData(session)
 
         return session.apply {
             registerModuleData(moduleData)
@@ -233,7 +233,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerCommonComponents(languageVersionSettings)
             registerResolveComponents()
 
-            val firProvider = LLFirProvider(
+            konst firProvider = LLFirProvider(
                 this,
                 components,
                 /* Source modules can contain `kotlin` package only if `-Xallow-kotlin-package` is specified, this is handled in LLFirProvider */
@@ -249,7 +249,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerCompilerPluginExtensions(project, module)
             registerCommonComponentsAfterExtensionsAreConfigured()
 
-            val dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
+            konst dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
                 addDependencySymbolProvidersTo(session, dependencies, this)
                 add(builtinsSession.symbolProvider)
             })
@@ -261,14 +261,14 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
 
             extensionService.additionalCheckers.forEach(session.checkersComponent::register)
 
-            val syntheticFunctionInterfaceProvider =
+            konst syntheticFunctionInterfaceProvider =
                 FirExtensionSyntheticFunctionInterfaceProvider.createIfNeeded(this, moduleData, scopeProvider)
-            val switchableExtensionDeclarationsSymbolProvider =
+            konst switchableExtensionDeclarationsSymbolProvider =
                 FirSwitchableExtensionDeclarationsSymbolProvider.createIfNeeded(this)?.also {
                     register(FirSwitchableExtensionDeclarationsSymbolProvider::class, it)
                 }
 
-            val context = SourceSessionCreationContext(
+            konst context = SourceSessionCreationContext(
                 moduleData, firProvider.searchScope, firProvider, dependencyProvider, syntheticFunctionInterfaceProvider,
                 switchableExtensionDeclarationsSymbolProvider,
             )
@@ -277,35 +277,35 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     }
 
     protected class LibrarySessionCreationContext(
-        val moduleData: LLFirModuleData,
-        val contentScope: GlobalSearchScope,
-        val firProvider: LLFirProvider,
-        val dependencyProvider: LLFirDependenciesSymbolProvider
+        konst moduleData: LLFirModuleData,
+        konst contentScope: GlobalSearchScope,
+        konst firProvider: LLFirProvider,
+        konst dependencyProvider: LLFirDependenciesSymbolProvider
     )
 
     protected fun doCreateLibrarySession(
         module: KtModule,
         additionalSessionConfiguration: LLFirLibraryOrLibrarySourceResolvableModuleSession.(context: LibrarySessionCreationContext) -> Unit
     ): LLFirLibraryOrLibrarySourceResolvableModuleSession {
-        val libraryModule = when (module) {
+        konst libraryModule = when (module) {
             is KtLibraryModule -> module
             is KtLibrarySourceModule -> module.binaryLibrary
             else -> error("Unexpected module ${module::class.simpleName}")
         }
 
-        val platform = module.platform
-        val builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
-        val languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT
+        konst platform = module.platform
+        konst builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
+        konst languageVersionSettings = LanguageVersionSettingsImpl.DEFAULT
 
-        val scopeProvider = FirKotlinScopeProvider()
-        val components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
+        konst scopeProvider = FirKotlinScopeProvider()
+        konst components = LLFirModuleResolveComponents(module, globalResolveComponents, scopeProvider)
 
-        val dependencyTracker = builtinsSession.modificationTracker
-        val session =
+        konst dependencyTracker = builtinsSession.modificationTracker
+        konst session =
             LLFirLibraryOrLibrarySourceResolvableModuleSession(module, dependencyTracker, components, builtinsSession.builtinTypes)
         components.session = session
 
-        val moduleData = createModuleData(session)
+        konst moduleData = createModuleData(session)
 
         return session.apply {
             registerModuleData(moduleData)
@@ -316,7 +316,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerCommonComponentsAfterExtensionsAreConfigured()
             registerResolveComponents()
 
-            val firProvider = LLFirProvider(
+            konst firProvider = LLFirProvider(
                 this,
                 components,
                 canContainKotlinPackage = true,
@@ -329,20 +329,20 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(FirLazyDeclarationResolver::class, LLFirLazyDeclarationResolver())
 
             // We need FirRegisteredPluginAnnotations during extensions' registration process
-            val annotationsResolver = project.createAnnotationResolver(firProvider.searchScope)
+            konst annotationsResolver = project.createAnnotationResolver(firProvider.searchScope)
             register(FirRegisteredPluginAnnotations::class, LLFirIdeRegisteredPluginAnnotations(this, annotationsResolver))
             register(FirPredicateBasedProvider::class, FirEmptyPredicateBasedProvider)
 
-            val dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
+            konst dependencyProvider = LLFirDependenciesSymbolProvider(this, buildList {
                 add(builtinsSession.symbolProvider)
 
                 // Script dependencies are self-contained and should not depend on other libraries
                 if (module !is KtScriptDependencyModule) {
                     // Add all libraries excluding the current one
-                    val librariesSearchScope = ProjectScope.getLibrariesScope(project)
+                    konst librariesSearchScope = ProjectScope.getLibrariesScope(project)
                         .intersectWith(GlobalSearchScope.notScope(libraryModule.contentScope))
 
-                    val restLibrariesProvider = LLFirLibraryProviderFactory.createProjectLibraryProvidersForScope(
+                    konst restLibrariesProvider = LLFirLibraryProviderFactory.createProjectLibraryProvidersForScope(
                         session, moduleData, scopeProvider,
                         project, builtinTypes, librariesSearchScope
                     )
@@ -354,7 +354,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(DEPENDENCIES_SYMBOL_PROVIDER_QUALIFIED_KEY, dependencyProvider)
             register(LLFirFirClassByPsiClassProvider::class, LLFirFirClassByPsiClassProvider(this))
 
-            val context = LibrarySessionCreationContext(moduleData, firProvider.searchScope, firProvider, dependencyProvider)
+            konst context = LibrarySessionCreationContext(moduleData, firProvider.searchScope, firProvider, dependencyProvider)
             additionalSessionConfiguration(context)
 
             LLFirSessionConfigurator.configure(this)
@@ -367,13 +367,13 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
         module: KtBinaryModule,
         additionalSessionConfiguration: LLFirLibrarySession.(context: BinaryLibrarySessionCreationContext) -> Unit,
     ): LLFirLibrarySession {
-        val platform = module.platform
-        val builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
+        konst platform = module.platform
+        konst builtinsSession = LLFirBuiltinsSessionFactory.getInstance(project).getBuiltinsSession(platform)
 
-        val dependencyTracker = ModificationTracker.NEVER_CHANGED
-        val session = LLFirLibrarySession(module, dependencyTracker, builtinsSession.builtinTypes)
+        konst dependencyTracker = ModificationTracker.NEVER_CHANGED
+        konst session = LLFirLibrarySession(module, dependencyTracker, builtinsSession.builtinTypes)
 
-        val moduleData = createModuleData(session)
+        konst moduleData = createModuleData(session)
 
         return session.apply {
             registerModuleData(moduleData)
@@ -382,10 +382,10 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             registerCommonComponents(LanguageVersionSettingsImpl.DEFAULT/*TODO*/)
             registerCommonComponentsAfterExtensionsAreConfigured()
 
-            val kotlinScopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
+            konst kotlinScopeProvider = FirKotlinScopeProvider(::wrapScopeWithJvmMapped)
             register(FirKotlinScopeProvider::class, kotlinScopeProvider)
 
-            val symbolProvider = LLFirLibraryProviderFactory.createLibraryProvidersForScope(
+            konst symbolProvider = LLFirLibraryProviderFactory.createLibraryProvidersForScope(
                 this,
                 moduleData,
                 kotlinScopeProvider,
@@ -399,7 +399,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             register(FirProvider::class, LLFirLibrarySessionProvider(symbolProvider))
             register(FirSymbolProvider::class, symbolProvider)
 
-            val context = BinaryLibrarySessionCreationContext()
+            konst context = BinaryLibrarySessionCreationContext()
             additionalSessionConfiguration(context)
             LLFirSessionConfigurator.configure(this)
         }
@@ -424,7 +424,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     }
 
     private fun collectSourceModuleDependencies(module: KtModule): List<LLFirSession> {
-        val llFirSessionCache = LLFirSessionCache.getInstance(project)
+        konst llFirSessionCache = LLFirSessionCache.getInstance(project)
 
         fun getOrCreateSessionForDependency(dependency: KtModule): LLFirSession? = when (dependency) {
             is KtBuiltinsModule -> null // Built-ins are already added
@@ -437,7 +437,7 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
             is KtLibrarySourceModule -> error("Module $module cannot depend on ${dependency::class}: $dependency")
         }
 
-        val dependencyModules = buildSet {
+        konst dependencyModules = buildSet {
             addAll(module.directRegularDependencies)
 
             // The dependency provider needs to have access to all direct and indirect `dependsOn` dependencies, as `dependsOn`
@@ -449,9 +449,9 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
     }
 
     private fun createSourceModuleDependencyTracker(module: KtModule, exposedDependencies: List<LLFirSession>): ModificationTracker {
-        val llFirSessionCache = LLFirSessionCache.getInstance(project)
-        val friendDependencies = module.directFriendDependencies
-        val trackers = ArrayList<ModificationTracker>(exposedDependencies.size + friendDependencies.size)
+        konst llFirSessionCache = LLFirSessionCache.getInstance(project)
+        konst friendDependencies = module.directFriendDependencies
+        konst trackers = ArrayList<ModificationTracker>(exposedDependencies.size + friendDependencies.size)
 
         exposedDependencies.forEach { trackers += it.modificationTracker }
         friendDependencies.forEach { trackers += llFirSessionCache.getSession(it).modificationTracker }
@@ -472,9 +472,9 @@ internal abstract class LLFirAbstractSessionFactory(protected val project: Proje
         dependencies: List<LLFirSession>,
         destination: MutableList<FirSymbolProvider>,
     ) {
-        val dependencyProviders = buildList {
+        konst dependencyProviders = buildList {
             dependencies.forEach { session ->
-                when (val dependencyProvider = session.symbolProvider) {
+                when (konst dependencyProvider = session.symbolProvider) {
                     is LLFirModuleWithDependenciesSymbolProvider -> addAll(dependencyProvider.providers)
                     else -> add(dependencyProvider)
                 }

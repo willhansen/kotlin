@@ -15,7 +15,7 @@ public class Box
 import test.*
 
 fun box(): String {
-    val boxClass = injectFnc<Box>()
+    konst boxClass = injectFnc<Box>()
     if (boxClass != Box::class) return "fail 1"
 
     return "OK"

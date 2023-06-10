@@ -1,7 +1,7 @@
 package
 
 package a {
-    public val foo: [Error type: Return type for function cannot be resolved]
+    public konst foo: [Error type: Return type for function cannot be resolved]
     public fun bar(): [Error type: Return type for function cannot be resolved]
 }
 
@@ -19,7 +19,7 @@ package c {
 package ok {
 
     package ok.a {
-        public val foo: kotlin.Int
+        public konst foo: kotlin.Int
         public fun bar(): kotlin.Int
     }
 

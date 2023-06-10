@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 sealed class A : CharSequence {
-    data class B(val c: CharSequence) : A(), CharSequence by c
+    data class B(konst c: CharSequence) : A(), CharSequence by c
 }
 
 fun box(): String {

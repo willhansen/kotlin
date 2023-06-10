@@ -5,16 +5,16 @@ plugins {
 idePluginDependency {
     publish()
 
-    val jar: Jar by tasks
+    konst jar: Jar by tasks
 
     jar.apply {
-        val compilerProjectName = ":kotlin-compiler"
-        val distTaskName = "distKotlinc"
+        konst compilerProjectName = ":kotlin-compiler"
+        konst distTaskName = "distKotlinc"
 
         dependsOn("$compilerProjectName:$distTaskName")
 
         from {
-            val distKotlincTask = project(compilerProjectName).tasks.getByName(distTaskName)
+            konst distKotlincTask = project(compilerProjectName).tasks.getByName(distTaskName)
             distKotlincTask.outputs.files
         }
     }

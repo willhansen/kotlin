@@ -11,7 +11,7 @@ class MyList : AbstractCollection<String>(), MutableCollection<String> {
         throw UnsupportedOperationException()
     }
 
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun removeIf(predicate: Predicate<in String>) =
@@ -19,14 +19,14 @@ class MyList : AbstractCollection<String>(), MutableCollection<String> {
 }
 
 fun box(): String {
-    val ml = mutableListOf("xyz", "abc")
+    konst ml = mutableListOf("xyz", "abc")
 
     if (!ml.removeIf { x -> x == "abc" }) return "fail 1"
     if (ml.removeIf { x -> x == "abc" }) return "fail 2"
 
     if (ml != listOf("xyz")) return "fail 3"
 
-    val myList = MyList()
+    konst myList = MyList()
 
     if (!myList.removeIf { x -> x == "abc" }) return "fail 4"
     if (myList.removeIf { x -> x == "xyz" }) return "fail 5"

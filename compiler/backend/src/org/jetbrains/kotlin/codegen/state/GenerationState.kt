@@ -57,29 +57,29 @@ import org.jetbrains.org.objectweb.asm.Type
 import java.io.File
 
 class GenerationState private constructor(
-    val project: Project,
+    konst project: Project,
     builderFactory: ClassBuilderFactory,
-    val module: ModuleDescriptor,
-    val originalFrontendBindingContext: BindingContext,
-    val configuration: CompilerConfiguration,
-    val generateDeclaredClassFilter: GenerateClassFilter,
-    val targetId: TargetId?,
+    konst module: ModuleDescriptor,
+    konst originalFrontendBindingContext: BindingContext,
+    konst configuration: CompilerConfiguration,
+    konst generateDeclaredClassFilter: GenerateClassFilter,
+    konst targetId: TargetId?,
     moduleName: String?,
-    val outDirectory: File?,
-    private val onIndependentPartCompilationEnd: GenerationStateEventCallback,
+    konst outDirectory: File?,
+    private konst onIndependentPartCompilationEnd: GenerationStateEventCallback,
     wantsDiagnostics: Boolean,
-    val jvmBackendClassResolver: JvmBackendClassResolver,
-    val isIrBackend: Boolean,
-    val ignoreErrors: Boolean,
-    val diagnosticReporter: DiagnosticReporter,
-    val isIncrementalCompilation: Boolean
+    konst jvmBackendClassResolver: JvmBackendClassResolver,
+    konst isIrBackend: Boolean,
+    konst ignoreErrors: Boolean,
+    konst diagnosticReporter: DiagnosticReporter,
+    konst isIncrementalCompilation: Boolean
 ) {
     class Builder(
-        private val project: Project,
-        private val builderFactory: ClassBuilderFactory,
-        private val module: ModuleDescriptor,
-        private val bindingContext: BindingContext,
-        private val configuration: CompilerConfiguration
+        private konst project: Project,
+        private konst builderFactory: ClassBuilderFactory,
+        private konst module: ModuleDescriptor,
+        private konst bindingContext: BindingContext,
+        private konst configuration: CompilerConfiguration
     ) {
         // TODO: patch IntelliJ project and remove this compatibility c-tor
         constructor(
@@ -137,7 +137,7 @@ class GenerationState private constructor(
         fun diagnosticReporter(v: DiagnosticReporter) =
             apply { diagnosticReporter = v }
 
-        val isIncrementalCompilation: Boolean = configuration.getBoolean(CommonConfigurationKeys.INCREMENTAL_COMPILATION)
+        konst isIncrementalCompilation: Boolean = configuration.getBoolean(CommonConfigurationKeys.INCREMENTAL_COMPILATION)
 
         // TODO: remove after cleanin up IDE counterpart
         private var files: List<KtFile>? = null
@@ -169,7 +169,7 @@ class GenerationState private constructor(
 
         companion object {
             @JvmField
-            val GENERATE_ALL: GenerateClassFilter = object : GenerateClassFilter() {
+            konst GENERATE_ALL: GenerateClassFilter = object : GenerateClassFilter() {
                 override fun shouldAnnotateClass(processingClassOrObject: KtClassOrObject): Boolean = true
                 override fun shouldGenerateClass(processingClassOrObject: KtClassOrObject): Boolean = true
                 override fun shouldGenerateScript(script: KtScript): Boolean = true
@@ -179,17 +179,17 @@ class GenerationState private constructor(
         }
     }
 
-    val languageVersionSettings = configuration.languageVersionSettings
+    konst languageVersionSettings = configuration.languageVersionSettings
 
-    val inlineCache: InlineCache = InlineCache()
+    konst inlineCache: InlineCache = InlineCache()
 
-    val incrementalCacheForThisTarget: IncrementalCache?
-    val packagesWithObsoleteParts: Set<FqName>
-    val obsoleteMultifileClasses: List<FqName>
-    val deserializationConfiguration: DeserializationConfiguration =
+    konst incrementalCacheForThisTarget: IncrementalCache?
+    konst packagesWithObsoleteParts: Set<FqName>
+    konst obsoleteMultifileClasses: List<FqName>
+    konst deserializationConfiguration: DeserializationConfiguration =
         JvmCompilerDeserializationConfiguration(languageVersionSettings)
 
-    val deprecationProvider = DeprecationResolver(
+    konst deprecationProvider = DeprecationResolver(
         LockBasedStorageManager.NO_LOCKS, languageVersionSettings, JavaDeprecationSettings
     )
 
@@ -198,9 +198,9 @@ class GenerationState private constructor(
     var codegenFactory: CodegenFactory? = null
 
     init {
-        val icComponents = configuration.get(JVMConfigurationKeys.INCREMENTAL_COMPILATION_COMPONENTS)
+        konst icComponents = configuration.get(JVMConfigurationKeys.INCREMENTAL_COMPILATION_COMPONENTS)
         if (icComponents != null) {
-            val targetId = targetId
+            konst targetId = targetId
                 ?: moduleName?.let {
                     // hack for Gradle IC, Gradle does not use build.xml file, so there is no way to pass target id
                     TargetId(it, "java-production")
@@ -219,53 +219,53 @@ class GenerationState private constructor(
         }
     }
 
-    val extraJvmDiagnosticsTrace: BindingTrace =
+    konst extraJvmDiagnosticsTrace: BindingTrace =
         DelegatingBindingTrace(
             originalFrontendBindingContext, "For extra diagnostics in ${this::class.java}", false,
             customSuppressCache = if (isIrBackend) OnDemandSuppressCache(originalFrontendBindingContext) else null,
         )
 
-    private val interceptedBuilderFactory: ClassBuilderFactory
+    private konst interceptedBuilderFactory: ClassBuilderFactory
     private var used = false
 
-    val diagnostics: DiagnosticSink get() = extraJvmDiagnosticsTrace
-    val collectedExtraJvmDiagnostics: Diagnostics = LazyJvmDiagnostics {
+    konst diagnostics: DiagnosticSink get() = extraJvmDiagnosticsTrace
+    konst collectedExtraJvmDiagnostics: Diagnostics = LazyJvmDiagnostics {
         duplicateSignatureFactory?.reportDiagnostics()
         extraJvmDiagnosticsTrace.bindingContext.diagnostics
     }
 
-    val useOldManglingSchemeForFunctionsWithInlineClassesInSignatures =
+    konst useOldManglingSchemeForFunctionsWithInlineClassesInSignatures =
         configuration.getBoolean(JVMConfigurationKeys.USE_OLD_INLINE_CLASSES_MANGLING_SCHEME) ||
                 languageVersionSettings.languageVersion.run { major == 1 && minor < 4 }
 
-    val target = configuration.get(JVMConfigurationKeys.JVM_TARGET) ?: JvmTarget.DEFAULT
-    val runtimeStringConcat =
+    konst target = configuration.get(JVMConfigurationKeys.JVM_TARGET) ?: JvmTarget.DEFAULT
+    konst runtimeStringConcat =
         if (target.majorVersion >= JvmTarget.JVM_9.majorVersion)
             configuration.get(JVMConfigurationKeys.STRING_CONCAT) ?: JvmStringConcat.INDY_WITH_CONSTANTS
         else JvmStringConcat.INLINE
 
-    val samConversionsScheme: JvmClosureGenerationScheme =
+    konst samConversionsScheme: JvmClosureGenerationScheme =
         configuration.get(JVMConfigurationKeys.SAM_CONVERSIONS)
             ?: if (languageVersionSettings.supportsFeature(LanguageFeature.SamWrapperClassesAreSynthetic))
                 JvmClosureGenerationScheme.INDY
             else
                 JvmClosureGenerationScheme.CLASS
 
-    val lambdasScheme: JvmClosureGenerationScheme =
+    konst lambdasScheme: JvmClosureGenerationScheme =
         configuration.get(JVMConfigurationKeys.LAMBDAS)
             ?: if (languageVersionSettings.supportsFeature(LanguageFeature.LightweightLambdas))
                 JvmClosureGenerationScheme.INDY
             else JvmClosureGenerationScheme.CLASS
 
-    val moduleName: String = moduleName ?: JvmCodegenUtil.getModuleName(module)
-    val classBuilderMode: ClassBuilderMode = builderFactory.classBuilderMode
-    val bindingTrace: BindingTrace = DelegatingBindingTrace(
+    konst moduleName: String = moduleName ?: JvmCodegenUtil.getModuleName(module)
+    konst classBuilderMode: ClassBuilderMode = builderFactory.classBuilderMode
+    konst bindingTrace: BindingTrace = DelegatingBindingTrace(
         originalFrontendBindingContext, "trace in GenerationState",
         filter = if (wantsDiagnostics) BindingTraceFilter.ACCEPT_ALL else BindingTraceFilter.NO_DIAGNOSTICS
     )
-    val bindingContext: BindingContext = bindingTrace.bindingContext
-    val mainFunctionDetector = MainFunctionDetector(originalFrontendBindingContext, languageVersionSettings)
-    val typeMapper: KotlinTypeMapper = KotlinTypeMapper(
+    konst bindingContext: BindingContext = bindingTrace.bindingContext
+    konst mainFunctionDetector = MainFunctionDetector(originalFrontendBindingContext, languageVersionSettings)
+    konst typeMapper: KotlinTypeMapper = KotlinTypeMapper(
         bindingContext,
         classBuilderMode,
         this.moduleName,
@@ -274,28 +274,28 @@ class GenerationState private constructor(
         target,
         isIrBackend
     )
-    val canReplaceStdlibRuntimeApiBehavior = languageVersionSettings.apiVersion <= ApiVersion.parse(KotlinVersion.CURRENT.toString())!!
-    val intrinsics: IntrinsicMethods = IntrinsicMethods(canReplaceStdlibRuntimeApiBehavior)
-    val generateOptimizedCallableReferenceSuperClasses =
+    konst canReplaceStdlibRuntimeApiBehavior = languageVersionSettings.apiVersion <= ApiVersion.parse(KotlinVersion.CURRENT.toString())!!
+    konst intrinsics: IntrinsicMethods = IntrinsicMethods(canReplaceStdlibRuntimeApiBehavior)
+    konst generateOptimizedCallableReferenceSuperClasses =
         languageVersionSettings.apiVersion >= ApiVersion.KOTLIN_1_4 &&
                 !configuration.getBoolean(JVMConfigurationKeys.NO_OPTIMIZED_CALLABLE_REFERENCES)
-    val useKotlinNothingValueException =
+    konst useKotlinNothingValueException =
         languageVersionSettings.apiVersion >= ApiVersion.KOTLIN_1_4 &&
                 !configuration.getBoolean(JVMConfigurationKeys.NO_KOTLIN_NOTHING_VALUE_EXCEPTION)
 
     // In 1.6, `typeOf` became stable and started to rely on a few internal stdlib functions which were missing before 1.6.
-    val stableTypeOf = languageVersionSettings.apiVersion >= ApiVersion.KOTLIN_1_6
+    konst stableTypeOf = languageVersionSettings.apiVersion >= ApiVersion.KOTLIN_1_6
 
-    val samWrapperClasses: SamWrapperClasses = SamWrapperClasses(this)
-    val globalInlineContext: GlobalInlineContext = GlobalInlineContext(diagnostics)
-    val mappingsClassesForWhenByEnum: MappingsClassesForWhenByEnum = MappingsClassesForWhenByEnum(this)
-    val jvmRuntimeTypes: JvmRuntimeTypes = JvmRuntimeTypes(
+    konst samWrapperClasses: SamWrapperClasses = SamWrapperClasses(this)
+    konst globalInlineContext: GlobalInlineContext = GlobalInlineContext(diagnostics)
+    konst mappingsClassesForWhenByEnum: MappingsClassesForWhenByEnum = MappingsClassesForWhenByEnum(this)
+    konst jvmRuntimeTypes: JvmRuntimeTypes = JvmRuntimeTypes(
         module, languageVersionSettings, generateOptimizedCallableReferenceSuperClasses
     )
-    val factory: ClassFileFactory
+    konst factory: ClassFileFactory
     private var duplicateSignatureFactory: BuilderFactoryForDuplicateSignatureDiagnostics? = null
 
-    val scriptSpecific = ForScript()
+    konst scriptSpecific = ForScript()
 
     // TODO: review usages and consider replace mutability with explicit passing of input and output
     class ForScript {
@@ -307,72 +307,72 @@ class GenerationState private constructor(
         var resultType: KotlinType? = null
     }
 
-    val isCallAssertionsDisabled: Boolean = configuration.getBoolean(JVMConfigurationKeys.DISABLE_CALL_ASSERTIONS)
-    val isReceiverAssertionsDisabled: Boolean =
+    konst isCallAssertionsDisabled: Boolean = configuration.getBoolean(JVMConfigurationKeys.DISABLE_CALL_ASSERTIONS)
+    konst isReceiverAssertionsDisabled: Boolean =
         configuration.getBoolean(JVMConfigurationKeys.DISABLE_RECEIVER_ASSERTIONS) ||
                 !languageVersionSettings.supportsFeature(LanguageFeature.NullabilityAssertionOnExtensionReceiver)
-    val isParamAssertionsDisabled: Boolean = configuration.getBoolean(JVMConfigurationKeys.DISABLE_PARAM_ASSERTIONS)
-    val assertionsMode: JVMAssertionsMode = configuration.get(JVMConfigurationKeys.ASSERTIONS_MODE, JVMAssertionsMode.DEFAULT)
-    val isInlineDisabled: Boolean = configuration.getBoolean(CommonConfigurationKeys.DISABLE_INLINE)
-    val useTypeTableInSerializer: Boolean = configuration.getBoolean(JVMConfigurationKeys.USE_TYPE_TABLE)
-    val unifiedNullChecks: Boolean =
+    konst isParamAssertionsDisabled: Boolean = configuration.getBoolean(JVMConfigurationKeys.DISABLE_PARAM_ASSERTIONS)
+    konst assertionsMode: JVMAssertionsMode = configuration.get(JVMConfigurationKeys.ASSERTIONS_MODE, JVMAssertionsMode.DEFAULT)
+    konst isInlineDisabled: Boolean = configuration.getBoolean(CommonConfigurationKeys.DISABLE_INLINE)
+    konst useTypeTableInSerializer: Boolean = configuration.getBoolean(JVMConfigurationKeys.USE_TYPE_TABLE)
+    konst unifiedNullChecks: Boolean =
         languageVersionSettings.apiVersion >= ApiVersion.KOTLIN_1_4 &&
                 !configuration.getBoolean(JVMConfigurationKeys.NO_UNIFIED_NULL_CHECKS)
 
-    val noSourceCodeInNotNullAssertionExceptions: Boolean =
+    konst noSourceCodeInNotNullAssertionExceptions: Boolean =
         (languageVersionSettings.supportsFeature(LanguageFeature.NoSourceCodeInNotNullAssertionExceptions)
                 // This check is needed because we generate calls to `Intrinsics.checkNotNull` which is only available since 1.4
                 // (when unified null checks were introduced).
                 && unifiedNullChecks)
-                // Never generate source code in assertion exceptions in K2 to make behavior of FIR PSI & FIR light-tree equivalent
+                // Never generate source code in assertion exceptions in K2 to make behavior of FIR PSI & FIR light-tree equikonstent
                 // (obtaining source code is not supported in light tree).
                 || languageVersionSettings.languageVersion.usesK2
 
-    val generateSmapCopyToAnnotation: Boolean = !configuration.getBoolean(JVMConfigurationKeys.NO_SOURCE_DEBUG_EXTENSION)
-    val functionsWithInlineClassReturnTypesMangled: Boolean =
+    konst generateSmapCopyToAnnotation: Boolean = !configuration.getBoolean(JVMConfigurationKeys.NO_SOURCE_DEBUG_EXTENSION)
+    konst functionsWithInlineClassReturnTypesMangled: Boolean =
         languageVersionSettings.supportsFeature(LanguageFeature.MangleClassMembersReturningInlineClasses)
-    val shouldValidateIr = configuration.getBoolean(JVMConfigurationKeys.VALIDATE_IR)
-    val shouldValidateBytecode = configuration.getBoolean(JVMConfigurationKeys.VALIDATE_BYTECODE)
+    konst shouldValidateIr = configuration.getBoolean(JVMConfigurationKeys.VALIDATE_IR)
+    konst shouldValidateBytecode = configuration.getBoolean(JVMConfigurationKeys.VALIDATE_BYTECODE)
 
-    val rootContext: CodegenContext<*> = RootContext(this)
+    konst rootContext: CodegenContext<*> = RootContext(this)
 
-    val classFileVersion: Int = run {
-        val minorVersion = if (configuration.getBoolean(JVMConfigurationKeys.ENABLE_JVM_PREVIEW)) 0xffff else 0
+    konst classFileVersion: Int = run {
+        konst minorVersion = if (configuration.getBoolean(JVMConfigurationKeys.ENABLE_JVM_PREVIEW)) 0xffff else 0
         (minorVersion shl 16) + target.majorVersion
     }
 
-    val generateParametersMetadata: Boolean = configuration.getBoolean(JVMConfigurationKeys.PARAMETERS_METADATA)
+    konst generateParametersMetadata: Boolean = configuration.getBoolean(JVMConfigurationKeys.PARAMETERS_METADATA)
 
-    val shouldInlineConstVals = languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)
+    konst shouldInlineConstVals = languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)
 
-    val jvmDefaultMode = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
+    konst jvmDefaultMode = languageVersionSettings.getFlag(JvmAnalysisFlags.jvmDefaultMode)
 
-    val disableOptimization = configuration.get(JVMConfigurationKeys.DISABLE_OPTIMIZATION, false)
+    konst disableOptimization = configuration.get(JVMConfigurationKeys.DISABLE_OPTIMIZATION, false)
 
-    val metadataVersion = configuration.metadataVersion()
+    konst metadataVersion = configuration.metadataVersion()
 
-    val abiStability = configuration.get(JVMConfigurationKeys.ABI_STABILITY)
+    konst abiStability = configuration.get(JVMConfigurationKeys.ABI_STABILITY)
 
-    val noNewJavaAnnotationTargets = configuration.getBoolean(JVMConfigurationKeys.NO_NEW_JAVA_ANNOTATION_TARGETS)
+    konst noNewJavaAnnotationTargets = configuration.getBoolean(JVMConfigurationKeys.NO_NEW_JAVA_ANNOTATION_TARGETS)
 
-    val globalSerializationBindings = JvmSerializationBindings()
+    konst globalSerializationBindings = JvmSerializationBindings()
     var mapInlineClass: (ClassDescriptor) -> Type = { descriptor -> typeMapper.mapType(descriptor.defaultType) }
 
-    class MultiFieldValueClassUnboxInfo(val unboxedTypesAndMethodNamesAndFieldNames: List<Triple<Type, String, String>>) {
-        val unboxedTypes = unboxedTypesAndMethodNamesAndFieldNames.map { (type, _, _) -> type }
-        val unboxedMethodNames = unboxedTypesAndMethodNamesAndFieldNames.map { (_, methodName, _) -> methodName }
-        val unboxedFieldNames = unboxedTypesAndMethodNamesAndFieldNames.map { (_, _, fieldName) -> fieldName }
+    class MultiFieldValueClassUnboxInfo(konst unboxedTypesAndMethodNamesAndFieldNames: List<Triple<Type, String, String>>) {
+        konst unboxedTypes = unboxedTypesAndMethodNamesAndFieldNames.map { (type, _, _) -> type }
+        konst unboxedMethodNames = unboxedTypesAndMethodNamesAndFieldNames.map { (_, methodName, _) -> methodName }
+        konst unboxedFieldNames = unboxedTypesAndMethodNamesAndFieldNames.map { (_, _, fieldName) -> fieldName }
     }
 
     var multiFieldValueClassUnboxInfo: (ClassDescriptor) -> MultiFieldValueClassUnboxInfo? = { null }
 
-    val typeApproximator: TypeApproximator? =
+    konst typeApproximator: TypeApproximator? =
         if (languageVersionSettings.supportsFeature(LanguageFeature.NewInference))
             TypeApproximator(module.builtIns, languageVersionSettings)
         else
             null
 
-    val oldInnerClassesLogic = configuration.getBoolean(JVMConfigurationKeys.OLD_INNER_CLASSES_LOGIC)
+    konst oldInnerClassesLogic = configuration.getBoolean(JVMConfigurationKeys.OLD_INNER_CLASSES_LOGIC)
 
     init {
         this.interceptedBuilderFactory = builderFactory
@@ -405,14 +405,14 @@ class GenerationState private constructor(
                 extension.interceptClassBuilderFactory(classBuilderFactory, originalFrontendBindingContext, diagnostics)
             }
 
-        val finalizers = ClassFileFactoryFinalizerExtension.getInstances(project)
+        konst finalizers = ClassFileFactoryFinalizerExtension.getInstances(project)
         this.factory = ClassFileFactory(this, interceptedBuilderFactory, finalizers)
     }
 
     @Suppress("UNCHECKED_CAST", "DEPRECATION_ERROR")
     private fun loadClassBuilderInterceptors(): List<org.jetbrains.kotlin.codegen.extensions.ClassBuilderInterceptorExtension> {
         // Using Class.forName here because we're in the old JVM backend, and we need to load extensions declared in the JVM IR backend.
-        val adapted = Class.forName("org.jetbrains.kotlin.backend.jvm.extensions.ClassBuilderExtensionAdapter")
+        konst adapted = Class.forName("org.jetbrains.kotlin.backend.jvm.extensions.ClassBuilderExtensionAdapter")
             .getDeclaredMethod("getExtensions", Project::class.java)
             .invoke(null, project) as List<org.jetbrains.kotlin.codegen.extensions.ClassBuilderInterceptorExtension>
 
@@ -446,18 +446,18 @@ class GenerationState private constructor(
     private fun shouldOnlyCollectSignatures(origin: JvmDeclarationOrigin) =
         classBuilderMode == ClassBuilderMode.LIGHT_CLASSES && origin.originKind in doNotGenerateInLightClassMode
 
-    val newFragmentCaptureParameters: MutableList<Triple<String, KotlinType, DeclarationDescriptor>> = mutableListOf()
+    konst newFragmentCaptureParameters: MutableList<Triple<String, KotlinType, DeclarationDescriptor>> = mutableListOf()
     fun recordNewFragmentCaptureParameter(string: String, type: KotlinType, descriptor: DeclarationDescriptor) {
         newFragmentCaptureParameters.add(Triple(string, type, descriptor))
     }
 }
 
-private val doNotGenerateInLightClassMode = setOf(CLASS_MEMBER_DELEGATION_TO_DEFAULT_IMPL, BRIDGE, COLLECTION_STUB, AUGMENTED_BUILTIN_API)
+private konst doNotGenerateInLightClassMode = setOf(CLASS_MEMBER_DELEGATION_TO_DEFAULT_IMPL, BRIDGE, COLLECTION_STUB, AUGMENTED_BUILTIN_API)
 
 private class LazyJvmDiagnostics(compute: () -> Diagnostics) : Diagnostics {
-    private val delegate by lazy(LazyThreadSafetyMode.SYNCHRONIZED, compute)
+    private konst delegate by lazy(LazyThreadSafetyMode.SYNCHRONIZED, compute)
 
-    override val modificationTracker: ModificationTracker
+    override konst modificationTracker: ModificationTracker
         get() = delegate.modificationTracker
 
     override fun all(): Collection<Diagnostic> = delegate.all()
@@ -473,7 +473,7 @@ private class LazyJvmDiagnostics(compute: () -> Diagnostics) : Diagnostics {
 
 interface GenerationStateEventCallback : (GenerationState) -> Unit {
     companion object {
-        val DO_NOTHING = GenerationStateEventCallback { }
+        konst DO_NOTHING = GenerationStateEventCallback { }
     }
 }
 

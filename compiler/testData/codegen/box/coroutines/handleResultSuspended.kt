@@ -7,15 +7,15 @@ import kotlin.coroutines.intrinsics.*
 class Controller {
     var log = ""
 
-    suspend fun <T> suspendAndLog(value: T): T = suspendCoroutineUninterceptedOrReturn { x ->
-        log += "suspend($value);"
-        x.resume(value)
+    suspend fun <T> suspendAndLog(konstue: T): T = suspendCoroutineUninterceptedOrReturn { x ->
+        log += "suspend($konstue);"
+        x.resume(konstue)
         COROUTINE_SUSPENDED
     }
 }
 
 fun builder(c: suspend Controller.() -> String): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.log += "return($it);"
     })
@@ -23,7 +23,7 @@ fun builder(c: suspend Controller.() -> String): String {
 }
 
 fun box(): String {
-    val result = builder { suspendAndLog("OK") }
+    konst result = builder { suspendAndLog("OK") }
 
     if (result != "suspend(OK);return(OK);") return "fail: $result"
 

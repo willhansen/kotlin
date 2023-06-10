@@ -21,12 +21,12 @@ interface GradleKpmConfigurationArtifactsSetup<in T : GradleKpmFragment> {
 }
 
 class GradleKpmConfigurationArtifactsSetupContext<T : GradleKpmFragment> internal constructor(
-    internal val outgoing: ConfigurationPublications,
-    val fragment: T
+    internal konst outgoing: ConfigurationPublications,
+    konst fragment: T
 ) {
-    val project: Project get() = fragment.project
+    konst project: Project get() = fragment.project
 
-    val variants: NamedDomainObjectContainer<ConfigurationVariant> get() = outgoing.variants
+    konst variants: NamedDomainObjectContainer<ConfigurationVariant> get() = outgoing.variants
 
     fun artifact(notation: Any) {
         outgoing.artifact(notation)
@@ -43,7 +43,7 @@ fun <T : GradleKpmFragment> GradleKpmConfigurationArtifactsSetup(
 ): GradleKpmConfigurationArtifactsSetup<T> {
     return object : GradleKpmConfigurationArtifactsSetup<T> {
         override fun setupArtifacts(outgoing: ConfigurationPublications, fragment: T) {
-            val context = GradleKpmConfigurationArtifactsSetupContext(outgoing, fragment)
+            konst context = GradleKpmConfigurationArtifactsSetupContext(outgoing, fragment)
             context.addArtifacts()
         }
     }
@@ -71,7 +71,7 @@ operator fun <T : GradleKpmFragment> GradleKpmConfigurationArtifactsSetup<T>.plu
 }
 
 internal class CompositeFragmentConfigurationArtifactsSetup<in T : GradleKpmFragment>(
-    val children: List<GradleKpmConfigurationArtifactsSetup<T>>
+    konst children: List<GradleKpmConfigurationArtifactsSetup<T>>
 ) : GradleKpmConfigurationArtifactsSetup<T> {
 
     override fun setupArtifacts(outgoing: ConfigurationPublications, fragment: T) {

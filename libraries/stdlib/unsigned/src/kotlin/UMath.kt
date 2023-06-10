@@ -6,7 +6,7 @@
 package kotlin.math
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -16,7 +16,7 @@ public inline fun min(a: UInt, b: UInt): UInt {
 }
 
 /**
- * Returns the smaller of two values.
+ * Returns the smaller of two konstues.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -26,7 +26,7 @@ public inline fun min(a: ULong, b: ULong): ULong {
 }
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -36,7 +36,7 @@ public inline fun max(a: UInt, b: UInt): UInt {
 }
 
 /**
- * Returns the greater of two values.
+ * Returns the greater of two konstues.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)

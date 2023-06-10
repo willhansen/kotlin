@@ -3,9 +3,9 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T>(val x: Int)
+konstue class Foo<T>(konst x: Int)
 
-class Bar(val y: Foo<Any>)
+class Bar(konst y: Foo<Any>)
 
 fun box(): String {
     if (Bar(Foo<Any>(42)).y.x != 42) throw AssertionError()

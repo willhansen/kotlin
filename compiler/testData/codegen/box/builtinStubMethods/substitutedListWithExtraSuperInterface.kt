@@ -18,7 +18,7 @@ class Test {
 // FILE: test.kt
 
 abstract class C : Test.A, List<String> {
-    override val size: Int get() = null!!
+    override konst size: Int get() = null!!
     override fun isEmpty(): Boolean = null!!
     override fun contains(o: String): Boolean = null!!
     override fun iterator(): Iterator<String> = null!!

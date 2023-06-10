@@ -29,9 +29,9 @@ var intResult = intArrayOf()
 
 fun box(): String {
     builder {
-        val x = true
+        konst x = true
         suspendHere()
-        val a = BooleanArray(1)
+        konst a = BooleanArray(1)
         a[0] = x
         booleanResult = a
     }
@@ -39,9 +39,9 @@ fun box(): String {
     if (!booleanResult[0]) return "fail 1"
 
     builder {
-        val x = '1'
+        konst x = '1'
         suspendHere()
-        val a = CharArray(1)
+        konst a = CharArray(1)
         a[0] = x
         charResult = a
     }
@@ -49,9 +49,9 @@ fun box(): String {
     if (charResult[0] != '1') return "fail 2"
 
     builder {
-        val x: Byte = 1
+        konst x: Byte = 1
         suspendHere()
-        val a = ByteArray(1)
+        konst a = ByteArray(1)
         a[0] = x
         byteResult = a
     }
@@ -59,9 +59,9 @@ fun box(): String {
     if (byteResult[0] != 1.toByte()) return "fail 3"
 
     builder {
-        val x: Short = 1
+        konst x: Short = 1
         suspendHere()
-        val a = ShortArray(1)
+        konst a = ShortArray(1)
         a[0] = x
         shortResult = a
     }
@@ -69,9 +69,9 @@ fun box(): String {
     if (shortResult[0] != 1.toShort()) return "fail 4"
 
     builder {
-        val x: Int = 1
+        konst x: Int = 1
         suspendHere()
-        val a = IntArray(1)
+        konst a = IntArray(1)
         a[0] = x
         intResult = a
     }

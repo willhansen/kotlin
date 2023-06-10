@@ -14,10 +14,10 @@ import kotlinx.cinterop.*
 internal external fun getNativeNullPtr(): NativePtr
 
 @ExperimentalForeignApi
-class NativePtr @PublishedApi internal constructor(private val value: NonNullNativePtr?) {
+class NativePtr @PublishedApi internal constructor(private konst konstue: NonNullNativePtr?) {
     companion object {
         // TODO: make it properly precreated, maybe use an intrinsic for that.
-        val NULL = getNativeNullPtr()
+        konst NULL = getNativeNullPtr()
     }
 
     @TypedIntrinsic(IntrinsicType.INTEROP_NATIVE_PTR_PLUS_LONG)
@@ -32,7 +32,7 @@ class NativePtr @PublishedApi internal constructor(private val value: NonNullNat
 
     override fun toString() = "0x${this.toLong().toString(16)}"
 
-    internal fun isNull(): Boolean = (value == null)
+    internal fun isNull(): Boolean = (konstue == null)
 }
 
 @PublishedApi
@@ -55,9 +55,9 @@ internal class NativePtrArray {
     external public operator fun get(index: Int): NativePtr
 
     @GCUnsafeCall("Kotlin_NativePtrArray_set")
-    external public operator fun set(index: Int, value: NativePtr): Unit
+    external public operator fun set(index: Int, konstue: NativePtr): Unit
 
-    val size: Int
+    konst size: Int
         get() = getArrayLength()
 
     @GCUnsafeCall("Kotlin_NativePtrArray_getArrayLength")

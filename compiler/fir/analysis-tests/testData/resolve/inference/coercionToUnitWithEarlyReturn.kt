@@ -8,7 +8,7 @@ fun foo(x: () -> Unit) {}
 
 fun main(x: A?) {
 
-    val lambda = l@{
+    konst lambda = l@{
         if (x?.hashCode() == 0) return@l
 
         x?.unit()

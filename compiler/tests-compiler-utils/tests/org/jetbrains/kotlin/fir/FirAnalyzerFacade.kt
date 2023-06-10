@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.sourceFiles.LightTreeFile
 import org.jetbrains.kotlin.test.FirParser
 
 abstract class AbstractFirAnalyzerFacade {
-    abstract val scopeSession: ScopeSession
+    abstract konst scopeSession: ScopeSession
     abstract fun runCheckers(): Map<FirFile, List<KtDiagnostic>>
 
     abstract fun runResolution(): List<FirFile>
@@ -41,28 +41,28 @@ abstract class AbstractFirAnalyzerFacade {
 }
 
 class FirAnalyzerFacade(
-    val session: FirSession,
-    val fir2IrConfiguration: Fir2IrConfiguration,
-    val ktFiles: Collection<KtFile> = emptyList(), // may be empty if light tree mode enabled
-    val lightTreeFiles: Collection<LightTreeFile> = emptyList(), // may be empty if light tree mode disabled
-    val irGeneratorExtensions: Collection<IrGenerationExtension>,
-    val parser: FirParser,
-    val enablePluginPhases: Boolean = false,
-    val diagnosticReporterForLightTree: DiagnosticReporter? = null
+    konst session: FirSession,
+    konst fir2IrConfiguration: Fir2IrConfiguration,
+    konst ktFiles: Collection<KtFile> = emptyList(), // may be empty if light tree mode enabled
+    konst lightTreeFiles: Collection<LightTreeFile> = emptyList(), // may be empty if light tree mode disabled
+    konst irGeneratorExtensions: Collection<IrGenerationExtension>,
+    konst parser: FirParser,
+    konst enablePluginPhases: Boolean = false,
+    konst diagnosticReporterForLightTree: DiagnosticReporter? = null
 ) : AbstractFirAnalyzerFacade() {
     private var firFiles: List<FirFile>? = null
     private var _scopeSession: ScopeSession? = null
-    override val scopeSession: ScopeSession
+    override konst scopeSession: ScopeSession
         get() = _scopeSession!!
 
     private var collectedDiagnostics: Map<FirFile, List<KtDiagnostic>>? = null
 
     private fun buildRawFir() {
         if (firFiles != null) return
-        val firProvider = (session.firProvider as FirProviderImpl)
+        konst firProvider = (session.firProvider as FirProviderImpl)
         firFiles = when (parser) {
             FirParser.LightTree -> {
-                val builder = LightTree2Fir(session, firProvider.kotlinScopeProvider, diagnosticReporterForLightTree)
+                konst builder = LightTree2Fir(session, firProvider.kotlinScopeProvider, diagnosticReporterForLightTree)
                 lightTreeFiles.map {
                     builder.buildFirFile(it.lightTree, it.sourceFile, it.linesMapping).also { firFile ->
                         firProvider.recordFile(firFile)
@@ -70,7 +70,7 @@ class FirAnalyzerFacade(
                 }
             }
             FirParser.Psi -> {
-                val builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
+                konst builder = RawFirBuilder(session, firProvider.kotlinScopeProvider)
                 ktFiles.map {
                     builder.buildFirFile(it).also { firFile ->
                         firProvider.recordFile(firFile)
@@ -83,7 +83,7 @@ class FirAnalyzerFacade(
     override fun runResolution(): List<FirFile> {
         if (firFiles == null) buildRawFir()
         if (_scopeSession != null) return firFiles!!
-        val resolveProcessor = FirTotalResolveProcessor(session)
+        konst resolveProcessor = FirTotalResolveProcessor(session)
         resolveProcessor.process(firFiles!!)
         _scopeSession = resolveProcessor.scopeSession
         return firFiles!!
@@ -92,11 +92,11 @@ class FirAnalyzerFacade(
     override fun runCheckers(): Map<FirFile, List<KtDiagnostic>> {
         if (_scopeSession == null) runResolution()
         if (collectedDiagnostics != null) return collectedDiagnostics!!
-        val collector = FirDiagnosticsCollector.create(session, scopeSession)
+        konst collector = FirDiagnosticsCollector.create(session, scopeSession)
         collectedDiagnostics = buildMap {
             for (file in firFiles!!) {
                 withFileAnalysisExceptionWrapping(file) {
-                    val reporter = DiagnosticReporterFactory.createPendingReporter()
+                    konst reporter = DiagnosticReporterFactory.createPendingReporter()
                     collector.collectDiagnostics(file, reporter)
                     put(file, reporter.diagnostics)
                 }

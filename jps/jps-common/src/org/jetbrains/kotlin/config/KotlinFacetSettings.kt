@@ -19,14 +19,14 @@ import kotlin.reflect.full.findAnnotation
 
 @Deprecated("Use IdePlatformKind instead.", level = DeprecationLevel.ERROR)
 sealed class TargetPlatformKind<out Version : TargetPlatformVersion>(
-    val version: Version,
-    val name: String
+    konst version: Version,
+    konst name: String
 ) : DescriptionAware {
-    override val description = "$name ${version.description}"
+    override konst description = "$name ${version.description}"
 
     class Jvm(version: JvmTarget) : @Suppress("DEPRECATION_ERROR") TargetPlatformKind<JvmTarget>(version, "JVM") {
         companion object {
-            private val JVM_PLATFORMS by lazy { JvmTarget.values().map(::Jvm) }
+            private konst JVM_PLATFORMS by lazy { JvmTarget.konstues().map(::Jvm) }
             operator fun get(version: JvmTarget) = JVM_PLATFORMS[version.ordinal]
         }
     }
@@ -43,17 +43,17 @@ sealed class TargetPlatformKind<out Version : TargetPlatformVersion>(
 }
 
 sealed class VersionView : DescriptionAware {
-    abstract val version: LanguageOrApiVersion
+    abstract konst version: LanguageOrApiVersion
 
     object LatestStable : VersionView() {
-        override val version: LanguageVersion = LanguageVersion.LATEST_STABLE
+        override konst version: LanguageVersion = LanguageVersion.LATEST_STABLE
 
-        override val description: String
+        override konst description: String
             get() = "Latest stable (${version.versionString})"
     }
 
-    class Specific(override val version: LanguageOrApiVersion) : VersionView() {
-        override val description: String
+    class Specific(override konst version: LanguageOrApiVersion) : VersionView() {
+        override konst description: String
             get() = version.description
 
         override fun equals(other: Any?) = other is Specific && version == other.version
@@ -62,9 +62,9 @@ sealed class VersionView : DescriptionAware {
     }
 
     companion object {
-        fun deserialize(value: String?, isAutoAdvance: Boolean): VersionView {
+        fun deserialize(konstue: String?, isAutoAdvance: Boolean): VersionView {
             if (isAutoAdvance) return LatestStable
-            val languageVersion = LanguageVersion.fromVersionString(value)
+            konst languageVersion = LanguageVersion.fromVersionString(konstue)
             return if (languageVersion != null) Specific(languageVersion) else LatestStable
         }
     }
@@ -72,16 +72,16 @@ sealed class VersionView : DescriptionAware {
 
 var CommonCompilerArguments.languageVersionView: VersionView
     get() = VersionView.deserialize(languageVersion, autoAdvanceLanguageVersion)
-    set(value) {
-        languageVersion = value.version.versionString
-        autoAdvanceLanguageVersion = value == VersionView.LatestStable
+    set(konstue) {
+        languageVersion = konstue.version.versionString
+        autoAdvanceLanguageVersion = konstue == VersionView.LatestStable
     }
 
 var CommonCompilerArguments.apiVersionView: VersionView
     get() = VersionView.deserialize(apiVersion, autoAdvanceApiVersion)
-    set(value) {
-        apiVersion = value.version.versionString
-        autoAdvanceApiVersion = value == VersionView.LatestStable
+    set(konstue) {
+        apiVersion = konstue.version.versionString
+        autoAdvanceApiVersion = konstue == VersionView.LatestStable
     }
 
 enum class KotlinModuleKind {
@@ -90,37 +90,37 @@ enum class KotlinModuleKind {
     COMPILATION_AND_SOURCE_SET_HOLDER;
 
     @Deprecated("Use KotlinFacetSettings.mppVersion.isNewMpp")
-    val isNewMPP: Boolean
+    konst isNewMPP: Boolean
         get() = this != DEFAULT
 }
 
-enum class KotlinMultiplatformVersion(val version: Int) {
+enum class KotlinMultiplatformVersion(konst version: Int) {
     M1(1), // the first implementation of MPP. Aka 1.2.0 MPP
     M2(2), // the "New" MPP. Aka 1.3.0 MPP
     M3(3) // the "Hierarchical" MPP.
 }
 
-val KotlinMultiplatformVersion?.isOldMpp: Boolean
+konst KotlinMultiplatformVersion?.isOldMpp: Boolean
     get() = this == KotlinMultiplatformVersion.M1
 
-val KotlinMultiplatformVersion?.isNewMPP: Boolean
+konst KotlinMultiplatformVersion?.isNewMPP: Boolean
     get() = this == KotlinMultiplatformVersion.M2
 
-val KotlinMultiplatformVersion?.isHmpp: Boolean
+konst KotlinMultiplatformVersion?.isHmpp: Boolean
     get() = this == KotlinMultiplatformVersion.M3
 
 interface ExternalSystemRunTask {
-    val taskName: String
-    val externalSystemProjectId: String
-    val targetName: String
-    val kotlinPlatformId: String? //one of id org.jetbrains.kotlin.idea.projectModel.KotlinPlatform
+    konst taskName: String
+    konst externalSystemProjectId: String
+    konst targetName: String
+    konst kotlinPlatformId: String? //one of id org.jetbrains.kotlin.idea.projectModel.KotlinPlatform
 }
 
 data class ExternalSystemTestRunTask(
-    override val taskName: String,
-    override val externalSystemProjectId: String,
-    override val targetName: String,
-    override val kotlinPlatformId: String?,
+    override konst taskName: String,
+    override konst externalSystemProjectId: String,
+    override konst targetName: String,
+    override konst kotlinPlatformId: String?,
 ) : ExternalSystemRunTask {
 
     fun toStringRepresentation() = buildString {
@@ -139,13 +139,13 @@ data class ExternalSystemTestRunTask(
 }
 
 data class ExternalSystemNativeMainRunTask(
-    override val taskName: String,
-    override val externalSystemProjectId: String,
-    override val targetName: String,
-    val entryPoint: String,
-    val debuggable: Boolean,
+    override konst taskName: String,
+    override konst externalSystemProjectId: String,
+    override konst targetName: String,
+    konst entryPoint: String,
+    konst debuggable: Boolean,
 ) : ExternalSystemRunTask {
-    override val kotlinPlatformId = "native"
+    override konst kotlinPlatformId = "native"
 
     fun toStringRepresentation() = "$taskName|$externalSystemProjectId|$targetName|$entryPoint|$debuggable"
 
@@ -160,8 +160,8 @@ data class ExternalSystemNativeMainRunTask(
 class KotlinFacetSettings {
     companion object {
         // Increment this when making serialization-incompatible changes to configuration data
-        val CURRENT_VERSION = 5
-        val DEFAULT_VERSION = 0
+        konst CURRENT_VERSION = 5
+        konst DEFAULT_VERSION = 0
     }
 
     var version = CURRENT_VERSION
@@ -173,8 +173,8 @@ class KotlinFacetSettings {
     // TODO: Workaround for unwanted facet settings modification on code analysis
     // To be replaced with proper API for settings update (see BaseKotlinCompilerSettings as an example)
     fun updateMergedArguments() {
-        val compilerArguments = compilerArguments
-        val compilerSettings = compilerSettings
+        konst compilerArguments = compilerArguments
+        konst compilerSettings = compilerSettings
 
         mergedCompilerArguments = if (compilerArguments != null) {
             compilerArguments.copyOf().apply {
@@ -187,26 +187,26 @@ class KotlinFacetSettings {
     }
 
     var compilerArguments: CommonCompilerArguments? = null
-        set(value) {
-            field = value?.unfrozen()
+        set(konstue) {
+            field = konstue?.unfrozen()
             updateMergedArguments()
         }
 
     var compilerSettings: CompilerSettings? = null
-        set(value) {
-            field = value?.unfrozen()
+        set(konstue) {
+            field = konstue?.unfrozen()
             updateMergedArguments()
         }
 
     /*
-    This function is needed as some setting values may not be present in compilerArguments
+    This function is needed as some setting konstues may not be present in compilerArguments
     but present in additional arguments instead, so we have to check both cases manually
      */
     inline fun <reified A : CommonCompilerArguments> isCompilerSettingPresent(settingReference: KProperty1<A, Boolean>): Boolean {
-        val isEnabledByCompilerArgument = compilerArguments?.safeAs<A>()?.let(settingReference::get)
+        konst isEnabledByCompilerArgument = compilerArguments?.safeAs<A>()?.let(settingReference::get)
         if (isEnabledByCompilerArgument == true) return true
-        val isEnabledByAdditionalSettings = run {
-            val stringArgumentName = settingReference.findAnnotation<Argument>()?.value ?: return@run null
+        konst isEnabledByAdditionalSettings = run {
+            konst stringArgumentName = settingReference.findAnnotation<Argument>()?.konstue ?: return@run null
             compilerSettings?.additionalArguments?.contains(stringArgumentName, ignoreCase = true)
         }
         return isEnabledByAdditionalSettings ?: false
@@ -214,17 +214,17 @@ class KotlinFacetSettings {
 
     var languageLevel: LanguageVersion?
         get() = compilerArguments?.languageVersion?.let { LanguageVersion.fromFullVersionString(it) }
-        set(value) {
+        set(konstue) {
             compilerArguments?.apply {
-                languageVersion = value?.versionString
+                languageVersion = konstue?.versionString
             }
         }
 
     var apiLevel: LanguageVersion?
         get() = compilerArguments?.apiVersion?.let { LanguageVersion.fromFullVersionString(it) }
-        set(value) {
+        set(konstue) {
             compilerArguments?.apply {
-                apiVersion = value?.versionString
+                apiVersion = konstue?.versionString
             }
         }
 
@@ -233,8 +233,8 @@ class KotlinFacetSettings {
             // This work-around is required in order to fix importing of the proper JVM target version and works only
             // for fully actualized JVM target platform
             //TODO(auskov): this hack should be removed after fixing equals in SimplePlatform
-            val args = compilerArguments
-            val singleSimplePlatform = field?.componentPlatforms?.singleOrNull()
+            konst args = compilerArguments
+            konst singleSimplePlatform = field?.componentPlatforms?.singleOrNull()
             if (singleSimplePlatform == JvmPlatforms.defaultJvmPlatform.singleOrNull() && args != null) {
                 return IdePlatformKind.platformByCompilerArguments(args)
             }
@@ -271,7 +271,7 @@ class KotlinFacetSettings {
         @Deprecated(message = "Use mppVersion.isHmppEnabled", ReplaceWith("mppVersion.isHmpp"))
         get
 
-    val mppVersion: KotlinMultiplatformVersion?
+    konst mppVersion: KotlinMultiplatformVersion?
         @Suppress("DEPRECATION")
         get() = when {
             isHmppEnabled -> KotlinMultiplatformVersion.M3

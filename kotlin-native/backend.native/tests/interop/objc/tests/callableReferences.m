@@ -2,7 +2,7 @@
 
 @implementation TestCallableReferences
 - (int)instanceMethod {
-    return self.value;
+    return self.konstue;
 }
 
 + (int)classMethod:(int)first :(int)second {

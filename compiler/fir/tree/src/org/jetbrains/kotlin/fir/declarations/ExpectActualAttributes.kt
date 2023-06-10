@@ -23,7 +23,7 @@ fun FirFunctionSymbol<*>.getSingleCompatibleExpectForActualOrNull() =
     (this as FirBasedSymbol<*>).getSingleCompatibleExpectForActualOrNull() as? FirFunctionSymbol<*>
 
 fun FirBasedSymbol<*>.getSingleCompatibleExpectForActualOrNull(): FirBasedSymbol<*>? {
-    val expectForActual = expectForActual ?: return null
+    konst expectForActual = expectForActual ?: return null
     var compatibleActuals: List<FirBasedSymbol<*>>? = null
     for ((key, item) in expectForActual) {
         if (key.compatible) {
@@ -37,7 +37,7 @@ fun FirBasedSymbol<*>.getSingleCompatibleExpectForActualOrNull(): FirBasedSymbol
     return compatibleActuals?.singleOrNull()
 }
 
-val FirBasedSymbol<*>.expectForActual: ExpectForActualData?
+konst FirBasedSymbol<*>.expectForActual: ExpectForActualData?
     get() {
         lazyResolveToPhase(FirResolvePhase.EXPECT_ACTUAL_MATCHING)
         return fir.expectForActual

@@ -9,9 +9,9 @@ declare namespace JS_TESTS {
         };
         function takesO(o: typeof foo.O): number;
         const WithSimpleObjectInside: {
-            get value(): string;
+            get konstue(): string;
             get SimpleObject(): {
-                get value(): string;
+                get konstue(): string;
             };
         };
         abstract class Parent {
@@ -44,7 +44,7 @@ declare namespace JS_TESTS {
     }
     namespace _objects_ {
         const foo$Parent$Nested1: {
-            get value(): string;
+            get konstue(): string;
         } & {
             new(): any;
         };

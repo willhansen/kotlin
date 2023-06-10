@@ -5,7 +5,7 @@ class Delegate {
 }
 
 class AImpl {
-    val prop: Number by Delegate()
+    konst prop: Number by Delegate()
 }
 
 fun box(): String {

@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.symbols.IrReturnTargetSymbol
  */
 interface IrReturnTarget : IrSymbolOwner {
     @ObsoleteDescriptorBasedAPI
-    val descriptor: FunctionDescriptor
+    konst descriptor: FunctionDescriptor
 
-    override val symbol: IrReturnTargetSymbol
+    override konst symbol: IrReturnTargetSymbol
 }

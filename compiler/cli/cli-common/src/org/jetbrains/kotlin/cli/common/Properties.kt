@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.cli.common
 /**
  * @param alwaysDirectAccess Gradle has a list of properties that can be read without declaring, see https://github.com/gradle/gradle/blob/f191a61cec61afe308f2b45184cb303d32706a6f/subprojects/configuration-cache/src/main/kotlin/org/gradle/configurationcache/SystemPropertyAccessListener.kt#L32
  */
-enum class CompilerSystemProperties(val property: String, val alwaysDirectAccess: Boolean = false) {
+enum class CompilerSystemProperties(konst property: String, konst alwaysDirectAccess: Boolean = false) {
     COMPILE_DAEMON_ENABLED_PROPERTY("kotlin.daemon.enabled"),
     COMPILE_DAEMON_JVM_OPTIONS_PROPERTY("kotlin.daemon.jvm.options"),
     COMPILE_DAEMON_OPTIONS_PROPERTY("kotlin.daemon.options"),
@@ -32,7 +32,7 @@ enum class CompilerSystemProperties(val property: String, val alwaysDirectAccess
     JAVA_RMI_SERVER_HOSTNAME("java.rmi.server.hostname"),
     DAEMON_RMI_SOCKET_BACKLOG_SIZE_PROPERTY("kotlin.daemon.socket.backlog.size"),
     DAEMON_RMI_SOCKET_CONNECT_ATTEMPTS_PROPERTY("kotlin.daemon.socket.connect.attempts"),
-    DAEMON_RMI_SOCKET_CONNECT_INTERVAL_PROPERTY("kotlin.daemon.socket.connect.interval"),
+    DAEMON_RMI_SOCKET_CONNECT_INTERVAL_PROPERTY("kotlin.daemon.socket.connect.interkonst"),
 
     /**
      * Only specify that property if you want to avoid multiple initializations/disposals of KotlinCoreApplicationEnvironment
@@ -63,16 +63,16 @@ enum class CompilerSystemProperties(val property: String, val alwaysDirectAccess
         return custom ?: default
     }
 
-    var value: String?
+    var konstue: String?
         get() {
             return getProperFunction(systemPropertyGetter, System::getProperty)(property)
         }
-        set(value) {
-            getProperFunction(systemPropertySetter, System::setProperty)(property, value!!)
+        set(konstue) {
+            getProperFunction(systemPropertySetter, System::setProperty)(property, konstue!!)
         }
 
-    val safeValue
-        get() = value ?: error("No value for $property system property")
+    konst safeValue
+        get() = konstue ?: error("No konstue for $property system property")
 
     fun clear(): String? = getProperFunction(systemPropertyCleaner, System::clearProperty)(property)
 
@@ -85,8 +85,8 @@ enum class CompilerSystemProperties(val property: String, val alwaysDirectAccess
     }
 }
 
-val isWindows: Boolean
-    get() = CompilerSystemProperties.OS_NAME.value!!.lowercase().startsWith("windows")
+konst isWindows: Boolean
+    get() = CompilerSystemProperties.OS_NAME.konstue!!.lowercase().startsWith("windows")
 
 fun String?.toBooleanLenient(): Boolean? = when (this?.lowercase()) {
     null -> false

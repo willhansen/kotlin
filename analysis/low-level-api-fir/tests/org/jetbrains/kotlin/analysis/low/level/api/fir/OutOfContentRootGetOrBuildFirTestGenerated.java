@@ -791,36 +791,36 @@ public class OutOfContentRootGetOrBuildFirTestGenerated extends AbstractOutOfCon
     }
 
     @Nested
-    @TestMetadata("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode")
+    @TestMetadata("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode")
     @TestDataPath("$PROJECT_ROOT")
-    public class InvalidCode {
+    public class InkonstidCode {
         @Test
-        public void testAllFilesPresentInInvalidCode() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode"), Pattern.compile("^(.+)\\.kt$"), null, true);
+        public void testAllFilesPresentInInkonstidCode() throws Exception {
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode"), Pattern.compile("^(.+)\\.kt$"), null, true);
         }
 
         @Test
         @TestMetadata("delegatedProperty.kt")
         public void testDelegatedProperty() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode/delegatedProperty.kt");
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode/delegatedProperty.kt");
         }
 
         @Test
         @TestMetadata("incompletePropertyWithAnnotation.kt")
         public void testIncompletePropertyWithAnnotation() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode/incompletePropertyWithAnnotation.kt");
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode/incompletePropertyWithAnnotation.kt");
         }
 
         @Test
         @TestMetadata("javaClassLiteral.kt")
         public void testJavaClassLiteral() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode/javaClassLiteral.kt");
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode/javaClassLiteral.kt");
         }
 
         @Test
         @TestMetadata("secondaryConstructor.kt")
         public void testSecondaryConstructor() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/invalidCode/secondaryConstructor.kt");
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/inkonstidCode/secondaryConstructor.kt");
         }
     }
 
@@ -886,27 +886,27 @@ public class OutOfContentRootGetOrBuildFirTestGenerated extends AbstractOutOfCon
         }
 
         @Test
-        @TestMetadata("invalidTypeArgumentsCount.kt")
-        public void testInvalidTypeArgumentsCount() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/invalidTypeArgumentsCount.kt");
+        @TestMetadata("inkonstidTypeArgumentsCount.kt")
+        public void testInkonstidTypeArgumentsCount() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/inkonstidTypeArgumentsCount.kt");
         }
 
         @Test
-        @TestMetadata("invalidTypeArgumentsCountArgument.kt")
-        public void testInvalidTypeArgumentsCountArgument() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/invalidTypeArgumentsCountArgument.kt");
+        @TestMetadata("inkonstidTypeArgumentsCountArgument.kt")
+        public void testInkonstidTypeArgumentsCountArgument() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/inkonstidTypeArgumentsCountArgument.kt");
         }
 
         @Test
-        @TestMetadata("invalidTypeArgumentsCountFirstArgument.kt")
-        public void testInvalidTypeArgumentsCountFirstArgument() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/invalidTypeArgumentsCountFirstArgument.kt");
+        @TestMetadata("inkonstidTypeArgumentsCountFirstArgument.kt")
+        public void testInkonstidTypeArgumentsCountFirstArgument() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/inkonstidTypeArgumentsCountFirstArgument.kt");
         }
 
         @Test
-        @TestMetadata("invalidTypeArgumentsCountLastArgument.kt")
-        public void testInvalidTypeArgumentsCountLastArgument() throws Exception {
-            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/invalidTypeArgumentsCountLastArgument.kt");
+        @TestMetadata("inkonstidTypeArgumentsCountLastArgument.kt")
+        public void testInkonstidTypeArgumentsCountLastArgument() throws Exception {
+            runTest("analysis/low-level-api-fir/testdata/getOrBuildFir/types/inkonstidTypeArgumentsCountLastArgument.kt");
         }
 
         @Test

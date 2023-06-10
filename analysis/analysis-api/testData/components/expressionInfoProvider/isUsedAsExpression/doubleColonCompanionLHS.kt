@@ -1,7 +1,7 @@
 class C {
     companion object {
         fun t() = x
-        val x = 45
+        konst x = 45
     }
 }
 

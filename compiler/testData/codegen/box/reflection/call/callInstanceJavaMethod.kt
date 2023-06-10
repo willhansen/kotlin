@@ -21,7 +21,7 @@ import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val f = J::foo
+    konst f = J::foo
     assertEquals(
             listOf(J::class.java, IntArray::class.java, Array<Any>::class.java, Integer::class.java),
             f.parameters.map { it.type.javaType }

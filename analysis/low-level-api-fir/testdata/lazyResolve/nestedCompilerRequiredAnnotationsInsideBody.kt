@@ -1,9 +1,9 @@
-annotation class Anno(val s: String)
+annotation class Anno(konst s: String)
 
 fun te<caret>st() {
     @Deprecated("FirstClass")
     @Anno("FirstClass")
-    class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") val a: Int) {
+    class FirstClass @Deprecated("constructor") @Anno("constructor") constructor(@Deprecated("constructorProperty") @Anno("constructorProperty") konst a: Int) {
         @Deprecated("memberFunction")
         @Anno("memberFunction")
         fun memberFunction() {
@@ -11,7 +11,7 @@ fun te<caret>st() {
 
         @Deprecated("memberProperty")
         @Anno("memberProperty")
-        val memberProperty = 32
+        konst memberProperty = 32
     }
 
     @Deprecated("anotherFunction")

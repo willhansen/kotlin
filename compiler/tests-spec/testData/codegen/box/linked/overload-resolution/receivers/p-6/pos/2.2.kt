@@ -35,7 +35,7 @@ open class Case1Base {
 }
 
 fun box(): String {
-    val test = Case1()
+    konst test = Case1()
     test.case()
     if (test.isImplicitReceiverCalled && !Case1Base.isCompanionObjectReceiverCalled)
         return "OK"

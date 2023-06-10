@@ -12,25 +12,25 @@ import java.io.File
 import java.util.regex.Pattern
 
 class SingleClassTestModel(
-    val rootFile: File,
-    val filenamePattern: Pattern,
-    val excludePattern: Pattern?,
-    private val checkFilenameStartsLowerCase: Boolean?,
-    private val doTestMethodName: String,
-    private val testClassName: String,
-    val targetBackend: TargetBackend,
-    private val skipIgnored: Boolean,
-    private val testRunnerMethodName: String,
-    private val additionalRunnerArguments: List<String>,
-    override val annotations: List<AnnotationModel>,
-    override val tags: List<String>,
-    private val additionalMethods: Collection<MethodModel>,
+    konst rootFile: File,
+    konst filenamePattern: Pattern,
+    konst excludePattern: Pattern?,
+    private konst checkFilenameStartsLowerCase: Boolean?,
+    private konst doTestMethodName: String,
+    private konst testClassName: String,
+    konst targetBackend: TargetBackend,
+    private konst skipIgnored: Boolean,
+    private konst testRunnerMethodName: String,
+    private konst additionalRunnerArguments: List<String>,
+    override konst annotations: List<AnnotationModel>,
+    override konst tags: List<String>,
+    private konst additionalMethods: Collection<MethodModel>,
 ) : TestClassModel() {
-    override val name: String
+    override konst name: String
         get() = testClassName
 
-    override val methods: Collection<MethodModel> by lazy {
-        val result: MutableList<MethodModel> = ArrayList()
+    override konst methods: Collection<MethodModel> by lazy {
+        konst result: MutableList<MethodModel> = ArrayList()
         result.add(RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName, additionalRunnerArguments))
         result.add(TestAllFilesPresentMethodModel())
         result.addAll(additionalMethods)
@@ -41,14 +41,14 @@ class SingleClassTestModel(
             true
         }
         if (result.any { it is TransformingTestMethodModel && it.shouldBeGenerated() }) {
-            val additionalRunner =
+            konst additionalRunner =
                 RunTestMethodModel(targetBackend, doTestMethodName, testRunnerMethodName, additionalRunnerArguments, withTransformer = true)
             result.add(additionalRunner)
         }
         result.sortedWith { o1: MethodModel, o2: MethodModel -> o1.name.compareTo(o2.name, ignoreCase = true) }
     }
 
-    override val innerTestClasses: Collection<TestClassModel>
+    override konst innerTestClasses: Collection<TestClassModel>
         get() = emptyList()
 
     private fun getTestMethodsFromFile(file: File): Collection<MethodModel> {
@@ -58,29 +58,29 @@ class SingleClassTestModel(
     }
 
     // There's always one test for checking if all tests are present
-    override val isEmpty: Boolean
+    override konst isEmpty: Boolean
         get() = methods.size <= 1
-    override val dataString: String = KtTestUtil.getFilePath(rootFile)
-    override val dataPathRoot: String = "\$PROJECT_ROOT"
+    override konst dataString: String = KtTestUtil.getFilePath(rootFile)
+    override konst dataPathRoot: String = "\$PROJECT_ROOT"
 
     object AllFilesPresentedMethodKind : MethodModel.Kind()
 
     inner class TestAllFilesPresentMethodModel : MethodModel {
-        override val name: String = "testAllFilesPresentIn$testClassName"
-        override val dataString: String?
+        override konst name: String = "testAllFilesPresentIn$testClassName"
+        override konst dataString: String?
             get() = null
 
-        val classModel: SingleClassTestModel
+        konst classModel: SingleClassTestModel
             get() = this@SingleClassTestModel
 
-        override val kind: MethodModel.Kind
+        override konst kind: MethodModel.Kind
             get() = AllFilesPresentedMethodKind
 
         override fun shouldBeGenerated(): Boolean {
             return true
         }
 
-        override val tags: List<String>
+        override konst tags: List<String>
             get() = emptyList()
     }
 }

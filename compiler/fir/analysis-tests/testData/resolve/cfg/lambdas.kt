@@ -13,7 +13,7 @@ fun test_1(x: Any?) {
 
 fun test_2(x: Any?) {
     if (x is Int) {
-        val lambda = {
+        konst lambda = {
             x.inc()
         }
     }

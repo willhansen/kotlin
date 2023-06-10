@@ -15,10 +15,10 @@ import org.jetbrains.kotlin.backend.konan.llvm.*
  *
  * [finishModule] must be called exactly once after all required data was generated.
  */
-internal class ObjCDataGenerator(val codegen: CodeGenerator) {
+internal class ObjCDataGenerator(konst codegen: CodeGenerator) {
 
-    val context = codegen.context
-    val llvm = codegen.llvm
+    konst context = codegen.context
+    konst llvm = codegen.llvm
 
     fun finishModule() {
         addModuleClassList(
@@ -28,12 +28,12 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         )
     }
 
-    private val selectorRefs = mutableMapOf<String, ConstPointer>()
-    private val classRefs = mutableMapOf<String, ConstPointer>()
+    private konst selectorRefs = mutableMapOf<String, ConstPointer>()
+    private konst classRefs = mutableMapOf<String, ConstPointer>()
 
     fun genSelectorRef(selector: String): ConstPointer = selectorRefs.getOrPut(selector) {
-        val literal = selectors.get(selector)
-        val global = codegen.staticData.placeGlobal("OBJC_SELECTOR_REFERENCES_", literal)
+        konst literal = selectors.get(selector)
+        konst global = codegen.staticData.placeGlobal("OBJC_SELECTOR_REFERENCES_", literal)
         global.setLinkage(LLVMLinkage.LLVMPrivateLinkage)
         LLVMSetExternallyInitialized(global.llvmGlobal, 1)
         global.setAlignment(codegen.runtime.pointerAlignment)
@@ -45,8 +45,8 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
     }
 
     fun genClassRef(name: String): ConstPointer = classRefs.getOrPut(name) {
-        val classGlobal = getClassGlobal(name, isMetaclass = false)
-        val global = codegen.staticData.placeGlobal("OBJC_CLASSLIST_REFERENCES_\$_", classGlobal).also {
+        konst classGlobal = getClassGlobal(name, isMetaclass = false)
+        konst global = codegen.staticData.placeGlobal("OBJC_CLASSLIST_REFERENCES_\$_", classGlobal).also {
             it.setLinkage(LLVMLinkage.LLVMPrivateLinkage)
             it.setSection("__DATA,__objc_classrefs,regular,no_dead_strip")
             it.setAlignment(codegen.runtime.pointerAlignment)
@@ -57,7 +57,7 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         global.pointer.bitcast(pointerType(llvm.int8PtrType))
     }
 
-    private val classObjectType = codegen.runtime.objCClassObjectType
+    private konst classObjectType = codegen.runtime.objCClassObjectType
 
     fun exportClass(name: String) {
         llvm.usedGlobals += getClassGlobal(name, isMetaclass = false).llvm
@@ -65,22 +65,22 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
     }
 
     private fun getClassGlobal(name: String, isMetaclass: Boolean): ConstPointer {
-        val prefix = if (isMetaclass) {
+        konst prefix = if (isMetaclass) {
             "OBJC_METACLASS_\$_"
         } else {
             "OBJC_CLASS_\$_"
         }
 
-        val globalName = prefix + name
+        konst globalName = prefix + name
 
         // TODO: refactor usages and use [Global] class.
-        val llvmGlobal = LLVMGetNamedGlobal(llvm.module, globalName)
+        konst llvmGlobal = LLVMGetNamedGlobal(llvm.module, globalName)
                 ?: codegen.importObjCGlobal(globalName, classObjectType)
 
         return constPointer(llvmGlobal)
     }
 
-    private val emptyCache = constPointer(
+    private konst emptyCache = constPointer(
             codegen.importObjCGlobal("_objc_empty_cache", codegen.runtime.objCCache)
     )
 
@@ -88,35 +88,35 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         emitClass(name, superName, instanceMethods = emptyList())
     }
 
-    class Method(val selector: String, val encoding: String, val imp: ConstPointer)
+    class Method(konst selector: String, konst encoding: String, konst imp: ConstPointer)
 
     fun emitClass(name: String, superName: String, instanceMethods: List<Method>) {
-        val runtime = llvm.runtime
+        konst runtime = llvm.runtime
 
-        val classRoType = runtime.objCClassRoType
-        val methodType = runtime.objCMethodType
-        val methodListType = runtime.objCMethodListType
-        val protocolListType = runtime.objCProtocolListType
-        val ivarListType = runtime.objCIVarListType
-        val propListType = runtime.objCPropListType
+        konst classRoType = runtime.objCClassRoType
+        konst methodType = runtime.objCMethodType
+        konst methodListType = runtime.objCMethodListType
+        konst protocolListType = runtime.objCProtocolListType
+        konst ivarListType = runtime.objCIVarListType
+        konst propListType = runtime.objCPropListType
 
-        val classNameLiteral = classNames.get(name)
+        konst classNameLiteral = classNames.get(name)
 
         fun emitInstanceMethodList(): ConstPointer {
             if (instanceMethods.isEmpty()) return NullPointer(methodListType)
 
-            val methodStructs = instanceMethods.map {
+            konst methodStructs = instanceMethods.map {
                 Struct(methodType, selectors.get(it.selector), encodings.get(it.encoding), it.imp.bitcast(llvm.int8PtrType))
             }
 
-            val methodList = llvm.struct(
+            konst methodList = llvm.struct(
                     llvm.constInt32(LLVMABISizeOfType(codegen.llvmTargetData, methodType).toInt()),
                     llvm.constInt32(instanceMethods.size),
                     ConstArray(methodType, methodStructs)
             )
 
-            val globalName = "\u0001l_OBJC_\$_INSTANCE_METHODS_$name"
-            val global = codegen.staticData.placeGlobal(globalName, methodList).also {
+            konst globalName = "\u0001l_OBJC_\$_INSTANCE_METHODS_$name"
+            konst global = codegen.staticData.placeGlobal(globalName, methodList).also {
                 it.setLinkage(LLVMLinkage.LLVMPrivateLinkage)
                 it.setAlignment(runtime.pointerAlignment)
                 it.setSection("__DATA, __objc_const")
@@ -130,10 +130,10 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         fun buildClassRo(isMetaclass: Boolean): ConstPointer {
             // TODO: add NonFragileABI_Class_CompiledByARC flag?
 
-            val flags: Int
-            val start: Int
-            val size: Int
-            // TODO: stop using hard-coded values.
+            konst flags: Int
+            konst start: Int
+            konst size: Int
+            // TODO: stop using hard-coded konstues.
             if (isMetaclass) {
                 flags = 1
                 start = 40
@@ -144,7 +144,7 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
                 size = 8
             }
 
-            val fields = mutableListOf<ConstValue>()
+            konst fields = mutableListOf<ConstValue>()
 
             fields += llvm.constInt32(flags)
             fields += llvm.constInt32(start)
@@ -157,15 +157,15 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
             fields += NullPointer(llvm.int8Type) // ivar layout
             fields += NullPointer(propListType)
 
-            val roValue = Struct(classRoType, fields)
+            konst roValue = Struct(classRoType, fields)
 
-            val roLabel = if (isMetaclass) {
+            konst roLabel = if (isMetaclass) {
                 "\u0001l_OBJC_METACLASS_RO_\$_"
             } else {
                 "\u0001l_OBJC_CLASS_RO_\$_"
             } + name
 
-            val roGlobal = codegen.staticData.placeGlobal(roLabel, roValue).also {
+            konst roGlobal = codegen.staticData.placeGlobal(roLabel, roValue).also {
                 it.setLinkage(LLVMLinkage.LLVMPrivateLinkage)
                 it.setAlignment(runtime.pointerAlignment)
                 it.setSection("__DATA, __objc_const")
@@ -180,17 +180,17 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
                 superClass: ConstPointer,
                 classRo: ConstPointer
         ): ConstPointer {
-            val fields = mutableListOf<ConstValue>()
+            konst fields = mutableListOf<ConstValue>()
 
             fields += isa
             fields += superClass
             fields += emptyCache
-            val vtableEntryType = pointerType(functionType(llvm.int8PtrType, false, llvm.int8PtrType, llvm.int8PtrType))
+            konst vtableEntryType = pointerType(functionType(llvm.int8PtrType, false, llvm.int8PtrType, llvm.int8PtrType))
             fields += NullPointer(vtableEntryType) // empty vtable
             fields += classRo
 
-            val classObjectValue = Struct(classObjectType, fields)
-            val classGlobal = getClassGlobal(name, isMetaclass = isMetaclass)
+            konst classObjectValue = Struct(classObjectType, fields)
+            konst classGlobal = getClassGlobal(name, isMetaclass = isMetaclass)
 
             LLVMSetInitializer(classGlobal.llvm, classObjectValue.llvm)
             LLVMSetSection(classGlobal.llvm, "__DATA, __objc_data")
@@ -201,14 +201,14 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
             return classGlobal
         }
 
-        val metaclassObject = buildClassObject(
+        konst metaclassObject = buildClassObject(
                 isMetaclass = true,
                 isa = getClassGlobal("NSObject", isMetaclass = true),
                 superClass = getClassGlobal(superName, isMetaclass = true),
                 classRo = buildClassRo(isMetaclass = true)
         )
 
-        val classObject = buildClassObject(
+        konst classObject = buildClassObject(
                 isMetaclass = false,
                 isa = metaclassObject,
                 superClass = getClassGlobal(superName, isMetaclass = false),
@@ -218,12 +218,12 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         definedClasses.add(classObject)
     }
 
-    private val definedClasses = mutableListOf<ConstPointer>()
+    private konst definedClasses = mutableListOf<ConstPointer>()
 
     private fun addModuleClassList(elements: List<ConstPointer>, name: String, section: String) {
         if (elements.isEmpty()) return
 
-        val global = codegen.staticData.placeGlobalArray(
+        konst global = codegen.staticData.placeGlobalArray(
                 name,
                 llvm.int8PtrType,
                 elements.map { it.bitcast(llvm.int8PtrType) }
@@ -241,39 +241,39 @@ internal class ObjCDataGenerator(val codegen: CodeGenerator) {
         llvm.compilerUsedGlobals += global.llvmGlobal
     }
 
-    private val classNames = CStringLiteralsTable(classNameGenerator)
+    private konst classNames = CStringLiteralsTable(classNameGenerator)
 
-    private val selectors = CStringLiteralsTable(selectorGenerator)
+    private konst selectors = CStringLiteralsTable(selectorGenerator)
 
-    private val encodings = CStringLiteralsTable(encodingGenerator)
+    private konst encodings = CStringLiteralsTable(encodingGenerator)
 
-    private inner class CStringLiteralsTable(val generator: CStringLiteralsGenerator) {
+    private inner class CStringLiteralsTable(konst generator: CStringLiteralsGenerator) {
 
-        private val literals = mutableMapOf<String, ConstPointer>()
+        private konst literals = mutableMapOf<String, ConstPointer>()
 
-        fun get(value: String) = literals.getOrPut(value) {
-            val globalPointer = generator.generate(llvm.module, llvm, value)
+        fun get(konstue: String) = literals.getOrPut(konstue) {
+            konst globalPointer = generator.generate(llvm.module, llvm, konstue)
             llvm.compilerUsedGlobals += globalPointer.llvm
             globalPointer.getElementPtr(llvm, 0)
         }
     }
 
     companion object {
-        val classNameGenerator =
+        konst classNameGenerator =
                 CStringLiteralsGenerator("OBJC_CLASS_NAME_", "__TEXT,__objc_classname,cstring_literals")
 
-        val selectorGenerator =
+        konst selectorGenerator =
                 CStringLiteralsGenerator("OBJC_METH_VAR_NAME_",  "__TEXT,__objc_methname,cstring_literals")
 
-        private val encodingGenerator =
+        private konst encodingGenerator =
                 CStringLiteralsGenerator("OBJC_METH_VAR_TYPE_", "__TEXT,__objc_methtype,cstring_literals")
     }
 
-    class CStringLiteralsGenerator(val label: String, val section: String) {
-        fun generate(module: LLVMModuleRef, llvm: CodegenLlvmHelpers, value: String): ConstPointer {
-            val bytes = value.toByteArray(Charsets.UTF_8).map { llvm.constInt8(it) } + llvm.constInt8(0)
-            val initializer = ConstArray(llvm.int8Type, bytes)
-            val llvmGlobal = LLVMAddGlobal(module, initializer.llvmType, label)!!
+    class CStringLiteralsGenerator(konst label: String, konst section: String) {
+        fun generate(module: LLVMModuleRef, llvm: CodegenLlvmHelpers, konstue: String): ConstPointer {
+            konst bytes = konstue.toByteArray(Charsets.UTF_8).map { llvm.constInt8(it) } + llvm.constInt8(0)
+            konst initializer = ConstArray(llvm.int8Type, bytes)
+            konst llvmGlobal = LLVMAddGlobal(module, initializer.llvmType, label)!!
             LLVMSetInitializer(llvmGlobal, initializer.llvm)
 
             LLVMSetGlobalConstant(llvmGlobal, 1)

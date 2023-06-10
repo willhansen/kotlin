@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.types.KotlinType
 
 interface ExpressionReceiver : ReceiverValue {
-    val expression: KtExpression
+    konst expression: KtExpression
 
     companion object {
         private open class ExpressionReceiverImpl(
-            override val expression: KtExpression, type: KotlinType, original: ReceiverValue?
+            override konst expression: KtExpression, type: KotlinType, original: ReceiverValue?
         ) : AbstractReceiverValue(type, original), ExpressionReceiver {
             override fun replaceType(newType: KotlinType) = ExpressionReceiverImpl(expression, newType, original)
 
@@ -34,7 +34,7 @@ interface ExpressionReceiver : ReceiverValue {
         }
 
         private class ThisExpressionClassReceiver(
-            override val classDescriptor: ClassDescriptor,
+            override konst classDescriptor: ClassDescriptor,
             expression: KtExpression,
             type: KotlinType,
             original: ReceiverValue?
@@ -43,7 +43,7 @@ interface ExpressionReceiver : ReceiverValue {
         }
 
         private class SuperExpressionReceiver(
-            override val thisType: KotlinType,
+            override konst thisType: KotlinType,
             expression: KtExpression,
             type: KotlinType,
             original: ReceiverValue?
@@ -64,7 +64,7 @@ interface ExpressionReceiver : ReceiverValue {
             }
 
             if (referenceExpression != null) {
-                val descriptor = bindingContext.get(BindingContext.REFERENCE_TARGET, referenceExpression)
+                konst descriptor = bindingContext.get(BindingContext.REFERENCE_TARGET, referenceExpression)
                 if (descriptor is ClassDescriptor && !referenceExpression.isContextClassReceiverReference(bindingContext)) {
                     return ThisExpressionClassReceiver(descriptor.original, expression, type, original = null)
                 }
@@ -80,6 +80,6 @@ interface ExpressionReceiver : ReceiverValue {
         }
 
         private fun KtReferenceExpression.isContextClassReceiverReference(bindingContext: BindingContext): Boolean =
-            bindingContext[BindingContext.THIS_REFERENCE_TARGET, this]?.value is ContextClassReceiver
+            bindingContext[BindingContext.THIS_REFERENCE_TARGET, this]?.konstue is ContextClassReceiver
     }
 }

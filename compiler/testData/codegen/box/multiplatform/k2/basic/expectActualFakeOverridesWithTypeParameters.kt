@@ -10,7 +10,7 @@ expect open class A<S>() {
 
     fun g(s: S): S
 
-    val <S> S.p: S
+    konst <S> S.p: S
 }
 
 class B : A<String>()
@@ -25,7 +25,7 @@ actual open class A<S> {
 
     actual fun g(s: S): S = s.p
 
-    actual val <S> S.p: S get() = this
+    actual konst <S> S.p: S get() = this
 }
 
 fun box() = foo(B())

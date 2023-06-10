@@ -4,7 +4,7 @@ KtFile: FunctionExpressions.kt
   IMPORT_LIST
     <empty list>
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -18,7 +18,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -33,7 +33,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -53,7 +53,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(RPAR)(')')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -100,7 +100,7 @@ KtFile: FunctionExpressions.kt
             PsiElement(IDENTIFIER)('bar')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -148,7 +148,7 @@ KtFile: FunctionExpressions.kt
             PsiElement(IDENTIFIER)('bar')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -425,7 +425,7 @@ KtFile: FunctionExpressions.kt
       PsiElement(SEMICOLON)(';')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('d')
     PsiWhiteSpace(' ')
@@ -444,7 +444,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('d')
     PsiWhiteSpace(' ')
@@ -464,7 +464,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(IDENTIFIER)('a')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('a')
     PsiWhiteSpace(' ')
@@ -490,7 +490,7 @@ KtFile: FunctionExpressions.kt
         PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('b')
     PsiWhiteSpace(' ')

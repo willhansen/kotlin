@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 interface FirTypeParametersOwnerBuilder {
     abstract var source: KtSourceElement?
-    abstract val typeParameters: MutableList<FirTypeParameter>
+    abstract konst typeParameters: MutableList<FirTypeParameter>
 
     fun build(): FirTypeParametersOwner
 }

@@ -28,21 +28,21 @@ abstract class AbstractAnalysisApiSpecificAnnotationOnDeclarationTest : Abstract
     }
 
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val ktDeclaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
-        val classIdString = module.directives.singleValue(Directives.CLASS_ID)
+        konst ktDeclaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
+        konst classIdString = module.directives.singleValue(Directives.CLASS_ID)
 
-        val actual = analyseForTest(ktDeclaration) {
-            val declarationSymbol = ktDeclaration.getSymbol() as KtAnnotatedSymbol
-            val annotationList = declarationSymbol.annotationsList
-            val classId = ClassId.fromString(classIdString)
-            val renderer = DebugSymbolRenderer()
+        konst actual = analyseForTest(ktDeclaration) {
+            konst declarationSymbol = ktDeclaration.getSymbol() as KtAnnotatedSymbol
+            konst annotationList = declarationSymbol.annotationsList
+            konst classId = ClassId.fromString(classIdString)
+            konst renderer = DebugSymbolRenderer()
             fun renderAnnotation(application: KtAnnotationApplication): String = buildString {
                 appendLine("KtDeclaration: ${ktDeclaration::class.simpleName} ${ktDeclaration.name}")
                 append(renderer.renderAnnotationApplication(application))
             }
 
-            val rawList = renderAnnotation(annotationList.annotationsByClassId(classId).single())
-            val resolvedList = renderAnnotation(annotationList.annotations.single { it.classId == classId })
+            konst rawList = renderAnnotation(annotationList.annotationsByClassId(classId).single())
+            konst resolvedList = renderAnnotation(annotationList.annotations.single { it.classId == classId })
             testServices.assertions.assertEquals(resolvedList, rawList) {
                 "Result before and after resolve are different"
             }
@@ -54,7 +54,7 @@ abstract class AbstractAnalysisApiSpecificAnnotationOnDeclarationTest : Abstract
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val CLASS_ID by stringDirective("ClassId of expected annotation")
+        konst CLASS_ID by stringDirective("ClassId of expected annotation")
     }
 }
 

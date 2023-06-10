@@ -13,21 +13,21 @@ import java.lang.invoke.WrongMethodTypeException
 fun foo(vararg args: Any?): Any? = args[0]
 
 fun box(): String {
-    val mh = MethodHandles.lookup().findStatic(
+    konst mh = MethodHandles.lookup().findStatic(
         object {}::class.java.enclosingClass, "foo",
         MethodType.methodType(Any::class.java, Array<Any>::class.java)
     )
 
-    val args = arrayOf("aaa", 1)
+    konst args = arrayOf("aaa", 1)
 
-    val r1 = mh.invokeExact(args)
+    konst r1 = mh.invokeExact(args)
     if (r1 != "aaa") return "Fail 1: $r1"
 
     // Spread operator is prohibited for arguments to signature-polymorphic calls
-    // val r2 = mh.invokeExact(*args)
+    // konst r2 = mh.invokeExact(*args)
     // if (r2 != "aaa") return "Fail 2: $r2"
 
-    val r3 = mh.invokeExact(arrayOf(args) as Array<*>)
+    konst r3 = mh.invokeExact(arrayOf(args) as Array<*>)
     if (r3 !is Array<*> || !r3.contentEquals(args)) return "Fail 3: $r3"
 
     try {
@@ -37,16 +37,16 @@ fun box(): String {
         // OK
     }
 
-    val r5 = mh.invoke(args)
+    konst r5 = mh.invoke(args)
     if (r5 != "aaa") return "Fail 5: $r5"
 
-    // val r6 = mh.invoke(*args)
+    // konst r6 = mh.invoke(*args)
     // if (r6 != "aaa") return "Fail 6: $r6"
 
-    val r7 = mh.invoke(arrayOf(args) as Array<*>)
+    konst r7 = mh.invoke(arrayOf(args) as Array<*>)
     if (r7 !is Array<*> || !r7.contentEquals(args)) return "Fail 7: $r7"
 
-    val r8 = mh.invoke(arrayOf(args))
+    konst r8 = mh.invoke(arrayOf(args))
     if (r8 !is Array<*> || !r8.contentEquals(args)) return "Fail 8: $r8"
 
     // The next two calls check behavior in a statement context (where the call result is not used)

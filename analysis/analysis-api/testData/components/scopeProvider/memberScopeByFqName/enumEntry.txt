@@ -38,7 +38,7 @@ KtKotlinPropertySymbol:
       type: kotlin/String
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getDispatchReceiver(): KtUsualClassType:
       annotationsList: []
@@ -106,7 +106,7 @@ KtFunctionSymbol:
     type: kotlin/Any
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Protected
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -144,7 +144,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -201,7 +201,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -262,7 +262,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -300,7 +300,7 @@ KtFunctionSymbol:
     type: kotlin/String
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -315,7 +315,7 @@ KtFunctionSymbol:
 
 KtKotlinPropertySymbol:
   annotationsList: [
-    kotlin/internal/IntrinsicConstEvaluation()
+    kotlin/internal/IntrinsicConstEkonstuation()
       psi: null
   ]
   backingFieldSymbol: KtBackingFieldSymbol:
@@ -462,7 +462,7 @@ KtFunctionSymbol:
     type: ft<java/lang/Class<test/E!>, java/lang/Class<test/E!>?>
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []
@@ -496,7 +496,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: ProtectedAndPackage
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []

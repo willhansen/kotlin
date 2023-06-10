@@ -3,12 +3,12 @@
 // TARGET_BACKEND: JVM_IR
 
 @JvmInline
-value class A(val x: Int) {
+konstue class A(konst x: Int) {
     operator fun equals(other: A) = x % 5 == other.x % 5
 }
 
 @JvmInline
-value class B(val x: A)
+konstue class B(konst x: A)
 
 fun box() = if (B(A(0)) == B(A(5))) "OK" else "Fail"
 

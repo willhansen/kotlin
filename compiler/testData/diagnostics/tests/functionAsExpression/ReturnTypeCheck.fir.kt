@@ -1,4 +1,4 @@
-val foo = fun(a: Int): String {
+konst foo = fun(a: Int): String {
     if (a == 1) return "4"
     when (a) {
         5 -> return "2"

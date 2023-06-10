@@ -25,7 +25,7 @@ class KtPlaceHolderWithTextStubElementType<T : KtElementImplStub<out StubElement
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>): KotlinPlaceHolderWithTextStub<T> {
-        val text = dataStream.readUTFFast()
+        konst text = dataStream.readUTFFast()
         return KotlinPlaceHolderWithTextStubImpl(parentStub, this, text)
     }
 }

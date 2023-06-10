@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.resolve.jvm.modules.JavaModuleResolver
 import java.io.File
 
 interface AbstractProjectFileSearchScope {
-    val isEmpty: Boolean
+    konst isEmpty: Boolean
 
     operator fun minus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope
 
@@ -25,14 +25,14 @@ interface AbstractProjectFileSearchScope {
 
 
     object EMPTY : AbstractProjectFileSearchScope {
-        override val isEmpty: Boolean = true
+        override konst isEmpty: Boolean = true
         override fun minus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope = this
         override fun plus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope = other
         override fun not(): AbstractProjectFileSearchScope = ANY
     }
 
     object ANY : AbstractProjectFileSearchScope {
-        override val isEmpty: Boolean = false
+        override konst isEmpty: Boolean = false
         override fun minus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope = error("Operation not implemented")
         override fun plus(other: AbstractProjectFileSearchScope): AbstractProjectFileSearchScope = this
         override fun not(): AbstractProjectFileSearchScope = EMPTY

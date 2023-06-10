@@ -30,8 +30,8 @@ object FirPropertyAccessorsTypesChecker : FirPropertyChecker() {
     }
 
     private fun checkGetter(property: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val getter = property.getter ?: return
-        val propertyType = property.returnTypeRef.coneType
+        konst getter = property.getter ?: return
+        konst propertyType = property.returnTypeRef.coneType
 
         checkAccessorForDelegatedProperty(property, getter, context, reporter)
 
@@ -46,23 +46,23 @@ object FirPropertyAccessorsTypesChecker : FirPropertyChecker() {
                 reporter.reportOn(getter.source, FirErrors.ABSTRACT_PROPERTY_WITH_GETTER, context)
             }
         }
-        val getterReturnTypeRef = getter.returnTypeRef
+        konst getterReturnTypeRef = getter.returnTypeRef
         if (getterReturnTypeRef.source?.kind is KtFakeSourceElementKind) {
             return
         }
-        val getterReturnType = getterReturnTypeRef.coneType
+        konst getterReturnType = getterReturnTypeRef.coneType
         if (propertyType is ConeErrorType || getterReturnType is ConeErrorType) {
             return
         }
         if (getterReturnType != property.returnTypeRef.coneType) {
-            val getterReturnTypeSource = getterReturnTypeRef.source
+            konst getterReturnTypeSource = getterReturnTypeRef.source
             reporter.reportOn(getterReturnTypeSource, FirErrors.WRONG_GETTER_RETURN_TYPE, propertyType, getterReturnType, context)
         }
     }
 
     private fun checkSetter(property: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val setter = property.setter ?: return
-        val propertyType = property.returnTypeRef.coneType
+        konst setter = property.setter ?: return
+        konst propertyType = property.returnTypeRef.coneType
 
         if (property.isVal) {
             reporter.reportOn(setter.source, FirErrors.VAL_WITH_SETTER, context)
@@ -72,12 +72,12 @@ object FirPropertyAccessorsTypesChecker : FirPropertyChecker() {
         if (setter.isImplicitDelegateAccessor()) {
             return
         }
-        val visibilityCompareResult = setter.visibility.compareTo(property.visibility)
+        konst visibilityCompareResult = setter.visibility.compareTo(property.visibility)
         if (visibilityCompareResult == null || visibilityCompareResult > 0) {
             reporter.reportOn(setter.source, FirErrors.SETTER_VISIBILITY_INCONSISTENT_WITH_PROPERTY_VISIBILITY, context)
         }
         if (property.symbol.callableId.classId != null && property.delegate == null) {
-            val isLegallyAbstract = isLegallyAbstract(property, context)
+            konst isLegallyAbstract = isLegallyAbstract(property, context)
             if (setter.visibility == Visibilities.Private && property.visibility != Visibilities.Private) {
                 if (isLegallyAbstract) {
                     reporter.reportOn(setter.source, FirErrors.PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY, context)
@@ -90,21 +90,21 @@ object FirPropertyAccessorsTypesChecker : FirPropertyChecker() {
             }
         }
 
-        val valueSetterParameter = setter.valueParameters.first()
-        if (valueSetterParameter.isVararg) {
+        konst konstueSetterParameter = setter.konstueParameters.first()
+        if (konstueSetterParameter.isVararg) {
             return
         }
-        val valueSetterType = valueSetterParameter.returnTypeRef.coneType
-        val valueSetterTypeSource = valueSetterParameter.returnTypeRef.source
-        if (propertyType is ConeErrorType || valueSetterType is ConeErrorType) {
+        konst konstueSetterType = konstueSetterParameter.returnTypeRef.coneType
+        konst konstueSetterTypeSource = konstueSetterParameter.returnTypeRef.source
+        if (propertyType is ConeErrorType || konstueSetterType is ConeErrorType) {
             return
         }
 
-        if (valueSetterType != propertyType && !valueSetterType.hasError()) {
-            reporter.reportOn(valueSetterTypeSource, FirErrors.WRONG_SETTER_PARAMETER_TYPE, propertyType, valueSetterType, context)
+        if (konstueSetterType != propertyType && !konstueSetterType.hasError()) {
+            reporter.reportOn(konstueSetterTypeSource, FirErrors.WRONG_SETTER_PARAMETER_TYPE, propertyType, konstueSetterType, context)
         }
 
-        val setterReturnType = setter.returnTypeRef.coneType
+        konst setterReturnType = setter.returnTypeRef.coneType
 
         if (!setterReturnType.isUnit) {
             reporter.reportOn(setter.returnTypeRef.source, FirErrors.WRONG_SETTER_RETURN_TYPE, context)

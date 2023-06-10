@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.resolve.checkSinceKotlinVersionAccessibility
 
 object ApiVersionClassifierUsageChecker : ClassifierUsageChecker {
     override fun check(targetDescriptor: ClassifierDescriptor, element: PsiElement, context: ClassifierUsageCheckerContext) {
-        val accessibility = targetDescriptor.checkSinceKotlinVersionAccessibility(context.languageVersionSettings)
+        konst accessibility = targetDescriptor.checkSinceKotlinVersionAccessibility(context.languageVersionSettings)
         if (accessibility is SinceKotlinAccessibility.NotAccessible) {
             context.trace.report(
                 Errors.API_NOT_AVAILABLE.on(

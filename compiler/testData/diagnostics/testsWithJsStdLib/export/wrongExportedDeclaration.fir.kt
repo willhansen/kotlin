@@ -11,7 +11,7 @@ inline fun <reified T> inlineReifiedFun(x: Any)<!> = x is T
 suspend fun suspendFun()<!> { }
 
 <!WRONG_EXPORTED_DECLARATION("extension property")!>@JsExport
-val String.extensionProperty<!>
+konst String.extensionProperty<!>
     get() = this.length
 
 @JsExport
@@ -36,13 +36,13 @@ interface OuterInterface {
 }
 
 @JsExport
-value class <!WRONG_EXPORTED_DECLARATION("value class")!>A(val a: Int)<!>
+konstue class <!WRONG_EXPORTED_DECLARATION("konstue class")!>A(konst a: Int)<!>
 
 @JsExport
-inline class <!WRONG_EXPORTED_DECLARATION("value class")!>B(val b: Int)<!>
+inline class <!WRONG_EXPORTED_DECLARATION("konstue class")!>B(konst b: Int)<!>
 
 @JsExport
-inline value class <!WRONG_EXPORTED_DECLARATION("value class")!>C(val c: Int)<!>
+inline konstue class <!WRONG_EXPORTED_DECLARATION("konstue class")!>C(konst c: Int)<!>
 
 @JsExport
-value inline class <!WRONG_EXPORTED_DECLARATION("value class")!>D(val d: Int)<!>
+konstue inline class <!WRONG_EXPORTED_DECLARATION("konstue class")!>D(konst d: Int)<!>

@@ -14,7 +14,7 @@ inline fun <T> T.testApplyToExtensionReceiver(block: T.() -> Unit): T {
     return this
 }
 
-class StringWrapper(val s: String) {
+class StringWrapper(konst s: String) {
     inline fun testApplyToDispatchReceiver(block: StringWrapper.() -> Unit): String {
         block()
         return s
@@ -28,48 +28,48 @@ inline fun <T> testApplyToArg0(args: T, block: T.() -> Unit): T {
 
 // FILE: testClass.kt
 class TestClass {
-    val testExtensionReceiver = functionWithLambda { strArg: String ->
-        val anonymousObj = genericFunctionWithLambda {
+    konst testExtensionReceiver = functionWithLambda { strArg: String ->
+        konst anonymousObj = genericFunctionWithLambda {
             strArg.testLet {
                 object {
-                    val strField = it
+                    konst strField = it
                 }
             }
         }
         anonymousObj.strField
     }.testApplyToExtensionReceiver {}
 
-    val testDispatchReceiver = functionWithLambda { strArg: StringWrapper ->
-        val anonymousObj = genericFunctionWithLambda {
+    konst testDispatchReceiver = functionWithLambda { strArg: StringWrapper ->
+        konst anonymousObj = genericFunctionWithLambda {
             strArg.testLet {
                 object {
-                    val strField = it
+                    konst strField = it
                 }
             }
         }
         anonymousObj.strField
     }.testApplyToDispatchReceiver {}
 
-    val testArg0 = testApplyToArg0(functionWithLambda { strArg: String ->
-        val anonymousObj = genericFunctionWithLambda {
+    konst testArg0 = testApplyToArg0(functionWithLambda { strArg: String ->
+        konst anonymousObj = genericFunctionWithLambda {
             strArg.testLet {
                 object {
-                    val strField = it
+                    konst strField = it
                 }
             }
         }
         anonymousObj.strField
     }) {}
 
-    val testChain = functionWithLambda { strArg: String ->
-        val anonymousObj = genericFunctionWithLambda {
+    konst testChain = functionWithLambda { strArg: String ->
+        konst anonymousObj = genericFunctionWithLambda {
             strArg.testLet {
                 object {
-                    val strField1 = it
+                    konst strField1 = it
                 }
             }.testLet {
                 object {
-                    val strField2 = it.strField1
+                    konst strField2 = it.strField1
                 }
             }
         }
@@ -79,7 +79,7 @@ class TestClass {
 
 // FILE: main.kt
 fun box(): String {
-    val testObject = TestClass()
+    konst testObject = TestClass()
     when {
         testObject.testExtensionReceiver != "OK" -> return "testExtensionReceiver failed"
         testObject.testDispatchReceiver != "OK" -> return "testDispatchReceiver failed"

@@ -3,7 +3,7 @@ interface Base {
     fun printMessageLine()
 }
 
-class BaseImpl(val x: Int) : Base {
+class BaseImpl(konst x: Int) : Base {
     override fun printMessage() { print(x) }
     override fun printMessageLine() { println(x) }
 }
@@ -13,7 +13,7 @@ class Derived(b: Base) : Base by b {
 }
 
 fun main() {
-    val b = BaseImpl(10)
+    konst b = BaseImpl(10)
     Derived(b).printMessage()
     Derived(b).printMessageLine()
 }

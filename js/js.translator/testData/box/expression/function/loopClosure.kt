@@ -6,7 +6,7 @@ var b = 0
 fun loop(times: Int) {
     var left = times
     while (left > 0) {
-        val u = { value: Int ->
+        konst u = { konstue: Int ->
             b = b + 1
         }
         u(left--)

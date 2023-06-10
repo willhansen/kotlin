@@ -13,10 +13,10 @@ import org.junit.jupiter.api.DisplayName
 @DisplayName("Tasks don't have unnamed inputs and outputs")
 class UnnamedTaskInputsIT : KGPBaseTest() {
 
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(buildCacheEnabled = true)
 
-    private val localBuildCacheDir get() = workingDir.resolve("custom-jdk-build-cache-2")
+    private konst localBuildCacheDir get() = workingDir.resolve("custom-jdk-build-cache-2")
 
     @JvmGradlePluginTests
     @DisplayName("JVM")

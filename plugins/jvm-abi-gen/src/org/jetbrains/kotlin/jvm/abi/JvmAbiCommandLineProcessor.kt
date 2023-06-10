@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.config.CompilerConfiguration
 
 class JvmAbiCommandLineProcessor : CommandLineProcessor {
     companion object {
-        const val COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.jvm.abi"
+        const konst COMPILER_PLUGIN_ID: String = "org.jetbrains.kotlin.jvm.abi"
 
-        val OUTPUT_PATH_OPTION: CliOption =
+        konst OUTPUT_PATH_OPTION: CliOption =
             CliOption(
                 "outputDir",
                 "<path>",
@@ -24,15 +24,15 @@ class JvmAbiCommandLineProcessor : CommandLineProcessor {
             )
     }
 
-    override val pluginId: String
+    override konst pluginId: String
         get() = COMPILER_PLUGIN_ID
 
-    override val pluginOptions: Collection<CliOption>
+    override konst pluginOptions: Collection<CliOption>
         get() = listOf(OUTPUT_PATH_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         when (option) {
-            OUTPUT_PATH_OPTION -> configuration.put(JvmAbiConfigurationKeys.OUTPUT_PATH, value)
+            OUTPUT_PATH_OPTION -> configuration.put(JvmAbiConfigurationKeys.OUTPUT_PATH, konstue)
             else -> throw CliOptionProcessingException("Unknown option: ${option.optionName}")
         }
     }

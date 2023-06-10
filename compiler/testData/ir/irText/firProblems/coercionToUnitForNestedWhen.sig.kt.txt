@@ -11,7 +11,7 @@ private fun Reader.nextChar(): Char?
 // CHECK:
 //   Mangled name: {}BACKSLASH
 //   Public signature: [ File 'coercionToUnitForNestedWhen.kt' <- /BACKSLASH|9213821134505379379[0] ]
-private const val BACKSLASH: Char
+private const konst BACKSLASH: Char
   // CHECK JVM_IR:
   //   Mangled name: #<get-BACKSLASH>(){}kotlin.Char
   //   Public signature: [ File 'coercionToUnitForNestedWhen.kt' <- /BACKSLASH.<get-BACKSLASH>|7174062972088453102[0] ]

@@ -10,7 +10,7 @@ KtSuccessCallInfo:
         name = sub
         receiverType = null
         returnType = JavaSubClass!
-        symbol = val sub: JavaSubClass!
+        symbol = konst sub: JavaSubClass!
         callableIdIfNonLocal = /JavaClass.sub
     simpleAccess = Read:
 

@@ -7,8 +7,8 @@ public final expect enum class En : kotlin.Enum<En> {
 
     private constructor En(/*0*/ x: kotlin.Int)
     private constructor En(/*0*/ s: kotlin.String)
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: En): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -16,15 +16,15 @@ public final expect enum class En : kotlin.Enum<En> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): En
-    public final /*synthesized*/ fun values(): kotlin.Array<En>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): En
+    public final /*synthesized*/ fun konstues(): kotlin.Array<En>
 }
 
 public final expect enum class En2 : kotlin.Enum<En2> {
     expect enum entry E1
 
-    @kotlin.internal.IntrinsicConstEvaluation public final override /*1*/ /*fake_override*/ val name: kotlin.String
-    public final override /*1*/ /*fake_override*/ val ordinal: kotlin.Int
+    @kotlin.internal.IntrinsicConstEkonstuation public final override /*1*/ /*fake_override*/ konst name: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst ordinal: kotlin.Int
     protected final override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public final override /*1*/ /*fake_override*/ fun compareTo(/*0*/ other: En2): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -32,6 +32,6 @@ public final expect enum class En2 : kotlin.Enum<En2> {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    public final /*synthesized*/ fun valueOf(/*0*/ value: kotlin.String): En2
-    public final /*synthesized*/ fun values(): kotlin.Array<En2>
+    public final /*synthesized*/ fun konstueOf(/*0*/ konstue: kotlin.String): En2
+    public final /*synthesized*/ fun konstues(): kotlin.Array<En2>
 }

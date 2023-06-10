@@ -26,18 +26,18 @@ object SamTypeConversions : ParameterTypeConversion {
         argument: KotlinCallArgument,
         expectedParameterType: UnwrappedType
     ): Boolean {
-        val callComponents = candidate.callComponents
+        konst callComponents = candidate.callComponents
 
         if (!callComponents.languageVersionSettings.supportsFeature(LanguageFeature.SamConversionPerArgument)) return true
         if (expectedParameterType.isNothing()) return true
         if (expectedParameterType.isFunctionType) return true
 
-        val samConversionOracle = callComponents.samConversionOracle
+        konst samConversionOracle = callComponents.samConversionOracle
         if (!callComponents.languageVersionSettings.supportsFeature(LanguageFeature.SamConversionForKotlinFunctions)) {
             if (!samConversionOracle.shouldRunSamConversionForFunction(candidate.resolvedCall.candidateDescriptor)) return true
         }
 
-        val declarationDescriptor = expectedParameterType.constructor.declarationDescriptor
+        konst declarationDescriptor = expectedParameterType.constructor.declarationDescriptor
         if (declarationDescriptor is ClassDescriptor && declarationDescriptor.isDefinitelyNotSamInterface) return true
 
         return false
@@ -49,7 +49,7 @@ object SamTypeConversions : ParameterTypeConversion {
     ): Boolean {
         return when (argument) {
             is SubKotlinCallArgument -> {
-                val stableType = argument.receiver.stableType
+                konst stableType = argument.receiver.stableType
                 if (
                     stableType.isFunctionType ||
                     (areSuspendOnlySamConversionsSupported && stableType.isFunctionOrKFunctionTypeWithAnySuspendability)
@@ -71,7 +71,7 @@ object SamTypeConversions : ParameterTypeConversion {
                 if (it.expectedType.constructor == type.constructor) return true
             }
 
-            val hasNonAnalyzedLambda = hasNonAnalyzedLambdaAsReturnType(it.subResolvedAtoms, type)
+            konst hasNonAnalyzedLambda = hasNonAnalyzedLambdaAsReturnType(it.subResolvedAtoms, type)
             if (hasNonAnalyzedLambda) return true
         }
 
@@ -88,16 +88,16 @@ object SamTypeConversions : ParameterTypeConversion {
         parameter: ParameterDescriptor,
         expectedParameterType: UnwrappedType
     ): UnwrappedType? {
-        val callComponents = candidate.callComponents
-        val originalExpectedType = argument.getExpectedType(parameter.original, callComponents.languageVersionSettings)
+        konst callComponents = candidate.callComponents
+        konst originalExpectedType = argument.getExpectedType(parameter.original, callComponents.languageVersionSettings)
 
-        val convertedTypeByCandidate =
+        konst convertedTypeByCandidate =
             callComponents.samConversionResolver.getFunctionTypeForPossibleSamType(
                 expectedParameterType,
                 callComponents.samConversionOracle
             ) ?: return null
 
-        val convertedTypeByOriginal =
+        konst convertedTypeByOriginal =
             if (expectedParameterType.constructor == originalExpectedType.constructor)
                 callComponents.samConversionResolver.getFunctionTypeForPossibleSamType(
                     originalExpectedType,
@@ -121,7 +121,7 @@ object SamTypeConversions : ParameterTypeConversion {
             candidate.markCandidateForCompatibilityResolve()
         }
 
-        val samDescriptor = originalExpectedType.constructor.declarationDescriptor
+        konst samDescriptor = originalExpectedType.constructor.declarationDescriptor
         if (samDescriptor is ClassDescriptor) {
             callComponents.lookupTracker.record(candidate.scopeTower.location, samDescriptor, SAM_LOOKUP_NAME)
         }
@@ -131,7 +131,7 @@ object SamTypeConversions : ParameterTypeConversion {
 
     private fun needCompatibilityResolveForSAM(candidate: ResolutionCandidate, typeToConvert: UnwrappedType): Boolean {
         // fun interfaces is a new feature with a new modifier, so no compatibility resolve is needed
-        val descriptor = typeToConvert.constructor.declarationDescriptor
+        konst descriptor = typeToConvert.constructor.declarationDescriptor
         if (descriptor is ClassDescriptor && descriptor.isFun) return false
 
         // now conversions for Kotlin candidates are possible, so we have to perform compatibility resolve
@@ -142,15 +142,15 @@ object SamTypeConversions : ParameterTypeConversion {
         candidate: ResolutionCandidate,
         expectedParameterType: UnwrappedType
     ): Boolean {
-        val callComponents = candidate.callComponents
+        konst callComponents = candidate.callComponents
 
-        val samConversionOracle = callComponents.samConversionOracle
+        konst samConversionOracle = callComponents.samConversionOracle
         if (!samConversionOracle.isJavaApplicableCandidate(candidate.resolvedCall.candidateDescriptor)) return false
 
-        val declarationDescriptor = expectedParameterType.constructor.declarationDescriptor
+        konst declarationDescriptor = expectedParameterType.constructor.declarationDescriptor
         if (declarationDescriptor is ClassDescriptor && declarationDescriptor.isDefinitelyNotSamInterface) return false
 
-        val convertedType =
+        konst convertedType =
             callComponents.samConversionResolver.getFunctionTypeForPossibleSamType(
                 expectedParameterType,
                 callComponents.samConversionOracle

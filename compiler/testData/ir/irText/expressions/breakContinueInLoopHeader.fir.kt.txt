@@ -1,7 +1,7 @@
 fun test1(c: Boolean?) {
   L@ while (true) { // BLOCK
     L2@ while ({ // BLOCK
-      val <elvis>: Boolean? = c
+      konst <elvis>: Boolean? = c
       when {
         EQEQ(arg0 = <elvis>, arg1 = null) -> break@L
         else -> <elvis>
@@ -14,7 +14,7 @@ fun test1(c: Boolean?) {
 fun test2(c: Boolean?) {
   L@ while (true) { // BLOCK
     L2@ while ({ // BLOCK
-      val <elvis>: Boolean? = c
+      konst <elvis>: Boolean? = c
       when {
         EQEQ(arg0 = <elvis>, arg1 = null) -> continue@L
         else -> <elvis>
@@ -27,15 +27,15 @@ fun test2(c: Boolean?) {
 fun test3(ss: List<String>?) {
   L@ while (true) { // BLOCK
     { // BLOCK
-      val <iterator>: Iterator<String> = { // BLOCK
-        val <elvis>: List<String>? = ss
+      konst <iterator>: Iterator<String> = { // BLOCK
+        konst <elvis>: List<String>? = ss
         when {
           EQEQ(arg0 = <elvis>, arg1 = null) -> continue@L
           else -> <elvis>
         }
       }.iterator()
       L2@ while (<iterator>.hasNext()) { // BLOCK
-        val s: String = <iterator>.next()
+        konst s: String = <iterator>.next()
         { // BLOCK
         }
       }
@@ -46,15 +46,15 @@ fun test3(ss: List<String>?) {
 fun test4(ss: List<String>?) {
   L@ while (true) { // BLOCK
     { // BLOCK
-      val <iterator>: Iterator<String> = { // BLOCK
-        val <elvis>: List<String>? = ss
+      konst <iterator>: Iterator<String> = { // BLOCK
+        konst <elvis>: List<String>? = ss
         when {
           EQEQ(arg0 = <elvis>, arg1 = null) -> break@L
           else -> <elvis>
         }
       }.iterator()
       L2@ while (<iterator>.hasNext()) { // BLOCK
-        val s: String = <iterator>.next()
+        konst s: String = <iterator>.next()
         { // BLOCK
         }
       }

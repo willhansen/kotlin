@@ -10,7 +10,7 @@ public class JavaClass {
 
 interface A
 
-val A.foo: Int get() = 1
+konst A.foo: Int get() = 1
 
 fun bar(a: A) {
     a.foo checkType { _<Int>() } // OK, resolved to extension property

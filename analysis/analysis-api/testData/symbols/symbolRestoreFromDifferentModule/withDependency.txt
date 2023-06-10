@@ -24,7 +24,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
 
 Restored in Sources of restoreInContextOf:
@@ -53,5 +53,5 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public

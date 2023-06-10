@@ -9,4 +9,4 @@ import org.jetbrains.kotlin.fir.declarations.FirScript
 import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import org.jetbrains.kotlin.name.FqName
 
-class FirScriptSymbol(val fqName: FqName) : FirBasedSymbol<FirScript>()
+class FirScriptSymbol(konst fqName: FqName) : FirBasedSymbol<FirScript>()

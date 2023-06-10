@@ -2,7 +2,7 @@
 open class KotlinClass {
     public open fun getSomething1(): Int = 1
 
-    public open fun setSomething2(value: Int) {}
+    public open fun setSomething2(konstue: Int) {}
 }
 
 fun foo(javaClass: JavaClass) {
@@ -20,7 +20,7 @@ public class JavaClass extends KotlinClass implements JavaInterface {
     public int getSomething1() { return 1; }
 
     public int getSomething2() { return 1; }
-    public void setSomething2(int value) {}
+    public void setSomething2(int konstue) {}
 }
 
 // FILE: JavaInterface.java

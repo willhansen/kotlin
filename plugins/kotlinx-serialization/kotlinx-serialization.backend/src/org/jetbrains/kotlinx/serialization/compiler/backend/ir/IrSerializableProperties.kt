@@ -21,31 +21,31 @@ import org.jetbrains.kotlinx.serialization.compiler.extensions.SerializationDesc
 import org.jetbrains.kotlinx.serialization.compiler.resolve.*
 
 class IrSerializableProperty(
-    val ir: IrProperty,
-    override val isConstructorParameterWithDefault: Boolean,
+    konst ir: IrProperty,
+    override konst isConstructorParameterWithDefault: Boolean,
     hasBackingField: Boolean,
     declaresDefaultValue: Boolean,
-    val type: IrSimpleType
+    konst type: IrSimpleType
 ) : ISerializableProperty {
-    override val name = ir.annotations.serialNameValue ?: ir.name.asString()
-    override val originalDescriptorName: Name = ir.name
-    val genericIndex = type.genericIndex
+    override konst name = ir.annotations.serialNameValue ?: ir.name.asString()
+    override konst originalDescriptorName: Name = ir.name
+    konst genericIndex = type.genericIndex
     fun serializableWith(ctx: SerializationBaseContext) =
         ir.annotations.serializableWith() ?: analyzeSpecialSerializers(ctx, ir.annotations)
 
-    override val optional = !ir.annotations.hasAnnotation(SerializationAnnotations.requiredAnnotationFqName) && declaresDefaultValue
-    override val transient = ir.annotations.hasAnnotation(SerializationAnnotations.serialTransientFqName) || !hasBackingField
+    override konst optional = !ir.annotations.hasAnnotation(SerializationAnnotations.requiredAnnotationFqName) && declaresDefaultValue
+    override konst transient = ir.annotations.hasAnnotation(SerializationAnnotations.serialTransientFqName) || !hasBackingField
 }
 
 class IrSerializableProperties(
-    override val serializableProperties: List<IrSerializableProperty>,
-    override val isExternallySerializable: Boolean,
-    override val serializableConstructorProperties: List<IrSerializableProperty>,
-    override val serializableStandaloneProperties: List<IrSerializableProperty>
+    override konst serializableProperties: List<IrSerializableProperty>,
+    override konst isExternallySerializable: Boolean,
+    override konst serializableConstructorProperties: List<IrSerializableProperty>,
+    override konst serializableStandaloneProperties: List<IrSerializableProperty>
 ) : ISerializableProperties<IrSerializableProperty>
 
 /**
- * This function checks if a deserialized property declares default value and has backing field.
+ * This function checks if a deserialized property declares default konstue and has backing field.
  *
  * Returns (declaresDefaultValue, hasBackingField) boolean pair. Returns (false, false) for properties from current module.
  */
@@ -54,18 +54,18 @@ fun IrProperty.analyzeIfFromAnotherModule(): Pair<Boolean, Boolean> {
     return if (descriptor is DeserializedPropertyDescriptor) {
         // IrLazyProperty does not deserialize backing fields correctly, so we should fall back to info from descriptor.
         // DeserializedPropertyDescriptor can be encountered only after K1, so it is safe to check it.
-        val hasDefault = descriptor.declaresDefaultValue()
+        konst hasDefault = descriptor.declaresDefaultValue()
         hasDefault to (descriptor.backingField != null || hasDefault)
     } else if (this is Fir2IrLazyProperty) {
         // Fir2IrLazyProperty after K2 correctly deserializes information about backing field.
-        // However, nor Fir2IrLazyProp nor deserialized FirProperty do not store default value (initializer expression) for property,
+        // However, nor Fir2IrLazyProp nor deserialized FirProperty do not store default konstue (initializer expression) for property,
         // so we either should find corresponding constructor parameter and check its default, or rely on less strict check for default getter.
         // Comments are copied from PropertyDescriptor.declaresDefaultValue() as it has similar logic.
-        val hasBackingField = backingField != null
-        val matchingPrimaryConstructorParam = containingClass?.declarations?.filterIsInstance<FirPrimaryConstructor>()
-            ?.singleOrNull()?.valueParameters?.find { it.name == this.name }
+        konst hasBackingField = backingField != null
+        konst matchingPrimaryConstructorParam = containingClass?.declarations?.filterIsInstance<FirPrimaryConstructor>()
+            ?.singleOrNull()?.konstueParameters?.find { it.name == this.name }
         if (matchingPrimaryConstructorParam != null) {
-            // If property is a constructor parameter, check parameter default value
+            // If property is a constructor parameter, check parameter default konstue
             // (serializable classes always have parameters-as-properties, so no name clash here)
             (matchingPrimaryConstructorParam.defaultValue != null) to hasBackingField
         } else {
@@ -85,13 +85,13 @@ fun IrProperty.analyzeIfFromAnotherModule(): Pair<Boolean, Boolean> {
  *
  * ```
  *    @Serializable
- *    sealed class TypedSealedClass<T>(val a: T) {
+ *    sealed class TypedSealedClass<T>(konst a: T) {
  *        @Serializable
- *        data class Child(val y: Int) : TypedSealedClass<String>("10")
+ *        data class Child(konst y: Int) : TypedSealedClass<String>("10")
  *     }
  * ```
- * In this case, serializableProperties for TypedSealedClass is a listOf(IrSerProp(val a: T)),
- * but for Child is a listOf(IrSerProp(val a: String), IrSerProp(val y: Int)).
+ * In this case, serializableProperties for TypedSealedClass is a listOf(IrSerProp(konst a: T)),
+ * but for Child is a listOf(IrSerProp(konst a: String), IrSerProp(konst y: Int)).
  *
  * Using this approach, we can correctly deserialize parent's properties in Child.Companion.deserialize()
  */
@@ -101,9 +101,9 @@ internal fun serializablePropertiesForIrBackend(
     serializationDescriptorSerializer: SerializationDescriptorSerializerPlugin? = null,
     typeReplacement: Map<IrProperty, IrSimpleType>? = null
 ): IrSerializableProperties {
-    val properties = irClass.properties.toList()
-    val primaryConstructorParams = irClass.primaryConstructor?.valueParameters.orEmpty()
-    val primaryParamsAsProps = properties.associateBy { it.name }.let { namesMap ->
+    konst properties = irClass.properties.toList()
+    konst primaryConstructorParams = irClass.primaryConstructor?.konstueParameters.orEmpty()
+    konst primaryParamsAsProps = properties.associateBy { it.name }.let { namesMap ->
         primaryConstructorParams.mapNotNull {
             if (it.name !in namesMap) null else namesMap.getValue(it.name) to it.hasDefaultValue()
         }.toMap()
@@ -115,13 +115,13 @@ internal fun serializablePropertiesForIrBackend(
             it
         )) && it.getter?.returnType != null // For some reason, some properties from Java (like java.net.URL.hostAddress) do not have getter. Let's ignore them, as they never have worked properly in K1 either.
 
-    val (primaryCtorSerializableProps, bodySerializableProps) = properties
+    konst (primaryCtorSerializableProps, bodySerializableProps) = properties
         .asSequence()
         .filter { !it.isFakeOverride && !it.isDelegated && it.origin != IrDeclarationOrigin.DELEGATED_MEMBER }
         .filter(::isPropSerializable)
         .map {
-            val isConstructorParameterWithDefault = primaryParamsAsProps[it] ?: false
-            val (isPropertyFromAnotherModuleDeclaresDefaultValue, isPropertyWithBackingFieldFromAnotherModule) = it.analyzeIfFromAnotherModule()
+            konst isConstructorParameterWithDefault = primaryParamsAsProps[it] ?: false
+            konst (isPropertyFromAnotherModuleDeclaresDefaultValue, isPropertyWithBackingFieldFromAnotherModule) = it.analyzeIfFromAnotherModule()
             IrSerializableProperty(
                 it,
                 isConstructorParameterWithDefault,
@@ -135,14 +135,14 @@ internal fun serializablePropertiesForIrBackend(
         .partition { primaryParamsAsProps.contains(it.ir) }
 
     var serializableProps = run {
-        val supers = irClass.getSuperClassNotAny()
+        konst supers = irClass.getSuperClassNotAny()
         if (supers == null || !supers.isInternalSerializable) {
             primaryCtorSerializableProps + bodySerializableProps
         } else {
-            val originalToTypeFromFO = typeReplacement ?: buildMap<IrProperty, IrSimpleType> {
+            konst originalToTypeFromFO = typeReplacement ?: buildMap<IrProperty, IrSimpleType> {
                 irClass.properties.filter { it.isFakeOverride }.forEach { prop ->
-                    val orig = prop.resolveFakeOverride()
-                    val type = prop.getter?.returnType as? IrSimpleType
+                    konst orig = prop.resolveFakeOverride()
+                    konst type = prop.getter?.returnType as? IrSimpleType
                     if (orig != null && type != null) put(orig, type)
                 }
             }
@@ -157,7 +157,7 @@ internal fun serializablePropertiesForIrBackend(
     // FIXME: since descriptor from FIR does not have classProto in it(?), this line won't do anything
     serializableProps = restoreCorrectOrderFromClassProtoExtension(irClass.descriptor, serializableProps)
 
-    val isExternallySerializable =
+    konst isExternallySerializable =
         irClass.isInternallySerializableEnum() || primaryConstructorParams.size == primaryParamsAsProps.size
 
     return IrSerializableProperties(serializableProps, isExternallySerializable, primaryCtorSerializableProps, bodySerializableProps)

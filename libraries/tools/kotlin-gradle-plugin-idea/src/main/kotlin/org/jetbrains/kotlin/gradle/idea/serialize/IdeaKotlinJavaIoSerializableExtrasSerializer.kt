@@ -12,17 +12,17 @@ import java.io.ObjectOutputStream
 import kotlin.reflect.KClass
 
 internal class IdeaKotlinJavaIoSerializableExtrasSerializer<T : Any>(
-    private val clazz: KClass<T>
+    private konst clazz: KClass<T>
 ) : IdeaKotlinExtrasSerializer<T> {
 
-    override fun serialize(context: IdeaKotlinSerializationContext, value: T): ByteArray? {
+    override fun serialize(context: IdeaKotlinSerializationContext, konstue: T): ByteArray? {
         return try {
             ByteArrayOutputStream().use { byteArrayOutputStream ->
-                ObjectOutputStream(byteArrayOutputStream).use { oos -> oos.writeObject(value) }
+                ObjectOutputStream(byteArrayOutputStream).use { oos -> oos.writeObject(konstue) }
                 byteArrayOutputStream.toByteArray()
             }
         } catch (t: Throwable) {
-            context.logger.error("${ErrorMessages.SERIALIZATION_FAILURE} $value", t)
+            context.logger.error("${ErrorMessages.SERIALIZATION_FAILURE} $konstue", t)
             null
         }
     }
@@ -37,7 +37,7 @@ internal class IdeaKotlinJavaIoSerializableExtrasSerializer<T : Any>(
     }
 
     object ErrorMessages {
-        const val SERIALIZATION_FAILURE = "Failed to serialize"
-        const val DESERIALIZATION_FAILURE = "Failed to deserialize"
+        const konst SERIALIZATION_FAILURE = "Failed to serialize"
+        const konst DESERIALIZATION_FAILURE = "Failed to deserialize"
     }
 }

@@ -28,11 +28,11 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import java.io.File
 
 interface ModuleVisibilityManager {
-    val chunk: Collection<Module>
-    val friendPaths: Collection<String>
+    konst chunk: Collection<Module>
+    konst friendPaths: Collection<String>
     fun addModule(module: Module)
     fun addFriendPath(path: String)
-    val enabled
+    konst enabled
         get() = true
 
     object SERVICE {
@@ -44,12 +44,12 @@ interface ModuleVisibilityManager {
 fun isContainedByCompiledPartOfOurModule(descriptor: DeclarationDescriptor, friendPath: File?): Boolean {
     if (friendPath == null) return false
 
-    val packageFragment = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java, false)
+    konst packageFragment = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java, false)
     if (packageFragment !is LazyJavaPackageFragment) return false
 
-    val source = getSourceElement(descriptor)
+    konst source = getSourceElement(descriptor)
 
-    val binaryClass = when (source) {
+    konst binaryClass = when (source) {
         is KotlinJvmBinarySourceElement ->
             source.binaryClass
         is KotlinJvmBinaryPackageSourceElement ->
@@ -64,14 +64,14 @@ fun isContainedByCompiledPartOfOurModule(descriptor: DeclarationDescriptor, frie
     }
 
     if (binaryClass is VirtualFileKotlinClass) {
-        val file = binaryClass.file
+        konst file = binaryClass.file
         when (file.fileSystem.protocol) {
             StandardFileSystems.FILE_PROTOCOL -> {
-                val ioFile = VfsUtilCore.virtualToIoFile(file)
+                konst ioFile = VfsUtilCore.virtualToIoFile(file)
                 return ioFile.toPath().startsWith(friendPath.toPath())
             }
             StandardFileSystems.JAR_PROTOCOL -> {
-                val ioFile = VfsUtilCore.getVirtualFileForJar(file)?.let(VfsUtilCore::virtualToIoFile)
+                konst ioFile = VfsUtilCore.getVirtualFileForJar(file)?.let(VfsUtilCore::virtualToIoFile)
                 return ioFile != null && ioFile.toPath() == friendPath.toPath()
             }
         }
@@ -90,5 +90,5 @@ fun getSourceElement(descriptor: DeclarationDescriptor): SourceElement =
                 descriptor.toSourceElement
         }
 
-val DeclarationDescriptor.toSourceElement: SourceElement
+konst DeclarationDescriptor.toSourceElement: SourceElement
     get() = if (this is DeclarationDescriptorWithSource) source else SourceElement.NO_SOURCE

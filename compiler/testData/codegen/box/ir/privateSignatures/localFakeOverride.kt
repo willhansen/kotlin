@@ -19,7 +19,7 @@ fun foo(b: Boolean) {
             override fun qux(): String = "C1T"
         }
 
-        val c1 = C1()
+        konst c1 = C1()
         result += c1.qux()
         result += c1.bar(P1())
     } else {
@@ -27,7 +27,7 @@ fun foo(b: Boolean) {
             override fun qux(): String = "C1F"
         }
 
-        val c1 = C1()
+        konst c1 = C1()
         result += c1.qux()
         result += c1.bar(P1())
     }
@@ -45,7 +45,7 @@ fun box(): String {
     foo(true)
     foo(false)
 
-    val rr = r()
+    konst rr = r()
     if (rr != "C1TABC1FAB") return "FAIL: $rr"
 
     return "OK"

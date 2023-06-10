@@ -16,60 +16,60 @@ import kotlin.test.assertTrue
 class HierarchicalModuleCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test common modules hierarchically`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(a, b, c)")
 
             target("a") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
 
                 module {
                     name = "bar"
-                    source("val bar: Int = 1")
+                    source("konst bar: Int = 1")
                 }
             }
 
             target("b") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
 
                 module {
                     name = "bar"
-                    source("val bar: Int = 1")
+                    source("konst bar: Int = 1")
                 }
             }
 
             target("c") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
 
                 module {
                     name = "not-bar"
-                    source("val bar: Int = 1")
+                    source("konst bar: Int = 1")
                 }
             }
         }
 
         result.assertCommonized("(a, b)") {
             name = "foo"
-            source("expect val foo: Int")
+            source("expect konst foo: Int")
         }
 
         result.assertCommonized("(a, b)") {
             name = "bar"
-            source("expect val bar: Int")
+            source("expect konst bar: Int")
         }
 
 
         result.assertCommonized("(a, b, c)") {
             name = "foo"
-            source("expect val foo: Int")
+            source("expect konst foo: Int")
         }
 
         assertEquals(
@@ -79,34 +79,34 @@ class HierarchicalModuleCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test module commonization with empty root not sharing any module`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(a, b, c)")
 
             target("a") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("b") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("c") {
                 module {
                     name = "bar"
-                    source("val bar: Int = 1")
+                    source("konst bar: Int = 1")
                 }
             }
         }
 
         result.assertCommonized("(a, b)") {
             name = "foo"
-            source("expect val foo: Int")
+            source("expect konst foo: Int")
         }
 
         assertTrue(
@@ -116,27 +116,27 @@ class HierarchicalModuleCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test no common modules`() {
-        val result = commonize(Status.NOTHING_TO_DO) {
+        konst result = commonize(Status.NOTHING_TO_DO) {
             outputTarget("(a, b)", "(a, b, c)")
 
             target("a") {
                 module {
                     name = "a"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("b") {
                 module {
                     name = "b"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("c") {
                 module {
                     name = "c"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
         }
@@ -145,44 +145,44 @@ class HierarchicalModuleCommonizationTest : AbstractInlineSourcesCommonizationTe
     }
 
     fun `test propagation`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(a, b, c)", "(a, b, c, d)")
 
             target("a") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("b") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
 
             target("d") {
                 module {
                     name = "foo"
-                    source("val foo: Int = 1")
+                    source("konst foo: Int = 1")
                 }
             }
         }
 
         result.assertCommonized("(a, b, c)") {
             name = "foo"
-            source("expect val foo: Int")
+            source("expect konst foo: Int")
         }
 
         result.assertCommonized("(a, b, c, d)") {
             name = "foo"
-            source("expect val foo: Int")
+            source("expect konst foo: Int")
         }
     }
 
     fun `test missing modules on two targets`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             target("a") {

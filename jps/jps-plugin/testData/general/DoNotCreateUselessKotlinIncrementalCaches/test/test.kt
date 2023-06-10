@@ -1,3 +1,3 @@
 fun test() {
-    val x = 5 + 5
+    konst x = 5 + 5
 }

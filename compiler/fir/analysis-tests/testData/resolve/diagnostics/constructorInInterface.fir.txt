@@ -4,7 +4,7 @@ FILE: constructorInInterface.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val s: R|kotlin/String| = R|<local>/s|
+        public open konst s: R|kotlin/String| = R|<local>/s|
             public get(): R|kotlin/String|
 
     }
@@ -13,7 +13,7 @@ FILE: constructorInInterface.kt
             super<R|kotlin/Any|>()
         }
 
-        public open val s: R|kotlin/String| = R|<local>/s|
+        public open konst s: R|kotlin/String| = R|<local>/s|
             public get(): R|kotlin/String|
 
     }

@@ -11,7 +11,7 @@ public final class ResolutionCandidate</*0*/ A> {
 
 public final class ResolutionTask</*0*/ B, /*1*/ C : B> {
     public constructor ResolutionTask</*0*/ B, /*1*/ C : B>(/*0*/ candidate: ResolutionCandidate<B>)
-    public final val candidate: ResolutionCandidate<B>
+    public final konst candidate: ResolutionCandidate<B>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

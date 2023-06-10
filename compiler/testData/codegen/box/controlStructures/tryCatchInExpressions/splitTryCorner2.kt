@@ -15,7 +15,7 @@ fun shouldReturn11() : Int {
 }
 
 fun box(): String {
-    val test = shouldReturn11()
+    konst test = shouldReturn11()
     if (test != 11) return "Failed, test=$test"
 
     return "OK"

@@ -6,36 +6,36 @@
 package org.jetbrains.kotlin.test.model
 
 abstract class ResultingArtifact<A : ResultingArtifact<A>> {
-    abstract val kind: TestArtifactKind<A>
+    abstract konst kind: TestArtifactKind<A>
 
     class Source : ResultingArtifact<Source>() {
-        override val kind: TestArtifactKind<Source>
+        override konst kind: TestArtifactKind<Source>
             get() = SourcesKind
     }
 
     abstract class FrontendOutput<R : FrontendOutput<R>> : ResultingArtifact<R>() {
-        abstract override val kind: FrontendKind<R>
+        abstract override konst kind: FrontendKind<R>
 
         object Empty : FrontendOutput<Empty>() {
-            override val kind: FrontendKind<Empty>
+            override konst kind: FrontendKind<Empty>
                 get() = FrontendKind.NoFrontend
         }
     }
 
     abstract class BackendInput<I : BackendInput<I>> : ResultingArtifact<I>() {
-        abstract override val kind: BackendKind<I>
+        abstract override konst kind: BackendKind<I>
 
         object Empty : BackendInput<Empty>() {
-            override val kind: BackendKind<Empty>
+            override konst kind: BackendKind<Empty>
                 get() = BackendKind.NoBackend
         }
     }
 
     abstract class Binary<A : Binary<A>> : ResultingArtifact<A>() {
-        abstract override val kind: BinaryKind<A>
+        abstract override konst kind: BinaryKind<A>
 
         object Empty : Binary<Empty>() {
-            override val kind: BinaryKind<Empty>
+            override konst kind: BinaryKind<Empty>
                 get() = BinaryKind.NoArtifact
         }
     }

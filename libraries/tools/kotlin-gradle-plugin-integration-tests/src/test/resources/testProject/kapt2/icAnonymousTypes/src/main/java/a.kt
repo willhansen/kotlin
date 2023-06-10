@@ -1,7 +1,7 @@
 package test
 
 class CrashMe {
-    private val crashMe = object : CrashMe2(1000) {
+    private konst crashMe = object : CrashMe2(1000) {
         // empty
     }
 }

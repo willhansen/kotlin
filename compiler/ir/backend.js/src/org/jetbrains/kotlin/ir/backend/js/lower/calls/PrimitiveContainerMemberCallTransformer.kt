@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.ir.symbols.IrClassSymbol
 import org.jetbrains.kotlin.ir.util.getPropertyGetter
 import org.jetbrains.kotlin.ir.util.getSimpleFunction
 
-class PrimitiveContainerMemberCallTransformer(private val context: JsIrBackendContext) : CallsTransformer {
-    private val intrinsics = context.intrinsics
+class PrimitiveContainerMemberCallTransformer(private konst context: JsIrBackendContext) : CallsTransformer {
+    private konst intrinsics = context.intrinsics
 
-    private val symbolToTransformer: SymbolToTransformer = hashMapOf()
+    private konst symbolToTransformer: SymbolToTransformer = hashMapOf()
 
     init {
         symbolToTransformer.run {
@@ -40,7 +40,7 @@ class PrimitiveContainerMemberCallTransformer(private val context: JsIrBackendCo
                         call.type,
                         context.intrinsics.primitiveToSizeConstructor[elementType]!!,
                         typeArgumentsCount = 0,
-                        valueArgumentsCount = 1
+                        konstueArgumentsCount = 1
                     ).apply {
                         putValueArgument(0, call.getValueArgument(0))
                     }
@@ -69,26 +69,26 @@ class PrimitiveContainerMemberCallTransformer(private val context: JsIrBackendCo
     }
 }
 
-private val IrClassSymbol.sizeProperty
+private konst IrClassSymbol.sizeProperty
     get() = getPropertyGetter("size")!!
 
-private val IrClassSymbol.getFunction
+private konst IrClassSymbol.getFunction
     get() = getSimpleFunction("get")!!
 
-private val IrClassSymbol.setFunction
+private konst IrClassSymbol.setFunction
     get() = getSimpleFunction("set")!!
 
-private val IrClassSymbol.iterator
+private konst IrClassSymbol.iterator
     get() = getSimpleFunction("iterator")!!
 
-private val IrClassSymbol.sizeConstructor
-    get() = owner.declarations.asSequence().filterIsInstance<IrConstructor>().first { it.valueParameters.size == 1 }.symbol
+private konst IrClassSymbol.sizeConstructor
+    get() = owner.declarations.asSequence().filterIsInstance<IrConstructor>().first { it.konstueParameters.size == 1 }.symbol
 
-private val IrClassSymbol.lengthProperty
+private konst IrClassSymbol.lengthProperty
     get() = getPropertyGetter("length")!!
 
-private val IrClassSymbol.subSequence
+private konst IrClassSymbol.subSequence
     get() = getSimpleFunction("subSequence")!!
 
-private val IrClassSymbol.hashCodeFunction
+private konst IrClassSymbol.hashCodeFunction
     get() = getSimpleFunction("hashCode")!!

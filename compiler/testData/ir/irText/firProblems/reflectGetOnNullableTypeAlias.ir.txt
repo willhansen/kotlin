@@ -3,34 +3,34 @@ FILE fqName:<root> fileName:/reflectGetOnNullableTypeAlias.kt
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:backRefProp type:kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } [val]
+      VAR name:backRefProp type:kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } [konst]
         PROPERTY_REFERENCE 'public final bar: kotlin.String' field=null getter='public final fun <get-bar> (): kotlin.String declared in <root>.Foo' setter=null type=kotlin.reflect.KProperty1<<root>.Foo, kotlin.String> origin=null
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
-              arg0: GET_VAR 'val backRefProp: kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } declared in <root>.box' type=kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } origin=null
-              arg1: CONST Null type=kotlin.Nothing? value=null
+              arg0: GET_VAR 'konst backRefProp: kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } declared in <root>.box' type=kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } origin=null
+              arg1: CONST Null type=kotlin.Nothing? konstue=null
           then: BLOCK type=kotlin.Unit origin=null
             RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
               TYPE_OP type=kotlin.String origin=CAST typeOperand=kotlin.String
                 CALL 'public abstract fun get (receiver: T of kotlin.reflect.KProperty1): V of kotlin.reflect.KProperty1 declared in kotlin.reflect.KProperty1' type=kotlin.Any? origin=null
-                  $this: GET_VAR 'val backRefProp: kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } declared in <root>.box' type=kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } origin=null
+                  $this: GET_VAR 'konst backRefProp: kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } declared in <root>.box' type=kotlin.reflect.KProperty1<<root>.Foo, kotlin.Any?>?{ <root>.PropAlias<<root>.Foo> } origin=null
                   receiver: CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.Foo' type=<root>.Foo origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="FAIL"
+        CONST String type=kotlin.String konstue="FAIL"
   CLASS CLASS name:Foo modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Foo
     CONSTRUCTOR visibility:public <> () returnType:<root>.Foo [primary]
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Foo modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:bar visibility:public modality:FINAL [val]
+    PROPERTY name:bar visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:bar type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="OK"
+          CONST String type=kotlin.String konstue="OK"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bar> visibility:public modality:FINAL <> ($this:<root>.Foo) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:bar visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:bar visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Foo
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-bar> (): kotlin.String declared in <root>.Foo'

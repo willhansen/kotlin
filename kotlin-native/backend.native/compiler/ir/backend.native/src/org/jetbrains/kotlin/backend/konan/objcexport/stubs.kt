@@ -10,30 +10,30 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.resolve.descriptorUtil.module
 import org.jetbrains.kotlin.resolve.source.PsiSourceElement
 
-class ObjCComment(val contentLines: List<String>) {
+class ObjCComment(konst contentLines: List<String>) {
     constructor(vararg contentLines: String) : this(contentLines.toList())
 }
 
 data class ObjCClassForwardDeclaration(
-        val className: String,
-        val typeDeclarations: List<ObjCGenericTypeDeclaration> = emptyList()
+        konst className: String,
+        konst typeDeclarations: List<ObjCGenericTypeDeclaration> = emptyList()
 )
 
-abstract class Stub<out D : DeclarationDescriptor>(val name: String, val comment: ObjCComment? = null) {
-    abstract val descriptor: D?
-    open val psi: PsiElement?
+abstract class Stub<out D : DeclarationDescriptor>(konst name: String, konst comment: ObjCComment? = null) {
+    abstract konst descriptor: D?
+    open konst psi: PsiElement?
         get() = ((descriptor as? DeclarationDescriptorWithSource)?.source as? PsiSourceElement)?.psi
-    open val isValid: Boolean
+    open konst isValid: Boolean
         get() = descriptor?.module?.isValid ?: true
 }
 
 abstract class ObjCTopLevel<out D : DeclarationDescriptor>(name: String, comment: ObjCComment? = null) : Stub<D>(name, comment)
 
 abstract class ObjCClass<out D : DeclarationDescriptor>(name: String,
-                                                        val attributes: List<String>,
+                                                        konst attributes: List<String>,
                                                         comment: ObjCComment? = null) : ObjCTopLevel<D>(name, comment) {
-    abstract val superProtocols: List<String>
-    abstract val members: List<Stub<*>>
+    abstract konst superProtocols: List<String>
+    abstract konst members: List<Stub<*>>
 }
 
 abstract class ObjCProtocol(name: String,
@@ -42,59 +42,59 @@ abstract class ObjCProtocol(name: String,
 
 class ObjCProtocolImpl(
         name: String,
-        override val descriptor: ClassDescriptor,
-        override val superProtocols: List<String>,
-        override val members: List<Stub<*>>,
+        override konst descriptor: ClassDescriptor,
+        override konst superProtocols: List<String>,
+        override konst members: List<Stub<*>>,
         attributes: List<String> = emptyList(),
         comment: ObjCComment? = null) : ObjCProtocol(name, attributes, comment)
 
 abstract class ObjCInterface(name: String,
-                             val generics: List<ObjCGenericTypeDeclaration>,
-                             val categoryName: String?,
+                             konst generics: List<ObjCGenericTypeDeclaration>,
+                             konst categoryName: String?,
                              attributes: List<String>,
                              comment: ObjCComment? = null) : ObjCClass<ClassDescriptor>(name, attributes, comment) {
-    abstract val superClass: String?
-    abstract val superClassGenerics: List<ObjCNonNullReferenceType>
+    abstract konst superClass: String?
+    abstract konst superClassGenerics: List<ObjCNonNullReferenceType>
 }
 
 class ObjCInterfaceImpl(
         name: String,
         generics: List<ObjCGenericTypeDeclaration> = emptyList(),
-        override val descriptor: ClassDescriptor? = null,
-        override val superClass: String? = null,
-        override val superClassGenerics: List<ObjCNonNullReferenceType> = emptyList(),
-        override val superProtocols: List<String> = emptyList(),
+        override konst descriptor: ClassDescriptor? = null,
+        override konst superClass: String? = null,
+        override konst superClassGenerics: List<ObjCNonNullReferenceType> = emptyList(),
+        override konst superProtocols: List<String> = emptyList(),
         categoryName: String? = null,
-        override val members: List<Stub<*>> = emptyList(),
+        override konst members: List<Stub<*>> = emptyList(),
         attributes: List<String> = emptyList(),
         comment: ObjCComment? = null
 ) : ObjCInterface(name, generics, categoryName, attributes, comment)
 
 class ObjCMethod(
-        override val descriptor: DeclarationDescriptor?,
-        val isInstanceMethod: Boolean,
-        val returnType: ObjCType,
-        val selectors: List<String>,
-        val parameters: List<ObjCParameter>,
-        val attributes: List<String>,
+        override konst descriptor: DeclarationDescriptor?,
+        konst isInstanceMethod: Boolean,
+        konst returnType: ObjCType,
+        konst selectors: List<String>,
+        konst parameters: List<ObjCParameter>,
+        konst attributes: List<String>,
         comment: ObjCComment? = null
 ) : Stub<DeclarationDescriptor>(buildMethodName(selectors, parameters), comment)
 
 class ObjCParameter(name: String,
-                    override val descriptor: ParameterDescriptor?,
-                    val type: ObjCType) : Stub<ParameterDescriptor>(name)
+                    override konst descriptor: ParameterDescriptor?,
+                    konst type: ObjCType) : Stub<ParameterDescriptor>(name)
 
 class ObjCProperty(name: String,
-                   override val descriptor: DeclarationDescriptorWithSource?,
-                   val type: ObjCType,
-                   val propertyAttributes: List<String>,
-                   val setterName: String? = null,
-                   val getterName: String? = null,
-                   val declarationAttributes: List<String> = emptyList(),
+                   override konst descriptor: DeclarationDescriptorWithSource?,
+                   konst type: ObjCType,
+                   konst propertyAttributes: List<String>,
+                   konst setterName: String? = null,
+                   konst getterName: String? = null,
+                   konst declarationAttributes: List<String> = emptyList(),
                    comment: ObjCComment? = null) : Stub<DeclarationDescriptorWithSource>(name, comment) {
 
     @Deprecated("", ReplaceWith("this.propertyAttributes"), DeprecationLevel.WARNING)
-    val attributes: List<String> get() = propertyAttributes
+    konst attributes: List<String> get() = propertyAttributes
 }
 
 private fun buildMethodName(selectors: List<String>, parameters: List<ObjCParameter>): String =

@@ -14,8 +14,8 @@ class StructRenderingTests : InteropTestsBase() {
     // See https://youtrack.jetbrains.com/issue/KT-55030#focus=Comments-27-6742454.0-0
     @Test
     fun kt55030() {
-        val files = TempFiles("kt55030")
-        val header = files.file("header.h", """
+        konst files = TempFiles("kt55030")
+        konst header = files.file("header.h", """
             union SupportedValue {
                 struct {
                     int a;
@@ -30,13 +30,13 @@ class StructRenderingTests : InteropTestsBase() {
                 int c;
             };
         """.trimIndent())
-        val defFile = files.file("kt55030.def", """
+        konst defFile = files.file("kt55030.def", """
             headers = ${header.name}
         """.trimIndent())
 
 
-        val library = buildNativeLibraryFrom(defFile, files.directory)
-        val index = buildNativeIndex(library, verbose = false).index
+        konst library = buildNativeLibraryFrom(defFile, files.directory)
+        konst index = buildNativeIndex(library, verbose = false).index
 
         fun getUnionDef(name: String): StructDef {
             return index.structs.find { it.spelling == "union $name" }!!.def!!

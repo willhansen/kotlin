@@ -4,7 +4,7 @@ FILE: nestedClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ContainingClassKey=Base] get(): String
 
     }

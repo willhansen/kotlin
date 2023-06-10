@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface TypeQualifier {
 
     /**
-     * Describes the kinds of values the qualifier can be applied to. If a
+     * Describes the kinds of konstues the qualifier can be applied to. If a
      * numeric class is provided (e.g., Number.class or Integer.class) then the
      * annotation can also be applied to the corresponding primitive numeric
      * types.

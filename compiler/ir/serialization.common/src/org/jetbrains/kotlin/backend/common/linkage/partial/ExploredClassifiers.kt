@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.ir.symbols.IrClassifierSymbol
 import org.jetbrains.kotlin.ir.linkage.partial.ExploredClassifier
 
 internal class ExploredClassifiers {
-    private val usableSymbols = HashSet<IrClassifierSymbol>()
-    private val unusableSymbols = HashMap<IrClassifierSymbol, ExploredClassifier.Unusable>()
+    private konst usableSymbols = HashSet<IrClassifierSymbol>()
+    private konst unusableSymbols = HashMap<IrClassifierSymbol, ExploredClassifier.Unusable>()
 
     operator fun get(symbol: IrClassifierSymbol): ExploredClassifier? =
         if (symbol in usableSymbols) ExploredClassifier.Usable else unusableSymbols[symbol]

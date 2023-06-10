@@ -1,5 +1,5 @@
 // JVM_TARGET: 11
-data class A(val x: Unit)
+data class A(konst x: Unit)
 
 fun test(): Unit {}
 
@@ -14,9 +14,9 @@ class Foo : B<Unit> {
 }
 
 fun box(): String {
-    val a = A(Unit)
+    konst a = A(Unit)
 
-    val test = "Test ${a.component1()} ${test()} ${Foo().test()}"
+    konst test = "Test ${a.component1()} ${test()} ${Foo().test()}"
     return "OK"
 }
 // one in data class `toString` and one in `box` method

@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.wasm.ir
 
 sealed class WasmType(
-    val name: String,
-    val code: Byte
+    konst name: String,
+    konst code: Byte
 ) {
     override fun toString(): String = name
 }
@@ -28,8 +28,8 @@ object WasmEqRef : WasmType("eqref", -0x13)
 object WasmRefNullNoneType : WasmType("nullnone", -0x1b)
 object WasmRefNullExternrefType : WasmType("nullexternref", -0x17)
 
-data class WasmRefNullType(val heapType: WasmHeapType) : WasmType("ref null", -0x14)
-data class WasmRefType(val heapType: WasmHeapType) : WasmType("ref", -0x15)
+data class WasmRefNullType(konst heapType: WasmHeapType) : WasmType("ref null", -0x14)
+data class WasmRefType(konst heapType: WasmHeapType) : WasmType("ref", -0x15)
 
 @Suppress("unused")
 object WasmI31Ref : WasmType("i31ref", -0x16)
@@ -38,13 +38,13 @@ object WasmI31Ref : WasmType("i31ref", -0x16)
 object WasmStructRef : WasmType("structref", -0x19)
 
 sealed class WasmHeapType {
-    data class Type(val type: WasmSymbolReadOnly<WasmTypeDeclaration>) : WasmHeapType() {
+    data class Type(konst type: WasmSymbolReadOnly<WasmTypeDeclaration>) : WasmHeapType() {
         override fun toString(): String {
             return "Type:$type"
         }
     }
 
-    sealed class Simple(val name: String, val code: Byte) : WasmHeapType() {
+    sealed class Simple(konst name: String, konst code: Byte) : WasmHeapType() {
         object Func : Simple("func", -0x10)
         object Extern : Simple("extern", -0x11)
         object Any : Simple("any", -0x12)
@@ -60,8 +60,8 @@ sealed class WasmHeapType {
 }
 
 sealed class WasmBlockType {
-    class Function(val type: WasmFunctionType) : WasmBlockType()
-    class Value(val type: WasmType) : WasmBlockType()
+    class Function(konst type: WasmFunctionType) : WasmBlockType()
+    class Value(konst type: WasmType) : WasmBlockType()
 }
 
 
@@ -82,7 +82,7 @@ fun WasmFunctionType.referencesTypeDeclarations(): Boolean =
     parameterTypes.any { it.referencesTypeDeclaration() } or resultTypes.any { it.referencesTypeDeclaration() }
 
 fun WasmType.referencesTypeDeclaration(): Boolean {
-    val heapType = when (this) {
+    konst heapType = when (this) {
         is WasmRefNullType -> getHeapType()
         is WasmRefType -> getHeapType()
         else -> return false

@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.resolve.calls.results.FlatSignature
 import org.jetbrains.kotlin.resolve.calls.results.TypeSpecificityComparator
 
-// This conflict resolver filters JVM equivalent top-level functions
+// This conflict resolver filters JVM equikonstent top-level functions
 // like emptyArray() from intrinsics and built-ins
-class ConeEquivalentCallConflictResolver(
+class ConeEquikonstentCallConflictResolver(
     specificityComparator: TypeSpecificityComparator,
     inferenceComponents: InferenceComponents,
     transformerComponents: BodyResolveComponents
@@ -35,18 +35,18 @@ class ConeEquivalentCallConflictResolver(
         candidates: Set<Candidate>,
         discriminateAbstracts: Boolean
     ): Set<Candidate> {
-        return filterOutEquivalentCalls(candidates)
+        return filterOutEquikonstentCalls(candidates)
     }
 
-    private fun filterOutEquivalentCalls(candidates: Collection<Candidate>): Set<Candidate> {
-        val result = mutableSetOf<Candidate>()
+    private fun filterOutEquikonstentCalls(candidates: Collection<Candidate>): Set<Candidate> {
+        konst result = mutableSetOf<Candidate>()
         outerLoop@ for (myCandidate in candidates) {
-            val me = myCandidate.symbol.fir
+            konst me = myCandidate.symbol.fir
             if (me is FirCallableDeclaration && me.symbol.containingClassLookupTag() == null) {
                 for (otherCandidate in result) {
-                    val other = otherCandidate.symbol.fir
+                    konst other = otherCandidate.symbol.fir
                     if (other is FirCallableDeclaration && other.symbol.containingClassLookupTag() == null) {
-                        if (areEquivalentTopLevelCallables(me, myCandidate, other, otherCandidate)) {
+                        if (areEquikonstentTopLevelCallables(me, myCandidate, other, otherCandidate)) {
                             continue@outerLoop
                         }
                     }
@@ -57,7 +57,7 @@ class ConeEquivalentCallConflictResolver(
         return result
     }
 
-    private fun areEquivalentTopLevelCallables(
+    private fun areEquikonstentTopLevelCallables(
         first: FirCallableDeclaration,
         firstCandidate: Candidate,
         second: FirCallableDeclaration,
@@ -71,8 +71,8 @@ class ConeEquivalentCallConflictResolver(
         if (first is FirVariable != second is FirVariable) {
             return false
         }
-        val firstSignature = createFlatSignature(firstCandidate, first)
-        val secondSignature = createFlatSignature(secondCandidate, second)
+        konst firstSignature = createFlatSignature(firstCandidate, first)
+        konst secondSignature = createFlatSignature(secondCandidate, second)
         return compareCallsByUsedArguments(firstSignature, secondSignature, discriminateGenerics = false, useOriginalSamTypes = false) &&
                 compareCallsByUsedArguments(secondSignature, firstSignature, discriminateGenerics = false, useOriginalSamTypes = false)
     }

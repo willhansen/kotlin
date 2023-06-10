@@ -95,7 +95,7 @@ inline constexpr const char* kTagTLS = "tls";
 #endif // RUNTIME_LOGGING_H
 
 // Using macros to simplify forwarding of varargs without breaking __attribute__((format)) and to avoid
-// evaluating args in `...` if logging is disabled.
+// ekonstuating args in `...` if logging is disabled.
 
 #define RuntimeLog(level, tags, format, ...) \
     do { \

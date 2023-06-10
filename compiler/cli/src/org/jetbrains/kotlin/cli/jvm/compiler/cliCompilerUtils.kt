@@ -54,13 +54,13 @@ fun Module.getSourceFiles(
     return if (multiModuleChunk) {
         // filter out source files from other modules
         assert(buildFile != null) { "Compiling multiple modules, but build file is null" }
-        val (moduleSourceDirs, moduleSourceFiles) =
+        konst (moduleSourceDirs, moduleSourceFiles) =
             getBuildFilePaths(buildFile, getSourceFiles())
                 .mapNotNull(localFileSystem!!::findFileByPath)
                 .partition(VirtualFile::isDirectory)
 
         allSourceFiles.filter { file ->
-            val virtualFile = file.virtualFile
+            konst virtualFile = file.virtualFile
             virtualFile in moduleSourceFiles || moduleSourceDirs.any { dir ->
                 VfsUtilCore.isAncestor(dir, virtualFile, true)
             }
@@ -91,7 +91,7 @@ fun createOutputFilesFlushingCallbackIfPossible(configuration: CompilerConfigura
         return GenerationStateEventCallback.DO_NOTHING
     }
     return GenerationStateEventCallback { state ->
-        val currentOutput = SimpleOutputFileCollection(state.factory.currentOutput)
+        konst currentOutput = SimpleOutputFileCollection(state.factory.currentOutput)
         writeOutput(configuration, currentOutput, null)
         if (!configuration.get(JVMConfigurationKeys.RETAIN_OUTPUT_IN_MEMORY, false)) {
             state.factory.releaseGeneratedOutput()
@@ -104,13 +104,13 @@ fun writeOutput(
     outputFiles: OutputFileCollection,
     mainClassFqName: FqName?
 ) {
-    val reportOutputFiles = configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
-    val jarPath = configuration.get(JVMConfigurationKeys.OUTPUT_JAR)
-    val messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
+    konst reportOutputFiles = configuration.getBoolean(CommonConfigurationKeys.REPORT_OUTPUT_FILES)
+    konst jarPath = configuration.get(JVMConfigurationKeys.OUTPUT_JAR)
+    konst messageCollector = configuration.get(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY, MessageCollector.NONE)
     if (jarPath != null) {
-        val includeRuntime = configuration.get(JVMConfigurationKeys.INCLUDE_RUNTIME, false)
-        val noReflect = configuration.get(JVMConfigurationKeys.NO_REFLECT, false)
-        val resetJarTimestamps = !configuration.get(JVMConfigurationKeys.NO_RESET_JAR_TIMESTAMPS, false)
+        konst includeRuntime = configuration.get(JVMConfigurationKeys.INCLUDE_RUNTIME, false)
+        konst noReflect = configuration.get(JVMConfigurationKeys.NO_REFLECT, false)
+        konst resetJarTimestamps = !configuration.get(JVMConfigurationKeys.NO_RESET_JAR_TIMESTAMPS, false)
         CompileEnvironmentUtil.writeToJar(
             jarPath,
             includeRuntime,
@@ -121,13 +121,13 @@ fun writeOutput(
             messageCollector
         )
         if (reportOutputFiles) {
-            val message = OutputMessageUtil.formatOutputMessage(outputFiles.asList().flatMap { it.sourceFiles }.distinct(), jarPath)
+            konst message = OutputMessageUtil.formatOutputMessage(outputFiles.asList().flatMap { it.sourceFiles }.distinct(), jarPath)
             messageCollector.report(CompilerMessageSeverity.OUTPUT, message)
         }
         return
     }
 
-    val outputDir = configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
+    konst outputDir = configuration.get(JVMConfigurationKeys.OUTPUT_DIRECTORY)
         ?.takeUnless { it.path.isBlank() }
         ?: File(".")
 
@@ -155,7 +155,7 @@ fun writeOutputsIfNeeded(
     }
 
     if (projectConfiguration.getBoolean(JVMConfigurationKeys.COMPILE_JAVA)) {
-        val singleModule = chunk.singleOrNull()
+        konst singleModule = chunk.singleOrNull()
         if (singleModule != null) {
             return JavacWrapper.getInstance(project!!).use {
                 it.compile(File(singleModule.getOutputDirectory()))
@@ -179,7 +179,7 @@ fun ModuleBuilder.configureFromArgs(args: K2JVMCompilerArguments) {
         addJavaSourceRoot(JavaRootPath(it, args.javaPackagePrefix))
     }
 
-    val commonSources = args.commonSources?.toSet().orEmpty()
+    konst commonSources = args.commonSources?.toSet().orEmpty()
     for (arg in args.freeArgs) {
         if (arg.endsWith(JavaFileType.DOT_DEFAULT_EXTENSION)) {
             addJavaSourceRoot(JavaRootPath(arg, args.javaPackagePrefix))
@@ -204,15 +204,15 @@ fun createContextForIncrementalCompilation(
     sourceScope: AbstractProjectFileSearchScope,
 ): IncrementalCompilationContext? {
     if (targetIds == null || incrementalComponents == null) return null
-    val directoryWithIncrementalPartsFromPreviousCompilation =
+    konst directoryWithIncrementalPartsFromPreviousCompilation =
         moduleConfiguration[JVMConfigurationKeys.OUTPUT_DIRECTORY]
             ?: return null
-    val incrementalCompilationScope = directoryWithIncrementalPartsFromPreviousCompilation.walk()
+    konst incrementalCompilationScope = directoryWithIncrementalPartsFromPreviousCompilation.walk()
         .filter { it.extension == "class" }
         .let { projectEnvironment.getSearchScopeByIoFiles(it.asIterable()) }
         .takeIf { !it.isEmpty }
         ?: return null
-    val packagePartProvider = IncrementalPackagePartProvider(
+    konst packagePartProvider = IncrementalPackagePartProvider(
         projectEnvironment.getPackagePartProvider(sourceScope),
         targetIds.map(incrementalComponents::getIncrementalCache)
     )
@@ -224,12 +224,12 @@ fun createLibraryListForJvm(
     configuration: CompilerConfiguration,
     friendPaths: List<String>
 ): DependencyListForCliModule {
-    val binaryModuleData = BinaryModuleData.initialize(
+    konst binaryModuleData = BinaryModuleData.initialize(
         Name.identifier(moduleName),
         JvmPlatforms.unspecifiedJvmPlatform,
         JvmPlatformAnalyzerServices
     )
-    val libraryList = DependencyListForCliModule.build(binaryModuleData) {
+    konst libraryList = DependencyListForCliModule.build(binaryModuleData) {
         dependencies(configuration.jvmClasspathRoots.map { it.toPath() })
         dependencies(configuration.jvmModularRoots.map { it.toPath() })
         friendDependencies(configuration[JVMConfigurationKeys.FRIEND_PATHS] ?: emptyList())

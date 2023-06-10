@@ -1,17 +1,17 @@
 package test
 
 public final annotation class Anno : kotlin.Annotation {
-    /*primary*/ public constructor Anno(/*0*/ value: kotlin.Array<test.Bnno>)
-    public final val value: kotlin.Array<test.Bnno>
-        public final fun `<get-value>`(): kotlin.Array<test.Bnno>
+    /*primary*/ public constructor Anno(/*0*/ konstue: kotlin.Array<test.Bnno>)
+    public final konst konstue: kotlin.Array<test.Bnno>
+        public final fun `<get-konstue>`(): kotlin.Array<test.Bnno>
 }
 
-@test.Anno(value = {test.Bnno(value = "x"), test.Bnno(value = "y")}) public final class AnnotationInArray {
+@test.Anno(konstue = {test.Bnno(konstue = "x"), test.Bnno(konstue = "y")}) public final class AnnotationInArray {
     /*primary*/ public constructor AnnotationInArray()
 }
 
 public final annotation class Bnno : kotlin.Annotation {
-    /*primary*/ public constructor Bnno(/*0*/ value: kotlin.String)
-    public final val value: kotlin.String
-        public final fun `<get-value>`(): kotlin.String
+    /*primary*/ public constructor Bnno(/*0*/ konstue: kotlin.String)
+    public final konst konstue: kotlin.String
+        public final fun `<get-konstue>`(): kotlin.String
 }

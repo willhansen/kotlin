@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 
 internal object MultiplatformLayoutV2DefaultManifestLocationConfigurator : KotlinAndroidSourceSetConfigurator {
-    private const val DEFAULT_FILE_NAME = "AndroidManifest.xml"
-    private val logger = Logging.getLogger(javaClass)
+    private const konst DEFAULT_FILE_NAME = "AndroidManifest.xml"
+    private konst logger = Logging.getLogger(javaClass)
 
     override fun configure(target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, androidSourceSet: AndroidSourceSet) {
-        val defaultManifestLocation = target.project.file("src/${androidSourceSet.name}/$DEFAULT_FILE_NAME")
+        konst defaultManifestLocation = target.project.file("src/${androidSourceSet.name}/$DEFAULT_FILE_NAME")
         if (androidSourceSet.manifest.srcFile != defaultManifestLocation) {
             logger.debug(
                 """
@@ -26,7 +26,7 @@ internal object MultiplatformLayoutV2DefaultManifestLocationConfigurator : Kotli
             return
         }
 
-        val newManifestLocation = target.project.file("src/${kotlinSourceSet.name}/$DEFAULT_FILE_NAME")
+        konst newManifestLocation = target.project.file("src/${kotlinSourceSet.name}/$DEFAULT_FILE_NAME")
         androidSourceSet.manifest.srcFile(newManifestLocation)
         logger.debug("${androidSourceSet.name}: Changed default Manifest location to $newManifestLocation")
     }

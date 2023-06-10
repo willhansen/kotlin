@@ -12,5 +12,5 @@ public open class Foo {
 
 public final class Request {
     public constructor Request(/*0*/ kotlin.Long)
-    public final val id: kotlin.Long
+    public final konst id: kotlin.Long
 }

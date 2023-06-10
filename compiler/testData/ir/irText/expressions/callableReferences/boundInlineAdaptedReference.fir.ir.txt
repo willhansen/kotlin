@@ -21,4 +21,4 @@ FILE fqName:test fileName:/boundInlineAdaptedReference.kt
               CALL 'public final fun id (s: kotlin.String, vararg xs: kotlin.Int): kotlin.String declared in test' type=kotlin.String origin=null
                 $receiver: GET_VAR 'receiver: kotlin.String declared in test.test.id' type=kotlin.String origin=ADAPTED_FUNCTION_REFERENCE
           FUNCTION_REFERENCE 'local final fun id (): kotlin.Unit declared in test.test' type=kotlin.Function0<kotlin.Unit> origin=ADAPTED_FUNCTION_REFERENCE reflectionTarget=null
-            $receiver: CONST String type=kotlin.String value="Fail"
+            $receiver: CONST String type=kotlin.String konstue="Fail"

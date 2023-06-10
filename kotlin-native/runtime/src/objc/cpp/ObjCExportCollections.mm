@@ -60,7 +60,7 @@ OBJ_GETTER(Kotlin_Map_keyIterator, KRef map);
 OBJ_GETTER(Kotlin_List_get, KRef list, KInt index);
 
 OBJ_GETTER(Kotlin_MutableMap_createWithCapacity, KInt capacity);
-void Kotlin_MutableMap_set(KRef map, KRef key, KRef value);
+void Kotlin_MutableMap_set(KRef map, KRef key, KRef konstue);
 void Kotlin_MutableMap_remove(KRef map, KRef key);
 void Kotlin_MutableList_addObjectAtIndex(KRef list, KInt index, KRef obj);
 void Kotlin_MutableList_removeObjectAtIndex(KRef list, KInt index);
@@ -438,10 +438,10 @@ static inline id KSet_getElement(KRef set, id object) {
 @end
 
 static inline id KMap_get(KRef map, id aKey) {
-  ObjHolder keyHolder, valueHolder;
+  ObjHolder keyHolder, konstueHolder;
 
   KRef kotlinKey = refFromObjCOrNSNull(aKey, keyHolder.slot());
-  KRef kotlinValue = Kotlin_Map_get(map, kotlinKey, valueHolder.slot());
+  KRef kotlinValue = Kotlin_Map_get(map, kotlinKey, konstueHolder.slot());
 
   if (kotlinValue == nullptr) {
     // Either null or not found.
@@ -566,11 +566,11 @@ static inline id KMap_get(KRef map, id aKey) {
   id keyCopy = [aKey copyWithZone:nullptr]; // Correspond to the expected NSMutableDictionary behaviour.
   {
     kotlin::CalledFromNativeGuard guard;
-    ObjHolder keyHolder, valueHolder;
+    ObjHolder keyHolder, konstueHolder;
 
     KRef kotlinKey = refFromObjCOrNSNull(keyCopy, keyHolder.slot());
 
-    KRef kotlinValue = refFromObjCOrNSNull(anObject, valueHolder.slot());
+    KRef kotlinValue = refFromObjCOrNSNull(anObject, konstueHolder.slot());
 
     Kotlin_MutableMap_set(mapHolder.ref<ErrorPolicy::kTerminate>(), kotlinKey, kotlinValue);
   }

@@ -1,3 +1,3 @@
 class B {
-  val p: Int by A()
+  konst p: Int by A()
 }

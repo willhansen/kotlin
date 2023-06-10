@@ -5,7 +5,7 @@ public fun </*0*/ T> materializeFoo(): Inv<T>
 
 public final class Bar</*0*/ U : I> {
     public constructor Bar</*0*/ U : I>(/*0*/ x: Inv<Out<U>>)
-    public final val x: Inv<Out<U>>
+    public final konst x: Inv<Out<U>>
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

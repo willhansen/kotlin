@@ -7,7 +7,7 @@ package kotlin
 
 /**
  * Implements annotated function in JavaScript and automatically imports is to Wasm.
- * [code] string must contain JS expression that evaluates to JS function with signature that matches annotated kotlin function
+ * [code] string must contain JS expression that ekonstuates to JS function with signature that matches annotated kotlin function
  *
  * For example, a function that adds two Doubles via JS:
  *
@@ -19,4 +19,4 @@ package kotlin
  */
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
 @Retention(AnnotationRetention.BINARY)
-public annotation class JsFun(val code: String)
+public annotation class JsFun(konst code: String)

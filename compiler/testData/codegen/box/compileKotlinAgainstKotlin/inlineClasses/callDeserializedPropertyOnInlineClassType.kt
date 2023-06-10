@@ -5,8 +5,8 @@
 package a
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class Foo(val x: IntArray) {
-    val size: Int get() = x.size
+inline class Foo(konst x: IntArray) {
+    konst size: Int get() = x.size
 }
 
 // MODULE: main(lib)
@@ -15,7 +15,7 @@ inline class Foo(val x: IntArray) {
 import a.*
 
 fun box(): String {
-    val a = Foo(intArrayOf(3, 4))
+    konst a = Foo(intArrayOf(3, 4))
     if (a.size != 2) return "Fail"
     return "OK"
 }

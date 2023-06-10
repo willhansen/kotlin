@@ -45,10 +45,10 @@ public fun <T> Sequence<T>.elementAt(index: Int): T {
 public fun <T> Sequence<T>.elementAtOrElse(index: Int, defaultValue: (Int) -> T): T {
     if (index < 0)
         return defaultValue(index)
-    val iterator = iterator()
+    konst iterator = iterator()
     var count = 0
     while (iterator.hasNext()) {
-        val element = iterator.next()
+        konst element = iterator.next()
         if (index == count++)
             return element
     }
@@ -65,10 +65,10 @@ public fun <T> Sequence<T>.elementAtOrElse(index: Int, defaultValue: (Int) -> T)
 public fun <T> Sequence<T>.elementAtOrNull(index: Int): T? {
     if (index < 0)
         return null
-    val iterator = iterator()
+    konst iterator = iterator()
     var count = 0
     while (iterator.hasNext()) {
-        val element = iterator.next()
+        konst element = iterator.next()
         if (index == count++)
             return element
     }
@@ -107,7 +107,7 @@ public inline fun <T> Sequence<T>.findLast(predicate: (T) -> Boolean): T? {
  * @throws NoSuchElementException if the sequence is empty.
  */
 public fun <T> Sequence<T>.first(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         throw NoSuchElementException("Sequence is empty.")
     return iterator.next()
@@ -125,8 +125,8 @@ public inline fun <T> Sequence<T>.first(predicate: (T) -> Boolean): T {
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to elements of this sequence in iteration order,
- * or throws [NoSuchElementException] if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to elements of this sequence in iteration order,
+ * or throws [NoSuchElementException] if no non-null konstue was produced.
  *
  * The operation is _terminal_.
  * 
@@ -135,12 +135,12 @@ public inline fun <T> Sequence<T>.first(predicate: (T) -> Boolean): T {
 @SinceKotlin("1.5")
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Any> Sequence<T>.firstNotNullOf(transform: (T) -> R?): R {
-    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the sequence was transformed to a non-null value.")
+    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the sequence was transformed to a non-null konstue.")
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to elements of this sequence in iteration order,
- * or `null` if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to elements of this sequence in iteration order,
+ * or `null` if no non-null konstue was produced.
  *
  * The operation is _terminal_.
  * 
@@ -150,7 +150,7 @@ public inline fun <T, R : Any> Sequence<T>.firstNotNullOf(transform: (T) -> R?):
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Any> Sequence<T>.firstNotNullOfOrNull(transform: (T) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) {
             return result
         }
@@ -164,7 +164,7 @@ public inline fun <T, R : Any> Sequence<T>.firstNotNullOfOrNull(transform: (T) -
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.firstOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         return null
     return iterator.next()
@@ -239,7 +239,7 @@ public inline fun <T> Sequence<T>.indexOfLast(predicate: (T) -> Boolean): Int {
  * @sample samples.collections.Collections.Elements.last
  */
 public fun <T> Sequence<T>.last(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         throw NoSuchElementException("Sequence is empty.")
     var last = iterator.next()
@@ -296,7 +296,7 @@ public fun <@kotlin.internal.OnlyInputTypes T> Sequence<T>.lastIndexOf(element: 
  * @sample samples.collections.Collections.Elements.last
  */
 public fun <T> Sequence<T>.lastOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         return null
     var last = iterator.next()
@@ -328,10 +328,10 @@ public inline fun <T> Sequence<T>.lastOrNull(predicate: (T) -> Boolean): T? {
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.single(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         throw NoSuchElementException("Sequence is empty.")
-    val single = iterator.next()
+    konst single = iterator.next()
     if (iterator.hasNext())
         throw IllegalArgumentException("Sequence has more than one element.")
     return single
@@ -363,10 +363,10 @@ public inline fun <T> Sequence<T>.single(predicate: (T) -> Boolean): T {
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.singleOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext())
         return null
-    val single = iterator.next()
+    konst single = iterator.next()
     if (iterator.hasNext())
         return null
     return single
@@ -434,7 +434,7 @@ public fun <T> Sequence<T>.filter(predicate: (T) -> Boolean): Sequence<T> {
 /**
  * Returns a sequence containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -442,13 +442,13 @@ public fun <T> Sequence<T>.filter(predicate: (T) -> Boolean): Sequence<T> {
  */
 public fun <T> Sequence<T>.filterIndexed(predicate: (index: Int, T) -> Boolean): Sequence<T> {
     // TODO: Rewrite with generalized MapFilterIndexingSequence
-    return TransformingSequence(FilteringSequence(IndexingSequence(this), true, { predicate(it.index, it.value) }), { it.value })
+    return TransformingSequence(FilteringSequence(IndexingSequence(this), true, { predicate(it.index, it.konstue) }), { it.konstue })
 }
 
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  *
  * The operation is _terminal_.
  * 
@@ -583,7 +583,7 @@ public fun <T> Sequence<T>.takeWhile(predicate: (T) -> Boolean): Sequence<T> {
 public fun <T : Comparable<T>> Sequence<T>.sorted(): Sequence<T> {
     return object : Sequence<T> {
         override fun iterator(): Iterator<T> {
-            val sortedList = this@sorted.toMutableList()
+            konst sortedList = this@sorted.toMutableList()
             sortedList.sort()
             return sortedList.iterator()
         }
@@ -591,7 +591,7 @@ public fun <T : Comparable<T>> Sequence<T>.sorted(): Sequence<T> {
 }
 
 /**
- * Returns a sequence that yields elements of this sequence sorted according to natural sort order of the value returned by specified [selector] function.
+ * Returns a sequence that yields elements of this sequence sorted according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  *
@@ -604,7 +604,7 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.sortedBy(crossinline select
 }
 
 /**
- * Returns a sequence that yields elements of this sequence sorted descending according to natural sort order of the value returned by specified [selector] function.
+ * Returns a sequence that yields elements of this sequence sorted descending according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  *
@@ -635,7 +635,7 @@ public fun <T : Comparable<T>> Sequence<T>.sortedDescending(): Sequence<T> {
 public fun <T> Sequence<T>.sortedWith(comparator: Comparator<in T>): Sequence<T> {
     return object : Sequence<T> {
         override fun iterator(): Iterator<T> {
-            val sortedList = this@sortedWith.toMutableList()
+            konst sortedList = this@sortedWith.toMutableList()
             sortedList.sortWith(comparator)
             return sortedList.iterator()
         }
@@ -643,7 +643,7 @@ public fun <T> Sequence<T>.sortedWith(comparator: Comparator<in T>): Sequence<T>
 }
 
 /**
- * Returns a [Map] containing key-value pairs provided by [transform] function
+ * Returns a [Map] containing key-konstue pairs provided by [transform] function
  * applied to elements of the given sequence.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -675,7 +675,7 @@ public inline fun <T, K> Sequence<T>.associateBy(keySelector: (T) -> K): Map<K, 
 }
 
 /**
- * Returns a [Map] containing the values provided by [valueTransform] and indexed by [keySelector] functions applied to elements of the given sequence.
+ * Returns a [Map] containing the konstues provided by [konstueTransform] and indexed by [keySelector] functions applied to elements of the given sequence.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  * 
@@ -685,14 +685,14 @@ public inline fun <T, K> Sequence<T>.associateBy(keySelector: (T) -> K): Map<K, 
  * 
  * @sample samples.collections.Collections.Transformations.associateByWithValueTransform
  */
-public inline fun <T, K, V> Sequence<T>.associateBy(keySelector: (T) -> K, valueTransform: (T) -> V): Map<K, V> {
-    return associateByTo(LinkedHashMap<K, V>(), keySelector, valueTransform)
+public inline fun <T, K, V> Sequence<T>.associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V): Map<K, V> {
+    return associateByTo(LinkedHashMap<K, V>(), keySelector, konstueTransform)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function applied to each element of the given sequence
- * and value is the element itself.
+ * and konstue is the element itself.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  *
@@ -708,9 +708,9 @@ public inline fun <T, K, M : MutableMap<in K, in T>> Sequence<T>.associateByTo(d
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function and
- * and value is provided by the [valueTransform] function applied to elements of the given sequence.
+ * and konstue is provided by the [konstueTransform] function applied to elements of the given sequence.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  *
@@ -718,15 +718,15 @@ public inline fun <T, K, M : MutableMap<in K, in T>> Sequence<T>.associateByTo(d
  * 
  * @sample samples.collections.Collections.Transformations.associateByToWithValueTransform
  */
-public inline fun <T, K, V, M : MutableMap<in K, in V>> Sequence<T>.associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M {
+public inline fun <T, K, V, M : MutableMap<in K, in V>> Sequence<T>.associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M {
     for (element in this) {
-        destination.put(keySelector(element), valueTransform(element))
+        destination.put(keySelector(element), konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs
+ * Populates and returns the [destination] mutable map with key-konstue pairs
  * provided by [transform] function applied to each element of the given sequence.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -743,8 +743,8 @@ public inline fun <T, K, V, M : MutableMap<in K, in V>> Sequence<T>.associateTo(
 }
 
 /**
- * Returns a [Map] where keys are elements from the given sequence and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given sequence and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -755,25 +755,25 @@ public inline fun <T, K, V, M : MutableMap<in K, in V>> Sequence<T>.associateTo(
  * @sample samples.collections.Collections.Transformations.associateWith
  */
 @SinceKotlin("1.3")
-public inline fun <K, V> Sequence<K>.associateWith(valueSelector: (K) -> V): Map<K, V> {
-    val result = LinkedHashMap<K, V>()
-    return associateWithTo(result, valueSelector)
+public inline fun <K, V> Sequence<K>.associateWith(konstueSelector: (K) -> V): Map<K, V> {
+    konst result = LinkedHashMap<K, V>()
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given sequence,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given sequence,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  *
  * The operation is _terminal_.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.3")
-public inline fun <K, V, M : MutableMap<in K, in V>> Sequence<K>.associateWithTo(destination: M, valueSelector: (K) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, in V>> Sequence<K>.associateWithTo(destination: M, konstueSelector: (K) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
@@ -805,13 +805,13 @@ public fun <T> Sequence<T>.toHashSet(): HashSet<T> {
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.toList(): List<T> {
-    val it = iterator()
+    konst it = iterator()
     if (!it.hasNext())
         return emptyList()
-    val element = it.next()
+    konst element = it.next()
     if (!it.hasNext())
         return listOf(element)
-    val dst = ArrayList<T>()
+    konst dst = ArrayList<T>()
     dst.add(element)
     while (it.hasNext()) dst.add(it.next())
     return dst
@@ -834,13 +834,13 @@ public fun <T> Sequence<T>.toMutableList(): MutableList<T> {
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.toSet(): Set<T> {
-    val it = iterator()
+    konst it = iterator()
     if (!it.hasNext())
         return emptySet()
-    val element = it.next()
+    konst element = it.next()
     if (!it.hasNext())
         return setOf(element)
-    val dst = LinkedHashSet<T>()
+    konst dst = LinkedHashSet<T>()
     dst.add(element)
     while (it.hasNext()) dst.add(it.next())
     return dst
@@ -918,7 +918,7 @@ public fun <T, R> Sequence<T>.flatMapIndexed(transform: (index: Int, T) -> Seque
 public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapIndexedTo(destination: C, transform: (index: Int, T) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(checkIndexOverflow(index++), element)
+        konst list = transform(checkIndexOverflow(index++), element)
         destination.addAll(list)
     }
     return destination
@@ -938,7 +938,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapIndexed
 public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapIndexedTo(destination: C, transform: (index: Int, T) -> Sequence<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(checkIndexOverflow(index++), element)
+        konst list = transform(checkIndexOverflow(index++), element)
         destination.addAll(list)
     }
     return destination
@@ -955,7 +955,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapIndexed
 @kotlin.jvm.JvmName("flatMapIterableTo")
 public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapTo(destination: C, transform: (T) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -968,7 +968,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapTo(dest
  */
 public inline fun <T, R, C : MutableCollection<in R>> Sequence<T>.flatMapTo(destination: C, transform: (T) -> Sequence<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -989,9 +989,9 @@ public inline fun <T, K> Sequence<T>.groupBy(keySelector: (T) -> K): Map<K, List
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original sequence
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original sequence
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original sequence.
  *
@@ -999,8 +999,8 @@ public inline fun <T, K> Sequence<T>.groupBy(keySelector: (T) -> K): Map<K, List
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <T, K, V> Sequence<T>.groupBy(keySelector: (T) -> K, valueTransform: (T) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <T, K, V> Sequence<T>.groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
@@ -1015,17 +1015,17 @@ public inline fun <T, K, V> Sequence<T>.groupBy(keySelector: (T) -> K, valueTran
  */
 public inline fun <T, K, M : MutableMap<in K, MutableList<T>>> Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<T>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<T>() }
         list.add(element)
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original sequence
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original sequence
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  *
@@ -1033,11 +1033,11 @@ public inline fun <T, K, M : MutableMap<in K, MutableList<T>>> Sequence<T>.group
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <T, K, V, M : MutableMap<in K, MutableList<V>>> Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M {
+public inline fun <T, K, V, M : MutableMap<in K, MutableList<V>>> Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
@@ -1204,7 +1204,7 @@ public fun <T, K> Sequence<T>.distinctBy(selector: (T) -> K): Sequence<T> {
  * The operation is _terminal_.
  */
 public fun <T> Sequence<T>.toMutableSet(): MutableSet<T> {
-    val set = LinkedHashSet<T>()
+    konst set = LinkedHashSet<T>()
     for (item in this) set.add(item)
     return set
 }
@@ -1271,12 +1271,12 @@ public inline fun <T> Sequence<T>.count(predicate: (T) -> Boolean): Int {
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the sequence is empty.
+ * Returns the specified [initial] konstue if the sequence is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  */
@@ -1287,13 +1287,13 @@ public inline fun <T, R> Sequence<T>.fold(initial: R, operation: (acc: R, T) -> 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original sequence.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original sequence.
  * 
- * Returns the specified [initial] value if the sequence is empty.
+ * Returns the specified [initial] konstue if the sequence is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  */
@@ -1338,11 +1338,11 @@ public inline fun <T> Sequence<T>.forEachIndexed(action: (index: Int, T) -> Unit
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Sequence<Double>.max(): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1361,11 +1361,11 @@ public fun Sequence<Double>.max(): Double {
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Sequence<Float>.max(): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1382,18 +1382,18 @@ public fun Sequence<Float>.max(): Float {
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T : Comparable<T>> Sequence<T>.max(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  *
  * The operation is _terminal_.
  * 
@@ -1405,14 +1405,14 @@ public fun <T : Comparable<T>> Sequence<T>.max(): T {
 @kotlin.jvm.JvmName("maxByOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public inline fun <T, R : Comparable<R>> Sequence<T>.maxBy(selector: (T) -> R): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxElem = iterator.next()
     if (!iterator.hasNext()) return maxElem
     var maxValue = selector(maxElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1422,7 +1422,7 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxBy(selector: (T) -> R): 
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  *
  * The operation is _terminal_.
  * 
@@ -1430,14 +1430,14 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxBy(selector: (T) -> R): 
  */
 @SinceKotlin("1.4")
 public inline fun <T, R : Comparable<R>> Sequence<T>.maxByOrNull(selector: (T) -> R): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxElem = iterator.next()
     if (!iterator.hasNext()) return maxElem
     var maxValue = selector(maxElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1447,10 +1447,10 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxByOrNull(selector: (T) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  * 
@@ -1461,21 +1461,21 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxByOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.maxOf(selector: (T) -> Double): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  * 
@@ -1486,18 +1486,18 @@ public inline fun <T> Sequence<T>.maxOf(selector: (T) -> Double): Double {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.maxOf(selector: (T) -> Float): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  *
  * The operation is _terminal_.
@@ -1509,11 +1509,11 @@ public inline fun <T> Sequence<T>.maxOf(selector: (T) -> Float): Float {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Sequence<T>.maxOf(selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (maxValue < v) {
             maxValue = v
         }
@@ -1522,10 +1522,10 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxOf(selector: (T) -> R): 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  */
@@ -1534,21 +1534,21 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxOf(selector: (T) -> R): 
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.maxOfOrNull(selector: (T) -> Double): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  */
@@ -1557,18 +1557,18 @@ public inline fun <T> Sequence<T>.maxOfOrNull(selector: (T) -> Double): Double? 
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.maxOfOrNull(selector: (T) -> Float): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  *
  * The operation is _terminal_.
@@ -1578,11 +1578,11 @@ public inline fun <T> Sequence<T>.maxOfOrNull(selector: (T) -> Float): Float? {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Sequence<T>.maxOfOrNull(selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (maxValue < v) {
             maxValue = v
         }
@@ -1591,8 +1591,8 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxOfOrNull(selector: (T) -
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the sequence.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the sequence.
  * 
  * @throws NoSuchElementException if the sequence is empty.
  *
@@ -1603,11 +1603,11 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.maxOfOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Sequence<T>.maxOfWith(comparator: Comparator<in R>, selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -1616,8 +1616,8 @@ public inline fun <T, R> Sequence<T>.maxOfWith(comparator: Comparator<in R>, sel
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the sequence or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the sequence or `null` if there are no elements.
  *
  * The operation is _terminal_.
  */
@@ -1626,11 +1626,11 @@ public inline fun <T, R> Sequence<T>.maxOfWith(comparator: Comparator<in R>, sel
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Sequence<T>.maxOfWithOrNull(comparator: Comparator<in R>, selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -1647,11 +1647,11 @@ public inline fun <T, R> Sequence<T>.maxOfWithOrNull(comparator: Comparator<in R
  */
 @SinceKotlin("1.4")
 public fun Sequence<Double>.maxOrNull(): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1666,11 +1666,11 @@ public fun Sequence<Double>.maxOrNull(): Double? {
  */
 @SinceKotlin("1.4")
 public fun Sequence<Float>.maxOrNull(): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1683,18 +1683,18 @@ public fun Sequence<Float>.maxOrNull(): Float? {
  */
 @SinceKotlin("1.4")
 public fun <T : Comparable<T>> Sequence<T>.maxOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  *
  * The operation is _terminal_.
  * 
@@ -1704,28 +1704,28 @@ public fun <T : Comparable<T>> Sequence<T>.maxOrNull(): T? {
 @kotlin.jvm.JvmName("maxWithOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T> Sequence<T>.maxWith(comparator: Comparator<in T>): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  *
  * The operation is _terminal_.
  */
 @SinceKotlin("1.4")
 public fun <T> Sequence<T>.maxWithOrNull(comparator: Comparator<in T>): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
@@ -1744,11 +1744,11 @@ public fun <T> Sequence<T>.maxWithOrNull(comparator: Comparator<in T>): T? {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Sequence<Double>.min(): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -1767,11 +1767,11 @@ public fun Sequence<Double>.min(): Double {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Sequence<Float>.min(): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -1788,18 +1788,18 @@ public fun Sequence<Float>.min(): Float {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T : Comparable<T>> Sequence<T>.min(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  *
  * The operation is _terminal_.
  * 
@@ -1811,14 +1811,14 @@ public fun <T : Comparable<T>> Sequence<T>.min(): T {
 @kotlin.jvm.JvmName("minByOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public inline fun <T, R : Comparable<R>> Sequence<T>.minBy(selector: (T) -> R): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minElem = iterator.next()
     if (!iterator.hasNext()) return minElem
     var minValue = selector(minElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -1828,7 +1828,7 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minBy(selector: (T) -> R): 
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  *
  * The operation is _terminal_.
  * 
@@ -1836,14 +1836,14 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minBy(selector: (T) -> R): 
  */
 @SinceKotlin("1.4")
 public inline fun <T, R : Comparable<R>> Sequence<T>.minByOrNull(selector: (T) -> R): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minElem = iterator.next()
     if (!iterator.hasNext()) return minElem
     var minValue = selector(minElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -1853,10 +1853,10 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minByOrNull(selector: (T) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  * 
@@ -1867,21 +1867,21 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minByOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.minOf(selector: (T) -> Double): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  * 
@@ -1892,18 +1892,18 @@ public inline fun <T> Sequence<T>.minOf(selector: (T) -> Double): Double {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.minOf(selector: (T) -> Float): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence.
  *
  * The operation is _terminal_.
@@ -1915,11 +1915,11 @@ public inline fun <T> Sequence<T>.minOf(selector: (T) -> Float): Float {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Sequence<T>.minOf(selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (minValue > v) {
             minValue = v
         }
@@ -1928,10 +1928,10 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minOf(selector: (T) -> R): 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  */
@@ -1940,21 +1940,21 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minOf(selector: (T) -> R): 
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.minOfOrNull(selector: (T) -> Double): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  *
  * The operation is _terminal_.
  */
@@ -1963,18 +1963,18 @@ public inline fun <T> Sequence<T>.minOfOrNull(selector: (T) -> Double): Double? 
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Sequence<T>.minOfOrNull(selector: (T) -> Float): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the sequence or `null` if there are no elements.
  *
  * The operation is _terminal_.
@@ -1984,11 +1984,11 @@ public inline fun <T> Sequence<T>.minOfOrNull(selector: (T) -> Float): Float? {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Sequence<T>.minOfOrNull(selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (minValue > v) {
             minValue = v
         }
@@ -1997,8 +1997,8 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minOfOrNull(selector: (T) -
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the sequence.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the sequence.
  * 
  * @throws NoSuchElementException if the sequence is empty.
  *
@@ -2009,11 +2009,11 @@ public inline fun <T, R : Comparable<R>> Sequence<T>.minOfOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Sequence<T>.minOfWith(comparator: Comparator<in R>, selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -2022,8 +2022,8 @@ public inline fun <T, R> Sequence<T>.minOfWith(comparator: Comparator<in R>, sel
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the sequence or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the sequence or `null` if there are no elements.
  *
  * The operation is _terminal_.
  */
@@ -2032,11 +2032,11 @@ public inline fun <T, R> Sequence<T>.minOfWith(comparator: Comparator<in R>, sel
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Sequence<T>.minOfWithOrNull(comparator: Comparator<in R>, selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -2053,11 +2053,11 @@ public inline fun <T, R> Sequence<T>.minOfWithOrNull(comparator: Comparator<in R
  */
 @SinceKotlin("1.4")
 public fun Sequence<Double>.minOrNull(): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2072,11 +2072,11 @@ public fun Sequence<Double>.minOrNull(): Double? {
  */
 @SinceKotlin("1.4")
 public fun Sequence<Float>.minOrNull(): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2089,18 +2089,18 @@ public fun Sequence<Float>.minOrNull(): Float? {
  */
 @SinceKotlin("1.4")
 public fun <T : Comparable<T>> Sequence<T>.minOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  *
  * The operation is _terminal_.
  * 
@@ -2110,28 +2110,28 @@ public fun <T : Comparable<T>> Sequence<T>.minOrNull(): T? {
 @kotlin.jvm.JvmName("minWithOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T> Sequence<T>.minWith(comparator: Comparator<in T>): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  *
  * The operation is _terminal_.
  */
 @SinceKotlin("1.4")
 public fun <T> Sequence<T>.minWithOrNull(comparator: Comparator<in T>): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
@@ -2189,21 +2189,21 @@ public fun <T> Sequence<T>.onEachIndexed(action: (index: Int, T) -> Unit): Seque
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this sequence is empty. If the sequence can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
 public inline fun <S, T : S> Sequence<T>.reduce(operation: (acc: S, T) -> S): S {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) throw UnsupportedOperationException("Empty sequence can't be reduced.")
     var accumulator: S = iterator.next()
     while (iterator.hasNext()) {
@@ -2213,21 +2213,21 @@ public inline fun <S, T : S> Sequence<T>.reduce(operation: (acc: S, T) -> S): S 
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original sequence.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original sequence.
  * 
  * Throws an exception if this sequence is empty. If the sequence can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
 public inline fun <S, T : S> Sequence<T>.reduceIndexed(operation: (index: Int, acc: S, T) -> S): S {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) throw UnsupportedOperationException("Empty sequence can't be reduced.")
     var index = 1
     var accumulator: S = iterator.next()
@@ -2238,13 +2238,13 @@ public inline fun <S, T : S> Sequence<T>.reduceIndexed(operation: (index: Int, a
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original sequence.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original sequence.
  * 
  * Returns `null` if the sequence is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  * 
@@ -2252,7 +2252,7 @@ public inline fun <S, T : S> Sequence<T>.reduceIndexed(operation: (index: Int, a
  */
 @SinceKotlin("1.4")
 public inline fun <S, T : S> Sequence<T>.reduceIndexedOrNull(operation: (index: Int, acc: S, T) -> S): S? {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return null
     var index = 1
     var accumulator: S = iterator.next()
@@ -2263,13 +2263,13 @@ public inline fun <S, T : S> Sequence<T>.reduceIndexedOrNull(operation: (index: 
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the sequence is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  *
  * The operation is _terminal_.
  * 
@@ -2278,7 +2278,7 @@ public inline fun <S, T : S> Sequence<T>.reduceIndexedOrNull(operation: (index: 
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public inline fun <S, T : S> Sequence<T>.reduceOrNull(operation: (acc: S, T) -> S): S? {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return null
     var accumulator: S = iterator.next()
     while (iterator.hasNext()) {
@@ -2288,15 +2288,15 @@ public inline fun <S, T : S> Sequence<T>.reduceOrNull(operation: (acc: S, T) -> 
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
- * The [initial] value should also be immutable (or should not be mutated)
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
+ * The [initial] konstue should also be immutable (or should not be mutated)
  * as it may be passed to [operation] function later because of sequence's lazy nature.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2315,16 +2315,16 @@ public fun <T, R> Sequence<T>.runningFold(initial: R, operation: (acc: R, T) -> 
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original sequence and current accumulator value that starts with [initial] value.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original sequence and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
- * The [initial] value should also be immutable (or should not be mutated)
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
+ * The [initial] konstue should also be immutable (or should not be mutated)
  * as it may be passed to [operation] function later because of sequence's lazy nature.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2344,13 +2344,13 @@ public fun <T, R> Sequence<T>.runningFoldIndexed(initial: R, operation: (index: 
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this sequence.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this sequence.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
  * 
- * @param [operation] function that takes current accumulator value and the element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and the element, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2360,7 +2360,7 @@ public fun <T, R> Sequence<T>.runningFoldIndexed(initial: R, operation: (index: 
 @WasExperimental(ExperimentalStdlibApi::class)
 public fun <S, T : S> Sequence<T>.runningReduce(operation: (acc: S, T) -> S): Sequence<S> {
     return sequence {
-        val iterator = iterator()
+        konst iterator = iterator()
         if (iterator.hasNext()) {
             var accumulator: S = iterator.next()
             yield(accumulator)
@@ -2373,14 +2373,14 @@ public fun <S, T : S> Sequence<T>.runningReduce(operation: (acc: S, T) -> S): Se
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original sequence and current accumulator value that starts with the first element of this sequence.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original sequence and current accumulator konstue that starts with the first element of this sequence.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2389,7 +2389,7 @@ public fun <S, T : S> Sequence<T>.runningReduce(operation: (acc: S, T) -> S): Se
 @SinceKotlin("1.4")
 public fun <S, T : S> Sequence<T>.runningReduceIndexed(operation: (index: Int, acc: S, T) -> S): Sequence<S> {
     return sequence {
-        val iterator = iterator()
+        konst iterator = iterator()
         if (iterator.hasNext()) {
             var accumulator: S = iterator.next()
             yield(accumulator)
@@ -2403,15 +2403,15 @@ public fun <S, T : S> Sequence<T>.runningReduceIndexed(operation: (index: Int, a
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
- * The [initial] value should also be immutable (or should not be mutated)
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
+ * The [initial] konstue should also be immutable (or should not be mutated)
  * as it may be passed to [operation] function later because of sequence's lazy nature.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2424,16 +2424,16 @@ public fun <T, R> Sequence<T>.scan(initial: R, operation: (acc: R, T) -> R): Seq
 }
 
 /**
- * Returns a sequence containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original sequence and current accumulator value that starts with [initial] value.
+ * Returns a sequence containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original sequence and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting sequence.
- * The [initial] value should also be immutable (or should not be mutated)
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting sequence.
+ * The [initial] konstue should also be immutable (or should not be mutated)
  * as it may be passed to [operation] function later because of sequence's lazy nature.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  *
  * The operation is _intermediate_ and _stateless_.
  * 
@@ -2446,7 +2446,7 @@ public fun <T, R> Sequence<T>.scanIndexed(initial: R, operation: (index: Int, ac
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2461,7 +2461,7 @@ public inline fun <T> Sequence<T>.sumBy(selector: (T) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2476,7 +2476,7 @@ public inline fun <T> Sequence<T>.sumByDouble(selector: (T) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2494,7 +2494,7 @@ public inline fun <T> Sequence<T>.sumOf(selector: (T) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2512,7 +2512,7 @@ public inline fun <T> Sequence<T>.sumOf(selector: (T) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2530,7 +2530,7 @@ public inline fun <T> Sequence<T>.sumOf(selector: (T) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2549,7 +2549,7 @@ public inline fun <T> Sequence<T>.sumOf(selector: (T) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the sequence.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2598,7 +2598,7 @@ public fun <T> Sequence<T>.chunked(size: Int): Sequence<List<T>> {
  * 
  * @return sequence of results of the [transform] applied to an each list.
  * 
- * Note that the list passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the list passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * The last list may have fewer elements than the given [size].
  * 
@@ -2655,7 +2655,7 @@ public operator fun <T> Sequence<T>.minus(elements: Array<out T>): Sequence<T> {
 public operator fun <T> Sequence<T>.minus(elements: Iterable<T>): Sequence<T> {
     return object: Sequence<T> {
         override fun iterator(): Iterator<T> {
-            val other = elements.convertToListIfNotCollection()
+            konst other = elements.convertToListIfNotCollection()
             if (other.isEmpty())
                 return this@minus.iterator()
             else
@@ -2675,7 +2675,7 @@ public operator fun <T> Sequence<T>.minus(elements: Iterable<T>): Sequence<T> {
 public operator fun <T> Sequence<T>.minus(elements: Sequence<T>): Sequence<T> {
     return object: Sequence<T> {
         override fun iterator(): Iterator<T> {
-            val other = elements.toList()
+            konst other = elements.toList()
             if (other.isEmpty())
                 return this@minus.iterator()
             else
@@ -2704,8 +2704,8 @@ public inline fun <T> Sequence<T>.minusElement(element: T): Sequence<T> {
  * @sample samples.collections.Sequences.Transformations.partition
  */
 public inline fun <T> Sequence<T>.partition(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
-    val first = ArrayList<T>()
-    val second = ArrayList<T>()
+    konst first = ArrayList<T>()
+    konst second = ArrayList<T>()
     for (element in this) {
         if (predicate(element)) {
             first.add(element)
@@ -2796,7 +2796,7 @@ public fun <T> Sequence<T>.windowed(size: Int, step: Int = 1, partialWindows: Bo
  * an each list representing a view over the window of the given [size]
  * sliding along this sequence with the given [step].
  * 
- * Note that the list passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the list passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * Several last lists may have fewer elements than the given [size].
  * 
@@ -2814,7 +2814,7 @@ public fun <T, R> Sequence<T>.windowed(size: Int, step: Int = 1, partialWindows:
 }
 
 /**
- * Returns a sequence of values built from the elements of `this` sequence and the [other] sequence with the same index.
+ * Returns a sequence of konstues built from the elements of `this` sequence and the [other] sequence with the same index.
  * The resulting sequence ends as soon as the shortest input sequence ends.
  *
  * The operation is _intermediate_ and _stateless_.
@@ -2826,7 +2826,7 @@ public infix fun <T, R> Sequence<T>.zip(other: Sequence<R>): Sequence<Pair<T, R>
 }
 
 /**
- * Returns a sequence of values built from the elements of `this` sequence and the [other] sequence with the same index
+ * Returns a sequence of konstues built from the elements of `this` sequence and the [other] sequence with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The resulting sequence ends as soon as the shortest input sequence ends.
  *
@@ -2865,11 +2865,11 @@ public fun <T> Sequence<T>.zipWithNext(): Sequence<Pair<T, T>> {
 @SinceKotlin("1.2")
 public fun <T, R> Sequence<T>.zipWithNext(transform: (a: T, b: T) -> R): Sequence<R> {
     return sequence result@ {
-        val iterator = iterator()
+        konst iterator = iterator()
         if (!iterator.hasNext()) return@result
         var current = iterator.next()
         while (iterator.hasNext()) {
-            val next = iterator.next()
+            konst next = iterator.next()
             yield(transform(current, next))
             current = next
         }
@@ -2879,7 +2879,7 @@ public fun <T, R> Sequence<T>.zipWithNext(transform: (a: T, b: T) -> R): Sequenc
 /**
  * Appends the string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
  * 
- * If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+ * If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
  * elements will be appended, followed by the [truncated] string (which defaults to "...").
  *
  * The operation is _terminal_.
@@ -2903,7 +2903,7 @@ public fun <T, A : Appendable> Sequence<T>.joinTo(buffer: A, separator: CharSequ
 /**
  * Creates a string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
  * 
- * If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+ * If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
  * elements will be appended, followed by the [truncated] string (which defaults to "...").
  *
  * The operation is _terminal_.
@@ -2930,7 +2930,7 @@ public inline fun <T> Sequence<T>.asSequence(): Sequence<T> {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2946,7 +2946,7 @@ public fun Sequence<Byte>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2962,7 +2962,7 @@ public fun Sequence<Short>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2978,7 +2978,7 @@ public fun Sequence<Int>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -2994,7 +2994,7 @@ public fun Sequence<Long>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */
@@ -3010,7 +3010,7 @@ public fun Sequence<Float>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the sequence.
+ * Returns an average konstue of elements in the sequence.
  *
  * The operation is _terminal_.
  */

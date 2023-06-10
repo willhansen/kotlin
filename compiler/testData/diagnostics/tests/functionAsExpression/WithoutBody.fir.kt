@@ -1,7 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 annotation class ann
-val bas = fun ()
+konst bas = fun ()
 
 fun bar(a: Any) = fun ()
 

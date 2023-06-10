@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 import org.jetbrains.org.objectweb.asm.MethodVisitor
 
-class OptimizationClassBuilder(private val delegate: ClassBuilder, private val generationState: GenerationState) :
+class OptimizationClassBuilder(private konst delegate: ClassBuilder, private konst generationState: GenerationState) :
     DelegatingClassBuilder() {
 
     public override fun getDelegate(): ClassBuilder = delegate

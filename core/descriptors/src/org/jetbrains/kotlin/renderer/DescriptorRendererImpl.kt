@@ -30,13 +30,13 @@ import org.jetbrains.kotlin.types.typeUtil.isUnresolvedType
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 internal class DescriptorRendererImpl(
-    val options: DescriptorRendererOptionsImpl
+    konst options: DescriptorRendererOptionsImpl
 ) : DescriptorRenderer(), DescriptorRendererOptions by options/* this gives access to options without qualifier */ {
     init {
         assert(options.isLocked)
     }
 
-    private val functionTypeAnnotationsRenderer: DescriptorRendererImpl by lazy {
+    private konst functionTypeAnnotationsRenderer: DescriptorRendererImpl by lazy {
         withOptions {
             excludedTypeAnnotationClasses += listOf(StandardNames.FqNames.extensionFunctionType, StandardNames.FqNames.contextFunctionTypeParams)
         } as DescriptorRendererImpl
@@ -70,7 +70,7 @@ internal class DescriptorRendererImpl(
 
     /* NAMES RENDERING */
     override fun renderName(name: Name, rootRenderedElement: Boolean): String {
-        val escaped = escape(name.render())
+        konst escaped = escape(name.render())
         return if (boldOnlyForNamesInHtml && textFormat == RenderingFormat.HTML && rootRenderedElement) {
             "<b>$escaped</b>"
         } else
@@ -87,7 +87,7 @@ internal class DescriptorRendererImpl(
                 builder.append("companion object")
             }
             renderSpaceIfNeeded(builder)
-            val containingDeclaration = descriptor.containingDeclaration
+            konst containingDeclaration = descriptor.containingDeclaration
             if (containingDeclaration != null) {
                 builder.append("of ")
                 builder.append(renderName(containingDeclaration.name, false))
@@ -114,7 +114,7 @@ internal class DescriptorRendererImpl(
     }
 
     private fun StringBuilder.renderNormalizedType(type: KotlinType) {
-        val abbreviated = type.unwrap() as? AbbreviatedType
+        konst abbreviated = type.unwrap() as? AbbreviatedType
         if (abbreviated != null) {
             if (renderTypeExpansions) {
                 renderNormalizedTypeAsIs(abbreviated.expandedType)
@@ -148,7 +148,7 @@ internal class DescriptorRendererImpl(
             append("<Not computed yet>")
             return
         }
-        when (val unwrappedType = type.unwrap()) {
+        when (konst unwrappedType = type.unwrap()) {
             is FlexibleType -> append(unwrappedType.render(this@DescriptorRendererImpl, this@DescriptorRendererImpl))
             is SimpleType -> renderSimpleType(unwrappedType)
         }
@@ -192,10 +192,10 @@ internal class DescriptorRendererImpl(
             return "$lowerRendered!"
         }
 
-        val kotlinCollectionsPrefix = classifierNamePolicy.renderClassifier(builtIns.collection, this).substringBefore("Collection")
-        val mutablePrefix = "Mutable"
+        konst kotlinCollectionsPrefix = classifierNamePolicy.renderClassifier(builtIns.collection, this).substringBefore("Collection")
+        konst mutablePrefix = "Mutable"
         // java.util.List<Foo> -> (Mutable)List<Foo!>!
-        val simpleCollection = replacePrefixesInTypeRepresentations(
+        konst simpleCollection = replacePrefixesInTypeRepresentations(
             lowerRendered,
             kotlinCollectionsPrefix + mutablePrefix,
             upperRendered,
@@ -204,7 +204,7 @@ internal class DescriptorRendererImpl(
         )
         if (simpleCollection != null) return simpleCollection
         // java.util.Map.Entry<Foo, Bar> -> (Mutable)Map.(Mutable)Entry<Foo!, Bar!>!
-        val mutableEntry = replacePrefixesInTypeRepresentations(
+        konst mutableEntry = replacePrefixesInTypeRepresentations(
             lowerRendered,
             kotlinCollectionsPrefix + "MutableMap.MutableEntry",
             upperRendered,
@@ -213,9 +213,9 @@ internal class DescriptorRendererImpl(
         )
         if (mutableEntry != null) return mutableEntry
 
-        val kotlinPrefix = classifierNamePolicy.renderClassifier(builtIns.array, this).substringBefore("Array")
+        konst kotlinPrefix = classifierNamePolicy.renderClassifier(builtIns.array, this).substringBefore("Array")
         // Foo[] -> Array<(out) Foo!>!
-        val array = replacePrefixesInTypeRepresentations(
+        konst array = replacePrefixesInTypeRepresentations(
             lowerRendered,
             kotlinPrefix + escape("Array<"),
             upperRendered,
@@ -238,7 +238,7 @@ internal class DescriptorRendererImpl(
     private fun StringBuilder.renderDefaultType(type: KotlinType) {
         this.renderAnnotations(type)
 
-        val originalTypeOfDefNotNullType = (type as? DefinitelyNotNullType)?.original
+        konst originalTypeOfDefNotNullType = (type as? DefinitelyNotNullType)?.original
 
         when {
             type.isError -> {
@@ -274,7 +274,7 @@ internal class DescriptorRendererImpl(
         type: KotlinType,
         typeConstructor: TypeConstructor = type.constructor
     ) {
-        val possiblyInnerType = type.buildPossiblyInnerType()
+        konst possiblyInnerType = type.buildPossiblyInnerType()
         if (possiblyInnerType == null) {
             append(renderTypeConstructor(typeConstructor))
             append(renderTypeArguments(type.arguments))
@@ -294,7 +294,7 @@ internal class DescriptorRendererImpl(
         append(renderTypeArguments(possiblyInnerType.arguments))
     }
 
-    override fun renderTypeConstructor(typeConstructor: TypeConstructor): String = when (val cd = typeConstructor.declarationDescriptor) {
+    override fun renderTypeConstructor(typeConstructor: TypeConstructor): String = when (konst cd = typeConstructor.declarationDescriptor) {
         is TypeParameterDescriptor, is ClassDescriptor, is TypeAliasDescriptor -> renderClassifierName(cd)
         null -> {
             if (typeConstructor is IntersectionTypeConstructor) {
@@ -313,25 +313,25 @@ internal class DescriptorRendererImpl(
             if (it.isStarProjection) {
                 "*"
             } else {
-                val type = renderType(it.type)
+                konst type = renderType(it.type)
                 if (it.projectionKind == Variance.INVARIANT) type else "${it.projectionKind} $type"
             }
         }
     }
 
     private fun StringBuilder.renderFunctionType(type: KotlinType) {
-        val lengthBefore = length
+        konst lengthBefore = length
         // we need special renderer to skip @ExtensionFunctionType and @ContextFunctionTypeParams
         with(functionTypeAnnotationsRenderer) {
             renderAnnotations(type)
         }
-        val hasAnnotations = length != lengthBefore
+        konst hasAnnotations = length != lengthBefore
 
-        val receiverType = type.getReceiverTypeFromFunctionType()
-        val contextReceiversTypes = type.getContextReceiverTypesFromFunctionType()
+        konst receiverType = type.getReceiverTypeFromFunctionType()
+        konst contextReceiversTypes = type.getContextReceiverTypesFromFunctionType()
         if (contextReceiversTypes.isNotEmpty()) {
             append("context(")
-            val withoutLast = contextReceiversTypes.subList(0, contextReceiversTypes.lastIndex)
+            konst withoutLast = contextReceiversTypes.subList(0, contextReceiversTypes.lastIndex)
             for (contextReceiverType in withoutLast) {
                 renderNormalizedType(contextReceiverType)
                 append(", ")
@@ -340,10 +340,10 @@ internal class DescriptorRendererImpl(
             append(") ")
         }
 
-        val isSuspend = type.isSuspendFunctionType
-        val isNullable = type.isMarkedNullable
+        konst isSuspend = type.isSuspendFunctionType
+        konst isNullable = type.isMarkedNullable
 
-        val needParenthesis = isNullable || (hasAnnotations && receiverType != null)
+        konst needParenthesis = isNullable || (hasAnnotations && receiverType != null)
         if (needParenthesis) {
             if (isSuspend) {
                 insert(lengthBefore, '(')
@@ -363,7 +363,7 @@ internal class DescriptorRendererImpl(
         renderModifier(this, isSuspend, "suspend")
 
         if (receiverType != null) {
-            val surroundReceiver = shouldRenderAsPrettyFunctionType(receiverType) && !receiverType.isMarkedNullable ||
+            konst surroundReceiver = shouldRenderAsPrettyFunctionType(receiverType) && !receiverType.isMarkedNullable ||
                     receiverType.hasModifiersOrAnnotations() ||
                     receiverType is DefinitelyNotNullType
             if (surroundReceiver) {
@@ -381,11 +381,11 @@ internal class DescriptorRendererImpl(
         if (type.isBuiltinExtensionFunctionalType && type.arguments.size <= 1) {
             append("???")
         } else {
-            val parameterTypes = type.getValueParameterTypesFromFunctionType()
+            konst parameterTypes = type.getValueParameterTypesFromFunctionType()
             for ((index, typeProjection) in parameterTypes.withIndex()) {
                 if (index > 0) append(", ")
 
-                val name = if (parameterNamesInFunctionalTypes) typeProjection.type.extractParameterNameFromFunctionTypeArgument() else null
+                konst name = if (parameterNamesInFunctionalTypes) typeProjection.type.extractParameterNameFromFunctionTypeArgument() else null
                 if (name != null) {
                     append(renderName(name, false))
                     append(": ")
@@ -412,10 +412,10 @@ internal class DescriptorRendererImpl(
             return
         }
         
-        val containingDeclaration = descriptor.containingDeclaration
+        konst containingDeclaration = descriptor.containingDeclaration
         if (containingDeclaration != null && containingDeclaration !is ModuleDescriptor) {
             append(" ").append(renderMessage("defined in")).append(" ")
-            val fqName = DescriptorUtils.getFqName(containingDeclaration)
+            konst fqName = DescriptorUtils.getFqName(containingDeclaration)
             append(if (fqName.isRoot) "root package" else renderFqName(fqName))
 
             if (withSourceFileForTopLevel &&
@@ -432,9 +432,9 @@ internal class DescriptorRendererImpl(
     private fun StringBuilder.renderAnnotations(annotated: Annotated, target: AnnotationUseSiteTarget? = null) {
         if (DescriptorRendererModifier.ANNOTATIONS !in modifiers) return
 
-        val excluded = if (annotated is KotlinType) excludedTypeAnnotationClasses else excludedAnnotationClasses
+        konst excluded = if (annotated is KotlinType) excludedTypeAnnotationClasses else excludedAnnotationClasses
 
-        val annotationFilter = annotationFilter
+        konst annotationFilter = annotationFilter
         for (annotation in annotated.annotations) {
             if (annotation.fqName !in excluded
                 && !annotation.isParameterName()
@@ -460,11 +460,11 @@ internal class DescriptorRendererImpl(
             if (target != null) {
                 append(target.renderName + ":")
             }
-            val annotationType = annotation.type
+            konst annotationType = annotation.type
             append(renderType(annotationType))
 
             if (includeAnnotationArguments) {
-                val arguments = renderAndSortAnnotationArguments(annotation)
+                konst arguments = renderAndSortAnnotationArguments(annotation)
                 if (includeEmptyAnnotationArguments || arguments.isNotEmpty()) {
                     arguments.joinTo(this, ", ", "(", ")")
                 }
@@ -477,26 +477,26 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderAndSortAnnotationArguments(descriptor: AnnotationDescriptor): List<String> {
-        val allValueArguments = descriptor.allValueArguments
-        val classDescriptor = if (renderDefaultAnnotationArguments) descriptor.annotationClass else null
-        val parameterDescriptorsWithDefaultValue = classDescriptor?.unsubstitutedPrimaryConstructor?.valueParameters
+        konst allValueArguments = descriptor.allValueArguments
+        konst classDescriptor = if (renderDefaultAnnotationArguments) descriptor.annotationClass else null
+        konst parameterDescriptorsWithDefaultValue = classDescriptor?.unsubstitutedPrimaryConstructor?.konstueParameters
             ?.filter { it.declaresDefaultValue() }
             ?.map { it.name }
             .orEmpty()
-        val defaultList = parameterDescriptorsWithDefaultValue.filter { it !in allValueArguments }.map { "${it.asString()} = ..." }
-        val argumentList = allValueArguments.entries
-            .map { (name, value) ->
-                "${name.asString()} = ${if (name !in parameterDescriptorsWithDefaultValue) renderConstant(value) else "..."}"
+        konst defaultList = parameterDescriptorsWithDefaultValue.filter { it !in allValueArguments }.map { "${it.asString()} = ..." }
+        konst argumentList = allValueArguments.entries
+            .map { (name, konstue) ->
+                "${name.asString()} = ${if (name !in parameterDescriptorsWithDefaultValue) renderConstant(konstue) else "..."}"
             }
         return (defaultList + argumentList).sorted()
     }
 
-    private fun renderConstant(value: ConstantValue<*>): String? {
-        options.propertyConstantRenderer?.let { return it.invoke(value) }
-        return when (value) {
-            is ArrayValue -> value.value.mapNotNull { renderConstant(it) }.joinToString(", ", "{", "}")
-            is AnnotationValue -> renderAnnotation(value.value).removePrefix("@")
-            is KClassValue -> when (val classValue = value.value) {
+    private fun renderConstant(konstue: ConstantValue<*>): String? {
+        options.propertyConstantRenderer?.let { return it.invoke(konstue) }
+        return when (konstue) {
+            is ArrayValue -> konstue.konstue.mapNotNull { renderConstant(it) }.joinToString(", ", "{", "}")
+            is AnnotationValue -> renderAnnotation(konstue.konstue).removePrefix("@")
+            is KClassValue -> when (konst classValue = konstue.konstue) {
                 is KClassValue.Value.LocalClass -> "${classValue.type}::class"
                 is KClassValue.Value.NormalClass -> {
                     var type = classValue.classId.asSingleFqName().asString()
@@ -504,7 +504,7 @@ internal class DescriptorRendererImpl(
                     "$type::class"
                 }
             }
-            else -> value.toString()
+            else -> konstue.toString()
         }
     }
 
@@ -529,7 +529,7 @@ internal class DescriptorRendererImpl(
         if (this is ClassDescriptor) {
             return if (kind == ClassKind.INTERFACE) Modality.ABSTRACT else Modality.FINAL
         }
-        val containingClassDescriptor = containingDeclaration as? ClassDescriptor ?: return Modality.FINAL
+        konst containingClassDescriptor = containingDeclaration as? ClassDescriptor ?: return Modality.FINAL
         if (this !is CallableMemberDescriptor) return Modality.FINAL
         if (this.overriddenDescriptors.isNotEmpty()) {
             if (containingClassDescriptor.modality != Modality.FINAL) return Modality.OPEN
@@ -570,8 +570,8 @@ internal class DescriptorRendererImpl(
         }
     }
 
-    private fun renderModifier(builder: StringBuilder, value: Boolean, modifier: String) {
-        if (value) {
+    private fun renderModifier(builder: StringBuilder, konstue: Boolean, modifier: String) {
+        if (konstue) {
             builder.append(renderKeyword(modifier))
             builder.append(" ")
         }
@@ -584,9 +584,9 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderAdditionalModifiers(functionDescriptor: FunctionDescriptor, builder: StringBuilder) {
-        val isOperator =
+        konst isOperator =
             functionDescriptor.isOperator && (functionDescriptor.overriddenDescriptors.none { it.isOperator } || alwaysRenderModifiers)
-        val isInfix =
+        konst isInfix =
             functionDescriptor.isInfix && (functionDescriptor.overriddenDescriptors.none { it.isInfix } || alwaysRenderModifiers)
 
         renderModifier(builder, functionDescriptor.isTailrec, "tailrec")
@@ -622,15 +622,15 @@ internal class DescriptorRendererImpl(
         }
 
         renderModifier(builder, typeParameter.isReified, "reified")
-        val variance = typeParameter.variance.label
+        konst variance = typeParameter.variance.label
         renderModifier(builder, variance.isNotEmpty(), variance)
 
         builder.renderAnnotations(typeParameter)
 
         renderName(typeParameter, builder, topLevel)
-        val upperBoundsCount = typeParameter.upperBounds.size
+        konst upperBoundsCount = typeParameter.upperBounds.size
         if ((upperBoundsCount > 1 && !topLevel) || upperBoundsCount == 1) {
-            val upperBound = typeParameter.upperBounds.iterator().next()
+            konst upperBound = typeParameter.upperBounds.iterator().next()
             if (!KotlinBuiltIns.isDefaultBound(upperBound)) {
                 builder.append(" : ").append(renderType(upperBound))
             }
@@ -671,9 +671,9 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderTypeParameterList(builder: StringBuilder, typeParameters: List<TypeParameterDescriptor>) {
-        val iterator = typeParameters.iterator()
+        konst iterator = typeParameters.iterator()
         while (iterator.hasNext()) {
-            val typeParameterDescriptor = iterator.next()
+            konst typeParameterDescriptor = iterator.next()
             renderTypeParameter(typeParameterDescriptor, builder, false)
             if (iterator.hasNext()) {
                 builder.append(", ")
@@ -722,11 +722,11 @@ internal class DescriptorRendererImpl(
 
         renderName(function, builder, true)
 
-        renderValueParameters(function.valueParameters, function.hasSynthesizedParameterNames(), builder)
+        renderValueParameters(function.konstueParameters, function.hasSynthesizedParameterNames(), builder)
 
         renderReceiverAfterName(function, builder)
 
-        val returnType = function.returnType
+        konst returnType = function.returnType
         if (!withoutReturnType && (unitReturnType || (returnType == null || !KotlinBuiltIns.isUnit(returnType)))) {
             builder.append(": ").append(if (returnType == null) "[NULL]" else renderType(returnType))
         }
@@ -737,7 +737,7 @@ internal class DescriptorRendererImpl(
     private fun renderReceiverAfterName(callableDescriptor: CallableDescriptor, builder: StringBuilder) {
         if (!receiverAfterName) return
 
-        val receiver = callableDescriptor.extensionReceiverParameter
+        konst receiver = callableDescriptor.extensionReceiverParameter
         if (receiver != null) {
             builder.append(" on ").append(renderType(receiver.type))
         }
@@ -759,7 +759,7 @@ internal class DescriptorRendererImpl(
         }
         for ((i, contextReceiver) in contextReceivers.withIndex()) {
             builder.renderAnnotations(contextReceiver, AnnotationUseSiteTarget.RECEIVER)
-            val typeString = contextReceiver.type.renderForReceiver()
+            konst typeString = contextReceiver.type.renderForReceiver()
             builder.append(typeString)
             if (i == contextReceivers.lastIndex) {
                 builder.append(") ")
@@ -770,26 +770,26 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderReceiver(callableDescriptor: CallableDescriptor, builder: StringBuilder) {
-        val receiver = callableDescriptor.extensionReceiverParameter
+        konst receiver = callableDescriptor.extensionReceiverParameter
         if (receiver != null) {
             builder.renderAnnotations(receiver, AnnotationUseSiteTarget.RECEIVER)
 
-            val typeString = receiver.type.renderForReceiver()
+            konst typeString = receiver.type.renderForReceiver()
             builder.append(typeString).append(".")
         }
     }
 
     private fun renderConstructor(constructor: ConstructorDescriptor, builder: StringBuilder) {
         builder.renderAnnotations(constructor)
-        val visibilityRendered = (options.renderDefaultVisibility || constructor.constructedClass.modality != Modality.SEALED)
+        konst visibilityRendered = (options.renderDefaultVisibility || constructor.constructedClass.modality != Modality.SEALED)
                 && renderVisibility(constructor.visibility, builder)
         renderMemberKind(constructor, builder)
 
-        val constructorKeywordRendered = renderConstructorKeyword || !constructor.isPrimary || visibilityRendered
+        konst constructorKeywordRendered = renderConstructorKeyword || !constructor.isPrimary || visibilityRendered
         if (constructorKeywordRendered) {
             builder.append(renderKeyword("constructor"))
         }
-        val classDescriptor = constructor.containingDeclaration
+        konst classDescriptor = constructor.containingDeclaration
         if (secondaryConstructorsAsPrimary) {
             if (constructorKeywordRendered) {
                 builder.append(" ")
@@ -798,12 +798,12 @@ internal class DescriptorRendererImpl(
             renderTypeParameters(constructor.typeParameters, builder, false)
         }
 
-        renderValueParameters(constructor.valueParameters, constructor.hasSynthesizedParameterNames(), builder)
+        renderValueParameters(constructor.konstueParameters, constructor.hasSynthesizedParameterNames(), builder)
 
         if (renderConstructorDelegation && !constructor.isPrimary && classDescriptor is ClassDescriptor) {
-            val primaryConstructor = classDescriptor.unsubstitutedPrimaryConstructor
+            konst primaryConstructor = classDescriptor.unsubstitutedPrimaryConstructor
             if (primaryConstructor != null) {
-                val parametersWithoutDefault = primaryConstructor.valueParameters.filter {
+                konst parametersWithoutDefault = primaryConstructor.konstueParameters.filter {
                     !it.declaresDefaultValue() && it.varargElementType == null
                 }
                 if (parametersWithoutDefault.isNotEmpty()) {
@@ -821,7 +821,7 @@ internal class DescriptorRendererImpl(
     private fun renderWhereSuffix(typeParameters: List<TypeParameterDescriptor>, builder: StringBuilder) {
         if (withoutTypeParameters) return
 
-        val upperBoundStrings = ArrayList<String>(0)
+        konst upperBoundStrings = ArrayList<String>(0)
 
         for (typeParameter in typeParameters) {
             typeParameter.upperBounds
@@ -844,15 +844,15 @@ internal class DescriptorRendererImpl(
         synthesizedParameterNames: Boolean,
         builder: StringBuilder
     ) {
-        val includeNames = shouldRenderParameterNames(synthesizedParameterNames)
-        val parameterCount = parameters.size
-        valueParametersHandler.appendBeforeValueParameters(parameterCount, builder)
+        konst includeNames = shouldRenderParameterNames(synthesizedParameterNames)
+        konst parameterCount = parameters.size
+        konstueParametersHandler.appendBeforeValueParameters(parameterCount, builder)
         for ((index, parameter) in parameters.withIndex()) {
-            valueParametersHandler.appendBeforeValueParameter(parameter, index, parameterCount, builder)
+            konstueParametersHandler.appendBeforeValueParameter(parameter, index, parameterCount, builder)
             renderValueParameter(parameter, includeNames, builder, false)
-            valueParametersHandler.appendAfterValueParameter(parameter, index, parameterCount, builder)
+            konstueParametersHandler.appendAfterValueParameter(parameter, index, parameterCount, builder)
         }
-        valueParametersHandler.appendAfterValueParameters(parameterCount, builder)
+        konstueParametersHandler.appendAfterValueParameters(parameterCount, builder)
     }
 
     private fun shouldRenderParameterNames(synthesizedParameterNames: Boolean): Boolean = when (parameterNameRenderingPolicy) {
@@ -863,42 +863,42 @@ internal class DescriptorRendererImpl(
 
     /* VARIABLES */
     private fun renderValueParameter(
-        valueParameter: ValueParameterDescriptor,
+        konstueParameter: ValueParameterDescriptor,
         includeName: Boolean,
         builder: StringBuilder,
         topLevel: Boolean
     ) {
         if (topLevel) {
-            builder.append(renderKeyword("value-parameter")).append(" ")
+            builder.append(renderKeyword("konstue-parameter")).append(" ")
         }
 
         if (verbose) {
-            builder.append("/*").append(valueParameter.index).append("*/ ")
+            builder.append("/*").append(konstueParameter.index).append("*/ ")
         }
 
-        builder.renderAnnotations(valueParameter)
-        renderModifier(builder, valueParameter.isCrossinline, "crossinline")
-        renderModifier(builder, valueParameter.isNoinline, "noinline")
+        builder.renderAnnotations(konstueParameter)
+        renderModifier(builder, konstueParameter.isCrossinline, "crossinline")
+        renderModifier(builder, konstueParameter.isNoinline, "noinline")
 
-        val isPrimaryConstructor = renderPrimaryConstructorParametersAsProperties &&
-                (valueParameter.containingDeclaration as? ClassConstructorDescriptor)?.isPrimary == true
+        konst isPrimaryConstructor = renderPrimaryConstructorParametersAsProperties &&
+                (konstueParameter.containingDeclaration as? ClassConstructorDescriptor)?.isPrimary == true
         if (isPrimaryConstructor) {
             renderModifier(builder, actualPropertiesInPrimaryConstructor, "actual")
         }
 
-        renderVariable(valueParameter, includeName, builder, topLevel, isPrimaryConstructor)
+        renderVariable(konstueParameter, includeName, builder, topLevel, isPrimaryConstructor)
 
-        val withDefaultValue =
+        konst withDefaultValue =
             defaultParameterValueRenderer != null &&
-                    (if (debugMode) valueParameter.declaresDefaultValue() else valueParameter.declaresOrInheritsDefaultValue())
+                    (if (debugMode) konstueParameter.declaresDefaultValue() else konstueParameter.declaresOrInheritsDefaultValue())
         if (withDefaultValue) {
-            builder.append(" = ${defaultParameterValueRenderer!!(valueParameter)}")
+            builder.append(" = ${defaultParameterValueRenderer!!(konstueParameter)}")
         }
     }
 
     private fun renderValVarPrefix(variable: VariableDescriptor, builder: StringBuilder, isInPrimaryConstructor: Boolean = false) {
         if (isInPrimaryConstructor || variable !is ValueParameterDescriptor) {
-            builder.append(renderKeyword(if (variable.isVar) "var" else "val")).append(" ")
+            builder.append(renderKeyword(if (variable.isVar) "var" else "konst")).append(" ")
         }
     }
 
@@ -909,10 +909,10 @@ internal class DescriptorRendererImpl(
         topLevel: Boolean,
         isInPrimaryConstructor: Boolean = false
     ) {
-        val realType = variable.type
+        konst realType = variable.type
 
-        val varargElementType = (variable as? ValueParameterDescriptor)?.varargElementType
-        val typeToRender = varargElementType ?: realType
+        konst varargElementType = (variable as? ValueParameterDescriptor)?.varargElementType
+        konst typeToRender = varargElementType ?: realType
         renderModifier(builder, varargElementType != null, "vararg")
 
         if (isInPrimaryConstructor || topLevel && !startFromName) {
@@ -977,7 +977,7 @@ internal class DescriptorRendererImpl(
                 setter.let {
                     builder.renderAnnotations(it, AnnotationUseSiteTarget.PROPERTY_SETTER)
                 }
-                setter.valueParameters.single().let {
+                setter.konstueParameters.single().let {
                     builder.renderAnnotations(it, AnnotationUseSiteTarget.SETTER_PARAMETER)
                 }
             }
@@ -987,7 +987,7 @@ internal class DescriptorRendererImpl(
     private fun renderInitializer(variable: VariableDescriptor, builder: StringBuilder) {
         if (includePropertyConstant) {
             variable.compileTimeInitializer?.let { constant ->
-                val renderedConstant = renderConstant(constant)
+                konst renderedConstant = renderConstant(constant)
                 if (renderedConstant != null) builder.append(" = ").append(escape(renderedConstant))
             }
         }
@@ -1007,8 +1007,8 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderCapturedTypeParametersIfRequired(classifier: ClassifierDescriptorWithTypeParameters, builder: StringBuilder) {
-        val typeParameters = classifier.declaredTypeParameters
-        val typeConstructorParameters = classifier.typeConstructor.parameters
+        konst typeParameters = classifier.declaredTypeParameters
+        konst typeConstructorParameters = classifier.typeConstructor.parameters
 
         if (verbose && classifier.isInner && typeConstructorParameters.size > typeParameters.size) {
             builder.append(" /*captured type parameters: ")
@@ -1019,7 +1019,7 @@ internal class DescriptorRendererImpl(
 
     /* CLASSES */
     private fun renderClass(klass: ClassDescriptor, builder: StringBuilder) {
-        val isEnumEntry = klass.kind == ClassKind.ENUM_ENTRY
+        konst isEnumEntry = klass.kind == ClassKind.ENUM_ENTRY
 
         if (!startFromName) {
             builder.renderAnnotations(klass)
@@ -1036,7 +1036,7 @@ internal class DescriptorRendererImpl(
             renderModifier(builder, DescriptorRendererModifier.INNER in modifiers && klass.isInner, "inner")
             renderModifier(builder, DescriptorRendererModifier.DATA in modifiers && klass.isData, "data")
             renderModifier(builder, DescriptorRendererModifier.INLINE in modifiers && klass.isInline, "inline")
-            renderModifier(builder, DescriptorRendererModifier.VALUE in modifiers && klass.isValue, "value")
+            renderModifier(builder, DescriptorRendererModifier.VALUE in modifiers && klass.isValue, "konstue")
             renderModifier(builder, DescriptorRendererModifier.FUN in modifiers && klass.isFun, "fun")
             renderClassKindPrefix(klass, builder)
         }
@@ -1050,18 +1050,18 @@ internal class DescriptorRendererImpl(
 
         if (isEnumEntry) return
 
-        val typeParameters = klass.declaredTypeParameters
+        konst typeParameters = klass.declaredTypeParameters
         renderTypeParameters(typeParameters, builder, false)
         renderCapturedTypeParametersIfRequired(klass, builder)
 
         if (!klass.kind.isSingleton && classWithPrimaryConstructor) {
-            val primaryConstructor = klass.unsubstitutedPrimaryConstructor
+            konst primaryConstructor = klass.unsubstitutedPrimaryConstructor
             if (primaryConstructor != null) {
                 builder.append(" ")
                 builder.renderAnnotations(primaryConstructor)
                 renderVisibility(primaryConstructor.visibility, builder)
                 builder.append(renderKeyword("constructor"))
-                renderValueParameters(primaryConstructor.valueParameters, primaryConstructor.hasSynthesizedParameterNames(), builder)
+                renderValueParameters(primaryConstructor.konstueParameters, primaryConstructor.hasSynthesizedParameterNames(), builder)
             }
         }
 
@@ -1074,7 +1074,7 @@ internal class DescriptorRendererImpl(
 
         if (KotlinBuiltIns.isNothing(klass.defaultType)) return
 
-        val supertypes = klass.typeConstructor.supertypes
+        konst supertypes = klass.typeConstructor.supertypes
         if (supertypes.isEmpty() || supertypes.size == 1 && KotlinBuiltIns.isAnyOrNullableAny(supertypes.iterator().next())) return
 
         renderSpaceIfNeeded(builder)
@@ -1106,7 +1106,7 @@ internal class DescriptorRendererImpl(
 
     private fun renderPackageHeader(fqName: FqName, fragmentOrView: String, builder: StringBuilder) {
         builder.append(renderKeyword(fragmentOrView))
-        val fqNameString = renderFqName(fqName.toUnsafe())
+        konst fqNameString = renderFqName(fqName.toUnsafe())
         if (fqNameString.isNotEmpty()) {
             builder.append(" ")
             builder.append(fqNameString)
@@ -1196,7 +1196,7 @@ internal class DescriptorRendererImpl(
     }
 
     private fun renderSpaceIfNeeded(builder: StringBuilder) {
-        val length = builder.length
+        konst length = builder.length
         if (length == 0 || builder[length - 1] != ' ') {
             builder.append(' ')
         }

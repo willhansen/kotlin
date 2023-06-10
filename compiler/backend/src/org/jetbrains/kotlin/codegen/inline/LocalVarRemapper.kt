@@ -25,14 +25,14 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 import org.jetbrains.kotlin.codegen.inline.LocalVarRemapper.RemapStatus.*
 
-class LocalVarRemapper(private val params: Parameters, private val additionalShift: Int) {
-    private val actualParamsSize: Int
-    private val remapValues = arrayOfNulls<StackValue?>(params.argsSizeOnStack)
+class LocalVarRemapper(private konst params: Parameters, private konst additionalShift: Int) {
+    private konst actualParamsSize: Int
+    private konst remapValues = arrayOfNulls<StackValue?>(params.argsSizeOnStack)
 
     init {
         var realSize = 0
         for (info in params) {
-            val shift = params.getDeclarationSlot(info)
+            konst shift = params.getDeclarationSlot(info)
             if (!info.isSkippedOrRemapped) {
                 remapValues[shift] = StackValue.local(realSize, AsmTypes.OBJECT_TYPE)
                 realSize += info.type.size
@@ -48,11 +48,11 @@ class LocalVarRemapper(private val params: Parameters, private val additionalShi
     }
 
     private fun doRemap(index: Int): RemapInfo {
-        val remappedIndex: Int
+        konst remappedIndex: Int
 
         if (index < params.argsSizeOnStack) {
-            val info = params.getParameterByDeclarationSlot(index)
-            val remapped = remapValues[index]
+            konst info = params.getParameterByDeclarationSlot(index)
+            konst remapped = remapValues[index]
             if (info.isSkipped || remapped == null) {
                 return RemapInfo(info)
             }
@@ -71,7 +71,7 @@ class LocalVarRemapper(private val params: Parameters, private val additionalShi
     }
 
     fun remap(index: Int): RemapInfo {
-        val info = doRemap(index)
+        konst info = doRemap(index)
         if (FAIL == info.status) {
             assert(info.parameterInfo != null) { "Parameter info for $index variable should be not null" }
             throw RuntimeException("Trying to access skipped parameter: " + info.parameterInfo!!.type + " at " + index)
@@ -80,41 +80,41 @@ class LocalVarRemapper(private val params: Parameters, private val additionalShi
     }
 
     fun visitIincInsn(`var`: Int, increment: Int, mv: MethodVisitor) {
-        val remap = remap(`var`)
-        if (remap.value !is StackValue.Local) {
-            throw AssertionError("Remapped value should be a local: ${remap.value}")
+        konst remap = remap(`var`)
+        if (remap.konstue !is StackValue.Local) {
+            throw AssertionError("Remapped konstue should be a local: ${remap.konstue}")
         }
-        mv.visitIincInsn(remap.value.index, increment)
+        mv.visitIincInsn(remap.konstue.index, increment)
     }
 
     fun visitLocalVariable(name: String, desc: String, signature: String?, start: Label, end: Label, index: Int, mv: MethodVisitor) {
-        val info = doRemap(index)
+        konst info = doRemap(index)
         //add entries only for shifted vars
         if (SHIFT == info.status) {
-            mv.visitLocalVariable(name, desc, signature, start, end, (info.value as StackValue.Local).index)
+            mv.visitLocalVariable(name, desc, signature, start, end, (info.konstue as StackValue.Local).index)
         }
     }
 
     fun visitVarInsn(opcode: Int, `var`: Int, mv: InstructionAdapter) {
-        val remapInfo = remap(`var`)
-        val value = remapInfo.value
-        if (value is StackValue.Local) {
-            val isStore = isStoreInstruction(opcode)
-            val localOpcode = if (remapInfo.parameterInfo != null) {
-                //All remapped value parameters can't be rewritten except case of default ones.
-                //On remapping default parameter to actual value there is only one instruction that writes to it according to mask value
+        konst remapInfo = remap(`var`)
+        konst konstue = remapInfo.konstue
+        if (konstue is StackValue.Local) {
+            konst isStore = isStoreInstruction(opcode)
+            konst localOpcode = if (remapInfo.parameterInfo != null) {
+                //All remapped konstue parameters can't be rewritten except case of default ones.
+                //On remapping default parameter to actual konstue there is only one instruction that writes to it according to mask konstue
                 //but if such parameter remapped then it passed and this mask branch code never executed
-                //TODO add assertion about parameter default value: descriptor is required
-                value.type.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
+                //TODO add assertion about parameter default konstue: descriptor is required
+                konstue.type.getOpcode(if (isStore) Opcodes.ISTORE else Opcodes.ILOAD)
             } else opcode
             
-            mv.visitVarInsn(localOpcode, value.index)
+            mv.visitVarInsn(localOpcode, konstue.index)
             if (remapInfo.parameterInfo != null && !isStore) {
-                StackValue.coerce(value.type, remapInfo.parameterInfo.type, mv)
+                StackValue.coerce(konstue.type, remapInfo.parameterInfo.type, mv)
             }
         } else {
-            assert(remapInfo.parameterInfo != null) { "Non local value should have parameter info" }
-            value!!.put(remapInfo.parameterInfo!!.type, mv)
+            assert(remapInfo.parameterInfo != null) { "Non local konstue should have parameter info" }
+            konstue!!.put(remapInfo.parameterInfo!!.type, mv)
         }
     }
 
@@ -125,8 +125,8 @@ class LocalVarRemapper(private val params: Parameters, private val additionalShi
     }
 
     class RemapInfo(
-        @JvmField val parameterInfo: ParameterInfo?,
-        @JvmField val value: StackValue? = null,
-        @JvmField val status: RemapStatus = FAIL
+        @JvmField konst parameterInfo: ParameterInfo?,
+        @JvmField konst konstue: StackValue? = null,
+        @JvmField konst status: RemapStatus = FAIL
     )
 }

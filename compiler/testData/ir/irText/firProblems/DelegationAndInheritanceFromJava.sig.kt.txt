@@ -9,7 +9,7 @@ class Impl : A, B {
   // CHECK:
   //   Mangled name: Impl.$$delegate_0
   //   Public signature: /Impl.$$delegate_0|-7286425919675154353[0]
-  private /* final field */ val $$delegate_0: B
+  private /* final field */ konst $$delegate_0: B
   // CHECK JVM_IR:
   //   Mangled name: Impl#add(kotlin.String?){}kotlin.Boolean
   //   Public signature: /Impl.add|-2525808668243873976[0]
@@ -63,7 +63,7 @@ class Impl : A, B {
   // CHECK:
   //   Mangled name: Impl{}size
   //   Public signature: /Impl.size|-6253659984320132064[0]
-  override val size: Int
+  override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: Impl#<get-size>(){}kotlin.Int
     //   Public signature: /Impl.size.<get-size>|-3941649985161900780[0]

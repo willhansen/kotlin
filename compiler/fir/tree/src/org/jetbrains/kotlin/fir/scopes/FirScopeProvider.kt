@@ -35,8 +35,8 @@ abstract class FirScopeProvider {
         useSiteSession: FirSession,
         scopeSession: ScopeSession
     ): FirContainingNamesAwareScope? {
-        val nestedClassifierScope = getNestedClassifierScope(klass, useSiteSession, scopeSession)
-        val callableScope = getStaticMemberScopeForCallables(klass, useSiteSession, scopeSession)
+        konst nestedClassifierScope = getNestedClassifierScope(klass, useSiteSession, scopeSession)
+        konst callableScope = getStaticMemberScopeForCallables(klass, useSiteSession, scopeSession)
 
         return when {
             nestedClassifierScope != null && callableScope != null ->

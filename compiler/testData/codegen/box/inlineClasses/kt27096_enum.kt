@@ -5,21 +5,21 @@
 enum class En { N, A, B, C }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z1(val x: En)
+konstue class Z1(konst x: En)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z2(val z: Z1)
+konstue class Z2(konst z: Z1)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN(val z: Z1?)
+konstue class ZN(konst z: Z1?)
 
 fun wrap1(x: En): Z1? = if (x.ordinal == 0) null else Z1(x)
 fun wrap2(x: En): Z2? = if (x.ordinal == 0) null else Z2(Z1(x))
 fun wrapN(x: En): ZN? = if (x.ordinal == 0) null else ZN(Z1(x))
 
 fun box(): String {
-    val n = En.N
-    val a = En.A
+    konst n = En.N
+    konst a = En.A
 
     if (wrap1(n) != null) throw AssertionError()
     if (wrap1(a) == null) throw AssertionError()

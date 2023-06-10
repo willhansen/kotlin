@@ -10,6 +10,6 @@ import org.jetbrains.jps.incremental.messages.CompilerMessage
 
 fun jpsReportInternalBuilderError(context: CompileContext, error: Throwable) {
     @Suppress("HardCodedStringLiteral")
-    val builderError = CompilerMessage.createInternalBuilderError("Kotlin", error)
+    konst builderError = CompilerMessage.createInternalBuilderError("Kotlin", error)
     context.processMessage(builderError)
 }

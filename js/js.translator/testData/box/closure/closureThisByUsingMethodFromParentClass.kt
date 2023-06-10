@@ -10,21 +10,21 @@ open class A {
 class B : A() {
     fun boo() = "B::boo"
 
-    val far = { foo() }
-    val gar = { boo() }
+    konst far = { foo() }
+    konst gar = { boo() }
 }
 
 
 fun box(): String {
-    val b = B()
-    val f = b.far
-    val g = b.gar
+    konst b = B()
+    konst f = b.far
+    konst g = b.gar
 
     assertEquals("A::foo", f())
     assertEquals("B::boo", g())
 
-    val fs: String = eval("B\$far\$lambda").toString()
-    val gs = (eval("B\$gar\$lambda").toString() as String).replaceAll("boo", "foo").replaceAll("gar", "far")
+    konst fs: String = ekonst("B\$far\$lambda").toString()
+    konst gs = (ekonst("B\$gar\$lambda").toString() as String).replaceAll("boo", "foo").replaceAll("gar", "far")
 
     assertEquals(gs, fs)
 

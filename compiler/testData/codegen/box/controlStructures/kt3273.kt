@@ -1,7 +1,7 @@
 fun printlnMock(a: Any) {}
 
 public fun testCoalesce() {
-    val value: String = when {
+    konst konstue: String = when {
         true -> {
             if (true) {
                 "foo"
@@ -12,7 +12,7 @@ public fun testCoalesce() {
         else -> "Hello world"
     }
 
-    printlnMock(value.length)
+    printlnMock(konstue.length)
 }
 
 fun box(): String {

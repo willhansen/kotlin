@@ -125,9 +125,9 @@ const char* addressToSymbol(const void* address, ptrdiff_t& resultOffset) {
     auto begin = record.symtabBegin;
     auto end = record.symtabEnd;
     while (begin < end) {
-      // st_value is load address adjusted.
-      if (addressValue >= begin->st_value && addressValue < begin->st_value + begin->st_size) {
-        resultOffset = addressValue - begin->st_value;
+      // st_konstue is load address adjusted.
+      if (addressValue >= begin->st_konstue && addressValue < begin->st_konstue + begin->st_size) {
+        resultOffset = addressValue - begin->st_konstue;
         return &record.strtab[begin->st_name];
       }
       begin++;
@@ -181,7 +181,7 @@ static void* mapModuleFile(HMODULE hModule) {
       continue;
     }
 
-    // Invalid result.
+    // Inkonstid result.
     std_support::free(buffer);
     return nullptr;
   }

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.name.FqName
 
-class KtFirPackageSymbolPointer(private val fqName: FqName) : KtSymbolPointer<KtPackageSymbol>() {
+class KtFirPackageSymbolPointer(private konst fqName: FqName) : KtSymbolPointer<KtPackageSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtPackageSymbol? {
         check(analysisSession is KtFirAnalysisSession)

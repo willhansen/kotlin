@@ -1,9 +1,9 @@
 // TARGET_BACKEND: JVM
 // WITH_REFLECT
 
-class A(val result: String)
+class A(konst result: String)
 
 fun box(): String {
-    val a = (::A).call("OK")
+    konst a = (::A).call("OK")
     return a.result
 }

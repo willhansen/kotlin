@@ -6,7 +6,7 @@
 // FILE: a.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: Int>(val v: T) {
+konstue class IC<T: Int>(konst v: T) {
     fun <T> getT(): T? = null
 }
 

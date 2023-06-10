@@ -3,18 +3,18 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class SnekDirection<T: Int>(val direction: T) {
+konstue class SnekDirection<T: Int>(konst direction: T) {
     companion object {
-        val Up = SnekDirection(0)
+        konst Up = SnekDirection(0)
     }
 }
 
 fun testUnbox() : SnekDirection<Int> {
-    val list = arrayListOf(SnekDirection.Up)
+    konst list = arrayListOf(SnekDirection.Up)
     return list[0]
 }
 
 fun box(): String {
-    val a = testUnbox()
+    konst a = testUnbox()
     return if (a.direction == 0) "OK" else "Fail"
 }

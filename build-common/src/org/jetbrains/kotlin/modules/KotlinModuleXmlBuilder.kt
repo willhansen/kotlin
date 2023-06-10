@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.utils.Printer
 import java.io.File
 
 class KotlinModuleXmlBuilder {
-    private val xml = StringBuilder()
-    private val p = Printer(xml)
+    private konst xml = StringBuilder()
+    private konst p = Printer(xml)
     private var done = false
 
     init {
@@ -112,7 +112,7 @@ class KotlinModuleXmlBuilder {
             isIncrementalCompilation: Boolean) {
         p.println("<!-- Classpath -->")
         for (file in files) {
-            val isOutput = directoriesToFilterOut.contains(file) && !isIncrementalCompilation
+            konst isOutput = directoriesToFilterOut.contains(file) && !isIncrementalCompilation
             if (isOutput) {
                 // For IDEA's make (incremental compilation) purposes, output directories of the current module and its dependencies
                 // appear on the class path, so we are at risk of seeing the results of the previous build, i.e. if some class was
@@ -169,9 +169,9 @@ class KotlinModuleXmlBuilder {
     }
 
     private companion object {
-        private val xmlEscapeReplacement = mapOf("<" to "&lt;", ">" to "&gt;", "&" to "&amp;", "'" to "&#39;", "\"" to "&quot;")
-        private val xmlEscapeRegex = Regex(xmlEscapeReplacement.keys.joinToString("|", "(?:", ")") { Regex.escape(it) })
+        private konst xmlEscapeReplacement = mapOf("<" to "&lt;", ">" to "&gt;", "&" to "&amp;", "'" to "&#39;", "\"" to "&quot;")
+        private konst xmlEscapeRegex = Regex(xmlEscapeReplacement.keys.joinToString("|", "(?:", ")") { Regex.escape(it) })
 
-        private fun escapeXml(string: String) = string.replace(xmlEscapeRegex) { xmlEscapeReplacement.getValue(it.value) }
+        private fun escapeXml(string: String) = string.replace(xmlEscapeRegex) { xmlEscapeReplacement.getValue(it.konstue) }
     }
 }

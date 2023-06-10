@@ -66,18 +66,18 @@ class ScriptingIT : KGPBaseTest() {
                 logLevel = if (withIC) LogLevel.DEBUG else defaultBuildOptions.logLevel
             )
         ) {
-            val appSubproject = subProject("app")
-            val bobGreetSource = appSubproject.kotlinSourcesDir().resolve("bob.greet")
-            val bobGreet = bobGreetSource.relativeTo(projectPath)
-            val aliceGreet = appSubproject.kotlinSourcesDir().resolve("alice.greet").relativeTo(projectPath)
-            val worldGreet = appSubproject.kotlinSourcesDir().resolve("world.greet").relativeTo(projectPath)
-            val greetScriptTemplateKt = subProject("script-template")
+            konst appSubproject = subProject("app")
+            konst bobGreetSource = appSubproject.kotlinSourcesDir().resolve("bob.greet")
+            konst bobGreet = bobGreetSource.relativeTo(projectPath)
+            konst aliceGreet = appSubproject.kotlinSourcesDir().resolve("alice.greet").relativeTo(projectPath)
+            konst worldGreet = appSubproject.kotlinSourcesDir().resolve("world.greet").relativeTo(projectPath)
+            konst greetScriptTemplateKt = subProject("script-template")
                 .kotlinSourcesDir()
                 .resolve("GreetScriptTemplate.kt")
                 .relativeTo(projectPath)
 
             build("assemble") {
-                val classesDir = appSubproject.kotlinClassesDir()
+                konst classesDir = appSubproject.kotlinClassesDir()
                 assertFileExists(classesDir.resolve("World.class"))
                 assertFileExists(classesDir.resolve("Alice.class"))
                 assertFileExists(classesDir.resolve("Bob.class"))

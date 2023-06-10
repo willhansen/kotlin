@@ -18,11 +18,11 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SerializationPackage
 import java.io.File
 
 object VersionReader {
-    private val VERSIONS_SLICE: WritableSlice<ModuleDescriptor, RuntimeVersions> = Slices.createSimpleSlice()
+    private konst VERSIONS_SLICE: WritableSlice<ModuleDescriptor, RuntimeVersions> = Slices.createSimpleSlice()
 
     fun getVersionsForCurrentModuleFromTrace(module: ModuleDescriptor, trace: BindingTrace): RuntimeVersions? {
         trace.get(VERSIONS_SLICE, module)?.let { return it }
-        val versions = getVersionsForCurrentModule(module) ?: return null
+        konst versions = getVersionsForCurrentModule(module) ?: return null
         trace.record(VERSIONS_SLICE, module, versions)
         return versions
     }
@@ -33,7 +33,7 @@ object VersionReader {
     }
 
     fun getVersionsForCurrentModule(module: ModuleDescriptor): RuntimeVersions? {
-        val markerClass = module.findClassAcrossModuleDependencies(
+        konst markerClass = module.findClassAcrossModuleDependencies(
             ClassId(
                 SerializationPackages.packageFqName,
                 Name.identifier(SerialEntityNames.KSERIALIZER_CLASS)

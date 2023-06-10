@@ -7,7 +7,7 @@ fun f(x: Long, zzz: Long = 1): Long
 
 fun box() : String
 {
-    val six: Long = 6;
+    konst six: Long = 6;
     if (f(six) != 720.toLong()) return "Fail"
     return "OK"
 }

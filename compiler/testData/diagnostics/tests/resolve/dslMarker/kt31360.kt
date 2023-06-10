@@ -6,21 +6,21 @@ annotation class MyDsl
 
 @MyDsl
 interface Scope<A, B> {
-    val something: A
-    val value: B
+    konst something: A
+    konst konstue: B
 }
 fun scoped1(block: Scope<Int, String>.() -> Unit) {}
 fun scoped2(block: Scope<*, String>.() -> Unit) {}
 
-val <T> Scope<*, T>.property: T get() = value
+konst <T> Scope<*, T>.property: T get() = konstue
 
 fun f() {
     scoped1 {
-        value
+        konstue
         property
     }
     scoped2 {
-        value
+        konstue
         property
     }
 }

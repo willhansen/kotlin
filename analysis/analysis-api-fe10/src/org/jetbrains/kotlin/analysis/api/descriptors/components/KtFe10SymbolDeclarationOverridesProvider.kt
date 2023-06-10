@@ -20,18 +20,18 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.getSuperClassOrAny
 import org.jetbrains.kotlin.resolve.descriptorUtil.isSubclassOf
 
 internal class KtFe10SymbolDeclarationOverridesProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSymbolDeclarationOverridesProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun <T : KtSymbol> getAllOverriddenSymbols(callableSymbol: T): List<KtCallableSymbol> {
-        val descriptor = getSymbolDescriptor(callableSymbol) as? CallableMemberDescriptor ?: return emptyList()
+        konst descriptor = getSymbolDescriptor(callableSymbol) as? CallableMemberDescriptor ?: return emptyList()
         return getOverriddenDescriptors(descriptor, true).mapNotNull { it.toKtCallableSymbol(analysisContext) }.distinct()
     }
 
     override fun <T : KtSymbol> getDirectlyOverriddenSymbols(callableSymbol: T): List<KtCallableSymbol> {
-        val descriptor = getSymbolDescriptor(callableSymbol) as? CallableMemberDescriptor ?: return emptyList()
+        konst descriptor = getSymbolDescriptor(callableSymbol) as? CallableMemberDescriptor ?: return emptyList()
         return getOverriddenDescriptors(descriptor, false).mapNotNull { it.toKtCallableSymbol(analysisContext) }.distinct()
     }
 
@@ -39,11 +39,11 @@ internal class KtFe10SymbolDeclarationOverridesProvider(
         descriptor: CallableMemberDescriptor,
         collectAllOverrides: Boolean
     ): Collection<CallableMemberDescriptor> {
-        val overriddenDescriptors = LinkedHashSet<CallableMemberDescriptor>()
-        val queue = ArrayDeque<CallableMemberDescriptor>().apply { addAll(descriptor.overriddenDescriptors) }
+        konst overriddenDescriptors = LinkedHashSet<CallableMemberDescriptor>()
+        konst queue = ArrayDeque<CallableMemberDescriptor>().apply { addAll(descriptor.overriddenDescriptors) }
 
         while (queue.isNotEmpty()) {
-            val current = queue.removeFirst()
+            konst current = queue.removeFirst()
 
             if (current.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
                 overriddenDescriptors.add(current)
@@ -53,7 +53,7 @@ internal class KtFe10SymbolDeclarationOverridesProvider(
                 }
             }
 
-            val overriddenDescriptorsForCurrent = current.overriddenDescriptors
+            konst overriddenDescriptorsForCurrent = current.overriddenDescriptors
             for (overriddenDescriptor in overriddenDescriptorsForCurrent) {
                 if (overriddenDescriptor.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
                     overriddenDescriptors.add(overriddenDescriptor)
@@ -66,14 +66,14 @@ internal class KtFe10SymbolDeclarationOverridesProvider(
     }
 
     override fun isSubClassOf(subClass: KtClassOrObjectSymbol, superClass: KtClassOrObjectSymbol): Boolean {
-        val subClassDescriptor = getSymbolDescriptor(subClass) as? ClassDescriptor ?: return false
-        val superClassDescriptor = getSymbolDescriptor(superClass) as? ClassDescriptor ?: return false
+        konst subClassDescriptor = getSymbolDescriptor(subClass) as? ClassDescriptor ?: return false
+        konst superClassDescriptor = getSymbolDescriptor(superClass) as? ClassDescriptor ?: return false
         return subClassDescriptor.isSubclassOf(superClassDescriptor)
     }
 
     override fun isDirectSubClassOf(subClass: KtClassOrObjectSymbol, superClass: KtClassOrObjectSymbol): Boolean {
-        val subClassDescriptor = getSymbolDescriptor(subClass) as? ClassDescriptor ?: return false
-        val superClassDescriptor = getSymbolDescriptor(superClass) as? ClassDescriptor ?: return false
+        konst subClassDescriptor = getSymbolDescriptor(subClass) as? ClassDescriptor ?: return false
+        konst superClassDescriptor = getSymbolDescriptor(superClass) as? ClassDescriptor ?: return false
         return subClassDescriptor.getSuperClassOrAny() == superClassDescriptor
     }
 

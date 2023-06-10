@@ -6,127 +6,127 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class IC(val x: UInt)
+konstue class IC(konst x: UInt)
 
 fun ic(x: IC) = x.x
 fun ic(x: UInt) = ic(IC(x))
 
 @JvmInline
-value class SimpleMfvc(val x: UInt, val y: IC, val z: String) {
+konstue class SimpleMfvc(konst x: UInt, konst y: IC, konst z: String) {
     companion object {
-        val SimpleMfvc.a1: SimpleMfvc
+        konst SimpleMfvc.a1: SimpleMfvc
             get() = this
 
         @JvmStatic
-        val SimpleMfvc.b1: SimpleMfvc
+        konst SimpleMfvc.b1: SimpleMfvc
             get() = this
 
         context(b@SimpleMfvc)
-        val a2: SimpleMfvc
+        konst a2: SimpleMfvc
             get() = this@b
 
         context(b@SimpleMfvc)
         @JvmStatic
-        val b2: SimpleMfvc
+        konst b2: SimpleMfvc
             get() = this@b
         
         
-        private val SimpleMfvc.private1: SimpleMfvc
+        private konst SimpleMfvc.private1: SimpleMfvc
             get() = this
 
         @JvmStatic
-        private val SimpleMfvc.private2: SimpleMfvc
+        private konst SimpleMfvc.private2: SimpleMfvc
             get() = this
 
         context(b@SimpleMfvc)
-        private val private3: SimpleMfvc
+        private konst private3: SimpleMfvc
             get() = this@b
 
         context(b@SimpleMfvc)
         @JvmStatic
-        private val private4: SimpleMfvc
+        private konst private4: SimpleMfvc
             get() = this@b
     }
 
-    val SimpleMfvc.a3: SimpleMfvc
+    konst SimpleMfvc.a3: SimpleMfvc
         get() = this
 
     context(SimpleMfvc)
-    val b3: SimpleMfvc
+    konst b3: SimpleMfvc
         get() = this@SimpleMfvc
 
     
-    private val SimpleMfvc.private1: SimpleMfvc
+    private konst SimpleMfvc.private1: SimpleMfvc
         get() = this@SimpleMfvc
     context(SimpleMfvc)
-    private val private2: SimpleMfvc
+    private konst private2: SimpleMfvc
         get() = this@SimpleMfvc
     
-    val a4: Int
+    konst a4: Int
         get() = 2
-    val b4: SimpleMfvc
+    konst b4: SimpleMfvc
         get() = this
 }
 
 fun smfvc(ic: IC, x: SimpleMfvc, ic1: UInt) = ic(ic) + x.x + ic(x.y) + ic1
 
 @JvmInline
-value class Wrapper(val simpleMfvc: SimpleMfvc)
+konstue class Wrapper(konst simpleMfvc: SimpleMfvc)
 fun smfvc(ic: IC, x: Wrapper, ic1: UInt) = smfvc(ic, x.simpleMfvc, ic1)
 
 @JvmInline
-value class GreaterMfvc(val x: SimpleMfvc, val y: IC, val z: SimpleMfvc)
+konstue class GreaterMfvc(konst x: SimpleMfvc, konst y: IC, konst z: SimpleMfvc)
 
 fun gmfvc(ic: IC, x: GreaterMfvc, ic1: UInt) = smfvc(ic, x.x, 0U) + ic(x.y) + smfvc(IC(0U), x.z, ic1)
 
 class Extensions {
-    val SimpleMfvc.x1: SimpleMfvc
+    konst SimpleMfvc.x1: SimpleMfvc
         get() = this
-    private val SimpleMfvc.private_: SimpleMfvc
+    private konst SimpleMfvc.private_: SimpleMfvc
         get() = this
 
     companion object {
-        val SimpleMfvc.y1: SimpleMfvc
+        konst SimpleMfvc.y1: SimpleMfvc
             get() = this
 
         @JvmStatic
-        val SimpleMfvc.z1: SimpleMfvc
+        konst SimpleMfvc.z1: SimpleMfvc
             get() = this
         
-        private val SimpleMfvc.private1: SimpleMfvc
+        private konst SimpleMfvc.private1: SimpleMfvc
             get() = this
 
         @JvmStatic
-        private val SimpleMfvc.private2: SimpleMfvc
+        private konst SimpleMfvc.private2: SimpleMfvc
             get() = this
     }
 }
 
 class Contexts {
     context(b@SimpleMfvc)
-    val x1: SimpleMfvc
+    konst x1: SimpleMfvc
         get() = this@b
     context(b@SimpleMfvc)
-    private val private_: SimpleMfvc
+    private konst private_: SimpleMfvc
         get() = this@b
 
     companion object {
         context(b@SimpleMfvc)
-        val y1: SimpleMfvc
+        konst y1: SimpleMfvc
             get() = this@b
 
         context(b@SimpleMfvc)
         @JvmStatic
-        val z1: SimpleMfvc
+        konst z1: SimpleMfvc
             get() = this@b
         
         context(b@SimpleMfvc)
-        private val private1: SimpleMfvc
+        private konst private1: SimpleMfvc
             get() = this@b
 
         context(b@SimpleMfvc)
         @JvmStatic
-        private val private2: SimpleMfvc
+        private konst private2: SimpleMfvc
             get() = this@b
     }
 }
@@ -135,13 +135,13 @@ fun idUnboxed(x: SimpleMfvc) = x
 fun idBoxed(x: SimpleMfvc?) = x!!
 
 fun box(): String {
-    val o1 = IC(2U)
+    konst o1 = IC(2U)
     require(ic(o1) == 2U)
-    val o2 = SimpleMfvc(1U, o1, "3")
-    val o2_ = SimpleMfvc(1U, o1, "-3")
+    konst o2 = SimpleMfvc(1U, o1, "3")
+    konst o2_ = SimpleMfvc(1U, o1, "-3")
     require(smfvc(IC(4U), o2, 5U) == 12U)
     require(smfvc(IC(4U), Wrapper(o2), 5U) == 12U)
-    val o3 = GreaterMfvc(o2, IC(6U), SimpleMfvc(7U, IC(8U), "9"))
+    konst o3 = GreaterMfvc(o2, IC(6U), SimpleMfvc(7U, IC(8U), "9"))
     require(gmfvc(IC(10U), o3, 11U) == 45U)
     with(Extensions()) {
         require(o2.x1 == o2)

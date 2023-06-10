@@ -30,18 +30,18 @@ fun IrStatement.isPartialLinkageRuntimeError(): Boolean {
 object PartialLinkageUtils {
     /** For fast check if a declaration is in the module */
     sealed interface Module {
-        val name: String
+        konst name: String
 
-        data class Real(override val name: String) : Module {
+        data class Real(override konst name: String) : Module {
             constructor(name: Name) : this(name.asString())
         }
 
         object SyntheticBuiltInFunctions : Module {
-            override val name = "<synthetic built-in functions>"
+            override konst name = "<synthetic built-in functions>"
         }
 
         object MissingDeclarations : Module {
-            override val name = "<missing declarations>"
+            override konst name = "<missing declarations>"
         }
 
         fun defaultLocationWithoutPath() = PartialLinkageLogger.Location(name, /* no path */ "", UNDEFINED_LINE_NUMBER, UNDEFINED_COLUMN_NUMBER)
@@ -59,11 +59,11 @@ object PartialLinkageUtils {
     }
 
     sealed interface File {
-        val module: Module
+        konst module: Module
         fun computeLocationForOffset(offset: Int): PartialLinkageLogger.Location
 
-        data class IrBased(private val file: IrFile) : File {
-            override val module = Module.Real(file.module.name)
+        data class IrBased(private konst file: IrFile) : File {
+            override konst module = Module.Real(file.module.name)
 
             override fun computeLocationForOffset(offset: Int) = PartialLinkageLogger.Location(
                 moduleName = module.name,
@@ -74,8 +74,8 @@ object PartialLinkageUtils {
         }
 
         class LazyIrBased(packageFragmentDescriptor: PackageFragmentDescriptor) : File {
-            override val module = Module.Real(packageFragmentDescriptor.containingDeclaration.name)
-            private val defaultLocation = module.defaultLocationWithoutPath()
+            override konst module = Module.Real(packageFragmentDescriptor.containingDeclaration.name)
+            private konst defaultLocation = module.defaultLocationWithoutPath()
 
             override fun equals(other: Any?) = (other as? LazyIrBased)?.module == module
             override fun hashCode() = module.hashCode()
@@ -84,15 +84,15 @@ object PartialLinkageUtils {
         }
 
         object SyntheticBuiltInFunctions : File {
-            override val module = Module.SyntheticBuiltInFunctions
-            private val defaultLocation = module.defaultLocationWithoutPath()
+            override konst module = Module.SyntheticBuiltInFunctions
+            private konst defaultLocation = module.defaultLocationWithoutPath()
 
             override fun computeLocationForOffset(offset: Int) = defaultLocation
         }
 
         object MissingDeclarations : File {
-            override val module = Module.MissingDeclarations
-            private val defaultLocation = module.defaultLocationWithoutPath()
+            override konst module = Module.MissingDeclarations
+            private konst defaultLocation = module.defaultLocationWithoutPath()
 
             override fun computeLocationForOffset(offset: Int) = defaultLocation
         }
@@ -121,8 +121,8 @@ object PartialLinkageUtils {
         return if (declaration.origin == PartiallyLinkedDeclarationOrigin.MISSING_DECLARATION)
             onMissingDeclaration
         else {
-            val packageFragment = declaration.getPackageFragment()
-            val packageFragmentDescriptor = with(packageFragment.symbol) { if (hasDescriptor) descriptor else null }
+            konst packageFragment = declaration.getPackageFragment()
+            konst packageFragmentDescriptor = with(packageFragment.symbol) { if (hasDescriptor) descriptor else null }
 
             when {
                 packageFragmentDescriptor is FunctionInterfacePackageFragment -> onSyntheticBuiltInFunction
@@ -135,8 +135,8 @@ object PartialLinkageUtils {
 }
 
 // A workaround for KT-58837 until KT-58904 is fixed. TODO: Merge with IrMessageLogger.
-class PartialLinkageLogger(private val irLogger: IrMessageLogger, logLevel: PartialLinkageLogLevel) {
-    class Location(val moduleName: String, val filePath: String, val lineNumber: Int, val columnNumber: Int) {
+class PartialLinkageLogger(private konst irLogger: IrMessageLogger, logLevel: PartialLinkageLogLevel) {
+    class Location(konst moduleName: String, konst filePath: String, konst lineNumber: Int, konst columnNumber: Int) {
         fun render(): StringBuilder = StringBuilder().apply {
             append(moduleName)
             if (filePath.isNotEmpty()) {
@@ -150,7 +150,7 @@ class PartialLinkageLogger(private val irLogger: IrMessageLogger, logLevel: Part
         override fun toString() = render().toString()
     }
 
-    private val irLoggerSeverity = when (logLevel) {
+    private konst irLoggerSeverity = when (logLevel) {
         PartialLinkageLogLevel.INFO -> IrMessageLogger.Severity.INFO
         PartialLinkageLogLevel.WARNING -> IrMessageLogger.Severity.WARNING
         PartialLinkageLogLevel.ERROR -> IrMessageLogger.Severity.ERROR

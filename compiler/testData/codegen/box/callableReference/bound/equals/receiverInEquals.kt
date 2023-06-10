@@ -12,13 +12,13 @@ class A {
     fun bar() {}
 }
 
-val a = A()
-val aa = A()
+konst a = A()
+konst aa = A()
 
-val aFoo = a::foo
-val aBar = a::bar
-val aaFoo = aa::foo
-val A_foo = A::foo
+konst aFoo = a::foo
+konst aBar = a::bar
+konst aaFoo = aa::foo
+konst A_foo = A::foo
 
 fun box(): String =
         when {

@@ -3,7 +3,7 @@ fun <T, R> with2(receiver: T, block: T.() -> R): R {
     return receiver.block()
 }
 
-class X(val x: String) {
+class X(konst x: String) {
     open inner class Y {
         fun foo() = x
     }
@@ -11,7 +11,7 @@ class X(val x: String) {
     fun foo(s: String): String {
         var t = ""
         with2(X(s+x)) {
-            val obj = object : Y() {}
+            konst obj = object : Y() {}
             t = obj.foo()
         }
         return t

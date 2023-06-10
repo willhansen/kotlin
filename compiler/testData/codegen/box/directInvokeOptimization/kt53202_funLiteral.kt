@@ -1,8 +1,8 @@
 fun box(): String {
-    val a = "OK"
+    konst a = "OK"
 
-    val c = (fun(): String {
-        val b = a
+    konst c = (fun(): String {
+        konst b = a
         return b
     }).invoke()
 

@@ -11,13 +11,13 @@ package kotlinx.atomicfu
  *
  * Example of transformation:
  * ```
- * val a = atomic(0)
+ * konst a = atomic(0)
  * a.compareAndSet(expect, update)
  * ```
  * is transformed to:
  * ```
  * var a = 0
- * atomicfu_compareAndSet(expect, update, { return a }, { v: Int -> a.value = v })
+ * atomicfu_compareAndSet(expect, update, { return a }, { v: Int -> a.konstue = v })
  * ```
  */
 
@@ -25,12 +25,12 @@ internal inline fun <T> atomicfu_getValue(`atomicfu$getter`: () -> T, `atomicfu$
     return `atomicfu$getter`()
 }
 
-internal inline fun <T> atomicfu_setValue(value: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Unit {
-    `atomicfu$setter`(value)
+internal inline fun <T> atomicfu_setValue(konstue: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Unit {
+    `atomicfu$setter`(konstue)
 }
 
-internal inline fun <T> atomicfu_lazySet(value: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Unit {
-    `atomicfu$setter`(value)
+internal inline fun <T> atomicfu_lazySet(konstue: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Unit {
+    `atomicfu$setter`(konstue)
 }
 
 internal inline fun <T> atomicfu_compareAndSet(expect: T, update: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Boolean {
@@ -42,20 +42,20 @@ internal inline fun <T> atomicfu_compareAndSet(expect: T, update: T, `atomicfu$g
     }
 }
 
-internal inline fun <T> atomicfu_getAndSet(value: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): T {
-    val oldValue = `atomicfu$getter`()
-    `atomicfu$setter`(value)
+internal inline fun <T> atomicfu_getAndSet(konstue: T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): T {
+    konst oldValue = `atomicfu$getter`()
+    `atomicfu$setter`(konstue)
     return oldValue
 }
 
 internal inline fun atomicfu_getAndIncrement(`atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
-    val oldValue = `atomicfu$getter`()
+    konst oldValue = `atomicfu$getter`()
     `atomicfu$setter`(oldValue + 1)
     return oldValue
 }
 
 internal inline fun atomicfu_getAndIncrement(`atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
-    val oldValue = `atomicfu$getter`()
+    konst oldValue = `atomicfu$getter`()
     `atomicfu$setter`(oldValue + 1)
     return oldValue
 }
@@ -71,13 +71,13 @@ internal inline fun atomicfu_incrementAndGet(`atomicfu$getter`: () -> Long, `ato
 }
 
 internal inline fun atomicfu_getAndDecrement(`atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
-    val oldValue = `atomicfu$getter`()
+    konst oldValue = `atomicfu$getter`()
     `atomicfu$setter`(oldValue - 1)
     return oldValue
 }
 
 internal inline fun atomicfu_getAndDecrement(`atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
-    val oldValue = `atomicfu$getter`()
+    konst oldValue = `atomicfu$getter`()
     `atomicfu$setter`(oldValue - 1)
     return oldValue
 }
@@ -92,55 +92,55 @@ internal inline fun atomicfu_decrementAndGet(`atomicfu$getter`: () -> Long, `ato
     return `atomicfu$getter`()
 }
 
-internal inline fun atomicfu_getAndAdd(value: Int, `atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
-    val oldValue = `atomicfu$getter`()
-    `atomicfu$setter`(oldValue + value)
+internal inline fun atomicfu_getAndAdd(konstue: Int, `atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
+    konst oldValue = `atomicfu$getter`()
+    `atomicfu$setter`(oldValue + konstue)
     return oldValue
 }
 
-internal inline fun atomicfu_getAndAdd(value: Long, `atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
-    val oldValue = `atomicfu$getter`()
-    `atomicfu$setter`(oldValue + value)
+internal inline fun atomicfu_getAndAdd(konstue: Long, `atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
+    konst oldValue = `atomicfu$getter`()
+    `atomicfu$setter`(oldValue + konstue)
     return oldValue
 }
 
-internal inline fun atomicfu_addAndGet(value: Int, `atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
-    `atomicfu$setter`(`atomicfu$getter`() + value)
+internal inline fun atomicfu_addAndGet(konstue: Int, `atomicfu$getter`: () -> Int, `atomicfu$setter`: (Int) -> Unit): Int {
+    `atomicfu$setter`(`atomicfu$getter`() + konstue)
     return `atomicfu$getter`()
 }
 
-internal inline fun atomicfu_addAndGet(value: Long, `atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
-    `atomicfu$setter`(`atomicfu$getter`() + value)
+internal inline fun atomicfu_addAndGet(konstue: Long, `atomicfu$getter`: () -> Long, `atomicfu$setter`: (Long) -> Unit): Long {
+    `atomicfu$setter`(`atomicfu$getter`() + konstue)
     return `atomicfu$getter`()
 }
 
 internal inline fun <T> atomicfu_loop(action: (T) -> Unit, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): Nothing {
     while (true) {
-        val cur = `atomicfu$getter`()
+        konst cur = `atomicfu$getter`()
         action(cur)
     }
 }
 
 internal inline fun <T> atomicfu_update(function: (T) -> T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit) {
     while (true) {
-        val cur = `atomicfu$getter`()
-        val upd = function(cur)
+        konst cur = `atomicfu$getter`()
+        konst upd = function(cur)
         if (atomicfu_compareAndSet(cur, upd, `atomicfu$getter`, `atomicfu$setter`)) return
     }
 }
 
 internal inline fun <T> atomicfu_getAndUpdate(function: (T) -> T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): T {
     while (true) {
-        val cur = `atomicfu$getter`()
-        val upd = function(cur)
+        konst cur = `atomicfu$getter`()
+        konst upd = function(cur)
         if (atomicfu_compareAndSet(cur, upd, `atomicfu$getter`, `atomicfu$setter`)) return cur
     }
 }
 
 internal inline fun <T> atomicfu_updateAndGet(function: (T) -> T, `atomicfu$getter`: () -> T, `atomicfu$setter`: (T) -> Unit): T {
     while (true) {
-        val cur = `atomicfu$getter`()
-        val upd = function(cur)
+        konst cur = `atomicfu$getter`()
+        konst upd = function(cur)
         if (atomicfu_compareAndSet(cur, upd, `atomicfu$getter`, `atomicfu$setter`)) return upd
     }
 }

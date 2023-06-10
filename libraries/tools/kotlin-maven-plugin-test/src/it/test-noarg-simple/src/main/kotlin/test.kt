@@ -19,4 +19,4 @@ package test
 annotation class NoArg
 
 @NoArg
-class NoArgClass(val a: String)
+class NoArgClass(konst a: String)

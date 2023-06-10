@@ -1,4 +1,4 @@
-class Pair<out A, out B>(val first: A, val second: B)
+class Pair<out A, out B>(konst first: A, konst second: B)
 
 class Example {
     infix fun to(other: Example) = Pair(this, other)
@@ -21,8 +21,8 @@ fun test() {
     Example() <!INFIX_MODIFIER_REQUIRED!>toNonInfix<!> Example()
     Example().toNonInfix(Example())
 
-    val a = Example()
-    val b = Example()
+    konst a = Example()
+    konst b = Example()
 
     a toExt b
     a <!INFIX_MODIFIER_REQUIRED!>toExtNonInfix<!> b

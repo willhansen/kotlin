@@ -22,7 +22,7 @@ suspend fun suspendMe() =
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object: Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
         override fun resumeWith(result: Result<Unit>) {
             result.getOrThrow()
         }
@@ -35,7 +35,7 @@ fun interface SuspendFoo {
 
 fun box(): String {
     var test = ""
-    val lambda = SuspendFoo {
+    konst lambda = SuspendFoo {
         suspendMe()
         test += "O"
         suspendMe()

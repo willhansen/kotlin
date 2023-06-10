@@ -39,7 +39,7 @@ class CompilerOptionsProjectIT : KGPBaseTest() {
             build("compileKotlin") {
                 assertTasksExecuted(":compileKotlin")
 
-                val compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
+                konst compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
 
                 assert(compilationArgs.contains("-java-parameters")) {
                     printBuildOutput()
@@ -83,7 +83,7 @@ class CompilerOptionsProjectIT : KGPBaseTest() {
             build("compileKotlin") {
                 assertTasksExecuted(":compileKotlin")
 
-                val compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
+                konst compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
 
                 assert(compilationArgs.contains("-language-version 2.0")) {
                     printBuildOutput()
@@ -193,7 +193,7 @@ class CompilerOptionsProjectIT : KGPBaseTest() {
                     "w: :compileKotlin 'KotlinJvmCompile.moduleName' is deprecated, please migrate to 'compilerOptions.moduleName'!"
                 )
 
-                val compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
+                konst compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
 
                 assert(compilationArgs.contains("-module-name customModule")) {
                     printBuildOutput()
@@ -237,7 +237,7 @@ class CompilerOptionsProjectIT : KGPBaseTest() {
                     "w: :compileKotlin 'KotlinJvmCompile.moduleName' is deprecated, please migrate to 'compilerOptions.moduleName'!"
                 )
 
-                val compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
+                konst compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
 
                 assert(compilationArgs.contains("-java-parameters")) {
                     printBuildOutput()
@@ -336,7 +336,7 @@ class CompilerOptionsProjectIT : KGPBaseTest() {
                     "w: :compileKotlin 'KotlinJvmCompile.moduleName' is deprecated, please migrate to 'compilerOptions.moduleName'!"
                 )
 
-                val compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
+                konst compilationArgs = output.lineSequence().first { it.contains("Kotlin compiler args:") }
 
                 assert(compilationArgs.contains("-module-name otherCustomModuleName")) {
                     printBuildOutput()

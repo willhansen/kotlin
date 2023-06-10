@@ -12,8 +12,8 @@ FILE: nestedConstructorCallable.kt
         }
 
         public final fun main(): R|kotlin/Unit| {
-            lval x: R|kotlin/reflect/KFunction0<A.Nested>| = ::R|/A.Nested.Nested|
-            lval y: R|kotlin/reflect/KFunction0<A.Nested>| = Q|A|::R|/A.Nested.Nested|
+            lkonst x: R|kotlin/reflect/KFunction0<A.Nested>| = ::R|/A.Nested.Nested|
+            lkonst y: R|kotlin/reflect/KFunction0<A.Nested>| = Q|A|::R|/A.Nested.Nested|
         }
 
     }

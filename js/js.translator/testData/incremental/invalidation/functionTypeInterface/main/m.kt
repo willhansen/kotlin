@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val s = doTest()
+    konst s = doTest()
     when (stepId) {
         0 -> if (s == "class SuspendFunction0") return "OK"
         1 -> if (s == "class SuspendFunction1") return "OK"

@@ -3,7 +3,7 @@
 package their;
 
 public interface Condition<T> {
-    boolean value (T t);
+    boolean konstue (T t);
 }
 
 // FILE: your/ContainerUtil.java
@@ -46,8 +46,8 @@ import my.FileUtil.*
 import your.ContainerUtil.find
 
 fun foo() {
-    val externalsMap = mutableMapOf<File, String?>()
+    konst externalsMap = mutableMapOf<File, String?>()
     fun test(file: File) {
-        val base = find(externalsMap.keys) { isAncestor(it, file, false) }
+        konst base = find(externalsMap.keys) { isAncestor(it, file, false) }
     }
 }

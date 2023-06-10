@@ -22,7 +22,7 @@ class JvmIrDeserializerImpl : JvmIrDeserializer {
         irProviders: List<IrProvider>,
         extensions: JvmGeneratorExtensions,
     ): Boolean {
-        val serializedIr = when (val source = irClass.source) {
+        konst serializedIr = when (konst source = irClass.source) {
             is KotlinJvmBinarySourceElement -> source.binaryClass.classHeader.serializedIr
             is JvmPackagePartSource -> source.knownJvmBinaryClass?.classHeader?.serializedIr
             else -> null

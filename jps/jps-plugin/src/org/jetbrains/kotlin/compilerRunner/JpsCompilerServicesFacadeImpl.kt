@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.progress.CompilationCanceledStatus
 import java.io.Serializable
 
 internal class JpsCompilerServicesFacadeImpl(
-    private val env: JpsCompilerEnvironment,
+    private konst env: JpsCompilerEnvironment,
     port: Int = SOCKET_ANY_FREE_PORT
 ) : CompilerCallbackServicesFacadeServer(
     env.services[IncrementalCompilationComponents::class.java],

@@ -3,5 +3,5 @@ class A {
 }
 
 fun call() {
-    val a = <expr>A(42)</expr>
+    konst a = <expr>A(42)</expr>
 }

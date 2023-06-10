@@ -18,22 +18,22 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 
 class NoFirCompilationErrorsHandler(testServices: TestServices) : FirAnalysisHandler(testServices, failureDisablesNextSteps = true) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         for (part in info.partsForDependsOnModules) {
             var hasError = false
 
-            val ignoreErrors = IGNORE_FIR_DIAGNOSTICS in part.module.directives
+            konst ignoreErrors = IGNORE_FIR_DIAGNOSTICS in part.module.directives
             for ((firFile, diagnostics) in part.firAnalyzerFacade.runCheckers()) {
                 for (diagnostic in diagnostics) {
                     if (diagnostic.severity == Severity.ERROR) {
                         hasError = true
                         if (!ignoreErrors) {
-                            val diagnosticText = RootDiagnosticRendererFactory(diagnostic).render(diagnostic)
-                            val range = diagnostic.textRanges.first()
-                            val locationText = firFile.source?.psi?.containingFile?.let { psiFile ->
+                            konst diagnosticText = RootDiagnosticRendererFactory(diagnostic).render(diagnostic)
+                            konst range = diagnostic.textRanges.first()
+                            konst locationText = firFile.source?.psi?.containingFile?.let { psiFile ->
                                 PsiDiagnosticUtils.atLocation(psiFile, range)
                             } ?: "${firFile.name}:$range"
                             throw IllegalStateException("${diagnostic.factory.name}: $diagnosticText at $locationText")

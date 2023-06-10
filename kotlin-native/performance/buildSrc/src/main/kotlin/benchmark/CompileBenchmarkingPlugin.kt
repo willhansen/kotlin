@@ -7,7 +7,7 @@ import org.gradle.api.tasks.Exec
 import org.jetbrains.kotlin.*
 import javax.inject.Inject
 
-class BuildStep (private val _name: String): Named  {
+class BuildStep (private konst _name: String): Named  {
     override fun getName(): String = _name
     lateinit var command: List<String>
 
@@ -16,7 +16,7 @@ class BuildStep (private val _name: String): Named  {
     }
 }
 
-class BuildStepContainer(val project: Project): NamedDomainObjectContainer<BuildStep> by project.container(BuildStep::class.java) {
+class BuildStepContainer(konst project: Project): NamedDomainObjectContainer<BuildStep> by project.container(BuildStep::class.java) {
     fun step(name: String, configure: Action<BuildStep>) =
         maybeCreate(name).apply { configure.execute(this) }
     
@@ -24,7 +24,7 @@ class BuildStepContainer(val project: Project): NamedDomainObjectContainer<Build
         step(name, { project.configure(this, configure) })
 }
 
-open class CompileBenchmarkExtension @Inject constructor(val project: Project) {
+open class CompileBenchmarkExtension @Inject constructor(konst project: Project) {
     var applicationName = project.name
     var repeatNumber: Int = 1
     var buildSteps: BuildStepContainer = BuildStepContainer(project)
@@ -36,7 +36,7 @@ open class CompileBenchmarkExtension @Inject constructor(val project: Project) {
 
 open class CompileBenchmarkingPlugin : Plugin<Project> {
 
-    private val exitCodes: MutableMap<String, Int> = mutableMapOf()
+    private konst exitCodes: MutableMap<String, Int> = mutableMapOf()
     
     private fun Project.configureUtilityTasks() {
         tasks.create("configureBuild") {
@@ -52,7 +52,7 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
         benchmarkExtension: CompileBenchmarkExtension
     ): Unit = with(benchmarkExtension) {
         // Aggregate task.
-        val konanRun = tasks.create("konanRun") {
+        konst konanRun = tasks.create("konanRun") {
             dependsOn("configureBuild")
 
             group = BenchmarkingPlugin.BENCHMARKING_GROUP
@@ -60,10 +60,10 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
         }
 
         // Compile tasks.
-        afterEvaluate {
+        afterEkonstuate {
             for (number in 1..repeatNumber) {
                 buildSteps.forEach { step ->
-                    val taskName = step.name
+                    konst taskName = step.name
                     tasks.create("$taskName$number", Exec::class.java).apply {
                         commandLine(step.command)
                         isIgnoreExitValue = true
@@ -83,15 +83,15 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
             description = "Builds the benchmarking report for Kotlin/Native."
 
             doLast {
-                val nativeCompileTime = getCompileBenchmarkTime(
+                konst nativeCompileTime = getCompileBenchmarkTime(
                     project,
                     applicationName,
                     buildSteps.names,
                     repeatNumber,
                     exitCodes
                 )
-                val nativeExecutable = buildDir.resolve("program${getNativeProgramExtension()}")
-                val properties = commonBenchmarkProperties + mapOf(
+                konst nativeExecutable = buildDir.resolve("program${getNativeProgramExtension()}")
+                konst properties = commonBenchmarkProperties + mapOf(
                     "type" to "native",
                     "compilerVersion" to konanVersion,
                     "benchmarks" to "[]",
@@ -99,7 +99,7 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
                     "compileTime" to nativeCompileTime,
                     "codeSize" to getCodeSizeBenchmark(applicationName, nativeExecutable.absolutePath)
                 )
-                val output = createJsonReport(properties)
+                konst output = createJsonReport(properties)
                 buildDir.resolve(nativeJson).writeText(output)
             }
             konanRun.finalizedBy(this)
@@ -110,7 +110,7 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
             benchmarkExtension.compilerOpts
 
     private fun Project.configureJvmRun() {
-        val jvmRun = tasks.create("jvmRun") {
+        konst jvmRun = tasks.create("jvmRun") {
             group = BenchmarkingPlugin.BENCHMARKING_GROUP
             description = "Runs the compile only benchmark for Kotlin/JVM."
             doLast { println("JVM run isn't supported") }
@@ -127,7 +127,7 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         addTimeListener(this)
 
-        val benchmarkExtension = extensions.create(
+        konst benchmarkExtension = extensions.create(
             COMPILE_BENCHMARK_EXTENSION_NAME,
             CompileBenchmarkExtension::class.java,
             this
@@ -140,6 +140,6 @@ open class CompileBenchmarkingPlugin : Plugin<Project> {
     }
 
     companion object {
-        const val COMPILE_BENCHMARK_EXTENSION_NAME = "compileBenchmark"
+        const konst COMPILE_BENCHMARK_EXTENSION_NAME = "compileBenchmark"
     }
 }

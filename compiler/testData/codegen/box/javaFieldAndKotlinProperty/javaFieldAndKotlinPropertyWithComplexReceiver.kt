@@ -9,7 +9,7 @@ public class Jaba {
 
 // FILE: test.kt
 class My : Jaba() {
-    private val a: String = "FAIL"
+    private konst a: String = "FAIL"
 
     operator fun plus(my: My) = my
 }

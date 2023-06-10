@@ -7,13 +7,13 @@ FILE: enums.kt
         public final static enum entry FIRST: R|Order|
         public final static enum entry SECOND: R|Order|
         public final static enum entry THIRD: R|Order|
-        public final static fun values(): R|kotlin/Array<Order>| {
+        public final static fun konstues(): R|kotlin/Array<Order>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|Order| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|Order| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<Order>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<Order>|
             public get(): R|kotlin/enums/EnumEntries<Order>|
 
     }
@@ -22,10 +22,10 @@ FILE: enums.kt
             super<R|kotlin/Enum<Planet>|>()
         }
 
-        public final val m: R|kotlin/Double| = R|<local>/m|
+        public final konst m: R|kotlin/Double| = R|<local>/m|
             public get(): R|kotlin/Double|
 
-        internal final val r: R|kotlin/Double| = R|<local>/r|
+        internal final konst r: R|kotlin/Double| = R|<local>/r|
             internal get(): R|kotlin/Double|
 
         public final static enum entry MERCURY: R|Planet| = object : R|Planet| {
@@ -61,7 +61,7 @@ FILE: enums.kt
 
         }
 
-        public final val g: R|kotlin/Double| = this@R|/Planet.Companion|.R|/Planet.Companion.G|.R|kotlin/Double.times|(this@R|/Planet|.R|/Planet.m|).R|kotlin/Double.div|(this@R|/Planet|.R|/Planet.r|.R|kotlin/Double.times|(this@R|/Planet|.R|/Planet.r|))
+        public final konst g: R|kotlin/Double| = this@R|/Planet.Companion|.R|/Planet.Companion.G|.R|kotlin/Double.times|(this@R|/Planet|.R|/Planet.m|).R|kotlin/Double.div|(this@R|/Planet|.R|/Planet.r|.R|kotlin/Double.times|(this@R|/Planet|.R|/Planet.r|))
             public get(): R|kotlin/Double|
 
         public abstract fun sayHello(): R|kotlin/Unit|
@@ -71,18 +71,18 @@ FILE: enums.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final const val G: R|kotlin/Double| = Double(6.67E-11)
+            public final const konst G: R|kotlin/Double| = Double(6.67E-11)
                 public get(): R|kotlin/Double|
 
         }
 
-        public final static fun values(): R|kotlin/Array<Planet>| {
+        public final static fun konstues(): R|kotlin/Array<Planet>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|Planet| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|Planet| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<Planet>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<Planet>|
             public get(): R|kotlin/enums/EnumEntries<Planet>|
 
     }

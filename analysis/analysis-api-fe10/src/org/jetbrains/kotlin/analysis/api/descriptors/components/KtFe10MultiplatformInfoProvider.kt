@@ -20,17 +20,17 @@ import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectedActualResolver
 
 internal class KtFe10MultiplatformInfoProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtMultiplatformInfoProvider(), Fe10KtAnalysisSessionComponent {
     override fun getExpectForActual(actual: KtDeclarationSymbol): KtDeclarationSymbol? {
         if (actual.psiSafe<KtDeclaration>()?.hasActualModifier() != true) return null
-        val memberDescriptor = (getSymbolDescriptor(actual) as? MemberDescriptor)?.takeIf { it.isActual } ?: return null
+        konst memberDescriptor = (getSymbolDescriptor(actual) as? MemberDescriptor)?.takeIf { it.isActual } ?: return null
 
-        val expectedCompatibilityMap =
+        konst expectedCompatibilityMap =
             ExpectedActualResolver.findExpectedForActual(memberDescriptor) ?: return null
 
-        val expectsForActual = (expectedCompatibilityMap[ExpectActualCompatibility.Compatible]
-            ?: expectedCompatibilityMap.values.flatten())
+        konst expectsForActual = (expectedCompatibilityMap[ExpectActualCompatibility.Compatible]
+            ?: expectedCompatibilityMap.konstues.flatten())
         check(expectsForActual.size <= 1) { "expected as maximum one `expect` for the actual" }
         checkWithAttachmentBuilder(expectsForActual.size <= 1, message = { "expected as maximum one `expect` for the actual" }) {
             withEntry("actual", memberDescriptor.toString())

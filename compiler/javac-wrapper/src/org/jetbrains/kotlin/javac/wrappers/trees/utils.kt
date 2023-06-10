@@ -27,19 +27,19 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import javax.lang.model.element.Modifier
 
-internal val JCTree.JCModifiers.isAbstract: Boolean
+internal konst JCTree.JCModifiers.isAbstract: Boolean
     get() = Modifier.ABSTRACT in getFlags()
 
-internal val JCTree.JCModifiers.isFinal: Boolean
+internal konst JCTree.JCModifiers.isFinal: Boolean
     get() = Modifier.FINAL in getFlags()
 
-internal val JCTree.JCModifiers.isStatic: Boolean
+internal konst JCTree.JCModifiers.isStatic: Boolean
     get() = Modifier.STATIC in getFlags()
 
-internal val JCTree.JCModifiers.hasDefaultModifier: Boolean
+internal konst JCTree.JCModifiers.hasDefaultModifier: Boolean
     get() = Modifier.DEFAULT in getFlags()
 
-internal val JCTree.JCModifiers.visibility: Visibility
+internal konst JCTree.JCModifiers.visibility: Visibility
     get() = getFlags().getVisibility()
 
 internal fun JCTree.annotations(): Collection<JCTree.JCAnnotation> = when (this) {
@@ -51,12 +51,12 @@ internal fun JCTree.annotations(): Collection<JCTree.JCAnnotation> = when (this)
 } ?: emptyList<JCTree.JCAnnotation>()
 
 fun Collection<JavaAnnotation>.filterTypeAnnotations(): Collection<JavaAnnotation> {
-    val filteredAnnotations = arrayListOf<JavaAnnotation>()
-    val targetClassId = ClassId(FqName("java.lang.annotation"), Name.identifier("Target"))
+    konst filteredAnnotations = arrayListOf<JavaAnnotation>()
+    konst targetClassId = ClassId(FqName("java.lang.annotation"), Name.identifier("Target"))
     for (annotation in this) {
-        val annotationClass = annotation.resolve()
-        val targetAnnotation = annotationClass?.annotations?.find { it.classId == targetClassId } ?: continue
-        val elementTypeArg = targetAnnotation.arguments.firstOrNull() ?: continue
+        konst annotationClass = annotation.resolve()
+        konst targetAnnotation = annotationClass?.annotations?.find { it.classId == targetClassId } ?: continue
+        konst elementTypeArg = targetAnnotation.arguments.firstOrNull() ?: continue
 
         when (elementTypeArg) {
             is SymbolBasedArrayAnnotationArgument -> {

@@ -12,10 +12,10 @@ public abstract class JavaClass {
 open class A {
     protected fun test() {}
 
-    protected val z: String = "1"
+    protected konst z: String = "1"
 
     public var zVar: String = "1"
-        protected set(value) {}
+        protected set(konstue) {}
 
     inline fun call() {
         <!PROTECTED_CALL_FROM_PUBLIC_INLINE_ERROR!>test<!>()
@@ -75,10 +75,10 @@ class C : JavaClass() {
 internal class AInternal {
     protected fun test() {}
 
-    protected val z: String = "1"
+    protected konst z: String = "1"
 
     public var zVar: String = "1"
-        protected set(value) {}
+        protected set(konstue) {}
 
 
     inline fun call() {

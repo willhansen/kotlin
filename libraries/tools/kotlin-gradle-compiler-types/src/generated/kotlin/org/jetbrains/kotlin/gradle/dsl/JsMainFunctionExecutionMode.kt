@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JsMainFunctionExecutionMode(val mode: String) {
+enum class JsMainFunctionExecutionMode(konst mode: String) {
     CALL("call"),
     NO_CALL("noCall"),
     ;
 
     companion object {
         fun fromMode(mode: String): JsMainFunctionExecutionMode =
-            JsMainFunctionExecutionMode.values().firstOrNull { it.mode == mode }
+            JsMainFunctionExecutionMode.konstues().firstOrNull { it.mode == mode }
                 ?: throw IllegalArgumentException("Unknown main function execution mode: $mode")
     }
 }

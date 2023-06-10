@@ -7,82 +7,82 @@ package kotlin.jvm.internal
 
 import kotlin.reflect.*
 
-public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassBasedDeclarationContainer {
-    override val simpleName: String?
+public class ClassReference(override konst jClass: Class<*>) : KClass<Any>, ClassBasedDeclarationContainer {
+    override konst simpleName: String?
         get() = getClassSimpleName(jClass)
 
-    override val qualifiedName: String?
+    override konst qualifiedName: String?
         get() = getClassQualifiedName(jClass)
 
-    override val members: Collection<KCallable<*>>
+    override konst members: Collection<KCallable<*>>
         get() = error()
 
-    override val constructors: Collection<KFunction<Any>>
+    override konst constructors: Collection<KFunction<Any>>
         get() = error()
 
-    override val nestedClasses: Collection<KClass<*>>
+    override konst nestedClasses: Collection<KClass<*>>
         get() = error()
 
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = error()
 
-    override val objectInstance: Any?
-        get() = error()
-
-    @SinceKotlin("1.1")
-    override fun isInstance(value: Any?): Boolean =
-        isInstance(value, jClass)
-
-    @SinceKotlin("1.1")
-    override val typeParameters: List<KTypeParameter>
+    override konst objectInstance: Any?
         get() = error()
 
     @SinceKotlin("1.1")
-    override val supertypes: List<KType>
+    override fun isInstance(konstue: Any?): Boolean =
+        isInstance(konstue, jClass)
+
+    @SinceKotlin("1.1")
+    override konst typeParameters: List<KTypeParameter>
+        get() = error()
+
+    @SinceKotlin("1.1")
+    override konst supertypes: List<KType>
         get() = error()
 
     @SinceKotlin("1.3")
-    override val sealedSubclasses: List<KClass<out Any>>
+    override konst sealedSubclasses: List<KClass<out Any>>
         get() = error()
 
     @SinceKotlin("1.1")
-    override val visibility: KVisibility?
+    override konst visibility: KVisibility?
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isOpen: Boolean
+    override konst isOpen: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isData: Boolean
+    override konst isData: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isInner: Boolean
+    override konst isInner: Boolean
         get() = error()
 
     @SinceKotlin("1.1")
-    override val isCompanion: Boolean
+    override konst isCompanion: Boolean
         get() = error()
 
     @SinceKotlin("1.4")
-    override val isFun: Boolean
+    override konst isFun: Boolean
         get() = error()
 
     @SinceKotlin("1.5")
-    override val isValue: Boolean
+    override konst isValue: Boolean
         get() = error()
 
     private fun error(): Nothing = throw KotlinReflectionNotSupportedError()
@@ -97,7 +97,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
         jClass.toString() + Reflection.REFLECTION_NOT_AVAILABLE
 
     companion object {
-        private val FUNCTION_CLASSES =
+        private konst FUNCTION_CLASSES =
             listOf(
                 Function0::class.java, Function1::class.java, Function2::class.java, Function3::class.java, Function4::class.java,
                 Function5::class.java, Function6::class.java, Function7::class.java, Function8::class.java, Function9::class.java,
@@ -106,7 +106,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
                 Function20::class.java, Function21::class.java, Function22::class.java
             ).mapIndexed { i, clazz -> clazz to i }.toMap()
 
-        private val primitiveFqNames = HashMap<String, String>().apply {
+        private konst primitiveFqNames = HashMap<String, String>().apply {
             put("boolean", "kotlin.Boolean")
             put("char", "kotlin.Char")
             put("byte", "kotlin.Byte")
@@ -117,7 +117,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             put("double", "kotlin.Double")
         }
 
-        private val primitiveWrapperFqNames = HashMap<String, String>().apply {
+        private konst primitiveWrapperFqNames = HashMap<String, String>().apply {
             put("java.lang.Boolean", "kotlin.Boolean")
             put("java.lang.Character", "kotlin.Char")
             put("java.lang.Byte", "kotlin.Byte")
@@ -129,7 +129,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
         }
 
         // See JavaToKotlinClassMap.
-        private val classFqNames = HashMap<String, String>().apply {
+        private konst classFqNames = HashMap<String, String>().apply {
             put("java.lang.Object", "kotlin.Any")
             put("java.lang.String", "kotlin.String")
             put("java.lang.CharSequence", "kotlin.CharSequence")
@@ -152,7 +152,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
 
             putAll(primitiveFqNames)
             putAll(primitiveWrapperFqNames)
-            primitiveFqNames.values.associateTo(this) { kotlinName ->
+            primitiveFqNames.konstues.associateTo(this) { kotlinName ->
                 "kotlin.jvm.internal.${kotlinName.substringAfterLast('.')}CompanionObject" to "$kotlinName.Companion"
             }
             for ((klass, arity) in FUNCTION_CLASSES) {
@@ -160,18 +160,18 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             }
         }
 
-        private val simpleNames = classFqNames.mapValues { (_, fqName) -> fqName.substringAfterLast('.') }
+        private konst simpleNames = classFqNames.mapValues { (_, fqName) -> fqName.substringAfterLast('.') }
 
         public fun getClassSimpleName(jClass: Class<*>): String? = when {
             jClass.isAnonymousClass -> null
             jClass.isLocalClass -> {
-                val name = jClass.simpleName
+                konst name = jClass.simpleName
                 jClass.enclosingMethod?.let { method -> name.substringAfter(method.name + "$") }
                     ?: jClass.enclosingConstructor?.let { constructor -> name.substringAfter(constructor.name + "$") }
                     ?: name.substringAfter('$')
             }
             jClass.isArray -> {
-                val componentType = jClass.componentType
+                konst componentType = jClass.componentType
                 when {
                     componentType.isPrimitive -> simpleNames[componentType.name]?.plus("Array")
                     else -> null
@@ -184,7 +184,7 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             jClass.isAnonymousClass -> null
             jClass.isLocalClass -> null
             jClass.isArray -> {
-                val componentType = jClass.componentType
+                konst componentType = jClass.componentType
                 when {
                     componentType.isPrimitive -> classFqNames[componentType.name]?.plus("Array")
                     else -> null
@@ -193,12 +193,12 @@ public class ClassReference(override val jClass: Class<*>) : KClass<Any>, ClassB
             else -> classFqNames[jClass.name] ?: jClass.canonicalName
         }
 
-        public fun isInstance(value: Any?, jClass: Class<*>): Boolean {
+        public fun isInstance(konstue: Any?, jClass: Class<*>): Boolean {
             FUNCTION_CLASSES[jClass]?.let { arity ->
-                return TypeIntrinsics.isFunctionOfArity(value, arity)
+                return TypeIntrinsics.isFunctionOfArity(konstue, arity)
             }
-            val objectType = if (jClass.isPrimitive) jClass.kotlin.javaObjectType else jClass
-            return objectType.isInstance(value)
+            konst objectType = if (jClass.isPrimitive) jClass.kotlin.javaObjectType else jClass
+            return objectType.isInstance(konstue)
         }
     }
 }

@@ -1,7 +1,7 @@
 package
 
 public fun test(/*0*/ cb: FutureCallback<kotlin.String>): kotlin.Unit
-public fun </*0*/ T> test(/*0*/ value: T, /*1*/ test: TestClass): T
+public fun </*0*/ T> test(/*0*/ konstue: T, /*1*/ test: TestClass): T
 
 public final class Future</*0*/ T> {
     public constructor Future</*0*/ T>()

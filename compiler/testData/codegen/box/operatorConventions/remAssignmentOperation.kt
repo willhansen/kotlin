@@ -9,8 +9,8 @@ operator fun A.modAssign(y: Int) { throw RuntimeException("mod has been called i
 operator fun A.remAssign(y: Int) { x %= y + 1 }
 
 fun box(): String {
-    val original = A()
-    val a = original
+    konst original = A()
+    konst a = original
 
     a %= 2
     if (a !== original) return "Fail 1: $a !== $original"

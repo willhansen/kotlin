@@ -13,6 +13,6 @@ public class Unsound {
 
 package test
 
-class Wrap<T>(val x: T)
+class Wrap<T>(konst x: T)
 
 fun box(): String = if ((Unsound.get<String>() as Wrap<String>).x == null) "OK" else "Fail"

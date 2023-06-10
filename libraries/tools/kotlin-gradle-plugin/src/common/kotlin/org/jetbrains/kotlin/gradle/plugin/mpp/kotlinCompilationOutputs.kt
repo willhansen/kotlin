@@ -13,18 +13,18 @@ import java.io.File
 import java.util.concurrent.Callable
 
 class DefaultKotlinCompilationOutput(
-    private val project: Project,
+    private konst project: Project,
     override var resourcesDirProvider: Any
 ) : KotlinCompilationOutput, Callable<FileCollection> {
 
-    override val classesDirs: ConfigurableFileCollection = project.files()
+    override konst classesDirs: ConfigurableFileCollection = project.files()
 
-    override val allOutputs: ConfigurableFileCollection = project.files().apply {
+    override konst allOutputs: ConfigurableFileCollection = project.files().apply {
         from(classesDirs)
         from(Callable { resourcesDirProvider })
     }
 
-    override val resourcesDir: File
+    override konst resourcesDir: File
         get() = project.file(resourcesDirProvider)
 
     override fun call(): FileCollection = allOutputs

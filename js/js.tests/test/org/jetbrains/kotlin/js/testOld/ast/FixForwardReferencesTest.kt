@@ -183,7 +183,7 @@ class FixForwardReferencesTest {
     }
 
     private infix fun String.transformsInto(result: String): String {
-        val node = toAst()
+        konst node = toAst()
         node.fixForwardNameReferences()
         node.makeNamesUnique()
 
@@ -228,7 +228,7 @@ private fun JsNode.transformEachName(transform: JsName.() -> JsName): JsNode {
 }
 
 private fun String.toAst(): JsNode {
-    val nameMapping = mutableMapOf<String, Pair<JsName, JsName>>()
+    konst nameMapping = mutableMapOf<String, Pair<JsName, JsName>>()
 
     return parse().transformEachName {
         nameMapping[ident]?.let { (oldName, newName) ->
@@ -236,9 +236,9 @@ private fun String.toAst(): JsNode {
             newName
         } ?: run {
 
-            val parts = ident.split('_')
+            konst parts = ident.split('_')
             if (parts.size != 2) error("Unable to parse: $ident")
-            val (name, index) = parts
+            konst (name, index) = parts
             if (ident != "${name}_$index") error("Unable to parse: $ident")
 
             JsName(name, false).also {
@@ -250,12 +250,12 @@ private fun String.toAst(): JsNode {
 
 private fun JsNode.makeNamesUnique(): JsNode {
 
-    val nameCounter = mutableMapOf<String, Int>()
-    val nameMap = mutableMapOf<JsName, JsName>()
+    konst nameCounter = mutableMapOf<String, Int>()
+    konst nameMap = mutableMapOf<JsName, JsName>()
 
     return transformEachName {
         nameMap[this] ?: run {
-            val index = nameCounter.getOrDefault(ident, 0).also {
+            konst index = nameCounter.getOrDefault(ident, 0).also {
                 nameCounter[ident] = it + 1
             }
 

@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.fir.diagnostics.ConeDiagnostic
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 
 object FirContractChecker : FirFunctionChecker() {
-    private val EMPTY_CONTRACT_MESSAGE = "Empty contract block is not allowed"
+    private konst EMPTY_CONTRACT_MESSAGE = "Empty contract block is not allowed"
 
     override fun check(declaration: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration !is FirContractDescriptionOwner) return
-        val contractDescription = declaration.contractDescription as? FirResolvedContractDescription ?: return
+        konst contractDescription = declaration.contractDescription as? FirResolvedContractDescription ?: return
 
         checkUnresolvedEffects(contractDescription, context, reporter)
         checkContractNotAllowed(declaration, contractDescription, context, reporter)
@@ -43,7 +43,7 @@ object FirContractChecker : FirFunctionChecker() {
     ) {
         // Any statements that [ConeEffectExtractor] cannot extract effects will be in `unresolvedEffects`.
         for (unresolvedEffect in contractDescription.unresolvedEffects) {
-            val diagnostic = unresolvedEffect.effect.accept(DiagnosticExtractor, null) ?: continue
+            konst diagnostic = unresolvedEffect.effect.accept(DiagnosticExtractor, null) ?: continue
 
             // TODO: report on fine-grained locations, e.g., ... implies unresolved => report on unresolved, not the entire statement.
             //  but, sometimes, it's just reported on `contract`...
@@ -57,7 +57,7 @@ object FirContractChecker : FirFunctionChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val source = contractDescription.source
+        konst source = contractDescription.source
         if (source?.kind !is KtRealSourceElementKind) return
 
         fun contractNotAllowed(message: String) = reporter.reportOn(source, FirErrors.CONTRACT_NOT_ALLOWED, message, context)
@@ -84,11 +84,11 @@ object FirContractChecker : FirFunctionChecker() {
         }
 
         override fun visitReturnsEffectDeclaration(returnsEffect: ConeReturnsEffectDeclaration, data: Nothing?): ConeDiagnostic? {
-            return returnsEffect.value.accept(this, null)
+            return returnsEffect.konstue.accept(this, null)
         }
 
         override fun visitCallsEffectDeclaration(callsEffect: ConeCallsEffectDeclaration, data: Nothing?): ConeDiagnostic? {
-            return callsEffect.valueParameterReference.accept(this, data)
+            return callsEffect.konstueParameterReference.accept(this, data)
         }
 
         override fun visitErroneousCallsEffectDeclaration(
@@ -132,10 +132,10 @@ object FirContractChecker : FirFunctionChecker() {
         }
 
         override fun visitErroneousValueParameterReference(
-            valueParameterReference: KtErroneousValueParameterReference<ConeKotlinType, ConeDiagnostic>,
+            konstueParameterReference: KtErroneousValueParameterReference<ConeKotlinType, ConeDiagnostic>,
             data: Nothing?
         ): ConeDiagnostic {
-            return valueParameterReference.diagnostic
+            return konstueParameterReference.diagnostic
         }
 
         override fun visitErroneousElement(element: KtErroneousContractElement<ConeKotlinType, ConeDiagnostic>, data: Nothing?): ConeDiagnostic {

@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 
 interface Foo<in T> {
-    val x: Int
+    konst x: Int
     fun foo(x: T)
 }
 

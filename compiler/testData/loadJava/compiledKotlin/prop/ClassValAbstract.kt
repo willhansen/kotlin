@@ -1,5 +1,5 @@
 package test
 
 abstract class ClassValAbstract {
-    abstract val a: Int
+    abstract konst a: Int
 }

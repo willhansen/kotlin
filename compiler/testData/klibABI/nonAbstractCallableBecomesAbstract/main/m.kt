@@ -3,14 +3,14 @@ import lib1.*
 import lib2.*
 
 fun box() = abiTest {
-    val abstractClassWithFunctions: AbstractClassWithFunctions = AbstractClassWithFunctionsImpl1()
-    val abstractClassWithFunctionsImpl1 = AbstractClassWithFunctionsImpl1()
-    val interfaceWithFunctions: InterfaceWithFunctions = InterfaceWithFunctionsImpl1()
-    val interfaceWithFunctionsImpl1 = InterfaceWithFunctionsImpl1()
-    val abstractClassWithProperties: AbstractClassWithProperties = AbstractClassWithPropertiesImpl1()
-    val abstractClassWithPropertiesImpl1 = AbstractClassWithPropertiesImpl1()
-    val interfaceWithProperties: InterfaceWithProperties = InterfaceWithPropertiesImpl1()
-    val interfaceWithPropertiesImpl1 = InterfaceWithPropertiesImpl1()
+    konst abstractClassWithFunctions: AbstractClassWithFunctions = AbstractClassWithFunctionsImpl1()
+    konst abstractClassWithFunctionsImpl1 = AbstractClassWithFunctionsImpl1()
+    konst interfaceWithFunctions: InterfaceWithFunctions = InterfaceWithFunctionsImpl1()
+    konst interfaceWithFunctionsImpl1 = InterfaceWithFunctionsImpl1()
+    konst abstractClassWithProperties: AbstractClassWithProperties = AbstractClassWithPropertiesImpl1()
+    konst abstractClassWithPropertiesImpl1 = AbstractClassWithPropertiesImpl1()
+    konst interfaceWithProperties: InterfaceWithProperties = InterfaceWithPropertiesImpl1()
+    konst interfaceWithPropertiesImpl1 = InterfaceWithPropertiesImpl1()
 
     expectFailure(nonImplementedCallable("function 'foo'", "class 'AbstractClassWithFunctionsImpl1'")) { abstractClassWithFunctions.foo() }
     expectFailure(nonImplementedCallable("function 'bar'", "class 'AbstractClassWithFunctionsImpl1'")) { abstractClassWithFunctions.bar() }

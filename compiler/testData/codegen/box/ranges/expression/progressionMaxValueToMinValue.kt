@@ -2,20 +2,20 @@
 // WITH_STDLIB
 
 
-val MaxI = Int.MAX_VALUE
-val MinI = Int.MIN_VALUE
-val MaxB = Byte.MAX_VALUE
-val MinB = Byte.MIN_VALUE
-val MaxS = Short.MAX_VALUE
-val MinS = Short.MIN_VALUE
-val MaxL = Long.MAX_VALUE
-val MinL = Long.MIN_VALUE
-val MaxC = Char.MAX_VALUE
-val MinC = Char.MIN_VALUE
+konst MaxI = Int.MAX_VALUE
+konst MinI = Int.MIN_VALUE
+konst MaxB = Byte.MAX_VALUE
+konst MinB = Byte.MIN_VALUE
+konst MaxS = Short.MAX_VALUE
+konst MinS = Short.MIN_VALUE
+konst MaxL = Long.MAX_VALUE
+konst MinL = Long.MIN_VALUE
+konst MaxC = Char.MAX_VALUE
+konst MinC = Char.MIN_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
-    val range1 = MaxI..MinI step 1
+    konst list1 = ArrayList<Int>()
+    konst range1 = MaxI..MinI step 1
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -24,8 +24,8 @@ fun box(): String {
         return "Wrong elements for MaxI..MinI step 1: $list1"
     }
 
-    val list2 = ArrayList<Int>()
-    val range2 = MaxB..MinB step 1
+    konst list2 = ArrayList<Int>()
+    konst range2 = MaxB..MinB step 1
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break
@@ -34,8 +34,8 @@ fun box(): String {
         return "Wrong elements for MaxB..MinB step 1: $list2"
     }
 
-    val list3 = ArrayList<Int>()
-    val range3 = MaxS..MinS step 1
+    konst list3 = ArrayList<Int>()
+    konst range3 = MaxS..MinS step 1
     for (i in range3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -44,8 +44,8 @@ fun box(): String {
         return "Wrong elements for MaxS..MinS step 1: $list3"
     }
 
-    val list4 = ArrayList<Long>()
-    val range4 = MaxL..MinL step 1
+    konst list4 = ArrayList<Long>()
+    konst range4 = MaxL..MinL step 1
     for (i in range4) {
         list4.add(i)
         if (list4.size > 23) break
@@ -54,8 +54,8 @@ fun box(): String {
         return "Wrong elements for MaxL..MinL step 1: $list4"
     }
 
-    val list5 = ArrayList<Char>()
-    val range5 = MaxC..MinC step 1
+    konst list5 = ArrayList<Char>()
+    konst range5 = MaxC..MinC step 1
     for (i in range5) {
         list5.add(i)
         if (list5.size > 23) break

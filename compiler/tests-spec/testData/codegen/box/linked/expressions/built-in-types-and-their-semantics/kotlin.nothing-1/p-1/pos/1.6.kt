@@ -11,9 +11,9 @@
 
 
 fun box(): String {
-    val info = Info<String>()
+    konst info = Info<String>()
     info.getData { "text " }
-    val infoUseless = InfoUseless()
+    konst infoUseless = InfoUseless()
     try {
         infoUseless.getData { throw  IllegalArgumentException() }
     } catch (e: IllegalArgumentException) {

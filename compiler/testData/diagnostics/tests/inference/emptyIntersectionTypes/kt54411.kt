@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
-class AtomicRef<T>(val value: T)
+class AtomicRef<T>(konst konstue: T)
 
 inline fun <F : Segment<F>> AtomicRef<F>.findSegmentAndMoveForward(createNewSegment: (prev: F?) -> F) = null
 
 interface Queue<Q> {
-    val tail: AtomicRef<OneElementSegment<Q>>
+    konst tail: AtomicRef<OneElementSegment<Q>>
 
     fun enqueue(element: Q) {
         // F <: Segment<F> from upper bound

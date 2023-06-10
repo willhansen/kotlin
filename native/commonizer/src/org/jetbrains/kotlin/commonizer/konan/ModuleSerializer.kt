@@ -17,18 +17,18 @@ import org.jetbrains.kotlin.library.impl.KotlinLibraryWriterImpl
 import java.io.File
 
 internal class ModuleSerializer(
-    private val destination: File,
+    private konst destination: File,
 ) : ResultsConsumer {
     override fun consume(parameters: CommonizerParameters, target: CommonizerTarget, moduleResult: ResultsConsumer.ModuleResult) {
-        val librariesDestination = CommonizerOutputFileLayout.resolveCommonizedDirectory(destination, target)
+        konst librariesDestination = CommonizerOutputFileLayout.resolveCommonizedDirectory(destination, target)
         when (moduleResult) {
             is ResultsConsumer.ModuleResult.Commonized -> {
-                val libraryDestination = librariesDestination.resolve(moduleResult.fileSystemCompatibleLibraryName)
+                konst libraryDestination = librariesDestination.resolve(moduleResult.fileSystemCompatibleLibraryName)
                 writeLibrary(moduleResult.metadata, moduleResult.manifest, libraryDestination)
             }
             is ResultsConsumer.ModuleResult.Missing -> {
-                val missingModuleSourceLocation = moduleResult.originalLocation
-                val missingModuleDestinationLocation = librariesDestination.resolve(moduleResult.fileSystemCompatibleLibraryName)
+                konst missingModuleSourceLocation = moduleResult.originalLocation
+                konst missingModuleDestinationLocation = librariesDestination.resolve(moduleResult.fileSystemCompatibleLibraryName)
                 if (!missingModuleDestinationLocation.exists()) {
                     missingModuleSourceLocation.copyRecursively(librariesDestination.resolve(moduleResult.fileSystemCompatibleLibraryName))
                 }
@@ -42,8 +42,8 @@ private fun writeLibrary(
     manifestData: NativeSensitiveManifestData,
     libraryDestination: File
 ) {
-    val layout = org.jetbrains.kotlin.konan.file.File(libraryDestination.path).let { KotlinLibraryLayoutForWriter(it, it) }
-    val library = KotlinLibraryWriterImpl(
+    konst layout = org.jetbrains.kotlin.konan.file.File(libraryDestination.path).let { KotlinLibraryLayoutForWriter(it, it) }
+    konst library = KotlinLibraryWriterImpl(
         moduleName = manifestData.uniqueName,
         versions = manifestData.versions,
         builtInsPlatform = BuiltInsPlatform.NATIVE,
@@ -61,5 +61,5 @@ private fun writeLibrary(
  * Returns [ResultsConsumer.ModuleResult.libraryName] but replaces potentially occurring colons ':' with underscores '_'.
  * Colons cannot be used as filenames on Windows, but they occured as libraryNames for Klibs produced by the cinterop tool.
  */
-val ResultsConsumer.ModuleResult.fileSystemCompatibleLibraryName: String
+konst ResultsConsumer.ModuleResult.fileSystemCompatibleLibraryName: String
     get() = libraryName.replace(":", "_")

@@ -1,5 +1,5 @@
 fun case1(a: A?) {
-    val test = a?.let {
+    konst test = a?.let {
 
         Case1.invoke(it)
 
@@ -12,7 +12,7 @@ fun case1(a: A?) {
     Case1(a = A())
 }
 
-class Case1 private constructor(val a: A) {
+class Case1 private constructor(konst a: A) {
     companion object {
         operator fun invoke(a: A) = ""
     }

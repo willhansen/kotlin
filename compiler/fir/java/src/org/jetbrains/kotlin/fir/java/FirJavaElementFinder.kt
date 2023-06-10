@@ -44,12 +44,12 @@ import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 import org.jetbrains.kotlin.resolve.jvm.KotlinFinderMarker
 
 class FirJavaElementFinder(
-    private val session: FirSession,
+    private konst session: FirSession,
     project: Project
 ) : PsiElementFinder(), KotlinFinderMarker {
-    private val psiManager = PsiManager.getInstance(project)
+    private konst psiManager = PsiManager.getInstance(project)
 
-    private val firProviders: List<FirProvider> = buildList {
+    private konst firProviders: List<FirProvider> = buildList {
         add(session.firProvider)
         session.collectAllDependentSourceSessions().mapTo(this) { it.firProvider }
     }
@@ -73,17 +73,17 @@ class FirJavaElementFinder(
     override fun findClass(qualifiedName: String, scope: GlobalSearchScope): PsiClass? {
         if (qualifiedName.endsWith(".")) return null
 
-        val fqName = FqName(qualifiedName)
+        konst fqName = FqName(qualifiedName)
 
         for (topLevelClass in generateSequence(fqName) { it.parentOrNull() }) {
             if (topLevelClass.isRoot) break
-            val classId = ClassId.topLevel(topLevelClass)
+            konst classId = ClassId.topLevel(topLevelClass)
 
-            val firClass = firProviders.firstNotNullOfOrNull { it.getFirClassifierByFqName(classId) as? FirRegularClass } ?: continue
+            konst firClass = firProviders.firstNotNullOfOrNull { it.getFirClassifierByFqName(classId) as? FirRegularClass } ?: continue
 
-            val fileStub = createJavaFileStub(classId.packageFqName, psiManager)
-            val topLevelResult = buildStub(firClass, fileStub).psi
-            val tail = fqName.tail(topLevelClass).pathSegments()
+            konst fileStub = createJavaFileStub(classId.packageFqName, psiManager)
+            konst topLevelResult = buildStub(firClass, fileStub).psi
+            konst tail = fqName.tail(topLevelClass).pathSegments()
 
             return tail.fold(topLevelResult) { psiClass, segment ->
                 psiClass.findInnerClassByName(segment.identifier, false) ?: return null
@@ -94,8 +94,8 @@ class FirJavaElementFinder(
     }
 
     private fun buildStub(firClass: FirRegularClass, parent: StubElement<*>): PsiClassStub<*> {
-        val classId = firClass.classId
-        val stub = PsiClassStubImpl<ClsClassImpl>(
+        konst classId = firClass.classId
+        konst stub = PsiClassStubImpl<ClsClassImpl>(
             JavaStubElementTypes.CLASS, parent, classId.asSingleFqName().asString(), firClass.name.identifier, null,
             PsiClassStubImpl.packFlags(
                 false,
@@ -113,7 +113,7 @@ class FirJavaElementFinder(
             firClass.typeParameters.filterIsInstance<FirTypeParameter>().map { Pair(it.name.asString(), arrayOf(CommonClassNames.JAVA_LANG_OBJECT)) }
         )
 
-        val superTypeRefs = when {
+        konst superTypeRefs = when {
             firClass.superTypeRefs.all { it is FirResolvedTypeRef } -> firClass.superTypeRefs
             else -> firClass.resolveSupertypesOnAir(session)
         }
@@ -130,20 +130,20 @@ class FirJavaElementFinder(
 }
 
 private fun FirRegularClass.resolveSupertypesOnAir(session: FirSession): List<FirTypeRef> {
-    val visitor = FirSupertypeResolverVisitor(session, SupertypeComputationSession(), ScopeSession())
+    konst visitor = FirSupertypeResolverVisitor(session, SupertypeComputationSession(), ScopeSession())
     return visitor.withFile(session.firProvider.getFirClassifierContainerFile(this.symbol)) {
         visitor.resolveSpecificClassLikeSupertypes(this, superTypeRefs)
     }
 }
 
 private fun FirSession.collectAllDependentSourceSessions(): List<FirSession> {
-    val result = mutableListOf<FirSession>()
+    konst result = mutableListOf<FirSession>()
     collectAllDependentSourceSessionsTo(result)
     return result
 }
 
 private fun FirSession.collectAllDependentSourceSessionsTo(destination: MutableList<FirSession>) {
-    val moduleData = moduleData
+    konst moduleData = moduleData
     collectAllDependentSourceSessionsTo(destination, moduleData.dependencies)
     collectAllDependentSourceSessionsTo(destination, moduleData.friendDependencies)
     collectAllDependentSourceSessionsTo(destination, moduleData.dependsOnDependencies)
@@ -151,7 +151,7 @@ private fun FirSession.collectAllDependentSourceSessionsTo(destination: MutableL
 
 private fun collectAllDependentSourceSessionsTo(destination: MutableList<FirSession>, dependencies: Collection<FirModuleData>) {
     for (dependency in dependencies) {
-        val dependencySession = dependency.session
+        konst dependencySession = dependency.session
         if (dependencySession.kind != FirSession.Kind.Source) continue
         destination += dependencySession
         dependencySession.collectAllDependentSourceSessionsTo(destination)
@@ -188,16 +188,16 @@ private fun PsiClassStubImpl<*>.addSupertypesReferencesLists(
         "Supertypes for light class $qualifiedName are being added too early"
     }
 
-    val isInterface = firRegularClass.classKind == ClassKind.INTERFACE
+    konst isInterface = firRegularClass.classKind == ClassKind.INTERFACE
 
-    val interfaceNames = mutableListOf<String>()
+    konst interfaceNames = mutableListOf<String>()
     var superName: String? = null
 
     for (superTypeRef in superTypeRefs) {
-        val superConeType = superTypeRef.coneTypeSafe<ConeClassLikeType>() ?: continue
-        val supertypeFirClass = superConeType.toFirClass(session) ?: continue
+        konst superConeType = superTypeRef.coneTypeSafe<ConeClassLikeType>() ?: continue
+        konst supertypeFirClass = superConeType.toFirClass(session) ?: continue
 
-        val canonicalString = superConeType.mapToCanonicalString(session)
+        konst canonicalString = superConeType.mapToCanonicalString(session)
 
         if (isInterface || supertypeFirClass.classKind == ClassKind.INTERFACE) {
             interfaceNames.add(canonicalString)
@@ -228,18 +228,18 @@ private fun newReferenceList(type: JavaClassReferenceListElementType, parent: St
 }
 
 private fun newTypeParameterList(parent: StubElement<*>, parameters: List<Pair<String, Array<String>>>) {
-    val listStub = PsiTypeParameterListStubImpl(parent)
+    konst listStub = PsiTypeParameterListStubImpl(parent)
     for (parameter in parameters) {
-        val parameterStub = PsiTypeParameterStubImpl(listStub, parameter.first)
+        konst parameterStub = PsiTypeParameterStubImpl(listStub, parameter.first)
         newReferenceList(JavaStubElementTypes.EXTENDS_BOUND_LIST, parameterStub, parameter.second)
     }
 }
 
 private fun createJavaFileStub(packageFqName: FqName, psiManager: PsiManager): PsiJavaFileStub {
-    val javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /*compiled = */true)
+    konst javaFileStub = PsiJavaFileStubImpl(packageFqName.asString(), /*compiled = */true)
     javaFileStub.psiFactory = ClsStubPsiFactory.INSTANCE
 
-    val fakeFile = object : ClsFileImpl(DummyHolderViewProvider(psiManager)) {
+    konst fakeFile = object : ClsFileImpl(DummyHolderViewProvider(psiManager)) {
         override fun getStub() = javaFileStub
 
         override fun getPackageName() = packageFqName.asString()
@@ -252,7 +252,7 @@ private fun createJavaFileStub(packageFqName: FqName, psiManager: PsiManager): P
 }
 
 private fun ConeClassLikeType.toFirClass(session: FirSession): FirRegularClass? {
-    val expandedType = this.fullyExpandedType(session)
+    konst expandedType = this.fullyExpandedType(session)
     return (expandedType.lookupTag.toSymbol(session) as? FirClassSymbol)?.fir as? FirRegularClass
 }
 
@@ -260,7 +260,7 @@ private fun ConeClassLikeType.toFirClass(session: FirSession): FirRegularClass? 
 // JVM TYPE MAPPING
 // TODO: reuse other type mapping implementations when possible
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-private const val ERROR_TYPE_STUB = CommonClassNames.JAVA_LANG_OBJECT
+private const konst ERROR_TYPE_STUB = CommonClassNames.JAVA_LANG_OBJECT
 
 private fun ConeKotlinType.mapToCanonicalString(session: FirSession): String {
     return when (this) {
@@ -281,7 +281,7 @@ private fun ConeClassLikeType.mapToCanonicalString(session: FirSession): String 
 
 private fun ConeClassLikeType.mapToCanonicalNoExpansionString(session: FirSession): String {
     if (lookupTag.classId == StandardClassIds.Array) {
-        return when (val typeProjection = typeArguments[0]) {
+        return when (konst typeProjection = typeArguments[0]) {
             is ConeStarProjection -> CommonClassNames.JAVA_LANG_OBJECT
             is ConeKotlinTypeProjection -> {
                 if (typeProjection.kind == ProjectionKind.IN)
@@ -294,11 +294,11 @@ private fun ConeClassLikeType.mapToCanonicalNoExpansionString(session: FirSessio
     }
 
     with(session.typeContext) {
-        val typeConstructor = typeConstructor()
+        konst typeConstructor = typeConstructor()
         typeConstructor.getPrimitiveType()?.let { return JvmPrimitiveType.get(it).wrapperFqName.asString() }
         typeConstructor.getPrimitiveArrayType()?.let { return JvmPrimitiveType.get(it).javaKeywordName + "[]" }
-        val kotlinClassFqName = typeConstructor.getClassFqNameUnsafe() ?: return ERROR_TYPE_STUB
-        val mapped = JavaToKotlinClassMap.mapKotlinToJava(kotlinClassFqName)?.asSingleFqName() ?: kotlinClassFqName
+        konst kotlinClassFqName = typeConstructor.getClassFqNameUnsafe() ?: return ERROR_TYPE_STUB
+        konst mapped = JavaToKotlinClassMap.mapKotlinToJava(kotlinClassFqName)?.asSingleFqName() ?: kotlinClassFqName
 
         return mapped.toString() +
                 typeArguments.takeIf { it.isNotEmpty() }
@@ -312,7 +312,7 @@ private fun ConeTypeProjection.mapToCanonicalString(session: FirSession): String
     return when (this) {
         is ConeStarProjection -> "?"
         is ConeKotlinTypeProjection -> {
-            val wildcard = when (kind) {
+            konst wildcard = when (kind) {
                 ProjectionKind.STAR -> error("Should be handled in the case above")
                 ProjectionKind.IN -> "? super "
                 ProjectionKind.OUT -> "? extends "

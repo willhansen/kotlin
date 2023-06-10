@@ -34,9 +34,9 @@ open internal class SingleSet(var kid: AbstractSet, fSet: FSet) : JointSet(listO
     // Overrides (API) =================================================================================================
 
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val start = matchResult.getStart(groupIndex)
+        konst start = matchResult.getStart(groupIndex)
         matchResult.setStart(groupIndex, startIndex)
-        val shift = kid.matches(startIndex, testString, matchResult)
+        konst shift = kid.matches(startIndex, testString, matchResult)
         if (shift >= 0) {
             return shift
         }
@@ -45,14 +45,14 @@ open internal class SingleSet(var kid: AbstractSet, fSet: FSet) : JointSet(listO
     }
 
     override fun find(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val res = kid.find(startIndex, testString, matchResult)
+        konst res = kid.find(startIndex, testString, matchResult)
         if (res >= 0)
             matchResult.setStart(groupIndex, res)
         return res
     }
 
     override fun findBack(leftLimit: Int, rightLimit: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val res = kid.findBack(leftLimit, rightLimit, testString, matchResult)
+        konst res = kid.findBack(leftLimit, rightLimit, testString, matchResult)
         if (res >= 0)
             matchResult.setStart(groupIndex, res)
         return res
@@ -71,7 +71,7 @@ open internal class SingleSet(var kid: AbstractSet, fSet: FSet) : JointSet(listO
          * QuantifierSet and AbstractSet processSecondPass() methods for
          * more details.
          */
-        val result = BackReferencedSingleSet(this)
+        konst result = BackReferencedSingleSet(this)
         backReferencedSet = result
         return result
     }
@@ -119,10 +119,10 @@ open internal class SingleSet(var kid: AbstractSet, fSet: FSet) : JointSet(listO
          */
         override fun find(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
             for (index in startIndex..testString.length) {
-                val oldStart = matchResult.getStart(groupIndex)
+                konst oldStart = matchResult.getStart(groupIndex)
                 matchResult.setStart(groupIndex, index)
 
-                val res = kid.matches(index, testString, matchResult)
+                konst res = kid.matches(index, testString, matchResult)
                 if (res >= 0) {
                     return index
                 } else {
@@ -135,10 +135,10 @@ open internal class SingleSet(var kid: AbstractSet, fSet: FSet) : JointSet(listO
         override fun findBack(leftLimit: Int, rightLimit: Int,
                               testString: CharSequence, matchResult: MatchResultImpl): Int {
             for (index in rightLimit downTo leftLimit) {
-                val oldStart = matchResult.getStart(groupIndex)
+                konst oldStart = matchResult.getStart(groupIndex)
                 matchResult.setStart(groupIndex, index)
 
-                val res = kid.matches(index, testString, matchResult)
+                konst res = kid.matches(index, testString, matchResult)
                 if (res >= 0) {
                     return index
                 } else {

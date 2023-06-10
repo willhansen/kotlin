@@ -9,7 +9,7 @@ fun lastIndexOf(element: kotlin.Int): kotlin.Int
 fun listIterator(): kotlin.collections.ListIterator<kotlin.Int>
 fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<kotlin.Int>
 fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<kotlin.Int>
-val size: kotlin.Int
+konst size: kotlin.Int
 fun equals(other: kotlin.Any?): kotlin.Boolean
 fun hashCode(): kotlin.Int
 fun toString(): kotlin.String
@@ -26,7 +26,7 @@ fun lastIndexOf(element: E): kotlin.Int
 fun listIterator(): kotlin.collections.ListIterator<E>
 fun listIterator(index: kotlin.Int): kotlin.collections.ListIterator<E>
 fun subList(fromIndex: kotlin.Int, toIndex: kotlin.Int): kotlin.collections.List<E>
-val size: kotlin.Int
+konst size: kotlin.Int
 fun equals(other: kotlin.Any?): kotlin.Boolean
 fun hashCode(): kotlin.Int
 fun toString(): kotlin.String

@@ -1,10 +1,10 @@
 
 fun xxx() {
-    val f = 2
-    val g = "x"
-    /*PLACE*/val x = g
+    konst f = 2
+    konst g = "x"
+    /*PLACE*/konst x = g
 }
 
 fun x() {
-    /*ONAIR*/val y = f
+    /*ONAIR*/konst y = f
 }

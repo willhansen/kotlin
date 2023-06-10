@@ -4,11 +4,11 @@ class A {
 }
 
 fun foo(a: A, c: Int) {
-    val (a, b) = a
-    val arr = Array(2) { A() }
+    konst (a, b) = a
+    konst arr = Array(2) { A() }
     for ((c, d) in arr)  {
 
     }
 
-    val e = a.toString() + b + c
+    konst e = a.toString() + b + c
 }

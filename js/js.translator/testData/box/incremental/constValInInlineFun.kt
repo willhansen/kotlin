@@ -2,7 +2,7 @@
 // MODULE: lib
 // FILE: lib.kt
 
-const val FOO: String = "OK"
+const konst FOO: String = "OK"
 
 class B {
     inline fun bar(): String {

@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.types.typeUtil.isNothing
 import org.jetbrains.kotlin.types.typeUtil.isUnit
 
 internal class CAdapterTypeTranslator(
-        val prefix: String,
-        val builtIns: KonanBuiltIns,
+        konst prefix: String,
+        konst builtIns: KonanBuiltIns,
 ) {
     private fun translateTypeFull(type: KotlinType): Pair<String, String> =
             if (isMappedToVoid(type)) {
@@ -65,7 +65,7 @@ internal class CAdapterTypeTranslator(
                 primitiveTypeMapping[primitiveType]!!.let { it to it }
             },
             ifReference = {
-                val clazz = (it.computeBinaryType() as BinaryType.Reference).types.first()
+                konst clazz = (it.computeBinaryType() as BinaryType.Reference).types.first()
                 if (clazz == builtIns.string) {
                     "const char*" to "KObjHeader*"
                 } else {
@@ -74,7 +74,7 @@ internal class CAdapterTypeTranslator(
             }
     )
 
-    private val primitiveTypeMapping = KonanPrimitiveType.values().associate {
+    private konst primitiveTypeMapping = KonanPrimitiveType.konstues().associate {
         it to when (it) {
             KonanPrimitiveType.BOOLEAN -> "${prefix}_KBoolean"
             KonanPrimitiveType.CHAR -> "${prefix}_KChar"
@@ -89,7 +89,7 @@ internal class CAdapterTypeTranslator(
         }
     }
 
-    private val unsignedTypeMapping = UnsignedType.values().associate {
+    private konst unsignedTypeMapping = UnsignedType.konstues().associate {
         it.classId to when (it) {
             UnsignedType.UBYTE -> "${prefix}_KUByte"
             UnsignedType.USHORT -> "${prefix}_KUShort"

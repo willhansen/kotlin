@@ -8,7 +8,7 @@ public inline fun Int.times(body : () -> Unit) {
 }
 
 fun calc() : Int {
-    val a = ArrayList<()->Int>()
+    konst a = ArrayList<()->Int>()
     2.times {
         var j = 1
         a.add({ j })
@@ -16,13 +16,13 @@ fun calc() : Int {
     }
     var sum = 0
     for (f in a) {
-        val g = f as () -> Int
+        konst g = f as () -> Int
         sum += g()
     }
     return sum
 }
 
 fun box() : String {
-    val x = calc()
+    konst x = calc()
     return if (x == 4) "OK" else x.toString()
 }

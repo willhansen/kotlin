@@ -13,5 +13,5 @@ interface CirModule : CirDeclaration, CirHasName {
 }
 
 data class CirModuleImpl(
-    override val name: CirName
+    override konst name: CirName
 ) : CirModule

@@ -7,8 +7,8 @@
           <testOutputPath>$MODULE_DIR$/target/my_test-js/myproject-tests.js</testOutputPath>
           <compilerSettings />
           <compilerArguments>
-            <option name="sourceMapPrefix" value="" />
-            <option name="sourceMapEmbedSources" value="inlining" />
+            <option name="sourceMapPrefix" konstue="" />
+            <option name="sourceMapEmbedSources" konstue="inlining" />
             <option name="pluginOptions">
               <array />
             </option>

@@ -12,23 +12,23 @@ import java.util.regex.Pattern
 enum class SubstitutionPassType { FIRST, SECOND }
 
 data class SubstitutionRule(
-    val tag: SubstitutionTag,
-    val filename: String,
-    val testNumber: Int,
-    val varNumber: Int? = null
+    konst tag: SubstitutionTag,
+    konst filename: String,
+    konst testNumber: Int,
+    konst varNumber: Int? = null
 )
 
-class FeatureInteractionTestDataGenerator(private val configuration: GenerationSpecTestDataConfig) {
+class FeatureInteractionTestDataGenerator(private konst configuration: GenerationSpecTestDataConfig) {
     companion object {
-        const val TEMPLATES_PATH = "templates"
+        const konst TEMPLATES_PATH = "templates"
 
-        private const val PARAMETER_REGEXP = """(?:".*?"|.*?)"""
+        private const konst PARAMETER_REGEXP = """(?:".*?"|.*?)"""
 
         private fun getVariablePattern(varRegex: String = ".*?", afterContent: String = "") =
             Pattern.compile("""<!(?<varName>$varRegex)(?:\((?<parameters>$PARAMETER_REGEXP(?:,\s*$PARAMETER_REGEXP)*)\))?!>$afterContent""")
 
         private fun String.extractDirectives(): Pair<String, String> {
-            val matcher = getVariablePattern(
+            konst matcher = getVariablePattern(
                 varRegex = SubstitutionTag.DIRECTIVES.name,
                 afterContent = System.lineSeparator().repeat(2)
             ).matcher(this)
@@ -36,9 +36,9 @@ class FeatureInteractionTestDataGenerator(private val configuration: GenerationS
             if (!matcher.find())
                 return Pair("", this)
 
-            val parameters = parseParameters(matcher.group("parameters"))
-            val directives = parameters.joinToString { "// $it${System.lineSeparator()}" } + System.lineSeparator()
-            val template = StringBuffer(this.length).let {
+            konst parameters = parseParameters(matcher.group("parameters"))
+            konst directives = parameters.joinToString { "// $it${System.lineSeparator()}" } + System.lineSeparator()
+            konst template = StringBuffer(this.length).let {
                 matcher.appendReplacement(it, "").appendTail(it).toString()
             }
 
@@ -54,13 +54,13 @@ class FeatureInteractionTestDataGenerator(private val configuration: GenerationS
         testNumber: Int,
         passType: SubstitutionPassType = SubstitutionPassType.FIRST
     ): String {
-        val buffer = StringBuffer(this.length)
-        val matcher = getVariablePattern().matcher(this)
+        konst buffer = StringBuffer(this.length)
+        konst matcher = getVariablePattern().matcher(this)
         while (matcher.find()) {
-            val varName = matcher.group("varName")
-            val rawParameters = matcher.group("parameters")
-            val varNumber = if (rawParameters != null) parseParameters(rawParameters)[0].toInt() else null
-            val tag = SubstitutionTag.valueOf(varName)
+            konst varName = matcher.group("varName")
+            konst rawParameters = matcher.group("parameters")
+            konst varNumber = if (rawParameters != null) parseParameters(rawParameters)[0].toInt() else null
+            konst tag = SubstitutionTag.konstueOf(varName)
 
             if (tag.passType != passType)
                 continue
@@ -78,18 +78,18 @@ class FeatureInteractionTestDataGenerator(private val configuration: GenerationS
 
     fun generate() {
         var testNumber = 1
-        val testsPartPath = "$SPEC_TESTDATA_PATH/${configuration.getTestsPartPath()}"
-        val layoutTemplate = File("$SPEC_TESTDATA_PATH/${configuration.getLayoutPath()}").readText()
+        konst testsPartPath = "$SPEC_TESTDATA_PATH/${configuration.getTestsPartPath()}"
+        konst layoutTemplate = File("$SPEC_TESTDATA_PATH/${configuration.getLayoutPath()}").readText()
 
         File(testsPartPath).parentFile.mkdirs()
 
         for ((filename, template) in configuration.prepareAndGetFirstFeatureTemplates()) {
-            val (directives, templateWithoutDirectives) = template.extractDirectives()
-            val code = templateWithoutDirectives
+            konst (directives, templateWithoutDirectives) = template.extractDirectives()
+            konst code = templateWithoutDirectives
                 .substitute(filename, testNumber, SubstitutionPassType.FIRST)
                 .substitute(filename, testNumber, SubstitutionPassType.SECOND)
-            val layout = layoutTemplate.substitute(filename, testNumber)
-            val testFilePath = "$testsPartPath$testNumber.kt"
+            konst layout = layoutTemplate.substitute(filename, testNumber)
+            konst testFilePath = "$testsPartPath$testNumber.kt"
 
             File(testFilePath).writeText(directives + layout + System.lineSeparator().repeat(2) + code)
             testNumber++

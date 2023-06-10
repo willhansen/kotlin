@@ -6,11 +6,11 @@ import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.ClassKind
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 
-class DefaultIdSignatureRenderer(private val prefix: String? = null) : IdSignatureRenderer {
-    private val idSignaturer = KonanIdSignaturer(KonanManglerDesc)
+class DefaultIdSignatureRenderer(private konst prefix: String? = null) : IdSignatureRenderer {
+    private konst idSignaturer = KonanIdSignaturer(KonanManglerDesc)
 
     override fun render(descriptor: DeclarationDescriptor): String? {
-        val idSignature = if (descriptor is ClassDescriptor && descriptor.kind == ClassKind.ENUM_ENTRY) {
+        konst idSignature = if (descriptor is ClassDescriptor && descriptor.kind == ClassKind.ENUM_ENTRY) {
             idSignaturer.composeEnumEntrySignature(descriptor)
         } else {
             idSignaturer.composeSignature(descriptor)

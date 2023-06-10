@@ -33,7 +33,7 @@ FILE: invokeWithReceiverAndArgument.kt
         }
 
         public final fun test(func: R|(AbstractBuilderConfigurator.LeafBuilderConfigurationContext<FirTreeBuilder>) -> kotlin/Unit|): R|kotlin/Unit| {
-            lval context: R|AbstractBuilderConfigurator.LeafBuilderConfigurationContext<FirTreeBuilder>| = this@R|/BuilderConfigurator|.R|SubstitutionOverride</AbstractBuilderConfigurator.LeafBuilderConfigurationContext.LeafBuilderConfigurationContext>|()
+            lkonst context: R|AbstractBuilderConfigurator.LeafBuilderConfigurationContext<FirTreeBuilder>| = this@R|/BuilderConfigurator|.R|SubstitutionOverride</AbstractBuilderConfigurator.LeafBuilderConfigurationContext.LeafBuilderConfigurationContext>|()
             R|<local>/func|.R|SubstitutionOverride<kotlin/Function1.invoke: R|kotlin/Unit|>|(R|<local>/context|)
         }
 

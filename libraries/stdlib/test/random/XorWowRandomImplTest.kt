@@ -12,11 +12,11 @@ import kotlin.test.*
 class XorWowRandomImplTest {
     @Test
     fun predefinedSequence() {
-        val seed = 1
-        val addend = (seed shl 10) xor (seed ushr 4)
+        konst seed = 1
+        konst addend = (seed shl 10) xor (seed ushr 4)
 
         @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
-        val random: Random = XorWowRandom(seed, 0, 0, 0, 0, addend)
+        konst random: Random = XorWowRandom(seed, 0, 0, 0, 0, addend)
 
         // differs from reference 0.8178000247146859 because of different double mixing algorithm
         assertEquals(0.817799582443095, random.nextDouble())

@@ -9,7 +9,7 @@ public/*package*/ open class TypeParamInInner {
 
 public final class outerClass</*0*/ T> {
     public constructor outerClass</*0*/ T>(/*0*/ T)
-    public final val t: T
+    public final konst t: T
 
     public final inner class innerClass /*captured type parameters: /*0*/ T*/ {
         public constructor innerClass()

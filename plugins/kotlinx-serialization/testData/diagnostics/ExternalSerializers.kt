@@ -7,19 +7,19 @@ import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
-class Foo(i: Int, val j: Int)
+class Foo(i: Int, konst j: Int)
 
 <!EXTERNAL_CLASS_NOT_SERIALIZABLE!>@Serializer(forClass = Foo::class)<!>
 object ExternalSerializer
 
 <!EXTERNAL_SERIALIZER_USELESS!>@Serializer(forClass = Foo::class)<!>
 object UselessExternalSerializer : KSerializer<Foo> {
-    override val descriptor: SerialDescriptor
+    override konst descriptor: SerialDescriptor
         get() {
             TODO()
         }
 
-    override fun serialize(encoder: Encoder, value: Foo) {
+    override fun serialize(encoder: Encoder, konstue: Foo) {
         TODO()
     }
 

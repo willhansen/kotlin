@@ -8,11 +8,11 @@ fun <T> id(x: T) = x
 
 fun test1() = checkAny { J.foo() }
 
-val test2: () -> Any = { J.foo() }
+konst test2: () -> Any = { J.foo() }
 
-val test3: () -> Any = { J.foo() } as () -> Any
+konst test3: () -> Any = { J.foo() } as () -> Any
 
-val test4: () -> Any = id { J.foo() }
+konst test4: () -> Any = id { J.foo() }
 
 fun test5() = checkAnyN { J.foo() }
 

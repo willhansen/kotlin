@@ -137,7 +137,7 @@ class XCFrameworkIT : KGPBaseTest() {
     fun shouldCheckDashesHandlingWithXCFramework(gradleVersion: GradleVersion) {
         project("appleXCFramework", gradleVersion) {
 
-            val sharedBuildGradleKts = subProject("shared").buildGradleKts
+            konst sharedBuildGradleKts = subProject("shared").buildGradleKts
             sharedBuildGradleKts.replaceText("baseName = \"shared\"", "baseName = \"sha-red\"")
             sharedBuildGradleKts.replaceText("XCFramework()", "XCFramework(\"sha-red\")")
 

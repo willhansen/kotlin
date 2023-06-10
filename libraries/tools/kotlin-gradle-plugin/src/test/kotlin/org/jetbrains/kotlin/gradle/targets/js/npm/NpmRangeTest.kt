@@ -13,19 +13,19 @@ class NpmRangeTest {
     @Test
     fun intersectTest() {
         fun assertIntersect(range1: NpmRange, range2: NpmRange, expected: NpmRange?) {
-            val intersection = range1 intersect range2
+            konst intersection = range1 intersect range2
             assertTrue("Range $range1 and $range2 expected to have intersection $expected, but actual is $intersection") {
                 intersection == expected
             }
 
-            val symIntersection = range2 intersect range1
+            konst symIntersection = range2 intersect range1
             assertTrue("Range $range2 and $range1 expected to have union $expected, but actual is $symIntersection") {
                 symIntersection == expected
             }
         }
 
-        val range1 = npmRange(startMajor = 1, endMajor = 2)
-        val range2 = npmRange(startMajor = 3, endMajor = 4)
+        konst range1 = npmRange(startMajor = 1, endMajor = 2)
+        konst range2 = npmRange(startMajor = 3, endMajor = 4)
         assertIntersect(range1, range2, null)
 
         assertIntersect(
@@ -90,19 +90,19 @@ class NpmRangeTest {
     @Test
     fun unionTest() {
         fun assertUnion(range1: NpmRange, range2: NpmRange, expected: Set<NpmRange>) {
-            val union = (range1 union range2)
+            konst union = (range1 union range2)
             assertTrue("Range $range1 and $range2 expected to have union $expected, but actual is $union") {
                 union == expected
             }
 
-            val symUnion = range2 union range1
+            konst symUnion = range2 union range1
             assertTrue("Range $range2 and $range1 expected to have union $expected, but actual is $symUnion") {
                 symUnion == expected
             }
         }
 
-        val range1 = npmRange(startMajor = 1, endMajor = 2)
-        val range2 = npmRange(startMajor = 3, endMajor = 4)
+        konst range1 = npmRange(startMajor = 1, endMajor = 2)
+        konst range2 = npmRange(startMajor = 3, endMajor = 4)
         assertUnion(range1, range2, setOf(range1, range2))
 
         assertUnion(
@@ -184,7 +184,7 @@ class NpmRangeTest {
     @Test
     fun rangeInvertTest() {
         fun assertInvert(invertible: NpmRange, expected: Set<NpmRange>) {
-            val invert = invertible.invert()
+            konst invert = invertible.invert()
             assertTrue("Inverted $invertible should be $expected but found $invert") {
                 invert == expected
             }
@@ -282,9 +282,9 @@ class NpmRangeTest {
 
     @Test
     fun maxStartTest() {
-        val nullRange1 = npmRange()
-        val nullRange2 = npmRange()
-        val maxStart1 = maxStart(
+        konst nullRange1 = npmRange()
+        konst nullRange2 = npmRange()
+        konst maxStart1 = maxStart(
             nullRange1,
             nullRange2
         )
@@ -292,10 +292,10 @@ class NpmRangeTest {
             maxStart1 == nullRange2.startVersion
         }
 
-        val startRange1 = npmRange(
+        konst startRange1 = npmRange(
             startMajor = 1
         )
-        val maxStart2 = maxStart(
+        konst maxStart2 = maxStart(
             startRange1,
             npmRange()
         )
@@ -303,8 +303,8 @@ class NpmRangeTest {
             maxStart2 == startRange1.startVersion
         }
 
-        val startRange2 = npmRange(startMajor = 2)
-        val maxStart3 = maxStart(
+        konst startRange2 = npmRange(startMajor = 2)
+        konst maxStart3 = maxStart(
             startRange1,
             startRange2
         )
@@ -315,9 +315,9 @@ class NpmRangeTest {
 
     @Test
     fun minStartTest() {
-        val nullRange1 = npmRange()
-        val nullRange2 = npmRange()
-        val minStart1 = minStart(
+        konst nullRange1 = npmRange()
+        konst nullRange2 = npmRange()
+        konst minStart1 = minStart(
             nullRange1,
             nullRange2
         )
@@ -325,10 +325,10 @@ class NpmRangeTest {
             minStart1 == null
         }
 
-        val startRange1 = npmRange(
+        konst startRange1 = npmRange(
             startMajor = 1
         )
-        val minStart2 = minStart(
+        konst minStart2 = minStart(
             startRange1,
             npmRange()
         )
@@ -336,8 +336,8 @@ class NpmRangeTest {
             minStart2 == null
         }
 
-        val startRange2 = npmRange(startMajor = 2)
-        val minStart3 = minStart(
+        konst startRange2 = npmRange(startMajor = 2)
+        konst minStart3 = minStart(
             startRange1,
             startRange2
         )
@@ -348,9 +348,9 @@ class NpmRangeTest {
 
     @Test
     fun maxEndTest() {
-        val nullRange1 = npmRange()
-        val nullRange2 = npmRange()
-        val maxEnd1 = maxEnd(
+        konst nullRange1 = npmRange()
+        konst nullRange2 = npmRange()
+        konst maxEnd1 = maxEnd(
             nullRange1,
             nullRange2
         )
@@ -358,10 +358,10 @@ class NpmRangeTest {
             maxEnd1 == null
         }
 
-        val endRange1 = npmRange(
+        konst endRange1 = npmRange(
             endMajor = 1
         )
-        val maxEnd2 = maxEnd(
+        konst maxEnd2 = maxEnd(
             endRange1,
             npmRange()
         )
@@ -369,8 +369,8 @@ class NpmRangeTest {
             maxEnd2 == null
         }
 
-        val endRange2 = npmRange(endMajor = 2)
-        val maxEnd3 = maxEnd(
+        konst endRange2 = npmRange(endMajor = 2)
+        konst maxEnd3 = maxEnd(
             endRange1,
             endRange2
         )
@@ -381,9 +381,9 @@ class NpmRangeTest {
 
     @Test
     fun minEndTest() {
-        val nullRange1 = npmRange()
-        val nullRange2 = npmRange()
-        val minEnd1 = minEnd(
+        konst nullRange1 = npmRange()
+        konst nullRange2 = npmRange()
+        konst minEnd1 = minEnd(
             nullRange1,
             nullRange2
         )
@@ -391,10 +391,10 @@ class NpmRangeTest {
             minEnd1 == nullRange1.endVersion
         }
 
-        val endRange1 = npmRange(
+        konst endRange1 = npmRange(
             endMajor = 1
         )
-        val minEnd2 = minEnd(
+        konst minEnd2 = minEnd(
             endRange1,
             npmRange()
         )
@@ -402,8 +402,8 @@ class NpmRangeTest {
             minEnd2 == endRange1.endVersion
         }
 
-        val endRange2 = npmRange(endMajor = 2)
-        val minEnd3 = minEnd(
+        konst endRange2 = npmRange(endMajor = 2)
+        konst minEnd3 = minEnd(
             endRange1,
             endRange2
         )

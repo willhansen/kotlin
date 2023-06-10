@@ -25,11 +25,11 @@ sink:
     <SINK>                                               PREV:[<ERROR>, <END>]
 =====================
 == foo ==
-val Int.foo: String.() -> Unit get() = {}
+konst Int.foo: String.() -> Unit get() = {}
 ---------------------
 L0:
   1 <START>
-    v(val Int.foo: String.() -> Unit get() = {})
+    v(konst Int.foo: String.() -> Unit get() = {})
 L1:
     <END>                                           NEXT:[<SINK>]
 error:

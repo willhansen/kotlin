@@ -19,7 +19,7 @@ fun generateUnsignedTypes(
     targetDir: File,
     generate: (File, (PrintWriter) -> BuiltInsSourceGenerator) -> Unit
 ) {
-    for (type in UnsignedType.values()) {
+    for (type in UnsignedType.konstues()) {
         generate(File(targetDir, "kotlin/${type.capitalized}.kt")) { UnsignedTypeGenerator(type, it) }
         generate(File(targetDir, "kotlin/${type.capitalized}Array.kt")) { UnsignedArrayGenerator(type, it) }
     }
@@ -29,27 +29,27 @@ fun generateUnsignedTypes(
     }
 }
 
-class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
-    val className = type.capitalized
-    val storageType = type.asSigned.capitalized
+class UnsignedTypeGenerator(konst type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
+    konst className = type.capitalized
+    konst storageType = type.asSigned.capitalized
 
     internal fun binaryOperatorDoc(operator: String, operand1: UnsignedType, operand2: UnsignedType): String = when (operator) {
         "floorDiv" ->
             """
-            Divides this value by the other value, flooring the result to an integer that is closer to negative infinity.
+            Divides this konstue by the other konstue, flooring the result to an integer that is closer to negative infinity.
             
             For unsigned types, the results of flooring division and truncating division are the same.
             """.trimIndent()
         "rem" -> {
             """
-                Calculates the remainder of truncating division of this value (dividend) by the other value (divisor).
+                Calculates the remainder of truncating division of this konstue (dividend) by the other konstue (divisor).
                 
                 The result is always less than the divisor.
                 """.trimIndent()
         }
         "mod" -> {
             """
-                Calculates the remainder of flooring division of this value (dividend) by the other value (divisor).
+                Calculates the remainder of flooring division of this konstue (dividend) by the other konstue (divisor).
 
                 The result is always less than the divisor.
                 
@@ -68,28 +68,28 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
         out.println("@SinceKotlin(\"1.5\")")
         out.println("@WasExperimental(ExperimentalUnsignedTypes::class)")
         out.println("@JvmInline")
-        out.println("public value class $className @kotlin.internal.IntrinsicConstEvaluation @PublishedApi internal constructor(@PublishedApi internal val data: $storageType) : Comparable<$className> {")
+        out.println("public konstue class $className @kotlin.internal.IntrinsicConstEkonstuation @PublishedApi internal constructor(@PublishedApi internal konst data: $storageType) : Comparable<$className> {")
         out.println()
         out.println("""    companion object {
         /**
-         * A constant holding the minimum value an instance of $className can have.
+         * A constant holding the minimum konstue an instance of $className can have.
          */
-        public const val MIN_VALUE: $className = $className(0)
+        public const konst MIN_VALUE: $className = $className(0)
 
         /**
-         * A constant holding the maximum value an instance of $className can have.
+         * A constant holding the maximum konstue an instance of $className can have.
          */
-        public const val MAX_VALUE: $className = $className(-1)
+        public const konst MAX_VALUE: $className = $className(-1)
 
         /**
          * The number of bytes used to represent an instance of $className in a binary form.
          */
-        public const val SIZE_BYTES: Int = ${type.byteSize}
+        public const konst SIZE_BYTES: Int = ${type.byteSize}
 
         /**
          * The number of bits used to represent an instance of $className in a binary form.
          */
-        public const val SIZE_BITS: Int = ${type.byteSize * 8}
+        public const konst SIZE_BITS: Int = ${type.byteSize * 8}
     }""")
 
         generateCompareTo()
@@ -119,11 +119,11 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
 
 
     private fun generateCompareTo() {
-        for (otherType in UnsignedType.values()) {
+        for (otherType in UnsignedType.konstues()) {
             out.println("""
     /**
-     * Compares this value with the specified value for order.
-     * Returns zero if this value is equal to the specified other value, a negative number if it's less than other,
+     * Compares this konstue with the specified konstue for order.
+     * Returns zero if this konstue is equal to the specified other konstue, a negative number if it's less than other,
      * or a positive number if it's greater than other.
      */""")
             out.println("    @kotlin.internal.InlineOnly")
@@ -138,7 +138,7 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
                 if (maxOf(type, otherType) < UnsignedType.UINT) {
                     out.println("this.toInt().compareTo(other.toInt())")
                 } else {
-                    val ctype = maxByDomainCapacity(type, otherType)
+                    konst ctype = maxByDomainCapacity(type, otherType)
                     out.println("${convert("this", type, ctype)}.compareTo(${convert("other", otherType, ctype)})")
                 }
             }
@@ -155,8 +155,8 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     }
 
     private fun generateOperator(name: String) {
-        for (otherType in UnsignedType.values()) {
-            val returnType = getOperatorReturnType(type, otherType)
+        for (otherType in UnsignedType.konstues()) {
+            konst returnType = getOperatorReturnType(type, otherType)
 
             out.printDoc(binaryOperatorDoc(name, type, otherType), "    ")
             out.println("    @kotlin.internal.InlineOnly")
@@ -176,9 +176,9 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     }
 
     private fun generateFloorDivMod(name: String) {
-        for (otherType in UnsignedType.values()) {
-            val operationType = getOperatorReturnType(type, otherType)
-            val returnType = if (name == "mod") otherType else operationType
+        for (otherType in UnsignedType.konstues()) {
+            konst operationType = getOperatorReturnType(type, otherType)
+            konst returnType = if (name == "mod") otherType else operationType
 
             out.printDoc(binaryOperatorDoc(name, type, otherType), "    ")
             out.println("    @kotlin.internal.InlineOnly")
@@ -212,23 +212,23 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     }
 
     private fun generateRangeTo() {
-        val rangeElementType = maxByDomainCapacity(type, UnsignedType.UINT)
-        val rangeType = rangeElementType.capitalized + "Range"
+        konst rangeElementType = maxByDomainCapacity(type, UnsignedType.UINT)
+        konst rangeType = rangeElementType.capitalized + "Range"
         fun convert(name: String) = if (rangeElementType == type) name else "$name.to${rangeElementType.capitalized}()"
-        out.println("    /** Creates a range from this value to the specified [other] value. */")
+        out.println("    /** Creates a range from this konstue to the specified [other] konstue. */")
         out.println("    @kotlin.internal.InlineOnly")
         out.println("    public inline operator fun rangeTo(other: $className): $rangeType = $rangeType(${convert("this")}, ${convert("other")})")
         out.println()
     }
 
     private fun generateRangeUntil() {
-        val rangeElementType = maxByDomainCapacity(type, UnsignedType.UINT)
-        val rangeType = rangeElementType.capitalized + "Range"
+        konst rangeElementType = maxByDomainCapacity(type, UnsignedType.UINT)
+        konst rangeType = rangeElementType.capitalized + "Range"
         fun convert(name: String) = if (rangeElementType == type) name else "$name.to${rangeElementType.capitalized}()"
         out.println("    /**")
-        out.println("     * Creates a range from this value up to but excluding the specified [other] value.")
+        out.println("     * Creates a range from this konstue up to but excluding the specified [other] konstue.")
         out.println("     *")
-        out.println("     * If the [other] value is less than or equal to `this` value, then the returned range is empty.")
+        out.println("     * If the [other] konstue is less than or equal to `this` konstue, then the returned range is empty.")
         out.println("     */")
         out.println("    @SinceKotlin(\"1.9\")")
         out.println("    @WasExperimental(ExperimentalStdlibApi::class)")
@@ -241,8 +241,8 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     private fun generateBitShiftOperators() {
 
         fun generateShiftOperator(name: String, implementation: String = name) {
-            val doc = BasePrimitivesGenerator.shiftOperators[implementation]!!
-            val detail = BasePrimitivesGenerator.shiftOperatorsDocDetail(type.asSigned)
+            konst doc = BasePrimitivesGenerator.shiftOperators[implementation]!!
+            konst detail = BasePrimitivesGenerator.shiftOperatorsDocDetail(type.asSigned)
             out.printDoc(doc + END_LINE + END_LINE + detail, "    ")
             out.println("    @kotlin.internal.InlineOnly")
             out.println("    public inline infix fun $name(bitCount: Int): $className = $className(data $implementation bitCount)")
@@ -259,7 +259,7 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
             out.println("    @kotlin.internal.InlineOnly")
             out.println("    public inline infix fun $name(other: $className): $className = $className(this.data $name other.data)")
         }
-        out.println("    /** Inverts the bits in this value. */")
+        out.println("    /** Inverts the bits in this konstue. */")
         out.println("    @kotlin.internal.InlineOnly")
         out.println("    public inline fun inv(): $className = $className(data.inv())")
         out.println()
@@ -269,28 +269,28 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     private fun msb(count: Int) = "most significant $count bits"
 
     private fun generateMemberConversions() {
-        for (otherType in UnsignedType.values()) {
-            val signed = otherType.asSigned.capitalized
+        for (otherType in UnsignedType.konstues()) {
+            konst signed = otherType.asSigned.capitalized
 
-            out.println("    /**\n     * Converts this [$className] value to [$signed].\n     *")
+            out.println("    /**\n     * Converts this [$className] konstue to [$signed].\n     *")
             when {
                 otherType < type -> {
-                    out.println("     * If this value is less than or equals to [$signed.MAX_VALUE], the resulting `$signed` value represents")
-                    out.println("     * the same numerical value as this `$className`.")
+                    out.println("     * If this konstue is less than or equals to [$signed.MAX_VALUE], the resulting `$signed` konstue represents")
+                    out.println("     * the same numerical konstue as this `$className`.")
                     out.println("     *")
-                    out.println("     * The resulting `$signed` value is represented by the ${lsb(otherType.bitSize)} of this `$className` value.")
-                    out.println("     * Note that the resulting `$signed` value may be negative.")
+                    out.println("     * The resulting `$signed` konstue is represented by the ${lsb(otherType.bitSize)} of this `$className` konstue.")
+                    out.println("     * Note that the resulting `$signed` konstue may be negative.")
                 }
                 otherType == type -> {
-                    out.println("     * If this value is less than or equals to [$signed.MAX_VALUE], the resulting `$signed` value represents")
-                    out.println("     * the same numerical value as this `$className`. Otherwise the result is negative.")
+                    out.println("     * If this konstue is less than or equals to [$signed.MAX_VALUE], the resulting `$signed` konstue represents")
+                    out.println("     * the same numerical konstue as this `$className`. Otherwise the result is negative.")
                     out.println("     *")
-                    out.println("     * The resulting `$signed` value has the same binary representation as this `$className` value.")
+                    out.println("     * The resulting `$signed` konstue has the same binary representation as this `$className` konstue.")
                 }
                 else -> {
-                    out.println("     * The resulting `$signed` value represents the same numerical value as this `$className`.")
+                    out.println("     * The resulting `$signed` konstue represents the same numerical konstue as this `$className`.")
                     out.println("     *")
-                    out.println("     * The ${lsb(type.bitSize)} of the resulting `$signed` value are the same as the bits of this `$className` value,")
+                    out.println("     * The ${lsb(type.bitSize)} of the resulting `$signed` konstue are the same as the bits of this `$className` konstue,")
                     out.println("     * whereas the ${msb(otherType.bitSize - type.bitSize)} are filled with zeros.")
                 }
             }
@@ -306,24 +306,24 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
         }
         out.println()
 
-        for (otherType in UnsignedType.values()) {
-            val name = otherType.capitalized
+        for (otherType in UnsignedType.konstues()) {
+            konst name = otherType.capitalized
 
             if (type == otherType)
-                out.println("    /** Returns this value. */")
+                out.println("    /** Returns this konstue. */")
             else {
-                out.println("    /**\n     * Converts this [$className] value to [$name].\n     *")
+                out.println("    /**\n     * Converts this [$className] konstue to [$name].\n     *")
                 when {
                     otherType < type -> {
-                        out.println("     * If this value is less than or equals to [$name.MAX_VALUE], the resulting `$name` value represents")
-                        out.println("     * the same numerical value as this `$className`.")
+                        out.println("     * If this konstue is less than or equals to [$name.MAX_VALUE], the resulting `$name` konstue represents")
+                        out.println("     * the same numerical konstue as this `$className`.")
                         out.println("     *")
-                        out.println("     * The resulting `$name` value is represented by the ${lsb(otherType.bitSize)} of this `$className` value.")
+                        out.println("     * The resulting `$name` konstue is represented by the ${lsb(otherType.bitSize)} of this `$className` konstue.")
                     }
                     else -> {
-                        out.println("     * The resulting `$name` value represents the same numerical value as this `$className`.")
+                        out.println("     * The resulting `$name` konstue represents the same numerical konstue as this `$className`.")
                         out.println("     *")
-                        out.println("     * The ${lsb(type.bitSize)} of the resulting `$name` value are the same as the bits of this `$className` value,")
+                        out.println("     * The ${lsb(type.bitSize)} of the resulting `$name` konstue are the same as the bits of this `$className` konstue,")
                         out.println("     * whereas the ${msb(otherType.bitSize - type.bitSize)} are filled with zeros.")
                     }
                 }
@@ -343,15 +343,15 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
 
     private fun generateFloatingConversions() {
         for (otherType in PrimitiveType.floatingPoint) {
-            val otherName = otherType.capitalized
+            konst otherName = otherType.capitalized
 
-            out.println("    /**\n     * Converts this [$className] value to [$otherName].\n     *")
+            out.println("    /**\n     * Converts this [$className] konstue to [$otherName].\n     *")
             if (type == UnsignedType.ULONG || type == UnsignedType.UINT && otherType == PrimitiveType.FLOAT) {
-                out.println("     * The resulting value is the closest `$otherName` to this `$className` value.")
-                out.println("     * In case when this `$className` value is exactly between two `$otherName`s,")
+                out.println("     * The resulting konstue is the closest `$otherName` to this `$className` konstue.")
+                out.println("     * In case when this `$className` konstue is exactly between two `$otherName`s,")
                 out.println("     * the one with zero at least significant bit of mantissa is selected.")
             } else {
-                out.println("     * The resulting `$otherName` value represents the same numerical value as this `$className`.")
+                out.println("     * The resulting `$otherName` konstue represents the same numerical konstue as this `$className`.")
             }
             out.println("     */")
 
@@ -368,28 +368,28 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
     }
 
     private fun generateExtensionConversions() {
-        for (otherType in UnsignedType.values()) {
-            val otherSigned = otherType.asSigned.capitalized
-            val thisSigned = type.asSigned.capitalized
+        for (otherType in UnsignedType.konstues()) {
+            konst otherSigned = otherType.asSigned.capitalized
+            konst thisSigned = type.asSigned.capitalized
 
-            out.println("/**\n * Converts this [$otherSigned] value to [$className].\n *")
+            out.println("/**\n * Converts this [$otherSigned] konstue to [$className].\n *")
             when {
                 otherType < type -> {
-                    out.println(" * If this value is positive, the resulting `$className` value represents the same numerical value as this `$otherSigned`.")
+                    out.println(" * If this konstue is positive, the resulting `$className` konstue represents the same numerical konstue as this `$otherSigned`.")
                     out.println(" *")
-                    out.println(" * The ${lsb(otherType.bitSize)} of the resulting `$className` value are the same as the bits of this `$otherSigned` value,")
-                    out.println(" * whereas the ${msb(type.bitSize - otherType.bitSize)} are filled with the sign bit of this value.")
+                    out.println(" * The ${lsb(otherType.bitSize)} of the resulting `$className` konstue are the same as the bits of this `$otherSigned` konstue,")
+                    out.println(" * whereas the ${msb(type.bitSize - otherType.bitSize)} are filled with the sign bit of this konstue.")
                 }
                 otherType == type -> {
-                    out.println(" * If this value is positive, the resulting `$className` value represents the same numerical value as this `$otherSigned`.")
+                    out.println(" * If this konstue is positive, the resulting `$className` konstue represents the same numerical konstue as this `$otherSigned`.")
                     out.println(" *")
-                    out.println(" * The resulting `$className` value has the same binary representation as this `$otherSigned` value.")
+                    out.println(" * The resulting `$className` konstue has the same binary representation as this `$otherSigned` konstue.")
                 }
                 else -> {
-                    out.println(" * If this value is positive and less than or equals to [$className.MAX_VALUE], the resulting `$className` value represents")
-                    out.println(" * the same numerical value as this `$otherSigned`.")
+                    out.println(" * If this konstue is positive and less than or equals to [$className.MAX_VALUE], the resulting `$className` konstue represents")
+                    out.println(" * the same numerical konstue as this `$otherSigned`.")
                     out.println(" *")
-                    out.println(" * The resulting `$className` value is represented by the ${lsb(type.bitSize)} of this `$otherSigned` value.")
+                    out.println(" * The resulting `$className` konstue is represented by the ${lsb(type.bitSize)} of this `$otherSigned` konstue.")
                 }
             }
             out.println(" */")
@@ -408,15 +408,15 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
 
         out.println()
         for (otherType in PrimitiveType.floatingPoint) {
-            val otherName = otherType.capitalized
+            konst otherName = otherType.capitalized
 
             out.println(
                 """
                 /**
-                 * Converts this [$otherName] value to [$className].
+                 * Converts this [$otherName] konstue to [$className].
                  *
                  * The fractional part, if any, is rounded down towards zero.
-                 * Returns zero if this `$otherName` value is negative or `NaN`, [$className.MAX_VALUE] if it's bigger than `$className.MAX_VALUE`.
+                 * Returns zero if this `$otherName` konstue is negative or `NaN`, [$className.MAX_VALUE] if it's bigger than `$className.MAX_VALUE`.
                  */
                 """.trimIndent()
             )
@@ -424,7 +424,7 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
             out.println("@WasExperimental(ExperimentalUnsignedTypes::class)")
             out.println("@kotlin.internal.InlineOnly")
             out.print("public inline fun $otherName.to$className(): $className = ")
-            val conversion = if (otherType == PrimitiveType.DOUBLE) "" else ".toDouble()"
+            konst conversion = if (otherType == PrimitiveType.DOUBLE) "" else ".toDouble()"
             out.println("doubleTo$className(this$conversion)")
         }
     }
@@ -454,12 +454,12 @@ class UnsignedTypeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIns
 }
 
 
-class UnsignedArrayGenerator(val type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
-    val elementType = type.capitalized
-    val arrayType = elementType + "Array"
-    val arrayTypeOf = elementType.lowercase() + "ArrayOf"
-    val storageElementType = type.asSigned.capitalized
-    val storageArrayType = storageElementType + "Array"
+class UnsignedArrayGenerator(konst type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
+    konst elementType = type.capitalized
+    konst arrayType = elementType + "Array"
+    konst arrayTypeOf = elementType.lowercase() + "ArrayOf"
+    konst storageElementType = type.asSigned.capitalized
+    konst storageArrayType = storageElementType + "Array"
     override fun generateBody() {
         out.println("import kotlin.jvm.*")
         out.println()
@@ -467,9 +467,9 @@ class UnsignedArrayGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIn
         out.println("@SinceKotlin(\"1.3\")")
         out.println("@ExperimentalUnsignedTypes")
         out.println("@JvmInline")
-        out.println("public value class $arrayType")
+        out.println("public konstue class $arrayType")
         out.println("@PublishedApi")
-        out.println("internal constructor(@PublishedApi internal val storage: $storageArrayType) : Collection<$elementType> {")
+        out.println("internal constructor(@PublishedApi internal konst storage: $storageArrayType) : Collection<$elementType> {")
         out.println(
             """
     /** Creates a new array of the specified [size], with all elements initialized to zero. */
@@ -484,22 +484,22 @@ class UnsignedArrayGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIn
     public operator fun get(index: Int): $elementType = storage[index].to$elementType()
 
     /**
-     * Sets the element at the given [index] to the given [value]. This method can be called using the index operator.
+     * Sets the element at the given [index] to the given [konstue]. This method can be called using the index operator.
      *
      * If the [index] is out of bounds of this array, throws an [IndexOutOfBoundsException] except in Kotlin/JS
      * where the behavior is unspecified.
      */
-    public operator fun set(index: Int, value: $elementType) {
-        storage[index] = value.to$storageElementType()
+    public operator fun set(index: Int, konstue: $elementType) {
+        storage[index] = konstue.to$storageElementType()
     }
 
     /** Returns the number of elements in the array. */
-    public override val size: Int get() = storage.size
+    public override konst size: Int get() = storage.size
 
     /** Creates an iterator over the elements of the array. */
     public override operator fun iterator(): kotlin.collections.Iterator<$elementType> = Iterator(storage)
 
-    private class Iterator(private val array: $storageArrayType) : kotlin.collections.Iterator<${elementType}> {
+    private class Iterator(private konst array: $storageArrayType) : kotlin.collections.Iterator<${elementType}> {
         private var index = 0
         override fun hasNext() = index < array.size
         override fun next() = if (index < array.size) array[index++].to$elementType() else throw NoSuchElementException(index.toString())
@@ -530,7 +530,7 @@ class UnsignedArrayGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIn
  * [init] function.
  *
  * The function [init] is called for each array element sequentially starting from the first one.
- * It should return the value for an array element given its index.
+ * It should return the konstue for an array element given its index.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -547,11 +547,11 @@ public inline fun $arrayTypeOf(vararg elements: $elementType): $arrayType = elem
     }
 }
 
-class UnsignedRangeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
-    val elementType = type.capitalized
-    val signedType = type.asSigned.capitalized
-    val stepType = signedType
-    val stepMinValue = "$stepType.MIN_VALUE"
+class UnsignedRangeGenerator(konst type: UnsignedType, out: PrintWriter) : BuiltInsSourceGenerator(out) {
+    konst elementType = type.capitalized
+    konst signedType = type.asSigned.capitalized
+    konst stepType = signedType
+    konst stepMinValue = "$stepType.MIN_VALUE"
 
     override fun getPackage(): String = "kotlin.ranges"
 
@@ -565,28 +565,28 @@ class UnsignedRangeGenerator(val type: UnsignedType, out: PrintWriter) : BuiltIn
 import kotlin.internal.*
 
 /**
- * A range of values of type `$elementType`.
+ * A range of konstues of type `$elementType`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
 public class ${elementType}Range(start: $elementType, endInclusive: $elementType) : ${elementType}Progression(start, endInclusive, 1), ClosedRange<${elementType}>, OpenEndRange<${elementType}> {
-    override val start: $elementType get() = first
-    override val endInclusive: $elementType get() = last
+    override konst start: $elementType get() = first
+    override konst endInclusive: $elementType get() = last
     
-    @Deprecated("Can throw an exception when it's impossible to represent the value with $elementType type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @Deprecated("Can throw an exception when it's impossible to represent the konstue with $elementType type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @SinceKotlin("1.9")
     @WasExperimental(ExperimentalStdlibApi::class)
-    override val endExclusive: $elementType get() {
+    override konst endExclusive: $elementType get() {
         if (last == $elementType.MAX_VALUE) error("Cannot return the exclusive upper bound of a range that includes MAX_VALUE.")
         return last + 1u
     }
 
-    override fun contains(value: $elementType): Boolean = first <= value && value <= last
+    override fun contains(konstue: $elementType): Boolean = first <= konstue && konstue <= last
 
     /** 
      * Checks if the range is empty.
      
-     * The range is empty if its start value is greater than the end value.
+     * The range is empty if its start konstue is greater than the end konstue.
      */
     override fun isEmpty(): Boolean = first > last
 
@@ -600,13 +600,13 @@ public class ${elementType}Range(start: $elementType, endInclusive: $elementType
     override fun toString(): String = "${'$'}first..${'$'}last"
 
     companion object {
-        /** An empty range of values of type $elementType. */
-        public val EMPTY: ${elementType}Range = ${elementType}Range($elementType.MAX_VALUE, $elementType.MIN_VALUE)
+        /** An empty range of konstues of type $elementType. */
+        public konst EMPTY: ${elementType}Range = ${elementType}Range($elementType.MAX_VALUE, $elementType.MIN_VALUE)
     }
 }
 
 /**
- * A progression of values of type `$elementType`.
+ * A progression of konstues of type `$elementType`.
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -624,17 +624,17 @@ internal constructor(
     /**
      * The first element in the progression.
      */
-    public val first: $elementType = start
+    public konst first: $elementType = start
 
     /**
      * The last element in the progression.
      */
-    public val last: $elementType = getProgressionLastElement(start, endInclusive, step)
+    public konst last: $elementType = getProgressionLastElement(start, endInclusive, step)
 
     /**
      * The step of the progression.
      */
-    public val step: $stepType = step
+    public konst step: $stepType = step
 
     final override fun iterator(): Iterator<$elementType> = ${elementType}ProgressionIterator(first, last, step)
 
@@ -659,7 +659,7 @@ internal constructor(
         /**
          * Creates ${elementType}Progression within the specified bounds of a closed range.
 
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `$stepMinValue` and not equal to zero.
@@ -670,27 +670,27 @@ internal constructor(
 
 
 /**
- * An iterator over a progression of values of type `$elementType`.
- * @property step the number by which the value is incremented on each step.
+ * An iterator over a progression of konstues of type `$elementType`.
+ * @property step the number by which the konstue is incremented on each step.
  */
 @SinceKotlin("1.3")
 private class ${elementType}ProgressionIterator(first: $elementType, last: $elementType, step: $stepType) : Iterator<${elementType}> {
-    private val finalElement = last
+    private konst finalElement = last
     private var hasNext: Boolean = if (step > 0) first <= last else first >= last
-    private val step = step.to$elementType() // use 2-complement math for negative steps
+    private konst step = step.to$elementType() // use 2-complement math for negative steps
     private var next = if (hasNext) first else finalElement
 
     override fun hasNext(): Boolean = hasNext
 
     override fun next(): $elementType {
-        val value = next
-        if (value == finalElement) {
+        konst konstue = next
+        if (konstue == finalElement) {
             if (!hasNext) throw kotlin.NoSuchElementException()
             hasNext = false
         } else {
             next += step
         }
-        return value
+        return konstue
     }
 }
 """

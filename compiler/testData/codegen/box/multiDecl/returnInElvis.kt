@@ -1,4 +1,4 @@
-data class Z(val p: String, val k: String)
+data class Z(konst p: String, konst k: String)
 
 
 fun create(p: Boolean): Z? {
@@ -11,7 +11,7 @@ fun create(p: Boolean): Z? {
 }
 
 fun test(p: Boolean): String {
-    val (a, b) = create(p) ?: return "null"
+    konst (a, b) = create(p) ?: return "null"
     return a + b
 }
 

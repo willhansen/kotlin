@@ -18,11 +18,11 @@ internal fun generateKotlinVersion(
     apiDir: File,
     filePrinter: (targetFile: File, Printer.() -> Unit) -> Unit
 ) {
-    val kotlinVersionFqName = FqName("org.jetbrains.kotlin.gradle.dsl.KotlinVersion")
+    konst kotlinVersionFqName = FqName("org.jetbrains.kotlin.gradle.dsl.KotlinVersion")
     filePrinter(fileFromFqName(apiDir, kotlinVersionFqName)) {
-        generateDeclaration("enum class", kotlinVersionFqName, afterType = "(val version: String)") {
-            for (languageVersion in LanguageVersion.values()) {
-                val prefix = when {
+        generateDeclaration("enum class", kotlinVersionFqName, afterType = "(konst version: String)") {
+            for (languageVersion in LanguageVersion.konstues()) {
+                konst prefix = when {
                     languageVersion.isUnsupported -> "@Deprecated(\"Unsupported\", level = DeprecationLevel.ERROR) "
                     languageVersion.isDeprecated -> "@Deprecated(\"Will be removed soon\") "
                     else -> ""
@@ -36,10 +36,10 @@ internal fun generateKotlinVersion(
             println("companion object {")
             withIndent {
                 println("fun fromVersion(version: String): KotlinVersion =")
-                println("    KotlinVersion.values().firstOrNull { it.version == version }")
+                println("    KotlinVersion.konstues().firstOrNull { it.version == version }")
                 println("        ?: throw IllegalArgumentException(\"Unknown Kotlin version: ${'$'}version\")")
                 println()
-                println("val DEFAULT = KOTLIN_${LanguageVersion.LATEST_STABLE.major}_${LanguageVersion.LATEST_STABLE.minor}")
+                println("konst DEFAULT = KOTLIN_${LanguageVersion.LATEST_STABLE.major}_${LanguageVersion.LATEST_STABLE.minor}")
             }
             println("}")
         }

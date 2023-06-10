@@ -1,3 +1,3 @@
-annotation class A(val a: Int, val c: KClass<*>)
+annotation class A(konst a: Int, konst c: KClass<*>)
 
-data class Foo(@param:A(1, Int::class) val ba<caret>r: String)
+data class Foo(@param:A(1, Int::class) konst ba<caret>r: String)

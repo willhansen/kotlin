@@ -24,6 +24,6 @@ interface E : A2, B2, C2 {
 class Z : D, E
 
 fun box(): String {
-    val f = Z::test
+    konst f = Z::test
     return f.callBy(mapOf(f.parameters.first() to Z()))
 }

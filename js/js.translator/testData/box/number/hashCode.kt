@@ -3,20 +3,20 @@
 fun box(): String {
 
 
-    var value = (3).hashCode()
-    if (value != 3) return "fail1: $value"
+    var konstue = (3).hashCode()
+    if (konstue != 3) return "fail1: $konstue"
 
-    value = (3.14).hashCode()
-    if (value != 319176039) return "fail2: $value"
+    konstue = (3.14).hashCode()
+    if (konstue != 319176039) return "fail2: $konstue"
 
-    value = (3.14159).hashCode()
-    if (value != -1321819243) return "fail3: $value"
+    konstue = (3.14159).hashCode()
+    if (konstue != -1321819243) return "fail3: $konstue"
 
-    value = (1e80).hashCode()
-    if (value != 314940496) return "fail4: $value"
+    konstue = (1e80).hashCode()
+    if (konstue != 314940496) return "fail4: $konstue"
 
-    value = (1e81).hashCode()
-    if (value != 1519485350) return "fail5: $value"
+    konstue = (1e81).hashCode()
+    if (konstue != 1519485350) return "fail5: $konstue"
 
     return "OK"
 }

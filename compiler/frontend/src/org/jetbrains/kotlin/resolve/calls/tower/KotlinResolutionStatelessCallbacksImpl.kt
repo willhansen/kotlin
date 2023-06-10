@@ -43,9 +43,9 @@ import org.jetbrains.kotlin.types.TypeIntersector
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 class KotlinResolutionStatelessCallbacksImpl(
-    private val deprecationResolver: DeprecationResolver,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val kotlinTypeRefiner: KotlinTypeRefiner
+    private konst deprecationResolver: DeprecationResolver,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst kotlinTypeRefiner: KotlinTypeRefiner
 ) : KotlinResolutionStatelessCallbacks {
     override fun isDescriptorFromSource(descriptor: CallableDescriptor) =
         DescriptorToSourceUtils.descriptorToDeclaration(descriptor) != null
@@ -93,7 +93,7 @@ class KotlinResolutionStatelessCallbacksImpl(
         (functionCall as? PSIKotlinCallForInvoke)?.variableCall
 
     override fun isBuilderInferenceCall(argument: KotlinCallArgument, parameter: ValueParameterDescriptor): Boolean =
-        isBuilderInferenceCall(parameter, argument.psiCallArgument.valueArgument, languageVersionSettings)
+        isBuilderInferenceCall(parameter, argument.psiCallArgument.konstueArgument, languageVersionSettings)
 
     override fun isApplicableCallForBuilderInference(
         descriptor: CallableDescriptor,

@@ -31,26 +31,26 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplBasics() {
         JvmTestRepl()
             .use { repl ->
-                val res1 = repl.compile(
+                konst res1 = repl.compile(
                     SourceCodeTestImpl(
                         0,
-                        "val x ="
+                        "konst x ="
                     )
                 )
                 assertTrue("Unexpected check results: $res1", res1.isIncomplete())
 
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
-                    "val l1 = listOf(1 + 2)\nl1.first()",
+                    "konst l1 = listOf(1 + 2)\nl1.first()",
                     3
                 )
 
-                assertEvalUnit(
+                assertEkonstUnit(
                     repl,
-                    "val x = 5"
+                    "konst x = 5"
                 )
 
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
                     "x + 2",
                     7
@@ -61,33 +61,33 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplErrors() {
         JvmTestRepl()
             .use { repl ->
-                repl.compileAndEval(repl.nextCodeLine("val x = 10"))
+                repl.compileAndEkonst(repl.nextCodeLine("konst x = 10"))
 
-                val res = repl.compileAndEval(repl.nextCodeLine("java.util.fish"))
+                konst res = repl.compileAndEkonst(repl.nextCodeLine("java.util.fish"))
                 assertTrue("Expected compile error", res.first.isError())
 
-                val result = repl.compileAndEval(repl.nextCodeLine("x"))
-                assertEquals(res.second.toString(), 10, (result.second?.result as ResultValue.Value?)?.value)
+                konst result = repl.compileAndEkonst(repl.nextCodeLine("x"))
+                assertEquals(res.second.toString(), 10, (result.second?.result as ResultValue.Value?)?.konstue)
             }
     }
 
     fun testReplErrorsWithLocations() {
         JvmTestRepl()
             .use { repl ->
-                val (compileResult, evalResult) = repl.compileAndEval(
+                konst (compileResult, ekonstResult) = repl.compileAndEkonst(
                     repl.nextCodeLine(
                         """
-                            val foobar = 78
-                            val foobaz = "dsdsda"
-                            val ddd = ppp
-                            val ooo = foobar
+                            konst foobar = 78
+                            konst foobaz = "dsdsda"
+                            konst ddd = ppp
+                            konst ooo = foobar
                         """.trimIndent()
                     )
                 )
 
-                if (compileResult.isError() && evalResult == null) {
-                    val errors = compileResult.getErrors()
-                    val loc = errors.location
+                if (compileResult.isError() && ekonstResult == null) {
+                    konst errors = compileResult.getErrors()
+                    konst loc = errors.location
                     if (loc == null) {
                         fail("Location shouldn't be null")
                     } else {
@@ -105,20 +105,20 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplErrorsAndWarningsWithLocations() {
         JvmTestRepl()
             .use { repl ->
-                val (compileResult, evalResult) = repl.compileAndEval(
+                konst (compileResult, ekonstResult) = repl.compileAndEkonst(
                     repl.nextCodeLine(
                         """
                         fun f() {
-                            val x = 3
-                            val y = ooo
+                            konst x = 3
+                            konst y = ooo
                             return y
                         }
                     """.trimIndent()
                     )
                 )
-                if (compileResult.isError() && evalResult == null) {
-                    val errors = compileResult.getErrors()
-                    val loc = errors.location
+                if (compileResult.isError() && ekonstResult == null) {
+                    konst errors = compileResult.getErrors()
+                    konst loc = errors.location
                     if (loc == null) {
                         fail("Location shouldn't be null")
                     } else {
@@ -136,13 +136,13 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplSyntaxErrorsChecked() {
         JvmTestRepl()
             .use { repl ->
-                val res = repl.compileAndEval(repl.nextCodeLine("data class Q(val x: Int, val: String)"))
+                konst res = repl.compileAndEkonst(repl.nextCodeLine("data class Q(konst x: Int, konst: String)"))
                 assertTrue("Expected compile error", res.first.isError())
             }
     }
 
     private fun checkContains(actual: Sequence<SourceCodeCompletionVariant>, expected: Set<String>) {
-        val variants = actual.map { it.displayText }.toHashSet()
+        konst variants = actual.map { it.displayText }.toHashSet()
         for (displayText in expected) {
             if (!variants.contains(displayText)) {
                 fail("Element $displayText should be in $variants")
@@ -151,7 +151,7 @@ class JvmIdeServicesTest : TestCase() {
     }
 
     private fun checkDoesntContain(actual: Sequence<SourceCodeCompletionVariant>, expected: Set<String>) {
-        val variants = actual.map { it.displayText }.toHashSet()
+        konst variants = actual.map { it.displayText }.toHashSet()
         for (displayText in expected) {
             if (variants.contains(displayText)) {
                 fail("Element $displayText should NOT be in $variants")
@@ -160,10 +160,10 @@ class JvmIdeServicesTest : TestCase() {
     }
 
     fun testCompletion() = JvmTestRepl().use { repl ->
-        repl.compileAndEval(
+        repl.compileAndEkonst(
             repl.nextCodeLine(
                 """
-                    class AClass(val prop_x: Int) {
+                    class AClass(konst prop_x: Int) {
                         fun filter(xxx: (AClass).(AClass) -> Boolean): AClass {
                             return if(this.xxx(this)) 
                                 this 
@@ -171,54 +171,54 @@ class JvmIdeServicesTest : TestCase() {
                                 this
                         }
                     }
-                    val AClass.prop_y: Int
+                    konst AClass.prop_y: Int
                         get() = prop_x * prop_x
                         
-                    val df = AClass(10)
-                    val pro = "some string"
+                    konst df = AClass(10)
+                    konst pro = "some string"
                 """.trimIndent()
             )
         )
 
-        val codeLine1 = repl.nextCodeLine(
+        konst codeLine1 = repl.nextCodeLine(
             """
                 df.filter{pr}
             """.trimIndent()
         )
-        val completionList1 = repl.complete(codeLine1, 12)
-        checkContains(completionList1.valueOrThrow(), setOf("prop_x", "prop_y", "pro", "println(Double)"))
+        konst completionList1 = repl.complete(codeLine1, 12)
+        checkContains(completionList1.konstueOrThrow(), setOf("prop_x", "prop_y", "pro", "println(Double)"))
     }
 
     fun testPackageCompletion() = JvmTestRepl().use { repl ->
-        val codeLine1 = repl.nextCodeLine(
+        konst codeLine1 = repl.nextCodeLine(
             """
                 import java.
-                val xval = 3
+                konst xkonst = 3
             """.trimIndent()
         )
-        val completionList1 = repl.complete(codeLine1, 12)
-        checkContains(completionList1.valueOrThrow(), setOf("lang", "math"))
-        checkDoesntContain(completionList1.valueOrThrow(), setOf("xval"))
+        konst completionList1 = repl.complete(codeLine1, 12)
+        checkContains(completionList1.konstueOrThrow(), setOf("lang", "math"))
+        checkDoesntContain(completionList1.konstueOrThrow(), setOf("xkonst"))
     }
 
     fun testFileCompletion() = JvmTestRepl().use { repl ->
-        val codeLine1 = repl.nextCodeLine(
+        konst codeLine1 = repl.nextCodeLine(
             """
-                val fname = "
+                konst fname = "
             """.trimIndent()
         )
-        val completionList1 = repl.complete(codeLine1, 13)
-        val files = File(".").listFiles()?.map { it.name }
+        konst completionList1 = repl.complete(codeLine1, 13)
+        konst files = File(".").listFiles()?.map { it.name }
         assertFalse("There should be files in current dir", files.isNullOrEmpty())
-        checkContains(completionList1.valueOrThrow(), files!!.toSet())
+        checkContains(completionList1.konstueOrThrow(), files!!.toSet())
     }
 
     fun testReplCodeFormat() {
         JvmTestRepl()
             .use { repl ->
-                val codeLine0 =
-                    SourceCodeTestImpl(0, "val l1 = 1\r\nl1\r\n")
-                val res = repl.compile(codeLine0)
+                konst codeLine0 =
+                    SourceCodeTestImpl(0, "konst l1 = 1\r\nl1\r\n")
+                konst res = repl.compile(codeLine0)
 
                 assertTrue("Unexpected compile result: $res", res is ResultWithDiagnostics.Success<*>)
             }
@@ -227,13 +227,13 @@ class JvmIdeServicesTest : TestCase() {
     fun testRepPackage() {
         JvmTestRepl()
             .use { repl ->
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
-                    "package mypackage\n\nval x = 1\nx+2",
+                    "package mypackage\n\nkonst x = 1\nx+2",
                     3
                 )
 
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
                     "x+4",
                     5
@@ -244,15 +244,15 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplResultFieldWithFunction() {
         JvmTestRepl()
             .use { repl ->
-                assertEvalResultIs<Function0<Int>>(
+                assertEkonstResultIs<Function0<Int>>(
                     repl,
                     "{ 1 + 2 }"
                 )
-                assertEvalResultIs<Function0<Int>>(
+                assertEkonstResultIs<Function0<Int>>(
                     repl,
                     "res0"
                 )
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
                     "res0()",
                     3
@@ -263,12 +263,12 @@ class JvmIdeServicesTest : TestCase() {
     fun testReplResultField() {
         JvmTestRepl()
             .use { repl ->
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
                     "5 * 4",
                     20
                 )
-                assertEvalResult(
+                assertEkonstResult(
                     repl,
                     "res0 + 3",
                     23
@@ -277,9 +277,9 @@ class JvmIdeServicesTest : TestCase() {
     }
 
     fun testDependency() {
-        val resolver = ScriptDependenciesResolver()
+        konst resolver = ScriptDependenciesResolver()
 
-        val conf = ScriptCompilationConfiguration {
+        konst conf = ScriptCompilationConfiguration {
             jvm {
                 updateClasspath(scriptCompilationClasspathFromContext("test", classLoader = DependsOn::class.java.classLoader))
             }
@@ -291,8 +291,8 @@ class JvmIdeServicesTest : TestCase() {
 
         JvmTestRepl(conf)
             .use { repl ->
-                val outputJarName = "kt35651.jar"
-                val (exitCode, outputJarPath) = compileFile("stringTo.kt", outputJarName)
+                konst outputJarName = "kt35651.jar"
+                konst (exitCode, outputJarPath) = compileFile("stringTo.kt", outputJarName)
                 assertEquals(ExitCode.OK, exitCode)
 
                 assertCompileFails(
@@ -301,60 +301,60 @@ class JvmIdeServicesTest : TestCase() {
                     """.trimIndent()
                 )
 
-                assertEvalUnit(
+                assertEkonstUnit(
                     repl, """
                         @file:DependsOn("$outputJarPath")
                         import example.dependency.*
                         
-                        val x = listOf<String>()
+                        konst x = listOf<String>()
                     """.trimIndent()
                 )
 
-                // This snippet is needed to be evaluated to ensure that importing scopes were created
+                // This snippet is needed to be ekonstuated to ensure that importing scopes were created
                 // (but default ones were not)
-                assertEvalUnit(
+                assertEkonstUnit(
                     repl, """
                         import kotlin.math.*
                         
-                        val y = listOf<String>()
+                        konst y = listOf<String>()
                     """.trimIndent()
                 )
 
-                assertEvalResult(repl, """ "a" to "a" """, "aa")
+                assertEkonstResult(repl, """ "a" to "a" """, "aa")
             }
     }
 
     fun testAnonymousObjectReflection() {
         JvmTestRepl()
             .use { repl ->
-                assertEvalResult(repl, "42", 42)
-                assertEvalUnit(repl, "val sim = object : ArrayList<String>() {}")
+                assertEkonstResult(repl, "42", 42)
+                assertEkonstUnit(repl, "konst sim = object : ArrayList<String>() {}")
 
-                val compiledSnippet = checkCompile(repl, "sim")
-                val evalResult = repl.eval(compiledSnippet!!)
+                konst compiledSnippet = checkCompile(repl, "sim")
+                konst ekonstResult = repl.ekonst(compiledSnippet!!)
 
-                val a = (evalResult.valueOrThrow().get().result as ResultValue.Value).value!!
+                konst a = (ekonstResult.konstueOrThrow().get().result as ResultValue.Value).konstue!!
                 assertTrue(a::class.isSubclassOf(List::class))
             }
     }
 
     @OptIn(ExperimentalPathApi::class)
     companion object {
-        private const val MODULE_PATH = "plugins/scripting/scripting-ide-services-test"
-        private val outputJarDir = createTempDirectory("temp-ide-services")
+        private const konst MODULE_PATH = "plugins/scripting/scripting-ide-services-test"
+        private konst outputJarDir = createTempDirectory("temp-ide-services")
 
-        private data class CliCompilationResult(val exitCode: ExitCode, val outputJarPath: String)
+        private data class CliCompilationResult(konst exitCode: ExitCode, konst outputJarPath: String)
 
         private fun compileFile(inputKtFileName: String, outputJarName: String): CliCompilationResult {
-            val jarPath = outputJarDir.resolve(outputJarName).toAbsolutePath().invariantSeparatorsPathString
+            konst jarPath = outputJarDir.resolve(outputJarName).toAbsolutePath().invariantSeparatorsPathString
 
-            val compilerArgs = arrayOf(
+            konst compilerArgs = arrayOf(
                 "$MODULE_PATH/testData/$inputKtFileName",
                 "-kotlin-home", "dist/kotlinc",
                 "-d", jarPath
             )
 
-            val exitCode = K2JVMCompiler().exec(
+            konst exitCode = K2JVMCompiler().exec(
                 MessageCollector.NONE,
                 Services.EMPTY,
                 K2JVMCompilerArguments().apply {
@@ -368,49 +368,49 @@ class JvmIdeServicesTest : TestCase() {
 }
 
 class LegacyReplTestLong : TestCase() {
-    fun test256Evals() {
+    fun test256Ekonsts() {
         JvmTestRepl()
             .use { repl ->
-                repl.compileAndEval(
+                repl.compileAndEkonst(
                     SourceCodeTestImpl(
                         0,
-                        "val x0 = 0"
+                        "konst x0 = 0"
                     )
                 )
 
-                val evals = 256
-                for (i in 1..evals) {
-                    repl.compileAndEval(
+                konst ekonsts = 256
+                for (i in 1..ekonsts) {
+                    repl.compileAndEkonst(
                         SourceCodeTestImpl(
                             i,
-                            "val x$i = x${i - 1} + 1"
+                            "konst x$i = x${i - 1} + 1"
                         )
                     )
                 }
 
-                val (_, evaluated) = repl.compileAndEval(
+                konst (_, ekonstuated) = repl.compileAndEkonst(
                     SourceCodeTestImpl(
-                        evals + 1,
-                        "x$evals"
+                        ekonsts + 1,
+                        "x$ekonsts"
                     )
                 )
-                assertEquals(evaluated.toString(), evals, (evaluated?.result as ResultValue.Value?)?.value)
+                assertEquals(ekonstuated.toString(), ekonsts, (ekonstuated?.result as ResultValue.Value?)?.konstue)
             }
     }
 
     fun testReplSlowdownKt22740() {
         JvmTestRepl()
             .use { repl ->
-                repl.compileAndEval(
+                repl.compileAndEkonst(
                     SourceCodeTestImpl(
                         0,
-                        "class Test<T>(val x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()
+                        "class Test<T>(konst x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()
                     )
                 )
 
                 // We expect that analysis time is not exponential
                 for (i in 1..60) {
-                    repl.compileAndEval(
+                    repl.compileAndEkonst(
                         SourceCodeTestImpl(
                             i,
                             "fun <T> Test<T>.map(f: (T) -> Double): List<Double> = listOf(f(this.x))"

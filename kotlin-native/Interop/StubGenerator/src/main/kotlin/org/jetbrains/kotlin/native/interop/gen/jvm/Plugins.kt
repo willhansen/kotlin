@@ -20,18 +20,18 @@ object Plugins {
 }
 
 interface Plugin {
-    val name: String
+    konst name: String
     fun buildNativeIndex(library: NativeLibrary, verbose: Boolean): IndexerResult
-    val managedTypePassing: ManagedTypePassing
-    val ManagedType.stringRepresentation: String
+    konst managedTypePassing: ManagedTypePassing
+    konst ManagedType.stringRepresentation: String
     fun stubsBuildingContext(stubIrContext: StubIrContext): StubsBuildingContext
 }
 
 object DefaultPlugin : Plugin {
-    override val name = "Default"
+    override konst name = "Default"
     override fun buildNativeIndex(library: NativeLibrary, verbose: Boolean): IndexerResult =
             buildNativeIndexImpl(library, verbose)
-    override val managedTypePassing = ManagedTypePassing()
-    override val ManagedType.stringRepresentation get() = error("ManagedType requires non-default interop plugin")
+    override konst managedTypePassing = ManagedTypePassing()
+    override konst ManagedType.stringRepresentation get() = error("ManagedType requires non-default interop plugin")
     override fun stubsBuildingContext(stubIrContext: StubIrContext) = StubsBuildingContextImpl(stubIrContext)
 }

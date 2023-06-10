@@ -16,7 +16,7 @@ public interface FirExpression {
 }
 
 public interface FirNamedArgumentExpression : FirExpression {
-    public abstract val expression: FirNamedArgumentExpression
+    public abstract konst expression: FirNamedArgumentExpression
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

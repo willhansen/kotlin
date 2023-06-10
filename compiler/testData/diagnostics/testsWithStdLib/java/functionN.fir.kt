@@ -37,7 +37,7 @@ public class A implements KI {
 fun <T> any(): T = null!!
 
 fun main() {
-    val a: A = A(null)
+    konst a: A = A(null)
 
     a.field.hashCode();
     a.field = null;

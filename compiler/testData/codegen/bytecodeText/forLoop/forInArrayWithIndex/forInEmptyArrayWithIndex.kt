@@ -7,10 +7,10 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val arr = intArrayOf()
+konst arr = intArrayOf()
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
     for ((index, x) in arr.withIndex()) {
         return "Loop over empty array should not be executed"
     }

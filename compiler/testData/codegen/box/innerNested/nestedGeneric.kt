@@ -1,5 +1,5 @@
 class Outer {
-    class Nested<T>(val t: T) {
+    class Nested<T>(konst t: T) {
         fun box() = t
     }
 }
@@ -7,6 +7,6 @@ class Outer {
 fun box(): String {
     if (Outer.Nested<String>("OK").box() != "OK") return "Fail"
     
-    val x: Outer.Nested<String> = Outer.Nested("OK")
+    konst x: Outer.Nested<String> = Outer.Nested("OK")
     return x.box()
 }

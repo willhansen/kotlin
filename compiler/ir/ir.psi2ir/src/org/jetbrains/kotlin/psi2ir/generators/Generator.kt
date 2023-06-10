@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.util.slicedMap.ReadOnlySlice
 
 internal interface Generator : IrGenerator {
-    override val context: GeneratorContext
+    override konst context: GeneratorContext
 }
 
 internal interface GeneratorWithScope : Generator, IrGeneratorWithScope

@@ -1,8 +1,8 @@
 class My {
     // No initialization needed because no backing field
-    val two: Int
+    konst two: Int
         get() {
-            val <!NAME_SHADOWING!>field<!> = 2
+            konst <!NAME_SHADOWING!>field<!> = 2
             return field
         }
 }

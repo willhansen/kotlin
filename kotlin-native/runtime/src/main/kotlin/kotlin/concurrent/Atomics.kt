@@ -13,70 +13,70 @@ import kotlin.concurrent.*
 import kotlin.native.concurrent.*
 
 /**
- * An [Int] value that is always updated atomically.
+ * An [Int] konstue that is always updated atomically.
  * For additional details about atomicity guarantees for reads and writes see [kotlin.concurrent.Volatile].
  *
- * Legacy MM: Atomic values and freezing: this type is unique with regard to freezing.
+ * Legacy MM: Atomic konstues and freezing: this type is unique with regard to freezing.
  * Namely, it provides mutating operations, while can participate in frozen subgraphs.
  * So shared frozen objects can have mutable fields of [AtomicInt] type.
  */
 @Frozen
 @OptIn(FreezingIsDeprecated::class, ExperimentalStdlibApi::class)
 @SinceKotlin("1.9")
-public class AtomicInt(@Volatile public var value: Int) {
+public class AtomicInt(@Volatile public var konstue: Int) {
     /**
-     * Atomically sets the value to the given [new value][newValue] and returns the old value.
+     * Atomically sets the konstue to the given [new konstue][newValue] and returns the old konstue.
      */
-    public fun getAndSet(newValue: Int): Int = this::value.getAndSetField(newValue)
+    public fun getAndSet(newValue: Int): Int = this::konstue.getAndSetField(newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected],
-     * returns true if the operation was successful and false only if the current value was not equal to the expected value.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected],
+     * returns true if the operation was successful and false only if the current konstue was not equal to the expected konstue.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      */
-    public fun compareAndSet(expected: Int, newValue: Int): Boolean = this::value.compareAndSetField(expected, newValue)
+    public fun compareAndSet(expected: Int, newValue: Int): Boolean = this::konstue.compareAndSetField(expected, newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected]
-     * and returns the old value in any case.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected]
+     * and returns the old konstue in any case.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      */
-    public fun compareAndExchange(expected: Int, newValue: Int): Int = this::value.compareAndExchangeField(expected, newValue)
+    public fun compareAndExchange(expected: Int, newValue: Int): Int = this::konstue.compareAndExchangeField(expected, newValue)
 
     /**
-     * Atomically adds the [given value][delta] to the current value and returns the old value.
+     * Atomically adds the [given konstue][delta] to the current konstue and returns the old konstue.
      */
-    public fun getAndAdd(delta: Int): Int = this::value.getAndAddField(delta)
+    public fun getAndAdd(delta: Int): Int = this::konstue.getAndAddField(delta)
 
     /**
-     * Atomically adds the [given value][delta] to the current value and returns the new value.
+     * Atomically adds the [given konstue][delta] to the current konstue and returns the new konstue.
      */
-    public fun addAndGet(delta: Int): Int = this::value.getAndAddField(delta) + delta
+    public fun addAndGet(delta: Int): Int = this::konstue.getAndAddField(delta) + delta
 
     /**
-     * Atomically increments the current value by one and returns the old value.
+     * Atomically increments the current konstue by one and returns the old konstue.
      */
-    public fun getAndIncrement(): Int = this::value.getAndAddField(1)
+    public fun getAndIncrement(): Int = this::konstue.getAndAddField(1)
 
     /**
-     * Atomically increments the current value by one and returns the new value.
+     * Atomically increments the current konstue by one and returns the new konstue.
      */
-    public fun incrementAndGet(): Int = this::value.getAndAddField(1) + 1
+    public fun incrementAndGet(): Int = this::konstue.getAndAddField(1) + 1
 
     /**
-     * Atomically decrements the current value by one and returns the new value.
+     * Atomically decrements the current konstue by one and returns the new konstue.
      */
-    public fun decrementAndGet(): Int = this::value.getAndAddField(-1) - 1
+    public fun decrementAndGet(): Int = this::konstue.getAndAddField(-1) - 1
 
     /**
-     * Atomically decrements the current value by one and returns the old value.
+     * Atomically decrements the current konstue by one and returns the old konstue.
      */
-    public fun getAndDecrement(): Int = this::value.getAndAddField(-1)
+    public fun getAndDecrement(): Int = this::konstue.getAndAddField(-1)
 
     /**
-     * Atomically increments the current value by one.
+     * Atomically increments the current konstue by one.
      */
     @Deprecated(level = DeprecationLevel.ERROR, message = "Use incrementAndGet() or getAndIncrement() instead.",
             replaceWith = ReplaceWith("this.incrementAndGet()"))
@@ -85,7 +85,7 @@ public class AtomicInt(@Volatile public var value: Int) {
     }
 
     /**
-     * Atomically decrements the current value by one.
+     * Atomically decrements the current konstue by one.
      */
     @Deprecated(level = DeprecationLevel.ERROR, message = "Use decrementAndGet() or getAndDecrement() instead.",
             replaceWith = ReplaceWith("this.decrementAndGet()"))
@@ -94,82 +94,82 @@ public class AtomicInt(@Volatile public var value: Int) {
     }
 
     /**
-     * Returns the string representation of the current [value].
+     * Returns the string representation of the current [konstue].
      */
-    public override fun toString(): String = value.toString()
+    public override fun toString(): String = konstue.toString()
 }
 
 /**
- * A [Long] value that is always updated atomically.
+ * A [Long] konstue that is always updated atomically.
  * For additional details about atomicity guarantees for reads and writes see [kotlin.concurrent.Volatile].
  *
- * Legacy MM: Atomic values and freezing: this type is unique with regard to freezing.
+ * Legacy MM: Atomic konstues and freezing: this type is unique with regard to freezing.
  * Namely, it provides mutating operations, while can participate in frozen subgraphs.
  * So shared frozen objects can have mutable fields of [AtomicLong] type.
  */
 @Frozen
 @OptIn(FreezingIsDeprecated::class, ExperimentalStdlibApi::class)
 @SinceKotlin("1.9")
-public class AtomicLong(@Volatile public var value: Long)  {
+public class AtomicLong(@Volatile public var konstue: Long)  {
     /**
-     * Atomically sets the value to the given [new value][newValue] and returns the old value.
+     * Atomically sets the konstue to the given [new konstue][newValue] and returns the old konstue.
      */
-    public fun getAndSet(newValue: Long): Long = this::value.getAndSetField(newValue)
+    public fun getAndSet(newValue: Long): Long = this::konstue.getAndSetField(newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected],
-     * returns true if the operation was successful and false only if the current value was not equal to the expected value.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected],
+     * returns true if the operation was successful and false only if the current konstue was not equal to the expected konstue.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      */
-    public fun compareAndSet(expected: Long, newValue: Long): Boolean = this::value.compareAndSetField(expected, newValue)
+    public fun compareAndSet(expected: Long, newValue: Long): Boolean = this::konstue.compareAndSetField(expected, newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected]
-     * and returns the old value in any case.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected]
+     * and returns the old konstue in any case.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      */
-    public fun compareAndExchange(expected: Long, newValue: Long): Long = this::value.compareAndExchangeField(expected, newValue)
+    public fun compareAndExchange(expected: Long, newValue: Long): Long = this::konstue.compareAndExchangeField(expected, newValue)
 
     /**
-     * Atomically adds the [given value][delta] to the current value and returns the old value.
+     * Atomically adds the [given konstue][delta] to the current konstue and returns the old konstue.
      */
-    public fun getAndAdd(delta: Long): Long = this::value.getAndAddField(delta)
+    public fun getAndAdd(delta: Long): Long = this::konstue.getAndAddField(delta)
 
     /**
-     * Atomically adds the [given value][delta] to the current value and returns the new value.
+     * Atomically adds the [given konstue][delta] to the current konstue and returns the new konstue.
      */
-    public fun addAndGet(delta: Long): Long = this::value.getAndAddField(delta) + delta
+    public fun addAndGet(delta: Long): Long = this::konstue.getAndAddField(delta) + delta
 
     /**
-     * Atomically increments the current value by one and returns the old value.
+     * Atomically increments the current konstue by one and returns the old konstue.
      */
-    public fun getAndIncrement(): Long = this::value.getAndAddField(1L)
+    public fun getAndIncrement(): Long = this::konstue.getAndAddField(1L)
 
     /**
-     * Atomically increments the current value by one and returns the new value.
+     * Atomically increments the current konstue by one and returns the new konstue.
      */
-    public fun incrementAndGet(): Long = this::value.getAndAddField(1L) + 1L
+    public fun incrementAndGet(): Long = this::konstue.getAndAddField(1L) + 1L
 
     /**
-     * Atomically decrements the current value by one and returns the new value.
+     * Atomically decrements the current konstue by one and returns the new konstue.
      */
-    public fun decrementAndGet(): Long = this::value.getAndAddField(-1L) - 1L
+    public fun decrementAndGet(): Long = this::konstue.getAndAddField(-1L) - 1L
 
     /**
-     * Atomically decrements the current value by one and returns the old value.
+     * Atomically decrements the current konstue by one and returns the old konstue.
      */
-    public fun getAndDecrement(): Long = this::value.getAndAddField(-1L)
+    public fun getAndDecrement(): Long = this::konstue.getAndAddField(-1L)
 
     /**
-     * Atomically adds the [given value][delta] to the current value and returns the new value.
+     * Atomically adds the [given konstue][delta] to the current konstue and returns the new konstue.
      */
     @Deprecated(level = DeprecationLevel.ERROR, message = "Use addAndGet(delta: Long) instead.")
     public fun addAndGet(delta: Int): Long = addAndGet(delta.toLong())
 
     /**
-     * Atomically increments the current value by one.
+     * Atomically increments the current konstue by one.
      */
     @Deprecated(level = DeprecationLevel.ERROR, message = "Use incrementAndGet() or getAndIncrement() instead.",
             replaceWith = ReplaceWith("this.incrementAndGet()"))
@@ -178,7 +178,7 @@ public class AtomicLong(@Volatile public var value: Long)  {
     }
 
     /**
-     * Atomically decrements the current value by one.
+     * Atomically decrements the current konstue by one.
      */
     @Deprecated(level = DeprecationLevel.ERROR, message = "Use decrementAndGet() or getAndDecrement() instead.",
             replaceWith = ReplaceWith("this.decrementAndGet()"))
@@ -187,9 +187,9 @@ public class AtomicLong(@Volatile public var value: Long)  {
     }
 
     /**
-     * Returns the string representation of the current [value].
+     * Returns the string representation of the current [konstue].
      */
-    public override fun toString(): String = value.toString()
+    public override fun toString(): String = konstue.toString()
 }
 
 /**
@@ -206,7 +206,7 @@ public class AtomicLong(@Volatile public var value: Long)  {
 @OptIn(FreezingIsDeprecated::class)
 @SinceKotlin("1.9")
 public class AtomicReference<T> {
-    private var value_: T
+    private var konstue_: T
 
     // A spinlock to fix potential ARC race.
     private var lock: Int = 0
@@ -215,35 +215,35 @@ public class AtomicReference<T> {
     private var cookie: Int = 0
 
     /**
-     * Creates a new atomic reference pointing to the [given value][value].
+     * Creates a new atomic reference pointing to the [given konstue][konstue].
      *
-     * @throws InvalidMutabilityException with legacy MM if reference is not frozen.
+     * @throws InkonstidMutabilityException with legacy MM if reference is not frozen.
      */
-    constructor(value: T) {
+    constructor(konstue: T) {
         if (this.isFrozen) {
-            checkIfFrozen(value)
+            checkIfFrozen(konstue)
         }
-        value_ = value
+        konstue_ = konstue
     }
 
     /**
-     * The current value.
-     * Gets the current value or sets to the given [new value][newValue].
+     * The current konstue.
+     * Gets the current konstue or sets to the given [new konstue][newValue].
      *
-     * Legacy MM: if the [new value][newValue] value is not null, it must be frozen or permanent object.
+     * Legacy MM: if the [new konstue][newValue] konstue is not null, it must be frozen or permanent object.
      *
-     * @throws InvalidMutabilityException with legacy MM if the value is not frozen or a permanent object
+     * @throws InkonstidMutabilityException with legacy MM if the konstue is not frozen or a permanent object
      */
-    public var value: T
+    public var konstue: T
         get() = @Suppress("UNCHECKED_CAST")(getImpl() as T)
         set(newValue) = setImpl(newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] and returns the old value.
+     * Atomically sets the konstue to the given [new konstue][newValue] and returns the old konstue.
      */
     public fun getAndSet(newValue: T): T {
         while (true) {
-            val old = value
+            konst old = konstue
             if (old === newValue) {
                 return old
             }
@@ -254,36 +254,36 @@ public class AtomicReference<T> {
     }
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected],
-     * returns true if the operation was successful and false only if the current value was not equal to the expected value.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected],
+     * returns true if the operation was successful and false only if the current konstue was not equal to the expected konstue.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      *
-     * Comparison of values is done by reference.
+     * Comparison of konstues is done by reference.
      */
     @GCUnsafeCall("Kotlin_AtomicReference_compareAndSet")
     external public fun compareAndSet(expected: T, newValue: T): Boolean
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected]
-     * and returns the old value in any case.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected]
+     * and returns the old konstue in any case.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      *
-     * Comparison of values is done by reference.
+     * Comparison of konstues is done by reference.
      *
-     * Legacy MM: if the [new value][newValue] value is not null, it must be frozen or permanent object.
+     * Legacy MM: if the [new konstue][newValue] konstue is not null, it must be frozen or permanent object.
      *
-     * @throws InvalidMutabilityException with legacy MM if the value is not frozen or a permanent object
+     * @throws InkonstidMutabilityException with legacy MM if the konstue is not frozen or a permanent object
      */
     @GCUnsafeCall("Kotlin_AtomicReference_compareAndSwap")
     external public fun compareAndExchange(expected: T, newValue: T): T
 
     /**
-     * Returns the string representation of the current [value].
+     * Returns the string representation of the current [konstue].
      */
     public override fun toString(): String =
-            "${debugString(this)} -> ${debugString(value)}"
+            "${debugString(this)} -> ${debugString(konstue)}"
 
     // Implementation details.
     @GCUnsafeCall("Kotlin_AtomicReference_set")
@@ -294,13 +294,13 @@ public class AtomicReference<T> {
 }
 
 /**
- * A [kotlinx.cinterop.NativePtr] value that is always updated atomically.
+ * A [kotlinx.cinterop.NativePtr] konstue that is always updated atomically.
  * For additional details about atomicity guarantees for reads and writes see [kotlin.concurrent.Volatile].
  *
- * [kotlinx.cinterop.NativePtr] is a value type, hence it is stored in [AtomicNativePtr] without boxing
- * and [compareAndSet], [compareAndExchange] operations perform comparison by value.
+ * [kotlinx.cinterop.NativePtr] is a konstue type, hence it is stored in [AtomicNativePtr] without boxing
+ * and [compareAndSet], [compareAndExchange] operations perform comparison by konstue.
  *
- * Legacy MM: Atomic values and freezing: this type is unique with regard to freezing.
+ * Legacy MM: Atomic konstues and freezing: this type is unique with regard to freezing.
  * Namely, it provides mutating operations, while can participate in frozen subgraphs.
  * So shared frozen objects can have mutable fields of [AtomicNativePtr] type.
  */
@@ -308,104 +308,104 @@ public class AtomicReference<T> {
 @OptIn(FreezingIsDeprecated::class, ExperimentalStdlibApi::class)
 @SinceKotlin("1.9")
 @ExperimentalForeignApi
-public class AtomicNativePtr(@Volatile public var value: NativePtr) {
+public class AtomicNativePtr(@Volatile public var konstue: NativePtr) {
     /**
-     * Atomically sets the value to the given [new value][newValue] and returns the old value.
+     * Atomically sets the konstue to the given [new konstue][newValue] and returns the old konstue.
      */
     public fun getAndSet(newValue: NativePtr): NativePtr {
         // Pointer types are allowed for atomicrmw xchg operand since LLVM 15.0,
         // after LLVM version update, it may be implemented via getAndSetField intrinsic.
         // Check: https://youtrack.jetbrains.com/issue/KT-57557
         while (true) {
-            val old = value
-            if (this::value.compareAndSetField(old, newValue)) {
+            konst old = konstue
+            if (this::konstue.compareAndSetField(old, newValue)) {
                 return old
             }
         }
     }
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected],
-     * returns true if the operation was successful and false only if the current value was not equal to the expected value.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected],
+     * returns true if the operation was successful and false only if the current konstue was not equal to the expected konstue.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      *
-     * Comparison of values is done by value.
+     * Comparison of konstues is done by konstue.
      */
     public fun compareAndSet(expected: NativePtr, newValue: NativePtr): Boolean =
-            this::value.compareAndSetField(expected, newValue)
+            this::konstue.compareAndSetField(expected, newValue)
 
     /**
-     * Atomically sets the value to the given [new value][newValue] if the current value equals the [expected value][expected]
-     * and returns the old value in any case.
+     * Atomically sets the konstue to the given [new konstue][newValue] if the current konstue equals the [expected konstue][expected]
+     * and returns the old konstue in any case.
      *
      * Provides sequential consistent ordering guarantees and cannot fail spuriously.
      *
-     * Comparison of values is done by value.
+     * Comparison of konstues is done by konstue.
      */
     public fun compareAndExchange(expected: NativePtr, newValue: NativePtr): NativePtr =
-            this::value.compareAndExchangeField(expected, newValue)
+            this::konstue.compareAndExchangeField(expected, newValue)
 
     /**
-     * Returns the string representation of the current [value].
+     * Returns the string representation of the current [konstue].
      */
-    public override fun toString(): String = value.toString()
+    public override fun toString(): String = konstue.toString()
 }
 
 
-private fun idString(value: Any) = "${value.hashCode().toUInt().toString(16)}"
+private fun idString(konstue: Any) = "${konstue.hashCode().toUInt().toString(16)}"
 
-private fun debugString(value: Any?): String {
-    if (value == null) return "null"
-    return "${value::class.qualifiedName}: ${idString(value)}"
+private fun debugString(konstue: Any?): String {
+    if (konstue == null) return "null"
+    return "${konstue::class.qualifiedName}: ${idString(konstue)}"
 }
 
 /**
- * Compares the value of the field referenced by [this] to [expectedValue], and if they are equal,
+ * Compares the konstue of the field referenced by [this] to [expectedValue], and if they are equal,
  * atomically replaces it with [newValue].
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
  *
- * Comparison is done by reference or value depending on field representation.
+ * Comparison is done by reference or konstue depending on field representation.
  *
  * If [this] is not a compile-time known reference to the property with [Volatile] annotation [IllegalArgumentException]
  * would be thrown.
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Returns true if the actual field value matched [expectedValue]
+ * Returns true if the actual field konstue matched [expectedValue]
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_SET_FIELD)
 internal external fun <T> KMutableProperty0<T>.compareAndSetField(expectedValue: T, newValue: T): Boolean
 
 /**
- * Compares the value of the field referenced by [this] to [expectedValue], and if they are equal,
+ * Compares the konstue of the field referenced by [this] to [expectedValue], and if they are equal,
  * atomically replaces it with [newValue].
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
  *
- * Comparison is done by reference or value depending on field representation.
+ * Comparison is done by reference or konstue depending on field representation.
  *
  * If [this] is not a compile-time known reference to the property with [Volatile] annotation [IllegalArgumentException]
  * would be thrown.
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Returns the field value before operation.
+ * Returns the field konstue before operation.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.COMPARE_AND_EXCHANGE_FIELD)
 internal external fun <T> KMutableProperty0<T>.compareAndExchangeField(expectedValue: T, newValue: T): T
 
 /**
- * Atomically sets value of the field referenced by [this] to [newValue] and returns old field value.
+ * Atomically sets konstue of the field referenced by [this] to [newValue] and returns old field konstue.
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
@@ -415,7 +415,7 @@ internal external fun <T> KMutableProperty0<T>.compareAndExchangeField(expectedV
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.GET_AND_SET_FIELD)
@@ -423,7 +423,7 @@ internal external fun <T> KMutableProperty0<T>.getAndSetField(newValue: T): T
 
 
 /**
- * Atomically increments value of the field referenced by [this] by [delta] and returns old field value.
+ * Atomically increments konstue of the field referenced by [this] by [delta] and returns old field konstue.
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
@@ -433,14 +433,14 @@ internal external fun <T> KMutableProperty0<T>.getAndSetField(newValue: T): T
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_FIELD)
 internal external fun KMutableProperty0<Short>.getAndAddField(delta: Short): Short
 
 /**
- * Atomically increments value of the field referenced by [this] by [delta] and returns old field value.
+ * Atomically increments konstue of the field referenced by [this] by [delta] and returns old field konstue.
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
@@ -450,14 +450,14 @@ internal external fun KMutableProperty0<Short>.getAndAddField(delta: Short): Sho
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_FIELD)
 internal external fun KMutableProperty0<Int>.getAndAddField(newValue: Int): Int
 
 /**
- * Atomically increments value of the field referenced by [this] by [delta] and returns old field value.
+ * Atomically increments konstue of the field referenced by [this] by [delta] and returns old field konstue.
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
@@ -467,14 +467,14 @@ internal external fun KMutableProperty0<Int>.getAndAddField(newValue: Int): Int
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_FIELD)
 internal external fun KMutableProperty0<Long>.getAndAddField(newValue: Long): Long
 
 /**
- * Atomically increments value of the field referenced by [this] by [delta] and returns old field value.
+ * Atomically increments konstue of the field referenced by [this] by [delta] and returns old field konstue.
  *
  * For now, it can be used only within the same file, where property is defined.
  * Check https://youtrack.jetbrains.com/issue/KT-55426 for details.
@@ -484,7 +484,7 @@ internal external fun KMutableProperty0<Long>.getAndAddField(newValue: Long): Lo
  *
  * If property referenced by [this] has nontrivial setter it will not be called.
  *
- * Legacy MM: if [this] is a reference for a non-value represented field, [IllegalArgumentException] would be thrown.
+ * Legacy MM: if [this] is a reference for a non-konstue represented field, [IllegalArgumentException] would be thrown.
  */
 @PublishedApi
 @TypedIntrinsic(IntrinsicType.GET_AND_ADD_FIELD)

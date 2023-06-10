@@ -6,7 +6,7 @@ class A {
 }
 
 fun box(): String {
-    val result = A()(1)
+    konst result = A()(1)
     if (result != 1) return "fail: $result"
     return "OK"
 }

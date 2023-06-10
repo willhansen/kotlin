@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.getRangeOrProgressionElementType
 
-class PrimitiveRangeRangeValue(private val rangeExpression: KtExpression) : ReversableRangeValue {
+class PrimitiveRangeRangeValue(private konst rangeExpression: KtExpression) : ReversableRangeValue {
 
     override fun createForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression) =
         ForInRangeInstanceLoopGenerator(
@@ -48,9 +48,9 @@ class PrimitiveRangeRangeValue(private val rangeExpression: KtExpression) : Reve
         )
 
     private fun getRangeElementType(codegen: ExpressionCodegen, forExpression: KtForExpression): KotlinType {
-        val ktLoopRange = forExpression.loopRange
+        konst ktLoopRange = forExpression.loopRange
             ?: throw AssertionError("No loop range expression: ${forExpression.text}")
-        val rangeType = codegen.bindingContext.getType(ktLoopRange)
+        konst rangeType = codegen.bindingContext.getType(ktLoopRange)
             ?: throw AssertionError("No type for loop range expression: ${ktLoopRange.text}")
         return getRangeOrProgressionElementType(rangeType)
             ?: throw AssertionError("Unexpected range type: $rangeType")

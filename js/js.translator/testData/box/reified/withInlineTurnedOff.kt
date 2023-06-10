@@ -8,8 +8,8 @@ class A
 class B
 
 fun box(): String {
-    val a = A()
-    val b = B()
+    konst a = A()
+    konst b = B()
 
     assertEquals(true, isInstance<A>(a), "isInstance<A>(a)")
     assertEquals(false, isInstance<A>(b), "isInstance<A>(b)")

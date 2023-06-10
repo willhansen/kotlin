@@ -9,8 +9,8 @@ import org.gradle.internal.os.OperatingSystem
 
 
 fun Test.configureTestDistribution(configure: TestDistributionExtension.() -> Unit = {}) {
-    val isTeamcityBuild = project.kotlinBuildProperties.isTeamcityBuild
-    val testDistributionEnabled =
+    konst isTeamcityBuild = project.kotlinBuildProperties.isTeamcityBuild
+    konst testDistributionEnabled =
         project.findProperty("kotlin.build.test.distribution.enabled")?.toString()?.toBoolean() ?: false
 
     useJUnitPlatform()

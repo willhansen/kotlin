@@ -11,12 +11,12 @@ import org.jetbrains.kotlin.ir.generator.util.GeneratedFile
 import org.jetbrains.kotlin.ir.generator.util.Import
 import java.io.File
 
-private val COPYRIGHT by lazy { File("license/COPYRIGHT_HEADER.txt").readText() }
-private val GENERATED_MESSAGE = """
+private konst COPYRIGHT by lazy { File("license/COPYRIGHT_HEADER.txt").readText() }
+private konst GENERATED_MESSAGE = """
      // This file was generated automatically. See compiler/ir/ir.tree/tree-generator/ReadMe.md.
      // DO NOT MODIFY IT MANUALLY.
      """.trimIndent()
-private val PREFIX by lazy { "$COPYRIGHT\n\n$GENERATED_MESSAGE\n\n" }
+private konst PREFIX by lazy { "$COPYRIGHT\n\n$GENERATED_MESSAGE\n\n" }
 
 fun printTypeCommon(
     generationPath: File,
@@ -24,7 +24,7 @@ fun printTypeCommon(
     type: TypeSpec,
     additionalImports: List<Import> = emptyList(),
 ): GeneratedFile {
-    val code = FileSpec.builder(packageName, type.name!!)
+    konst code = FileSpec.builder(packageName, type.name!!)
         .apply {
             additionalImports.forEach { addImport(it.packageName, it.className) }
         }
@@ -32,7 +32,7 @@ fun printTypeCommon(
         .addType(type)
         .build()
         .toString()
-        .unbacktickIdentifiers("data", "value", "operator", "constructor", "delegate", "receiver", "field")
+        .unbacktickIdentifiers("data", "konstue", "operator", "constructor", "delegate", "receiver", "field")
         .replace("public ", "")
         .replace(":\\s*Unit".toRegex(), "")
         .replace("import kotlin\\..*\\n".toRegex(), "")
@@ -40,7 +40,7 @@ fun printTypeCommon(
         .replace("            visitor.visit", "        visitor.visit")
         .replace("            accept(transformer, data)", "        accept(transformer, data)")
 
-    val text = PREFIX + code
+    konst text = PREFIX + code
     return GeneratedFile(getPathForFile(generationPath, packageName, type.name!!), text)
 }
 
@@ -53,6 +53,6 @@ private fun String.unbacktickIdentifiers(vararg identifiers: String): String {
 }
 
 fun getPathForFile(generationPath: File, packageName: String, typeName: String): File {
-    val dir = generationPath.resolve(packageName.replace(".", "/"))
+    konst dir = generationPath.resolve(packageName.replace(".", "/"))
     return File(dir, "$typeName.kt")
 }

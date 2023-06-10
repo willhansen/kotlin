@@ -48,8 +48,8 @@ public final class Vector128 private constructor() {
             other is Vector128 && getLongAt(0) == other.getLongAt(0) && getLongAt(1) == other.getLongAt(1)
 
     override fun hashCode(): Int {
-        val x0 = getLongAt(0)
-        val x1 = getLongAt(1)
+        konst x0 = getLongAt(0)
+        konst x1 = getLongAt(1)
         return 31 * (x0 xor (x0 shr 32)).toInt() + (x1 xor (x1 shr 32)).toInt()
     }
 }

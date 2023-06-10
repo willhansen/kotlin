@@ -23,7 +23,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -76,7 +76,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -129,7 +129,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -182,7 +182,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

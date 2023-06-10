@@ -2,11 +2,11 @@ class MyClass
 
 fun foo(): String
 
-val x: Int
+konst x: Int
 
 class MyClass
 
 fun foo(): String
 
-val x: Int
+konst x: Int
 

@@ -8,7 +8,7 @@ interface I {
 
     fun test(): String {
         // INVOKESTATIC I$Companion.access$setBar$p
-        bar = "New value"
+        bar = "New konstue"
         // INVOKESTATIC I$Companion.access$getBar$p
         return bar
     }

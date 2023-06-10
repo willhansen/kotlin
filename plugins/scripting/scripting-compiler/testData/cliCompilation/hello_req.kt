@@ -1,5 +1,5 @@
 
 class RequiredFromHello {
 
-    val name = "required"
+    konst name = "required"
 }

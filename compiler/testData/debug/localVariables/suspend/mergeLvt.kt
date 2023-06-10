@@ -3,16 +3,16 @@
 
 import kotlin.coroutines.intrinsics.*
 
-class AtomicInt(val value: Int)
+class AtomicInt(konst konstue: Int)
 
 fun atomic(i: Int) = AtomicInt(i)
 
-private val state = atomic(0)
-private val a = 77
+private konst state = atomic(0)
+private konst a = 77
 
 private inline fun AtomicInt.extensionFun() {
     if (a == 76) throw IllegalStateException("AAAAAAAAAAAA")
-    value
+    konstue
 }
 
 private suspend inline fun suspendBar() {
@@ -23,7 +23,7 @@ private suspend inline fun suspendBar() {
 }
 
 suspend fun box() {
-    val a = suspendBar()
+    konst a = suspendBar()
 }
 
 // FIXME(JS_IR): KT-54657
@@ -57,8 +57,8 @@ suspend fun box() {
 // test.kt:19 doResume:
 // test.kt:10 <init properties test.kt>:
 // test.kt:8 atomic: i=0:number
-// test.kt:6 <init>: value=0:number
-// test.kt:6 <init>: value=0:number
+// test.kt:6 <init>: konstue=0:number
+// test.kt:6 <init>: konstue=0:number
 // test.kt:11 <init properties test.kt>:
 // test.kt:10 <get-state>$accessor$1gle43a:
 // test.kt:10 <get-state>:

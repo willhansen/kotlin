@@ -4,13 +4,13 @@ function box(): string {
     const tens: number[] = [
         foo.exportedVal,
         foo.exportedFun(),
-        new foo.ExportedClass().value,
+        new foo.ExportedClass().konstue,
         foo.fileLevelExportedVal,
         foo.fileLevelExportedFun(),
-        new foo.FileLevelExportedClass().value
+        new foo.FileLevelExportedClass().konstue
     ];
 
-    if (tens.every((value) => value === 10))
+    if (tens.every((konstue) => konstue === 10))
         return "OK";
 
     return "FAIL";

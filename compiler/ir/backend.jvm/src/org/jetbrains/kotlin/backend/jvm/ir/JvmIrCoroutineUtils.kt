@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.ir.util.parentAsClass
 
 fun IrFunction.continuationParameter(): IrValueParameter? = when {
     isInvokeSuspendOfLambda() || isInvokeSuspendForInlineOfLambda() -> dispatchReceiverParameter
-    else -> valueParameters.singleOrNull { it.origin == JvmLoweredDeclarationOrigin.CONTINUATION_CLASS }
+    else -> konstueParameters.singleOrNull { it.origin == JvmLoweredDeclarationOrigin.CONTINUATION_CLASS }
 }
 
 fun IrFunction.isInvokeSuspendOfLambda(): Boolean =
@@ -50,7 +50,7 @@ private fun IrFunction.isBridgeToSuspendImplMethod(): Boolean =
 private fun IrFunction.isStaticInlineClassReplacementDelegatingCall(): Boolean {
     if (this !is IrAttributeContainer || isStaticInlineClassReplacement) return false
 
-    val parentClass = parent as? IrClass ?: return false
+    konst parentClass = parent as? IrClass ?: return false
     if (!parentClass.isSingleFieldValueClass) return false
 
     return parentClass.declarations.find {
@@ -58,7 +58,7 @@ private fun IrFunction.isStaticInlineClassReplacementDelegatingCall(): Boolean {
     }?.isStaticInlineClassReplacement == true
 }
 
-private val BRIDGE_ORIGINS = setOf(
+private konst BRIDGE_ORIGINS = setOf(
     IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER,
     JvmLoweredDeclarationOrigin.JVM_STATIC_WRAPPER,
     JvmLoweredDeclarationOrigin.JVM_OVERLOADS_WRAPPER,
@@ -70,8 +70,8 @@ private val BRIDGE_ORIGINS = setOf(
     IrDeclarationOrigin.SYNTHETIC_GENERATED_SAM_IMPLEMENTATION,
 )
 
-// These functions contain a single `suspend` tail call, the value of which should be returned as is
-// (i.e. if it's an unboxed inline class value, it should remain unboxed).
+// These functions contain a single `suspend` tail call, the konstue of which should be returned as is
+// (i.e. if it's an unboxed inline class konstue, it should remain unboxed).
 fun IrFunction.isNonBoxingSuspendDelegation(): Boolean =
     origin in BRIDGE_ORIGINS ||
             isMultifileBridge() ||
@@ -84,7 +84,7 @@ fun IrFunction.isStaticInlineClassReplacementForDefaultInterfaceMethod(): Boolea
     isStaticInlineClassReplacement && this is IrSimpleFunction && (attributeOwnerId as IrSimpleFunction).isFakeOverride
 
 fun IrFunction.shouldContainSuspendMarkers(): Boolean = !isNonBoxingSuspendDelegation() &&
-        // These functions also contain a single `suspend` tail call, but if it returns an unboxed inline class value,
+        // These functions also contain a single `suspend` tail call, but if it returns an unboxed inline class konstue,
         // the return of it should be checked for a suspension and potentially boxed to satisfy an interface.
         origin != IrDeclarationOrigin.DELEGATED_MEMBER &&
         !isInvokeSuspendOfContinuation() &&

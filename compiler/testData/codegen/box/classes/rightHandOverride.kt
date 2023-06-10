@@ -10,8 +10,8 @@ class D() : Left, Right() {
 }
 
 fun box() : String {
-    val r : Right = Right()
-    val d : D = D()
+    konst r : Right = Right()
+    konst d : D = D()
 
     if (r.f() != 42) return "Fail #1"
     if (d.f() != 239) return "Fail #2"

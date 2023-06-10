@@ -25,21 +25,21 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 internal class KtFirEnumEntrySymbol(
-    override val firSymbol: FirEnumEntrySymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirEnumEntrySymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtEnumEntrySymbol(), KtFirSymbol<FirEnumEntrySymbol> {
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion {
             KtFirAnnotationListForDeclaration.create(firSymbol, analysisSession.useSiteSession, token)
         }
 
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
-    override val returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
-    override val containingEnumClassIdIfNonLocal: ClassId? get() = withValidityAssertion { callableIdIfNonLocal?.classId }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst returnType: KtType get() = withValidityAssertion { firSymbol.returnType(builder) }
+    override konst containingEnumClassIdIfNonLocal: ClassId? get() = withValidityAssertion { callableIdIfNonLocal?.classId }
 
-    override val callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
+    override konst callableIdIfNonLocal: CallableId? get() = withValidityAssertion { firSymbol.getCallableIdIfNonLocal() }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtEnumEntrySymbol> = withValidityAssertion {

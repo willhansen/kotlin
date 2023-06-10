@@ -8,7 +8,7 @@ import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-inline class Z(val value: String)
+inline class Z(konst konstue: String)
 
 class S {
     suspend fun consumeZ(z: Z) {}
@@ -17,29 +17,29 @@ class S {
 }
 
 fun box(): String {
-    val members = S::class.members.filterIsInstance<KFunction<*>>().associateBy(KFunction<*>::name)
+    konst members = S::class.members.filterIsInstance<KFunction<*>>().associateBy(KFunction<*>::name)
 
     members["consumeZ"]!!.let { cz ->
-        val czj = cz.javaMethod!!
+        konst czj = cz.javaMethod!!
         assertTrue(czj.name.startsWith("consumeZ-"), czj.name)
         assertEquals("java.lang.String, kotlin.coroutines.Continuation", czj.parameterTypes.joinToString { it.name })
-        val czjk = czj.kotlinFunction
+        konst czjk = czj.kotlinFunction
         assertEquals(cz, czjk)
     }
 
     members["produceZ"]!!.let { pz ->
-        val pzj = pz.javaMethod!!
+        konst pzj = pz.javaMethod!!
         assertTrue(pzj.name.startsWith("produceZ-"), pzj.name)
         assertEquals("kotlin.coroutines.Continuation", pzj.parameterTypes.joinToString { it.name })
-        val pzjk = pzj!!.kotlinFunction
+        konst pzjk = pzj!!.kotlinFunction
         assertEquals(pz, pzjk)
     }
 
     members["consumeAndProduceZ"]!!.let { cpz ->
-        val cpzj = cpz.javaMethod!!
+        konst cpzj = cpz.javaMethod!!
         assertTrue(cpzj.name.startsWith("consumeAndProduceZ-"), cpzj.name)
         assertEquals("java.lang.String, kotlin.coroutines.Continuation", cpzj.parameterTypes.joinToString { it.name })
-        val cpzjk = cpzj!!.kotlinFunction
+        konst cpzjk = cpzj!!.kotlinFunction
         assertEquals(cpz, cpzjk)
     }
 

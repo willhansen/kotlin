@@ -5,7 +5,7 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val x: String)
+konstue class S(konst x: String)
 
 interface IFoo<T> {
     fun memberFun(s1: S, s2: String): String
@@ -17,7 +17,7 @@ interface IFoo<T> {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class FooImpl(val xs: Array<String>) : IFoo<S> {
+konstue class FooImpl(konst xs: Array<String>) : IFoo<S> {
     override fun memberFun(s1: S, s2: String): String = xs[0] + s1.x + s2
     override fun memberFunT(x1: S, x2: String): String = xs[0] + x1.x + x2
     override fun <X> genericMemberFun(x1: S, x2: X): String = xs[0] + x1.x + x2.toString()
@@ -29,7 +29,7 @@ value class FooImpl(val xs: Array<String>) : IFoo<S> {
 class Test : IFoo<S> by FooImpl(arrayOf("1"))
 
 fun box(): String {
-    val test = Test()
+    konst test = Test()
 
     assertEquals("1OK", test.memberFun(S("O"), "K"))
     assertEquals("1OK", test.memberFunT(S("O"), "K"))

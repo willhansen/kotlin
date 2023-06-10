@@ -1,6 +1,6 @@
 
 interface Intf {
-    val str: String
+    konst str: String
 }
 
 class A : Intf {
@@ -8,7 +8,7 @@ class A : Intf {
 
     fun getMyStr(): String {
         try {
-            val a = str
+            konst a = str
         } catch (e: RuntimeException) {
             return "OK"
         }
@@ -17,6 +17,6 @@ class A : Intf {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     return a.getMyStr()
 }

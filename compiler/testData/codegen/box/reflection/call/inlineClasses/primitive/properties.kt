@@ -4,8 +4,8 @@
 import kotlin.reflect.KMutableProperty2
 import kotlin.test.assertEquals
 
-inline class Z(val value: Int) {
-    operator fun plus(other: Z): Z = Z(this.value + other.value)
+inline class Z(konst konstue: Int) {
+    operator fun plus(other: Z): Z = Z(this.konstue + other.konstue)
 }
 
 class C {
@@ -15,19 +15,19 @@ class C {
     private var offset = Z(0)
     var Z.nonNull_nonNullMemExt: Z
         get() = this + offset
-        set(value) { offset = this + value }
+        set(konstue) { offset = this + konstue }
 
     var Z.nonNull_nullableMemExt: Z?
         get() = this + offset
-        set(value) { offset = this + value!! }
+        set(konstue) { offset = this + konstue!! }
 
     var Z?.nullable_nonNullMemExt: Z
         get() = this!! + offset
-        set(value) { offset = this!! + value }
+        set(konstue) { offset = this!! + konstue }
 
     var Z?.nullable_nullableMemExt: Z?
         get() = this!! + offset
-        set(value) { offset = this!! + value!! }
+        set(konstue) { offset = this!! + konstue!! }
 }
 
 var nonNullTopLevel: Z = Z(0)
@@ -36,26 +36,26 @@ var nullableTopLevel: Z? = Z(0)
 private var offset = Z(0)
 var Z.nonNull_nonNullExt: Z
     get() = this + offset
-    set(value) { offset = this + value }
+    set(konstue) { offset = this + konstue }
 
 var Z.nonNull_nullableExt: Z?
     get() = this + offset
-    set(value) { offset = this + value!! }
+    set(konstue) { offset = this + konstue!! }
 
 var Z?.nullable_nonNullExt: Z
     get() = this!! + offset
-    set(value) { offset = this!! + value }
+    set(konstue) { offset = this!! + konstue }
 
 var Z?.nullable_nullableExt: Z?
     get() = this!! + offset
-    set(value) { offset = this!! + value!! }
+    set(konstue) { offset = this!! + konstue!! }
 
 fun box(): String {
-    val one = Z(1)
-    val two = Z(2)
-    val three = Z(3)
+    konst one = Z(1)
+    konst two = Z(2)
+    konst three = Z(3)
 
-    val c = C()
+    konst c = C()
     assertEquals(Unit, C::nonNullMember.setter.call(c, one))
     assertEquals(one, C::nonNullMember.call(c))
     assertEquals(one, C::nonNullMember.getter.call(c))
@@ -72,22 +72,22 @@ fun box(): String {
     assertEquals(two, c::nullableMember.call())
     assertEquals(two, c::nullableMember.getter.call())
 
-    val nonNull_nonNullMemExt = C::class.members.single { it.name == "nonNull_nonNullMemExt" } as KMutableProperty2<C, Z, Z>
+    konst nonNull_nonNullMemExt = C::class.members.single { it.name == "nonNull_nonNullMemExt" } as KMutableProperty2<C, Z, Z>
     assertEquals(Unit, nonNull_nonNullMemExt.setter.call(c, Z(0), two))
     assertEquals(three, nonNull_nonNullMemExt.call(c, one))
     assertEquals(three, nonNull_nonNullMemExt.getter.call(c, one))
 
-    val nonNull_nullableMemExt = C::class.members.single { it.name == "nonNull_nullableMemExt" } as KMutableProperty2<C, Z, Z?>
+    konst nonNull_nullableMemExt = C::class.members.single { it.name == "nonNull_nullableMemExt" } as KMutableProperty2<C, Z, Z?>
     assertEquals(Unit, nonNull_nullableMemExt.setter.call(c, Z(0), two))
     assertEquals(three, nonNull_nullableMemExt.call(c, one))
     assertEquals(three, nonNull_nullableMemExt.getter.call(c, one))
 
-    val nullable_nonNullMemExt = C::class.members.single { it.name == "nullable_nonNullMemExt" } as KMutableProperty2<C, Z?, Z>
+    konst nullable_nonNullMemExt = C::class.members.single { it.name == "nullable_nonNullMemExt" } as KMutableProperty2<C, Z?, Z>
     assertEquals(Unit, nullable_nonNullMemExt.setter.call(c, Z(0), two))
     assertEquals(three, nullable_nonNullMemExt.call(c, one))
     assertEquals(three, nullable_nonNullMemExt.getter.call(c, one))
 
-    val nullable_nullableMemExt = C::class.members.single { it.name == "nullable_nullableMemExt" } as KMutableProperty2<C, Z?, Z?>
+    konst nullable_nullableMemExt = C::class.members.single { it.name == "nullable_nullableMemExt" } as KMutableProperty2<C, Z?, Z?>
     assertEquals(Unit, nullable_nullableMemExt.setter.call(c, Z(0), two))
     assertEquals(three, nullable_nullableMemExt.call(c, one))
     assertEquals(three, nullable_nullableMemExt.getter.call(c, one))

@@ -43,7 +43,7 @@ class HelloWorldTest {
         assertEquals("bar", PublicClassHeir().bar)
         assertEquals("PublicClassHeir.baz()", PublicClassHeir().baz())
 
-        val data = InternalDataClass(10, 20)
+        konst data = InternalDataClass(10, 20)
         assertEquals(10, data.x)
         assertEquals(20, data.y)
     }

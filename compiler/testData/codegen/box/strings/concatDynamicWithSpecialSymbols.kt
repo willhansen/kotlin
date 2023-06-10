@@ -2,7 +2,7 @@
 // IGNORE_BACKEND: ANDROID
 
 fun test(z: Int): String {
-    val result = "" + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() +
+    konst result = "" + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() +
             z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() +
             z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() +
             z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() + z + 1.toChar() +
@@ -13,7 +13,7 @@ fun test(z: Int): String {
 }
 
 fun box(): String {
-    val result = test(0)
+    konst result = test(0)
 
     if (result.length != 208)
         return "fail 1: ${result.length}"

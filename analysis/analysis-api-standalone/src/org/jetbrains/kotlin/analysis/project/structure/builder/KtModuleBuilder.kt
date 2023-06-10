@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.platform.TargetPlatform
 
 @KtModuleBuilderDsl
 public abstract class KtModuleBuilder {
-    protected val directRegularDependencies: MutableList<KtModule> = mutableListOf()
-    protected val directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
-    protected val directFriendDependencies: MutableList<KtModule> = mutableListOf()
+    protected konst directRegularDependencies: MutableList<KtModule> = mutableListOf()
+    protected konst directDependsOnDependencies: MutableList<KtModule> = mutableListOf()
+    protected konst directFriendDependencies: MutableList<KtModule> = mutableListOf()
 
     public fun addRegularDependency(module: KtModule) {
         directRegularDependencies.add(module)

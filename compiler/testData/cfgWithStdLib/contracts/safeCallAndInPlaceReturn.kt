@@ -10,7 +10,7 @@ inline fun Any?.myRun(block: () -> Unit): Unit {
 }
 
 fun test(): String {
-    val x: String? = null
+    konst x: String? = null
 
     x?.myRun {
         return ""

@@ -4,17 +4,17 @@ FILE: compilerPhase.kt
     public abstract interface PhaserState<Data> : R|kotlin/Any| {
         public abstract var depth: R|kotlin/Int|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
     }
     public abstract interface PhaseConfig : R|kotlin/Any| {
-        public abstract val needProfiling: R|kotlin/Boolean|
+        public abstract konst needProfiling: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean|
 
     }
     public final inline fun <R, D> R|PhaserState<D>|.downlevel(nlevels: R|kotlin/Int|, block: R|() -> R|): R|R| {
         this@R|/downlevel|.R|SubstitutionOverride</PhaserState.depth: R|kotlin/Int|>| = this@R|/downlevel|.R|SubstitutionOverride</PhaserState.depth: R|kotlin/Int|>|.R|kotlin/Int.plus|(R|<local>/nlevels|)
-        lval result: R|R| = R|<local>/block|.R|SubstitutionOverride<kotlin/Function0.invoke: R|R|>|()
+        lkonst result: R|R| = R|<local>/block|.R|SubstitutionOverride<kotlin/Function0.invoke: R|R|>|()
         this@R|/downlevel|.R|SubstitutionOverride</PhaserState.depth: R|kotlin/Int|>| = this@R|/downlevel|.R|SubstitutionOverride</PhaserState.depth: R|kotlin/Int|>|.R|kotlin/Int.minus|(R|<local>/nlevels|)
         ^downlevel R|<local>/result|
     }
@@ -27,11 +27,11 @@ FILE: compilerPhase.kt
             super<R|kotlin/Any|>()
         }
 
-        private/*private to this*/ final val lower: R|CompilerPhase<Context, Data, Data>| = R|<local>/lower|
+        private/*private to this*/ final konst lower: R|CompilerPhase<Context, Data, Data>| = R|<local>/lower|
             private/*private to this*/ get(): R|CompilerPhase<Context, Data, Data>|
 
         public open override fun invoke(phaseConfig: R|PhaseConfig|, phaserState: R|PhaserState<Data>|, context: R|Context|, input: R|Data|): R|Data| {
-            lval output: R|Data| = when () {
+            lkonst output: R|Data| = when () {
                 R|<local>/phaseConfig|.R|/PhaseConfig.needProfiling| ->  {
                     this@R|/NamedCompilerPhase|.R|/NamedCompilerPhase.runAndProfile|(R|<local>/phaseConfig|, R|<local>/phaserState|, R|<local>/context|, R|<local>/input|)
                 }

@@ -2,5 +2,5 @@
 class C {
     companion <!REDECLARATION!>object<!> {}
 
-    val <!REDECLARATION!>Companion<!> = C
+    konst <!REDECLARATION!>Companion<!> = C
 }

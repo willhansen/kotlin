@@ -1,4 +1,4 @@
-val foo: Pair<Pair<List<Int>>, String> = null!!
+konst foo: Pair<Pair<List<Int>>, String> = null!!
 /*
 psi: Pair<Pair<List<Int>>, String>
 type: Pair<[Error type: Type for error type constructor (Pair)]<List<Int>>, String>

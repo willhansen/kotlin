@@ -12,10 +12,10 @@ import java.io.Serializable
 
 class FakeCompilerServicesFacadeBase : CompilerServicesFacadeBase {
 
-    val messages: Map<String, Pair<ReportCategory, ReportSeverity>>
+    konst messages: Map<String, Pair<ReportCategory, ReportSeverity>>
         get() = messageMap.toMap()
 
-    private val messageMap = mutableMapOf<String, Pair<ReportCategory, ReportSeverity>>()
+    private konst messageMap = mutableMapOf<String, Pair<ReportCategory, ReportSeverity>>()
 
     override fun report(category: Int, severity: Int, message: String?, attachment: Serializable?) {
         messageMap[message!!] = ReportCategory.fromCode(category)!! to ReportSeverity.fromCode(severity)

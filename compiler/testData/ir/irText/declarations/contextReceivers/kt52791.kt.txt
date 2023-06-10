@@ -1,6 +1,6 @@
 class MyClass {
-  private /* final field */ val contextReceiverField0: Unit
-  private /* final field */ val contextReceiverField1: Int
+  private /* final field */ konst contextReceiverField0: Unit
+  private /* final field */ konst contextReceiverField1: Int
   constructor($context_receiver_0: Unit, $context_receiver_1: Int) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0

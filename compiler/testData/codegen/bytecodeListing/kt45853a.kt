@@ -1,6 +1,6 @@
 // FILE: kt45853a.kt
 abstract class A {
-    open val a: A? get() = null
+    open konst a: A? get() = null
 }
 
 class B() : AX() {

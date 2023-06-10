@@ -4,7 +4,7 @@ FILE: derivedClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val x: T = R|<local>/x|
+        public? final? [IsFromPrimaryConstructor=true] konst x: T = R|<local>/x|
             public? [ContainingClassKey=Base] get(): T
 
     }

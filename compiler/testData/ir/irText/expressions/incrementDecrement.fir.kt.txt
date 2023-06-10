@@ -3,7 +3,7 @@ var p: Int
   get
   set
 
-val arr: IntArray
+konst arr: IntArray
   field = intArrayOf(elements = [1, 2, 3])
   get
 
@@ -23,7 +23,7 @@ class C {
     return i
   }
 
-  operator fun set(i: Int, value: Int) {
+  operator fun set(i: Int, konstue: Int) {
   }
 
 }
@@ -44,18 +44,18 @@ object O {
     return i
   }
 
-  operator fun set(i: Int, value: Int) {
+  operator fun set(i: Int, konstue: Int) {
   }
 
 }
 
 fun testVarPrefix() {
   var x: Int = 0
-  val x1: Int = { // BLOCK
+  konst x1: Int = { // BLOCK
     x = x.inc()
     x
   }
-  val x2: Int = { // BLOCK
+  konst x2: Int = { // BLOCK
     x = x.dec()
     x
   }
@@ -63,186 +63,186 @@ fun testVarPrefix() {
 
 fun testVarPostfix() {
   var x: Int = 0
-  val x1: Int = { // BLOCK
-    val <unary>: Int = x
+  konst x1: Int = { // BLOCK
+    konst <unary>: Int = x
     x = <unary>.inc()
     <unary>
   }
-  val x2: Int = { // BLOCK
-    val <unary>: Int = x
+  konst x2: Int = { // BLOCK
+    konst <unary>: Int = x
     x = <unary>.dec()
     <unary>
   }
 }
 
 fun testPropPrefix() {
-  val p1: Int = { // BLOCK
+  konst p1: Int = { // BLOCK
     <set-p>(<set-?> = <get-p>().inc())
     <get-p>()
   }
-  val p2: Int = { // BLOCK
+  konst p2: Int = { // BLOCK
     <set-p>(<set-?> = <get-p>().dec())
     <get-p>()
   }
 }
 
 fun testPropPostfix() {
-  val p1: Int = { // BLOCK
-    val <unary>: Int = <get-p>()
+  konst p1: Int = { // BLOCK
+    konst <unary>: Int = <get-p>()
     <set-p>(<set-?> = <unary>.inc())
     <unary>
   }
-  val p2: Int = { // BLOCK
-    val <unary>: Int = <get-p>()
+  konst p2: Int = { // BLOCK
+    konst <unary>: Int = <get-p>()
     <set-p>(<set-?> = <unary>.dec())
     <unary>
   }
 }
 
 fun testArrayPrefix() {
-  val a1: Int = { // BLOCK
-    val <array>: IntArray = <get-arr>()
-    val <index_0>: Int = 0
-    <array>.set(index = <index_0>, value = <array>.get(index = <index_0>).inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: IntArray = <get-arr>()
+    konst <index_0>: Int = 0
+    <array>.set(index = <index_0>, konstue = <array>.get(index = <index_0>).inc())
     <array>.get(index = <index_0>)
   }
-  val a2: Int = { // BLOCK
-    val <array>: IntArray = <get-arr>()
-    val <index_0>: Int = 0
-    <array>.set(index = <index_0>, value = <array>.get(index = <index_0>).dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: IntArray = <get-arr>()
+    konst <index_0>: Int = 0
+    <array>.set(index = <index_0>, konstue = <array>.get(index = <index_0>).dec())
     <array>.get(index = <index_0>)
   }
 }
 
 fun testArrayPostfix() {
-  val a1: Int = { // BLOCK
-    val <array>: IntArray = <get-arr>()
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(index = <index_0>)
-    <array>.set(index = <index_0>, value = <unary>.inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: IntArray = <get-arr>()
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(index = <index_0>)
+    <array>.set(index = <index_0>, konstue = <unary>.inc())
     <unary>
   }
-  val a2: Int = { // BLOCK
-    val <array>: IntArray = <get-arr>()
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(index = <index_0>)
-    <array>.set(index = <index_0>, value = <unary>.dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: IntArray = <get-arr>()
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(index = <index_0>)
+    <array>.set(index = <index_0>, konstue = <unary>.dec())
     <unary>
   }
 }
 
 fun testClassPropPrefix() {
-  val p1: Int = { // BLOCK
-    val <receiver>: C = C()
+  konst p1: Int = { // BLOCK
+    konst <receiver>: C = C()
     <receiver>.<set-p>(<set-?> = <receiver>.<get-p>().inc())
     <receiver>.<get-p>()
   }
-  val p2: Int = { // BLOCK
-    val <receiver>: C = C()
+  konst p2: Int = { // BLOCK
+    konst <receiver>: C = C()
     <receiver>.<set-p>(<set-?> = <receiver>.<get-p>().dec())
     <receiver>.<get-p>()
   }
 }
 
 fun testClassPropPostfix() {
-  val p1: Int = { // BLOCK
-    val <receiver>: C = C()
-    val <unary>: Int = <receiver>.<get-p>()
+  konst p1: Int = { // BLOCK
+    konst <receiver>: C = C()
+    konst <unary>: Int = <receiver>.<get-p>()
     <receiver>.<set-p>(<set-?> = <unary>.inc())
     <unary>
   }
-  val p2: Int = { // BLOCK
-    val <receiver>: C = C()
-    val <unary>: Int = <receiver>.<get-p>()
+  konst p2: Int = { // BLOCK
+    konst <receiver>: C = C()
+    konst <unary>: Int = <receiver>.<get-p>()
     <receiver>.<set-p>(<set-?> = <unary>.dec())
     <unary>
   }
 }
 
 fun testClassOperatorPrefix() {
-  val a1: Int = { // BLOCK
-    val <array>: C = C()
-    val <index_0>: Int = 0
-    <array>.set(i = <index_0>, value = <array>.get(i = <index_0>).inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: C = C()
+    konst <index_0>: Int = 0
+    <array>.set(i = <index_0>, konstue = <array>.get(i = <index_0>).inc())
     <array>.get(i = <index_0>)
   }
-  val a2: Int = { // BLOCK
-    val <array>: C = C()
-    val <index_0>: Int = 0
-    <array>.set(i = <index_0>, value = <array>.get(i = <index_0>).dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: C = C()
+    konst <index_0>: Int = 0
+    <array>.set(i = <index_0>, konstue = <array>.get(i = <index_0>).dec())
     <array>.get(i = <index_0>)
   }
 }
 
 fun testClassOperatorPostfix() {
-  val a1: Int = { // BLOCK
-    val <array>: C = C()
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(i = <index_0>)
-    <array>.set(i = <index_0>, value = <unary>.inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: C = C()
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(i = <index_0>)
+    <array>.set(i = <index_0>, konstue = <unary>.inc())
     <unary>
   }
-  val a2: Int = { // BLOCK
-    val <array>: C = C()
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(i = <index_0>)
-    <array>.set(i = <index_0>, value = <unary>.dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: C = C()
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(i = <index_0>)
+    <array>.set(i = <index_0>, konstue = <unary>.dec())
     <unary>
   }
 }
 
 fun testObjectPropPrefix() {
-  val p1: Int = { // BLOCK
+  konst p1: Int = { // BLOCK
     O.<set-p>(<set-?> = O.<get-p>().inc())
     O.<get-p>()
   }
-  val p2: Int = { // BLOCK
+  konst p2: Int = { // BLOCK
     O.<set-p>(<set-?> = O.<get-p>().dec())
     O.<get-p>()
   }
 }
 
 fun testObjectPropPostfix() {
-  val p1: Int = { // BLOCK
-    val <unary>: Int = O.<get-p>()
+  konst p1: Int = { // BLOCK
+    konst <unary>: Int = O.<get-p>()
     O.<set-p>(<set-?> = <unary>.inc())
     <unary>
   }
-  val p2: Int = { // BLOCK
-    val <unary>: Int = O.<get-p>()
+  konst p2: Int = { // BLOCK
+    konst <unary>: Int = O.<get-p>()
     O.<set-p>(<set-?> = <unary>.dec())
     <unary>
   }
 }
 
 fun testObjectOperatorPrefix() {
-  val a1: Int = { // BLOCK
-    val <array>: O = O
-    val <index_0>: Int = 0
-    <array>.set(i = <index_0>, value = <array>.get(i = <index_0>).inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: O = O
+    konst <index_0>: Int = 0
+    <array>.set(i = <index_0>, konstue = <array>.get(i = <index_0>).inc())
     <array>.get(i = <index_0>)
   }
-  val a2: Int = { // BLOCK
-    val <array>: O = O
-    val <index_0>: Int = 0
-    <array>.set(i = <index_0>, value = <array>.get(i = <index_0>).dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: O = O
+    konst <index_0>: Int = 0
+    <array>.set(i = <index_0>, konstue = <array>.get(i = <index_0>).dec())
     <array>.get(i = <index_0>)
   }
 }
 
 fun testObjectOperatorPostfix() {
-  val a1: Int = { // BLOCK
-    val <array>: O = O
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(i = <index_0>)
-    <array>.set(i = <index_0>, value = <unary>.inc())
+  konst a1: Int = { // BLOCK
+    konst <array>: O = O
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(i = <index_0>)
+    <array>.set(i = <index_0>, konstue = <unary>.inc())
     <unary>
   }
-  val a2: Int = { // BLOCK
-    val <array>: O = O
-    val <index_0>: Int = 0
-    val <unary>: Int = <array>.get(i = <index_0>)
-    <array>.set(i = <index_0>, value = <unary>.dec())
+  konst a2: Int = { // BLOCK
+    konst <array>: O = O
+    konst <index_0>: Int = 0
+    konst <unary>: Int = <array>.get(i = <index_0>)
+    <array>.set(i = <index_0>, konstue = <unary>.dec())
     <unary>
   }
 }

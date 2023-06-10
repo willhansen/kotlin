@@ -199,7 +199,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
           PsiElement(GT)('>')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaType')
     PsiElement(COLON)(':')
@@ -234,7 +234,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
       PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaParameter')
     PsiElement(COLON)(':')
@@ -269,7 +269,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaParameterNP')
     PsiElement(COLON)(':')
@@ -302,7 +302,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReturnValue')
     PsiElement(COLON)(':')
@@ -332,7 +332,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
           PsiElement(RPAR)(')')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaReceiver')
     PsiElement(COLON)(':')
@@ -368,7 +368,7 @@ KtFile: annotationsOnParenthesizedTypes.kt
               PsiElement(IDENTIFIER)('C')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('lambdaParameterNP')
     PsiElement(COLON)(':')

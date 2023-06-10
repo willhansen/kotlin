@@ -15,9 +15,9 @@ import kotlin.reflect.KVariance
 @PublishedApi
 @UnsafeApi("Use 'ReifiedTypeSignature' instead")
 internal fun renderReifiedTypeSignatureString(type: KType): String {
-    val classifier = type.classifier ?: throw IllegalArgumentException("Expected denotable type, found $type")
-    val classifierClass = classifier as? KClass<*> ?: throw IllegalArgumentException("Expected class type, found $type")
-    val classifierName = classifierClass.qualifiedName ?: throw IllegalArgumentException(
+    konst classifier = type.classifier ?: throw IllegalArgumentException("Expected denotable type, found $type")
+    konst classifierClass = classifier as? KClass<*> ?: throw IllegalArgumentException("Expected class type, found $type")
+    konst classifierName = classifierClass.qualifiedName ?: throw IllegalArgumentException(
         "Expected non-anonymous, non-local type, found $type"
     )
 

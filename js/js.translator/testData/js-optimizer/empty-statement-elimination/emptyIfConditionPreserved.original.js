@@ -1,8 +1,8 @@
 var global = "";
 
-function id(value) {
-    global += value + ";";
-    return value;
+function id(konstue) {
+    global += konstue + ";";
+    return konstue;
 }
 
 function test(x) {

@@ -28,7 +28,7 @@ private fun captureVararg0Bound(f: () -> Unit): Any = f
 private fun captureVarargAsArrayBound(f: (Array<String>) -> Unit): Any = f
 
 fun box(): String {
-    val v0 = V()
+    konst v0 = V()
 
     checkEqual(captureVararg2(V::target), captureVararg2(V::target))
     checkEqual(captureVararg1(V::target), captureVararg1(V::target))
@@ -52,7 +52,7 @@ fun box(): String {
     checkNotEqual(captureVararg1Bound(v0::target), captureVarargAsArrayBound(v0::target))
     checkNotEqual(captureVararg1Bound(v0::target), captureVarargAsArrayBoundFromOtherFile(v0))
 
-    val v1 = V()
+    konst v1 = V()
     checkNotEqual(captureVararg0Bound(v0::target), captureVararg0Bound(v1::target))
     checkNotEqual(captureVarargAsArrayBound(v0::target), captureVarargAsArrayBound(v1::target))
 

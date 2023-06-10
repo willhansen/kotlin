@@ -3,7 +3,7 @@ package p1
 
 class Container {
     class MyString : CharSequence {
-        override val length: Int
+        override konst length: Int
             get() = 0
 
         override fun chars(): IntStream = error("")

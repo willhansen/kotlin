@@ -40,12 +40,12 @@ abstract class KaptTask @Inject constructor(
     init {
         cacheOnlyIfEnabledForKotlin()
 
-        val reason = "Caching is disabled for kapt with 'kapt.useBuildCache'"
+        konst reason = "Caching is disabled for kapt with 'kapt.useBuildCache'"
         outputs.cacheIf(reason) { useBuildCache }
     }
 
     @get:Classpath
-    abstract val compilerClasspath: ConfigurableFileCollection
+    abstract konst compilerClasspath: ConfigurableFileCollection
 
     @get:PathSensitive(PathSensitivity.NONE)
     @get:Incremental
@@ -53,16 +53,16 @@ abstract class KaptTask @Inject constructor(
     @get:NormalizeLineEndings
     @get:Optional
     @get:InputFiles
-    abstract val classpathStructure: ConfigurableFileCollection
+    abstract konst classpathStructure: ConfigurableFileCollection
 
     @get:Internal
-    abstract val kaptPluginOptions: ListProperty<CompilerPluginConfig>
+    abstract konst kaptPluginOptions: ListProperty<CompilerPluginConfig>
 
     @get:Nested
-    override val annotationProcessorOptionProviders: MutableList<Any> = mutableListOf()
+    override konst annotationProcessorOptionProviders: MutableList<Any> = mutableListOf()
 
     @get:Input
-    override val includeCompileClasspath: Property<Boolean> = objectFactory
+    override konst includeCompileClasspath: Property<Boolean> = objectFactory
         .propertyWithConvention(true)
         .chainedFinalizeValueOnRead()
 
@@ -70,10 +70,10 @@ abstract class KaptTask @Inject constructor(
     internal var isIncremental = true
 
     @get:Internal
-    internal val defaultKotlinJavaToolchain: Provider<DefaultKotlinJavaToolchain> = objectFactory
+    internal konst defaultKotlinJavaToolchain: Provider<DefaultKotlinJavaToolchain> = objectFactory
         .propertyWithNewInstance({ null })
 
-    final override val kotlinJavaToolchainProvider: Provider<KotlinJavaToolchain> = defaultKotlinJavaToolchain.cast()
+    final override konst kotlinJavaToolchainProvider: Provider<KotlinJavaToolchain> = defaultKotlinJavaToolchain.cast()
 
     @Suppress("unused", "DeprecatedCallableAddReplaceWith")
     @Deprecated(
@@ -82,7 +82,7 @@ abstract class KaptTask @Inject constructor(
     )
     @get:Incremental
     @get:CompileClasspath
-    internal val internalAbiClasspath: FileCollection = project.objects.fileCollection().from(
+    internal konst internalAbiClasspath: FileCollection = project.objects.fileCollection().from(
         { if (includeCompileClasspath.get()) null else classpath }
     )
 
@@ -94,7 +94,7 @@ abstract class KaptTask @Inject constructor(
     )
     @get:Incremental
     @get:Classpath
-    internal val internalNonAbiClasspath: FileCollection = project.objects.fileCollection().from(
+    internal konst internalNonAbiClasspath: FileCollection = project.objects.fileCollection().from(
         { if (includeCompileClasspath.get()) classpath else null }
     )
 
@@ -102,20 +102,20 @@ abstract class KaptTask @Inject constructor(
     var useBuildCache: Boolean = false
 
     @get:Internal
-    override val metrics: Property<BuildMetricsReporter> = objectFactory
+    override konst metrics: Property<BuildMetricsReporter> = objectFactory
         .property(BuildMetricsReporterImpl())
 
     @get:Input
-    abstract val verbose: Property<Boolean>
+    abstract konst verbose: Property<Boolean>
 
     protected fun checkAnnotationProcessorClasspath() {
         if (!includeCompileClasspath.get()) return
 
-        val kaptClasspath = kaptClasspath.toSet()
-        val processorsFromCompileClasspath = classpath.files.filterTo(LinkedHashSet()) {
+        konst kaptClasspath = kaptClasspath.toSet()
+        konst processorsFromCompileClasspath = classpath.files.filterTo(LinkedHashSet()) {
             hasAnnotationProcessors(it)
         }
-        val processorsAbsentInKaptClasspath = processorsFromCompileClasspath.filter { it !in kaptClasspath }
+        konst processorsAbsentInKaptClasspath = processorsFromCompileClasspath.filter { it !in kaptClasspath }
         if (processorsAbsentInKaptClasspath.isNotEmpty()) {
             if (logger.isInfoEnabled) {
                 logger.warn(
@@ -147,15 +147,15 @@ abstract class KaptTask @Inject constructor(
     }
 
     private fun findClasspathChanges(inputChanges: InputChanges): KaptIncrementalChanges {
-        val incAptCacheDir = incAptCache.asFile.get()
+        konst incAptCacheDir = incAptCache.asFile.get()
         incAptCacheDir.mkdirs()
-        val allDataFiles = classpathStructure.files
+        konst allDataFiles = classpathStructure.files
 
         return if (inputChanges.isIncremental) {
-            val startTime = System.currentTimeMillis()
+            konst startTime = System.currentTimeMillis()
 
             @Suppress("DEPRECATION_ERROR")
-            val changedFiles = listOf(
+            konst changedFiles = listOf(
                 source,
                 internalNonAbiClasspath,
                 internalAbiClasspath,
@@ -165,15 +165,15 @@ abstract class KaptTask @Inject constructor(
                 acc
             }
 
-            val previousSnapshot = loadPreviousSnapshot(incAptCacheDir, allDataFiles, changedFiles)
-            val currentSnapshot = ClasspathSnapshot.ClasspathSnapshotFactory
+            konst previousSnapshot = loadPreviousSnapshot(incAptCacheDir, allDataFiles, changedFiles)
+            konst currentSnapshot = ClasspathSnapshot.ClasspathSnapshotFactory
                 .createCurrent(
                     incAptCacheDir,
                     classpath.files.toList(),
                     kaptClasspath.files.toList(),
                     allDataFiles
                 )
-            val classpathChanges = currentSnapshot.diff(previousSnapshot, changedFiles)
+            konst classpathChanges = currentSnapshot.diff(previousSnapshot, changedFiles)
             if (classpathChanges == KaptClasspathChanges.Unknown) {
                 // We are unable to determine classpath changes, so clean the local state as we will run non-incrementally
                 cleanOutputsAndLocalState()
@@ -181,7 +181,7 @@ abstract class KaptTask @Inject constructor(
             currentSnapshot.writeToCache()
 
             if (logger.isInfoEnabled) {
-                val time = "Took ${System.currentTimeMillis() - startTime}ms."
+                konst time = "Took ${System.currentTimeMillis() - startTime}ms."
                 when {
                     previousSnapshot == UnknownSnapshot ->
                         logger.info("Initializing classpath information for KAPT. $time")
@@ -221,16 +221,16 @@ abstract class KaptTask @Inject constructor(
         allDataFiles: MutableSet<File>,
         changedFiles: MutableSet<File>
     ): ClasspathSnapshot {
-        val loadedPrevious = ClasspathSnapshot.ClasspathSnapshotFactory.loadFrom(cacheDir)
+        konst loadedPrevious = ClasspathSnapshot.ClasspathSnapshotFactory.loadFrom(cacheDir)
 
-        val previousAndCurrentDataFiles = lazy { loadedPrevious.getAllDataFiles() + allDataFiles }
-        val allChangesRecognized = changedFiles.all {
-            val extension = it.extension
+        konst previousAndCurrentDataFiles = lazy { loadedPrevious.getAllDataFiles() + allDataFiles }
+        konst allChangesRecognized = changedFiles.all {
+            konst extension = it.extension
             if (extension.isEmpty() || extension == "java" || extension == "jar" || extension == "class") {
                 return@all true
             }
             // if not a directory, Java source file, jar, or class, it has to be a structure file, in order to understand changes
-            it in previousAndCurrentDataFiles.value
+            it in previousAndCurrentDataFiles.konstue
         }
         return if (allChangesRecognized) {
             loadedPrevious
@@ -240,7 +240,7 @@ abstract class KaptTask @Inject constructor(
     }
 
     private fun hasAnnotationProcessors(file: File): Boolean {
-        val processorEntryPath = "META-INF/services/javax.annotation.processing.Processor"
+        konst processorEntryPath = "META-INF/services/javax.annotation.processing.Processor"
 
         try {
             when {
@@ -260,7 +260,7 @@ abstract class KaptTask @Inject constructor(
     }
 
     companion object {
-        private const val KAPT_VERBOSE_OPTION_NAME = "kapt.verbose"
+        private const konst KAPT_VERBOSE_OPTION_NAME = "kapt.verbose"
 
         internal fun queryKaptVerboseProperty(
             project: Project

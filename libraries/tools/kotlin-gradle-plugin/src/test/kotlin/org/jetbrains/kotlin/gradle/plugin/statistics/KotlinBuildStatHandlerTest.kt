@@ -14,12 +14,12 @@ import kotlin.test.Test
 
 class KotlinBuildStatHandlerTest {
 
-    @DisplayName("Checks that all KonanTarget names are presented in MPP_PLATFORMS statistic's report validator")
+    @DisplayName("Checks that all KonanTarget names are presented in MPP_PLATFORMS statistic's report konstidator")
     @Test
     fun mppPlatformsShouldContainsllKonanTargetsTest() {
-        val regex = Regex(StringMetrics.MPP_PLATFORMS.anonymization.validationRegexp())
+        konst regex = Regex(StringMetrics.MPP_PLATFORMS.anonymization.konstidationRegexp())
 
-        val konanTargetsMissedInMppPlatforms = KonanTarget::class.sealedSubclasses
+        konst konanTargetsMissedInMppPlatforms = KonanTarget::class.sealedSubclasses
             .mapNotNull { sealedClass -> sealedClass.objectInstance }
             .filter { sealedClass -> !regex.matches(sealedClass.name) }
 
@@ -28,12 +28,12 @@ class KotlinBuildStatHandlerTest {
         }
     }
 
-    @DisplayName("Checks that all KotlinPlatformType names are presented in MPP_PLATFORMS statistic's report validator")
+    @DisplayName("Checks that all KotlinPlatformType names are presented in MPP_PLATFORMS statistic's report konstidator")
     @Test
     fun mppPlatformsShouldContainAllKotlinPlatformTypeTest() {
-        val regex = Regex(StringMetrics.MPP_PLATFORMS.anonymization.validationRegexp())
+        konst regex = Regex(StringMetrics.MPP_PLATFORMS.anonymization.konstidationRegexp())
 
-        val kotlinPlatformTypesMissedInMppPlatforms = KotlinPlatformType.values()
+        konst kotlinPlatformTypesMissedInMppPlatforms = KotlinPlatformType.konstues()
             .map { platformType -> platformType.name }
             .filter { platformTypeName -> !regex.matches(platformTypeName) }
 
@@ -43,22 +43,22 @@ class KotlinBuildStatHandlerTest {
     }
 
 
-    @DisplayName("Checks that only values listed in KotlinPlatformType and KonanTarget are included in MPP_PLATFORMS")
+    @DisplayName("Checks that only konstues listed in KotlinPlatformType and KonanTarget are included in MPP_PLATFORMS")
     @Test
     fun mppPlatformsShouldContainOnlyKonanTargetsAndKotlinPlatformTypeTest() {
-        val allowedMppValues =
+        konst allowedMppValues =
             (StringMetrics.MPP_PLATFORMS.anonymization as StringAnonymizationPolicy.AllowedListAnonymizer)
                 .allowedValues
 
-        val kotlinPlatformTypesMissedInMppPlatforms = KotlinPlatformType.values()
+        konst kotlinPlatformTypesMissedInMppPlatforms = KotlinPlatformType.konstues()
             .map { platformType -> platformType.name }
 
-        val konanTargetsMissedInMppPlatforms = KonanTarget::class.sealedSubclasses
+        konst konanTargetsMissedInMppPlatforms = KonanTarget::class.sealedSubclasses
             .mapNotNull { sealedClass -> sealedClass.objectInstance }
             .map { koltinTarget -> koltinTarget.name }
 
 
-        val extraValues = allowedMppValues - kotlinPlatformTypesMissedInMppPlatforms - konanTargetsMissedInMppPlatforms
+        konst extraValues = allowedMppValues - kotlinPlatformTypesMissedInMppPlatforms - konanTargetsMissedInMppPlatforms
         assert(extraValues.isEmpty()) {
             "There are platforms $extraValues which are presented in MPP_PLATFORMS regex," +
                     " but they are presented neither in konan targets nor in kotlin platform types"

@@ -2,11 +2,11 @@
 // SKIP_KT_DUMP
 
 // FILE: kt44855.kt
-open class Child(val x: Parent?) : Parent() {
+open class Child(konst x: Parent?) : Parent() {
     inner class QQQ {
         fun z() {
             x as Child
-            val q = x.qqq
+            konst q = x.qqq
             x.qqq = q + "OK"
         }
     }

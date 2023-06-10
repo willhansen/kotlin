@@ -6,4 +6,4 @@ fun foo(d: dynamic) {
 
 }
 
-class Foo<T>(val p: T)
+class Foo<T>(konst p: T)

@@ -18,9 +18,9 @@ interface AD : A, B {
 }
 
 class Test() : AD {
-    fun eval(): String {
+    fun ekonst(): String {
         return addFoo(hooray());
     }
 }
 
-fun box() = Test().eval()
+fun box() = Test().ekonst()

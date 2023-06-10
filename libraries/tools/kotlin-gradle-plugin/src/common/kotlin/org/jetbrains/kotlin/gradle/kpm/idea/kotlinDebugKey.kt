@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.tooling.core.Extras
 import org.jetbrains.kotlin.tooling.core.MutableExtras
 import org.jetbrains.kotlin.tooling.core.extrasKeyOf
 
-internal val kotlinDebugKey = extrasKeyOf<Any>("kotlin.debug")
+internal konst kotlinDebugKey = extrasKeyOf<Any>("kotlin.debug")
 
-val Extras.kotlinDebug get() = this[kotlinDebugKey]
+konst Extras.kotlinDebug get() = this[kotlinDebugKey]
 
 var MutableExtras.kotlinDebug: Any?
     get() = this[kotlinDebugKey]
-    set(value) {
-        if (value != null) this[kotlinDebugKey] = value
+    set(konstue) {
+        if (konstue != null) this[kotlinDebugKey] = konstue
         else this.remove(kotlinDebugKey)
     }

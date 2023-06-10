@@ -41,7 +41,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: LOCAL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Local
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null
@@ -98,7 +98,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

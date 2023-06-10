@@ -1,5 +1,5 @@
 fun box(): String {
-  val obj: <no name provided> = { // BLOCK
+  konst obj: <no name provided> = { // BLOCK
     local class <no name provided> {
       constructor() /* primary */ {
         super/*Any*/()
@@ -7,7 +7,7 @@ fun box(): String {
 
       }
 
-      val end: String
+      konst end: String
         field = "K"
         get
 
@@ -35,7 +35,7 @@ fun box(): String {
 
         }
 
-        val s: String
+        konst s: String
           field = s
           get
 

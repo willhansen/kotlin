@@ -5,39 +5,39 @@ data class Test1 {
 
   }
 
-  val stringArray: Array<String>
+  konst stringArray: Array<String>
     field = stringArray
     get
 
-  val charArray: CharArray
+  konst charArray: CharArray
     field = charArray
     get
 
-  val booleanArray: BooleanArray
+  konst booleanArray: BooleanArray
     field = booleanArray
     get
 
-  val byteArray: ByteArray
+  konst byteArray: ByteArray
     field = byteArray
     get
 
-  val shortArray: ShortArray
+  konst shortArray: ShortArray
     field = shortArray
     get
 
-  val intArray: IntArray
+  konst intArray: IntArray
     field = intArray
     get
 
-  val longArray: LongArray
+  konst longArray: LongArray
     field = longArray
     get
 
-  val floatArray: FloatArray
+  konst floatArray: FloatArray
     field = floatArray
     get
 
-  val doubleArray: DoubleArray
+  konst doubleArray: DoubleArray
     field = doubleArray
     get
 
@@ -105,7 +105,7 @@ data class Test1 {
     when {
       other !is Test1 -> return false
     }
-    val tmp0_other_with_cast: Test1 = other as Test1
+    konst tmp0_other_with_cast: Test1 = other as Test1
     when {
       EQEQ(arg0 = <this>.#stringArray, arg1 = tmp0_other_with_cast.#stringArray).not() -> return false
     }
@@ -145,7 +145,7 @@ data class Test2<T : Any?> {
 
   }
 
-  val genericArray: Array<T>
+  konst genericArray: Array<T>
     field = genericArray
     get
 
@@ -172,7 +172,7 @@ data class Test2<T : Any?> {
     when {
       other !is Test2<T> -> return false
     }
-    val tmp0_other_with_cast: Test2<T> = other as Test2<T>
+    konst tmp0_other_with_cast: Test2<T> = other as Test2<T>
     when {
       EQEQ(arg0 = <this>.#genericArray, arg1 = tmp0_other_with_cast.#genericArray).not() -> return false
     }
@@ -188,7 +188,7 @@ data class Test3 {
 
   }
 
-  val anyArrayN: Array<Any>?
+  konst anyArrayN: Array<Any>?
     field = anyArrayN
     get
 
@@ -218,7 +218,7 @@ data class Test3 {
     when {
       other !is Test3 -> return false
     }
-    val tmp0_other_with_cast: Test3 = other as Test3
+    konst tmp0_other_with_cast: Test3 = other as Test3
     when {
       EQEQ(arg0 = <this>.#anyArrayN, arg1 = tmp0_other_with_cast.#anyArrayN).not() -> return false
     }

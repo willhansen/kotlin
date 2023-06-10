@@ -14,8 +14,8 @@ enum class Color : Parcelable { BLACK, WHITE }
 object Obj : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val black = Color.BLACK
-    val obj = Obj
+    konst black = Color.BLACK
+    konst obj = Obj
 
     black.writeToParcel(parcel, 0)
     obj.writeToParcel(parcel, 0)
@@ -23,12 +23,12 @@ fun box() = parcelTest { parcel ->
     println(black)
     println(obj)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val black2 = readFromParcel<Color>(parcel)
-    val obj2 = readFromParcel<Obj>(parcel)
+    konst black2 = readFromParcel<Color>(parcel)
+    konst obj2 = readFromParcel<Obj>(parcel)
 
     println(black2)
     println(obj2)

@@ -14,25 +14,25 @@ fun foo(x: C) {
 fun bar() = C()
 
 @JsExport
-val x: C = C()
+konst x: C = C()
 
 @JsExport
 var x2: C
     get() = C()
-    set(value) { }
+    set(konstue) { }
 
 @JsExport
 class A(
-    val x: C,
+    konst x: C,
     y: C
 ) {
     fun foo(x: C) = x
 
-    val x2: C = C()
+    konst x2: C = C()
 
     var x3: C
         get() = C()
-        set(value) { }
+        set(konstue) { }
 }
 
 @JsExport

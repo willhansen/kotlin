@@ -13,8 +13,8 @@ import java.io.Serializable
 // DO NOT MODIFY DIRECTLY! Use org.jetbrains.kotlin.generators.gradle.targets.js.MainKt
 class $class : Serializable {
 #foreach( $dep in $dependencies )
-    val $dep.camelize() = NpmPackageVersion("$dep.name", "$dep.version")
+    konst $dep.camelize() = NpmPackageVersion("$dep.name", "$dep.version")
 #end
 
-    val kotlinJsTestRunner = KotlinGradleNpmPackage("test-js-runner")
+    konst kotlinJsTestRunner = KotlinGradleNpmPackage("test-js-runner")
 }

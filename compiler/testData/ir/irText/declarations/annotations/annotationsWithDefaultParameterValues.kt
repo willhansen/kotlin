@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-annotation class A(val x: String = "", val y: Int = 42)
+annotation class A(konst x: String = "", konst y: Int = 42)
 
 @A("abc", 123) fun test1() {}
 @A("def") fun test2() {}

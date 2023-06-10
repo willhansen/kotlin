@@ -1,7 +1,7 @@
 == test ==
 fun test() {
     while (true) {
-        class LocalClass(val x: Int) {
+        class LocalClass(konst x: Int) {
             init {
                 break
             }
@@ -16,12 +16,12 @@ fun test() {
 }
 ---------------------
                                                                                                                               <v1>: *         NEW: magic[VALUE_CONSUMER](true|<v0>) -> <v1>
-                                                                                                                              <v2>: Int       NEW: magic[FAKE_INITIALIZER](val x: Int) -> <v2>
+                                                                                                                              <v2>: Int       NEW: magic[FAKE_INITIALIZER](konst x: Int) -> <v2>
 true                                                                                                                          <v0>: Boolean   NEW: r(true) -> <v0>
 break                                                                                                                         !<v3>: *
 { break }                                                                                                                     !<v3>: *        COPY
-while (true) { class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } }       !<v4>: *
-{ while (true) { class LocalClass(val x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } }   !<v4>: *        COPY
+while (true) { class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } }       !<v4>: *
+{ while (true) { class LocalClass(konst x: Int) { init { break } constructor() : this(42) { break } fun foo() { break } } } }   !<v4>: *        COPY
 =====================
 == foo ==
 fun foo() {

@@ -6,7 +6,7 @@ fun foo() {
 }
 
 fun bar() {
-    val b: Int
+    konst b: Int
     b = 3
 }
 

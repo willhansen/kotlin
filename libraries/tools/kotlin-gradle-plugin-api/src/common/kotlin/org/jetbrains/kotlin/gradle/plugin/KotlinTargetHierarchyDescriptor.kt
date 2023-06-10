@@ -22,11 +22,11 @@ fun KotlinTargetHierarchyDescriptor(
 
 @ExperimentalKotlinGradlePluginApi
 private class KotlinTargetHierarchyDescriptorImpl(
-    private val describe: KotlinTargetHierarchyBuilder.Root.() -> Unit
+    private konst describe: KotlinTargetHierarchyBuilder.Root.() -> Unit
 ) : KotlinTargetHierarchyDescriptor {
 
     override fun extend(describe: KotlinTargetHierarchyBuilder.Root.() -> Unit): KotlinTargetHierarchyDescriptor {
-        val sourceDescribe = this.describe
+        konst sourceDescribe = this.describe
         return KotlinTargetHierarchyDescriptor {
             sourceDescribe()
             describe()

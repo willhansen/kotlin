@@ -1,8 +1,8 @@
 // WITH_STDLIB
 
-val i1 = 1
-val i2 = 2
-val i3 = 3
+konst i1 = 1
+konst i2 = 2
+konst i3 = 3
 
 fun box(): String {
     if (!(i2 in i1 .. i3 && i1 !in i2 .. i3)) return "Fail 1 &&"
@@ -12,11 +12,11 @@ fun box(): String {
     if (!(2 in 1 .. 3 && 1 !in 2 .. 3)) return "Fail 2 &&"
     if (!(2 in 1 .. 3 || 1 !in 2 .. 3)) return "Fail 2 ||"
 
-    val xs = listOf(1, 2, 3)
+    konst xs = listOf(1, 2, 3)
     if (!(1 in xs && 10 !in xs)) return "Fail 3 &&"
     if (!(1 in xs || 10 !in xs)) return "Fail 3 ||"
 
-    val iarr = intArrayOf(1, 2, 3)
+    konst iarr = intArrayOf(1, 2, 3)
     if (!(1 in iarr && 10 !in iarr)) return "Fail 4 &&"
     if (!(1 in iarr || 10 !in iarr)) return "Fail 4 ||"
 

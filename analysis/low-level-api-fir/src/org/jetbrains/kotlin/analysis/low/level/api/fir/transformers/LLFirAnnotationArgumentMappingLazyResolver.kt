@@ -32,7 +32,7 @@ internal object LLFirAnnotationArgumentMappingLazyResolver : LLFirLazyResolver(F
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirAnnotationArgumentsMappingTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirAnnotationArgumentsMappingTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -63,7 +63,7 @@ private class LLFirAnnotationArgumentsMappingTargetResolver(
     scopeSession,
     FirResolvePhase.ANNOTATIONS_ARGUMENTS_MAPPING,
 ) {
-    override val transformer = FirAnnotationArgumentsMappingTransformer(
+    override konst transformer = FirAnnotationArgumentsMappingTransformer(
         session,
         scopeSession,
         resolverPhase,

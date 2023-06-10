@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(val u: Int) {
+konstue class UInt(konst u: Int) {
     override fun toString(): String {
         return "UInt: $u"
     }
@@ -33,7 +33,7 @@ fun bar(x: UInt?): String {
 }
 
 fun box(): String {
-    val u = UInt(12)
+    konst u = UInt(12)
     if (!u.isUInt()) return "fail"
     if (u.notIsUInt()) return "fail"
 
@@ -44,10 +44,10 @@ fun box(): String {
     if (!u.instanceOf<UInt>()) return "fail"
     if (1.instanceOf<UInt>()) return "fail"
 
-    val nullableUInt: UInt? = UInt(10)
+    konst nullableUInt: UInt? = UInt(10)
     if (!nullableUInt.instanceOf<UInt>()) return "fail"
 
-    val nullAsUInt: UInt? = null
+    konst nullAsUInt: UInt? = null
     if (nullAsUInt.instanceOf<UInt>()) return "fail"
     if (!nullAsUInt.instanceOf<UInt?>()) return "fail"
 

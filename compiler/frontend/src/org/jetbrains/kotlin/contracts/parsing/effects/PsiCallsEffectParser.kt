@@ -35,23 +35,23 @@ internal class PsiCallsEffectParser(
 ) : AbstractPsiEffectParser(collector, callContext, contractParserDispatcher) {
 
     override fun tryParseEffect(expression: KtExpression): EffectDeclaration? {
-        val resolvedCall = expression.getResolvedCall(callContext.bindingContext) ?: return null
-        val descriptor = resolvedCall.resultingDescriptor
+        konst resolvedCall = expression.getResolvedCall(callContext.bindingContext) ?: return null
+        konst descriptor = resolvedCall.resultingDescriptor
 
         if (!descriptor.isCallsInPlaceEffectDescriptor()) return null
 
-        val lambda = contractParserDispatcher.parseVariable(resolvedCall.firstArgumentAsExpressionOrNull()) ?: return null
+        konst lambda = contractParserDispatcher.parseVariable(resolvedCall.firstArgumentAsExpressionOrNull()) ?: return null
 
-        val kindArgument = resolvedCall.valueArgumentsByIndex?.getOrNull(1)
+        konst kindArgument = resolvedCall.konstueArgumentsByIndex?.getOrNull(1)
 
-        val kind = when (kindArgument) {
+        konst kind = when (kindArgument) {
             is DefaultValueArgument -> EventOccurrencesRange.UNKNOWN
-            is ExpressionValueArgument -> kindArgument.valueArgument?.getArgumentExpression()?.toInvocationKind(callContext.bindingContext)
+            is ExpressionValueArgument -> kindArgument.konstueArgument?.getArgumentExpression()?.toInvocationKind(callContext.bindingContext)
             else -> null
         }
 
         if (kind == null) {
-            val reportOn = (kindArgument as? ExpressionValueArgument)?.valueArgument?.getArgumentExpression() ?: expression
+            konst reportOn = (kindArgument as? ExpressionValueArgument)?.konstueArgument?.getArgumentExpression() ?: expression
             collector.badDescription("unrecognized InvocationKind", reportOn)
             return null
         }
@@ -60,7 +60,7 @@ internal class PsiCallsEffectParser(
     }
 
     private fun KtExpression.toInvocationKind(bindingContext: BindingContext): EventOccurrencesRange? {
-        val descriptor = this.getResolvedCall(bindingContext)?.resultingDescriptor ?: return null
+        konst descriptor = this.getResolvedCall(bindingContext)?.resultingDescriptor ?: return null
         if (!descriptor.parents.first().isInvocationKindEnum()) return null
 
         return when (descriptor.fqNameSafe.shortName()) {

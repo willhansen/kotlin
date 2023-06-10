@@ -13,9 +13,9 @@ import java.io.File
 import java.io.FileWriter
 
 internal class StringUppercaseGenerator(
-    private val outputFile: File,
+    private konst outputFile: File,
     unicodeDataLines: List<UnicodeDataLine>,
-    private val target: KotlinTarget
+    private konst target: KotlinTarget
 ) : StringCasingGenerator(unicodeDataLines) {
 
     override fun SpecialCasingLine.mapping(): List<String> = uppercaseMapping
@@ -46,9 +46,9 @@ internal class StringUppercaseGenerator(
 
     private fun codePointAt(): String = """
         internal fun String.codePointAt(index: Int): Int {
-            val high = this[index]
+            konst high = this[index]
             if (high.isHighSurrogate() && index + 1 < this.length) {
-                val low = this[index + 1]
+                konst low = this[index + 1]
                 if (low.isLowSurrogate()) {
                     return Char.toCodePoint(high, low)
                 }
@@ -72,7 +72,7 @@ internal class StringUppercaseGenerator(
         internal fun String.uppercaseImpl(): String {
             var unchangedIndex = 0
             while (unchangedIndex < this.length) {
-                val codePoint = codePointAt(unchangedIndex)
+                konst codePoint = codePointAt(unchangedIndex)
                 if (this[unchangedIndex].oneToManyUppercase() != null || codePoint.uppercaseCodePoint() != codePoint) {
                     break
                 }
@@ -82,20 +82,20 @@ internal class StringUppercaseGenerator(
                 return this
             }
 
-            val sb = StringBuilder(this.length)
+            konst sb = StringBuilder(this.length)
             sb.appendRange(this, 0, unchangedIndex)
 
             var index = unchangedIndex
 
             while (index < this.length) {
-                val specialCasing = this[index].oneToManyUppercase()
+                konst specialCasing = this[index].oneToManyUppercase()
                 if (specialCasing != null) {
                     sb.append(specialCasing)
                     index++
                     continue
                 }
-                val codePoint = codePointAt(index)
-                val uppercaseCodePoint = codePoint.uppercaseCodePoint()
+                konst codePoint = codePointAt(index)
+                konst uppercaseCodePoint = codePoint.uppercaseCodePoint()
                 sb.appendCodePoint(uppercaseCodePoint)
                 index += codePoint.charCount()
             }

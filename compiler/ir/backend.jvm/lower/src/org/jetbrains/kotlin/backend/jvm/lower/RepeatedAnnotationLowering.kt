@@ -27,13 +27,13 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames
 
-internal val repeatedAnnotationPhase = makeIrModulePhase(
+internal konst repeatedAnnotationPhase = makeIrModulePhase(
     ::RepeatedAnnotationLowering,
     name = "RepeatedAnnotation",
     description = "Enclose repeated annotations in a container annotation, generating a container class if needed"
 )
 
-class RepeatedAnnotationLowering(private val context: JvmBackendContext) : FileLoweringPass, IrElementVisitorVoid {
+class RepeatedAnnotationLowering(private konst context: JvmBackendContext) : FileLoweringPass, IrElementVisitorVoid {
     override fun lower(irFile: IrFile) {
         irFile.acceptVoid(this)
     }
@@ -66,31 +66,31 @@ class RepeatedAnnotationLowering(private val context: JvmBackendContext) : FileL
         if (!context.state.classBuilderMode.generateBodies) return annotations
         if (annotations.size < 2) return annotations
 
-        val annotationsByClass = annotations.groupByTo(mutableMapOf()) { it.symbol.owner.constructedClass }
-        if (annotationsByClass.values.none { it.size > 1 }) return annotations
+        konst annotationsByClass = annotations.groupByTo(mutableMapOf()) { it.symbol.owner.constructedClass }
+        if (annotationsByClass.konstues.none { it.size > 1 }) return annotations
 
-        val result = mutableListOf<IrConstructorCall>()
+        konst result = mutableListOf<IrConstructorCall>()
         for (annotation in annotations) {
-            val annotationClass = annotation.symbol.owner.constructedClass
-            val grouped = annotationsByClass.remove(annotationClass) ?: continue
+            konst annotationClass = annotation.symbol.owner.constructedClass
+            konst grouped = annotationsByClass.remove(annotationClass) ?: continue
             if (grouped.size < 2) {
                 result.add(grouped.single())
                 continue
             }
 
-            val containerClass = getOrCreateContainerClass(annotationClass)
+            konst containerClass = getOrCreateContainerClass(annotationClass)
             result.add(wrapAnnotationEntriesInContainer(annotationClass, containerClass, grouped))
         }
         return result
     }
 
     private fun getOrCreateContainerClass(annotationClass: IrClass): IrClass {
-        val metaAnnotations = annotationClass.annotations
-        val jvmRepeatable = metaAnnotations.find { it.isAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION) }
+        konst metaAnnotations = annotationClass.annotations
+        konst jvmRepeatable = metaAnnotations.find { it.isAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION) }
         return if (jvmRepeatable != null) {
-            val containerClassReference = jvmRepeatable.getValueArgument(0)
+            konst containerClassReference = jvmRepeatable.getValueArgument(0)
             require(containerClassReference is IrClassReference) {
-                "Repeatable annotation container value must be a class reference: $annotationClass"
+                "Repeatable annotation container konstue must be a class reference: $annotationClass"
             }
             (containerClassReference.symbol as? IrClassSymbol)?.owner
                 ?: error("Repeatable annotation container must be a class: $annotationClass")
@@ -104,7 +104,7 @@ class RepeatedAnnotationLowering(private val context: JvmBackendContext) : FileL
         containerClass: IrClass,
         entries: List<IrConstructorCall>,
     ): IrConstructorCall {
-        val annotationType = annotationClass.typeWith()
+        konst annotationType = annotationClass.typeWith()
         return IrConstructorCallImpl.fromSymbolOwner(containerClass.defaultType, containerClass.primaryConstructor!!.symbol).apply {
             putValueArgument(
                 0,

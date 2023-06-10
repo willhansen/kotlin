@@ -6,7 +6,7 @@ fun foo2(p: Int?): Boolean {
     return 1 == M<Int>(p)?.chain()?.nulled()
 }
 
-class M<T: Any>(val z: T?) {
+class M<T: Any>(konst z: T?) {
     fun nulled(): T? = z
 
     fun chain(): M<T>? = this

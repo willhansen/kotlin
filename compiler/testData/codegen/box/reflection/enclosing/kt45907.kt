@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 fun box(): String = use {
-    class Local(val n: Int)
+    class Local(konst n: Int)
     if (Local::class.java.declaringClass == null) "OK" else "Fail"
 }
 

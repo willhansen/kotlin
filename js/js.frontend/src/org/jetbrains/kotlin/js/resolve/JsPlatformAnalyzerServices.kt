@@ -27,11 +27,11 @@ object JsPlatformAnalyzerServices : PlatformDependentAnalyzerServices() {
         result.add(ImportPath.fromString("kotlin.js.*"))
     }
 
-    override val platformConfigurator: PlatformConfigurator = JsPlatformConfigurator
+    override konst platformConfigurator: PlatformConfigurator = JsPlatformConfigurator
 
-    val builtIns: KotlinBuiltIns
+    konst builtIns: KotlinBuiltIns
         get() = DefaultBuiltIns.Instance
 
-    override val excludedImports: List<FqName> =
+    override konst excludedImports: List<FqName> =
         listOf("Promise", "Date", "Console", "Math", "RegExp", "RegExpMatch", "Json", "json").map { FqName("kotlin.js.$it") }
 }

@@ -1,18 +1,18 @@
 KtDeclaration: KtPropertyAccessor
 Symbol:
-set(value: kotlin.Int)
+set(konstue: kotlin.Int)
 
 Signature:
 KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.Unit
-  symbol = <setter>(value: kotlin.Int): kotlin.Unit
-  valueParameters = [
+  symbol = <setter>(konstue: kotlin.Int): kotlin.Unit
+  konstueParameters = [
     KtVariableLikeSignature:
-      name = value
+      name = konstue
       receiverType = null
       returnType = kotlin.Int
-      symbol = value: kotlin.Int
+      symbol = konstue: kotlin.Int
       callableIdIfNonLocal = null
   ]
   callableIdIfNonLocal = null

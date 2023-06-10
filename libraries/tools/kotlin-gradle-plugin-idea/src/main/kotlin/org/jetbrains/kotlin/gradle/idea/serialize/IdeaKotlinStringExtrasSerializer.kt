@@ -6,8 +6,8 @@
 package org.jetbrains.kotlin.gradle.idea.serialize
 
 object IdeaKotlinStringExtrasSerializer : IdeaKotlinExtrasSerializer<String> {
-    override fun serialize(context: IdeaKotlinSerializationContext, value: String): ByteArray {
-        return value.encodeToByteArray()
+    override fun serialize(context: IdeaKotlinSerializationContext, konstue: String): ByteArray {
+        return konstue.encodeToByteArray()
     }
 
     override fun deserialize(context: IdeaKotlinSerializationContext, data: ByteArray): String {

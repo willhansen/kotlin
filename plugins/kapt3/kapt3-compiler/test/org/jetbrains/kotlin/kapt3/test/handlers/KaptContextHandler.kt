@@ -17,18 +17,18 @@ import org.jetbrains.kotlin.test.utils.withExtension
 
 class KaptContextHandler(testServices: TestServices) : BaseKaptHandler(testServices) {
     override fun processModule(module: TestModule, info: KaptContextBinaryArtifact) {
-        val kaptContext = info.kaptContext
-        val compilationUnits = convert(module, kaptContext, generateNonExistentClass = false)
+        konst kaptContext = info.kaptContext
+        konst compilationUnits = convert(module, kaptContext, generateNonExistentClass = false)
         kaptContext.doAnnotationProcessing(
             emptyList(),
             listOf(JavaKaptContextTest.simpleProcessor()),
             additionalSources = compilationUnits
         )
 
-        val stubJavaFiles = kaptContext.options.sourcesOutputDir.walkTopDown().filter { it.isFile && it.extension == "java" }
-        val actualRaw = stubJavaFiles.sortedBy { it.name }.joinToString(FILE_SEPARATOR) { it.name + ":\n\n" + it.readText() }
-        val actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' }).trimTrailingWhitespacesAndAddNewlineAtEOF()
-        val expectedFile = module.files.first().originalFile.withExtension(".txt")
+        konst stubJavaFiles = kaptContext.options.sourcesOutputDir.walkTopDown().filter { it.isFile && it.extension == "java" }
+        konst actualRaw = stubJavaFiles.sortedBy { it.name }.joinToString(FILE_SEPARATOR) { it.name + ":\n\n" + it.readText() }
+        konst actual = StringUtil.convertLineSeparators(actualRaw.trim { it <= ' ' }).trimTrailingWhitespacesAndAddNewlineAtEOF()
+        konst expectedFile = module.files.first().originalFile.withExtension(".txt")
         assertions.assertEqualsToFile(expectedFile, actual)
     }
 

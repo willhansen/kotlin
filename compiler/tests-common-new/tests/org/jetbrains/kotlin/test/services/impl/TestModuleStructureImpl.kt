@@ -19,15 +19,15 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import java.io.File
 
 class TestModuleStructureImpl(
-    override val modules: List<TestModule>,
-    override val originalTestDataFiles: List<File>
+    override konst modules: List<TestModule>,
+    override konst originalTestDataFiles: List<File>
 ) : TestModuleStructure() {
-    override val allDirectives: RegisteredDirectives = ComposedRegisteredDirectives(modules.map { it.directives })
+    override konst allDirectives: RegisteredDirectives = ComposedRegisteredDirectives(modules.map { it.directives })
 
     @OptIn(ExperimentalStdlibApi::class)
-    private val targetArtifactsByModule: Map<String, List<BinaryKind<*>>> = buildMap {
+    private konst targetArtifactsByModule: Map<String, List<BinaryKind<*>>> = buildMap {
         for (module in modules) {
-            val result = mutableListOf<BinaryKind<*>>()
+            konst result = mutableListOf<BinaryKind<*>>()
             for (dependency in module.allDependencies) {
                 if (dependency.kind == DependencyKind.KLib) {
                     result += ArtifactKinds.KLib

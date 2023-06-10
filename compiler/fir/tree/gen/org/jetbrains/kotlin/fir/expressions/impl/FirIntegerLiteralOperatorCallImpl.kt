@@ -36,7 +36,7 @@ internal class FirIntegerLiteralOperatorCallImpl(
     override var source: KtSourceElement?,
     override var argumentList: FirArgumentList,
     override var calleeReference: FirNamedReference,
-    override val origin: FirFunctionCallOrigin,
+    override konst origin: FirFunctionCallOrigin,
     override var dispatchReceiver: FirExpression,
     override var extensionReceiver: FirExpression,
 ) : FirIntegerLiteralOperatorCall() {

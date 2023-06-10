@@ -6,20 +6,20 @@ fun bar(): Bar? = null
 
 fun <T : Bar> run(f: () -> T): T = f()
 
-val foo: Foo = run {
-    val x = bar()
+konst foo: Foo = run {
+    konst x = bar()
     if (x == null) throw Exception()
     <!DEBUG_INFO_SMARTCAST!>x<!>
 }
 
-val foofoo: Foo = run {
-    val x = foo()
+konst foofoo: Foo = run {
+    konst x = foo()
     if (x == null) throw Exception()
     <!DEBUG_INFO_SMARTCAST, TYPE_MISMATCH!>x<!>
 }
 
-val bar: Bar = <!TYPE_MISMATCH!>run {
-    val x = foo()
+konst bar: Bar = <!TYPE_MISMATCH!>run {
+    konst x = foo()
     if (x == null) throw Exception()
     <!DEBUG_INFO_SMARTCAST, TYPE_MISMATCH!>x<!>
 }<!>

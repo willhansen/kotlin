@@ -1,17 +1,17 @@
 package
 
-public val test1: [ERROR : Type for generate {
+public konst test1: [ERROR : Type for generate {
     apply {
         yield(4)
     }
 }]
-public val test2: [ERROR : Type for generate {
+public konst test2: [ERROR : Type for generate {
     yield(B)
     apply {
         yield(C)
     }
 }]
-public val test3: [ERROR : Type for generate {
+public konst test3: [ERROR : Type for generate {
     this.let {
         yield(B)
     }

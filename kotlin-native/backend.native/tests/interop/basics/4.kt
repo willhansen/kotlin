@@ -7,7 +7,7 @@
 import cstdio.*
 import kotlinx.cinterop.*
 
-val stdout
+konst stdout
     get() = getStdout()
 
 fun main(args: Array<String>) {
@@ -15,9 +15,9 @@ fun main(args: Array<String>) {
             "a", "b".cstr, (-1).toByte(), 2.toShort(), 3, Long.MAX_VALUE, 0.1.toFloat(), 0.2, true, false)
 
     memScoped {
-        val aVar = alloc<IntVar>()
-        val bVar = alloc<IntVar>()
-        val sscanfResult = sscanf("42", "%d%d", aVar.ptr, bVar.ptr)
-        printf("%d %d\n", sscanfResult, aVar.value)
+        konst aVar = alloc<IntVar>()
+        konst bVar = alloc<IntVar>()
+        konst sscanfResult = sscanf("42", "%d%d", aVar.ptr, bVar.ptr)
+        printf("%d %d\n", sscanfResult, aVar.konstue)
     }
 }

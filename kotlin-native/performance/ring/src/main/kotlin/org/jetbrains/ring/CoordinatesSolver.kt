@@ -3,10 +3,10 @@ package org.jetbrains.ring
 import kotlin.experimental.and
 
 class CoordinatesSolverBenchmark {
-    val solver: Solver
+    konst solver: Solver
 
     init {
-        val inputValue = """
+        konst inputValue = """
             12 5 3 25 3 9 3 9 1 3
             13 3 12 6 10 10 12 2 10 10
             9 2 9 5 6 12 5 0 2 10
@@ -18,77 +18,77 @@ class CoordinatesSolverBenchmark {
             12 3 13 6 12 3 9 6 12 2
             13 4 5 5 5 6 12 5 5 2
             1""".trimIndent()
-        val input = readTillParsed(inputValue)
+        konst input = readTillParsed(inputValue)
 
         solver = Solver(input!!)
     }
 
-    data class Coordinate(val x: Int, val y: Int)
+    data class Coordinate(konst x: Int, konst y: Int)
 
     @SinceKotlin("1.1")
-    data class Field(val x: Int, val y: Int, val value: Byte) {
+    data class Field(konst x: Int, konst y: Int, konst konstue: Byte) {
         fun northWall(): Boolean {
-            return value and 1 != 0.toByte()
+            return konstue and 1 != 0.toByte()
         }
 
         fun eastWall(): Boolean {
-            return value and 2 != 0.toByte()
+            return konstue and 2 != 0.toByte()
         }
 
         fun southWall(): Boolean {
-            return value and 4 != 0.toByte()
+            return konstue and 4 != 0.toByte()
         }
 
         fun westWall(): Boolean {
-            return value and 8 != 0.toByte()
+            return konstue and 8 != 0.toByte()
         }
 
         fun hasObject(): Boolean {
-            return value and 16 != 0.toByte()
+            return konstue and 16 != 0.toByte()
         }
     }
 
-    class Input(val labyrinth: Labyrinth, val nObjects: Int)
+    class Input(konst labyrinth: Labyrinth, konst nObjects: Int)
 
-    class Labyrinth(val width: Int, val height: Int, val fields: Array<Field>) {
+    class Labyrinth(konst width: Int, konst height: Int, konst fields: Array<Field>) {
         fun getField(x: Int, y: Int): Field {
             return fields[x + y * width]
         }
     }
 
-    class Output(val steps: List<Coordinate?>)
+    class Output(konst steps: List<Coordinate?>)
 
     class InputParser {
-        private val rows : MutableList<Array<Field>> = mutableListOf()
+        private konst rows : MutableList<Array<Field>> = mutableListOf()
         private var numObjects: Int = 0
 
-        private val input: Input
+        private konst input: Input
             get() {
-                val width = rows[0].size
-                val fields = arrayOfNulls<Field>(width * rows.size)
+                konst width = rows[0].size
+                konst fields = arrayOfNulls<Field>(width * rows.size)
 
                 for (y in rows.indices) {
-                    val row = rows[y]
+                    konst row = rows[y]
                     for (p in y*width until y*width + width) {
                         fields[p] = row[p-y*width]
                     }
                 }
 
-                val labyrinth = Labyrinth(width, rows.size, fields.requireNoNulls())
+                konst labyrinth = Labyrinth(width, rows.size, fields.requireNoNulls())
 
                 return Input(labyrinth, numObjects)
             }
 
         fun feedLine(line: String): Input? {
-            val items = line.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            konst items = line.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
 
             if (items.size == 1) {
                 numObjects = items[0].toInt()
 
                 return input
             } else if (items.size > 0) {
-                val rowNum = rows.size
-                val row = arrayOfNulls<Field>(items.size)
+                konst rowNum = rows.size
+                konst row = arrayOfNulls<Field>(items.size)
 
                 for (col in items.indices) {
                     row[col] = Field(rowNum, col, items[col].toByte())
@@ -102,12 +102,12 @@ class CoordinatesSolverBenchmark {
     }
 
 
-    class Solver(private val input: Input) {
-        private val objects: List<Coordinate>
+    class Solver(private konst input: Input) {
+        private konst objects: List<Coordinate>
 
-        private val width: Int
-        private val height: Int
-        private val maze_end: Coordinate
+        private konst width: Int
+        private konst height: Int
+        private konst maze_end: Coordinate
 
         private var counter: Long = 0
 
@@ -126,7 +126,7 @@ class CoordinatesSolverBenchmark {
         }
 
         fun solve(): Output {
-            val steps = ArrayList<Coordinate>()
+            konst steps = ArrayList<Coordinate>()
 
             for (o in objects.indices) {
                 var limit = input.labyrinth.width + input.labyrinth.height - 2
@@ -164,8 +164,8 @@ class CoordinatesSolverBenchmark {
         }
 
         private fun createOutput(steps: List<Coordinate>): Output {
-            val objects : MutableList<Coordinate> = this.objects.toMutableList()
-            val outSteps : MutableList<Coordinate?> = mutableListOf()
+            konst objects : MutableList<Coordinate> = this.objects.toMutableList()
+            konst outSteps : MutableList<Coordinate?> = mutableListOf()
 
             for (step in steps) {
                 outSteps.add(step)
@@ -181,7 +181,7 @@ class CoordinatesSolverBenchmark {
 
         private fun isValid(steps: List<Coordinate>): Boolean {
             counter++
-            val (x, y) = steps[steps.size - 1]
+            konst (x, y) = steps[steps.size - 1]
             return if (!(x == input.labyrinth.width - 1 && y == input.labyrinth.height - 1)) { // Jobb also a cel
                 false
             } else steps.containsAll(objects)
@@ -189,9 +189,9 @@ class CoordinatesSolverBenchmark {
         }
 
         private fun getPossibleSteps(now: Coordinate, previous: Coordinate?): ArrayList<Coordinate> {
-            val field = input.labyrinth.getField(now.x, now.y)
+            konst field = input.labyrinth.getField(now.x, now.y)
 
-            val possibleSteps = ArrayList<Coordinate>()
+            konst possibleSteps = ArrayList<Coordinate>()
 
             if (now.x != width - 1 && !field.eastWall()) {
                 possibleSteps.add(Coordinate(now.x + 1, now.y))
@@ -213,10 +213,10 @@ class CoordinatesSolverBenchmark {
             return possibleSteps
         }
 
-        private fun solveWithLimit(limit: Int, start: Coordinate, validFn: (List<Coordinate>) -> Boolean): List<Coordinate>? {
+        private fun solveWithLimit(limit: Int, start: Coordinate, konstidFn: (List<Coordinate>) -> Boolean): List<Coordinate>? {
             var steps: MutableList<Coordinate>? = findFirstLegitSteps(null, start, limit)
 
-            while (steps != null && !validFn(steps)) {
+            while (steps != null && !konstidFn(steps)) {
                 steps = alter(start, null, steps)
             }
 
@@ -229,8 +229,8 @@ class CoordinatesSolverBenchmark {
 
             var i = 0
             while (i < num) {
-                val prev: Coordinate?
-                val state: Coordinate
+                konst prev: Coordinate?
+                konst state: Coordinate
 
                 if (i == 0) {
                     state = start
@@ -243,7 +243,7 @@ class CoordinatesSolverBenchmark {
                     prev = steps[i - 2]
                 }
 
-                val possibleSteps = getPossibleSteps(state, prev)
+                konst possibleSteps = getPossibleSteps(state, prev)
 
                 if (possibleSteps.size == 0) {
                     if (steps!!.size == 0) {
@@ -260,7 +260,7 @@ class CoordinatesSolverBenchmark {
                     continue
                 }
 
-                val newStep = possibleSteps[0]
+                konst newStep = possibleSteps[0]
                 steps!!.add(newStep)
                 i++
             }
@@ -269,13 +269,13 @@ class CoordinatesSolverBenchmark {
         }
 
         private fun alter(start: Coordinate, startPrev: Coordinate?, steps: MutableList<Coordinate>): MutableList<Coordinate>? {
-            val size = steps.size
+            konst size = steps.size
 
             var i = size - 1
             while (i >= 0) {
-                val current = steps[i]
-                val prev = if (i == 0) start else steps[i - 1]
-                val prevprev: Coordinate?
+                konst current = steps[i]
+                konst prev = if (i == 0) start else steps[i - 1]
+                konst prevprev: Coordinate?
                 if (i > 1) {
                     prevprev = steps[i - 2]
                 } else if (i == 1) {
@@ -284,14 +284,14 @@ class CoordinatesSolverBenchmark {
                     prevprev = startPrev
                 }
 
-                val alternatives = getPossibleSteps(prev, prevprev)
-                val index = alternatives.indexOf(current)
+                konst alternatives = getPossibleSteps(prev, prevprev)
+                konst index = alternatives.indexOf(current)
 
                 if (index != alternatives.size - 1) {
-                    val newItem = alternatives[index + 1]
+                    konst newItem = alternatives[index + 1]
                     steps[i] = newItem
 
-                    val remainder = findFirstLegitSteps(prev, newItem, size - i - 1)
+                    konst remainder = findFirstLegitSteps(prev, newItem, size - i - 1)
                     if (remainder == null) {
                         i++
                         i--
@@ -314,9 +314,9 @@ class CoordinatesSolverBenchmark {
         }
 
         companion object {
-            private val MAZE_START = Coordinate(0, 0)
+            private konst MAZE_START = Coordinate(0, 0)
             private fun removeAfterIndexExclusive(list: MutableList<*>, index: Int) {
-                val rnum = list.size - 1 - index
+                konst rnum = list.size - 1 - index
 
                 for (i in 0 until rnum) {
                     list.removeAt(list.size - 1)
@@ -327,7 +327,7 @@ class CoordinatesSolverBenchmark {
 
     private fun readTillParsed(inputValue: String): Input? {
 
-        val parser = InputParser()
+        konst parser = InputParser()
         var input: Input? = null
         inputValue.lines().forEach { line ->
             input = parser.feedLine(line)
@@ -337,10 +337,10 @@ class CoordinatesSolverBenchmark {
     }
 
     fun solve() {
-        val output = solver.solve()
+        konst output = solver.solve()
 
         for (c in output.steps) {
-            val value = if (c == null) {
+            konst konstue = if (c == null) {
                 "felvesz"
             } else {
                 "${c.x} ${c.y}"

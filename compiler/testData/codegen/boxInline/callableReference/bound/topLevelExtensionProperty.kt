@@ -2,9 +2,9 @@
 
 package test
 
-class Foo(val z: String)
+class Foo(konst z: String)
 
-val Foo.a: String
+konst Foo.a: String
     get() = z
 
 inline fun test(s: () -> String): String {

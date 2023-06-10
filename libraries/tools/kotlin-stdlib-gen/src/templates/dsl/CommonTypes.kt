@@ -26,16 +26,16 @@ enum class Family {
     Primitives,
     Unsigned;
 
-    val isPrimitiveSpecialization: Boolean by lazy { this in primitiveSpecializations }
+    konst isPrimitiveSpecialization: Boolean by lazy { this in primitiveSpecializations }
 
-    class DocExtension(val family: Family)
-    class CodeExtension(val family: Family)
-    val doc = DocExtension(this)
-    val code = CodeExtension(this)
+    class DocExtension(konst family: Family)
+    class CodeExtension(konst family: Family)
+    konst doc = DocExtension(this)
+    konst code = CodeExtension(this)
 
     companion object {
-        val primitiveSpecializations = setOf(ArraysOfPrimitives, RangesOfPrimitives, ProgressionsOfPrimitives, Primitives)
-        val defaultFamilies = setOf(Iterables, Sequences, ArraysOfObjects, ArraysOfPrimitives)
+        konst primitiveSpecializations = setOf(ArraysOfPrimitives, RangesOfPrimitives, ProgressionsOfPrimitives, Primitives)
+        konst defaultFamilies = setOf(Iterables, Sequences, ArraysOfObjects, ArraysOfPrimitives)
     }
 }
 
@@ -54,19 +54,19 @@ enum class PrimitiveType {
     UInt,
     ULong;
 
-    val capacity by lazy { descendingByDomainCapacity.indexOf(this).let { if (it < 0) it else descendingByDomainCapacity.size - it } }
-    val capacityUnsigned by lazy { descendingByDomainCapacityUnsigned.indexOf(this).let { if (it < 0) it else descendingByDomainCapacityUnsigned.size - it } }
+    konst capacity by lazy { descendingByDomainCapacity.indexOf(this).let { if (it < 0) it else descendingByDomainCapacity.size - it } }
+    konst capacityUnsigned by lazy { descendingByDomainCapacityUnsigned.indexOf(this).let { if (it < 0) it else descendingByDomainCapacityUnsigned.size - it } }
 
     companion object {
-        val unsignedPrimitives = setOf(UInt, ULong, UByte, UShort)
-        val defaultPrimitives = PrimitiveType.values().toSet() - unsignedPrimitives
-        val numericPrimitives = setOf(Int, Long, Byte, Short, Double, Float)
-        val integralPrimitives = setOf(Int, Long, Byte, Short, Char)
-        val floatingPointPrimitives = setOf(Double, Float)
-        val rangePrimitives = setOf(Int, Long, Char, UInt, ULong)
+        konst unsignedPrimitives = setOf(UInt, ULong, UByte, UShort)
+        konst defaultPrimitives = PrimitiveType.konstues().toSet() - unsignedPrimitives
+        konst numericPrimitives = setOf(Int, Long, Byte, Short, Double, Float)
+        konst integralPrimitives = setOf(Int, Long, Byte, Short, Char)
+        konst floatingPointPrimitives = setOf(Double, Float)
+        konst rangePrimitives = setOf(Int, Long, Char, UInt, ULong)
 
-        val descendingByDomainCapacity = listOf(Double, Float, Long, Int, Short, Char, Byte)
-        val descendingByDomainCapacityUnsigned = listOf(ULong, UInt, UShort, UByte)
+        konst descendingByDomainCapacity = listOf(Double, Float, Long, Int, Short, Char, Byte)
+        konst descendingByDomainCapacityUnsigned = listOf(ULong, UInt, UShort, UByte)
 
         fun maxByCapacity(fromType: PrimitiveType, toType: PrimitiveType): PrimitiveType =
             (if (fromType in unsignedPrimitives) descendingByDomainCapacityUnsigned else descendingByDomainCapacity)
@@ -117,7 +117,7 @@ enum class Backend {
     Wasm,
 }
 
-enum class KotlinTarget(val platform: Platform, val backend: Backend) {
+enum class KotlinTarget(konst platform: Platform, konst backend: Backend) {
     Common(Platform.Common, Backend.Any),
     JVM(Platform.JVM, Backend.Any),
     JS(Platform.JS, Backend.Legacy),
@@ -125,10 +125,10 @@ enum class KotlinTarget(val platform: Platform, val backend: Backend) {
     WASM(Platform.Native, Backend.Wasm),
     Native(Platform.Native, Backend.IR);
 
-    val fullName get() = "Kotlin/$name"
+    konst fullName get() = "Kotlin/$name"
 
     companion object {
-        val values = KotlinTarget.values().toList()
+        konst konstues = KotlinTarget.konstues().toList()
     }
 }
 
@@ -140,10 +140,10 @@ enum class SequenceClass {
 }
 
 data class Deprecation(
-    val message: String, val replaceWith: String? = null, val level: DeprecationLevel = DeprecationLevel.WARNING,
-    val warningSince: String? = null, val errorSince: String? = null, val hiddenSince: String? = null)
-val forBinaryCompatibility = Deprecation("Provided for binary compatibility", level = DeprecationLevel.HIDDEN)
+    konst message: String, konst replaceWith: String? = null, konst level: DeprecationLevel = DeprecationLevel.WARNING,
+    konst warningSince: String? = null, konst errorSince: String? = null, konst hiddenSince: String? = null)
+konst forBinaryCompatibility = Deprecation("Provided for binary compatibility", level = DeprecationLevel.HIDDEN)
 
-data class ThrowsException(val exceptionType: String, val reason: String)
+data class ThrowsException(konst exceptionType: String, konst reason: String)
 
 fun String.ifOrEmpty(condition: Boolean): String = if (condition) this else ""

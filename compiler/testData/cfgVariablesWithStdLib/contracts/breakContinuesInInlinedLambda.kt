@@ -13,7 +13,7 @@ inline fun <T> myRun(block: () -> T): T {
 fun getBoolean(): Boolean = false
 
 fun test() {
-    val x: Int
+    konst x: Int
 
     if (getBoolean())
         myRun {

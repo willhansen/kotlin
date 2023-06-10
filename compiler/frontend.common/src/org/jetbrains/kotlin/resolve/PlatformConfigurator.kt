@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.resolve
 import org.jetbrains.kotlin.container.StorageComponentContainer
 
 interface PlatformConfigurator {
-    val platformSpecificContainer: StorageComponentContainer
+    konst platformSpecificContainer: StorageComponentContainer
     fun configureModuleComponents(container: StorageComponentContainer)
     fun configureModuleDependentCheckers(container: StorageComponentContainer)
 }

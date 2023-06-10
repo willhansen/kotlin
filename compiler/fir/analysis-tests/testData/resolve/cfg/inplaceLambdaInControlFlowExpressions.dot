@@ -78,7 +78,7 @@ digraph inplaceLambdaInControlFlowExpressions_kt {
                 33 [label="Exit when branch result"];
                 34 [label="Exit when"];
             }
-            35 [label="Variable declaration: lval x: R|kotlin/String|"];
+            35 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             36 [label="Exit block"];
         }
         37 [label="Exit function test_1" style="filled" fillcolor=red];
@@ -162,7 +162,7 @@ digraph inplaceLambdaInControlFlowExpressions_kt {
                 }
                 59 [label="Try expression exit"];
             }
-            60 [label="Variable declaration: lval x: R|kotlin/String|"];
+            60 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             61 [label="Exit block"];
         }
         62 [label="Exit function test_2" style="filled" fillcolor=red];
@@ -216,7 +216,7 @@ digraph inplaceLambdaInControlFlowExpressions_kt {
             71 [label="Postponed exit from lambda"];
             72 [label="Function call: R|kotlin/run|<R|kotlin/String?|>(...)" style="filled" fillcolor=yellow];
             73 [label="Check not null: R|kotlin/run|<R|kotlin/String?|>(...)!!" style="filled" fillcolor=yellow];
-            74 [label="Variable declaration: lval x: R|kotlin/String|"];
+            74 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             75 [label="Exit block"];
         }
         76 [label="Exit function test_3" style="filled" fillcolor=red];

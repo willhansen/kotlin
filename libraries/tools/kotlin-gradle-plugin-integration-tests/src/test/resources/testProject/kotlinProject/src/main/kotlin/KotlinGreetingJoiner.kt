@@ -3,15 +3,15 @@ package demo
 import com.google.common.base.Joiner
 import java.util.ArrayList
 
-class KotlinGreetingJoiner(val greeter: Greeter) {
-    val names = ArrayList<String?>()
+class KotlinGreetingJoiner(konst greeter: Greeter) {
+    konst names = ArrayList<String?>()
 
     fun addName(name: String?): Unit {
         names.add(name)
     }
 
     fun getJoinedGreeting(): String? {
-        val joiner = Joiner.on(" and ").skipNulls();
+        konst joiner = Joiner.on(" and ").skipNulls();
         return "${greeter.greeting} ${joiner.join(names)}"
     }
 }

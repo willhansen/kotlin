@@ -5,7 +5,7 @@
 package org.jetbrains.kotlin.backend.konan
 
 // Must match `WorkerExceptionHandling` in CompilerConstants.hpp
-enum class WorkerExceptionHandling(val value: Int) {
+enum class WorkerExceptionHandling(konst konstue: Int) {
     LEGACY(0),
     USE_HOOK(1),
 }

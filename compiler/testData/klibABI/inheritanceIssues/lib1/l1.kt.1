@@ -4,16 +4,16 @@ class InterfaceToFinalClass
 annotation class InterfaceToAnnotationClass
 object InterfaceToObject
 enum class InterfaceToEnumClass
-value class InterfaceToValueClass(val x: Int)
-data class InterfaceToDataClass(val x: Int)
+konstue class InterfaceToValueClass(konst x: Int)
+data class InterfaceToDataClass(konst x: Int)
 
-final class OpenClassToFinalClass(val x: Int)
-annotation class OpenClassToAnnotationClass(val x: Int)
-object OpenClassToObject { val x: Int = 42 }
-enum class OpenClassToEnumClass(val x: Int)
-value class OpenClassToValueClass(val x: Int)
-data class OpenClassToDataClass(val x: Int)
-interface OpenClassToInterface { val x: Int }
+final class OpenClassToFinalClass(konst x: Int)
+annotation class OpenClassToAnnotationClass(konst x: Int)
+object OpenClassToObject { konst x: Int = 42 }
+enum class OpenClassToEnumClass(konst x: Int)
+konstue class OpenClassToValueClass(konst x: Int)
+data class OpenClassToDataClass(konst x: Int)
+interface OpenClassToInterface { konst x: Int }
 
 abstract class InterfaceToAbstractClass1
 abstract class InterfaceToAbstractClass2
@@ -22,32 +22,32 @@ abstract class AbstractClass
 //interface RemovedInterface {
 //    fun abstractFun(): String
 //    fun abstractFunWithDefaultImpl(): String = "RemovedInterface.abstractFunWithDefaultImpl"
-//    val abstractVal: String
-//    val abstractValWithDefaultImpl: String get() = "RemovedInterface.abstractValWithDefaultImpl"
+//    konst abstractVal: String
+//    konst abstractValWithDefaultImpl: String get() = "RemovedInterface.abstractValWithDefaultImpl"
 //}
 //
 //abstract class RemovedAbstractClass {
 //    abstract fun abstractFun(): String
 //    open fun openFun(): String = "RemovedAbstractClass.openFun"
 //    fun finalFun(): String = "RemovedAbstractClass.finalFun"
-//    abstract val abstractVal: String
-//    open val openVal: String get() = "RemovedAbstractClass.openVal"
-//    val finalVal: String get() = "RemovedAbstractClass.finalVal"
+//    abstract konst abstractVal: String
+//    open konst openVal: String get() = "RemovedAbstractClass.openVal"
+//    konst finalVal: String get() = "RemovedAbstractClass.finalVal"
 //}
 //
 //open class RemovedOpenClass {
 //    open fun openFun(): String = "RemovedOpenClass.openFun"
 //    fun finalFun(): String = "RemovedOpenClass.finalFun"
-//    open val openVal: String get() = "RemovedOpenClass.openVal"
-//    val finalVal: String get() = "RemovedOpenClass.finalVal"
+//    open konst openVal: String get() = "RemovedOpenClass.openVal"
+//    konst finalVal: String get() = "RemovedOpenClass.finalVal"
 //}
 
 abstract class AbstractClassWithChangedConstructorSignature(name: String, city: String) {
-    val greeting = "Hello, $name from $city!"
+    konst greeting = "Hello, $name from $city!"
 }
 
 open class OpenClassWithChangedConstructorSignature(name: String, city: String) {
-    val greeting = "Hello, $name from $city!"
+    konst greeting = "Hello, $name from $city!"
 }
 
 open class SuperSuperClass {

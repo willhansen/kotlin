@@ -2,7 +2,7 @@
 // KJS_WITH_FULL_RUNTIME
 // FILE: 1.kt
 
-class My(val value: Int)
+class My(konst konstue: Int)
 
 inline fun <T, R> T.perform(job: (T)-> R) : R {
     return job(this)
@@ -13,9 +13,9 @@ public inline fun String.toInt2() : Int = this.toInt()
 // FILE: 2.kt
 
 fun test1() : Int {
-    val inlineX = My(111)
+    konst inlineX = My(111)
     var result = 0
-    val res = inlineX.perform<My, Int>{
+    konst res = inlineX.perform<My, Int>{
 
         try {
             throw RuntimeException()
@@ -29,8 +29,8 @@ fun test1() : Int {
 }
 
 fun test11() : Int {
-    val inlineX = My(111)
-    val res = inlineX.perform<My, Int>{
+    konst inlineX = My(111)
+    konst res = inlineX.perform<My, Int>{
         try {
             throw RuntimeException()
         } catch (e: RuntimeException) {
@@ -43,9 +43,9 @@ fun test11() : Int {
 
 fun test2() : Int {
     try {
-        val inlineX = My(111)
+        konst inlineX = My(111)
         var result = 0
-        val res = inlineX.perform<My, Int>{
+        konst res = inlineX.perform<My, Int>{
             try {
                 throw RuntimeException("-1")
             } catch (e: RuntimeException) {

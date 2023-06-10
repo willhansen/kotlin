@@ -1,9 +1,9 @@
 package
 
-public val w: kotlin.reflect.KFunction1<() -> kotlin.Unit, Foo>
-public val x: kotlin.reflect.KFunction1<() -> kotlin.Unit, Foo>
-public val y: Foo
-public val z: kotlin.reflect.KFunction1<() -> kotlin.Unit, java.lang.Runnable>
+public konst w: kotlin.reflect.KFunction1<() -> kotlin.Unit, Foo>
+public konst x: kotlin.reflect.KFunction1<() -> kotlin.Unit, Foo>
+public konst y: Foo
+public konst z: kotlin.reflect.KFunction1<() -> kotlin.Unit, java.lang.Runnable>
 public fun </*0*/ T> id(/*0*/ t: T): T
 
 public fun interface Foo {

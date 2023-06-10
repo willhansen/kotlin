@@ -17,17 +17,17 @@ enum class Kind {
     GLOBAL
 }
 
-class Internal(val value: String)
+class Internal(konst konstue: String)
 
-class External(val value: String)
+class External(konst konstue: String)
 
-class Global(val value: String)
+class Global(konst konstue: String)
 
 fun test1(intKind: Kind, extKind: Kind): Global {
 
     var externalResult = doCall ext@ {
 
-        val internalResult = doCall int@ {
+        konst internalResult = doCall int@ {
             if (intKind == Kind.GLOBAL) {
                 return@test1 Global("internal -> global")
             } else if (intKind == EXTERNAL) {
@@ -40,40 +40,40 @@ fun test1(intKind: Kind, extKind: Kind): Global {
             return Global("external -> global")
         }
 
-        External(internalResult.value + ": external -> local");
+        External(internalResult.konstue + ": external -> local");
     }
 
-    return Global(externalResult.value + ": exit")
+    return Global(externalResult.konstue + ": exit")
 }
 
 fun box(): String {
-    var test1 = test1(LOCAL, LOCAL).value
+    var test1 = test1(LOCAL, LOCAL).konstue
     if (test1 != "internal -> local: external -> local: exit") return "test1: ${test1}"
 
-    test1 = test1(EXTERNAL, LOCAL).value
+    test1 = test1(EXTERNAL, LOCAL).konstue
     if (test1 != "internal -> external: exit") return "test2: ${test1}"
 
-    test1 = test1(GLOBAL, LOCAL).value
+    test1 = test1(GLOBAL, LOCAL).konstue
     if (test1 != "internal -> global") return "test3: ${test1}"
 
 
-    test1 = test1(LOCAL, EXTERNAL).value
+    test1 = test1(LOCAL, EXTERNAL).konstue
     if (test1 != "external -> global") return "test4: ${test1}"
 
-    test1 = test1(EXTERNAL, EXTERNAL).value
+    test1 = test1(EXTERNAL, EXTERNAL).konstue
     if (test1 != "internal -> external: exit") return "test5: ${test1}"
 
-    test1 = test1(GLOBAL, EXTERNAL).value
+    test1 = test1(GLOBAL, EXTERNAL).konstue
     if (test1 != "internal -> global") return "test6: ${test1}"
 
 
-    test1 = test1(LOCAL, GLOBAL).value
+    test1 = test1(LOCAL, GLOBAL).konstue
     if (test1 != "external -> global") return "test7: ${test1}"
 
-    test1 = test1(EXTERNAL, GLOBAL).value
+    test1 = test1(EXTERNAL, GLOBAL).konstue
     if (test1 != "internal -> external: exit") return "test8: ${test1}"
 
-    test1 = test1(GLOBAL, GLOBAL).value
+    test1 = test1(GLOBAL, GLOBAL).konstue
     if (test1 != "internal -> global") return "test9: ${test1}"
 
 

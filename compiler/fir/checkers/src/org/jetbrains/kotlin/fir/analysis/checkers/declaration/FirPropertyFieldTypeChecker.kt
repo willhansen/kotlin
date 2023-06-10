@@ -19,13 +19,13 @@ import org.jetbrains.kotlin.fir.types.*
 
 object FirPropertyFieldTypeChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val backingField = declaration.backingField ?: return
+        konst backingField = declaration.backingField ?: return
 
         if (!declaration.hasExplicitBackingField) {
             return
         }
 
-        val typeCheckerContext = context.session.typeContext.newTypeCheckerState(
+        konst typeCheckerContext = context.session.typeContext.newTypeCheckerState(
             errorTypesEqualToAnything = false,
             stubTypesEqualToAnything = false
         )
@@ -66,13 +66,13 @@ object FirPropertyFieldTypeChecker : FirPropertyChecker() {
         }
     }
 
-    private val FirBackingField.isNullable
-        get() = when (val type = returnTypeRef.coneType) {
+    private konst FirBackingField.isNullable
+        get() = when (konst type = returnTypeRef.coneType) {
             is ConeTypeParameterType -> type.isNullable || type.lookupTag.typeParameterSymbol.resolvedBounds.any { it.coneType.isNullable }
             else -> type.isNullable
         }
 
-    private val FirPropertyAccessor?.isNotExplicit
+    private konst FirPropertyAccessor?.isNotExplicit
         get() = this == null || this is FirDefaultPropertyAccessor
 
     private fun checkAsPropertyNotSubtype(

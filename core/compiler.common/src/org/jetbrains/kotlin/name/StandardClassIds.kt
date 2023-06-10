@@ -8,21 +8,21 @@ package org.jetbrains.kotlin.name
 import org.jetbrains.kotlin.builtins.StandardNames
 
 object StandardClassIds {
-    val BASE_KOTLIN_PACKAGE = FqName("kotlin")
-    val BASE_REFLECT_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("reflect"))
-    val BASE_COLLECTIONS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("collections"))
-    val BASE_RANGES_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("ranges"))
-    val BASE_JVM_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("jvm"))
-    val BASE_JVM_INTERNAL_PACKAGE = BASE_JVM_PACKAGE.child(Name.identifier("internal"))
-    val BASE_ANNOTATION_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("annotation"))
-    val BASE_INTERNAL_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("internal"))
-    val BASE_INTERNAL_IR_PACKAGE = BASE_INTERNAL_PACKAGE.child(Name.identifier("ir"))
-    val BASE_COROUTINES_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("coroutines"))
-    val BASE_ENUMS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("enums"))
-    val BASE_CONTRACTS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("contracts"))
-    val BASE_CONCURRENT_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("concurrent"))
+    konst BASE_KOTLIN_PACKAGE = FqName("kotlin")
+    konst BASE_REFLECT_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("reflect"))
+    konst BASE_COLLECTIONS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("collections"))
+    konst BASE_RANGES_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("ranges"))
+    konst BASE_JVM_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("jvm"))
+    konst BASE_JVM_INTERNAL_PACKAGE = BASE_JVM_PACKAGE.child(Name.identifier("internal"))
+    konst BASE_ANNOTATION_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("annotation"))
+    konst BASE_INTERNAL_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("internal"))
+    konst BASE_INTERNAL_IR_PACKAGE = BASE_INTERNAL_PACKAGE.child(Name.identifier("ir"))
+    konst BASE_COROUTINES_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("coroutines"))
+    konst BASE_ENUMS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("enums"))
+    konst BASE_CONTRACTS_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("contracts"))
+    konst BASE_CONCURRENT_PACKAGE = BASE_KOTLIN_PACKAGE.child(Name.identifier("concurrent"))
 
-    val builtInsPackages = setOf(
+    konst builtInsPackages = setOf(
         BASE_KOTLIN_PACKAGE,
         BASE_COLLECTIONS_PACKAGE,
         BASE_RANGES_PACKAGE,
@@ -32,65 +32,65 @@ object StandardClassIds {
         BASE_COROUTINES_PACKAGE
     )
 
-    val Nothing = "Nothing".baseId()
-    val Unit = "Unit".baseId()
-    val Any = "Any".baseId()
-    val Enum = "Enum".baseId()
-    val Annotation = "Annotation".baseId()
-    val Array = "Array".baseId()
+    konst Nothing = "Nothing".baseId()
+    konst Unit = "Unit".baseId()
+    konst Any = "Any".baseId()
+    konst Enum = "Enum".baseId()
+    konst Annotation = "Annotation".baseId()
+    konst Array = "Array".baseId()
 
-    val Boolean = "Boolean".baseId()
-    val Char = "Char".baseId()
-    val Byte = "Byte".baseId()
-    val Short = "Short".baseId()
-    val Int = "Int".baseId()
-    val Long = "Long".baseId()
-    val Float = "Float".baseId()
-    val Double = "Double".baseId()
+    konst Boolean = "Boolean".baseId()
+    konst Char = "Char".baseId()
+    konst Byte = "Byte".baseId()
+    konst Short = "Short".baseId()
+    konst Int = "Int".baseId()
+    konst Long = "Long".baseId()
+    konst Float = "Float".baseId()
+    konst Double = "Double".baseId()
 
-    val UByte = Byte.unsignedId()
-    val UShort = Short.unsignedId()
-    val UInt = Int.unsignedId()
-    val ULong = Long.unsignedId()
+    konst UByte = Byte.unsignedId()
+    konst UShort = Short.unsignedId()
+    konst UInt = Int.unsignedId()
+    konst ULong = Long.unsignedId()
 
-    val CharSequence = "CharSequence".baseId()
-    val String = "String".baseId()
-    val Throwable = "Throwable".baseId()
+    konst CharSequence = "CharSequence".baseId()
+    konst String = "String".baseId()
+    konst Throwable = "Throwable".baseId()
 
-    val Cloneable = "Cloneable".baseId()
+    konst Cloneable = "Cloneable".baseId()
 
-    val KProperty = "KProperty".reflectId()
-    val KMutableProperty = "KMutableProperty".reflectId()
-    val KProperty0 = "KProperty0".reflectId()
-    val KMutableProperty0 = "KMutableProperty0".reflectId()
-    val KProperty1 = "KProperty1".reflectId()
-    val KMutableProperty1 = "KMutableProperty1".reflectId()
-    val KProperty2 = "KProperty2".reflectId()
-    val KMutableProperty2 = "KMutableProperty2".reflectId()
-    val KFunction = "KFunction".reflectId()
-    val KClass = "KClass".reflectId()
-    val KCallable = "KCallable".reflectId()
+    konst KProperty = "KProperty".reflectId()
+    konst KMutableProperty = "KMutableProperty".reflectId()
+    konst KProperty0 = "KProperty0".reflectId()
+    konst KMutableProperty0 = "KMutableProperty0".reflectId()
+    konst KProperty1 = "KProperty1".reflectId()
+    konst KMutableProperty1 = "KMutableProperty1".reflectId()
+    konst KProperty2 = "KProperty2".reflectId()
+    konst KMutableProperty2 = "KMutableProperty2".reflectId()
+    konst KFunction = "KFunction".reflectId()
+    konst KClass = "KClass".reflectId()
+    konst KCallable = "KCallable".reflectId()
 
-    val Comparable = "Comparable".baseId()
-    val Number = "Number".baseId()
+    konst Comparable = "Comparable".baseId()
+    konst Number = "Number".baseId()
 
-    val Function = "Function".baseId()
+    konst Function = "Function".baseId()
 
     fun byName(name: String) = name.baseId()
     fun reflectByName(name: String) = name.reflectId()
 
-    val primitiveTypes = setOf(Boolean, Char, Byte, Short, Int, Long, Float, Double)
+    konst primitiveTypes = setOf(Boolean, Char, Byte, Short, Int, Long, Float, Double)
 
-    val primitiveArrayTypeByElementType = primitiveTypes.associateWith { id -> id.shortClassName.primitiveArrayId() }
-    val elementTypeByPrimitiveArrayType = primitiveArrayTypeByElementType.inverseMap()
+    konst primitiveArrayTypeByElementType = primitiveTypes.associateWith { id -> id.shortClassName.primitiveArrayId() }
+    konst elementTypeByPrimitiveArrayType = primitiveArrayTypeByElementType.inverseMap()
 
-    val unsignedTypes = setOf(UByte, UShort, UInt, ULong)
-    val unsignedArrayTypeByElementType = unsignedTypes.associateWith { id -> id.shortClassName.primitiveArrayId() }
-    val elementTypeByUnsignedArrayType = unsignedArrayTypeByElementType.inverseMap()
+    konst unsignedTypes = setOf(UByte, UShort, UInt, ULong)
+    konst unsignedArrayTypeByElementType = unsignedTypes.associateWith { id -> id.shortClassName.primitiveArrayId() }
+    konst elementTypeByUnsignedArrayType = unsignedArrayTypeByElementType.inverseMap()
 
-    val constantAllowedTypes = primitiveTypes + unsignedTypes + String
+    konst constantAllowedTypes = primitiveTypes + unsignedTypes + String
 
-    val Continuation = "Continuation".coroutinesId()
+    konst Continuation = "Continuation".coroutinesId()
 
     @Suppress("FunctionName")
     fun FunctionN(n: Int): ClassId {
@@ -112,127 +112,127 @@ object StandardClassIds {
         return "KSuspendFunction$n".reflectId()
     }
 
-    val Iterator = "Iterator".collectionsId()
-    val Iterable = "Iterable".collectionsId()
-    val Collection = "Collection".collectionsId()
-    val List = "List".collectionsId()
-    val ListIterator = "ListIterator".collectionsId()
-    val Set = "Set".collectionsId()
-    val Map = "Map".collectionsId()
-    val MutableIterator = "MutableIterator".collectionsId()
-    val CharIterator = "CharIterator".collectionsId()
+    konst Iterator = "Iterator".collectionsId()
+    konst Iterable = "Iterable".collectionsId()
+    konst Collection = "Collection".collectionsId()
+    konst List = "List".collectionsId()
+    konst ListIterator = "ListIterator".collectionsId()
+    konst Set = "Set".collectionsId()
+    konst Map = "Map".collectionsId()
+    konst MutableIterator = "MutableIterator".collectionsId()
+    konst CharIterator = "CharIterator".collectionsId()
 
-    val MutableIterable = "MutableIterable".collectionsId()
-    val MutableCollection = "MutableCollection".collectionsId()
-    val MutableList = "MutableList".collectionsId()
-    val MutableListIterator = "MutableListIterator".collectionsId()
-    val MutableSet = "MutableSet".collectionsId()
-    val MutableMap = "MutableMap".collectionsId()
+    konst MutableIterable = "MutableIterable".collectionsId()
+    konst MutableCollection = "MutableCollection".collectionsId()
+    konst MutableList = "MutableList".collectionsId()
+    konst MutableListIterator = "MutableListIterator".collectionsId()
+    konst MutableSet = "MutableSet".collectionsId()
+    konst MutableMap = "MutableMap".collectionsId()
 
-    val MapEntry = Map.createNestedClassId(Name.identifier("Entry"))
-    val MutableMapEntry = MutableMap.createNestedClassId(Name.identifier("MutableEntry"))
+    konst MapEntry = Map.createNestedClassId(Name.identifier("Entry"))
+    konst MutableMapEntry = MutableMap.createNestedClassId(Name.identifier("MutableEntry"))
 
-    val Result = "Result".baseId()
+    konst Result = "Result".baseId()
 
-    val IntRange = "IntRange".rangesId()
-    val LongRange = "LongRange".rangesId()
-    val CharRange = "CharRange".rangesId()
+    konst IntRange = "IntRange".rangesId()
+    konst LongRange = "LongRange".rangesId()
+    konst CharRange = "CharRange".rangesId()
 
-    val AnnotationRetention = "AnnotationRetention".annotationId()
-    val AnnotationTarget = "AnnotationTarget".annotationId()
-    val DeprecationLevel = "DeprecationLevel".baseId()
+    konst AnnotationRetention = "AnnotationRetention".annotationId()
+    konst AnnotationTarget = "AnnotationTarget".annotationId()
+    konst DeprecationLevel = "DeprecationLevel".baseId()
 
-    val EnumEntries = "EnumEntries".enumsId()
+    konst EnumEntries = "EnumEntries".enumsId()
 
     object Annotations {
-        val Suppress = "Suppress".baseId()
-        val PublishedApi = "PublishedApi".baseId()
-        val SinceKotlin = "SinceKotlin".baseId()
-        val ExtensionFunctionType = "ExtensionFunctionType".baseId()
-        val ContextFunctionTypeParams = "ContextFunctionTypeParams".baseId()
-        val Deprecated = "Deprecated".baseId()
-        val DeprecatedSinceKotlin = "DeprecatedSinceKotlin".baseId()
+        konst Suppress = "Suppress".baseId()
+        konst PublishedApi = "PublishedApi".baseId()
+        konst SinceKotlin = "SinceKotlin".baseId()
+        konst ExtensionFunctionType = "ExtensionFunctionType".baseId()
+        konst ContextFunctionTypeParams = "ContextFunctionTypeParams".baseId()
+        konst Deprecated = "Deprecated".baseId()
+        konst DeprecatedSinceKotlin = "DeprecatedSinceKotlin".baseId()
 
-        val HidesMembers = "HidesMembers".internalId()
-        val DynamicExtension = "DynamicExtension".internalId()
+        konst HidesMembers = "HidesMembers".internalId()
+        konst DynamicExtension = "DynamicExtension".internalId()
 
-        val Retention = "Retention".annotationId()
-        val Target = "Target".annotationId()
-        val Repeatable = "Repeatable".annotationId()
-        val MustBeDocumented = "MustBeDocumented".annotationId()
+        konst Retention = "Retention".annotationId()
+        konst Target = "Target".annotationId()
+        konst Repeatable = "Repeatable".annotationId()
+        konst MustBeDocumented = "MustBeDocumented".annotationId()
 
-        val JvmStatic = "JvmStatic".jvmId()
-        val JvmName = "JvmName".jvmId()
-        val JvmField = "JvmField".jvmId()
-        val JvmDefault = "JvmDefault".jvmId()
-        val JvmRepeatable = "JvmRepeatable".jvmId()
-        val JvmRecord = "JvmRecord".jvmId()
-        val JvmVolatile = "Volatile".jvmId()
-        val Throws = "Throws".jvmId()
+        konst JvmStatic = "JvmStatic".jvmId()
+        konst JvmName = "JvmName".jvmId()
+        konst JvmField = "JvmField".jvmId()
+        konst JvmDefault = "JvmDefault".jvmId()
+        konst JvmRepeatable = "JvmRepeatable".jvmId()
+        konst JvmRecord = "JvmRecord".jvmId()
+        konst JvmVolatile = "Volatile".jvmId()
+        konst Throws = "Throws".jvmId()
 
-        val Volatile = "Volatile".concurrentId()
+        konst Volatile = "Volatile".concurrentId()
 
-        val RawTypeAnnotation = "RawType".internalIrId()
-        val FlexibleNullability = "FlexibleNullability".internalIrId()
-        val FlexibleMutability = "FlexibleMutability".internalIrId()
-        val EnhancedNullability = "EnhancedNullability".jvmInternalId()
+        konst RawTypeAnnotation = "RawType".internalIrId()
+        konst FlexibleNullability = "FlexibleNullability".internalIrId()
+        konst FlexibleMutability = "FlexibleMutability".internalIrId()
+        konst EnhancedNullability = "EnhancedNullability".jvmInternalId()
 
-        val InlineOnly = "InlineOnly".internalId()
+        konst InlineOnly = "InlineOnly".internalId()
 
-        val OnlyInputTypes = "OnlyInputTypes".internalId()
+        konst OnlyInputTypes = "OnlyInputTypes".internalId()
 
-        val RestrictsSuspension = "RestrictsSuspension".coroutinesId()
+        konst RestrictsSuspension = "RestrictsSuspension".coroutinesId()
 
-        val WasExperimental = "WasExperimental".baseId()
+        konst WasExperimental = "WasExperimental".baseId()
 
-        val AccessibleLateinitPropertyLiteral = "AccessibleLateinitPropertyLiteral".internalId()
+        konst AccessibleLateinitPropertyLiteral = "AccessibleLateinitPropertyLiteral".internalId()
 
         object Java {
-            val Deprecated = "Deprecated".javaLangId()
-            val Repeatable = "Repeatable".javaAnnotationId()
-            val Retention = "Retention".javaAnnotationId()
-            val Documented = "Documented".javaAnnotationId()
-            val Target = "Target".javaAnnotationId()
-            val ElementType = "ElementType".javaAnnotationId()
-            val RetentionPolicy = "RetentionPolicy".javaAnnotationId()
+            konst Deprecated = "Deprecated".javaLangId()
+            konst Repeatable = "Repeatable".javaAnnotationId()
+            konst Retention = "Retention".javaAnnotationId()
+            konst Documented = "Documented".javaAnnotationId()
+            konst Target = "Target".javaAnnotationId()
+            konst ElementType = "ElementType".javaAnnotationId()
+            konst RetentionPolicy = "RetentionPolicy".javaAnnotationId()
         }
 
         object ParameterNames {
-            val value = Name.identifier("value")
+            konst konstue = Name.identifier("konstue")
 
-            val retentionValue = value
-            val targetAllowedTargets = Name.identifier("allowedTargets")
+            konst retentionValue = konstue
+            konst targetAllowedTargets = Name.identifier("allowedTargets")
 
-            val sinceKotlinVersion = Name.identifier("version")
+            konst sinceKotlinVersion = Name.identifier("version")
 
-            val deprecatedMessage = Name.identifier("message")
-            val deprecatedLevel = Name.identifier("level")
+            konst deprecatedMessage = Name.identifier("message")
+            konst deprecatedLevel = Name.identifier("level")
 
-            val deprecatedSinceKotlinWarningSince = Name.identifier("warningSince")
-            val deprecatedSinceKotlinErrorSince = Name.identifier("errorSince")
-            val deprecatedSinceKotlinHiddenSince = Name.identifier("hiddenSince")
+            konst deprecatedSinceKotlinWarningSince = Name.identifier("warningSince")
+            konst deprecatedSinceKotlinErrorSince = Name.identifier("errorSince")
+            konst deprecatedSinceKotlinHiddenSince = Name.identifier("hiddenSince")
 
-            val parameterNameName = StandardNames.NAME
+            konst parameterNameName = StandardNames.NAME
         }
     }
 
     object Callables {
-        val suspend = "suspend".callableId(BASE_KOTLIN_PACKAGE)
-        val coroutineContext = "coroutineContext".callableId(BASE_COROUTINES_PACKAGE)
+        konst suspend = "suspend".callableId(BASE_KOTLIN_PACKAGE)
+        konst coroutineContext = "coroutineContext".callableId(BASE_COROUTINES_PACKAGE)
 
-        val clone = "clone".callableId(Cloneable)
+        konst clone = "clone".callableId(Cloneable)
 
-        val not = "not".callableId(Boolean)
+        konst not = "not".callableId(Boolean)
 
-        val contract = "contract".callableId(BASE_CONTRACTS_PACKAGE)
+        konst contract = "contract".callableId(BASE_CONTRACTS_PACKAGE)
     }
 
     object Java {
-        val Record = "Record".javaLangId()
+        konst Record = "Record".javaLangId()
     }
 
     object Collections {
-        val baseCollectionToMutableEquivalent: Map<ClassId, ClassId> = mapOf(
+        konst baseCollectionToMutableEquikonstent: Map<ClassId, ClassId> = mapOf(
             StandardClassIds.Iterable to StandardClassIds.MutableIterable,
             StandardClassIds.Iterator to StandardClassIds.MutableIterator,
             StandardClassIds.ListIterator to StandardClassIds.MutableListIterator,
@@ -243,8 +243,8 @@ object StandardClassIds {
             StandardClassIds.MapEntry to StandardClassIds.MutableMapEntry
         )
 
-        val mutableCollectionToBaseCollection: Map<ClassId, ClassId> =
-            baseCollectionToMutableEquivalent.entries.associateBy({ it.value }) { it.key }
+        konst mutableCollectionToBaseCollection: Map<ClassId, ClassId> =
+            baseCollectionToMutableEquikonstent.entries.associateBy({ it.konstue }) { it.key }
     }
 }
 
@@ -266,8 +266,8 @@ private fun String.concurrentId() = ClassId(StandardClassIds.BASE_CONCURRENT_PAC
 private fun String.callableId(packageName: FqName) = CallableId(packageName, Name.identifier(this))
 private fun String.callableId(classId: ClassId) = CallableId(classId, Name.identifier(this))
 
-private val JAVA_LANG_PACKAGE = FqName("java.lang")
-private val JAVA_LANG_ANNOTATION_PACKAGE = JAVA_LANG_PACKAGE.child(Name.identifier("annotation"))
+private konst JAVA_LANG_PACKAGE = FqName("java.lang")
+private konst JAVA_LANG_ANNOTATION_PACKAGE = JAVA_LANG_PACKAGE.child(Name.identifier("annotation"))
 
 private fun String.javaLangId() = ClassId(JAVA_LANG_PACKAGE, Name.identifier(this))
 private fun String.javaAnnotationId() = ClassId(JAVA_LANG_ANNOTATION_PACKAGE, Name.identifier(this))

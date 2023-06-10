@@ -6,7 +6,7 @@ package foo
 // CHECK_CONTAINS_NO_CALLS: testIf3
 
 inline fun if1(f: (Int) -> Int, a: Int, b: Int, c: Int): Int {
-    val result = f(a)
+    konst result = f(a)
 
     if (result == b) {
         return f(a)
@@ -35,10 +35,10 @@ inline fun if3(f: (Int) -> Int, a: Int, b: Int, c: Int): Int {
 // CHECK_LABELS_COUNT: function=testIf1 name=$l$block count=1 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=testIf1 name=$l$block_0 count=1 TARGET_BACKENDS=JS_IR
 fun testIf1(): String {
-    val test1 = if1({it}, 1, 2, 3)
+    konst test1 = if1({it}, 1, 2, 3)
     if (test1 != 3) return "testIf1: test1 fail"
 
-    val test2 = if1({it}, 2, 2, 3)
+    konst test2 = if1({it}, 2, 2, 3)
     if (test2 != 2) return "testIf1: test 2 fail"
 
     return "OK"
@@ -48,10 +48,10 @@ fun testIf1(): String {
 // CHECK_LABELS_COUNT: function=testIf2 name=$l$block count=1 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=testIf2 name=$l$block_0 count=1 TARGET_BACKENDS=JS_IR
 fun testIf2(): String {
-    val test1 = if2({it}, 1, 2, 3)
+    konst test1 = if2({it}, 1, 2, 3)
     if (test1 != 3) return "testIf2: test1 fail"
 
-    val test2 = if2({it}, 2, 2, 3)
+    konst test2 = if2({it}, 2, 2, 3)
     if (test2 != 2) return "testIf2: test 2 fail"
 
     return "OK"
@@ -61,10 +61,10 @@ fun testIf2(): String {
 // CHECK_LABELS_COUNT: function=testIf3 name=$l$block_0 count=1 TARGET_BACKENDS=JS_IR
 // CHECK_LABELS_COUNT: function=testIf3 name=$l$block_2 count=1 TARGET_BACKENDS=JS_IR
 fun testIf3(): String {
-    val test1 = if3({it}, 1, 2, 3)
+    konst test1 = if3({it}, 1, 2, 3)
     if (test1 != 3) return "testIf3: test1 fail"
 
-    val test2 = if3({it}, 2, 2, 3)
+    konst test2 = if3({it}, 2, 2, 3)
     if (test2 != 2) return "testIf3: test 2 fail"
 
     return "OK"

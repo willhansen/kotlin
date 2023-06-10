@@ -1,6 +1,6 @@
 fun box(): String {
-    val obj = object {
-        val end = "K"
+    konst obj = object {
+        konst end = "K"
 
         fun foo() = Some("O").bar()
 
@@ -8,7 +8,7 @@ fun box(): String {
             fun bar() = s + end
         }
 
-        open inner class Base(val s: String)
+        open inner class Base(konst s: String)
     }
     return obj.foo()
 }

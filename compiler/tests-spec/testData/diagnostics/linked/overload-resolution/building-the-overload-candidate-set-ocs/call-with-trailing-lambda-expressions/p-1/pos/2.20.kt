@@ -35,7 +35,7 @@ import libPackage.*
 
 
 fun case1() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: sentence3.trim; typeCall: infix extension function")!>"" trim {true}<!>
 }
 
@@ -48,6 +48,6 @@ infix fun CharSequence.trim(predicate: (Char) -> Boolean): CharSequence = TODO()
 
 
 fun case2() {
-    val regex = Regex("")
+    konst regex = Regex("")
     <!DEBUG_INFO_CALL("fqName: testPack.trim; typeCall: infix extension function")!>"" trim {true}<!>
 }

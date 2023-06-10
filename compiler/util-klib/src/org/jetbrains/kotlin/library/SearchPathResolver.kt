@@ -7,13 +7,13 @@ import org.jetbrains.kotlin.util.Logger
 import org.jetbrains.kotlin.util.WithLogger
 import org.jetbrains.kotlin.util.removeSuffixIfPresent
 import org.jetbrains.kotlin.util.suffixIfNot
-import java.nio.file.InvalidPathException
+import java.nio.file.InkonstidPathException
 import java.nio.file.Paths
 
-const val KOTLIN_STDLIB_NAME = "stdlib"
+const konst KOTLIN_STDLIB_NAME = "stdlib"
 
 interface SearchPathResolver<L : KotlinLibrary> : WithLogger {
-    val searchRoots: List<File>
+    konst searchRoots: List<File>
     fun resolutionSequence(givenPath: String): Sequence<File>
     fun resolve(unresolved: LenientUnresolvedLibrary, isDefaultLink: Boolean = false): L?
     fun resolve(unresolved: RequiredUnresolvedLibrary, isDefaultLink: Boolean = false): L
@@ -32,43 +32,43 @@ fun <L : KotlinLibrary> SearchPathResolver<L>.resolve(unresolved: UnresolvedLibr
 abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
     repositories: List<String>,
     directLibs: List<String>,
-    val distributionKlib: String?,
-    val localKotlinDir: String?,
-    val skipCurrentDir: Boolean,
-    override val logger: Logger
+    konst distributionKlib: String?,
+    konst localKotlinDir: String?,
+    konst skipCurrentDir: Boolean,
+    override konst logger: Logger
 ) : SearchPathResolver<L> {
 
-    val localHead: File?
+    konst localHead: File?
         get() = localKotlinDir?.File()?.klib
 
-    val distHead: File?
+    konst distHead: File?
         get() = distributionKlib?.File()?.child("common")
 
-    open val distPlatformHead: File? = null
+    open konst distPlatformHead: File? = null
 
-    val currentDirHead: File?
+    konst currentDirHead: File?
         get() = if (!skipCurrentDir) File.userDir else null
 
-    private val repoRoots: List<File> by lazy { repositories.map { File(it) } }
+    private konst repoRoots: List<File> by lazy { repositories.map { File(it) } }
 
     abstract fun libraryComponentBuilder(file: File, isDefault: Boolean): List<L>
 
-    private val directLibraries: List<KotlinLibrary> by lazy {
+    private konst directLibraries: List<KotlinLibrary> by lazy {
         directLibs.mapNotNull { found(File(it)) }.flatMap { libraryComponentBuilder(it, false) }
     }
 
     // This is the place where we specify the order of library search.
-    override val searchRoots: List<File> by lazy {
+    override konst searchRoots: List<File> by lazy {
         (listOf(currentDirHead) + repoRoots + listOf(localHead, distHead, distPlatformHead)).filterNotNull()
     }
 
-    private val files: Set<String> by lazy { searchRoots.flatMap { it.listFilesOrEmpty }.map { it.absolutePath }.toSet() }
+    private konst files: Set<String> by lazy { searchRoots.flatMap { it.listFilesOrEmpty }.map { it.absolutePath }.toSet() }
 
     private fun found(candidate: File): File? {
         fun check(file: File): Boolean = files.contains(file.absolutePath) || file.exists
 
-        val noSuffix = File(candidate.path.removeSuffixIfPresent(KLIB_FILE_EXTENSION_WITH_DOT))
-        val withSuffix = File(candidate.path.suffixIfNot(KLIB_FILE_EXTENSION_WITH_DOT))
+        konst noSuffix = File(candidate.path.removeSuffixIfPresent(KLIB_FILE_EXTENSION_WITH_DOT))
+        konst withSuffix = File(candidate.path.suffixIfNot(KLIB_FILE_EXTENSION_WITH_DOT))
         return when {
             check(withSuffix) -> withSuffix
             check(noSuffix) -> noSuffix
@@ -77,13 +77,13 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
     }
 
     /**
-     * Returns a [File] instance if the [path] is valid on the current file system and null otherwise.
+     * Returns a [File] instance if the [path] is konstid on the current file system and null otherwise.
      * Doesn't check whether the file denoted by [path] really exists.
      */
-    private fun validFileOrNull(path: String): File? =
+    private fun konstidFileOrNull(path: String): File? =
         try {
             File(Paths.get(path))
-        } catch (_: InvalidPathException) {
+        } catch (_: InkonstidPathException) {
             null
         }
 
@@ -107,8 +107,8 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
     }
 
     override fun resolutionSequence(givenPath: String): Sequence<File> {
-        val given = validFileOrNull(givenPath)
-        val sequence = when {
+        konst given = konstidFileOrNull(givenPath)
+        konst sequence = when {
             given == null -> {
                 // The given path can't denote a real file, so just look for such
                 // unique_name among libraries passed to the compiler directly.
@@ -118,7 +118,7 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
                 sequenceOf(found(given))
             else -> {
                 // Search among libraries in repositories by library filename.
-                val repoLibs = searchRoots.asSequence().map {
+                konst repoLibs = searchRoots.asSequence().map {
                     found(File(it, given))
                 }
                 // The given path still may denote a unique name of a direct library.
@@ -139,13 +139,13 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
 
     // Default libraries could be resolved several times during findLibraries and resolveDependencies.
     // Store already resolved libraries.
-    private inner class ResolvedLibrary(val library: L?)
+    private inner class ResolvedLibrary(konst library: L?)
 
-    private val resolvedLibraries = HashMap<UnresolvedLibrary, ResolvedLibrary>()
+    private konst resolvedLibraries = HashMap<UnresolvedLibrary, ResolvedLibrary>()
 
     private fun resolveOrNull(unresolved: UnresolvedLibrary, isDefaultLink: Boolean): L? {
         return resolvedLibraries.getOrPut(unresolved) {
-            val givenPath = unresolved.path
+            konst givenPath = unresolved.path
             try {
                 resolutionSequence(givenPath)
                     .filterOutPre_1_4_libraries()
@@ -174,11 +174,11 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
 
     override fun resolve(givenPath: String) = resolve(UnresolvedLibrary(givenPath, null), false)
 
-    private val File.klib
+    private konst File.klib
         get() = File(this, "klib")
 
     // The libraries from the default root are linked automatically.
-    val defaultRoots: List<File>
+    konst defaultRoots: List<File>
         get() = listOfNotNull(distHead, distPlatformHead).filter { it.exists }
 
     private fun getDefaultLibrariesFromDir(directory: File, prefix: String = "org.jetbrains.kotlin") =
@@ -194,7 +194,7 @@ abstract class KotlinLibrarySearchPathResolver<L : KotlinLibrary>(
 
     override fun defaultLinks(noStdLib: Boolean, noDefaultLibs: Boolean, noEndorsedLibs: Boolean): List<L> {
 
-        val result = mutableListOf<L>()
+        konst result = mutableListOf<L>()
 
         if (!noStdLib) {
             result.add(resolve(UnresolvedLibrary(KOTLIN_STDLIB_NAME, null), true))
@@ -226,16 +226,16 @@ abstract class KotlinLibraryProperResolverWithAttributes<L : KotlinLibrary>(
     distributionKlib: String?,
     localKotlinDir: String?,
     skipCurrentDir: Boolean,
-    override val logger: Logger,
-    private val knownIrProviders: List<String>
+    override konst logger: Logger,
+    private konst knownIrProviders: List<String>
 ) : KotlinLibrarySearchPathResolver<L>(repositories, directLibs, distributionKlib, localKotlinDir, skipCurrentDir, logger),
     SearchPathResolver<L> {
     override fun libraryMatch(candidate: L, unresolved: UnresolvedLibrary): Boolean {
-        val candidatePath = candidate.libraryFile.absolutePath
+        konst candidatePath = candidate.libraryFile.absolutePath
 
-        val candidateCompilerVersion = candidate.versions.compilerVersion
-        val candidateAbiVersion = candidate.versions.abiVersion
-        val candidateLibraryVersion = candidate.versions.libraryVersion
+        konst candidateCompilerVersion = candidate.versions.compilerVersion
+        konst candidateAbiVersion = candidate.versions.abiVersion
+        konst candidateLibraryVersion = candidate.versions.libraryVersion
 
         // Rejecting a library at this stage has disadvantages - the diagnostics are not-understandable.
         // Please, don't add checks for other versions here. For example, check for the metadata version should be
@@ -302,7 +302,7 @@ object CompilerSingleFileKlibResolveStrategy : SingleFileKlibResolveStrategy {
 //  The reason this strategy exists is that we shouldn't skip Native metadata-based interop libraries
 //  when generating compiler caches.
 class CompilerSingleFileKlibResolveAllowingIrProvidersStrategy(
-    private val knownIrProviders: List<String>
+    private konst knownIrProviders: List<String>
 ) : SingleFileKlibResolveStrategy {
     override fun resolve(libraryFile: File, logger: Logger) =
         SingleKlibComponentResolver(

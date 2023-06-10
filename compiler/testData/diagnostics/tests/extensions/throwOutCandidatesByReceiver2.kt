@@ -4,7 +4,7 @@ package a
 class A {}
 
 fun test(a1: A, a2: A) {
-    val range = "island".."isle"
+    konst range = "island".."isle"
 
     a1<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>..<!>a2
 }

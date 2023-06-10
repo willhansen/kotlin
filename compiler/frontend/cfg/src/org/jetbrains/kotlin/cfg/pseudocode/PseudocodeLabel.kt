@@ -21,19 +21,19 @@ import org.jetbrains.kotlin.cfg.pseudocode.instructions.Instruction
 import org.jetbrains.kotlin.psi.KtElement
 
 class PseudocodeLabel internal constructor(
-    override val pseudocode: PseudocodeImpl, override val name: String, private val comment: String?
+    override konst pseudocode: PseudocodeImpl, override konst name: String, private konst comment: String?
 ) : Label {
 
-    private val instructionList: List<Instruction> get() = pseudocode.mutableInstructionList
+    private konst instructionList: List<Instruction> get() = pseudocode.mutableInstructionList
 
-    private val correspondingElement: KtElement get() = pseudocode.correspondingElement
+    private konst correspondingElement: KtElement get() = pseudocode.correspondingElement
 
     override var targetInstructionIndex = -1
 
     override fun toString(): String = if (comment == null) name else "$name [$comment]"
 
     override fun resolveToInstruction(): Instruction {
-        val index = targetInstructionIndex
+        konst index = targetInstructionIndex
         when {
             index < 0 ->
                 error(

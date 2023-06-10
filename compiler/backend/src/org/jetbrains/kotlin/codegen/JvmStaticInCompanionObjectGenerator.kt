@@ -25,21 +25,21 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.Synthetic
 import org.jetbrains.kotlin.resolve.jvm.jvmSignature.JvmMethodSignature
 
 class JvmStaticInCompanionObjectGenerator(
-        private val descriptor: FunctionDescriptor,
-        private val declarationOrigin: JvmDeclarationOrigin,
-        private val state: GenerationState,
+        private konst descriptor: FunctionDescriptor,
+        private konst declarationOrigin: JvmDeclarationOrigin,
+        private konst state: GenerationState,
         parentBodyCodegen: ImplementationBodyCodegen
 ) : Function2<ImplementationBodyCodegen, ClassBuilder, Unit> {
-    private val typeMapper = state.typeMapper
+    private konst typeMapper = state.typeMapper
 
     init {
         parentBodyCodegen.getContext().accessibleDescriptor(JvmCodegenUtil.getDirectMember(descriptor), null)
     }
 
     override fun invoke(codegen: ImplementationBodyCodegen, classBuilder: ClassBuilder) {
-        val staticFunctionDescriptor = createStaticFunctionDescriptor(descriptor)
+        konst staticFunctionDescriptor = createStaticFunctionDescriptor(descriptor)
 
-        val originElement = declarationOrigin.element
+        konst originElement = declarationOrigin.element
         codegen.functionCodegen.generateMethod(
                 Synthetic(originElement, staticFunctionDescriptor),
                 staticFunctionDescriptor,
@@ -47,17 +47,17 @@ class JvmStaticInCompanionObjectGenerator(
                     override fun skipNotNullAssertionsForParameters(): Boolean = true
 
                     override fun doGenerateBody(codegen: ExpressionCodegen, signature: JvmMethodSignature) {
-                        val iv = codegen.v
-                        val classDescriptor = descriptor.containingDeclaration as ClassDescriptor
+                        konst iv = codegen.v
+                        konst classDescriptor = descriptor.containingDeclaration as ClassDescriptor
                         StackValue.singleton(classDescriptor, typeMapper).put(iv)
                         var index = 0
-                        val asmMethod = signature.asmMethod
+                        konst asmMethod = signature.asmMethod
                         for (paramType in asmMethod.argumentTypes) {
                             iv.load(index, paramType)
                             index += paramType.size
                         }
                         if (descriptor is PropertyAccessorDescriptor) {
-                            val propertyValue = codegen.intermediateValueForProperty(descriptor.correspondingProperty, false, null, StackValue.none())
+                            konst propertyValue = codegen.intermediateValueForProperty(descriptor.correspondingProperty, false, null, StackValue.none())
                             if (descriptor is PropertyGetterDescriptor) {
                                 propertyValue.put(signature.returnType, iv)
                             }
@@ -66,7 +66,7 @@ class JvmStaticInCompanionObjectGenerator(
                             }
                         }
                         else {
-                            val syntheticOrOriginalMethod = typeMapper.mapToCallableMethod(
+                            konst syntheticOrOriginalMethod = typeMapper.mapToCallableMethod(
                                     codegen.context.accessibleDescriptor(descriptor, /* superCallTarget = */ null),
                                     false
                             )
@@ -85,8 +85,8 @@ class JvmStaticInCompanionObjectGenerator(
     companion object {
         @JvmStatic
         fun createStaticFunctionDescriptor(descriptor: FunctionDescriptor): FunctionDescriptor {
-            val memberDescriptor = if (descriptor is PropertyAccessorDescriptor) descriptor.correspondingProperty else descriptor
-            val copies = CodegenUtil.copyFunctions(
+            konst memberDescriptor = if (descriptor is PropertyAccessorDescriptor) descriptor.correspondingProperty else descriptor
+            konst copies = CodegenUtil.copyFunctions(
                     memberDescriptor,
                     memberDescriptor,
                     descriptor.containingDeclaration.containingDeclaration!!,

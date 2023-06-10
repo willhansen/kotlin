@@ -7,7 +7,7 @@
 // FILE: lib.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val value: String)
+konstue class A(konst konstue: String)
 
 fun interface B {
     fun f(a: A): String
@@ -18,6 +18,6 @@ fun interface B {
 fun get(b: B) = b.f(A("OK"))
 
 fun box(): String {
-    val l = { a: A -> a.value }
+    konst l = { a: A -> a.konstue }
     return get(l)
 }

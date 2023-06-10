@@ -9,7 +9,7 @@ import java.io.PrintWriter
 import java.io.StringWriter
 
 internal fun Throwable.stackTraceAsString(): String {
-    val writer = StringWriter()
+    konst writer = StringWriter()
     printStackTrace(PrintWriter(writer))
     return writer.toString()
 }

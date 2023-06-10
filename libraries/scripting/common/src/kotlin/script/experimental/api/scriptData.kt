@@ -18,17 +18,17 @@ interface SourceCode {
     /**
      * The source code text
      */
-    val text: String
+    konst text: String
 
     /**
      * The script file or display name
      */
-    val name: String?
+    konst name: String?
 
     /**
      * The path or other script location identifier
      */
-    val locationId: String?
+    konst locationId: String?
 
     /**
      * The source code position
@@ -36,28 +36,28 @@ interface SourceCode {
      * @param col source code position column
      * @param absolutePos absolute source code text position, if available
      */
-    data class Position(val line: Int, val col: Int, val absolutePos: Int? = null) : Serializable
+    data class Position(konst line: Int, konst col: Int, konst absolutePos: Int? = null) : Serializable
 
     /**
      * The source code positions range
      * @param start range start position
      * @param end range end position (after the last char)
      */
-    data class Range(val start: Position, val end: Position) : Serializable
+    data class Range(konst start: Position, konst end: Position) : Serializable
 
     /**
      * The source code location, pointing either at a position or at a range
      * @param start location start position
      * @param end optional range location end position (after the last char)
      */
-    data class Location(val start: Position, val end: Position? = null) : Serializable
+    data class Location(konst start: Position, konst end: Position? = null) : Serializable
 
     /**
      * The source code location including the path to the file
      * @param codeLocationId the file path or other script location identifier (see [SourceCode.locationId])
      * @param locationInText concrete location of the source code in file
      */
-    data class LocationWithId(val codeLocationId: String, val locationInText: Location) : Serializable
+    data class LocationWithId(konst codeLocationId: String, konst locationInText: Location) : Serializable
 }
 
 /**
@@ -67,12 +67,12 @@ data class ScriptSourceAnnotation<out A : Annotation>(
     /**
      * Annotation found during script source parsing
      */
-    val annotation: A,
+    konst annotation: A,
 
     /**
      * Location of annotation is script
      */
-    val location: SourceCode.LocationWithId?
+    konst location: SourceCode.LocationWithId?
 )
 
 /**
@@ -82,14 +82,14 @@ interface ExternalSourceCode : SourceCode {
     /**
      * The source code location url
      */
-    val externalLocation: URL
+    konst externalLocation: URL
 }
 
 /**
  * The source code [range] with the the optional [name]
  */
-data class ScriptSourceNamedFragment(val name: String?, val range: SourceCode.Range) : Serializable {
-    companion object { private const val serialVersionUID: Long = 1L }
+data class ScriptSourceNamedFragment(konst name: String?, konst range: SourceCode.Range) : Serializable {
+    companion object { private const konst serialVersionUID: Long = 1L }
 }
 
 /**
@@ -111,12 +111,12 @@ class ScriptCollectedData(properties: Map<PropertiesCollection.Key<*>, Any>) : P
 /**
  * The script file-level annotations found during script source parsing
  */
-val ScriptCollectedDataKeys.foundAnnotations by PropertiesCollection.key<List<Annotation>>()
+konst ScriptCollectedDataKeys.foundAnnotations by PropertiesCollection.key<List<Annotation>>()
 
 /**
  * The script file-level annotations and their locations found during script source parsing
  */
-val ScriptCollectedDataKeys.collectedAnnotations by PropertiesCollection.key<List<ScriptSourceAnnotation<*>>>(getDefaultValue = {
+konst ScriptCollectedDataKeys.collectedAnnotations by PropertiesCollection.key<List<ScriptSourceAnnotation<*>>>(getDefaultValue = {
     get(ScriptCollectedData.foundAnnotations)?.map { ScriptSourceAnnotation(it, null) }
 })
 
@@ -124,37 +124,37 @@ val ScriptCollectedDataKeys.collectedAnnotations by PropertiesCollection.key<Lis
  * The facade to the script data for compilation configuration refinement callbacks
  */
 data class ScriptConfigurationRefinementContext(
-    val script: SourceCode,
-    val compilationConfiguration: ScriptCompilationConfiguration,
-    val collectedData: ScriptCollectedData? = null
+    konst script: SourceCode,
+    konst compilationConfiguration: ScriptCompilationConfiguration,
+    konst collectedData: ScriptCollectedData? = null
 )
 
-interface ScriptEvaluationContextDataKeys
+interface ScriptEkonstuationContextDataKeys
 
 /**
- * The container for script evaluation context data
- * Used for transferring data to the evaluation refinement callbacks
+ * The container for script ekonstuation context data
+ * Used for transferring data to the ekonstuation refinement callbacks
  */
-class ScriptEvaluationContextData(baseConfigurations: Iterable<ScriptEvaluationContextData>, body: Builder.() -> Unit = {}) :
+class ScriptEkonstuationContextData(baseConfigurations: Iterable<ScriptEkonstuationContextData>, body: Builder.() -> Unit = {}) :
     PropertiesCollection(Builder(baseConfigurations).apply(body).data) {
 
     constructor(body: Builder.() -> Unit = {}) : this(emptyList(), body)
     constructor(
-        vararg baseConfigurations: ScriptEvaluationContextData, body: Builder.() -> Unit = {}
+        vararg baseConfigurations: ScriptEkonstuationContextData, body: Builder.() -> Unit = {}
     ) : this(baseConfigurations.asIterable(), body)
 
-    class Builder internal constructor(baseConfigurations: Iterable<ScriptEvaluationContextData>) :
-        ScriptEvaluationContextDataKeys,
+    class Builder internal constructor(baseConfigurations: Iterable<ScriptEkonstuationContextData>) :
+        ScriptEkonstuationContextDataKeys,
         PropertiesCollection.Builder(baseConfigurations)
 
-    companion object : ScriptEvaluationContextDataKeys
+    companion object : ScriptEkonstuationContextDataKeys
 }
 
 /**
  * optimized alternative to the constructor with multiple base configurations
  */
-fun merge(vararg contexts: ScriptEvaluationContextData?): ScriptEvaluationContextData? {
-    val nonEmpty = ArrayList<ScriptEvaluationContextData>()
+fun merge(vararg contexts: ScriptEkonstuationContextData?): ScriptEkonstuationContextData? {
+    konst nonEmpty = ArrayList<ScriptEkonstuationContextData>()
     for (data in contexts) {
         if (data != null && !data.isEmpty()) {
             nonEmpty.add(data)
@@ -163,20 +163,20 @@ fun merge(vararg contexts: ScriptEvaluationContextData?): ScriptEvaluationContex
     return when {
         nonEmpty.isEmpty() -> null
         nonEmpty.size == 1 -> nonEmpty.first()
-        else -> ScriptEvaluationContextData(nonEmpty.asIterable())
+        else -> ScriptEkonstuationContextData(nonEmpty.asIterable())
     }
 }
 
 /**
- * Command line arguments of the current process, could be provided by an evaluation host
+ * Command line arguments of the current process, could be provided by an ekonstuation host
  */
-val ScriptEvaluationContextDataKeys.commandLineArgs by PropertiesCollection.key<List<String>>()
+konst ScriptEkonstuationContextDataKeys.commandLineArgs by PropertiesCollection.key<List<String>>()
 
 /**
- * The facade to the script data for evaluation configuration refinement callbacks
+ * The facade to the script data for ekonstuation configuration refinement callbacks
  */
-data class ScriptEvaluationConfigurationRefinementContext(
-    val compiledScript: CompiledScript,
-    val evaluationConfiguration: ScriptEvaluationConfiguration,
-    val contextData: ScriptEvaluationContextData? = null
+data class ScriptEkonstuationConfigurationRefinementContext(
+    konst compiledScript: CompiledScript,
+    konst ekonstuationConfiguration: ScriptEkonstuationConfiguration,
+    konst contextData: ScriptEkonstuationContextData? = null
 )

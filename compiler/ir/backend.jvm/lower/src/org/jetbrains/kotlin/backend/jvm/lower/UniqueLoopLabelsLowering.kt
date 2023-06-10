@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.expressions.IrLoop
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-internal val uniqueLoopLabelsPhase = makeIrFilePhase(
+internal konst uniqueLoopLabelsPhase = makeIrFilePhase(
     ::UniqueLoopLabelsLowering,
     name = "UniqueLoopLabels",
     description = "Label all loops for non-local break/continue"
 )
 
-private class UniqueLoopLabelsLowering(val context: JvmBackendContext) : FileLoweringPass {
+private class UniqueLoopLabelsLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.accept(object : IrElementVisitor<Unit, String> {
             // This counter is intentionally not local to every declaration because their names might clash.

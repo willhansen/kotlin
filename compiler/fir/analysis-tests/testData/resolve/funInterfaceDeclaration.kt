@@ -6,7 +6,7 @@
 }
 <!FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS!>fun<!> interface Test2 {}
 fun interface Test3 {
-    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>val<!> a: Int
+    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>konst<!> a: Int
     fun foo()
 }
 fun interface Test4{
@@ -33,7 +33,7 @@ fun interface Test10 : Test9 {
     fun test()
 }
 interface Test11 {
-    val a: Int
+    konst a: Int
 }
 <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>fun<!> interface Test12 : Test11 {
     fun test()

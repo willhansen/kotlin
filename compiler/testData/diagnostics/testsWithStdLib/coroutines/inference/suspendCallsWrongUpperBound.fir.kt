@@ -7,6 +7,6 @@ class Controller<T : Number> {
 
 fun <S : Number> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
-val test = <!NEW_INFERENCE_ERROR!>generate {
+konst test = <!NEW_INFERENCE_ERROR!>generate {
     yield("foo")
 }<!>

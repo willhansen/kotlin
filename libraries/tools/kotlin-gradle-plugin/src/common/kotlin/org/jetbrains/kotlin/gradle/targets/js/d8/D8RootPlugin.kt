@@ -9,7 +9,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.BasePlugin
 import org.gradle.api.tasks.Copy
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.targets.js.MultiplePluginDeclarationDetector
 import org.jetbrains.kotlin.gradle.targets.js.d8.D8RootExtension.Companion.EXTENSION_NAME
 import org.jetbrains.kotlin.gradle.tasks.CleanDataTask
@@ -26,10 +26,10 @@ open class D8RootPlugin : Plugin<Project> {
             "D8RootPlugin can be applied only to root project"
         }
 
-        val settings = project.extensions.create(EXTENSION_NAME, D8RootExtension::class.java, project)
+        konst settings = project.extensions.create(EXTENSION_NAME, D8RootExtension::class.java, project)
 
-        project.gradle.projectsEvaluated {
-            val downloadUrl = settings.requireConfigured().downloadUrl
+        project.gradle.projectsEkonstuated {
+            konst downloadUrl = settings.requireConfigured().downloadUrl
             project.repositories.ivy { repo ->
                 repo.name = "D8 Distributions at $downloadUrl"
                 repo.url = downloadUrl.toURI()
@@ -41,18 +41,18 @@ open class D8RootPlugin : Plugin<Project> {
             }
         }
 
-        val downloadTask = project.registerTask<Copy>("${TASKS_GROUP_NAME}Download") {
+        konst downloadTask = project.registerTask<Copy>("${TASKS_GROUP_NAME}Download") {
             it.group = TASKS_GROUP_NAME
             it.description = "Download local d8 version"
 
-            val env = settings.requireConfigured()
-            val configuration = project.configurations.detachedConfiguration(project.dependencies.create(env.ivyDependency))
+            konst env = settings.requireConfigured()
+            konst configuration = project.configurations.detachedConfiguration(project.dependencies.create(env.ivyDependency))
             it.from(project.provider { configuration.singleFile })
             it.into(env.zipPath.parentFile)
         }
 
         project.registerTask<Copy>(INSTALL_TASK_NAME) {
-            val env = settings.requireConfigured()
+            konst env = settings.requireConfigured()
             it.onlyIf { env.zipPath.exists() && !env.executablePath.exists() }
             it.group = TASKS_GROUP_NAME
             it.from(project.zipTree(env.zipPath))
@@ -69,8 +69,8 @@ open class D8RootPlugin : Plugin<Project> {
     }
 
     companion object {
-        const val TASKS_GROUP_NAME: String = "d8"
-        const val INSTALL_TASK_NAME: String = "${TASKS_GROUP_NAME}Install"
+        const konst TASKS_GROUP_NAME: String = "d8"
+        const konst INSTALL_TASK_NAME: String = "${TASKS_GROUP_NAME}Install"
 
         fun apply(rootProject: Project): D8RootExtension {
             check(rootProject == rootProject.rootProject)

@@ -38,32 +38,32 @@ import javax.tools.JavaFileObject
 class SymbolBasedClass(
     element: TypeElement,
     javac: JavacWrapper,
-    override val classId: ClassId?,
-    val file: JavaFileObject?
+    override konst classId: ClassId?,
+    konst file: JavaFileObject?
 ) : SymbolBasedClassifier<TypeElement>(element, javac), JavaClassWithClassId {
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(element.simpleName.toString())
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = element.isAbstract
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = element.isStatic
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = element.isFinal
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = element.getVisibility()
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
             by lazy { element.typeParameters.map { SymbolBasedTypeParameter(it, javac) } }
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = FqName(element.qualifiedName.toString())
 
-    override val supertypes: Collection<JavaClassifierType>
+    override konst supertypes: Collection<JavaClassifierType>
             by lazy {
                 arrayListOf<TypeMirror>()
                     .apply {
@@ -78,7 +78,7 @@ class SymbolBasedClass(
                     }
             }
 
-    val innerClasses: Map<Name, JavaClass>
+    konst innerClasses: Map<Name, JavaClass>
             by lazy {
                 enclosedElements
                     .filterIsInstance(TypeElement::class.java)
@@ -86,7 +86,7 @@ class SymbolBasedClass(
                     .associateBy(JavaClass::name)
             }
 
-    override val outerClass: JavaClass?
+    override konst outerClass: JavaClass?
             by lazy {
                 element.enclosingElement?.let {
                     if (it.asType().kind != TypeKind.DECLARED) null else SymbolBasedClass(
@@ -98,60 +98,60 @@ class SymbolBasedClass(
                 }
             }
 
-    override val isInterface: Boolean
+    override konst isInterface: Boolean
         get() = element.kind == ElementKind.INTERFACE
 
-    override val isAnnotationType: Boolean
+    override konst isAnnotationType: Boolean
         get() = element.kind == ElementKind.ANNOTATION_TYPE
 
-    override val isEnum: Boolean
+    override konst isEnum: Boolean
         get() = element.kind == ElementKind.ENUM
 
     // TODO
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = false
 
-    override val permittedTypes: Collection<JavaClassifierType>
+    override konst permittedTypes: Collection<JavaClassifierType>
         get() = emptyList()
 
-    override val lightClassOriginKind: LightClassOriginKind?
+    override konst lightClassOriginKind: LightClassOriginKind?
         get() = null
 
-    override val methods: Collection<JavaMethod>
+    override konst methods: Collection<JavaMethod>
         get() = enclosedElements
             .filter { it.kind == ElementKind.METHOD && !isEnumValuesOrValueOf(it as ExecutableElement) }
             .map { SymbolBasedMethod(it as ExecutableElement, this, javac) }
 
     private fun isEnumValuesOrValueOf(method: ExecutableElement): Boolean {
         return isEnum && when (method.simpleName.toString()) {
-            "values" -> method.parameters.isEmpty()
-            "valueOf" -> method.parameters.let { it.size == 1 && it.first().asType().toString() == "java.lang.String" }
+            "konstues" -> method.parameters.isEmpty()
+            "konstueOf" -> method.parameters.let { it.size == 1 && it.first().asType().toString() == "java.lang.String" }
             else -> false
         }
     }
 
-    override val fields: Collection<JavaField>
+    override konst fields: Collection<JavaField>
         get() = enclosedElements
             .filter { it.kind.isField && Name.isValidIdentifier(it.simpleName.toString()) }
             .map { SymbolBasedField(it as VariableElement, this, javac) }
 
-    override val constructors: Collection<JavaConstructor>
+    override konst constructors: Collection<JavaConstructor>
         get() = enclosedElements
             .filter { it.kind == ElementKind.CONSTRUCTOR }
             .map { SymbolBasedConstructor(it as ExecutableElement, this, javac) }
 
-    override val isRecord: Boolean
+    override konst isRecord: Boolean
         get() = false
 
-    override val recordComponents: Collection<JavaRecordComponent>
+    override konst recordComponents: Collection<JavaRecordComponent>
         get() = emptyList()
 
     override fun hasDefaultConstructor() = false // default constructors are explicit in symbols
 
-    override val innerClassNames: Collection<Name>
+    override konst innerClassNames: Collection<Name>
         get() = innerClasses.keys
 
-    override val virtualFile: VirtualFile? by lazy {
+    override konst virtualFile: VirtualFile? by lazy {
         file?.let { javac.toVirtualFile(it) }
     }
 
@@ -159,6 +159,6 @@ class SymbolBasedClass(
 
     override fun findInnerClass(name: Name) = innerClasses[name]
 
-    private val enclosedElements by lazy { element.enclosedElements }
+    private konst enclosedElements by lazy { element.enclosedElements }
 
 }

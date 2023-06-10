@@ -1,5 +1,5 @@
-data class Test1(val x: Int, val y: String, val z: Any)
+data class Test1(konst x: Int, konst y: String, konst z: Any)
 
-data class Test2(val x: Any?)
+data class Test2(konst x: Any?)
 
-data class Test3(val d: Double, val dn: Double?, val f: Float, val df: Float?)
+data class Test3(konst d: Double, konst dn: Double?, konst f: Float, konst df: Float?)

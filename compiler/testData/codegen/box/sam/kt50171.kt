@@ -5,10 +5,10 @@
 
 import java.util.function.DoubleConsumer
 
-var value: Double = 3.14
+var konstue: Double = 3.14
 
 fun f() = {
-    g(::value::set)
+    g(::konstue::set)
 }
 
 fun g(consumer: DoubleConsumer) {
@@ -17,5 +17,5 @@ fun g(consumer: DoubleConsumer) {
 
 fun box(): String {
     f()()
-    return if (value == 42.0) "OK" else "Fail"
+    return if (konstue == 42.0) "OK" else "Fail"
 }

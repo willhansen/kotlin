@@ -24,21 +24,21 @@ class JsAdditionalSourceProvider(testServices: TestServices) : AdditionalSourceP
     }
 
     companion object {
-        private const val COMMON_FILES_NAME = "_common"
-        private const val COMMON_FILES_DIR = "_commonFiles/"
-        private const val COMMON_FILES_DIR_PATH = JsEnvironmentConfigurator.TEST_DATA_DIR_PATH + "/" + COMMON_FILES_DIR
+        private const konst COMMON_FILES_NAME = "_common"
+        private const konst COMMON_FILES_DIR = "_commonFiles/"
+        private const konst COMMON_FILES_DIR_PATH = JsEnvironmentConfigurator.TEST_DATA_DIR_PATH + "/" + COMMON_FILES_DIR
 
         private fun getFilesInDirectoryByExtension(directory: String, extension: String): List<String> {
-            val dir = File(directory)
+            konst dir = File(directory)
             if (!dir.isDirectory) return emptyList()
 
             return dir.listFiles(FileFilter { it.extension == extension })?.map { it.absolutePath } ?: emptyList()
         }
 
         private fun getAdditionalFiles(directory: String, extension: String): List<File> {
-            val globalCommonFiles = getFilesInDirectoryByExtension(COMMON_FILES_DIR_PATH, extension).map { File(it) }
-            val localCommonFilePath = "$directory/$COMMON_FILES_NAME.$extension"
-            val localCommonFile = File(localCommonFilePath).takeIf { it.exists() } ?: return globalCommonFiles
+            konst globalCommonFiles = getFilesInDirectoryByExtension(COMMON_FILES_DIR_PATH, extension).map { File(it) }
+            konst localCommonFilePath = "$directory/$COMMON_FILES_NAME.$extension"
+            konst localCommonFile = File(localCommonFilePath).takeIf { it.exists() } ?: return globalCommonFiles
             return globalCommonFiles + localCommonFile
         }
 

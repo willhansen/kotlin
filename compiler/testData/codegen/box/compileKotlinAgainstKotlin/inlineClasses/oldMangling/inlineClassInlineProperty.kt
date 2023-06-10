@@ -6,9 +6,9 @@
 
 package a
 
-inline class S(val value: String) {
-    inline val k: String
-        get() = value + "K"
+inline class S(konst konstue: String) {
+    inline konst k: String
+        get() = konstue + "K"
 }
 
 // MODULE: main(lib)

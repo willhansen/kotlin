@@ -123,10 +123,10 @@ public class CodegenTestFiles {
             Matcher scriptParametersMatcher = scriptParametersPattern.matcher(file.getText());
 
             if (scriptParametersMatcher.find()) {
-                String valueString = scriptParametersMatcher.group(1);
-                String[] values = valueString.split(" ");
+                String konstueString = scriptParametersMatcher.group(1);
+                String[] konstues = konstueString.split(" ");
 
-                scriptParameterValues.add(values);
+                scriptParameterValues.add(konstues);
             }
             else {
                 scriptParameterValues.add(ArrayUtil.EMPTY_STRING_ARRAY);

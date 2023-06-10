@@ -16,9 +16,9 @@ class ModuleTests : IndexerTests() {
 
     @Test
     fun testSingleHeaderModule() {
-        val files = TempFiles("testSingleHeaderModule")
+        konst files = TempFiles("testSingleHeaderModule")
 
-        val header = files.file("Foo.h", "")
+        konst header = files.file("Foo.h", "")
 
         files.file("module.modulemap", """
             module Foo {
@@ -26,20 +26,20 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
+        konst modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
         assertEquals(setOf(header.absolutePath), modulesInfo.ownHeaders)
         assertEquals(listOf(header.absolutePath), modulesInfo.topLevelHeaders.canonicalize())
     }
 
     @Test
     fun testModuleWithTransitiveInclude() {
-        val files = TempFiles("testModuleWithTransitiveInclude")
+        konst files = TempFiles("testModuleWithTransitiveInclude")
 
-        val fooH = files.file("Foo.h", """
+        konst fooH = files.file("Foo.h", """
             #include "Bar.h"
         """.trimIndent())
 
-        val barH = files.file("Bar.h", "")
+        konst barH = files.file("Bar.h", "")
 
         files.file("module.modulemap", """
             module Foo {
@@ -47,16 +47,16 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
+        konst modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
         assertEquals(setOf(fooH.absolutePath, barH.absolutePath), modulesInfo.ownHeaders)
         assertEquals(listOf(fooH.absolutePath), modulesInfo.topLevelHeaders.canonicalize())
     }
 
     @Test
     fun testModuleImportingOtherModule() {
-        val files = TempFiles("testModuleImportingOtherModule")
+        konst files = TempFiles("testModuleImportingOtherModule")
 
-        val fooH = files.file("Foo.h", """
+        konst fooH = files.file("Foo.h", """
             #include "Bar.h"
         """.trimIndent())
 
@@ -71,21 +71,21 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
+        konst modulesInfo = getModulesInfo(compilationIncluding(files.directory), listOf("Foo"))
         assertEquals(setOf(fooH.absolutePath), modulesInfo.ownHeaders)
         assertEquals(listOf(fooH.absolutePath), modulesInfo.topLevelHeaders.canonicalize())
     }
 
     @Test
     fun testFrameworkModule() {
-        val files = TempFiles("testFramework")
-        val fooH = files.file("Foo.framework/Headers/Foo.h", """
+        konst files = TempFiles("testFramework")
+        konst fooH = files.file("Foo.framework/Headers/Foo.h", """
             #include "Bar.h"
             #include <Foo/Baz.h>
         """.trimIndent())
 
-        val barH = files.file("Foo.framework/Headers/Bar.h", "")
-        val bazH = files.file("Foo.framework/Headers/Baz.h", "")
+        konst barH = files.file("Foo.framework/Headers/Bar.h", "")
+        konst bazH = files.file("Foo.framework/Headers/Baz.h", "")
 
         files.file("Foo.framework/Modules/module.modulemap", """
             framework module Foo {
@@ -93,18 +93,18 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val modulesInfo = getModulesInfo(compilation("-F${files.directory}"), listOf("Foo"))
+        konst modulesInfo = getModulesInfo(compilation("-F${files.directory}"), listOf("Foo"))
         assertEquals(setOf(fooH.absolutePath, barH.absolutePath, bazH.absolutePath), modulesInfo.ownHeaders)
         assertEquals(listOf(fooH.absolutePath), modulesInfo.topLevelHeaders.canonicalize())
     }
 
     @Test
     fun testMissingModule() {
-        val files = TempFiles("testMissingModule")
+        konst files = TempFiles("testMissingModule")
 
-        val compilation = compilationIncluding(files.directory)
+        konst compilation = compilationIncluding(files.directory)
 
-        val error = assertFails {
+        konst error = assertFails {
             getModulesInfo(compilation, modules = listOf("Foo"))
         }
 
@@ -113,7 +113,7 @@ class ModuleTests : IndexerTests() {
 
     @Test
     fun testModuleWithMissingHeader() {
-        val files = TempFiles("testModuleWithMissingHeader")
+        konst files = TempFiles("testModuleWithMissingHeader")
 
         files.file("module.modulemap", """
             module Foo {
@@ -121,9 +121,9 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val compilation = compilationIncluding(files.directory)
+        konst compilation = compilationIncluding(files.directory)
 
-        val error = assertFails {
+        konst error = assertFails {
             getModulesInfo(compilation, modules = listOf("Foo"))
         }
 
@@ -132,7 +132,7 @@ class ModuleTests : IndexerTests() {
 
     @Test
     fun testModuleWithBadCode() {
-        val files = TempFiles("testModuleWithBadCode")
+        konst files = TempFiles("testModuleWithBadCode")
 
         files.file("Foo.h", """
             bad code;
@@ -144,9 +144,9 @@ class ModuleTests : IndexerTests() {
             }
         """.trimIndent())
 
-        val compilation = compilationIncluding(files.directory)
+        konst compilation = compilationIncluding(files.directory)
 
-        val error = assertFails {
+        konst error = assertFails {
             getModulesInfo(compilation, modules = listOf("Foo"))
         }
 

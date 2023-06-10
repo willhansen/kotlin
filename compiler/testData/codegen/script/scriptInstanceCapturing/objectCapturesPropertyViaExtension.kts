@@ -10,7 +10,7 @@
 // The original example from the issue works supposedly because the constructor is not called on the runtime.
 // In this example, uncommenting call to buildZip leads to the runtime exception, while uncommenting the call to copy or
 // moving DefaultEachEntryConfiguration class definition before ZipHelper breaks codegeneration (somewhat expectedly).
-// The JVM IR BE now generates correct error about invalid script instance capturing.
+// The JVM IR BE now generates correct error about inkonstid script instance capturing.
 
 interface I {
     fun rename()
@@ -23,7 +23,7 @@ object ZipHelper {
     }
 }
 
-class DefaultEachEntryConfiguration(val entry: Int) : I {
+class DefaultEachEntryConfiguration(konst entry: Int) : I {
     override fun rename() {
         entry.copy()
     }

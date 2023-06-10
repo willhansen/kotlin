@@ -12,11 +12,11 @@ import test.*
 
 fun box(): String {
     var invokeOrder = "";
-    val expectedResult = "0_1_9"
-    val expectedInvokeOrder = "1_0_9"
+    konst expectedResult = "0_1_9"
+    konst expectedInvokeOrder = "1_0_9"
     var l = 1L
     var i = 0
-    val captured = 9L
+    konst captured = 9L
 
     var result = test(b = {invokeOrder += "1_"; l}(), a = {invokeOrder+="0_"; i}(), c = {invokeOrder += "$captured"; "$captured"})
     if (invokeOrder != expectedInvokeOrder || result != expectedResult) return "fail 1: $invokeOrder != $expectedInvokeOrder or $result != $expectedResult"

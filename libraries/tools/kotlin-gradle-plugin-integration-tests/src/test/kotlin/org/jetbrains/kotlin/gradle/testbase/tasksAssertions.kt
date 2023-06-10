@@ -13,7 +13,7 @@ import org.gradle.testkit.runner.TaskOutcome
  * Asserts given tasks are not present in the build task graph
  */
 fun BuildResult.assertTasksAreNotInTaskGraph(vararg tasks: String) {
-    val presentTasks = tasks.filter { task(it) != null }
+    konst presentTasks = tasks.filter { task(it) != null }
     assert(presentTasks.isEmpty()) {
         printBuildOutput()
         "Tasks ${tasks.joinToString(prefix = "[", postfix = "]")} shouldn't be present in the task graph, but $presentTasks were present"
@@ -190,7 +190,7 @@ fun BuildResult.assertTasksInBuildOutput(
     expectedPresentTasks: List<String> = emptyList(),
     expectedAbsentTasks: List<String> = emptyList()
 ) {
-    val registeredTasks = getAllTasksFromTheOutput()
+    konst registeredTasks = getAllTasksFromTheOutput()
     expectedPresentTasks.forEach {
         assert(registeredTasks.contains(it)) {
             printBuildOutput()
@@ -214,8 +214,8 @@ fun BuildResult.assertTasksInBuildOutput(
  */
 private fun BuildResult.getAllTasksFromTheOutput(): List<String> {
 
-    val taskPattern = Regex("^([:\\w]+) - (.*)$")
-    val tasks = mutableListOf<String>()
+    konst taskPattern = Regex("^([:\\w]+) - (.*)$")
+    konst tasks = mutableListOf<String>()
 
     output.lines().forEach { line ->
         if (line.matches(taskPattern)) {

@@ -11,8 +11,8 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 @Test fun runTest() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { "Input" }) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { "Input" }) {
         input ->
         assertEquals(1, 1)
         assertFailsWith<AssertionError> { assertEquals(1, 2) }

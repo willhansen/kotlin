@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // Should work already in M11
 
-open class A(val s : String)
+open class A(konst s : String)
 class B(s : String) : A(s)
 
 fun test(a : A): String? {

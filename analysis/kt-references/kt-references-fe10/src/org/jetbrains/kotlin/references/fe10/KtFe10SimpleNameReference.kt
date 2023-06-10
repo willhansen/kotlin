@@ -35,14 +35,14 @@ class KtFe10SimpleNameReference(expression: KtSimpleNameExpression) : KtSimpleNa
         return SmartList<DeclarationDescriptor>().apply {
             // Replace Java property with its accessor(s)
             for (descriptor in expression.getReferenceTargets(context)) {
-                val sizeBefore = size
+                konst sizeBefore = size
 
                 if (descriptor !is JavaPropertyDescriptor) {
                     add(descriptor)
                     continue
                 }
 
-                val readWriteAccess = expression.readWriteAccess(true)
+                konst readWriteAccess = expression.readWriteAccess(true)
                 descriptor.getter?.let {
                     if (readWriteAccess.isRead) add(it)
                 }
@@ -59,9 +59,9 @@ class KtFe10SimpleNameReference(expression: KtSimpleNameExpression) : KtSimpleNa
 
     // It's a copy of function in BindingContextUtils supporting some special cases (labels, this)
     private fun KtExpression.getReferenceTargets(context: BindingContext): Collection<DeclarationDescriptor> {
-        val descriptor = when (this) {
+        konst descriptor = when (this) {
             is KtLabelReferenceExpression -> {
-                val target = context[BindingContext.LABEL_TARGET, this]
+                konst target = context[BindingContext.LABEL_TARGET, this]
                 target?.let { context[BindingContext.DECLARATION_TO_DESCRIPTOR, it] }
             }
             is KtReferenceExpression -> {
@@ -85,12 +85,12 @@ class KtFe10SimpleNameReference(expression: KtSimpleNameExpression) : KtSimpleNa
     override fun getImportAlias(): KtImportAlias? {
         fun DeclarationDescriptor.unwrap() = if (this is ImportedFromObjectCallableDescriptor<*>) callableFromObject else this
 
-        val name = element.getReferencedName()
-        val file = element.containingKtFile
-        val importDirective = file.findImportByAlias(name) ?: return null
-        val fqName = importDirective.importedFqName ?: return null
-        val helper = KtFe10ReferenceResolutionHelper.getInstance()
-        val importedDescriptors = helper.resolveImportReference(file, fqName).map { it.unwrap() }
+        konst name = element.getReferencedName()
+        konst file = element.containingKtFile
+        konst importDirective = file.findImportByAlias(name) ?: return null
+        konst fqName = importDirective.importedFqName ?: return null
+        konst helper = KtFe10ReferenceResolutionHelper.getInstance()
+        konst importedDescriptors = helper.resolveImportReference(file, fqName).map { it.unwrap() }
         if (getTargetDescriptors(helper.partialAnalyze(element)).any {
                 it.unwrap().getImportableDescriptor() in importedDescriptors
             }) {

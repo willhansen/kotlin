@@ -4,7 +4,7 @@ package test
 
 import testing.*
 
-val a1: `fromOtherPackage`TestClass? = null
+konst a1: `fromOtherPackage`TestClass? = null
 
 //FILE:fromRoot.kt
 //----------------------------------------------------------------------------------

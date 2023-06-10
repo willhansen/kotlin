@@ -10,7 +10,7 @@ fun <BarTP : IntConvertible> computeSum(array: Array<BarTP>) = foo(0, array) {
     res
 }
 
-class N(val v: Int) : IntConvertible {
+class N(konst v: Int) : IntConvertible {
     override fun toInt() = v
 }
 

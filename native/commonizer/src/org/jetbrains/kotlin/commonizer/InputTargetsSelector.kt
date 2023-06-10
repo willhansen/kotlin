@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.commonizer.utils.isProperSubsetOf
 import org.jetbrains.kotlin.commonizer.utils.isSubsetOf
 
 internal fun selectInputTargets(inputTargets: Set<CommonizerTarget>, outputTarget: SharedCommonizerTarget): Set<CommonizerTarget> {
-    val subsetInputTargets = inputTargets
+    konst subsetInputTargets = inputTargets
         .filter { inputTarget -> inputTarget != outputTarget && inputTarget.allLeaves() isSubsetOf outputTarget.allLeaves() }
         .sortedBy { it.allLeaves().size }
 
-    val disjointSubsetInputTargets = subsetInputTargets
+    konst disjointSubsetInputTargets = subsetInputTargets
         .filter { inputTarget ->
             subsetInputTargets.none { potentialSuperSet -> inputTarget.allLeaves() isProperSubsetOf potentialSuperSet.allLeaves() }
         }

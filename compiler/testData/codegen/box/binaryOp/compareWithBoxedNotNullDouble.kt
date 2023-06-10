@@ -3,8 +3,8 @@
 import org.jetbrains.annotations.*;
 
 class Holder {
-    public @NotNull Double value;
-    public Holder(Double value) { this.value = value; }
+    public @NotNull Double konstue;
+    public Holder(Double konstue) { this.konstue = konstue; }
 }
 
 //FILE: test.kt
@@ -12,6 +12,6 @@ class Holder {
 import Holder
 
 fun box(): String {
-    val j = Holder(0.99)
-    return if (j.value > 0) "OK" else "fail"
+    konst j = Holder(0.99)
+    return if (j.konstue > 0) "OK" else "fail"
 }

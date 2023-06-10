@@ -26,9 +26,9 @@ abstract class IrFunction : IrDeclarationBase(), IrPossiblyExternalDeclaration,
         IrDeclarationWithVisibility, IrTypeParametersContainer, IrSymbolOwner, IrDeclarationParent,
         IrReturnTarget, IrMemberWithContainerSource, IrMetadataSourceOwner {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: FunctionDescriptor
+    abstract override konst descriptor: FunctionDescriptor
 
-    abstract override val symbol: IrFunctionSymbol
+    abstract override konst symbol: IrFunctionSymbol
 
     abstract var isInline: Boolean
 
@@ -40,7 +40,7 @@ abstract class IrFunction : IrDeclarationBase(), IrPossiblyExternalDeclaration,
 
     abstract var extensionReceiverParameter: IrValueParameter?
 
-    abstract var valueParameters: List<IrValueParameter>
+    abstract var konstueParameters: List<IrValueParameter>
 
     abstract var contextReceiverParametersCount: Int
 
@@ -50,7 +50,7 @@ abstract class IrFunction : IrDeclarationBase(), IrPossiblyExternalDeclaration,
         typeParameters.forEach { it.accept(visitor, data) }
         dispatchReceiverParameter?.accept(visitor, data)
         extensionReceiverParameter?.accept(visitor, data)
-        valueParameters.forEach { it.accept(visitor, data) }
+        konstueParameters.forEach { it.accept(visitor, data) }
         body?.accept(visitor, data)
     }
 
@@ -58,7 +58,7 @@ abstract class IrFunction : IrDeclarationBase(), IrPossiblyExternalDeclaration,
         typeParameters = typeParameters.transformIfNeeded(transformer, data)
         dispatchReceiverParameter = dispatchReceiverParameter?.transform(transformer, data)
         extensionReceiverParameter = extensionReceiverParameter?.transform(transformer, data)
-        valueParameters = valueParameters.transformIfNeeded(transformer, data)
+        konstueParameters = konstueParameters.transformIfNeeded(transformer, data)
         body = body?.transform(transformer, data)
     }
 }

@@ -15,7 +15,7 @@ import javax.lang.model.util.Elements
 import javax.lang.model.util.Types
 import kotlin.ConcurrentModificationException
 
-class MemoryLeak(val className: String, val fieldName: String, val description: String) {
+class MemoryLeak(konst className: String, konst fieldName: String, konst description: String) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -36,14 +36,14 @@ class MemoryLeak(val className: String, val fieldName: String, val description: 
 }
 
 private class ClassLoaderData(classLoader: ClassLoader) {
-    val ref = WeakReference(classLoader)
+    konst ref = WeakReference(classLoader)
 
     @Volatile
     var age: Int = 0
 }
 
 object MemoryLeakDetector {
-    private val classLoaderData = mutableListOf<ClassLoaderData>()
+    private konst classLoaderData = mutableListOf<ClassLoaderData>()
 
     fun add(classLoader: ClassLoader) {
         synchronized(classLoaderData) {
@@ -52,12 +52,12 @@ object MemoryLeakDetector {
     }
 
     fun process(isParanoid: Boolean): Set<MemoryLeak> {
-        val memoryLeaks = mutableSetOf<MemoryLeak>()
+        konst memoryLeaks = mutableSetOf<MemoryLeak>()
 
         synchronized(classLoaderData) {
-            val newClassLoaderData = mutableListOf<ClassLoaderData>()
+            konst newClassLoaderData = mutableListOf<ClassLoaderData>()
             for (data in classLoaderData) {
-                val classLoader = data.ref.get() ?: continue
+                konst classLoader = data.ref.get() ?: continue
                 data.age += 1
 
                 if (isParanoid || data.age >= 5) {
@@ -77,18 +77,18 @@ object MemoryLeakDetector {
     }
 
     private fun inspectStatics(classLoader: ClassLoader): Set<MemoryLeak> {
-        val loadedClasses = classLoader.loadedClasses()
-        val loadedClassesSet = try {
+        konst loadedClasses = classLoader.loadedClasses()
+        konst loadedClassesSet = try {
             loadedClasses.mapTo(mutableSetOf()) { it }
         } catch (e: ConcurrentModificationException) {
             Thread.sleep(100)
             return inspectStatics(classLoader)
         }
 
-        val leaks = mutableSetOf<MemoryLeak>()
+        konst leaks = mutableSetOf<MemoryLeak>()
 
         for (clazz in loadedClassesSet) {
-            val declaredFields = try {
+            konst declaredFields = try {
                 clazz.declaredFields
             } catch (e: Throwable) {
                 continue
@@ -97,13 +97,13 @@ object MemoryLeakDetector {
             nextField@ for (field in declaredFields) {
                 if (!Modifier.isStatic(field.modifiers)) continue
 
-                val value = field.getSafe(null)
+                konst konstue = field.getSafe(null)
                     ?.takeIf { !it.isPrimitiveOrString() } ?: continue@nextField
 
-                if (value.isJavacComponent()) {
-                    leaks += MemoryLeak(clazz.name, field.name, "Field leaks an Annotation Processing component ($value).")
-                } else if (value is Class<*> && value in loadedClassesSet) {
-                    leaks += MemoryLeak(clazz.name, field.name, "Field leaks a class type from the same ClassLoader (${value.name}).")
+                if (konstue.isJavacComponent()) {
+                    leaks += MemoryLeak(clazz.name, field.name, "Field leaks an Annotation Processing component ($konstue).")
+                } else if (konstue is Class<*> && konstue in loadedClassesSet) {
+                    leaks += MemoryLeak(clazz.name, field.name, "Field leaks a class type from the same ClassLoader (${konstue.name}).")
                 }
             }
         }
@@ -132,7 +132,7 @@ private fun Any.isPrimitiveOrString(): Boolean {
 
 private fun ClassLoader.loadedClasses(): Vector<Class<*>> {
     try {
-        val classesField = ClassLoader::class.java.getDeclaredField("classes")
+        konst classesField = ClassLoader::class.java.getDeclaredField("classes")
 
         @Suppress("UNCHECKED_CAST")
         return classesField.getSafe(this) as? Vector<Class<*>> ?: Vector()

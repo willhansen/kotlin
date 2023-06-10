@@ -22,35 +22,35 @@ import org.jetbrains.kotlin.library.KotlinAbiVersion
 import org.jetbrains.kotlin.library.SerializedIrFile
 import org.jetbrains.kotlin.library.impl.*
 
-class ICData(val icData: List<SerializedIrFile>, val containsErrorCode: Boolean)
+class ICData(konst icData: List<SerializedIrFile>, konst containsErrorCode: Boolean)
 
-class ICKotlinLibrary(private val icData: List<SerializedIrFile>) : IrLibrary {
-    override val dataFlowGraph: ByteArray? = null
+class ICKotlinLibrary(private konst icData: List<SerializedIrFile>) : IrLibrary {
+    override konst dataFlowGraph: ByteArray? = null
 
     private inline fun <K, R : IrTableReader<K>> Array<R?>.itemBytes(fileIndex: Int, key: K, factory: () -> R): ByteArray {
-        val reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
+        konst reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
 
         return reader.tableItemBytes(key)
     }
 
     private inline fun <R : IrArrayReader> Array<R?>.itemBytes(fileIndex: Int, index: Int, factory: () -> R): ByteArray {
-        val reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
+        konst reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
 
         return reader.tableItemBytes(index)
     }
 
     private inline fun <R : IrArrayReader?> Array<R?>.itemNullableBytes(fileIndex: Int, index: Int, factory: () -> R): ByteArray? {
-        val reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
+        konst reader = this[fileIndex] ?: factory().also { this[fileIndex] = it }
 
         return reader?.tableItemBytes(index)
     }
 
-    private val indexedDeclarations = arrayOfNulls<DeclarationIrTableMemoryReader>(icData.size)
-    private val indexedTypes = arrayOfNulls<IrArrayMemoryReader>(icData.size)
-    private val indexedSignatures = arrayOfNulls<IrArrayMemoryReader>(icData.size)
-    private val indexedStrings = arrayOfNulls<IrArrayMemoryReader>(icData.size)
-    private val indexedDebugInfos = arrayOfNulls<IrArrayMemoryReader?>(icData.size)
-    private val indexedBodies = arrayOfNulls<IrArrayMemoryReader>(icData.size)
+    private konst indexedDeclarations = arrayOfNulls<DeclarationIrTableMemoryReader>(icData.size)
+    private konst indexedTypes = arrayOfNulls<IrArrayMemoryReader>(icData.size)
+    private konst indexedSignatures = arrayOfNulls<IrArrayMemoryReader>(icData.size)
+    private konst indexedStrings = arrayOfNulls<IrArrayMemoryReader>(icData.size)
+    private konst indexedDebugInfos = arrayOfNulls<IrArrayMemoryReader?>(icData.size)
+    private konst indexedBodies = arrayOfNulls<IrArrayMemoryReader>(icData.size)
 
     override fun irDeclaration(index: Int, fileIndex: Int): ByteArray =
         indexedDeclarations.itemBytes(fileIndex, DeclarationId(index)) {
@@ -98,17 +98,17 @@ class ICKotlinLibrary(private val icData: List<SerializedIrFile>) : IrLibrary {
 }
 
 class CurrentModuleWithICDeserializer(
-    private val delegate: IrModuleDeserializer,
-    private val symbolTable: SymbolTable,
-    private val irBuiltIns: IrBuiltIns,
+    private konst delegate: IrModuleDeserializer,
+    private konst symbolTable: SymbolTable,
+    private konst irBuiltIns: IrBuiltIns,
     icData: List<SerializedIrFile>,
     icReaderFactory: (IrLibrary) -> IrModuleDeserializer) :
     IrModuleDeserializer(delegate.moduleDescriptor, KotlinAbiVersion.CURRENT) {
 
-    private val dirtyDeclarations = hashMapOf<IdSignature, IrSymbol>()
-    private val icKlib = ICKotlinLibrary(icData)
+    private konst dirtyDeclarations = hashMapOf<IdSignature, IrSymbol>()
+    private konst icKlib = ICKotlinLibrary(icData)
 
-    private val icDeserializer: IrModuleDeserializer = icReaderFactory(icKlib)
+    private konst icDeserializer: IrModuleDeserializer = icReaderFactory(icKlib)
 
     override fun contains(idSig: IdSignature): Boolean {
         return idSig in dirtyDeclarations || idSig.topLevelSignature() in icDeserializer || idSig in delegate
@@ -144,7 +144,7 @@ class CurrentModuleWithICDeserializer(
     }
 
     override fun init(delegate: IrModuleDeserializer) {
-        val knownBuiltIns = irBuiltIns.knownBuiltins.map { (it as IrSymbolOwner).symbol }.toSet()
+        konst knownBuiltIns = irBuiltIns.knownBuiltins.map { (it as IrSymbolOwner).symbol }.toSet()
         symbolTable.forEachDeclarationSymbol {
             assert(it.isPublicApi)
             if (it.descriptor.isDirtyDescriptor()) { // public && non-deserialized should be dirty symbol
@@ -159,14 +159,14 @@ class CurrentModuleWithICDeserializer(
 
     override fun toString(): String = "Incremental Cache Klib"
 
-    override val klib: IrLibrary
+    override konst klib: IrLibrary
         get() = icDeserializer.klib
 
-    override val moduleFragment: IrModuleFragment
+    override konst moduleFragment: IrModuleFragment
         get() = delegate.moduleFragment
-    override val moduleDependencies: Collection<IrModuleDeserializer>
+    override konst moduleDependencies: Collection<IrModuleDeserializer>
         get() = delegate.moduleDependencies
-    override val kind: IrModuleDeserializerKind
+    override konst kind: IrModuleDeserializerKind
         get() = delegate.kind
 
     override fun fileDeserializers(): Collection<IrFileDeserializer> {

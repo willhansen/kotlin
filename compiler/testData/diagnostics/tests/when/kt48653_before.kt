@@ -9,13 +9,13 @@ sealed class Sealed {
 fun functionReturningSealed(): Sealed = null!!
 
 fun test_1() {
-    <!NON_EXHAUSTIVE_WHEN_STATEMENT!>when<!> (val result = functionReturningSealed()) {
+    <!NON_EXHAUSTIVE_WHEN_STATEMENT!>when<!> (konst result = functionReturningSealed()) {
         is Sealed.A -> {}
     }
 }
 
 fun test_2() {
-    val result2 = functionReturningSealed()
+    konst result2 = functionReturningSealed()
     <!NON_EXHAUSTIVE_WHEN_STATEMENT!>when<!> (result2) {
         is Sealed.A -> {}
     }

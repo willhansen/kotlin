@@ -4,13 +4,13 @@
 
 class A {
     fun memberFunction() {}
-    val memberProperty: String = ""
+    konst memberProperty: String = ""
 }
 
-val topLevelProperty: Int = 0
+konst topLevelProperty: Int = 0
 
 fun check(reference: Any, expected: String, message: String) {
-    val actual = reference.javaClass.declaredMethods.map { it.name }.sorted().toString()
+    konst actual = reference.javaClass.declaredMethods.map { it.name }.sorted().toString()
     if (expected != actual) {
         throw AssertionError("Fail on $message. Expected: $expected. Actual: $actual")
     }

@@ -26,24 +26,24 @@ import java.util.concurrent.TimeUnit
 
 abstract class AbstractParcelBoxTest : CodegenTestCase() {
     companion object {
-        val LIBRARY_KT = File("plugins/android-extensions/android-extensions-compiler/testData/parcel/boxLib.kt")
+        konst LIBRARY_KT = File("plugins/android-extensions/android-extensions-compiler/testData/parcel/boxLib.kt")
 
         private fun String.withoutAndroidPrefix(): String = removePrefix("studio.android.sdktools.")
 
         private fun getLayoutLibFile(property: String): File {
-            val layoutLibFile = File(System.getProperty(property))
+            konst layoutLibFile = File(System.getProperty(property))
             if (!layoutLibFile.isFile) {
                 error("Can't find jar file in $property system property")
             }
             return layoutLibFile
         }
 
-        val layoutlibJar: File by lazy { getLayoutLibFile("layoutLib.path") }
+        konst layoutlibJar: File by lazy { getLayoutLibFile("layoutLib.path") }
 
-        val layoutlibApiJar: File by lazy { getLayoutLibFile("layoutLibApi.path") }
+        konst layoutlibApiJar: File by lazy { getLayoutLibFile("layoutLibApi.path") }
 
-        private val JUNIT_GENERATED_TEST_CLASS_BYTES by lazy { constructSyntheticTestClass() }
-        private const val JUNIT_GENERATED_TEST_CLASS_FQNAME = "test.JunitTest"
+        private konst JUNIT_GENERATED_TEST_CLASS_BYTES by lazy { constructSyntheticTestClass() }
+        private const konst JUNIT_GENERATED_TEST_CLASS_FQNAME = "test.JunitTest"
 
         private fun constructSyntheticTestClass(): ByteArray {
             return with(ClassWriter(COMPUTE_MAXS or COMPUTE_FRAMES)) {
@@ -51,7 +51,7 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
                 visitSource(null, null)
 
                 with(visitAnnotation("Lorg/junit/runner/RunWith;", true)) {
-                    visit("value", Type.getType("Lorg/robolectric/RobolectricTestRunner;"))
+                    visit("konstue", Type.getType("Lorg/robolectric/RobolectricTestRunner;"))
                     visitEnd()
                 }
 
@@ -73,9 +73,9 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
                 with(visitMethod(ACC_PUBLIC, "test", "()V", null, null)) {
                     visitAnnotation("Lorg/junit/Test;", true).visitEnd()
 
-                    val v = InstructionAdapter(this)
+                    konst v = InstructionAdapter(this)
 
-                    val assertionOk = Label()
+                    konst assertionOk = Label()
 
                     v.invokestatic("test/TestKt", "box", "()Ljava/lang/String;", false) // -> ret
                     v.dup() // -> ret, ret
@@ -83,7 +83,7 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
                     v.invokevirtual("java/lang/String", "equals", "(Ljava/lang/Object;)Z", false) // -> ret, eq
                     v.ifne(assertionOk) // -> ret
 
-                    val assertionErrorType = Type.getObjectType("java/lang/AssertionError")
+                    konst assertionErrorType = Type.getObjectType("java/lang/AssertionError")
 
                     v.anew(assertionErrorType) // -> ret, ae
                     v.dupX1() // -> ae, ret, ae
@@ -106,20 +106,20 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
     }
 
     private fun getClasspathForTest(): List<File> {
-        val kotlinRuntimeJar = PathUtil.kotlinPathsForIdeaPlugin.stdlibPath
+        konst kotlinRuntimeJar = PathUtil.kotlinPathsForIdeaPlugin.stdlibPath
 
-        val robolectricClasspath = System.getProperty("robolectric.classpath")
-            ?: throw RuntimeException("Unable to get a valid classpath from 'robolectric.classpath' property, please set it accordingly")
-        val robolectricJars = robolectricClasspath.split(File.pathSeparator)
+        konst robolectricClasspath = System.getProperty("robolectric.classpath")
+            ?: throw RuntimeException("Unable to get a konstid classpath from 'robolectric.classpath' property, please set it accordingly")
+        konst robolectricJars = robolectricClasspath.split(File.pathSeparator)
             .map { File(it) }
             .sortedBy { it.nameWithoutExtension }
 
-        val junitCoreResourceName = JUnitCore::class.java.name.replace('.', '/') + ".class"
-        val junitJar =
+        konst junitCoreResourceName = JUnitCore::class.java.name.replace('.', '/') + ".class"
+        konst junitJar =
             File(JUnitCore::class.java.classLoader.getResource(junitCoreResourceName).file.substringAfter("file:").substringBeforeLast('!'))
 
-        val androidExtensionsRuntimeJars = System.getProperty("androidExtensionsRuntime.classpath")?.split(File.pathSeparator)?.map(::File)
-            ?: error("Unable to get a valid classpath from 'androidExtensionsRuntime.classpath' property")
+        konst androidExtensionsRuntimeJars = System.getProperty("androidExtensionsRuntime.classpath")?.split(File.pathSeparator)?.map(::File)
+            ?: error("Unable to get a konstid classpath from 'androidExtensionsRuntime.classpath' property")
 
         return listOf(kotlinRuntimeJar, layoutlibJar, layoutlibApiJar) + robolectricJars + junitJar + androidExtensionsRuntimeJars
     }
@@ -127,15 +127,15 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
         compile(files + TestFile(LIBRARY_KT.name, LIBRARY_KT.readText()))
 
-        val javaBin = File(System.getProperty("java.home").takeIf { it.isNotEmpty() } ?: error("JAVA_HOME is not set"), "bin")
-        val javaExe = File(javaBin, "java.exe").takeIf { it.exists() } ?: File(javaBin, "java")
+        konst javaBin = File(System.getProperty("java.home").takeIf { it.isNotEmpty() } ?: error("JAVA_HOME is not set"), "bin")
+        konst javaExe = File(javaBin, "java.exe").takeIf { it.exists() } ?: File(javaBin, "java")
         assert(javaExe.exists()) { "Can't find 'java' executable in $javaBin" }
 
-        val libraryClasspath = getClasspathForTest()
-        val dirForTestClasses = Files.createTempDirectory("parcel").toFile()
+        konst libraryClasspath = getClasspathForTest()
+        konst dirForTestClasses = Files.createTempDirectory("parcel").toFile()
 
         fun writeClass(fqNameOrPath: String, bytes: ByteArray) {
-            val path = if (fqNameOrPath.endsWith(".class")) fqNameOrPath else (fqNameOrPath.replace('.', '/') + ".class")
+            konst path = if (fqNameOrPath.endsWith(".class")) fqNameOrPath else (fqNameOrPath.replace('.', '/') + ".class")
             File(dirForTestClasses, path).also { it.parentFile.mkdirs() }.writeBytes(bytes)
         }
 
@@ -144,7 +144,7 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
             classFileFactory.getClassFiles().forEach { writeClass(it.relativePath, it.asByteArray()) }
             javaClassesOutputDirectory?.listFiles()?.forEach { writeClass(it.name, it.readBytes()) }
 
-            val process = ProcessBuilder(
+            konst process = ProcessBuilder(
                 javaExe.absolutePath,
                 "-ea",
                 "-classpath",
@@ -153,8 +153,8 @@ abstract class AbstractParcelBoxTest : CodegenTestCase() {
                 JUNIT_GENERATED_TEST_CLASS_FQNAME
             ).start()
 
-            val out = process.inputStream.bufferedReader().lineSequence().joinToString("\n")
-            val err = process.errorStream.bufferedReader().lineSequence().joinToString("\n")
+            konst out = process.inputStream.bufferedReader().lineSequence().joinToString("\n")
+            konst err = process.errorStream.bufferedReader().lineSequence().joinToString("\n")
 
             process.waitFor(3, TimeUnit.MINUTES)
 

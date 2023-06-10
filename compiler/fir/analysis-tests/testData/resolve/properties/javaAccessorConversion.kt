@@ -55,18 +55,18 @@ public class D {
 // FILE: main.kt
 
 fun test_1(x: A) {
-    val str1 = x.vmParameters // OK
-    val str2 = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
+    konst str1 = x.vmParameters // OK
+    konst str2 = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
 }
 
 fun test_2(x: B) {
-    val int = x.vmParameters // OK
-    val error = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
+    konst int = x.vmParameters // OK
+    konst error = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
 }
 
 fun test_3(x: C) {
-    val error = x.<!OVERLOAD_RESOLUTION_AMBIGUITY!>vmParameters<!> // should be error
-    val int = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
+    konst error = x.<!OVERLOAD_RESOLUTION_AMBIGUITY!>vmParameters<!> // should be error
+    konst int = x.<!UNRESOLVED_REFERENCE!>vMParameters<!> // should be error
 }
 
 class Foo {

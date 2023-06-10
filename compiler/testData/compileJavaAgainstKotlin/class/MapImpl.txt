@@ -2,10 +2,10 @@ package test
 
 public final class EmptyMap</*0*/ V> : kotlin.collections.Map<kotlin.String, V> {
     public constructor EmptyMap</*0*/ V>()
-    public open val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, V>>
-    public open val keys: kotlin.collections.MutableSet<kotlin.String>
-    public open val size: kotlin.Int
-    public open val values: kotlin.collections.MutableCollection<V>
+    public open konst entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, V>>
+    public open konst keys: kotlin.collections.MutableSet<kotlin.String>
+    public open konst size: kotlin.Int
+    public open konst konstues: kotlin.collections.MutableCollection<V>
     public open fun containsKey(/*0*/ kotlin.String): kotlin.Boolean
     public open fun containsValue(/*0*/ V): kotlin.Boolean
     public open /*fake_override*/ fun forEach(/*0*/ java.util.function.BiConsumer<in kotlin.String, in V>): kotlin.Unit

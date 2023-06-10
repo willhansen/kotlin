@@ -1,7 +1,7 @@
 package testing
 
 class Test {
-    private val hello: String
+    private konst hello: String
         get() { return "hello" }
 
     fun sayHello() : String = hello

@@ -23,7 +23,7 @@
 class Case1() {
     fun foo() : Int =1
 
-    val foo = object : MarkerCase1 {}
+    konst foo = object : MarkerCase1 {}
 
     fun innerFun() {
         this.<!DEBUG_INFO_CALL("fqName: Case1.foo; typeCall: function")!>foo()<!>
@@ -31,7 +31,7 @@ class Case1() {
 
 
     inner class InnerClass0 {
-        val foo = object : MarkerCase1 {}
+        konst foo = object : MarkerCase1 {}
         operator fun MarkerCase1.invoke() {}
 
         fun innerClassFun() {
@@ -42,7 +42,7 @@ class Case1() {
     operator fun MarkerCase1.invoke() {}
 
     inner class InnerClass1(){
-        val foo = object : MarkerCase1 {}
+        konst foo = object : MarkerCase1 {}
 
         fun nestedClassFun(){
             this.<!DEBUG_INFO_CALL("fqName: Case1.invoke; typeCall: variable&invoke")!>foo()<!>
@@ -62,7 +62,7 @@ fun case1(){
 open class Case2() {
     open fun fooCase2(): MarkerCase2 = object : MarkerCase2 {}
 
-    open val fooCase2 = object : MarkerCase2 {}
+    open konst fooCase2 = object : MarkerCase2 {}
 
     interface MarkerCase2 {}
     open operator fun MarkerCase2.invoke() {}
@@ -87,7 +87,7 @@ open class Case2() {
 
 
     inner class InnerClass1() {
-        val fooCase2 = object : MarkerCase2 {}
+        konst fooCase2 = object : MarkerCase2 {}
 
         fun nestedClassFun() {
             this.<!DEBUG_INFO_CALL("fqName: Case2.invoke; typeCall: variable&invoke")!>fooCase2()<!>

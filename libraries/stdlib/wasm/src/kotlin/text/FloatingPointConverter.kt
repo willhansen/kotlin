@@ -7,7 +7,7 @@ package kotlin.text
 
 import kotlin.math.abs
 
-private val s_Pow10MantissaTable: ULongArray = ulongArrayOf(
+private konst s_Pow10MantissaTable: ULongArray = ulongArrayOf(
     // powers of 10
     0xA0000000_00000000UL,     // 1
     0xC8000000_00000000UL,     // 2
@@ -43,7 +43,7 @@ private val s_Pow10MantissaTable: ULongArray = ulongArrayOf(
     0x901D7CF7_3AB0ACDCUL,     // 15
 )
 
-private val s_Pow10ExponentTable: ShortArray = shortArrayOf(
+private konst s_Pow10ExponentTable: ShortArray = shortArrayOf(
     // exponents for both powers of 10 and 0.1
     4,      // 1
     7,      // 2
@@ -62,7 +62,7 @@ private val s_Pow10ExponentTable: ShortArray = shortArrayOf(
     50,     // 15
 )
 
-private val s_Pow10By16MantissaTable: ULongArray = ulongArrayOf(
+private konst s_Pow10By16MantissaTable: ULongArray = ulongArrayOf(
     // powers of 10^16
     0x8E1BC9BF_04000000UL,     // 1
     0x9DC5ADA8_2B70B59EUL,     // 2
@@ -110,7 +110,7 @@ private val s_Pow10By16MantissaTable: ULongArray = ulongArrayOf(
     0xE3E27A44_4D8D991AUL,     // 21
 )
 
-private val s_Pow10By16ExponentTable: ShortArray = shortArrayOf(
+private konst s_Pow10By16ExponentTable: ShortArray = shortArrayOf(
     // exponents for both powers of 10^16 and 0.1^16
     54,     // 1
     107,    // 2
@@ -162,7 +162,7 @@ private fun mul64Lossy(a: ULong, b: ULong): ULong {
 //Original implementation https://github.com/mono/corert/blob/master/src/System.Private.CoreLib/src/System/Number.CoreRT.cs
 internal fun numberToDouble(signed: Boolean, numberScale: Int, number: String): Double {
     var srcIndex = 0
-    val total = number.length
+    konst total = number.length
     var remaining = total
 
     // skip the leading zeros
@@ -185,13 +185,13 @@ internal fun numberToDouble(signed: Boolean, numberScale: Int, number: String): 
         remaining -= count
 
         // get the denormalized power of 10
-        val mult: UInt = (s_Pow10MantissaTable[count - 1] shr (64 - s_Pow10ExponentTable[count - 1])).toUInt()
+        konst mult: UInt = (s_Pow10MantissaTable[count - 1] shr (64 - s_Pow10ExponentTable[count - 1])).toUInt()
         resultValue = mul32x32To64((resultValue).toUInt(), mult) + digitsToInt(number, srcIndex, count)
         srcIndex += count
     }
 
-    val scale = numberScale - (total - remaining)
-    val absScale: Int = abs(scale)
+    konst scale = numberScale - (total - remaining)
+    konst absScale: Int = abs(scale)
     if (absScale >= 22 * 16) {
         // overflow / underflow
         return if (scale > 0) {
@@ -213,11 +213,11 @@ internal fun numberToDouble(signed: Boolean, numberScale: Int, number: String): 
 
     var index: Int = absScale and 15
     if (index != 0) {
-        val multexp: Int = s_Pow10ExponentTable[index - 1].toInt()
+        konst multexp: Int = s_Pow10ExponentTable[index - 1].toInt()
         // the exponents are shared between the inverted and regular table
         exp += if(scale < 0) (-multexp + 1) else multexp
 
-        val multVal: ULong = s_Pow10MantissaTable[index + (if (scale < 0) 15 else 0) - 1]
+        konst multVal: ULong = s_Pow10MantissaTable[index + (if (scale < 0) 15 else 0) - 1]
 
         resultValue = mul64Lossy(resultValue, multVal)
         // normalize
@@ -229,11 +229,11 @@ internal fun numberToDouble(signed: Boolean, numberScale: Int, number: String): 
 
     index = absScale ushr 4
     if (index != 0) {
-        val multexp: Int = s_Pow10By16ExponentTable[index - 1].toInt()
+        konst multexp: Int = s_Pow10By16ExponentTable[index - 1].toInt()
         // the exponents are shared between the inverted and regular table
         exp += if (scale < 0) (-multexp + 1) else multexp
 
-        val multVal: ULong = s_Pow10By16MantissaTable[index + (if (scale < 0) 21 else 0) - 1]
+        konst multVal: ULong = s_Pow10By16MantissaTable[index + (if (scale < 0) 21 else 0) - 1]
         resultValue = mul64Lossy(resultValue, multVal)
         // normalize
         if ((resultValue and 0x80000000_00000000UL) == 0UL) {

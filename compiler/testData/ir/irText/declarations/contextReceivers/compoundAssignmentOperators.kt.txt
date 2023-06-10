@@ -33,7 +33,7 @@ data class Result {
     when {
       other !is Result -> return false
     }
-    val tmp0_other_with_cast: Result = other as Result
+    konst tmp0_other_with_cast: Result = other as Result
     when {
       EQEQ(arg0 = <this>.#i, arg1 = tmp0_other_with_cast.#i).not() -> return false
     }
@@ -59,7 +59,7 @@ operator fun Result.plusAssign($context_receiver_0: Int, other: Result) {
     <set-operationScore>(<set-?> = <get-operationScore>().plus(other = $context_receiver_0))
   }
   { // BLOCK
-    val tmp0_this: Result = <this>
+    konst tmp0_this: Result = <this>
     tmp0_this.<set-i>(<set-?> = tmp0_this.<get-i>().plus(other = other.<get-i>()))
   }
 }
@@ -76,7 +76,7 @@ operator fun Result.minusAssign($context_receiver_0: Int, other: Result) {
     <set-operationScore>(<set-?> = <get-operationScore>().plus(other = $context_receiver_0))
   }
   { // BLOCK
-    val tmp0_this: Result = <this>
+    konst tmp0_this: Result = <this>
     tmp0_this.<set-i>(<set-?> = tmp0_this.<get-i>().minus(other = other.<get-i>()))
   }
 }
@@ -93,7 +93,7 @@ operator fun Result.timesAssign($context_receiver_0: Int, other: Result) {
     <set-operationScore>(<set-?> = <get-operationScore>().plus(other = $context_receiver_0))
   }
   { // BLOCK
-    val tmp0_this: Result = <this>
+    konst tmp0_this: Result = <this>
     tmp0_this.<set-i>(<set-?> = tmp0_this.<get-i>().times(other = other.<get-i>()))
   }
 }
@@ -110,13 +110,13 @@ operator fun Result.divAssign($context_receiver_0: Int, other: Result) {
     <set-operationScore>(<set-?> = <get-operationScore>().plus(other = $context_receiver_0))
   }
   { // BLOCK
-    val tmp0_this: Result = <this>
+    konst tmp0_this: Result = <this>
     tmp0_this.<set-i>(<set-?> = tmp0_this.<get-i>().div(other = other.<get-i>()))
   }
 }
 
 fun box(): String {
-  val result: Result = Result(i = 0)
+  konst result: Result = Result(i = 0)
   with<Int, Unit>(receiver = 1, block = local fun Int.<anonymous>() {
     result.plusAssign($context_receiver_0 = $this$with, other = Result(i = 1).plus($context_receiver_0 = $this$with, other = Result(i = 1)))
     result.minusAssign($context_receiver_0 = $this$with, other = Result(i = 1).minus($context_receiver_0 = $this$with, other = Result(i = 0)))

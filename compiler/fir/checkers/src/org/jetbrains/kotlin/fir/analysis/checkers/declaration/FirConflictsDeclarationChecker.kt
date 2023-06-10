@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.name.ClassId
 
 object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val inspector: FirDeclarationInspector?
+        konst inspector: FirDeclarationInspector?
 
         when (declaration) {
             is FirFile -> {
@@ -40,7 +40,7 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
             else -> {
                 if (declaration.source?.kind !is KtFakeSourceElementKind && declaration is FirTypeParameterRefsOwner) {
                     if (declaration is FirFunction) {
-                        checkConflictingElements(declaration.valueParameters, context, reporter)
+                        checkConflictingElements(declaration.konstueParameters, context, reporter)
                     }
                     checkConflictingElements(declaration.typeParameters, context, reporter)
                 }
@@ -49,7 +49,7 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
         }
 
         inspector.declarationConflictingSymbols.forEach { (conflictingDeclaration, symbols) ->
-            val source = conflictingDeclaration.source
+            konst source = conflictingDeclaration.source
             if (symbols.isNotEmpty()) {
                 when (conflictingDeclaration) {
                     is FirSimpleFunction,
@@ -57,7 +57,7 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
                         reporter.reportOn(source, FirErrors.CONFLICTING_OVERLOADS, symbols, context)
                     }
                     else -> {
-                        val factory = if (conflictingDeclaration is FirClassLikeDeclaration &&
+                        konst factory = if (conflictingDeclaration is FirClassLikeDeclaration &&
                             conflictingDeclaration.getContainingDeclaration(context.session) == null &&
                             symbols.any { it is FirClassLikeSymbol<*> }
                         ) {
@@ -73,7 +73,7 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
     }
 
     private fun checkFile(file: FirFile, inspector: FirDeclarationInspector, context: CheckerContext) {
-        val packageMemberScope: FirPackageMemberScope = context.sessionHolder.scopeSession.getOrBuild(file.packageFqName, PACKAGE_MEMBER) {
+        konst packageMemberScope: FirPackageMemberScope = context.sessionHolder.scopeSession.getOrBuild(file.packageFqName, PACKAGE_MEMBER) {
             FirPackageMemberScope(file.packageFqName, context.sessionHolder.session)
         }
         for (topLevelDeclaration in file.declarations) {
@@ -92,11 +92,11 @@ object FirConflictsDeclarationChecker : FirBasicDeclarationChecker() {
 class FirNameConflictsTracker : FirNameConflictsTrackerComponent() {
 
     data class ClassifierWithFile(
-        val classifier: FirClassLikeSymbol<*>,
-        val file: FirFile?
+        konst classifier: FirClassLikeSymbol<*>,
+        konst file: FirFile?
     )
 
-    val redeclaredClassifiers = HashMap<ClassId, Set<ClassifierWithFile>>()
+    konst redeclaredClassifiers = HashMap<ClassId, Set<ClassifierWithFile>>()
 
     override fun registerClassifierRedeclaration(
         classId: ClassId,

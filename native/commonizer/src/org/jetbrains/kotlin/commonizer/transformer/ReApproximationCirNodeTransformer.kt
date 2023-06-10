@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.commonizer.utils.fastForEach
 import org.jetbrains.kotlin.storage.StorageManager
 
 internal class ReApproximationCirNodeTransformer(
-    private val storageManager: StorageManager,
-    private val classifiers: CirKnownClassifiers,
-    private val settings: CommonizerSettings,
-    private val signatureBuildingContextProvider: SignatureBuildingContextProvider,
+    private konst storageManager: StorageManager,
+    private konst classifiers: CirKnownClassifiers,
+    private konst settings: CommonizerSettings,
+    private konst signatureBuildingContextProvider: SignatureBuildingContextProvider,
 ) : CirNodeTransformer {
 
     internal class SignatureBuildingContextProvider(
-        private val classifiers: CirKnownClassifiers,
-        private val typeAliasInvariant: Boolean,
-        private val skipArguments: Boolean
+        private konst classifiers: CirKnownClassifiers,
+        private konst typeAliasInvariant: Boolean,
+        private konst skipArguments: Boolean
     ) {
         operator fun invoke(member: CirMemberContext, functionOrPropertyOrConstructor: CirHasTypeParameters): SignatureBuildingContext {
             return SignatureBuildingContext(
@@ -47,26 +47,26 @@ internal class ReApproximationCirNodeTransformer(
     }
 
     private operator fun invoke(pkg: CirPackageNode, index: Int) {
-        pkg.functions.values.toTypedArray().fastForEach { function -> this(pkg, function, index, CirMemberContext.empty) }
-        pkg.properties.values.toTypedArray().fastForEach { property -> this(pkg, property, index, CirMemberContext.empty) }
-        pkg.classes.values.toTypedArray().fastForEach { clazz -> this(clazz, index, CirMemberContext.empty) }
+        pkg.functions.konstues.toTypedArray().fastForEach { function -> this(pkg, function, index, CirMemberContext.empty) }
+        pkg.properties.konstues.toTypedArray().fastForEach { property -> this(pkg, property, index, CirMemberContext.empty) }
+        pkg.classes.konstues.toTypedArray().fastForEach { clazz -> this(clazz, index, CirMemberContext.empty) }
     }
 
     private operator fun invoke(clazz: CirClassNode, index: Int, context: CirMemberContext) {
-        val contextWithClass = context.withContextOf(clazz.targetDeclarations[index] ?: return)
-        clazz.functions.values.toTypedArray().fastForEach { function -> this(clazz, function, index, contextWithClass) }
-        clazz.properties.values.toTypedArray().fastForEach { property -> this(clazz, property, index, contextWithClass) }
-        clazz.constructors.values.toTypedArray().fastForEach { constructor -> this(clazz, constructor, index, contextWithClass) }
-        clazz.classes.values.toTypedArray().fastForEach { innerClass -> this(innerClass, index, contextWithClass) }
+        konst contextWithClass = context.withContextOf(clazz.targetDeclarations[index] ?: return)
+        clazz.functions.konstues.toTypedArray().fastForEach { function -> this(clazz, function, index, contextWithClass) }
+        clazz.properties.konstues.toTypedArray().fastForEach { property -> this(clazz, property, index, contextWithClass) }
+        clazz.constructors.konstues.toTypedArray().fastForEach { constructor -> this(clazz, constructor, index, contextWithClass) }
+        clazz.classes.konstues.toTypedArray().fastForEach { innerClass -> this(innerClass, index, contextWithClass) }
     }
 
     private operator fun invoke(parent: CirNodeWithMembers<*, *>, function: CirFunctionNode, index: Int, context: CirMemberContext) {
         /* Only perform re-approximation to nodes that are not 'complete' */
         if (function.targetDeclarations.none { it == null }) return
-        val functionAtIndex = function.targetDeclarations[index] ?: return
+        konst functionAtIndex = function.targetDeclarations[index] ?: return
 
-        val approximationKey = FunctionApproximationKey.create(functionAtIndex, signatureBuildingContextProvider(context, functionAtIndex))
-        val newNode = parent.functions.getOrPut(approximationKey) {
+        konst approximationKey = FunctionApproximationKey.create(functionAtIndex, signatureBuildingContextProvider(context, functionAtIndex))
+        konst newNode = parent.functions.getOrPut(approximationKey) {
             buildFunctionNode(storageManager, parent.targetDeclarations.size, classifiers, settings, ParentNode(parent))
         }
 
@@ -80,10 +80,10 @@ internal class ReApproximationCirNodeTransformer(
     private operator fun invoke(parent: CirNodeWithMembers<*, *>, property: CirPropertyNode, index: Int, context: CirMemberContext) {
         /* Only perform re-approximation to nodes that are not 'complete' */
         if (property.targetDeclarations.none { it == null }) return
-        val propertyAtIndex = property.targetDeclarations[index] ?: return
+        konst propertyAtIndex = property.targetDeclarations[index] ?: return
 
-        val approximationKey = PropertyApproximationKey.create(propertyAtIndex, signatureBuildingContextProvider(context, propertyAtIndex))
-        val newNode = parent.properties.getOrPut(approximationKey) {
+        konst approximationKey = PropertyApproximationKey.create(propertyAtIndex, signatureBuildingContextProvider(context, propertyAtIndex))
+        konst newNode = parent.properties.getOrPut(approximationKey) {
             buildPropertyNode(storageManager, parent.targetDeclarations.size, classifiers, settings, ParentNode(parent))
         }
 
@@ -99,12 +99,12 @@ internal class ReApproximationCirNodeTransformer(
     ) {
         /* Only perform re-approximation to nodes that are not 'complete' */
         if (constructor.targetDeclarations.none { it == null }) return
-        val constructorAtIndex = constructor.targetDeclarations[index] ?: return
+        konst constructorAtIndex = constructor.targetDeclarations[index] ?: return
 
-        val approximationKey =
+        konst approximationKey =
             ConstructorApproximationKey.create(constructorAtIndex, signatureBuildingContextProvider(context, constructorAtIndex))
 
-        val newNode = parent.constructors.getOrPut(approximationKey) {
+        konst newNode = parent.constructors.getOrPut(approximationKey) {
             buildClassConstructorNode(storageManager, parent.targetDeclarations.size, classifiers, settings, ParentNode(parent))
         }
 

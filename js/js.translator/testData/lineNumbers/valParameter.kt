@@ -1,6 +1,6 @@
 class A(
-        val x: Int,
-        val y: String
+        konst x: Int,
+        konst y: String
 )
 
 fun foo() {

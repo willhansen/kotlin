@@ -33,11 +33,11 @@ import org.jetbrains.kotlin.types.error.ErrorScopeKind
 import org.jetbrains.kotlin.types.typeUtil.builtIns
 
 interface CapturedTypeConstructor : CapturedTypeConstructorMarker, TypeConstructor {
-    val projection: TypeProjection
+    konst projection: TypeProjection
 }
 
 class CapturedTypeConstructorImpl(
-    override val projection: TypeProjection
+    override konst projection: TypeProjection
 ) : CapturedTypeConstructor {
     var newTypeConstructor: NewCapturedTypeConstructor? = null
 
@@ -50,7 +50,7 @@ class CapturedTypeConstructorImpl(
     override fun getParameters(): List<TypeParameterDescriptor> = listOf()
 
     override fun getSupertypes(): Collection<KotlinType> {
-        val superType = if (projection.projectionKind == Variance.OUT_VARIANCE)
+        konst superType = if (projection.projectionKind == Variance.OUT_VARIANCE)
             projection.type
         else
             builtIns.nullableAnyType
@@ -73,25 +73,25 @@ class CapturedTypeConstructorImpl(
 }
 
 class CapturedType(
-    val typeProjection: TypeProjection,
-    override val constructor: CapturedTypeConstructor = CapturedTypeConstructorImpl(typeProjection),
-    override val isMarkedNullable: Boolean = false,
-    override val attributes: TypeAttributes = TypeAttributes.Empty
+    konst typeProjection: TypeProjection,
+    override konst constructor: CapturedTypeConstructor = CapturedTypeConstructorImpl(typeProjection),
+    override konst isMarkedNullable: Boolean = false,
+    override konst attributes: TypeAttributes = TypeAttributes.Empty
 ) : SimpleType(), SubtypingRepresentatives, CapturedTypeMarker {
 
-    override val arguments: List<TypeProjection>
+    override konst arguments: List<TypeProjection>
         get() = listOf()
 
-    override val memberScope: MemberScope
+    override konst memberScope: MemberScope
         get() = ErrorUtils.createErrorScope(
             ErrorScopeKind.CAPTURED_TYPE_SCOPE,
             throwExceptions = true
         )
 
-    override val subTypeRepresentative: KotlinType
+    override konst subTypeRepresentative: KotlinType
         get() = representative(OUT_VARIANCE, builtIns.nullableAnyType)
 
-    override val superTypeRepresentative: KotlinType
+    override konst superTypeRepresentative: KotlinType
         get() = representative(IN_VARIANCE, builtIns.nothingType)
 
     private fun representative(variance: Variance, default: KotlinType) =

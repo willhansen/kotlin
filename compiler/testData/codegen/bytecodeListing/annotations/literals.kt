@@ -15,6 +15,6 @@ open class My
 fun foo(arg: Int): My {
     bar @FunAnn { arg }
     bar @ExprAnn { arg }
-    val x = @FunAnn fun() = arg
+    konst x = @FunAnn fun() = arg
     return (@ClsAnn object: My() {})
 }

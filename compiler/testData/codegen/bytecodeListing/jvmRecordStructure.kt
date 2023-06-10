@@ -9,9 +9,9 @@
 // IGNORE_DEXING
 
 interface KI<T> {
-    val x: String get() = ""
-    val y: T
+    konst x: String get() = ""
+    konst y: T
 }
 
 @JvmRecord
-data class MyRec<R>(override val x: String, override val y: R) : KI<R>
+data class MyRec<R>(override konst x: String, override konst y: R) : KI<R>

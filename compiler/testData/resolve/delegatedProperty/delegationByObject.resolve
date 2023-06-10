@@ -1,4 +1,4 @@
 object ~A~A
 
-val a: Int by `A`A
+konst a: Int by `A`A
 

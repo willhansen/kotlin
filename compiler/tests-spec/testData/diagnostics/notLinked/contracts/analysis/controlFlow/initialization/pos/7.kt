@@ -37,19 +37,19 @@ import contracts.*
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val value_1: Int
+    konst konstue_1: Int
     case_1 {
-        value_1 = 10
+        konstue_1 = 10
     }
-    println(value_1)
+    println(konstue_1)
 }
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val value_1: Int
+    konst konstue_1: Int
     case_2 {
-        value_1 = 10
+        konstue_1 = 10
         10
     }
-    println(value_1)
+    println(konstue_1)
 }

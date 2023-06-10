@@ -14,11 +14,11 @@ class NullableScope() {
 }
 
 fun box(): String {
-    val stringVal: String = "Stirng value"
-    val charSequenceVal: CharSequence = "CharSequence value"
-    val anyVal: Any = "Any value"
+    konst stringVal: String = "Stirng konstue"
+    konst charSequenceVal: CharSequence = "CharSequence konstue"
+    konst anyVal: Any = "Any konstue"
 
-    val r = Receiver()
+    konst r = Receiver()
 
     Scope().apply {
         assertEquals("String", r.testOverload(stringVal))
@@ -26,9 +26,9 @@ fun box(): String {
         assertEquals("Any", r.testOverload(anyVal))
     }
 
-    val stringOrNullVal: String? = "Stirng? value"
-    val charSequenceOrNullVal: CharSequence? = "CharSequence? value"
-    val anyOrNullVal: Any? = "Any? value"
+    konst stringOrNullVal: String? = "Stirng? konstue"
+    konst charSequenceOrNullVal: CharSequence? = "CharSequence? konstue"
+    konst anyOrNullVal: Any? = "Any? konstue"
 
     NullableScope().apply {
         assertEquals("String", r.testOverload(stringVal))

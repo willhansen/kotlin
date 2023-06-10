@@ -607,9 +607,9 @@ public class PseudoValueTestGenerated extends AbstractPseudoValueTest {
                 runTest("compiler/testData/cfg/expressions/incdec.kt");
             }
 
-            @TestMetadata("invalidVariableCall.kt")
-            public void testInvalidVariableCall() throws Exception {
-                runTest("compiler/testData/cfg/expressions/invalidVariableCall.kt");
+            @TestMetadata("inkonstidVariableCall.kt")
+            public void testInkonstidVariableCall() throws Exception {
+                runTest("compiler/testData/cfg/expressions/inkonstidVariableCall.kt");
             }
 
             @TestMetadata("labeledExpression.kt")

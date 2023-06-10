@@ -1,7 +1,7 @@
 // !CHECK_TYPE
 
 fun noCoercionLastExpressionUsedAsReturnArgument() {
-    val a = {
+    konst a = {
         42
     }
 
@@ -9,13 +9,13 @@ fun noCoercionLastExpressionUsedAsReturnArgument() {
 }
 
 fun noCoercionBlockHasExplicitType() {
-    val b: () -> Int = {
+    konst b: () -> Int = {
         <!TYPE_MISMATCH!>if (true) 42<!>
     }
 }
 
 fun noCoercionBlockHasExplicitReturn() {
-    val c = l@{
+    konst c = l@{
         if (true) return@l 42
 
         <!INVALID_IF_AS_EXPRESSION!>if<!> (true) 239

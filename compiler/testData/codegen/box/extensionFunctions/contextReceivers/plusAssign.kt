@@ -4,7 +4,7 @@
 
 @file:Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
 
-open class EntityFactory<E>(val size: Int, val factory: (Int) -> E)
+open class EntityFactory<E>(konst size: Int, konst factory: (Int) -> E)
 
 class EntityContext {
     var d = DoubleArray(16)
@@ -12,39 +12,39 @@ class EntityContext {
     var size: Int = 0
         private set
     fun <E> create(entity: EntityFactory<E>): E {
-        val i = size
+        konst i = size
         size += entity.size
         if (size > d.size) d = d.copyOf(maxOf(2 * d.size, size))
         return entity.factory(i)
     }
 }
 
-@JvmInline value class EDouble(private val i: Int) {
+@JvmInline konstue class EDouble(private konst i: Int) {
     companion object Factory : EntityFactory<EDouble>(1, ::EDouble)
 
     context(EntityContext)
-    var value: Double
+    var konstue: Double
         get() = d[i]
-        set(value) { d[i] = value }
+        set(konstue) { d[i] = konstue }
 }
 
-@JvmInline value class EVec3(private val i: Int) {
+@JvmInline konstue class EVec3(private konst i: Int) {
     companion object Factory : EntityFactory<EVec3>(3, ::EVec3)
 
     context(EntityContext)
     var x: Double
         get() = d[i]
-        set(value) { d[i] = value }
+        set(konstue) { d[i] = konstue }
 
     context(EntityContext)
     var y: Double
         get() = d[i + 1]
-        set(value) { d[i + 1] = value }
+        set(konstue) { d[i + 1] = konstue }
 
     context(EntityContext)
     var z: Double
         get() = d[i + 2]
-        set(value) { d[i + 2] = value }
+        set(konstue) { d[i + 2] = konstue }
 }
 
 context(EntityContext)
@@ -59,11 +59,11 @@ operator fun EVec3.plusAssign(v: EVec3) {
 }
 
 fun box(): String = with(EntityContext()) {
-    val v0 = create(EVec3)
+    konst v0 = create(EVec3)
     v0.x = 1.0
     v0.y = 2.0
     v0.z = 3.0
-    val v1 = create(EVec3)
+    konst v1 = create(EVec3)
     v1.x = 2.0
     v1.y = 0.0
     v1.z = 4.0

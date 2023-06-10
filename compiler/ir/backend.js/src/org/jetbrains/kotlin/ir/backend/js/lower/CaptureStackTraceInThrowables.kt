@@ -26,23 +26,23 @@ object ES6_THROWABLE_CONSTRUCTOR_SLOT : IrDeclarationOriginImpl("ES6_THROWABLE_C
 /**
  * Capture stack trace in primary constructors of Throwable
  */
-class CaptureStackTraceInThrowables(val context: JsIrBackendContext) : BodyLoweringPass {
+class CaptureStackTraceInThrowables(konst context: JsIrBackendContext) : BodyLoweringPass {
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (container !is IrConstructor || !container.isPrimary)
             return
 
-        val klass = container.parentAsClass
+        konst klass = container.parentAsClass
 
         if (!klass.isSubclassOf(context.irBuiltIns.throwableClass.owner))
             return
 
-        val statements = (irBody as? IrBlockBody)?.statements ?: return
-        val delegatingConstructorCallIndex = statements.indexOfLast { it is IrDelegatingConstructorCall }
+        konst statements = (irBody as? IrBlockBody)?.statements ?: return
+        konst delegatingConstructorCallIndex = statements.indexOfLast { it is IrDelegatingConstructorCall }
 
         statements.add(delegatingConstructorCallIndex + 1, JsIrBuilder.buildCall(context.intrinsics.captureStack).also { call ->
-            val self = klass.thisReceiver!!.symbol
+            konst self = klass.thisReceiver!!.symbol
 
-            val constructorRef = if (context.es6mode) {
+            konst constructorRef = if (context.es6mode) {
                 JsIrBuilder.buildGetField(klass.addThrowableConstructorSlot().symbol, JsIrBuilder.buildGetValue(self))
             } else {
                 JsIrBuilder.buildRawReference(container.symbol, context.irBuiltIns.anyType)

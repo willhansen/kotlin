@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.codegen.CallableMethod
 
 class ToString : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable {
-        val type = AsmUtil.stringValueOfType(method.dispatchReceiverType ?: method.extensionReceiverType)
+        konst type = AsmUtil.stringValueOfType(method.dispatchReceiverType ?: method.extensionReceiverType)
         return createUnaryIntrinsicCallable(method, newThisType = type) {
-            it.invokestatic("java/lang/String", "valueOf", "(${type.descriptor})Ljava/lang/String;", false)
+            it.invokestatic("java/lang/String", "konstueOf", "(${type.descriptor})Ljava/lang/String;", false)
         }
     }
 }

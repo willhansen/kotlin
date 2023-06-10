@@ -20,7 +20,7 @@ internal fun FileWriter.writeHeader(file: File, pkg: String) {
 }
 
 internal fun FileWriter.writeIntArray(name: String, elements: List<Int>, strategy: RangesWritingStrategy, useHex: Boolean = true) {
-    val toString = if (useHex) Int::toHexIntLiteral else Int::toString
+    konst toString = if (useHex) Int::toHexIntLiteral else Int::toString
     writeCollection(name, "intArrayOf", elements.map(toString), strategy)
 }
 
@@ -35,7 +35,7 @@ private fun FileWriter.writeCollection(
     }
 
     append(strategy.rangesAnnotation)
-    appendWithIndentation("${strategy.rangesVisibilityModifier} val $name = $constructingFun(")
+    appendWithIndentation("${strategy.rangesVisibilityModifier} konst $name = $constructingFun(")
     for (i in elements.indices) {
         if (i % 20 == 0) {
             appendLine()
@@ -49,39 +49,39 @@ private fun FileWriter.writeCollection(
 }
 
 internal fun FileWriter.writeMappings(mappings: Map<Int, List<String>>, strategy: RangesWritingStrategy) {
-    val keys = mappings.keys.map { it.toHexIntLiteral() }
+    konst keys = mappings.keys.map { it.toHexIntLiteral() }
     writeCollection("keys", "intArrayOf", keys, strategy)
-    val values = mappings.values.map { it.hexCharsToStringLiteral() }
-    writeCollection("values", "arrayOf", values, strategy)
+    konst konstues = mappings.konstues.map { it.hexCharsToStringLiteral() }
+    writeCollection("konstues", "arrayOf", konstues, strategy)
 }
 
-internal const val TO_BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+internal const konst TO_BASE64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
 internal fun List<Int>.toVarLenBase64(): String {
-    val base64 = flatMap { it.to6Bits() }
+    konst base64 = flatMap { it.to6Bits() }
     return base64.joinToString(separator = "") { TO_BASE64[it].toString() }
 }
 
 private fun Int.to6Bits(): List<Int> {
     require(this >= 0)
 
-    val result = mutableListOf<Int>()
+    konst result = mutableListOf<Int>()
 
-    var value = this
+    var konstue = this
     do {
-        var fiveBits = value and 0x1f
-        value = value shr 5
-        if (value != 0) {
+        var fiveBits = konstue and 0x1f
+        konstue = konstue shr 5
+        if (konstue != 0) {
             fiveBits = fiveBits or 0x20
         }
         result.add(fiveBits)
-    } while (value != 0)
+    } while (konstue != 0)
 
     return result
 }
 
 internal fun Int.toHexIntLiteral(): String {
-    val result = toString(radix = 16)
+    konst result = toString(radix = 16)
     if (result.first() == '-') {
         return "-0x" + result.substring(startIndex = 1).padStart(4, '0')
     }
@@ -101,8 +101,8 @@ internal fun List<String>.hexCharsToStringLiteral(): String {
 }
 
 internal fun IntRange.rangeCheck(ch: String, indent: String): String {
-    val firstHex = first.toHexIntLiteral()
-    val lastHex = last.toHexIntLiteral()
+    konst firstHex = first.toHexIntLiteral()
+    konst lastHex = last.toHexIntLiteral()
     return when (first) {
         last ->
             "$ch == $firstHex"

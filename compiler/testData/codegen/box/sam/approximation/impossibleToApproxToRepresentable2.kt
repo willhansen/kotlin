@@ -18,7 +18,7 @@ class G<T> where T: U, T: W {
 }
 
 fun box(): String {
-    val g = sel(G<A>(), G<B>())
+    konst g = sel(G<A>(), G<B>())
     g.check {} // TODO: report a compile time error for this case
     return "OK"
 }

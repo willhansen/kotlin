@@ -21,7 +21,7 @@ class Test {
 
 annotation class Annotation {
     companion object {
-        @JvmStatic val TEST_FIELD = "OK"
+        @JvmStatic konst TEST_FIELD = "OK"
 
         var TEST_FIELD2 = ""
             @JvmStatic get

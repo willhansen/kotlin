@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.fir.resolve.isSubclassOf
 import org.jetbrains.kotlin.fir.resolve.toSymbol
 import org.jetbrains.kotlin.fir.symbols.ConeClassLikeLookupTag
 
-class JvmPlatformOverloadsConflictResolver(private val session: FirSession) : ConeCallConflictResolver() {
+class JvmPlatformOverloadsConflictResolver(private konst session: FirSession) : ConeCallConflictResolver() {
     override fun chooseMaximallySpecificCandidates(
         candidates: Set<Candidate>,
         discriminateAbstracts: Boolean
@@ -24,9 +24,9 @@ class JvmPlatformOverloadsConflictResolver(private val session: FirSession) : Co
         if (!session.languageVersionSettings.supportsFeature(LanguageFeature.PreferJavaFieldOverload)) {
             return candidates
         }
-        val result = mutableSetOf<Candidate>()
+        konst result = mutableSetOf<Candidate>()
         for (myCandidate in candidates) {
-            when (val me = myCandidate.symbol.fir) {
+            when (konst me = myCandidate.symbol.fir) {
                 is FirProperty -> if (!me.isShadowedByFieldCandidate(candidates)) {
                     result += myCandidate
                 }
@@ -40,14 +40,14 @@ class JvmPlatformOverloadsConflictResolver(private val session: FirSession) : Co
     }
 
     private fun FirProperty.isShadowedByFieldCandidate(candidates: Set<Candidate>): Boolean {
-        val propertyContainingClassLookupTag = unwrapSubstitutionOverrides().symbol.containingClassLookupTag() ?: return false
+        konst propertyContainingClassLookupTag = unwrapSubstitutionOverrides().symbol.containingClassLookupTag() ?: return false
         for (otherCandidate in candidates) {
-            val field = otherCandidate.symbol.fir as? FirField ?: continue
-            val fieldContainingClassLookupTag = field.unwrapFakeOverrides().symbol.containingClassLookupTag()
+            konst field = otherCandidate.symbol.fir as? FirField ?: continue
+            konst fieldContainingClassLookupTag = field.unwrapFakeOverrides().symbol.containingClassLookupTag()
             if (fieldContainingClassLookupTag != null &&
                 !propertyContainingClassLookupTag.strictlyDerivedFrom(fieldContainingClassLookupTag)
             ) {
-                // NB: FE 1.0 does class equivalence check here ^^^
+                // NB: FE 1.0 does class equikonstence check here ^^^
                 // However, in FIR container classes aren't the same for our samples (see fieldPropertyOverloads.kt)
                 // E.g. we can have SomeConcreteJavaEnum for field and kotlin.Enum for static property 'name'
                 return true
@@ -57,14 +57,14 @@ class JvmPlatformOverloadsConflictResolver(private val session: FirSession) : Co
     }
 
     private fun FirField.isShadowedByPropertyCandidate(candidates: Set<Candidate>): Boolean {
-        val fieldContainingClassLookupTag = unwrapFakeOverrides().symbol.containingClassLookupTag() ?: return false
+        konst fieldContainingClassLookupTag = unwrapFakeOverrides().symbol.containingClassLookupTag() ?: return false
         for (otherCandidate in candidates) {
-            val property = otherCandidate.symbol.fir as? FirProperty ?: continue
-            val propertyContainingClassLookupTag = property.unwrapSubstitutionOverrides().symbol.containingClassLookupTag()
+            konst property = otherCandidate.symbol.fir as? FirProperty ?: continue
+            konst propertyContainingClassLookupTag = property.unwrapSubstitutionOverrides().symbol.containingClassLookupTag()
             if (propertyContainingClassLookupTag != null &&
                 propertyContainingClassLookupTag.strictlyDerivedFrom(fieldContainingClassLookupTag)
             ) {
-                // NB: FE 1.0 does class equivalence check here ^^^
+                // NB: FE 1.0 does class equikonstence check here ^^^
                 // However, in FIR container classes aren't the same for our samples (see fieldPropertyOverloads.kt)
                 // E.g. we can have SomeConcreteJavaEnum for field and kotlin.Enum for static property 'name'
                 return true
@@ -75,7 +75,7 @@ class JvmPlatformOverloadsConflictResolver(private val session: FirSession) : Co
 
     private fun ConeClassLikeLookupTag.strictlyDerivedFrom(other: ConeClassLikeLookupTag): Boolean {
         if (this == other) return false
-        val thisClass = this.toSymbol(session)?.fir as? FirClass ?: return false
+        konst thisClass = this.toSymbol(session)?.fir as? FirClass ?: return false
 
         return thisClass.isSubclassOf(other, session, isStrict = true)
     }

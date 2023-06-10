@@ -21,7 +21,7 @@ internal class PossessiveFixedLengthQuantifierSet(
         // Process occurrences between 0 and max.
         var occurrences = 0
         while (max == Quantifier.INF || occurrences < max) {
-            val nextIndex = innerSet.matches(index, testString, matchResult)
+            konst nextIndex = innerSet.matches(index, testString, matchResult)
             if (nextIndex < 0) {
                 break
             }

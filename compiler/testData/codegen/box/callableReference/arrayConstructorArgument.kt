@@ -1,7 +1,7 @@
 // WITH_STDLIB
 fun foo(it: Int) = "O"[it]
 
-val Int.foo: Char
+konst Int.foo: Char
     get() = "K"[this]
 
 fun box(): String =

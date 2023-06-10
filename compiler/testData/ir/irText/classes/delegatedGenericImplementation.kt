@@ -3,7 +3,7 @@
 
 interface IBase<A> {
     fun <B> foo(a: A, b: B)
-    val <C> C.id: Map<A, C>?
+    konst <C> C.id: Map<A, C>?
     var <D> List<D>.x: D?
 }
 

@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.util.slicedMap.ReadOnlySlice
  * files to compile, but in cases such as the IDE bytecode tool window, such a source file won't be included in [files].
  */
 internal fun SymbolTable.referenceUndiscoveredExpectSymbols(files: Collection<KtFile>, bindingContext: BindingContext) {
-    val visitor = UndiscoveredExpectVisitor(this, bindingContext)
+    konst visitor = UndiscoveredExpectVisitor(this, bindingContext)
     files.forEach(visitor::visitKtFile)
 }
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class UndiscoveredExpectVisitor(
-    private val symbolTable: SymbolTable,
-    private val bindingContext: BindingContext,
+    private konst symbolTable: SymbolTable,
+    private konst bindingContext: BindingContext,
 ) : KtTreeVisitorVoid() {
     override fun visitClassOrObject(classOrObject: KtClassOrObject) {
         super.visitClassOrObject(classOrObject)
@@ -82,7 +82,7 @@ class UndiscoveredExpectVisitor(
     private inline fun <reified D : MemberDescriptor, K : PsiElement, V> K.findExpectForActualOfType(
         bindingContextKey: ReadOnlySlice<K, V>,
     ): D? {
-        val descriptor = (bindingContext[bindingContextKey, this] as? D)?.takeIf { it.isActual } ?: return null
+        konst descriptor = (bindingContext[bindingContextKey, this] as? D)?.takeIf { it.isActual } ?: return null
         return descriptor.findCompatibleExpectsForActual().singleOrNull() as? D
     }
 }

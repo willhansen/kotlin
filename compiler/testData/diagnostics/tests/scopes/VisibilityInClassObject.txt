@@ -12,10 +12,10 @@ public open class A {
 
     public companion object Companion {
         private constructor Companion()
-        public final val internal_val: kotlin.Int = 1
-        private final val private_val: kotlin.Int = 3
-        protected final val protected_val: kotlin.Int = 5
-        public final val public_val: kotlin.Int = 2
+        public final konst internal_konst: kotlin.Int = 1
+        private final konst private_konst: kotlin.Int = 3
+        protected final konst protected_konst: kotlin.Int = 5
+        public final konst public_konst: kotlin.Int = 2
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

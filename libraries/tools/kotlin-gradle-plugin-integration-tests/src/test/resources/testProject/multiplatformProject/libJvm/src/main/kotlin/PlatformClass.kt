@@ -1,5 +1,5 @@
 package foo
 
 actual class PlatformClass {
-    actual val value: String = "JVM"
+    actual konst konstue: String = "JVM"
 }

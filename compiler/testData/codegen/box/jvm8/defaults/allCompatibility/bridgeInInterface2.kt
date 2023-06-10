@@ -27,7 +27,7 @@ fun box(): String {
     checkNoMethod(TestClass::class.java, "test", Any::class.java)
 
 
-    val test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
+    konst test2DefaultImpls = java.lang.Class.forName("Test2\$DefaultImpls")
     checkMethodExists(test2DefaultImpls, "test", Test2::class.java, String::class.java)
     checkNoMethod(test2DefaultImpls, "test", Test2::class.java, Any::class.java)
 

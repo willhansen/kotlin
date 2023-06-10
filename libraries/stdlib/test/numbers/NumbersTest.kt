@@ -10,23 +10,23 @@ import kotlin.random.Random
 import kotlin.test.*
 
 object NumbersTestConstants {
-    public const val byteMinSucc: Byte = (Byte.MIN_VALUE + 1).toByte()
-    public const val byteMaxPred: Byte = (Byte.MAX_VALUE - 1).toByte()
+    public const konst byteMinSucc: Byte = (Byte.MIN_VALUE + 1).toByte()
+    public const konst byteMaxPred: Byte = (Byte.MAX_VALUE - 1).toByte()
 
-    public const val shortMinSucc: Short = (Short.MIN_VALUE + 1).toShort()
-    public const val shortMaxPred: Short = (Short.MAX_VALUE - 1).toShort()
+    public const konst shortMinSucc: Short = (Short.MIN_VALUE + 1).toShort()
+    public const konst shortMaxPred: Short = (Short.MAX_VALUE - 1).toShort()
 
-    public const val intMinSucc: Int = Int.MIN_VALUE + 1
-    public const val intMaxPred: Int = Int.MAX_VALUE - 1
+    public const konst intMinSucc: Int = Int.MIN_VALUE + 1
+    public const konst intMaxPred: Int = Int.MAX_VALUE - 1
 
-    public const val longMinSucc: Long = Long.MIN_VALUE + 1L
-    public const val longMaxPred: Long = Long.MAX_VALUE - 1L
+    public const konst longMinSucc: Long = Long.MIN_VALUE + 1L
+    public const konst longMaxPred: Long = Long.MAX_VALUE - 1L
 
-    public const val doubleMaxHalf: Double = Double.MAX_VALUE / 2
-    public const val doubleMinTwice: Double = Double.MIN_VALUE * 2
+    public const konst doubleMaxHalf: Double = Double.MAX_VALUE / 2
+    public const konst doubleMinTwice: Double = Double.MIN_VALUE * 2
 
-    public const val floatMaxHalf: Float = Float.MAX_VALUE / 2
-    public const val floatMinTwice: Float = Float.MIN_VALUE * 2
+    public const konst floatMaxHalf: Float = Float.MAX_VALUE / 2
+    public const konst floatMinTwice: Float = Float.MIN_VALUE * 2
 
 }
 
@@ -137,42 +137,42 @@ class NumbersTest {
     }
     
     @Test fun doubleProperties() {
-        for (value in listOf(1.0, 0.0, Double.MIN_VALUE, Double.MAX_VALUE))
-            doTestNumber(value)
-        for (value in listOf(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY))
-            doTestNumber(value, isInfinite = true)
+        for (konstue in listOf(1.0, 0.0, Double.MIN_VALUE, Double.MAX_VALUE))
+            doTestNumber(konstue)
+        for (konstue in listOf(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY))
+            doTestNumber(konstue, isInfinite = true)
         doTestNumber(Double.NaN, isNaN = true)
     }
 
     @Test fun floatProperties() {
-        for (value in listOf(1.0F, 0.0F, Float.MAX_VALUE, Float.MIN_VALUE))
-            doTestNumber(value)
-        for (value in listOf(Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY))
-            doTestNumber(value, isInfinite = true)
+        for (konstue in listOf(1.0F, 0.0F, Float.MAX_VALUE, Float.MIN_VALUE))
+            doTestNumber(konstue)
+        for (konstue in listOf(Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY))
+            doTestNumber(konstue, isInfinite = true)
         doTestNumber(Float.NaN, isNaN = true)
     }
 
     @Test fun floatFitsInFloatArray() {
-        val values = listOf(1.0F, 0.0F, Float.MAX_VALUE, Float.MIN_VALUE, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NaN)
-        val valuesArray = values.toFloatArray()
+        konst konstues = listOf(1.0F, 0.0F, Float.MAX_VALUE, Float.MIN_VALUE, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NaN)
+        konst konstuesArray = konstues.toFloatArray()
 
-        for (index in values.indices) {
-            val value = values[index]
-            val tolerance = if (value == Float.MIN_VALUE) 0.001 * value else 0.0000001 * value
-            assertAlmostEquals(value, valuesArray[index], tolerance)
+        for (index in konstues.indices) {
+            konst konstue = konstues[index]
+            konst tolerance = if (konstue == Float.MIN_VALUE) 0.001 * konstue else 0.0000001 * konstue
+            assertAlmostEquals(konstue, konstuesArray[index], tolerance)
         }
     }
 
-    private fun doTestNumber(value: Double, isNaN: Boolean = false, isInfinite: Boolean = false) {
-        assertEquals(isNaN, value.isNaN(), "Expected $value to have isNaN: $isNaN")
-        assertEquals(isInfinite, value.isInfinite(), "Expected $value to have isInfinite: $isInfinite")
-        assertEquals(!isNaN && !isInfinite, value.isFinite())
+    private fun doTestNumber(konstue: Double, isNaN: Boolean = false, isInfinite: Boolean = false) {
+        assertEquals(isNaN, konstue.isNaN(), "Expected $konstue to have isNaN: $isNaN")
+        assertEquals(isInfinite, konstue.isInfinite(), "Expected $konstue to have isInfinite: $isInfinite")
+        assertEquals(!isNaN && !isInfinite, konstue.isFinite())
     }
 
-    private fun doTestNumber(value: Float, isNaN: Boolean = false, isInfinite: Boolean = false) {
-        assertEquals(isNaN, value.isNaN(), "Expected $value to have isNaN: $isNaN")
-        assertEquals(isInfinite, value.isInfinite(), "Expected $value to have isInfinite: $isInfinite")
-        assertEquals(!isNaN && !isInfinite, value.isFinite())
+    private fun doTestNumber(konstue: Float, isNaN: Boolean = false, isInfinite: Boolean = false) {
+        assertEquals(isNaN, konstue.isNaN(), "Expected $konstue to have isNaN: $isNaN")
+        assertEquals(isInfinite, konstue.isInfinite(), "Expected $konstue to have isInfinite: $isInfinite")
+        assertEquals(!isNaN && !isInfinite, konstue.isFinite())
     }
 
     @Test fun doubleToBits() {
@@ -180,9 +180,9 @@ class NumbersTest {
         assertEquals(0x400921fb54442d18L, kotlin.math.PI.toRawBits())
         assertEquals(kotlin.math.PI, Double.fromBits(0x400921fb54442d18L))
 
-        for (value in listOf(Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -Double.MIN_VALUE, -0.0, 0.0, Double.POSITIVE_INFINITY, Double.MAX_VALUE, 1.0, Double.MIN_VALUE)) {
-            assertEquals(value, Double.fromBits(value.toBits()))
-            assertEquals(value, Double.fromBits(value.toRawBits()))
+        for (konstue in listOf(Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -Double.MIN_VALUE, -0.0, 0.0, Double.POSITIVE_INFINITY, Double.MAX_VALUE, 1.0, Double.MIN_VALUE)) {
+            assertEquals(konstue, Double.fromBits(konstue.toBits()))
+            assertEquals(konstue, Double.fromBits(konstue.toRawBits()))
         }
         assertTrue(Double.NaN.toBits().let(Double.Companion::fromBits).isNaN())
         assertTrue(Double.NaN.toRawBits().let { Double.fromBits(it) }.isNaN())
@@ -193,7 +193,7 @@ class NumbersTest {
         assertEquals(0x7FF80000_00000000L, Double.NaN.toBits())
         assertEquals(0x7FF80000_00000000L, Double.NaN.toRawBits())
 
-        val bitsNaN = Double.NaN.toBits()
+        konst bitsNaN = Double.NaN.toBits()
         for (bitsDenormNaN in listOf(0xFFF80000L shl 32, bitsNaN or 1)) {
             assertTrue(Double.fromBits(bitsDenormNaN).isNaN(), "expected $bitsDenormNaN represent NaN")
             assertEquals(bitsNaN, Double.fromBits(bitsDenormNaN).toBits())
@@ -201,26 +201,26 @@ class NumbersTest {
     }
 
     @Test fun floatToBits() {
-        val PI_F = kotlin.math.PI.toFloat()
+        konst PI_F = kotlin.math.PI.toFloat()
         assertEquals(0x40490fdb, PI_F.toBits())
         if (isFloat32RangeEnforced) {
             assertEquals(PI_F, Float.fromBits(0x40490fdb))
         } else {
             assertAlmostEquals(PI_F, Float.fromBits(0x40490fdb)) // PI_F is actually Double in JS
         }
-        for (value in listOf(Float.NEGATIVE_INFINITY, -1.0F, -0.0F, 0.0F, Float.POSITIVE_INFINITY, 1.0F)) {
-            assertEquals(value, Float.fromBits(value.toBits()))
-            assertEquals(value, Float.fromBits(value.toRawBits()))
+        for (konstue in listOf(Float.NEGATIVE_INFINITY, -1.0F, -0.0F, 0.0F, Float.POSITIVE_INFINITY, 1.0F)) {
+            assertEquals(konstue, Float.fromBits(konstue.toBits()))
+            assertEquals(konstue, Float.fromBits(konstue.toRawBits()))
         }
 
-        for (value in listOf(-Float.MAX_VALUE, Float.MAX_VALUE, -Float.MIN_VALUE, Float.MIN_VALUE)) {
+        for (konstue in listOf(-Float.MAX_VALUE, Float.MAX_VALUE, -Float.MIN_VALUE, Float.MIN_VALUE)) {
             if (isFloat32RangeEnforced) {
-                assertEquals(value, Float.fromBits(value.toBits()))
-                assertEquals(value, Float.fromBits(value.toRawBits()))
+                assertEquals(konstue, Float.fromBits(konstue.toBits()))
+                assertEquals(konstue, Float.fromBits(konstue.toRawBits()))
             } else {
-                val tolerance = if (kotlin.math.abs(value) == Float.MIN_VALUE) 0.001 * value else 0.0000001 * value
-                assertAlmostEquals(value, Float.fromBits(value.toBits()), tolerance)
-                assertAlmostEquals(value, Float.fromBits(value.toRawBits()), tolerance)
+                konst tolerance = if (kotlin.math.abs(konstue) == Float.MIN_VALUE) 0.001 * konstue else 0.0000001 * konstue
+                assertAlmostEquals(konstue, Float.fromBits(konstue.toBits()), tolerance)
+                assertAlmostEquals(konstue, Float.fromBits(konstue.toRawBits()), tolerance)
             }
         }
 
@@ -231,7 +231,7 @@ class NumbersTest {
         assertEquals(0x7fc00000, Float.NaN.toBits())
         assertEquals(0x7fc00000, Float.NaN.toRawBits())
 
-        val bitsNaN = Float.NaN.toBits()
+        konst bitsNaN = Float.NaN.toBits()
         for (bitsDenormNaN in listOf(0xFFFC0000.toInt(), bitsNaN or 1)) {
             assertTrue(Float.fromBits(bitsDenormNaN).isNaN(), "expected $bitsDenormNaN represent NaN")
             assertEquals(bitsNaN, Float.fromBits(bitsDenormNaN).toBits())
@@ -262,14 +262,14 @@ class NumbersTest {
 
     @Test
     fun byteBits() {
-        fun test(value: Byte, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < Byte.SIZE_BITS) 1.shl(Byte.SIZE_BITS - leadingZeroes - 1).toByte() else 0
-            val lowestBit = if (trailingZeroes < Byte.SIZE_BITS) 1.shl(trailingZeroes).toByte() else 0
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: Byte, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < Byte.SIZE_BITS) 1.shl(Byte.SIZE_BITS - leadingZeroes - 1).toByte() else 0
+            konst lowestBit = if (trailingZeroes < Byte.SIZE_BITS) 1.shl(trailingZeroes).toByte() else 0
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0, 0, 8, 8)
@@ -282,14 +282,14 @@ class NumbersTest {
 
     @Test
     fun shortBits() {
-        fun test(value: Short, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < Short.SIZE_BITS) 1.shl(Short.SIZE_BITS - leadingZeroes - 1).toShort() else 0
-            val lowestBit = if (trailingZeroes < Short.SIZE_BITS) 1.shl(trailingZeroes).toShort() else 0
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: Short, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < Short.SIZE_BITS) 1.shl(Short.SIZE_BITS - leadingZeroes - 1).toShort() else 0
+            konst lowestBit = if (trailingZeroes < Short.SIZE_BITS) 1.shl(trailingZeroes).toShort() else 0
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0, 0, 16, 16)
@@ -302,14 +302,14 @@ class NumbersTest {
 
     @Test
     fun intBits() {
-        fun test(value: Int, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < Int.SIZE_BITS) 1.shl(Int.SIZE_BITS - leadingZeroes - 1) else 0
-            val lowestBit = if (trailingZeroes < Int.SIZE_BITS) 1.shl(trailingZeroes) else 0
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: Int, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < Int.SIZE_BITS) 1.shl(Int.SIZE_BITS - leadingZeroes - 1) else 0
+            konst lowestBit = if (trailingZeroes < Int.SIZE_BITS) 1.shl(trailingZeroes) else 0
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0, 0, 32, 32)
@@ -321,14 +321,14 @@ class NumbersTest {
 
     @Test
     fun longBits() {
-        fun test(value: Long, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
-            assertEquals(oneBits, value.countOneBits())
-            assertEquals(leadingZeroes, value.countLeadingZeroBits())
-            assertEquals(trailingZeroes, value.countTrailingZeroBits())
-            val highestBit = if (leadingZeroes < Long.SIZE_BITS) 1L.shl(Long.SIZE_BITS - leadingZeroes - 1).toLong() else 0
-            val lowestBit = if (trailingZeroes < Long.SIZE_BITS) 1L.shl(trailingZeroes).toLong() else 0
-            assertEquals(highestBit, value.takeHighestOneBit())
-            assertEquals(lowestBit, value.takeLowestOneBit())
+        fun test(konstue: Long, oneBits: Int, leadingZeroes: Int, trailingZeroes: Int) {
+            assertEquals(oneBits, konstue.countOneBits())
+            assertEquals(leadingZeroes, konstue.countLeadingZeroBits())
+            assertEquals(trailingZeroes, konstue.countTrailingZeroBits())
+            konst highestBit = if (leadingZeroes < Long.SIZE_BITS) 1L.shl(Long.SIZE_BITS - leadingZeroes - 1).toLong() else 0
+            konst lowestBit = if (trailingZeroes < Long.SIZE_BITS) 1L.shl(trailingZeroes).toLong() else 0
+            assertEquals(highestBit, konstue.takeHighestOneBit())
+            assertEquals(lowestBit, konstue.takeLowestOneBit())
         }
 
         test(0, 0, 64, 64)
@@ -342,20 +342,20 @@ class NumbersTest {
 
     @Test
     fun intRotate() {
-        fun test(value: Int, n: Int, expected: Int) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: Int, n: Int, expected: Int) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: Int) {
+        fun testCyclic(konstue: Int) {
             for (n in -2 * Int.SIZE_BITS..2 * Int.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % Int.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % Int.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % Int.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % Int.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -369,20 +369,20 @@ class NumbersTest {
 
     @Test
     fun byteRotate() {
-        fun test(value: Byte, n: Int, expected: Byte) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: Byte, n: Int, expected: Byte) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: Byte) {
+        fun testCyclic(konstue: Byte) {
             for (n in -2 * Byte.SIZE_BITS..2 * Byte.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % Byte.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % Byte.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % Byte.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % Byte.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -397,20 +397,20 @@ class NumbersTest {
 
     @Test
     fun longRotate() {
-        fun test(value: Long, n: Int, expected: Long) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: Long, n: Int, expected: Long) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: Long) {
+        fun testCyclic(konstue: Long) {
             for (n in -2 * Long.SIZE_BITS..2 * Long.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % Long.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % Long.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % Long.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % Long.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 
@@ -424,20 +424,20 @@ class NumbersTest {
 
     @Test
     fun shortRotate() {
-        fun test(value: Short, n: Int, expected: Short) {
-            assertEquals(expected, value.rotateLeft(n))
-            assertEquals(expected, value.rotateRight(-n))
+        fun test(konstue: Short, n: Int, expected: Short) {
+            assertEquals(expected, konstue.rotateLeft(n))
+            assertEquals(expected, konstue.rotateRight(-n))
         }
 
-        fun testCyclic(value: Short) {
+        fun testCyclic(konstue: Short) {
             for (n in -2 * Short.SIZE_BITS..2 * Short.SIZE_BITS) {
-                val rl = value.rotateLeft(n)
-                val rr = value.rotateRight(-n)
+                konst rl = konstue.rotateLeft(n)
+                konst rr = konstue.rotateRight(-n)
                 assertEquals(rl, rr)
-                assertEquals(rl, value.rotateLeft(n % Short.SIZE_BITS))
-                assertEquals(rr, value.rotateRight((-n) % Short.SIZE_BITS))
-                assertEquals(value, value.rotateLeft(n).rotateLeft(-n))
-                assertEquals(value, value.rotateRight(n).rotateRight(-n))
+                assertEquals(rl, konstue.rotateLeft(n % Short.SIZE_BITS))
+                assertEquals(rr, konstue.rotateRight((-n) % Short.SIZE_BITS))
+                assertEquals(konstue, konstue.rotateLeft(n).rotateLeft(-n))
+                assertEquals(konstue, konstue.rotateRight(n).rotateRight(-n))
             }
         }
 

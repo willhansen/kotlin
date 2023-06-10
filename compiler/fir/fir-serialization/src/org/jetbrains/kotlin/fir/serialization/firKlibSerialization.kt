@@ -24,8 +24,8 @@ fun serializeSingleFirFile(
     serializerExtension: FirKLibSerializerExtension,
     languageVersionSettings: LanguageVersionSettings,
 ): ProtoBuf.PackageFragment {
-    val approximator = TypeApproximatorForMetadataSerializer(session)
-    val packageSerializer = FirElementSerializer.createTopLevel(
+    konst approximator = TypeApproximatorForMetadataSerializer(session)
+    konst packageSerializer = FirElementSerializer.createTopLevel(
         session, scopeSession, serializerExtension,
         approximator,
         languageVersionSettings
@@ -35,21 +35,21 @@ fun serializeSingleFirFile(
     // TODO: split package fragment (see klib serializer)
     // TODO: handle incremental/monolothic (see klib serializer) - maybe externally
 
-    val packageProto = packageSerializer.packagePartProto(file.packageFqName, listOf(file), actualizedExpectDeclarations).build()
+    konst packageProto = packageSerializer.packagePartProto(file.packageFqName, listOf(file), actualizedExpectDeclarations).build()
 
-    val classesProto = mutableListOf<Pair<ProtoBuf.Class, Int>>()
+    konst classesProto = mutableListOf<Pair<ProtoBuf.Class, Int>>()
 
     fun List<FirClassSymbol<*>>.makeClassesProtoWithNested() {
-        val classSymbols = this
+        konst classSymbols = this
             .filter { it.fir.shouldBeSerialized(actualizedExpectDeclarations) }
             .sortedBy { it.classId.asFqNameString() }
         for (symbol in classSymbols) {
-            val klass = symbol.fir
-            val classSerializer = FirElementSerializer.create(
+            konst klass = symbol.fir
+            konst classSerializer = FirElementSerializer.create(
                 session, scopeSession, klass, serializerExtension, null,
                 approximator, languageVersionSettings
             )
-            val index = classSerializer.stringTable.getFqNameIndex(klass)
+            konst index = classSerializer.stringTable.getFqNameIndex(klass)
 
             classesProto += classSerializer.classProto(klass).build() to index
             classSerializer.computeNestedClassifiersForClass(symbol).filterIsInstance<FirClassSymbol<*>>().makeClassesProtoWithNested()
@@ -60,7 +60,7 @@ fun serializeSingleFirFile(
         file.declarations.mapNotNull { it.symbol as? FirClassSymbol<*> }.makeClassesProtoWithNested()
     }
 
-    val hasTopLevelDeclarations = file.declarations.any {
+    konst hasTopLevelDeclarations = file.declarations.any {
         it is FirMemberDeclaration && it.shouldBeSerialized(actualizedExpectDeclarations) &&
                 (it is FirProperty || it is FirSimpleFunction || it is FirTypeAlias)
     }

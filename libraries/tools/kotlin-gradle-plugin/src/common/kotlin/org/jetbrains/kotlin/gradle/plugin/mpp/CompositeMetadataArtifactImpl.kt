@@ -17,15 +17,15 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
 internal class CompositeMetadataArtifactImpl(
-    override val moduleDependencyIdentifier: ModuleDependencyIdentifier,
-    override val moduleDependencyVersion: String,
-    private val kotlinProjectStructureMetadata: KotlinProjectStructureMetadata,
-    private val primaryArtifactFile: File,
-    private val hostSpecificArtifactFilesBySourceSetName: Map<String, File>
+    override konst moduleDependencyIdentifier: ModuleDependencyIdentifier,
+    override konst moduleDependencyVersion: String,
+    private konst kotlinProjectStructureMetadata: KotlinProjectStructureMetadata,
+    private konst primaryArtifactFile: File,
+    private konst hostSpecificArtifactFilesBySourceSetName: Map<String, File>
 ) : CompositeMetadataArtifact {
 
     override fun exists(): Boolean {
-        return primaryArtifactFile.exists() && hostSpecificArtifactFilesBySourceSetName.values.all { it.exists() }
+        return primaryArtifactFile.exists() && hostSpecificArtifactFilesBySourceSetName.konstues.all { it.exists() }
     }
 
     override fun open(): CompositeMetadataArtifactContent {
@@ -34,16 +34,16 @@ internal class CompositeMetadataArtifactImpl(
 
     inner class CompositeMetadataArtifactContentImpl : CompositeMetadataArtifactContent {
 
-        override val containingArtifact: CompositeMetadataArtifact
+        override konst containingArtifact: CompositeMetadataArtifact
             get() = this@CompositeMetadataArtifactImpl
 
         /* Creating SourceSet instances eagerly, as they will only lazily access files */
-        private val sourceSetsImpl = kotlinProjectStructureMetadata.sourceSetNames.associateWith { sourceSetName ->
+        private konst sourceSetsImpl = kotlinProjectStructureMetadata.sourceSetNames.associateWith { sourceSetName ->
             SourceSetContentImpl(this, sourceSetName, ArtifactFile(hostSpecificArtifactFilesBySourceSetName[sourceSetName] ?: primaryArtifactFile))
         }
 
-        override val sourceSets: List<CompositeMetadataArtifactContent.SourceSetContent> =
-            sourceSetsImpl.values.toList()
+        override konst sourceSets: List<CompositeMetadataArtifactContent.SourceSetContent> =
+            sourceSetsImpl.konstues.toList()
 
         override fun getSourceSet(name: String): CompositeMetadataArtifactContent.SourceSetContent {
             return findSourceSet(name)
@@ -55,17 +55,17 @@ internal class CompositeMetadataArtifactImpl(
 
 
         override fun close() {
-            sourceSetsImpl.values.forEach { it.close() }
+            sourceSetsImpl.konstues.forEach { it.close() }
         }
     }
 
     private inner class SourceSetContentImpl(
-        override val containingArtifactContent: CompositeMetadataArtifactContent,
-        override val sourceSetName: String,
-        private val artifactFile: ArtifactFile
+        override konst containingArtifactContent: CompositeMetadataArtifactContent,
+        override konst sourceSetName: String,
+        private konst artifactFile: ArtifactFile
     ) : CompositeMetadataArtifactContent.SourceSetContent, Closeable {
 
-        override val metadataBinary: CompositeMetadataArtifactContent.MetadataBinary? by lazy {
+        override konst metadataBinary: CompositeMetadataArtifactContent.MetadataBinary? by lazy {
             /*
             There are published multiplatform libraries that indeed suppress, disable certain compilations.
             In this scenario, the sourceSetName might still be mentioned in the artifact, but there will be no
@@ -76,14 +76,14 @@ internal class CompositeMetadataArtifactImpl(
             if (artifactFile.containsDirectory(sourceSetName)) MetadataBinaryImpl(this, artifactFile) else null
         }
 
-        override val cinteropMetadataBinaries: List<CompositeMetadataArtifactContent.CInteropMetadataBinary> by lazy {
-            val cinteropMetadataDirectory = kotlinProjectStructureMetadata.sourceSetCInteropMetadataDirectory[sourceSetName]
+        override konst cinteropMetadataBinaries: List<CompositeMetadataArtifactContent.CInteropMetadataBinary> by lazy {
+            konst cinteropMetadataDirectory = kotlinProjectStructureMetadata.sourceSetCInteropMetadataDirectory[sourceSetName]
                 ?: return@lazy emptyList()
 
-            val cinteropMetadataDirectoryPath = ensureValidZipDirectoryPath(cinteropMetadataDirectory)
-            val cinteropEntries = artifactFile.zip.listDescendants(cinteropMetadataDirectoryPath)
+            konst cinteropMetadataDirectoryPath = ensureValidZipDirectoryPath(cinteropMetadataDirectory)
+            konst cinteropEntries = artifactFile.zip.listDescendants(cinteropMetadataDirectoryPath)
 
-            val cinteropLibraryNames = cinteropEntries.map { entry ->
+            konst cinteropLibraryNames = cinteropEntries.map { entry ->
                 entry.name.removePrefix(cinteropMetadataDirectoryPath).split("/", limit = 2).first()
             }.toSet()
 
@@ -98,22 +98,22 @@ internal class CompositeMetadataArtifactImpl(
     }
 
     private inner class MetadataBinaryImpl(
-        override val containingSourceSetContent: CompositeMetadataArtifactContent.SourceSetContent,
-        private val artifactFile: ArtifactFile
+        override konst containingSourceSetContent: CompositeMetadataArtifactContent.SourceSetContent,
+        private konst artifactFile: ArtifactFile
     ) : CompositeMetadataArtifactContent.MetadataBinary {
 
-        override val archiveExtension: String
+        override konst archiveExtension: String
             get() = kotlinProjectStructureMetadata.sourceSetBinaryLayout[containingSourceSetContent.sourceSetName]?.archiveExtension
                 ?: SourceSetMetadataLayout.METADATA.archiveExtension
 
-        override val checksum: String
+        override konst checksum: String
             get() = artifactFile.checksum
 
         /**
          * Example:
          * org.jetbrains.sample-sampleLibrary-1.0.0-SNAPSHOT-appleAndLinuxMain-Vk5pxQ.klib
          */
-        override val relativeFile: File = File(buildString {
+        override konst relativeFile: File = File(buildString {
             append(containingSourceSetContent.containingArtifactContent.containingArtifact.moduleDependencyIdentifier)
             append("-")
             append(containingSourceSetContent.containingArtifactContent.containingArtifact.moduleDependencyVersion)
@@ -130,7 +130,7 @@ internal class CompositeMetadataArtifactImpl(
                 "Expected file.extension == '$archiveExtension'. Found ${file.extension}"
             }
 
-            val libraryPath = "${containingSourceSetContent.sourceSetName}/"
+            konst libraryPath = "${containingSourceSetContent.sourceSetName}/"
             if (!artifactFile.containsDirectory(libraryPath)) return false
             file.parentFile.mkdirs()
             artifactFile.zip.copyPartially(file, libraryPath)
@@ -140,15 +140,15 @@ internal class CompositeMetadataArtifactImpl(
     }
 
     private inner class CInteropMetadataBinaryImpl(
-        override val containingSourceSetContent: CompositeMetadataArtifactContent.SourceSetContent,
-        override val cinteropLibraryName: String,
-        private val artifactFile: ArtifactFile,
+        override konst containingSourceSetContent: CompositeMetadataArtifactContent.SourceSetContent,
+        override konst cinteropLibraryName: String,
+        private konst artifactFile: ArtifactFile,
     ) : CompositeMetadataArtifactContent.CInteropMetadataBinary {
 
-        override val archiveExtension: String
+        override konst archiveExtension: String
             get() = SourceSetMetadataLayout.KLIB.archiveExtension
 
-        override val checksum: String
+        override konst checksum: String
             get() = artifactFile.checksum
 
         /**
@@ -156,7 +156,7 @@ internal class CompositeMetadataArtifactImpl(
          * org.jetbrains.sample-sampleLibrary-1.0.0-SNAPSHOT-appleAndLinuxMain-cinterop/
          *     org.jetbrains.sample_sampleLibrary-cinterop-simple-Vk5pxQ.klib
          */
-        override val relativeFile: File = File(buildString {
+        override konst relativeFile: File = File(buildString {
             append(containingSourceSetContent.containingArtifactContent.containingArtifact.moduleDependencyIdentifier)
             append("-")
             append(containingSourceSetContent.containingArtifactContent.containingArtifact.moduleDependencyVersion)
@@ -170,12 +170,12 @@ internal class CompositeMetadataArtifactImpl(
                 "Expected 'file.extension == '${SourceSetMetadataLayout.KLIB.archiveExtension}'. Found ${file.extension}"
             }
 
-            val sourceSetName = containingSourceSetContent.sourceSetName
-            val cinteropMetadataDirectory = kotlinProjectStructureMetadata.sourceSetCInteropMetadataDirectory[sourceSetName]
+            konst sourceSetName = containingSourceSetContent.sourceSetName
+            konst cinteropMetadataDirectory = kotlinProjectStructureMetadata.sourceSetCInteropMetadataDirectory[sourceSetName]
                 ?: error("Missing CInteropMetadataDirectory for SourceSet $sourceSetName")
-            val cinteropMetadataDirectoryPath = ensureValidZipDirectoryPath(cinteropMetadataDirectory)
+            konst cinteropMetadataDirectoryPath = ensureValidZipDirectoryPath(cinteropMetadataDirectory)
 
-            val libraryPath = "$cinteropMetadataDirectoryPath$cinteropLibraryName/"
+            konst libraryPath = "$cinteropMetadataDirectoryPath$cinteropLibraryName/"
             if (!artifactFile.containsDirectory(libraryPath)) return false
             file.parentFile.mkdirs()
             artifactFile.zip.copyPartially(file, "$cinteropMetadataDirectoryPath$cinteropLibraryName/")
@@ -188,25 +188,25 @@ internal class CompositeMetadataArtifactImpl(
      * Interface to the underlying [zip][file] that only opens the file lazily and keeps references to
      * all [entries] and infers all potential directory paths (see [directoryPaths] and [containsDirectory])
      */
-    private class ArtifactFile(private val file: File) : Closeable {
+    private class ArtifactFile(private konst file: File) : Closeable {
 
         private var isClosed = false
 
-        private val lazyZip = lazy {
+        private konst lazyZip = lazy {
             ensureNotClosed()
             ZipFile(file)
         }
 
-        val zip: ZipFile get() = lazyZip.value
+        konst zip: ZipFile get() = lazyZip.konstue
 
-        val entries: List<ZipEntry> by lazy {
+        konst entries: List<ZipEntry> by lazy {
             zip.entries().toList()
         }
 
-        val checksum: String by lazy(LazyThreadSafetyMode.NONE) {
-            val crc32 = CRC32()
+        konst checksum: String by lazy(LazyThreadSafetyMode.NONE) {
+            konst crc32 = CRC32()
             entries.forEach { entry -> crc32.update(entry.crc.toInt()) }
-            checksumString(crc32.value.toInt())
+            checksumString(crc32.konstue.toInt())
         }
 
         /**
@@ -214,7 +214,7 @@ internal class CompositeMetadataArtifactImpl(
          * not include directory entries.
          * @see collectAllDirectoryPaths
          */
-        val directoryPaths: Set<String> by lazy { collectAllDirectoryPaths(entries) }
+        konst directoryPaths: Set<String> by lazy { collectAllDirectoryPaths(entries) }
 
         /**
          * Check if the underlying [zip] file contains this directory.
@@ -222,9 +222,9 @@ internal class CompositeMetadataArtifactImpl(
          * This will return true, if any other zip-entry is placed inside this directory [path]
          */
         fun containsDirectory(path: String): Boolean {
-            val validPath = ensureValidZipDirectoryPath(path)
-            if (zip.getEntry(validPath) != null) return true
-            return validPath in directoryPaths
+            konst konstidPath = ensureValidZipDirectoryPath(path)
+            if (zip.getEntry(konstidPath) != null) return true
+            return konstidPath in directoryPaths
         }
 
         private fun ensureNotClosed() {
@@ -234,7 +234,7 @@ internal class CompositeMetadataArtifactImpl(
         override fun close() {
             isClosed = true
             if (lazyZip.isInitialized()) {
-                lazyZip.value.close()
+                lazyZip.konstue.close()
             }
         }
     }
@@ -250,7 +250,7 @@ private fun collectAllDirectoryPaths(entries: List<ZipEntry>): Set<String> {
     /*
     The 'root' directory is represented as empty String in ZipFile
      */
-    val set = hashSetOf("")
+    konst set = hashSetOf("")
 
     entries.forEach { entry ->
         if (entry.isDirectory) {
@@ -259,7 +259,7 @@ private fun collectAllDirectoryPaths(entries: List<ZipEntry>): Set<String> {
         }
 
         /* Collect all 'intermediate' directories found by looking at the files path */
-        val pathParts = entry.name.split("/")
+        konst pathParts = entry.name.split("/")
         pathParts.runningReduce { currentPath, nextPart ->
             set.add("$currentPath/")
             "$currentPath/$nextPart"

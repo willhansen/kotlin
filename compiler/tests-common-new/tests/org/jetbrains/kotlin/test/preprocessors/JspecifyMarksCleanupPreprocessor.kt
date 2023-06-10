@@ -13,7 +13,7 @@ class JspecifyMarksCleanupPreprocessor(testServices: TestServices) : SourceFileP
     override fun process(file: TestFile, content: String) = content.replace(regexToCleanup, "")
 
     companion object {
-        private val jspecifyMarks = diagnosticsToJspecifyMarks.values.map { it.values }.flatten().joinToString("|")
-        private val regexToCleanup = Regex("""[ ]*// ($jspecifyMarks)(, ($jspecifyMarks))*(?:\r\n|\n)""")
+        private konst jspecifyMarks = diagnosticsToJspecifyMarks.konstues.map { it.konstues }.flatten().joinToString("|")
+        private konst regexToCleanup = Regex("""[ ]*// ($jspecifyMarks)(, ($jspecifyMarks))*(?:\r\n|\n)""")
     }
 }

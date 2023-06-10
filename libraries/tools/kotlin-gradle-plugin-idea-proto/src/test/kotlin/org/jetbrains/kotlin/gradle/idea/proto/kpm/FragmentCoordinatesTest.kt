@@ -13,7 +13,7 @@ import org.junit.Test
 
 class FragmentCoordinatesTest : AbstractSerializationTest<IdeaKpmFragmentCoordinates>() {
 
-    override fun serialize(value: IdeaKpmFragmentCoordinates) = value.toByteArray()
+    override fun serialize(konstue: IdeaKpmFragmentCoordinates) = konstue.toByteArray()
 
     override fun deserialize(data: ByteArray) = IdeaKpmFragmentCoordinates(data)
 

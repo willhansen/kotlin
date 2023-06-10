@@ -1,8 +1,8 @@
 package
 
-public val field: MyInterface
+public konst field: MyInterface
 
-@kotlin.RequiresOptIn @kotlin.annotation.Retention(value = AnnotationRetention.BINARY) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FUNCTION}) public final annotation class MyAnn : kotlin.Annotation {
+@kotlin.RequiresOptIn @kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.FUNCTION}) public final annotation class MyAnn : kotlin.Annotation {
     public constructor MyAnn()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

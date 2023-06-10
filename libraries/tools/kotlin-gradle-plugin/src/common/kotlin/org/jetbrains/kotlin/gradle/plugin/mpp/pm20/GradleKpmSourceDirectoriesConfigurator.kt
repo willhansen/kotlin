@@ -27,7 +27,7 @@ object GradleKpmDefaultSourceDirectoriesConfigurator : GradleKpmSourceDirectorie
     }
 
     fun defaultSourceFolder(fragment: GradleKpmFragment, type: String): File {
-        val fragmentDirectoryName = fragmentDirectoryName(fragment)
+        konst fragmentDirectoryName = fragmentDirectoryName(fragment)
         return fragment.project.file("src/$fragmentDirectoryName/$type")
     }
 }

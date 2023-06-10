@@ -23,16 +23,16 @@ import kotlin.test.fail
 
 class InvokeWhenCreatedTest {
 
-    data class Value(private val name: String) : Named {
+    data class Value(private konst name: String) : Named {
         override fun getName(): String = name
         override fun toString(): String = name
     }
 
-    private val project = buildProjectWithJvm()
-    private val container = project.objects.domainObjectContainer(Value::class.java) { name -> Value(name) }
+    private konst project = buildProjectWithJvm()
+    private konst container = project.objects.domainObjectContainer(Value::class.java) { name -> Value(name) }
 
     @Test
-    fun `test - values is already present - is called inline`() {
+    fun `test - konstues is already present - is called inline`() {
         var invocations = 0
 
         container.create("x")
@@ -41,12 +41,12 @@ class InvokeWhenCreatedTest {
             assertEquals(1, invocations, "Expected 'invokeWhenCreated' to be called inline, once")
         }
 
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(1, invocations, "Expected 'invokeWhenCreated' to be called only once")
     }
 
     @Test
-    fun `test - value will be created later`() {
+    fun `test - konstue will be created later`() {
         var invocations = 0
 
         project.kotlinExtension.apply {
@@ -62,21 +62,21 @@ class InvokeWhenCreatedTest {
     }
 
     @Test
-    fun `test - value is missing - evaluate will fail`() {
+    fun `test - konstue is missing - ekonstuate will fail`() {
         project.kotlinExtension.apply {
             container.invokeWhenCreated("x") {
                 fail("Called 'invokeWhenCreated' unexpectedly")
             }
         }
 
-        val causes = assertFails { project.evaluate() }.withLinearClosure { it.cause }
+        konst causes = assertFails { project.ekonstuate() }.withLinearClosure { it.cause }
         assertEquals<Class<*>>(UnknownDomainObjectException::class.java, causes.last().javaClass)
     }
 
     @Test
     fun `test - is lenient up-to last stage of Kotlin Plugin Lifecycle`() = project.runLifecycleAwareTest {
         project.kotlinExtension.apply {
-            val invocations = AtomicInteger(0)
+            konst invocations = AtomicInteger(0)
             container.invokeWhenCreated("x") { assertEquals(1, invocations.incrementAndGet()) }
             KotlinPluginLifecycle.Stage.last.await()
             assertEquals(0, invocations.get())

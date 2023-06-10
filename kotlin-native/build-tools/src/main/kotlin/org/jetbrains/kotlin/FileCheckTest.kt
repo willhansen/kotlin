@@ -73,7 +73,7 @@ open class FileCheckTest : DefaultTask() {
     var targetName: String = project.testTarget.name
 
     @get:Internal
-    val target: KonanTarget
+    konst target: KonanTarget
         get() = project.platformManager.targetByName(targetName)
 
     override fun configure(closure: Closure<*>): Task {
@@ -88,7 +88,7 @@ open class FileCheckTest : DefaultTask() {
      * Check that [inputFile] matches [annotatedFile] with FileCheck.
      */
     private fun runFileCheck(annotatedFile: Path, inputFile: Path): ProcessOutput {
-        val args = mutableListOf(
+        konst args = mutableListOf(
                 annotatedFile.toAbsolutePath().toString(),
                 "--input-file", inputFile.toAbsolutePath().toString()
         )
@@ -98,10 +98,10 @@ open class FileCheckTest : DefaultTask() {
         additionalFileCheckFlags?.let {
             args.addAll(it)
         }
-        val platform = project.platformManager.platform(target)
-        val configurables = platform.configurables
-        val llvmBin = "${configurables.absoluteLlvmHome}/bin"
-        val fileCheck = "$llvmBin/FileCheck"
+        konst platform = project.platformManager.platform(target)
+        konst configurables = platform.configurables
+        konst llvmBin = "${configurables.absoluteLlvmHome}/bin"
+        konst fileCheck = "$llvmBin/FileCheck"
         return runProcess(localExecutor(project), fileCheck, *args.toTypedArray())
                 .ensureSuccessful(fileCheck, *args.toTypedArray())
     }

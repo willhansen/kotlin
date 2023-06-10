@@ -18,7 +18,7 @@ fun f() {}
 @RK("42.33", message = "This declaration is only supported since Kotlin 42.33")
 @RK("40.34", versionKind = K.API_VERSION)
 @RK("45.35")
-val p = ""
+konst p = ""
 
 @RK("42.33", message = "This declaration is only supported since Kotlin 42.33")
 @RK("40.34", versionKind = K.API_VERSION)

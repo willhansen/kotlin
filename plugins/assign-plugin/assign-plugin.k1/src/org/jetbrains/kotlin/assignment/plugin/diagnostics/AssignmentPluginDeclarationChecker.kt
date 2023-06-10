@@ -20,19 +20,19 @@ import org.jetbrains.kotlin.resolve.checkers.DeclarationCheckerContext
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 import org.jetbrains.kotlin.types.expressions.OperatorConventions.ASSIGN_METHOD
 
-class AssignmentPluginDeclarationChecker(private val annotations: List<String>) : DeclarationChecker {
+class AssignmentPluginDeclarationChecker(private konst annotations: List<String>) : DeclarationChecker {
 
-    private val annotationMatchingService = AnnotationMatchingService(annotations)
+    private konst annotationMatchingService = AnnotationMatchingService(annotations)
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor is SimpleFunctionDescriptor) {
             if (!descriptor.isAssignMethod()) return
-            val receiverClass = if (descriptor.isExtension) {
+            konst receiverClass = if (descriptor.isExtension) {
                 descriptor.extensionReceiverParameter?.type?.constructor?.declarationDescriptor as? ClassDescriptor
             } else {
                 descriptor.containingDeclaration as? ClassDescriptor
             }
-            val ktFunction = declaration as? KtFunction
+            konst ktFunction = declaration as? KtFunction
             if (receiverClass != null && ktFunction != null) {
                 checkAssignMethod(descriptor, receiverClass, ktFunction, context.trace)
             }
@@ -55,10 +55,10 @@ class AssignmentPluginDeclarationChecker(private val annotations: List<String>) 
     }
 
     private fun SimpleFunctionDescriptor.isAssignMethod(): Boolean {
-        return valueParameters.size == 1 && name == ASSIGN_METHOD
+        return konstueParameters.size == 1 && name == ASSIGN_METHOD
     }
 
-    private class AnnotationMatchingService(val annotations: List<String>) : AnnotationBasedExtension {
+    private class AnnotationMatchingService(konst annotations: List<String>) : AnnotationBasedExtension {
         override fun getAnnotationFqNames(modifierListOwner: KtModifierListOwner?): List<String> = annotations
 
         fun isAnnotated(descriptor: ClassDescriptor): Boolean = descriptor.hasSpecialAnnotation(null)

@@ -34,12 +34,12 @@ class G2<T> where T : X, T : Z {
 
 
 fun test1() {
-    val g = sel(G1<A>(), G1<B>())
+    konst g = sel(G1<A>(), G1<B>())
     g.checkFoo {}
 }
 
 fun test2() {
-    val g = sel(G2<A>(), G2<B>())
+    konst g = sel(G2<A>(), G2<B>())
     g.checkFoo {}
     g.checkBar1 {}
     g.checkBar2 {}

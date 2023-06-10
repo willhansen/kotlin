@@ -10,10 +10,10 @@ package lib
 
 import kotlin.contracts.*
 
-fun requireIsTrue(value: Boolean) contract [
-    returns() implies value
+fun requireIsTrue(konstue: Boolean) contract [
+    returns() implies konstue
 ] {
-    if (!value) throw IllegalArgumentException()
+    if (!konstue) throw IllegalArgumentException()
 }
 
 // MODULE: main(lib)

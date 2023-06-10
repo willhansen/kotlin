@@ -5,16 +5,16 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class A<T : Any>(val x: List<T>)
+konstue class A<T : Any>(konst x: List<T>)
 
 @JvmInline
-value class B(val x: UInt)
+konstue class B(konst x: UInt)
 
 @JvmInline
-value class C(val x: Int, val y: B, val z: String)
+konstue class C(konst x: Int, konst y: B, konst z: String)
 
 @JvmInline
-value class D(val x: C) {
+konstue class D(konst x: C) {
     constructor(x: Int, y: UInt, z: Int) : this(C(x, B(y), z.toString()))
 
     init {
@@ -22,7 +22,7 @@ value class D(val x: C) {
     }
 }
 
-class Regular(private val x: D) {
+class Regular(private konst x: D) {
     fun privateAccess() {
         listOf(x.x.x)
         listOf(x.x)
@@ -32,7 +32,7 @@ class Regular(private val x: D) {
 
 fun functionWithoutBoxes(x: D, y: D) {
     var z: D = x
-    val t: D = D(C(1, B(3U), "4"))
+    konst t: D = D(C(1, B(3U), "4"))
     z = t
     require(z == y)
 }

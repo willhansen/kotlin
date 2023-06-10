@@ -1,5 +1,5 @@
 object O {
-    val x = "OK"
+    konst x = "OK"
 
     operator fun invoke() = x
 }

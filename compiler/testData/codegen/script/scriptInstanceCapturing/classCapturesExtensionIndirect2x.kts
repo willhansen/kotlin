@@ -18,4 +18,4 @@ class B {
     }
 }
 
-val rv = C().foo()
+konst rv = C().foo()

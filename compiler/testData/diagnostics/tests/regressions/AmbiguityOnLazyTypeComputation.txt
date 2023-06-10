@@ -1,8 +1,8 @@
 package
 
 package x {
-    public val a1: kotlin.Int
-    public val b: x.Foo
+    public konst a1: kotlin.Int
+    public konst b: x.Foo
 
     public final class Foo {
         public constructor Foo()

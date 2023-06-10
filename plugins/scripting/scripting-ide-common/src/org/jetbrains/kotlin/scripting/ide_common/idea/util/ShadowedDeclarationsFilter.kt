@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.BindingTraceFilter.Companion.NO_DIAGNOSTICS
 import org.jetbrains.kotlin.resolve.DelegatingBindingTrace
-import org.jetbrains.kotlin.resolve.DescriptorEquivalenceForOverrides
+import org.jetbrains.kotlin.resolve.DescriptorEquikonstenceForOverrides
 import org.jetbrains.kotlin.resolve.bindingContextUtil.getDataFlowInfoBefore
 import org.jetbrains.kotlin.resolve.calls.CallResolver
 import org.jetbrains.kotlin.resolve.calls.context.BasicCallResolutionContext
@@ -31,10 +31,10 @@ import org.jetbrains.kotlin.scripting.ide_common.util.descriptorsEqualWithSubsti
 import java.util.*
 
 class ShadowedDeclarationsFilter(
-    private val bindingContext: BindingContext,
-    private val resolutionFacade: ResolutionFacade,
-    private val context: PsiElement,
-    private val explicitReceiverValue: ReceiverValue?
+    private konst bindingContext: BindingContext,
+    private konst resolutionFacade: ResolutionFacade,
+    private konst context: PsiElement,
+    private konst explicitReceiverValue: ReceiverValue?
 ) {
     companion object {
         fun create(
@@ -43,7 +43,7 @@ class ShadowedDeclarationsFilter(
             context: PsiElement,
             callTypeAndReceiver: CallTypeAndReceiver<*, *>
         ): ShadowedDeclarationsFilter? {
-            val receiverExpression = when (callTypeAndReceiver) {
+            konst receiverExpression = when (callTypeAndReceiver) {
                 is CallTypeAndReceiver.DEFAULT -> null
                 is CallTypeAndReceiver.DOT -> callTypeAndReceiver.receiver
                 is CallTypeAndReceiver.SAFE -> callTypeAndReceiver.receiver
@@ -53,19 +53,19 @@ class ShadowedDeclarationsFilter(
                 else -> return null // TODO: support shadowed declarations filtering for callable references
             }
 
-            val explicitReceiverValue = receiverExpression?.let {
-                val type = bindingContext.getType(it) ?: return null
+            konst explicitReceiverValue = receiverExpression?.let {
+                konst type = bindingContext.getType(it) ?: return null
                 ExpressionReceiver.create(it, type, bindingContext)
             }
             return ShadowedDeclarationsFilter(bindingContext, resolutionFacade, context, explicitReceiverValue)
         }
     }
 
-    private val psiFactory = KtPsiFactory(resolutionFacade.project)
-    private val dummyExpressionFactory = DummyExpressionFactory(psiFactory)
+    private konst psiFactory = KtPsiFactory(resolutionFacade.project)
+    private konst dummyExpressionFactory = DummyExpressionFactory(psiFactory)
 
     fun <TDescriptor : DeclarationDescriptor> filter(declarations: Collection<TDescriptor>): Collection<TDescriptor> =
-        declarations.groupBy { signature(it) }.values.flatMap { group -> filterEqualSignatureGroup(group) }
+        declarations.groupBy { signature(it) }.konstues.flatMap { group -> filterEqualSignatureGroup(group) }
 
     fun signature(descriptor: DeclarationDescriptor): Any = when (descriptor) {
         is SimpleFunctionDescriptor -> FunctionSignature(descriptor)
@@ -80,7 +80,7 @@ class ShadowedDeclarationsFilter(
     ): Collection<TDescriptor> {
         if (descriptors.size == 1) return descriptors
 
-        val first = descriptors.firstOrNull {
+        konst first = descriptors.firstOrNull {
             it is ClassDescriptor || it is ConstructorDescriptor || it is CallableDescriptor && !it.name.isSpecial
         } ?: return descriptors
 
@@ -88,22 +88,22 @@ class ShadowedDeclarationsFilter(
             return listOf(first)
         }
 
-        // Optimization: if the descriptors are structurally equivalent then there is no need to run resolve.
+        // Optimization: if the descriptors are structurally equikonstent then there is no need to run resolve.
         // This can happen when the classpath contains multiple copies of the same library.
-        if (descriptors.all { DescriptorEquivalenceForOverrides.areEquivalent(first, it, allowCopiesFromTheSameDeclaration = true) }) {
+        if (descriptors.all { DescriptorEquikonstenceForOverrides.areEquikonstent(first, it, allowCopiesFromTheSameDeclaration = true) }) {
             return listOf(first)
         }
 
-        val isFunction = first is FunctionDescriptor
-        val name = when (first) {
+        konst isFunction = first is FunctionDescriptor
+        konst name = when (first) {
             is ConstructorDescriptor -> first.constructedClass.name
             else -> first.name
         }
-        val parameters = (first as CallableDescriptor).valueParameters
+        konst parameters = (first as CallableDescriptor).konstueParameters
 
-        val dummyArgumentExpressions = dummyExpressionFactory.createDummyExpressions(parameters.size)
+        konst dummyArgumentExpressions = dummyExpressionFactory.createDummyExpressions(parameters.size)
 
-        val bindingTrace = DelegatingBindingTrace(
+        konst bindingTrace = DelegatingBindingTrace(
             bindingContext, "Temporary trace for filtering shadowed declarations",
             filter = NO_DIAGNOSTICS
         )
@@ -112,17 +112,17 @@ class ShadowedDeclarationsFilter(
             bindingTrace.record(BindingContext.PROCESSED, expression, true)
         }
 
-        val firstVarargIndex = parameters.withIndex().firstOrNull { it.value.varargElementType != null }?.index
-        val useNamedFromIndex =
+        konst firstVarargIndex = parameters.withIndex().firstOrNull { it.konstue.varargElementType != null }?.index
+        konst useNamedFromIndex =
             if (firstVarargIndex != null && firstVarargIndex != parameters.lastIndex) firstVarargIndex else parameters.size
 
-        class DummyArgument(val index: Int) : ValueArgument {
-            private val expression = dummyArgumentExpressions[index]
+        class DummyArgument(konst index: Int) : ValueArgument {
+            private konst expression = dummyArgumentExpressions[index]
 
-            private val argumentName: ValueArgumentName? = if (isNamed()) {
+            private konst argumentName: ValueArgumentName? = if (isNamed()) {
                 object : ValueArgumentName {
-                    override val asName = parameters[index].name
-                    override val referenceExpression = null
+                    override konst asName = parameters[index].name
+                    override konst referenceExpression = null
                 }
             } else {
                 null
@@ -136,15 +136,15 @@ class ShadowedDeclarationsFilter(
             override fun isExternal() = false
         }
 
-        val arguments = ArrayList<DummyArgument>()
+        konst arguments = ArrayList<DummyArgument>()
         for (i in parameters.indices) {
             arguments.add(DummyArgument(i))
         }
 
-        val newCall = object : Call {
+        konst newCall = object : Call {
             //TODO: compiler crash (KT-8011)
-            //val arguments = parameters.indices.map { DummyArgument(it) }
-            val callee = psiFactory.createExpressionByPattern("$0", name, reformat = false)
+            //konst arguments = parameters.indices.map { DummyArgument(it) }
+            konst callee = psiFactory.createExpressionByPattern("$0", name, reformat = false)
 
             override fun getCalleeExpression() = callee
 
@@ -175,8 +175,8 @@ class ShadowedDeclarationsFilter(
             scope = scope.addImportingScope(ExplicitImportsScope(descriptorsToImport))
         }
 
-        val dataFlowInfo = bindingContext.getDataFlowInfoBefore(context)
-        val context = BasicCallResolutionContext.create(
+        konst dataFlowInfo = bindingContext.getDataFlowInfoBefore(context)
+        konst context = BasicCallResolutionContext.create(
             bindingTrace, scope, newCall, TypeUtils.NO_EXPECTED_TYPE, dataFlowInfo,
             ContextDependency.INDEPENDENT, CheckArgumentTypesMode.CHECK_VALUE_ARGUMENTS,
             false, resolutionFacade.getLanguageVersionSettings(),
@@ -184,11 +184,11 @@ class ShadowedDeclarationsFilter(
         )
 
         @OptIn(FrontendInternals::class)
-        val callResolver = resolutionFacade.frontendService<CallResolver>()
-        val results = if (isFunction) callResolver.resolveFunctionCall(context) else callResolver.resolveSimpleProperty(context)
-        val resultingDescriptors = results.resultingCalls.map { it.resultingDescriptor }
-        val resultingOriginals = resultingDescriptors.mapTo(HashSet<DeclarationDescriptor>()) { it.original }
-        val filtered = descriptors.filter { candidateDescriptor ->
+        konst callResolver = resolutionFacade.frontendService<CallResolver>()
+        konst results = if (isFunction) callResolver.resolveFunctionCall(context) else callResolver.resolveSimpleProperty(context)
+        konst resultingDescriptors = results.resultingCalls.map { it.resultingDescriptor }
+        konst resultingOriginals = resultingDescriptors.mapTo(HashSet<DeclarationDescriptor>()) { it.original }
+        konst filtered = descriptors.filter { candidateDescriptor ->
             candidateDescriptor.original in resultingOriginals /* optimization */ && resultingDescriptors.any {
                 descriptorsEqualWithSubstitution(
                     it,
@@ -199,8 +199,8 @@ class ShadowedDeclarationsFilter(
         return if (filtered.isNotEmpty()) filtered else descriptors /* something went wrong, none of our declarations among resolve candidates, let's not filter anything */
     }
 
-    private class DummyExpressionFactory(val factory: KtPsiFactory) {
-        private val expressions = ArrayList<KtExpression>()
+    private class DummyExpressionFactory(konst factory: KtPsiFactory) {
+        private konst expressions = ArrayList<KtExpression>()
 
         fun createDummyExpressions(count: Int): List<KtExpression> {
             while (expressions.size < count) {
@@ -210,32 +210,32 @@ class ShadowedDeclarationsFilter(
         }
     }
 
-    private class FunctionSignature(val function: FunctionDescriptor) {
+    private class FunctionSignature(konst function: FunctionDescriptor) {
         override fun equals(other: Any?): Boolean {
             if (other === this) return true
             if (other !is FunctionSignature) return false
             if (function.name != other.function.name) return false
-            val parameters1 = function.valueParameters
-            val parameters2 = other.function.valueParameters
+            konst parameters1 = function.konstueParameters
+            konst parameters2 = other.function.konstueParameters
             if (parameters1.size != parameters2.size) return false
             for (i in parameters1.indices) {
-                val p1 = parameters1[i]
-                val p2 = parameters2[i]
+                konst p1 = parameters1[i]
+                konst p2 = parameters2[i]
                 if (p1.varargElementType != p2.varargElementType) return false // both should be vararg or or both not
                 if (p1.type != p2.type) return false
             }
 
-            val typeParameters1 = function.typeParameters
-            val typeParameters2 = other.function.typeParameters
+            konst typeParameters1 = function.typeParameters
+            konst typeParameters2 = other.function.typeParameters
             if (typeParameters1.size != typeParameters2.size) return false
             for (i in typeParameters1.indices) {
-                val t1 = typeParameters1[i]
-                val t2 = typeParameters2[i]
+                konst t1 = typeParameters1[i]
+                konst t2 = typeParameters2[i]
                 if (t1.upperBounds != t2.upperBounds) return false
             }
             return true
         }
 
-        override fun hashCode() = function.name.hashCode() * 17 + function.valueParameters.size
+        override fun hashCode() = function.name.hashCode() * 17 + function.konstueParameters.size
     }
 }

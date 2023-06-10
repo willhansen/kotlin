@@ -8,37 +8,37 @@ interface IFoo {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcStr<T: String>(val y: T) : IFoo {
+konstue class IcStr<T: String>(konst y: T) : IFoo {
     override fun foo(): String = y + super<IFoo>.foo()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt<T: Int>(val i: T) : IFoo {
+konstue class IcInt<T: Int>(konst i: T) : IFoo {
     override fun foo(): String = "O" + super<IFoo>.foo()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong<T: Long>(val l: T) : IFoo {
+konstue class IcLong<T: Long>(konst l: T) : IFoo {
     override fun foo(): String = "O" + super<IFoo>.foo()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny<T: Any>(val a: T?) : IFoo {
+konstue class IcAny<T: Any>(konst a: T?) : IFoo {
     override fun foo(): String = "O" + super<IFoo>.foo()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverIc<T: IcLong<Long>>(val o: T) : IFoo {
+konstue class IcOverIc<T: IcLong<Long>>(konst o: T) : IFoo {
     override fun foo(): String = "O" + super<IFoo>.foo()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverSuperInterface<T: IFoo>(val x: T) : IFoo {
+konstue class IcOverSuperInterface<T: IFoo>(konst x: T) : IFoo {
     override fun foo(): String = "O" + super<IFoo>.foo()
 }
 
 fun check(message: String, iFoo: IFoo) {
-    val actual = iFoo.foo()
+    konst actual = iFoo.foo()
     if (actual != "OK")
         throw Exception("$message: \"$actual\" != OK")
 }

@@ -20,10 +20,10 @@ internal fun NameResolverImpl.getDescriptorByFqNameIndex(
     fqNameIndex: Int): DeclarationDescriptor {
 
     if (fqNameIndex == -1) return module.getPackage(FqName.ROOT)
-    val packageName = this.getPackageFqName(fqNameIndex)
+    konst packageName = this.getPackageFqName(fqNameIndex)
     // TODO: Here we are using internals of NameresolverImpl. 
     // Consider extending NameResolver.
-    val proto = nameTable.getQualifiedName(fqNameIndex)
+    konst proto = nameTable.getQualifiedName(fqNameIndex)
     when (proto.kind!!) {
         QualifiedName.Kind.CLASS,
         QualifiedName.Kind.LOCAL ->

@@ -10,7 +10,7 @@ object IdeaKpmModuleProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmModuleProtoKt {
       @JvmName("getExtras")
       get() = _builder.getExtras()
       @JvmName("setExtras")
-      set(value) {
-        _builder.setExtras(value)
+      set(konstue) {
+        _builder.setExtras(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto extras = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmModuleProtoKt {
     fun hasExtras(): kotlin.Boolean {
       return _builder.hasExtras()
     }
-    val IdeaKpmModuleProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+    konst IdeaKpmModuleProtoKt.Dsl.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
       get() = _builder.extrasOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmModuleProtoKt {
       @JvmName("getCoordinates")
       get() = _builder.getCoordinates()
       @JvmName("setCoordinates")
-      set(value) {
-        _builder.setCoordinates(value)
+      set(konstue) {
+        _builder.setCoordinates(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto coordinates = 2;</code>
@@ -71,7 +71,7 @@ object IdeaKpmModuleProtoKt {
     fun hasCoordinates(): kotlin.Boolean {
       return _builder.hasCoordinates()
     }
-    val IdeaKpmModuleProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
+    konst IdeaKpmModuleProtoKt.Dsl.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
       get() = _builder.coordinatesOrNull
 
     /**
@@ -83,58 +83,58 @@ object IdeaKpmModuleProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
      */
-     val fragments: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>
+     konst fragments: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getFragmentsList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
-     * @param value The fragments to add.
+     * @param konstue The fragments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addFragments")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
-      _builder.addFragments(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
+      _builder.addFragments(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
-     * @param value The fragments to add.
+     * @param konstue The fragments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignFragments")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
-     * @param values The fragments to add.
+     * @param konstues The fragments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllFragments")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto>) {
-      _builder.addAllFragments(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto>) {
+      _builder.addAllFragments(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
-     * @param values The fragments to add.
+     * @param konstues The fragments to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllFragments")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
-     * @param index The index to set the value at.
-     * @param value The fragments to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The fragments to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setFragments")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
-      _builder.setFragments(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto, FragmentsProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto) {
+      _builder.setFragments(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentProto fragments = 3;</code>
@@ -155,58 +155,58 @@ object IdeaKpmModuleProtoKt {
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
      */
-     val variants: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>
+     konst variants: com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getVariantsList()
       )
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
-     * @param value The variants to add.
+     * @param konstue The variants to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addVariants")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.add(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
-      _builder.addVariants(value)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.add(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
+      _builder.addVariants(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
-     * @param value The variants to add.
+     * @param konstue The variants to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignVariants")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.plusAssign(value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.plusAssign(konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
+      add(konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
-     * @param values The variants to add.
+     * @param konstues The variants to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllVariants")
-    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.addAll(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto>) {
-      _builder.addAllVariants(values)
+    fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.addAll(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto>) {
+      _builder.addAllVariants(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
-     * @param values The variants to add.
+     * @param konstues The variants to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllVariants")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.plusAssign(values: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.plusAssign(konstues: kotlin.collections.Iterable<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
-     * @param index The index to set the value at.
-     * @param value The variants to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The variants to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setVariants")
-    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.set(index: kotlin.Int, value: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
-      _builder.setVariants(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto, VariantsProxy>.set(index: kotlin.Int, konstue: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto) {
+      _builder.setVariants(index, konstue)
     }
     /**
      * <code>repeated .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmVariantProto variants = 4;</code>
@@ -223,9 +223,9 @@ object IdeaKpmModuleProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoOrBuilder.extrasOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.IdeaExtrasProto?
   get() = if (hasExtras()) getExtras() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleProtoOrBuilder.coordinatesOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
   get() = if (hasCoordinates()) getCoordinates() else null
 

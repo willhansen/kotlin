@@ -16,11 +16,11 @@ typealias TypeParameterId = Int
 typealias TypeParameterIndex = Int
 
 abstract class CirTypeResolver : CirTypeParameterResolver {
-    abstract val providedClassifiers: CirProvidedClassifiers
-    protected abstract val typeParameterIndexOffset: Int
+    abstract konst providedClassifiers: CirProvidedClassifiers
+    protected abstract konst typeParameterIndexOffset: Int
 
     inline fun <reified T : CirProvided.Classifier> resolveClassifier(classifierId: CirEntityId): T {
-        val classifier = providedClassifiers.classifier(classifierId)
+        konst classifier = providedClassifiers.classifier(classifierId)
             ?: error("Unresolved classifier: $classifierId")
 
         check(classifier is T) {
@@ -33,19 +33,19 @@ abstract class CirTypeResolver : CirTypeParameterResolver {
     abstract fun resolveTypeParameterIndex(id: TypeParameterId): TypeParameterIndex
     abstract override fun resolveTypeParameter(id: TypeParameterId): KmTypeParameter
 
-    private class TopLevel(override val providedClassifiers: CirProvidedClassifiers) : CirTypeResolver() {
-        override val typeParameterIndexOffset get() = 0
+    private class TopLevel(override konst providedClassifiers: CirProvidedClassifiers) : CirTypeResolver() {
+        override konst typeParameterIndexOffset get() = 0
 
         override fun resolveTypeParameterIndex(id: TypeParameterId) = error("Unresolved type parameter: id=$id")
         override fun resolveTypeParameter(id: TypeParameterId) = error("Unresolved type parameter: id=$id")
     }
 
     private class Nested(
-        private val parent: CirTypeResolver,
-        private val typeParameterMapping: TIntObjectHashMap<TypeParameterInfo>
+        private konst parent: CirTypeResolver,
+        private konst typeParameterMapping: TIntObjectHashMap<TypeParameterInfo>
     ) : CirTypeResolver() {
-        override val providedClassifiers get() = parent.providedClassifiers
-        override val typeParameterIndexOffset = typeParameterMapping.size() + parent.typeParameterIndexOffset
+        override konst providedClassifiers get() = parent.providedClassifiers
+        override konst typeParameterIndexOffset = typeParameterMapping.size() + parent.typeParameterIndexOffset
 
         override fun resolveTypeParameterIndex(id: TypeParameterId) =
             typeParameterMapping[id]?.index ?: parent.resolveTypeParameterIndex(id)
@@ -54,15 +54,15 @@ abstract class CirTypeResolver : CirTypeParameterResolver {
             typeParameterMapping[id]?.typeParameter ?: parent.resolveTypeParameter(id)
     }
 
-    private class TypeParameterInfo(val index: TypeParameterIndex, val typeParameter: KmTypeParameter)
+    private class TypeParameterInfo(konst index: TypeParameterIndex, konst typeParameter: KmTypeParameter)
 
     fun create(typeParameters: List<KmTypeParameter>): CirTypeResolver =
         if (typeParameters.isEmpty())
             this
         else {
-            val mapping = TIntObjectHashMap<TypeParameterInfo>(typeParameters.size * 2)
+            konst mapping = TIntObjectHashMap<TypeParameterInfo>(typeParameters.size * 2)
             typeParameters.forEachIndexed { localIndex, typeParameter ->
-                val typeParameterInfo = TypeParameterInfo(
+                konst typeParameterInfo = TypeParameterInfo(
                     index = localIndex + typeParameterIndexOffset,
                     typeParameter = typeParameter
                 )

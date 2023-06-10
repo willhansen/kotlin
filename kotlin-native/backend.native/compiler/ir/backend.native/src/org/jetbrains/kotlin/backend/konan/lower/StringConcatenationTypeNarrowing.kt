@@ -31,26 +31,26 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
  * - "if (arg==null) null else arg.toString()"  to pass to StringBuilder.append(String?)
  * - "if (arg==null) "null" else arg.toString()"  to pass to other methods as non-nullable String
  */
-internal class StringConcatenationTypeNarrowing(val context: Context) : FileLoweringPass, IrBuildingTransformer(context) {
+internal class StringConcatenationTypeNarrowing(konst context: Context) : FileLoweringPass, IrBuildingTransformer(context) {
 
-    private val string = context.ir.symbols.string.owner
-    private val stringBuilder = context.ir.symbols.stringBuilder.owner
-    private val namePlusImpl = Name.identifier("plusImpl")
-    private val nameAppend = Name.identifier("append")
+    private konst string = context.ir.symbols.string.owner
+    private konst stringBuilder = context.ir.symbols.stringBuilder.owner
+    private konst namePlusImpl = Name.identifier("plusImpl")
+    private konst nameAppend = Name.identifier("append")
 
-    private val appendNullableStringFunction = stringBuilder.functions.single {  // StringBuilder.append(String?)
+    private konst appendNullableStringFunction = stringBuilder.functions.single {  // StringBuilder.append(String?)
         it.name == nameAppend &&
-                it.valueParameters.singleOrNull()?.type?.isNullableString() == true
+                it.konstueParameters.singleOrNull()?.type?.isNullableString() == true
     }
-    private val appendAnyFunction = stringBuilder.functions.single {  // StringBuilder.append(Any?)
+    private konst appendAnyFunction = stringBuilder.functions.single {  // StringBuilder.append(Any?)
         it.name == nameAppend &&
-                it.valueParameters.singleOrNull()?.type?.isNullableAny() == true
+                it.konstueParameters.singleOrNull()?.type?.isNullableAny() == true
     }
 
-    private val plusImplFunction = string.functions.single { // external fun String.plusImpl(String)
+    private konst plusImplFunction = string.functions.single { // external fun String.plusImpl(String)
         it.name == namePlusImpl &&
-                it.valueParameters.size == 1 &&
-                it.valueParameters.single().type.isString()
+                it.konstueParameters.size == 1 &&
+                it.konstueParameters.single().type.isString()
     }
 
     override fun lower(irFile: IrFile) {
@@ -77,7 +77,7 @@ internal class StringConcatenationTypeNarrowing(val context: Context) : FileLowe
     }
 
     private fun buildConcatenationCall(function: IrSimpleFunction, receiver: IrExpression, argument: IrExpression): IrExpression =
-            builder.irCall(function.symbol, function.returnType, valueArgumentsCount = 1, typeArgumentsCount = 0)
+            builder.irCall(function.symbol, function.returnType, konstueArgumentsCount = 1, typeArgumentsCount = 0)
                     .apply {
                         putValueArgument(0, argument)
                         dispatchReceiver = receiver
@@ -86,7 +86,7 @@ internal class StringConcatenationTypeNarrowing(val context: Context) : FileLowe
     /** Builds snippet of type String
      * - "if(argument==null) "null" else argument.toString()", if argument's type is nullable. Note: fortunately, all "null" string structures are unified
      * - "argument.toString()", otherwise
-     * Note: should side effects are possible, temporary val is introduced
+     * Note: should side effects are possible, temporary konst is introduced
      */
     private fun buildNullableArgToString(argument: IrExpression): IrExpression =
             if (argument.type.isNullable()) {
@@ -98,7 +98,7 @@ internal class StringConcatenationTypeNarrowing(val context: Context) : FileLowe
     /** Builds snippet of type String?
      * - "if(argument==null) null else argument.toString()" (that is similar to "argument?.toString()"), if argument's type is nullable.
      * - "argument.toString()", otherwise
-     * Note: should side effects are possible, temporary val is introduced
+     * Note: should side effects are possible, temporary konst is introduced
      */
     private fun buildArgForAppend(argument: IrExpression): IrExpression =
             if (argument.type.isNullable()) {
@@ -112,12 +112,12 @@ internal class StringConcatenationTypeNarrowing(val context: Context) : FileLowe
             }
 
     /** Builds snippet of type String:
-     *      val arg = argument
+     *      konst arg = argument
      *      if (arg==null) ifNull else arg.toString()
-     *  In case "argument" is IrGetValue => temporary val is omitted due to side effect absence
+     *  In case "argument" is IrGetValue => temporary konst is omitted due to side effect absence
      */
     private fun IrBlockBuilder.nullableArgToStringType(argument: IrExpression, stringType: IrType, ifNull: IrExpression) {
-        val (firstExpression, secondExpression) = twoExpressionsForSubsequentUsages(argument)
+        konst (firstExpression, secondExpression) = twoExpressionsForSubsequentUsages(argument)
         +irIfThenElse(
                 stringType,
                 condition = irEqeqeq(firstExpression, irNull()),
@@ -136,21 +136,21 @@ internal class StringConcatenationTypeNarrowing(val context: Context) : FileLowe
         return if (argument.type.isString() || argument.type.isNullableString())
             argument
         else {
-            val calleeOrNull = argument.type.classOrNull?.owner?.functions?.singleOrNull {
-                it.name == OperatorNameConventions.TO_STRING && it.valueParameters.isEmpty()
+            konst calleeOrNull = argument.type.classOrNull?.owner?.functions?.singleOrNull {
+                it.name == OperatorNameConventions.TO_STRING && it.konstueParameters.isEmpty()
             }?.symbol
-            val callee = calleeOrNull ?: context.ir.symbols.memberToString  // defaults to `Any.toString()`
+            konst callee = calleeOrNull ?: context.ir.symbols.memberToString  // defaults to `Any.toString()`
             builder
-                    .irCall(callee, callee.owner.returnType, valueArgumentsCount = 0, typeArgumentsCount = 0)
+                    .irCall(callee, callee.owner.returnType, konstueArgumentsCount = 0, typeArgumentsCount = 0)
                     .apply { dispatchReceiver = argument }
         }
     }
 
     /**
      * This function returns two expressions based on the parameter:
-     * - <original [argument] and its shallow copy>, should its second usage be idempotent and have runtime cost not greater than local val read.
+     * - <original [argument] and its shallow copy>, should its second usage be idempotent and have runtime cost not greater than local konst read.
      *   This reduces excessive local variable usage without performance degradation.
-     * - <two [IrGetValue] nodes for newly-created temporary val, initialized with original expression>, otherwise.
+     * - <two [IrGetValue] nodes for newly-created temporary konst, initialized with original expression>, otherwise.
      */
     private fun IrBlockBuilder.twoExpressionsForSubsequentUsages(argument: IrExpression): Pair<IrExpression, IrExpression> =
             if (argument is IrGetValue)

@@ -26,13 +26,13 @@ import org.jetbrains.kotlin.backend.common.serialization.proto.IrStatement as Pr
 import org.jetbrains.kotlin.backend.common.serialization.proto.IrType as ProtoType
 
 class IrFileDeserializer(
-    val file: IrFile,
-    private val libraryFile: IrLibraryFile,
+    konst file: IrFile,
+    private konst libraryFile: IrLibraryFile,
     fileProto: ProtoFile,
-    val symbolDeserializer: IrSymbolDeserializer,
-    val declarationDeserializer: IrDeclarationDeserializer,
+    konst symbolDeserializer: IrSymbolDeserializer,
+    konst declarationDeserializer: IrDeclarationDeserializer,
 ) {
-    val reversedSignatureIndex = fileProto.declarationIdList.associateBy { symbolDeserializer.deserializeIdSignature(it) }
+    konst reversedSignatureIndex = fileProto.declarationIdList.associateBy { symbolDeserializer.deserializeIdSignature(it) }
 
     private var annotations: List<ProtoConstructorCall>? = fileProto.annotationList
 
@@ -43,7 +43,7 @@ class IrFileDeserializer(
     }
 
     private fun loadTopLevelDeclarationProto(idSig: IdSignature): ProtoDeclaration {
-        val idSigIndex = reversedSignatureIndex[idSig] ?: error("Not found Idx for $idSig")
+        konst idSigIndex = reversedSignatureIndex[idSig] ?: error("Not found Idx for $idSig")
         return libraryFile.declaration(idSigIndex)
     }
 
@@ -56,10 +56,10 @@ class IrFileDeserializer(
 }
 
 class FileDeserializationState(
-    val linker: KotlinIrLinker,
-    val fileIndex: Int,
-    val file: IrFile,
-    val fileReader: IrLibraryFileFromBytes,
+    konst linker: KotlinIrLinker,
+    konst fileIndex: Int,
+    konst file: IrFile,
+    konst fileReader: IrLibraryFileFromBytes,
     fileProto: ProtoFile,
     deserializeBodies: Boolean,
     allowErrorNodes: Boolean,
@@ -67,7 +67,7 @@ class FileDeserializationState(
     moduleDeserializer: IrModuleDeserializer
 ) {
 
-    val symbolDeserializer =
+    konst symbolDeserializer =
         IrSymbolDeserializer(
             linker.symbolTable, fileReader, file.symbol,
             fileProto.actualList,
@@ -79,7 +79,7 @@ class FileDeserializationState(
             linker.deserializeOrReturnUnboundIrSymbolIfPartialLinkageEnabled(idSignature, symbolKind, moduleDeserializer)
         }
 
-    val declarationDeserializer = IrDeclarationDeserializer(
+    konst declarationDeserializer = IrDeclarationDeserializer(
         linker.builtIns,
         linker.symbolTable,
         linker.symbolTable.irFactory,
@@ -96,16 +96,16 @@ class FileDeserializationState(
         internationService = linker.internationService
     )
 
-    val fileDeserializer = IrFileDeserializer(file, fileReader, fileProto, symbolDeserializer, declarationDeserializer)
+    konst fileDeserializer = IrFileDeserializer(file, fileReader, fileProto, symbolDeserializer, declarationDeserializer)
 
-    private val reachableTopLevels = LinkedHashSet<IdSignature>()
+    private konst reachableTopLevels = LinkedHashSet<IdSignature>()
 
     init {
         // Explicitly exported declarations (e.g. top-level initializers) must be deserialized before all other declarations.
         // Thus we schedule their deserialization in deserializer's constructor.
         fileProto.explicitlyExportedToCompilerList.forEach {
-            val symbolData = symbolDeserializer.parseSymbolData(it)
-            val sig = symbolDeserializer.deserializeIdSignature(symbolData.signatureId)
+            konst symbolData = symbolDeserializer.parseSymbolData(it)
+            konst sig = symbolDeserializer.deserializeIdSignature(symbolData.signatureId)
             assert(!sig.isPackageSignature())
             addIdSignature(sig.topLevelSignature())
         }
@@ -121,9 +121,9 @@ class FileDeserializationState(
 
     fun deserializeAllFileReachableTopLevel() {
         while (reachableTopLevels.isNotEmpty()) {
-            val reachableKey = reachableTopLevels.first()
+            konst reachableKey = reachableTopLevels.first()
 
-            val existedSymbol = symbolDeserializer.deserializedSymbols[reachableKey]
+            konst existedSymbol = symbolDeserializer.deserializedSymbols[reachableKey]
             if (existedSymbol == null || !existedSymbol.isBound) {
                 fileDeserializer.deserializeDeclaration(reachableKey)
             }
@@ -152,7 +152,7 @@ abstract class IrLibraryBytesSource {
     abstract fun debugInfo(index: Int): ByteArray?
 }
 
-class IrLibraryFileFromBytes(private val bytesSource: IrLibraryBytesSource) : IrLibraryFile() {
+class IrLibraryFileFromBytes(private konst bytesSource: IrLibraryBytesSource) : IrLibraryFile() {
 
     override fun declaration(index: Int): ProtoDeclaration =
         ProtoDeclaration.parseFrom(bytesSource.irDeclaration(index).codedInputStream, extensionRegistryLite)
@@ -173,11 +173,11 @@ class IrLibraryFileFromBytes(private val bytesSource: IrLibraryBytesSource) : Ir
     override fun debugInfo(index: Int): String? = bytesSource.debugInfo(index)?.let { WobblyTF8.decode(it) }
 
     companion object {
-        val extensionRegistryLite: ExtensionRegistryLite = ExtensionRegistryLite.newInstance()
+        konst extensionRegistryLite: ExtensionRegistryLite = ExtensionRegistryLite.newInstance()
     }
 }
 
-class IrKlibBytesSource(private val klib: IrLibrary, private val fileIndex: Int) : IrLibraryBytesSource() {
+class IrKlibBytesSource(private konst klib: IrLibrary, private konst fileIndex: Int) : IrLibraryBytesSource() {
     override fun irDeclaration(index: Int): ByteArray = klib.irDeclaration(index, fileIndex)
     override fun type(index: Int): ByteArray = klib.type(index, fileIndex)
     override fun signature(index: Int): ByteArray = klib.signature(index, fileIndex)
@@ -190,10 +190,10 @@ fun IrLibraryFile.deserializeFqName(fqn: List<Int>): String =
     fqn.joinToString(".", transform = ::string)
 
 fun IrLibraryFile.createFile(module: IrModuleFragment, fileProto: ProtoFile): IrFile {
-    val fileName = fileProto.fileEntry.name
-    val fileEntry = NaiveSourceBasedFileEntryImpl(fileName, fileProto.fileEntry.lineStartOffsetList.toIntArray())
-    val fqName = FqName(deserializeFqName(fileProto.fqNameList))
-    val packageFragmentDescriptor = EmptyPackageFragmentDescriptor(module.descriptor, fqName)
-    val symbol = IrFileSymbolImpl(packageFragmentDescriptor)
+    konst fileName = fileProto.fileEntry.name
+    konst fileEntry = NaiveSourceBasedFileEntryImpl(fileName, fileProto.fileEntry.lineStartOffsetList.toIntArray())
+    konst fqName = FqName(deserializeFqName(fileProto.fqNameList))
+    konst packageFragmentDescriptor = EmptyPackageFragmentDescriptor(module.descriptor, fqName)
+    konst symbol = IrFileSymbolImpl(packageFragmentDescriptor)
     return IrFileImpl(fileEntry, symbol, fqName, module)
 }

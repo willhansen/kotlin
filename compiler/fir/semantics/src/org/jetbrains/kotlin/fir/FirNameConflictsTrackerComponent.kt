@@ -17,4 +17,4 @@ abstract class FirNameConflictsTrackerComponent : FirSessionComponent {
     )
 }
 
-val FirSession.nameConflictsTracker: FirNameConflictsTrackerComponent? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.nameConflictsTracker: FirNameConflictsTrackerComponent? by FirSession.nullableSessionComponentAccessor()

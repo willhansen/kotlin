@@ -22,7 +22,7 @@
  *	the error in r when rounded to a floating-point number.
  *
  *   2. Approximating expm1(r) by a special rational function on
- *	the interval [0,0.34658]:
+ *	the interkonst [0,0.34658]:
  *	Since
  *	    r*(exp(r)+1)/(exp(r)-1) = 2+ r^2/6 - r^4/360 + ...
  *	we define R1(r*r) by
@@ -41,7 +41,7 @@
  * 		Q3  =  -9.9206344733435987357E-6,
  * 		Q4  =   2.5051361420808517002E-7,
  * 		Q5  =  -6.2843505682382617102E-9;
- *  	(where z=r*r, and the values of Q1 to Q5 are listed below)
+ *  	(where z=r*r, and the konstues of Q1 to Q5 are listed below)
  *	with error bounded by
  *	    |                  5           |     -61
  *	    | 1.0+Q1*z+...+Q5*z   -  R1(z) | <= 2 
@@ -98,29 +98,29 @@
  *	    if x >  7.09782712893383973096e+02 then expm1(x) overflow
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
 
-private const val one = 1.0
-private const val huge = 1.0e+300
-private const val tiny = 1.0e-300
-private const val o_threshold = 7.09782712893383973096e+02 /* 0x40862E42, 0xFEFA39EF */
-private const val ln2_hi = 6.93147180369123816490e-01 /* 0x3fe62e42, 0xfee00000 */
-private const val ln2_lo = 1.90821492927058770002e-10 /* 0x3dea39ef, 0x35793c76 */
-private const val invln2 = 1.44269504088896338700e+00 /* 0x3ff71547, 0x652b82fe */
+private const konst one = 1.0
+private const konst huge = 1.0e+300
+private const konst tiny = 1.0e-300
+private const konst o_threshold = 7.09782712893383973096e+02 /* 0x40862E42, 0xFEFA39EF */
+private const konst ln2_hi = 6.93147180369123816490e-01 /* 0x3fe62e42, 0xfee00000 */
+private const konst ln2_lo = 1.90821492927058770002e-10 /* 0x3dea39ef, 0x35793c76 */
+private const konst invln2 = 1.44269504088896338700e+00 /* 0x3ff71547, 0x652b82fe */
 
 /* scaled coefficients related to expm1 */
-private const val Q1 = -3.33333333333331316428e-02 /* BFA11111 111110F4 */
-private const val Q2 = 1.58730158725481460165e-03 /* 3F5A01A0 19FE5585 */
-private const val Q3 = -7.93650757867487942473e-05 /* BF14CE19 9EAADBB7 */
-private const val Q4 = 4.00821782732936239552e-06 /* 3ED0CFCA 86E65239 */
-private const val Q5 = -2.01099218183624371326e-07 /* BE8AFDB7 6E09C32D */
+private const konst Q1 = -3.33333333333331316428e-02 /* BFA11111 111110F4 */
+private const konst Q2 = 1.58730158725481460165e-03 /* 3F5A01A0 19FE5585 */
+private const konst Q3 = -7.93650757867487942473e-05 /* BF14CE19 9EAADBB7 */
+private const konst Q4 = 4.00821782732936239552e-06 /* 3ED0CFCA 86E65239 */
+private const konst Q5 = -2.01099218183624371326e-07 /* BE8AFDB7 6E09C32D */
 
 internal fun expm1(_x: Double): Double {
     var x: Double = _x

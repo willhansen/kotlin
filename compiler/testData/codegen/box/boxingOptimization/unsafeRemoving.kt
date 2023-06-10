@@ -11,23 +11,23 @@ fun box() : String {
     assertEquals(1, returningBoxed())
     assertEquals(1, acceptingBoxed(1))
 
-    val a = A()
+    konst a = A()
     a.x = 1
     assertEquals(1, a.x)
 
-    val b = Array<Int?>(1, { null })
+    konst b = Array<Int?>(1, { null })
     b[0] = 1
     assertEquals(1, b[0])
 
-    val x: Int? = 1
+    konst x: Int? = 1
     assertEquals(1, x!!.hashCode())
 
-    val y: Int? = 1000
-    val z: Int? = 1000
-    val res = y === z
+    konst y: Int? = 1000
+    konst z: Int? = 1000
+    konst res = y === z
 
-    val c1: Any = if (1 == 1) 0 else "abc"
-    val c2: Any = if (1 != 1) 0 else "abc"
+    konst c1: Any = if (1 == 1) 0 else "abc"
+    konst c2: Any = if (1 != 1) 0 else "abc"
     assertEquals(0, c1)
     assertEquals("abc", c2)
 

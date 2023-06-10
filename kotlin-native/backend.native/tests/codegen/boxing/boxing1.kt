@@ -16,10 +16,10 @@ fun foo(arg: Any) {
     foo(2u)
     foo(false)
     foo("Hello")
-    val nonConstInt = 1
-    val nonConstUInt = 2u
-    val nonConstBool = false
-    val nonConstString = "Hello"
+    konst nonConstInt = 1
+    konst nonConstUInt = 2u
+    konst nonConstBool = false
+    konst nonConstString = "Hello"
     foo(nonConstInt)
     foo(nonConstUInt)
     foo(nonConstBool)

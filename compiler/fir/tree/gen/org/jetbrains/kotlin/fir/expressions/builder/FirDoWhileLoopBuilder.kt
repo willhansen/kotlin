@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirDoWhileLoopBuilder : FirLoopBuilder, FirAnnotationContainerBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     override lateinit var block: FirBlock
     override lateinit var condition: FirExpression
     override var label: FirLabel? = null

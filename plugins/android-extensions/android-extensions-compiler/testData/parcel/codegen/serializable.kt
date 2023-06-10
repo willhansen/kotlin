@@ -5,7 +5,7 @@ import kotlinx.android.parcel.*
 import android.os.Parcelable
 import java.io.Serializable
 
-class SerializableSimple(val a: String, val b: String) : Serializable
+class SerializableSimple(konst a: String, konst b: String) : Serializable
 
 @Parcelize
-class User(val notNull: SerializableSimple, val nullable: SerializableSimple) : Parcelable
+class User(konst notNull: SerializableSimple, konst nullable: SerializableSimple) : Parcelable

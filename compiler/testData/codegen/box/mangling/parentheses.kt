@@ -1,6 +1,6 @@
 // !SANITIZE_PARENTHESES
 // IGNORE_BACKEND: JS, NATIVE
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 // Sanitization is needed here because DxChecker reports ParseException on parentheses in names.
 

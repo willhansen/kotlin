@@ -35,9 +35,9 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirThisReceiverExpressionBuilder : FirQualifiedAccessExpressionBuilder, FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    override val contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
-    override val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
+    override konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     override var source: KtSourceElement? = null
     lateinit var calleeReference: FirThisReference
     var isImplicit: Boolean = false

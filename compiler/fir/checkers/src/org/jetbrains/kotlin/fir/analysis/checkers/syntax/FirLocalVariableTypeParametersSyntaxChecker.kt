@@ -32,7 +32,7 @@ object FirLocalVariableTypeParametersSyntaxChecker : FirDeclarationSyntaxChecker
         reporter: DiagnosticReporter
     ) {
         if (psi is KtProperty && psi.typeParameterList != null) {
-            val diagnostic =
+            konst diagnostic =
                 if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitTypeParametersForLocalVariables))
                     FirErrors.LOCAL_VARIABLE_WITH_TYPE_PARAMETERS else FirErrors.LOCAL_VARIABLE_WITH_TYPE_PARAMETERS_WARNING
             reporter.reportOn(source, diagnostic, context)
@@ -46,7 +46,7 @@ object FirLocalVariableTypeParametersSyntaxChecker : FirDeclarationSyntaxChecker
         reporter: DiagnosticReporter
     ) {
         source.treeStructure.typeParametersList(source.lighterASTNode)?.let { _ ->
-            val diagnostic =
+            konst diagnostic =
                 if (context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitTypeParametersForLocalVariables))
                     FirErrors.LOCAL_VARIABLE_WITH_TYPE_PARAMETERS else FirErrors.LOCAL_VARIABLE_WITH_TYPE_PARAMETERS_WARNING
             reporter.reportOn(source, diagnostic, context)

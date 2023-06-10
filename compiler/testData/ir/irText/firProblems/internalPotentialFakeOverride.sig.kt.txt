@@ -8,7 +8,7 @@ open class A {
   // CHECK:
   //   Mangled name: A{}bar
   //   Public signature: /A.bar|-7864284097863469857[0]
-  internal open val bar: Int
+  internal open konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-bar>(){}kotlin.Int
     //   Public signature: /A.bar.<get-bar>|-7403724005139201014[0]

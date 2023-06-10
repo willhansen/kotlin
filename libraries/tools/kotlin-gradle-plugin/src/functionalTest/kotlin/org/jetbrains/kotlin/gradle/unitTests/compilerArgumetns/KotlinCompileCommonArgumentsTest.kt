@@ -21,17 +21,17 @@ import kotlin.test.assertNull
 class KotlinCompileCommonArgumentsTest {
     @Test
     fun `test - simple project - old CompilerArgumentsAware and new CompilerArgumentsProducer - return same arguments`() {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.repositories.mavenLocal()
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64()
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain")
-        val commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinCompileCommon
+        konst commonMainCompilation = kotlin.metadata().compilations.getByName("commonMain")
+        konst commonMainCompileTask = commonMainCompilation.compileTaskProvider.get() as KotlinCompileCommon
 
-        val argumentsFromCompilerArgumentsProducer = commonMainCompileTask.createCompilerArguments(lenient)
+        konst argumentsFromCompilerArgumentsProducer = commonMainCompileTask.createCompilerArguments(lenient)
 
         @Suppress("DEPRECATION_ERROR")
         assertEquals(
@@ -42,14 +42,14 @@ class KotlinCompileCommonArgumentsTest {
 
     @Test
     fun `test - simple project - failing dependency - lenient`() {
-        val project = buildProjectWithMPP()
-        val kotlin = project.multiplatformExtension
+        konst project = buildProjectWithMPP()
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm()
         kotlin.linuxX64()
         kotlin.sourceSets.getByName("commonMain").dependencies { implementation("not-a:dependency:1.0.0") }
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMainCompileTask = kotlin.metadata().compilations.getByName("commonMain").compileTaskProvider.get() as KotlinCompileCommon
+        konst commonMainCompileTask = kotlin.metadata().compilations.getByName("commonMain").compileTaskProvider.get() as KotlinCompileCommon
         assertNull(commonMainCompileTask.createCompilerArguments(lenient).classpath)
         assertFails { commonMainCompileTask.createCompilerArguments(CreateCompilerArgumentsContext.default) }
     }

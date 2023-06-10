@@ -1,4 +1,4 @@
 fun usageWithFunctionExpression() {
-    val a = { println("Hi!") }
+    konst a = { println("Hi!") }
     SamInterface(a)
 }

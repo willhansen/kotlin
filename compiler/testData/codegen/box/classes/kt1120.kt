@@ -7,11 +7,11 @@
 // IGNORE_BACKEND: JS, NATIVE
 
 object RefreshQueue {
-    val any = Any()
-    val workerThread: Thread = Thread(object : Runnable {
+    konst any = Any()
+    konst workerThread: Thread = Thread(object : Runnable {
         override fun run() {
-            val a = any
-            val b = RefreshQueue.any
+            konst a = any
+            konst b = RefreshQueue.any
             if (a != b) throw AssertionError()
         }
     })

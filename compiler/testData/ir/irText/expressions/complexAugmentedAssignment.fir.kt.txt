@@ -42,30 +42,30 @@ object X1 {
 
 fun test1(a: IntArray) {
   var i: Int = 0
-  val <array>: IntArray = a
-  val <index_0>: Int = { // BLOCK
-    val <unary>: Int = i
+  konst <array>: IntArray = a
+  konst <index_0>: Int = { // BLOCK
+    konst <unary>: Int = i
     i = <unary>.inc()
     <unary>
   }
-  val <unary>: Int = <array>.get(index = <index_0>)
-  <array>.set(index = <index_0>, value = <unary>.inc())
+  konst <unary>: Int = <array>.get(index = <index_0>)
+  <array>.set(index = <index_0>, konstue = <unary>.inc())
   <unary> /*~> Unit */
 }
 
 fun test2() {
   { // BLOCK
-    val <unary>: Int = X1.<get-x1>()
+    konst <unary>: Int = X1.<get-x1>()
     X1.<set-x1>(<set-?> = <unary>.inc())
     <unary>
   } /*~> Unit */
   { // BLOCK
-    val <unary>: Int = X2.<get-x2>()
+    konst <unary>: Int = X2.<get-x2>()
     X2.<set-x2>(<set-?> = <unary>.inc())
     <unary>
   } /*~> Unit */
   { // BLOCK
-    val <unary>: Int = X3.<get-x3>()
+    konst <unary>: Int = X3.<get-x3>()
     X3.<set-x3>(<set-?> = <unary>.inc())
     <unary>
   } /*~> Unit */

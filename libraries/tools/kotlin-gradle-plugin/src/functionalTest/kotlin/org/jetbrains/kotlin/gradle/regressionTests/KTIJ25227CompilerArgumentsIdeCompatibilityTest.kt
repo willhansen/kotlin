@@ -23,12 +23,12 @@ class KTIJ25227CompilerArgumentsIdeCompatibilityTest {
 
     @Test
     fun `test - jvm compile task - is compatible with old CompilerArgumentsExtractor in older IDEs`() {
-        val project = buildProjectWithJvm()
-        project.evaluate()
+        konst project = buildProjectWithJvm()
+        project.ekonstuate()
 
-        val kotlin = project.kotlinJvmExtension
-        val mainCompilation = kotlin.target.compilations.main
-        val mainCompileTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
+        konst kotlin = project.kotlinJvmExtension
+        konst mainCompilation = kotlin.target.compilations.main
+        konst mainCompileTask = mainCompilation.compileTaskProvider.get() as KotlinCompile
         checkExtractCompilerArgumentsFromTask(mainCompileTask)
     }
 
@@ -37,12 +37,12 @@ class KTIJ25227CompilerArgumentsIdeCompatibilityTest {
     Code from CompilerArgumentsExtractor inside intellij.git with injected asssertions
      */
     private object IdePluginCodeMock {
-        const val CREATE_COMPILER_ARGS = "createCompilerArgs"
-        const val SETUP_COMPILER_ARGS = "setupCompilerArgs"
+        const konst CREATE_COMPILER_ARGS = "createCompilerArgs"
+        const konst SETUP_COMPILER_ARGS = "setupCompilerArgs"
 
         fun checkExtractCompilerArgumentsFromTask(compileTask: Task, defaultsOnly: Boolean = false): Any {
-            val compileTaskClass = compileTask.javaClass
-            val compilerArguments = compileTask[CREATE_COMPILER_ARGS] ?: fail("Missing $CREATE_COMPILER_ARGS method")
+            konst compileTaskClass = compileTask.javaClass
+            konst compilerArguments = compileTask[CREATE_COMPILER_ARGS] ?: fail("Missing $CREATE_COMPILER_ARGS method")
             compileTaskClass.getMethodOrNull(SETUP_COMPILER_ARGS, compilerArguments::class.java, Boolean::class.java, Boolean::class.java)
                 ?.doSetupCompilerArgs(compileTask, compilerArguments, defaultsOnly, false) ?: compileTaskClass
                 .getMethodOrNull(SETUP_COMPILER_ARGS, compilerArguments::class.java, Boolean::class.java)

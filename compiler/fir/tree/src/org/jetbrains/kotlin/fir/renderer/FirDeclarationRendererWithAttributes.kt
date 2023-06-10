@@ -14,17 +14,17 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 open class FirDeclarationRendererWithAttributes : FirDeclarationRenderer() {
     override fun FirDeclaration.renderDeclarationAttributes() {
         if (attributes.isNotEmpty()) {
-            val attributes = getAttributesWithValues().mapNotNull { (klass, value) ->
-                value?.let { klass to value.renderAsDeclarationAttributeValue() }
-            }.joinToString { (name, value) -> "$name=$value" }
+            konst attributes = getAttributesWithValues().mapNotNull { (klass, konstue) ->
+                konstue?.let { klass to konstue.renderAsDeclarationAttributeValue() }
+            }.joinToString { (name, konstue) -> "$name=$konstue" }
             printer.print("[$attributes] ")
         }
     }
 
     private fun FirDeclaration.getAttributesWithValues(): List<Pair<String, Any?>> {
-        val attributesMap = FirDeclarationDataRegistry.allValuesThreadUnsafeForRendering()
+        konst attributesMap = FirDeclarationDataRegistry.allValuesThreadUnsafeForRendering()
         return attributesMap.entries
-            .map { it.key.substringAfterLast(".") to it.value }
+            .map { it.key.substringAfterLast(".") to it.konstue }
             .sortedBy { it.first }
             .map { (klass, index) -> klass to attributes[index] }
     }

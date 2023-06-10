@@ -3,9 +3,9 @@ fun foo(x: Any?, y: Any?) = null
 
 var finallyFlag = false
 
-inline fun test(value: Any?): String? {
+inline fun test(konstue: Any?): String? {
     try {
-        return foo(null, value ?: return null)
+        return foo(null, konstue ?: return null)
     }
     finally {
         finallyFlag = true

@@ -3,7 +3,7 @@
  * that can be found in the license/LICENSE.txt file.
  */
 
-package org.jetbrains.kotlin.spec.utils.validators
+package org.jetbrains.kotlin.spec.utils.konstidators
 
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiErrorElement
@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.spec.utils.models.AbstractSpecTest
 import java.io.File
 
 class ParsingTestTypeValidator(
-    private val psiFile: PsiFile,
+    private konst psiFile: PsiFile,
     testDataFile: File,
     testInfo: AbstractSpecTest
 ) : AbstractTestValidator(testInfo, testDataFile) {

@@ -1,16 +1,16 @@
 import kotlin.reflect.KProperty
 
-class Foo(a: Int, val b:Foo, var c:Boolean, private val d: List, protected val e: Long = 2) {
-  val f1 = 2
+class Foo(a: Int, konst b:Foo, var c:Boolean, private konst d: List, protected konst e: Long = 2) {
+  konst f1 = 2
 
-  val intConst: dynamic = 30
-  val arrayConst: Any = byteArrayOf(1,2)
+  konst intConst: dynamic = 30
+  konst arrayConst: Any = byteArrayOf(1,2)
 
   protected var f2 = 3
 
   var name: String = "x"
 
-  val isEmpty get() = false
+  konst isEmpty get() = false
   var isEmptyMutable: Boolean?
   var islowercase: Boolean?
   var isEmptyInt: Int?
@@ -19,22 +19,22 @@ class Foo(a: Int, val b:Foo, var c:Boolean, private val d: List, protected val e
 
   internal var stringRepresentation: String
     get() = this.toString()
-    set(value) {
-        setDataFromString(value)
+    set(konstue) {
+        setDataFromString(konstue)
     }
 
-  const val SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
+  const konst SUBSYSTEM_DEPRECATED: String = "This subsystem is deprecated"
 
-  const val CONSTANT_WITH_ESCAPES = "A\tB\nC\rD\'E\"F\\G\$H"
+  const konst CONSTANT_WITH_ESCAPES = "A\tB\nC\rD\'E\"F\\G\$H"
 
   var counter = 0
-    set(value) {
-        if (value >= 0) field = value
+    set(konstue) {
+        if (konstue >= 0) field = konstue
     }
   var counter2 : Int?
     get() = field
-    set(value) {
-        if (value >= 0) field = value
+    set(konstue) {
+        if (konstue >= 0) field = konstue
     }
 
   lateinit var subject: Unresolved
@@ -47,7 +47,7 @@ class Foo(a: Int, val b:Foo, var c:Boolean, private val d: List, protected val e
   private var privateDelegated: Int by Delegate()
   var lazyProp: String by lazy { "abc" }
 
-  val Int.intProp: Int
+  konst Int.intProp: Int
     get() = 1
 
   final internal var internalWithPrivateSet: Int = 1
@@ -59,16 +59,16 @@ class Foo(a: Int, val b:Foo, var c:Boolean, private val d: List, protected val e
   private var privateVarWithPrivateSet = { 0 }()
     private set
 
-  private val privateValWithGet: String?
+  private konst privateValWithGet: String?
     get() = ""
 
   private var privateVarWithGet: Object = Object()
     get
 
-  val sum: (Int)->Int = { x: Int -> sum(x - 1) + x }
+  konst sum: (Int)->Int = { x: Int -> sum(x - 1) + x }
 
   companion object {
-    public val prop3: Int = { 12 }()
+    public konst prop3: Int = { 12 }()
       get() {
         return field
       }
@@ -76,9 +76,9 @@ class Foo(a: Int, val b:Foo, var c:Boolean, private val d: List, protected val e
       set(i: Int) {
         field++
       }
-    private const val contextBean = Context.BEAN
+    private const konst contextBean = Context.BEAN
 
-    val f1 = 4
+    konst f1 = 4
   }
 }
 
@@ -89,7 +89,7 @@ class MyProperty<T> {
 
 class Modifiers {
   @delegate:Transient
-  val plainField: Int = 1
+  konst plainField: Int = 1
 }
 
 interface A {
@@ -102,8 +102,8 @@ interface A {
 }
 
 class Foo2 {
-  val foo get() = getMeNonNullFoo()
-  val foo2: Foo get() = getMeNonNullFoo()
+  konst foo get() = getMeNonNullFoo()
+  konst foo2: Foo get() = getMeNonNullFoo()
   fun getMeNonNullFoo() : Foo = Foo()
 }
 

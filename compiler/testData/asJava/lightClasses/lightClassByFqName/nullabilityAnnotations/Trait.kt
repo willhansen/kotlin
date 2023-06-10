@@ -13,9 +13,9 @@ interface Trait {
     @Nullable fun `nullableWithN`(): String?
     @NotNull fun nullableWithNN(): String?
 
-    val nullableVal: String?
+    konst nullableVal: String?
     var nullableVar: String?
-    val notNullVal: String
+    konst notNullVal: String
     var notNullVar: String
 }
 

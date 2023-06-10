@@ -15,7 +15,7 @@ class A {
     var sum1 = 0
     var sum2 = 0
     for (i in 0 until 10) {
-        val a = A()
+        konst a = A()
         sum1 += a.x
         a.x = i
         sum2 += a.x

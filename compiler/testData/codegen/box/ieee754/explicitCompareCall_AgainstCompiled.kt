@@ -24,7 +24,7 @@ public class JavaClass {
 
 fun box(): String {
 
-    val jClass = JavaClass()
+    konst jClass = JavaClass()
 
     if (jClass.minus0().compareTo(jClass.plus0()) != -1) return "fail 1"
 

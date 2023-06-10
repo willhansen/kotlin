@@ -2,8 +2,8 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 class Test<X, T> {
-    fun hereIdeaFail(values : List<Int>, others : List<String>): List<Test<out Int, out String>> {
-        return values.map { left(it) }.plus(others.map { right(it) })
+    fun hereIdeaFail(konstues : List<Int>, others : List<String>): List<Test<out Int, out String>> {
+        return konstues.map { left(it) }.plus(others.map { right(it) })
     }
 
     companion object {

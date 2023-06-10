@@ -43,7 +43,7 @@ object Z {
 
   }
 
-  val aLambda: Function0<Unit>
+  konst aLambda: Function0<Unit>
     field = local fun <anonymous>() {
       Z.<set-counter>(<set-?> = 1)
       Z.foo()
@@ -53,7 +53,7 @@ object Z {
 
     get
 
-  val anObject: Any
+  konst anObject: Any
     field = { // BLOCK
       local class <no name provided> {
         constructor() /* primary */ {

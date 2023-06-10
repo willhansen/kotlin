@@ -21,12 +21,12 @@ import java.io.Serializable
  * @param exception optional exception caused the diagnostic
  */
 data class ScriptDiagnostic(
-    val code: Int,
-    val message: String,
-    val severity: Severity = Severity.ERROR,
-    val sourcePath: String? = null,
-    val location: SourceCode.Location? = null,
-    val exception: Throwable? = null
+    konst code: Int,
+    konst message: String,
+    konst severity: Severity = Severity.ERROR,
+    konst sourcePath: String? = null,
+    konst location: SourceCode.Location? = null,
+    konst exception: Throwable? = null
 ) : Serializable {
     /**
      * The diagnostic severity
@@ -78,7 +78,7 @@ data class ScriptDiagnostic(
             append(exception)
             if (withStackTrace) {
                 ByteArrayOutputStream().use { os ->
-                    val ps = PrintStream(os)
+                    konst ps = PrintStream(os)
                     exception.printStackTrace(ps)
                     ps.flush()
                     append("\n")
@@ -89,12 +89,12 @@ data class ScriptDiagnostic(
     }
 
     companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
 
-        const val unspecifiedInfo = 0
-        const val unspecifiedError = -1
-        const val unspecifiedException = -2
-        const val incompleteCode = -3
+        const konst unspecifiedInfo = 0
+        const konst unspecifiedError = -1
+        const konst unspecifiedException = -2
+        const konst incompleteCode = -3
     }
 }
 
@@ -109,14 +109,14 @@ sealed class ResultWithDiagnostics<out R> {
     /**
      * The diagnostic reports container
      */
-    abstract val reports: List<ScriptDiagnostic>
+    abstract konst reports: List<ScriptDiagnostic>
 
     /**
-     * The successful [value] result with optional [reports] with diagnostics
+     * The successful [konstue] result with optional [reports] with diagnostics
      */
     data class Success<out R>(
-        val value: R,
-        override val reports: List<ScriptDiagnostic> = listOf()
+        konst konstue: R,
+        override konst reports: List<ScriptDiagnostic> = listOf()
     ) : ResultWithDiagnostics<R>()
 
     /**
@@ -124,7 +124,7 @@ sealed class ResultWithDiagnostics<out R> {
      * @param reports diagnostics associated with the failure
      */
     data class Failure(
-        override val reports: List<ScriptDiagnostic>
+        override konst reports: List<ScriptDiagnostic>
     ) : ResultWithDiagnostics<Nothing>() {
         constructor(vararg reports: ScriptDiagnostic) : this(reports.asList())
     }
@@ -137,7 +137,7 @@ sealed class ResultWithDiagnostics<out R> {
  */
 inline fun <R1, R2> ResultWithDiagnostics<R1>.onSuccess(body: (R1) -> ResultWithDiagnostics<R2>): ResultWithDiagnostics<R2> =
     when (this) {
-        is ResultWithDiagnostics.Success -> this.reports + body(this.value)
+        is ResultWithDiagnostics.Success -> this.reports + body(this.konstue)
         is ResultWithDiagnostics.Failure -> this
     }
 
@@ -173,14 +173,14 @@ inline fun<T, R> Iterable<T>.flatMapSuccess(body: (T) -> ResultWithDiagnostics<C
     }
 
 inline fun<T, R1, R2> Iterable<T>.mapSuccessImpl(body: (T) -> ResultWithDiagnostics<R1>, updateResults: (MutableList<R2>, R1) -> Unit): ResultWithDiagnostics<List<R2>> {
-    val reports = ArrayList<ScriptDiagnostic>()
-    val results = ArrayList<R2>()
+    konst reports = ArrayList<ScriptDiagnostic>()
+    konst results = ArrayList<R2>()
     for (it in this) {
-        val result = body(it)
+        konst result = body(it)
         reports.addAll(result.reports)
         when (result) {
             is ResultWithDiagnostics.Success -> {
-                updateResults(results, result.value)
+                updateResults(results, result.konstue)
             }
             else -> {
                 return ResultWithDiagnostics.Failure(reports)
@@ -206,12 +206,12 @@ inline fun <R> ResultWithDiagnostics<R>.onFailure(body: (ResultWithDiagnostics<R
  * Merges diagnostics report with the [result] wrapper
  */
 operator fun <R> List<ScriptDiagnostic>.plus(result: ResultWithDiagnostics<R>): ResultWithDiagnostics<R> = when (result) {
-    is ResultWithDiagnostics.Success -> ResultWithDiagnostics.Success(result.value, this + result.reports)
+    is ResultWithDiagnostics.Success -> ResultWithDiagnostics.Success(result.konstue, this + result.reports)
     is ResultWithDiagnostics.Failure -> ResultWithDiagnostics.Failure(this + result.reports)
 }
 
 /**
- * Converts the receiver value to the Success result wrapper with optional diagnostic [reports]
+ * Converts the receiver konstue to the Success result wrapper with optional diagnostic [reports]
  */
 fun <R> R.asSuccess(reports: List<ScriptDiagnostic> = listOf()): ResultWithDiagnostics.Success<R> =
     ResultWithDiagnostics.Success(this, reports)
@@ -283,25 +283,25 @@ fun String.asErrorDiagnostics(
     ScriptDiagnostic(code, this, ScriptDiagnostic.Severity.ERROR, locationWithId)
 
 /**
- * Extracts the result value from the receiver wrapper or null if receiver represents a Failure
+ * Extracts the result konstue from the receiver wrapper or null if receiver represents a Failure
  */
-fun <R> ResultWithDiagnostics<R>.valueOrNull(): R? = when (this) {
-    is ResultWithDiagnostics.Success<R> -> value
+fun <R> ResultWithDiagnostics<R>.konstueOrNull(): R? = when (this) {
+    is ResultWithDiagnostics.Success<R> -> konstue
     else -> null
 }
 
 /**
- * Extracts the result value from the receiver wrapper or run non-returning lambda if receiver represents a Failure
+ * Extracts the result konstue from the receiver wrapper or run non-returning lambda if receiver represents a Failure
  */
-inline fun <R> ResultWithDiagnostics<R>.valueOr(body: (ResultWithDiagnostics.Failure) -> Nothing): R = when (this) {
-    is ResultWithDiagnostics.Success<R> -> value
+inline fun <R> ResultWithDiagnostics<R>.konstueOr(body: (ResultWithDiagnostics.Failure) -> Nothing): R = when (this) {
+    is ResultWithDiagnostics.Success<R> -> konstue
     is ResultWithDiagnostics.Failure -> body(this)
 }
 
 /**
- * Extracts the result value from the receiver wrapper or throw RuntimeException with diagnostics
+ * Extracts the result konstue from the receiver wrapper or throw RuntimeException with diagnostics
  */
-fun <R> ResultWithDiagnostics<R>.valueOrThrow(): R = valueOr {
+fun <R> ResultWithDiagnostics<R>.konstueOrThrow(): R = konstueOr {
     throw RuntimeException(
         reports.joinToString("\n") { it.exception?.toString() ?: it.message },
         reports.find { it.exception != null }?.exception

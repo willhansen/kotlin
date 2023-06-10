@@ -9,11 +9,11 @@ public class Base {
 // FILE: test.kt
 
 interface Proxy {
-    val x: String
+    konst x: String
 }
 
 open class Intermediate : Base() {
-    val x get() = " "
+    konst x get() = " "
 }
 
 class Derived : Proxy, Intermediate() {

@@ -16,7 +16,7 @@
 
 package org.jetbrains.kotlin.native.interop.indexer
 
-enum class Language(val sourceFileExtension: String, val clangLanguageName: String) {
+enum class Language(konst sourceFileExtension: String, konst clangLanguageName: String) {
     C("c", "c"),
     CPP("cpp", "c++"),
     OBJECTIVE_C("m", "objective-c")
@@ -44,18 +44,18 @@ interface HeaderExclusionPolicy {
 
 sealed class NativeLibraryHeaderFilter {
     class NameBased(
-            val policy: HeaderInclusionPolicy,
-            val excludeDepdendentModules: Boolean
+            konst policy: HeaderInclusionPolicy,
+            konst excludeDepdendentModules: Boolean
     ) : NativeLibraryHeaderFilter()
 
-    class Predefined(val headers: Set<String>, val modules: List<String>) : NativeLibraryHeaderFilter()
+    class Predefined(konst headers: Set<String>, konst modules: List<String>) : NativeLibraryHeaderFilter()
 }
 
 interface Compilation {
-    val includes: List<IncludeInfo>
-    val additionalPreambleLines: List<String>
-    val compilerArgs: List<String>
-    val language: Language
+    konst includes: List<IncludeInfo>
+    konst additionalPreambleLines: List<String>
+    konst compilerArgs: List<String>
+    konst language: Language
 }
 
 fun defaultCompilerArgs(language: Language): List<String> =
@@ -87,16 +87,16 @@ fun defaultCompilerArgs(language: Language): List<String> =
         }
 
 data class CompilationWithPCH(
-        override val compilerArgs: List<String>,
-        override val language: Language
+        override konst compilerArgs: List<String>,
+        override konst language: Language
 ) : Compilation {
     constructor(compilerArgs: List<String>, precompiledHeader: String, language: Language)
             : this(compilerArgs + listOf("-include-pch", precompiledHeader), language)
 
-    override val includes: List<IncludeInfo>
+    override konst includes: List<IncludeInfo>
         get() = emptyList()
 
-    override val additionalPreambleLines: List<String>
+    override konst additionalPreambleLines: List<String>
         get() = emptyList()
 }
 
@@ -107,18 +107,18 @@ data class CompilationWithPCH(
  * TODO: Compilation hierarchy seems to require some refactoring.
  */
 data class NativeLibrary(
-        override val includes: List<IncludeInfo>,
-        override val additionalPreambleLines: List<String>,
-        override val compilerArgs: List<String>,
-        val headerToIdMapper: HeaderToIdMapper,
-        override val language: Language,
-        val excludeSystemLibs: Boolean, // TODO: drop?
-        val headerExclusionPolicy: HeaderExclusionPolicy,
-        val headerFilter: NativeLibraryHeaderFilter,
-        val objCClassesIncludingCategories: Set<String>,
+        override konst includes: List<IncludeInfo>,
+        override konst additionalPreambleLines: List<String>,
+        override konst compilerArgs: List<String>,
+        konst headerToIdMapper: HeaderToIdMapper,
+        override konst language: Language,
+        konst excludeSystemLibs: Boolean, // TODO: drop?
+        konst headerExclusionPolicy: HeaderExclusionPolicy,
+        konst headerFilter: NativeLibraryHeaderFilter,
+        konst objCClassesIncludingCategories: Set<String>,
 ) : Compilation
 
-data class IndexerResult(val index: NativeIndex, val compilation: CompilationWithPCH)
+data class IndexerResult(konst index: NativeIndex, konst compilation: CompilationWithPCH)
 
 /**
  * Retrieves the definitions from given C header file using given compiler arguments (e.g. defines).
@@ -129,64 +129,64 @@ fun buildNativeIndex(library: NativeLibrary, verbose: Boolean): IndexerResult = 
  * This class describes the IR of definitions from C header file(s).
  */
 abstract class NativeIndex {
-    abstract val structs: Collection<StructDecl>
-    abstract val enums: Collection<EnumDef>
-    abstract val objCClasses: Collection<ObjCClass>
-    abstract val objCProtocols: Collection<ObjCProtocol>
-    abstract val objCCategories: Collection<ObjCCategory>
-    abstract val typedefs: Collection<TypedefDef>
-    abstract val functions: Collection<FunctionDecl>
-    abstract val macroConstants: Collection<ConstantDef>
-    abstract val wrappedMacros: Collection<WrappedMacroDef>
-    abstract val globals: Collection<GlobalDecl>
-    abstract val includedHeaders: Collection<HeaderId>
+    abstract konst structs: Collection<StructDecl>
+    abstract konst enums: Collection<EnumDef>
+    abstract konst objCClasses: Collection<ObjCClass>
+    abstract konst objCProtocols: Collection<ObjCProtocol>
+    abstract konst objCCategories: Collection<ObjCCategory>
+    abstract konst typedefs: Collection<TypedefDef>
+    abstract konst functions: Collection<FunctionDecl>
+    abstract konst macroConstants: Collection<ConstantDef>
+    abstract konst wrappedMacros: Collection<WrappedMacroDef>
+    abstract konst globals: Collection<GlobalDecl>
+    abstract konst includedHeaders: Collection<HeaderId>
 }
 
 /**
  * The (contents-based) header id.
- * Its [value] remains valid across different runs of the indexer and the process,
+ * Its [konstue] remains konstid across different runs of the indexer and the process,
  * and thus can be used to 'serialize' the id.
  */
-data class HeaderId(val value: String)
+data class HeaderId(konst konstue: String)
 
-data class Location(val headerId: HeaderId)
+data class Location(konst headerId: HeaderId)
 
 interface LocatableDeclaration {
-    val location: Location
+    konst location: Location
 }
 
 interface TypeDeclaration : LocatableDeclaration
 
-sealed class StructMember(val name: String) {
-    abstract val offset: Long?
+sealed class StructMember(konst name: String) {
+    abstract konst offset: Long?
 }
 
 /**
  * C struct field.
  */
-class Field(name: String, val type: Type, override val offset: Long, val typeSize: Long, val typeAlign: Long)
+class Field(name: String, konst type: Type, override konst offset: Long, konst typeSize: Long, konst typeAlign: Long)
     : StructMember(name)
 
-val Field.isAligned: Boolean
+konst Field.isAligned: Boolean
     get() = offset % (typeAlign * 8) == 0L
 
-class BitField(name: String, val type: Type, override val offset: Long, val size: Int) : StructMember(name)
+class BitField(name: String, konst type: Type, override konst offset: Long, konst size: Int) : StructMember(name)
 
 class IncompleteField(name: String) : StructMember(name) {
-    override val offset: Long? get() = null
+    override konst offset: Long? get() = null
 }
 
-class AnonymousInnerRecord(val def: StructDef) : StructMember("") {
-    override val offset: Long? get() = null
-    val typeSize: Long = def.size
+class AnonymousInnerRecord(konst def: StructDef) : StructMember("") {
+    override konst offset: Long? get() = null
+    konst typeSize: Long = def.size
 }
 
 /**
  * C struct declaration.
  */
-abstract class StructDecl(val spelling: String) : TypeDeclaration {
+abstract class StructDecl(konst spelling: String) : TypeDeclaration {
 
-    abstract val def: StructDef?
+    abstract konst def: StructDef?
 }
 
 /**
@@ -195,18 +195,18 @@ abstract class StructDecl(val spelling: String) : TypeDeclaration {
  * @param hasNaturalLayout must be `false` if the struct has unnatural layout, e.g. it is `packed`.
  * May be `false` even if the struct has natural layout.
  */
-abstract class StructDef(val size: Long, val align: Int) {
+abstract class StructDef(konst size: Long, konst align: Int) {
 
     enum class Kind {
         STRUCT, UNION, CLASS
     }
 
-    abstract val kind: Kind
-    abstract val members: List<StructMember>
-    abstract val methods: List<FunctionDecl>
-    abstract val staticFields: List<GlobalDecl>
+    abstract konst kind: Kind
+    abstract konst members: List<StructMember>
+    abstract konst methods: List<FunctionDecl>
+    abstract konst staticFields: List<GlobalDecl>
 
-    val fields: List<Field>
+    konst fields: List<Field>
         get() = mutableListOf<Field>().apply {
             members.forEach {
                 when (it) {
@@ -218,7 +218,7 @@ abstract class StructDef(val size: Long, val align: Int) {
             }
         }
 
-    val bitFields: List<BitField>
+    konst bitFields: List<BitField>
         get() = mutableListOf<BitField>().apply {
             members.forEach {
                 when (it) {
@@ -232,32 +232,32 @@ abstract class StructDef(val size: Long, val align: Int) {
 }
 
 /**
- * C enum value.
+ * C enum konstue.
  */
-class EnumConstant(val name: String, val value: Long, val isExplicitlyDefined: Boolean)
+class EnumConstant(konst name: String, konst konstue: Long, konst isExplicitlyDefined: Boolean)
 
 /**
  * C enum definition.
  */
-abstract class EnumDef(val spelling: String, val baseType: Type) : TypeDeclaration {
+abstract class EnumDef(konst spelling: String, konst baseType: Type) : TypeDeclaration {
 
-    abstract val constants: List<EnumConstant>
+    abstract konst constants: List<EnumConstant>
 }
 
 sealed class ObjCContainer {
-    abstract val protocols: List<ObjCProtocol>
-    abstract val methods: List<ObjCMethod>
-    abstract val properties: List<ObjCProperty>
+    abstract konst protocols: List<ObjCProtocol>
+    abstract konst methods: List<ObjCMethod>
+    abstract konst properties: List<ObjCProperty>
 }
 
-sealed class ObjCClassOrProtocol(val name: String) : ObjCContainer(), TypeDeclaration {
-    abstract val isForwardDeclaration: Boolean
+sealed class ObjCClassOrProtocol(konst name: String) : ObjCContainer(), TypeDeclaration {
+    abstract konst isForwardDeclaration: Boolean
 }
 
 data class ObjCMethod(
-        val selector: String, val encoding: String, val parameters: List<Parameter>, private val returnType: Type,
-        val isVariadic: Boolean, val isClass: Boolean, val nsConsumesSelf: Boolean, val nsReturnsRetained: Boolean,
-        val isOptional: Boolean, val isInit: Boolean, val isExplicitlyDesignatedInitializer: Boolean, val isDirect: Boolean
+        konst selector: String, konst encoding: String, konst parameters: List<Parameter>, private konst returnType: Type,
+        konst isVariadic: Boolean, konst isClass: Boolean, konst nsConsumesSelf: Boolean, konst nsReturnsRetained: Boolean,
+        konst isOptional: Boolean, konst isInit: Boolean, konst isExplicitlyDesignatedInitializer: Boolean, konst isDirect: Boolean
 ) {
 
     fun returnsInstancetype(): Boolean = returnType is ObjCInstanceType
@@ -272,26 +272,26 @@ data class ObjCMethod(
     }
 }
 
-data class ObjCProperty(val name: String, val getter: ObjCMethod, val setter: ObjCMethod?) {
+data class ObjCProperty(konst name: String, konst getter: ObjCMethod, konst setter: ObjCMethod?) {
     fun getType(container: ObjCClassOrProtocol): Type = getter.getReturnType(container)
 }
 
 abstract class ObjCClass(name: String) : ObjCClassOrProtocol(name) {
-    abstract val binaryName: String?
-    abstract val baseClass: ObjCClass?
+    abstract konst binaryName: String?
+    abstract konst baseClass: ObjCClass?
     /**
      * Categories whose methods and properties should be generated as members of Kotlin class.
      */
-    abstract val includedCategories: List<ObjCCategory>
+    abstract konst includedCategories: List<ObjCCategory>
 }
 abstract class ObjCProtocol(name: String) : ObjCClassOrProtocol(name)
 
-abstract class ObjCCategory(val name: String, val clazz: ObjCClass) : ObjCContainer(), LocatableDeclaration
+abstract class ObjCCategory(konst name: String, konst clazz: ObjCClass) : ObjCContainer(), LocatableDeclaration
 
 /**
  * C function parameter.
  */
-data class Parameter(val name: String?, val type: Type, val nsConsumed: Boolean)
+data class Parameter(konst name: String?, konst type: Type, konst nsConsumed: Boolean)
 
 
 enum class CxxMethodKind {
@@ -307,7 +307,7 @@ enum class CxxMethodKind {
 /**
  * C++ class method, constructor or destructor details
  */
-class CxxMethodInfo(val receiverType: PointerType, val kind: CxxMethodKind = CxxMethodKind.InstanceMethod)
+class CxxMethodInfo(konst receiverType: PointerType, konst kind: CxxMethodKind = CxxMethodKind.InstanceMethod)
 
 fun CxxMethodInfo.isConst() : Boolean = receiverType.pointeeIsConst
 
@@ -315,24 +315,24 @@ fun CxxMethodInfo.isConst() : Boolean = receiverType.pointeeIsConst
 /**
  * C function declaration.
  */
-class FunctionDecl(val name: String, val parameters: List<Parameter>, val returnType: Type, val binaryName: String,
-                   val isDefined: Boolean, val isVararg: Boolean,
-                   val parentName: String? = null, val cxxMethod: CxxMethodInfo? = null) {
+class FunctionDecl(konst name: String, konst parameters: List<Parameter>, konst returnType: Type, konst binaryName: String,
+                   konst isDefined: Boolean, konst isVararg: Boolean,
+                   konst parentName: String? = null, konst cxxMethod: CxxMethodInfo? = null) {
 
-    val fullName: String = parentName?.let { "$parentName::$name" } ?: name
+    konst fullName: String = parentName?.let { "$parentName::$name" } ?: name
 
     // C++ virtual or non-virtual instance member, i.e. has "this" receiver
-    val isCxxInstanceMethod: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.InstanceMethod
+    konst isCxxInstanceMethod: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.InstanceMethod
 
     /**
      * C++ class or instance member function, i.e. any function in the scope of class/struct: method, static, ctor, dtor, cast operator, etc
      */
-    val isCxxMethod: Boolean get() = this.cxxMethod != null && this.cxxMethod.kind != CxxMethodKind.None
+    konst isCxxMethod: Boolean get() = this.cxxMethod != null && this.cxxMethod.kind != CxxMethodKind.None
 
-    val isCxxConstructor: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.Constructor
-    val isCxxDestructor: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.Destructor
-    val cxxReceiverType: PointerType? get() = cxxMethod?.receiverType
-    val cxxReceiverClass: StructDecl?
+    konst isCxxConstructor: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.Constructor
+    konst isCxxDestructor: Boolean get() = this.cxxMethod?.kind == CxxMethodKind.Destructor
+    konst cxxReceiverType: PointerType? get() = cxxMethod?.receiverType
+    konst cxxReceiverClass: StructDecl?
         get() = cxxMethod?. let { (this.cxxMethod.receiverType.pointeeType as RecordType).decl }
 }
 
@@ -343,19 +343,19 @@ class FunctionDecl(val name: String, val parameters: List<Parameter>, val return
  * typedef $aliased $name;
  * ```
  */
-class TypedefDef(val aliased: Type, val name: String, override val location: Location) : TypeDeclaration
+class TypedefDef(konst aliased: Type, konst name: String, override konst location: Location) : TypeDeclaration
 
-abstract class MacroDef(val name: String)
+abstract class MacroDef(konst name: String)
 
-abstract class ConstantDef(name: String, val type: Type): MacroDef(name)
-class IntegerConstantDef(name: String, type: Type, val value: Long) : ConstantDef(name, type)
-class FloatingConstantDef(name: String, type: Type, val value: Double) : ConstantDef(name, type)
-class StringConstantDef(name: String, type: Type, val value: String) : ConstantDef(name, type)
+abstract class ConstantDef(name: String, konst type: Type): MacroDef(name)
+class IntegerConstantDef(name: String, type: Type, konst konstue: Long) : ConstantDef(name, type)
+class FloatingConstantDef(name: String, type: Type, konst konstue: Double) : ConstantDef(name, type)
+class StringConstantDef(name: String, type: Type, konst konstue: String) : ConstantDef(name, type)
 
-class WrappedMacroDef(name: String, val type: Type) : MacroDef(name)
+class WrappedMacroDef(name: String, konst type: Type) : MacroDef(name)
 
-class GlobalDecl(val name: String, val type: Type, val isConst: Boolean, val parentName: String? = null) {
-    val fullName: String get() = parentName?.let { "$it::$name" } ?: name
+class GlobalDecl(konst name: String, konst type: Type, konst isConst: Boolean, konst parentName: String? = null) {
+    konst fullName: String get() = parentName?.let { "$it::$name" } ?: name
 }
 
 /**
@@ -374,70 +374,70 @@ object CBoolType : BoolType()
 object ObjCBoolType : BoolType()
 // We omit `const` qualifier for IntegerType and FloatingType to make `CBridgeGen` simpler.
 // See KT-28102.
-data class IntegerType(val size: Int, val isSigned: Boolean, val spelling: String) : PrimitiveType
+data class IntegerType(konst size: Int, konst isSigned: Boolean, konst spelling: String) : PrimitiveType
 
 // TODO: floating type is not actually defined entirely by its size.
-data class FloatingType(val size: Int, val spelling: String) : PrimitiveType
+data class FloatingType(konst size: Int, konst spelling: String) : PrimitiveType
 
-data class VectorType(val elementType: Type, val elementCount: Int, val spelling: String) : PrimitiveType
+data class VectorType(konst elementType: Type, konst elementCount: Int, konst spelling: String) : PrimitiveType
 
 object VoidType : Type
 
-data class RecordType(val decl: StructDecl) : Type
+data class RecordType(konst decl: StructDecl) : Type
 
-data class ManagedType(val decl: StructDecl) : Type
+data class ManagedType(konst decl: StructDecl) : Type
 
-data class EnumType(val def: EnumDef) : Type
+data class EnumType(konst def: EnumDef) : Type
 
 // when pointer type is provided by clang we'll use ots correct spelling
-data class PointerType(val pointeeType: Type, val pointeeIsConst: Boolean = false,
-                       val isLVReference: Boolean = false, val spelling: String? = null) : Type
+data class PointerType(konst pointeeType: Type, konst pointeeIsConst: Boolean = false,
+                       konst isLVReference: Boolean = false, konst spelling: String? = null) : Type
 // TODO: refactor type representation and support type modifiers more generally.
 
-data class FunctionType(val parameterTypes: List<Type>, val returnType: Type) : Type
+data class FunctionType(konst parameterTypes: List<Type>, konst returnType: Type) : Type
 
 interface ArrayType : Type {
-    val elemType: Type
+    konst elemType: Type
 }
 
-data class ConstArrayType(override val elemType: Type, val length: Long) : ArrayType
-data class IncompleteArrayType(override val elemType: Type) : ArrayType
-data class VariableArrayType(override val elemType: Type) : ArrayType
+data class ConstArrayType(override konst elemType: Type, konst length: Long) : ArrayType
+data class IncompleteArrayType(override konst elemType: Type) : ArrayType
+data class VariableArrayType(override konst elemType: Type) : ArrayType
 
-data class Typedef(val def: TypedefDef) : Type
+data class Typedef(konst def: TypedefDef) : Type
 
 sealed class ObjCPointer : Type {
     enum class Nullability {
         Nullable, NonNull, Unspecified
     }
 
-    abstract val nullability: Nullability
+    abstract konst nullability: Nullability
 }
 
 sealed class ObjCQualifiedPointer : ObjCPointer() {
-    abstract val protocols: List<ObjCProtocol>
+    abstract konst protocols: List<ObjCProtocol>
 }
 
 data class ObjCObjectPointer(
-        val def: ObjCClass,
-        override val nullability: Nullability,
-        override val protocols: List<ObjCProtocol>
+        konst def: ObjCClass,
+        override konst nullability: Nullability,
+        override konst protocols: List<ObjCProtocol>
 ) : ObjCQualifiedPointer()
 
 data class ObjCClassPointer(
-        override val nullability: Nullability,
-        override val protocols: List<ObjCProtocol>
+        override konst nullability: Nullability,
+        override konst protocols: List<ObjCProtocol>
 ) : ObjCQualifiedPointer()
 
 data class ObjCIdType(
-        override val nullability: Nullability,
-        override val protocols: List<ObjCProtocol>
+        override konst nullability: Nullability,
+        override konst protocols: List<ObjCProtocol>
 ) : ObjCQualifiedPointer()
 
-data class ObjCInstanceType(override val nullability: Nullability) : ObjCPointer()
+data class ObjCInstanceType(override konst nullability: Nullability) : ObjCPointer()
 data class ObjCBlockPointer(
-        override val nullability: Nullability,
-        val parameterTypes: List<Type>, val returnType: Type
+        override konst nullability: Nullability,
+        konst parameterTypes: List<Type>, konst returnType: Type
 ) : ObjCPointer()
 
 object UnsupportedType : Type

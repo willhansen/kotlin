@@ -35,8 +35,8 @@ digraph postponedLambdaInReturn_kt {
             9 [label="Function call: R|/Lateinit.Lateinit|<R|R|>()" style="filled" fillcolor=yellow];
             10 [label="Access variable R|<local>/builder|"];
             11 [label="Function call: R|/Lateinit.Lateinit|<R|R|>().R|kotlin/apply|<R|Lateinit<R>|>(...)" style="filled" fillcolor=yellow];
-            12 [label="Access variable R|SubstitutionOverride</Lateinit.value: R|R|>|"];
-            13 [label="Jump: ^build R|/Lateinit.Lateinit|<R|R|>().R|kotlin/apply|<R|Lateinit<R>|>(R|<local>/builder|).R|SubstitutionOverride</Lateinit.value: R|R|>|"];
+            12 [label="Access variable R|SubstitutionOverride</Lateinit.konstue: R|R|>|"];
+            13 [label="Jump: ^build R|/Lateinit.Lateinit|<R|R|>().R|kotlin/apply|<R|Lateinit<R>|>(R|<local>/builder|).R|SubstitutionOverride</Lateinit.konstue: R|R|>|"];
             14 [label="Stub" style="filled" fillcolor=gray];
             15 [label="Exit block" style="filled" fillcolor=gray];
         }
@@ -117,7 +117,7 @@ digraph postponedLambdaInReturn_kt {
                                     45 [label="Access variable R|<local>/y|"];
                                     46 [label="Type operator: (R|<local>/y| as R|kotlin/String|)"];
                                     47 [label="Const: String(...)"];
-                                    48 [label="Assignment: R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>|"];
+                                    48 [label="Assignment: R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>|"];
                                     49 [label="Exit block"];
                                 }
                                 50 [label="Exit function <anonymous>" style="filled" fillcolor=red];
@@ -126,7 +126,7 @@ digraph postponedLambdaInReturn_kt {
                             52 [label="Function call: R|/build|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
                             53 [label="Jump: ^@run R|/build|<R|kotlin/String|>(<L> = build@fun R|Lateinit<kotlin/String>|.<anonymous>(): R|kotlin/Unit| <inline=CrossInline, kind=EXACTLY_ONCE>  {
     (R|<local>/y| as R|kotlin/String|)
-    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>| = String(...)
+    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>| = String(...)
 }
 )"];
                             54 [label="Stub" style="filled" fillcolor=gray];
@@ -141,7 +141,7 @@ digraph postponedLambdaInReturn_kt {
             }
             60 [label="Postponed exit from lambda"];
             61 [label="Function call: R|kotlin/run|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
-            62 [label="Variable declaration: lval x: R|kotlin/String|"];
+            62 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             63 [label="Access variable R|<local>/y|"];
             64 [label="Access variable R|kotlin/String.length<Inapplicable(UNSAFE_CALL): kotlin/String.length>#|"];
             65 [label="Exit block"];
@@ -246,7 +246,7 @@ digraph postponedLambdaInReturn_kt {
                                                     color=blue
                                                     83 [label="Enter block"];
                                                     84 [label="Const: String(...)"];
-                                                    85 [label="Assignment: R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>|"];
+                                                    85 [label="Assignment: R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>|"];
                                                     86 [label="Exit block"];
                                                 }
                                                 87 [label="Exit function <anonymous>" style="filled" fillcolor=red];
@@ -254,7 +254,7 @@ digraph postponedLambdaInReturn_kt {
                                             88 [label="Postponed exit from lambda"];
                                             89 [label="Function call: R|/build|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
                                             90 [label="Jump: ^@run R|/build|<R|kotlin/String|>(<L> = build@fun R|Lateinit<kotlin/String>|.<anonymous>(): R|kotlin/Unit| <inline=CrossInline, kind=EXACTLY_ONCE>  {
-    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>| = String(...)
+    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>| = String(...)
 }
 )"];
                                             91 [label="Stub" style="filled" fillcolor=gray];
@@ -290,7 +290,7 @@ digraph postponedLambdaInReturn_kt {
             }
             108 [label="Postponed exit from lambda"];
             109 [label="Function call: R|kotlin/run|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
-            110 [label="Variable declaration: lval x: R|kotlin/String|"];
+            110 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             111 [label="Access variable R|<local>/x|"];
             112 [label="Access variable R|kotlin/String.length|"];
             113 [label="Exit block"];
@@ -406,7 +406,7 @@ digraph postponedLambdaInReturn_kt {
                                     142 [label="Const: Null(null)"];
                                     143 [label="Assignment: R|<local>/y|"];
                                     144 [label="Const: String(...)"];
-                                    145 [label="Assignment: R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>|"];
+                                    145 [label="Assignment: R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>|"];
                                     146 [label="Exit block"];
                                 }
                                 147 [label="Exit function <anonymous>" style="filled" fillcolor=red];
@@ -415,7 +415,7 @@ digraph postponedLambdaInReturn_kt {
                             149 [label="Function call: R|/build|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
                             150 [label="Jump: ^@run R|/build|<R|kotlin/String|>(<L> = build@fun R|Lateinit<kotlin/String>|.<anonymous>(): R|kotlin/Unit| <inline=CrossInline, kind=EXACTLY_ONCE>  {
     R|<local>/y| = Null(null)
-    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.value: R|kotlin/String|>| = String(...)
+    this@R|special/anonymous|.R|SubstitutionOverride</Lateinit.konstue: R|kotlin/String|>| = String(...)
 }
 )"];
                             151 [label="Stub" style="filled" fillcolor=gray];
@@ -430,7 +430,7 @@ digraph postponedLambdaInReturn_kt {
             }
             157 [label="Postponed exit from lambda"];
             158 [label="Function call: R|kotlin/run|<R|kotlin/String|>(...)" style="filled" fillcolor=yellow];
-            159 [label="Variable declaration: lval x: R|kotlin/String|"];
+            159 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             160 [label="Access variable R|<local>/y|"];
             161 [label="Smart cast: R|<local>/y|"];
             162 [label="Access variable R|kotlin/String.length|"];

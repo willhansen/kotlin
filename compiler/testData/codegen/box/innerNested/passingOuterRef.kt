@@ -1,9 +1,9 @@
 open class A1(y: String) {
-    val x = "A1.x,$y"
+    konst x = "A1.x,$y"
 }
 
 open class A2(y: String) {
-    val x = "A2.x,$y"
+    konst x = "A2.x,$y"
 
     inner open class B1 : A1 {
         constructor(p: String) : super("B1.param,$p")
@@ -23,7 +23,7 @@ open class A2(y: String) {
 }
 
 open class A3(y: String) {
-    val x = "A3.x,$y"
+    konst x = "A3.x,$y"
 
     inner open class B1(p: String) : A1("B1.param,$p")
 
@@ -37,10 +37,10 @@ open class A3(y: String) {
 }
 
 fun box(): String {
-    val r1 = A2("c").foo()
+    konst r1 = A2("c").foo()
     if (r1 != "A1.x,B1.param,q;A2.x,B2.param,w;A1.x,B1.param,B3.param,e;A2.x,c") return "fail1: $r1"
 
-    val r2 = A3("d").foo()
+    konst r2 = A3("d").foo()
     if (r2 != "A1.x,B1.param,q;A3.x,B2.param,w;A1.x,B1.param,B3.param,e;A3.x,d") return "fail2: $r2"
 
     return "OK"

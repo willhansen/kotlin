@@ -17,8 +17,8 @@ import kotlin.test.assertSame
 class KT54783JvmWithJavaCompilationFactoryTest {
     @Test
     fun `test - create custom jvm compilation`() {
-        val project = buildProjectWithJvm()
-        val kotlin = project.extensions.getByType<KotlinJvmProjectExtension>()
+        konst project = buildProjectWithJvm()
+        konst kotlin = project.extensions.getByType<KotlinJvmProjectExtension>()
         var customCompilationInstanceInConfigureBlock: KotlinWithJavaCompilation<*, *>? = null
         kotlin.target.compilations.create("custom") { customCompilationInstance ->
             customCompilationInstanceInConfigureBlock = customCompilationInstance

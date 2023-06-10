@@ -27,17 +27,17 @@ import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class TryCatchExpressionGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
     fun generateTryCatch(ktTry: KtTryExpression): IrExpression {
-        val resultType = getExpressionTypeWithCoercionToUnitOrFail(ktTry).toIrType()
-        val irTryCatch = IrTryImpl(ktTry.startOffsetSkippingComments, ktTry.endOffset, resultType)
+        konst resultType = getExpressionTypeWithCoercionToUnitOrFail(ktTry).toIrType()
+        konst irTryCatch = IrTryImpl(ktTry.startOffsetSkippingComments, ktTry.endOffset, resultType)
 
         irTryCatch.tryResult = ktTry.tryBlock.genExpr()
 
         for (ktCatchClause in ktTry.catchClauses) {
-            val ktCatchParameter = ktCatchClause.catchParameter!!
-            val ktCatchBody = ktCatchClause.catchBody!!
-            val catchParameterDescriptor = getOrFail(BindingContext.VALUE_PARAMETER, ktCatchParameter)
+            konst ktCatchParameter = ktCatchClause.catchParameter!!
+            konst ktCatchBody = ktCatchClause.catchBody!!
+            konst catchParameterDescriptor = getOrFail(BindingContext.VALUE_PARAMETER, ktCatchParameter)
 
-            val irCatch = IrCatchImpl(
+            konst irCatch = IrCatchImpl(
                 ktCatchClause.startOffsetSkippingComments, ktCatchClause.endOffset,
                 context.symbolTable.declareVariable(
                     ktCatchParameter.startOffsetSkippingComments, ktCatchParameter.endOffset,

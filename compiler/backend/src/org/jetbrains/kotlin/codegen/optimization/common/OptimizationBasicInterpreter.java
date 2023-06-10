@@ -143,15 +143,15 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
     }
 
     @Override
-    public BasicValue copyOperation(@NotNull AbstractInsnNode insn, BasicValue value) throws AnalyzerException {
-        return value;
+    public BasicValue copyOperation(@NotNull AbstractInsnNode insn, BasicValue konstue) throws AnalyzerException {
+        return konstue;
     }
 
     @Override
     public BasicValue binaryOperation(
             @NotNull AbstractInsnNode insn,
-            @NotNull BasicValue value1,
-            @NotNull BasicValue value2
+            @NotNull BasicValue konstue1,
+            @NotNull BasicValue konstue2
     ) throws AnalyzerException {
         switch (insn.getOpcode()) {
             case IALOAD:
@@ -198,7 +198,7 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
             case DREM:
                 return StrictBasicValue.DOUBLE_VALUE;
             case AALOAD:
-                Type arrayType = value1.getType();
+                Type arrayType = konstue1.getType();
                 if (arrayType != null && arrayType.getSort() == Type.ARRAY) {
                     return new StrictBasicValue(AsmUtil.correctElementType(arrayType));
                 }
@@ -228,14 +228,14 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
 
     @Override
     public BasicValue ternaryOperation(
-            AbstractInsnNode insn, BasicValue value1, BasicValue value2, BasicValue value3
+            AbstractInsnNode insn, BasicValue konstue1, BasicValue konstue2, BasicValue konstue3
     ) throws AnalyzerException {
         return null;
     }
 
     @Override
     public BasicValue naryOperation(
-            AbstractInsnNode insn, List<? extends BasicValue> values
+            AbstractInsnNode insn, List<? extends BasicValue> konstues
     ) throws AnalyzerException {
         int opcode = insn.getOpcode();
         if (opcode == MULTIANEWARRAY) {
@@ -251,14 +251,14 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
 
     @Override
     public void returnOperation(
-            AbstractInsnNode insn, BasicValue value, BasicValue expected
+            AbstractInsnNode insn, BasicValue konstue, BasicValue expected
     ) throws AnalyzerException {
     }
 
     @Override
     public BasicValue unaryOperation(
             AbstractInsnNode insn,
-            BasicValue value
+            BasicValue konstue
     ) throws AnalyzerException {
         switch (insn.getOpcode()) {
             case INEG:
@@ -321,7 +321,7 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
                     case T_LONG:
                         return newValue(Type.getType("[J"));
                     default:
-                        throw new AnalyzerException(insn, "Invalid array type");
+                        throw new AnalyzerException(insn, "Inkonstid array type");
                 }
             case ANEWARRAY:
                 String desc = ((TypeInsnNode) insn).desc;
@@ -331,7 +331,7 @@ public class OptimizationBasicInterpreter extends Interpreter<BasicValue> implem
             case ATHROW:
                 return null;
             case CHECKCAST:
-                if (value == StrictBasicValue.NULL_VALUE) {
+                if (konstue == StrictBasicValue.NULL_VALUE) {
                     return StrictBasicValue.NULL_VALUE;
                 }
                 desc = ((TypeInsnNode) insn).desc;

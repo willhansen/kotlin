@@ -14,18 +14,18 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinTargetHierarchyBuilder
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetHierarchyDescriptor
 
 internal class KotlinTargetHierarchyDslImpl(
-    private val targets: DomainObjectCollection<KotlinTarget>,
-    private val sourceSets: NamedDomainObjectContainer<KotlinSourceSet>,
+    private konst targets: DomainObjectCollection<KotlinTarget>,
+    private konst sourceSets: NamedDomainObjectContainer<KotlinSourceSet>,
 ) : KotlinTargetHierarchyDsl {
 
-    private val _appliedDescriptors = mutableListOf<KotlinTargetHierarchyDescriptor>()
-    val appliedDescriptors: List<KotlinTargetHierarchyDescriptor> get() = _appliedDescriptors
+    private konst _appliedDescriptors = mutableListOf<KotlinTargetHierarchyDescriptor>()
+    konst appliedDescriptors: List<KotlinTargetHierarchyDescriptor> get() = _appliedDescriptors
 
     override fun apply(
         hierarchyDescriptor: KotlinTargetHierarchyDescriptor,
         describeExtension: (KotlinTargetHierarchyBuilder.Root.() -> Unit)?,
     ) {
-        val descriptor = hierarchyDescriptor.extendIfNotNull(describeExtension)
+        konst descriptor = hierarchyDescriptor.extendIfNotNull(describeExtension)
         _appliedDescriptors.add(descriptor)
         applyKotlinTargetHierarchy(descriptor, targets, sourceSets)
     }

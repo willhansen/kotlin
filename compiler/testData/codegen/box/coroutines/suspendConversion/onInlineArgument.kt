@@ -17,7 +17,7 @@ inline suspend fun runS(fn: suspend (String) -> String) = fn("O")
 
 fun box(): String {
     var test = "Failed"
-    val lambda: (String) -> String = { it + "K" }
+    konst lambda: (String) -> String = { it + "K" }
     suspend { test = runS(lambda) }.startCoroutine(EmptyContinuation)
     return test
 }

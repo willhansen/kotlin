@@ -9,7 +9,7 @@ typealias OtherA = A
 typealias OtherOtherA = OtherA
 typealias OtherB<X, Y> = B<Y, X>
 
-annotation class Ann(vararg val kClass: KClass<*>)
+annotation class Ann(vararg konst kClass: KClass<*>)
 
 @Ann(A::class, OtherA::class, OtherOtherA::class, B::class, OtherB::class)
 interface Test

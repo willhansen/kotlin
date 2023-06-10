@@ -1,11 +1,11 @@
 package
 
 public expect interface My {
-    public expect open val a: kotlin.Int
-    public expect open val b: kotlin.String
-    public expect open val c: kotlin.String
-    public expect open val e: kotlin.Int
-    public expect abstract val f: kotlin.Int
+    public expect open konst a: kotlin.Int
+    public expect open konst b: kotlin.String
+    public expect open konst c: kotlin.String
+    public expect open konst e: kotlin.Int
+    public expect abstract konst f: kotlin.Int
     public open expect fun bar(): kotlin.Unit
     public open expect fun bas(): kotlin.Unit
     public open expect fun bat(): kotlin.Int
@@ -17,11 +17,11 @@ public expect interface My {
 
 public final class MyImpl1 : My {
     public constructor MyImpl1()
-    public expect open override /*1*/ /*fake_override*/ val a: kotlin.Int
-    public expect open override /*1*/ /*fake_override*/ val b: kotlin.String
-    public expect open override /*1*/ /*fake_override*/ val c: kotlin.String
-    public expect open override /*1*/ /*fake_override*/ val e: kotlin.Int
-    public expect abstract override /*1*/ /*fake_override*/ val f: kotlin.Int
+    public expect open override /*1*/ /*fake_override*/ konst a: kotlin.Int
+    public expect open override /*1*/ /*fake_override*/ konst b: kotlin.String
+    public expect open override /*1*/ /*fake_override*/ konst c: kotlin.String
+    public expect open override /*1*/ /*fake_override*/ konst e: kotlin.Int
+    public expect abstract override /*1*/ /*fake_override*/ konst f: kotlin.Int
     public open expect override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
     public open expect override /*1*/ /*fake_override*/ fun bas(): kotlin.Unit
     public open expect override /*1*/ /*fake_override*/ fun bat(): kotlin.Int
@@ -33,11 +33,11 @@ public final class MyImpl1 : My {
 
 public final class MyImpl2 : My {
     public constructor MyImpl2()
-    public expect open override /*1*/ /*fake_override*/ val a: kotlin.Int
-    public expect open override /*1*/ /*fake_override*/ val b: kotlin.String
-    public expect open override /*1*/ /*fake_override*/ val c: kotlin.String
-    public open override /*1*/ val e: kotlin.Int = 1
-    public open override /*1*/ val f: kotlin.Int = 0
+    public expect open override /*1*/ /*fake_override*/ konst a: kotlin.Int
+    public expect open override /*1*/ /*fake_override*/ konst b: kotlin.String
+    public expect open override /*1*/ /*fake_override*/ konst c: kotlin.String
+    public open override /*1*/ konst e: kotlin.Int = 1
+    public open override /*1*/ konst f: kotlin.Int = 0
     public open expect override /*1*/ /*fake_override*/ fun bar(): kotlin.Unit
     public open expect override /*1*/ /*fake_override*/ fun bas(): kotlin.Unit
     public open expect override /*1*/ /*fake_override*/ fun bat(): kotlin.Int

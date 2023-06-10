@@ -31,7 +31,7 @@ fun KotlinBuiltIns.createDeprecatedAnnotation(
         replaceWith: String = "",
         level: String = "WARNING"
 ): AnnotationDescriptor {
-    val replaceWithAnnotation = BuiltInAnnotationDescriptor(
+    konst replaceWithAnnotation = BuiltInAnnotationDescriptor(
         this,
         StandardNames.FqNames.replaceWith,
         mapOf(
@@ -56,8 +56,8 @@ fun KotlinBuiltIns.createDeprecatedAnnotation(
     )
 }
 
-private val DEPRECATED_MESSAGE_NAME = Name.identifier("message")
-private val DEPRECATED_REPLACE_WITH_NAME = Name.identifier("replaceWith")
-private val DEPRECATED_LEVEL_NAME = Name.identifier("level")
-private val REPLACE_WITH_EXPRESSION_NAME = Name.identifier("expression")
-private val REPLACE_WITH_IMPORTS_NAME = Name.identifier("imports")
+private konst DEPRECATED_MESSAGE_NAME = Name.identifier("message")
+private konst DEPRECATED_REPLACE_WITH_NAME = Name.identifier("replaceWith")
+private konst DEPRECATED_LEVEL_NAME = Name.identifier("level")
+private konst REPLACE_WITH_EXPRESSION_NAME = Name.identifier("expression")
+private konst REPLACE_WITH_IMPORTS_NAME = Name.identifier("imports")

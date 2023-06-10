@@ -8,19 +8,19 @@ package kotlin.js
 internal typealias BitMask = IntArray
 
 private fun bitMaskWith(activeBit: Int): BitMask {
-    val intArray = IntArray((activeBit shr 5) + 1)
-    val numberIndex = activeBit shr 5
-    val positionInNumber = activeBit and 31
-    val numberWithSettledBit = 1 shl positionInNumber
+    konst intArray = IntArray((activeBit shr 5) + 1)
+    konst numberIndex = activeBit shr 5
+    konst positionInNumber = activeBit and 31
+    konst numberWithSettledBit = 1 shl positionInNumber
     intArray[numberIndex] = intArray[numberIndex] or numberWithSettledBit
     return intArray
 }
 
 internal fun BitMask.isBitSet(possibleActiveBit: Int): Boolean {
-    val numberIndex = possibleActiveBit shr 5
+    konst numberIndex = possibleActiveBit shr 5
     if (numberIndex > size) return false
-    val positionInNumber = possibleActiveBit and 31
-    val numberWithSettledBit = 1 shl positionInNumber
+    konst positionInNumber = possibleActiveBit and 31
+    konst numberWithSettledBit = 1 shl positionInNumber
     return get(numberIndex) and numberWithSettledBit != 0
 }
 
@@ -38,19 +38,19 @@ private fun compositeBitMask(capacity: Int, masks: Array<BitMask>): BitMask {
 
 internal fun implement(interfaces: Array<dynamic>): BitMask {
     var maxSize = 1
-    val masks = js("[]")
+    konst masks = js("[]")
 
     for (i in interfaces) {
         var currentSize = maxSize
-        val imask: BitMask? = i.prototype.`$imask$` ?: i.`$imask$`
+        konst imask: BitMask? = i.prototype.`$imask$` ?: i.`$imask$`
 
         if (imask != null) {
             masks.push(imask)
             currentSize = imask.size
         }
 
-        val iid: Int? = i.`$metadata$`.iid
-        val iidImask: BitMask? = iid?.let { bitMaskWith(it) }
+        konst iid: Int? = i.`$metadata$`.iid
+        konst iidImask: BitMask? = iid?.let { bitMaskWith(it) }
 
         if (iidImask != null) {
             masks.push(iidImask)

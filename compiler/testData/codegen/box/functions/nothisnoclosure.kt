@@ -3,7 +3,7 @@ fun foo(x: Int) {}
 fun loop(times : Int) {
    var left = times
    while(left > 0) {
-        val u : (value : Int) -> Unit = {
+        konst u : (konstue : Int) -> Unit = {
             foo(it)
         }
         u(left--)

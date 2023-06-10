@@ -19,4 +19,4 @@ interface Delegate : Base {
 
 interface Derived : Delegate
 
-data class DataClass(val delegate: Delegate): Derived, Delegate by delegate
+data class DataClass(konst delegate: Delegate): Derived, Delegate by delegate

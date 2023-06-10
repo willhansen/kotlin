@@ -1,7 +1,7 @@
-class C(val p: Boolean) { }
+class C(konst p: Boolean) { }
 
 fun box(): String {
-  val c = C(true)
+  konst c = C(true)
 
   // Commented for KT-621
   // return when(c) {

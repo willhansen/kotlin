@@ -42,7 +42,7 @@ internal object LLFirCompilerAnnotationsLazyResolver : LLFirLazyResolver(FirReso
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirCompilerRequiredAnnotationsTargetResolver(target, lockProvider, session, scopeSession)
+        konst resolver = LLFirCompilerRequiredAnnotationsTargetResolver(target, lockProvider, session, scopeSession)
         resolver.resolveDesignation()
     }
 
@@ -70,12 +70,12 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.COMPILER_REQUIRED_ANNOTATIONS, isJumpingPhase = false) {
     inner class LLFirCompilerRequiredAnnotationsComputationSession : CompilerRequiredAnnotationsComputationSession() {
         override fun resolveAnnotationSymbol(symbol: FirRegularClassSymbol, scopeSession: ScopeSession) {
-            val regularClass = symbol.fir
+            konst regularClass = symbol.fir
             if (regularClass.resolvePhase >= resolverPhase) return
 
             symbol.lazyResolveToPhase(resolverPhase.previous)
-            val designation = regularClass.collectDesignationWithFile().asResolveTarget()
-            val resolver = LLFirCompilerRequiredAnnotationsTargetResolver(
+            konst designation = regularClass.collectDesignationWithFile().asResolveTarget()
+            konst resolver = LLFirCompilerRequiredAnnotationsTargetResolver(
                 designation,
                 lockProvider,
                 designation.target.llFirSession,
@@ -86,17 +86,17 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
             resolver.resolveDesignation()
         }
 
-        override val useCacheForImportScope: Boolean get() = true
+        override konst useCacheForImportScope: Boolean get() = true
     }
 
-    private val transformer = FirCompilerRequiredAnnotationsResolveTransformer(
+    private konst transformer = FirCompilerRequiredAnnotationsResolveTransformer(
         session,
         scopeSession,
         computationSession ?: LLFirCompilerRequiredAnnotationsComputationSession(),
     )
 
     @OptIn(PrivateForInline::class)
-    private val llFirComputationSession: LLFirCompilerRequiredAnnotationsComputationSession
+    private konst llFirComputationSession: LLFirCompilerRequiredAnnotationsComputationSession
         get() = transformer.annotationTransformer.computationSession as LLFirCompilerRequiredAnnotationsComputationSession
 
     override fun withFile(firFile: FirFile, action: () -> Unit) {
@@ -132,7 +132,7 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
 
         // 3. Create annotation transformer for targets we want to transform (under read lock)
         // Exit if another thread is already resolved this target
-        val annotationTransformer = target.createAnnotationTransformer() ?: return
+        konst annotationTransformer = target.createAnnotationTransformer() ?: return
 
         // 4. Exit if there are no applicable annotations, so we can just update the phase
         if (annotationTransformer.isNothingToResolve()) {
@@ -162,7 +162,7 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
             return (AnnotationTransformer(mutableMapOf()))
         }
 
-        val map = hashMapOf<FirElementWithResolveState, List<FirAnnotation>>()
+        konst map = hashMapOf<FirElementWithResolveState, List<FirAnnotation>>()
         var isUnresolved = false
         withReadLock(this) {
             isUnresolved = true
@@ -173,17 +173,17 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
     }
 
     private inner class AnnotationTransformer(
-        private val annotationMap: MutableMap<FirElementWithResolveState, List<FirAnnotation>>,
+        private konst annotationMap: MutableMap<FirElementWithResolveState, List<FirAnnotation>>,
     ) {
-        private val deprecations: MutableMap<FirElementWithResolveState, DeprecationsProvider> = hashMapOf()
+        private konst deprecations: MutableMap<FirElementWithResolveState, DeprecationsProvider> = hashMapOf()
 
         fun isNothingToResolve(): Boolean = annotationMap.isEmpty()
 
         fun transformAnnotations() {
-            for (annotations in annotationMap.values) {
+            for (annotations in annotationMap.konstues) {
                 for (annotation in annotations) {
                     if (annotation !is FirAnnotationCall) continue
-                    val typeRef = annotation.annotationTypeRef as? FirUserTypeRef ?: continue
+                    konst typeRef = annotation.annotationTypeRef as? FirUserTypeRef ?: continue
                     if (!transformer.annotationTransformer.shouldRunAnnotationResolve(typeRef)) continue
                     transformer.annotationTransformer.transformAnnotationCall(annotation, typeRef)
                 }
@@ -192,8 +192,8 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
 
         fun balanceAnnotations(target: FirElementWithResolveState) {
             if (target !is FirProperty) return
-            val backingField = target.backingField ?: return
-            val updatedAnnotations = transformer.annotationTransformer.extractBackingFieldAnnotationsFromProperty(
+            konst backingField = target.backingField ?: return
+            konst updatedAnnotations = transformer.annotationTransformer.extractBackingFieldAnnotationsFromProperty(
                 target,
                 annotationMap[target].orEmpty(),
                 annotationMap[backingField].orEmpty(),
@@ -204,8 +204,8 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
         }
 
         fun calculateDeprecations(target: FirElementWithResolveState) {
-            val session = target.llFirSession
-            val cacheFactory = session.firCachesFactory
+            konst session = target.llFirSession
+            konst cacheFactory = session.firCachesFactory
             if (target is FirProperty) {
                 deprecations[target] = target.extractDeprecationInfoPerUseSite(
                     session = session,
@@ -227,19 +227,19 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
         }
 
         fun <T> publishResult(target: T) where T : FirElementWithResolveState, T : FirAnnotationContainer {
-            val newAnnotations = annotationMap[target]
+            konst newAnnotations = annotationMap[target]
             if (newAnnotations != null) {
                 target.replaceAnnotations(newAnnotations)
             }
 
-            val deprecationProvider = deprecations[target] ?: EmptyDeprecationsProvider
+            konst deprecationProvider = deprecations[target] ?: EmptyDeprecationsProvider
             when (target) {
                 is FirClassLikeDeclaration -> target.replaceDeprecationsProvider(deprecationProvider)
                 is FirCallableDeclaration -> target.replaceDeprecationsProvider(deprecationProvider)
             }
 
             when (target) {
-                is FirFunction -> target.valueParameters.forEach(::publishResult)
+                is FirFunction -> target.konstueParameters.forEach(::publishResult)
                 is FirProperty -> {
                     target.getter?.let(::publishResult)
                     target.setter?.let(::publishResult)
@@ -257,7 +257,7 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
     ) where T : FirAnnotationContainer, T : FirElementWithResolveState {
         when (this) {
             is FirFunction -> {
-                valueParameters.forEach {
+                konstueParameters.forEach {
                     it.annotationsForTransformationTo(map)
                 }
             }
@@ -272,9 +272,9 @@ private class LLFirCompilerRequiredAnnotationsTargetResolver(
         if (annotations.isEmpty()) return
 
         var hasApplicableAnnotation = false
-        val containerForAnnotations = ArrayList<FirAnnotation>(annotations.size)
+        konst containerForAnnotations = ArrayList<FirAnnotation>(annotations.size)
         for (annotation in annotations) {
-            val userTypeRef = (annotation as? FirAnnotationCall)?.annotationTypeRef as? FirUserTypeRef
+            konst userTypeRef = (annotation as? FirAnnotationCall)?.annotationTypeRef as? FirUserTypeRef
             containerForAnnotations += if (userTypeRef != null && transformer.annotationTransformer.shouldRunAnnotationResolve(userTypeRef)) {
                 hasApplicableAnnotation = true
                 buildAnnotationCallCopy(annotation) {
@@ -312,7 +312,7 @@ private fun FirAnnotationContainer.hasAnnotationsToResolve(): Boolean {
     if (annotations.isNotEmpty()) return true
 
     return when (this) {
-        is FirFunction -> valueParameters.any(FirAnnotationContainer::hasAnnotationsToResolve)
+        is FirFunction -> konstueParameters.any(FirAnnotationContainer::hasAnnotationsToResolve)
         is FirProperty -> this.getter?.hasAnnotationsToResolve() == true ||
                 this.setter?.hasAnnotationsToResolve() == true ||
                 this.backingField?.hasAnnotationsToResolve() == true

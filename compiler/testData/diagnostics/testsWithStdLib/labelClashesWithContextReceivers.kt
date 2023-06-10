@@ -10,6 +10,6 @@ class Some {
     }
 
     context(Some)
-    val self: Some
+    konst self: Some
         get() = this<!LABEL_RESOLVE_WILL_CHANGE("class Some; property self context receiver")!>@Some<!>
 }

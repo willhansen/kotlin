@@ -5,7 +5,7 @@ open annotation class A : Annotation {
   // CHECK:
   //   Mangled name: A{}xs
   //   Public signature: /A.xs|1063330853857063704[0]
-  val xs: Array<out String>
+  konst xs: Array<out String>
     // CHECK JVM_IR:
     //   Mangled name: A#<get-xs>(){}kotlin.Array<out|kotlin.String>
     //   Public signature: /A.xs.<get-xs>|9188548163055185324[0]

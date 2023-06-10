@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class AsAny(val a: Any?)
+inline class AsAny(konst a: Any?)
 
 fun asNotNullAny(a: AsAny) {}
 fun AsAny.asNotNullAnyExtension(b: AsAny): AsAny = this

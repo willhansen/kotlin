@@ -5,11 +5,11 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
 @OptIn(ExperimentalContracts::class)
-fun logicalNotContract(value: Boolean) {
+fun logicalNotContract(konstue: Boolean) {
     contr<caret>act {
-        returns() implies !value
+        returns() implies !konstue
     }
-    if (value) {
+    if (konstue) {
         throw IllegalStateException()
     }
 }

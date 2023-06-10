@@ -11,14 +11,14 @@ import org.jetbrains.kotlin.build.report.statistics.StatTag
 import org.jetbrains.kotlin.incremental.ChangedFiles
 
 internal class TaskExecutionResult(
-    val buildMetrics: BuildMetrics,
-    val taskInfo: TaskExecutionInfo = TaskExecutionInfo(),
-    val icLogLines: List<String> = emptyList()
+    konst buildMetrics: BuildMetrics,
+    konst taskInfo: TaskExecutionInfo = TaskExecutionInfo(),
+    konst icLogLines: List<String> = emptyList()
 )
 
 internal class TaskExecutionInfo(
-    val kotlinLanguageVersion: KotlinVersion? = null,
-    val changedFiles: ChangedFiles? = null,
-    val compilerArguments: Array<String> = emptyArray(),
-    val tags: Set<StatTag> = emptySet(),
+    konst kotlinLanguageVersion: KotlinVersion? = null,
+    konst changedFiles: ChangedFiles? = null,
+    konst compilerArguments: Array<String> = emptyArray(),
+    konst tags: Set<StatTag> = emptySet(),
 )

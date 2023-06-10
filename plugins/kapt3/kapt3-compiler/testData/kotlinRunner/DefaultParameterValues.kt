@@ -3,6 +3,6 @@
 package test
 
 @Anno
-class User(val name: String = "John", age: Int = 18)
+class User(konst name: String = "John", age: Int = 18)
 
 internal annotation class Anno

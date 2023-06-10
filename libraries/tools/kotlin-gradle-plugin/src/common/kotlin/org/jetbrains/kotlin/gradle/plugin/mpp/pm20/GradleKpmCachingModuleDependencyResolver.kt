@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.project.model.KpmModuleDependency
 import org.jetbrains.kotlin.project.model.KpmModuleDependencyResolver
 import java.util.*
 
-class GradleKpmCachingModuleDependencyResolver(private val actualResolver: KpmModuleDependencyResolver) : KpmModuleDependencyResolver {
-    private val cacheByRequestingModule = WeakHashMap<KpmModule, MutableMap<KpmModuleDependency, KpmModule?>>()
+class GradleKpmCachingModuleDependencyResolver(private konst actualResolver: KpmModuleDependencyResolver) : KpmModuleDependencyResolver {
+    private konst cacheByRequestingModule = WeakHashMap<KpmModule, MutableMap<KpmModuleDependency, KpmModule?>>()
 
     private fun cacheForRequestingModule(requestingModule: KpmModule) =
         cacheByRequestingModule.getOrPut(requestingModule) { mutableMapOf() }

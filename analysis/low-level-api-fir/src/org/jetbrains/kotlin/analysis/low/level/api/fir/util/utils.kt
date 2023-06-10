@@ -19,19 +19,19 @@ import org.jetbrains.kotlin.psi.psiUtil.isObjectLiteral
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 
-internal fun <R : Any> withInvalidationOnException(session: LLFirResolvableModuleSession, action: () -> R): R {
+internal fun <R : Any> withInkonstidationOnException(session: LLFirResolvableModuleSession, action: () -> R): R {
     try {
         return action()
     } catch (e: Throwable) {
-        session.invalidate()
+        session.inkonstidate()
         throw e
     }
 }
 
-internal inline fun <T> Lock.lockWithPCECheck(lockingIntervalMs: Long, action: () -> T): T {
+internal inline fun <T> Lock.lockWithPCECheck(lockingInterkonstMs: Long, action: () -> T): T {
     while (true) {
         checkCanceled()
-        if (tryLock(lockingIntervalMs, TimeUnit.MILLISECONDS)) {
+        if (tryLock(lockingInterkonstMs, TimeUnit.MILLISECONDS)) {
             try {
                 checkCanceled()
                 return action()
@@ -47,12 +47,12 @@ internal inline fun checkCanceled() {
     ProgressManager.checkCanceled()
 }
 
-internal val FirElement.isErrorElement
+internal konst FirElement.isErrorElement
     get() = this is FirDiagnosticHolder
 
-internal val FirDeclaration.ktDeclaration: KtDeclaration
+internal konst FirDeclaration.ktDeclaration: KtDeclaration
     get() {
-        val psi = psi
+        konst psi = psi
             ?: errorWithFirSpecificEntries("PSI element was not found", fir = this)
         return when (psi) {
             is KtDeclaration -> psi
@@ -65,7 +65,7 @@ internal val FirDeclaration.ktDeclaration: KtDeclaration
         }
     }
 
-internal val FirDeclaration.containingKtFileIfAny: KtFile?
+internal konst FirDeclaration.containingKtFileIfAny: KtFile?
     get() = psi?.containingFile as? KtFile
 
 

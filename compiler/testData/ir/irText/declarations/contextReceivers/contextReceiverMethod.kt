@@ -9,6 +9,6 @@ context(Context)
 class Test {
     fun foo() = 2
     fun bar() {
-        val x = this@Context.foo()
+        konst x = this@Context.foo()
     }
 }

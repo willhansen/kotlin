@@ -25,13 +25,13 @@ import kotlin.test.assertTrue
 
 class MultiplatformAndroidSourceSetLayoutV2Test {
 
-    private val project = ProjectBuilder.builder().build()
+    private konst project = ProjectBuilder.builder().build()
         .run { this as ProjectInternal }
         .also { project -> project.setMultiplatformAndroidSourceSetLayoutVersion(2) }
 
-    private val kotlin = project.applyMultiplatformPlugin()
+    private konst kotlin = project.applyMultiplatformPlugin()
 
-    private val android: LibraryExtension = run {
+    private konst android: LibraryExtension = run {
         project.plugins.apply(LibraryPlugin::class.java)
         project.androidExtension as LibraryExtension
     }
@@ -86,13 +86,13 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
         android.productFlavors.create("paid").dimension = "price"
         android.productFlavors.create("free").dimension = "price"
 
-        project.evaluate()
+        project.ekonstuate()
 
         fun assertKotlinSourceSetNameEquals(
             androidSourceSetName: String, kotlinSourceSetName: String
         ) {
-            val androidSourceSet = android.sourceSets.getByName(androidSourceSetName)
-            val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+            konst androidSourceSet = android.sourceSets.getByName(androidSourceSetName)
+            konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
             assertEquals(
                 kotlinSourceSetName, kotlinSourceSet.name,
                 "Expected KotlinSourceSet name: $kotlinSourceSetName for AndroidSourceSet name: $androidSourceSetName"
@@ -122,11 +122,11 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
         android.productFlavors.create("paid").dimension = "price"
         android.productFlavors.create("free").dimension = "price"
 
-        project.evaluate()
+        project.ekonstuate()
 
         kotlin.sourceSets.toSet().generatePairs()
             .forEach { (sourceSetA, sourceSetB) ->
-                val sourceDirsInBothSourceSets = sourceSetA.kotlin.srcDirs.intersect(sourceSetB.kotlin.srcDirs)
+                konst sourceDirsInBothSourceSets = sourceSetA.kotlin.srcDirs.intersect(sourceSetB.kotlin.srcDirs)
                 assertTrue(
                     sourceDirsInBothSourceSets.isEmpty(),
                     "Expected disjoint source directories in source sets. " +
@@ -136,7 +136,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
         android.sourceSets.toSet().generatePairs()
             .forEach { (sourceSetA, sourceSetB) ->
-                val sourceDirsInBothSourceSets = sourceSetA.java.srcDirs.intersect(sourceSetB.java.srcDirs)
+                konst sourceDirsInBothSourceSets = sourceSetA.java.srcDirs.intersect(sourceSetB.java.srcDirs)
                 assertTrue(
                     sourceDirsInBothSourceSets.isEmpty(),
                     "Expected disjoint source directories in source sets. " +
@@ -148,11 +148,11 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
     @Test
     fun `test - default dependsOn edges`() {
         kotlin.androidTarget()
-        project.evaluate()
+        project.ekonstuate()
 
         android.libraryVariants.all { libraryVariant ->
             libraryVariant.sourceSets.forEach { androidSourceSet ->
-                val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+                konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
                 assertEquals(
                     setOf("commonMain"), kotlinSourceSet.dependsOn.map { it.name }.toSet(),
                     "Expected KotlinSourceSet: ${kotlinSourceSet.name} to dependsOn commonMain"
@@ -162,7 +162,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
         android.unitTestVariants.all { libraryVariant ->
             libraryVariant.sourceSets.forEach { androidSourceSet ->
-                val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+                konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
                 assertEquals(
                     setOf("commonTest"), kotlinSourceSet.dependsOn.map { it.name }.toSet(),
                     "Expected KotlinSourceSet: ${kotlinSourceSet.name} to dependsOn commonTest"
@@ -172,7 +172,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
         android.testVariants.all { libraryVariant ->
             libraryVariant.sourceSets.forEach { androidSourceSet ->
-                val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+                konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
                 assertEquals(
                     emptySet(), kotlinSourceSet.dependsOn.map { it.name }.toSet(),
                     "Expected KotlinSourceSet: ${kotlinSourceSet.name} to have no dependsOn edges"
@@ -190,7 +190,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
                 androidSourceSet as SourceProvider
 
                 /* Check if KotlinSourceSet and AndroidSourceSet contain the same srcDirs */
-                val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+                konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
                 assertEquals(
                     androidSourceSet.kotlinDirectories.toSet(), kotlinSourceSet.kotlin.srcDirs,
                     "Expected same kotlin srcDirs for KotlinSourceSet: ${kotlinSourceSet.name} " +
@@ -199,14 +199,14 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
 
                 /* Check if androidSourceSet.kotlinDirectories is live and includes sources from Kotlin */
-                val adhocSrcDir = project.file("src/${kotlinSourceSet.name}/adhoc/${variant.name}")
+                konst adhocSrcDir = project.file("src/${kotlinSourceSet.name}/adhoc/${variant.name}")
                 assertFalse(adhocSrcDir in androidSourceSet.kotlinDirectories)
                 kotlinSourceSet.kotlin.srcDir(adhocSrcDir)
                 assertTrue(adhocSrcDir in androidSourceSet.kotlinDirectories)
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     @Test
@@ -215,7 +215,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
         project.forAllAndroidVariants { variant ->
             variant.sourceSets.forEach { androidSourceSet ->
-                val kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
+                konst kotlinSourceSet = project.getKotlinSourceSetOrFail(androidSourceSet)
                 assertTrue(
                     project.file("src/${androidSourceSet.name}/kotlin") in kotlinSourceSet.kotlin.srcDirs,
                     "Expected 'src/${androidSourceSet.name}/kotlin to be supported by KotlinSourceSet: ${kotlinSourceSet.name}"
@@ -223,7 +223,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
     }
 
     @Test
@@ -239,14 +239,14 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
 
         /* Check if default can be overwritten */
         android.sourceSets.main.manifest.srcFile(project.file("custom.xml"))
-        project.evaluate()
+        project.ekonstuate()
         assertEquals(project.file("custom.xml"), android.sourceSets.main.manifest.srcFile)
     }
 
     @Test
     fun `test - main - default Manifest location - already changed by user - does not get overwritten`() {
         /* First: Change manifest location to something non-default */
-        val customManifestFile = project.file("src/main/CustomAndroidManifest.xml")
+        konst customManifestFile = project.file("src/main/CustomAndroidManifest.xml")
         android.sourceSets.main.manifest.srcFile(customManifestFile)
 
         /* Then: Setup Kotlin/Android target */
@@ -267,10 +267,10 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
         android.productFlavors.create("usa").dimension = "market"
         android.productFlavors.create("paid").dimension = "price"
         android.productFlavors.create("free").dimension = "price"
-        project.evaluate()
+        project.ekonstuate()
 
         kotlin.androidTarget().compilations.all { compilation ->
-            val defaultKotlinSourceSetName = multiplatformAndroidSourceSetLayoutV2.naming
+            konst defaultKotlinSourceSetName = multiplatformAndroidSourceSetLayoutV2.naming
                 .defaultKotlinSourceSetName(kotlin.androidTarget(), compilation.androidVariant)
 
             assertNotNull(
@@ -278,7 +278,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
                 "Expected non-null 'defaultKotlinSourceSetName' for compilation ${compilation.name}"
             )
 
-            val kotlinSourceSet = kotlin.sourceSets.getByName(defaultKotlinSourceSetName)
+            konst kotlinSourceSet = kotlin.sourceSets.getByName(defaultKotlinSourceSetName)
 
             assertEquals(
                 setOf(compilation.androidVariant.name), kotlinSourceSet.androidSourceSetInfo.androidVariantNames,
@@ -296,7 +296,7 @@ class MultiplatformAndroidSourceSetLayoutV2Test {
         android.productFlavors.create("usa").dimension = "market"
         android.productFlavors.create("paid").dimension = "price"
         android.productFlavors.create("free").dimension = "price"
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             "androidGermanFreeDebug",

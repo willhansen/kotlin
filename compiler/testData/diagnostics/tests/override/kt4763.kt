@@ -9,4 +9,4 @@ open class B {
 
 <!RETURN_TYPE_MISMATCH_ON_INHERITANCE!>class C<!> : B(), A
 
-val d: A = <!RETURN_TYPE_MISMATCH_ON_INHERITANCE!>object<!> : B(), A {}
+konst d: A = <!RETURN_TYPE_MISMATCH_ON_INHERITANCE!>object<!> : B(), A {}

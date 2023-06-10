@@ -5,12 +5,12 @@ fun <T> emptyList(): List<T> = null!!
 fun <T> foo() {
     typealias LT = List<T>
 
-    val a: LT = emptyList()
+    konst a: LT = emptyList()
 
     fun localFun(): LT {
         typealias LLT = List<T>
 
-        val b: LLT = a
+        konst b: LLT = a
 
         return b
     }

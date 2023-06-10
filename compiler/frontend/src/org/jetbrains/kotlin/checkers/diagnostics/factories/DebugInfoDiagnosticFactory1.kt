@@ -26,12 +26,12 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 
 class DebugInfoDiagnosticFactory1 : DiagnosticFactory1<PsiElement, String>,
     DebugInfoDiagnosticFactory {
-    private val privateName: String
+    private konst privateName: String
 
-    override val name: String
+    override konst name: String
         get() = "DEBUG_INFO_$privateName"
 
-    override val withExplicitDefinitionOnly: Boolean
+    override konst withExplicitDefinitionOnly: Boolean
 
     override fun createDiagnostic(
         element: KtElement,
@@ -41,7 +41,7 @@ class DebugInfoDiagnosticFactory1 : DiagnosticFactory1<PsiElement, String>,
         moduleDescriptor: ModuleDescriptorImpl?
     ) = when (privateName) {
         EXPRESSION_TYPE.privateName -> {
-            val (type, dataFlowTypes) = CheckerTestUtil.getTypeInfo(
+            konst (type, dataFlowTypes) = CheckerTestUtil.getTypeInfo(
                 element,
                 bindingContext,
                 dataFlowValueFactory,
@@ -52,14 +52,14 @@ class DebugInfoDiagnosticFactory1 : DiagnosticFactory1<PsiElement, String>,
             this.on(element, Renderers.renderExpressionType(type, dataFlowTypes))
         }
         CALL.privateName -> {
-            val (fqName, typeCall) = CheckerTestUtil.getCallDebugInfo(element, bindingContext)
+            konst (fqName, typeCall) = CheckerTestUtil.getCallDebugInfo(element, bindingContext)
             this.on(element, Renderers.renderCallInfo(fqName, typeCall))
         }
         CALLABLE_OWNER.privateName -> {
-            val resolvedCall = element.getCall(bindingContext)?.getResolvedCall(bindingContext)
+            konst resolvedCall = element.getCall(bindingContext)?.getResolvedCall(bindingContext)
             if (resolvedCall != null) {
-                val callableDescriptor = resolvedCall.resultingDescriptor
-                val text = renderCallableOwner(
+                konst callableDescriptor = resolvedCall.resultingDescriptor
+                konst text = renderCallableOwner(
                     callableDescriptor.fqNameSafe,
                     callableDescriptor.containingDeclaration.fqNameOrNull(),
                     isImplicit = false
@@ -86,17 +86,17 @@ class DebugInfoDiagnosticFactory1 : DiagnosticFactory1<PsiElement, String>,
     }
 
     companion object {
-        val EXPRESSION_TYPE = create(
+        konst EXPRESSION_TYPE = create(
             "EXPRESSION_TYPE",
             Severity.INFO,
             true
         )
-        val CALLABLE_OWNER = create(
+        konst CALLABLE_OWNER = create(
             "CALLABLE_OWNER",
             Severity.INFO,
             true
         )
-        val CALL = create(
+        konst CALL = create(
             "CALL",
             Severity.INFO,
             true

@@ -6,10 +6,10 @@ import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
 sealed class NetRequestStatus<out T : Any> {
-    abstract val value: T?
+    abstract konst konstue: T?
     data class Error<out T : Any>(
-        val error: Throwable,
-        override val value: T? = null,
+        konst error: Throwable,
+        override konst konstue: T? = null,
     ) : NetRequestStatus<T>()
 }
 
@@ -20,6 +20,6 @@ fun <T : Any> NetRequestStatus<T>.isError(): Boolean {
 }
 
 fun <T : Any> successOrThrow() {
-    val nextTerminal: NetRequestStatus<T> = NetRequestStatus.Error(Exception())
+    konst nextTerminal: NetRequestStatus<T> = NetRequestStatus.Error(Exception())
     if (nextTerminal.isError()) throw nextTerminal.error
 }

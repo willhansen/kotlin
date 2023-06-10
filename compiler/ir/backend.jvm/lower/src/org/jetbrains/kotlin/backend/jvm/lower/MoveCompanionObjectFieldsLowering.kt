@@ -28,20 +28,20 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
-internal val moveOrCopyCompanionObjectFieldsPhase = makeIrFilePhase(
+internal konst moveOrCopyCompanionObjectFieldsPhase = makeIrFilePhase(
     ::MoveOrCopyCompanionObjectFieldsLowering,
     name = "MoveOrCopyCompanionObjectFields",
     description = "Move and/or copy companion object fields to static fields of companion's owner"
 )
 
-internal val remapObjectFieldAccesses = makeIrFilePhase(
+internal konst remapObjectFieldAccesses = makeIrFilePhase(
     ::RemapObjectFieldAccesses,
     name = "RemapObjectFieldAccesses",
     description = "Make IrGetField/IrSetField to objects' fields point to the static versions",
     prerequisite = setOf(propertiesPhase)
 )
 
-private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendContext) : ClassLoweringPass {
+private class MoveOrCopyCompanionObjectFieldsLowering(konst context: JvmBackendContext) : ClassLoweringPass {
     override fun lower(irClass: IrClass) {
         if (irClass.isNonCompanionObject) {
             irClass.handle()
@@ -51,7 +51,7 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCon
     }
 
     private fun IrClass.handle() {
-        val newDeclarations = declarations.map {
+        konst newDeclarations = declarations.map {
             when (it) {
                 is IrProperty -> context.cachedDeclarations.getStaticBackingField(it)?.also { newField ->
                     it.backingField = newField
@@ -61,11 +61,11 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCon
             }
         }
 
-        val companionParent = if (isCompanion) parentAsClass else null
+        konst companionParent = if (isCompanion) parentAsClass else null
         // In case a companion contains no fields, move the anonymous initializers to the parent
         // anyway, as otherwise there will probably be no references to the companion class at all
         // and therefore its class initializer will never be invoked.
-        val newParent = newDeclarations.firstOrNull { it != null }?.parentAsClass ?: companionParent ?: this
+        konst newParent = newDeclarations.firstOrNull { it != null }?.parentAsClass ?: companionParent ?: this
         if (newParent === this) {
             declarations.replaceAll {
                 // Anonymous initializers must be made static to correctly initialize the new static
@@ -93,13 +93,13 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCon
         }
     }
 
-    private val IrProperty.hasPublicVisibility: Boolean
+    private konst IrProperty.hasPublicVisibility: Boolean
         get() = !DescriptorVisibilities.isPrivate(visibility) && visibility != DescriptorVisibilities.PROTECTED
 
     private fun makeAnonymousInitializerStatic(oldInitializer: IrAnonymousInitializer, newParent: IrClass): IrAnonymousInitializer =
         with(oldInitializer) {
-            val oldParent = parentAsClass
-            val newSymbol = IrAnonymousInitializerSymbolImpl(newParent.symbol)
+            konst oldParent = parentAsClass
+            konst newSymbol = IrAnonymousInitializerSymbolImpl(newParent.symbol)
             IrAnonymousInitializerImpl(startOffset, endOffset, origin, newSymbol, isStatic = true).apply {
                 parent = newParent
                 body = this@with.body.patchDeclarationParents(newParent)
@@ -108,7 +108,7 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCon
         }
 
     private fun copyConstProperty(oldProperty: IrProperty, newParent: IrClass): IrField {
-        val oldField = oldProperty.backingField!!
+        konst oldField = oldProperty.backingField!!
         return newParent.addField {
             updateFrom(oldField)
             name = oldField.name
@@ -130,7 +130,7 @@ private class MoveOrCopyCompanionObjectFieldsLowering(val context: JvmBackendCon
     }
 }
 
-private class RemapObjectFieldAccesses(val context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
+private class RemapObjectFieldAccesses(konst context: JvmBackendContext) : FileLoweringPass, IrElementTransformerVoid() {
     override fun lower(irFile: IrFile) = irFile.transformChildrenVoid()
 
     private fun IrField.remap(): IrField? =
@@ -146,7 +146,7 @@ private class RemapObjectFieldAccesses(val context: JvmBackendContext) : FileLow
     override fun visitSetField(expression: IrSetField): IrExpression =
         expression.symbol.owner.remap()?.let {
             with(expression) {
-                val newValue = value.transform(this@RemapObjectFieldAccesses, null)
+                konst newValue = konstue.transform(this@RemapObjectFieldAccesses, null)
                 IrSetFieldImpl(startOffset, endOffset, it.symbol, /* receiver = */ null, newValue, type, origin, superQualifierSymbol)
             }
         } ?: super.visitSetField(expression)

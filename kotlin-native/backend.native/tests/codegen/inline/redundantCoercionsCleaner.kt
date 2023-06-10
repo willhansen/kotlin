@@ -12,7 +12,7 @@ inline fun foo(): Int = runAndThrow {
 }
 
 @Test fun runTest() {
-    val result: Any = foo()
+    konst result: Any = foo()
     assertEquals(1, result)
 }
 

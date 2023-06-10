@@ -3,6 +3,6 @@
 
 
 fun foo(maybe: Int?) {
-    val i : Int = maybe ?: throw RuntimeException("No value")
+    konst i : Int = maybe ?: throw RuntimeException("No konstue")
     System.out.println(i)
 }

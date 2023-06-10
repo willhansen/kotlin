@@ -7,31 +7,31 @@
  * DESCRIPTION: Real literals suffixed by f/F (float suffix) with omitted whole-number part and not allowed several exponent marks.
  */
 
-val value = .0ee0
-val value = .0E-e-00F
-val value = .0eE+000
-val value = .0e+e0000f
+konst konstue = .0ee0
+konst konstue = .0E-e-00F
+konst konstue = .0eE+000
+konst konstue = .0e+e0000f
 
-val value = .0E++e0f
-val value = .00e+E-00F
-val value = .000e-e000
+konst konstue = .0E++e0f
+konst konstue = .00e+E-00F
+konst konstue = .000e-e000
 
-val value = .0ee+1
-val value = .00eE22
-val value = .000ee-333f
-val value = .0000e+E+e4444
-val value = .0eE-55555
-val value = .00eeeeeeeee666666F
-val value = .000e+E+e+E+e7777777
-val value = .0000eEeEeEe-88888888
-val value = .0EEEEEEEE+999999999
+konst konstue = .0ee+1
+konst konstue = .00eE22
+konst konstue = .000ee-333f
+konst konstue = .0000e+E+e4444
+konst konstue = .0eE-55555
+konst konstue = .00eeeeeeeee666666F
+konst konstue = .000e+E+e+E+e7777777
+konst konstue = .0000eEeEeEe-88888888
+konst konstue = .0EEEEEEEE+999999999
 
-val value = .0ee+F
-val value = .00eE
-val value = .000ee-f
-val value = .0000e+E+
-val value = .0eE-f
-val value = .00eeeeeeeef
-val value = .000e+E+e+E+e
-val value = .0000eEeEeEe-
-val value = .0EEEEEEEE+F
+konst konstue = .0ee+F
+konst konstue = .00eE
+konst konstue = .000ee-f
+konst konstue = .0000e+E+
+konst konstue = .0eE-f
+konst konstue = .00eeeeeeeef
+konst konstue = .000e+E+e+E+e
+konst konstue = .0000eEeEeEe-
+konst konstue = .0EEEEEEEE+F

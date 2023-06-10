@@ -12,16 +12,16 @@ import generators.unicode.hexToInt
 internal abstract class StringCasingGenerator(
     unicodeDataLines: List<UnicodeDataLine>
 ) {
-    private val unicodeDataLines = unicodeDataLines.associateBy { it.char.hexToInt() }
-    protected val contextDependentMappings = mutableListOf<SpecialCasingLine>()
+    private konst unicodeDataLines = unicodeDataLines.associateBy { it.char.hexToInt() }
+    protected konst contextDependentMappings = mutableListOf<SpecialCasingLine>()
 
     fun appendSpecialCasingLine(line: SpecialCasingLine) {
         if (line.conditionList.isEmpty()) return
 
-        val isLocaleAgnosticCondition = line.conditionList.all { it.length > 2 }
+        konst isLocaleAgnosticCondition = line.conditionList.all { it.length > 2 }
 
-        val unicodeLine = unicodeDataLines[line.char.hexToInt()]
-        val unicodeDataMapping = unicodeLine?.mapping()?.takeIf { it.isNotEmpty() } ?: line.char
+        konst unicodeLine = unicodeDataLines[line.char.hexToInt()]
+        konst unicodeDataMapping = unicodeLine?.mapping()?.takeIf { it.isNotEmpty() } ?: line.char
 
         if (isLocaleAgnosticCondition && line.mapping() != listOf(unicodeDataMapping)) {
             contextDependentMappings.add(line)

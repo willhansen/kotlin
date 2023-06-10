@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Composed<T: String>(val s: T) {
+konstue class Composed<T: String>(konst s: T) {
     private constructor(s1: String, s2: String) : this((s1 + s2) as T)
 
     companion object {

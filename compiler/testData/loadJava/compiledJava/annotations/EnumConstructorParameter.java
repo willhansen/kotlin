@@ -4,7 +4,7 @@ public enum EnumConstructorParameter {
     INSTANCE("instance");
 
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     EnumConstructorParameter(@Anno("string") String s) {

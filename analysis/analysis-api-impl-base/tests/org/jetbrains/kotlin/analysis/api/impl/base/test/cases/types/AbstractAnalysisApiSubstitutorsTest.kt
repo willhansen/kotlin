@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractAnalysisApiSubstitutorsTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtCallableDeclaration>(ktFile)
-        val actual = analyseForTest(declaration) {
-            val substitutor = SubstitutionParser.parseSubstitutor(ktFile, declaration)
-            val symbol = declaration.getSymbolOfType<KtCallableSymbol>()
-            val type = symbol.returnType
-            val substituted = substitutor.substitute(type)
-            val substitutedOrNull = substitutor.substituteOrNull(type)
+        konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtCallableDeclaration>(ktFile)
+        konst actual = analyseForTest(declaration) {
+            konst substitutor = SubstitutionParser.parseSubstitutor(ktFile, declaration)
+            konst symbol = declaration.getSymbolOfType<KtCallableSymbol>()
+            konst type = symbol.returnType
+            konst substituted = substitutor.substitute(type)
+            konst substitutedOrNull = substitutor.substituteOrNull(type)
 
             prettyPrint {
                 appendLine("PSI type: ${declaration.typeReference?.text}")

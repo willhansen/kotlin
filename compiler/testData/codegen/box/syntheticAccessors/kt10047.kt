@@ -5,15 +5,15 @@ package test2
 import test.Actor
 import test.O2dScriptAction
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class CompositeActor : Actor()
 
 public open class O2dDialog : O2dScriptAction<CompositeActor>() {
 
-    fun test() = eval { owner }
+    fun test() = ekonst { owner }
 
-    fun test2() = eval { calc() }
+    fun test2() = ekonst { calc() }
 }
 
 fun box(): String {

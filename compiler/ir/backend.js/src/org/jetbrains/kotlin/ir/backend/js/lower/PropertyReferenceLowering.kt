@@ -26,19 +26,19 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
-class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyLoweringPass {
+class PropertyReferenceLowering(private konst context: JsIrBackendContext) : BodyLoweringPass {
 
-    private val referenceBuilderSymbol = context.kpropertyBuilder
-    private val localDelegateBuilderSymbol = context.klocalDelegateBuilder
-    private val jsClassSymbol = context.intrinsics.jsClass
+    private konst referenceBuilderSymbol = context.kpropertyBuilder
+    private konst localDelegateBuilderSymbol = context.klocalDelegateBuilder
+    private konst jsClassSymbol = context.intrinsics.jsClass
 
-    private val throwISE = context.throwISEsymbol
+    private konst throwISE = context.throwISEsymbol
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
-        val currentParent = container as? IrDeclarationParent ?: container.parent
-        val newDeclarations = PropertyReferenceTransformer(currentParent).process(irBody)
+        konst currentParent = container as? IrDeclarationParent ?: container.parent
+        konst newDeclarations = PropertyReferenceTransformer(currentParent).process(irBody)
         if (!newDeclarations.isEmpty()) {
-            val file = container.file
+            konst file = container.file
             newDeclarations.forEach { it.parent = file }
             file.declarations.addAll(newDeclarations)
         }
@@ -46,7 +46,7 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
 
     private inner class PropertyReferenceTransformer(var currentParent: IrDeclarationParent) : IrElementTransformerVoid() {
 
-        val newDeclarations = mutableListOf<IrDeclaration>()
+        konst newDeclarations = mutableListOf<IrDeclaration>()
 
         fun process(irBody: IrBody): List<IrDeclaration> {
             irBody.transformChildrenVoid(this)
@@ -54,9 +54,9 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun buildFactoryFunction(reference: IrPropertyReference): IrSimpleFunction {
-            val property = reference.symbol.owner
+            konst property = reference.symbol.owner
 
-            val factoryDeclaration = context.irFactory.buildFun {
+            konst factoryDeclaration = context.irFactory.buildFun {
                 startOffset = reference.startOffset
                 endOffset = reference.endOffset
                 returnType = reference.type
@@ -64,16 +64,16 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
                 origin = PROPERTY_REFERENCE_FACTORY
             }
 
-            val boundArguments = listOfNotNull(reference.dispatchReceiver, reference.extensionReceiver)
+            konst boundArguments = listOfNotNull(reference.dispatchReceiver, reference.extensionReceiver)
 
-            val valueParameters = boundArguments.mapIndexed { i, arg ->
+            konst konstueParameters = boundArguments.mapIndexed { i, arg ->
                 buildValueParameter(factoryDeclaration) {
                     type = arg.type
                     index = i
                     name = Name.identifier("\$b$i")
                 }
             }
-            factoryDeclaration.valueParameters = valueParameters
+            factoryDeclaration.konstueParameters = konstueParameters
 
             // TODO: type parameters
 
@@ -83,16 +83,16 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
             // 3 - getter
             // 4 - setter
 
-            val arity = (reference.type as IrSimpleType).arguments.size - 1
+            konst arity = (reference.type as IrSimpleType).arguments.size - 1
 
-            val irBuilder = context.createIrBuilder(factoryDeclaration.symbol)
+            konst irBuilder = context.createIrBuilder(factoryDeclaration.symbol)
             factoryDeclaration.body = irBuilder.irBlockBody {
                 +irReturn(irCall(referenceBuilderSymbol).apply {
                     putValueArgument(0, reference.nameExpression())
                     putValueArgument(1, irInt(arity))
                     putValueArgument(2, reference.getJsTypeConstructor())
-                    putValueArgument(3, buildGetterLambda(factoryDeclaration, reference, valueParameters))
-                    putValueArgument(4, buildSetterLambda(factoryDeclaration, reference, valueParameters))
+                    putValueArgument(3, buildGetterLambda(factoryDeclaration, reference, konstueParameters))
+                    putValueArgument(4, buildSetterLambda(factoryDeclaration, reference, konstueParameters))
                 })
             }
 
@@ -102,7 +102,7 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun buildGetterLambda(factory: IrSimpleFunction, reference: IrPropertyReference, boundValueParameters: List<IrValueParameter>): IrExpression {
-            val getter = reference.getter?.owner
+            konst getter = reference.getter?.owner
                 ?: compilationException(
                     "Getter expected",
                     reference
@@ -111,7 +111,7 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun buildSetterLambda(factory: IrSimpleFunction, reference: IrPropertyReference, boundValueParameters: List<IrValueParameter>): IrExpression {
-            val setter = reference.run {
+            konst setter = reference.run {
                 setter?.owner ?: return IrConstImpl.constNull(startOffset, endOffset, context.irBuiltIns.nothingNType)
             }
 
@@ -119,7 +119,7 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun buildAccessorLambda(factory: IrSimpleFunction, accessor: IrSimpleFunction, reference: IrPropertyReference, boundValueParameters: List<IrValueParameter>): IrExpression {
-            val superName = when (accessor.symbol) {
+            konst superName = when (accessor.symbol) {
                 reference.getter -> "get"
                 reference.setter -> "set"
                 else -> compilationException(
@@ -128,15 +128,15 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
                 )
             }
 
-            val classifier = (reference.type as IrSimpleType).classOrNull
+            konst classifier = (reference.type as IrSimpleType).classOrNull
                 ?: compilationException(
                     "Simple type expected",
                     reference
                 )
-            val supperAccessor =
+            konst supperAccessor =
                 classifier.owner.declarations.filterIsInstance<IrSimpleFunction>().single { it.name.asString() == superName }
 
-            val function = context.irFactory.buildFun {
+            konst function = context.irFactory.buildFun {
                 startOffset = reference.startOffset
                 endOffset = reference.endOffset
                 returnType = supperAccessor.returnType
@@ -145,17 +145,17 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
 
             function.parent = factory
 
-            val unboundValueParameters = supperAccessor.valueParameters.memoryOptimizedMap { it.copyTo(function) }
-            function.valueParameters = unboundValueParameters
-            val arity = unboundValueParameters.size
-            val total = arity + boundValueParameters.size
+            konst unboundValueParameters = supperAccessor.konstueParameters.memoryOptimizedMap { it.copyTo(function) }
+            function.konstueParameters = unboundValueParameters
+            konst arity = unboundValueParameters.size
+            konst total = arity + boundValueParameters.size
 
             var b = 0
             var u = 0
 
-            val irBuilder = context.createIrBuilder(function.symbol)
+            konst irBuilder = context.createIrBuilder(function.symbol)
             function.body = irBuilder.irBlockBody {
-                val irAccessorCall = irCall(accessor.symbol)
+                konst irAccessorCall = irCall(accessor.symbol)
 
                 if (accessor.dispatchReceiverParameter != null) {
                     irAccessorCall.dispatchReceiver =
@@ -187,12 +187,12 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun IrPropertyReference.nameExpression(): IrExpression {
-            val propertyName = symbol.owner.name.asString()
+            konst propertyName = symbol.owner.name.asString()
             return IrConstImpl.string(startOffset, endOffset, context.irBuiltIns.stringType, propertyName)
         }
 
         private fun IrExpression.getJsTypeConstructor(): IrExpression {
-            val irCall = IrCallImpl(startOffset, endOffset, jsClassSymbol.owner.returnType, jsClassSymbol, 1, 0)
+            konst irCall = IrCallImpl(startOffset, endOffset, jsClassSymbol.owner.returnType, jsClassSymbol, 1, 0)
             irCall.putTypeArgument(0, type)
             return irCall
         }
@@ -200,9 +200,9 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         override fun visitPropertyReference(expression: IrPropertyReference): IrExpression {
             expression.transformChildrenVoid(this)
 
-            val factoryFunction = buildFactoryFunction(expression)
+            konst factoryFunction = buildFactoryFunction(expression)
 
-            assert(expression.valueArgumentsCount == 0)
+            assert(expression.konstueArgumentsCount == 0)
 
             return IrCallImpl(
                 expression.startOffset,
@@ -210,7 +210,7 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
                 expression.type,
                 factoryFunction.symbol,
                 expression.typeArgumentsCount,
-                factoryFunction.valueParameters.size
+                factoryFunction.konstueParameters.size
             ).apply {
                 for (ti in 0 until typeArgumentsCount) {
                     putTypeArgument(ti, expression.getTypeArgument(ti))
@@ -225,12 +225,12 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         override fun visitLocalDelegatedPropertyReference(expression: IrLocalDelegatedPropertyReference): IrExpression {
             expression.transformChildrenVoid(this)
 
-            val builderCall = expression.run {
+            konst builderCall = expression.run {
                 IrCallImpl(startOffset, endOffset, type, localDelegateBuilderSymbol, typeArgumentsCount, 4)
             }
 
-            val localName = expression.symbol.owner.name.asString()
-            val isMutable = expression.setter != null
+            konst localName = expression.symbol.owner.name.asString()
+            konst isMutable = expression.setter != null
 
             // 0 - name
             // 1 - type
@@ -248,8 +248,8 @@ class PropertyReferenceLowering(private val context: JsIrBackendContext) : BodyL
         }
 
         private fun buildLocalDelegateLambda(expression: IrLocalDelegatedPropertyReference): IrExpression {
-            val delegatedVar = expression.delegate.owner
-            val function = context.irFactory.buildFun {
+            konst delegatedVar = expression.delegate.owner
+            konst function = context.irFactory.buildFun {
                 startOffset = expression.startOffset
                 endOffset = expression.endOffset
                 returnType = context.irBuiltIns.nothingType

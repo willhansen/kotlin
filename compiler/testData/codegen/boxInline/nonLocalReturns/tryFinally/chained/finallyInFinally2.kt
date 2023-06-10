@@ -3,16 +3,16 @@
 package test
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
 inline fun doCall_1(block: ()-> Unit, h: Holder) {
     try {
         doCall(block) {
-            h.value += ", OF_FINALLY1"
+            h.konstue += ", OF_FINALLY1"
         }
     } finally {
-        h.value += ", DO_CALL_1_FINALLY"
+        h.konstue += ", DO_CALL_1_FINALLY"
     }
 }
 
@@ -20,14 +20,14 @@ inline fun doCall_2(block: ()-> Unit, h: Holder) {
     try {
         doCall(block) {
             try {
-                h.value += ", OF_FINALLY1"
+                h.konstue += ", OF_FINALLY1"
             }
             finally {
-                h.value += ", OF_FINALLY1_FINALLY"
+                h.konstue += ", OF_FINALLY1_FINALLY"
             }
         }
     } finally {
-        h.value += ", DO_CALL_1_FINALLY"
+        h.konstue += ", DO_CALL_1_FINALLY"
     }
 }
 
@@ -47,10 +47,10 @@ fun test1(h: Holder, doReturn: Int): String {
     doCall_1 (
             {
                 if (doReturn < 1) {
-                    h.value += "OK_NONLOCAL"
+                    h.konstue += "OK_NONLOCAL"
                     return "OK_NONLOCAL"
                 }
-                h.value += "LOCAL"
+                h.konstue += "LOCAL"
                 "OK_LOCAL"
             },
             h
@@ -63,10 +63,10 @@ fun test2(h: Holder, doReturn: Int): String {
     doCall_2 (
             {
                 if (doReturn < 1) {
-                    h.value += "OK_NONLOCAL"
+                    h.konstue += "OK_NONLOCAL"
                     return "OK_NONLOCAL"
                 }
-                h.value += "LOCAL"
+                h.konstue += "LOCAL"
                 "OK_LOCAL"
             },
             h
@@ -77,20 +77,20 @@ fun test2(h: Holder, doReturn: Int): String {
 
 fun box(): String {
     var h = Holder()
-    val test10 = test1(h, 0)
-    if (test10 != "OK_NONLOCAL" || h.value != "OK_NONLOCAL, OF_FINALLY1, DO_CALL_1_FINALLY") return "test10: ${test10}, holder: ${h.value}"
+    konst test10 = test1(h, 0)
+    if (test10 != "OK_NONLOCAL" || h.konstue != "OK_NONLOCAL, OF_FINALLY1, DO_CALL_1_FINALLY") return "test10: ${test10}, holder: ${h.konstue}"
 
     h = Holder()
-    val test11 = test1(h, 1)
-    if (test11 != "TEST1" || h.value != "LOCAL, OF_FINALLY1, DO_CALL_1_FINALLY") return "test11: ${test11}, holder: ${h.value}"
+    konst test11 = test1(h, 1)
+    if (test11 != "TEST1" || h.konstue != "LOCAL, OF_FINALLY1, DO_CALL_1_FINALLY") return "test11: ${test11}, holder: ${h.konstue}"
 
     h = Holder()
-    val test2 = test2(h, 0)
-    if (test2 != "OK_NONLOCAL" || h.value != "OK_NONLOCAL, OF_FINALLY1, OF_FINALLY1_FINALLY, DO_CALL_1_FINALLY") return "test20: ${test2}, holder: ${h.value}"
+    konst test2 = test2(h, 0)
+    if (test2 != "OK_NONLOCAL" || h.konstue != "OK_NONLOCAL, OF_FINALLY1, OF_FINALLY1_FINALLY, DO_CALL_1_FINALLY") return "test20: ${test2}, holder: ${h.konstue}"
 
     h = Holder()
-    val test21 = test2(h, 1)
-    if (test21 != "TEST2" || h.value != "LOCAL, OF_FINALLY1, OF_FINALLY1_FINALLY, DO_CALL_1_FINALLY") return "test21: ${test21}, holder: ${h.value}"
+    konst test21 = test2(h, 1)
+    if (test21 != "TEST2" || h.konstue != "LOCAL, OF_FINALLY1, OF_FINALLY1_FINALLY, DO_CALL_1_FINALLY") return "test21: ${test21}, holder: ${h.konstue}"
 
     return "OK"
 }

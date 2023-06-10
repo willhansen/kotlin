@@ -61,7 +61,7 @@ kaptTestTask("testJdk11", JavaLanguageVersion.of(11))
 kaptTestTask("testJdk17", JavaLanguageVersion.of(17))
 
 fun Project.kaptTestTask(name: String, javaLanguageVersion: JavaLanguageVersion) {
-    val service = extensions.getByType<JavaToolchainService>()
+    konst service = extensions.getByType<JavaToolchainService>()
 
     projectTest(taskName = name, parallel = true) {
         useJUnitPlatform {

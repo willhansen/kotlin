@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.psiUtil.getNonStrictParentOfType
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.BindingContext.DECLARATION_TO_DESCRIPTOR
 
-val KtElement.containingDeclarationForPseudocode: KtDeclaration?
+konst KtElement.containingDeclarationForPseudocode: KtDeclaration?
     get() = getParentOfType(this, KtDeclarationWithBody::class.java, KtClassOrObject::class.java, KtScript::class.java)
         ?: getNonStrictParentOfType<KtProperty>()
 
@@ -24,7 +24,7 @@ fun KtElement.getElementParentDeclaration(): KtDeclaration? =
         KtScriptInitializer::class.java)
 
 fun KtDeclaration?.getDeclarationDescriptorIncludingConstructors(context: BindingContext): DeclarationDescriptor? {
-    val descriptor = context.get(DECLARATION_TO_DESCRIPTOR, (this as? KtClassInitializer)?.containingDeclaration ?: this)
+    konst descriptor = context.get(DECLARATION_TO_DESCRIPTOR, (this as? KtClassInitializer)?.containingDeclaration ?: this)
     return if (descriptor is ClassDescriptor && this is KtClassInitializer) {
         // For a class primary constructor, we cannot directly get ConstructorDescriptor by KtClassInitializer,
         // so we have to do additional conversion: KtClassInitializer -> KtClassOrObject -> ClassDescriptor -> ConstructorDescriptor

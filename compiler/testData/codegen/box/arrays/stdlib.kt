@@ -1,5 +1,5 @@
 interface ISized {
-    val size : Int
+    konst size : Int
 }
 
 interface javaUtilIterator<T> : Iterator<T> {
@@ -8,7 +8,7 @@ interface javaUtilIterator<T> : Iterator<T> {
     }
 }
 
-class MyIterator<T>(val array : ReadOnlyArray<T>) : javaUtilIterator<T> {
+class MyIterator<T>(konst array : ReadOnlyArray<T>) : javaUtilIterator<T> {
     private var index = 0
 
     override fun hasNext() : Boolean = index < array.size
@@ -23,22 +23,22 @@ interface ReadOnlyArray<out T> : ISized, Iterable<T> {
 }
 
 interface WriteOnlyArray<in T> : ISized {
-  operator fun set(index : Int, value : T) : Unit
+  operator fun set(index : Int, konstue : T) : Unit
 
-  operator fun set(from: Int, count: Int, value: T) {
+  operator fun set(from: Int, count: Int, konstue: T) {
     for(i in from..from+count-1) {
-        set(i, value)
+        set(i, konstue)
     }
   }
 }
 
 class MutableArray<T>(length: Int, init : (Int) -> T) : ReadOnlyArray<T>, WriteOnlyArray<T> {
-    private val array = Array<Any?>(length, init)
+    private konst array = Array<Any?>(length, init)
 
     override fun get(index : Int) : T = array[index] as T
-    override fun set(index : Int, value : T) : Unit { array[index] = value }
+    override fun set(index : Int, konstue : T) : Unit { array[index] = konstue }
 
-    override val size : Int
+    override konst size : Int
         get() = array.size
 }
 
@@ -50,7 +50,7 @@ fun box() : String {
     a.iterator()
     a.iterator().hasNext()
     for(el in a) {
-        val fl = el
+        konst fl = el
     }
     return "OK"
 }

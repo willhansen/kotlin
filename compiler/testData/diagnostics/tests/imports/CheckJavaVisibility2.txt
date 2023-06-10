@@ -4,9 +4,9 @@ package j {
 
     public final class C {
         public constructor C()
-        public final val p1: kotlin.Int
-        public final val p2: kotlin.Int
-        public final val p3: kotlin.Int = 4
+        public final konst p1: kotlin.Int
+        public final konst p2: kotlin.Int
+        public final konst p3: kotlin.Int = 4
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final fun test(): kotlin.Unit
@@ -26,7 +26,7 @@ package j {
 
     public open class JavaProtected {
         public constructor JavaProtected()
-        protected/*protected and package*/ final val javaPProtectedPackage: kotlin.Int = 4
+        protected/*protected and package*/ final konst javaPProtectedPackage: kotlin.Int = 4
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -41,9 +41,9 @@ package k {
 
     public final class A {
         public constructor A()
-        public final val p1: kotlin.Int
-        public final val p2: kotlin.Int
-        public final val p3: kotlin.Int = 4
+        public final konst p1: kotlin.Int
+        public final konst p2: kotlin.Int
+        public final konst p3: kotlin.Int = 4
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final fun test(): kotlin.Unit
@@ -52,10 +52,10 @@ package k {
 
     public final class B : j.JavaProtected {
         public constructor B()
-        protected/*protected and package*/ final override /*1*/ /*fake_override*/ val javaPProtectedPackage: kotlin.Int
-        public final val p1: kotlin.Int
-        public final val p2: kotlin.Int
-        public final val p3: kotlin.Int
+        protected/*protected and package*/ final override /*1*/ /*fake_override*/ konst javaPProtectedPackage: kotlin.Int
+        public final konst p1: kotlin.Int
+        public final konst p2: kotlin.Int
+        public final konst p3: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public final fun test(): kotlin.Unit

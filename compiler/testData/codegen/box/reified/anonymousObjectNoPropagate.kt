@@ -15,7 +15,7 @@ fun doWork(block: () -> String) = block()
 inline fun doWorkInline(block: () -> String) = block()
 
 fun box(): String {
-    val x = object {
+    konst x = object {
         inline fun <reified T : Any> bar1(): A = object : A {
             override fun f1(): String = T::class.java.getName()
             override fun f2(): String = doWork { T::class.java.getName() }
@@ -27,7 +27,7 @@ fun box(): String {
         inline fun <reified T : Any> bar4() = doWorkInline { T::class.java.getName() }
     }
 
-    val y: A = x.bar1<String>()
+    konst y: A = x.bar1<String>()
     assertEquals("java.lang.String", y.f1())
     assertEquals("java.lang.String", y.f2())
     assertEquals("java.lang.String", y.f3())

@@ -17,7 +17,7 @@ fun makeVisibilityHiddenLikeLlvmInternalizePass(module: LLVMModuleRef) {
     // but omits some details for simplicity.
 
     // TODO: LLVM handles some additional cases.
-    val alwaysPreserved = getLlvmUsed(module)
+    konst alwaysPreserved = getLlvmUsed(module)
 
     (getFunctions(module) + getGlobals(module) + getGlobalAliases(module))
             .filter {
@@ -34,15 +34,15 @@ fun makeVisibilityHiddenLikeLlvmInternalizePass(module: LLVMModuleRef) {
 }
 
 private fun getLlvmUsed(module: LLVMModuleRef): Set<LLVMValueRef> {
-    val llvmUsed = LLVMGetNamedGlobal(module, "llvm.used") ?: return emptySet()
-    val llvmUsedValue = LLVMGetInitializer(llvmUsed) ?: return emptySet()
+    konst llvmUsed = LLVMGetNamedGlobal(module, "llvm.used") ?: return emptySet()
+    konst llvmUsedValue = LLVMGetInitializer(llvmUsed) ?: return emptySet()
 
-    // Note: llvm.used value is an array of globals, wrapped into bitcasts, GEPs and other instructions;
+    // Note: llvm.used konstue is an array of globals, wrapped into bitcasts, GEPs and other instructions;
     // see llvm::collectUsedGlobalVariables.
     // Conservatively extract all involved globals for simplicity:
     return DFS.dfs(
             /* nodes = */ listOf(llvmUsedValue),
-            /* neighbors = */ { value -> getOperands(value) },
+            /* neighbors = */ { konstue -> getOperands(konstue) },
             object : DFS.CollectingNodeHandler<LLVMValueRef, LLVMValueRef, MutableSet<LLVMValueRef>>(mutableSetOf()) {
                 override fun beforeChildren(current: LLVMValueRef): Boolean = when (LLVMGetValueKind(current)) {
                     LLVMValueKind.LLVMGlobalAliasValueKind,

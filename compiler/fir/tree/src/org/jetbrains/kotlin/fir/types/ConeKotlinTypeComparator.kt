@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.fir.types
 
 object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
-    private val ConeKotlinType.priority : Int
+    private konst ConeKotlinType.priority : Int
         get() = when (this) {
             is ConeErrorType -> 9
             is ConeLookupTagBasedType -> 8
@@ -21,7 +21,7 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
         }
 
     private fun compare(a: ConeTypeProjection, b: ConeTypeProjection): Int {
-        val kindDiff = a.kind.ordinal - b.kind.ordinal
+        konst kindDiff = a.kind.ordinal - b.kind.ordinal
         if (kindDiff != 0) {
             return kindDiff
         }
@@ -49,12 +49,12 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
     }
 
     private fun compare(a: Array<out ConeTypeProjection>, b: Array<out ConeTypeProjection>): Int {
-        val sizeDiff = a.size - b.size
+        konst sizeDiff = a.size - b.size
         if (sizeDiff != 0) {
             return sizeDiff
         }
         for ((aTypeProjection, bTypeProjection) in a.zip(b)) {
-            val typeProjectionDiff = compare(aTypeProjection, bTypeProjection)
+            konst typeProjectionDiff = compare(aTypeProjection, bTypeProjection)
             if (typeProjectionDiff != 0) {
                 return typeProjectionDiff
             }
@@ -67,7 +67,7 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
     }
 
     override fun compare(a: ConeKotlinType, b: ConeKotlinType): Int {
-        val priorityDiff = a.priority - b.priority
+        konst priorityDiff = a.priority - b.priority
         if (priorityDiff != 0) {
             return priorityDiff
         }
@@ -83,11 +83,11 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeLookupTagBasedType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val nameDiff = a.lookupTag.name.compareTo(b.lookupTag.name)
+                konst nameDiff = a.lookupTag.name.compareTo(b.lookupTag.name)
                 if (nameDiff != 0) {
                     return nameDiff
                 }
-                val nullabilityDiff = compare(a.nullability, b.nullability)
+                konst nullabilityDiff = compare(a.nullability, b.nullability)
                 if (nullabilityDiff != 0) {
                     return nullabilityDiff
                 }
@@ -97,7 +97,7 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeFlexibleType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val lowerBoundDiff = compare(a.lowerBound, b.lowerBound)
+                konst lowerBoundDiff = compare(a.lowerBound, b.lowerBound)
                 if (lowerBoundDiff != 0) {
                     return lowerBoundDiff
                 }
@@ -107,19 +107,19 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeCapturedType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val aHasLowerType = if (a.lowerType != null) 1 else 0
-                val bHasLowerType = if (b.lowerType != null) 1 else 0
-                val hasLowerTypeDiff = aHasLowerType - bHasLowerType
+                konst aHasLowerType = if (a.lowerType != null) 1 else 0
+                konst bHasLowerType = if (b.lowerType != null) 1 else 0
+                konst hasLowerTypeDiff = aHasLowerType - bHasLowerType
                 if (hasLowerTypeDiff != 0) {
                     return hasLowerTypeDiff
                 }
                 if (a.lowerType != null && b.lowerType != null) {
-                    val lowerTypeDiff = compare(a.lowerType!!, b.lowerType!!)
+                    konst lowerTypeDiff = compare(a.lowerType!!, b.lowerType!!)
                     if (lowerTypeDiff != 0) {
                         return lowerTypeDiff
                     }
                 }
-                val nullabilityDiff = compare(a.nullability, b.nullability)
+                konst nullabilityDiff = compare(a.nullability, b.nullability)
                 if (nullabilityDiff != 0) {
                     return nullabilityDiff
                 }
@@ -135,7 +135,7 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeIntersectionType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val sizeDiff = a.intersectedTypes.size - b.intersectedTypes.size
+                konst sizeDiff = a.intersectedTypes.size - b.intersectedTypes.size
                 if (sizeDiff != 0) {
                     return sizeDiff
                 }
@@ -146,7 +146,7 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeStubType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val nameDiff = a.constructor.variable.typeConstructor.name.compareTo(b.constructor.variable.typeConstructor.name)
+                konst nameDiff = a.constructor.variable.typeConstructor.name.compareTo(b.constructor.variable.typeConstructor.name)
                 if (nameDiff != 0) {
                     return nameDiff
                 }
@@ -156,11 +156,11 @@ object ConeKotlinTypeComparator : Comparator<ConeKotlinType> {
                 require(b is ConeIntegerLiteralConstantType) {
                     "priority is inconsistent: ${a.renderForDebugging()} v.s. ${b.renderForDebugging()}"
                 }
-                val valueDiff = a.value - b.value
-                if (valueDiff != 0L) {
-                    return valueDiff.toInt()
+                konst konstueDiff = a.konstue - b.konstue
+                if (konstueDiff != 0L) {
+                    return konstueDiff.toInt()
                 }
-                val nullabilityDiff = compare(a.nullability, b.nullability)
+                konst nullabilityDiff = compare(a.nullability, b.nullability)
                 if (nullabilityDiff != 0) {
                     return nullabilityDiff
                 }

@@ -6,6 +6,6 @@ class A {
 }
 
 fun f() {
-    val a = A()
+    konst a = A()
     a.<!NESTED_CLASS_ACCESSED_VIA_INSTANCE_REFERENCE, NO_COMPANION_OBJECT!>BAlias<!>
 }

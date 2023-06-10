@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.util.*
 
 internal class InlineFunctionsSupport(mapping: NativeMapping) {
     // Inline functions lowered up to just before the inliner.
-    private val partiallyLoweredInlineFunctions = mapping.partiallyLoweredInlineFunctions
+    private konst partiallyLoweredInlineFunctions = mapping.partiallyLoweredInlineFunctions
 
     fun savePartiallyLoweredInlineFunction(function: IrFunction) =
             function.deepCopyWithVariables().also {
@@ -31,18 +31,18 @@ internal class InlineFunctionsSupport(mapping: NativeMapping) {
 }
 
 // TODO: This is a bit hacky. Think about adopting persistent IR ideas.
-internal class NativeInlineFunctionResolver(override val context: Context, val generationState: NativeGenerationState) : DefaultInlineFunctionResolver(context) {
+internal class NativeInlineFunctionResolver(override konst context: Context, konst generationState: NativeGenerationState) : DefaultInlineFunctionResolver(context) {
     override fun getFunctionDeclaration(symbol: IrFunctionSymbol): IrFunction {
-        val function = super.getFunctionDeclaration(symbol)
+        konst function = super.getFunctionDeclaration(symbol)
 
         generationState.inlineFunctionOrigins[function]?.let { return it.irFunction }
 
-        val packageFragment = function.getPackageFragment()
-        val functionIsNotFromLazyIr = packageFragment !is IrExternalPackageFragment
-        val irFile: IrFile
-        val (possiblyLoweredFunction, shouldLower) = if (functionIsNotFromLazyIr) {
+        konst packageFragment = function.getPackageFragment()
+        konst functionIsNotFromLazyIr = packageFragment !is IrExternalPackageFragment
+        konst irFile: IrFile
+        konst (possiblyLoweredFunction, shouldLower) = if (functionIsNotFromLazyIr) {
             irFile = packageFragment as IrFile
-            val partiallyLoweredFunction = context.inlineFunctionsSupport.getPartiallyLoweredInlineFunction(function)
+            konst partiallyLoweredFunction = context.inlineFunctionsSupport.getPartiallyLoweredInlineFunction(function)
             if (partiallyLoweredFunction == null)
                 function to true
             else {
@@ -52,13 +52,13 @@ internal class NativeInlineFunctionResolver(override val context: Context, val g
             }
         } else {
             // The function is from Lazy IR, get its body from the IR linker.
-            val moduleDescriptor = packageFragment.packageFragmentDescriptor.containingDeclaration
-            val moduleDeserializer = context.irLinker.moduleDeserializers[moduleDescriptor]
+            konst moduleDescriptor = packageFragment.packageFragmentDescriptor.containingDeclaration
+            konst moduleDeserializer = context.irLinker.moduleDeserializers[moduleDescriptor]
                     ?: error("No module deserializer for ${function.render()}")
             require(context.config.cachedLibraries.isLibraryCached(moduleDeserializer.klib)) {
                 "No IR and no cache for ${function.render()}"
             }
-            val (firstAccess, deserializedInlineFunction) = moduleDeserializer.deserializeInlineFunction(function)
+            konst (firstAccess, deserializedInlineFunction) = moduleDeserializer.deserializeInlineFunction(function)
             generationState.inlineFunctionOrigins[function] = deserializedInlineFunction
             irFile = deserializedInlineFunction.irFile
             function to firstAccess
@@ -76,7 +76,7 @@ internal class NativeInlineFunctionResolver(override val context: Context, val g
     }
 
     private fun lower(function: IrFunction, irFile: IrFile, functionIsNotFromLazyIr: Boolean) {
-        val body = function.body ?: return
+        konst body = function.body ?: return
 
         PreInlineLowering(context).lower(body, function, irFile)
 

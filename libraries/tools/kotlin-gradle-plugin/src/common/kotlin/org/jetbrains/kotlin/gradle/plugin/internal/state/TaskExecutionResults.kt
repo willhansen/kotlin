@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.gradle.report.TaskExecutionResult
 import java.util.concurrent.ConcurrentHashMap
 
 internal object TaskExecutionResults {
-    private val results = ConcurrentHashMap<String, TaskExecutionResult>()
+    private konst results = ConcurrentHashMap<String, TaskExecutionResult>()
 
     operator fun get(taskPath: String): TaskExecutionResult? =
         results[taskPath]

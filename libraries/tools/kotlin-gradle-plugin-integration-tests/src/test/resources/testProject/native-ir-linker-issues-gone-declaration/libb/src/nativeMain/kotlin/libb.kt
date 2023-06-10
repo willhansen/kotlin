@@ -7,20 +7,20 @@ fun getAll(): List<Any> {
 }
 
 fun getA(): A {
-    val a = A()
+    konst a = A()
     println("Returning a: ${a::class}, $a")
     return a
 }
 
 
 fun getB(): B {
-    val b = B()
+    konst b = B()
     println("Returning b: ${b::class}, $b")
     return b
 }
 
 fun getC(): C {
-    val c = C()
+    konst c = C()
     println("Returning c: ${c::class}, $c")
     return c
 }

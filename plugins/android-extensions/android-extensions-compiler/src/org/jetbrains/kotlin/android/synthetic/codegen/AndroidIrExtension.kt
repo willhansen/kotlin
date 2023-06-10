@@ -69,19 +69,19 @@ abstract class AndroidIrExtension : IrGenerationExtension {
 }
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-private class AndroidIrTransformer(val extension: AndroidIrExtension, val pluginContext: IrPluginContext) :
+private class AndroidIrTransformer(konst extension: AndroidIrExtension, konst pluginContext: IrPluginContext) :
     IrElementTransformerVoidWithContext() {
 
-    private val cachedPackages = mutableMapOf<FqName, IrPackageFragment>()
-    private val cachedClasses = mutableMapOf<FqName, IrClass>()
-    private val cachedMethods = mutableMapOf<FqName, IrSimpleFunction>()
-    private val cachedFields = mutableMapOf<FqName, IrField>()
+    private konst cachedPackages = mutableMapOf<FqName, IrPackageFragment>()
+    private konst cachedClasses = mutableMapOf<FqName, IrClass>()
+    private konst cachedMethods = mutableMapOf<FqName, IrSimpleFunction>()
+    private konst cachedFields = mutableMapOf<FqName, IrField>()
 
-    private val cachedCacheFields = mutableMapOf<IrClass, IrField>()
-    private val cachedCacheClearFuns = mutableMapOf<IrClass, IrSimpleFunction>()
-    private val cachedCacheLookupFuns = mutableMapOf<IrClass, IrSimpleFunction>()
+    private konst cachedCacheFields = mutableMapOf<IrClass, IrField>()
+    private konst cachedCacheClearFuns = mutableMapOf<IrClass, IrSimpleFunction>()
+    private konst cachedCacheLookupFuns = mutableMapOf<IrClass, IrSimpleFunction>()
 
-    private val irFactory: IrFactory = IrFactoryImpl
+    private konst irFactory: IrFactory = IrFactoryImpl
 
     private fun irBuilder(scope: IrSymbol, replacing: IrStatement): IrBuilderWithScope =
         DeclarationIrBuilder(IrGeneratorContextBase(pluginContext.irBuiltIns), scope, replacing.startOffset, replacing.endOffset)
@@ -105,7 +105,7 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
 
     private fun createMethod(fqName: FqName, type: IrType, inInterface: Boolean = false, f: IrFunction.() -> Unit = {}) =
         cachedMethods.getOrPut(fqName) {
-            val parent = createClass(fqName.parent(), inInterface)
+            konst parent = createClass(fqName.parent(), inInterface)
             parent.addFunction {
                 name = fqName.shortName()
                 origin = IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
@@ -124,16 +124,16 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
 
     // NOTE: sparse array version intentionally not implemented; this plugin is deprecated
     @OptIn(FirIncompatiblePluginAPI::class)
-    private val mapFactory = pluginContext.referenceFunctions(FqName("kotlin.collections.mutableMapOf"))
-        .single { it.owner.valueParameters.isEmpty() }
-    private val mapGet = pluginContext.irBuiltIns.mapClass.owner.functions
-        .single { it.name.asString() == "get" && it.valueParameters.size == 1 }
-    private val mapSet = pluginContext.irBuiltIns.mutableMapClass.owner.functions
-        .single { it.name.asString() == "put" && it.valueParameters.size == 2 }
-    private val mapClear = pluginContext.irBuiltIns.mutableMapClass.owner.functions
-        .single { it.name.asString() == "clear" && it.valueParameters.isEmpty() }
+    private konst mapFactory = pluginContext.referenceFunctions(FqName("kotlin.collections.mutableMapOf"))
+        .single { it.owner.konstueParameters.isEmpty() }
+    private konst mapGet = pluginContext.irBuiltIns.mapClass.owner.functions
+        .single { it.name.asString() == "get" && it.konstueParameters.size == 1 }
+    private konst mapSet = pluginContext.irBuiltIns.mutableMapClass.owner.functions
+        .single { it.name.asString() == "put" && it.konstueParameters.size == 2 }
+    private konst mapClear = pluginContext.irBuiltIns.mutableMapClass.owner.functions
+        .single { it.name.asString() == "clear" && it.konstueParameters.isEmpty() }
 
-    private val nullableViewType = createClass(FqName(AndroidConst.VIEW_FQNAME)).defaultType.makeNullable()
+    private konst nullableViewType = createClass(FqName(AndroidConst.VIEW_FQNAME)).defaultType.makeNullable()
 
     private fun IrClass.getCacheField(): IrField =
         cachedCacheFields.getOrPut(this) {
@@ -152,7 +152,7 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
                 modality = Modality.OPEN
                 returnType = pluginContext.irBuiltIns.unitType
             }.apply {
-                val self = addDispatchReceiver { type = defaultType }
+                konst self = addDispatchReceiver { type = defaultType }
                 parent = this@getClearCacheFun
                 body = irBuilder(symbol, this).irBlockBody {
                     +irCall(mapClear).apply { dispatchReceiver = irGetField(irGet(self), getCacheField()) }
@@ -162,17 +162,17 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
 
     private fun IrClass.getCachedFindViewByIdFun(): IrSimpleFunction =
         cachedCacheLookupFuns.getOrPut(this) {
-            val containerType = ContainerOptionsProxy.create(descriptor).containerType
+            konst containerType = ContainerOptionsProxy.create(descriptor).containerType
             irFactory.buildFun {
                 name = Name.identifier(AbstractAndroidExtensionsExpressionCodegenExtension.CACHED_FIND_VIEW_BY_ID_METHOD_NAME)
                 modality = Modality.OPEN
                 returnType = nullableViewType
             }.apply {
-                val self = addDispatchReceiver { type = defaultType }
-                val resourceId = addValueParameter("id", pluginContext.irBuiltIns.intType)
+                konst self = addDispatchReceiver { type = defaultType }
+                konst resourceId = addValueParameter("id", pluginContext.irBuiltIns.intType)
                 parent = this@getCachedFindViewByIdFun
                 body = irBuilder(symbol, this).irBlockBody {
-                    val cache = irTemporary(irGetField(irGet(self), getCacheField()))
+                    konst cache = irTemporary(irGetField(irGet(self), getCacheField()))
                     // cache[resourceId] ?: findViewById(resourceId)?.also { cache[resourceId] = it }
                     +irReturn(irElvis(returnType, irCallOp(mapGet.symbol, returnType, irGet(cache), irGet(resourceId))) {
                         irSafeLet(returnType, irFindViewById(irGet(self), irGet(resourceId), containerType)) { foundView ->
@@ -193,14 +193,14 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
     override fun visitClassNew(declaration: IrClass): IrStatement {
         if (!declaration.isClass && !declaration.isObject)
             return super.visitClassNew(declaration)
-        val containerOptions = ContainerOptionsProxy.create(declaration.descriptor)
+        konst containerOptions = ContainerOptionsProxy.create(declaration.descriptor)
         if ((containerOptions.cache ?: extension.getGlobalCacheImpl(declaration)) == CacheImplementation.NO_CACHE)
             return super.visitClassNew(declaration)
         if (containerOptions.containerType == AndroidContainerType.LAYOUT_CONTAINER && !extension.isExperimental(declaration))
             return super.visitClassNew(declaration)
 
         if ((containerOptions.cache ?: extension.getGlobalCacheImpl(declaration)).hasCache) {
-            val cacheField = declaration.getCacheField()
+            konst cacheField = declaration.getCacheField()
             declaration.declarations += cacheField
             declaration.declarations += declaration.getClearCacheFun()
             declaration.declarations += declaration.getCachedFindViewByIdFun()
@@ -209,9 +209,9 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
                 if (constructor.delegationKind(pluginContext.irBuiltIns) != ConstructorDelegationKind.CALLS_SUPER) continue
                 // Initialize the cache as the first thing, even before the super constructor is called. This ensures
                 // that if the super constructor calls an override declared in this class, the cache already exists.
-                val body = constructor.body as? IrBlockBody ?: continue
-                val setCache = irBuilder(constructor.symbol, constructor).run {
-                    val newCache = irCall(mapFactory, cacheField.type, valueArgumentsCount = 0, typeArgumentsCount = 2).apply {
+                konst body = constructor.body as? IrBlockBody ?: continue
+                konst setCache = irBuilder(constructor.symbol, constructor).run {
+                    konst newCache = irCall(mapFactory, cacheField.type, konstueArgumentsCount = 0, typeArgumentsCount = 2).apply {
                         putTypeArgument(0, context.irBuiltIns.intType)
                         putTypeArgument(1, nullableViewType)
                     }
@@ -224,12 +224,12 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val receiverClass = expression.extensionReceiver?.type?.classOrNull
+        konst receiverClass = expression.extensionReceiver?.type?.classOrNull
             ?: return super.visitFunctionAccess(expression)
-        val receiver = expression.extensionReceiver!!.transform(this, null)
+        konst receiver = expression.extensionReceiver!!.transform(this, null)
 
-        val containerOptions = ContainerOptionsProxy.create(receiverClass.descriptor)
-        val containerHasCache = (containerOptions.cache ?: extension.getGlobalCacheImpl(receiverClass.owner)).hasCache
+        konst containerOptions = ContainerOptionsProxy.create(receiverClass.descriptor)
+        konst containerHasCache = (containerOptions.cache ?: extension.getGlobalCacheImpl(receiverClass.owner)).hasCache
 
         if (expression.symbol.descriptor is AndroidSyntheticFunction) {
             if (expression.symbol.owner.name.asString() != AndroidConst.CLEAR_FUNCTION_NAME)
@@ -241,35 +241,35 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
             }
         }
 
-        val resource = (expression.symbol.descriptor as? PropertyGetterDescriptor)?.correspondingProperty as? AndroidSyntheticProperty
+        konst resource = (expression.symbol.descriptor as? PropertyGetterDescriptor)?.correspondingProperty as? AndroidSyntheticProperty
             ?: return super.visitFunctionAccess(expression)
-        val packageFragment = (resource as PropertyDescriptor).containingDeclaration as? AndroidSyntheticPackageFragmentDescriptor
+        konst packageFragment = (resource as PropertyDescriptor).containingDeclaration as? AndroidSyntheticPackageFragmentDescriptor
             ?: return super.visitFunctionAccess(expression)
 
-        val packageFqName = FqName(packageFragment.packageData.moduleData.module.applicationPackage)
-        val field = createField(packageFqName.child("R\$id").child(resource.name), pluginContext.irBuiltIns.intType)
-        val resourceId = IrGetFieldImpl(expression.startOffset, expression.endOffset, field.symbol, field.type)
+        konst packageFqName = FqName(packageFragment.packageData.moduleData.module.applicationPackage)
+        konst field = createField(packageFqName.child("R\$id").child(resource.name), pluginContext.irBuiltIns.intType)
+        konst resourceId = IrGetFieldImpl(expression.startOffset, expression.endOffset, field.symbol, field.type)
 
-        val containerType = containerOptions.containerType
-        val result = if (expression.type.classifierOrNull?.isFragment == true) {
+        konst containerType = containerOptions.containerType
+        konst result = if (expression.type.classifierOrNull?.isFragment == true) {
             // this.get[Support]FragmentManager().findFragmentById(R$id.<name>)
-            val appPackageFqName = when (containerType) {
+            konst appPackageFqName = when (containerType) {
                 AndroidContainerType.ACTIVITY,
                 AndroidContainerType.FRAGMENT -> FqName("android.app")
                 AndroidContainerType.SUPPORT_FRAGMENT,
                 AndroidContainerType.SUPPORT_FRAGMENT_ACTIVITY -> FqName("android.support.v4.app")
                 AndroidContainerType.ANDROIDX_SUPPORT_FRAGMENT,
                 AndroidContainerType.ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY -> FqName("androidx.fragment.app")
-                else -> throw IllegalStateException("Invalid Android class type: $this") // Should never occur
+                else -> throw IllegalStateException("Inkonstid Android class type: $this") // Should never occur
             }
-            val getFragmentManagerFqName = when (containerType) {
+            konst getFragmentManagerFqName = when (containerType) {
                 AndroidContainerType.SUPPORT_FRAGMENT_ACTIVITY,
                 AndroidContainerType.ANDROIDX_SUPPORT_FRAGMENT_ACTIVITY -> containerType.fqName.child("getSupportFragmentManager")
                 else -> containerType.fqName.child("getFragmentManager")
             }
-            val fragment = appPackageFqName.child("Fragment")
-            val fragmentManager = appPackageFqName.child("FragmentManager")
-            val getFragmentManager = createMethod(getFragmentManagerFqName, createClass(fragmentManager).defaultType)
+            konst fragment = appPackageFqName.child("Fragment")
+            konst fragmentManager = appPackageFqName.child("FragmentManager")
+            konst getFragmentManager = createMethod(getFragmentManagerFqName, createClass(fragmentManager).defaultType)
             createMethod(fragmentManager.child("findFragmentById"), createClass(fragment).defaultType.makeNullable()) {
                 addValueParameter("id", pluginContext.irBuiltIns.intType)
             }.callWithRanges(expression).apply {
@@ -294,18 +294,18 @@ private class AndroidIrTransformer(val extension: AndroidIrExtension, val plugin
         receiver: IrExpression, id: IrExpression, container: AndroidContainerType
     ): IrExpression {
         // this[.getView()?|.getContainerView()?].findViewById(R$id.<name>)
-        val getView = when (container) {
+        konst getView = when (container) {
             AndroidContainerType.FRAGMENT,
             AndroidContainerType.ANDROIDX_SUPPORT_FRAGMENT,
             AndroidContainerType.SUPPORT_FRAGMENT -> createMethod(container.fqName.child("getView"), nullableViewType)
             AndroidContainerType.LAYOUT_CONTAINER -> createMethod(container.fqName.child("getContainerView"), nullableViewType, true)
             else -> null
         }
-        val findViewByIdParent = if (getView == null) container.fqName else FqName(AndroidConst.VIEW_FQNAME)
-        val findViewById = createMethod(findViewByIdParent.child("findViewById"), nullableViewType) {
+        konst findViewByIdParent = if (getView == null) container.fqName else FqName(AndroidConst.VIEW_FQNAME)
+        konst findViewById = createMethod(findViewByIdParent.child("findViewById"), nullableViewType) {
             addValueParameter("id", pluginContext.irBuiltIns.intType)
         }
-        val findViewCall = irCall(findViewById).apply { putValueArgument(0, id) }
+        konst findViewCall = irCall(findViewById).apply { putValueArgument(0, id) }
         return if (getView == null) {
             findViewCall.apply { dispatchReceiver = receiver }
         } else {
@@ -335,16 +335,16 @@ private inline fun IrBuilderWithScope.irSafeLet(type: IrType, lhs: IrExpression,
 private inline fun IrBuilderWithScope.irElvis(type: IrType, lhs: IrExpression, rhs: IrBuilderWithScope.() -> IrExpression) =
     irSafeCall(type, lhs, rhs) { irGet(it) }
 
-private val AndroidContainerType.fqName: FqName
+private konst AndroidContainerType.fqName: FqName
     get() = FqName(internalClassName.replace("/", "."))
 
-private val IrClassifierSymbol.isFragment: Boolean
+private konst IrClassifierSymbol.isFragment: Boolean
     get() = isClassWithFqName(FqNameUnsafe(AndroidConst.FRAGMENT_FQNAME)) ||
             isClassWithFqName(FqNameUnsafe(AndroidConst.SUPPORT_FRAGMENT_FQNAME)) ||
             isClassWithFqName(FqNameUnsafe(AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_FQNAME))
 
 private fun TranslationPluginContext.declareTypeParameterStub(typeParameterDescriptor: TypeParameterDescriptor): IrTypeParameter {
-    val symbol = IrTypeParameterSymbolImpl(typeParameterDescriptor)
+    konst symbol = IrTypeParameterSymbolImpl(typeParameterDescriptor)
     return irFactory.createTypeParameter(
         UNDEFINED_OFFSET, UNDEFINED_OFFSET, IrDeclarationOrigin.DEFINED, symbol, typeParameterDescriptor.name,
         typeParameterDescriptor.index, typeParameterDescriptor.isReified, typeParameterDescriptor.variance
@@ -352,9 +352,9 @@ private fun TranslationPluginContext.declareTypeParameterStub(typeParameterDescr
 }
 
 private fun TranslationPluginContext.declareParameterStub(parameterDescriptor: ParameterDescriptor): IrValueParameter {
-    val symbol = IrValueParameterSymbolImpl(parameterDescriptor)
-    val type = typeTranslator.translateType(parameterDescriptor.type)
-    val varargElementType = parameterDescriptor.varargElementType?.let { typeTranslator.translateType(it) }
+    konst symbol = IrValueParameterSymbolImpl(parameterDescriptor)
+    konst type = typeTranslator.translateType(parameterDescriptor.type)
+    konst varargElementType = parameterDescriptor.varargElementType?.let { typeTranslator.translateType(it) }
     return irFactory.createValueParameter(
         UNDEFINED_OFFSET, UNDEFINED_OFFSET, IrDeclarationOrigin.DEFINED, symbol, parameterDescriptor.name,
         parameterDescriptor.indexOrMinusOne, type, varargElementType, parameterDescriptor.isCrossinline,
@@ -372,5 +372,5 @@ private fun TranslationPluginContext.declareFunctionStub(descriptor: FunctionDes
         it.typeParameters = descriptor.propertyIfAccessor.typeParameters.map(this::declareTypeParameterStub)
         it.dispatchReceiverParameter = descriptor.dispatchReceiverParameter?.let(this::declareParameterStub)
         it.extensionReceiverParameter = descriptor.extensionReceiverParameter?.let(this::declareParameterStub)
-        it.valueParameters = descriptor.valueParameters.map(this::declareParameterStub)
+        it.konstueParameters = descriptor.konstueParameters.map(this::declareParameterStub)
     }

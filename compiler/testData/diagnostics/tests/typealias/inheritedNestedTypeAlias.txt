@@ -8,7 +8,7 @@ public open class Base</*0*/ T> {
 
     public final inner class InnerCell /*captured type parameters: /*0*/ T*/ : ICell<T> {
         public constructor InnerCell(/*0*/ x: T)
-        public open override /*1*/ val x: T
+        public open override /*1*/ konst x: T
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -18,7 +18,7 @@ public open class Base</*0*/ T> {
 
 public final class Cell</*0*/ T> : ICell<T> {
     public constructor Cell</*0*/ T>(/*0*/ x: T)
-    public open override /*1*/ val x: T
+    public open override /*1*/ konst x: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -26,17 +26,17 @@ public final class Cell</*0*/ T> : ICell<T> {
 
 public final class Derived : Base<kotlin.Int> {
     public constructor Derived()
-    public final val test1: Base<kotlin.Int>.CT /* = Cell<kotlin.Int> */
-    public final val test2: Base<kotlin.Int>.CT /* = Cell<kotlin.Int> */
-    public final val x1: Base<kotlin.Int>.InnerCell
-    public final val x2: Base<kotlin.Int>.InnerCell
+    public final konst test1: Base<kotlin.Int>.CT /* = Cell<kotlin.Int> */
+    public final konst test2: Base<kotlin.Int>.CT /* = Cell<kotlin.Int> */
+    public final konst x1: Base<kotlin.Int>.InnerCell
+    public final konst x2: Base<kotlin.Int>.InnerCell
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public interface ICell</*0*/ T> {
-    public abstract val x: T
+    public abstract konst x: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

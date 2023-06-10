@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.cfg.pseudocode.instructions.eval
+package org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst
 
 import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.InstructionWithNext

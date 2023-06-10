@@ -7,7 +7,7 @@ open class A {
     protected open fun test(): String = "FAIL (A)"
 }
 
-fun box() = C().value()
+fun box() = C().konstue()
 
 // FILE: B.kt
 
@@ -18,7 +18,7 @@ package second
 import first.A
 
 public abstract class B(): A() {
-    val value = {
+    konst konstue = {
         test()
     }
 }

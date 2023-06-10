@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val i: Int) {
+konstue class A(konst i: Int) {
     fun foo(s: String = "OK") = s
 }
 

@@ -8,7 +8,7 @@ FILE: kt41989.kt
 
     }
     public abstract interface C : R|B| {
-        public open val lineCellStyle: R|(A.() -> kotlin/Unit)?|
+        public open konst lineCellStyle: R|(A.() -> kotlin/Unit)?|
             public get(): R|(A.() -> kotlin/Unit)?| {
                 ^ when () {
                     R|/cond|() ->  {

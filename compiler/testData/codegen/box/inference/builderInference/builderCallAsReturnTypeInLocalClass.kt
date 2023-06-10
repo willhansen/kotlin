@@ -23,8 +23,8 @@ fun foo3() {
         object {
             var x: Int
                 get() = 1
-                set(value) {
-                    add(value)
+                set(konstue) {
+                    add(konstue)
                 }
         }
     }
@@ -36,8 +36,8 @@ fun foo4() {
         class A {
             var x: Int
                 get() = 1
-                set(value) {
-                    add(value)
+                set(konstue) {
+                    add(konstue)
                 }
         }
     }

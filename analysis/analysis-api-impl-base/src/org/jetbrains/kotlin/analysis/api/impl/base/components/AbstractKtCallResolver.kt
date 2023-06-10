@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.psi.*
 abstract class AbstractKtCallResolver : KtCallResolver() {
 
     protected fun KtBinaryExpression.getCompoundAssignKind(): KtCompoundAccess.CompoundAssign.Kind {
-        val compoundAssignKind = when (operationToken) {
+        konst compoundAssignKind = when (operationToken) {
             KtTokens.PLUSEQ -> KtCompoundAccess.CompoundAssign.Kind.PLUS_ASSIGN
             KtTokens.MINUSEQ -> KtCompoundAccess.CompoundAssign.Kind.MINUS_ASSIGN
             KtTokens.MULTEQ -> KtCompoundAccess.CompoundAssign.Kind.TIMES_ASSIGN
@@ -29,7 +29,7 @@ abstract class AbstractKtCallResolver : KtCallResolver() {
     }
 
     protected fun KtUnaryExpression.getInOrDecOperationKind(): KtCompoundAccess.IncOrDecOperation.Kind {
-        val incOrDecOperationKind = when (operationToken) {
+        konst incOrDecOperationKind = when (operationToken) {
             KtTokens.PLUSPLUS -> KtCompoundAccess.IncOrDecOperation.Kind.INC
             KtTokens.MINUSMINUS -> KtCompoundAccess.IncOrDecOperation.Kind.DEC
             else -> error("unexpected operator $operationToken")
@@ -41,7 +41,7 @@ abstract class AbstractKtCallResolver : KtCallResolver() {
         KtExplicitReceiverValue(this, type, isReceiverOfKtSafeQualifiedExpression(), token)
 
     private fun KtExpression.isReceiverOfKtSafeQualifiedExpression(): Boolean {
-        val safeQualifiedExpression = parentOfType<KtSafeQualifiedExpression>() ?: return false
+        konst safeQualifiedExpression = parentOfType<KtSafeQualifiedExpression>() ?: return false
         return KtPsiUtil.deparenthesize(safeQualifiedExpression.receiverExpression) == KtPsiUtil.deparenthesize(this)
     }
 
@@ -58,6 +58,6 @@ abstract class AbstractKtCallResolver : KtCallResolver() {
     }
 
     protected companion object {
-        private val nonCallBinaryOperator: Set<KtSingleValueToken> = setOf(KtTokens.ELVIS, KtTokens.EQEQEQ, KtTokens.EXCLEQEQEQ)
+        private konst nonCallBinaryOperator: Set<KtSingleValueToken> = setOf(KtTokens.ELVIS, KtTokens.EQEQEQ, KtTokens.EXCLEQEQEQ)
     }
 }

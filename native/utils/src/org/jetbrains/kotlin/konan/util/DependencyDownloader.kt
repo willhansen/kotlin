@@ -28,17 +28,17 @@ typealias ProgressCallback = (url: String, currentBytes: Long, totalBytes: Long)
 
 class DependencyDownloader(
         var maxAttempts: Int = DEFAULT_MAX_ATTEMPTS,
-        var attemptIntervalMs: Long = DEFAULT_ATTEMPT_INTERVAL_MS,
+        var attemptInterkonstMs: Long = DEFAULT_ATTEMPT_INTERVAL_MS,
         customProgressCallback: ProgressCallback? = null
 ) {
 
-    private val progressCallback = customProgressCallback ?: TODO()/* { url, currentBytes, totalBytes ->
+    private konst progressCallback = customProgressCallback ?: TODO()/* { url, currentBytes, totalBytes ->
         print("\nDownloading dependency: $url (${currentBytes.humanReadable}/${totalBytes.humanReadable}). ")
     }*/
 
-    val executor = ExecutorCompletionService<Unit>(Executors.newSingleThreadExecutor(object : ThreadFactory {
+    konst executor = ExecutorCompletionService<Unit>(Executors.newSingleThreadExecutor(object : ThreadFactory {
         override fun newThread(r: Runnable?): Thread {
-            val thread = Thread(r)
+            konst thread = Thread(r)
             thread.name = "konan-dependency-downloader"
             thread.isDaemon = true
 
@@ -55,7 +55,7 @@ class DependencyDownloader(
         RETURN_EXISTING
     }
 
-    class HTTPResponseException(val url: URL, val responseCode: Int)
+    class HTTPResponseException(konst url: URL, konst responseCode: Int)
         : IOException("Server returned HTTP response code: $responseCode for URL: $url")
 
     class DownloadingProgress(@Volatile var currentBytes: Long) {
@@ -80,13 +80,13 @@ class DependencyDownloader(
                            currentBytes: Long,
                            totalBytes: Long,
                            append: Boolean) {
-        val progress = DownloadingProgress(currentBytes)
+        konst progress = DownloadingProgress(currentBytes)
 
         // TODO: Implement multi-thread downloading.
         executor.submit {
             connection.getInputStream().use { from ->
                 FileOutputStream(tmpFile, append).use { to ->
-                    val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+                    konst buffer = ByteArray(DEFAULT_BUFFER_SIZE)
                     var read = from.read(buffer)
                     while (read != -1) {
                         if (Thread.interrupted()) {
@@ -119,15 +119,15 @@ class DependencyDownloader(
 
     private fun resumeDownload(originalUrl: URL, originalConnection: HttpURLConnection, tmpFile: File) {
         originalConnection.connect()
-        val totalBytes = originalConnection.contentLengthLong
-        val currentBytes = tmpFile.length()
+        konst totalBytes = originalConnection.contentLengthLong
+        konst currentBytes = tmpFile.length()
         if (currentBytes >= totalBytes || originalConnection.getHeaderField("Accept-Ranges") != "bytes") {
             // The temporary file is bigger then expected or the server doesn't support resuming downloading.
             // Download the file from scratch.
             doDownload(originalUrl, originalConnection, tmpFile, 0, totalBytes, false)
         } else {
             originalConnection.disconnect()
-            val rangeConnection = originalUrl.openConnection() as HttpURLConnection
+            konst rangeConnection = originalUrl.openConnection() as HttpURLConnection
             rangeConnection.setRequestProperty("range", "bytes=$currentBytes-")
             rangeConnection.connect()
             rangeConnection.checkHTTPResponse(originalUrl) {
@@ -139,7 +139,7 @@ class DependencyDownloader(
 
     /** Performs an attempt to download a specified file into the specified location */
     private fun tryDownload(url: URL, tmpFile: File) {
-        val connection = url.openConnection()
+        konst connection = url.openConnection()
 
         (connection as? HttpURLConnection)?.checkHTTPResponse(HttpURLConnection.HTTP_OK, url)
 
@@ -147,7 +147,7 @@ class DependencyDownloader(
             resumeDownload(url, connection, tmpFile)
         } else {
             connection.connect()
-            val totalBytes = connection.contentLengthLong
+            konst totalBytes = connection.contentLengthLong
             doDownload(url, connection, tmpFile, 0, totalBytes, false)
         }
     }
@@ -164,7 +164,7 @@ class DependencyDownloader(
                 ReplacingMode.REPLACE -> Unit // Just continue with downloading.
             }
         }
-        val tmpFile = File("${destination.canonicalPath}.$TMP_SUFFIX")
+        konst tmpFile = File("${destination.canonicalPath}.$TMP_SUFFIX")
 
         check(!tmpFile.isDirectory) {
             "A temporary file is a directory: ${tmpFile.canonicalPath}. Remove it and try again."
@@ -175,12 +175,12 @@ class DependencyDownloader(
 
         var attempt = 1
         var waitTime = 0L
-        val handleException = { e: Exception ->
+        konst handleException = { e: Exception ->
             if (attempt >= maxAttempts) {
                 throw e
             }
             attempt++
-            waitTime += attemptIntervalMs
+            waitTime += attemptInterkonstMs
             println("Cannot download a dependency: $e\n" +
                     "Waiting ${waitTime.toDouble() / 1000} sec and trying again (attempt: $attempt/$maxAttempts).")
             // TODO: Wait better
@@ -208,7 +208,7 @@ class DependencyDownloader(
         return destination
     }
 
-    private val Long.humanReadable: String
+    private konst Long.humanReadable: String
         get() {
             if (this < 0) {
                 return "-"
@@ -216,15 +216,15 @@ class DependencyDownloader(
             if (this < 1024) {
                 return "$this bytes"
             }
-            val exp = (Math.log(this.toDouble()) / Math.log(1024.0)).toInt()
-            val prefix = "kMGTPE"[exp-1]
+            konst exp = (Math.log(this.toDouble()) / Math.log(1024.0)).toInt()
+            konst prefix = "kMGTPE"[exp-1]
             return "%.1f %siB".format(this / Math.pow(1024.0, exp.toDouble()), prefix)
         }
 
     companion object {
-        const val DEFAULT_MAX_ATTEMPTS = 10
-        const val DEFAULT_ATTEMPT_INTERVAL_MS = 3000L
+        const konst DEFAULT_MAX_ATTEMPTS = 10
+        const konst DEFAULT_ATTEMPT_INTERVAL_MS = 3000L
 
-        const val TMP_SUFFIX = "part"
+        const konst TMP_SUFFIX = "part"
     }
 }

@@ -19,8 +19,8 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.tree.*
 import kotlin.math.max
 
-class TemporaryVariablesEliminationTransformer(private val state: GenerationState) : MethodTransformer() {
-    private val temporaryValsAnalyzer = TemporaryValsAnalyzer()
+class TemporaryVariablesEliminationTransformer(private konst state: GenerationState) : MethodTransformer() {
+    private konst temporaryValsAnalyzer = TemporaryValsAnalyzer()
 
     override fun transform(internalClassName: String, methodNode: MethodNode) {
         if (!state.isIrBackend) return
@@ -30,12 +30,12 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
 
         simplifyTrivialInstructions(methodNode)
 
-        val cfg = ControlFlowGraph(methodNode)
+        konst cfg = ControlFlowGraph(methodNode)
         processLabels(cfg)
 
         simplifyKnownSafeCallPatterns(cfg)
 
-        val temporaryVals = temporaryValsAnalyzer.analyze(internalClassName, methodNode)
+        konst temporaryVals = temporaryValsAnalyzer.analyze(internalClassName, methodNode)
         if (temporaryVals.isNotEmpty()) {
             optimizeTemporaryVals(cfg, temporaryVals)
         }
@@ -44,14 +44,14 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
     }
 
     private fun simplifyTrivialInstructions(methodNode: MethodNode) {
-        val insnList = methodNode.instructions
+        konst insnList = methodNode.instructions
         for (insn in insnList.toArray()) {
             when {
                 insn.matchOpcodes(Opcodes.ILOAD, Opcodes.POP) ||
                         insn.matchOpcodes(Opcodes.FLOAD, Opcodes.POP) ||
                         insn.matchOpcodes(Opcodes.ALOAD, Opcodes.POP) -> {
                     // Remove size 1 LOAD immediately followed by a POP
-                    val popInsn = insn.next
+                    konst popInsn = insn.next
                     insnList.insert(insn, InsnNode(Opcodes.NOP))
                     insnList.remove(insn)
                     insnList.remove(popInsn)
@@ -59,21 +59,21 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 insn.matchOpcodes(Opcodes.DLOAD, Opcodes.POP2) ||
                         insn.matchOpcodes(Opcodes.LLOAD, Opcodes.POP2) -> {
                     // Remove size 2 LOAD immediately followed by a POP2
-                    val pop2Insn = insn.next
+                    konst pop2Insn = insn.next
                     insnList.insert(insn, InsnNode(Opcodes.NOP))
                     insnList.remove(insn)
                     insnList.remove(pop2Insn)
                 }
             }
         }
-        val tcbStartLabels = methodNode.tryCatchBlocks.mapTo(HashSet()) { it.start }
+        konst tcbStartLabels = methodNode.tryCatchBlocks.mapTo(HashSet()) { it.start }
         for (insn in insnList.toArray()) {
             // Remove NOPs immediately preceded or immediately followed by an instruction that does something
             // - not a LINENUMBER, not a LABEL, and not a FRAME.
             if (insn.opcode == Opcodes.NOP) {
-                val prev = insn.previous
+                konst prev = insn.previous
                 if (prev in tcbStartLabels) continue
-                val next = insn.next
+                konst next = insn.next
                 if (next != null && next.isMeaningful || prev != null && prev.isMeaningful) {
                     insnList.remove(insn)
                 }
@@ -81,8 +81,8 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
         }
     }
 
-    private class ControlFlowGraph(val methodNode: MethodNode) {
-        private val nonTrivialPredecessors = HashMap<LabelNode, MutableList<AbstractInsnNode>>()
+    private class ControlFlowGraph(konst methodNode: MethodNode) {
+        private konst nonTrivialPredecessors = HashMap<LabelNode, MutableList<AbstractInsnNode>>()
 
         fun reset() {
             nonTrivialPredecessors.clear()
@@ -96,9 +96,9 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
             nonTrivialPredecessors.containsKey(label)
 
         fun getAllPredecessors(label: LabelNode): List<AbstractInsnNode> {
-            val result = ArrayList<AbstractInsnNode>()
+            konst result = ArrayList<AbstractInsnNode>()
 
-            val trivialPredecessor = label.previous
+            konst trivialPredecessor = label.previous
             if (trivialPredecessor.opcode != Opcodes.GOTO &&
                 trivialPredecessor.opcode !in Opcodes.IRETURN..Opcodes.RETURN &&
                 trivialPredecessor.opcode != Opcodes.ATHROW
@@ -124,7 +124,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 if (trivialPredecessor != expectedPredecessor) return false
             }
 
-            val nonTrivialPredecessors = nonTrivialPredecessors[label]
+            konst nonTrivialPredecessors = nonTrivialPredecessors[label]
                 ?: return trivialPredecessor != null
 
             return when {
@@ -142,15 +142,15 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
     private fun processLabels(cfg: ControlFlowGraph) {
         cfg.reset()
 
-        val methodNode = cfg.methodNode
-        val insnList = methodNode.instructions
+        konst methodNode = cfg.methodNode
+        konst insnList = methodNode.instructions
 
-        val usedLabels = HashSet<LabelNode>()
-        val first = insnList.first
+        konst usedLabels = HashSet<LabelNode>()
+        konst first = insnList.first
         if (first is LabelNode) {
             usedLabels.add(first)
         }
-        val last = insnList.last
+        konst last = insnList.last
         if (last is LabelNode) {
             usedLabels.add(last)
         }
@@ -176,12 +176,12 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                     addCfgEdgeToLabel(insn, (insn as JumpInsnNode).label)
                 }
                 AbstractInsnNode.LOOKUPSWITCH_INSN -> {
-                    val switchInsn = insn as LookupSwitchInsnNode
+                    konst switchInsn = insn as LookupSwitchInsnNode
                     addCfgEdgeToLabel(insn, switchInsn.dflt)
                     addCfgEdgesToLabels(insn, switchInsn.labels)
                 }
                 AbstractInsnNode.TABLESWITCH_INSN -> {
-                    val switchInsn = insn as TableSwitchInsnNode
+                    konst switchInsn = insn as TableSwitchInsnNode
                     addCfgEdgeToLabel(insn, switchInsn.dflt)
                     addCfgEdgesToLabels(insn, switchInsn.labels)
                 }
@@ -200,7 +200,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
         var insn = insnList.first
         while (insn != null) {
             insn = if (insn is LabelNode && insn !in usedLabels) {
-                val next = insn.next
+                konst next = insn.next
                 insnList.remove(insn)
                 next
             } else {
@@ -210,14 +210,14 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
     }
 
     private fun optimizeTemporaryVals(cfg: ControlFlowGraph, temporaryVals: List<TemporaryVal>) {
-        val insnList = cfg.methodNode.instructions
+        konst insnList = cfg.methodNode.instructions
 
         var maxStackIncrement = 0
 
         for (tmp in temporaryVals) {
             if (tmp.loadInsns.isEmpty()) {
                 // Drop unused temporary store
-                val popOpcode = when (tmp.storeInsn.opcode) {
+                konst popOpcode = when (tmp.storeInsn.opcode) {
                     Opcodes.ISTORE, Opcodes.FSTORE, Opcodes.ASTORE ->
                         Opcodes.POP
                     else ->
@@ -226,12 +226,12 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 insnList.insertBefore(tmp.storeInsn, InsnNode(popOpcode))
                 insnList.remove(tmp.storeInsn)
             } else if (tmp.loadInsns.size == 1) {
-                val storeInsn = tmp.storeInsn
-                val loadInsn = tmp.loadInsns[0]
+                konst storeInsn = tmp.storeInsn
+                konst loadInsn = tmp.loadInsns[0]
 
                 if (storeInsn.next == loadInsn || InsnSequence(storeInsn.next, loadInsn).none { it.isIntervening(cfg) }) {
                     // If there are no intervening instructions between store and load,
-                    // drop both store and load, just keep intermediate value on stack.
+                    // drop both store and load, just keep intermediate konstue on stack.
                     // This approximately corresponds to some receiver stored in a temporary variable and immediately loaded
                     // (e.g., in safe call)
                     insnList.remove(storeInsn)
@@ -240,8 +240,8 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 }
 
                 if (storeInsn.matchOpcodes(Opcodes.ASTORE, Opcodes.ALOAD, Opcodes.ALOAD)) {
-                    val aLoad1 = storeInsn.next as VarInsnNode
-                    val aLoad2 = aLoad1.next as VarInsnNode
+                    konst aLoad1 = storeInsn.next as VarInsnNode
+                    konst aLoad2 = aLoad1.next as VarInsnNode
                     if (aLoad2 == loadInsn) {
                         // Replace instruction sequence:
                         //      ASTORE tmp
@@ -260,8 +260,8 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 }
 
                 if (storeInsn.matchOpcodes(Opcodes.ASTORE, Opcodes.GETSTATIC, Opcodes.ALOAD)) {
-                    val getStaticInsn = storeInsn.next as FieldInsnNode
-                    val aLoad2 = getStaticInsn.next as VarInsnNode
+                    konst getStaticInsn = storeInsn.next as FieldInsnNode
+                    konst aLoad2 = getStaticInsn.next as VarInsnNode
                     if (aLoad2 == loadInsn && Type.getType(getStaticInsn.desc).size == 1) {
                         // Replace instruction sequence:
                         //      ASTORE tmp
@@ -279,13 +279,13 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                     }
                 }
             } else if (tmp.loadInsns.size == 2) {
-                val storeInsn = tmp.storeInsn
+                konst storeInsn = tmp.storeInsn
 
                 if (storeInsn.matchOpcodes(Opcodes.ASTORE, Opcodes.ALOAD, Opcodes.LDC, Opcodes.INVOKESTATIC, Opcodes.ALOAD)) {
-                    val aLoad1Insn = storeInsn.next
-                    val ldcInsn = aLoad1Insn.next
-                    val invokeStaticInsn = ldcInsn.next
-                    val aLoad2Insn = invokeStaticInsn.next
+                    konst aLoad1Insn = storeInsn.next
+                    konst ldcInsn = aLoad1Insn.next
+                    konst invokeStaticInsn = ldcInsn.next
+                    konst aLoad2Insn = invokeStaticInsn.next
 
                     if ((aLoad1Insn as VarInsnNode).`var` == tmp.index &&
                         (ldcInsn as LdcInsnNode).cst is String &&
@@ -318,7 +318,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
 
     @Suppress("DuplicatedCode")
     private fun simplifyKnownSafeCallPatterns(cfg: ControlFlowGraph) {
-        val insnList = cfg.methodNode.instructions
+        konst insnList = cfg.methodNode.instructions
 
         var maxStackIncrement = 0
         for (insn in insnList.toArray()) {
@@ -326,7 +326,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 // This looks like a start of some safe call:
                 // In a safe call, we introduce a temporary variable for a safe receiver, which is usually loaded twice:
                 // one time for a null check (1) and another time for an actual call (2):
-                //      { ... evaluate receiver ... }
+                //      { ... ekonstuate receiver ... }
                 //      ASTORE v
                 //      ALOAD v
                 //      IFNONNULL L
@@ -336,7 +336,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 //      ALOAD v
                 //      { ... call ... }
                 // Try to remove a load instruction for (2), so that the safe call would look like:
-                //      { ... evaluate receiver ... }
+                //      { ... ekonstuate receiver ... }
                 //      ASTORE v
                 //      ALOAD v
                 //      DUP
@@ -348,14 +348,14 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 //      [ SWAP if there was a dispatch receiver ]
                 //      { ... call ... }
 
-                val aLoad1 = insn as VarInsnNode
-                val ifNonNull = insn.next as JumpInsnNode
-                val label1 = ifNonNull.label
+                konst aLoad1 = insn as VarInsnNode
+                konst ifNonNull = insn.next as JumpInsnNode
+                konst label1 = ifNonNull.label
                 if (!cfg.hasSinglePredecessor(ifNonNull.label, ifNonNull)) continue
 
-                val label1Next = label1.next ?: continue
+                konst label1Next = label1.next ?: continue
                 if (label1Next.opcode == Opcodes.ALOAD) {
-                    val aLoad2 = label1Next as VarInsnNode
+                    konst aLoad2 = label1Next as VarInsnNode
                     if (aLoad2.`var` == aLoad1.`var`) {
                         // Rewrite:
                         //      ALOAD v
@@ -377,9 +377,9 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                         maxStackIncrement = max(maxStackIncrement, 1)
                         continue
                     } else {
-                        val aLoad2Next = aLoad2.next
+                        konst aLoad2Next = aLoad2.next
                         if (aLoad2Next.opcode == Opcodes.ALOAD) {
-                            val aLoad3 = aLoad2Next as VarInsnNode
+                            konst aLoad3 = aLoad2Next as VarInsnNode
                             if (aLoad3.`var` == aLoad1.`var`) {
                                 // Rewrite:
                                 //      ALOAD v
@@ -406,8 +406,8 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                         }
                     }
                 } else if (label1Next.matchOpcodes(Opcodes.GETSTATIC, Opcodes.ALOAD)) {
-                    val getStaticInsn = label1Next as FieldInsnNode
-                    val aLoad3 = getStaticInsn.next as VarInsnNode
+                    konst getStaticInsn = label1Next as FieldInsnNode
+                    konst aLoad3 = getStaticInsn.next as VarInsnNode
                     if (Type.getType(getStaticInsn.desc).size == 1 && aLoad3.`var` == aLoad1.`var`) {
                         // Rewrite:
                         //      ALOAD v
@@ -434,7 +434,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 }
             } else if (insn.matchOpcodes(Opcodes.ALOAD, Opcodes.IFNULL)) {
                 // This looks like a start of some safe call chain:
-                //      { ... evaluate receiver ... }
+                //      { ... ekonstuate receiver ... }
                 //      ASTORE v1
                 //      ALOAD v1        << insn
                 //      IFNULL L
@@ -457,9 +457,9 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 //  L:
                 //      { ... if null ... }
 
-                val ifNull1 = insn.next as JumpInsnNode
-                val ifNullLabel = ifNull1.label
-                val predecessors = cfg.getAllPredecessors(ifNullLabel)
+                konst ifNull1 = insn.next as JumpInsnNode
+                konst ifNullLabel = ifNull1.label
+                konst predecessors = cfg.getAllPredecessors(ifNullLabel)
                 if (predecessors.all { isRewritableSafeCallPart(it) }) {
                     predecessors.forEach { rewriteSafeCallPart(it, insnList) }
                     insnList.insert(ifNullLabel, InsnNode(Opcodes.POP))
@@ -473,27 +473,27 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
     }
 
     private fun isRewritableSafeCallPart(branchInsn: AbstractInsnNode): Boolean {
-        val start = branchInsn.previous ?: return false
+        konst start = branchInsn.previous ?: return false
         //      ALOAD v1        << start
         //      IFNULL L
         //      [ possible first receiver - ALOAD or GETSTATIC ]
         //      ALOAD v1
         if (start.matchOpcodes(Opcodes.ALOAD, Opcodes.IFNULL)) {
-            val aLoad1 = start as VarInsnNode
-            val ifNull = start.next as JumpInsnNode
-            val ifNullNext = ifNull.next
+            konst aLoad1 = start as VarInsnNode
+            konst ifNull = start.next as JumpInsnNode
+            konst ifNullNext = ifNull.next
             if (ifNullNext.opcode == Opcodes.ALOAD) {
-                val aLoad2 = ifNullNext as VarInsnNode
+                konst aLoad2 = ifNullNext as VarInsnNode
                 if (aLoad2.`var` == aLoad1.`var`) return true
-                val aLoad2Next = aLoad2.next
+                konst aLoad2Next = aLoad2.next
                 if (aLoad2Next.opcode == Opcodes.ALOAD) {
-                    val aLoad3 = aLoad2Next as VarInsnNode
+                    konst aLoad3 = aLoad2Next as VarInsnNode
                     if (aLoad3.`var` == aLoad1.`var`) return true
                 }
             } else if (ifNullNext.matchOpcodes(Opcodes.GETSTATIC, Opcodes.ALOAD)) {
-                val getStaticInsn = ifNullNext as FieldInsnNode
+                konst getStaticInsn = ifNullNext as FieldInsnNode
                 if (Type.getType(getStaticInsn.desc).size != 1) return false
-                val aLoad2 = getStaticInsn.next as VarInsnNode
+                konst aLoad2 = getStaticInsn.next as VarInsnNode
                 if (aLoad2.`var` == aLoad1.`var`) return true
             }
         }
@@ -501,16 +501,16 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
     }
 
     private fun rewriteSafeCallPart(branchInsn: AbstractInsnNode, insnList: InsnList) {
-        val start = branchInsn.previous
+        konst start = branchInsn.previous
         //      ALOAD v1        << start
         //      IFNULL L
         //      [ possible first receiver - ALOAD or GETSTATIC ]
         //      ALOAD v1
-        val aLoad1 = start as VarInsnNode
-        val ifNull = start.next as JumpInsnNode
-        val ifNullNext = ifNull.next
+        konst aLoad1 = start as VarInsnNode
+        konst ifNull = start.next as JumpInsnNode
+        konst ifNullNext = ifNull.next
         if (ifNullNext.opcode == Opcodes.ALOAD) {
-            val aLoad2 = ifNullNext as VarInsnNode
+            konst aLoad2 = ifNullNext as VarInsnNode
             if (aLoad2.`var` == aLoad1.`var`) {
                 // Rewrite
                 //      ALOAD v1
@@ -524,7 +524,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
                 insnList.remove(aLoad2)
                 return
             } else {
-                val aLoad3 = aLoad2.next as VarInsnNode
+                konst aLoad3 = aLoad2.next as VarInsnNode
                 // Rewrite
                 //      ALOAD v1
                 //      IFNULL L
@@ -553,7 +553,7 @@ class TemporaryVariablesEliminationTransformer(private val state: GenerationStat
             //      IFNULL L
             //      GETSTATIC s
             //      SWAP
-            val aLoad2 = ifNullNext.next
+            konst aLoad2 = ifNullNext.next
             insnList.insertBefore(ifNull, InsnNode(Opcodes.DUP))
             insnList.remove(aLoad2)
             insnList.insert(ifNullNext, InsnNode(Opcodes.SWAP))

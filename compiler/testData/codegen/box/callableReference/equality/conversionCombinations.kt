@@ -96,7 +96,7 @@ fun box() : String {
     testInline()
     testInlineReifined()
 
-    val allRefs = mapOf(
+    konst allRefs = mapOf(
         "noConversionNormal" to noConversion(::normalF),
         "suspendConversionNormal" to suspendConversion(::normalF),
         "unitConversionNormal" to unitConversion(::normalF),

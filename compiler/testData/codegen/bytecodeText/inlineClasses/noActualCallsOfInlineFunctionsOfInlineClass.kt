@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     inline fun inlineInc(): Foo = Foo(x + 1)
     fun notInlineInc(): Foo = Foo(x + 1)
 

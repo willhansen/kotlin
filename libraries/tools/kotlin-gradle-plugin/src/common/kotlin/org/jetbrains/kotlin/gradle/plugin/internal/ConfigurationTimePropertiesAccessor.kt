@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.variantImplementationFactory
 
 /**
  * Provides unified safe way to read environmental properties via [Provider] at configuration time in terms of Gradle configuration cache feature
- * Gradle 6.5 - 7.3 was requiring to explicitly mark such reads to be able to invalidate configuration cache entries on the value change.
+ * Gradle 6.5 - 7.3 was requiring to explicitly mark such reads to be able to inkonstidate configuration cache entries on the konstue change.
  * Gradle 7.4+ is able to automatically detect such reads without explicit declaration, thus method to declare a read was deprecated
  */
 internal interface ConfigurationTimePropertiesAccessor {
@@ -35,7 +35,7 @@ internal class DefaultConfigurationTimePropertiesAccessor : ConfigurationTimePro
     override fun <T> Provider<T>.usedAtConfigurationTime(): Provider<T> = this
 }
 
-internal val Project.configurationTimePropertiesAccessor
+internal konst Project.configurationTimePropertiesAccessor
     get() = variantImplementationFactory<ConfigurationTimePropertiesAccessor.ConfigurationTimePropertiesAccessorVariantFactory>()
         .getInstance()
 

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.types.isNullable
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 object NullableExtensionOperatorWithSafeCallChecker : CallChecker {
-    private val RELEVANT_OPERATORS = mutableSetOf<Name>().apply {
+    private konst RELEVANT_OPERATORS = mutableSetOf<Name>().apply {
         addAll(OperatorNameConventions.ASSIGNMENT_OPERATIONS)
         add(OperatorNameConventions.INC)
         add(OperatorNameConventions.DEC)
@@ -33,12 +33,12 @@ object NullableExtensionOperatorWithSafeCallChecker : CallChecker {
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!resolvedCall.isReallySuccess()) return
-        val name = resolvedCall.resultingDescriptor.name
+        konst name = resolvedCall.resultingDescriptor.name
         if (name !in RELEVANT_OPERATORS) return
 
         if (!isNullableSafeCallReceiver(resolvedCall.extensionReceiver)) return
 
-        val callElement = resolvedCall.call.callElement
+        konst callElement = resolvedCall.call.callElement
 
         // It's an operator call, not a regular one
         if (callElement is KtCallExpression && name.identifier == (callElement.calleeExpression as? KtNameReferenceExpression)?.getReferencedName()) return
@@ -50,7 +50,7 @@ object NullableExtensionOperatorWithSafeCallChecker : CallChecker {
         if (receiverValue !is ExpressionReceiver) return false
         if (!receiverValue.type.isNullable() || receiverValue.type.isFlexible()) return false
 
-        val expression = receiverValue.expression
+        konst expression = receiverValue.expression
 
         if (expression !is KtSafeQualifiedExpression) return false
         if (expression.parent is KtParenthesizedExpression) return false

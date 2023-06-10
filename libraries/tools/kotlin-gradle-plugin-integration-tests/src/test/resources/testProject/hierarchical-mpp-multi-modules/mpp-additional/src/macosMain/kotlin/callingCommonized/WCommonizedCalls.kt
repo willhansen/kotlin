@@ -12,15 +12,15 @@ import platform.posix.ns_r_notauth
 
 actual class WCommonizedCalls actual constructor(pc: __CLPK_real) {
 
-    val eFunCall: CFTypeID = CFAllocatorGetTypeID()
-    actual val eClass: NSObject
+    konst eFunCall: CFTypeID = CFAllocatorGetTypeID()
+    actual konst eClass: NSObject
         get() = TODO("Not yet implemented")
-    actual val enumInteroped: CEnum
+    actual konst enumInteroped: CEnum
         get() = TODO("Not yet implemented")
 
-    val eVal: CBLAS_TRANSPOSE = AtlasConj
+    konst eVal: CBLAS_TRANSPOSE = AtlasConj
 
-    val theCall = ns_r_notauth
+    konst theCall = ns_r_notauth
 
 
 }

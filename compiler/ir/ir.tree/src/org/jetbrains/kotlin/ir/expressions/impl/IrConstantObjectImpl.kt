@@ -12,68 +12,68 @@ import org.jetbrains.kotlin.ir.util.constructedClassType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrConstantPrimitiveImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
-    override var value: IrConst<*>,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    override var konstue: IrConst<*>,
 ) : IrConstantPrimitive() {
     override fun contentEquals(other: IrConstantValue) =
         other is IrConstantPrimitive &&
                 type == other.type &&
-                value.type == other.value.type &&
-                value.kind == other.value.kind &&
-                value.value == other.value.value
+                konstue.type == other.konstue.type &&
+                konstue.kind == other.konstue.kind &&
+                konstue.konstue == other.konstue.konstue
 
     override fun contentHashCode(): Int {
         var result = type.hashCode()
-        result = result * 31 + value.type.hashCode()
-        result = result * 31 + value.kind.hashCode()
-        result = result * 31 + value.value.hashCode()
+        result = result * 31 + konstue.type.hashCode()
+        result = result * 31 + konstue.kind.hashCode()
+        result = result * 31 + konstue.konstue.hashCode()
         return result
     }
 
-    override var type = value.type
+    override var type = konstue.type
 }
 
 class IrConstantObjectImpl constructor(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var constructor: IrConstructorSymbol,
     initValueArguments: List<IrConstantValue>,
     initTypeArguments: List<IrType>,
     override var type: IrType = constructor.owner.constructedClassType,
 ) : IrConstantObject() {
-    override val valueArguments = SmartList(initValueArguments)
-    override val typeArguments = SmartList(initTypeArguments)
+    override konst konstueArguments = SmartList(initValueArguments)
+    override konst typeArguments = SmartList(initTypeArguments)
 
     override fun contentEquals(other: IrConstantValue): Boolean =
         other is IrConstantObject &&
                 other.type == type &&
                 other.constructor == constructor &&
-                valueArguments.size == other.valueArguments.size &&
+                konstueArguments.size == other.konstueArguments.size &&
                 typeArguments.size == other.typeArguments.size &&
-                valueArguments.indices.all { index -> valueArguments[index].contentEquals(other.valueArguments[index]) } &&
+                konstueArguments.indices.all { index -> konstueArguments[index].contentEquals(other.konstueArguments[index]) } &&
                 typeArguments.indices.all { index -> typeArguments[index] == other.typeArguments[index] }
 
 
     override fun contentHashCode(): Int {
         var res = type.hashCode() * 31 + constructor.hashCode()
-        for (value in valueArguments) {
-            res = res * 31 + value.contentHashCode()
+        for (konstue in konstueArguments) {
+            res = res * 31 + konstue.contentHashCode()
         }
-        for (value in typeArguments) {
-            res = res * 31 + value.hashCode()
+        for (konstue in typeArguments) {
+            res = res * 31 + konstue.hashCode()
         }
         return res
     }
 }
 
 class IrConstantArrayImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
     initElements: List<IrConstantValue>,
 ) : IrConstantArray() {
-    override val elements = SmartList(initElements)
+    override konst elements = SmartList(initElements)
 
     override fun contentEquals(other: IrConstantValue): Boolean =
         other is IrConstantArray &&
@@ -83,8 +83,8 @@ class IrConstantArrayImpl(
 
     override fun contentHashCode(): Int {
         var res = type.hashCode()
-        for (value in elements) {
-            res = res * 31 + value.contentHashCode()
+        for (konstue in elements) {
+            res = res * 31 + konstue.contentHashCode()
         }
         return res
     }

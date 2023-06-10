@@ -6,10 +6,10 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 fun box(): String {
-    val x = gen().joinToString()
+    konst x = gen().joinToString()
     if (x != "1, 2") return "fail1: $x"
 
-    val y = gen().joinToString()
+    konst y = gen().joinToString()
     if (y != "-1") return "fail2: $y"
     return "OK"
 }
@@ -29,18 +29,18 @@ fun gen() = generate<Int> {
 
 // LIBRARY CODE
 interface Generator<in T> {
-    suspend fun yield(value: T)
+    suspend fun yield(konstue: T)
 }
 
 fun <T> generate(block: suspend Generator<T>.() -> Unit): Sequence<T> = GeneratedSequence(block)
 
-class GeneratedSequence<out T>(private val block: suspend Generator<T>.() -> Unit) : Sequence<T> {
+class GeneratedSequence<out T>(private konst block: suspend Generator<T>.() -> Unit) : Sequence<T> {
     override fun iterator(): Iterator<T> = GeneratedIterator(block)
 }
 
 class GeneratedIterator<T>(block: suspend Generator<T>.() -> Unit) : AbstractIterator<T>(), Generator<T> {
     private var nextStep: Continuation<Unit> = block.createCoroutine(this, object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<Unit>) {
             data.getOrThrow()
@@ -51,8 +51,8 @@ class GeneratedIterator<T>(block: suspend Generator<T>.() -> Unit) : AbstractIte
     override fun computeNext() {
         nextStep.resume(Unit)
     }
-    suspend override fun yield(value: T) = suspendCoroutineUninterceptedOrReturn<Unit> { c ->
-        setNext(value)
+    suspend override fun yield(konstue: T) = suspendCoroutineUninterceptedOrReturn<Unit> { c ->
+        setNext(konstue)
         nextStep = c
 
         COROUTINE_SUSPENDED

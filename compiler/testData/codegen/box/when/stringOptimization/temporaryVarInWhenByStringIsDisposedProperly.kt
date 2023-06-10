@@ -1,9 +1,9 @@
 // WITH_STDLIB
 
-val String.name get() = this
+konst String.name get() = this
 
 fun List<String>.normalize(): List<String> {
-    val list = ArrayList<String>()
+    konst list = ArrayList<String>()
     for (str in this) {
         when (str.name) {
             "." -> {}
@@ -15,7 +15,7 @@ fun List<String>.normalize(): List<String> {
 }
 
 fun box(): String {
-    val xs = listOf("a", "b", ".", "..").normalize()
+    konst xs = listOf("a", "b", ".", "..").normalize()
     if (xs != listOf("a")) return "Fail: $xs"
 
     return "OK"

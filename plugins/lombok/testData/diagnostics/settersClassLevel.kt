@@ -25,7 +25,7 @@ public class SetterTest {
 // FILE: test.kt
 
 fun test() {
-    val obj = SetterTest()
+    konst obj = SetterTest()
     obj.setAge(42)
     assertEquals(obj.age, 42)
     obj.age = 43

@@ -6,7 +6,7 @@ enum class Order {
     THIRD
 }
 
-enum class Planet(val m: Double, internal val r: Double) {
+enum class Planet(konst m: Double, internal konst r: Double) {
 //         constructor Planet(Double, Double)
 //         │Double
 //         ││    Double
@@ -41,15 +41,15 @@ enum class Planet(val m: Double, internal val r: Double) {
         }
     };
 
-//                  val (Planet.Companion).G: Double
+//                  konst (Planet.Companion).G: Double
 //                  │ fun (Double).times(Double): Double
-//                  │ │ val (Planet).m: Double
+//                  │ │ konst (Planet).m: Double
 //                  │ │ │ fun (Double).div(Double): Double
-//                  │ │ │ │  val (Planet).r: Double
+//                  │ │ │ │  konst (Planet).r: Double
 //                  │ │ │ │  │ fun (Double).times(Double): Double
-//      Double      │ │ │ │  │ │ val (Planet).r: Double
+//      Double      │ │ │ │  │ │ konst (Planet).r: Double
 //      │           │ │ │ │  │ │ │
-    val g: Double = G * m / (r * r)
+    konst g: Double = G * m / (r * r)
 
     abstract fun sayHello()
 
@@ -57,11 +57,11 @@ enum class Planet(val m: Double, internal val r: Double) {
 //                Double
 //                │   Double
 //                │   │
-        const val G = 6.67e-11
+        const konst G = 6.67e-11
     }
 }
 
-enum class PseudoInsn(val signature: String = "()V") {
+enum class PseudoInsn(konst signature: String = "()V") {
     FIX_STACK_BEFORE_JUMP,
 //                       constructor PseudoInsn(String = ...)
 //                       │

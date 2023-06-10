@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractResolveCallTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val ktFile = ktFiles.first()
-        val expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
+        konst ktFile = ktFiles.first()
+        konst expression = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
                 resolveCall(expression)?.let { stringRepresentation(it) }
             }
@@ -33,12 +33,12 @@ abstract class AbstractResolveCallTest : AbstractAnalysisApiBasedSingleModuleTes
     private fun KtAnalysisSession.resolveCall(element: PsiElement): KtCallInfo? = when (element) {
         is KtValueArgument -> element.getArgumentExpression()?.resolveCall()
         is KtDeclarationModifierList -> {
-            val annotationEntry = element.annotationEntries.singleOrNull()
+            konst annotationEntry = element.annotationEntries.singleOrNull()
                 ?: error("Only single annotation entry is supported for now")
             annotationEntry.resolveCall()
         }
         is KtFileAnnotationList -> {
-            val annotationEntry = element.annotationEntries.singleOrNull()
+            konst annotationEntry = element.annotationEntries.singleOrNull()
                 ?: error("Only single annotation entry is supported for now")
             annotationEntry.resolveCall()
         }

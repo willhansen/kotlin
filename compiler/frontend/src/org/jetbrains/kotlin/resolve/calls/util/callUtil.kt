@@ -35,37 +35,37 @@ import org.jetbrains.kotlin.utils.sure
 // resolved call
 
 fun <D : CallableDescriptor> ResolvedCall<D>.noErrorsInValueArguments(): Boolean {
-    return call.valueArguments.all { argument -> !getArgumentMapping(argument!!).isError() }
+    return call.konstueArguments.all { argument -> !getArgumentMapping(argument!!).isError() }
 }
 
 fun <D : CallableDescriptor> ResolvedCall<D>.hasUnmappedArguments(): Boolean {
-    return call.valueArguments.any { argument -> getArgumentMapping(argument!!) == ArgumentUnmapped }
+    return call.konstueArguments.any { argument -> getArgumentMapping(argument!!) == ArgumentUnmapped }
 }
 
 fun <D : CallableDescriptor> ResolvedCall<D>.hasUnmappedParameters(): Boolean {
-    val parameterToArgumentMap = valueArguments
-    return !parameterToArgumentMap.keys.containsAll(resultingDescriptor.valueParameters)
+    konst parameterToArgumentMap = konstueArguments
+    return !parameterToArgumentMap.keys.containsAll(resultingDescriptor.konstueParameters)
 }
 
 fun <D : CallableDescriptor> ResolvedCall<D>.allArgumentsMapped() =
-    call.valueArguments.all { argument -> getArgumentMapping(argument) is ArgumentMatch }
+    call.konstueArguments.all { argument -> getArgumentMapping(argument) is ArgumentMatch }
 
 fun <D : CallableDescriptor> ResolvedCall<D>.hasTypeMismatchErrorOnParameter(parameter: ValueParameterDescriptor): Boolean {
-    val resolvedValueArgument = valueArguments[parameter]
+    konst resolvedValueArgument = konstueArguments[parameter]
     if (resolvedValueArgument == null) return true
 
     return resolvedValueArgument.arguments.any { argument ->
-        val argumentMapping = getArgumentMapping(argument)
+        konst argumentMapping = getArgumentMapping(argument)
         argumentMapping is ArgumentMatch && argumentMapping.status == ArgumentMatchStatus.TYPE_MISMATCH
     }
 }
 
-fun <D : CallableDescriptor> ResolvedCall<D>.getParameterForArgument(valueArgument: ValueArgument?): ValueParameterDescriptor? {
-    return (valueArgument?.let { getArgumentMapping(it) } as? ArgumentMatch)?.valueParameter
+fun <D : CallableDescriptor> ResolvedCall<D>.getParameterForArgument(konstueArgument: ValueArgument?): ValueParameterDescriptor? {
+    return (konstueArgument?.let { getArgumentMapping(it) } as? ArgumentMatch)?.konstueParameter
 }
 
 fun <D : CallableDescriptor> ResolvedCall<D>.usesDefaultArguments(): Boolean {
-    return valueArgumentsByIndex?.any { it is DefaultValueArgument } ?: false
+    return konstueArgumentsByIndex?.any { it is DefaultValueArgument } ?: false
 }
 
 
@@ -75,29 +75,29 @@ fun <C : ResolutionContext<C>> Call.hasUnresolvedArguments(context: ResolutionCo
     hasUnresolvedArguments(context.trace.bindingContext, context.statementFilter)
 
 fun Call.hasUnresolvedArguments(bindingContext: BindingContext, statementFilter: StatementFilter): Boolean {
-    val arguments = valueArguments.map { it.getArgumentExpression() }
+    konst arguments = konstueArguments.map { it.getArgumentExpression() }
     return arguments.any(fun(argument: KtExpression?): Boolean {
         if (argument == null || ArgumentTypeResolver.isFunctionLiteralOrCallableReference(argument, statementFilter)) return false
 
-        when (val resolvedCall = argument.getResolvedCall(bindingContext)) {
+        when (konst resolvedCall = argument.getResolvedCall(bindingContext)) {
             is MutableResolvedCall<*> -> if (!resolvedCall.hasInferredReturnType()) return false
             is NewResolvedCallImpl<*> -> if (resolvedCall.resultingDescriptor.returnType?.isError == true) return false
         }
 
-        val expressionType = bindingContext.getType(argument)
+        konst expressionType = bindingContext.getType(argument)
         return expressionType == null || expressionType.isError
     })
 }
 
-fun Call.getValueArgumentsInParentheses(): List<ValueArgument> = valueArguments.filterArgsInParentheses()
+fun Call.getValueArgumentsInParentheses(): List<ValueArgument> = konstueArguments.filterArgsInParentheses()
 
-fun KtCallElement.getValueArgumentsInParentheses(): List<ValueArgument> = valueArguments.filterArgsInParentheses()
+fun KtCallElement.getValueArgumentsInParentheses(): List<ValueArgument> = konstueArguments.filterArgsInParentheses()
 
 fun Call.getValueArgumentListOrElement(): KtElement =
     if (this is CallTransformer.CallForImplicitInvoke) {
         outerCall.getValueArgumentListOrElement()
     } else {
-        valueArgumentList ?: calleeExpression ?: callElement
+        konstueArgumentList ?: calleeExpression ?: callElement
     }
 
 @Suppress("UNCHECKED_CAST")
@@ -105,7 +105,7 @@ private fun List<ValueArgument?>.filterArgsInParentheses() = filter { it !is KtL
 
 fun Call.getValueArgumentForExpression(expression: KtExpression): ValueArgument? {
     fun KtElement.deparenthesizeStructurally(): KtElement? {
-        val deparenthesized = if (this is KtExpression) KtPsiUtil.deparenthesizeOnce(this) else this
+        konst deparenthesized = if (this is KtExpression) KtPsiUtil.deparenthesizeOnce(this) else this
         return when {
             deparenthesized != this -> deparenthesized
             this is KtLambdaExpression -> this.functionLiteral
@@ -115,7 +115,7 @@ fun Call.getValueArgumentForExpression(expression: KtExpression): ValueArgument?
     }
 
     fun KtElement.isParenthesizedExpression() = generateSequence(this) { it.deparenthesizeStructurally() }.any { it == expression }
-    return valueArguments.firstOrNull { it?.getArgumentExpression()?.isParenthesizedExpression() ?: false }
+    return konstueArguments.firstOrNull { it?.getArgumentExpression()?.isParenthesizedExpression() ?: false }
 }
 
 // Get call / resolved call from binding context
@@ -128,21 +128,21 @@ fun Call.getValueArgumentForExpression(expression: KtExpression): ValueArgument?
  *  so there is a corresponding call for them.
  */
 fun KtElement.getCall(context: BindingContext): Call? {
-    val element = if (this is KtExpression) KtPsiUtil.deparenthesize(this) else this
+    konst element = if (this is KtExpression) KtPsiUtil.deparenthesize(this) else this
     if (element == null) return null
 
     // Do not use Call bound to outer call expression (if any) to prevent stack overflow during analysis
     if (element is KtCallElement && element.calleeExpression == null) return null
 
     if (element is KtWhenExpression) {
-        val subjectVariable = element.subjectVariable
+        konst subjectVariable = element.subjectVariable
         if (subjectVariable != null) {
             return subjectVariable.getCall(context) ?: context[CALL, element]
         }
     }
 
-    val parent = element.parent
-    val reference: KtExpression? = when (parent) {
+    konst parent = element.parent
+    konst reference: KtExpression? = when (parent) {
         is KtInstanceExpressionWithLabel -> parent
         is KtUserType -> parent.parent.parent as? KtConstructorCalleeExpression
         else -> element.getCalleeExpressionIfAny()
@@ -154,12 +154,12 @@ fun KtElement.getCall(context: BindingContext): Call? {
 }
 
 fun KtElement.getParentCall(context: BindingContext, strict: Boolean = true): Call? {
-    val callExpressionTypes = arrayOf(
+    konst callExpressionTypes = arrayOf(
         KtSimpleNameExpression::class.java, KtCallElement::class.java, KtBinaryExpression::class.java,
         KtUnaryExpression::class.java, KtArrayAccessExpression::class.java
     )
 
-    val parent = if (strict) {
+    konst parent = if (strict) {
         PsiTreeUtil.getParentOfType(this, *callExpressionTypes)
     } else {
         PsiTreeUtil.getNonStrictParentOfType(this, *callExpressionTypes)
@@ -192,7 +192,7 @@ fun Call.getResolvedCallWithAssert(context: BindingContext): ResolvedCall<out Ca
 }
 
 fun KtExpression.getFunctionResolvedCallWithAssert(context: BindingContext): ResolvedCall<out FunctionDescriptor> {
-    val resolvedCall = getResolvedCallWithAssert(context)
+    konst resolvedCall = getResolvedCallWithAssert(context)
     assert(resolvedCall.resultingDescriptor is FunctionDescriptor) {
         "ResolvedCall for this expression must be ResolvedCall<? extends FunctionDescriptor>: ${this.getTextWithLocation()}"
     }
@@ -201,7 +201,7 @@ fun KtExpression.getFunctionResolvedCallWithAssert(context: BindingContext): Res
 }
 
 fun KtExpression.getPropertyResolvedCallWithAssert(context: BindingContext): ResolvedCall<out PropertyDescriptor> {
-    val resolvedCall = getResolvedCallWithAssert(context)
+    konst resolvedCall = getResolvedCallWithAssert(context)
     assert(resolvedCall.resultingDescriptor is PropertyDescriptor) {
         "ResolvedCall for this expression must be ResolvedCall<? extends PropertyDescriptor>: ${this.getTextWithLocation()}"
     }
@@ -210,7 +210,7 @@ fun KtExpression.getPropertyResolvedCallWithAssert(context: BindingContext): Res
 }
 
 fun KtExpression.getVariableResolvedCallWithAssert(context: BindingContext): ResolvedCall<out VariableDescriptor> {
-    val resolvedCall = getResolvedCallWithAssert(context)
+    konst resolvedCall = getResolvedCallWithAssert(context)
     assert(resolvedCall.resultingDescriptor is VariableDescriptor) {
         "ResolvedCall for this expression must be ResolvedCall<? extends PropertyDescriptor>: ${this.getTextWithLocation()}"
     }
@@ -219,37 +219,37 @@ fun KtExpression.getVariableResolvedCallWithAssert(context: BindingContext): Res
 }
 
 fun KtExpression.getType(context: BindingContext): KotlinType? {
-    val type = context.getType(this)
+    konst type = context.getType(this)
     if (type != null) return type
-    val resolvedCall = this.getResolvedCall(context)
+    konst resolvedCall = this.getResolvedCall(context)
     if (resolvedCall is VariableAsFunctionResolvedCall) {
         return resolvedCall.variableCall.resultingDescriptor.type
     }
     return null
 }
 
-val KtElement.isFakeElement: Boolean
+konst KtElement.isFakeElement: Boolean
     get() {
         // Don't use getContainingKtFile() because in IDE we can get an element with JavaDummyHolder as containing file
-        val file = containingFile
+        konst file = containingFile
         return file is KtFile && file.doNotAnalyze != null
     }
 
-val PsiElement.isFakePsiElement: Boolean
+konst PsiElement.isFakePsiElement: Boolean
     get() = this is KtElement && isFakeElement
 
 fun Call.isSafeCall(): Boolean {
     if (this is CallTransformer.CallForImplicitInvoke) {
         //implicit safe 'invoke'
-        if (outerCall.isSemanticallyEquivalentToSafeCall) {
+        if (outerCall.isSemanticallyEquikonstentToSafeCall) {
             return true
         }
     }
-    return isSemanticallyEquivalentToSafeCall
+    return isSemanticallyEquikonstentToSafeCall
 }
 
 fun Call.isCallableReference(): Boolean {
-    val callElement = callElement
+    konst callElement = callElement
     return callElement.isCallableReference()
 }
 
@@ -264,8 +264,8 @@ fun PsiElement.asCallableReferenceExpression(): KtCallableReferenceExpression? =
     }
 
 fun Call.createLookupLocation(): KotlinLookupLocation {
-    val calleeExpression = calleeExpression
-    val element =
+    konst calleeExpression = calleeExpression
+    konst element =
         if (calleeExpression != null && !calleeExpression.isFakeElement) calleeExpression
         else callElement
     return KotlinLookupLocation(element)
@@ -275,12 +275,12 @@ fun KtExpression.createLookupLocation(): KotlinLookupLocation? =
     if (!isFakeElement) KotlinLookupLocation(this) else null
 
 fun ResolvedCall<*>.getFirstArgumentExpression(): KtExpression? =
-    valueArgumentsByIndex?.run { get(0).arguments[0].getArgumentExpression() }
+    konstueArgumentsByIndex?.run { get(0).arguments[0].getArgumentExpression() }
 
 fun ResolvedCall<*>.getReceiverExpression(): KtExpression? =
     (extensionReceiver as? ExpressionReceiver)?.expression ?: (dispatchReceiver as? ExpressionReceiver)?.expression
 
-val KtLambdaExpression.isTrailingLambdaOnNewLIne
+konst KtLambdaExpression.isTrailingLambdaOnNewLIne
     get(): Boolean {
         (parent as? KtLambdaArgument)?.let { lambdaArgument ->
             var prevSibling = lambdaArgument.prevSibling
@@ -320,10 +320,10 @@ fun NewTypeSubstitutor.toOldSubstitution(): TypeSubstitution = object : TypeSubs
 }
 
 fun <D : CallableDescriptor> ResolvedCallImpl<D>.shouldBeSubstituteWithStubTypes() =
-    typeArguments.any { argument -> argument.value.contains { it is StubTypeForBuilderInference } }
+    typeArguments.any { argument -> argument.konstue.contains { it is StubTypeForBuilderInference } }
             || dispatchReceiver?.type?.contains { it is StubTypeForBuilderInference } == true
             || extensionReceiver?.type?.contains { it is StubTypeForBuilderInference } == true
-            || valueArguments.any { argument -> argument.key.type.contains { it is StubTypeForBuilderInference } }
+            || konstueArguments.any { argument -> argument.key.type.contains { it is StubTypeForBuilderInference } }
 
 fun KotlinCall.extractCallableReferenceExpression(): KtCallableReferenceExpression? =
     psiKotlinCall.psiCall.extractCallableReferenceExpression()

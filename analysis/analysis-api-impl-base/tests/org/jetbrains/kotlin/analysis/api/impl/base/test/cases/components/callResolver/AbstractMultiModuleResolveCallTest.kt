@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractMultiModuleResolveCallTest : AbstractAnalysisApiBasedTest() {
     final override fun doTestByModuleStructure(moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val (expression, _) =
+        konst (expression, _) =
             testServices.expressionMarkerProvider.getElementsOfTypeAtCarets<KtExpression>(moduleStructure, testServices)
                 .single()
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
                 resolveCall(expression)?.let { stringRepresentation(it) }
             }

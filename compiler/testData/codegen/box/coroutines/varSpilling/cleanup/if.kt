@@ -6,7 +6,7 @@ import kotlin.coroutines.intrinsics.*
 
 fun blackhole(vararg a: Any?) {}
 
-val spilledVariables = mutableSetOf<Pair<String, String>>()
+konst spilledVariables = mutableSetOf<Pair<String, String>>()
 
 var c: Continuation<Unit>? = null
 
@@ -23,12 +23,12 @@ suspend fun saveSpilledVariables() = suspendCoroutineUninterceptedOrReturn<Unit>
 
 suspend fun test(check: Boolean) {
     if (check) {
-        val a = "a1"
+        konst a = "a1"
         saveSpilledVariables()
         blackhole(a)
     } else {
-        val a = "a2"
-        val b = "b2"
+        konst a = "a2"
+        konst b = "b2"
         saveSpilledVariables()
         blackhole(a, b)
     }

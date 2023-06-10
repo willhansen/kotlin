@@ -2,6 +2,6 @@
 package test
 
 interface Foo {
-    val foo: String
-    val
+    konst foo: String
+    konst
 }

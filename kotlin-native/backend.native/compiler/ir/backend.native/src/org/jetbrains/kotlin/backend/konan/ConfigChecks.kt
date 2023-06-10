@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.konan.target.needSmallBinary
  */
 interface ConfigChecks {
 
-    val config: KonanConfig
+    konst config: KonanConfig
 
     fun shouldExportKDoc() = config.configuration.getBoolean(KonanConfigKeys.EXPORT_KDOC)
 

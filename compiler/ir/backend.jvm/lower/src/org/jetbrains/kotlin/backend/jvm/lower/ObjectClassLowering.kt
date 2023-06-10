@@ -25,13 +25,13 @@ import org.jetbrains.kotlin.ir.util.filterOutAnnotations
 import org.jetbrains.kotlin.ir.util.isObject
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 
-internal val objectClassPhase = makeIrFilePhase(
+internal konst objectClassPhase = makeIrFilePhase(
     ::ObjectClassLowering,
     name = "ObjectClass",
     description = "Handle object classes"
 )
 
-private class ObjectClassLowering(val context: JvmBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
+private class ObjectClassLowering(konst context: JvmBackendContext) : IrElementTransformerVoidWithContext(), FileLoweringPass {
 
     private var pendingTransformations = mutableListOf<Function0<Unit>>()
 
@@ -50,10 +50,10 @@ private class ObjectClassLowering(val context: JvmBackendContext) : IrElementTra
     private fun process(irClass: IrClass) {
         if (!irClass.isObject) return
 
-        val publicInstanceField = context.cachedDeclarations.getFieldForObjectInstance(irClass)
-        val privateInstanceField = context.cachedDeclarations.getPrivateFieldForObjectInstance(irClass)
+        konst publicInstanceField = context.cachedDeclarations.getFieldForObjectInstance(irClass)
+        konst privateInstanceField = context.cachedDeclarations.getPrivateFieldForObjectInstance(irClass)
 
-        val constructor = irClass.constructors.find { it.isPrimary }
+        konst constructor = irClass.constructors.find { it.isPrimary }
             ?: throw AssertionError("Object should have a primary constructor: ${irClass.name}")
 
         if (privateInstanceField != publicInstanceField) {

@@ -6,7 +6,7 @@ package foo
 fun box(): String {
     var threwForEmptyList = false
 
-    val arr = ArrayList<Int>()
+    konst arr = ArrayList<Int>()
     try {
         arr.removeAt(2)
     }

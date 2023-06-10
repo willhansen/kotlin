@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.analysis.low.level.api.fir.sessions.LLFirSession
 
 internal object PersistentCheckerContextFactory {
     fun createEmptyPersistenceCheckerContext(sessionHolder: SessionHolder): PersistentCheckerContext {
-        val returnTypeCalculator = LLFirReturnTypeCalculatorWithJump(
+        konst returnTypeCalculator = LLFirReturnTypeCalculatorWithJump(
             scopeSession = sessionHolder.scopeSession,
             implicitBodyResolveComputationSession = ImplicitBodyResolveComputationSession(),
             lockProvider = LLFirGlobalResolveComponents.getInstance(sessionHolder.session).lockProvider,

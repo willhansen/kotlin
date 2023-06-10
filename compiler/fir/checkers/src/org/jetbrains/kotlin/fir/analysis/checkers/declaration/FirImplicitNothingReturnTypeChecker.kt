@@ -23,7 +23,7 @@ object FirImplicitNothingReturnTypeChecker : FirCallableDeclarationChecker() {
         if (declaration.isOverride) return
         if (declaration.symbol.hasExplicitReturnType) return
         if (declaration.returnTypeRef.coneType.isNothing) {
-            val factory = when (declaration) {
+            konst factory = when (declaration) {
                 is FirSimpleFunction -> FirErrors.IMPLICIT_NOTHING_RETURN_TYPE
                 is FirProperty -> FirErrors.IMPLICIT_NOTHING_PROPERTY_TYPE
                 else -> error("Should not be here")

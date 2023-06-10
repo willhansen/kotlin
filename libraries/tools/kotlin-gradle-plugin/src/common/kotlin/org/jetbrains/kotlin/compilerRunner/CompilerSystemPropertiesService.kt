@@ -22,15 +22,15 @@ import org.jetbrains.kotlin.gradle.utils.isConfigurationCacheAvailable
 
 internal interface UsesCompilerSystemPropertiesService : Task {
     @get:Internal
-    val systemPropertiesService: Property<CompilerSystemPropertiesService>
+    konst systemPropertiesService: Property<CompilerSystemPropertiesService>
 }
 
 internal abstract class CompilerSystemPropertiesService : BuildService<CompilerSystemPropertiesService.Parameters>, AutoCloseable {
     internal interface Parameters : BuildServiceParameters {
-        val properties: MapProperty<String, Provider<String>>
+        konst properties: MapProperty<String, Provider<String>>
     }
 
-    private val properties by lazy { parameters.properties.get().mapValues { it.value.orNull }.toMutableMap() }
+    private konst properties by lazy { parameters.properties.get().mapValues { it.konstue.orNull }.toMutableMap() }
 
     fun startIntercept() {
         if (parameters.properties.get().isEmpty()) return
@@ -38,19 +38,19 @@ internal abstract class CompilerSystemPropertiesService : BuildService<CompilerS
         CompilerSystemProperties.systemPropertyGetter = {
             if (it in properties) properties[it] else System.getProperty(it)
         }
-        CompilerSystemProperties.systemPropertySetter = setter@{ key, value ->
+        CompilerSystemProperties.systemPropertySetter = setter@{ key, konstue ->
             if (key !in properties) {
-                return@setter System.setProperty(key, value)
+                return@setter System.setProperty(key, konstue)
             }
-            val oldValue = properties[key]
-            properties[key] = value
+            konst oldValue = properties[key]
+            properties[key] = konstue
             oldValue
         }
         CompilerSystemProperties.systemPropertyCleaner = cleaner@{
             if (it !in properties) {
                 return@cleaner System.clearProperty(it)
             }
-            val oldValue = properties[it]
+            konst oldValue = properties[it]
             properties.remove(it)
             oldValue
         }
@@ -69,7 +69,7 @@ internal abstract class CompilerSystemPropertiesService : BuildService<CompilerS
         ) { service ->
             if (isConfigurationCacheAvailable(project.gradle)) {
                 service.parameters.properties.set(
-                    CompilerSystemProperties.values()
+                    CompilerSystemProperties.konstues()
                         .filterNot { it.alwaysDirectAccess }
                         .associate {
                             it.property to project.providers.systemProperty(it.property)

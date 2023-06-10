@@ -18,21 +18,21 @@ import org.jetbrains.kotlin.tooling.core.withClosure
 
 internal object AndroidSourceSetLayoutV1SourceSetsNotFoundChecker : KotlinGradleProjectChecker {
 
-    private val androidSourceSetRegex by lazy { Regex("""(androidTest|androidAndroidTest)\w*""") }
+    private konst androidSourceSetRegex by lazy { Regex("""(androidTest|androidAndroidTest)\w*""") }
 
     override suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector) {
         /* Checker will only try to provide additional diagnostics if the project configuration failed */
-        val failure = project.configurationResult.await() as? KotlinPluginLifecycle.ProjectConfigurationResult.Failure ?: return
+        konst failure = project.configurationResult.await() as? KotlinPluginLifecycle.ProjectConfigurationResult.Failure ?: return
 
         /* Checker is only relevant if multiplatformAndroidSourceSetLayoutV2 is applied */
         if (project.kotlinAndroidSourceSetLayout != multiplatformAndroidSourceSetLayoutV2) return
 
-        val allReasons = failure.failures.withClosure<Throwable> { listOfNotNull(it.cause) }
+        konst allReasons = failure.failures.withClosure<Throwable> { listOfNotNull(it.cause) }
 
-        val unknownAndroidSourceSetNames = allReasons.filterIsInstance<UnknownDomainObjectException>()
+        konst unknownAndroidSourceSetNames = allReasons.filterIsInstance<UnknownDomainObjectException>()
             .filter { it.message.orEmpty().contains("KotlinSourceSet") }
             .mapNotNull { androidSourceSetRegex.find(it.message.orEmpty()) }
-            .map { it.value }
+            .map { it.konstue }
 
         unknownAndroidSourceSetNames.forEach { unknownAndroidSourceSetName ->
             collector.report(project, AndroidSourceSetLayoutV1SourceSetsNotFoundError(unknownAndroidSourceSetName))

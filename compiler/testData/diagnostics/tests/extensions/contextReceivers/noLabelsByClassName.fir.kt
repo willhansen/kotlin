@@ -7,7 +7,7 @@ var Int.p: Int
         this@Int
         <!RETURN_NOT_ALLOWED!>return@p<!> 42
     }
-    set(value) {
+    set(konstue) {
         this@Int
     }
 
@@ -17,7 +17,7 @@ class X {
             this@Int
             <!RETURN_NOT_ALLOWED!>return@p<!> 42
         }
-        set(value) {
+        set(konstue) {
             this@Int
         }
 

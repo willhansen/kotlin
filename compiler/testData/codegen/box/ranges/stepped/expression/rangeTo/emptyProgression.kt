@@ -3,22 +3,22 @@
 import kotlin.test.*
 
 fun box(): String {
-    val intList = mutableListOf<Int>()
-    val intProgression = 2..1
+    konst intList = mutableListOf<Int>()
+    konst intProgression = 2..1
     for (i in intProgression step 2) {
         intList += i
     }
     assertTrue(intList.isEmpty())
 
-    val longList = mutableListOf<Long>()
-    val longProgression = 2L..1L
+    konst longList = mutableListOf<Long>()
+    konst longProgression = 2L..1L
     for (i in longProgression step 2L) {
         longList += i
     }
     assertTrue(longList.isEmpty())
 
-    val charList = mutableListOf<Char>()
-    val charProgression = 'b'..'a'
+    konst charList = mutableListOf<Char>()
+    konst charProgression = 'b'..'a'
     for (i in charProgression step 2) {
         charList += i
     }

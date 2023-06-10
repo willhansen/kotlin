@@ -3,20 +3,20 @@ var barStorage = "Fail"
 
 var Double.foo: String
     get() = fooStorage
-    set(value) {
-        fooStorage = value
+    set(konstue) {
+        fooStorage = konstue
     }
 
 var Long.bar: String
     get() = barStorage
-    set(value) {
-        barStorage = value
+    set(konstue) {
+        barStorage = konstue
     }
 
 fun box(): String {
-    val d = 1.0
+    konst d = 1.0
     d.foo = "O"
-    val l = 1L
+    konst l = 1L
     l.bar = "K"
     return d.foo + l.bar
 }

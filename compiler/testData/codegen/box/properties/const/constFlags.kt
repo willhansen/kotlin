@@ -6,24 +6,24 @@
 @file:JvmName("XYZ")
 import java.lang.reflect.Modifier
 
-private const val privateConst: Int = 1
-public const val publicConst: Int = 3
+private const konst privateConst: Int = 1
+public const konst publicConst: Int = 3
 
 public object A {
-    private const val privateConst: Int = 1
-    public const val publicConst: Int = 3
+    private const konst privateConst: Int = 1
+    public const konst publicConst: Int = 3
 }
 
 public class B {
     companion object {
-        private const val privateConst: Int = 1
-        protected const val protectedConst: Int = 2
-        public const val publicConst: Int = 3
+        private const konst privateConst: Int = 1
+        protected const konst protectedConst: Int = 2
+        public const konst publicConst: Int = 3
     }
 }
 
 fun check(clazz: Class<*>, expectProtected: Boolean = true) {
-    val fields = clazz.declaredFields.filter { it.name.contains("Const") }
+    konst fields = clazz.declaredFields.filter { it.name.contains("Const") }
 
     assert(fields.all { Modifier.isStatic(it.modifiers) }) { "`$clazz` contains non-static fields" }
 

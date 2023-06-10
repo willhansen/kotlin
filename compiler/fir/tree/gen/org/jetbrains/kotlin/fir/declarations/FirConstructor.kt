@@ -26,26 +26,26 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirConstructor : FirFunction(), FirTypeParameterRefsOwner, FirContractDescriptionOwner {
-    abstract override val source: KtSourceElement?
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract override val returnTypeRef: FirTypeRef
-    abstract override val receiverParameter: FirReceiverParameter?
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val containerSource: DeserializedContainerSource?
-    abstract override val dispatchReceiverType: ConeSimpleKotlinType?
-    abstract override val contextReceivers: List<FirContextReceiver>
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract override val valueParameters: List<FirValueParameter>
-    abstract override val contractDescription: FirContractDescription
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val symbol: FirConstructorSymbol
-    abstract val delegatedConstructor: FirDelegatedConstructorCall?
-    abstract override val body: FirBlock?
-    abstract val isPrimary: Boolean
+    abstract override konst source: KtSourceElement?
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst returnTypeRef: FirTypeRef
+    abstract override konst receiverParameter: FirReceiverParameter?
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst containerSource: DeserializedContainerSource?
+    abstract override konst dispatchReceiverType: ConeSimpleKotlinType?
+    abstract override konst contextReceivers: List<FirContextReceiver>
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract override konst konstueParameters: List<FirValueParameter>
+    abstract override konst contractDescription: FirContractDescription
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst symbol: FirConstructorSymbol
+    abstract konst delegatedConstructor: FirDelegatedConstructorCall?
+    abstract override konst body: FirBlock?
+    abstract konst isPrimary: Boolean
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitConstructor(this, data)
 

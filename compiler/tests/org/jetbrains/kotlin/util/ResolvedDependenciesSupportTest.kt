@@ -14,7 +14,7 @@ import org.junit.Test
 class ResolvedDependenciesSupportTest {
     @Test
     fun success1() {
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 io.ktor:ktor-io,io.ktor:ktor-io-macosx64[1.5.4] #0[1.5.4]
         |${'\t'}/some/path/ktor-io.klib
@@ -30,17 +30,17 @@ class ResolvedDependenciesSupportTest {
         |
         """.trimMargin()
 
-        val (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
+        konst (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
             fail("Unexpected failure at line $lineNo: $line")
         }
-        val restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
+        konst restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
 
         assertEquals(originalText, restoredText)
     }
 
     @Test
     fun success2() {
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
@@ -49,17 +49,17 @@ class ResolvedDependenciesSupportTest {
         |
         """.trimMargin()
 
-        val (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
+        konst (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
             fail("Unexpected failure at line $lineNo: $line")
         }
-        val restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
+        konst restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
 
         assertEquals(originalText, restoredText)
     }
 
     @Test
     fun success3() {
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 org.jetbrains.kotlin:kotlin-stdlib-common[1.5.0] #2[1.4.32] #3[1.5.0] #4[1.5.0] #5[1.4.32] #6[1.4.32] #7[1.4.32] #8[1.4.32]
         |${'\t'}/some/path/kotlin-stdlib-common-1.5.0.jar
@@ -84,17 +84,17 @@ class ResolvedDependenciesSupportTest {
         |
         """.trimMargin()
 
-        val (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
+        konst (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
             fail("Unexpected failure at line $lineNo: $line")
         }
-        val restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
+        konst restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
 
         assertEquals(originalText, restoredText)
     }
 
     @Test
     fun success4() {
-        val originalText = """
+        konst originalText = """
         |0 baz-native,foo,org.sample.bar
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
@@ -103,10 +103,10 @@ class ResolvedDependenciesSupportTest {
         |
         """.trimMargin()
 
-        val (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
+        konst (deserializedModules, sourceCodeModuleId) = ResolvedDependenciesSupport.deserialize(originalText) { lineNo, line ->
             fail("Unexpected failure at line $lineNo: $line")
         }
-        val restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
+        konst restoredText = ResolvedDependenciesSupport.serialize(ResolvedDependencies(deserializedModules, sourceCodeModuleId))
 
         assertEquals(originalText, restoredText)
     }
@@ -114,7 +114,7 @@ class ResolvedDependenciesSupportTest {
     @Test(expected = NoSuchElementException::class)
     fun failure1() {
         // There is no record with number 42!
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0] #42[42.42]
         |${'\t'}/some/path/liba.klib
@@ -134,7 +134,7 @@ class ResolvedDependenciesSupportTest {
     @Test(expected = MyException::class)
     fun failure2() {
         // Name not specified.
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
@@ -154,7 +154,7 @@ class ResolvedDependenciesSupportTest {
     @Test(expected = MyException::class)
     fun failure3() {
         // Version not specified.
-        val originalText = """
+        konst originalText = """
         |0 \
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
@@ -174,7 +174,7 @@ class ResolvedDependenciesSupportTest {
     @Test(expected = MyException::class)
     fun failure4() {
         // Source code module ID not specified.
-        val originalText = """
+        konst originalText = """
         |0
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
@@ -194,7 +194,7 @@ class ResolvedDependenciesSupportTest {
     @Test(expected = MyException::class)
     fun failure5() {
         // Source code module ID not specified.
-        val originalText = """
+        konst originalText = """
         |1 org.sample:liba,org.sample:liba-native[2.0] #0[2.0] #2[1.0]
         |${'\t'}/some/path/liba.klib
         |2 org.sample:libb,org.sample:libb-native #0[1.0]

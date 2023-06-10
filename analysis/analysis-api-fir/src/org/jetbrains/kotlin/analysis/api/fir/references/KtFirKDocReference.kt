@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.kdoc.psi.impl.KDocName
 
 internal class KtFirKDocReference(element: KDocName) : KDocReference(element), KtFirReference {
     override fun KtAnalysisSession.resolveToSymbols(): Collection<KtSymbol> {
-        val fullFqName = generateSequence(element) { it.parent as? KDocName }.last().getQualifiedNameAsFqName()
-        val selectedFqName = element.getQualifiedNameAsFqName()
+        konst fullFqName = generateSequence(element) { it.parent as? KDocName }.last().getQualifiedNameAsFqName()
+        konst selectedFqName = element.getQualifiedNameAsFqName()
         return KDocReferenceResolver.resolveKdocFqName(selectedFqName, fullFqName, element)
     }
 }

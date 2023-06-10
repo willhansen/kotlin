@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.name.Name
  * A representation of a simple name. Examples:
  * 1) name of class without package and outer class name (if this is nested class).
  * 2) name of class member such as property or function.
- * 3) name of type parameter, name of value parameter.
+ * 3) name of type parameter, name of konstue parameter.
  *
  * New instances are created via [create] method which encapsulates interning to avoid duplicated instances.
  */
-class CirName private constructor(val name: String) {
+class CirName private constructor(konst name: String) {
     override fun equals(other: Any?): Boolean = other is CirName && (other === this || other.name == name)
     override fun hashCode(): Int = hashCode(name)
     override fun toString(): String = name
@@ -34,7 +34,7 @@ class CirName private constructor(val name: String) {
         fun create(name: String): CirName = interner.intern(CirName(name))
         fun create(name: Name): CirName = create(name.asString())
 
-        private val interner = Interner<CirName>()
+        private konst interner = Interner<CirName>()
     }
 }
 
@@ -43,7 +43,7 @@ class CirName private constructor(val name: String) {
  *
  * New instances are created via [create] method which encapsulates interning to avoid duplicated instances.
  */
-class CirPackageName private constructor(val segments: Array<String>) {
+class CirPackageName private constructor(konst segments: Array<String>) {
     override fun equals(other: Any?): Boolean = other is CirPackageName && (other === this || other.segments.contentEquals(segments))
     override fun hashCode(): Int = hashCode(segments)
     override fun toString(): String = segments.joinToString(".")
@@ -66,13 +66,13 @@ class CirPackageName private constructor(val segments: Array<String>) {
     }
 
     companion object {
-        val ROOT: CirPackageName = CirPackageName(emptyArray())
+        konst ROOT: CirPackageName = CirPackageName(emptyArray())
 
         fun create(packageFqName: String): CirPackageName = create(splitComplexNameToArray(packageFqName, ".") { it })
         fun create(packageFqName: FqName): CirPackageName = if (packageFqName.isRoot) ROOT else create(packageFqName.asString())
         fun create(segments: Array<String>): CirPackageName = if (segments.isEmpty()) ROOT else interner.intern(CirPackageName(segments))
 
-        private val interner = Interner<CirPackageName>()
+        private konst interner = Interner<CirPackageName>()
 
         init {
             interner.intern(ROOT)
@@ -88,7 +88,7 @@ class CirPackageName private constructor(val segments: Array<String>) {
  *
  * New instances are created via [create] method which encapsulates interning to avoid duplicated instances.
  */
-class CirEntityId private constructor(val packageName: CirPackageName, val relativeNameSegments: Array<CirName>) {
+class CirEntityId private constructor(konst packageName: CirPackageName, konst relativeNameSegments: Array<CirName>) {
 
 
     override fun equals(other: Any?): Boolean {
@@ -117,7 +117,7 @@ class CirEntityId private constructor(val packageName: CirPackageName, val relat
         relativeNameSegments.joinTo(this, ".")
     }
 
-    val isNestedEntity: Boolean get() = relativeNameSegments.size > 1
+    konst isNestedEntity: Boolean get() = relativeNameSegments.size > 1
 
     fun createNestedEntityId(entityName: CirName): CirEntityId = create(packageName, relativeNameSegments + entityName)
 
@@ -126,9 +126,9 @@ class CirEntityId private constructor(val packageName: CirPackageName, val relat
 
     companion object {
         fun create(entityId: String): CirEntityId {
-            val rawPackageName: String
-            val rawRelativeName: String
-            when (val index = entityId.lastIndexOf('/')) {
+            konst rawPackageName: String
+            konst rawRelativeName: String
+            when (konst index = entityId.lastIndexOf('/')) {
                 -1 -> {
                     rawPackageName = ""
                     rawRelativeName = entityId
@@ -139,15 +139,15 @@ class CirEntityId private constructor(val packageName: CirPackageName, val relat
                 }
             }
 
-            val packageName = create(splitComplexNameToArray(rawPackageName, "/") { it })
-            val relativeNameSegments = splitComplexNameToArray(rawRelativeName, ".", CirName::create)
+            konst packageName = create(splitComplexNameToArray(rawPackageName, "/") { it })
+            konst relativeNameSegments = splitComplexNameToArray(rawRelativeName, ".", CirName::create)
 
             return create(packageName, relativeNameSegments)
         }
 
         fun create(classifierId: ClassId): CirEntityId {
-            val packageName = create(classifierId.packageFqName)
-            val relativeNameSegments = splitComplexNameToArray(classifierId.relativeClassName.asString(), ".", CirName::create)
+            konst packageName = create(classifierId.packageFqName)
+            konst relativeNameSegments = splitComplexNameToArray(classifierId.relativeClassName.asString(), ".", CirName::create)
 
             return create(packageName, relativeNameSegments)
         }
@@ -157,12 +157,12 @@ class CirEntityId private constructor(val packageName: CirPackageName, val relat
         fun create(packageName: CirPackageName, relativeNameSegments: Array<CirName>): CirEntityId =
             interner.intern(CirEntityId(packageName, relativeNameSegments))
 
-        private val interner = Interner<CirEntityId>()
+        private konst interner = Interner<CirEntityId>()
     }
 }
 
 private inline fun <reified T> splitComplexNameToArray(complexName: String, delimiter: String, transform: (String) -> T): Array<T> {
     if (complexName.isEmpty()) return emptyArray()
-    val segments = complexName.split(delimiter)
+    konst segments = complexName.split(delimiter)
     return Array(segments.size) { index -> transform(segments[index]) }
 }

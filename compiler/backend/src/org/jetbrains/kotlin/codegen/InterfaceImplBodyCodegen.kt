@@ -41,11 +41,11 @@ class InterfaceImplBodyCodegen(
     private var isAnythingGenerated: Boolean = false
         get() = (v as InterfaceImplClassBuilder).isAnythingGenerated
 
-    private val defaultImplType = typeMapper.mapDefaultImpls(descriptor)
+    private konst defaultImplType = typeMapper.mapDefaultImpls(descriptor)
 
     override fun generateDeclaration() {
-        val codegenFlags = ACC_PUBLIC or ACC_FINAL or ACC_SUPER
-        val flags = if (state.classBuilderMode == ClassBuilderMode.LIGHT_CLASSES) codegenFlags or ACC_STATIC else codegenFlags
+        konst codegenFlags = ACC_PUBLIC or ACC_FINAL or ACC_SUPER
+        konst flags = if (state.classBuilderMode == ClassBuilderMode.LIGHT_CLASSES) codegenFlags or ACC_STATIC else codegenFlags
         v.defineClass(
                 myClass.psiOrParent, state.classFileVersion, flags,
                 defaultImplType.internalName,
@@ -67,7 +67,7 @@ class InterfaceImplBodyCodegen(
             if (memberDescriptor.visibility == DescriptorVisibilities.INVISIBLE_FAKE) continue
             if (memberDescriptor.modality == Modality.ABSTRACT) continue
 
-            val implementation = findImplementationFromInterface(memberDescriptor) ?: continue
+            konst implementation = findImplementationFromInterface(memberDescriptor) ?: continue
 
             // If implementation is a default interface method (JVM 8 only)
             if (implementation.isDefinitelyNotDefaultImplsMethod()) continue
@@ -77,13 +77,13 @@ class InterfaceImplBodyCodegen(
             }
             else if (memberDescriptor is PropertyDescriptor) {
                 implementation as PropertyDescriptor
-                val getter = memberDescriptor.getter
-                val implGetter = implementation.getter
+                konst getter = memberDescriptor.getter
+                konst implGetter = implementation.getter
                 if (getter != null && implGetter != null) {
                     generateDelegationToSuperDefaultImpls(getter, implGetter)
                 }
-                val setter = memberDescriptor.setter
-                val implSetter = implementation.setter
+                konst setter = memberDescriptor.setter
+                konst implSetter = implementation.setter
                 if (setter != null && implSetter != null) {
                     generateDelegationToSuperDefaultImpls(setter, implSetter)
                 }
@@ -94,7 +94,7 @@ class InterfaceImplBodyCodegen(
     }
 
     private fun generateDelegationToSuperDefaultImpls(descriptor: FunctionDescriptor, implementation: FunctionDescriptor) {
-        val delegateTo = firstSuperMethodFromKotlin(descriptor, implementation) as FunctionDescriptor? ?: return
+        konst delegateTo = firstSuperMethodFromKotlin(descriptor, implementation) as FunctionDescriptor? ?: return
 
         // We can't call super methods from Java 1.8 interfaces because that requires INVOKESPECIAL which is forbidden from TImpl class
         if (delegateTo is JavaMethodDescriptor) return
@@ -107,11 +107,11 @@ class InterfaceImplBodyCodegen(
                 descriptor,
                 object : FunctionGenerationStrategy.CodegenBased(state) {
                     override fun doGenerateBody(codegen: ExpressionCodegen, signature: JvmMethodSignature) {
-                        val iv = codegen.v
+                        konst iv = codegen.v
 
-                        val method = typeMapper.mapToCallableMethod(delegateTo, true)
-                        val myParameters = signature.valueParameters
-                        val calleeParameters = method.getValueParameters()
+                        konst method = typeMapper.mapToCallableMethod(delegateTo, true)
+                        konst myParameters = signature.konstueParameters
+                        konst calleeParameters = method.getValueParameters()
 
                         if (myParameters.size != calleeParameters.size) {
                             throw AssertionError(
@@ -123,9 +123,9 @@ class InterfaceImplBodyCodegen(
                         }
 
                         var k = 0
-                        val it = calleeParameters.iterator()
+                        konst it = calleeParameters.iterator()
                         for (parameter in myParameters) {
-                            val type = parameter.asmType
+                            konst type = parameter.asmType
                             StackValue.local(k, type).put(it.next().asmType, iv)
                             k += type.size
                         }
@@ -150,7 +150,7 @@ class InterfaceImplBodyCodegen(
         }
     }
 
-    private class InterfaceImplClassBuilder(private val v: ClassBuilder) : DelegatingClassBuilder() {
+    private class InterfaceImplClassBuilder(private konst v: ClassBuilder) : DelegatingClassBuilder() {
         private var shouldCount: Boolean = true
         var isAnythingGenerated: Boolean = false
             private set

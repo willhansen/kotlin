@@ -30,18 +30,18 @@ import kotlin.properties.Delegates
 
 @OptIn(FirImplementationDetail::class)
 class FirJavaValueParameter @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin.Java,
+    override konst source: KtSourceElement?,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin.Java,
     resolvePhase: FirResolvePhase,
-    override val attributes: FirDeclarationAttributes,
+    override konst attributes: FirDeclarationAttributes,
     override var returnTypeRef: FirTypeRef,
-    override val name: Name,
-    override val symbol: FirValueParameterSymbol,
+    override konst name: Name,
+    override konst symbol: FirValueParameterSymbol,
     annotationBuilder: () -> List<FirAnnotation>,
     override var defaultValue: FirExpression?,
-    override val containingFunctionSymbol: FirFunctionSymbol<*>,
-    override val isVararg: Boolean,
+    override konst containingFunctionSymbol: FirFunctionSymbol<*>,
+    override konst isVararg: Boolean,
 ) : FirValueParameter() {
     init {
         symbol.bind(this)
@@ -50,57 +50,57 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val isCrossinline: Boolean
+    override konst isCrossinline: Boolean
         get() = false
 
-    override val isNoinline: Boolean
+    override konst isNoinline: Boolean
         get() = false
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = true
 
-    override val isVar: Boolean
+    override konst isVar: Boolean
         get() = false
 
-    override val annotations: List<FirAnnotation> by lazy { annotationBuilder() }
+    override konst annotations: List<FirAnnotation> by lazy { annotationBuilder() }
 
-    override val receiverParameter: FirReceiverParameter?
+    override konst receiverParameter: FirReceiverParameter?
         get() = null
 
-    override val deprecationsProvider: DeprecationsProvider
+    override konst deprecationsProvider: DeprecationsProvider
         get() = EmptyDeprecationsProvider
 
-    override val initializer: FirExpression?
+    override konst initializer: FirExpression?
         get() = null
 
-    override val delegate: FirExpression?
+    override konst delegate: FirExpression?
         get() = null
 
-    override val getter: FirPropertyAccessor?
+    override konst getter: FirPropertyAccessor?
         get() = null
 
-    override val setter: FirPropertyAccessor?
+    override konst setter: FirPropertyAccessor?
         get() = null
 
-    override val backingField: FirBackingField?
+    override konst backingField: FirBackingField?
         get() = null
 
-    override val controlFlowGraphReference: FirControlFlowGraphReference?
+    override konst controlFlowGraphReference: FirControlFlowGraphReference?
         get() = null
 
-    override val typeParameters: List<FirTypeParameterRef>
+    override konst typeParameters: List<FirTypeParameterRef>
         get() = emptyList()
 
-    override val status: FirDeclarationStatus
+    override konst status: FirDeclarationStatus
         get() = FirResolvedDeclarationStatusImpl.DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = null
 
-    override val dispatchReceiverType: ConeSimpleKotlinType?
+    override konst dispatchReceiverType: ConeSimpleKotlinType?
         get() = null
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
@@ -182,7 +182,7 @@ class FirJavaValueParameter @FirImplementationDetail constructor(
     }
 
     override fun replaceDefaultValue(newDefaultValue: FirExpression?) {
-        error("Java value parameter cannot has default value")
+        error("Java konstue parameter cannot has default konstue")
     }
 
     override fun replaceGetter(newGetter: FirPropertyAccessor?) {
@@ -241,14 +241,14 @@ inline fun buildJavaValueParameterCopy(original: FirValueParameter, init: FirJav
     contract {
         callsInPlace(init, InvocationKind.EXACTLY_ONCE)
     }
-    val copyBuilder = FirJavaValueParameterBuilder()
+    konst copyBuilder = FirJavaValueParameterBuilder()
     copyBuilder.source = original.source
     copyBuilder.moduleData = original.moduleData
     copyBuilder.attributes = original.attributes.copy()
     copyBuilder.isFromSource = original.origin.fromSource
     copyBuilder.returnTypeRef = original.returnTypeRef
     copyBuilder.name = original.name
-    val annotations = original.annotations
+    konst annotations = original.annotations
     copyBuilder.annotationBuilder = { annotations }
     copyBuilder.defaultValue = original.defaultValue
     copyBuilder.containingFunctionSymbol = original.containingFunctionSymbol

@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.platform
  * it still can be applicable for [TargetPlatform]s with [componentPlatforms] > 1, e.g. when it consists
  * of two version of JDK, JDK and Android, several versions of Android API, etc.
  */
-open class TargetPlatform(val componentPlatforms: Set<SimplePlatform>) : Collection<SimplePlatform> by componentPlatforms {
+open class TargetPlatform(konst componentPlatforms: Set<SimplePlatform>) : Collection<SimplePlatform> by componentPlatforms {
     init {
         if (componentPlatforms.isEmpty()) throw IllegalArgumentException("Don't instantiate TargetPlatform with empty set of platforms")
     }
@@ -56,31 +56,31 @@ open class TargetPlatform(val componentPlatforms: Set<SimplePlatform>) : Collect
  *
  * Ideally, each specific subtype should be either a data class or singleton.
  */
-abstract class SimplePlatform(val platformName: String) {
+abstract class SimplePlatform(konst platformName: String) {
     override fun toString(): String {
-        val targetName = targetName
+        konst targetName = targetName
         return if (targetName.isNotEmpty()) "$platformName ($targetName)" else platformName
     }
 
     // description of TargetPlatformVersion or name of custom platform-specific target; used in serialization
-    open val targetName: String
+    open konst targetName: String
         get() = targetPlatformVersion.description
 
     /** See KDoc for [TargetPlatform.oldFashionedDescription] */
-    abstract val oldFashionedDescription: String
+    abstract konst oldFashionedDescription: String
 
     // FIXME(dsavvinov): hack to allow injection inject JvmTarget into container.
     //   Proper fix would be to rewrite clients to get JdkPlatform from container, and pull JvmTarget from it
     //   (this will also remove need in TargetPlatformVersion as the whole, and, in particular, ugly passing
     //   of TargetPlatformVersion.NoVersion in non-JVM code)
-    open val targetPlatformVersion: TargetPlatformVersion = TargetPlatformVersion.NoVersion
+    open konst targetPlatformVersion: TargetPlatformVersion = TargetPlatformVersion.NoVersion
 }
 
 interface TargetPlatformVersion {
-    val description: String
+    konst description: String
 
     object NoVersion : TargetPlatformVersion {
-        override val description = ""
+        override konst description = ""
     }
 }
 
@@ -93,7 +93,7 @@ fun TargetPlatform?.isMultiPlatform(): Boolean = this != null && size > 1
  * Whether this is "Common" platform in its classical sense (MPP v1).
  */
 fun TargetPlatform?.isCommon(): Boolean = isMultiPlatform() && this!!.iterator().let { i ->
-    val firstPlatformName = i.next().platformName
+    konst firstPlatformName = i.next().platformName
     while (i.hasNext()) {
         if (i.next().platformName != firstPlatformName) return@let true
     }

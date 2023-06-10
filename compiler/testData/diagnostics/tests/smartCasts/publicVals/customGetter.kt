@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 public class X {
-    private val x : String? = null
-    public val y: CharSequence?
+    private konst x : String? = null
+    public konst y: CharSequence?
         get() = x?.subSequence(0, 1)
     public fun fn(): Int {
         if (y != null)

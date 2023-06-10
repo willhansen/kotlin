@@ -46,7 +46,7 @@ class ReifiedTypeParameterAnnotationChecker : DeclarationChecker {
         diagnosticHolder: DiagnosticSink
     ) {
         for (reifiedTypeParameterDescriptor in typeParameterDescriptors.filter { it.isReified }) {
-            val typeParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(reifiedTypeParameterDescriptor)
+            konst typeParameterDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(reifiedTypeParameterDescriptor)
             if (typeParameterDeclaration !is KtTypeParameter) throw AssertionError("KtTypeParameter expected")
 
             diagnosticHolder.report(

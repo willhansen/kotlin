@@ -27,11 +27,11 @@ open class C : A() {
 open class D: C(), Y, Z
 
 @Test fun runTest() {
-    val d = D()
-    val y: Y = d
-    val z: Z = d
-    val c: C = d
-    val a: A = d
+    konst d = D()
+    konst y: Y = d
+    konst z: Z = d
+    konst c: C = d
+    konst a: A = d
     println(d.foo().toString())
     println(y.foo().toString())
     println(z.foo().toString())

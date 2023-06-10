@@ -31,11 +31,11 @@ open internal class NonCapturingJointSet(children: List<AbstractSet>, fSet: FSet
      * Returns startIndex+shift, the next position to match
      */
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val start = matchResult.getConsumed(groupIndex)
+        konst start = matchResult.getConsumed(groupIndex)
         matchResult.setConsumed(groupIndex, startIndex)
 
         children.forEach {
-            val shift = it.matches(startIndex, testString, matchResult)
+            konst shift = it.matches(startIndex, testString, matchResult)
             if (shift >= 0) {
                 return shift
             }
@@ -45,7 +45,7 @@ open internal class NonCapturingJointSet(children: List<AbstractSet>, fSet: FSet
         return -1
     }
 
-    override val name: String
+    override konst name: String
         get() = "NonCapturingJointSet"
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean {

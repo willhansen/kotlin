@@ -1,36 +1,36 @@
 import kotlin.annotation.AnnotationTarget.*
 
 @Target(ANNOTATION_CLASS)
-annotation class CommonAnnotationForAnnotationClassesOnly(val text: String)
+annotation class CommonAnnotationForAnnotationClassesOnly(konst text: String)
 
 @Target(PROPERTY, PROPERTY_GETTER, PROPERTY_SETTER, FIELD, VALUE_PARAMETER, TYPE_PARAMETER, FUNCTION, CLASS, CONSTRUCTOR, TYPEALIAS, TYPE)
 @JsAnnotationForAnnotationClassesOnly("annotation-class")
 @CommonAnnotationForAnnotationClassesOnly("annotation-class")
-annotation class CommonAnnotation(val text: String)
+annotation class CommonAnnotation(konst text: String)
 
 @Target(ANNOTATION_CLASS)
-annotation class JsAnnotationForAnnotationClassesOnly(val text: String)
+annotation class JsAnnotationForAnnotationClassesOnly(konst text: String)
 
 @Target(PROPERTY, PROPERTY_GETTER, PROPERTY_SETTER, FIELD, VALUE_PARAMETER, TYPE_PARAMETER, FUNCTION, CLASS, CONSTRUCTOR, TYPEALIAS, TYPE)
 @JsAnnotationForAnnotationClassesOnly("annotation-class")
 @CommonAnnotationForAnnotationClassesOnly("annotation-class")
-annotation class JsAnnotation(val text: String)
+annotation class JsAnnotation(konst text: String)
 
 @JsAnnotation("property")
 @CommonAnnotation("property")
 var propertyWithoutBackingField
     @JsAnnotation("getter") @CommonAnnotation("getter") get() = 3.14
-    @JsAnnotation("setter") @CommonAnnotation("setter") set(@JsAnnotation("parameter") @CommonAnnotation("parameter") value) = Unit
+    @JsAnnotation("setter") @CommonAnnotation("setter") set(@JsAnnotation("parameter") @CommonAnnotation("parameter") konstue) = Unit
 
 @field:JsAnnotation("field")
 @field:CommonAnnotation("field")
-val propertyWithBackingField = 3.14
+konst propertyWithBackingField = 3.14
 
 @delegate:JsAnnotation("field")
 @delegate:CommonAnnotation("field")
-val propertyWithDelegateField: Int by lazy { 42 }
+konst propertyWithDelegateField: Int by lazy { 42 }
 
-val <
+konst <
         @JsAnnotation("type-parameter")
         @CommonAnnotation("type-parameter")
         T : CharSequence>
@@ -56,11 +56,11 @@ fun <
 
 @JsAnnotation("class")
 @CommonAnnotation("class")
-class AnnotatedClass @JsAnnotation("constructor") @CommonAnnotation("constructor") constructor(val value: String)
+class AnnotatedClass @JsAnnotation("constructor") @CommonAnnotation("constructor") constructor(konst konstue: String)
 
 @JsAnnotation("js-only-class")
 @CommonAnnotation("js-only-class")
-class JsOnlyAnnotatedClass @JsAnnotation("js-only-constructor") @CommonAnnotation("js-only-constructor") constructor(val value: String)
+class JsOnlyAnnotatedClass @JsAnnotation("js-only-constructor") @CommonAnnotation("js-only-constructor") constructor(konst konstue: String)
 
 @JsAnnotation("lifted-up-type-alias")
 @CommonAnnotation("lifted-up-type-alias")

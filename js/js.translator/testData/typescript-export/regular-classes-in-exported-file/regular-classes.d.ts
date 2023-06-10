@@ -12,15 +12,15 @@ declare namespace JS_TESTS {
             constructor(x: string, y: boolean);
             get x(): string;
             get y(): boolean;
-            set y(value: boolean);
+            set y(konstue: boolean);
         }
         class A3 {
             constructor();
             get x(): number;
         }
         class A4<T> {
-            constructor(value: T);
-            get value(): T;
+            constructor(konstue: T);
+            get konstue(): T;
             test(): T;
         }
         class A5 {

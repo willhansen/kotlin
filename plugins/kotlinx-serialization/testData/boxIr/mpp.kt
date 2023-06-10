@@ -10,10 +10,10 @@
 import kotlinx.serialization.*
 
 @Serializable
-class Bar<T>(val t: T)
+class Bar<T>(konst t: T)
 
 @Serializable
-class Wrapper(val b: Bar<String>)
+class Wrapper(konst b: Bar<String>)
 
 // MODULE: jvm()()(common)
 // TARGET_PLATFORM: JVM

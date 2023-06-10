@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.ir.util.findDeclaration
 import org.jetbrains.kotlin.ir.util.render
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-class JavaLikeCounterLoopBuilder(private val context: CommonBackendContext) {
-    private val booleanNot =
+class JavaLikeCounterLoopBuilder(private konst context: CommonBackendContext) {
+    private konst booleanNot =
         context.irBuiltIns.booleanClass.owner.findDeclaration<IrSimpleFunction> {
             it.name == OperatorNameConventions.NOT
         } ?: error("No '${OperatorNameConventions.NOT}' in ${context.irBuiltIns.booleanClass.owner.render()}")
@@ -47,19 +47,19 @@ class JavaLikeCounterLoopBuilder(private val context: CommonBackendContext) {
         //              true
         //          }
         //      )
-        val bodyBlock = newBody as? IrContainerExpression
+        konst bodyBlock = newBody as? IrContainerExpression
             ?: throw AssertionError("newBody: ${newBody?.dump()}")
-        val forLoopNextBlockIndex = bodyBlock.statements.indexOfFirst {
+        konst forLoopNextBlockIndex = bodyBlock.statements.indexOfFirst {
             it is IrContainerExpression && it.origin == IrStatementOrigin.FOR_LOOP_NEXT
         }
         if (forLoopNextBlockIndex < 0) {
             throw AssertionError("No FOR_LOOP_NEXT block in bodyBlock: ${bodyBlock.dump()}")
         }
-        val forLoopNextBlock = bodyBlock.statements[forLoopNextBlockIndex] as IrContainerExpression
-        val inductionVariableUpdate = forLoopNextBlock.statements.last() as? IrSetValue
+        konst forLoopNextBlock = bodyBlock.statements[forLoopNextBlockIndex] as IrContainerExpression
+        konst inductionVariableUpdate = forLoopNextBlock.statements.last() as? IrSetValue
             ?: throw AssertionError("forLoopNextBlock.last: ${forLoopNextBlock.statements.last().dump()}")
 
-        val doWhileLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, loopOrigin)
+        konst doWhileLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, loopOrigin)
         doWhileLoop.label = oldLoop.label
 
         bodyBlock.statements[forLoopNextBlockIndex] = IrCompositeImpl(
@@ -74,9 +74,9 @@ class JavaLikeCounterLoopBuilder(private val context: CommonBackendContext) {
 
         doWhileLoop.body = bodyBlock
 
-        val stepStartOffset = inductionVariableUpdate.startOffset
-        val stepEndOffset = inductionVariableUpdate.endOffset
-        val doWhileCondition =
+        konst stepStartOffset = inductionVariableUpdate.startOffset
+        konst stepEndOffset = inductionVariableUpdate.endOffset
+        konst doWhileCondition =
             IrCompositeImpl(
                 stepStartOffset, stepEndOffset, context.irBuiltIns.booleanType, null,
                 listOf(
@@ -94,9 +94,9 @@ class JavaLikeCounterLoopBuilder(private val context: CommonBackendContext) {
         newLoopCondition: IrExpression,
         doWhileLoop: IrDoWhileLoop
     ): IrWhenImpl {
-        val conditionStartOffset = newLoopCondition.startOffset
-        val conditionEndOffset = newLoopCondition.endOffset
-        val negatedCondition =
+        konst conditionStartOffset = newLoopCondition.startOffset
+        konst conditionEndOffset = newLoopCondition.endOffset
+        konst negatedCondition =
             IrCallImpl.fromSymbolOwner(conditionStartOffset, conditionEndOffset, booleanNot.symbol).apply {
                 dispatchReceiver = newLoopCondition
             }
@@ -128,20 +128,20 @@ class JavaLikeCounterLoopBuilder(private val context: CommonBackendContext) {
         //          { <next'> }
         //          <body>
         //      } while ( { if (!<condition>) break; <updateInductionVar>; true } )
-        val doWhileBody = doWhileLoop.body as? IrContainerExpression ?: return
+        konst doWhileBody = doWhileLoop.body as? IrContainerExpression ?: return
         if (doWhileBody.origin != IrStatementOrigin.FOR_LOOP_INNER_WHILE) return
-        val doWhileLoopNext = doWhileBody.statements[0] as? IrContainerExpression ?: return
+        konst doWhileLoopNext = doWhileBody.statements[0] as? IrContainerExpression ?: return
         if (doWhileLoopNext.origin != IrStatementOrigin.FOR_LOOP_NEXT) return
 
-        val updateInductionVarIndex = doWhileLoopNext.statements
+        konst updateInductionVarIndex = doWhileLoopNext.statements
             .indexOfFirst { it is IrSetValue && it.symbol.owner.isInductionVariable(context) }
         if (updateInductionVarIndex < 0) return
-        val updateInductionVar = doWhileLoopNext.statements[updateInductionVarIndex]
+        konst updateInductionVar = doWhileLoopNext.statements[updateInductionVarIndex]
         doWhileLoopNext.statements.removeAt(updateInductionVarIndex)
 
-        val loopCondition = doWhileLoop.condition
-        val loopConditionStartOffset = loopCondition.startOffset
-        val loopConditionEndOffset = loopCondition.endOffset
+        konst loopCondition = doWhileLoop.condition
+        konst loopConditionStartOffset = loopCondition.startOffset
+        konst loopConditionEndOffset = loopCondition.endOffset
         doWhileLoop.condition = IrCompositeImpl(
             loopConditionStartOffset, loopConditionEndOffset, loopCondition.type,
             origin = null,

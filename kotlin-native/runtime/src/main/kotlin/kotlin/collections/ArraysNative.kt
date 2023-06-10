@@ -13,7 +13,7 @@ package kotlin.collections
  * @sample samples.collections.Collections.Collections.collectionToTypedArray
  */
 public actual inline fun <reified T> Collection<T>.toTypedArray(): Array<T> {
-    val result = arrayOfNulls<T>(size)
+    konst result = arrayOfNulls<T>(size)
     var index = 0
     for (element in this) result[index++] = element
     @Suppress("UNCHECKED_CAST")
@@ -25,7 +25,7 @@ internal actual fun <T> copyToArrayImpl(collection: Collection<*>, array: Array<
     if (array.size < collection.size)
         return copyToArrayImpl(collection) as Array<T>
 
-    val iterator = collection.iterator()
+    konst iterator = collection.iterator()
     var index = 0
     while (iterator.hasNext()) {
         array[index++] = iterator.next() as T

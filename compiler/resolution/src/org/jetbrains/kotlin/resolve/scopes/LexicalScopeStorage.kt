@@ -36,11 +36,11 @@ interface LocalRedeclarationChecker {
 
 abstract class LexicalScopeStorage(
     parent: HierarchicalScope,
-    val redeclarationChecker: LocalRedeclarationChecker
+    konst redeclarationChecker: LocalRedeclarationChecker
 ) : LexicalScope {
-    override val parent = parent.takeSnapshot()
+    override konst parent = parent.takeSnapshot()
 
-    protected val addedDescriptors: MutableList<DeclarationDescriptor> = SmartList()
+    protected konst addedDescriptors: MutableList<DeclarationDescriptor> = SmartList()
 
     private var functionsByName: MutableMap<Name, IntList>? = null
     private var variablesAndClassifiersByName: MutableMap<Name, IntList>? = null
@@ -56,9 +56,9 @@ abstract class LexicalScopeStorage(
     override fun getContributedDescriptors(kindFilter: DescriptorKindFilter, nameFilter: (Name) -> Boolean) = addedDescriptors
 
     protected fun addVariableOrClassDescriptor(descriptor: DeclarationDescriptor) {
-        val name = descriptor.name
+        konst name = descriptor.name
         if (name.isSpecial) return
-        val descriptorIndex = addDescriptor(descriptor)
+        konst descriptorIndex = addDescriptor(descriptor)
 
         if (variablesAndClassifiersByName == null) {
             variablesAndClassifiersByName = HashMap()
@@ -69,8 +69,8 @@ abstract class LexicalScopeStorage(
     }
 
     protected fun addFunctionDescriptorInternal(functionDescriptor: FunctionDescriptor) {
-        val name = functionDescriptor.name
-        val descriptorIndex = addDescriptor(functionDescriptor)
+        konst name = functionDescriptor.name
+        konst descriptorIndex = addDescriptor(functionDescriptor)
         if (functionsByName == null) {
             functionsByName = HashMap(1)
         }
@@ -83,7 +83,7 @@ abstract class LexicalScopeStorage(
 
         var list = variablesAndClassifiersByName?.get(name)
         while (list != null) {
-            val descriptorIndex = list.last
+            konst descriptorIndex = list.last
             if (descriptorIndex < descriptorLimit) {
                 return descriptorIndex.descriptorByIndex()
             }
@@ -111,14 +111,14 @@ abstract class LexicalScopeStorage(
         return addedDescriptors.size - 1
     }
 
-    private class IntList(val last: Int, val prev: IntList?)
+    private class IntList(konst last: Int, konst prev: IntList?)
 
     private fun Int.descriptorByIndex() = addedDescriptors[this]
 
-    private operator fun IntList?.plus(value: Int) = IntList(value, this)
+    private operator fun IntList?.plus(konstue: Int) = IntList(konstue, this)
 
     private fun <TDescriptor : DeclarationDescriptor> IntList.toDescriptors(): List<TDescriptor> {
-        val result = ArrayList<TDescriptor>(1)
+        konst result = ArrayList<TDescriptor>(1)
         var rest: IntList? = this
         do {
             @Suppress("UNCHECKED_CAST")

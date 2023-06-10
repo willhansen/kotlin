@@ -1,14 +1,14 @@
 // ISSUE: KT-21463
 // SKIP_TXT
 
-class Bound<T: Number>(val value: T)
+class Bound<T: Number>(konst konstue: T)
 
 fun test_1() {
-    val b: Bound<in Int> = Bound(1)
-    val vl: Number = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>b.value<!>
+    konst b: Bound<in Int> = Bound(1)
+    konst vl: Number = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>b.konstue<!>
 }
 
 fun test_2() {
-    val b: Bound<*> = Bound(1)
-    val vl: Number = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>b.value<!>
+    konst b: Bound<*> = Bound(1)
+    konst vl: Number = <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>b.konstue<!>
 }

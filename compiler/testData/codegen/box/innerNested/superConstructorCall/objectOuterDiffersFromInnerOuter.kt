@@ -1,9 +1,9 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class A {
     fun bar(): Any {
-        return eval {
-            eval {
+        return ekonst {
+            ekonst {
                 object : Inner() {
                     override fun toString() = foo()
                 }

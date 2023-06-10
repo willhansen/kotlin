@@ -1,6 +1,6 @@
-val sb = StringBuilder()
-val o = object : Any() {
-    val name = "123"
+konst sb = StringBuilder()
+konst o = object : Any() {
+    konst name = "123"
 
     fun test() {
         name
@@ -10,15 +10,15 @@ fun test() {
     class Local
     Local()
 }
-val Any.bar get() = "456"
-val String.bar get() = "987"
+konst Any.bar get() = "456"
+konst String.bar get() = "987"
 
-val <!REDECLARATION!>t<!> = "".bar
+konst <!REDECLARATION!>t<!> = "".bar
 
-val p = Pair(0, "")
+konst p = Pair(0, "")
 
-open class Base<T>(val x: T)
+open class Base<T>(konst x: T)
 class Derived : Base<Int>(10)
-val xx = Derived().x + 1
+konst xx = Derived().x + 1
 
-val <!IMPLICIT_NOTHING_PROPERTY_TYPE, REDECLARATION!>t<!> = throw AssertionError("")
+konst <!IMPLICIT_NOTHING_PROPERTY_TYPE, REDECLARATION!>t<!> = throw AssertionError("")

@@ -22,11 +22,11 @@ fun getVisibleSourceSetsFromAssociateCompilations(
 internal fun getVisibleSourceSetsFromAssociateCompilations(
     participatesInCompilations: Set<KotlinCompilation<*>>
 ): List<KotlinSourceSet> {
-    val visibleInCompilations = participatesInCompilations.map {
-        val sourceSetsInAssociatedCompilations = getSourceSetsFromAssociatedCompilations(it)
+    konst visibleInCompilations = participatesInCompilations.map {
+        konst sourceSetsInAssociatedCompilations = getSourceSetsFromAssociatedCompilations(it)
         when (sourceSetsInAssociatedCompilations.size) {
             0 -> emptySet()
-            1 -> sourceSetsInAssociatedCompilations.values.single()
+            1 -> sourceSetsInAssociatedCompilations.konstues.single()
             else -> mutableSetOf<KotlinSourceSet>().apply {
                 for ((_, sourceSets) in sourceSetsInAssociatedCompilations) {
                     addAll(sourceSets)
@@ -46,13 +46,13 @@ internal fun getVisibleSourceSetsFromAssociateCompilations(
 }
 
 class UnsatisfiedSourceSetVisibilityException(
-    val sourceSet: KotlinSourceSet,
-    val compilations: Set<KotlinCompilation<*>>,
-    val visibleSourceSets: List<KotlinSourceSet>,
-    val requiredButNotVisible: Set<KotlinSourceSet>
+    konst sourceSet: KotlinSourceSet,
+    konst compilations: Set<KotlinCompilation<*>>,
+    konst visibleSourceSets: List<KotlinSourceSet>,
+    konst requiredButNotVisible: Set<KotlinSourceSet>
 ) : GradleException() {
 
-    override val message: String?
+    override konst message: String?
         get() = buildString {
             fun singularOrPlural(collection: Collection<*>, singular: String, plural: String = singular + "s") =
                 if (collection.size == 1) singular else plural
@@ -69,15 +69,15 @@ class UnsatisfiedSourceSetVisibilityException(
             append("${sourceSet.name} takes part in the ${singularOrPlural(compilations, "compilation")}:\n")
 
             fun appendCompilationRecursively(compilation: KotlinCompilation<*>, depth: Int) {
-                val isAssociatedCompilation = depth > 0
+                konst isAssociatedCompilation = depth > 0
 
-                val sourceSetsInAssociatedCompilations =
+                konst sourceSetsInAssociatedCompilations =
                     getSourceSetsFromAssociatedCompilations(compilation)
-                val allKotlinSourceSets = compilation.allKotlinSourceSets
+                konst allKotlinSourceSets = compilation.allKotlinSourceSets
 
-                val indent = "  ".repeat(depth + 1)
+                konst indent = "  ".repeat(depth + 1)
 
-                val prefix = if (isAssociatedCompilation)
+                konst prefix = if (isAssociatedCompilation)
                     "$indent- ${"indirectly ".takeIf { depth > 1 }.orEmpty()}associated with"
                 else
                     "$indent-"
@@ -96,8 +96,8 @@ class UnsatisfiedSourceSetVisibilityException(
                 compilation.associateWith.forEach { appendCompilationRecursively(it, depth + 1) }
 
                 if (!isAssociatedCompilation) {
-                    val missingRequiredSourceSets = requiredButNotVisible.filter { missingSourceSet ->
-                        sourceSetsInAssociatedCompilations.values.none { missingSourceSet in it }
+                    konst missingRequiredSourceSets = requiredButNotVisible.filter { missingSourceSet ->
+                        sourceSetsInAssociatedCompilations.konstues.none { missingSourceSet in it }
                     }
 
                     if (missingRequiredSourceSets.isEmpty()) {
@@ -128,14 +128,14 @@ internal fun checkSourceSetVisibilityRequirements(
     sourceSets: Iterable<KotlinSourceSet>,
 ) {
     sourceSets.forEach { sourceSet ->
-        val requiredVisibility = sourceSet.requiresVisibilityOf
-        val inferredVisibility =
+        konst requiredVisibility = sourceSet.requiresVisibilityOf
+        konst inferredVisibility =
             getVisibleSourceSetsFromAssociateCompilations(sourceSet.internal.compilations)
 
-        val requiredButNotVisible = requiredVisibility - inferredVisibility - sourceSet.internal.withDependsOnClosure
+        konst requiredButNotVisible = requiredVisibility - inferredVisibility - sourceSet.internal.withDependsOnClosure
 
         if (requiredButNotVisible.isNotEmpty()) {
-            val compilations = sourceSet.internal.compilations
+            konst compilations = sourceSet.internal.compilations
 
             throw UnsatisfiedSourceSetVisibilityException(
                 sourceSet,

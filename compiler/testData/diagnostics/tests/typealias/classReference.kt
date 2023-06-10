@@ -1,4 +1,4 @@
 // FIR_IDENTICAL
 typealias S = String
 
-val s = S::class
+konst s = S::class

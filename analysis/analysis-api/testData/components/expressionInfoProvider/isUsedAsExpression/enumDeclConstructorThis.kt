@@ -1,4 +1,4 @@
-enum class Enum(val i: Int) {
+enum class Enum(konst i: Int) {
 
     TEST(45),
     PROBE(45),

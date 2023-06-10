@@ -1,12 +1,12 @@
 fun demo() {
-  val abc = 1
-  val a = ""
-  val asd = 1
-  val bar = 5
+  konst abc = 1
+  konst a = ""
+  konst asd = 1
+  konst bar = 5
   fun map(f :  () -> Any?) : Int  = 1
   fun buzz(f :  () -> Any?) : Int  = 1
-  val sdf = 1
-  val foo = 3;
+  konst sdf = 1
+  konst foo = 3;
     "$abc"
     "$"
     "$.$.asdf$\t"

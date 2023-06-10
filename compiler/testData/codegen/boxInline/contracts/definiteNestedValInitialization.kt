@@ -18,7 +18,7 @@ public inline fun <R> myrun(block: () -> R): R {
 import test.*
 
 fun box(): String {
-    val x: Int
+    konst x: Int
     myrun {
         myrun {
             x = 42

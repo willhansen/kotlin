@@ -66,14 +66,14 @@ private fun String.getRootLength(): Int {
  *
  * @return string representing the root for this file, or empty string is this file name is relative.
  */
-internal val File.rootName: String
+internal konst File.rootName: String
     get() = path.substring(0, path.getRootLength())
 
 /**
  * Returns root component of this abstract name, like / from /home/user, or C:\ from C:\file.tmp,
  * or //my.host/home for //my.host/home/user
  */
-internal val File.root: File
+internal konst File.root: File
     get() = File(rootName)
 
 /**
@@ -81,7 +81,7 @@ internal val File.root: File
  *
  * Returns `true` when this file has non-empty root.
  */
-public val File.isRooted: Boolean
+public konst File.isRooted: Boolean
     get() = path.getRootLength() > 0
 
 /**
@@ -92,22 +92,22 @@ public val File.isRooted: Boolean
  *     up to an including the file itself.
  */
 internal data class FilePathComponents
-    internal constructor(public val root: File, public val segments: List<File>) {
+    internal constructor(public konst root: File, public konst segments: List<File>) {
 
     /**
      *  Returns a string representing the root for this file, or an empty string is this file name is relative.
      */
-    public val rootName: String get() = root.path
+    public konst rootName: String get() = root.path
 
     /**
      * Returns `true` when the [root] is not empty.
      */
-    public val isRooted: Boolean get() = root.path.isNotEmpty()
+    public konst isRooted: Boolean get() = root.path.isNotEmpty()
 
     /**
      * Returns the number of elements in the path to the file.
      */
-    public val size: Int get() = segments.size
+    public konst size: Int get() = segments.size
 
     /**
      * Returns a sub-path of the path, starting with the directory at the specified [beginIndex] and up
@@ -126,11 +126,11 @@ internal data class FilePathComponents
  * itself) and returns the resulting collection of components.
  */
 internal fun File.toComponents(): FilePathComponents {
-    val path = path
-    val rootLength = path.getRootLength()
-    val rootName = path.substring(0, rootLength)
-    val subPath = path.substring(rootLength)
-    val list = if (subPath.isEmpty()) listOf() else subPath.split(File.separatorChar).map(::File)
+    konst path = path
+    konst rootLength = path.getRootLength()
+    konst rootName = path.substring(0, rootLength)
+    konst subPath = path.substring(rootLength)
+    konst list = if (subPath.isEmpty()) listOf() else subPath.split(File.separatorChar).map(::File)
     return FilePathComponents(File(rootName), list)
 }
 

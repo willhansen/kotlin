@@ -3,7 +3,7 @@
 package foo
 
 fun box(): String {
-    val chars = mapOf('\u0000' to 0x0000,
+    konst chars = mapOf('\u0000' to 0x0000,
                       '\u0001' to 0x0001,
                       '\u0010' to 0x0010,
                       '\u001F' to 0x001F,

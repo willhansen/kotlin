@@ -2,7 +2,7 @@ FILE fqName:<root> fileName:/thisReferenceBeforeClassDeclared.kt
   FUN name:test visibility:public modality:FINAL <> ($receiver:<root>.WithCompanion) returnType:kotlin.Unit
     $receiver: VALUE_PARAMETER name:<this> type:<root>.WithCompanion
     BLOCK_BODY
-      VAR name:test1 type:<root>.test.<no name provided> [val]
+      VAR name:test1 type:<root>.test.<no name provided> [konst]
         BLOCK type=<root>.test.<no name provided> origin=OBJECT_LITERAL
           CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[<root>.WithCompanion]
             $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.test.<no name provided>
@@ -25,7 +25,7 @@ FILE fqName:<root> fileName:/thisReferenceBeforeClassDeclared.kt
                 public open fun toString (): kotlin.String declared in <root>.WithCompanion
               $this: VALUE_PARAMETER name:<this> type:kotlin.Any
           CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.test.<no name provided>' type=<root>.test.<no name provided> origin=OBJECT_LITERAL
-      VAR name:test2 type:<root>.test.<no name provided> [val]
+      VAR name:test2 type:<root>.test.<no name provided> [konst]
         BLOCK type=<root>.test.<no name provided> origin=OBJECT_LITERAL
           CLASS CLASS name:<no name provided> modality:FINAL visibility:local superTypes:[<root>.WithCompanion]
             $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.test.<no name provided>

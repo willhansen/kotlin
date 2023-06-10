@@ -9,8 +9,8 @@ object Foo2 {
 object Main {
     fun bar() = myWith(Foo2) {
 
-        val x = object {
-            val y = 38["Hello!"]
+        konst x = object {
+            konst y = 38["Hello!"]
         }
         x.y
     }

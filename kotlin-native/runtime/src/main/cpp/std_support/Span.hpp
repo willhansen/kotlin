@@ -32,7 +32,7 @@ template <typename T, std::size_t Extent = dynamic_extent>
 class span {
 public:
     using element_type = T;
-    using value_type = std::remove_cv_t<T>;
+    using konstue_type = std::remove_cv_t<T>;
     using size_type = std::size_t;
     using difference_type = std::ptrdiff_t;
     using pointer = T*;
@@ -159,7 +159,7 @@ template <typename T>
 class span<T, dynamic_extent> {
 public:
     using element_type = T;
-    using value_type = std::remove_cv_t<T>;
+    using konstue_type = std::remove_cv_t<T>;
     using size_type = std::size_t;
     using difference_type = std::ptrdiff_t;
     using pointer = T*;

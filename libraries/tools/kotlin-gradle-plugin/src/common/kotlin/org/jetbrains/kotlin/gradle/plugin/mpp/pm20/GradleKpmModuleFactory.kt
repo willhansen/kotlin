@@ -9,9 +9,9 @@ import org.gradle.api.NamedDomainObjectFactory
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.pm20Extension
 
-open class GradleKpmModuleFactory(private val project: Project) : NamedDomainObjectFactory<GradleKpmModule> {
+open class GradleKpmModuleFactory(private konst project: Project) : NamedDomainObjectFactory<GradleKpmModule> {
     override fun create(name: String): GradleKpmModule {
-        val result = project.objects.newInstance(GradleKpmModuleInternal::class.java, project, name)
+        konst result = project.objects.newInstance(GradleKpmModuleInternal::class.java, project, name)
         registerFragmentFactory(result)
         registerDefaultCommonFragment(result)
         addDefaultDependencyOnMainModule(result)

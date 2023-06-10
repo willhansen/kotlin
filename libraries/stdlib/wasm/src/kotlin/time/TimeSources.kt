@@ -22,7 +22,7 @@ private fun dateNow(): Double =
 
 @SinceKotlin("1.3")
 internal actual object MonotonicTimeSource : TimeSource.WithComparableMarks {
-    private val performance: ExternalInterfaceType? = tryGetPerformance()
+    private konst performance: ExternalInterfaceType? = tryGetPerformance()
 
     private fun read(): Double =
         if (performance != null) getPerformanceNow(performance) else dateNow()
@@ -33,8 +33,8 @@ internal actual object MonotonicTimeSource : TimeSource.WithComparableMarks {
         ValueTimeMark(sumCheckNaN(timeMark.reading + duration.toDouble(DurationUnit.MILLISECONDS)))
 
     actual fun differenceBetween(one: ValueTimeMark, another: ValueTimeMark): Duration {
-        val ms1 = one.reading
-        val ms2 = another.reading
+        konst ms1 = one.reading
+        konst ms2 = another.reading
         return if (ms1 == ms2) Duration.ZERO else (ms1 - ms2).milliseconds
     }
 
@@ -45,4 +45,4 @@ internal actual object MonotonicTimeSource : TimeSource.WithComparableMarks {
 @Suppress("ACTUAL_WITHOUT_EXPECT") // visibility
 internal actual typealias ValueTimeMarkReading = Double
 
-private fun sumCheckNaN(value: Double): Double = value.also { if (it.isNaN()) throw IllegalArgumentException("Summing infinities of different signs") }
+private fun sumCheckNaN(konstue: Double): Double = konstue.also { if (it.isNaN()) throw IllegalArgumentException("Summing infinities of different signs") }

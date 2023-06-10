@@ -23,12 +23,12 @@ fun GradleKpmCommonFragmentFactory(
 )
 
 class GradleKpmCommonFragmentInstantiator(
-    private val module: GradleKpmModule,
-    private val dependencyConfigurationsFactory: GradleKpmFragmentDependencyConfigurationsFactory =
+    private konst module: GradleKpmModule,
+    private konst dependencyConfigurationsFactory: GradleKpmFragmentDependencyConfigurationsFactory =
         GradleKpmDefaultFragmentDependencyConfigurationsFactory
 ) : GradleKpmFragmentFactory.FragmentInstantiator<GradleKpmFragmentInternal> {
     override fun create(name: String): GradleKpmFragmentInternal {
-        val names = FragmentNameDisambiguation(module, name)
+        konst names = FragmentNameDisambiguation(module, name)
         return module.project.objects.newInstance(
             GradleKpmFragmentInternal::class.java,
             module,
@@ -39,7 +39,7 @@ class GradleKpmCommonFragmentInstantiator(
 }
 
 class GradleKpmCommonFragmentConfigurator(
-    private val sourceDirectoriesSetup: GradleKpmSourceDirectoriesConfigurator<GradleKpmFragmentInternal> =
+    private konst sourceDirectoriesSetup: GradleKpmSourceDirectoriesConfigurator<GradleKpmFragmentInternal> =
         GradleKpmDefaultSourceDirectoriesConfigurator
 ) : GradleKpmFragmentFactory.FragmentConfigurator<GradleKpmFragmentInternal> {
     override fun configure(fragment: GradleKpmFragmentInternal) {

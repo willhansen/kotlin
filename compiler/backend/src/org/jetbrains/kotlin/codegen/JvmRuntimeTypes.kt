@@ -28,11 +28,11 @@ import org.jetbrains.kotlin.utils.KotlinExceptionWithAttachments
 
 class JvmRuntimeTypes(
     module: ModuleDescriptor,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val generateOptimizedCallableReferenceSuperClasses: Boolean
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst generateOptimizedCallableReferenceSuperClasses: Boolean
 ) {
-    private val kotlinJvmInternalPackage = MutablePackageFragmentDescriptor(module, FqName("kotlin.jvm.internal"))
-    private val kotlinCoroutinesJvmInternalPackage = MutablePackageFragmentDescriptor(module, COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME)
+    private konst kotlinJvmInternalPackage = MutablePackageFragmentDescriptor(module, FqName("kotlin.jvm.internal"))
+    private konst kotlinCoroutinesJvmInternalPackage = MutablePackageFragmentDescriptor(module, COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME)
 
     private fun internal(className: String, packageFragment: PackageFragmentDescriptor = kotlinJvmInternalPackage): Lazy<ClassDescriptor> =
         lazy { createClass(packageFragment, className) }
@@ -43,29 +43,29 @@ class JvmRuntimeTypes(
     private fun propertyClasses(prefix: String, suffix: String): Lazy<List<ClassDescriptor>> =
         lazy { (0..2).map { i -> createClass(kotlinJvmInternalPackage, prefix + i + suffix) } }
 
-    private val lambda: ClassDescriptor by internal("Lambda")
-    val functionReference: ClassDescriptor by internal("FunctionReference")
-    val functionReferenceImpl: ClassDescriptor by internal("FunctionReferenceImpl")
-    val adaptedFunctionReference: ClassDescriptor by internal("AdaptedFunctionReference")
+    private konst lambda: ClassDescriptor by internal("Lambda")
+    konst functionReference: ClassDescriptor by internal("FunctionReference")
+    konst functionReferenceImpl: ClassDescriptor by internal("FunctionReferenceImpl")
+    konst adaptedFunctionReference: ClassDescriptor by internal("AdaptedFunctionReference")
 
-    private val localVariableReference: ClassDescriptor by internal("LocalVariableReference")
-    private val mutableLocalVariableReference: ClassDescriptor by internal("MutableLocalVariableReference")
+    private konst localVariableReference: ClassDescriptor by internal("LocalVariableReference")
+    private konst mutableLocalVariableReference: ClassDescriptor by internal("MutableLocalVariableReference")
 
-    private val continuationImpl: ClassDescriptor by coroutinesInternal("ContinuationImpl")
-    private val restrictedContinuationImpl: ClassDescriptor by coroutinesInternal("RestrictedContinuationImpl")
-    private val suspendLambda: ClassDescriptor by coroutinesInternal("SuspendLambda")
-    private val restrictedSuspendLambda: ClassDescriptor by coroutinesInternal("RestrictedSuspendLambda")
+    private konst continuationImpl: ClassDescriptor by coroutinesInternal("ContinuationImpl")
+    private konst restrictedContinuationImpl: ClassDescriptor by coroutinesInternal("RestrictedContinuationImpl")
+    private konst suspendLambda: ClassDescriptor by coroutinesInternal("SuspendLambda")
+    private konst restrictedSuspendLambda: ClassDescriptor by coroutinesInternal("RestrictedSuspendLambda")
 
-    private val suspendFunctionInterface: ClassDescriptor? by lazy {
+    private konst suspendFunctionInterface: ClassDescriptor? by lazy {
         createClass(kotlinCoroutinesJvmInternalPackage, "SuspendFunction", ClassKind.INTERFACE)
     }
 
     private fun createCoroutineSuperClass(className: String): ClassDescriptor = createClass(kotlinCoroutinesJvmInternalPackage, className)
 
-    private val propertyReferences: List<ClassDescriptor> by propertyClasses("PropertyReference", "")
-    private val mutablePropertyReferences: List<ClassDescriptor> by propertyClasses("MutablePropertyReference", "")
-    private val propertyReferenceImpls: List<ClassDescriptor> by propertyClasses("PropertyReference", "Impl")
-    private val mutablePropertyReferenceImpls: List<ClassDescriptor> by propertyClasses("MutablePropertyReference", "Impl")
+    private konst propertyReferences: List<ClassDescriptor> by propertyClasses("PropertyReference", "")
+    private konst mutablePropertyReferences: List<ClassDescriptor> by propertyClasses("MutablePropertyReference", "")
+    private konst propertyReferenceImpls: List<ClassDescriptor> by propertyClasses("PropertyReference", "Impl")
+    private konst mutablePropertyReferenceImpls: List<ClassDescriptor> by propertyClasses("MutablePropertyReference", "Impl")
 
     private fun createClass(
         packageFragment: PackageFragmentDescriptor,
@@ -82,7 +82,7 @@ class JvmRuntimeTypes(
         }
 
     fun getSupertypesForClosure(descriptor: FunctionDescriptor): Collection<KotlinType> {
-        val actualFunctionDescriptor =
+        konst actualFunctionDescriptor =
             if (descriptor.isSuspend)
                 getOrCreateJvmSuspendFunctionView(descriptor)
             else
@@ -96,12 +96,12 @@ class JvmRuntimeTypes(
                         }"
             )
 
-        val functionType = createFunctionType(
+        konst functionType = createFunctionType(
             descriptor.builtIns,
             Annotations.EMPTY,
             actualFunctionDescriptor.extensionReceiverParameter?.type,
             actualFunctionDescriptor.contextReceiverParameters.map { it.type },
-            actualFunctionDescriptor.valueParameters.map { it.type },
+            actualFunctionDescriptor.konstueParameters.map { it.type },
             null,
             actualFunctionDescriptor.returnType!!
         )
@@ -140,22 +140,22 @@ class JvmRuntimeTypes(
         isAdaptedCallableReference: Boolean,
         isSuspendConversion: Boolean
     ): Collection<KotlinType> {
-        val receivers = computeExpectedNumberOfReceivers(referencedFunction, isBound)
+        konst receivers = computeExpectedNumberOfReceivers(referencedFunction, isBound)
 
-        val functionType = createFunctionType(
+        konst functionType = createFunctionType(
             referencedFunction.builtIns,
             Annotations.EMPTY,
             if (isBound) null else referencedFunction.extensionReceiverParameter?.type
                 ?: referencedFunction.dispatchReceiverParameter?.type,
             referencedFunction.contextReceiverParameters.map { it.type },
-            anonymousFunctionDescriptor.valueParameters.drop(receivers).map { it.type },
+            anonymousFunctionDescriptor.konstueParameters.drop(receivers).map { it.type },
             null,
             anonymousFunctionDescriptor.returnType!!,
             referencedFunction.isSuspend || isSuspendConversion
         )
 
-        val suspendFunctionType = if (referencedFunction.isSuspend || isSuspendConversion) suspendFunctionInterface?.defaultType else null
-        val superClass = when {
+        konst suspendFunctionType = if (referencedFunction.isSuspend || isSuspendConversion) suspendFunctionInterface?.defaultType else null
+        konst superClass = when {
             generateOptimizedCallableReferenceSuperClasses -> when {
                 isAdaptedCallableReference || isSuspendConversion -> adaptedFunctionReference
                 else -> functionReferenceImpl
@@ -170,12 +170,12 @@ class JvmRuntimeTypes(
             return (if (isMutable) mutableLocalVariableReference else localVariableReference).defaultType
         }
 
-        val arity =
+        konst arity =
             (if (descriptor.extensionReceiverParameter != null) 1 else 0) +
                     (if (descriptor.dispatchReceiverParameter != null) 1 else 0) -
                     if (isBound) 1 else 0
 
-        val classes = when {
+        konst classes = when {
             generateOptimizedCallableReferenceSuperClasses -> if (isMutable) mutablePropertyReferenceImpls else propertyReferenceImpls
             else -> if (isMutable) mutablePropertyReferences else propertyReferences
         }

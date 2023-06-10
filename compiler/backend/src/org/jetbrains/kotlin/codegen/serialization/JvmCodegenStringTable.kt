@@ -15,21 +15,21 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.serialization.DescriptorAwareStringTable
 
 class JvmCodegenStringTable @JvmOverloads constructor(
-    private val typeMapper: KotlinTypeMapperBase,
+    private konst typeMapper: KotlinTypeMapperBase,
     nameResolver: JvmNameResolver? = null
 ) : JvmStringTable(nameResolver), DescriptorAwareStringTable {
     override fun getLocalClassIdReplacement(descriptor: ClassifierDescriptorWithTypeParameters): ClassId =
-        when (val container = descriptor.containingDeclaration) {
+        when (konst container = descriptor.containingDeclaration) {
             is ClassifierDescriptorWithTypeParameters -> getLocalClassIdReplacement(container).createNestedClassId(descriptor.name)
             is PackageFragmentDescriptor -> {
                 throw IllegalStateException("getLocalClassIdReplacement should only be called for local classes: $descriptor")
             }
             else -> {
-                val fqName = FqName(typeMapper.mapClass(descriptor).internalName.replace('/', '.'))
+                konst fqName = FqName(typeMapper.mapClass(descriptor).internalName.replace('/', '.'))
                 ClassId(fqName.parent(), FqName.topLevel(fqName.shortName()), true)
             }
         }
 
-    override val isLocalClassIdReplacementKeptGeneric: Boolean
+    override konst isLocalClassIdReplacementKeptGeneric: Boolean
         get() = true
 }

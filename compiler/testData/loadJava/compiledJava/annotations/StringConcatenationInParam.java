@@ -2,7 +2,7 @@ package test;
 
 public interface StringConcatenationInParam {
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     @Anno("he" + "l" + "lo")

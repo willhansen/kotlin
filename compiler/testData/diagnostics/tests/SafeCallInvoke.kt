@@ -1,12 +1,12 @@
-class Rule(val apply:() -> Unit)
+class Rule(konst apply:() -> Unit)
 
 fun bar() {}
 
 fun foo() {
-    val rule: Rule? = Rule { bar() }
+    konst rule: Rule? = Rule { bar() }
 
     // this compiles and works
-    val apply = rule?.apply
+    konst apply = rule?.apply
     if (apply != null) <!DEBUG_INFO_SMARTCAST!>apply<!>()
 
     // this compiles and works

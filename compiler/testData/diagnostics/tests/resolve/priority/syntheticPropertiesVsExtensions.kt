@@ -9,7 +9,7 @@ public class A {
 
 // FILE: 1.kt
 
-private val A.foo: Int get() = 4
+private konst A.foo: Int get() = 4
 
 fun test(a: A) {
     a.foo checkType { _<A>() }
@@ -19,7 +19,7 @@ fun test(a: A) {
 }
 
 class B {
-    private val A.foo: B get() = this@B
+    private konst A.foo: B get() = this@B
 
     fun test(a: A) {
         a.foo checkType { _<A>() }

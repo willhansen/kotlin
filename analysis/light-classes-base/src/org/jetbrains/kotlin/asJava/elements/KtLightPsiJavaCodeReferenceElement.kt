@@ -12,9 +12,9 @@ import com.intellij.util.IncorrectOperationException
 import org.jetbrains.kotlin.asJava.classes.lazyPub
 
 class KtLightPsiJavaCodeReferenceElement(
-    private val ktElement: PsiElement,
+    private konst ktElement: PsiElement,
     reference: () -> PsiReference?,
-    private val customReferenceName: String? = null,
+    private konst customReferenceName: String? = null,
 ) :
     PsiElement by ktElement,
     PsiReference by LazyPsiReferenceDelegate(ktElement, reference),
@@ -42,11 +42,11 @@ class KtLightPsiJavaCodeReferenceElement(
 }
 
 private class LazyPsiReferenceDelegate(
-    private val psiElement: PsiElement,
+    private konst psiElement: PsiElement,
     referenceProvider: () -> PsiReference?
 ) : PsiReference {
 
-    private val delegate by lazyPub(referenceProvider)
+    private konst delegate by lazyPub(referenceProvider)
 
     override fun getElement(): PsiElement = psiElement
 

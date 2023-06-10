@@ -4,23 +4,23 @@
 
 import kotlin.reflect.jvm.*
 
-var state: String = "value"
+var state: String = "konstue"
     @JvmName("getter")
     get
     @JvmName("setter")
     set
 
 fun box(): String {
-    val p = ::state
+    konst p = ::state
 
     if (p.name != "state") return "Fail name: ${p.name}"
-    if (p.get() != "value") return "Fail get: ${p.get()}"
+    if (p.get() != "konstue") return "Fail get: ${p.get()}"
     p.set("OK")
 
-    val getterName = p.javaGetter!!.getName()
+    konst getterName = p.javaGetter!!.getName()
     if (getterName != "getter") return "Fail getter name: $getterName"
 
-    val setterName = p.javaSetter!!.getName()
+    konst setterName = p.javaSetter!!.getName()
     if (setterName != "setter") return "Fail setter name: $setterName"
 
     return p.get()

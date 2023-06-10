@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.container.tests
 import java.io.*
 
 interface TestComponentInterface {
-    val disposed: Boolean
+    konst disposed: Boolean
     fun foo()
 }
 
@@ -37,7 +37,7 @@ class TestComponent : TestComponentInterface, Closeable {
     }
 }
 
-class ManualTestComponent(val name: String) : TestComponentInterface, Closeable {
+class ManualTestComponent(konst name: String) : TestComponentInterface, Closeable {
     override var disposed: Boolean = false
     override fun close() {
         disposed = true
@@ -48,7 +48,7 @@ class ManualTestComponent(val name: String) : TestComponentInterface, Closeable 
     }
 }
 
-class TestClientComponent(val dep: TestComponentInterface) : TestClientComponentInterface, Closeable {
+class TestClientComponent(konst dep: TestComponentInterface) : TestClientComponentInterface, Closeable {
     override fun close() {
         if (dep.disposed)
             throw Exception("Dependency shouldn't be disposed before dependee")
@@ -62,21 +62,21 @@ class TestClientComponent2() : TestClientComponentInterface {
 }
 
 class TestAdhocComponentService
-class TestAdhocComponent1(val service: TestAdhocComponentService) {
+class TestAdhocComponent1(konst service: TestAdhocComponentService) {
 
 }
 
-class TestAdhocComponent2(val service: TestAdhocComponentService) {
+class TestAdhocComponent2(konst service: TestAdhocComponentService) {
 
 }
 
-class TestIterableComponent(val components: Iterable<TestClientComponentInterface>)
+class TestIterableComponent(konst components: Iterable<TestClientComponentInterface>)
 
 interface TestGenericComponent<T>
 
-class TestGenericClient(val component1 : TestGenericComponent<String>, val component2: TestGenericComponent<Int>)
+class TestGenericClient(konst component1 : TestGenericComponent<String>, konst component2: TestGenericComponent<Int>)
 class TestStringComponent : TestGenericComponent<String>
 class TestIntComponent : TestGenericComponent<Int>
 
 class TestImplicitGeneric<T>()
-class TestImplicitGenericClient(val component: TestImplicitGeneric<String>)
+class TestImplicitGenericClient(konst component: TestImplicitGeneric<String>)

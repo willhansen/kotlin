@@ -6,4 +6,4 @@
 package org.jetbrains.kotlin
 
 @RequiresOptIn
-annotation class ObsoleteTestInfrastructure(val replacer: String = "")
+annotation class ObsoleteTestInfrastructure(konst replacer: String = "")

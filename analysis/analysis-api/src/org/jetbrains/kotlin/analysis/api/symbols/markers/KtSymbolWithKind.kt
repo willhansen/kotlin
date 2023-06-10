@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.name.FqName
 
 
 public interface KtSymbolWithKind : KtSymbol {
-    public val symbolKind: KtSymbolKind
+    public konst symbolKind: KtSymbolKind
 }
 
 public enum class KtSymbolKind {

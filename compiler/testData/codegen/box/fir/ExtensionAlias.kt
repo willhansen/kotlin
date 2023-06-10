@@ -7,11 +7,11 @@ typealias ProcessOverriddenWithBaseScope<D> = String.(D, (D, String) -> Boolean)
 // MODULE: main(lib)
 // FILE: B.kt
 
-private data class NumberWithString<N : Number>(val n: N, val s: String)
+private data class NumberWithString<N : Number>(konst n: N, konst s: String)
 
 private fun <N : Number> use(ns: NumberWithString<N>, process: ProcessOverriddenWithBaseScope<N>): String {
-    val (n, s) = ns
-    val result = s.process(n) { _, s ->
+    konst (n, s) = ns
+    konst result = s.process(n) { _, s ->
         s == "OK"
     }
     return if (result) "OK" else "FAIL"

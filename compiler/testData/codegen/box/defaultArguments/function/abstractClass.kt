@@ -9,7 +9,7 @@ class Derived: Base() {
 }
 
 fun box(): String {
-    val result = Derived().foo()
+    konst result = Derived().foo()
     if (result != "abc") return "Fail: $result"
 
     return "OK"

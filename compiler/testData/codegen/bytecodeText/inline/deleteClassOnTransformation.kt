@@ -2,7 +2,7 @@
 
 fun test() {
     {
-        val lam = {}
+        konst lam = {}
         lam()
     }()
 }
@@ -14,7 +14,7 @@ inline fun ifun(s: () -> Unit) {
 fun test2() {
     var z = 1;
     ifun {
-        val lam = { z = 2 }
+        konst lam = { z = 2 }
         lam()
     }
 }

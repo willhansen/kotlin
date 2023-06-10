@@ -39,39 +39,39 @@ object ModuleWrapperTranslation {
             moduleId: String, function: JsExpression,
             importedModules: List<JsImportedModule>, program: JsProgram
     ): List<JsStatement> {
-        val scope = program.scope
-        val defineName = scope.declareName("define")
-        val exportsName = scope.declareName("exports")
+        konst scope = program.scope
+        konst defineName = scope.declareName("define")
+        konst exportsName = scope.declareName("exports")
 
-        val adapterBody = JsBlock()
-        val adapter = JsFunction(program.scope, adapterBody, "Adapter")
-        val rootName = adapter.scope.declareName("root")
-        val factoryName = adapter.scope.declareName("factory")
+        konst adapterBody = JsBlock()
+        konst adapter = JsFunction(program.scope, adapterBody, "Adapter")
+        konst rootName = adapter.scope.declareName("root")
+        konst factoryName = adapter.scope.declareName("factory")
         adapter.parameters += JsParameter(rootName)
         adapter.parameters += JsParameter(factoryName)
 
-        val amdTest = JsAstUtils.and(JsAstUtils.typeOfIs(defineName.makeRef(), JsStringLiteral("function")),
+        konst amdTest = JsAstUtils.and(JsAstUtils.typeOfIs(defineName.makeRef(), JsStringLiteral("function")),
                                      JsNameRef("amd", defineName.makeRef()))
-        val commonJsTest = JsAstUtils.typeOfIs(exportsName.makeRef(), JsStringLiteral("object"))
+        konst commonJsTest = JsAstUtils.typeOfIs(exportsName.makeRef(), JsStringLiteral("object"))
 
-        val amdBody = JsBlock(wrapAmd(factoryName.makeRef(), importedModules, program))
-        val commonJsBody = JsBlock(wrapCommonJs(factoryName.makeRef(), importedModules, program))
-        val plainInvocation = makePlainInvocation(moduleId, factoryName.makeRef(), importedModules, program)
+        konst amdBody = JsBlock(wrapAmd(factoryName.makeRef(), importedModules, program))
+        konst commonJsBody = JsBlock(wrapCommonJs(factoryName.makeRef(), importedModules, program))
+        konst plainInvocation = makePlainInvocation(moduleId, factoryName.makeRef(), importedModules, program)
 
-        val lhs: JsExpression = if (Namer.requiresEscaping(moduleId)) {
+        konst lhs: JsExpression = if (Namer.requiresEscaping(moduleId)) {
             JsArrayAccess(rootName.makeRef(), JsStringLiteral(moduleId))
         }
         else {
             JsNameRef(scope.declareName(moduleId), rootName.makeRef())
         }
 
-        val plainBlock = JsBlock()
+        konst plainBlock = JsBlock()
         for (importedModule in importedModules) {
             plainBlock.statements += addModuleValidation(moduleId, program, importedModule)
         }
         plainBlock.statements += JsAstUtils.assignment(lhs, plainInvocation).makeStmt()
 
-        val selector = JsAstUtils.newJsIf(amdTest, amdBody, JsAstUtils.newJsIf(commonJsTest, commonJsBody, plainBlock))
+        konst selector = JsAstUtils.newJsIf(amdTest, amdBody, JsAstUtils.newJsIf(commonJsTest, commonJsBody, plainBlock))
         adapterBody.statements += selector
 
         return listOf(JsInvocation(adapter, JsThisRef(), function).makeStmt())
@@ -81,14 +81,14 @@ object ModuleWrapperTranslation {
             function: JsExpression,
             importedModules: List<JsImportedModule>, program: JsProgram
     ): List<JsStatement> {
-        val scope = program.scope
-        val defineName = scope.declareName("define")
-        val invocationArgs = listOf(
+        konst scope = program.scope
+        konst defineName = scope.declareName("define")
+        konst invocationArgs = listOf(
                 JsArrayLiteral(listOf(JsStringLiteral("exports")) + importedModules.map { JsStringLiteral(it.externalName) }),
                 function
         )
 
-        val invocation = JsInvocation(defineName.makeRef(), invocationArgs)
+        konst invocation = JsInvocation(defineName.makeRef(), invocationArgs)
         return listOf(invocation.makeStmt())
     }
 
@@ -97,12 +97,12 @@ object ModuleWrapperTranslation {
             importedModules: List<JsImportedModule>,
             program: JsProgram
     ): List<JsStatement> {
-        val scope = program.scope
-        val moduleName = scope.declareName("module")
-        val requireName = scope.declareName("require")
+        konst scope = program.scope
+        konst moduleName = scope.declareName("module")
+        konst requireName = scope.declareName("require")
 
-        val invocationArgs = importedModules.map { JsInvocation(requireName.makeRef(), JsStringLiteral(it.externalName)) }
-        val invocation = JsInvocation(function, listOf(JsNameRef("exports", moduleName.makeRef())) + invocationArgs)
+        konst invocationArgs = importedModules.map { JsInvocation(requireName.makeRef(), JsStringLiteral(it.externalName)) }
+        konst invocation = JsInvocation(function, listOf(JsNameRef("exports", moduleName.makeRef())) + invocationArgs)
         return listOf(invocation.makeStmt())
     }
 
@@ -110,8 +110,8 @@ object ModuleWrapperTranslation {
             moduleId: String, function: JsExpression,
             importedModules: List<JsImportedModule>, program: JsProgram
     ): List<JsStatement> {
-        val invocation = makePlainInvocation(moduleId, function, importedModules, program)
-        val statements = mutableListOf<JsStatement>()
+        konst invocation = makePlainInvocation(moduleId, function, importedModules, program)
+        konst statements = mutableListOf<JsStatement>()
 
         for (importedModule in importedModules) {
             statements += addModuleValidation(moduleId, program, importedModule)
@@ -132,12 +132,12 @@ object ModuleWrapperTranslation {
             program: JsProgram,
             module: JsImportedModule
     ): JsStatement {
-        val moduleRef = makePlainModuleRef(module, program)
-        val moduleExistsCond = JsAstUtils.typeOfIs(moduleRef, JsStringLiteral("undefined"))
-        val moduleNotFoundMessage = JsStringLiteral(
+        konst moduleRef = makePlainModuleRef(module, program)
+        konst moduleExistsCond = JsAstUtils.typeOfIs(moduleRef, JsStringLiteral("undefined"))
+        konst moduleNotFoundMessage = JsStringLiteral(
                 "Error loading module '" + currentModuleId + "'. Its dependency '" + module.externalName + "' was not found. " +
                 "Please, check whether '" + module.externalName + "' is loaded prior to '" + currentModuleId + "'.")
-        val moduleNotFoundThrow = JsThrow(JsNew(JsNameRef("Error"), listOf<JsExpression>(moduleNotFoundMessage)))
+        konst moduleNotFoundThrow = JsThrow(JsNew(JsNameRef("Error"), listOf<JsExpression>(moduleNotFoundMessage)))
         return JsIf(moduleExistsCond, JsBlock(moduleNotFoundThrow))
     }
 
@@ -147,10 +147,10 @@ object ModuleWrapperTranslation {
             importedModules: List<JsImportedModule>,
             program: JsProgram
     ): JsInvocation {
-        val invocationArgs = importedModules.map { makePlainModuleRef(it, program) }
-        val moduleRef = makePlainModuleRef(moduleId, program)
-        val testModuleDefined = JsAstUtils.typeOfIs(moduleRef, JsStringLiteral("undefined"))
-        val selfArg = JsConditional(testModuleDefined, JsObjectLiteral(false), moduleRef.deepCopy())
+        konst invocationArgs = importedModules.map { makePlainModuleRef(it, program) }
+        konst moduleRef = makePlainModuleRef(moduleId, program)
+        konst testModuleDefined = JsAstUtils.typeOfIs(moduleRef, JsStringLiteral("undefined"))
+        konst selfArg = JsConditional(testModuleDefined, JsObjectLiteral(false), moduleRef.deepCopy())
 
         return JsInvocation(function, listOf(selfArg) + invocationArgs)
     }

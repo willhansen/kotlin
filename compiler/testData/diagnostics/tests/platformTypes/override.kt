@@ -21,7 +21,7 @@ public class J implements I {
 import p.*
 
 fun test() {
-    val s = J().s()
+    konst s = J().s()
     s.get(0)
     s!!.get(0)
 }

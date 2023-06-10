@@ -47,18 +47,18 @@ typealias DeserializedTypeAliasPostProcessor = (FirTypeAliasSymbol) -> Unit
 internal open class JvmStubBasedFirDeserializedSymbolProvider(
     session: FirSession,
     moduleDataProvider: SingleModuleDataProvider,
-    private val kotlinScopeProvider: FirKotlinScopeProvider,
+    private konst kotlinScopeProvider: FirKotlinScopeProvider,
     project: Project,
     scope: GlobalSearchScope,
-    private val initialOrigin: FirDeclarationOrigin
+    private konst initialOrigin: FirDeclarationOrigin
 ) : LLFirKotlinSymbolProvider(session) {
-    private val moduleData = moduleDataProvider.getModuleData(null)
+    private konst moduleData = moduleDataProvider.getModuleData(null)
 
-    final override val declarationProvider = project.createDeclarationProvider(scope, module = null)
+    final override konst declarationProvider = project.createDeclarationProvider(scope, module = null)
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = LLFirKotlinSymbolNamesProvider.cached(session, declarationProvider)
+    override konst symbolNamesProvider: FirSymbolNamesProvider = LLFirKotlinSymbolNamesProvider.cached(session, declarationProvider)
 
-    private val typeAliasCache: FirCache<ClassId, FirTypeAliasSymbol?, StubBasedFirDeserializationContext?> =
+    private konst typeAliasCache: FirCache<ClassId, FirTypeAliasSymbol?, StubBasedFirDeserializationContext?> =
         session.firCachesFactory.createCacheWithPostCompute(
             createValue = { classId, context -> findAndDeserializeTypeAlias(classId, context) },
             postCompute = { _, symbol, postProcessor ->
@@ -68,24 +68,24 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
             }
         )
 
-    private val classCache: FirCache<ClassId, FirRegularClassSymbol?, StubBasedFirDeserializationContext?> =
+    private konst classCache: FirCache<ClassId, FirRegularClassSymbol?, StubBasedFirDeserializationContext?> =
         session.firCachesFactory.createCache(
             createValue = { classId, context -> findAndDeserializeClass(classId, context) }
         )
 
-    private val functionCache = session.firCachesFactory.createCache(::loadFunctionsByCallableId)
-    private val propertyCache = session.firCachesFactory.createCache(::loadPropertiesByCallableId)
+    private konst functionCache = session.firCachesFactory.createCache(::loadFunctionsByCallableId)
+    private konst propertyCache = session.firCachesFactory.createCache(::loadPropertiesByCallableId)
 
     private fun findAndDeserializeTypeAlias(
         classId: ClassId,
         context: StubBasedFirDeserializationContext?,
     ): Pair<FirTypeAliasSymbol?, DeserializedTypeAliasPostProcessor?> {
-        val classLikeDeclaration =
+        konst classLikeDeclaration =
             (context?.classLikeDeclaration ?: declarationProvider.getClassLikeDeclarationByClassId(classId))
         if (classLikeDeclaration is KtTypeAlias) {
-            val symbol = FirTypeAliasSymbol(classId)
-            val postProcessor: DeserializedTypeAliasPostProcessor = {
-                val rootContext = context ?: StubBasedFirDeserializationContext.createRootContext(
+            konst symbol = FirTypeAliasSymbol(classId)
+            konst postProcessor: DeserializedTypeAliasPostProcessor = {
+                konst rootContext = context ?: StubBasedFirDeserializationContext.createRootContext(
                     moduleData,
                     StubBasedAnnotationDeserializer(session),
                     classId.packageFqName,
@@ -104,14 +104,14 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
         classId: ClassId,
         parentContext: StubBasedFirDeserializationContext?,
     ): FirRegularClassSymbol? {
-        val (classLikeDeclaration, context) =
+        konst (classLikeDeclaration, context) =
             if (parentContext?.classLikeDeclaration != null) {
                 parentContext.classLikeDeclaration to null
             } else {
                 (declarationProvider.getClassLikeDeclarationByClassId(classId) ?: return null) to parentContext
             }
 
-        val symbol = FirRegularClassSymbol(classId)
+        konst symbol = FirRegularClassSymbol(classId)
         if (classLikeDeclaration is KtClassOrObject) {
             deserializeClassToSymbol(
                 classId,
@@ -139,28 +139,28 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
         callableId: CallableId,
         foundFunctions: Collection<KtNamedFunction>?,
     ): List<FirNamedFunctionSymbol> {
-        val topLevelFunctions = foundFunctions ?: declarationProvider.getTopLevelFunctions(callableId)
+        konst topLevelFunctions = foundFunctions ?: declarationProvider.getTopLevelFunctions(callableId)
         return topLevelFunctions
             .mapNotNull { function ->
-                val file = function.containingKtFile
-                val virtualFile = file.virtualFile
+                konst file = function.containingKtFile
+                konst virtualFile = file.virtualFile
                 if (virtualFile.extension == MetadataPackageFragment.METADATA_FILE_EXTENSION) return@mapNotNull null
                 if (initialOrigin != FirDeclarationOrigin.BuiltIns && file.packageFqName.asString()
                         .replace(".", "/") + "/" + virtualFile.nameWithoutExtension in KotlinBuiltins
                 ) return@mapNotNull null
-                val symbol = FirNamedFunctionSymbol(callableId)
-                val rootContext =
+                konst symbol = FirNamedFunctionSymbol(callableId)
+                konst rootContext =
                     StubBasedFirDeserializationContext.createRootContext(session, moduleData, callableId, function, symbol, initialOrigin)
                 rootContext.memberDeserializer.loadFunction(function, null, session, symbol).symbol
             }
     }
 
     private fun loadPropertiesByCallableId(callableId: CallableId, foundProperties: Collection<KtProperty>?): List<FirPropertySymbol> {
-        val topLevelProperties = foundProperties ?: declarationProvider.getTopLevelProperties(callableId)
+        konst topLevelProperties = foundProperties ?: declarationProvider.getTopLevelProperties(callableId)
         return topLevelProperties
             .map { property ->
-                val symbol = FirPropertySymbol(callableId)
-                val rootContext =
+                konst symbol = FirPropertySymbol(callableId)
+                konst rootContext =
                     StubBasedFirDeserializationContext.createRootContext(session, moduleData, callableId, property, symbol, initialOrigin)
                 rootContext.memberDeserializer.loadProperty(property, null, symbol).symbol
             }
@@ -180,7 +180,7 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
 
     @FirSymbolProviderInternals
     override fun getTopLevelCallableSymbolsTo(destination: MutableList<FirCallableSymbol<*>>, packageFqName: FqName, name: Name) {
-        val callableId = CallableId(packageFqName, name)
+        konst callableId = CallableId(packageFqName, name)
         destination += functionCache.getCallablesWithoutContext(callableId)
         destination += propertyCache.getCallablesWithoutContext(callableId)
     }
@@ -248,8 +248,8 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
 
     @FirSymbolProviderInternals
     override fun getClassLikeSymbolByClassId(classId: ClassId, classLikeDeclaration: KtClassLikeDeclaration): FirClassLikeSymbol<*>? {
-        val annotationDeserializer = StubBasedAnnotationDeserializer(session)
-        val deserializationContext = StubBasedFirDeserializationContext(
+        konst annotationDeserializer = StubBasedAnnotationDeserializer(session)
+        konst deserializationContext = StubBasedFirDeserializationContext(
             moduleData,
             classId.packageFqName,
             classId.relativeClassName,
@@ -285,8 +285,8 @@ internal open class JvmStubBasedFirDeserializedSymbolProvider(
         //possible overloads spoils here
         //we can't use only this callable instead of index access to fill the cache
         //names check is redundant though as we already have existing callable in scope
-        val callableId = CallableId(packageFqName, shortName)
-        val callableSymbols = when (callableDeclaration) {
+        konst callableId = CallableId(packageFqName, shortName)
+        konst callableSymbols = when (callableDeclaration) {
             is KtNamedFunction -> functionCache.getValue(callableId)
             is KtProperty -> propertyCache.getValue(callableId)
             else -> null

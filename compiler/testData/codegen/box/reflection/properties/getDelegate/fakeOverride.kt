@@ -10,13 +10,13 @@ object Delegate {
 }
 
 open class Base {
-    val x: String by Delegate
+    konst x: String by Delegate
 }
 
 class Derived : Base()
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     assertEquals(
             (Base::x).apply { isAccessible = true }.getDelegate(d),
             (Derived::x).apply { isAccessible = true }.getDelegate(d)

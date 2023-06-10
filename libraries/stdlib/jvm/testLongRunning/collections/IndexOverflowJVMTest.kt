@@ -10,19 +10,19 @@ import kotlin.test.*
 class IndexOverflowJVMTest {
 
     companion object {
-        fun <T> repeatCounted(value: T, count: Long = Int.MAX_VALUE + 1L): Sequence<T> = Sequence {
+        fun <T> repeatCounted(konstue: T, count: Long = Int.MAX_VALUE + 1L): Sequence<T> = Sequence {
             object : Iterator<T> {
                 var counter = count
                 override fun hasNext(): Boolean = counter > 0
-                override fun next(): T = value.also { counter-- }
+                override fun next(): T = konstue.also { counter-- }
             }
         }
 
-        val maxIndexSequence = repeatCounted("k", (Int.MAX_VALUE + 1L) + 1L) // here the last index is one greater than Int.MAX_VALUE
-        val maxIndexIterable = maxIndexSequence.asIterable()
+        konst maxIndexSequence = repeatCounted("k", (Int.MAX_VALUE + 1L) + 1L) // here the last index is one greater than Int.MAX_VALUE
+        konst maxIndexIterable = maxIndexSequence.asIterable()
 
 
-        val longCountSequence = Sequence {
+        konst longCountSequence = Sequence {
             object : Iterator<Long> {
                 var counter = 0L
                 override fun hasNext(): Boolean = true
@@ -31,12 +31,12 @@ class IndexOverflowJVMTest {
         }
 
         fun assertIndexOverflow(f: () -> Unit) {
-            val ex = assertFailsWith<ArithmeticException>(block = f)
+            konst ex = assertFailsWith<ArithmeticException>(block = f)
             assertTrue(ex.message!!.contains("index", ignoreCase = true))
         }
 
         fun assertCountOverflow(f: () -> Unit) {
-            val ex = assertFailsWith<ArithmeticException>(block = f)
+            konst ex = assertFailsWith<ArithmeticException>(block = f)
             assertTrue(ex.message!!.contains("count", ignoreCase = true))
         }
 
@@ -99,7 +99,7 @@ class IndexOverflowJVMTest {
             return true
         }
 
-        override val size: Int get() = _size
+        override konst size: Int get() = _size
 
         override fun iterator(): MutableIterator<T> = error("not implemented")
     }
@@ -153,23 +153,23 @@ class IndexOverflowJVMTest {
     @Test
     fun dropTwiceMaxValue() {
 
-        val halfMax = (1 shl 30) + 1
+        konst halfMax = (1 shl 30) + 1
 
-        val dropOnce = longCountSequence.drop(halfMax)
-        val dropTwice = dropOnce.drop(halfMax)
+        konst dropOnce = longCountSequence.drop(halfMax)
+        konst dropTwice = dropOnce.drop(halfMax)
 
-        val expectedEnd = halfMax.toLong() * 2
+        konst expectedEnd = halfMax.toLong() * 2
 
         assertEquals(expectedEnd, dropTwice.first())
 
-        val dropTake = dropOnce.take(halfMax + 1)
+        konst dropTake = dropOnce.take(halfMax + 1)
 
         assertEquals(expectedEnd, dropTake.last())
     }
 
     @Test
     fun dropMaxValue() {
-        val range = 0L..Int.MAX_VALUE + 1L
+        konst range = 0L..Int.MAX_VALUE + 1L
         assertEquals(listOf(Int.MAX_VALUE.toLong(), Int.MAX_VALUE + 1L), range.drop(Int.MAX_VALUE))
     }
 

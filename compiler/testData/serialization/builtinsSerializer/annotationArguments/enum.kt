@@ -6,9 +6,9 @@ enum class Weapon {
     SCISSORS
 }
 
-annotation class JustEnum(val weapon: Weapon)
+annotation class JustEnum(konst weapon: Weapon)
 
-annotation class EnumArray(val enumArray: Array<Weapon>)
+annotation class EnumArray(konst enumArray: Array<Weapon>)
 
 @JustEnum(Weapon.SCISSORS)
 @EnumArray(arrayOf())

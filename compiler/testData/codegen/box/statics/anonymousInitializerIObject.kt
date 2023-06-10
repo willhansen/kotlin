@@ -1,5 +1,5 @@
 object Foo {
-    val bar: String
+    konst bar: String
 
     init {
         bar = "OK"

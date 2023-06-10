@@ -13,10 +13,10 @@ context(JSONObject)
 infix fun String.by(build: JSONObject.() -> Unit) = put(this, JSONObject().build())
 
 context(JSONObject)
-infix fun String.by(value: Any) = put(this, value)
+infix fun String.by(konstue: Any) = put(this, konstue)
 
 fun test() {
-    val json = json {
+    konst json = json {
         "name" by "Kotlin"
         "age" by 10
         "creator" by {

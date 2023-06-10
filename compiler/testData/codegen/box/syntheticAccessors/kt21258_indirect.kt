@@ -1,10 +1,10 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class Foo {
-    private val fld: String = "O"
-        get() = eval { field } + "K"
+    private konst fld: String = "O"
+        get() = ekonst { field } + "K"
 
-    val indirectFldGetter: () -> String = { fld }
+    konst indirectFldGetter: () -> String = { fld }
 }
 
 fun box() = Foo().indirectFldGetter()

@@ -34,21 +34,21 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirFileImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var annotationsContainer: FirFileAnnotationsContainer,
     override var packageDirective: FirPackageDirective,
-    override val imports: MutableList<FirImport>,
-    override val declarations: MutableList<FirDeclaration>,
-    override val name: String,
-    override val sourceFile: KtSourceFile?,
-    override val sourceFileLinesMapping: KtSourceFileLinesMapping?,
-    override val symbol: FirFileSymbol,
+    override konst imports: MutableList<FirImport>,
+    override konst declarations: MutableList<FirDeclaration>,
+    override konst name: String,
+    override konst sourceFile: KtSourceFile?,
+    override konst sourceFileLinesMapping: KtSourceFileLinesMapping?,
+    override konst symbol: FirFileSymbol,
 ) : FirFile() {
-    override val annotations: List<FirAnnotation> get() = annotationsContainer.annotations
+    override konst annotations: List<FirAnnotation> get() = annotationsContainer.annotations
 
     init {
         symbol.bind(this)

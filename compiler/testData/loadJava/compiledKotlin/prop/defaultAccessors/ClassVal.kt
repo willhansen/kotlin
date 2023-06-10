@@ -3,13 +3,13 @@
 package test
 
 class ClassVal() {
-    val property1 = { 1 }()
+    konst property1 = { 1 }()
 
-    internal val property2 = { 1 }()
+    internal konst property2 = { 1 }()
 
-    private val property3 = Object()
+    private konst property3 = Object()
 
-    protected val property4: String = { "" }()
+    protected konst property4: String = { "" }()
 
-    public val property5: Int = { 1 }()
+    public konst property5: Int = { 1 }()
 }

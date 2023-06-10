@@ -6,7 +6,7 @@ FILE: constructorVarWrite.kt
 
         public final var foo: R|kotlin/Int| = R|<local>/foo|
             public get(): R|kotlin/Int|
-            public set(value: R|kotlin/Int|): R|kotlin/Unit|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         init {
             when () {
@@ -17,7 +17,7 @@ FILE: constructorVarWrite.kt
 
         }
 
-        public final val y: R|kotlin/Int| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/Int|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
+        public final konst y: R|kotlin/Int| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/Int|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
             this@R|special/anonymous|.R|/Some.foo| = Int(1)
             ^ this@R|special/anonymous|.R|/Some.foo|
         }

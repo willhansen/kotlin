@@ -25,7 +25,7 @@ public class ConstructorExample {
 // FILE: test.kt
 
 fun box(): String {
-    val existing: ConstructorExample = ConstructorExample("existing")
-    val generated: ConstructorExample = ConstructorExample.of(45, "234", false)
+    konst existing: ConstructorExample = ConstructorExample("existing")
+    konst generated: ConstructorExample = ConstructorExample.of(45, "234", false)
     return "OK"
 }

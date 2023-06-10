@@ -314,7 +314,7 @@ KtFile: lambdaRecovery.kt
   PROPERTY
     PsiComment(EOL_COMMENT)('// No '}'')
     PsiWhiteSpace('\n')
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('test')
     PsiWhiteSpace(' ')

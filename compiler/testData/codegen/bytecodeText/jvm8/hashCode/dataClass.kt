@@ -1,15 +1,15 @@
 // JVM_TARGET: 1.8
 
 data class Hash(
-        val a: Boolean,
-        val b: Byte,
-        val c: Char,
-        val d: Short,
-        val e: Int,
-        val f: Long,
-        val g: Float,
-        val j: Double,
-        val k: Any
+        konst a: Boolean,
+        konst b: Byte,
+        konst c: Char,
+        konst d: Short,
+        konst e: Int,
+        konst f: Long,
+        konst g: Float,
+        konst j: Double,
+        konst k: Any
 )
 
 

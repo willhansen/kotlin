@@ -1,1 +1,1 @@
-val f<caret>oo: Int = 10
+konst f<caret>oo: Int = 10

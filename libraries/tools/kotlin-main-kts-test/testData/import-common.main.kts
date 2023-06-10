@@ -1,10 +1,10 @@
 
 var sharedVar = 2
 
-class SharedClass(val msg: String)
+class SharedClass(konst msg: String)
 
 object SharedObject {
-    val greeting = "Hi"
+    konst greeting = "Hi"
 }
 
 println("${SharedObject.greeting} from common")

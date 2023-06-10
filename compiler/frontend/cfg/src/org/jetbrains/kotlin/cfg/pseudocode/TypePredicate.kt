@@ -27,24 +27,24 @@ interface TypePredicate : (KotlinType) -> Boolean {
     override fun invoke(typeToCheck: KotlinType): Boolean
 }
 
-data class SingleType(val targetType: KotlinType) : TypePredicate {
+data class SingleType(konst targetType: KotlinType) : TypePredicate {
     override fun invoke(typeToCheck: KotlinType): Boolean = KotlinTypeChecker.DEFAULT.equalTypes(typeToCheck, targetType)
     override fun toString(): String = targetType.render()
 }
 
-data class AllSubtypes(val upperBound: KotlinType) : TypePredicate {
+data class AllSubtypes(konst upperBound: KotlinType) : TypePredicate {
     override fun invoke(typeToCheck: KotlinType): Boolean = KotlinTypeChecker.DEFAULT.isSubtypeOf(typeToCheck, upperBound)
 
     override fun toString(): String = "{<: ${upperBound.render()}}"
 }
 
-data class ForAllTypes(val typeSets: List<TypePredicate>) : TypePredicate {
+data class ForAllTypes(konst typeSets: List<TypePredicate>) : TypePredicate {
     override fun invoke(typeToCheck: KotlinType): Boolean = typeSets.all { it(typeToCheck) }
 
     override fun toString(): String = "AND{${typeSets.joinToString(", ")}}"
 }
 
-data class ForSomeType(val typeSets: List<TypePredicate>) : TypePredicate {
+data class ForSomeType(konst typeSets: List<TypePredicate>) : TypePredicate {
     override fun invoke(typeToCheck: KotlinType): Boolean = typeSets.any { it(typeToCheck) }
 
     override fun toString(): String = "OR{${typeSets.joinToString(", ")}}"

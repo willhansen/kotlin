@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.name.ClassId
  * Entity which may have annotations applied inside. E.g, type or declaration
  */
 public interface KtAnnotated {
-    public val annotationsList: KtAnnotationsList
+    public konst annotationsList: KtAnnotationsList
 }
 
 /**
@@ -22,7 +22,7 @@ public interface KtAnnotated {
  *
  * @see [KtAnnotationsList.annotations]
  */
-public val KtAnnotated.annotations: List<KtAnnotationApplicationWithArgumentsInfo>
+public konst KtAnnotated.annotations: List<KtAnnotationApplicationWithArgumentsInfo>
     get() = annotationsList.annotations
 
 /**
@@ -30,7 +30,7 @@ public val KtAnnotated.annotations: List<KtAnnotationApplicationWithArgumentsInf
  *
  * @see [KtAnnotationsList.annotationInfos]
  */
-public val KtAnnotated.annotationInfos: List<KtAnnotationApplicationInfo>
+public konst KtAnnotated.annotationInfos: List<KtAnnotationApplicationInfo>
     get() = annotationsList.annotationInfos
 
 /**
@@ -58,5 +58,5 @@ public fun KtAnnotated.annotationsByClassId(
  *
  * @see [KtAnnotationsList.annotationClassIds]
  */
-public val KtAnnotated.annotationClassIds: Collection<ClassId>
+public konst KtAnnotated.annotationClassIds: Collection<ClassId>
     get() = annotationsList.annotationClassIds

@@ -1,5 +1,5 @@
 fun test1() {
-    val a = null
+    konst a = null
 
     if (a != null) {
         println("X1")

@@ -1,12 +1,12 @@
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 
 fun example() {
-    val a = if (true) true else false
-    val b = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) else false
-    val c = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) true
-    val d = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) true else;
-    val e = if (true) <!IMPLICIT_CAST_TO_ANY!>{}<!> else <!IMPLICIT_CAST_TO_ANY!>false<!>
-    val f = if (true) <!IMPLICIT_CAST_TO_ANY!>true<!> else <!IMPLICIT_CAST_TO_ANY!>{}<!>
+    konst a = if (true) true else false
+    konst b = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) else false
+    konst c = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) true
+    konst d = <!INVALID_IF_AS_EXPRESSION!>if<!> (true) true else;
+    konst e = if (true) <!IMPLICIT_CAST_TO_ANY!>{}<!> else <!IMPLICIT_CAST_TO_ANY!>false<!>
+    konst f = if (true) <!IMPLICIT_CAST_TO_ANY!>true<!> else <!IMPLICIT_CAST_TO_ANY!>{}<!>
 
     {
         if (true) true

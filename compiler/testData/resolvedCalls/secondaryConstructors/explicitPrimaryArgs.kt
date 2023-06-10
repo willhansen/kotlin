@@ -7,4 +7,4 @@ class A(x: Double) {
     }
 }
 
-val v = <caret>A(1.0)
+konst v = <caret>A(1.0)

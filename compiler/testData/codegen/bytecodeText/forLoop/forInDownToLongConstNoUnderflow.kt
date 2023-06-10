@@ -7,7 +7,7 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-const val M = 1L
+const konst M = 1L
 
 fun f(a: Long): Int {
     var n = 0

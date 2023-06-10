@@ -9,7 +9,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 interface I {
     suspend fun foo(s: String): IC
@@ -21,13 +21,13 @@ class D: I {
     }
 }
 
-class C(val d: I) : I by d
+class C(konst d: I) : I by d
 
 
 fun box(): String {
     var result = "FAIL"
 
-    val d = D()
+    konst d = D()
 
     builder {
         result = C(d).foo("OK").s

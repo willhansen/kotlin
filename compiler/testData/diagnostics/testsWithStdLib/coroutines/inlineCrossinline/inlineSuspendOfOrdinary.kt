@@ -14,12 +14,12 @@ import helpers.*
 // suspend calls possible inside lambda matching to the parameter
 suspend inline fun test(c: () -> Unit) {
     c()
-    val o = object: Runnable {
+    konst o = object: Runnable {
         override fun run() {
             <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>()
         }
     }
-    val l = { <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>() }
+    konst l = { <!NON_LOCAL_RETURN_NOT_ALLOWED!>c<!>() }
     c.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>startCoroutine<!>(EmptyContinuation)
 }
 

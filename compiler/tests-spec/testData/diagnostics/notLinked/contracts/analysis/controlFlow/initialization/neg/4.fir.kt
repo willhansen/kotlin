@@ -3,83 +3,83 @@
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val value_1: Int
+    konst konstue_1: Int
     funWithExactlyOnceCallsInPlace {
-        val value_1 = 10
-        value_1.inc()
+        konst konstue_1 = 10
+        konstue_1.inc()
     }
-    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!>.inc()
 }
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val value_1: Int
+    konst konstue_1: Int
     funWithExactlyOnceCallsInPlace {
-        val value_1: Int
+        konst konstue_1: Int
         funWithExactlyOnceCallsInPlace {
-            value_1 = 10
+            konstue_1 = 10
         }
         funWithAtLeastOnceCallsInPlace {
-            value_1.inc()
+            konstue_1.inc()
         }
-        value_1.inc()
+        konstue_1.inc()
     }
-    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!>.inc()
 }
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val value_1: Int
+    konst konstue_1: Int
     funWithAtLeastOnceCallsInPlace {
-        val value_1: Int
+        konst konstue_1: Int
         funWithAtMostOnceCallsInPlace {
-            value_1 = 10
+            konstue_1 = 10
         }
         funWithAtMostOnceCallsInPlace {
-            <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+            <!UNINITIALIZED_VARIABLE!>konstue_1<!>.inc()
         }
-        <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+        <!UNINITIALIZED_VARIABLE!>konstue_1<!>.inc()
     }
     funWithAtMostOnceCallsInPlace {
-        value_1 = 10
+        konstue_1 = 10
     }
-    <!UNINITIALIZED_VARIABLE!>value_1<!>.inc()
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!>.inc()
 }
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    var value_1: Int
+    var konstue_1: Int
     funWithAtLeastOnceCallsInPlace {
-        val value_1: Int
+        konst konstue_1: Int
         funWithExactlyOnceCallsInPlace {
-            value_1 = 10
+            konstue_1 = 10
         }
         funWithAtMostOnceCallsInPlace {
-            value_1.inc()
+            konstue_1.inc()
         }
-        value_1.inc()
+        konstue_1.inc()
     }
     funWithAtMostOnceCallsInPlace {
-        value_1 = 1
+        konstue_1 = 1
     }
-    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!>.dec()
 }
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val value_1: Int
+    konst konstue_1: Int
     funWithUnknownCallsInPlace {
-        var value_1: Int
+        var konstue_1: Int
         funWithAtLeastOnceCallsInPlace {
-            value_1 = 10
+            konstue_1 = 10
         }
         funWithUnknownCallsInPlace {
-            value_1.inc()
+            konstue_1.inc()
         }
-        value_1.inc()
+        konstue_1.inc()
     }
     funWithUnknownCallsInPlace {
-        <!VAL_REASSIGNMENT!>value_1<!> = 1
+        <!VAL_REASSIGNMENT!>konstue_1<!> = 1
     }
-    <!UNINITIALIZED_VARIABLE!>value_1<!>.dec()
+    <!UNINITIALIZED_VARIABLE!>konstue_1<!>.dec()
 }

@@ -25,10 +25,10 @@ fun sameName(s: Int): Int {
 }
 
 fun box(): String {
-    val result = sameName(1.toLong())
+    konst result = sameName(1.toLong())
     if (result != 1.toLong()) return "fail1: ${result}"
 
-    val result2 = sameName(2)
+    konst result2 = sameName(2)
     if (result2 != 2) return "fail2: ${result2}"
 
     return "OK"

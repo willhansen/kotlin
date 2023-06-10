@@ -16,7 +16,7 @@ private inline fun g(x: String) = println(x)
 fun call(c: Consumer<String>) = c.accept("")
 
 fun box(): String {
-    val obj = { call(::g) } // `g` is inaccessible in this scope
+    konst obj = { call(::g) } // `g` is inaccessible in this scope
     obj()
     return "OK"
 }

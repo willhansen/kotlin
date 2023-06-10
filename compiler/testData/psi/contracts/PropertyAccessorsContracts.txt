@@ -55,7 +55,7 @@ KtFile: PropertyAccessorsContracts.kt
           PsiElement(LPAR)('(')
           VALUE_PARAMETER_LIST
             VALUE_PARAMETER
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiElement(RPAR)(')')
           PsiWhiteSpace(' ')
           BLOCK
@@ -70,7 +70,7 @@ KtFile: PropertyAccessorsContracts.kt
               PsiWhiteSpace(' ')
               BINARY_EXPRESSION
                 REFERENCE_EXPRESSION
-                  PsiElement(IDENTIFIER)('value')
+                  PsiElement(IDENTIFIER)('konstue')
                 PsiWhiteSpace(' ')
                 OPERATION_REFERENCE
                   PsiElement(MUL)('*')
@@ -146,7 +146,7 @@ KtFile: PropertyAccessorsContracts.kt
           PsiElement(LPAR)('(')
           VALUE_PARAMETER_LIST
             VALUE_PARAMETER
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiElement(RPAR)(')')
           PsiWhiteSpace(' ')
           PsiElement(contract)('contract')
@@ -174,7 +174,7 @@ KtFile: PropertyAccessorsContracts.kt
               PsiWhiteSpace(' ')
               BINARY_EXPRESSION
                 REFERENCE_EXPRESSION
-                  PsiElement(IDENTIFIER)('value')
+                  PsiElement(IDENTIFIER)('konstue')
                 PsiWhiteSpace(' ')
                 OPERATION_REFERENCE
                   PsiElement(MUL)('*')
@@ -252,7 +252,7 @@ KtFile: PropertyAccessorsContracts.kt
           PsiElement(LPAR)('(')
           VALUE_PARAMETER_LIST
             VALUE_PARAMETER
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiElement(RPAR)(')')
           PsiWhiteSpace(' ')
           PsiElement(contract)('contract')
@@ -275,7 +275,7 @@ KtFile: PropertyAccessorsContracts.kt
                   PsiElement(LPAR)('(')
                   BINARY_EXPRESSION
                     REFERENCE_EXPRESSION
-                      PsiElement(IDENTIFIER)('value')
+                      PsiElement(IDENTIFIER)('konstue')
                     PsiWhiteSpace(' ')
                     OPERATION_REFERENCE
                       PsiElement(EXCLEQ)('!=')
@@ -290,7 +290,7 @@ KtFile: PropertyAccessorsContracts.kt
             PsiWhiteSpace('\n            ')
             BINARY_EXPRESSION
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
               PsiWhiteSpace(' ')
               OPERATION_REFERENCE
                 PsiElement(ELVIS)('?:')
@@ -313,7 +313,7 @@ KtFile: PropertyAccessorsContracts.kt
                 PsiElement(EQ)('=')
               PsiWhiteSpace(' ')
               REFERENCE_EXPRESSION
-                PsiElement(IDENTIFIER)('value')
+                PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace('\n        ')
             PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n')

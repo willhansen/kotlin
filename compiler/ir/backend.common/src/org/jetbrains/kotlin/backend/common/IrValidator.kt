@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 @Suppress("unused")
-fun validateIrFile(context: CommonBackendContext, irFile: IrFile) {
-    val visitor = IrValidator(context, IrValidatorConfig(abortOnError = false, ensureAllNodesAreDifferent = false))
+fun konstidateIrFile(context: CommonBackendContext, irFile: IrFile) {
+    konst visitor = IrValidator(context, IrValidatorConfig(abortOnError = false, ensureAllNodesAreDifferent = false))
     irFile.acceptVoid(visitor)
 }
 
 @Suppress("unused")
-fun validateIrModule(context: CommonBackendContext, irModule: IrModuleFragment) {
-    val visitor = IrValidator(
+fun konstidateIrModule(context: CommonBackendContext, irModule: IrModuleFragment) {
+    konst visitor = IrValidator(
         context,
         IrValidatorConfig(abortOnError = false, ensureAllNodesAreDifferent = true)
     ) // TODO: consider taking the boolean from settings.
@@ -49,21 +49,21 @@ private fun CommonBackendContext.reportIrValidationError(message: String, irFile
         println("an error trying to print a warning message: $e")
         e.printStackTrace()
     }
-    // TODO: throw an exception after fixing bugs leading to invalid IR.
+    // TODO: throw an exception after fixing bugs leading to inkonstid IR.
 }
 
 data class IrValidatorConfig(
-    val abortOnError: Boolean,
-    val ensureAllNodesAreDifferent: Boolean,
-    val checkTypes: Boolean = true,
-    val checkDescriptors: Boolean = true,
-    val checkProperties: Boolean = false,
-    val checkScopes: Boolean = false,
+    konst abortOnError: Boolean,
+    konst ensureAllNodesAreDifferent: Boolean,
+    konst checkTypes: Boolean = true,
+    konst checkDescriptors: Boolean = true,
+    konst checkProperties: Boolean = false,
+    konst checkScopes: Boolean = false,
 )
 
-class IrValidator(val context: CommonBackendContext, val config: IrValidatorConfig) : IrElementVisitorVoid {
+class IrValidator(konst context: CommonBackendContext, konst config: IrValidatorConfig) : IrElementVisitorVoid {
 
-    val irBuiltIns = context.irBuiltIns
+    konst irBuiltIns = context.irBuiltIns
     var currentFile: IrFile? = null
 
     override fun visitFile(declaration: IrFile) {
@@ -87,7 +87,7 @@ class IrValidator(val context: CommonBackendContext, val config: IrValidatorConf
         }
     }
 
-    private val elementChecker = CheckIrElementVisitor(irBuiltIns, this::error, config)
+    private konst elementChecker = CheckIrElementVisitor(irBuiltIns, this::error, config)
 
     override fun visitElement(element: IrElement) {
         element.acceptVoid(elementChecker)
@@ -96,10 +96,10 @@ class IrValidator(val context: CommonBackendContext, val config: IrValidatorConf
 }
 
 fun IrElement.checkDeclarationParents() {
-    val checker = CheckDeclarationParentsVisitor()
+    konst checker = CheckDeclarationParentsVisitor()
     acceptVoid(checker)
     if (checker.errors.isNotEmpty()) {
-        val expectedParents = LinkedHashSet<IrDeclarationParent>()
+        konst expectedParents = LinkedHashSet<IrDeclarationParent>()
         throw AssertionError(
             buildString {
                 append("Declarations with wrong parent: ")
@@ -127,13 +127,13 @@ fun IrElement.checkDeclarationParents() {
 }
 
 class CheckDeclarationParentsVisitor : DeclarationParentsVisitor() {
-    class Error(val declaration: IrDeclaration, val expectedParent: IrDeclarationParent, val actualParent: IrDeclarationParent?)
+    class Error(konst declaration: IrDeclaration, konst expectedParent: IrDeclarationParent, konst actualParent: IrDeclarationParent?)
 
-    val errors = ArrayList<Error>()
+    konst errors = ArrayList<Error>()
 
     override fun handleParent(declaration: IrDeclaration, parent: IrDeclarationParent) {
         try {
-            val actualParent = declaration.parent
+            konst actualParent = declaration.parent
             if (actualParent != parent) {
                 errors.add(Error(declaration, parent, actualParent))
             }

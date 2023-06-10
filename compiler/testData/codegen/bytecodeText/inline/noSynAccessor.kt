@@ -6,7 +6,7 @@ class A {
 
     private fun method() {}
 
-    private val prop = 1
+    private konst prop = 1
 
     fun test1() {
         call {

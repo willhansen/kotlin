@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.codegen.state.GenerationState
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ComponentRegistrar
 import org.jetbrains.kotlin.config.*
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.diagnostics.DiagnosticReporterFactory
 import org.jetbrains.kotlin.diagnostics.impl.BaseDiagnosticsCollector
 import org.jetbrains.kotlin.fir.*
@@ -63,9 +63,9 @@ object FirKotlinToJvmBytecodeCompiler {
         buildFile: File?,
         chunk: List<Module>
     ): Boolean {
-        val performanceManager = projectConfiguration.get(CLIConfigurationKeys.PERF_MANAGER)
+        konst performanceManager = projectConfiguration.get(CLIConfigurationKeys.PERF_MANAGER)
 
-        val notSupportedPlugins = mutableListOf<String?>().apply {
+        konst notSupportedPlugins = mutableListOf<String?>().apply {
             projectConfiguration.get(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS)
                 .collectIncompatiblePluginNamesTo(this, ComponentRegistrar::supportsK2)
             projectConfiguration.get(CompilerPluginRegistrar.COMPILER_PLUGIN_REGISTRARS)
@@ -84,16 +84,16 @@ object FirKotlinToJvmBytecodeCompiler {
             return false
         }
 
-        val outputs = ArrayList<Pair<FirResult, GenerationState>>(chunk.size)
-        val targetIds = projectConfiguration.get(JVMConfigurationKeys.MODULES)?.map(::TargetId)
-        val incrementalComponents = projectConfiguration.get(JVMConfigurationKeys.INCREMENTAL_COMPILATION_COMPONENTS)
-        val isMultiModuleChunk = chunk.size > 1
+        konst outputs = ArrayList<Pair<FirResult, GenerationState>>(chunk.size)
+        konst targetIds = projectConfiguration.get(JVMConfigurationKeys.MODULES)?.map(::TargetId)
+        konst incrementalComponents = projectConfiguration.get(JVMConfigurationKeys.INCREMENTAL_COMPILATION_COMPONENTS)
+        konst isMultiModuleChunk = chunk.size > 1
 
         // TODO: run lowerings for all modules in the chunk, then run codegen for all modules.
-        val project = (projectEnvironment as? VfsBasedProjectEnvironment)?.project
+        konst project = (projectEnvironment as? VfsBasedProjectEnvironment)?.project
         for (module in chunk) {
-            val moduleConfiguration = projectConfiguration.applyModuleProperties(module, buildFile)
-            val context = CompilationContext(
+            konst moduleConfiguration = projectConfiguration.applyModuleProperties(module, buildFile)
+            konst context = CompilationContext(
                 module,
                 module.getSourceFiles(
                     allSources, (projectEnvironment as? VfsBasedProjectEnvironment)?.localFileSystem, isMultiModuleChunk, buildFile
@@ -108,11 +108,11 @@ object FirKotlinToJvmBytecodeCompiler {
                 extensionRegistrars = project?.let { FirExtensionRegistrar.getInstances(it) } ?: emptyList(),
                 irGenerationExtensions = project?.let { IrGenerationExtension.getInstances(it) } ?: emptyList()
             )
-            val generationState = context.compileModule() ?: return false
+            konst generationState = context.compileModule() ?: return false
             outputs += generationState
         }
 
-        val mainClassFqName: FqName? = runIf(chunk.size == 1 && projectConfiguration.get(JVMConfigurationKeys.OUTPUT_JAR) != null) {
+        konst mainClassFqName: FqName? = runIf(chunk.size == 1 && projectConfiguration.get(JVMConfigurationKeys.OUTPUT_JAR) != null) {
             findMainClass(outputs.single().first.outputs.last().fir)
         }
 
@@ -139,10 +139,10 @@ object FirKotlinToJvmBytecodeCompiler {
 
         if (!checkKotlinPackageUsageForPsi(moduleConfiguration, allSources)) return null
 
-        val renderDiagnosticNames = moduleConfiguration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
+        konst renderDiagnosticNames = moduleConfiguration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
 
-        val diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
-        val firResult = runFrontend(allSources, diagnosticsReporter).also {
+        konst diagnosticsReporter = DiagnosticReporterFactory.createPendingReporter()
+        konst firResult = runFrontend(allSources, diagnosticsReporter).also {
             performanceManager?.notifyAnalysisFinished()
         }
         if (firResult == null) {
@@ -153,14 +153,14 @@ object FirKotlinToJvmBytecodeCompiler {
         performanceManager?.notifyGenerationStarted()
         performanceManager?.notifyIRTranslationStarted()
 
-        val fir2IrExtensions = JvmFir2IrExtensions(moduleConfiguration, JvmIrDeserializerImpl(), JvmIrMangler)
-        val fir2IrConfiguration = Fir2IrConfiguration(
+        konst fir2IrExtensions = JvmFir2IrExtensions(moduleConfiguration, JvmIrDeserializerImpl(), JvmIrMangler)
+        konst fir2IrConfiguration = Fir2IrConfiguration(
             languageVersionSettings = moduleConfiguration.languageVersionSettings,
             linkViaSignatures = moduleConfiguration.getBoolean(JVMConfigurationKeys.LINK_VIA_SIGNATURES),
-            evaluatedConstTracker = moduleConfiguration
-                .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EvaluatedConstTracker.create()),
+            ekonstuatedConstTracker = moduleConfiguration
+                .putIfAbsent(CommonConfigurationKeys.EVALUATED_CONST_TRACKER, EkonstuatedConstTracker.create()),
         )
-        val fir2IrAndIrActualizerResult = firResult.convertToIrAndActualizeForJvm(
+        konst fir2IrAndIrActualizerResult = firResult.convertToIrAndActualizeForJvm(
             fir2IrExtensions,
             fir2IrConfiguration,
             irGenerationExtensions,
@@ -169,7 +169,7 @@ object FirKotlinToJvmBytecodeCompiler {
 
         performanceManager?.notifyIRTranslationFinished()
 
-        val generationState = runBackend(
+        konst generationState = runBackend(
             allSources,
             fir2IrAndIrActualizerResult,
             fir2IrExtensions,
@@ -186,16 +186,16 @@ object FirKotlinToJvmBytecodeCompiler {
     }
 
     private fun CompilationContext.runFrontend(ktFiles: List<KtFile>, diagnosticsReporter: BaseDiagnosticsCollector): FirResult? {
-        val syntaxErrors = ktFiles.fold(false) { errorsFound, ktFile ->
+        konst syntaxErrors = ktFiles.fold(false) { errorsFound, ktFile ->
             AnalyzerWithCompilerReport.reportSyntaxErrors(ktFile, messageCollector).isHasErrors or errorsFound
         }
 
-        val sourceScope = (projectEnvironment as VfsBasedProjectEnvironment).getSearchScopeByPsiFiles(ktFiles) +
+        konst sourceScope = (projectEnvironment as VfsBasedProjectEnvironment).getSearchScopeByPsiFiles(ktFiles) +
                 projectEnvironment.getSearchScopeForProjectJavaSources()
 
         var librariesScope = projectEnvironment.getSearchScopeForProjectLibraries()
 
-        val providerAndScopeForIncrementalCompilation = createContextForIncrementalCompilation(
+        konst providerAndScopeForIncrementalCompilation = createContextForIncrementalCompilation(
             projectEnvironment,
             incrementalComponents,
             moduleConfiguration,
@@ -206,9 +206,9 @@ object FirKotlinToJvmBytecodeCompiler {
         providerAndScopeForIncrementalCompilation?.precompiledBinariesFileScope?.let {
             librariesScope -= it
         }
-        val rootModuleName = module.getModuleName()
-        val libraryList = createLibraryListForJvm(rootModuleName, moduleConfiguration, module.getFriendPaths())
-        val sessionsWithSources = prepareJvmSessions(
+        konst rootModuleName = module.getModuleName()
+        konst libraryList = createLibraryListForJvm(rootModuleName, moduleConfiguration, module.getFriendPaths())
+        konst sessionsWithSources = prepareJvmSessions(
             ktFiles, moduleConfiguration, projectEnvironment, Name.identifier(rootModuleName),
             extensionRegistrars, librariesScope, libraryList,
             isCommonSource = { it.isCommonSource == true },
@@ -216,7 +216,7 @@ object FirKotlinToJvmBytecodeCompiler {
             createProviderAndScopeForIncrementalCompilation = { providerAndScopeForIncrementalCompilation }
         )
 
-        val outputs = sessionsWithSources.map { (session, sources) ->
+        konst outputs = sessionsWithSources.map { (session, sources) ->
             buildResolveAndCheckFirFromKtFiles(session, sources, diagnosticsReporter)
         }
 
@@ -229,14 +229,14 @@ object FirKotlinToJvmBytecodeCompiler {
         extensions: JvmGeneratorExtensions,
         diagnosticsReporter: BaseDiagnosticsCollector
     ): GenerationState {
-        val (moduleFragment, components, pluginContext, irActualizedResult) = fir2IrActualizedResult
-        val dummyBindingContext = NoScopeRecordCliBindingTrace().bindingContext
-        val codegenFactory = JvmIrCodegenFactory(
+        konst (moduleFragment, components, pluginContext, irActualizedResult) = fir2IrActualizedResult
+        konst dummyBindingContext = NoScopeRecordCliBindingTrace().bindingContext
+        konst codegenFactory = JvmIrCodegenFactory(
             moduleConfiguration,
             moduleConfiguration.get(CLIConfigurationKeys.PHASE_CONFIG),
         )
 
-        val generationState = GenerationState.Builder(
+        konst generationState = GenerationState.Builder(
             (projectEnvironment as VfsBasedProjectEnvironment).project, ClassBuilderFactories.BINARIES,
             moduleFragment.descriptor, dummyBindingContext, moduleConfiguration
         ).withModule(
@@ -282,24 +282,24 @@ object FirKotlinToJvmBytecodeCompiler {
     }
 
     private class CompilationContext(
-        val module: Module,
-        val allSources: List<KtFile>,
-        val projectEnvironment: AbstractProjectEnvironment,
-        val messageCollector: MessageCollector,
-        val renderDiagnosticName: Boolean,
-        val moduleConfiguration: CompilerConfiguration,
-        val performanceManager: CommonCompilerPerformanceManager?,
-        val targetIds: List<TargetId>?,
-        val incrementalComponents: IncrementalCompilationComponents?,
-        val extensionRegistrars: List<FirExtensionRegistrar>,
-        val irGenerationExtensions: Collection<IrGenerationExtension>
+        konst module: Module,
+        konst allSources: List<KtFile>,
+        konst projectEnvironment: AbstractProjectEnvironment,
+        konst messageCollector: MessageCollector,
+        konst renderDiagnosticName: Boolean,
+        konst moduleConfiguration: CompilerConfiguration,
+        konst performanceManager: CommonCompilerPerformanceManager?,
+        konst targetIds: List<TargetId>?,
+        konst incrementalComponents: IncrementalCompilationComponents?,
+        konst extensionRegistrars: List<FirExtensionRegistrar>,
+        konst irGenerationExtensions: Collection<IrGenerationExtension>
     )
 }
 
 fun findMainClass(fir: List<FirFile>): FqName? {
     // TODO: replace with proper main function detector, KT-44557
-    val compatibleClasses = mutableListOf<FqName>()
-    val visitor = object : FirVisitorVoid() {
+    konst compatibleClasses = mutableListOf<FqName>()
+    konst visitor = object : FirVisitorVoid() {
         lateinit var file: FirFile
 
         override fun visitElement(element: FirElement) {}
@@ -312,10 +312,10 @@ fun findMainClass(fir: List<FirFile>): FqName? {
         override fun visitSimpleFunction(simpleFunction: FirSimpleFunction) {
             if (simpleFunction.name.asString() != "main") return
             if (simpleFunction.typeParameters.isNotEmpty()) return
-            when (simpleFunction.valueParameters.size) {
+            when (simpleFunction.konstueParameters.size) {
                 0 -> {}
                 1 -> {
-                    val parameterType = simpleFunction.valueParameters.single().returnTypeRef.coneType
+                    konst parameterType = simpleFunction.konstueParameters.single().returnTypeRef.coneType
                     if (!parameterType.isArrayType || parameterType.arrayElementType()?.isString != true) return
                 }
                 else -> return

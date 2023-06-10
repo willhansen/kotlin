@@ -2,7 +2,7 @@
 // FILE: lib.kt
 
 // Force constructor renaming
-val dummy = run {
+konst dummy = run {
     if (false) {
         js("A")
         js("A_init")
@@ -10,7 +10,7 @@ val dummy = run {
     null
 }
 
-class A(val s: String) {
+class A(konst s: String) {
     constructor(c: Char) : this("$c")
 }
 

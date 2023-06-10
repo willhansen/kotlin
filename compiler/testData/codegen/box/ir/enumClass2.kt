@@ -1,7 +1,7 @@
 // WITH_STDLIB
 import kotlin.test.assertEquals
 
-enum class TestEnumClass(val x: Int) {
+enum class TestEnumClass(konst x: Int) {
     ZERO
 //    {
 //        init {

@@ -41,7 +41,7 @@ fun box(): String {
     check(false, listOfUnspecifiedNullability<String>().descriptor.elementDescriptors.first())
     check(true, listOfUnspecifiedNullability<String?>().descriptor.elementDescriptors.first())
 
-    val module = EmptySerializersModule()
+    konst module = EmptySerializersModule()
     check(false, getSer<String>(module).descriptor)
     check(true, getSer<String?>(module).descriptor)
 

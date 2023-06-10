@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int /* by */
+konst test1: Int /* by */
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -33,7 +33,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}map
   //   Public signature: /C.map|7076745113644856434[0]
-  val map: MutableMap<String, Any>
+  konst map: MutableMap<String, Any>
     // CHECK JVM_IR:
     //   Mangled name: C#<get-map>(){}kotlin.collections.MutableMap<kotlin.String,kotlin.Any>
     //   Public signature: /C.map.<get-map>|-8717997113067483919[0]
@@ -45,7 +45,7 @@ class C {
   // CHECK:
   //   Mangled name: C{}test2
   //   Public signature: /C.test2|2517758057000911509[0]
-  val test2: Int /* by */
+  konst test2: Int /* by */
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test2>(){}kotlin.Int
     //   Public signature: /C.test2.<get-test2>|-8779933517717592707[0]

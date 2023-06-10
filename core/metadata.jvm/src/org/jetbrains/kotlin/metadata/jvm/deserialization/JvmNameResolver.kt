@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.metadata.jvm.JvmProtoBuf
 import org.jetbrains.kotlin.metadata.jvm.JvmProtoBuf.StringTableTypes.Record
 
 class JvmNameResolver(
-    val types: JvmProtoBuf.StringTableTypes,
+    konst types: JvmProtoBuf.StringTableTypes,
     strings: Array<String>
 ) : JvmNameResolverBase(
     strings,

@@ -17,10 +17,10 @@ open enum class A : Enum<A> {
 
   Z = A(x = 5)
 
-  val prop1: String
+  konst prop1: String
     get
 
-  val prop2: String
+  konst prop2: String
     field = "const2"
     get
 
@@ -53,11 +53,11 @@ open enum class A : Enum<A> {
     return <this>.<get-prop1>() + "#" + <this>.<get-prop2>() + "#" + <this>.<get-prop3>()
   }
 
-  fun values(): Array<A> /* Synthetic body for ENUM_VALUES */
+  fun konstues(): Array<A> /* Synthetic body for ENUM_VALUES */
 
-  fun valueOf(value: String): A /* Synthetic body for ENUM_VALUEOF */
+  fun konstueOf(konstue: String): A /* Synthetic body for ENUM_VALUEOF */
 
-  val entries: EnumEntries<A>
+  konst entries: EnumEntries<A>
     get(): EnumEntries<A> /* Synthetic body for ENUM_ENTRIES */
 
 }

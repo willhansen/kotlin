@@ -19,16 +19,16 @@
 /*∆*/ public open external class ClipboardEvent : org.w3c.dom.events.Event {
 /*∆*/     public constructor ClipboardEvent(type: kotlin.String, eventInitDict: org.w3c.dom.clipboard.ClipboardEventInit = ...)
 /*∆*/ 
-/*∆*/     public open val clipboardData: org.w3c.dom.DataTransfer? { get; }
+/*∆*/     public open konst clipboardData: org.w3c.dom.DataTransfer? { get; }
 /*∆*/ 
 /*∆*/     public companion object of ClipboardEvent {
-/*∆*/         public final val AT_TARGET: kotlin.Short { get; }
+/*∆*/         public final konst AT_TARGET: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val BUBBLING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst BUBBLING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val CAPTURING_PHASE: kotlin.Short { get; }
+/*∆*/         public final konst CAPTURING_PHASE: kotlin.Short { get; }
 /*∆*/ 
-/*∆*/         public final val NONE: kotlin.Short { get; }
+/*∆*/         public final konst NONE: kotlin.Short { get; }
 /*∆*/     }
 /*∆*/ }
 /*∆*/ 

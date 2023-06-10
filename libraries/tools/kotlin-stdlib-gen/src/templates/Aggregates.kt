@@ -26,7 +26,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_all = fn("all(predicate: (T) -> Boolean)") {
+    konst f_all = fn("all(predicate: (T) -> Boolean)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -57,7 +57,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_none_predicate = fn("none(predicate: (T) -> Boolean)") {
+    konst f_none_predicate = fn("none(predicate: (T) -> Boolean)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -84,7 +84,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_none = fn("none()") {
+    konst f_none = fn("none()") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -114,7 +114,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_any_predicate = fn("any(predicate: (T) -> Boolean)") {
+    konst f_any_predicate = fn("any(predicate: (T) -> Boolean)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -141,7 +141,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_any = fn("any()") {
+    konst f_any = fn("any()") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -170,7 +170,7 @@ object Aggregates : TemplateGroupBase() {
     }
 
 
-    val f_count_predicate = fn("count(predicate: (T) -> Boolean)") {
+    konst f_count_predicate = fn("count(predicate: (T) -> Boolean)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -180,7 +180,7 @@ object Aggregates : TemplateGroupBase() {
         doc { "Returns the number of ${f.element.pluralize()} matching the given [predicate]." }
         returns("Int")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkCountOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkCountOverflow($konstue)" else konstue
             """
             ${when (f) {
                 Iterables -> "if (this is Collection && isEmpty()) return 0"
@@ -194,14 +194,14 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_count = fn("count()") {
+    konst f_count = fn("count()") {
         includeDefault()
         include(Collections, Maps, CharSequences)
     } builder {
         doc { "Returns the number of ${f.element.pluralize()} in this ${f.collection}." }
         returns("Int")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkCountOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkCountOverflow($konstue)" else konstue
             """
             ${if (f == Iterables) "if (this is Collection) return size" else ""}
             var count = 0
@@ -221,14 +221,14 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_sumBy = fn("sumBy(selector: (T) -> Int)") {
+    konst f_sumBy = fn("sumBy(selector: (T) -> Int)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
         deprecate(Deprecation("Use sumOf instead.", "this.sumOf(selector)", DeprecationLevel.WARNING, warningSince = "1.5"))
 
         inline()
-        doc { "Returns the sum of all values produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
+        doc { "Returns the sum of all konstues produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
         returns("Int")
         body {
             """
@@ -264,7 +264,7 @@ object Aggregates : TemplateGroupBase() {
         } builder {
             inlineOnly()
             since("1.4")
-            val typeShortName = when {
+            konst typeShortName = when {
                 selectorType.startsWith("java") -> selectorType.substringAfterLast('.')
                 else -> selectorType
             }
@@ -279,7 +279,7 @@ object Aggregates : TemplateGroupBase() {
                 wasExperimental("ExperimentalUnsignedTypes")
             }
 
-            doc { "Returns the sum of all values produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
+            doc { "Returns the sum of all konstues produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
             returns(selectorType)
             body {
                 """
@@ -293,7 +293,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_sumByDouble = fn("sumByDouble(selector: (T) -> Double)") {
+    konst f_sumByDouble = fn("sumByDouble(selector: (T) -> Double)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -302,7 +302,7 @@ object Aggregates : TemplateGroupBase() {
         inline()
         specialFor(ArraysOfUnsigned) { inlineOnly() }
 
-        doc { "Returns the sum of all values produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
+        doc { "Returns the sum of all konstues produced by [selector] function applied to each ${f.element} in the ${f.collection}." }
         returns("Double")
         body {
             """
@@ -316,8 +316,8 @@ object Aggregates : TemplateGroupBase() {
     }
 
 
-    val f_minMax = sequence {
-        val genericSpecializations = PrimitiveType.floatingPointPrimitives + setOf(null)
+    konst f_minMax = sequence {
+        konst genericSpecializations = PrimitiveType.floatingPointPrimitives + setOf(null)
 
         fun def(op: String, nullable: Boolean, legacy: Boolean = false, orNull: String = "OrNull".ifOrEmpty(nullable)) =
             fn("$op$orNull()") {
@@ -332,13 +332,13 @@ object Aggregates : TemplateGroupBase() {
                 typeParam("T : Comparable<T>")
                 returns("T" + "?".ifOrEmpty(nullable))
 
-                val isFloat = primitive?.isFloatingPoint() == true
-                val isUnsigned = family == ArraysOfUnsigned
+                konst isFloat = primitive?.isFloatingPoint() == true
+                konst isUnsigned = family == ArraysOfUnsigned
 
                 if (!nullable || legacy) suppress("CONFLICTING_OVERLOADS")
                 if (legacy) {
                     deprecate(Deprecation("Use ${op}OrNull instead.", "this.${op}OrNull()", warningSince = "1.4", errorSince = "1.5", hiddenSince = "1.6"))
-                    val isGeneric = f in listOf(Iterables, Sequences, ArraysOfObjects)
+                    konst isGeneric = f in listOf(Iterables, Sequences, ArraysOfObjects)
                     if (isFloat && isGeneric) {
                         since("1.1")
                     }
@@ -348,7 +348,7 @@ object Aggregates : TemplateGroupBase() {
                     return@builder
                 }
 
-                val doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
+                konst doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
 
                 since("1.4")
                 if (!nullable) since("1.7")
@@ -362,18 +362,18 @@ object Aggregates : TemplateGroupBase() {
                     annotation("@kotlin.jvm.JvmName(\"${op}OrThrow${"-U".ifOrEmpty(isUnsigned)}\")")
                 }
 
-                val acc = op
-                val cmpBlock = if (isFloat)
+                konst acc = op
+                konst cmpBlock = if (isFloat)
                     """$acc = ${op}Of($acc, e)"""
                 else
                     """if ($acc ${if (op == "max") "<" else ">"} e) $acc = e"""
                 body {
                     """
-                    val iterator = iterator()
+                    konst iterator = iterator()
                     if (!iterator.hasNext()) $doOnEmpty
                     var $acc = iterator.next()
                     while (iterator.hasNext()) {
-                        val e = iterator.next()
+                        konst e = iterator.next()
                         $cmpBlock
                     }
                     return $acc
@@ -384,7 +384,7 @@ object Aggregates : TemplateGroupBase() {
                     if (isEmpty()) $doOnEmpty
                     var $acc = this[0]
                     for (i in 1..lastIndex) {
-                        val e = this[i]
+                        konst e = this[i]
                         $cmpBlock
                     }
                     return $acc
@@ -399,7 +399,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_minMaxBy = sequence {
+    konst f_minMaxBy = sequence {
         fun def(op: String, nullable: Boolean, legacy: Boolean = false, orNull: String = "OrNull".ifOrEmpty(nullable)) =
             fn("$op$orNull(selector: (T) -> R)") {
                 if (legacy) platforms(Platform.JVM)
@@ -411,7 +411,7 @@ object Aggregates : TemplateGroupBase() {
                 specialFor(Maps) { if (op == "maxBy" || !legacy) inlineOnly() }
                 typeParam("R : Comparable<R>")
                 returns("T" + "?".ifOrEmpty(nullable))
-                val isUnsigned = family == ArraysOfUnsigned
+                konst isUnsigned = family == ArraysOfUnsigned
 
                 if (!nullable || legacy) suppress("CONFLICTING_OVERLOADS")
                 if (legacy) {
@@ -420,12 +420,12 @@ object Aggregates : TemplateGroupBase() {
                     return@builder
                 }
 
-                val doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
+                konst doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
 
                 since("1.4")
                 if (!nullable) since("1.7")
 
-                doc { "Returns the first ${f.element} yielding the ${if (op == "maxBy") "largest" else "smallest"} value of the given function${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}." }
+                doc { "Returns the first ${f.element} yielding the ${if (op == "maxBy") "largest" else "smallest"} konstue of the given function${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}." }
                 sample("samples.collections.Collections.Aggregates.$op$orNull")
 
                 if (!nullable) {
@@ -433,21 +433,21 @@ object Aggregates : TemplateGroupBase() {
                     annotation("@kotlin.jvm.JvmName(\"${op}OrThrow${"-U".ifOrEmpty(isUnsigned)}\")")
                 }
 
-                val (elem, value, cmp) = if (op == "minBy") Triple("minElem", "minValue", ">") else Triple("maxElem", "maxValue", "<")
+                konst (elem, konstue, cmp) = if (op == "minBy") Triple("minElem", "minValue", ">") else Triple("maxElem", "maxValue", "<")
                 body {
                     """
-                    val iterator = iterator()
+                    konst iterator = iterator()
                     if (!iterator.hasNext()) $doOnEmpty
         
                     var $elem = iterator.next()
                     if (!iterator.hasNext()) return $elem
-                    var $value = selector($elem)
+                    var $konstue = selector($elem)
                     do {
-                        val e = iterator.next()
-                        val v = selector(e)
-                        if ($value $cmp v) {
+                        konst e = iterator.next()
+                        konst v = selector(e)
+                        if ($konstue $cmp v) {
                             $elem = e
-                            $value = v
+                            $konstue = v
                         }
                     } while (iterator.hasNext())
                     return $elem
@@ -458,15 +458,15 @@ object Aggregates : TemplateGroupBase() {
                     if (isEmpty()) $doOnEmpty
         
                     var $elem = this[0]
-                    val lastIndex = this.lastIndex
+                    konst lastIndex = this.lastIndex
                     if (lastIndex == 0) return $elem
-                    var $value = selector($elem)
+                    var $konstue = selector($elem)
                     for (i in 1..lastIndex) {
-                        val e = this[i]
-                        val v = selector(e)
-                        if ($value $cmp v) {
+                        konst e = this[i]
+                        konst v = selector(e)
+                        if ($konstue $cmp v) {
                             $elem = e
-                            $value = v
+                            $konstue = v
                         }
                     }
                     return $elem
@@ -482,7 +482,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_minMaxWith = sequence {
+    konst f_minMaxWith = sequence {
         fun def(op: String, nullable: Boolean, legacy: Boolean = false, orNull: String = "OrNull".ifOrEmpty(nullable)) =
             fn("$op$orNull(comparator: Comparator<in T>)") {
                 if (legacy) platforms(Platform.JVM)
@@ -491,7 +491,7 @@ object Aggregates : TemplateGroupBase() {
             } builder {
                 specialFor(Maps) { if (op == "maxWith" || !legacy) inlineOnly() }
                 returns("T" + "?".ifOrEmpty(nullable))
-                val isUnsigned = family == ArraysOfUnsigned
+                konst isUnsigned = family == ArraysOfUnsigned
 
                 if (!nullable || legacy) suppress("CONFLICTING_OVERLOADS")
                 if (legacy) {
@@ -500,26 +500,26 @@ object Aggregates : TemplateGroupBase() {
                     return@builder
                 }
 
-                val doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
+                konst doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
 
                 since("1.4")
                 if (!nullable) since("1.7")
 
-                doc { "Returns the first ${f.element} having the ${if (op == "maxWith") "largest" else "smallest"} value according to the provided [comparator]${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}." }
+                doc { "Returns the first ${f.element} having the ${if (op == "maxWith") "largest" else "smallest"} konstue according to the provided [comparator]${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}." }
                 if (!nullable) {
                     throws("NoSuchElementException", "if the ${f.collection} is empty.")
                     annotation("@kotlin.jvm.JvmName(\"${op}OrThrow${"-U".ifOrEmpty(isUnsigned)}\")")
                 }
 
-                val (acc, cmp) = if (op == "minWith") Pair("min", ">") else Pair("max", "<")
+                konst (acc, cmp) = if (op == "minWith") Pair("min", ">") else Pair("max", "<")
                 body {
                     """
-                    val iterator = iterator()
+                    konst iterator = iterator()
                     if (!iterator.hasNext()) $doOnEmpty
         
                     var $acc = iterator.next()
                     while (iterator.hasNext()) {
-                        val e = iterator.next()
+                        konst e = iterator.next()
                         if (comparator.compare($acc, e) $cmp 0) $acc = e
                     }
                     return $acc
@@ -530,7 +530,7 @@ object Aggregates : TemplateGroupBase() {
                     if (isEmpty()) $doOnEmpty
                     var $acc = this[0]
                     for (i in 1..lastIndex) {
-                        val e = this[i]
+                        konst e = this[i]
                         if (comparator.compare($acc, e) $cmp 0) $acc = e
                     }
                     return $acc
@@ -557,15 +557,15 @@ object Aggregates : TemplateGroupBase() {
                 annotation("@OptIn(kotlin.experimental.ExperimentalTypeInference::class)")
                 annotation("@OverloadResolutionByLambdaReturnType")
 
-                val isFloat = selectorType != "R"
+                konst isFloat = selectorType != "R"
 
                 doc {
                     """
-                    Returns the ${if (op == "max") "largest" else "smallest"} value among all values produced by [selector] function 
+                    Returns the ${if (op == "max") "largest" else "smallest"} konstue among all konstues produced by [selector] function 
                     applied to each ${f.element} in the ${f.collection}${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}.
                     """ +
                     """
-                    If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+                    If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
                     """.ifOrEmpty(isFloat)
                 }
                 if (!nullable) {
@@ -574,9 +574,9 @@ object Aggregates : TemplateGroupBase() {
 
                 if (!isFloat) typeParam("R : Comparable<R>")
                 returns(selectorType + "?".ifOrEmpty(nullable))
-                val doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
-                val acc = op + "Value"
-                val cmpBlock = if (isFloat)
+                konst doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
+                konst acc = op + "Value"
+                konst cmpBlock = if (isFloat)
                     """$acc = ${op}Of($acc, v)"""
                 else
                     """if ($acc ${if (op == "max") "<" else ">"} v) {
@@ -584,11 +584,11 @@ object Aggregates : TemplateGroupBase() {
                         }"""
                 body {
                     """
-                    val iterator = iterator()
+                    konst iterator = iterator()
                     if (!iterator.hasNext()) $doOnEmpty
                     var $acc = selector(iterator.next())
                     while (iterator.hasNext()) {
-                        val v = selector(iterator.next())
+                        konst v = selector(iterator.next())
                         $cmpBlock
                     }
                     return $acc
@@ -600,7 +600,7 @@ object Aggregates : TemplateGroupBase() {
         
                     var $acc = selector(this[0])
                     for (i in 1..lastIndex) {
-                        val v = selector(this[i])
+                        konst v = selector(this[i])
                         $cmpBlock
                     }
                     return $acc
@@ -620,7 +620,7 @@ object Aggregates : TemplateGroupBase() {
     }
 
     fun f_minMaxOfWith() = sequence {
-        val selectorType = "R"
+        konst selectorType = "R"
         fun def(op: String, nullable: Boolean, orNull: String = "OrNull".ifOrEmpty(nullable)) =
             fn("${op}OfWith$orNull(comparator: Comparator<in R>, selector: (T) -> $selectorType)") {
                 includeDefault()
@@ -633,8 +633,8 @@ object Aggregates : TemplateGroupBase() {
 
                 doc {
                     """
-                    Returns the ${if (op == "max") "largest" else "smallest"} value according to the provided [comparator] 
-                    among all values produced by [selector] function applied to each ${f.element} in the ${f.collection}${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}.
+                    Returns the ${if (op == "max") "largest" else "smallest"} konstue according to the provided [comparator] 
+                    among all konstues produced by [selector] function applied to each ${f.element} in the ${f.collection}${" or `null` if there are no ${f.element.pluralize()}".ifOrEmpty(nullable)}.
                     """ +
                     """
                     @throws NoSuchElementException if the ${f.collection} is empty.
@@ -643,16 +643,16 @@ object Aggregates : TemplateGroupBase() {
 
                 typeParam(selectorType)
                 returns(selectorType + "?".ifOrEmpty(nullable))
-                val doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
-                val acc = op + "Value"
-                val cmp = if (op == "max") "<" else ">"
+                konst doOnEmpty = if (nullable) "return null" else "throw NoSuchElementException()"
+                konst acc = op + "Value"
+                konst cmp = if (op == "max") "<" else ">"
                 body {
                     """
-                    val iterator = iterator()
+                    konst iterator = iterator()
                     if (!iterator.hasNext()) $doOnEmpty
                     var $acc = selector(iterator.next())
                     while (iterator.hasNext()) {
-                        val v = selector(iterator.next())
+                        konst v = selector(iterator.next())
                         if (comparator.compare($acc, v) $cmp 0) {
                             $acc = v
                         }
@@ -666,7 +666,7 @@ object Aggregates : TemplateGroupBase() {
         
                     var $acc = selector(this[0])
                     for (i in 1..lastIndex) {
-                        val v = selector(this[i])
+                        konst v = selector(this[i])
                         if (comparator.compare($acc, v) $cmp 0) {
                             $acc = v
                         }
@@ -685,7 +685,7 @@ object Aggregates : TemplateGroupBase() {
     }
 
 
-    val f_foldIndexed = fn("foldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
+    konst f_foldIndexed = fn("foldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences)
         include(ArraysOfUnsigned)
@@ -695,19 +695,19 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Accumulates value starting with [initial] value and applying [operation] from left to right
-            to current accumulator value and each ${f.element} with its index in the original ${f.collection}.
+            Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+            to current accumulator konstue and each ${f.element} with its index in the original ${f.collection}.
             
-            Returns the specified [initial] value if the ${f.collection} is empty.
+            Returns the specified [initial] konstue if the ${f.collection} is empty.
             
-            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator value
-            and the ${f.element} itself, and calculates the next accumulator value.
+            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator konstue
+            and the ${f.element} itself, and calculates the next accumulator konstue.
             """
         }
         typeParam("R")
         returns("R")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
             """
             var index = 0
             var accumulator = initial
@@ -717,7 +717,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_foldRightIndexed = fn("foldRightIndexed(initial: R, operation: (index: Int, T, acc: R) -> R)") {
+    konst f_foldRightIndexed = fn("foldRightIndexed(initial: R, operation: (index: Int, T, acc: R) -> R)") {
         include(CharSequences, Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -725,13 +725,13 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Accumulates value starting with [initial] value and applying [operation] from right to left
-            to each ${f.element} with its index in the original ${f.collection} and current accumulator value.
+            Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+            to each ${f.element} with its index in the original ${f.collection} and current accumulator konstue.
             
-            Returns the specified [initial] value if the ${f.collection} is empty.
+            Returns the specified [initial] konstue if the ${f.collection} is empty.
             
             @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, the ${f.element} itself
-            and current accumulator value, and calculates the next accumulator value.
+            and current accumulator konstue, and calculates the next accumulator konstue.
             """
         }
         typeParam("R")
@@ -751,9 +751,9 @@ object Aggregates : TemplateGroupBase() {
             """
             var accumulator = initial
             if (!isEmpty()) {
-                val iterator = listIterator(size)
+                konst iterator = listIterator(size)
                 while (iterator.hasPrevious()) {
-                    val index = iterator.previousIndex()
+                    konst index = iterator.previousIndex()
                     accumulator = operation(index, iterator.previous(), accumulator)
                 }
             }
@@ -762,7 +762,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_fold = fn("fold(initial: R, operation: (acc: R, T) -> R)") {
+    konst f_fold = fn("fold(initial: R, operation: (acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences)
         include(ArraysOfUnsigned)
@@ -772,12 +772,12 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Accumulates value starting with [initial] value and applying [operation] from left to right 
-            to current accumulator value and each ${f.element}.
+            Accumulates konstue starting with [initial] konstue and applying [operation] from left to right 
+            to current accumulator konstue and each ${f.element}.
 
-            Returns the specified [initial] value if the ${f.collection} is empty.
+            Returns the specified [initial] konstue if the ${f.collection} is empty.
 
-            @param [operation] function that takes current accumulator value and ${f.element.prefixWithArticle()}, and calculates the next accumulator value.
+            @param [operation] function that takes current accumulator konstue and ${f.element.prefixWithArticle()}, and calculates the next accumulator konstue.
             """
         }
         typeParam("R")
@@ -791,7 +791,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_foldRight = fn("foldRight(initial: R, operation: (T, acc: R) -> R)") {
+    konst f_foldRight = fn("foldRight(initial: R, operation: (T, acc: R) -> R)") {
         include(CharSequences, Lists, ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -799,12 +799,12 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Accumulates value starting with [initial] value and applying [operation] from right to left 
-            to each ${f.element} and current accumulator value.
+            Accumulates konstue starting with [initial] konstue and applying [operation] from right to left 
+            to each ${f.element} and current accumulator konstue.
 
-            Returns the specified [initial] value if the ${f.collection} is empty.
+            Returns the specified [initial] konstue if the ${f.collection} is empty.
 
-            @param [operation] function that takes ${f.element.prefixWithArticle()} and current accumulator value, and calculates the next accumulator value.
+            @param [operation] function that takes ${f.element.prefixWithArticle()} and current accumulator konstue, and calculates the next accumulator konstue.
             """
         }
         typeParam("R")
@@ -823,7 +823,7 @@ object Aggregates : TemplateGroupBase() {
             """
             var accumulator = initial
             if (!isEmpty()) {
-                val iterator = listIterator(size)
+                konst iterator = listIterator(size)
                 while (iterator.hasPrevious()) {
                     accumulator = operation(iterator.previous(), accumulator)
                 }
@@ -835,21 +835,21 @@ object Aggregates : TemplateGroupBase() {
 
     private fun MemberBuilder.reduceDoc(fName: String): String {
         fun summaryDoc(isLeftToRight: Boolean, isIndexed: Boolean): String {
-            val acc = "current accumulator value"
-            val element = if (isIndexed) "each ${f.element} with its index in the original ${f.collection}" else "each ${f.element}"
-            val start = if (isLeftToRight) "first" else "last"
-            val iteration = if (isLeftToRight) "left to right\nto $acc and $element" else "right to left\nto $element and $acc"
+            konst acc = "current accumulator konstue"
+            konst element = if (isIndexed) "each ${f.element} with its index in the original ${f.collection}" else "each ${f.element}"
+            konst start = if (isLeftToRight) "first" else "last"
+            konst iteration = if (isLeftToRight) "left to right\nto $acc and $element" else "right to left\nto $element and $acc"
             return """
-                Accumulates value starting with the $start ${f.element} and applying [operation] from $iteration."""
+                Accumulates konstue starting with the $start ${f.element} and applying [operation] from $iteration."""
         }
 
         fun paramDoc(isLeftToRight: Boolean, isIndexed: Boolean): String {
-            val acc = "current accumulator value"
-            val element = if (isIndexed) "the ${f.element} itself" else f.element.prefixWithArticle()
-            val index = if (isIndexed) "the index of ${f.element.prefixWithArticle()}, " else ""
+            konst acc = "current accumulator konstue"
+            konst element = if (isIndexed) "the ${f.element} itself" else f.element.prefixWithArticle()
+            konst index = if (isIndexed) "the index of ${f.element.prefixWithArticle()}, " else ""
             return """
                 @param [operation] function that takes $index${if (isLeftToRight) "$acc and $element" else "$element and $acc"}, 
-                and calculates the next accumulator value."""
+                and calculates the next accumulator konstue."""
         }
 
         fun emptyNote(isThrowing: Boolean): String = if (isThrowing) """
@@ -858,16 +858,16 @@ object Aggregates : TemplateGroupBase() {
         else """
             Returns `null` if the ${f.collection} is empty."""
 
-        val isLeftToRight = fName.contains("Right").not()
-        val isIndexed = fName.contains("Indexed")
-        val isThrowing = fName.contains("OrNull").not()
+        konst isLeftToRight = fName.contains("Right").not()
+        konst isIndexed = fName.contains("Indexed")
+        konst isThrowing = fName.contains("OrNull").not()
         return """
             ${summaryDoc(isLeftToRight, isIndexed)}
             ${emptyNote(isThrowing)}
             ${paramDoc(isLeftToRight, isIndexed)}"""
     }
 
-    val f_reduceIndexed = fn("reduceIndexed(operation: (index: Int, acc: T, T) -> T)") {
+    konst f_reduceIndexed = fn("reduceIndexed(operation: (index: Int, acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         inline()
@@ -890,7 +890,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceIndexedSuper = fn("reduceIndexed(operation: (index: Int, acc: S, T) -> S)") {
+    konst f_reduceIndexedSuper = fn("reduceIndexed(operation: (index: Int, acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         inline()
@@ -901,9 +901,9 @@ object Aggregates : TemplateGroupBase() {
         sample("samples.collections.Collections.Aggregates.reduce")
         returns("S")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) throw UnsupportedOperationException("Empty ${f.doc.collection} can't be reduced.")
 
             var index = 1
@@ -928,7 +928,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceIndexedOrNull = fn("reduceIndexedOrNull(operation: (index: Int, acc: T, T) -> T)") {
+    konst f_reduceIndexedOrNull = fn("reduceIndexedOrNull(operation: (index: Int, acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         since("1.4")
@@ -952,7 +952,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceIndexedOrNullSuper = fn("reduceIndexedOrNull(operation: (index: Int, acc: S, T) -> S)") {
+    konst f_reduceIndexedOrNullSuper = fn("reduceIndexedOrNull(operation: (index: Int, acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         since("1.4")
@@ -964,9 +964,9 @@ object Aggregates : TemplateGroupBase() {
         sample("samples.collections.Collections.Aggregates.reduceOrNull")
         returns("S?")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) return null
 
             var index = 1
@@ -991,7 +991,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightIndexed = fn("reduceRightIndexed(operation: (index: Int, T, acc: T) -> T)") {
+    konst f_reduceRightIndexed = fn("reduceRightIndexed(operation: (index: Int, T, acc: T) -> T)") {
         include(CharSequences, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -1016,7 +1016,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightIndexedSuper = fn("reduceRightIndexed(operation: (index: Int, T, acc: S) -> S)") {
+    konst f_reduceRightIndexedSuper = fn("reduceRightIndexed(operation: (index: Int, T, acc: S) -> S)") {
         include(Lists, ArraysOfObjects)
     } builder {
         inline()
@@ -1042,13 +1042,13 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Lists) {
             """
-            val iterator = listIterator(size)
+            konst iterator = listIterator(size)
             if (!iterator.hasPrevious())
                 throw UnsupportedOperationException("Empty list can't be reduced.")
 
             var accumulator: S = iterator.previous()
             while (iterator.hasPrevious()) {
-                val index = iterator.previousIndex()
+                konst index = iterator.previousIndex()
                 accumulator = operation(index, iterator.previous(), accumulator)
             }
 
@@ -1057,7 +1057,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightIndexedOrNull = fn("reduceRightIndexedOrNull(operation: (index: Int, T, acc: T) -> T)") {
+    konst f_reduceRightIndexedOrNull = fn("reduceRightIndexedOrNull(operation: (index: Int, T, acc: T) -> T)") {
         include(CharSequences, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -1083,7 +1083,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightIndexedOrNullSuper = fn("reduceRightIndexedOrNull(operation: (index: Int, T, acc: S) -> S)") {
+    konst f_reduceRightIndexedOrNullSuper = fn("reduceRightIndexedOrNull(operation: (index: Int, T, acc: S) -> S)") {
         include(Lists, ArraysOfObjects)
     } builder {
         since("1.4")
@@ -1110,13 +1110,13 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Lists) {
             """
-            val iterator = listIterator(size)
+            konst iterator = listIterator(size)
             if (!iterator.hasPrevious())
                 return null
 
             var accumulator: S = iterator.previous()
             while (iterator.hasPrevious()) {
-                val index = iterator.previousIndex()
+                konst index = iterator.previousIndex()
                 accumulator = operation(index, iterator.previous(), accumulator)
             }
 
@@ -1125,7 +1125,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduce = fn("reduce(operation: (acc: T, T) -> T)") {
+    konst f_reduce = fn("reduce(operation: (acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         inline()
@@ -1148,7 +1148,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceSuper = fn("reduce(operation: (acc: S, T) -> S)") {
+    konst f_reduceSuper = fn("reduce(operation: (acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         inline()
@@ -1160,7 +1160,7 @@ object Aggregates : TemplateGroupBase() {
         returns("S")
         body {
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) throw UnsupportedOperationException("Empty ${f.doc.collection} can't be reduced.")
 
             var accumulator: S = iterator.next()
@@ -1184,7 +1184,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceOrNull = fn("reduceOrNull(operation: (acc: T, T) -> T)") {
+    konst f_reduceOrNull = fn("reduceOrNull(operation: (acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         since("1.4")
@@ -1209,7 +1209,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceOrNullSuper = fn("reduceOrNull(operation: (acc: S, T) -> S)") {
+    konst f_reduceOrNullSuper = fn("reduceOrNull(operation: (acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         since("1.4")
@@ -1223,7 +1223,7 @@ object Aggregates : TemplateGroupBase() {
         returns("S?")
         body {
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) return null
 
             var accumulator: S = iterator.next()
@@ -1247,7 +1247,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRight = fn("reduceRight(operation: (T, acc: T) -> T)") {
+    konst f_reduceRight = fn("reduceRight(operation: (T, acc: T) -> T)") {
         include(CharSequences, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         inline()
@@ -1271,7 +1271,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightSuper = fn("reduceRight(operation: (T, acc: S) -> S)") {
+    konst f_reduceRightSuper = fn("reduceRight(operation: (T, acc: S) -> S)") {
         include(Lists, ArraysOfObjects)
     } builder {
         inline()
@@ -1295,7 +1295,7 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Lists) {
             """
-            val iterator = listIterator(size)
+            konst iterator = listIterator(size)
             if (!iterator.hasPrevious())
                 throw UnsupportedOperationException("Empty list can't be reduced.")
 
@@ -1309,7 +1309,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightOrNull = fn("reduceRightOrNull(operation: (T, acc: T) -> T)") {
+    konst f_reduceRightOrNull = fn("reduceRightOrNull(operation: (T, acc: T) -> T)") {
         include(CharSequences, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -1335,7 +1335,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_reduceRightOrNullSuper = fn("reduceRightOrNull(operation: (T, acc: S) -> S)") {
+    konst f_reduceRightOrNullSuper = fn("reduceRightOrNull(operation: (T, acc: S) -> S)") {
         include(Lists, ArraysOfObjects)
     } builder {
         since("1.4")
@@ -1361,7 +1361,7 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Lists) {
             """
-            val iterator = listIterator(size)
+            konst iterator = listIterator(size)
             if (!iterator.hasPrevious())
                 return null
 
@@ -1378,18 +1378,18 @@ object Aggregates : TemplateGroupBase() {
     private fun scanAccMutationNote(hasInitial: Boolean, f: Family): String {
         if (!hasInitial && f.isPrimitiveSpecialization) return ""
 
-        val initialValueRequirement = if (hasInitial && f == Sequences)
-            """The [initial] value should also be immutable (or should not be mutated)
+        konst initialValueRequirement = if (hasInitial && f == Sequences)
+            """The [initial] konstue should also be immutable (or should not be mutated)
             as it may be passed to [operation] function later because of sequence's lazy nature.
             """ else
             ""
         return """
-        Note that `acc` value passed to [operation] function should not be mutated;
-        otherwise it would affect the previous value in resulting ${f.mapResult}.
+        Note that `acc` konstue passed to [operation] function should not be mutated;
+        otherwise it would affect the previous konstue in resulting ${f.mapResult}.
         $initialValueRequirement"""
     }
 
-    val f_runningFold = fn("runningFold(initial: R, operation: (acc: R, T) -> R)") {
+    konst f_runningFold = fn("runningFold(initial: R, operation: (acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1405,10 +1405,10 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element} and current accumulator value that starts with [initial] value.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element} and current accumulator konstue that starts with [initial] konstue.
             ${scanAccMutationNote(true, f)}
-            @param [operation] function that takes current accumulator value and ${f.element.prefixWithArticle()}, and calculates the next accumulator value.
+            @param [operation] function that takes current accumulator konstue and ${f.element.prefixWithArticle()}, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningFold")
@@ -1418,7 +1418,7 @@ object Aggregates : TemplateGroupBase() {
             """
             if (isEmpty()) return listOf(initial)
 
-            val result = ArrayList<R>(${f.code.size} + 1).apply { add(initial) }
+            konst result = ArrayList<R>(${f.code.size} + 1).apply { add(initial) }
             var accumulator = initial
             for (element in this) {
                 accumulator = operation(accumulator, element)
@@ -1429,10 +1429,10 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Iterables) {
             """
-            val estimatedSize = collectionSizeOrDefault(9)
+            konst estimatedSize = collectionSizeOrDefault(9)
             if (estimatedSize == 0) return listOf(initial)
             
-            val result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
+            konst result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
             var accumulator = initial
             for (element in this) {
                 accumulator = operation(accumulator, element)
@@ -1455,7 +1455,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_scan = fn("scan(initial: R, operation: (acc: R, T) -> R)") {
+    konst f_scan = fn("scan(initial: R, operation: (acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1472,10 +1472,10 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element} and current accumulator value that starts with [initial] value.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element} and current accumulator konstue that starts with [initial] konstue.
             ${scanAccMutationNote(true, f)}
-            @param [operation] function that takes current accumulator value and ${f.element.prefixWithArticle()}, and calculates the next accumulator value.
+            @param [operation] function that takes current accumulator konstue and ${f.element.prefixWithArticle()}, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.scan")
@@ -1484,7 +1484,7 @@ object Aggregates : TemplateGroupBase() {
         body { "return runningFold(initial, operation)" }
     }
 
-    val f_runningFoldIndexed = fn("runningFoldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
+    konst f_runningFoldIndexed = fn("runningFoldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1500,11 +1500,11 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right
-            to each ${f.element}, its index in the original ${f.collection} and current accumulator value that starts with [initial] value.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right
+            to each ${f.element}, its index in the original ${f.collection} and current accumulator konstue that starts with [initial] konstue.
             ${scanAccMutationNote(true, f)}
-            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator value
-            and the ${f.element} itself, and calculates the next accumulator value.
+            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator konstue
+            and the ${f.element} itself, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningFold")
@@ -1514,7 +1514,7 @@ object Aggregates : TemplateGroupBase() {
             """
             if (isEmpty()) return listOf(initial)
 
-            val result = ArrayList<R>(${f.code.size} + 1).apply { add(initial) }
+            konst result = ArrayList<R>(${f.code.size} + 1).apply { add(initial) }
             var accumulator = initial
             for (index in indices) {
                 accumulator = operation(index, accumulator, this[index])
@@ -1525,10 +1525,10 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Iterables) {
             """
-            val estimatedSize = collectionSizeOrDefault(9)
+            konst estimatedSize = collectionSizeOrDefault(9)
             if (estimatedSize == 0) return listOf(initial)
             
-            val result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
+            konst result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
             var index = 0
             var accumulator = initial
             for (element in this) {
@@ -1553,7 +1553,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_scanIndexed = fn("scanIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
+    konst f_scanIndexed = fn("scanIndexed(initial: R, operation: (index: Int, acc: R, T) -> R)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1570,11 +1570,11 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right
-            to each ${f.element}, its index in the original ${f.collection} and current accumulator value that starts with [initial] value.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right
+            to each ${f.element}, its index in the original ${f.collection} and current accumulator konstue that starts with [initial] konstue.
             ${scanAccMutationNote(true, f)}
-            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator value
-            and the ${f.element} itself, and calculates the next accumulator value.
+            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator konstue
+            and the ${f.element} itself, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.scan")
@@ -1583,7 +1583,7 @@ object Aggregates : TemplateGroupBase() {
         body { "return runningFoldIndexed(initial, operation)" }
     }
 
-    val f_runningReduce = fn("runningReduce(operation: (acc: T, T) -> T)") {
+    konst f_runningReduce = fn("runningReduce(operation: (acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         since("1.4")
@@ -1595,10 +1595,10 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element} and current accumulator value that starts with the first ${f.element} of this ${f.collection}.
+            Returns a list containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element} and current accumulator konstue that starts with the first ${f.element} of this ${f.collection}.
             ${scanAccMutationNote(false, f)}
-            @param [operation] function that takes current accumulator value and ${f.element.prefixWithArticle()}, and calculates the next accumulator value.
+            @param [operation] function that takes current accumulator konstue and ${f.element.prefixWithArticle()}, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningReduce")
@@ -1608,7 +1608,7 @@ object Aggregates : TemplateGroupBase() {
             if (isEmpty()) return emptyList()
             
             var accumulator = this[0]
-            val result = ArrayList<T>(${f.code.size}).apply { add(accumulator) }
+            konst result = ArrayList<T>(${f.code.size}).apply { add(accumulator) }
             for (index in 1 until ${f.code.size}) {
                 accumulator = operation(accumulator, this[index])
                 result.add(accumulator)
@@ -1618,7 +1618,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_runningReduceIndexed = fn("runningReduceIndexed(operation: (index: Int, acc: T, T) -> T)") {
+    konst f_runningReduceIndexed = fn("runningReduceIndexed(operation: (index: Int, acc: T, T) -> T)") {
         include(ArraysOfPrimitives, ArraysOfUnsigned, CharSequences)
     } builder {
         since("1.4")
@@ -1630,11 +1630,11 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a list containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element}, its index in the original ${f.collection} and current accumulator value that starts with the first ${f.element} of this ${f.collection}.
+            Returns a list containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element}, its index in the original ${f.collection} and current accumulator konstue that starts with the first ${f.element} of this ${f.collection}.
             ${scanAccMutationNote(false, f)}
-            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator value
-            and the ${f.element} itself, and calculates the next accumulator value.
+            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator konstue
+            and the ${f.element} itself, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningReduce")
@@ -1644,7 +1644,7 @@ object Aggregates : TemplateGroupBase() {
             if (isEmpty()) return emptyList()
 
             var accumulator = this[0]
-            val result = ArrayList<T>(${f.code.size}).apply { add(accumulator) }
+            konst result = ArrayList<T>(${f.code.size}).apply { add(accumulator) }
             for (index in 1 until ${f.code.size}) {
                 accumulator = operation(index, accumulator, this[index])
                 result.add(accumulator)
@@ -1654,7 +1654,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_runningReduceSuper = fn("runningReduce(operation: (acc: S, T) -> S)") {
+    konst f_runningReduceSuper = fn("runningReduce(operation: (acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         since("1.4")
@@ -1670,10 +1670,10 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element} and current accumulator value that starts with the first ${f.element} of this ${f.collection}.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element} and current accumulator konstue that starts with the first ${f.element} of this ${f.collection}.
             ${scanAccMutationNote(false, f)}
-            @param [operation] function that takes current accumulator value and the ${f.element}, and calculates the next accumulator value.
+            @param [operation] function that takes current accumulator konstue and the ${f.element}, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningReduce")
@@ -1684,7 +1684,7 @@ object Aggregates : TemplateGroupBase() {
             if (isEmpty()) return emptyList()
 
             var accumulator: S = this[0]
-            val result = ArrayList<S>(size).apply { add(accumulator) }
+            konst result = ArrayList<S>(size).apply { add(accumulator) }
             for (index in 1 until size) {
                 accumulator = operation(accumulator, this[index])
                 result.add(accumulator)
@@ -1694,11 +1694,11 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Iterables) {
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) return emptyList()
 
             var accumulator: S = iterator.next()
-            val result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
+            konst result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
             while (iterator.hasNext()) {
                 accumulator = operation(accumulator, iterator.next())
                 result.add(accumulator)
@@ -1709,7 +1709,7 @@ object Aggregates : TemplateGroupBase() {
         body(Sequences) {
             """
             return sequence {
-                val iterator = iterator()
+                konst iterator = iterator()
                 if (iterator.hasNext()) {
                     var accumulator: S = iterator.next()
                     yield(accumulator)
@@ -1723,7 +1723,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_runningReduceIndexedSuper = fn("runningReduceIndexed(operation: (index: Int, acc: S, T) -> S)") {
+    konst f_runningReduceIndexedSuper = fn("runningReduceIndexed(operation: (index: Int, acc: S, T) -> S)") {
         include(ArraysOfObjects, Iterables, Sequences)
     } builder {
         since("1.4")
@@ -1738,11 +1738,11 @@ object Aggregates : TemplateGroupBase() {
 
         doc {
             """
-            Returns a ${f.mapResult} containing successive accumulation values generated by applying [operation] from left to right 
-            to each ${f.element}, its index in the original ${f.collection} and current accumulator value that starts with the first ${f.element} of this ${f.collection}.
+            Returns a ${f.mapResult} containing successive accumulation konstues generated by applying [operation] from left to right 
+            to each ${f.element}, its index in the original ${f.collection} and current accumulator konstue that starts with the first ${f.element} of this ${f.collection}.
             ${scanAccMutationNote(false, f)}
-            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator value
-            and the ${f.element} itself, and calculates the next accumulator value.
+            @param [operation] function that takes the index of ${f.element.prefixWithArticle()}, current accumulator konstue
+            and the ${f.element} itself, and calculates the next accumulator konstue.
             """
         }
         sample("samples.collections.Collections.Aggregates.runningReduce")
@@ -1753,7 +1753,7 @@ object Aggregates : TemplateGroupBase() {
             if (isEmpty()) return emptyList()
 
             var accumulator: S = this[0]
-            val result = ArrayList<S>(size).apply { add(accumulator) }
+            konst result = ArrayList<S>(size).apply { add(accumulator) }
             for (index in 1 until size) {
                 accumulator = operation(index, accumulator, this[index])
                 result.add(accumulator)
@@ -1763,11 +1763,11 @@ object Aggregates : TemplateGroupBase() {
         }
         body(Iterables) {
             """
-            val iterator = this.iterator()
+            konst iterator = this.iterator()
             if (!iterator.hasNext()) return emptyList()
 
             var accumulator: S = iterator.next()
-            val result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
+            konst result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
             var index = 1
             while (iterator.hasNext()) {
                 accumulator = operation(index++, accumulator, iterator.next())
@@ -1779,7 +1779,7 @@ object Aggregates : TemplateGroupBase() {
         body(Sequences) {
             """
             return sequence {
-                val iterator = iterator()
+                konst iterator = iterator()
                 if (iterator.hasNext()) {
                     var accumulator: S = iterator.next()
                     yield(accumulator)
@@ -1795,7 +1795,7 @@ object Aggregates : TemplateGroupBase() {
     }
 
 
-    val f_onEach = fn("onEach(action: (T) -> Unit)") {
+    konst f_onEach = fn("onEach(action: (T) -> Unit)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1811,7 +1811,7 @@ object Aggregates : TemplateGroupBase() {
 
         specialFor(Iterables, Maps, CharSequences) {
             inline()
-            val collectionType = when (f) {
+            konst collectionType = when (f) {
                 Maps -> "M"
                 CharSequences -> "S"
                 else -> "C"
@@ -1838,7 +1838,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_onEachIndexed = fn("onEachIndexed(action: (index: Int, T) -> Unit)") {
+    konst f_onEachIndexed = fn("onEachIndexed(action: (index: Int, T) -> Unit)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1861,7 +1861,7 @@ object Aggregates : TemplateGroupBase() {
 
         specialFor(Maps, Iterables, CharSequences) {
             inline()
-            val collectionType = when (f) {
+            konst collectionType = when (f) {
                 Maps -> "M"
                 CharSequences -> "S"
                 else -> "C"
@@ -1893,7 +1893,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_forEach = fn("forEach(action: (T) -> Unit)") {
+    konst f_forEach = fn("forEach(action: (T) -> Unit)") {
         includeDefault()
         include(Maps, CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1910,7 +1910,7 @@ object Aggregates : TemplateGroupBase() {
         }
     }
 
-    val f_forEachIndexed = fn("forEachIndexed(action: (index: Int, T) -> Unit)") {
+    konst f_forEachIndexed = fn("forEachIndexed(action: (index: Int, T) -> Unit)") {
         includeDefault()
         include(CharSequences, ArraysOfUnsigned)
     } builder {
@@ -1925,7 +1925,7 @@ object Aggregates : TemplateGroupBase() {
             """ }
         returns("Unit")
         body {
-            fun checkOverflow(value: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($value)" else value
+            fun checkOverflow(konstue: String) = if (f == Sequences || f == Iterables) "checkIndexOverflow($konstue)" else konstue
             """
             var index = 0
             for (item in this) action(${checkOverflow("index++")}, item)

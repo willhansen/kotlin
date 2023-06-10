@@ -19,10 +19,10 @@ import JavaClass.*
 import kotlin.reflect.*
 
 fun test() {
-    val pubFinRef: KProperty0<String> = ::publicFinal
-    val pubMutRef: KMutableProperty0<Any?> = ::publicMutable
-    val protFinRef: KProperty<Double> = ::protectedFinal
-    val protMutRef: KMutableProperty<Char> = ::protectedMutable
-    val privFinRef: KProperty<JavaClass?> = ::<!UNRESOLVED_REFERENCE!>privateFinal<!>
-    val privMutRef: KMutableProperty<Throwable?> = ::<!UNRESOLVED_REFERENCE!>privateMutable<!>
+    konst pubFinRef: KProperty0<String> = ::publicFinal
+    konst pubMutRef: KMutableProperty0<Any?> = ::publicMutable
+    konst protFinRef: KProperty<Double> = ::protectedFinal
+    konst protMutRef: KMutableProperty<Char> = ::protectedMutable
+    konst privFinRef: KProperty<JavaClass?> = ::<!UNRESOLVED_REFERENCE!>privateFinal<!>
+    konst privMutRef: KMutableProperty<Throwable?> = ::<!UNRESOLVED_REFERENCE!>privateMutable<!>
 }

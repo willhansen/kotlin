@@ -31,7 +31,7 @@ abstract class AbstractTypeConstructor(storageManager: StorageManager) : Classif
 
     @TypeRefinement
     private inner class ModuleViewTypeConstructor(
-        private val kotlinTypeRefiner: KotlinTypeRefiner
+        private konst kotlinTypeRefiner: KotlinTypeRefiner
     ) : TypeConstructor {
         /* NB: it is important to use PUBLICATION here instead of 'storageManager.createLazyValue { ... }'
 
@@ -42,7 +42,7 @@ abstract class AbstractTypeConstructor(storageManager: StorageManager) : Classif
         Obviously, a lot of code acquires locks in different order (sources lock first, then built-ins lock), so that would
         result in deadlock
          */
-        private val refinedSupertypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        private konst refinedSupertypes by lazy(LazyThreadSafetyMode.PUBLICATION) {
             @OptIn(TypeRefinement::class)
             kotlinTypeRefiner.refineTypes(this@AbstractTypeConstructor.getSupertypes())
         }
@@ -69,12 +69,12 @@ abstract class AbstractTypeConstructor(storageManager: StorageManager) : Classif
     // In current version diagnostic about loops in supertypes is reported on each vertex (supertype reference) that lies on the cycle.
     // To achieve that we store both versions of supertypes --- before and after loops disconnection.
     // The first one is used for computation of neighbours in supertypes graph (see Companion.computeNeighbours)
-    private class Supertypes(val allSupertypes: Collection<KotlinType>) {
+    private class Supertypes(konst allSupertypes: Collection<KotlinType>) {
         // initializer is only needed as a stub for case when 'getSupertypes' is called while 'supertypes' are being calculated
         var supertypesWithoutCycles: List<KotlinType> = listOf(ErrorUtils.errorTypeForLoopInSupertypes)
     }
 
-    private val supertypes = storageManager.createLazyValueWithPostCompute(
+    private konst supertypes = storageManager.createLazyValueWithPostCompute(
         { Supertypes(computeSupertypes()) },
         { Supertypes(listOf(ErrorUtils.errorTypeForLoopInSupertypes)) },
         { supertypes ->
@@ -114,14 +114,14 @@ abstract class AbstractTypeConstructor(storageManager: StorageManager) : Classif
         } ?: supertypes
 
     protected abstract fun computeSupertypes(): Collection<KotlinType>
-    protected abstract val supertypeLoopChecker: SupertypeLoopChecker
+    protected abstract konst supertypeLoopChecker: SupertypeLoopChecker
     protected open fun reportSupertypeLoopError(type: KotlinType) {}
 
     protected open fun processSupertypesWithoutCycles(supertypes: List<@JvmSuppressWildcards KotlinType>): List<KotlinType> = supertypes
 
     // TODO: overload in AbstractTypeParameterDescriptor?
     protected open fun reportScopesLoopError(type: KotlinType) {}
-    protected open val shouldReportCyclicScopeWithCompanionWarning: Boolean = false
+    protected open konst shouldReportCyclicScopeWithCompanionWarning: Boolean = false
 
     protected open fun getAdditionalNeighboursInSupertypeGraph(useCompanions: Boolean): Collection<KotlinType> = emptyList()
     protected open fun defaultSupertypeIfEmpty(): KotlinType? = null

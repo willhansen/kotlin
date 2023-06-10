@@ -18,7 +18,7 @@ where advanced options include:
                              default: legacy
   -Xbackend-threads=<N>      When using the IR backend, run lowerings by file in N parallel threads.
                              0 means use a thread per processor core.
-                             Default value is 1
+                             Default konstue is 1
   -Xbuild-file=<path>        Path to the .xml build file to compile
   -Xcompile-java             Reuse javac analysis and compile Java source files
   -Xdump-declarations-to=<path> Path to JSON file to dump Java to Kotlin declaration mappings
@@ -43,10 +43,10 @@ where advanced options include:
   -Xjavac-arguments=<option[,]> Java compiler arguments
   -Xjdk-release=<version>    Compile against the specified JDK API version, similarly to javac's `-release`. Requires JDK 9 or newer.
                              Supported versions depend on the used JDK; for JDK 17+ supported versions are 1.8, 9, 10, ..., 20.
-                             Also sets `-jvm-target` value equal to the selected JDK version
+                             Also sets `-jvm-target` konstue equal to the selected JDK version
   -Xjspecify-annotations=ignore|strict|warn
                              Specify behavior for jspecify annotations.
-                             Default value is 'warn'
+                             Default konstue is 'warn'
   -Xjsr305={ignore/strict/warn}|under-migration:{ignore/strict/warn}|@<fq.name>:{ignore/strict/warn}
                              Specify behavior for JSR-305 nullability annotations:
                              -Xjsr305={ignore/strict/warn}                   globally (all non-@UnderMigration annotations)
@@ -85,7 +85,7 @@ where advanced options include:
   -Xlink-via-signatures      Link JVM IR symbols via signatures, instead of descriptors.
                              This mode is slower, but can be useful in troubleshooting problems with the JVM IR backend
   -Xno-call-assertions       Don't generate not-null assertions for arguments of platform types
-  -Xno-kotlin-nothing-value-exception
+  -Xno-kotlin-nothing-konstue-exception
                              Do not use KotlinNothingValueException available since 1.4
   -Xno-new-java-annotation-targets
                              Do not generate Java 1.8+ targets for Kotlin annotation classes
@@ -109,7 +109,7 @@ where advanced options include:
                              Debug option: Run compiler with async profiler and save snapshots to `outputDir`; `command` is passed to async-profiler on start.
                              `profilerPath` is a path to libasyncProfiler.so; async-profiler.jar should be on the compiler classpath.
                              If it's not on the classpath, the compiler will attempt to load async-profiler.jar from the containing directory of profilerPath.
-                             Example: -Xprofile=<PATH_TO_ASYNC_PROFILER>/async-profiler/build/libasyncProfiler.so:event=cpu,interval=1ms,threads,start:<SNAPSHOT_DIR_PATH>
+                             Example: -Xprofile=<PATH_TO_ASYNC_PROFILER>/async-profiler/build/libasyncProfiler.so:event=cpu,interkonst=1ms,threads,start:<SNAPSHOT_DIR_PATH>
   -Xrepeat=<number>          Debug option: Repeats modules compilation <number> times
   -Xsam-conversions={class|indy} Select code generation scheme for SAM conversions.
                              -Xsam-conversions=indy              Generate SAM conversions using `invokedynamic` with `LambdaMetafactory.metafactory`. Requires `-jvm-target 1.8` or greater.
@@ -117,8 +117,8 @@ where advanced options include:
   -Xsanitize-parentheses     Transform '(' and ')' in method names to some other character sequence.
                              This mode can BREAK BINARY COMPATIBILITY and is only supposed to be used to workaround
                              problems with parentheses in identifiers on certain platforms
-  -Xscript-resolver-environment=<key=value[,]>
-                             Script resolver environment in key-value pairs (the value could be quoted and escaped)
+  -Xscript-resolver-environment=<key=konstue[,]>
+                             Script resolver environment in key-konstue pairs (the konstue could be quoted and escaped)
   -Xserialize-ir={none|inline|all}
                              Save IR to metadata (EXPERIMENTAL)
   -Xgenerate-strict-metadata-version
@@ -131,7 +131,7 @@ where advanced options include:
                              default: `indy-with-constants` for JVM target 9 or greater, `inline` otherwise
   -Xsupport-compatqual-checker-framework-annotations=enable|disable
                              Specify behavior for Checker Framework compatqual annotations (NullableDecl/NonNullDecl).
-                             Default value is 'enable'
+                             Default konstue is 'enable'
   -Xsuppress-deprecated-jvm-target-warning
                              Suppress deprecation warning about deprecated JVM target versions.
                              This option has no effect and will be deleted in a future version.
@@ -149,9 +149,9 @@ where advanced options include:
   -Xuse-14-inline-classes-mangling-scheme
                              Use 1.4 inline classes mangling scheme instead of 1.4.30 one
   -Xuse-type-table           Use type table in metadata serialization
-  -Xvalidate-bytecode        Validate generated JVM bytecode before and after optimizations
-  -Xvalidate-ir              Validate IR before and after lowering
-  -Xvalue-classes            Enable experimental value classes
+  -Xkonstidate-bytecode        Validate generated JVM bytecode before and after optimizations
+  -Xkonstidate-ir              Validate IR before and after lowering
+  -Xkonstue-classes            Enable experimental konstue classes
   -Xallow-any-scripts-in-source-roots
                              Allow to compile any scripts along with regular Kotlin sources
   -Xallow-kotlin-package     Allow compiling code in package 'kotlin' and allow not requiring kotlin.stdlib in module-info
@@ -204,14 +204,14 @@ where advanced options include:
   -Xphases-to-dump           Dump backend state both before and after these phases
   -Xphases-to-dump-after     Dump backend state after these phases
   -Xphases-to-dump-before    Dump backend state before these phases
-  -Xphases-to-validate       Validate backend state both before and after these phases
-  -Xphases-to-validate-after Validate backend state after these phases
-  -Xphases-to-validate-before Validate backend state before these phases
+  -Xphases-to-konstidate       Validate backend state both before and after these phases
+  -Xphases-to-konstidate-after Validate backend state after these phases
+  -Xphases-to-konstidate-before Validate backend state before these phases
   -Xplugin=<path>            Load plugins from the given classpath
-  -Xcompiler-plugin=<path1>,<path2>:<optionName>=<value>,<optionName>=<value>
+  -Xcompiler-plugin=<path1>,<path2>:<optionName>=<konstue>,<optionName>=<konstue>
                              Register compiler plugin
   -Xprofile-phases           Profile backend phases
-  -Xproper-ieee754-comparisons Generate proper IEEE 754 comparisons in all cases if values are statically known to be of primitive numeric types
+  -Xproper-ieee754-comparisons Generate proper IEEE 754 comparisons in all cases if konstues are statically known to be of primitive numeric types
   -Xread-deserialized-contracts Enable reading of contracts from metadata
   -Xklib-relative-path-base  Provide a base paths to compute source's relative paths in klib (default is empty)
   -Xrender-internal-diagnostic-names

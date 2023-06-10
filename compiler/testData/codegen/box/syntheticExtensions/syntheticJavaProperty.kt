@@ -15,9 +15,9 @@ public class J {
         return stringProperty;
     }
 
-    public void setStringProperty(String value) {
+    public void setStringProperty(String konstue) {
         numSetCalls++;
-        stringProperty = value;
+        stringProperty = konstue;
     }
 
     public boolean isBooleanProperty() {
@@ -25,9 +25,9 @@ public class J {
         return myBooleanProperty;
     }
 
-    public void setBooleanProperty(boolean value) {
+    public void setBooleanProperty(boolean konstue) {
         numSetCalls++;
-        myBooleanProperty = value;
+        myBooleanProperty = konstue;
     }
 }
 
@@ -37,9 +37,9 @@ import kotlin.reflect.*
 import kotlin.test.*
 
 fun box(): String {
-    val j = J()
+    konst j = J()
 
-    val unboundStringProperty = J::stringProperty
+    konst unboundStringProperty = J::stringProperty
     assertNull(unboundStringProperty.get(j))
     unboundStringProperty.set(j, "Hi")
     assertEquals("Hi", unboundStringProperty.get(j))
@@ -48,7 +48,7 @@ fun box(): String {
     assertEquals(3, j.numGetCalls)
     assertEquals(1, j.numSetCalls)
 
-    val boundStringProperty = j::stringProperty
+    konst boundStringProperty = j::stringProperty
     assertEquals("Hi", boundStringProperty.get())
     boundStringProperty.set("Hello")
     assertEquals("Hello", boundStringProperty.get())
@@ -57,7 +57,7 @@ fun box(): String {
     assertEquals(6, j.numGetCalls)
     assertEquals(2, j.numSetCalls)
 
-    val unboundBooleanProperty: KMutableProperty1<J, Boolean> = J::isBooleanProperty
+    konst unboundBooleanProperty: KMutableProperty1<J, Boolean> = J::isBooleanProperty
     assertFalse(unboundBooleanProperty.get(j))
     unboundBooleanProperty.set(j, true)
     assertTrue(unboundBooleanProperty.get(j))
@@ -66,7 +66,7 @@ fun box(): String {
     assertEquals(9, j.numGetCalls)
     assertEquals(3, j.numSetCalls)
 
-    val boundBooleanProperty: KMutableProperty0<Boolean> = j::isBooleanProperty
+    konst boundBooleanProperty: KMutableProperty0<Boolean> = j::isBooleanProperty
     assertTrue(boundBooleanProperty.get())
     boundBooleanProperty.set(false)
     assertFalse(boundBooleanProperty.get())

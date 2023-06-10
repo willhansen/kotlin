@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import org.jetbrains.kotlin.ir.util.isFakeOverriddenFromAny
 import org.jetbrains.kotlin.ir.util.isUnsigned
 
-internal class CommonProxy private constructor(override val state: Common, override val callInterceptor: CallInterceptor) : Proxy {
+internal class CommonProxy private constructor(override konst state: Common, override konst callInterceptor: CallInterceptor) : Proxy {
     private fun defaultEquals(other: Any?): Boolean = if (other is Proxy) this.state === other.state else false
     private fun defaultHashCode(): Int = System.identityHashCode(state)
     private fun defaultToString(): String = "${state.irClass.internalName()}@" + hashCode().toString(16).padStart(8, '0')
@@ -23,8 +23,8 @@ internal class CommonProxy private constructor(override val state: Common, overr
      *     override fun toString(): String = super.toString()
      */
     private fun IrFunction.wasAlreadyCalled(): Boolean {
-        val anyParameter = this.getLastOverridden().dispatchReceiverParameter!!.symbol
-        val callStack = callInterceptor.environment.callStack
+        konst anyParameter = this.getLastOverridden().dispatchReceiverParameter!!.symbol
+        konst callStack = callInterceptor.environment.callStack
         if (callStack.containsStateInMemory(anyParameter) && callStack.loadState(anyParameter) === state) return true
         return this == callInterceptor.environment.callStack.currentFrameOwner
     }
@@ -33,23 +33,23 @@ internal class CommonProxy private constructor(override val state: Common, overr
         if (this === other) return true
         if (other == null) return false
 
-        val valueArguments = mutableListOf<State>()
-        val equalsFun = state.getEqualsFunction()
+        konst konstueArguments = mutableListOf<State>()
+        konst equalsFun = state.getEqualsFunction()
         if (equalsFun.isFakeOverriddenFromAny() || equalsFun.wasAlreadyCalled()) return defaultEquals(other)
 
-        equalsFun.getDispatchReceiver()!!.let { valueArguments.add(state) }
-        valueArguments.add(if (other is Proxy) other.state else other as State)
+        equalsFun.getDispatchReceiver()!!.let { konstueArguments.add(state) }
+        konstueArguments.add(if (other is Proxy) other.state else other as State)
 
-        return callInterceptor.interceptProxy(equalsFun, valueArguments) as Boolean
+        return callInterceptor.interceptProxy(equalsFun, konstueArguments) as Boolean
     }
 
     override fun hashCode(): Int {
-        val valueArguments = mutableListOf<State>()
-        val hashCodeFun = state.getHashCodeFunction()
+        konst konstueArguments = mutableListOf<State>()
+        konst hashCodeFun = state.getHashCodeFunction()
         if (hashCodeFun.isFakeOverriddenFromAny() || hashCodeFun.wasAlreadyCalled()) return defaultHashCode()
 
-        hashCodeFun.getDispatchReceiver()!!.let { valueArguments.add(state) }
-        return callInterceptor.interceptProxy(hashCodeFun, valueArguments) as Int
+        hashCodeFun.getDispatchReceiver()!!.let { konstueArguments.add(state) }
+        return callInterceptor.interceptProxy(hashCodeFun, konstueArguments) as Int
     }
 
     override fun toString(): String {
@@ -58,18 +58,18 @@ internal class CommonProxy private constructor(override val state: Common, overr
         if (state.irClass.defaultType.isUnsigned()) {
             return state.unsignedToString()
         }
-        val valueArguments = mutableListOf<State>()
-        val toStringFun = state.getToStringFunction()
+        konst konstueArguments = mutableListOf<State>()
+        konst toStringFun = state.getToStringFunction()
         if (toStringFun.isFakeOverriddenFromAny() || toStringFun.wasAlreadyCalled()) return defaultToString()
 
-        toStringFun.getDispatchReceiver()!!.let { valueArguments.add(state) }
-        return callInterceptor.interceptProxy(toStringFun, valueArguments) as String
+        toStringFun.getDispatchReceiver()!!.let { konstueArguments.add(state) }
+        return callInterceptor.interceptProxy(toStringFun, konstueArguments) as String
     }
 
     companion object {
         internal fun Common.asProxy(callInterceptor: CallInterceptor, extendFrom: Class<*>? = null): Any {
-            val commonProxy = CommonProxy(this, callInterceptor)
-            val interfaces = when (extendFrom) {
+            konst commonProxy = CommonProxy(this, callInterceptor)
+            konst interfaces = when (extendFrom) {
                 null, Object::class.java -> arrayOf(Proxy::class.java)
                 else -> arrayOf(extendFrom, Proxy::class.java)
             }
@@ -83,13 +83,13 @@ internal class CommonProxy private constructor(override val state: Common, overr
                     method.name == "hashCode" && method.parameterTypes.isEmpty() -> commonProxy.hashCode()
                     method.name == "toString" && method.parameterTypes.isEmpty() -> commonProxy.toString()
                     else -> {
-                        val irFunction = commonProxy.state.getIrFunction(method)
+                        konst irFunction = commonProxy.state.getIrFunction(method)
                             ?: return@newProxyInstance commonProxy.fallbackIfMethodNotFound(method)
-                        val valueArguments = mutableListOf<State>(commonProxy.state)
-                        valueArguments += irFunction.valueParameters.mapIndexed { index, parameter ->
+                        konst konstueArguments = mutableListOf<State>(commonProxy.state)
+                        konstueArguments += irFunction.konstueParameters.mapIndexed { index, parameter ->
                             callInterceptor.environment.convertToState(args[index], parameter.type)
                         }
-                        callInterceptor.interceptProxy(irFunction, valueArguments, method.returnType)
+                        callInterceptor.interceptProxy(irFunction, konstueArguments, method.returnType)
                     }
                 }
             }
@@ -98,8 +98,8 @@ internal class CommonProxy private constructor(override val state: Common, overr
         private fun CommonProxy.fallbackIfMethodNotFound(method: java.lang.reflect.Method): Any {
             return when {
                 method.name == "toArray" && method.parameterTypes.isEmpty() -> {
-                    val wrapper = this.state.superWrapperClass
-                    if (wrapper == null) arrayOf() else (wrapper.value as Collection<*>).toTypedArray()
+                    konst wrapper = this.state.superWrapperClass
+                    if (wrapper == null) arrayOf() else (wrapper.konstue as Collection<*>).toTypedArray()
                 }
                 else -> throw AssertionError("Cannot find method $method in ${this.state}")
             }

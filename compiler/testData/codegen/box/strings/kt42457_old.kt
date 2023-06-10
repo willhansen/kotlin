@@ -9,9 +9,9 @@ public class JavaClass {
 
 // FILE: Kotlin.kt
 fun box(): String {
-    val toString: String? = JavaClass().toString()
+    konst toString: String? = JavaClass().toString()
     if (toString != null) return "fail 1: $toString"
-    val template: String? = "${JavaClass()}"
+    konst template: String? = "${JavaClass()}"
     if (template != null) return "fail 2: $template"
     return "OK"
 }

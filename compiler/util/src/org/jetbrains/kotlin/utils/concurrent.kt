@@ -16,25 +16,25 @@
 
 package org.jetbrains.kotlin.utils.concurrent.block
 
-class LockedClearableLazyValue<out T: Any>(val lock: Any, val init: () -> T) {
-    @Volatile private var value: T? = null
+class LockedClearableLazyValue<out T: Any>(konst lock: Any, konst init: () -> T) {
+    @Volatile private var konstue: T? = null
 
     fun get(): T {
-        val _v1 = value
+        konst _v1 = konstue
         if (_v1 != null) {
             return _v1
         }
 
         return synchronized(lock) {
-            val _v2 = value
+            konst _v2 = konstue
             // Suppress because of https://youtrack.jetbrains.com/issue/KT-6176
             @Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
             if (_v2 != null) {
                 _v2!!
             }
             else {
-                val _v3 = init()
-                this.value = _v3
+                konst _v3 = init()
+                this.konstue = _v3
                 _v3
             }
         }
@@ -42,7 +42,7 @@ class LockedClearableLazyValue<out T: Any>(val lock: Any, val init: () -> T) {
 
     fun drop() {
         synchronized (lock) {
-            value = null
+            konstue = null
         }
     }
 }

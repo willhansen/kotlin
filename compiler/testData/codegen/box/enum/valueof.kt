@@ -6,7 +6,7 @@ enum class Color {
 
 fun throwsOnGreen(): Boolean {
     try {
-        Color.valueOf("GREEN")
+        Color.konstueOf("GREEN")
         return false
     }
     catch (e: Exception) {
@@ -15,9 +15,9 @@ fun throwsOnGreen(): Boolean {
 }
 
 fun box() = if(
-     Color.valueOf("RED") == Color.RED
-  && Color.valueOf("BLUE") == Color.BLUE
-  && Color.values()[0] == Color.RED
-  && Color.values()[1] == Color.BLUE
+     Color.konstueOf("RED") == Color.RED
+  && Color.konstueOf("BLUE") == Color.BLUE
+  && Color.konstues()[0] == Color.RED
+  && Color.konstues()[1] == Color.BLUE
   && throwsOnGreen()
   ) "OK" else "fail"

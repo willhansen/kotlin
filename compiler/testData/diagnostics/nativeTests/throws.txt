@@ -104,8 +104,8 @@ public final class DifferentThrowsOnOverride : Base1 {
 
 public final class Exception1 : kotlin.Throwable {
     public constructor Exception1()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -113,8 +113,8 @@ public final class Exception1 : kotlin.Throwable {
 
 public final class Exception2 : kotlin.Throwable {
     public constructor Exception2()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -122,8 +122,8 @@ public final class Exception2 : kotlin.Throwable {
 
 public final class Exception3 : kotlin.Throwable {
     public constructor Exception3()
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -439,8 +439,8 @@ package kotlin {
 
     public open class Exception : kotlin.Throwable {
         public constructor Exception()
-        public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-        public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+        public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+        public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -448,8 +448,8 @@ package kotlin {
 
     public open class IllegalStateException : kotlin.RuntimeException {
         public constructor IllegalStateException()
-        public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-        public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+        public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+        public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -457,16 +457,16 @@ package kotlin {
 
     public open class RuntimeException : kotlin.Exception {
         public constructor RuntimeException()
-        public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-        public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+        public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+        public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
-    @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR}) @kotlin.annotation.Retention(value = AnnotationRetention.SOURCE) public final annotation class Throws : kotlin.Annotation {
+    @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.FUNCTION, AnnotationTarget.CONSTRUCTOR}) @kotlin.annotation.Retention(konstue = AnnotationRetention.SOURCE) public final annotation class Throws : kotlin.Annotation {
         public constructor Throws(/*0*/ vararg exceptionClasses: kotlin.reflect.KClass<out kotlin.Throwable> /*kotlin.Array<out kotlin.reflect.KClass<out kotlin.Throwable>>*/)
-        public final val exceptionClasses: kotlin.Array<out kotlin.reflect.KClass<out kotlin.Throwable>>
+        public final konst exceptionClasses: kotlin.Array<out kotlin.reflect.KClass<out kotlin.Throwable>>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -478,8 +478,8 @@ package kotlin {
 
             public open class CancellationException : kotlin.IllegalStateException {
                 public constructor CancellationException()
-                public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-                public open override /*1*/ /*fake_override*/ val message: kotlin.String?
+                public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+                public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

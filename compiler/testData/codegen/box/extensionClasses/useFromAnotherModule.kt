@@ -7,11 +7,11 @@
 
 package a
 
-class O(val o: String)
+class O(konst o: String)
 
 context(O)
-class OK(val k: String) {
-    val result = o + k
+class OK(konst k: String) {
+    konst result = o + k
 }
 
 // MODULE: main(lib)
@@ -19,7 +19,7 @@ class OK(val k: String) {
 
 fun box(): String {
     return with(a.O("O")) {
-        val ok = a.OK("K")
+        konst ok = a.OK("K")
         ok.result
     }
 }

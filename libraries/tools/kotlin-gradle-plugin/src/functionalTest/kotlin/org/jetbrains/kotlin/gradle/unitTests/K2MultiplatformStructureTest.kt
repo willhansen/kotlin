@@ -30,16 +30,16 @@ import kotlin.test.assertEquals
 import kotlin.test.fail
 
 class K2MultiplatformStructureTest {
-    private val project = buildProject {
+    private konst project = buildProject {
         /* Resolving dependencies is necessary for creating compiler arguments */
         enableDefaultStdlibDependency(false)
         applyMultiplatformPlugin()
     }
-    private val kotlin = project.multiplatformExtension
+    private konst kotlin = project.multiplatformExtension
 
     @Test
     fun `test - configureK2Multiplatform - then parse arguments`() {
-        val structure = project.objects.newInstance<K2MultiplatformStructure>()
+        konst structure = project.objects.newInstance<K2MultiplatformStructure>()
         structure.refinesEdges.set(listOf(RefinesEdge("a", "b"), RefinesEdge("b", "c")))
         structure.fragments.set(
             listOf(
@@ -49,17 +49,17 @@ class K2MultiplatformStructureTest {
             )
         )
 
-        val sourceArguments = K2JVMCompilerArguments()
+        konst sourceArguments = K2JVMCompilerArguments()
         sourceArguments.configureK2Multiplatform(structure)
 
-        val parsedArguments = K2JVMCompilerArguments().apply {
+        konst parsedArguments = K2JVMCompilerArguments().apply {
             parseCommandLineArguments(ArgumentUtils.convertArgumentsToStringList(sourceArguments), this)
         }
 
-        val fragments = parsedArguments.fragments ?: fail("Missing ${CommonCompilerArguments::fragments.name}")
+        konst fragments = parsedArguments.fragments ?: fail("Missing ${CommonCompilerArguments::fragments.name}")
         assertEquals(listOf("a", "b", "c"), fragments.toList())
 
-        val fragmentSources = parsedArguments.fragmentSources ?: fail("Missing ${CommonCompilerArguments::fragmentSources.name}")
+        konst fragmentSources = parsedArguments.fragmentSources ?: fail("Missing ${CommonCompilerArguments::fragmentSources.name}")
         assertEquals(
             listOf(
                 "a:${project.file("a.kt").absolutePath}",
@@ -68,7 +68,7 @@ class K2MultiplatformStructureTest {
             fragmentSources.toList()
         )
 
-        val dependsOn = parsedArguments.fragmentRefines ?: fail("Missing ${CommonCompilerArguments::fragmentRefines.name}")
+        konst dependsOn = parsedArguments.fragmentRefines ?: fail("Missing ${CommonCompilerArguments::fragmentRefines.name}")
         assertEquals(listOf("a:b", "b:c"), dependsOn.toList())
     }
 
@@ -88,7 +88,7 @@ class K2MultiplatformStructureTest {
     }
 
     private fun `test compilations multiplatformStructure configuration`(compilation: KotlinCompilation<*>) {
-        val defaultSourceSet = compilation.defaultSourceSet
+        konst defaultSourceSet = compilation.defaultSourceSet
         /* Create an additional intermediate source set for testing */
         kotlin.sourceSets.create("intermediateMain") { intermediateMain ->
             intermediateMain.dependsOn(kotlin.sourceSets.getByName("commonMain"))
@@ -108,7 +108,7 @@ class K2MultiplatformStructureTest {
             compilation.compilerOptions.options.languageVersion.set(KotlinVersion.KOTLIN_2_0)
         }
 
-        val compileTask = compilation.compileTaskProvider.get() as K2MultiplatformCompilationTask
+        konst compileTask = compilation.compileTaskProvider.get() as K2MultiplatformCompilationTask
 
         /* check dependsOnEdges */
         assertEquals(
@@ -131,7 +131,7 @@ class K2MultiplatformStructureTest {
             }
         )
 
-        val args = compileTask.buildCompilerArguments()
+        konst args = compileTask.buildCompilerArguments()
 
         if (args.commonSources != null) {
             fail("Unexpected ${CommonCompilerArguments::commonSources.name} in K2 compilation: ${args.commonSources}")

@@ -13,7 +13,7 @@ FILE: complexTypes.kt
 
     }
     public? final? interface Test : R|kotlin/Any| {
-        public? final? val x: a.b.C<out CharSequence, *>.D<in List<*>, *>
+        public? final? konst x: a.b.C<out CharSequence, *>.D<in List<*>, *>
             public? get(): a.b.C<out CharSequence, *>.D<in List<*>, *>
 
     }

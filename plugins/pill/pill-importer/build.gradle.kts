@@ -25,29 +25,29 @@ sourceSets {
 }
 
 fun runPillTask(taskName: String) {
-    val jarFile = configurations.archives.artifacts.single { it.type == "jar" }.file
-    val cl = URLClassLoader(arrayOf(jarFile.toURI().toURL()), (object {}).javaClass.classLoader)
+    konst jarFile = configurations.archives.artifacts.single { it.type == "jar" }.file
+    konst cl = URLClassLoader(arrayOf(jarFile.toURI().toURL()), (object {}).javaClass.classLoader)
 
-    val pillImporterClass = Class.forName("org.jetbrains.kotlin.pill.PillImporter", true, cl)
-    val runMethod = pillImporterClass.declaredMethods.single { it.name == "run" }
+    konst pillImporterClass = Class.forName("org.jetbrains.kotlin.pill.PillImporter", true, cl)
+    konst runMethod = pillImporterClass.declaredMethods.single { it.name == "run" }
     require(Modifier.isStatic(runMethod.modifiers))
 
-    val platformDir = rootProject.ideaHomePathForTests()
-    val resourcesDir = File(project.projectDir, "resources")
-    val isIdePluginAttached = project.rootProject.intellijSdkVersionForIde() != null
+    konst platformDir = rootProject.ideaHomePathForTests()
+    konst resourcesDir = File(project.projectDir, "resources")
+    konst isIdePluginAttached = project.rootProject.intellijSdkVersionForIde() != null
 
     runMethod.invoke(null, project.rootProject, taskName, platformDir, resourcesDir, isIdePluginAttached)
 }
 
-val jar: Jar by tasks
+konst jar: Jar by tasks
 
-val pill by tasks.creating {
+konst pill by tasks.creating {
     dependsOn(jar)
     dependsOn(":createIdeaHomeForTests")
     doLast { runPillTask("pill") }
 }
 
-val unpill by tasks.creating {
+konst unpill by tasks.creating {
     dependsOn(jar)
     doLast { runPillTask("unpill") }
 }

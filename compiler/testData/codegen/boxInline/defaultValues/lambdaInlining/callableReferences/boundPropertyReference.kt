@@ -2,7 +2,7 @@
 // FILE: 1.kt
 package test
 
-class A(val ok: String)
+class A(konst ok: String)
 
 inline fun inlineFun(a: A, lambda: () -> String = a::ok): String {
     return lambda()

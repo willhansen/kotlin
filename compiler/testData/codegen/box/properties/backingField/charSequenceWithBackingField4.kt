@@ -2,11 +2,11 @@
 // IGNORE_BACKEND_K1: JVM_IR
 
 class Base {
-    val x: CharSequence
+    konst x: CharSequence
         internal field: String = "OK"
 
 }
-val s: String = Base().x
+konst s: String = Base().x
 fun box(): String {
     return s
 }

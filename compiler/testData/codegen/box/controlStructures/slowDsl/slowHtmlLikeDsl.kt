@@ -33,14 +33,14 @@ inline fun Builder.t2(body: Builder.() -> Unit) {
     tag("t", body)
 }
 
-val expectedLength = 1906
+konst expectedLength = 1906
 
 fun doStuff(b: Builder) {
     b.t2 { t2 { t2 { t2 { t2 { t2 { t2 { text("1") } } } } } } }
 }
 
 fun box(): String {
-    val b = Builder("")
+    konst b = Builder("")
     doStuff(b)
     if (b.content.length != expectedLength)
         return "${b.content.length}"

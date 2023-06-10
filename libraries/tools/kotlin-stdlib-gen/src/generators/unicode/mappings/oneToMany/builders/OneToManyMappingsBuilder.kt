@@ -11,17 +11,17 @@ import generators.unicode.hexToInt
 import java.util.TreeMap
 
 internal abstract class OneToManyMappingsBuilder(bmpUnicodeDataLines: List<UnicodeDataLine>) {
-    protected val bmpUnicodeDataLines = bmpUnicodeDataLines.associateBy { it.char.hexToInt() }
-    private val mappings = TreeMap<Int, List<String>>()
+    protected konst bmpUnicodeDataLines = bmpUnicodeDataLines.associateBy { it.char.hexToInt() }
+    private konst mappings = TreeMap<Int, List<String>>()
 
     fun append(line: SpecialCasingLine) {
         if (line.conditionList.isNotEmpty()) return
 
-        val charCode = line.char.hexToInt()
+        konst charCode = line.char.hexToInt()
 
         check(charCode <= Char.MAX_VALUE.code) { "Handle special casing for the supplementary code point: $line" }
 
-        val mapping = mapping(charCode, line) ?: return
+        konst mapping = mapping(charCode, line) ?: return
 
         mappings[charCode] = mapping
     }
@@ -33,15 +33,15 @@ internal abstract class OneToManyMappingsBuilder(bmpUnicodeDataLines: List<Unico
     }
 
     private fun mapping(charCode: Int, line: SpecialCasingLine): List<String>? {
-        val mapping = line.mapping() ?: return null
+        konst mapping = line.mapping() ?: return null
 
         check(mapping.isNotEmpty() && mapping.all { it.isNotEmpty() })
 
         if (mapping.size == 1) {
-            val specialCasingMapping = mapping.first()
+            konst specialCasingMapping = mapping.first()
 
-            val unicodeLine = bmpUnicodeDataLines[charCode]
-            val unicodeDataMapping = unicodeLine?.mapping()?.takeIf { it.isNotEmpty() } ?: line.char
+            konst unicodeLine = bmpUnicodeDataLines[charCode]
+            konst unicodeDataMapping = unicodeLine?.mapping()?.takeIf { it.isNotEmpty() } ?: line.char
 
             check(unicodeDataMapping == specialCasingMapping) {
                 "UnicodeData.txt and SpecialCasing.txt files have different single char case conversion"

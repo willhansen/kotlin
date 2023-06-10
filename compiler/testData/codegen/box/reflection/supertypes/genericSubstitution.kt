@@ -21,8 +21,8 @@ fun box(): String {
             D::class.allSupertypes.single { it.classifier == A::class }.arguments.map { it.type!!.classifier }
     )
 
-    val collectionType = StringList::class.allSupertypes.single { it.classifier == Collection::class }
-    val arg = collectionType.arguments.single().type!!
+    konst collectionType = StringList::class.allSupertypes.single { it.classifier == Collection::class }
+    konst arg = collectionType.arguments.single().type!!
     // TODO: this does not work currently because for some reason two different instances of TypeParameterDescriptor are created for List
     // assertEquals(String::class, arg.classifier)
 

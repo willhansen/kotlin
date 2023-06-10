@@ -18,12 +18,12 @@ object FirStarProjectionModifierChecker : FirTypeRefChecker() {
     override fun check(typeRef: FirTypeRef, context: CheckerContext, reporter: DiagnosticReporter) {
         if (typeRef !is FirResolvedTypeRef) return
 
-        val delegatedTypeRef = typeRef.delegatedTypeRef as? FirUserTypeRef ?: return
+        konst delegatedTypeRef = typeRef.delegatedTypeRef as? FirUserTypeRef ?: return
         for (part in delegatedTypeRef.qualifier) {
             for (typeArgument in part.typeArgumentList.typeArguments) {
                 if (typeArgument !is FirStarProjection) continue
-                val source = typeArgument.source?.takeIf { it.kind is KtRealSourceElementKind } ?: continue
-                val modifierList = source.getModifierList() ?: continue
+                konst source = typeArgument.source?.takeIf { it.kind is KtRealSourceElementKind } ?: continue
+                konst modifierList = source.getModifierList() ?: continue
 
                 for (modifier in modifierList.modifiers) {
                     reporter.reportOn(

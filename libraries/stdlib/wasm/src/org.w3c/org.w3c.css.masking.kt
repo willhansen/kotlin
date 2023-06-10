@@ -16,31 +16,31 @@ import org.w3c.dom.svg.*
  * Exposes the JavaScript [SVGClipPathElement](https://developer.mozilla.org/en/docs/Web/API/SVGClipPathElement) to Kotlin
  */
 public external abstract class SVGClipPathElement : SVGElement, SVGUnitTypes, JsAny {
-    open val clipPathUnits: SVGAnimatedEnumeration
-    open val transform: SVGAnimatedTransformList
+    open konst clipPathUnits: SVGAnimatedEnumeration
+    open konst transform: SVGAnimatedTransformList
 
     companion object {
-        val SVG_UNIT_TYPE_UNKNOWN: Short
-        val SVG_UNIT_TYPE_USERSPACEONUSE: Short
-        val SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst SVG_UNIT_TYPE_UNKNOWN: Short
+        konst SVG_UNIT_TYPE_USERSPACEONUSE: Short
+        konst SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -48,34 +48,34 @@ public external abstract class SVGClipPathElement : SVGElement, SVGUnitTypes, Js
  * Exposes the JavaScript [SVGMaskElement](https://developer.mozilla.org/en/docs/Web/API/SVGMaskElement) to Kotlin
  */
 public external abstract class SVGMaskElement : SVGElement, SVGUnitTypes, JsAny {
-    open val maskUnits: SVGAnimatedEnumeration
-    open val maskContentUnits: SVGAnimatedEnumeration
-    open val x: SVGAnimatedLength
-    open val y: SVGAnimatedLength
-    open val width: SVGAnimatedLength
-    open val height: SVGAnimatedLength
+    open konst maskUnits: SVGAnimatedEnumeration
+    open konst maskContentUnits: SVGAnimatedEnumeration
+    open konst x: SVGAnimatedLength
+    open konst y: SVGAnimatedLength
+    open konst width: SVGAnimatedLength
+    open konst height: SVGAnimatedLength
 
     companion object {
-        val SVG_UNIT_TYPE_UNKNOWN: Short
-        val SVG_UNIT_TYPE_USERSPACEONUSE: Short
-        val SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst SVG_UNIT_TYPE_UNKNOWN: Short
+        konst SVG_UNIT_TYPE_USERSPACEONUSE: Short
+        konst SVG_UNIT_TYPE_OBJECTBOUNDINGBOX: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }

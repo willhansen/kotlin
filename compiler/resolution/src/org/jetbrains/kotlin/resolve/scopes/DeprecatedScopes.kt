@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.descriptors.DescriptorWithDeprecation
 import org.jetbrains.kotlin.incremental.components.LookupLocation
 import org.jetbrains.kotlin.name.Name
 
-class DeprecatedLexicalScope(private val workerScope: LexicalScope) : LexicalScope by workerScope {
+class DeprecatedLexicalScope(private konst workerScope: LexicalScope) : LexicalScope by workerScope {
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? = null
 
     override fun getContributedClassifierIncludeDeprecated(
@@ -21,7 +21,7 @@ class DeprecatedLexicalScope(private val workerScope: LexicalScope) : LexicalSco
     }
 }
 
-class DeprecatedMemberScope(private val workerScope: MemberScope) : MemberScope by workerScope {
+class DeprecatedMemberScope(private konst workerScope: MemberScope) : MemberScope by workerScope {
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? = null
 
     override fun getContributedClassifierIncludeDeprecated(

@@ -4,7 +4,7 @@ object O1 : Some
 
 object O2 : Some
 
-enum class SomeEnum(val x: Some) {
+enum class SomeEnum(konst x: Some) {
 //       constructor SomeEnum(Some)
 //       │object O1: Some
 //       ││

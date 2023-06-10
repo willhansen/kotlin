@@ -5,7 +5,7 @@ class Derived : Base {
   // CHECK:
   //   Mangled name: Derived{}ref
   //   Public signature: /Derived.ref|-1081516401990928556[0]
-  val ref: KMutableProperty0<String?>
+  konst ref: KMutableProperty0<String?>
     // CHECK JVM_IR:
     //   Mangled name: Derived#<get-ref>(){}kotlin.reflect.KMutableProperty0<kotlin.String?>
     //   Public signature: /Derived.ref.<get-ref>|-6985556442168523841[0]

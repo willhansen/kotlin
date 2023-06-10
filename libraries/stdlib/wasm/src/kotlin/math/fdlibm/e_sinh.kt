@@ -30,8 +30,8 @@
 
 package kotlin.math.fdlibm
 
-private const val one = 1.0
-private const val shuge = 1.0e307
+private const konst one = 1.0
+private const konst shuge = 1.0e307
 internal fun __ieee754_sinh(x: Double): Double {
     var t: Double
     var w: Double

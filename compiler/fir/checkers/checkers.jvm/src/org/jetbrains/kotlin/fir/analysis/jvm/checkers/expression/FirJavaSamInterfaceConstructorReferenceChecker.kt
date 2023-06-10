@@ -23,13 +23,13 @@ object FirJavaSamInterfaceConstructorReferenceChecker : FirQualifiedAccessExpres
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression !is FirCallableReferenceAccess) return
 
-        val reference = expression.calleeReference as? FirResolvedNamedReference ?: return
-        val referredSymbol = reference.resolvedSymbol
+        konst reference = expression.calleeReference as? FirResolvedNamedReference ?: return
+        konst referredSymbol = reference.resolvedSymbol
 
         if (referredSymbol is FirNamedFunctionSymbol &&
             referredSymbol.origin == FirDeclarationOrigin.SamConstructor
         ) {
-            val samClassSymbol = referredSymbol.resolvedReturnTypeRef.toRegularClassSymbol(context.session) ?: return
+            konst samClassSymbol = referredSymbol.resolvedReturnTypeRef.toRegularClassSymbol(context.session) ?: return
             if (samClassSymbol.isFun && samClassSymbol.isJavaOrEnhancement) {
                 reporter.reportOn(reference.source, FirJvmErrors.JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE, context)
             }

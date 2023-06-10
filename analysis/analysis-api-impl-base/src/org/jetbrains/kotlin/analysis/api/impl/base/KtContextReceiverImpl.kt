@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.name.Name
 
 @KtAnalysisApiInternals
 class KtContextReceiverImpl(
-    private val _type: KtType,
-    private val _label: Name?,
-    override val token: KtLifetimeToken
+    private konst _type: KtType,
+    private konst _label: Name?,
+    override konst token: KtLifetimeToken
 ) : KtContextReceiver() {
-    override val label: Name? get() = withValidityAssertion { _label }
-    override val type: KtType get() = withValidityAssertion { _type }
+    override konst label: Name? get() = withValidityAssertion { _label }
+    override konst type: KtType get() = withValidityAssertion { _type }
 }

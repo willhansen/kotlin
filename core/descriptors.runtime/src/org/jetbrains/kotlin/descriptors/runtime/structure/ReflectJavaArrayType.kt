@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.load.java.structure.JavaArrayType
 import java.lang.reflect.GenericArrayType
 import java.lang.reflect.Type
 
-class ReflectJavaArrayType(override val reflectType: Type) : ReflectJavaType(), JavaArrayType {
-    override val componentType: ReflectJavaType = with(reflectType) {
+class ReflectJavaArrayType(override konst reflectType: Type) : ReflectJavaType(), JavaArrayType {
+    override konst componentType: ReflectJavaType = with(reflectType) {
         when {
             this is GenericArrayType -> create(genericComponentType)
             this is Class<*> && isArray() -> create(getComponentType())
@@ -31,6 +31,6 @@ class ReflectJavaArrayType(override val reflectType: Type) : ReflectJavaType(), 
     }
 
     // TODO: support type use annotations in reflection
-    override val annotations: Collection<JavaAnnotation> = emptyList()
-    override val isDeprecatedInJavaDoc = false
+    override konst annotations: Collection<JavaAnnotation> = emptyList()
+    override konst isDeprecatedInJavaDoc = false
 }

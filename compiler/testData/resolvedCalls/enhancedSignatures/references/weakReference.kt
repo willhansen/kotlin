@@ -9,7 +9,7 @@ fun nullable(r: WeakReference<String?>) {
 }
 
 fun platform() {
-    val r = WeakReference("x")
+    konst r = WeakReference("x")
     r.<caret>get()
 }
 

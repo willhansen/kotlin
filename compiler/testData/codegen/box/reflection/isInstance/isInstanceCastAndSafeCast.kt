@@ -6,18 +6,18 @@ import kotlin.reflect.cast
 import kotlin.reflect.safeCast
 import kotlin.test.*
 
-fun testInstance(value: Any?, klass: KClass<*>) {
-    assertTrue(klass.isInstance(value))
-    assertEquals(value, klass.safeCast(value))
-    assertEquals(value, klass.cast(value))
+fun testInstance(konstue: Any?, klass: KClass<*>) {
+    assertTrue(klass.isInstance(konstue))
+    assertEquals(konstue, klass.safeCast(konstue))
+    assertEquals(konstue, klass.cast(konstue))
 }
 
-fun testNotInstance(value: Any?, klass: KClass<*>) {
-    assertFalse(klass.isInstance(value))
-    assertNull(klass.safeCast(value))
+fun testNotInstance(konstue: Any?, klass: KClass<*>) {
+    assertFalse(klass.isInstance(konstue))
+    assertNull(klass.safeCast(konstue))
     try {
-        klass.cast(value)
-        fail("Value should not be an instance of $klass: $value")
+        klass.cast(konstue)
+        fail("Value should not be an instance of $klass: $konstue")
     }
     catch (e: Exception) { /* OK */ }
 }

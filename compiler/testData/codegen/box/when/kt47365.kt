@@ -7,9 +7,9 @@ enum class EType {
 class Wrapper(var t: EType?)
 
 fun box(): String {
-    val l = listOf(Wrapper(EType.A), Wrapper(null))
+    konst l = listOf(Wrapper(EType.A), Wrapper(null))
 
-    val ll = l.map {
+    konst ll = l.map {
         when (it.t) {
             EType.A -> "O"
             null -> "K"

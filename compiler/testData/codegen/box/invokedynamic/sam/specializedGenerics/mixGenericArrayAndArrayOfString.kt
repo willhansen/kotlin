@@ -22,13 +22,13 @@ fun interface IFooMix1 : IFooT<String>, IFooStr {
 }
 
 fun box(): String {
-    val f0 = IFooMix0 { "O" + it[0] }
-    val t0 = f0.foo(arrayOf("K"))
+    konst f0 = IFooMix0 { "O" + it[0] }
+    konst t0 = f0.foo(arrayOf("K"))
     if (t0 != "OK")
         return "Failed: t0=$t0"
 
-    val f1 = IFooMix1 { it[0] + "K" }
-    val t1 = f1.foo(arrayOf("O"))
+    konst f1 = IFooMix1 { it[0] + "K" }
+    konst t1 = f1.foo(arrayOf("O"))
     if (t1 != "OK")
         return "Failed: t1=$t1"
 

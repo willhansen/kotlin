@@ -6,8 +6,8 @@ class A {
     
     inline var Int.z: Int
         get() = result
-        set(value) {
-            result = value + this
+        set(konstue) {
+            result = konstue + this
         }
 
 }

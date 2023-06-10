@@ -20,18 +20,18 @@ import org.jetbrains.benchmarksLauncher.Random
 
 open class StringBenchmark {
     private var _data: ArrayList<String>? = null
-    val data: ArrayList<String>
+    konst data: ArrayList<String>
         get() = _data!!
     var csv: String = ""
 
     init {
-        val list = ArrayList<String>(BENCHMARK_SIZE)
+        konst list = ArrayList<String>(BENCHMARK_SIZE)
         for (n in stringValues(BENCHMARK_SIZE))
             list.add(n)
         _data = list
         csv = ""
         for (i in 1..BENCHMARK_SIZE-1) {
-            val elem = Random.nextDouble()
+            konst elem = Random.nextDouble()
             csv += elem
             csv += ","
         }
@@ -68,7 +68,7 @@ open class StringBenchmark {
     
     //Benchmark
     open fun summarizeSplittedCsv(): Double {
-        val fields = csv.split(",")
+        konst fields = csv.split(",")
         var sum = 0.0
         for (field in fields) {
             sum += field.toDouble()

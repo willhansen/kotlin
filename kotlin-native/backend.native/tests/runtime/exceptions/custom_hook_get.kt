@@ -9,18 +9,18 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 fun main() {
-    val exceptionHook = { _: Throwable ->
+    konst exceptionHook = { _: Throwable ->
         println("Hook")
     }.freeze()
 
-    val oldHook = setUnhandledExceptionHook(exceptionHook)
+    konst oldHook = setUnhandledExceptionHook(exceptionHook)
     assertNull(oldHook)
-    val hook1 = getUnhandledExceptionHook()
+    konst hook1 = getUnhandledExceptionHook()
     assertEquals(exceptionHook, hook1)
-    val hook2 = getUnhandledExceptionHook()
+    konst hook2 = getUnhandledExceptionHook()
     assertEquals(exceptionHook, hook2)
-    val hook3 = setUnhandledExceptionHook(null)
+    konst hook3 = setUnhandledExceptionHook(null)
     assertEquals(exceptionHook, hook3)
-    val hook4 = getUnhandledExceptionHook()
+    konst hook4 = getUnhandledExceptionHook()
     assertNull(hook4)
 }

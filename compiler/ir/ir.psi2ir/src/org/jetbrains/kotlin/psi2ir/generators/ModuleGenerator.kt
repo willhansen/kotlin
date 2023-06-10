@@ -41,15 +41,15 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 open class ModuleGenerator(
-    override val context: GeneratorContext,
-    private val expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>? = null
+    override konst context: GeneratorContext,
+    private konst expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>? = null
 ) : Generator {
 
     open fun generateModuleFragment(ktFiles: Collection<KtFile>): IrModuleFragment =
         IrModuleFragmentImpl(context.moduleDescriptor, context.irBuiltIns).also { irModule ->
             ktFiles.toSet().mapTo(irModule.files) { ktFile ->
-                val fileContext = context.createFileScopeContext(ktFile)
-                val irDeclarationGenerator = DeclarationGenerator(fileContext)
+                konst fileContext = context.createFileScopeContext(ktFile)
+                konst irDeclarationGenerator = DeclarationGenerator(fileContext)
                 generateSingleFile(irDeclarationGenerator, ktFile, irModule)
             }
         }
@@ -59,11 +59,11 @@ open class ModuleGenerator(
     }
 
     fun generateSingleFile(irDeclarationGenerator: DeclarationGenerator, ktFile: KtFile, module: IrModuleFragment): IrFileImpl {
-        val irFile = createEmptyIrFile(ktFile, module)
+        konst irFile = createEmptyIrFile(ktFile, module)
 
-        val constantValueGenerator = irDeclarationGenerator.context.constantValueGenerator
+        konst constantValueGenerator = irDeclarationGenerator.context.constantValueGenerator
         for (ktAnnotationEntry in ktFile.annotationEntries) {
-            val annotationDescriptor = getOrFail(BindingContext.ANNOTATION, ktAnnotationEntry)
+            konst annotationDescriptor = getOrFail(BindingContext.ANNOTATION, ktAnnotationEntry)
             constantValueGenerator.generateAnnotationConstructorCall(annotationDescriptor)?.let {
                 irFile.annotations += it
             }
@@ -99,27 +99,27 @@ open class ModuleGenerator(
     }
 
     private fun createEmptyIrFile(ktFile: KtFile, module: IrModuleFragment): IrFileImpl {
-        val fileEntry = PsiIrFileEntry(ktFile)
-        val packageFragmentDescriptor = context.moduleDescriptor.findPackageFragmentForFile(ktFile)!!
+        konst fileEntry = PsiIrFileEntry(ktFile)
+        konst packageFragmentDescriptor = context.moduleDescriptor.findPackageFragmentForFile(ktFile)!!
         return IrFileImpl(fileEntry, packageFragmentDescriptor, module).apply {
             metadata = DescriptorMetadataSource.File(CodegenUtil.getMemberDescriptorsToGenerate(ktFile, context.bindingContext))
         }
     }
 
     private fun createStubIrForErrorClass() {
-        val fakeFileEntry = object : IrFileEntry {
-            override val name: String = "<error-class>"
-            override val maxOffset: Int = UNDEFINED_OFFSET
+        konst fakeFileEntry = object : IrFileEntry {
+            override konst name: String = "<error-class>"
+            override konst maxOffset: Int = UNDEFINED_OFFSET
 
             override fun getSourceRangeInfo(beginOffset: Int, endOffset: Int): SourceRangeInfo = TODO("Not yet implemented")
             override fun getLineNumber(offset: Int): Int = TODO("Not yet implemented")
             override fun getColumnNumber(offset: Int): Int = TODO("Not yet implemented")
         }
-        val fakeFile = IrFileImpl(
+        konst fakeFile = IrFileImpl(
             fakeFileEntry,
             EmptyPackageFragmentDescriptor(context.moduleDescriptor, FqName(fakeFileEntry.name)),
         )
-        val gen = SyntheticDeclarationsGenerator(context)
+        konst gen = SyntheticDeclarationsGenerator(context)
         gen.visitClassDescriptor(ErrorUtils.errorClass, fakeFile)
         gen.visitConstructorDescriptor(
             ErrorUtils.errorClass.unsubstitutedPrimaryConstructor!!,

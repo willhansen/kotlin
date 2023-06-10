@@ -47,15 +47,15 @@ fun box(): String {
     assertEquals("1", topLevel("OK"))
     assertEquals("73", topLevel("OK") { 73 })
 
-    val foo = Foo()
+    konst foo = Foo()
     assertEquals("2", foo.member("OK"))
     assertEquals("42", foo.member("OK") { 42 })
 
-    val bar = Bar<String>()
+    konst bar = Bar<String>()
     assertEquals("3", bar.member("OK"))
     assertEquals("37", bar.member("OK") { 37 })
 
-    val b = A<Int>().B<Double>()
+    konst b = A<Int>().B<Double>()
     assertEquals("4", b.foo<Int>(1, 2.0, 3))
     assertEquals("6", b.foo<Int>(1, 2.0, 3) { t, n, h -> t + n.toInt() + h })
 

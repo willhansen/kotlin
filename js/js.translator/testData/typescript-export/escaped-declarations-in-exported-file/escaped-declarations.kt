@@ -5,7 +5,7 @@
 // SKIP_MINIFICATION
 // SKIP_NODE_JS
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 // INFER_MAIN_MODULE
 // MODULE: JS_TESTS
 // FILE: escaped-interfaces.kt
@@ -16,43 +16,43 @@
 package foo
 
 
-fun `invalid@name sum`(x: Int, y: Int): Int =
+fun `inkonstid@name sum`(x: Int, y: Int): Int =
     x + y
 
 
-fun invalid_args_name_sum(`first value`: Int, `second value`: Int): Int =
-    `first value` + `second value`
+fun inkonstid_args_name_sum(`first konstue`: Int, `second konstue`: Int): Int =
+    `first konstue` + `second konstue`
 
 // Properties
 
 
-val `invalid name val`: Int = 1
+konst `inkonstid name konst`: Int = 1
 
-var `invalid@name var`: Int = 1
+var `inkonstid@name var`: Int = 1
 
 // Classes
 
 
-class `Invalid A`
+class `Inkonstid A`
 
-class A1(val `first value`: Int, var `second.value`: Int)
+class A1(konst `first konstue`: Int, var `second.konstue`: Int)
 
 class A2 {
-    var `invalid:name`: Int = 42
+    var `inkonstid:name`: Int = 42
 }
 
 class A3 {
-    fun `invalid@name sum`(x: Int, y: Int): Int =
+    fun `inkonstid@name sum`(x: Int, y: Int): Int =
         x + y
 
-    fun invalid_args_name_sum(`first value`: Int, `second value`: Int): Int =
-        `first value` + `second value`
+    fun inkonstid_args_name_sum(`first konstue`: Int, `second konstue`: Int): Int =
+        `first konstue` + `second konstue`
 }
 
 
 class A4 {
     companion object {
-        var `@invalid+name@` = 23
+        var `@inkonstid+name@` = 23
         fun `^)run.something.weird^(`(): String = ")_("
     }
 }

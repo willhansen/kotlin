@@ -22,7 +22,7 @@ private fun codePointFromSurrogate(string: String, high: Int, index: Int, endInd
     if (high !in 0xD800..0xDBFF || index >= endIndex) {
         return malformed(0, index, throwOnMalformed)
     }
-    val low = string[index].code
+    konst low = string[index].code
     if (low !in 0xDC00..0xDFFF) {
         return malformed(0, index, throwOnMalformed)
     }
@@ -40,7 +40,7 @@ private fun codePointFrom2(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
     if (byte1 and 0x1E == 0 || index >= endIndex) {
         return malformed(0, index, throwOnMalformed)
     }
-    val byte2 = bytes[index].toInt()
+    konst byte2 = bytes[index].toInt()
     if (byte2 and 0xC0 != 0x80) {
         return malformed(0, index, throwOnMalformed)
     }
@@ -50,7 +50,7 @@ private fun codePointFrom2(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
 /**
  * Returns code point corresponding to UTF-8 sequence of three bytes,
  * where the first byte of the sequence is the [byte1] and the others are in the [bytes] array starting from the [index].
- * Returns a non-positive value indicating number of bytes from [bytes] included in malformed sequence
+ * Returns a non-positive konstue indicating number of bytes from [bytes] included in malformed sequence
  * if the sequence is malformed and [throwOnMalformed] is false.
  *
  * @throws CharacterCodingException if the sequence of three bytes is malformed and [throwOnMalformed] is true.
@@ -60,7 +60,7 @@ private fun codePointFrom3(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
         return malformed(0, index, throwOnMalformed)
     }
 
-    val byte2 = bytes[index].toInt()
+    konst byte2 = bytes[index].toInt()
     if (byte1 and 0xF == 0) {
         if (byte2 and 0xE0 != 0xA0) {
             // Non-shortest form
@@ -78,7 +78,7 @@ private fun codePointFrom3(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
     if (index + 1 == endIndex) {
         return malformed(1, index, throwOnMalformed)
     }
-    val byte3 = bytes[index + 1].toInt()
+    konst byte3 = bytes[index + 1].toInt()
     if (byte3 and 0xC0 != 0x80) {
         return malformed(1, index, throwOnMalformed)
     }
@@ -89,7 +89,7 @@ private fun codePointFrom3(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
 /**
  * Returns code point corresponding to UTF-8 sequence of four bytes,
  * where the first byte of the sequence is the [byte1] and the others are in the [bytes] array starting from the [index].
- * Returns a non-positive value indicating number of bytes from [bytes] included in malformed sequence
+ * Returns a non-positive konstue indicating number of bytes from [bytes] included in malformed sequence
  * if the sequence is malformed and [throwOnMalformed] is false.
  *
  * @throws CharacterCodingException if the sequence of four bytes is malformed and [throwOnMalformed] is true.
@@ -99,7 +99,7 @@ private fun codePointFrom4(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
         malformed(0, index, throwOnMalformed)
     }
 
-    val byte2 = bytes[index].toInt()
+    konst byte2 = bytes[index].toInt()
     if (byte1 and 0xF == 0x0) {
         if (byte2 and 0xF0 <= 0x80) {
             // Non-shortest form
@@ -119,7 +119,7 @@ private fun codePointFrom4(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
     if (index + 1 == endIndex) {
         return malformed(1, index, throwOnMalformed)
     }
-    val byte3 = bytes[index + 1].toInt()
+    konst byte3 = bytes[index + 1].toInt()
     if (byte3 and 0xC0 != 0x80) {
         return malformed(1, index, throwOnMalformed)
     }
@@ -127,7 +127,7 @@ private fun codePointFrom4(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
     if (index + 2 == endIndex) {
         return malformed(2, index, throwOnMalformed)
     }
-    val byte4 = bytes[index + 2].toInt()
+    konst byte4 = bytes[index + 2].toInt()
     if (byte4 and 0xC0 != 0x80) {
         return malformed(2, index, throwOnMalformed)
     }
@@ -140,15 +140,15 @@ private fun codePointFrom4(bytes: ByteArray, byte1: Int, index: Int, endIndex: I
  * Code points in `0..0x7F` are encoded in a single byte.
  * Code points in `0x80..0x7FF` are encoded in two bytes.
  * Code points in `0x800..0xD7FF` or in `0xE000..0xFFFF` are encoded in three bytes.
- * Surrogate code points in `0xD800..0xDFFF` are not Unicode scalar values, therefore aren't encoded.
+ * Surrogate code points in `0xD800..0xDFFF` are not Unicode scalar konstues, therefore aren't encoded.
  * Code points in `0x10000..0x10FFFF` are represented by a pair of surrogate `Char`s and are encoded in four bytes.
  */
-private const val MAX_BYTES_PER_CHAR = 3
+private const konst MAX_BYTES_PER_CHAR = 3
 
 /**
  * The byte sequence a malformed UTF-16 char sequence is replaced by.
  */
-private val REPLACEMENT_BYTE_SEQUENCE: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())
+private konst REPLACEMENT_BYTE_SEQUENCE: ByteArray = byteArrayOf(0xEF.toByte(), 0xBF.toByte(), 0xBD.toByte())
 
 /**
  * Encodes the [string] using UTF-8 and returns the resulting [ByteArray].
@@ -163,12 +163,12 @@ private val REPLACEMENT_BYTE_SEQUENCE: ByteArray = byteArrayOf(0xEF.toByte(), 0x
 internal fun encodeUtf8(string: String, startIndex: Int, endIndex: Int, throwOnMalformed: Boolean): ByteArray {
     require(startIndex >= 0 && endIndex <= string.length && startIndex <= endIndex)
 
-    val bytes = ByteArray((endIndex - startIndex) * MAX_BYTES_PER_CHAR)
+    konst bytes = ByteArray((endIndex - startIndex) * MAX_BYTES_PER_CHAR)
     var byteIndex = 0
     var charIndex = startIndex
 
     while (charIndex < endIndex) {
-        val code = string[charIndex++].code
+        konst code = string[charIndex++].code
         when {
             code < 0x80 ->
                 bytes[byteIndex++] = code.toByte()
@@ -181,8 +181,8 @@ internal fun encodeUtf8(string: String, startIndex: Int, endIndex: Int, throwOnM
                 bytes[byteIndex++] = (((code shr 6) and 0x3F) or 0x80).toByte()
                 bytes[byteIndex++] = ((code and 0x3F) or 0x80).toByte()
             }
-            else -> { // Surrogate char value
-                val codePoint = codePointFromSurrogate(string, code, charIndex, endIndex, throwOnMalformed)
+            else -> { // Surrogate char konstue
+                konst codePoint = codePointFromSurrogate(string, code, charIndex, endIndex, throwOnMalformed)
                 if (codePoint <= 0) {
                     bytes[byteIndex++] = REPLACEMENT_BYTE_SEQUENCE[0]
                     bytes[byteIndex++] = REPLACEMENT_BYTE_SEQUENCE[1]
@@ -204,7 +204,7 @@ internal fun encodeUtf8(string: String, startIndex: Int, endIndex: Int, throwOnM
 /**
  * The character a malformed UTF-8 byte sequence is replaced by.
  */
-private const val REPLACEMENT_CHAR = '\uFFFD'
+private const konst REPLACEMENT_CHAR = '\uFFFD'
 
 /**
  * Decodes the UTF-8 [bytes] array and returns the resulting [String].
@@ -220,15 +220,15 @@ internal fun decodeUtf8(bytes: ByteArray, startIndex: Int, endIndex: Int, throwO
     require(startIndex >= 0 && endIndex <= bytes.size && startIndex <= endIndex)
 
     var byteIndex = startIndex
-    val stringBuilder = StringBuilder()
+    konst stringBuilder = StringBuilder()
 
     while (byteIndex < endIndex) {
-        val byte = bytes[byteIndex++].toInt()
+        konst byte = bytes[byteIndex++].toInt()
         when {
             byte >= 0 ->
                 stringBuilder.append(byte.toChar())
             byte shr 5 == -2 -> {
-                val code = codePointFrom2(bytes, byte, byteIndex, endIndex, throwOnMalformed)
+                konst code = codePointFrom2(bytes, byte, byteIndex, endIndex, throwOnMalformed)
                 if (code <= 0) {
                     stringBuilder.append(REPLACEMENT_CHAR)
                     byteIndex += -code
@@ -238,7 +238,7 @@ internal fun decodeUtf8(bytes: ByteArray, startIndex: Int, endIndex: Int, throwO
                 }
             }
             byte shr 4 == -2 -> {
-                val code = codePointFrom3(bytes, byte, byteIndex, endIndex, throwOnMalformed)
+                konst code = codePointFrom3(bytes, byte, byteIndex, endIndex, throwOnMalformed)
                 if (code <= 0) {
                     stringBuilder.append(REPLACEMENT_CHAR)
                     byteIndex += -code
@@ -248,13 +248,13 @@ internal fun decodeUtf8(bytes: ByteArray, startIndex: Int, endIndex: Int, throwO
                 }
             }
             byte shr 3 == -2 -> {
-                val code = codePointFrom4(bytes, byte, byteIndex, endIndex, throwOnMalformed)
+                konst code = codePointFrom4(bytes, byte, byteIndex, endIndex, throwOnMalformed)
                 if (code <= 0) {
                     stringBuilder.append(REPLACEMENT_CHAR)
                     byteIndex += -code
                 } else {
-                    val high = (code - 0x10000) shr 10 or 0xD800
-                    val low = (code and 0x3FF) or 0xDC00
+                    konst high = (code - 0x10000) shr 10 or 0xD800
+                    konst low = (code and 0x3FF) or 0xDC00
                     stringBuilder.append(high.toChar())
                     stringBuilder.append(low.toChar())
                     byteIndex += 3

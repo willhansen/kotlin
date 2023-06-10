@@ -7,7 +7,7 @@ class A {
 fun box() : String {
     var (a, b) = A()
 
-    val local = {
+    konst local = {
         a = 3
     }
     local()

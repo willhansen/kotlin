@@ -27,9 +27,9 @@ abstract class AbstractSymbolLightClassesStructureByFqNameTest(
     }
 
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val result = prettyPrint {
-            val fqName = module.directives.singleValue(Directives.FQ_NAME)
-            val psiClass = findLightClass(fqName, ktFiles.first().project)
+        konst result = prettyPrint {
+            konst fqName = module.directives.singleValue(Directives.FQ_NAME)
+            konst psiClass = findLightClass(fqName, ktFiles.first().project)
             psiClass?.let { handleClass(it) } ?: append(LightClassTestCommon.NOT_GENERATED_DIRECTIVE)
         }
 
@@ -39,6 +39,6 @@ abstract class AbstractSymbolLightClassesStructureByFqNameTest(
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val FQ_NAME by stringDirective(description = "Light class to render")
+        konst FQ_NAME by stringDirective(description = "Light class to render")
     }
 }

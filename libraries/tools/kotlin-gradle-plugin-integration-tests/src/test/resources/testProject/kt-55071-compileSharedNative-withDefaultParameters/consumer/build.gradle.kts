@@ -16,13 +16,13 @@ kotlin {
     linuxX64()
     linuxArm64()
 
-    val commonMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val jvmAndJsMain by sourceSets.creating
-    val jvmMain by sourceSets.getting
-    val jsMain by sourceSets.getting
-    val linuxX64Main by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst jvmAndJsMain by sourceSets.creating
+    konst jvmMain by sourceSets.getting
+    konst jsMain by sourceSets.getting
+    konst linuxX64Main by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
 
     commonMain.let {
         nativeMain.dependsOn(it)

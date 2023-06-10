@@ -5,12 +5,12 @@
 import kotlin.test.assertEquals
 
 inline fun check(message: String, generate: () -> Any?) {
-    val x1: Any?
-    val x2: Any?
+    konst x1: Any?
+    konst x2: Any?
     try {
         x1 = generate()
 
-        // Force clear the internal maps, as if the weak values in them are garbage-collected.
+        // Force clear the internal maps, as if the weak konstues in them are garbage-collected.
         synchronized(kotlin.reflect.jvm.internal.ReflectionFactoryImpl::class.java) {
             kotlin.reflect.jvm.internal.ReflectionFactoryImpl.clearCaches()
         }
@@ -28,11 +28,11 @@ inline fun check(message: String, generate: () -> Any?) {
 class C<T> {
     fun <V> v(): V? = null
     fun t(): T? = null
-    val <U> U.u: U get() = this
+    konst <U> U.u: U get() = this
 }
 
 fun <W> W.w() {}
-val <X> X.x: X get() = this
+konst <X> X.x: X get() = this
 
 fun box(): String {
     check("T from C's typeParameters") { C::class.typeParameters.single() }

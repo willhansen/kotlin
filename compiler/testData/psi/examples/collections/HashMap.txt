@@ -115,7 +115,7 @@ KtFile: HashMap.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('hashCode')
         PsiWhiteSpace(' ')
@@ -229,7 +229,7 @@ KtFile: HashMap.kt
           PsiElement(COMMA)(',')
           PsiWhiteSpace(' ')
           VALUE_PARAMETER
-            PsiElement(IDENTIFIER)('value')
+            PsiElement(IDENTIFIER)('konstue')
             PsiWhiteSpace(' ')
             PsiElement(COLON)(':')
             PsiWhiteSpace(' ')
@@ -304,7 +304,7 @@ KtFile: HashMap.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('obj')
           PsiWhiteSpace(' ')

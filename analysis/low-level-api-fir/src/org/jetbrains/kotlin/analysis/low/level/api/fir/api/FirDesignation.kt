@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.name.ClassId
 class FirDesignationWithFile(
     path: List<FirRegularClass>,
     target: FirElementWithResolveState,
-    val firFile: FirFile
+    konst firFile: FirFile
 ) : FirDesignation(
     path,
     target,
@@ -44,8 +44,8 @@ class FirDesignationWithFile(
 }
 
 open class FirDesignation(
-    val path: List<FirRegularClass>,
-    val target: FirElementWithResolveState,
+    konst path: List<FirRegularClass>,
+    konst target: FirElementWithResolveState,
 ) {
     fun toSequence(includeTarget: Boolean): Sequence<FirElementWithResolveState> = sequence {
         yieldAll(path)
@@ -68,10 +68,10 @@ private fun collectDesignationPath(target: FirElementWithResolveState): List<Fir
                 return null
             }
 
-            val containingClassId = target.containingClassLookupTag()?.classId ?: return emptyList()
+            konst containingClassId = target.containingClassLookupTag()?.classId ?: return emptyList()
 
             if (target.origin is FirDeclarationOrigin.SubstitutionOverride) {
-                val originalContainingClassId = target.originalForSubstitutionOverride?.containingClassLookupTag()?.classId
+                konst originalContainingClassId = target.originalForSubstitutionOverride?.containingClassLookupTag()?.classId
                 if (containingClassId == originalContainingClassId) {
                     // Ugly temporary hack for call-site substitution overrides (KTIJ-24004).
                     // Containing class ID from the origin cannot be used, as the origin might be in a different module.
@@ -87,17 +87,17 @@ private fun collectDesignationPath(target: FirElementWithResolveState): List<Fir
                 return null
             }
 
-            val containingClassId = target.symbol.classId.outerClassId ?: return emptyList()
+            konst containingClassId = target.symbol.classId.outerClassId ?: return emptyList()
             return collectDesignationPathWithContainingClass(target, containingClassId)
         }
 
         is FirDanglingModifierList -> {
-            val containingClassId = target.containingClass()?.classId ?: return emptyList()
+            konst containingClassId = target.containingClass()?.classId ?: return emptyList()
             return collectDesignationPathWithContainingClass(target, containingClassId)
         }
 
         is FirAnonymousInitializer -> {
-            val containingClassId = target.containingClass().symbol.classId
+            konst containingClassId = target.containingClass().symbol.classId
             if (containingClassId.isLocal) return null
             return collectDesignationPathWithContainingClass(target, containingClassId)
         }
@@ -131,7 +131,7 @@ private fun collectDesignationPathWithContainingClass(target: FirDeclaration, co
         return null
     }
 
-    val firFile = target.getContainingFile()
+    konst firFile = target.getContainingFile()
     if (firFile != null && firFile.packageFqName == containingClassId.packageFqName) {
         // We should do fallback to the heavy implementation if something goes wrong.
         // For example, we can't be able to find an on-air declaration by this way
@@ -140,10 +140,10 @@ private fun collectDesignationPathWithContainingClass(target: FirDeclaration, co
         }
     }
 
-    val useSiteSession = getTargetSession(target)
+    konst useSiteSession = getTargetSession(target)
 
     fun resolveChunk(classId: ClassId): FirRegularClass {
-        val declaration = if (useSiteSession is LLFirLibraryOrLibrarySourceResolvableModuleSession) {
+        konst declaration = if (useSiteSession is LLFirLibraryOrLibrarySourceResolvableModuleSession) {
             useSiteSession.symbolProvider.getClassLikeSymbolByClassId(classId)?.fir
         } else {
             useSiteSession.firProvider.getFirClassifierByFqName(classId)
@@ -166,10 +166,10 @@ private fun collectDesignationPathWithContainingClass(target: FirDeclaration, co
         return declaration
     }
 
-    val chunks = generateSequence(containingClassId) { it.outerClassId }.toList()
+    konst chunks = generateSequence(containingClassId) { it.outerClassId }.toList()
 
     if (chunks.any { it.shortClassName.isSpecial }) {
-        val fallbackResult = collectDesignationPathWithTreeTraversal(target)
+        konst fallbackResult = collectDesignationPathWithTreeTraversal(target)
         if (fallbackResult != null) {
             return fallbackResult
         }
@@ -186,14 +186,14 @@ private fun collectDesignationPathWithContainingClass(target: FirDeclaration, co
     anonymous outer classes unless FIR tree gets a way to get an element parent.
  */
 private fun collectDesignationPathWithTreeTraversal(target: FirDeclaration): List<FirRegularClass>? {
-    val containingFile = target.getContainingFile() ?: return null
+    konst containingFile = target.getContainingFile() ?: return null
 
-    val path = ArrayDeque<FirElement>()
+    konst path = ArrayDeque<FirElement>()
     path.addLast(containingFile)
 
     var result: List<FirRegularClass>? = null
 
-    val visitor = object : FirVisitorVoid() {
+    konst visitor = object : FirVisitorVoid() {
         override fun visitElement(element: FirElement) {
             if (result != null) {
                 return
@@ -220,7 +220,7 @@ private fun getTargetSession(target: FirDeclaration): FirSession {
     }
 
     if (target is FirCallableDeclaration) {
-        val containingSymbol = target.containingClassLookupTag()?.toSymbol(target.moduleData.session)
+        konst containingSymbol = target.containingClassLookupTag()?.toSymbol(target.moduleData.session)
         if (containingSymbol != null) {
             // Synthetic declarations might have a call site session
             return containingSymbol.moduleData.session
@@ -235,7 +235,7 @@ private fun findKotlinStdlibClass(classId: ClassId, target: FirDeclaration): Fir
         return null
     }
 
-    val firFile = target.getContainingFile() ?: return null
+    konst firFile = target.getContainingFile() ?: return null
     return FirElementFinder.findClassifierWithClassId(firFile, classId) as? FirRegularClass
 }
 
@@ -269,12 +269,12 @@ fun FirElementWithResolveState.tryCollectDesignation(): FirDesignation? =
 fun FirElementWithResolveState.tryCollectDesignationWithFile(): FirDesignationWithFile? {
     return when (this) {
         is FirScript, is FirFileAnnotationsContainer -> {
-            val firFile = getContainingFile() ?: return null
+            konst firFile = getContainingFile() ?: return null
             FirDesignationWithFile(path = emptyList(), this, firFile)
         }
         is FirDeclaration -> {
-            val path = collectDesignationPath(this) ?: return null
-            val firFile = getContainingFile() ?: return null
+            konst path = collectDesignationPath(this) ?: return null
+            konst firFile = getContainingFile() ?: return null
             FirDesignationWithFile(path, this, firFile)
         }
         else -> unexpectedElementError<FirElementWithResolveState>(this)

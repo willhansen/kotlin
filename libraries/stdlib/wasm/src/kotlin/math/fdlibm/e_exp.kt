@@ -23,7 +23,7 @@
  *	accuracy.
  *
  *   2. Approximation of exp(r) by a special rational function on
- *	the interval [0,0.34658]:
+ *	the interkonst [0,0.34658]:
  *	Write
  *	    R(r**2) = r*(exp(r)+1)/(exp(r)-1) = 2 + r*r/6 - r**4/360 + ...
  *      We use a special Remes algorithm on [0,0.34658] to generate 
@@ -31,7 +31,7 @@
  *	of this polynomial approximation is bounded by 2**-59. In
  *	other words,
  *	    R(z) ~ 2.0 + P1*z + P2*z**2 + P3*z**3 + P4*z**4 + P5*z**5
- *  	(where z=r*r, and the values of P1 to P5 are listed below)
+ *  	(where z=r*r, and the konstues of P1 to P5 are listed below)
  *	and
  *	    |                  5          |     -59
  *	    | 2.0+P1*z+...+P5*z   -  R(z) | <= 2 
@@ -66,35 +66,35 @@
  *	    if x < -7.45133219101941108420e+02 then exp(x) underflow
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  */
 
 package kotlin.math.fdlibm
 
 
-private const val one = 1.0
-private val halF = doubleArrayOf(0.5, -0.5)
-private const val huge = 1.0e+300
-private const val twom1000 = 9.33263618503218878990e-302     /* 2**-1000=0x01700000,0*/
-private const val o_threshold = 7.09782712893383973096e+02  /* 0x40862E42, 0xFEFA39EF */
-private const val u_threshold = -7.45133219101941108420e+02  /* 0xc0874910, 0xD52D3051 */
-private val ln2HI = doubleArrayOf(
+private const konst one = 1.0
+private konst halF = doubleArrayOf(0.5, -0.5)
+private const konst huge = 1.0e+300
+private const konst twom1000 = 9.33263618503218878990e-302     /* 2**-1000=0x01700000,0*/
+private const konst o_threshold = 7.09782712893383973096e+02  /* 0x40862E42, 0xFEFA39EF */
+private const konst u_threshold = -7.45133219101941108420e+02  /* 0xc0874910, 0xD52D3051 */
+private konst ln2HI = doubleArrayOf(
     6.93147180369123816490e-01,  /* 0x3fe62e42, 0xfee00000 */
     -6.93147180369123816490e-01,
 )/* 0xbfe62e42, 0xfee00000 */
-private val ln2LO = doubleArrayOf(
+private konst ln2LO = doubleArrayOf(
     1.90821492927058770002e-10,  /* 0x3dea39ef, 0x35793c76 */
     -1.90821492927058770002e-10,
 )/* 0xbdea39ef, 0x35793c76 */
-private const val invln2 = 1.44269504088896338700e+00 /* 0x3ff71547, 0x652b82fe */
-private const val P1 = 1.66666666666666019037e-01 /* 0x3FC55555, 0x5555553E */
-private const val P2 = -2.77777777770155933842e-03 /* 0xBF66C16C, 0x16BEBD93 */
-private const val P3 = 6.61375632143793436117e-05 /* 0x3F11566A, 0xAF25DE2C */
-private const val P4 = -1.65339022054652515390e-06 /* 0xBEBBBD41, 0xC5D26BF1 */
-private const val P5 = 4.13813679705723846039e-08 /* 0x3E663769, 0x72BEA4D0 */
+private const konst invln2 = 1.44269504088896338700e+00 /* 0x3ff71547, 0x652b82fe */
+private const konst P1 = 1.66666666666666019037e-01 /* 0x3FC55555, 0x5555553E */
+private const konst P2 = -2.77777777770155933842e-03 /* 0xBF66C16C, 0x16BEBD93 */
+private const konst P3 = 6.61375632143793436117e-05 /* 0x3F11566A, 0xAF25DE2C */
+private const konst P4 = -1.65339022054652515390e-06 /* 0xBEBBBD41, 0xC5D26BF1 */
+private const konst P5 = 4.13813679705723846039e-08 /* 0x3E663769, 0x72BEA4D0 */
 
 
 internal fun __ieee754_exp(_x: Double): Double    /* default IEEE double exp */ {

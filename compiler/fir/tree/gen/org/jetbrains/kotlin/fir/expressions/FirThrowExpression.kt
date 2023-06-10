@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirThrowExpression : FirExpression() {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract val exception: FirExpression
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst exception: FirExpression
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitThrowExpression(this, data)
 

@@ -30,7 +30,7 @@ class K : Derived {
 }
 
 fun box(): String {
-    val z = object : Derived by K() {
+    konst z = object : Derived by K() {
         override fun getValue() = "Fail"
     }
     return z.test()

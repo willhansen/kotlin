@@ -159,4 +159,4 @@ public expect fun Throwable.addSuppressed(exception: Throwable)
  * - if this [Throwable] instance has disabled the suppression.
  */
 @SinceKotlin("1.4")
-public expect val Throwable.suppressedExceptions: List<Throwable>
+public expect konst Throwable.suppressedExceptions: List<Throwable>

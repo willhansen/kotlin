@@ -23,14 +23,14 @@ abstract class TypeAttribute<out T : TypeAttribute<T>> : AnnotationMarker {
      * typealias B = @SomeAttribute(1) A
      * typealias C = @SomeAttribute(2) B
      *
-     * For determining attribute value of expanded type of C we should add @SomeAttribute(2) to @SomeAttribute(1)
+     * For determining attribute konstue of expanded type of C we should add @SomeAttribute(2) to @SomeAttribute(1)
      *
      * This function must be symmetrical: a.add(b) == b.add(a)
      */
     abstract fun add(other: @UnsafeVariance T?): T
     abstract fun isSubtypeOf(other: @UnsafeVariance T?): Boolean
 
-    abstract val key: KClass<out T>
+    abstract konst key: KClass<out T>
 }
 
 class TypeAttributes private constructor(attributes: List<TypeAttribute<*>>) : AttributeArrayOwner<TypeAttribute<*>, TypeAttribute<*>>(),
@@ -51,7 +51,7 @@ class TypeAttributes private constructor(attributes: List<TypeAttribute<*>>) : A
             }
         }
 
-        val Empty: TypeAttributes = TypeAttributes(emptyList())
+        konst Empty: TypeAttributes = TypeAttributes(emptyList())
 
         fun create(attributes: List<TypeAttribute<*>>): TypeAttributes {
             return if (attributes.isEmpty()) {
@@ -83,37 +83,37 @@ class TypeAttributes private constructor(attributes: List<TypeAttribute<*>>) : A
     }
 
     operator fun contains(attribute: TypeAttribute<*>): Boolean {
-        val index = getId(attribute.key)
+        konst index = getId(attribute.key)
         return arrayMap[index] != null
     }
 
     operator fun plus(attribute: TypeAttribute<*>): TypeAttributes {
         if (attribute in this) return this
         if (isEmpty()) return TypeAttributes(attribute)
-        val newAttributes = this.toList() + attribute
+        konst newAttributes = this.toList() + attribute
         return create(newAttributes)
     }
 
     fun remove(attribute: TypeAttribute<*>): TypeAttributes {
         if (isEmpty()) return this
-        val attributes = arrayMap.filter { it != attribute }
+        konst attributes = arrayMap.filter { it != attribute }
         if (attributes.size == arrayMap.size) return this
         return create(attributes)
     }
 
     private inline fun perform(other: TypeAttributes, op: TypeAttribute<*>.(TypeAttribute<*>?) -> TypeAttribute<*>?): TypeAttributes {
         if (this.isEmpty() && other.isEmpty()) return this
-        val attributes = mutableListOf<TypeAttribute<*>>()
+        konst attributes = mutableListOf<TypeAttribute<*>>()
         for (index in indices) {
-            val a = arrayMap[index]
-            val b = other.arrayMap[index]
-            val res = if (a == null) b?.op(a) else a.op(b)
+            konst a = arrayMap[index]
+            konst b = other.arrayMap[index]
+            konst res = if (a == null) b?.op(a) else a.op(b)
             attributes.addIfNotNull(res)
         }
         return create(attributes)
     }
 
-    override val typeRegistry: TypeRegistry<TypeAttribute<*>, TypeAttribute<*>>
+    override konst typeRegistry: TypeRegistry<TypeAttribute<*>, TypeAttribute<*>>
         get() = Companion
 
 }
@@ -125,7 +125,7 @@ fun Annotations.toDefaultAttributes(): TypeAttributes = DefaultTypeAttributeTran
 
 fun TypeAttributes.replaceAnnotations(newAnnotations: Annotations): TypeAttributes {
     if (annotations === newAnnotations) return this
-    val withoutAnnotations = annotationsAttribute?.let { this.remove(it) } ?: this
+    konst withoutAnnotations = annotationsAttribute?.let { this.remove(it) } ?: this
     // Check if iterator hasNext to handle FilteredAnnotations.isEmpty() with OldInference
     if (!newAnnotations.iterator().hasNext() && newAnnotations.isEmpty()) return withoutAnnotations
     return withoutAnnotations.plus(AnnotationsTypeAttribute(newAnnotations))

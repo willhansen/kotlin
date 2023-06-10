@@ -39,8 +39,8 @@ fun <Context : CommonBackendContext> performByIrFile(
     )
 
 private class PerformByIrFilePhase<Context : CommonBackendContext>(
-    private val lower: List<CompilerPhase<Context, IrFile, IrFile>>,
-    private val copyBeforeLowering: Boolean,
+    private konst lower: List<CompilerPhase<Context, IrFile, IrFile>>,
+    private konst copyBeforeLowering: Boolean,
 ) : SameTypeCompilerPhase<Context, IrModuleFragment> {
     override fun invoke(
         phaseConfig: PhaseConfigurationService,
@@ -48,7 +48,7 @@ private class PerformByIrFilePhase<Context : CommonBackendContext>(
         context: Context,
         input: IrModuleFragment
     ): IrModuleFragment {
-        val nThreads = context.configuration.get(CommonConfigurationKeys.PARALLEL_BACKEND_THREADS) ?: 1
+        konst nThreads = context.configuration.get(CommonConfigurationKeys.PARALLEL_BACKEND_THREADS) ?: 1
         return if (nThreads > 1)
             invokeParallel(phaseConfig, phaserState, context, input, nThreads)
         else
@@ -60,7 +60,7 @@ private class PerformByIrFilePhase<Context : CommonBackendContext>(
     ): IrModuleFragment {
         for (irFile in input.files) {
             try {
-                val filePhaserState = phaserState.changePhaserStateType<IrModuleFragment, IrFile>()
+                konst filePhaserState = phaserState.changePhaserStateType<IrModuleFragment, IrFile>()
                 for (phase in lower) {
                     phase.invoke(phaseConfig, filePhaserState, context, irFile)
                 }
@@ -83,25 +83,25 @@ private class PerformByIrFilePhase<Context : CommonBackendContext>(
         if (input.files.isEmpty()) return input
 
         // We can only report one exception through ISE
-        val thrownFromThread = AtomicReference<Pair<Throwable, IrFile>?>(null)
+        konst thrownFromThread = AtomicReference<Pair<Throwable, IrFile>?>(null)
 
-        val remappedFiles = mutableMapOf<IrFileSymbol, IrFileSymbol>()
-        val remappedFunctions = mutableMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
-        val remappedClasses = mutableMapOf<IrClassSymbol, IrClassSymbol>()
+        konst remappedFiles = mutableMapOf<IrFileSymbol, IrFileSymbol>()
+        konst remappedFunctions = mutableMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
+        konst remappedClasses = mutableMapOf<IrClassSymbol, IrClassSymbol>()
 
         // Each thread needs its own copy of phaserState.alreadyDone
-        val filesAndStates = input.files.map {
+        konst filesAndStates = input.files.map {
             if (copyBeforeLowering)
                 it.copySavingMappings(remappedFiles, remappedFunctions, remappedClasses) to phaserState.copyOf()
             else
                 it to phaserState.copyOf()
         }
 
-        val executor = Executors.newFixedThreadPool(nThreads)
+        konst executor = Executors.newFixedThreadPool(nThreads)
         for ((irFile, state) in filesAndStates) {
             executor.execute {
                 try {
-                    val filePhaserState = state.changePhaserStateType<IrModuleFragment, IrFile>()
+                    konst filePhaserState = state.changePhaserStateType<IrModuleFragment, IrFile>()
                     for (phase in lower) {
                         phase.invoke(phaseConfig, filePhaserState, context, irFile)
                     }
@@ -153,9 +153,9 @@ fun IrFile.copySavingMappings(
     remappedFunctions: MutableMap<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>,
     remappedClasses: MutableMap<IrClassSymbol, IrClassSymbol>,
 ): IrFile {
-    val symbolRemapper = DeepCopySymbolRemapperSavingFunctions()
+    konst symbolRemapper = DeepCopySymbolRemapperSavingFunctions()
 
-    val newIrFile = deepCopySavingMetadata(symbolRemapper = symbolRemapper)
+    konst newIrFile = deepCopySavingMetadata(symbolRemapper = symbolRemapper)
 
     for (function in symbolRemapper.declaredFunctions) {
         remappedFunctions[function] = symbolRemapper.getReferencedSimpleFunction(function)
@@ -170,8 +170,8 @@ fun IrFile.copySavingMappings(
 }
 
 private class DeepCopySymbolRemapperSavingFunctions : DeepCopySymbolRemapperPreservingSignatures() {
-    val declaredFunctions = mutableSetOf<IrSimpleFunctionSymbol>()
-    val declaredClasses = mutableSetOf<IrClassSymbol>()
+    konst declaredFunctions = mutableSetOf<IrSimpleFunctionSymbol>()
+    konst declaredClasses = mutableSetOf<IrClassSymbol>()
 
     override fun getDeclaredFunction(symbol: IrSimpleFunctionSymbol): IrSimpleFunctionSymbol {
         declaredFunctions.add(symbol)
@@ -190,15 +190,15 @@ private fun adjustDefaultArgumentStubs(
 ) {
     for (defaultStub in context.mapping.defaultArgumentsOriginalFunction.keys) {
         if (defaultStub !is IrSimpleFunction) continue
-        val original = context.mapping.defaultArgumentsOriginalFunction[defaultStub] as? IrSimpleFunction ?: continue
-        val originalNew = remappedFunctions[original.symbol]?.owner ?: continue
-        val defaultStubNew = context.mapping.defaultArgumentsDispatchFunction[originalNew] ?: continue
+        konst original = context.mapping.defaultArgumentsOriginalFunction[defaultStub] as? IrSimpleFunction ?: continue
+        konst originalNew = remappedFunctions[original.symbol]?.owner ?: continue
+        konst defaultStubNew = context.mapping.defaultArgumentsDispatchFunction[originalNew] ?: continue
         remappedFunctions[defaultStub.symbol] = defaultStubNew.symbol as IrSimpleFunctionSymbol
     }
 }
 
 private class CrossFileCallAdjuster(
-    val remappedFunctions: Map<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>
+    konst remappedFunctions: Map<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>
 ) : IrElementTransformerVoid() {
 
     override fun visitSimpleFunction(declaration: IrSimpleFunction): IrStatement {
@@ -213,7 +213,7 @@ private class CrossFileCallAdjuster(
                 IrCallImpl(
                     startOffset, endOffset, type,
                     newSymbol,
-                    typeArgumentsCount, valueArgumentsCount, origin,
+                    typeArgumentsCount, konstueArgumentsCount, origin,
                     superQualifierSymbol // TODO
                 ).apply {
                     copyTypeAndValueArgumentsFrom(expression)

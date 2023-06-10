@@ -9,8 +9,8 @@ import kotlinx.metadata.KmAnnotation
 
 // TODO: Add to common kotlinx-metadata.
 class KlibEnumEntry(
-    val name: String,
+    konst name: String,
     var uniqId: UniqId? = null,
     var ordinal: Int? = null,
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
 )

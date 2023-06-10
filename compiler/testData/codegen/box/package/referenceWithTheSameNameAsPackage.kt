@@ -8,7 +8,7 @@ fun foo() {}
 // FILE: sample.kt
 
 class Test {
-    val messages = arrayListOf<String>()
+    konst messages = arrayListOf<String>()
 
     fun test(): Boolean {
         return messages.any { it == "foo" }
@@ -16,6 +16,6 @@ class Test {
 }
 
 fun box(): String {
-    val result = Test().test()
+    konst result = Test().test()
     return if (result) "faile" else "OK"
 }

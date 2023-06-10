@@ -9,7 +9,7 @@ class B : A()
 
 fun foo(a: A): String {
     if (a is B) {
-        val v = a::InnerInA
+        konst v = a::InnerInA
         return v().returnOk()
     }
 

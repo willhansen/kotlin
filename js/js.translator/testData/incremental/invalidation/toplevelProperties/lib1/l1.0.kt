@@ -1,1 +1,1 @@
-val globalVal = "0"
+konst globalVal = "0"

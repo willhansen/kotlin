@@ -12,17 +12,17 @@ struct UnsupportedOperationException: Error {
 
 class Leaf<T : Equatable> : NodeEntity<T>, Equatable {
     static func == (lhs: Leaf<T>, rhs: Leaf<T>) -> Bool {
-        return lhs.value == rhs.value
+        return lhs.konstue == rhs.konstue
     }
     
-    var value: T
+    var konstue: T
     
-    init(_ value: T) {
-        self.value = value
+    init(_ konstue: T) {
+        self.konstue = konstue
     }
 
     override func toString() -> String  {
-        return "L{$value}"
+        return "L{$konstue}"
     }
 }
 
@@ -31,7 +31,7 @@ class NodeEntity<T: Equatable>: Node {
         return ""
     }
     
-    func set(x: Int, y: Int, z: Int, value: T, depth: Int) throws -> Bool {
+    func set(x: Int, y: Int, z: Int, konstue: T, depth: Int) throws -> Bool {
         throw UnsupportedOperationException(message: "set on Leaf element")
     }
 }
@@ -39,7 +39,7 @@ class NodeEntity<T: Equatable>: Node {
 private protocol Node {
     associatedtype T
 
-    func set(x: Int, y: Int, z: Int, value: T, depth: Int) throws -> Bool
+    func set(x: Int, y: Int, z: Int, konstue: T, depth: Int) throws -> Bool
     func toString() -> String
 }
 
@@ -48,21 +48,21 @@ class Branch<T: Equatable> : NodeEntity<T> {
     
     override init() {}
 
-    init(_ value: T, _ exclude: Int) {
+    init(_ konstue: T, _ exclude: Int) {
         var i = 0
         while (i < 8) {
             if (i != exclude) {
-                nodes[i] = Leaf(value)
+                nodes[i] = Leaf(konstue)
             }
             i += 1
         }
     }
 
-    private func canClusterize(_ value: T) -> Bool {
+    private func canClusterize(_ konstue: T) -> Bool {
         var i = 0
         while (i < 8) {
             let w = nodes[i]
-            if (w == nil || !(w is Leaf) || value != (w as? Leaf)?.value) {
+            if (w == nil || !(w is Leaf) || konstue != (w as? Leaf)?.konstue) {
                 return false
             }
             i += 1
@@ -70,29 +70,29 @@ class Branch<T: Equatable> : NodeEntity<T> {
         return true
     }
 
-    override func set(x: Int, y: Int, z: Int, value: T, depth: Int) throws -> Bool {
+    override func set(x: Int, y: Int, z: Int, konstue: T, depth: Int) throws -> Bool {
         let branchIndex = OctoTree<T>.number(x, y, z, depth)
         let node = nodes[branchIndex]
         if (node == nil) {
             if (depth == 0) {
-                nodes[branchIndex] = Leaf(value)
-                return canClusterize(value)
+                nodes[branchIndex] = Leaf(konstue)
+                return canClusterize(konstue)
             } else {
                 nodes[branchIndex] = Branch<T>()
             }
         } else if let leaf = node as? Leaf<T> {
-            if (leaf.value == value) {
+            if (leaf.konstue == konstue) {
                 return false
             } else if (depth == 0) {
-                leaf.value = value
-                return canClusterize(value)
+                leaf.konstue = konstue
+                return canClusterize(konstue)
             }
-            nodes[branchIndex] = Branch(leaf.value, OctoTree<T>.number(x, y, z, depth - 1))
+            nodes[branchIndex] = Branch(leaf.konstue, OctoTree<T>.number(x, y, z, depth - 1))
         }
 
-        if (try nodes[branchIndex]!.set(x: x, y: y, z: z, value: value, depth: depth - 1)) {
-            nodes[branchIndex] = Leaf(value)
-            return canClusterize(value)
+        if (try nodes[branchIndex]!.set(x: x, y: y, z: z, konstue: konstue, depth: depth - 1)) {
+            nodes[branchIndex] = Leaf(konstue)
+            return canClusterize(konstue)
         }
         return false
     }
@@ -120,7 +120,7 @@ class OctoTree<T: Equatable> {
             if (iter == nil) {
                 return nil
             } else if let leaf = iter as? Leaf<T> {
-                return leaf.value
+                return leaf.konstue
             }
             
             dep -= 1
@@ -128,13 +128,13 @@ class OctoTree<T: Equatable> {
         }
     }
 
-    func set(x: Int, y: Int, z: Int, value: T) {
+    func set(x: Int, y: Int, z: Int, konstue: T) {
         if (root == nil) {
             root = Branch()
         }
         do {
-            if (try root!.set(x: x, y: y, z: z, value: value, depth: depth - 1)) {
-                root = Leaf(value)
+            if (try root!.set(x: x, y: y, z: z, konstue: konstue, depth: depth - 1)) {
+                root = Leaf(konstue)
             }
         } catch {
             print("Exception")
@@ -189,7 +189,7 @@ func octoTest() {
             while (z < to) {
                 let c = (z + to * y + to * to * x) % 2 == 0
 
-                tree.set(x: x, y: y, z: z, value: c)
+                tree.set(x: x, y: y, z: z, konstue: c)
                 z += 1
             }
             y += 1

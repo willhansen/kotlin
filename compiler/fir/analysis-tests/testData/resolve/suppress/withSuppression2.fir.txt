@@ -12,7 +12,7 @@ FILE: withSuppression2.kt
             super<R|@R|kotlin/Suppress|(names = vararg(String(VALUE_CLASS_CANNOT_EXTEND_CLASSES)))  A|>()
         }
 
-        public final val i: R|kotlin/Int| = R|<local>/i|
+        public final konst i: R|kotlin/Int| = R|<local>/i|
             public get(): R|kotlin/Int|
 
         @R|kotlin/Suppress|(names = vararg(String(SECONDARY_CONSTRUCTOR_WITH_BODY_INSIDE_VALUE_CLASS))) public constructor(): R|B| {
@@ -20,12 +20,12 @@ FILE: withSuppression2.kt
             R|/foo|(this@R|/B|.R|/B.i|)
         }
 
-        @R|kotlin/Suppress|(names = vararg(String(ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS))) public abstract val y: R|kotlin/Int|
+        @R|kotlin/Suppress|(names = vararg(String(ABSTRACT_PROPERTY_IN_NON_ABSTRACT_CLASS))) public abstract konst y: R|kotlin/Int|
             public get(): R|kotlin/Int|
 
     }
     public abstract interface C : R|kotlin/Any| {
-        @R|kotlin/Suppress|(names = vararg(String(PRIVATE_PROPERTY_IN_INTERFACE))) private final val x: R|kotlin/Int|
+        @R|kotlin/Suppress|(names = vararg(String(PRIVATE_PROPERTY_IN_INTERFACE))) private final konst x: R|kotlin/Int|
             private get(): R|kotlin/Int|
 
         @R|kotlin/Suppress|(names = vararg(String(METHOD_OF_ANY_IMPLEMENTED_IN_INTERFACE))) public open override fun hashCode(): R|kotlin/Int| {
@@ -33,5 +33,5 @@ FILE: withSuppression2.kt
         }
 
     }
-    @R|kotlin/Suppress|(names = vararg(String(PROPERTY_WITH_NO_TYPE_NO_INITIALIZER))) public final val z: <ERROR TYPE REF: Cannot infer variable type without initializer / getter / delegate>
+    @R|kotlin/Suppress|(names = vararg(String(PROPERTY_WITH_NO_TYPE_NO_INITIALIZER))) public final konst z: <ERROR TYPE REF: Cannot infer variable type without initializer / getter / delegate>
         public get(): <ERROR TYPE REF: Cannot infer variable type without initializer / getter / delegate>

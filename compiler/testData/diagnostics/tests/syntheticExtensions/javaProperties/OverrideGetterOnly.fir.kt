@@ -13,7 +13,7 @@ fun useString(i: String) {}
 // FILE: JavaClass1.java
 public class JavaClass1 {
     public Object getSomething() { return null; }
-    public void setSomething(Object value) { }
+    public void setSomething(Object konstue) { }
 }
 
 // FILE: JavaClass2.java

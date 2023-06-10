@@ -5,14 +5,14 @@
 // LANGUAGE: +ValueClasses
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double) {
-    val opposite: DPoint
+konstue class DPoint(konst x: Double, konst y: Double) {
+    konst opposite: DPoint
         get() = DPoint(-x, -y)
 }
 
 class DSegment(var p1: DPoint, var p2: DPoint) {
 
-    val center: DPoint
+    konst center: DPoint
         get() = DPoint(p1.x / 2 + p2.x / 2, p1.y / 2 + p2.y / 2)
     
     var notImplemented: DPoint
@@ -22,15 +22,15 @@ class DSegment(var p1: DPoint, var p2: DPoint) {
     var point1WithBackingFieldAndDefaultGetter: DPoint = p1
     var point2WithBackingFieldAndDefaultGetter: DPoint = p1
         get() = field
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
             require("${2 + 2}" == "4")
         }
     
     var pointWithBackingFieldAndCustomGetter: DPoint = p1
         get() = field.also { require("${2 + 2}" == "4") }
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
             require("${2 + 2}" == "4")
         }
     

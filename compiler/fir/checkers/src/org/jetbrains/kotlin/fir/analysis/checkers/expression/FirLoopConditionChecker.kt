@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.expressions.FirLoop
 object FirLoopConditionChecker : FirLoopExpressionChecker() {
     override fun check(expression: FirLoop, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression is FirErrorLoop) return
-        val condition = expression.condition
+        konst condition = expression.condition
         checkCondition(condition, context, reporter)
     }
 }

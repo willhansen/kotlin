@@ -13,16 +13,16 @@ class Container<T>
 fun <X> test() = typeOf<Container<X>>()
 
 fun box(): String {
-    val type = test<Any>()
-    val x = type.arguments.single().type!!.classifier as KTypeParameter
+    konst type = test<Any>()
+    konst x = type.arguments.single().type!!.classifier as KTypeParameter
 
-    val expected = className("kotlin.Any?")
+    konst expected = className("kotlin.Any?")
     assertEquals(expected, x.upperBounds.joinToString())
 
     return "OK"
 }
 
 fun className(fqName: String): String {
-    val isJS = 1 as Any is Double
+    konst isJS = 1 as Any is Double
     return if (isJS) fqName.substringAfterLast('.') else fqName
 }

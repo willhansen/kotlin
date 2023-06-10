@@ -21,8 +21,8 @@ interface CK : A
 
 class Adapter : B, C
 
-class D(val adapter: Adapter) : B by adapter, C by adapter
-class E(val b: B, val c: C) : B by b, C by c
+class D(konst adapter: Adapter) : B by adapter, C by adapter
+class E(konst b: B, konst c: C) : B by b, C by c
 
 class AdapterK : B, CK
-class F(val adapter: AdapterK) : B by adapter, CK by adapter
+class F(konst adapter: AdapterK) : B by adapter, CK by adapter

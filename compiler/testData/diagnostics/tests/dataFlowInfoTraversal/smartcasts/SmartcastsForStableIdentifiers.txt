@@ -1,7 +1,7 @@
 package
 
 package example {
-    public val x: kotlin.Any? = 1
+    public konst x: kotlin.Any? = 1
     public fun kotlin.Any?.foo(): kotlin.Int
     public fun kotlin.Any?.vars(/*0*/ a: kotlin.Any?): kotlin.Int
 
@@ -13,7 +13,7 @@ package example {
 
         public companion object Companion {
             private constructor Companion()
-            public final val y: kotlin.Any? = 2
+            public final konst y: kotlin.Any? = 2
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -30,7 +30,7 @@ package example {
 
     public object Obj {
         private constructor Obj()
-        public final val y: kotlin.Any? = 2
+        public final konst y: kotlin.Any? = 2
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -43,6 +43,6 @@ package example {
     }
 
     package example.ns {
-        public val y: kotlin.Any? = 2
+        public konst y: kotlin.Any? = 2
     }
 }

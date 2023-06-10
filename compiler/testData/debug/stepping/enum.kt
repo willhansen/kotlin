@@ -8,10 +8,10 @@ enum class E() {
         prop
     }
 
-    val prop = 22
+    konst prop = 22
 }
 
-enum class E2(val y : Int) {
+enum class E2(konst y : Int) {
     C(1),
     D(
         2
@@ -25,13 +25,13 @@ fun box() {
 
 // JVM_IR maintains line number information in the class initializer for the
 // initialization of the enum entries. There is line number information for
-// the allocation of the object, for the evaluation of arguments to the
+// the allocation of the object, for the ekonstuation of arguments to the
 // constructor, and for the call to the constructor. This is consistent
 // with the line number information generated for normal object allocation.
 
 // JVM has no line number information in <clinit> if there are no arguments
 // to the enum constructor. If there are arguments it has line number information
-// for the evaluation of the arguments constructor and for the constructor call,
+// for the ekonstuation of the arguments constructor and for the constructor call,
 // but not for the allocation of the object.
 
 // EXPECTATIONS JVM JVM_IR

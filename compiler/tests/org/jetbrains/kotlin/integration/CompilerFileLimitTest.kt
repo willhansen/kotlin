@@ -23,10 +23,10 @@ import java.io.File
 
 class CompilerFileLimitTest : CompilerSmokeTestBase() {
     fun testLargeKotlinFile() {
-        val size = 300
+        konst size = 300
 
-        val dir = tempDir("largeKotlinFileSrc")
-        val file = File(dir, "largeKotlinFile.kt")
+        konst dir = tempDir("largeKotlinFileSrc")
+        konst file = File(dir, "largeKotlinFile.kt")
         file.writeText(generateLargeKotlinFile(size))
 
         assertIsLargeButNotTooLarge(file)
@@ -49,7 +49,7 @@ class CompilerFileLimitTest : CompilerSmokeTestBase() {
             }
             appendLine("fun main()")
             appendLine("{")
-            appendLine("\tval result = Class5().foo() + Class$size().foo()")
+            appendLine("\tkonst result = Class5().foo() + Class$size().foo()")
             appendLine("\tprintln(result)")
             appendLine("}")
         }
@@ -57,14 +57,14 @@ class CompilerFileLimitTest : CompilerSmokeTestBase() {
     }
 
     fun testLargeJavaFile() {
-        val size = 300
+        konst size = 300
 
-        val dir = tempDir("largeJavaFileSrc")
-        val javaDir = File(dir, "large")
+        konst dir = tempDir("largeJavaFileSrc")
+        konst javaDir = File(dir, "large")
         javaDir.mkdir()
-        val javaFile = File(javaDir, "Large.java")
+        konst javaFile = File(javaDir, "Large.java")
         javaFile.writeText(generateLargeJavaFile(size))
-        val ktFile = File(dir, "useLargerJava.kt")
+        konst ktFile = File(dir, "useLargerJava.kt")
         ktFile.writeText(generateKotlinFileThatUsesLargeJavaFile(size))
 
         assertIsLargeButNotTooLarge(javaFile)
@@ -83,7 +83,7 @@ class CompilerFileLimitTest : CompilerSmokeTestBase() {
             append("import large.Large\n\n")
             appendLine("fun main()")
             appendLine("{")
-            appendLine("\tval result = Large.Class0().foo() + Large.Class$size().foo()")
+            appendLine("\tkonst result = Large.Class0().foo() + Large.Class$size().foo()")
             appendLine("\tprintln(result)")
             appendLine("}")
         }

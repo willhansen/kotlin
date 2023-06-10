@@ -35,7 +35,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.native.FirNativeErrors.SUBT
 import org.jetbrains.kotlin.fir.analysis.diagnostics.native.FirNativeErrors.THROWS_LIST_EMPTY
 
 object FirNativeErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
-    override val MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
         map.put(THROWS_LIST_EMPTY, "Throws must have non-empty class list")
         map.put(INCOMPATIBLE_THROWS_OVERRIDE, "Member overrides different @Throws filter from {0}", SYMBOL)
         map.put(INCOMPATIBLE_THROWS_INHERITED, "Member inherits different @Throws filters from {0}", SYMBOLS)
@@ -45,7 +45,7 @@ object FirNativeErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(
             INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY,
-            "@SharedImmutable is applicable only to val with backing field or to property with delegation"
+            "@SharedImmutable is applicable only to konst with backing field or to property with delegation"
         )
         map.put(INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL, "@SharedImmutable is applicable only to top level declarations")
         map.put(
@@ -77,7 +77,7 @@ object FirNativeErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(INCOMPATIBLE_OBJC_NAME_OVERRIDE, "Member \"{0}\" inherits inconsistent @ObjCName from {1}", SYMBOL, SYMBOLS)
         map.put(INAPPLICABLE_EXACT_OBJC_NAME, "Exact @ObjCName is only applicable to classes, objects and interfaces")
         map.put(MISSING_EXACT_OBJC_NAME, "Exact @ObjCName is required to have an ObjC name")
-        map.put(NON_LITERAL_OBJC_NAME_ARG, "@ObjCName accepts only literal string and boolean values")
+        map.put(NON_LITERAL_OBJC_NAME_ARG, "@ObjCName accepts only literal string and boolean konstues")
         map.put(SUBTYPE_OF_HIDDEN_FROM_OBJC, "Only @HiddenFromObjC declaration can be a subtype of @HiddenFromObjC declaration")
     }
 }

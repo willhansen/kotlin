@@ -7,10 +7,10 @@ fun bar(a: A) = a
 fun bar(b: B) = b
 
 fun foo() {
-    val a = A()
-    val b = B()
-    val c = C()
-    val ra = bar(a)
-    val rb = bar(b)
-    val rc = bar(c)
+    konst a = A()
+    konst b = B()
+    konst c = C()
+    konst ra = bar(a)
+    konst rb = bar(b)
+    konst rc = bar(c)
 }

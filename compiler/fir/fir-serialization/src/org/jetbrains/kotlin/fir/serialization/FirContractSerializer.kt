@@ -24,15 +24,15 @@ class FirContractSerializer {
         proto: ProtoBuf.Function.Builder,
         parentSerializer: FirElementSerializer
     ) {
-        val contractDescription = (function as? FirSimpleFunction)?.contractDescription
+        konst contractDescription = (function as? FirSimpleFunction)?.contractDescription
         if (contractDescription == null || contractDescription.effects.isNullOrEmpty()) {
             return
         }
-        val worker = ContractSerializerWorker(parentSerializer)
+        konst worker = ContractSerializerWorker(parentSerializer)
         proto.setContract(worker.contractProto(contractDescription))
     }
 
-    private class ContractSerializerWorker(private val parentSerializer: FirElementSerializer) {
+    private class ContractSerializerWorker(private konst parentSerializer: FirElementSerializer) {
         fun contractProto(contractDescription: FirContractDescription): ProtoBuf.Contract.Builder {
             return ProtoBuf.Contract.newBuilder().apply {
                 contractDescription.effects?.forEach { addEffect(effectProto(it.effect, contractDescription)) }
@@ -59,14 +59,14 @@ class FirContractSerializer {
                 }
 
                 is ConeReturnsEffectDeclaration -> {
-                    when (effectDeclaration.value) {
+                    when (effectDeclaration.konstue) {
                         ConeContractConstantValues.NOT_NULL ->
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_NOT_NULL
                         ConeContractConstantValues.WILDCARD ->
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_CONSTANT
                         else -> {
                             builder.effectType = ProtoBuf.Effect.EffectType.RETURNS_CONSTANT
-                            builder.addEffectConstructorArgument(contractExpressionProto(effectDeclaration.value, contractDescription))
+                            builder.addEffectConstructorArgument(contractExpressionProto(effectDeclaration.konstue, contractDescription))
                         }
                     }
                 }
@@ -74,9 +74,9 @@ class FirContractSerializer {
                 is ConeCallsEffectDeclaration -> {
                     builder.effectType = ProtoBuf.Effect.EffectType.CALLS
                     builder.addEffectConstructorArgument(
-                        contractExpressionProto(effectDeclaration.valueParameterReference, contractDescription)
+                        contractExpressionProto(effectDeclaration.konstueParameterReference, contractDescription)
                     )
-                    val invocationKindProtobufEnum = invocationKindProtobufEnum(effectDeclaration.kind)
+                    konst invocationKindProtobufEnum = invocationKindProtobufEnum(effectDeclaration.kind)
                     if (invocationKindProtobufEnum != null) {
                         builder.kind = invocationKindProtobufEnum
                     }
@@ -105,7 +105,7 @@ class FirContractSerializer {
                 }
 
                 private fun visitLogicalOr(logicalOr: ConeBinaryLogicExpression, data: Unit): ProtoBuf.Expression.Builder {
-                    val leftBuilder = logicalOr.left.accept(this, data)
+                    konst leftBuilder = logicalOr.left.accept(this, data)
 
                     return if (leftBuilder.andArgumentCount != 0) {
                         // can't flatten and re-use left builder
@@ -120,7 +120,7 @@ class FirContractSerializer {
                 }
 
                 private fun visitLogicalAnd(logicalAnd: ConeBinaryLogicExpression, data: Unit): ProtoBuf.Expression.Builder {
-                    val leftBuilder = logicalAnd.left.accept(this, data)
+                    konst leftBuilder = logicalAnd.left.accept(this, data)
 
                     return if (leftBuilder.orArgumentCount != 0) {
                         // leftBuilder is already a sequence of Or-operators, so we can't re-use it
@@ -143,7 +143,7 @@ class FirContractSerializer {
                     isInstancePredicate: ConeIsInstancePredicate, data: Unit
                 ): ProtoBuf.Expression.Builder {
                     // write variable
-                    val builder = visitValueParameterReference(isInstancePredicate.arg, data)
+                    konst builder = visitValueParameterReference(isInstancePredicate.arg, data)
 
                     // write rhs type
                     builder.isInstanceTypeId = parentSerializer.typeId(isInstancePredicate.type)
@@ -156,7 +156,7 @@ class FirContractSerializer {
 
                 override fun visitIsNullPredicate(isNullPredicate: ConeIsNullPredicate, data: Unit): ProtoBuf.Expression.Builder {
                     // get builder with variable embedded into it
-                    val builder = visitValueParameterReference(isNullPredicate.arg, data)
+                    konst builder = visitValueParameterReference(isNullPredicate.arg, data)
 
                     // set flags
                     builder.writeFlags(Flags.getContractExpressionFlags(isNullPredicate.isNegated, true))
@@ -165,10 +165,10 @@ class FirContractSerializer {
                 }
 
                 override fun visitConstantDescriptor(constantReference: ConeConstantReference, data: Unit): ProtoBuf.Expression.Builder {
-                    val builder = ProtoBuf.Expression.newBuilder()
+                    konst builder = ProtoBuf.Expression.newBuilder()
 
-                    // write constant value
-                    val constantValueProtobufEnum = constantValueProtobufEnum(constantReference)
+                    // write constant konstue
+                    konst constantValueProtobufEnum = constantValueProtobufEnum(constantReference)
                     if (constantValueProtobufEnum != null) {
                         builder.constantValue = constantValueProtobufEnum
                     }
@@ -177,12 +177,12 @@ class FirContractSerializer {
                 }
 
                 override fun visitValueParameterReference(
-                    valueParameterReference: ConeValueParameterReference, data: Unit
+                    konstueParameterReference: ConeValueParameterReference, data: Unit
                 ): ProtoBuf.Expression.Builder {
-                    val builder = ProtoBuf.Expression.newBuilder()
+                    konst builder = ProtoBuf.Expression.newBuilder()
 
-                    val indexOfParameter = valueParameterReference.parameterIndex + 1
-                    builder.valueParameterReference = indexOfParameter
+                    konst indexOfParameter = konstueParameterReference.parameterIndex + 1
+                    builder.konstueParameterReference = indexOfParameter
 
                     return builder
                 }

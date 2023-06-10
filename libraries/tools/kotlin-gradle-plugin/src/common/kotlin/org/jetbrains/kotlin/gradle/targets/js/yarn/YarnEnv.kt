@@ -9,15 +9,15 @@ import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import java.io.File
 
 data class YarnEnv(
-    val downloadUrl: String,
-    val cleanableStore: CleanableStore,
-    val home: File,
-    val executable: String,
-    val ivyDependency: String,
-    val standalone: Boolean,
-    val ignoreScripts: Boolean,
-    val yarnLockMismatchReport: YarnLockMismatchReport,
-    val reportNewYarnLock: Boolean,
-    val yarnLockAutoReplace: Boolean,
-    val yarnResolutions: List<YarnResolution>
+    konst downloadUrl: String,
+    konst cleanableStore: CleanableStore,
+    konst home: File,
+    konst executable: String,
+    konst ivyDependency: String,
+    konst standalone: Boolean,
+    konst ignoreScripts: Boolean,
+    konst yarnLockMismatchReport: YarnLockMismatchReport,
+    konst reportNewYarnLock: Boolean,
+    konst yarnLockAutoReplace: Boolean,
+    konst yarnResolutions: List<YarnResolution>
 )

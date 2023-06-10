@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.name.Name
 
 interface IrLazyFunctionBase : IrLazyDeclarationBase, IrTypeParametersContainer {
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val descriptor: FunctionDescriptor
+    override konst descriptor: FunctionDescriptor
 
-    val initialSignatureFunction: IrFunction?
+    konst initialSignatureFunction: IrFunction?
 
     fun getTopLevelDeclaration(): IrDeclaration {
         var current: IrDeclaration = this
@@ -31,7 +31,7 @@ interface IrLazyFunctionBase : IrLazyDeclarationBase, IrTypeParametersContainer 
     fun createInitialSignatureFunction(): Lazy<IrFunction?> =
         // Need SYNCHRONIZED; otherwise two stubs generated in parallel may fight for the same symbol.
         lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-            val initialSignatureDescriptor = descriptor.initialSignatureDescriptor
+            konst initialSignatureDescriptor = descriptor.initialSignatureDescriptor
                 ?: return@lazy null
             if (initialSignatureDescriptor == descriptor)
                 return@lazy null
@@ -40,7 +40,7 @@ interface IrLazyFunctionBase : IrLazyDeclarationBase, IrTypeParametersContainer 
 
     fun createValueParameters(): List<IrValueParameter> =
         typeTranslator.buildWithScope(this) {
-            val result = arrayListOf<IrValueParameter>()
+            konst result = arrayListOf<IrValueParameter>()
             descriptor.contextReceiverParameters.mapIndexedTo(result) { i, contextReceiverParameter ->
                 factory.createValueParameter(
                     UNDEFINED_OFFSET, UNDEFINED_OFFSET, origin, IrValueParameterSymbolImpl(contextReceiverParameter),
@@ -48,7 +48,7 @@ interface IrLazyFunctionBase : IrLazyDeclarationBase, IrTypeParametersContainer 
                     null, isCrossinline = false, isNoinline = false, isHidden = false, isAssignable = false
                 ).apply { parent = this@IrLazyFunctionBase }
             }
-            descriptor.valueParameters.mapTo(result) {
+            descriptor.konstueParameters.mapTo(result) {
                 stubGenerator.generateValueParameterStub(it, it.index + descriptor.contextReceiverParameters.size)
                     .apply { parent = this@IrLazyFunctionBase }
             }

@@ -2,7 +2,7 @@
 
 fun box(): String {
     var sum = 0u
-    val ls = listOf(1u, 2u, 3u)
+    konst ls = listOf(1u, 2u, 3u)
     for (el in ls) {
         sum += el
     }

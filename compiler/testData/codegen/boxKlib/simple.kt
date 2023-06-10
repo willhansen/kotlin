@@ -3,7 +3,7 @@
 package fromKlib
 
 class C {
-    val x = "OK"
+    konst x = "OK"
 }
 fun foo(): String {
     return C().x

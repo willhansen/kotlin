@@ -2,9 +2,9 @@
 package test
 
 interface Trait {
-    val shape: String
+    konst shape: String
 }
 
 open class Subclass() : Trait {
-    override open val shape = { "circle" }()
+    override open konst shape = { "circle" }()
 }

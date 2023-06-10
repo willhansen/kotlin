@@ -9,7 +9,7 @@ open class A {
     return 1
   }
 
-  val aVal: Int
+  konst aVal: Int
     field = 42
     get
 
@@ -63,7 +63,7 @@ open class GA<T : Any?> {
     return 1
   }
 
-  val aVal: Int
+  konst aVal: Int
     field = 42
     get
 

@@ -11,17 +11,17 @@ import kotlin.random.Random
 open class ArrayCopyBenchmark {
     class CustomArray<T>(capacity: Int = 0) {
         private var hashes: IntArray = IntArray(capacity)
-        private var values: Array<T?> = arrayOfNulls<Any>(capacity) as Array<T?>
+        private var konstues: Array<T?> = arrayOfNulls<Any>(capacity) as Array<T?>
         private var _size: Int = 0
 
         fun add(index: Int, element: T): Boolean {
-            val oldSize = _size
+            konst oldSize = _size
 
             // Grow the array if needed.
             if (oldSize == hashes.size) {
-                val newSize = if (oldSize > 0) oldSize * 2 else 2
+                konst newSize = if (oldSize > 0) oldSize * 2 else 2
                 hashes = hashes.copyOf(newSize)
-                values = values.copyOf(newSize)
+                konstues = konstues.copyOf(newSize)
             }
 
             // Shift the array if needed.
@@ -32,8 +32,8 @@ open class ArrayCopyBenchmark {
                         startIndex = index,
                         endIndex = oldSize
                 )
-                values.copyInto(
-                        values,
+                konstues.copyInto(
+                        konstues,
                         destinationOffset = index + 1,
                         startIndex = index,
                         endIndex = oldSize
@@ -41,7 +41,7 @@ open class ArrayCopyBenchmark {
             }
 
             hashes[index] = element.hashCode()
-            values[index] = element
+            konstues[index] = element
 
             _size++
             return true
@@ -50,7 +50,7 @@ open class ArrayCopyBenchmark {
 
     //Benchmark
     fun copyInSameArray(): CustomArray<Int> {
-        val array = CustomArray<Int>()
+        konst array = CustomArray<Int>()
         for (i in 0 until 2 * BENCHMARK_SIZE) {
             array.add(0, i)
         }

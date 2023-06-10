@@ -23,7 +23,7 @@ sealed interface PartialLinkageCase {
      *
      * Applicable to: Declarations (classifiers).
      */
-    class UnusableClassifier(val cause: ExploredClassifier.Unusable.CanBeRootCause) : PartialLinkageCase
+    class UnusableClassifier(konst cause: ExploredClassifier.Unusable.CanBeRootCause) : PartialLinkageCase
 
     /**
      * There is no real owner declaration for the symbol, only synthetic stub created by [MissingDeclarationStubGenerator].
@@ -31,7 +31,7 @@ sealed interface PartialLinkageCase {
      *
      * Applicable to: Declarations.
      */
-    class MissingDeclaration(val missingDeclarationSymbol: IrSymbol) : PartialLinkageCase
+    class MissingDeclaration(konst missingDeclarationSymbol: IrSymbol) : PartialLinkageCase
 
     /**
      * Declaration's signature uses an unusable (partially linked) classifier symbol.
@@ -39,8 +39,8 @@ sealed interface PartialLinkageCase {
      * Applicable to: Declarations.
      */
     class DeclarationWithUnusableClassifier(
-        val declarationSymbol: IrSymbol,
-        val cause: ExploredClassifier.Unusable
+        konst declarationSymbol: IrSymbol,
+        konst cause: ExploredClassifier.Unusable
     ) : PartialLinkageCase
 
     /**
@@ -50,8 +50,8 @@ sealed interface PartialLinkageCase {
      * Applicable to: Expressions.
      */
     class ExpressionWithUnusableClassifier(
-        val expression: IrExpression,
-        val cause: ExploredClassifier.Unusable
+        konst expression: IrExpression,
+        konst cause: ExploredClassifier.Unusable
     ) : PartialLinkageCase
 
     /**
@@ -61,8 +61,8 @@ sealed interface PartialLinkageCase {
      * Applicable to: Expressions.
      */
     class ExpressionWithMissingDeclaration(
-        val expression: IrExpression,
-        val missingDeclarationSymbol: IrSymbol
+        konst expression: IrExpression,
+        konst missingDeclarationSymbol: IrSymbol
     ) : PartialLinkageCase
 
     /**
@@ -71,9 +71,9 @@ sealed interface PartialLinkageCase {
      * Applicable to: Expressions.
      */
     class ExpressionHasDeclarationWithUnusableClassifier(
-        val expression: IrExpression,
-        val referencedDeclarationSymbol: IrSymbol,
-        val cause: ExploredClassifier.Unusable
+        konst expression: IrExpression,
+        konst referencedDeclarationSymbol: IrSymbol,
+        konst cause: ExploredClassifier.Unusable
     ) : PartialLinkageCase
 
     /**
@@ -83,24 +83,24 @@ sealed interface PartialLinkageCase {
      * Applicable to: Expressions.
      */
     class ExpressionHasWrongTypeOfDeclaration(
-        val expression: IrExpression,
-        val actualDeclarationSymbol: IrSymbol,
-        val expectedDeclarationDescription: String
+        konst expression: IrExpression,
+        konst actualDeclarationSymbol: IrSymbol,
+        konst expectedDeclarationDescription: String
     ) : PartialLinkageCase
 
     /**
      * Expression that refers to an IR function has an excessive or a missing dispatch receiver parameter,
-     * or the number of value arguments in expression does not match the number of value parameters in function
-     * (which may happen, for example, is a default value for a value parameter was removed).
+     * or the number of konstue arguments in expression does not match the number of konstue parameters in function
+     * (which may happen, for example, is a default konstue for a konstue parameter was removed).
      *
      * Applicable to: Expressions.
      */
     class MemberAccessExpressionArgumentsMismatch(
-        val expression: IrMemberAccessExpression<IrFunctionSymbol>,
-        val expressionHasDispatchReceiver: Boolean,
-        val functionHasDispatchReceiver: Boolean,
-        val expressionValueArgumentCount: Int,
-        val functionValueParameterCount: Int
+        konst expression: IrMemberAccessExpression<IrFunctionSymbol>,
+        konst expressionHasDispatchReceiver: Boolean,
+        konst functionHasDispatchReceiver: Boolean,
+        konst expressionValueArgumentCount: Int,
+        konst functionValueParameterCount: Int
     ) : PartialLinkageCase
 
     /**
@@ -108,10 +108,10 @@ sealed interface PartialLinkageCase {
      *
      * Applicable to: Expressions.
      */
-    class InvalidSamConversion(
-        val expression: IrTypeOperatorCall,
-        val abstractFunctionSymbols: Set<IrSimpleFunctionSymbol>,
-        val abstractPropertySymbol: IrPropertySymbol?
+    class InkonstidSamConversion(
+        konst expression: IrTypeOperatorCall,
+        konst abstractFunctionSymbols: Set<IrSimpleFunctionSymbol>,
+        konst abstractPropertySymbol: IrPropertySymbol?
     ) : PartialLinkageCase
 
     /**
@@ -119,14 +119,14 @@ sealed interface PartialLinkageCase {
      *
      * Applicable to: Expressions.
      */
-    class SuspendableFunctionCallWithoutCoroutineContext(val expression: IrCall) : PartialLinkageCase
+    class SuspendableFunctionCallWithoutCoroutineContext(konst expression: IrCall) : PartialLinkageCase
 
     /**
      * A non-local return in context where it is not expected.
      *
      * Applicable to: Expressions.
      */
-    class IllegalNonLocalReturn(val expression: IrReturn, val validReturnTargets: Set<IrReturnTargetSymbol>) : PartialLinkageCase
+    class IllegalNonLocalReturn(konst expression: IrReturn, konst konstidReturnTargets: Set<IrReturnTargetSymbol>) : PartialLinkageCase
 
     /**
      * Expression refers an IR declaration that is not accessible at the use site.
@@ -135,33 +135,33 @@ sealed interface PartialLinkageCase {
      * Applicable to: Expressions.
      */
     class ExpressionHasInaccessibleDeclaration(
-        val expression: IrExpression,
-        val referencedDeclarationSymbol: IrSymbol,
-        val declaringModule: PLModule,
-        val useSiteModule: PLModule
+        konst expression: IrExpression,
+        konst referencedDeclarationSymbol: IrSymbol,
+        konst declaringModule: PLModule,
+        konst useSiteModule: PLModule
     ) : PartialLinkageCase
 
     /**
      * An [IrConstructor] delegates call to [unexpectedSuperClassConstructorSymbol] while should delegate to
      * one of constructors of [superClassSymbol].
      */
-    class InvalidConstructorDelegation(
-        val constructorSymbol: IrConstructorSymbol,
-        val superClassSymbol: IrClassSymbol,
-        val unexpectedSuperClassConstructorSymbol: IrConstructorSymbol
+    class InkonstidConstructorDelegation(
+        konst constructorSymbol: IrConstructorSymbol,
+        konst superClassSymbol: IrClassSymbol,
+        konst unexpectedSuperClassConstructorSymbol: IrConstructorSymbol
     ) : PartialLinkageCase
 
     /**
      * An attempt to instantiate an abstract class from outside its inheritance hierarchy.
      */
-    class AbstractClassInstantiation(val constructorCall: IrConstructorCall, val classSymbol: IrClassSymbol) : PartialLinkageCase
+    class AbstractClassInstantiation(konst constructorCall: IrConstructorCall, konst classSymbol: IrClassSymbol) : PartialLinkageCase
 
     /**
      * Unimplemented abstract callable member in non-abstract class.
      *
      * Applicable to: Declarations (functions, properties).
      */
-    class UnimplementedAbstractCallable(val callable: IrOverridableDeclaration<*>) : PartialLinkageCase
+    class UnimplementedAbstractCallable(konst callable: IrOverridableDeclaration<*>) : PartialLinkageCase
 
     /**
      * Unusable instance of annotation. The annotation itself is removed from the holder [IrDeclaration].
@@ -169,8 +169,8 @@ sealed interface PartialLinkageCase {
      * Applicable to: Declarations.
      */
     class UnusableAnnotation(
-        val annotationConstructorSymbol: IrConstructorSymbol,
-        val holderDeclarationSymbol: IrSymbol
+        konst annotationConstructorSymbol: IrConstructorSymbol,
+        konst holderDeclarationSymbol: IrSymbol
     ) : PartialLinkageCase
 
     /**
@@ -178,5 +178,5 @@ sealed interface PartialLinkageCase {
      *
      * Applicable to: Declarations (functions, properties).
      */
-    class AmbiguousNonOverriddenCallable(val callable: IrOverridableDeclaration<*>) : PartialLinkageCase
+    class AmbiguousNonOverriddenCallable(konst callable: IrOverridableDeclaration<*>) : PartialLinkageCase
 }

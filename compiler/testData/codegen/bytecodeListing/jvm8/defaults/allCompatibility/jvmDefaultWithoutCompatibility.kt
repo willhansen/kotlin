@@ -5,7 +5,7 @@
 @JvmDefaultWithoutCompatibility
 interface NoDefaultImpl {
     fun test() {}
-    val prop: String
+    konst prop: String
         get() = "123"
 }
 
@@ -15,7 +15,7 @@ interface WithDefaultImpl: NoDefaultImpl {
 
 interface WithDefaultImplPure {
     fun test() {}
-    val prop: String
+    konst prop: String
         get() = "123"
 }
 

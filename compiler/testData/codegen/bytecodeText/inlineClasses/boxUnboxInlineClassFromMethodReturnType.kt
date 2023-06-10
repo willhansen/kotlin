@@ -2,7 +2,7 @@
 
 // FILE: utils.kt
 
-inline class Foo(val a: Int) {
+inline class Foo(konst a: Int) {
     fun member(): String = ""
 }
 
@@ -20,12 +20,12 @@ fun test(f: Foo) {
     id(f).member() // box unbox
     id(f).extension() // box unbox
 
-    val a = id(f) // box unbox
-    val b = id(f).idExtension() // box unbox
+    konst a = id(f) // box unbox
+    konst b = id(f).idExtension() // box unbox
 }
 
 // @TestKt.class:
 // 6 INVOKESTATIC Foo\.box
 // 4 INVOKEVIRTUAL Foo.unbox
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue

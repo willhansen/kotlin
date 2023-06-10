@@ -25,5 +25,5 @@ public class B : A() {
 package test
 
 open class A {
-    @JvmField protected val s = 2;
+    @JvmField protected konst s = 2;
 }

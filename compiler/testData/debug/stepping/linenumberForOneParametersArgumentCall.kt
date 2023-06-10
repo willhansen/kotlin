@@ -3,12 +3,12 @@
 
 fun box() {
     lookAtMe {
-        val c = "c"
+        konst c = "c"
     }
 }
 
 inline fun lookAtMe(f: (String) -> Unit) {
-    val a = "a"
+    konst a = "a"
     f(a)
 }
 

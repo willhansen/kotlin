@@ -1,5 +1,5 @@
 class StrList : List<String?> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun isEmpty(): Boolean {
@@ -41,7 +41,7 @@ class StrList : List<String?> {
 fun <E> Collection<E>.forceContains(x: Any?): Boolean = contains(x as E)
 
 fun box(): String {
-    val strList = StrList()
+    konst strList = StrList()
 
     if (strList.forceContains(1)) return "fail 1"
     if (!strList.forceContains(null)) return "fail 2"

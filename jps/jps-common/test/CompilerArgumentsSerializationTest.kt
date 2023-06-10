@@ -114,30 +114,30 @@ class CompilerArgumentsSerializationTest {
 
 
     private inline fun <reified T : CommonToolArguments> doSerializeDeserializeAndCompareTest(configure: T.() -> Unit = {}) {
-        val oldInstance = T::class.java.getConstructor().newInstance().apply(configure)
-        val serializer = CompilerArgumentsSerializerV5<T>(oldInstance)
-        val mockFacetElement = Element("ROOT")
-        val element = serializer.serializeTo(mockFacetElement)
-        val newInstance = T::class.java.getConstructor().newInstance()
-        val deserializer = CompilerArgumentsDeserializerV5(newInstance)
+        konst oldInstance = T::class.java.getConstructor().newInstance().apply(configure)
+        konst serializer = CompilerArgumentsSerializerV5<T>(oldInstance)
+        konst mockFacetElement = Element("ROOT")
+        konst element = serializer.serializeTo(mockFacetElement)
+        konst newInstance = T::class.java.getConstructor().newInstance()
+        konst deserializer = CompilerArgumentsDeserializerV5(newInstance)
         deserializer.deserializeFrom(element)
         T::class.memberProperties.mapNotNull { it.safeAs<KProperty1<T, *>>() }.forEach {
-            val oldValue = it.get(oldInstance)
-            val newValue = it.get(newInstance)
+            konst oldValue = it.get(oldInstance)
+            konst newValue = it.get(newInstance)
             if (oldValue == null && newValue == null) return@forEach
-            Assert.assertNotNull("Old value of property \"${it.name}\" is null but new is not", oldValue)
-            Assert.assertNotNull("New value of property \"${it.name}\" is null but old is not", newValue)
+            Assert.assertNotNull("Old konstue of property \"${it.name}\" is null but new is not", oldValue)
+            Assert.assertNotNull("New konstue of property \"${it.name}\" is null but old is not", newValue)
 
             if ((it.returnType.classifier as? KClass<*>)?.java?.isArray == true)
                 Assert.assertArrayEquals(
-                    "Property ${it.name} has different values before (${it.get(oldInstance).toString()}) and after (${
+                    "Property ${it.name} has different konstues before (${it.get(oldInstance).toString()}) and after (${
                         it.get(newInstance).toString()
                     }) serialization",
                     oldValue as Array<*>, newValue as Array<*>
                 )
             else
                 assert(it.get(oldInstance) == it.get(newInstance)) {
-                    "Property ${it.name} has different values before (${it.get(oldInstance).toString()}) and after (${
+                    "Property ${it.name} has different konstues before (${it.get(oldInstance).toString()}) and after (${
                         it.get(newInstance).toString()
                     }) serialization"
                 }
@@ -145,8 +145,8 @@ class CompilerArgumentsSerializationTest {
     }
 
     private inline fun <reified T : CommonToolArguments> doRandomFlagArgumentsTest() {
-        val flagProperties = CompilerArgumentsContentProspector.getFlagCompilerArgumentProperties(T::class)
-        val randomFlags = generateSequence { Random.nextBoolean() }.take(flagProperties.size).toList()
+        konst flagProperties = CompilerArgumentsContentProspector.getFlagCompilerArgumentProperties(T::class)
+        konst randomFlags = generateSequence { Random.nextBoolean() }.take(flagProperties.size).toList()
         doSerializeDeserializeAndCompareTest<T> {
             flagProperties.zip(randomFlags).forEach {
                 it.first.cast<KMutableProperty1<T, Boolean>>().set(this, it.second)
@@ -155,8 +155,8 @@ class CompilerArgumentsSerializationTest {
     }
 
     private inline fun <reified T : CommonToolArguments> doRandomStringArgumentsTest() {
-        val stringProperties = CompilerArgumentsContentProspector.getStringCompilerArgumentProperties(T::class)
-        val randomStrings = generateSequence { generateRandomString(Random.nextInt(20)) }.take(stringProperties.size).toList()
+        konst stringProperties = CompilerArgumentsContentProspector.getStringCompilerArgumentProperties(T::class)
+        konst randomStrings = generateSequence { generateRandomString(Random.nextInt(20)) }.take(stringProperties.size).toList()
         doSerializeDeserializeAndCompareTest<T> {
             stringProperties.zip(randomStrings).forEach {
                 it.first.cast<KMutableProperty1<T, String?>>().set(this, it.second)
@@ -165,8 +165,8 @@ class CompilerArgumentsSerializationTest {
     }
 
     private inline fun <reified T : CommonToolArguments> doRandomArrayArgumentsTest() {
-        val arrayProperties = CompilerArgumentsContentProspector.getArrayCompilerArgumentProperties(T::class)
-        val randomArrays = generateSequence {
+        konst arrayProperties = CompilerArgumentsContentProspector.getArrayCompilerArgumentProperties(T::class)
+        konst randomArrays = generateSequence {
             generateSequence { generateRandomString(Random.nextInt(20)) }.take(Random.nextInt(10)).toList().toTypedArray()
         }.take(arrayProperties.size).toList()
         doSerializeDeserializeAndCompareTest<T> {
@@ -177,7 +177,7 @@ class CompilerArgumentsSerializationTest {
     }
 
     companion object {
-        private val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+        private konst charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
         private fun generateRandomString(length: Int) = generateSequence { Random.nextInt(0, charPool.size) }
             .take(length)

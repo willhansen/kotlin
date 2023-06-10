@@ -1,6 +1,6 @@
 
 class Foo {
-    val x = 1
+    konst x = 1
 
     fun abc() = x
 
@@ -8,7 +8,7 @@ class Foo {
 }
 
 class Bar {
-    val x = ""
+    konst x = ""
 
     // NB: unused
     fun Foo.abc() = x
@@ -38,18 +38,18 @@ fun buz() {
 }
 
 fun f() {
-    val a = 10
-    val b = a
-    val d = ""
-    val c = <!UNRESOLVED_REFERENCE!>c<!>
+    konst a = 10
+    konst b = a
+    konst d = ""
+    konst c = <!UNRESOLVED_REFERENCE!>c<!>
 
     <!UNRESOLVED_REFERENCE!>abc<!>()
 
     fun bcd() {}
 
     fun abc() {
-        val a = d
-        val b = a
+        konst a = d
+        konst b = a
         bcd()
 
         fun dcb() {}

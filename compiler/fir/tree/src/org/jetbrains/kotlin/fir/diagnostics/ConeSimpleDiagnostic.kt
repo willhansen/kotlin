@@ -13,61 +13,61 @@ import org.jetbrains.kotlin.fir.types.ConeKotlinType
 import org.jetbrains.kotlin.fir.types.ConeTypeVariableType
 import org.jetbrains.kotlin.name.Name
 
-class ConeSimpleDiagnostic(override val reason: String, val kind: DiagnosticKind = DiagnosticKind.Other) : ConeDiagnostic
+class ConeSimpleDiagnostic(override konst reason: String, konst kind: DiagnosticKind = DiagnosticKind.Other) : ConeDiagnostic
 
-class ConeSyntaxDiagnostic(override val reason: String) : ConeDiagnostic
+class ConeSyntaxDiagnostic(override konst reason: String) : ConeDiagnostic
 
-class ConeNotAnnotationContainer(val text: String) : ConeDiagnostic {
-    override val reason: String get() = "Strange annotated expression: $text"
+class ConeNotAnnotationContainer(konst text: String) : ConeDiagnostic {
+    override konst reason: String get() = "Strange annotated expression: $text"
 }
 
-abstract class ConeDiagnosticWithSource(val source: KtSourceElement) : ConeDiagnostic
+abstract class ConeDiagnosticWithSource(konst source: KtSourceElement) : ConeDiagnostic
 
 class ConeUnderscoreIsReserved(source: KtSourceElement) : ConeDiagnosticWithSource(source) {
-    override val reason: String get() = "Names _, __, ___, ..., are reserved in Kotlin"
+    override konst reason: String get() = "Names _, __, ___, ..., are reserved in Kotlin"
 }
 
 class ConeCannotInferTypeParameterType(
-    val typeParameter: FirTypeParameterSymbol,
-    override val reason: String = "Cannot infer type for parameter ${typeParameter.name}"
+    konst typeParameter: FirTypeParameterSymbol,
+    override konst reason: String = "Cannot infer type for parameter ${typeParameter.name}"
 ) : ConeDiagnostic
 
 class ConeCannotInferValueParameterType(
-    val valueParameter: FirValueParameterSymbol,
-    override val reason: String = "Cannot infer type for parameter ${valueParameter.name}"
+    konst konstueParameter: FirValueParameterSymbol,
+    override konst reason: String = "Cannot infer type for parameter ${konstueParameter.name}"
 ) : ConeDiagnostic
 
 class ConeTypeVariableTypeIsNotInferred(
-    val typeVariableType: ConeTypeVariableType,
-    override val reason: String = "Type for ${typeVariableType.lookupTag.debugName} is not inferred"
+    konst typeVariableType: ConeTypeVariableType,
+    override konst reason: String = "Type for ${typeVariableType.lookupTag.debugName} is not inferred"
 ) : ConeDiagnostic
 
 class ConeUnderscoreUsageWithoutBackticks(source: KtSourceElement) : ConeDiagnosticWithSource(source) {
-    override val reason: String get() = "Names _, __, ___, ... can be used only in back-ticks (`_`, `__`, `___`, ...)"
+    override konst reason: String get() = "Names _, __, ___, ... can be used only in back-ticks (`_`, `__`, `___`, ...)"
 }
 
-class ConeAmbiguousSuper(val candidateTypes: List<ConeKotlinType>) : ConeDiagnostic {
-    override val reason: String
+class ConeAmbiguousSuper(konst candidateTypes: List<ConeKotlinType>) : ConeDiagnostic {
+    override konst reason: String
         get() = "Ambiguous supertype"
 }
 
-class ConeRecursiveTypeParameterDuringErasureError(val typeParameterName: Name) : ConeDiagnostic {
-    override val reason: String
+class ConeRecursiveTypeParameterDuringErasureError(konst typeParameterName: Name) : ConeDiagnostic {
+    override konst reason: String
         get() = "self-recursive type parameter $typeParameterName"
 }
 
 object ConeDestructuringDeclarationsOnTopLevel : ConeDiagnostic {
-    override val reason: String
-        get() = "Destructuring declarations are only allowed for local variables/values"
+    override konst reason: String
+        get() = "Destructuring declarations are only allowed for local variables/konstues"
 }
 
 object ConeDanglingModifierOnTopLevel : ConeDiagnostic {
-    override val reason: String
+    override konst reason: String
         get() = "Top level declaration expected"
 }
 
-class ConeAmbiguousFunctionTypeKinds(val kinds: List<FunctionTypeKind>) : ConeDiagnostic {
-    override val reason: String
+class ConeAmbiguousFunctionTypeKinds(konst kinds: List<FunctionTypeKind>) : ConeDiagnostic {
+    override konst reason: String
         get() = "There are multiple function kinds for functional type ref"
 }
 

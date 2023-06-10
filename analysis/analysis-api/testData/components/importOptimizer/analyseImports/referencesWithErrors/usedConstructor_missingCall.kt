@@ -4,7 +4,7 @@ package test
 import dependency.Bar
 
 fun usage() {
-    val result = Bar
+    konst result = Bar
 }
 
 // FILE: dependency.kt

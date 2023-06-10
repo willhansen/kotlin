@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.codegen.range.inExpression.InExpressionGenerator
 import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
-class ReversedRangeValue(private val original: ReversableRangeValue) : RangeValue, ReversableRangeValue {
+class ReversedRangeValue(private konst original: ReversableRangeValue) : RangeValue, ReversableRangeValue {
     override fun createInExpressionGenerator(codegen: ExpressionCodegen, operatorReference: KtSimpleNameExpression): InExpressionGenerator =
         original.createInExpressionGenerator(codegen, operatorReference)
 

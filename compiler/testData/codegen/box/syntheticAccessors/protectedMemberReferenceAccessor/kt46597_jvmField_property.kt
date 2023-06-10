@@ -6,7 +6,7 @@ package a
 
 abstract class Base {
     @JvmField
-    protected val property = "OK"
+    protected konst property = "OK"
 }
 
 // FILE: b.kt

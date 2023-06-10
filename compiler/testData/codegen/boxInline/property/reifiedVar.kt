@@ -3,12 +3,12 @@
 // FILE: 1.kt
 package test
 
-var bvalue: String = ""
+var bkonstue: String = ""
 
-inline var <reified T : Any> T.value: String
-    get() = T::class.simpleName!! + bvalue
+inline var <reified T : Any> T.konstue: String
+    get() = T::class.simpleName!! + bkonstue
     set(p: String) {
-        bvalue = p
+        bkonstue = p
     }
 
 // FILE: 2.kt
@@ -17,10 +17,10 @@ import test.*
 class O
 
 fun box(): String {
-    val o = O()
-    val value1 = o.value
-    if (value1 != "O") return "fail 1: $value1"
+    konst o = O()
+    konst konstue1 = o.konstue
+    if (konstue1 != "O") return "fail 1: $konstue1"
 
-    o.value = "K"
-    return o.value
+    o.konstue = "K"
+    return o.konstue
 }

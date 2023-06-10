@@ -2,7 +2,7 @@
 
 object Retry {
     class Builder<B>(
-        private val action: suspend () -> B,
+        private konst action: suspend () -> B,
     )
 
     fun <W> withExponentialBackoff(action: () -> W): Builder<W> {

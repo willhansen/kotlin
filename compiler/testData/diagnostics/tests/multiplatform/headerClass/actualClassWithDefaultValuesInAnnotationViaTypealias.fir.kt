@@ -20,13 +20,13 @@ fun bar() {}
 // FILE: Bar1.java
 
 public @interface Bar1 {
-    String value() default "";
+    String konstue() default "";
 }
 
 // FILE: Bar2.java
 
 public @interface Bar2 {
-    String value() default "";
+    String konstue() default "";
     String path();
 }
 
@@ -36,12 +36,12 @@ actual typealias Foo1 = Bar1
 
 actual typealias Foo4 = Bar2
 
-actual annotation class Foo2(val p: String = "default")
+actual annotation class Foo2(konst p: String = "default")
 
-actual annotation class Foo3(val a: String = "a", val b: String = "b")
+actual annotation class Foo3(konst a: String = "a", konst b: String = "b")
 
 actual annotation class Foo5
 
-actual annotation class Foo6(val s: String = "value")
+actual annotation class Foo6(konst s: String = "konstue")
 
 actual typealias <!NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS!>Foo7<!> = Bar2

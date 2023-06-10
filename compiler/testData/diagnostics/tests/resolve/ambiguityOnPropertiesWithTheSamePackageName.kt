@@ -9,14 +9,14 @@ package b
 
 import a.A
 
-val A.d: Int get() = 1
+konst A.d: Int get() = 1
 
 // FILE: c.kt
 package c
 
 import a.A
 
-val A.d: Int get() = 2
+konst A.d: Int get() = 2
 
 // FILE: d.kt
 

@@ -21,5 +21,5 @@ internal object DiagnosticsRemovingSourceTransformer : ExternalSourceTransformer
         line.replace(DIAGNOSTIC_REGEX) { match -> match.groupValues[1] }
     }
 
-    private val DIAGNOSTIC_REGEX = Regex("<!.*?!>(.*?)<!>")
+    private konst DIAGNOSTIC_REGEX = Regex("<!.*?!>(.*?)<!>")
 }

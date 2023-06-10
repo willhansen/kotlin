@@ -11,6 +11,6 @@ public class OCNewFileActionBase<T extends OCNewFileActionBase<T>.CreateFileDial
 fun box(): String {
     // Before changes in raw types computation: (OCNewFileActionBase<OCNewFileActionBase<*>.CreateFileDialogBase!>..OCNewFileActionBase<out OCNewFileActionBase<*>.CreateFileDialogBase!>?)
     // After that: raw (OCNewFileActionBase<*>..OCNewFileActionBase<*>?)
-    val x = OCNewFileActionBase.get()
+    konst x = OCNewFileActionBase.get()
     return "OK"
 }

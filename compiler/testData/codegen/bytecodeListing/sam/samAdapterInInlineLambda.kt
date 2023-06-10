@@ -6,6 +6,6 @@ package test
 // inline SAM wrappers (`...$sam$i$...`). This is unnecessary, unless
 // the code is itself contained in an inline function.
 fun test() {
-    val lambda = { }
+    konst lambda = { }
     1.apply { Runnable(lambda) }
 }

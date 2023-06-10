@@ -4,11 +4,11 @@
 
 package test
 
-class Company(val name: String) {
+class Company(konst name: String) {
     fun sayName() = Person("test").doSayName { name }
 }
 
-class Person(val name: String) {
+class Person(konst name: String) {
 
     inline fun doSayName(crossinline call: () -> String): String {
         return companyName { parsonName { call() } }

@@ -5,7 +5,7 @@ open class A {
 
     fun method() {}
 
-    val quux = ""
+    konst quux = ""
 }
 
 fun foo() {}

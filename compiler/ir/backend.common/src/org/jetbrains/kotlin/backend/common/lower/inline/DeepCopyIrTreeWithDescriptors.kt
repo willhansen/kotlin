@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
 internal class DeepCopyIrTreeWithSymbolsForInliner(
-    val typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
-    val parent: IrDeclarationParent?
+    konst typeArguments: Map<IrTypeParameterSymbol, IrType?>?,
+    konst parent: IrDeclarationParent?
 ) {
 
     fun copy(irElement: IrElement): IrElement {
@@ -35,15 +35,15 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
         symbolRemapper.typeArguments = typeArguments
 
         // Copy IR.
-        val result = irElement.transform(copier, data = null)
+        konst result = irElement.transform(copier, data = null)
 
         result.patchDeclarationParents(parent)
         return result
     }
 
     private inner class InlinerTypeRemapper(
-        val symbolRemapper: SymbolRemapper,
-        val typeArguments: Map<IrTypeParameterSymbol, IrType?>?
+        konst symbolRemapper: SymbolRemapper,
+        konst typeArguments: Map<IrTypeParameterSymbol, IrType?>?
     ) : TypeRemapper {
 
         override fun enterScope(irTypeParametersContainer: IrTypeParametersContainer) {}
@@ -66,15 +66,15 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
         override fun remapType(type: IrType) = remapTypeAndOptionallyErase(type, erase = false)
 
         fun remapTypeAndOptionallyErase(type: IrType, erase: Boolean): IrType {
-            val erasedParams = if (erase) mutableSetOf<IrTypeParameterSymbol>() else null
+            konst erasedParams = if (erase) mutableSetOf<IrTypeParameterSymbol>() else null
             return remapTypeAndOptionallyErase(type, erasedParams) ?: error("Cannot substitute type ${type.render()}")
         }
 
         private fun remapTypeAndOptionallyErase(type: IrType, erasedParameters: MutableSet<IrTypeParameterSymbol>?): IrType? {
             if (type !is IrSimpleType) return type
 
-            val classifier = type.classifier
-            val substitutedType = typeArguments?.get(classifier)
+            konst classifier = type.classifier
+            konst substitutedType = typeArguments?.get(classifier)
 
             // Erase non-reified type parameter if asked to.
             if (erasedParameters != null && substitutedType != null && (classifier as? IrTypeParameterSymbol)?.owner?.isReified == false) {
@@ -86,15 +86,15 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
                 erasedParameters.add(classifier)
 
                 // Pick the (necessarily unique) non-interface upper bound if it exists.
-                val superTypes = classifier.owner.superTypes
-                val superClass = superTypes.firstOrNull {
+                konst superTypes = classifier.owner.superTypes
+                konst superClass = superTypes.firstOrNull {
                     it.classOrNull?.owner?.isInterface == false
                 }
 
-                val upperBound = superClass ?: superTypes.first()
+                konst upperBound = superClass ?: superTypes.first()
 
                 // TODO: Think about how to reduce complexity from k^N to N^k
-                val erasedUpperBound = remapTypeAndOptionallyErase(upperBound, erasedParameters)
+                konst erasedUpperBound = remapTypeAndOptionallyErase(upperBound, erasedParameters)
                     ?: error("Cannot erase upperbound ${upperBound.render()}")
 
                 erasedParameters.remove(classifier)
@@ -120,24 +120,24 @@ internal class DeepCopyIrTreeWithSymbolsForInliner(
     private class SymbolRemapperImpl(descriptorsRemapper: DescriptorsRemapper) : DeepCopySymbolRemapper(descriptorsRemapper) {
 
         var typeArguments: Map<IrTypeParameterSymbol, IrType?>? = null
-            set(value) {
+            set(konstue) {
                 if (field != null) return
-                field = value?.asSequence()?.associate {
-                    (getReferencedClassifier(it.key) as IrTypeParameterSymbol) to it.value
+                field = konstue?.asSequence()?.associate {
+                    (getReferencedClassifier(it.key) as IrTypeParameterSymbol) to it.konstue
                 }
             }
 
         override fun getReferencedClassifier(symbol: IrClassifierSymbol): IrClassifierSymbol {
-            val result = super.getReferencedClassifier(symbol)
+            konst result = super.getReferencedClassifier(symbol)
             if (result !is IrTypeParameterSymbol)
                 return result
             return typeArguments?.get(result)?.classifierOrNull ?: result
         }
     }
 
-    private val symbolRemapper = SymbolRemapperImpl(NullDescriptorsRemapper)
-    private val typeRemapper = InlinerTypeRemapper(symbolRemapper, typeArguments)
-    private val copier = object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
+    private konst symbolRemapper = SymbolRemapperImpl(NullDescriptorsRemapper)
+    private konst typeRemapper = InlinerTypeRemapper(symbolRemapper, typeArguments)
+    private konst copier = object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
         private fun IrType.remapTypeAndErase() = typeRemapper.remapTypeAndOptionallyErase(this, erase = true)
 
         override fun visitTypeOperator(expression: IrTypeOperatorCall) =

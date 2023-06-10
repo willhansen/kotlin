@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.psi.KtCallElement
  * @see KtAnnotationApplicationWithArgumentsInfo
  */
 public data class KtAnnotationApplicationInfo(
-    public override val classId: ClassId?,
-    public override val psi: KtCallElement?,
-    public override val useSiteTarget: AnnotationUseSiteTarget?,
-    public override val isCallWithArguments: Boolean,
-    public override val index: Int,
+    public override konst classId: ClassId?,
+    public override konst psi: KtCallElement?,
+    public override konst useSiteTarget: AnnotationUseSiteTarget?,
+    public override konst isCallWithArguments: Boolean,
+    public override konst index: Int,
 ) : KtAnnotationApplication

@@ -1,5 +1,5 @@
 // WITH_STDLIB
-inline class IC(val x: Int)
+inline class IC(konst x: Int)
 
 class C {
     @Suppress("INAPPLICABLE_JVM_NAME")

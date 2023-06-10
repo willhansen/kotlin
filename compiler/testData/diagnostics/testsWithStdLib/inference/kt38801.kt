@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 open class A {
-    open val servers: List<C>
+    open konst servers: List<C>
         get() = findAndExpand({ "hi" })
             .mapNotNull { B.foo(it) }
 

@@ -2,13 +2,13 @@
 // WITH_STDLIB
 
 class A {
-    @JvmField val b = B()
+    @JvmField konst b = B()
 }
 
 class B {
-    @JvmField val c = C()
+    @JvmField konst c = C()
 
-    @JvmField val result = "OK"
+    @JvmField konst result = "OK"
 }
 
 class C {
@@ -16,7 +16,7 @@ class C {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.b.c.d = a.b.result
     return a.b.c.d
 }

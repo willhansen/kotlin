@@ -4,7 +4,7 @@ package fooIsExtension
 class A
 class B
 
-val A.foo: B.() -> Unit get() = {}
+konst A.foo: B.() -> Unit get() = {}
 
 fun test(a: A, b: B) {
     b.(a.foo)()
@@ -44,7 +44,7 @@ fun test(a: A, b: B) {
 package fooIsMember
 
 class A {
-    val foo: B.() -> Unit get() = {}
+    konst foo: B.() -> Unit get() = {}
 }
 class B
 

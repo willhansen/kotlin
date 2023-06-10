@@ -1,10 +1,10 @@
 // IGNORE K2
 
 @JvmInline
-value class A(private val i: Int?)
+konstue class A(private konst i: Int?)
 
 @JvmInline
-value class B(private val f: suspend () -> Unit)
+konstue class B(private konst f: suspend () -> Unit)
 
 @JvmInline
-value class Z(val s: String)
+konstue class Z(konst s: String)

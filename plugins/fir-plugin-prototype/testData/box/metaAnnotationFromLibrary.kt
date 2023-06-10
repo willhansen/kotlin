@@ -28,9 +28,9 @@ class Second
 class Third
 
 fun box(): String {
-    val a = object : Zero() {}
-    val b = object : First() {}
-    val c = object : Second() {}
-    val d = object : Third() {}
+    konst a = object : Zero() {}
+    konst b = object : First() {}
+    konst c = object : Second() {}
+    konst d = object : Third() {}
     return "OK"
 }

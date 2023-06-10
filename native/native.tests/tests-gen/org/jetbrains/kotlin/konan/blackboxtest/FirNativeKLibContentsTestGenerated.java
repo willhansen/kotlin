@@ -47,9 +47,9 @@ public class FirNativeKLibContentsTestGenerated extends AbstractNativeKlibConten
     }
 
     @Test
-    @TestMetadata("kt56018_value_parameters_annotations.kt")
-    public void testKt56018_value_parameters_annotations() throws Exception {
-        runTest("native/native.tests/testData/klibContents/kt56018_value_parameters_annotations.kt");
+    @TestMetadata("kt56018_konstue_parameters_annotations.kt")
+    public void testKt56018_konstue_parameters_annotations() throws Exception {
+        runTest("native/native.tests/testData/klibContents/kt56018_konstue_parameters_annotations.kt");
     }
 
     @Test

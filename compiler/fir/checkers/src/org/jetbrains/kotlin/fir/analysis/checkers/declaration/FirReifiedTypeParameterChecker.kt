@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.fir.declarations.utils.isInline
 object FirReifiedTypeParameterChecker : FirTypeParameterChecker() {
     override fun check(declaration: FirTypeParameter, context: CheckerContext, reporter: DiagnosticReporter) {
         if (!declaration.isReified) return
-        val containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
+        konst containingDeclaration = context.containingDeclarations.lastOrNull() ?: return
 
-        val forbidReified = (containingDeclaration is FirRegularClass) ||
+        konst forbidReified = (containingDeclaration is FirRegularClass) ||
                 (containingDeclaration is FirSimpleFunction && !containingDeclaration.isInline) ||
                 (containingDeclaration is FirProperty && !containingDeclaration.areAccessorsInline())
 

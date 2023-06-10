@@ -3,9 +3,9 @@ declare namespace JS_TESTS {
     namespace foo {
         class ClassWithoutPrimary {
             private constructor();
-            get value(): string;
-            static fromInt(value: number): foo.ClassWithoutPrimary;
-            static fromString(value: string): foo.ClassWithoutPrimary;
+            get konstue(): string;
+            static fromInt(konstue: number): foo.ClassWithoutPrimary;
+            static fromString(konstue: string): foo.ClassWithoutPrimary;
         }
         /* @ts-ignore: extends class with private primary constructor */
         class SomeBaseClass extends foo.ClassWithoutPrimary {

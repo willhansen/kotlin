@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.utils.addToStdlib.popLast
 
 object FirJsExternalInheritorOnlyChecker : FirClassChecker() {
     private fun FirClass.forEachParents(context: CheckerContext, f: (FirRegularClassSymbol) -> Unit) {
-        val todo = superConeTypes.toMutableList()
-        val done = hashSetOf<FirRegularClassSymbol>()
+        konst todo = superConeTypes.toMutableList()
+        konst done = hashSetOf<FirRegularClassSymbol>()
 
         while (todo.isNotEmpty()) {
-            val classSymbol = todo.popLast().toRegularClassSymbol(context.session) ?: continue
+            konst classSymbol = todo.popLast().toRegularClassSymbol(context.session) ?: continue
             if (done.add(classSymbol)) {
                 f(classSymbol)
                 classSymbol.resolvedSuperTypeRefs.mapNotNullTo(todo) { it.type as? ConeClassLikeType }

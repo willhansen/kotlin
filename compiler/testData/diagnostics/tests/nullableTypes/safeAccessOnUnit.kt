@@ -1,8 +1,8 @@
 // FIR_IDENTICAL
-data class My(val x: Unit)
+data class My(konst x: Unit)
 
 fun foo(my: My?): Int? {
-    val x = my?.x
+    konst x = my?.x
     // ?. is required here
     return x?.hashCode()
 }

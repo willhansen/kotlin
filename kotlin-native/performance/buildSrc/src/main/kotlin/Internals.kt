@@ -21,34 +21,34 @@ import java.io.File
  * This file includes internal short-cuts visible only inside of the 'buildSrc' module.
  */
 
-internal val hostOs by lazy { System.getProperty("os.name") }
-internal val userHome by lazy { System.getProperty("user.home") }
+internal konst hostOs by lazy { System.getProperty("os.name") }
+internal konst userHome by lazy { System.getProperty("user.home") }
 
-internal val Project.ext: ExtraPropertiesExtension
+internal konst Project.ext: ExtraPropertiesExtension
     get() = extensions.getByName("ext") as ExtraPropertiesExtension
 
-internal val Project.kotlin: KotlinMultiplatformExtension
+internal konst Project.kotlin: KotlinMultiplatformExtension
     get() = extensions.getByName("kotlin") as KotlinMultiplatformExtension
 
-internal val NamedDomainObjectCollection<KotlinTargetPreset<*>>.macosX64: KotlinTargetPreset<*>
+internal konst NamedDomainObjectCollection<KotlinTargetPreset<*>>.macosX64: KotlinTargetPreset<*>
     get() = getByName(::macosX64.name)
 
-internal val NamedDomainObjectCollection<KotlinTargetPreset<*>>.macosArm64: KotlinTargetPreset<*>
+internal konst NamedDomainObjectCollection<KotlinTargetPreset<*>>.macosArm64: KotlinTargetPreset<*>
     get() = getByName(::macosArm64.name)
 
-internal val NamedDomainObjectCollection<KotlinTargetPreset<*>>.linuxX64: KotlinTargetPreset<*>
+internal konst NamedDomainObjectCollection<KotlinTargetPreset<*>>.linuxX64: KotlinTargetPreset<*>
     get() = getByName(::linuxX64.name)
 
-internal val NamedDomainObjectCollection<KotlinTargetPreset<*>>.mingwX64: KotlinTargetPreset<*>
+internal konst NamedDomainObjectCollection<KotlinTargetPreset<*>>.mingwX64: KotlinTargetPreset<*>
     get() = getByName(::mingwX64.name)
 
-internal val NamedDomainObjectCollection<KotlinTargetPreset<*>>.linuxArm64: KotlinTargetPreset<*>
+internal konst NamedDomainObjectCollection<KotlinTargetPreset<*>>.linuxArm64: KotlinTargetPreset<*>
     get() = getByName(::linuxArm64.name)
 
-internal val NamedDomainObjectContainer<out KotlinCompilation<*>>.main: KotlinNativeCompilation
+internal konst NamedDomainObjectContainer<out KotlinCompilation<*>>.main: KotlinNativeCompilation
     get() = getByName(::main.name) as KotlinNativeCompilation
 
-internal val FileCollection.isNotEmpty: Boolean
+internal konst FileCollection.isNotEmpty: Boolean
     get() = !isEmpty
 
 internal fun Provider<File>.resolve(child: String): Provider<File> = map { it.resolve(child) }

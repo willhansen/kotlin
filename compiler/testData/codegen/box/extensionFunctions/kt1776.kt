@@ -2,12 +2,12 @@ interface Expr {
     public fun ttFun() : Int = 12
 }
 
-class Num(val value : Int) : Expr
+class Num(konst konstue : Int) : Expr
 
 fun Expr.sometest() : Int {
     if (this is Num) {
-        value
-        return value
+        konstue
+        return konstue
     }
     return 0;
 }

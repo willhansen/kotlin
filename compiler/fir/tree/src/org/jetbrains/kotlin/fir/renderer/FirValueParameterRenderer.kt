@@ -10,36 +10,36 @@ import org.jetbrains.kotlin.name.SpecialNames
 
 open class FirValueParameterRenderer {
     internal lateinit var components: FirRendererComponents
-    protected val printer get() = components.printer
-    protected val visitor get() = components.visitor
-    private val annotationRenderer get() = components.annotationRenderer
-    protected val declarationRenderer get() = components.declarationRenderer
-    private val modifierRenderer get() = components.modifierRenderer
+    protected konst printer get() = components.printer
+    protected konst visitor get() = components.visitor
+    private konst annotationRenderer get() = components.annotationRenderer
+    protected konst declarationRenderer get() = components.declarationRenderer
+    private konst modifierRenderer get() = components.modifierRenderer
 
-    fun renderParameters(valueParameters: List<FirValueParameter>) {
+    fun renderParameters(konstueParameters: List<FirValueParameter>) {
         printer.print("(")
-        for ((index, valueParameter) in valueParameters.withIndex()) {
+        for ((index, konstueParameter) in konstueParameters.withIndex()) {
             if (index > 0) {
                 printer.print(", ")
             }
-            renderParameter(valueParameter)
+            renderParameter(konstueParameter)
         }
         printer.print(")")
     }
 
-    fun renderParameter(valueParameter: FirValueParameter) {
-        declarationRenderer?.renderPhaseAndAttributes(valueParameter)
-        annotationRenderer?.render(valueParameter)
-        modifierRenderer?.renderModifiers(valueParameter)
-        if (valueParameter.name != SpecialNames.NO_NAME_PROVIDED) {
-            printer.print(valueParameter.name.toString() + ": ")
+    fun renderParameter(konstueParameter: FirValueParameter) {
+        declarationRenderer?.renderPhaseAndAttributes(konstueParameter)
+        annotationRenderer?.render(konstueParameter)
+        modifierRenderer?.renderModifiers(konstueParameter)
+        if (konstueParameter.name != SpecialNames.NO_NAME_PROVIDED) {
+            printer.print(konstueParameter.name.toString() + ": ")
         }
-        valueParameter.returnTypeRef.accept(visitor)
-        renderDefaultValue(valueParameter)
+        konstueParameter.returnTypeRef.accept(visitor)
+        renderDefaultValue(konstueParameter)
     }
 
-    protected open fun renderDefaultValue(valueParameter: FirValueParameter) {
-        valueParameter.defaultValue?.let {
+    protected open fun renderDefaultValue(konstueParameter: FirValueParameter) {
+        konstueParameter.defaultValue?.let {
             printer.print(" = ")
             it.accept(visitor)
         }

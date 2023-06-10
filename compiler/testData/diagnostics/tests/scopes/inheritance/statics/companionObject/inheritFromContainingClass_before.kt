@@ -11,15 +11,15 @@ open class A<T> : J() {
     init {
         <!DEPRECATED_ACCESS_BY_SHORT_NAME!>foo()<!>
         bar()
-        val a: Int = <!TYPE_MISMATCH!><!DEBUG_INFO_LEAKING_THIS!>baz<!>()<!>
-        val b: T = <!DEBUG_INFO_LEAKING_THIS!>baz<!>()
+        konst a: Int = <!TYPE_MISMATCH!><!DEBUG_INFO_LEAKING_THIS!>baz<!>()<!>
+        konst b: T = <!DEBUG_INFO_LEAKING_THIS!>baz<!>()
     }
 
     fun test1() {
         <!DEPRECATED_ACCESS_BY_SHORT_NAME!>foo()<!>
         bar()
-        val a: Int = <!TYPE_MISMATCH!>baz()<!>
-        val b: T = baz()
+        konst a: Int = <!TYPE_MISMATCH!>baz()<!>
+        konst b: T = baz()
     }
 
     fun baz(): T = null!!
@@ -28,8 +28,8 @@ open class A<T> : J() {
         fun test() {
             <!DEPRECATED_ACCESS_BY_SHORT_NAME!>foo()<!>
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
     }
 
@@ -37,15 +37,15 @@ open class A<T> : J() {
         init {
             <!DEPRECATED_ACCESS_BY_SHORT_NAME!>foo()<!>
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
 
         fun test() {
             <!DEPRECATED_ACCESS_BY_SHORT_NAME!>foo()<!>
             bar()
-            val a: Int = baz()
-            val b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
+            konst a: Int = baz()
+            konst b: <!UNRESOLVED_REFERENCE!>T<!> = baz()
         }
 
         fun bar() {}

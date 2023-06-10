@@ -11,7 +11,7 @@
 
 
 fun box(): String {
-    val person = Person("Elvis")
+    konst person = Person("Elvis")
     person.name
     try {
         person.name = null

@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
 public @interface Anno {
-    String value() default "sdf";
+    String konstue() default "sdf";
 }
 
 // FILE: Foo.java
@@ -25,6 +25,6 @@ public class Foo {
 
 <!WRONG_ANNOTATION_TARGET!>@Anno<!>
 fun box(): String {
-    val obj = Foo()
+    konst obj = Foo()
     return "OK"
 }

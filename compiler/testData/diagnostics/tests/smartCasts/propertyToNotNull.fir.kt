@@ -1,4 +1,4 @@
-class Immutable(val x: String?) {
+class Immutable(konst x: String?) {
     fun foo(): String {
         if (x != null) return x
         return ""

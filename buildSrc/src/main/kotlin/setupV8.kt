@@ -22,7 +22,7 @@ fun Project.useD8Plugin() {
 
 fun Test.setupV8() {
     dependsOn(V8Utils.d8Plugin.setupTaskProvider)
-    val v8ExecutablePath = project.provider {
+    konst v8ExecutablePath = project.provider {
         V8Utils.d8Plugin.requireConfigured().executablePath.absolutePath
     }
     doFirst {

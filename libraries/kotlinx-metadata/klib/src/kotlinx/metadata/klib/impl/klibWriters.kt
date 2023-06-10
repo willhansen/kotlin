@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.serialization.ApproximatingStringTable
 
 class ReverseSourceFileIndexWriteExtension : WriteContextExtension {
-    private val filesReverseIndex = mutableMapOf<KlibSourceFile, Int>()
+    private konst filesReverseIndex = mutableMapOf<KlibSourceFile, Int>()
 
-    val fileIndex: List<KlibSourceFile>
+    konst fileIndex: List<KlibSourceFile>
         get() = filesReverseIndex
             .map { (file, index) -> index to file }
             .sortedBy { it.first }
@@ -37,16 +37,16 @@ class KlibModuleFragmentWriter(
     override fun visitEnd() {
 
         // TODO: This should be moved to ModuleFragmentWriter.
-        val (strings, qualifiedNames) = (c.strings as ApproximatingStringTable).buildProto()
+        konst (strings, qualifiedNames) = (c.strings as ApproximatingStringTable).buildProto()
         t.strings = strings
         t.qualifiedNames = qualifiedNames
 
-        val isPackageEmpty = if (t.`package` == null) {
+        konst isPackageEmpty = if (t.`package` == null) {
             true
         } else {
             t.`package`.let { it.functionCount == 0 && it.propertyCount == 0 && it.typeAliasCount == 0 }
         }
-        val isEmpty = t.class_Count == 0 && isPackageEmpty
+        konst isEmpty = t.class_Count == 0 && isPackageEmpty
         t.setExtension(KlibMetadataProtoBuf.isEmpty, isEmpty)
     }
 }

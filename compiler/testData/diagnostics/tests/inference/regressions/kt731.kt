@@ -6,7 +6,7 @@ package a
 import checkSubtype
 
 class A<T>(x: T) {
-    val p = x
+    konst p = x
 }
 
 fun <T, G> A<T>.foo(x: (T)-> G): G {
@@ -14,7 +14,7 @@ fun <T, G> A<T>.foo(x: (T)-> G): G {
 }
 
 fun main() {
-    val a = A(1)
-    val t: String = <!TYPE_MISMATCH!>a.foo({p -> <!TYPE_MISMATCH!>p<!>})<!>
+    konst a = A(1)
+    konst t: String = <!TYPE_MISMATCH!>a.foo({p -> <!TYPE_MISMATCH!>p<!>})<!>
     checkSubtype<String>(t)
 }

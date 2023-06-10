@@ -1,6 +1,6 @@
 fun box(): String {
     class A {
-        val result = "OK"
+        konst result = "OK"
     }
 
     return (::A).let { it() }.result

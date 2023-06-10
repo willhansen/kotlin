@@ -33,8 +33,8 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 fun builder(c: suspend () -> Unit) {
-    val continuation = object: Continuation<Unit> {
-        override val context: CoroutineContext
+    konst continuation = object: Continuation<Unit> {
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
         override fun resumeWith(r: Result<Unit>) {

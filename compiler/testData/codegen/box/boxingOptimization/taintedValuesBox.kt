@@ -15,7 +15,7 @@ inline fun <T> put(
             return true
         }
 
-        val y = fetch(i)
+        konst y = fetch(i)
         if (equals(x, y)) {
             return false
         }
@@ -25,8 +25,8 @@ inline fun <T> put(
     } while (true)
 }
 
-const val SIZE = 16
-val arr = IntArray(SIZE) { -1 }
+const konst SIZE = 16
+konst arr = IntArray(SIZE) { -1 }
 
 fun putNonNegInt(x: Int) =
         put(x, SIZE,

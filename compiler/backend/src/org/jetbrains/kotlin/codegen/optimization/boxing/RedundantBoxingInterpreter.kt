@@ -28,127 +28,127 @@ internal class RedundantBoxingInterpreter(
     generationState: GenerationState
 ) : BoxingInterpreter(methodNode.instructions, generationState) {
 
-    val candidatesBoxedValues = RedundantBoxedValuesCollection()
+    konst candidatesBoxedValues = RedundantBoxedValuesCollection()
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue? {
-        if ((insn.opcode == Opcodes.CHECKCAST || insn.opcode == Opcodes.INSTANCEOF) && value is BoxedBasicValue) {
-            val typeInsn = insn as TypeInsnNode
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue? {
+        if ((insn.opcode == Opcodes.CHECKCAST || insn.opcode == Opcodes.INSTANCEOF) && konstue is BoxedBasicValue) {
+            konst typeInsn = insn as TypeInsnNode
 
-            if (!isSafeCast(value, typeInsn.desc)) {
-                markValueAsDirty(value)
+            if (!isSafeCast(konstue, typeInsn.desc)) {
+                markValueAsDirty(konstue)
             }
         }
 
-        processOperationWithBoxedValue(value, insn)
+        processOperationWithBoxedValue(konstue, insn)
 
-        return super.unaryOperation(insn, value)
+        return super.unaryOperation(insn, konstue)
     }
 
-    override fun binaryOperation(insn: AbstractInsnNode, value1: BasicValue, value2: BasicValue): BasicValue? {
-        processOperationWithBoxedValue(value1, insn)
-        processOperationWithBoxedValue(value2, insn)
+    override fun binaryOperation(insn: AbstractInsnNode, konstue1: BasicValue, konstue2: BasicValue): BasicValue? {
+        processOperationWithBoxedValue(konstue1, insn)
+        processOperationWithBoxedValue(konstue2, insn)
 
-        return super.binaryOperation(insn, value1, value2)
+        return super.binaryOperation(insn, konstue1, konstue2)
     }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, value1: BasicValue, value2: BasicValue, value3: BasicValue): BasicValue? {
-        // in a valid code only aastore could happen with boxed value
-        processOperationWithBoxedValue(value3, insn)
+    override fun ternaryOperation(insn: AbstractInsnNode, konstue1: BasicValue, konstue2: BasicValue, konstue3: BasicValue): BasicValue? {
+        // in a konstid code only aastore could happen with boxed konstue
+        processOperationWithBoxedValue(konstue3, insn)
 
-        return super.ternaryOperation(insn, value1, value2, value3)
+        return super.ternaryOperation(insn, konstue1, konstue2, konstue3)
     }
 
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue): BasicValue {
-        if (value is BoxedBasicValue && insn.opcode == Opcodes.ASTORE) {
-            value.descriptor.addVariableIndex((insn as VarInsnNode).`var`)
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue): BasicValue {
+        if (konstue is BoxedBasicValue && insn.opcode == Opcodes.ASTORE) {
+            konstue.descriptor.addVariableIndex((insn as VarInsnNode).`var`)
         }
 
-        processOperationWithBoxedValue(value, insn)
+        processOperationWithBoxedValue(konstue, insn)
 
-        return super.copyOperation(insn, value)
+        return super.copyOperation(insn, konstue)
     }
 
-    fun processPopInstruction(insnNode: AbstractInsnNode, value: BasicValue) {
-        processOperationWithBoxedValue(value, insnNode)
+    fun processPopInstruction(insnNode: AbstractInsnNode, konstue: BasicValue) {
+        processOperationWithBoxedValue(konstue, insnNode)
     }
 
-    override fun onNewBoxedValue(value: BoxedBasicValue) {
-        candidatesBoxedValues.add(value.descriptor)
+    override fun onNewBoxedValue(konstue: BoxedBasicValue) {
+        candidatesBoxedValues.add(konstue.descriptor)
     }
 
-    override fun onUnboxing(insn: AbstractInsnNode, value: BoxedBasicValue, resultType: Type) {
-        value.descriptor.run {
-            val unboxedType = getUnboxTypeOrOtherwiseMethodReturnType(insn as? MethodInsnNode)
+    override fun onUnboxing(insn: AbstractInsnNode, konstue: BoxedBasicValue, resultType: Type) {
+        konstue.descriptor.run {
+            konst unboxedType = getUnboxTypeOrOtherwiseMethodReturnType(insn as? MethodInsnNode)
             if (unboxedType == resultType)
-                addAssociatedInsn(value, insn)
+                addAssociatedInsn(konstue, insn)
             else
                 addUnboxingWithCastTo(insn, resultType)
         }
     }
 
-    override fun onAreEqual(insn: AbstractInsnNode, value1: BoxedBasicValue, value2: BoxedBasicValue) {
-        val descriptor1 = value1.descriptor
-        val descriptor2 = value2.descriptor
+    override fun onAreEqual(insn: AbstractInsnNode, konstue1: BoxedBasicValue, konstue2: BoxedBasicValue) {
+        konst descriptor1 = konstue1.descriptor
+        konst descriptor2 = konstue2.descriptor
         candidatesBoxedValues.merge(descriptor1, descriptor2)
         descriptor1.addInsn(insn)
     }
 
-    override fun onCompareTo(insn: AbstractInsnNode, value1: BoxedBasicValue, value2: BoxedBasicValue) {
-        val descriptor1 = value1.descriptor
-        val descriptor2 = value2.descriptor
+    override fun onCompareTo(insn: AbstractInsnNode, konstue1: BoxedBasicValue, konstue2: BoxedBasicValue) {
+        konst descriptor1 = konstue1.descriptor
+        konst descriptor2 = konstue2.descriptor
         candidatesBoxedValues.merge(descriptor1, descriptor2)
         descriptor1.addInsn(insn)
     }
 
-    override fun onMethodCallWithBoxedValue(value: BoxedBasicValue) {
-        markValueAsDirty(value)
+    override fun onMethodCallWithBoxedValue(konstue: BoxedBasicValue) {
+        markValueAsDirty(konstue)
     }
 
-    override fun onMergeFail(value: BoxedBasicValue) {
-        markValueAsDirty(value)
+    override fun onMergeFail(konstue: BoxedBasicValue) {
+        markValueAsDirty(konstue)
     }
 
     override fun onMergeSuccess(v: BoxedBasicValue, w: BoxedBasicValue) {
         candidatesBoxedValues.merge(v.descriptor, w.descriptor)
     }
 
-    private fun processOperationWithBoxedValue(value: BasicValue?, insnNode: AbstractInsnNode) {
-        if (value is BoxedBasicValue) {
-            checkUsedValue(value)
+    private fun processOperationWithBoxedValue(konstue: BasicValue?, insnNode: AbstractInsnNode) {
+        if (konstue is BoxedBasicValue) {
+            checkUsedValue(konstue)
 
             if (!PERMITTED_OPERATIONS_OPCODES.contains(insnNode.opcode)) {
-                markValueAsDirty(value)
+                markValueAsDirty(konstue)
             } else {
-                addAssociatedInsn(value, insnNode)
+                addAssociatedInsn(konstue, insnNode)
             }
         }
     }
 
-    private fun markValueAsDirty(value: BoxedBasicValue) {
-        candidatesBoxedValues.remove(value.descriptor)
+    private fun markValueAsDirty(konstue: BoxedBasicValue) {
+        candidatesBoxedValues.remove(konstue.descriptor)
     }
 
     companion object {
-        private val PERMITTED_OPERATIONS_OPCODES =
+        private konst PERMITTED_OPERATIONS_OPCODES =
             ImmutableSet.of(Opcodes.ASTORE, Opcodes.ALOAD, Opcodes.POP, Opcodes.DUP, Opcodes.CHECKCAST, Opcodes.INSTANCEOF)
 
-        private val PRIMITIVE_TYPES_SORTS_WITH_WRAPPER_EXTENDS_NUMBER =
+        private konst PRIMITIVE_TYPES_SORTS_WITH_WRAPPER_EXTENDS_NUMBER =
             ImmutableSet.of(Type.BYTE, Type.SHORT, Type.INT, Type.FLOAT, Type.LONG, Type.DOUBLE)
 
-        private fun isSafeCast(value: BoxedBasicValue, targetInternalName: String) =
+        private fun isSafeCast(konstue: BoxedBasicValue, targetInternalName: String) =
             when (targetInternalName) {
                 Type.getInternalName(Any::class.java) ->
                     true
                 Type.getInternalName(Number::class.java) ->
-                    value.descriptor.unboxedTypes.singleOrNull()?.sort?.let { PRIMITIVE_TYPES_SORTS_WITH_WRAPPER_EXTENDS_NUMBER.contains(it) } == true
+                    konstue.descriptor.unboxedTypes.singleOrNull()?.sort?.let { PRIMITIVE_TYPES_SORTS_WITH_WRAPPER_EXTENDS_NUMBER.contains(it) } == true
                 "java/lang/Comparable" ->
                     true
                 else ->
-                    value.type.internalName == targetInternalName
+                    konstue.type.internalName == targetInternalName
             }
 
-        private fun addAssociatedInsn(value: BoxedBasicValue, insn: AbstractInsnNode) {
-            value.descriptor.run {
+        private fun addAssociatedInsn(konstue: BoxedBasicValue, insn: AbstractInsnNode) {
+            konstue.descriptor.run {
                 if (isSafeToRemove) addInsn(insn)
             }
         }

@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.cli.common.messages
 
 import org.jetbrains.kotlin.ir.util.IrMessageLogger
 
-class IrMessageCollector(private val messageCollector: MessageCollector) : IrMessageLogger {
+class IrMessageCollector(private konst messageCollector: MessageCollector) : IrMessageLogger {
     override fun report(severity: IrMessageLogger.Severity, message: String, location: IrMessageLogger.Location?) {
         messageCollector.report(severityToCLISeverity(severity), message, locationToCLILocation(location))
     }

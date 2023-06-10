@@ -1,7 +1,7 @@
 public class Test {
-    val content = 1
+    konst content = 1
     inner class A {
-        val v = object {
+        konst v = object {
             fun f() = content
         }
     }

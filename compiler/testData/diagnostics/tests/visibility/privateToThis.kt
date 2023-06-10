@@ -1,17 +1,17 @@
 // FIR_DUMP
 
 class A<in T>(t: T) {
-    private val t: T = t  // PRIVATE_TO_THIS
+    private konst t: T = t  // PRIVATE_TO_THIS
 
-    private val i: B = B()
+    private konst i: B = B()
 
     fun test() {
-        val x: T = t      // Ok
-        val y: T = this.t // Ok
+        konst x: T = t      // Ok
+        konst y: T = this.t // Ok
     }
 
     fun foo(a: A<String>) {
-        val x: String = a.<!INVISIBLE_MEMBER!>t<!> // Invisible!
+        konst x: String = a.<!INVISIBLE_MEMBER!>t<!> // Invisible!
     }
 
     fun bar(a: A<*>) {

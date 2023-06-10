@@ -13,9 +13,9 @@ fun <T> foo() = typeOf<List<T>>()
 
 @Test
 fun test_fun() {
-    val l = foo<Int>()
+    konst l = foo<Int>()
     assertEquals(List::class, l.classifier)
-    val t = l.arguments.single().type!!.classifier
+    konst t = l.arguments.single().type!!.classifier
     assertTrue(t is KTypeParameter)
     assertFalse((t as KTypeParameter).isReified)
     assertEquals("T", (t as KTypeParameter).name)
@@ -28,9 +28,9 @@ class C<T> {
 
 @Test
 fun test_class() {
-    val l = C<Int>().foo()
+    konst l = C<Int>().foo()
     assertEquals(List::class, l.classifier)
-    val t = l.arguments.single().type!!.classifier
+    konst t = l.arguments.single().type!!.classifier
     assertTrue(t is KTypeParameter)
     assertFalse((t as KTypeParameter).isReified)
     assertEquals("T", (t as KTypeParameter).name)
@@ -49,9 +49,9 @@ class D {
 
 @Test
 fun test_equality() {
-    val t1 = bar1<Int>().arguments.single().type!!.classifier
-    val t2 = bar2<Int>().arguments.single().type!!.classifier
-    val t3 = D().bar1<Int>().arguments.single().type!!.classifier
+    konst t1 = bar1<Int>().arguments.single().type!!.classifier
+    konst t2 = bar2<Int>().arguments.single().type!!.classifier
+    konst t3 = D().bar1<Int>().arguments.single().type!!.classifier
     assertNotEquals(t1, t2)
     assertNotEquals(t1, t3)
     assertNotEquals(t2, t3)
@@ -65,13 +65,13 @@ inline fun <reified T, R : T> reifiedUpperBound() = typeOf<List<R>>()
 
 @Test
 fun test_reifiedUpperBound() {
-    val l = reifiedUpperBound<Any, Any>()
+    konst l = reifiedUpperBound<Any, Any>()
     assertEquals(List::class, l.classifier)
-    val r = l.arguments.single().type!!.classifier
+    konst r = l.arguments.single().type!!.classifier
     assertTrue(r is KTypeParameter)
     assertFalse((r as KTypeParameter).isReified)
     assertEquals("R", (r as KTypeParameter).name)
-    val t = (r as KTypeParameter).upperBounds.single().classifier
+    konst t = (r as KTypeParameter).upperBounds.single().classifier
     assertTrue(t is KTypeParameter)
     assertTrue((t as KTypeParameter).isReified)
     assertEquals("T", (t as KTypeParameter).name)
@@ -82,7 +82,7 @@ inline fun <reified T : Comparable<T>> recursionInReified() = typeOf<List<T>>()
 
 @Test
 fun test_recursionInReified() {
-    val l = recursionInReified<Int>()
+    konst l = recursionInReified<Int>()
     assertEquals(List::class, l.classifier)
     assertEquals(Int::class, l.arguments.single().type!!.classifier)
 }

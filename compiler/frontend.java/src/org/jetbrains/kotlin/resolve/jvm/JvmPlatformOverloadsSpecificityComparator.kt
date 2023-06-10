@@ -11,19 +11,19 @@ import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ClassDescriptor
 import org.jetbrains.kotlin.descriptors.PropertyDescriptor
 import org.jetbrains.kotlin.load.java.lazy.descriptors.isJavaField
-import org.jetbrains.kotlin.resolve.DescriptorEquivalenceForOverrides
+import org.jetbrains.kotlin.resolve.DescriptorEquikonstenceForOverrides
 import org.jetbrains.kotlin.resolve.calls.results.PlatformOverloadsSpecificityComparator
 
 class JvmPlatformOverloadsSpecificityComparator(
-    val languageVersionSettings: LanguageVersionSettings
+    konst languageVersionSettings: LanguageVersionSettings
 ) : PlatformOverloadsSpecificityComparator {
     override fun isMoreSpecificShape(specific: CallableDescriptor, general: CallableDescriptor): Boolean {
         if (specific !is PropertyDescriptor || general !is PropertyDescriptor) return false
 
         if (specific.dispatchReceiverParameter == null || general.dispatchReceiverParameter == null) return false
         if (specific.containingDeclaration !is ClassDescriptor) return false
-        if (!DescriptorEquivalenceForOverrides
-                .areEquivalent(specific.containingDeclaration, general.containingDeclaration, allowCopiesFromTheSameDeclaration = true)
+        if (!DescriptorEquikonstenceForOverrides
+                .areEquikonstent(specific.containingDeclaration, general.containingDeclaration, allowCopiesFromTheSameDeclaration = true)
         ) return false
 
         if (!languageVersionSettings.supportsFeature(LanguageFeature.PreferJavaFieldOverload)) return false

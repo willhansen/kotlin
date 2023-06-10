@@ -27,10 +27,10 @@ import org.jetbrains.kotlin.ir.symbols.impl.*
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
-class Scope(val scopeOwnerSymbol: IrSymbol) {
+class Scope(konst scopeOwnerSymbol: IrSymbol) {
     fun getLocalDeclarationParent(): IrDeclarationParent {
         if (!scopeOwnerSymbol.isBound) throw AssertionError("Unbound symbol: $scopeOwnerSymbol")
-        return when (val scopeOwnerElement = scopeOwnerSymbol.owner) {
+        return when (konst scopeOwnerElement = scopeOwnerSymbol.owner) {
             is IrDeclarationParent -> scopeOwnerElement
             !is IrDeclaration -> throw AssertionError("Not a declaration: $scopeOwnerElement")
             else -> scopeOwnerElement.parent
@@ -41,7 +41,7 @@ class Scope(val scopeOwnerSymbol: IrSymbol) {
     private fun nextTemporaryIndex(): Int = lastTemporaryIndex++
 
     fun inventNameForTemporary(prefix: String = "tmp", nameHint: String? = null): String {
-        val index = nextTemporaryIndex()
+        konst index = nextTemporaryIndex()
         return if (nameHint != null) "$prefix${index}_$nameHint" else "$prefix$index"
     }
 
@@ -56,7 +56,7 @@ class Scope(val scopeOwnerSymbol: IrSymbol) {
         startOffset: Int,
         endOffset: Int
     ): IrVariable {
-        val name = Name.identifier(getNameForTemporary(nameHint))
+        konst name = Name.identifier(getNameForTemporary(nameHint))
         return IrVariableImpl(
             startOffset, endOffset, origin, IrVariableSymbolImpl(), name,
             irType, isMutable, isConst = false, isLateinit = false

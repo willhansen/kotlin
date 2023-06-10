@@ -30,18 +30,18 @@ import org.jetbrains.kotlin.resolve.TemporaryBindingTrace
 import org.jetbrains.kotlin.resolve.calls.checkers.CallChecker
 import org.jetbrains.kotlin.resolve.calls.checkers.CallCheckerContext
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.kotlin.wasm.util.hasValidJsCodeBody
 
 class WasmJsCallChecker(
-    private val constantExpressionEvaluator: ConstantExpressionEvaluator
+    private konst constantExpressionEkonstuator: ConstantExpressionEkonstuator
 ) : CallChecker {
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (context.isAnnotationContext || !resolvedCall.isJsCall()) return
 
-        val containingDeclaration = context.scope.ownerDescriptor
+        konst containingDeclaration = context.scope.ownerDescriptor
         if (
             !(containingDeclaration is FunctionDescriptor || containingDeclaration is PropertyDescriptor) ||
             !containingDeclaration.isTopLevelInPackage()
@@ -62,7 +62,7 @@ class WasmJsCallChecker(
                         if (containingDeclaration.extensionReceiverParameter != null) {
                             context.trace.report(ErrorsWasm.JSCODE_UNSUPPORTED_FUNCTION_KIND.on(reportOn, "function with extension receiver"))
                         }
-                        for (parameter in containingDeclaration.valueParameters) {
+                        for (parameter in containingDeclaration.konstueParameters) {
                             if (parameter.name.identifierOrNullIfSpecial?.isValidES5Identifier() != true) {
                                 context.trace.report(ErrorsWasm.JSCODE_INVALID_PARAMETER_NAME.on(parameter.findPsi() ?: reportOn))
                             }
@@ -77,15 +77,15 @@ class WasmJsCallChecker(
             }
         }
 
-        val expression = resolvedCall.call.callElement
+        konst expression = resolvedCall.call.callElement
         if (expression !is KtCallExpression) return
 
-        val arguments = expression.valueArgumentList?.arguments
-        val argument = arguments?.firstOrNull()?.getArgumentExpression() ?: return
+        konst arguments = expression.konstueArgumentList?.arguments
+        konst argument = arguments?.firstOrNull()?.getArgumentExpression() ?: return
 
-        val trace = TemporaryBindingTrace.create(context.trace, "WasmJsCallChecker")
-        val evaluationResult = constantExpressionEvaluator.evaluateExpression(argument, trace, TypeUtils.NO_EXPECTED_TYPE)
-        val code = extractStringValue(evaluationResult)
+        konst trace = TemporaryBindingTrace.create(context.trace, "WasmJsCallChecker")
+        konst ekonstuationResult = constantExpressionEkonstuator.ekonstuateExpression(argument, trace, TypeUtils.NO_EXPECTED_TYPE)
+        konst code = extractStringValue(ekonstuationResult)
 
         if (code == null) {
             context.trace.report(ErrorsJs.JSCODE_ARGUMENT_SHOULD_BE_CONSTANT.on(argument))

@@ -55,9 +55,9 @@ internal open class SymbolLightClassForInterface : SymbolLightClassForInterfaceO
 
     override fun getOwnMethods(): List<PsiMethod> = cachedValue {
         withClassOrObjectSymbol { classOrObjectSymbol ->
-            val result = mutableListOf<KtLightMethod>()
+            konst result = mutableListOf<KtLightMethod>()
 
-            val visibleDeclarations = classOrObjectSymbol.getDeclaredMemberScope().getCallableSymbols().filter { acceptCallableSymbol(it) }
+            konst visibleDeclarations = classOrObjectSymbol.getDeclaredMemberScope().getCallableSymbols().filter { acceptCallableSymbol(it) }
 
             createMethods(visibleDeclarations, result)
             addMethodsFromCompanionIfNeeded(result, classOrObjectSymbol)
@@ -73,7 +73,7 @@ internal open class SymbolLightClassForInterface : SymbolLightClassForInterfaceO
     override fun copy(): SymbolLightClassForInterface =
         SymbolLightClassForInterface(classOrObjectDeclaration, classOrObjectSymbolPointer, ktModule, manager)
 
-    private val _extendsList: PsiReferenceList by lazyPub {
+    private konst _extendsList: PsiReferenceList by lazyPub {
         withClassOrObjectSymbol { classOrObjectSymbol ->
             createInheritanceList(forExtendsList = true, classOrObjectSymbol.superTypes)
         }

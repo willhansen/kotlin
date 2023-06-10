@@ -10,7 +10,7 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     var res = "FAIL"
-    val lambda: suspend (Boolean) -> String = {
+    konst lambda: suspend (Boolean) -> String = {
         if (it) "OK" else "FAIL 1"
     }
     builder {

@@ -5,7 +5,7 @@ FILE: [ResolvedTo(IMPORTS)] constructorParameter.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val x: R|kotlin/String| = R|<local>/x|
+        public final [ResolvedTo(BODY_RESOLVE)] konst x: R|kotlin/String| = R|<local>/x|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/String|
 
     }

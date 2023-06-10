@@ -12,26 +12,26 @@ import org.jetbrains.kotlin.konan.target.LinkerOutputKind
 import java.io.File
 
 internal data class LinkerPhaseInput(
-        val outputFile: String,
-        val outputKind: LinkerOutputKind,
-        val objectFiles: List<ObjectFile>,
-        val dependenciesTrackingResult: DependenciesTrackingResult,
-        val outputFiles: OutputFiles,
-        val resolvedCacheBinaries: ResolvedCacheBinaries,
-        val isCoverageEnabled: Boolean,
+        konst outputFile: String,
+        konst outputKind: LinkerOutputKind,
+        konst objectFiles: List<ObjectFile>,
+        konst dependenciesTrackingResult: DependenciesTrackingResult,
+        konst outputFiles: OutputFiles,
+        konst resolvedCacheBinaries: ResolvedCacheBinaries,
+        konst isCoverageEnabled: Boolean,
 )
 
-internal val LinkerPhase = createSimpleNamedCompilerPhase<PhaseContext, LinkerPhaseInput>(
+internal konst LinkerPhase = createSimpleNamedCompilerPhase<PhaseContext, LinkerPhaseInput>(
         name = "Linker",
         description = "Linker"
 ) { context, input ->
-    val linker = Linker(
+    konst linker = Linker(
             config = context.config,
             linkerOutput = input.outputKind,
             isCoverageEnabled = input.isCoverageEnabled,
             outputFiles = input.outputFiles
     )
-    val commands = linker.linkCommands(
+    konst commands = linker.linkCommands(
             input.outputFile,
             input.objectFiles,
             input.dependenciesTrackingResult,
@@ -41,16 +41,16 @@ internal val LinkerPhase = createSimpleNamedCompilerPhase<PhaseContext, LinkerPh
 }
 
 internal data class PreLinkCachesInput(
-        val objectFiles: List<File>,
-        val caches: ResolvedCacheBinaries,
-        val outputObjectFile: File,
+        konst objectFiles: List<File>,
+        konst caches: ResolvedCacheBinaries,
+        konst outputObjectFile: File,
 )
 
-internal val PreLinkCachesPhase = createSimpleNamedCompilerPhase<PhaseContext, PreLinkCachesInput>(
+internal konst PreLinkCachesPhase = createSimpleNamedCompilerPhase<PhaseContext, PreLinkCachesInput>(
         name = "PreLinkCaches",
         description = "Pre-link static caches",
 ) { context, input ->
-    val inputFiles = input.objectFiles.map { it.absoluteFile.normalize().path } + input.caches.static
-    val commands = context.config.platform.linker.preLinkCommands(inputFiles, input.outputObjectFile.absoluteFile.normalize().path)
+    konst inputFiles = input.objectFiles.map { it.absoluteFile.normalize().path } + input.caches.static
+    konst commands = context.config.platform.linker.preLinkCommands(inputFiles, input.outputObjectFile.absoluteFile.normalize().path)
     runLinkerCommands(context, commands, cachingInvolved = true)
 }

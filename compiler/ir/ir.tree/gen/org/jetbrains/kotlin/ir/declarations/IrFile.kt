@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrFile : IrPackageFragment(), IrMetadataSourceOwner,
         IrMutableAnnotationContainer {
-    abstract override val symbol: IrFileSymbol
+    abstract override konst symbol: IrFileSymbol
 
     abstract var module: IrModuleFragment
 

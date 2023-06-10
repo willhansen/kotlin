@@ -1,5 +1,5 @@
 
-class TestingKotlinCollections(val arguments: Collection<String>)
+class TestingKotlinCollections(konst arguments: Collection<String>)
 
 // method: TestingKotlinCollections::<init>
 // jvm signature:     (Ljava/util/Collection;)V

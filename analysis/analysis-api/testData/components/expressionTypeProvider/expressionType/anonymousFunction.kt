@@ -1,3 +1,3 @@
 fun foo() {
-    val f = <expr>fun(it: String) {}</expr>
+    konst f = <expr>fun(it: String) {}</expr>
 }

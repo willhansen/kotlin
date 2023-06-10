@@ -1,11 +1,11 @@
 // !LANGUAGE: -ProhibitNonConstValuesAsVarargsInAnnotations
 
-annotation class AnnE(val i: MyEnum)
+annotation class AnnE(konst i: MyEnum)
 
 @AnnE(<!ANNOTATION_ARGUMENT_MUST_BE_ENUM_CONST!>e<!>)
 class Test
 
-val e: MyEnum = MyEnum.A
+konst e: MyEnum = MyEnum.A
 
 enum class MyEnum {
     A

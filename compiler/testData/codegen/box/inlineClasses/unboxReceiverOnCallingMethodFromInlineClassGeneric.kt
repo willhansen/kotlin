@@ -3,16 +3,16 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T: Any>(val s: T) {
+konstue class Foo<T: Any>(konst s: T) {
     fun isString(): Boolean = s is String
 }
 
-class Box<T>(val x: T)
+class Box<T>(konst x: T)
 
 fun box(): String {
-    val f = Foo("string")
-    val g = Box(f)
-    val r = g.x.isString()
+    konst f = Foo("string")
+    konst g = Box(f)
+    konst r = g.x.isString()
 
     if (!r) return "Fail"
 

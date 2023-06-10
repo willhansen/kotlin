@@ -2,7 +2,7 @@
 // !LANGUAGE: +ReadDeserializedContracts +UseCallsInPlaceEffect
 
 fun test(lock: Any) {
-    val x: Int
+    konst x: Int
 
     synchronized(lock) {
         x = 42

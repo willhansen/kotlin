@@ -38,15 +38,15 @@ class ImplicitsFromScriptResultTest : TestCase() {
         // the implementation of the Compiler Host doesn't work with IR - the inter-script symbol table
         // should be maintained to make it run (see latest REPL compiler implementations for details
         // TODO: consider either fix it or rewrite to the REPL compiler
-        val host = CompilerHost()
+        konst host = CompilerHost()
 
-        val snippets = listOf(
-            "val xyz0 = 42",
+        konst snippets = listOf(
+            "konst xyz0 = 42",
             "fun f() = xyz0",
-            "val finalRes = xyz0 + f()",
+            "konst finalRes = xyz0 + f()",
         )
         for (snippet in snippets) {
-            val res = host.compile(snippet)
+            konst res = host.compile(snippet)
             assertTrue(res is ResultWithDiagnostics.Success)
         }
     }
@@ -57,11 +57,11 @@ fun interface PreviousScriptClassesProvider {
 }
 
 class GetScriptClassForImplicits(
-    private val previousScriptClassesProvider: PreviousScriptClassesProvider
+    private konst previousScriptClassesProvider: PreviousScriptClassesProvider
 ) : GetScriptingClassByClassLoader {
-    private val getScriptingClass = JvmGetScriptingClass()
+    private konst getScriptingClass = JvmGetScriptingClass()
 
-    private val lastClassLoader
+    private konst lastClassLoader
         get() = previousScriptClassesProvider.get().lastOrNull()?.java?.classLoader
 
     override fun invoke(
@@ -83,19 +83,19 @@ class GetScriptClassForImplicits(
 
 class CompilerHost {
     private var counter = 0
-    private val implicits = mutableListOf<KClass<*>>()
-    private val outputDir: Path = Files.createTempDirectory("kotlin-scripting-jvm")
-    private val classWriter = ClassWriter(outputDir)
+    private konst implicits = mutableListOf<KClass<*>>()
+    private konst outputDir: Path = Files.createTempDirectory("kotlin-scripting-jvm")
+    private konst classWriter = ClassWriter(outputDir)
 
     init {
         outputDir.toFile().deleteOnExit()
     }
 
-    private val myHostConfiguration = defaultJvmScriptingHostConfiguration.with {
+    private konst myHostConfiguration = defaultJvmScriptingHostConfiguration.with {
         getScriptingClass(GetScriptClassForImplicits { getImplicitsClasses() })
     }
 
-    private val compileConfiguration = ScriptCompilationConfiguration {
+    private konst compileConfiguration = ScriptCompilationConfiguration {
         hostConfiguration(myHostConfiguration)
 
         jvm {
@@ -103,36 +103,36 @@ class CompilerHost {
         }
     }
 
-    private val evaluationConfiguration = ScriptEvaluationConfiguration()
+    private konst ekonstuationConfiguration = ScriptEkonstuationConfiguration()
 
-    private val compiler = JvmScriptCompiler(myHostConfiguration)
+    private konst compiler = JvmScriptCompiler(myHostConfiguration)
 
     private fun getImplicitsClasses(): List<KClass<*>> = implicits
 
     fun compile(code: String): ResultWithDiagnostics<CompiledScript> {
-        val source = SourceCodeTestImpl(counter++, code)
-        val refinedConfig = compileConfiguration.with {
+        konst source = SourceCodeTestImpl(counter++, code)
+        konst refinedConfig = compileConfiguration.with {
             implicitReceivers(*implicits.toTypedArray())
         }
-        val result = runBlocking { compiler.invoke(source, refinedConfig) }
-        val compiledScript = result.valueOrThrow() as KJvmCompiledScript
+        konst result = runBlocking { compiler.invoke(source, refinedConfig) }
+        konst compiledScript = result.konstueOrThrow() as KJvmCompiledScript
 
         classWriter.writeCompiledSnippet(compiledScript)
 
-        val kClass = runBlocking { compiledScript.getClass(evaluationConfiguration) }.valueOrThrow()
+        konst kClass = runBlocking { compiledScript.getClass(ekonstuationConfiguration) }.konstueOrThrow()
         implicits.add(kClass)
         return result
     }
 
-    private class SourceCodeTestImpl(number: Int, override val text: String) : SourceCode {
-        override val name: String = "Line_$number"
-        override val locationId: String = "location_$number"
+    private class SourceCodeTestImpl(number: Int, override konst text: String) : SourceCode {
+        override konst name: String = "Line_$number"
+        override konst locationId: String = "location_$number"
     }
 }
 
-class ClassWriter(private val outputDir: Path) {
+class ClassWriter(private konst outputDir: Path) {
     fun writeCompiledSnippet(snippet: KJvmCompiledScript) {
-        val moduleInMemory = snippet.getCompiledModule() as KJvmCompiledModuleInMemory
+        konst moduleInMemory = snippet.getCompiledModule() as KJvmCompiledModuleInMemory
         moduleInMemory.compilerOutputFiles.forEach { (name, bytes) ->
             if (name.endsWith(".class")) {
                 writeClass(bytes, outputDir.resolve(name))

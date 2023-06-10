@@ -5,15 +5,15 @@
 
 package org.jetbrains.kotlin.test.mutes
 
-private val SKIP_MUTED_TESTS = java.lang.Boolean.getBoolean("org.jetbrains.kotlin.skip.muted.tests")
+private konst SKIP_MUTED_TESTS = java.lang.Boolean.getBoolean("org.jetbrains.kotlin.skip.muted.tests")
 
 fun isMutedInDatabase(testClass: Class<*>, methodKey: String): Boolean {
-    val mutedTest = mutedSet.mutedTest(testClass, methodKey)
+    konst mutedTest = mutedSet.mutedTest(testClass, methodKey)
     return SKIP_MUTED_TESTS && isPresentedInDatabaseWithoutFailMarker(mutedTest)
 }
 
 fun isMutedInDatabaseWithLog(testClass: Class<*>, methodKey: String): Boolean {
-    val mutedInDatabase = isMutedInDatabase(testClass, methodKey)
+    konst mutedInDatabase = isMutedInDatabase(testClass, methodKey)
 
     if (mutedInDatabase) {
         System.err.println(mutedMessage(testClass, methodKey))
@@ -31,8 +31,8 @@ fun mutedMessage(klass: Class<*>, methodKey: String): String = "MUTED TEST: ${te
 fun testKey(klass: Class<*>, methodKey: String): String = "${klass.canonicalName}.$methodKey"
 
 fun wrapWithMuteInDatabase(testClass: Class<*>, methodName: String, f: () -> Unit): (() -> Unit)? {
-    val mutedTest = getMutedTest(testClass, methodName)
-    val testKey = testKey(testClass, methodName)
+    konst mutedTest = getMutedTest(testClass, methodName)
+    konst testKey = testKey(testClass, methodName)
 
     if (isMutedInDatabase(testClass, methodName)) {
         return {

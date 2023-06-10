@@ -31,25 +31,25 @@ import java.io.File
 interface JvmContentRootBase : ContentRoot
 
 interface JvmClasspathRootBase : JvmContentRootBase {
-    val isSdkRoot: Boolean
+    konst isSdkRoot: Boolean
 }
 
 interface JvmContentRoot : JvmContentRootBase {
-    val file: File
+    konst file: File
 }
 
-data class JvmClasspathRoot(override val file: File, override val isSdkRoot: Boolean) : JvmContentRoot, JvmClasspathRootBase {
+data class JvmClasspathRoot(override konst file: File, override konst isSdkRoot: Boolean) : JvmContentRoot, JvmClasspathRootBase {
     constructor(file: File) : this(file, false)
 }
 
 @Suppress("unused") // Might be useful for external tools which invoke kotlinc with their own file system, not based on java.io.File.
-data class VirtualJvmClasspathRoot(val file: VirtualFile, override val isSdkRoot: Boolean) : JvmClasspathRootBase {
+data class VirtualJvmClasspathRoot(konst file: VirtualFile, override konst isSdkRoot: Boolean) : JvmClasspathRootBase {
     constructor(file: VirtualFile) : this(file, false)
 }
 
-data class JavaSourceRoot(override val file: File, val packagePrefix: String?) : JvmContentRoot
+data class JavaSourceRoot(override konst file: File, konst packagePrefix: String?) : JvmContentRoot
 
-data class JvmModulePathRoot(override val file: File) : JvmContentRoot
+data class JvmModulePathRoot(override konst file: File) : JvmContentRoot
 
 fun CompilerConfiguration.addJvmClasspathRoot(file: File) {
     add(CLIConfigurationKeys.CONTENT_ROOTS, JvmClasspathRoot(file))
@@ -63,10 +63,10 @@ fun CompilerConfiguration.addJvmSdkRoots(files: List<File>) {
     addAll(CLIConfigurationKeys.CONTENT_ROOTS, 0, files.map { file -> JvmClasspathRoot(file, true) })
 }
 
-val CompilerConfiguration.jvmClasspathRoots: List<File>
+konst CompilerConfiguration.jvmClasspathRoots: List<File>
     get() = getList(CLIConfigurationKeys.CONTENT_ROOTS).filterIsInstance<JvmClasspathRoot>().map(JvmContentRoot::file)
 
-val CompilerConfiguration.jvmModularRoots: List<File>
+konst CompilerConfiguration.jvmModularRoots: List<File>
     get() = getList(CLIConfigurationKeys.CONTENT_ROOTS).filterIsInstance<JvmModulePathRoot>().map(JvmContentRoot::file)
 
 @JvmOverloads
@@ -79,7 +79,7 @@ fun CompilerConfiguration.addJavaSourceRoots(files: List<File>, packagePrefix: S
     files.forEach { addJavaSourceRoot(it, packagePrefix) }
 }
 
-val CompilerConfiguration.javaSourceRoots: Set<String>
+konst CompilerConfiguration.javaSourceRoots: Set<String>
     get() = getList(CLIConfigurationKeys.CONTENT_ROOTS).mapNotNullTo(linkedSetOf()) { root ->
         when (root) {
             is KotlinSourceRoot -> root.path
@@ -91,8 +91,8 @@ val CompilerConfiguration.javaSourceRoots: Set<String>
 fun CompilerConfiguration.configureJdkClasspathRoots() {
     if (getBoolean(JVMConfigurationKeys.NO_JDK)) return
 
-    val javaRoot = get(JVMConfigurationKeys.JDK_HOME) ?: File(System.getProperty("java.home"))
-    val classesRoots = PathUtil.getJdkClassesRootsFromJdkOrJre(javaRoot)
+    konst javaRoot = get(JVMConfigurationKeys.JDK_HOME) ?: File(System.getProperty("java.home"))
+    konst classesRoots = PathUtil.getJdkClassesRootsFromJdkOrJre(javaRoot)
 
     if (!CoreJrtFileSystem.isModularJdk(javaRoot)) {
         if (classesRoots.isEmpty()) {

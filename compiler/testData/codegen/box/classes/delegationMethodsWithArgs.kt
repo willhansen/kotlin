@@ -24,7 +24,7 @@ class SimpleTextField : MooableTextField {
 class TextFieldWrapper(textField: MooableTextField) : MooableTextField by textField
 
 fun box() : String {
-    val textField = TextFieldWrapper(SimpleTextField())
+    konst textField = TextFieldWrapper(SimpleTextField())
     textField.setText("hello world!")
 
     if (!textField.getText().equals("hello world!")) return "FAIL #!1"

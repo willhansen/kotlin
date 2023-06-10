@@ -27,7 +27,7 @@ import kotlin.reflect.KProperty
 operator fun Delegate.getValue(thisRef: Any?, property: KProperty<*>): String {
     return ""
 }
-operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {}
+operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {}
 
 // FILE: Lib2.kt
 package libPackage2
@@ -38,7 +38,7 @@ import kotlin.reflect.KProperty
 operator fun Delegate.getValue(thisRef: Any?, property: KProperty<*>): String {
     return ""
 }
-operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {}
+operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {}
 
 // FILE: Test.kt
 package testPack
@@ -53,7 +53,7 @@ class Delegate {}
 operator fun Delegate.getValue(thisRef: Any?, property: KProperty<*>): String {
     return ""
 }
-operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {}
+operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {}
 
 fun box() : String {
     class Test {
@@ -63,17 +63,17 @@ fun box() : String {
             isGetCalled = true
             return ""
         }
-        operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
             isSetCalled = true
         }
     }
 
-    val test = Test()
+    konst test = Test()
     assert(!isGetCalled && !isSetCalled)
     test.p = "NEW"
     if (isSetCalled && !isGetCalled) {
         isSetCalled = false
-        val x = test.p
+        konst x = test.p
         if (!isSetCalled && isGetCalled)
             return "OK"
     }

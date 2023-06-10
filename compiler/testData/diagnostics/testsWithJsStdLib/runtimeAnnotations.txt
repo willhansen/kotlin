@@ -2,8 +2,8 @@ package
 
 @X public final external class A {
     public constructor A()
-    @X public final val p: kotlin.Int
-    @get:X public final val r: kotlin.Int
+    @X public final konst p: kotlin.Int
+    @get:X public final konst r: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     @X public final fun f(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -12,8 +12,8 @@ package
 
 @Y public final external class B {
     public constructor B()
-    @Y public final val p: kotlin.Int
-    @get:Y public final val r: kotlin.Int
+    @Y public final konst p: kotlin.Int
+    @get:Y public final konst r: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     @Y public final fun f(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -29,9 +29,9 @@ package
 
 @X public final class C {
     public constructor C()
-    @X public final val p: kotlin.Int = 0
-    @get:X public final val q: kotlin.Int
-    @get:X public final val r: kotlin.Int = 0
+    @X public final konst p: kotlin.Int = 0
+    @get:X public final konst q: kotlin.Int
+    @get:X public final konst r: kotlin.Int = 0
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     @X public final fun f(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -40,23 +40,23 @@ package
 
 @Y public final class D {
     public constructor D()
-    @Y public final val p: kotlin.Int = 0
-    @get:Y public final val q: kotlin.Int
-    @get:Y public final val r: kotlin.Int = 0
+    @Y public final konst p: kotlin.Int = 0
+    @get:Y public final konst q: kotlin.Int
+    @get:Y public final konst r: kotlin.Int = 0
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     @Y public final fun f(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY) public final annotation class X : kotlin.Annotation {
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY) public final annotation class X : kotlin.Annotation {
     public constructor X()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class Y : kotlin.Annotation {
+@kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class Y : kotlin.Annotation {
     public constructor Y()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

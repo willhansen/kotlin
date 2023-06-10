@@ -36,44 +36,44 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 
 class Fir2IrPluginContext(
-    private val components: Fir2IrComponents,
-    @property:ObsoleteDescriptorBasedAPI override val moduleDescriptor: ModuleDescriptor
+    private konst components: Fir2IrComponents,
+    @property:ObsoleteDescriptorBasedAPI override konst moduleDescriptor: ModuleDescriptor
 ) : IrPluginContext {
     companion object {
-        private const val ERROR_MESSAGE = "This API is not supported for K2"
+        private const konst ERROR_MESSAGE = "This API is not supported for K2"
     }
 
     @ObsoleteDescriptorBasedAPI
     @FirIncompatiblePluginAPI
-    override val bindingContext: BindingContext
+    override konst bindingContext: BindingContext
         get() = error(ERROR_MESSAGE)
 
     @ObsoleteDescriptorBasedAPI
     @FirIncompatiblePluginAPI
-    override val typeTranslator: TypeTranslator
+    override konst typeTranslator: TypeTranslator
         get() = error(ERROR_MESSAGE)
 
-    override val afterK2: Boolean = true
+    override konst afterK2: Boolean = true
 
-    override val languageVersionSettings: LanguageVersionSettings
+    override konst languageVersionSettings: LanguageVersionSettings
         get() = components.session.languageVersionSettings
 
-    override val platform: TargetPlatform
+    override konst platform: TargetPlatform
         get() = components.session.moduleData.platform
 
-    override val symbolTable: ReferenceSymbolTable
+    override konst symbolTable: ReferenceSymbolTable
         get() = components.symbolTable
 
-    override val symbols: BuiltinSymbolsBase = BuiltinSymbolsBase(irBuiltIns, symbolTable)
+    override konst symbols: BuiltinSymbolsBase = BuiltinSymbolsBase(irBuiltIns, symbolTable)
 
-    override val irBuiltIns: IrBuiltIns
+    override konst irBuiltIns: IrBuiltIns
         get() = components.irBuiltIns
 
-    private val symbolProvider: FirSymbolProvider
+    private konst symbolProvider: FirSymbolProvider
         get() = components.session.symbolProvider
 
     override fun referenceClass(classId: ClassId): IrClassSymbol? {
-        val firSymbol = symbolProvider.getClassLikeSymbolByClassId(classId) as? FirClassSymbol<*> ?: return null
+        konst firSymbol = symbolProvider.getClassLikeSymbolByClassId(classId) as? FirClassSymbol<*> ?: return null
         return components.classifierStorage.getIrClassSymbol(firSymbol)
     }
 
@@ -86,8 +86,8 @@ class Fir2IrPluginContext(
         firSymbolExtractor: (ClassId) -> FirBasedSymbol<*>?,
         irSymbolExtractor: (IdSignature) -> R
     ): R? {
-        val firSymbol = firSymbolExtractor(id) ?: return null
-        val signature = components.signatureComposer.composeSignature(firSymbol.fir) ?: return null
+        konst firSymbol = firSymbolExtractor(id) ?: return null
+        konst signature = components.signatureComposer.composeSignature(firSymbol.fir) ?: return null
         return irSymbolExtractor(signature)
     }
 
@@ -124,8 +124,8 @@ class Fir2IrPluginContext(
         getCallablesFromProvider: FirSymbolProvider.() -> Collection<F>,
         irExtractor: Fir2IrDeclarationStorage.(F) -> S?,
     ): Collection<R> {
-        val callables = if (classId != null) {
-            val expandedClass = symbolProvider.getClassLikeSymbolByClassId(classId)
+        konst callables = if (classId != null) {
+            konst expandedClass = symbolProvider.getClassLikeSymbolByClassId(classId)
                 ?.fullyExpandedClass(components.session)
                 ?: return emptyList()
 

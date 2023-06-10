@@ -24,7 +24,7 @@ fun box(): String {
         proceed()
     }
 
-    val expected = "before(first);--;after(first);before(second);--;after(second);--;done;"
+    konst expected = "before(first);--;after(first);before(second);--;after(second);--;done;"
     if (result != expected + expected) return "fail: $result"
 
     return "OK"
@@ -54,19 +54,19 @@ fun async(f: suspend () -> Unit) {
                 finished = true
             }
         }
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
 }
 
 fun asyncSuspend(f: suspend () -> Unit) {
-    val coroutine = f.createCoroutine(object : Continuation<Unit> {
+    konst coroutine = f.createCoroutine(object : Continuation<Unit> {
         override fun resumeWith(x: Result<Unit>) {
             proceed = {
                 result += "done;"
                 finished = true
             }
         }
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
     coroutine.resume(Unit)
 }

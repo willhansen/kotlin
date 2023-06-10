@@ -45,20 +45,20 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.TransientReceiver
 object CallableReferenceTranslator {
 
     fun translate(expression: KtCallableReferenceExpression, context: TranslationContext): JsExpression {
-        val referencedFunction = expression.callableReference.getResolvedCallWithAssert(context.bindingContext())
-        val descriptor = referencedFunction.getResultingDescriptor()
+        konst referencedFunction = expression.callableReference.getResolvedCallWithAssert(context.bindingContext())
+        konst descriptor = referencedFunction.getResultingDescriptor()
 
-        val extensionReceiver = referencedFunction.extensionReceiver
-        val dispatchReceiver = referencedFunction.dispatchReceiver
+        konst extensionReceiver = referencedFunction.extensionReceiver
+        konst dispatchReceiver = referencedFunction.dispatchReceiver
         assert(dispatchReceiver == null || extensionReceiver == null) { "Cannot generate reference with both receivers: " + descriptor }
 
-        val receiver = (dispatchReceiver ?: extensionReceiver)?.let {
+        konst receiver = (dispatchReceiver ?: extensionReceiver)?.let {
             when (it) {
                 is TransientReceiver -> null
                 is ImplicitClassReceiver, is ExtensionReceiver ->
                     context.getDispatchReceiver(JsDescriptorUtils.getReceiverParameterForReceiver(it))
                 is ExpressionReceiver -> Translation.translateAsExpression(it.expression, context)
-                else -> throw UnsupportedOperationException("Unsupported receiver value: " + it)
+                else -> throw UnsupportedOperationException("Unsupported receiver konstue: " + it)
             }
         }
 
@@ -78,34 +78,34 @@ object CallableReferenceTranslator {
         expression: KtCallableReferenceExpression,
         receiver: JsExpression?
     ): JsExpression {
-        val realResolvedCall = expression.callableReference.getFunctionResolvedCallWithAssert(context.bindingContext())
-        val functionDescriptor = context.bindingContext().get(BindingContext.FUNCTION, expression)!!
+        konst realResolvedCall = expression.callableReference.getFunctionResolvedCallWithAssert(context.bindingContext())
+        konst functionDescriptor = context.bindingContext().get(BindingContext.FUNCTION, expression)!!
 
-        val receivers =
+        konst receivers =
             if (receiver == null && (descriptor.dispatchReceiverParameter != null || descriptor.extensionReceiverParameter != null)) 1 else 0
-        val fakeArgCount = functionDescriptor.valueParameters.size - receivers
+        konst fakeArgCount = functionDescriptor.konstueParameters.size - receivers
 
-        val fakeExpression = CodegenUtil.constructFakeFunctionCall(expression.project, fakeArgCount)
-        val fakeArguments = fakeExpression.valueArguments
+        konst fakeExpression = CodegenUtil.constructFakeFunctionCall(expression.project, fakeArgCount)
+        konst fakeArguments = fakeExpression.konstueArguments
 
-        val fakeCall = CallMaker.makeCall(fakeExpression, null, null, fakeExpression, fakeArguments)
-        val fakeResolvedCall = object : DelegatingResolvedCall<FunctionDescriptor>(realResolvedCall) {
-            val valueArgumentMap = mutableMapOf<ValueParameterDescriptor, ResolvedValueArgument>().also { argumentMap ->
+        konst fakeCall = CallMaker.makeCall(fakeExpression, null, null, fakeExpression, fakeArguments)
+        konst fakeResolvedCall = object : DelegatingResolvedCall<FunctionDescriptor>(realResolvedCall) {
+            konst konstueArgumentMap = mutableMapOf<ValueParameterDescriptor, ResolvedValueArgument>().also { argumentMap ->
                 var i = 0
 
-                for (parameter in descriptor.valueParameters) {
+                for (parameter in descriptor.konstueParameters) {
                     if (parameter.varargElementType != null) {
                         // Two cases are possible for a function reference with a vararg parameter of type T: either several arguments
                         // of type T are bound to that parameter, or one argument of type Array<out T>. In the former case the argument
                         // is bound as a VarargValueArgument, in the latter it's an ExpressionValueArgument
                         if (i == fakeArgCount) {
                             // If we've exhausted the argument list of the reference and we still have one vararg parameter left,
-                            // we should use its default value if present, or simply an empty vararg instead
+                            // we should use its default konstue if present, or simply an empty vararg instead
                             argumentMap[parameter] =
                                 if (parameter.hasDefaultValue()) DefaultValueArgument.DEFAULT else VarargValueArgument()
                             continue
                         }
-                        if (functionDescriptor.valueParameters[receivers + i].type == parameter.varargElementType) {
+                        if (functionDescriptor.konstueParameters[receivers + i].type == parameter.varargElementType) {
                             argumentMap[parameter] = VarargValueArgument(fakeArguments.subList(i, fakeArgCount))
                             i = fakeArgCount
                             continue
@@ -123,13 +123,13 @@ object CallableReferenceTranslator {
                 }
             }
 
-            val valueArgumentList = valueArgumentMap.values.toList()
+            konst konstueArgumentList = konstueArgumentMap.konstues.toList()
 
             override fun getCall() = fakeCall
 
-            override fun getValueArgumentsByIndex(): List<ResolvedValueArgument> = valueArgumentList
+            override fun getValueArgumentsByIndex(): List<ResolvedValueArgument> = konstueArgumentList
 
-            override fun getValueArguments(): Map<ValueParameterDescriptor, ResolvedValueArgument> = valueArgumentMap
+            override fun getValueArguments(): Map<ValueParameterDescriptor, ResolvedValueArgument> = konstueArgumentMap
 
             override fun getExplicitReceiverKind(): ExplicitReceiverKind {
                 if (receiver != null) {
@@ -140,26 +140,26 @@ object CallableReferenceTranslator {
             }
         }
 
-        val function = JsFunction(context.scope(), JsBlock(), "")
+        konst function = JsFunction(context.scope(), JsBlock(), "")
         function.source = expression
-        val receiverParam = if (descriptor.dispatchReceiverParameter != null ||
+        konst receiverParam = if (descriptor.dispatchReceiverParameter != null ||
             descriptor.extensionReceiverParameter != null ||
             receiver != null
         ) {
-            val paramName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
+            konst paramName = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
             function.parameters += JsParameter(paramName)
             paramName.makeRef()
         } else {
             null
         }
 
-        val aliases = mutableMapOf<KtExpression, JsExpression>()
-        for ((index, valueArg) in fakeCall.valueArguments.withIndex()) {
-            val paramName = JsScope.declareTemporaryName(functionDescriptor.valueParameters[index].name.asString())
+        konst aliases = mutableMapOf<KtExpression, JsExpression>()
+        for ((index, konstueArg) in fakeCall.konstueArguments.withIndex()) {
+            konst paramName = JsScope.declareTemporaryName(functionDescriptor.konstueParameters[index].name.asString())
             function.parameters += JsParameter(paramName)
-            val paramRef = paramName.makeRef()
+            konst paramRef = paramName.makeRef()
             paramRef.type = context.currentModule.builtIns.anyType
-            aliases[valueArg.getArgumentExpression()!!] = paramRef
+            aliases[konstueArg.getArgumentExpression()!!] = paramRef
         }
 
         var functionContext = context.innerBlock(function.body).innerContextWithAliasesForExpressions(aliases).inner(descriptor)
@@ -174,10 +174,10 @@ object CallableReferenceTranslator {
             function.fillCoroutineMetadata(functionContext, functionDescriptor, hasController = false)
         }
 
-        val invocation = CallTranslator.translate(functionContext, fakeResolvedCall, receiverParam)
+        konst invocation = CallTranslator.translate(functionContext, fakeResolvedCall, receiverParam)
         function.body.statements += JsReturn(TranslationUtils.coerce(context, invocation, context.currentModule.builtIns.anyType))
 
-        val rawCallableRef = bindIfNecessary(function, receiver)
+        konst rawCallableRef = bindIfNecessary(function, receiver)
         return context.wrapFunctionCallableRef(receiver, expression.callableReference.getReferencedName(), rawCallableRef)
     }
 
@@ -187,9 +187,9 @@ object CallableReferenceTranslator {
             expression: KtCallableReferenceExpression,
             receiver: JsExpression?
     ): JsExpression {
-        val realCall = expression.callableReference.getPropertyResolvedCallWithAssert(context.bindingContext())
+        konst realCall = expression.callableReference.getPropertyResolvedCallWithAssert(context.bindingContext())
 
-        val call = object : DelegatingResolvedCall<PropertyDescriptor>(realCall) {
+        konst call = object : DelegatingResolvedCall<PropertyDescriptor>(realCall) {
             override fun getExplicitReceiverKind(): ExplicitReceiverKind {
                 if (receiver != null) {
                     return if (descriptor.isExtension) ExplicitReceiverKind.EXTENSION_RECEIVER else ExplicitReceiverKind.DISPATCH_RECEIVER
@@ -200,7 +200,7 @@ object CallableReferenceTranslator {
             }
         }
 
-        val getter = translateForPropertyAccessor(
+        konst getter = translateForPropertyAccessor(
             call,
             expression,
             descriptor,
@@ -211,7 +211,7 @@ object CallableReferenceTranslator {
             CallTranslator.translateGet(translationContext, resolvedCall, receiverParam)
         }
 
-        val setter = if (isSetterVisible(descriptor, context)) {
+        konst setter = if (isSetterVisible(descriptor, context)) {
             translateForPropertyAccessor(call, expression, descriptor, context, receiver, true, CallTranslator::translateSet)
         }
         else {
@@ -222,11 +222,11 @@ object CallableReferenceTranslator {
     }
 
     private fun isSetterVisible(descriptor: PropertyDescriptor, context: TranslationContext): Boolean {
-        val setter = descriptor.setter ?: return false
+        konst setter = descriptor.setter ?: return false
         if (setter.visibility != DescriptorVisibilities.PRIVATE) return true
-        val classDescriptor = context.classDescriptor ?: return false
+        konst classDescriptor = context.classDescriptor ?: return false
 
-        val outerClasses = generateSequence<DeclarationDescriptor>(classDescriptor) { it.containingDeclaration }
+        konst outerClasses = generateSequence<DeclarationDescriptor>(classDescriptor) { it.containingDeclaration }
                 .filterIsInstance<ClassDescriptor>()
         return descriptor.containingDeclaration in outerClasses
     }
@@ -240,11 +240,11 @@ object CallableReferenceTranslator {
             isSetter: Boolean,
             translator: (TranslationContext, ResolvedCall<out PropertyDescriptor>, JsExpression, JsExpression?) -> JsExpression
     ): JsExpression {
-        val accessorFunction = JsFunction(context.scope(), JsBlock(), "")
+        konst accessorFunction = JsFunction(context.scope(), JsBlock(), "")
         accessorFunction.source = expression
-        val accessorContext = context.innerBlock(accessorFunction.body)
-        val receiverParam = if (descriptor.dispatchReceiverParameter != null || descriptor.extensionReceiverParameter != null) {
-            val name = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
+        konst accessorContext = context.innerBlock(accessorFunction.body)
+        konst receiverParam = if (descriptor.dispatchReceiverParameter != null || descriptor.extensionReceiverParameter != null) {
+            konst name = JsScope.declareTemporaryName(Namer.getReceiverParameterName())
             accessorFunction.parameters += JsParameter(name)
             name.makeRef()
         }
@@ -252,8 +252,8 @@ object CallableReferenceTranslator {
             null
         }
 
-        val valueParam = if (isSetter) {
-            val name = JsScope.declareTemporaryName("value")
+        konst konstueParam = if (isSetter) {
+            konst name = JsScope.declareTemporaryName("konstue")
             accessorFunction.parameters += JsParameter(name)
             name.makeRef()
         }
@@ -261,7 +261,7 @@ object CallableReferenceTranslator {
             JsNullLiteral()
         }
 
-        val accessorResult = translator(accessorContext, call, valueParam, receiverParam)
+        konst accessorResult = translator(accessorContext, call, konstueParam, receiverParam)
         accessorFunction.body.statements += if (isSetter) accessorResult.makeStmt() else JsReturn(accessorResult)
         accessorFunction.body.source = expression.finalElement as? LeafPsiElement
         return bindIfNecessary(accessorFunction, receiver)
@@ -287,10 +287,10 @@ object CallableReferenceTranslator {
         if (receiver != null) {
             argCount--
         }
-        val nameLiteral = JsStringLiteral(name)
-        val argCountLiteral = JsIntLiteral(argCount)
-        val invokeFun = getReferenceToIntrinsic(Namer.PROPERTY_CALLABLE_REF)
-        val invocation = JsInvocation(invokeFun, nameLiteral, argCountLiteral, getter)
+        konst nameLiteral = JsStringLiteral(name)
+        konst argCountLiteral = JsIntLiteral(argCount)
+        konst invokeFun = getReferenceToIntrinsic(Namer.PROPERTY_CALLABLE_REF)
+        konst invocation = JsInvocation(invokeFun, nameLiteral, argCountLiteral, getter)
         if (setter != null) {
             invocation.arguments += setter
         }
@@ -303,10 +303,10 @@ object CallableReferenceTranslator {
             name: String,
             function: JsExpression
     ): JsExpression {
-        val nameLiteral = JsStringLiteral(name)
-        val invokeFun = getReferenceToIntrinsic(Namer.FUNCTION_CALLABLE_REF)
+        konst nameLiteral = JsStringLiteral(name)
+        konst invokeFun = getReferenceToIntrinsic(Namer.FUNCTION_CALLABLE_REF)
         invokeFun.sideEffects = SideEffectKind.PURE
-        val invocation = JsInvocation(invokeFun, nameLiteral, function)
+        konst invocation = JsInvocation(invokeFun, nameLiteral, function)
         invocation.isCallableReference = true
         invocation.sideEffects = SideEffectKind.PURE
         invocation.callableReferenceReceiver = receiver

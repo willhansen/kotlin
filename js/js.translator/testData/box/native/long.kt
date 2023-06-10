@@ -3,7 +3,7 @@
 // WASM_MUTE_REASON: UNSUPPORTED_JS_INTEROP
 // KJS_WITH_FULL_RUNTIME
 
-// Test that APIs expecting Number behave correctly with Long values.
+// Test that APIs expecting Number behave correctly with Long konstues.
 
 import kotlin.js.Date
 

@@ -5,15 +5,15 @@
 // MODULE: lib
 // FILE: lib.kt
 
-enum class E(val value: String) {
+enum class E(konst konstue: String) {
     OK("K");
 
     companion object {
         @JvmField
-        val OK = "O"
+        konst OK = "O"
     }
 }
 
 // MODULE: main(lib)
 // FILE: main.kt
-fun box() = E.OK + E.OK.value
+fun box() = E.OK + E.OK.konstue

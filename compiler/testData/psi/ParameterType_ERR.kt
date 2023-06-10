@@ -17,9 +17,9 @@ fun test() {
     }
 }
 
-val a = fun (b:) {}
+konst a = fun (b:) {}
 
-val a: (a:) -> Unit
+konst a: (a:) -> Unit
 
 class A(a)
 class A(a:)

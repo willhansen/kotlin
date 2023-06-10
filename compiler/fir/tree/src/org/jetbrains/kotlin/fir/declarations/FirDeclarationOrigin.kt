@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.fir.declarations
 import org.jetbrains.kotlin.GeneratedDeclarationKey
 
 sealed class FirDeclarationOrigin(
-    private val displayName: String? = null,
-    val fromSupertypes: Boolean = false,
-    val generated: Boolean = false,
-    val fromSource: Boolean = false
+    private konst displayName: String? = null,
+    konst fromSupertypes: Boolean = false,
+    konst generated: Boolean = false,
+    konst fromSource: Boolean = false
 ) {
     object Source : FirDeclarationOrigin(fromSource = true)
     object Library : FirDeclarationOrigin()
@@ -37,12 +37,12 @@ sealed class FirDeclarationOrigin(
     object RenamedForOverride : FirDeclarationOrigin()
     object WrappedIntegerOperator : FirDeclarationOrigin()
     object ScriptCustomization : FirDeclarationOrigin()
-    class Plugin(val key: GeneratedDeclarationKey) : FirDeclarationOrigin(displayName = "Plugin[$key]", generated = true)
+    class Plugin(konst key: GeneratedDeclarationKey) : FirDeclarationOrigin(displayName = "Plugin[$key]", generated = true)
 
     override fun toString(): String {
         return displayName ?: this::class.simpleName!!
     }
 }
 
-val GeneratedDeclarationKey.origin: FirDeclarationOrigin
+konst GeneratedDeclarationKey.origin: FirDeclarationOrigin
     get() = FirDeclarationOrigin.Plugin(this)

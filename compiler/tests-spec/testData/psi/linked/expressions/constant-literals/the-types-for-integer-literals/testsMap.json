@@ -89,7 +89,7 @@
         {
           "specVersion": "0.1-100",
           "casesNumber": 0,
-          "description": "Various integer literals with long literal mark in not allowed lower case (but valid in opinion the parser).",
+          "description": "Various integer literals with long literal mark in not allowed lower case (but konstid in opinion the parser).",
           "path": "compiler/tests-spec/testData/psi/linked/expressions/constant-literals/the-types-for-integer-literals/p-1/pos/1.9.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"

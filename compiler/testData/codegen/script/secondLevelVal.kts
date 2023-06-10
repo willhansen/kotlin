@@ -1,5 +1,5 @@
 if (true) {
-    val archenemy = "Jim Moriarty"
+    konst archenemy = "Jim Moriarty"
 }
 
 // expected: archenemy: <nofield>

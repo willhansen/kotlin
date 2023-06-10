@@ -1,8 +1,8 @@
 @Target(AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Denotable(val type: String)
+annotation class Denotable(konst type: String)
 
 @Target(AnnotationTarget.EXPRESSION)
 @Retention(AnnotationRetention.SOURCE)
-annotation class Nondenotable(val type: String)
+annotation class Nondenotable(konst type: String)
 

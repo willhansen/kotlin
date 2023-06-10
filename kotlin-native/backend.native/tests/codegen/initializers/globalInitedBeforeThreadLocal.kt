@@ -6,10 +6,10 @@
 // FILE: lib.kt
 import kotlin.test.*
 
-val x = foo()
+konst x = foo()
 
 @ThreadLocal
-val y = bar()
+konst y = bar()
 
 private fun foo() = 42
 

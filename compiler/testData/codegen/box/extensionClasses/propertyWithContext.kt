@@ -9,9 +9,9 @@ fun box(): String {
 }
 
 class SomeContext {
-    val value: String = "OK"
+    konst konstue: String = "OK"
 }
 
 context(SomeContext)
-val String.foo: String
-    get() = value
+konst String.foo: String
+    get() = konstue

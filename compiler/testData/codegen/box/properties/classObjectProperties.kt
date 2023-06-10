@@ -2,12 +2,12 @@ class Test {
 
     companion object {
 
-        public val prop1 : Int = 10
+        public konst prop1 : Int = 10
 
         public var  prop2 : Int = 11
             private set
 
-        public val prop3: Int = 12
+        public konst prop3: Int = 12
             get() {
                 return field
             }
@@ -31,7 +31,7 @@ class Test {
 
 
 fun box(): String {
-    val t = Test;
+    konst t = Test;
 
     if (t.prop1 != 10) return "fail1";
 

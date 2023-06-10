@@ -13,7 +13,7 @@ KtSuccessCallInfo:
           receiverType = null
           returnType = kotlin.Int
           symbol = kotlin/Int.plus(<dispatch receiver>: kotlin.Int, other: kotlin.Int): kotlin.Int
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = other
               receiverType = null
@@ -32,7 +32,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.Int
         symbol = /MyMap.get(<dispatch receiver>: MyMap<K, V>, k: K): V
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = k
             receiverType = null
@@ -54,7 +54,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /MyMap.set(<dispatch receiver>: MyMap<K, V>, k: K, v: V): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = k
             receiverType = null

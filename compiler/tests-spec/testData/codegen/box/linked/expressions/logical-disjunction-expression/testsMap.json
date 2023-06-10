@@ -5,7 +5,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -13,7 +13,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -21,7 +21,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -31,7 +31,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -39,7 +39,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -47,7 +47,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "operator || does not evaluate the right hand side argument unless the left hand side argument evaluated to false",
+          "description": "operator || does not ekonstuate the right hand side argument unless the left hand side argument ekonstuated to false",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/logical-disjunction-expression/p-1/pos/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"

@@ -35,15 +35,15 @@ import org.jetbrains.kotlin.util.collectionUtils.listOfNonEmptyScopes
 import org.jetbrains.kotlin.utils.Printer
 
 class JvmPackageScope(
-    private val c: LazyJavaResolverContext,
+    private konst c: LazyJavaResolverContext,
     jPackage: JavaPackage,
-    private val packageFragment: LazyJavaPackageFragment
+    private konst packageFragment: LazyJavaPackageFragment
 ) : MemberScope {
-    internal val javaScope = LazyJavaPackageScope(c, jPackage, packageFragment)
+    internal konst javaScope = LazyJavaPackageScope(c, jPackage, packageFragment)
 
-    private val kotlinScopes by c.storageManager.createLazyValue {
+    private konst kotlinScopes by c.storageManager.createLazyValue {
         listOfNonEmptyScopes(
-            packageFragment.binaryClasses.values.mapNotNull { partClass ->
+            packageFragment.binaryClasses.konstues.mapNotNull { partClass ->
                 c.components.deserializedDescriptorResolver.createKotlinPackagePartScope(packageFragment, partClass)
             }
         ).toTypedArray()
@@ -52,7 +52,7 @@ class JvmPackageScope(
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? {
         recordLookup(name, location)
 
-        val javaClassifier = javaScope.getContributedClassifier(name, location)
+        konst javaClassifier = javaScope.getContributedClassifier(name, location)
         if (javaClassifier != null) return javaClassifier
 
         return getFirstClassifierDiscriminateHeaders(kotlinScopes) { it.getContributedClassifier(name, location) }

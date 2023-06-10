@@ -8,4 +8,4 @@ context(A) class C {
 }
 
 context(A) fun g() {}
-context(B) val h: Int get() = 42
+context(B) konst h: Int get() = 42

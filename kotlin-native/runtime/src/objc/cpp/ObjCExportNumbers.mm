@@ -27,17 +27,17 @@
 
 extern "C" {
 
-OBJ_GETTER(Kotlin_boxBoolean, KBoolean value);
-OBJ_GETTER(Kotlin_boxByte, KByte value);
-OBJ_GETTER(Kotlin_boxShort, KShort value);
-OBJ_GETTER(Kotlin_boxInt, KInt value);
-OBJ_GETTER(Kotlin_boxLong, KLong value);
-OBJ_GETTER(Kotlin_boxUByte, KUByte value);
-OBJ_GETTER(Kotlin_boxUShort, KUShort value);
-OBJ_GETTER(Kotlin_boxUInt, KUInt value);
-OBJ_GETTER(Kotlin_boxULong, KULong value);
-OBJ_GETTER(Kotlin_boxFloat, KFloat value);
-OBJ_GETTER(Kotlin_boxDouble, KDouble value);
+OBJ_GETTER(Kotlin_boxBoolean, KBoolean konstue);
+OBJ_GETTER(Kotlin_boxByte, KByte konstue);
+OBJ_GETTER(Kotlin_boxShort, KShort konstue);
+OBJ_GETTER(Kotlin_boxInt, KInt konstue);
+OBJ_GETTER(Kotlin_boxLong, KLong konstue);
+OBJ_GETTER(Kotlin_boxUByte, KUByte konstue);
+OBJ_GETTER(Kotlin_boxUShort, KUShort konstue);
+OBJ_GETTER(Kotlin_boxUInt, KUInt konstue);
+OBJ_GETTER(Kotlin_boxULong, KULong konstue);
+OBJ_GETTER(Kotlin_boxFloat, KFloat konstue);
+OBJ_GETTER(Kotlin_boxDouble, KDouble konstue);
 
 }
 
@@ -62,37 +62,37 @@ OBJ_GETTER(Kotlin_boxDouble, KDouble value);
 
 @implementation KotlinNumber : NSNumber
 
-- (NSNumber *)initWithBool:(BOOL)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithChar:(char)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithShort:(short)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithInt:(int)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithInteger:(NSInteger)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithLong:(long)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithLongLong:(long long)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedChar:(unsigned char)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedShort:(unsigned short)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedInt:(unsigned int)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedInteger:(NSUInteger)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedLong:(unsigned long)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithUnsignedLongLong:(unsigned long long)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithFloat:(float)value { incorrectNumberInitialization(self, _cmd); }
-- (NSNumber *)initWithDouble:(double)value { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithBool:(BOOL)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithChar:(char)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithShort:(short)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithInt:(int)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithInteger:(NSInteger)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithLong:(long)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithLongLong:(long long)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedChar:(unsigned char)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedShort:(unsigned short)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedInt:(unsigned int)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedInteger:(NSUInteger)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedLong:(unsigned long)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithUnsignedLongLong:(unsigned long long)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithFloat:(float)konstue { incorrectNumberInitialization(self, _cmd); }
+- (NSNumber *)initWithDouble:(double)konstue { incorrectNumberInitialization(self, _cmd); }
 
-+ (NSNumber *)numberWithBool:(BOOL)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithChar:(char)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithShort:(short)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithInt:(int)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithInteger:(NSInteger)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithLong:(long)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithLongLong:(long long)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedChar:(unsigned char)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedShort:(unsigned short)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedInt:(unsigned int)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedLong:(unsigned long)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithUnsignedLongLong:(unsigned long long)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithFloat:(float)value { incorrectNumberFactory(self, _cmd); }
-+ (NSNumber *)numberWithDouble:(double)value { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithBool:(BOOL)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithChar:(char)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithShort:(short)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithInt:(int)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithInteger:(NSInteger)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithLong:(long)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithLongLong:(long long)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedChar:(unsigned char)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedShort:(unsigned short)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedInt:(unsigned int)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedLong:(unsigned long)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithUnsignedLongLong:(unsigned long long)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithFloat:(float)konstue { incorrectNumberFactory(self, _cmd); }
++ (NSNumber *)numberWithDouble:(double)konstue { incorrectNumberFactory(self, _cmd); }
 
 @end
 
@@ -119,31 +119,31 @@ private fun genBoolean(): String = """
 @end
 
 @implementation KotlinBoolean {
-  BOOL value_;
+  BOOL konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(BOOL*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(BOOL*)konstue = konstue_;
 }
 
-- (instancetype)initWithBool:(BOOL)value {
+- (instancetype)initWithBool:(BOOL)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithBool:(BOOL)value {
++ (instancetype)numberWithBool:(BOOL)konstue {
   KotlinBoolean* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 - (BOOL)boolValue {
-  return value_;
+  return konstue_;
 }
 
 - (char)charValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -151,7 +151,7 @@ private fun genBoolean(): String = """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxBoolean, value_);
+  RETURN_RESULT_OF(Kotlin_boxBoolean, konstue_);
 }
 
 @end
@@ -168,34 +168,34 @@ private fun genInteger(
 @end
 
 @implementation Kotlin$name {
-  $cType value_;
+  $cType konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*($cType*)value = value_;
+- (void)getValue:(void *)konstue {
+	*($cType*)konstue = konstue_;
 }
 
-- (instancetype)initWith${kind.capitalize()}:($cType)value {
+- (instancetype)initWith${kind.capitalize()}:($cType)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWith${kind.capitalize()}:($cType)value {
++ (instancetype)numberWith${kind.capitalize()}:($cType)konstue {
   Kotlin$name* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - ($cType)${kind}Value {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -203,7 +203,7 @@ private fun genInteger(
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_box$name, value_);
+  RETURN_RESULT_OF(Kotlin_box$name, konstue_);
 }
 
 @end
@@ -223,41 +223,41 @@ private fun genFloating(
 @end
 
 @implementation Kotlin$name {
-  $cType value_;
+  $cType konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*($cType*)value = value_;
+- (void)getValue:(void *)konstue {
+	*($cType*)konstue = konstue_;
 }
 
-- (instancetype)initWith${kind.capitalize()}:($cType)value  {
+- (instancetype)initWith${kind.capitalize()}:($cType)konstue  {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWith${kind.capitalize()}:($cType)value {
++ (instancetype)numberWith${kind.capitalize()}:($cType)konstue {
   Kotlin$name* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 ${if (cType != "double") """
 // Required to convert Swift floating literals.
-- (instancetype)initWithDouble:(double)value {
+- (instancetype)initWithDouble:(double)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 """ else ""}
 - ($cType)${kind}Value {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -265,7 +265,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_box$name, value_);
+  RETURN_RESULT_OF(Kotlin_box$name, konstue_);
 }
 
 @end
@@ -279,31 +279,31 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinBoolean {
-  BOOL value_;
+  BOOL konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(BOOL*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(BOOL*)konstue = konstue_;
 }
 
-- (instancetype)initWithBool:(BOOL)value {
+- (instancetype)initWithBool:(BOOL)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithBool:(BOOL)value {
++ (instancetype)numberWithBool:(BOOL)konstue {
   KotlinBoolean* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 - (BOOL)boolValue {
-  return value_;
+  return konstue_;
 }
 
 - (char)charValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -311,7 +311,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxBoolean, value_);
+  RETURN_RESULT_OF(Kotlin_boxBoolean, konstue_);
 }
 
 @end
@@ -320,34 +320,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinByte {
-  char value_;
+  char konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(char*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(char*)konstue = konstue_;
 }
 
-- (instancetype)initWithChar:(char)value {
+- (instancetype)initWithChar:(char)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithChar:(char)value {
++ (instancetype)numberWithChar:(char)konstue {
   KotlinByte* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (char)charValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -355,7 +355,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxByte, value_);
+  RETURN_RESULT_OF(Kotlin_boxByte, konstue_);
 }
 
 @end
@@ -364,34 +364,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinShort {
-  short value_;
+  short konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(short*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(short*)konstue = konstue_;
 }
 
-- (instancetype)initWithShort:(short)value {
+- (instancetype)initWithShort:(short)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithShort:(short)value {
++ (instancetype)numberWithShort:(short)konstue {
   KotlinShort* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (short)shortValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -399,7 +399,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxShort, value_);
+  RETURN_RESULT_OF(Kotlin_boxShort, konstue_);
 }
 
 @end
@@ -408,34 +408,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinInt {
-  int value_;
+  int konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(int*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(int*)konstue = konstue_;
 }
 
-- (instancetype)initWithInt:(int)value {
+- (instancetype)initWithInt:(int)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithInt:(int)value {
++ (instancetype)numberWithInt:(int)konstue {
   KotlinInt* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (int)intValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -443,7 +443,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxInt, value_);
+  RETURN_RESULT_OF(Kotlin_boxInt, konstue_);
 }
 
 @end
@@ -452,34 +452,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinLong {
-  long long value_;
+  long long konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(long long*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(long long*)konstue = konstue_;
 }
 
-- (instancetype)initWithLongLong:(long long)value {
+- (instancetype)initWithLongLong:(long long)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithLongLong:(long long)value {
++ (instancetype)numberWithLongLong:(long long)konstue {
   KotlinLong* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (long long)longLongValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -487,7 +487,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxLong, value_);
+  RETURN_RESULT_OF(Kotlin_boxLong, konstue_);
 }
 
 @end
@@ -496,34 +496,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinUByte {
-  unsigned char value_;
+  unsigned char konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(unsigned char*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(unsigned char*)konstue = konstue_;
 }
 
-- (instancetype)initWithUnsignedChar:(unsigned char)value {
+- (instancetype)initWithUnsignedChar:(unsigned char)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithUnsignedChar:(unsigned char)value {
++ (instancetype)numberWithUnsignedChar:(unsigned char)konstue {
   KotlinUByte* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (unsigned char)unsignedCharValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -531,7 +531,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxUByte, value_);
+  RETURN_RESULT_OF(Kotlin_boxUByte, konstue_);
 }
 
 @end
@@ -540,34 +540,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinUShort {
-  unsigned short value_;
+  unsigned short konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(unsigned short*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(unsigned short*)konstue = konstue_;
 }
 
-- (instancetype)initWithUnsignedShort:(unsigned short)value {
+- (instancetype)initWithUnsignedShort:(unsigned short)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithUnsignedShort:(unsigned short)value {
++ (instancetype)numberWithUnsignedShort:(unsigned short)konstue {
   KotlinUShort* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (unsigned short)unsignedShortValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -575,7 +575,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxUShort, value_);
+  RETURN_RESULT_OF(Kotlin_boxUShort, konstue_);
 }
 
 @end
@@ -584,34 +584,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinUInt {
-  unsigned int value_;
+  unsigned int konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(unsigned int*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(unsigned int*)konstue = konstue_;
 }
 
-- (instancetype)initWithUnsignedInt:(unsigned int)value {
+- (instancetype)initWithUnsignedInt:(unsigned int)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithUnsignedInt:(unsigned int)value {
++ (instancetype)numberWithUnsignedInt:(unsigned int)konstue {
   KotlinUInt* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (unsigned int)unsignedIntValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -619,7 +619,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxUInt, value_);
+  RETURN_RESULT_OF(Kotlin_boxUInt, konstue_);
 }
 
 @end
@@ -628,34 +628,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinULong {
-  unsigned long long value_;
+  unsigned long long konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(unsigned long long*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(unsigned long long*)konstue = konstue_;
 }
 
-- (instancetype)initWithUnsignedLongLong:(unsigned long long)value {
+- (instancetype)initWithUnsignedLongLong:(unsigned long long)konstue {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithUnsignedLongLong:(unsigned long long)value {
++ (instancetype)numberWithUnsignedLongLong:(unsigned long long)konstue {
   KotlinULong* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (unsigned long long)unsignedLongLongValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -663,7 +663,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxULong, value_);
+  RETURN_RESULT_OF(Kotlin_boxULong, konstue_);
 }
 
 @end
@@ -672,41 +672,41 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinFloat {
-  float value_;
+  float konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(float*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(float*)konstue = konstue_;
 }
 
-- (instancetype)initWithFloat:(float)value  {
+- (instancetype)initWithFloat:(float)konstue  {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithFloat:(float)value {
++ (instancetype)numberWithFloat:(float)konstue {
   KotlinFloat* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 // Required to convert Swift floating literals.
-- (instancetype)initWithDouble:(double)value {
+- (instancetype)initWithDouble:(double)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (float)floatValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -714,7 +714,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxFloat, value_);
+  RETURN_RESULT_OF(Kotlin_boxFloat, konstue_);
 }
 
 @end
@@ -723,34 +723,34 @@ ${if (cType != "double") """
 @end
 
 @implementation KotlinDouble {
-  double value_;
+  double konstue_;
 }
 
-- (void)getValue:(void *)value {
-	*(double*)value = value_;
+- (void)getValue:(void *)konstue {
+	*(double*)konstue = konstue_;
 }
 
-- (instancetype)initWithDouble:(double)value  {
+- (instancetype)initWithDouble:(double)konstue  {
   self = [super init];
-  value_ = value;
+  konstue_ = konstue;
   return self;
 }
 
-+ (instancetype)numberWithDouble:(double)value {
++ (instancetype)numberWithDouble:(double)konstue {
   KotlinDouble* result = [[self new] autorelease];
-  result->value_ = value;
+  result->konstue_ = konstue;
   return result;
 }
 
 // Required to convert Swift integer literals.
-- (instancetype)initWithInteger:(NSInteger)value {
+- (instancetype)initWithInteger:(NSInteger)konstue {
   self = [super init];
-  value_ = value; // TODO: check fits.
+  konstue_ = konstue; // TODO: check fits.
   return self;
 }
 
 - (double)doubleValue {
-  return value_;
+  return konstue_;
 }
 
 - (const char *)objCType {
@@ -758,7 +758,7 @@ ${if (cType != "double") """
 }
 
 -(ObjHeader*)toKotlin:(ObjHeader**)OBJ_RESULT {
-  RETURN_RESULT_OF(Kotlin_boxDouble, value_);
+  RETURN_RESULT_OF(Kotlin_boxDouble, konstue_);
 }
 
 @end

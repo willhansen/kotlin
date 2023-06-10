@@ -1,14 +1,14 @@
-val nonConstFlag = true
+konst nonConstFlag = true
 
-inline fun <T, R> calc(value : T, fn: (T) -> R) : R = fn(value)
+inline fun <T, R> calc(konstue : T, fn: (T) -> R) : R = fn(konstue)
 
-inline fun <T> identity(value : T) : T = calc(value) {
+inline fun <T> identity(konstue : T) : T = calc(konstue) {
     if (nonConstFlag) return it
     it
 }
 
 fun foo() {
-    val x = identity(1)
+    konst x = identity(1)
 }
 
 // 1 GOTO

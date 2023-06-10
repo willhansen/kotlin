@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.SmartList
 
 class FirPackageMemberScope(
-    val fqName: FqName,
-    val session: FirSession,
-    private val symbolProvider: FirSymbolProvider = session.symbolProvider
+    konst fqName: FqName,
+    konst session: FirSession,
+    private konst symbolProvider: FirSymbolProvider = session.symbolProvider
 ) : FirScope() {
-    private val classifierCache: MutableMap<Name, FirClassifierSymbol<*>?> = mutableMapOf()
-    private val functionCache: MutableMap<Name, List<FirNamedFunctionSymbol>> = mutableMapOf()
-    private val propertyCache: MutableMap<Name, List<FirPropertySymbol>> = mutableMapOf()
+    private konst classifierCache: MutableMap<Name, FirClassifierSymbol<*>?> = mutableMapOf()
+    private konst functionCache: MutableMap<Name, List<FirNamedFunctionSymbol>> = mutableMapOf()
+    private konst propertyCache: MutableMap<Name, List<FirPropertySymbol>> = mutableMapOf()
 
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
@@ -35,8 +35,8 @@ class FirPackageMemberScope(
     ) {
         if (name.asString().isEmpty()) return
 
-        val symbol = classifierCache.getOrPut(name) {
-            val unambiguousFqName = ClassId(fqName, name)
+        konst symbol = classifierCache.getOrPut(name) {
+            konst unambiguousFqName = ClassId(fqName, name)
             symbolProvider.getClassLikeSymbolByClassId(unambiguousFqName)
         }
 
@@ -46,7 +46,7 @@ class FirPackageMemberScope(
     }
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
-        val symbols = functionCache.getOrPut(name) {
+        konst symbols = functionCache.getOrPut(name) {
             symbolProvider.getTopLevelFunctionSymbols(fqName, name)
         }
         for (symbol in symbols) {
@@ -55,7 +55,7 @@ class FirPackageMemberScope(
     }
 
     override fun processPropertiesByName(name: Name, processor: (FirVariableSymbol<*>) -> Unit) {
-        val symbols = propertyCache.getOrPut(name) {
+        konst symbols = propertyCache.getOrPut(name) {
             symbolProvider.getTopLevelPropertySymbols(fqName, name)
         }
         for (symbol in symbols) {
@@ -63,7 +63,7 @@ class FirPackageMemberScope(
         }
     }
 
-    override val scopeOwnerLookupNames: List<String> = SmartList(fqName.asString())
+    override konst scopeOwnerLookupNames: List<String> = SmartList(fqName.asString())
 }
 
-val PACKAGE_MEMBER = scopeSessionKey<FqName, FirPackageMemberScope>()
+konst PACKAGE_MEMBER = scopeSessionKey<FqName, FirPackageMemberScope>()

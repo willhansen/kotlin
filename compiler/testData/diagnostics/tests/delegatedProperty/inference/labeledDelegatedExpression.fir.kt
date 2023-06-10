@@ -1,7 +1,7 @@
 import kotlin.reflect.KProperty
 
 class A3 {
-    val a: String by l@ MyProperty()
+    konst a: String by l@ MyProperty()
 
     class MyProperty<T> {}
 

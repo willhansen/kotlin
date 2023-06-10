@@ -6,7 +6,7 @@ interface T1 {
 }
 
 interface T2 {
-    val x: Int
+    konst x: Int
         get() = 1
 }
 

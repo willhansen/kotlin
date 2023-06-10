@@ -9,16 +9,16 @@ interface AssociativeCommonizer<T> {
     fun commonize(first: T, second: T): T?
 }
 
-fun <T> AssociativeCommonizer<T>.commonize(values: List<T>): T? {
-    if (values.isEmpty()) return null
-    if (values.size == 1) return values.first()
-    return values.reduce { acc, next -> commonize(acc, next) ?: return null }
+fun <T> AssociativeCommonizer<T>.commonize(konstues: List<T>): T? {
+    if (konstues.isEmpty()) return null
+    if (konstues.size == 1) return konstues.first()
+    return konstues.reduce { acc, next -> commonize(acc, next) ?: return null }
 }
 
 fun <T : Any> AssociativeCommonizer<T>.asCommonizer(): AssociativeCommonizerAdapter<T> = AssociativeCommonizerAdapter(this)
 
 open class AssociativeCommonizerAdapter<T : Any>(
-    private val commonizer: AssociativeCommonizer<T>
+    private konst commonizer: AssociativeCommonizer<T>
 ) : AbstractStandardCommonizer<T, T>() {
 
     private var _result: T? = null
@@ -30,7 +30,7 @@ open class AssociativeCommonizerAdapter<T : Any>(
     override fun initialize(first: T) = Unit
 
     override fun doCommonizeWith(next: T): Boolean {
-        val currentResult = _result
+        konst currentResult = _result
 
         if (currentResult == null) {
             _result = next
@@ -45,17 +45,17 @@ open class AssociativeCommonizerAdapter<T : Any>(
 fun <T> AssociativeCommonizer<T?>.asNullableCommonizer(): Commonizer<T?, T?> = NullableAssociativeCommonizerAdapter(this)
 
 open class NullableAssociativeCommonizerAdapter<T>(
-    private val commonizer: AssociativeCommonizer<T?>
+    private konst commonizer: AssociativeCommonizer<T?>
 ) : Commonizer<T?, T?> {
 
     private var isInitialized = false
     private var _result: T? = null
 
-    override val result: T?
+    override konst result: T?
         get() = _result
 
     override fun commonizeWith(next: T?): Boolean {
-        val currentResult = _result
+        konst currentResult = _result
 
         if (!isInitialized) {
             _result = next

@@ -10,8 +10,8 @@ public class Build {
 // FILE: main.kt
 import os.Build
 
-annotation class Annotation(val api: Int)
+annotation class Annotation(konst api: Int)
 
 @get:Annotation(api = <expr>Build.VERSION_CODES.CUPCAKE</expr>)
-val versionCheck1: Boolean
+konst versionCheck1: Boolean
     get() = false

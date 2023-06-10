@@ -15,14 +15,14 @@ import java.io.*
 import java.nio.charset.StandardCharsets
 
 class SourceMapBuilderConsumer(
-    private val sourceBaseDir: File,
-    private val mappingConsumer: SourceMapMappingConsumer,
-    private val pathResolver: SourceFilePathResolver,
-    private val provideCurrentModuleContent: Boolean,
-    private val provideExternalModuleContent: Boolean
+    private konst sourceBaseDir: File,
+    private konst mappingConsumer: SourceMapMappingConsumer,
+    private konst pathResolver: SourceFilePathResolver,
+    private konst provideCurrentModuleContent: Boolean,
+    private konst provideExternalModuleContent: Boolean
 ) : SourceLocationConsumer {
 
-    private val sourceStack = mutableListOf<Any?>()
+    private konst sourceStack = mutableListOf<Any?>()
 
     override fun newLine() {
         mappingConsumer.newLine()
@@ -45,10 +45,10 @@ class SourceMapBuilderConsumer(
                 // This branch is only taken on the legacy backend
                 if (sourceInfo.isFakePsiElement) return
                 try {
-                    val (sourceFilePath, startLine, startChar) = PsiUtils.extractLocationFromPsi(sourceInfo, pathResolver)
-                    val psiFile = sourceInfo.containingFile
-                    val file = File(psiFile.viewProvider.virtualFile.path)
-                    val contentSupplier = if (provideCurrentModuleContent) {
+                    konst (sourceFilePath, startLine, startChar) = PsiUtils.extractLocationFromPsi(sourceInfo, pathResolver)
+                    konst psiFile = sourceInfo.containingFile
+                    konst file = File(psiFile.viewProvider.virtualFile.path)
+                    konst contentSupplier = if (provideCurrentModuleContent) {
                         {
                             try {
                                 InputStreamReader(FileInputStream(file), StandardCharsets.UTF_8)
@@ -66,12 +66,12 @@ class SourceMapBuilderConsumer(
             }
 
             is JsLocationWithSource -> {
-                val contentSupplier = if (provideExternalModuleContent) sourceInfo.sourceProvider else {
+                konst contentSupplier = if (provideExternalModuleContent) sourceInfo.sourceProvider else {
                     { null }
                 }
-                val sourceFile = File(sourceInfo.file)
-                val absFile = if (sourceFile.isAbsolute) sourceFile else File(sourceBaseDir, sourceInfo.file)
-                val path = if (absFile.isAbsolute) {
+                konst sourceFile = File(sourceInfo.file)
+                konst absFile = if (sourceFile.isAbsolute) sourceFile else File(sourceBaseDir, sourceInfo.file)
+                konst path = if (absFile.isAbsolute) {
                     try {
                         pathResolver.getPathRelativeToSourceRoots(absFile)
                     } catch (e: IOException) {

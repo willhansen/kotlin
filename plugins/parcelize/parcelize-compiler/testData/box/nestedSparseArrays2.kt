@@ -12,26 +12,26 @@ import android.os.Parcelable
 import android.util.SparseArray
 
 @Parcelize
-class Data(val values: SparseArray<SparseArray<Parcelable>>) : Parcelable
+class Data(konst konstues: SparseArray<SparseArray<Parcelable>>) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val innerArray = SparseArray<Parcelable>()
+    konst innerArray = SparseArray<Parcelable>()
     innerArray.append(20, Bundle())
     var array = SparseArray<SparseArray<Parcelable>>()
     array.append(10, innerArray)
-    val first = Data(array)
+    konst first = Data(array)
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val second = parcelableCreator<Data>().createFromParcel(parcel)
-    assert(second.values.size() == 1)
-    val secondInnerArray = second.values.get(10)
+    konst second = parcelableCreator<Data>().createFromParcel(parcel)
+    assert(second.konstues.size() == 1)
+    konst secondInnerArray = second.konstues.get(10)
     assert(secondInnerArray.size() == 1)
-    val innerBundle = secondInnerArray.get(20)
+    konst innerBundle = secondInnerArray.get(20)
     assert(innerBundle is Bundle)
     assert((innerBundle as Bundle).size() == 0)
 }

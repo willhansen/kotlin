@@ -28,7 +28,7 @@ fun PsiElement?.position(): String {
 }
 
 fun KtSymbol.getNameWithPositionString(): String {
-    return when (val psi = this.psi) {
+    return when (konst psi = this.psi) {
         is KtDeclarationWithBody -> psi.name
         is KtNamedDeclaration -> psi.name
         null -> "null"
@@ -37,7 +37,7 @@ fun KtSymbol.getNameWithPositionString(): String {
 }
 
 fun String.indented(indent: Int): String {
-    val indentString = " ".repeat(indent)
+    konst indentString = " ".repeat(indent)
     return indentString + replace("\n", "\n$indentString")
 }
 

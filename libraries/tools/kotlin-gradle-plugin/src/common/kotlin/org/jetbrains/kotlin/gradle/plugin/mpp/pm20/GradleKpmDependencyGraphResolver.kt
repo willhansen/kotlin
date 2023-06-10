@@ -18,7 +18,7 @@ internal fun configurationToResolveMetadataDependencies(requestingModule: KpmMod
     resolvableMetadataConfiguration(requestingModule as GradleKpmModule)
 
 class GradleKpmDependencyGraphResolver(
-    private val moduleResolver: KpmModuleDependencyResolver
+    private konst moduleResolver: KpmModuleDependencyResolver
 ) : KpmDependencyGraphResolver {
 
     private fun configurationToResolve(requestingModule: GradleKpmModule): Configuration =
@@ -31,7 +31,7 @@ class GradleKpmDependencyGraphResolver(
     }
 
     private fun resolveAsGraph(requestingModule: GradleKpmModule): GradleKpmDependencyGraph {
-        val nodeByModuleId = mutableMapOf<KpmModuleIdentifier, GradleKpmDependencyGraphNode>()
+        konst nodeByModuleId = mutableMapOf<KpmModuleIdentifier, GradleKpmDependencyGraphNode>()
 
         fun getKotlinModuleFromComponentResult(component: ResolvedComponentResult): KpmModule =
             moduleResolver.resolveDependency(requestingModule, component.toKpmModuleDependency())
@@ -41,18 +41,18 @@ class GradleKpmDependencyGraphResolver(
                 )
 
         fun nodeFromModule(componentResult: ResolvedComponentResult, kpmModule: KpmModule): GradleKpmDependencyGraphNode {
-            val id = kpmModule.moduleIdentifier
+            konst id = kpmModule.moduleIdentifier
             return nodeByModuleId.getOrPut(id) {
-                val metadataSourceComponent =
+                konst metadataSourceComponent =
                     (kpmModule as? GradleKpmExternalImportedModule)
                         ?.takeIf { it.hasLegacyMetadataModule }
                         ?.let { (componentResult.dependencies.singleOrNull() as? ResolvedDependencyResult)?.selected }
                         ?: componentResult
 
-                val dependenciesRequestedByModule =
+                konst dependenciesRequestedByModule =
                     kpmModule.fragments.flatMap { fragment -> fragment.declaredModuleDependencies.map { it.moduleIdentifier } }.toSet()
 
-                val resolvedComponentDependencies = metadataSourceComponent.dependencies
+                konst resolvedComponentDependencies = metadataSourceComponent.dependencies
                     .filterIsInstance<ResolvedDependencyResult>()
                     // This filter statement is used to only visit the dependencies of the variant(s) of the requested Kotlin module and not
                     // other variants. This prevents infinite recursion when visiting multiple Kotlin modules within one Gradle components
@@ -60,11 +60,11 @@ class GradleKpmDependencyGraphResolver(
                     .flatMap { dependency -> dependency.requested.toKpmModuleIdentifiers().map { id -> id to dependency.selected } }
                     .toMap()
 
-                val fragmentDependencies = kpmModule.fragments.associateWith { it.declaredModuleDependencies }
+                konst fragmentDependencies = kpmModule.fragments.associateWith { it.declaredModuleDependencies }
 
-                val nodeDependenciesMap = fragmentDependencies.mapValues { (_, deps) ->
+                konst nodeDependenciesMap = fragmentDependencies.mapValues { (_, deps) ->
                     deps.mapNotNull { resolvedComponentDependencies[it.moduleIdentifier] }.map {
-                        val dependencyModule = getKotlinModuleFromComponentResult(it)
+                        konst dependencyModule = getKotlinModuleFromComponentResult(it)
                         nodeFromModule(it, dependencyModule)
                     }
                 }
@@ -86,15 +86,15 @@ class GradleKpmDependencyGraphResolver(
 }
 
 class GradleKpmDependencyGraphNode(
-    override val module: KpmModule,
-    val selectedComponent: ResolvedComponentResult,
+    override konst module: KpmModule,
+    konst selectedComponent: ResolvedComponentResult,
     /** If the Kotlin module description was provided by a different component, such as with legacy publishing layout using *-metadata
      * modules, then this property points to the other component. */
-    val metadataSourceComponent: ResolvedComponentResult?,
-    override val dependenciesByFragment: Map<KpmFragment, Iterable<GradleKpmDependencyGraphNode>>
+    konst metadataSourceComponent: ResolvedComponentResult?,
+    override konst dependenciesByFragment: Map<KpmFragment, Iterable<GradleKpmDependencyGraphNode>>
 ) : KpmDependencyGraphNode(module, dependenciesByFragment)
 
 class GradleKpmDependencyGraph(
-    override val requestingModule: GradleKpmModule,
-    override val root: GradleKpmDependencyGraphNode
+    override konst requestingModule: GradleKpmModule,
+    override konst root: GradleKpmDependencyGraphNode
 ) : KpmDependencyGraphResolution.KpmDependencyGraph(requestingModule, root)

@@ -17,10 +17,10 @@ enum class ExplicitlyMarkedEnum { @SerialName("a") A, B}
 enum class ExplicitlyMarkedEnumCustom { @SerialName("a") A, B}
 
 object EnumSerializer: KSerializer<ExplicitlyMarkedEnumCustom> {
-    override val descriptor = TODO()
-    override fun serialize(encoder: Encoder, value: ExplicitlyMarkedEnumCustom) = TODO()
+    override konst descriptor = TODO()
+    override fun serialize(encoder: Encoder, konstue: ExplicitlyMarkedEnumCustom) = TODO()
     override fun deserialize(decoder: Decoder): ExplicitlyMarkedEnumCustom = TODO()
 }
 
 @Serializable
-data class EnumUsage(val s: SimpleEnum, val m: MarkedNameEnum, val e: ExplicitlyMarkedEnum)
+data class EnumUsage(konst s: SimpleEnum, konst m: MarkedNameEnum, konst e: ExplicitlyMarkedEnum)

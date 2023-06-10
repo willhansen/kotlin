@@ -142,7 +142,7 @@ private func testCallUnitSuspendFun(doSuspend: Bool, doThrow: Bool) throws {
 }
 
 private class WeakRefHolder {
-    weak var value: AnyObject? = nil
+    weak var konstue: AnyObject? = nil
 }
 
 #if NO_GENERICS
@@ -159,10 +159,10 @@ private func callSuspendFunAsync(
 ) throws {
     class C {}
     let capturedByCompletion = C()
-    weakRefToObjectCapturedByCompletion.value = capturedByCompletion
+    weakRefToObjectCapturedByCompletion.konstue = capturedByCompletion
 
     CoroutinesKt.suspendFunAsync(result: nil, continuationHolder: continuationHolder) { _result, _error in
-        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.value)
+        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.konstue)
         completionHandler(_result, _error)
     }
 }
@@ -175,7 +175,7 @@ private func testSuspendFuncAsync(doThrow: Bool) throws {
     let continuationHolder = AnyContinuationHolder()
 
     let weakRefToObjectCapturedByCompletion = WeakRefHolder()
-    try assertTrue(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertTrue(weakRefToObjectCapturedByCompletion.konstue === nil)
     try autoreleasepool {
         try callSuspendFunAsync(
             weakRefToObjectCapturedByCompletion: weakRefToObjectCapturedByCompletion,
@@ -188,7 +188,7 @@ private func testSuspendFuncAsync(doThrow: Bool) throws {
     }
     CoroutinesKt.gc()
     // This assert checks that suspendFunAsync retains the completion handler:
-    try assertFalse(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertFalse(weakRefToObjectCapturedByCompletion.konstue === nil)
 
     try assertEquals(actual: completionCalled, expected: 0)
 
@@ -203,7 +203,7 @@ private func testSuspendFuncAsync(doThrow: Bool) throws {
     } else {
         class C {}
         let expectedResult = C()
-        continuationHolder.resume(value: expectedResult)
+        continuationHolder.resume(konstue: expectedResult)
 
         try assertEquals(actual: completionCalled, expected: 1)
 
@@ -214,7 +214,7 @@ private func testSuspendFuncAsync(doThrow: Bool) throws {
 #if !NOOP_GC
     CoroutinesKt.gc()
     // This assert checks that the completion handler gets properly released after all:
-    try assertTrue(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertTrue(weakRefToObjectCapturedByCompletion.konstue === nil)
 #endif
 }
 
@@ -232,15 +232,15 @@ private func callUnitSuspendFunAsync(
 ) throws {
     class C {}
     let capturedByCompletion = C()
-    weakRefToObjectCapturedByCompletion.value = capturedByCompletion
+    weakRefToObjectCapturedByCompletion.konstue = capturedByCompletion
 #if LEGACY_SUSPEND_UNIT_FUNCTION_EXPORT
     CoroutinesKt.unitSuspendFunAsync(continuationHolder: continuationHolder) { _result, _error in
-        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.value)
+        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.konstue)
         completionHandler(_error)
     }
 #else
     CoroutinesKt.unitSuspendFunAsync(continuationHolder: continuationHolder) { _error in
-        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.value)
+        try! assertSame(actual: capturedByCompletion, expected: weakRefToObjectCapturedByCompletion.konstue)
         completionHandler(_error)
     }
 #endif
@@ -253,7 +253,7 @@ private func testUnitSuspendFuncAsync(doThrow: Bool) throws {
     let continuationHolder = UnitContinuationHolder()
 
     let weakRefToObjectCapturedByCompletion = WeakRefHolder()
-    try assertTrue(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertTrue(weakRefToObjectCapturedByCompletion.konstue === nil)
     try autoreleasepool {
         try callUnitSuspendFunAsync(
             weakRefToObjectCapturedByCompletion: weakRefToObjectCapturedByCompletion,
@@ -265,7 +265,7 @@ private func testUnitSuspendFuncAsync(doThrow: Bool) throws {
     }
     CoroutinesKt.gc()
     // This assert checks that unitSuspendFunAsync retains the completion handler:
-    try assertFalse(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertFalse(weakRefToObjectCapturedByCompletion.konstue === nil)
 
     try assertEquals(actual: completionCalled, expected: 0)
 
@@ -277,7 +277,7 @@ private func testUnitSuspendFuncAsync(doThrow: Bool) throws {
 
         try assertSame(actual: error?.kotlinException as AnyObject?, expected: exception)
     } else {
-        continuationHolder.resume(value: KotlinUnit.shared)
+        continuationHolder.resume(konstue: KotlinUnit.shared)
 
         try assertEquals(actual: completionCalled, expected: 1)
 
@@ -287,7 +287,7 @@ private func testUnitSuspendFuncAsync(doThrow: Bool) throws {
 #if !NOOP_GC
     CoroutinesKt.gc()
     // This assert checks that the completion handler gets properly released after all:
-    try assertTrue(weakRefToObjectCapturedByCompletion.value === nil)
+    try assertTrue(weakRefToObjectCapturedByCompletion.konstue === nil)
 #endif
 }
 
@@ -447,42 +447,42 @@ private func testOverride() throws {
 private class SwiftSuspendBridge : AbstractSuspendBridge {
     class E : Error {}
 
-    override func intAsAny(value: KotlinInt, completionHandler: @escaping (KotlinInt?, Error?) -> Void) {
-        completionHandler(value, nil)
+    override func intAsAny(konstue: KotlinInt, completionHandler: @escaping (KotlinInt?, Error?) -> Void) {
+        completionHandler(konstue, nil)
     }
 
 #if LEGACY_SUSPEND_UNIT_FUNCTION_EXPORT
-    override func unit(value: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
+    override func unit(konstue: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
         completionHandler(KotlinUnit(), nil)
     }
 #else
-    override func unit(value: KotlinInt, completionHandler: @escaping (Error?) -> Void) {
+    override func unit(konstue: KotlinInt, completionHandler: @escaping (Error?) -> Void) {
         completionHandler(nil)
     }
 #endif
 
-    override func unitAsAny(value: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
+    override func unitAsAny(konstue: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
         completionHandler(KotlinUnit(), nil)
     }
 
-    override func nullableUnit(value: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
+    override func nullableUnit(konstue: KotlinInt, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
         completionHandler(KotlinUnit(), nil)
     }
 
-    override func nothingAsInt(value: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
+    override func nothingAsInt(konstue: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
         completionHandler(nil, E())
     }
 
-    override func nothingAsAny(value: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
+    override func nothingAsAny(konstue: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
         completionHandler(nil, E())
     }
 
 #if LEGACY_SUSPEND_UNIT_FUNCTION_EXPORT
-    override func nothingAsUnit(value: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
+    override func nothingAsUnit(konstue: KotlinInt, completionHandler: @escaping (KotlinNothing?, Error?) -> Void) {
         completionHandler(nil, E())
     }
 #else
-    override func nothingAsUnit(value: KotlinInt, completionHandler: @escaping (Error?) -> Void) {
+    override func nothingAsUnit(konstue: KotlinInt, completionHandler: @escaping (Error?) -> Void) {
         completionHandler(E())
     }
 #endif

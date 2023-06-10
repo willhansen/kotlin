@@ -52,19 +52,19 @@ object A {
 }
 
 fun box() : String {
-    val p = A.test()
+    konst p = A.test()
     if (p != 3) return "fail 1: $p"
 
-    val p2 = A.test2()
-    val holderValue = A.holder
+    konst p2 = A.test2()
+    konst holderValue = A.holder
     if (p2 != 3 || holderValue != "getR2getR2getR2getR2") return "fail 2:  $p2 ${holderValue}"
 
     A.holder = ""
-    val p3 = A.test3()
+    konst p3 = A.test3()
     if (p3 != 3 || A.holder != "setR3setR3") return "fail 3:  $p3 ${A.holder}"
 
     A.holder = ""
-    val p4 = A.test4()
+    konst p4 = A.test4()
     if (p4 != 3 || A.holder != "getR4setR4:getR4setR4getR4getR4") return "fail 4:  $p4 ${A.holder}"
 
     return "OK"

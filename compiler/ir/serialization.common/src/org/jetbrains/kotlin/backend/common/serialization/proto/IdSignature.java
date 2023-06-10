@@ -30,7 +30,7 @@ public final class IdSignature extends
   private IdSignature(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -138,10 +138,10 @@ public final class IdSignature extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -159,7 +159,7 @@ public final class IdSignature extends
     public IdSignature parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IdSignature(input, extensionRegistry);
     }
   };
@@ -182,12 +182,12 @@ public final class IdSignature extends
     LOCAL_SIG(6),
     FILE_SIG(7),
     IDSIG_NOT_SET(0);
-    private int value = 0;
-    private IdSigCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private IdSigCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static IdSigCase valueOf(int value) {
-      switch (value) {
+    public static IdSigCase konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return PUBLIC_SIG;
         case 2: return PRIVATE_SIG;
         case 3: return ACCESSOR_SIG;
@@ -201,13 +201,13 @@ public final class IdSignature extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public IdSigCase
   getIdSigCase() {
-    return IdSigCase.valueOf(
+    return IdSigCase.konstueOf(
         idSigCase_);
   }
 
@@ -437,23 +437,23 @@ public final class IdSignature extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parseFrom(java.io.InputStream input)
@@ -637,7 +637,7 @@ public final class IdSignature extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IdSignature) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -651,7 +651,7 @@ public final class IdSignature extends
     private java.lang.Object idSig_;
     public IdSigCase
         getIdSigCase() {
-      return IdSigCase.valueOf(
+      return IdSigCase.konstueOf(
           idSigCase_);
     }
 
@@ -681,11 +681,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature public_sig = 1;</code>
      */
-    public Builder setPublicSig(org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature value) {
-      if (value == null) {
+    public Builder setPublicSig(org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 1;
       return this;
@@ -703,13 +703,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature public_sig = 1;</code>
      */
-    public Builder mergePublicSig(org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature value) {
+    public Builder mergePublicSig(org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature konstue) {
       if (idSigCase_ == 1 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.CommonIdSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 1;
@@ -745,11 +745,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature private_sig = 2;</code>
      */
-    public Builder setPrivateSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature value) {
-      if (value == null) {
+    public Builder setPrivateSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 2;
       return this;
@@ -767,13 +767,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature private_sig = 2;</code>
      */
-    public Builder mergePrivateSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature value) {
+    public Builder mergePrivateSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature konstue) {
       if (idSigCase_ == 2 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.FileLocalIdSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 2;
@@ -809,11 +809,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature accessor_sig = 3;</code>
      */
-    public Builder setAccessorSig(org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature value) {
-      if (value == null) {
+    public Builder setAccessorSig(org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 3;
       return this;
@@ -831,13 +831,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature accessor_sig = 3;</code>
      */
-    public Builder mergeAccessorSig(org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature value) {
+    public Builder mergeAccessorSig(org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature konstue) {
       if (idSigCase_ == 3 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.AccessorIdSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 3;
@@ -873,9 +873,9 @@ public final class IdSignature extends
     /**
      * <code>optional int32 scoped_local_sig = 4;</code>
      */
-    public Builder setScopedLocalSig(int value) {
+    public Builder setScopedLocalSig(int konstue) {
       idSigCase_ = 4;
-      idSig_ = value;
+      idSig_ = konstue;
       
       return this;
     }
@@ -909,11 +909,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature composite_sig = 5;</code>
      */
-    public Builder setCompositeSig(org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature value) {
-      if (value == null) {
+    public Builder setCompositeSig(org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 5;
       return this;
@@ -931,13 +931,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature composite_sig = 5;</code>
      */
-    public Builder mergeCompositeSig(org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature value) {
+    public Builder mergeCompositeSig(org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature konstue) {
       if (idSigCase_ == 5 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.CompositeSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 5;
@@ -973,11 +973,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature local_sig = 6;</code>
      */
-    public Builder setLocalSig(org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature value) {
-      if (value == null) {
+    public Builder setLocalSig(org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 6;
       return this;
@@ -995,13 +995,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature local_sig = 6;</code>
      */
-    public Builder mergeLocalSig(org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature value) {
+    public Builder mergeLocalSig(org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature konstue) {
       if (idSigCase_ == 6 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.LocalSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 6;
@@ -1037,11 +1037,11 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature file_sig = 7;</code>
      */
-    public Builder setFileSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature value) {
-      if (value == null) {
+    public Builder setFileSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      idSig_ = value;
+      idSig_ = konstue;
 
       idSigCase_ = 7;
       return this;
@@ -1059,13 +1059,13 @@ public final class IdSignature extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature file_sig = 7;</code>
      */
-    public Builder mergeFileSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature value) {
+    public Builder mergeFileSig(org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature konstue) {
       if (idSigCase_ == 7 &&
           idSig_ != org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature.getDefaultInstance()) {
         idSig_ = org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.FileSignature) idSig_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        idSig_ = value;
+        idSig_ = konstue;
       }
 
       idSigCase_ = 7;

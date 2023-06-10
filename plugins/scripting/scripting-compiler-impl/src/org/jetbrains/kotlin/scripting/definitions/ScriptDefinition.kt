@@ -22,36 +22,36 @@ import kotlin.script.experimental.jvm.jvm
 abstract class ScriptDefinition : UserDataHolderBase() {
 
     @Deprecated("Use configurations instead")
-    abstract val legacyDefinition: KotlinScriptDefinition
-    abstract val hostConfiguration: ScriptingHostConfiguration
-    abstract val compilationConfiguration: ScriptCompilationConfiguration
-    abstract val evaluationConfiguration: ScriptEvaluationConfiguration?
+    abstract konst legacyDefinition: KotlinScriptDefinition
+    abstract konst hostConfiguration: ScriptingHostConfiguration
+    abstract konst compilationConfiguration: ScriptCompilationConfiguration
+    abstract konst ekonstuationConfiguration: ScriptEkonstuationConfiguration?
 
     abstract fun isScript(script: SourceCode): Boolean
-    abstract val fileExtension: String
-    abstract val name: String
-    open val defaultClassName: String = "Script"
+    abstract konst fileExtension: String
+    abstract konst name: String
+    open konst defaultClassName: String = "Script"
 
     // TODO: used in settings, find out the reason and refactor accordingly
-    abstract val definitionId: String
+    abstract konst definitionId: String
 
-    abstract val contextClassLoader: ClassLoader?
+    abstract konst contextClassLoader: ClassLoader?
 
     // Target platform for script, ex. "JVM", "JS", "NATIVE"
-    open val platform: String
+    open konst platform: String
         get() = "JVM"
 
-    open val isDefault = false
+    open konst isDefault = false
 
     // Store IDE-related settings in script definition
     var order: Int = Integer.MAX_VALUE
-    open val canAutoReloadScriptConfigurationsBeSwitchedOff: Boolean get() = true
-    open val canDefinitionBeSwitchedOff: Boolean get() = true
+    open konst canAutoReloadScriptConfigurationsBeSwitchedOff: Boolean get() = true
+    open konst canDefinitionBeSwitchedOff: Boolean get() = true
 
-    abstract val baseClassType: KotlinType
-    open val defaultCompilerOptions: Iterable<String> = emptyList()
-    abstract val compilerOptions: Iterable<String>
-    abstract val annotationsForSamWithReceivers: List<String>
+    abstract konst baseClassType: KotlinType
+    open konst defaultCompilerOptions: Iterable<String> = emptyList()
+    abstract konst compilerOptions: Iterable<String>
+    abstract konst annotationsForSamWithReceivers: List<String>
 
     @Suppress("DEPRECATION")
     inline fun <reified T : KotlinScriptDefinition> asLegacyOrNull(): T? =
@@ -63,20 +63,20 @@ abstract class ScriptDefinition : UserDataHolderBase() {
 
     @Suppress("OverridingDeprecatedMember", "DEPRECATION", "OVERRIDE_DEPRECATION")
     open class FromLegacy(
-        override val hostConfiguration: ScriptingHostConfiguration,
-        override val legacyDefinition: KotlinScriptDefinition,
-        override val defaultCompilerOptions: Iterable<String> = emptyList()
+        override konst hostConfiguration: ScriptingHostConfiguration,
+        override konst legacyDefinition: KotlinScriptDefinition,
+        override konst defaultCompilerOptions: Iterable<String> = emptyList()
     ) : ScriptDefinition() {
 
-        override val compilationConfiguration: ScriptCompilationConfiguration by lazy {
+        override konst compilationConfiguration: ScriptCompilationConfiguration by lazy {
             ScriptCompilationConfigurationFromDefinition(
                 hostConfiguration,
                 legacyDefinition
             )
         }
 
-        override val evaluationConfiguration by lazy {
-            ScriptEvaluationConfigurationFromDefinition(
+        override konst ekonstuationConfiguration by lazy {
+            ScriptEkonstuationConfigurationFromDefinition(
                 hostConfiguration,
                 legacyDefinition
             )
@@ -84,25 +84,25 @@ abstract class ScriptDefinition : UserDataHolderBase() {
 
         override fun isScript(script: SourceCode): Boolean = script.name?.let { legacyDefinition.isScript(it) } ?: isDefault
 
-        override val fileExtension: String get() = legacyDefinition.fileExtension
+        override konst fileExtension: String get() = legacyDefinition.fileExtension
 
-        override val name: String get() = legacyDefinition.name
+        override konst name: String get() = legacyDefinition.name
 
-        override val definitionId: String get() = legacyDefinition::class.qualifiedName ?: "unknown"
+        override konst definitionId: String get() = legacyDefinition::class.qualifiedName ?: "unknown"
 
-        override val platform: String
+        override konst platform: String
             get() = legacyDefinition.platform
 
-        override val contextClassLoader: ClassLoader?
+        override konst contextClassLoader: ClassLoader?
             get() = legacyDefinition.template.java.classLoader
 
-        override val baseClassType: KotlinType
+        override konst baseClassType: KotlinType
             get() = KotlinType(legacyDefinition.template)
 
-        override val compilerOptions: Iterable<String>
+        override konst compilerOptions: Iterable<String>
             get() = legacyDefinition.additionalCompilerArguments ?: emptyList()
 
-        override val annotationsForSamWithReceivers: List<String>
+        override konst annotationsForSamWithReceivers: List<String>
             get() = legacyDefinition.annotationsForSamWithReceivers
 
         override fun equals(other: Any?): Boolean = this === other || legacyDefinition == (other as? FromLegacy)?.legacyDefinition
@@ -128,79 +128,79 @@ abstract class ScriptDefinition : UserDataHolderBase() {
     abstract class FromConfigurationsBase() : ScriptDefinition() {
 
         @Suppress("OverridingDeprecatedMember", "DEPRECATION", "OVERRIDE_DEPRECATION")
-        override val legacyDefinition by lazy {
+        override konst legacyDefinition by lazy {
             KotlinScriptDefinitionAdapterFromNewAPI(
                 compilationConfiguration,
                 hostConfiguration
             )
         }
 
-        val filePathPattern by lazy {
+        konst filePathPattern by lazy {
             compilationConfiguration[ScriptCompilationConfiguration.filePathPattern]?.takeIf { it.isNotBlank() }
         }
 
         override fun isScript(script: SourceCode): Boolean {
-            val extension = ".$fileExtension"
-            val location = script.locationId ?: return false
+            konst extension = ".$fileExtension"
+            konst location = script.locationId ?: return false
             return (script.name?.endsWith(extension) == true || location.endsWith(extension)) && filePathPattern?.let {
                 Regex(it).matches(FileUtilRt.toSystemIndependentName(location))
             } != false
         }
 
-        override val fileExtension: String get() = compilationConfiguration[ScriptCompilationConfiguration.fileExtension]!!
+        override konst fileExtension: String get() = compilationConfiguration[ScriptCompilationConfiguration.fileExtension]!!
 
-        override val name: String
+        override konst name: String
             get() =
                 compilationConfiguration[ScriptCompilationConfiguration.displayName]?.takeIf { it.isNotBlank() }
                     ?: compilationConfiguration[ScriptCompilationConfiguration.baseClass]!!.typeName.substringAfterLast('.')
 
-        override val defaultClassName: String
+        override konst defaultClassName: String
             get() = compilationConfiguration[ScriptCompilationConfiguration.defaultIdentifier] ?: super.defaultClassName
 
-        override val definitionId: String get() = compilationConfiguration[ScriptCompilationConfiguration.baseClass]!!.typeName
+        override konst definitionId: String get() = compilationConfiguration[ScriptCompilationConfiguration.baseClass]!!.typeName
 
-        override val contextClassLoader: ClassLoader? by lazy {
+        override konst contextClassLoader: ClassLoader? by lazy {
             compilationConfiguration[ScriptCompilationConfiguration.baseClass]?.fromClass?.java?.classLoader
                 ?: hostConfiguration[ScriptingHostConfiguration.jvm.baseClassLoader]
         }
 
-        override val platform: String
+        override konst platform: String
             get() = compilationConfiguration[ScriptCompilationConfiguration.platform] ?: super.platform
 
-        override val baseClassType: KotlinType
+        override konst baseClassType: KotlinType
             get() = compilationConfiguration[ScriptCompilationConfiguration.baseClass]!!
 
-        override val compilerOptions: Iterable<String>
+        override konst compilerOptions: Iterable<String>
             get() = compilationConfiguration[ScriptCompilationConfiguration.compilerOptions].orEmpty()
 
-        override val annotationsForSamWithReceivers: List<String>
+        override konst annotationsForSamWithReceivers: List<String>
             get() = compilationConfiguration[ScriptCompilationConfiguration.annotationsForSamWithReceivers].orEmpty().map { it.typeName }
 
         override fun equals(other: Any?): Boolean = this === other ||
                 (other as? FromConfigurationsBase)?.let {
-                    compilationConfiguration == it.compilationConfiguration && evaluationConfiguration == it.evaluationConfiguration
+                    compilationConfiguration == it.compilationConfiguration && ekonstuationConfiguration == it.ekonstuationConfiguration
                 } == true
 
-        override fun hashCode(): Int = compilationConfiguration.hashCode() + 37 * (evaluationConfiguration?.hashCode() ?: 0)
+        override fun hashCode(): Int = compilationConfiguration.hashCode() + 37 * (ekonstuationConfiguration?.hashCode() ?: 0)
     }
 
     open class FromConfigurations(
-        override val hostConfiguration: ScriptingHostConfiguration,
-        override val compilationConfiguration: ScriptCompilationConfiguration,
-        override val evaluationConfiguration: ScriptEvaluationConfiguration?,
-        override val defaultCompilerOptions: Iterable<String> = emptyList()
+        override konst hostConfiguration: ScriptingHostConfiguration,
+        override konst compilationConfiguration: ScriptCompilationConfiguration,
+        override konst ekonstuationConfiguration: ScriptEkonstuationConfiguration?,
+        override konst defaultCompilerOptions: Iterable<String> = emptyList()
     ) : FromConfigurationsBase()
 
     open class FromNewDefinition(
-        private val baseHostConfiguration: ScriptingHostConfiguration,
-        private val definition: kotlin.script.experimental.host.ScriptDefinition,
-        override val defaultCompilerOptions: Iterable<String> = emptyList()
+        private konst baseHostConfiguration: ScriptingHostConfiguration,
+        private konst definition: kotlin.script.experimental.host.ScriptDefinition,
+        override konst defaultCompilerOptions: Iterable<String> = emptyList()
     ) : FromConfigurationsBase() {
-        override val hostConfiguration: ScriptingHostConfiguration
+        override konst hostConfiguration: ScriptingHostConfiguration
             get() = definition.compilationConfiguration[ScriptCompilationConfiguration.hostConfiguration] ?: baseHostConfiguration
 
-        override val compilationConfiguration: ScriptCompilationConfiguration get() = definition.compilationConfiguration
-        override val evaluationConfiguration: ScriptEvaluationConfiguration get() = definition.evaluationConfiguration
+        override konst compilationConfiguration: ScriptCompilationConfiguration get() = definition.compilationConfiguration
+        override konst ekonstuationConfiguration: ScriptEkonstuationConfiguration get() = definition.ekonstuationConfiguration
     }
 
     open class FromTemplate(
@@ -219,9 +219,9 @@ abstract class ScriptDefinition : UserDataHolderBase() {
             object : FromConfigurations(
                 hostConfiguration,
                 ScriptCompilationConfigurationFromDefinition(hostConfiguration, StandardScriptDefinition),
-                ScriptEvaluationConfigurationFromDefinition(hostConfiguration, StandardScriptDefinition)
+                ScriptEkonstuationConfigurationFromDefinition(hostConfiguration, StandardScriptDefinition)
             ) {
-                override val isDefault = true
+                override konst isDefault = true
             }
     }
 }

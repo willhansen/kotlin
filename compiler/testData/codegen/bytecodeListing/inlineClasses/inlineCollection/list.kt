@@ -1,7 +1,7 @@
 // IGNORE_ANNOTATIONS
 
-inline class InlineList<T>(private val list: List<T>) : List<T> {
-    override val size: Int get() = list.size
+inline class InlineList<T>(private konst list: List<T>) : List<T> {
+    override konst size: Int get() = list.size
     override fun contains(element: T): Boolean = list.contains(element)
     override fun containsAll(elements: Collection<T>): Boolean = list.containsAll(elements)
     override fun get(index: Int): T = list[index]

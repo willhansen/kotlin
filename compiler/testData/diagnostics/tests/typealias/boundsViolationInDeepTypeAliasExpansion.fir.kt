@@ -10,7 +10,7 @@ fun test2(x: TC2<Number, Collection<Int>>) {}
 fun test3(x: TC2<Number, List<Int>>) {}
 fun test4(x: TC2<Number, <!UPPER_BOUND_VIOLATED!>List<Any><!>>) {}
 
-val test5 = TC2<Number, Collection<Number>>()
-val test6 = TC2<Number, Collection<Int>>()
-val test7 = TC2<Number, List<Int>>()
-val test8 = TC2<Number, <!UPPER_BOUND_VIOLATED!>List<Any><!>>()
+konst test5 = TC2<Number, Collection<Number>>()
+konst test6 = TC2<Number, Collection<Int>>()
+konst test7 = TC2<Number, List<Int>>()
+konst test8 = TC2<Number, <!UPPER_BOUND_VIOLATED!>List<Any><!>>()

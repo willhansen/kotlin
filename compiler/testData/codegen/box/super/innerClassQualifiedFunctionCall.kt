@@ -3,7 +3,7 @@ interface T {
 }
 
 open class A {
-    open val foo: String = "OK"
+    open konst foo: String = "OK"
     open fun bar(): String = "OK"
     open fun boo(): String = "OK"
 }
@@ -12,7 +12,7 @@ open class B : A(), T {
     override fun bar(): String = "B"
     override fun baz(): String = "B.baz"
     inner class E {
-        val foo: String = super<A>@B.foo
+        konst foo: String = super<A>@B.foo
         fun bar() = super<A>@B.bar() + super@B.bar() + super@B.baz()
     }
 }
@@ -21,7 +21,7 @@ class C : B() {
     override fun bar(): String = "C"
     override fun boo(): String = "C"
     inner class D {
-        val foo: String = super<B>@C.foo
+        konst foo: String = super<B>@C.foo
         fun bar() = super<B>@C.bar() + super<B>@C.boo()
     }
 }

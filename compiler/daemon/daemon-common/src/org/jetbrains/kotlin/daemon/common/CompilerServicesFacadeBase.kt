@@ -28,7 +28,7 @@ interface CompilerServicesFacadeBase : Remote {
     fun report(category: Int, severity: Int, message: String?, attachment: Serializable?)
 }
 
-enum class ReportCategory(val code: Int) {
+enum class ReportCategory(konst code: Int) {
     COMPILER_MESSAGE(0),
     EXCEPTION(1),
     DAEMON_MESSAGE(2),
@@ -37,11 +37,11 @@ enum class ReportCategory(val code: Int) {
 
     companion object {
         fun fromCode(code: Int): ReportCategory? =
-                ReportCategory.values().firstOrNull { it.code == code }
+                ReportCategory.konstues().firstOrNull { it.code == code }
     }
 }
 
-enum class ReportSeverity(val code: Int) {
+enum class ReportSeverity(konst code: Int) {
     ERROR(0),
     WARNING(1),
     INFO(2),
@@ -49,7 +49,7 @@ enum class ReportSeverity(val code: Int) {
 
     companion object {
         fun fromCode(code: Int): ReportSeverity {
-            return values().firstOrNull { it.code == code } ?: error("Can't find a matching ReportSeverity with code = $code")
+            return konstues().firstOrNull { it.code == code } ?: error("Can't find a matching ReportSeverity with code = $code")
         }
     }
 }

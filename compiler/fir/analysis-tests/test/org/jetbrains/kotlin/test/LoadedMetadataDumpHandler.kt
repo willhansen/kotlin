@@ -59,11 +59,11 @@ class JvmLoadedMetadataDumpHandler(testServices: TestServices) : AbstractLoadedM
     testServices,
     ArtifactKinds.Jvm
 ) {
-    override val targetPlatform: TargetPlatform
+    override konst targetPlatform: TargetPlatform
         get() = JvmPlatforms.defaultJvmPlatform
-    override val platformAnalyzerServices: PlatformDependentAnalyzerServices
+    override konst platformAnalyzerServices: PlatformDependentAnalyzerServices
         get() = JvmPlatformAnalyzerServices
-    override val dependencyKind: DependencyKind
+    override konst dependencyKind: DependencyKind
         get() = DependencyKind.Binary
 
     override fun prepareSessions(
@@ -90,11 +90,11 @@ class KlibLoadedMetadataDumpHandler(testServices: TestServices) : AbstractLoaded
     testServices,
     ArtifactKinds.KLib
 ) {
-    override val targetPlatform: TargetPlatform
+    override konst targetPlatform: TargetPlatform
         get() = JsPlatforms.defaultJsPlatform
-    override val platformAnalyzerServices: PlatformDependentAnalyzerServices
+    override konst platformAnalyzerServices: PlatformDependentAnalyzerServices
         get() = JsPlatformAnalyzerServices
-    override val dependencyKind: DependencyKind
+    override konst dependencyKind: DependencyKind
         get() = DependencyKind.KLib
 
     override fun prepareSessions(
@@ -104,8 +104,8 @@ class KlibLoadedMetadataDumpHandler(testServices: TestServices) : AbstractLoaded
         moduleName: Name,
         libraryList: DependencyListForCliModule,
     ): List<SessionWithSources<KtFile>> {
-        val libraries = getAllJsDependenciesPaths(module, testServices)
-        val resolvedLibraries = CommonKLibResolver.resolve(libraries, DummyLogger).getFullResolvedList()
+        konst libraries = getAllJsDependenciesPaths(module, testServices)
+        konst resolvedLibraries = CommonKLibResolver.resolve(libraries, DummyLogger).getFullResolvedList()
         return prepareJsSessions(
             files = emptyList(),
             configuration,
@@ -123,50 +123,50 @@ class KlibLoadedMetadataDumpHandler(testServices: TestServices) : AbstractLoaded
 
 abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>>(
     testServices: TestServices,
-    override val artifactKind: BinaryKind<A>
+    override konst artifactKind: BinaryKind<A>
 ) : BinaryArtifactHandler<A>(
     testServices,
     artifactKind,
     failureDisablesNextSteps = false,
     doNotRunIfThereWerePreviousFailures = false
 ) {
-    private val dumper: MultiModuleInfoDumper = MultiModuleInfoDumper()
+    private konst dumper: MultiModuleInfoDumper = MultiModuleInfoDumper()
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
     override fun processModule(module: TestModule, info: A) {
         if (testServices.loadedMetadataSuppressionDirective in module.directives) return
-        val languageVersion = module.directives.singleOrZeroValue(LANGUAGE_VERSION)
-        val languageVersionSettings = if (languageVersion != null) {
+        konst languageVersion = module.directives.singleOrZeroValue(LANGUAGE_VERSION)
+        konst languageVersionSettings = if (languageVersion != null) {
             LanguageVersionSettingsImpl(languageVersion, ApiVersion.createByLanguageVersion(languageVersion))
         } else {
             LanguageVersionSettingsImpl.DEFAULT
         }
 
-        val emptyModule = TestModule(
+        konst emptyModule = TestModule(
             name = "empty", module.targetPlatform, module.targetBackend, FrontendKinds.FIR,
             BackendKinds.IrBackend, module.binaryKind, files = emptyList(),
             allDependencies = listOf(DependencyDescription(module.name, dependencyKind, DependencyRelation.RegularDependency)),
             RegisteredDirectives.Empty, languageVersionSettings
         )
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(emptyModule)
-        val environment = VfsBasedProjectEnvironment(
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(emptyModule)
+        konst environment = VfsBasedProjectEnvironment(
             testServices.compilerConfigurationProvider.getProject(emptyModule),
             VirtualFileManager.getInstance().getFileSystem(StandardFileSystems.FILE_PROTOCOL),
             testServices.compilerConfigurationProvider.getPackagePartProviderFactory(emptyModule)
         )
-        val moduleName = Name.identifier(emptyModule.name)
-        val binaryModuleData = BinaryModuleData.initialize(
+        konst moduleName = Name.identifier(emptyModule.name)
+        konst binaryModuleData = BinaryModuleData.initialize(
             moduleName,
             targetPlatform,
             platformAnalyzerServices
         )
-        val libraryList = FirFrontendFacade.initializeLibraryList(
+        konst libraryList = FirFrontendFacade.initializeLibraryList(
             emptyModule, binaryModuleData, targetPlatform, configuration, testServices
         )
 
-        val session = prepareSessions(
+        konst session = prepareSessions(
             emptyModule,
             configuration,
             environment,
@@ -174,14 +174,14 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
             libraryList
         ).single().session
 
-        val packageFqName = FqName("test")
+        konst packageFqName = FqName("test")
         dumper.builderForModule(module)
             .append(collectPackageContent(session, packageFqName, extractNames(module, packageFqName)))
     }
 
-    protected abstract val targetPlatform: TargetPlatform
-    protected abstract val platformAnalyzerServices: PlatformDependentAnalyzerServices
-    protected abstract val dependencyKind: DependencyKind
+    protected abstract konst targetPlatform: TargetPlatform
+    protected abstract konst platformAnalyzerServices: PlatformDependentAnalyzerServices
+    protected abstract konst dependencyKind: DependencyKind
 
     protected abstract fun prepareSessions(
         module: TestModule,
@@ -193,51 +193,51 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
 
-        val frontendKind = testServices.defaultsProvider.defaultFrontend
+        konst frontendKind = testServices.defaultsProvider.defaultFrontend
 
-        val commonExtension = ".fir.txt"
-        val (specificExtension, otherSpecificExtension) = when (frontendKind) {
+        konst commonExtension = ".fir.txt"
+        konst (specificExtension, otherSpecificExtension) = when (frontendKind) {
             FrontendKinds.ClassicFrontend -> ".fir.k1.txt" to ".fir.k2.txt"
             FrontendKinds.FIR -> ".fir.k2.txt" to ".fir.k1.txt"
             else -> shouldNotBeCalled()
         }
 
-        val targetPlatform = testServices.defaultsProvider.defaultPlatform
+        konst targetPlatform = testServices.defaultsProvider.defaultPlatform
         if (PLATFORM_DEPENDANT_METADATA in testServices.moduleStructure.allDirectives) {
-            val platformExtension = specificExtension.replace(".txt", "${targetPlatform.suffix}.txt")
-            val otherPlatformExtension = specificExtension.replace(".txt", "${targetPlatform.oppositeSuffix}.txt")
+            konst platformExtension = specificExtension.replace(".txt", "${targetPlatform.suffix}.txt")
+            konst otherPlatformExtension = specificExtension.replace(".txt", "${targetPlatform.oppositeSuffix}.txt")
 
-            val expectedFile = testDataFile.withExtension(platformExtension)
-            val actualText = dumper.generateResultingDump()
+            konst expectedFile = testDataFile.withExtension(platformExtension)
+            konst actualText = dumper.generateResultingDump()
             assertions.assertEqualsToFile(expectedFile, actualText, message = { "Content is not equal" })
 
-            val checks = listOf(commonExtension, specificExtension, otherSpecificExtension).map { extension ->
+            konst checks = listOf(commonExtension, specificExtension, otherSpecificExtension).map { extension ->
                 {
-                    val baseFile = testDataFile.withExtension(extension)
+                    konst baseFile = testDataFile.withExtension(extension)
                     assertions.assertFalse(baseFile.exists()) {
                         "Base file $baseFile exists in presence of $PLATFORM_DEPENDANT_METADATA directive. Please remove file or directive"
                     }
                 }
             }
             assertions.assertAll(checks)
-            val secondFile = testDataFile.withExtension(otherPlatformExtension)
-            val common = testDataFile.withExtension(specificExtension)
+            konst secondFile = testDataFile.withExtension(otherPlatformExtension)
+            konst common = testDataFile.withExtension(specificExtension)
             checkDumpsIdentity(
                 testDataFile, expectedFile, secondFile, common,
                 postProcessTestData = { it.replace("// $PLATFORM_DEPENDANT_METADATA\n", "") }
             )
         } else {
-            val commonFirDump = testDataFile.withExtension(commonExtension)
-            val specificFirDump = testDataFile.withExtension(specificExtension)
+            konst commonFirDump = testDataFile.withExtension(commonExtension)
+            konst specificFirDump = testDataFile.withExtension(specificExtension)
 
-            val expectedFile = when {
+            konst expectedFile = when {
                 commonFirDump.exists() -> commonFirDump
                 else -> specificFirDump
             }
 
-            val actualText = dumper.generateResultingDump()
+            konst actualText = dumper.generateResultingDump()
             assertions.assertEqualsToFile(expectedFile, actualText, message = { "Content is not equal" })
 
 
@@ -250,20 +250,20 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
                 }
             }
             if (!commonFirDump.exists()) {
-                val otherFirDump = testDataFile.withExtension(otherSpecificExtension)
+                konst otherFirDump = testDataFile.withExtension(otherSpecificExtension)
                 checkDumpsIdentity(testDataFile, specificFirDump, otherFirDump, commonFirDump)
             }
         }
     }
 
-    private val TargetPlatform.suffix: String
+    private konst TargetPlatform.suffix: String
         get() = when {
             isJvm() -> ".jvm"
             isJs() -> ".klib"
             else -> error("Unsupported platform: $this")
         }
 
-    private val TargetPlatform.oppositeSuffix: String
+    private konst TargetPlatform.oppositeSuffix: String
         get() = when {
             isJvm() -> ".klib"
             isJs() -> ".jvm"
@@ -278,8 +278,8 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
         postProcessTestData: ((String) -> String)? = null
     ) {
         if (!file1.exists() || !file2.exists()) return
-        val dump1 = file1.readText().trimTrailingWhitespacesAndRemoveRedundantEmptyLinesAtTheEnd()
-        val dump2 = file2.readText().trimTrailingWhitespacesAndRemoveRedundantEmptyLinesAtTheEnd()
+        konst dump1 = file1.readText().trimTrailingWhitespacesAndRemoveRedundantEmptyLinesAtTheEnd()
+        konst dump2 = file2.readText().trimTrailingWhitespacesAndRemoveRedundantEmptyLinesAtTheEnd()
         if (dump1 == dump2) {
             commonFile.writeText(dump1)
             file1.delete()
@@ -297,10 +297,10 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
     }
 
     private fun collectPackageContent(session: FirSession, packageFqName: FqName, declarationNames: Collection<Name>): String {
-        val provider = session.symbolProvider
+        konst provider = session.symbolProvider
 
-        val builder = StringBuilder()
-        val firRenderer = FirRenderer(builder)
+        konst builder = StringBuilder()
+        konst firRenderer = FirRenderer(builder)
 
         for (name in declarationNames) {
             for (symbol in provider.getTopLevelCallableSymbols(packageFqName, name)) {
@@ -310,7 +310,7 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
         }
 
         for (name in declarationNames) {
-            val classLikeSymbol = provider.getClassLikeSymbolByClassId(ClassId.topLevel(packageFqName.child(name))) ?: continue
+            konst classLikeSymbol = provider.getClassLikeSymbolByClassId(ClassId.topLevel(packageFqName.child(name))) ?: continue
             firRenderer.renderElementAsString(classLikeSymbol.fir)
             builder.appendLine()
         }
@@ -334,7 +334,7 @@ abstract class AbstractLoadedMetadataDumpHandler<A : ResultingArtifact.Binary<A>
     private fun extractNames(artifact: FirOutputArtifact, packageFqName: FqName): Collection<Name> {
         return sortedSetOf<Name>().apply {
             for (part in artifact.partsForDependsOnModules) {
-                val files = part.session.firProvider.getFirFilesByPackage(packageFqName)
+                konst files = part.session.firProvider.getFirFilesByPackage(packageFqName)
                 files.flatMapTo(this) { file ->
                     file.declarations.mapNotNull { (it as? FirMemberDeclaration)?.nameOrSpecialName }
                 }

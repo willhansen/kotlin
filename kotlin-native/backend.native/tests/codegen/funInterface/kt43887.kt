@@ -24,15 +24,15 @@ inline fun <reified T : CVariable> CPointer<heap_t>?.alloc(): CPointer<T>? {
     return heap_alloc(this, sizeOf<T>().toULong())?.reinterpret()
 }
 inline fun CPointer<heap_t>?.free(ptr: CPointer<*>?): Boolean {
-    return heap_free(this, ptr)?.pointed?.value ?: false
+    return heap_free(this, ptr)?.pointed?.konstue ?: false
 }
 
 @Test
 fun runTest(): Unit = memScoped {
-    val heap = Heap(1024)
+    konst heap = Heap(1024)
 
     heap.use<IntVar> { ptr ->
-        ptr.pointed.value = 40
+        ptr.pointed.konstue = 40
         //println("PTR ${ptr.pointed}")
     }
 }

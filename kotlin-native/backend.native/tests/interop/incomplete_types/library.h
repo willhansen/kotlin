@@ -13,14 +13,14 @@ union U;
 extern union U u;
 
 double getDouble(union U* u);
-void setDouble(union U* u, double value);
+void setDouble(union U* u, double konstue);
 
 // Global array of unknown size.
 extern char array[];
 
 
 int arrayLength();
-void setArrayValue(char* array, char value);
+void setArrayValue(char* array, char konstue);
 
 #ifdef __cplusplus
 }

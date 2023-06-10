@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.resolve.scopes.getDescriptorsFiltered
 import org.jetbrains.kotlin.utils.filterIsInstanceAnd
 
 class FakeOverrideChecker(
-    private val irMangler: KotlinMangler.IrMangler,
-    private val descriptorMangler: KotlinMangler.DescriptorMangler
+    private konst irMangler: KotlinMangler.IrMangler,
+    private konst descriptorMangler: KotlinMangler.DescriptorMangler
 ) {
 
     private fun checkOverriddenSymbols(fake: IrOverridableMember) {
@@ -32,30 +32,30 @@ class FakeOverrideChecker(
         }
     }
 
-    private fun validateFakeOverrides(clazz: IrClass, compatibleMode: Boolean = false) {
-        val classId = clazz.classId ?: return
-        val classDescriptor = clazz.module.module.findClassAcrossModuleDependencies(classId) ?: return
+    private fun konstidateFakeOverrides(clazz: IrClass, compatibleMode: Boolean = false) {
+        konst classId = clazz.classId ?: return
+        konst classDescriptor = clazz.module.module.findClassAcrossModuleDependencies(classId) ?: return
         // All enum entry overrides look like fake overrides in descriptor enum entries
         if (classDescriptor.kind == ClassKind.ENUM_ENTRY) return
 
-        val descriptorFakeOverrides = classDescriptor.unsubstitutedMemberScope
+        konst descriptorFakeOverrides = classDescriptor.unsubstitutedMemberScope
             .getDescriptorsFiltered(DescriptorKindFilter.CALLABLES)
             .asSequence()
             .filterIsInstance<CallableMemberDescriptor>()
             .filter { it.kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE }
             .filterNot { it.visibility == DescriptorVisibilities.PRIVATE || it.visibility == DescriptorVisibilities.INVISIBLE_FAKE }
 
-        val descriptorSignatures = descriptorFakeOverrides
+        konst descriptorSignatures = descriptorFakeOverrides
             .map { with(descriptorMangler) { it.signatureString(compatibleMode) } }
             .toMutableList()
             .apply { sort() }
 
-        val irFakeOverrides = clazz.declarations.asSequence()
+        konst irFakeOverrides = clazz.declarations.asSequence()
             .filterIsInstance<IrOverridableMember>()
             .filter { it.isFakeOverride }
             .onEach { checkOverriddenSymbols(it) }
 
-        val irSignatures = irFakeOverrides
+        konst irSignatures = irFakeOverrides
             .map { with(irMangler) { it.signatureString(compatibleMode) } }
             .toMutableList()
             .apply { sort() }
@@ -77,7 +77,7 @@ class FakeOverrideChecker(
                 element.acceptChildrenVoid(this)
             }
             override fun visitClass(declaration: IrClass) {
-                validateFakeOverrides(declaration)
+                konstidateFakeOverrides(declaration)
                 super.visitClass(declaration)
             }
         })

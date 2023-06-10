@@ -4,7 +4,7 @@ FILE: test.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val si: R|SamInterface?| = R|<local>/si|
+        public final konst si: R|SamInterface?| = R|<local>/si|
             public get(): R|SamInterface?|
 
     }

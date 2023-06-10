@@ -15,26 +15,26 @@ import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.util.Logger
 
 data class CommonizerParameters(
-    val outputTargets: Set<SharedCommonizerTarget>,
-    val manifestProvider: TargetDependent<NativeManifestDataProvider>,
-    val dependenciesProvider: TargetDependent<ModulesProvider?>,
-    val targetProviders: TargetDependent<TargetProvider?>,
-    val resultsConsumer: ResultsConsumer,
-    val storageManager: StorageManager = LockBasedStorageManager.NO_LOCKS,
-    val statsCollector: StatsCollector? = null,
-    val logger: Logger? = null,
-    val settings: CommonizerSettings,
+    konst outputTargets: Set<SharedCommonizerTarget>,
+    konst manifestProvider: TargetDependent<NativeManifestDataProvider>,
+    konst dependenciesProvider: TargetDependent<ModulesProvider?>,
+    konst targetProviders: TargetDependent<TargetProvider?>,
+    konst resultsConsumer: ResultsConsumer,
+    konst storageManager: StorageManager = LockBasedStorageManager.NO_LOCKS,
+    konst statsCollector: StatsCollector? = null,
+    konst logger: Logger? = null,
+    konst settings: CommonizerSettings,
 )
 
 internal fun CommonizerParameters.dependencyClassifiers(target: CommonizerTarget): CirProvidedClassifiers {
-    val dependenciesModulesProvider = dependenciesProvider[target]
+    konst dependenciesModulesProvider = dependenciesProvider[target]
 
-    val exportedForwardDeclarations = target.withAllLeaves()
+    konst exportedForwardDeclarations = target.withAllLeaves()
         .mapNotNull { targetOrLeaf -> targetProviders.getOrNull(targetOrLeaf)?.modulesProvider }
         .plus(listOfNotNull(dependenciesModulesProvider))
         .let { modulesProviders -> CirProvidedClassifiersByModules.loadExportedForwardDeclarations(modulesProviders) }
 
-    val providedByDependencies = if (dependenciesModulesProvider != null)
+    konst providedByDependencies = if (dependenciesModulesProvider != null)
         CirProvidedClassifiersByModules.load(dependenciesModulesProvider)
     else null
 

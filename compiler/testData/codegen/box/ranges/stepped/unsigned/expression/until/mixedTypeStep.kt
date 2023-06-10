@@ -3,8 +3,8 @@
 import kotlin.test.*
 
 fun box(): String {
-    val uintList = mutableListOf<UInt>()
-    val uintProgression = 1.toUByte() until 8.toUByte()
+    konst uintList = mutableListOf<UInt>()
+    konst uintProgression = 1.toUByte() until 8.toUByte()
     for (i in uintProgression step 2) {
         uintList += i
     }

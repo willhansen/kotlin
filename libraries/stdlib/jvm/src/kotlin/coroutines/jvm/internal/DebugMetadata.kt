@@ -11,21 +11,21 @@ import java.lang.reflect.Method
 @SinceKotlin("1.3")
 internal annotation class DebugMetadata(
     @get:JvmName("v")
-    val version: Int = 1,
+    konst version: Int = 1,
     @get:JvmName("f")
-    val sourceFile: String = "",
+    konst sourceFile: String = "",
     @get:JvmName("l")
-    val lineNumbers: IntArray = [],
+    konst lineNumbers: IntArray = [],
     @get:JvmName("n")
-    val localNames: Array<String> = [],
+    konst localNames: Array<String> = [],
     @get:JvmName("s")
-    val spilled: Array<String> = [],
+    konst spilled: Array<String> = [],
     @get:JvmName("i")
-    val indexToLabel: IntArray = [],
+    konst indexToLabel: IntArray = [],
     @get:JvmName("m")
-    val methodName: String = "",
+    konst methodName: String = "",
     @get:JvmName("c")
-    val className: String = ""
+    konst className: String = ""
 )
 
 /**
@@ -39,46 +39,46 @@ internal annotation class DebugMetadata(
 @SinceKotlin("1.3")
 @JvmName("getStackTraceElement")
 internal fun BaseContinuationImpl.getStackTraceElementImpl(): StackTraceElement? {
-    val debugMetadata = getDebugMetadataAnnotation() ?: return null
+    konst debugMetadata = getDebugMetadataAnnotation() ?: return null
     checkDebugMetadataVersion(COROUTINES_DEBUG_METADATA_VERSION, debugMetadata.version)
-    val label = getLabel()
-    val lineNumber = if (label < 0) -1 else debugMetadata.lineNumbers[label]
-    val moduleName = ModuleNameRetriever.getModuleName(this)
-    val moduleAndClass = if (moduleName == null) debugMetadata.className else "$moduleName/${debugMetadata.className}"
+    konst label = getLabel()
+    konst lineNumber = if (label < 0) -1 else debugMetadata.lineNumbers[label]
+    konst moduleName = ModuleNameRetriever.getModuleName(this)
+    konst moduleAndClass = if (moduleName == null) debugMetadata.className else "$moduleName/${debugMetadata.className}"
     return StackTraceElement(moduleAndClass, debugMetadata.methodName, debugMetadata.sourceFile, lineNumber)
 }
 
 private object ModuleNameRetriever {
     private class Cache(
         @JvmField
-        val getModuleMethod: Method?,
+        konst getModuleMethod: Method?,
         @JvmField
-        val getDescriptorMethod: Method?,
+        konst getDescriptorMethod: Method?,
         @JvmField
-        val nameMethod: Method?
+        konst nameMethod: Method?
     )
 
-    private val notOnJava9 = Cache(null, null, null)
+    private konst notOnJava9 = Cache(null, null, null)
 
     private var cache: Cache? = null
 
     fun getModuleName(continuation: BaseContinuationImpl): String? {
-        val cache = this.cache ?: buildCache(continuation)
+        konst cache = this.cache ?: buildCache(continuation)
         if (cache === notOnJava9) {
             return null
         }
-        val module = cache.getModuleMethod?.invoke(continuation.javaClass) ?: return null
-        val descriptor = cache.getDescriptorMethod?.invoke(module) ?: return null
+        konst module = cache.getModuleMethod?.invoke(continuation.javaClass) ?: return null
+        konst descriptor = cache.getDescriptorMethod?.invoke(module) ?: return null
         return cache.nameMethod?.invoke(descriptor) as? String
     }
 
     private fun buildCache(continuation: BaseContinuationImpl): Cache {
         try {
-            val getModuleMethod = Class::class.java.getDeclaredMethod("getModule")
-            val methodClass = continuation.javaClass.classLoader.loadClass("java.lang.Module")
-            val getDescriptorMethod = methodClass.getDeclaredMethod("getDescriptor")
-            val moduleDescriptorClass = continuation.javaClass.classLoader.loadClass("java.lang.module.ModuleDescriptor")
-            val nameMethod = moduleDescriptorClass.getDeclaredMethod("name")
+            konst getModuleMethod = Class::class.java.getDeclaredMethod("getModule")
+            konst methodClass = continuation.javaClass.classLoader.loadClass("java.lang.Module")
+            konst getDescriptorMethod = methodClass.getDeclaredMethod("getDescriptor")
+            konst moduleDescriptorClass = continuation.javaClass.classLoader.loadClass("java.lang.module.ModuleDescriptor")
+            konst nameMethod = moduleDescriptorClass.getDeclaredMethod("name")
             return Cache(getModuleMethod, getDescriptorMethod, nameMethod).also { cache = it }
         } catch (ignored: Exception) {
             return notOnJava9.also { cache = it }
@@ -91,7 +91,7 @@ private fun BaseContinuationImpl.getDebugMetadataAnnotation(): DebugMetadata? =
 
 private fun BaseContinuationImpl.getLabel(): Int =
     try {
-        val field = javaClass.getDeclaredField("label")
+        konst field = javaClass.getDeclaredField("label")
         field.isAccessible = true
         (field.get(this) as? Int ?: 0) - 1
     } catch (e: Exception) { // NoSuchFieldException, SecurityException, or IllegalAccessException
@@ -118,10 +118,10 @@ private fun checkDebugMetadataVersion(expected: Int, actual: Int) {
 @SinceKotlin("1.3")
 @JvmName("getSpilledVariableFieldMapping")
 internal fun BaseContinuationImpl.getSpilledVariableFieldMapping(): Array<String>? {
-    val debugMetadata = getDebugMetadataAnnotation() ?: return null
+    konst debugMetadata = getDebugMetadataAnnotation() ?: return null
     checkDebugMetadataVersion(COROUTINES_DEBUG_METADATA_VERSION, debugMetadata.version)
-    val res = arrayListOf<String>()
-    val label = getLabel()
+    konst res = arrayListOf<String>()
+    konst label = getLabel()
     for ((i, labelOfIndex) in debugMetadata.indexToLabel.withIndex()) {
         if (labelOfIndex == label) {
             res.add(debugMetadata.spilled[i])
@@ -131,4 +131,4 @@ internal fun BaseContinuationImpl.getSpilledVariableFieldMapping(): Array<String
     return res.toTypedArray()
 }
 
-private const val COROUTINES_DEBUG_METADATA_VERSION = 1
+private const konst COROUTINES_DEBUG_METADATA_VERSION = 1

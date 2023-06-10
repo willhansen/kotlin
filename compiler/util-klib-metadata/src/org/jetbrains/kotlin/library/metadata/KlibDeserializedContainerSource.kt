@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 
 class KlibDeserializedContainerSource(
-    override val isPreReleaseInvisible: Boolean,
-    override val presentableString: String,
-    val isFromNativeInteropLibrary: Boolean
+    override konst isPreReleaseInvisible: Boolean,
+    override konst presentableString: String,
+    konst isFromNativeInteropLibrary: Boolean
 ) : DeserializedContainerSource {
 
     constructor(
@@ -33,10 +33,10 @@ class KlibDeserializedContainerSource(
         library.isInteropLibrary()
     )
 
-    override val incompatibility: IncompatibleVersionErrorData<*>?
+    override konst incompatibility: IncompatibleVersionErrorData<*>?
         get() = null // TODO KT-55808
 
-    override val abiStability: DeserializedContainerAbiStability
+    override konst abiStability: DeserializedContainerAbiStability
         get() = DeserializedContainerAbiStability.STABLE
 
     // TODO: move [CallableMemberDescriptor.findSourceFile] here.

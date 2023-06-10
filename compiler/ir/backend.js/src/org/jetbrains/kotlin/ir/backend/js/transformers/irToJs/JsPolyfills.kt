@@ -13,17 +13,17 @@ import org.jetbrains.kotlin.ir.util.getAnnotation
 import org.jetbrains.kotlin.js.backend.ast.JsStatement
 
 class JsPolyfills {
-    private val polyfillsPerFile = hashMapOf<IrFile, HashSet<IrDeclaration>>()
+    private konst polyfillsPerFile = hashMapOf<IrFile, HashSet<IrDeclaration>>()
 
     fun registerDeclarationNativeImplementation(file: IrFile, declaration: IrDeclaration) {
         if (!declaration.hasJsPolyfill()) return
-        val declarations = polyfillsPerFile[file] ?: hashSetOf()
+        konst declarations = polyfillsPerFile[file] ?: hashSetOf()
         declarations.add(declaration)
         polyfillsPerFile[file] = declarations
     }
 
     fun saveOnlyIntersectionOfNextDeclarationsFor(file: IrFile, declarations: Set<IrDeclaration>) {
-        val polyfills = polyfillsPerFile[file] ?: return
+        konst polyfills = polyfillsPerFile[file] ?: return
         polyfillsPerFile[file] = polyfills.intersect(declarations).toHashSet()
     }
 
@@ -36,7 +36,7 @@ class JsPolyfills {
     @Suppress("UNCHECKED_CAST")
     private fun Sequence<IrDeclaration>.asImplementationList(): List<JsStatement> {
         return map { it to it.getAnnotation(JsAnnotations.JsPolyfillFqn)!!.getValueArgument(0)!! }
-            .distinctBy { (it.second as IrConst<String>).value }
+            .distinctBy { (it.second as IrConst<String>).konstue }
             .flatMap { (container, polyfill) -> translateJsCodeIntoStatementList(polyfill, null, container).orEmpty() }
             .toList()
     }

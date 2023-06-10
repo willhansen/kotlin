@@ -1,5 +1,5 @@
 class Clazz {
-    val
+    konst
 }
 
 fun f() {
@@ -7,5 +7,5 @@ fun f() {
 }
 
 class Clazz {
-    val
+    konst
 }

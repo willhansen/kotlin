@@ -39,6 +39,6 @@ fun box(): String {
 @file:kotlin.jvm.JvmMultifileClass
 package test
 
-val y = 239
+konst y = 239
 
-const val MAGIC_NUMBER = 42
+const konst MAGIC_NUMBER = 42

@@ -24,7 +24,7 @@ fun SmartCastManager.getSmartCastVariantsWithLessSpecificExcluded(
     languageVersionSettings: LanguageVersionSettings,
     dataFlowValueFactory: DataFlowValueFactory
 ): List<KotlinType> {
-    val variants = getSmartCastVariants(
+    konst variants = getSmartCastVariants(
         receiverToCast,
         bindingContext,
         containingDeclarationOrModule,
@@ -38,8 +38,8 @@ fun SmartCastManager.getSmartCastVariantsWithLessSpecificExcluded(
 }
 
 private fun chooseMoreSpecific(type1: KotlinType, type2: KotlinType): KotlinType? {
-    val type1IsSubtype = KotlinTypeChecker.DEFAULT.isSubtypeOf(type1, type2)
-    val type2IsSubtype = KotlinTypeChecker.DEFAULT.isSubtypeOf(type2, type1)
+    konst type1IsSubtype = KotlinTypeChecker.DEFAULT.isSubtypeOf(type1, type2)
+    konst type2IsSubtype = KotlinTypeChecker.DEFAULT.isSubtypeOf(type2, type1)
 
     when {
         type1IsSubtype && !type2IsSubtype -> return type1
@@ -49,8 +49,8 @@ private fun chooseMoreSpecific(type1: KotlinType, type2: KotlinType): KotlinType
         !type1IsSubtype && !type2IsSubtype -> return null
 
         else -> { // type1IsSubtype && type2IsSubtype
-            val flexible1 = type1.unwrap() as? FlexibleType
-            val flexible2 = type2.unwrap() as? FlexibleType
+            konst flexible1 = type1.unwrap() as? FlexibleType
+            konst flexible2 = type2.unwrap() as? FlexibleType
             return when {
                 flexible1 != null && flexible2 == null -> type2
                 flexible2 != null && flexible1 == null -> type1

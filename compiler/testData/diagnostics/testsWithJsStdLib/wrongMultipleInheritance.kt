@@ -15,10 +15,10 @@ abstract class <!WRONG_MULTIPLE_INHERITANCE!>C<!> : CharIterator(), I {
     override fun nextChar(): Char = '*'
 }
 
-class <!WRONG_MULTIPLE_INHERITANCE!>CC(val s: CharSequence)<!> : CharSequence by s, MyCharSequence {}
+class <!WRONG_MULTIPLE_INHERITANCE!>CC(konst s: CharSequence)<!> : CharSequence by s, MyCharSequence {}
 
 interface MyCharSequence {
-    val length: Int
+    konst length: Int
 
     operator fun get(index: Int): Char
 

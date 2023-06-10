@@ -17,8 +17,8 @@ public class JavaClass {
 // FILE: kotlin.kt
 
 fun box(): String {
-    val nullStr = JavaClass.nullString()
-    val nonnullStr = JavaClass.nonnullString()
+    konst nullStr = JavaClass.nullString()
+    konst nonnullStr = JavaClass.nonnullString()
 
     if (nullStr.foo() != null) return "fail 1"
     if (nonnullStr.foo() != nonnullStr) return "fail 2"

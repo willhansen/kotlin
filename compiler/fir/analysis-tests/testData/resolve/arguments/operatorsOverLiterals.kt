@@ -6,16 +6,16 @@ fun test_0() {
 }
 
 fun test_1() {
-    val x1 = 1 + 1
-    val x2 = 1.plus(1)
+    konst x1 = 1 + 1
+    konst x2 = 1.plus(1)
     1 + 1
     127 + 1
-    val x3 = 2000000000 * 4
+    konst x3 = 2000000000 * 4
 }
 
 fun test_2(n: Int) {
-    val x = 1 + n
-    val y = n + 1
+    konst x = 1 + n
+    konst y = n + 1
 }
 
 fun Int.bar(): Int {<!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
@@ -24,8 +24,8 @@ fun Int.baz(): Int {<!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 fun Byte.baz(): Byte {<!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 
 fun test_3() {
-    val x = 1.bar()
-    val y = 1.baz()
+    konst x = 1.bar()
+    konst y = 1.baz()
 }
 
 fun takeByte(b: Byte) {}
@@ -64,6 +64,6 @@ fun test_6() {
 }
 
 fun test_7(d: Double) {
-    val x1 = 1 + d
-    val x2 = d + 1
+    konst x1 = 1 + d
+    konst x2 = d + 1
 }

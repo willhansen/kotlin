@@ -3,12 +3,12 @@
 
 var log = ""
 
-fun <T> logged(value: T): T =
-    value.also { log += " " + value }
+fun <T> logged(konstue: T): T =
+    konstue.also { log += " " + konstue }
 
 fun doTest(id: String, expected: String, expectedLog: String, test: () -> String) {
     log = ""
-    val actual = test()
+    konst actual = test()
     if (actual != expected) throw AssertionError("$id expected: $expected, actual: $actual")
     if (log != expectedLog) throw AssertionError("$id expectedLog: $expectedLog, actual: $log")
 }

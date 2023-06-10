@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import java.io.File
 
-private val testDataDir =
+private konst testDataDir =
     File("compiler/incremental-compilation-impl/testData/org/jetbrains/kotlin/incremental/classpathDiff/ClasspathSnapshotterTest")
 
 class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
@@ -30,9 +30,9 @@ class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
     @Test
     fun testSimpleClass() {
-        val sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.kt")
-        val actualSnapshot = sourceFile.compileAndSnapshot().toGson()
-        val expectedSnapshot = sourceFile.getExpectedSnapshotFile().readText()
+        konst sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.kt")
+        konst actualSnapshot = sourceFile.compileAndSnapshot().toGson()
+        konst expectedSnapshot = sourceFile.getExpectedSnapshotFile().readText()
 
         assertEquals(expectedSnapshot, actualSnapshot)
 
@@ -44,8 +44,8 @@ class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
         // Check that the snapshot does not contain non-ABI info
         actualSnapshot.assertDoesNotContain(
-            "publicProperty's value",
-            "privateProperty's value",
+            "publicProperty's konstue",
+            "privateProperty's konstue",
             "publicFunction's body",
             "privateFunction's body"
         )
@@ -53,10 +53,10 @@ class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
     @Test
     fun testSimpleClass_ClassLevelSnapshot() {
-        val sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.kt")
-        val classFile = sourceFile.compileSingle()
-        val actualSnapshot = classFile.snapshot(ClassSnapshotGranularity.CLASS_LEVEL).toGson()
-        val expectedSnapshot = sourceFile.getExpectedSnapshotFile(ClassSnapshotGranularity.CLASS_LEVEL).readText()
+        konst sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.kt")
+        konst classFile = sourceFile.compileSingle()
+        konst actualSnapshot = classFile.snapshot(ClassSnapshotGranularity.CLASS_LEVEL).toGson()
+        konst expectedSnapshot = sourceFile.getExpectedSnapshotFile(ClassSnapshotGranularity.CLASS_LEVEL).readText()
 
         assertEquals(expectedSnapshot, actualSnapshot)
 
@@ -66,12 +66,12 @@ class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
     @Test
     fun testPackageFacadeClasses() {
-        val classpathSnapshot = snapshotClasspath(File("$testDataDir/kotlin/testPackageFacadeClasses/src"), tmpDir)
-        val classSnapshots = classpathSnapshot.classpathEntrySnapshots.single().classSnapshots
-        val fileFacadeSnapshot = classSnapshots["com/example/FileFacadeKt.class"]!!.toGson()
-        val multifileClassSnapshot = classSnapshots["com/example/MultifileClass.class"]!!.toGson()
-        val multifileClassPart1Snapshot = classSnapshots["com/example/MultifileClass__MultifileClass1Kt.class"]!!.toGson()
-        val multifileClassPart2Snapshot = classSnapshots["com/example/MultifileClass__MultifileClass2Kt.class"]!!.toGson()
+        konst classpathSnapshot = snapshotClasspath(File("$testDataDir/kotlin/testPackageFacadeClasses/src"), tmpDir)
+        konst classSnapshots = classpathSnapshot.classpathEntrySnapshots.single().classSnapshots
+        konst fileFacadeSnapshot = classSnapshots["com/example/FileFacadeKt.class"]!!.toGson()
+        konst multifileClassSnapshot = classSnapshots["com/example/MultifileClass.class"]!!.toGson()
+        konst multifileClassPart1Snapshot = classSnapshots["com/example/MultifileClass__MultifileClass1Kt.class"]!!.toGson()
+        konst multifileClassPart2Snapshot = classSnapshots["com/example/MultifileClass__MultifileClass2Kt.class"]!!.toGson()
 
         // Check that the snapshots contain ABI info
         fileFacadeSnapshot.assertContains("propertyInFileFacade", "functionInFileFacade")
@@ -79,9 +79,9 @@ class KotlinOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
         multifileClassPart2Snapshot.assertContains("propertyInMultifileClass2", "functionInMultifileClass2")
 
         // Check that the snapshots do not contain non-ABI info
-        fileFacadeSnapshot.assertDoesNotContain("propertyInFileFacade's value", "functionInFileFacade's body")
-        multifileClassPart1Snapshot.assertDoesNotContain("propertyInMultifileClass1's value", "functionInMultifileClass1's body")
-        multifileClassPart2Snapshot.assertDoesNotContain("propertyInMultifileClass2's value", "functionInMultifileClass2's body")
+        fileFacadeSnapshot.assertDoesNotContain("propertyInFileFacade's konstue", "functionInFileFacade's body")
+        multifileClassPart1Snapshot.assertDoesNotContain("propertyInMultifileClass1's konstue", "functionInMultifileClass1's body")
+        multifileClassPart2Snapshot.assertDoesNotContain("propertyInMultifileClass2's konstue", "functionInMultifileClass2's body")
 
         // Classes with MULTIFILE_CLASS kind have no proto data
         multifileClassSnapshot.assertDoesNotContain(
@@ -102,9 +102,9 @@ class JavaOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
     @Test
     fun testSimpleClass() {
-        val sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.java")
-        val actualSnapshot = sourceFile.compileAndSnapshot().toGson()
-        val expectedSnapshot = sourceFile.getExpectedSnapshotFile().readText()
+        konst sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.java")
+        konst actualSnapshot = sourceFile.compileAndSnapshot().toGson()
+        konst expectedSnapshot = sourceFile.getExpectedSnapshotFile().readText()
 
         assertEquals(expectedSnapshot, actualSnapshot)
 
@@ -115,8 +115,8 @@ class JavaOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
         actualSnapshot.assertDoesNotContain(
             "privateField",
             "privateMethod",
-            "publicField's value",
-            "privateField's value",
+            "publicField's konstue",
+            "privateField's konstue",
             "publicMethod's body",
             "privateMethod's body"
         )
@@ -124,10 +124,10 @@ class JavaOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 
     @Test
     fun testSimpleClass_ClassLevelSnapshot() {
-        val sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.java")
-        val classFile = sourceFile.compileSingle()
-        val actualSnapshot = classFile.snapshot(ClassSnapshotGranularity.CLASS_LEVEL).toGson()
-        val expectedSnapshot = sourceFile.getExpectedSnapshotFile(ClassSnapshotGranularity.CLASS_LEVEL).readText()
+        konst sourceFile = getSourceFile("testSimpleClass", "com/example/SimpleClass.java")
+        konst classFile = sourceFile.compileSingle()
+        konst actualSnapshot = classFile.snapshot(ClassSnapshotGranularity.CLASS_LEVEL).toGson()
+        konst expectedSnapshot = sourceFile.getExpectedSnapshotFile(ClassSnapshotGranularity.CLASS_LEVEL).readText()
 
         assertEquals(expectedSnapshot, actualSnapshot)
 
@@ -137,8 +137,8 @@ class JavaOnlyClasspathSnapshotterTest : ClasspathSnapshotTestCommon() {
 }
 
 private fun TestSourceFile.getExpectedSnapshotFile(granularity: ClassSnapshotGranularity? = null): File {
-    val relativePath = sourceFile.unixStyleRelativePath.substringBeforeLast(".") + ".json"
-    val expectedSnapshotDirName = if (granularity == null) "expected-snapshot" else "expected-snapshot-${granularity.name}"
+    konst relativePath = sourceFile.unixStyleRelativePath.substringBeforeLast(".") + ".json"
+    konst expectedSnapshotDirName = if (granularity == null) "expected-snapshot" else "expected-snapshot-${granularity.name}"
     return sourceFile.baseDir.resolve("../$expectedSnapshotDirName/$relativePath")
 }
 

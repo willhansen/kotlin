@@ -10,34 +10,34 @@ package kotlin
 import kotlin.wasm.internal.*
 
 /**
- * Represents a value which is either `true` or `false`. On the JVM, non-nullable values of this type are
- * represented as values of the primitive type `boolean`.
+ * Represents a konstue which is either `true` or `false`. On the JVM, non-nullable konstues of this type are
+ * represented as konstues of the primitive type `boolean`.
  */
 @WasmAutoboxed
-public class Boolean private constructor(private val value: Boolean) : Comparable<Boolean> {
+public class Boolean private constructor(private konst konstue: Boolean) : Comparable<Boolean> {
     /**
      * Returns the inverse of this boolean.
      */
     @WasmOp(WasmOp.I32_EQZ)
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     public operator fun not(): Boolean =
         implementedAsIntrinsic
 
     /**
      * Performs a logical `and` operation between this Boolean and the [other] one. Unlike the `&&` operator,
-     * this function does not perform short-circuit evaluation. Both `this` and [other] will always be evaluated.
+     * this function does not perform short-circuit ekonstuation. Both `this` and [other] will always be ekonstuated.
      */
     @WasmOp(WasmOp.I32_AND)
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     public infix fun and(other: Boolean): Boolean =
         implementedAsIntrinsic
 
     /**
      * Performs a logical `or` operation between this Boolean and the [other] one. Unlike the `||` operator,
-     * this function does not perform short-circuit evaluation. Both `this` and [other] will always be evaluated.
+     * this function does not perform short-circuit ekonstuation. Both `this` and [other] will always be ekonstuated.
      */
     @WasmOp(WasmOp.I32_OR)
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     public infix fun or(other: Boolean): Boolean =
         implementedAsIntrinsic
 
@@ -45,22 +45,22 @@ public class Boolean private constructor(private val value: Boolean) : Comparabl
      * Performs a logical `xor` operation between this Boolean and the [other] one.
      */
     @WasmOp(WasmOp.I32_XOR)
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     public infix fun xor(other: Boolean): Boolean =
         implementedAsIntrinsic
 
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     public override fun compareTo(other: Boolean): Int =
         wasm_i32_compareTo(this.toInt(), other.toInt())
 
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     override fun toString(): String =
         if (this) "true" else "false"
 
     override fun hashCode(): Int =
         toInt()
 
-    @kotlin.internal.IntrinsicConstEvaluation
+    @kotlin.internal.IntrinsicConstEkonstuation
     override fun equals(other: Any?): Boolean {
         return if (other !is Boolean) {
             false

@@ -1,5 +1,5 @@
 fun <!ELEMENT(3)!>() {
-    val l = <!ELEMENT(2)!>@ {
+    konst l = <!ELEMENT(2)!>@ {
         return@<!ELEMENT(2)!>
     }
     l()

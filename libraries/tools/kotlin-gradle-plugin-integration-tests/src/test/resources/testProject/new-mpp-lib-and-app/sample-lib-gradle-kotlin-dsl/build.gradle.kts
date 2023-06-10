@@ -12,9 +12,9 @@ repositories {
 }
 
 kotlin {
-    val shouldBeJs = true
-    val jvm = jvm("jvm6")
-    val js = if (shouldBeJs) {
+    konst shouldBeJs = true
+    konst jvm = jvm("jvm6")
+    konst js = if (shouldBeJs) {
         js("nodeJs") {
             nodejs()
         }
@@ -32,7 +32,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 api(kotlin("stdlib-common"))
             }
@@ -57,8 +57,8 @@ publishing {
 	}
 }
 
-// Check that a compilation may be created after project evaluation, KT-28896:
-afterEvaluate {
+// Check that a compilation may be created after project ekonstuation, KT-28896:
+afterEkonstuate {
     kotlin {
         jvm("jvm6").compilations.create("benchmark") {
             tasks["assemble"].dependsOn(compileKotlinTask)

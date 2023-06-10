@@ -11,9 +11,9 @@ package kotlin {
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
         }
 
-        @kotlin.jvm.JvmInline public final value class Name {
+        @kotlin.jvm.JvmInline public final konstue class Name {
             public constructor Name(/*0*/ name: kotlin.String)
-            public final val name: kotlin.String
+            public final konst name: kotlin.String
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -34,9 +34,9 @@ package kotlin {
             public abstract fun verify(/*0*/ name: kotlin.jvm.Name): kotlin.Unit
         }
 
-        @kotlin.jvm.JvmInline public final value class Password {
+        @kotlin.jvm.JvmInline public final konstue class Password {
             public constructor Password(/*0*/ password: kotlin.String)
-            public final val password: kotlin.String
+            public final konst password: kotlin.String
             public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

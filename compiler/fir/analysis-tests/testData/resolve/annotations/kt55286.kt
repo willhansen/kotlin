@@ -3,11 +3,11 @@
 annotation class Deprecated<T>
 
 open class Base(
-    @Deprecated<Nested> val a: String,
+    @Deprecated<Nested> konst a: String,
 ) {
     class Nested
 }
 
 class Derived(
-    @Deprecated<Nested> val b: String,
+    @Deprecated<Nested> konst b: String,
 ) : Base("")

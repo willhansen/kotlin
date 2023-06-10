@@ -5,11 +5,11 @@
 // FILE: lib.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z private constructor(private val value: Any?) {
-    fun result(): String = value as String
+konstue class Z private constructor(private konst konstue: Any?) {
+    fun result(): String = konstue as String
 
     companion object {
-        fun create(value: Any?): Z = Z(value)
+        fun create(konstue: Any?): Z = Z(konstue)
     }
 }
 

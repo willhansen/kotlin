@@ -1,14 +1,14 @@
 package transitiveStory.bottomActual.mppBeginning
 
-val moduleName = "top-mpp"
-val commonInt = 42
-expect val sourceSetName: String
+konst moduleName = "top-mpp"
+konst commonInt = 42
+expect konst sourceSetName: String
 
 expect open class BottomActualDeclarations() {
-    val simpleVal: Int
+    konst simpleVal: Int
 
     companion object Compainon {
-        val inTheCompanionOfBottomActualDeclarations: String
+        konst inTheCompanionOfBottomActualDeclarations: String
     }
 }
 
@@ -20,31 +20,31 @@ fun regularTLfunInTheBottomActualCommmon(s: String): String {
 // shouldn't be resolved
 /*
 fun bottActualApiCaller(k: KotlinApiContainer, s: JavaApiContainer) {
-    // val first = privateKotlinDeclaration
+    // konst first = privateKotlinDeclaration
 }*/
 
-internal val tlInternalInCommon = 42
+internal konst tlInternalInCommon = 42
 
 // has a child in jsJvm18Main
 open class Outer {
-    private val a = 1
-    protected open val b = 2
-    internal val c = 3
-    val d = 4  // public by default
+    private konst a = 1
+    protected open konst b = 2
+    internal konst c = 3
+    konst d = 4  // public by default
 
     protected class Nested {
-        public val e: Int = 5
+        public konst e: Int = 5
     }
 }
 
 // has a child in jsJvm18Main
 expect open class MPOuter {
-    protected open val b: Int
-    internal val c: Int
-    val d: Int // public by default
+    protected open konst b: Int
+    internal konst c: Int
+    konst d: Int // public by default
 
     protected class MPNested {
-        public val e: Int
+        public konst e: Int
     }
 }
 

@@ -12,13 +12,13 @@ import kotlin.reflect.KParameter
 import kotlin.reflect.KType
 
 internal class KParameterState(
-    override val irClass: IrClass, val irParameter: IrValueParameter, val index: Int, val kind: KParameter.Kind = KParameter.Kind.VALUE
+    override konst irClass: IrClass, konst irParameter: IrValueParameter, konst index: Int, konst kind: KParameter.Kind = KParameter.Kind.VALUE
 ) : ReflectionState() {
     private var _type: KType? = null
 
     fun getType(callInterceptor: CallInterceptor): KType {
         if (_type != null) return _type!!
-        val kTypeIrClass = callInterceptor.environment.kTypeClass.owner
+        konst kTypeIrClass = callInterceptor.environment.kTypeClass.owner
         _type = KTypeProxy(KTypeState(irParameter.type, kTypeIrClass), callInterceptor)
         return _type!!
     }
@@ -47,7 +47,7 @@ internal class KParameterState(
             }
 
             append(" of ")
-            when (val parent = irParameter.parent) {
+            when (konst parent = irParameter.parent) {
                 is IrSimpleFunction -> parent.correspondingPropertySymbol?.owner?.let { append(renderProperty(it)) }
                     ?: append(renderFunction(parent))
                 is IrFunction -> append(renderFunction(parent))

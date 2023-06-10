@@ -5,9 +5,9 @@
 
 package codegen.escapeAnalysis.test10
 
-class G(val x: Int)
+class G(konst x: Int)
 
-class F(val s: String) {
+class F(konst s: String) {
     var g = G(0)
 }
 
@@ -26,14 +26,14 @@ class A {
 //     RET.v@lue -> D0
 // Escapes: D0
 fun foo(a: A): F {
-    val v = F("zzz")
+    konst v = F("zzz")
     a.f = v
     return v
 }
 
 fun bar(): F {
-    val w = A()
-    val u = foo(w)
+    konst w = A()
+    konst u = foo(w)
     w.f.g = G(42)
     return u
 }

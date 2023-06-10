@@ -23,9 +23,9 @@ abstract class BaseActivity : AppCompatActivity() {
     private fun prepareTaskDescription() {
         if (Build.VERSION.SDK_INT >= 21) {
             if (sTaskDescription == null) {
-                val label = getString(R.string.app_name)
-                val icon = BitmapFactory.decodeResource(resources, R.drawable.ic_task)
-                val colorPrimary = resources.getColor(R.color.app_primary_500)
+                konst label = getString(R.string.app_name)
+                konst icon = BitmapFactory.decodeResource(resources, R.drawable.ic_task)
+                konst colorPrimary = resources.getColor(R.color.app_primary_500)
                 sTaskDescription = ActivityManager.TaskDescription(label, icon, colorPrimary)
             }
             setTaskDescription(sTaskDescription)

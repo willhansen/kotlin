@@ -1,6 +1,6 @@
 package com.example;
 
 open class ChangedSuperClass {
-    val changedProperty = ""
+    konst changedProperty = ""
     fun changedFunction() = ""
 }

@@ -23,8 +23,8 @@ class ProgressionLoopHeader(
     context: CommonBackendContext
 ) : NumericForLoopHeader<ProgressionHeaderInfo>(headerInfo, builder, context) {
 
-    private val preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
-    private val javaLikeCounterLoopBuilder = JavaLikeCounterLoopBuilder(context)
+    private konst preferJavaLikeCounterLoop = context.preferJavaLikeCounterLoop
+    private konst javaLikeCounterLoopBuilder = JavaLikeCounterLoopBuilder(context)
 
     // For this loop:
     //
@@ -34,8 +34,8 @@ class ProgressionLoopHeader(
     // Additional variables come first as they may be needed to the subsequent variables.
     //
     // In the case of a reversed range, the `inductionVariable` and `last` variables are swapped, therefore the declaration order must be
-    // swapped to preserve the correct evaluation order.
-    override val loopInitStatements = headerInfo.additionalStatements + (
+    // swapped to preserve the correct ekonstuation order.
+    override konst loopInitStatements = headerInfo.additionalStatements + (
             if (headerInfo.isReversed)
                 listOfNotNull(lastVariableIfCanCacheLast, inductionVariable)
             else
@@ -87,7 +87,7 @@ class ProgressionLoopHeader(
                 //   if (inductionVar <= last) {
                 //     // Loop is not empty
                 //     do {
-                //       val loopVar = inductionVar
+                //       konst loopVar = inductionVar
                 //       inductionVar += step
                 //       // Loop body
                 //     } while (loopVar != last)
@@ -97,12 +97,12 @@ class ProgressionLoopHeader(
                 // because HotSpot doesn't recognize unsigned integer comparison as a counter loop condition.
                 // Unsigned integer equality is fine, though.
                 // See KT-49444 for performance comparison example.
-                val newLoopOrigin = if (preferJavaLikeCounterLoop)
+                konst newLoopOrigin = if (preferJavaLikeCounterLoop)
                     this@ProgressionLoopHeader.context.doWhileCounterLoopOrigin
                 else
                     oldLoop.origin
-                val newLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, newLoopOrigin).apply {
-                    val loopVariableExpression = irGet(loopVariable!!).let {
+                konst newLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, newLoopOrigin).apply {
+                    konst loopVariableExpression = irGet(loopVariable!!).let {
                         headerInfo.progressionType.run {
                             if (this is UnsignedProgressionType) {
                                 // The loop variable is signed but bounds are signed for unsigned progressions.
@@ -119,7 +119,7 @@ class ProgressionLoopHeader(
                     javaLikeCounterLoopBuilder.moveInductionVariableUpdateToLoopCondition(newLoop)
                 }
 
-                val loopCondition = buildLoopCondition(this@with)
+                konst loopCondition = buildLoopCondition(this@with)
                 LoopReplacement(newLoop, irIfThen(loopCondition, newLoop))
             } else if (preferJavaLikeCounterLoop && !headerInfo.isLastInclusive) {
                 // It is critically important for loop code performance on JVM to "look like" a simple counter loop in Java when possible
@@ -129,12 +129,12 @@ class ProgressionLoopHeader(
                 // Use a do-while loop:
                 //   do {
                 //       if ( !( inductionVariable < last ) ) break
-                //       val loopVariable = inductionVariable
+                //       konst loopVariable = inductionVariable
                 //       <body>
                 //   } while ( { inductionVariable += step; true } )
-                // This loop form is equivalent to the Java counter loop shown above.
+                // This loop form is equikonstent to the Java counter loop shown above.
 
-                val newLoopCondition = buildLoopCondition(this@with)
+                konst newLoopCondition = buildLoopCondition(this@with)
 
                 javaLikeCounterLoopBuilder.buildJavaLikeDoWhileCounterLoop(
                     oldLoop, newLoopCondition, newBody,
@@ -145,18 +145,18 @@ class ProgressionLoopHeader(
                 //
                 //   if (inductionVar <= last) {
                 //     do {
-                //       val loopVar = inductionVar
+                //       konst loopVar = inductionVar
                 //       inductionVar += step
                 //       // Loop body
                 //     } while (inductionVar <= last)
                 //   }
                 //
-                val newLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
+                konst newLoop = IrDoWhileLoopImpl(oldLoop.startOffset, oldLoop.endOffset, oldLoop.type, oldLoop.origin).apply {
                     label = oldLoop.label
                     condition = buildLoopCondition(this@with)
                     body = newBody
                 }
-                val loopCondition = buildLoopCondition(this@with)
+                konst loopCondition = buildLoopCondition(this@with)
                 LoopReplacement(newLoop, irIfThen(loopCondition, newLoop))
             }
         }

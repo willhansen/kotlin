@@ -1,5 +1,5 @@
 fun box() : String {
-    val b : Array<Int?> = arrayOfNulls<Int> (5)
+    konst b : Array<Int?> = arrayOfNulls<Int> (5)
     var i = 0
     var sum = 0
     while(i < 5) {

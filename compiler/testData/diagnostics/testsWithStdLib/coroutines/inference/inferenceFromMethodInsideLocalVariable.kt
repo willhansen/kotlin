@@ -13,6 +13,6 @@ fun <K> foo(block: Inv<K>.() -> Unit) {}
 
 fun test(i: Int) {
     foo {
-        val p = send(i)
+        konst p = send(i)
     }
 }

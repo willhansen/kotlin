@@ -9,7 +9,7 @@ import kotlin.annotation.AnnotationTarget.*
 
 @Retention(AnnotationRetention.BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, CONSTRUCTOR, PROPERTY_GETTER, PROPERTY_SETTER)
-internal external annotation class JsName(val name: String)
+internal external annotation class JsName(konst name: String)
 
 internal external annotation class native
 

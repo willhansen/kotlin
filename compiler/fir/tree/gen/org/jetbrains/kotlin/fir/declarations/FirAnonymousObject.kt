@@ -23,20 +23,20 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirAnonymousObject : FirClass() {
-    abstract override val source: KtSourceElement?
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val typeParameters: List<FirTypeParameterRef>
-    abstract override val status: FirDeclarationStatus
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract override val classKind: ClassKind
-    abstract override val superTypeRefs: List<FirTypeRef>
-    abstract override val declarations: List<FirDeclaration>
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val scopeProvider: FirScopeProvider
-    abstract override val symbol: FirAnonymousObjectSymbol
+    abstract override konst source: KtSourceElement?
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst typeParameters: List<FirTypeParameterRef>
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract override konst classKind: ClassKind
+    abstract override konst superTypeRefs: List<FirTypeRef>
+    abstract override konst declarations: List<FirDeclaration>
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst scopeProvider: FirScopeProvider
+    abstract override konst symbol: FirAnonymousObjectSymbol
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAnonymousObject(this, data)
 

@@ -14,7 +14,7 @@ inline fun f(crossinline g: () -> String) = object: Foo {
 // FILE: 2.kt
 import test.*
 
-val x = f { "O" }
+konst x = f { "O" }
 
 fun box() : String {
     return x.call()

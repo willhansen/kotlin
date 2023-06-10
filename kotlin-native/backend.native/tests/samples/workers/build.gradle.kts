@@ -4,10 +4,10 @@ plugins {
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
+    konst hostOs = System.getProperty("os.name")
 
     // Create target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("workers")
         hostOs == "Linux" -> linuxX64("workers")
         hostOs.startsWith("Windows") -> mingwX64("workers")

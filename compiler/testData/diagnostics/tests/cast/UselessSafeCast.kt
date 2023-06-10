@@ -1,13 +1,13 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER, -UNUSED_VARIABLE
 
 fun test(x: Int?) {
-    val a1 = x <!USELESS_CAST!>as? Int<!>
-    val a2 = x <!USELESS_CAST!>as? Int?<!>
-    val a3 = x as? Number
-    val a4 = x as? Number?
-    val a5: Int? = x <!USELESS_CAST!>as? Int<!>
-    val a6: Number? = x <!USELESS_CAST!>as? Int<!>
-    val a7: Number? = 1 <!USELESS_CAST!>as? Number<!>
+    konst a1 = x <!USELESS_CAST!>as? Int<!>
+    konst a2 = x <!USELESS_CAST!>as? Int?<!>
+    konst a3 = x as? Number
+    konst a4 = x as? Number?
+    konst a5: Int? = x <!USELESS_CAST!>as? Int<!>
+    konst a6: Number? = x <!USELESS_CAST!>as? Int<!>
+    konst a7: Number? = 1 <!USELESS_CAST!>as? Number<!>
 
     run { x <!USELESS_CAST!>as? Int<!> }
     run { x <!USELESS_CAST!>as? Number<!> }
@@ -15,7 +15,7 @@ fun test(x: Int?) {
     foo(x as? Number)
 
     if (x is Int) {
-        val b = x as? Int
+        konst b = x as? Int
     }
 }
 

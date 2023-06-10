@@ -3,7 +3,7 @@ import java.util.*
 import kotlin.comparisons.compareBy
 import kotlin.comparisons.nullsLast
 
-class Foo(val a: String, val b: Int)
+class Foo(konst a: String, konst b: Int)
 
 fun getComp(): Comparator<Foo?> =
         when {

@@ -27,17 +27,17 @@ fun DeclarationDescriptor.deepPrint() {
     this.accept(DeepPrintVisitor(PrintVisitor()), 0)
 }
 
-internal val String.synthesizedName get() = Name.identifier(this.synthesizedString)
+internal konst String.synthesizedName get() = Name.identifier(this.synthesizedString)
 
-internal val String.synthesizedString get() = "\$$this"
+internal konst String.synthesizedString get() = "\$$this"
 
 
-internal val CallableMemberDescriptor.propertyIfAccessor
+internal konst CallableMemberDescriptor.propertyIfAccessor
     get() = if (this is PropertyAccessorDescriptor)
                 this.correspondingProperty
                 else this
 
-private fun IrDeclaration.findTopLevelDeclaration(): IrDeclaration = when (val parent = this.parent) {
+private fun IrDeclaration.findTopLevelDeclaration(): IrDeclaration = when (konst parent = this.parent) {
     is IrDeclaration -> parent.findTopLevelDeclaration()
     else -> this
 }
@@ -45,7 +45,7 @@ private fun IrDeclaration.findTopLevelDeclaration(): IrDeclaration = when (val p
 private fun IrDeclaration.propertyIfAccessor(): IrDeclaration =
         (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner ?: this
 
-val ModuleDescriptor.isForwardDeclarationModule: Boolean
+konst ModuleDescriptor.isForwardDeclarationModule: Boolean
     get() {
         // TODO: use KlibResolvedModuleDescriptorsFactoryImpl.FORWARD_DECLARATIONS_MODULE_NAME instead of
         //  manually created Name instance
@@ -59,15 +59,15 @@ fun DeclarationDescriptor.isFromInteropLibrary(): Boolean =
         this.isFromFirDeserializedInteropLibrary() || this.module.isFromInteropLibrary()
 
 private fun DeclarationDescriptor.isFromFirDeserializedInteropLibrary(): Boolean {
-    val declaration = (this as? IrBasedDeclarationDescriptor<*>)?.owner ?: return false
+    konst declaration = (this as? IrBasedDeclarationDescriptor<*>)?.owner ?: return false
 
     // We need to find top-level non-accessor declaration, because
     //  - fir2ir lazy IR creates non-AbstractFir2IrLazyDeclaration declarations sometimes, e.g. for enum entries;
     //  - K2 metadata deserializer doesn't set containerSource for property accessors.
-    val topLevelDeclaration = declaration.findTopLevelDeclaration().propertyIfAccessor()
+    konst topLevelDeclaration = declaration.findTopLevelDeclaration().propertyIfAccessor()
 
-    val firDeclaration = (topLevelDeclaration as? AbstractFir2IrLazyDeclaration<*>)?.fir ?: return false
-    val containerSource = (firDeclaration as? FirMemberDeclaration)?.containerSource
+    konst firDeclaration = (topLevelDeclaration as? AbstractFir2IrLazyDeclaration<*>)?.fir ?: return false
+    konst containerSource = (firDeclaration as? FirMemberDeclaration)?.containerSource
 
     return containerSource is KlibDeserializedContainerSource && containerSource.isFromNativeInteropLibrary
 }

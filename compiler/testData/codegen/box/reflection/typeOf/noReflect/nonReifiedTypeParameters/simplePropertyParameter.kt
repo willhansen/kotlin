@@ -8,8 +8,8 @@ import kotlin.test.assertEquals
 
 class Container<T>
 
-val <X1> X1.notNull get() = typeOf<Container<X1>>()
-val <X2> X2.nullable get() = typeOf<Container<X2?>>()
+konst <X1> X1.notNull get() = typeOf<Container<X1>>()
+konst <X2> X2.nullable get() = typeOf<Container<X2?>>()
 
 fun box(): String {
     assertEquals("test.Container<X1> (Kotlin reflection is not available)", "".notNull.toString())

@@ -16,7 +16,7 @@ KtFile: Graph.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('data')
           PsiWhiteSpace(' ')
@@ -45,7 +45,7 @@ KtFile: Graph.kt
       VALUE_PARAMETER_LIST
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('from')
           PsiWhiteSpace(' ')
@@ -58,7 +58,7 @@ KtFile: Graph.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace(' ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('data')
           PsiWhiteSpace(' ')
@@ -71,7 +71,7 @@ KtFile: Graph.kt
         PsiElement(COMMA)(',')
         PsiWhiteSpace(' ')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('to')
           PsiWhiteSpace(' ')
@@ -104,7 +104,7 @@ KtFile: Graph.kt
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('mutableEdges')
         PsiWhiteSpace(' ')
@@ -142,13 +142,13 @@ KtFile: Graph.kt
         PsiWhiteSpace(' ')
         PsiComment(EOL_COMMENT)('// type is ArrayList, but I want IMutableList')
       PsiWhiteSpace('\n')
-      PsiComment(BLOCK_COMMENT)('/* options:\n    private val edges : IMutableList<Edge<V, E>> = ArrayList<Edge<V, E>>()\n    private val edges : IMutableList<Edge<V, E>> = ArrayList() // not an erasure, but a request to infer parameters\n*/')
+      PsiComment(BLOCK_COMMENT)('/* options:\n    private konst edges : IMutableList<Edge<V, E>> = ArrayList<Edge<V, E>>()\n    private konst edges : IMutableList<Edge<V, E>> = ArrayList() // not an erasure, but a request to infer parameters\n*/')
       PsiWhiteSpace('\n\n  ')
       PROPERTY
         MODIFIER_LIST
           PsiElement(private)('private')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('mutableVertices')
         PsiWhiteSpace(' ')
@@ -178,7 +178,7 @@ KtFile: Graph.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('edges')
         PsiWhiteSpace(' ')
@@ -219,7 +219,7 @@ KtFile: Graph.kt
         PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n  ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('vertices')
         PsiWhiteSpace(' ')
@@ -498,7 +498,7 @@ KtFile: Graph.kt
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n    ')
           PROPERTY
-            PsiElement(val)('val')
+            PsiElement(konst)('konst')
             PsiWhiteSpace(' ')
             PsiElement(IDENTIFIER)('visited')
             PsiWhiteSpace(' ')
@@ -886,7 +886,7 @@ KtFile: Graph.kt
                             PsiElement(LBRACE)('{')
                             PsiWhiteSpace('\n        ')
                             PROPERTY
-                              PsiElement(val)('val')
+                              PsiElement(konst)('konst')
                               PsiWhiteSpace(' ')
                               PsiElement(IDENTIFIER)('current')
                               PsiWhiteSpace(' ')

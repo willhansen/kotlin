@@ -8,7 +8,7 @@ object Test {
     @JvmStatic
     private fun createWildcard(s: String) = Type<Any>(s).x
 
-    class Type<T>(val x: String)
+    class Type<T>(konst x: String)
 
 }
 

@@ -3,7 +3,7 @@ class Foo {
 }
 
 fun box(): String {
-   val foo: Foo? = Foo()
+   konst foo: Foo? = Foo()
    if (foo?.isOk()!!) return "OK"
    return "fail"
 }

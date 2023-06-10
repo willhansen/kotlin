@@ -14,8 +14,8 @@ object Obj3 : Rec<Obj3, I3>
 object Obj4 : Rec<Obj4, I4>
 
 fun testOutOut() {
-    val cst1 = select(Obj2, Obj3)
-    val cst2 = select(Obj2, Obj4)
+    konst cst1 = select(Obj2, Obj3)
+    konst cst2 = select(Obj2, Obj4)
     <!DEBUG_INFO_EXPRESSION_TYPE("Rec<{Obj2 & Obj3}, {I2 & I3}>")!>cst1<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("Rec<{Obj2 & Obj4}, {I2 & I4}>")!>cst2<!>
 }

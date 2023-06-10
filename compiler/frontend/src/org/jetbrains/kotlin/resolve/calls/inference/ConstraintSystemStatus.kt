@@ -52,7 +52,7 @@ interface ConstraintSystemStatus {
     /**
      * Returns `true` if there is no information for some registered type variable.
      *
-     * For example, for `fun <E> newList()` in invocation `val nl = newList()`
+     * For example, for `fun <E> newList()` in invocation `konst nl = newList()`
      * there is no information to infer type variable `E`.
      */
     fun hasUnknownParameters(): Boolean
@@ -92,5 +92,5 @@ interface ConstraintSystemStatus {
 
     fun hasTypeParameterWithUnsatisfiedOnlyInputTypesError(): Boolean
 
-    val constraintErrors: List<ConstraintError>
+    konst constraintErrors: List<ConstraintError>
 }

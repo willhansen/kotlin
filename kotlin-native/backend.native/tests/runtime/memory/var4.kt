@@ -11,7 +11,7 @@ import kotlin.test.*
     var x = Error()
 
     for (i in 0..1) {
-        val c = Error()
+        konst c = Error()
         if (i == 0) x = c
     }
 

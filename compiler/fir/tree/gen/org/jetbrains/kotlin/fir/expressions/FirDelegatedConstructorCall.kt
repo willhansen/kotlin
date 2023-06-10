@@ -18,15 +18,15 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirDelegatedConstructorCall : FirPureAbstractElement(), FirResolvable, FirCall, FirContextReceiverArgumentListOwner {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val argumentList: FirArgumentList
-    abstract override val contextReceiverArguments: List<FirExpression>
-    abstract val constructedTypeRef: FirTypeRef
-    abstract val dispatchReceiver: FirExpression
-    abstract override val calleeReference: FirReference
-    abstract val isThis: Boolean
-    abstract val isSuper: Boolean
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst argumentList: FirArgumentList
+    abstract override konst contextReceiverArguments: List<FirExpression>
+    abstract konst constructedTypeRef: FirTypeRef
+    abstract konst dispatchReceiver: FirExpression
+    abstract override konst calleeReference: FirReference
+    abstract konst isThis: Boolean
+    abstract konst isSuper: Boolean
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitDelegatedConstructorCall(this, data)
 

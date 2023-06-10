@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.config.CompilerConfigurationKey
 interface ComponentRegistrar {
     companion object {
         @Suppress("DEPRECATION")
-        val PLUGIN_COMPONENT_REGISTRARS: CompilerConfigurationKey<MutableList<ComponentRegistrar>> =
+        konst PLUGIN_COMPONENT_REGISTRARS: CompilerConfigurationKey<MutableList<ComponentRegistrar>> =
             CompilerConfigurationKey.create("plugin component registrars")
     }
 
     fun registerProjectComponents(project: MockProject, configuration: CompilerConfiguration)
 
-    val supportsK2: Boolean
+    konst supportsK2: Boolean
         get() = false
 }

@@ -5,7 +5,7 @@
 // TODO: muted automatically, investigate should it be ran for JS or not
 // IGNORE_BACKEND: JS, NATIVE
 
-public class RunnableFunctionWrapper(val f : () -> Unit) : Runnable {
+public class RunnableFunctionWrapper(konst f : () -> Unit) : Runnable {
     public override fun run() {
         f()
     }

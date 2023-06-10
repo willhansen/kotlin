@@ -10,13 +10,13 @@ FILE fqName:<root> fileName:/A.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.A
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='internal open fun foo (): kotlin.Int declared in <root>.A'
-          CONST Int type=kotlin.Int value=1
-    PROPERTY name:bar visibility:internal modality:OPEN [val]
+          CONST Int type=kotlin.Int konstue=1
+    PROPERTY name:bar visibility:internal modality:OPEN [konst]
       FIELD PROPERTY_BACKING_FIELD name:bar type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=1
+          CONST Int type=kotlin.Int konstue=1
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-bar> visibility:internal modality:OPEN <> ($this:<root>.A) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:bar visibility:internal modality:OPEN [val]
+        correspondingProperty: PROPERTY name:bar visibility:internal modality:OPEN [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='internal open fun <get-bar> (): kotlin.Int declared in <root>.A'

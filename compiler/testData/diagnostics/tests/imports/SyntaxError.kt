@@ -1,11 +1,11 @@
 // FILE:a.kt
 package a
 
-val foo = 2
+konst foo = 2
 fun bar() {}
 
 class B {
-    val foo = 2
+    konst foo = 2
     fun bar() {}
 
     class C

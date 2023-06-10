@@ -22,7 +22,7 @@ import org.jetbrains.annotations.TestOnly;
 
 public interface MutableSlicedMap extends SlicedMap {
 
-    <K, V> void put(WritableSlice<K, V> slice, K key, V value);
+    <K, V> void put(WritableSlice<K, V> slice, K key, V konstue);
 
     void clear();
 

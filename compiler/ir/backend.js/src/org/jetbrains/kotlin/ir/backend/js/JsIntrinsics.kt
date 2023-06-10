@@ -26,105 +26,105 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 import java.util.*
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-class JsIntrinsics(private val irBuiltIns: IrBuiltIns, val context: JsIrBackendContext) {
+class JsIntrinsics(private konst irBuiltIns: IrBuiltIns, konst context: JsIrBackendContext) {
 
     // TODO: Should we drop operator intrinsics in favor of IrDynamicOperatorExpression?
 
     // Global variables
-    val void = getInternalProperty("VOID")
-    val globalThis = getInternalProperty("globalThis")
+    konst void = getInternalProperty("VOID")
+    konst globalThis = getInternalProperty("globalThis")
 
     // Equality operations:
 
-    val jsEqeq = getInternalFunction("jsEqeq")
-    val jsNotEq = getInternalFunction("jsNotEq")
-    val jsEqeqeq = getInternalFunction("jsEqeqeq")
-    val jsNotEqeq = getInternalFunction("jsNotEqeq")
+    konst jsEqeq = getInternalFunction("jsEqeq")
+    konst jsNotEq = getInternalFunction("jsNotEq")
+    konst jsEqeqeq = getInternalFunction("jsEqeqeq")
+    konst jsNotEqeq = getInternalFunction("jsNotEqeq")
 
-    val jsGt = getInternalFunction("jsGt")
-    val jsGtEq = getInternalFunction("jsGtEq")
-    val jsLt = getInternalFunction("jsLt")
-    val jsLtEq = getInternalFunction("jsLtEq")
+    konst jsGt = getInternalFunction("jsGt")
+    konst jsGtEq = getInternalFunction("jsGtEq")
+    konst jsLt = getInternalFunction("jsLt")
+    konst jsLtEq = getInternalFunction("jsLtEq")
 
 
     // Unary operations:
 
-    val jsNot = getInternalFunction("jsNot")
+    konst jsNot = getInternalFunction("jsNot")
 
-    val jsUnaryPlus = getInternalFunction("jsUnaryPlus")
-    val jsUnaryMinus = getInternalFunction("jsUnaryMinus")
+    konst jsUnaryPlus = getInternalFunction("jsUnaryPlus")
+    konst jsUnaryMinus = getInternalFunction("jsUnaryMinus")
 
-    val jsPrefixInc = getInternalFunction("jsPrefixInc")
-    val jsPostfixInc = getInternalFunction("jsPostfixInc")
-    val jsPrefixDec = getInternalFunction("jsPrefixDec")
-    val jsPostfixDec = getInternalFunction("jsPostfixDec")
+    konst jsPrefixInc = getInternalFunction("jsPrefixInc")
+    konst jsPostfixInc = getInternalFunction("jsPostfixInc")
+    konst jsPrefixDec = getInternalFunction("jsPrefixDec")
+    konst jsPostfixDec = getInternalFunction("jsPostfixDec")
 
-    val jsDelete = getInternalFunction("jsDelete")
+    konst jsDelete = getInternalFunction("jsDelete")
 
     // Binary operations:
 
-    val jsPlus = getInternalFunction("jsPlus")
-    val jsMinus = getInternalFunction("jsMinus")
-    val jsMult = getInternalFunction("jsMult")
-    val jsDiv = getInternalFunction("jsDiv")
-    val jsMod = getInternalFunction("jsMod")
+    konst jsPlus = getInternalFunction("jsPlus")
+    konst jsMinus = getInternalFunction("jsMinus")
+    konst jsMult = getInternalFunction("jsMult")
+    konst jsDiv = getInternalFunction("jsDiv")
+    konst jsMod = getInternalFunction("jsMod")
 
-    val jsPlusAssign = getInternalFunction("jsPlusAssign")
-    val jsMinusAssign = getInternalFunction("jsMinusAssign")
-    val jsMultAssign = getInternalFunction("jsMultAssign")
-    val jsDivAssign = getInternalFunction("jsDivAssign")
-    val jsModAssign = getInternalFunction("jsModAssign")
+    konst jsPlusAssign = getInternalFunction("jsPlusAssign")
+    konst jsMinusAssign = getInternalFunction("jsMinusAssign")
+    konst jsMultAssign = getInternalFunction("jsMultAssign")
+    konst jsDivAssign = getInternalFunction("jsDivAssign")
+    konst jsModAssign = getInternalFunction("jsModAssign")
 
-    val jsAnd = getInternalFunction("jsAnd")
-    val jsOr = getInternalFunction("jsOr")
+    konst jsAnd = getInternalFunction("jsAnd")
+    konst jsOr = getInternalFunction("jsOr")
 
-    val jsIn = getInternalFunction("jsInIntrinsic")
+    konst jsIn = getInternalFunction("jsInIntrinsic")
 
     // Bit operations:
 
-    val jsBitAnd = getInternalFunction("jsBitAnd")
-    val jsBitOr = getInternalFunction("jsBitOr")
-    val jsBitXor = getInternalFunction("jsBitXor")
-    val jsBitNot = getInternalFunction("jsBitNot")
+    konst jsBitAnd = getInternalFunction("jsBitAnd")
+    konst jsBitOr = getInternalFunction("jsBitOr")
+    konst jsBitXor = getInternalFunction("jsBitXor")
+    konst jsBitNot = getInternalFunction("jsBitNot")
 
-    val jsBitShiftR = getInternalFunction("jsBitShiftR")
-    val jsBitShiftRU = getInternalFunction("jsBitShiftRU")
-    val jsBitShiftL = getInternalFunction("jsBitShiftL")
+    konst jsBitShiftR = getInternalFunction("jsBitShiftR")
+    konst jsBitShiftRU = getInternalFunction("jsBitShiftRU")
+    konst jsBitShiftL = getInternalFunction("jsBitShiftL")
 
     // Type checks:
 
-    val jsInstanceOf = getInternalFunction("jsInstanceOfIntrinsic")
-    val jsTypeOf = getInternalFunction("jsTypeOf")
-    val isExternalObject = getInternalFunction("isExternalObject")
+    konst jsInstanceOf = getInternalFunction("jsInstanceOfIntrinsic")
+    konst jsTypeOf = getInternalFunction("jsTypeOf")
+    konst isExternalObject = getInternalFunction("isExternalObject")
 
     // Number conversions:
 
-    val jsNumberToByte = getInternalFunction("numberToByte")
-    val jsNumberToDouble = getInternalFunction("numberToDouble")
-    val jsNumberToInt = getInternalFunction("numberToInt")
-    val jsNumberToShort = getInternalFunction("numberToShort")
-    val jsNumberToLong = getInternalFunction("numberToLong")
-    val jsNumberToChar = getInternalFunction("numberToChar")
-    val jsToByte = getInternalFunction("toByte")
-    val jsToShort = getInternalFunction("toShort")
-    val jsToLong = getInternalFunction("toLong")
+    konst jsNumberToByte = getInternalFunction("numberToByte")
+    konst jsNumberToDouble = getInternalFunction("numberToDouble")
+    konst jsNumberToInt = getInternalFunction("numberToInt")
+    konst jsNumberToShort = getInternalFunction("numberToShort")
+    konst jsNumberToLong = getInternalFunction("numberToLong")
+    konst jsNumberToChar = getInternalFunction("numberToChar")
+    konst jsToByte = getInternalFunction("toByte")
+    konst jsToShort = getInternalFunction("toShort")
+    konst jsToLong = getInternalFunction("toLong")
 
 
     // RTTI:
-    val implementSymbol = getInternalFunction("implement")
-    val setMetadataForSymbol = getInternalFunction("setMetadataFor")
+    konst implementSymbol = getInternalFunction("implement")
+    konst setMetadataForSymbol = getInternalFunction("setMetadataFor")
 
-    val isInterfaceSymbol = getInternalFunction("isInterface")
-    val isArraySymbol = getInternalFunction("isArray")
-    //    val isCharSymbol = getInternalFunction("isChar")
-    val isObjectSymbol = getInternalFunction("isObject")
-    val isSuspendFunctionSymbol = getInternalFunction("isSuspendFunction")
+    konst isInterfaceSymbol = getInternalFunction("isInterface")
+    konst isArraySymbol = getInternalFunction("isArray")
+    //    konst isCharSymbol = getInternalFunction("isChar")
+    konst isObjectSymbol = getInternalFunction("isObject")
+    konst isSuspendFunctionSymbol = getInternalFunction("isSuspendFunction")
 
-    val isNumberSymbol = getInternalFunction("isNumber")
-    val isComparableSymbol = getInternalFunction("isComparable")
-    val isCharSequenceSymbol = getInternalFunction("isCharSequence")
+    konst isNumberSymbol = getInternalFunction("isNumber")
+    konst isComparableSymbol = getInternalFunction("isComparable")
+    konst isCharSequenceSymbol = getInternalFunction("isCharSequence")
 
-    val isPrimitiveArray = mapOf(
+    konst isPrimitiveArray = mapOf(
         PrimitiveType.BOOLEAN to getInternalFunction("isBooleanArray"),
         PrimitiveType.BYTE to getInternalFunction("isByteArray"),
         PrimitiveType.SHORT to getInternalFunction("isShortArray"),
@@ -138,154 +138,154 @@ class JsIntrinsics(private val irBuiltIns: IrBuiltIns, val context: JsIrBackendC
 
     // Enum
 
-    val enumValueOfIntrinsic = getInternalFunction("enumValueOfIntrinsic")
-    val enumValuesIntrinsic = getInternalFunction("enumValuesIntrinsic")
+    konst enumValueOfIntrinsic = getInternalFunction("enumValueOfIntrinsic")
+    konst enumValuesIntrinsic = getInternalFunction("enumValuesIntrinsic")
 
 
     // Other:
 
-    val jsCode = getInternalFunction("js") // js("<code>")
-    val jsHashCode = getInternalFunction("hashCode")
-    val jsGetNumberHashCode = getInternalFunction("getNumberHashCode")
-    val jsGetObjectHashCode = getInternalFunction("getObjectHashCode")
-    val jsGetStringHashCode = getInternalFunction("getStringHashCode")
-    val jsToString = getInternalFunction("toString")
-    val jsAnyToString = getInternalFunction("anyToString")
-    val jsCompareTo = getInternalFunction("compareTo")
-    val jsEquals = getInternalFunction("equals")
-    val jsNewTarget = getInternalFunction("jsNewTarget")
-    val jsEmptyObject = getInternalFunction("emptyObject")
-    val jsOpenInitializerBox = getInternalFunction("openInitializerBox")
+    konst jsCode = getInternalFunction("js") // js("<code>")
+    konst jsHashCode = getInternalFunction("hashCode")
+    konst jsGetNumberHashCode = getInternalFunction("getNumberHashCode")
+    konst jsGetObjectHashCode = getInternalFunction("getObjectHashCode")
+    konst jsGetStringHashCode = getInternalFunction("getStringHashCode")
+    konst jsToString = getInternalFunction("toString")
+    konst jsAnyToString = getInternalFunction("anyToString")
+    konst jsCompareTo = getInternalFunction("compareTo")
+    konst jsEquals = getInternalFunction("equals")
+    konst jsNewTarget = getInternalFunction("jsNewTarget")
+    konst jsEmptyObject = getInternalFunction("emptyObject")
+    konst jsOpenInitializerBox = getInternalFunction("openInitializerBox")
 
-    val jsImul = getInternalFunction("imul")
+    konst jsImul = getInternalFunction("imul")
 
-    val jsUnreachableDeclarationLog = getInternalFunction("unreachableDeclarationLog")
-    val jsUnreachableDeclarationException = getInternalFunction("unreachableDeclarationException")
+    konst jsUnreachableDeclarationLog = getInternalFunction("unreachableDeclarationLog")
+    konst jsUnreachableDeclarationException = getInternalFunction("unreachableDeclarationException")
 
-    val jsNativeBoolean = getInternalFunction("nativeBoolean")
-    val jsBooleanInExternalLog = getInternalFunction("booleanInExternalLog")
-    val jsBooleanInExternalException = getInternalFunction("booleanInExternalException")
+    konst jsNativeBoolean = getInternalFunction("nativeBoolean")
+    konst jsBooleanInExternalLog = getInternalFunction("booleanInExternalLog")
+    konst jsBooleanInExternalException = getInternalFunction("booleanInExternalException")
 
-    val jsNewAnonymousClass = getInternalFunction("jsNewAnonymousClass")
+    konst jsNewAnonymousClass = getInternalFunction("jsNewAnonymousClass")
 
     // Coroutines
 
-    val jsCoroutineContext
+    konst jsCoroutineContext
         get() = context.ir.symbols.coroutineContextGetter
 
-    val jsGetContinuation = getInternalFunction("getContinuation")
-    val jsInvokeSuspendSuperType =
+    konst jsGetContinuation = getInternalFunction("getContinuation")
+    konst jsInvokeSuspendSuperType =
         getInternalWithoutPackage("kotlin.coroutines.intrinsics.invokeSuspendSuperType")
-    val jsInvokeSuspendSuperTypeWithReceiver =
+    konst jsInvokeSuspendSuperTypeWithReceiver =
         getInternalWithoutPackage("kotlin.coroutines.intrinsics.invokeSuspendSuperTypeWithReceiver")
-    val jsInvokeSuspendSuperTypeWithReceiverAndParam =
+    konst jsInvokeSuspendSuperTypeWithReceiverAndParam =
         getInternalWithoutPackage("kotlin.coroutines.intrinsics.invokeSuspendSuperTypeWithReceiverAndParam")
 
-    val jsNumberRangeToNumber = getInternalFunction("numberRangeToNumber")
-    val jsNumberRangeToLong = getInternalFunction("numberRangeToLong")
+    konst jsNumberRangeToNumber = getInternalFunction("numberRangeToNumber")
+    konst jsNumberRangeToLong = getInternalFunction("numberRangeToLong")
 
-    private val _rangeUntilFunctions = irBuiltIns.findFunctions(Name.identifier("until"), "kotlin", "ranges")
-    val rangeUntilFunctions by lazy(LazyThreadSafetyMode.NONE) {
+    private konst _rangeUntilFunctions = irBuiltIns.findFunctions(Name.identifier("until"), "kotlin", "ranges")
+    konst rangeUntilFunctions by lazy(LazyThreadSafetyMode.NONE) {
         _rangeUntilFunctions
-            .filter { it.owner.extensionReceiverParameter != null && it.owner.valueParameters.size == 1 }
-            .associateBy { it.owner.extensionReceiverParameter!!.type to it.owner.valueParameters[0].type }
+            .filter { it.owner.extensionReceiverParameter != null && it.owner.konstueParameters.size == 1 }
+            .associateBy { it.owner.extensionReceiverParameter!!.type to it.owner.konstueParameters[0].type }
     }
 
-    val longClassSymbol = getInternalClassWithoutPackage("kotlin.Long")
+    konst longClassSymbol = getInternalClassWithoutPackage("kotlin.Long")
 
-    val promiseClassSymbol: IrClassSymbol by context.lazy2 {
+    konst promiseClassSymbol: IrClassSymbol by context.lazy2 {
         getInternalClassWithoutPackage("kotlin.js.Promise")
     }
 
-    val metadataInterfaceConstructorSymbol = getInternalFunction("interfaceMeta")
-    val metadataObjectConstructorSymbol = getInternalFunction("objectMeta")
-    val metadataClassConstructorSymbol = getInternalFunction("classMeta")
+    konst metadataInterfaceConstructorSymbol = getInternalFunction("interfaceMeta")
+    konst metadataObjectConstructorSymbol = getInternalFunction("objectMeta")
+    konst metadataClassConstructorSymbol = getInternalFunction("classMeta")
 
-    val longToDouble = context.symbolTable.referenceSimpleFunction(
+    konst longToDouble = context.symbolTable.referenceSimpleFunction(
         context.getClass(FqName("kotlin.Long")).unsubstitutedMemberScope.findSingleFunction(
             Name.identifier("toDouble")
         )
     )
-    val longToFloat = context.symbolTable.referenceSimpleFunction(
+    konst longToFloat = context.symbolTable.referenceSimpleFunction(
         context.getClass(FqName("kotlin.Long")).unsubstitutedMemberScope.findSingleFunction(
             Name.identifier("toFloat")
         )
     )
 
-    val longCompareToLong: IrSimpleFunction = longClassSymbol.owner.findDeclaration<IrSimpleFunction> {
-        it.name == Name.identifier("compareTo") && it.valueParameters[0].type.isLong()
+    konst longCompareToLong: IrSimpleFunction = longClassSymbol.owner.findDeclaration<IrSimpleFunction> {
+        it.name == Name.identifier("compareTo") && it.konstueParameters[0].type.isLong()
     }!!
 
-    val charClassSymbol = getInternalClassWithoutPackage("kotlin.Char")
+    konst charClassSymbol = getInternalClassWithoutPackage("kotlin.Char")
 
-    val stringClassSymbol = getInternalClassWithoutPackage("kotlin.String")
-    val stringConstructorSymbol = stringClassSymbol.constructors.single()
+    konst stringClassSymbol = getInternalClassWithoutPackage("kotlin.String")
+    konst stringConstructorSymbol = stringClassSymbol.constructors.single()
 
-    val anyClassSymbol = getInternalClassWithoutPackage("kotlin.Any")
-    val anyConstructorSymbol = anyClassSymbol.constructors.single()
+    konst anyClassSymbol = getInternalClassWithoutPackage("kotlin.Any")
+    konst anyConstructorSymbol = anyClassSymbol.constructors.single()
 
-    val jsObjectClassSymbol = getInternalClassWithoutPackage("kotlin.js.JsObject")
-    val jsObjectConstructorSymbol by context.lazy2 { jsObjectClassSymbol.constructors.single() }
+    konst jsObjectClassSymbol = getInternalClassWithoutPackage("kotlin.js.JsObject")
+    konst jsObjectConstructorSymbol by context.lazy2 { jsObjectClassSymbol.constructors.single() }
 
-    val uByteClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UByte") }
-    val uShortClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UShort") }
-    val uIntClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UInt") }
-    val uLongClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.ULong") }
+    konst uByteClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UByte") }
+    konst uShortClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UShort") }
+    konst uIntClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.UInt") }
+    konst uLongClassSymbol by context.lazy2 { getInternalClassWithoutPackage("kotlin.ULong") }
 
-    val unreachable = getInternalFunction("unreachable")
+    konst unreachable = getInternalFunction("unreachable")
 
-    val jsArguments = getInternalFunction("jsArguments")
+    konst jsArguments = getInternalFunction("jsArguments")
 
-    val returnIfSuspended = getInternalFunction("returnIfSuspended")
-    val getContinuation = getInternalFunction("getContinuation")
+    konst returnIfSuspended = getInternalFunction("returnIfSuspended")
+    konst getContinuation = getInternalFunction("getContinuation")
 
-    val jsEnsureNonNull = getFunctionInKotlinPackage("ensureNotNull")
+    konst jsEnsureNonNull = getFunctionInKotlinPackage("ensureNotNull")
 
     // Arrays:
-    val array get() = irBuiltIns.arrayClass
+    konst array get() = irBuiltIns.arrayClass
 
-    val primitiveArrays get() = irBuiltIns.primitiveArraysToPrimitiveTypes
+    konst primitiveArrays get() = irBuiltIns.primitiveArraysToPrimitiveTypes
 
-    val jsArray = getInternalFunction("arrayWithFun")
-    val jsFillArray = getInternalFunction("fillArrayFun")
+    konst jsArray = getInternalFunction("arrayWithFun")
+    konst jsFillArray = getInternalFunction("fillArrayFun")
 
-    val jsArrayLength = getInternalFunction("jsArrayLength")
-    val jsArrayGet = getInternalFunction("jsArrayGet")
-    val jsArraySet = getInternalFunction("jsArraySet")
+    konst jsArrayLength = getInternalFunction("jsArrayLength")
+    konst jsArrayGet = getInternalFunction("jsArrayGet")
+    konst jsArraySet = getInternalFunction("jsArraySet")
 
-    val jsArrayIteratorFunction = getInternalFunction("arrayIterator")
+    konst jsArrayIteratorFunction = getInternalFunction("arrayIterator")
 
-    val jsPrimitiveArrayIteratorFunctions =
-        PrimitiveType.values().associate { it to getInternalFunction("${it.typeName.asString().toLowerCaseAsciiOnly()}ArrayIterator") }
+    konst jsPrimitiveArrayIteratorFunctions =
+        PrimitiveType.konstues().associate { it to getInternalFunction("${it.typeName.asString().toLowerCaseAsciiOnly()}ArrayIterator") }
 
-    val jsClass = getInternalFunction("jsClassIntrinsic")
-    val arrayLiteral: IrSimpleFunctionSymbol = getInternalFunction("arrayLiteral")
+    konst jsClass = getInternalFunction("jsClassIntrinsic")
+    konst arrayLiteral: IrSimpleFunctionSymbol = getInternalFunction("arrayLiteral")
 
     // The following 3 functions are all lowered into [].slice.call(...), they only differ
     // in the number of arguments.
     // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
-    val jsArrayLike2Array = getInternalFunction("jsArrayLike2Array")
-    val jsSliceArrayLikeFromIndex = getInternalFunction("jsSliceArrayLikeFromIndex")
-    val jsSliceArrayLikeFromIndexToIndex = getInternalFunction("jsSliceArrayLikeFromIndexToIndex")
+    konst jsArrayLike2Array = getInternalFunction("jsArrayLike2Array")
+    konst jsSliceArrayLikeFromIndex = getInternalFunction("jsSliceArrayLikeFromIndex")
+    konst jsSliceArrayLikeFromIndexToIndex = getInternalFunction("jsSliceArrayLikeFromIndexToIndex")
 
     internal inner class JsReflectionSymbols : ReflectionSymbols {
-        override val createKType = getInternalWithoutPackageOrNull("createKType")
-        override val createDynamicKType = getInternalWithoutPackageOrNull("createDynamicKType")
-        override val createKTypeParameter = getInternalWithoutPackageOrNull("createKTypeParameter")
-        override val getStarKTypeProjection = getInternalWithoutPackageOrNull("getStarKTypeProjection")
-        override val createCovariantKTypeProjection = getInternalWithoutPackageOrNull("createCovariantKTypeProjection")
-        override val createInvariantKTypeProjection = getInternalWithoutPackageOrNull("createInvariantKTypeProjection")
-        override val createContravariantKTypeProjection = getInternalWithoutPackageOrNull("createContravariantKTypeProjection")
-        override val getKClass = getInternalWithoutPackage("getKClass")
-        override val getKClassFromExpression = getInternalWithoutPackage("getKClassFromExpression")
-        override val primitiveClassesObject = context.getIrClass(FqName("kotlin.reflect.js.internal.PrimitiveClasses"))
-        override val kTypeClass: IrClassSymbol = context.getIrClass(FqName("kotlin.reflect.KType"))
-        override val getClassData: IrSimpleFunctionSymbol get() = jsClass
+        override konst createKType = getInternalWithoutPackageOrNull("createKType")
+        override konst createDynamicKType = getInternalWithoutPackageOrNull("createDynamicKType")
+        override konst createKTypeParameter = getInternalWithoutPackageOrNull("createKTypeParameter")
+        override konst getStarKTypeProjection = getInternalWithoutPackageOrNull("getStarKTypeProjection")
+        override konst createCovariantKTypeProjection = getInternalWithoutPackageOrNull("createCovariantKTypeProjection")
+        override konst createInvariantKTypeProjection = getInternalWithoutPackageOrNull("createInvariantKTypeProjection")
+        override konst createContravariantKTypeProjection = getInternalWithoutPackageOrNull("createContravariantKTypeProjection")
+        override konst getKClass = getInternalWithoutPackage("getKClass")
+        override konst getKClassFromExpression = getInternalWithoutPackage("getKClassFromExpression")
+        override konst primitiveClassesObject = context.getIrClass(FqName("kotlin.reflect.js.internal.PrimitiveClasses"))
+        override konst kTypeClass: IrClassSymbol = context.getIrClass(FqName("kotlin.reflect.KType"))
+        override konst getClassData: IrSimpleFunctionSymbol get() = jsClass
     }
 
-    internal val reflectionSymbols: JsReflectionSymbols = JsReflectionSymbols()
+    internal konst reflectionSymbols: JsReflectionSymbols = JsReflectionSymbols()
 
-    val primitiveToTypedArrayMap = EnumMap(
+    konst primitiveToTypedArrayMap = EnumMap(
         mapOf(
             PrimitiveType.BYTE to "Int8",
             PrimitiveType.SHORT to "Int16",
@@ -295,85 +295,85 @@ class JsIntrinsics(private val irBuiltIns: IrBuiltIns, val context: JsIrBackendC
         )
     )
 
-    val primitiveToSizeConstructor =
-        PrimitiveType.values().associate { type ->
+    konst primitiveToSizeConstructor =
+        PrimitiveType.konstues().associate { type ->
             type to (primitiveToTypedArrayMap[type]?.let {
                 getInternalFunction("${it.toLowerCaseAsciiOnly()}Array")
             } ?: getInternalFunction("${type.typeName.asString().toLowerCaseAsciiOnly()}Array"))
         }
 
-    val primitiveToLiteralConstructor =
-        PrimitiveType.values().associate { type ->
+    konst primitiveToLiteralConstructor =
+        PrimitiveType.konstues().associate { type ->
             type to (primitiveToTypedArrayMap[type]?.let {
                 getInternalFunction("${it.toLowerCaseAsciiOnly()}ArrayOf")
             } ?: getInternalFunction("${type.typeName.asString().toLowerCaseAsciiOnly()}ArrayOf"))
         }
 
-    val arrayConcat = getInternalWithoutPackage("arrayConcat")
+    konst arrayConcat = getInternalWithoutPackage("arrayConcat")
 
-    val primitiveArrayConcat = getInternalWithoutPackage("primitiveArrayConcat")
-    val taggedArrayCopy = getInternalWithoutPackage("taggedArrayCopy")
+    konst primitiveArrayConcat = getInternalWithoutPackage("primitiveArrayConcat")
+    konst taggedArrayCopy = getInternalWithoutPackage("taggedArrayCopy")
 
-    val jsArraySlice = getInternalFunction("slice")
+    konst jsArraySlice = getInternalFunction("slice")
 
-    val jsCall = getInternalFunction("jsCall")
-    val jsBind = getInternalFunction("jsBind")
+    konst jsCall = getInternalFunction("jsCall")
+    konst jsBind = getInternalFunction("jsBind")
 
     // TODO move to IntrinsifyCallsLowering
-    val doNotIntrinsifyAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("DoNotIntrinsify"))
-    val jsFunAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsFun"))
-    val jsNameAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsName"))
+    konst doNotIntrinsifyAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("DoNotIntrinsify"))
+    konst jsFunAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsFun"))
+    konst jsNameAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsName"))
 
-    val jsExportAnnotationSymbol by lazy(LazyThreadSafetyMode.NONE) {
+    konst jsExportAnnotationSymbol by lazy(LazyThreadSafetyMode.NONE) {
       context.symbolTable.referenceClass(context.getJsInternalClass("JsExport"))
     }
 
-    val jsExportIgnoreAnnotationSymbol by lazy(LazyThreadSafetyMode.NONE) {
+    konst jsExportIgnoreAnnotationSymbol by lazy(LazyThreadSafetyMode.NONE) {
         jsExportAnnotationSymbol.owner
             .findDeclaration<IrClass> { it.fqNameWhenAvailable == FqName("kotlin.js.JsExport.Ignore") }
             ?.symbol ?: error("can't find kotlin.js.JsExport.Ignore annotation")
     }
 
-    val jsImplicitExportAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsImplicitExport"))
+    konst jsImplicitExportAnnotationSymbol = context.symbolTable.referenceClass(context.getJsInternalClass("JsImplicitExport"))
 
     // TODO move CharSequence-related stiff to IntrinsifyCallsLowering
-    val charSequenceClassSymbol = context.symbolTable.referenceClass(context.getClass(FqName("kotlin.CharSequence")))
-    val charSequenceLengthPropertyGetterSymbol by context.lazy2 {
+    konst charSequenceClassSymbol = context.symbolTable.referenceClass(context.getClass(FqName("kotlin.CharSequence")))
+    konst charSequenceLengthPropertyGetterSymbol by context.lazy2 {
         with(charSequenceClassSymbol.owner.declarations) {
             filterIsInstance<IrProperty>().firstOrNull { it.name.asString() == "length" }?.getter ?:
             filterIsInstance<IrFunction>().first { it.name.asString() == "<get-length>" }
         }.symbol
     }
-    val charSequenceGetFunctionSymbol by context.lazy2 {
+    konst charSequenceGetFunctionSymbol by context.lazy2 {
         charSequenceClassSymbol.owner.declarations.filterIsInstance<IrFunction>().single { it.name.asString() == "get" }.symbol
     }
-    val charSequenceSubSequenceFunctionSymbol by context.lazy2 {
+    konst charSequenceSubSequenceFunctionSymbol by context.lazy2 {
         charSequenceClassSymbol.owner.declarations.filterIsInstance<IrFunction>().single { it.name.asString() == "subSequence" }.symbol
     }
 
 
-    val jsCharSequenceGet = getInternalFunction("charSequenceGet")
-    val jsCharSequenceLength = getInternalFunction("charSequenceLength")
-    val jsCharSequenceSubSequence = getInternalFunction("charSequenceSubSequence")
+    konst jsCharSequenceGet = getInternalFunction("charSequenceGet")
+    konst jsCharSequenceLength = getInternalFunction("charSequenceLength")
+    konst jsCharSequenceSubSequence = getInternalFunction("charSequenceSubSequence")
 
-    val jsContexfulRef = getInternalFunction("jsContextfulRef")
-    val jsBoxIntrinsic = getInternalFunction("boxIntrinsic")
-    val jsUnboxIntrinsic = getInternalFunction("unboxIntrinsic")
+    konst jsContexfulRef = getInternalFunction("jsContextfulRef")
+    konst jsBoxIntrinsic = getInternalFunction("boxIntrinsic")
+    konst jsUnboxIntrinsic = getInternalFunction("unboxIntrinsic")
 
-    val captureStack = getInternalFunction("captureStack")
+    konst captureStack = getInternalFunction("captureStack")
 
-    val createSharedBox = getInternalFunction("sharedBoxCreate")
-    val readSharedBox = getInternalFunction("sharedBoxRead")
-    val writeSharedBox = getInternalFunction("sharedBoxWrite")
+    konst createSharedBox = getInternalFunction("sharedBoxCreate")
+    konst readSharedBox = getInternalFunction("sharedBoxRead")
+    konst writeSharedBox = getInternalFunction("sharedBoxWrite")
 
-    val linkageErrorSymbol = getInternalFunction("throwLinkageError")
+    konst linkageErrorSymbol = getInternalFunction("throwLinkageError")
 
-    val jsPrototypeOfSymbol = getInternalFunction("protoOf")
-    val jsDefinePropertySymbol = getInternalFunction("defineProp")
-    val jsObjectCreateSymbol = getInternalFunction("objectCreate")                 // Object.create(x)
-    val jsCreateThisSymbol = getInternalFunction("createThis")                     // Object.create(x.prototype)
-    val jsBoxApplySymbol = getInternalFunction("boxApply")
-    val jsCreateExternalThisSymbol = getInternalFunction("createExternalThis")
+    konst jsPrototypeOfSymbol = getInternalFunction("protoOf")
+    konst jsDefinePropertySymbol = getInternalFunction("defineProp")
+    konst jsObjectCreateSymbol = getInternalFunction("objectCreate")                 // Object.create(x)
+    konst jsCreateThisSymbol = getInternalFunction("createThis")                     // Object.create(x.prototype)
+    konst jsBoxApplySymbol = getInternalFunction("boxApply")
+    konst jsCreateExternalThisSymbol = getInternalFunction("createExternalThis")
 
     // Helpers:
 
@@ -387,7 +387,7 @@ class JsIntrinsics(private val irBuiltIns: IrBuiltIns, val context: JsIrBackendC
         context.symbolTable.referenceSimpleFunction(context.getFunctions(FqName(name)).single())
 
     private fun getInternalWithoutPackageOrNull(name: String): IrSimpleFunctionSymbol? {
-        val descriptor = context.getFunctions(FqName(name)).singleOrNull() ?: return null
+        konst descriptor = context.getFunctions(FqName(name)).singleOrNull() ?: return null
         return context.symbolTable.referenceSimpleFunction(descriptor)
     }
 

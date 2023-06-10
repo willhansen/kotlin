@@ -11,8 +11,8 @@ fun interface IExtFun {
 }
 
 fun box(): String {
-    val oChar = 'O'
-    val iExtFun = IExtFun { this + oChar.toString() + it }
+    konst oChar = 'O'
+    konst iExtFun = IExtFun { this + oChar.toString() + it }
     return with(iExtFun) {
         "".foo("K")
     }

@@ -23,7 +23,7 @@ import kotlin.test.assertTrue
 @DisplayName("Kapt incremental tests with aggregating apt")
 open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
 
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(
         incremental = true,
         kaptOptions = super.defaultBuildOptions.kaptOptions!!.copy(
             verbose = true,
@@ -72,7 +72,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
             }
 
             javaSourcesDir().resolve("foo/JavaClass.java").modify { current ->
-                val lastBrace = current.lastIndexOf("}")
+                konst lastBrace = current.lastIndexOf("}")
                 current.substring(0, lastBrace) + "private void anotherFun() {}\n }"
             }
             build("assemble") {
@@ -118,7 +118,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
     @GradleTest
     fun testClasspathChanges(gradleVersion: GradleVersion) {
         project("incrementalMultiproject", gradleVersion) {
-            val processorPath = generateProcessor("AGGREGATING" to IncrementalProcessor::class.java)
+            konst processorPath = generateProcessor("AGGREGATING" to IncrementalProcessor::class.java)
 
             subProject("app").buildGradle.modify {
                 it
@@ -145,9 +145,9 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
 
             build("clean", ":app:assemble")
 
-            val aKtSourceFile = subProject("lib").kotlinSourcesDir().resolve("bar/A.kt")
+            konst aKtSourceFile = subProject("lib").kotlinSourcesDir().resolve("bar/A.kt")
             aKtSourceFile.modify { current ->
-                val lastBrace = current.lastIndexOf("}")
+                konst lastBrace = current.lastIndexOf("}")
                 current.substring(0, lastBrace) + "fun anotherFun() {}\n }"
             }
 
@@ -168,7 +168,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
             }
 
             aKtSourceFile.modify { current ->
-                val lastBrace = current.lastIndexOf("}")
+                konst lastBrace = current.lastIndexOf("}")
                 current.substring(0, lastBrace) + "private fun privateFunction() {}\n }"
             }
             build("assemble") {
@@ -181,7 +181,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
     @GradleTest
     fun testIncompatibleClasspathChanges(gradleVersion: GradleVersion) {
         kaptProject(gradleVersion) {
-            val useBSourceFile = javaSourcesDir().resolve("bar/useB.kt")
+            konst useBSourceFile = javaSourcesDir().resolve("bar/useB.kt")
             useBSourceFile.modify { current ->
                 current + """
 
@@ -230,9 +230,9 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
     }
 
     private fun TestProject.checkAggregatingResource(check: (List<String>) -> Unit) {
-        val aggregatingResource = "build/tmp/kapt3/classes/main/generated.txt"
+        konst aggregatingResource = "build/tmp/kapt3/classes/main/generated.txt"
         assertFileInProjectExists(aggregatingResource)
-        val lines = projectPath.resolve(aggregatingResource).readLines()
+        konst lines = projectPath.resolve(aggregatingResource).readLines()
         check(lines)
     }
 
@@ -268,7 +268,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
             }
 
             //change file without annotations
-            val noAnnotationsSourceFile = javaSourcesDir().resolve("bar/noAnnotations.kt")
+            konst noAnnotationsSourceFile = javaSourcesDir().resolve("bar/noAnnotations.kt")
             noAnnotationsSourceFile.modify { current -> "$current\nfun otherFunction() {}" }
 
             build("assemble") {
@@ -288,7 +288,7 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
             }
 
             //add new file with annotations
-            val newBazClass = javaSourcesDir().resolve("baz/BazClass.kt").also {
+            konst newBazClass = javaSourcesDir().resolve("baz/BazClass.kt").also {
                 it.parent.createDirectories()
             }
             newBazClass.writeText(
@@ -392,5 +392,5 @@ open class KaptIncrementalWithAggregatingApt : KaptIncrementalIT() {
 
 @DisplayName("Kapt incremental tests with aggregating apt with precise compilation outputs backup")
 class KaptIncrementalWithAggregatingAptAndPreciseBackup : KaptIncrementalWithAggregatingApt() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }

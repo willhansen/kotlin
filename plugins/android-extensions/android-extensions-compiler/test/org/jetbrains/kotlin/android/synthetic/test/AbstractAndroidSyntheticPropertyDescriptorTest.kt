@@ -22,26 +22,26 @@ import java.io.File
 
 abstract class AbstractAndroidSyntheticPropertyDescriptorTest : KtUsefulTestCase() {
     fun doTest(path: String) {
-        val config = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.ANDROID_API)
-        val env = createTestEnvironment(config, getResPaths(path))
-        val project = env.project
+        konst config = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.ANDROID_API)
+        konst env = createTestEnvironment(config, getResPaths(path))
+        konst project = env.project
 
-        val ext = PackageFragmentProviderExtension.getInstances(project).first { it is AndroidPackageFragmentProviderExtension }
+        konst ext = PackageFragmentProviderExtension.getInstances(project).first { it is AndroidPackageFragmentProviderExtension }
 
-        val analysisResult = JvmResolveUtil.analyzeAndCheckForErrors(listOf(), env)
+        konst analysisResult = JvmResolveUtil.analyzeAndCheckForErrors(listOf(), env)
 
-        val fragmentProvider =
+        konst fragmentProvider =
             ext.getPackageFragmentProvider(
                 project, analysisResult.moduleDescriptor, LockBasedStorageManager.NO_LOCKS,
                 DummyTraces.DUMMY_EXCEPTION_ON_ERROR_TRACE, null, LookupTracker.DO_NOTHING
             ) as AndroidSyntheticPackageFragmentProvider
 
-        val renderer = DescriptorRenderer.COMPACT_WITH_MODIFIERS
-        val expected = fragmentProvider.packages.values
+        konst renderer = DescriptorRenderer.COMPACT_WITH_MODIFIERS
+        konst expected = fragmentProvider.packages.konstues
             .map { it() }
             .sortedBy { it.fqName.asString() }
             .joinToString(separator = "\n\n\n") { packageFragment ->
-                val descriptors = packageFragment.getMemberScope().getContributedDescriptors()
+                konst descriptors = packageFragment.getMemberScope().getContributedDescriptors()
                     .sortedWith(MemberComparator.INSTANCE)
                     .joinToString("\n") { "    " + renderer.render(it) }
                 packageFragment.fqName.asString() + (if (descriptors.isNotEmpty()) "\n\n" + descriptors else "")

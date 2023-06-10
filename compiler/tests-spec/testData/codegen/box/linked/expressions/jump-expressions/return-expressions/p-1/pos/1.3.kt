@@ -10,9 +10,9 @@
  * NUMBER: 3
  * DESCRIPTION:
  */
-val flag = false
+konst flag = false
 fun box() : String{
-    val x = foo()
+    konst x = foo()
     if (x is kotlin.Unit && !flag)
         return "OK"
     return "NOK"
@@ -22,5 +22,5 @@ fun foo() {
     return
     1
     flag = true
-    val x = ""
+    konst x = ""
 }

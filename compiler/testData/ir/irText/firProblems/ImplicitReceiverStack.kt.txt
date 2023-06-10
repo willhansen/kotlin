@@ -7,7 +7,7 @@ interface Symbol<E : SymbolOwner<E>> {
 }
 
 interface ReceiverValue {
-  abstract val type: String
+  abstract konst type: String
     abstract get
 
 }
@@ -19,11 +19,11 @@ class ImplicitReceiverValue<S : Symbol<*>> : ReceiverValue {
 
   }
 
-  val boundSymbol: S?
+  konst boundSymbol: S?
     field = boundSymbol
     get
 
-  override val type: String
+  override konst type: String
     field = type
     override get
 
@@ -47,7 +47,7 @@ class PersistentImplicitReceiverStack : ImplicitReceiverStack, Iterable<Implicit
 
   }
 
-  private val stack: List<ImplicitReceiverValue<*>>
+  private konst stack: List<ImplicitReceiverValue<*>>
     field = stack
     private get
 
@@ -73,10 +73,10 @@ fun foo(stack: PersistentImplicitReceiverStack) {
 }
 
 fun box(): String {
-  val stack: PersistentImplicitReceiverStack = PersistentImplicitReceiverStack(stack = listOf<ImplicitReceiverValue<Nothing>>(elements = [ImplicitReceiverValue<Nothing>(boundSymbol = null, type = "O"), ImplicitReceiverValue<Nothing>(boundSymbol = null, type = "K")]))
+  konst stack: PersistentImplicitReceiverStack = PersistentImplicitReceiverStack(stack = listOf<ImplicitReceiverValue<Nothing>>(elements = [ImplicitReceiverValue<Nothing>(boundSymbol = null, type = "O"), ImplicitReceiverValue<Nothing>(boundSymbol = null, type = "K")]))
   foo(stack = stack)
   return stack.first<ImplicitReceiverValue<*>>().<get-type>().plus(other = { // BLOCK
-    val tmp0_safe_receiver: ImplicitReceiverValue<*>? = stack.get(name = null)
+    konst tmp0_safe_receiver: ImplicitReceiverValue<*>? = stack.get(name = null)
     when {
       EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
       else -> tmp0_safe_receiver.<get-type>()

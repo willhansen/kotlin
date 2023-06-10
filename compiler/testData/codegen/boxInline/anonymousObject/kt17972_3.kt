@@ -4,14 +4,14 @@ package test
 
 class Test {
 
-    val prop: String = "OK"
+    konst prop: String = "OK"
 
     fun test() =
             inlineFun {
                 noInline {
                     inlineFun {
                         object {
-                            val inflater = prop
+                            konst inflater = prop
                         }.inflater
                     }
                 }

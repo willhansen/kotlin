@@ -6,11 +6,11 @@
 package org.jetbrains.kotlin.fir
 
 abstract class FirAbstractTarget<E : FirTargetElement>(
-    override val labelName: String?
+    override konst labelName: String?
 ) : FirTarget<E> {
     protected abstract var _labeledElement: E
 
-    final override val labeledElement: E
+    final override konst labeledElement: E
         get() = _labeledElement
 
     override fun bind(element: E) {

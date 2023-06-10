@@ -5,19 +5,19 @@ import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import java.io.File
 
 data class NodeJsEnv(
-    val cleanableStore: CleanableStore,
-    val rootPackageDir: File,
-    val nodeDir: File,
-    val nodeBinDir: File,
-    val nodeExecutable: String,
+    konst cleanableStore: CleanableStore,
+    konst rootPackageDir: File,
+    konst nodeDir: File,
+    konst nodeBinDir: File,
+    konst nodeExecutable: String,
 
-    val platformName: String,
-    val architectureName: String,
-    val ivyDependency: String,
-    val downloadBaseUrl: String,
+    konst platformName: String,
+    konst architectureName: String,
+    konst ivyDependency: String,
+    konst downloadBaseUrl: String,
 
-    val packageManager: NpmApi,
+    konst packageManager: NpmApi,
 ) {
-    val isWindows: Boolean
+    konst isWindows: Boolean
         get() = platformName == "win"
 }

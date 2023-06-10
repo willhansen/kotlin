@@ -10,7 +10,7 @@ object IdeaKpmModuleCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmModuleCoordinatesProtoKt {
       @JvmName("getBuildId")
       get() = _builder.getBuildId()
       @JvmName("setBuildId")
-      set(value) {
-        _builder.setBuildId(value)
+      set(konstue) {
+        _builder.setBuildId(konstue)
       }
     /**
      * <code>optional string build_id = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKpmModuleCoordinatesProtoKt {
       @JvmName("getProjectPath")
       get() = _builder.getProjectPath()
       @JvmName("setProjectPath")
-      set(value) {
-        _builder.setProjectPath(value)
+      set(konstue) {
+        _builder.setProjectPath(konstue)
       }
     /**
      * <code>optional string project_path = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKpmModuleCoordinatesProtoKt {
       @JvmName("getProjectName")
       get() = _builder.getProjectName()
       @JvmName("setProjectName")
-      set(value) {
-        _builder.setProjectName(value)
+      set(konstue) {
+        _builder.setProjectName(konstue)
       }
     /**
      * <code>optional string project_name = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKpmModuleCoordinatesProtoKt {
       @JvmName("getModuleName")
       get() = _builder.getModuleName()
       @JvmName("setModuleName")
-      set(value) {
-        _builder.setModuleName(value)
+      set(konstue) {
+        _builder.setModuleName(konstue)
       }
     /**
      * <code>optional string module_name = 4;</code>
@@ -125,8 +125,8 @@ object IdeaKpmModuleCoordinatesProtoKt {
       @JvmName("getModuleClassifier")
       get() = _builder.getModuleClassifier()
       @JvmName("setModuleClassifier")
-      set(value) {
-        _builder.setModuleClassifier(value)
+      set(konstue) {
+        _builder.setModuleClassifier(konstue)
       }
     /**
      * <code>optional string module_classifier = 5;</code>

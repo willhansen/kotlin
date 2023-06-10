@@ -72,22 +72,22 @@ abstract class TowerScopeLevel {
 // So: extension receiver = either none, if dispatch receiver = explicit receiver,
 //     or given implicit or explicit receiver, otherwise
 class MemberScopeTowerLevel(
-    private val bodyResolveComponents: BodyResolveComponents,
-    val dispatchReceiverValue: ReceiverValue,
-    private val givenExtensionReceiverOptions: List<ReceiverValue>,
-    private val skipSynthetics: Boolean,
+    private konst bodyResolveComponents: BodyResolveComponents,
+    konst dispatchReceiverValue: ReceiverValue,
+    private konst givenExtensionReceiverOptions: List<ReceiverValue>,
+    private konst skipSynthetics: Boolean,
 ) : TowerScopeLevel() {
-    private val scopeSession: ScopeSession get() = bodyResolveComponents.scopeSession
-    private val session: FirSession get() = bodyResolveComponents.session
+    private konst scopeSession: ScopeSession get() = bodyResolveComponents.scopeSession
+    private konst session: FirSession get() = bodyResolveComponents.session
 
     private fun <T : FirCallableSymbol<*>> processMembers(
         output: TowerScopeLevelProcessor<T>,
         processScopeMembers: FirScope.(processor: (T) -> Unit) -> Unit
     ): ProcessResult {
-        val scope = dispatchReceiverValue.scope(session, scopeSession) ?: return ProcessResult.SCOPE_EMPTY
+        konst scope = dispatchReceiverValue.scope(session, scopeSession) ?: return ProcessResult.SCOPE_EMPTY
         var (empty, candidates) = scope.collectCandidates(processScopeMembers)
 
-        val scopeWithoutSmartcast = getOriginalReceiverExpressionIfStableSmartCast()?.typeRef
+        konst scopeWithoutSmartcast = getOriginalReceiverExpressionIfStableSmartCast()?.typeRef
             ?.coneType
             ?.scope(
                 session,
@@ -99,7 +99,7 @@ class MemberScopeTowerLevel(
         if (scopeWithoutSmartcast == null) {
             consumeCandidates(output, candidates)
         } else {
-            val isFromSmartCast: MutableMap<MemberWithBaseScope<T>, Boolean> = mutableMapOf()
+            konst isFromSmartCast: MutableMap<MemberWithBaseScope<T>, Boolean> = mutableMapOf()
 
             scopeWithoutSmartcast.collectCandidates(processScopeMembers).let { (isEmpty, originalCandidates) ->
                 empty = empty && isEmpty
@@ -121,14 +121,14 @@ class MemberScopeTowerLevel(
         }
 
         if (givenExtensionReceiverOptions.isEmpty() && !skipSynthetics) {
-            val dispatchReceiverType = dispatchReceiverValue.type
+            konst dispatchReceiverType = dispatchReceiverValue.type
 
-            val useSiteForSyntheticScope: FirTypeScope
-            val typeForSyntheticScope: ConeKotlinType
+            konst useSiteForSyntheticScope: FirTypeScope
+            konst typeForSyntheticScope: ConeKotlinType
 
             // In K1, synthetic properties were working a bit differently
             // - On first step they've been built on the per-class level
-            // - Then, they've been handled as regular extensions with specific receiver value
+            // - Then, they've been handled as regular extensions with specific receiver konstue
             // In K2, we build those properties using specific use-site scope of given receiver
             // And that gives us different results in case of raw types (since we've got special scopes for them)
             // So, here we decide to preserve the K1 behavior just by converting the type to its non-raw version
@@ -145,7 +145,7 @@ class MemberScopeTowerLevel(
                 useSiteForSyntheticScope = scope
             }
 
-            val withSynthetic = FirSyntheticPropertiesScope.createIfSyntheticNamesProviderIsDefined(
+            konst withSynthetic = FirSyntheticPropertiesScope.createIfSyntheticNamesProviderIsDefined(
                 session,
                 typeForSyntheticScope,
                 useSiteForSyntheticScope,
@@ -169,11 +169,11 @@ class MemberScopeTowerLevel(
         processScopeMembers: FirScope.(processor: (T) -> Unit) -> Unit
     ): Pair<Boolean, List<MemberWithBaseScope<T>>> {
         var empty = true
-        val result = mutableListOf<MemberWithBaseScope<T>>()
+        konst result = mutableListOf<MemberWithBaseScope<T>>()
         processScopeMembers { candidate ->
             empty = false
             if (candidate.hasConsistentExtensionReceiver(givenExtensionReceiverOptions)) {
-                val fir = candidate.fir
+                konst fir = candidate.fir
                 if ((fir as? FirConstructor)?.isInner == false) {
                     return@processScopeMembers
                 }
@@ -192,11 +192,11 @@ class MemberScopeTowerLevel(
         isFromSmartCast: Map<MemberWithBaseScope<T>, Boolean>? = null
     ) {
         for (candidateWithScope in candidates) {
-            val (candidate, scope) = candidateWithScope
+            konst (candidate, scope) = candidateWithScope
             if (candidate.hasConsistentExtensionReceiver(givenExtensionReceiverOptions)) {
-                val isFromOriginalTypeInPresenceOfSmartCast = isFromSmartCast != null && !isFromSmartCast.getValue(candidateWithScope)
+                konst isFromOriginalTypeInPresenceOfSmartCast = isFromSmartCast != null && !isFromSmartCast.getValue(candidateWithScope)
 
-                val dispatchReceiverToUse = when {
+                konst dispatchReceiverToUse = when {
                     isFromOriginalTypeInPresenceOfSmartCast ->
                         getOriginalReceiverExpressionIfStableSmartCast()?.let(::ExpressionReceiverValue)
                     else -> dispatchReceiverValue
@@ -222,7 +222,7 @@ class MemberScopeTowerLevel(
         info: CallInfo,
         processor: TowerScopeLevelProcessor<FirFunctionSymbol<*>>
     ): ProcessResult {
-        val lookupTracker = session.lookupTracker
+        konst lookupTracker = session.lookupTracker
         return processMembers(processor) { consumer ->
             withMemberCallLookup(lookupTracker, info) { lookupCtx ->
                 this.processFunctionsAndConstructorsByName(
@@ -242,7 +242,7 @@ class MemberScopeTowerLevel(
         info: CallInfo,
         processor: TowerScopeLevelProcessor<FirVariableSymbol<*>>
     ): ProcessResult {
-        val lookupTracker = session.lookupTracker
+        konst lookupTracker = session.lookupTracker
         return processMembers(processor) { consumer ->
             withMemberCallLookup(lookupTracker, info) { lookupCtx ->
                 lookupTracker?.recordCallLookup(info, dispatchReceiverValue.type)
@@ -267,7 +267,7 @@ class MemberScopeTowerLevel(
         body: (Triple<FirLookupTrackerComponent?, SmartList<String>, CallInfo>) -> Unit
     ) {
         lookupTracker?.recordCallLookup(info, dispatchReceiverValue.type)
-        val lookupScopes = SmartList<String>()
+        konst lookupScopes = SmartList<String>()
         body(Triple(lookupTracker, lookupScopes, info))
         if (lookupScopes.isNotEmpty()) {
             lookupTracker?.recordCallLookup(info, lookupScopes)
@@ -293,7 +293,7 @@ class ContextReceiverGroupMemberScopeTowerLevel(
     contextReceiverGroup: ContextReceiverGroup,
     givenExtensionReceiverOptions: List<ReceiverValue> = emptyList(),
 ) : TowerScopeLevel() {
-    private val memberScopeLevels = contextReceiverGroup.map {
+    private konst memberScopeLevels = contextReceiverGroup.map {
         MemberScopeTowerLevel(bodyResolveComponents, it, givenExtensionReceiverOptions, false)
     }
 
@@ -318,19 +318,19 @@ class ContextReceiverGroupMemberScopeTowerLevel(
 // So: extension receiver = either none or explicit
 // (if explicit receiver exists, it always *should* be an extension receiver)
 class ScopeTowerLevel(
-    private val bodyResolveComponents: BodyResolveComponents,
-    val scope: FirScope,
-    private val givenExtensionReceiverOptions: List<ReceiverValue>,
-    private val withHideMembersOnly: Boolean,
-    private val includeInnerConstructors: Boolean,
-    private val dispatchReceiverForStatics: ExpressionReceiverValue?
+    private konst bodyResolveComponents: BodyResolveComponents,
+    konst scope: FirScope,
+    private konst givenExtensionReceiverOptions: List<ReceiverValue>,
+    private konst withHideMembersOnly: Boolean,
+    private konst includeInnerConstructors: Boolean,
+    private konst dispatchReceiverForStatics: ExpressionReceiverValue?
 ) : TowerScopeLevel() {
-    private val session: FirSession get() = bodyResolveComponents.session
+    private konst session: FirSession get() = bodyResolveComponents.session
 
     fun areThereExtensionReceiverOptions(): Boolean = givenExtensionReceiverOptions.isNotEmpty()
 
     private fun FirRegularClassSymbol.toResolvedQualifierExpressionReceiver(source: KtSourceElement?): ExpressionReceiverValue {
-        val resolvedQualifier = buildResolvedQualifier {
+        konst resolvedQualifier = buildResolvedQualifier {
             packageFqName = classId.packageFqName
             relativeClassFqName = classId.relativeClassName
             this.symbol = this@toResolvedQualifierExpressionReceiver
@@ -344,8 +344,8 @@ class ScopeTowerLevel(
     // For static entries we may return here FirResolvedQualifier, wrapped in ExpressionReceiverValue
     private fun dispatchReceiverValue(candidate: FirCallableSymbol<*>, callInfo: CallInfo): ReceiverValue? {
         candidate.fir.importedFromObjectOrStaticData?.let { data ->
-            val objectClassId = data.objectClassId
-            val symbol = session.symbolProvider.getClassLikeSymbolByClassId(objectClassId)
+            konst objectClassId = data.objectClassId
+            konst symbol = session.symbolProvider.getClassLikeSymbolByClassId(objectClassId)
             if (symbol is FirRegularClassSymbol) {
                 return symbol.toResolvedQualifierExpressionReceiver(callInfo.callSite.source)
             }
@@ -353,7 +353,7 @@ class ScopeTowerLevel(
 
         when {
             candidate is FirBackingFieldSymbol -> {
-                val lookupTag = candidate.fir.propertySymbol.dispatchReceiverClassLookupTagOrNull()
+                konst lookupTag = candidate.fir.propertySymbol.dispatchReceiverClassLookupTagOrNull()
                 return when {
                     lookupTag != null -> {
                         bodyResolveComponents.implicitReceiverStack.lastDispatchReceiver { implicitReceiverValue ->
@@ -376,14 +376,14 @@ class ScopeTowerLevel(
         // Pre-check explicit extension receiver for default package top-level members
         if (scope !is FirDefaultStarImportingScope || !areThereExtensionReceiverOptions()) return false
 
-        val declarationReceiverType = candidate.resolvedReceiverTypeRef?.coneType as? ConeClassLikeType ?: return false
-        val startProjectedDeclarationReceiverType = declarationReceiverType.lookupTag.constructClassType(
+        konst declarationReceiverType = candidate.resolvedReceiverTypeRef?.coneType as? ConeClassLikeType ?: return false
+        konst startProjectedDeclarationReceiverType = declarationReceiverType.lookupTag.constructClassType(
             declarationReceiverType.typeArguments.map { ConeStarProjection }.toTypedArray(),
             isNullable = true
         )
 
         return givenExtensionReceiverOptions.none { extensionReceiver ->
-            val extensionReceiverType = extensionReceiver.type
+            konst extensionReceiverType = extensionReceiver.type
             // If some receiver is non class like, we should not skip it
             if (extensionReceiverType !is ConeClassLikeType) return@none true
 
@@ -405,15 +405,15 @@ class ScopeTowerLevel(
             return
         }
 
-        val receiverExpected = withHideMembersOnly || areThereExtensionReceiverOptions()
-        val candidateReceiverTypeRef = candidate.fir.receiverParameter?.typeRef
+        konst receiverExpected = withHideMembersOnly || areThereExtensionReceiverOptions()
+        konst candidateReceiverTypeRef = candidate.fir.receiverParameter?.typeRef
         if (candidateReceiverTypeRef == null == receiverExpected) return
 
-        val dispatchReceiverValue = dispatchReceiverValue(candidate, callInfo)
+        konst dispatchReceiverValue = dispatchReceiverValue(candidate, callInfo)
         if (dispatchReceiverValue == null && shouldSkipCandidateWithInconsistentExtensionReceiver(candidate)) {
             return
         }
-        val unwrappedCandidate = candidate.fir.importedFromObjectOrStaticData?.original?.symbol ?: candidate
+        konst unwrappedCandidate = candidate.fir.importedFromObjectOrStaticData?.original?.symbol ?: candidate
         @Suppress("UNCHECKED_CAST")
         processor.consumeCandidate(
             unwrappedCandidate as T,

@@ -4,21 +4,21 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z1<T: String>(val x: T)
+konstue class Z1<T: String>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN<T: Z1<String>>(val z: T?)
+konstue class ZN<T: Z1<String>>(konst z: T?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN2<TN: ZN<Z1<String>>>(val z: TN)
+konstue class ZN2<TN: ZN<Z1<String>>>(konst z: TN)
 
 fun zap(b: Boolean): ZN2<ZN<Z1<String>>>? = if (b) null else ZN2(ZN(null))
 
 fun eq(a: Any?, b: Any?) = a == b
 
 fun box(): String {
-    val x = zap(true)
-    val y = zap(false)
+    konst x = zap(true)
+    konst y = zap(false)
     if (eq(x, y)) throw AssertionError()
 
     return "OK"

@@ -5,22 +5,22 @@ interface IFoo {
 enum class En {
     TEST {
         inner class Nested : IFoo {
-            private val ee = TEST
+            private konst ee = TEST
 
             override fun foo(e: En): String {
                 return if (e == ee) e.ok else "Failed"
             }
         }
 
-        override val ok: String get() = "OK"
+        override konst ok: String get() = "OK"
         override fun foo(): IFoo = Nested()
     },
     OTHER {
-        override val ok: String get() = throw AssertionError()
+        override konst ok: String get() = throw AssertionError()
         override fun foo(): IFoo = throw AssertionError()
     };
 
-    abstract val ok: String
+    abstract konst ok: String
     abstract fun foo(): IFoo
 }
 

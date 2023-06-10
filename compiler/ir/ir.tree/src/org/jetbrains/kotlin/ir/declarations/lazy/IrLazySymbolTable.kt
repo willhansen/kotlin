@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.ir.util.ReferenceSymbolTable
 import org.jetbrains.kotlin.ir.util.SymbolTable
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-class IrLazySymbolTable(private val originalTable: SymbolTable) : ReferenceSymbolTable by originalTable {
+class IrLazySymbolTable(private konst originalTable: SymbolTable) : ReferenceSymbolTable by originalTable {
 
-    val lock: IrLock get() = originalTable.lock
+    konst lock: IrLock get() = originalTable.lock
 
     /*Don't force builtins class linking before unbound symbols linking: otherwise stdlib compilation will failed*/
     var stubGenerator: DeclarationStubGenerator? = null

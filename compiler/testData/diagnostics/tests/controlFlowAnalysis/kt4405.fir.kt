@@ -2,11 +2,11 @@
 
 package d
 
-val closure = {
-    val x4 = "" // error: should be UNUSED_VARIABLE
+konst closure = {
+    konst x4 = "" // error: should be UNUSED_VARIABLE
 
     fun g() {
-        val x6 = "" // error: should be UNUSED_VARIABLE
+        konst x6 = "" // error: should be UNUSED_VARIABLE
     }
 
     fun h(): Int { // error: should be NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY
@@ -18,13 +18,13 @@ class A {
         fun foo(): Int {
         <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 
-        val closure = {
-            val x = ""
+        konst closure = {
+            konst x = ""
 
             fun local(): Int {
             <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
         }
 
-        val y = ""
+        konst y = ""
     }
 }

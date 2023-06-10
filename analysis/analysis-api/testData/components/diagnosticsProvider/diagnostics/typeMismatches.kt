@@ -1,4 +1,4 @@
-val i: Int = ""
+konst i: Int = ""
 
 fun foo(s: String): String {
     foo(i)

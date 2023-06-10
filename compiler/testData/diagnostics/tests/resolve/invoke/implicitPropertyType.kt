@@ -5,6 +5,6 @@ class A
 
 fun A.bar() = baz("")
 
-val baz = foo()
+konst baz = foo()
 
 fun foo(): A.(String) -> Unit = TODO()

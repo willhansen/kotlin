@@ -1,5 +1,5 @@
 @kotlin.SinceKotlin(version = "1.3")
-public val COROUTINE_SUSPENDED: kotlin.Any { get; }
+public konst COROUTINE_SUSPENDED: kotlin.Any { get; }
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly

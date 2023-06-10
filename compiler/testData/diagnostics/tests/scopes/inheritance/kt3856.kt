@@ -4,13 +4,13 @@ fun foo(init: A.() -> Unit) { }
 class A {
     var x: Int = 0
     companion object {
-        val f = foo() {
+        konst f = foo() {
             x = 1
         }
     }
 }
 
-class B(val a: String) {
+class B(konst a: String) {
     fun f() = 0
     companion object   {
         fun B.bar() = a + f()

@@ -1,1 +1,1 @@
-val x = <expr>Int::class</expr>
+konst x = <expr>Int::class</expr>

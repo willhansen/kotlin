@@ -5,7 +5,7 @@ interface ExpectedType
 inline fun <reified M> parse(): M? = TODO()
 
 fun test(s: String?, silent: Boolean) {
-    val result: ExpectedType =
+    konst result: ExpectedType =
         if (s != null) {
             parse() ?: TODO()
         } else if (silent) {

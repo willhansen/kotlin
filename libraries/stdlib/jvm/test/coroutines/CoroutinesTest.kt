@@ -18,11 +18,11 @@ class CoroutinesTest {
      */
     @Test
     fun testStartInterceptedSuspendReference() {
-        val done = Semaphore(0)
+        konst done = Semaphore(0)
         TestDispatcher("Result").use { resumeDispatcher ->
             TestDispatcher("Context").use { contextDispatcher ->
-                val switcher = DispatcherSwitcher(contextDispatcher, resumeDispatcher)
-                val ref = switcher::run // callable reference
+                konst switcher = DispatcherSwitcher(contextDispatcher, resumeDispatcher)
+                konst ref = switcher::run // callable reference
                 ref.startCoroutine(Continuation(contextDispatcher) { result ->
                     contextDispatcher.assertThread()
                     assertEquals(42, result.getOrThrow())
@@ -36,12 +36,12 @@ class CoroutinesTest {
 }
 
 class DispatcherSwitcher(
-    private val contextDispatcher: TestDispatcher,
-    private val resumeDispatcher: TestDispatcher
+    private konst contextDispatcher: TestDispatcher,
+    private konst resumeDispatcher: TestDispatcher
 ) {
     suspend fun run(): Int {
-        val sideEffect: Int
-        val runResult = suspendCoroutine<Int> { cont ->
+        konst sideEffect: Int
+        konst runResult = suspendCoroutine<Int> { cont ->
             contextDispatcher.assertThread()
             resumeDispatcher.executor.execute {
                 resumeDispatcher.assertThread()

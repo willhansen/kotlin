@@ -12,7 +12,7 @@ operator fun String.iterator(): IntIterator = object : IntIterator() {
 }
 
 fun String.collectInts(): List<Int> {
-    val result = ArrayList<Int>()
+    konst result = ArrayList<Int>()
     for (c in this) {
         result.add(c)
     }
@@ -20,6 +20,6 @@ fun String.collectInts(): List<Int> {
 }
 
 fun box(): String {
-    val ints = String(Character.toChars(127849)).collectInts()
+    konst ints = String(Character.toChars(127849)).collectInts()
     return if (ints == listOf(127849)) "OK" else "Fail: $ints"
 }

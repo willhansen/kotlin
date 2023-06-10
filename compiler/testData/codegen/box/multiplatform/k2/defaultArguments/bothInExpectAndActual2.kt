@@ -14,7 +14,7 @@ expect interface J : I
 // FILE: platform.kt
 
 actual interface I {
-    // This test should be updated once KT-22818 is fixed; default values are not allowed in the actual function
+    // This test should be updated once KT-22818 is fixed; default konstues are not allowed in the actual function
     @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
     actual fun test(source: String = "actual")
 }

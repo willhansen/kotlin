@@ -18,9 +18,9 @@ open class Jsr223HostConfigurationBuilder : PropertiesCollection.Builder(),
     companion object : Jsr223HostConfigurationBuilder()
 }
 
-val ScriptingHostConfigurationKeys.jsr223 get() = Jsr223HostConfigurationBuilder()
+konst ScriptingHostConfigurationKeys.jsr223 get() = Jsr223HostConfigurationBuilder()
 
-val Jsr223HostConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>()
+konst Jsr223HostConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>()
 
 
 interface Jsr223CompilationConfigurationKeys
@@ -30,29 +30,29 @@ open class Jsr223CompilationConfigurationBuilder : PropertiesCollection.Builder(
     companion object : Jsr223CompilationConfigurationBuilder()
 }
 
-val ScriptCompilationConfigurationKeys.jsr223 get() = Jsr223CompilationConfigurationBuilder()
+konst ScriptCompilationConfigurationKeys.jsr223 get() = Jsr223CompilationConfigurationBuilder()
 
-val Jsr223CompilationConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>(
+konst Jsr223CompilationConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>(
     {
         get(ScriptCompilationConfiguration.hostConfiguration)?.get(ScriptingHostConfiguration.jsr223.getScriptContext)
     },
     isTransient = true
 )
 
-val Jsr223CompilationConfigurationKeys.importAllBindings by PropertiesCollection.key<Boolean>(false)
+konst Jsr223CompilationConfigurationKeys.importAllBindings by PropertiesCollection.key<Boolean>(false)
 
-interface Jsr223EvaluationConfigurationKeys
+interface Jsr223EkonstuationConfigurationKeys
 
-open class Jsr223EvaluationConfigurationBuilder : PropertiesCollection.Builder(),
-    Jsr223EvaluationConfigurationKeys {
-    companion object : Jsr223EvaluationConfigurationBuilder()
+open class Jsr223EkonstuationConfigurationBuilder : PropertiesCollection.Builder(),
+    Jsr223EkonstuationConfigurationKeys {
+    companion object : Jsr223EkonstuationConfigurationBuilder()
 }
 
-val ScriptEvaluationConfigurationKeys.jsr223 get() = Jsr223EvaluationConfigurationBuilder()
+konst ScriptEkonstuationConfigurationKeys.jsr223 get() = Jsr223EkonstuationConfigurationBuilder()
 
-val Jsr223EvaluationConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>(
+konst Jsr223EkonstuationConfigurationKeys.getScriptContext by PropertiesCollection.key<() -> ScriptContext?>(
     {
-        get(ScriptEvaluationConfiguration.hostConfiguration)?.get(ScriptingHostConfiguration.jsr223.getScriptContext)
+        get(ScriptEkonstuationConfiguration.hostConfiguration)?.get(ScriptingHostConfiguration.jsr223.getScriptContext)
     },
     isTransient = true
 )

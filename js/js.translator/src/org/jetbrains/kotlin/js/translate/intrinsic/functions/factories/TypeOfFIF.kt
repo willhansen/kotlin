@@ -27,7 +27,7 @@ object TypeOfFIF : FunctionIntrinsicFactory {
 
     object Intrinsic : FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val type = callInfo.resolvedCall.typeArguments.values.single()
+            konst type = callInfo.resolvedCall.typeArguments.konstues.single()
             return context.createKType(type)
         }
     }
@@ -35,14 +35,14 @@ object TypeOfFIF : FunctionIntrinsicFactory {
 
 fun TranslationContext.createKType(type: KotlinType): JsExpression = KTypeConstructor(this).createKType(type)
 
-private class KTypeConstructor(private val context: TranslationContext) {
-    private val visitedTypeParams = hashSetOf<TypeParameterDescriptor>()
+private class KTypeConstructor(private konst context: TranslationContext) {
+    private konst visitedTypeParams = hashSetOf<TypeParameterDescriptor>()
 
     fun callHelperFunction(name: String, vararg arguments: JsExpression) =
         JsInvocation(context.getReferenceToIntrinsic(name), *arguments)
 
     fun createKType(type: KotlinType): JsExpression {
-        val unwrappedType = type.unwrap()
+        konst unwrappedType = type.unwrap()
         if (unwrappedType is SimpleType)
             return createSimpleKType(unwrappedType)
         if (unwrappedType is DynamicType)
@@ -55,14 +55,14 @@ private class KTypeConstructor(private val context: TranslationContext) {
     }
 
     private fun createSimpleKType(type: SimpleType): JsExpression {
-        val typeConstructor = type.constructor
-        val classifier = typeConstructor.declarationDescriptor
+        konst typeConstructor = type.constructor
+        konst classifier = typeConstructor.declarationDescriptor
 
         if (classifier is TypeParameterDescriptor && classifier.isReified) {
-            val kClassName = context.getNameForIntrinsic(SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE.suggestedName)
+            konst kClassName = context.getNameForIntrinsic(SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE.suggestedName)
             kClassName.specialFunction = SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE
 
-            val reifiedTypeParameterType = JsInvocation(kClassName.makeRef(), getReferenceToJsClass(classifier, context))
+            konst reifiedTypeParameterType = JsInvocation(kClassName.makeRef(), getReferenceToJsClass(classifier, context))
             if (type.isMarkedNullable) {
                 return callHelperFunction(Namer.MARK_KTYPE_NULLABLE, reifiedTypeParameterType)
             }
@@ -70,14 +70,14 @@ private class KTypeConstructor(private val context: TranslationContext) {
             return reifiedTypeParameterType
         }
 
-        val kClassifier =
+        konst kClassifier =
             when {
                 classifier != null -> {
                     createKClassifier(classifier)
                 }
                 typeConstructor is IntersectionTypeConstructor -> {
-                    val getKClassM = context.getNameForIntrinsic("getKClassM")
-                    val args = JsArrayLiteral(
+                    konst getKClassM = context.getNameForIntrinsic("getKClassM")
+                    konst args = JsArrayLiteral(
                         typeConstructor.supertypes.map { getReferenceToJsClass(it.constructor.declarationDescriptor, context) }
                     )
 
@@ -87,8 +87,8 @@ private class KTypeConstructor(private val context: TranslationContext) {
                     error("Can't get KClass for $type")
                 }
             }
-        val arguments = JsArrayLiteral(type.arguments.map { createKTypeProjection(it) })
-        val isMarkedNullable = JsBooleanLiteral(type.isMarkedNullable)
+        konst arguments = JsArrayLiteral(type.arguments.map { createKTypeProjection(it) })
+        konst isMarkedNullable = JsBooleanLiteral(type.isMarkedNullable)
         return callHelperFunction(
             Namer.CREATE_KTYPE,
             kClassifier,
@@ -102,13 +102,13 @@ private class KTypeConstructor(private val context: TranslationContext) {
             return callHelperFunction(Namer.GET_START_KTYPE_PROJECTION)
         }
 
-        val factoryName = when (tp.projectionKind) {
+        konst factoryName = when (tp.projectionKind) {
             Variance.INVARIANT -> Namer.CREATE_INVARIANT_KTYPE_PROJECTION
             Variance.IN_VARIANCE -> Namer.CREATE_CONTRAVARIANT_KTYPE_PROJECTION
             Variance.OUT_VARIANCE -> Namer.CREATE_COVARIANT_KTYPE_PROJECTION
         }
 
-        val kType = createKType(tp.type)
+        konst kType = createKType(tp.type)
         return callHelperFunction(factoryName, kType)
 
     }
@@ -124,16 +124,16 @@ private class KTypeConstructor(private val context: TranslationContext) {
         visitedTypeParams: MutableSet<TypeParameterDescriptor>
     ): JsExpression {
         fun createKTypeParameterImpl(): JsExpression {
-            val name = JsStringLiteral(typeParameter.name.asString())
-            val upperBounds = JsArrayLiteral(typeParameter.upperBounds.map { createKType(it) })
-            val variance = when (typeParameter.variance) {
+            konst name = JsStringLiteral(typeParameter.name.asString())
+            konst upperBounds = JsArrayLiteral(typeParameter.upperBounds.map { createKType(it) })
+            konst variance = when (typeParameter.variance) {
                 //// TODO use consts, enums, numbers???
                 Variance.INVARIANT -> JsStringLiteral("invariant")
                 Variance.IN_VARIANCE -> JsStringLiteral("in")
                 Variance.OUT_VARIANCE -> JsStringLiteral("out")
             }
             if (typeParameter.isReified) {
-                val kClassName = context.getNameForIntrinsic(SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE.suggestedName)
+                konst kClassName = context.getNameForIntrinsic(SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE.suggestedName)
                 kClassName.specialFunction = SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE
 
                 return JsInvocation(kClassName.makeRef(), getReferenceToJsClass(typeParameter, context))

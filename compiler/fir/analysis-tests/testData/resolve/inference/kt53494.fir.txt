@@ -6,16 +6,16 @@ FILE: kt53494.kt
 
     }
     public final data class Wrapped<out T> : R|C<T>| {
-        public constructor<out T>(value: R|T|): R|Wrapped<T>| {
+        public constructor<out T>(konstue: R|T|): R|Wrapped<T>| {
             super<R|C<T>|>()
         }
 
-        public final val value: R|T| = R|<local>/value|
+        public final konst konstue: R|T| = R|<local>/konstue|
             public get(): R|T|
 
         public final operator fun component1(): R|T|
 
-        public final fun copy(value: R|T| = this@R|/Wrapped|.R|/Wrapped.value|): R|Wrapped<T>|
+        public final fun copy(konstue: R|T| = this@R|/Wrapped|.R|/Wrapped.konstue|): R|Wrapped<T>|
 
     }
     public final object Default : R|C<kotlin/Nothing>| {

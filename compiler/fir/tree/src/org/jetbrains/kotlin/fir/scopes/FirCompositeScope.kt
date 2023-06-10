@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirNamedFunctionSymbol
 import org.jetbrains.kotlin.fir.symbols.impl.FirVariableSymbol
 import org.jetbrains.kotlin.name.Name
 
-class FirCompositeScope(val scopes: Iterable<FirScope>) : FirScope() {
+class FirCompositeScope(konst scopes: Iterable<FirScope>) : FirScope() {
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
         processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit
@@ -27,7 +27,7 @@ class FirCompositeScope(val scopes: Iterable<FirScope>) : FirScope() {
         name: Name,
         noinline processor: (T) -> Unit
     ) {
-        val unique = mutableSetOf<T>()
+        konst unique = mutableSetOf<T>()
         for (scope in scopes) {
             scope.process(name) {
                 if (unique.add(it)) {
@@ -41,7 +41,7 @@ class FirCompositeScope(val scopes: Iterable<FirScope>) : FirScope() {
         process: FirScope.((T) -> Unit) -> Unit,
         noinline processor: (T) -> Unit
     ) {
-        val unique = mutableSetOf<T>()
+        konst unique = mutableSetOf<T>()
         for (scope in scopes) {
             scope.process {
                 if (unique.add(it)) {
@@ -63,13 +63,13 @@ class FirCompositeScope(val scopes: Iterable<FirScope>) : FirScope() {
         processComposite(FirScope::processDeclaredConstructors, processor)
     }
 
-    override val scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         scopes.flatMap { it.scopeOwnerLookupNames }
     }
 }
 
-class FirNameAwareCompositeScope(val scopes: Iterable<FirContainingNamesAwareScope>) : FirContainingNamesAwareScope() {
-    private val delegate = FirCompositeScope(scopes)
+class FirNameAwareCompositeScope(konst scopes: Iterable<FirContainingNamesAwareScope>) : FirContainingNamesAwareScope() {
+    private konst delegate = FirCompositeScope(scopes)
 
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
@@ -90,7 +90,7 @@ class FirNameAwareCompositeScope(val scopes: Iterable<FirContainingNamesAwareSco
         delegate.processDeclaredConstructors(processor)
     }
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = delegate.scopeOwnerLookupNames
 
     override fun getCallableNames(): Set<Name> {

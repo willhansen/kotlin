@@ -39,7 +39,7 @@ class CCC {
 fun doCCC() = CCC()
 
 @JsExport
-val prop: String
+konst prop: String
     get() = "kek"
 
 @JsExport

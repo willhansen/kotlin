@@ -16,12 +16,12 @@ inline fun Int.ensureUnixCallResult(op: String, predicate: (Int) -> Boolean = { 
     return this
 }
 
-data class SharedDataMember(val double: Double)
+data class SharedDataMember(konst double: Double)
 
-data class SharedData(val string: String, val int: Int, val member: SharedDataMember)
+data class SharedData(konst string: String, konst int: Int, konst member: SharedDataMember)
 
 // Here we access the same shared Kotlin object from multiple threads.
-val globalObject: SharedData?
+konst globalObject: SharedData?
     get() = sharedData.kotlinObject?.asStableRef<SharedData>()?.get()
 
 fun dumpShared(prefix: String) {
@@ -32,7 +32,7 @@ fun dumpShared(prefix: String) {
 
 fun main() {
     // Arena owning all native allocs.
-    val arena = Arena()
+    konst arena = Arena()
 
     // Assign global data.
     sharedData.x = 239
@@ -40,7 +40,7 @@ fun main() {
     sharedData.string = "Hello Kotlin!".cstr.getPointer(arena)
 
     // Here we create shared object reference,
-    val stableRef = StableRef.create(SharedData("Shared", 239, SharedDataMember(2.71)))
+    konst stableRef = StableRef.create(SharedData("Shared", 239, SharedDataMember(2.71)))
     sharedData.kotlinObject = stableRef.asCPointer()
     dumpShared("thread1")
     println("shared is $globalObject")
@@ -48,17 +48,17 @@ fun main() {
     // Start a new thread, that sees the variable.
     // memScoped is needed to pass thread's local address to pthread_create().
     memScoped {
-        val thread = alloc<pthread_tVar>()
+        konst thread = alloc<pthread_tVar>()
         pthread_create(thread.ptr, null, staticCFunction { argC ->
             initRuntimeIfNeeded()
             dumpShared("thread2")
-            val arg = argC!!.asStableRef<SharedDataMember>()
+            konst arg = argC!!.asStableRef<SharedDataMember>()
             println("thread arg is ${arg.get()} shared is $globalObject")
             arg.dispose()
             // Workaround for compiler issue.
             null as COpaquePointer?
         }, StableRef.create(SharedDataMember(3.14)).asCPointer() ).ensureUnixCallResult("pthread_create")
-        pthread_join(thread.value, null).ensureUnixCallResult("pthread_join")
+        pthread_join(thread.konstue, null).ensureUnixCallResult("pthread_join")
     }
 
     // At this moment we do not need data stored in shared data, so clean up the data

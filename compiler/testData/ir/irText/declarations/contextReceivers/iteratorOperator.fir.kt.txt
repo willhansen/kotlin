@@ -25,7 +25,7 @@ data class Counter {
     when {
       other !is Counter -> return false
     }
-    val tmp0_other_with_cast: Counter = other as Counter
+    konst tmp0_other_with_cast: Counter = other as Counter
     when {
       EQEQ(arg0 = <this>.#i, arg1 = tmp0_other_with_cast.#i).not() -> return false
     }
@@ -49,7 +49,7 @@ data class CounterConfig {
 
   }
 
-  val max: Int
+  konst max: Int
     field = max
     get
 
@@ -68,7 +68,7 @@ data class CounterConfig {
     when {
       other !is CounterConfig -> return false
     }
-    val tmp0_other_with_cast: CounterConfig = other as CounterConfig
+    konst tmp0_other_with_cast: CounterConfig = other as CounterConfig
     when {
       EQEQ(arg0 = <this>.#max, arg1 = tmp0_other_with_cast.#max).not() -> return false
     }
@@ -86,7 +86,7 @@ data class CounterConfig {
 }
 
 class CounterIterator : Iterator<Int> {
-  private /* final field */ val contextReceiverField0: CounterConfig
+  private /* final field */ konst contextReceiverField0: CounterConfig
   constructor($context_receiver_0: CounterConfig, counter: Counter) /* primary */ {
     super/*Any*/()
     <this>.#contextReceiverField0 = $context_receiver_0
@@ -94,7 +94,7 @@ class CounterIterator : Iterator<Int> {
 
   }
 
-  private val counter: Counter
+  private konst counter: Counter
     field = counter
     private get
 
@@ -104,8 +104,8 @@ class CounterIterator : Iterator<Int> {
 
   override operator fun next(): Int {
     return { // BLOCK
-      val <receiver>: Counter = <this>.<get-counter>()
-      val <unary>: Int = <receiver>.<get-i>()
+      konst <receiver>: Counter = <this>.<get-counter>()
+      konst <unary>: Int = <receiver>.<get-i>()
       <receiver>.<set-i>(<set-?> = <unary>.inc())
       <unary>
     }
@@ -124,9 +124,9 @@ fun box(): String {
   var result: Int = 0
   with<CounterConfig, Unit>(receiver = CounterConfig(), block = local fun CounterConfig.<anonymous>() {
     { // BLOCK
-      val <iterator>: CounterIterator = Counter().iterator($context_receiver_0 = $this$with)
+      konst <iterator>: CounterIterator = Counter().iterator($context_receiver_0 = $this$with)
       while (<iterator>.hasNext()) { // BLOCK
-        val i: Int = <iterator>.next()
+        konst i: Int = <iterator>.next()
         { // BLOCK
           result = result.plus(other = i)
         }

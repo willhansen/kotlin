@@ -12,13 +12,13 @@ package kotlin.collections
 import kotlin.contracts.*
 
 internal object EmptySet : Set<Nothing>, Serializable {
-    private const val serialVersionUID: Long = 3406603774387020532
+    private const konst serialVersionUID: Long = 3406603774387020532
 
     override fun equals(other: Any?): Boolean = other is Set<*> && other.isEmpty()
     override fun hashCode(): Int = 0
     override fun toString(): String = "[]"
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: Nothing): Boolean = false
     override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()
@@ -123,7 +123,7 @@ public fun <T : Any> setOfNotNull(vararg elements: T?): Set<T> {
  * Builds a new read-only [Set] by populating a [MutableSet] using the given [builderAction]
  * and returning a read-only set with the same elements.
  *
- * The set passed as a receiver to the [builderAction] is valid only inside that function.
+ * The set passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * Elements of the set are iterated in the order they were added by the [builderAction].
@@ -150,7 +150,7 @@ internal expect inline fun <E> buildSetInternal(builderAction: MutableSet<E>.() 
  * Builds a new read-only [Set] by populating a [MutableSet] using the given [builderAction]
  * and returning a read-only set with the same elements.
  *
- * The set passed as a receiver to the [builderAction] is valid only inside that function.
+ * The set passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * [capacity] is used to hint the expected number of elements added in the [builderAction].

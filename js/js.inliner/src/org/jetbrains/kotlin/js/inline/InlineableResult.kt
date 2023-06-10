@@ -20,6 +20,6 @@ import org.jetbrains.kotlin.js.backend.ast.JsStatement
 import org.jetbrains.kotlin.js.backend.ast.JsExpression
 
 data class InlineableResult(
-        val inlineableBody: JsStatement,
-        val resultExpression: JsExpression?
+        konst inlineableBody: JsStatement,
+        konst resultExpression: JsExpression?
 )

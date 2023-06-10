@@ -5,13 +5,13 @@ FILE: annotationArgumentMustBeEnumConst.kt
         }
 
         public final static enum entry Foo: R|TestEnum|
-        public final static fun values(): R|kotlin/Array<TestEnum>| {
+        public final static fun konstues(): R|kotlin/Array<TestEnum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|TestEnum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|TestEnum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<TestEnum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<TestEnum>|
             public get(): R|kotlin/enums/EnumEntries<TestEnum>|
 
     }
@@ -20,14 +20,14 @@ FILE: annotationArgumentMustBeEnumConst.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Array<out TestEnum>| = R|<local>/a|
+        public final konst a: R|kotlin/Array<out TestEnum>| = R|<local>/a|
             public get(): R|kotlin/Array<out TestEnum>|
 
     }
-    public final val foo: R|TestEnum| = Q|TestEnum|.R|/TestEnum.Foo|
+    public final konst foo: R|TestEnum| = Q|TestEnum|.R|/TestEnum.Foo|
         public get(): R|TestEnum|
     public final var bar: R|TestEnum| = Q|TestEnum|.R|/TestEnum.Foo|
         public get(): R|TestEnum|
-        public set(value: R|TestEnum|): R|kotlin/Unit|
+        public set(konstue: R|TestEnum|): R|kotlin/Unit|
     @R|Ann|(a = vararg(R|/foo|, R|/bar|)) public final fun test(): R|kotlin/Unit| {
     }

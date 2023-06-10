@@ -3,38 +3,38 @@
 
 package foo
 
-open class NotExportedParent(val a: Int, val b: Int) {
-    inner class Inner(val c: Int, val d: Int) {
+open class NotExportedParent(konst a: Int, konst b: Int) {
+    inner class Inner(konst c: Int, konst d: Int) {
         fun foo() = a + b + c + d
     }
 
-    inner class WithVararg(vararg val values: Int) {
-        fun foo() = a + b + values.sum()
+    inner class WithVararg(vararg konst konstues: Int) {
+        fun foo() = a + b + konstues.sum()
     }
 }
 
 @JsExport
-open class ExportedParent(val a: Int, val b: Int) {
-    inner class Inner(val c: Int, val d: Int) {
+open class ExportedParent(konst a: Int, konst b: Int) {
+    inner class Inner(konst c: Int, konst d: Int) {
         fun foo() = a + b + c + d
     }
 
-    inner class WithVararg(vararg val values: Int) {
-        fun foo() = a + b + values.sum()
+    inner class WithVararg(vararg konst konstues: Int) {
+        fun foo() = a + b + konstues.sum()
     }
 }
 
 fun box(): String {
-    val notExportedParent = NotExportedParent(1, 2)
-    val notExportedInner = notExportedParent.Inner(3, 4)
-    val notExportedInnerWithVararg = notExportedParent.WithVararg(3, 4)
+    konst notExportedParent = NotExportedParent(1, 2)
+    konst notExportedInner = notExportedParent.Inner(3, 4)
+    konst notExportedInnerWithVararg = notExportedParent.WithVararg(3, 4)
 
     if (notExportedInner.foo() != 10) return "Failed: something wrong with multiple arguments inside not-exported inner class primary constructor"
     if (notExportedInnerWithVararg.foo() != 10) return "Failed: something wrong with vararg arguments inside not-exported inner class primary constructor"
 
-    val exportedParent = ExportedParent(1, 2)
-    val exportedInner = exportedParent.Inner(3, 4)
-    val exportedInnerWithVararg = exportedParent.WithVararg(3, 4)
+    konst exportedParent = ExportedParent(1, 2)
+    konst exportedInner = exportedParent.Inner(3, 4)
+    konst exportedInnerWithVararg = exportedParent.WithVararg(3, 4)
 
     if (exportedInner.foo() != 10) return "Failed: something wrong with multiple arguments inside exported inner class primary constructor"
     if (exportedInnerWithVararg.foo() != 10) return "Failed: something wrong with vararg arguments inside exported inner class primary constructor"

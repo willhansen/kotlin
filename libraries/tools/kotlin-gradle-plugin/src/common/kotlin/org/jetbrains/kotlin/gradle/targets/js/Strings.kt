@@ -9,5 +9,5 @@ import com.google.gson.stream.JsonWriter
 import java.io.StringWriter
 
 fun String.jsQuoted(): String = StringWriter().also {
-    JsonWriter(it).value(this)
+    JsonWriter(it).konstue(this)
 }.toString()

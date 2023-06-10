@@ -1,6 +1,6 @@
 package
 
-public val foo: Foo
+public konst foo: Foo
 public fun bar(): Foo
 public fun foo(): Foo?
 public fun </*0*/ T> repeat(/*0*/ arg: T): T

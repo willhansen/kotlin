@@ -13,12 +13,12 @@ import org.jetbrains.kotlin.ir.expressions.IrCall
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 /** Builds a [HeaderInfo] for progressions built using the `rangeUntil` member function (`..<` operator). */
-internal class RangeUntilHandler(private val context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
-    private val progressionElementTypes = context.ir.symbols.progressionElementTypes
+internal class RangeUntilHandler(private konst context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
+    private konst progressionElementTypes = context.ir.symbols.progressionElementTypes
 
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.singleOrNull()?.type in progressionElementTypes &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.singleOrNull()?.type in progressionElementTypes &&
                 callee.extensionReceiverParameter == null &&
                 callee.dispatchReceiverParameter?.type in progressionElementTypes &&
                 callee.name.asString() == "rangeUntil"

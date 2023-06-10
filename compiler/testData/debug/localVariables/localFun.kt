@@ -2,9 +2,9 @@
 
 //FILE: test.kt
 fun foo() {
-    val x = 1
+    konst x = 1
     fun bar()  {
-        val y = x
+        konst y = x
     }
     bar()
 }

@@ -22,17 +22,17 @@ import org.jetbrains.kotlin.idea.references.KotlinReferenceProviderContributor
 import org.jetbrains.kotlin.psi.KotlinReferenceProvidersService
 import org.jetbrains.kotlin.utils.SmartList
 
-class HLApiReferenceProviderService(val project: Project) : KotlinReferenceProvidersService() {
-    private val originalProvidersBinding: MultiMap<Class<out PsiElement>, KotlinPsiReferenceProvider>
-    private val providersBindingCache: Map<Class<out PsiElement>, List<KotlinPsiReferenceProvider>>
+class HLApiReferenceProviderService(konst project: Project) : KotlinReferenceProvidersService() {
+    private konst originalProvidersBinding: MultiMap<Class<out PsiElement>, KotlinPsiReferenceProvider>
+    private konst providersBindingCache: Map<Class<out PsiElement>, List<KotlinPsiReferenceProvider>>
 
     init {
-        val registrar = KotlinPsiReferenceRegistrar()
+        konst registrar = KotlinPsiReferenceRegistrar()
         KotlinReferenceProviderContributor.getInstance(project).registerReferenceProviders(registrar)
         originalProvidersBinding = registrar.providers
 
         providersBindingCache = ConcurrentFactoryMap.createMap<Class<out PsiElement>, List<KotlinPsiReferenceProvider>> { klass ->
-            val result = SmartList<KotlinPsiReferenceProvider>()
+            konst result = SmartList<KotlinPsiReferenceProvider>()
             for (bindingClass in originalProvidersBinding.keySet()) {
                 if (bindingClass.isAssignableFrom(klass)) {
                     result.addAll(originalProvidersBinding.get(bindingClass))
@@ -43,10 +43,10 @@ class HLApiReferenceProviderService(val project: Project) : KotlinReferenceProvi
     }
 
     private fun doGetKotlinReferencesFromProviders(context: PsiElement): Array<PsiReference> {
-        val providers: List<KotlinPsiReferenceProvider>? = providersBindingCache[context.javaClass]
+        konst providers: List<KotlinPsiReferenceProvider>? = providersBindingCache[context.javaClass]
         if (providers.isNullOrEmpty()) return PsiReference.EMPTY_ARRAY
 
-        val result = SmartList<PsiReference>()
+        konst result = SmartList<PsiReference>()
         for (provider in providers) {
             result.addAll(provider.getReferencesByElement(context))
         }

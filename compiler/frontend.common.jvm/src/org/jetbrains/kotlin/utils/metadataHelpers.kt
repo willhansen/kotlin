@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
 import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmMetadataVersion
 import java.util.*
 
-private val LANGUAGE_TO_METADATA_VERSION = EnumMap<LanguageVersion, JvmMetadataVersion>(LanguageVersion::class.java).apply {
-    val oldMetadataVersion = JvmMetadataVersion(1, 1, 18)
+private konst LANGUAGE_TO_METADATA_VERSION = EnumMap<LanguageVersion, JvmMetadataVersion>(LanguageVersion::class.java).apply {
+    konst oldMetadataVersion = JvmMetadataVersion(1, 1, 18)
     this[LanguageVersion.KOTLIN_1_0] = oldMetadataVersion
     this[LanguageVersion.KOTLIN_1_1] = oldMetadataVersion
     this[LanguageVersion.KOTLIN_1_2] = oldMetadataVersion
@@ -28,7 +28,7 @@ private val LANGUAGE_TO_METADATA_VERSION = EnumMap<LanguageVersion, JvmMetadataV
     this[LanguageVersion.KOTLIN_2_0] = JvmMetadataVersion(2, 0, 0)
     this[LanguageVersion.KOTLIN_2_1] = JvmMetadataVersion(2, 1, 0)
 
-    check(size == LanguageVersion.values().size) {
+    check(size == LanguageVersion.konstues().size) {
         "Please add mappings from the missing LanguageVersion instances to the corresponding JvmMetadataVersion " +
                 "in `LANGUAGE_TO_METADATA_VERSION`"
     }

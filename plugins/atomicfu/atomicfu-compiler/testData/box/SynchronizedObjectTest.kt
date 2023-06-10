@@ -4,7 +4,7 @@ import kotlin.test.*
 class SynchronizedObjectTest : SynchronizedObject() {
 
     fun testSync() {
-        val result = synchronized(this) { bar() }
+        konst result = synchronized(this) { bar() }
         assertEquals("OK", result)
     }
 
@@ -15,7 +15,7 @@ class SynchronizedObjectTest : SynchronizedObject() {
 }
 
 fun box(): String {
-    val testClass = SynchronizedObjectTest()
+    konst testClass = SynchronizedObjectTest()
     testClass.testSync()
     return "OK"
 }

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.*
 import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.NewTypeVariableConstructor
 
-class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallResolver) : CallCheckerWithAdditionalResolve {
+class ResolutionWithStubTypesChecker(private konst kotlinCallResolver: KotlinCallResolver) : CallCheckerWithAdditionalResolve {
     override fun check(
         overloadResolutionResults: OverloadResolutionResults<*>,
         scopeTower: ImplicitScopeTower,
@@ -37,19 +37,19 @@ class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallR
         // Don't check builder inference lambdas if the entire builder call itself has resolution ambiguity
         if (!overloadResolutionResults.isSingleResult) return
 
-        val builderResolvedCall = overloadResolutionResults.resultingCall as? NewAbstractResolvedCall<*> ?: return
+        konst builderResolvedCall = overloadResolutionResults.resultingCall as? NewAbstractResolvedCall<*> ?: return
 
-        val builderLambdas = (builderResolvedCall.psiKotlinCall.argumentsInParenthesis + builderResolvedCall.psiKotlinCall.externalArgument)
+        konst builderLambdas = (builderResolvedCall.psiKotlinCall.argumentsInParenthesis + builderResolvedCall.psiKotlinCall.externalArgument)
             .filterIsInstance<LambdaKotlinCallArgument>()
             .filter { it.hasBuilderInferenceAnnotation }
 
         for (lambda in builderLambdas) {
-            val builderInferenceSession = lambda.builderInferenceSession as? BuilderInferenceSession ?: continue
-            val errorCalls = builderInferenceSession.errorCallsInfo
+            konst builderInferenceSession = lambda.builderInferenceSession as? BuilderInferenceSession ?: continue
+            konst errorCalls = builderInferenceSession.errorCallsInfo
             for (errorCall in errorCalls) {
-                val resolutionResult = errorCall.result
+                konst resolutionResult = errorCall.result
                 if (resolutionResult.isAmbiguity) {
-                    val firstResolvedCall = resolutionResult.resultingCalls.first() as? NewAbstractResolvedCall<*> ?: continue
+                    konst firstResolvedCall = resolutionResult.resultingCalls.first() as? NewAbstractResolvedCall<*> ?: continue
                     processResolutionAmbiguityError(context, firstResolvedCall, lambda, resolutionCallbacks, expectedType, scopeTower)
                 }
             }
@@ -64,41 +64,41 @@ class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallR
         expectedType: UnwrappedType?,
         scopeTower: ImplicitScopeTower,
     ) {
-        val kotlinCall = firstResolvedCall.psiKotlinCall
-        val calleeExpression = kotlinCall.psiCall.calleeExpression
-        val builderCalleeExpression = context.call.calleeExpression
+        konst kotlinCall = firstResolvedCall.psiKotlinCall
+        konst calleeExpression = kotlinCall.psiCall.calleeExpression
+        konst builderCalleeExpression = context.call.calleeExpression
 
         if (calleeExpression == null || builderCalleeExpression == null) return
 
-        val receiverValue = firstResolvedCall.extensionReceiver
-        val valueArguments = kotlinCall.argumentsInParenthesis
+        konst receiverValue = firstResolvedCall.extensionReceiver
+        konst konstueArguments = kotlinCall.argumentsInParenthesis
 
-        val builderInferenceSession = lambda.builderInferenceSession as BuilderInferenceSession
-        val stubVariablesSubstitutor = builderInferenceSession.getNotFixedToInferredTypesSubstitutor()
-        val variablesForUsedStubTypes = builderInferenceSession.getUsedStubTypes().map { it.originalTypeVariable }
-        val substitutor = builderInferenceSession.getCurrentSubstitutor() as? NewTypeSubstitutorByConstructorMap ?: return
-        val typeVariablesSubstitutionMap = substitutor.map.filterKeys { it in variablesForUsedStubTypes }
+        konst builderInferenceSession = lambda.builderInferenceSession as BuilderInferenceSession
+        konst stubVariablesSubstitutor = builderInferenceSession.getNotFixedToInferredTypesSubstitutor()
+        konst variablesForUsedStubTypes = builderInferenceSession.getUsedStubTypes().map { it.originalTypeVariable }
+        konst substitutor = builderInferenceSession.getCurrentSubstitutor() as? NewTypeSubstitutorByConstructorMap ?: return
+        konst typeVariablesSubstitutionMap = substitutor.map.filterKeys { it in variablesForUsedStubTypes }
 
-        val newReceiverArgument = receiverValue?.buildSubstitutedReceiverArgument(stubVariablesSubstitutor, context)
-        val newArguments = valueArguments.replaceTypes(context, resolutionCallbacks) { _, type ->
+        konst newReceiverArgument = receiverValue?.buildSubstitutedReceiverArgument(stubVariablesSubstitutor, context)
+        konst newArguments = konstueArguments.replaceTypes(context, resolutionCallbacks) { _, type ->
             stubVariablesSubstitutor.safeSubstitute(type)
         }
 
-        if (newReceiverArgument == null && valueArguments == newArguments) return
+        if (newReceiverArgument == null && konstueArguments == newArguments) return
 
-        val newCall = kotlinCall.replaceArguments(newArguments, newReceiverArgument)
-        val candidatesForSubstitutedCall = kotlinCallResolver.resolveCall(
+        konst newCall = kotlinCall.replaceArguments(newArguments, newReceiverArgument)
+        konst candidatesForSubstitutedCall = kotlinCallResolver.resolveCall(
             scopeTower, resolutionCallbacks, newCall, expectedType, context.collectAllCandidates
         )
 
         // It means we can't disambiguate the call with substituted receiver and arguments
         if (candidatesForSubstitutedCall.size != 1) return
 
-        val typeVariablesCausedAmbiguity = reportStubTypeCausesAmbiguityOnArgumentsIfNeeded(
-            valueArguments, newArguments, context, typeVariablesSubstitutionMap
+        konst typeVariablesCausedAmbiguity = reportStubTypeCausesAmbiguityOnArgumentsIfNeeded(
+            konstueArguments, newArguments, context, typeVariablesSubstitutionMap
         ).toMutableSet()
 
-        val newReceiverValue = newReceiverArgument?.receiverValue
+        konst newReceiverValue = newReceiverArgument?.receiverValue
 
         if (receiverValue != null && newReceiverValue != null) {
             typeVariablesCausedAmbiguity.addAll(
@@ -128,19 +128,19 @@ class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallR
         context: BasicCallResolutionContext,
         substitutionMap: Map<TypeConstructor, UnwrappedType>
     ): Set<NewTypeVariableConstructor> = buildSet {
-        val receiverType = receiver.type
-        val newReceiverType = newReceiver.type
-        val relatedLambdaToLabel = (lambda.psiExpression as? KtLambdaExpression)?.takeIf {
-            val lexicalScope = context.trace.bindingContext[BindingContext.LEXICAL_SCOPE, kotlinCall.psiCall.callElement]
-            val nearestScopeDescriptor = lexicalScope?.ownerDescriptor
+        konst receiverType = receiver.type
+        konst newReceiverType = newReceiver.type
+        konst relatedLambdaToLabel = (lambda.psiExpression as? KtLambdaExpression)?.takeIf {
+            konst lexicalScope = context.trace.bindingContext[BindingContext.LEXICAL_SCOPE, kotlinCall.psiCall.callElement]
+            konst nearestScopeDescriptor = lexicalScope?.ownerDescriptor
             // Don't need to store lambda psi element if it can be accessed though unmarked `this`
             nearestScopeDescriptor != null && nearestScopeDescriptor != (receiver as? ExtensionReceiver)?.declarationDescriptor
         }
 
         if (receiverType != newReceiverType) {
-            val typeVariables = substitutionMap.map { it.key as NewTypeVariableConstructor }
-            val typeParameters = typeVariables.joinToString { (it.originalTypeParameter?.name ?: it).toString() }
-            val inferredTypes = substitutionMap.values
+            konst typeVariables = substitutionMap.map { it.key as NewTypeVariableConstructor }
+            konst typeParameters = typeVariables.joinToString { (it.originalTypeParameter?.name ?: it).toString() }
+            konst inferredTypes = substitutionMap.konstues
 
             addAll(typeVariables)
 
@@ -155,23 +155,23 @@ class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallR
     }
 
     private fun reportStubTypeCausesAmbiguityOnArgumentsIfNeeded(
-        valueArguments: List<KotlinCallArgument>,
+        konstueArguments: List<KotlinCallArgument>,
         newArguments: List<KotlinCallArgument>,
         context: BasicCallResolutionContext,
         substitutionMap: Map<TypeConstructor, UnwrappedType>
     ): Set<NewTypeVariableConstructor> = buildSet {
-        for ((i, valueArgument) in valueArguments.withIndex()) {
-            if (valueArgument !is SimpleKotlinCallArgument) continue
+        for ((i, konstueArgument) in konstueArguments.withIndex()) {
+            if (konstueArgument !is SimpleKotlinCallArgument) continue
 
-            val substitutedValueArgument = newArguments[i] as? SimpleKotlinCallArgument ?: continue
-            val originalType = valueArgument.receiver.stableType
-            val substitutedType = substitutedValueArgument.receiver.stableType
+            konst substitutedValueArgument = newArguments[i] as? SimpleKotlinCallArgument ?: continue
+            konst originalType = konstueArgument.receiver.stableType
+            konst substitutedType = substitutedValueArgument.receiver.stableType
 
             if (originalType != substitutedType) {
-                val psiExpression = valueArgument.psiExpression ?: continue
-                val typeVariables = substitutionMap.map { it.key as NewTypeVariableConstructor }
-                val typeParameters = typeVariables.joinToString { (it.originalTypeParameter?.name ?: it).toString() }
-                val inferredTypes = substitutionMap.values
+                konst psiExpression = konstueArgument.psiExpression ?: continue
+                konst typeVariables = substitutionMap.map { it.key as NewTypeVariableConstructor }
+                konst typeParameters = typeVariables.joinToString { (it.originalTypeParameter?.name ?: it).toString() }
+                konst inferredTypes = substitutionMap.konstues
 
                 addAll(typeVariables)
 
@@ -186,8 +186,8 @@ class ResolutionWithStubTypesChecker(private val kotlinCallResolver: KotlinCallR
         substitutor: NewTypeSubstitutor,
         context: BasicCallResolutionContext,
     ): ReceiverExpressionKotlinCallArgument? {
-        val newType = substitutor.safeSubstitute(type.unwrap())
-        val receiverValue = when (this) {
+        konst newType = substitutor.safeSubstitute(type.unwrap())
+        konst receiverValue = when (this) {
             is ExpressionReceiver -> ExpressionReceiver.create(expression, newType, context.trace.bindingContext)
             is ExtensionReceiver -> ExtensionReceiver(declarationDescriptor, newType, original)
             else -> return null

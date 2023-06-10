@@ -5,23 +5,23 @@ FILE fqName:<root> fileName:/Derived.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.BaseJava'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Derived modality:FINAL visibility:public superTypes:[<root>.BaseJava]'
-    PROPERTY name:a visibility:private modality:FINAL [val]
+    PROPERTY name:a visibility:private modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="FAIL"
+          CONST String type=kotlin.String konstue="FAIL"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-a> visibility:private modality:FINAL <> ($this:<root>.Derived) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:a visibility:private modality:FINAL [val]
+        correspondingProperty: PROPERTY name:a visibility:private modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Derived
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='private final fun <get-a> (): kotlin.String declared in <root>.Derived'
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:a type:kotlin.String visibility:private [final]' type=kotlin.String origin=null
               receiver: GET_VAR '<this>: <root>.Derived declared in <root>.Derived.<get-a>' type=<root>.Derived origin=null
-    PROPERTY name:b visibility:private modality:FINAL [val]
+    PROPERTY name:b visibility:private modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:b type:kotlin.String visibility:private [final]
         EXPRESSION_BODY
-          CONST String type=kotlin.String value="FAIL"
+          CONST String type=kotlin.String konstue="FAIL"
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-b> visibility:private modality:FINAL <> ($this:<root>.Derived) returnType:kotlin.String
-        correspondingProperty: PROPERTY name:b visibility:private modality:FINAL [val]
+        correspondingProperty: PROPERTY name:b visibility:private modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Derived
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='private final fun <get-b> (): kotlin.String declared in <root>.Derived'
@@ -48,14 +48,14 @@ FILE fqName:<root> fileName:/Derived.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:d type:<root>.Derived [val]
+      VAR name:d type:<root>.Derived [konst]
         CONSTRUCTOR_CALL 'public constructor <init> () [primary] declared in <root>.Derived' type=<root>.Derived origin=null
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public final fun plus (other: kotlin.Any?): kotlin.String [operator] declared in kotlin.String' type=kotlin.String origin=PLUS
           $this: TYPE_OP type=kotlin.String origin=IMPLICIT_NOTNULL typeOperand=kotlin.String
             CALL 'public abstract fun get (): V of kotlin.reflect.KMutableProperty0 [expect,fake_override] declared in kotlin.reflect.KMutableProperty0' type=@[FlexibleNullability] kotlin.String? origin=null
               $this: PROPERTY_REFERENCE 'public final a [fake_override,var]' field='FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:a type:@[FlexibleNullability] kotlin.String? visibility:public' getter=null setter=null type=kotlin.reflect.KMutableProperty0<@[FlexibleNullability] kotlin.String?> origin=null
-                $this: GET_VAR 'val d: <root>.Derived [val] declared in <root>.box' type=<root>.Derived origin=null
+                $this: GET_VAR 'konst d: <root>.Derived [konst] declared in <root>.box' type=<root>.Derived origin=null
           other: CALL 'public abstract fun get (): V of kotlin.reflect.KMutableProperty0 [expect,fake_override] declared in kotlin.reflect.KMutableProperty0' type=@[FlexibleNullability] kotlin.String? origin=null
             $this: PROPERTY_REFERENCE 'public/*package*/ final b [fake_override,var]' field='FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:b type:@[FlexibleNullability] kotlin.String? visibility:public/*package*/' getter=null setter=null type=kotlin.reflect.KMutableProperty0<@[FlexibleNullability] kotlin.String?> origin=null
-              $this: GET_VAR 'val d: <root>.Derived [val] declared in <root>.box' type=<root>.Derived origin=null
+              $this: GET_VAR 'konst d: <root>.Derived [konst] declared in <root>.box' type=<root>.Derived origin=null

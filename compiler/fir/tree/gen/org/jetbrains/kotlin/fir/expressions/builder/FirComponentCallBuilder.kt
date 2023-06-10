@@ -39,9 +39,9 @@ import org.jetbrains.kotlin.name.Name
 
 @FirBuilderDsl
 class FirComponentCallBuilder : FirCallBuilder, FirAnnotationContainerBuilder, FirExpressionBuilder {
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    val contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
-    val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst contextReceiverArguments: MutableList<FirExpression> = mutableListOf()
+    konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     var dispatchReceiver: FirExpression = FirNoReceiverExpression
     var extensionReceiver: FirExpression = FirNoReceiverExpression
     override var source: KtSourceElement? = null

@@ -139,9 +139,9 @@ public class AntTaskTestGenerated extends AbstractAntTaskTest {
         runTest("compiler/testData/integration/ant/jvm/twoStdlibForCollectionLiterals/");
     }
 
-    @TestMetadata("valWithInvoke")
+    @TestMetadata("konstWithInvoke")
     public void testValWithInvoke() throws Exception {
-        runTest("compiler/testData/integration/ant/jvm/valWithInvoke/");
+        runTest("compiler/testData/integration/ant/jvm/konstWithInvoke/");
     }
 
     @TestMetadata("verbose")

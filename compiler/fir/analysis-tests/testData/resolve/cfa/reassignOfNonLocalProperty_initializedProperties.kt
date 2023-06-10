@@ -1,13 +1,13 @@
 // ISSUE: KT-55493
 // WITH_STDLIB
 
-val z: String = "ok"
+konst z: String = "ok"
 
-val Some.y: String
+konst Some.y: String
     get() = "ok"
 
 class Some {
-    val x: String = "ok"
+    konst x: String = "ok"
 
     init {
         <!VAL_REASSIGNMENT!>x<!> = "error"
@@ -15,7 +15,7 @@ class Some {
         <!VAL_REASSIGNMENT!>z<!> = "error"
     }
 
-    val a: String = run {
+    konst a: String = run {
         <!VAL_REASSIGNMENT!>x<!> = "error"
         <!VAL_REASSIGNMENT!>y<!> = "error"
         <!VAL_REASSIGNMENT!>z<!> = "error"

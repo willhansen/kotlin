@@ -30,7 +30,7 @@ public interface KtSymbolInfoProviderMixIn : KtAnalysisSessionMixIn {
     /**
      * Gets the deprecation status of the given symbol. Returns null if the symbol is not deprecated.
      */
-    public val KtSymbol.deprecationStatus: DeprecationInfo?
+    public konst KtSymbol.deprecationStatus: DeprecationInfo?
         get() = withValidityAssertion {
             analysisSession.symbolInfoProvider.getDeprecation(this)
         }
@@ -44,27 +44,27 @@ public interface KtSymbolInfoProviderMixIn : KtAnalysisSessionMixIn {
     /**
      * Gets the deprecation status of the getter of this property symbol. Returns null if the getter is not deprecated.
      */
-    public val KtPropertySymbol.getterDeprecationStatus: DeprecationInfo?
+    public konst KtPropertySymbol.getterDeprecationStatus: DeprecationInfo?
         get() = withValidityAssertion { analysisSession.symbolInfoProvider.getGetterDeprecation(this) }
 
     /**
      * Gets the deprecation status of the setter of this property symbol. Returns null if the setter it not deprecated or the property does
      * not have a setter.
      */
-    public val KtPropertySymbol.setterDeprecationStatus: DeprecationInfo?
+    public konst KtPropertySymbol.setterDeprecationStatus: DeprecationInfo?
         get() = withValidityAssertion { analysisSession.symbolInfoProvider.getSetterDeprecation(this) }
 
-    public val KtPropertySymbol.javaGetterName: Name
+    public konst KtPropertySymbol.javaGetterName: Name
         get() = withValidityAssertion {
             analysisSession.symbolInfoProvider.getJavaGetterName(this)
         }
 
-    public val KtPropertySymbol.javaSetterName: Name?
+    public konst KtPropertySymbol.javaSetterName: Name?
         get() = withValidityAssertion {
             analysisSession.symbolInfoProvider.getJavaSetterName(this)
         }
 
     /** Gets the set of applicable targets for an annotation class symbol. Returns `null` if the symbol is not an annotation class. */
-    public val KtClassOrObjectSymbol.annotationApplicableTargets: Set<KotlinTarget>?
+    public konst KtClassOrObjectSymbol.annotationApplicableTargets: Set<KotlinTarget>?
         get() = withValidityAssertion { analysisSession.symbolInfoProvider.getAnnotationApplicableTargets(this) }
 }

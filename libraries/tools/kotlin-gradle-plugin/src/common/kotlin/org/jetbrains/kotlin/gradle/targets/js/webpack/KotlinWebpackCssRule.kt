@@ -25,18 +25,18 @@ typealias KotlinWebpackCssSupport = KotlinWebpackCssRule
 @Suppress("LeakingThis")
 abstract class KotlinWebpackCssRule @Inject constructor(name: String) : KotlinWebpackRule(name) {
     @get:Input
-    abstract val mode: Property<String>
+    abstract konst mode: Property<String>
 
     init {
         mode.convention(INLINE)
         test.convention("/\\.css\$/")
     }
 
-    override fun validate(): Boolean {
+    override fun konstidate(): Boolean {
         if (mode.get() !in arrayOf(EXTRACT, INLINE, IMPORT)) {
             error(
                 """
-                Possible values for cssSupport.mode:
+                Possible konstues for cssSupport.mode:
                 - EXTRACT
                 - INLINE
                 - IMPORT
@@ -75,7 +75,7 @@ abstract class KotlinWebpackCssRule @Inject constructor(name: String) : KotlinWe
 }
 
 object KotlinWebpackCssMode {
-    const val EXTRACT = "extract"
-    const val INLINE = "inline"
-    const val IMPORT = "import"
+    const konst EXTRACT = "extract"
+    const konst INLINE = "inline"
+    const konst IMPORT = "import"
 }

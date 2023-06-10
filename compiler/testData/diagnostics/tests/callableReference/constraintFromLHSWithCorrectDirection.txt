@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T : A> T.bla: kotlin.Int
+public konst </*0*/ T : A> T.bla: kotlin.Int
 public fun </*0*/ K, /*1*/ V> B<out K>.bar(/*0*/ p: kotlin.reflect.KProperty1<out K, V>): B<V>
 public fun </*0*/ K, /*1*/ V> B<K>.baz(/*0*/ p: kotlin.reflect.KProperty1<out K, V>): B<V>
 public fun </*0*/ K, /*1*/ V> B<K>.foo(/*0*/ p: kotlin.reflect.KProperty1<in K, V>): B<V>

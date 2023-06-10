@@ -4,7 +4,7 @@ import kotlin.reflect.KProperty0
 var x = 0
 
 class A {
-    val p: String
+    konst p: String
         get() = if (x == 1) "OK" else "Fail $x"
 }
 

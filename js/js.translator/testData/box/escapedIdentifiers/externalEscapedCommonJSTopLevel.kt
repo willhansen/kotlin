@@ -1,28 +1,28 @@
 // IGNORE_BACKEND: JS
 // MODULE_KIND: COMMON_JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 // FILE: lib.kt
 @file:JsModule("lib")
 package lib
 
-external fun `@get something-invalid`(): String = definedExternally
+external fun `@get something-inkonstid`(): String = definedExternally
 
-external val `some+value`: Int = definedExternally
+external konst `some+konstue`: Int = definedExternally
 
 external object `+some+object%:` {
-    val foo: String = definedExternally
+    konst foo: String = definedExternally
 }
 
 // FILE: main.kt
-import lib.`some+value`
-import lib.`@get something-invalid`
+import lib.`some+konstue`
+import lib.`@get something-inkonstid`
 import lib.`+some+object%:`
 
 fun box(): String {
-    assertEquals(42, `some+value`)
+    assertEquals(42, `some+konstue`)
     assertEquals("%%++%%", `+some+object%:`.foo)
-    assertEquals("something invalid", `@get something-invalid`())
+    assertEquals("something inkonstid", `@get something-inkonstid`())
 
     return "OK"
 }

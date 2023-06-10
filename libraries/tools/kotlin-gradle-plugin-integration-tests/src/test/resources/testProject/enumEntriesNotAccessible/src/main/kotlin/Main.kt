@@ -10,7 +10,7 @@ enum class MyEnum {
 }
 
 fun main() {
-    val a = MyEnum.entries
-    val b = AnnotationTarget.entries
+    konst a = MyEnum.entries
+    konst b = AnnotationTarget.entries
     println("$a :: $b")
 }

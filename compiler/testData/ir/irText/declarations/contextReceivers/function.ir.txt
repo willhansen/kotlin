@@ -5,12 +5,12 @@ FILE fqName:<root> fileName:/function.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:c visibility:public modality:FINAL [val]
+    PROPERTY name:c visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.C) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.Int declared in <root>.C'

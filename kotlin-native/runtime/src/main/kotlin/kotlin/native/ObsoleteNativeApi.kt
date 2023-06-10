@@ -17,7 +17,7 @@ import kotlin.annotation.AnnotationTarget.*
  * annotating that usage with the [OptIn] annotation, e.g. `@OptIn(ObsoleteNativeApi::class)`,
  * or by using the compiler argument `-opt-in=kotlin.native.ObsoleteNativeApi`.
  */
-@RequiresOptIn(message = "This API is obsolete and subject to removal in a future release.", level = RequiresOptIn.Level.WARNING)
+@RequiresOptIn(message = "This API is obsolete and subject to remokonst in a future release.", level = RequiresOptIn.Level.WARNING)
 @Retention(AnnotationRetention.BINARY)
 @Target(
         AnnotationTarget.CLASS,

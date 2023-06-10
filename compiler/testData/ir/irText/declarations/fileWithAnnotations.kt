@@ -5,4 +5,4 @@
 
 fun foo() {}
 
-val bar = 42
+konst bar = 42

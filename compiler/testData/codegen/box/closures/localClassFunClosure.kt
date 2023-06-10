@@ -1,8 +1,8 @@
 fun box(): String {
-    val o = "O"
+    konst o = "O"
     fun ok() = o + "K"
     class OK {
-        val ok = ok()
+        konst ok = ok()
     }
     return OK().ok
 }

@@ -10,7 +10,7 @@ FILE: lambdaInWhenBranch.kt
             super<R|Sealed|>()
         }
 
-        public final val t: R|kotlin/String| = R|<local>/t|
+        public final konst t: R|kotlin/String| = R|<local>/t|
             public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|

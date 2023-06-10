@@ -5,4 +5,4 @@ var x: kotlin.Int
   get()
   @SetAnnotation
   @ExplicitSetAnnotation
-  set(@ExplicitSetparamAnnotation @SetparamAnnotation value: kotlin.Int)
+  set(@ExplicitSetparamAnnotation @SetparamAnnotation konstue: kotlin.Int)

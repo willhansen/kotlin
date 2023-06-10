@@ -41,31 +41,31 @@ import java.io.Serializable
  * See [KotlinNpmResolutionManager] for details about resolution process.
  */
 class KotlinCompilationNpmResolver(
-    val projectResolver: KotlinProjectNpmResolver,
-    val compilation: KotlinJsCompilation,
+    konst projectResolver: KotlinProjectNpmResolver,
+    konst compilation: KotlinJsCompilation,
 ) : Serializable {
     var rootResolver = projectResolver.resolver
 
-    val npmProject = compilation.npmProject
+    konst npmProject = compilation.npmProject
 
-    val compilationDisambiguatedName = compilation.disambiguatedName
+    konst compilationDisambiguatedName = compilation.disambiguatedName
 
-    val npmVersion by lazy {
+    konst npmVersion by lazy {
         project.version.toString()
     }
 
-    val target get() = compilation.target
+    konst target get() = compilation.target
 
-    val project get() = target.project
+    konst project get() = target.project
 
-    val projectPath: String = project.path
+    konst projectPath: String = project.path
 
-    val packageJsonTaskHolder: TaskProvider<KotlinPackageJsonTask> =
+    konst packageJsonTaskHolder: TaskProvider<KotlinPackageJsonTask> =
         KotlinPackageJsonTask.create(compilation)
 
-    val publicPackageJsonTaskHolder: TaskProvider<PublicPackageJsonTask> = run {
-        val npmResolutionManager = project.kotlinNpmResolutionManager
-        val nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
+    konst publicPackageJsonTaskHolder: TaskProvider<PublicPackageJsonTask> = run {
+        konst npmResolutionManager = project.kotlinNpmResolutionManager
+        konst nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
         project.registerTask<PublicPackageJsonTask>(
             npmProject.publicPackageJsonTaskName
         ) {
@@ -73,7 +73,7 @@ class KotlinCompilationNpmResolver(
 
             it.compilationDisambiguatedName.set(compilation.disambiguatedName)
 
-            it.npmResolutionManager.value(npmResolutionManager)
+            it.npmResolutionManager.konstue(npmResolutionManager)
                 .disallowChanges()
 
             it.jsIrCompilation.set(compilation is KotlinJsIrCompilation)
@@ -96,7 +96,7 @@ class KotlinCompilationNpmResolver(
                         it.dependsOn(packageJsonTask)
                     }
 
-                val publicPackageJsonConfiguration = createPublicPackageJsonConfiguration()
+                konst publicPackageJsonConfiguration = createPublicPackageJsonConfiguration()
 
                 target.project.artifacts.add(publicPackageJsonConfiguration.name, packageJsonTask.map { it.packageJsonFile }) {
                     it.builtBy(packageJsonTask)
@@ -107,16 +107,16 @@ class KotlinCompilationNpmResolver(
 
     override fun toString(): String = "KotlinCompilationNpmResolver(${npmProject.name})"
 
-    val aggregatedConfiguration: Configuration = run {
+    konst aggregatedConfiguration: Configuration = run {
         createAggregatedConfiguration()
     }
 
     private var _compilationNpmResolution: KotlinCompilationNpmResolution? = null
 
-    val compilationNpmResolution: KotlinCompilationNpmResolution
+    konst compilationNpmResolution: KotlinCompilationNpmResolution
         get() {
             return _compilationNpmResolution ?: run {
-                val visitor = ConfigurationVisitor()
+                konst visitor = ConfigurationVisitor()
                 visitor.visit(aggregatedConfiguration)
                 visitor.toPackageJsonProducer()
             }.also {
@@ -130,7 +130,7 @@ class KotlinCompilationNpmResolver(
     }
 
     private fun createAggregatedConfiguration(): Configuration {
-        val all = project.configurations.create(compilation.npmAggregatedConfigurationName)
+        konst all = project.configurations.create(compilation.npmAggregatedConfigurationName)
 
         all.usesPlatformOf(target)
         all.attributes.attribute(Usage.USAGE_ATTRIBUTE, KotlinUsages.consumerRuntimeUsage(target))
@@ -141,14 +141,14 @@ class KotlinCompilationNpmResolver(
         all.isCanBeResolved = true
         all.description = "NPM configuration for $compilation."
 
-        KotlinDependencyScope.values().forEach { scope ->
-            val compilationConfiguration = project.compilationDependencyConfigurationByScope(
+        KotlinDependencyScope.konstues().forEach { scope ->
+            konst compilationConfiguration = project.compilationDependencyConfigurationByScope(
                 compilation,
                 scope
             )
             all.extendsFrom(compilationConfiguration)
             compilation.allKotlinSourceSets.forEach { sourceSet ->
-                val sourceSetConfiguration = project.configurations.sourceSetDependencyConfigurationByScope(sourceSet, scope)
+                konst sourceSetConfiguration = project.configurations.sourceSetDependencyConfigurationByScope(sourceSet, scope)
                 all.extendsFrom(sourceSetConfiguration)
             }
         }
@@ -160,7 +160,7 @@ class KotlinCompilationNpmResolver(
     }
 
     private fun createPublicPackageJsonConfiguration(): Configuration {
-        val all = project.configurations.create(compilation.publicPackageJsonConfigurationName)
+        konst all = project.configurations.create(compilation.publicPackageJsonConfigurationName)
 
         all.usesPlatformOf(target)
         all.attributes.attribute(Usage.USAGE_ATTRIBUTE, KotlinUsages.consumerRuntimeUsage(target))
@@ -174,13 +174,13 @@ class KotlinCompilationNpmResolver(
     }
 
     inner class ConfigurationVisitor {
-        private val internalDependencies = mutableSetOf<InternalDependency>()
-        private val internalCompositeDependencies = mutableSetOf<CompositeDependency>()
-        private val externalGradleDependencies = mutableSetOf<ExternalGradleDependency>()
-        private val externalNpmDependencies = mutableSetOf<NpmDependencyDeclaration>()
-        private val fileCollectionDependencies = mutableSetOf<FileCollectionExternalGradleDependency>()
+        private konst internalDependencies = mutableSetOf<InternalDependency>()
+        private konst internalCompositeDependencies = mutableSetOf<CompositeDependency>()
+        private konst externalGradleDependencies = mutableSetOf<ExternalGradleDependency>()
+        private konst externalNpmDependencies = mutableSetOf<NpmDependencyDeclaration>()
+        private konst fileCollectionDependencies = mutableSetOf<FileCollectionExternalGradleDependency>()
 
-        private val visitedDependencies = mutableSetOf<ResolvedDependency>()
+        private konst visitedDependencies = mutableSetOf<ResolvedDependency>()
 
         fun visit(configuration: Configuration) {
             configuration.resolvedConfiguration.firstLevelModuleDependencies.forEach {
@@ -201,7 +201,7 @@ class KotlinCompilationNpmResolver(
 
             //TODO: rewrite when we get general way to have inter compilation dependencies
             if (compilation.name == KotlinCompilation.TEST_COMPILATION_NAME) {
-                val main = compilation.target.compilations.findByName(KotlinCompilation.MAIN_COMPILATION_NAME) as KotlinJsCompilation
+                konst main = compilation.target.compilations.findByName(KotlinCompilation.MAIN_COMPILATION_NAME) as KotlinJsCompilation
                 internalDependencies.add(
                     InternalDependency(
                         projectResolver.projectPath,
@@ -211,7 +211,7 @@ class KotlinCompilationNpmResolver(
                 )
             }
 
-            val hasPublicNpmDependencies = externalNpmDependencies.isNotEmpty()
+            konst hasPublicNpmDependencies = externalNpmDependencies.isNotEmpty()
 
             if (compilation.isMain() && hasPublicNpmDependencies) {
                 project.tasks
@@ -244,8 +244,8 @@ class KotlinCompilationNpmResolver(
             dependency: ResolvedDependency,
             artifact: ResolvedArtifact,
         ) {
-            val artifactId = artifact.id
-            val componentIdentifier = artifactId.componentIdentifier
+            konst artifactId = artifact.id
+            konst componentIdentifier = artifactId.componentIdentifier
 
             if (artifactId `is` CompositeProjectComponentArtifactMetadata) {
                 visitCompositeProjectDependency(dependency, componentIdentifier as ProjectComponentIdentifier)
@@ -274,7 +274,7 @@ class KotlinCompilationNpmResolver(
             }
 
             (componentIdentifier as DefaultProjectComponentIdentifier).let { identifier ->
-                val includedBuild = project.gradle.includedBuild(identifier.identityPath.topRealPath().name!!)
+                konst includedBuild = project.gradle.includedBuild(identifier.identityPath.topRealPath().name!!)
                 internalCompositeDependencies.add(
                     CompositeDependency(dependency.moduleName, dependency.moduleVersion, includedBuild.projectDir, includedBuild)
                 )
@@ -284,7 +284,7 @@ class KotlinCompilationNpmResolver(
         private fun visitProjectDependency(
             componentIdentifier: ProjectComponentIdentifier,
         ) {
-            val dependentProject = project.findProject(componentIdentifier.projectPath)
+            konst dependentProject = project.findProject(componentIdentifier.projectPath)
                 ?: error("Cannot find project ${componentIdentifier.projectPath}")
 
             rootResolver.findDependentResolver(project, dependentProject)
@@ -325,11 +325,11 @@ class KotlinCompilationNpmResolver(
     }
 
     companion object {
-        val publicPackageJsonAttribute = Attribute.of(
+        konst publicPackageJsonAttribute = Attribute.of(
             "org.jetbrains.kotlin.js.public.package.json",
             String::class.java
         )
 
-        const val PUBLIC_PACKAGE_JSON_ATTR_VALUE = "public-package-json"
+        const konst PUBLIC_PACKAGE_JSON_ATTR_VALUE = "public-package-json"
     }
 }

@@ -23,24 +23,24 @@ import java.lang.reflect.Array
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
-val Class<*>.safeClassLoader: ClassLoader
+konst Class<*>.safeClassLoader: ClassLoader
     get() = classLoader ?: ClassLoader.getSystemClassLoader()
 
 fun Class<*>.isEnumClassOrSpecializedEnumEntryClass(): Boolean =
     Enum::class.java.isAssignableFrom(this)
 
-private val PRIMITIVE_CLASSES =
+private konst PRIMITIVE_CLASSES =
     listOf(Boolean::class, Byte::class, Char::class, Double::class, Float::class, Int::class, Long::class, Short::class)
-private val WRAPPER_TO_PRIMITIVE = PRIMITIVE_CLASSES.map { it.javaObjectType to it.javaPrimitiveType }.toMap()
-private val PRIMITIVE_TO_WRAPPER = PRIMITIVE_CLASSES.map { it.javaPrimitiveType to it.javaObjectType }.toMap()
+private konst WRAPPER_TO_PRIMITIVE = PRIMITIVE_CLASSES.map { it.javaObjectType to it.javaPrimitiveType }.toMap()
+private konst PRIMITIVE_TO_WRAPPER = PRIMITIVE_CLASSES.map { it.javaPrimitiveType to it.javaObjectType }.toMap()
 
-val Class<*>.primitiveByWrapper: Class<*>?
+konst Class<*>.primitiveByWrapper: Class<*>?
     get() = WRAPPER_TO_PRIMITIVE[this]
 
-val Class<*>.wrapperByPrimitive: Class<*>?
+konst Class<*>.wrapperByPrimitive: Class<*>?
     get() = PRIMITIVE_TO_WRAPPER[this]
 
-private val FUNCTION_CLASSES =
+private konst FUNCTION_CLASSES =
     listOf(
         Function0::class.java, Function1::class.java, Function2::class.java, Function3::class.java, Function4::class.java,
         Function5::class.java, Function6::class.java, Function7::class.java, Function8::class.java, Function9::class.java,
@@ -49,24 +49,24 @@ private val FUNCTION_CLASSES =
         Function20::class.java, Function21::class.java, Function22::class.java
     ).mapIndexed { i, clazz -> clazz to i }.toMap()
 
-val Class<*>.functionClassArity: Int?
+konst Class<*>.functionClassArity: Int?
     get() = FUNCTION_CLASSES[this]
 
 /**
  * NOTE: does not perform a Java -> Kotlin mapping. If this is not expected, consider using KClassImpl#classId instead
  */
-val Class<*>.classId: ClassId
+konst Class<*>.classId: ClassId
     get() = when {
         isPrimitive -> throw IllegalArgumentException("Can't compute ClassId for primitive type: $this")
         isArray -> throw IllegalArgumentException("Can't compute ClassId for array type: $this")
         enclosingMethod != null || enclosingConstructor != null || simpleName.isEmpty() -> {
-            val fqName = FqName(name)
+            konst fqName = FqName(name)
             ClassId(fqName.parent(), FqName.topLevel(fqName.shortName()), /* local = */ true)
         }
         else -> declaringClass?.classId?.createNestedClassId(Name.identifier(simpleName)) ?: ClassId.topLevel(FqName(name))
     }
 
-val Class<*>.desc: String
+konst Class<*>.desc: String
     get() = when {
         isPrimitive -> when (name) {
             "boolean" -> "Z"
@@ -89,7 +89,7 @@ val Class<*>.desc: String
  * The returned list starts with the arguments to the innermost class, then continues with those of its outer class, and so on.
  * For example, for the type `Outer<A, B>.Inner<C, D>` the result would be `[C, D, A, B]`.
  */
-val Type.parameterizedTypeArguments: List<Type>
+konst Type.parameterizedTypeArguments: List<Type>
     get() {
         if (this !is ParameterizedType) return emptyList()
         if (ownerType == null) return actualTypeArguments.toList()

@@ -11,4 +11,4 @@ fun main(): Int {
     return foo { x -> bar(x) }
 }
 
-val rv = main()
+konst rv = main()

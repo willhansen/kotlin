@@ -19,7 +19,7 @@ fun defaultAndVararg(f: (A) -> String): Any = f
 fun allOfTheAbove(f: (A) -> Unit): Any = f
 
 fun box(): String {
-    val foo = A::class.members.single { it.name == "foo" }
+    konst foo = A::class.members.single { it.name == "foo" }
 
     checkNotEqual(coercionToUnit(A::foo), foo)
     checkNotEqual(varargToElement(A::foo), foo)

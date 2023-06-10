@@ -33,7 +33,7 @@ open class PodBuildTask : CocoapodsTask() {
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
     @get:IgnoreEmptyDirectories
     @get:InputFiles
-    internal val srcDir: FileTree
+    internal konst srcDir: FileTree
         get() = project.fileTree(
             buildSettingsFile.map { PodBuildSettingsProperties.readSettingsFromReader(it.reader()).podsTargetSrcRoot }
         )
@@ -48,7 +48,7 @@ open class PodBuildTask : CocoapodsTask() {
 
     @Suppress("unused") // declares an ouptut
     @get:OutputFiles
-    internal val buildResult: Provider<FileCollection> = project.provider {
+    internal konst buildResult: Provider<FileCollection> = project.provider {
         project.fileTree(buildDir.get()) {
             it.include("**/${pod.get().schemeName}.*/")
             it.include("**/${pod.get().schemeName}/")
@@ -60,11 +60,11 @@ open class PodBuildTask : CocoapodsTask() {
 
     @TaskAction
     fun buildDependencies() {
-        val podBuildSettings = PodBuildSettingsProperties.readSettingsFromReader(buildSettingsFile.get().reader())
+        konst podBuildSettings = PodBuildSettingsProperties.readSettingsFromReader(buildSettingsFile.get().reader())
 
-        val podsXcodeProjDir = podsXcodeProjDir.get()
+        konst podsXcodeProjDir = podsXcodeProjDir.get()
 
-        val podXcodeBuildCommand = listOf(
+        konst podXcodeBuildCommand = listOf(
             "xcodebuild",
             "-project", podsXcodeProjDir.name,
             "-scheme", pod.get().schemeName,

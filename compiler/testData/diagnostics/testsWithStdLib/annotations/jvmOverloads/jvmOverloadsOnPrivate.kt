@@ -17,7 +17,7 @@ fun foo() {
         }
     }
 
-    val x = object {
+    konst x = object {
         <!OVERLOADS_LOCAL!>@kotlin.jvm.JvmOverloads<!> fun foo(s: String = "OK") {
         }
     }

@@ -1,21 +1,21 @@
-inline class Test(val s: String) {
+inline class Test(konst s: String) {
     fun memberFun(x: String) = s
 
     fun String.memberExtFun() = s
 
-    val memberVal
+    konst memberVal
         get() = s
 
-    val String.memberExtVal
+    konst String.memberExtVal
         get() = s
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
     var memberVar
         get() = s
-        set(value) {}
+        set(konstue) {}
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
     var String.memberExtVar
         get() = s
-        set(value) {}
+        set(konstue) {}
 }

@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: P
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -59,7 +59,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -162,7 +162,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -314,7 +314,7 @@ KtFunctionSymbol:
     type: kotlin/Int
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

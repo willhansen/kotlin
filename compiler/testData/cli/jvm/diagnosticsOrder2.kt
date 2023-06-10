@@ -1,2 +1,2 @@
-val y = 5
-val y = 5
+konst y = 5
+konst y = 5

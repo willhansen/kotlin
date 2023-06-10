@@ -58,7 +58,7 @@ class JavaFixedElementSourceFactory : JavaElementSourceFactory() {
     }
 
     override fun <TYPE : PsiType> createMethodReturnTypeSource(psiMethodSource: JavaElementPsiSource<out PsiMethod>): JavaElementTypeSource<TYPE> {
-        val psiType: PsiType = psiMethodSource.psi.returnType
+        konst psiType: PsiType = psiMethodSource.psi.returnType
             ?: error("Method is not a constructor and has no return type: " + psiMethodSource.psi.name)
         @Suppress("UNCHECKED_CAST")
         return createTypeSource(psiType as TYPE)

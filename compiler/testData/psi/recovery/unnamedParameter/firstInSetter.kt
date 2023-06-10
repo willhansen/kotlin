@@ -1,4 +1,4 @@
-val foo: Int
+konst foo: Int
     set(: Int) {
 
     }

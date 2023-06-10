@@ -18,32 +18,32 @@ open class G<T> {
     fun g() {}
 }
 
-private val o1 = object { fun foo() {} }
-private val o2 = object : I1 {}
-private val o3 = object : I1, I2 {}
-private val o4 = object : I3 {}
-private val o5 = object : C() {}
-private val o6 = object : C(), I1, I2 {}
-private val o7 = object : C(), I3 {}
-private val o8 = object : G<Int>() {}
-private val o9 = object : G<Int>(), I1, I2 {}
-private val o10 = object : G<Int>(), I3 {}
+private konst o1 = object { fun foo() {} }
+private konst o2 = object : I1 {}
+private konst o3 = object : I1, I2 {}
+private konst o4 = object : I3 {}
+private konst o5 = object : C() {}
+private konst o6 = object : C(), I1, I2 {}
+private konst o7 = object : C(), I3 {}
+private konst o8 = object : G<Int>() {}
+private konst o9 = object : G<Int>(), I1, I2 {}
+private konst o10 = object : G<Int>(), I3 {}
 
-private val o11 = object {
+private konst o11 = object {
     inner class D {
         fun df() {}
     }
     fun d(): D = D()
 }.d()
 
-private val o12 = {
+private konst o12 = {
     class L {
         fun l() {}
     }
     L()
 }()
 
-private val o13 = {
+private konst o13 = {
     class L {
         inner class L1 {
             inner class L2 {
@@ -82,16 +82,16 @@ fun fn() {
 }
 
 class W {
-    private val o1 = object { fun foo() {} }
-    private val o2 = object : I1 {}
-    private val o3 = object : I1, I2 {}
-    private val o4 = object : I3 {}
-    private val o5 = object : C() {}
-    private val o6 = object : C(), I1, I2 {}
-    private val o7 = object : C(), I3 {}
-    private val o8 = object : G<Int>() {}
-    private val o9 = object : G<Int>(), I1, I2 {}
-    private val o10 = object : G<Int>(), I3 {}
+    private konst o1 = object { fun foo() {} }
+    private konst o2 = object : I1 {}
+    private konst o3 = object : I1, I2 {}
+    private konst o4 = object : I3 {}
+    private konst o5 = object : C() {}
+    private konst o6 = object : C(), I1, I2 {}
+    private konst o7 = object : C(), I3 {}
+    private konst o8 = object : G<Int>() {}
+    private konst o9 = object : G<Int>(), I1, I2 {}
+    private konst o10 = object : G<Int>(), I3 {}
 
     fun w() {
         o1.foo()
@@ -118,16 +118,16 @@ class W {
 }
 
 object O {
-    private val o1 = object { fun foo() {} }
-    private val o2 = object : I1 {}
-    private val o3 = object : I1, I2 {}
-    private val o4 = object : I3 {}
-    private val o5 = object : C() {}
-    private val o6 = object : C(), I1, I2 {}
-    private val o7 = object : C(), I3 {}
-    private val o8 = object : G<Int>() {}
-    private val o9 = object : G<Int>(), I1, I2 {}
-    private val o10 = object : G<Int>(), I3 {}
+    private konst o1 = object { fun foo() {} }
+    private konst o2 = object : I1 {}
+    private konst o3 = object : I1, I2 {}
+    private konst o4 = object : I3 {}
+    private konst o5 = object : C() {}
+    private konst o6 = object : C(), I1, I2 {}
+    private konst o7 = object : C(), I3 {}
+    private konst o8 = object : G<Int>() {}
+    private konst o9 = object : G<Int>(), I1, I2 {}
+    private konst o10 = object : G<Int>(), I3 {}
 
     fun o() {
         o1.foo()

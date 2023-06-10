@@ -119,7 +119,7 @@ void BackRefFromAssociatedObject::initAndAddRef(ObjHeader* obj) {
 
 template <ErrorPolicy errorPolicy>
 void BackRefFromAssociatedObject::addRef() {
-  static_assert(errorPolicy != ErrorPolicy::kDefaultValue, "Cannot use default return value here");
+  static_assert(errorPolicy != ErrorPolicy::kDefaultValue, "Cannot use default return konstue here");
 
   // Can be called both from Native state (if ObjC or Swift code adds RC)
   // and from Runnable state (Kotlin_ObjCExport_refToObjC).
@@ -142,7 +142,7 @@ template void BackRefFromAssociatedObject::addRef<ErrorPolicy::kTerminate>();
 
 template <ErrorPolicy errorPolicy>
 bool BackRefFromAssociatedObject::tryAddRef() {
-  static_assert(errorPolicy != ErrorPolicy::kDefaultValue, "Cannot use default return value here");
+  static_assert(errorPolicy != ErrorPolicy::kDefaultValue, "Cannot use default return konstue here");
 
   if (obj_ == nullptr) return false; // E.g. after [detach].
 
@@ -170,7 +170,7 @@ void BackRefFromAssociatedObject::releaseRef() {
     if (obj_ == nullptr) return; // E.g. after [detach].
 
     // Note: by this moment "subsequent" addRef may have already happened and patched context_.
-    // So use the value loaded before refCount update:
+    // So use the konstue loaded before refCount update:
     DeinitForeignRef(obj_, context);
     // From this moment [context] is generally a dangling pointer.
     // This is handled in [IsForeignRefAccessible] and [addRef].
@@ -189,7 +189,7 @@ void BackRefFromAssociatedObject::dealloc() {
 
 template <ErrorPolicy errorPolicy>
 ObjHeader* BackRefFromAssociatedObject::ref() const {
-  RuntimeAssert(obj_ != nullptr, "no valid Kotlin object found");
+  RuntimeAssert(obj_ != nullptr, "no konstid Kotlin object found");
 
   if (!ensureRefAccessible<errorPolicy>(obj_, context_)) {
     return nullptr;

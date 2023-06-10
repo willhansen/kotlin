@@ -16,22 +16,22 @@ import kotlin.reflect.KClass
 
 abstract class FirAdditionalCheckersExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("ExtensionCheckers")
+        konst NAME = FirExtensionPointName("ExtensionCheckers")
     }
 
-    open val declarationCheckers: DeclarationCheckers = DeclarationCheckers.EMPTY
-    open val expressionCheckers: ExpressionCheckers = ExpressionCheckers.EMPTY
-    open val typeCheckers: TypeCheckers = TypeCheckers.EMPTY
+    open konst declarationCheckers: DeclarationCheckers = DeclarationCheckers.EMPTY
+    open konst expressionCheckers: ExpressionCheckers = ExpressionCheckers.EMPTY
+    open konst typeCheckers: TypeCheckers = TypeCheckers.EMPTY
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
     fun interface Factory : FirExtension.Factory<FirAdditionalCheckersExtension>
 
-    final override val extensionType: KClass<out FirExtension>
+    final override konst extensionType: KClass<out FirExtension>
         get() = FirAdditionalCheckersExtension::class
 }
 
-val FirExtensionService.additionalCheckers: List<FirAdditionalCheckersExtension> by FirExtensionService.registeredExtensions(
+konst FirExtensionService.additionalCheckers: List<FirAdditionalCheckersExtension> by FirExtensionService.registeredExtensions(
     FirAdditionalCheckersExtension::class
 )

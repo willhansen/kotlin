@@ -3,11 +3,11 @@
 
 fun fn() : String? = null
 fun foo(): String {
-    val x = fn()?.let { throw Exception() } ?: "unreachable?"
+    konst x = fn()?.let { throw Exception() } ?: "unreachable?"
     return x
 }
 fun bar(): String {
-    val x = fn() ?: return ""
-    val y = x<!SAFE_CALL_WILL_CHANGE_NULLABILITY!><!UNNECESSARY_SAFE_CALL!>?.<!>let { throw Exception() }<!> ?: "unreachable"
+    konst x = fn() ?: return ""
+    konst y = x<!SAFE_CALL_WILL_CHANGE_NULLABILITY!><!UNNECESSARY_SAFE_CALL!>?.<!>let { throw Exception() }<!> ?: "unreachable"
     return y
 }

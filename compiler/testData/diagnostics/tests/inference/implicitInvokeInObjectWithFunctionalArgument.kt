@@ -6,9 +6,9 @@ object TestClass {
 }
 
 fun test(s: String): String {
-    val a = TestClass { TestClass { TestClass } }
+    konst a = TestClass { TestClass { TestClass } }
     a checkType { _<TestClass>() }
 
-    <!UNREACHABLE_CODE!>val b =<!> TestClass { return s }
+    <!UNREACHABLE_CODE!>konst b =<!> TestClass { return s }
     <!UNREACHABLE_CODE!>b checkType { _<Nothing>() }<!>
 }

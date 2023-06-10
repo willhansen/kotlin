@@ -6,5 +6,5 @@
 package project
 
 class Main {
-    fun value(): String = "instant"
+    fun konstue(): String = "instant"
 }

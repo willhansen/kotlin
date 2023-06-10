@@ -14,7 +14,7 @@ class KTypeProjectionTest {
     @Test
     fun constructorArgumentsValidation() {
         assertFailsWith<IllegalArgumentException> { KTypeProjection(null, typeOf<Int>()) }
-        for (variance in KVariance.values()) {
+        for (variance in KVariance.konstues()) {
             assertFailsWith<IllegalArgumentException> { KTypeProjection(variance, null) }.let { e ->
                 assertTrue(variance.toString() in e.message!!)
             }

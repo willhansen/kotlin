@@ -38,10 +38,10 @@ object FirSessionFactoryHelper {
         dependenciesConfigurator: DependencyListForCliModule.Builder.() -> Unit = {},
         noinline sessionConfigurator: FirSessionConfigurator.() -> Unit = {},
     ): FirSession {
-        val binaryModuleData = BinaryModuleData.initialize(moduleName, platform, analyzerServices)
-        val dependencyList = DependencyListForCliModule.build(binaryModuleData, init = dependenciesConfigurator)
-        val sessionProvider = externalSessionProvider ?: FirProjectSessionProvider()
-        val packagePartProvider = projectEnvironment.getPackagePartProvider(librariesScope)
+        konst binaryModuleData = BinaryModuleData.initialize(moduleName, platform, analyzerServices)
+        konst dependencyList = DependencyListForCliModule.build(binaryModuleData, init = dependenciesConfigurator)
+        konst sessionProvider = externalSessionProvider ?: FirProjectSessionProvider()
+        konst packagePartProvider = projectEnvironment.getPackagePartProvider(librariesScope)
         FirJvmSessionFactory.createLibrarySession(
             moduleName,
             sessionProvider,
@@ -54,7 +54,7 @@ object FirSessionFactoryHelper {
             registerExtraComponents = {},
         )
 
-        val mainModuleData = FirModuleDataImpl(
+        konst mainModuleData = FirModuleDataImpl(
             moduleName,
             dependencyList.regularDependencies,
             dependencyList.dependsOnDependencies,
@@ -82,7 +82,7 @@ object FirSessionFactoryHelper {
     @TestOnly
     fun createEmptySession(): FirSession {
         return object : FirSession(null, Kind.Source) {}.apply {
-            val moduleData = FirModuleDataImpl(
+            konst moduleData = FirModuleDataImpl(
                 Name.identifier("<stub module>"),
                 dependencies = emptyList(),
                 dependsOnDependencies = emptyList(),
@@ -109,9 +109,9 @@ object FirSessionFactoryHelper {
 
                     override fun <T> getFlag(flag: AnalysisFlag<T>): T = stub()
 
-                    override val apiVersion: ApiVersion
+                    override konst apiVersion: ApiVersion
                         get() = stub()
-                    override val languageVersion: LanguageVersion
+                    override konst languageVersion: LanguageVersion
                         get() = stub()
                 }
             ))

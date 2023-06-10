@@ -10,7 +10,7 @@ FILE: annotation.kt
             super<R|kotlin/Any|>()
         }
 
-        @base() public? final? [IsFromPrimaryConstructor=true] val x: Int = R|<local>/x|
+        @base() public? final? [IsFromPrimaryConstructor=true] konst x: Int = R|<local>/x|
             public? [ContainingClassKey=correct] get(): Int
 
         @base() public? [ContainingClassKey=correct] constructor(): R|correct| {
@@ -37,13 +37,13 @@ FILE: annotation.kt
 
         }
 
-        public final static [ContainingClassKey=My] fun values(): R|kotlin/Array<My>| {
+        public final static [ContainingClassKey=My] fun konstues(): R|kotlin/Array<My>| {
         }
 
-        public final static [ContainingClassKey=My] fun valueOf(value: R|kotlin/String|): R|My| {
+        public final static [ContainingClassKey=My] fun konstueOf(konstue: R|kotlin/String|): R|My| {
         }
 
-        public final static [ContainingClassKey=My] val entries: R|kotlin/enums/EnumEntries<My>|
+        public final static [ContainingClassKey=My] konst entries: R|kotlin/enums/EnumEntries<My>|
             public get(): R|kotlin/enums/EnumEntries<My>|
 
     }
@@ -52,19 +52,19 @@ FILE: annotation.kt
             ^bar z#.plus#(IntegerLiteral(1))
         }
 
-        @base() lval local: <implicit> = bar#(y#)
+        @base() lkonst local: <implicit> = bar#(y#)
         ^foo local#
     }
-    @base() public? final? val z: <implicit> = IntegerLiteral(0)
+    @base() public? final? konst z: <implicit> = IntegerLiteral(0)
         public? get(): <implicit>
-    @base() public? final? val x: Map<@base() Int, List<@base() Int>> = mapOf#()
+    @base() public? final? konst x: Map<@base() Int, List<@base() Int>> = mapOf#()
         public? get(): Map<@base() Int, List<@base() Int>>
     @Target(AnnotationTarget#.CLASS#, AnnotationTarget#.PROPERTY#, AnnotationTarget#.LOCAL_VARIABLE#, AnnotationTarget#.VALUE_PARAMETER#, AnnotationTarget#.CONSTRUCTOR#, AnnotationTarget#.FUNCTION#, AnnotationTarget#.TYPE#) @base() public? final? annotation class derived : base, R|kotlin/Annotation| {
         public? [ContainingClassKey=derived] constructor([CorrespondingProperty=/derived.x] x: Int): R|derived| {
             super<R|kotlin/Any|>()
         }
 
-        public? final? [IsFromPrimaryConstructor=true] val x: Int = R|<local>/x|
+        public? final? [IsFromPrimaryConstructor=true] konst x: Int = R|<local>/x|
             public? [ContainingClassKey=derived] get(): Int
 
     }
@@ -73,7 +73,7 @@ FILE: annotation.kt
             super<R|kotlin/Any|>()
         }
 
-        @derived(IntegerLiteral(1)) public? final? [IsFromPrimaryConstructor=true] val x: Int = R|<local>/x|
+        @derived(IntegerLiteral(1)) public? final? [IsFromPrimaryConstructor=true] konst x: Int = R|<local>/x|
             public? [ContainingClassKey=correctDerived] get(): Int
 
         @base() public? [ContainingClassKey=correctDerived] constructor(): R|correctDerived| {
@@ -100,13 +100,13 @@ FILE: annotation.kt
 
         }
 
-        public final static [ContainingClassKey=MyDerived] fun values(): R|kotlin/Array<MyDerived>| {
+        public final static [ContainingClassKey=MyDerived] fun konstues(): R|kotlin/Array<MyDerived>| {
         }
 
-        public final static [ContainingClassKey=MyDerived] fun valueOf(value: R|kotlin/String|): R|MyDerived| {
+        public final static [ContainingClassKey=MyDerived] fun konstueOf(konstue: R|kotlin/String|): R|MyDerived| {
         }
 
-        public final static [ContainingClassKey=MyDerived] val entries: R|kotlin/enums/EnumEntries<MyDerived>|
+        public final static [ContainingClassKey=MyDerived] konst entries: R|kotlin/enums/EnumEntries<MyDerived>|
             public get(): R|kotlin/enums/EnumEntries<MyDerived>|
 
     }
@@ -115,10 +115,10 @@ FILE: annotation.kt
             ^bar z#.plus#(IntegerLiteral(1))
         }
 
-        @derived(IntegerLiteral(1)) lval local: <implicit> = bar#(y#)
+        @derived(IntegerLiteral(1)) lkonst local: <implicit> = bar#(y#)
         ^fooDerived local#
     }
-    @derived(IntegerLiteral(1)) public? final? val zDerived: <implicit> = IntegerLiteral(0)
+    @derived(IntegerLiteral(1)) public? final? konst zDerived: <implicit> = IntegerLiteral(0)
         public? get(): <implicit>
-    @derived(IntegerLiteral(1)) public? final? val xDerived: Map<@derived(IntegerLiteral(1)) Int, List<@derived(IntegerLiteral(1)) Int>> = mapOf#()
+    @derived(IntegerLiteral(1)) public? final? konst xDerived: Map<@derived(IntegerLiteral(1)) Int, List<@derived(IntegerLiteral(1)) Int>> = mapOf#()
         public? get(): Map<@derived(IntegerLiteral(1)) Int, List<@derived(IntegerLiteral(1)) Int>>

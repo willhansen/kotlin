@@ -37,8 +37,8 @@ class BlockExpressionElementType : IErrorCounterReparseableElementType("BLOCK", 
         ElementTypeUtils.getKotlinBlockImbalanceCount(seq)
 
     override fun parseContents(chameleon: ASTNode): ASTNode {
-        val project = chameleon.psi.project
-        val builder = PsiBuilderFactory.getInstance().createBuilder(
+        konst project = chameleon.psi.project
+        konst builder = PsiBuilderFactory.getInstance().createBuilder(
             project, chameleon, null, KotlinLanguage.INSTANCE, chameleon.chars
         )
 
@@ -69,7 +69,7 @@ class BlockExpressionElementType : IErrorCounterReparseableElementType("BLOCK", 
                 return true
             }
 
-            val lexer = KotlinLexer()
+            konst lexer = KotlinLexer()
             lexer.start(blockText)
 
             // Try to parse a simple name list followed by an ARROW
@@ -85,11 +85,11 @@ class BlockExpressionElementType : IErrorCounterReparseableElementType("BLOCK", 
                 lexer.tokenType != KtTokens.LPAR
             ) return true
 
-            val searchForRPAR = lexer.tokenType == KtTokens.LPAR
+            konst searchForRPAR = lexer.tokenType == KtTokens.LPAR
 
             if (advanceWhitespacesCheckIsEndOrArrow(lexer)) return false
 
-            val preferParamsToExpressions = lexer.tokenType == KtTokens.COMMA || lexer.tokenType == KtTokens.COLON
+            konst preferParamsToExpressions = lexer.tokenType == KtTokens.COMMA || lexer.tokenType == KtTokens.COLON
 
             while (true) {
 

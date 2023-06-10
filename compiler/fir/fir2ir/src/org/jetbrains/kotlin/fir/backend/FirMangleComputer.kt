@@ -42,25 +42,25 @@ open class FirMangleComputer(
         /*FunctionDeclaration=*/FirFunction,
         /*Session=*/FirSession,
         >(builder, mode) {
-    protected open val visitor = Visitor()
+    protected open konst visitor = Visitor()
 
     override fun copy(newMode: MangleMode): FirMangleComputer =
         FirMangleComputer(builder, newMode)
 
     override fun getTypeSystemContext(session: FirSession) = object : ConeInferenceContext {
-        override val session: FirSession
+        override konst session: FirSession
             get() = session
     }
 
     @OptIn(SymbolInternals::class)
     override fun FirDeclaration.visitParent() {
-        val (parentPackageFqName, parentClassId) = when (this) {
+        konst (parentPackageFqName, parentClassId) = when (this) {
             is FirCallableDeclaration -> this.symbol.callableId.packageName.let { it to containingClassLookupTag()?.classId }
             is FirClassLikeDeclaration -> this.symbol.classId.let { it.packageFqName to it.outerClassId }
             else -> return
         }
         if (parentClassId != null && !parentClassId.isLocal) {
-            val parentClassLike = this.moduleData.session.symbolProvider.getClassLikeSymbolByClassId(parentClassId)?.fir
+            konst parentClassLike = this.moduleData.session.symbolProvider.getClassLikeSymbolByClassId(parentClassId)?.fir
                 ?: error("Attempt to find parent ($parentClassId) for probably-local declaration!")
             if (parentClassLike is FirRegularClass || parentClassLike is FirTypeAlias) {
                 parentClassLike.visit()
@@ -90,7 +90,7 @@ open class FirMangleComputer(
             ?: (function as? FirPropertyAccessor)?.propertySymbol?.fir?.receiverParameter?.typeRef?.coneType
 
     override fun getValueParameters(function: FirFunction): List<FirValueParameter> =
-        function.valueParameters
+        function.konstueParameters
 
     override fun getReturnType(function: FirFunction): ConeKotlinType = function.returnTypeRef.coneType
 
@@ -114,7 +114,7 @@ open class FirMangleComputer(
         // If a type parameter is declared in a java method, typeParameterContainers will contain the enhanced declaration,
         // but parent will be the non-enhanced version.
         // To work around this, we additionally compare declarations using their callable IDs.
-        val callableId = (parent as? FirCallableDeclaration)?.symbol?.callableId
+        konst callableId = (parent as? FirCallableDeclaration)?.symbol?.callableId
         return typeParameterContainers.indexOfFirst {
             it == parent || it is FirCallableDeclaration && it.symbol.callableId == callableId
         }
@@ -124,10 +124,10 @@ open class FirMangleComputer(
 
     override fun getTypeParameterName(typeParameter: ConeTypeParameterLookupTag) = typeParameter.name.asString()
 
-    override fun isVararg(valueParameter: FirValueParameter) = valueParameter.isVararg
+    override fun isVararg(konstueParameter: FirValueParameter) = konstueParameter.isVararg
 
-    override fun getValueParameterType(valueParameter: FirValueParameter): ConeKotlinType =
-        valueParameter.returnTypeRef.coneType
+    override fun getValueParameterType(konstueParameter: FirValueParameter): ConeKotlinType =
+        konstueParameter.returnTypeRef.coneType
 
     override fun getIndexOfTypeParameter(typeParameter: ConeTypeParameterLookupTag, container: FirMemberDeclaration) =
         container.typeParameters.indexOf(typeParameter.symbol.fir)
@@ -135,7 +135,7 @@ open class FirMangleComputer(
     override fun mangleType(tBuilder: StringBuilder, type: ConeKotlinType, declarationSiteSession: FirSession) {
         when (type) {
             is ConeLookupTagBasedType -> {
-                when (val symbol = type.lookupTag.toSymbol(declarationSiteSession)) {
+                when (konst symbol = type.lookupTag.toSymbol(declarationSiteSession)) {
                     is FirTypeAliasSymbol -> {
                         mangleType(tBuilder, type.fullyExpandedType(declarationSiteSession), declarationSiteSession)
                         return
@@ -172,13 +172,13 @@ open class FirMangleComputer(
                 with(declarationSiteSession.typeContext) {
                     // Need to reproduce type approximation done for flexible types in TypeTranslator.
                     // For now, we replicate the current behaviour of Fir2IrTypeConverter and just take the upper bound
-                    val upper = type.upperBound
+                    konst upper = type.upperBound
                     if (upper is ConeClassLikeType) {
-                        val lower = type.lowerBound as? ConeClassLikeType ?: error("Expecting class-like type, got ${type.lowerBound}")
-                        val intermediate = if (lower.lookupTag == upper.lookupTag) {
+                        konst lower = type.lowerBound as? ConeClassLikeType ?: error("Expecting class-like type, got ${type.lowerBound}")
+                        konst intermediate = if (lower.lookupTag == upper.lookupTag) {
                             lower.replaceArguments(upper.getArguments())
                         } else lower
-                        val mixed = if (upper.isNullable) intermediate.makeNullable() else intermediate.makeDefinitelyNotNullOrNotNull()
+                        konst mixed = if (upper.isNullable) intermediate.makeNullable() else intermediate.makeDefinitelyNotNullOrNotNull()
                         mangleType(tBuilder, mixed as ConeKotlinType, declarationSiteSession)
                     } else mangleType(tBuilder, upper, declarationSiteSession)
                 }
@@ -219,7 +219,7 @@ open class FirMangleComputer(
             typeParameterContainers.add(variable)
             variable.visitParent()
 
-            val isStaticProperty = variable.isStatic
+            konst isStaticProperty = variable.isStatic
             if (isStaticProperty) {
                 builder.appendSignature(MangleConstant.STATIC_MEMBER_MARK)
             }

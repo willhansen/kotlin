@@ -2,11 +2,11 @@
 // WITH_STDLIB
 // FILE: C.java
 public class C<T> {
-    T val;
+    T konst;
 
-    public C(T val) { this.val = val; }
+    public C(T konst) { this.konst = konst; }
 
-    public T getVal() { return val; }
+    public T getVal() { return konst; }
 }
 
 // FILE: UseRaw.java

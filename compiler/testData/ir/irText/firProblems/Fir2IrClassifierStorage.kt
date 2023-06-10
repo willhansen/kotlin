@@ -1,18 +1,18 @@
-class FirSession(val name: String)
+class FirSession(konst name: String)
 
 interface Fir2IrComponents {
-    val session: FirSession
-    val classifierStorage: Fir2IrClassifierStorage
+    konst session: FirSession
+    konst classifierStorage: Fir2IrClassifierStorage
 }
 
 class Fir2IrComponentsStorage(
-    override val session: FirSession
+    override konst session: FirSession
 ) : Fir2IrComponents {
     override lateinit var classifierStorage: Fir2IrClassifierStorage
 }
 
 class Fir2IrClassifierStorage(
-    private val components: Fir2IrComponents
+    private konst components: Fir2IrComponents
 ) : Fir2IrComponents by components {
-    private val name = session.name
+    private konst name = session.name
 }

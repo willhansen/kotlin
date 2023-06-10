@@ -13,14 +13,14 @@ sealed class C2
 sealed class D1
 
 abstract class E {
-    final val p1: Int = 1
-    open val p2: Int = 1
-    abstract val p3: Int
+    final konst p1: Int = 1
+    open konst p2: Int = 1
+    abstract konst p3: Int
 
-    open val p4: Int = 1
-    abstract val p5: Int
+    open konst p4: Int = 1
+    abstract konst p5: Int
 
-    abstract val p6: Int
+    abstract konst p6: Int
 
     final fun f1(): Int = 1
     open fun f2(): Int = 1

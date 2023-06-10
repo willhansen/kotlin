@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.js.engine
 
 interface ScriptEngine {
-    fun eval(script: String): String
+    fun ekonst(script: String): String
 
     // TODO Add API to load few files at once?
     fun loadFile(path: String)
@@ -40,7 +40,7 @@ interface ScriptEngine {
 }
 
 interface ScriptEngineWithTypedResult : ScriptEngine {
-    fun <R> evalWithTypedResult(script: String): R
+    fun <R> ekonstWithTypedResult(script: String): R
 }
 
 fun ScriptEngine.loadFiles(files: List<String>) {

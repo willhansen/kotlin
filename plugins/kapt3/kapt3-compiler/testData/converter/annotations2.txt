@@ -1,11 +1,11 @@
 package test;
 
-@Anno(value = "anno-class")
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@Anno(konstue = "anno-class")
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 @kotlin.Metadata()
 public abstract @interface Anno {
 
-    public abstract java.lang.String value();
+    public abstract java.lang.String konstue();
 }
 
 ////////////////////
@@ -20,19 +20,19 @@ public final class AnnotationsTest {
         super();
     }
 
-    @Anno(value = "top-level-fun")
-    public static final void topLevelFun(@Anno(value = "top-level-fun-receiver")
+    @Anno(konstue = "top-level-fun")
+    public static final void topLevelFun(@Anno(konstue = "top-level-fun-receiver")
     @org.jetbrains.annotations.NotNull()
     java.lang.String $this$topLevelFun) {
     }
 
-    @Anno(value = "top-level-val")
+    @Anno(konstue = "top-level-konst")
     @java.lang.Deprecated()
     public static void getTopLevelVal$annotations(int p0) {
     }
 
     @org.jetbrains.annotations.NotNull()
-    public static final java.lang.String getTopLevelVal(@Anno(value = "top-level-val-receiver")
+    public static final java.lang.String getTopLevelVal(@Anno(konstue = "top-level-konst-receiver")
     int $this$topLevelVal) {
         return null;
     }
@@ -42,17 +42,17 @@ public final class AnnotationsTest {
 
 package test;
 
-@Anno(value = "enum")
+@Anno(konstue = "enum")
 @kotlin.Metadata()
 public enum Enum {
-    @Anno(value = "white")
+    @Anno(konstue = "white")
     /*public static final*/ WHITE /* = new Enum() */,
-    @Anno(value = "black")
+    @Anno(konstue = "black")
     /*public static final*/ BLACK /* = new Enum() */;
     private final int x = 0;
 
-    @Anno(value = "enum-constructor")
-    Enum(@Anno(value = "x")
+    @Anno(konstue = "enum-constructor")
+    Enum(@Anno(konstue = "x")
     int x) {
     }
 
@@ -65,44 +65,44 @@ public enum Enum {
 
 package test;
 
-@Anno(value = "clazz")
+@Anno(konstue = "clazz")
 @kotlin.Metadata()
 public abstract class Test {
     @org.jetbrains.annotations.NotNull()
     private java.lang.String v;
 
-    @Anno(value = "test-constructor")
-    protected Test(@Anno(value = "v-param")
+    @Anno(konstue = "test-constructor")
+    protected Test(@Anno(konstue = "v-param")
     @org.jetbrains.annotations.NotNull()
     java.lang.String v) {
         super();
     }
 
-    @Anno(value = "v-get")
+    @Anno(konstue = "v-get")
     @org.jetbrains.annotations.NotNull()
     public final java.lang.String getV() {
         return null;
     }
 
-    @Anno(value = "v-property")
+    @Anno(konstue = "v-property")
     @java.lang.Deprecated()
     public static void getV$annotations() {
     }
 
-    @Anno(value = "v-set")
-    public final void setV(@Anno(value = "v-setparam")
+    @Anno(konstue = "v-set")
+    public final void setV(@Anno(konstue = "v-setparam")
     @org.jetbrains.annotations.NotNull()
     java.lang.String p0) {
     }
 
-    @Anno(value = "abstract-method")
+    @Anno(konstue = "abstract-method")
     @org.jetbrains.annotations.NotNull()
     public abstract java.lang.String abstractMethod();
 
     @org.jetbrains.annotations.NotNull()
     public abstract java.lang.String getAbstractVal();
 
-    @Anno(value = "abstract-val")
+    @Anno(konstue = "abstract-konst")
     @java.lang.Deprecated()
     public static void getAbstractVal$annotations() {
     }

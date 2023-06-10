@@ -55,7 +55,7 @@ digraph atLeastOnce_kt {
         subgraph cluster_7 {
             color=blue
             15 [label="Enter block"];
-            16 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            16 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             17 [label="Postponed enter to lambda"];
             subgraph cluster_8 {
                 color=blue
@@ -102,7 +102,7 @@ digraph atLeastOnce_kt {
         subgraph cluster_11 {
             color=blue
             31 [label="Enter block"];
-            32 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            32 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             33 [label="Postponed enter to lambda"];
             subgraph cluster_12 {
                 color=blue

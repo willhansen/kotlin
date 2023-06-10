@@ -80,7 +80,7 @@ digraph when_kt {
                 44 [label="Exit when branch result"];
                 45 [label="Exit when"];
             }
-            46 [label="Variable declaration: lval y: R|kotlin/Int|"];
+            46 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
             47 [label="Exit block"];
         }
         48 [label="Exit function test_1" style="filled" fillcolor=red];

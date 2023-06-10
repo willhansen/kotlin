@@ -5,7 +5,7 @@ fun box(): String {
   }
 
   class A {
-      val test = local()
+      konst test = local()
   }
 
   return if (A().test == 10) "OK" else "fail"

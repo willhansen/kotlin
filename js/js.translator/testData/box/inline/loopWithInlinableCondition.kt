@@ -85,20 +85,20 @@ fun testNested(doBreak: Boolean, doContinue: Boolean): String {
 }
 
 fun box(): String {
-    val test1 = test(true, true)
-    val test2 = test(true, false)
-    val test3 = test(false, true)
-    val test4 = test(false, false)
+    konst test1 = test(true, true)
+    konst test2 = test(true, false)
+    konst test3 = test(false, true)
+    konst test4 = test(false, false)
 
     if (test1 != "1 ") return "Test1 output: ${test1}"
     if (test2 != "1 ") return "Test2 output: ${test2}"
     if (test3 != "1 2 foo ") return "Test3 output: ${test3}"
     if (test4 != "1 2 3 foo ") return "Test4 output: ${test4}"
 
-    val testNested1 = testNested(true, true)
-    val testNested2 = testNested(true, false)
-    val testNested3 = testNested(false, true)
-    val testNested4 = testNested(false, false)
+    konst testNested1 = testNested(true, true)
+    konst testNested2 = testNested(true, false)
+    konst testNested3 = testNested(false, true)
+    konst testNested4 = testNested(false, false)
 
     if (testNested1 != "0_1 1_1 0_2 ") return "testNested1 output: ${testNested1}"
     if (testNested2 != "0_1 1_1 0_2 ") return "testNested2 output: ${testNested2}"

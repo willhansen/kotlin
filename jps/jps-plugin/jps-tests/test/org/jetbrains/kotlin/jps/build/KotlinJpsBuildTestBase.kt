@@ -23,14 +23,14 @@ import java.nio.file.Paths
 
 abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
     protected lateinit var originalProjectDir: File
-    protected val expectedOutputFile: File
+    protected konst expectedOutputFile: File
         get() = File(originalProjectDir, "expected-output.txt")
 
     override fun setUp() {
         super.setUp()
-        val currentTestMethod = this::class.members.firstOrNull { it.name == "test" + getTestName(false) }
-        val workingDirFromAnnotation = currentTestMethod?.annotations?.filterIsInstance<WorkingDir>()?.firstOrNull()?.name
-        val projDirPath = Paths.get(
+        konst currentTestMethod = this::class.members.firstOrNull { it.name == "test" + getTestName(false) }
+        konst workingDirFromAnnotation = currentTestMethod?.annotations?.filterIsInstance<WorkingDir>()?.firstOrNull()?.name
+        konst projDirPath = Paths.get(
             TEST_DATA_PATH,
             "general",
             workingDirFromAnnotation ?: getTestName(false)
@@ -42,7 +42,7 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
 
     protected open fun copyTestDataToTmpDir(testDataDir: File): File {
         assert(testDataDir.exists()) { "Cannot find source folder " + testDataDir.absolutePath }
-        val tmpDir = FileUtil.createTempDirectory("kjbtb-jps-build", null)
+        konst tmpDir = FileUtil.createTempDirectory("kjbtb-jps-build", null)
         FileUtil.copyDir(testDataDir, tmpDir)
         return tmpDir
     }
@@ -56,7 +56,7 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
 
     override fun doGetProjectDir(): File = workDir
 
-    annotation class WorkingDir(val name: String)
+    annotation class WorkingDir(konst name: String)
 
     enum class LibraryDependency {
         NONE,
@@ -89,7 +89,7 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
 
     protected fun setupKotlinJSFacet() {
         myProject.modules.forEach {
-            val facet = KotlinFacetSettings()
+            konst facet = KotlinFacetSettings()
             facet.compilerArguments = K2JSCompilerArguments().apply {
                 forceDeprecatedLegacyCompilerUsage = true
             }
@@ -104,7 +104,7 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
 
     private fun setupKotlinLombokFacet() {
         myProject.modules.forEach {
-            val facet = KotlinFacetSettings()
+            konst facet = KotlinFacetSettings()
             facet.useProjectSettings = false
             facet.compilerSettings = CompilerSettings().also {
                 it.additionalArguments = "-Xallow-no-source-files -Xplugin=${PathUtil.kotlinPathsForDistDirectory.lombokPluginJarPath}"
@@ -118,13 +118,13 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
     }
 
     companion object {
-        const val JDK_NAME = "IDEA_JDK"
-        const val PROJECT_NAME = "kotlinProject"
+        const konst JDK_NAME = "IDEA_JDK"
+        const konst PROJECT_NAME = "kotlinProject"
 
         @JvmStatic
         protected fun assertFilesExistInOutput(module: JpsModule, vararg relativePaths: String) {
             for (path in relativePaths) {
-                val outputFile = findFileInOutputDir(module, path)
+                konst outputFile = findFileInOutputDir(module, path)
                 assertTrue("Output not written: " + outputFile.absolutePath + "\n Directory contents: \n" + dirContents(
                     outputFile.parentFile
                 ), outputFile.exists())
@@ -133,26 +133,26 @@ abstract class KotlinJpsBuildTestBase : AbstractKotlinJpsBuildTestCase() {
 
         @JvmStatic
         protected fun findFileInOutputDir(module: JpsModule, relativePath: String): File {
-            val outputUrl = JpsJavaExtensionService.getInstance().getOutputUrl(module, false)
+            konst outputUrl = JpsJavaExtensionService.getInstance().getOutputUrl(module, false)
             assertNotNull(outputUrl)
-            val outputDir = File(JpsPathUtil.urlToPath(outputUrl))
+            konst outputDir = File(JpsPathUtil.urlToPath(outputUrl))
             return File(outputDir, relativePath)
         }
 
         @JvmStatic
         protected fun assertFilesNotExistInOutput(module: JpsModule, vararg relativePaths: String) {
-            val outputUrl = JpsJavaExtensionService.getInstance().getOutputUrl(module, false)
+            konst outputUrl = JpsJavaExtensionService.getInstance().getOutputUrl(module, false)
             assertNotNull(outputUrl)
-            val outputDir = File(JpsPathUtil.urlToPath(outputUrl))
+            konst outputDir = File(JpsPathUtil.urlToPath(outputUrl))
             for (path in relativePaths) {
-                val outputFile = File(outputDir, path)
+                konst outputFile = File(outputDir, path)
                 assertFalse("Output directory \"" + outputFile.absolutePath + "\" contains \"" + path + "\"", outputFile.exists())
             }
         }
 
         private fun dirContents(dir: File): String {
-            val files = dir.listFiles() ?: return "<not found>"
-            val builder = StringBuilder()
+            konst files = dir.listFiles() ?: return "<not found>"
+            konst builder = StringBuilder()
             for (file in files) {
                 builder.append(" * ").append(file.name).append("\n")
             }

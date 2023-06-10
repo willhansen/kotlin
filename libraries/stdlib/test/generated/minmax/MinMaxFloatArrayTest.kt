@@ -35,7 +35,7 @@ class MinMaxFloatArrayTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = floatArrayOf()
+        konst empty = floatArrayOf()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -45,8 +45,8 @@ class MinMaxFloatArrayTest {
 
     @Test
     fun minMaxFloat() {
-        val zeroes = floatArrayOf(0.0F, -0.0F).apply { shuffle() }
-        val NaNs = floatArrayOf(0.0F, Float.NaN).apply { shuffle() }
+        konst zeroes = floatArrayOf(0.0F, -0.0F).apply { shuffle() }
+        konst NaNs = floatArrayOf(0.0F, Float.NaN).apply { shuffle() }
 
         assertIsNegativeZero(zeroes.min().toDouble())
         assertIsNegativeZero(zeroes.minOrNull()!!.toDouble())
@@ -79,7 +79,7 @@ class MinMaxFloatArrayTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = floatArrayOf()
+        konst empty = floatArrayOf()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -104,7 +104,7 @@ class MinMaxFloatArrayTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = floatArrayOf()
+        konst empty = floatArrayOf()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -112,8 +112,8 @@ class MinMaxFloatArrayTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY)
+    fun minBySelectorEkonstuateOnce() {
+        konst source = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY)
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -123,8 +123,8 @@ class MinMaxFloatArrayTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY)
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY)
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -151,8 +151,8 @@ class MinMaxFloatArrayTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = 2.0F
-        val items = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY).apply { shuffle() }
+        konst middle = 2.0F
+        konst items = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -166,8 +166,8 @@ class MinMaxFloatArrayTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = 2.0F
-        val items = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY).apply { shuffle() }
+        konst middle = 2.0F
+        konst items = floatArrayOf(1.0F, 2.0F, Float.POSITIVE_INFINITY).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -181,7 +181,7 @@ class MinMaxFloatArrayTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = floatArrayOf()
+        konst empty = floatArrayOf()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -221,7 +221,7 @@ class MinMaxFloatArrayTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = floatArrayOf()
+        konst empty = floatArrayOf()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

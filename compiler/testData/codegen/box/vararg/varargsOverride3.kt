@@ -27,13 +27,13 @@ open class Super
 open class Sub: Super()
 class Sub2: Sub()
 
-val a: A<Super> =
+konst a: A<Super> =
     object : A<Super>() {
         override fun doIt(vararg parameters: Super): String = "OK"
     }
 
 fun box(): String {
-    val b = a.B<Sub, Sub2>()
+    konst b = a.B<Sub, Sub2>()
     if (b.test() != "OK") return "FAIL1"
     if (b.test2() != "OK") return "FAIL2"
     return b.test3()

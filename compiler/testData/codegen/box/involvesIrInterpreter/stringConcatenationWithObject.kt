@@ -4,7 +4,7 @@
 
 object K : Code("K")
 
-open class Code(val x: String) {
+open class Code(konst x: String) {
     override fun toString() = "$x"
 }
 
@@ -13,5 +13,5 @@ class O {
 }
 
 fun box(): String {
-    return "$O" + "$K" // must not be evaluated during compile time
+    return "$O" + "$K" // must not be ekonstuated during compile time
 }

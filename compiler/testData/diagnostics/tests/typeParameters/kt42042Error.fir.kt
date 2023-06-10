@@ -1,13 +1,13 @@
 // !LANGUAGE: +ProperTypeInferenceConstraintsProcessing
 
 sealed class Subtype<A1, B1> {
-    abstract fun cast(value: A1): B1
+    abstract fun cast(konstue: A1): B1
     class Trivial<A2 : B2, B2> : Subtype<A2, B2>() {
-        override fun cast(value: A2): B2 = value
+        override fun cast(konstue: A2): B2 = konstue
     }
 }
 
-fun <A, B> unsafeCast(value: A): B {
-    val proof: Subtype<A, B> = <!TYPE_MISMATCH, TYPE_MISMATCH!>Subtype.Trivial()<!>
-    return proof.cast(value)
+fun <A, B> unsafeCast(konstue: A): B {
+    konst proof: Subtype<A, B> = <!TYPE_MISMATCH, TYPE_MISMATCH!>Subtype.Trivial()<!>
+    return proof.cast(konstue)
 }

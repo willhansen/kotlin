@@ -37,9 +37,9 @@ import org.jetbrains.kotlin.test.model.FrontendKinds
 import org.jetbrains.kotlin.test.model.TestModule
 import java.io.File
 
-abstract class CompilerConfigurationProvider(val testServices: TestServices) : TestService {
-    abstract val testRootDisposable: Disposable
-    abstract val configurators: List<AbstractEnvironmentConfigurator>
+abstract class CompilerConfigurationProvider(konst testServices: TestServices) : TestService {
+    abstract konst testRootDisposable: Disposable
+    abstract konst configurators: List<AbstractEnvironmentConfigurator>
 
     protected abstract fun getKotlinCoreEnvironment(module: TestModule): KotlinCoreEnvironment
 
@@ -48,7 +48,7 @@ abstract class CompilerConfigurationProvider(val testServices: TestServices) : T
     }
 
     fun registerCompilerExtensions(project: Project, module: TestModule, configuration: CompilerConfiguration) {
-        val extensionStorage = CompilerPluginRegistrar.ExtensionStorage()
+        konst extensionStorage = CompilerPluginRegistrar.ExtensionStorage()
         for (configurator in configurators) {
             configurator.legacyRegisterCompilerExtensions(project, module, configuration)
             with(configurator) {
@@ -67,20 +67,20 @@ abstract class CompilerConfigurationProvider(val testServices: TestServices) : T
     }
 
     fun registerJavacForModule(module: TestModule, ktFiles: List<KtFile>, mockJdk: File?) {
-        val environment = getKotlinCoreEnvironment(module)
-        val bootClasspath = mockJdk?.let { listOf(it) }
+        konst environment = getKotlinCoreEnvironment(module)
+        konst bootClasspath = mockJdk?.let { listOf(it) }
         environment.registerJavac(kotlinFiles = ktFiles, bootClasspath = bootClasspath)
     }
 }
 
-val TestServices.compilerConfigurationProvider: CompilerConfigurationProvider by TestServices.testServiceAccessor()
+konst TestServices.compilerConfigurationProvider: CompilerConfigurationProvider by TestServices.testServiceAccessor()
 
 open class CompilerConfigurationProviderImpl(
     testServices: TestServices,
-    override val testRootDisposable: Disposable,
-    override val configurators: List<AbstractEnvironmentConfigurator>
+    override konst testRootDisposable: Disposable,
+    override konst configurators: List<AbstractEnvironmentConfigurator>
 ) : CompilerConfigurationProvider(testServices) {
-    private val cache: MutableMap<TestModule, KotlinCoreEnvironment> = mutableMapOf()
+    private konst cache: MutableMap<TestModule, KotlinCoreEnvironment> = mutableMapOf()
 
     override fun getKotlinCoreEnvironment(module: TestModule): KotlinCoreEnvironment {
         return cache.getOrPut(module) {
@@ -90,14 +90,14 @@ open class CompilerConfigurationProviderImpl(
 
     @OptIn(TestInfrastructureInternals::class)
     protected open fun createKotlinCoreEnvironment(module: TestModule): KotlinCoreEnvironment {
-        val platform = module.targetPlatform
-        val configFiles = platform.platformToEnvironmentConfigFiles()
-        val applicationEnvironment = KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForTests(
+        konst platform = module.targetPlatform
+        konst configFiles = platform.platformToEnvironmentConfigFiles()
+        konst applicationEnvironment = KotlinCoreEnvironment.getOrCreateApplicationEnvironmentForTests(
             testServices.applicationDisposableProvider.getApplicationRootDisposable(),
             CompilerConfiguration()
         )
-        val configuration = createCompilerConfiguration(module, configurators)
-        val projectEnv = KotlinCoreEnvironment.ProjectEnvironment(testRootDisposable, applicationEnvironment, configuration)
+        konst configuration = createCompilerConfiguration(module, configurators)
+        konst projectEnv = KotlinCoreEnvironment.ProjectEnvironment(testRootDisposable, applicationEnvironment, configuration)
         return KotlinCoreEnvironment.createForTests(
             projectEnv,
             configuration,
@@ -126,7 +126,7 @@ fun TargetPlatform.platformToEnvironmentConfigFiles() = when {
 
 @TestInfrastructureInternals
 fun createCompilerConfiguration(module: TestModule, configurators: List<AbstractEnvironmentConfigurator>): CompilerConfiguration {
-    val configuration = CompilerConfiguration()
+    konst configuration = CompilerConfiguration()
     configuration[CommonConfigurationKeys.MODULE_NAME] = module.name
 
     if (JsEnvironmentConfigurationDirectives.GENERATE_STRICT_IMPLICIT_EXPORT in module.directives) {
@@ -141,12 +141,12 @@ fun createCompilerConfiguration(module: TestModule, configurators: List<Abstract
         configuration[CommonConfigurationKeys.USE_FIR] = true
     }
 
-    val messageCollector = object : MessageCollector {
+    konst messageCollector = object : MessageCollector {
         override fun clear() {}
 
         override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
             if (severity == CompilerMessageSeverity.ERROR) {
-                val prefix = if (location == null) "" else "(" + location.path + ":" + location.line + ":" + location.column + ") "
+                konst prefix = if (location == null) "" else "(" + location.path + ":" + location.line + ":" + location.column + ") "
                 throw AssertionError(prefix + message)
             }
         }
@@ -162,6 +162,6 @@ fun createCompilerConfiguration(module: TestModule, configurators: List<Abstract
     return configuration
 }
 
-private operator fun <T : Any> CompilerConfiguration.set(key: CompilerConfigurationKey<T>, value: T) {
-    put(key, value)
+private operator fun <T : Any> CompilerConfiguration.set(key: CompilerConfigurationKey<T>, konstue: T) {
+    put(key, konstue)
 }

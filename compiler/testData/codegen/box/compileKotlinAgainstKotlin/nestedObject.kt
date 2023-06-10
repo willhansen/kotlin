@@ -5,7 +5,7 @@ package aaa
 
 class A {
     object O {
-        val s = "OK"
+        konst s = "OK"
     }
 }
 

@@ -35,7 +35,7 @@ public final class IrOperation extends
   private IrOperation(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     int mutable_bitField1_ = 0;
@@ -516,10 +516,10 @@ public final class IrOperation extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -537,7 +537,7 @@ public final class IrOperation extends
     public IrOperation parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrOperation(input, extensionRegistry);
     }
   };
@@ -589,12 +589,12 @@ public final class IrOperation extends
     ERROR_EXPRESSION(34),
     ERROR_CALL_EXPRESSION(35),
     OPERATION_NOT_SET(0);
-    private int value = 0;
-    private OperationCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private OperationCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static OperationCase valueOf(int value) {
-      switch (value) {
+    public static OperationCase konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return BLOCK;
         case 2: return BREAK;
         case 3: return CALL;
@@ -636,13 +636,13 @@ public final class IrOperation extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public OperationCase
   getOperationCase() {
-    return OperationCase.valueOf(
+    return OperationCase.konstueOf(
         operationCase_);
   }
 
@@ -852,13 +852,13 @@ public final class IrOperation extends
 
   public static final int GET_ENUM_VALUE_FIELD_NUMBER = 13;
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
    */
   public boolean hasGetEnumValue() {
     return operationCase_ == 13;
   }
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue getGetEnumValue() {
     if (operationCase_ == 13) {
@@ -903,13 +903,13 @@ public final class IrOperation extends
 
   public static final int GET_VALUE_FIELD_NUMBER = 16;
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
    */
   public boolean hasGetValue() {
     return operationCase_ == 16;
   }
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue getGetValue() {
     if (operationCase_ == 16) {
@@ -988,13 +988,13 @@ public final class IrOperation extends
 
   public static final int SET_VALUE_FIELD_NUMBER = 21;
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
    */
   public boolean hasSetValue() {
     return operationCase_ == 21;
   }
   /**
-   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+   * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
    */
   public org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue getSetValue() {
     if (operationCase_ == 21) {
@@ -1736,23 +1736,23 @@ public final class IrOperation extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parseFrom(java.io.InputStream input)
@@ -2326,7 +2326,7 @@ public final class IrOperation extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrOperation) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -2340,7 +2340,7 @@ public final class IrOperation extends
     private java.lang.Object operation_;
     public OperationCase
         getOperationCase() {
-      return OperationCase.valueOf(
+      return OperationCase.konstueOf(
           operationCase_);
     }
 
@@ -2371,11 +2371,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock block = 1;</code>
      */
-    public Builder setBlock(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock value) {
-      if (value == null) {
+    public Builder setBlock(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 1;
       return this;
@@ -2393,13 +2393,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock block = 1;</code>
      */
-    public Builder mergeBlock(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock value) {
+    public Builder mergeBlock(org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock konstue) {
       if (operationCase_ == 1 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrBlock) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 1;
@@ -2435,11 +2435,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak break = 2;</code>
      */
-    public Builder setBreak(org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak value) {
-      if (value == null) {
+    public Builder setBreak(org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 2;
       return this;
@@ -2457,13 +2457,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak break = 2;</code>
      */
-    public Builder mergeBreak(org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak value) {
+    public Builder mergeBreak(org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak konstue) {
       if (operationCase_ == 2 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrBreak) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 2;
@@ -2499,11 +2499,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrCall call = 3;</code>
      */
-    public Builder setCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrCall value) {
-      if (value == null) {
+    public Builder setCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 3;
       return this;
@@ -2521,13 +2521,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrCall call = 3;</code>
      */
-    public Builder mergeCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrCall value) {
+    public Builder mergeCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrCall konstue) {
       if (operationCase_ == 3 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrCall.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrCall.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrCall) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 3;
@@ -2563,11 +2563,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference class_reference = 4;</code>
      */
-    public Builder setClassReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference value) {
-      if (value == null) {
+    public Builder setClassReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 4;
       return this;
@@ -2585,13 +2585,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference class_reference = 4;</code>
      */
-    public Builder mergeClassReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference value) {
+    public Builder mergeClassReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference konstue) {
       if (operationCase_ == 4 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrClassReference) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 4;
@@ -2627,11 +2627,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite composite = 5;</code>
      */
-    public Builder setComposite(org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite value) {
-      if (value == null) {
+    public Builder setComposite(org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 5;
       return this;
@@ -2649,13 +2649,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite composite = 5;</code>
      */
-    public Builder mergeComposite(org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite value) {
+    public Builder mergeComposite(org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite konstue) {
       if (operationCase_ == 5 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrComposite) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 5;
@@ -2691,11 +2691,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConst const = 6;</code>
      */
-    public Builder setConst(org.jetbrains.kotlin.backend.common.serialization.proto.IrConst value) {
-      if (value == null) {
+    public Builder setConst(org.jetbrains.kotlin.backend.common.serialization.proto.IrConst konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 6;
       return this;
@@ -2713,13 +2713,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConst const = 6;</code>
      */
-    public Builder mergeConst(org.jetbrains.kotlin.backend.common.serialization.proto.IrConst value) {
+    public Builder mergeConst(org.jetbrains.kotlin.backend.common.serialization.proto.IrConst konstue) {
       if (operationCase_ == 6 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrConst.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrConst.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrConst) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 6;
@@ -2755,11 +2755,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue continue = 7;</code>
      */
-    public Builder setContinue(org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue value) {
-      if (value == null) {
+    public Builder setContinue(org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 7;
       return this;
@@ -2777,13 +2777,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue continue = 7;</code>
      */
-    public Builder mergeContinue(org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue value) {
+    public Builder mergeContinue(org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue konstue) {
       if (operationCase_ == 7 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrContinue) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 7;
@@ -2819,11 +2819,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall delegating_constructor_call = 8;</code>
      */
-    public Builder setDelegatingConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall value) {
-      if (value == null) {
+    public Builder setDelegatingConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 8;
       return this;
@@ -2841,13 +2841,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall delegating_constructor_call = 8;</code>
      */
-    public Builder mergeDelegatingConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall value) {
+    public Builder mergeDelegatingConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall konstue) {
       if (operationCase_ == 8 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 8;
@@ -2883,11 +2883,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile do_while = 9;</code>
      */
-    public Builder setDoWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile value) {
-      if (value == null) {
+    public Builder setDoWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 9;
       return this;
@@ -2905,13 +2905,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile do_while = 9;</code>
      */
-    public Builder mergeDoWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile value) {
+    public Builder mergeDoWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile konstue) {
       if (operationCase_ == 9 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDoWhile) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 9;
@@ -2947,11 +2947,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall enum_constructor_call = 10;</code>
      */
-    public Builder setEnumConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall value) {
-      if (value == null) {
+    public Builder setEnumConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 10;
       return this;
@@ -2969,13 +2969,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall enum_constructor_call = 10;</code>
      */
-    public Builder mergeEnumConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall value) {
+    public Builder mergeEnumConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall konstue) {
       if (operationCase_ == 10 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrEnumConstructorCall) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 10;
@@ -3011,11 +3011,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference function_reference = 11;</code>
      */
-    public Builder setFunctionReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference value) {
-      if (value == null) {
+    public Builder setFunctionReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 11;
       return this;
@@ -3033,13 +3033,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference function_reference = 11;</code>
      */
-    public Builder mergeFunctionReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference value) {
+    public Builder mergeFunctionReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference konstue) {
       if (operationCase_ == 11 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionReference) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 11;
@@ -3075,11 +3075,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass get_class = 12;</code>
      */
-    public Builder setGetClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass value) {
-      if (value == null) {
+    public Builder setGetClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 12;
       return this;
@@ -3097,13 +3097,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass get_class = 12;</code>
      */
-    public Builder mergeGetClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass value) {
+    public Builder mergeGetClass(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass konstue) {
       if (operationCase_ == 12 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrGetClass) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 12;
@@ -3122,13 +3122,13 @@ public final class IrOperation extends
     }
 
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
     public boolean hasGetEnumValue() {
       return operationCase_ == 13;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue getGetEnumValue() {
       if (operationCase_ == 13) {
@@ -3137,19 +3137,19 @@ public final class IrOperation extends
       return org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue.getDefaultInstance();
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
-    public Builder setGetEnumValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue value) {
-      if (value == null) {
+    public Builder setGetEnumValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 13;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
     public Builder setGetEnumValue(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue.Builder builderForValue) {
@@ -3159,22 +3159,22 @@ public final class IrOperation extends
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
-    public Builder mergeGetEnumValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue value) {
+    public Builder mergeGetEnumValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue konstue) {
       if (operationCase_ == 13 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 13;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_value = 13;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetEnumValue get_enum_konstue = 13;</code>
      */
     public Builder clearGetEnumValue() {
       if (operationCase_ == 13) {
@@ -3203,11 +3203,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField get_field = 14;</code>
      */
-    public Builder setGetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField value) {
-      if (value == null) {
+    public Builder setGetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 14;
       return this;
@@ -3225,13 +3225,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField get_field = 14;</code>
      */
-    public Builder mergeGetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField value) {
+    public Builder mergeGetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField konstue) {
       if (operationCase_ == 14 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrGetField) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 14;
@@ -3267,11 +3267,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject get_object = 15;</code>
      */
-    public Builder setGetObject(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject value) {
-      if (value == null) {
+    public Builder setGetObject(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 15;
       return this;
@@ -3289,13 +3289,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject get_object = 15;</code>
      */
-    public Builder mergeGetObject(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject value) {
+    public Builder mergeGetObject(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject konstue) {
       if (operationCase_ == 15 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrGetObject) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 15;
@@ -3314,13 +3314,13 @@ public final class IrOperation extends
     }
 
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
     public boolean hasGetValue() {
       return operationCase_ == 16;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue getGetValue() {
       if (operationCase_ == 16) {
@@ -3329,19 +3329,19 @@ public final class IrOperation extends
       return org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue.getDefaultInstance();
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
-    public Builder setGetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue value) {
-      if (value == null) {
+    public Builder setGetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 16;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
     public Builder setGetValue(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue.Builder builderForValue) {
@@ -3351,22 +3351,22 @@ public final class IrOperation extends
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
-    public Builder mergeGetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue value) {
+    public Builder mergeGetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue konstue) {
       if (operationCase_ == 16 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 16;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_value = 16;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrGetValue get_konstue = 16;</code>
      */
     public Builder clearGetValue() {
       if (operationCase_ == 16) {
@@ -3395,11 +3395,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall instance_initializer_call = 17;</code>
      */
-    public Builder setInstanceInitializerCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall value) {
-      if (value == null) {
+    public Builder setInstanceInitializerCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 17;
       return this;
@@ -3417,13 +3417,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall instance_initializer_call = 17;</code>
      */
-    public Builder mergeInstanceInitializerCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall value) {
+    public Builder mergeInstanceInitializerCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall konstue) {
       if (operationCase_ == 17 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrInstanceInitializerCall) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 17;
@@ -3459,11 +3459,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference property_reference = 18;</code>
      */
-    public Builder setPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference value) {
-      if (value == null) {
+    public Builder setPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 18;
       return this;
@@ -3481,13 +3481,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference property_reference = 18;</code>
      */
-    public Builder mergePropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference value) {
+    public Builder mergePropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference konstue) {
       if (operationCase_ == 18 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrPropertyReference) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 18;
@@ -3523,11 +3523,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn return = 19;</code>
      */
-    public Builder setReturn(org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn value) {
-      if (value == null) {
+    public Builder setReturn(org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 19;
       return this;
@@ -3545,13 +3545,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn return = 19;</code>
      */
-    public Builder mergeReturn(org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn value) {
+    public Builder mergeReturn(org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn konstue) {
       if (operationCase_ == 19 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrReturn) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 19;
@@ -3587,11 +3587,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField set_field = 20;</code>
      */
-    public Builder setSetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField value) {
-      if (value == null) {
+    public Builder setSetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 20;
       return this;
@@ -3609,13 +3609,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField set_field = 20;</code>
      */
-    public Builder mergeSetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField value) {
+    public Builder mergeSetField(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField konstue) {
       if (operationCase_ == 20 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSetField) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 20;
@@ -3634,13 +3634,13 @@ public final class IrOperation extends
     }
 
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
     public boolean hasSetValue() {
       return operationCase_ == 21;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
     public org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue getSetValue() {
       if (operationCase_ == 21) {
@@ -3649,19 +3649,19 @@ public final class IrOperation extends
       return org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue.getDefaultInstance();
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
-    public Builder setSetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue value) {
-      if (value == null) {
+    public Builder setSetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 21;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
     public Builder setSetValue(
         org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue.Builder builderForValue) {
@@ -3671,22 +3671,22 @@ public final class IrOperation extends
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
-    public Builder mergeSetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue value) {
+    public Builder mergeSetValue(org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue konstue) {
       if (operationCase_ == 21 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 21;
       return this;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_value = 21;</code>
+     * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSetValue set_konstue = 21;</code>
      */
     public Builder clearSetValue() {
       if (operationCase_ == 21) {
@@ -3715,11 +3715,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat string_concat = 22;</code>
      */
-    public Builder setStringConcat(org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat value) {
-      if (value == null) {
+    public Builder setStringConcat(org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 22;
       return this;
@@ -3737,13 +3737,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat string_concat = 22;</code>
      */
-    public Builder mergeStringConcat(org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat value) {
+    public Builder mergeStringConcat(org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat konstue) {
       if (operationCase_ == 22 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrStringConcat) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 22;
@@ -3779,11 +3779,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow throw = 23;</code>
      */
-    public Builder setThrow(org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow value) {
-      if (value == null) {
+    public Builder setThrow(org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 23;
       return this;
@@ -3801,13 +3801,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow throw = 23;</code>
      */
-    public Builder mergeThrow(org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow value) {
+    public Builder mergeThrow(org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow konstue) {
       if (operationCase_ == 23 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrThrow) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 23;
@@ -3843,11 +3843,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTry try = 24;</code>
      */
-    public Builder setTry(org.jetbrains.kotlin.backend.common.serialization.proto.IrTry value) {
-      if (value == null) {
+    public Builder setTry(org.jetbrains.kotlin.backend.common.serialization.proto.IrTry konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 24;
       return this;
@@ -3865,13 +3865,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTry try = 24;</code>
      */
-    public Builder mergeTry(org.jetbrains.kotlin.backend.common.serialization.proto.IrTry value) {
+    public Builder mergeTry(org.jetbrains.kotlin.backend.common.serialization.proto.IrTry konstue) {
       if (operationCase_ == 24 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrTry.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrTry.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrTry) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 24;
@@ -3907,11 +3907,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp type_op = 25;</code>
      */
-    public Builder setTypeOp(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp value) {
-      if (value == null) {
+    public Builder setTypeOp(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 25;
       return this;
@@ -3929,13 +3929,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp type_op = 25;</code>
      */
-    public Builder mergeTypeOp(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp value) {
+    public Builder mergeTypeOp(org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp konstue) {
       if (operationCase_ == 25 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrTypeOp) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 25;
@@ -3971,11 +3971,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg vararg = 26;</code>
      */
-    public Builder setVararg(org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg value) {
-      if (value == null) {
+    public Builder setVararg(org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 26;
       return this;
@@ -3993,13 +3993,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg vararg = 26;</code>
      */
-    public Builder mergeVararg(org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg value) {
+    public Builder mergeVararg(org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg konstue) {
       if (operationCase_ == 26 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrVararg) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 26;
@@ -4035,11 +4035,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen when = 27;</code>
      */
-    public Builder setWhen(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen value) {
-      if (value == null) {
+    public Builder setWhen(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 27;
       return this;
@@ -4057,13 +4057,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen when = 27;</code>
      */
-    public Builder mergeWhen(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen value) {
+    public Builder mergeWhen(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen konstue) {
       if (operationCase_ == 27 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrWhen) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 27;
@@ -4099,11 +4099,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile while = 28;</code>
      */
-    public Builder setWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile value) {
-      if (value == null) {
+    public Builder setWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 28;
       return this;
@@ -4121,13 +4121,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile while = 28;</code>
      */
-    public Builder mergeWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile value) {
+    public Builder mergeWhile(org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile konstue) {
       if (operationCase_ == 28 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrWhile) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 28;
@@ -4163,11 +4163,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression dynamic_member = 29;</code>
      */
-    public Builder setDynamicMember(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression value) {
-      if (value == null) {
+    public Builder setDynamicMember(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 29;
       return this;
@@ -4185,13 +4185,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression dynamic_member = 29;</code>
      */
-    public Builder mergeDynamicMember(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression value) {
+    public Builder mergeDynamicMember(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression konstue) {
       if (operationCase_ == 29 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicMemberExpression) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 29;
@@ -4227,11 +4227,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression dynamic_operator = 30;</code>
      */
-    public Builder setDynamicOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression value) {
-      if (value == null) {
+    public Builder setDynamicOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 30;
       return this;
@@ -4249,13 +4249,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression dynamic_operator = 30;</code>
      */
-    public Builder mergeDynamicOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression value) {
+    public Builder mergeDynamicOperator(org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression konstue) {
       if (operationCase_ == 30 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrDynamicOperatorExpression) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 30;
@@ -4291,11 +4291,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference local_delegated_property_reference = 31;</code>
      */
-    public Builder setLocalDelegatedPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference value) {
-      if (value == null) {
+    public Builder setLocalDelegatedPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 31;
       return this;
@@ -4313,13 +4313,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference local_delegated_property_reference = 31;</code>
      */
-    public Builder mergeLocalDelegatedPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference value) {
+    public Builder mergeLocalDelegatedPropertyReference(org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference konstue) {
       if (operationCase_ == 31 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrLocalDelegatedPropertyReference) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 31;
@@ -4355,11 +4355,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall constructor_call = 32;</code>
      */
-    public Builder setConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
-      if (value == null) {
+    public Builder setConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 32;
       return this;
@@ -4377,13 +4377,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall constructor_call = 32;</code>
      */
-    public Builder mergeConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall value) {
+    public Builder mergeConstructorCall(org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall konstue) {
       if (operationCase_ == 32 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrConstructorCall) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 32;
@@ -4419,11 +4419,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression function_expression = 33;</code>
      */
-    public Builder setFunctionExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression value) {
-      if (value == null) {
+    public Builder setFunctionExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 33;
       return this;
@@ -4441,13 +4441,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression function_expression = 33;</code>
      */
-    public Builder mergeFunctionExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression value) {
+    public Builder mergeFunctionExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression konstue) {
       if (operationCase_ == 33 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrFunctionExpression) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 33;
@@ -4495,11 +4495,11 @@ public final class IrOperation extends
      * Error code
      * </pre>
      */
-    public Builder setErrorExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression value) {
-      if (value == null) {
+    public Builder setErrorExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 34;
       return this;
@@ -4525,13 +4525,13 @@ public final class IrOperation extends
      * Error code
      * </pre>
      */
-    public Builder mergeErrorExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression value) {
+    public Builder mergeErrorExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression konstue) {
       if (operationCase_ == 34 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorExpression) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 34;
@@ -4571,11 +4571,11 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression error_call_expression = 35;</code>
      */
-    public Builder setErrorCallExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression value) {
-      if (value == null) {
+    public Builder setErrorCallExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      operation_ = value;
+      operation_ = konstue;
 
       operationCase_ = 35;
       return this;
@@ -4593,13 +4593,13 @@ public final class IrOperation extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression error_call_expression = 35;</code>
      */
-    public Builder mergeErrorCallExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression value) {
+    public Builder mergeErrorCallExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression konstue) {
       if (operationCase_ == 35 &&
           operation_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression.getDefaultInstance()) {
         operation_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrErrorCallExpression) operation_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        operation_ = value;
+        operation_ = konstue;
       }
 
       operationCase_ = 35;

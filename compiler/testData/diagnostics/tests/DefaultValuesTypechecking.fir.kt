@@ -1,4 +1,4 @@
-val x = ""
+konst x = ""
 
 fun bar(x : Int = "", y : Int = x, z : String = y) {
 
@@ -11,7 +11,7 @@ class A(x : Int = <!UNINITIALIZED_PARAMETER!>y<!>, y : Int = x) { // None of the
     fun foo(bool: Boolean, a: Int = <!UNINITIALIZED_PARAMETER!>b<!>, b: String = a) {}
 }
 
-val z = 3
+konst z = 3
 
 fun foo(x: Int = <!UNINITIALIZED_PARAMETER!>y<!>, y: Int = x, i : Int = z): Int = x + y
 

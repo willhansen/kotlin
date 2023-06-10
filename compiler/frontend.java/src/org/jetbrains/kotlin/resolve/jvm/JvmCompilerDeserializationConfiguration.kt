@@ -13,6 +13,6 @@ import org.jetbrains.kotlin.utils.toMetadataVersion
 class JvmCompilerDeserializationConfiguration(
     languageVersionSettings: LanguageVersionSettings
 ) : CompilerDeserializationConfiguration(languageVersionSettings) {
-    override val binaryVersion: JvmMetadataVersion
+    override konst binaryVersion: JvmMetadataVersion
         get() = languageVersionSettings.languageVersion.toMetadataVersion()
 }

@@ -34,7 +34,7 @@ internal fun ThrowArrayIndexOutOfBoundsException(): Nothing {
 @ExportForCppRuntime
 @PublishedApi
 internal fun ThrowClassCastException(instance: Any, typeInfo: NativePtr): Nothing {
-    val clazz = KClassImpl<Any>(typeInfo)
+    konst clazz = KClassImpl<Any>(typeInfo)
     throw ClassCastException("${instance::class} cannot be cast to $clazz")
 }
 
@@ -52,7 +52,7 @@ internal fun ThrowKotlinNothingValueException(): Nothing {
 
 @ExportForCppRuntime
 @PublishedApi
-internal fun ThrowInvalidReceiverTypeException(klass: KClass<*>): Nothing {
+internal fun ThrowInkonstidReceiverTypeException(klass: KClass<*>): Nothing {
     throw RuntimeException("Unexpected receiver type: " + (klass.qualifiedName ?: "noname"))
 }
 
@@ -116,7 +116,7 @@ internal fun ThrowCharacterCodingException(): Nothing {
 @FreezingIsDeprecated
 internal fun ThrowIncorrectDereferenceException() {
     throw IncorrectDereferenceException(
-            "Trying to access top level value not marked as @ThreadLocal or @SharedImmutable from non-main thread")
+            "Trying to access top level konstue not marked as @ThreadLocal or @SharedImmutable from non-main thread")
 }
 
 internal class FileFailedToInitializeException(message: String?, cause: Throwable?) : Error(message, cause)
@@ -158,7 +158,7 @@ internal fun ReportUnhandledException(throwable: Throwable) {
 // to throw an exception during it's initialization before this hook would've been initialized.
 @OptIn(FreezingIsDeprecated::class, ExperimentalNativeApi::class)
 internal object UnhandledExceptionHookHolder {
-    internal val hook: FreezableAtomicReference<ReportUnhandledExceptionHook?> =
+    internal konst hook: FreezableAtomicReference<ReportUnhandledExceptionHook?> =
         if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) {
             FreezableAtomicReference<ReportUnhandledExceptionHook?>(null)
         } else {
@@ -171,7 +171,7 @@ internal object UnhandledExceptionHookHolder {
 @ExportForCppRuntime
 @OptIn(FreezingIsDeprecated::class, ExperimentalNativeApi::class)
 internal fun OnUnhandledException(throwable: Throwable) {
-    val handler = UnhandledExceptionHookHolder.hook.value
+    konst handler = UnhandledExceptionHookHolder.hook.konstue
     if (handler == null) {
         ReportUnhandledException(throwable);
         return
@@ -186,7 +186,7 @@ internal fun OnUnhandledException(throwable: Throwable) {
 @ExportForCppRuntime("Kotlin_runUnhandledExceptionHook")
 @OptIn(FreezingIsDeprecated::class, ExperimentalNativeApi::class)
 internal fun runUnhandledExceptionHook(throwable: Throwable) {
-    val handler = UnhandledExceptionHookHolder.hook.value ?: throw throwable
+    konst handler = UnhandledExceptionHookHolder.hook.konstue ?: throw throwable
     handler(throwable)
 }
 
@@ -194,26 +194,26 @@ internal fun runUnhandledExceptionHook(throwable: Throwable) {
 internal fun TheEmptyString() = ""
 
 @PublishedApi
-internal fun <T: Enum<T>> valueOfForEnum(name: String, values: Array<T>) : T {
+internal fun <T: Enum<T>> konstueOfForEnum(name: String, konstues: Array<T>) : T {
     var left = 0
-    var right = values.size - 1
+    var right = konstues.size - 1
     while (left <= right) {
-        val middle = (left + right) / 2
-        val x = values[middle].name.compareTo(name)
+        konst middle = (left + right) / 2
+        konst x = konstues[middle].name.compareTo(name)
         when {
             x < 0 -> left = middle + 1
             x > 0 -> right = middle - 1
-            else -> return values[middle]
+            else -> return konstues[middle]
         }
     }
-    throw Exception("Invalid enum value name: $name")
+    throw Exception("Inkonstid enum konstue name: $name")
 }
 
 @PublishedApi
-internal fun <T: Enum<T>> valuesForEnum(values: Array<T>): Array<T> {
-    val result = @Suppress("TYPE_PARAMETER_AS_REIFIED") Array<T?>(values.size)
-    for (value in values)
-        result[value.ordinal] = value
+internal fun <T: Enum<T>> konstuesForEnum(konstues: Array<T>): Array<T> {
+    konst result = @Suppress("TYPE_PARAMETER_AS_REIFIED") Array<T?>(konstues.size)
+    for (konstue in konstues)
+        result[konstue.ordinal] = konstue
     @Suppress("UNCHECKED_CAST")
     return result as Array<T>
 }
@@ -251,19 +251,19 @@ internal fun getProgressionLast(start: Long, end: Long, step: Long): Long =
 @PublishedApi
 // Called by the debugger.
 @ExportForCppRuntime
-internal fun KonanObjectToUtf8Array(value: Any?): ByteArray {
-    val string = try {
-        when (value) {
-            is Array<*> -> value.contentToString()
-            is CharArray -> value.contentToString()
-            is BooleanArray -> value.contentToString()
-            is ByteArray -> value.contentToString()
-            is ShortArray -> value.contentToString()
-            is IntArray -> value.contentToString()
-            is LongArray -> value.contentToString()
-            is FloatArray -> value.contentToString()
-            is DoubleArray -> value.contentToString()
-            else -> value.toString()
+internal fun KonanObjectToUtf8Array(konstue: Any?): ByteArray {
+    konst string = try {
+        when (konstue) {
+            is Array<*> -> konstue.contentToString()
+            is CharArray -> konstue.contentToString()
+            is BooleanArray -> konstue.contentToString()
+            is ByteArray -> konstue.contentToString()
+            is ShortArray -> konstue.contentToString()
+            is IntArray -> konstue.contentToString()
+            is LongArray -> konstue.contentToString()
+            is FloatArray -> konstue.contentToString()
+            is DoubleArray -> konstue.contentToString()
+            else -> konstue.toString()
         }
     } catch (error: Throwable) {
         "<Thrown $error when converting to string>"

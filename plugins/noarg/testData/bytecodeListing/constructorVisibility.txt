@@ -6,7 +6,7 @@ public final class Internal {
     public method <init>(p0: boolean): void
 }
 
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class NoArg {
     // source: 'constructorVisibility.kt'

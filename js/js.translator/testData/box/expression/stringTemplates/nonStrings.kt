@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1282
 fun box(): String {
-    val x = foo()
-    val y = bar()
+    konst x = foo()
+    konst y = bar()
 
     var r = "$x$y"
     if (r != "2342") return "fail: $r"

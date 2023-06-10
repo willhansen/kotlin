@@ -16,11 +16,11 @@ FILE: main.kt
             super<R|A|>()
         }
 
-        public final val executor: R|CommandExecutor| = R|/CommandExecutor.CommandExecutor|()
+        public final konst executor: R|CommandExecutor| = R|/CommandExecutor.CommandExecutor|()
             public get(): R|CommandExecutor|
 
         public final fun test(): R|kotlin/Unit| {
-            lval e: R|CommandExecutor| = this@R|/B|.R|/B.executor|
+            lkonst e: R|CommandExecutor| = this@R|/B|.R|/B.executor|
         }
 
     }

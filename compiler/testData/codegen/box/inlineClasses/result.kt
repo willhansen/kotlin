@@ -10,10 +10,10 @@
 package kotlin
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result(val value: Any?)
+konstue class Result(konst konstue: Any?)
 
 // FILE: box.kt
 
 fun box(): String {
-    return Result("OK").value as String
+    return Result("OK").konstue as String
 }

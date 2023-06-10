@@ -7,7 +7,7 @@ expect class Foo2
 
 expect fun foo2(): Int
 
-expect val s: String
+expect konst s: String
 
 expect open class <!AMBIGUOUS_ACTUALS{JVM}, PACKAGE_OR_CLASSIFIER_REDECLARATION{JVM}!>Foo3<!>
 
@@ -18,7 +18,7 @@ expect open class <!AMBIGUOUS_ACTUALS{JVM}, PACKAGE_OR_CLASSIFIER_REDECLARATION{
 interface <!ACTUAL_MISSING!>Foo1<!>
 actual <!ACTUAL_WITHOUT_EXPECT!>interface<!> Foo2
 
-actual <!ACTUAL_WITHOUT_EXPECT!>var<!> s: String = "value"
+actual <!ACTUAL_WITHOUT_EXPECT!>var<!> s: String = "konstue"
 
 fun <!ACTUAL_MISSING!>foo2<!>(): Int = 0
 

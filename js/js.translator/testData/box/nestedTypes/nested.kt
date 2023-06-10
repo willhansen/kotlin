@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1289
 package foo
 
-open class A(val x: Int) {
+open class A(konst x: Int) {
     class B : A(5)
 }
 

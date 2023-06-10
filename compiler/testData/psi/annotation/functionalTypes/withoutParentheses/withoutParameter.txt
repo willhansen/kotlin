@@ -6,7 +6,7 @@ KtFile: withoutParameter.kt
   PsiComment(EOL_COMMENT)('// Issue: KT-31734')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')
@@ -50,7 +50,7 @@ KtFile: withoutParameter.kt
           PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')
@@ -94,7 +94,7 @@ KtFile: withoutParameter.kt
           PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')
@@ -136,7 +136,7 @@ KtFile: withoutParameter.kt
           PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')
@@ -208,7 +208,7 @@ KtFile: withoutParameter.kt
           PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')
@@ -380,7 +380,7 @@ KtFile: withoutParameter.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')
@@ -438,7 +438,7 @@ KtFile: withoutParameter.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -720,7 +720,7 @@ KtFile: withoutParameter.kt
         PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')
     PsiElement(COLON)(':')

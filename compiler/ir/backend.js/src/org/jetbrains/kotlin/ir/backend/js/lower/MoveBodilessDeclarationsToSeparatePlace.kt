@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.isChildOf
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
-private val BODILESS_BUILTIN_CLASSES = listOf(
+private konst BODILESS_BUILTIN_CLASSES = listOf(
     "kotlin.String",
     "kotlin.Nothing",
     "kotlin.Array",
@@ -46,9 +46,9 @@ fun isBuiltInClass(declaration: IrDeclaration): Boolean =
 fun isStdLibClass(declaration: IrDeclaration): Boolean =
     declaration is IrClass && declaration.fqNameWhenAvailable?.isChildOf(JsPackage) != false
 
-private val JsPackage = FqName("kotlin.js")
+private konst JsPackage = FqName("kotlin.js")
 
-private val JsIntrinsicFqName = FqName("kotlin.js.JsIntrinsic")
+private konst JsIntrinsicFqName = FqName("kotlin.js.JsIntrinsic")
 
 private fun IrDeclaration.isPlacedInsideInternalPackage() =
     (parent as? IrPackageFragment)?.packageFqName == JsPackage
@@ -60,18 +60,18 @@ private fun isIntrinsic(declaration: IrDeclaration): Boolean =
 fun moveBodilessDeclarationsToSeparatePlace(context: JsIrBackendContext, moduleFragment: IrModuleFragment) {
     MoveBodilessDeclarationsToSeparatePlaceLowering(context).let { moveBodiless ->
         moduleFragment.files.forEach {
-            validateIsExternal(it)
+            konstidateIsExternal(it)
             moveBodiless.lower(it)
         }
     }
 }
 
-class MoveBodilessDeclarationsToSeparatePlaceLowering(private val context: JsIrBackendContext) : DeclarationTransformer {
+class MoveBodilessDeclarationsToSeparatePlaceLowering(private konst context: JsIrBackendContext) : DeclarationTransformer {
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
-        val irFile = declaration.parent as? IrFile ?: return null
+        konst irFile = declaration.parent as? IrFile ?: return null
 
-        val externalPackageFragment by lazy(LazyThreadSafetyMode.NONE) {
+        konst externalPackageFragment by lazy(LazyThreadSafetyMode.NONE) {
             context.externalPackageFragment.getOrPut(irFile.symbol) {
                 IrFileImpl(fileEntry = irFile.fileEntry, fqName = irFile.packageFqName, symbol = IrFileSymbolImpl(), module = irFile.module).also {
                     it.annotations = it.annotations memoryOptimizedPlus irFile.annotations
@@ -87,7 +87,7 @@ class MoveBodilessDeclarationsToSeparatePlaceLowering(private val context: JsIrB
 
             return emptyList()
         } else {
-            val d = declaration as? IrDeclarationWithName ?: return null
+            konst d = declaration as? IrDeclarationWithName ?: return null
 
             if (isBuiltInClass(d) || isIntrinsic(d)) {
                 context.bodilessBuiltInsPackageFragment.addChild(d)
@@ -108,18 +108,18 @@ class MoveBodilessDeclarationsToSeparatePlaceLowering(private val context: JsIrB
     }
 }
 
-fun validateIsExternal(packageFragment: IrPackageFragment) {
+fun konstidateIsExternal(packageFragment: IrPackageFragment) {
     for (declaration in packageFragment.declarations) {
-        validateNestedExternalDeclarations(declaration, (declaration as? IrPossiblyExternalDeclaration)?.isExternal ?: false)
+        konstidateNestedExternalDeclarations(declaration, (declaration as? IrPossiblyExternalDeclaration)?.isExternal ?: false)
     }
 }
 
 
-fun validateNestedExternalDeclarations(declaration: IrDeclaration, isExternalTopLevel: Boolean) {
+fun konstidateNestedExternalDeclarations(declaration: IrDeclaration, isExternalTopLevel: Boolean) {
     fun IrPossiblyExternalDeclaration.checkExternal() {
         if (isExternal != isExternalTopLevel) {
             compilationException(
-                "isExternal validation failed for declaration",
+                "isExternal konstidation failed for declaration",
                 declaration,
             )
         }
@@ -135,7 +135,7 @@ fun validateNestedExternalDeclarations(declaration: IrDeclaration, isExternalTop
     }
     if (declaration is IrClass) {
         declaration.declarations.forEach {
-            validateNestedExternalDeclarations(it, isExternalTopLevel)
+            konstidateNestedExternalDeclarations(it, isExternalTopLevel)
         }
     }
 }

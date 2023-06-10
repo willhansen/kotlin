@@ -12,7 +12,7 @@ KtErrorCallInfo:
           receiverType = kotlin.Int
           returnType = kotlin.Unit
           symbol = invoke(<extension receiver>: kotlin.Int, a: kotlin.String): kotlin.Unit
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = a
               receiverType = null
@@ -35,7 +35,7 @@ KtErrorCallInfo:
           receiverType = kotlin.Int
           returnType = kotlin.Unit
           symbol = invoke(<extension receiver>: kotlin.Int, b: kotlin.Boolean): kotlin.Unit
-          valueParameters = [
+          konstueParameters = [
             KtVariableLikeSignature:
               name = b
               receiverType = null

@@ -21,9 +21,9 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 internal class TaskOutputsBackup(
-    private val fileSystemOperations: FileSystemOperations,
-    val buildDirectory: DirectoryProperty,
-    val snapshotsDir: Provider<Directory>,
+    private konst fileSystemOperations: FileSystemOperations,
+    konst buildDirectory: DirectoryProperty,
+    konst snapshotsDir: Provider<Directory>,
 
     /**
      * Task outputs to back up and restore.
@@ -32,9 +32,9 @@ internal class TaskOutputsBackup(
      * restore (e.g., if (1) they are too big and (2) they are updated only at the end of the task execution so in a failed task run, they
      * are usually unchanged and therefore don't need to be restored).
      */
-    val outputsToRestore: List<File>,
+    konst outputsToRestore: List<File>,
 
-    val logger: Logger
+    konst logger: Logger
 ) {
 
     fun createSnapshot() {
@@ -42,7 +42,7 @@ internal class TaskOutputsBackup(
         // property. To avoid snapshot sync collisions, each snapshot output directory has also 'index' as prefix.
         outputsToRestore.toSortedSet().forEachIndexed { index, outputPath ->
             if (outputPath.isDirectory && !outputPath.isEmptyDirectory) {
-                val snapshotFile = File(snapshotsDir.get().asFile, index.asSnapshotArchiveName)
+                konst snapshotFile = File(snapshotsDir.get().asFile, index.asSnapshotArchiveName)
                 logger.debug("Packing $outputPath as $snapshotFile to make a backup")
                 compressDirectoryToZip(
                     snapshotFile,
@@ -52,7 +52,7 @@ internal class TaskOutputsBackup(
                 logger.debug("Ignoring $outputPath in making a backup as it does not exist")
                 File(snapshotsDir.get().asFile, index.asNotExistsMarkerFile).createNewFile()
             } else {
-                val snapshotFile = snapshotsDir.map { it.file(index.asSnapshotDirectoryName).asFile }
+                konst snapshotFile = snapshotsDir.map { it.file(index.asSnapshotDirectoryName).asFile }
                 logger.debug("Copying $outputPath as $snapshotFile to make a backup")
                 fileSystemOperations.copy { spec ->
                     spec.from(outputPath)
@@ -68,7 +68,7 @@ internal class TaskOutputsBackup(
         }
 
         outputsToRestore.toSortedSet().forEachIndexed { index, outputPath ->
-            val snapshotDir = snapshotsDir.get().file(index.asSnapshotDirectoryName).asFile
+            konst snapshotDir = snapshotsDir.get().file(index.asSnapshotDirectoryName).asFile
             if (snapshotDir.isDirectory) {
                 logger.debug("Copying files from $snapshotDir into ${outputPath.parentFile} to restore from backup")
                 fileSystemOperations.copy { spec ->
@@ -78,7 +78,7 @@ internal class TaskOutputsBackup(
             } else if (snapshotsDir.get().file(index.asNotExistsMarkerFile).asFile.exists()) {
                 // do nothing
             } else {
-                val snapshotArchive = snapshotsDir.get().file(index.asSnapshotArchiveName).asFile
+                konst snapshotArchive = snapshotsDir.get().file(index.asSnapshotArchiveName).asFile
                 logger.debug("Unpacking $snapshotArchive into $outputPath to restore from backup")
                 if (!snapshotArchive.exists()) {
                     logger.warn(
@@ -116,8 +116,8 @@ internal class TaskOutputsBackup(
                 .walkTopDown()
                 .filter { file -> !file.isDirectory || file.isEmptyDirectory }
                 .forEach { file ->
-                    val suffix = if (file.isDirectory) "/" else ""
-                    val entry = ZipEntry(file.relativeTo(outputPath).invariantSeparatorsPath + suffix)
+                    konst suffix = if (file.isDirectory) "/" else ""
+                    konst entry = ZipEntry(file.relativeTo(outputPath).invariantSeparatorsPath + suffix)
                     zip.putNextEntry(entry)
                     if (!file.isDirectory) {
                         file.inputStream().buffered().use { it.copyTo(zip) }
@@ -132,8 +132,8 @@ internal class TaskOutputsBackup(
         snapshotFile: File,
         outputDirectory: File
     ) {
-        val outputPath = outputDirectory.toPath()
-        val snapshotUri = URI.create("jar:${snapshotFile.toURI()}")
+        konst outputPath = outputDirectory.toPath()
+        konst snapshotUri = URI.create("jar:${snapshotFile.toURI()}")
         FileSystems.newFileSystem(snapshotUri, emptyMap<String, Any>()).use { zipFs ->
             zipFs.rootDirectories.forEach { rootDir ->
                 Files.walk(rootDir).use { paths ->
@@ -149,18 +149,18 @@ internal class TaskOutputsBackup(
         }
     }
 
-    private val File.isEmptyDirectory: Boolean
+    private konst File.isEmptyDirectory: Boolean
         get() = !Files.list(toPath()).use { it.findFirst().isPresent }
 
-    private val Path.normalizedToBeRelative: String
+    private konst Path.normalizedToBeRelative: String
         get() = if (toString() == "/") "." else toString().removePrefix("/")
 
-    private val Int.asSnapshotArchiveName: String
+    private konst Int.asSnapshotArchiveName: String
         get() = "$this.zip"
 
-    private val Int.asNotExistsMarkerFile: String
+    private konst Int.asNotExistsMarkerFile: String
         get() = "$this.not-exists"
 
-    private val Int.asSnapshotDirectoryName: String
+    private konst Int.asSnapshotDirectoryName: String
         get() = "$this"
 }

@@ -1,5 +1,5 @@
 object Foo {
-    open class Bar(val bar: String)
+    open class Bar(konst bar: String)
 }
 
 class Baz: Foo.Bar("OK")

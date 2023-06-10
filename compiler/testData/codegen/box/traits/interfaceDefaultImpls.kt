@@ -15,7 +15,7 @@ interface A {
 }
 
 fun box(): String {
-    val result = B.test(object : A {})
+    konst result = B.test(object : A {})
     if (result != "OK") return "fail: $result"
 
     return "OK"

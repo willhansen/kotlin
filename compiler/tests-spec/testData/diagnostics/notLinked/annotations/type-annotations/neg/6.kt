@@ -11,7 +11,7 @@
 
 // TESTCASE NUMBER: 1, 2
 @Target(AnnotationTarget.TYPE)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
 /*
  * TESTCASE NUMBER: 1
@@ -41,5 +41,5 @@ fun case_3_2(a: Any) {
 
 // TESTCASE NUMBER: 4
 fun case_4(a: Any) {
-    val x = a as @Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) String // ERROR, has error in IDE and in the compiler
+    konst x = a as @Ann(<!UNRESOLVED_REFERENCE!>unresolved_reference<!>) String // ERROR, has error in IDE and in the compiler
 }

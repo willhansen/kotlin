@@ -12,18 +12,18 @@
  * ISSUES: KT-26947
  */
 
-val map = mapOf("x" to null)
+konst map = mapOf("x" to null)
 
 fun box(): String {
     try {
-        val x: Int by mapOf("x" to null)
+        konst x: Int by mapOf("x" to null)
     } catch (e: KotlinNullPointerException) {
         return "OK"
     } catch (e: NullPointerException) {
         return "OK"
     }
     try {
-        val x: Any by map
+        konst x: Any by map
     } catch (e: KotlinNullPointerException) {
         return "OK"
     } catch (e: NullPointerException) {

@@ -26,7 +26,7 @@ public interface KtAnnotationUseSiteTargetRenderer {
     public object WITH_USES_SITE : KtAnnotationUseSiteTargetRenderer {
         context(KtAnalysisSession, KtAnnotationRenderer)
         override fun renderUseSiteTarget(annotation: KtAnnotationApplication, owner: KtAnnotated, printer: PrettyPrinter) {
-            val useSite = annotation.useSiteTarget ?: return
+            konst useSite = annotation.useSiteTarget ?: return
             printer.append(useSite.renderName)
             printer.append(':')
         }
@@ -35,7 +35,7 @@ public interface KtAnnotationUseSiteTargetRenderer {
     public object WITH_NON_DEFAULT_USE_SITE : KtAnnotationUseSiteTargetRenderer {
         context(KtAnalysisSession, KtAnnotationRenderer)
         override fun renderUseSiteTarget(annotation: KtAnnotationApplication, owner: KtAnnotated, printer: PrettyPrinter) {
-            val print = when (owner) {
+            konst print = when (owner) {
                 is KtReceiverParameterSymbol -> true
                 !is KtCallableSymbol -> return
                 is KtAnonymousFunctionSymbol -> true

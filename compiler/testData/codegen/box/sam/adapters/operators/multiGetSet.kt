@@ -9,10 +9,10 @@ class JavaClass {
         return 239;
     }
 
-    void set(Runnable i1, Runnable i2, Runnable value) {
+    void set(Runnable i1, Runnable i2, Runnable konstue) {
         i1.run();
         i2.run();
-        value.run();
+        konstue.run();
     }
 }
 
@@ -20,7 +20,7 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val obj = JavaClass()
+    konst obj = JavaClass()
 
     var v1 = "FAIL"
     obj[{ v1 = "O" }, { v1 += "K" }]

@@ -1,6 +1,6 @@
 class Test {
   companion object {
-    const protected val prop: Int = 0;
+    const protected konst prop: Int = 0;
   }
 }
 

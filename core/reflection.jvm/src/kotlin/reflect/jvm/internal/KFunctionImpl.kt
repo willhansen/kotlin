@@ -37,11 +37,11 @@ import kotlin.reflect.jvm.internal.calls.AnnotationConstructorCaller.Origin.JAVA
 import kotlin.reflect.jvm.internal.calls.AnnotationConstructorCaller.Origin.KOTLIN
 
 internal class KFunctionImpl private constructor(
-    override val container: KDeclarationContainerImpl,
+    override konst container: KDeclarationContainerImpl,
     name: String,
-    private val signature: String,
+    private konst signature: String,
     descriptorInitialValue: FunctionDescriptor?,
-    private val rawBoundReceiver: Any? = CallableReference.NO_RECEIVER
+    private konst rawBoundReceiver: Any? = CallableReference.NO_RECEIVER
 ) : KCallableImpl<Any?>(), KFunction<Any?>, FunctionBase<Any?>, FunctionWithAllInvokes {
     constructor(container: KDeclarationContainerImpl, name: String, signature: String, boundReceiver: Any?)
             : this(container, name, signature, null, boundReceiver)
@@ -53,16 +53,16 @@ internal class KFunctionImpl private constructor(
         descriptor
     )
 
-    override val isBound: Boolean get() = rawBoundReceiver != CallableReference.NO_RECEIVER
+    override konst isBound: Boolean get() = rawBoundReceiver != CallableReference.NO_RECEIVER
 
-    override val descriptor: FunctionDescriptor by ReflectProperties.lazySoft(descriptorInitialValue) {
+    override konst descriptor: FunctionDescriptor by ReflectProperties.lazySoft(descriptorInitialValue) {
         container.findFunctionDescriptor(name, signature)
     }
 
-    override val name: String get() = descriptor.name.asString()
+    override konst name: String get() = descriptor.name.asString()
 
-    override val caller: Caller<*> by lazy(PUBLICATION) caller@{
-        val member: Member? = when (val jvmSignature = RuntimeTypeMapper.mapSignature(descriptor)) {
+    override konst caller: Caller<*> by lazy(PUBLICATION) caller@{
+        konst member: Member? = when (konst jvmSignature = RuntimeTypeMapper.mapSignature(descriptor)) {
             is KotlinConstructor -> {
                 if (isAnnotationConstructor)
                     return@caller AnnotationConstructorCaller(container.jClass, parameters.map { it.name!! }, POSITIONAL_CALL, KOTLIN)
@@ -71,7 +71,7 @@ internal class KFunctionImpl private constructor(
             is KotlinFunction -> {
                 if (descriptor.let { it.containingDeclaration.isMultiFieldValueClass() && it is ConstructorDescriptor && it.isPrimary }) {
                     return@caller ValueClassAwareCaller.MultiFieldValueClassPrimaryConstructorCaller(
-                        descriptor, container, jvmSignature.methodDesc, descriptor.valueParameters
+                        descriptor, container, jvmSignature.methodDesc, descriptor.konstueParameters
                     )
                 }
                 container.findMethodBySignature(jvmSignature.methodName, jvmSignature.methodDesc)
@@ -79,7 +79,7 @@ internal class KFunctionImpl private constructor(
             is JavaMethod -> jvmSignature.method
             is JavaConstructor -> jvmSignature.constructor
             is FakeJavaAnnotationConstructor -> {
-                val methods = jvmSignature.methods
+                konst methods = jvmSignature.methods
                 return@caller AnnotationConstructorCaller(container.jClass, methods.map { it.name }, POSITIONAL_CALL, JAVA, methods)
             }
         }
@@ -99,9 +99,9 @@ internal class KFunctionImpl private constructor(
         }.createValueClassAwareCallerIfNeeded(descriptor)
     }
 
-    override val defaultCaller: Caller<*>? by lazy(PUBLICATION) defaultCaller@{
-        val jvmSignature = RuntimeTypeMapper.mapSignature(descriptor)
-        val member: Member? = when (jvmSignature) {
+    override konst defaultCaller: Caller<*>? by lazy(PUBLICATION) defaultCaller@{
+        konst jvmSignature = RuntimeTypeMapper.mapSignature(descriptor)
+        konst member: Member? = when (jvmSignature) {
             is KotlinFunction -> {
                 if (descriptor.let { it.containingDeclaration.isMultiFieldValueClass() && it is ConstructorDescriptor && it.isPrimary }) {
                     throw KotlinReflectionInternalError("${descriptor.containingDeclaration} cannot have default arguments")
@@ -114,7 +114,7 @@ internal class KFunctionImpl private constructor(
                 container.findDefaultConstructor(jvmSignature.constructorDesc)
             }
             is FakeJavaAnnotationConstructor -> {
-                val methods = jvmSignature.methods
+                konst methods = jvmSignature.methods
                 return@defaultCaller AnnotationConstructorCaller(container.jClass, methods.map { it.name }, CALL_BY_NAME, JAVA, methods)
             }
             else -> {
@@ -141,7 +141,7 @@ internal class KFunctionImpl private constructor(
         }?.createValueClassAwareCallerIfNeeded(descriptor, isDefault = true)
     }
 
-    private val boundReceiver
+    private konst boundReceiver
         get() = rawBoundReceiver.coerceToExpectedReceiverType(descriptor)
 
     private fun createStaticMethodCaller(member: Method) =
@@ -169,25 +169,25 @@ internal class KFunctionImpl private constructor(
         }
     }
 
-    override val arity: Int get() = caller.arity
+    override konst arity: Int get() = caller.arity
 
-    override val isInline: Boolean
+    override konst isInline: Boolean
         get() = descriptor.isInline
 
-    override val isExternal: Boolean
+    override konst isExternal: Boolean
         get() = descriptor.isExternal
 
-    override val isOperator: Boolean
+    override konst isOperator: Boolean
         get() = descriptor.isOperator
 
-    override val isInfix: Boolean
+    override konst isInfix: Boolean
         get() = descriptor.isInfix
 
-    override val isSuspend: Boolean
+    override konst isSuspend: Boolean
         get() = descriptor.isSuspend
 
     override fun equals(other: Any?): Boolean {
-        val that = other.asKFunctionImpl() ?: return false
+        konst that = other.asKFunctionImpl() ?: return false
         return container == that.container && name == that.name && signature == that.signature && rawBoundReceiver == that.rawBoundReceiver
     }
 

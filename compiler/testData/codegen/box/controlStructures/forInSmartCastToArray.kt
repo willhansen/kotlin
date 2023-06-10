@@ -8,7 +8,7 @@ fun f(x: Any?): Any? {
 }
 
 fun box(): String {
-    val a = arrayOfNulls<String>(1) as Array<String>
+    konst a = arrayOfNulls<String>(1) as Array<String>
     a[0] = "OK"
     return f(a) as String
 }

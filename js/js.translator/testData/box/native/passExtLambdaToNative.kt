@@ -8,15 +8,15 @@
 package foo
 
 external class A(v: String) {
-    val v: String
+    konst v: String
 }
 
 external fun bar(a: A, extLambda: A.(Int, String) -> String): String = definedExternally
 
 fun box(): String {
-    val a = A("test")
+    konst a = A("test")
 
-    val r = bar(a) { i, s -> "${this.v} $i $s"}
+    konst r = bar(a) { i, s -> "${this.v} $i $s"}
     if (r != "test 4 boo") return r
 
     return "OK"

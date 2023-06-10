@@ -7,7 +7,7 @@ public class Test extends KotlinBase {
 // FILE: KotlinBase.kt
 
 open class KotlinBase {
-    val abcd = "abcd"
+    konst abcd = "abcd"
 }
 
 // FILE: JavaDerived.java

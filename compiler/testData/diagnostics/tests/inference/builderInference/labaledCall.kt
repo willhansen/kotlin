@@ -16,7 +16,7 @@ interface TestInterface<R> {
 fun main() {
     build myLabel@ {
         emit("")
-        val x = this@myLabel
+        konst x = this@myLabel
         ""
     }
 }

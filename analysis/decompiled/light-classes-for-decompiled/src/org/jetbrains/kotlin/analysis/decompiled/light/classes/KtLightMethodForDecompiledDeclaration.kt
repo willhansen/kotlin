@@ -20,14 +20,14 @@ import org.jetbrains.kotlin.asJava.propertyNameByAccessor
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 class KtLightMethodForDecompiledDeclaration(
-    private val funDelegate: PsiMethod,
-    private val funParent: KtLightClass,
-    override val lightMemberOrigin: LightMemberOriginForCompiledMethod,
+    private konst funDelegate: PsiMethod,
+    private konst funParent: KtLightClass,
+    override konst lightMemberOrigin: LightMemberOriginForCompiledMethod,
 ) : KtLightElementBase(funParent), PsiMethod, KtLightMethod, KtLightMember<PsiMethod> {
 
-    override val kotlinOrigin: KtDeclaration? get() = lightMemberOrigin.originalElement
+    override konst kotlinOrigin: KtDeclaration? get() = lightMemberOrigin.originalElement
 
-    override val isMangled: Boolean get() = checkIsMangled()
+    override konst isMangled: Boolean get() = checkIsMangled()
 
     override fun hasModifierProperty(name: String): Boolean = funDelegate.hasModifierProperty(name)
 
@@ -105,10 +105,10 @@ class KtLightMethodForDecompiledDeclaration(
 
     override fun getOriginalElement() = funDelegate
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
         return this == another ||
-                another is KtLightMethodForDecompiledDeclaration && funDelegate.isEquivalentTo(another.funDelegate) ||
-                funDelegate.isEquivalentTo(another)
+                another is KtLightMethodForDecompiledDeclaration && funDelegate.isEquikonstentTo(another.funDelegate) ||
+                funDelegate.isEquikonstentTo(another)
     }
 
     override fun accept(visitor: PsiElementVisitor) {
@@ -121,7 +121,7 @@ class KtLightMethodForDecompiledDeclaration(
 }
 
 private fun KtLightMethod.checkIsMangled(): Boolean {
-    val demangledName = demangleInternalName(name) ?: return false
-    val originalName = propertyNameByAccessor(demangledName, this) ?: demangledName
+    konst demangledName = demangleInternalName(name) ?: return false
+    konst originalName = propertyNameByAccessor(demangledName, this) ?: demangledName
     return originalName == kotlinOrigin?.name
 }

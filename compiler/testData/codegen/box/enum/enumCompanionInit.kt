@@ -15,8 +15,8 @@ enum class E(a: String) {
     companion object {
         init {
             result += "E.companion.init;"
-            val value = E.values()[0].name
-            result += "$value;"
+            konst konstue = E.konstues()[0].name
+            result += "$konstue;"
         }
     }
 }
@@ -60,7 +60,7 @@ enum class G(a: String) {
 }
 
 fun box(): String {
-    val y = E.Y
+    konst y = E.Y
     result += "${y.name};"
     F.foo()
     G.O.foo()

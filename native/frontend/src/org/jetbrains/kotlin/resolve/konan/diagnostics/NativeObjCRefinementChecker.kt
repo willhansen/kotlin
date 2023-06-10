@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.resolve.konan.diagnostics.NativeObjCRefinementOverri
 
 object NativeObjCRefinementChecker : DeclarationChecker {
 
-    val hidesFromObjCFqName = FqName("kotlin.native.HidesFromObjC")
-    val refinesInSwiftFqName = FqName("kotlin.native.RefinesInSwift")
+    konst hidesFromObjCFqName = FqName("kotlin.native.HidesFromObjC")
+    konst refinesInSwiftFqName = FqName("kotlin.native.RefinesInSwift")
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is CallableMemberDescriptor) return
         if (descriptor !is FunctionDescriptor && descriptor !is PropertyDescriptor) return
-        val (objCAnnotations, swiftAnnotations) = descriptor.findRefinedAnnotations()
+        konst (objCAnnotations, swiftAnnotations) = descriptor.findRefinedAnnotations()
         if (objCAnnotations.isNotEmpty() && swiftAnnotations.isNotEmpty()) {
             swiftAnnotations.forEach {
-                val reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
+                konst reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
                 context.trace.report(ErrorsNative.REDUNDANT_SWIFT_REFINEMENT.on(reportLocation))
             }
         }
@@ -34,10 +34,10 @@ object NativeObjCRefinementChecker : DeclarationChecker {
     }
 
     private fun DeclarationDescriptor.findRefinedAnnotations(): Pair<List<AnnotationDescriptor>, List<AnnotationDescriptor>> {
-        val objCAnnotations = mutableListOf<AnnotationDescriptor>()
-        val swiftAnnotations = mutableListOf<AnnotationDescriptor>()
+        konst objCAnnotations = mutableListOf<AnnotationDescriptor>()
+        konst swiftAnnotations = mutableListOf<AnnotationDescriptor>()
         for (annotation in annotations) {
-            val annotations = annotation.annotationClass?.annotations ?: continue
+            konst annotations = annotation.annotationClass?.annotations ?: continue
             for (metaAnnotation in annotations) {
                 when (metaAnnotation.fqName) {
                     hidesFromObjCFqName -> {

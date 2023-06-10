@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.lexer.KtTokens
 
 object FirConstructorAllowedChecker : FirConstructorChecker() {
     override fun check(declaration: FirConstructor, context: CheckerContext, reporter: DiagnosticReporter) {
-        val containingClass = context.containingDeclarations.lastOrNull() as? FirClass ?: return
-        val source = declaration.source
-        val elementType = source?.elementType
+        konst containingClass = context.containingDeclarations.lastOrNull() as? FirClass ?: return
+        konst source = declaration.source
+        konst elementType = source?.elementType
         if (elementType != KtNodeTypes.PRIMARY_CONSTRUCTOR && elementType != KtNodeTypes.SECONDARY_CONSTRUCTOR) {
             return
         }
@@ -37,9 +37,9 @@ object FirConstructorAllowedChecker : FirConstructorChecker() {
                 reporter.reportOn(source, FirErrors.NON_PRIVATE_CONSTRUCTOR_IN_ENUM, context)
             }
             ClassKind.CLASS -> if (containingClass is FirRegularClass && containingClass.modality == Modality.SEALED) {
-                val modifierList = source.getModifierList() ?: return
-                val hasIllegalModifier = modifierList.modifiers.any {
-                    val token = it.token
+                konst modifierList = source.getModifierList() ?: return
+                konst hasIllegalModifier = modifierList.modifiers.any {
+                    konst token = it.token
                     token in KtTokens.VISIBILITY_MODIFIERS && token != KtTokens.PROTECTED_KEYWORD && token != KtTokens.PRIVATE_KEYWORD
                 }
                 if (hasIllegalModifier) {

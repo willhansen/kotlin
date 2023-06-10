@@ -1,8 +1,8 @@
 object A {
-    private val p = "OK";
+    private konst p = "OK";
 
     object B {
-        val z = p;
+        konst z = p;
     }
 
 }

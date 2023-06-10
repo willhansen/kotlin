@@ -24,7 +24,7 @@ internal fun Path.findInPath(name: String): Path? = Files
 /**
  * Find all Kotlin source files (ends with '.kt') in the given [Path].
  */
-internal val Path.allKotlinSources: List<Path>
+internal konst Path.allKotlinSources: List<Path>
     get() = Files.walk(this)
         .use { files ->
             files.asSequence()
@@ -35,7 +35,7 @@ internal val Path.allKotlinSources: List<Path>
 /**
  * Find all Java source files (ends with '.java') in the given [Path].
  */
-internal val Path.allJavaSources: List<Path>
+internal konst Path.allJavaSources: List<Path>
     get() = Files.walk(this)
         .use { files ->
             files.asSequence()
@@ -58,7 +58,7 @@ internal fun createTempDirDeleteOnExit(prefix: String): Path = Files
 internal fun Path.allFilesWithExtension(ext: String): List<Path> =
     Files.walk(this).use { stream -> stream.filter { it.extension.equals(ext, ignoreCase = true) }.toList() }
 
-internal val Path.allKotlinFiles
+internal konst Path.allKotlinFiles
     get() = allFilesWithExtension("kt")
 
 internal fun Iterable<Path>.relativizeTo(basePath: Path): Iterable<Path> = map {
@@ -134,9 +134,9 @@ fun TestProject.sourceFilesRelativeToProject(
  * Returns a single file located in the [relativePath] subdirectory. If no file or more than one file is found an assertion error will be thrown.
  */
 fun Path.getSingleFileInDir(relativePath: String): Path {
-    val path = resolve(relativePath)
+    konst path = resolve(relativePath)
     return Files.list(path).use {
-        val files = it.asSequence().toList()
+        konst files = it.asSequence().toList()
         files.singleOrNull() ?: fail("The directory must contain a single file, but got: $files")
     }
 }

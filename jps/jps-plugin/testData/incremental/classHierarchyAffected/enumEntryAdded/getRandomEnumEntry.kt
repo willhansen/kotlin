@@ -1,2 +1,2 @@
 fun getRandomEnumEntry() =
-        Enum.values()[1]
+        Enum.konstues()[1]

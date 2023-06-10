@@ -26,9 +26,9 @@ class FirAllOpenStatusTransformer(session: FirSession) : FirStatusTransformerExt
         return when (declaration) {
             is FirRegularClass -> declaration.classKind == ClassKind.CLASS && session.allOpenPredicateMatcher.isAnnotated(declaration.symbol)
             is FirCallableDeclaration -> {
-                val parentClassId = declaration.symbol.callableId.classId ?: return false
+                konst parentClassId = declaration.symbol.callableId.classId ?: return false
                 if (parentClassId.isLocal) return false
-                val parentClassSymbol = session.symbolProvider.getClassLikeSymbolByClassId(parentClassId) as? FirRegularClassSymbol
+                konst parentClassSymbol = session.symbolProvider.getClassLikeSymbolByClassId(parentClassId) as? FirRegularClassSymbol
                     ?: return false
                 session.allOpenPredicateMatcher.isAnnotated(parentClassSymbol)
             }
@@ -55,10 +55,10 @@ class FirAllOpenPredicateMatcher(
         }
     }
 
-    override val predicate = DeclarationPredicate.create {
-        val annotationFqNames = allOpenAnnotationFqNames.map { FqName(it) }
+    override konst predicate = DeclarationPredicate.create {
+        konst annotationFqNames = allOpenAnnotationFqNames.map { FqName(it) }
         annotated(annotationFqNames) or metaAnnotated(annotationFqNames, includeItself = true)
     }
 }
 
-val FirSession.allOpenPredicateMatcher: FirAllOpenPredicateMatcher by FirSession.sessionComponentAccessor()
+konst FirSession.allOpenPredicateMatcher: FirAllOpenPredicateMatcher by FirSession.sessionComponentAccessor()

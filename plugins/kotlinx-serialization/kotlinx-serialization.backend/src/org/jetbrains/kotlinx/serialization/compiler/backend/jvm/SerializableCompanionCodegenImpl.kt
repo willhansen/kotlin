@@ -31,19 +31,19 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.getSerializableClass
 import org.jetbrains.kotlinx.serialization.compiler.resolve.shouldHaveGeneratedMethodsInCompanion
 import org.jetbrains.org.objectweb.asm.Opcodes
 
-class SerializableCompanionCodegenImpl(private val classCodegen: ImplementationBodyCodegen) :
+class SerializableCompanionCodegenImpl(private konst classCodegen: ImplementationBodyCodegen) :
     SerializableCompanionCodegen(classCodegen.descriptor, classCodegen.bindingContext) {
 
     companion object {
         fun generateSerializableExtensions(codegen: ImplementationBodyCodegen) {
-            val serializableClass = getSerializableClassDescriptorByCompanion(codegen.descriptor) ?: return
+            konst serializableClass = getSerializableClassDescriptorByCompanion(codegen.descriptor) ?: return
             if (serializableClass.shouldHaveGeneratedMethodsInCompanion)
                 SerializableCompanionCodegenImpl(codegen).generate()
         }
     }
 
     override fun generateLazySerializerGetter(methodDescriptor: FunctionDescriptor) {
-        val fieldName = "$CACHED_SERIALIZER_PROPERTY\$delegate"
+        konst fieldName = "$CACHED_SERIALIZER_PROPERTY\$delegate"
 
         // Create field for lazy delegate
         classCodegen.v.newField(
@@ -56,13 +56,13 @@ class SerializableCompanionCodegenImpl(private val classCodegen: ImplementationB
         )
 
         // create singleton lambda class
-        val lambdaType =
+        konst lambdaType =
             createSingletonLambda(
                 "serializer\$1",
                 classCodegen,
                 companionDescriptor.getKSerializer().defaultType
             ) { lambdaCodegen, expressionCodegen ->
-                val serializerDescriptor = requireNotNull(
+                konst serializerDescriptor = requireNotNull(
                     findTypeSerializer(
                         serializableDescriptor.module,
                         serializableDescriptor.toSimpleType()
@@ -81,7 +81,7 @@ class SerializableCompanionCodegenImpl(private val classCodegen: ImplementationB
             }
 
         // initialize lazy delegate
-        val clInit = classCodegen.createOrGetClInitCodegen()
+        konst clInit = classCodegen.createOrGetClInitCodegen()
         with(clInit.v) {
             getstatic(threadSafeModeType.internalName, LAZY_PUBLICATION_MODE_NAME.identifier, threadSafeModeType.descriptor)
             getstatic(lambdaType.internalName, JvmAbi.INSTANCE_FIELD, lambdaType.descriptor)
@@ -105,7 +105,7 @@ class SerializableCompanionCodegenImpl(private val classCodegen: ImplementationB
     }
 
     override fun generateSerializerGetter(methodDescriptor: FunctionDescriptor) {
-        val serial = requireNotNull(
+        konst serial = requireNotNull(
             findTypeSerializer(
                 serializableDescriptor.module,
                 serializableDescriptor.toSimpleType()

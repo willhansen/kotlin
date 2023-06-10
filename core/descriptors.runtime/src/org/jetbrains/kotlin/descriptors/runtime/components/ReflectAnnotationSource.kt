@@ -19,6 +19,6 @@ package org.jetbrains.kotlin.descriptors.runtime.components
 import org.jetbrains.kotlin.descriptors.SourceElement
 import org.jetbrains.kotlin.descriptors.SourceFile
 
-class ReflectAnnotationSource(val annotation: Annotation) : SourceElement {
+class ReflectAnnotationSource(konst annotation: Annotation) : SourceElement {
     override fun getContainingFile(): SourceFile = SourceFile.NO_SOURCE_FILE
 }

@@ -12,7 +12,7 @@ fun box(): String {
     if (kt49182(true) + kt49182(false) != "OK")
         return "Fail test2"
 
-    val a: String
+    konst a: String
     if (flag) {
         a = "OK"
     }

@@ -57,10 +57,10 @@ public final class DebugProtoBuf {
     public static final int SEALED_VALUE = 3;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static Modality valueOf(int value) {
-      switch (value) {
+    public static Modality konstueOf(int konstue) {
+      switch (konstue) {
         case 0: return FINAL;
         case 1: return OPEN;
         case 2: return ABSTRACT;
@@ -77,7 +77,7 @@ public final class DebugProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Modality>() {
             public Modality findValueByNumber(int number) {
-              return Modality.valueOf(number);
+              return Modality.konstueOf(number);
             }
           };
 
@@ -94,9 +94,9 @@ public final class DebugProtoBuf {
       return org.jetbrains.kotlin.metadata.DebugProtoBuf.getDescriptor().getEnumTypes().get(0);
     }
 
-    private static final Modality[] VALUES = values();
+    private static final Modality[] VALUES = konstues();
 
-    public static Modality valueOf(
+    public static Modality konstueOf(
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -106,11 +106,11 @@ public final class DebugProtoBuf {
     }
 
     private final int index;
-    private final int value;
+    private final int konstue;
 
-    private Modality(int index, int value) {
+    private Modality(int index, int konstue) {
       this.index = index;
-      this.value = value;
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Modality)
@@ -181,10 +181,10 @@ public final class DebugProtoBuf {
     public static final int LOCAL_VALUE = 5;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static Visibility valueOf(int value) {
-      switch (value) {
+    public static Visibility konstueOf(int konstue) {
+      switch (konstue) {
         case 0: return INTERNAL;
         case 1: return PRIVATE;
         case 2: return PROTECTED;
@@ -203,7 +203,7 @@ public final class DebugProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Visibility>() {
             public Visibility findValueByNumber(int number) {
-              return Visibility.valueOf(number);
+              return Visibility.konstueOf(number);
             }
           };
 
@@ -220,9 +220,9 @@ public final class DebugProtoBuf {
       return org.jetbrains.kotlin.metadata.DebugProtoBuf.getDescriptor().getEnumTypes().get(1);
     }
 
-    private static final Visibility[] VALUES = values();
+    private static final Visibility[] VALUES = konstues();
 
-    public static Visibility valueOf(
+    public static Visibility konstueOf(
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -232,11 +232,11 @@ public final class DebugProtoBuf {
     }
 
     private final int index;
-    private final int value;
+    private final int konstue;
 
-    private Visibility(int index, int value) {
+    private Visibility(int index, int konstue) {
       this.index = index;
-      this.value = value;
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Visibility)
@@ -291,10 +291,10 @@ public final class DebugProtoBuf {
     public static final int SYNTHESIZED_VALUE = 3;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() { return konstue; }
 
-    public static MemberKind valueOf(int value) {
-      switch (value) {
+    public static MemberKind konstueOf(int konstue) {
+      switch (konstue) {
         case 0: return DECLARATION;
         case 1: return FAKE_OVERRIDE;
         case 2: return DELEGATION;
@@ -311,7 +311,7 @@ public final class DebugProtoBuf {
         internalValueMap =
           new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<MemberKind>() {
             public MemberKind findValueByNumber(int number) {
-              return MemberKind.valueOf(number);
+              return MemberKind.konstueOf(number);
             }
           };
 
@@ -328,9 +328,9 @@ public final class DebugProtoBuf {
       return org.jetbrains.kotlin.metadata.DebugProtoBuf.getDescriptor().getEnumTypes().get(2);
     }
 
-    private static final MemberKind[] VALUES = values();
+    private static final MemberKind[] VALUES = konstues();
 
-    public static MemberKind valueOf(
+    public static MemberKind konstueOf(
         org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
       if (desc.getType() != getDescriptor()) {
         throw new java.lang.IllegalArgumentException(
@@ -340,11 +340,11 @@ public final class DebugProtoBuf {
     }
 
     private final int index;
-    private final int value;
+    private final int konstue;
 
-    private MemberKind(int index, int value) {
+    private MemberKind(int index, int konstue) {
       this.index = index;
-      this.value = value;
+      this.konstue = konstue;
     }
 
     // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.MemberKind)
@@ -405,7 +405,7 @@ public final class DebugProtoBuf {
     private StringTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -436,10 +436,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -466,7 +466,7 @@ public final class DebugProtoBuf {
       public StringTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new StringTable(input, extensionRegistry);
       }
     };
@@ -556,23 +556,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parseFrom(java.io.InputStream input)
@@ -733,7 +733,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -782,12 +782,12 @@ public final class DebugProtoBuf {
        * <code>repeated string string = 1;</code>
        */
       public Builder setString(
-          int index, java.lang.String value) {
-        if (value == null) {
+          int index, java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.set(index, value);
+        string_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -795,12 +795,12 @@ public final class DebugProtoBuf {
        * <code>repeated string string = 1;</code>
        */
       public Builder addString(
-          java.lang.String value) {
-        if (value == null) {
+          java.lang.String konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.add(value);
+        string_.add(konstue);
         onChanged();
         return this;
       }
@@ -808,10 +808,10 @@ public final class DebugProtoBuf {
        * <code>repeated string string = 1;</code>
        */
       public Builder addAllString(
-          java.lang.Iterable<java.lang.String> values) {
+          java.lang.Iterable<java.lang.String> konstues) {
         ensureStringIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, string_);
+            konstues, string_);
         onChanged();
         return this;
       }
@@ -828,12 +828,12 @@ public final class DebugProtoBuf {
        * <code>repeated string string = 1;</code>
        */
       public Builder addStringBytes(
-          org.jetbrains.kotlin.protobuf.ByteString value) {
-        if (value == null) {
+          org.jetbrains.kotlin.protobuf.ByteString konstue) {
+        if (konstue == null) {
     throw new NullPointerException();
   }
   ensureStringIsMutable();
-        string_.add(value);
+        string_.add(konstue);
         onChanged();
         return this;
       }
@@ -909,7 +909,7 @@ public final class DebugProtoBuf {
     private QualifiedNameTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -939,10 +939,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -969,7 +969,7 @@ public final class DebugProtoBuf {
       public QualifiedNameTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new QualifiedNameTable(input, extensionRegistry);
       }
     };
@@ -1050,7 +1050,7 @@ public final class DebugProtoBuf {
       private QualifiedName(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         initFields();
         int mutable_bitField0_ = 0;
         org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -1082,21 +1082,21 @@ public final class DebugProtoBuf {
               }
               case 24: {
                 int rawValue = input.readEnum();
-                org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind value = org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind.valueOf(rawValue);
-                if (value == null) {
+                org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind.konstueOf(rawValue);
+                if (konstue == null) {
                   unknownFields.mergeVarintField(3, rawValue);
                 } else {
                   bitField0_ |= 0x00000004;
-                  kind_ = value;
+                  kind_ = konstue;
                 }
                 break;
               }
             }
           }
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
-          throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+          throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
           this.unknownFields = unknownFields.build();
@@ -1120,7 +1120,7 @@ public final class DebugProtoBuf {
         public QualifiedName parsePartialFrom(
             org.jetbrains.kotlin.protobuf.CodedInputStream input,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return new QualifiedName(input, extensionRegistry);
         }
       };
@@ -1163,10 +1163,10 @@ public final class DebugProtoBuf {
         public static final int LOCAL_VALUE = 2;
 
 
-        public final int getNumber() { return value; }
+        public final int getNumber() { return konstue; }
 
-        public static Kind valueOf(int value) {
-          switch (value) {
+        public static Kind konstueOf(int konstue) {
+          switch (konstue) {
             case 0: return CLASS;
             case 1: return PACKAGE;
             case 2: return LOCAL;
@@ -1182,7 +1182,7 @@ public final class DebugProtoBuf {
             internalValueMap =
               new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>() {
                 public Kind findValueByNumber(int number) {
-                  return Kind.valueOf(number);
+                  return Kind.konstueOf(number);
                 }
               };
 
@@ -1199,9 +1199,9 @@ public final class DebugProtoBuf {
           return org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.getDescriptor().getEnumTypes().get(0);
         }
 
-        private static final Kind[] VALUES = values();
+        private static final Kind[] VALUES = konstues();
 
-        public static Kind valueOf(
+        public static Kind konstueOf(
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
@@ -1211,11 +1211,11 @@ public final class DebugProtoBuf {
         }
 
         private final int index;
-        private final int value;
+        private final int konstue;
 
-        private Kind(int index, int value) {
+        private Kind(int index, int konstue) {
           this.index = index;
-          this.value = value;
+          this.konstue = konstue;
         }
 
         // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName.Kind)
@@ -1341,23 +1341,23 @@ public final class DebugProtoBuf {
 
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parseFrom(byte[] data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parseFrom(
           byte[] data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parseFrom(java.io.InputStream input)
@@ -1534,7 +1534,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+          } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
             parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName) e.getUnfinishedMessage();
             throw e;
           } finally {
@@ -1562,9 +1562,9 @@ public final class DebugProtoBuf {
         /**
          * <code>optional int32 parent_qualified_name = 1 [default = -1];</code>
          */
-        public Builder setParentQualifiedName(int value) {
+        public Builder setParentQualifiedName(int konstue) {
           bitField0_ |= 0x00000001;
-          parentQualifiedName_ = value;
+          parentQualifiedName_ = konstue;
           onChanged();
           return this;
         }
@@ -1606,9 +1606,9 @@ public final class DebugProtoBuf {
          * id in the StringTable
          * </pre>
          */
-        public Builder setShortName(int value) {
+        public Builder setShortName(int konstue) {
           bitField0_ |= 0x00000002;
-          shortName_ = value;
+          shortName_ = konstue;
           onChanged();
           return this;
         }
@@ -1642,12 +1642,12 @@ public final class DebugProtoBuf {
         /**
          * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName.Kind kind = 3 [default = PACKAGE];</code>
          */
-        public Builder setKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind value) {
-          if (value == null) {
+        public Builder setKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName.Kind konstue) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           bitField0_ |= 0x00000004;
-          kind_ = value;
+          kind_ = konstue;
           onChanged();
           return this;
         }
@@ -1759,23 +1759,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parseFrom(java.io.InputStream input)
@@ -1967,7 +1967,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -2025,16 +2025,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName qualified_name = 1;</code>
        */
       public Builder setQualifiedName(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName konstue) {
         if (qualifiedNameBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureQualifiedNameIsMutable();
-          qualifiedName_.set(index, value);
+          qualifiedName_.set(index, konstue);
           onChanged();
         } else {
-          qualifiedNameBuilder_.setMessage(index, value);
+          qualifiedNameBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -2055,16 +2055,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName qualified_name = 1;</code>
        */
-      public Builder addQualifiedName(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName value) {
+      public Builder addQualifiedName(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName konstue) {
         if (qualifiedNameBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureQualifiedNameIsMutable();
-          qualifiedName_.add(value);
+          qualifiedName_.add(konstue);
           onChanged();
         } else {
-          qualifiedNameBuilder_.addMessage(value);
+          qualifiedNameBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -2072,16 +2072,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName qualified_name = 1;</code>
        */
       public Builder addQualifiedName(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName konstue) {
         if (qualifiedNameBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureQualifiedNameIsMutable();
-          qualifiedName_.add(index, value);
+          qualifiedName_.add(index, konstue);
           onChanged();
         } else {
-          qualifiedNameBuilder_.addMessage(index, value);
+          qualifiedNameBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -2117,14 +2117,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.QualifiedNameTable.QualifiedName qualified_name = 1;</code>
        */
       public Builder addAllQualifiedName(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.QualifiedName> konstues) {
         if (qualifiedNameBuilder_ == null) {
           ensureQualifiedNameIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, qualifiedName_);
+              konstues, qualifiedName_);
           onChanged();
         } else {
-          qualifiedNameBuilder_.addAllMessages(values);
+          qualifiedNameBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -2299,7 +2299,7 @@ public final class DebugProtoBuf {
     private Annotation(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2334,10 +2334,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -2364,7 +2364,7 @@ public final class DebugProtoBuf {
       public Annotation parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Annotation(input, extensionRegistry);
       }
     };
@@ -2388,15 +2388,15 @@ public final class DebugProtoBuf {
       int getNameId();
 
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       boolean hasValue();
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value getValue();
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder getValueOrBuilder();
     }
@@ -2432,7 +2432,7 @@ public final class DebugProtoBuf {
       private Argument(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         initFields();
         int mutable_bitField0_ = 0;
         org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2460,22 +2460,22 @@ public final class DebugProtoBuf {
               case 18: {
                 org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder subBuilder = null;
                 if (((bitField0_ & 0x00000002) == 0x00000002)) {
-                  subBuilder = value_.toBuilder();
+                  subBuilder = konstue_.toBuilder();
                 }
-                value_ = input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.PARSER, extensionRegistry);
+                konstue_ = input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.PARSER, extensionRegistry);
                 if (subBuilder != null) {
-                  subBuilder.mergeFrom(value_);
-                  value_ = subBuilder.buildPartial();
+                  subBuilder.mergeFrom(konstue_);
+                  konstue_ = subBuilder.buildPartial();
                 }
                 bitField0_ |= 0x00000002;
                 break;
               }
             }
           }
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
-          throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+          throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
           this.unknownFields = unknownFields.build();
@@ -2499,7 +2499,7 @@ public final class DebugProtoBuf {
         public Argument parsePartialFrom(
             org.jetbrains.kotlin.protobuf.CodedInputStream input,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return new Argument(input, extensionRegistry);
         }
       };
@@ -2535,38 +2535,38 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type getType();
 
         /**
-         * <code>optional sint64 int_value = 2;</code>
+         * <code>optional sint64 int_konstue = 2;</code>
          */
         boolean hasIntValue();
         /**
-         * <code>optional sint64 int_value = 2;</code>
+         * <code>optional sint64 int_konstue = 2;</code>
          */
         long getIntValue();
 
         /**
-         * <code>optional float float_value = 3;</code>
+         * <code>optional float float_konstue = 3;</code>
          */
         boolean hasFloatValue();
         /**
-         * <code>optional float float_value = 3;</code>
+         * <code>optional float float_konstue = 3;</code>
          */
         float getFloatValue();
 
         /**
-         * <code>optional double double_value = 4;</code>
+         * <code>optional double double_konstue = 4;</code>
          */
         boolean hasDoubleValue();
         /**
-         * <code>optional double double_value = 4;</code>
+         * <code>optional double double_konstue = 4;</code>
          */
         double getDoubleValue();
 
         /**
-         * <code>optional int32 string_value = 5;</code>
+         * <code>optional int32 string_konstue = 5;</code>
          */
         boolean hasStringValue();
         /**
-         * <code>optional int32 string_value = 5;</code>
+         * <code>optional int32 string_konstue = 5;</code>
          */
         int getStringValue();
 
@@ -2588,11 +2588,11 @@ public final class DebugProtoBuf {
         int getClassId();
 
         /**
-         * <code>optional int32 enum_value_id = 7;</code>
+         * <code>optional int32 enum_konstue_id = 7;</code>
          */
         boolean hasEnumValueId();
         /**
-         * <code>optional int32 enum_value_id = 7;</code>
+         * <code>optional int32 enum_konstue_id = 7;</code>
          */
         int getEnumValueId();
 
@@ -2638,14 +2638,14 @@ public final class DebugProtoBuf {
          *
          * <pre>
          * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-         * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+         * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
          * - String::class, if array_dimension_count = 0
          * - Array&lt;String&gt;::class, if array_dimension_count = 1
          * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
          * - etc.
          * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
          * in class literals on JVM, we don't bother to do represent this in our format as well.
-         * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+         * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
          * </pre>
          */
         boolean hasArrayDimensionCount();
@@ -2654,14 +2654,14 @@ public final class DebugProtoBuf {
          *
          * <pre>
          * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-         * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+         * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
          * - String::class, if array_dimension_count = 0
          * - Array&lt;String&gt;::class, if array_dimension_count = 1
          * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
          * - etc.
          * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
          * in class literals on JVM, we don't bother to do represent this in our format as well.
-         * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+         * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
          * </pre>
          */
         int getArrayDimensionCount();
@@ -2715,7 +2715,7 @@ public final class DebugProtoBuf {
         private Value(
             org.jetbrains.kotlin.protobuf.CodedInputStream input,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           initFields();
           int mutable_bitField0_ = 0;
           org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -2737,12 +2737,12 @@ public final class DebugProtoBuf {
                 }
                 case 8: {
                   int rawValue = input.readEnum();
-                  org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type value = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type.valueOf(rawValue);
-                  if (value == null) {
+                  org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type.konstueOf(rawValue);
+                  if (konstue == null) {
                     unknownFields.mergeVarintField(1, rawValue);
                   } else {
                     bitField0_ |= 0x00000001;
-                    type_ = value;
+                    type_ = konstue;
                   }
                   break;
                 }
@@ -2809,10 +2809,10 @@ public final class DebugProtoBuf {
                 }
               }
             }
-          } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+          } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
             throw e.setUnfinishedMessage(this);
           } catch (java.io.IOException e) {
-            throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+            throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
                 e.getMessage()).setUnfinishedMessage(this);
           } finally {
             if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
@@ -2839,7 +2839,7 @@ public final class DebugProtoBuf {
           public Value parsePartialFrom(
               org.jetbrains.kotlin.protobuf.CodedInputStream input,
               org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+              throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
             return new Value(input, extensionRegistry);
           }
         };
@@ -2962,10 +2962,10 @@ public final class DebugProtoBuf {
           public static final int ARRAY_VALUE = 12;
 
 
-          public final int getNumber() { return value; }
+          public final int getNumber() { return konstue; }
 
-          public static Type valueOf(int value) {
-            switch (value) {
+          public static Type konstueOf(int konstue) {
+            switch (konstue) {
               case 0: return BYTE;
               case 1: return CHAR;
               case 2: return SHORT;
@@ -2991,7 +2991,7 @@ public final class DebugProtoBuf {
               internalValueMap =
                 new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Type>() {
                   public Type findValueByNumber(int number) {
-                    return Type.valueOf(number);
+                    return Type.konstueOf(number);
                   }
                 };
 
@@ -3008,9 +3008,9 @@ public final class DebugProtoBuf {
             return org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDescriptor().getEnumTypes().get(0);
           }
 
-          private static final Type[] VALUES = values();
+          private static final Type[] VALUES = konstues();
 
-          public static Type valueOf(
+          public static Type konstueOf(
               org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
             if (desc.getType() != getDescriptor()) {
               throw new java.lang.IllegalArgumentException(
@@ -3020,11 +3020,11 @@ public final class DebugProtoBuf {
           }
 
           private final int index;
-          private final int value;
+          private final int konstue;
 
-          private Type(int index, int value) {
+          private Type(int index, int konstue) {
             this.index = index;
-            this.value = value;
+            this.konstue = konstue;
           }
 
           // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Annotation.Argument.Value.Type)
@@ -3061,13 +3061,13 @@ public final class DebugProtoBuf {
         public static final int INT_VALUE_FIELD_NUMBER = 2;
         private long intValue_;
         /**
-         * <code>optional sint64 int_value = 2;</code>
+         * <code>optional sint64 int_konstue = 2;</code>
          */
         public boolean hasIntValue() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional sint64 int_value = 2;</code>
+         * <code>optional sint64 int_konstue = 2;</code>
          */
         public long getIntValue() {
           return intValue_;
@@ -3076,13 +3076,13 @@ public final class DebugProtoBuf {
         public static final int FLOAT_VALUE_FIELD_NUMBER = 3;
         private float floatValue_;
         /**
-         * <code>optional float float_value = 3;</code>
+         * <code>optional float float_konstue = 3;</code>
          */
         public boolean hasFloatValue() {
           return ((bitField0_ & 0x00000004) == 0x00000004);
         }
         /**
-         * <code>optional float float_value = 3;</code>
+         * <code>optional float float_konstue = 3;</code>
          */
         public float getFloatValue() {
           return floatValue_;
@@ -3091,13 +3091,13 @@ public final class DebugProtoBuf {
         public static final int DOUBLE_VALUE_FIELD_NUMBER = 4;
         private double doubleValue_;
         /**
-         * <code>optional double double_value = 4;</code>
+         * <code>optional double double_konstue = 4;</code>
          */
         public boolean hasDoubleValue() {
           return ((bitField0_ & 0x00000008) == 0x00000008);
         }
         /**
-         * <code>optional double double_value = 4;</code>
+         * <code>optional double double_konstue = 4;</code>
          */
         public double getDoubleValue() {
           return doubleValue_;
@@ -3106,13 +3106,13 @@ public final class DebugProtoBuf {
         public static final int STRING_VALUE_FIELD_NUMBER = 5;
         private int stringValue_;
         /**
-         * <code>optional int32 string_value = 5;</code>
+         * <code>optional int32 string_konstue = 5;</code>
          */
         public boolean hasStringValue() {
           return ((bitField0_ & 0x00000010) == 0x00000010);
         }
         /**
-         * <code>optional int32 string_value = 5;</code>
+         * <code>optional int32 string_konstue = 5;</code>
          */
         public int getStringValue() {
           return stringValue_;
@@ -3144,13 +3144,13 @@ public final class DebugProtoBuf {
         public static final int ENUM_VALUE_ID_FIELD_NUMBER = 7;
         private int enumValueId_;
         /**
-         * <code>optional int32 enum_value_id = 7;</code>
+         * <code>optional int32 enum_konstue_id = 7;</code>
          */
         public boolean hasEnumValueId() {
           return ((bitField0_ & 0x00000040) == 0x00000040);
         }
         /**
-         * <code>optional int32 enum_value_id = 7;</code>
+         * <code>optional int32 enum_konstue_id = 7;</code>
          */
         public int getEnumValueId() {
           return enumValueId_;
@@ -3219,14 +3219,14 @@ public final class DebugProtoBuf {
          *
          * <pre>
          * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-         * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+         * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
          * - String::class, if array_dimension_count = 0
          * - Array&lt;String&gt;::class, if array_dimension_count = 1
          * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
          * - etc.
          * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
          * in class literals on JVM, we don't bother to do represent this in our format as well.
-         * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+         * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
          * </pre>
          */
         public boolean hasArrayDimensionCount() {
@@ -3237,14 +3237,14 @@ public final class DebugProtoBuf {
          *
          * <pre>
          * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-         * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+         * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
          * - String::class, if array_dimension_count = 0
          * - Array&lt;String&gt;::class, if array_dimension_count = 1
          * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
          * - etc.
          * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
          * in class literals on JVM, we don't bother to do represent this in our format as well.
-         * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+         * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
          * </pre>
          */
         public int getArrayDimensionCount() {
@@ -3412,23 +3412,23 @@ public final class DebugProtoBuf {
 
         public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parseFrom(
             org.jetbrains.kotlin.protobuf.ByteString data)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return PARSER.parseFrom(data);
         }
         public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parseFrom(
             org.jetbrains.kotlin.protobuf.ByteString data,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return PARSER.parseFrom(data, extensionRegistry);
         }
         public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parseFrom(byte[] data)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return PARSER.parseFrom(data);
         }
         public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parseFrom(
             byte[] data,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return PARSER.parseFrom(data, extensionRegistry);
         }
         public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parseFrom(java.io.InputStream input)
@@ -3727,7 +3727,7 @@ public final class DebugProtoBuf {
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value parsedMessage = null;
             try {
               parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-            } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+            } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
               parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value) e.getUnfinishedMessage();
               throw e;
             } finally {
@@ -3773,12 +3773,12 @@ public final class DebugProtoBuf {
            * However, to save space, this field is optional: in case of homogeneous arrays, only the type of the first element is required
            * </pre>
            */
-          public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type value) {
-            if (value == null) {
+          public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Type konstue) {
+            if (konstue == null) {
               throw new NullPointerException();
             }
             bitField0_ |= 0x00000001;
-            type_ = value;
+            type_ = konstue;
             onChanged();
             return this;
           }
@@ -3800,28 +3800,28 @@ public final class DebugProtoBuf {
 
           private long intValue_ ;
           /**
-           * <code>optional sint64 int_value = 2;</code>
+           * <code>optional sint64 int_konstue = 2;</code>
            */
           public boolean hasIntValue() {
             return ((bitField0_ & 0x00000002) == 0x00000002);
           }
           /**
-           * <code>optional sint64 int_value = 2;</code>
+           * <code>optional sint64 int_konstue = 2;</code>
            */
           public long getIntValue() {
             return intValue_;
           }
           /**
-           * <code>optional sint64 int_value = 2;</code>
+           * <code>optional sint64 int_konstue = 2;</code>
            */
-          public Builder setIntValue(long value) {
+          public Builder setIntValue(long konstue) {
             bitField0_ |= 0x00000002;
-            intValue_ = value;
+            intValue_ = konstue;
             onChanged();
             return this;
           }
           /**
-           * <code>optional sint64 int_value = 2;</code>
+           * <code>optional sint64 int_konstue = 2;</code>
            */
           public Builder clearIntValue() {
             bitField0_ = (bitField0_ & ~0x00000002);
@@ -3832,28 +3832,28 @@ public final class DebugProtoBuf {
 
           private float floatValue_ ;
           /**
-           * <code>optional float float_value = 3;</code>
+           * <code>optional float float_konstue = 3;</code>
            */
           public boolean hasFloatValue() {
             return ((bitField0_ & 0x00000004) == 0x00000004);
           }
           /**
-           * <code>optional float float_value = 3;</code>
+           * <code>optional float float_konstue = 3;</code>
            */
           public float getFloatValue() {
             return floatValue_;
           }
           /**
-           * <code>optional float float_value = 3;</code>
+           * <code>optional float float_konstue = 3;</code>
            */
-          public Builder setFloatValue(float value) {
+          public Builder setFloatValue(float konstue) {
             bitField0_ |= 0x00000004;
-            floatValue_ = value;
+            floatValue_ = konstue;
             onChanged();
             return this;
           }
           /**
-           * <code>optional float float_value = 3;</code>
+           * <code>optional float float_konstue = 3;</code>
            */
           public Builder clearFloatValue() {
             bitField0_ = (bitField0_ & ~0x00000004);
@@ -3864,28 +3864,28 @@ public final class DebugProtoBuf {
 
           private double doubleValue_ ;
           /**
-           * <code>optional double double_value = 4;</code>
+           * <code>optional double double_konstue = 4;</code>
            */
           public boolean hasDoubleValue() {
             return ((bitField0_ & 0x00000008) == 0x00000008);
           }
           /**
-           * <code>optional double double_value = 4;</code>
+           * <code>optional double double_konstue = 4;</code>
            */
           public double getDoubleValue() {
             return doubleValue_;
           }
           /**
-           * <code>optional double double_value = 4;</code>
+           * <code>optional double double_konstue = 4;</code>
            */
-          public Builder setDoubleValue(double value) {
+          public Builder setDoubleValue(double konstue) {
             bitField0_ |= 0x00000008;
-            doubleValue_ = value;
+            doubleValue_ = konstue;
             onChanged();
             return this;
           }
           /**
-           * <code>optional double double_value = 4;</code>
+           * <code>optional double double_konstue = 4;</code>
            */
           public Builder clearDoubleValue() {
             bitField0_ = (bitField0_ & ~0x00000008);
@@ -3896,28 +3896,28 @@ public final class DebugProtoBuf {
 
           private int stringValue_ ;
           /**
-           * <code>optional int32 string_value = 5;</code>
+           * <code>optional int32 string_konstue = 5;</code>
            */
           public boolean hasStringValue() {
             return ((bitField0_ & 0x00000010) == 0x00000010);
           }
           /**
-           * <code>optional int32 string_value = 5;</code>
+           * <code>optional int32 string_konstue = 5;</code>
            */
           public int getStringValue() {
             return stringValue_;
           }
           /**
-           * <code>optional int32 string_value = 5;</code>
+           * <code>optional int32 string_konstue = 5;</code>
            */
-          public Builder setStringValue(int value) {
+          public Builder setStringValue(int konstue) {
             bitField0_ |= 0x00000010;
-            stringValue_ = value;
+            stringValue_ = konstue;
             onChanged();
             return this;
           }
           /**
-           * <code>optional int32 string_value = 5;</code>
+           * <code>optional int32 string_konstue = 5;</code>
            */
           public Builder clearStringValue() {
             bitField0_ = (bitField0_ & ~0x00000010);
@@ -3954,9 +3954,9 @@ public final class DebugProtoBuf {
            * If type = CLASS, FQ name of the referenced class; if type = ENUM, FQ name of the enum class
            * </pre>
            */
-          public Builder setClassId(int value) {
+          public Builder setClassId(int konstue) {
             bitField0_ |= 0x00000020;
-            classId_ = value;
+            classId_ = konstue;
             onChanged();
             return this;
           }
@@ -3976,28 +3976,28 @@ public final class DebugProtoBuf {
 
           private int enumValueId_ ;
           /**
-           * <code>optional int32 enum_value_id = 7;</code>
+           * <code>optional int32 enum_konstue_id = 7;</code>
            */
           public boolean hasEnumValueId() {
             return ((bitField0_ & 0x00000040) == 0x00000040);
           }
           /**
-           * <code>optional int32 enum_value_id = 7;</code>
+           * <code>optional int32 enum_konstue_id = 7;</code>
            */
           public int getEnumValueId() {
             return enumValueId_;
           }
           /**
-           * <code>optional int32 enum_value_id = 7;</code>
+           * <code>optional int32 enum_konstue_id = 7;</code>
            */
-          public Builder setEnumValueId(int value) {
+          public Builder setEnumValueId(int konstue) {
             bitField0_ |= 0x00000040;
-            enumValueId_ = value;
+            enumValueId_ = konstue;
             onChanged();
             return this;
           }
           /**
-           * <code>optional int32 enum_value_id = 7;</code>
+           * <code>optional int32 enum_konstue_id = 7;</code>
            */
           public Builder clearEnumValueId() {
             bitField0_ = (bitField0_ & ~0x00000040);
@@ -4028,15 +4028,15 @@ public final class DebugProtoBuf {
           /**
            * <code>optional .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
            */
-          public Builder setAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation value) {
+          public Builder setAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation konstue) {
             if (annotationBuilder_ == null) {
-              if (value == null) {
+              if (konstue == null) {
                 throw new NullPointerException();
               }
-              annotation_ = value;
+              annotation_ = konstue;
               onChanged();
             } else {
-              annotationBuilder_.setMessage(value);
+              annotationBuilder_.setMessage(konstue);
             }
             bitField0_ |= 0x00000080;
             return this;
@@ -4058,18 +4058,18 @@ public final class DebugProtoBuf {
           /**
            * <code>optional .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
            */
-          public Builder mergeAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation value) {
+          public Builder mergeAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation konstue) {
             if (annotationBuilder_ == null) {
               if (((bitField0_ & 0x00000080) == 0x00000080) &&
                   annotation_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.getDefaultInstance()) {
                 annotation_ =
-                  org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.newBuilder(annotation_).mergeFrom(value).buildPartial();
+                  org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.newBuilder(annotation_).mergeFrom(konstue).buildPartial();
               } else {
-                annotation_ = value;
+                annotation_ = konstue;
               }
               onChanged();
             } else {
-              annotationBuilder_.mergeFrom(value);
+              annotationBuilder_.mergeFrom(konstue);
             }
             bitField0_ |= 0x00000080;
             return this;
@@ -4168,16 +4168,16 @@ public final class DebugProtoBuf {
            * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument.Value array_element = 9;</code>
            */
           public Builder setArrayElement(
-              int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value) {
+              int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue) {
             if (arrayElementBuilder_ == null) {
-              if (value == null) {
+              if (konstue == null) {
                 throw new NullPointerException();
               }
               ensureArrayElementIsMutable();
-              arrayElement_.set(index, value);
+              arrayElement_.set(index, konstue);
               onChanged();
             } else {
-              arrayElementBuilder_.setMessage(index, value);
+              arrayElementBuilder_.setMessage(index, konstue);
             }
             return this;
           }
@@ -4198,16 +4198,16 @@ public final class DebugProtoBuf {
           /**
            * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument.Value array_element = 9;</code>
            */
-          public Builder addArrayElement(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value) {
+          public Builder addArrayElement(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue) {
             if (arrayElementBuilder_ == null) {
-              if (value == null) {
+              if (konstue == null) {
                 throw new NullPointerException();
               }
               ensureArrayElementIsMutable();
-              arrayElement_.add(value);
+              arrayElement_.add(konstue);
               onChanged();
             } else {
-              arrayElementBuilder_.addMessage(value);
+              arrayElementBuilder_.addMessage(konstue);
             }
             return this;
           }
@@ -4215,16 +4215,16 @@ public final class DebugProtoBuf {
            * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument.Value array_element = 9;</code>
            */
           public Builder addArrayElement(
-              int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value) {
+              int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue) {
             if (arrayElementBuilder_ == null) {
-              if (value == null) {
+              if (konstue == null) {
                 throw new NullPointerException();
               }
               ensureArrayElementIsMutable();
-              arrayElement_.add(index, value);
+              arrayElement_.add(index, konstue);
               onChanged();
             } else {
-              arrayElementBuilder_.addMessage(index, value);
+              arrayElementBuilder_.addMessage(index, konstue);
             }
             return this;
           }
@@ -4260,14 +4260,14 @@ public final class DebugProtoBuf {
            * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument.Value array_element = 9;</code>
            */
           public Builder addAllArrayElement(
-              java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value> values) {
+              java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value> konstues) {
             if (arrayElementBuilder_ == null) {
               ensureArrayElementIsMutable();
               org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-                  values, arrayElement_);
+                  konstues, arrayElement_);
               onChanged();
             } else {
-              arrayElementBuilder_.addAllMessages(values);
+              arrayElementBuilder_.addAllMessages(konstues);
             }
             return this;
           }
@@ -4368,14 +4368,14 @@ public final class DebugProtoBuf {
            *
            * <pre>
            * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-           * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+           * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
            * - String::class, if array_dimension_count = 0
            * - Array&lt;String&gt;::class, if array_dimension_count = 1
            * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
            * - etc.
            * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
            * in class literals on JVM, we don't bother to do represent this in our format as well.
-           * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+           * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
            * </pre>
            */
           public boolean hasArrayDimensionCount() {
@@ -4386,14 +4386,14 @@ public final class DebugProtoBuf {
            *
            * <pre>
            * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-           * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+           * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
            * - String::class, if array_dimension_count = 0
            * - Array&lt;String&gt;::class, if array_dimension_count = 1
            * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
            * - etc.
            * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
            * in class literals on JVM, we don't bother to do represent this in our format as well.
-           * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+           * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
            * </pre>
            */
           public int getArrayDimensionCount() {
@@ -4404,19 +4404,19 @@ public final class DebugProtoBuf {
            *
            * <pre>
            * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-           * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+           * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
            * - String::class, if array_dimension_count = 0
            * - Array&lt;String&gt;::class, if array_dimension_count = 1
            * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
            * - etc.
            * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
            * in class literals on JVM, we don't bother to do represent this in our format as well.
-           * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+           * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
            * </pre>
            */
-          public Builder setArrayDimensionCount(int value) {
+          public Builder setArrayDimensionCount(int konstue) {
             bitField0_ |= 0x00000200;
-            arrayDimensionCount_ = value;
+            arrayDimensionCount_ = konstue;
             onChanged();
             return this;
           }
@@ -4425,14 +4425,14 @@ public final class DebugProtoBuf {
            *
            * <pre>
            * If type = CLASS, the number of dimensions of the array of the class specified in class_id.
-           * E.g. if class_id = kotlin/String, this annotation argument value denotes:
+           * E.g. if class_id = kotlin/String, this annotation argument konstue denotes:
            * - String::class, if array_dimension_count = 0
            * - Array&lt;String&gt;::class, if array_dimension_count = 1
            * - Array&lt;Array&lt;String&gt;&gt;::class, if array_dimension_count = 2
            * - etc.
            * Since it's very difficult to represent Kotlin-specific type aspects (nullability, type projections) of array arguments
            * in class literals on JVM, we don't bother to do represent this in our format as well.
-           * So, for example, values `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
+           * So, for example, konstues `Array&lt;Array&lt;in B?&gt;&gt;::class` and `Array&lt;out Array&lt;B&gt;&gt;?&gt;::class` will be represented exactly the same here.
            * </pre>
            */
           public Builder clearArrayDimensionCount() {
@@ -4470,9 +4470,9 @@ public final class DebugProtoBuf {
            *isUnsigned
            * </pre>
            */
-          public Builder setFlags(int value) {
+          public Builder setFlags(int konstue) {
             bitField0_ |= 0x00000400;
-            flags_ = value;
+            flags_ = konstue;
             onChanged();
             return this;
           }
@@ -4518,29 +4518,29 @@ public final class DebugProtoBuf {
       }
 
       public static final int VALUE_FIELD_NUMBER = 2;
-      private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value_;
+      private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue_;
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value getValue() {
-        return value_;
+        return konstue_;
       }
       /**
-       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+       * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder getValueOrBuilder() {
-        return value_;
+        return konstue_;
       }
 
       private void initFields() {
         nameId_ = 0;
-        value_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
+        konstue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -4571,7 +4571,7 @@ public final class DebugProtoBuf {
           output.writeInt32(1, nameId_);
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeMessage(2, value_);
+          output.writeMessage(2, konstue_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -4588,7 +4588,7 @@ public final class DebugProtoBuf {
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-            .computeMessageSize(2, value_);
+            .computeMessageSize(2, konstue_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -4604,23 +4604,23 @@ public final class DebugProtoBuf {
 
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parseFrom(byte[] data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parseFrom(
           byte[] data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parseFrom(java.io.InputStream input)
@@ -4710,10 +4710,10 @@ public final class DebugProtoBuf {
           super.clear();
           nameId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
-          if (valueBuilder_ == null) {
-            value_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
+          if (konstueBuilder_ == null) {
+            konstue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
           } else {
-            valueBuilder_.clear();
+            konstueBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00000002);
           return this;
@@ -4751,10 +4751,10 @@ public final class DebugProtoBuf {
           if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
             to_bitField0_ |= 0x00000002;
           }
-          if (valueBuilder_ == null) {
-            result.value_ = value_;
+          if (konstueBuilder_ == null) {
+            result.konstue_ = konstue_;
           } else {
-            result.value_ = valueBuilder_.build();
+            result.konstue_ = konstueBuilder_.build();
           }
           result.bitField0_ = to_bitField0_;
           onBuilt();
@@ -4805,7 +4805,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+          } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
             parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument) e.getUnfinishedMessage();
             throw e;
           } finally {
@@ -4833,9 +4833,9 @@ public final class DebugProtoBuf {
         /**
          * <code>required int32 name_id = 1;</code>
          */
-        public Builder setNameId(int value) {
+        public Builder setNameId(int konstue) {
           bitField0_ |= 0x00000001;
-          nameId_ = value;
+          nameId_ = konstue;
           onChanged();
           return this;
         }
@@ -4849,89 +4849,89 @@ public final class DebugProtoBuf {
           return this;
         }
 
-        private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
+        private org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
         private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
-            org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder> valueBuilder_;
+            org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder> konstueBuilder_;
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public boolean hasValue() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value getValue() {
-          if (valueBuilder_ == null) {
-            return value_;
+          if (konstueBuilder_ == null) {
+            return konstue_;
           } else {
-            return valueBuilder_.getMessage();
+            return konstueBuilder_.getMessage();
           }
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
-        public Builder setValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value) {
-          if (valueBuilder_ == null) {
-            if (value == null) {
+        public Builder setValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue) {
+          if (konstueBuilder_ == null) {
+            if (konstue == null) {
               throw new NullPointerException();
             }
-            value_ = value;
+            konstue_ = konstue;
             onChanged();
           } else {
-            valueBuilder_.setMessage(value);
+            konstueBuilder_.setMessage(konstue);
           }
           bitField0_ |= 0x00000002;
           return this;
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public Builder setValue(
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder builderForValue) {
-          if (valueBuilder_ == null) {
-            value_ = builderForValue.build();
+          if (konstueBuilder_ == null) {
+            konstue_ = builderForValue.build();
             onChanged();
           } else {
-            valueBuilder_.setMessage(builderForValue.build());
+            konstueBuilder_.setMessage(builderForValue.build());
           }
           bitField0_ |= 0x00000002;
           return this;
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
-        public Builder mergeValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value value) {
-          if (valueBuilder_ == null) {
+        public Builder mergeValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value konstue) {
+          if (konstueBuilder_ == null) {
             if (((bitField0_ & 0x00000002) == 0x00000002) &&
-                value_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance()) {
-              value_ =
-                org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.newBuilder(value_).mergeFrom(value).buildPartial();
+                konstue_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance()) {
+              konstue_ =
+                org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.newBuilder(konstue_).mergeFrom(konstue).buildPartial();
             } else {
-              value_ = value;
+              konstue_ = konstue;
             }
             onChanged();
           } else {
-            valueBuilder_.mergeFrom(value);
+            konstueBuilder_.mergeFrom(konstue);
           }
           bitField0_ |= 0x00000002;
           return this;
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public Builder clearValue() {
-          if (valueBuilder_ == null) {
-            value_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
+          if (konstueBuilder_ == null) {
+            konstue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.getDefaultInstance();
             onChanged();
           } else {
-            valueBuilder_.clear();
+            konstueBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00000002);
           return this;
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder getValueBuilder() {
           bitField0_ |= 0x00000002;
@@ -4939,30 +4939,30 @@ public final class DebugProtoBuf {
           return getValueFieldBuilder().getBuilder();
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         public org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder getValueOrBuilder() {
-          if (valueBuilder_ != null) {
-            return valueBuilder_.getMessageOrBuilder();
+          if (konstueBuilder_ != null) {
+            return konstueBuilder_.getMessageOrBuilder();
           } else {
-            return value_;
+            return konstue_;
           }
         }
         /**
-         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value value = 2;</code>
+         * <code>required .org.jetbrains.kotlin.metadata.Annotation.Argument.Value konstue = 2;</code>
          */
         private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder> 
             getValueFieldBuilder() {
-          if (valueBuilder_ == null) {
-            valueBuilder_ = new org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
+          if (konstueBuilder_ == null) {
+            konstueBuilder_ = new org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
                 org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.Value.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument.ValueOrBuilder>(
                     getValue(),
                     getParentForChildren(),
                     isClean());
-            value_ = null;
+            konstue_ = null;
           }
-          return valueBuilder_;
+          return konstueBuilder_;
         }
 
         // @@protoc_insertion_point(builder_scope:org.jetbrains.kotlin.metadata.Annotation.Argument)
@@ -5091,23 +5091,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parseFrom(java.io.InputStream input)
@@ -5314,7 +5314,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -5342,9 +5342,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 id = 1;</code>
        */
-      public Builder setId(int value) {
+      public Builder setId(int konstue) {
         bitField0_ |= 0x00000001;
-        id_ = value;
+        id_ = konstue;
         onChanged();
         return this;
       }
@@ -5404,16 +5404,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument argument = 2;</code>
        */
       public Builder setArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.set(index, value);
+          argument_.set(index, konstue);
           onChanged();
         } else {
-          argumentBuilder_.setMessage(index, value);
+          argumentBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -5434,16 +5434,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument argument = 2;</code>
        */
-      public Builder addArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument value) {
+      public Builder addArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.add(value);
+          argument_.add(konstue);
           onChanged();
         } else {
-          argumentBuilder_.addMessage(value);
+          argumentBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -5451,16 +5451,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument argument = 2;</code>
        */
       public Builder addArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.add(index, value);
+          argument_.add(index, konstue);
           onChanged();
         } else {
-          argumentBuilder_.addMessage(index, value);
+          argumentBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -5496,14 +5496,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation.Argument argument = 2;</code>
        */
       public Builder addAllArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation.Argument> konstues) {
         if (argumentBuilder_ == null) {
           ensureArgumentIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, argument_);
+              konstues, argument_);
           onChanged();
         } else {
-          argumentBuilder_.addAllMessages(values);
+          argumentBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -5858,7 +5858,7 @@ public final class DebugProtoBuf {
     private Type(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -5977,10 +5977,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6007,7 +6007,7 @@ public final class DebugProtoBuf {
       public Type parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Type(input, extensionRegistry);
       }
     };
@@ -6096,7 +6096,7 @@ public final class DebugProtoBuf {
       private Argument(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         initFields();
         int mutable_bitField0_ = 0;
         org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -6118,12 +6118,12 @@ public final class DebugProtoBuf {
               }
               case 8: {
                 int rawValue = input.readEnum();
-                org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection value = org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection.valueOf(rawValue);
-                if (value == null) {
+                org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection.konstueOf(rawValue);
+                if (konstue == null) {
                   unknownFields.mergeVarintField(1, rawValue);
                 } else {
                   bitField0_ |= 0x00000001;
-                  projection_ = value;
+                  projection_ = konstue;
                 }
                 break;
               }
@@ -6147,10 +6147,10 @@ public final class DebugProtoBuf {
               }
             }
           }
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           throw e.setUnfinishedMessage(this);
         } catch (java.io.IOException e) {
-          throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+          throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
               e.getMessage()).setUnfinishedMessage(this);
         } finally {
           this.unknownFields = unknownFields.build();
@@ -6174,7 +6174,7 @@ public final class DebugProtoBuf {
         public Argument parsePartialFrom(
             org.jetbrains.kotlin.protobuf.CodedInputStream input,
             org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+            throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
           return new Argument(input, extensionRegistry);
         }
       };
@@ -6225,10 +6225,10 @@ public final class DebugProtoBuf {
         public static final int STAR_VALUE = 3;
 
 
-        public final int getNumber() { return value; }
+        public final int getNumber() { return konstue; }
 
-        public static Projection valueOf(int value) {
-          switch (value) {
+        public static Projection konstueOf(int konstue) {
+          switch (konstue) {
             case 0: return IN;
             case 1: return OUT;
             case 2: return INV;
@@ -6245,7 +6245,7 @@ public final class DebugProtoBuf {
             internalValueMap =
               new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Projection>() {
                 public Projection findValueByNumber(int number) {
-                  return Projection.valueOf(number);
+                  return Projection.konstueOf(number);
                 }
               };
 
@@ -6262,9 +6262,9 @@ public final class DebugProtoBuf {
           return org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.getDescriptor().getEnumTypes().get(0);
         }
 
-        private static final Projection[] VALUES = values();
+        private static final Projection[] VALUES = konstues();
 
-        public static Projection valueOf(
+        public static Projection konstueOf(
             org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
           if (desc.getType() != getDescriptor()) {
             throw new java.lang.IllegalArgumentException(
@@ -6274,11 +6274,11 @@ public final class DebugProtoBuf {
         }
 
         private final int index;
-        private final int value;
+        private final int konstue;
 
-        private Projection(int index, int value) {
+        private Projection(int index, int konstue) {
           this.index = index;
-          this.value = value;
+          this.konstue = konstue;
         }
 
         // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Type.Argument.Projection)
@@ -6416,23 +6416,23 @@ public final class DebugProtoBuf {
 
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parseFrom(
           org.jetbrains.kotlin.protobuf.ByteString data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parseFrom(byte[] data)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parseFrom(
           byte[] data,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return PARSER.parseFrom(data, extensionRegistry);
       }
       public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parseFrom(java.io.InputStream input)
@@ -6620,7 +6620,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument parsedMessage = null;
           try {
             parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+          } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
             parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument) e.getUnfinishedMessage();
             throw e;
           } finally {
@@ -6648,12 +6648,12 @@ public final class DebugProtoBuf {
         /**
          * <code>optional .org.jetbrains.kotlin.metadata.Type.Argument.Projection projection = 1 [default = INV];</code>
          */
-        public Builder setProjection(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection value) {
-          if (value == null) {
+        public Builder setProjection(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument.Projection konstue) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           bitField0_ |= 0x00000001;
-          projection_ = value;
+          projection_ = konstue;
           onChanged();
           return this;
         }
@@ -6701,15 +6701,15 @@ public final class DebugProtoBuf {
          * When projection is STAR, no type is written, otherwise type must be specified
          * </pre>
          */
-        public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+        public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
           if (typeBuilder_ == null) {
-            if (value == null) {
+            if (konstue == null) {
               throw new NullPointerException();
             }
-            type_ = value;
+            type_ = konstue;
             onChanged();
           } else {
-            typeBuilder_.setMessage(value);
+            typeBuilder_.setMessage(konstue);
           }
           bitField0_ |= 0x00000002;
           return this;
@@ -6739,18 +6739,18 @@ public final class DebugProtoBuf {
          * When projection is STAR, no type is written, otherwise type must be specified
          * </pre>
          */
-        public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+        public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
           if (typeBuilder_ == null) {
             if (((bitField0_ & 0x00000002) == 0x00000002) &&
                 type_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
               type_ =
-                org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(type_).mergeFrom(value).buildPartial();
+                org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(type_).mergeFrom(konstue).buildPartial();
             } else {
-              type_ = value;
+              type_ = konstue;
             }
             onChanged();
           } else {
-            typeBuilder_.mergeFrom(value);
+            typeBuilder_.mergeFrom(konstue);
           }
           bitField0_ |= 0x00000002;
           return this;
@@ -6835,9 +6835,9 @@ public final class DebugProtoBuf {
         /**
          * <code>optional int32 type_id = 3;</code>
          */
-        public Builder setTypeId(int value) {
+        public Builder setTypeId(int konstue) {
           bitField0_ |= 0x00000004;
-          typeId_ = value;
+          typeId_ = konstue;
           onChanged();
           return this;
         }
@@ -7352,23 +7352,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parseFrom(java.io.InputStream input)
@@ -7730,7 +7730,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Type parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Type) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -7788,16 +7788,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type.Argument argument = 2;</code>
        */
       public Builder setArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.set(index, value);
+          argument_.set(index, konstue);
           onChanged();
         } else {
-          argumentBuilder_.setMessage(index, value);
+          argumentBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -7818,16 +7818,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type.Argument argument = 2;</code>
        */
-      public Builder addArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument value) {
+      public Builder addArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.add(value);
+          argument_.add(konstue);
           onChanged();
         } else {
-          argumentBuilder_.addMessage(value);
+          argumentBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -7835,16 +7835,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type.Argument argument = 2;</code>
        */
       public Builder addArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument konstue) {
         if (argumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureArgumentIsMutable();
-          argument_.add(index, value);
+          argument_.add(index, konstue);
           onChanged();
         } else {
-          argumentBuilder_.addMessage(index, value);
+          argumentBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -7880,14 +7880,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type.Argument argument = 2;</code>
        */
       public Builder addAllArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Argument> konstues) {
         if (argumentBuilder_ == null) {
           ensureArgumentIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, argument_);
+              konstues, argument_);
           onChanged();
         } else {
-          argumentBuilder_.addAllMessages(values);
+          argumentBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -7998,9 +7998,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional bool nullable = 3 [default = false];</code>
        */
-      public Builder setNullable(boolean value) {
+      public Builder setNullable(boolean konstue) {
         bitField0_ |= 0x00000002;
-        nullable_ = value;
+        nullable_ = konstue;
         onChanged();
         return this;
       }
@@ -8045,9 +8045,9 @@ public final class DebugProtoBuf {
        * All the other fields and extensions represent its lower bound, and flexible_upper_bound must be set and represents its upper bound.
        * </pre>
        */
-      public Builder setFlexibleTypeCapabilitiesId(int value) {
+      public Builder setFlexibleTypeCapabilitiesId(int konstue) {
         bitField0_ |= 0x00000004;
-        flexibleTypeCapabilitiesId_ = value;
+        flexibleTypeCapabilitiesId_ = konstue;
         onChanged();
         return this;
       }
@@ -8088,15 +8088,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type flexible_upper_bound = 5;</code>
        */
-      public Builder setFlexibleUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setFlexibleUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (flexibleUpperBoundBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          flexibleUpperBound_ = value;
+          flexibleUpperBound_ = konstue;
           onChanged();
         } else {
-          flexibleUpperBoundBuilder_.setMessage(value);
+          flexibleUpperBoundBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -8118,18 +8118,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type flexible_upper_bound = 5;</code>
        */
-      public Builder mergeFlexibleUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeFlexibleUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (flexibleUpperBoundBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               flexibleUpperBound_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             flexibleUpperBound_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(flexibleUpperBound_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(flexibleUpperBound_).mergeFrom(konstue).buildPartial();
           } else {
-            flexibleUpperBound_ = value;
+            flexibleUpperBound_ = konstue;
           }
           onChanged();
         } else {
-          flexibleUpperBoundBuilder_.mergeFrom(value);
+          flexibleUpperBoundBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -8198,9 +8198,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 flexible_upper_bound_id = 8;</code>
        */
-      public Builder setFlexibleUpperBoundId(int value) {
+      public Builder setFlexibleUpperBoundId(int konstue) {
         bitField0_ |= 0x00000010;
-        flexibleUpperBoundId_ = value;
+        flexibleUpperBoundId_ = konstue;
         onChanged();
         return this;
       }
@@ -8230,9 +8230,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 class_name = 6;</code>
        */
-      public Builder setClassName(int value) {
+      public Builder setClassName(int konstue) {
         bitField0_ |= 0x00000020;
-        className_ = value;
+        className_ = konstue;
         onChanged();
         return this;
       }
@@ -8274,9 +8274,9 @@ public final class DebugProtoBuf {
        * id of the type parameter
        * </pre>
        */
-      public Builder setTypeParameter(int value) {
+      public Builder setTypeParameter(int konstue) {
         bitField0_ |= 0x00000040;
-        typeParameter_ = value;
+        typeParameter_ = konstue;
         onChanged();
         return this;
       }
@@ -8322,9 +8322,9 @@ public final class DebugProtoBuf {
        * Name of the type parameter in the immediate owner
        * </pre>
        */
-      public Builder setTypeParameterName(int value) {
+      public Builder setTypeParameterName(int konstue) {
         bitField0_ |= 0x00000080;
-        typeParameterName_ = value;
+        typeParameterName_ = konstue;
         onChanged();
         return this;
       }
@@ -8373,9 +8373,9 @@ public final class DebugProtoBuf {
        * Top level types are always fully expanded
        * </pre>
        */
-      public Builder setTypeAliasName(int value) {
+      public Builder setTypeAliasName(int konstue) {
         bitField0_ |= 0x00000100;
-        typeAliasName_ = value;
+        typeAliasName_ = konstue;
         onChanged();
         return this;
       }
@@ -8428,15 +8428,15 @@ public final class DebugProtoBuf {
        * Outer type may be present only if class_name or type_alias_name is present
        * </pre>
        */
-      public Builder setOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (outerTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          outerType_ = value;
+          outerType_ = konstue;
           onChanged();
         } else {
-          outerTypeBuilder_.setMessage(value);
+          outerTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000200;
         return this;
@@ -8466,18 +8466,18 @@ public final class DebugProtoBuf {
        * Outer type may be present only if class_name or type_alias_name is present
        * </pre>
        */
-      public Builder mergeOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeOuterType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (outerTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000200) == 0x00000200) &&
               outerType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             outerType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(outerType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(outerType_).mergeFrom(konstue).buildPartial();
           } else {
-            outerType_ = value;
+            outerType_ = konstue;
           }
           onChanged();
         } else {
-          outerTypeBuilder_.mergeFrom(value);
+          outerTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000200;
         return this;
@@ -8562,9 +8562,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 outer_type_id = 11;</code>
        */
-      public Builder setOuterTypeId(int value) {
+      public Builder setOuterTypeId(int konstue) {
         bitField0_ |= 0x00000400;
-        outerTypeId_ = value;
+        outerTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -8600,15 +8600,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type abbreviated_type = 13;</code>
        */
-      public Builder setAbbreviatedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setAbbreviatedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (abbreviatedTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          abbreviatedType_ = value;
+          abbreviatedType_ = konstue;
           onChanged();
         } else {
-          abbreviatedTypeBuilder_.setMessage(value);
+          abbreviatedTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000800;
         return this;
@@ -8630,18 +8630,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type abbreviated_type = 13;</code>
        */
-      public Builder mergeAbbreviatedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeAbbreviatedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (abbreviatedTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000800) == 0x00000800) &&
               abbreviatedType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             abbreviatedType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(abbreviatedType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(abbreviatedType_).mergeFrom(konstue).buildPartial();
           } else {
-            abbreviatedType_ = value;
+            abbreviatedType_ = konstue;
           }
           onChanged();
         } else {
-          abbreviatedTypeBuilder_.mergeFrom(value);
+          abbreviatedTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000800;
         return this;
@@ -8710,9 +8710,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 abbreviated_type_id = 14;</code>
        */
-      public Builder setAbbreviatedTypeId(int value) {
+      public Builder setAbbreviatedTypeId(int konstue) {
         bitField0_ |= 0x00001000;
-        abbreviatedTypeId_ = value;
+        abbreviatedTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -8757,9 +8757,9 @@ public final class DebugProtoBuf {
        *definitelyNonNull
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00002000;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -8900,7 +8900,7 @@ public final class DebugProtoBuf {
     private TypeParameter(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -8937,12 +8937,12 @@ public final class DebugProtoBuf {
             }
             case 32: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance value = org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
                 bitField0_ |= 0x00000008;
-                variance_ = value;
+                variance_ = konstue;
               }
               break;
             }
@@ -8977,10 +8977,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
@@ -9010,7 +9010,7 @@ public final class DebugProtoBuf {
       public TypeParameter parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new TypeParameter(input, extensionRegistry);
       }
     };
@@ -9053,10 +9053,10 @@ public final class DebugProtoBuf {
       public static final int INV_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Variance valueOf(int value) {
-        switch (value) {
+      public static Variance konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return IN;
           case 1: return OUT;
           case 2: return INV;
@@ -9072,7 +9072,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Variance>() {
               public Variance findValueByNumber(int number) {
-                return Variance.valueOf(number);
+                return Variance.konstueOf(number);
               }
             };
 
@@ -9089,9 +9089,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Variance[] VALUES = values();
+      private static final Variance[] VALUES = konstues();
 
-      public static Variance valueOf(
+      public static Variance konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -9101,11 +9101,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private Variance(int index, int value) {
+      private Variance(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.TypeParameter.Variance)
@@ -9353,23 +9353,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parseFrom(java.io.InputStream input)
@@ -9630,7 +9630,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -9658,9 +9658,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 id = 1;</code>
        */
-      public Builder setId(int value) {
+      public Builder setId(int konstue) {
         bitField0_ |= 0x00000001;
-        id_ = value;
+        id_ = konstue;
         onChanged();
         return this;
       }
@@ -9690,9 +9690,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 name = 2;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000002;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -9722,9 +9722,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional bool reified = 3 [default = false];</code>
        */
-      public Builder setReified(boolean value) {
+      public Builder setReified(boolean konstue) {
         bitField0_ |= 0x00000004;
-        reified_ = value;
+        reified_ = konstue;
         onChanged();
         return this;
       }
@@ -9754,12 +9754,12 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeParameter.Variance variance = 4 [default = INV];</code>
        */
-      public Builder setVariance(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance value) {
-        if (value == null) {
+      public Builder setVariance(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter.Variance konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000008;
-        variance_ = value;
+        variance_ = konstue;
         onChanged();
         return this;
       }
@@ -9819,16 +9819,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type upper_bound = 5;</code>
        */
       public Builder setUpperBound(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (upperBoundBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureUpperBoundIsMutable();
-          upperBound_.set(index, value);
+          upperBound_.set(index, konstue);
           onChanged();
         } else {
-          upperBoundBuilder_.setMessage(index, value);
+          upperBoundBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -9849,16 +9849,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type upper_bound = 5;</code>
        */
-      public Builder addUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addUpperBound(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (upperBoundBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureUpperBoundIsMutable();
-          upperBound_.add(value);
+          upperBound_.add(konstue);
           onChanged();
         } else {
-          upperBoundBuilder_.addMessage(value);
+          upperBoundBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -9866,16 +9866,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type upper_bound = 5;</code>
        */
       public Builder addUpperBound(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (upperBoundBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureUpperBoundIsMutable();
-          upperBound_.add(index, value);
+          upperBound_.add(index, konstue);
           onChanged();
         } else {
-          upperBoundBuilder_.addMessage(index, value);
+          upperBoundBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -9911,14 +9911,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type upper_bound = 5;</code>
        */
       public Builder addAllUpperBound(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (upperBoundBuilder_ == null) {
           ensureUpperBoundIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, upperBound_);
+              konstues, upperBound_);
           onChanged();
         } else {
-          upperBoundBuilder_.addAllMessages(values);
+          upperBoundBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -10043,18 +10043,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 upper_bound_id = 6 [packed = true];</code>
        */
       public Builder setUpperBoundId(
-          int index, int value) {
+          int index, int konstue) {
         ensureUpperBoundIdIsMutable();
-        upperBoundId_.set(index, value);
+        upperBoundId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 upper_bound_id = 6 [packed = true];</code>
        */
-      public Builder addUpperBoundId(int value) {
+      public Builder addUpperBoundId(int konstue) {
         ensureUpperBoundIdIsMutable();
-        upperBoundId_.add(value);
+        upperBoundId_.add(konstue);
         onChanged();
         return this;
       }
@@ -10062,10 +10062,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 upper_bound_id = 6 [packed = true];</code>
        */
       public Builder addAllUpperBoundId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureUpperBoundIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, upperBoundId_);
+            konstues, upperBoundId_);
         onChanged();
         return this;
       }
@@ -10426,52 +10426,52 @@ public final class DebugProtoBuf {
     int getInlineClassUnderlyingTypeId();
 
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     java.util.List<java.lang.Integer> getMultiFieldValueClassUnderlyingNameList();
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     int getMultiFieldValueClassUnderlyingNameCount();
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     int getMultiFieldValueClassUnderlyingName(int index);
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> 
         getMultiFieldValueClassUnderlyingTypeList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getMultiFieldValueClassUnderlyingType(int index);
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     int getMultiFieldValueClassUnderlyingTypeCount();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
         getMultiFieldValueClassUnderlyingTypeOrBuilderList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getMultiFieldValueClassUnderlyingTypeOrBuilder(
         int index);
 
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     java.util.List<java.lang.Integer> getMultiFieldValueClassUnderlyingTypeIdList();
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     int getMultiFieldValueClassUnderlyingTypeIdCount();
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     int getMultiFieldValueClassUnderlyingTypeId(int index);
 
@@ -10559,7 +10559,7 @@ public final class DebugProtoBuf {
     private Class(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -10864,10 +10864,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
@@ -10939,7 +10939,7 @@ public final class DebugProtoBuf {
       public Class parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Class(input, extensionRegistry);
       }
     };
@@ -11022,10 +11022,10 @@ public final class DebugProtoBuf {
       public static final int COMPANION_OBJECT_VALUE = 6;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Kind valueOf(int value) {
-        switch (value) {
+      public static Kind konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return CLASS;
           case 1: return INTERFACE;
           case 2: return ENUM_CLASS;
@@ -11045,7 +11045,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Kind>() {
               public Kind findValueByNumber(int number) {
-                return Kind.valueOf(number);
+                return Kind.konstueOf(number);
               }
             };
 
@@ -11062,9 +11062,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.Class.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Kind[] VALUES = values();
+      private static final Kind[] VALUES = konstues();
 
-      public static Kind valueOf(
+      public static Kind konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -11074,11 +11074,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private Kind(int index, int value) {
+      private Kind(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Class.Kind)
@@ -11584,20 +11584,20 @@ public final class DebugProtoBuf {
     public static final int MULTI_FIELD_VALUE_CLASS_UNDERLYING_NAME_FIELD_NUMBER = 22;
     private java.util.List<java.lang.Integer> multiFieldValueClassUnderlyingName_;
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     public java.util.List<java.lang.Integer>
         getMultiFieldValueClassUnderlyingNameList() {
       return multiFieldValueClassUnderlyingName_;
     }
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     public int getMultiFieldValueClassUnderlyingNameCount() {
       return multiFieldValueClassUnderlyingName_.size();
     }
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
      */
     public int getMultiFieldValueClassUnderlyingName(int index) {
       return multiFieldValueClassUnderlyingName_.get(index);
@@ -11607,32 +11607,32 @@ public final class DebugProtoBuf {
     public static final int MULTI_FIELD_VALUE_CLASS_UNDERLYING_TYPE_FIELD_NUMBER = 23;
     private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> multiFieldValueClassUnderlyingType_;
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> getMultiFieldValueClassUnderlyingTypeList() {
       return multiFieldValueClassUnderlyingType_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
         getMultiFieldValueClassUnderlyingTypeOrBuilderList() {
       return multiFieldValueClassUnderlyingType_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     public int getMultiFieldValueClassUnderlyingTypeCount() {
       return multiFieldValueClassUnderlyingType_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getMultiFieldValueClassUnderlyingType(int index) {
       return multiFieldValueClassUnderlyingType_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getMultiFieldValueClassUnderlyingTypeOrBuilder(
         int index) {
@@ -11642,20 +11642,20 @@ public final class DebugProtoBuf {
     public static final int MULTI_FIELD_VALUE_CLASS_UNDERLYING_TYPE_ID_FIELD_NUMBER = 24;
     private java.util.List<java.lang.Integer> multiFieldValueClassUnderlyingTypeId_;
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     public java.util.List<java.lang.Integer>
         getMultiFieldValueClassUnderlyingTypeIdList() {
       return multiFieldValueClassUnderlyingTypeId_;
     }
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     public int getMultiFieldValueClassUnderlyingTypeIdCount() {
       return multiFieldValueClassUnderlyingTypeId_.size();
     }
     /**
-     * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+     * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
      */
     public int getMultiFieldValueClassUnderlyingTypeId(int index) {
       return multiFieldValueClassUnderlyingTypeId_.get(index);
@@ -12136,23 +12136,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parseFrom(java.io.InputStream input)
@@ -12970,7 +12970,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Class parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Class) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -13040,9 +13040,9 @@ public final class DebugProtoBuf {
        *hasEnumEntries
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -13086,9 +13086,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 fq_name = 3;</code>
        */
-      public Builder setFqName(int value) {
+      public Builder setFqName(int konstue) {
         bitField0_ |= 0x00000002;
-        fqName_ = value;
+        fqName_ = konstue;
         onChanged();
         return this;
       }
@@ -13118,9 +13118,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 companion_object_name = 4;</code>
        */
-      public Builder setCompanionObjectName(int value) {
+      public Builder setCompanionObjectName(int konstue) {
         bitField0_ |= 0x00000004;
-        companionObjectName_ = value;
+        companionObjectName_ = konstue;
         onChanged();
         return this;
       }
@@ -13180,16 +13180,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 5;</code>
        */
       public Builder setTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.set(index, value);
+          typeParameter_.set(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.setMessage(index, value);
+          typeParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -13210,16 +13210,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 5;</code>
        */
-      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(value);
+          typeParameter_.add(konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(value);
+          typeParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -13227,16 +13227,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 5;</code>
        */
       public Builder addTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(index, value);
+          typeParameter_.add(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(index, value);
+          typeParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -13272,14 +13272,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 5;</code>
        */
       public Builder addAllTypeParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> konstues) {
         if (typeParameterBuilder_ == null) {
           ensureTypeParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeParameter_);
+              konstues, typeParameter_);
           onChanged();
         } else {
-          typeParameterBuilder_.addAllMessages(values);
+          typeParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -13420,16 +13420,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type supertype = 6;</code>
        */
       public Builder setSupertype(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (supertypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureSupertypeIsMutable();
-          supertype_.set(index, value);
+          supertype_.set(index, konstue);
           onChanged();
         } else {
-          supertypeBuilder_.setMessage(index, value);
+          supertypeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -13450,16 +13450,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type supertype = 6;</code>
        */
-      public Builder addSupertype(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addSupertype(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (supertypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureSupertypeIsMutable();
-          supertype_.add(value);
+          supertype_.add(konstue);
           onChanged();
         } else {
-          supertypeBuilder_.addMessage(value);
+          supertypeBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -13467,16 +13467,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type supertype = 6;</code>
        */
       public Builder addSupertype(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (supertypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureSupertypeIsMutable();
-          supertype_.add(index, value);
+          supertype_.add(index, konstue);
           onChanged();
         } else {
-          supertypeBuilder_.addMessage(index, value);
+          supertypeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -13512,14 +13512,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type supertype = 6;</code>
        */
       public Builder addAllSupertype(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (supertypeBuilder_ == null) {
           ensureSupertypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, supertype_);
+              konstues, supertype_);
           onChanged();
         } else {
-          supertypeBuilder_.addAllMessages(values);
+          supertypeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -13644,18 +13644,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 supertype_id = 2 [packed = true];</code>
        */
       public Builder setSupertypeId(
-          int index, int value) {
+          int index, int konstue) {
         ensureSupertypeIdIsMutable();
-        supertypeId_.set(index, value);
+        supertypeId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 supertype_id = 2 [packed = true];</code>
        */
-      public Builder addSupertypeId(int value) {
+      public Builder addSupertypeId(int konstue) {
         ensureSupertypeIdIsMutable();
-        supertypeId_.add(value);
+        supertypeId_.add(konstue);
         onChanged();
         return this;
       }
@@ -13663,10 +13663,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 supertype_id = 2 [packed = true];</code>
        */
       public Builder addAllSupertypeId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureSupertypeIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, supertypeId_);
+            konstues, supertypeId_);
         onChanged();
         return this;
       }
@@ -13710,18 +13710,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 nested_class_name = 7 [packed = true];</code>
        */
       public Builder setNestedClassName(
-          int index, int value) {
+          int index, int konstue) {
         ensureNestedClassNameIsMutable();
-        nestedClassName_.set(index, value);
+        nestedClassName_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 nested_class_name = 7 [packed = true];</code>
        */
-      public Builder addNestedClassName(int value) {
+      public Builder addNestedClassName(int konstue) {
         ensureNestedClassNameIsMutable();
-        nestedClassName_.add(value);
+        nestedClassName_.add(konstue);
         onChanged();
         return this;
       }
@@ -13729,10 +13729,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 nested_class_name = 7 [packed = true];</code>
        */
       public Builder addAllNestedClassName(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureNestedClassNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, nestedClassName_);
+            konstues, nestedClassName_);
         onChanged();
         return this;
       }
@@ -13792,16 +13792,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 20;</code>
        */
       public Builder setContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.set(index, value);
+          contextReceiverType_.set(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.setMessage(index, value);
+          contextReceiverTypeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -13822,16 +13822,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 20;</code>
        */
-      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(value);
+          contextReceiverType_.add(konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(value);
+          contextReceiverTypeBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -13839,16 +13839,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 20;</code>
        */
       public Builder addContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(index, value);
+          contextReceiverType_.add(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(index, value);
+          contextReceiverTypeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -13884,14 +13884,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 20;</code>
        */
       public Builder addAllContextReceiverType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (contextReceiverTypeBuilder_ == null) {
           ensureContextReceiverTypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, contextReceiverType_);
+              konstues, contextReceiverType_);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addAllMessages(values);
+          contextReceiverTypeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -14016,18 +14016,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 21 [packed = true];</code>
        */
       public Builder setContextReceiverTypeId(
-          int index, int value) {
+          int index, int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.set(index, value);
+        contextReceiverTypeId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 context_receiver_type_id = 21 [packed = true];</code>
        */
-      public Builder addContextReceiverTypeId(int value) {
+      public Builder addContextReceiverTypeId(int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.add(value);
+        contextReceiverTypeId_.add(konstue);
         onChanged();
         return this;
       }
@@ -14035,10 +14035,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 21 [packed = true];</code>
        */
       public Builder addAllContextReceiverTypeId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureContextReceiverTypeIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, contextReceiverTypeId_);
+            konstues, contextReceiverTypeId_);
         onChanged();
         return this;
       }
@@ -14098,16 +14098,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Constructor constructor = 8;</code>
        */
       public Builder setConstructor(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor konstue) {
         if (constructorBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureConstructorIsMutable();
-          constructor_.set(index, value);
+          constructor_.set(index, konstue);
           onChanged();
         } else {
-          constructorBuilder_.setMessage(index, value);
+          constructorBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -14128,16 +14128,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Constructor constructor = 8;</code>
        */
-      public Builder addConstructor(org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor value) {
+      public Builder addConstructor(org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor konstue) {
         if (constructorBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureConstructorIsMutable();
-          constructor_.add(value);
+          constructor_.add(konstue);
           onChanged();
         } else {
-          constructorBuilder_.addMessage(value);
+          constructorBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -14145,16 +14145,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Constructor constructor = 8;</code>
        */
       public Builder addConstructor(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor konstue) {
         if (constructorBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureConstructorIsMutable();
-          constructor_.add(index, value);
+          constructor_.add(index, konstue);
           onChanged();
         } else {
-          constructorBuilder_.addMessage(index, value);
+          constructorBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -14190,14 +14190,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Constructor constructor = 8;</code>
        */
       public Builder addAllConstructor(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor> konstues) {
         if (constructorBuilder_ == null) {
           ensureConstructorIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, constructor_);
+              konstues, constructor_);
           onChanged();
         } else {
-          constructorBuilder_.addAllMessages(values);
+          constructorBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -14338,16 +14338,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 9;</code>
        */
       public Builder setFunction(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.set(index, value);
+          function_.set(index, konstue);
           onChanged();
         } else {
-          functionBuilder_.setMessage(index, value);
+          functionBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -14368,16 +14368,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 9;</code>
        */
-      public Builder addFunction(org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+      public Builder addFunction(org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.add(value);
+          function_.add(konstue);
           onChanged();
         } else {
-          functionBuilder_.addMessage(value);
+          functionBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -14385,16 +14385,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 9;</code>
        */
       public Builder addFunction(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.add(index, value);
+          function_.add(index, konstue);
           onChanged();
         } else {
-          functionBuilder_.addMessage(index, value);
+          functionBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -14430,14 +14430,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 9;</code>
        */
       public Builder addAllFunction(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Function> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Function> konstues) {
         if (functionBuilder_ == null) {
           ensureFunctionIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, function_);
+              konstues, function_);
           onChanged();
         } else {
-          functionBuilder_.addAllMessages(values);
+          functionBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -14578,16 +14578,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 10;</code>
        */
       public Builder setProperty(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.set(index, value);
+          property_.set(index, konstue);
           onChanged();
         } else {
-          propertyBuilder_.setMessage(index, value);
+          propertyBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -14608,16 +14608,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 10;</code>
        */
-      public Builder addProperty(org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+      public Builder addProperty(org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.add(value);
+          property_.add(konstue);
           onChanged();
         } else {
-          propertyBuilder_.addMessage(value);
+          propertyBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -14625,16 +14625,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 10;</code>
        */
       public Builder addProperty(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.add(index, value);
+          property_.add(index, konstue);
           onChanged();
         } else {
-          propertyBuilder_.addMessage(index, value);
+          propertyBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -14670,14 +14670,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 10;</code>
        */
       public Builder addAllProperty(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Property> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Property> konstues) {
         if (propertyBuilder_ == null) {
           ensurePropertyIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, property_);
+              konstues, property_);
           onChanged();
         } else {
-          propertyBuilder_.addAllMessages(values);
+          propertyBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -14818,16 +14818,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 11;</code>
        */
       public Builder setTypeAlias(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.set(index, value);
+          typeAlias_.set(index, konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.setMessage(index, value);
+          typeAliasBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -14848,16 +14848,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 11;</code>
        */
-      public Builder addTypeAlias(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+      public Builder addTypeAlias(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.add(value);
+          typeAlias_.add(konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.addMessage(value);
+          typeAliasBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -14865,16 +14865,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 11;</code>
        */
       public Builder addTypeAlias(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.add(index, value);
+          typeAlias_.add(index, konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.addMessage(index, value);
+          typeAliasBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -14910,14 +14910,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 11;</code>
        */
       public Builder addAllTypeAlias(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias> konstues) {
         if (typeAliasBuilder_ == null) {
           ensureTypeAliasIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeAlias_);
+              konstues, typeAlias_);
           onChanged();
         } else {
-          typeAliasBuilder_.addAllMessages(values);
+          typeAliasBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -15058,16 +15058,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.EnumEntry enum_entry = 13;</code>
        */
       public Builder setEnumEntry(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry konstue) {
         if (enumEntryBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEnumEntryIsMutable();
-          enumEntry_.set(index, value);
+          enumEntry_.set(index, konstue);
           onChanged();
         } else {
-          enumEntryBuilder_.setMessage(index, value);
+          enumEntryBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -15088,16 +15088,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.EnumEntry enum_entry = 13;</code>
        */
-      public Builder addEnumEntry(org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry value) {
+      public Builder addEnumEntry(org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry konstue) {
         if (enumEntryBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEnumEntryIsMutable();
-          enumEntry_.add(value);
+          enumEntry_.add(konstue);
           onChanged();
         } else {
-          enumEntryBuilder_.addMessage(value);
+          enumEntryBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -15105,16 +15105,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.EnumEntry enum_entry = 13;</code>
        */
       public Builder addEnumEntry(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry konstue) {
         if (enumEntryBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEnumEntryIsMutable();
-          enumEntry_.add(index, value);
+          enumEntry_.add(index, konstue);
           onChanged();
         } else {
-          enumEntryBuilder_.addMessage(index, value);
+          enumEntryBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -15150,14 +15150,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.EnumEntry enum_entry = 13;</code>
        */
       public Builder addAllEnumEntry(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry> konstues) {
         if (enumEntryBuilder_ == null) {
           ensureEnumEntryIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, enumEntry_);
+              konstues, enumEntry_);
           onChanged();
         } else {
-          enumEntryBuilder_.addAllMessages(values);
+          enumEntryBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -15282,18 +15282,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 sealed_subclass_fq_name = 16 [packed = true];</code>
        */
       public Builder setSealedSubclassFqName(
-          int index, int value) {
+          int index, int konstue) {
         ensureSealedSubclassFqNameIsMutable();
-        sealedSubclassFqName_.set(index, value);
+        sealedSubclassFqName_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 sealed_subclass_fq_name = 16 [packed = true];</code>
        */
-      public Builder addSealedSubclassFqName(int value) {
+      public Builder addSealedSubclassFqName(int konstue) {
         ensureSealedSubclassFqNameIsMutable();
-        sealedSubclassFqName_.add(value);
+        sealedSubclassFqName_.add(konstue);
         onChanged();
         return this;
       }
@@ -15301,10 +15301,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 sealed_subclass_fq_name = 16 [packed = true];</code>
        */
       public Builder addAllSealedSubclassFqName(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureSealedSubclassFqNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, sealedSubclassFqName_);
+            konstues, sealedSubclassFqName_);
         onChanged();
         return this;
       }
@@ -15334,9 +15334,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 inline_class_underlying_property_name = 17;</code>
        */
-      public Builder setInlineClassUnderlyingPropertyName(int value) {
+      public Builder setInlineClassUnderlyingPropertyName(int konstue) {
         bitField0_ |= 0x00008000;
-        inlineClassUnderlyingPropertyName_ = value;
+        inlineClassUnderlyingPropertyName_ = konstue;
         onChanged();
         return this;
       }
@@ -15372,15 +15372,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type inline_class_underlying_type = 18;</code>
        */
-      public Builder setInlineClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setInlineClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (inlineClassUnderlyingTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          inlineClassUnderlyingType_ = value;
+          inlineClassUnderlyingType_ = konstue;
           onChanged();
         } else {
-          inlineClassUnderlyingTypeBuilder_.setMessage(value);
+          inlineClassUnderlyingTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00010000;
         return this;
@@ -15402,18 +15402,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type inline_class_underlying_type = 18;</code>
        */
-      public Builder mergeInlineClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeInlineClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (inlineClassUnderlyingTypeBuilder_ == null) {
           if (((bitField0_ & 0x00010000) == 0x00010000) &&
               inlineClassUnderlyingType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             inlineClassUnderlyingType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(inlineClassUnderlyingType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(inlineClassUnderlyingType_).mergeFrom(konstue).buildPartial();
           } else {
-            inlineClassUnderlyingType_ = value;
+            inlineClassUnderlyingType_ = konstue;
           }
           onChanged();
         } else {
-          inlineClassUnderlyingTypeBuilder_.mergeFrom(value);
+          inlineClassUnderlyingTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00010000;
         return this;
@@ -15482,9 +15482,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 inline_class_underlying_type_id = 19;</code>
        */
-      public Builder setInlineClassUnderlyingTypeId(int value) {
+      public Builder setInlineClassUnderlyingTypeId(int konstue) {
         bitField0_ |= 0x00020000;
-        inlineClassUnderlyingTypeId_ = value;
+        inlineClassUnderlyingTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -15506,56 +15506,56 @@ public final class DebugProtoBuf {
          }
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public java.util.List<java.lang.Integer>
           getMultiFieldValueClassUnderlyingNameList() {
         return java.util.Collections.unmodifiableList(multiFieldValueClassUnderlyingName_);
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public int getMultiFieldValueClassUnderlyingNameCount() {
         return multiFieldValueClassUnderlyingName_.size();
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public int getMultiFieldValueClassUnderlyingName(int index) {
         return multiFieldValueClassUnderlyingName_.get(index);
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public Builder setMultiFieldValueClassUnderlyingName(
-          int index, int value) {
+          int index, int konstue) {
         ensureMultiFieldValueClassUnderlyingNameIsMutable();
-        multiFieldValueClassUnderlyingName_.set(index, value);
+        multiFieldValueClassUnderlyingName_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
-      public Builder addMultiFieldValueClassUnderlyingName(int value) {
+      public Builder addMultiFieldValueClassUnderlyingName(int konstue) {
         ensureMultiFieldValueClassUnderlyingNameIsMutable();
-        multiFieldValueClassUnderlyingName_.add(value);
+        multiFieldValueClassUnderlyingName_.add(konstue);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public Builder addAllMultiFieldValueClassUnderlyingName(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureMultiFieldValueClassUnderlyingNameIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, multiFieldValueClassUnderlyingName_);
+            konstues, multiFieldValueClassUnderlyingName_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_name = 22 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_name = 22 [packed = true];</code>
        */
       public Builder clearMultiFieldValueClassUnderlyingName() {
         multiFieldValueClassUnderlyingName_ = java.util.Collections.emptyList();
@@ -15577,7 +15577,7 @@ public final class DebugProtoBuf {
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> multiFieldValueClassUnderlyingTypeBuilder_;
 
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> getMultiFieldValueClassUnderlyingTypeList() {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
@@ -15587,7 +15587,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public int getMultiFieldValueClassUnderlyingTypeCount() {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
@@ -15597,7 +15597,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type getMultiFieldValueClassUnderlyingType(int index) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
@@ -15607,24 +15607,24 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder setMultiFieldValueClassUnderlyingType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureMultiFieldValueClassUnderlyingTypeIsMutable();
-          multiFieldValueClassUnderlyingType_.set(index, value);
+          multiFieldValueClassUnderlyingType_.set(index, konstue);
           onChanged();
         } else {
-          multiFieldValueClassUnderlyingTypeBuilder_.setMessage(index, value);
+          multiFieldValueClassUnderlyingTypeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder setMultiFieldValueClassUnderlyingType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -15638,40 +15638,40 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
-      public Builder addMultiFieldValueClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addMultiFieldValueClassUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureMultiFieldValueClassUnderlyingTypeIsMutable();
-          multiFieldValueClassUnderlyingType_.add(value);
+          multiFieldValueClassUnderlyingType_.add(konstue);
           onChanged();
         } else {
-          multiFieldValueClassUnderlyingTypeBuilder_.addMessage(value);
+          multiFieldValueClassUnderlyingTypeBuilder_.addMessage(konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder addMultiFieldValueClassUnderlyingType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureMultiFieldValueClassUnderlyingTypeIsMutable();
-          multiFieldValueClassUnderlyingType_.add(index, value);
+          multiFieldValueClassUnderlyingType_.add(index, konstue);
           onChanged();
         } else {
-          multiFieldValueClassUnderlyingTypeBuilder_.addMessage(index, value);
+          multiFieldValueClassUnderlyingTypeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder addMultiFieldValueClassUnderlyingType(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -15685,7 +15685,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder addMultiFieldValueClassUnderlyingType(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder builderForValue) {
@@ -15699,22 +15699,22 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder addAllMultiFieldValueClassUnderlyingType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
           ensureMultiFieldValueClassUnderlyingTypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, multiFieldValueClassUnderlyingType_);
+              konstues, multiFieldValueClassUnderlyingType_);
           onChanged();
         } else {
-          multiFieldValueClassUnderlyingTypeBuilder_.addAllMessages(values);
+          multiFieldValueClassUnderlyingTypeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder clearMultiFieldValueClassUnderlyingType() {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
@@ -15727,7 +15727,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public Builder removeMultiFieldValueClassUnderlyingType(int index) {
         if (multiFieldValueClassUnderlyingTypeBuilder_ == null) {
@@ -15740,14 +15740,14 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder getMultiFieldValueClassUnderlyingTypeBuilder(
           int index) {
         return getMultiFieldValueClassUnderlyingTypeFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder getMultiFieldValueClassUnderlyingTypeOrBuilder(
           int index) {
@@ -15757,7 +15757,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeOrBuilder> 
            getMultiFieldValueClassUnderlyingTypeOrBuilderList() {
@@ -15768,14 +15768,14 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder addMultiFieldValueClassUnderlyingTypeBuilder() {
         return getMultiFieldValueClassUnderlyingTypeFieldBuilder().addBuilder(
             org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder addMultiFieldValueClassUnderlyingTypeBuilder(
           int index) {
@@ -15783,7 +15783,7 @@ public final class DebugProtoBuf {
             index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_value_class_underlying_type = 23;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.Type multi_field_konstue_class_underlying_type = 23;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.Builder> 
            getMultiFieldValueClassUnderlyingTypeBuilderList() {
@@ -15812,56 +15812,56 @@ public final class DebugProtoBuf {
          }
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public java.util.List<java.lang.Integer>
           getMultiFieldValueClassUnderlyingTypeIdList() {
         return java.util.Collections.unmodifiableList(multiFieldValueClassUnderlyingTypeId_);
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public int getMultiFieldValueClassUnderlyingTypeIdCount() {
         return multiFieldValueClassUnderlyingTypeId_.size();
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public int getMultiFieldValueClassUnderlyingTypeId(int index) {
         return multiFieldValueClassUnderlyingTypeId_.get(index);
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public Builder setMultiFieldValueClassUnderlyingTypeId(
-          int index, int value) {
+          int index, int konstue) {
         ensureMultiFieldValueClassUnderlyingTypeIdIsMutable();
-        multiFieldValueClassUnderlyingTypeId_.set(index, value);
+        multiFieldValueClassUnderlyingTypeId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
-      public Builder addMultiFieldValueClassUnderlyingTypeId(int value) {
+      public Builder addMultiFieldValueClassUnderlyingTypeId(int konstue) {
         ensureMultiFieldValueClassUnderlyingTypeIdIsMutable();
-        multiFieldValueClassUnderlyingTypeId_.add(value);
+        multiFieldValueClassUnderlyingTypeId_.add(konstue);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public Builder addAllMultiFieldValueClassUnderlyingTypeId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureMultiFieldValueClassUnderlyingTypeIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, multiFieldValueClassUnderlyingTypeId_);
+            konstues, multiFieldValueClassUnderlyingTypeId_);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated int32 multi_field_value_class_underlying_type_id = 24 [packed = true];</code>
+       * <code>repeated int32 multi_field_konstue_class_underlying_type_id = 24 [packed = true];</code>
        */
       public Builder clearMultiFieldValueClassUnderlyingTypeId() {
         multiFieldValueClassUnderlyingTypeId_ = java.util.Collections.emptyList();
@@ -15892,15 +15892,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          typeTable_ = value;
+          typeTable_ = konstue;
           onChanged();
         } else {
-          typeTableBuilder_.setMessage(value);
+          typeTableBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00200000;
         return this;
@@ -15922,18 +15922,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
           if (((bitField0_ & 0x00200000) == 0x00200000) &&
               typeTable_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance()) {
             typeTable_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(konstue).buildPartial();
           } else {
-            typeTable_ = value;
+            typeTable_ = konstue;
           }
           onChanged();
         } else {
-          typeTableBuilder_.mergeFrom(value);
+          typeTableBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00200000;
         return this;
@@ -16032,9 +16032,9 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder setVersionRequirement(
-          int index, int value) {
+          int index, int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.set(index, value);
+        versionRequirement_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -16045,9 +16045,9 @@ public final class DebugProtoBuf {
        * Index into the VersionRequirementTable
        * </pre>
        */
-      public Builder addVersionRequirement(int value) {
+      public Builder addVersionRequirement(int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.add(value);
+        versionRequirement_.add(konstue);
         onChanged();
         return this;
       }
@@ -16059,10 +16059,10 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder addAllVersionRequirement(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureVersionRequirementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, versionRequirement_);
+            konstues, versionRequirement_);
         onChanged();
         return this;
       }
@@ -16102,15 +16102,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.VersionRequirementTable version_requirement_table = 32;</code>
        */
-      public Builder setVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable value) {
+      public Builder setVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable konstue) {
         if (versionRequirementTableBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          versionRequirementTable_ = value;
+          versionRequirementTable_ = konstue;
           onChanged();
         } else {
-          versionRequirementTableBuilder_.setMessage(value);
+          versionRequirementTableBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00800000;
         return this;
@@ -16132,18 +16132,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.VersionRequirementTable version_requirement_table = 32;</code>
        */
-      public Builder mergeVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable value) {
+      public Builder mergeVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable konstue) {
         if (versionRequirementTableBuilder_ == null) {
           if (((bitField0_ & 0x00800000) == 0x00800000) &&
               versionRequirementTable_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.getDefaultInstance()) {
             versionRequirementTable_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.newBuilder(versionRequirementTable_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.newBuilder(versionRequirementTable_).mergeFrom(konstue).buildPartial();
           } else {
-            versionRequirementTable_ = value;
+            versionRequirementTable_ = konstue;
           }
           onChanged();
         } else {
-          versionRequirementTableBuilder_.mergeFrom(value);
+          versionRequirementTableBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00800000;
         return this;
@@ -16343,7 +16343,7 @@ public final class DebugProtoBuf {
     private Package(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -16415,10 +16415,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -16451,7 +16451,7 @@ public final class DebugProtoBuf {
       public Package parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Package(input, extensionRegistry);
       }
     };
@@ -16720,23 +16720,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parseFrom(java.io.InputStream input)
@@ -17074,7 +17074,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Package parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Package) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -17132,16 +17132,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 3;</code>
        */
       public Builder setFunction(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.set(index, value);
+          function_.set(index, konstue);
           onChanged();
         } else {
-          functionBuilder_.setMessage(index, value);
+          functionBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -17162,16 +17162,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 3;</code>
        */
-      public Builder addFunction(org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+      public Builder addFunction(org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.add(value);
+          function_.add(konstue);
           onChanged();
         } else {
-          functionBuilder_.addMessage(value);
+          functionBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -17179,16 +17179,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 3;</code>
        */
       public Builder addFunction(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Function konstue) {
         if (functionBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureFunctionIsMutable();
-          function_.add(index, value);
+          function_.add(index, konstue);
           onChanged();
         } else {
-          functionBuilder_.addMessage(index, value);
+          functionBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -17224,14 +17224,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Function function = 3;</code>
        */
       public Builder addAllFunction(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Function> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Function> konstues) {
         if (functionBuilder_ == null) {
           ensureFunctionIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, function_);
+              konstues, function_);
           onChanged();
         } else {
-          functionBuilder_.addAllMessages(values);
+          functionBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -17372,16 +17372,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 4;</code>
        */
       public Builder setProperty(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.set(index, value);
+          property_.set(index, konstue);
           onChanged();
         } else {
-          propertyBuilder_.setMessage(index, value);
+          propertyBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -17402,16 +17402,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 4;</code>
        */
-      public Builder addProperty(org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+      public Builder addProperty(org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.add(value);
+          property_.add(konstue);
           onChanged();
         } else {
-          propertyBuilder_.addMessage(value);
+          propertyBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -17419,16 +17419,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 4;</code>
        */
       public Builder addProperty(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Property konstue) {
         if (propertyBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensurePropertyIsMutable();
-          property_.add(index, value);
+          property_.add(index, konstue);
           onChanged();
         } else {
-          propertyBuilder_.addMessage(index, value);
+          propertyBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -17464,14 +17464,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Property property = 4;</code>
        */
       public Builder addAllProperty(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Property> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Property> konstues) {
         if (propertyBuilder_ == null) {
           ensurePropertyIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, property_);
+              konstues, property_);
           onChanged();
         } else {
-          propertyBuilder_.addAllMessages(values);
+          propertyBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -17612,16 +17612,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 5;</code>
        */
       public Builder setTypeAlias(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.set(index, value);
+          typeAlias_.set(index, konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.setMessage(index, value);
+          typeAliasBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -17642,16 +17642,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 5;</code>
        */
-      public Builder addTypeAlias(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+      public Builder addTypeAlias(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.add(value);
+          typeAlias_.add(konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.addMessage(value);
+          typeAliasBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -17659,16 +17659,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 5;</code>
        */
       public Builder addTypeAlias(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias konstue) {
         if (typeAliasBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeAliasIsMutable();
-          typeAlias_.add(index, value);
+          typeAlias_.add(index, konstue);
           onChanged();
         } else {
-          typeAliasBuilder_.addMessage(index, value);
+          typeAliasBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -17704,14 +17704,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeAlias type_alias = 5;</code>
        */
       public Builder addAllTypeAlias(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias> konstues) {
         if (typeAliasBuilder_ == null) {
           ensureTypeAliasIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeAlias_);
+              konstues, typeAlias_);
           onChanged();
         } else {
-          typeAliasBuilder_.addAllMessages(values);
+          typeAliasBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -17828,15 +17828,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          typeTable_ = value;
+          typeTable_ = konstue;
           onChanged();
         } else {
-          typeTableBuilder_.setMessage(value);
+          typeTableBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -17858,18 +17858,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               typeTable_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance()) {
             typeTable_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(konstue).buildPartial();
           } else {
-            typeTable_ = value;
+            typeTable_ = konstue;
           }
           onChanged();
         } else {
-          typeTableBuilder_.mergeFrom(value);
+          typeTableBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -17944,15 +17944,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.VersionRequirementTable version_requirement_table = 32;</code>
        */
-      public Builder setVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable value) {
+      public Builder setVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable konstue) {
         if (versionRequirementTableBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          versionRequirementTable_ = value;
+          versionRequirementTable_ = konstue;
           onChanged();
         } else {
-          versionRequirementTableBuilder_.setMessage(value);
+          versionRequirementTableBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;
@@ -17974,18 +17974,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.VersionRequirementTable version_requirement_table = 32;</code>
        */
-      public Builder mergeVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable value) {
+      public Builder mergeVersionRequirementTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable konstue) {
         if (versionRequirementTableBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
               versionRequirementTable_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.getDefaultInstance()) {
             versionRequirementTable_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.newBuilder(versionRequirementTable_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable.newBuilder(versionRequirementTable_).mergeFrom(konstue).buildPartial();
           } else {
-            versionRequirementTable_ = value;
+            versionRequirementTable_ = konstue;
           }
           onChanged();
         } else {
-          versionRequirementTableBuilder_.mergeFrom(value);
+          versionRequirementTableBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;
@@ -18128,7 +18128,7 @@ public final class DebugProtoBuf {
     private TypeTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -18163,10 +18163,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -18193,7 +18193,7 @@ public final class DebugProtoBuf {
       public TypeTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new TypeTable(input, extensionRegistry);
       }
     };
@@ -18324,23 +18324,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parseFrom(java.io.InputStream input)
@@ -18543,7 +18543,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -18601,16 +18601,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
        */
       public Builder setType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (typeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeIsMutable();
-          type_.set(index, value);
+          type_.set(index, konstue);
           onChanged();
         } else {
-          typeBuilder_.setMessage(index, value);
+          typeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -18631,16 +18631,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
        */
-      public Builder addType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (typeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeIsMutable();
-          type_.add(value);
+          type_.add(konstue);
           onChanged();
         } else {
-          typeBuilder_.addMessage(value);
+          typeBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -18648,16 +18648,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
        */
       public Builder addType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (typeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeIsMutable();
-          type_.add(index, value);
+          type_.add(index, konstue);
           onChanged();
         } else {
-          typeBuilder_.addMessage(index, value);
+          typeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -18693,14 +18693,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type type = 1;</code>
        */
       public Builder addAllType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (typeBuilder_ == null) {
           ensureTypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, type_);
+              konstues, type_);
           onChanged();
         } else {
-          typeBuilder_.addAllMessages(values);
+          typeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -18826,9 +18826,9 @@ public final class DebugProtoBuf {
        * Note that the 'nullable' field of Type messages is ignored and shouldn't be written because it wastes too much space
        * </pre>
        */
-      public Builder setFirstNullable(int value) {
+      public Builder setFirstNullable(int konstue) {
         bitField0_ |= 0x00000002;
-        firstNullable_ = value;
+        firstNullable_ = konstue;
         onChanged();
         return this;
       }
@@ -18887,25 +18887,25 @@ public final class DebugProtoBuf {
     int getFlags();
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> 
         getValueParameterList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index);
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     int getValueParameterCount();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
         getValueParameterOrBuilderList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
         int index);
@@ -18968,7 +18968,7 @@ public final class DebugProtoBuf {
     private Constructor(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -18995,10 +18995,10 @@ public final class DebugProtoBuf {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>();
+                konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>();
                 mutable_bitField0_ |= 0x00000002;
               }
-              valueParameter_.add(input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.PARSER, extensionRegistry));
+              konstueParameter_.add(input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.PARSER, extensionRegistry));
               break;
             }
             case 248: {
@@ -19024,14 +19024,14 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+          konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
         }
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           versionRequirement_ = java.util.Collections.unmodifiableList(versionRequirement_);
@@ -19057,7 +19057,7 @@ public final class DebugProtoBuf {
       public Constructor parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Constructor(input, extensionRegistry);
       }
     };
@@ -19098,38 +19098,38 @@ public final class DebugProtoBuf {
     }
 
     public static final int VALUE_PARAMETER_FIELD_NUMBER = 2;
-    private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> valueParameter_;
+    private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstueParameter_;
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> getValueParameterList() {
-      return valueParameter_;
+      return konstueParameter_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
         getValueParameterOrBuilderList() {
-      return valueParameter_;
+      return konstueParameter_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     public int getValueParameterCount() {
-      return valueParameter_.size();
+      return konstueParameter_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index) {
-      return valueParameter_.get(index);
+      return konstueParameter_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
         int index) {
-      return valueParameter_.get(index);
+      return konstueParameter_.get(index);
     }
 
     public static final int VERSION_REQUIREMENT_FIELD_NUMBER = 31;
@@ -19168,7 +19168,7 @@ public final class DebugProtoBuf {
 
     private void initFields() {
       flags_ = 6;
-      valueParameter_ = java.util.Collections.emptyList();
+      konstueParameter_ = java.util.Collections.emptyList();
       versionRequirement_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -19200,8 +19200,8 @@ public final class DebugProtoBuf {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, flags_);
       }
-      for (int i = 0; i < valueParameter_.size(); i++) {
-        output.writeMessage(2, valueParameter_.get(i));
+      for (int i = 0; i < konstueParameter_.size(); i++) {
+        output.writeMessage(2, konstueParameter_.get(i));
       }
       for (int i = 0; i < versionRequirement_.size(); i++) {
         output.writeInt32(31, versionRequirement_.get(i));
@@ -19220,9 +19220,9 @@ public final class DebugProtoBuf {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeInt32Size(1, flags_);
       }
-      for (int i = 0; i < valueParameter_.size(); i++) {
+      for (int i = 0; i < konstueParameter_.size(); i++) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(2, valueParameter_.get(i));
+          .computeMessageSize(2, konstueParameter_.get(i));
       }
       {
         int dataSize = 0;
@@ -19248,23 +19248,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parseFrom(java.io.InputStream input)
@@ -19355,11 +19355,11 @@ public final class DebugProtoBuf {
         super.clear();
         flags_ = 6;
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (valueParameterBuilder_ == null) {
-          valueParameter_ = java.util.Collections.emptyList();
+        if (konstueParameterBuilder_ == null) {
+          konstueParameter_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          valueParameterBuilder_.clear();
+          konstueParameterBuilder_.clear();
         }
         versionRequirement_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -19395,14 +19395,14 @@ public final class DebugProtoBuf {
           to_bitField0_ |= 0x00000001;
         }
         result.flags_ = flags_;
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+            konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.valueParameter_ = valueParameter_;
+          result.konstueParameter_ = konstueParameter_;
         } else {
-          result.valueParameter_ = valueParameterBuilder_.build();
+          result.konstueParameter_ = konstueParameterBuilder_.build();
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           versionRequirement_ = java.util.Collections.unmodifiableList(versionRequirement_);
@@ -19428,29 +19428,29 @@ public final class DebugProtoBuf {
         if (other.hasFlags()) {
           setFlags(other.getFlags());
         }
-        if (valueParameterBuilder_ == null) {
-          if (!other.valueParameter_.isEmpty()) {
-            if (valueParameter_.isEmpty()) {
-              valueParameter_ = other.valueParameter_;
+        if (konstueParameterBuilder_ == null) {
+          if (!other.konstueParameter_.isEmpty()) {
+            if (konstueParameter_.isEmpty()) {
+              konstueParameter_ = other.konstueParameter_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureValueParameterIsMutable();
-              valueParameter_.addAll(other.valueParameter_);
+              konstueParameter_.addAll(other.konstueParameter_);
             }
             onChanged();
           }
         } else {
-          if (!other.valueParameter_.isEmpty()) {
-            if (valueParameterBuilder_.isEmpty()) {
-              valueParameterBuilder_.dispose();
-              valueParameterBuilder_ = null;
-              valueParameter_ = other.valueParameter_;
+          if (!other.konstueParameter_.isEmpty()) {
+            if (konstueParameterBuilder_.isEmpty()) {
+              konstueParameterBuilder_.dispose();
+              konstueParameterBuilder_ = null;
+              konstueParameter_ = other.konstueParameter_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              valueParameterBuilder_ = 
+              konstueParameterBuilder_ = 
                 org.jetbrains.kotlin.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getValueParameterFieldBuilder() : null;
             } else {
-              valueParameterBuilder_.addAllMessages(other.valueParameter_);
+              konstueParameterBuilder_.addAllMessages(other.konstueParameter_);
             }
           }
         }
@@ -19490,7 +19490,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Constructor) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -19539,9 +19539,9 @@ public final class DebugProtoBuf {
        *hasNonStableParameterNames
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -19562,218 +19562,218 @@ public final class DebugProtoBuf {
         return this;
       }
 
-      private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> valueParameter_ =
+      private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstueParameter_ =
         java.util.Collections.emptyList();
       private void ensureValueParameterIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>(valueParameter_);
+          konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>(konstueParameter_);
           bitField0_ |= 0x00000002;
          }
       }
 
       private org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
-          org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> valueParameterBuilder_;
+          org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> konstueParameterBuilder_;
 
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> getValueParameterList() {
-        if (valueParameterBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(valueParameter_);
+        if (konstueParameterBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(konstueParameter_);
         } else {
-          return valueParameterBuilder_.getMessageList();
+          return konstueParameterBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public int getValueParameterCount() {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.size();
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.size();
         } else {
-          return valueParameterBuilder_.getCount();
+          return konstueParameterBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index) {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.get(index);
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.get(index);
         } else {
-          return valueParameterBuilder_.getMessage(index);
+          return konstueParameterBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder setValueParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.set(index, value);
+          konstueParameter_.set(index, konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.setMessage(index, value);
+          konstueParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder setValueParameter(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.set(index, builderForValue.build());
+          konstueParameter_.set(index, builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.setMessage(index, builderForValue.build());
+          konstueParameterBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
-      public Builder addValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+      public Builder addValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.add(value);
+          konstueParameter_.add(konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(value);
+          konstueParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder addValueParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.add(index, value);
+          konstueParameter_.add(index, konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(index, value);
+          konstueParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder addValueParameter(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.add(builderForValue.build());
+          konstueParameter_.add(builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(builderForValue.build());
+          konstueParameterBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder addValueParameter(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.add(index, builderForValue.build());
+          konstueParameter_.add(index, builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(index, builderForValue.build());
+          konstueParameterBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder addAllValueParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> values) {
-        if (valueParameterBuilder_ == null) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstues) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, valueParameter_);
+              konstues, konstueParameter_);
           onChanged();
         } else {
-          valueParameterBuilder_.addAllMessages(values);
+          konstueParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder clearValueParameter() {
-        if (valueParameterBuilder_ == null) {
-          valueParameter_ = java.util.Collections.emptyList();
+        if (konstueParameterBuilder_ == null) {
+          konstueParameter_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          valueParameterBuilder_.clear();
+          konstueParameterBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public Builder removeValueParameter(int index) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.remove(index);
+          konstueParameter_.remove(index);
           onChanged();
         } else {
-          valueParameterBuilder_.remove(index);
+          konstueParameterBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder getValueParameterBuilder(
           int index) {
         return getValueParameterFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
           int index) {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.get(index);  } else {
-          return valueParameterBuilder_.getMessageOrBuilder(index);
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.get(index);  } else {
+          return konstueParameterBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
            getValueParameterOrBuilderList() {
-        if (valueParameterBuilder_ != null) {
-          return valueParameterBuilder_.getMessageOrBuilderList();
+        if (konstueParameterBuilder_ != null) {
+          return konstueParameterBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(valueParameter_);
+          return java.util.Collections.unmodifiableList(konstueParameter_);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder addValueParameterBuilder() {
         return getValueParameterFieldBuilder().addBuilder(
             org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder addValueParameterBuilder(
           int index) {
@@ -19781,7 +19781,7 @@ public final class DebugProtoBuf {
             index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 2;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 2;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder> 
            getValueParameterBuilderList() {
@@ -19790,16 +19790,16 @@ public final class DebugProtoBuf {
       private org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
           getValueParameterFieldBuilder() {
-        if (valueParameterBuilder_ == null) {
-          valueParameterBuilder_ = new org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
+        if (konstueParameterBuilder_ == null) {
+          konstueParameterBuilder_ = new org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
               org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder>(
-                  valueParameter_,
+                  konstueParameter_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          valueParameter_ = null;
+          konstueParameter_ = null;
         }
-        return valueParameterBuilder_;
+        return konstueParameterBuilder_;
       }
 
       private java.util.List<java.lang.Integer> versionRequirement_ = java.util.Collections.emptyList();
@@ -19848,9 +19848,9 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder setVersionRequirement(
-          int index, int value) {
+          int index, int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.set(index, value);
+        versionRequirement_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -19861,9 +19861,9 @@ public final class DebugProtoBuf {
        * Index into the VersionRequirementTable
        * </pre>
        */
-      public Builder addVersionRequirement(int value) {
+      public Builder addVersionRequirement(int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.add(value);
+        versionRequirement_.add(konstue);
         onChanged();
         return this;
       }
@@ -19875,10 +19875,10 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder addAllVersionRequirement(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureVersionRequirementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, versionRequirement_);
+            konstues, versionRequirement_);
         onChanged();
         return this;
       }
@@ -20075,25 +20075,25 @@ public final class DebugProtoBuf {
     int getContextReceiverTypeId(int index);
 
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> 
         getValueParameterList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index);
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     int getValueParameterCount();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
         getValueParameterOrBuilderList();
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
         int index);
@@ -20182,7 +20182,7 @@ public final class DebugProtoBuf {
     private Function(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -20248,10 +20248,10 @@ public final class DebugProtoBuf {
             }
             case 50: {
               if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
-                valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>();
+                konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>();
                 mutable_bitField0_ |= 0x00000400;
               }
-              valueParameter_.add(input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.PARSER, extensionRegistry));
+              konstueParameter_.add(input.readMessage(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.PARSER, extensionRegistry));
               break;
             }
             case 56: {
@@ -20347,17 +20347,17 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           typeParameter_ = java.util.Collections.unmodifiableList(typeParameter_);
         }
         if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
-          valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+          konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
         }
         if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           contextReceiverType_ = java.util.Collections.unmodifiableList(contextReceiverType_);
@@ -20389,7 +20389,7 @@ public final class DebugProtoBuf {
       public Function parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Function(input, extensionRegistry);
       }
     };
@@ -20641,38 +20641,38 @@ public final class DebugProtoBuf {
     private int contextReceiverTypeIdMemoizedSerializedSize = -1;
 
     public static final int VALUE_PARAMETER_FIELD_NUMBER = 6;
-    private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> valueParameter_;
+    private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstueParameter_;
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> getValueParameterList() {
-      return valueParameter_;
+      return konstueParameter_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
         getValueParameterOrBuilderList() {
-      return valueParameter_;
+      return konstueParameter_;
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     public int getValueParameterCount() {
-      return valueParameter_.size();
+      return konstueParameter_.size();
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index) {
-      return valueParameter_.get(index);
+      return konstueParameter_.get(index);
     }
     /**
-     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+     * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
         int index) {
-      return valueParameter_.get(index);
+      return konstueParameter_.get(index);
     }
 
     public static final int TYPE_TABLE_FIELD_NUMBER = 30;
@@ -20762,7 +20762,7 @@ public final class DebugProtoBuf {
       receiverTypeId_ = 0;
       contextReceiverType_ = java.util.Collections.emptyList();
       contextReceiverTypeId_ = java.util.Collections.emptyList();
-      valueParameter_ = java.util.Collections.emptyList();
+      konstueParameter_ = java.util.Collections.emptyList();
       typeTable_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance();
       versionRequirement_ = java.util.Collections.emptyList();
       contract_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract.getDefaultInstance();
@@ -20848,8 +20848,8 @@ public final class DebugProtoBuf {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(5, receiverType_);
       }
-      for (int i = 0; i < valueParameter_.size(); i++) {
-        output.writeMessage(6, valueParameter_.get(i));
+      for (int i = 0; i < konstueParameter_.size(); i++) {
+        output.writeMessage(6, konstueParameter_.get(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(7, returnTypeId_);
@@ -20909,9 +20909,9 @@ public final class DebugProtoBuf {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
           .computeMessageSize(5, receiverType_);
       }
-      for (int i = 0; i < valueParameter_.size(); i++) {
+      for (int i = 0; i < konstueParameter_.size(); i++) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeMessageSize(6, valueParameter_.get(i));
+          .computeMessageSize(6, konstueParameter_.get(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
@@ -20975,23 +20975,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parseFrom(java.io.InputStream input)
@@ -21122,11 +21122,11 @@ public final class DebugProtoBuf {
         }
         contextReceiverTypeId_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000200);
-        if (valueParameterBuilder_ == null) {
-          valueParameter_ = java.util.Collections.emptyList();
+        if (konstueParameterBuilder_ == null) {
+          konstueParameter_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000400);
         } else {
-          valueParameterBuilder_.clear();
+          konstueParameterBuilder_.clear();
         }
         if (typeTableBuilder_ == null) {
           typeTable_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance();
@@ -21229,14 +21229,14 @@ public final class DebugProtoBuf {
           bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.contextReceiverTypeId_ = contextReceiverTypeId_;
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           if (((bitField0_ & 0x00000400) == 0x00000400)) {
-            valueParameter_ = java.util.Collections.unmodifiableList(valueParameter_);
+            konstueParameter_ = java.util.Collections.unmodifiableList(konstueParameter_);
             bitField0_ = (bitField0_ & ~0x00000400);
           }
-          result.valueParameter_ = valueParameter_;
+          result.konstueParameter_ = konstueParameter_;
         } else {
-          result.valueParameter_ = valueParameterBuilder_.build();
+          result.konstueParameter_ = konstueParameterBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000080;
@@ -21358,29 +21358,29 @@ public final class DebugProtoBuf {
           }
           onChanged();
         }
-        if (valueParameterBuilder_ == null) {
-          if (!other.valueParameter_.isEmpty()) {
-            if (valueParameter_.isEmpty()) {
-              valueParameter_ = other.valueParameter_;
+        if (konstueParameterBuilder_ == null) {
+          if (!other.konstueParameter_.isEmpty()) {
+            if (konstueParameter_.isEmpty()) {
+              konstueParameter_ = other.konstueParameter_;
               bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureValueParameterIsMutable();
-              valueParameter_.addAll(other.valueParameter_);
+              konstueParameter_.addAll(other.konstueParameter_);
             }
             onChanged();
           }
         } else {
-          if (!other.valueParameter_.isEmpty()) {
-            if (valueParameterBuilder_.isEmpty()) {
-              valueParameterBuilder_.dispose();
-              valueParameterBuilder_ = null;
-              valueParameter_ = other.valueParameter_;
+          if (!other.konstueParameter_.isEmpty()) {
+            if (konstueParameterBuilder_.isEmpty()) {
+              konstueParameterBuilder_.dispose();
+              konstueParameterBuilder_ = null;
+              konstueParameter_ = other.konstueParameter_;
               bitField0_ = (bitField0_ & ~0x00000400);
-              valueParameterBuilder_ = 
+              konstueParameterBuilder_ = 
                 org.jetbrains.kotlin.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getValueParameterFieldBuilder() : null;
             } else {
-              valueParameterBuilder_.addAllMessages(other.valueParameter_);
+              konstueParameterBuilder_.addAllMessages(other.konstueParameter_);
             }
           }
         }
@@ -21466,7 +21466,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Function parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Function) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -21539,9 +21539,9 @@ public final class DebugProtoBuf {
        *hasNonStableParameterNames
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -21586,9 +21586,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 old_flags = 1 [default = 6];</code>
        */
-      public Builder setOldFlags(int value) {
+      public Builder setOldFlags(int konstue) {
         bitField0_ |= 0x00000002;
-        oldFlags_ = value;
+        oldFlags_ = konstue;
         onChanged();
         return this;
       }
@@ -21618,9 +21618,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 name = 2;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000004;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -21656,15 +21656,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type return_type = 3;</code>
        */
-      public Builder setReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (returnTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          returnType_ = value;
+          returnType_ = konstue;
           onChanged();
         } else {
-          returnTypeBuilder_.setMessage(value);
+          returnTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -21686,18 +21686,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type return_type = 3;</code>
        */
-      public Builder mergeReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (returnTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               returnType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             returnType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(returnType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(returnType_).mergeFrom(konstue).buildPartial();
           } else {
-            returnType_ = value;
+            returnType_ = konstue;
           }
           onChanged();
         } else {
-          returnTypeBuilder_.mergeFrom(value);
+          returnTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -21766,9 +21766,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 return_type_id = 7;</code>
        */
-      public Builder setReturnTypeId(int value) {
+      public Builder setReturnTypeId(int konstue) {
         bitField0_ |= 0x00000010;
-        returnTypeId_ = value;
+        returnTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -21828,16 +21828,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder setTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.set(index, value);
+          typeParameter_.set(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.setMessage(index, value);
+          typeParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -21858,16 +21858,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
-      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(value);
+          typeParameter_.add(konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(value);
+          typeParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -21875,16 +21875,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder addTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(index, value);
+          typeParameter_.add(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(index, value);
+          typeParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -21920,14 +21920,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder addAllTypeParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> konstues) {
         if (typeParameterBuilder_ == null) {
           ensureTypeParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeParameter_);
+              konstues, typeParameter_);
           onChanged();
         } else {
-          typeParameterBuilder_.addAllMessages(values);
+          typeParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -22044,15 +22044,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type receiver_type = 5;</code>
        */
-      public Builder setReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (receiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          receiverType_ = value;
+          receiverType_ = konstue;
           onChanged();
         } else {
-          receiverTypeBuilder_.setMessage(value);
+          receiverTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000040;
         return this;
@@ -22074,18 +22074,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type receiver_type = 5;</code>
        */
-      public Builder mergeReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (receiverTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
               receiverType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             receiverType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(receiverType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(receiverType_).mergeFrom(konstue).buildPartial();
           } else {
-            receiverType_ = value;
+            receiverType_ = konstue;
           }
           onChanged();
         } else {
-          receiverTypeBuilder_.mergeFrom(value);
+          receiverTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000040;
         return this;
@@ -22154,9 +22154,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 receiver_type_id = 8;</code>
        */
-      public Builder setReceiverTypeId(int value) {
+      public Builder setReceiverTypeId(int konstue) {
         bitField0_ |= 0x00000080;
-        receiverTypeId_ = value;
+        receiverTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -22216,16 +22216,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 10;</code>
        */
       public Builder setContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.set(index, value);
+          contextReceiverType_.set(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.setMessage(index, value);
+          contextReceiverTypeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -22246,16 +22246,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 10;</code>
        */
-      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(value);
+          contextReceiverType_.add(konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(value);
+          contextReceiverTypeBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -22263,16 +22263,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 10;</code>
        */
       public Builder addContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(index, value);
+          contextReceiverType_.add(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(index, value);
+          contextReceiverTypeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -22308,14 +22308,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 10;</code>
        */
       public Builder addAllContextReceiverType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (contextReceiverTypeBuilder_ == null) {
           ensureContextReceiverTypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, contextReceiverType_);
+              konstues, contextReceiverType_);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addAllMessages(values);
+          contextReceiverTypeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -22440,18 +22440,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 11 [packed = true];</code>
        */
       public Builder setContextReceiverTypeId(
-          int index, int value) {
+          int index, int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.set(index, value);
+        contextReceiverTypeId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 context_receiver_type_id = 11 [packed = true];</code>
        */
-      public Builder addContextReceiverTypeId(int value) {
+      public Builder addContextReceiverTypeId(int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.add(value);
+        contextReceiverTypeId_.add(konstue);
         onChanged();
         return this;
       }
@@ -22459,10 +22459,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 11 [packed = true];</code>
        */
       public Builder addAllContextReceiverTypeId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureContextReceiverTypeIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, contextReceiverTypeId_);
+            konstues, contextReceiverTypeId_);
         onChanged();
         return this;
       }
@@ -22476,218 +22476,218 @@ public final class DebugProtoBuf {
         return this;
       }
 
-      private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> valueParameter_ =
+      private java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstueParameter_ =
         java.util.Collections.emptyList();
       private void ensureValueParameterIsMutable() {
         if (!((bitField0_ & 0x00000400) == 0x00000400)) {
-          valueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>(valueParameter_);
+          konstueParameter_ = new java.util.ArrayList<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter>(konstueParameter_);
           bitField0_ |= 0x00000400;
          }
       }
 
       private org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
-          org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> valueParameterBuilder_;
+          org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> konstueParameterBuilder_;
 
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> getValueParameterList() {
-        if (valueParameterBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(valueParameter_);
+        if (konstueParameterBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(konstueParameter_);
         } else {
-          return valueParameterBuilder_.getMessageList();
+          return konstueParameterBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public int getValueParameterCount() {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.size();
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.size();
         } else {
-          return valueParameterBuilder_.getCount();
+          return konstueParameterBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getValueParameter(int index) {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.get(index);
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.get(index);
         } else {
-          return valueParameterBuilder_.getMessage(index);
+          return konstueParameterBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder setValueParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.set(index, value);
+          konstueParameter_.set(index, konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.setMessage(index, value);
+          konstueParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder setValueParameter(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.set(index, builderForValue.build());
+          konstueParameter_.set(index, builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.setMessage(index, builderForValue.build());
+          konstueParameterBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
-      public Builder addValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+      public Builder addValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.add(value);
+          konstueParameter_.add(konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(value);
+          konstueParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder addValueParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
-        if (valueParameterBuilder_ == null) {
-          if (value == null) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
+        if (konstueParameterBuilder_ == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureValueParameterIsMutable();
-          valueParameter_.add(index, value);
+          konstueParameter_.add(index, konstue);
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(index, value);
+          konstueParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder addValueParameter(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.add(builderForValue.build());
+          konstueParameter_.add(builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(builderForValue.build());
+          konstueParameterBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder addValueParameter(
           int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.add(index, builderForValue.build());
+          konstueParameter_.add(index, builderForValue.build());
           onChanged();
         } else {
-          valueParameterBuilder_.addMessage(index, builderForValue.build());
+          konstueParameterBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder addAllValueParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> values) {
-        if (valueParameterBuilder_ == null) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter> konstues) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, valueParameter_);
+              konstues, konstueParameter_);
           onChanged();
         } else {
-          valueParameterBuilder_.addAllMessages(values);
+          konstueParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder clearValueParameter() {
-        if (valueParameterBuilder_ == null) {
-          valueParameter_ = java.util.Collections.emptyList();
+        if (konstueParameterBuilder_ == null) {
+          konstueParameter_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
-          valueParameterBuilder_.clear();
+          konstueParameterBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public Builder removeValueParameter(int index) {
-        if (valueParameterBuilder_ == null) {
+        if (konstueParameterBuilder_ == null) {
           ensureValueParameterIsMutable();
-          valueParameter_.remove(index);
+          konstueParameter_.remove(index);
           onChanged();
         } else {
-          valueParameterBuilder_.remove(index);
+          konstueParameterBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder getValueParameterBuilder(
           int index) {
         return getValueParameterFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getValueParameterOrBuilder(
           int index) {
-        if (valueParameterBuilder_ == null) {
-          return valueParameter_.get(index);  } else {
-          return valueParameterBuilder_.getMessageOrBuilder(index);
+        if (konstueParameterBuilder_ == null) {
+          return konstueParameter_.get(index);  } else {
+          return konstueParameterBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public java.util.List<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
            getValueParameterOrBuilderList() {
-        if (valueParameterBuilder_ != null) {
-          return valueParameterBuilder_.getMessageOrBuilderList();
+        if (konstueParameterBuilder_ != null) {
+          return konstueParameterBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(valueParameter_);
+          return java.util.Collections.unmodifiableList(konstueParameter_);
         }
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder addValueParameterBuilder() {
         return getValueParameterFieldBuilder().addBuilder(
             org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder addValueParameterBuilder(
           int index) {
@@ -22695,7 +22695,7 @@ public final class DebugProtoBuf {
             index, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.getDefaultInstance());
       }
       /**
-       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter value_parameter = 6;</code>
+       * <code>repeated .org.jetbrains.kotlin.metadata.ValueParameter konstue_parameter = 6;</code>
        */
       public java.util.List<org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder> 
            getValueParameterBuilderList() {
@@ -22704,16 +22704,16 @@ public final class DebugProtoBuf {
       private org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
           getValueParameterFieldBuilder() {
-        if (valueParameterBuilder_ == null) {
-          valueParameterBuilder_ = new org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
+        if (konstueParameterBuilder_ == null) {
+          konstueParameterBuilder_ = new org.jetbrains.kotlin.protobuf.RepeatedFieldBuilder<
               org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder>(
-                  valueParameter_,
+                  konstueParameter_,
                   ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
-          valueParameter_ = null;
+          konstueParameter_ = null;
         }
-        return valueParameterBuilder_;
+        return konstueParameterBuilder_;
       }
 
       private org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable typeTable_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance();
@@ -22738,15 +22738,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder setTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          typeTable_ = value;
+          typeTable_ = konstue;
           onChanged();
         } else {
-          typeTableBuilder_.setMessage(value);
+          typeTableBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000800;
         return this;
@@ -22768,18 +22768,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.TypeTable type_table = 30;</code>
        */
-      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable value) {
+      public Builder mergeTypeTable(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable konstue) {
         if (typeTableBuilder_ == null) {
           if (((bitField0_ & 0x00000800) == 0x00000800) &&
               typeTable_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.getDefaultInstance()) {
             typeTable_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeTable.newBuilder(typeTable_).mergeFrom(konstue).buildPartial();
           } else {
-            typeTable_ = value;
+            typeTable_ = konstue;
           }
           onChanged();
         } else {
-          typeTableBuilder_.mergeFrom(value);
+          typeTableBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000800;
         return this;
@@ -22878,9 +22878,9 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder setVersionRequirement(
-          int index, int value) {
+          int index, int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.set(index, value);
+        versionRequirement_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -22891,9 +22891,9 @@ public final class DebugProtoBuf {
        * Index into the VersionRequirementTable
        * </pre>
        */
-      public Builder addVersionRequirement(int value) {
+      public Builder addVersionRequirement(int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.add(value);
+        versionRequirement_.add(konstue);
         onChanged();
         return this;
       }
@@ -22905,10 +22905,10 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder addAllVersionRequirement(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureVersionRequirementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, versionRequirement_);
+            konstues, versionRequirement_);
         onChanged();
         return this;
       }
@@ -22948,15 +22948,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Contract contract = 32;</code>
        */
-      public Builder setContract(org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract value) {
+      public Builder setContract(org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract konstue) {
         if (contractBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          contract_ = value;
+          contract_ = konstue;
           onChanged();
         } else {
-          contractBuilder_.setMessage(value);
+          contractBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00002000;
         return this;
@@ -22978,18 +22978,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Contract contract = 32;</code>
        */
-      public Builder mergeContract(org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract value) {
+      public Builder mergeContract(org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract konstue) {
         if (contractBuilder_ == null) {
           if (((bitField0_ & 0x00002000) == 0x00002000) &&
               contract_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract.getDefaultInstance()) {
             contract_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract.newBuilder(contract_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract.newBuilder(contract_).mergeFrom(konstue).buildPartial();
           } else {
-            contract_ = value;
+            contract_ = konstue;
           }
           onChanged();
         } else {
-          contractBuilder_.mergeFrom(value);
+          contractBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00002000;
         return this;
@@ -23223,15 +23223,15 @@ public final class DebugProtoBuf {
     int getContextReceiverTypeId(int index);
 
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     boolean hasSetterValueParameter();
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getSetterValueParameter();
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getSetterValueParameterOrBuilder();
 
@@ -23245,8 +23245,8 @@ public final class DebugProtoBuf {
      *isNotDefault
      *isExternal
      *isInline
-     *If getter_flags or setter_flags are absent, their value should be computed as follows:
-     *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+     *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+     *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
      *- all other flags are false
      * </pre>
      */
@@ -23261,8 +23261,8 @@ public final class DebugProtoBuf {
      *isNotDefault
      *isExternal
      *isInline
-     *If getter_flags or setter_flags are absent, their value should be computed as follows:
-     *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+     *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+     *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
      *- all other flags are false
      * </pre>
      */
@@ -23335,7 +23335,7 @@ public final class DebugProtoBuf {
     private Property(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -23489,10 +23489,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
@@ -23528,7 +23528,7 @@ public final class DebugProtoBuf {
       public Property parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Property(input, extensionRegistry);
       }
     };
@@ -23784,19 +23784,19 @@ public final class DebugProtoBuf {
     public static final int SETTER_VALUE_PARAMETER_FIELD_NUMBER = 6;
     private org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter setterValueParameter_;
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     public boolean hasSetterValueParameter() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getSetterValueParameter() {
       return setterValueParameter_;
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getSetterValueParameterOrBuilder() {
       return setterValueParameter_;
@@ -23814,8 +23814,8 @@ public final class DebugProtoBuf {
      *isNotDefault
      *isExternal
      *isInline
-     *If getter_flags or setter_flags are absent, their value should be computed as follows:
-     *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+     *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+     *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
      *- all other flags are false
      * </pre>
      */
@@ -23832,8 +23832,8 @@ public final class DebugProtoBuf {
      *isNotDefault
      *isExternal
      *isInline
-     *If getter_flags or setter_flags are absent, their value should be computed as follows:
-     *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+     *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+     *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
      *- all other flags are false
      * </pre>
      */
@@ -24102,23 +24102,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parseFrom(java.io.InputStream input)
@@ -24539,7 +24539,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Property parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Property) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -24615,9 +24615,9 @@ public final class DebugProtoBuf {
        *isExpect
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -24663,9 +24663,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 old_flags = 1 [default = 2054];</code>
        */
-      public Builder setOldFlags(int value) {
+      public Builder setOldFlags(int konstue) {
         bitField0_ |= 0x00000002;
-        oldFlags_ = value;
+        oldFlags_ = konstue;
         onChanged();
         return this;
       }
@@ -24695,9 +24695,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 name = 2;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000004;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -24733,15 +24733,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type return_type = 3;</code>
        */
-      public Builder setReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (returnTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          returnType_ = value;
+          returnType_ = konstue;
           onChanged();
         } else {
-          returnTypeBuilder_.setMessage(value);
+          returnTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -24763,18 +24763,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type return_type = 3;</code>
        */
-      public Builder mergeReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeReturnType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (returnTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               returnType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             returnType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(returnType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(returnType_).mergeFrom(konstue).buildPartial();
           } else {
-            returnType_ = value;
+            returnType_ = konstue;
           }
           onChanged();
         } else {
-          returnTypeBuilder_.mergeFrom(value);
+          returnTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -24843,9 +24843,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 return_type_id = 9;</code>
        */
-      public Builder setReturnTypeId(int value) {
+      public Builder setReturnTypeId(int konstue) {
         bitField0_ |= 0x00000010;
-        returnTypeId_ = value;
+        returnTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -24905,16 +24905,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder setTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.set(index, value);
+          typeParameter_.set(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.setMessage(index, value);
+          typeParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -24935,16 +24935,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
-      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(value);
+          typeParameter_.add(konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(value);
+          typeParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -24952,16 +24952,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder addTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(index, value);
+          typeParameter_.add(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(index, value);
+          typeParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -24997,14 +24997,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 4;</code>
        */
       public Builder addAllTypeParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> konstues) {
         if (typeParameterBuilder_ == null) {
           ensureTypeParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeParameter_);
+              konstues, typeParameter_);
           onChanged();
         } else {
-          typeParameterBuilder_.addAllMessages(values);
+          typeParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -25121,15 +25121,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type receiver_type = 5;</code>
        */
-      public Builder setReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (receiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          receiverType_ = value;
+          receiverType_ = konstue;
           onChanged();
         } else {
-          receiverTypeBuilder_.setMessage(value);
+          receiverTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000040;
         return this;
@@ -25151,18 +25151,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type receiver_type = 5;</code>
        */
-      public Builder mergeReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (receiverTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
               receiverType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             receiverType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(receiverType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(receiverType_).mergeFrom(konstue).buildPartial();
           } else {
-            receiverType_ = value;
+            receiverType_ = konstue;
           }
           onChanged();
         } else {
-          receiverTypeBuilder_.mergeFrom(value);
+          receiverTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000040;
         return this;
@@ -25231,9 +25231,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 receiver_type_id = 10;</code>
        */
-      public Builder setReceiverTypeId(int value) {
+      public Builder setReceiverTypeId(int konstue) {
         bitField0_ |= 0x00000080;
-        receiverTypeId_ = value;
+        receiverTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -25293,16 +25293,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 12;</code>
        */
       public Builder setContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.set(index, value);
+          contextReceiverType_.set(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.setMessage(index, value);
+          contextReceiverTypeBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -25323,16 +25323,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 12;</code>
        */
-      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder addContextReceiverType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(value);
+          contextReceiverType_.add(konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(value);
+          contextReceiverTypeBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -25340,16 +25340,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 12;</code>
        */
       public Builder addContextReceiverType(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (contextReceiverTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureContextReceiverTypeIsMutable();
-          contextReceiverType_.add(index, value);
+          contextReceiverType_.add(index, konstue);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addMessage(index, value);
+          contextReceiverTypeBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -25385,14 +25385,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Type context_receiver_type = 12;</code>
        */
       public Builder addAllContextReceiverType(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Type> konstues) {
         if (contextReceiverTypeBuilder_ == null) {
           ensureContextReceiverTypeIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, contextReceiverType_);
+              konstues, contextReceiverType_);
           onChanged();
         } else {
-          contextReceiverTypeBuilder_.addAllMessages(values);
+          contextReceiverTypeBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -25517,18 +25517,18 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 13 [packed = true];</code>
        */
       public Builder setContextReceiverTypeId(
-          int index, int value) {
+          int index, int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.set(index, value);
+        contextReceiverTypeId_.set(index, konstue);
         onChanged();
         return this;
       }
       /**
        * <code>repeated int32 context_receiver_type_id = 13 [packed = true];</code>
        */
-      public Builder addContextReceiverTypeId(int value) {
+      public Builder addContextReceiverTypeId(int konstue) {
         ensureContextReceiverTypeIdIsMutable();
-        contextReceiverTypeId_.add(value);
+        contextReceiverTypeId_.add(konstue);
         onChanged();
         return this;
       }
@@ -25536,10 +25536,10 @@ public final class DebugProtoBuf {
        * <code>repeated int32 context_receiver_type_id = 13 [packed = true];</code>
        */
       public Builder addAllContextReceiverTypeId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureContextReceiverTypeIdIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, contextReceiverTypeId_);
+            konstues, contextReceiverTypeId_);
         onChanged();
         return this;
       }
@@ -25557,13 +25557,13 @@ public final class DebugProtoBuf {
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> setterValueParameterBuilder_;
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public boolean hasSetterValueParameter() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter getSetterValueParameter() {
         if (setterValueParameterBuilder_ == null) {
@@ -25573,23 +25573,23 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
-      public Builder setSetterValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
+      public Builder setSetterValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
         if (setterValueParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          setterValueParameter_ = value;
+          setterValueParameter_ = konstue;
           onChanged();
         } else {
-          setterValueParameterBuilder_.setMessage(value);
+          setterValueParameterBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000400;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public Builder setSetterValueParameter(
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder builderForValue) {
@@ -25603,26 +25603,26 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
-      public Builder mergeSetterValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter value) {
+      public Builder mergeSetterValueParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter konstue) {
         if (setterValueParameterBuilder_ == null) {
           if (((bitField0_ & 0x00000400) == 0x00000400) &&
               setterValueParameter_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.getDefaultInstance()) {
             setterValueParameter_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.newBuilder(setterValueParameter_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.newBuilder(setterValueParameter_).mergeFrom(konstue).buildPartial();
           } else {
-            setterValueParameter_ = value;
+            setterValueParameter_ = konstue;
           }
           onChanged();
         } else {
-          setterValueParameterBuilder_.mergeFrom(value);
+          setterValueParameterBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000400;
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public Builder clearSetterValueParameter() {
         if (setterValueParameterBuilder_ == null) {
@@ -25635,7 +25635,7 @@ public final class DebugProtoBuf {
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder getSetterValueParameterBuilder() {
         bitField0_ |= 0x00000400;
@@ -25643,7 +25643,7 @@ public final class DebugProtoBuf {
         return getSetterValueParameterFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder getSetterValueParameterOrBuilder() {
         if (setterValueParameterBuilder_ != null) {
@@ -25653,7 +25653,7 @@ public final class DebugProtoBuf {
         }
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_value_parameter = 6;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.ValueParameter setter_konstue_parameter = 6;</code>
        */
       private org.jetbrains.kotlin.protobuf.SingleFieldBuilder<
           org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter.Builder, org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameterOrBuilder> 
@@ -25680,8 +25680,8 @@ public final class DebugProtoBuf {
        *isNotDefault
        *isExternal
        *isInline
-       *If getter_flags or setter_flags are absent, their value should be computed as follows:
-       *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+       *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+       *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
        *- all other flags are false
        * </pre>
        */
@@ -25698,8 +25698,8 @@ public final class DebugProtoBuf {
        *isNotDefault
        *isExternal
        *isInline
-       *If getter_flags or setter_flags are absent, their value should be computed as follows:
-       *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+       *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+       *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
        *- all other flags are false
        * </pre>
        */
@@ -25716,14 +25716,14 @@ public final class DebugProtoBuf {
        *isNotDefault
        *isExternal
        *isInline
-       *If getter_flags or setter_flags are absent, their value should be computed as follows:
-       *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+       *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+       *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
        *- all other flags are false
        * </pre>
        */
-      public Builder setGetterFlags(int value) {
+      public Builder setGetterFlags(int konstue) {
         bitField0_ |= 0x00000800;
-        getterFlags_ = value;
+        getterFlags_ = konstue;
         onChanged();
         return this;
       }
@@ -25737,8 +25737,8 @@ public final class DebugProtoBuf {
        *isNotDefault
        *isExternal
        *isInline
-       *If getter_flags or setter_flags are absent, their value should be computed as follows:
-       *- hasAnnotations, Visibility, Modality have the same value as in the property flags
+       *If getter_flags or setter_flags are absent, their konstue should be computed as follows:
+       *- hasAnnotations, Visibility, Modality have the same konstue as in the property flags
        *- all other flags are false
        * </pre>
        */
@@ -25765,9 +25765,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 setter_flags = 8;</code>
        */
-      public Builder setSetterFlags(int value) {
+      public Builder setSetterFlags(int konstue) {
         bitField0_ |= 0x00001000;
-        setterFlags_ = value;
+        setterFlags_ = konstue;
         onChanged();
         return this;
       }
@@ -25827,9 +25827,9 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder setVersionRequirement(
-          int index, int value) {
+          int index, int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.set(index, value);
+        versionRequirement_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -25840,9 +25840,9 @@ public final class DebugProtoBuf {
        * Index into the VersionRequirementTable
        * </pre>
        */
-      public Builder addVersionRequirement(int value) {
+      public Builder addVersionRequirement(int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.add(value);
+        versionRequirement_.add(konstue);
         onChanged();
         return this;
       }
@@ -25854,10 +25854,10 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder addAllVersionRequirement(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureVersionRequirementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, versionRequirement_);
+            konstues, versionRequirement_);
         onChanged();
         return this;
       }
@@ -26000,7 +26000,7 @@ public final class DebugProtoBuf {
     private ValueParameter(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -26068,10 +26068,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -26095,7 +26095,7 @@ public final class DebugProtoBuf {
       public ValueParameter parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new ValueParameter(input, extensionRegistry);
       }
     };
@@ -26333,23 +26333,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parseFrom(java.io.InputStream input)
@@ -26589,7 +26589,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.ValueParameter) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -26638,9 +26638,9 @@ public final class DebugProtoBuf {
        *isNoinline
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -26677,9 +26677,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 name = 2;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000002;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -26715,15 +26715,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
        */
-      public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (typeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          type_ = value;
+          type_ = konstue;
           onChanged();
         } else {
-          typeBuilder_.setMessage(value);
+          typeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -26745,18 +26745,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type type = 3;</code>
        */
-      public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (typeBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
               type_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             type_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(type_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(type_).mergeFrom(konstue).buildPartial();
           } else {
-            type_ = value;
+            type_ = konstue;
           }
           onChanged();
         } else {
-          typeBuilder_.mergeFrom(value);
+          typeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -26825,9 +26825,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 type_id = 5;</code>
        */
-      public Builder setTypeId(int value) {
+      public Builder setTypeId(int konstue) {
         bitField0_ |= 0x00000008;
-        typeId_ = value;
+        typeId_ = konstue;
         onChanged();
         return this;
       }
@@ -26863,15 +26863,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type vararg_element_type = 4;</code>
        */
-      public Builder setVarargElementType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setVarargElementType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (varargElementTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          varargElementType_ = value;
+          varargElementType_ = konstue;
           onChanged();
         } else {
-          varargElementTypeBuilder_.setMessage(value);
+          varargElementTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;
@@ -26893,18 +26893,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type vararg_element_type = 4;</code>
        */
-      public Builder mergeVarargElementType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeVarargElementType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (varargElementTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
               varargElementType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             varargElementType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(varargElementType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(varargElementType_).mergeFrom(konstue).buildPartial();
           } else {
-            varargElementType_ = value;
+            varargElementType_ = konstue;
           }
           onChanged();
         } else {
-          varargElementTypeBuilder_.mergeFrom(value);
+          varargElementTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000010;
         return this;
@@ -26973,9 +26973,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 vararg_element_type_id = 6;</code>
        */
-      public Builder setVarargElementTypeId(int value) {
+      public Builder setVarargElementTypeId(int konstue) {
         bitField0_ |= 0x00000020;
-        varargElementTypeId_ = value;
+        varargElementTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -27183,7 +27183,7 @@ public final class DebugProtoBuf {
     private TypeAlias(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -27288,10 +27288,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
@@ -27324,7 +27324,7 @@ public final class DebugProtoBuf {
       public TypeAlias parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new TypeAlias(input, extensionRegistry);
       }
     };
@@ -27703,23 +27703,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parseFrom(java.io.InputStream input)
@@ -28072,7 +28072,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeAlias) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -28115,9 +28115,9 @@ public final class DebugProtoBuf {
        *Visibility
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -28152,9 +28152,9 @@ public final class DebugProtoBuf {
       /**
        * <code>required int32 name = 2;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000002;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -28214,16 +28214,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 3;</code>
        */
       public Builder setTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.set(index, value);
+          typeParameter_.set(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.setMessage(index, value);
+          typeParameterBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -28244,16 +28244,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 3;</code>
        */
-      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+      public Builder addTypeParameter(org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(value);
+          typeParameter_.add(konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(value);
+          typeParameterBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -28261,16 +28261,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 3;</code>
        */
       public Builder addTypeParameter(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter konstue) {
         if (typeParameterBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureTypeParameterIsMutable();
-          typeParameter_.add(index, value);
+          typeParameter_.add(index, konstue);
           onChanged();
         } else {
-          typeParameterBuilder_.addMessage(index, value);
+          typeParameterBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -28306,14 +28306,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.TypeParameter type_parameter = 3;</code>
        */
       public Builder addAllTypeParameter(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.TypeParameter> konstues) {
         if (typeParameterBuilder_ == null) {
           ensureTypeParameterIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, typeParameter_);
+              konstues, typeParameter_);
           onChanged();
         } else {
-          typeParameterBuilder_.addAllMessages(values);
+          typeParameterBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -28430,15 +28430,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type underlying_type = 4;</code>
        */
-      public Builder setUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (underlyingTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          underlyingType_ = value;
+          underlyingType_ = konstue;
           onChanged();
         } else {
-          underlyingTypeBuilder_.setMessage(value);
+          underlyingTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -28460,18 +28460,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type underlying_type = 4;</code>
        */
-      public Builder mergeUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeUnderlyingType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (underlyingTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               underlyingType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             underlyingType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(underlyingType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(underlyingType_).mergeFrom(konstue).buildPartial();
           } else {
-            underlyingType_ = value;
+            underlyingType_ = konstue;
           }
           onChanged();
         } else {
-          underlyingTypeBuilder_.mergeFrom(value);
+          underlyingTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -28540,9 +28540,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 underlying_type_id = 5;</code>
        */
-      public Builder setUnderlyingTypeId(int value) {
+      public Builder setUnderlyingTypeId(int konstue) {
         bitField0_ |= 0x00000010;
-        underlyingTypeId_ = value;
+        underlyingTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -28578,15 +28578,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type expanded_type = 6;</code>
        */
-      public Builder setExpandedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setExpandedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (expandedTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          expandedType_ = value;
+          expandedType_ = konstue;
           onChanged();
         } else {
-          expandedTypeBuilder_.setMessage(value);
+          expandedTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000020;
         return this;
@@ -28608,18 +28608,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Type expanded_type = 6;</code>
        */
-      public Builder mergeExpandedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeExpandedType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (expandedTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020) &&
               expandedType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             expandedType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(expandedType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(expandedType_).mergeFrom(konstue).buildPartial();
           } else {
-            expandedType_ = value;
+            expandedType_ = konstue;
           }
           onChanged();
         } else {
-          expandedTypeBuilder_.mergeFrom(value);
+          expandedTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000020;
         return this;
@@ -28688,9 +28688,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 expanded_type_id = 7;</code>
        */
-      public Builder setExpandedTypeId(int value) {
+      public Builder setExpandedTypeId(int konstue) {
         bitField0_ |= 0x00000040;
-        expandedTypeId_ = value;
+        expandedTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -28750,16 +28750,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
        */
       public Builder setAnnotation(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation konstue) {
         if (annotationBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAnnotationIsMutable();
-          annotation_.set(index, value);
+          annotation_.set(index, konstue);
           onChanged();
         } else {
-          annotationBuilder_.setMessage(index, value);
+          annotationBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -28780,16 +28780,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
        */
-      public Builder addAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation value) {
+      public Builder addAnnotation(org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation konstue) {
         if (annotationBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAnnotationIsMutable();
-          annotation_.add(value);
+          annotation_.add(konstue);
           onChanged();
         } else {
-          annotationBuilder_.addMessage(value);
+          annotationBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -28797,16 +28797,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
        */
       public Builder addAnnotation(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation konstue) {
         if (annotationBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAnnotationIsMutable();
-          annotation_.add(index, value);
+          annotation_.add(index, konstue);
           onChanged();
         } else {
-          annotationBuilder_.addMessage(index, value);
+          annotationBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -28842,14 +28842,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Annotation annotation = 8;</code>
        */
       public Builder addAllAnnotation(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Annotation> konstues) {
         if (annotationBuilder_ == null) {
           ensureAnnotationIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, annotation_);
+              konstues, annotation_);
           onChanged();
         } else {
-          annotationBuilder_.addAllMessages(values);
+          annotationBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -28990,9 +28990,9 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder setVersionRequirement(
-          int index, int value) {
+          int index, int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.set(index, value);
+        versionRequirement_.set(index, konstue);
         onChanged();
         return this;
       }
@@ -29003,9 +29003,9 @@ public final class DebugProtoBuf {
        * Index into the VersionRequirementTable
        * </pre>
        */
-      public Builder addVersionRequirement(int value) {
+      public Builder addVersionRequirement(int konstue) {
         ensureVersionRequirementIsMutable();
-        versionRequirement_.add(value);
+        versionRequirement_.add(konstue);
         onChanged();
         return this;
       }
@@ -29017,10 +29017,10 @@ public final class DebugProtoBuf {
        * </pre>
        */
       public Builder addAllVersionRequirement(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Integer> konstues) {
         ensureVersionRequirementIsMutable();
         org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-            values, versionRequirement_);
+            konstues, versionRequirement_);
         onChanged();
         return this;
       }
@@ -29096,7 +29096,7 @@ public final class DebugProtoBuf {
     private EnumEntry(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -29123,10 +29123,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -29150,7 +29150,7 @@ public final class DebugProtoBuf {
       public EnumEntry parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new EnumEntry(input, extensionRegistry);
       }
     };
@@ -29231,23 +29231,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parseFrom(java.io.InputStream input)
@@ -29408,7 +29408,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.EnumEntry) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -29436,9 +29436,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 name = 1;</code>
        */
-      public Builder setName(int value) {
+      public Builder setName(int konstue) {
         bitField0_ |= 0x00000001;
-        name_ = value;
+        name_ = konstue;
         onChanged();
         return this;
       }
@@ -29473,7 +29473,7 @@ public final class DebugProtoBuf {
      * <pre>
      * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
      * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-     * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+     * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
      * </pre>
      */
     boolean hasVersion();
@@ -29483,7 +29483,7 @@ public final class DebugProtoBuf {
      * <pre>
      * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
      * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-     * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+     * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
      * </pre>
      */
     int getVersion();
@@ -29563,7 +29563,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-     * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+     * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
      * </pre>
      */
     boolean hasVersionKind();
@@ -29572,7 +29572,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-     * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+     * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
      * </pre>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind getVersionKind();
@@ -29609,7 +29609,7 @@ public final class DebugProtoBuf {
     private VersionRequirement(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -29641,12 +29641,12 @@ public final class DebugProtoBuf {
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level value = org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                level_ = value;
+                level_ = konstue;
               }
               break;
             }
@@ -29662,21 +29662,21 @@ public final class DebugProtoBuf {
             }
             case 48: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind value = org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(6, rawValue);
               } else {
                 bitField0_ |= 0x00000020;
-                versionKind_ = value;
+                versionKind_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
@@ -29700,7 +29700,7 @@ public final class DebugProtoBuf {
       public VersionRequirement parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new VersionRequirement(input, extensionRegistry);
       }
     };
@@ -29743,10 +29743,10 @@ public final class DebugProtoBuf {
       public static final int HIDDEN_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static Level valueOf(int value) {
-        switch (value) {
+      public static Level konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return WARNING;
           case 1: return ERROR;
           case 2: return HIDDEN;
@@ -29762,7 +29762,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<Level>() {
               public Level findValueByNumber(int number) {
-                return Level.valueOf(number);
+                return Level.konstueOf(number);
               }
             };
 
@@ -29779,9 +29779,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Level[] VALUES = values();
+      private static final Level[] VALUES = konstues();
 
-      public static Level valueOf(
+      public static Level konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -29791,11 +29791,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private Level(int index, int value) {
+      private Level(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.VersionRequirement.Level)
@@ -29834,10 +29834,10 @@ public final class DebugProtoBuf {
       public static final int API_VERSION_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static VersionKind valueOf(int value) {
-        switch (value) {
+      public static VersionKind konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return LANGUAGE_VERSION;
           case 1: return COMPILER_VERSION;
           case 2: return API_VERSION;
@@ -29853,7 +29853,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<VersionKind>() {
               public VersionKind findValueByNumber(int number) {
-                return VersionKind.valueOf(number);
+                return VersionKind.konstueOf(number);
               }
             };
 
@@ -29870,9 +29870,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.getDescriptor().getEnumTypes().get(1);
       }
 
-      private static final VersionKind[] VALUES = values();
+      private static final VersionKind[] VALUES = konstues();
 
-      public static VersionKind valueOf(
+      public static VersionKind konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -29882,11 +29882,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private VersionKind(int index, int value) {
+      private VersionKind(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.VersionRequirement.VersionKind)
@@ -29901,7 +29901,7 @@ public final class DebugProtoBuf {
      * <pre>
      * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
      * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-     * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+     * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
      * </pre>
      */
     public boolean hasVersion() {
@@ -29913,7 +29913,7 @@ public final class DebugProtoBuf {
      * <pre>
      * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
      * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-     * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+     * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
      * </pre>
      */
     public int getVersion() {
@@ -30021,7 +30021,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-     * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+     * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
      * </pre>
      */
     public boolean hasVersionKind() {
@@ -30032,7 +30032,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-     * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+     * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
      * </pre>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind getVersionKind() {
@@ -30125,23 +30125,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parseFrom(java.io.InputStream input)
@@ -30341,7 +30341,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -30360,7 +30360,7 @@ public final class DebugProtoBuf {
        * <pre>
        * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
        * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-       * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+       * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
        * </pre>
        */
       public boolean hasVersion() {
@@ -30372,7 +30372,7 @@ public final class DebugProtoBuf {
        * <pre>
        * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
        * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-       * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+       * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
        * </pre>
        */
       public int getVersion() {
@@ -30384,12 +30384,12 @@ public final class DebugProtoBuf {
        * <pre>
        * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
        * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-       * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+       * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
        * </pre>
        */
-      public Builder setVersion(int value) {
+      public Builder setVersion(int konstue) {
         bitField0_ |= 0x00000001;
-        version_ = value;
+        version_ = konstue;
         onChanged();
         return this;
       }
@@ -30399,7 +30399,7 @@ public final class DebugProtoBuf {
        * <pre>
        * Kotlin version, since which this declaration is accessible, in the following format (encoded version is "major.minor.patch"):
        * (patch &lt;&lt; 7) + (minor &lt;&lt; 3) + major
-       * Compilers with version less than this value should report a diagnostic if this declaration is selected as the resolution result
+       * Compilers with version less than this konstue should report a diagnostic if this declaration is selected as the resolution result
        * </pre>
        */
       public Builder clearVersion() {
@@ -30440,9 +30440,9 @@ public final class DebugProtoBuf {
        * (patch &lt;&lt; 16) + (minor &lt;&lt; 8) + major
        * </pre>
        */
-      public Builder setVersionFull(int value) {
+      public Builder setVersionFull(int konstue) {
         bitField0_ |= 0x00000002;
-        versionFull_ = value;
+        versionFull_ = konstue;
         onChanged();
         return this;
       }
@@ -30489,12 +30489,12 @@ public final class DebugProtoBuf {
        * Level of the reported diagnostic
        * </pre>
        */
-      public Builder setLevel(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level value) {
-        if (value == null) {
+      public Builder setLevel(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.Level konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        level_ = value;
+        level_ = konstue;
         onChanged();
         return this;
       }
@@ -30540,9 +30540,9 @@ public final class DebugProtoBuf {
        * Error code, to be looked up on the website
        * </pre>
        */
-      public Builder setErrorCode(int value) {
+      public Builder setErrorCode(int konstue) {
         bitField0_ |= 0x00000008;
-        errorCode_ = value;
+        errorCode_ = konstue;
         onChanged();
         return this;
       }
@@ -30588,9 +30588,9 @@ public final class DebugProtoBuf {
        * Diagnostic message
        * </pre>
        */
-      public Builder setMessage(int value) {
+      public Builder setMessage(int konstue) {
         bitField0_ |= 0x00000010;
-        message_ = value;
+        message_ = konstue;
         onChanged();
         return this;
       }
@@ -30614,7 +30614,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-       * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+       * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
        * </pre>
        */
       public boolean hasVersionKind() {
@@ -30625,7 +30625,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-       * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+       * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
        * </pre>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind getVersionKind() {
@@ -30636,15 +30636,15 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-       * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+       * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
        * </pre>
        */
-      public Builder setVersionKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind value) {
-        if (value == null) {
+      public Builder setVersionKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement.VersionKind konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000020;
-        versionKind_ = value;
+        versionKind_ = konstue;
         onChanged();
         return this;
       }
@@ -30653,7 +30653,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * Which version is this requirement for. For example, if version_kind = API_VERSION, this declaration requires the API version
-       * (the "-api-version" argument value when compiling the call site) to be of at least the specified value
+       * (the "-api-version" argument konstue when compiling the call site) to be of at least the specified konstue
        * </pre>
        */
       public Builder clearVersionKind() {
@@ -30734,7 +30734,7 @@ public final class DebugProtoBuf {
     private VersionRequirementTable(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -30764,10 +30764,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -30794,7 +30794,7 @@ public final class DebugProtoBuf {
       public VersionRequirementTable parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new VersionRequirementTable(input, extensionRegistry);
       }
     };
@@ -30885,23 +30885,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parseFrom(java.io.InputStream input)
@@ -31087,7 +31087,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirementTable) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -31145,16 +31145,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.VersionRequirement requirement = 1;</code>
        */
       public Builder setRequirement(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement konstue) {
         if (requirementBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRequirementIsMutable();
-          requirement_.set(index, value);
+          requirement_.set(index, konstue);
           onChanged();
         } else {
-          requirementBuilder_.setMessage(index, value);
+          requirementBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -31175,16 +31175,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.VersionRequirement requirement = 1;</code>
        */
-      public Builder addRequirement(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement value) {
+      public Builder addRequirement(org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement konstue) {
         if (requirementBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRequirementIsMutable();
-          requirement_.add(value);
+          requirement_.add(konstue);
           onChanged();
         } else {
-          requirementBuilder_.addMessage(value);
+          requirementBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -31192,16 +31192,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.VersionRequirement requirement = 1;</code>
        */
       public Builder addRequirement(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement konstue) {
         if (requirementBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureRequirementIsMutable();
-          requirement_.add(index, value);
+          requirement_.add(index, konstue);
           onChanged();
         } else {
-          requirementBuilder_.addMessage(index, value);
+          requirementBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -31237,14 +31237,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.VersionRequirement requirement = 1;</code>
        */
       public Builder addAllRequirement(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.VersionRequirement> konstues) {
         if (requirementBuilder_ == null) {
           ensureRequirementIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, requirement_);
+              konstues, requirement_);
           onChanged();
         } else {
-          requirementBuilder_.addAllMessages(values);
+          requirementBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -31456,7 +31456,7 @@ public final class DebugProtoBuf {
     private PackageFragment(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -31525,10 +31525,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
@@ -31555,7 +31555,7 @@ public final class DebugProtoBuf {
       public PackageFragment parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new PackageFragment(input, extensionRegistry);
       }
     };
@@ -31761,23 +31761,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parseFrom(java.io.InputStream input)
@@ -32048,7 +32048,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.PackageFragment) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -32082,15 +32082,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable strings = 1;</code>
        */
-      public Builder setStrings(org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable value) {
+      public Builder setStrings(org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable konstue) {
         if (stringsBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          strings_ = value;
+          strings_ = konstue;
           onChanged();
         } else {
-          stringsBuilder_.setMessage(value);
+          stringsBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -32112,18 +32112,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.StringTable strings = 1;</code>
        */
-      public Builder mergeStrings(org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable value) {
+      public Builder mergeStrings(org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable konstue) {
         if (stringsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
               strings_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable.getDefaultInstance()) {
             strings_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable.newBuilder(strings_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.StringTable.newBuilder(strings_).mergeFrom(konstue).buildPartial();
           } else {
-            strings_ = value;
+            strings_ = konstue;
           }
           onChanged();
         } else {
-          stringsBuilder_.mergeFrom(value);
+          stringsBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000001;
         return this;
@@ -32198,15 +32198,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_names = 2;</code>
        */
-      public Builder setQualifiedNames(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable value) {
+      public Builder setQualifiedNames(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable konstue) {
         if (qualifiedNamesBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          qualifiedNames_ = value;
+          qualifiedNames_ = konstue;
           onChanged();
         } else {
-          qualifiedNamesBuilder_.setMessage(value);
+          qualifiedNamesBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000002;
         return this;
@@ -32228,18 +32228,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.QualifiedNameTable qualified_names = 2;</code>
        */
-      public Builder mergeQualifiedNames(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable value) {
+      public Builder mergeQualifiedNames(org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable konstue) {
         if (qualifiedNamesBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
               qualifiedNames_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.getDefaultInstance()) {
             qualifiedNames_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.newBuilder(qualifiedNames_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.QualifiedNameTable.newBuilder(qualifiedNames_).mergeFrom(konstue).buildPartial();
           } else {
-            qualifiedNames_ = value;
+            qualifiedNames_ = konstue;
           }
           onChanged();
         } else {
-          qualifiedNamesBuilder_.mergeFrom(value);
+          qualifiedNamesBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000002;
         return this;
@@ -32314,15 +32314,15 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Package package = 3;</code>
        */
-      public Builder setPackage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Package value) {
+      public Builder setPackage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Package konstue) {
         if (packageBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          package_ = value;
+          package_ = konstue;
           onChanged();
         } else {
-          packageBuilder_.setMessage(value);
+          packageBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -32344,18 +32344,18 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Package package = 3;</code>
        */
-      public Builder mergePackage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Package value) {
+      public Builder mergePackage(org.jetbrains.kotlin.metadata.DebugProtoBuf.Package konstue) {
         if (packageBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
               package_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Package.getDefaultInstance()) {
             package_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Package.newBuilder(package_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Package.newBuilder(package_).mergeFrom(konstue).buildPartial();
           } else {
-            package_ = value;
+            package_ = konstue;
           }
           onChanged();
         } else {
-          packageBuilder_.mergeFrom(value);
+          packageBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -32454,16 +32454,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Class class = 4;</code>
        */
       public Builder setClass_(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Class value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Class konstue) {
         if (class_Builder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureClass_IsMutable();
-          class__.set(index, value);
+          class__.set(index, konstue);
           onChanged();
         } else {
-          class_Builder_.setMessage(index, value);
+          class_Builder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -32484,16 +32484,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Class class = 4;</code>
        */
-      public Builder addClass_(org.jetbrains.kotlin.metadata.DebugProtoBuf.Class value) {
+      public Builder addClass_(org.jetbrains.kotlin.metadata.DebugProtoBuf.Class konstue) {
         if (class_Builder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureClass_IsMutable();
-          class__.add(value);
+          class__.add(konstue);
           onChanged();
         } else {
-          class_Builder_.addMessage(value);
+          class_Builder_.addMessage(konstue);
         }
         return this;
       }
@@ -32501,16 +32501,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Class class = 4;</code>
        */
       public Builder addClass_(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Class value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Class konstue) {
         if (class_Builder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureClass_IsMutable();
-          class__.add(index, value);
+          class__.add(index, konstue);
           onChanged();
         } else {
-          class_Builder_.addMessage(index, value);
+          class_Builder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -32546,14 +32546,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Class class = 4;</code>
        */
       public Builder addAllClass_(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Class> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Class> konstues) {
         if (class_Builder_ == null) {
           ensureClass_IsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, class__);
+              konstues, class__);
           onChanged();
         } else {
-          class_Builder_.addAllMessages(values);
+          class_Builder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -32719,7 +32719,7 @@ public final class DebugProtoBuf {
     private Contract(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -32749,10 +32749,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -32779,7 +32779,7 @@ public final class DebugProtoBuf {
       public Contract parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Contract(input, extensionRegistry);
       }
     };
@@ -32876,23 +32876,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parseFrom(java.io.InputStream input)
@@ -33084,7 +33084,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Contract) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -33142,16 +33142,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Effect effect = 1;</code>
        */
       public Builder setEffect(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect konstue) {
         if (effectBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectIsMutable();
-          effect_.set(index, value);
+          effect_.set(index, konstue);
           onChanged();
         } else {
-          effectBuilder_.setMessage(index, value);
+          effectBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -33172,16 +33172,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Effect effect = 1;</code>
        */
-      public Builder addEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect value) {
+      public Builder addEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect konstue) {
         if (effectBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectIsMutable();
-          effect_.add(value);
+          effect_.add(konstue);
           onChanged();
         } else {
-          effectBuilder_.addMessage(value);
+          effectBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -33189,16 +33189,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Effect effect = 1;</code>
        */
       public Builder addEffect(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect konstue) {
         if (effectBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectIsMutable();
-          effect_.add(index, value);
+          effect_.add(index, konstue);
           onChanged();
         } else {
-          effectBuilder_.addMessage(index, value);
+          effectBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -33234,14 +33234,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Effect effect = 1;</code>
        */
       public Builder addAllEffect(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect> konstues) {
         if (effectBuilder_ == null) {
           ensureEffectIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, effect_);
+              konstues, effect_);
           onChanged();
         } else {
-          effectBuilder_.addAllMessages(values);
+          effectBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -33453,7 +33453,7 @@ public final class DebugProtoBuf {
     private Effect(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -33475,12 +33475,12 @@ public final class DebugProtoBuf {
             }
             case 8: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType value = org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                effectType_ = value;
+                effectType_ = konstue;
               }
               break;
             }
@@ -33507,21 +33507,21 @@ public final class DebugProtoBuf {
             }
             case 32: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind value = org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                kind_ = value;
+                kind_ = konstue;
               }
               break;
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
@@ -33548,7 +33548,7 @@ public final class DebugProtoBuf {
       public Effect parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Effect(input, extensionRegistry);
       }
     };
@@ -33564,7 +33564,7 @@ public final class DebugProtoBuf {
      * <pre>
      * This enum controls which effect this message contains and how 'effectConstructorArguments'
      * should be parsed.
-     * Each enum value documented in the following syntax: "EffectName(arg1: T1, arg2: T2, ...)"
+     * Each enum konstue documented in the following syntax: "EffectName(arg1: T1, arg2: T2, ...)"
      * Those arguments are expected to be found in 'effectConstructorArguments' in exactly the same
      * order and amount as defined by signature, otherwise message should be dropped.
      * </pre>
@@ -33575,7 +33575,7 @@ public final class DebugProtoBuf {
        * <code>RETURNS_CONSTANT = 0;</code>
        *
        * <pre>
-       * Returns(value: ConstantValue?)
+       * Returns(konstue: ConstantValue?)
        * </pre>
        */
       RETURNS_CONSTANT(0, 0),
@@ -33602,7 +33602,7 @@ public final class DebugProtoBuf {
        * <code>RETURNS_CONSTANT = 0;</code>
        *
        * <pre>
-       * Returns(value: ConstantValue?)
+       * Returns(konstue: ConstantValue?)
        * </pre>
        */
       public static final int RETURNS_CONSTANT_VALUE = 0;
@@ -33625,10 +33625,10 @@ public final class DebugProtoBuf {
       public static final int RETURNS_NOT_NULL_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static EffectType valueOf(int value) {
-        switch (value) {
+      public static EffectType konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return RETURNS_CONSTANT;
           case 1: return CALLS;
           case 2: return RETURNS_NOT_NULL;
@@ -33644,7 +33644,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<EffectType>() {
               public EffectType findValueByNumber(int number) {
-                return EffectType.valueOf(number);
+                return EffectType.konstueOf(number);
               }
             };
 
@@ -33661,9 +33661,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final EffectType[] VALUES = values();
+      private static final EffectType[] VALUES = konstues();
 
-      public static EffectType valueOf(
+      public static EffectType konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -33673,11 +33673,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private EffectType(int index, int value) {
+      private EffectType(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Effect.EffectType)
@@ -33716,10 +33716,10 @@ public final class DebugProtoBuf {
       public static final int AT_LEAST_ONCE_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static InvocationKind valueOf(int value) {
-        switch (value) {
+      public static InvocationKind konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return AT_MOST_ONCE;
           case 1: return EXACTLY_ONCE;
           case 2: return AT_LEAST_ONCE;
@@ -33735,7 +33735,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<InvocationKind>() {
               public InvocationKind findValueByNumber(int number) {
-                return InvocationKind.valueOf(number);
+                return InvocationKind.konstueOf(number);
               }
             };
 
@@ -33752,9 +33752,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.getDescriptor().getEnumTypes().get(1);
       }
 
-      private static final InvocationKind[] VALUES = values();
+      private static final InvocationKind[] VALUES = konstues();
 
-      public static InvocationKind valueOf(
+      public static InvocationKind konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -33764,11 +33764,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private InvocationKind(int index, int value) {
+      private InvocationKind(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Effect.InvocationKind)
@@ -33958,23 +33958,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parseFrom(java.io.InputStream input)
@@ -34210,7 +34210,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -34238,12 +34238,12 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Effect.EffectType effect_type = 1;</code>
        */
-      public Builder setEffectType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType value) {
-        if (value == null) {
+      public Builder setEffectType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.EffectType konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        effectType_ = value;
+        effectType_ = konstue;
         onChanged();
         return this;
       }
@@ -34303,16 +34303,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Expression effect_constructor_argument = 2;</code>
        */
       public Builder setEffectConstructorArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (effectConstructorArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectConstructorArgumentIsMutable();
-          effectConstructorArgument_.set(index, value);
+          effectConstructorArgument_.set(index, konstue);
           onChanged();
         } else {
-          effectConstructorArgumentBuilder_.setMessage(index, value);
+          effectConstructorArgumentBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -34333,16 +34333,16 @@ public final class DebugProtoBuf {
       /**
        * <code>repeated .org.jetbrains.kotlin.metadata.Expression effect_constructor_argument = 2;</code>
        */
-      public Builder addEffectConstructorArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+      public Builder addEffectConstructorArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (effectConstructorArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectConstructorArgumentIsMutable();
-          effectConstructorArgument_.add(value);
+          effectConstructorArgument_.add(konstue);
           onChanged();
         } else {
-          effectConstructorArgumentBuilder_.addMessage(value);
+          effectConstructorArgumentBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -34350,16 +34350,16 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Expression effect_constructor_argument = 2;</code>
        */
       public Builder addEffectConstructorArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (effectConstructorArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureEffectConstructorArgumentIsMutable();
-          effectConstructorArgument_.add(index, value);
+          effectConstructorArgument_.add(index, konstue);
           onChanged();
         } else {
-          effectConstructorArgumentBuilder_.addMessage(index, value);
+          effectConstructorArgumentBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -34395,14 +34395,14 @@ public final class DebugProtoBuf {
        * <code>repeated .org.jetbrains.kotlin.metadata.Expression effect_constructor_argument = 2;</code>
        */
       public Builder addAllEffectConstructorArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> konstues) {
         if (effectConstructorArgumentBuilder_ == null) {
           ensureEffectConstructorArgumentIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, effectConstructorArgument_);
+              konstues, effectConstructorArgument_);
           onChanged();
         } else {
-          effectConstructorArgumentBuilder_.addAllMessages(values);
+          effectConstructorArgumentBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -34534,15 +34534,15 @@ public final class DebugProtoBuf {
        * is given by other fields in this message, and 'Expression' is stored in this field.
        * </pre>
        */
-      public Builder setConclusionOfConditionalEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+      public Builder setConclusionOfConditionalEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (conclusionOfConditionalEffectBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          conclusionOfConditionalEffect_ = value;
+          conclusionOfConditionalEffect_ = konstue;
           onChanged();
         } else {
-          conclusionOfConditionalEffectBuilder_.setMessage(value);
+          conclusionOfConditionalEffectBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -34574,18 +34574,18 @@ public final class DebugProtoBuf {
        * is given by other fields in this message, and 'Expression' is stored in this field.
        * </pre>
        */
-      public Builder mergeConclusionOfConditionalEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+      public Builder mergeConclusionOfConditionalEffect(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (conclusionOfConditionalEffectBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
               conclusionOfConditionalEffect_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.getDefaultInstance()) {
             conclusionOfConditionalEffect_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.newBuilder(conclusionOfConditionalEffect_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.newBuilder(conclusionOfConditionalEffect_).mergeFrom(konstue).buildPartial();
           } else {
-            conclusionOfConditionalEffect_ = value;
+            conclusionOfConditionalEffect_ = konstue;
           }
           onChanged();
         } else {
-          conclusionOfConditionalEffectBuilder_.mergeFrom(value);
+          conclusionOfConditionalEffectBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000004;
         return this;
@@ -34674,12 +34674,12 @@ public final class DebugProtoBuf {
       /**
        * <code>optional .org.jetbrains.kotlin.metadata.Effect.InvocationKind kind = 4;</code>
        */
-      public Builder setKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind value) {
-        if (value == null) {
+      public Builder setKind(org.jetbrains.kotlin.metadata.DebugProtoBuf.Effect.InvocationKind konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000008;
-        kind_ = value;
+        kind_ = konstue;
         onChanged();
         return this;
       }
@@ -34728,30 +34728,30 @@ public final class DebugProtoBuf {
     int getFlags();
 
     /**
-     * <code>optional int32 value_parameter_reference = 2;</code>
+     * <code>optional int32 konstue_parameter_reference = 2;</code>
      *
      * <pre>
-     * stored as index in valueParameters list of owner-function in 1-indexation
+     * stored as index in konstueParameters list of owner-function in 1-indexation
      * Index '0' is reserved for extension receiver
      * </pre>
      */
     boolean hasValueParameterReference();
     /**
-     * <code>optional int32 value_parameter_reference = 2;</code>
+     * <code>optional int32 konstue_parameter_reference = 2;</code>
      *
      * <pre>
-     * stored as index in valueParameters list of owner-function in 1-indexation
+     * stored as index in konstueParameters list of owner-function in 1-indexation
      * Index '0' is reserved for extension receiver
      * </pre>
      */
     int getValueParameterReference();
 
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
      */
     boolean hasConstantValue();
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
      */
     org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue getConstantValue();
 
@@ -34797,7 +34797,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -34808,7 +34808,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -34818,7 +34818,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -34828,7 +34828,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -34839,7 +34839,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -34851,7 +34851,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -34862,7 +34862,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -34872,7 +34872,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -34882,7 +34882,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -34893,7 +34893,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -34937,7 +34937,7 @@ public final class DebugProtoBuf {
     private Expression(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       initFields();
       int mutable_bitField0_ = 0;
       org.jetbrains.kotlin.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -34964,17 +34964,17 @@ public final class DebugProtoBuf {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              valueParameterReference_ = input.readInt32();
+              konstueParameterReference_ = input.readInt32();
               break;
             }
             case 24: {
               int rawValue = input.readEnum();
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue value = org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue.valueOf(rawValue);
-              if (value == null) {
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue konstue = org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue.konstueOf(rawValue);
+              if (konstue == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
                 bitField0_ |= 0x00000004;
-                constantValue_ = value;
+                constantValue_ = konstue;
               }
               break;
             }
@@ -35014,10 +35014,10 @@ public final class DebugProtoBuf {
             }
           }
         }
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
-        throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+        throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
@@ -35047,7 +35047,7 @@ public final class DebugProtoBuf {
       public Expression parsePartialFrom(
           org.jetbrains.kotlin.protobuf.CodedInputStream input,
           org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+          throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
         return new Expression(input, extensionRegistry);
       }
     };
@@ -35090,10 +35090,10 @@ public final class DebugProtoBuf {
       public static final int NULL_VALUE = 2;
 
 
-      public final int getNumber() { return value; }
+      public final int getNumber() { return konstue; }
 
-      public static ConstantValue valueOf(int value) {
-        switch (value) {
+      public static ConstantValue konstueOf(int konstue) {
+        switch (konstue) {
           case 0: return TRUE;
           case 1: return FALSE;
           case 2: return NULL;
@@ -35109,7 +35109,7 @@ public final class DebugProtoBuf {
           internalValueMap =
             new org.jetbrains.kotlin.protobuf.Internal.EnumLiteMap<ConstantValue>() {
               public ConstantValue findValueByNumber(int number) {
-                return ConstantValue.valueOf(number);
+                return ConstantValue.konstueOf(number);
               }
             };
 
@@ -35126,9 +35126,9 @@ public final class DebugProtoBuf {
         return org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final ConstantValue[] VALUES = values();
+      private static final ConstantValue[] VALUES = konstues();
 
-      public static ConstantValue valueOf(
+      public static ConstantValue konstueOf(
           org.jetbrains.kotlin.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -35138,11 +35138,11 @@ public final class DebugProtoBuf {
       }
 
       private final int index;
-      private final int value;
+      private final int konstue;
 
-      private ConstantValue(int index, int value) {
+      private ConstantValue(int index, int konstue) {
         this.index = index;
-        this.value = value;
+        this.konstue = konstue;
       }
 
       // @@protoc_insertion_point(enum_scope:org.jetbrains.kotlin.metadata.Expression.ConstantValue)
@@ -35175,12 +35175,12 @@ public final class DebugProtoBuf {
     }
 
     public static final int VALUE_PARAMETER_REFERENCE_FIELD_NUMBER = 2;
-    private int valueParameterReference_;
+    private int konstueParameterReference_;
     /**
-     * <code>optional int32 value_parameter_reference = 2;</code>
+     * <code>optional int32 konstue_parameter_reference = 2;</code>
      *
      * <pre>
-     * stored as index in valueParameters list of owner-function in 1-indexation
+     * stored as index in konstueParameters list of owner-function in 1-indexation
      * Index '0' is reserved for extension receiver
      * </pre>
      */
@@ -35188,27 +35188,27 @@ public final class DebugProtoBuf {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 value_parameter_reference = 2;</code>
+     * <code>optional int32 konstue_parameter_reference = 2;</code>
      *
      * <pre>
-     * stored as index in valueParameters list of owner-function in 1-indexation
+     * stored as index in konstueParameters list of owner-function in 1-indexation
      * Index '0' is reserved for extension receiver
      * </pre>
      */
     public int getValueParameterReference() {
-      return valueParameterReference_;
+      return konstueParameterReference_;
     }
 
     public static final int CONSTANT_VALUE_FIELD_NUMBER = 3;
     private org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue constantValue_;
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
      */
     public boolean hasConstantValue() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+     * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
      */
     public org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue getConstantValue() {
       return constantValue_;
@@ -35272,7 +35272,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -35284,7 +35284,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -35297,7 +35297,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -35309,7 +35309,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -35321,7 +35321,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message
      * </pre>
      */
@@ -35337,7 +35337,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -35349,7 +35349,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -35362,7 +35362,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -35374,7 +35374,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -35386,7 +35386,7 @@ public final class DebugProtoBuf {
      *
      * <pre>
      * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-     * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+     * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
      * it is optimized and embedded straight into this message.
      * </pre>
      */
@@ -35397,7 +35397,7 @@ public final class DebugProtoBuf {
 
     private void initFields() {
       flags_ = 0;
-      valueParameterReference_ = 0;
+      konstueParameterReference_ = 0;
       constantValue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue.TRUE;
       isInstanceType_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance();
       isInstanceTypeId_ = 0;
@@ -35439,7 +35439,7 @@ public final class DebugProtoBuf {
         output.writeInt32(1, flags_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, valueParameterReference_);
+        output.writeInt32(2, konstueParameterReference_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, constantValue_.getNumber());
@@ -35471,7 +35471,7 @@ public final class DebugProtoBuf {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
-          .computeInt32Size(2, valueParameterReference_);
+          .computeInt32Size(2, konstueParameterReference_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += org.jetbrains.kotlin.protobuf.CodedOutputStream
@@ -35507,23 +35507,23 @@ public final class DebugProtoBuf {
 
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parseFrom(
         org.jetbrains.kotlin.protobuf.ByteString data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parseFrom(byte[] data)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parseFrom(
         byte[] data,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
     public static org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parseFrom(java.io.InputStream input)
@@ -35620,7 +35620,7 @@ public final class DebugProtoBuf {
         super.clear();
         flags_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        valueParameterReference_ = 0;
+        konstueParameterReference_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         constantValue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue.TRUE;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -35679,7 +35679,7 @@ public final class DebugProtoBuf {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.valueParameterReference_ = valueParameterReference_;
+        result.konstueParameterReference_ = konstueParameterReference_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -35830,7 +35830,7 @@ public final class DebugProtoBuf {
         org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+        } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
           parsedMessage = (org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression) e.getUnfinishedMessage();
           throw e;
         } finally {
@@ -35873,9 +35873,9 @@ public final class DebugProtoBuf {
        *isIsNullPredicate =&gt; this expression is IsNullPredicate with 'variableName' as argument
        * </pre>
        */
-      public Builder setFlags(int value) {
+      public Builder setFlags(int konstue) {
         bitField0_ |= 0x00000001;
-        flags_ = value;
+        flags_ = konstue;
         onChanged();
         return this;
       }
@@ -35894,12 +35894,12 @@ public final class DebugProtoBuf {
         return this;
       }
 
-      private int valueParameterReference_ ;
+      private int konstueParameterReference_ ;
       /**
-       * <code>optional int32 value_parameter_reference = 2;</code>
+       * <code>optional int32 konstue_parameter_reference = 2;</code>
        *
        * <pre>
-       * stored as index in valueParameters list of owner-function in 1-indexation
+       * stored as index in konstueParameters list of owner-function in 1-indexation
        * Index '0' is reserved for extension receiver
        * </pre>
        */
@@ -35907,72 +35907,72 @@ public final class DebugProtoBuf {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 value_parameter_reference = 2;</code>
+       * <code>optional int32 konstue_parameter_reference = 2;</code>
        *
        * <pre>
-       * stored as index in valueParameters list of owner-function in 1-indexation
+       * stored as index in konstueParameters list of owner-function in 1-indexation
        * Index '0' is reserved for extension receiver
        * </pre>
        */
       public int getValueParameterReference() {
-        return valueParameterReference_;
+        return konstueParameterReference_;
       }
       /**
-       * <code>optional int32 value_parameter_reference = 2;</code>
+       * <code>optional int32 konstue_parameter_reference = 2;</code>
        *
        * <pre>
-       * stored as index in valueParameters list of owner-function in 1-indexation
+       * stored as index in konstueParameters list of owner-function in 1-indexation
        * Index '0' is reserved for extension receiver
        * </pre>
        */
-      public Builder setValueParameterReference(int value) {
+      public Builder setValueParameterReference(int konstue) {
         bitField0_ |= 0x00000002;
-        valueParameterReference_ = value;
+        konstueParameterReference_ = konstue;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 value_parameter_reference = 2;</code>
+       * <code>optional int32 konstue_parameter_reference = 2;</code>
        *
        * <pre>
-       * stored as index in valueParameters list of owner-function in 1-indexation
+       * stored as index in konstueParameters list of owner-function in 1-indexation
        * Index '0' is reserved for extension receiver
        * </pre>
        */
       public Builder clearValueParameterReference() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        valueParameterReference_ = 0;
+        konstueParameterReference_ = 0;
         onChanged();
         return this;
       }
 
       private org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue constantValue_ = org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue.TRUE;
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
        */
       public boolean hasConstantValue() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
        */
       public org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue getConstantValue() {
         return constantValue_;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
        */
-      public Builder setConstantValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue value) {
-        if (value == null) {
+      public Builder setConstantValue(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression.ConstantValue konstue) {
+        if (konstue == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000004;
-        constantValue_ = value;
+        constantValue_ = konstue;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_value = 3;</code>
+       * <code>optional .org.jetbrains.kotlin.metadata.Expression.ConstantValue constant_konstue = 3;</code>
        */
       public Builder clearConstantValue() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -36018,15 +36018,15 @@ public final class DebugProtoBuf {
        * and with type encoded in either one of next two fields as RHS.
        * </pre>
        */
-      public Builder setIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder setIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (isInstanceTypeBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
-          isInstanceType_ = value;
+          isInstanceType_ = konstue;
           onChanged();
         } else {
-          isInstanceTypeBuilder_.setMessage(value);
+          isInstanceTypeBuilder_.setMessage(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -36058,18 +36058,18 @@ public final class DebugProtoBuf {
        * and with type encoded in either one of next two fields as RHS.
        * </pre>
        */
-      public Builder mergeIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type value) {
+      public Builder mergeIsInstanceType(org.jetbrains.kotlin.metadata.DebugProtoBuf.Type konstue) {
         if (isInstanceTypeBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
               isInstanceType_ != org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.getDefaultInstance()) {
             isInstanceType_ =
-              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(isInstanceType_).mergeFrom(value).buildPartial();
+              org.jetbrains.kotlin.metadata.DebugProtoBuf.Type.newBuilder(isInstanceType_).mergeFrom(konstue).buildPartial();
           } else {
-            isInstanceType_ = value;
+            isInstanceType_ = konstue;
           }
           onChanged();
         } else {
-          isInstanceTypeBuilder_.mergeFrom(value);
+          isInstanceTypeBuilder_.mergeFrom(konstue);
         }
         bitField0_ |= 0x00000008;
         return this;
@@ -36158,9 +36158,9 @@ public final class DebugProtoBuf {
       /**
        * <code>optional int32 is_instance_type_id = 5;</code>
        */
-      public Builder setIsInstanceTypeId(int value) {
+      public Builder setIsInstanceTypeId(int konstue) {
         bitField0_ |= 0x00000010;
-        isInstanceTypeId_ = value;
+        isInstanceTypeId_ = konstue;
         onChanged();
         return this;
       }
@@ -36191,7 +36191,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36207,7 +36207,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36223,7 +36223,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36239,21 +36239,21 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
       public Builder setAndArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (andArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAndArgumentIsMutable();
-          andArgument_.set(index, value);
+          andArgument_.set(index, konstue);
           onChanged();
         } else {
-          andArgumentBuilder_.setMessage(index, value);
+          andArgumentBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -36262,7 +36262,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36282,20 +36282,20 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
-      public Builder addAndArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+      public Builder addAndArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (andArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAndArgumentIsMutable();
-          andArgument_.add(value);
+          andArgument_.add(konstue);
           onChanged();
         } else {
-          andArgumentBuilder_.addMessage(value);
+          andArgumentBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -36304,21 +36304,21 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
       public Builder addAndArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (andArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureAndArgumentIsMutable();
-          andArgument_.add(index, value);
+          andArgument_.add(index, konstue);
           onChanged();
         } else {
-          andArgumentBuilder_.addMessage(index, value);
+          andArgumentBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -36327,7 +36327,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36347,7 +36347,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36367,19 +36367,19 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
       public Builder addAllAndArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> konstues) {
         if (andArgumentBuilder_ == null) {
           ensureAndArgumentIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, andArgument_);
+              konstues, andArgument_);
           onChanged();
         } else {
-          andArgumentBuilder_.addAllMessages(values);
+          andArgumentBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -36388,7 +36388,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36407,7 +36407,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36426,7 +36426,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36439,7 +36439,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36455,7 +36455,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36472,7 +36472,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36485,7 +36485,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36499,7 +36499,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'andArguments[0] &amp;&amp; andArguments[1] &amp;&amp; ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message
        * </pre>
        */
@@ -36539,7 +36539,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36555,7 +36555,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36571,7 +36571,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36587,21 +36587,21 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
       public Builder setOrArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (orArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureOrArgumentIsMutable();
-          orArgument_.set(index, value);
+          orArgument_.set(index, konstue);
           onChanged();
         } else {
-          orArgumentBuilder_.setMessage(index, value);
+          orArgumentBuilder_.setMessage(index, konstue);
         }
         return this;
       }
@@ -36610,7 +36610,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36630,20 +36630,20 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
-      public Builder addOrArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+      public Builder addOrArgument(org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (orArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureOrArgumentIsMutable();
-          orArgument_.add(value);
+          orArgument_.add(konstue);
           onChanged();
         } else {
-          orArgumentBuilder_.addMessage(value);
+          orArgumentBuilder_.addMessage(konstue);
         }
         return this;
       }
@@ -36652,21 +36652,21 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
       public Builder addOrArgument(
-          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression value) {
+          int index, org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression konstue) {
         if (orArgumentBuilder_ == null) {
-          if (value == null) {
+          if (konstue == null) {
             throw new NullPointerException();
           }
           ensureOrArgumentIsMutable();
-          orArgument_.add(index, value);
+          orArgument_.add(index, konstue);
           onChanged();
         } else {
-          orArgumentBuilder_.addMessage(index, value);
+          orArgumentBuilder_.addMessage(index, konstue);
         }
         return this;
       }
@@ -36675,7 +36675,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36695,7 +36695,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36715,19 +36715,19 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
       public Builder addAllOrArgument(
-          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> values) {
+          java.lang.Iterable<? extends org.jetbrains.kotlin.metadata.DebugProtoBuf.Expression> konstues) {
         if (orArgumentBuilder_ == null) {
           ensureOrArgumentIsMutable();
           org.jetbrains.kotlin.protobuf.AbstractMessageLite.Builder.addAll(
-              values, orArgument_);
+              konstues, orArgument_);
           onChanged();
         } else {
-          orArgumentBuilder_.addAllMessages(values);
+          orArgumentBuilder_.addAllMessages(konstues);
         }
         return this;
       }
@@ -36736,7 +36736,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36755,7 +36755,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36774,7 +36774,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36787,7 +36787,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36803,7 +36803,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36820,7 +36820,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36833,7 +36833,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -36847,7 +36847,7 @@ public final class DebugProtoBuf {
        *
        * <pre>
        * non-empty =&gt; this expression is boolean formula of form 'orArguments[0] || andArguments[1] || ...'
-       * Additionally, if first argument of formula is primitive expression (i.e. predicate or value),
+       * Additionally, if first argument of formula is primitive expression (i.e. predicate or konstue),
        * it is optimized and embedded straight into this message.
        * </pre>
        */
@@ -37025,14 +37025,14 @@ public final class DebugProtoBuf {
       "\006\n\nAnnotation\022\020\n\002id\030\001 \002(\005B\004\220\265\030\001\022D\n\010argum" +
       "ent\030\002 \003(\01322.org.jetbrains.kotlin.metadat" +
       "a.Annotation.Argument\032\257\005\n\010Argument\022\025\n\007na" +
-      "me_id\030\001 \002(\005B\004\210\265\030\001\022G\n\005value\030\002 \002(\01328.org.j" +
+      "me_id\030\001 \002(\005B\004\210\265\030\001\022G\n\005konstue\030\002 \002(\01328.org.j" +
       "etbrains.kotlin.metadata.Annotation.Argu" +
       "ment.Value\032\302\004\n\005Value\022K\n\004type\030\001 \001(\0162=.org" +
       ".jetbrains.kotlin.metadata.Annotation.Ar" +
-      "gument.Value.Type\022\021\n\tint_value\030\002 \001(\022\022\023\n\013",
-      "float_value\030\003 \001(\002\022\024\n\014double_value\030\004 \001(\001\022" +
-      "\032\n\014string_value\030\005 \001(\005B\004\230\265\030\001\022\026\n\010class_id\030" +
-      "\006 \001(\005B\004\220\265\030\001\022\033\n\renum_value_id\030\007 \001(\005B\004\210\265\030\001" +
+      "gument.Value.Type\022\021\n\tint_konstue\030\002 \001(\022\022\023\n\013",
+      "float_konstue\030\003 \001(\002\022\024\n\014double_konstue\030\004 \001(\001\022" +
+      "\032\n\014string_konstue\030\005 \001(\005B\004\230\265\030\001\022\026\n\010class_id\030" +
+      "\006 \001(\005B\004\220\265\030\001\022\033\n\renum_konstue_id\030\007 \001(\005B\004\210\265\030\001" +
       "\022=\n\nannotation\030\010 \001(\0132).org.jetbrains.kot" +
       "lin.metadata.Annotation\022O\n\rarray_element" +
       "\030\t \003(\01328.org.jetbrains.kotlin.metadata.A" +
@@ -37091,11 +37091,11 @@ public final class DebugProtoBuf {
       "y_name\030\021 \001(\005B\004\210\265\030\001\022I\n\034inline_class_under" +
       "lying_type\030\022 \001(\0132#.org.jetbrains.kotlin.",
       "metadata.Type\022-\n\037inline_class_underlying" +
-      "_type_id\030\023 \001(\005B\004\240\265\030\001\0227\n\'multi_field_valu" +
+      "_type_id\030\023 \001(\005B\004\240\265\030\001\0227\n\'multi_field_konstu" +
       "e_class_underlying_name\030\026 \003(\005B\006\020\001\210\265\030\001\022T\n" +
-      "\'multi_field_value_class_underlying_type" +
+      "\'multi_field_konstue_class_underlying_type" +
       "\030\027 \003(\0132#.org.jetbrains.kotlin.metadata.T" +
-      "ype\022:\n*multi_field_value_class_underlyin" +
+      "ype\022:\n*multi_field_konstue_class_underlyin" +
       "g_type_id\030\030 \003(\005B\006\020\001\240\265\030\001\022<\n\ntype_table\030\036 " +
       "\001(\0132(.org.jetbrains.kotlin.metadata.Type" +
       "Table\022\033\n\023version_requirement\030\037 \003(\005\022Y\n\031ve" +
@@ -37116,7 +37116,7 @@ public final class DebugProtoBuf {
       "*\005\010d\020\310\001\"`\n\tTypeTable\0221\n\004type\030\001 \003(\0132#.org" +
       ".jetbrains.kotlin.metadata.Type\022\032\n\016first" +
       "_nullable\030\002 \001(\005:\002-1:\004\240\273\030\001\"\214\001\n\013Constructo" +
-      "r\022\020\n\005flags\030\001 \001(\005:\0016\022F\n\017value_parameter\030\002" +
+      "r\022\020\n\005flags\030\001 \001(\005:\0016\022F\n\017konstue_parameter\030\002" +
       " \003(\0132-.org.jetbrains.kotlin.metadata.Val" +
       "ueParameter\022\033\n\023version_requirement\030\037 \003(\005" +
       "*\006\010d\020\270\224\001\"\224\005\n\010Function\022\020\n\005flags\030\t \001(\005:\0016\022",
@@ -37130,7 +37130,7 @@ public final class DebugProtoBuf {
       "\010 \001(\005B\004\240\265\030\001\022B\n\025context_receiver_type\030\n \003" +
       "(\0132#.org.jetbrains.kotlin.metadata.Type\022" +
       "(\n\030context_receiver_type_id\030\013 \003(\005B\006\020\001\240\265\030",
-      "\001\022F\n\017value_parameter\030\006 \003(\0132-.org.jetbrai" +
+      "\001\022F\n\017konstue_parameter\030\006 \003(\0132-.org.jetbrai" +
       "ns.kotlin.metadata.ValueParameter\022<\n\ntyp" +
       "e_table\030\036 \001(\0132(.org.jetbrains.kotlin.met" +
       "adata.TypeTable\022\033\n\023version_requirement\030\037" +
@@ -37147,7 +37147,7 @@ public final class DebugProtoBuf {
       "B\n\025context_receiver_type\030\014 \003(\0132#.org.jet" +
       "brains.kotlin.metadata.Type\022(\n\030context_r" +
       "eceiver_type_id\030\r \003(\005B\006\020\001\240\265\030\001\022M\n\026setter_" +
-      "value_parameter\030\006 \001(\0132-.org.jetbrains.ko" +
+      "konstue_parameter\030\006 \001(\0132-.org.jetbrains.ko" +
       "tlin.metadata.ValueParameter\022\024\n\014getter_f" +
       "lags\030\007 \001(\005\022\024\n\014setter_flags\030\010 \001(\005\022\033\n\023vers",
       "ion_requirement\030\037 \003(\005*\006\010d\020\270\224\001\"\357\001\n\016ValueP" +
@@ -37201,8 +37201,8 @@ public final class DebugProtoBuf {
       "\t\n\005CALLS\020\001\022\024\n\020RETURNS_NOT_NULL\020\002\"G\n\016Invo" +
       "cationKind\022\020\n\014AT_MOST_ONCE\020\000\022\020\n\014EXACTLY_",
       "ONCE\020\001\022\021\n\rAT_LEAST_ONCE\020\002\"\245\003\n\nExpression" +
-      "\022\020\n\005flags\030\001 \001(\005:\0010\022!\n\031value_parameter_re" +
-      "ference\030\002 \001(\005\022O\n\016constant_value\030\003 \001(\01627." +
+      "\022\020\n\005flags\030\001 \001(\005:\0010\022!\n\031konstue_parameter_re" +
+      "ference\030\002 \001(\005\022O\n\016constant_konstue\030\003 \001(\01627." +
       "org.jetbrains.kotlin.metadata.Expression" +
       ".ConstantValue\022=\n\020is_instance_type\030\004 \001(\013" +
       "2#.org.jetbrains.kotlin.metadata.Type\022!\n" +

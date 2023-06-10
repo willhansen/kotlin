@@ -17,7 +17,7 @@ import kotlin.reflect.KClass
 sealed interface ExploredClassifier {
     /** Indicated unusable classifier. */
     sealed interface Unusable : ExploredClassifier {
-        val symbol: IrClassifierSymbol
+        konst symbol: IrClassifierSymbol
 
         sealed interface CanBeRootCause : Unusable
 
@@ -25,15 +25,15 @@ sealed interface ExploredClassifier {
          * There is no real owner classifier for the symbol, only synthetic stub created by [MissingDeclarationStubGenerator].
          * Likely the classifier has been deleted in newer version of the library.
          */
-        data class MissingClassifier(override val symbol: IrClassifierSymbol) : CanBeRootCause
+        data class MissingClassifier(override konst symbol: IrClassifierSymbol) : CanBeRootCause
 
         /**
          * There is an issue with inheritance: interface inherits from a class, class inherits from a final class, etc.
          * On practice, such class can't be instantiated and used anywhere.
          */
-        class InvalidInheritance(override val symbol: IrClassSymbol, val superClassSymbols: Collection<IrClassSymbol>) : CanBeRootCause {
+        class InkonstidInheritance(override konst symbol: IrClassSymbol, konst superClassSymbols: Collection<IrClassSymbol>) : CanBeRootCause {
             init {
-                // Just a sanity check to avoid creating invalid [InvalidInheritance]s.
+                // Just a sanity check to avoid creating inkonstid [InkonstidInheritance]s.
                 check(superClassSymbols.isNotEmpty())
             }
         }
@@ -44,14 +44,14 @@ sealed interface ExploredClassifier {
          * converted to a non-annotation class.
          */
         data class AnnotationWithUnacceptableParameter(
-            override val symbol: IrClassSymbol,
-            val unacceptableClassifierSymbol: IrClassifierSymbol
+            override konst symbol: IrClassSymbol,
+            konst unacceptableClassifierSymbol: IrClassifierSymbol
         ) : CanBeRootCause
 
         /**
          * The classifier depends on another unusable classifier. Thus, it is considered unusable too.
          */
-        data class DueToOtherClassifier(override val symbol: IrClassifierSymbol, val rootCause: CanBeRootCause) : Unusable
+        data class DueToOtherClassifier(override konst symbol: IrClassifierSymbol, konst rootCause: CanBeRootCause) : Unusable
     }
 
     /** Indicates usable (fully linked) classifier. */

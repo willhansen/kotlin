@@ -7,15 +7,15 @@ package org.jetbrains.kotlin.js.config
 
 import java.util.*
 
-enum class ErrorTolerancePolicy(val allowSyntaxErrors: Boolean, val allowSemanticErrors: Boolean) {
+enum class ErrorTolerancePolicy(konst allowSyntaxErrors: Boolean, konst allowSemanticErrors: Boolean) {
     NONE(false, false),
     SEMANTIC(false, true),
     ALL(true, true);
 
-    val allowErrors: Boolean get() = allowSyntaxErrors || allowSemanticErrors
+    konst allowErrors: Boolean get() = allowSyntaxErrors || allowSemanticErrors
 
     companion object {
-        val DEFAULT = NONE
+        konst DEFAULT = NONE
 
         fun resolvePolicy(key: String): ErrorTolerancePolicy {
             return when (key.uppercase()) {

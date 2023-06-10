@@ -22,19 +22,19 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirErrorResolvedQualifier : FirResolvedQualifier(), FirDiagnosticHolder {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val packageFqName: FqName
-    abstract override val relativeClassFqName: FqName?
-    abstract override val classId: ClassId?
-    abstract override val symbol: FirClassLikeSymbol<*>?
-    abstract override val isNullableLHSForCallableReference: Boolean
-    abstract override val resolvedToCompanionObject: Boolean
-    abstract override val isFullyQualified: Boolean
-    abstract override val nonFatalDiagnostics: List<ConeDiagnostic>
-    abstract override val typeArguments: List<FirTypeProjection>
-    abstract override val diagnostic: ConeDiagnostic
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst packageFqName: FqName
+    abstract override konst relativeClassFqName: FqName?
+    abstract override konst classId: ClassId?
+    abstract override konst symbol: FirClassLikeSymbol<*>?
+    abstract override konst isNullableLHSForCallableReference: Boolean
+    abstract override konst resolvedToCompanionObject: Boolean
+    abstract override konst isFullyQualified: Boolean
+    abstract override konst nonFatalDiagnostics: List<ConeDiagnostic>
+    abstract override konst typeArguments: List<FirTypeProjection>
+    abstract override konst diagnostic: ConeDiagnostic
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitErrorResolvedQualifier(this, data)
 

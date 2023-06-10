@@ -30,13 +30,13 @@ class NondeterministicJumpInstruction(
     element: KtElement,
     targetLabels: List<Label>,
     blockScope: BlockScope,
-    private val inputValue: PseudoValue?
+    private konst inputValue: PseudoValue?
 ) : KtElementInstructionImpl(element, blockScope), JumpInstruction {
     private var _next: Instruction? = null
-    private val _resolvedTargets: MutableMap<Label, Instruction> = linkedMapOf()
+    private konst _resolvedTargets: MutableMap<Label, Instruction> = linkedMapOf()
 
-    val targetLabels: List<Label> = ArrayList(targetLabels)
-    private val resolvedTargets: Map<Label, Instruction>
+    konst targetLabels: List<Label> = ArrayList(targetLabels)
+    private konst resolvedTargets: Map<Label, Instruction>
         get() = _resolvedTargets
 
     fun setResolvedTarget(label: Label, resolvedTarget: Instruction) {
@@ -45,18 +45,18 @@ class NondeterministicJumpInstruction(
 
     var next: Instruction
         get() = _next!!
-        set(value) {
-            _next = outgoingEdgeTo(value)
+        set(konstue) {
+            _next = outgoingEdgeTo(konstue)
         }
 
-    override val nextInstructions: Collection<Instruction>
+    override konst nextInstructions: Collection<Instruction>
         get() {
-            val targetInstructions = ArrayList(resolvedTargets.values)
+            konst targetInstructions = ArrayList(resolvedTargets.konstues)
             targetInstructions.add(next)
             return targetInstructions
         }
 
-    override val inputValues: List<PseudoValue>
+    override konst inputValues: List<PseudoValue>
         get() = listOfNotNull(inputValue)
 
     override fun accept(visitor: InstructionVisitor) {
@@ -66,8 +66,8 @@ class NondeterministicJumpInstruction(
     override fun <R> accept(visitor: InstructionVisitorWithResult<R>): R = visitor.visitNondeterministicJump(this)
 
     override fun toString(): String {
-        val inVal = if (inputValue != null) "|$inputValue" else ""
-        val labels = targetLabels.joinToString(", ") { it.name }
+        konst inVal = if (inputValue != null) "|$inputValue" else ""
+        konst labels = targetLabels.joinToString(", ") { it.name }
         return "jmp?($labels$inVal)"
     }
 

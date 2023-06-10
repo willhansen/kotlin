@@ -8,9 +8,9 @@
 
 @JsExport
 interface IOwner {
-    val interfaceValOpen: String
+    konst interfaceValOpen: String
 
-    val interfaceGetterOnly: String
+    konst interfaceGetterOnly: String
         get() = "Interface with Getter"
 
     var interfaceVarOpen: String
@@ -18,65 +18,65 @@ interface IOwner {
 
 @JsExport
 open class Owner {
-    open val classOpenReadonly: String = "Class Readonly Open"
+    open konst classOpenReadonly: String = "Class Readonly Open"
     open var classOpenVar: String = "Class Var Open"
     open lateinit var classOpenLateinitVar: String;
 
     lateinit var classLateinitVar: String;
 
-    val classFinalReadonly: String = "Class Readonly Final"
+    konst classFinalReadonly: String = "Class Readonly Final"
     var classFinalVar: String = "Class Default"
 
-    val classGetterOnly: String
+    konst classGetterOnly: String
         get() = "Class with Final Getter"
 
-    open val classOpenGetterOnly: String
+    open konst classOpenGetterOnly: String
         get() = "Class with Open Getter"
 
     var classSetterOnly: String = "Class setter only"
-        set(value) { classOpenVar = "Class Changed by class setter only $value" }
+        set(konstue) { classOpenVar = "Class Changed by class setter only $konstue" }
 
     open var classOpenSetterOnly: String = "Class open setter only"
-        set(value) { classOpenVar = "Class Changed by class open setter only $value" }
+        set(konstue) { classOpenVar = "Class Changed by class open setter only $konstue" }
 
     var classGetterAndSetter: String = "Class Getter and Setter"
         get() = field + " by class getter"
-        set(value) { field = value }
+        set(konstue) { field = konstue }
 
     open var classOpenGetterAndSetter: String = "Class Open Getter and Setter"
         get() = field + " by class open getter"
-        set(value) { field = value }
+        set(konstue) { field = konstue }
 }
 
 open class HiddenChild : Owner(), IOwner {
-    override val interfaceValOpen: String = "Hidden Child Open Val"
+    override konst interfaceValOpen: String = "Hidden Child Open Val"
     override var interfaceVarOpen: String = "Hidden Child Open Var"
 
-    val hiddenDefaultVal: String = "Hidden Default Val"
-    val hiddenDefaultGetter: String get() = "Hidden Default Getter"
+    konst hiddenDefaultVal: String = "Hidden Default Val"
+    konst hiddenDefaultGetter: String get() = "Hidden Default Getter"
     var hiddenDefaultVar: String = "Hidden Default Var"
 }
 
 open class AnotherOneHiddenChild: HiddenChild() {
-    override val interfaceGetterOnly: String
+    override konst interfaceGetterOnly: String
         get() = "Another One Hidden Child with Getter"
 }
 
 @JsExport
 class ExportedChild: AnotherOneHiddenChild() {
-    override val classOpenReadonly: String = "Exported Child Readonly Open"
+    override konst classOpenReadonly: String = "Exported Child Readonly Open"
     override var classOpenVar: String = "Exported Child Var Open"
     override var classOpenLateinitVar: String = "Exported Child Lateinit Open Var"
 
-    override val classOpenGetterOnly: String
+    override konst classOpenGetterOnly: String
         get() = "Exported Child with Open Getter"
 
     override var classOpenSetterOnly: String = super.classOpenSetterOnly
-        set(value) { classOpenVar = "Exported Child Changed by class open setter only $value" }
+        set(konstue) { classOpenVar = "Exported Child Changed by class open setter only $konstue" }
 
     override var classOpenGetterAndSetter: String = super.classOpenGetterAndSetter
         get() = field + " by exported child open getter"
-        set(value) { field = value }
+        set(konstue) { field = konstue }
 }
 
 @JsExport
@@ -89,7 +89,7 @@ fun generateAnotherHiddenChild() = AnotherOneHiddenChild()
 
 function assertEquals(actualValue, expectedValue) {
     if (actualValue !== expectedValue) {
-        throw new Error("Expected value is '" + expectedValue + "', but got '" + actualValue + "'")
+        throw new Error("Expected konstue is '" + expectedValue + "', but got '" + actualValue + "'")
     }
 }
 
@@ -101,7 +101,7 @@ function testOwner(pkg) {
 
     try {
         owner.classOpenLateinitVar;
-        return "Fail: invalid getter for open lateinit var in Owner class";
+        return "Fail: inkonstid getter for open lateinit var in Owner class";
     } catch(e) {}
 
     owner.classOpenLateinitVar = "Class Open Lateinit Var"
@@ -109,7 +109,7 @@ function testOwner(pkg) {
 
     try {
         owner.classLateinitVar;
-        return "Fail: invalid getter for lateinit var in Owner class";
+        return "Fail: inkonstid getter for lateinit var in Owner class";
     } catch(e) {}
 
     owner.classLateinitVar = "Class Lateinit Var"
@@ -152,7 +152,7 @@ function testHiddenChild(pkg) {
 
     try {
         owner.classOpenLateinitVar;
-        return "Fail: invalid getter for open lateinit var in Hidden Child class";
+        return "Fail: inkonstid getter for open lateinit var in Hidden Child class";
     } catch(e) {}
 
     owner.classOpenLateinitVar = "Hidden Child Open Lateinit Var"
@@ -160,7 +160,7 @@ function testHiddenChild(pkg) {
 
     try {
         owner.classLateinitVar;
-        return "Fail: invalid getter for lateinit var in Hidden Child class";
+        return "Fail: inkonstid getter for lateinit var in Hidden Child class";
     } catch(e) {}
 
     owner.classLateinitVar = "Hidden Child Lateinit Var"
@@ -203,7 +203,7 @@ function testAnotherHiddenChild(pkg) {
 
     try {
         owner.classOpenLateinitVar;
-        return "Fail: invalid getter for open lateinit var in Another Hidden Child class";
+        return "Fail: inkonstid getter for open lateinit var in Another Hidden Child class";
     } catch(e) {}
 
     owner.classOpenLateinitVar = "Another Hidden Child Open Lateinit Var"
@@ -211,7 +211,7 @@ function testAnotherHiddenChild(pkg) {
 
     try {
         owner.classLateinitVar;
-        return "Fail: invalid getter for lateinit var in Another Hidden Child class";
+        return "Fail: inkonstid getter for lateinit var in Another Hidden Child class";
     } catch(e) {}
 
     owner.classLateinitVar = "Another Hidden Child Lateinit Var"
@@ -251,7 +251,7 @@ function testExportedChild(pkg) {
     try {
         owner.classOpenLateinitVar;
     } catch(e) {
-        return "Fail: invalid overridding of getter for open lateinit var in ExportedChild class";
+        return "Fail: inkonstid overridding of getter for open lateinit var in ExportedChild class";
     }
 
     owner.classOpenLateinitVar = "Exported Child Open Lateinit Var"
@@ -260,7 +260,7 @@ function testExportedChild(pkg) {
     try {
         owner.classLateinitVar;
     } catch(e) {
-        return "Fail: invalid overridding of getter for lateinit var in ExportedChild class";
+        return "Fail: inkonstid overridding of getter for lateinit var in ExportedChild class";
     }
 
     owner.classLateinitVar = "Exported Child Lateinit Var"

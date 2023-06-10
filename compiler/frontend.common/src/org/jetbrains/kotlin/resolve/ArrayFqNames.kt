@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object ArrayFqNames {
-    val PRIMITIVE_TYPE_TO_ARRAY: Map<PrimitiveType, Name> = hashMapOf(
+    konst PRIMITIVE_TYPE_TO_ARRAY: Map<PrimitiveType, Name> = hashMapOf(
         PrimitiveType.BOOLEAN to Name.identifier("booleanArrayOf"),
         PrimitiveType.CHAR to Name.identifier("charArrayOf"),
         PrimitiveType.INT to Name.identifier("intArrayOf"),
@@ -22,20 +22,20 @@ object ArrayFqNames {
         PrimitiveType.DOUBLE to Name.identifier("doubleArrayOf")
     )
 
-    val UNSIGNED_TYPE_TO_ARRAY: Map<FqName, Name> = hashMapOf(
+    konst UNSIGNED_TYPE_TO_ARRAY: Map<FqName, Name> = hashMapOf(
         FqNames.uByteFqName to Name.identifier("ubyteArrayOf"),
         FqNames.uShortFqName to Name.identifier("ushortArrayOf"),
         FqNames.uIntFqName to Name.identifier("uintArrayOf"),
         FqNames.uLongFqName to Name.identifier("ulongArrayOf")
     )
 
-    val ARRAY_OF_FUNCTION: Name = Name.identifier("arrayOf")
+    konst ARRAY_OF_FUNCTION: Name = Name.identifier("arrayOf")
 
-    val EMPTY_ARRAY: Name = Name.identifier("emptyArray")
+    konst EMPTY_ARRAY: Name = Name.identifier("emptyArray")
 
-    val ARRAY_CALL_NAMES: Set<Name> =
-        setOf(ARRAY_OF_FUNCTION, EMPTY_ARRAY) + PRIMITIVE_TYPE_TO_ARRAY.values.toSet() + UNSIGNED_TYPE_TO_ARRAY.values.toSet()
+    konst ARRAY_CALL_NAMES: Set<Name> =
+        setOf(ARRAY_OF_FUNCTION, EMPTY_ARRAY) + PRIMITIVE_TYPE_TO_ARRAY.konstues.toSet() + UNSIGNED_TYPE_TO_ARRAY.konstues.toSet()
 
     @JvmField
-    val ARRAY_CALL_FQ_NAMES: Set<FqName> = ARRAY_CALL_NAMES.map { FqName("kotlin." + it.identifier) }.toSet()
+    konst ARRAY_CALL_FQ_NAMES: Set<FqName> = ARRAY_CALL_NAMES.map { FqName("kotlin." + it.identifier) }.toSet()
 }

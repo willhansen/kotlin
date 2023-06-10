@@ -21,11 +21,11 @@ class A
 fun foo() : A = A()
 
 interface AI{
-    val ai0: String
+    konst ai0: String
         get() = ""
 }
 
-val AI.ai1: Int
+konst AI.ai1: Int
     get() = 1
 
 
@@ -75,7 +75,7 @@ fun case2( nothing: Nothing) {
 }
 // TESTCASE NUMBER: 3
 
-class A3(val x : Int){
+class A3(konst x : Int){
 
     class Nested{
         fun case3(nothing: Nothing) {
@@ -105,7 +105,7 @@ class A3(val x : Int){
 }
 
 // TESTCASE NUMBER: 4
-class A4(val x: Int) {
+class A4(konst x: Int) {
 
     interface AN
 

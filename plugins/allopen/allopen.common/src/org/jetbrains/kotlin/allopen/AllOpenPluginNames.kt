@@ -6,14 +6,14 @@
 package org.jetbrains.kotlin.allopen
 
 object AllOpenPluginNames {
-    val SUPPORTED_PRESETS = mapOf(
+    konst SUPPORTED_PRESETS = mapOf(
         "spring" to listOf(
             "org.springframework.stereotype.Component",
             "org.springframework.transaction.annotation.Transactional",
             "org.springframework.scheduling.annotation.Async",
             "org.springframework.cache.annotation.Cacheable",
             "org.springframework.boot.test.context.SpringBootTest",
-            "org.springframework.validation.annotation.Validated"
+            "org.springframework.konstidation.annotation.Validated"
         ),
         "quarkus" to listOf(
             "javax.enterprise.context.ApplicationScoped",
@@ -27,6 +27,6 @@ object AllOpenPluginNames {
         )
     )
 
-    const val PLUGIN_ID = "org.jetbrains.kotlin.allopen"
-    const val ANNOTATION_OPTION_NAME = "annotation"
+    const konst PLUGIN_ID = "org.jetbrains.kotlin.allopen"
+    const konst ANNOTATION_OPTION_NAME = "annotation"
 }

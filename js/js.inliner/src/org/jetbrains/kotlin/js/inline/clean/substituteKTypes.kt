@@ -10,15 +10,15 @@ import org.jetbrains.kotlin.js.backend.ast.metadata.*
 
 // Replaces getReifiedTypeParameterKType(<Class Constructor>) with its KType
 fun substituteKTypes(root: JsNode) {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(invocation: JsInvocation, ctx: JsContext<in JsNode>) {
             // for invocations from non-inline contexts
             invocation.checkDoesNotCreateRecursiveKType()
 
-            val qualifier = invocation.qualifier as? JsNameRef ?: return
+            konst qualifier = invocation.qualifier as? JsNameRef ?: return
             if (qualifier.name?.specialFunction != SpecialFunction.GET_REIFIED_TYPE_PARAMETER_KTYPE) return
 
-            val firstArg = invocation.arguments.first()
+            konst firstArg = invocation.arguments.first()
             getTransitiveKType(firstArg)?.let {
                 // for invocations from inline contexts
                 it.checkNoInvocationsWithRecursiveKType()
@@ -39,7 +39,7 @@ private fun getTransitiveKType(e: JsExpression): JsExpression? {
             e.kType
 
         e is JsNameRef -> {
-            val staticRef = e.name?.staticRef as? JsExpression ?: return null
+            konst staticRef = e.name?.staticRef as? JsExpression ?: return null
             getTransitiveKType(staticRef)
         }
 
@@ -48,7 +48,7 @@ private fun getTransitiveKType(e: JsExpression): JsExpression? {
 }
 
 private fun JsExpression.checkNoInvocationsWithRecursiveKType() {
-    val visitor = object : JsVisitorWithContextImpl() {
+    konst visitor = object : JsVisitorWithContextImpl() {
         override fun endVisit(invocation: JsInvocation, ctx: JsContext<in JsNode>) {
             invocation.checkDoesNotCreateRecursiveKType()
         }

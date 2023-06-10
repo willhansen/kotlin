@@ -110,13 +110,13 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         reporter: DiagnosticReporter,
         checkActual: Boolean = true
     ) {
-        val symbol = declaration.symbol
-        val compatibilityToMembersMap = symbol.expectForActual ?: return
-        val session = context.session
+        konst symbol = declaration.symbol
+        konst compatibilityToMembersMap = symbol.expectForActual ?: return
+        konst session = context.session
 
         checkAmbiguousExpects(symbol, compatibilityToMembersMap, symbol, context, reporter)
 
-        val source = declaration.source
+        konst source = declaration.source
         if (!declaration.isActual) {
             if (compatibilityToMembersMap.allStrongIncompatibilities()) return
 
@@ -128,7 +128,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             }
         }
 
-        val singleIncompatibility = compatibilityToMembersMap.keys.singleOrNull()
+        konst singleIncompatibility = compatibilityToMembersMap.keys.singleOrNull()
         when {
             singleIncompatibility is Incompatible.ClassScopes -> {
                 assert(symbol is FirRegularClassSymbol || symbol is FirTypeAliasSymbol) {
@@ -142,16 +142,16 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
                 fun hasSingleActualSuspect(
                     expectedWithIncompatibility: Pair<FirBasedSymbol<*>, Map<Incompatible<FirBasedSymbol<*>>, Collection<FirBasedSymbol<*>>>>
                 ): Boolean {
-                    val (expectedMember, incompatibility) = expectedWithIncompatibility
-                    val actualMember = incompatibility.values.singleOrNull()?.singleOrNull()
+                    konst (expectedMember, incompatibility) = expectedWithIncompatibility
+                    konst actualMember = incompatibility.konstues.singleOrNull()?.singleOrNull()
                     @OptIn(SymbolInternals::class)
                     return actualMember != null &&
                             actualMember.isExplicitActualDeclaration() &&
                             !incompatibility.allStrongIncompatibilities() &&
-                            actualMember.fir.expectForActual?.values?.singleOrNull()?.singleOrNull() == expectedMember
+                            actualMember.fir.expectForActual?.konstues?.singleOrNull()?.singleOrNull() == expectedMember
                 }
 
-                val nonTrivialUnfulfilled = singleIncompatibility.unfulfilled.filterNot(::hasSingleActualSuspect)
+                konst nonTrivialUnfulfilled = singleIncompatibility.unfulfilled.filterNot(::hasSingleActualSuspect)
 
                 if (nonTrivialUnfulfilled.isNotEmpty()) {
                     reporter.reportOn(source, FirErrors.NO_ACTUAL_CLASS_MEMBER_FOR_EXPECTED_CLASS, symbol, nonTrivialUnfulfilled, context)
@@ -169,18 +169,18 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             }
 
             else -> {
-                val expected = compatibilityToMembersMap[Compatible]!!.first()
+                konst expected = compatibilityToMembersMap[Compatible]!!.first()
                 if (expected is FirRegularClassSymbol && expected.classKind == ClassKind.ANNOTATION_CLASS) {
-                    val klass = symbol.expandedClass(session)
-                    val actualConstructor = klass?.declarationSymbols?.firstIsInstanceOrNull<FirConstructorSymbol>()
-                    val expectedConstructor = expected.declarationSymbols.firstIsInstanceOrNull<FirConstructorSymbol>()
+                    konst klass = symbol.expandedClass(session)
+                    konst actualConstructor = klass?.declarationSymbols?.firstIsInstanceOrNull<FirConstructorSymbol>()
+                    konst expectedConstructor = expected.declarationSymbols.firstIsInstanceOrNull<FirConstructorSymbol>()
                     if (expectedConstructor != null && actualConstructor != null) {
                         checkAnnotationConstructors(source, expectedConstructor, actualConstructor, context, reporter)
                     }
                 }
             }
         }
-        val expectedSingleCandidate = compatibilityToMembersMap.values.singleOrNull()?.firstOrNull()
+        konst expectedSingleCandidate = compatibilityToMembersMap.konstues.singleOrNull()?.firstOrNull()
         if (expectedSingleCandidate != null) {
             checkIfExpectHasDefaultArgumentsAndActualizedWithTypealias(
                 expectedSingleCandidate,
@@ -199,23 +199,23 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        for (expectedValueParameter in expected.valueParameterSymbols) {
+        for (expectedValueParameter in expected.konstueParameterSymbols) {
             // Actual parameter with the same name is guaranteed to exist because this method is only called for compatible annotations
-            val actualValueDescriptor = actual.valueParameterSymbols.first { it.name == expectedValueParameter.name }
+            konst actualValueDescriptor = actual.konstueParameterSymbols.first { it.name == expectedValueParameter.name }
 
             if (expectedValueParameter.hasDefaultValue && actualValueDescriptor.hasDefaultValue) {
 //              TODO
-//                val expectedParameter =
+//                konst expectedParameter =
 //                    DescriptorToSourceUtils.descriptorToDeclaration(expectedValueParameter) as? KtParameter ?: continue
 //
-//                val expectedValue = trace.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expectedParameter.defaultValue)
+//                konst expectedValue = trace.bindingContext.get(BindingContext.COMPILE_TIME_VALUE, expectedParameter.defaultValue)
 //                    ?.toConstantValue(expectedValueParameter.type)
 //
-//                val actualValue =
+//                konst actualValue =
 //                    getActualAnnotationParameterValue(actualValueDescriptor, trace.bindingContext, expectedValueParameter.type)
 //                if (expectedValue != actualValue) {
-//                    val ktParameter = DescriptorToSourceUtils.descriptorToDeclaration(actualValueDescriptor)
-//                    val target = (ktParameter as? KtParameter)?.defaultValue ?: (reportOn as? KtTypeAlias)?.nameIdentifier ?: reportOn
+//                    konst ktParameter = DescriptorToSourceUtils.descriptorToDeclaration(actualValueDescriptor)
+//                    konst target = (ktParameter as? KtParameter)?.defaultValue ?: (reportOn as? KtTypeAlias)?.nameIdentifier ?: reportOn
 //                    trace.report(Errors.ACTUAL_ANNOTATION_CONFLICTING_DEFAULT_ARGUMENT_VALUE.on(target, actualValueDescriptor))
 //                }
             }
@@ -230,7 +230,7 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val filesWithAtLeastWeaklyCompatibleExpects = compatibility.asSequence()
+        konst filesWithAtLeastWeaklyCompatibleExpects = compatibility.asSequence()
             .filter { (compatibility, _) ->
                 compatibility.isCompatibleOrWeakCompatible()
             }
@@ -262,10 +262,10 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
             expectSymbol.classKind == ClassKind.ANNOTATION_CLASS
         ) return
 
-        val membersWithDefaultValueParameters =
+        konst membersWithDefaultValueParameters =
             expectSymbol.declaredMemberScope(expectSymbol.moduleData.session, memberRequiredPhase = null)
                 .run { collectAllFunctions() + getDeclaredConstructors() }
-                .filter { it.valueParameterSymbols.any(FirValueParameterSymbol::hasDefaultValue) }
+                .filter { it.konstueParameterSymbols.any(FirValueParameterSymbol::hasDefaultValue) }
 
         if (membersWithDefaultValueParameters.isEmpty()) return
 
@@ -289,8 +289,8 @@ object FirExpectActualDeclarationChecker : FirBasicDeclarationChecker() {
 
     // we don't require `actual` modifier on
     //  - annotation constructors, because annotation classes can only have one constructor
-    //  - value class primary constructors, because value class must have primary constructor
-    //  - value parameter inside primary constructor of inline class, because inline class must have one value parameter
+    //  - konstue class primary constructors, because konstue class must have primary constructor
+    //  - konstue parameter inside primary constructor of inline class, because inline class must have one konstue parameter
     private fun requireActualModifier(declaration: FirBasedSymbol<*>, session: FirSession): Boolean {
         return !declaration.isAnnotationConstructor(session) &&
                 !declaration.isPrimaryConstructorOfInlineOrValueClass(session) &&

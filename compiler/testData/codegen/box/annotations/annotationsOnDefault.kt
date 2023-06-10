@@ -4,7 +4,7 @@
 import kotlin.test.assertEquals
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 class A {
     @Ann(1) fun foo(x: Int, y: Int = 2, z: Int) {}
 
@@ -22,18 +22,18 @@ fun testAbsence(name: String, annotations: Array<out Annotation>) {
 }
 
 fun box(): String {
-    val foo = A::class.java.getDeclaredMethods().first { it.getName() == "foo" }
+    konst foo = A::class.java.getDeclaredMethods().first { it.getName() == "foo" }
     test("foo", foo.getDeclaredAnnotations())
 
-    val fooDefault = A::class.java.getDeclaredMethods().first { it.getName() == "foo\$default" }
+    konst fooDefault = A::class.java.getDeclaredMethods().first { it.getName() == "foo\$default" }
     testAbsence("foo\$default", fooDefault.getDeclaredAnnotations())
 
-    val (secondary, secondaryDefault) = A::class.java.getDeclaredConstructors().partition { it.getParameterTypes().size == 3 }
+    konst (secondary, secondaryDefault) = A::class.java.getDeclaredConstructors().partition { it.getParameterTypes().size == 3 }
 
     test("secondary", secondary[0].getDeclaredAnnotations())
     testAbsence("secondary\$default", secondaryDefault[0].getDeclaredAnnotations())
 
-    val (primary, primaryDefault) = B::class.java.getConstructors().partition { it.getParameterTypes().size == 3 }
+    konst (primary, primaryDefault) = B::class.java.getConstructors().partition { it.getParameterTypes().size == 3 }
 
     test("primary", primary[0].getDeclaredAnnotations())
     testAbsence("primary\$default", primaryDefault[0].getDeclaredAnnotations())

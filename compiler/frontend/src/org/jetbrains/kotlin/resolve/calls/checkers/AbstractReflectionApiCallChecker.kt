@@ -31,11 +31,11 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameSafe
 import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.storage.getValue
 
-private val ALLOWED_MEMBER_NAMES = setOf(
+private konst ALLOWED_MEMBER_NAMES = setOf(
     "equals", "hashCode", "toString", "invoke", "name"
 )
 
-private val ALLOWED_CLASSES = setOf(
+private konst ALLOWED_CLASSES = setOf(
     FqName("kotlin.reflect.KType"),
     FqName("kotlin.reflect.KTypeParameter"),
     FqName("kotlin.reflect.KTypeProjection"),
@@ -47,17 +47,17 @@ private val ALLOWED_CLASSES = setOf(
  * Checks that there are no usages of reflection API which will fail at runtime.
  */
 abstract class AbstractReflectionApiCallChecker(
-    private val reflectionTypes: ReflectionTypes,
+    private konst reflectionTypes: ReflectionTypes,
     storageManager: StorageManager
 ) : CallChecker {
-    protected abstract val isWholeReflectionApiAvailable: Boolean
+    protected abstract konst isWholeReflectionApiAvailable: Boolean
     protected abstract fun report(element: PsiElement, context: CallCheckerContext)
 
-    private val kPropertyClasses by storageManager.createLazyValue {
+    private konst kPropertyClasses by storageManager.createLazyValue {
         setOf(reflectionTypes.kProperty0, reflectionTypes.kProperty1, reflectionTypes.kProperty2)
     }
 
-    private val kClass by storageManager.createLazyValue { reflectionTypes.kClass }
+    private konst kClass by storageManager.createLazyValue { reflectionTypes.kClass }
 
     protected open fun isAllowedKClassMember(name: Name, context: CallCheckerContext): Boolean = when (name.asString()) {
         "simpleName", "isInstance" -> true
@@ -71,8 +71,8 @@ abstract class AbstractReflectionApiCallChecker(
         // Do not report the diagnostic on built-in sources
         if (isReflectionSource(reportOn)) return
 
-        val descriptor = resolvedCall.resultingDescriptor
-        val containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
+        konst descriptor = resolvedCall.resultingDescriptor
+        konst containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
         if (!ReflectionTypes.isReflectionClass(containingClass)) return
 
         if (!isAllowedReflectionApi(descriptor, containingClass, context)) {
@@ -85,7 +85,7 @@ abstract class AbstractReflectionApiCallChecker(
         containingClass: ClassDescriptor,
         context: CallCheckerContext
     ): Boolean {
-        val name = descriptor.name
+        konst name = descriptor.name
         return name.asString() in ALLOWED_MEMBER_NAMES ||
                 DescriptorUtils.isSubclass(containingClass, kClass) && isAllowedKClassMember(name, context) ||
                 (name.asString() == "get" || name.asString() == "set") && containingClass.isKPropertyClass() ||
@@ -95,8 +95,8 @@ abstract class AbstractReflectionApiCallChecker(
     private fun ClassDescriptor.isKPropertyClass() = kPropertyClasses.any { kProperty -> DescriptorUtils.isSubclass(this, kProperty) }
 
     private fun isReflectionSource(reportOn: PsiElement): Boolean {
-        val file = reportOn.containingFile as? KtFile ?: return false
-        val fqName = file.packageFqName.toUnsafe()
+        konst file = reportOn.containingFile as? KtFile ?: return false
+        konst fqName = file.packageFqName.toUnsafe()
         return fqName == KOTLIN_REFLECT_FQ_NAME.toUnsafe() || fqName.asString().startsWith(KOTLIN_REFLECT_FQ_NAME.asString() + ".")
     }
 }

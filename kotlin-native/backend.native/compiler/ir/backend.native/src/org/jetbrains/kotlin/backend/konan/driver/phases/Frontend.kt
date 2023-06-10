@@ -24,10 +24,10 @@ sealed class FrontendPhaseOutput {
     object ShouldNotGenerateCode : FrontendPhaseOutput()
 
     data class Full(
-            val moduleDescriptor: ModuleDescriptor,
-            val bindingContext: BindingContext,
-            val frontendServices: FrontendServices,
-            val environment: KotlinCoreEnvironment,
+            konst moduleDescriptor: ModuleDescriptor,
+            konst bindingContext: BindingContext,
+            konst frontendServices: FrontendServices,
+            konst environment: KotlinCoreEnvironment,
     ) : FrontendPhaseOutput()
 }
 
@@ -41,20 +41,20 @@ internal class FrontendContextImpl(
     override lateinit var frontendServices: FrontendServices
 }
 
-internal val FrontendPhase = createSimpleNamedCompilerPhase(
+internal konst FrontendPhase = createSimpleNamedCompilerPhase(
         "Frontend", "Compiler frontend",
         outputIfNotEnabled = { _, _, _, _ -> FrontendPhaseOutput.ShouldNotGenerateCode }
 ) { context: FrontendContext, input: KotlinCoreEnvironment ->
     lateinit var analysisResult: AnalysisResult
 
     do {
-        val analyzerWithCompilerReport = AnalyzerWithCompilerReport(
+        konst analyzerWithCompilerReport = AnalyzerWithCompilerReport(
                 context.messageCollector,
                 input.configuration.languageVersionSettings,
                 input.configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)
         )
 
-        val sourceFiles = input.getSourceFiles()
+        konst sourceFiles = input.getSourceFiles()
 
         if (sourceFiles.isNotEmpty()) {
             require (!input.configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
@@ -78,8 +78,8 @@ internal val FrontendPhase = createSimpleNamedCompilerPhase(
         }
     } while (analysisResult is AnalysisResult.RetryWithAdditionalRoots)
 
-    val moduleDescriptor = analysisResult.moduleDescriptor
-    val bindingContext = analysisResult.bindingContext
+    konst moduleDescriptor = analysisResult.moduleDescriptor
+    konst bindingContext = analysisResult.bindingContext
 
     if (analysisResult.shouldGenerateCode) {
         FrontendPhaseOutput.Full(moduleDescriptor, bindingContext, context.frontendServices, input)

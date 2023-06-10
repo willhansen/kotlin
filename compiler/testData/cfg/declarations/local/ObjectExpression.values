@@ -21,7 +21,7 @@ override fun foo() = 10
 =====================
 == foo ==
 fun foo(b: B) : Int {
-    val o = object : A by b {}
+    konst o = object : A by b {}
     return o.foo()
 }
 ---------------------
@@ -33,5 +33,5 @@ o                                               <v4>: {<: A}                 NEW
 foo()                                           <v5>: Int                    NEW: call(foo(), foo|<v4>) -> <v5>
 o.foo()                                         <v5>: Int                    COPY
 return o.foo()                                  !<v6>: *
-{ val o = object : A by b {} return o.foo() }   !<v6>: *                     COPY
+{ konst o = object : A by b {} return o.foo() }   !<v6>: *                     COPY
 =====================

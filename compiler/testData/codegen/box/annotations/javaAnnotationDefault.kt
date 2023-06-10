@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface JavaAnn {
-    String value() default "default";
+    String konstue() default "default";
 }
 
 // FILE: JavaAnn2.java
@@ -35,11 +35,11 @@ import java.lang.annotation.RetentionPolicy;
 @JavaAnn2 class MyClass2
 
 fun box(): String {
-    val ann = MyClass::class.java.getAnnotation(JavaAnn::class.java)
+    konst ann = MyClass::class.java.getAnnotation(JavaAnn::class.java)
     if (ann == null) return "fail: cannot find Ann on MyClass}"
-    if (ann.value != "default") return "fail: annotation parameter i should be 'default', but was ${ann.value}"
+    if (ann.konstue != "default") return "fail: annotation parameter i should be 'default', but was ${ann.konstue}"
 
-    val ann2 = MyClass2::class.java.getAnnotation(JavaAnn2::class.java)
+    konst ann2 = MyClass2::class.java.getAnnotation(JavaAnn2::class.java)
     if (ann2 == null) return "fail: cannot find Ann on MyClass}"
     if (ann2.a != 1) return "fail for a: expected = 1, but was ${ann2.a}"
     if (ann2.b != 1.toByte()) return "fail for b: expected = 1, but was ${ann2.b}"

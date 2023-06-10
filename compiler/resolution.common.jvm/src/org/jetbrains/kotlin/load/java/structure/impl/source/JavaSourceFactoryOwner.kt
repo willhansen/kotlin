@@ -11,7 +11,7 @@ import com.intellij.psi.PsiType
 import com.intellij.psi.PsiVariable
 
 interface JavaSourceFactoryOwner {
-    val sourceFactory: JavaElementSourceFactory
+    konst sourceFactory: JavaElementSourceFactory
 
     fun <PSI : PsiElement> createPsiSource(psi: PSI): JavaElementPsiSource<PSI> {
         return sourceFactory.createPsiSource(psi)

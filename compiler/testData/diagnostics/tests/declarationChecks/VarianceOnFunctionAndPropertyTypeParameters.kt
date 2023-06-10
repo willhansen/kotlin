@@ -11,8 +11,8 @@ fun <<!VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED!>out<!> T, <!VARIANCE_ON_TYPE_PARA
 
 }
 
-val <<!VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED!>out<!> T> T.x: Int
+konst <<!VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED!>out<!> T> T.x: Int
     get() = 1
 
-val <<!VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED!>in<!> T> T.y: Int
+konst <<!VARIANCE_ON_TYPE_PARAMETER_NOT_ALLOWED!>in<!> T> T.y: Int
     get() = 1

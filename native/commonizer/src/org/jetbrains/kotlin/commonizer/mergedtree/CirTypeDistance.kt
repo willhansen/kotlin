@@ -11,17 +11,17 @@ import org.jetbrains.kotlin.commonizer.mergedtree.CirTypeDistance.Companion.unre
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 @JvmInline
-value class CirTypeDistance(private val value: Int) : Comparable<CirTypeDistance> {
+konstue class CirTypeDistance(private konst konstue: Int) : Comparable<CirTypeDistance> {
 
-    val isReachable: Boolean get() = value != Int.MAX_VALUE
+    konst isReachable: Boolean get() = konstue != Int.MAX_VALUE
 
-    val isNotReachable: Boolean get() = !isReachable
+    konst isNotReachable: Boolean get() = !isReachable
 
-    val isNegative: Boolean get() = isReachable && value < 0
+    konst isNegative: Boolean get() = isReachable && konstue < 0
 
-    val isPositive: Boolean get() = isReachable && value > 0
+    konst isPositive: Boolean get() = isReachable && konstue > 0
 
-    val isZero: Boolean get() = value == 0
+    konst isZero: Boolean get() = konstue == 0
 
     /**
      * Judges the type distance on 'how bad is it'.
@@ -34,29 +34,29 @@ value class CirTypeDistance(private val value: Int) : Comparable<CirTypeDistance
      * Range for negative type distances: [1, MAX_VALUE[
      * Range for positive type distances: ]MIN_VALUE, -1]
      */
-    val penalty: Int
+    konst penalty: Int
         get() = when {
             isNotReachable -> Int.MAX_VALUE
-            isNegative -> -value
+            isNegative -> -konstue
             isZero -> Int.MIN_VALUE
-            isPositive -> Int.MIN_VALUE + value
+            isPositive -> Int.MIN_VALUE + konstue
             else -> throw IllegalStateException("Unable to calculate penalty for $this")
         }
 
-    operator fun plus(value: Int) = if (isReachable) CirTypeDistance(this.value + value) else this
+    operator fun plus(konstue: Int) = if (isReachable) CirTypeDistance(this.konstue + konstue) else this
 
-    operator fun plus(value: CirTypeDistance) = when {
+    operator fun plus(konstue: CirTypeDistance) = when {
         this.isNotReachable -> this
-        value.isNotReachable -> value
-        else -> CirTypeDistance(this.value + value.value)
+        konstue.isNotReachable -> konstue
+        else -> CirTypeDistance(this.konstue + konstue.konstue)
     }
 
-    operator fun minus(value: Int) = if (isReachable) CirTypeDistance(this.value - value) else this
+    operator fun minus(konstue: Int) = if (isReachable) CirTypeDistance(this.konstue - konstue) else this
 
-    operator fun minus(value: CirTypeDistance) = when {
+    operator fun minus(konstue: CirTypeDistance) = when {
         this.isNotReachable -> this
-        value.isNotReachable -> value
-        else -> CirTypeDistance(this.value - value.value)
+        konstue.isNotReachable -> konstue
+        else -> CirTypeDistance(this.konstue - konstue.konstue)
     }
 
     operator fun inc() = this + 1
@@ -64,16 +64,16 @@ value class CirTypeDistance(private val value: Int) : Comparable<CirTypeDistance
     operator fun dec() = this - 1
 
     override fun compareTo(other: CirTypeDistance): Int {
-        return value.compareTo(other.value)
+        return konstue.compareTo(other.konstue)
     }
 
     override fun toString(): String {
         return if (isNotReachable) "CirTypeDistance([unreachable])"
-        else "CirTypeDistance($value)"
+        else "CirTypeDistance($konstue)"
     }
 
     companion object {
-        val unreachable: CirTypeDistance = CirTypeDistance(Int.MAX_VALUE)
+        konst unreachable: CirTypeDistance = CirTypeDistance(Int.MAX_VALUE)
     }
 }
 
@@ -93,14 +93,14 @@ internal fun typeDistance(
     to: CirEntityId
 ): CirTypeDistance {
     if (from.classifierId == to) return CirTypeDistance(0)
-    val forwardDistance = forwardTypeDistance(from, to)
+    konst forwardDistance = forwardTypeDistance(from, to)
     if (forwardDistance.isReachable) return forwardDistance
 
-    val backwardsDistance = backwardsTypeDistance(classifiers, targetIndex, from.classifierId, to)
+    konst backwardsDistance = backwardsTypeDistance(classifiers, targetIndex, from.classifierId, to)
     if (backwardsDistance.isReachable) return backwardsDistance
 
-    val fromExpansion = from.expandedType()
-    val distanceToExpansion = typeDistance(classifiers, targetIndex, from, fromExpansion.classifierId)
+    konst fromExpansion = from.expandedType()
+    konst distanceToExpansion = typeDistance(classifiers, targetIndex, from, fromExpansion.classifierId)
     return backwardsTypeDistance(classifiers, targetIndex, fromExpansion.classifierId, to) - distanceToExpansion
 }
 
@@ -113,7 +113,7 @@ internal fun forwardTypeDistance(from: CirClassOrTypeAliasType, to: CirEntityId)
 
     while (true) {
         iteration++
-        val capturedUnderlyingType = underlyingType ?: return unreachable
+        konst capturedUnderlyingType = underlyingType ?: return unreachable
         if (capturedUnderlyingType.classifierId == to) return CirTypeDistance(iteration)
         underlyingType = (capturedUnderlyingType as? CirTypeAliasType)?.underlyingType
     }
@@ -131,17 +131,17 @@ internal fun backwardsTypeDistance(
 internal fun generateUnderlyingTypeSequence(
     classifiers: CirKnownClassifiers, targetIndex: Int, id: CirEntityId
 ): Sequence<AnyClassOrTypeAliasType> {
-    val resolvedClassifier = classifiers.classifierIndices[targetIndex].findClassifier(id)
+    konst resolvedClassifier = classifiers.classifierIndices[targetIndex].findClassifier(id)
     if (resolvedClassifier != null) {
         return generateUnderlyingTypeSequence(resolvedClassifier)
     }
 
-    val resolvedFromCommonDependencies = classifiers.commonDependencies.classifier(id)
+    konst resolvedFromCommonDependencies = classifiers.commonDependencies.classifier(id)
     if (resolvedFromCommonDependencies != null) {
         return generateUnderlyingTypeSequence(classifiers.commonDependencies, resolvedFromCommonDependencies)
     }
 
-    val resolvedFromTargetDependencies = classifiers.targetDependencies[targetIndex].classifier(id)
+    konst resolvedFromTargetDependencies = classifiers.targetDependencies[targetIndex].classifier(id)
     if (resolvedFromTargetDependencies != null) {
         return generateUnderlyingTypeSequence(
             CirProvidedClassifiers.of(classifiers.commonDependencies, classifiers.targetDependencies[targetIndex]),

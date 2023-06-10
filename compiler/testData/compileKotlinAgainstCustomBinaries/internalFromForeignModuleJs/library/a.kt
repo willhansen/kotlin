@@ -8,7 +8,7 @@ public class PublicClass {
     internal companion object {}
 }
 
-internal val internalVal = ""
+internal konst internalVal = ""
 
 internal fun internalFun(s: String): String = s
 

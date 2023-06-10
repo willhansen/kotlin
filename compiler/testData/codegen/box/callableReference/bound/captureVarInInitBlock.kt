@@ -14,7 +14,7 @@ class C() {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c.f != 21) return "fail"
     return "OK"
 }

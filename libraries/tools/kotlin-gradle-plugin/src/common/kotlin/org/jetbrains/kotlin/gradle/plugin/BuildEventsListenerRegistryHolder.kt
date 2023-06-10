@@ -9,7 +9,7 @@ import org.gradle.api.Project
 import org.gradle.build.event.BuildEventsListenerRegistry
 import javax.inject.Inject
 
-open class BuildEventsListenerRegistryHolder @Inject constructor(val listenerRegistry: BuildEventsListenerRegistry) {
+open class BuildEventsListenerRegistryHolder @Inject constructor(konst listenerRegistry: BuildEventsListenerRegistry) {
     companion object {
         fun getInstance(project: Project) =
             project.objects.newInstance(BuildEventsListenerRegistryHolder::class.java)

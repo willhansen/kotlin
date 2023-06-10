@@ -20,9 +20,9 @@ class FirExpectActualMatcherProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
-    private val enabled = session.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
+    private konst enabled = session.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
 
-    override val transformer: FirTransformer<Nothing?> = FirExpectActualMatcherTransformer(session, scopeSession)
+    override konst transformer: FirTransformer<Nothing?> = FirExpectActualMatcherTransformer(session, scopeSession)
 
     override fun processFile(file: FirFile) {
         if (!enabled) return
@@ -31,8 +31,8 @@ class FirExpectActualMatcherProcessor(
 }
 
 open class FirExpectActualMatcherTransformer(
-    override val session: FirSession,
-    private val scopeSession: ScopeSession
+    override konst session: FirSession,
+    private konst scopeSession: ScopeSession
 ) : FirAbstractTreeTransformer<Nothing?>(FirResolvePhase.EXPECT_ACTUAL_MATCHING) {
 
     // --------------------------- classifiers ---------------------------
@@ -77,12 +77,12 @@ open class FirExpectActualMatcherTransformer(
 
     fun transformMemberDeclaration(memberDeclaration: FirMemberDeclaration) {
         if (!memberDeclaration.isActual) return
-        val actualSymbol = memberDeclaration.symbol
+        konst actualSymbol = memberDeclaration.symbol
 
         // Regardless of whether any `expect` symbols are found for `memberDeclaration`, it must be assigned an `expectForActual` map.
         // Otherwise, `FirExpectActualDeclarationChecker` will assume that the symbol needs no checking and not report an
         // `EXPECT_WITHOUT_ACTUAL` error.
-        val expectForActualData = FirExpectActualResolver.findExpectForActual(
+        konst expectForActualData = FirExpectActualResolver.findExpectForActual(
             actualSymbol,
             session,
             scopeSession

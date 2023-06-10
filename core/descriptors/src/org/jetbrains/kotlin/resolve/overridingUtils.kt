@@ -50,15 +50,15 @@ fun <H : Any> Collection<H>.selectMostSpecificInEachOverridableGroup(
     descriptorByHandle: H.() -> CallableDescriptor
 ): Collection<H> {
     if (size <= 1) return this
-    val queue = LinkedList<H>(this)
-    val result = SmartSet.create<H>()
+    konst queue = LinkedList<H>(this)
+    konst result = SmartSet.create<H>()
 
     while (queue.isNotEmpty()) {
-        val nextHandle: H = queue.first()
+        konst nextHandle: H = queue.first()
 
-        val conflictedHandles = SmartSet.create<H>()
+        konst conflictedHandles = SmartSet.create<H>()
 
-        val overridableGroup =
+        konst overridableGroup =
             OverridingUtil.extractMembersOverridableInBothWays(nextHandle, queue, descriptorByHandle) { conflictedHandles.add(it) }
 
         if (overridableGroup.size == 1 && conflictedHandles.isEmpty()) {
@@ -66,8 +66,8 @@ fun <H : Any> Collection<H>.selectMostSpecificInEachOverridableGroup(
             continue
         }
 
-        val mostSpecific = OverridingUtil.selectMostSpecificMember(overridableGroup, descriptorByHandle)
-        val mostSpecificDescriptor = mostSpecific.descriptorByHandle()
+        konst mostSpecific = OverridingUtil.selectMostSpecificMember(overridableGroup, descriptorByHandle)
+        konst mostSpecificDescriptor = mostSpecific.descriptorByHandle()
 
         overridableGroup.filterNotTo(conflictedHandles) {
             OverridingUtil.isMoreSpecific(mostSpecificDescriptor, it.descriptorByHandle())

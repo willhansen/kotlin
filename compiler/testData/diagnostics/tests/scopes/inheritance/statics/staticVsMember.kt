@@ -10,60 +10,60 @@ public class A {
 class B: A() {
     companion object {
         init {
-            val a: Int = foo()
-            val b: Int = bar
+            konst a: Int = foo()
+            konst b: Int = bar
         }
     }
 
     init {
-        val a: Int = foo()
-        val b: Int = bar
+        konst a: Int = foo()
+        konst b: Int = bar
     }
 }
 
 open class C: A() {
-    val bar = ""
+    konst bar = ""
     fun foo() = ""
 
     init {
-        val a: String = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
-        val b: String = bar
+        konst a: String = <!DEBUG_INFO_LEAKING_THIS!>foo<!>()
+        konst b: String = bar
     }
 }
 
 class E: C() {
     init {
-        val a: String = foo()
-        val b: String = bar
+        konst a: String = foo()
+        konst b: String = bar
     }
 }
 
 open class F: A() {
     companion object {
-        val bar = ""
+        konst bar = ""
         fun foo() = ""
 
         init {
-            val a: String = foo()
-            val b: String = bar
+            konst a: String = foo()
+            konst b: String = bar
         }
     }
     init {
-        val a: String = foo()
-        val b: String = bar
+        konst a: String = foo()
+        konst b: String = bar
     }
 }
 
 class G: F() {
     companion object {
         init {
-            val a: String = foo()
-            val b: String = bar
+            konst a: String = foo()
+            konst b: String = bar
         }
     }
 
     init {
-        val a: String = foo()
-        val b: String = bar
+        konst a: String = foo()
+        konst b: String = bar
     }
 }

@@ -2,7 +2,7 @@
 annotation class My
 
 fun foo() {
-    val s = object {
+    konst s = object {
         @My fun bar() {}
     }
     s.bar()

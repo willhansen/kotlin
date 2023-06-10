@@ -5,6 +5,6 @@ interface T {
 }
 
 interface <!CONFLICTING_JVM_DECLARATIONS!>C<!> : T {
-    val x: Int
+    konst x: Int
         <!ACCIDENTAL_OVERRIDE, ACCIDENTAL_OVERRIDE, CONFLICTING_JVM_DECLARATIONS!>get()<!> = 1
 }

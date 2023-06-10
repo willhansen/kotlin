@@ -26,5 +26,5 @@ interface FunctionN<out R> : Function<R>, FunctionBase<R> {
     /**
      * Returns the number of arguments that must be passed to this function.
      */
-    override val arity: Int
+    override konst arity: Int
 }

@@ -5,7 +5,7 @@ package foo
 
 
 fun <T> test(a: List<T>, b: List<T>, removed: Boolean, expected: List<T>): String? {
-    val t = ArrayList<T>(a.size)
+    konst t = ArrayList<T>(a.size)
     t.addAll(a)
 
     if (t.removeAll(b) != removed) return "$a.removeAll($b) != $removed, result list: $t"
@@ -15,10 +15,10 @@ fun <T> test(a: List<T>, b: List<T>, removed: Boolean, expected: List<T>): Strin
 }
 
 fun box(): String {
-    val list = listOf(3, "2", -1, null, 0, 8, 5, "3", 77, -15)
-    val subset = listOf(3, "2", -1, null)
-    val empty = listOf<Any?>()
-    val withOtherElements = listOf(3, 54, null)
+    konst list = listOf(3, "2", -1, null, 0, 8, 5, "3", 77, -15)
+    konst subset = listOf(3, "2", -1, null)
+    konst empty = listOf<Any?>()
+    konst withOtherElements = listOf(3, 54, null)
 
     return test(list, subset, removed = true, expected = listOf(0, 8, 5, "3", 77, -15)) ?:
     test(list, empty, removed = false, expected = list) ?:

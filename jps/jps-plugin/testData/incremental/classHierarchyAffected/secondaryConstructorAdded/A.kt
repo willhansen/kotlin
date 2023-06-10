@@ -1,1 +1,1 @@
-open class A(val x: Int)
+open class A(konst x: Int)

@@ -18,12 +18,12 @@ fun test2(n: Int): Int {
 }
 
 fun test3(n: Int): Int {
-    Holder.value = if (n > 0) a(n + 10) else a(n - 10)
-    return Holder.value
+    Holder.konstue = if (n > 0) a(n + 10) else a(n - 10)
+    return Holder.konstue
 }
 
 object Holder {
-    var value = 0
+    var konstue = 0
 }
 
 fun box(): String {

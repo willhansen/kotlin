@@ -16,7 +16,7 @@ interface I {
 }
 
 @PublishedApi
-internal class B(val x: String) : I {
+internal class B(konst x: String) : I {
     override fun test() = x + "K"
 }
 

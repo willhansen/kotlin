@@ -99,7 +99,7 @@ object GC {
 
     /**
      * GC threshold, controlling how frequenly GC is activated, and how much time GC
-     * takes. Bigger values lead to longer GC pauses, but less GCs.
+     * takes. Bigger konstues lead to longer GC pauses, but less GCs.
      * Usually unused. For the on-safepoints GC scheduler counts
      *         how many safepoints must the code pass before informing the GC scheduler.
      *
@@ -107,7 +107,7 @@ object GC {
      *
      * Default: (new MM) 100000
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     var threshold: Int by kotlin.native.runtime.GC::threshold
 
@@ -115,11 +115,11 @@ object GC {
      * Deprecated and unused.
      *
      * Legacy MM: GC allocation threshold, controlling how frequenly GC collect cycles, and how much time
-     * this process takes. Bigger values lead to longer GC pauses, but less GCs.
+     * this process takes. Bigger konstues lead to longer GC pauses, but less GCs.
      *
      * Default: 8 * 1024
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     @Suppress("DEPRECATION")
     @Deprecated("No-op in modern GC implementation")
@@ -135,7 +135,7 @@ object GC {
      *
      * Default: (legacy MM) 8 * 1024 * 1024
      *
-     * @throws [IllegalArgumentException] when value is not positive.
+     * @throws [IllegalArgumentException] when konstue is not positive.
      */
     var thresholdAllocations: Long by kotlin.native.runtime.GC::thresholdAllocations
 
@@ -160,7 +160,7 @@ object GC {
 
     /**
      * When Kotlin code is not allocating enough to trigger GC, the GC scheduler uses timer to drive collection.
-     * Timer-triggered collection will happen roughly in [regularGCInterval] .. 2 * [regularGCInterval] since
+     * Timer-triggered collection will happen roughly in [regularGCInterkonst] .. 2 * [regularGCInterkonst] since
      * any previous collection.
      * Unused with on-safepoints GC scheduler.
      *
@@ -168,9 +168,9 @@ object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
-     var regularGCInterval: Duration by kotlin.native.runtime.GC::regularGCInterval
+     var regularGCInterkonst: Duration by kotlin.native.runtime.GC::regularGCInterkonst
 
     /**
      * Total amount of heap available for Kotlin objects. When Kotlin objects overflow this heap,
@@ -185,7 +185,7 @@ object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
     var targetHeapBytes: Long by kotlin.native.runtime.GC::targetHeapBytes
 
@@ -197,31 +197,31 @@ object GC {
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is outside (0, 1] interval.
+     * @throws [IllegalArgumentException] when konstue is outside (0, 1] interkonst.
      */
      var targetHeapUtilization: Double by kotlin.native.runtime.GC::targetHeapUtilization
 
     /**
-     * The minimum value for [targetHeapBytes]
+     * The minimum konstue for [targetHeapBytes]
      * Only used if [autotune] is true. See [targetHeapBytes] for more details.
      *
      * Default: 1 MiB
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
      var minHeapBytes: Long by kotlin.native.runtime.GC::minHeapBytes
 
     /**
-     * The maximum value for [targetHeapBytes].
+     * The maximum konstue for [targetHeapBytes].
      * Only used if [autotune] is true. See [targetHeapBytes] for more details.
      *
      * Default: [Long.MAX_VALUE]
      *
      * Unused in legacy MM.
      *
-     * @throws [IllegalArgumentException] when value is negative.
+     * @throws [IllegalArgumentException] when konstue is negative.
      */
      var maxHeapBytes: Long by kotlin.native.runtime.GC::maxHeapBytes
 
@@ -246,6 +246,6 @@ object GC {
      */
     @ExperimentalStdlibApi
     @Suppress("DEPRECATION")
-    val lastGCInfo: kotlin.native.internal.gc.GCInfo?
+    konst lastGCInfo: kotlin.native.internal.gc.GCInfo?
         get() = kotlin.native.internal.gc.GCInfo.lastGCInfo
 }

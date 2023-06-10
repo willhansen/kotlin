@@ -11,7 +11,7 @@ public class CoreBundle {
 // FILE: main.kt
 
 @Target(AnnotationTarget.TYPE)
-annotation class AnnKlass(val argument: String)
+annotation class AnnKlass(konst argument: String)
 
 fun message(key: @AnnKlass(CoreBundle.BUNDLE) String) = key
 

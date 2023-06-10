@@ -21,11 +21,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 private fun Project.kotlinToolingMetadataOfModule(moduleName: String): KotlinToolingMetadata {
-    val module = pm20Extension.modules.getByName(moduleName)
+    konst module = pm20Extension.modules.getByName(moduleName)
     return module.buildKotlinToolingMetadataTask!!.get().kotlinToolingMetadata
 }
 
-private val Project.kotlinToolingMetadataOfMainModule get() = kotlinToolingMetadataOfModule(GradleKpmModule.MAIN_MODULE_NAME)
+private konst Project.kotlinToolingMetadataOfMainModule get() = kotlinToolingMetadataOfModule(GradleKpmModule.MAIN_MODULE_NAME)
 
 class BuildKotlinToolingMetadataTest : AbstractKpmExtensionTest() {
     @Test
@@ -34,7 +34,7 @@ class BuildKotlinToolingMetadataTest : AbstractKpmExtensionTest() {
         with(kotlin) {
             mainAndTest {
                 jvm
-                val linux = fragments.create("linux")
+                konst linux = fragments.create("linux")
                 fragments.create<GradleKpmLinuxX64Variant>("linuxX64").apply { refines(linux) }
                 fragments.create<GradleKpmLinuxArm64Variant>("linuxArm64").apply { refines(linux) }
                 // No JS & Android variants available at the moment, only through [LegacyMappedVariant] which is tested below
@@ -42,7 +42,7 @@ class BuildKotlinToolingMetadataTest : AbstractKpmExtensionTest() {
         }
 
         // When
-        val metadata = project.kotlinToolingMetadataOfMainModule
+        konst metadata = project.kotlinToolingMetadataOfMainModule
 
         // Then
         assertEquals("Gradle", metadata.buildSystem)
@@ -51,10 +51,10 @@ class BuildKotlinToolingMetadataTest : AbstractKpmExtensionTest() {
         assertEquals(project.getKotlinPluginVersion(), metadata.buildPluginVersion)
         assertEquals(3, metadata.projectTargets.size, "Expected 3 targets in KPM")
 
-        val jvmTarget = metadata.projectTargets.single { it.platformType == jvm.name }
+        konst jvmTarget = metadata.projectTargets.single { it.platformType == jvm.name }
         assertEquals(GradleKpmJvmVariant::class.decoratedClassCanonicalName, jvmTarget.target)
 
-        val nativeTargets = metadata.projectTargets.filter { it.platformType == native.name }.map { it.target }.toSet()
+        konst nativeTargets = metadata.projectTargets.filter { it.platformType == native.name }.map { it.target }.toSet()
         assertEquals(
             setOf(
                 GradleKpmLinuxArm64Variant::class.decoratedClassCanonicalName,

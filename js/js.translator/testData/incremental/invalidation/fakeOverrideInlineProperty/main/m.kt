@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val a = ClassA()
+    konst a = ClassA()
     when (stepId) {
         0 -> {
             if (a.testPropertyWithGetter() != "0") return "Fail testPropertyWithGetter()"

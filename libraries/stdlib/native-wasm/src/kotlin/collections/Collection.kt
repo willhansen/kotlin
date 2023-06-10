@@ -15,7 +15,7 @@ public interface Collection<out E> : Iterable<E> {
     /**
      * Returns the size of the collection.
      */
-    public val size: Int
+    public konst size: Int
 
     /**
      * Returns `true` if the collection is empty (contains no elements), `false` otherwise.

@@ -59,7 +59,7 @@ interface HeaderSet : Set<String>
 class MutableHeaderSet : HeaderSet, MutableSet<String>, THashSet<String>()
 
 fun box(): String {
-    val size1 = THashSet<String>().size
-    val size2 = MutableHeaderSet().size
+    konst size1 = THashSet<String>().size
+    konst size2 = MutableHeaderSet().size
     return if (size1 == 1 && size2 == 1) "OK" else "$size1/$size2"
 }

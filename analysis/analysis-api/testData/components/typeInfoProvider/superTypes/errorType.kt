@@ -1,2 +1,2 @@
-val i: UnresolvedType? = null
-val j = <expr>i</expr>
+konst i: UnresolvedType? = null
+konst j = <expr>i</expr>

@@ -31,7 +31,7 @@ fun MutableContextInfo.toDataFlowInfo(languageVersionSettings: LanguageVersionSe
     var resultingDataFlowInfo = DataFlowInfoFactory.EMPTY
 
     extractDataFlowStatements(equalValues, builtIns) { leftDfv, rightValue ->
-        val rightDfv = rightValue.toDataFlowValue(builtIns)
+        konst rightDfv = rightValue.toDataFlowValue(builtIns)
         if (rightDfv != null) {
             resultingDataFlowInfo = resultingDataFlowInfo.equate(leftDfv, rightDfv, false, languageVersionSettings)
         }
@@ -39,7 +39,7 @@ fun MutableContextInfo.toDataFlowInfo(languageVersionSettings: LanguageVersionSe
     }
 
     extractDataFlowStatements(notEqualValues, builtIns) { leftDfv, rightValue ->
-        val rightDfv = rightValue.toDataFlowValue(builtIns)
+        konst rightDfv = rightValue.toDataFlowValue(builtIns)
         if (rightDfv != null) {
             resultingDataFlowInfo = resultingDataFlowInfo.disequate(leftDfv, rightDfv, languageVersionSettings)
         }
@@ -58,7 +58,7 @@ private inline fun <D> extractDataFlowStatements(
     callback: (DataFlowValue, D) -> Unit
 ) {
     for ((key, setOfValues) in dictionary) {
-        val leftDfv = key.toDataFlowValue(builtIns) ?: continue
+        konst leftDfv = key.toDataFlowValue(builtIns) ?: continue
         setOfValues.forEach { callback(leftDfv, it) }
     }
 }

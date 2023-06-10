@@ -4,25 +4,25 @@
 
 package a
 
-const val i = 2
-const val s = 2.toShort()
-const val f = 2.0.toFloat()
-const val d = 2.0
-const val l = 2L
-const val b = 2.toByte()
-const val bool = true
-const val c = 'c'
-const val str = "str"
+const konst i = 2
+const konst s = 2.toShort()
+const konst f = 2.0.toFloat()
+const konst d = 2.0
+const konst l = 2L
+const konst b = 2.toByte()
+const konst bool = true
+const konst c = 'c'
+const konst str = "str"
 
-const val i2 = i
-const val s2 = s
-const val f2 = f
-const val d2 = d
-const val l2 = l
-const val b2 = b
-const val bool2 = bool
-const val c2 = c
-const val str2 = str
+const konst i2 = i
+const konst s2 = s
+const konst f2 = f
+const konst d2 = d
+const konst l2 = l
+const konst b2 = b
+const konst bool2 = bool
+const konst c2 = c
+const konst str2 = str
 
 // MODULE: main(lib)
 // FILE: B.kt
@@ -37,15 +37,15 @@ class MyClass2
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val i: Int,
-        val s: Short,
-        val f: Float,
-        val d: Double,
-        val l: Long,
-        val b: Byte,
-        val bool: Boolean,
-        val c: Char,
-        val str: String
+        konst i: Int,
+        konst s: Short,
+        konst f: Float,
+        konst d: Double,
+        konst l: Long,
+        konst b: Byte,
+        konst bool: Boolean,
+        konst c: Char,
+        konst str: String
 )
 
 fun box(): String {

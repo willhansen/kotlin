@@ -1,15 +1,15 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_VARIABLE
 
-val bar = fun() {}
-val bas = fun() {}
+konst bar = fun() {}
+konst bas = fun() {}
 
 fun gar(p: Any?) = fun() {}
 fun gas(p: Any?) = fun() {}
 
 fun outer() {
-    val bar = fun() {}
-    val bas = fun() {}
+    konst bar = fun() {}
+    konst bas = fun() {}
 
     fun gar(p: Any?) = fun() {}
     fun gas(p: Any?) = fun() {}

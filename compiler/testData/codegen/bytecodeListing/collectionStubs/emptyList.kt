@@ -5,7 +5,7 @@ internal object EmptyList : List<Nothing>, RandomAccess {
     override fun hashCode(): Int = 1
     override fun toString(): String = "[]"
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: Nothing): Boolean = false
     override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()

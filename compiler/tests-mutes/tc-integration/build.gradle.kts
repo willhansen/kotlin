@@ -16,7 +16,7 @@ sourceSets {
     "test" {}
 }
 
-val mutesPackageName = "org.jetbrains.kotlin.test.mutes"
+konst mutesPackageName = "org.jetbrains.kotlin.test.mutes"
 
 application {
     mainClass.set("$mutesPackageName.MutedTestsSyncKt")

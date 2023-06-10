@@ -17,7 +17,7 @@ fun box(): String {
     }else
         return "NOK"
 }
-class Case (val y: Int, val x: Number)  {
+class Case (konst y: Int, konst x: Number)  {
 
     constructor(vararg x: Int) : this(1, 1 as Number){
         flag = true

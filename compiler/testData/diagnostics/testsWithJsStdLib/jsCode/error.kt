@@ -1,4 +1,4 @@
-val code = """
+konst code = """
     var s = "hello"
     + );
 """
@@ -18,7 +18,7 @@ fun main(): Unit {
 
     js(<!JSCODE_ERROR!>"var " + " = " + "10;"<!>)
 
-    val n = 10
+    konst n = 10
     js(<!JSCODE_ERROR!>"var = $n;"<!>)
 
     js(<!JSCODE_ERROR!>code<!>)

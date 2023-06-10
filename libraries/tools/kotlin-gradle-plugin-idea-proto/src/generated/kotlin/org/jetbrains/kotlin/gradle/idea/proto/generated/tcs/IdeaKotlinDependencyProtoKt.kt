@@ -10,7 +10,7 @@ object IdeaKotlinDependencyProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKotlinDependencyProtoKt {
       @JvmName("getSourceDependency")
       get() = _builder.getSourceDependency()
       @JvmName("setSourceDependency")
-      set(value) {
-        _builder.setSourceDependency(value)
+      set(konstue) {
+        _builder.setSourceDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto source_dependency = 1;</code>
@@ -53,8 +53,8 @@ object IdeaKotlinDependencyProtoKt {
       @JvmName("getResolvedBinaryDependency")
       get() = _builder.getResolvedBinaryDependency()
       @JvmName("setResolvedBinaryDependency")
-      set(value) {
-        _builder.setResolvedBinaryDependency(value)
+      set(konstue) {
+        _builder.setResolvedBinaryDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto resolved_binary_dependency = 2;</code>
@@ -77,8 +77,8 @@ object IdeaKotlinDependencyProtoKt {
       @JvmName("getUnresolvedBinaryDependency")
       get() = _builder.getUnresolvedBinaryDependency()
       @JvmName("setUnresolvedBinaryDependency")
-      set(value) {
-        _builder.setUnresolvedBinaryDependency(value)
+      set(konstue) {
+        _builder.setUnresolvedBinaryDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinUnresolvedBinaryDependencyProto unresolved_binary_dependency = 3;</code>
@@ -101,8 +101,8 @@ object IdeaKotlinDependencyProtoKt {
       @JvmName("getProjectArtifactDependency")
       get() = _builder.getProjectArtifactDependency()
       @JvmName("setProjectArtifactDependency")
-      set(value) {
-        _builder.setProjectArtifactDependency(value)
+      set(konstue) {
+        _builder.setProjectArtifactDependency(konstue)
       }
     /**
      * <code>.org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectArtifactDependencyProto project_artifact_dependency = 4;</code>
@@ -117,7 +117,7 @@ object IdeaKotlinDependencyProtoKt {
     fun hasProjectArtifactDependency(): kotlin.Boolean {
       return _builder.hasProjectArtifactDependency()
     }
-    val dependencyCase: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.DependencyCase
+    konst dependencyCase: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.DependencyCase
       @JvmName("getDependencyCase")
       get() = _builder.getDependencyCase()
 
@@ -130,15 +130,15 @@ object IdeaKotlinDependencyProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.sourceDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.sourceDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinSourceDependencyProto?
   get() = if (hasSourceDependency()) getSourceDependency() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.resolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.resolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinResolvedBinaryDependencyProto?
   get() = if (hasResolvedBinaryDependency()) getResolvedBinaryDependency() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.unresolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinUnresolvedBinaryDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.unresolvedBinaryDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinUnresolvedBinaryDependencyProto?
   get() = if (hasUnresolvedBinaryDependency()) getUnresolvedBinaryDependency() else null
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.projectArtifactDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectArtifactDependencyProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProtoOrBuilder.projectArtifactDependencyOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinProjectArtifactDependencyProto?
   get() = if (hasProjectArtifactDependency()) getProjectArtifactDependency() else null
 

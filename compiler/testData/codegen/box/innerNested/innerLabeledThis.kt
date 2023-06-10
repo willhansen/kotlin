@@ -1,10 +1,10 @@
 class Outer {
     inner class Inner {
         fun O() = this@Outer.O
-        val K = this@Outer.K()
+        konst K = this@Outer.K()
     }
     
-    val O = "O"
+    konst O = "O"
     fun K() = "K"
 }
 

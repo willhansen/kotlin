@@ -20,9 +20,9 @@ fun incJ(a: Any){
 fun foo(f: () -> Unit) = f
 
 fun box(): String {
-    val bar = 1
+    konst bar = 1
 
-    val f = foo {
+    konst f = foo {
         incI()
         incJ(if (bar == 2) "A" else "B")
     }

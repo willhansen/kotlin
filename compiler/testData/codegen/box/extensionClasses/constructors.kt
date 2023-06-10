@@ -3,7 +3,7 @@
 // IGNORE_BACKEND_K2: JS_IR
 // WITH_STDLIB
 
-class A(val ok: String)
+class A(konst ok: String)
 
 context(A)
 class B(oValue: Boolean = true, kValue: Boolean = true) {
@@ -21,9 +21,9 @@ class B(oValue: Boolean = true, kValue: Boolean = true) {
 }
 
 fun box(): String {
-    val a = A("OK")
+    konst a = A("OK")
     with (a) {
-        val results = listOf(
+        konst results = listOf(
             B(true, true).result(),
             B("O", "K").result(),
             B().result()

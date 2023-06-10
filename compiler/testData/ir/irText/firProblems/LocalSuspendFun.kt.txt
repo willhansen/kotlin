@@ -1,5 +1,5 @@
 fun foo() {
-  val addNewStatusAction: SuspendFunction0<Unit> = useMemo<SuspendFunction0<Unit>>(callback = local fun <anonymous>(): SuspendFunction0<Unit> {
+  konst addNewStatusAction: SuspendFunction0<Unit> = useMemo<SuspendFunction0<Unit>>(callback = local fun <anonymous>(): SuspendFunction0<Unit> {
     return local suspend fun <no name provided>() {
     }
 

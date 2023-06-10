@@ -1,17 +1,17 @@
 import kotlin.reflect.KProperty
 
-public open class TestDelegate<T: Any>(private val initializer: () -> T) {
-    private var value: T? = null
+public open class TestDelegate<T: Any>(private konst initializer: () -> T) {
+    private var konstue: T? = null
 
     operator open fun getValue(thisRef: Any?, desc: KProperty<*>): T {
-        if (value == null) {
-            value = initializer()
+        if (konstue == null) {
+            konstue = initializer()
         }
-        return value!!
+        return konstue!!
     }
 
-    operator open fun setValue(thisRef: Any?, desc: KProperty<*>, svalue : T) {
-        value = svalue
+    operator open fun setValue(thisRef: Any?, desc: KProperty<*>, skonstue : T) {
+        konstue = skonstue
     }
 }
 
@@ -20,10 +20,10 @@ class B
 class C
 class D
 
-public val A.s: String by TestDelegate({"A"})
-public val B.s: String by TestDelegate({"B"})
-public val C.s: String by TestDelegate({"C"})
-public val D.s: String by TestDelegate({"D"})
+public konst A.s: String by TestDelegate({"A"})
+public konst B.s: String by TestDelegate({"B"})
+public konst C.s: String by TestDelegate({"C"})
+public konst D.s: String by TestDelegate({"D"})
 
 fun box() : String {
     if (A().s != "A") return "Fail A"

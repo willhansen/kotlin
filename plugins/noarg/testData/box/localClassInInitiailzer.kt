@@ -4,17 +4,17 @@
 annotation class NoArg
 
 @NoArg
-class Test(val a: String) {
-    val lc = run {
-        class Local(val result: String)
+class Test(konst a: String) {
+    konst lc = run {
+        class Local(konst result: String)
         Local("OK").result
     }
 
-    val obj = object { val result = "OK" }.result
+    konst obj = object { konst result = "OK" }.result
 }
 
 fun box(): String {
-    val t = Test::class.java.newInstance()
+    konst t = Test::class.java.newInstance()
     if (t.lc != "OK") return "Fail 1"
     return t.obj
 }

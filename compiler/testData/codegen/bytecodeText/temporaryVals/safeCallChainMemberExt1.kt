@@ -3,9 +3,9 @@ class B
 class C
 
 object Host {
-    val A.b: B get() = B()
-    val B.c: C get() = C()
-    val C.s: String get() = "s"
+    konst A.b: B get() = B()
+    konst B.c: C get() = C()
+    konst C.s: String get() = "s"
 
     fun test(an: A?) = an?.b?.c?.s
 }

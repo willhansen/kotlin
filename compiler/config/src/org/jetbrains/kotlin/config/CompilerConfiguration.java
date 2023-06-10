@@ -48,7 +48,7 @@ public class CompilerConfiguration {
     @NotNull
     public <T> T getNotNull(@NotNull CompilerConfigurationKey<T> key) {
         T data = get(key);
-        assert data != null : "No value for configuration key: " + key;
+        assert data != null : "No konstue for configuration key: " + key;
         return data;
     }
 
@@ -68,55 +68,55 @@ public class CompilerConfiguration {
         return data == null ? Collections.emptyMap() : data;
     }
 
-    public <T> void put(@NotNull CompilerConfigurationKey<T> key, @NotNull T value) {
+    public <T> void put(@NotNull CompilerConfigurationKey<T> key, @NotNull T konstue) {
         checkReadOnly();
-        map.put(key.ideaKey, value);
+        map.put(key.ideaKey, konstue);
     }
 
-    public <T> T putIfAbsent(@NotNull CompilerConfigurationKey<T> key, @NotNull T value) {
+    public <T> T putIfAbsent(@NotNull CompilerConfigurationKey<T> key, @NotNull T konstue) {
         T data = get(key);
         if (data != null) return data;
 
         checkReadOnly();
-        put(key, value);
-        return value;
+        put(key, konstue);
+        return konstue;
     }
 
-    public <T> void putIfNotNull(@NotNull CompilerConfigurationKey<T> key, @Nullable T value) {
-        if (value != null) {
-            put(key, value);
+    public <T> void putIfNotNull(@NotNull CompilerConfigurationKey<T> key, @Nullable T konstue) {
+        if (konstue != null) {
+            put(key, konstue);
         }
     }
 
-    public <T> void add(@NotNull CompilerConfigurationKey<List<T>> key, @NotNull T value) {
+    public <T> void add(@NotNull CompilerConfigurationKey<List<T>> key, @NotNull T konstue) {
         checkReadOnly();
         Key<List<T>> ideaKey = key.ideaKey;
         map.computeIfAbsent(ideaKey, k -> new ArrayList<T>());
         List<T> list = (List<T>) map.get(ideaKey);
-        list.add(value);
+        list.add(konstue);
     }
 
-    public <K, V> void put(@NotNull CompilerConfigurationKey<Map<K, V>> configurationKey, @NotNull K key, @NotNull V value) {
+    public <K, V> void put(@NotNull CompilerConfigurationKey<Map<K, V>> configurationKey, @NotNull K key, @NotNull V konstue) {
         checkReadOnly();
         Key<Map<K, V>> ideaKey = configurationKey.ideaKey;
         map.computeIfAbsent(ideaKey, k -> new HashMap<K, V>());
         Map<K, V> data = (Map<K, V>) map.get(ideaKey);
-        data.put(key, value);
+        data.put(key, konstue);
     }
 
-    public <T> void addAll(@NotNull CompilerConfigurationKey<List<T>> key, @Nullable Collection<T> values) {
-        if (values != null) {
-            addAll(key, getList(key).size(), values);
+    public <T> void addAll(@NotNull CompilerConfigurationKey<List<T>> key, @Nullable Collection<T> konstues) {
+        if (konstues != null) {
+            addAll(key, getList(key).size(), konstues);
         }
     }
 
-    public <T> void addAll(@NotNull CompilerConfigurationKey<List<T>> key, int index, @NotNull Collection<T> values) {
+    public <T> void addAll(@NotNull CompilerConfigurationKey<List<T>> key, int index, @NotNull Collection<T> konstues) {
         checkReadOnly();
-        checkForNullElements(values);
+        checkForNullElements(konstues);
         Key<List<T>> ideaKey = key.ideaKey;
         map.computeIfAbsent(ideaKey, k -> new ArrayList<T>());
         List<T> list = (List<T>) map.get(ideaKey);
-        list.addAll(index, values);
+        list.addAll(index, konstues);
     }
 
     public CompilerConfiguration copy() {
@@ -165,12 +165,12 @@ public class CompilerConfiguration {
         return map.toString();
     }
 
-    private static <T> void checkForNullElements(Collection<T> values) {
+    private static <T> void checkForNullElements(Collection<T> konstues) {
         int index = 0;
-        for (T value : values) {
-            if (value == null) {
+        for (T konstue : konstues) {
+            if (konstue == null) {
                 throw new IllegalArgumentException("Element " + index
-                                                   + " is null, while null values in compiler configuration are not allowed");
+                                                   + " is null, while null konstues in compiler configuration are not allowed");
             }
             index++;
         }

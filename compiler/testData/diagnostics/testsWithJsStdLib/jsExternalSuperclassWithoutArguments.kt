@@ -5,4 +5,4 @@ package bar.baz
 
 open external class LIcon(options: String)
 
-external class DivIcon(options: String) : LIcon // No value passed for parameter 'options'
+external class DivIcon(options: String) : LIcon // No konstue passed for parameter 'options'

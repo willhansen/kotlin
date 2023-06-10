@@ -15,7 +15,7 @@ import kotlin.time.*
  * This function is deprecated.
  * To measure the duration of execution of a block of code,
  * use [measureTime] or [measureTimedValue] instead.
- * To mark a point in time for querying the duration of time interval [elapsed][TimeMark.elapsedNow]
+ * To mark a point in time for querying the duration of time interkonst [elapsed][TimeMark.elapsedNow]
  * from that point, use [TimeSource.Monotonic.markNow] instead.
  * The resulting [Duration] then can be expressed as a [Long] number of milliseconds
  * using [Duration.inWholeMilliseconds].
@@ -32,7 +32,7 @@ public external fun getTimeMillis() : Long
  * This function is deprecated.
  * To measure the duration of execution of a block of code,
  * use [measureTime] or [measureTimedValue] instead.
- * To mark a point in time for querying the duration of time interval [elapsed][TimeMark.elapsedNow]
+ * To mark a point in time for querying the duration of time interkonst [elapsed][TimeMark.elapsedNow]
  * from that point, use [TimeSource.Monotonic.markNow] instead.
  * The resulting [Duration] then can be expressed as a [Long] number of nanoseconds
  * using [Duration.inWholeNanoseconds].
@@ -49,7 +49,7 @@ public external fun getTimeNanos() : Long
  * This function is deprecated.
  * To measure the duration of execution of a block of code,
  * use [measureTime] or [measureTimedValue] instead.
- * To mark a point in time for querying the duration of time interval [elapsed][TimeMark.elapsedNow]
+ * To mark a point in time for querying the duration of time interkonst [elapsed][TimeMark.elapsedNow]
  * from that point, use [TimeSource.Monotonic.markNow] instead.
  * The resulting [Duration] then can be expressed as a [Long] number of microseconds
  * using [Duration.inWholeMicroseconds].
@@ -74,7 +74,7 @@ public external fun getTimeMicros() : Long
 @DeprecatedSinceKotlin(warningSince = "1.9")
 @Suppress("DEPRECATION")
 public inline fun measureTimeMillis(block: () -> Unit) : Long {
-    val start = getTimeMillis()
+    konst start = getTimeMillis()
     block()
     return getTimeMillis() - start
 }
@@ -92,7 +92,7 @@ public inline fun measureTimeMillis(block: () -> Unit) : Long {
 @DeprecatedSinceKotlin(warningSince = "1.9")
 @Suppress("DEPRECATION")
 public inline fun measureTimeMicros(block: () -> Unit) : Long {
-    val start = getTimeMicros()
+    konst start = getTimeMicros()
     block()
     return getTimeMicros() - start
 }
@@ -112,7 +112,7 @@ public inline fun measureTimeMicros(block: () -> Unit) : Long {
 @DeprecatedSinceKotlin(warningSince = "1.9")
 @Suppress("DEPRECATION")
 public inline fun measureNanoTime(block: () -> Unit) : Long {
-    val start = getTimeNanos()
+    konst start = getTimeNanos()
     block()
     return getTimeNanos() - start
 }

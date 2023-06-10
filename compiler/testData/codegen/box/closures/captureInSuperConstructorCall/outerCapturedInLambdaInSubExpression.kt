@@ -1,8 +1,8 @@
-open class Foo(val x: () -> String)
-open class Foo2(val foo: Foo)
+open class Foo(konst x: () -> String)
+open class Foo2(konst foo: Foo)
 
 class Outer {
-    val s = "OK"
+    konst s = "OK"
 
     inner class Inner : Foo2(Foo({ s }))
 }

@@ -13,14 +13,14 @@ interface Distribution {
     @Deprecated("Use `distributionName` instead", ReplaceWith("distributionName"))
     var name: String?
 
-    val distributionName: Property<String>
+    konst distributionName: Property<String>
 
     @Deprecated("Use `outputDirectory` instead", ReplaceWith("outputDirectory"))
     var directory: File
 
-    val outputDirectory: DirectoryProperty
+    konst outputDirectory: DirectoryProperty
 
     companion object {
-        const val DIST = "dist"
+        const konst DIST = "dist"
     }
 }

@@ -10,13 +10,13 @@ import kotlin.test.*
 import kotlin.native.*
 
 @Test fun runTest() {
-    val data = immutableBlobOf(0x1, 0x2, 0x3, 0x7, 0x8, 0x9, 0x80, 0xff)
+    konst data = immutableBlobOf(0x1, 0x2, 0x3, 0x7, 0x8, 0x9, 0x80, 0xff)
     for (b in data) {
         print("$b ")
     }
     println()
 
-    val dataClone = data.toByteArray()
+    konst dataClone = data.toByteArray()
     dataClone.map { print("$it ") }
     println()
 }

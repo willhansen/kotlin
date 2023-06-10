@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.CompilerEnvironment
 import java.io.File
 
-data class CommonAnalysisResult(val moduleDescriptor: ModuleDescriptor, val bindingContext: BindingContext)
+data class CommonAnalysisResult(konst moduleDescriptor: ModuleDescriptor, konst bindingContext: BindingContext)
 
-internal val KotlinCoreEnvironment.destDir: File?
+internal konst KotlinCoreEnvironment.destDir: File?
     get() = configuration.get(CLIConfigurationKeys.METADATA_DESTINATION_DIRECTORY)
 
 internal fun runCommonAnalysisForSerialization(
@@ -30,39 +30,39 @@ internal fun runCommonAnalysisForSerialization(
     dependOnBuiltins: Boolean,
     dependencyContainerFactory: () -> CommonDependenciesContainer?
 ): CommonAnalysisResult? {
-    val performanceManager = environment.configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
+    konst performanceManager = environment.configuration.getNotNull(CLIConfigurationKeys.PERF_MANAGER)
 
     var analysisResultWithHasErrors: AnalysisResultWithHasErrors
     do {
         performanceManager.notifyAnalysisStarted()
         analysisResultWithHasErrors = runCommonAnalysisIteration(environment, dependOnBuiltins, dependencyContainerFactory())
-        val result = analysisResultWithHasErrors.result
+        konst result = analysisResultWithHasErrors.result
         if (result is AnalysisResult.RetryWithAdditionalRoots) {
             environment.addKotlinSourceRoots(result.additionalKotlinRoots)
         }
         performanceManager.notifyAnalysisFinished()
     } while (result is AnalysisResult.RetryWithAdditionalRoots)
 
-    val analysisResult = analysisResultWithHasErrors.result
+    konst analysisResult = analysisResultWithHasErrors.result
     return if (analysisResult.shouldGenerateCode && !analysisResultWithHasErrors.hasErrors)
         CommonAnalysisResult(analysisResult.moduleDescriptor, analysisResult.bindingContext)
     else
         null
 }
 
-private data class AnalysisResultWithHasErrors(val result: AnalysisResult, val hasErrors: Boolean)
+private data class AnalysisResultWithHasErrors(konst result: AnalysisResult, konst hasErrors: Boolean)
 
 private fun runCommonAnalysisIteration(
     environment: KotlinCoreEnvironment,
     dependOnBuiltins: Boolean,
     dependencyContainer: CommonDependenciesContainer?
 ): AnalysisResultWithHasErrors {
-    val configuration = environment.configuration
-    val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-    val files = environment.getSourceFiles()
-    val moduleName = Name.special("<${configuration.getNotNull(CommonConfigurationKeys.MODULE_NAME)}>")
+    konst configuration = environment.configuration
+    konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+    konst files = environment.getSourceFiles()
+    konst moduleName = Name.special("<${configuration.getNotNull(CommonConfigurationKeys.MODULE_NAME)}>")
 
-    val analyzer = AnalyzerWithCompilerReport(
+    konst analyzer = AnalyzerWithCompilerReport(
         messageCollector,
         configuration.languageVersionSettings,
         configuration.getBoolean(CLIConfigurationKeys.RENDER_DIAGNOSTIC_INTERNAL_NAME)

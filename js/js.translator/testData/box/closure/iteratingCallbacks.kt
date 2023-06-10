@@ -4,10 +4,10 @@ package foo
 
 
 fun box(): String {
-    val oneTwo = Array(2) {
+    konst oneTwo = Array(2) {
         it + 1
     }
-    val a = ArrayList<() -> Int>()
+    konst a = ArrayList<() -> Int>()
     for (i in oneTwo) {
         for (j in 1..2) {
             a.add({

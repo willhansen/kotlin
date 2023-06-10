@@ -28,18 +28,18 @@
  *	log2(2**N) = N  for N=−1022 to +1023.
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following constants.
- * The decimal values may be used, provided that the compiler will convert
- * from decimal to binary accurately enough to produce the hexadecimal values
+ * The hexadecimal konstues are the intended ones for the following constants.
+ * The decimal konstues may be used, provided that the compiler will convert
+ * from decimal to binary accurately enough to produce the hexadecimal konstues
  * shown.
  */
 
 package kotlin.math.fdlibm
 
-private const val two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
-private const val ivln2 = 0.14426950408889634073e+01 /* 0x3ff71547, 0x652b82fe */
+private const konst two54 = 1.80143985094819840000e+16 /* 0x43500000, 0x00000000 */
+private const konst ivln2 = 0.14426950408889634073e+01 /* 0x3ff71547, 0x652b82fe */
 
-private const val zero = 0.0
+private const konst zero = 0.0
 
 internal fun __ieee754_log2(_x: Double): Double {
     var x: Double = _x

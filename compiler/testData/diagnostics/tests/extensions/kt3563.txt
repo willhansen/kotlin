@@ -1,7 +1,7 @@
 package
 
 package bar {
-    public val java.io.File.name1: kotlin.String
+    public konst java.io.File.name1: kotlin.String
     public fun foo(/*0*/ f: java.io.File, /*1*/ c: bar.Customer): kotlin.Unit
 
     public final class Customer {

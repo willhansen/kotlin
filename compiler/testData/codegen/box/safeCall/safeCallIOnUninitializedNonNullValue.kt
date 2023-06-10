@@ -6,7 +6,7 @@ abstract class Base() {
     abstract fun foo()
 }
 
-class Derived(val x: String) : Base() {
+class Derived(konst x: String) : Base() {
     override fun foo() {
         x?.length
     }

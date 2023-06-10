@@ -13,10 +13,10 @@ class C : B {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     var r = c.foo().iterator().next()
-    val b: B = c
-    val a: A = c
+    konst b: B = c
+    konst a: A = c
     r += b.foo().iterator().next()
     r += a.foo().iterator().next()
     return if (r == "CCC") "OK" else "Fail: $r"

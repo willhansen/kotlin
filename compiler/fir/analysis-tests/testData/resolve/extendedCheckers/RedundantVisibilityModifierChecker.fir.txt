@@ -8,7 +8,7 @@ FILE: RedundantVisibilityModifierChecker.kt
 
             internal final var foo: R|kotlin/Int| = Int(0)
                 internal get(): R|kotlin/Int|
-                internal set(value: R|kotlin/Int|): R|kotlin/Unit|
+                internal set(konstue: R|kotlin/Int|): R|kotlin/Unit|
 
         }
 
@@ -22,7 +22,7 @@ FILE: RedundantVisibilityModifierChecker.kt
             super<R|kotlin/Any|>()
         }
 
-        internal final val z: R|kotlin/Any| = object : R|kotlin/Any| {
+        internal final konst z: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -57,7 +57,7 @@ FILE: RedundantVisibilityModifierChecker.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val foo: R|kotlin/Int| = Int(0)
+        public final konst foo: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int|
 
         public final fun bar(): R|kotlin/Unit| {
@@ -93,7 +93,7 @@ FILE: RedundantVisibilityModifierChecker.kt
             super<R|kotlin/Enum<F>|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
         public final static enum entry FIRST: R|F| = object : R|F| {
@@ -103,13 +103,13 @@ FILE: RedundantVisibilityModifierChecker.kt
 
         }
 
-        public final static fun values(): R|kotlin/Array<F>| {
+        public final static fun konstues(): R|kotlin/Array<F>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|F| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|F| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<F>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<F>|
             public get(): R|kotlin/enums/EnumEntries<F>|
 
     }
@@ -118,7 +118,7 @@ FILE: RedundantVisibilityModifierChecker.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val y: R|kotlin/Int| = R|<local>/y|
+        public final konst y: R|kotlin/Int| = R|<local>/y|
             public get(): R|kotlin/Int|
 
         private constructor(): R|G| {
@@ -139,13 +139,13 @@ FILE: RedundantVisibilityModifierChecker.kt
     }
     public final var baz: R|kotlin/Int| = Int(0)
         public get(): R|kotlin/Int|
-        public set(value: R|kotlin/Int|): R|kotlin/Unit|
+        public set(konstue: R|kotlin/Int|): R|kotlin/Unit|
     public open class J : R|kotlin/Any| {
         public constructor(): R|J| {
             super<R|kotlin/Any|>()
         }
 
-        protected final val baz: R|kotlin/Int| = Int(0)
+        protected final konst baz: R|kotlin/Int| = Int(0)
             protected get(): R|kotlin/Int| {
                 ^ this@R|/J|.F|/J.baz|.R|kotlin/Int.times|(Int(2))
             }
@@ -154,23 +154,23 @@ FILE: RedundantVisibilityModifierChecker.kt
             public get(): R|kotlin/Int| {
                 ^ Int(1)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J|.F|/J.baf| = R|<local>/value|
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J|.F|/J.baf| = R|<local>/konstue|
             }
 
         public final var buf: R|kotlin/Int| = Int(0)
             private get(): R|kotlin/Int| {
                 ^ Int(42)
             }
-            protected set(value: R|kotlin/Int|): R|kotlin/Unit| {
-                this@R|/J|.F|/J.buf| = R|<local>/value|
+            protected set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
+                this@R|/J|.F|/J.buf| = R|<local>/konstue|
             }
 
         public final var bar: R|kotlin/Int| = Int(0)
             public get(): R|kotlin/Int| {
                 ^ Double(3.1415926535)
             }
-            public set(value: R|kotlin/Int|): R|kotlin/Unit| {
+            public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
             }
 
     }

@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated element and the code transitively {@linkplain
  * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are <b>null-marked
- * code</b>: there, type usages are generally considered to exclude {@code null} as a value unless
+ * code</b>: there, type usages are generally considered to exclude {@code null} as a konstue unless
  * specified otherwise. Using this annotation avoids the need to write {@link NonNull @NonNull} many
  * times throughout your code.
  *
@@ -43,7 +43,7 @@ import java.lang.annotation.Target;
  * <h2 id="effects">Effects of being null-marked</h2>
  *
  * <p>Within null-marked code, as a <i>general</i> rule, a type usage is considered non-null (to
- * exclude {@code null} as a value) unless explicitly annotated as {@link Nullable}. However, there
+ * exclude {@code null} as a konstue) unless explicitly annotated as {@link Nullable}. However, there
  * are several special cases to address.
  *
  * <h3 id="effects-special-cases">Special cases</h3>

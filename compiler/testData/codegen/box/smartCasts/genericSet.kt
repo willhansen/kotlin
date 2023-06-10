@@ -7,7 +7,7 @@ inline fun <reified T> change(w: Wrapper<T>, x: Any?) {
 }
 
 fun box(): String {
-    val w = Wrapper<String>("FAIL")
+    konst w = Wrapper<String>("FAIL")
     change(w, "OK")
     return w.x
 }

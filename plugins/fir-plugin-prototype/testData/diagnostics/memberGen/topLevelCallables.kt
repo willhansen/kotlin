@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.fir.plugin.DummyFunction
 @DummyFunction
 class MySuperClass {
     fun test() {
-        val s = dummyMySuperClass(this)
+        konst s = dummyMySuperClass(this)
         takeString(s)
     }
 }

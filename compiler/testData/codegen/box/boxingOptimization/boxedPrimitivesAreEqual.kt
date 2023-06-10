@@ -1,8 +1,8 @@
 inline fun eq(a: Any, b: Any) = a == b
 inline fun ne(a: Any, b: Any) = a != b
 
-val ONE = 1
-val ONEL = 1L
+konst ONE = 1
+konst ONEL = 1L
 
 fun box(): String {
     return when {

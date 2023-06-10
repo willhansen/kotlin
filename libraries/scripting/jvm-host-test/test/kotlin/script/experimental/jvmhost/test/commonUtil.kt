@@ -8,10 +8,10 @@ package kotlin.script.experimental.jvmhost.test
 import java.io.File
 import java.nio.file.Files
 
-internal const val TEST_DATA_DIR = "libraries/scripting/jvm-host-test/testData"
+internal const konst TEST_DATA_DIR = "libraries/scripting/jvm-host-test/testData"
 
 internal fun <R> withTempDir(keyName: String = "tmp", body: (File) -> R) {
-    val tempDir = Files.createTempDirectory(keyName).toFile()
+    konst tempDir = Files.createTempDirectory(keyName).toFile()
     try {
         body(tempDir)
     } finally {

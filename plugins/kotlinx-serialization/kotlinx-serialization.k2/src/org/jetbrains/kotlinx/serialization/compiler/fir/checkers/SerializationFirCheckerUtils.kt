@@ -40,7 +40,7 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SpecialBuiltins
 // ---------------------- search utils ----------------------
 
 context(CheckerContext)
-internal val FirClassSymbol<*>?.classSerializer: FirClassSymbol<*>?
+internal konst FirClassSymbol<*>?.classSerializer: FirClassSymbol<*>?
     get() {
         if (this == null) return null
         // serializer annotation on class?
@@ -59,9 +59,9 @@ internal val FirClassSymbol<*>?.classSerializer: FirClassSymbol<*>?
     }
 
 context(CheckerContext)
-val FirClassSymbol<*>.polymorphicSerializerIfApplicableAutomatically: FirClassSymbol<*>?
+konst FirClassSymbol<*>.polymorphicSerializerIfApplicableAutomatically: FirClassSymbol<*>?
     get() {
-        val serializerName = when {
+        konst serializerName = when {
             isInterface -> when (modality) {
                 Modality.SEALED -> SpecialBuiltins.sealedSerializer
                 else -> SpecialBuiltins.polymorphicSerializer
@@ -81,24 +81,24 @@ val FirClassSymbol<*>.polymorphicSerializerIfApplicableAutomatically: FirClassSy
 // ---------------------- annotation utils ----------------------
 
 context(CheckerContext)
-internal val FirAnnotation.annotationClassSymbol: FirRegularClassSymbol?
+internal konst FirAnnotation.annotationClassSymbol: FirRegularClassSymbol?
     get() = annotationTypeRef.coneType
         .fullyExpandedType(session)
         .toRegularClassSymbol(session)
 
 context(CheckerContext)
-internal val FirAnnotation.isMetaSerializableAnnotation: Boolean
+internal konst FirAnnotation.isMetaSerializableAnnotation: Boolean
     get() = annotationClassSymbol?.hasAnnotation(SerializationAnnotations.metaSerializableAnnotationClassId, session) ?: false
 
 
 context(CheckerContext)
 internal fun FirClassSymbol<*>.metaSerializableAnnotation(needArguments: Boolean): FirAnnotation? {
-    val annotations = if (needArguments) resolvedAnnotationsWithClassIds else resolvedAnnotationsWithArguments
+    konst annotations = if (needArguments) resolvedAnnotationsWithClassIds else resolvedAnnotationsWithArguments
     return annotations.firstOrNull { it.isMetaSerializableAnnotation }
 }
 
 context(CheckerContext)
-internal val FirClassSymbol<*>.serializableOrMetaAnnotationSource: KtSourceElement?
+internal konst FirClassSymbol<*>.serializableOrMetaAnnotationSource: KtSourceElement?
     get() {
         serializableAnnotation(needArguments = false, session)?.source?.let { return it }
         metaSerializableAnnotation(needArguments = false)?.source?.let { return it }
@@ -106,7 +106,7 @@ internal val FirClassSymbol<*>.serializableOrMetaAnnotationSource: KtSourceEleme
     }
 
 context(CheckerContext)
-internal val FirBasedSymbol<*>.hasAnySerialAnnotation: Boolean
+internal konst FirBasedSymbol<*>.hasAnySerialAnnotation: Boolean
     get() = getSerialNameValue(session) != null || resolvedAnnotationsWithClassIds.any {
         with(session) { it.annotationClassSymbol?.isSerialInfoAnnotation == true }
     }
@@ -126,7 +126,7 @@ fun FirClassSymbol<*>.getSuperClassOrAny(session: FirSession): FirRegularClassSy
 }
 
 context(CheckerContext)
-internal val FirClassSymbol<*>.isSerializableEnumWithMissingSerializer: Boolean
+internal konst FirClassSymbol<*>.isSerializableEnumWithMissingSerializer: Boolean
     get() {
         if (!isEnumClass) return false
         if (with(session) { hasSerializableOrMetaAnnotation }) return false
@@ -135,7 +135,7 @@ internal val FirClassSymbol<*>.isSerializableEnumWithMissingSerializer: Boolean
     }
 
 context(FirSession)
-internal val FirClassSymbol<*>.serializableAnnotationIsUseless: Boolean
+internal konst FirClassSymbol<*>.serializableAnnotationIsUseless: Boolean
     get() = !classKind.isEnumClass &&
             hasSerializableOrMetaAnnotationWithoutArgs &&
             !isInternalSerializable &&
@@ -145,15 +145,15 @@ internal val FirClassSymbol<*>.serializableAnnotationIsUseless: Boolean
 // ---------------------- type utils ----------------------
 
 context(CheckerContext)
-internal val ConeKotlinType.serializableWith: ConeKotlinType?
+internal konst ConeKotlinType.serializableWith: ConeKotlinType?
     get() = customAnnotations.getSerializableWith(session) ?: toRegularClassSymbol(session)?.getSerializableWith(session)
 
 
 context(CheckerContext)
-internal val ConeKotlinType.overriddenSerializer: ConeKotlinType?
+internal konst ConeKotlinType.overriddenSerializer: ConeKotlinType?
     get() = toRegularClassSymbol(session)?.getSerializableWith(session)
 
 
 // ---------------------- others ----------------------
-internal val CheckerContext.currentFile: FirFile
+internal konst CheckerContext.currentFile: FirFile
     get() = containingDeclarations.first() as FirFile

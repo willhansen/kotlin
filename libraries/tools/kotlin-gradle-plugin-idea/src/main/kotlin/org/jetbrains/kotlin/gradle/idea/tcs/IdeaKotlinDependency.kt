@@ -10,5 +10,5 @@ import java.io.Serializable
 
 @IdeaKotlinModel
 sealed interface IdeaKotlinDependency : Serializable, HasMutableExtras {
-    val coordinates: IdeaKotlinDependencyCoordinates?
+    konst coordinates: IdeaKotlinDependencyCoordinates?
 }

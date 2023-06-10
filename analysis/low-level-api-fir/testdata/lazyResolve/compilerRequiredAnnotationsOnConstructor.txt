@@ -6,7 +6,7 @@ FILE: [ResolvedTo(RAW_FIR)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -15,7 +15,7 @@ FILE: [ResolvedTo(RAW_FIR)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -28,7 +28,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -37,7 +37,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -50,7 +50,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -59,7 +59,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -72,7 +72,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -81,7 +81,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -94,7 +94,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -103,7 +103,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -116,7 +116,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -125,7 +125,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val i: Int = R|<local>/i|
+        @PROPERTY:Deprecated[Unresolved](LAZY_EXPRESSION) @PROPERTY:Anno[Unresolved](LAZY_EXPRESSION) field:@FIELD:Deprecated[Unresolved](LAZY_EXPRESSION) @FIELD:Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst i: Int = R|<local>/i|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=A] get(): Int
 
     }
@@ -138,7 +138,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -147,7 +147,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -160,7 +160,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -169,7 +169,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -182,7 +182,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -191,7 +191,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -204,7 +204,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -213,7 +213,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -226,7 +226,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -235,7 +235,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -248,7 +248,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -257,7 +257,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -270,7 +270,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -279,7 +279,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](String(property)) @PROPERTY:R|Anno|[Types](LAZY_EXPRESSION) field:@FIELD:R|kotlin/Deprecated|[Types](String(field)) @FIELD:R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(STATUS)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }
@@ -292,7 +292,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -301,7 +301,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnConstructor.kt
             super<R|kotlin/Any|>()
         }
 
-        @PROPERTY:R|kotlin/Deprecated|[Types](message = String(property)) @PROPERTY:R|Anno|[Types](s = String(property)) field:@FIELD:R|kotlin/Deprecated|[Types](message = String(field)) @FIELD:R|Anno|[Types](s = String(field)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val i: R|kotlin/Int| = R|<local>/i|
+        @PROPERTY:R|kotlin/Deprecated|[Types](message = String(property)) @PROPERTY:R|Anno|[Types](s = String(property)) field:@FIELD:R|kotlin/Deprecated|[Types](message = String(field)) @FIELD:R|Anno|[Types](s = String(field)) public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst i: R|kotlin/Int| = R|<local>/i|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=A] get(): R|kotlin/Int|
 
     }

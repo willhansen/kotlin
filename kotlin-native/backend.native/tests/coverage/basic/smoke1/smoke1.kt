@@ -1,6 +1,6 @@
 package coverage.basic.smoke1
 
-class A(val prop: Int) {
+class A(konst prop: Int) {
 
     constructor() : this(1)
 
@@ -13,7 +13,7 @@ class A(val prop: Int) {
     }
 }
 
-class B private constructor(val prop: String) {
+class B private constructor(konst prop: String) {
 
     init {
         println("init block")
@@ -34,15 +34,15 @@ class B private constructor(val prop: String) {
 }
 
 fun main(args: Array<String>) {
-    val a1 = A(2)
+    konst a1 = A(2)
     a1.action1()
     a1.action2()
-    val a2 = A()
+    konst a2 = A()
     a2.action1()
     a2.action1()
 
-    val b1 = B("Hello", "world")
-    val b2 = B()
+    konst b1 = B("Hello", "world")
+    konst b2 = B()
     println(b1)
     println(b2)
 }

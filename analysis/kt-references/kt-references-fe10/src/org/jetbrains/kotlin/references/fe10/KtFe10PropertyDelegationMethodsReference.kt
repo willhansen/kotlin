@@ -21,8 +21,8 @@ class KtFe10PropertyDelegationMethodsReference(
 ) : KtPropertyDelegationMethodsReference(expression), KtFe10Reference {
 
     override fun getTargetDescriptors(context: BindingContext): Collection<DeclarationDescriptor> {
-        val property = expression.getStrictParentOfType<KtProperty>() ?: return emptyList()
-        val descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, property] as? VariableDescriptorWithAccessors
+        konst property = expression.getStrictParentOfType<KtProperty>() ?: return emptyList()
+        konst descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, property] as? VariableDescriptorWithAccessors
             ?: return emptyList()
         return descriptor.accessors.mapNotNull { accessor ->
             context.get(BindingContext.DELEGATED_PROPERTY_RESOLVED_CALL, accessor)?.candidateDescriptor

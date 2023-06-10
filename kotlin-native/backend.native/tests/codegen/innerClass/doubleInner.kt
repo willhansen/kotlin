@@ -7,7 +7,7 @@ package codegen.innerClass.doubleInner
 
 import kotlin.test.*
 
-open class Father(val param: String) {
+open class Father(konst param: String) {
     abstract inner class InClass {
         fun work(): String {
             return param

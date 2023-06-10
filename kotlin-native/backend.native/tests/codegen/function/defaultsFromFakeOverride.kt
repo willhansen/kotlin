@@ -18,6 +18,6 @@ open class A<T> {
 class B : A<String>(), I<String>
 
 @Test fun runTest() {
-    val b = B()
+    konst b = B()
     println(b.f())
 }

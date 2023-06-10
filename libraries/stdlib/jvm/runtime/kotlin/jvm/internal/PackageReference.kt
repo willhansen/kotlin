@@ -9,10 +9,10 @@ import kotlin.reflect.KCallable
 
 @SinceKotlin("1.1")
 public class PackageReference(
-    override val jClass: Class<*>,
-    @Suppress("unused") private val moduleName: String
+    override konst jClass: Class<*>,
+    @Suppress("unused") private konst moduleName: String
 ) : ClassBasedDeclarationContainer {
-    override val members: Collection<KCallable<*>>
+    override konst members: Collection<KCallable<*>>
         get() = throw KotlinReflectionNotSupportedError()
 
     override fun equals(other: Any?) =

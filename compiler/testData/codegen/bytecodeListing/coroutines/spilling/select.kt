@@ -12,7 +12,7 @@ public fun <E> CoroutineScope.produce(
 ): ReceiveChannel<E>  = TODO()
 
 interface ProducerScope<in E> : CoroutineScope, SendChannel<E> {
-    public val channel: SendChannel<E>
+    public konst channel: SendChannel<E>
 }
 
 interface ReceiveChannel<out E>
@@ -21,7 +21,7 @@ interface SelectBuilder<in R> {
 }
 interface SelectClause2<in P, out Q>
 interface SendChannel<in E> {
-    val onSend: SelectClause2<E, SendChannel<E>>
+    konst onSend: SelectClause2<E, SendChannel<E>>
 }
 suspend inline fun <R> select(crossinline builder: SelectBuilder<R>.() -> Unit): R {
     TODO()

@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.lombok.k2.config.LombokService
 import org.jetbrains.kotlin.lombok.k2.generators.*
 import java.io.File
 
-class FirLombokRegistrar(private val lombokConfigFile: File?) : FirExtensionRegistrar() {
+class FirLombokRegistrar(private konst lombokConfigFile: File?) : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +LombokService.getFactory(lombokConfigFile)
         +::GetterGenerator

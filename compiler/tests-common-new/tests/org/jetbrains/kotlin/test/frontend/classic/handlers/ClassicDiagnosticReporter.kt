@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.*
 import org.jetbrains.kotlin.test.utils.AbstractTwoAttributesMetaInfoProcessor
 
-class ClassicDiagnosticReporter(private val testServices: TestServices) {
-    private val globalMetadataInfoHandler: GlobalMetadataInfoHandler
+class ClassicDiagnosticReporter(private konst testServices: TestServices) {
+    private konst globalMetadataInfoHandler: GlobalMetadataInfoHandler
         get() = testServices.globalMetadataInfoHandler
 
     fun createConfiguration(module: TestModule): DiagnosticsRenderingConfiguration {
@@ -58,12 +58,12 @@ class ClassicDiagnosticReporter(private val testServices: TestServices) {
         newInferenceEnabled: Boolean,
         withNewInferenceModeEnabled: Boolean
     ): List<DiagnosticCodeMetaInfo> = textRanges.map { range ->
-        val metaInfo = DiagnosticCodeMetaInfo(range, ClassicMetaInfoUtils.renderDiagnosticNoArgs, this)
+        konst metaInfo = DiagnosticCodeMetaInfo(range, ClassicMetaInfoUtils.renderDiagnosticNoArgs, this)
         if (withNewInferenceModeEnabled) {
             metaInfo.attributes += if (newInferenceEnabled) OldNewInferenceMetaInfoProcessor.NI else OldNewInferenceMetaInfoProcessor.OI
         }
         if (file !in module.files) {
-            val targetPlatform = module.targetPlatform
+            konst targetPlatform = module.targetPlatform
             metaInfo.attributes += when {
                 targetPlatform.isJvm() -> "JVM"
                 targetPlatform.isJs() -> "JS"
@@ -72,7 +72,7 @@ class ClassicDiagnosticReporter(private val testServices: TestServices) {
                 else -> error("Should not be here")
             }
         }
-        val existing = globalMetadataInfoHandler.getExistingMetaInfosForActualMetadata(file, metaInfo)
+        konst existing = globalMetadataInfoHandler.getExistingMetaInfosForActualMetadata(file, metaInfo)
         if (existing.any { it.description != null }) {
             metaInfo.replaceRenderConfiguration(ClassicMetaInfoUtils.renderDiagnosticWithArgs)
         }
@@ -82,12 +82,12 @@ class ClassicDiagnosticReporter(private val testServices: TestServices) {
 
 class OldNewInferenceMetaInfoProcessor(testServices: TestServices) : AbstractTwoAttributesMetaInfoProcessor(testServices) {
     companion object {
-        const val OI = "OI"
-        const val NI = "NI"
+        const konst OI = "OI"
+        const konst NI = "NI"
     }
 
-    override val firstAttribute: String get() = NI
-    override val secondAttribute: String get() = OI
+    override konst firstAttribute: String get() = NI
+    override konst secondAttribute: String get() = OI
 
     override fun processorEnabled(module: TestModule): Boolean {
         return DiagnosticsDirectives.WITH_NEW_INFERENCE in module.directives

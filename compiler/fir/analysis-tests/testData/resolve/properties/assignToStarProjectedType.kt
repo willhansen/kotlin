@@ -10,7 +10,7 @@ abstract class Base<T> {
 class Bar : Base<String>()
 
 fun test_1() {
-    val x = Bar()
+    konst x = Bar()
     x.foo = invOf()
     x.foo = null
 }

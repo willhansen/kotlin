@@ -31,21 +31,21 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-internal val annotationImplementationPhase = makeIrFilePhase<JvmBackendContext>(
+internal konst annotationImplementationPhase = makeIrFilePhase<JvmBackendContext>(
     { ctxt -> AnnotationImplementationLowering { JvmAnnotationImplementationTransformer(ctxt, it) } },
     name = "AnnotationImplementation",
     description = "Create synthetic annotations implementations and use them in annotations constructor calls"
 )
 
-class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, file: IrFile) :
+class JvmAnnotationImplementationTransformer(konst jvmContext: JvmBackendContext, file: IrFile) :
     AnnotationImplementationTransformer(jvmContext, file) {
-    private val publicAnnotationImplementationClasses = mutableSetOf<IrClassSymbol>()
+    private konst publicAnnotationImplementationClasses = mutableSetOf<IrClassSymbol>()
 
     // FIXME: Copied from JvmSingleAbstractMethodLowering
-    private val inInlineFunctionScope: Boolean
+    private konst inInlineFunctionScope: Boolean
         get() = allScopes.any { (it.irElement as? IrDeclaration)?.isInPublicInlineScope == true }
 
-    private val implementor = AnnotationPropertyImplementor(
+    private konst implementor = AnnotationPropertyImplementor(
         jvmContext.irFactory,
         jvmContext.irBuiltIns,
         jvmContext.ir.symbols,
@@ -59,7 +59,7 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
         implClass.constructors.single()
 
     override fun visitConstructorCall(expression: IrConstructorCall): IrExpression {
-        val constructedClass = expression.type.classOrNull
+        konst constructedClass = expression.type.classOrNull
         if (constructedClass?.owner?.isAnnotationClass == true && inInlineFunctionScope) {
             publicAnnotationImplementationClasses += constructedClass
         }
@@ -77,13 +77,13 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
         }
 
     override fun getArrayContentEqualsSymbol(type: IrType): IrFunctionSymbol {
-        val targetType = when {
+        konst targetType = when {
             type.isPrimitiveArray() -> type
             type.isUnsignedArray() -> type.unboxInlineClass()
             else -> jvmContext.ir.symbols.arrayOfAnyNType
         }
-        val requiredSymbol = jvmContext.ir.symbols.arraysClass.owner.findDeclaration<IrFunction> {
-            it.name.asString() == "equals" && it.valueParameters.size == 2 && it.valueParameters.first().type == targetType
+        konst requiredSymbol = jvmContext.ir.symbols.arraysClass.owner.findDeclaration<IrFunction> {
+            it.name.asString() == "equals" && it.konstueParameters.size == 2 && it.konstueParameters.first().type == targetType
         }
         requireNotNull(requiredSymbol) { "Can't find Arrays.equals method for type ${targetType.render()}" }
         return requiredSymbol.symbol
@@ -131,26 +131,26 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
         toStringFun: IrSimpleFunction,
         generator: AnnotationImplementationMemberGenerator
     ) {
-        val properties = annotationClass.getAnnotationProperties()
-        val implProperties = implClass.getAnnotationProperties()
+        konst properties = annotationClass.getAnnotationProperties()
+        konst implProperties = implClass.getAnnotationProperties()
         generator.generateEqualsUsingGetters(eqFun, annotationClass.defaultType, properties)
         generator.generateHashCodeMethod(hcFun, implProperties)
         generator.generateToStringMethod(toStringFun, implProperties)
     }
 
     class AnnotationPropertyImplementor(
-        val irFactory: IrFactory,
-        val irBuiltIns: IrBuiltIns,
-        val symbols: BuiltinSymbolsBase,
-        val javaLangClassSymbol: IrClassSymbol,
-        val kClassJavaPropertyGetterSymbol: IrSimpleFunctionSymbol,
-        val originForProp: IrDeclarationOrigin
+        konst irFactory: IrFactory,
+        konst irBuiltIns: IrBuiltIns,
+        konst symbols: BuiltinSymbolsBase,
+        konst javaLangClassSymbol: IrClassSymbol,
+        konst kClassJavaPropertyGetterSymbol: IrSimpleFunctionSymbol,
+        konst originForProp: IrDeclarationOrigin
     ) {
 
         /**
          * Copies array by one element, roughly as following:
-         *     val size = kClassArray.size
-         *     val result = arrayOfNulls<java.lang.Class>(size)
+         *     konst size = kClassArray.size
+         *     konst result = arrayOfNulls<java.lang.Class>(size)
          *     var i = 0
          *     while(i < size) {
          *         result[i] = kClassArray[i].java
@@ -159,39 +159,39 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
          * Partially taken from ArrayConstructorLowering.kt
          */
         private fun IrBuilderWithScope.kClassArrayToJClassArray(kClassArray: IrExpression): IrExpression {
-            val javaLangClassType = javaLangClassSymbol.starProjectedType
-            val jlcArray = symbols.array.typeWith(javaLangClassType)
-            val arrayClass = symbols.array.owner
-            val arrayOfNulls = symbols.arrayOfNulls
-            val arraySizeSymbol = arrayClass.findDeclaration<IrProperty> { it.name.asString() == "size" }!!.getter!!
+            konst javaLangClassType = javaLangClassSymbol.starProjectedType
+            konst jlcArray = symbols.array.typeWith(javaLangClassType)
+            konst arrayClass = symbols.array.owner
+            konst arrayOfNulls = symbols.arrayOfNulls
+            konst arraySizeSymbol = arrayClass.findDeclaration<IrProperty> { it.name.asString() == "size" }!!.getter!!
 
-            val block = irBlock {
-                val sourceArray = createTmpVariable(kClassArray, "src", isMutable = false)
-                val index = createTmpVariable(irInt(0), "i", isMutable = true)
-                val size = createTmpVariable(
+            konst block = irBlock {
+                konst sourceArray = createTmpVariable(kClassArray, "src", isMutable = false)
+                konst index = createTmpVariable(irInt(0), "i", isMutable = true)
+                konst size = createTmpVariable(
                     irCall(arraySizeSymbol).apply { dispatchReceiver = irGet(sourceArray) },
                     "size", isMutable = false
                 )
-                val result = createTmpVariable(irCall(arrayOfNulls, jlcArray).apply {
+                konst result = createTmpVariable(irCall(arrayOfNulls, jlcArray).apply {
                     listOf(javaLangClassType)
                     putValueArgument(0, irGet(size))
                 })
-                val comparison = primitiveOp2(
+                konst comparison = primitiveOp2(
                     startOffset, endOffset,
                     context.irBuiltIns.lessFunByOperandType[context.irBuiltIns.intType.classifierOrFail]!!,
                     context.irBuiltIns.booleanType,
                     IrStatementOrigin.LT,
                     irGet(index), irGet(size)
                 )
-                val setArraySymbol = arrayClass.functions.single { it.name == OperatorNameConventions.SET }
-                val getArraySymbol = arrayClass.functions.single { it.name == OperatorNameConventions.GET }
-                val inc = context.irBuiltIns.intType.getClass()!!.functions.single { it.name == OperatorNameConventions.INC }
+                konst setArraySymbol = arrayClass.functions.single { it.name == OperatorNameConventions.SET }
+                konst getArraySymbol = arrayClass.functions.single { it.name == OperatorNameConventions.GET }
+                konst inc = context.irBuiltIns.intType.getClass()!!.functions.single { it.name == OperatorNameConventions.INC }
                 +irWhile().also { loop ->
                     loop.condition = comparison
                     loop.body = irBlock {
-                        val tempIndex = createTmpVariable(irGet(index))
+                        konst tempIndex = createTmpVariable(irGet(index))
 
-                        val getArray = irCall(getArraySymbol).apply {
+                        konst getArray = irCall(getArraySymbol).apply {
                             dispatchReceiver = irGet(sourceArray)
                             putValueArgument(0, irGet(tempIndex))
                         }
@@ -236,12 +236,12 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
             generatedConstructor: IrConstructor,
             defaultValueTransformer: IrElementTransformerVoid?
         ) {
-            val ctorBodyBuilder = irBuiltIns.createIrBuilder(generatedConstructor.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
-            val ctorBody = irFactory.createBlockBody(
+            konst ctorBodyBuilder = irBuiltIns.createIrBuilder(generatedConstructor.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET)
+            konst ctorBody = irFactory.createBlockBody(
                 SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, listOf(
                     IrDelegatingConstructorCallImpl(
                         SYNTHETIC_OFFSET, SYNTHETIC_OFFSET, irBuiltIns.unitType, irBuiltIns.anyClass.constructors.single(),
-                        typeArgumentsCount = 0, valueArgumentsCount = 0
+                        typeArgumentsCount = 0, konstueArgumentsCount = 0
                     )
                 )
             )
@@ -249,10 +249,10 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
             generatedConstructor.body = ctorBody
 
             annotationProperties.forEach { property ->
-                val propType = property.getter!!.returnType
-                val storedFieldType = propType.kClassToJClassIfNeeded()
-                val propName = property.name
-                val field = irFactory.buildField {
+                konst propType = property.getter!!.returnType
+                konst storedFieldType = propType.kClassToJClassIfNeeded()
+                konst propName = property.name
+                konst field = irFactory.buildField {
                     startOffset = SYNTHETIC_OFFSET
                     endOffset = SYNTHETIC_OFFSET
                     name = propName
@@ -262,10 +262,10 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
                     visibility = DescriptorVisibilities.PRIVATE
                 }.also { it.parent = implClass }
 
-                val parameter = generatedConstructor.addValueParameter(propName.asString(), propType)
+                konst parameter = generatedConstructor.addValueParameter(propName.asString(), propType)
 
-                val defaultExpression = property.backingField?.initializer?.expression
-                val newDefaultValue: IrExpressionBody? =
+                konst defaultExpression = property.backingField?.initializer?.expression
+                konst newDefaultValue: IrExpressionBody? =
                     if (defaultExpression is IrGetValue && defaultExpression.symbol.owner is IrValueParameter) {
                         // INITIALIZE_PROPERTY_FROM_PARAMETER
                         (defaultExpression.symbol.owner as IrValueParameter).defaultValue
@@ -276,8 +276,8 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
                     ?.also { if (defaultValueTransformer != null) it.transformChildrenVoid(defaultValueTransformer) }
 
                 ctorBody.statements += with(ctorBodyBuilder) {
-                    val param = irGet(parameter)
-                    val fieldValue = when {
+                    konst param = irGet(parameter)
+                    konst fieldValue = when {
                         propType.isKClass() -> kClassToJClass(param)
                         propType.isKClassArray() -> kClassArrayToJClassArray(param)
                         else -> param
@@ -285,7 +285,7 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
                     irSetField(irGet(implClass.thisReceiver!!), field, fieldValue)
                 }
 
-                val prop = implClass.addProperty {
+                konst prop = implClass.addProperty {
                     startOffset = SYNTHETIC_OFFSET
                     endOffset = SYNTHETIC_OFFSET
                     name = propName
@@ -301,7 +301,7 @@ class JvmAnnotationImplementationTransformer(val jvmContext: JvmBackendContext, 
                 prop.addGetter {
                     startOffset = SYNTHETIC_OFFSET
                     endOffset = SYNTHETIC_OFFSET
-                    name = propName  // Annotation value getter should be named 'x', not 'getX'
+                    name = propName  // Annotation konstue getter should be named 'x', not 'getX'
                     returnType = propType.kClassToJClassIfNeeded() // On JVM, annotation store j.l.Class even if declared with KClass
                     origin = originForProp
                     visibility = DescriptorVisibilities.PUBLIC

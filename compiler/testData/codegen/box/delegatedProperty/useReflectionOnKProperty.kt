@@ -17,6 +17,6 @@ class Delegate {
     }
 }
 
-val prop: String by Delegate()
+konst prop: String by Delegate()
 
-fun box() = if (prop == "val prop: kotlin.String") "OK" else "Fail: $prop"
+fun box() = if (prop == "konst prop: kotlin.String") "OK" else "Fail: $prop"

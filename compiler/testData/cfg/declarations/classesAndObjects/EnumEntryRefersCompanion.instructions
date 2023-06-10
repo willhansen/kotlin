@@ -1,5 +1,5 @@
 == EE ==
-enum class EE(val x: Int) {
+enum class EE(konst x: Int) {
     INSTANCE(Companion.foo()),
     ANOTHER(foo());
 
@@ -10,8 +10,8 @@ enum class EE(val x: Int) {
 ---------------------
 L0:
   1 <START>
-    v(val x: Int)
-    magic[FAKE_INITIALIZER](val x: Int) -> <v0>
+    v(konst x: Int)
+    magic[FAKE_INITIALIZER](konst x: Int) -> <v0>
     w(x|<v0>)
     v(INSTANCE(Companion.foo()),)
     magic[FAKE_INITIALIZER](INSTANCE(Companion.foo()),) -> <v1>

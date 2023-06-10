@@ -1,7 +1,7 @@
 fun interface Interface {
     fun foo()
 
-    val value get() = "OK"
+    konst konstue get() = "OK"
 }
 
-fun box() = Interface{}.value
+fun box() = Interface{}.konstue

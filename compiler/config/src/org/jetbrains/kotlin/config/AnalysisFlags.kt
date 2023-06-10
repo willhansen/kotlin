@@ -7,56 +7,56 @@ package org.jetbrains.kotlin.config
 
 object AnalysisFlags {
     @JvmStatic
-    val skipMetadataVersionCheck by AnalysisFlag.Delegates.Boolean
+    konst skipMetadataVersionCheck by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val metadataCompilation by AnalysisFlag.Delegates.Boolean
+    konst metadataCompilation by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val skipPrereleaseCheck by AnalysisFlag.Delegates.Boolean
+    konst skipPrereleaseCheck by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val multiPlatformDoNotCheckActual by AnalysisFlag.Delegates.Boolean
+    konst multiPlatformDoNotCheckActual by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val expectActualLinker by AnalysisFlag.Delegates.Boolean
+    konst expectActualLinker by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val optIn by AnalysisFlag.Delegates.ListOfStrings
+    konst optIn by AnalysisFlag.Delegates.ListOfStrings
 
     @JvmStatic
-    val explicitApiVersion by AnalysisFlag.Delegates.Boolean
+    konst explicitApiVersion by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val ignoreDataFlowInAssert by AnalysisFlag.Delegates.Boolean
+    konst ignoreDataFlowInAssert by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val allowResultReturnType by AnalysisFlag.Delegates.Boolean
+    konst allowResultReturnType by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val explicitApiMode by AnalysisFlag.Delegates.ApiModeDisabledByDefault
+    konst explicitApiMode by AnalysisFlag.Delegates.ApiModeDisabledByDefault
 
     @JvmStatic
-    val ideMode by AnalysisFlag.Delegates.Boolean
+    konst ideMode by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val allowUnstableDependencies by AnalysisFlag.Delegates.Boolean
+    konst allowUnstableDependencies by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val libraryToSourceAnalysis by AnalysisFlag.Delegates.Boolean
+    konst libraryToSourceAnalysis by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val extendedCompilerChecks by AnalysisFlag.Delegates.Boolean
+    konst extendedCompilerChecks by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val allowKotlinPackage by AnalysisFlag.Delegates.Boolean
+    konst allowKotlinPackage by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val builtInsFromSources by AnalysisFlag.Delegates.Boolean
+    konst builtInsFromSources by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val allowFullyQualifiedNameInKClass by AnalysisFlag.Delegates.Boolean
+    konst allowFullyQualifiedNameInKClass by AnalysisFlag.Delegates.Boolean
 
     @JvmStatic
-    val eagerResolveOfLightClasses by AnalysisFlag.Delegates.Boolean
+    konst eagerResolveOfLightClasses by AnalysisFlag.Delegates.Boolean
 }

@@ -8,7 +8,7 @@ import kotlin.test.*
 import kotlin.reflect.KProperty
 
 @Test fun forEachIndexedTest() {
-    val array = Array(10) { 0 }
+    konst array = Array(10) { 0 }
 
     assertFailsWith<IndexOutOfBoundsException> {
         array.forEachIndexed { index, _ ->
@@ -18,8 +18,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forEachIndicies() {
-    val array = Array(10) { 0 }
-    val array1 = Array(3) { 0 }
+    konst array = Array(10) { 0 }
+    konst array1 = Array(3) { 0 }
     var j = 4
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -43,8 +43,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forUntilSize() {
-    val array = Array(10) { 0L }
-    val array1 = Array(3) { 0L }
+    konst array = Array(10) { 0L }
+    konst array1 = Array(3) { 0L }
     var j = 4
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -74,8 +74,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forDownToSize() {
-    val array = Array(10) { 0L }
-    val array1 = Array(3) { 0L }
+    konst array = Array(10) { 0L }
+    konst array1 = Array(3) { 0L }
     var j = 4
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -98,8 +98,8 @@ import kotlin.reflect.KProperty
     }
 
     var a = array.size - 1
-    val b = ++a
-    val c = b
+    konst b = ++a
+    konst c = b
 
     assertFailsWith<IndexOutOfBoundsException> {
         for (i in c downTo 0) {
@@ -127,8 +127,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forRangeToSize() {
-    val array = Array(10) { 0L }
-    val array1 = Array(3) { 0L }
+    konst array = Array(10) { 0L }
+    konst array1 = Array(3) { 0L }
     var j = 4
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -178,8 +178,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forRangeToWithStep() {
-    val array = Array(10) { 0L }
-    val array1 = Array(3) { 0L }
+    konst array = Array(10) { 0L }
+    konst array1 = Array(3) { 0L }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -221,8 +221,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forUntilWithStep() {
-    val array = CharArray(10) { '0' }
-    val array1 = CharArray(3) { '0' }
+    konst array = CharArray(10) { '0' }
+    konst array1 = CharArray(3) { '0' }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -258,8 +258,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forDownToWithStep() {
-    val array = UIntArray(10) { 0U }
-    val array1 = UIntArray(3) { 0U }
+    konst array = UIntArray(10) { 0U }
+    konst array1 = UIntArray(3) { 0U }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -301,8 +301,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forIndiciesWithStep() {
-    val array = Array(10) { 0L }
-    val array1 = Array(3) { 0L }
+    konst array = Array(10) { 0L }
+    konst array1 = Array(3) { 0L }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -326,26 +326,26 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forWithIndex() {
-    val array = Array(10) { 100 }
-    val array1 = Array(3) { 0 }
+    konst array = Array(10) { 100 }
+    konst array1 = Array(3) { 0 }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
-        for ((index, value) in array.withIndex()) {
+        for ((index, konstue) in array.withIndex()) {
             array[j] = 6
             j++
         }
     }
 
     assertFailsWith<IndexOutOfBoundsException> {
-        for ((index, value) in array.withIndex()) {
+        for ((index, konstue) in array.withIndex()) {
             array[index + 1] = 6
         }
     }
 
     assertFailsWith<IndexOutOfBoundsException> {
-        for ((index, value) in array.withIndex()) {
-            array[value] = 6
+        for ((index, konstue) in array.withIndex()) {
+            array[konstue] = 6
         }
     }
 
@@ -363,8 +363,8 @@ import kotlin.reflect.KProperty
 }
 
 @Test fun forReversed() {
-    val array = Array(10) { 100 }
-    val array1 = Array(3) { 0 }
+    konst array = Array(10) { 100 }
+    konst array1 = Array(3) { 0 }
     var j = 8
 
     assertFailsWith<IndexOutOfBoundsException> {
@@ -396,8 +396,8 @@ import kotlin.reflect.KProperty
 fun foo(a: Int, b : Int): Int = a + b * 2
 
 @Test fun bceCases() {
-    val array = Array(10) { 100 }
-    val array1 = Array(3) { 0 }
+    konst array = Array(10) { 100 }
+    konst array1 = Array(3) { 0 }
     var length = array.size  - 1
     var sum = 0
 
@@ -437,7 +437,7 @@ fun foo(a: Int, b : Int): Int = a + b * 2
         array[i] = 7
     }
 
-    for ((index, value) in array.withIndex()) {
+    for ((index, konstue) in array.withIndex()) {
         array[index] = 8
     }
 
@@ -460,8 +460,8 @@ fun foo(a: Int, b : Int): Int = a + b * 2
         }
     }
 
-    val size = array.size - 1
-    val size1 = size
+    konst size = array.size - 1
+    konst size1 = size
 
     for (i in 0..size1) {
         foo(array[i], array[i])
@@ -475,7 +475,7 @@ fun foo(a: Int, b : Int): Int = a + b * 2
 var needSmallArray = true
 
 class WithGetter() {
-    val array: Array<Int>
+    konst array: Array<Int>
         get() = if (needSmallArray)
             Array(10) { 100 }
         else
@@ -492,16 +492,16 @@ class Delegate {
 }
 
 class WithDelegates {
-    val array by Delegate()
+    konst array by Delegate()
 }
 
 open class Base {
-    open val array = Array(10) { 100 }
-    val array1 by Delegate()
+    open konst array = Array(10) { 100 }
+    konst array1 by Delegate()
 }
 
 class Child : Base() {
-    override val array: Array<Int>
+    override konst array: Array<Int>
         get() = if (needSmallArray)
             Array(10) { 100 }
         else
@@ -509,7 +509,7 @@ class Child : Base() {
 }
 
 @Test fun withGetter() {
-    val obj = WithGetter()
+    konst obj = WithGetter()
     needSmallArray = false
     assertFailsWith<IndexOutOfBoundsException> {
         for (i in 0..obj.array.size-1) {
@@ -521,7 +521,7 @@ class Child : Base() {
 }
 
 @Test fun delegatedProperty() {
-    val obj = WithDelegates()
+    konst obj = WithDelegates()
     needSmallArray = false
     assertFailsWith<IndexOutOfBoundsException> {
         for (i in 0..obj.array.size-1) {
@@ -533,8 +533,8 @@ class Child : Base() {
 }
 
 @Test fun inheritance() {
-    val obj = Child()
-    val base = Base()
+    konst obj = Child()
+    konst base = Base()
     needSmallArray = false
     assertFailsWith<IndexOutOfBoundsException> {
         for (i in 0..obj.array.size-1) {
@@ -563,11 +563,11 @@ class Child : Base() {
     }
 }
 
-val array: Array<Int> = arrayOf(1)
+konst array: Array<Int> = arrayOf(1)
     get() = if (needSmallArray) field else arrayOf(1, 2, 3)
 
 @Test fun customeGetter() {
-    val a = array
+    konst a = array
     needSmallArray = false
     assertFailsWith<IndexOutOfBoundsException> {
         for (index in 0 until array.size) {
@@ -577,20 +577,20 @@ val array: Array<Int> = arrayOf(1)
 }
 
 class First(initArray: Array<Int>) {
-    val array = initArray
+    konst array = initArray
 }
 
 class Second(initArray: Array<Int>){
-    val first = First(initArray)
+    konst first = First(initArray)
 }
 
 class Third(initArray: Array<Int>) {
-    val second = Second(initArray)
+    konst second = Second(initArray)
 }
 
 @Test fun differentObjects() {
-    val a = Third(arrayOf(1, 2, 3, 4, 5))
-    val b = Third(arrayOf(1, 2))
+    konst a = Third(arrayOf(1, 2, 3, 4, 5))
+    konst b = Third(arrayOf(1, 2))
 
     assertFailsWith<IndexOutOfBoundsException> {
         for (i in 0..a.second.first.array.size-1) {
@@ -600,19 +600,19 @@ class Third(initArray: Array<Int>) {
 }
 
 class Foo(size: Int) {
-    val array = IntArray(size)
+    konst array = IntArray(size)
 }
 
 class Bar {
-    val smallFoo = Foo(1)
-    val largeFoo = Foo(10)
+    konst smallFoo = Foo(1)
+    konst largeFoo = Foo(10)
 
-    val smallArray = smallFoo.array
-    val largeArray = largeFoo.array
+    konst smallArray = smallFoo.array
+    konst largeArray = largeFoo.array
 }
 
 @Test fun differentArrays() {
-    val bar = Bar()
+    konst bar = Bar()
 
     assertFailsWith<IndexOutOfBoundsException> {
         for (index in 0 until bar.largeArray.size) {

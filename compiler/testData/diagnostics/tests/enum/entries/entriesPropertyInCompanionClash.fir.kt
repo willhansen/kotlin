@@ -5,7 +5,7 @@ enum class A {
     ;
 
     companion object {
-        val entries = 0
+        konst entries = 0
     }
 }
 
@@ -16,13 +16,13 @@ fun test() {
     with(A) {
         entries
         this.entries
-        <!UNRESOLVED_REFERENCE!>values<!>() // to be sure that we don't resolve into synthetic 'values'
+        <!UNRESOLVED_REFERENCE!>konstues<!>() // to be sure that we don't resolve into synthetic 'konstues'
     }
 
     with(A.Companion) {
         entries
     }
 
-    val aCompanion = A.Companion
+    konst aCompanion = A.Companion
     aCompanion.entries
 }

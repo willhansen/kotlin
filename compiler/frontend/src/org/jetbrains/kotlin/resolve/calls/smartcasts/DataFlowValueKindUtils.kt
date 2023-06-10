@@ -26,13 +26,13 @@ internal fun PropertyDescriptor.propertyKind(
     if (isVar) return DataFlowValue.Kind.MUTABLE_PROPERTY
     if (isOverridable) return DataFlowValue.Kind.PROPERTY_WITH_GETTER
     if (!hasDefaultGetter()) return DataFlowValue.Kind.PROPERTY_WITH_GETTER
-    val originalDescriptor = DescriptorUtils.unwrapFakeOverride(this)
-    val isInvisibleFromOtherModuleUnwrappedFakeOverride = originalDescriptor.isInvisibleFromOtherModules()
+    konst originalDescriptor = DescriptorUtils.unwrapFakeOverride(this)
+    konst isInvisibleFromOtherModuleUnwrappedFakeOverride = originalDescriptor.isInvisibleFromOtherModules()
     if (isInvisibleFromOtherModuleUnwrappedFakeOverride) return DataFlowValue.Kind.STABLE_VALUE
 
     if (kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
         if (overriddenDescriptors.any { isDeclaredInAnotherModule(usageModule) }) {
-            val deprecationForInvisibleFakeOverride =
+            konst deprecationForInvisibleFakeOverride =
                 isInvisibleFromOtherModules() != isInvisibleFromOtherModuleUnwrappedFakeOverride &&
                         !languageVersionSettings.supportsFeature(ProhibitSmartcastsOnPropertyFromAlienBaseClassInheritedInInvisibleClass)
             return when {
@@ -46,7 +46,7 @@ internal fun PropertyDescriptor.propertyKind(
         }
     }
 
-    val declarationModule = DescriptorUtils.getContainingModule(originalDescriptor)
+    konst declarationModule = DescriptorUtils.getContainingModule(originalDescriptor)
     if (!areCompiledTogether(usageModule, declarationModule)) return DataFlowValue.Kind.ALIEN_PUBLIC_PROPERTY
 
     return DataFlowValue.Kind.STABLE_VALUE
@@ -96,17 +96,17 @@ internal fun VariableDescriptor.variableKind(
     if (this is SyntheticFieldDescriptor) return DataFlowValue.Kind.MUTABLE_PROPERTY
 
     // Local variable classification: STABLE or CAPTURED
-    val preliminaryVisitor = PreliminaryDeclarationVisitor.getVisitorByVariable(this, bindingContext)
+    konst preliminaryVisitor = PreliminaryDeclarationVisitor.getVisitorByVariable(this, bindingContext)
     // A case when we just analyse an expression alone: counts as captured
             ?: return DataFlowValue.Kind.CAPTURED_VARIABLE
 
     // Analyze who writes variable
     // If there is no writer: stable
-    val writers = preliminaryVisitor.writers(this)
+    konst writers = preliminaryVisitor.writers(this)
     if (writers.isEmpty()) return DataFlowValue.Kind.STABLE_VARIABLE
 
     // If access element is inside closure: captured
-    val variableContainingDeclaration = this.containingDeclaration
+    konst variableContainingDeclaration = this.containingDeclaration
     if (isAccessedInsideClosure(variableContainingDeclaration, bindingContext, accessElement)) {
         // stable iff we have no writers in closures AND this closure is AFTER all writers
         return if (preliminaryVisitor.languageVersionSettings.supportsFeature(CapturedInClosureSmartCasts) &&
@@ -142,7 +142,7 @@ private fun isAccessedInsideClosureAfterAllWriters(
     writers: Set<AssignedVariablesSearcher.Writer>,
     accessElement: KtElement
 ): Boolean {
-    val parent = accessElement.getElementParentDeclaration() ?: return false
+    konst parent = accessElement.getElementParentDeclaration() ?: return false
     return writers.none { (assignment) -> !assignment.before(parent) }
 }
 
@@ -155,7 +155,7 @@ private fun isAccessedBeforeAllClosureWriters(
     // All writers should be before access element, with the exception:
     // writer which is the same with declaration site does not count
     writers.mapNotNull { it.declaration }.forEach { writerDeclaration ->
-        val writerDescriptor = writerDeclaration.getDeclarationDescriptorIncludingConstructors(bindingContext)
+        konst writerDescriptor = writerDeclaration.getDeclarationDescriptorIncludingConstructors(bindingContext)
         // Access is after some writerDeclaration
         if (variableContainingDeclaration != writerDescriptor && !accessElement.before(writerDeclaration)) {
             return false
@@ -168,12 +168,12 @@ private fun isAccessedBeforeAllClosureWriters(
 private fun DeclarationDescriptorWithVisibility.isInvisibleFromOtherModules(): Boolean {
     if (DescriptorVisibilities.INVISIBLE_FROM_OTHER_MODULES.contains(visibility)) return true
 
-    val containingDeclaration = containingDeclaration
+    konst containingDeclaration = containingDeclaration
     return containingDeclaration is DeclarationDescriptorWithVisibility && containingDeclaration.isInvisibleFromOtherModules()
 }
 
 private fun PropertyDescriptor.hasDefaultGetter(): Boolean {
-    val getter = getter
+    konst getter = getter
     return getter == null || getter.isDefault
 }
 
@@ -182,7 +182,7 @@ private fun isAccessedInsideClosure(
     bindingContext: BindingContext,
     accessElement: KtElement
 ): Boolean {
-    val parent = accessElement.getElementParentDeclaration()
+    konst parent = accessElement.getElementParentDeclaration()
     return if (parent != null) // Access is at the same declaration: not in closure, lower: in closure
         parent.getDeclarationDescriptorIncludingConstructors(bindingContext) != variableContainingDeclaration
     else

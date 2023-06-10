@@ -29,7 +29,7 @@ object FirOpenMemberChecker : FirClassChecker() {
                 // Marking a constructor `open` is an error covered by diagnostic code WRONG_MODIFIER_TARGET
                 memberDeclaration is FirConstructor
             ) continue
-            val source = memberDeclaration.source ?: continue
+            konst source = memberDeclaration.source ?: continue
             if (memberDeclaration.isOpen && !memberDeclaration.isOverride && declaration.classKind == ClassKind.ANNOTATION_CLASS ||
                 memberDeclaration.hasModifier(KtTokens.OPEN_KEYWORD) && source.shouldReportOpenFromSource
             ) {
@@ -42,7 +42,7 @@ object FirOpenMemberChecker : FirClassChecker() {
         }
     }
 
-    private val KtSourceElement.shouldReportOpenFromSource: Boolean
+    private konst KtSourceElement.shouldReportOpenFromSource: Boolean
         get() = when (kind) {
             KtRealSourceElementKind,
             KtFakeSourceElementKind.PropertyFromParameter -> true

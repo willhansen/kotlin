@@ -29,21 +29,21 @@ private fun TypeSystemCommonBackendContext.getOptimalModeForSignaturePart(
 ): TypeMappingMode {
     if (type.argumentsCount() == 0) return TypeMappingMode.DEFAULT
 
-    val isInlineClassType = type.typeConstructor().isInlineClass()
+    konst isInlineClassType = type.typeConstructor().isInlineClass()
     if (isInlineClassType && shouldUseUnderlyingType(type)) {
-        val underlyingType = computeUnderlyingType(type)
+        konst underlyingType = computeUnderlyingType(type)
         if (underlyingType != null) {
             return getOptimalModeForSignaturePart(underlyingType, canBeUsedInSupertypePosition).dontWrapInlineClassesMode()
         }
     }
 
-    val contravariantArgumentMode =
+    konst contravariantArgumentMode =
         if (!canBeUsedInSupertypePosition)
             TypeMappingMode(skipDeclarationSiteWildcards = false, skipDeclarationSiteWildcardsIfPossible = true)
         else
             null
 
-    val invariantArgumentMode =
+    konst invariantArgumentMode =
         if (canBeUsedInSupertypePosition)
             getOptimalModeForSignaturePart(type, canBeUsedInSupertypePosition = false)
         else

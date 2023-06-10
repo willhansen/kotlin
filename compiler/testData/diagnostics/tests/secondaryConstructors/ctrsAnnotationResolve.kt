@@ -1,6 +1,6 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 annotation class Ann1
-annotation class Ann2(val x: Int)
+annotation class Ann2(konst x: Int)
 
 class A {
     @Ann1

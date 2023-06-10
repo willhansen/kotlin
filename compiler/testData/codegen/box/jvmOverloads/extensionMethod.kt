@@ -10,6 +10,6 @@ class C {
 }
 
 fun box(): String {
-    val m = Class.forName("ExtensionMethodKt").getMethod("foo", C::class.java, String::class.java)
+    konst m = Class.forName("ExtensionMethodKt").getMethod("foo", C::class.java, String::class.java)
     return m.invoke(null, C(), "O") as String
 }

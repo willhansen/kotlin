@@ -22,7 +22,7 @@ public abstract class KtAnnotationsList : KtLifetimeOwner {
      *
      * @see KtAnnotationApplication
      */
-    public abstract val annotations: List<KtAnnotationApplicationWithArgumentsInfo>
+    public abstract konst annotations: List<KtAnnotationApplicationWithArgumentsInfo>
 
     /**
      * A list of annotation infos.
@@ -31,12 +31,12 @@ public abstract class KtAnnotationsList : KtLifetimeOwner {
      *
      * @see KtAnnotationApplicationInfo
      */
-    public abstract val annotationInfos: List<KtAnnotationApplicationInfo>
+    public abstract konst annotationInfos: List<KtAnnotationApplicationInfo>
 
     /**
      * Checks if entity contains annotation with specified [classId] and filtered by [useSiteTargetFilter].
      *
-     * The semantic is equivalent to
+     * The semantic is equikonstent to
      * ```
      * annotationsList.hasAnnotation(classId, useSiteTargetFilter) == annotationsList.annotations.any {
      *   it.classId == classId && useSiteTargetFilter.isAllowed(it.useSiteTarget)
@@ -55,7 +55,7 @@ public abstract class KtAnnotationsList : KtLifetimeOwner {
      *
      * To check if annotation is present, please use [hasAnnotation].
      *
-     * The semantic is equivalent to
+     * The semantic is equikonstent to
      * ```
      * annotationsList.annotationsByClassId(classId) == annotationsList.annotations.filter {
      *   it.classId == classId && useSiteTargetFilter.isAllowed(it.useSiteTarget)
@@ -74,10 +74,10 @@ public abstract class KtAnnotationsList : KtLifetimeOwner {
      *
      * To check if annotation is present, please use [hasAnnotation].
      *
-     * The semantic is equivalent to
+     * The semantic is equikonstent to
      * ```
      * annotationsList.annotationClassIds == annotationsList.annotations.map { it.classId }
      * ```
      */
-    public abstract val annotationClassIds: Collection<ClassId>
+    public abstract konst annotationClassIds: Collection<ClassId>
 }

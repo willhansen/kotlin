@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOrigin
 
-fun JvmDeclarationOrigin.toLightMemberOrigin(): LightElementOrigin = when (val originalElement = element) {
+fun JvmDeclarationOrigin.toLightMemberOrigin(): LightElementOrigin = when (konst originalElement = element) {
     is KtAnnotationEntry -> DefaultLightElementOrigin(originalElement)
     is KtDeclaration -> LightMemberOriginForDeclaration(originalElement, originKind, parametersForJvmOverload)
     else -> LightElementOrigin.None

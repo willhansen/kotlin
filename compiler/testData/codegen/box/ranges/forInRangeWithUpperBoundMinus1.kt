@@ -26,8 +26,8 @@ fun box(): String {
 }
 
 fun noUnderflow() {
-    val M1 = Int.MAX_VALUE - 2
-    val M2 = Int.MIN_VALUE
+    konst M1 = Int.MAX_VALUE - 2
+    konst M2 = Int.MIN_VALUE
     var t = 0
     for (x in M1..M2 - 1) {
         ++t
@@ -37,8 +37,8 @@ fun noUnderflow() {
 }
 
 fun testByteArray() {
-    val array = byteArrayOf(1, 2, 3)
-    val range = array.size - 1
+    konst array = byteArrayOf(1, 2, 3)
+    konst range = array.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..array.size - 1) optimized += array[i]
@@ -47,8 +47,8 @@ fun testByteArray() {
 }
 
 fun testCharArray() {
-    val array = charArrayOf('1', '2', '3')
-    val range = array.size - 1
+    konst array = charArrayOf('1', '2', '3')
+    konst range = array.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..array.size - 1) optimized += array[i]
@@ -57,8 +57,8 @@ fun testCharArray() {
 }
 
 fun testShortArray() {
-    val array = shortArrayOf(1, 2, 3)
-    val range = array.size - 1
+    konst array = shortArrayOf(1, 2, 3)
+    konst range = array.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..array.size - 1) optimized += array[i]
@@ -67,8 +67,8 @@ fun testShortArray() {
 }
 
 fun testIntArray() {
-    val array = intArrayOf(1, 2, 3)
-    val range = array.size - 1
+    konst array = intArrayOf(1, 2, 3)
+    konst range = array.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..array.size - 1) optimized += array[i]
@@ -77,8 +77,8 @@ fun testIntArray() {
 }
 
 fun testLongArray() {
-    val array = longArrayOf(1, 2, 3)
-    val range = array.size - 1
+    konst array = longArrayOf(1, 2, 3)
+    konst range = array.size - 1
     var optimized = 0L
     var nonOptimized = 0L
     for (i in 0..array.size - 1) optimized += array[i]
@@ -87,8 +87,8 @@ fun testLongArray() {
 }
 
 fun testFloatArray() {
-    val array = floatArrayOf(1f, 2f, 3f)
-    val range = array.size - 1
+    konst array = floatArrayOf(1f, 2f, 3f)
+    konst range = array.size - 1
     var optimized = 0f
     var nonOptimized = 0f
     for (i in 0..array.size - 1) optimized += array[i]
@@ -97,8 +97,8 @@ fun testFloatArray() {
 }
 
 fun testDoubleArray() {
-    val array = doubleArrayOf(1.0, 2.0, 3.0)
-    val range = array.size - 1
+    konst array = doubleArrayOf(1.0, 2.0, 3.0)
+    konst range = array.size - 1
     var optimized = 0.0
     var nonOptimized = 0.0
     for (i in 0..array.size - 1) optimized += array[i]
@@ -107,8 +107,8 @@ fun testDoubleArray() {
 }
 
 fun testBooleanArray() {
-    val array = booleanArrayOf(true, false, true)
-    val range = array.size - 1
+    konst array = booleanArrayOf(true, false, true)
+    konst range = array.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..array.size - 1) optimized += array[i]
@@ -117,8 +117,8 @@ fun testBooleanArray() {
 }
 
 fun testEmptyList() {
-    val list = emptyList<Int>()
-    val range = list.size - 1
+    konst list = emptyList<Int>()
+    konst range = list.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..list.size - 1) optimized += list[i]
@@ -127,8 +127,8 @@ fun testEmptyList() {
 }
 
 fun testList() {
-    val list = listOf(1, 2, 3)
-    val range = list.size - 1
+    konst list = listOf(1, 2, 3)
+    konst range = list.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..list.size - 1) optimized += list[i]
@@ -137,8 +137,8 @@ fun testList() {
 }
 
 fun testMutableList() {
-    val list = mutableListOf(1, 2, 3)
-    val range = list.size - 1
+    konst list = mutableListOf(1, 2, 3)
+    konst range = list.size - 1
     var optimized = 0
     var nonOptimized = 0
     for (i in 0..list.size - 1) optimized += list[i]
@@ -147,8 +147,8 @@ fun testMutableList() {
 }
 
 fun testCharSequence() {
-    val chars: CharSequence = "123"
-    val range = chars.length - 1
+    konst chars: CharSequence = "123"
+    konst range = chars.length - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..chars.length - 1) optimized += chars[i]
@@ -157,8 +157,8 @@ fun testCharSequence() {
 }
 
 fun testString() {
-    val str = "123"
-    val range = str.length - 1
+    konst str = "123"
+    konst range = str.length - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..str.length - 1) optimized += str[i]
@@ -167,8 +167,8 @@ fun testString() {
 }
 
 fun testEmptySet() {
-    val set = emptySet<Int>()
-    val range = set.size - 1
+    konst set = emptySet<Int>()
+    konst range = set.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..set.size - 1) optimized += set.elementAt(i)
@@ -177,8 +177,8 @@ fun testEmptySet() {
 }
 
 fun testSet() {
-    val set = setOf(1, 2, 3)
-    val range = set.size - 1
+    konst set = setOf(1, 2, 3)
+    konst range = set.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..set.size - 1) optimized += set.elementAt(i)
@@ -187,8 +187,8 @@ fun testSet() {
 }
 
 fun testMutableSet() {
-    val set = mutableSetOf(1, 2, 3)
-    val range = set.size - 1
+    konst set = mutableSetOf(1, 2, 3)
+    konst range = set.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..set.size - 1) optimized += set.elementAt(i)
@@ -197,8 +197,8 @@ fun testMutableSet() {
 }
 
 fun testEmptyMap() {
-    val map = emptyMap<Int, Int>()
-    val range = map.size - 1
+    konst map = emptyMap<Int, Int>()
+    konst range = map.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..map.size - 1) optimized += map[i]
@@ -207,8 +207,8 @@ fun testEmptyMap() {
 }
 
 fun testMap() {
-    val map = mapOf(1 to 1, 2 to 2, 3 to 3)
-    val range = map.size - 1
+    konst map = mapOf(1 to 1, 2 to 2, 3 to 3)
+    konst range = map.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..map.size - 1) optimized += map[i]
@@ -217,8 +217,8 @@ fun testMap() {
 }
 
 fun testMutableMap() {
-    val map = mutableMapOf(1 to 1, 2 to 2, 3 to 3)
-    val range = map.size - 1
+    konst map = mutableMapOf(1 to 1, 2 to 2, 3 to 3)
+    konst range = map.size - 1
     var optimized = ""
     var nonOptimized = ""
     for (i in 0..map.size - 1) optimized += map[i]

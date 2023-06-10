@@ -1,25 +1,25 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-val x1: (String) -> Unit = run {
+konst x1: (String) -> Unit = run {
     lambda@{ foo ->
         bar(foo)
     }
 }
 
-val x2: (String) -> Unit = run {
+konst x2: (String) -> Unit = run {
     ({ foo ->
         bar(foo)
     })
 }
 
-val x3: (String) -> Unit = run {
+konst x3: (String) -> Unit = run {
     (lambda@{ foo ->
         bar(foo)
     })
 }
 
-val x4: (String) -> Unit = run {
+konst x4: (String) -> Unit = run {
     return@run (lambda@{ foo ->
         bar(foo)
     })

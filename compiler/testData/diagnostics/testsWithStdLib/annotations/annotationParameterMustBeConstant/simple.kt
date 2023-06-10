@@ -2,9 +2,9 @@
 // FIR_IDENTICAL
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class Ann(val i: Int)
-annotation class AnnIA(val ia: IntArray)
-annotation class AnnSA(val sa: Array<String>)
+annotation class Ann(konst i: Int)
+annotation class AnnIA(konst ia: IntArray)
+annotation class AnnSA(konst sa: Array<String>)
 
 var i = 1
 
@@ -14,20 +14,20 @@ var i = 1
 @AnnIA(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>ia<!>)
 @AnnSA(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>sa<!>)
 class Test {
-    val i = 1
-    @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>i<!>) val i2 = 1
+    konst i = 1
+    @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_CONST!>i<!>) konst i2 = 1
 }
 
-val i2 = foo()
+konst i2 = foo()
 
 fun foo(): Int = 1
 
 @AnnSA(emptyArray())
 class MyClass {
-    val i = 1
+    konst i = 1
 }
 
-val ia: IntArray = intArrayOf(1, 2)
-val sa: Array<String> = arrayOf("a", "b")
+konst ia: IntArray = intArrayOf(1, 2)
+konst sa: Array<String> = arrayOf("a", "b")
 
 annotation class Ann2

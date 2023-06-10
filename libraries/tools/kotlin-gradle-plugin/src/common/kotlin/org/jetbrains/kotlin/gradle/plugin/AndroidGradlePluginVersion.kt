@@ -13,14 +13,14 @@ import java.util.*
 
 internal fun AndroidGradlePluginVersion(versionString: String): AndroidGradlePluginVersion {
     return AndroidGradlePluginVersionOrNull(versionString)
-        ?: throw IllegalArgumentException("Invalid Android Gradle Plugin version: $versionString")
+        ?: throw IllegalArgumentException("Inkonstid Android Gradle Plugin version: $versionString")
 }
 
 internal fun AndroidGradlePluginVersionOrNull(versionString: String): AndroidGradlePluginVersion? {
-    val baseVersion = versionString.split("-", limit = 2)[0]
-    val classifier = versionString.split("-", limit = 2).getOrNull(1)
+    konst baseVersion = versionString.split("-", limit = 2)[0]
+    konst classifier = versionString.split("-", limit = 2).getOrNull(1)
 
-    val baseVersionSplit = baseVersion.split(".")
+    konst baseVersionSplit = baseVersion.split(".")
     if (!(baseVersionSplit.size == 2 || baseVersionSplit.size == 3)) return null
 
     return AndroidGradlePluginVersion(
@@ -32,10 +32,10 @@ internal fun AndroidGradlePluginVersionOrNull(versionString: String): AndroidGra
 }
 
 internal data class AndroidGradlePluginVersion(
-    val major: Int,
-    val minor: Int,
-    val patch: Int = 0,
-    val classifier: String? = null
+    konst major: Int,
+    konst minor: Int,
+    konst patch: Int = 0,
+    konst classifier: String? = null
 ) : Comparable<AndroidGradlePluginVersion>, Serializable {
     override fun compareTo(other: AndroidGradlePluginVersion): Int {
         if (this === other) return 0
@@ -47,8 +47,8 @@ internal data class AndroidGradlePluginVersion(
         if (this.classifier == null) return 1
         if (other.classifier == null) return -1
 
-        val thisClassifierLowercase = this.classifier.toLowerCase(Locale.ROOT)
-        val otherClassifierLowercase = other.classifier.toLowerCase(Locale.ROOT)
+        konst thisClassifierLowercase = this.classifier.toLowerCase(Locale.ROOT)
+        konst otherClassifierLowercase = other.classifier.toLowerCase(Locale.ROOT)
         if (thisClassifierLowercase == otherClassifierLowercase) return 0
         return thisClassifierLowercase.compareTo(otherClassifierLowercase)
     }
@@ -58,7 +58,7 @@ internal data class AndroidGradlePluginVersion(
     }
 
     companion object {
-        val currentOrNull: AndroidGradlePluginVersion? = try {
+        konst currentOrNull: AndroidGradlePluginVersion? = try {
             AndroidGradlePluginVersion(Version.ANDROID_GRADLE_PLUGIN_VERSION)
         } catch (_: LinkageError) {
             null
@@ -67,7 +67,7 @@ internal data class AndroidGradlePluginVersion(
         /**
          * The currently applied/accessible Android Gradle Plugin version
          */
-        val current: AndroidGradlePluginVersion
+        konst current: AndroidGradlePluginVersion
             get() = currentOrNull ?: throw IllegalStateException(
                 "Can't infer current AndroidGradlePluginVersion: Is the Android plugin applied?"
             )

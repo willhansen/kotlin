@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.tooling.core.toMutableExtras
 import kotlin.test.Test
 
 class IdeaKotlinSourceDependencySerializationTest : AbstractSerializationTest<IdeaKotlinSourceDependency>() {
-    override fun serialize(value: IdeaKotlinSourceDependency): ByteArray = IdeaKotlinSourceDependencyProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinSourceDependency): ByteArray = IdeaKotlinSourceDependencyProto(konstue).toByteArray()
 
     override fun deserialize(data: ByteArray): IdeaKotlinSourceDependency =
         IdeaKotlinSourceDependency(IdeaKotlinSourceDependencyProto.parseFrom(data))

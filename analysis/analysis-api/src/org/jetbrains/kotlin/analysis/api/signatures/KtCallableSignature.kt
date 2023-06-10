@@ -27,22 +27,22 @@ public sealed class KtCallableSignature<out S : KtCallableSymbol> : KtLifetimeOw
     /**
      * The original symbol for this signature.
      */
-    public abstract val symbol: S
+    public abstract konst symbol: S
 
     /**
      * The use-site-substituted return type.
      */
-    public abstract val returnType: KtType
+    public abstract konst returnType: KtType
 
     /**
      * The use-site-substituted extension receiver type.
      */
-    public abstract val receiverType: KtType?
+    public abstract konst receiverType: KtType?
 
     /**
      * A [CallableId] of a substituted symbol
      */
-    public open val callableIdIfNonLocal: CallableId? get() = withValidityAssertion { symbol.callableIdIfNonLocal }
+    public open konst callableIdIfNonLocal: CallableId? get() = withValidityAssertion { symbol.callableIdIfNonLocal }
 
     /**
      * Applies a [substitutor] to the given signature and return a new signature with substituted types.

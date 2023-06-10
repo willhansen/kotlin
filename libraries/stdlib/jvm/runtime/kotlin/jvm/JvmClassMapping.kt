@@ -24,16 +24,16 @@ import java.lang.Short as JavaLangShort
  * Returns a Java [Class] instance corresponding to the given [KClass] instance.
  */
 @Suppress("UPPER_BOUND_VIOLATED")
-public val <T> KClass<T>.java: Class<T>
+public konst <T> KClass<T>.java: Class<T>
     @JvmName("getJavaClass")
     get() = (this as ClassBasedDeclarationContainer).jClass as Class<T>
 
 /**
  * Returns a Java [Class] instance representing the primitive type corresponding to the given [KClass] if it exists.
  */
-public val <T : Any> KClass<T>.javaPrimitiveType: Class<T>?
+public konst <T : Any> KClass<T>.javaPrimitiveType: Class<T>?
     get() {
-        val thisJClass = (this as ClassBasedDeclarationContainer).jClass
+        konst thisJClass = (this as ClassBasedDeclarationContainer).jClass
         if (thisJClass.isPrimitive) return thisJClass as Class<T>
 
         return when (thisJClass.name) {
@@ -54,9 +54,9 @@ public val <T : Any> KClass<T>.javaPrimitiveType: Class<T>?
  * Returns a Java [Class] instance corresponding to the given [KClass] instance.
  * In case of primitive types it returns corresponding wrapper classes.
  */
-public val <T : Any> KClass<T>.javaObjectType: Class<T>
+public konst <T : Any> KClass<T>.javaObjectType: Class<T>
     get() {
-        val thisJClass = (this as ClassBasedDeclarationContainer).jClass
+        konst thisJClass = (this as ClassBasedDeclarationContainer).jClass
         if (!thisJClass.isPrimitive) return thisJClass as Class<T>
 
         return when (thisJClass.name) {
@@ -76,7 +76,7 @@ public val <T : Any> KClass<T>.javaObjectType: Class<T>
 /**
  * Returns a [KClass] instance corresponding to the given Java [Class] instance.
  */
-public val <T : Any> Class<T>.kotlin: KClass<T>
+public konst <T : Any> Class<T>.kotlin: KClass<T>
     @JvmName("getKotlinClass")
     get() = Reflection.getOrCreateKotlinClass(this) as KClass<T>
 
@@ -84,12 +84,12 @@ public val <T : Any> Class<T>.kotlin: KClass<T>
 /**
  * Returns the runtime Java class of this object.
  */
-public inline val <T : Any> T.javaClass: Class<T>
+public inline konst <T : Any> T.javaClass: Class<T>
     @Suppress("UsePropertyAccessSyntax")
     get() = (this as java.lang.Object).getClass() as Class<T>
 
 @Deprecated("Use 'java' property to get Java class corresponding to this Kotlin class or cast this instance to Any if you really want to get the runtime Java class of this implementation of KClass.", ReplaceWith("(this as Any).javaClass"), level = DeprecationLevel.ERROR)
-public inline val <T : Any> KClass<T>.javaClass: Class<KClass<T>>
+public inline konst <T : Any> KClass<T>.javaClass: Class<KClass<T>>
     @JvmName("getRuntimeClassOfKClassInstance")
     @Suppress("UsePropertyAccessSyntax")
     get() = (this as java.lang.Object).getClass() as Class<KClass<T>>
@@ -104,7 +104,7 @@ public fun <reified T : Any> Array<*>.isArrayOf(): Boolean =
 /**
  * Returns a [KClass] instance corresponding to the annotation type of this annotation.
  */
-public val <T : Annotation> T.annotationClass: KClass<out T>
+public konst <T : Annotation> T.annotationClass: KClass<out T>
     get() = (this as java.lang.annotation.Annotation).annotationType().kotlin as KClass<out T>
 
 /**
@@ -114,5 +114,5 @@ public val <T : Annotation> T.annotationClass: KClass<out T>
  */
 @SinceKotlin("1.7")
 @InlineOnly
-public inline val <E : Enum<E>> Enum<E>.declaringJavaClass: Class<E>
+public inline konst <E : Enum<E>> Enum<E>.declaringJavaClass: Class<E>
     get() = (this as java.lang.Enum<E>).declaringClass

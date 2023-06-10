@@ -11,7 +11,7 @@ inline fun<T1, T2, T3, T4, T5, T6, reified R> recursive(
 }
 
 fun box(): String {
-    val x = recursive<Int, Int, Int, Int, Int, Int, String>(){ "abc" }
+    konst x = recursive<Int, Int, Int, Int, Int, Int, String>(){ "abc" }
 
     require(x.all { it == "abc" })
     return "OK"

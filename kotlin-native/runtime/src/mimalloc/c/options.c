@@ -36,16 +36,16 @@ int mi_version(void) mi_attr_noexcept {
 // Options
 // These can be accessed by multiple threads and may be
 // concurrently initialized, but an initializing data race
-// is ok since they resolve to the same value.
+// is ok since they resolve to the same konstue.
 // --------------------------------------------------------
 typedef enum mi_init_e {
   UNINIT,       // not yet initialized
-  DEFAULTED,    // not found in the environment, use default value
+  DEFAULTED,    // not found in the environment, use default konstue
   INITIALIZED   // found in environment or set explicitly
 } mi_init_t;
 
 typedef struct mi_option_desc_s {
-  long        value;  // the value
+  long        konstue;  // the konstue
   mi_init_t   init;   // is it initialized yet? (from the environment)
   mi_option_t option; // for debugging: the option index should match the option
   const char* name;   // option name without `mimalloc_` prefix
@@ -106,7 +106,7 @@ void _mi_options_init(void) {
     long l = mi_option_get(option); UNUSED(l); // initialize
     if (option != mi_option_verbose) {
       mi_option_desc_t* desc = &options[option];
-      _mi_verbose_message("option '%s': %ld\n", desc->name, desc->value);
+      _mi_verbose_message("option '%s': %ld\n", desc->name, desc->konstue);
     }
   }
   mi_max_error_count = mi_option_get(mi_option_max_errors);
@@ -120,22 +120,22 @@ long mi_option_get(mi_option_t option) {
   if (mi_unlikely(desc->init == UNINIT)) {
     mi_option_init(desc);
   }
-  return desc->value;
+  return desc->konstue;
 }
 
-void mi_option_set(mi_option_t option, long value) {
+void mi_option_set(mi_option_t option, long konstue) {
   mi_assert(option >= 0 && option < _mi_option_last);
   mi_option_desc_t* desc = &options[option];
   mi_assert(desc->option == option);  // index should match the option
-  desc->value = value;
+  desc->konstue = konstue;
   desc->init = INITIALIZED;
 }
 
-void mi_option_set_default(mi_option_t option, long value) {
+void mi_option_set_default(mi_option_t option, long konstue) {
   mi_assert(option >= 0 && option < _mi_option_last);
   mi_option_desc_t* desc = &options[option];
   if (desc->init != INITIALIZED) {
-    desc->value = value;
+    desc->konstue = konstue;
   }
 }
 
@@ -487,7 +487,7 @@ static bool mi_getenv(const char* name, char* result, size_t result_size) {
 #endif
 
 static void mi_option_init(mi_option_desc_t* desc) {  
-  // Read option value from the environment
+  // Read option konstue from the environment
   char buf[64+1];
   mi_strlcpy(buf, "mimalloc_", sizeof(buf));
   mi_strlcat(buf, desc->name, sizeof(buf));
@@ -500,30 +500,30 @@ static void mi_option_init(mi_option_desc_t* desc) {
     }
     buf[len] = 0;
     if (buf[0]==0 || strstr("1;TRUE;YES;ON", buf) != NULL) {
-      desc->value = 1;
+      desc->konstue = 1;
       desc->init = INITIALIZED;
     }
     else if (strstr("0;FALSE;NO;OFF", buf) != NULL) {
-      desc->value = 0;
+      desc->konstue = 0;
       desc->init = INITIALIZED;
     }
     else {
       char* end = buf;
-      long value = strtol(buf, &end, 10);
+      long konstue = strtol(buf, &end, 10);
       if (desc->option == mi_option_reserve_os_memory) {
         // this option is interpreted in KiB to prevent overflow of `long`
         if (*end == 'K') { end++; }
-        else if (*end == 'M') { value *= KiB; end++; }
-        else if (*end == 'G') { value *= MiB; end++; }
-        else { value = (value + KiB - 1) / KiB; }
+        else if (*end == 'M') { konstue *= KiB; end++; }
+        else if (*end == 'G') { konstue *= MiB; end++; }
+        else { konstue = (konstue + KiB - 1) / KiB; }
         if (*end == 'B') { end++; }
       }
       if (*end == 0) {
-        desc->value = value;
+        desc->konstue = konstue;
         desc->init = INITIALIZED;
       }
       else {
-        _mi_warning_message("environment option mimalloc_%s has an invalid value: %s\n", desc->name, buf);
+        _mi_warning_message("environment option mimalloc_%s has an inkonstid konstue: %s\n", desc->name, buf);
         desc->init = DEFAULTED;
       }
     }

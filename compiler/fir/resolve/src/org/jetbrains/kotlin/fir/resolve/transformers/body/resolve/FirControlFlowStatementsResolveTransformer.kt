@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.fir.visitors.transformSingle
 class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyResolveTransformerDispatcher) :
     FirPartialBodyResolveTransformer(transformer) {
 
-    private val syntheticCallGenerator: FirSyntheticCallGenerator get() = components.syntheticCallGenerator
-    private val whenExhaustivenessTransformer = FirWhenExhaustivenessTransformer(components)
+    private konst syntheticCallGenerator: FirSyntheticCallGenerator get() = components.syntheticCallGenerator
+    private konst whenExhaustivenessTransformer = FirWhenExhaustivenessTransformer(components)
 
 
     // ------------------------------- Loops -------------------------------
 
     override fun transformWhileLoop(whileLoop: FirWhileLoop, data: ResolutionMode): FirStatement {
-        val context = ResolutionMode.ContextIndependent
+        konst context = ResolutionMode.ContextIndependent
         return whileLoop.also(dataFlowAnalyzer::enterWhileLoop)
             .transformCondition(transformer, withExpectedType(session.builtinTypes.booleanType))
             .also(dataFlowAnalyzer::exitWhileLoopCondition)
@@ -39,7 +39,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
     override fun transformDoWhileLoop(doWhileLoop: FirDoWhileLoop, data: ResolutionMode): FirStatement {
         // Do-while has a specific scope structure (its block and condition effectively share the scope)
         return context.forBlock(session) {
-            val context = ResolutionMode.ContextIndependent
+            konst context = ResolutionMode.ContextIndependent
             doWhileLoop.also(dataFlowAnalyzer::enterDoWhileLoop)
                 .also {
                     transformer.expressionsTransformer.transformBlockInCurrentScope(it.block, context)
@@ -62,7 +62,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         return context.withWhenExpression(whenExpression, session) with@{
             @Suppress("NAME_SHADOWING")
             var whenExpression = whenExpression.transformSubject(transformer, ResolutionMode.ContextIndependent)
-            val subjectType = whenExpression.subject?.typeRef?.coneType?.fullyExpandedType(session)
+            konst subjectType = whenExpression.subject?.typeRef?.coneType?.fullyExpandedType(session)
             var completionNeeded = false
             context.withWhenSubjectType(subjectType, components) {
                 when {
@@ -73,7 +73,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
                         // when with one branch cannot be completed if it's not already complete in the first place
                     }
                     else -> {
-                        val resolutionModeForBranches =
+                        konst resolutionModeForBranches =
                             (data as? ResolutionMode.WithExpectedType)
                                 // Currently we don't use information from cast, but probably we could have
                                 ?.takeUnless { it.fromCast }
@@ -94,9 +94,9 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
                 // exhaustiveness is not yet computed there, but at the same time to compute it properly
                 // we need having branches condition bes analyzed that is why we can't have call
                 // `whenExpression.transformSingle(whenExhaustivenessTransformer, null)` at the beginning
-                val callCompleted = when {
+                konst callCompleted = when {
                     completionNeeded -> {
-                        val completionResult = callCompleter.completeCall(
+                        konst completionResult = callCompleter.completeCall(
                             whenExpression,
                             // For non-exhaustive when expressions, we should complete then as independent because below
                             // their type is artificially replaced with Unit, while candidate symbol's return type remains the same
@@ -128,7 +128,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
     private fun FirWhenExpression.isOneBranch(): Boolean {
         if (branches.size == 1) return true
         if (branches.size > 2) return false
-        val lastBranch = branches.last()
+        konst lastBranch = branches.last()
         return lastBranch.source != null && lastBranch.condition is FirElseIfTrueCondition && lastBranch.result is FirEmptyExpressionBlock
     }
 
@@ -146,8 +146,8 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         whenSubjectExpression: FirWhenSubjectExpression,
         data: ResolutionMode
     ): FirStatement {
-        val parentWhen = whenSubjectExpression.whenRef.value
-        val subjectType = parentWhen.subject?.resultType ?: parentWhen.subjectVariable?.returnTypeRef
+        konst parentWhen = whenSubjectExpression.whenRef.konstue
+        konst subjectType = parentWhen.subject?.resultType ?: parentWhen.subjectVariable?.returnTypeRef
         if (subjectType != null) {
             whenSubjectExpression.resultType = subjectType
         }
@@ -168,7 +168,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         dataFlowAnalyzer.exitTryMainBlock()
         tryExpression.transformCatches(this, ResolutionMode.ContextDependent)
 
-        val incomplete = syntheticCallGenerator.generateCalleeForTryExpression(tryExpression, resolutionContext)
+        konst incomplete = syntheticCallGenerator.generateCalleeForTryExpression(tryExpression, resolutionContext)
         var (result, callCompleted) = callCompleter.completeCall(incomplete, data)
         if (result.finallyBlock != null) {
             dataFlowAnalyzer.enterFinallyBlock()
@@ -192,7 +192,7 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
 
     override fun <E : FirTargetElement> transformJump(jump: FirJump<E>, data: ResolutionMode): FirStatement {
         dataFlowAnalyzer.enterJump(jump)
-        val result = transformer.transformExpression(jump, data)
+        konst result = transformer.transformExpression(jump, data)
         dataFlowAnalyzer.exitJump(jump)
         return result
     }
@@ -201,10 +201,10 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         returnExpression: FirReturnExpression,
         data: ResolutionMode
     ): FirStatement {
-        val labeledElement = returnExpression.target.labeledElement
-        val expectedTypeRef = labeledElement.returnTypeRef
+        konst labeledElement = returnExpression.target.labeledElement
+        konst expectedTypeRef = labeledElement.returnTypeRef
 
-        val mode = when {
+        konst mode = when {
             labeledElement.symbol in context.anonymousFunctionsAnalyzedInDependentContext -> ResolutionMode.ContextDependent
 
             expectedTypeRef is FirResolvedTypeRef ->
@@ -242,12 +242,12 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         // But this is mostly a hack that I hope might be lifted once KT-55692 is considered
         // NB: Currently situation `it is ResolutionMode.WithExpectedType && !it.forceFullCompletion` might only happen in case of when branches
         @Suppress("NAME_SHADOWING")
-        val data = data.takeUnless { it is ResolutionMode.WithExpectedType && !it.forceFullCompletion } ?: ResolutionMode.ContextDependent
+        konst data = data.takeUnless { it is ResolutionMode.WithExpectedType && !it.forceFullCompletion } ?: ResolutionMode.ContextDependent
 
-        val expectedType = data.expectedType?.coneTypeSafe<ConeKotlinType>()
-        val mayBeCoercionToUnitApplied = (data as? ResolutionMode.WithExpectedType)?.mayBeCoercionToUnitApplied == true
+        konst expectedType = data.expectedType?.coneTypeSafe<ConeKotlinType>()
+        konst mayBeCoercionToUnitApplied = (data as? ResolutionMode.WithExpectedType)?.mayBeCoercionToUnitApplied == true
 
-        val resolutionModeForLhs =
+        konst resolutionModeForLhs =
             if (mayBeCoercionToUnitApplied && expectedType?.isUnitOrFlexibleUnit == true)
                 withExpectedType(expectedType, mayBeCoercionToUnitApplied = true)
             else
@@ -256,22 +256,22 @@ class FirControlFlowStatementsResolveTransformer(transformer: FirAbstractBodyRes
         elvisExpression.transformLhs(transformer, resolutionModeForLhs)
         dataFlowAnalyzer.exitElvisLhs(elvisExpression)
 
-        val resolutionModeForRhs = withExpectedType(
+        konst resolutionModeForRhs = withExpectedType(
             expectedType,
             mayBeCoercionToUnitApplied = mayBeCoercionToUnitApplied
         )
         elvisExpression.transformRhs(transformer, resolutionModeForRhs)
 
-        val (result, callCompleted) = callCompleter.completeCall(
+        konst (result, callCompleted) = callCompleter.completeCall(
             syntheticCallGenerator.generateCalleeForElvisExpression(elvisExpression, resolutionContext), data
         )
 
         var isLhsNotNull = false
         if (result.rhs.typeRef.coneTypeSafe<ConeKotlinType>()?.isNothing == true) {
-            val lhsType = result.lhs.typeRef.coneTypeSafe<ConeKotlinType>()
+            konst lhsType = result.lhs.typeRef.coneTypeSafe<ConeKotlinType>()
             if (lhsType != null) {
                 // Converting to non-raw type is necessary to preserver the K1 semantics (see KT-54526)
-                val newReturnType =
+                konst newReturnType =
                     lhsType.makeConeTypeDefinitelyNotNullOrNotNull(session.typeContext)
                         .convertToNonRawVersion()
                 result.replaceTypeRef(result.typeRef.resolvedTypeFromPrototype(newReturnType))

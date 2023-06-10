@@ -8,7 +8,7 @@ package codegen.lambda.lambda4
 import kotlin.test.*
 
 @Test fun runTest() {
-    val lambda = bar()
+    konst lambda = bar()
     lambda()
     lambda()
 }
@@ -16,7 +16,7 @@ import kotlin.test.*
 fun bar(): () -> Unit {
     var x = Integer(0)
 
-    val lambda = {
+    konst lambda = {
         println(x.toString())
         x = x + 1
     }
@@ -31,7 +31,7 @@ fun bar(): () -> Unit {
     return lambda
 }
 
-class Integer(val value: Int) {
-    override fun toString() = value.toString()
-    operator fun plus(other: Int) = Integer(value + other)
+class Integer(konst konstue: Int) {
+    override fun toString() = konstue.toString()
+    operator fun plus(other: Int) = Integer(konstue + other)
 }

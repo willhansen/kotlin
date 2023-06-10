@@ -10,13 +10,13 @@ enum class EnumClassSingle {
 
 enum class EnumClassEmpty
 
-enum class EnumClassWithNullableProperty(val prop_1: Int?) {
+enum class EnumClassWithNullableProperty(konst prop_1: Int?) {
     A(1),
     B(5),
     D(null)
 }
 
-enum class EnumClassWithProperty(val prop_1: Int) {
+enum class EnumClassWithProperty(konst prop_1: Int) {
     A(1),
     B(5),
     D(6)

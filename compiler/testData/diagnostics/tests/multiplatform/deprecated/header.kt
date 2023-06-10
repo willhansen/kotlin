@@ -5,7 +5,7 @@
 
 <!DEPRECATED_MODIFIER, DEPRECATED_MODIFIER{JVM}!>header<!> fun foo(): Int
 
-<!DEPRECATED_MODIFIER, DEPRECATED_MODIFIER{JVM}!>header<!> val x: String
+<!DEPRECATED_MODIFIER, DEPRECATED_MODIFIER{JVM}!>header<!> konst x: String
 
 <!DEPRECATED_MODIFIER, DEPRECATED_MODIFIER{JVM}!>header<!> object O
 
@@ -20,7 +20,7 @@
 
 <!DEPRECATED_MODIFIER!>impl<!> fun foo() = 42
 
-<!DEPRECATED_MODIFIER!>impl<!> val x get() = "Hello"
+<!DEPRECATED_MODIFIER!>impl<!> konst x get() = "Hello"
 
 <!DEPRECATED_MODIFIER!>impl<!> object O
 

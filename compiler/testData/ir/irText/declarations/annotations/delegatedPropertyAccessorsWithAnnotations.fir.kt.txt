@@ -5,43 +5,43 @@ open annotation class A : Annotation {
 
   }
 
-  val x: String
+  konst x: String
     field = x
     get
 
 }
 
 class Cell {
-  constructor(value: Int) /* primary */ {
+  constructor(konstue: Int) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  var value: Int
-    field = value
+  var konstue: Int
+    field = konstue
     get
     set
 
   operator fun getValue(thisRef: Any?, kProp: Any?): Int {
-    return <this>.<get-value>()
+    return <this>.<get-konstue>()
   }
 
   operator fun setValue(thisRef: Any?, kProp: Any?, newValue: Int) {
-    <this>.<set-value>(<set-?> = newValue)
+    <this>.<set-konstue>(<set-?> = newValue)
   }
 
 }
 
-val test1: Int /* by */
-  field = Cell(value = 1)
+konst test1: Int /* by */
+  field = Cell(konstue = 1)
   @A(x = "test1.get")
   get(): Int {
     return #test1$delegate.getValue(thisRef = null, kProp = ::test1)
   }
 
 var test2: Int /* by */
-  field = Cell(value = 2)
+  field = Cell(konstue = 2)
   @A(x = "test2.get")
   get(): Int {
     return #test2$delegate.getValue(thisRef = null, kProp = ::test2)

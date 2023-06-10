@@ -1,2 +1,2 @@
 expect class ClassWithImplByExtension
-expect val ClassWithImplByExtension.extensionVal: Int
+expect konst ClassWithImplByExtension.extensionVal: Int

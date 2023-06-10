@@ -4,7 +4,7 @@ interface Base {
 }
 
 abstract class A {
-    protected val a: Base = null!!
+    protected konst a: Base = null!!
 
     fun fest_1(other: A) {
         other.a.baseFun() // OK

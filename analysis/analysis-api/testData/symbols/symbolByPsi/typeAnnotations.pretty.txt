@@ -16,7 +16,7 @@ annotation class Anno4
 
 @kotlin.annotation.Target(allowedTargets = [kotlin.annotation.AnnotationTarget.TYPE])
 annotation class Anno5(s: kotlin.String) {
-  val s: kotlin.String
+  konst s: kotlin.String
 }
 
 interface I
@@ -24,5 +24,5 @@ interface I
 class X : @Anno1 I {
   fun f(arg: @Anno2 I): @Anno3 I
 
-  val x: @Anno4 I
+  konst x: @Anno4 I
 }

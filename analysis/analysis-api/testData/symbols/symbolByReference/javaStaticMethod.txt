@@ -23,7 +23,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getContainingModule: KtSourceModule "Sources of main"
   deprecationStatus: null

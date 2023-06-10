@@ -9,10 +9,10 @@ import kotlin.reflect.jvm.isAccessible
 class K<in T : String> {
     private var t: T
         get() = "OK" as T
-        set(value) {}
+        set(konstue) {}
 
     fun run(): String {
-        val p = K::class.memberProperties.single() as KMutableProperty1<K<String>, String>
+        konst p = K::class.memberProperties.single() as KMutableProperty1<K<String>, String>
         p.isAccessible = true
         p.set(this as K<String>, "")
         return p.get(this) as String

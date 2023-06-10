@@ -16,7 +16,7 @@ private class TargetDisambiguationRule : AttributeDisambiguationRule<TargetWithS
     override fun execute(details: MultipleCandidatesDetails<TargetWithSanitizer>) = details.run {
         if (consumerValue == null) {
             // If the consumer didn't want a specific target, provide host target if it's available.
-            val default = TargetWithSanitizer.host
+            konst default = TargetWithSanitizer.host
             if (candidateValues.contains(default)) {
                 closestMatch(default)
             }

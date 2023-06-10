@@ -20,8 +20,8 @@ fun <T> List<T>.listFromKotlin() = fromKotlin(this)
 fun <T> fromKotlin(var0: List<T?>): List<T?> = var0
 
 fun test(a: List<Int>) {
-    val b: List<Int>? = a.listFromJava()
-    val c: List<Int?> = a.listFromKotlin()
+    konst b: List<Int>? = a.listFromJava()
+    konst c: List<Int?> = a.listFromKotlin()
 }
 
 fun box(): String {

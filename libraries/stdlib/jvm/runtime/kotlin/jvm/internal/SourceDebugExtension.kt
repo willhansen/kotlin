@@ -8,11 +8,11 @@ package kotlin.jvm.internal
 /**
  * Provides a copy of the JVM attribute SourceDebugExtension on the class file.
  * This annotation exists if and only if there is a SourceDebugExtension attribute on the class.
- * To obtain the stored source mapping information, concatenate the strings in [value].
+ * To obtain the stored source mapping information, concatenate the strings in [konstue].
  * This annotation is needed for tools which inspect the Kotlin bytecode via JVMTI,
  * which does not always provide access to the SourceDebugExtension attribute.
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.BINARY)
 @SinceKotlin("1.8")
-annotation class SourceDebugExtension(val value: Array<String>)
+annotation class SourceDebugExtension(konst konstue: Array<String>)

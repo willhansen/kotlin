@@ -13,7 +13,7 @@ fun baz() {
     allInline
     allInline = 1
 
-    val base = Base()
+    konst base = Base()
     base.inlineFunBase {}
     base.inlineGetterBase
     base.inlineGetterBase = 1

@@ -7,7 +7,7 @@ interface B {
 }
 
 interface C : B {
-    val lineCellStyle: (A.() -> Unit)?
+    konst lineCellStyle: (A.() -> Unit)?
         get() = if (cond()) {
             {
                 withBottomBorder()

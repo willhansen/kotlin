@@ -6,18 +6,18 @@ plugins {
     `maven-publish`
 }
 
-val builtinsSrc = fileFrom(rootDir, "core", "builtins", "src")
-val builtinsNative = fileFrom(rootDir, "core", "builtins", "native")
-val kotlinReflectCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/reflect/")
-val kotlinReflectJvm = fileFrom(rootDir, "libraries/stdlib/jvm/src/kotlin/reflect")
-val kotlinRangesCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/ranges")
-val kotlinCollectionsCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/collections")
-val kotlinAnnotationsCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/annotations")
-val builtinsCherryPicked = fileFrom(buildDir, "src/reflect")
-val rangesCherryPicked = fileFrom(buildDir, "src/ranges")
-val builtinsCherryPickedJvm = fileFrom(buildDir, "src-jvm/reflect")
+konst builtinsSrc = fileFrom(rootDir, "core", "builtins", "src")
+konst builtinsNative = fileFrom(rootDir, "core", "builtins", "native")
+konst kotlinReflectCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/reflect/")
+konst kotlinReflectJvm = fileFrom(rootDir, "libraries/stdlib/jvm/src/kotlin/reflect")
+konst kotlinRangesCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/ranges")
+konst kotlinCollectionsCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/collections")
+konst kotlinAnnotationsCommon = fileFrom(rootDir, "libraries/stdlib/src/kotlin/annotations")
+konst builtinsCherryPicked = fileFrom(buildDir, "src/reflect")
+konst rangesCherryPicked = fileFrom(buildDir, "src/ranges")
+konst builtinsCherryPickedJvm = fileFrom(buildDir, "src-jvm/reflect")
 
-val runtimeElements by configurations.creating {
+konst runtimeElements by configurations.creating {
     isCanBeResolved = false
     isCanBeConsumed = true
     attributes {
@@ -25,7 +25,7 @@ val runtimeElements by configurations.creating {
     }
 }
 
-val runtimeElementsJvm by configurations.creating {
+konst runtimeElementsJvm by configurations.creating {
     isCanBeResolved = false
     isCanBeConsumed = true
     attributes {
@@ -34,7 +34,7 @@ val runtimeElementsJvm by configurations.creating {
     }
 }
 
-val prepareRangeSources by tasks.registering(Sync::class) {
+konst prepareRangeSources by tasks.registering(Sync::class) {
     from(kotlinRangesCommon) {
         exclude("Ranges.kt")
     }
@@ -50,7 +50,7 @@ val prepareRangeSources by tasks.registering(Sync::class) {
     into(rangesCherryPicked)
 }
 
-val prepareSources by tasks.registering(Sync::class) {
+konst prepareSources by tasks.registering(Sync::class) {
     from(kotlinReflectCommon) {
         exclude("typeOf.kt")
         exclude("KClasses.kt")
@@ -58,7 +58,7 @@ val prepareSources by tasks.registering(Sync::class) {
     into(builtinsCherryPicked)
 }
 
-val prepareSourcesJvm by tasks.registering(Sync::class) {
+konst prepareSourcesJvm by tasks.registering(Sync::class) {
     from(kotlinReflectJvm) {
         exclude("TypesJVM.kt")
         exclude("KClassesImpl.kt")
@@ -75,7 +75,7 @@ val prepareSourcesJvm by tasks.registering(Sync::class) {
 fun serializeTask(name: String, sourcesTask: TaskProvider<*>, inDirs: List<File>) =
     tasks.register(name, NoDebugJavaExec::class) {
         dependsOn(sourcesTask, prepareRangeSources)
-        val outDir = buildDir.resolve(this.name)
+        konst outDir = buildDir.resolve(this.name)
         inDirs.forEach { inputs.dir(it).withPathSensitivity(RELATIVE) }
         outputs.dir(outDir)
         outputs.cacheIf { true }
@@ -92,29 +92,29 @@ fun serializeTask(name: String, sourcesTask: TaskProvider<*>, inDirs: List<File>
         )
     }
 
-val serialize = serializeTask("serialize", prepareSources, listOf(builtinsSrc, builtinsNative, builtinsCherryPicked, rangesCherryPicked))
+konst serialize = serializeTask("serialize", prepareSources, listOf(builtinsSrc, builtinsNative, builtinsCherryPicked, rangesCherryPicked))
 
-val serializeJvm = serializeTask("serializeJvm", prepareSourcesJvm, listOf(builtinsSrc, builtinsNative, builtinsCherryPickedJvm, rangesCherryPicked))
+konst serializeJvm = serializeTask("serializeJvm", prepareSourcesJvm, listOf(builtinsSrc, builtinsNative, builtinsCherryPickedJvm, rangesCherryPicked))
 
-val builtinsJar by task<Jar> {
+konst builtinsJar by task<Jar> {
     dependsOn(serialize)
     from(serialize) { include("kotlin/**") }
     destinationDirectory.set(File(buildDir, "libs"))
 }
 
-val builtinsJvmJar by task<Jar> {
+konst builtinsJvmJar by task<Jar> {
     dependsOn(serializeJvm)
     from(serializeJvm) { include("kotlin/**") }
     archiveClassifier.set("jvm")
     destinationDirectory.set(File(buildDir, "libs"))
 }
 
-val assemble by tasks.getting {
+konst assemble by tasks.getting {
     dependsOn(serialize)
     dependsOn(serializeJvm)
 }
 
-val builtinsJarArtifact = artifacts.add(runtimeElements.name, builtinsJar)
+konst builtinsJarArtifact = artifacts.add(runtimeElements.name, builtinsJar)
 artifacts.add(runtimeElementsJvm.name, builtinsJvmJar)
 
 publishing {

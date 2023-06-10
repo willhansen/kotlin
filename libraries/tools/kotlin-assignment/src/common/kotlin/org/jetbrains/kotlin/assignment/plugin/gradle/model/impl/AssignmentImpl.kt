@@ -12,13 +12,13 @@ import java.io.Serializable
  * Implementation of the [ValueContainerAssignment] interface.
  */
 data class AssignmentImpl(
-    override val name: String,
-    override val annotations: List<String>
+    override konst name: String,
+    override konst annotations: List<String>
 ) : Assignment, Serializable {
 
-    override val modelVersion = serialVersionUID
+    override konst modelVersion = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

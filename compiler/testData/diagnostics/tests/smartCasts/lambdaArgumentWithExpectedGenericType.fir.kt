@@ -1,7 +1,7 @@
-class My<T: Any>(val y: T?) {
+class My<T: Any>(konst y: T?) {
 
     fun get(): T = run {
-        val x = y
+        konst x = y
         if (x == null) throw Exception()
         x
     }

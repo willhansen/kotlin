@@ -1,7 +1,7 @@
 package
 
 package a {
-    public val x: b.X
+    public konst x: b.X
 }
 
 package b {
@@ -15,7 +15,7 @@ package b {
 }
 
 package c {
-    public val x: d.X
+    public konst x: d.X
 }
 
 package d {

@@ -7,14 +7,14 @@ fun <E> id(e: E): E = e
 
 fun runForString(x: () -> String) {}
 
-val cs: CharSequence = ""
+konst cs: CharSequence = ""
 
 fun foo(dumpStrategy: String) {
-    val dump0: () -> String = <!TYPE_MISMATCH!>::<!TYPE_MISMATCH!>baz<!><!> // TYPE_MISMATCH
-    val dump1: () -> String = <!TYPE_MISMATCH, TYPE_MISMATCH!>id(::baz)<!> // TYPE_MISMATCH
+    konst dump0: () -> String = <!TYPE_MISMATCH!>::<!TYPE_MISMATCH!>baz<!><!> // TYPE_MISMATCH
+    konst dump1: () -> String = <!TYPE_MISMATCH, TYPE_MISMATCH!>id(::baz)<!> // TYPE_MISMATCH
     // OK, TYPE_MISMATCH IN K2
-    val dump2: () -> String = if (dumpStrategy == "KotlinLike") ::baz else ::bar
-    val dump3: () -> String = <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>select(::baz, ::bar)<!> // TYPE_MISMATCH
+    konst dump2: () -> String = if (dumpStrategy == "KotlinLike") ::baz else ::bar
+    konst dump3: () -> String = <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>select(::baz, ::bar)<!> // TYPE_MISMATCH
 
     var dump4: () -> String = if (dumpStrategy == "KotlinLike") ::baz else ::bar
     dump4.invoke()

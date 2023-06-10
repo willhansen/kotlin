@@ -13,16 +13,16 @@ import java.util.ArrayList
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-private val AT_OUTPUT_FILE_PATTERN = Pattern.compile("^\\s*//\\s*@(.*):$")
-private val EXPECTED_OCCURRENCES_PATTERN = Pattern.compile("^\\s*//\\s*(\\d+)\\s*(.*)$")
-private const val JVM_TEMPLATES = "// JVM_TEMPLATES"
-private const val JVM_IR_TEMPLATES = "// JVM_IR_TEMPLATES"
+private konst AT_OUTPUT_FILE_PATTERN = Pattern.compile("^\\s*//\\s*@(.*):$")
+private konst EXPECTED_OCCURRENCES_PATTERN = Pattern.compile("^\\s*//\\s*(\\d+)\\s*(.*)$")
+private const konst JVM_TEMPLATES = "// JVM_TEMPLATES"
+private const konst JVM_IR_TEMPLATES = "// JVM_IR_TEMPLATES"
 
-class OccurrenceInfo constructor(private val numberOfOccurrences: Int, private val needle: String, val backend: TargetBackend) {
-    private val pattern = Pattern.compile("($needle)")
+class OccurrenceInfo constructor(private konst numberOfOccurrences: Int, private konst needle: String, konst backend: TargetBackend) {
+    private konst pattern = Pattern.compile("($needle)")
 
     fun getActualOccurrence(text: String): String {
-        val actualCount = StringUtil.findMatches(text, pattern).size
+        konst actualCount = StringUtil.findMatches(text, pattern).size
         return "$actualCount $needle"
     }
 
@@ -32,18 +32,18 @@ class OccurrenceInfo constructor(private val numberOfOccurrences: Int, private v
 }
 
 fun readExpectedOccurrences(filename: String): List<OccurrenceInfo> {
-    val lines = File(filename).readLines().dropLastWhile(String::isEmpty)
+    konst lines = File(filename).readLines().dropLastWhile(String::isEmpty)
     return readExpectedOccurrences(lines)
 }
 
 fun readExpectedOccurrences(lines: List<String>): List<OccurrenceInfo> {
-    val result = ArrayList<OccurrenceInfo>()
+    konst result = ArrayList<OccurrenceInfo>()
     var backend = TargetBackend.ANY
     for (line in lines) {
         if (line.contains(JVM_TEMPLATES)) backend = TargetBackend.JVM
         else if (line.contains(JVM_IR_TEMPLATES)) backend = TargetBackend.JVM_IR
 
-        val matcher = EXPECTED_OCCURRENCES_PATTERN.matcher(line)
+        konst matcher = EXPECTED_OCCURRENCES_PATTERN.matcher(line)
         if (matcher.matches()) {
             result.add(parseOccurrenceInfo(matcher, backend))
         }
@@ -64,9 +64,9 @@ fun readExpectedOccurrencesForMultiFileTest(
         if (line.contains(JVM_TEMPLATES)) backend = TargetBackend.JVM
         else if (line.contains(JVM_IR_TEMPLATES)) backend = TargetBackend.JVM_IR
 
-        val atOutputFileMatcher = AT_OUTPUT_FILE_PATTERN.matcher(line)
+        konst atOutputFileMatcher = AT_OUTPUT_FILE_PATTERN.matcher(line)
         if (atOutputFileMatcher.matches()) {
-            val outputFileName = atOutputFileMatcher.group(1)
+            konst outputFileName = atOutputFileMatcher.group(1)
             if (withGeneratedFile.containsKey(outputFileName)) {
                 throw AssertionError("${fileName}: Expected occurrences for output file $outputFileName were already provided")
             }
@@ -74,17 +74,17 @@ fun readExpectedOccurrencesForMultiFileTest(
             withGeneratedFile[outputFileName] = currentOccurrenceInfos
         }
 
-        val expectedOccurrencesMatcher = EXPECTED_OCCURRENCES_PATTERN.matcher(line)
+        konst expectedOccurrencesMatcher = EXPECTED_OCCURRENCES_PATTERN.matcher(line)
         if (expectedOccurrencesMatcher.matches()) {
-            val occurrenceInfo = parseOccurrenceInfo(expectedOccurrencesMatcher, backend)
+            konst occurrenceInfo = parseOccurrenceInfo(expectedOccurrencesMatcher, backend)
             currentOccurrenceInfos.add(occurrenceInfo)
         }
     }
 }
 
 private fun parseOccurrenceInfo(matcher: Matcher, backend: TargetBackend): OccurrenceInfo {
-    val numberOfOccurrences = Integer.parseInt(matcher.group(1))
-    val needle = matcher.group(2)
+    konst numberOfOccurrences = Integer.parseInt(matcher.group(1))
+    konst needle = matcher.group(2)
     return OccurrenceInfo(numberOfOccurrences, needle, backend)
 }
 
@@ -95,8 +95,8 @@ fun checkGeneratedTextAgainstExpectedOccurrences(
     reportProblems: Boolean,
     assertions: Assertions
 ) {
-    val expected = StringBuilder()
-    val actual = StringBuilder()
+    konst expected = StringBuilder()
+    konst actual = StringBuilder()
     var lastBackend = TargetBackend.ANY
     for (info in expectedOccurrences) {
         if (lastBackend != info.backend) {
@@ -131,7 +131,7 @@ fun checkGeneratedTextAgainstExpectedOccurrences(
 
 fun assertTextWasGenerated(expectedOutputFile: String, generated: Map<String, String>, assertions: Assertions) {
     if (!generated.containsKey(expectedOutputFile)) {
-        val failMessage = StringBuilder()
+        konst failMessage = StringBuilder()
         failMessage.append("Missing output file ").append(expectedOutputFile).append(", got ").append(generated.size).append(": ")
         for (generatedFile in generated.keys) {
             failMessage.append(generatedFile).append(" ")

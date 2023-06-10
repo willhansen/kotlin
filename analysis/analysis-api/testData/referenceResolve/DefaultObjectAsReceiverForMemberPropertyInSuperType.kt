@@ -1,7 +1,7 @@
 package t
 
 interface Trait {
-    val some : Int get() = 1
+    konst some : Int get() = 1
 }
 
 open class A {

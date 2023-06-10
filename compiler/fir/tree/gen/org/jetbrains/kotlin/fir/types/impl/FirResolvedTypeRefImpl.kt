@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 class FirResolvedTypeRefImpl @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val type: ConeKotlinType,
+    override konst type: ConeKotlinType,
     override var delegatedTypeRef: FirTypeRef?,
-    override val isFromStubType: Boolean,
+    override konst isFromStubType: Boolean,
 ) : FirResolvedTypeRef() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

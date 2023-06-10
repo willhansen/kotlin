@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.fir.types.ConeDynamicType
 import org.jetbrains.kotlin.fir.types.coneType
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-private val nameToOperator = mapOf(
+private konst nameToOperator = mapOf(
     OperatorNameConventions.CONTAINS to "in",
     OperatorNameConventions.RANGE_TO to "..",
     OperatorNameConventions.RANGE_UNTIL to "..<",
@@ -28,13 +28,13 @@ private val nameToOperator = mapOf(
 
 object FirJsDynamicCallChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val callee = expression.calleeReference.resolved ?: return
+        konst callee = expression.calleeReference.resolved ?: return
 
         if (callee.resolvedSymbol.origin !is FirDeclarationOrigin.DynamicScope) {
             return checkSpreadOperator(expression, context, reporter)
         }
 
-        val symbol = callee.toResolvedCallableSymbol()
+        konst symbol = callee.toResolvedCallableSymbol()
             ?: error("Resolved call callee without a callable symbol")
 
         when {
@@ -57,28 +57,28 @@ object FirJsDynamicCallChecker : FirFunctionCallChecker() {
         }
     }
 
-    private val FirCall.isArrayAccessWithMultipleIndices: Boolean
+    private konst FirCall.isArrayAccessWithMultipleIndices: Boolean
         get() {
-            val callee = calleeReference as? FirNamedReference
+            konst callee = calleeReference as? FirNamedReference
                 ?: return false
 
             if (callee.source?.kind != KtFakeSourceElementKind.ArrayAccessNameReference) {
                 return false
             }
 
-            val arguments = (arguments.singleOrNull() as? FirVarargArgumentsExpression)?.arguments
+            konst arguments = (arguments.singleOrNull() as? FirVarargArgumentsExpression)?.arguments
                 ?: return false
 
             return callee.name == OperatorNameConventions.GET && arguments.size >= 2
                     || callee.name == OperatorNameConventions.SET && arguments.size >= 3
         }
 
-    private val FirFunctionCall.isInOperator
+    private konst FirFunctionCall.isInOperator
         get() = calleeReference.resolved?.name == OperatorNameConventions.CONTAINS && origin == FirFunctionCallOrigin.Operator
 
-    private val FirFunctionCall.isRangeOperator
+    private konst FirFunctionCall.isRangeOperator
         get(): Boolean {
-            val name = calleeReference.resolved?.name
+            konst name = calleeReference.resolved?.name
             return (name == OperatorNameConventions.RANGE_TO || name == OperatorNameConventions.RANGE_UNTIL)
                     && origin == FirFunctionCallOrigin.Operator
         }

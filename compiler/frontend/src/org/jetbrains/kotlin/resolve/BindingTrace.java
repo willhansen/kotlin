@@ -31,9 +31,9 @@ public interface BindingTrace extends DiagnosticSink {
     @NotNull
     BindingContext getBindingContext();
     
-    <K, V> void record(WritableSlice<K, V> slice, K key, V value);
+    <K, V> void record(WritableSlice<K, V> slice, K key, V konstue);
 
-    // Writes TRUE for a boolean value
+    // Writes TRUE for a boolean konstue
     <K> void record(WritableSlice<K, Boolean> slice, K key);
 
     @Nullable

@@ -35,8 +35,8 @@ object JavaScopeProvider : FirScopeProvider() {
         scopeSession: ScopeSession,
         memberRequiredPhase: FirResolvePhase?,
     ): FirTypeScope {
-        val symbol = klass.symbol as FirRegularClassSymbol
-        val enhancementScope = buildJavaEnhancementScope(useSiteSession, symbol, scopeSession, memberRequiredPhase)
+        konst symbol = klass.symbol as FirRegularClassSymbol
+        konst enhancementScope = buildJavaEnhancementScope(useSiteSession, symbol, scopeSession, memberRequiredPhase)
         if (klass.classKind == ClassKind.ANNOTATION_CLASS) {
             return buildSyntheticScopeForAnnotations(useSiteSession, symbol, scopeSession, enhancementScope)
         }
@@ -61,7 +61,7 @@ object JavaScopeProvider : FirScopeProvider() {
         memberRequiredPhase: FirResolvePhase?,
     ): JavaClassMembersEnhancementScope {
         return scopeSession.getOrBuild(symbol, JAVA_ENHANCEMENT) {
-            val firJavaClass = symbol.fir
+            konst firJavaClass = symbol.fir
             require(firJavaClass is FirJavaClass) {
                 "${firJavaClass.classId} is expected to be FirJavaClass, but ${firJavaClass::class} found"
             }
@@ -92,15 +92,15 @@ object JavaScopeProvider : FirScopeProvider() {
         memberRequiredPhase: FirResolvePhase?,
     ): JavaClassUseSiteMemberScope {
         return scopeSession.getOrBuild(regularClass.symbol, JAVA_USE_SITE) {
-            val declaredScope = buildDeclaredMemberScope(useSiteSession, regularClass)
-            val superTypes = if (regularClass.isThereLoopInSupertypes(useSiteSession))
+            konst declaredScope = buildDeclaredMemberScope(useSiteSession, regularClass)
+            konst superTypes = if (regularClass.isThereLoopInSupertypes(useSiteSession))
                 listOf(StandardClassIds.Any.constructClassLikeType(emptyArray(), isNullable = false))
             else
                 lookupSuperTypes(
                     regularClass, lookupInterfaces = true, deep = false, useSiteSession = useSiteSession, substituteTypes = true
                 )
 
-            val superTypeScopes = superTypes.mapNotNull {
+            konst superTypeScopes = superTypes.mapNotNull {
                 it.scopeForSupertype(useSiteSession, scopeSession, regularClass, memberRequiredPhase = memberRequiredPhase)
             }
 
@@ -118,7 +118,7 @@ object JavaScopeProvider : FirScopeProvider() {
         useSiteSession: FirSession,
         scopeSession: ScopeSession
     ): FirContainingNamesAwareScope? {
-        val scope = getStaticMemberScopeForCallables(klass, useSiteSession, scopeSession, hashSetOf()) ?: return null
+        konst scope = getStaticMemberScopeForCallables(klass, useSiteSession, scopeSession, hashSetOf()) ?: return null
         return FirNameAwareOnlyCallablesScope(FirStaticScope(scope))
     }
 
@@ -132,14 +132,14 @@ object JavaScopeProvider : FirScopeProvider() {
         if (!visitedClasses.add(klass)) return null
 
         return scopeSession.getOrBuild(klass.symbol, JAVA_ENHANCEMENT_FOR_STATIC) {
-            val declaredScope = buildDeclaredMemberScope(useSiteSession, klass)
+            konst declaredScope = buildDeclaredMemberScope(useSiteSession, klass)
 
-            val superClassScope = klass.findJavaSuperClass(useSiteSession)?.let {
+            konst superClassScope = klass.findJavaSuperClass(useSiteSession)?.let {
                 (it.scopeProvider as? JavaScopeProvider)
                     ?.getStaticMemberScopeForCallables(it, useSiteSession, scopeSession, visitedClasses)
             } ?: FirTypeScope.Empty
 
-            val superTypesScopes = klass.findClosestJavaSuperTypes(useSiteSession).mapNotNull {
+            konst superTypesScopes = klass.findClosestJavaSuperTypes(useSiteSession).mapNotNull {
                 (it.scopeProvider as? JavaScopeProvider)
                     ?.getStaticMemberScopeForCallables(it, useSiteSession, scopeSession, visitedClasses)
             }
@@ -160,7 +160,7 @@ object JavaScopeProvider : FirScopeProvider() {
     }
 
     private tailrec fun FirRegularClass.findJavaSuperClass(useSiteSession: FirSession): FirRegularClass? {
-        val superClass = superConeTypes.firstNotNullOfOrNull {
+        konst superClass = superConeTypes.firstNotNullOfOrNull {
             if (it.isAny) return@firstNotNullOfOrNull null
             (it.lookupTag.toSymbol(useSiteSession)?.fir as? FirRegularClass)?.takeIf { superClass ->
                 superClass.classKind == ClassKind.CLASS
@@ -173,7 +173,7 @@ object JavaScopeProvider : FirScopeProvider() {
     }
 
     private fun FirRegularClass.findClosestJavaSuperTypes(useSiteSession: FirSession): Collection<FirRegularClass> {
-        val result = mutableListOf<FirRegularClass>()
+        konst result = mutableListOf<FirRegularClass>()
         DFS.dfs(listOf(this),
                 { regularClass ->
                     regularClass.superConeTypes.mapNotNull {
@@ -212,7 +212,7 @@ object JavaScopeProvider : FirScopeProvider() {
     }
 }
 
-private val JAVA_SYNTHETIC_FOR_ANNOTATIONS = scopeSessionKey<FirRegularClassSymbol, JavaAnnotationSyntheticPropertiesScope>()
-private val JAVA_ENHANCEMENT_FOR_STATIC = scopeSessionKey<FirRegularClassSymbol, JavaClassStaticEnhancementScope>()
-private val JAVA_ENHANCEMENT = scopeSessionKey<FirRegularClassSymbol, JavaClassMembersEnhancementScope>()
-private val JAVA_USE_SITE = scopeSessionKey<FirRegularClassSymbol, JavaClassUseSiteMemberScope>()
+private konst JAVA_SYNTHETIC_FOR_ANNOTATIONS = scopeSessionKey<FirRegularClassSymbol, JavaAnnotationSyntheticPropertiesScope>()
+private konst JAVA_ENHANCEMENT_FOR_STATIC = scopeSessionKey<FirRegularClassSymbol, JavaClassStaticEnhancementScope>()
+private konst JAVA_ENHANCEMENT = scopeSessionKey<FirRegularClassSymbol, JavaClassMembersEnhancementScope>()
+private konst JAVA_USE_SITE = scopeSessionKey<FirRegularClassSymbol, JavaClassUseSiteMemberScope>()

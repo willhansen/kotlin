@@ -8,18 +8,18 @@ interface B {
 
 interface C: A, B
 
-class Z(val param: String): C {
+class Z(konst param: String): C {
 
     override fun test(): String {
         return param
     }
 }
 
-public class MyClass(val value : C) : C by value {
+public class MyClass(konst konstue : C) : C by konstue {
 
 }
 
 fun box(): String {
-    val s = MyClass(Z("OK"))
+    konst s = MyClass(Z("OK"))
     return s.test()
 }

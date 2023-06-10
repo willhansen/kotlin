@@ -9,6 +9,6 @@ enum class E {
 operator fun E.getValue(thisRef: Any?, property: Any?): String =
     if (this == E.OK && thisRef == null) "OK" else "Failed"
 
-val s: String by E.OK
+konst s: String by E.OK
 
 fun box(): String = s

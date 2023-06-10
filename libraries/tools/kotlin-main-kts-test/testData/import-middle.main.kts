@@ -3,6 +3,6 @@
 
 sharedVar *= 2
 
-val from = SharedClass("from")
+konst from = SharedClass("from")
 
 println("${SharedObject.greeting} ${from.msg} middle")

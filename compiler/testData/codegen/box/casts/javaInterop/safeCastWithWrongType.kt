@@ -2,10 +2,10 @@
 // TARGET_BACKEND: JVM
 // FILE: A.java
 public class A<T> {
-    private T value;
-    private A(T x) { value = x; }
+    private T konstue;
+    private A(T x) { konstue = x; }
     public static <T> T f() {
-        return ((A<T>) new A(1)).value;
+        return ((A<T>) new A(1)).konstue;
     }
 }
 

@@ -8,11 +8,11 @@ public interface IrThrowOrBuilder extends
     org.jetbrains.kotlin.protobuf.MessageLiteOrBuilder {
 
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 1;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 1;</code>
    */
   boolean hasValue();
   /**
-   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value = 1;</code>
+   * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue = 1;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getValue();
 }

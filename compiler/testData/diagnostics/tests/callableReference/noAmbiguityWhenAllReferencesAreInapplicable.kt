@@ -16,5 +16,5 @@ fun A.test() = true // everything is OK without this line
 fun B.test() = true
 
 fun main() {
-    val x = Foo.bar(B::test) // ambiguity in NI
+    konst x = Foo.bar(B::test) // ambiguity in NI
 }

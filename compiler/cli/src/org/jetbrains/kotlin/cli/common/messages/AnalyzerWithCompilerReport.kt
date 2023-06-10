@@ -37,11 +37,11 @@ import org.jetbrains.kotlin.resolve.checkers.OptInUsageChecker
 import org.jetbrains.kotlin.resolve.jvm.JvmBindingContextSlices
 
 class AnalyzerWithCompilerReport(
-    private val messageCollector: MessageCollector,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val renderDiagnosticName: Boolean
+    private konst messageCollector: MessageCollector,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst renderDiagnosticName: Boolean
 ) : AbstractAnalyzerWithCompilerReport {
-    override val targetEnvironment: TargetEnvironment
+    override konst targetEnvironment: TargetEnvironment
         get() = CompilerEnvironment
 
     override lateinit var analysisResult: AnalysisResult
@@ -53,16 +53,16 @@ class AnalyzerWithCompilerReport(
     )
 
     private fun reportIncompleteHierarchies() {
-        val bindingContext = analysisResult.bindingContext
-        val classes = bindingContext.getKeys(TraceBasedErrorReporter.INCOMPLETE_HIERARCHY)
+        konst bindingContext = analysisResult.bindingContext
+        konst classes = bindingContext.getKeys(TraceBasedErrorReporter.INCOMPLETE_HIERARCHY)
         if (!classes.isEmpty()) {
-            val message = StringBuilder(
+            konst message = StringBuilder(
                 "Supertypes of the following classes cannot be resolved. " +
                         "Please make sure you have the required dependencies in the classpath:\n"
             )
             for (descriptor in classes) {
-                val fqName = DescriptorUtils.getFqName(descriptor).asString()
-                val unresolved = bindingContext.get(TraceBasedErrorReporter.INCOMPLETE_HIERARCHY, descriptor)
+                konst fqName = DescriptorUtils.getFqName(descriptor).asString()
+                konst unresolved = bindingContext.get(TraceBasedErrorReporter.INCOMPLETE_HIERARCHY, descriptor)
                 assert(unresolved != null && !unresolved.isEmpty()) {
                     "Incomplete hierarchy should be reported with names of unresolved superclasses: $fqName"
                 }
@@ -78,18 +78,18 @@ class AnalyzerWithCompilerReport(
     }
 
     private fun reportAlternativeSignatureErrors() {
-        val bc = analysisResult.bindingContext
-        val descriptorsWithErrors = bc.getKeys(JvmBindingContextSlices.LOAD_FROM_JAVA_SIGNATURE_ERRORS)
+        konst bc = analysisResult.bindingContext
+        konst descriptorsWithErrors = bc.getKeys(JvmBindingContextSlices.LOAD_FROM_JAVA_SIGNATURE_ERRORS)
         if (!descriptorsWithErrors.isEmpty()) {
-            val message = StringBuilder("The following Java entities have annotations with wrong Kotlin signatures:\n")
+            konst message = StringBuilder("The following Java entities have annotations with wrong Kotlin signatures:\n")
             for (descriptor in descriptorsWithErrors) {
-                val declaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)
+                konst declaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)
                 assert(declaration is PsiModifierListOwner)
 
-                val errors = bc.get(JvmBindingContextSlices.LOAD_FROM_JAVA_SIGNATURE_ERRORS, descriptor)
+                konst errors = bc.get(JvmBindingContextSlices.LOAD_FROM_JAVA_SIGNATURE_ERRORS, descriptor)
                 assert(errors != null && !errors.isEmpty())
 
-                val externalName = PsiFormatUtil.getExternalName(declaration as PsiModifierListOwner)
+                konst externalName = PsiFormatUtil.getExternalName(declaration as PsiModifierListOwner)
                 message.append(externalName).append(":\n")
 
                 for (error in errors!!) {
@@ -106,7 +106,7 @@ class AnalyzerWithCompilerReport(
         }
     }
 
-    class SyntaxErrorReport(val isHasErrors: Boolean, val isAllErrorsAtEof: Boolean)
+    class SyntaxErrorReport(konst isHasErrors: Boolean, konst isAllErrorsAtEof: Boolean)
 
     override fun hasErrors(): Boolean =
         messageCollector.hasErrors()
@@ -127,10 +127,10 @@ class AnalyzerWithCompilerReport(
     }
 
     private class MyDiagnostic<E : PsiElement>(
-        psiElement: E, factory: DiagnosticFactory0<E>, val message: String
+        psiElement: E, factory: DiagnosticFactory0<E>, konst message: String
     ) : SimpleDiagnostic<E>(psiElement, factory, Severity.ERROR) {
 
-        override val isValid: Boolean = true
+        override konst isValid: Boolean = true
     }
 
     companion object {
@@ -142,13 +142,13 @@ class AnalyzerWithCompilerReport(
             else -> throw IllegalStateException("Unknown severity: $severity")
         }
 
-        private val SYNTAX_ERROR_FACTORY = DiagnosticFactory0.create<PsiErrorElement>(Severity.ERROR)
+        private konst SYNTAX_ERROR_FACTORY = DiagnosticFactory0.create<PsiErrorElement>(Severity.ERROR)
 
         private fun reportDiagnostic(diagnostic: Diagnostic, reporter: DiagnosticMessageReporter, renderDiagnosticName: Boolean): Boolean {
             if (!diagnostic.isValid) return false
 
-            val message = (diagnostic as? MyDiagnostic<*>)?.message ?: DefaultErrorMessages.render(diagnostic)
-            val textToRender = when (renderDiagnosticName) {
+            konst message = (diagnostic as? MyDiagnostic<*>)?.message ?: DefaultErrorMessages.render(diagnostic)
+            konst textToRender = when (renderDiagnosticName) {
                 true -> "[${diagnostic.factoryName}] $message"
                 false -> message
             }
@@ -168,7 +168,7 @@ class AnalyzerWithCompilerReport(
             renderDiagnosticName: Boolean
         ): Boolean {
             var hasErrors = false
-            val diagnostics = sortedDiagnostics(unsortedDiagnostics.all().filterIsInstance<Diagnostic>())
+            konst diagnostics = sortedDiagnostics(unsortedDiagnostics.all().filterIsInstance<Diagnostic>())
             for (diagnostic in diagnostics) {
                 hasErrors = hasErrors or reportDiagnostic(diagnostic, reporter, renderDiagnosticName)
             }
@@ -180,7 +180,7 @@ class AnalyzerWithCompilerReport(
             messageCollector: MessageCollector,
             renderInternalDiagnosticName: Boolean
         ): Boolean {
-            val hasErrors = reportDiagnostics(diagnostics, DefaultDiagnosticReporter(messageCollector), renderInternalDiagnosticName)
+            konst hasErrors = reportDiagnostics(diagnostics, DefaultDiagnosticReporter(messageCollector), renderInternalDiagnosticName)
 
             if (diagnostics.any { it.factory == Errors.INCOMPATIBLE_CLASS }) {
                 messageCollector.report(
@@ -224,7 +224,7 @@ class AnalyzerWithCompilerReport(
                 var allErrorsAtEof = true
 
                 private fun <E : PsiElement> reportDiagnostic(element: E, factory: DiagnosticFactory0<E>, message: String) {
-                    val diagnostic = MyDiagnostic(element, factory, message)
+                    konst diagnostic = MyDiagnostic(element, factory, message)
                     AnalyzerWithCompilerReport.reportDiagnostic(diagnostic, reporter, renderDiagnosticName = false)
                     if (allErrorsAtEof && !element.isAtEof()) {
                         allErrorsAtEof = false
@@ -241,7 +241,7 @@ class AnalyzerWithCompilerReport(
                 }
 
                 override fun visitErrorElement(element: PsiErrorElement) {
-                    val description = element.errorDescription
+                    konst description = element.errorDescription
                     reportDiagnostic(
                         element, SYNTAX_ERROR_FACTORY,
                         if (StringUtil.isEmpty(description)) "Syntax error" else description
@@ -249,7 +249,7 @@ class AnalyzerWithCompilerReport(
                 }
             }
 
-            val visitor = ErrorReportingVisitor()
+            konst visitor = ErrorReportingVisitor()
 
             file.accept(visitor)
 

@@ -7,7 +7,7 @@ KtFunctionLikeSignature:
   receiverType = null
   returnType = T
   symbol = /foo(x: kotlin.collections.List<T>, y: kotlin.collections.Map<T, kotlin.collections.List<S>>, k: kotlin.String): T
-  valueParameters = [
+  konstueParameters = [
     KtVariableLikeSignature:
       name = x
       receiverType = null
@@ -34,7 +34,7 @@ KtFunctionLikeSignature:
   receiverType = null
   returnType = kotlin.collections.List<S>
   symbol = /foo(x: kotlin.collections.List<T>, y: kotlin.collections.Map<T, kotlin.collections.List<S>>, k: kotlin.String): T
-  valueParameters = [
+  konstueParameters = [
     KtVariableLikeSignature:
       name = x
       receiverType = null

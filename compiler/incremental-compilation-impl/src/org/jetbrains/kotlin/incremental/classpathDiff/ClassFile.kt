@@ -11,7 +11,7 @@ import java.io.File
 class ClassFile(
 
     /** Directory or jar containing the .class file. */
-    val classRoot: File,
+    konst classRoot: File,
 
     /**
      * The relative path from [classRoot] to the .class file.
@@ -22,7 +22,7 @@ class ClassFile(
 ) {
 
     /** The Unix-style relative path (with '/' as separators) from [classRoot] to the .class file. */
-    val unixStyleRelativePath: String
+    konst unixStyleRelativePath: String
 
     init {
         unixStyleRelativePath = File(relativePath).invariantSeparatorsPath
@@ -31,16 +31,16 @@ class ClassFile(
 
 /** Information about the location of a .class file ([ClassFile]) and how to load its contents. */
 class ClassFileWithContentsProvider(
-    val classFile: ClassFile,
-    val contentsProvider: () -> ByteArray
+    konst classFile: ClassFile,
+    konst contentsProvider: () -> ByteArray
 ) {
     fun loadContents() = ClassFileWithContents(classFile, contentsProvider.invoke())
 }
 
 /** Information about the location of a .class file ([ClassFile]) and its contents. */
 class ClassFileWithContents(
-    @Suppress("unused") val classFile: ClassFile,
-    val contents: ByteArray
+    @Suppress("unused") konst classFile: ClassFile,
+    konst contents: ByteArray
 ) {
-    val classInfo: BasicClassInfo = BasicClassInfo.compute(contents)
+    konst classInfo: BasicClassInfo = BasicClassInfo.compute(contents)
 }

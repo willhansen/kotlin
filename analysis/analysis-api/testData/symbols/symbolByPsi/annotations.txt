@@ -14,7 +14,7 @@ KtConstructorSymbol:
     type: Anno
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null
@@ -59,7 +59,7 @@ KtConstructorSymbol:
             type: kotlin/String
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -70,7 +70,7 @@ KtConstructorSymbol:
         hasBackingField: true
         hasGetter: true
         hasSetter: false
-        initializer: KtNonConstantInitializerValue(val param1: String)
+        initializer: KtNonConstantInitializerValue(konst param1: String)
         isConst: false
         isDelegatedProperty: false
         isExtension: false
@@ -162,7 +162,7 @@ KtConstructorSymbol:
             type: kotlin/Int
           symbolKind: ACCESSOR
           typeParameters: []
-          valueParameters: []
+          konstueParameters: []
           visibility: Public
           getDispatchReceiver(): KtUsualClassType:
             annotationsList: []
@@ -173,7 +173,7 @@ KtConstructorSymbol:
         hasBackingField: true
         hasGetter: true
         hasSetter: false
-        initializer: KtNonConstantInitializerValue(val param2: Int)
+        initializer: KtNonConstantInitializerValue(konst param2: Int)
         isConst: false
         isDelegatedProperty: false
         isExtension: false
@@ -281,7 +281,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: CLASS_MEMBER
   typeParameters: []
-  valueParameters: []
+  konstueParameters: []
   visibility: Public
   getDispatchReceiver(): KtUsualClassType:
     annotationsList: []

@@ -21,7 +21,7 @@ fun cond() = true
 fun test(s: String) = s
 
 fun box(): String {
-    val x: String
+    konst x: String
     myrun {
         x = if (cond()) test("OK") else test("fail")
     }

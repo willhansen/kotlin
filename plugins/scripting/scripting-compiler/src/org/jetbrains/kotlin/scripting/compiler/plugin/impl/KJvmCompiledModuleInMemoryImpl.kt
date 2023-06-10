@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.scripting.compiler.plugin.impl
 import java.io.Serializable
 import kotlin.script.experimental.jvm.impl.KJvmCompiledModuleInMemory
 
-class KJvmCompiledModuleInMemoryImpl(override val compilerOutputFiles: Map<String, ByteArray>) : KJvmCompiledModuleInMemory,
+class KJvmCompiledModuleInMemoryImpl(override konst compilerOutputFiles: Map<String, ByteArray>) : KJvmCompiledModuleInMemory,
     Serializable {
 
     override fun createClassLoader(baseClassLoader: ClassLoader?): ClassLoader =
@@ -16,6 +16,6 @@ class KJvmCompiledModuleInMemoryImpl(override val compilerOutputFiles: Map<Strin
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 }

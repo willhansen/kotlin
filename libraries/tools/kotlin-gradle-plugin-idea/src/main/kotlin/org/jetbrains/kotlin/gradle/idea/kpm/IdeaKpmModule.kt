@@ -9,22 +9,22 @@ import org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi
 import java.io.Serializable
 
 sealed interface IdeaKpmModule : Serializable {
-    val coordinates: IdeaKpmModuleCoordinates
-    val fragments: List<IdeaKpmFragment>
+    konst coordinates: IdeaKpmModuleCoordinates
+    konst fragments: List<IdeaKpmFragment>
 }
 
-val IdeaKpmModule.name get() = coordinates.moduleName
+konst IdeaKpmModule.name get() = coordinates.moduleName
 
-val IdeaKpmModule.moduleClassifier get() = coordinates.moduleClassifier
+konst IdeaKpmModule.moduleClassifier get() = coordinates.moduleClassifier
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmModuleImpl(
-    override val coordinates: IdeaKpmModuleCoordinates,
-    override val fragments: List<IdeaKpmFragment>
+    override konst coordinates: IdeaKpmModuleCoordinates,
+    override konst fragments: List<IdeaKpmFragment>
 ) : IdeaKpmModule {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

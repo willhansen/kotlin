@@ -13,7 +13,7 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class NegatedJumpsMethodTransformer : MethodTransformer() {
     override fun transform(internalClassName: String, methodNode: MethodNode) {
-        val insnList = methodNode.instructions
+        konst insnList = methodNode.instructions
 
         // Replace sequence of instructions such as
         //      IF_ICMPLT L1            = insn
@@ -24,19 +24,19 @@ class NegatedJumpsMethodTransformer : MethodTransformer() {
         //    L1:                       = next2
         for (insn in insnList.toArray()) {
             if (insn.type != AbstractInsnNode.JUMP_INSN || insn.opcode == Opcodes.GOTO) continue
-            val next1 = insn.next ?: continue
+            konst next1 = insn.next ?: continue
             if (next1.opcode != Opcodes.GOTO) continue
-            val next2 = next1.next ?: continue
+            konst next2 = next1.next ?: continue
             if (next2 != (insn as JumpInsnNode).label) continue
 
-            val negatedJumpInsn = JumpInsnNode(negateConditionalJumpOpcode(insn.opcode), (next1 as JumpInsnNode).label)
+            konst negatedJumpInsn = JumpInsnNode(negateConditionalJumpOpcode(insn.opcode), (next1 as JumpInsnNode).label)
             insnList.insertBefore(insn, negatedJumpInsn)
             insnList.remove(insn)
             insnList.remove(next1)
         }
     }
 
-    private val negatedConditionalJumpOpcode = IntArray(255).also { a ->
+    private konst negatedConditionalJumpOpcode = IntArray(255).also { a ->
         fun negated(opcode1: Int, opcode2: Int) {
             a[opcode1] = opcode2
             a[opcode2] = opcode1

@@ -7,7 +7,7 @@ class Derived: Base {
 }
 
 fun box(): String {
-    val result = Derived().bar()
+    konst result = Derived().bar()
     if (result != "abc from class") return "Fail: $result"
 
     return "OK"

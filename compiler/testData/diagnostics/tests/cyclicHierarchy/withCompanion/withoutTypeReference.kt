@@ -10,7 +10,7 @@ open class C {
         open fun m() {}
     }
 
-    val field = Data()
+    konst field = Data()
 
     companion object : DerivedAbstract() {
         override fun m() {}

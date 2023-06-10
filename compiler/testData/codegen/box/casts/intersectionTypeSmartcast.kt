@@ -8,12 +8,12 @@ interface B {
 
 fun bar(x: Any?): String {
     if (x is A) {
-        val k = x.foo()
+        konst k = x.foo()
         if (k != "OK") return "fail 1"
     }
 
     if (x is B) {
-        val k = x.foo()
+        konst k = x.foo()
         if (k.length != 2) return "fail 2"
     }
 

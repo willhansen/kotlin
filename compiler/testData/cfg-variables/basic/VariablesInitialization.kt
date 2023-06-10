@@ -1,6 +1,6 @@
 fun foo() {
-    val a = 1
-    val b: Int
+    konst a = 1
+    konst b: Int
     b = 2
     42
 }

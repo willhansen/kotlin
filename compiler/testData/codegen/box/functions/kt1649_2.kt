@@ -1,5 +1,5 @@
 interface A {
-    val method : () -> Unit?
+    konst method : () -> Unit?
 }
 
 fun test(a : A) {
@@ -9,7 +9,7 @@ fun test(a : A) {
 }
 
 class B : A {
-    override val method = { }
+    override konst method = { }
 }
 
 fun box(): String {

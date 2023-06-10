@@ -9,25 +9,25 @@ import android.os.Parcelable
 
 sealed class Foo : Parcelable {
     @Parcelize
-    data class A(val x: Int) : Foo()
+    data class A(konst x: Int) : Foo()
 
     @Parcelize
-    data class B (val x: String) : Foo()
+    data class B (konst x: String) : Foo()
 }
 
 @Parcelize
-data class Bar(val a: Foo) : Parcelable
+data class Bar(konst a: Foo) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Bar(Foo.B("OK"))
+    konst first = Bar(Foo.B("OK"))
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val second = readFromParcel<Bar>(parcel)
+    konst second = readFromParcel<Bar>(parcel)
 
     assert(first == second)
 }

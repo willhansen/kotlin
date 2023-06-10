@@ -40,12 +40,12 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
                 receiver: GET_VAR '<this>: <root>.A.B declared in <root>.A.B.subSequence' type=<root>.A.B origin=null
               startIndex: GET_VAR 'startIndex: kotlin.Int declared in <root>.A.B.subSequence' type=kotlin.Int origin=null
               endIndex: GET_VAR 'endIndex: kotlin.Int declared in <root>.A.B.subSequence' type=kotlin.Int origin=null
-      PROPERTY DELEGATED_MEMBER name:length visibility:public modality:OPEN [val]
+      PROPERTY DELEGATED_MEMBER name:length visibility:public modality:OPEN [konst]
         overridden:
           public abstract length: kotlin.Int
           public abstract length: kotlin.Int
         FUN DELEGATED_MEMBER name:<get-length> visibility:public modality:OPEN <> ($this:<root>.A.B) returnType:kotlin.Int
-          correspondingProperty: PROPERTY DELEGATED_MEMBER name:length visibility:public modality:OPEN [val]
+          correspondingProperty: PROPERTY DELEGATED_MEMBER name:length visibility:public modality:OPEN [konst]
           overridden:
             public abstract fun <get-length> (): kotlin.Int declared in <root>.A
             public abstract fun <get-length> (): kotlin.Int declared in kotlin.CharSequence
@@ -55,12 +55,12 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
               CALL 'public abstract fun <get-length> (): kotlin.Int declared in kotlin.CharSequence' type=kotlin.Int origin=null
                 $this: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.CharSequence visibility:private [final]' type=kotlin.CharSequence origin=null
                   receiver: GET_VAR '<this>: <root>.A.B declared in <root>.A.B.<get-length>' type=<root>.A.B origin=null
-      PROPERTY name:c visibility:public modality:FINAL [val]
+      PROPERTY name:c visibility:public modality:FINAL [konst]
         FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.CharSequence visibility:private [final]
           EXPRESSION_BODY
             GET_VAR 'c: kotlin.CharSequence declared in <root>.A.B.<init>' type=kotlin.CharSequence origin=INITIALIZE_PROPERTY_FROM_PARAMETER
         FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.A.B) returnType:kotlin.CharSequence
-          correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+          correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
           $this: VALUE_PARAMETER name:<this> type:<root>.A.B
           BLOCK_BODY
             RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.CharSequence declared in <root>.A.B'
@@ -94,14 +94,14 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
                 arg0: GET_VAR '<this>: <root>.A.B declared in <root>.A.B.equals' type=<root>.A.B origin=null
                 arg1: GET_VAR 'other: kotlin.Any? declared in <root>.A.B.equals' type=kotlin.Any? origin=null
               then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A.B'
-                CONST Boolean type=kotlin.Boolean value=true
+                CONST Boolean type=kotlin.Boolean konstue=true
           WHEN type=kotlin.Unit origin=null
             BRANCH
               if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.A.B
                 GET_VAR 'other: kotlin.Any? declared in <root>.A.B.equals' type=kotlin.Any? origin=null
               then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A.B'
-                CONST Boolean type=kotlin.Boolean value=false
-          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.A.B [val]
+                CONST Boolean type=kotlin.Boolean konstue=false
+          VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.A.B [konst]
             TYPE_OP type=<root>.A.B origin=CAST typeOperand=<root>.A.B
               GET_VAR 'other: kotlin.Any? declared in <root>.A.B.equals' type=kotlin.Any? origin=null
           WHEN type=kotlin.Unit origin=null
@@ -111,11 +111,11 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
                   arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.CharSequence visibility:private [final]' type=kotlin.CharSequence origin=null
                     receiver: GET_VAR '<this>: <root>.A.B declared in <root>.A.B.equals' type=<root>.A.B origin=null
                   arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.CharSequence visibility:private [final]' type=kotlin.CharSequence origin=null
-                    receiver: GET_VAR 'val tmp_0: <root>.A.B declared in <root>.A.B.equals' type=<root>.A.B origin=null
+                    receiver: GET_VAR 'konst tmp_0: <root>.A.B declared in <root>.A.B.equals' type=<root>.A.B origin=null
               then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A.B'
-                CONST Boolean type=kotlin.Boolean value=false
+                CONST Boolean type=kotlin.Boolean konstue=false
           RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.A.B'
-            CONST Boolean type=kotlin.Boolean value=true
+            CONST Boolean type=kotlin.Boolean konstue=true
       FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.A.B) returnType:kotlin.Int
         overridden:
           public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -132,10 +132,10 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.A.B'
             STRING_CONCATENATION type=kotlin.String
-              CONST String type=kotlin.String value="B(c="
+              CONST String type=kotlin.String konstue="B(c="
               GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.CharSequence visibility:private [final]' type=kotlin.CharSequence origin=null
                 receiver: GET_VAR '<this>: <root>.A.B declared in <root>.A.B.toString' type=<root>.A.B origin=null
-              CONST String type=kotlin.String value=")"
+              CONST String type=kotlin.String konstue=")"
     FUN FAKE_OVERRIDE name:get visibility:public modality:ABSTRACT <> ($this:kotlin.CharSequence, index:kotlin.Int) returnType:kotlin.Char [fake_override,operator]
       overridden:
         public abstract fun get (index: kotlin.Int): kotlin.Char declared in kotlin.CharSequence
@@ -147,11 +147,11 @@ FILE fqName:<root> fileName:/delegationInSealed.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.CharSequence
       VALUE_PARAMETER name:startIndex index:0 type:kotlin.Int
       VALUE_PARAMETER name:endIndex index:1 type:kotlin.Int
-    PROPERTY FAKE_OVERRIDE name:length visibility:public modality:ABSTRACT [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:length visibility:public modality:ABSTRACT [fake_override,konst]
       overridden:
         public abstract length: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-length> visibility:public modality:ABSTRACT <> ($this:kotlin.CharSequence) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:length visibility:public modality:ABSTRACT [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:length visibility:public modality:ABSTRACT [fake_override,konst]
         overridden:
           public abstract fun <get-length> (): kotlin.Int declared in kotlin.CharSequence
         $this: VALUE_PARAMETER name:<this> type:kotlin.CharSequence

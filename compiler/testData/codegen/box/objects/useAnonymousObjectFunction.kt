@@ -13,11 +13,11 @@ class Outer {
     fun barCaller(): Enum = obj1.bar()
     fun bazCaller(): Enum = obj2.baz()
 
-    private abstract inner class Inner<T>(val default: T) {
+    private abstract inner class Inner<T>(konst default: T) {
         abstract fun foo()
     }
 
-    private val obj1 = object : Inner<Enum>(Enum.Entry1) {
+    private konst obj1 = object : Inner<Enum>(Enum.Entry1) {
         override fun foo() {
             TODO("not related")
         }
@@ -27,7 +27,7 @@ class Outer {
         }
     }
 
-    private val obj2 = object : Inner<Enum>(Enum.Entry2) {
+    private konst obj2 = object : Inner<Enum>(Enum.Entry2) {
         override fun foo() {
             TODO("not related")
         }
@@ -39,7 +39,7 @@ class Outer {
 }
 
 fun box(): String {
-    val o = Outer()
+    konst o = Outer()
     if (o.barCaller() != Enum.Entry1) return "Fail1"
     if (o.bazCaller() != Enum.Entry2) return "Fail2"
     return "OK"

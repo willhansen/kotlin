@@ -1,7 +1,7 @@
-val a = f() {} {} {}
-val a = f {} {} {}
-val a = f {}
-val a = f() {}
-val a = (f) {} {} {}
-val a = (f)() {} {} {}
-val a = (f)<A>() {} {} {}
+konst a = f() {} {} {}
+konst a = f {} {} {}
+konst a = f {}
+konst a = f() {}
+konst a = (f) {} {} {}
+konst a = (f)() {} {} {}
+konst a = (f)<A>() {} {} {}

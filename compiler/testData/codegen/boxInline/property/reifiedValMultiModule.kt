@@ -4,7 +4,7 @@
 // FILE: lib.kt
 package lib
 
-inline val <reified T: Any> T.value: String
+inline konst <reified T: Any> T.konstue: String
     get() = T::class.simpleName!!
 
 // MODULE: main(lib)
@@ -14,5 +14,5 @@ import lib.*
 class OK
 
 fun box(): String {
-    return OK().value ?: "fail"
+    return OK().konstue ?: "fail"
 }

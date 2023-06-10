@@ -24,7 +24,7 @@ internal class KotlinJsIrSourceSetProcessor(
     kotlinCompilation = kotlinCompilation
 ) {
     override fun doRegisterTask(project: Project, taskName: String): TaskProvider<out Kotlin2JsCompile> {
-        val configAction = Kotlin2JsCompileConfig(compilationInfo)
+        konst configAction = Kotlin2JsCompileConfig(compilationInfo)
         applyStandardTaskConfiguration(configAction)
         return tasksProvider.registerKotlinJSTask(
             project,
@@ -39,12 +39,12 @@ internal class KotlinJsIrSourceSetProcessor(
             it.dependsOn(kotlinTask)
         }
 
-        val compilation = compilationInfo.tcsOrNull?.compilation as KotlinJsIrCompilation
+        konst compilation = compilationInfo.tcsOrNull?.compilation as KotlinJsIrCompilation
 
         compilation.binaries
             .withType(JsIrBinary::class.java)
             .all { binary ->
-                val configAction = KotlinJsIrLinkConfig(binary)
+                konst configAction = KotlinJsIrLinkConfig(binary)
                 configAction.configureTask {
                     it.description = taskDescription
                     it.libraries.from(compilation.runtimeDependencyFiles)
@@ -57,8 +57,8 @@ internal class KotlinJsIrSourceSetProcessor(
                 tasksProvider.registerKotlinJsIrTask(project, binary.linkTaskName, configAction)
             }
 
-        project.whenEvaluated {
-            val subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
+        project.whenEkonstuated {
+            konst subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
             /* Not supported in KPM, yet */
             compilationInfo.tcsOrNull?.compilation?.let { compilation ->
                 subpluginEnvironment.addSubpluginOptions(project, compilation)

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-internal val CreateLLVMDeclarationsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
+internal konst CreateLLVMDeclarationsPhase = createSimpleNamedCompilerPhase<NativeGenerationState, IrModuleFragment>(
         name = "CreateLLVMDeclarations",
         description = "Map IR declarations to LLVM",
         preactions = getDefaultIrActions(),
@@ -31,40 +31,40 @@ internal val CreateLLVMDeclarationsPhase = createSimpleNamedCompilerPhase<Native
 )
 
 internal data class RTTIInput(
-        val irModule: IrModuleFragment,
-        val referencedFunctions: Set<IrFunction>?
+        konst irModule: IrModuleFragment,
+        konst referencedFunctions: Set<IrFunction>?
 ) : KotlinBackendIrHolder {
-    override val kotlinIr: IrElement
+    override konst kotlinIr: IrElement
         get() = irModule
 }
 
-internal val RTTIPhase = createSimpleNamedCompilerPhase<NativeGenerationState, RTTIInput>(
+internal konst RTTIPhase = createSimpleNamedCompilerPhase<NativeGenerationState, RTTIInput>(
         name = "RTTI",
         description = "RTTI generation",
         preactions = getDefaultIrActions(),
         postactions = getDefaultIrActions(),
         op = { generationState, input ->
-            val visitor = RTTIGeneratorVisitor(generationState, input.referencedFunctions)
+            konst visitor = RTTIGeneratorVisitor(generationState, input.referencedFunctions)
             input.irModule.acceptVoid(visitor)
             visitor.dispose()
         }
 )
 
 internal data class CodegenInput(
-        val irModule: IrModuleFragment,
-        val lifetimes: Map<IrElement, Lifetime>
+        konst irModule: IrModuleFragment,
+        konst lifetimes: Map<IrElement, Lifetime>
 ) : KotlinBackendIrHolder {
-    override val kotlinIr: IrElement
+    override konst kotlinIr: IrElement
         get() = irModule
 }
 
-internal val CodegenPhase = createSimpleNamedCompilerPhase<NativeGenerationState, CodegenInput>(
+internal konst CodegenPhase = createSimpleNamedCompilerPhase<NativeGenerationState, CodegenInput>(
         name = "Codegen",
         description = "Code generation",
         preactions = getDefaultIrActions<CodegenInput, NativeGenerationState>() + getDefaultLlvmModuleActions(),
         postactions = getDefaultIrActions<CodegenInput, NativeGenerationState>() + getDefaultLlvmModuleActions(),
         op = { generationState, input ->
-            val context = generationState.context
+            konst context = generationState.context
             generationState.objCExport = ObjCExport(
                     generationState,
                     input.irModule.descriptor,

@@ -9,10 +9,10 @@ inline fun <R> map(transform: () -> R): R {
 // FILE: 2.kt
 
 import test.*
-val Long.myInc
+konst Long.myInc
     get() = this + 1
 
 fun box(): String {
-    val result = map(2L::myInc)
+    konst result = map(2L::myInc)
     return if (result == 3L) "OK" else "fail $result"
 }

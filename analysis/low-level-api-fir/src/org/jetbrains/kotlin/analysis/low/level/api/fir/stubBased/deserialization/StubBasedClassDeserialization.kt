@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.psi.*
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedContainerSource
 import java.lang.ref.WeakReference
 
-internal val KtModifierListOwner.visibility: Visibility
+internal konst KtModifierListOwner.visibility: Visibility
     get() = with(modifierList) {
         when {
             this == null -> Visibilities.Public
@@ -42,7 +42,7 @@ internal val KtModifierListOwner.visibility: Visibility
         }
     }
 
-internal val KtDeclaration.modality: Modality
+internal konst KtDeclaration.modality: Modality
     get() {
         return when {
             hasModifier(KtTokens.SEALED_KEYWORD) -> Modality.SEALED
@@ -52,24 +52,24 @@ internal val KtDeclaration.modality: Modality
         }
     }
 
-private val STUBS_KEY = Key.create<WeakReference<List<Stub>?>>("STUBS")
+private konst STUBS_KEY = Key.create<WeakReference<List<Stub>?>>("STUBS")
 internal fun <S, T> loadStubByElement(ktElement: T): S? where T : StubBasedPsiElementBase<*>, T : KtElement {
     ktElement.greenStub?.let {
         @Suppress("UNCHECKED_CAST")
         return it as S
     }
-    val ktFile = ktElement.containingKtFile
+    konst ktFile = ktElement.containingKtFile
     require(ktFile.isCompiled) {
         "Expected compiled file $ktFile"
     }
-    val virtualFile = PsiUtilCore.getVirtualFile(ktFile) ?: return null
+    konst virtualFile = PsiUtilCore.getVirtualFile(ktFile) ?: return null
     var stubList = ktFile.getUserData(STUBS_KEY)?.get()
     if (stubList == null) {
-        val stubTree = StubTreeLoader.getInstance().readOrBuild(ktElement.project, virtualFile, null)
+        konst stubTree = StubTreeLoader.getInstance().readOrBuild(ktElement.project, virtualFile, null)
         stubList = stubTree?.plainList ?: emptyList()
         ktFile.putUserData(STUBS_KEY, WeakReference(stubList))
     }
-    val nodeList = (ktFile.node as FileElement).stubbedSpine.spineNodes
+    konst nodeList = (ktFile.node as FileElement).stubbedSpine.spineNodes
     if (stubList.size != nodeList.size) return null
     @Suppress("UNCHECKED_CAST")
     return stubList[nodeList.indexOf(ktElement.node)] as S
@@ -88,7 +88,7 @@ internal fun deserializeClassToSymbol(
     deserializeNestedClass: (ClassId, StubBasedFirDeserializationContext) -> FirRegularClassSymbol?,
     initialOrigin: FirDeclarationOrigin
 ) {
-    val kind = when (classOrObject) {
+    konst kind = when (classOrObject) {
         is KtObjectDeclaration -> ClassKind.OBJECT
         is KtClass -> when {
             classOrObject.isInterface() -> ClassKind.INTERFACE
@@ -98,9 +98,9 @@ internal fun deserializeClassToSymbol(
         }
         else -> throw AssertionError("Unexpected class or object: ${classOrObject.text}")
     }
-    val modality = classOrObject.modality
-    val visibility = classOrObject.visibility
-    val status = FirResolvedDeclarationStatusImpl(
+    konst modality = classOrObject.modality
+    konst visibility = classOrObject.visibility
+    konst status = FirResolvedDeclarationStatusImpl(
         visibility,
         modality,
         visibility.toEffectiveVisibility(parentContext?.outerClassSymbol, forClass = true)
@@ -114,8 +114,8 @@ internal fun deserializeClassToSymbol(
         isFun = classOrObject.hasModifier(KtTokens.FUN_KEYWORD)
         isExternal = classOrObject.hasModifier(KtTokens.EXTERNAL_KEYWORD)
     }
-    val annotationDeserializer = defaultAnnotationDeserializer ?: StubBasedAnnotationDeserializer(session)
-    val context =
+    konst annotationDeserializer = defaultAnnotationDeserializer ?: StubBasedAnnotationDeserializer(session)
+    konst context =
         parentContext?.childContext(
             classOrObject,
             classId.relativeClassName,
@@ -148,10 +148,10 @@ internal fun deserializeClassToSymbol(
         if (status.isInner)
             typeParameters += parentContext?.allTypeParameters?.map { buildOuterClassTypeParameterRef { this.symbol = it } }.orEmpty()
 
-        val typeDeserializer = context.typeDeserializer
-        val memberDeserializer = context.memberDeserializer
+        konst typeDeserializer = context.typeDeserializer
+        konst memberDeserializer = context.memberDeserializer
 
-        val superTypeList = classOrObject.getSuperTypeList()
+        konst superTypeList = classOrObject.getSuperTypeList()
         if (superTypeList != null) {
             superTypeRefs.addAll(superTypeList.entries.map {
                 typeDeserializer.typeRef(
@@ -162,8 +162,8 @@ internal fun deserializeClassToSymbol(
             superTypeRefs.add(session.builtinTypes.anyType)
         }
 
-        val firPrimaryConstructor = classOrObject.primaryConstructor?.let {
-            val constructor = memberDeserializer.loadConstructor(it, classOrObject, this)
+        konst firPrimaryConstructor = classOrObject.primaryConstructor?.let {
+            konst constructor = memberDeserializer.loadConstructor(it, classOrObject, this)
             addDeclaration(constructor)
             constructor
         }
@@ -174,7 +174,7 @@ internal fun deserializeClassToSymbol(
                 is KtProperty -> addDeclaration(memberDeserializer.loadProperty(declaration, symbol))
                 is KtEnumEntry -> addDeclaration(memberDeserializer.loadEnumEntry(declaration, symbol, classId))
                 is KtClassOrObject -> {
-                    val nestedClassId =
+                    konst nestedClassId =
                         classId.createNestedClassId(Name.identifier(declaration.name ?: error("Class doesn't have name $declaration")))
                     deserializeNestedClass(nestedClassId, context)?.fir?.let { addDeclaration(it) }
                 }
@@ -193,7 +193,7 @@ internal fun deserializeClassToSymbol(
         }
 
         if (classOrObject.isData() && firPrimaryConstructor != null) {
-            val zippedParameters =
+            konst zippedParameters =
                 classOrObject.primaryConstructorParameters zip declarations.filterIsInstance<FirProperty>()
             addDeclaration(
                 createDataClassCopyFunction(
@@ -230,7 +230,7 @@ internal fun deserializeClassToSymbol(
 
         contextReceivers.addAll(memberDeserializer.createContextReceiversForClass(classOrObject))
     }.apply {
-        valueClassRepresentation = computeValueClassRepresentation(this, session)
+        konstueClassRepresentation = computeValueClassRepresentation(this, session)
 
         replaceAnnotations(
             context.annotationDeserializer.loadAnnotations(classOrObject)

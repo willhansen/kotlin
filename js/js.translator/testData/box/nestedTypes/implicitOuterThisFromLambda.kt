@@ -2,7 +2,7 @@
 // See KT-11823
 package foo
 
-class Outer(val x: Int) {
+class Outer(konst x: Int) {
     inner class Inner() {
         fun foo() = { x }
     }

@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_VARIABLE
-annotation class Ann(vararg val i: Boolean)
+annotation class Ann(vararg konst i: Boolean)
 fun foo() {
-    val a1 = 1 > 2
-    val a2 = 1 == 2
-    val a3 = a1 == a2
-    val a4 = a1 > a2
+    konst a1 = 1 > 2
+    konst a2 = 1 == 2
+    konst a3 = a1 == a2
+    konst a4 = a1 > a2
 
     @Ann(
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>a1<!>,
@@ -13,5 +13,5 @@ fun foo() {
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>a3<!>,
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>a1 > a2<!>,
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>a1 == a2<!>
-    ) val b = 1
+    ) konst b = 1
 }

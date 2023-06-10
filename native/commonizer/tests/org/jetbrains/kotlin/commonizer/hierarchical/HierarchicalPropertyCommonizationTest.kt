@@ -11,33 +11,33 @@ import org.jetbrains.kotlin.commonizer.assertCommonized
 class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonizationTest() {
 
     fun `test simple property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)", "(c, d)", "(a, b, c, d)")
-            simpleSingleSourceTarget("a", "val x: Int = 42")
-            simpleSingleSourceTarget("b", "val x: Int = 42")
-            simpleSingleSourceTarget("c", "val x: Int = 42")
-            simpleSingleSourceTarget("d", "val x: Int = 42")
+            simpleSingleSourceTarget("a", "konst x: Int = 42")
+            simpleSingleSourceTarget("b", "konst x: Int = 42")
+            simpleSingleSourceTarget("c", "konst x: Int = 42")
+            simpleSingleSourceTarget("d", "konst x: Int = 42")
         }
 
-        result.assertCommonized("((a,b), (c,d))", "expect val x: Int")
-        result.assertCommonized("(a, b)", "expect val x: Int")
-        result.assertCommonized("(c, d)", "expect val x: Int")
+        result.assertCommonized("((a,b), (c,d))", "expect konst x: Int")
+        result.assertCommonized("(a, b)", "expect konst x: Int")
+        result.assertCommonized("(c, d)", "expect konst x: Int")
     }
 
     fun `test same typeAliased property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                      typealias TA = Int
-                     val x: TA = 42
+                     konst x: TA = 42
             """.trimIndent()
             )
 
             simpleSingleSourceTarget(
                 "b", """
                     typealias TA = Int
-                    val x: TA = 42
+                    konst x: TA = 42
                 """.trimIndent()
             )
         }
@@ -45,44 +45,44 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
         result.assertCommonized(
             "(a, b)", """
             typealias TA = Int
-            expect val x: TA
+            expect konst x: TA
         """.trimIndent()
         )
     }
 
     fun `test differently typeAliased property - expanded type from dependencies`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                      typealias TA_A = Int
-                     val x: TA_A = 42
+                     konst x: TA_A = 42
             """.trimIndent()
             )
 
             simpleSingleSourceTarget(
                 "b", """
                     typealias TA_B = Int
-                    val x: TA_B = 42
+                    konst x: TA_B = 42
                 """.trimIndent()
             )
         }
 
         result.assertCommonized(
             "(a, b)", """
-            expect val x: Int
+            expect konst x: Int
         """.trimIndent()
         )
     }
 
     fun `test differently typeAliased property - expanded type from sources`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     class AB
                     typealias TA_A = AB
-                    val x: TA_A = TA_A()
+                    konst x: TA_A = TA_A()
             """.trimIndent()
             )
 
@@ -90,7 +90,7 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
                 "b", """
                     class AB
                     typealias TA_B = AB
-                    val x: TA_B = TA_B()
+                    konst x: TA_B = TA_B()
                 """.trimIndent()
             )
         }
@@ -98,26 +98,26 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
         result.assertCommonized(
             "(a, b)", """
                 expect class AB()
-                expect val x: AB
+                expect konst x: AB
         """.trimIndent()
         )
     }
 
     fun `test typeAliased property and class typed property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     class AB
                     typealias TA = AB
-                    val x: TA = TA()
+                    konst x: TA = TA()
             """.trimIndent()
             )
 
             simpleSingleSourceTarget(
                 "b", """
                     class AB
-                    val x: AB = AB()
+                    konst x: AB = AB()
                 """.trimIndent()
             )
         }
@@ -125,18 +125,18 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
         result.assertCommonized(
             "(a, b)", """
                 expect class AB()
-                expect val x: AB
+                expect konst x: AB
         """.trimIndent()
         )
     }
 
     fun `test class typed property and typeAliased property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     class AB
-                    val x: AB = AB()
+                    konst x: AB = AB()
             """.trimIndent()
             )
 
@@ -144,7 +144,7 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
                 "b", """
                     class AB
                     typealias TA = AB
-                    val x: TA = TA()
+                    konst x: TA = TA()
                 """.trimIndent()
             )
         }
@@ -152,20 +152,20 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
         result.assertCommonized(
             "(a, b)", """
                 expect class AB()
-                expect val x: AB
+                expect konst x: AB
         """.trimIndent()
         )
     }
 
 
     fun `test single typeAliased property and double typeAliased property`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     class AB
                     typealias TA_AB = AB
-                    val x: TA_AB = TA_AB()
+                    konst x: TA_AB = TA_AB()
             """.trimIndent()
             )
 
@@ -174,7 +174,7 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
                     class AB
                     typealias TA_AB = AB
                     typealias TA_B = TA_AB
-                    val x: TA_B = TA_B()
+                    konst x: TA_B = TA_B()
                 """.trimIndent()
             )
         }
@@ -183,20 +183,20 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
             "(a, b)", """
                 expect class AB()
                 typealias TA_AB = AB
-                expect val x: TA_AB
+                expect konst x: TA_AB
         """.trimIndent()
         )
     }
 
     fun `test single typeAliased property and double typeAliased property - with reversed order`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
             simpleSingleSourceTarget(
                 "a", """
                     class AB
                     typealias TA_AB = AB
                     typealias TA_B = TA_AB
-                    val x: TA_B = TA_B()
+                    konst x: TA_B = TA_B()
             """.trimIndent()
             )
 
@@ -204,7 +204,7 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
                 "b", """
                     class AB
                     typealias TA_AB = AB
-                    val x: TA_AB = TA_AB()
+                    konst x: TA_AB = TA_AB()
                 """.trimIndent()
             )
         }
@@ -213,18 +213,18 @@ class HierarchicalPropertyCommonizationTest : AbstractInlineSourcesCommonization
             "(a, b)", """
                 expect class AB()
                 typealias TA_AB = AB
-                expect val x: TA_AB
+                expect konst x: TA_AB
         """.trimIndent()
         )
     }
 
     fun `test property with and without setter`() {
-        val result = commonize {
+        konst result = commonize {
             outputTarget("(a, b)")
 
             simpleSingleSourceTarget(
                 "a", """
-                    val x: Int = 42
+                    konst x: Int = 42
                 """.trimIndent()
             )
 

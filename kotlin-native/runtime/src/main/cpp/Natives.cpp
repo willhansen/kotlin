@@ -88,7 +88,7 @@ void* Kotlin_interop_malloc(KLong size, KInt align) {
   if (size < 0 || static_cast<std::make_unsigned_t<decltype(size)>>(size) > std::numeric_limits<size_t>::max()) {
     return nullptr;
   }
-  RuntimeAssert(align > 0, "Invalid alignment %d", align);
+  RuntimeAssert(align > 0, "Inkonstid alignment %d", align);
   size_t actualAlign = static_cast<size_t>(align);
   size_t actualSize = AlignUp(static_cast<size_t>(size), actualAlign);
 

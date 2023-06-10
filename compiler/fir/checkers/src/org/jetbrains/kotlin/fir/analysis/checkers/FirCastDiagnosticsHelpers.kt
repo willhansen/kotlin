@@ -32,15 +32,15 @@ fun checkCasting(
     isSafeCase: Boolean,
     context: CheckerContext
 ): CastingType {
-    val lhsLowerType = lhsType.lowerBoundIfFlexible()
-    val rhsLowerType = rhsType.lowerBoundIfFlexible()
-    val session = context.session
+    konst lhsLowerType = lhsType.lowerBoundIfFlexible()
+    konst rhsLowerType = rhsType.lowerBoundIfFlexible()
+    konst session = context.session
 
     if (lhsLowerType is ConeIntersectionType) {
         var result = false
         for (intersectedType in lhsLowerType.intersectedTypes) {
-            val isIntersectedCastPossible = checkCasting(intersectedType, rhsLowerType, isSafeCase, context)
-            val intersectedTypeSymbol = intersectedType.toRegularClassSymbol(context.session)
+            konst isIntersectedCastPossible = checkCasting(intersectedType, rhsLowerType, isSafeCase, context)
+            konst intersectedTypeSymbol = intersectedType.toRegularClassSymbol(context.session)
             if (intersectedTypeSymbol?.isInterface == false && isIntersectedCastPossible == CastingType.Impossible) {
                 return CastingType.Impossible // Any class type in intersection type should be subtype of RHS
             }
@@ -50,8 +50,8 @@ fun checkCasting(
         return if (result) CastingType.Possible else CastingType.Impossible
     }
 
-    val lhsNullable = lhsLowerType.canBeNull
-    val rhsNullable = rhsLowerType.canBeNull
+    konst lhsNullable = lhsLowerType.canBeNull
+    konst rhsNullable = rhsLowerType.canBeNull
     if (lhsLowerType.isNothing) return CastingType.Possible
     if (lhsLowerType.isNullableNothing && !rhsNullable) {
         return if (isSafeCase) CastingType.Always else CastingType.Impossible
@@ -61,11 +61,11 @@ fun checkCasting(
         return if (lhsNullable) CastingType.Possible else CastingType.Impossible
     }
     if (lhsNullable && rhsNullable) return CastingType.Possible
-    val lhsClassSymbol = lhsLowerType.toRegularClassSymbol(context.session)
-    val rhsClassSymbol = rhsLowerType.toRegularClassSymbol(context.session)
+    konst lhsClassSymbol = lhsLowerType.toRegularClassSymbol(context.session)
+    konst rhsClassSymbol = rhsLowerType.toRegularClassSymbol(context.session)
     if (isRelated(lhsLowerType, rhsLowerType, lhsClassSymbol, rhsClassSymbol, context)) return CastingType.Possible
     // This is an oversimplification (which does not render the method incomplete):
-    // we consider any type parameter capable of taking any value, which may be made more precise if we considered bounds
+    // we consider any type parameter capable of taking any konstue, which may be made more precise if we considered bounds
     if (lhsLowerType is ConeTypeParameterType || rhsLowerType is ConeTypeParameterType) return CastingType.Possible
 
     if (isFinal(lhsLowerType, session) || isFinal(rhsLowerType, session)) return CastingType.Impossible
@@ -89,7 +89,7 @@ private fun isRelated(
     bClassSymbol: FirRegularClassSymbol?,
     context: CheckerContext
 ): Boolean {
-    val typeContext = context.session.typeContext
+    konst typeContext = context.session.typeContext
 
     if (AbstractTypeChecker.isSubtypeOf(typeContext, aType, bType) ||
         AbstractTypeChecker.isSubtypeOf(typeContext, bType, aType)
@@ -101,8 +101,8 @@ private fun isRelated(
         return context.session.platformClassMapper.getCorrespondingKotlinClass(type.classId)?.defaultType(listOf()) ?: type
     }
 
-    val aNormalizedType = getCorrespondingKotlinClass(aClassSymbol?.defaultType() ?: aType)
-    val bNormalizedType = getCorrespondingKotlinClass(bClassSymbol?.defaultType() ?: bType)
+    konst aNormalizedType = getCorrespondingKotlinClass(aClassSymbol?.defaultType() ?: aType)
+    konst bNormalizedType = getCorrespondingKotlinClass(bClassSymbol?.defaultType() ?: bType)
 
     return AbstractTypeChecker.isSubtypeOf(typeContext, aNormalizedType, bNormalizedType) ||
             AbstractTypeChecker.isSubtypeOf(typeContext, bNormalizedType, aNormalizedType)
@@ -113,15 +113,15 @@ private fun isFinal(type: ConeSimpleKotlinType, session: FirSession): Boolean {
 }
 
 fun isCastErased(supertype: ConeKotlinType, subtype: ConeKotlinType, context: CheckerContext): Boolean {
-    val typeContext = context.session.typeContext
+    konst typeContext = context.session.typeContext
 
-    val isNonReifiedTypeParameter = subtype.isNonReifiedTypeParameter()
-    val isUpcast = isUpcast(context, supertype, subtype)
+    konst isNonReifiedTypeParameter = subtype.isNonReifiedTypeParameter()
+    konst isUpcast = isUpcast(context, supertype, subtype)
 
     // here we want to restrict cases such as `x is T` for x = T?, when T might have nullable upper bound
     if (isNonReifiedTypeParameter && !isUpcast) {
         // hack to save previous behavior in case when `x is T`, where T is not nullable, see IsErasedNullableTasT.kt
-        val nullableToDefinitelyNotNull = !subtype.canBeNull && supertype.withNullability(ConeNullability.NOT_NULL, typeContext) == subtype
+        konst nullableToDefinitelyNotNull = !subtype.canBeNull && supertype.withNullability(ConeNullability.NOT_NULL, typeContext) == subtype
         if (!nullableToDefinitelyNotNull) {
             return true
         }
@@ -144,8 +144,8 @@ fun isCastErased(supertype: ConeKotlinType, subtype: ConeKotlinType, context: Ch
     // downcasting to a reified type parameter is never erased
     else if (subtype is ConeTypeParameterType) return false
 
-    val regularClassSymbol = subtype.toRegularClassSymbol(context.session) ?: return true
-    val staticallyKnownSubtype = findStaticallyKnownSubtype(supertype, regularClassSymbol, context)
+    konst regularClassSymbol = subtype.toRegularClassSymbol(context.session) ?: return true
+    konst staticallyKnownSubtype = findStaticallyKnownSubtype(supertype, regularClassSymbol, context)
 
     // If the substitution failed, it means that the result is an impossible type, e.g. something like Out<in Foo>
     // In this case, we can't guarantee anything, so the cast is considered to be erased
@@ -178,41 +178,41 @@ fun findStaticallyKnownSubtype(
 ): ConeKotlinType {
     assert(!supertype.isMarkedNullable) { "This method only makes sense for non-nullable types" }
 
-    val session = context.session
-    val typeContext = session.typeContext
+    konst session = context.session
+    konst typeContext = session.typeContext
 
     // Assume we are casting an expression of type Collection<Foo> to List<Bar>
     // First, let's make List<T>, where T is a type variable
-    val subtypeWithVariablesType = subTypeClassSymbol.defaultType()
+    konst subtypeWithVariablesType = subTypeClassSymbol.defaultType()
 
     // Now, let's find a supertype of List<T> that is a Collection of something,
     // in this case it will be Collection<T>
-    val typeCheckerState = context.session.typeContext.newTypeCheckerState(
+    konst typeCheckerState = context.session.typeContext.newTypeCheckerState(
         errorTypesEqualToAnything = false,
         stubTypesEqualToAnything = false
     )
 
-    val normalizedTypes = if (supertype is ConeIntersectionType) {
+    konst normalizedTypes = if (supertype is ConeIntersectionType) {
         supertype.intersectedTypes
     } else {
         ArrayList<ConeKotlinType>(1).also { it.add(supertype) }
     }
 
-    val resultSubstitution = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
+    konst resultSubstitution = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
 
     for (normalizedType in normalizedTypes) {
-        val supertypeWithVariables =
+        konst supertypeWithVariables =
             findCorrespondingSupertypes(
                 typeCheckerState,
                 subtypeWithVariablesType,
                 normalizedType.typeConstructor(typeContext)
             ).firstOrNull()
 
-        val variables: List<FirTypeParameterSymbol> = subTypeClassSymbol.typeParameterSymbols
+        konst variables: List<FirTypeParameterSymbol> = subTypeClassSymbol.typeParameterSymbols
 
-        val substitution = if (supertypeWithVariables != null) {
+        konst substitution = if (supertypeWithVariables != null) {
             // Now, let's try to unify Collection<T> and Collection<Foo> solution is a map from T to Foo
-            val result = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
+            konst result = mutableMapOf<FirTypeParameterSymbol, ConeTypeProjection>()
             if (context.session.doUnify(
                     supertype,
                     supertypeWithVariables as ConeKotlinTypeProjection,
@@ -231,12 +231,12 @@ fun findStaticallyKnownSubtype(
         // If some parameters are not determined by unification, it means that these parameters are lost,
         // let's put ConeStubType instead, so that we can only cast to something like List<*>, e.g. (a: Any) as List<*>
         for (variable in variables) {
-            val resultValue = when (val value = substitution[variable]) {
+            konst resultValue = when (konst konstue = substitution[variable]) {
                 null -> null
                 is ConeStarProjection -> {
                     ConeStubTypeForTypeVariableInSubtyping(ConeTypeVariable("", null), ConeNullability.NULLABLE)
                 }
-                else -> value.type
+                else -> konstue.type
             }
             if (resultValue != null) {
                 resultSubstitution[variable] = resultValue
@@ -244,9 +244,9 @@ fun findStaticallyKnownSubtype(
         }
     }
 
-    // At this point we have values for all type parameters of List
+    // At this point we have konstues for all type parameters of List
     // Let's make a type by substituting them: List<T> -> List<Foo>
-    val substitutor = ConeSubstitutorByMap(resultSubstitution, session)
+    konst substitutor = ConeSubstitutorByMap(resultSubstitution, session)
     return substitutor.substituteOrSelf(subtypeWithVariablesType)
 }
 
@@ -260,8 +260,8 @@ fun shouldCheckForExactType(expression: FirTypeOperatorCall, context: CheckerCon
         FirOperation.IS, FirOperation.NOT_IS -> false
         // TODO: differentiate if this expression defines the enclosing thing's type
         //   e.g.,
-        //   val c1 get() = 1 as Number
-        //   val c2: Number get() = 1 <!USELESS_CAST!>as Number<!>
+        //   konst c1 get() = 1 as Number
+        //   konst c2: Number get() = 1 <!USELESS_CAST!>as Number<!>
         FirOperation.AS, FirOperation.SAFE_AS -> true
         else -> throw AssertionError("Should not be here: ${expression.operation}")
     }
@@ -276,7 +276,7 @@ fun isRefinementUseless(
 ): Boolean {
     return if (shouldCheckForExactType) {
         if (arg is FirFunctionCall) {
-            val functionSymbol = arg.toResolvedCallableSymbol() as? FirFunctionSymbol<*>
+            konst functionSymbol = arg.toResolvedCallableSymbol() as? FirFunctionSymbol<*>
             if (functionSymbol != null && functionSymbol.isFunctionForExpectTypeFromCastFeature()) return false
         }
 

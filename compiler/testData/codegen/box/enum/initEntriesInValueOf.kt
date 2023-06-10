@@ -14,7 +14,7 @@ enum class Foo {
             l += "Foo.CO;"
         }
 
-        val boo = 22
+        konst boo = 22
     }
 }
 
@@ -31,13 +31,13 @@ enum class Foo2 {
             l += "Foo2.CO;"
         }
 
-        val boo = 22
+        konst boo = 22
     }
 }
 
 fun box(): String {
     try {
-        Foo.valueOf("NO")
+        Foo.konstueOf("NO")
     } catch (e: Throwable) {
         l += "caught;"
     }
@@ -45,7 +45,7 @@ fun box(): String {
     if (l != "Foo.FOO;Foo.BAR;Foo.CO;caught;") return "Failure 0: l = $l"
 
     l = ""
-    Foo2.valueOf("BAR")
+    Foo2.konstueOf("BAR")
     if (l != "Foo2.FOO;Foo2.BAR;Foo2.CO;") return "Failure 1: l = $l"
 
     return "OK"

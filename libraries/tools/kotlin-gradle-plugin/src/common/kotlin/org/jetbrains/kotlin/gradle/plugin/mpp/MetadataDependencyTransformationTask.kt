@@ -30,14 +30,14 @@ import javax.inject.Inject
 @Deprecated("Task was renamed to MetadataDependencyTransformationTask", replaceWith = ReplaceWith("MetadataDependencyTransformationTask"))
 typealias TransformKotlinGranularMetadata = MetadataDependencyTransformationTask
 
-internal const val TRANSFORM_ALL_SOURCESETS_DEPENDENCIES_METADATA = "transformDependenciesMetadata"
+internal const konst TRANSFORM_ALL_SOURCESETS_DEPENDENCIES_METADATA = "transformDependenciesMetadata"
 private fun transformGranularMetadataTaskName(sourceSetName: String) =
     lowerCamelCaseName("transform", sourceSetName, "DependenciesMetadata")
 
 internal fun Project.locateOrRegisterMetadataDependencyTransformationTask(
     sourceSet: KotlinSourceSet
 ): TaskProvider<MetadataDependencyTransformationTask> {
-    val transformationTask = project.locateOrRegisterTask<MetadataDependencyTransformationTask>(
+    konst transformationTask = project.locateOrRegisterTask<MetadataDependencyTransformationTask>(
         transformGranularMetadataTaskName(sourceSet.name),
         listOf(sourceSet)
     ) {
@@ -53,22 +53,22 @@ internal fun Project.locateOrRegisterMetadataDependencyTransformationTask(
 open class MetadataDependencyTransformationTask
 @Inject constructor(
     kotlinSourceSet: KotlinSourceSet,
-    private val objectFactory: ObjectFactory,
-    private val projectLayout: ProjectLayout
+    private konst objectFactory: ObjectFactory,
+    private konst projectLayout: ProjectLayout
 ) : DefaultTask() {
 
     //region Task Configuration State & Inputs
-    private val transformationParameters = GranularMetadataTransformation.Params(project, kotlinSourceSet)
+    private konst transformationParameters = GranularMetadataTransformation.Params(project, kotlinSourceSet)
 
     @Suppress("unused") // task inputs for up-to-date checks
     @get:Nested
-    internal val taskInputs = MetadataDependencyTransformationTaskInputs(project, kotlinSourceSet)
+    internal konst taskInputs = MetadataDependencyTransformationTaskInputs(project, kotlinSourceSet)
 
     @get:OutputDirectory
-    internal val outputsDir: File get() = projectLayout.kotlinTransformedMetadataLibraryDirectoryForBuild(transformationParameters.sourceSetName)
+    internal konst outputsDir: File get() = projectLayout.kotlinTransformedMetadataLibraryDirectoryForBuild(transformationParameters.sourceSetName)
 
     @Transient // Only needed for configuring task inputs
-    private val parentTransformationTasksLazy: Lazy<List<TaskProvider<MetadataDependencyTransformationTask>>>? = lazy {
+    private konst parentTransformationTasksLazy: Lazy<List<TaskProvider<MetadataDependencyTransformationTask>>>? = lazy {
         dependsOnClosureWithInterCompilationDependencies(kotlinSourceSet).mapNotNull {
             project
                 .tasks
@@ -76,25 +76,25 @@ open class MetadataDependencyTransformationTask
         }
     }
 
-    private val parentTransformationTasks: List<TaskProvider<MetadataDependencyTransformationTask>>
-        get() = parentTransformationTasksLazy?.value
+    private konst parentTransformationTasks: List<TaskProvider<MetadataDependencyTransformationTask>>
+        get() = parentTransformationTasksLazy?.konstue
             ?: error(
                 "`parentTransformationTasks` is null. " +
                         "Probably it is accessed it during Task Execution with state loaded from Configuration Cache"
             )
 
     @get:OutputFile
-    protected val transformedLibrariesIndexFile: RegularFileProperty = objectFactory
+    protected konst transformedLibrariesIndexFile: RegularFileProperty = objectFactory
         .fileProperty()
         .apply { set(outputsDir.resolve("${kotlinSourceSet.name}.libraries")) }
 
     @get:OutputFile
-    protected val visibleSourceSetsFile: RegularFileProperty = objectFactory
+    protected konst visibleSourceSetsFile: RegularFileProperty = objectFactory
         .fileProperty()
         .apply { set(outputsDir.resolve("${kotlinSourceSet.name}.visibleSourceSets")) }
 
     @get:InputFiles
-    protected val parentVisibleSourceSetFiles: FileCollection = project.filesProvider {
+    protected konst parentVisibleSourceSetFiles: FileCollection = project.filesProvider {
         parentTransformationTasks.map { taskProvider ->
             taskProvider.flatMap { task ->
                 task.visibleSourceSetsFile.map { it.asFile }
@@ -103,7 +103,7 @@ open class MetadataDependencyTransformationTask
     }
 
     @get:InputFiles
-    protected val parentTransformedLibraries: FileCollection = project.filesProvider {
+    protected konst parentTransformedLibraries: FileCollection = project.filesProvider {
         parentTransformationTasks.map { taskProvider ->
             taskProvider.map { task -> task.ownTransformedLibraries }
         }
@@ -113,10 +113,10 @@ open class MetadataDependencyTransformationTask
 
     @TaskAction
     fun transformMetadata() {
-        val transformation = GranularMetadataTransformation(
+        konst transformation = GranularMetadataTransformation(
             params = transformationParameters,
             parentSourceSetVisibilityProvider = ParentSourceSetVisibilityProvider { identifier: ComponentIdentifier ->
-                val serializableKey = identifier.serializableUniqueKey
+                konst serializableKey = identifier.serializableUniqueKey
                 parentVisibleSourceSetFiles.flatMap { visibleSourceSetsFile ->
                     readVisibleSourceSetsFile(visibleSourceSetsFile)[serializableKey].orEmpty()
                 }.toSet()
@@ -128,9 +128,9 @@ open class MetadataDependencyTransformationTask
         }
         outputsDir.mkdirs()
 
-        val metadataDependencyResolutions = transformation.metadataDependencyResolutions
+        konst metadataDependencyResolutions = transformation.metadataDependencyResolutions
 
-        val transformedLibraries = metadataDependencyResolutions
+        konst transformedLibraries = metadataDependencyResolutions
             .flatMap { resolution ->
                 when (resolution) {
                     is MetadataDependencyResolution.ChooseVisibleSourceSets ->
@@ -150,7 +150,7 @@ open class MetadataDependencyTransformationTask
     }
 
     private fun writeVisibleSourceSets(visibleSourceSetsByComponentId: Map<ComponentIdentifier, Set<String>>) {
-        val content = visibleSourceSetsByComponentId.entries.joinToString("\n") { (id, visibleSourceSets) ->
+        konst content = visibleSourceSetsByComponentId.entries.joinToString("\n") { (id, visibleSourceSets) ->
             "${id.serializableUniqueKey} => ${visibleSourceSets.joinToString(",")}"
         }
         visibleSourceSetsFile.get().asFile.writeText(content)
@@ -159,19 +159,19 @@ open class MetadataDependencyTransformationTask
     private fun readVisibleSourceSetsFile(file: File): Map<String, Set<String>> = file
         .readLines()
         .associate { string ->
-            val (id, visibleSourceSetsString) = string.split(" => ")
+            konst (id, visibleSourceSetsString) = string.split(" => ")
             id to visibleSourceSetsString.split(",").toSet()
         }
 
     @get:Internal // Warning! ownTransformedLibraries is available only after Task Execution
-    internal val ownTransformedLibraries: FileCollection = project.filesProvider {
+    internal konst ownTransformedLibraries: FileCollection = project.filesProvider {
         transformedLibrariesIndexFile.map { regularFile ->
             KotlinMetadataLibrariesIndexFile(regularFile.asFile).read()
         }
     }
 
     @get:Internal // Warning! allTransformedLibraries is available only after Task Execution
-    val allTransformedLibraries: FileCollection get() = ownTransformedLibraries + parentTransformedLibraries
+    konst allTransformedLibraries: FileCollection get() = ownTransformedLibraries + parentTransformedLibraries
 }
 
 private typealias SerializableComponentIdentifierKey = String
@@ -180,7 +180,7 @@ private typealias SerializableComponentIdentifierKey = String
  * This unique key can be used to lookup various info for related Resolved Dependency
  * that gets serialized
  */
-private val ComponentIdentifier.serializableUniqueKey
+private konst ComponentIdentifier.serializableUniqueKey
     get(): SerializableComponentIdentifierKey = when (this) {
         is ProjectComponentIdentifier -> "project ${build.name}$projectPath"
         is ModuleComponentIdentifier -> "module $group:$module:$version"

@@ -1,8 +1,8 @@
 import kotlin.collections.*
 
-const val a = <!EVALUATED: `3`!>listOf(1, 2, 3).size<!>
-const val b = <!EVALUATED: `0`!>emptyList<Int>().size<!>
-const val c = <!EVALUATED: `1`!>listOf<Int>().hashCode()<!>
+const konst a = <!EVALUATED: `3`!>listOf(1, 2, 3).size<!>
+const konst b = <!EVALUATED: `0`!>emptyList<Int>().size<!>
+const konst c = <!EVALUATED: `1`!>listOf<Int>().hashCode()<!>
 
 @CompileTimeCalculation
 fun getSum(list: List<Int>): Int {
@@ -13,4 +13,4 @@ fun getSum(list: List<Int>): Int {
     return sum
 }
 
-const val sum = <!EVALUATED: `16`!>getSum(listOf(1, 3, 5, 7))<!>
+const konst sum = <!EVALUATED: `16`!>getSum(listOf(1, 3, 5, 7))<!>

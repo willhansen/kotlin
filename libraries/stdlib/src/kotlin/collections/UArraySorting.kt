@@ -11,14 +11,14 @@ private fun partition(
     array: UByteArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -31,7 +31,7 @@ private fun partition(
 @ExperimentalUnsignedTypes
 private fun quickSort(
     array: UByteArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -44,14 +44,14 @@ private fun partition(
     array: UShortArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -64,7 +64,7 @@ private fun partition(
 @ExperimentalUnsignedTypes
 private fun quickSort(
     array: UShortArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -77,14 +77,14 @@ private fun partition(
     array: UIntArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -97,7 +97,7 @@ private fun partition(
 @ExperimentalUnsignedTypes
 private fun quickSort(
     array: UIntArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)
@@ -110,14 +110,14 @@ private fun partition(
     array: ULongArray, left: Int, right: Int): Int {
     var i = left
     var j = right
-    val pivot = array[(left + right) / 2]
+    konst pivot = array[(left + right) / 2]
     while (i <= j) {
         while (array[i] < pivot)
             i++
         while (array[j] > pivot)
             j--
         if (i <= j) {
-            val tmp = array[i]
+            konst tmp = array[i]
             array[i] = array[j]
             array[j] = tmp
             i++
@@ -130,7 +130,7 @@ private fun partition(
 @ExperimentalUnsignedTypes
 private fun quickSort(
     array: ULongArray, left: Int, right: Int) {
-    val index = partition(array, left, right)
+    konst index = partition(array, left, right)
     if (left < index - 1)
         quickSort(array, left, index - 1)
     if (index < right)

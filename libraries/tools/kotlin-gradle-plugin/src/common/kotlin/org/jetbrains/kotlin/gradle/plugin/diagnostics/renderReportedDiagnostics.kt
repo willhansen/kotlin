@@ -24,4 +24,4 @@ internal fun renderReportedDiagnostics(diagnostics: Collection<ToolingDiagnostic
 private fun ToolingDiagnostic.render(isVerbose: Boolean): String =
     if (isVerbose) toString() + "\n$DIAGNOSTIC_SEPARATOR" else message
 
-internal const val DIAGNOSTIC_SEPARATOR = "#diagnostic-end"
+internal const konst DIAGNOSTIC_SEPARATOR = "#diagnostic-end"

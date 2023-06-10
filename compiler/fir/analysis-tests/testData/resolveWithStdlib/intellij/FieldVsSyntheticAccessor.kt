@@ -10,14 +10,14 @@ package test
 
 class User : BaseClass() {
     fun foo(tree: BaseClass) {
-        val ui = tree.<!INVISIBLE_REFERENCE!>ui<!>
+        konst ui = tree.<!INVISIBLE_REFERENCE!>ui<!>
     }
 
     fun bar() {
-        val ui = ui
+        konst ui = ui
     }
 
     fun baz() {
-        val ui = this.ui
+        konst ui = this.ui
     }
 }

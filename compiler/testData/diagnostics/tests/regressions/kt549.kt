@@ -4,7 +4,7 @@
 package demo
 
   fun <T> filter(list : Array<T>, filter :  (T) -> Boolean) : List<T> {
-    val answer = java.util.ArrayList<T>();
+    konst answer = java.util.ArrayList<T>();
     for (l in list) {
       if (filter(l)) answer.add(l)
     }

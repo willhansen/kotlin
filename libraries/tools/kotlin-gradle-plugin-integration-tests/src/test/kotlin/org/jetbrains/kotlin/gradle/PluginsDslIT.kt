@@ -34,7 +34,7 @@ class PluginsDslIT : KGPBaseTest() {
     fun testApplyAllPlugins(gradleVersion: GradleVersion) {
         project("applyAllPlugins".withPrefix, gradleVersion) {
 
-            val kotlinPluginClasses = setOf(
+            konst kotlinPluginClasses = setOf(
                 "org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper",
                 "org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin",
                 "org.jetbrains.kotlin.allopen.gradle.AllOpenGradleSubplugin",
@@ -48,7 +48,7 @@ class PluginsDslIT : KGPBaseTest() {
             )
 
             build("build") {
-                val appliedPlugins = "applied plugin class:(.*)".toRegex().findAll(output).map { it.groupValues[1] }.toSet()
+                konst appliedPlugins = "applied plugin class:(.*)".toRegex().findAll(output).map { it.groupValues[1] }.toSet()
                 kotlinPluginClasses.forEach {
                     assertTrue(it in appliedPlugins) {
                         "Plugin class $it should be in applied plugins"
@@ -58,5 +58,5 @@ class PluginsDslIT : KGPBaseTest() {
         }
     }
 
-    private val String.withPrefix get() = "pluginsDsl/$this"
+    private konst String.withPrefix get() = "pluginsDsl/$this"
 }

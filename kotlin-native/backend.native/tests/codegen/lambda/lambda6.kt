@@ -8,7 +8,7 @@ package codegen.lambda.lambda6
 import kotlin.test.*
 
 @Test fun runTest() {
-    val str = "captured"
+    konst str = "captured"
     foo {
         println(it)
         println(str)

@@ -7,7 +7,7 @@ enum class First {
     ONE, TWO;
 }
 
-val THREE = First.ONE
+konst THREE = First.ONE
 
 // FILE: second.kt
 
@@ -20,7 +20,7 @@ enum class Second {
     THREE, FOUR;
 }
 
-val ONE = Second.THREE
+konst ONE = Second.THREE
 
 fun foo(f: First) = <!NO_ELSE_IN_WHEN!>when<!> (f) {
     <!INCOMPATIBLE_ENUM_COMPARISON_ERROR!>ONE<!> -> 1

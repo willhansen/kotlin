@@ -10,15 +10,15 @@ import java.nio.file.Paths
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-private const val MODULE_DELIMITER = ",\\s*"
+private const konst MODULE_DELIMITER = ",\\s*"
 // These patterns are copies from
 // kotlin/compiler/tests-common/tests/org/jetbrains/kotlin/test/TestFiles.java
 // kotlin/compiler/tests-common/tests/org/jetbrains/kotlin/test/KotlinTestUtils.java
-private val MODULE_PATTERN: Pattern = Pattern.compile("//\\s*MODULE:\\s*([^()\\n]+)(?:\\(([^()]+(?:" +
+private konst MODULE_PATTERN: Pattern = Pattern.compile("//\\s*MODULE:\\s*([^()\\n]+)(?:\\(([^()]+(?:" +
         MODULE_DELIMITER + "[^()]+)*)\\))?\\s*(?:\\(([^()]+(?:" + MODULE_DELIMITER + "[^()]+)*)\\))?\n")
-private val FILE_PATTERN = Pattern.compile("//\\s*FILE:\\s*(.*)\n")
+private konst FILE_PATTERN = Pattern.compile("//\\s*FILE:\\s*(.*)\n")
 
-private val DIRECTIVE_PATTERN = Pattern.compile("^//\\s*[!]?([A-Z_]+)(:[ \\t]*(.*))?$", Pattern.MULTILINE)
+private konst DIRECTIVE_PATTERN = Pattern.compile("^//\\s*[!]?([A-Z_]+)(:[ \\t]*(.*))?$", Pattern.MULTILINE)
 
 /**
  * Creates test files from the given source file that may contain different test directives.
@@ -29,15 +29,15 @@ fun buildCompileList(
         source: Path,
         outputDirectory: String,
         defaultModule: TestModule = TestModule.default()): List<TestFile> {
-    val result = mutableListOf<TestFile>()
-    val srcFile = source.toFile()
+    konst result = mutableListOf<TestFile>()
+    konst srcFile = source.toFile()
     // Remove diagnostic parameters in external tests.
-    val srcText = srcFile.readText().replace(Regex("<!.*?!>(.*?)<!>")) { match -> match.groupValues[1] }
+    konst srcText = srcFile.readText().replace(Regex("<!.*?!>(.*?)<!>")) { match -> match.groupValues[1] }
 
     var supportModule: TestModule? = if (srcText.contains("// WITH_COROUTINES")) TestModule.support() else null
 
-    val moduleMatcher = MODULE_PATTERN.matcher(srcText)
-    val fileMatcher = FILE_PATTERN.matcher(srcText)
+    konst moduleMatcher = MODULE_PATTERN.matcher(srcText)
+    konst fileMatcher = FILE_PATTERN.matcher(srcText)
     var nextModuleExists = moduleMatcher.find()
     var nextFileExists = fileMatcher.find()
 
@@ -53,12 +53,12 @@ fun buildCompileList(
         while (nextModuleExists || nextFileExists) {
             if (nextModuleExists) {
                 var moduleName = moduleMatcher.group(1)
-                val moduleDependencies = moduleMatcher.group(2)
-                val moduleFriends = moduleMatcher.group(3)
+                konst moduleDependencies = moduleMatcher.group(2)
+                konst moduleFriends = moduleMatcher.group(3)
 
                 if (moduleName != null) {
                     moduleName = moduleName.trim { it <= ' ' }
-                    val dependencies = mutableListOf<String>().apply {
+                    konst dependencies = mutableListOf<String>().apply {
                         addAll(moduleDependencies.parseModuleList()
                                 .map { if (it != "support") "${srcFile.name}.$it" else it }
                         )
@@ -78,16 +78,16 @@ fun buildCompileList(
 
             nextModuleExists = moduleMatcher.find()
             while (nextFileExists) {
-                val fileName = fileMatcher.group(1)
-                val filePath = "$outputDirectory/$fileName"
-                val start = processedChars
+                konst fileName = fileMatcher.group(1)
+                konst filePath = "$outputDirectory/$fileName"
+                konst start = processedChars
                 nextFileExists = fileMatcher.find()
-                val end = when {
+                konst end = when {
                     nextFileExists && nextModuleExists -> Math.min(fileMatcher.start(), moduleMatcher.start())
                     nextFileExists -> fileMatcher.start()
                     else -> srcText.length
                 }
-                val fileText = srcText.substring(start, end)
+                konst fileText = srcText.substring(start, end)
                 processedChars = end
                 if (fileName.endsWith(".kt")) {
                     result.add(TestFile(fileName, filePath, fileText, module))
@@ -112,15 +112,15 @@ private fun String?.parseModuleList() = this
  *  - [support] for a helper sources like Coroutines support.
  */
 data class TestModule(
-    val name: String,
-    val dependencies: MutableList<String>,
-    val friends: MutableList<String>
+    konst name: String,
+    konst dependencies: MutableList<String>,
+    konst friends: MutableList<String>
 ) {
-    val files = mutableListOf<TestFile>()
+    konst files = mutableListOf<TestFile>()
     fun isDefaultModule() = this.name == "default" || name.endsWith(".main")
     fun isSupportModule() = this.name == "support"
 
-    val hasVersions get() = this.files.any { it.version != null }
+    konst hasVersions get() = this.files.any { it.version != null }
     fun versionFiles(version: Int) = this.files.filter { it.version == null || it.version == version }
 
     companion object {
@@ -133,28 +133,28 @@ data class TestModule(
  * Represent a single test file that belongs to the [module].
  */
 data class TestFile(
-    val name: String,
-    val path: String,
+    konst name: String,
+    konst path: String,
     var text: String = "",
-    val module: TestModule
+    konst module: TestModule
 ) {
     init {
         this.module.files.add(this)
     }
 
-    val directives: Map<String, String> by lazy {
+    konst directives: Map<String, String> by lazy {
         parseDirectives()
     }
 
-    val version: Int? get() = this.directives["VERSION"]?.toInt()
+    konst version: Int? get() = this.directives["VERSION"]?.toInt()
 
     fun parseDirectives(): Map<String, String> {
-        val newDirectives = mutableMapOf<String, String>()
-        val directiveMatcher: Matcher = DIRECTIVE_PATTERN.matcher(text)
+        konst newDirectives = mutableMapOf<String, String>()
+        konst directiveMatcher: Matcher = DIRECTIVE_PATTERN.matcher(text)
         while (directiveMatcher.find()) {
-            val name = directiveMatcher.group(1)
-            val value = directiveMatcher.group(3) ?: ""
-            newDirectives[name] = value
+            konst name = directiveMatcher.group(1)
+            konst konstue = directiveMatcher.group(3) ?: ""
+            newDirectives[name] = konstue
         }
         return newDirectives
     }

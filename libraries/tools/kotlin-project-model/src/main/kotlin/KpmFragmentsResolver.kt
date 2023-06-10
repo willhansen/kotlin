@@ -14,12 +14,12 @@ interface KpmFragmentsResolver {
     ): KpmFragmentResolution
 }
 
-sealed class KpmFragmentResolution(val requestingFragment: KpmFragment, val dependencyModule: KpmModule) {
+sealed class KpmFragmentResolution(konst requestingFragment: KpmFragment, konst dependencyModule: KpmModule) {
     class ChosenFragments(
         requestingFragment: KpmFragment,
         dependencyModule: KpmModule,
-        val visibleFragments: Iterable<KpmFragment>,
-        val variantResolutions: Iterable<KpmVariantResolution>
+        konst visibleFragments: Iterable<KpmFragment>,
+        konst variantResolutions: Iterable<KpmVariantResolution>
     ) : KpmFragmentResolution(requestingFragment, dependencyModule)
 
     class NotRequested(requestingFragment: KpmFragment, dependencyModule: KpmModule) :
@@ -31,30 +31,30 @@ sealed class KpmFragmentResolution(val requestingFragment: KpmFragment, val depe
 }
 
 class KpmDefaultFragmentsResolver(
-    private val variantResolver: KpmModuleVariantResolver
+    private konst variantResolver: KpmModuleVariantResolver
 ) : KpmFragmentsResolver {
     override fun getChosenFragments(
         requestingFragment: KpmFragment,
         dependencyModule: KpmModule
     ): KpmFragmentResolution {
-        val dependingModule = requestingFragment.containingModule
-        val containingVariants = dependingModule.variantsContainingFragment(requestingFragment)
+        konst dependingModule = requestingFragment.containingModule
+        konst containingVariants = dependingModule.variantsContainingFragment(requestingFragment)
 
-        val chosenVariants = containingVariants.map { variantResolver.getChosenVariant(it, dependencyModule) }
+        konst chosenVariants = containingVariants.map { variantResolver.getChosenVariant(it, dependencyModule) }
 
         // TODO: extend this to more cases with non-matching variants, revisit the behavior when no matching variant is found once we fix
         //       local publishing of libraries with missing host-specific parts (it breaks transitive dependencies now)
         if (chosenVariants.none { it is KpmVariantResolution.KpmVariantMatch })
             return KpmFragmentResolution.NotRequested(requestingFragment, dependencyModule)
 
-        val chosenFragments = chosenVariants.map { variantResolution ->
+        konst chosenFragments = chosenVariants.map { variantResolution ->
             when (variantResolution) {
                 is KpmVariantResolution.KpmVariantMatch -> variantResolution.chosenVariant.withRefinesClosure
                 else -> emptySet()
             }
         }
 
-        val result = if (chosenFragments.isEmpty())
+        konst result = if (chosenFragments.isEmpty())
             emptyList<KpmFragment>()
         else chosenFragments
             // Note this emulates the existing behavior that is lenient wrt to unresolved modules, but gives imprecise results. TODO revisit

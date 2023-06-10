@@ -18,26 +18,26 @@ import org.jetbrains.kotlin.types.typeUtil.contains
 import org.jetbrains.kotlin.types.typeUtil.isUnresolvedType
 
 object ErrorUtils {
-    val errorModule: ModuleDescriptor = ErrorModuleDescriptor
-    val errorClass: ErrorClassDescriptor = ErrorClassDescriptor(Name.special(ErrorEntity.ERROR_CLASS.debugText.format("unknown class")))
+    konst errorModule: ModuleDescriptor = ErrorModuleDescriptor
+    konst errorClass: ErrorClassDescriptor = ErrorClassDescriptor(Name.special(ErrorEntity.ERROR_CLASS.debugText.format("unknown class")))
 
     // Do not move it into AbstractTypeConstructor.Companion because of cycle in initialization(see KT-13264)
-    val errorTypeForLoopInSupertypes: KotlinType = createErrorType(ErrorTypeKind.CYCLIC_SUPERTYPES)
-    val errorPropertyType: KotlinType = createErrorType(ErrorTypeKind.ERROR_PROPERTY_TYPE)
+    konst errorTypeForLoopInSupertypes: KotlinType = createErrorType(ErrorTypeKind.CYCLIC_SUPERTYPES)
+    konst errorPropertyType: KotlinType = createErrorType(ErrorTypeKind.ERROR_PROPERTY_TYPE)
 
-    private val errorProperty: PropertyDescriptor = ErrorPropertyDescriptor()
-    val errorPropertyGroup: Set<PropertyDescriptor> = setOf(errorProperty)
+    private konst errorProperty: PropertyDescriptor = ErrorPropertyDescriptor()
+    konst errorPropertyGroup: Set<PropertyDescriptor> = setOf(errorProperty)
 
     /**
      * @return true if any of the types referenced in parameter types (including type parameters and extension receiver) of the function
      * is an error type. Does not check the return type of the function.
      */
     fun containsErrorTypeInParameters(function: FunctionDescriptor): Boolean {
-        val receiverParameter = function.extensionReceiverParameter
+        konst receiverParameter = function.extensionReceiverParameter
         if (receiverParameter != null && containsErrorType(receiverParameter.type))
             return true
 
-        for (parameter in function.valueParameters) {
+        for (parameter in function.konstueParameters) {
             if (containsErrorType(parameter.type))
                 return true
         }
@@ -101,7 +101,7 @@ object ErrorUtils {
     @JvmStatic
     fun isUninferredTypeVariable(type: KotlinType?): Boolean {
         if (type == null) return false
-        val constructor = type.constructor
+        konst constructor = type.constructor
         return constructor is ErrorTypeConstructor && constructor.kind == ErrorTypeKind.UNINFERRED_TYPE_VARIABLE
     }
 

@@ -4,7 +4,7 @@ package test.pkg
 class R {
     class string {
         companion object {
-            val hello : Int = 42
+            konst hello : Int = 42
         }
     }
 }
@@ -16,5 +16,5 @@ package test.pkg
 import test.pkg.R as coreR
 
 fun box() {
-    val s = core<caret>R.string.hello
+    konst s = core<caret>R.string.hello
 }

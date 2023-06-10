@@ -17,8 +17,8 @@ import kotlin.test.*
 class Base64IOStreamTest {
 
     private fun testCoding(base64: Base64, text: String, encodedText: String) {
-        val encodedBytes = ByteArray(encodedText.length) { encodedText[it].code.toByte() }
-        val bytes = ByteArray(text.length) { text[it].code.toByte() }
+        konst encodedBytes = ByteArray(encodedText.length) { encodedText[it].code.toByte() }
+        konst bytes = ByteArray(text.length) { text[it].code.toByte() }
         encodedBytes.inputStream().decodingWith(base64).use { inputStream ->
             assertEquals(text, inputStream.reader().readText())
         }
@@ -51,11 +51,11 @@ class Base64IOStreamTest {
 
     @Test
     fun readDifferentOffsetAndLength() {
-        val repeat = 10_000
-        val symbols = "Zm9vYmFy".repeat(repeat) + "Zm8="
-        val expected = "foobar".repeat(repeat) + "fo"
+        konst repeat = 10_000
+        konst symbols = "Zm9vYmFy".repeat(repeat) + "Zm8="
+        konst expected = "foobar".repeat(repeat) + "fo"
 
-        val bytes = ByteArray(expected.length)
+        konst bytes = ByteArray(expected.length)
 
         symbols.byteInputStream().decodingWith(Base64).use { input ->
             var read = 0
@@ -65,8 +65,8 @@ class Base64IOStreamTest {
 
             var toRead = 1
             while (read < bytes.size) {
-                val length = minOf(toRead, bytes.size - read)
-                val result = input.read(bytes, read, length)
+                konst length = minOf(toRead, bytes.size - read)
+                konst result = input.read(bytes, read, length)
 
                 assertEquals(length, result)
 
@@ -82,11 +82,11 @@ class Base64IOStreamTest {
 
     @Test
     fun readDifferentOffsetAndLengthMime() {
-        val repeat = 10_000
-        val symbols = ("Zm9vYmFy".repeat(repeat) + "Zm8=").chunked(76).joinToString(separator = "\r\n")
-        val expected = "foobar".repeat(repeat) + "fo"
+        konst repeat = 10_000
+        konst symbols = ("Zm9vYmFy".repeat(repeat) + "Zm8=").chunked(76).joinToString(separator = "\r\n")
+        konst expected = "foobar".repeat(repeat) + "fo"
 
-        val bytes = ByteArray(expected.length)
+        konst bytes = ByteArray(expected.length)
 
         symbols.byteInputStream().decodingWith(Base64.Mime).use { input ->
             var read = 0
@@ -96,8 +96,8 @@ class Base64IOStreamTest {
 
             var toRead = 1
             while (read < bytes.size) {
-                val length = minOf(toRead, bytes.size - read)
-                val result = input.read(bytes, read, length)
+                konst length = minOf(toRead, bytes.size - read)
+                konst result = input.read(bytes, read, length)
 
                 assertEquals(length, result)
 
@@ -113,11 +113,11 @@ class Base64IOStreamTest {
 
     @Test
     fun writeDifferentOffsetAndLength() {
-        val repeat = 10_000
-        val bytes = ("foobar".repeat(repeat) + "fo").encodeToByteArray()
-        val expected = "Zm9vYmFy".repeat(repeat) + "Zm8="
+        konst repeat = 10_000
+        konst bytes = ("foobar".repeat(repeat) + "fo").encodeToByteArray()
+        konst expected = "Zm9vYmFy".repeat(repeat) + "Zm8="
 
-        val underlying = ByteArrayOutputStream()
+        konst underlying = ByteArrayOutputStream()
 
         underlying.encodingWith(Base64).use { output ->
             var written = 0
@@ -126,7 +126,7 @@ class Base64IOStreamTest {
             }
             var toWrite = 1
             while (written < bytes.size) {
-                val length = minOf(toWrite, bytes.size - written)
+                konst length = minOf(toWrite, bytes.size - written)
                 output.write(bytes, written, length)
 
                 written += length
@@ -139,11 +139,11 @@ class Base64IOStreamTest {
 
     @Test
     fun writeDifferentOffsetAndLengthMime() {
-        val repeat = 10_000
-        val bytes = ("foobar".repeat(repeat) + "fo").encodeToByteArray()
-        val expected = ("Zm9vYmFy".repeat(repeat) + "Zm8=").chunked(76).joinToString(separator = "\r\n")
+        konst repeat = 10_000
+        konst bytes = ("foobar".repeat(repeat) + "fo").encodeToByteArray()
+        konst expected = ("Zm9vYmFy".repeat(repeat) + "Zm8=").chunked(76).joinToString(separator = "\r\n")
 
-        val underlying = ByteArrayOutputStream()
+        konst underlying = ByteArrayOutputStream()
 
         underlying.encodingWith(Base64.Mime).use { output ->
             var written = 0
@@ -152,7 +152,7 @@ class Base64IOStreamTest {
             }
             var toWrite = 1
             while (written < bytes.size) {
-                val length = minOf(toWrite, bytes.size - written)
+                konst length = minOf(toWrite, bytes.size - written)
                 output.write(bytes, written, length)
 
                 written += length
@@ -166,7 +166,7 @@ class Base64IOStreamTest {
 
     @Test
     fun inputStreamClosesUnderlying() {
-        val underlying = object : InputStream() {
+        konst underlying = object : InputStream() {
             var isClosed: Boolean = false
 
             override fun close() {
@@ -178,14 +178,14 @@ class Base64IOStreamTest {
                 return 0
             }
         }
-        val wrapper = underlying.decodingWith(Base64)
+        konst wrapper = underlying.decodingWith(Base64)
         wrapper.close()
         assertTrue(underlying.isClosed)
     }
 
     @Test
     fun outputStreamClosesUnderlying() {
-        val underlying = object : OutputStream() {
+        konst underlying = object : OutputStream() {
             var isClosed: Boolean = false
 
             override fun close() {
@@ -197,7 +197,7 @@ class Base64IOStreamTest {
                 // ignore
             }
         }
-        val wrapper = underlying.encodingWith(Base64)
+        konst wrapper = underlying.encodingWith(Base64)
         wrapper.close()
         assertTrue(underlying.isClosed)
     }
@@ -205,8 +205,8 @@ class Base64IOStreamTest {
 
     @Test
     fun correctPadding() {
-        val inputStream = "Zg==Zg==".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64)
+        konst inputStream = "Zg==Zg==".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64)
 
         wrapper.use {
             assertEquals('f'.code, it.read())
@@ -225,8 +225,8 @@ class Base64IOStreamTest {
 
     @Test
     fun correctPaddingMime() {
-        val inputStream = "Zg==Zg==".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64.Mime)
+        konst inputStream = "Zg==Zg==".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64.Mime)
 
         wrapper.use {
             assertEquals('f'.code, it.read())
@@ -245,8 +245,8 @@ class Base64IOStreamTest {
 
     @Test
     fun illegalSymbol() {
-        val inputStream = "Zm\u00FF9vYg==".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64)
+        konst inputStream = "Zm\u00FF9vYg==".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64)
 
         wrapper.use {
             // one group of 4 symbols is read for decoding, that group includes illegal '\u00FF'
@@ -263,8 +263,8 @@ class Base64IOStreamTest {
 
     @Test
     fun illegalSymbolMime() {
-        val inputStream = "Zm\u00FF9vYg==".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64.Mime)
+        konst inputStream = "Zm\u00FF9vYg==".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64.Mime)
 
         wrapper.use {
             assertEquals('f'.code, it.read())
@@ -284,8 +284,8 @@ class Base64IOStreamTest {
     @Test
     fun incorrectPadding() {
         for (base64 in listOf(Base64, Base64.Mime)) {
-            val inputStream = "Zm9vZm=9v".byteInputStream()
-            val wrapper = inputStream.decodingWith(base64)
+            konst inputStream = "Zm9vZm=9v".byteInputStream()
+            konst wrapper = inputStream.decodingWith(base64)
 
             wrapper.use {
                 assertEquals('f'.code, it.read())
@@ -308,8 +308,8 @@ class Base64IOStreamTest {
     @Test
     fun withoutPadding() {
         for (base64 in listOf(Base64, Base64.Mime)) {
-            val inputStream = "Zm9vYg".byteInputStream()
-            val wrapper = inputStream.decodingWith(base64)
+            konst inputStream = "Zm9vYg".byteInputStream()
+            konst wrapper = inputStream.decodingWith(base64)
 
             wrapper.use {
                 assertEquals('f'.code, it.read())
@@ -329,8 +329,8 @@ class Base64IOStreamTest {
 
     @Test
     fun separatedPadSymbols() {
-        val inputStream = "Zm9vYg=[,.|^&*@#]=".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64)
+        konst inputStream = "Zm9vYg=[,.|^&*@#]=".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64)
 
         wrapper.use {
             assertEquals('f'.code, it.read())
@@ -351,8 +351,8 @@ class Base64IOStreamTest {
 
     @Test
     fun separatedPadSymbolsMime() {
-        val inputStream = "Zm9vYg=[,.|^&*@#]=".byteInputStream()
-        val wrapper = inputStream.decodingWith(Base64.Mime)
+        konst inputStream = "Zm9vYg=[,.|^&*@#]=".byteInputStream()
+        konst wrapper = inputStream.decodingWith(Base64.Mime)
 
         wrapper.use {
             assertEquals('f'.code, it.read())

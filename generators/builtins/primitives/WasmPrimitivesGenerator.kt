@@ -22,7 +22,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
         annotations += "WasmAutoboxed"
         // used here little hack with name extension just to avoid creation of specialized "ConstructorParameterDescription"
         constructorParam {
-            name = "private val value"
+            name = "private konst konstue"
             type = thisKind.capitalized
         }
     }
@@ -56,18 +56,18 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
         if (otherKind == thisKind) {
             if (thisKind in PrimitiveType.floatingPoint) {
                 """
-                    // if any of values in NaN both comparisons return false
+                    // if any of konstues in NaN both comparisons return false
                     if (this > $parameterName) return 1
                     if (this < $parameterName) return -1
             
-                    val thisBits = this.toBits()
-                    val otherBits = $parameterName.toBits()
+                    konst thisBits = this.toBits()
+                    konst otherBits = $parameterName.toBits()
             
-                    // Canonical NaN bit representation is higher than any other value's bit representation
+                    // Canonical NaN bit representation is higher than any other konstue's bit representation
                     return thisBits.compareTo(otherBits)
                 """.trimIndent().addAsMultiLineBody()
             } else {
-                val body = when (thisKind) {
+                konst body = when (thisKind) {
                     PrimitiveType.BYTE -> "wasm_i32_compareTo(this.toInt(), $parameterName.toInt())"
                     PrimitiveType.SHORT -> "this.toInt().compareTo($parameterName.toInt())"
                     PrimitiveType.INT, PrimitiveType.LONG -> "wasm_${thisKind.prefixLowercase}_compareTo(this, $parameterName)"
@@ -78,8 +78,8 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
             return
         }
 
-        val thisCasted = "this" + thisKind.castToIfNecessary(otherKind)
-        val otherCasted = parameterName + otherKind.castToIfNecessary(thisKind)
+        konst thisCasted = "this" + thisKind.castToIfNecessary(otherKind)
+        konst otherCasted = parameterName + otherKind.castToIfNecessary(thisKind)
         when {
             thisKind == PrimitiveType.FLOAT && otherKind == PrimitiveType.DOUBLE -> "-${otherCasted}.compareTo(this)"
             else -> "$thisCasted.compareTo($otherCasted)"
@@ -87,13 +87,13 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
     }
 
     override fun MethodBuilder.modifyGeneratedBinaryOperation(thisKind: PrimitiveType, otherKind: PrimitiveType) {
-        val sign = operatorSign(methodName)
+        konst sign = operatorSign(methodName)
         if (thisKind != PrimitiveType.BYTE && thisKind != PrimitiveType.SHORT && thisKind == otherKind) {
-            val type = thisKind.capitalized
+            konst type = thisKind.capitalized
 
             when (methodName) {
                 "div" -> {
-                    val oneConst = if (thisKind == PrimitiveType.LONG) "-1L" else "-1"
+                    konst oneConst = if (thisKind == PrimitiveType.LONG) "-1L" else "-1"
                     when (thisKind) {
                         PrimitiveType.INT, PrimitiveType.LONG -> "if (this == $type.MIN_VALUE && $parameterName == $oneConst) $type.MIN_VALUE " +
                                 "else wasm_${thisKind.prefixLowercase}_div_s(this, $parameterName)"
@@ -110,9 +110,9 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
         }
 
         modifySignature { isInline = true }
-        val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
-        val thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
-        val otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(returnTypeAsPrimitive)
+        konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
+        konst thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
+        konst otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(returnTypeAsPrimitive)
         "$thisCasted $sign $otherCasted".addAsSingleLineBody(bodyOnNewLine = true)
     }
 
@@ -124,7 +124,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
         }
 
         if (methodName in setOf("inc", "dec")) {
-            val sign = if (methodName == "inc") "+" else "-"
+            konst sign = if (methodName == "inc") "+" else "-"
             when (thisKind) {
                 PrimitiveType.BYTE, PrimitiveType.SHORT -> "(this $sign 1).to${thisKind.capitalized}()".addAsSingleLineBody(bodyOnNewLine = true)
                 PrimitiveType.INT -> "this $sign 1".addAsSingleLineBody(bodyOnNewLine = true)
@@ -140,9 +140,9 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
                 return implementAsIntrinsic(thisKind, methodName)
             }
 
-            val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
-            val thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
-            val sign = if (methodName == "unaryMinus") {
+            konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
+            konst thisCasted = "this" + thisKind.castToIfNecessary(returnTypeAsPrimitive)
+            konst sign = if (methodName == "unaryMinus") {
                 when (thisKind) {
                     PrimitiveType.INT -> "0 - "
                     PrimitiveType.LONG -> "0L - "
@@ -154,9 +154,9 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
     }
 
     override fun MethodBuilder.modifyGeneratedRangeTo(thisKind: PrimitiveType) {
-        val rangeType = PrimitiveType.valueOf(returnType.replace("Range", "").uppercase())
-        val thisCasted = "this" + thisKind.castToIfNecessary(rangeType)
-        val otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(rangeType)
+        konst rangeType = PrimitiveType.konstueOf(returnType.replace("Range", "").uppercase())
+        konst thisCasted = "this" + thisKind.castToIfNecessary(rangeType)
+        konst otherCasted = parameterName + parameterType.toPrimitiveType().castToIfNecessary(rangeType)
         "return ${returnType}($thisCasted, $otherCasted)".addAsMultiLineBody()
     }
 
@@ -176,7 +176,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
     override fun MethodBuilder.modifyGeneratedBitwiseOperators(thisKind: PrimitiveType) {
         if (methodName == "inv") {
             modifySignature { isInline = true }
-            val oneConst = if (thisKind == PrimitiveType.LONG) "-1L" else "-1"
+            konst oneConst = if (thisKind == PrimitiveType.LONG) "-1L" else "-1"
             "this.xor($oneConst)".addAsSingleLineBody(bodyOnNewLine = true)
             return
         }
@@ -185,7 +185,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
     }
 
     override fun MethodBuilder.modifyGeneratedConversions(thisKind: PrimitiveType) {
-        val returnTypeAsPrimitive = PrimitiveType.valueOf(returnType.uppercase())
+        konst returnTypeAsPrimitive = PrimitiveType.konstueOf(returnType.uppercase())
         if (returnTypeAsPrimitive == thisKind) {
             modifySignature { isInline = true }
             "this".addAsSingleLineBody(bodyOnNewLine = true)
@@ -235,7 +235,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
     }
 
     override fun MethodBuilder.modifyGeneratedEquals(thisKind: PrimitiveType) {
-        val additionalCheck = when (thisKind) {
+        konst additionalCheck = when (thisKind) {
             PrimitiveType.LONG -> "wasm_i64_eq(this, $parameterName)"
             PrimitiveType.FLOAT -> "this.equals(other)"
             PrimitiveType.DOUBLE -> "this.toBits() == other.toBits()"
@@ -285,7 +285,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
 
     private fun ClassBuilder.generateCustomEquals(thisKind: PrimitiveType) {
         method {
-            annotations += "kotlin.internal.IntrinsicConstEvaluation"
+            annotations += "kotlin.internal.IntrinsicConstEkonstuation"
             signature {
                 isInline = thisKind in PrimitiveType.floatingPoint
                 methodName = "equals"
@@ -336,7 +336,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
             "implementedAsIntrinsic".addAsSingleLineBody(bodyOnNewLine = true)
         }
 
-        private val PrimitiveType.prefixUppercase: String
+        private konst PrimitiveType.prefixUppercase: String
             get() = when (this) {
                 PrimitiveType.BYTE, PrimitiveType.SHORT, PrimitiveType.INT -> "I32"
                 PrimitiveType.LONG -> "I64"
@@ -345,7 +345,7 @@ class WasmPrimitivesGenerator(writer: PrintWriter) : BasePrimitivesGenerator(wri
                 else -> ""
             }
 
-        private val PrimitiveType.prefixLowercase: String
+        private konst PrimitiveType.prefixLowercase: String
             get() = prefixUppercase.lowercase()
     }
 }

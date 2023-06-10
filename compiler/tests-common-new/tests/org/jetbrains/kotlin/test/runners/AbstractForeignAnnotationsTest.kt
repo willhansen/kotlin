@@ -32,13 +32,13 @@ import org.jetbrains.kotlin.test.services.jvm.PsiClassFilesReadingForCompiledJav
 import org.jetbrains.kotlin.test.services.sourceProviders.AdditionalDiagnosticsSourceFilesProvider
 import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSourceFilesProvider
 
-enum class ForeignAnnotationsTestKind(val compiledJava: Boolean, val psiClassLoading: Boolean) {
+enum class ForeignAnnotationsTestKind(konst compiledJava: Boolean, konst psiClassLoading: Boolean) {
     SOURCE(false, false),
     COMPILED_JAVA(true, false),
     COMPILED_JAVA_WITH_PSI_CLASS_LOADING(true, true)
 }
 
-abstract class AbstractForeignAnnotationsTestBase(private val kind: ForeignAnnotationsTestKind) : AbstractKotlinCompilerTest() {
+abstract class AbstractForeignAnnotationsTestBase(private konst kind: ForeignAnnotationsTestKind) : AbstractKotlinCompilerTest() {
     override fun TestConfigurationBuilder.configuration() {
         globalDefaults {
             targetPlatform = JvmPlatforms.defaultJvmPlatform

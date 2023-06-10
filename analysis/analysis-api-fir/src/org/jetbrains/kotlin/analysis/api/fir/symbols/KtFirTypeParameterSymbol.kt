@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 
 internal class KtFirTypeParameterSymbol(
-    override val firSymbol: FirTypeParameterSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirTypeParameterSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtFirTypeParameterSymbolBase() {
-    override val token: KtLifetimeToken get() = builder.token
-    override val psi: PsiElement? by cached { firSymbol.findPsi() }
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst psi: PsiElement? by cached { firSymbol.findPsi() }
 
-    override val name: Name get() = withValidityAssertion { firSymbol.name }
+    override konst name: Name get() = withValidityAssertion { firSymbol.name }
 
-    override val variance: Variance get() = withValidityAssertion { firSymbol.variance }
-    override val isReified: Boolean get() = withValidityAssertion { firSymbol.isReified }
+    override konst variance: Variance get() = withValidityAssertion { firSymbol.variance }
+    override konst isReified: Boolean get() = withValidityAssertion { firSymbol.isReified }
 }

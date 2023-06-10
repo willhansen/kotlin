@@ -1,15 +1,15 @@
 interface Intf {
-    val aValue: String
+    konst aValue: String
 }
 
 class ClassB {
-    val x = { "OK" }
+    konst x = { "OK" }
 
-    val value: Intf = object : Intf {
-        override val aValue = x()
+    konst konstue: Intf = object : Intf {
+        override konst aValue = x()
     }
 }
 
 fun box() : String {
-    return ClassB().value.aValue
+    return ClassB().konstue.aValue
 }

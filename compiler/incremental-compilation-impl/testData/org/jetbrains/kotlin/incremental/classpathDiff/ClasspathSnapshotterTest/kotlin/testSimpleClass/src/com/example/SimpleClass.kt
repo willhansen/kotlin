@@ -2,9 +2,9 @@ package com.example
 
 class SimpleClass {
 
-    val publicProperty: String = "publicProperty's value"
+    konst publicProperty: String = "publicProperty's konstue"
 
-    private val privateProperty: String = "privateProperty's value"
+    private konst privateProperty: String = "privateProperty's konstue"
 
     fun publicFunction(): String = "publicFunction's body"
 

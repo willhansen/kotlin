@@ -7,7 +7,7 @@ class A {
 class A {
     companion object
 
-    val c: Int = 1
+    konst c: Int = 1
 }
 
 class B {
@@ -63,7 +63,7 @@ class A {
 companion class {}
 
 //should be error
-val t = companion object {
+konst t = companion object {
 
 }
 

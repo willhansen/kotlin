@@ -1,7 +1,7 @@
 fun main() {
-    val x = emptyList<Int>()
+    konst x = emptyList<Int>()
 
-    val u = x.map { it + it }
+    konst u = x.map { it + it }
     u.applyX {
         1 in this
         contains(1)

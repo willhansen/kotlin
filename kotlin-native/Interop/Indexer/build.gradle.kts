@@ -20,30 +20,30 @@ plugins {
 }
 
 
-val libclangextProject = project(":kotlin-native:libclangext")
-val libclangextTask = libclangextProject.path + ":build"
-val libclangextDir = libclangextProject.buildDir
-val libclangextIsEnabled = libclangextProject.findProperty("isEnabled")!! as Boolean
-val llvmDir = project.findProperty("llvmDir")
+konst libclangextProject = project(":kotlin-native:libclangext")
+konst libclangextTask = libclangextProject.path + ":build"
+konst libclangextDir = libclangextProject.buildDir
+konst libclangextIsEnabled = libclangextProject.findProperty("isEnabled")!! as Boolean
+konst llvmDir = project.findProperty("llvmDir")
 
 
-val libclang =
+konst libclang =
     if (HostManager.hostIsMingw) {
         "lib/libclang.lib"
     } else {
         "lib/${System.mapLibraryName("clang")}"
     }
 
-val cflags = mutableListOf( "-I$llvmDir/include",
+konst cflags = mutableListOf( "-I$llvmDir/include",
         "-I${project(":kotlin-native:libclangext").projectDir.absolutePath}/src/main/include",
                             *platformManager.hostPlatform.clangForJni.hostCompilerArgsForJni)
 
-val ldflags = mutableListOf("$llvmDir/$libclang", "-L${libclangextDir.absolutePath}", "-lclangext")
+konst ldflags = mutableListOf("$llvmDir/$libclang", "-L${libclangextDir.absolutePath}", "-lclangext")
 
 if (libclangextIsEnabled) {
     assert(HostManager.hostIsMac)
     // Let some symbols be undefined to avoid linking unnecessary parts.
-    val unnecessarySymbols = setOf(
+    konst unnecessarySymbols = setOf(
             "__ZN4llvm7remarks11parseFormatENS_9StringRefE",
             "__ZN4llvm7remarks22createRemarkSerializerENS0_6FormatENS0_14SerializerModeERNS_11raw_ostreamE",
             "__ZN4llvm7remarks14YAMLSerializerC1ERNS_11raw_ostreamENS0_14UseStringTableE",
@@ -65,7 +65,7 @@ if (libclangextIsEnabled) {
                     unnecessarySymbols.map { "-Wl,-U,$it" }
     )
 
-    val llvmLibs = listOf(
+    konst llvmLibs = listOf(
             "clangAST", "clangASTMatchers", "clangAnalysis", "clangBasic", "clangDriver", "clangEdit",
             "clangFrontend", "clangFrontendTool", "clangLex", "clangParse", "clangSema", "clangEdit",
             "clangRewrite", "clangRewriteFrontend", "clangStaticAnalyzerFrontend",
@@ -80,17 +80,17 @@ if (libclangextIsEnabled) {
     ldflags.addAll(listOf("-lpthread", "-lz", "-lm", "-lcurses"))
 }
 
-val solib = when{
+konst solib = when{
     HostManager.hostIsMingw -> "dll"
     HostManager.hostIsMac -> "dylib"
     else -> "so"
 }
-val lib = if (HostManager.hostIsMingw) "lib" else "a"
+konst lib = if (HostManager.hostIsMingw) "lib" else "a"
 
 
 native {
-    val obj = if (HostManager.hostIsMingw) "obj" else "o"
-    val cxxflags = listOf("-std=c++11", *cflags.toTypedArray())
+    konst obj = if (HostManager.hostIsMingw) "obj" else "o"
+    konst cxxflags = listOf("-std=c++11", *cflags.toTypedArray())
     suffixes {
         (".c" to ".$obj") {
             tool(*platformManager.hostPlatform.clangForJni.clangC("").toTypedArray())
@@ -111,7 +111,7 @@ native {
             dir("src/nativeInteropStubs/cpp")
         }
     }
-    val objSet = arrayOf(sourceSets["main-c"]!!.transform(".c" to ".$obj"),
+    konst objSet = arrayOf(sourceSets["main-c"]!!.transform(".c" to ".$obj"),
                          sourceSets["main-cpp"]!!.transform(".cpp" to ".$obj"))
 
     target(solib("clangstubs"), *objSet) {
@@ -145,8 +145,8 @@ dependencies {
     testImplementation(kotlin("test-junit"))
 }
 
-val nativelibs = project.tasks.register<Copy>("nativelibs") {
-    val clangstubsSolib = solib("clangstubs")
+konst nativelibs = project.tasks.register<Copy>("nativelibs") {
+    konst clangstubsSolib = solib("clangstubs")
     dependsOn(clangstubsSolib)
 
     from("$buildDir/$clangstubsSolib")
@@ -177,7 +177,7 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 tasks.withType<Test>().configureEach {
-    val projectsWithNativeLibs = listOf(
+    konst projectsWithNativeLibs = listOf(
             project, // Current one.
             project(":kotlin-native:Interop:Runtime")
     )

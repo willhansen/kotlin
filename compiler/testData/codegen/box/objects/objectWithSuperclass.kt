@@ -6,7 +6,7 @@ open class A {
 
 object O: A() {
     override fun foo(): Int {
-        val s = super<A>.foo()
+        konst s = super<A>.foo()
         return s + 3
     }
 }

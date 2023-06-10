@@ -1,1 +1,1 @@
-<expr>val p: String by</expr>
+<expr>konst p: String by</expr>

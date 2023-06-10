@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinAndroidTarget
 internal interface KotlinAndroidSourceSetConfigurator {
     /**
      * Called once, when the corresponding KotlinSourceSet is created for a given [AndroidSourceSet].
-     * Note, this can also be called in 'afterEvaluate', when Android is finalizing its variants.
+     * Note, this can also be called in 'afterEkonstuate', when Android is finalizing its variants.
      */
     fun configure(
         target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, androidSourceSet: AndroidSourceSet
@@ -35,8 +35,8 @@ internal fun KotlinAndroidSourceSetConfigurator.onlyIf(
 
 /* Conditional implementation */
 private class KotlinAndroidSourceSetConfigurationWithCondition(
-    private val underlying: KotlinAndroidSourceSetConfigurator,
-    private val condition: (KotlinAndroidTarget) -> Boolean
+    private konst underlying: KotlinAndroidSourceSetConfigurator,
+    private konst condition: (KotlinAndroidTarget) -> Boolean
 ) : KotlinAndroidSourceSetConfigurator {
     override fun configure(target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, androidSourceSet: AndroidSourceSet) {
         if (condition(target)) underlying.configure(target, kotlinSourceSet, androidSourceSet)
@@ -57,7 +57,7 @@ internal fun KotlinAndroidSourceSetConfigurator(
 }
 
 private class CompositeKotlinAndroidSourceSetConfigurator(
-    val configurators: List<KotlinAndroidSourceSetConfigurator>
+    konst configurators: List<KotlinAndroidSourceSetConfigurator>
 ) : KotlinAndroidSourceSetConfigurator {
     override fun configure(
         target: KotlinAndroidTarget,

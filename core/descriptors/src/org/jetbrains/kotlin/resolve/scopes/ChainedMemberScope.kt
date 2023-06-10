@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.SmartList
 
 class ChainedMemberScope private constructor(
-    private val debugName: String,
-    private val scopes: Array<out MemberScope>
+    private konst debugName: String,
+    private konst scopes: Array<out MemberScope>
 ) : MemberScope {
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? =
@@ -69,7 +69,7 @@ class ChainedMemberScope private constructor(
         fun create(debugName: String, vararg scopes: MemberScope): MemberScope = create(debugName, scopes.asIterable())
 
         fun create(debugName: String, scopes: Iterable<MemberScope>): MemberScope {
-            val flattenedNonEmptyScopes = SmartList<MemberScope>()
+            konst flattenedNonEmptyScopes = SmartList<MemberScope>()
             for (scope in scopes) {
                 when {
                     scope === MemberScope.Empty -> {}

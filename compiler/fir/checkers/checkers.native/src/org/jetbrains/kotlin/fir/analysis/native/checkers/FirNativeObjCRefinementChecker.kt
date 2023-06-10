@@ -22,29 +22,29 @@ import org.jetbrains.kotlin.name.FqName
 
 object FirNativeObjCRefinementChecker : FirCallableDeclarationChecker() {
 
-    val hidesFromObjCClassId = ClassId.topLevel(FqName("kotlin.native.HidesFromObjC"))
-    val refinesInSwiftClassId = ClassId.topLevel(FqName("kotlin.native.RefinesInSwift"))
+    konst hidesFromObjCClassId = ClassId.topLevel(FqName("kotlin.native.HidesFromObjC"))
+    konst refinesInSwiftClassId = ClassId.topLevel(FqName("kotlin.native.RefinesInSwift"))
 
     override fun check(declaration: FirCallableDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration !is FirSimpleFunction && declaration !is FirProperty) return
-        val (objCAnnotations, swiftAnnotations) = declaration.findRefinedAnnotations(context.session)
+        konst (objCAnnotations, swiftAnnotations) = declaration.findRefinedAnnotations(context.session)
         if (objCAnnotations.isNotEmpty() && swiftAnnotations.isNotEmpty()) {
             for (swiftAnnotation in swiftAnnotations) {
                 reporter.reportOn(swiftAnnotation.source, REDUNDANT_SWIFT_REFINEMENT, context)
             }
         }
-        val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
+        konst containingClass = context.containingDeclarations.lastOrNull() as? FirClass
         if (containingClass != null) {
-            val firTypeScope = containingClass.unsubstitutedScope(context)
+            konst firTypeScope = containingClass.unsubstitutedScope(context)
             check(firTypeScope, declaration.symbol, declaration, context, reporter, objCAnnotations, swiftAnnotations)
         }
     }
 
     private fun FirCallableDeclaration.findRefinedAnnotations(session: FirSession): Pair<List<FirAnnotation>, List<FirAnnotation>> {
-        val objCAnnotations = mutableListOf<FirAnnotation>()
-        val swiftAnnotations = mutableListOf<FirAnnotation>()
+        konst objCAnnotations = mutableListOf<FirAnnotation>()
+        konst swiftAnnotations = mutableListOf<FirAnnotation>()
         for (annotation in annotations) {
-            val metaAnnotations = annotation.toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty()
+            konst metaAnnotations = annotation.toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty()
             for (metaAnnotation in metaAnnotations) {
                 when (metaAnnotation.toAnnotationClassId(session)) {
                     hidesFromObjCClassId -> {

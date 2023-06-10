@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirResolvedContractDescriptionBuilder {
     var source: KtSourceElement? = null
-    val effects: MutableList<FirEffectDeclaration> = mutableListOf()
-    val unresolvedEffects: MutableList<FirContractElementDeclaration> = mutableListOf()
+    konst effects: MutableList<FirEffectDeclaration> = mutableListOf()
+    konst unresolvedEffects: MutableList<FirContractElementDeclaration> = mutableListOf()
 
     fun build(): FirResolvedContractDescription {
         return FirResolvedContractDescriptionImpl(

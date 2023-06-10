@@ -28,19 +28,19 @@ fun box(): String {
     } ?: return "FAIL: local function"
 
     expectAssertion {
-        class C(val x: String)
+        class C(konst x: String)
         ::C
     } ?: return "FAIL: local class constructor"
 
     expectAssertion {
-        class C(val x: String) {
+        class C(konst x: String) {
             fun foo(y: String) {}
         }
         C("")::foo
     } ?: return "FAIL: local class method"
 
     expectAssertion {
-        val o = object {
+        konst o = object {
             fun foo(y: String) {}
         }
         o::foo

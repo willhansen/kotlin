@@ -63,7 +63,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             return
         }
 
-        val newCapacity = AbstractList.newCapacity(elementData.size, minCapacity)
+        konst newCapacity = AbstractList.newCapacity(elementData.size, minCapacity)
         copyElements(newCapacity)
     }
 
@@ -71,7 +71,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
      * Creates a new array with the specified [newCapacity] size and copies elements in the [elementData] array to it.
      */
     private fun copyElements(newCapacity: Int) {
-        val newElements = arrayOfNulls<Any?>(newCapacity)
+        konst newElements = arrayOfNulls<Any?>(newCapacity)
         elementData.copyInto(newElements, 0, head, elementData.size)
         elementData.copyInto(newElements, elementData.size - head, 0, head)
         head = 0
@@ -144,7 +144,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     public fun removeFirst(): E {
         if (isEmpty()) throw NoSuchElementException("ArrayDeque is empty.")
 
-        val element = internalGet(head)
+        konst element = internalGet(head)
         elementData[head] = null
         head = incremented(head)
         size -= 1
@@ -162,8 +162,8 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     public fun removeLast(): E {
         if (isEmpty()) throw NoSuchElementException("ArrayDeque is empty.")
 
-        val internalLastIndex = internalIndex(lastIndex)
-        val element = internalGet(internalLastIndex)
+        konst internalLastIndex = internalIndex(lastIndex)
+        konst element = internalGet(internalLastIndex)
         elementData[internalLastIndex] = null
         size -= 1
         return element
@@ -218,12 +218,12 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
         //      -> shift all elements in the front of the array
         //      -> shift succeeding elements in the back of the array
 
-        val internalIndex = internalIndex(index)
+        konst internalIndex = internalIndex(index)
 
         if (index < (size + 1) shr 1) {
             // closer to the first element -> shift preceding elements
-            val decrementedInternalIndex = decremented(internalIndex)
-            val decrementedHead = decremented(head)
+            konst decrementedInternalIndex = decremented(internalIndex)
+            konst decrementedHead = decremented(head)
 
             if (decrementedInternalIndex >= head) {
                 elementData[decrementedHead] = elementData[head]  // head can be zero
@@ -238,7 +238,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             head = decrementedHead
         } else {
             // closer to the last element -> shift succeeding elements
-            val tail = internalIndex(size)
+            konst tail = internalIndex(size)
 
             if (internalIndex < tail) {
                 elementData.copyInto(elementData, internalIndex + 1, internalIndex, tail)
@@ -254,7 +254,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     private fun copyCollectionElements(internalIndex: Int, elements: Collection<E>) {
-        val iterator = elements.iterator()
+        konst iterator = elements.iterator()
 
         for (index in internalIndex until elementData.size) {
             if (!iterator.hasNext()) break
@@ -286,9 +286,9 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
 
         ensureCapacity(this.size + elements.size)
 
-        val tail = internalIndex(size)
-        val internalIndex = internalIndex(index)
-        val elementsSize = elements.size
+        konst tail = internalIndex(size)
+        konst internalIndex = internalIndex(index)
+        konst elementsSize = elements.size
 
         if (index < (size + 1) shr 1) {
             // closer to the first element -> shift preceding elements
@@ -300,8 +300,8 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
                     elementData.copyInto(elementData, shiftedHead, head, internalIndex)
                 } else { // head < tail, insertion leads to head >= tail
                     shiftedHead += elementData.size
-                    val elementsToShift = internalIndex - head
-                    val shiftToBack = elementData.size - shiftedHead
+                    konst elementsToShift = internalIndex - head
+                    konst shiftToBack = elementData.size - shiftedHead
 
                     if (shiftToBack >= elementsToShift) {
                         elementData.copyInto(elementData, shiftedHead, head, internalIndex)
@@ -324,7 +324,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
         } else {
             // closer to the last element -> shift succeeding elements
 
-            val shiftedInternalIndex = internalIndex + elementsSize
+            konst shiftedInternalIndex = internalIndex + elementsSize
 
             if (internalIndex < tail) {
                 if (tail + elementsSize <= elementData.size) {
@@ -333,7 +333,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
                     if (shiftedInternalIndex >= elementData.size) {
                         elementData.copyInto(elementData, shiftedInternalIndex - elementData.size, internalIndex, tail)
                     } else {
-                        val shiftToFront = tail + elementsSize - elementData.size
+                        konst shiftToFront = tail + elementsSize - elementData.size
                         elementData.copyInto(elementData, 0, tail - shiftToFront, tail)
                         elementData.copyInto(elementData, shiftedInternalIndex, internalIndex, tail - shiftToFront)
                     }
@@ -362,8 +362,8 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     public override fun set(index: Int, element: E): E {
         AbstractList.checkElementIndex(index, size)
 
-        val internalIndex = internalIndex(index)
-        val oldElement = internalGet(internalIndex)
+        konst internalIndex = internalIndex(index)
+        konst oldElement = internalGet(internalIndex)
         elementData[internalIndex] = element
 
         return oldElement
@@ -372,7 +372,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     public override fun contains(element: E): Boolean = indexOf(element) != -1
 
     public override fun indexOf(element: E): Int {
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
 
         if (head < tail) {
             for (index in head until tail) {
@@ -391,7 +391,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     public override fun lastIndexOf(element: E): Int {
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
 
         if (head < tail) {
             for (index in tail - 1 downTo head) {
@@ -410,7 +410,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     public override fun remove(element: E): Boolean {
-        val index = indexOf(element)
+        konst index = indexOf(element)
         if (index == -1) return false
         removeAt(index)
         return true
@@ -425,8 +425,8 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             return removeFirst()
         }
 
-        val internalIndex = internalIndex(index)
-        val element = internalGet(internalIndex)
+        konst internalIndex = internalIndex(index)
+        konst element = internalGet(internalIndex)
 
         if (index < size shr 1) {
             // closer to the first element -> shift preceding elements
@@ -442,7 +442,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             head = incremented(head)
         } else {
             // closer to the last element -> shift succeeding elements
-            val internalLastIndex = internalIndex(lastIndex)
+            konst internalLastIndex = internalIndex(lastIndex)
 
             if (internalIndex <= internalLastIndex) {
                 elementData.copyInto(elementData, internalIndex, internalIndex + 1, internalLastIndex + 1)
@@ -467,13 +467,13 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
         if (this.isEmpty() || elementData.isEmpty())
             return false
 
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
         var newTail = head
         var modified = false
 
         if (head < tail) {
             for (index in head until tail) {
-                val element = elementData[index]
+                konst element = elementData[index]
 
                 @Suppress("UNCHECKED_CAST")
                 if (predicate(element as E))
@@ -486,7 +486,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
 
         } else {
             for (index in head until elementData.size) {
-                val element = elementData[index]
+                konst element = elementData[index]
                 elementData[index] = null
 
                 @Suppress("UNCHECKED_CAST")
@@ -499,7 +499,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
             newTail = positiveMod(newTail)
 
             for (index in 0 until tail) {
-                val element = elementData[index]
+                konst element = elementData[index]
                 elementData[index] = null
 
                 @Suppress("UNCHECKED_CAST")
@@ -518,7 +518,7 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     }
 
     public override fun clear() {
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
         if (head < tail) {
             elementData.fill(null, head, tail)
         } else if (isNotEmpty()) {
@@ -532,9 +532,9 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     @Suppress("NOTHING_TO_OVERRIDE")
     override fun <T> toArray(array: Array<T>): Array<T> {
         @Suppress("UNCHECKED_CAST")
-        val dest = (if (array.size >= size) array else arrayOfNulls(array, size)) as Array<Any?>
+        konst dest = (if (array.size >= size) array else arrayOfNulls(array, size)) as Array<Any?>
 
-        val tail = internalIndex(size)
+        konst tail = internalIndex(size)
         if (head < tail) {
             elementData.copyInto(dest, startIndex = head, endIndex = tail)
         } else if (isNotEmpty()) {
@@ -559,14 +559,14 @@ public class ArrayDeque<E> : AbstractMutableList<E> {
     internal fun testToArray(): Array<Any?> = toArray()
 
     internal companion object {
-        private val emptyElementData = emptyArray<Any?>()
-        private const val defaultMinCapacity = 10
+        private konst emptyElementData = emptyArray<Any?>()
+        private const konst defaultMinCapacity = 10
     }
 
     // For testing only
     internal fun internalStructure(structure: (head: Int, elements: Array<Any?>) -> Unit) {
-        val tail = internalIndex(size)
-        val head = if (isEmpty() || head < tail) head else head - elementData.size
+        konst tail = internalIndex(size)
+        konst head = if (isEmpty() || head < tail) head else head - elementData.size
         structure(head, toArray())
     }
 }

@@ -12,7 +12,7 @@ import generators.unicode.toVarLenBase64
 import generators.unicode.writeIntArray
 import java.io.FileWriter
 
-internal open class LetterRangesWriter(protected val strategy: RangesWritingStrategy) : RangesWriter {
+internal open class LetterRangesWriter(protected konst strategy: RangesWritingStrategy) : RangesWriter {
     override fun write(rangeStart: List<Int>, rangeEnd: List<Int>, rangeCategory: List<Int>, writer: FileWriter) {
         beforeWritingRanges(writer)
 
@@ -81,18 +81,18 @@ internal open class LetterRangesWriter(protected val strategy: RangesWritingStra
          *   - `0` otherwise.
          */
         private fun Char.getLetterType(): Int {
-            val ch = this.code
-            val index = ${indexOf("ch")}
+            konst ch = this.code
+            konst index = ${indexOf("ch")}
 
-            val rangeStart = ${startAt("index")}
-            val rangeEnd = rangeStart + ${lengthAt("index")} - 1
-            val code = ${categoryAt("index")}
+            konst rangeStart = ${startAt("index")}
+            konst rangeEnd = rangeStart + ${lengthAt("index")} - 1
+            konst code = ${categoryAt("index")}
 
             if (ch > rangeEnd) {
                 return 0
             }
 
-            val lastTwoBits = code and 0x3
+            konst lastTwoBits = code and 0x3
 
             if (lastTwoBits == 0) { // gap pattern
                 var shift = 2
@@ -116,8 +116,8 @@ internal open class LetterRangesWriter(protected val strategy: RangesWritingStra
                 return lastTwoBits
             }
 
-            val distance = (ch - rangeStart)
-            val shift = if (code <= 0x1F) distance % 2 else distance
+            konst distance = (ch - rangeStart)
+            konst shift = if (code <= 0x1F) distance % 2 else distance
             return (code shr (2 * shift)) and 0x3
         }
         """.trimIndent()
@@ -147,30 +147,30 @@ internal class VarLenBase64LetterRangesWriter(strategy: RangesWritingStrategy) :
     }
 
     override fun writeInit(rangeStart: List<Int>, rangeEnd: List<Int>, rangeCategory: List<Int>, writer: FileWriter) {
-        val rangeStartDiff = rangeStart.mapIndexed { i, e -> if (i == 0) e else e - rangeStart[i - 1] }
-        val rangeLength = rangeEnd.mapIndexed { i, e -> e - rangeStart[i] + 1 }
+        konst rangeStartDiff = rangeStart.mapIndexed { i, e -> if (i == 0) e else e - rangeStart[i - 1] }
+        konst rangeLength = rangeEnd.mapIndexed { i, e -> e - rangeStart[i] + 1 }
 
-        val base64RangeStartDiff = rangeStartDiff.toVarLenBase64()
-        val base64RangeLength = rangeLength.toVarLenBase64()
-        val base64RangeCategory = rangeCategory.toVarLenBase64()
+        konst base64RangeStartDiff = rangeStartDiff.toVarLenBase64()
+        konst base64RangeLength = rangeLength.toVarLenBase64()
+        konst base64RangeCategory = rangeCategory.toVarLenBase64()
 
         writer.appendLine(
             """
-            val decodedRangeStart: IntArray
-            val decodedRangeLength: IntArray
-            val decodedRangeCategory: IntArray
+            konst decodedRangeStart: IntArray
+            konst decodedRangeLength: IntArray
+            konst decodedRangeCategory: IntArray
             
             init {
-                val toBase64 = "$TO_BASE64"
-                val fromBase64 = IntArray(128)
+                konst toBase64 = "$TO_BASE64"
+                konst fromBase64 = IntArray(128)
                 for (i in toBase64.indices) {
                     fromBase64[toBase64[i].code] = i
                 }
                 
                 // rangeStartDiff.length = ${base64RangeStartDiff.length}
-                val rangeStartDiff = "$base64RangeStartDiff"
-                val diff = decodeVarLenBase64(rangeStartDiff, fromBase64, ${rangeStartDiff.size})
-                val start = IntArray(diff.size)
+                konst rangeStartDiff = "$base64RangeStartDiff"
+                konst diff = decodeVarLenBase64(rangeStartDiff, fromBase64, ${rangeStartDiff.size})
+                konst start = IntArray(diff.size)
                 for (i in diff.indices) {
                     if (i == 0) start[i] = diff[i]
                     else start[i] = start[i - 1] + diff[i]
@@ -178,11 +178,11 @@ internal class VarLenBase64LetterRangesWriter(strategy: RangesWritingStrategy) :
                 decodedRangeStart = start
                 
                 // rangeLength.length = ${base64RangeLength.length}
-                val rangeLength = "$base64RangeLength"
+                konst rangeLength = "$base64RangeLength"
                 decodedRangeLength = decodeVarLenBase64(rangeLength, fromBase64, ${rangeLength.size})
                 
                 // rangeCategory.length = ${base64RangeCategory.length}
-                val rangeCategory = "$base64RangeCategory"
+                konst rangeCategory = "$base64RangeCategory"
                 decodedRangeCategory = decodeVarLenBase64(rangeCategory, fromBase64, ${rangeCategory.size})
             }
             """.replaceIndent(strategy.indentation)

@@ -131,7 +131,7 @@ internal class CompilerOptionsIT : KGPBaseTest() {
                 """.trimMargin()
             )
 
-            val compileTasks = listOf(
+            konst compileTasks = listOf(
                 "compileKotlinMetadata",
                 "compileKotlinJvmWithJava",
                 "compileKotlinJvmWithoutJava",
@@ -163,17 +163,17 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             )
 
             build("compileKotlin") {
-                val compilerArgs = output
+                konst compilerArgs = output
                     .lineSequence()
                     .first {
                         it.contains("Kotlin compiler args:")
                     }
                     .substringAfter("Kotlin compiler args:")
 
-                val expectedOptIn = "-opt-in kotlin.RequiresOptIn,my.CustomOptIn"
+                konst expectedOptIn = "-opt-in kotlin.RequiresOptIn,my.CustomOptIn"
                 assert(compilerArgs.contains(expectedOptIn)) {
                     printBuildOutput()
-                    "compiler arguments does not contain '$expectedOptIn' - actual value: $compilerArgs"
+                    "compiler arguments does not contain '$expectedOptIn' - actual konstue: $compilerArgs"
                 }
             }
         }
@@ -253,8 +253,8 @@ internal class CompilerOptionsIT : KGPBaseTest() {
 
             build("compileNativeMainKotlinMetadata") {
                 assertTasksExecuted(":compileNativeMainKotlinMetadata")
-                val taskOutput = getOutputForTask(":compileNativeMainKotlinMetadata")
-                val arguments = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
+                konst taskOutput = getOutputForTask(":compileNativeMainKotlinMetadata")
+                konst arguments = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
                 assertEquals(
                     setOf("another.custom.UnderOptIn", "my.custom.OptInAnnotation"), arguments.optIn?.toSet(),
                     "Arguments optIn does not match '-opt-in=another.custom.UnderOptIn, -opt-in=my.custom.OptInAnnotation'"
@@ -263,8 +263,8 @@ internal class CompilerOptionsIT : KGPBaseTest() {
 
             build("compileKotlinLinux64") {
                 assertTasksExecuted(":compileKotlinLinux64")
-                val taskOutput = getOutputForTask(":compileKotlinLinux64")
-                val arguments = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
+                konst taskOutput = getOutputForTask(":compileKotlinLinux64")
+                konst arguments = parseCompilerArgumentsFromBuildOutput(K2NativeCompilerArguments::class, taskOutput)
                 assertEquals(
                     setOf("another.custom.UnderOptIn", "my.custom.OptInAnnotation"), arguments.optIn?.toSet(),
                     "Arguments optIn does not match '-opt-in=another.custom.UnderOptIn, -opt-in=my.custom.OptInAnnotation'"
@@ -291,8 +291,8 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             )
 
             build("compileKotlinHost", forceOutput = true) {
-                val expectedOptIn = listOf("kotlin.RequiresOptIn", "my.CustomOptIn")
-                val arguments = parseCompilerArguments<K2NativeCompilerArguments>()
+                konst expectedOptIn = listOf("kotlin.RequiresOptIn", "my.CustomOptIn")
+                konst arguments = parseCompilerArguments<K2NativeCompilerArguments>()
                 if (arguments.optIn?.toList() != listOf("kotlin.RequiresOptIn", "my.CustomOptIn")) {
                     fail(
                         "compiler arguments does not contain expected optIns'${expectedOptIn.joinToString()}': ${arguments.optIn}"
@@ -322,17 +322,17 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             )
 
             build("compileKotlin") {
-                val compilerArgs = output
+                konst compilerArgs = output
                     .lineSequence()
                     .first {
                         it.contains("Kotlin compiler args:")
                     }
                     .substringAfter("Kotlin compiler args:")
 
-                val expectedArg = "-progressive"
+                konst expectedArg = "-progressive"
                 assert(compilerArgs.contains(expectedArg)) {
                     printBuildOutput()
-                    "compiler arguments does not contain '$expectedArg' - actual value: $compilerArgs"
+                    "compiler arguments does not contain '$expectedArg' - actual konstue: $compilerArgs"
                 }
             }
         }
@@ -348,17 +348,17 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG)
         ) {
             build("compileKotlin") {
-                val compilerArgs = output
+                konst compilerArgs = output
                     .lineSequence()
                     .first {
                         it.contains("Kotlin compiler args:")
                     }
                     .substringAfter("Kotlin compiler args:")
 
-                val expectedArg = "-progressive"
+                konst expectedArg = "-progressive"
                 assert(!compilerArgs.contains(expectedArg)) {
                     printBuildOutput()
-                    "compiler arguments contains '$expectedArg' - actual value: $compilerArgs"
+                    "compiler arguments contains '$expectedArg' - actual konstue: $compilerArgs"
                 }
             }
         }
@@ -386,17 +386,17 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             )
 
             build("compileKotlin") {
-                val compilerArgs = output
+                konst compilerArgs = output
                     .lineSequence()
                     .first {
                         it.contains("Kotlin compiler args:")
                     }
                     .substringAfter("Kotlin compiler args:")
 
-                val expectedArg = "-progressive"
+                konst expectedArg = "-progressive"
                 assert(compilerArgs.contains(expectedArg)) {
                     printBuildOutput()
-                    "compiler arguments does not contain '$expectedArg' - actual value: $compilerArgs"
+                    "compiler arguments does not contain '$expectedArg' - actual konstue: $compilerArgs"
                 }
             }
         }
@@ -421,12 +421,12 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             )
 
             build("compileKotlinHost") {
-                val expectedArg = "-progressive"
-                val compilerArgs = output
+                konst expectedArg = "-progressive"
+                konst compilerArgs = output
                     .substringAfter("Arguments = [")
                     .substringBefore("]")
                     .lines()
-                val progressiveArg = compilerArgs.find { it.trim() == expectedArg }
+                konst progressiveArg = compilerArgs.find { it.trim() == expectedArg }
 
                 assert(progressiveArg != null) {
                     printBuildOutput()
@@ -482,7 +482,7 @@ internal class CompilerOptionsIT : KGPBaseTest() {
         }
     }
 
-    @DisplayName("KT-57823: uses archivesName value for native compilation module name convention")
+    @DisplayName("KT-57823: uses archivesName konstue for native compilation module name convention")
     @NativeGradlePluginTests
     @GradleTest
     fun nativeCompilationModuleNameConvention(gradleVersion: GradleVersion) {
@@ -495,7 +495,7 @@ internal class CompilerOptionsIT : KGPBaseTest() {
             buildOptions = defaultBuildOptions.copy(logLevel = LogLevel.DEBUG, configurationCache = false)
         ) {
             buildGradle.modify {
-                val buildScript = """
+                konst buildScript = """
                 |${it.substringBefore("apply plugin:")}
                 |apply plugin: 'base'
                 |apply plugin: ${it.substringAfter("apply plugin:")}

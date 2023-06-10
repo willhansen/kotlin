@@ -6,24 +6,24 @@ package test
 import kotlin.test.assertEquals
 
 annotation class Anno(
-        val b: Byte,
-        val c: Char,
-        val d: Double,
-        val f: Float,
-        val i: Int,
-        val j: Long,
-        val s: Short,
-        val z: Boolean,
-        val ba: ByteArray,
-        val ca: CharArray,
-        val da: DoubleArray,
-        val fa: FloatArray,
-        val ia: IntArray,
-        val ja: LongArray,
-        val sa: ShortArray,
-        val za: BooleanArray,
-        val str: String,
-        val stra: Array<String>
+        konst b: Byte,
+        konst c: Char,
+        konst d: Double,
+        konst f: Float,
+        konst i: Int,
+        konst j: Long,
+        konst s: Short,
+        konst z: Boolean,
+        konst ba: ByteArray,
+        konst ca: CharArray,
+        konst da: DoubleArray,
+        konst fa: FloatArray,
+        konst ia: IntArray,
+        konst ja: LongArray,
+        konst sa: ShortArray,
+        konst za: BooleanArray,
+        konst str: String,
+        konst stra: Array<String>
 )
 
 @Anno(
@@ -50,7 +50,7 @@ fun foo() {}
 
 fun box(): String {
     // Construct an annotation with exactly the same parameters, check that the proxy created by Kotlin and by Java reflection are the same and have the same hash code
-    val a1 = Anno::class.constructors.single().call(
+    konst a1 = Anno::class.constructors.single().call(
         1.toByte(),
         'x',
         3.14,
@@ -71,7 +71,7 @@ fun box(): String {
         arrayOf("rofl")
     )
 
-    val a2 = ::foo.annotations.single() as Anno
+    konst a2 = ::foo.annotations.single() as Anno
 
     assertEquals(a1, a2)
     assertEquals(a2, a1)

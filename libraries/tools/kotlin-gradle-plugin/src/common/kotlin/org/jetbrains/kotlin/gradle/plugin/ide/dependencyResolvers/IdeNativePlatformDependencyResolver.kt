@@ -18,9 +18,9 @@ import org.jetbrains.kotlin.library.KLIB_FILE_EXTENSION
 
 internal object IdeNativePlatformDependencyResolver : IdeDependencyResolver {
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
-        val project = sourceSet.project
-        val commonizerTarget = sourceSet.commonizerTarget.getOrThrow() as? LeafCommonizerTarget ?: return emptySet()
-        val konanTarget = commonizerTarget.konanTargetOrNull ?: return emptySet()
+        konst project = sourceSet.project
+        konst commonizerTarget = sourceSet.commonizerTarget.getOrThrow() as? LeafCommonizerTarget ?: return emptySet()
+        konst konanTarget = commonizerTarget.konanTargetOrNull ?: return emptySet()
 
         return sourceSet.project.konanDistribution.platformLibsDir.resolve(konanTarget.name)
             .listFiles().orEmpty()
@@ -29,6 +29,6 @@ internal object IdeNativePlatformDependencyResolver : IdeDependencyResolver {
             .toSet()
     }
 
-    private val Project.konanDistribution: KonanDistribution
+    private konst Project.konanDistribution: KonanDistribution
         get() = KonanDistribution(project.file(konanHome))
 }

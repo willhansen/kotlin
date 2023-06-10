@@ -23,10 +23,10 @@ abstract class InstructionWithNext(
     blockScope: BlockScope
 ) : KtElementInstructionImpl(element, blockScope) {
     var next: Instruction? = null
-        set(value) {
-            field = outgoingEdgeTo(value)
+        set(konstue) {
+            field = outgoingEdgeTo(konstue)
         }
 
-    override val nextInstructions: Collection<Instruction>
+    override konst nextInstructions: Collection<Instruction>
         get() = listOfNotNull(next)
 }

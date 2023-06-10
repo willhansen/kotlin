@@ -7,5 +7,5 @@
 fun <!IMPLICIT_NOTHING_RETURN_TYPE!>case1<!>(a: Boolean) = run { println("d"); return <!RETURN_TYPE_MISMATCH!>true<!> }
 
 // TESTCASE NUMBER: 2
-val <!IMPLICIT_NOTHING_PROPERTY_TYPE!>case2<!>
+konst <!IMPLICIT_NOTHING_PROPERTY_TYPE!>case2<!>
 get() = run { println("d"); return <!RETURN_TYPE_MISMATCH!>true<!> }

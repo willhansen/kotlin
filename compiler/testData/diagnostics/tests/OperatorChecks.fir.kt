@@ -73,13 +73,13 @@ class OkDelegates {
 
 class DelegatesWithErrors {
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun getValue(thisRef: Any?, prop: String): String = ""
-    <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(thisRef: Any?, prop: String, value: String) {}
+    <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(thisRef: Any?, prop: String, konstue: String) {}
 
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(thisRef: Any?, prop: KProperty<*>, vararg n: Int) {}
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(thisRef: Any?, prop: KProperty<*>, f: Float = 0.0f) {}
 
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun getValue(prop: KProperty<*>): String = ""
-    <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(prop: KProperty<*>, value: String) {}
+    <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun setValue(prop: KProperty<*>, konstue: String) {}
 }
 
 interface Example2 {

@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.build.report.BuildReporter
 import org.jetbrains.kotlin.build.report.metrics.BuildMetricsReporter
 
 class TestBuildReporter(
-    val testICReporter: TestICReporter,
+    konst testICReporter: TestICReporter,
     buildMetricsReporter: BuildMetricsReporter
 ) : BuildReporter(testICReporter, buildMetricsReporter) {
     fun reportCachesDump(cachesDump: String) {

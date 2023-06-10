@@ -23,24 +23,24 @@ abstract class WasmExpressionBuilder {
 
     abstract var numberOfNestedBlocks: Int
 
-    fun buildConstI32(value: Int, location: SourceLocation) {
-        buildInstr(WasmOp.I32_CONST, location, WasmImmediate.ConstI32(value))
+    fun buildConstI32(konstue: Int, location: SourceLocation) {
+        buildInstr(WasmOp.I32_CONST, location, WasmImmediate.ConstI32(konstue))
     }
 
-    fun buildConstI64(value: Long, location: SourceLocation) {
-        buildInstr(WasmOp.I64_CONST, location, WasmImmediate.ConstI64(value))
+    fun buildConstI64(konstue: Long, location: SourceLocation) {
+        buildInstr(WasmOp.I64_CONST, location, WasmImmediate.ConstI64(konstue))
     }
 
-    fun buildConstF32(value: Float, location: SourceLocation) {
-        buildInstr(WasmOp.F32_CONST, location, WasmImmediate.ConstF32(value.toRawBits().toUInt()))
+    fun buildConstF32(konstue: Float, location: SourceLocation) {
+        buildInstr(WasmOp.F32_CONST, location, WasmImmediate.ConstF32(konstue.toRawBits().toUInt()))
     }
 
-    fun buildConstF64(value: Double, location: SourceLocation) {
-        buildInstr(WasmOp.F64_CONST, location, WasmImmediate.ConstF64(value.toRawBits().toULong()))
+    fun buildConstF64(konstue: Double, location: SourceLocation) {
+        buildInstr(WasmOp.F64_CONST, location, WasmImmediate.ConstF64(konstue.toRawBits().toULong()))
     }
 
-    fun buildConstI32Symbol(value: WasmSymbol<Int>, location: SourceLocation) {
-        buildInstr(WasmOp.I32_CONST, location, WasmImmediate.SymbolI32(value))
+    fun buildConstI32Symbol(konstue: WasmSymbol<Int>, location: SourceLocation) {
+        buildInstr(WasmOp.I32_CONST, location, WasmImmediate.SymbolI32(konstue))
     }
 
     fun buildUnreachable(location: SourceLocation) {
@@ -90,13 +90,13 @@ abstract class WasmExpressionBuilder {
 
 
     fun buildBrInstr(brOp: WasmOp, absoluteBlockLevel: Int, location: SourceLocation) {
-        val relativeLevel = numberOfNestedBlocks - absoluteBlockLevel
+        konst relativeLevel = numberOfNestedBlocks - absoluteBlockLevel
         assert(relativeLevel >= 0) { "Negative relative block index" }
         buildInstr(brOp, location, WasmImmediate.LabelIdx(relativeLevel))
     }
 
     fun buildBrInstr(brOp: WasmOp, absoluteBlockLevel: Int, symbol: WasmSymbolReadOnly<WasmTypeDeclaration>, location: SourceLocation) {
-        val relativeLevel = numberOfNestedBlocks - absoluteBlockLevel
+        konst relativeLevel = numberOfNestedBlocks - absoluteBlockLevel
         assert(relativeLevel >= 0) { "Negative relative block index" }
         buildInstr(brOp, location, WasmImmediate.LabelIdx(relativeLevel), WasmImmediate.HeapType(WasmHeapType.Type(symbol)))
     }

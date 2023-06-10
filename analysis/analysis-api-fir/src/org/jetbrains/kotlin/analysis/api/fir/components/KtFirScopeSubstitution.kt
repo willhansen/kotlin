@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.analysis.api.scopes.KtTypeScope
 import org.jetbrains.kotlin.analysis.utils.errors.unexpectedElementError
 
 internal class KtFirScopeSubstitution(
-    override val analysisSession: KtFirAnalysisSession,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtScopeSubstitution(), KtFirAnalysisSessionComponent {
 
     @OptIn(KtAnalysisApiInternals::class)

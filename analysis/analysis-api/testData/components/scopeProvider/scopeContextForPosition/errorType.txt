@@ -50,7 +50,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -96,7 +96,7 @@ scopes:
           type: T
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -144,7 +144,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -192,7 +192,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -219,7 +219,7 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   LocalScope, index = 4, empty
@@ -289,7 +289,7 @@ scopes:
         typeParameters: [
           KtTypeParameterSymbol(E)
         ]
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -350,7 +350,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   DefaultSimpleImportingScope, index = 9

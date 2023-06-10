@@ -4,11 +4,11 @@ class A() {
 
     private object Foo {
         fun foo() = "O"
-        val foov = "K"
+        konst foov = "K"
 
         public object Bar {
             fun bar() = foo()
-            val barv = foov
+            konst barv = foov
         }
     }
 }

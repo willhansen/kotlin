@@ -8,7 +8,7 @@
 
 import kotlin.test.*
 
-annotation class A(val i: Int)
+annotation class A(konst i: Int)
 
 inline fun foo(i: Int): A = A(i)
 
@@ -20,8 +20,8 @@ class C {
 }
 
 fun box(): String {
-    val one = C().one()
-    val two = C().two()
+    konst one = C().one()
+    konst two = C().two()
     assertEquals(1, one.i)
     assertEquals(2, two.i)
     assertEquals(A(1), one)

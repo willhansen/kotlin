@@ -1,7 +1,7 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 fun String.f(x: String): String {
-    fun String.g() = eval { this@f + this@g }
+    fun String.g() = ekonst { this@f + this@g }
     return x.g()
 }
 

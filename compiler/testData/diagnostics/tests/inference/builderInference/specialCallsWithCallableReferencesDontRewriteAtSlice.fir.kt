@@ -13,15 +13,15 @@ fun <K> K.foo3(): K = null as K
 fun bar2(): Int = 1
 fun foo2(): Float = 1f
 
-val bar4: Int
+konst bar4: Int
     get() = 1
 
 var foo4: Float
     get() = 1f
-    set(value) {}
+    set(konstue) {}
 
-val <K> FlowCollector<K>.bar5: K get() = null as K
-val <K> FlowCollector<K>.foo5: K get() = null as K
+konst <K> FlowCollector<K>.bar5: K get() = null as K
+konst <K> FlowCollector<K>.foo5: K get() = null as K
 
 class Foo6
 
@@ -32,46 +32,46 @@ interface FlowCollector<in T> {}
 
 fun <L> flow(block: suspend FlowCollector<L>.() -> Unit) = Flow(block)
 
-class Flow<out R>(private val block: suspend FlowCollector<R>.() -> Unit)
+class Flow<out R>(private konst block: suspend FlowCollector<R>.() -> Unit)
 
 fun poll71(): Flow<String> {
     return flow {
-        val inv = ::bar2<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
+        konst inv = ::bar2<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
         inv()
     }
 }
 
 fun poll73(): Flow<String> {
     return flow {
-        val inv = ::bar4<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
+        konst inv = ::bar4<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
         inv
     }
 }
 
 fun poll75(): Flow<String> {
     return flow {
-        val inv = ::Foo6<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
+        konst inv = ::Foo6<!NOT_NULL_ASSERTION_ON_CALLABLE_REFERENCE!>!!<!>
         inv
     }
 }
 
 fun poll81(): Flow<String> {
     return flow {
-        val inv = ::bar2 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> setOf(::foo2)
+        konst inv = ::bar2 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> setOf(::foo2)
         <!UNRESOLVED_REFERENCE!>inv<!>()
     }
 }
 
 fun poll83(): Flow<String> {
     return flow {
-        val inv = ::bar4 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> setOf(::foo4)
+        konst inv = ::bar4 <!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>in<!> setOf(::foo4)
         inv
     }
 }
 
 fun poll85(): Flow<String> {
     return flow {
-        val inv = ::Foo6 in setOf(::Foo6)
+        konst inv = ::Foo6 in setOf(::Foo6)
         inv
     }
 }

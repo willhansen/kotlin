@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir.types.IrType
 internal interface IntermediateValue {
     fun load(): IrExpression
     fun loadIfExists(): IrExpression? = load()
-    val type: IrType
+    konst type: IrType
 }
 
 internal interface LValue : IntermediateValue {
@@ -31,7 +31,7 @@ internal interface LValue : IntermediateValue {
 
 internal interface AssignmentReceiver {
     fun assign(withLValue: (LValue) -> IrExpression): IrExpression
-    fun assign(value: IrExpression): IrExpression = assign { it.store(value) }
+    fun assign(konstue: IrExpression): IrExpression = assign { it.store(konstue) }
 }
 
 internal fun interface CallExpressionBuilder {

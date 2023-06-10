@@ -5,19 +5,19 @@
 
 fun case1() {
     var name: Any? = null
-    val men = arrayListOf(Person("Phill"), Person(), Person("Bob"))
+    konst men = arrayListOf(Person("Phill"), Person(), Person("Bob"))
     for (k in men) {
         k.name
         loop@ for (i in men) {
             i.name
-            val valeua : Int =     break@loop
+            konst konsteua : Int =     break@loop
             i.name
         }
         k.name
-        val s = k.name ?: break
+        konst s = k.name ?: break
         k.name
     }
-    val a = 1
+    konst a = 1
 }
 
 class Person(var name: String? = null) {}
@@ -26,33 +26,33 @@ class Person(var name: String? = null) {}
 
 fun case2() {
     var name: Any? = null
-    val men = arrayListOf(Person("Phill"), Person(), Person("Bob"))
+    konst men = arrayListOf(Person("Phill"), Person(), Person("Bob"))
     for (k in men) {
         loop@ for (i in men) {
             i.name
-            val val1 =    continue@loop
-            val1
+            konst konst1 =    continue@loop
+            konst1
             i.name
         }
-        val s = k.name ?: continue
+        konst s = k.name ?: continue
         k.name
     }
-    val a = 1
+    konst a = 1
 }
 
 // TESTCASE NUMBER: 3
 
 fun case3() {
     listOf(1, 2, 3, 4, 5).forEach { x ->
-        val k = x
+        konst k = x
 
         listOf(1, 2, 3, 4, 5).forEach lit@{
             it
             return@lit
             print(it)
         }
-        val y = x
+        konst y = x
         if (x == 3) return
     }
-    val a = 1
+    konst a = 1
 }

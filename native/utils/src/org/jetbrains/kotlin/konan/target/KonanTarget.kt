@@ -8,10 +8,10 @@ package org.jetbrains.kotlin.konan.target
 import org.jetbrains.kotlin.konan.util.Named
 import java.io.Serializable
 
-private const val DEPRECATION_LINK = "https://kotl.in/native-targets-tiers"
-const val DEPRECATED_TARGET_MESSAGE = "Target is no longer available. See: $DEPRECATION_LINK"
+private const konst DEPRECATION_LINK = "https://kotl.in/native-targets-tiers"
+const konst DEPRECATED_TARGET_MESSAGE = "Target is no longer available. See: $DEPRECATION_LINK"
 
-sealed class KonanTarget(override val name: String, val family: Family, val architecture: Architecture) : Named, Serializable {
+sealed class KonanTarget(override konst name: String, konst family: Family, konst architecture: Architecture) : Named, Serializable {
     object ANDROID_X64 : KonanTarget("android_x64", Family.ANDROID, Architecture.X64)
     object ANDROID_X86 : KonanTarget("android_x86", Family.ANDROID, Architecture.X86)
     object ANDROID_ARM32 : KonanTarget("android_arm32", Family.ANDROID, Architecture.ARM32)
@@ -44,14 +44,14 @@ sealed class KonanTarget(override val name: String, val family: Family, val arch
     object WASM32 : KonanTarget("wasm32", Family.WASM, Architecture.WASM32)
 
     // Tunable targets
-    class ZEPHYR(val subName: String, val genericName: String = "zephyr") :
+    class ZEPHYR(konst subName: String, konst genericName: String = "zephyr") :
         KonanTarget("${genericName}_$subName", Family.ZEPHYR, Architecture.ARM32)
 
     override fun toString() = name
 
     companion object {
         // TODO: need a better way to enumerated predefined targets.
-        val predefinedTargets: Map<String, KonanTarget> by lazy {
+        konst predefinedTargets: Map<String, KonanTarget> by lazy {
             listOf(
                 ANDROID_X64, ANDROID_X86, ANDROID_ARM32, ANDROID_ARM64,
                 IOS_ARM32, IOS_ARM64, IOS_X64, IOS_SIMULATOR_ARM64,
@@ -66,6 +66,6 @@ sealed class KonanTarget(override val name: String, val family: Family, val arch
             ).associateBy { it.name }
         }
 
-        val deprecatedTargets = setOf(WATCHOS_X86, IOS_ARM32, LINUX_ARM32_HFP, MINGW_X86, LINUX_MIPS32, LINUX_MIPSEL32, WASM32)
+        konst deprecatedTargets = setOf(WATCHOS_X86, IOS_ARM32, LINUX_ARM32_HFP, MINGW_X86, LINUX_MIPS32, LINUX_MIPSEL32, WASM32)
     }
 }

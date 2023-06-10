@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.test.utils.isLLFirTestData
 
 class LLFirDivergenceCommentChecker(testServices: TestServices) : AfterAnalysisChecker(testServices) {
     override fun check(failedAssertions: List<WrappedException>) {
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
         if (!testDataFile.isLLFirTestData) return
 
         if (!testDataFile.hasLlFirDivergenceDirective()) {

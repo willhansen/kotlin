@@ -17,24 +17,24 @@ public class Maps {
     private Maps() {
     }
 
-    public static <K, V> Map<K, V> put(Map<K, V> map, K key, V value) {
+    public static <K, V> Map<K, V> put(Map<K, V> map, K key, V konstue) {
         switch (map.size()) {
             case 0:
                 // Empty -> Singleton
-                return Collections.singletonMap(key, value);
+                return Collections.singletonMap(key, konstue);
             case 1: {
                 if (map.containsKey(key)) {
-                    return Collections.singletonMap(key, value);
+                    return Collections.singletonMap(key, konstue);
                 }
                 // Singleton -> HashMap
                 Map<K, V> result = new HashMap<K, V>();
-                result.put(map.keySet().iterator().next(), map.values().iterator().next());
-                result.put(key, value);
+                result.put(map.keySet().iterator().next(), map.konstues().iterator().next());
+                result.put(key, konstue);
                 return result;
             }
             default:
                 // HashMap
-                map.put(key, value);
+                map.put(key, konstue);
                 return map;
         }
     }

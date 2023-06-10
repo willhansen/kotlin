@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import java.io.File
 
 open class JsAnalysisResult(
-        val bindingTrace: BindingTrace,
+        konst bindingTrace: BindingTrace,
         moduleDescriptor: ModuleDescriptor,
         shouldGenerateCode: Boolean
 ) : AnalysisResult(bindingTrace.bindingContext, moduleDescriptor, shouldGenerateCode) {
@@ -40,6 +40,6 @@ open class JsAnalysisResult(
     class RetryWithAdditionalRoots(
         bindingTrace: BindingTrace,
         moduleDescriptor: ModuleDescriptor,
-        val additionalKotlinRoots: List<File>,
+        konst additionalKotlinRoots: List<File>,
     ) : JsAnalysisResult(bindingTrace, moduleDescriptor,false)
 }

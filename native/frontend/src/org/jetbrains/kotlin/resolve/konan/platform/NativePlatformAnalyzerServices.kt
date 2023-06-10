@@ -14,9 +14,9 @@ object NativePlatformAnalyzerServices : PlatformDependentAnalyzerServices() {
         result.add(ImportPath.fromString("kotlin.native.*"))
     }
 
-    override val platformConfigurator: PlatformConfigurator = NativePlatformConfigurator
+    override konst platformConfigurator: PlatformConfigurator = NativePlatformConfigurator
 
-    override val excludedImports: List<FqName> =
+    override konst excludedImports: List<FqName> =
         listOf("identityHashCode").map {
             FqName("kotlin.native.$it")
         }

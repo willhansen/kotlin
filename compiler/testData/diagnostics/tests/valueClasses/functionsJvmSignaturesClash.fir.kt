@@ -8,15 +8,15 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class X(val x: Int)
+konstue class X(konst x: Int)
 @JvmInline
-value class Z(val x: Int)
+konstue class Z(konst x: Int)
 @JvmInline
-value class Str(val str: String)
+konstue class Str(konst str: String)
 @JvmInline
-value class Name(val name: String)
+konstue class Name(konst name: String)
 @JvmInline
-value class NStr(val str: String?)
+konstue class NStr(konst str: String?)
 
 fun testSimple(x: X) {}
 fun testSimple(z: Z) {}

@@ -28,7 +28,7 @@ public class FluentTest {
 // FILE: test.kt
 
 fun box(): String {
-    val obj = FluentTest()
+    konst obj = FluentTest()
     assertEquals(obj.age(), 10)
 
     obj.primitiveBoolean()

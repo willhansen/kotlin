@@ -22,8 +22,8 @@ fun Project.configureSbom(
     gradleConfigurations: Iterable<String> = setOf("runtimeClasspath"),
     publication: NamedDomainObjectProvider<MavenPublication>? = null
 ): TaskProvider<SpdxSbomTask> {
-    val project = this
-    val targetName = target ?: "${mainPublicationName}Publication"
+    konst project = this
+    konst targetName = target ?: "${mainPublicationName}Publication"
     apply<SpdxSbomPlugin>()
 
     configure<SpdxSbomExtension> {
@@ -47,14 +47,14 @@ fun Project.configureSbom(
         }
     }
 
-    val spdxSbomTask = tasks.named<SpdxSbomTask>("spdxSbomFor$targetName")
-    val sbomFile = layout.buildDirectory.file("spdx/$targetName.spdx.json")
-    val sbomCfg = configurations.maybeCreate("sbomFor$targetName").apply {
+    konst spdxSbomTask = tasks.named<SpdxSbomTask>("spdxSbomFor$targetName")
+    konst sbomFile = layout.buildDirectory.file("spdx/$targetName.spdx.json")
+    konst sbomCfg = configurations.maybeCreate("sbomFor$targetName").apply {
         isCanBeResolved = false
         isCanBeConsumed = true
     }
 
-    val sbomArtifact = artifacts.add(sbomCfg.name, sbomFile) {
+    konst sbomArtifact = artifacts.add(sbomCfg.name, sbomFile) {
         type = "sbom"
         extension = "spdx.json"
         builtBy(spdxSbomTask)
@@ -62,7 +62,7 @@ fun Project.configureSbom(
 
     if (target == null) {
         pluginManager.withPlugin("kotlin-build-publishing") {
-            val mainPublication = the<PublishingExtension>().publications[mainPublicationName] as MavenPublication
+            konst mainPublication = the<PublishingExtension>().publications[mainPublicationName] as MavenPublication
             mainPublication.artifact(sbomArtifact)
         }
     } else if (publication != null) {

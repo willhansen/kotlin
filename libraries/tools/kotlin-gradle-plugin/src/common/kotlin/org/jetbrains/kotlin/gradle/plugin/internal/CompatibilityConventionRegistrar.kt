@@ -33,6 +33,6 @@ internal class DefaultCompatibilityConventionRegistrar : CompatibilityConvention
     }
 }
 
-internal val Project.compatibilityConventionRegistrar
+internal konst Project.compatibilityConventionRegistrar
     get() = variantImplementationFactory<CompatibilityConventionRegistrar.Factory>()
         .getInstance()

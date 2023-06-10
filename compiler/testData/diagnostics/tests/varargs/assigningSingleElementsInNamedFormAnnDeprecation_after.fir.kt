@@ -3,28 +3,28 @@
 // FILE: JavaAnn.java
 
 @interface JavaAnn {
-    String[] value() default {};
+    String[] konstue() default {};
     String[] path() default {};
 }
 
 // FILE: test.kt
 
-annotation class Ann(vararg val s: String)
+annotation class Ann(vararg konst s: String)
 
-@Ann(s = <!ARGUMENT_TYPE_MISMATCH, ASSIGNING_SINGLE_ELEMENT_TO_VARARG_IN_NAMED_FORM_ANNOTATION_ERROR!>"value"<!>)
+@Ann(s = <!ARGUMENT_TYPE_MISMATCH, ASSIGNING_SINGLE_ELEMENT_TO_VARARG_IN_NAMED_FORM_ANNOTATION_ERROR!>"konstue"<!>)
 fun test1() {}
 
-@Ann(s = *<!REDUNDANT_SPREAD_OPERATOR_IN_NAMED_FORM_IN_ANNOTATION!>arrayOf("value")<!>)
+@Ann(s = *<!REDUNDANT_SPREAD_OPERATOR_IN_NAMED_FORM_IN_ANNOTATION!>arrayOf("konstue")<!>)
 fun test2() {}
 
-@Ann(s = *<!REDUNDANT_SPREAD_OPERATOR_IN_NAMED_FORM_IN_ANNOTATION!>["value"]<!>)
+@Ann(s = *<!REDUNDANT_SPREAD_OPERATOR_IN_NAMED_FORM_IN_ANNOTATION!>["konstue"]<!>)
 fun test3() {}
 
-@JavaAnn(value = <!ARGUMENT_TYPE_MISMATCH, ASSIGNING_SINGLE_ELEMENT_TO_VARARG_IN_NAMED_FORM_ANNOTATION_ERROR!>"value"<!>)
+@JavaAnn(konstue = <!ARGUMENT_TYPE_MISMATCH, ASSIGNING_SINGLE_ELEMENT_TO_VARARG_IN_NAMED_FORM_ANNOTATION_ERROR!>"konstue"<!>)
 fun test4() {}
 
-@JavaAnn("value", path = arrayOf("path"))
+@JavaAnn("konstue", path = arrayOf("path"))
 fun test5() {}
 
-@JavaAnn("value", path = ["path"])
+@JavaAnn("konstue", path = ["path"])
 fun test6() {}

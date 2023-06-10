@@ -1,10 +1,10 @@
-val String.id: String
+konst String.id: String
     get() = this
 
 fun box(): String {
-    val pr = String::id
+    konst pr = String::id
 
-    if (pr.get("123") != "123") return "Fail value: ${pr.get("123")}"
+    if (pr.get("123") != "123") return "Fail konstue: ${pr.get("123")}"
 
     if (pr.name != "id") return "Fail name: ${pr.name}"
 

@@ -24,7 +24,7 @@ fun ConstraintStorage.buildResultingSubstitutor(
     return buildAbstractResultingSubstitutor(context, transformTypeVariablesToErrorTypes) as NewTypeSubstitutor
 }
 
-val CallableDescriptor.returnTypeOrNothing: UnwrappedType
+konst CallableDescriptor.returnTypeOrNothing: UnwrappedType
     get() {
         returnType?.let { return it.unwrap() }
 
@@ -36,7 +36,7 @@ fun TypeSubstitutor.substitute(type: UnwrappedType): UnwrappedType = safeSubstit
 fun CallableDescriptor.substitute(substitutor: NewTypeSubstitutor): CallableDescriptor {
     if (substitutor.isEmpty) return this
 
-    val wrappedSubstitution = object : TypeSubstitution() {
+    konst wrappedSubstitution = object : TypeSubstitution() {
         override fun get(key: KotlinType): TypeProjection? = null
         override fun prepareTopLevelType(topLevelType: KotlinType, position: Variance) = substitutor.safeSubstitute(topLevelType.unwrap())
     }
@@ -50,7 +50,7 @@ fun CallableDescriptor.substituteAndApproximateTypes(
 ): CallableDescriptor {
     if (substitutor.isEmpty) return this
 
-    val wrappedSubstitution = object : TypeSubstitution() {
+    konst wrappedSubstitution = object : TypeSubstitution() {
         override fun get(key: KotlinType): TypeProjection? = null
 
         override fun prepareTopLevelType(topLevelType: KotlinType, position: Variance) =

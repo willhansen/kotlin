@@ -3,14 +3,14 @@ abstract class My {
         <!REDUNDANT_MODIFIER_IN_GETTER!>public<!> get
         <!PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY!>private<!> set
 
-    abstract val y: Int
+    abstract konst y: Int
         <!GETTER_VISIBILITY_DIFFERS_FROM_PROPERTY_VISIBILITY!>protected<!> get
 
     abstract protected var z: Int
         <!GETTER_VISIBILITY_DIFFERS_FROM_PROPERTY_VISIBILITY!>internal<!> get
         <!PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY!>private<!> set
 
-    abstract internal val w: Int
+    abstract internal konst w: Int
         <!GETTER_VISIBILITY_DIFFERS_FROM_PROPERTY_VISIBILITY!>protected<!> get
 
     abstract var u: Int

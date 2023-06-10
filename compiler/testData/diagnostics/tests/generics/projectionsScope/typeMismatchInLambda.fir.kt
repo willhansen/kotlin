@@ -12,7 +12,7 @@ class A<E> {
 
 fun test(a: A<out CharSequence>, z: Out<CharSequence>) {
     a.foo {
-        val x: String = <!INITIALIZER_TYPE_MISMATCH!>1<!> // Should be no TYPE_MISMATCH_DUE_TO_TYPE_PROJECTIONS
+        konst x: String = <!INITIALIZER_TYPE_MISMATCH!>1<!> // Should be no TYPE_MISMATCH_DUE_TO_TYPE_PROJECTIONS
         <!ARGUMENT_TYPE_MISMATCH!>""<!>
     }
     a.bar { <!ARGUMENT_TYPE_MISMATCH, TYPE_MISMATCH!>Out<CharSequence>()<!> }

@@ -5,8 +5,8 @@
 @file:JvmName("Test")
 package test
 
-sealed class Foo(val value: String)
+sealed class Foo(konst konstue: String)
 
 class Bar : Foo("OK")
 
-fun box(): String = Bar().value
+fun box(): String = Bar().konstue

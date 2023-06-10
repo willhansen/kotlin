@@ -5,25 +5,25 @@
 class C {
 
     OPTIONAL_JVM_INLINE_ANNOTATION
-    value class IC1(val s: String)
+    konstue class IC1(konst s: String)
 
     companion object {
 
         OPTIONAL_JVM_INLINE_ANNOTATION
-        value class IC2(val s: String)
+        konstue class IC2(konst s: String)
     }
 }
 
 object O {
 
     OPTIONAL_JVM_INLINE_ANNOTATION
-    value class IC3(val s: String)
+    konstue class IC3(konst s: String)
 }
 
 interface I {
 
     OPTIONAL_JVM_INLINE_ANNOTATION
-    value class IC4(val s: String)
+    konstue class IC4(konst s: String)
 }
 
 fun box(): String {

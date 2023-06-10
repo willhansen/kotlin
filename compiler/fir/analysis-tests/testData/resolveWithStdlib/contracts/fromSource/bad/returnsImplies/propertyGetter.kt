@@ -10,7 +10,7 @@ fun Any?.isNotNull(): Boolean {
 }
 
 @OptIn(ExperimentalContracts::class)
-val Any?.isNotNull: Boolean
+konst Any?.isNotNull: Boolean
     get() {
         <!CONTRACT_NOT_ALLOWED!>contract<!> {
             returns(true) implies (this@isNotNull != null)

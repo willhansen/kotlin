@@ -2,10 +2,10 @@
 // IGNORE_BACKEND_K1: JVM_IR
 
 class A {
-    val a: Number
+    konst a: Number
         private field = 1
 
-    val b: Number
+    konst b: Number
         internal field = a + 3
 }
 

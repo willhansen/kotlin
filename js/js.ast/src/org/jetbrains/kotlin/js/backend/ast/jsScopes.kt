@@ -35,14 +35,14 @@ open class JsDeclarationScope(parent: JsScope, description: String, useParentSco
     private var labelScopesImpl: ArrayList<LabelScope>? =
         if (parent is JsDeclarationScope && useParentScopeStack) parent.labelScopesImpl else null
 
-    private val topLabelScope
+    private konst topLabelScope
         get() = labelScopesImpl?.let { if (it.isNotEmpty()) it.last() else null }
 
-    private val labelScopes: ArrayList<LabelScope>
+    private konst labelScopes: ArrayList<LabelScope>
         get() = labelScopesImpl ?: ArrayList<LabelScope>().also { labelScopesImpl = it }
 
     open fun enterLabel(label: String, outputName: String): JsName {
-        val scope = LabelScope(topLabelScope, label, outputName)
+        konst scope = LabelScope(topLabelScope, label, outputName)
         labelScopes.add(scope)
         return scope.labelName
     }
@@ -57,8 +57,8 @@ open class JsDeclarationScope(parent: JsScope, description: String, useParentSco
     open fun findLabel(label: String): JsName? =
             topLabelScope?.findName(label)
 
-    private inner class LabelScope(parent: LabelScope?, val ident: String, outputIdent: String) : JsScope(parent, "Label scope for $ident") {
-        val labelName: JsName = JsName(outputIdent, true)
+    private inner class LabelScope(parent: LabelScope?, konst ident: String, outputIdent: String) : JsScope(parent, "Label scope for $ident") {
+        konst labelName: JsName = JsName(outputIdent, true)
 
         override fun findOwnName(name: String): JsName? =
                 if (name == ident) labelName else null
@@ -76,7 +76,7 @@ open class JsDeclarationScope(parent: JsScope, description: String, useParentSco
     }
 
     companion object {
-        val RESERVED_WORDS: Set<String> = RESERVED_KEYWORDS + setOf(
+        konst RESERVED_WORDS: Set<String> = RESERVED_KEYWORDS + setOf(
                 // global identifiers usually declared in a typical JS interpreter
                 "NaN", "isNaN", "Infinity", "undefined",
                 "Error", "Object", "Math", "String", "Number", "Boolean", "Date", "Array", "RegExp", "JSON",
@@ -91,7 +91,7 @@ open class JsDeclarationScope(parent: JsScope, description: String, useParentSco
 }
 
 class DelegatingJsFunctionScopeWithTemporaryParent(
-        private val delegatingScope: JsFunctionScope,
+        private konst delegatingScope: JsFunctionScope,
         parent: JsScope
 ) : JsFunctionScope(parent, "<delegating scope to delegatingScope>") {
 

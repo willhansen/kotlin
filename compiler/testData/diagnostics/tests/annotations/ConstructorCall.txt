@@ -1,7 +1,7 @@
 package
 
-@Ann2(a = Ann1(a = 1)) public val a: kotlin.Int = 1
-@Ann2(a = Ann1(a = 1)) public val c: kotlin.Int = 2
+@Ann2(a = Ann1(a = 1)) public konst a: kotlin.Int = 1
+@Ann2(a = Ann1(a = 1)) public konst c: kotlin.Int = 2
 public fun bar(/*0*/ a: Ann = ...): kotlin.Unit
 public fun foo(): kotlin.Unit
 public fun </*0*/ T> javaClass(): java.lang.Class<T>
@@ -16,7 +16,7 @@ public final annotation class Ann : kotlin.Annotation {
 
 public final annotation class Ann1 : kotlin.Annotation {
     public constructor Ann1(/*0*/ a: kotlin.Int)
-    public final val a: kotlin.Int
+    public final konst a: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -24,7 +24,7 @@ public final annotation class Ann1 : kotlin.Annotation {
 
 public final annotation class Ann2 : kotlin.Annotation {
     public constructor Ann2(/*0*/ a: Ann1)
-    public final val a: Ann1
+    public final konst a: Ann1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -32,21 +32,21 @@ public final annotation class Ann2 : kotlin.Annotation {
 
 public final annotation class Ann3 : kotlin.Annotation {
     public constructor Ann3(/*0*/ a: Ann1 = ...)
-    public final val a: Ann1
+    public final konst a: Ann1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final annotation class Ann4 : kotlin.Annotation {
-    public constructor Ann4(/*0*/ value: kotlin.String)
-    public final val value: kotlin.String
+    public constructor Ann4(/*0*/ konstue: kotlin.String)
+    public final konst konstue: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@Ann4(value = "a") public final class MyClass {
+@Ann4(konstue = "a") public final class MyClass {
     public constructor MyClass()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.utils.addToStdlib.partitionIsInstance
  */
 public class SublistMerger<A : Any>(
     initialElements: List<A>,
-    public val destination: MutableList<A>,
+    public konst destination: MutableList<A>,
 ) {
     public var remainingElements: List<A> = initialElements
 
     public inline fun <reified R : A> merge(create: (List<R>) -> A?) {
-        val (specificElements, remainingElements) = this.remainingElements.partitionIsInstance<_, R>()
+        konst (specificElements, remainingElements) = this.remainingElements.partitionIsInstance<_, R>()
         destination.addIfNotNull(create(specificElements))
         this.remainingElements = remainingElements
     }

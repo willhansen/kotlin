@@ -9,7 +9,7 @@ import d.M.T
 import d.M.Y
 
 var r: T = T()
-val y: T = Y
+konst y: T = Y
 
 fun f() {
     bar()

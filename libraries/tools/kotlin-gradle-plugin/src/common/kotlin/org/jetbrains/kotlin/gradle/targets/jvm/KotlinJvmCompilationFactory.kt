@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.utils.*
 
 open class KotlinJvmCompilationFactory internal constructor(
-    override val target: KotlinJvmTarget
+    override konst target: KotlinJvmTarget
 ) : KotlinCompilationFactory<KotlinJvmCompilation> {
 
-    private val compilationImplFactory: KotlinCompilationImplFactory =
+    private konst compilationImplFactory: KotlinCompilationImplFactory =
         KotlinCompilationImplFactory(
             compilerOptionsFactory = KotlinJvmCompilerOptionsFactory,
             compilationAssociator = KotlinJvmCompilationAssociator
         )
 
-    override val itemClass: Class<KotlinJvmCompilation>
+    override konst itemClass: Class<KotlinJvmCompilation>
         get() = KotlinJvmCompilation::class.java
 
     override fun create(name: String): KotlinJvmCompilation {

@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.native.interop.gen.jvm.DefaultPlugin
 import org.jetbrains.kotlin.native.interop.gen.jvm.Plugin
 import org.jetbrains.kotlin.native.interop.indexer.*
 
-val EnumDef.isAnonymous: Boolean
+konst EnumDef.isAnonymous: Boolean
     get() = spelling.contains("(anonymous ") // TODO: it is a hack
 
-val StructDecl.isAnonymous: Boolean
+konst StructDecl.isAnonymous: Boolean
     get() = spelling.contains("(anonymous ") // TODO: it is a hack
 
 /**
@@ -71,7 +71,7 @@ fun getPointerTypeStringRepresentation(pointee: Type): String =
         (getStringRepresentationOfPointee(pointee) ?: "void") + "*"
 
 private fun getStringRepresentationOfPointee(type: Type): String? {
-    val unwrapped = type.unwrapTypedefs()
+    konst unwrapped = type.unwrapTypedefs()
 
     return when (unwrapped) {
         is PrimitiveType -> unwrapped.getStringRepresentation()
@@ -85,7 +85,7 @@ private fun getStringRepresentationOfPointee(type: Type): String? {
     }
 }
 
-private val ObjCQualifiedPointer.protocolQualifier: String
+private konst ObjCQualifiedPointer.protocolQualifier: String
     get() = if (this.protocols.isEmpty()) "" else " <${protocols.joinToString { it.name }}>"
 
 fun blockTypeStringRepresentation(type: ObjCBlockPointer): String {
@@ -93,7 +93,7 @@ fun blockTypeStringRepresentation(type: ObjCBlockPointer): String {
         append(type.returnType.getStringRepresentation())
         append("(^)")
         append("(")
-        val blockParameters = if (type.parameterTypes.isEmpty()) {
+        konst blockParameters = if (type.parameterTypes.isEmpty()) {
             "void"
         } else {
             type.parameterTypes.joinToString { it.getStringRepresentation() }

@@ -5,9 +5,9 @@
 
 package test
 abstract class Introspector {
-    abstract inner class SchemaRetriever(val transaction: String) {
+    abstract inner class SchemaRetriever(konst transaction: String) {
         inline fun inSchema(crossinline modifier: (String) -> Unit)
-          { val lambda = { modifier.invoke(transaction) }; lambda() }
+          { konst lambda = { modifier.invoke(transaction) }; lambda() }
     }
 }
 

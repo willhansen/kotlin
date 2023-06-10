@@ -107,10 +107,10 @@ public fun <T> Iterable<T>.elementAtOrElse(index: Int, defaultValue: (Int) -> T)
         return this.getOrElse(index, defaultValue)
     if (index < 0)
         return defaultValue(index)
-    val iterator = iterator()
+    konst iterator = iterator()
     var count = 0
     while (iterator.hasNext()) {
-        val element = iterator.next()
+        konst element = iterator.next()
         if (index == count++)
             return element
     }
@@ -137,10 +137,10 @@ public fun <T> Iterable<T>.elementAtOrNull(index: Int): T? {
         return this.getOrNull(index)
     if (index < 0)
         return null
-    val iterator = iterator()
+    konst iterator = iterator()
     var count = 0
     while (iterator.hasNext()) {
-        val element = iterator.next()
+        konst element = iterator.next()
         if (index == count++)
             return element
     }
@@ -196,7 +196,7 @@ public fun <T> Iterable<T>.first(): T {
     when (this) {
         is List -> return this.first()
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 throw NoSuchElementException("Collection is empty.")
             return iterator.next()
@@ -225,20 +225,20 @@ public inline fun <T> Iterable<T>.first(predicate: (T) -> Boolean): T {
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to elements of this collection in iteration order,
- * or throws [NoSuchElementException] if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to elements of this collection in iteration order,
+ * or throws [NoSuchElementException] if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
 @SinceKotlin("1.5")
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Any> Iterable<T>.firstNotNullOf(transform: (T) -> R?): R {
-    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the collection was transformed to a non-null value.")
+    return firstNotNullOfOrNull(transform) ?: throw NoSuchElementException("No element of the collection was transformed to a non-null konstue.")
 }
 
 /**
- * Returns the first non-null value produced by [transform] function being applied to elements of this collection in iteration order,
- * or `null` if no non-null value was produced.
+ * Returns the first non-null konstue produced by [transform] function being applied to elements of this collection in iteration order,
+ * or `null` if no non-null konstue was produced.
  * 
  * @sample samples.collections.Collections.Transformations.firstNotNullOf
  */
@@ -246,7 +246,7 @@ public inline fun <T, R : Any> Iterable<T>.firstNotNullOf(transform: (T) -> R?):
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Any> Iterable<T>.firstNotNullOfOrNull(transform: (T) -> R?): R? {
     for (element in this) {
-        val result = transform(element)
+        konst result = transform(element)
         if (result != null) {
             return result
         }
@@ -266,7 +266,7 @@ public fun <T> Iterable<T>.firstOrNull(): T? {
                 return this[0]
         }
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 return null
             return iterator.next()
@@ -375,7 +375,7 @@ public inline fun <T> Iterable<T>.indexOfLast(predicate: (T) -> Boolean): Int {
  * Returns index of the last element matching the given [predicate], or -1 if the list does not contain such element.
  */
 public inline fun <T> List<T>.indexOfLast(predicate: (T) -> Boolean): Int {
-    val iterator = this.listIterator(size)
+    konst iterator = this.listIterator(size)
     while (iterator.hasPrevious()) {
         if (predicate(iterator.previous())) {
             return iterator.nextIndex()
@@ -395,7 +395,7 @@ public fun <T> Iterable<T>.last(): T {
     when (this) {
         is List -> return this.last()
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 throw NoSuchElementException("Collection is empty.")
             var last = iterator.next()
@@ -448,9 +448,9 @@ public inline fun <T> Iterable<T>.last(predicate: (T) -> Boolean): T {
  * @sample samples.collections.Collections.Elements.last
  */
 public inline fun <T> List<T>.last(predicate: (T) -> Boolean): T {
-    val iterator = this.listIterator(size)
+    konst iterator = this.listIterator(size)
     while (iterator.hasPrevious()) {
-        val element = iterator.previous()
+        konst element = iterator.previous()
         if (predicate(element)) return element
     }
     throw NoSuchElementException("List contains no element matching the predicate.")
@@ -489,7 +489,7 @@ public fun <T> Iterable<T>.lastOrNull(): T? {
     when (this) {
         is List -> return if (isEmpty()) null else this[size - 1]
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 return null
             var last = iterator.next()
@@ -530,9 +530,9 @@ public inline fun <T> Iterable<T>.lastOrNull(predicate: (T) -> Boolean): T? {
  * @sample samples.collections.Collections.Elements.last
  */
 public inline fun <T> List<T>.lastOrNull(predicate: (T) -> Boolean): T? {
-    val iterator = this.listIterator(size)
+    konst iterator = this.listIterator(size)
     while (iterator.hasPrevious()) {
-        val element = iterator.previous()
+        konst element = iterator.previous()
         if (predicate(element)) return element
     }
     return null
@@ -589,10 +589,10 @@ public fun <T> Iterable<T>.single(): T {
     when (this) {
         is List -> return this.single()
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 throw NoSuchElementException("Collection is empty.")
-            val single = iterator.next()
+            konst single = iterator.next()
             if (iterator.hasNext())
                 throw IllegalArgumentException("Collection has more than one element.")
             return single
@@ -636,10 +636,10 @@ public fun <T> Iterable<T>.singleOrNull(): T? {
     when (this) {
         is List -> return if (size == 1) this[0] else null
         else -> {
-            val iterator = iterator()
+            konst iterator = iterator()
             if (!iterator.hasNext())
                 return null
-            val single = iterator.next()
+            konst single = iterator.next()
             if (iterator.hasNext())
                 return null
             return single
@@ -681,9 +681,9 @@ public inline fun <T> Iterable<T>.singleOrNull(predicate: (T) -> Boolean): T? {
 public fun <T> Iterable<T>.drop(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return toList()
-    val list: ArrayList<T>
+    konst list: ArrayList<T>
     if (this is Collection<*>) {
-        val resultSize = size - n
+        konst resultSize = size - n
         if (resultSize <= 0)
             return emptyList()
         if (resultSize == 1)
@@ -729,7 +729,7 @@ public fun <T> List<T>.dropLast(n: Int): List<T> {
  */
 public inline fun <T> List<T>.dropLastWhile(predicate: (T) -> Boolean): List<T> {
     if (!isEmpty()) {
-        val iterator = listIterator(size)
+        konst iterator = listIterator(size)
         while (iterator.hasPrevious()) {
             if (!predicate(iterator.previous())) {
                 return take(iterator.nextIndex() + 1)
@@ -746,7 +746,7 @@ public inline fun <T> List<T>.dropLastWhile(predicate: (T) -> Boolean): List<T> 
  */
 public inline fun <T> Iterable<T>.dropWhile(predicate: (T) -> Boolean): List<T> {
     var yielding = false
-    val list = ArrayList<T>()
+    konst list = ArrayList<T>()
     for (item in this)
         if (yielding)
             list.add(item)
@@ -769,7 +769,7 @@ public inline fun <T> Iterable<T>.filter(predicate: (T) -> Boolean): List<T> {
 /**
  * Returns a list containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -780,7 +780,7 @@ public inline fun <T> Iterable<T>.filterIndexed(predicate: (index: Int, T) -> Bo
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -870,9 +870,9 @@ public fun <T> List<T>.slice(indices: IntRange): List<T> {
  * Returns a list containing elements at specified [indices].
  */
 public fun <T> List<T>.slice(indices: Iterable<Int>): List<T> {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
-    val list = ArrayList<T>(size)
+    konst list = ArrayList<T>(size)
     for (index in indices) {
         list.add(get(index))
     }
@@ -894,7 +894,7 @@ public fun <T> Iterable<T>.take(n: Int): List<T> {
         if (n == 1) return listOf(first())
     }
     var count = 0
-    val list = ArrayList<T>(n)
+    konst list = ArrayList<T>(n)
     for (item in this) {
         list.add(item)
         if (++count == n)
@@ -913,10 +913,10 @@ public fun <T> Iterable<T>.take(n: Int): List<T> {
 public fun <T> List<T>.takeLast(n: Int): List<T> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
-    val size = size
+    konst size = size
     if (n >= size) return toList()
     if (n == 1) return listOf(last())
-    val list = ArrayList<T>(n)
+    konst list = ArrayList<T>(n)
     if (this is RandomAccess) {
         for (index in size - n until size)
             list.add(this[index])
@@ -935,11 +935,11 @@ public fun <T> List<T>.takeLast(n: Int): List<T> {
 public inline fun <T> List<T>.takeLastWhile(predicate: (T) -> Boolean): List<T> {
     if (isEmpty())
         return emptyList()
-    val iterator = listIterator(size)
+    konst iterator = listIterator(size)
     while (iterator.hasPrevious()) {
         if (!predicate(iterator.previous())) {
             iterator.next()
-            val expectedSize = size - iterator.nextIndex()
+            konst expectedSize = size - iterator.nextIndex()
             if (expectedSize == 0) return emptyList()
             return ArrayList<T>(expectedSize).apply {
                 while (iterator.hasNext())
@@ -956,7 +956,7 @@ public inline fun <T> List<T>.takeLastWhile(predicate: (T) -> Boolean): List<T> 
  * @sample samples.collections.Collections.Transformations.take
  */
 public inline fun <T> Iterable<T>.takeWhile(predicate: (T) -> Boolean): List<T> {
-    val list = ArrayList<T>()
+    konst list = ArrayList<T>()
     for (item in this) {
         if (!predicate(item))
             break
@@ -975,7 +975,7 @@ public expect fun <T> MutableList<T>.reverse(): Unit
  */
 public fun <T> Iterable<T>.reversed(): List<T> {
     if (this is Collection && size <= 1) return toList()
-    val list = toMutableList()
+    konst list = toMutableList()
     list.reverse()
     return list
 }
@@ -988,13 +988,13 @@ public fun <T> Iterable<T>.reversed(): List<T> {
 @SinceKotlin("1.3")
 public fun <T> MutableList<T>.shuffle(random: Random): Unit {
     for (i in lastIndex downTo 1) {
-        val j = random.nextInt(i + 1)
+        konst j = random.nextInt(i + 1)
         this[j] = this.set(i, this[j])
     }
 }
 
 /**
- * Sorts elements in the list in-place according to natural sort order of the value returned by specified [selector] function.
+ * Sorts elements in the list in-place according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  */
@@ -1003,7 +1003,7 @@ public inline fun <T, R : Comparable<R>> MutableList<T>.sortBy(crossinline selec
 }
 
 /**
- * Sorts elements in the list in-place descending according to natural sort order of the value returned by specified [selector] function.
+ * Sorts elements in the list in-place descending according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  */
@@ -1035,7 +1035,7 @@ public fun <T : Comparable<T>> Iterable<T>.sorted(): List<T> {
 }
 
 /**
- * Returns a list of all elements sorted according to natural sort order of the value returned by specified [selector] function.
+ * Returns a list of all elements sorted according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  * 
@@ -1046,7 +1046,7 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.sortedBy(crossinline select
 }
 
 /**
- * Returns a list of all elements sorted descending according to natural sort order of the value returned by specified [selector] function.
+ * Returns a list of all elements sorted descending according to natural sort order of the konstue returned by specified [selector] function.
  * 
  * The sort is _stable_. It means that equal elements preserve their order relative to each other after sorting.
  */
@@ -1081,7 +1081,7 @@ public fun <T> Iterable<T>.sortedWith(comparator: Comparator<in T>): List<T> {
  * Returns an array of Boolean containing all of the elements of this collection.
  */
 public fun Collection<Boolean>.toBooleanArray(): BooleanArray {
-    val result = BooleanArray(size)
+    konst result = BooleanArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1092,7 +1092,7 @@ public fun Collection<Boolean>.toBooleanArray(): BooleanArray {
  * Returns an array of Byte containing all of the elements of this collection.
  */
 public fun Collection<Byte>.toByteArray(): ByteArray {
-    val result = ByteArray(size)
+    konst result = ByteArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1103,7 +1103,7 @@ public fun Collection<Byte>.toByteArray(): ByteArray {
  * Returns an array of Char containing all of the elements of this collection.
  */
 public fun Collection<Char>.toCharArray(): CharArray {
-    val result = CharArray(size)
+    konst result = CharArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1114,7 +1114,7 @@ public fun Collection<Char>.toCharArray(): CharArray {
  * Returns an array of Double containing all of the elements of this collection.
  */
 public fun Collection<Double>.toDoubleArray(): DoubleArray {
-    val result = DoubleArray(size)
+    konst result = DoubleArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1125,7 +1125,7 @@ public fun Collection<Double>.toDoubleArray(): DoubleArray {
  * Returns an array of Float containing all of the elements of this collection.
  */
 public fun Collection<Float>.toFloatArray(): FloatArray {
-    val result = FloatArray(size)
+    konst result = FloatArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1136,7 +1136,7 @@ public fun Collection<Float>.toFloatArray(): FloatArray {
  * Returns an array of Int containing all of the elements of this collection.
  */
 public fun Collection<Int>.toIntArray(): IntArray {
-    val result = IntArray(size)
+    konst result = IntArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1147,7 +1147,7 @@ public fun Collection<Int>.toIntArray(): IntArray {
  * Returns an array of Long containing all of the elements of this collection.
  */
 public fun Collection<Long>.toLongArray(): LongArray {
-    val result = LongArray(size)
+    konst result = LongArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1158,7 +1158,7 @@ public fun Collection<Long>.toLongArray(): LongArray {
  * Returns an array of Short containing all of the elements of this collection.
  */
 public fun Collection<Short>.toShortArray(): ShortArray {
-    val result = ShortArray(size)
+    konst result = ShortArray(size)
     var index = 0
     for (element in this)
         result[index++] = element
@@ -1166,7 +1166,7 @@ public fun Collection<Short>.toShortArray(): ShortArray {
 }
 
 /**
- * Returns a [Map] containing key-value pairs provided by [transform] function
+ * Returns a [Map] containing key-konstue pairs provided by [transform] function
  * applied to elements of the given collection.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -1176,7 +1176,7 @@ public fun Collection<Short>.toShortArray(): ShortArray {
  * @sample samples.collections.Collections.Transformations.associate
  */
 public inline fun <T, K, V> Iterable<T>.associate(transform: (T) -> Pair<K, V>): Map<K, V> {
-    val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+    konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
     return associateTo(LinkedHashMap<K, V>(capacity), transform)
 }
 
@@ -1191,12 +1191,12 @@ public inline fun <T, K, V> Iterable<T>.associate(transform: (T) -> Pair<K, V>):
  * @sample samples.collections.Collections.Transformations.associateBy
  */
 public inline fun <T, K> Iterable<T>.associateBy(keySelector: (T) -> K): Map<K, T> {
-    val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+    konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
     return associateByTo(LinkedHashMap<K, T>(capacity), keySelector)
 }
 
 /**
- * Returns a [Map] containing the values provided by [valueTransform] and indexed by [keySelector] functions applied to elements of the given collection.
+ * Returns a [Map] containing the konstues provided by [konstueTransform] and indexed by [keySelector] functions applied to elements of the given collection.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  * 
@@ -1204,15 +1204,15 @@ public inline fun <T, K> Iterable<T>.associateBy(keySelector: (T) -> K): Map<K, 
  * 
  * @sample samples.collections.Collections.Transformations.associateByWithValueTransform
  */
-public inline fun <T, K, V> Iterable<T>.associateBy(keySelector: (T) -> K, valueTransform: (T) -> V): Map<K, V> {
-    val capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
-    return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, valueTransform)
+public inline fun <T, K, V> Iterable<T>.associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V): Map<K, V> {
+    konst capacity = mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16)
+    return associateByTo(LinkedHashMap<K, V>(capacity), keySelector, konstueTransform)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function applied to each element of the given collection
- * and value is the element itself.
+ * and konstue is the element itself.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  * 
@@ -1226,23 +1226,23 @@ public inline fun <T, K, M : MutableMap<in K, in T>> Iterable<T>.associateByTo(d
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs,
+ * Populates and returns the [destination] mutable map with key-konstue pairs,
  * where key is provided by the [keySelector] function and
- * and value is provided by the [valueTransform] function applied to elements of the given collection.
+ * and konstue is provided by the [konstueTransform] function applied to elements of the given collection.
  * 
  * If any two elements would have the same key returned by [keySelector] the last one gets added to the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateByToWithValueTransform
  */
-public inline fun <T, K, V, M : MutableMap<in K, in V>> Iterable<T>.associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M {
+public inline fun <T, K, V, M : MutableMap<in K, in V>> Iterable<T>.associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M {
     for (element in this) {
-        destination.put(keySelector(element), valueTransform(element))
+        destination.put(keySelector(element), konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs
+ * Populates and returns the [destination] mutable map with key-konstue pairs
  * provided by [transform] function applied to each element of the given collection.
  * 
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -1257,8 +1257,8 @@ public inline fun <T, K, V, M : MutableMap<in K, in V>> Iterable<T>.associateTo(
 }
 
 /**
- * Returns a [Map] where keys are elements from the given collection and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given collection and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -1267,23 +1267,23 @@ public inline fun <T, K, V, M : MutableMap<in K, in V>> Iterable<T>.associateTo(
  * @sample samples.collections.Collections.Transformations.associateWith
  */
 @SinceKotlin("1.3")
-public inline fun <K, V> Iterable<K>.associateWith(valueSelector: (K) -> V): Map<K, V> {
-    val result = LinkedHashMap<K, V>(mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <K, V> Iterable<K>.associateWith(konstueSelector: (K) -> V): Map<K, V> {
+    konst result = LinkedHashMap<K, V>(mapCapacity(collectionSizeOrDefault(10)).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given collection,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given collection,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.3")
-public inline fun <K, V, M : MutableMap<in K, in V>> Iterable<K>.associateWithTo(destination: M, valueSelector: (K) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, in V>> Iterable<K>.associateWithTo(destination: M, konstueSelector: (K) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
@@ -1415,7 +1415,7 @@ public inline fun <T, R> Iterable<T>.flatMapIndexed(transform: (index: Int, T) -
 public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapIndexedTo(destination: C, transform: (index: Int, T) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(checkIndexOverflow(index++), element)
+        konst list = transform(checkIndexOverflow(index++), element)
         destination.addAll(list)
     }
     return destination
@@ -1433,7 +1433,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapIndexed
 public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapIndexedTo(destination: C, transform: (index: Int, T) -> Sequence<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(checkIndexOverflow(index++), element)
+        konst list = transform(checkIndexOverflow(index++), element)
         destination.addAll(list)
     }
     return destination
@@ -1444,7 +1444,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapIndexed
  */
 public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapTo(destination: C, transform: (T) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -1459,7 +1459,7 @@ public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapTo(dest
 @kotlin.jvm.JvmName("flatMapSequenceTo")
 public inline fun <T, R, C : MutableCollection<in R>> Iterable<T>.flatMapTo(destination: C, transform: (T) -> Sequence<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -1478,16 +1478,16 @@ public inline fun <T, K> Iterable<T>.groupBy(keySelector: (T) -> K): Map<K, List
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original collection
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original collection
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original collection.
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <T, K, V> Iterable<T>.groupBy(keySelector: (T) -> K, valueTransform: (T) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <T, K, V> Iterable<T>.groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
@@ -1500,27 +1500,27 @@ public inline fun <T, K, V> Iterable<T>.groupBy(keySelector: (T) -> K, valueTran
  */
 public inline fun <T, K, M : MutableMap<in K, MutableList<T>>> Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<T>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<T>() }
         list.add(element)
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original collection
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original collection
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
  * @sample samples.collections.Collections.Transformations.groupByKeysAndValues
  */
-public inline fun <T, K, V, M : MutableMap<in K, MutableList<V>>> Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M {
+public inline fun <T, K, V, M : MutableMap<in K, MutableList<V>>> Iterable<T>.groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
@@ -1652,10 +1652,10 @@ public fun <T> Iterable<T>.distinct(): List<T> {
  * @sample samples.collections.Collections.Transformations.distinctAndDistinctBy
  */
 public inline fun <T, K> Iterable<T>.distinctBy(selector: (T) -> K): List<T> {
-    val set = HashSet<K>()
-    val list = ArrayList<T>()
+    konst set = HashSet<K>()
+    konst list = ArrayList<T>()
     for (e in this) {
-        val key = selector(e)
+        konst key = selector(e)
         if (set.add(key))
             list.add(e)
     }
@@ -1670,7 +1670,7 @@ public inline fun <T, K> Iterable<T>.distinctBy(selector: (T) -> K): List<T> {
  * To get a set containing all elements that are contained at least in one of these collections use [union].
  */
 public infix fun <T> Iterable<T>.intersect(other: Iterable<T>): Set<T> {
-    val set = this.toMutableSet()
+    konst set = this.toMutableSet()
     set.retainAll(other)
     return set
 }
@@ -1681,7 +1681,7 @@ public infix fun <T> Iterable<T>.intersect(other: Iterable<T>): Set<T> {
  * The returned set preserves the element iteration order of the original collection.
  */
 public infix fun <T> Iterable<T>.subtract(other: Iterable<T>): Set<T> {
-    val set = this.toMutableSet()
+    konst set = this.toMutableSet()
     set.removeAll(other)
     return set
 }
@@ -1708,7 +1708,7 @@ public fun <T> Iterable<T>.toMutableSet(): MutableSet<T> {
  * To get a set containing all elements that are contained in both collections use [intersect].
  */
 public infix fun <T> Iterable<T>.union(other: Iterable<T>): Set<T> {
-    val set = this.toMutableSet()
+    konst set = this.toMutableSet()
     set.addAll(other)
     return set
 }
@@ -1778,12 +1778,12 @@ public inline fun <T> Iterable<T>.count(predicate: (T) -> Boolean): Int {
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the collection is empty.
+ * Returns the specified [initial] konstue if the collection is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  */
 public inline fun <T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> R): R {
     var accumulator = initial
@@ -1792,13 +1792,13 @@ public inline fun <T, R> Iterable<T>.fold(initial: R, operation: (acc: R, T) -> 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original collection.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original collection.
  * 
- * Returns the specified [initial] value if the collection is empty.
+ * Returns the specified [initial] konstue if the collection is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  */
 public inline fun <T, R> Iterable<T>.foldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R): R {
     var index = 0
@@ -1808,17 +1808,17 @@ public inline fun <T, R> Iterable<T>.foldIndexed(initial: R, operation: (index: 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the list is empty.
+ * Returns the specified [initial] konstue if the list is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue, and calculates the next accumulator konstue.
  */
 public inline fun <T, R> List<T>.foldRight(initial: R, operation: (T, acc: R) -> R): R {
     var accumulator = initial
     if (!isEmpty()) {
-        val iterator = listIterator(size)
+        konst iterator = listIterator(size)
         while (iterator.hasPrevious()) {
             accumulator = operation(iterator.previous(), accumulator)
         }
@@ -1827,20 +1827,20 @@ public inline fun <T, R> List<T>.foldRight(initial: R, operation: (T, acc: R) ->
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element with its index in the original list and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element with its index in the original list and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the list is empty.
+ * Returns the specified [initial] konstue if the list is empty.
  * 
  * @param [operation] function that takes the index of an element, the element itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 public inline fun <T, R> List<T>.foldRightIndexed(initial: R, operation: (index: Int, T, acc: R) -> R): R {
     var accumulator = initial
     if (!isEmpty()) {
-        val iterator = listIterator(size)
+        konst iterator = listIterator(size)
         while (iterator.hasPrevious()) {
-            val index = iterator.previousIndex()
+            konst index = iterator.previousIndex()
             accumulator = operation(index, iterator.previous(), accumulator)
         }
     }
@@ -1876,11 +1876,11 @@ public inline fun <T> Iterable<T>.forEachIndexed(action: (index: Int, T) -> Unit
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Iterable<Double>.max(): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1897,11 +1897,11 @@ public fun Iterable<Double>.max(): Double {
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Iterable<Float>.max(): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -1916,18 +1916,18 @@ public fun Iterable<Float>.max(): Float {
 @kotlin.jvm.JvmName("maxOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T : Comparable<T>> Iterable<T>.max(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the collection is empty.
  * 
@@ -1937,14 +1937,14 @@ public fun <T : Comparable<T>> Iterable<T>.max(): T {
 @kotlin.jvm.JvmName("maxByOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxElem = iterator.next()
     if (!iterator.hasNext()) return maxElem
     var maxValue = selector(maxElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1954,20 +1954,20 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxBy(selector: (T) -> R): 
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
 @SinceKotlin("1.4")
 public inline fun <T, R : Comparable<R>> Iterable<T>.maxByOrNull(selector: (T) -> R): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxElem = iterator.next()
     if (!iterator.hasNext()) return maxElem
     var maxValue = selector(maxElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -1977,10 +1977,10 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxByOrNull(selector: (T) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -1989,21 +1989,21 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxByOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.maxOf(selector: (T) -> Double): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2012,18 +2012,18 @@ public inline fun <T> Iterable<T>.maxOf(selector: (T) -> Double): Double {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.maxOf(selector: (T) -> Float): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
  * @throws NoSuchElementException if the collection is empty.
@@ -2033,11 +2033,11 @@ public inline fun <T> Iterable<T>.maxOf(selector: (T) -> Float): Float {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Iterable<T>.maxOf(selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (maxValue < v) {
             maxValue = v
         }
@@ -2046,49 +2046,49 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxOf(selector: (T) -> R): 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.maxOfOrNull(selector: (T) -> Double): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.maxOfOrNull(selector: (T) -> Float): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -2096,11 +2096,11 @@ public inline fun <T> Iterable<T>.maxOfOrNull(selector: (T) -> Float): Float? {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Iterable<T>.maxOfOrNull(selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (maxValue < v) {
             maxValue = v
         }
@@ -2109,8 +2109,8 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxOfOrNull(selector: (T) -
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the collection.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the collection.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2119,11 +2119,11 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.maxOfOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Iterable<T>.maxOfWith(comparator: Comparator<in R>, selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -2132,19 +2132,19 @@ public inline fun <T, R> Iterable<T>.maxOfWith(comparator: Comparator<in R>, sel
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the collection or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the collection or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Iterable<T>.maxOfWithOrNull(comparator: Comparator<in R>, selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var maxValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -2159,11 +2159,11 @@ public inline fun <T, R> Iterable<T>.maxOfWithOrNull(comparator: Comparator<in R
  */
 @SinceKotlin("1.4")
 public fun Iterable<Double>.maxOrNull(): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -2176,11 +2176,11 @@ public fun Iterable<Double>.maxOrNull(): Double? {
  */
 @SinceKotlin("1.4")
 public fun Iterable<Float>.maxOrNull(): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         max = maxOf(max, e)
     }
     return max
@@ -2191,18 +2191,18 @@ public fun Iterable<Float>.maxOrNull(): Float? {
  */
 @SinceKotlin("1.4")
 public fun <T : Comparable<T>> Iterable<T>.maxOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2210,26 +2210,26 @@ public fun <T : Comparable<T>> Iterable<T>.maxOrNull(): T? {
 @kotlin.jvm.JvmName("maxWithOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T> Iterable<T>.maxWith(comparator: Comparator<in T>): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 public fun <T> Iterable<T>.maxWithOrNull(comparator: Comparator<in T>): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var max = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
@@ -2246,11 +2246,11 @@ public fun <T> Iterable<T>.maxWithOrNull(comparator: Comparator<in T>): T? {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Iterable<Double>.min(): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2267,11 +2267,11 @@ public fun Iterable<Double>.min(): Double {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun Iterable<Float>.min(): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2286,18 +2286,18 @@ public fun Iterable<Float>.min(): Float {
 @kotlin.jvm.JvmName("minOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T : Comparable<T>> Iterable<T>.min(): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the collection is empty.
  * 
@@ -2307,14 +2307,14 @@ public fun <T : Comparable<T>> Iterable<T>.min(): T {
 @kotlin.jvm.JvmName("minByOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public inline fun <T, R : Comparable<R>> Iterable<T>.minBy(selector: (T) -> R): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minElem = iterator.next()
     if (!iterator.hasNext()) return minElem
     var minValue = selector(minElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -2324,20 +2324,20 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minBy(selector: (T) -> R): 
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
 @SinceKotlin("1.4")
 public inline fun <T, R : Comparable<R>> Iterable<T>.minByOrNull(selector: (T) -> R): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minElem = iterator.next()
     if (!iterator.hasNext()) return minElem
     var minValue = selector(minElem)
     do {
-        val e = iterator.next()
-        val v = selector(e)
+        konst e = iterator.next()
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -2347,10 +2347,10 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minByOrNull(selector: (T) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2359,21 +2359,21 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minByOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.minOf(selector: (T) -> Double): Double {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2382,18 +2382,18 @@ public inline fun <T> Iterable<T>.minOf(selector: (T) -> Double): Double {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.minOf(selector: (T) -> Float): Float {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection.
  * 
  * @throws NoSuchElementException if the collection is empty.
@@ -2403,11 +2403,11 @@ public inline fun <T> Iterable<T>.minOf(selector: (T) -> Float): Float {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Iterable<T>.minOf(selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (minValue > v) {
             minValue = v
         }
@@ -2416,49 +2416,49 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minOf(selector: (T) -> R): 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.minOfOrNull(selector: (T) -> Double): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T> Iterable<T>.minOfOrNull(selector: (T) -> Float): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the collection or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -2466,11 +2466,11 @@ public inline fun <T> Iterable<T>.minOfOrNull(selector: (T) -> Float): Float? {
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R : Comparable<R>> Iterable<T>.minOfOrNull(selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (minValue > v) {
             minValue = v
         }
@@ -2479,8 +2479,8 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minOfOrNull(selector: (T) -
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the collection.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the collection.
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2489,11 +2489,11 @@ public inline fun <T, R : Comparable<R>> Iterable<T>.minOfOrNull(selector: (T) -
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Iterable<T>.minOfWith(comparator: Comparator<in R>, selector: (T) -> R): R {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -2502,19 +2502,19 @@ public inline fun <T, R> Iterable<T>.minOfWith(comparator: Comparator<in R>, sel
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the collection or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the collection or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
 @OverloadResolutionByLambdaReturnType
 @kotlin.internal.InlineOnly
 public inline fun <T, R> Iterable<T>.minOfWithOrNull(comparator: Comparator<in R>, selector: (T) -> R): R? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var minValue = selector(iterator.next())
     while (iterator.hasNext()) {
-        val v = selector(iterator.next())
+        konst v = selector(iterator.next())
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -2529,11 +2529,11 @@ public inline fun <T, R> Iterable<T>.minOfWithOrNull(comparator: Comparator<in R
  */
 @SinceKotlin("1.4")
 public fun Iterable<Double>.minOrNull(): Double? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2546,11 +2546,11 @@ public fun Iterable<Double>.minOrNull(): Double? {
  */
 @SinceKotlin("1.4")
 public fun Iterable<Float>.minOrNull(): Float? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         min = minOf(min, e)
     }
     return min
@@ -2561,18 +2561,18 @@ public fun Iterable<Float>.minOrNull(): Float? {
  */
 @SinceKotlin("1.4")
 public fun <T : Comparable<T>> Iterable<T>.minOrNull(): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the collection is empty.
  */
@@ -2580,26 +2580,26 @@ public fun <T : Comparable<T>> Iterable<T>.minOrNull(): T? {
 @kotlin.jvm.JvmName("minWithOrThrow")
 @Suppress("CONFLICTING_OVERLOADS")
 public fun <T> Iterable<T>.minWith(comparator: Comparator<in T>): T {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) throw NoSuchElementException()
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 public fun <T> Iterable<T>.minWithOrNull(comparator: Comparator<in T>): T? {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return null
     var min = iterator.next()
     while (iterator.hasNext()) {
-        val e = iterator.next()
+        konst e = iterator.next()
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
@@ -2646,19 +2646,19 @@ public inline fun <T, C : Iterable<T>> C.onEachIndexed(action: (index: Int, T) -
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this collection is empty. If the collection can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
 public inline fun <S, T : S> Iterable<T>.reduce(operation: (acc: S, T) -> S): S {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) throw UnsupportedOperationException("Empty collection can't be reduced.")
     var accumulator: S = iterator.next()
     while (iterator.hasNext()) {
@@ -2668,19 +2668,19 @@ public inline fun <S, T : S> Iterable<T>.reduce(operation: (acc: S, T) -> S): S 
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original collection.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original collection.
  * 
  * Throws an exception if this collection is empty. If the collection can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
 public inline fun <S, T : S> Iterable<T>.reduceIndexed(operation: (index: Int, acc: S, T) -> S): S {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) throw UnsupportedOperationException("Empty collection can't be reduced.")
     var index = 1
     var accumulator: S = iterator.next()
@@ -2691,19 +2691,19 @@ public inline fun <S, T : S> Iterable<T>.reduceIndexed(operation: (index: Int, a
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original collection.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original collection.
  * 
  * Returns `null` if the collection is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
 @SinceKotlin("1.4")
 public inline fun <S, T : S> Iterable<T>.reduceIndexedOrNull(operation: (index: Int, acc: S, T) -> S): S? {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return null
     var index = 1
     var accumulator: S = iterator.next()
@@ -2714,20 +2714,20 @@ public inline fun <S, T : S> Iterable<T>.reduceIndexedOrNull(operation: (index: 
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the collection is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public inline fun <S, T : S> Iterable<T>.reduceOrNull(operation: (acc: S, T) -> S): S? {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return null
     var accumulator: S = iterator.next()
     while (iterator.hasNext()) {
@@ -2737,19 +2737,19 @@ public inline fun <S, T : S> Iterable<T>.reduceOrNull(operation: (acc: S, T) -> 
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Throws an exception if this list is empty. If the list can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
 public inline fun <S, T : S> List<T>.reduceRight(operation: (T, acc: S) -> S): S {
-    val iterator = listIterator(size)
+    konst iterator = listIterator(size)
     if (!iterator.hasPrevious())
         throw UnsupportedOperationException("Empty list can't be reduced.")
     var accumulator: S = iterator.previous()
@@ -2760,68 +2760,68 @@ public inline fun <S, T : S> List<T>.reduceRight(operation: (T, acc: S) -> S): S
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original list and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original list and current accumulator konstue.
  * 
  * Throws an exception if this list is empty. If the list can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
 public inline fun <S, T : S> List<T>.reduceRightIndexed(operation: (index: Int, T, acc: S) -> S): S {
-    val iterator = listIterator(size)
+    konst iterator = listIterator(size)
     if (!iterator.hasPrevious())
         throw UnsupportedOperationException("Empty list can't be reduced.")
     var accumulator: S = iterator.previous()
     while (iterator.hasPrevious()) {
-        val index = iterator.previousIndex()
+        konst index = iterator.previousIndex()
         accumulator = operation(index, iterator.previous(), accumulator)
     }
     return accumulator
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original list and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original list and current accumulator konstue.
  * 
  * Returns `null` if the list is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
 @SinceKotlin("1.4")
 public inline fun <S, T : S> List<T>.reduceRightIndexedOrNull(operation: (index: Int, T, acc: S) -> S): S? {
-    val iterator = listIterator(size)
+    konst iterator = listIterator(size)
     if (!iterator.hasPrevious())
         return null
     var accumulator: S = iterator.previous()
     while (iterator.hasPrevious()) {
-        val index = iterator.previousIndex()
+        konst index = iterator.previousIndex()
         accumulator = operation(index, iterator.previous(), accumulator)
     }
     return accumulator
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Returns `null` if the list is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public inline fun <S, T : S> List<T>.reduceRightOrNull(operation: (T, acc: S) -> S): S? {
-    val iterator = listIterator(size)
+    konst iterator = listIterator(size)
     if (!iterator.hasPrevious())
         return null
     var accumulator: S = iterator.previous()
@@ -2832,21 +2832,21 @@ public inline fun <S, T : S> List<T>.reduceRightOrNull(operation: (T, acc: S) ->
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
 @SinceKotlin("1.4")
 public inline fun <T, R> Iterable<T>.runningFold(initial: R, operation: (acc: R, T) -> R): List<R> {
-    val estimatedSize = collectionSizeOrDefault(9)
+    konst estimatedSize = collectionSizeOrDefault(9)
     if (estimatedSize == 0) return listOf(initial)
-    val result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
+    konst result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -2856,22 +2856,22 @@ public inline fun <T, R> Iterable<T>.runningFold(initial: R, operation: (acc: R,
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original collection and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original collection and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
 @SinceKotlin("1.4")
 public inline fun <T, R> Iterable<T>.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, T) -> R): List<R> {
-    val estimatedSize = collectionSizeOrDefault(9)
+    konst estimatedSize = collectionSizeOrDefault(9)
     if (estimatedSize == 0) return listOf(initial)
-    val result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
+    konst result = ArrayList<R>(estimatedSize + 1).apply { add(initial) }
     var index = 0
     var accumulator = initial
     for (element in this) {
@@ -2882,23 +2882,23 @@ public inline fun <T, R> Iterable<T>.runningFoldIndexed(initial: R, operation: (
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this collection.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this collection.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and the element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and the element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public inline fun <S, T : S> Iterable<T>.runningReduce(operation: (acc: S, T) -> S): List<S> {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return emptyList()
     var accumulator: S = iterator.next()
-    val result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
+    konst result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
     while (iterator.hasNext()) {
         accumulator = operation(accumulator, iterator.next())
         result.add(accumulator)
@@ -2907,23 +2907,23 @@ public inline fun <S, T : S> Iterable<T>.runningReduce(operation: (acc: S, T) ->
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original collection and current accumulator value that starts with the first element of this collection.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original collection and current accumulator konstue that starts with the first element of this collection.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
 @SinceKotlin("1.4")
 public inline fun <S, T : S> Iterable<T>.runningReduceIndexed(operation: (index: Int, acc: S, T) -> S): List<S> {
-    val iterator = this.iterator()
+    konst iterator = this.iterator()
     if (!iterator.hasNext()) return emptyList()
     var accumulator: S = iterator.next()
-    val result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
+    konst result = ArrayList<S>(collectionSizeOrDefault(10)).apply { add(accumulator) }
     var index = 1
     while (iterator.hasNext()) {
         accumulator = operation(index++, accumulator, iterator.next())
@@ -2933,13 +2933,13 @@ public inline fun <S, T : S> Iterable<T>.runningReduceIndexed(operation: (index:
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -2950,14 +2950,14 @@ public inline fun <T, R> Iterable<T>.scan(initial: R, operation: (acc: R, T) -> 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original collection and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original collection and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -2968,7 +2968,7 @@ public inline fun <T, R> Iterable<T>.scanIndexed(initial: R, operation: (index: 
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -2981,7 +2981,7 @@ public inline fun <T> Iterable<T>.sumBy(selector: (T) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -2994,7 +2994,7 @@ public inline fun <T> Iterable<T>.sumByDouble(selector: (T) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3010,7 +3010,7 @@ public inline fun <T> Iterable<T>.sumOf(selector: (T) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3026,7 +3026,7 @@ public inline fun <T> Iterable<T>.sumOf(selector: (T) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3042,7 +3042,7 @@ public inline fun <T> Iterable<T>.sumOf(selector: (T) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3059,7 +3059,7 @@ public inline fun <T> Iterable<T>.sumOf(selector: (T) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -3121,7 +3121,7 @@ public fun <T> Iterable<T>.chunked(size: Int): List<List<T>> {
  * 
  * @return list of results of the [transform] applied to an each list.
  * 
- * Note that the list passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the list passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * The last list may have fewer elements than the given [size].
  * 
@@ -3138,7 +3138,7 @@ public fun <T, R> Iterable<T>.chunked(size: Int, transform: (List<T>) -> R): Lis
  * Returns a list containing all elements of the original collection without the first occurrence of the given [element].
  */
 public operator fun <T> Iterable<T>.minus(element: T): List<T> {
-    val result = ArrayList<T>(collectionSizeOrDefault(10))
+    konst result = ArrayList<T>(collectionSizeOrDefault(10))
     var removed = false
     return this.filterTo(result) { if (!removed && it == element) { removed = true; false } else true }
 }
@@ -3155,7 +3155,7 @@ public operator fun <T> Iterable<T>.minus(elements: Array<out T>): List<T> {
  * Returns a list containing all elements of the original collection except the elements contained in the given [elements] collection.
  */
 public operator fun <T> Iterable<T>.minus(elements: Iterable<T>): List<T> {
-    val other = elements.convertToListIfNotCollection()
+    konst other = elements.convertToListIfNotCollection()
     if (other.isEmpty())
         return this.toList()
     return this.filterNot { it in other }
@@ -3165,7 +3165,7 @@ public operator fun <T> Iterable<T>.minus(elements: Iterable<T>): List<T> {
  * Returns a list containing all elements of the original collection except the elements contained in the given [elements] sequence.
  */
 public operator fun <T> Iterable<T>.minus(elements: Sequence<T>): List<T> {
-    val other = elements.toList()
+    konst other = elements.toList()
     if (other.isEmpty())
         return this.toList()
     return this.filterNot { it in other }
@@ -3187,8 +3187,8 @@ public inline fun <T> Iterable<T>.minusElement(element: T): List<T> {
  * @sample samples.collections.Iterables.Operations.partition
  */
 public inline fun <T> Iterable<T>.partition(predicate: (T) -> Boolean): Pair<List<T>, List<T>> {
-    val first = ArrayList<T>()
-    val second = ArrayList<T>()
+    konst first = ArrayList<T>()
+    konst second = ArrayList<T>()
     for (element in this) {
         if (predicate(element)) {
             first.add(element)
@@ -3204,7 +3204,7 @@ public inline fun <T> Iterable<T>.partition(predicate: (T) -> Boolean): Pair<Lis
  */
 public operator fun <T> Iterable<T>.plus(element: T): List<T> {
     if (this is Collection) return this.plus(element)
-    val result = ArrayList<T>()
+    konst result = ArrayList<T>()
     result.addAll(this)
     result.add(element)
     return result
@@ -3214,7 +3214,7 @@ public operator fun <T> Iterable<T>.plus(element: T): List<T> {
  * Returns a list containing all elements of the original collection and then the given [element].
  */
 public operator fun <T> Collection<T>.plus(element: T): List<T> {
-    val result = ArrayList<T>(size + 1)
+    konst result = ArrayList<T>(size + 1)
     result.addAll(this)
     result.add(element)
     return result
@@ -3225,7 +3225,7 @@ public operator fun <T> Collection<T>.plus(element: T): List<T> {
  */
 public operator fun <T> Iterable<T>.plus(elements: Array<out T>): List<T> {
     if (this is Collection) return this.plus(elements)
-    val result = ArrayList<T>()
+    konst result = ArrayList<T>()
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -3235,7 +3235,7 @@ public operator fun <T> Iterable<T>.plus(elements: Array<out T>): List<T> {
  * Returns a list containing all elements of the original collection and then all elements of the given [elements] array.
  */
 public operator fun <T> Collection<T>.plus(elements: Array<out T>): List<T> {
-    val result = ArrayList<T>(this.size + elements.size)
+    konst result = ArrayList<T>(this.size + elements.size)
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -3246,7 +3246,7 @@ public operator fun <T> Collection<T>.plus(elements: Array<out T>): List<T> {
  */
 public operator fun <T> Iterable<T>.plus(elements: Iterable<T>): List<T> {
     if (this is Collection) return this.plus(elements)
-    val result = ArrayList<T>()
+    konst result = ArrayList<T>()
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -3257,12 +3257,12 @@ public operator fun <T> Iterable<T>.plus(elements: Iterable<T>): List<T> {
  */
 public operator fun <T> Collection<T>.plus(elements: Iterable<T>): List<T> {
     if (elements is Collection) {
-        val result = ArrayList<T>(this.size + elements.size)
+        konst result = ArrayList<T>(this.size + elements.size)
         result.addAll(this)
         result.addAll(elements)
         return result
     } else {
-        val result = ArrayList<T>(this)
+        konst result = ArrayList<T>(this)
         result.addAll(elements)
         return result
     }
@@ -3272,7 +3272,7 @@ public operator fun <T> Collection<T>.plus(elements: Iterable<T>): List<T> {
  * Returns a list containing all elements of the original collection and then all elements of the given [elements] sequence.
  */
 public operator fun <T> Iterable<T>.plus(elements: Sequence<T>): List<T> {
-    val result = ArrayList<T>()
+    konst result = ArrayList<T>()
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -3282,7 +3282,7 @@ public operator fun <T> Iterable<T>.plus(elements: Sequence<T>): List<T> {
  * Returns a list containing all elements of the original collection and then all elements of the given [elements] sequence.
  */
 public operator fun <T> Collection<T>.plus(elements: Sequence<T>): List<T> {
-    val result = ArrayList<T>(this.size + 10)
+    konst result = ArrayList<T>(this.size + 10)
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -3323,19 +3323,19 @@ public inline fun <T> Collection<T>.plusElement(element: T): List<T> {
 public fun <T> Iterable<T>.windowed(size: Int, step: Int = 1, partialWindows: Boolean = false): List<List<T>> {
     checkWindowSizeStep(size, step)
     if (this is RandomAccess && this is List) {
-        val thisSize = this.size
-        val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-        val result = ArrayList<List<T>>(resultCapacity)
+        konst thisSize = this.size
+        konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+        konst result = ArrayList<List<T>>(resultCapacity)
         var index = 0
         while (index in 0 until thisSize) {
-            val windowSize = size.coerceAtMost(thisSize - index)
+            konst windowSize = size.coerceAtMost(thisSize - index)
             if (windowSize < size && !partialWindows) break
             result.add(List(windowSize) { this[it + index] })
             index += step
         }
         return result
     }
-    val result = ArrayList<List<T>>()
+    konst result = ArrayList<List<T>>()
     windowedIterator(iterator(), size, step, partialWindows, reuseBuffer = false).forEach {
         result.add(it)
     }
@@ -3347,7 +3347,7 @@ public fun <T> Iterable<T>.windowed(size: Int, step: Int = 1, partialWindows: Bo
  * an each list representing a view over the window of the given [size]
  * sliding along this collection with the given [step].
  * 
- * Note that the list passed to the [transform] function is ephemeral and is valid only inside that function.
+ * Note that the list passed to the [transform] function is ephemeral and is konstid only inside that function.
  * You should not store it or allow it to escape in some way, unless you made a snapshot of it.
  * Several last lists may have fewer elements than the given [size].
  * 
@@ -3363,13 +3363,13 @@ public fun <T> Iterable<T>.windowed(size: Int, step: Int = 1, partialWindows: Bo
 public fun <T, R> Iterable<T>.windowed(size: Int, step: Int = 1, partialWindows: Boolean = false, transform: (List<T>) -> R): List<R> {
     checkWindowSizeStep(size, step)
     if (this is RandomAccess && this is List) {
-        val thisSize = this.size
-        val resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
-        val result = ArrayList<R>(resultCapacity)
-        val window = MovingSubList(this)
+        konst thisSize = this.size
+        konst resultCapacity = thisSize / step + if (thisSize % step == 0) 0 else 1
+        konst result = ArrayList<R>(resultCapacity)
+        konst window = MovingSubList(this)
         var index = 0
         while (index in 0 until thisSize) {
-            val windowSize = size.coerceAtMost(thisSize - index)
+            konst windowSize = size.coerceAtMost(thisSize - index)
             if (!partialWindows && windowSize < size) break
             window.move(index, index + windowSize)
             result.add(transform(window))
@@ -3377,7 +3377,7 @@ public fun <T, R> Iterable<T>.windowed(size: Int, step: Int = 1, partialWindows:
         }
         return result
     }
-    val result = ArrayList<R>()
+    konst result = ArrayList<R>()
     windowedIterator(iterator(), size, step, partialWindows, reuseBuffer = true).forEach {
         result.add(transform(it))
     }
@@ -3395,15 +3395,15 @@ public infix fun <T, R> Iterable<T>.zip(other: Array<out R>): List<Pair<T, R>> {
 }
 
 /**
- * Returns a list of values built from the elements of `this` collection and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` collection and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
  * @sample samples.collections.Iterables.Operations.zipIterableWithTransform
  */
 public inline fun <T, R, V> Iterable<T>.zip(other: Array<out R>, transform: (a: T, b: R) -> V): List<V> {
-    val arraySize = other.size
-    val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), arraySize))
+    konst arraySize = other.size
+    konst list = ArrayList<V>(minOf(collectionSizeOrDefault(10), arraySize))
     var i = 0
     for (element in this) {
         if (i >= arraySize) break
@@ -3423,16 +3423,16 @@ public infix fun <T, R> Iterable<T>.zip(other: Iterable<R>): List<Pair<T, R>> {
 }
 
 /**
- * Returns a list of values built from the elements of `this` collection and the [other] collection with the same index
+ * Returns a list of konstues built from the elements of `this` collection and the [other] collection with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
  * @sample samples.collections.Iterables.Operations.zipIterableWithTransform
  */
 public inline fun <T, R, V> Iterable<T>.zip(other: Iterable<R>, transform: (a: T, b: R) -> V): List<V> {
-    val first = iterator()
-    val second = other.iterator()
-    val list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
+    konst first = iterator()
+    konst second = other.iterator()
+    konst list = ArrayList<V>(minOf(collectionSizeOrDefault(10), other.collectionSizeOrDefault(10)))
     while (first.hasNext() && second.hasNext()) {
         list.add(transform(first.next(), second.next()))
     }
@@ -3461,12 +3461,12 @@ public fun <T> Iterable<T>.zipWithNext(): List<Pair<T, T>> {
  */
 @SinceKotlin("1.2")
 public inline fun <T, R> Iterable<T>.zipWithNext(transform: (a: T, b: T) -> R): List<R> {
-    val iterator = iterator()
+    konst iterator = iterator()
     if (!iterator.hasNext()) return emptyList()
-    val result = mutableListOf<R>()
+    konst result = mutableListOf<R>()
     var current = iterator.next()
     while (iterator.hasNext()) {
-        val next = iterator.next()
+        konst next = iterator.next()
         result.add(transform(current, next))
         current = next
     }
@@ -3476,7 +3476,7 @@ public inline fun <T, R> Iterable<T>.zipWithNext(transform: (a: T, b: T) -> R): 
 /**
  * Appends the string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
  * 
- * If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+ * If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
  * elements will be appended, followed by the [truncated] string (which defaults to "...").
  * 
  * @sample samples.collections.Collections.Transformations.joinTo
@@ -3498,7 +3498,7 @@ public fun <T, A : Appendable> Iterable<T>.joinTo(buffer: A, separator: CharSequ
 /**
  * Creates a string from all the elements separated using [separator] and using the given [prefix] and [postfix] if supplied.
  * 
- * If the collection could be huge, you can specify a non-negative value of [limit], in which case only the first [limit]
+ * If the collection could be huge, you can specify a non-negative konstue of [limit], in which case only the first [limit]
  * elements will be appended, followed by the [truncated] string (which defaults to "...").
  * 
  * @sample samples.collections.Collections.Transformations.joinToString
@@ -3525,7 +3525,7 @@ public fun <T> Iterable<T>.asSequence(): Sequence<T> {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfByte")
 public fun Iterable<Byte>.average(): Double {
@@ -3539,7 +3539,7 @@ public fun Iterable<Byte>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfShort")
 public fun Iterable<Short>.average(): Double {
@@ -3553,7 +3553,7 @@ public fun Iterable<Short>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfInt")
 public fun Iterable<Int>.average(): Double {
@@ -3567,7 +3567,7 @@ public fun Iterable<Int>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfLong")
 public fun Iterable<Long>.average(): Double {
@@ -3581,7 +3581,7 @@ public fun Iterable<Long>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfFloat")
 public fun Iterable<Float>.average(): Double {
@@ -3595,7 +3595,7 @@ public fun Iterable<Float>.average(): Double {
 }
 
 /**
- * Returns an average value of elements in the collection.
+ * Returns an average konstue of elements in the collection.
  */
 @kotlin.jvm.JvmName("averageOfDouble")
 public fun Iterable<Double>.average(): Double {

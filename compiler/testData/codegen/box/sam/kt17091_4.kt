@@ -32,6 +32,6 @@ fun box(): String {
 }
 
 class A {
-    val f = {"OK"}
+    konst f = {"OK"}
     fun foo() = java.util.concurrent.Callable(f)
 }

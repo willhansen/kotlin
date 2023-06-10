@@ -32,7 +32,7 @@ object LightClassUtil {
 
         if (stub is PsiClassStub<*> || stub is PsiFileStub<*>) {
             for (child in stub.childrenStubs) {
-                val answer = findClass(child, predicate)
+                konst answer = findClass(child, predicate)
                 if (answer != null) return answer
             }
         }
@@ -43,8 +43,8 @@ object LightClassUtil {
         getLightClassAccessorMethods(accessor).firstOrNull()
 
     fun getLightClassAccessorMethods(accessor: KtPropertyAccessor): List<PsiMethod> {
-        val property = accessor.getNonStrictParentOfType<KtProperty>() ?: return emptyList()
-        val wrappers = getPsiMethodWrappers(property)
+        konst property = accessor.getNonStrictParentOfType<KtProperty>() ?: return emptyList()
+        konst wrappers = getPsiMethodWrappers(property)
         return wrappers.filter { wrapper ->
             (accessor.isGetter && !JvmAbi.isSetterName(wrapper.name)) ||
                     (accessor.isSetter && JvmAbi.isSetterName(wrapper.name))
@@ -52,7 +52,7 @@ object LightClassUtil {
     }
 
     fun getLightFieldForCompanionObject(companionObject: KtClassOrObject): PsiField? {
-        val outerPsiClass = getWrappingClass(companionObject)
+        konst outerPsiClass = getWrappingClass(companionObject)
         if (outerPsiClass != null) {
             for (fieldOfParent in outerPsiClass.fields) {
                 if ((fieldOfParent is KtLightElement<*, *>) && fieldOfParent.kotlinOrigin === companionObject.originalElement) {
@@ -64,11 +64,11 @@ object LightClassUtil {
     }
 
     fun getLightClassPropertyMethods(property: KtProperty): PropertyAccessorsPsiMethods {
-        val getter = property.getter
-        val setter = property.setter
+        konst getter = property.getter
+        konst setter = property.setter
 
-        val getterWrapper = if (getter != null) getLightClassAccessorMethod(getter) else null
-        val setterWrapper = if (setter != null) getLightClassAccessorMethod(setter) else null
+        konst getterWrapper = if (getter != null) getLightClassAccessorMethod(getter) else null
+        konst setterWrapper = if (setter != null) getLightClassAccessorMethod(setter) else null
 
         return extractPropertyAccessors(property, getterWrapper, setterWrapper)
     }
@@ -77,11 +77,11 @@ object LightClassUtil {
         var psiClass: PsiClass = getWrappingClass(declaration) ?: return null
 
         if (psiClass is KtLightClass) {
-            val origin = psiClass.kotlinOrigin
+            konst origin = psiClass.kotlinOrigin
             if (origin is KtObjectDeclaration && origin.isCompanion()) {
-                val containingClass = PsiTreeUtil.getParentOfType(origin, KtClass::class.java)
+                konst containingClass = PsiTreeUtil.getParentOfType(origin, KtClass::class.java)
                 if (containingClass != null) {
-                    val containingLightClass = containingClass.toLightClass()
+                    konst containingLightClass = containingClass.toLightClass()
                     if (containingLightClass != null) {
                         psiClass = containingLightClass
                     }
@@ -132,7 +132,7 @@ object LightClassUtil {
 
     private fun getWrappingClass(declaration: KtDeclaration): PsiClass? {
         if (declaration is KtParameter) {
-            val constructorClass = KtPsiUtil.getClassIfParameterIsProperty(declaration)
+            konst constructorClass = KtPsiUtil.getClassIfParameterIsProperty(declaration)
             if (constructorClass != null) {
                 return constructorClass.toLightClass()
             }
@@ -147,7 +147,7 @@ object LightClassUtil {
             return ktDeclaration.getContainingClassOrObject().toLightClass()
         }
 
-        val parent = ktDeclaration.parent
+        konst parent = ktDeclaration.parent
 
         if (parent is KtFile) {
             // top-level declaration
@@ -165,8 +165,8 @@ object LightClassUtil {
     }
 
     private fun getWrappingClasses(declaration: KtDeclaration): Sequence<PsiClass> {
-        val wrapperClass = getWrappingClass(declaration) ?: return emptySequence()
-        val wrapperClassOrigin = (wrapperClass as KtLightClass).kotlinOrigin
+        konst wrapperClass = getWrappingClass(declaration) ?: return emptySequence()
+        konst wrapperClassOrigin = (wrapperClass as KtLightClass).kotlinOrigin
         if (wrapperClassOrigin is KtObjectDeclaration && wrapperClassOrigin.isCompanion() && wrapperClass.parent is PsiClass) {
             return sequenceOf(wrapperClass, wrapperClass.parent as PsiClass)
         }
@@ -183,12 +183,12 @@ object LightClassUtil {
         specialGetter: PsiMethod?, specialSetter: PsiMethod?
     ): PropertyAccessorsPsiMethods {
 
-        val (setters, getters) = getPsiMethodWrappers(ktDeclaration).partition { it.isSetter }
+        konst (setters, getters) = getPsiMethodWrappers(ktDeclaration).partition { it.isSetter }
 
-        val allGetters = listOfNotNull(specialGetter) + getters.filterNot { it == specialGetter }
-        val allSetters = listOfNotNull(specialSetter) + setters.filterNot { it == specialSetter }
-        val backingField = getLightClassBackingField(ktDeclaration)
-        val additionalAccessors = allGetters.drop(1) + allSetters.drop(1)
+        konst allGetters = listOfNotNull(specialGetter) + getters.filterNot { it == specialGetter }
+        konst allSetters = listOfNotNull(specialSetter) + setters.filterNot { it == specialSetter }
+        konst backingField = getLightClassBackingField(ktDeclaration)
+        konst additionalAccessors = allGetters.drop(1) + allSetters.drop(1)
         return PropertyAccessorsPsiMethods(
             allGetters.firstOrNull(),
             allSetters.firstOrNull(),
@@ -198,13 +198,13 @@ object LightClassUtil {
     }
 
     class PropertyAccessorsPsiMethods(
-        val getter: PsiMethod?,
-        val setter: PsiMethod?,
-        val backingField: PsiField?,
+        konst getter: PsiMethod?,
+        konst setter: PsiMethod?,
+        konst backingField: PsiField?,
         additionalAccessors: List<PsiMethod>
     ) : Iterable<PsiMethod> {
-        private val allMethods: List<PsiMethod>
-        val allDeclarations: List<PsiNamedElement>
+        private konst allMethods: List<PsiMethod>
+        konst allDeclarations: List<PsiNamedElement>
 
         init {
             allMethods = arrayListOf()

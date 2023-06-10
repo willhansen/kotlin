@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.ir.util.getAnnotation
 
 // Keep track of all custom parcelers which are currently in scope.
 // Note that custom parcelers are resolved in *reverse* lexical order.
-class IrParcelerScope(val parent: IrParcelerScope? = null) {
-    private val typeParcelers = mutableMapOf<IrType, IrClass>()
+class IrParcelerScope(konst parent: IrParcelerScope? = null) {
+    private konst typeParcelers = mutableMapOf<IrType, IrClass>()
 
     fun add(type: IrType, parceler: IrClass) {
         typeParcelers.putIfAbsent(type, parceler)
@@ -38,17 +38,17 @@ fun IrParcelerScope?.hasCustomSerializer(irType: IrType): Boolean =
     getCustomSerializer(irType) != null
 
 fun IrAnnotationContainer.getParcelerScope(parent: IrParcelerScope? = null): IrParcelerScope? {
-    val typeParcelerAnnotations = annotations.filterTo(mutableListOf()) {
+    konst typeParcelerAnnotations = annotations.filterTo(mutableListOf()) {
         it.symbol.owner.constructedClass.fqNameWhenAvailable == ParcelableAnnotationChecker.TYPE_PARCELER_FQNAME
     }
 
     if (typeParcelerAnnotations.isEmpty())
         return parent
 
-    val scope = IrParcelerScope(parent)
+    konst scope = IrParcelerScope(parent)
 
     for (annotation in typeParcelerAnnotations) {
-        val (mappedType, parcelerType) = (annotation.type as IrSimpleType).arguments.map { it.typeOrNull!! }
+        konst (mappedType, parcelerType) = (annotation.type as IrSimpleType).arguments.map { it.typeOrNull!! }
         scope.add(mappedType, parcelerType.getClass()!!)
     }
 

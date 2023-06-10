@@ -5,16 +5,16 @@
 
 package test
 
-fun <T> eval(lambda: () -> T) = lambda()
+fun <T> ekonst(lambda: () -> T) = lambda()
 
-val p = eval { "OK" }
+konst p = ekonst { "OK" }
 
-val getter: String
-    get() = eval { "OK" }
+konst getter: String
+    get() = ekonst { "OK" }
 
-fun f() = eval { "OK" }
+fun f() = ekonst { "OK" }
 
-val obj = object : Function0<String> {
+konst obj = object : Function0<String> {
     override fun invoke() = "OK"
 }
 

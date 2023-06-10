@@ -2,5 +2,5 @@
 package test
 
 class C : B() {
-    val i = Inner("")
+    konst i = Inner("")
 }

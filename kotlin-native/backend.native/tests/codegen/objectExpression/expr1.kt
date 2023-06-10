@@ -8,9 +8,9 @@ package codegen.objectExpression.expr1
 import kotlin.test.*
 
 @Test fun runTest() {
-    val a = "a"
+    konst a = "a"
 
-    val x = object {
+    konst x = object {
         override fun toString(): String {
             return foo(a) + foo("b")
         }

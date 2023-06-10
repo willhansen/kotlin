@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.resolve.calls.inference.constraintPosition.Constrain
 import org.jetbrains.kotlin.types.KotlinType
 
 interface TypeBounds {
-    val typeVariable: TypeVariable
+    konst typeVariable: TypeVariable
 
-    val bounds: Collection<Bound>
+    konst bounds: Collection<Bound>
 
-    val value: KotlinType?
-        get() = if (values.size == 1) values.first() else null
+    konst konstue: KotlinType?
+        get() = if (konstues.size == 1) konstues.first() else null
 
-    val values: Collection<KotlinType>
+    konst konstues: Collection<KotlinType>
 
     enum class BoundKind {
         LOWER_BOUND,
@@ -38,19 +38,19 @@ interface TypeBounds {
     }
 
     class Bound(
-        val typeVariable: TypeVariable,
-        val constrainingType: KotlinType,
-        val kind: BoundKind,
-        val position: ConstraintPosition,
-        val isProper: Boolean,
+        konst typeVariable: TypeVariable,
+        konst constrainingType: KotlinType,
+        konst kind: BoundKind,
+        konst position: ConstraintPosition,
+        konst isProper: Boolean,
         // to prevent infinite recursion in incorporation we store the variables that was substituted to derive this bound
-        val derivedFrom: Set<TypeVariable>
+        konst derivedFrom: Set<TypeVariable>
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (other == null || this::class.java != other::class.java) return false
 
-            val bound = other as Bound
+            konst bound = other as Bound
 
             if (typeVariable != bound.typeVariable) return false
             if (constrainingType != bound.constrainingType) return false

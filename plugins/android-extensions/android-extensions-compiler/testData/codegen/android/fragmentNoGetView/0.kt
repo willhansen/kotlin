@@ -11,20 +11,20 @@ import kotlinx.android.synthetic.main.layout.*
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class MyFragment(): Fragment() {
-    val baseActivity = Activity()
+    konst baseActivity = Activity()
 
     override fun getActivity(): Activity = baseActivity
 
     override fun getView(): View? = null
 
     public fun box(): String {
-        val button = login
+        konst button = login
         return if (button == null) "OK" else "Button is not null: $button"
     }
 }

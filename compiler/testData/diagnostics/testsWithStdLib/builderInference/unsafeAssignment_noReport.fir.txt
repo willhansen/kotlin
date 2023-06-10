@@ -9,15 +9,15 @@ FILE: unsafeAssignment_noReport.fir.kt
 
         public final var a: R|T?| = Null(null)
             public get(): R|T?|
-            public set(value: R|T?|): R|kotlin/Unit|
+            public set(konstue: R|T?|): R|kotlin/Unit|
 
     }
     public final fun <T : R|kotlin/Any|> myBuilder(block: R|Foo<T>.() -> kotlin/Unit|): R|Foo<T>| {
         ^myBuilder R|/Foo.Foo|<R|T|>().R|kotlin/apply|<R|Foo<T>|>(R|<local>/block|)
     }
     public final fun main(arg: R|kotlin/Any|): R|kotlin/Unit| {
-        lval x: R|kotlin/Int| = Int(57)
-        lval value: R|Foo<kotlin/Any>| = R|/myBuilder|<R|kotlin/Any|>(<L> = myBuilder@fun R|Foo<kotlin/Any>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        lkonst x: R|kotlin/Int| = Int(57)
+        lkonst konstue: R|Foo<kotlin/Any>| = R|/myBuilder|<R|kotlin/Any|>(<L> = myBuilder@fun R|Foo<kotlin/Any>|.<anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             this@R|special/anonymous|.R|SubstitutionOverride</Foo.doSmthng: R|kotlin/Unit|>|(String(one ))
             this@R|special/anonymous|.R|SubstitutionOverride</Foo.a: R|Stub (chain inference): TypeVariable(T)?|>| = Int(57)
             this@R|special/anonymous|.R|SubstitutionOverride</Foo.a: R|Stub (chain inference): TypeVariable(T)?|>| = R|<local>/x|
@@ -29,7 +29,7 @@ FILE: unsafeAssignment_noReport.fir.kt
 
         }
         )
-        <Ambiguity: println, [kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println]>#(R|<local>/value|.R|SubstitutionOverride</Foo.a: R|kotlin/Any?|>|?.{ $subj$.<Unresolved name: count>#(<L> = count@fun <anonymous>(): R|kotlin/Boolean| <inline=Unknown>  {
+        <Ambiguity: println, [kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println, kotlin/io/println]>#(R|<local>/konstue|.R|SubstitutionOverride</Foo.a: R|kotlin/Any?|>|?.{ $subj$.<Unresolved name: count>#(<L> = count@fun <anonymous>(): R|kotlin/Boolean| <inline=Unknown>  {
             ^ Char(l).R|kotlin/Char.rangeTo|(Char(q)).R|kotlin/ranges/CharRange.contains|(<Unresolved name: it>#)
         }
         ) })

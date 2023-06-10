@@ -1,12 +1,12 @@
 object OHolder {
-    val O = "O"
+    konst O = "O"
 }
 
 typealias OHolderAlias = OHolder
 
 class KHolder {
     companion object {
-        val K = "K"
+        konst K = "K"
     }
 }
 

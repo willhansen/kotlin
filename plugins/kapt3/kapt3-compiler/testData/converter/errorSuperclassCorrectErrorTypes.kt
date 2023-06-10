@@ -30,9 +30,9 @@ class TClBarBaz : Cl, Bar, Baz
 
 class TBarBazCl : Bar, Baz, Cl
 
-class TFooBar(val a: X) : Foo(), Bar by a, Intf
+class TFooBar(konst a: X) : Foo(), Bar by a, Intf
 
-class TFooBar2(val a: X): Foo by a, Bar by a
+class TFooBar2(konst a: X): Foo by a, Bar by a
 
 class TxFooxBarxBaz : x.Foo(), x.Bar, x.Baz, Intf
 
@@ -47,7 +47,7 @@ class Generics3 : Foo<Bar, Baz, Boo<Baz, List<*>>, String>
 
 class MappedList<R>() : AbstractList<R>(), List<R> {
     override fun get(index: Int) = throw RuntimeException()
-    override val size get() = 0
+    override konst size get() = 0
 }
 
 interface Parent<A : CharSequence?, B>

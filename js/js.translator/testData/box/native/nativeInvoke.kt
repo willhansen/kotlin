@@ -22,8 +22,8 @@ fun Function.bar(a: Any?, b: Any? = definedExternally, c: Any? = definedExternal
 object t{}
 
 fun box(): String {
-    val f = Function("a", "return a")
-    val g = Function("a", "b", "c", "return a + (b || 10) + (c || 100)")
+    konst f = Function("a", "return a")
+    konst g = Function("a", "b", "c", "return a + (b || 10) + (c || 100)")
 
     assertEquals(1, f(1))
     assertEquals("ok", f("ok"))

@@ -1,32 +1,32 @@
 
 package pod1 {
 
-    enum class EnumWithoutConstant private constructor(value: Long) : Enum<EnumWithoutConstant>, CEnum {
-        override val value: Long
+    enum class EnumWithoutConstant private constructor(konstue: Long) : Enum<EnumWithoutConstant>, CEnum {
+        override konst konstue: Long
 
         class Var constructor(rawPtr: NativePtr /* = NativePtr */) : CEnumVar {
-            var value: EnumWithoutConstant
+            var konstue: EnumWithoutConstant
             @CEnumVarTypeSize(size = 8) @Deprecated(level = DeprecationLevel.WARNING, message = "Use sizeOf<T>() or alignOf<T>() instead.", replaceWith = ReplaceWith(expression = "", imports = {})) companion object : CPrimitiveVar.Type
         }
 
         companion object {
-            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(value: Long): EnumWithoutConstant
+            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(konstue: Long): EnumWithoutConstant
         }
 
     }
 
-    enum class ForwardEnum private constructor(value: Long) : Enum<ForwardEnum>, CEnum {
-        @ConstantValue.Long(value = 0.toLong()) enum entry A
-        @ConstantValue.Long(value = 1.toLong()) enum entry B
-        override val value: Long
+    enum class ForwardEnum private constructor(konstue: Long) : Enum<ForwardEnum>, CEnum {
+        @ConstantValue.Long(konstue = 0.toLong()) enum entry A
+        @ConstantValue.Long(konstue = 1.toLong()) enum entry B
+        override konst konstue: Long
 
         class Var constructor(rawPtr: NativePtr /* = NativePtr */) : CEnumVar {
-            var value: ForwardEnum
+            var konstue: ForwardEnum
             @CEnumVarTypeSize(size = 8) @Deprecated(level = DeprecationLevel.WARNING, message = "Use sizeOf<T>() or alignOf<T>() instead.", replaceWith = ReplaceWith(expression = "", imports = {})) companion object : CPrimitiveVar.Type
         }
 
         companion object {
-            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(value: Long): ForwardEnum
+            @Deprecated(level = DeprecationLevel.WARNING, message = "Will be removed.", replaceWith = ReplaceWith(expression = "", imports = {})) fun byValue(konstue: Long): ForwardEnum
         }
 
     }

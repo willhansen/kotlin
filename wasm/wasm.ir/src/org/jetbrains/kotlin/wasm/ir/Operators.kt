@@ -38,71 +38,71 @@ enum class WasmImmediateKind {
 }
 
 sealed class WasmImmediate {
-    class ConstI32(val value: Int) : WasmImmediate()
-    class ConstI64(val value: Long) : WasmImmediate()
-    class ConstF32(val rawBits: UInt) : WasmImmediate()
-    class ConstF64(val rawBits: ULong) : WasmImmediate()
-    class SymbolI32(val value: WasmSymbol<Int>) : WasmImmediate()
+    class ConstI32(konst konstue: Int) : WasmImmediate()
+    class ConstI64(konst konstue: Long) : WasmImmediate()
+    class ConstF32(konst rawBits: UInt) : WasmImmediate()
+    class ConstF64(konst rawBits: ULong) : WasmImmediate()
+    class SymbolI32(konst konstue: WasmSymbol<Int>) : WasmImmediate()
 
-    class MemArg(val align: UInt, val offset: UInt) : WasmImmediate()
+    class MemArg(konst align: UInt, konst offset: UInt) : WasmImmediate()
 
     sealed class BlockType : WasmImmediate() {
-        class Function(val type: WasmFunctionType) : BlockType()
-        class Value(val type: WasmType?) : BlockType()
+        class Function(konst type: WasmFunctionType) : BlockType()
+        class Value(konst type: WasmType?) : BlockType()
     }
 
-    class FuncIdx(val value: WasmSymbol<WasmFunction>) : WasmImmediate() {
-        constructor(value: WasmFunction) : this(WasmSymbol(value))
+    class FuncIdx(konst konstue: WasmSymbol<WasmFunction>) : WasmImmediate() {
+        constructor(konstue: WasmFunction) : this(WasmSymbol(konstue))
     }
 
-    class LocalIdx(val value: WasmSymbol<WasmLocal>) : WasmImmediate() {
-        constructor(value: WasmLocal) : this(WasmSymbol(value))
+    class LocalIdx(konst konstue: WasmSymbol<WasmLocal>) : WasmImmediate() {
+        constructor(konstue: WasmLocal) : this(WasmSymbol(konstue))
     }
 
-    class GlobalIdx(val value: WasmSymbol<WasmGlobal>) : WasmImmediate() {
-        constructor(value: WasmGlobal) : this(WasmSymbol(value))
+    class GlobalIdx(konst konstue: WasmSymbol<WasmGlobal>) : WasmImmediate() {
+        constructor(konstue: WasmGlobal) : this(WasmSymbol(konstue))
     }
 
-    class TypeIdx(val value: WasmSymbolReadOnly<WasmTypeDeclaration>) : WasmImmediate() {
-        constructor(value: WasmTypeDeclaration) : this(WasmSymbol(value))
+    class TypeIdx(konst konstue: WasmSymbolReadOnly<WasmTypeDeclaration>) : WasmImmediate() {
+        constructor(konstue: WasmTypeDeclaration) : this(WasmSymbol(konstue))
     }
 
-    class ValTypeVector(val value: List<WasmType>) : WasmImmediate()
+    class ValTypeVector(konst konstue: List<WasmType>) : WasmImmediate()
 
-    class MemoryIdx(val value: Int) : WasmImmediate()
+    class MemoryIdx(konst konstue: Int) : WasmImmediate()
 
-    class DataIdx(val value: WasmSymbol<Int>) : WasmImmediate() {
-        constructor(value: Int) : this(WasmSymbol(value))
+    class DataIdx(konst konstue: WasmSymbol<Int>) : WasmImmediate() {
+        constructor(konstue: Int) : this(WasmSymbol(konstue))
     }
 
-    class TableIdx(val value: WasmSymbolReadOnly<Int>) : WasmImmediate() {
-        constructor(value: Int) : this(WasmSymbol(value))
+    class TableIdx(konst konstue: WasmSymbolReadOnly<Int>) : WasmImmediate() {
+        constructor(konstue: Int) : this(WasmSymbol(konstue))
     }
 
-    class LabelIdx(val value: Int) : WasmImmediate()
-    class TagIdx(val value: Int) : WasmImmediate()
-    class LabelIdxVector(val value: List<Int>) : WasmImmediate()
-    class ElemIdx(val value: WasmElement) : WasmImmediate()
+    class LabelIdx(konst konstue: Int) : WasmImmediate()
+    class TagIdx(konst konstue: Int) : WasmImmediate()
+    class LabelIdxVector(konst konstue: List<Int>) : WasmImmediate()
+    class ElemIdx(konst konstue: WasmElement) : WasmImmediate()
 
-    class GcType(val value: WasmSymbol<WasmTypeDeclaration>) : WasmImmediate() {
-        constructor(value: WasmTypeDeclaration) : this(WasmSymbol(value))
+    class GcType(konst konstue: WasmSymbol<WasmTypeDeclaration>) : WasmImmediate() {
+        constructor(konstue: WasmTypeDeclaration) : this(WasmSymbol(konstue))
     }
 
-    class StructFieldIdx(val value: WasmSymbol<Int>) : WasmImmediate()
+    class StructFieldIdx(konst konstue: WasmSymbol<Int>) : WasmImmediate()
 
-    class HeapType(val value: WasmHeapType) : WasmImmediate() {
+    class HeapType(konst konstue: WasmHeapType) : WasmImmediate() {
         constructor(type: WasmType) : this(type.getHeapType())
     }
 
     // Pseudo-immediates
-    class ConstString(val value: String) : WasmImmediate()
+    class ConstString(konst konstue: String) : WasmImmediate()
 }
 
 
 enum class WasmOp(
-    val mnemonic: String,
-    val opcode: Int,
-    val immediates: List<WasmImmediateKind> = emptyList()
+    konst mnemonic: String,
+    konst opcode: Int,
+    konst immediates: List<WasmImmediateKind> = emptyList()
 ) {
 
     // Unary
@@ -394,7 +394,7 @@ enum class WasmOp(
     constructor(mnemonic: String, opcode: Int, vararg immediates: WasmImmediateKind) : this(mnemonic, opcode, immediates.toList())
 }
 
-const val WASM_OP_PSEUDO_OPCODE = 0xFFFF
+const konst WASM_OP_PSEUDO_OPCODE = 0xFFFF
 
-val opcodesToOp: Map<Int, WasmOp> =
+konst opcodesToOp: Map<Int, WasmOp> =
     enumValues<WasmOp>().associateBy { it.opcode }

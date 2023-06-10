@@ -6,9 +6,9 @@ public inline fun </*0*/ reified E : kotlin.Exception /* = java.lang.Exception *
 
 public final class XException</*0*/ T> : kotlin.Throwable {
     public constructor XException</*0*/ T>(/*0*/ p: T)
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
-    public final val p: T
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
+    public final konst p: T
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ exception: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -26,9 +26,9 @@ public final class XException</*0*/ T> : kotlin.Throwable {
 
 public final class YException</*0*/ T> : java.lang.RuntimeException {
     public constructor YException</*0*/ T>(/*0*/ p: T)
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
-    public final val p: T
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
+    public final konst p: T
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ exception: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!
@@ -46,9 +46,9 @@ public final class YException</*0*/ T> : java.lang.RuntimeException {
 
 public final class ZException</*0*/ T> : kotlin.Exception /* = java.lang.Exception */ {
     public constructor ZException</*0*/ T>(/*0*/ p: T)
-    public open override /*1*/ /*fake_override*/ val cause: kotlin.Throwable?
-    public open override /*1*/ /*fake_override*/ val message: kotlin.String?
-    public final val p: T
+    public open override /*1*/ /*fake_override*/ konst cause: kotlin.Throwable?
+    public open override /*1*/ /*fake_override*/ konst message: kotlin.String?
+    public final konst p: T
     public final override /*1*/ /*fake_override*/ fun addSuppressed(/*0*/ exception: kotlin.Throwable!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun fillInStackTrace(): kotlin.Throwable!

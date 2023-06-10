@@ -110,7 +110,7 @@ class FolderImpl: Folder {
 }
 
 fun box(): String {
-    val collector: Collector = CollectorImpl()
+    konst collector: Collector = CollectorImpl()
 
     assertEquals("[1, 2, [3, 4], 5, 6, 7]", collector.collect1("1", "2", "3", "4", trailing2 = "6", trailing1 = "5", trailing3 = "7"))
     assertEquals("[∅, 1, [2, 3, 4, 5, 6, 7], ∅, ∅, ∅]", collector.collect2("1", "2", "3", "4", "5", "6", "7"))
@@ -139,7 +139,7 @@ fun box(): String {
         js("collector.collect4()").unsafeCast<String>()
     )
 
-    val folder: Folder = FolderImpl()
+    konst folder: Folder = FolderImpl()
 
     assertEquals(true, folder.sumBools(false, true, false, false))
     assertEquals(10, folder.sumBytes(1, 2, 3, 4))

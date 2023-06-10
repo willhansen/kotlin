@@ -20,18 +20,18 @@ import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 import org.jetbrains.kotlin.renderer.DescriptorRenderer
 import org.jetbrains.kotlin.types.KotlinType
 
-class SmartTypeRenderer(private val baseRenderer: DescriptorRenderer) : DiagnosticParameterRenderer<KotlinType> {
+class SmartTypeRenderer(private konst baseRenderer: DescriptorRenderer) : DiagnosticParameterRenderer<KotlinType> {
     override fun render(obj: KotlinType, renderingContext: RenderingContext): String {
-        val adaptiveRenderer = baseRenderer.withOptions {
+        konst adaptiveRenderer = baseRenderer.withOptions {
             classifierNamePolicy = renderingContext.adaptiveClassifierPolicy
         }
         return adaptiveRenderer.renderType(obj)
     }
 }
 
-class SmartDescriptorRenderer(private val baseRenderer: DescriptorRenderer) : DiagnosticParameterRenderer<DeclarationDescriptor> {
+class SmartDescriptorRenderer(private konst baseRenderer: DescriptorRenderer) : DiagnosticParameterRenderer<DeclarationDescriptor> {
     override fun render(obj: DeclarationDescriptor, renderingContext: RenderingContext): String {
-        val adaptiveRenderer = baseRenderer.withOptions {
+        konst adaptiveRenderer = baseRenderer.withOptions {
             classifierNamePolicy = renderingContext.adaptiveClassifierPolicy
         }
         return adaptiveRenderer.render(obj)

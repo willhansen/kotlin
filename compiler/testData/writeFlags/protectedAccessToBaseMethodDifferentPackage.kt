@@ -21,12 +21,12 @@ package differentPackage;
 import Base.Derived
 import Base
 
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 class Kotlin : Base.Derived() {
     fun doTest(): String {
-        if (eval { Base.baseOnly() } != "BASE") return "fail 8"
-        if (eval { baseOnly() } != "BASE") return "fail 10"
+        if (ekonst { Base.baseOnly() } != "BASE") return "fail 8"
+        if (ekonst { baseOnly() } != "BASE") return "fail 10"
         return "FAIL"
     }
 }

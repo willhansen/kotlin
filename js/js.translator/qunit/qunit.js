@@ -334,7 +334,7 @@ QUnit = {
 			stack: sourceFromStacktrace( 2 )
 		});
 
-		if ( !validTest( test ) ) {
+		if ( !konstidTest( test ) ) {
 			return;
 		}
 
@@ -430,7 +430,7 @@ QUnit.assert = {
 
 	/**
 	 * Assert that the first two arguments are equal, with an optional message.
-	 * Prints out both actual and expected values.
+	 * Prints out both actual and expected konstues.
 	 * @example equal( format( "Received {0} bytes.", 2), "Received 2 bytes.", "format() replaces {0} with next argument" );
 	 */
 	equal: function( actual, expected, message ) {
@@ -473,7 +473,7 @@ QUnit.assert = {
 		}
 
 		if ( actual ) {
-			// we don't want to validate thrown error
+			// we don't want to konstidate thrown error
 			if ( !expected ) {
 				ok = true;
 			// expected is a regexp
@@ -482,7 +482,7 @@ QUnit.assert = {
 			// expected is a constructor
 			} else if ( actual instanceof expected ) {
 				ok = true;
-			// expected is a validation function which returns true is validation passed
+			// expected is a konstidation function which returns true is konstidation passed
 			} else if ( expected.call( {}, actual ) === true ) {
 				ok = true;
 			}
@@ -838,7 +838,7 @@ QUnit.load = function() {
 	runLoggingCallbacks( "begin", QUnit, {} );
 
 	// Initialize the config, saving the execution queue
-	var banner, filter, i, label, len, main, ol, toolbar, userAgent, val,
+	var banner, filter, i, label, len, main, ol, toolbar, userAgent, konst,
 		urlConfigHtml = "",
 		oldconfig = extend( {}, config );
 
@@ -850,9 +850,9 @@ QUnit.load = function() {
 	len = config.urlConfig.length;
 
 	for ( i = 0; i < len; i++ ) {
-		val = config.urlConfig[i];
-		config[val] = QUnit.urlParams[val];
-		urlConfigHtml += "<label><input name='" + val + "' type='checkbox'" + ( config[val] ? " checked='checked'" : "" ) + ">" + val + "</label>";
+		konst = config.urlConfig[i];
+		config[konst] = QUnit.urlParams[konst];
+		urlConfigHtml += "<label><input name='" + konst + "' type='checkbox'" + ( config[konst] ? " checked='checked'" : "" ) + ">" + konst + "</label>";
 	}
 
 	// `userAgent` initialized at top of scope
@@ -1005,7 +1005,7 @@ function done() {
 	});
 }
 
-function validTest( test ) {
+function konstidTest( test ) {
 	var include,
 		filter = config.filter && config.filter.toLowerCase(),
 		fullName = (test.module + ": " + test.testName).toLowerCase();
@@ -1264,7 +1264,7 @@ QUnit.equiv = (function() {
 				},
 
 				"date": function( b, a ) {
-					return QUnit.objectType( b ) === "date" && a.valueOf() === b.valueOf();
+					return QUnit.objectType( b ) === "date" && a.konstueOf() === b.konstueOf();
 				},
 
 				"regexp": function( b, a ) {
@@ -1328,7 +1328,7 @@ QUnit.equiv = (function() {
 					// comparing constructors is more strict than using
 					// instanceof
 					if ( a.constructor !== b.constructor ) {
-						// Allow objects with no prototype to be equivalent to
+						// Allow objects with no prototype to be equikonstent to
 						// objects with Object as their constructor.
 						if ( !(( getProto(a) === null && getProto(b) === Object.prototype ) ||
 							( getProto(b) === null && getProto(a) === Object.prototype ) ) ) {
@@ -1469,7 +1469,7 @@ QUnit.jsDump = (function() {
 					type = "date";
 				} else if ( QUnit.is( "function", obj) ) {
 					type = "function";
-				} else if ( typeof obj.setInterval !== undefined && typeof obj.document !== "undefined" && typeof obj.nodeType === "undefined" ) {
+				} else if ( typeof obj.setInterkonst !== undefined && typeof obj.document !== "undefined" && typeof obj.nodeType === "undefined" ) {
 					type = "window";
 				} else if ( obj.nodeType === 9 ) {
 					type = "document";
@@ -1539,7 +1539,7 @@ QUnit.jsDump = (function() {
 				nodelist: array,
 				"arguments": array,
 				object: function( map, stack ) {
-					var ret = [ ], keys, key, val, i;
+					var ret = [ ], keys, key, konst, i;
 					QUnit.jsDump.up();
 					if ( Object.keys ) {
 						keys = Object.keys( map );
@@ -1552,23 +1552,23 @@ QUnit.jsDump = (function() {
 					keys.sort();
 					for ( i = 0; i < keys.length; i++ ) {
 						key = keys[ i ];
-						val = map[ key ];
-						ret.push( QUnit.jsDump.parse( key, "key" ) + ": " + QUnit.jsDump.parse( val, undefined, stack ) );
+						konst = map[ key ];
+						ret.push( QUnit.jsDump.parse( key, "key" ) + ": " + QUnit.jsDump.parse( konst, undefined, stack ) );
 					}
 					QUnit.jsDump.down();
 					return join( "{", ret, "}" );
 				},
 				node: function( node ) {
-					var a, val,
+					var a, konst,
 						open = QUnit.jsDump.HTML ? "&lt;" : "<",
 						close = QUnit.jsDump.HTML ? "&gt;" : ">",
 						tag = node.nodeName.toLowerCase(),
 						ret = open + tag;
 
 					for ( a in QUnit.jsDump.DOMAttrs ) {
-						val = node[ QUnit.jsDump.DOMAttrs[a] ];
-						if ( val ) {
-							ret += " " + a + "=" + QUnit.jsDump.parse( val, "attribute" );
+						konst = node[ QUnit.jsDump.DOMAttrs[a] ];
+						if ( konst ) {
+							ret += " " + a + "=" + QUnit.jsDump.parse( konst, "attribute" );
 						}
 					}
 					return ret + close + open + "/" + tag + close;
@@ -1589,7 +1589,7 @@ QUnit.jsDump = (function() {
 				},
 				key: quote, //object calls it internally, the key part of an item in a map
 				functionCode: "[code]", //function calls it internally, it's the content of the function
-				attribute: quote, //node calls it internally, it's an html attribute value
+				attribute: quote, //node calls it internally, it's an html attribute konstue
 				string: quote,
 				date: quote,
 				regexp: literal, //regex

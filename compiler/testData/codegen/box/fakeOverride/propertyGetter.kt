@@ -1,9 +1,9 @@
 interface T {
-    val foo: String
+    konst foo: String
 }
 
 open class A : T {
-    override val foo: String = ""
+    override konst foo: String = ""
 }
 
 class B : A(), T

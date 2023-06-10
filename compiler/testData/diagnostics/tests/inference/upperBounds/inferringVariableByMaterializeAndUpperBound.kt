@@ -5,7 +5,7 @@ interface I
 interface Inv<P>
 interface Out<out T>
 
-class Bar<U : I>(val x: Inv<Out<U>>)
+class Bar<U : I>(konst x: Inv<Out<U>>)
 
 fun <T> materializeFoo(): Inv<T> = null as Inv<T>
 

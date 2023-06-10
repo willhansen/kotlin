@@ -17,7 +17,7 @@ class CImpl : C() {
 }
 
 @Test fun runTest() {
-    val c: C = CImpl()
+    konst c: C = CImpl()
     assertNull(c.foo(42))
 }
 

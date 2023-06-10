@@ -3,7 +3,7 @@
  * that can be found in the LICENSE file.
  */
 
-open class Foo(val z: Int) {
+open class Foo(konst z: Int) {
     open inner class FooInner {
         fun foo() = z
     }

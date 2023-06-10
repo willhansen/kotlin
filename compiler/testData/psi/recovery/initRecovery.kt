@@ -4,7 +4,7 @@ class A {
 
 class B {
     @Ann init
-    val x = 1
+    konst x = 1
     init
     fun foo() {}
     init

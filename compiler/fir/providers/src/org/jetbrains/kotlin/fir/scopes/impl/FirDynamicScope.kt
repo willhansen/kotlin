@@ -44,8 +44,8 @@ import org.jetbrains.kotlin.name.StandardClassIds
 annotation class FirDynamicScopeConstructor
 
 class FirDynamicScope @FirDynamicScopeConstructor constructor(
-    private val session: FirSession,
-    private val scopeSession: ScopeSession,
+    private konst session: FirSession,
+    private konst scopeSession: ScopeSession,
 ) : FirTypeScope() {
     override fun processDirectOverriddenFunctionsWithBaseScope(
         functionSymbol: FirNamedFunctionSymbol,
@@ -61,7 +61,7 @@ class FirDynamicScope @FirDynamicScopeConstructor constructor(
 
     override fun getClassifierNames(): Set<Name> = emptySet()
 
-    private val anyTypeScope by lazy {
+    private konst anyTypeScope by lazy {
         session.builtinTypes.anyType.type.scope(
             session,
             scopeSession,
@@ -111,26 +111,26 @@ class FirDynamicScope @FirDynamicScopeConstructor constructor(
     }
 }
 
-class FirDynamicMembersStorage(val session: FirSession) : FirSessionComponent {
-    private val cachesFactory = session.firCachesFactory
+class FirDynamicMembersStorage(konst session: FirSession) : FirSessionComponent {
+    private konst cachesFactory = session.firCachesFactory
 
     @OptIn(FirDynamicScopeConstructor::class)
-    private val dynamicScopeCacheByScope: FirCache<ScopeSession, FirDynamicScope, Nothing?> =
+    private konst dynamicScopeCacheByScope: FirCache<ScopeSession, FirDynamicScope, Nothing?> =
         cachesFactory.createCache { it -> FirDynamicScope(session, it) }
 
     fun getDynamicScopeFor(scopeSession: ScopeSession) = dynamicScopeCacheByScope.getValue(scopeSession, null)
 
-    val functionsCacheByName: FirCache<Name, FirSimpleFunction, Nothing?> =
+    konst functionsCacheByName: FirCache<Name, FirSimpleFunction, Nothing?> =
         cachesFactory.createCache { name -> buildPseudoFunctionByName(name) }
 
-    val propertiesCacheByName: FirCache<Name, FirProperty, Nothing?> =
+    konst propertiesCacheByName: FirCache<Name, FirProperty, Nothing?> =
         cachesFactory.createCache { name -> buildPseudoPropertyByName(name) }
 
-    private val dynamicTypeRef = buildResolvedTypeRef {
+    private konst dynamicTypeRef = buildResolvedTypeRef {
         type = ConeDynamicType.create(session)
     }
 
-    private val anyArrayTypeRef = buildResolvedTypeRef {
+    private konst anyArrayTypeRef = buildResolvedTypeRef {
         type = ConeClassLikeTypeImpl(
             StandardClassIds.Array.toLookupTag(),
             arrayOf(dynamicTypeRef.coneType),
@@ -161,7 +161,7 @@ class FirDynamicMembersStorage(val session: FirSession) : FirSessionComponent {
             dynamicTypeRef
         }
 
-        val parameter = buildValueParameter {
+        konst parameter = buildValueParameter {
             moduleData = session.moduleData
             containingFunctionSymbol = this@buildSimpleFunction.symbol
             origin = FirDeclarationOrigin.DynamicScope
@@ -173,7 +173,7 @@ class FirDynamicMembersStorage(val session: FirSession) : FirSessionComponent {
             isVararg = true
         }
 
-        valueParameters.add(parameter)
+        konstueParameters.add(parameter)
     }
 
     private fun buildPseudoPropertyByName(name: Name) = buildProperty {
@@ -195,4 +195,4 @@ class FirDynamicMembersStorage(val session: FirSession) : FirSessionComponent {
     }
 }
 
-val FirSession.dynamicMembersStorage: FirDynamicMembersStorage by FirSession.sessionComponentAccessor()
+konst FirSession.dynamicMembersStorage: FirDynamicMembersStorage by FirSession.sessionComponentAccessor()

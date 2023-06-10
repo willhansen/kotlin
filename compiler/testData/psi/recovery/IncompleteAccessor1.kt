@@ -1,5 +1,5 @@
 class C {
-    val v: Int get(
+    konst v: Int get(
 }
 
 class D

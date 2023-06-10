@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.serialization.deserialization.KOTLIN_SUSPEND_BUILT_I
 object LambdaWithSuspendModifierCallChecker : CallChecker {
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.candidateDescriptor
-        val call = resolvedCall.call
-        val calleeName = call.referencedName()
-        val variableCalleeName = (resolvedCall as? VariableAsFunctionResolvedCall)?.variableCall?.call?.referencedName()
+        konst descriptor = resolvedCall.candidateDescriptor
+        konst call = resolvedCall.call
+        konst calleeName = call.referencedName()
+        konst variableCalleeName = (resolvedCall as? VariableAsFunctionResolvedCall)?.variableCall?.call?.referencedName()
 
         if (calleeName != "suspend" && variableCalleeName != "suspend" && descriptor.name.asString() != "suspend") return
 
@@ -54,7 +54,7 @@ object LambdaWithSuspendModifierCallChecker : CallChecker {
     private fun Call.referencedName(): String? = (calleeExpression as? KtSimpleNameExpression)?.getReferencedName()
 
     private fun Call.hasNoArgumentListButDanglingLambdas(): Boolean =
-        valueArgumentList?.leftParenthesis == null && functionLiteralArguments.isNotEmpty()
+        konstueArgumentList?.leftParenthesis == null && functionLiteralArguments.isNotEmpty()
 
     private fun Call.isInfixWithRightLambda(): Boolean =
         isInfixCall(this) && (callElement as? KtBinaryExpression)?.right is KtLambdaExpression

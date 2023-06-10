@@ -3,18 +3,18 @@
 // IR_FILE: jvmInstanceFieldReference.txt
 class Derived: Base() {
     init {
-        value = 0
+        konstue = 0
     }
 
-    fun getValue() = value
+    fun getValue() = konstue
 
-    fun setValue(value: Int) {
-        this.value = value
+    fun setValue(konstue: Int) {
+        this.konstue = konstue
     }
 }
 
 // FILE: Base.java
 public class Base {
-    public int value;
+    public int konstue;
 }
 

@@ -5,7 +5,7 @@
 
 // WITH_STDLIB
 
-annotation class Ann(vararg val p: Int)
+annotation class Ann(vararg konst p: Int)
 
 @Ann(p = 1) class MyClass
 
@@ -15,7 +15,7 @@ fun box(): String {
 }
 
 fun test(klass: Class<*>, expected: String) {
-    val ann = klass.getAnnotation(Ann::class.java)
+    konst ann = klass.getAnnotation(Ann::class.java)
     if (ann == null) throw AssertionError("fail: cannot find Ann on ${klass}")
 
     var result = ""

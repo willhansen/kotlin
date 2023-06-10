@@ -3,7 +3,7 @@ package test;
 public class kt3698 {
 
     @interface Foo {
-        int value();
+        int konstue();
     }
 
     @Foo(KotlinClass.FOO) // Error here

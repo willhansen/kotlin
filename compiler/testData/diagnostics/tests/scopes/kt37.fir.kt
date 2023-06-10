@@ -10,7 +10,7 @@ class C() {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     if (c.<!INVISIBLE_REFERENCE!>f<!> != 610) return "fail"
     return "OK"
 }

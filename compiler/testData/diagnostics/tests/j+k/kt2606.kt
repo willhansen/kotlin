@@ -8,7 +8,7 @@ import java.util.*
 import java.lang.annotation.*
 
 fun bar() : Iterator<Int>? {
-    val i : Iterable<<!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Integer<!>>
-    val a : Annotation
+    konst i : Iterable<<!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>Integer<!>>
+    konst a : Annotation
     return null
 }

@@ -9,7 +9,7 @@ FILE: simpleIf.kt
         R|<local>/x|.<Unresolved name: length>#
     }
     public final fun test_2(x: R|kotlin/Any|): R|kotlin/Unit| {
-        lval b: R|kotlin/Boolean| = (R|<local>/x| is R|kotlin/String|)
+        lkonst b: R|kotlin/Boolean| = (R|<local>/x| is R|kotlin/String|)
         when () {
             R|<local>/b| ->  {
                 R|<local>/x|.R|kotlin/String.length|

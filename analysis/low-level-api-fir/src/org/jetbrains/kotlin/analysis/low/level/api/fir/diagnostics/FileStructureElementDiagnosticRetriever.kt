@@ -29,15 +29,15 @@ internal abstract class FileStructureElementDiagnosticRetriever {
 }
 
 internal class ClassDiagnosticRetriever(
-    private val structureElementDeclaration: FirRegularClass
+    private konst structureElementDeclaration: FirRegularClass
 ) : FileStructureElementDiagnosticRetriever() {
     override fun retrieve(
         firFile: FirFile,
         collector: FileStructureElementDiagnosticsCollector,
         moduleComponents: LLFirModuleResolveComponents,
     ): FileStructureElementDiagnosticList {
-        val sessionHolder = SessionHolderImpl(moduleComponents.session, moduleComponents.scopeSessionProvider.getScopeSession())
-        val context = PersistenceContextCollector.collectContext(sessionHolder, firFile, structureElementDeclaration)
+        konst sessionHolder = SessionHolderImpl(moduleComponents.session, moduleComponents.scopeSessionProvider.getScopeSession())
+        konst context = PersistenceContextCollector.collectContext(sessionHolder, firFile, structureElementDeclaration)
         return withSourceCodeAnalysisExceptionUnwrapping {
             collector.collectForStructureElement(structureElementDeclaration) { components ->
                 Visitor(structureElementDeclaration, context, components)
@@ -46,7 +46,7 @@ internal class ClassDiagnosticRetriever(
     }
 
     private class Visitor(
-        private val structureElementDeclaration: FirRegularClass,
+        private konst structureElementDeclaration: FirRegularClass,
         context: CheckerContextForProvider,
         components: DiagnosticCollectorComponents
     ) : LLFirDiagnosticVisitor(context, components) {
@@ -72,15 +72,15 @@ internal class ClassDiagnosticRetriever(
 }
 
 internal class SingleNonLocalDeclarationDiagnosticRetriever(
-    private val structureElementDeclaration: FirDeclaration
+    private konst structureElementDeclaration: FirDeclaration
 ) : FileStructureElementDiagnosticRetriever() {
     override fun retrieve(
         firFile: FirFile,
         collector: FileStructureElementDiagnosticsCollector,
         moduleComponents: LLFirModuleResolveComponents,
     ): FileStructureElementDiagnosticList {
-        val sessionHolder = SessionHolderImpl(moduleComponents.session, moduleComponents.scopeSessionProvider.getScopeSession())
-        val context = PersistenceContextCollector.collectContext(sessionHolder, firFile, structureElementDeclaration)
+        konst sessionHolder = SessionHolderImpl(moduleComponents.session, moduleComponents.scopeSessionProvider.getScopeSession())
+        konst context = PersistenceContextCollector.collectContext(sessionHolder, firFile, structureElementDeclaration)
         return withSourceCodeAnalysisExceptionUnwrapping {
             collector.collectForStructureElement(structureElementDeclaration) { components ->
                 Visitor(context, components)

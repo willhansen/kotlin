@@ -33,14 +33,14 @@ fun List<OutputFile>.filterClassFiles(): List<OutputFile> {
 fun JvmModuleProtoBuf.Module.Builder.addDataFromCompiledModule(
     registry: PackagePartRegistry, stringTable: StringTableImpl, state: GenerationState
 ) {
-    for (part in registry.parts.values.addCompiledPartsAndSort(state)) {
+    for (part in registry.parts.konstues.addCompiledPartsAndSort(state)) {
         part.addTo(this)
     }
 
     // Take all optional annotation classes from sources, as well as look up all previously compiled optional annotation classes
     // by FQ name in the current module. The latter is needed because in incremental compilation scenario, the already compiled
     // classes will not be available via sources.
-    val optionalAnnotationClassDescriptors =
+    konst optionalAnnotationClassDescriptors =
         registry.optionalAnnotations.toSet() +
                 state.loadCompiledModule()?.moduleData?.run {
                     optionalAnnotations.mapNotNull { proto ->
@@ -50,7 +50,7 @@ fun JvmModuleProtoBuf.Module.Builder.addDataFromCompiledModule(
                     }
                 }.orEmpty()
 
-    val serializer = DescriptorSerializer.createTopLevel(
+    konst serializer = DescriptorSerializer.createTopLevel(
         JvmOptionalAnnotationSerializerExtension(stringTable), state.configuration.languageVersionSettings,
     )
     for (descriptor in optionalAnnotationClassDescriptors) {
@@ -59,9 +59,9 @@ fun JvmModuleProtoBuf.Module.Builder.addDataFromCompiledModule(
 }
 
 class JvmOptionalAnnotationSerializerExtension(
-    override val stringTable: StringTableImpl
+    override konst stringTable: StringTableImpl
 ) : KotlinSerializerExtensionBase(BuiltInSerializerProtocol) {
-    override val metadataVersion: BinaryVersion
+    override konst metadataVersion: BinaryVersion
         get() = JvmMetadataVersion.INSTANCE
 
     override fun shouldUseTypeTable(): Boolean = true
@@ -71,14 +71,14 @@ private fun Iterable<PackageParts>.addCompiledPartsAndSort(state: GenerationStat
     addCompiledParts(state).sortedBy { it.packageFqName }
 
 private fun Iterable<PackageParts>.addCompiledParts(state: GenerationState): List<PackageParts> {
-    val mapping = state.loadCompiledModule() ?: return this.toList()
+    konst mapping = state.loadCompiledModule() ?: return this.toList()
 
     state.incrementalCacheForThisTarget?.getObsoletePackageParts()?.forEach { internalName ->
-        val qualifier = JvmClassName.byInternalName(internalName).packageFqName.asString()
+        konst qualifier = JvmClassName.byInternalName(internalName).packageFqName.asString()
         mapping.findPackageParts(qualifier)?.removePart(internalName)
     }
 
-    return (this + mapping.packageFqName2Parts.values)
+    return (this + mapping.packageFqName2Parts.konstues)
         .groupBy { it.packageFqName }
         .map { (packageFqName, allOldPackageParts) ->
             PackageParts(packageFqName).apply {
@@ -88,7 +88,7 @@ private fun Iterable<PackageParts>.addCompiledParts(state: GenerationState): Lis
 }
 
 private fun GenerationState.loadCompiledModule(): ModuleMapping? {
-    val moduleMappingData = incrementalCacheForThisTarget?.getModuleMappingData() ?: return null
+    konst moduleMappingData = incrementalCacheForThisTarget?.getModuleMappingData() ?: return null
     return ModuleMapping.loadModuleMapping(moduleMappingData, "<incremental>", deserializationConfiguration) { version ->
         throw IllegalStateException("Version of the generated module cannot be incompatible: $version")
     }

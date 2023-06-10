@@ -8,7 +8,7 @@ fun run(arg: Int, funRef:(Int) -> Int): Int {
 fun inc(x: Int) = x + 1
 
 fun box(): String {
-    val funRef = ::inc
+    konst funRef = ::inc
     if (funRef(5) != 6) return "fail1"
 
     if (run(5, funRef) != 6) return "fail2"

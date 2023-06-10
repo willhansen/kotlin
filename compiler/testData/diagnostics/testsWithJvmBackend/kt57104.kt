@@ -11,7 +11,7 @@ interface BaseTest {
 
 open class GradleTestCase {
     @get:JvmName("myProject")
-    val project = Any()
+    konst project = Any()
 }
 
 open class GradleCodeInsightTestCase: GradleTestCase(), BaseTest

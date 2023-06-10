@@ -62,7 +62,7 @@ public interface Collection<out E> : Iterable<E> {
     /**
      * Returns the size of the collection.
      */
-    public val size: Int
+    public konst size: Int
 
     /**
      * Returns `true` if the collection is empty (contains no elements), `false` otherwise.
@@ -145,7 +145,7 @@ public interface MutableCollection<E> : Collection<E>, MutableIterable<E> {
 public interface List<out E> : Collection<E> {
     // Query Operations
 
-    override val size: Int
+    override konst size: Int
     override fun isEmpty(): Boolean
     override fun contains(element: @UnsafeVariance E): Boolean
     override fun iterator(): Iterator<E>
@@ -267,7 +267,7 @@ public interface MutableList<E> : List<E>, MutableCollection<E> {
 public interface Set<out E> : Collection<E> {
     // Query Operations
 
-    override val size: Int
+    override konst size: Int
     override fun isEmpty(): Boolean
     override fun contains(element: @UnsafeVariance E): Boolean
     override fun iterator(): Iterator<E>
@@ -305,20 +305,20 @@ public interface MutableSet<E> : Set<E>, MutableCollection<E> {
 }
 
 /**
- * A collection that holds pairs of objects (keys and values) and supports efficiently retrieving
- * the value corresponding to each key. Map keys are unique; the map holds only one value for each key.
+ * A collection that holds pairs of objects (keys and konstues) and supports efficiently retrieving
+ * the konstue corresponding to each key. Map keys are unique; the map holds only one konstue for each key.
  * Methods in this interface support only read-only access to the map; read-write access is supported through
  * the [MutableMap] interface.
  * @param K the type of map keys. The map is invariant in its key type, as it
  *          can accept key as a parameter (of [containsKey] for example) and return it in [keys] set.
- * @param V the type of map values. The map is covariant in its value type.
+ * @param V the type of map konstues. The map is covariant in its konstue type.
  */
 public interface Map<K, out V> {
     // Query Operations
     /**
-     * Returns the number of key/value pairs in the map.
+     * Returns the number of key/konstue pairs in the map.
      */
-    public val size: Int
+    public konst size: Int
 
     /**
      * Returns `true` if the map is empty (contains no elements), `false` otherwise.
@@ -331,12 +331,12 @@ public interface Map<K, out V> {
     public fun containsKey(key: K): Boolean
 
     /**
-     * Returns `true` if the map maps one or more keys to the specified [value].
+     * Returns `true` if the map maps one or more keys to the specified [konstue].
      */
-    public fun containsValue(value: @UnsafeVariance V): Boolean
+    public fun containsValue(konstue: @UnsafeVariance V): Boolean
 
     /**
-     * Returns the value corresponding to the given [key], or `null` if such a key is not present in the map.
+     * Returns the konstue corresponding to the given [key], or `null` if such a key is not present in the map.
      */
     public operator fun get(key: K): V?
 
@@ -344,59 +344,59 @@ public interface Map<K, out V> {
     /**
      * Returns a read-only [Set] of all keys in this map.
      */
-    public val keys: Set<K>
+    public konst keys: Set<K>
 
     /**
-     * Returns a read-only [Collection] of all values in this map. Note that this collection may contain duplicate values.
+     * Returns a read-only [Collection] of all konstues in this map. Note that this collection may contain duplicate konstues.
      */
-    public val values: Collection<V>
+    public konst konstues: Collection<V>
 
     /**
-     * Returns a read-only [Set] of all key/value pairs in this map.
+     * Returns a read-only [Set] of all key/konstue pairs in this map.
      */
-    public val entries: Set<Map.Entry<K, V>>
+    public konst entries: Set<Map.Entry<K, V>>
 
     /**
-     * Represents a key/value pair held by a [Map].
+     * Represents a key/konstue pair held by a [Map].
      */
     public interface Entry<out K, out V> {
         /**
-         * Returns the key of this key/value pair.
+         * Returns the key of this key/konstue pair.
          */
-        public val key: K
+        public konst key: K
 
         /**
-         * Returns the value of this key/value pair.
+         * Returns the konstue of this key/konstue pair.
          */
-        public val value: V
+        public konst konstue: V
     }
 }
 
 /**
- * A modifiable collection that holds pairs of objects (keys and values) and supports efficiently retrieving
- * the value corresponding to each key. Map keys are unique; the map holds only one value for each key.
+ * A modifiable collection that holds pairs of objects (keys and konstues) and supports efficiently retrieving
+ * the konstue corresponding to each key. Map keys are unique; the map holds only one konstue for each key.
  * @param K the type of map keys. The map is invariant in its key type.
- * @param V the type of map values. The mutable map is invariant in its value type.
+ * @param V the type of map konstues. The mutable map is invariant in its konstue type.
  */
 public interface MutableMap<K, V> : Map<K, V> {
     // Modification Operations
     /**
-     * Associates the specified [value] with the specified [key] in the map.
+     * Associates the specified [konstue] with the specified [key] in the map.
      *
-     * @return the previous value associated with the key, or `null` if the key was not present in the map.
+     * @return the previous konstue associated with the key, or `null` if the key was not present in the map.
      */
-    public fun put(key: K, value: V): V?
+    public fun put(key: K, konstue: V): V?
 
     /**
-     * Removes the specified key and its corresponding value from this map.
+     * Removes the specified key and its corresponding konstue from this map.
      *
-     * @return the previous value associated with the key, or `null` if the key was not present in the map.
+     * @return the previous konstue associated with the key, or `null` if the key was not present in the map.
      */
     public fun remove(key: K): V?
 
     // Bulk Modification Operations
     /**
-     * Updates this map with key/value pairs from the specified map [from].
+     * Updates this map with key/konstue pairs from the specified map [from].
      */
     public fun putAll(from: Map<out K, V>): Unit
 
@@ -409,26 +409,26 @@ public interface MutableMap<K, V> : Map<K, V> {
     /**
      * Returns a [MutableSet] of all keys in this map.
      */
-    override val keys: MutableSet<K>
+    override konst keys: MutableSet<K>
 
     /**
-     * Returns a [MutableCollection] of all values in this map. Note that this collection may contain duplicate values.
+     * Returns a [MutableCollection] of all konstues in this map. Note that this collection may contain duplicate konstues.
      */
-    override val values: MutableCollection<V>
+    override konst konstues: MutableCollection<V>
 
     /**
-     * Returns a [MutableSet] of all key/value pairs in this map.
+     * Returns a [MutableSet] of all key/konstue pairs in this map.
      */
-    override val entries: MutableSet<MutableMap.MutableEntry<K, V>>
+    override konst entries: MutableSet<MutableMap.MutableEntry<K, V>>
 
     /**
-     * Represents a key/value pair held by a [MutableMap].
+     * Represents a key/konstue pair held by a [MutableMap].
      */
     public interface MutableEntry<K, V> : Map.Entry<K, V> {
         /**
-         * Changes the value associated with the key of this entry.
+         * Changes the konstue associated with the key of this entry.
          *
-         * @return the previous value corresponding to the key.
+         * @return the previous konstue corresponding to the key.
          */
         public fun setValue(newValue: V): V
     }

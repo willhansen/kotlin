@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.codegen.state.GenerationState
 class RootInliningContext(
     state: GenerationState,
     nameGenerator: NameGenerator,
-    val sourceCompilerForInline: SourceCompilerForInline,
-    override val callSiteInfo: InlineCallSiteInfo,
-    val inlineMethodReifier: ReifiedTypeInliner<*>,
+    konst sourceCompilerForInline: SourceCompilerForInline,
+    override konst callSiteInfo: InlineCallSiteInfo,
+    konst inlineMethodReifier: ReifiedTypeInliner<*>,
     typeParameterMappings: TypeParameterMappings<*>
 ) : InliningContext(
     null, state, nameGenerator, TypeRemapper.createRoot(typeParameterMappings), null, false
@@ -25,23 +25,23 @@ class RegeneratedClassContext(
     nameGenerator: NameGenerator,
     typeRemapper: TypeRemapper,
     lambdaInfo: LambdaInfo?,
-    override val callSiteInfo: InlineCallSiteInfo,
-    override val transformationInfo: TransformationInfo
+    override konst callSiteInfo: InlineCallSiteInfo,
+    override konst transformationInfo: TransformationInfo
 ) : InliningContext(
     parent, state, nameGenerator, typeRemapper, lambdaInfo, true
 ) {
-    val continuationBuilders: MutableMap<String, ClassBuilder> = hashMapOf()
+    konst continuationBuilders: MutableMap<String, ClassBuilder> = hashMapOf()
 }
 
 open class InliningContext(
-    val parent: InliningContext?,
-    val state: GenerationState,
-    val nameGenerator: NameGenerator,
-    val typeRemapper: TypeRemapper,
-    val lambdaInfo: LambdaInfo?,
-    val classRegeneration: Boolean
+    konst parent: InliningContext?,
+    konst state: GenerationState,
+    konst nameGenerator: NameGenerator,
+    konst typeRemapper: TypeRemapper,
+    konst lambdaInfo: LambdaInfo?,
+    konst classRegeneration: Boolean
 ) {
-    val isInliningLambda
+    konst isInliningLambda
         get() = lambdaInfo != null
 
     // Consider this arrangement:
@@ -49,23 +49,23 @@ open class InliningContext(
     //     inline fun <reified V> g() = f<...> { /* uses `V` in a local class */ }
     // When inlining `f` into `g`, we need to reify the contents of the default for `x` (if it was used), but not the
     // contents of the lambda passed as the argument in `g` as all reified type parameters used by the latter are not from `f`.
-    val shouldReifyTypeParametersInObjects: Boolean
+    konst shouldReifyTypeParametersInObjects: Boolean
         get() = lambdaInfo == null || lambdaInfo is DefaultLambda
 
     var generateAssertField = false
 
-    open val transformationInfo: TransformationInfo?
+    open konst transformationInfo: TransformationInfo?
         get() = null
 
     var isContinuation: Boolean = false
 
-    val isRoot: Boolean
+    konst isRoot: Boolean
         get() = parent == null
 
-    val root: RootInliningContext
+    konst root: RootInliningContext
         get() = if (isRoot) this as RootInliningContext else parent!!.root
 
-    private val regeneratedAnonymousObjects = hashSetOf<String>()
+    private konst regeneratedAnonymousObjects = hashSetOf<String>()
 
     fun isRegeneratedAnonymousObject(internalName: String): Boolean =
         internalName in regeneratedAnonymousObjects || (parent != null && parent.isRegeneratedAnonymousObject(internalName))
@@ -105,7 +105,7 @@ open class InliningContext(
         lambdaInfo: LambdaInfo? = this.lambdaInfo,
         classRegeneration: Boolean = this.classRegeneration
     ): InliningContext {
-        val isInliningLambda = lambdaInfo != null
+        konst isInliningLambda = lambdaInfo != null
         return InliningContext(
             this, state, generator,
             TypeRemapper.createFrom(
@@ -118,7 +118,7 @@ open class InliningContext(
         )
     }
 
-    open val callSiteInfo: InlineCallSiteInfo
+    open konst callSiteInfo: InlineCallSiteInfo
         get() {
             return parent!!.callSiteInfo
         }

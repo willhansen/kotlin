@@ -11,7 +11,7 @@ return main.A.js_f(23);
 """)
 
 fun box(): String {
-    val result = test()
+    konst result = test()
     assertEquals("f(23)", result);
     return "OK"
 }

@@ -38,17 +38,17 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 import java.io.File
 import java.util.*
 
-internal val Project.host
+internal konst Project.host
     get() = HostManager.host.visibleName
 
-internal val Project.simpleOsName
+internal konst Project.simpleOsName
     get() = HostManager.platformName()
 
 /** A task with a KonanTarget specified. */
 abstract class KonanTargetableTask: DefaultTask() {
 
     @get:Input
-    val konanTargetName: String
+    konst konanTargetName: String
         get() = konanTarget.name
 
     @get:Internal
@@ -58,17 +58,17 @@ abstract class KonanTargetableTask: DefaultTask() {
         this.konanTarget = target
     }
 
-    val isCrossCompile: Boolean
+    konst isCrossCompile: Boolean
         @Internal get() = (konanTarget != HostManager.host)
 
-    val target: String
+    konst target: String
         @Internal get() = konanTarget.visibleName
 }
 
 /** A task building an artifact. */
 abstract class KonanArtifactTask: KonanTargetableTask(), KonanArtifactSpec {
 
-    open val artifact: File
+    open konst artifact: File
         @OutputFile get() = destinationDir.resolve(artifactFullName)
 
     @Internal lateinit var destinationDir: File
@@ -76,16 +76,16 @@ abstract class KonanArtifactTask: KonanTargetableTask(), KonanArtifactSpec {
     @Internal lateinit var platformConfiguration: Configuration
     @Internal lateinit var configuration: Configuration
 
-    protected val artifactFullName: String
+    protected konst artifactFullName: String
         @Internal get() = "$artifactPrefix$artifactName$artifactSuffix"
 
-    val artifactPath: String
+    konst artifactPath: String
         @Internal get() = artifact.canonicalPath
 
-    protected abstract val artifactSuffix: String
+    protected abstract konst artifactSuffix: String
         @Internal get
 
-    protected abstract val artifactPrefix: String
+    protected abstract konst artifactPrefix: String
         @Internal get
 
     internal open fun init(config: KonanBuildingConfig<*>, destinationDir: File, artifactName: String, target: KonanTarget) {
@@ -103,7 +103,7 @@ abstract class KonanArtifactTask: KonanTargetableTask(), KonanArtifactSpec {
             attribute(Attribute.of("org.gradle.native.kotlin.platform", String::class.java), target.name)
         }
 
-        val artifactNameWithoutSuffix = artifact.name.removeSuffix("$artifactSuffix")
+        konst artifactNameWithoutSuffix = artifact.name.removeSuffix("$artifactSuffix")
         project.pluginManager.withPlugin("maven-publish") {
             platformConfiguration.artifacts.add(object: PublishArtifact {
                 override fun getName(): String = artifactNameWithoutSuffix
@@ -115,11 +115,11 @@ abstract class KonanArtifactTask: KonanTargetableTask(), KonanArtifactSpec {
                 override fun getBuildDependencies(): TaskDependency =
                         DefaultTaskDependency().apply { add(this@KonanArtifactTask) }
             })
-            val objectFactory = project.objects
-            val linkUsage = objectFactory.named(Usage::class.java, Usage.NATIVE_LINK)
-            val konanSoftwareComponent = config.mainVariant
-            val variantName = "${artifactNameWithoutSuffix}_${target.name}"
-            val context = DefaultUsageContext(object:UsageContext {
+            konst objectFactory = project.objects
+            konst linkUsage = objectFactory.named(Usage::class.java, Usage.NATIVE_LINK)
+            konst konanSoftwareComponent = config.mainVariant
+            konst variantName = "${artifactNameWithoutSuffix}_${target.name}"
+            konst context = DefaultUsageContext(object:UsageContext {
                 @Suppress("OVERRIDE_DEPRECATION")
                 override fun getUsage(): Usage = linkUsage
                 override fun getName(): String = "${variantName}Link"
@@ -165,7 +165,7 @@ abstract class KonanArtifactTask: KonanTargetableTask(), KonanArtifactSpec {
 /** Task building an artifact with libraries */
 abstract class KonanArtifactWithLibrariesTask: KonanArtifactTask(), KonanArtifactWithLibrariesSpec {
     @Nested
-    val libraries = KonanLibrariesSpec(this, project)
+    konst libraries = KonanLibrariesSpec(this, project)
 
     @Input
     var noDefaultLibs = false

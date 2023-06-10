@@ -12,4 +12,4 @@ fun box(): String = ::OK.get()
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-const val OK = "OK"
+const konst OK = "OK"

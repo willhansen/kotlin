@@ -15,6 +15,6 @@ class B: I, J {
 }
 
 fun box(): String {
-    val v = if (true) A() else B()
+    konst v = if (true) A() else B()
     return v.ff()
 }

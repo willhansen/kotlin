@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.propertyIfAccessor
 import org.jetbrains.kotlin.types.checker.TypeCheckingProcedure
 
 object BuiltinMethodsWithSpecialGenericSignature : SpecialGenericSignatures() {
-    private val CallableMemberDescriptor.hasErasedValueParametersInJava: Boolean
+    private konst CallableMemberDescriptor.hasErasedValueParametersInJava: Boolean
         get() = computeJvmSignature() in ERASED_VALUE_PARAMETERS_SIGNATURES
 
     @JvmStatic
@@ -51,7 +51,7 @@ object BuiltinMethodsWithSpecialGenericSignature : SpecialGenericSignatures() {
         }?.let { SIGNATURE_TO_DEFAULT_VALUES_MAP[it.computeJvmSignature()] }
     }
 
-    val Name.sameAsBuiltinMethodWithErasedValueParameters: Boolean
+    konst Name.sameAsBuiltinMethodWithErasedValueParameters: Boolean
         get() = this in ERASED_VALUE_PARAMETERS_SHORT_NAMES
 
     fun CallableMemberDescriptor.isBuiltinWithSpecialDescriptorInJvm(): Boolean {
@@ -63,7 +63,7 @@ object BuiltinMethodsWithSpecialGenericSignature : SpecialGenericSignatures() {
     fun CallableMemberDescriptor.getSpecialSignatureInfo(): SpecialSignatureInfo? {
         if (name !in ERASED_VALUE_PARAMETERS_SHORT_NAMES) return null
 
-        val builtinSignature = firstOverridden { it is FunctionDescriptor && it.hasErasedValueParametersInJava }?.computeJvmSignature()
+        konst builtinSignature = firstOverridden { it is FunctionDescriptor && it.hasErasedValueParametersInJava }?.computeJvmSignature()
             ?: return null
 
         return getSpecialSignatureInfo(builtinSignature)
@@ -81,7 +81,7 @@ object BuiltinMethodsWithDifferentJvmName : SpecialGenericSignatures() {
         } != null
     }
 
-    val SimpleFunctionDescriptor.isRemoveAtByIndex: Boolean
+    konst SimpleFunctionDescriptor.isRemoveAtByIndex: Boolean
         get() = name.asString() == "removeAt" && computeJvmSignature() == REMOVE_AT_NAME_AND_SIGNATURE.signature
 }
 
@@ -118,7 +118,7 @@ fun <T : CallableMemberDescriptor> T.getOverriddenSpecialBuiltin(): T? {
 // The subtle difference between getOverriddenBuiltinReflectingJvmDescriptor and getOverriddenSpecialBuiltin
 // is that first one return descriptor reflecting JVM signature (JVM descriptor)
 // E.g. it returns `contains(e: E): Boolean` instead of `contains(e: String): Boolean` for implementation of Collection<String>.contains
-// Implementation differs by getting 'original' for collection methods with erased value parameters
+// Implementation differs by getting 'original' for collection methods with erased konstue parameters
 // Also it ignores Collection<String>.containsAll overrides because they have the same JVM descriptor
 @Suppress("UNCHECKED_CAST")
 fun <T : CallableMemberDescriptor> T.getOverriddenBuiltinReflectingJvmDescriptor(): T? {
@@ -132,7 +132,7 @@ fun <T : CallableMemberDescriptor> T.getOverriddenBuiltinReflectingJvmDescriptor
 }
 
 fun getJvmMethodNameIfSpecial(callableMemberDescriptor: CallableMemberDescriptor): String? {
-    val overriddenBuiltin = getOverriddenBuiltinThatAffectsJvmName(callableMemberDescriptor)?.propertyIfAccessor
+    konst overriddenBuiltin = getOverriddenBuiltinThatAffectsJvmName(callableMemberDescriptor)?.propertyIfAccessor
         ?: return null
     return when (overriddenBuiltin) {
         is PropertyDescriptor -> overriddenBuiltin.getBuiltinSpecialPropertyGetterName()
@@ -150,7 +150,7 @@ private fun getOverriddenBuiltinThatAffectsJvmName(
 fun ClassDescriptor.hasRealKotlinSuperClassWithOverrideOf(
     specialCallableDescriptor: CallableDescriptor
 ): Boolean {
-    val builtinContainerDefaultType = (specialCallableDescriptor.containingDeclaration as ClassDescriptor).defaultType
+    konst builtinContainerDefaultType = (specialCallableDescriptor.containingDeclaration as ClassDescriptor).defaultType
 
     var superClassDescriptor = DescriptorUtils.getSuperClassDescriptor(this)
 
@@ -158,7 +158,7 @@ fun ClassDescriptor.hasRealKotlinSuperClassWithOverrideOf(
         if (superClassDescriptor !is JavaClassDescriptor) {
             // Kotlin class
 
-            val doesOverrideBuiltinDeclaration =
+            konst doesOverrideBuiltinDeclaration =
                 TypeCheckingProcedure.findCorrespondingSupertype(superClassDescriptor.defaultType, builtinContainerDefaultType) != null
 
             if (doesOverrideBuiltinDeclaration) {
@@ -172,9 +172,9 @@ fun ClassDescriptor.hasRealKotlinSuperClassWithOverrideOf(
     return false
 }
 
-val CallableMemberDescriptor.isFromJava: Boolean
+konst CallableMemberDescriptor.isFromJava: Boolean
     get() {
-        val descriptor = propertyIfAccessor
+        konst descriptor = propertyIfAccessor
         return descriptor.containingDeclaration is JavaClassDescriptor
     }
 

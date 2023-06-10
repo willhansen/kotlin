@@ -34,81 +34,81 @@ import org.jetbrains.kotlin.psi.psiUtil.isExtensionDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiKotlinPropertySymbol(
-    override val psi: KtProperty,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtProperty,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtKotlinPropertySymbol(), KtFe10PsiSymbol<KtProperty, PropertyDescriptor> {
-    override val descriptor: PropertyDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: PropertyDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.VARIABLE, psi] as? PropertyDescriptor
     }
 
-    override val isLateInit: Boolean
+    override konst isLateInit: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.LATEINIT_KEYWORD) }
 
-    override val isConst: Boolean
+    override konst isConst: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.CONST_KEYWORD) }
 
-    override val hasGetter: Boolean
+    override konst hasGetter: Boolean
         get() = withValidityAssertion { true }
 
-    override val hasSetter: Boolean
+    override konst hasSetter: Boolean
         get() = withValidityAssertion { psi.isVar }
 
-    override val getter: KtPropertyGetterSymbol
+    override konst getter: KtPropertyGetterSymbol
         get() = withValidityAssertion {
-            val getter = psi.getter ?: return KtFe10PsiDefaultPropertyGetterSymbol(psi, analysisContext)
+            konst getter = psi.getter ?: return KtFe10PsiDefaultPropertyGetterSymbol(psi, analysisContext)
             return KtFe10PsiPropertyGetterSymbol(getter, analysisContext)
         }
 
-    override val setter: KtPropertySetterSymbol?
+    override konst setter: KtPropertySetterSymbol?
         get() = withValidityAssertion {
             if (!psi.isVar) {
                 return null
             }
 
-            val setter = psi.setter ?: return KtFe10PsiDefaultPropertySetterSymbol(psi, analysisContext)
+            konst setter = psi.setter ?: return KtFe10PsiDefaultPropertySetterSymbol(psi, analysisContext)
             return KtFe10PsiPropertySetterSymbol(setter, analysisContext)
         }
 
-    override val backingFieldSymbol: KtBackingFieldSymbol?
+    override konst backingFieldSymbol: KtBackingFieldSymbol?
         get() = withValidityAssertion {
             if (psi.isLocal) null
             else KtFe10PsiDefaultBackingFieldSymbol(propertyPsi = psi, owningProperty = this, analysisContext)
         }
 
-    override val hasBackingField: Boolean
+    override konst hasBackingField: Boolean
         get() = withValidityAssertion {
-            val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+            konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
             bindingContext[BindingContext.BACKING_FIELD_REQUIRED, descriptor] == true
         }
 
-    override val isDelegatedProperty: Boolean
+    override konst isDelegatedProperty: Boolean
         get() = withValidityAssertion {
             psi.hasDelegate()
         }
 
-    override val isFromPrimaryConstructor: Boolean
+    override konst isFromPrimaryConstructor: Boolean
         get() = withValidityAssertion { false }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.OVERRIDE_KEYWORD) }
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = withValidityAssertion { false }
 
-    override val initializer: KtInitializerValue?
+    override konst initializer: KtInitializerValue?
         get() = withValidityAssertion { createKtInitializerValue(psi, descriptor, analysisContext) }
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = withValidityAssertion { !psi.isVar }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { psi.callableIdIfNonLocal }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor?.type?.toKtType(analysisContext) ?: createErrorType() }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion {
             if (!psi.isExtensionDeclaration()) {
                 return null
@@ -117,27 +117,27 @@ internal class KtFe10PsiKotlinPropertySymbol(
             descriptor?.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext)
         }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor?.createContextReceivers(analysisContext) ?: emptyList() }
 
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { psi.isExtensionDeclaration() }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { psi.ktSymbolKind }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { psi.nameAsSafeName }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion {
             psi.typeParameters.map { KtFe10PsiTypeParameterSymbol(it, analysisContext) }
         }
 
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion { psi.ktModality ?: descriptor?.ktModality ?: Modality.FINAL }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { psi.ktVisibility ?: descriptor?.ktVisibility ?: Visibilities.Public }
 
     context(KtAnalysisSession)

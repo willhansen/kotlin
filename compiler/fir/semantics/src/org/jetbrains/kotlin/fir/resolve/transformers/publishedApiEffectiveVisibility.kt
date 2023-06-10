@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirClassLikeSymbol
 private object PublishedApiEffectiveVisibilityKey : FirDeclarationDataKey()
 var FirDeclaration.publishedApiEffectiveVisibility: EffectiveVisibility? by FirDeclarationDataRegistry.data(PublishedApiEffectiveVisibilityKey)
 
-inline val FirBasedSymbol<*>.publishedApiEffectiveVisibility: EffectiveVisibility?
+inline konst FirBasedSymbol<*>.publishedApiEffectiveVisibility: EffectiveVisibility?
     get() {
         lazyResolveToPhase(FirResolvePhase.STATUS)
         return fir.publishedApiEffectiveVisibility

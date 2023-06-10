@@ -10,7 +10,7 @@ inline fun <T, R> T.myLet(block: (T) -> R) = block(this)
 import test.*
 
 fun box(): String {
-    val k = "".myLet { it + "K" }
+    konst k = "".myLet { it + "K" }
     return "O".myLet(fun (it: String): String { return it + k })
 }
 

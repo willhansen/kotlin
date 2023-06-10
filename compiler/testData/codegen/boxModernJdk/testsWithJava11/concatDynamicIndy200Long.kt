@@ -1,6 +1,6 @@
 // STRING_CONCAT: indy
 fun test(z: Long): String {
-    val result = "" + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
+    konst result = "" + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
             z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z + z +
@@ -15,7 +15,7 @@ fun test(z: Long): String {
 }
 
 fun box(): String {
-    val result = test(0L)
+    konst result = test(0L)
 
     if (result.length != 200)
         return "fail 1: ${result.length}"

@@ -1,5 +1,5 @@
 fun box(stepId: Int): String {
-    val x = test()
+    konst x = test()
     if (x != stepId) {
         return "Fail $x != $stepId"
     }

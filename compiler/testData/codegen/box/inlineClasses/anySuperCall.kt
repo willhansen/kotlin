@@ -4,11 +4,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val x: Int) {
+konstue class A(konst x: Int) {
     fun f(): Int = super.hashCode()
 }
 
 fun box(): String {
-    val a = A(1).f()
+    konst a = A(1).f()
     return "OK"
 }

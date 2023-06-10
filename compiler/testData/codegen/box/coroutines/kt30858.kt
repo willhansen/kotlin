@@ -27,7 +27,7 @@ fun <T> MyReceiveChannel<T>.debounce(period: Long) {
 }
 
 fun box(): String {
-    val m = MyReceiveChannel<String>()
+    konst m = MyReceiveChannel<String>()
     m.debounce(42)
 
     return "OK"

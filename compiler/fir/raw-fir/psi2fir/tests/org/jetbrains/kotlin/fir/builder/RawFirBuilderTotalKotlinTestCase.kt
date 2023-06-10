@@ -34,7 +34,7 @@ import kotlin.system.measureNanoTime
 class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
 
     fun testTotalKotlinWithExpressionTrees() {
-        val root = File(testDataPath)
+        konst root = File(testDataPath)
         var counter = 0
         var time = 0L
         var totalLength = 0
@@ -53,7 +53,7 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
         println("BASE PATH: $testDataPath")
         for (file in root.walkTopDown()) {
             if (file.isDirectory) continue
-            val path = file.path.lowercase()
+            konst path = file.path.lowercase()
             if ("testdata" in path ||
                 "kotlin-native" in path ||
                 "resources" in path ||
@@ -61,8 +61,8 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
             ) continue
             if (file.extension != "kt") continue
             try {
-                val ktFile = createKtFile(file.toRelativeString(root))
-                val firFile: FirFile
+                konst ktFile = createKtFile(file.toRelativeString(root))
+                konst firFile: FirFile
                 time += measureNanoTime {
                     firFile = ktFile.toFirFile()
                 }
@@ -80,7 +80,7 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
                     }
 
                     override fun visitQualifiedAccessExpression(qualifiedAccessExpression: FirQualifiedAccessExpression, data: FirElement) {
-                        val calleeReference = qualifiedAccessExpression.calleeReference
+                        konst calleeReference = qualifiedAccessExpression.calleeReference
                         if (calleeReference.isError()) {
                             errorReferences++
                             println((calleeReference as FirDiagnosticHolder).diagnostic.reason)
@@ -168,18 +168,18 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
     }
 
     private fun testConsistency(checkConsistency: FirFile.() -> Unit) {
-        val root = File(testDataPath)
+        konst root = File(testDataPath)
         for (file in root.walkTopDown()) {
             if (file.isDirectory) continue
-            val path = file.path.lowercase()
+            konst path = file.path.lowercase()
             if ("kotlin-native" in path ||
                 "testdata" in path ||
                 "resources" in path ||
                 "api/js" in path.replace('\\', '/')
             ) continue
             if (file.extension != "kt") continue
-            val ktFile = createKtFile(file.toRelativeString(root))
-            val firFile = ktFile.toFirFile()
+            konst ktFile = createKtFile(file.toRelativeString(root))
+            konst firFile = ktFile.toFirFile()
             try {
                 firFile.checkConsistency()
             } catch (e: Throwable) {
@@ -198,23 +198,23 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
     }
 
     fun testPsiConsistency() {
-        val root = File(testDataPath)
+        konst root = File(testDataPath)
         var counter = 0
         for (file in root.walkTopDown()) {
             if (file.isDirectory) continue
-            val path = file.path.lowercase()
+            konst path = file.path.lowercase()
             if ("kotlin-native" in path ||
                 "testdata" in path ||
                 "resources" in path ||
                 "api/js" in path.replace('\\', '/')) continue
             if (file.extension != "kt") continue
-            val ktFile = createKtFile(file.toRelativeString(root))
-            val firFile: FirFile = ktFile.toFirFile()
-            val psiSetViaFir = mutableSetOf<KtElement>()
-            val psiSetDirect = mutableSetOf<KtElement>()
+            konst ktFile = createKtFile(file.toRelativeString(root))
+            konst firFile: FirFile = ktFile.toFirFile()
+            konst psiSetViaFir = mutableSetOf<KtElement>()
+            konst psiSetDirect = mutableSetOf<KtElement>()
             firFile.accept(object : FirVisitorVoid() {
                 override fun visitElement(element: FirElement) {
-                    val psi = element.psi as? KtElement
+                    konst psi = element.psi as? KtElement
                     if (psi != null) {
                         psiSetViaFir += psi
                     }
@@ -234,7 +234,7 @@ class RawFirBuilderTotalKotlinTestCase : AbstractRawFirBuilderTestCase() {
                 println("FILE ${file.toRelativeString(root)} has not traversed PSI elements (total of ${psiSetDirect.size})!")
                 for (element in psiSetDirect) {
                     println("Not traversed ${element.javaClass}: ${element.text}")
-                    val traversedParent = element.parents.firstOrNull { it in psiSetViaFir }
+                    konst traversedParent = element.parents.firstOrNull { it in psiSetViaFir }
                     if (traversedParent != null) {
                         println("(traversed parent: ${traversedParent.javaClass} ${traversedParent.text})")
                     }

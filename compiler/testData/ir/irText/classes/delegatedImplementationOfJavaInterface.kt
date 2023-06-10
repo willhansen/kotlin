@@ -5,7 +5,7 @@
 
 // FILE: delegatedImplementationOfJavaInterface.kt
 
-class Test(private val j: J) : J by j
+class Test(private konst j: J) : J by j
 
 // FILE: J.java
 

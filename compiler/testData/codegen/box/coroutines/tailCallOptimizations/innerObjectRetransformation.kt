@@ -19,7 +19,7 @@ import kotlin.coroutines.*
 import helpers.*
 
 interface FlowCollector<T> {
-    suspend fun emit(value: T)
+    suspend fun emit(konstue: T)
 }
 
 interface Flow<T : Any> {
@@ -32,7 +32,7 @@ public inline fun <T : Any> flow(crossinline block: suspend FlowCollector<T>.() 
 
 suspend inline fun <T : Any> Flow<T>.collect(crossinline action: suspend (T) -> Unit): Unit =
     collect(object : FlowCollector<T> {
-        override suspend fun emit(value: T) = action(value)
+        override suspend fun emit(konstue: T) = action(konstue)
     })
 
 inline fun <T : Any, R : Any> Flow<T>.flowWith(crossinline builderBlock: suspend Flow<T>.() -> Flow<R>): Flow<T> =
@@ -45,7 +45,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 suspend fun check() {
-    val f: Unit = flow<Int> {
+    konst f: Unit = flow<Int> {
         emit(1)
     }.flowWith {
         this

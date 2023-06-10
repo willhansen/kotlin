@@ -39,18 +39,18 @@ class BasicScriptDependenciesResolver : ScriptDependenciesResolver
 
 fun KotlinScriptExternalDependencies?.asFuture(): PseudoFuture<KotlinScriptExternalDependencies?> = PseudoFuture(this)
 
-class PseudoFuture<T>(private val value: T): Future<T> {
-    override fun get(): T = value
-    override fun get(p0: Long, p1: TimeUnit): T  = value
+class PseudoFuture<T>(private konst konstue: T): Future<T> {
+    override fun get(): T = konstue
+    override fun get(p0: Long, p1: TimeUnit): T  = konstue
     override fun cancel(p0: Boolean): Boolean = false
     override fun isDone(): Boolean = true
     override fun isCancelled(): Boolean = false
 }
 
 interface ScriptContents {
-    val file: File?
-    val annotations: Iterable<Annotation>
-    val text: CharSequence?
+    konst file: File?
+    konst annotations: Iterable<Annotation>
+    konst text: CharSequence?
 
-    data class Position(val line: Int, val col: Int)
+    data class Position(konst line: Int, konst col: Int)
 }

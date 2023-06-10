@@ -27,8 +27,8 @@ class A() {
 
 
 fun box(): String {
-    val t = A()
-    val d = t.b++
+    konst t = A()
+    konst d = t.b++
     if (t.sc != 1) return "fail1"
     if (t.gc != 1) return "fail2"
     return "OK"

@@ -6,7 +6,7 @@
 package a
 
 fun foo(n: Int, block: (Int) -> Int): Int {
-    val arr = IntArray(n) { block(it) }
+    konst arr = IntArray(n) { block(it) }
     var sum = 0
     for (x in arr) sum += x
     return sum

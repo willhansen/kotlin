@@ -8,9 +8,9 @@ inline fun <reified T> foo(): T {
 }
 
 fun test() {
-    val fooCall = foo() as String // T in foo should be inferred to String
+    konst fooCall = foo() as String // T in foo should be inferred to String
     fooCall checkType { _<String>() }
 
-    val safeFooCall = foo() as? String
+    konst safeFooCall = foo() as? String
     safeFooCall checkType { _<String?>() }
 }

@@ -7,6 +7,6 @@
 import kotlin.test.*
 
 fun main() {
-    val exception = Error("some error")
+    konst exception = Error("some error")
     terminateWithUnhandledException(exception)
 }

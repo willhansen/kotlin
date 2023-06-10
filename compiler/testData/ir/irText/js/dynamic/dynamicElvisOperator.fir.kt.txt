@@ -1,6 +1,6 @@
 fun test(d: dynamic): dynamic {
   return { // BLOCK
-    val <elvis>: dynamic = d
+    konst <elvis>: dynamic = d
     when {
       EQEQ(arg0 = <elvis>, arg1 = null) -> "other"
       else -> <elvis>

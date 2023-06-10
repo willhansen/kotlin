@@ -9,7 +9,7 @@
 import kotlin.native.concurrent.*
 import kotlin.concurrent.*
 
-class Box(@Volatile var value: String)
+class Box(@Volatile var konstue: String)
 
 // MODULE: main(lib)
 // FILE: main.kt
@@ -20,7 +20,7 @@ import kotlin.native.concurrent.*
 import kotlin.concurrent.*
 
 fun box() : String {
-    val o = "O"
-    val x = Box(o)
-    return x::value.compareAndExchangeField(o, "K") + x.value
+    konst o = "O"
+    konst x = Box(o)
+    return x::konstue.compareAndExchangeField(o, "K") + x.konstue
 }

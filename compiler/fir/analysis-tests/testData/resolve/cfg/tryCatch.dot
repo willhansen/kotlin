@@ -19,7 +19,7 @@ digraph tryCatch_kt {
                         color=blue
                         4 [label="Enter block"];
                         5 [label="Const: Int(1)"];
-                        6 [label="Variable declaration: lval x: R|kotlin/Int|"];
+                        6 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
                         7 [label="Exit block"];
                     }
                     8 [label="Try main block exit"];
@@ -32,7 +32,7 @@ digraph tryCatch_kt {
                         color=blue
                         11 [label="Enter block"];
                         12 [label="Const: Int(2)"];
-                        13 [label="Variable declaration: lval y: R|kotlin/Int|"];
+                        13 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
                         14 [label="Exit block"];
                     }
                     15 [label="Catch exit"];
@@ -45,7 +45,7 @@ digraph tryCatch_kt {
                         color=blue
                         18 [label="Enter block"];
                         19 [label="Const: Int(3)"];
-                        20 [label="Variable declaration: lval z: R|kotlin/Int|"];
+                        20 [label="Variable declaration: lkonst z: R|kotlin/Int|"];
                         21 [label="Exit block"];
                     }
                     22 [label="Catch exit"];
@@ -116,7 +116,7 @@ digraph tryCatch_kt {
                 }
                 40 [label="Try expression exit"];
             }
-            41 [label="Variable declaration: lval x: R|kotlin/Int|"];
+            41 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
             42 [label="Exit block"];
         }
         43 [label="Exit function test_2" style="filled" fillcolor=red];
@@ -191,7 +191,7 @@ digraph tryCatch_kt {
                                         66 [label="Exit when"];
                                     }
                                     67 [label="Const: Int(1)"];
-                                    68 [label="Variable declaration: lval x: R|kotlin/Int|"];
+                                    68 [label="Variable declaration: lkonst x: R|kotlin/Int|"];
                                     subgraph cluster_28 {
                                         color=blue
                                         69 [label="Enter when"];
@@ -247,7 +247,7 @@ digraph tryCatch_kt {
                             98 [label="Try expression exit"];
                         }
                         99 [label="Const: Int(2)"];
-                        100 [label="Variable declaration: lval y: R|kotlin/Int|"];
+                        100 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
                         101 [label="Exit block"];
                     }
                     102 [label="Exit loop block"];
@@ -255,7 +255,7 @@ digraph tryCatch_kt {
                 103 [label="Exit while loop"];
             }
             104 [label="Const: Int(3)"];
-            105 [label="Variable declaration: lval z: R|kotlin/Int|"];
+            105 [label="Variable declaration: lkonst z: R|kotlin/Int|"];
             106 [label="Exit block"];
         }
         107 [label="Exit function test_3" style="filled" fillcolor=red];

@@ -3,7 +3,7 @@
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val x = expandInv(Inv(select(10, null)))
+    konst x = expandInv(Inv(select(10, null)))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -21,7 +21,7 @@ fun case_1() {
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val x = expandOut(Out(select(10, null)))
+    konst x = expandOut(Out(select(10, null)))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -39,7 +39,7 @@ fun case_2() {
 
 // TESTCASE NUMBER: 3
 fun case_3() {
-    val x = expandInv(Inv(select(10, null)))
+    konst x = expandInv(Inv(select(10, null)))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -57,7 +57,7 @@ fun case_3() {
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    val x = expandOut(Out(select(10, null)))
+    konst x = expandOut(Out(select(10, null)))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -75,7 +75,7 @@ fun case_4() {
 
 // TESTCASE NUMBER: 5
 fun case_5() {
-    val x = expandIn(In<Number?>())
+    konst x = expandIn(In<Number?>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>x<!>
@@ -93,7 +93,7 @@ fun case_5() {
 
 // TESTCASE NUMBER: 6
 fun case_6() {
-    val x = expandIn(In<Number?>())
+    konst x = expandIn(In<Number?>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>x<!>
@@ -110,10 +110,10 @@ fun case_6() {
 }
 
 // TESTCASE NUMBER: 7
-fun <T> case_7(x: MutableMap<T?, out T?>) = select(x.values.first(), x.keys.first())
+fun <T> case_7(x: MutableMap<T?, out T?>) = select(x.konstues.first(), x.keys.first())
 
 fun case_7() {
-    val x = case_7(mutableMapOf(10 to 10))
+    konst x = case_7(mutableMapOf(10 to 10))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -130,10 +130,10 @@ fun case_7() {
 }
 
 // TESTCASE NUMBER: 8
-fun <T> case_8(x: MutableMap<T, out T>) = select(x.values.first(), x.keys.first())
+fun <T> case_8(x: MutableMap<T, out T>) = select(x.konstues.first(), x.keys.first())
 
 fun case_8() {
-    val x = case_8(mutableMapOf(10 to null))
+    konst x = case_8(mutableMapOf(10 to null))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -150,10 +150,10 @@ fun case_8() {
 }
 
 // TESTCASE NUMBER: 9
-fun <T>case_9(x: MutableMap<T, out T>) = select(x.values.first(), x.keys.first())
+fun <T>case_9(x: MutableMap<T, out T>) = select(x.konstues.first(), x.keys.first())
 
 fun case_9() {
-    val x = case_9(mutableMapOf(null to 10))
+    konst x = case_9(mutableMapOf(null to 10))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -170,10 +170,10 @@ fun case_9() {
 }
 
 // TESTCASE NUMBER: 10
-fun <T> case_10(x: MutableMap<T?, out T>) = select(x.values.first(), x.keys.first())
+fun <T> case_10(x: MutableMap<T?, out T>) = select(x.konstues.first(), x.keys.first())
 
 fun case_10() {
-    val x = case_10(mutableMapOf(10 to 10))
+    konst x = case_10(mutableMapOf(10 to 10))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -190,10 +190,10 @@ fun case_10() {
 }
 
 // TESTCASE NUMBER: 11
-fun <T> case_11(x: MutableMap<T, out T?>) = select(x.values.first(), x.keys.first())
+fun <T> case_11(x: MutableMap<T, out T?>) = select(x.konstues.first(), x.keys.first())
 
 fun case_11() {
-    val x = case_11(mutableMapOf(10 to 10))
+    konst x = case_11(mutableMapOf(10 to 10))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -210,10 +210,10 @@ fun case_11() {
 }
 
 // TESTCASE NUMBER: 12
-fun <T, K: T, M: K> case_12(x: MutableMap<M, K?>) = select(x.values.first(), x.keys.first())
+fun <T, K: T, M: K> case_12(x: MutableMap<M, K?>) = select(x.konstues.first(), x.keys.first())
 
 fun case_12() {
-    val x = case_12(mutableMapOf(10 to 11))
+    konst x = case_12(mutableMapOf(10 to 11))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -237,7 +237,7 @@ fun case_12() {
 fun <T> case_13(x: Out<T?>?, y: Out<T>) = select(x, y)
 
 fun case_13() {
-    val x = case_13(Out<Int?>(), Out<Int>())
+    konst x = case_13(Out<Int?>(), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -250,7 +250,7 @@ fun case_13() {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funAny()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableT()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableAny()
-        val y = x.get()
+        konst y = x.get()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>.equals(null)
@@ -270,7 +270,7 @@ fun case_13() {
 fun <T> case_14(x: Out<T>?, y: Out<T?>) = select(x, y)
 
 fun case_14() {
-    val x = case_14(Out<Int>(), Out<Int?>())
+    konst x = case_14(Out<Int>(), Out<Int?>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -283,7 +283,7 @@ fun case_14() {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funAny()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableT()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableAny()
-        val y = x.get()
+        konst y = x.get()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>.equals(null)
@@ -303,7 +303,7 @@ fun case_14() {
 fun <T> case_15(x: Out<T>, y: Out<T?>?) = select(x, y)
 
 fun case_15() {
-    val x = case_15(Out(), Out<Int>())
+    konst x = case_15(Out(), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -316,7 +316,7 @@ fun case_15() {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funAny()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableT()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableAny()
-        val y = x.get()
+        konst y = x.get()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>.equals(null)
@@ -340,7 +340,7 @@ fun case_15() {
 fun <T> case_16(x: Out<T?>, y: Out<T>) = select(x, select(y, null))
 
 fun case_16() {
-    val x = case_16(Out<Int?>(), Out<Int>())
+    konst x = case_16(Out<Int?>(), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -353,7 +353,7 @@ fun case_16() {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funAny()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableT()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>.funNullableAny()
-        val y = x.get()
+        konst y = x.get()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>.equals(null)
@@ -373,7 +373,7 @@ fun case_16() {
 fun <T> case_17(x: Out<T>, y: Out<T?>) = select(x, select(y, null))
 
 fun case_17() {
-    val x = case_17(Out<Int>(), Out<Number?>())
+    konst x = case_17(Out<Int>(), Out<Number?>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>? & Out<kotlin.Number?>")!>x<!>
@@ -386,7 +386,7 @@ fun case_17() {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>? & Out<kotlin.Number?>")!>x<!>.funAny()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>? & Out<kotlin.Number?>")!>x<!>.funNullableT()
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>? & Out<kotlin.Number?>")!>x<!>.funNullableAny()
-        val y = x.get()
+        konst y = x.get()
         if (y != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>y<!>.equals(null)
@@ -410,7 +410,7 @@ fun case_17() {
 fun <T> case_18(x: Out<T?>, y: Out<T>) = select(x, y)
 
 fun case_18() {
-    val x = case_18(Out<Number?>(), Out<Int>())
+    konst x = case_18(Out<Number?>(), Out<Int>())
 
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>")!>x<!>.equals(null)
@@ -422,7 +422,7 @@ fun case_18() {
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>")!>x<!>.funAny()
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>")!>x<!>.funNullableT()
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Number?>")!>x<!>.funNullableAny()
-    val y = x.get()
+    konst y = x.get()
     if (y != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>y<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number? & kotlin.Number")!>y<!>.equals(null)
@@ -441,7 +441,7 @@ fun case_18() {
 fun <T> case_19(x: Out<T?>, y: Out<T>) = select(x, y)
 
 fun case_19() {
-    val x = case_19(Out<Int>(), Out())
+    konst x = case_19(Out<Int>(), Out())
 
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>")!>x<!>.equals(null)
@@ -453,7 +453,7 @@ fun case_19() {
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>")!>x<!>.funAny()
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>")!>x<!>.funNullableT()
     <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>")!>x<!>.funNullableAny()
-    val y = x.get()
+    konst y = x.get()
     if (y != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>y<!>.equals(null)
@@ -472,7 +472,7 @@ fun case_19() {
 fun <T> case_20(x: Out<T>, y: Out<T>) = select(x.get(), y.get())
 
 fun case_20(y: Int?) {
-    val x = case_20(Out(y), Out<Int>())
+    konst x = case_20(Out(y), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -492,7 +492,7 @@ fun case_20(y: Int?) {
 fun <T> case_21(x: Out<T?>, y: Out<T>) = select(x.get(), y.get())
 
 fun case_21(y: Int?) {
-    val x = case_21(Out(y), Out<Int>())
+    konst x = case_21(Out(y), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -512,7 +512,7 @@ fun case_21(y: Int?) {
 fun <T> case_22(x: Out<T?>, y: Out<T>): T? = select(x.get(), y.get())
 
 fun case_22(y: Int?) {
-    val x = case_22(Out(y), Out<Int>())
+    konst x = case_22(Out(y), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -532,7 +532,7 @@ fun case_22(y: Int?) {
 fun <T> case_23(x: Out<T>, y: Out<T>): T = select(x.get(), y.get())
 
 fun case_23(y: Int?) {
-    val x = case_13(Out(y), Out<Int>())
+    konst x = case_13(Out(y), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -552,7 +552,7 @@ fun case_23(y: Int?) {
 fun <A, B : A, C: B, D: C, E: D, F> case_24(x: Out<A>, y: Out<F>) where F : E? = select(x.get(), y.get())
 
 fun case_24(y: Int) {
-    val x = case_13(Out(y), Out<Int>())
+    konst x = case_13(Out(y), Out<Int>())
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Out<kotlin.Int?>? & Out<kotlin.Int?>")!>x<!>
@@ -577,7 +577,7 @@ fun <A, B : Out<A>, C: Out<B>, D: Out<C>, E: Out<D>, F> case_25(x: F, y: Out<C>)
     select(x.get()?.get()?.get()?.get()?.get(), y.get().get().get())
 
 fun case_25(y: Int) {
-    val x = case_25(Out(Out(Out(Out(Out(y))))), Out(Out(Out(y))))
+    konst x = case_25(Out(Out(Out(Out(Out(y))))), Out(Out(Out(y))))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>
@@ -602,7 +602,7 @@ fun <A, B : Out<A>, C: Out<B>, D: Out<C>, E: Out<D>, F> case_26(x: F, y: Out<C>)
     select(x.get()?.get()?.get()?.get()?.get(), y.get().get().get())
 
 fun case_26(y: Int) {
-    val x = case_26(Out(Out(Out(Out(Out(y))))), Out(Out(Out(y))))
+    konst x = case_26(Out(Out(Out(Out(Out(y))))), Out(Out(Out(y))))
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Int")!>x<!>

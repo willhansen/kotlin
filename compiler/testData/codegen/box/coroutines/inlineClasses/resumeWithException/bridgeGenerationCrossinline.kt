@@ -12,7 +12,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 @Suppress("UNSUPPORTED_FEATURE")
-inline class Result<T>(val a: Any?) {
+inline class Result<T>(konst a: Any?) {
     fun getOrThrow(): T = a as T
 }
 
@@ -36,7 +36,7 @@ inline fun <T> ResultReceiver(crossinline f: (Result<T>) -> Unit): ResultReceive
 
 fun test() {
     var invoked = false
-    val receiver = ResultReceiver<String> { result ->
+    konst receiver = ResultReceiver<String> { result ->
         invoked = true
         result.getOrThrow()
     }

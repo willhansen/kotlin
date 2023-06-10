@@ -3,15 +3,15 @@
 class Test {
 
     data class Style(
-            val color: Int? = null,
-            val underlined: Boolean? = null,
-            val separator: String = ""
+            konst color: Int? = null,
+            konst underlined: Boolean? = null,
+            konst separator: String = ""
     )
 
     init {
         var flag: Boolean? = null
 
-        val receiver: String = "123"
+        konst receiver: String = "123"
         try {
             receiver.let { a2 ->
                 flag = false
@@ -19,7 +19,7 @@ class Test {
         } finally {
             receiver.hashCode()
         }
-        val style = Style(null, flag, "123")
+        konst style = Style(null, flag, "123")
     }
 }
 

@@ -30,7 +30,7 @@ object IrInlineDefaultCodegen : IrInlineCallGenerator {
         blockInfo: BlockInfo
     ) {
         // This codegen is only used for calls to the underlying function in a $default stub.
-        // For such calls we know that we are passing along the value parameters and reusing the same indices.
+        // For such calls we know that we are passing along the konstue parameters and reusing the same indices.
         // There is no need to generate any code.
         assert(argumentExpression is IrGetValue || argumentExpression is IrTypeOperatorCall && argumentExpression.argument is IrGetValue)
     }
@@ -41,11 +41,11 @@ object IrInlineDefaultCodegen : IrInlineCallGenerator {
         expression: IrFunctionAccessExpression,
         isInsideIfCondition: Boolean
     ) {
-        val function = expression.symbol.owner
-        val nodeAndSmap = codegen.classCodegen.generateMethodNode(function)
-        val childSourceMapper = SourceMapCopier(codegen.smap, nodeAndSmap.classSMAP)
+        konst function = expression.symbol.owner
+        konst nodeAndSmap = codegen.classCodegen.generateMethodNode(function)
+        konst childSourceMapper = SourceMapCopier(codegen.smap, nodeAndSmap.classSMAP)
 
-        val argsSize =
+        konst argsSize =
             (Type.getArgumentsAndReturnSizes(callableMethod.asmMethod.descriptor) ushr 2) - if (function.isStatic) 1 else 0
         nodeAndSmap.node.accept(object : MethodBodyVisitor(codegen.visitor) {
             override fun visitLocalVariable(name: String, desc: String, signature: String?, start: Label, end: Label, index: Int) {

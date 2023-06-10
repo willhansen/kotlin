@@ -4,7 +4,7 @@
         AnnotationTarget.EXPRESSION, AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.SOURCE)
 @Repeatable
-annotation class Ann(val x: Int = 6)
+annotation class Ann(konst x: Int = 6)
 
 @Ann(1) @Ann(2) @Ann(3) private class A @Ann constructor() {
     @Ann(x = 5) fun foo() {
@@ -13,7 +13,7 @@ annotation class Ann(val x: Int = 6)
         @Ann fun local() {}
     }
 
-    @Ann val x = 1
+    @Ann konst x = 1
 
     fun bar(x: @Ann(1) @Ann(2) @Ann(3) Int) {}
 }

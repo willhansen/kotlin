@@ -1,12 +1,12 @@
 // IGNORE_BACKEND: JVM
-class X(val x: String) {
+class X(konst x: String) {
     open inner class Y {
         fun foo() = x
     }
 
     fun foo(s: String): String {
         with(X(s+x)) {
-            val obj = object : Y() {}
+            konst obj = object : Y() {}
             return obj.foo()
         }
     }

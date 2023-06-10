@@ -36,7 +36,7 @@ RUNTIME_NORETURN void Konan_js_freeArena(Arena arena) {
   konan::abort();
 }
 
-RUNTIME_NORETURN void Konan_js_pushIntToArena(Arena arena, KInt value) {
+RUNTIME_NORETURN void Konan_js_pushIntToArena(Arena arena, KInt konstue) {
   RuntimeAssert(false, "JavaScript interop is disabled");
   konan::abort();
 }

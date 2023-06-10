@@ -5,7 +5,7 @@
 
 package kotlin.text.regex
 
-private val decompositionValues = intArrayOf(
+private konst decompositionValues = intArrayOf(
     65, 768, 65, 769, 65, 770, 65, 771, 65, 776, 65, 778, 67, 807, 69, 768,
     69, 769, 69, 770, 69, 776, 73, 768, 73, 769, 73, 770, 73, 776, 78, 771,
     79, 768, 79, 769, 79, 770, 79, 771, 79, 776, 85, 768, 85, 769, 85, 770,
@@ -218,7 +218,7 @@ private val decompositionValues = intArrayOf(
     40635, 19798, 40697, 40702, 40709, 40719, 40726, 40763, 173568,
 )
 
-private val decompositionValueIndex = shortArrayOf(
+private konst decompositionValueIndex = shortArrayOf(
     0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30,
     32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 62,
     64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94,
@@ -350,9 +350,9 @@ private val decompositionValueIndex = shortArrayOf(
 )
 
 internal fun getDecompositionByIndex(index: Int): IntArray {
-    val startIndex = decompositionValueIndex[index].toInt()
-    val endIndex = decompositionValueIndex[index + 1].toInt()
-    val result = IntArray(endIndex - startIndex)
+    konst startIndex = decompositionValueIndex[index].toInt()
+    konst endIndex = decompositionValueIndex[index + 1].toInt()
+    konst result = IntArray(endIndex - startIndex)
     decompositionValues.copyInto(result, startIndex = startIndex, endIndex = endIndex)
     return result
 }

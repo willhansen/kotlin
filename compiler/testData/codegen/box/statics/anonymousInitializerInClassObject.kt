@@ -1,6 +1,6 @@
 class Foo {
     companion object {
-        val bar: String
+        konst bar: String
 
         init {
             bar = "OK"

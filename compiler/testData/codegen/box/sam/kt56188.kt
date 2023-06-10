@@ -18,10 +18,10 @@ fun <BarTP1, BarTP2 : Supplier<BarTP1>> bar(): SupplierInvoker<BarTP1, BarTP2> {
 }
 
 fun box(): String {
-    val result1 = foo("OK").get()
+    konst result1 = foo("OK").get()
     if (result1 != "OK") return result1
 
-    val result2 = bar<String, Supplier<String>>().invokeSupplier { "OK" }
+    konst result2 = bar<String, Supplier<String>>().invokeSupplier { "OK" }
     if (result2 != "OK") return result2
 
     return "OK"

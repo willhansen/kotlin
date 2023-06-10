@@ -7,9 +7,9 @@ interface A {
 fun box(): String {
     var result = "FAILURE"
 
-    val a: A = object : A {
+    konst a: A = object : A {
         override fun run() {
-            val b = object {
+            konst b = object {
                 fun foo() {
                     result = "OK"
                 }

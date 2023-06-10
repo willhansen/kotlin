@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.asJava.classes.lazyPub
 import org.jetbrains.kotlin.psi.KtCallElement
 
 internal open class SymbolLightJavaAnnotation(
-    val originalLightAnnotation: SymbolLightLazyAnnotation,
-    private val javaQualifier: String,
+    konst originalLightAnnotation: SymbolLightLazyAnnotation,
+    private konst javaQualifier: String,
     owner: PsiModifierList,
-    private val argumentsComputer: SymbolLightJavaAnnotation.() -> List<KtNamedAnnotationValue>,
+    private konst argumentsComputer: SymbolLightJavaAnnotation.() -> List<KtNamedAnnotationValue>,
 ) : SymbolLightAbstractAnnotation(owner) {
-    override val kotlinOrigin: KtCallElement? get() = originalLightAnnotation.kotlinOrigin
+    override konst kotlinOrigin: KtCallElement? get() = originalLightAnnotation.kotlinOrigin
 
     override fun equals(other: Any?): Boolean = other === this ||
             other is SymbolLightJavaAnnotation &&
@@ -28,7 +28,7 @@ internal open class SymbolLightJavaAnnotation(
 
     override fun getQualifiedName(): String = javaQualifier
 
-    private val _parameterList: PsiAnnotationParameterList by lazyPub {
+    private konst _parameterList: PsiAnnotationParameterList by lazyPub {
         symbolLightAnnotationParameterList { argumentsComputer() }
     }
 

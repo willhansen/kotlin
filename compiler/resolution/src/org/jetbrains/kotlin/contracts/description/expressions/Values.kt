@@ -27,14 +27,14 @@ interface ContractDescriptionValue : ContractDescriptionElement {
         contractDescriptionVisitor.visitValue(this, data)
 }
 
-open class ConstantReference(val name: String) : ContractDescriptionValue {
+open class ConstantReference(konst name: String) : ContractDescriptionValue {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitConstantDescriptor(this, data)
 
     companion object {
-        val NULL = ConstantReference("NULL")
-        val WILDCARD = ConstantReference("WILDCARD")
-        val NOT_NULL = ConstantReference("NOT_NULL")
+        konst NULL = ConstantReference("NULL")
+        konst WILDCARD = ConstantReference("WILDCARD")
+        konst NOT_NULL = ConstantReference("NOT_NULL")
     }
 }
 
@@ -43,12 +43,12 @@ class BooleanConstantReference(name: String) : ConstantReference(name), BooleanE
         contractDescriptionVisitor.visitBooleanConstantDescriptor(this, data)
 
     companion object {
-        val TRUE = BooleanConstantReference("TRUE")
-        val FALSE = BooleanConstantReference("FALSE")
+        konst TRUE = BooleanConstantReference("TRUE")
+        konst FALSE = BooleanConstantReference("FALSE")
     }
 }
 
-open class VariableReference(val descriptor: ParameterDescriptor) : ContractDescriptionValue {
+open class VariableReference(konst descriptor: ParameterDescriptor) : ContractDescriptionValue {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D) =
         contractDescriptionVisitor.visitVariableReference(this, data)
 }

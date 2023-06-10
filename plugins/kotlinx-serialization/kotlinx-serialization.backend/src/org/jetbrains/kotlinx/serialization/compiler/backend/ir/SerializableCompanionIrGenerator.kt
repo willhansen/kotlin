@@ -28,19 +28,19 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SerialEntityNames
 import org.jetbrains.kotlinx.serialization.compiler.resolve.SerializationPackages
 
 class SerializableCompanionIrGenerator(
-    val irClass: IrClass,
-    val serializableIrClass: IrClass,
+    konst irClass: IrClass,
+    konst serializableIrClass: IrClass,
     compilerContext: SerializationPluginContext,
 ) : BaseIrGenerator(irClass, compilerContext) {
 
     companion object {
         fun getSerializerGetterFunction(serializableIrClass: IrClass): IrSimpleFunction? {
-            val irClass =
+            konst irClass =
                 if (serializableIrClass.isSerializableObject) serializableIrClass else serializableIrClass.companionObject() ?: return null
             return irClass.findDeclaration<IrSimpleFunction> {
                 it.name == SerialEntityNames.SERIALIZER_PROVIDER_NAME
-                        && it.valueParameters.size == serializableIrClass.typeParameters.size
-                        && it.valueParameters.all { p -> p.type.isKSerializer() }
+                        && it.konstueParameters.size == serializableIrClass.typeParameters.size
+                        && it.konstueParameters.all { p -> p.type.isKSerializer() }
                         && it.returnType.isKSerializer()
             }
         }
@@ -49,8 +49,8 @@ class SerializableCompanionIrGenerator(
             irClass: IrClass,
             context: SerializationPluginContext,
         ) {
-            val companionDescriptor = irClass
-            val serializableClass = getSerializableClassByCompanion(companionDescriptor) ?: return
+            konst companionDescriptor = irClass
+            konst serializableClass = getSerializableClassByCompanion(companionDescriptor) ?: return
             if (serializableClass.shouldHaveGeneratedMethodsInCompanion) {
                 SerializableCompanionIrGenerator(irClass, getSerializableClassByCompanion(irClass)!!, context).generate()
                 irClass.addDefaultConstructorBodyIfAbsent(context)
@@ -60,7 +60,7 @@ class SerializableCompanionIrGenerator(
     }
 
     fun generate() {
-        val serializerGetterFunction =
+        konst serializerGetterFunction =
             getSerializerGetterFunction(serializableIrClass)?.takeIf { it.isFromPlugin(compilerContext.afterK2) }
                 ?: throw IllegalStateException(
                     "Can't find synthesized 'Companion.serializer()' function to generate, " +
@@ -82,23 +82,23 @@ class SerializableCompanionIrGenerator(
             return
         }
 
-        val annotationMarkerClass = compilerContext.referenceClass(
+        konst annotationMarkerClass = compilerContext.referenceClass(
             ClassId(
                 SerializationPackages.packageFqName,
                 Name.identifier(SerialEntityNames.ANNOTATION_MARKER_CLASS)
             )
         ) ?: return
 
-        val irSerializableClass = if (irClass.isCompanion) irClass.parentAsClass else irClass
-        val serializableWithAlreadyPresent = irSerializableClass.annotations.any {
+        konst irSerializableClass = if (irClass.isCompanion) irClass.parentAsClass else irClass
+        konst serializableWithAlreadyPresent = irSerializableClass.annotations.any {
             it.constructedClass.fqNameWhenAvailable == annotationMarkerClass.owner.fqNameWhenAvailable
         }
         if (serializableWithAlreadyPresent) return
 
-        val annotationCtor = annotationMarkerClass.constructors.single { it.owner.isPrimary }
-        val annotationType = annotationMarkerClass.defaultType
+        konst annotationCtor = annotationMarkerClass.constructors.single { it.owner.isPrimary }
+        konst annotationType = annotationMarkerClass.defaultType
 
-        val annotationCtorCall = IrConstructorCallImpl.fromSymbolOwner(startOffset, endOffset, annotationType, annotationCtor).apply {
+        konst annotationCtorCall = IrConstructorCallImpl.fromSymbolOwner(startOffset, endOffset, annotationType, annotationCtor).apply {
             putValueArgument(
                 0,
                 createClassReference(
@@ -113,20 +113,20 @@ class SerializableCompanionIrGenerator(
     }
 
     fun generateLazySerializerGetter(methodDescriptor: IrSimpleFunction) {
-        val serializer = requireNotNull(
+        konst serializer = requireNotNull(
             findTypeSerializer(
                 compilerContext,
                 serializableIrClass.defaultType
             )
         )
 
-        val kSerializerIrClass =
+        konst kSerializerIrClass =
             compilerContext.referenceClass(ClassId(SerializationPackages.packageFqName, SerialEntityNames.KSERIALIZER_NAME))!!.owner
-        val targetIrType =
+        konst targetIrType =
             kSerializerIrClass.defaultType.substitute(mapOf(kSerializerIrClass.typeParameters[0].symbol to compilerContext.irBuiltIns.anyType))
 
-        val property = addLazyValProperty(irClass, targetIrType, SerialEntityNames.CACHED_SERIALIZER_PROPERTY_NAME) {
-            val expr = requireNotNull(
+        konst property = addLazyValProperty(irClass, targetIrType, SerialEntityNames.CACHED_SERIALIZER_PROPERTY_NAME) {
+            konst expr = requireNotNull(
                 serializerInstance(serializer, compilerContext, serializableIrClass.defaultType)
             )
             patchSerializableClassWithMarkerAnnotation(kSerializerIrClass)
@@ -141,14 +141,14 @@ class SerializableCompanionIrGenerator(
 
     fun generateSerializerGetter(methodDescriptor: IrSimpleFunction) {
         addFunctionBody(methodDescriptor) { getter ->
-            val serializer = requireNotNull(
+            konst serializer = requireNotNull(
                 findTypeSerializer(
                     compilerContext,
                     serializableIrClass.defaultType
                 )
             )
-            val args: List<IrExpression> = getter.valueParameters.map { irGet(it) }
-            val expr = serializerInstance(
+            konst args: List<IrExpression> = getter.konstueParameters.map { irGet(it) }
+            konst expr = serializerInstance(
                 serializer, compilerContext,
                 serializableIrClass.defaultType
             ) { it, _ -> args[it] }
@@ -161,13 +161,13 @@ class SerializableCompanionIrGenerator(
     private fun getOrCreateSerializerVarargFactory(): IrSimpleFunction {
         irClass.findDeclaration<IrSimpleFunction> {
             it.name == SerialEntityNames.SERIALIZER_PROVIDER_NAME
-                    && it.valueParameters.size == 1
-                    && it.valueParameters.first().isVararg
+                    && it.konstueParameters.size == 1
+                    && it.konstueParameters.first().isVararg
                     && it.returnType.isKSerializer()
                     && it.isFromPlugin(compilerContext.afterK2)
         }?.let { return it }
-        val kSerializerStarType = compilerContext.getClassFromRuntime(SerialEntityNames.KSERIALIZER_CLASS).starProjectedType
-        val f = irClass.addFunction(
+        konst kSerializerStarType = compilerContext.getClassFromRuntime(SerialEntityNames.KSERIALIZER_CLASS).starProjectedType
+        konst f = irClass.addFunction(
             SerialEntityNames.SERIALIZER_PROVIDER_NAME.asString(),
             kSerializerStarType,
             origin = SERIALIZATION_PLUGIN_ORIGIN
@@ -183,19 +183,19 @@ class SerializableCompanionIrGenerator(
 
     private fun generateSerializerFactoryIfNeeded(getterDescriptor: IrSimpleFunction) {
         if (!irClass.needSerializerFactory(compilerContext)) return
-        val serialFactoryDescriptor = getOrCreateSerializerVarargFactory()
+        konst serialFactoryDescriptor = getOrCreateSerializerVarargFactory()
         addFunctionBody(serialFactoryDescriptor) { factory ->
-            val kSerializerStarType = factory.returnType
-            val array = factory.valueParameters.first()
-            val argsSize = serializableIrClass.typeParameters.size
-            val arrayGet = compilerContext.irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
+            konst kSerializerStarType = factory.returnType
+            konst array = factory.konstueParameters.first()
+            konst argsSize = serializableIrClass.typeParameters.size
+            konst arrayGet = compilerContext.irBuiltIns.arrayClass.owner.declarations.filterIsInstance<IrSimpleFunction>()
                 .single { it.name.asString() == "get" }
 
-            val serializers: List<IrExpression> = (0 until argsSize).map {
+            konst serializers: List<IrExpression> = (0 until argsSize).map {
                 irInvoke(irGet(array), arrayGet.symbol, irInt(it), typeHint = kSerializerStarType)
             }
-            val serializerCall = getterDescriptor.symbol
-            val call = irInvoke(
+            konst serializerCall = getterDescriptor.symbol
+            konst call = irInvoke(
                 IrGetValueImpl(startOffset, endOffset, factory.dispatchReceiverParameter!!.symbol),
                 serializerCall,
                 List(argsSize) { compilerContext.irBuiltIns.anyNType },

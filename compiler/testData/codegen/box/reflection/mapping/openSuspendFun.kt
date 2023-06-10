@@ -14,9 +14,9 @@ class Bbb {
 }
 
 fun box(): String {
-    val bbb = Bbb::class.declaredMemberFunctions.first { it.name == "bbb" }.javaMethod
+    konst bbb = Bbb::class.declaredMemberFunctions.first { it.name == "bbb" }.javaMethod
     assertEquals("bbb", bbb!!.name)
-    val aaa = Aaa::class.declaredMemberFunctions.first { it.name == "aaa" }.javaMethod
+    konst aaa = Aaa::class.declaredMemberFunctions.first { it.name == "aaa" }.javaMethod
     assertEquals("aaa", aaa!!.name)
     return "OK"
 }

@@ -2,7 +2,7 @@ interface Base {
     fun foo(): Int
 }
 
-val Int.getter: Int
+konst Int.getter: Int
     get() {
         return object : Base {
             override fun foo(): Int {
@@ -12,7 +12,7 @@ val Int.getter: Int
     }
 
 fun box(): String {
-    val i = 1
+    konst i = 1
     if (i.getter != 1) return "getter failed"
 
     return "OK"

@@ -1,4 +1,4 @@
-val ``: Int = 1
+konst ``: Int = 1
 
 fun ``() {}
 
@@ -6,9 +6,9 @@ class `` {}
 
 fun <``> f() {}
 
-class Data(val x: Int, val y: Int)
+class Data(konst x: Int, konst y: Int)
 fun g() {
     for (`` in 1..10) {
-        val (``, y) = Data(1, 2)
+        konst (``, y) = Data(1, 2)
     }
 }

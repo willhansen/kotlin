@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.js.KotlinJavascriptPackageFragment
 
 fun getAnnotationsOnContainingJsModule(descriptor: DeclarationDescriptor): List<ClassId>? {
-    val parent = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java, false) ?: return emptyList()
+    konst parent = DescriptorUtils.getParentOfType(descriptor, ClassOrPackageFragmentDescriptor::class.java, false) ?: return emptyList()
 
-    val parentSource = (descriptor as? DeserializedMemberDescriptor)?.containerSource ?: parent.source
+    konst parentSource = (descriptor as? DeserializedMemberDescriptor)?.containerSource ?: parent.source
     return (parentSource as? KotlinJavascriptPackageFragment.JsContainerSource)?.annotations
 }

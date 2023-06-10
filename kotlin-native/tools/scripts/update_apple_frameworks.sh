@@ -6,7 +6,7 @@
 # Note that some frameworks are unsupported (e.g. swift-only) and marked as .disabled.
 # Others may be supported and manual adjustment required (.attention_required).
 # Don't consider this script as a fully automatic solution. It tries its best
-# to identify unsupported frameworks correctly, but the result still should be validated.
+# to identify unsupported frameworks correctly, but the result still should be konstidated.
 #
 # jq is required to run the script. It can be installed via `brew install jq`.
 #

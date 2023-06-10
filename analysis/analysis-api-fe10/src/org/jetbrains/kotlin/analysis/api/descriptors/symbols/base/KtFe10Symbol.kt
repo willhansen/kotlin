@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 
 interface KtFe10Symbol : KtSymbol {
-    val analysisContext: Fe10AnalysisContext
+    konst analysisContext: Fe10AnalysisContext
 
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisContext.token
 }

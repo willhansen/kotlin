@@ -12,18 +12,18 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class BoxAny(val value: Any?) {
-    val intValue: Int get() = value as Int
+konstue class BoxAny(konst konstue: Any?) {
+    konst intValue: Int get() = konstue as Int
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class BoxInt(val value: Int)
+konstue class BoxInt(konst konstue: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class BoxLong(val value: Long)
+konstue class BoxLong(konst konstue: Long)
 
 class EmptyContinuation<T> : Continuation<T> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     override fun resumeWith(result: Result<T>) {}
@@ -82,7 +82,7 @@ suspend fun BoxLong.extension(block: suspend BoxLong.() -> Unit) {
 
 fun runBlocking(block: suspend () -> Unit) {
     block.startCoroutine(object : Continuation<Unit> {
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
         override fun resumeWith(result: Result<Unit>) {
@@ -102,31 +102,31 @@ fun box(): String {
         }
 
         bar { boxInt ->
-            result += boxInt.value
+            result += boxInt.konstue
         }
         barReceiver {
-            result += value
+            result += konstue
         }
 
         baz { boxLong ->
-            result += boxLong.value.toInt()
+            result += boxLong.konstue.toInt()
         }
         bazReceiver {
-            result += this.value.toInt()
+            result += this.konstue.toInt()
         }
 
-        val b = BoxAny(4)
+        konst b = BoxAny(4)
         b.extension {
             result += intValue
         }
 
-        val bInt = BoxInt(5)
+        konst bInt = BoxInt(5)
         BoxInt(5).extension {
-            result += value + bInt.value
+            result += konstue + bInt.konstue
         }
 
         BoxLong(6).extension {
-            result += value.toInt()
+            result += konstue.toInt()
         }
     }
 

@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrSetFieldImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
-    override val symbol: IrFieldSymbol,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
+    override konst symbol: IrFieldSymbol,
     override var type: IrType,
     override var origin: IrStatementOrigin? = null,
     override var superQualifierSymbol: IrClassSymbol? = null,
@@ -35,14 +35,14 @@ class IrSetFieldImpl(
         startOffset: Int, endOffset: Int,
         symbol: IrFieldSymbol,
         receiver: IrExpression?,
-        value: IrExpression,
+        konstue: IrExpression,
         type: IrType,
         origin: IrStatementOrigin? = null,
         superQualifierSymbol: IrClassSymbol? = null
     ) : this(startOffset, endOffset, symbol, type, origin, superQualifierSymbol) {
         this.receiver = receiver
-        this.value = value
+        this.konstue = konstue
     }
 
-    override lateinit var value: IrExpression
+    override lateinit var konstue: IrExpression
 }

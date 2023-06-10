@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 @Suppress("DEPRECATION_ERROR")
 class Controller {
-    val coroutineContext = object : CoroutineContext {
+    konst coroutineContext = object : CoroutineContext {
         public override fun <E : CoroutineContext.Element> get(key: CoroutineContext.Key<E>): E? = null
         public override fun <R> fold(initial: R, operation: (R, CoroutineContext.Element) -> R): R = initial
         public override fun plus(context: CoroutineContext): CoroutineContext = context
@@ -25,12 +25,12 @@ class Controller {
         var fromSuspension: String? = null
 
         c.startCoroutine(this, object : Continuation<String> {
-            override val context: CoroutineContext
+            override konst context: CoroutineContext
                 get() = EmptyCoroutineContext
 
-            override fun resumeWith(value: Result<String>) {
+            override fun resumeWith(konstue: Result<String>) {
                 fromSuspension = try {
-                    value.getOrThrow()
+                    konstue.getOrThrow()
                 } catch (exception: Throwable) {
                     "Exception: " + exception.message!!
                 }
@@ -42,7 +42,7 @@ class Controller {
 }
 
 fun box(): String {
-    val v = Controller()
+    konst v = Controller()
     var res = v.builder { controllerMultipleArgs(1, 1, 1) }
     if (res != "OK") {
         return "fail 1 $res"

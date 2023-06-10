@@ -9,7 +9,7 @@ object Delegate {
     return 1
   }
 
-  operator fun setValue(thisRef: Any?, kProp: Any, value: Int) {
+  operator fun setValue(thisRef: Any?, kProp: Any, konstue: Int) {
   }
 
 }
@@ -33,12 +33,12 @@ open class C {
 
 }
 
-val valWithBackingField: Int
+konst konstWithBackingField: Int
   field = 1
   get
 
-val test_valWithBackingField: KProperty0<Int>
-  field = ::valWithBackingField
+konst test_konstWithBackingField: KProperty0<Int>
+  field = ::konstWithBackingField
   get
 
 var varWithBackingField: Int
@@ -46,7 +46,7 @@ var varWithBackingField: Int
   get
   set
 
-val test_varWithBackingField: KMutableProperty0<Int>
+konst test_varWithBackingField: KMutableProperty0<Int>
   field = ::varWithBackingField
   get
 
@@ -55,41 +55,41 @@ var varWithBackingFieldAndAccessors: Int
   get(): Int {
     return #varWithBackingFieldAndAccessors
   }
-  set(value: Int) {
-    #varWithBackingFieldAndAccessors = value
+  set(konstue: Int) {
+    #varWithBackingFieldAndAccessors = konstue
   }
 
-val test_varWithBackingFieldAndAccessors: KMutableProperty0<Int>
+konst test_varWithBackingFieldAndAccessors: KMutableProperty0<Int>
   field = ::varWithBackingFieldAndAccessors
   get
 
-val valWithAccessors: Int
+konst konstWithAccessors: Int
   get(): Int {
     return 1
   }
 
-val test_valWithAccessors: KProperty0<Int>
-  field = ::valWithAccessors
+konst test_konstWithAccessors: KProperty0<Int>
+  field = ::konstWithAccessors
   get
 
 var varWithAccessors: Int
   get(): Int {
     return 1
   }
-  set(value: Int) {
+  set(konstue: Int) {
   }
 
-val test_varWithAccessors: KMutableProperty0<Int>
+konst test_varWithAccessors: KMutableProperty0<Int>
   field = ::varWithAccessors
   get
 
-val delegatedVal: Int /* by */
+konst delegatedVal: Int /* by */
   field = Delegate
   get(): Int {
     return #delegatedVal$delegate.getValue(thisRef = null, kProp = ::delegatedVal)
   }
 
-val test_delegatedVal: KProperty0<Int>
+konst test_delegatedVal: KProperty0<Int>
   field = ::delegatedVal
   get
 
@@ -99,33 +99,33 @@ var delegatedVar: Int /* by */
     return #delegatedVar$delegate.getValue(thisRef = null, kProp = ::delegatedVar)
   }
   set(<set-?>: Int) {
-    #delegatedVar$delegate.setValue(thisRef = null, kProp = ::delegatedVar, value = <set-?>)
+    #delegatedVar$delegate.setValue(thisRef = null, kProp = ::delegatedVar, konstue = <set-?>)
   }
 
-val test_delegatedVar: KMutableProperty0<Int>
+konst test_delegatedVar: KMutableProperty0<Int>
   field = ::delegatedVar
   get
 
-val constVal: Int
+konst constVal: Int
   field = 1
   get
 
-val test_constVal: KProperty0<Int>
+konst test_constVal: KProperty0<Int>
   field = ::constVal
   get
 
-val test_J_CONST: KProperty0<Int>
+konst test_J_CONST: KProperty0<Int>
   field = J::CONST/*</* null */>()*/
   get
 
-val test_J_nonConst: KMutableProperty0<Int>
+konst test_J_nonConst: KMutableProperty0<Int>
   field = J::nonConst/*</* null */>()*/
   get
 
-val test_varWithPrivateSet: KProperty1<C, Int>
+konst test_varWithPrivateSet: KProperty1<C, Int>
   field = C::varWithPrivateSet
   get
 
-val test_varWithProtectedSet: KProperty1<C, Int>
+konst test_varWithProtectedSet: KProperty1<C, Int>
   field = C::varWithProtectedSet
   get

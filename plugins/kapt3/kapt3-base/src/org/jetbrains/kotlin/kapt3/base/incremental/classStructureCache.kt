@@ -33,7 +33,7 @@ class JavaClassCache() : Serializable {
 
     /** Returns all types defined in these files. */
     fun getTypesForFiles(files: Collection<File>): Set<String> {
-        val typesFromFiles = HashSet<String>(files.size)
+        konst typesFromFiles = HashSet<String>(files.size)
         for (file in files) {
             sourceCache[file.toURI()]?.declaredTypes?.let {
                 typesFromFiles.addAll(it)
@@ -47,25 +47,25 @@ class JavaClassCache() : Serializable {
         sourceCache = input.readObject() as MutableMap<URI, JavaFileStructure>
 
         dependencyCache = HashMap(sourceCache.size * 4)
-        for (sourceInfo in sourceCache.values) {
+        for (sourceInfo in sourceCache.konstues) {
             if (sourceInfo !is SourceFileStructure) continue
             for (mentionedType in sourceInfo.getMentionedTypes()) {
-                val dependants = dependencyCache[mentionedType] ?: mutableSetOf()
+                konst dependants = dependencyCache[mentionedType] ?: mutableSetOf()
                 dependants.add(sourceInfo.sourceFile)
                 dependencyCache[mentionedType] = dependants
             }
             // Treat referred constants as ABI dependencies until we start supporting per-constant classpath updates.
             for (mentionedConstants in sourceInfo.getMentionedConstants().keys) {
-                val dependants = dependencyCache[mentionedConstants] ?: mutableSetOf()
+                konst dependants = dependencyCache[mentionedConstants] ?: mutableSetOf()
                 dependants.add(sourceInfo.sourceFile)
                 dependencyCache[mentionedConstants] = dependants
             }
         }
         nonTransitiveCache = HashMap(sourceCache.size * 2)
-        for (sourceInfo in sourceCache.values) {
+        for (sourceInfo in sourceCache.konstues) {
             if (sourceInfo !is SourceFileStructure) continue
             for (privateType in sourceInfo.getPrivateTypes()) {
-                val dependants = nonTransitiveCache[privateType] ?: mutableSetOf()
+                konst dependants = nonTransitiveCache[privateType] ?: mutableSetOf()
                 dependants.add(sourceInfo.sourceFile)
                 nonTransitiveCache[privateType] = dependants
             }
@@ -116,7 +116,7 @@ class JavaClassCache() : Serializable {
             }
         }
 
-        val allDirtyTypes = mutableSetOf<String>()
+        konst allDirtyTypes = mutableSetOf<String>()
         var currentDirtyTypes = getTypesForFiles(changes.sourceChanges).toMutableSet()
 
         changes.dirtyFqNamesFromClasspath.forEach { classpathChange ->
@@ -124,7 +124,7 @@ class JavaClassCache() : Serializable {
         }
 
         while (currentDirtyTypes.isNotEmpty()) {
-            val nextRound = mutableSetOf<String>()
+            konst nextRound = mutableSetOf<String>()
             for (dirtyType in currentDirtyTypes) {
                 allDirtyTypes.add(dirtyType)
                 findImpactedTypes(dirtyType, nextRound, allDirtyTypes)
@@ -135,7 +135,7 @@ class JavaClassCache() : Serializable {
         return allDirtyTypes
     }
 
-    internal fun invalidateAll() {
+    internal fun inkonstidateAll() {
         sourceCache.clear()
     }
 
@@ -148,8 +148,8 @@ class JavaClassCache() : Serializable {
         throw IllegalStateException("Unable to find source file for type $type")
     }
 
-    fun invalidateDataForTypes(impactedTypes: MutableSet<String>) {
-        val allSources = mutableSetOf<URI>()
+    fun inkonstidateDataForTypes(impactedTypes: MutableSet<String>) {
+        konst allSources = mutableSetOf<URI>()
         sourceCache.forEach { (fileUri, typeInfo) ->
             if (typeInfo.declaredTypes.any { it in impactedTypes }) {
                 allSources.add(fileUri)
@@ -161,8 +161,8 @@ class JavaClassCache() : Serializable {
 
     /** Returns total number of declared types in .java source files that were processed. */
     fun getSourceFileDefinedTypesCount(): Int {
-        return sourceCache.values.sumOf {
-            val structure = it as? SourceFileStructure ?: return@sumOf 0
+        return sourceCache.konstues.sumOf {
+            konst structure = it as? SourceFileStructure ?: return@sumOf 0
             if (structure.declaredTypes.size == 1 && structure.declaredTypes.single() == "error.NonExistentClass") {
                 // never report package for error.NonExistentClass, as it is never compiled by javac/kotlinc
                 return@sumOf 0
@@ -173,33 +173,33 @@ class JavaClassCache() : Serializable {
 }
 
 
-private val IGNORE_TYPES = { name: String -> name == "java.lang.Object" }
+private konst IGNORE_TYPES = { name: String -> name == "java.lang.Object" }
 
 interface JavaFileStructure {
-    val sourceFile: URI
-    val declaredTypes: Set<String>
+    konst sourceFile: URI
+    konst declaredTypes: Set<String>
 }
 
 class ClassFileStructure(
-    override val sourceFile: URI,
+    override konst sourceFile: URI,
     declaredType: String
 ) : JavaFileStructure, Serializable {
-    override val declaredTypes: Set<String> = setOf(declaredType)
+    override konst declaredTypes: Set<String> = setOf(declaredType)
 }
 
 class SourceFileStructure(
-    override val sourceFile: URI
+    override konst sourceFile: URI
 ) : JavaFileStructure, Serializable {
 
-    private val _declaredTypes: MutableSet<String> = mutableSetOf()
+    private konst _declaredTypes: MutableSet<String> = mutableSetOf()
 
-    private val mentionedTypes: MutableSet<String> = mutableSetOf()
-    private val privateTypes: MutableSet<String> = mutableSetOf()
+    private konst mentionedTypes: MutableSet<String> = mutableSetOf()
+    private konst privateTypes: MutableSet<String> = mutableSetOf()
 
-    private val mentionedAnnotations: MutableSet<String> = mutableSetOf()
-    private val mentionedConstants: MutableMap<String, MutableSet<String>> = mutableMapOf()
+    private konst mentionedAnnotations: MutableSet<String> = mutableSetOf()
+    private konst mentionedConstants: MutableMap<String, MutableSet<String>> = mutableMapOf()
 
-    override val declaredTypes: Set<String> = _declaredTypes
+    override konst declaredTypes: Set<String> = _declaredTypes
     fun getMentionedTypes(): Set<String> = mentionedTypes
     fun getPrivateTypes(): Set<String> = privateTypes
     fun getMentionedAnnotations(): Set<String> = mentionedAnnotations
@@ -231,4 +231,4 @@ class SourceFileStructure(
 }
 
 
-class Changes(val sourceChanges: Collection<File>, val dirtyFqNamesFromClasspath: Set<String>)
+class Changes(konst sourceChanges: Collection<File>, konst dirtyFqNamesFromClasspath: Set<String>)

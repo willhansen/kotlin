@@ -20,60 +20,60 @@ import org.jetbrains.kotlin.tooling.core.closure
 import org.jetbrains.kotlin.tooling.core.withClosure
 
 interface GradleKpmFragment : KpmFragment, HasKotlinDependencies, GradleKpmFragmentDependencyConfigurations, Named {
-    override val kotlinSourceRoots: SourceDirectorySet
+    override konst kotlinSourceRoots: SourceDirectorySet
 
-    override val containingModule: GradleKpmModule
+    override konst containingModule: GradleKpmModule
 
     override fun getName(): String = fragmentName
 
-    override val languageSettings: LanguageSettingsBuilder
+    override konst languageSettings: LanguageSettingsBuilder
 
-    val project: Project
+    konst project: Project
         get() = containingModule.project
 
-    val extras: MutableExtras
+    konst extras: MutableExtras
 
     fun refines(other: GradleKpmFragment)
 
     fun refines(other: NamedDomainObjectProvider<GradleKpmFragment>)
 
-    override val declaredRefinesDependencies: Iterable<GradleKpmFragment>
+    override konst declaredRefinesDependencies: Iterable<GradleKpmFragment>
 
-    override val refinesClosure: Set<GradleKpmFragment>
+    override konst refinesClosure: Set<GradleKpmFragment>
         get() = this.closure { it.declaredRefinesDependencies }
 
-    override val withRefinesClosure: Set<GradleKpmFragment>
+    override konst withRefinesClosure: Set<GradleKpmFragment>
         get() = this.withClosure { it.declaredRefinesDependencies }
 
     override fun dependencies(configure: Action<KotlinDependencyHandler>) =
         dependencies { configure.execute(this) }
 
     companion object {
-        const val COMMON_FRAGMENT_NAME = "common"
+        const konst COMMON_FRAGMENT_NAME = "common"
     }
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = apiConfiguration.name
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = implementationConfiguration.name
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = compileOnlyConfiguration.name
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = runtimeOnlyConfiguration.name
 
-    @Deprecated("Scheduled for removal with Kotlin 2.0")
+    @Deprecated("Scheduled for remokonst with Kotlin 2.0")
     @Suppress("DEPRECATION")
-    override val relatedConfigurationNames: List<String>
+    override konst relatedConfigurationNames: List<String>
         get() = super.relatedConfigurationNames +
                 // TODO: resolvable metadata configurations?
                 listOf(transitiveApiConfiguration.name, transitiveImplementationConfiguration.name)
 }
 
-val GradleKpmFragment.path: String
+konst GradleKpmFragment.path: String
     get() = "${project.path}/${containingModule.name}/$fragmentName"
 
-val GradleKpmFragment.containingVariants: Set<GradleKpmVariant>
+konst GradleKpmFragment.containingVariants: Set<GradleKpmVariant>
     get() = containingModule.variantsContainingFragment(this).map { it as GradleKpmVariant }.toSet()

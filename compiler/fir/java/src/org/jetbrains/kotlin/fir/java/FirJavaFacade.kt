@@ -44,7 +44,7 @@ import org.jetbrains.kotlin.types.Variance.INVARIANT
 
 class FirJavaFacadeForSource(
     session: FirSession,
-    private val sourceModuleData: FirModuleData,
+    private konst sourceModuleData: FirModuleData,
     classFinder: JavaClassFinder
 ) : FirJavaFacade(session, sourceModuleData.session.builtinTypes, classFinder) {
     override fun getModuleDataForClass(javaClass: JavaClass): FirModuleData {
@@ -54,27 +54,27 @@ class FirJavaFacadeForSource(
 
 @ThreadSafeMutableState
 abstract class FirJavaFacade(
-    private val session: FirSession,
-    private val builtinTypes: BuiltinTypes,
-    private val classFinder: JavaClassFinder
+    private konst session: FirSession,
+    private konst builtinTypes: BuiltinTypes,
+    private konst classFinder: JavaClassFinder
 ) {
     companion object {
-        val VALUE_METHOD_NAME = Name.identifier("value")
-        private const val PACKAGE_INFO_CLASS_NAME = "package-info"
+        konst VALUE_METHOD_NAME = Name.identifier("konstue")
+        private const konst PACKAGE_INFO_CLASS_NAME = "package-info"
     }
 
-    private val packageCache = session.firCachesFactory.createCache { fqName: FqName ->
-        val knownClassNames: Set<String>? = knownClassNamesInPackage(fqName)
+    private konst packageCache = session.firCachesFactory.createCache { fqName: FqName ->
+        konst knownClassNames: Set<String>? = knownClassNamesInPackage(fqName)
         classFinder.findPackage(
             fqName,
             mayHaveAnnotations = if (knownClassNames != null) PACKAGE_INFO_CLASS_NAME in knownClassNames else true
         )
     }
-    private val knownClassNamesInPackage = session.firCachesFactory.createCache(classFinder::knownClassNamesInPackage)
+    private konst knownClassNamesInPackage = session.firCachesFactory.createCache(classFinder::knownClassNamesInPackage)
 
-    private val parentClassTypeParameterStackCache = mutableMapOf<FirRegularClassSymbol, JavaTypeParameterStack>()
-    private val parentClassEffectiveVisibilityCache = mutableMapOf<FirRegularClassSymbol, EffectiveVisibility>()
-    private val statusExtensions = session.extensionService.statusTransformerExtensions
+    private konst parentClassTypeParameterStackCache = mutableMapOf<FirRegularClassSymbol, JavaTypeParameterStack>()
+    private konst parentClassEffectiveVisibilityCache = mutableMapOf<FirRegularClassSymbol, EffectiveVisibility>()
+    private konst statusExtensions = session.extensionService.statusTransformerExtensions
 
     fun findClass(classId: ClassId, knownContent: ByteArray? = null): JavaClass? =
         classFinder.findClass(JavaClassFinder.Request(classId, knownContent))
@@ -84,7 +84,7 @@ abstract class FirJavaFacade(
         packageCache.getValue(fqName)?.fqName
 
     fun hasTopLevelClassOf(classId: ClassId): Boolean {
-        val knownNames = knownClassNamesInPackage(classId.packageFqName) ?: return true
+        konst knownNames = knownClassNamesInPackage(classId.packageFqName) ?: return true
         return classId.relativeClassName.topLevelName() in knownNames
     }
 
@@ -134,12 +134,12 @@ abstract class FirJavaFacade(
     }
 
     private class ValueParametersForAnnotationConstructor {
-        val valueParameters: MutableMap<JavaMethod, FirJavaValueParameter> = linkedMapOf()
-        var valueParameterForValue: Pair<JavaMethod, FirJavaValueParameter>? = null
+        konst konstueParameters: MutableMap<JavaMethod, FirJavaValueParameter> = linkedMapOf()
+        var konstueParameterForValue: Pair<JavaMethod, FirJavaValueParameter>? = null
 
         inline fun forEach(block: (JavaMethod, FirJavaValueParameter) -> Unit) {
-            valueParameterForValue?.let { (javaMethod, firJavaValueParameter) -> block(javaMethod, firJavaValueParameter) }
-            valueParameters.forEach { (javaMethod, firJavaValueParameter) -> block(javaMethod, firJavaValueParameter) }
+            konstueParameterForValue?.let { (javaMethod, firJavaValueParameter) -> block(javaMethod, firJavaValueParameter) }
+            konstueParameters.forEach { (javaMethod, firJavaValueParameter) -> block(javaMethod, firJavaValueParameter) }
         }
     }
 
@@ -148,18 +148,18 @@ abstract class FirJavaFacade(
         parentClassSymbol: FirRegularClassSymbol?,
         javaClass: JavaClass,
     ): FirJavaClass {
-        val classId = classSymbol.classId
-        val javaTypeParameterStack = JavaTypeParameterStack()
+        konst classId = classSymbol.classId
+        konst javaTypeParameterStack = JavaTypeParameterStack()
 
         if (parentClassSymbol != null) {
-            val parentStack = parentClassTypeParameterStackCache[parentClassSymbol]
+            konst parentStack = parentClassTypeParameterStackCache[parentClassSymbol]
                 ?: (parentClassSymbol.fir as? FirJavaClass)?.javaTypeParameterStack
             if (parentStack != null) {
                 javaTypeParameterStack.addStack(parentStack)
             }
         }
         parentClassTypeParameterStackCache[classSymbol] = javaTypeParameterStack
-        val firJavaClass = createFirJavaClass(javaClass, classSymbol, parentClassSymbol, classId, javaTypeParameterStack)
+        konst firJavaClass = createFirJavaClass(javaClass, classSymbol, parentClassSymbol, classId, javaTypeParameterStack)
         parentClassTypeParameterStackCache.remove(classSymbol)
         parentClassEffectiveVisibilityCache.remove(classSymbol)
 
@@ -175,8 +175,8 @@ abstract class FirJavaFacade(
         //   to determine whether they set default nullability - but without laziness, breaking those loops is somewhat hard,
         //   as we have a nested ordering here.
 
-        val enhancement = FirSignatureEnhancement(firJavaClass, session) { emptyList() }
-        val (initialBounds, enhancedTypeParameters) = enhancement.performFirstRoundOfBoundsResolution(firJavaClass.typeParameters)
+        konst enhancement = FirSignatureEnhancement(firJavaClass, session) { emptyList() }
+        konst (initialBounds, enhancedTypeParameters) = enhancement.performFirstRoundOfBoundsResolution(firJavaClass.typeParameters)
         firJavaClass.typeParameters.clear()
         firJavaClass.typeParameters += enhancedTypeParameters
 
@@ -193,8 +193,8 @@ abstract class FirJavaFacade(
 
     private fun updateStatuses(firJavaClass: FirJavaClass, parentClassSymbol: FirRegularClassSymbol?) {
         if (statusExtensions.isEmpty()) return
-        val classSymbol = firJavaClass.symbol
-        val visitor = object : FirVisitorVoid() {
+        konst classSymbol = firJavaClass.symbol
+        konst visitor = object : FirVisitorVoid() {
             override fun visitElement(element: FirElement) {}
 
             override fun visitRegularClass(regularClass: FirRegularClass) {
@@ -232,9 +232,9 @@ abstract class FirJavaFacade(
         classId: ClassId,
         javaTypeParameterStack: JavaTypeParameterStack,
     ): FirJavaClass {
-        val valueParametersForAnnotationConstructor = ValueParametersForAnnotationConstructor()
-        val classIsAnnotation = javaClass.classKind == ClassKind.ANNOTATION_CLASS
-        val moduleData = getModuleDataForClass(javaClass)
+        konst konstueParametersForAnnotationConstructor = ValueParametersForAnnotationConstructor()
+        konst classIsAnnotation = javaClass.classKind == ClassKind.ANNOTATION_CLASS
+        konst moduleData = getModuleDataForClass(javaClass)
         return buildJavaClass {
             resolvePhase = FirResolvePhase.BODY_RESOLVE
             javaAnnotations += javaClass.annotations
@@ -243,7 +243,7 @@ abstract class FirJavaFacade(
             symbol = classSymbol
             name = javaClass.name
             isFromSource = javaClass.isFromSource
-            val visibility = javaClass.visibility
+            konst visibility = javaClass.visibility
             this@buildJavaClass.visibility = visibility
             classKind = javaClass.classKind
             modality = javaClass.modality
@@ -254,14 +254,14 @@ abstract class FirJavaFacade(
             existingNestedClassifierNames += javaClass.innerClassNames
             scopeProvider = JavaScopeProvider
 
-            val selfEffectiveVisibility = visibility.toEffectiveVisibility(parentClassSymbol?.toLookupTag(), forClass = true)
-            val parentEffectiveVisibility = parentClassSymbol?.let {
+            konst selfEffectiveVisibility = visibility.toEffectiveVisibility(parentClassSymbol?.toLookupTag(), forClass = true)
+            konst parentEffectiveVisibility = parentClassSymbol?.let {
                 parentClassEffectiveVisibilityCache[it] ?: it.fir.effectiveVisibility
             } ?: EffectiveVisibility.Public
-            val effectiveVisibility = parentEffectiveVisibility.lowerBound(selfEffectiveVisibility, session.typeContext)
+            konst effectiveVisibility = parentEffectiveVisibility.lowerBound(selfEffectiveVisibility, session.typeContext)
             parentClassEffectiveVisibilityCache[classSymbol] = effectiveVisibility
 
-            val classTypeParameters = javaClass.typeParameters.convertTypeParameters(javaTypeParameterStack, classSymbol, moduleData)
+            konst classTypeParameters = javaClass.typeParameters.convertTypeParameters(javaTypeParameterStack, classSymbol, moduleData)
             typeParameters += classTypeParameters
             if (!isStatic && parentClassSymbol != null) {
                 typeParameters += parentClassSymbol.fir.typeParameters.map {
@@ -277,7 +277,7 @@ abstract class FirJavaFacade(
                 )
             }
 
-            val dispatchReceiver = classId.defaultType(typeParameters.map { it.symbol })
+            konst dispatchReceiver = classId.defaultType(typeParameters.map { it.symbol })
 
             status = FirResolvedDeclarationStatusImpl(
                 visibility,
@@ -295,7 +295,7 @@ abstract class FirJavaFacade(
 
             for (javaMethod in javaClass.methods) {
                 if (javaMethod.isObjectMethodInInterface()) continue
-                val firJavaMethod = convertJavaMethodToFir(
+                konst firJavaMethod = convertJavaMethodToFir(
                     javaClass,
                     javaMethod,
                     classId,
@@ -306,17 +306,17 @@ abstract class FirJavaFacade(
                 declarations += firJavaMethod
 
                 if (classIsAnnotation) {
-                    val parameterForAnnotationConstructor =
+                    konst parameterForAnnotationConstructor =
                         convertJavaAnnotationMethodToValueParameter(javaMethod, firJavaMethod, moduleData)
                     if (javaMethod.name == VALUE_METHOD_NAME) {
-                        valueParametersForAnnotationConstructor.valueParameterForValue = javaMethod to parameterForAnnotationConstructor
+                        konstueParametersForAnnotationConstructor.konstueParameterForValue = javaMethod to parameterForAnnotationConstructor
                     } else {
-                        valueParametersForAnnotationConstructor.valueParameters[javaMethod] = parameterForAnnotationConstructor
+                        konstueParametersForAnnotationConstructor.konstueParameters[javaMethod] = parameterForAnnotationConstructor
                     }
                 }
             }
-            val javaClassDeclaredConstructors = javaClass.constructors
-            val constructorId = CallableId(classId.packageFqName, classId.relativeClassName, classId.shortClassName)
+            konst javaClassDeclaredConstructors = javaClass.constructors
+            konst constructorId = CallableId(classId.packageFqName, classId.relativeClassName, classId.shortClassName)
 
             if (javaClassDeclaredConstructors.isEmpty()
                 && javaClass.classKind == ClassKind.CLASS
@@ -361,7 +361,7 @@ abstract class FirJavaFacade(
                         javaClass,
                         constructorId = constructorId,
                         ownerClassBuilder = this,
-                        valueParametersForAnnotationConstructor = valueParametersForAnnotationConstructor,
+                        konstueParametersForAnnotationConstructor = konstueParametersForAnnotationConstructor,
                         moduleData = moduleData,
                     )
             }
@@ -381,8 +381,8 @@ abstract class FirJavaFacade(
             }
         }.apply {
             if (modality == Modality.SEALED) {
-                val inheritors = javaClass.permittedTypes.mapNotNull { classifierType ->
-                    val classifier = classifierType.classifier as? JavaClass
+                konst inheritors = javaClass.permittedTypes.mapNotNull { classifierType ->
+                    konst classifier = classifierType.classifier as? JavaClass
                     classifier?.let { JavaToKotlinClassMap.mapJavaToKotlin(it.fqName!!) }
                 }
                 setSealedClassInheritors(inheritors)
@@ -390,7 +390,7 @@ abstract class FirJavaFacade(
 
             if (classIsAnnotation) {
                 // Cannot load these until the symbol is bound because they may be self-referential.
-                valueParametersForAnnotationConstructor.forEach { javaMethod, firValueParameter ->
+                konstueParametersForAnnotationConstructor.forEach { javaMethod, firValueParameter ->
                     javaMethod.annotationParameterDefaultValue?.let { javaDefaultValue ->
                         firValueParameter.defaultValue =
                             javaDefaultValue.toFirExpression(session, javaTypeParameterStack, firValueParameter.returnTypeRef)
@@ -413,13 +413,13 @@ abstract class FirJavaFacade(
         classTypeParameters: List<FirTypeParameter>,
         destination: MutableList<FirDeclaration>
     ) {
-        val functionsByName = destination.filterIsInstance<FirJavaMethod>().groupBy { it.name }
+        konst functionsByName = destination.filterIsInstance<FirJavaMethod>().groupBy { it.name }
 
         for (recordComponent in javaClass.recordComponents) {
-            val name = recordComponent.name
-            if (functionsByName[name].orEmpty().any { it.valueParameters.isEmpty() }) continue
+            konst name = recordComponent.name
+            if (functionsByName[name].orEmpty().any { it.konstueParameters.isEmpty() }) continue
 
-            val componentId = CallableId(classId, name)
+            konst componentId = CallableId(classId, name)
             destination += buildJavaMethod {
                 this.moduleData = moduleData
                 source = recordComponent.toSourceElement(KtFakeSourceElementKind.JavaRecordComponentFunction)
@@ -444,7 +444,7 @@ abstract class FirJavaFacade(
             this.moduleData = moduleData
             isFromSource = javaClass.isFromSource
 
-            val constructorId = CallableId(classId, classId.shortClassName)
+            konst constructorId = CallableId(classId, classId.shortClassName)
             symbol = FirConstructorSymbol(constructorId)
             status = FirResolvedDeclarationStatusImpl(
                 Visibilities.Public,
@@ -458,7 +458,7 @@ abstract class FirJavaFacade(
             typeParameters += classTypeParameters.toRefs()
             annotationBuilder = { emptyList() }
 
-            javaClass.recordComponents.mapTo(valueParameters) { component ->
+            javaClass.recordComponents.mapTo(konstueParameters) { component ->
                 buildJavaValueParameter {
                     containingFunctionSymbol = this@buildJavaConstructor.symbol
                     source = component.toSourceElement(KtFakeSourceElementKind.ImplicitRecordConstructorParameter)
@@ -482,9 +482,9 @@ abstract class FirJavaFacade(
         dispatchReceiver: ConeClassLikeType,
         moduleData: FirModuleData,
     ): FirDeclaration {
-        val fieldName = javaField.name
-        val fieldId = CallableId(classId.packageFqName, classId.relativeClassName, fieldName)
-        val returnType = javaField.type
+        konst fieldName = javaField.name
+        konst fieldId = CallableId(classId.packageFqName, classId.relativeClassName, fieldName)
+        konst returnType = javaField.type
         return when {
             javaField.isEnumEntry -> buildEnumEntry {
                 source = javaField.toSourceElement()
@@ -550,10 +550,10 @@ abstract class FirJavaFacade(
         dispatchReceiver: ConeClassLikeType,
         moduleData: FirModuleData,
     ): FirJavaMethod {
-        val methodName = javaMethod.name
-        val methodId = CallableId(classId.packageFqName, classId.relativeClassName, methodName)
-        val methodSymbol = FirNamedFunctionSymbol(methodId)
-        val returnType = javaMethod.returnType
+        konst methodName = javaMethod.name
+        konst methodId = CallableId(classId.packageFqName, classId.relativeClassName, methodName)
+        konst methodSymbol = FirNamedFunctionSymbol(methodId)
+        konst returnType = javaMethod.returnType
         return buildJavaMethod {
             this.moduleData = moduleData
             source = javaMethod.toSourceElement()
@@ -563,8 +563,8 @@ abstract class FirJavaFacade(
             returnTypeRef = returnType.toFirJavaTypeRef(session, javaTypeParameterStack)
             isStatic = javaMethod.isStatic
             typeParameters += javaMethod.typeParameters.convertTypeParameters(javaTypeParameterStack, methodSymbol, moduleData)
-            for ((index, valueParameter) in javaMethod.valueParameters.withIndex()) {
-                valueParameters += valueParameter.toFirValueParameter(session, methodSymbol, moduleData, index, javaTypeParameterStack)
+            for ((index, konstueParameter) in javaMethod.konstueParameters.withIndex()) {
+                konstueParameters += konstueParameter.toFirValueParameter(session, methodSymbol, moduleData, index, javaTypeParameterStack)
             }
             annotationBuilder = { javaMethod.convertAnnotationsToFir(session, javaTypeParameterStack) }
             status = FirResolvedDeclarationStatusImpl(
@@ -583,7 +583,7 @@ abstract class FirJavaFacade(
             if (javaMethod.isStatic) {
                 containingClassForStaticMemberAttr = classId.toLookupTag()
             }
-            if (containingClass.isRecord && valueParameters.isEmpty() && containingClass.recordComponents.any { it.name == methodName }) {
+            if (containingClass.isRecord && konstueParameters.isEmpty() && containingClass.recordComponents.any { it.name == methodName }) {
                 isJavaRecordComponent = true
             }
         }
@@ -615,15 +615,15 @@ abstract class FirJavaFacade(
         outerClassSymbol: FirRegularClassSymbol?,
         moduleData: FirModuleData,
     ): FirJavaConstructor {
-        val constructorSymbol = FirConstructorSymbol(constructorId)
+        konst constructorSymbol = FirConstructorSymbol(constructorId)
         return buildJavaConstructor {
             source = javaConstructor?.toSourceElement() ?: javaClass.toSourceElement(KtFakeSourceElementKind.ImplicitConstructor)
             this.moduleData = moduleData
             isFromSource = javaClass.isFromSource
             symbol = constructorSymbol
             isInner = javaClass.outerClass != null && !javaClass.isStatic
-            val isThisInner = this.isInner
-            val visibility = javaConstructor?.visibility ?: ownerClassBuilder.visibility
+            konst isThisInner = this.isInner
+            konst visibility = javaConstructor?.visibility ?: ownerClassBuilder.visibility
             status = FirResolvedDeclarationStatusImpl(
                 visibility,
                 Modality.FINAL,
@@ -643,8 +643,8 @@ abstract class FirJavaFacade(
             if (javaConstructor != null) {
                 this.typeParameters += javaConstructor.typeParameters.convertTypeParameters(javaTypeParameterStack, constructorSymbol, moduleData)
                 annotationBuilder = { javaConstructor.convertAnnotationsToFir(session, javaTypeParameterStack) }
-                for ((index, valueParameter) in javaConstructor.valueParameters.withIndex()) {
-                    valueParameters += valueParameter.toFirValueParameter(session, constructorSymbol, moduleData, index, javaTypeParameterStack)
+                for ((index, konstueParameter) in javaConstructor.konstueParameters.withIndex()) {
+                    konstueParameters += konstueParameter.toFirValueParameter(session, constructorSymbol, moduleData, index, javaTypeParameterStack)
                 }
             } else {
                 annotationBuilder = { emptyList() }
@@ -658,7 +658,7 @@ abstract class FirJavaFacade(
         javaClass: JavaClass,
         constructorId: CallableId,
         ownerClassBuilder: FirJavaClassBuilder,
-        valueParametersForAnnotationConstructor: ValueParametersForAnnotationConstructor,
+        konstueParametersForAnnotationConstructor: ValueParametersForAnnotationConstructor,
         moduleData: FirModuleData,
     ): FirJavaConstructor {
         return buildJavaConstructor {
@@ -670,7 +670,7 @@ abstract class FirJavaFacade(
             returnTypeRef = buildResolvedTypeRef {
                 type = ownerClassBuilder.buildSelfTypeRef()
             }
-            valueParametersForAnnotationConstructor.forEach { _, firValueParameter -> valueParameters += firValueParameter }
+            konstueParametersForAnnotationConstructor.forEach { _, firValueParameter -> konstueParameters += firValueParameter }
             visibility = Visibilities.Public
             isInner = false
             isPrimary = true
@@ -701,9 +701,9 @@ abstract class FirJavaFacade(
     private inline fun FirMemberDeclaration.applyExtensionTransformers(
         operation: FirStatusTransformerExtension.(FirDeclarationStatus) -> FirDeclarationStatus
     ) {
-        val declaration = this
-        val oldStatus = declaration.status as FirResolvedDeclarationStatusImpl
-        val newStatus = statusExtensions.fold(status) { acc, it ->
+        konst declaration = this
+        konst oldStatus = declaration.status as FirResolvedDeclarationStatusImpl
+        konst newStatus = statusExtensions.fold(status) { acc, it ->
             if (it.needTransformStatus(declaration)) {
                 it.operation(acc)
             } else {
@@ -711,7 +711,7 @@ abstract class FirJavaFacade(
             }
         } as FirDeclarationStatusImpl
         if (newStatus === oldStatus) return
-        val resolvedStatus = newStatus.resolved(
+        konst resolvedStatus = newStatus.resolved(
             newStatus.visibility,
             newStatus.modality ?: oldStatus.modality,
             oldStatus.effectiveVisibility

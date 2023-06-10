@@ -27,13 +27,13 @@ import kotlin.test.*
 
 class KotlinPluginLifecycleTest {
 
-    private val project = buildProjectWithMPP()
-    private val lifecycle = project.kotlinPluginLifecycle as KotlinPluginLifecycleImpl
+    private konst project = buildProjectWithMPP()
+    private konst lifecycle = project.kotlinPluginLifecycle as KotlinPluginLifecycleImpl
 
     @Test
     fun `test - configure phase is executed right away`() {
-        val invocations = AtomicInteger(0)
-        lifecycle.enqueue(EvaluateBuildscript) {
+        konst invocations = AtomicInteger(0)
+        lifecycle.enqueue(EkonstuateBuildscript) {
             invocations.incrementAndGet()
         }
         assertEquals(1, invocations.get(), "Expected one invocation")
@@ -41,9 +41,9 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - launchInState - Configure`() {
-        val invocations = AtomicInteger(0)
-        project.launchInStage(EvaluateBuildscript) {
-            assertEquals(EvaluateBuildscript, stage)
+        konst invocations = AtomicInteger(0)
+        project.launchInStage(EkonstuateBuildscript) {
+            assertEquals(EkonstuateBuildscript, stage)
             assertEquals(1, invocations.incrementAndGet())
         }
         assertEquals(1, invocations.get())
@@ -51,24 +51,24 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - configure phase - nested enqueue - is executed as queue`() {
-        val outerInvocations = AtomicInteger(0)
-        val nestedAInvocations = AtomicInteger(0)
-        val nestedBInvocations = AtomicInteger(0)
-        val nestedCInvocations = AtomicInteger(0)
-        lifecycle.enqueue(EvaluateBuildscript) {
+        konst outerInvocations = AtomicInteger(0)
+        konst nestedAInvocations = AtomicInteger(0)
+        konst nestedBInvocations = AtomicInteger(0)
+        konst nestedCInvocations = AtomicInteger(0)
+        lifecycle.enqueue(EkonstuateBuildscript) {
             assertEquals(1, outerInvocations.incrementAndGet())
 
-            lifecycle.enqueue(EvaluateBuildscript) nestedA@{
+            lifecycle.enqueue(EkonstuateBuildscript) nestedA@{
                 assertEquals(0, nestedBInvocations.get(), "Expected nestedA to be executed before nestedB")
                 assertEquals(1, nestedAInvocations.incrementAndGet())
 
-                lifecycle.enqueue(EvaluateBuildscript) nestedC@{
+                lifecycle.enqueue(EkonstuateBuildscript) nestedC@{
                     assertEquals(1, nestedBInvocations.get(), "Expected nestedB to be executed before nestedC")
                     assertEquals(1, nestedCInvocations.incrementAndGet())
                 }
             }
 
-            lifecycle.enqueue(EvaluateBuildscript) nestedB@{
+            lifecycle.enqueue(EkonstuateBuildscript) nestedB@{
                 assertEquals(1, nestedAInvocations.get(), "Expected nestedA to be executed before nestedB")
                 assertEquals(0, nestedCInvocations.get(), "Expected nestedB to be executed before nestedC")
                 assertEquals(1, nestedBInvocations.incrementAndGet())
@@ -83,10 +83,10 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - all stages are executed in order`() {
-        val invocations = Stage.values().associateWith { AtomicInteger(0) }
-        Stage.values().toList().forEach { stage ->
+        konst invocations = Stage.konstues().associateWith { AtomicInteger(0) }
+        Stage.konstues().toList().forEach { stage ->
             lifecycle.enqueue(stage) {
-                Stage.values().forEach { otherStage ->
+                Stage.konstues().forEach { otherStage ->
                     when {
                         otherStage.ordinal < stage.ordinal -> assertEquals(1, invocations.getValue(otherStage).get())
                         otherStage.ordinal == stage.ordinal -> assertEquals(1, invocations.getValue(stage).incrementAndGet())
@@ -96,7 +96,7 @@ class KotlinPluginLifecycleTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         invocations.forEach { (stage, invocations) ->
             assertEquals(1, invocations.get(), "Expected stage '$stage' to be executed")
@@ -104,10 +104,10 @@ class KotlinPluginLifecycleTest {
     }
 
     @Test
-    fun `test - afterEvaluate based stage executes queue in order`() {
-        val action1Invocations = AtomicInteger(0)
-        val action2Invocations = AtomicInteger(0)
-        val action3Invocations = AtomicInteger(0)
+    fun `test - afterEkonstuate based stage executes queue in order`() {
+        konst action1Invocations = AtomicInteger(0)
+        konst action2Invocations = AtomicInteger(0)
+        konst action3Invocations = AtomicInteger(0)
 
         lifecycle.enqueue(ReadyForExecution) action3@{
             assertEquals(1, action1Invocations.get(), "Expected action1 to be executed before action3")
@@ -115,13 +115,13 @@ class KotlinPluginLifecycleTest {
             assertEquals(1, action3Invocations.incrementAndGet())
         }
 
-        lifecycle.enqueue(AfterEvaluateBuildscript) action1@{
+        lifecycle.enqueue(AfterEkonstuateBuildscript) action1@{
             assertEquals(0, action2Invocations.get(), "Expected action1 to be executed before action2")
             assertEquals(0, action3Invocations.get(), "Expected action1 to be executed before action3")
             assertEquals(1, action1Invocations.incrementAndGet())
         }
 
-        lifecycle.enqueue(AfterEvaluateBuildscript) action2@{
+        lifecycle.enqueue(AfterEkonstuateBuildscript) action2@{
             assertEquals(1, action1Invocations.get(), "Expected action1 to be executed before action2")
             assertEquals(0, action3Invocations.get(), "Expected action2 to be executed before action3")
             assertEquals(1, action2Invocations.incrementAndGet())
@@ -131,7 +131,7 @@ class KotlinPluginLifecycleTest {
         assertEquals(0, action2Invocations.get())
         assertEquals(0, action3Invocations.get())
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(1, action1Invocations.get())
         assertEquals(1, action2Invocations.get())
@@ -139,25 +139,25 @@ class KotlinPluginLifecycleTest {
     }
 
     @Test
-    fun `test - afterEvaluate based stage - allows enqueue in current stage`() {
-        val outerInvocations = AtomicInteger(0)
-        val nestedAInvocations = AtomicInteger(0)
-        val nestedBInvocations = AtomicInteger(0)
-        val nestedCInvocations = AtomicInteger(0)
-        lifecycle.enqueue(AfterEvaluateBuildscript) {
+    fun `test - afterEkonstuate based stage - allows enqueue in current stage`() {
+        konst outerInvocations = AtomicInteger(0)
+        konst nestedAInvocations = AtomicInteger(0)
+        konst nestedBInvocations = AtomicInteger(0)
+        konst nestedCInvocations = AtomicInteger(0)
+        lifecycle.enqueue(AfterEkonstuateBuildscript) {
             assertEquals(1, outerInvocations.incrementAndGet())
 
-            lifecycle.enqueue(AfterEvaluateBuildscript) nestedA@{
+            lifecycle.enqueue(AfterEkonstuateBuildscript) nestedA@{
                 assertEquals(0, nestedBInvocations.get(), "Expected nestedA to be executed before nestedB")
                 assertEquals(1, nestedAInvocations.incrementAndGet())
 
-                lifecycle.enqueue(AfterEvaluateBuildscript) nestedC@{
+                lifecycle.enqueue(AfterEkonstuateBuildscript) nestedC@{
                     assertEquals(1, nestedBInvocations.get(), "Expected nestedB to be executed before nestedC")
                     assertEquals(1, nestedCInvocations.incrementAndGet())
                 }
             }
 
-            lifecycle.enqueue(AfterEvaluateBuildscript) nestedB@{
+            lifecycle.enqueue(AfterEkonstuateBuildscript) nestedB@{
                 assertEquals(1, nestedAInvocations.get(), "Expected nestedA to be executed before nestedB")
                 assertEquals(0, nestedCInvocations.get(), "Expected nestedB to be executed before nestedC")
                 assertEquals(1, nestedBInvocations.incrementAndGet())
@@ -169,7 +169,7 @@ class KotlinPluginLifecycleTest {
         assertEquals(0, nestedBInvocations.get())
         assertEquals(0, nestedCInvocations.get())
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(1, outerInvocations.get())
         assertEquals(1, nestedAInvocations.get())
@@ -179,122 +179,122 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - enqueue of already executed stage - throws exception`() {
-        val executed = AtomicBoolean(false)
+        konst executed = AtomicBoolean(false)
         lifecycle.enqueue(ReadyForExecution) {
             assertFailsWith<IllegalLifecycleException> {
-                lifecycle.enqueue(AfterEvaluateBuildscript) { fail("This code shall not be executed!") }
+                lifecycle.enqueue(AfterEkonstuateBuildscript) { fail("This code shall not be executed!") }
             }
             assertFalse(executed.getAndSet(true))
         }
 
-        project.evaluate()
+        project.ekonstuate()
         assertTrue(executed.get())
     }
 
     @Test
-    fun `test - throwing an exception during buildscript evaluation - shall not execute afterEvaluate based stages`() {
-        val executed = AtomicReference<Throwable>()
-        lifecycle.enqueue(AfterEvaluateBuildscript) {
+    fun `test - throwing an exception during buildscript ekonstuation - shall not execute afterEkonstuate based stages`() {
+        konst executed = AtomicReference<Throwable>()
+        lifecycle.enqueue(AfterEkonstuateBuildscript) {
             assertNull(executed.getAndSet(Throwable()))
         }
 
-        val thrownException = Exception()
+        konst thrownException = Exception()
 
-        /* Provoking an exception during project.evaluate() */
-        val exceptionWasProvoked = AtomicBoolean()
+        /* Provoking an exception during project.ekonstuate() */
+        konst exceptionWasProvoked = AtomicBoolean()
         project.tasks.whenObjectAdded {
             assertFalse(exceptionWasProvoked.getAndSet(true))
             throw thrownException
         }
-        runCatching { project.evaluate() }
-        assertTrue(exceptionWasProvoked.get(), "Exception during '.evaluate()' was not provoked")
+        runCatching { project.ekonstuate() }
+        assertTrue(exceptionWasProvoked.get(), "Exception during '.ekonstuate()' was not provoked")
 
-        /* Assert: The 'AfterEvaluate' based stage should not have been executed */
+        /* Assert: The 'AfterEkonstuate' based stage should not have been executed */
         executed.get()?.let { throwable ->
-            fail("AfterEvaluate based stage is not expected to be launched because of exception during .evaluate()", throwable)
+            fail("AfterEkonstuate based stage is not expected to be launched because of exception during .ekonstuate()", throwable)
         }
 
-        val exceptions = project.configurationResult.getOrThrow().cast<Failure>()
+        konst exceptions = project.configurationResult.getOrThrow().cast<Failure>()
             .failures.withClosure<Throwable> { listOfNotNull(it.cause) }
         if (thrownException !in exceptions) fail("Expected 'thrownException' in lifecycle.finished")
     }
 
     @Test
-    fun `test - throwing an exception during buildscript evaluation - will execute coroutine waiting for finished`() {
-        val thrownException = Exception()
+    fun `test - throwing an exception during buildscript ekonstuation - will execute coroutine waiting for finished`() {
+        konst thrownException = Exception()
 
-        val executedAfterLifecycleFinished = AtomicBoolean(false)
+        konst executedAfterLifecycleFinished = AtomicBoolean(false)
         project.launch {
-            val exceptions = project.configurationResult.await().cast<Failure>()
+            konst exceptions = project.configurationResult.await().cast<Failure>()
                 .failures.withClosure<Throwable> { listOfNotNull(it.cause) }
             assertFalse(executedAfterLifecycleFinished.getAndSet(true))
             if (thrownException !in exceptions) fail("Expected 'thrownException' in lifecycle.finished")
         }
 
 
-        /* Provoking an exception during project.evaluate() */
-        val exceptionWasProvoked = AtomicBoolean()
+        /* Provoking an exception during project.ekonstuate() */
+        konst exceptionWasProvoked = AtomicBoolean()
         project.tasks.whenObjectAdded {
             assertFalse(exceptionWasProvoked.getAndSet(true))
             throw thrownException
         }
-        runCatching { project.evaluate() }
-        assertTrue(exceptionWasProvoked.get(), "Exception during '.evaluate()' was not provoked")
+        runCatching { project.ekonstuate() }
+        assertTrue(exceptionWasProvoked.get(), "Exception during '.ekonstuate()' was not provoked")
         assertTrue(executedAfterLifecycleFinished.get(), "Expected coroutine waiting for '.finished' to be executed")
     }
 
     @Test
-    fun `test - throwing an exception in afterEvaluate based stage - allows getOrThrow on future`() {
-        val exception = IllegalStateException()
-        val future = project.future { AfterEvaluateBuildscript.await(); 42 }
-        val secondActionExecuted = AtomicBoolean(false)
+    fun `test - throwing an exception in afterEkonstuate based stage - allows getOrThrow on future`() {
+        konst exception = IllegalStateException()
+        konst future = project.future { AfterEkonstuateBuildscript.await(); 42 }
+        konst secondActionExecuted = AtomicBoolean(false)
 
-        project.launchInStage(AfterEvaluateBuildscript) {
+        project.launchInStage(AfterEkonstuateBuildscript) {
             throw exception
         }
 
         project.launch secondAction@{
             project.configurationResult.await()
-            assertEquals(AfterEvaluateBuildscript, stage)
+            assertEquals(AfterEkonstuateBuildscript, stage)
             assertEquals(42, future.getOrThrow())
-            assertEquals(420, project.future { AfterEvaluateBuildscript.await(); 420 }.getOrThrow())
+            assertEquals(420, project.future { AfterEkonstuateBuildscript.await(); 420 }.getOrThrow())
             assertFalse(secondActionExecuted.getAndSet(true))
         }
 
-        assertTrue(exception in assertFails { project.evaluate() }.withLinearClosure { it.cause })
+        assertTrue(exception in assertFails { project.ekonstuate() }.withLinearClosure { it.cause })
         assertTrue(secondActionExecuted.get())
     }
 
     @Test
-    fun `test - throwing an exception in afterEvaluate based stage - will not execute coroutines in later stages`() {
-        val exception = IllegalStateException()
+    fun `test - throwing an exception in afterEkonstuate based stage - will not execute coroutines in later stages`() {
+        konst exception = IllegalStateException()
 
-        val secondActionExecuted = AtomicBoolean(false)
-        val thirdActionExecuted = AtomicBoolean(false)
-        val fourthActionExecuted = AtomicBoolean(false)
+        konst secondActionExecuted = AtomicBoolean(false)
+        konst thirdActionExecuted = AtomicBoolean(false)
+        konst fourthActionExecuted = AtomicBoolean(false)
 
-        project.launchInStage(AfterEvaluateBuildscript) {
+        project.launchInStage(AfterEkonstuateBuildscript) {
             throw exception
         }
 
-        project.launchInStage(AfterEvaluateBuildscript.nextOrThrow) secondAction@{
+        project.launchInStage(AfterEkonstuateBuildscript.nextOrThrow) secondAction@{
             assertFalse(secondActionExecuted.getAndSet(true))
         }
 
         project.launch {
             project.configurationResult.await()
-            project.launchInStage(AfterEvaluateBuildscript.nextOrThrow) thirdAction@{
+            project.launchInStage(AfterEkonstuateBuildscript.nextOrThrow) thirdAction@{
                 assertFalse(thirdActionExecuted.getAndSet(true))
             }
         }
 
         project.launch fourthAction@{
             project.configurationResult.await()
-            AfterEvaluateBuildscript.nextOrThrow.await()
+            AfterEkonstuateBuildscript.nextOrThrow.await()
             assertFalse(fourthActionExecuted.getAndSet(true))
         }
 
-        val failure = assertFails { project.evaluate() }
+        konst failure = assertFails { project.ekonstuate() }
 
         assertTrue(
             exception in failure.withLinearClosure { it.cause },
@@ -308,28 +308,28 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - stage property is correct`() {
-        Stage.values().forEach { stage ->
+        Stage.konstues().forEach { stage ->
             lifecycle.enqueue(stage) {
                 assertEquals(lifecycle.stage, stage)
             }
         }
-        project.evaluate()
+        project.ekonstuate()
     }
 
     @Test
     fun `test - invoke configure twice`() {
-        val action1Invocations = AtomicInteger(0)
-        val action2Invocations = AtomicInteger(0)
-        val action3Invocations = AtomicInteger(0)
+        konst action1Invocations = AtomicInteger(0)
+        konst action2Invocations = AtomicInteger(0)
+        konst action3Invocations = AtomicInteger(0)
 
-        lifecycle.enqueue(EvaluateBuildscript) action1@{
+        lifecycle.enqueue(EkonstuateBuildscript) action1@{
             assertEquals(0, action2Invocations.get())
             assertEquals(0, action3Invocations.get())
             assertEquals(1, action1Invocations.incrementAndGet())
         }
 
-        lifecycle.enqueue(EvaluateBuildscript) action2@{
-            lifecycle.enqueue(EvaluateBuildscript) action3@{
+        lifecycle.enqueue(EkonstuateBuildscript) action2@{
+            lifecycle.enqueue(EkonstuateBuildscript) action3@{
                 assertEquals(1, action1Invocations.get())
                 assertEquals(1, action2Invocations.get())
                 assertEquals(1, action3Invocations.incrementAndGet())
@@ -347,9 +347,9 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - launch in configure`() {
-        val action1Invocations = AtomicInteger(0)
-        val action2Invocations = AtomicInteger(0)
-        val action3Invocations = AtomicInteger(0)
+        konst action1Invocations = AtomicInteger(0)
+        konst action2Invocations = AtomicInteger(0)
+        konst action3Invocations = AtomicInteger(0)
 
         lifecycle.launch action1@{
             lifecycle.launch action2@{
@@ -375,30 +375,30 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - launch in configure - await Stage`() {
-        val executionPointA = AtomicBoolean(false)
-        val executionPointB = AtomicBoolean(false)
+        konst executionPointA = AtomicBoolean(false)
+        konst executionPointB = AtomicBoolean(false)
         lifecycle.launch action1@{
             assertFalse(executionPointA.getAndSet(true))
-            assertEquals(EvaluateBuildscript, stage)
-            await(AfterEvaluateBuildscript)
-            assertEquals(AfterEvaluateBuildscript, stage)
+            assertEquals(EkonstuateBuildscript, stage)
+            await(AfterEkonstuateBuildscript)
+            assertEquals(AfterEkonstuateBuildscript, stage)
             assertFalse(executionPointB.getAndSet(true))
         }
 
         assertTrue(executionPointA.get())
         assertFalse(executionPointB.get())
-        project.evaluate()
+        project.ekonstuate()
         assertTrue(executionPointA.get())
         assertTrue(executionPointB.get())
     }
 
     @Test
     fun `test - launch - await - launch`() {
-        val executedInnerAction = AtomicBoolean(false)
+        konst executedInnerAction = AtomicBoolean(false)
         lifecycle.launch {
-            await(AfterEvaluateBuildscript)
+            await(AfterEkonstuateBuildscript)
             launch {
-                assertEquals(AfterEvaluateBuildscript, stage)
+                assertEquals(AfterEkonstuateBuildscript, stage)
                 await(FinaliseRefinesEdges)
                 assertEquals(FinaliseRefinesEdges, stage)
                 assertFalse(executedInnerAction.getAndSet(true))
@@ -406,7 +406,7 @@ class KotlinPluginLifecycleTest {
         }
 
         assertFalse(executedInnerAction.get())
-        project.evaluate()
+        project.ekonstuate()
         assertTrue(executedInnerAction.get())
     }
 
@@ -421,16 +421,16 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - launch - await - exception`() {
-        val testException = object : Throwable() {}
+        konst testException = object : Throwable() {}
         lifecycle.launch {
-            await(AfterEvaluateBuildscript)
+            await(AfterEkonstuateBuildscript)
             launch {
                 throw testException
             }
         }
 
-        val causes = assertFailsWith<ProjectConfigurationException> {
-            project.evaluate()
+        konst causes = assertFailsWith<ProjectConfigurationException> {
+            project.ekonstuate()
         }.withLinearClosure<Throwable> { it.cause }
 
         assertTrue(testException in causes)
@@ -438,7 +438,7 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - require current stage`() = project.runLifecycleAwareTest {
-        launchInStage(AfterEvaluateBuildscript) {
+        launchInStage(AfterEkonstuateBuildscript) {
             requireCurrentStage { } // OK
 
             requireCurrentStage {
@@ -450,10 +450,10 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - launch in required stage`() = project.runLifecycleAwareTest {
-        launchInRequiredStage(AfterEvaluateBuildscript) {
-            assertEquals(AfterEvaluateBuildscript, stage)
-            await(AfterEvaluateBuildscript)
-            assertEquals(AfterEvaluateBuildscript, stage)
+        launchInRequiredStage(AfterEkonstuateBuildscript) {
+            assertEquals(AfterEkonstuateBuildscript, stage)
+            await(AfterEkonstuateBuildscript)
+            assertEquals(AfterEkonstuateBuildscript, stage)
             assertFailsWith<IllegalLifecycleException> { await(ReadyForExecution) }
         }
     }
@@ -462,10 +462,10 @@ class KotlinPluginLifecycleTest {
     fun `test - withRestrictedStages`() = project.runLifecycleAwareTest {
         launch {
             withRestrictedStages(Stage.upTo(FinaliseRefinesEdges)) {
-                assertEquals(EvaluateBuildscript, stage)
+                assertEquals(EkonstuateBuildscript, stage)
 
-                await(AfterEvaluateBuildscript)
-                assertEquals(AfterEvaluateBuildscript, stage)
+                await(AfterEkonstuateBuildscript)
+                assertEquals(AfterEkonstuateBuildscript, stage)
 
                 await(FinaliseDsl)
                 assertEquals(FinaliseDsl, stage)
@@ -481,19 +481,19 @@ class KotlinPluginLifecycleTest {
     }
 
     @Test
-    fun `test - launching in AfterEvaluate`() = project.runLifecycleAwareTest {
-        val actionInvocations = AtomicInteger(0)
+    fun `test - launching in AfterEkonstuate`() = project.runLifecycleAwareTest {
+        konst actionInvocations = AtomicInteger(0)
 
-        afterEvaluate {
+        afterEkonstuate {
             launch {
-                assertEquals(AfterEvaluateBuildscript.nextOrThrow, currentKotlinPluginLifecycle().stage)
+                assertEquals(AfterEkonstuateBuildscript.nextOrThrow, currentKotlinPluginLifecycle().stage)
                 assertEquals(1, actionInvocations.incrementAndGet())
             }
         }
 
-        AfterEvaluateBuildscript.nextOrThrow.nextOrThrow.await()
+        AfterEkonstuateBuildscript.nextOrThrow.nextOrThrow.await()
         assertEquals(1, actionInvocations.get())
-        Stage.values.last().await()
+        Stage.konstues.last().await()
     }
 
     /**
@@ -501,9 +501,9 @@ class KotlinPluginLifecycleTest {
      */
     @Test
     fun `test - launching after Lifecycle finished - will execute code right away`() {
-        project.evaluate()
-        val actionAInvocations = AtomicInteger(0)
-        val actionBInvocations = AtomicInteger(0)
+        project.ekonstuate()
+        konst actionAInvocations = AtomicInteger(0)
+        konst actionBInvocations = AtomicInteger(0)
         project.launch actionB@{
             project.launch actionA@{
                 assertEquals(0, actionBInvocations.get())
@@ -520,23 +520,23 @@ class KotlinPluginLifecycleTest {
 
     @Test
     fun `test - Stage - previous next utils`() {
-        assertNull(Stage.values.first().previousOrNull)
-        assertEquals(Stage.values.first(), Stage.values.first().previousOrFirst)
+        assertNull(Stage.konstues.first().previousOrNull)
+        assertEquals(Stage.konstues.first(), Stage.konstues.first().previousOrFirst)
 
-        assertNull(Stage.values.last().nextOrNull)
-        assertEquals(Stage.values.last(), Stage.values.last().nextOrLast)
+        assertNull(Stage.konstues.last().nextOrNull)
+        assertEquals(Stage.konstues.last(), Stage.konstues.last().nextOrLast)
 
-        assertFailsWith<IllegalArgumentException> { Stage.values.last().nextOrThrow }
+        assertFailsWith<IllegalArgumentException> { Stage.konstues.last().nextOrThrow }
     }
 
     @Test
     fun `test - Stage - range utils`() {
-        assertEquals(setOf(AfterEvaluateBuildscript, FinaliseDsl, AfterFinaliseDsl), AfterEvaluateBuildscript..AfterFinaliseDsl)
+        assertEquals(setOf(AfterEkonstuateBuildscript, FinaliseDsl, AfterFinaliseDsl), AfterEkonstuateBuildscript..AfterFinaliseDsl)
         assertEquals(emptySet(), AfterFinaliseDsl..AfterFinaliseDsl.previousOrThrow)
         assertEquals(setOf(FinaliseDsl), FinaliseDsl..FinaliseDsl)
 
         assertTrue(FinaliseDsl in Stage.upTo(FinaliseDsl))
-        assertTrue(Stage.values.first() in Stage.upTo(FinaliseDsl))
+        assertTrue(Stage.konstues.first() in Stage.upTo(FinaliseDsl))
         assertTrue(FinaliseDsl.previousOrThrow in Stage.upTo(FinaliseDsl))
         assertTrue(FinaliseDsl.nextOrThrow !in Stage.upTo(FinaliseDsl))
 

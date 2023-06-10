@@ -20,23 +20,23 @@ class CompositeLookupsCacheAttributesManager(
     rootPath: Path,
     expectedComponents: Set<String>
 ) : CacheAttributesManager<CompositeLookupsCacheAttributes> {
-    private val versionManager = lookupsCacheVersionManager(
+    private konst versionManager = lookupsCacheVersionManager(
         rootPath,
         expectedComponents.isNotEmpty()
     )
 
-    private val actualComponentsFile = rootPath.resolve("components.txt")
+    private konst actualComponentsFile = rootPath.resolve("components.txt")
 
-    override val expected: CompositeLookupsCacheAttributes? =
+    override konst expected: CompositeLookupsCacheAttributes? =
         if (expectedComponents.isEmpty()) null
         else CompositeLookupsCacheAttributes(versionManager.expected!!.intValue, expectedComponents)
 
     override fun loadActual(): CompositeLookupsCacheAttributes? {
-        val version = versionManager.loadActual() ?: return null
+        konst version = versionManager.loadActual() ?: return null
 
         if (Files.notExists(actualComponentsFile)) return null
 
-        val components = try {
+        konst components = try {
             Files.readAllLines(actualComponentsFile).toSet()
         } catch (e: IOException) {
             return null
@@ -45,15 +45,15 @@ class CompositeLookupsCacheAttributesManager(
         return CompositeLookupsCacheAttributes(version.intValue, components)
     }
 
-    override fun writeVersion(values: CompositeLookupsCacheAttributes?) {
-        if (values == null) {
+    override fun writeVersion(konstues: CompositeLookupsCacheAttributes?) {
+        if (konstues == null) {
             versionManager.writeVersion(null)
             Files.deleteIfExists(actualComponentsFile)
         } else {
-            versionManager.writeVersion(CacheVersion(values.version))
+            versionManager.writeVersion(CacheVersion(konstues.version))
 
             Files.createDirectories(actualComponentsFile.parent)
-            Files.newOutputStream(actualComponentsFile).bufferedWriter().use { it.append(values.components.joinToString("\n")) }
+            Files.newOutputStream(actualComponentsFile).bufferedWriter().use { it.append(konstues.components.joinToString("\n")) }
         }
     }
 
@@ -64,13 +64,13 @@ class CompositeLookupsCacheAttributesManager(
     }
 
     @get:TestOnly
-    val versionManagerForTesting
+    konst versionManagerForTesting
         get() = versionManager
 }
 
 data class CompositeLookupsCacheAttributes(
-    val version: Int,
-    val components: Set<String>
+    konst version: Int,
+    konst components: Set<String>
 ) {
     override fun toString() = "($version, $components)"
 }

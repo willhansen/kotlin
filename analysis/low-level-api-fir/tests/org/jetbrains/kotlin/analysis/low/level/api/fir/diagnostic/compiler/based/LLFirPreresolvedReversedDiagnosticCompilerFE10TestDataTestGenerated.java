@@ -1603,9 +1603,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("invalidTypesInAnnotationConstructor.kt")
-            public void testInvalidTypesInAnnotationConstructor() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/annotations/invalidTypesInAnnotationConstructor.kt");
+            @TestMetadata("inkonstidTypesInAnnotationConstructor.kt")
+            public void testInkonstidTypesInAnnotationConstructor() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/annotations/inkonstidTypesInAnnotationConstructor.kt");
             }
 
             @Test
@@ -2187,9 +2187,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                     }
 
                     @Test
-                    @TestMetadata("valueparam.kt")
+                    @TestMetadata("konstueparam.kt")
                     public void testValueparam() throws Exception {
-                        runTest("compiler/testData/diagnostics/tests/annotations/options/targets/valueparam.kt");
+                        runTest("compiler/testData/diagnostics/tests/annotations/options/targets/konstueparam.kt");
                     }
                 }
             }
@@ -3696,9 +3696,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valueOfTypeParameterType.kt")
+                @TestMetadata("konstueOfTypeParameterType.kt")
                 public void testValueOfTypeParameterType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/callableReference/bound/valueOfTypeParameterType.kt");
+                    runTest("compiler/testData/diagnostics/tests/callableReference/bound/konstueOfTypeParameterType.kt");
                 }
             }
 
@@ -4528,9 +4528,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valVsFun.kt")
+                @TestMetadata("konstVsFun.kt")
                 public void testValVsFun() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/callableReference/resolve/valVsFun.kt");
+                    runTest("compiler/testData/diagnostics/tests/callableReference/resolve/konstVsFun.kt");
                 }
 
                 @Test
@@ -4885,15 +4885,15 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("IsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInvalid.kt")
-            public void testIsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInvalid() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/cast/IsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInvalid.kt");
+            @TestMetadata("IsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInkonstid.kt")
+            public void testIsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInkonstid() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/cast/IsErasedDissallowForSubtypeMappedToTwoParamsWithFirstInkonstid.kt");
             }
 
             @Test
-            @TestMetadata("IsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInvalid.kt")
-            public void testIsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInvalid() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/cast/IsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInvalid.kt");
+            @TestMetadata("IsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInkonstid.kt")
+            public void testIsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInkonstid() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/cast/IsErasedDissallowForSubtypeMappedToTwoParamsWithSecondInkonstid.kt");
             }
 
             @Test
@@ -5636,239 +5636,239 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
         }
 
         @Nested
-        @TestMetadata("compiler/testData/diagnostics/tests/constantEvaluator")
+        @TestMetadata("compiler/testData/diagnostics/tests/constantEkonstuator")
         @TestDataPath("$PROJECT_ROOT")
-        public class ConstantEvaluator {
+        public class ConstantEkonstuator {
             @Test
-            public void testAllFilesPresentInConstantEvaluator() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEvaluator"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+            public void testAllFilesPresentInConstantEkonstuator() throws Exception {
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEkonstuator"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
             }
 
             @Nested
-            @TestMetadata("compiler/testData/diagnostics/tests/constantEvaluator/constant")
+            @TestMetadata("compiler/testData/diagnostics/tests/constantEkonstuator/constant")
             @TestDataPath("$PROJECT_ROOT")
             public class Constant {
                 @Test
                 public void testAllFilesPresentInConstant() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEvaluator/constant"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEkonstuator/constant"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
                 }
 
                 @Test
                 @TestMetadata("classObjectProperty.kt")
                 public void testClassObjectProperty() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/classObjectProperty.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/classObjectProperty.kt");
                 }
 
                 @Test
                 @TestMetadata("compareTo.kt")
                 public void testCompareTo() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/compareTo.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/compareTo.kt");
                 }
 
                 @Test
                 @TestMetadata("differentTypes.kt")
                 public void testDifferentTypes() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/differentTypes.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/differentTypes.kt");
                 }
 
                 @Test
                 @TestMetadata("divideByZero.kt")
                 public void testDivideByZero() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/divideByZero.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/divideByZero.kt");
                 }
 
                 @Test
                 @TestMetadata("duplicateLabelWithNonTrivialCondition_disabled.kt")
                 public void testDuplicateLabelWithNonTrivialCondition_disabled() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/duplicateLabelWithNonTrivialCondition_disabled.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/duplicateLabelWithNonTrivialCondition_disabled.kt");
                 }
 
                 @Test
                 @TestMetadata("duplicateLabelWithNonTrivialCondition_enabled.kt")
                 public void testDuplicateLabelWithNonTrivialCondition_enabled() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/duplicateLabelWithNonTrivialCondition_enabled.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/duplicateLabelWithNonTrivialCondition_enabled.kt");
                 }
 
                 @Test
                 @TestMetadata("equals.kt")
                 public void testEquals() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/equals.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/equals.kt");
                 }
 
                 @Test
-                @TestMetadata("exceptionWhenEvaluate.kt")
-                public void testExceptionWhenEvaluate() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/exceptionWhenEvaluate.kt");
+                @TestMetadata("exceptionWhenEkonstuate.kt")
+                public void testExceptionWhenEkonstuate() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/exceptionWhenEkonstuate.kt");
                 }
 
                 @Test
                 @TestMetadata("finalProperty.kt")
                 public void testFinalProperty() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/finalProperty.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/finalProperty.kt");
                 }
 
                 @Test
                 @TestMetadata("float.kt")
                 public void testFloat() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/float.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/float.kt");
                 }
 
                 @Test
                 @TestMetadata("floatsAndDoubles.kt")
                 public void testFloatsAndDoubles() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/floatsAndDoubles.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/floatsAndDoubles.kt");
                 }
 
                 @Test
                 @TestMetadata("integer.kt")
                 public void testInteger() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/integer.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/integer.kt");
                 }
 
                 @Test
                 @TestMetadata("integerOperations.kt")
                 public void testIntegerOperations() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/integerOperations.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/integerOperations.kt");
                 }
 
                 @Test
                 @TestMetadata("integers.kt")
                 public void testIntegers() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/integers.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/integers.kt");
                 }
 
                 @Test
                 @TestMetadata("invAsCompileTimeCall.kt")
                 public void testInvAsCompileTimeCall() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/invAsCompileTimeCall.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/invAsCompileTimeCall.kt");
                 }
 
                 @Test
                 @TestMetadata("localVal.kt")
                 public void testLocalVal() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/localVal.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/localVal.kt");
                 }
 
                 @Test
                 @TestMetadata("localVar.kt")
                 public void testLocalVar() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/localVar.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/localVar.kt");
                 }
 
                 @Test
                 @TestMetadata("nonFinalProperty.kt")
                 public void testNonFinalProperty() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/nonFinalProperty.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/nonFinalProperty.kt");
                 }
 
                 @Test
                 @TestMetadata("objectProperty.kt")
                 public void testObjectProperty() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/objectProperty.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/objectProperty.kt");
                 }
 
                 @Test
                 @TestMetadata("strings.kt")
                 public void testStrings() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/strings.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/strings.kt");
                 }
 
                 @Test
                 @TestMetadata("topLevelVal.kt")
                 public void testTopLevelVal() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/topLevelVal.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/topLevelVal.kt");
                 }
 
                 @Test
                 @TestMetadata("topLevelVar.kt")
                 public void testTopLevelVar() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/topLevelVar.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/topLevelVar.kt");
                 }
 
                 @Test
                 @TestMetadata("unaryMinusIndepWoExpType.kt")
                 public void testUnaryMinusIndepWoExpType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/unaryMinusIndepWoExpType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/unaryMinusIndepWoExpType.kt");
                 }
 
                 @Test
                 @TestMetadata("unaryMinusIndependentExpType.kt")
                 public void testUnaryMinusIndependentExpType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/constant/unaryMinusIndependentExpType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/constant/unaryMinusIndependentExpType.kt");
                 }
             }
 
             @Nested
-            @TestMetadata("compiler/testData/diagnostics/tests/constantEvaluator/isPure")
+            @TestMetadata("compiler/testData/diagnostics/tests/constantEkonstuator/isPure")
             @TestDataPath("$PROJECT_ROOT")
             public class IsPure {
                 @Test
                 public void testAllFilesPresentInIsPure() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEvaluator/isPure"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEkonstuator/isPure"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
                 }
 
                 @Test
                 @TestMetadata("innerToType.kt")
                 public void testInnerToType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/isPure/innerToType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/innerToType.kt");
                 }
 
                 @Test
                 @TestMetadata("namedConstants.kt")
                 public void testNamedConstants() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/isPure/namedConstants.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/namedConstants.kt");
                 }
 
                 @Test
                 @TestMetadata("toType.kt")
                 public void testToType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/isPure/toType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/toType.kt");
                 }
 
                 @Test
                 @TestMetadata("unaryMinusIndepWoExpType.kt")
                 public void testUnaryMinusIndepWoExpType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/isPure/unaryMinusIndepWoExpType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/unaryMinusIndepWoExpType.kt");
                 }
 
                 @Test
                 @TestMetadata("unaryMinusIndependentExpType.kt")
                 public void testUnaryMinusIndependentExpType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/isPure/unaryMinusIndependentExpType.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/isPure/unaryMinusIndependentExpType.kt");
                 }
             }
 
             @Nested
-            @TestMetadata("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant")
+            @TestMetadata("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant")
             @TestDataPath("$PROJECT_ROOT")
             public class UsesVariableAsConstant {
                 @Test
                 public void testAllFilesPresentInUsesVariableAsConstant() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
                 }
 
                 @Test
                 @TestMetadata("binaryTypes.kt")
                 public void testBinaryTypes() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant/binaryTypes.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant/binaryTypes.kt");
                 }
 
                 @Test
                 @TestMetadata("NamedConstants.kt")
                 public void testNamedConstants() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant/NamedConstants.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant/NamedConstants.kt");
                 }
 
                 @Test
                 @TestMetadata("OtherTypes.kt")
                 public void testOtherTypes() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant/OtherTypes.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant/OtherTypes.kt");
                 }
 
                 @Test
                 @TestMetadata("simpleTypes.kt")
                 public void testSimpleTypes() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/constantEvaluator/usesVariableAsConstant/simpleTypes.kt");
+                    runTest("compiler/testData/diagnostics/tests/constantEkonstuator/usesVariableAsConstant/simpleTypes.kt");
                 }
             }
         }
@@ -7283,15 +7283,15 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valVarCatchParameter.kt")
+            @TestMetadata("konstVarCatchParameter.kt")
             public void testValVarCatchParameter() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/controlStructures/valVarCatchParameter.kt");
+                runTest("compiler/testData/diagnostics/tests/controlStructures/konstVarCatchParameter.kt");
             }
 
             @Test
-            @TestMetadata("valVarLoopParameter.kt")
+            @TestMetadata("konstVarLoopParameter.kt")
             public void testValVarLoopParameter() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/controlStructures/valVarLoopParameter.kt");
+                runTest("compiler/testData/diagnostics/tests/controlStructures/konstVarLoopParameter.kt");
             }
 
             @Test
@@ -8265,9 +8265,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("IfThenElseBothInvalid.kt")
-            public void testIfThenElseBothInvalid() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/dataFlowInfoTraversal/IfThenElseBothInvalid.kt");
+            @TestMetadata("IfThenElseBothInkonstid.kt")
+            public void testIfThenElseBothInkonstid() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/dataFlowInfoTraversal/IfThenElseBothInkonstid.kt");
             }
 
             @Test
@@ -8661,9 +8661,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valVarFunctionParameter.kt")
+            @TestMetadata("konstVarFunctionParameter.kt")
             public void testValVarFunctionParameter() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/declarationChecks/valVarFunctionParameter.kt");
+                runTest("compiler/testData/diagnostics/tests/declarationChecks/konstVarFunctionParameter.kt");
             }
 
             @Test
@@ -11015,9 +11015,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valuesValueOfAndEntriesAccessibility.kt")
+            @TestMetadata("konstuesValueOfAndEntriesAccessibility.kt")
             public void testValuesValueOfAndEntriesAccessibility() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/enum/valuesValueOfAndEntriesAccessibility.kt");
+                runTest("compiler/testData/diagnostics/tests/enum/konstuesValueOfAndEntriesAccessibility.kt");
             }
 
             @Test
@@ -11216,171 +11216,171 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
         }
 
         @Nested
-        @TestMetadata("compiler/testData/diagnostics/tests/evaluate")
+        @TestMetadata("compiler/testData/diagnostics/tests/ekonstuate")
         @TestDataPath("$PROJECT_ROOT")
-        public class Evaluate {
+        public class Ekonstuate {
             @Test
-            public void testAllFilesPresentInEvaluate() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/evaluate"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+            public void testAllFilesPresentInEkonstuate() throws Exception {
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/ekonstuate"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
             }
 
             @Test
             @TestMetadata("binaryMinusDepOnExpType.kt")
             public void testBinaryMinusDepOnExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/binaryMinusDepOnExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/binaryMinusDepOnExpType.kt");
             }
 
             @Test
             @TestMetadata("binaryMinusIndepWoExpType.kt")
             public void testBinaryMinusIndepWoExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/binaryMinusIndepWoExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/binaryMinusIndepWoExpType.kt");
             }
 
             @Test
             @TestMetadata("binaryMinusIndependentExpType.kt")
             public void testBinaryMinusIndependentExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/binaryMinusIndependentExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/binaryMinusIndependentExpType.kt");
             }
 
             @Test
             @TestMetadata("customExtensionOverKotlinExtensionInConst.kt")
             public void testCustomExtensionOverKotlinExtensionInConst() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/customExtensionOverKotlinExtensionInConst.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/customExtensionOverKotlinExtensionInConst.kt");
             }
 
             @Test
             @TestMetadata("divisionByZero.kt")
             public void testDivisionByZero() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/divisionByZero.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/divisionByZero.kt");
             }
 
             @Test
             @TestMetadata("float.kt")
             public void testFloat() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/float.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/float.kt");
             }
 
             @Test
             @TestMetadata("floatLiteralOutOfRange.kt")
             public void testFloatLiteralOutOfRange() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/floatLiteralOutOfRange.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/floatLiteralOutOfRange.kt");
             }
 
             @Test
             @TestMetadata("infixFunOverBuiltinMemberInConst.kt")
             public void testInfixFunOverBuiltinMemberInConst() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/infixFunOverBuiltinMemberInConst.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/infixFunOverBuiltinMemberInConst.kt");
             }
 
             @Test
             @TestMetadata("intOverflow.kt")
             public void testIntOverflow() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/intOverflow.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/intOverflow.kt");
             }
 
             @Test
             @TestMetadata("intOverflowWithJavaProperties.kt")
             public void testIntOverflowWithJavaProperties() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/intOverflowWithJavaProperties.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/intOverflowWithJavaProperties.kt");
             }
 
             @Test
             @TestMetadata("integer.kt")
             public void testInteger() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/integer.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/integer.kt");
             }
 
             @Test
             @TestMetadata("logicWithNumber.kt")
             public void testLogicWithNumber() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/logicWithNumber.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/logicWithNumber.kt");
             }
 
             @Test
             @TestMetadata("longOverflow.kt")
             public void testLongOverflow() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/longOverflow.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/longOverflow.kt");
             }
 
             @Test
             @TestMetadata("noOverflowWithZero.kt")
             public void testNoOverflowWithZero() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/noOverflowWithZero.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/noOverflowWithZero.kt");
             }
 
             @Test
             @TestMetadata("numberBinaryOperations.kt")
             public void testNumberBinaryOperations() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/numberBinaryOperations.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/numberBinaryOperations.kt");
             }
 
             @Test
             @TestMetadata("numberBinaryOperationsCall.kt")
             public void testNumberBinaryOperationsCall() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/numberBinaryOperationsCall.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/numberBinaryOperationsCall.kt");
             }
 
             @Test
             @TestMetadata("numberBinaryOperationsInfixCall.kt")
             public void testNumberBinaryOperationsInfixCall() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/numberBinaryOperationsInfixCall.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/numberBinaryOperationsInfixCall.kt");
             }
 
             @Test
             @TestMetadata("otherOverflow.kt")
             public void testOtherOverflow() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/otherOverflow.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/otherOverflow.kt");
             }
 
             @Test
             @TestMetadata("parentesized.kt")
             public void testParentesized() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/parentesized.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/parentesized.kt");
             }
 
             @Test
             @TestMetadata("qualifiedExpressions.kt")
             public void testQualifiedExpressions() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/qualifiedExpressions.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/qualifiedExpressions.kt");
             }
 
             @Test
             @TestMetadata("unaryMinusDepOnExpType.kt")
             public void testUnaryMinusDepOnExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/unaryMinusDepOnExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/unaryMinusDepOnExpType.kt");
             }
 
             @Test
             @TestMetadata("unaryMinusIndepWoExpType.kt")
             public void testUnaryMinusIndepWoExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/unaryMinusIndepWoExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/unaryMinusIndepWoExpType.kt");
             }
 
             @Test
             @TestMetadata("unaryMinusIndependentExpType.kt")
             public void testUnaryMinusIndependentExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/unaryMinusIndependentExpType.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/unaryMinusIndependentExpType.kt");
             }
 
             @Test
             @TestMetadata("wrongLongSuffix.kt")
             public void testWrongLongSuffix() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/evaluate/wrongLongSuffix.kt");
+                runTest("compiler/testData/diagnostics/tests/ekonstuate/wrongLongSuffix.kt");
             }
 
             @Nested
-            @TestMetadata("compiler/testData/diagnostics/tests/evaluate/inlineClasses")
+            @TestMetadata("compiler/testData/diagnostics/tests/ekonstuate/inlineClasses")
             @TestDataPath("$PROJECT_ROOT")
             public class InlineClasses {
                 @Test
                 public void testAllFilesPresentInInlineClasses() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/evaluate/inlineClasses"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/ekonstuate/inlineClasses"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
                 }
 
                 @Test
                 @TestMetadata("constructorOfUnsignedType.kt")
                 public void testConstructorOfUnsignedType() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/evaluate/inlineClasses/constructorOfUnsignedType.kt");
+                    runTest("compiler/testData/diagnostics/tests/ekonstuate/inlineClasses/constructorOfUnsignedType.kt");
                 }
             }
         }
@@ -12935,9 +12935,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("invalidArgumentsNumberInWhere.kt")
-            public void testInvalidArgumentsNumberInWhere() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/generics/invalidArgumentsNumberInWhere.kt");
+            @TestMetadata("inkonstidArgumentsNumberInWhere.kt")
+            public void testInkonstidArgumentsNumberInWhere() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/generics/inkonstidArgumentsNumberInWhere.kt");
             }
 
             @Test
@@ -13446,9 +13446,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("validTypeParameters.kt")
+                @TestMetadata("konstidTypeParameters.kt")
                 public void testValidTypeParameters() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/generics/multipleBoundsMemberScope/validTypeParameters.kt");
+                    runTest("compiler/testData/diagnostics/tests/generics/multipleBoundsMemberScope/konstidTypeParameters.kt");
                 }
             }
 
@@ -13800,9 +13800,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("invalid.kt")
-                public void testInvalid() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/generics/starProjections/invalid.kt");
+                @TestMetadata("inkonstid.kt")
+                public void testInkonstid() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/generics/starProjections/inkonstid.kt");
                 }
             }
 
@@ -14576,21 +14576,21 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valNoName.kt")
+                @TestMetadata("konstNoName.kt")
                 public void testValNoName() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/valNoName.kt");
+                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/konstNoName.kt");
                 }
 
                 @Test
-                @TestMetadata("valWithNoNameBeforeNextDeclarationWithModifiers.kt")
+                @TestMetadata("konstWithNoNameBeforeNextDeclarationWithModifiers.kt")
                 public void testValWithNoNameBeforeNextDeclarationWithModifiers() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/valWithNoNameBeforeNextDeclarationWithModifiers.kt");
+                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/konstWithNoNameBeforeNextDeclarationWithModifiers.kt");
                 }
 
                 @Test
-                @TestMetadata("valWithNoNameInBlock.kt")
+                @TestMetadata("konstWithNoNameInBlock.kt")
                 public void testValWithNoNameInBlock() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/valWithNoNameInBlock.kt");
+                    runTest("compiler/testData/diagnostics/tests/incompleteCode/diagnosticWithSyntaxError/konstWithNoNameInBlock.kt");
                 }
             }
         }
@@ -15436,9 +15436,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("invalidateKeys.kt")
-                public void testInvalidateKeys() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/inference/builderInference/invalidateKeys.kt");
+                @TestMetadata("inkonstidateKeys.kt")
+                public void testInkonstidateKeys() throws Exception {
+                    runTest("compiler/testData/diagnostics/tests/inference/builderInference/inkonstidateKeys.kt");
                 }
 
                 @Test
@@ -18655,9 +18655,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valueClasses.kt")
+            @TestMetadata("konstueClasses.kt")
             public void testValueClasses() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/inline/valueClasses.kt");
+                runTest("compiler/testData/diagnostics/tests/inline/konstueClasses.kt");
             }
 
             @Test
@@ -20590,9 +20590,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("val.kt")
+                @TestMetadata("konst.kt")
                 public void testVal() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/j+k/properties/val.kt");
+                    runTest("compiler/testData/diagnostics/tests/j+k/properties/konst.kt");
                 }
 
                 @Test
@@ -24100,9 +24100,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valTypeMismatch.kt")
+                @TestMetadata("konstTypeMismatch.kt")
                 public void testValTypeMismatch() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/override/clashesOnInheritance/valTypeMismatch.kt");
+                    runTest("compiler/testData/diagnostics/tests/override/clashesOnInheritance/konstTypeMismatch.kt");
                 }
 
                 @Test
@@ -24548,9 +24548,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valueFromJava.kt")
+                @TestMetadata("konstueFromJava.kt")
                 public void testValueFromJava() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/platformTypes/genericVarianceViolation/valueFromJava.kt");
+                    runTest("compiler/testData/diagnostics/tests/platformTypes/genericVarianceViolation/konstueFromJava.kt");
                 }
 
                 @Test
@@ -25675,9 +25675,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("RedeclarationParameterlessMainInvalid.kt")
-            public void testRedeclarationParameterlessMainInvalid() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/redeclarations/RedeclarationParameterlessMainInvalid.kt");
+            @TestMetadata("RedeclarationParameterlessMainInkonstid.kt")
+            public void testRedeclarationParameterlessMainInkonstid() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/redeclarations/RedeclarationParameterlessMainInkonstid.kt");
             }
 
             @Test
@@ -26817,9 +26817,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("UnavaliableQualifiedThis.kt")
-            public void testUnavaliableQualifiedThis() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/regressions/UnavaliableQualifiedThis.kt");
+            @TestMetadata("UnakonstiableQualifiedThis.kt")
+            public void testUnakonstiableQualifiedThis() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/regressions/UnakonstiableQualifiedThis.kt");
             }
 
             @Test
@@ -27462,9 +27462,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valNamedInvoke.kt")
+                @TestMetadata("konstNamedInvoke.kt")
                 public void testValNamedInvoke() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/resolve/invoke/valNamedInvoke.kt");
+                    runTest("compiler/testData/diagnostics/tests/resolve/invoke/konstNamedInvoke.kt");
                 }
 
                 @Test
@@ -29459,9 +29459,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valOrValAndModifiersInCtr.kt")
+            @TestMetadata("konstOrValAndModifiersInCtr.kt")
             public void testValOrValAndModifiersInCtr() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/secondaryConstructors/valOrValAndModifiersInCtr.kt");
+                runTest("compiler/testData/diagnostics/tests/secondaryConstructors/konstOrValAndModifiersInCtr.kt");
             }
 
             @Test
@@ -30816,15 +30816,15 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("validTypeParameters.kt")
+                @TestMetadata("konstidTypeParameters.kt")
                 public void testValidTypeParameters() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/smartCasts/intersectionScope/validTypeParameters.kt");
+                    runTest("compiler/testData/diagnostics/tests/smartCasts/intersectionScope/konstidTypeParameters.kt");
                 }
 
                 @Test
-                @TestMetadata("validTypeParametersNoSmartCast.kt")
+                @TestMetadata("konstidTypeParametersNoSmartCast.kt")
                 public void testValidTypeParametersNoSmartCast() throws Exception {
-                    runTest("compiler/testData/diagnostics/tests/smartCasts/intersectionScope/validTypeParametersNoSmartCast.kt");
+                    runTest("compiler/testData/diagnostics/tests/smartCasts/intersectionScope/konstidTypeParametersNoSmartCast.kt");
                 }
             }
 
@@ -34598,198 +34598,198 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
         }
 
         @Nested
-        @TestMetadata("compiler/testData/diagnostics/tests/valueClasses")
+        @TestMetadata("compiler/testData/diagnostics/tests/konstueClasses")
         @TestDataPath("$PROJECT_ROOT")
         public class ValueClasses {
             @Test
             public void testAllFilesPresentInValueClasses() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/valueClasses"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/tests/konstueClasses"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true, "multiplatform");
             }
 
             @Test
             @TestMetadata("annotations.kt")
             public void testAnnotations() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/annotations.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/annotations.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
             }
 
             @Test
             @TestMetadata("basicValueClassDeclaration.kt")
             public void testBasicValueClassDeclaration() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/basicValueClassDeclaration.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/basicValueClassDeclaration.kt");
             }
 
             @Test
             @TestMetadata("basicValueClassDeclarationDisabled.kt")
             public void testBasicValueClassDeclarationDisabled() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/basicValueClassDeclarationDisabled.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/basicValueClassDeclarationDisabled.kt");
             }
 
             @Test
             @TestMetadata("constructorsJvmSignaturesClash.kt")
             public void testConstructorsJvmSignaturesClash() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/constructorsJvmSignaturesClash.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/constructorsJvmSignaturesClash.kt");
             }
 
             @Test
             @TestMetadata("defaultParameters.kt")
             public void testDefaultParameters() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/defaultParameters.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/defaultParameters.kt", TransformersFunctions.getReplaceOptionalJvmInlineAnnotationWithUniversal());
             }
 
             @Test
             @TestMetadata("delegatedPropertyInValueClass.kt")
             public void testDelegatedPropertyInValueClass() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/delegatedPropertyInValueClass.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/delegatedPropertyInValueClass.kt");
             }
 
             @Test
             @TestMetadata("functionsJvmSignaturesClash.kt")
             public void testFunctionsJvmSignaturesClash() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/functionsJvmSignaturesClash.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/functionsJvmSignaturesClash.kt");
             }
 
             @Test
             @TestMetadata("functionsJvmSignaturesConflictOnInheritance.kt")
             public void testFunctionsJvmSignaturesConflictOnInheritance() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/functionsJvmSignaturesConflictOnInheritance.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/functionsJvmSignaturesConflictOnInheritance.kt");
             }
 
             @Test
             @TestMetadata("identityComparisonWithValueClasses.kt")
             public void testIdentityComparisonWithValueClasses() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/identityComparisonWithValueClasses.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/identityComparisonWithValueClasses.kt");
             }
 
             @Test
             @TestMetadata("inefficientEqualsOverridingInMfvc.kt")
             public void testInefficientEqualsOverridingInMfvc() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/inefficientEqualsOverridingInMfvc.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/inefficientEqualsOverridingInMfvc.kt");
             }
 
             @Test
             @TestMetadata("inlineKeywordForMfvc.kt")
             public void testInlineKeywordForMfvc() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/inlineKeywordForMfvc.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/inlineKeywordForMfvc.kt");
             }
 
             @Test
             @TestMetadata("jvmInlineApplicability.kt")
             public void testJvmInlineApplicability() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/jvmInlineApplicability.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/jvmInlineApplicability.kt");
             }
 
             @Test
             @TestMetadata("lateinitValueClasses.kt")
             public void testLateinitValueClasses() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/lateinitValueClasses.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/lateinitValueClasses.kt");
             }
 
             @Test
             @TestMetadata("presenceOfInitializerBlockInsideValueClass.kt")
             public void testPresenceOfInitializerBlockInsideValueClass() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/presenceOfInitializerBlockInsideValueClass.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/presenceOfInitializerBlockInsideValueClass.kt");
             }
 
             @Test
             @TestMetadata("presenceOfPublicPrimaryConstructorForValueClass.kt")
             public void testPresenceOfPublicPrimaryConstructorForValueClass() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/presenceOfPublicPrimaryConstructorForValueClass.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/presenceOfPublicPrimaryConstructorForValueClass.kt");
             }
 
             @Test
             @TestMetadata("propertiesWithBackingFieldsInsideValueClass.kt")
             public void testPropertiesWithBackingFieldsInsideValueClass() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/propertiesWithBackingFieldsInsideValueClass.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/propertiesWithBackingFieldsInsideValueClass.kt");
             }
 
             @Test
             @TestMetadata("recursiveMultiFieldValueClasses.kt")
             public void testRecursiveMultiFieldValueClasses() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/recursiveMultiFieldValueClasses.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/recursiveMultiFieldValueClasses.kt");
             }
 
             @Test
             @TestMetadata("recursiveValueClasses.kt")
             public void testRecursiveValueClasses() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/recursiveValueClasses.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/recursiveValueClasses.kt");
             }
 
             @Test
             @TestMetadata("reservedMembersAndConstructsInsideMfvc.kt")
             public void testReservedMembersAndConstructsInsideMfvc() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/reservedMembersAndConstructsInsideMfvc.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/reservedMembersAndConstructsInsideMfvc.kt");
             }
 
             @Test
             @TestMetadata("typedEqualsOperatorModifierInMfvc.kt")
             public void testTypedEqualsOperatorModifierInMfvc() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/typedEqualsOperatorModifierInMfvc.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/typedEqualsOperatorModifierInMfvc.kt");
             }
 
             @Test
             @TestMetadata("unsignedLiteralsWithoutArtifactOnClasspath.kt")
             public void testUnsignedLiteralsWithoutArtifactOnClasspath() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/unsignedLiteralsWithoutArtifactOnClasspath.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/unsignedLiteralsWithoutArtifactOnClasspath.kt");
             }
 
             @Test
-            @TestMetadata("valueClassCanOnlyImplementInterfaces.kt")
+            @TestMetadata("konstueClassCanOnlyImplementInterfaces.kt")
             public void testValueClassCanOnlyImplementInterfaces() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassCanOnlyImplementInterfaces.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassCanOnlyImplementInterfaces.kt");
             }
 
             @Test
-            @TestMetadata("valueClassCannotImplementInterfaceByDelegation.kt")
+            @TestMetadata("konstueClassCannotImplementInterfaceByDelegation.kt")
             public void testValueClassCannotImplementInterfaceByDelegation() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassCannotImplementInterfaceByDelegation.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassCannotImplementInterfaceByDelegation.kt");
             }
 
             @Test
-            @TestMetadata("valueClassConstructorParameterWithDefaultValue.kt")
+            @TestMetadata("konstueClassConstructorParameterWithDefaultValue.kt")
             public void testValueClassConstructorParameterWithDefaultValue() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassConstructorParameterWithDefaultValue.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassConstructorParameterWithDefaultValue.kt");
             }
 
             @Test
-            @TestMetadata("valueClassDeclarationCheck.kt")
+            @TestMetadata("konstueClassDeclarationCheck.kt")
             public void testValueClassDeclarationCheck() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassDeclarationCheck.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassDeclarationCheck.kt");
             }
 
             @Test
-            @TestMetadata("valueClassImplementsCollection.kt")
+            @TestMetadata("konstueClassImplementsCollection.kt")
             public void testValueClassImplementsCollection() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassImplementsCollection.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassImplementsCollection.kt");
             }
 
             @Test
-            @TestMetadata("valueClassWithForbiddenUnderlyingType.kt")
+            @TestMetadata("konstueClassWithForbiddenUnderlyingType.kt")
             public void testValueClassWithForbiddenUnderlyingType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassWithForbiddenUnderlyingType.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassWithForbiddenUnderlyingType.kt");
             }
 
             @Test
-            @TestMetadata("valueClassWithForbiddenUnderlyingTypeMultiField.kt")
+            @TestMetadata("konstueClassWithForbiddenUnderlyingTypeMultiField.kt")
             public void testValueClassWithForbiddenUnderlyingTypeMultiField() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassWithForbiddenUnderlyingTypeMultiField.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassWithForbiddenUnderlyingTypeMultiField.kt");
             }
 
             @Test
-            @TestMetadata("valueClassWithGenericUnderlyingTypeNoFeature.kt")
+            @TestMetadata("konstueClassWithGenericUnderlyingTypeNoFeature.kt")
             public void testValueClassWithGenericUnderlyingTypeNoFeature() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassWithGenericUnderlyingTypeNoFeature.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassWithGenericUnderlyingTypeNoFeature.kt");
             }
 
             @Test
-            @TestMetadata("valueClassesInsideAnnotations.kt")
+            @TestMetadata("konstueClassesInsideAnnotations.kt")
             public void testValueClassesInsideAnnotations() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/valueClassesInsideAnnotations.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/konstueClassesInsideAnnotations.kt");
             }
 
             @Test
             @TestMetadata("varargsOnParametersOfValueClassType.kt")
             public void testVarargsOnParametersOfValueClassType() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/valueClasses/varargsOnParametersOfValueClassType.kt");
+                runTest("compiler/testData/diagnostics/tests/konstueClasses/varargsOnParametersOfValueClassType.kt");
             }
         }
 
@@ -34905,9 +34905,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("kt1838-val.kt")
-            public void testKt1838_val() throws Exception {
-                runTest("compiler/testData/diagnostics/tests/varargs/kt1838-val.kt");
+            @TestMetadata("kt1838-konst.kt")
+            public void testKt1838_konst() throws Exception {
+                runTest("compiler/testData/diagnostics/tests/varargs/kt1838-konst.kt");
             }
 
             @Test
@@ -36584,27 +36584,27 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valueArray.kt")
+                @TestMetadata("konstueArray.kt")
                 public void testValueArray() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/valueArray.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/konstueArray.kt");
                 }
 
                 @Test
-                @TestMetadata("valueArrayAndOtherDefault.kt")
+                @TestMetadata("konstueArrayAndOtherDefault.kt")
                 public void testValueArrayAndOtherDefault() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/valueArrayAndOtherDefault.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/konstueArrayAndOtherDefault.kt");
                 }
 
                 @Test
-                @TestMetadata("valueArrayOnly.kt")
+                @TestMetadata("konstueArrayOnly.kt")
                 public void testValueArrayOnly() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/valueArrayOnly.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/konstueArrayOnly.kt");
                 }
 
                 @Test
-                @TestMetadata("valueArrayWithDefault.kt")
+                @TestMetadata("konstueArrayWithDefault.kt")
                 public void testValueArrayWithDefault() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/valueArrayWithDefault.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/annotationParameters/konstueArrayWithDefault.kt");
                 }
             }
 
@@ -36682,33 +36682,33 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("value.kt")
+                @TestMetadata("konstue.kt")
                 public void testValue() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/value.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/konstue.kt");
                 }
 
                 @Test
-                @TestMetadata("valueAndOtherDefault.kt")
+                @TestMetadata("konstueAndOtherDefault.kt")
                 public void testValueAndOtherDefault() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/valueAndOtherDefault.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/konstueAndOtherDefault.kt");
                 }
 
                 @Test
-                @TestMetadata("valueArray.kt")
+                @TestMetadata("konstueArray.kt")
                 public void testValueArray() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/valueArray.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/konstueArray.kt");
                 }
 
                 @Test
-                @TestMetadata("valueWithDefault.kt")
+                @TestMetadata("konstueWithDefault.kt")
                 public void testValueWithDefault() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/valueWithDefault.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/konstueWithDefault.kt");
                 }
 
                 @Test
-                @TestMetadata("valueWithDefaultAndOther.kt")
+                @TestMetadata("konstueWithDefaultAndOther.kt")
                 public void testValueWithDefaultAndOther() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/valueWithDefaultAndOther.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/annotations/javaAnnotationsWithKClassParameter/konstueWithDefaultAndOther.kt");
                 }
             }
 
@@ -37556,9 +37556,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                         }
 
                         @Test
-                        @TestMetadata("valDefiniteReassignment.kt")
+                        @TestMetadata("konstDefiniteReassignment.kt")
                         public void testValDefiniteReassignment() throws Exception {
-                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/atLeastOnce/valDefiniteReassignment.kt");
+                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/atLeastOnce/konstDefiniteReassignment.kt");
                         }
 
                         @Test
@@ -37584,21 +37584,21 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                         }
 
                         @Test
-                        @TestMetadata("valDefiniteInitialization.kt")
+                        @TestMetadata("konstDefiniteInitialization.kt")
                         public void testValDefiniteInitialization() throws Exception {
-                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/valDefiniteInitialization.kt");
+                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/konstDefiniteInitialization.kt");
                         }
 
                         @Test
-                        @TestMetadata("valDefiniteReassignment.kt")
+                        @TestMetadata("konstDefiniteReassignment.kt")
                         public void testValDefiniteReassignment() throws Exception {
-                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/valDefiniteReassignment.kt");
+                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/konstDefiniteReassignment.kt");
                         }
 
                         @Test
-                        @TestMetadata("valIndefiniteInitialization.kt")
+                        @TestMetadata("konstIndefiniteInitialization.kt")
                         public void testValIndefiniteInitialization() throws Exception {
-                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/valIndefiniteInitialization.kt");
+                            runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/controlflow/initialization/exactlyOnce/konstIndefiniteInitialization.kt");
                         }
 
                         @Test
@@ -38012,9 +38012,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valueOfContractedFunctionIngored.kt")
+                @TestMetadata("konstueOfContractedFunctionIngored.kt")
                 public void testValueOfContractedFunctionIngored() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/valueOfContractedFunctionIngored.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/contracts/smartcasts/konstueOfContractedFunctionIngored.kt");
                 }
 
                 @Nested
@@ -39094,9 +39094,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
                 }
 
                 @Test
-                @TestMetadata("valid.kt")
+                @TestMetadata("konstid.kt")
                 public void testValid() throws Exception {
-                    runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/tailCalls/valid.kt");
+                    runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/tailCalls/konstid.kt");
                 }
             }
         }
@@ -39204,18 +39204,18 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
         }
 
         @Nested
-        @TestMetadata("compiler/testData/diagnostics/testsWithStdLib/evaluate")
+        @TestMetadata("compiler/testData/diagnostics/testsWithStdLib/ekonstuate")
         @TestDataPath("$PROJECT_ROOT")
-        public class Evaluate {
+        public class Ekonstuate {
             @Test
-            public void testAllFilesPresentInEvaluate() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithStdLib/evaluate"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
+            public void testAllFilesPresentInEkonstuate() throws Exception {
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/diagnostics/testsWithStdLib/ekonstuate"), Pattern.compile("^(.+)\\.kt$"), Pattern.compile("^(.+)\\.(reversed|fir|ll)\\.kts?$"), true);
             }
 
             @Test
             @TestMetadata("charCodeExpType.kt")
             public void testCharCodeExpType() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/evaluate/charCodeExpType.kt");
+                runTest("compiler/testData/diagnostics/testsWithStdLib/ekonstuate/charCodeExpType.kt");
             }
         }
 
@@ -40317,9 +40317,9 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("invalidFqName.kt")
-            public void testInvalidFqName() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/purelyImplementedCollection/invalidFqName.kt");
+            @TestMetadata("inkonstidFqName.kt")
+            public void testInkonstidFqName() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/purelyImplementedCollection/inkonstidFqName.kt");
             }
 
             @Test
@@ -40777,27 +40777,27 @@ public class LLFirPreresolvedReversedDiagnosticCompilerFE10TestDataTestGenerated
             }
 
             @Test
-            @TestMetadata("valueArgumentsWithDisabledFeature.kt")
+            @TestMetadata("konstueArgumentsWithDisabledFeature.kt")
             public void testValueArgumentsWithDisabledFeature() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/valueArgumentsWithDisabledFeature.kt");
+                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/konstueArgumentsWithDisabledFeature.kt");
             }
 
             @Test
-            @TestMetadata("valueArgumentsWithEnabledFeature.kt")
+            @TestMetadata("konstueArgumentsWithEnabledFeature.kt")
             public void testValueArgumentsWithEnabledFeature() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/valueArgumentsWithEnabledFeature.kt");
+                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/konstueArgumentsWithEnabledFeature.kt");
             }
 
             @Test
-            @TestMetadata("valueParametersWithDisabledFeature.kt")
+            @TestMetadata("konstueParametersWithDisabledFeature.kt")
             public void testValueParametersWithDisabledFeature() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/valueParametersWithDisabledFeature.kt");
+                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/konstueParametersWithDisabledFeature.kt");
             }
 
             @Test
-            @TestMetadata("valueParametersWithEnabledFeature.kt")
+            @TestMetadata("konstueParametersWithEnabledFeature.kt")
             public void testValueParametersWithEnabledFeature() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/valueParametersWithEnabledFeature.kt");
+                runTest("compiler/testData/diagnostics/testsWithStdLib/trailingComma/konstueParametersWithEnabledFeature.kt");
             }
 
             @Test

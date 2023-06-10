@@ -4,9 +4,9 @@ interface IFoo {
     fun overridingFun()
     fun String.overridingExtFun()
 
-    val overridingVal: Int
+    konst overridingVal: Int
     var overridingVar: Int
-    val String.overridingExtVal: Int
+    konst String.overridingExtVal: Int
     var String.overridingExtVar: Int
 }
 
@@ -30,7 +30,7 @@ annotation class ASetParam
 @Retention(AnnotationRetention.BINARY)
 annotation class AReceiver
 
-inline class Z(@get:AGet val x: Int) : IFoo {
+inline class Z(@get:AGet konst x: Int) : IFoo {
 
     constructor(y: Long) : this(y.toInt())
 
@@ -38,7 +38,7 @@ inline class Z(@get:AGet val x: Int) : IFoo {
     @A override fun @receiver:AReceiver String.overridingExtFun() {}
 
     @A @get:AGet
-    override val overridingVal: Int
+    override konst overridingVal: Int
         get() = x
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
@@ -48,7 +48,7 @@ inline class Z(@get:AGet val x: Int) : IFoo {
         set(v) {}
 
     @A @get:AGet
-    override val @receiver:AReceiver String.overridingExtVal: Int
+    override konst @receiver:AReceiver String.overridingExtVal: Int
         get() = x
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
@@ -64,7 +64,7 @@ inline class Z(@get:AGet val x: Int) : IFoo {
     @A fun @receiver:AReceiver String.nonOverridingExtFun() {}
 
     @A @get:AGet
-    val nonOverridingVal: Int get() = x
+    konst nonOverridingVal: Int get() = x
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")
     @A @get:AGet @set:ASet @setparam:ASetParam
@@ -73,7 +73,7 @@ inline class Z(@get:AGet val x: Int) : IFoo {
         set(v) {}
 
     @A @get:AGet
-    val @receiver:AReceiver String.nonOverridingExtVal: Int
+    konst @receiver:AReceiver String.nonOverridingExtVal: Int
         get() = x
 
     @Suppress("RESERVED_VAR_PROPERTY_OF_VALUE_CLASS")

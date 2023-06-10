@@ -29,7 +29,7 @@ public fun <T> CompareContext<List<T>>.listBehavior() {
         propertyEquals { this.lastIndexOf(element) }
     }
 
-    val nonExisting = object {}
+    konst nonExisting = object {}
     propertyEquals { this.indexOf(nonExisting as Any?) }
     propertyEquals { this.lastIndexOf(nonExisting as Any?) }
 
@@ -91,16 +91,16 @@ public fun <K, V> CompareContext<Map<K, V>>.mapBehavior() {
         propertyEquals { contains(keys.first()) }
 
     propertyEquals { containsKey(keys.firstOrNull()) }
-    propertyEquals { containsValue(values.firstOrNull()) }
+    propertyEquals { containsValue(konstues.firstOrNull()) }
     propertyEquals { get(null as Any?) }
 
     compareProperty({ keys }, { setBehavior("keySet") })
     compareProperty({ entries }, { setBehavior("entrySet") })
-    compareProperty({ values }, { collectionBehavior("values") })
+    compareProperty({ konstues }, { collectionBehavior("konstues") })
 }
 
 public fun <T> CompareContext<T>.equalityBehavior(objectName: String = "") {
-    val prefix = objectName + if (objectName.isNotEmpty()) "." else ""
+    konst prefix = objectName + if (objectName.isNotEmpty()) "." else ""
     equals(objectName)
     propertyEquals(prefix + "hashCode") { hashCode() }
     propertyEquals(prefix + "toString") { toString() }
@@ -108,7 +108,7 @@ public fun <T> CompareContext<T>.equalityBehavior(objectName: String = "") {
 
 
 public fun <T> CompareContext<Collection<T>>.collectionBehavior(objectName: String = "") {
-    val prefix = objectName + if (objectName.isNotEmpty()) "." else ""
+    konst prefix = objectName + if (objectName.isNotEmpty()) "." else ""
     propertyEquals(prefix + "size") { size }
     propertyEquals(prefix + "isEmpty") { isEmpty() }
 

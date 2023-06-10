@@ -6,10 +6,10 @@
 package test
 
 @OptionalExpectation
-expect annotation class A(val x: Int)
+expect annotation class A(konst x: Int)
 
 @OptionalExpectation
-expect annotation class B(val a: Array<String>)
+expect annotation class B(konst a: Array<String>)
 
 @OptionalExpectation
 expect annotation class C()

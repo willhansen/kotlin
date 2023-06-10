@@ -5,12 +5,12 @@
 
 package org.jetbrains.kotlin.fir.types
 
-enum class ConeNullability(val suffix: String) {
+enum class ConeNullability(konst suffix: String) {
     NULLABLE("?"),
     UNKNOWN("!"),
     NOT_NULL("");
 
-    val isNullable: Boolean get() = this != NOT_NULL
+    konst isNullable: Boolean get() = this != NOT_NULL
 
     companion object {
         fun create(isNullable: Boolean) = if (isNullable) NULLABLE else NOT_NULL

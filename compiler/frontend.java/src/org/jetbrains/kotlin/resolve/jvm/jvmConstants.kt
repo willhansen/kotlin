@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.psi.KtVisitorVoid
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.calls.util.getResolvedCall
 import org.jetbrains.kotlin.resolve.constants.ConstantValue
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 
 fun getCompileTimeConstant(
         expression: KtExpression,
@@ -34,30 +34,30 @@ fun getCompileTimeConstant(
         takeUpConstValsAsConst: Boolean,
         shouldInlineConstVals: Boolean
 ): ConstantValue<*>? {
-    val compileTimeValue = ConstantExpressionEvaluator.getConstant(expression, bindingContext)
+    konst compileTimeValue = ConstantExpressionEkonstuator.getConstant(expression, bindingContext)
     if (compileTimeValue == null || compileTimeValue.usesNonConstValAsConstant) {
         return null
     }
 
     if (!shouldInlineConstVals && !takeUpConstValsAsConst && compileTimeValue.usesVariableAsConstant) {
-        val constantChecker = ConstantsChecker(bindingContext)
+        konst constantChecker = ConstantsChecker(bindingContext)
         expression.accept(constantChecker)
         if (constantChecker.containsKotlinConstVals) return null
     }
 
-    val expectedType = bindingContext.getType(expression) ?: return null
+    konst expectedType = bindingContext.getType(expression) ?: return null
 
     return compileTimeValue.toConstantValue(expectedType)
 }
 
 
-private class ConstantsChecker(private val bindingContext: BindingContext) : KtVisitorVoid() {
+private class ConstantsChecker(private konst bindingContext: BindingContext) : KtVisitorVoid() {
     var containsKotlinConstVals = false
 
     override fun visitSimpleNameExpression(expression: KtSimpleNameExpression) {
-        val resolvedCall = expression.getResolvedCall(bindingContext)
+        konst resolvedCall = expression.getResolvedCall(bindingContext)
         if (resolvedCall != null) {
-            val callableDescriptor = resolvedCall.resultingDescriptor
+            konst callableDescriptor = resolvedCall.resultingDescriptor
             if (callableDescriptor is PropertyDescriptor && callableDescriptor !is JavaPropertyDescriptor && callableDescriptor.isConst) {
                 containsKotlinConstVals = true
             }

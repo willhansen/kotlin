@@ -18,18 +18,18 @@ abstract class DependencyProvider : TestService {
     abstract fun copy(): DependencyProvider
 }
 
-val TestServices.dependencyProvider: DependencyProvider by TestServices.testServiceAccessor()
+konst TestServices.dependencyProvider: DependencyProvider by TestServices.testServiceAccessor()
 
 class DependencyProviderImpl(
-    private val testServices: TestServices,
-    private val testModules: List<TestModule>
+    private konst testServices: TestServices,
+    private konst testModules: List<TestModule>
 ) : DependencyProvider() {
-    private val assertions: Assertions
+    private konst assertions: Assertions
         get() = testServices.assertions
 
-    private val testModulesByName = testModules.associateBy { it.name }
+    private konst testModulesByName = testModules.associateBy { it.name }
 
-    private val artifactsByModule: MutableMap<TestModule, MutableMap<TestArtifactKind<*>, ResultingArtifact<*>>> = mutableMapOf()
+    private konst artifactsByModule: MutableMap<TestModule, MutableMap<TestArtifactKind<*>, ResultingArtifact<*>>> = mutableMapOf()
 
     override fun getTestModule(name: String): TestModule {
         return testModulesByName[name] ?: assertions.fail { "Module $name is not defined" }
@@ -45,8 +45,8 @@ class DependencyProviderImpl(
     }
 
     fun <A : ResultingArtifact<A>> registerArtifact(module: TestModule, artifact: ResultingArtifact<A>) {
-        val kind = artifact.kind
-        val previousValue = artifactsByModule.getMap(module).put(kind, artifact)
+        konst kind = artifact.kind
+        konst previousValue = artifactsByModule.getMap(module).put(kind, artifact)
         if (previousValue != null) error("Artifact with kind $kind already registered for module ${module.name}")
     }
 

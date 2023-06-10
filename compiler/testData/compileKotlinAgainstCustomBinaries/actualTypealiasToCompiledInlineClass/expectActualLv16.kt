@@ -3,10 +3,10 @@
 package test
 
 @kotlin.jvm.JvmInline
-expect value class ExpectValueActualInline(val value: Int)
+expect konstue class ExpectValueActualInline(konst konstue: Int)
 
 @kotlin.jvm.JvmInline
-expect value class ExpectValueActualValue(val value: Int)
+expect konstue class ExpectValueActualValue(konst konstue: Int)
 
 actual typealias ExpectValueActualInline = lib.InlineClass
 actual typealias ExpectValueActualValue = lib.ValueClass

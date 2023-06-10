@@ -14,13 +14,13 @@ import javax.inject.Inject
 
 class AssignmentSubplugin
 @Inject internal constructor(
-    private val registry: ToolingModelBuilderRegistry
+    private konst registry: ToolingModelBuilderRegistry
 ) : KotlinCompilerPluginSupportPlugin {
 
     companion object {
-        const val COMPILER_PLUGIN_ARTIFACT_NAME = "kotlin-assignment-compiler-plugin-embeddable"
-        const val COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.assignment"
-        private const val ANNOTATION_ARG_NAME = "annotation"
+        const konst COMPILER_PLUGIN_ARTIFACT_NAME = "kotlin-assignment-compiler-plugin-embeddable"
+        const konst COMPILER_PLUGIN_ID = "org.jetbrains.kotlin.assignment"
+        private const konst ANNOTATION_ARG_NAME = "annotation"
     }
 
     override fun apply(target: Project) {
@@ -31,12 +31,12 @@ class AssignmentSubplugin
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
 
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
-        val extension = project.extensions.findByType(AssignmentExtension::class.java)
+        konst project = kotlinCompilation.target.project
+        konst extension = project.extensions.findByType(AssignmentExtension::class.java)
             ?: return project.provider { emptyList() }
 
         return project.provider {
-            val options = mutableListOf<SubpluginOption>()
+            konst options = mutableListOf<SubpluginOption>()
             for (anno in extension.myAnnotations) {
                 options += SubpluginOption(ANNOTATION_ARG_NAME, anno)
             }

@@ -1,1 +1,1 @@
-val entries: kotlin.enums.EnumEntries<MyKotlinEnum>
+konst entries: kotlin.enums.EnumEntries<MyKotlinEnum>

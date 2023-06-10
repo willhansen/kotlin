@@ -4,7 +4,7 @@
 expect <!EXPECTED_TAILREC_FUNCTION, EXPECTED_TAILREC_FUNCTION{JVM}!>tailrec<!> fun foo(p: Int): Int
 expect fun bar(p: Int): Int
 
-expect <!WRONG_MODIFIER_TARGET, WRONG_MODIFIER_TARGET{JVM}!>tailrec<!> val notReport: String
+expect <!WRONG_MODIFIER_TARGET, WRONG_MODIFIER_TARGET{JVM}!>tailrec<!> konst notReport: String
 
 expect class A {
     <!EXPECTED_TAILREC_FUNCTION, EXPECTED_TAILREC_FUNCTION{JVM}!>tailrec<!> fun foo(p: Int): Int
@@ -16,7 +16,7 @@ expect class A {
 actual tailrec fun foo(p: Int): Int = foo(p)
 actual tailrec fun bar(p: Int): Int = bar(p)
 
-actual val notReport: String = "123"
+actual konst notReport: String = "123"
 
 actual class A {
     actual tailrec fun foo(p: Int): Int = foo(p)

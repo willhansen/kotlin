@@ -3,7 +3,7 @@ package
 public final class Test : java.lang.Thread {
     public constructor Test()
     invisible_fake final override /*1*/ /*fake_override*/ var blocker: sun.nio.ch.Interruptible!
-    invisible_fake final override /*1*/ /*fake_override*/ val blockerLock: kotlin.Any!
+    invisible_fake final override /*1*/ /*fake_override*/ konst blockerLock: kotlin.Any!
     invisible_fake final override /*1*/ /*fake_override*/ var contextClassLoader: java.lang.ClassLoader!
     invisible_fake final override /*1*/ /*fake_override*/ var daemon: kotlin.Boolean
     invisible_fake final override /*1*/ /*fake_override*/ var eetop: kotlin.Long

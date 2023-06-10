@@ -13,19 +13,19 @@ import java.io.Serializable
 /**
  * Fake NodeJS module directory created from Gradle external module
  */
-data class GradleNodeModule(val name: String, val version: String, val path: File) : Serializable {
-    val semver: SemVer
+data class GradleNodeModule(konst name: String, konst version: String, konst path: File) : Serializable {
+    konst semver: SemVer
         get() = SemVer.from(version)
 
     @get:Synchronized
-    val dependencies: Set<NpmDependencyDeclaration> by lazy {
-        val pJson = path.resolve("package.json").reader().use {
+    konst dependencies: Set<NpmDependencyDeclaration> by lazy {
+        konst pJson = path.resolve("package.json").reader().use {
             Gson().fromJson(it, JsonObject::class.java)
         }
-        val normal = pJson.getAsJsonObject("dependencies")
-        val peer = pJson.getAsJsonObject("peerDependencies")
-        val optional = pJson.getAsJsonObject("optionalDependencies")
-        val dev = pJson.getAsJsonObject("devDependencies")
+        konst normal = pJson.getAsJsonObject("dependencies")
+        konst peer = pJson.getAsJsonObject("peerDependencies")
+        konst optional = pJson.getAsJsonObject("optionalDependencies")
+        konst dev = pJson.getAsJsonObject("devDependencies")
         mapOf(
             NpmDependency.Scope.NORMAL to normal,
             NpmDependency.Scope.PEER to peer,

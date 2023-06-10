@@ -4,7 +4,7 @@ FILE: genericPropertyAccess.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|T| = R|<local>/x|
+        public final konst x: R|T| = R|<local>/x|
             public get(): R|T|
 
         public abstract fun foo(): R|T|

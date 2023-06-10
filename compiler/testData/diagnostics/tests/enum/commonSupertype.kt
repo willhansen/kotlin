@@ -5,4 +5,4 @@
 enum class A { A }
 enum class B { B }
 
-val x = if (true) A.A else B.B
+konst x = if (true) A.A else B.B

@@ -35,27 +35,27 @@ import org.jetbrains.kotlin.name.Name
 import kotlin.properties.Delegates
 
 class FirJavaClass @FirImplementationDetail internal constructor(
-    override val source: KtSourceElement?,
-    override val moduleData: FirModuleData,
+    override konst source: KtSourceElement?,
+    override konst moduleData: FirModuleData,
     resolvePhase: FirResolvePhase,
-    override val name: Name,
-    override val origin: FirDeclarationOrigin.Java,
-    private val unEnhancedAnnotations: MutableOrEmptyList<JavaAnnotation>,
+    override konst name: Name,
+    override konst origin: FirDeclarationOrigin.Java,
+    private konst unEnhancedAnnotations: MutableOrEmptyList<JavaAnnotation>,
     override var status: FirDeclarationStatus,
-    override val classKind: ClassKind,
-    override val declarations: MutableList<FirDeclaration>,
-    override val scopeProvider: FirScopeProvider,
-    override val symbol: FirRegularClassSymbol,
-    private val unenhnancedSuperTypes: List<FirTypeRef>,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
-    internal val javaPackage: JavaPackage?,
-    val javaTypeParameterStack: JavaTypeParameterStack,
-    internal val existingNestedClassifierNames: List<Name>
+    override konst classKind: ClassKind,
+    override konst declarations: MutableList<FirDeclaration>,
+    override konst scopeProvider: FirScopeProvider,
+    override konst symbol: FirRegularClassSymbol,
+    private konst unenhnancedSuperTypes: List<FirTypeRef>,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
+    internal konst javaPackage: JavaPackage?,
+    konst javaTypeParameterStack: JavaTypeParameterStack,
+    internal konst existingNestedClassifierNames: List<Name>
 ) : FirRegularClass() {
-    override val hasLazyNestedClassifiers: Boolean get() = true
-    override val controlFlowGraphReference: FirControlFlowGraphReference? get() = null
+    override konst hasLazyNestedClassifiers: Boolean get() = true
+    override konst controlFlowGraphReference: FirControlFlowGraphReference? get() = null
 
-    override val contextReceivers: List<FirContextReceiver>
+    override konst contextReceivers: List<FirContextReceiver>
         get() = emptyList()
 
     init {
@@ -65,21 +65,21 @@ class FirJavaClass @FirImplementationDetail internal constructor(
         this.resolveState = resolvePhase.asResolveState()
     }
 
-    override val attributes: FirDeclarationAttributes = FirDeclarationAttributes()
+    override konst attributes: FirDeclarationAttributes = FirDeclarationAttributes()
 
     // TODO: the lazy superTypeRefs is a workaround for KT-55387, some non-lazy solution should probably be used instead
-    override val superTypeRefs: List<FirTypeRef> by lazy {
-        val enhancement = FirSignatureEnhancement(this@FirJavaClass, moduleData.session, overridden = { emptyList() })
+    override konst superTypeRefs: List<FirTypeRef> by lazy {
+        konst enhancement = FirSignatureEnhancement(this@FirJavaClass, moduleData.session, overridden = { emptyList() })
         enhancement.enhanceSuperTypes(unenhnancedSuperTypes)
     }
 
     // TODO: the lazy annotations is a workaround for KT-55387, some non-lazy solution should probably be used instead
-    override val annotations: List<FirAnnotation> by lazy {
+    override konst annotations: List<FirAnnotation> by lazy {
         unEnhancedAnnotations.convertAnnotationsToFir(moduleData.session, javaTypeParameterStack)
     }
 
     // TODO: the lazy deprecationsProvider is a workaround for KT-55387, some non-lazy solution should probably be used instead
-    override val deprecationsProvider: DeprecationsProvider by lazy {
+    override konst deprecationsProvider: DeprecationsProvider by lazy {
         getDeprecationsProvider(moduleData.session)
     }
 
@@ -93,7 +93,7 @@ class FirJavaClass @FirImplementationDetail internal constructor(
 
     override fun replaceControlFlowGraphReference(newControlFlowGraphReference: FirControlFlowGraphReference?) {}
 
-    override val companionObjectSymbol: FirRegularClassSymbol?
+    override konst companionObjectSymbol: FirRegularClassSymbol?
         get() = null
 
     override fun replaceCompanionObjectSymbol(newCompanionObjectSymbol: FirRegularClassSymbol?) {}
@@ -157,15 +157,15 @@ class FirJavaClassBuilder : FirRegularClassBuilder(), FirAnnotationContainerBuil
     var isNotSam: Boolean by Delegates.notNull()
     var javaPackage: JavaPackage? = null
     lateinit var javaTypeParameterStack: JavaTypeParameterStack
-    val existingNestedClassifierNames: MutableList<Name> = mutableListOf()
+    konst existingNestedClassifierNames: MutableList<Name> = mutableListOf()
 
     override var source: KtSourceElement? = null
     override var resolvePhase: FirResolvePhase = FirResolvePhase.RAW_FIR
     var javaAnnotations: MutableList<JavaAnnotation> = mutableListOf()
-    override val typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
-    override val declarations: MutableList<FirDeclaration> = mutableListOf()
+    override konst typeParameters: MutableList<FirTypeParameterRef> = mutableListOf()
+    override konst declarations: MutableList<FirDeclaration> = mutableListOf()
 
-    override val superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
+    override konst superTypeRefs: MutableList<FirTypeRef> = mutableListOf()
 
     @OptIn(FirImplementationDetail::class)
     override fun build(): FirJavaClass {
@@ -192,7 +192,7 @@ class FirJavaClassBuilder : FirRegularClassBuilder(), FirAnnotationContainerBuil
     @Deprecated("Modification of 'origin' has no impact for FirJavaClassBuilder", level = DeprecationLevel.HIDDEN)
     override var origin: FirDeclarationOrigin
         get() = throw IllegalStateException()
-        set(@Suppress("UNUSED_PARAMETER") value) {
+        set(@Suppress("UNUSED_PARAMETER") konstue) {
             throw IllegalStateException()
         }
 }

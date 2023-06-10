@@ -5,6 +5,6 @@
 internal class Bar
 
 sealed class Foo(
-    internal val x: Bar,
+    internal konst x: Bar,
     y: Bar
 )

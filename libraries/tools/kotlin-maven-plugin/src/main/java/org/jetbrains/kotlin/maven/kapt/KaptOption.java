@@ -24,19 +24,19 @@ class KaptOption {
     private final String key;
 
     @NotNull
-    private final String value;
+    private final String konstue;
 
-    KaptOption(@NotNull String key, boolean value) {
-        this(key, String.valueOf(value));
+    KaptOption(@NotNull String key, boolean konstue) {
+        this(key, String.konstueOf(konstue));
     }
 
-    KaptOption(@NotNull String key, @Nullable String[] value) {
-        this(key, renderStringArray(value));
+    KaptOption(@NotNull String key, @Nullable String[] konstue) {
+        this(key, renderStringArray(konstue));
     }
 
-    KaptOption(@NotNull String key, @Nullable String value) {
+    KaptOption(@NotNull String key, @Nullable String konstue) {
         this.key = key;
-        this.value = String.valueOf(value);
+        this.konstue = String.konstueOf(konstue);
     }
 
     @NotNull
@@ -59,6 +59,6 @@ class KaptOption {
 
     @Override
     public String toString() {
-        return "plugin:org.jetbrains.kotlin.kapt3:" + key + "=" + value;
+        return "plugin:org.jetbrains.kotlin.kapt3:" + key + "=" + konstue;
     }
 }

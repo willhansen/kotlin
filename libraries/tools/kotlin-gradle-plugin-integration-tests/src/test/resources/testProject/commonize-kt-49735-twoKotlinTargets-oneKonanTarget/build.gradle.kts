@@ -12,16 +12,16 @@ repositories {
 }
 
 kotlin {
-    val distinguishingAttribute = Attribute.of(String::class.java)
+    konst distinguishingAttribute = Attribute.of(String::class.java)
 
-    val platformTargetA = when {
+    konst platformTargetA = when {
         HostManager.hostIsMac -> macosX64("platformA")
         HostManager.hostIsMingw -> mingwX64("platformA")
         HostManager.hostIsLinux -> linuxX64("platformA")
         else -> error("Unexpected host: ${HostManager.host}")
     }
 
-    val platformTargetB = when {
+    konst platformTargetB = when {
         HostManager.hostIsMac -> macosX64("platformB")
         HostManager.hostIsMingw -> mingwX64("platformB")
         HostManager.hostIsLinux -> linuxX64("platformB")

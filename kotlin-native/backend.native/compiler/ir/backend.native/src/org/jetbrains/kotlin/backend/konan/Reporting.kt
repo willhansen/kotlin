@@ -42,11 +42,11 @@ internal fun renderCompilerError(irFile: IrFile?, element: IrElement?, message: 
                 append("(IR element is null)")
             } else {
                 if (irFile != null) {
-                    val location = element.getCompilerMessageLocation(irFile)
+                    konst location = element.getCompilerMessageLocation(irFile)
                     append("at $location\n")
                 }
 
-                val renderedElement = try {
+                konst renderedElement = try {
                     element.render()
                 } catch (e: Throwable) {
                     "(unable to render IR element)"

@@ -1,7 +1,7 @@
 enum class A {
     B, C;
     fun d(){}
-    val e: Int = 10
+    konst e: Int = 10
 }
 
 class X {
@@ -9,7 +9,7 @@ class X {
         enum class U {
             UB, UC;
             fun ud(){}
-            val ue: Int = 10
+            konst ue: Int = 10
         }
     }
 
@@ -17,7 +17,7 @@ class X {
         enum class W {
             WB, WC;
             fun wd(){}
-            val we: Int = 10
+            konst we: Int = 10
         }
     }
 }

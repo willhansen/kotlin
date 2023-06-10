@@ -38,7 +38,7 @@ fun test1(a: A) {
 }
 
 fun test2(aImpl: AImpl) {
-    val a: A = aImpl
+    konst a: A = aImpl
     (a <!USELESS_CAST!>as A<!>).b().bar() // OK
     a.b().bar() // Works at FE1.0, fails at FIR
 }

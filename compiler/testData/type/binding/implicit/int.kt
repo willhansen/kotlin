@@ -1,7 +1,7 @@
 fun <T> getT(): T = null!!
 
-val fml = getT<Int>()
+konst fml = getT<Int>()
 /*
-psi: val fml = getT<Int>()
+psi: konst fml = getT<Int>()
 type: Int
 */

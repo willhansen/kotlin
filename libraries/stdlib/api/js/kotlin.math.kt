@@ -1,41 +1,41 @@
 @kotlin.SinceKotlin(version = "1.2")
-public const val E: kotlin.Double = 2.718281828459045.toDouble() { get; }
+public const konst E: kotlin.Double = 2.718281828459045.toDouble() { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
-public const val PI: kotlin.Double = 3.141592653589793.toDouble() { get; }
-
-@kotlin.SinceKotlin(version = "1.2")
-@kotlin.internal.InlineOnly
-public val kotlin.Double.absoluteValue: kotlin.Double { get; }
+public const konst PI: kotlin.Double = 3.141592653589793.toDouble() { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly
-public val kotlin.Float.absoluteValue: kotlin.Float { get; }
+public konst kotlin.Double.absoluteValue: kotlin.Double { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly
-public val kotlin.Int.absoluteValue: kotlin.Int { get; }
+public konst kotlin.Float.absoluteValue: kotlin.Float { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly
-public val kotlin.Long.absoluteValue: kotlin.Long { get; }
+public konst kotlin.Int.absoluteValue: kotlin.Int { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly
-public val kotlin.Double.sign: kotlin.Double { get; }
+public konst kotlin.Long.absoluteValue: kotlin.Long { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly
-public val kotlin.Float.sign: kotlin.Float { get; }
+public konst kotlin.Double.sign: kotlin.Double { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
-public val kotlin.Int.sign: kotlin.Int { get; }
+@kotlin.internal.InlineOnly
+public konst kotlin.Float.sign: kotlin.Float { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
-public val kotlin.Long.sign: kotlin.Int { get; }
+public konst kotlin.Int.sign: kotlin.Int { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
-public val kotlin.Double.ulp: kotlin.Double { get; }
+public konst kotlin.Long.sign: kotlin.Int { get; }
+
+@kotlin.SinceKotlin(version = "1.2")
+public konst kotlin.Double.ulp: kotlin.Double { get; }
 
 @kotlin.SinceKotlin(version = "1.2")
 @kotlin.internal.InlineOnly

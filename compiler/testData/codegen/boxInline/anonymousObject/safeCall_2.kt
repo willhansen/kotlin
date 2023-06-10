@@ -2,11 +2,11 @@
 
 package test
 
-class W(val value: Any)
+class W(konst konstue: Any)
 
 inline fun W.safe(crossinline body : Any.() -> Unit) {
     {
-        this.value?.body()
+        this.konstue?.body()
     }.let { it() }
 }
 

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.fir.types.*
 import org.jetbrains.kotlin.fir.types.impl.ConeTypeParameterTypeImpl
 
 fun ConeKotlinType.removeTypeVariableTypes(typeContext: ConeTypeContext): ConeKotlinType {
-    val substitutor = TypeVariableTypeRemovingSubstitutor(typeContext)
+    konst substitutor = TypeVariableTypeRemovingSubstitutor(typeContext)
     return substitutor.substituteOrSelf(this)
 }
 
@@ -23,7 +23,7 @@ private class TypeVariableTypeRemovingSubstitutor(typeContext: ConeTypeContext) 
     }
 
     private fun convertTypeVariableType(type: ConeTypeVariableType): ConeKotlinType {
-        val originalTypeParameter = type.lookupTag.originalTypeParameter
+        konst originalTypeParameter = type.lookupTag.originalTypeParameter
         if (originalTypeParameter != null) {
             check(originalTypeParameter is ConeTypeParameterLookupTag)
             return ConeTypeParameterTypeImpl(originalTypeParameter, type.isNullable, type.attributes)

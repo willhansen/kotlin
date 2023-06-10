@@ -8,15 +8,15 @@ package org.jetbrains.kotlin.analyzer
 import org.jetbrains.kotlin.descriptors.ModuleCapability
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 
-val ModuleDescriptor.moduleInfo: ModuleInfo?
+konst ModuleDescriptor.moduleInfo: ModuleInfo?
     get() = getCapability(ModuleInfo.Capability)
 
 internal fun collectAllExpectedByModules(entryModule: ModuleInfo): Set<ModuleInfo> {
-    val unprocessedModules = ArrayDeque<ModuleInfo>().apply { addAll(entryModule.expectedBy) }
-    val expectedByModules = HashSet<ModuleInfo>()
+    konst unprocessedModules = ArrayDeque<ModuleInfo>().apply { addAll(entryModule.expectedBy) }
+    konst expectedByModules = HashSet<ModuleInfo>()
 
     while (unprocessedModules.isNotEmpty()) {
-        val nextImplemented = unprocessedModules.removeFirst()
+        konst nextImplemented = unprocessedModules.removeFirst()
         if (expectedByModules.add(nextImplemented)) {
             unprocessedModules.addAll(nextImplemented.expectedBy)
         }
@@ -25,7 +25,7 @@ internal fun collectAllExpectedByModules(entryModule: ModuleInfo): Set<ModuleInf
     return expectedByModules
 }
 
-val JDK_CAPABILITY = ModuleCapability<Boolean>("IsJdk")
+konst JDK_CAPABILITY = ModuleCapability<Boolean>("IsJdk")
 
-val ModuleDescriptor.hasJdkCapability: Boolean
+konst ModuleDescriptor.hasJdkCapability: Boolean
     get() = getCapability(JDK_CAPABILITY) == true

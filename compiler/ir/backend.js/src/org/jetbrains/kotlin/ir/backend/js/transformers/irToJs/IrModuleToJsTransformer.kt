@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifNotEmpty
 import java.io.File
 import java.util.*
 
-val String.safeModuleName: String
+konst String.safeModuleName: String
     get() {
         var result = this
 
@@ -42,13 +42,13 @@ val String.safeModuleName: String
         return sanitizeName("kotlin_$result", false)
     }
 
-val IrModuleFragment.safeName: String
+konst IrModuleFragment.safeName: String
     get() = name.asString().safeModuleName
 
 enum class TranslationMode(
-    val production: Boolean,
-    val perModule: Boolean,
-    val minimizedMemberNames: Boolean,
+    konst production: Boolean,
+    konst perModule: Boolean,
+    konst minimizedMemberNames: Boolean,
 ) {
     FULL_DEV(production = false, perModule = false, minimizedMemberNames = false),
     FULL_PROD(production = true, perModule = false, minimizedMemberNames = false),
@@ -79,11 +79,11 @@ enum class TranslationMode(
 }
 
 class JsCodeGenerator(
-    private val program: JsIrProgram,
-    private val multiModule: Boolean,
-    private val mainModuleName: String,
-    private val moduleKind: ModuleKind,
-    private val sourceMapsInfo: SourceMapsInfo?
+    private konst program: JsIrProgram,
+    private konst multiModule: Boolean,
+    private konst mainModuleName: String,
+    private konst moduleKind: ModuleKind,
+    private konst sourceMapsInfo: SourceMapsInfo?
 ) {
     fun generateJsCode(relativeRequirePath: Boolean, outJsProgram: Boolean): CompilationOutputsBuilt {
         return generateWrappedModuleBody(
@@ -99,29 +99,29 @@ class JsCodeGenerator(
 }
 
 class IrModuleToJsTransformer(
-    private val backendContext: JsIrBackendContext,
-    private val mainArguments: List<String>?,
-    private val moduleToName: Map<IrModuleFragment, String> = emptyMap(),
-    private val removeUnusedAssociatedObjects: Boolean = true,
+    private konst backendContext: JsIrBackendContext,
+    private konst mainArguments: List<String>?,
+    private konst moduleToName: Map<IrModuleFragment, String> = emptyMap(),
+    private konst removeUnusedAssociatedObjects: Boolean = true,
 ) {
-    private val shouldGeneratePolyfills = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
-    private val generateRegionComments = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_REGION_COMMENTS)
-    private val shouldGenerateTypeScriptDefinitions = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_DTS)
+    private konst shouldGeneratePolyfills = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_POLYFILLS)
+    private konst generateRegionComments = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_REGION_COMMENTS)
+    private konst shouldGenerateTypeScriptDefinitions = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_DTS)
 
-    private val mainModuleName = backendContext.configuration[CommonConfigurationKeys.MODULE_NAME]!!
-    private val moduleKind = backendContext.configuration[JSConfigurationKeys.MODULE_KIND]!!
-    private val isEsModules = moduleKind == ModuleKind.ES
-    private val sourceMapInfo = SourceMapsInfo.from(backendContext.configuration)
+    private konst mainModuleName = backendContext.configuration[CommonConfigurationKeys.MODULE_NAME]!!
+    private konst moduleKind = backendContext.configuration[JSConfigurationKeys.MODULE_KIND]!!
+    private konst isEsModules = moduleKind == ModuleKind.ES
+    private konst sourceMapInfo = SourceMapsInfo.from(backendContext.configuration)
 
-    private class IrFileExports(val file: IrFile, val exports: List<ExportedDeclaration>, val tsDeclarations: TypeScriptFragment?)
+    private class IrFileExports(konst file: IrFile, konst exports: List<ExportedDeclaration>, konst tsDeclarations: TypeScriptFragment?)
 
-    private class IrAndExportedDeclarations(val fragment: IrModuleFragment, val files: List<IrFileExports>)
+    private class IrAndExportedDeclarations(konst fragment: IrModuleFragment, konst files: List<IrFileExports>)
 
     private fun associateIrAndExport(modules: Iterable<IrModuleFragment>): List<IrAndExportedDeclarations> {
-        val exportModelGenerator = ExportModelGenerator(backendContext, generateNamespacesForPackages = !isEsModules)
+        konst exportModelGenerator = ExportModelGenerator(backendContext, generateNamespacesForPackages = !isEsModules)
 
         return modules.map { module ->
-            val files = exportModelGenerator.generateExportWithExternals(module.files)
+            konst files = exportModelGenerator.generateExportWithExternals(module.files)
             IrAndExportedDeclarations(module, files)
         }
     }
@@ -141,10 +141,10 @@ class IrModuleToJsTransformer(
     }
 
     fun generateModule(modules: Iterable<IrModuleFragment>, modes: Set<TranslationMode>, relativeRequirePath: Boolean): CompilerResult {
-        val exportData = associateIrAndExport(modules)
+        konst exportData = associateIrAndExport(modules)
         doStaticMembersLowering(modules)
 
-        val result = EnumMap<TranslationMode, CompilationOutputs>(TranslationMode::class.java)
+        konst result = EnumMap<TranslationMode, CompilationOutputs>(TranslationMode::class.java)
 
         modes.filter { !it.production }.forEach {
             result[it] = makeJsCodeGeneratorFromIr(exportData, it).generateJsCode(relativeRequirePath, true)
@@ -162,7 +162,7 @@ class IrModuleToJsTransformer(
     }
 
     fun makeJsCodeGenerator(modules: Iterable<IrModuleFragment>, mode: TranslationMode): JsCodeGenerator {
-        val exportData = associateIrAndExport(modules)
+        konst exportData = associateIrAndExport(modules)
         doStaticMembersLowering(modules)
 
         if (mode.production) {
@@ -173,8 +173,8 @@ class IrModuleToJsTransformer(
     }
 
     fun makeIrFragmentsGenerators(files: Collection<IrFile>, allModules: Collection<IrModuleFragment>): List<() -> JsIrProgramFragment> {
-        val exportModelGenerator = ExportModelGenerator(backendContext, generateNamespacesForPackages = !isEsModules)
-        val exportData = exportModelGenerator.generateExportWithExternals(files)
+        konst exportModelGenerator = ExportModelGenerator(backendContext, generateNamespacesForPackages = !isEsModules)
+        konst exportData = exportModelGenerator.generateExportWithExternals(files)
 
         doStaticMembersLowering(allModules)
 
@@ -185,10 +185,10 @@ class IrModuleToJsTransformer(
 
     private fun ExportModelGenerator.generateExportWithExternals(irFiles: Collection<IrFile>): List<IrFileExports> {
         return irFiles.map { irFile ->
-            val exports = generateExport(irFile)
-            val additionalExports = backendContext.externalPackageFragment[irFile.symbol]?.let { generateExport(it) } ?: emptyList()
-            val allExports = additionalExports + exports
-            val tsDeclarations = runIf(shouldGenerateTypeScriptDefinitions) {
+            konst exports = generateExport(irFile)
+            konst additionalExports = backendContext.externalPackageFragment[irFile.symbol]?.let { generateExport(it) } ?: emptyList()
+            konst allExports = additionalExports + exports
+            konst tsDeclarations = runIf(shouldGenerateTypeScriptDefinitions) {
                 allExports.ifNotEmpty { toTypeScriptFragment(moduleKind) }
             }
             IrFileExports(irFile, allExports, tsDeclarations)
@@ -205,7 +205,7 @@ class IrModuleToJsTransformer(
             backendContext.minimizedNameGenerator.clear()
         }
 
-        val program = JsIrProgram(
+        konst program = JsIrProgram(
             exportData.map { data ->
                 JsIrModule(
                     data.fragment.safeName,
@@ -218,34 +218,34 @@ class IrModuleToJsTransformer(
         return JsCodeGenerator(program, mode.perModule, mainModuleName, moduleKind, sourceMapInfo)
     }
 
-    private val generateFilePaths = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_COMMENTS_WITH_FILE_PATH)
-    private val pathPrefixMap = backendContext.configuration.getMap(JSConfigurationKeys.FILE_PATHS_PREFIX_MAP)
-    private val optimizeGeneratedJs = backendContext.configuration.get(JSConfigurationKeys.OPTIMIZE_GENERATED_JS, true)
+    private konst generateFilePaths = backendContext.configuration.getBoolean(JSConfigurationKeys.GENERATE_COMMENTS_WITH_FILE_PATH)
+    private konst pathPrefixMap = backendContext.configuration.getMap(JSConfigurationKeys.FILE_PATHS_PREFIX_MAP)
+    private konst optimizeGeneratedJs = backendContext.configuration.get(JSConfigurationKeys.OPTIMIZE_GENERATED_JS, true)
 
     private fun generateProgramFragment(fileExports: IrFileExports, minimizedMemberNames: Boolean): JsIrProgramFragment {
-        val nameGenerator = JsNameLinkingNamer(backendContext, minimizedMemberNames, isEsModules)
+        konst nameGenerator = JsNameLinkingNamer(backendContext, minimizedMemberNames, isEsModules)
 
-        val globalNameScope = NameTable<IrDeclaration>()
+        konst globalNameScope = NameTable<IrDeclaration>()
 
-        val staticContext = JsStaticContext(
+        konst staticContext = JsStaticContext(
             backendContext = backendContext,
             irNamer = nameGenerator,
             globalNameScope = globalNameScope
         )
 
-        val result = JsIrProgramFragment(fileExports.file.packageFqName.asString()).apply {
+        konst result = JsIrProgramFragment(fileExports.file.packageFqName.asString()).apply {
             if (shouldGeneratePolyfills) {
                 polyfills.statements += backendContext.polyfills.getAllPolyfillsFor(fileExports.file)
             }
         }
 
-        val internalModuleName = ReservedJsNames.makeInternalModuleName().takeIf { !isEsModules }
-        val globalNames = NameTable<String>(globalNameScope)
+        konst internalModuleName = ReservedJsNames.makeInternalModuleName().takeIf { !isEsModules }
+        konst globalNames = NameTable<String>(globalNameScope)
 
-        val statements = result.declarations.statements
-        val fileStatements = fileExports.file.accept(IrFileToJsTransformer(useBareParameterNames = true), staticContext).statements
+        konst statements = result.declarations.statements
+        konst fileStatements = fileExports.file.accept(IrFileToJsTransformer(useBareParameterNames = true), staticContext).statements
 
-        val exportStatements =
+        konst exportStatements =
             ExportModelToJsStatements(staticContext, backendContext.es6mode, { globalNames.declareFreshName(it, it) }).generateModuleExport(
                 ExportedModule(mainModuleName, moduleKind, fileExports.exports),
                 internalModuleName,
@@ -263,8 +263,8 @@ class IrModuleToJsTransformer(
             }
 
             if (generateRegionComments || generateFilePaths) {
-                val originalPath = fileExports.file.path
-                val path = pathPrefixMap.entries
+                konst originalPath = fileExports.file.path
+                konst path = pathPrefixMap.entries
                     .find { (k, _) -> originalPath.startsWith(k) }
                     ?.let { (k, v) -> v + originalPath.substring(k.length) }
                     ?: originalPath
@@ -294,9 +294,9 @@ class IrModuleToJsTransformer(
 
         if (mainArguments != null) {
             JsMainFunctionDetector(backendContext).getMainFunctionOrNull(fileExports.file)?.let {
-                val jsName = staticContext.getNameForStaticFunction(it)
-                val generateArgv = it.valueParameters.firstOrNull()?.isStringArrayParameter() ?: false
-                val generateContinuation = it.isLoweredSuspendFunction(backendContext)
+                konst jsName = staticContext.getNameForStaticFunction(it)
+                konst generateArgv = it.konstueParameters.firstOrNull()?.isStringArrayParameter() ?: false
+                konst generateContinuation = it.isLoweredSuspendFunction(backendContext)
                 result.mainFunction = JsInvocation(jsName.makeRef(), generateMainArguments(generateArgv, generateContinuation, staticContext)).makeStmt()
             }
         }
@@ -308,10 +308,10 @@ class IrModuleToJsTransformer(
 
         result.importedModules += nameGenerator.importedModules
 
-        val definitionSet = fileExports.file.declarations.toSet()
+        konst definitionSet = fileExports.file.declarations.toSet()
 
         fun computeTag(declaration: IrDeclaration): String? {
-            val tag = (backendContext.irFactory as IdSignatureRetriever).declarationSignature(declaration)?.toString()
+            konst tag = (backendContext.irFactory as IdSignatureRetriever).declarationSignature(declaration)?.toString()
 
             if (tag == null && declaration !in definitionSet) {
                 error("signature for ${declaration.render()} not found")
@@ -330,7 +330,7 @@ class IrModuleToJsTransformer(
         }
 
         nameGenerator.imports.entries.forEach { (declaration, importStatement) ->
-            val tag = computeTag(declaration) ?: error("No tag for imported declaration ${declaration.render()}")
+            konst tag = computeTag(declaration) ?: error("No tag for imported declaration ${declaration.render()}")
             result.imports[tag] = importStatement
             result.optionalCrossModuleImports += tag
         }
@@ -361,11 +361,11 @@ class IrModuleToJsTransformer(
         generateContinuation: Boolean,
         staticContext: JsStaticContext,
     ): List<JsExpression> {
-        val mainArguments = this.mainArguments!!
-        val mainArgumentsArray =
+        konst mainArguments = this.mainArguments!!
+        konst mainArgumentsArray =
             if (generateArgv) JsArrayLiteral(mainArguments.map { JsStringLiteral(it) }) else null
 
-        val continuation = if (generateContinuation) {
+        konst continuation = if (generateContinuation) {
             backendContext.coroutineEmptyContinuation.owner
                 .let { it.getter!! }
                 .let { staticContext.getNameForStaticFunction(it) }
@@ -389,8 +389,8 @@ private fun generateWrappedModuleBody(
         // mutable container allows explicitly remove elements from itself,
         // so we are able to help GC to free heavy JsIrModule objects
         // TODO: It makes sense to invent something better, because this logic can be easily broken
-        val moduleToRef = program.asCrossModuleDependencies(moduleKind, relativeRequirePath).toMutableList()
-        val mainModule = moduleToRef.removeLast().let { (main, mainRef) ->
+        konst moduleToRef = program.asCrossModuleDependencies(moduleKind, relativeRequirePath).toMutableList()
+        konst mainModule = moduleToRef.removeLast().let { (main, mainRef) ->
             generateSingleWrappedModuleBody(
                 mainModuleName,
                 moduleKind,
@@ -405,8 +405,8 @@ private fun generateWrappedModuleBody(
         mainModule.dependencies = buildList(moduleToRef.size) {
             while (moduleToRef.isNotEmpty()) {
                 moduleToRef.removeFirst().let { (module, moduleRef) ->
-                    val moduleName = module.externalModuleName
-                    val moduleCompilationOutput = generateSingleWrappedModuleBody(
+                    konst moduleName = module.externalModuleName
+                    konst moduleCompilationOutput = generateSingleWrappedModuleBody(
                         moduleName,
                         moduleKind,
                         module.fragments,
@@ -442,7 +442,7 @@ fun generateSingleWrappedModuleBody(
     crossModuleReferences: CrossModuleReferences = CrossModuleReferences.Empty(moduleKind),
     outJsProgram: Boolean = true
 ): CompilationOutputsBuilt {
-    val program = Merger(
+    konst program = Merger(
         moduleName,
         moduleKind,
         fragments,
@@ -453,17 +453,17 @@ fun generateSingleWrappedModuleBody(
 
     program.resolveTemporaryNames()
 
-    val jsCode = TextOutputImpl()
+    konst jsCode = TextOutputImpl()
 
-    val sourceMapBuilder: SourceMap3Builder?
-    val sourceMapBuilderConsumer: SourceLocationConsumer
+    konst sourceMapBuilder: SourceMap3Builder?
+    konst sourceMapBuilderConsumer: SourceLocationConsumer
     if (sourceMapsInfo != null) {
-        val sourceMapPrefix = sourceMapsInfo.sourceMapPrefix
+        konst sourceMapPrefix = sourceMapsInfo.sourceMapPrefix
         sourceMapBuilder = SourceMap3Builder(null, jsCode::getColumn, sourceMapPrefix)
 
-        val pathResolver = SourceFilePathResolver.create(sourceMapsInfo.sourceRoots, sourceMapPrefix, sourceMapsInfo.outputDir)
+        konst pathResolver = SourceFilePathResolver.create(sourceMapsInfo.sourceRoots, sourceMapPrefix, sourceMapsInfo.outputDir)
 
-        val sourceMapContentEmbedding =
+        konst sourceMapContentEmbedding =
             sourceMapsInfo.sourceMapContentEmbedding
 
         sourceMapBuilderConsumer = SourceMapBuilderConsumer(

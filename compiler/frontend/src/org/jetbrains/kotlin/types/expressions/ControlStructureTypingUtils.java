@@ -222,10 +222,10 @@ public class ControlStructureTypingUtils {
         KotlinType type = typeParameter.getDefaultType();
         KotlinType nullableType = TypeUtils.makeNullable(type);
 
-        List<ValueParameterDescriptor> valueParameters = new ArrayList<>(argumentNames.size());
+        List<ValueParameterDescriptor> konstueParameters = new ArrayList<>(argumentNames.size());
         for (int i = 0; i < argumentNames.size(); i++) {
             KotlinType argumentType = isArgumentNullable.get(i) ? nullableType : type;
-            ValueParameterDescriptorImpl valueParameter = new ValueParameterDescriptorImpl(
+            ValueParameterDescriptorImpl konstueParameter = new ValueParameterDescriptorImpl(
                     function, null, i, Annotations.Companion.getEMPTY(), Name.identifier(argumentNames.get(i)),
                     argumentType,
                     /* declaresDefaultValue = */ false,
@@ -233,7 +233,7 @@ public class ControlStructureTypingUtils {
                     /* isNoinline = */ false,
                     null, SourceElement.NO_SOURCE
             );
-            valueParameters.add(valueParameter);
+            konstueParameters.add(konstueParameter);
         }
         KotlinType returnType = construct != ResolveConstruct.ELVIS ? type : TypeUtilsKt.replaceAnnotations(type, AnnotationsForResolveUtilsKt.getExactInAnnotations());
         function.initialize(
@@ -241,7 +241,7 @@ public class ControlStructureTypingUtils {
                 null,
                 Collections.emptyList(),
                 Lists.newArrayList(typeParameter),
-                valueParameters,
+                konstueParameters,
                 returnType,
                 Modality.FINAL,
                 DescriptorVisibilities.PUBLIC
@@ -262,8 +262,8 @@ public class ControlStructureTypingUtils {
 
 
         @Override
-        public void updateInfo(@NotNull ValueArgument valueArgument, @NotNull DataFlowInfo dataFlowInfo) {
-            dataFlowInfoForArgumentsMap.put(valueArgument, dataFlowInfo);
+        public void updateInfo(@NotNull ValueArgument konstueArgument, @NotNull DataFlowInfo dataFlowInfo) {
+            dataFlowInfoForArgumentsMap.put(konstueArgument, dataFlowInfo);
         }
 
         @Override
@@ -271,8 +271,8 @@ public class ControlStructureTypingUtils {
 
         @NotNull
         @Override
-        public DataFlowInfo getInfo(@NotNull ValueArgument valueArgument) {
-            return dataFlowInfoForArgumentsMap.get(valueArgument);
+        public DataFlowInfo getInfo(@NotNull ValueArgument konstueArgument) {
+            return dataFlowInfoForArgumentsMap.get(konstueArgument);
         }
     }
 
@@ -315,10 +315,10 @@ public class ControlStructureTypingUtils {
             @NotNull DataFlowInfo dataFlowInfoAfterTry
     ) {
         Map<ValueArgument, DataFlowInfo> dataFlowInfoForArgumentsMap = new HashMap<>();
-        List<? extends ValueArgument> valueArguments = callForTry.getValueArguments();
-        dataFlowInfoForArgumentsMap.put(valueArguments.get(0), dataFlowInfoBeforeTry);
-        for (int i = 1; i < valueArguments.size(); i++) {
-            dataFlowInfoForArgumentsMap.put(valueArguments.get(i), dataFlowInfoAfterTry);
+        List<? extends ValueArgument> konstueArguments = callForTry.getValueArguments();
+        dataFlowInfoForArgumentsMap.put(konstueArguments.get(0), dataFlowInfoBeforeTry);
+        for (int i = 1; i < konstueArguments.size(); i++) {
+            dataFlowInfoForArgumentsMap.put(konstueArguments.get(i), dataFlowInfoAfterTry);
         }
         return createIndependentDataFlowInfoForArgumentsForCall(dataFlowInfoBeforeTry, dataFlowInfoForArgumentsMap);
     }
@@ -329,9 +329,9 @@ public class ControlStructureTypingUtils {
             @NotNull KtExpression calleeExpression,
             @NotNull List<? extends KtExpression> arguments
     ) {
-        List<ValueArgument> valueArguments = Lists.newArrayList();
+        List<ValueArgument> konstueArguments = Lists.newArrayList();
         for (KtExpression argument : arguments) {
-            valueArguments.add(CallMaker.makeValueArgument(argument));
+            konstueArguments.add(CallMaker.makeValueArgument(argument));
         }
         return new Call() {
             @Nullable
@@ -367,7 +367,7 @@ public class ControlStructureTypingUtils {
             @NotNull
             @Override
             public List<? extends ValueArgument> getValueArguments() {
-                return valueArguments;
+                return konstueArguments;
             }
 
             @NotNull
@@ -641,7 +641,7 @@ public class ControlStructureTypingUtils {
 
         @Override
         public void noValueForParameter(
-                @NotNull BindingTrace trace, @NotNull ValueParameterDescriptor valueParameter
+                @NotNull BindingTrace trace, @NotNull ValueParameterDescriptor konstueParameter
         ) {
             logError();
         }

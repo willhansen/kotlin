@@ -1,7 +1,7 @@
 package
 
-public val x: kotlin.Int
-public val kotlin.Any?.bar: kotlin.Int
+public konst x: kotlin.Int
+public konst kotlin.Any?.bar: kotlin.Int
 public fun kotlin.Any.foo(): kotlin.Int
 
 public object O {

@@ -34,7 +34,7 @@ fun copyValueParameters(
     newOwner: CallableDescriptor
 ): List<ValueParameterDescriptor> {
     assert(newValueParameterTypes.size == oldValueParameters.size) {
-        "Different value parameters sizes: Enhanced = ${newValueParameterTypes.size}, Old = ${oldValueParameters.size}"
+        "Different konstue parameters sizes: Enhanced = ${newValueParameterTypes.size}, Old = ${oldValueParameters.size}"
     }
 
     return newValueParameterTypes.zip(oldValueParameters).map { (newParameterType, oldParameter) ->
@@ -55,7 +55,7 @@ fun copyValueParameters(
 }
 
 fun ClassDescriptor.getParentJavaStaticClassScope(): LazyJavaStaticClassScope? {
-    val superClassDescriptor = getSuperClassNotAny() ?: return null
+    konst superClassDescriptor = getSuperClassNotAny() ?: return null
 
     return superClassDescriptor.staticScope as? LazyJavaStaticClassScope ?: superClassDescriptor.getParentJavaStaticClassScope()
 }

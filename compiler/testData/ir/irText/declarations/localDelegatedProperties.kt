@@ -3,7 +3,7 @@
 // IGNORE_BACKEND: JS_IR_ES6
 
 fun test1() {
-    val x by lazy { 42 }
+    konst x by lazy { 42 }
     println(x)
 }
 

@@ -23,17 +23,17 @@ fun <T> inv(t: T): Inv<T> = Inv<T>()
 
 fun box(): String {
     printStream().checkError()
-    val p: Inv<PrintStream> = inv(printStream())
-    val p1: Inv<PrintStream?> = inv(printStream())
+    konst p: Inv<PrintStream> = inv(printStream())
+    konst p1: Inv<PrintStream?> = inv(printStream())
 
     list().size
-    val l: Inv<List<String>> = inv(list())
-    val l1: Inv<MutableList<String>?> = inv(list())
+    konst l: Inv<List<String>> = inv(list())
+    konst l1: Inv<MutableList<String>?> = inv(list())
 
-    val a = array(arrayOfNulls<Int>(1) as Array<Int>)
+    konst a = array(arrayOfNulls<Int>(1) as Array<Int>)
     a[0] = 1
-    val a1: Inv<Array<Int>> = inv(a)
-    val a2: Inv<Array<out Int>?> = inv(a)
+    konst a1: Inv<Array<Int>> = inv(a)
+    konst a2: Inv<Array<out Int>?> = inv(a)
 
     return "OK"
 }

@@ -1,7 +1,7 @@
 // !LANGUAGE: +ContextReceivers
 // TARGET_BACKEND: JVM_IR
 
-data class Result(val i: Int)
+data class Result(konst i: Int)
 
 var operationScore = 0
 

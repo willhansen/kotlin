@@ -12,10 +12,10 @@ FILE: generatedClassWithMembersAndNestedClasses.kt
 
     }
     public final fun testConstructor(): R|kotlin/Unit| {
-        lval generatedClass: R|foo/AllOpenGenerated| = R|foo/AllOpenGenerated|()
+        lkonst generatedClass: R|foo/AllOpenGenerated| = R|foo/AllOpenGenerated|()
     }
     public final fun testNestedClasses(): R|kotlin/String| {
-        lval nestedFoo: R|foo/AllOpenGenerated.NestedFoo| = Q|foo/AllOpenGenerated|.R|foo/AllOpenGenerated.NestedFoo|()
+        lkonst nestedFoo: R|foo/AllOpenGenerated.NestedFoo| = Q|foo/AllOpenGenerated|.R|foo/AllOpenGenerated.NestedFoo|()
         ^testNestedClasses R|<local>/nestedFoo|.R|foo/AllOpenGenerated.NestedFoo.materialize|().R|bar/Foo.box|()
     }
     public final fun box(): R|kotlin/String| {

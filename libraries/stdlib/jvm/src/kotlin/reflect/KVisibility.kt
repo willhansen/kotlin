@@ -21,7 +21,7 @@ package kotlin.reflect
  * Visibility can be changed with one of the following modifiers: `public`, `protected`, `internal`, `private`.
  *
  * Note that some Java visibilities such as package-private and protected (which also gives access to items from the same package)
- * cannot be represented in Kotlin, so there's no [KVisibility] value corresponding to them.
+ * cannot be represented in Kotlin, so there's no [KVisibility] konstue corresponding to them.
  *
  * See the [Kotlin language documentation](https://kotlinlang.org/docs/reference/visibility-modifiers.html)
  * for more information.

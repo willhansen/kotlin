@@ -4,7 +4,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Int>(private val r: T) {
+konstue class R<T: Int>(private konst r: T) {
     fun test() = ok()
 
     companion object {

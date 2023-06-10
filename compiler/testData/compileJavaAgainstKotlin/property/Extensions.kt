@@ -1,9 +1,9 @@
 package test
 
-val String.val_: String
+konst String.konst_: String
     get() = ""
 
 var String.var_: String
     get() = ""
-    set(value) {
+    set(konstue) {
     }

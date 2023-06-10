@@ -10,7 +10,7 @@ expect var getAndSet: String
     <!EXPECTED_EXTERNAL_DECLARATION!>external<!> get
     <!EXPECTED_EXTERNAL_DECLARATION!>external<!> set
 
-<!EXPECTED_EXTERNAL_DECLARATION, WRONG_MODIFIER_TARGET!>external<!> expect val explicitGetter: String
+<!EXPECTED_EXTERNAL_DECLARATION, WRONG_MODIFIER_TARGET!>external<!> expect konst explicitGetter: String
     <!EXPECTED_EXTERNAL_DECLARATION!>external<!> get
 
 expect <!EXPECTED_EXTERNAL_DECLARATION, WRONG_MODIFIER_TARGET!>external<!> class A {
@@ -29,7 +29,7 @@ actual var getAndSet: String
     external get
     external set
 
-actual <!WRONG_MODIFIER_TARGET!>external<!> val explicitGetter: String
+actual <!WRONG_MODIFIER_TARGET!>external<!> konst explicitGetter: String
     external get
 
 actual class A {

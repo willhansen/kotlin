@@ -30,9 +30,9 @@ interface KotlinAndroidTargetVariantDsl {
      * Will ensure that all android instrumented tests (androidInstrumentedTest, androidInstrumentedTestDebug, ...)
      * will be placed into the 'test' SourceSet tree (with 'commonTest' as root)
      */
-    val sourceSetTree: Property<SourceSetTree>
+    konst sourceSetTree: Property<SourceSetTree>
 }
 
 internal class KotlinAndroidTargetVariantDslImpl(objects: ObjectFactory) : KotlinAndroidTargetVariantDsl {
-    override val sourceSetTree: Property<SourceSetTree> = objects.property()
+    override konst sourceSetTree: Property<SourceSetTree> = objects.property()
 }

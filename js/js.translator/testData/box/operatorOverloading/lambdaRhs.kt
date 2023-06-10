@@ -9,7 +9,7 @@ fun log(message: String) {
 }
 
 fun test1(): String {
-    val list = mutableListOf<(Int) -> Unit>()
+    konst list = mutableListOf<(Int) -> Unit>()
 
     var result = ""
     list += { log("<$it>") }

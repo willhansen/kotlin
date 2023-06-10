@@ -21,7 +21,7 @@ import testPackCase1.Case.Inv
 import testPackCase1.Case.E
 import kotlin.reflect.KProperty
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 
@@ -33,16 +33,16 @@ import libPackage.*
 import libPackage.invoke
 class Case() {
 
-    class E(val plus: Inv? = null) {
-        /*operator*/ fun plus(value: Int) = Case()
+    class E(konst plus: Inv? = null) {
+        /*operator*/ fun plus(konstue: Int) = Case()
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) = Case()
+        /*operator*/ fun invoke(konstue: Int) = Case()
     }
 
     fun foo(e: E) {
-        operator fun E.plus(value: Int) = Case()
+        operator fun E.plus(konstue: Int) = Case()
 
         run {
             <!DEBUG_INFO_CALL("fqName: testPackCase1.Case.foo.plus; typeCall: operator extension function")!>e + 1<!>
@@ -59,7 +59,7 @@ import testPackCase2.Case
 import testPackCase2.Case.Inv
 import testPackCase2.Case.E
 
-operator fun Case.E.plus(value: Int) =  Inv()
+operator fun Case.E.plus(konstue: Int) =  Inv()
 operator fun Case.Inv.invoke(i: Int) = 1
 
 
@@ -70,23 +70,23 @@ import libPackage.plus
 import libPackage.*
 import libPackage.invoke
 
-operator fun Case.E.plus(value: Int) = Case()
+operator fun Case.E.plus(konstue: Int) = Case()
 
 class Case() {
 
-    class E(val plus: Inv? = null) {
-        /*operator*/ fun plus(value: Int) = Case()
+    class E(konst plus: Inv? = null) {
+        /*operator*/ fun plus(konstue: Int) = Case()
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) = Case()
+        /*operator*/ fun invoke(konstue: Int) = Case()
     }
 
     fun foo(e: E) {
-        operator fun E.plus(value: Int) = Case()
+        operator fun E.plus(konstue: Int) = Case()
 
         run {
-            operator fun E.plus(value: Int) = Case()
+            operator fun E.plus(konstue: Int) = Case()
 
             <!DEBUG_INFO_CALL("fqName: testPackCase2.Case.foo.<anonymous>.plus; typeCall: operator extension function")!>e + 1<!>
         }
@@ -101,7 +101,7 @@ import testPackCase3.Case
 import testPackCase3.Case.Inv
 import testPackCase3.Case.E
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 operator fun Case.Inv.invoke(i: Int) {}
 
 
@@ -113,16 +113,16 @@ import libPackage.invoke
 import libPackage.*
 class Case() {
 
-    class E(val plusAssign: Inv? = null) {
-        /*operator*/ fun plusAssign(value: Int) {}
+    class E(konst plusAssign: Inv? = null) {
+        /*operator*/ fun plusAssign(konstue: Int) {}
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) {}
+        /*operator*/ fun invoke(konstue: Int) {}
     }
 
     fun foo(e: E) {
-        operator fun E.plusAssign(value: Int) {}
+        operator fun E.plusAssign(konstue: Int) {}
 
         run {
             <!DEBUG_INFO_CALL("fqName: testPackCase3.Case.foo.plusAssign; typeCall: operator extension function")!>e += 1<!>
@@ -140,7 +140,7 @@ import testPackCase4.Case
 import testPackCase4.Case.Inv
 import testPackCase4.Case.E
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 operator fun Case.Inv.invoke(i: Int) {}
 
 
@@ -151,23 +151,23 @@ import libPackage.plusAssign
 import libPackage.*
 import libPackage.invoke
 
-operator fun Case.E.plusAssign(value: Int) {}
+operator fun Case.E.plusAssign(konstue: Int) {}
 
 class Case() {
 
-    class E(val plusAssign: Inv? = null) {
-        /*operator*/ fun plusAssign(value: Int) {}
+    class E(konst plusAssign: Inv? = null) {
+        /*operator*/ fun plusAssign(konstue: Int) {}
     }
 
     class Inv() {
-        /*operator*/ fun invoke(value: Int) {}
+        /*operator*/ fun invoke(konstue: Int) {}
     }
 
     fun foo(e: E) {
-        operator fun E.plusAssign(value: Int) {}
+        operator fun E.plusAssign(konstue: Int) {}
 
         run {
-            operator fun E.plusAssign(value: Int) {}
+            operator fun E.plusAssign(konstue: Int) {}
 
             <!DEBUG_INFO_CALL("fqName: testPackCase4.Case.foo.<anonymous>.plusAssign; typeCall: operator extension function")!>e += 1<!>
         }
@@ -190,14 +190,14 @@ class Delegate {
         return ""
     }
 
-    /*operator*/ fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+    /*operator*/ fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
     }
 }
 
 operator fun Delegate.getValue(thisRef: Any?, property: KProperty<*>): String {
     return ""
 }
-operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {}
+operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {}
 
 fun case() {
     class Test {
@@ -206,11 +206,11 @@ fun case() {
         operator fun Delegate.getValue(thisRef: Any?, property: KProperty<*>): String {
             return ""
         }
-        operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+        operator fun Delegate.setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
         }
     }
-    val test = Test()
+    konst test = Test()
     test.p = "NEW"
-    val x = test.p
+    konst x = test.p
 
 }

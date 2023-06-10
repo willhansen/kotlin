@@ -34,17 +34,17 @@ data class ArgumentMapping(
     // This map should be ordered by arguments as written, e.g.:
     //      fun foo(a: Int, b: Int) {}
     //      foo(b = bar(), a = qux())
-    // parameterToCallArgumentMap.values() should be [ 'bar()', 'foo()' ]
-    val parameterToCallArgumentMap: LinkedHashMap<FirValueParameter, ResolvedCallArgument>,
-    val diagnostics: List<ResolutionDiagnostic>
+    // parameterToCallArgumentMap.konstues() should be [ 'bar()', 'foo()' ]
+    konst parameterToCallArgumentMap: LinkedHashMap<FirValueParameter, ResolvedCallArgument>,
+    konst diagnostics: List<ResolutionDiagnostic>
 ) {
     fun toArgumentToParameterMapping(): LinkedHashMap<FirExpression, FirValueParameter> {
-        val argumentToParameterMapping = linkedMapOf<FirExpression, FirValueParameter>()
-        parameterToCallArgumentMap.forEach { (valueParameter, resolvedArgument) ->
+        konst argumentToParameterMapping = linkedMapOf<FirExpression, FirValueParameter>()
+        parameterToCallArgumentMap.forEach { (konstueParameter, resolvedArgument) ->
             when (resolvedArgument) {
-                is ResolvedCallArgument.SimpleArgument -> argumentToParameterMapping[resolvedArgument.callArgument] = valueParameter
+                is ResolvedCallArgument.SimpleArgument -> argumentToParameterMapping[resolvedArgument.callArgument] = konstueParameter
                 is ResolvedCallArgument.VarargArgument -> resolvedArgument.arguments.forEach {
-                    argumentToParameterMapping[it] = valueParameter
+                    argumentToParameterMapping[it] = konstueParameter
                 }
                 ResolvedCallArgument.DefaultArgument -> {
                 }
@@ -54,11 +54,11 @@ data class ArgumentMapping(
     }
 
     fun numDefaults(): Int {
-        return parameterToCallArgumentMap.values.count { it == ResolvedCallArgument.DefaultArgument }
+        return parameterToCallArgumentMap.konstues.count { it == ResolvedCallArgument.DefaultArgument }
     }
 }
 
-private val EmptyArgumentMapping = ArgumentMapping(linkedMapOf(), emptyList())
+private konst EmptyArgumentMapping = ArgumentMapping(linkedMapOf(), emptyList())
 
 fun BodyResolveComponents.mapArguments(
     arguments: List<FirExpression>,
@@ -66,12 +66,12 @@ fun BodyResolveComponents.mapArguments(
     originScope: FirScope?,
     callSiteIsOperatorCall: Boolean
 ): ArgumentMapping {
-    if (arguments.isEmpty() && function.valueParameters.isEmpty()) {
+    if (arguments.isEmpty() && function.konstueParameters.isEmpty()) {
         return EmptyArgumentMapping
     }
 
-    val nonLambdaArguments: MutableList<FirExpression> = mutableListOf()
-    val excessLambdaArguments: MutableList<FirExpression> = mutableListOf()
+    konst nonLambdaArguments: MutableList<FirExpression> = mutableListOf()
+    konst excessLambdaArguments: MutableList<FirExpression> = mutableListOf()
     var externalArgument: FirExpression? = null
     for (argument in arguments) {
         if (argument is FirLambdaArgumentExpression) {
@@ -85,31 +85,31 @@ fun BodyResolveComponents.mapArguments(
         }
     }
 
-    // If this is an indexed access set operator, it could have default values or a vararg parameter in the middle.
-    // For proper argument mapping, wrap the last one, which is supposed to be the updated value, as a named argument.
-    val isIndexedSetOperator = callSiteIsOperatorCall
+    // If this is an indexed access set operator, it could have default konstues or a vararg parameter in the middle.
+    // For proper argument mapping, wrap the last one, which is supposed to be the updated konstue, as a named argument.
+    konst isIndexedSetOperator = callSiteIsOperatorCall
             && function is FirSimpleFunction
             && function.isOperator
             && function.name == OperatorNameConventions.SET
             && function.origin !is FirDeclarationOrigin.DynamicScope
 
     if (isIndexedSetOperator &&
-        function.valueParameters.any { it.defaultValue != null || it.isVararg }
+        function.konstueParameters.any { it.defaultValue != null || it.isVararg }
     ) {
-        val v = nonLambdaArguments.last()
+        konst v = nonLambdaArguments.last()
         if (v !is FirNamedArgumentExpression) {
-            val namedV = buildNamedArgumentExpression {
+            konst namedV = buildNamedArgumentExpression {
                 source = v.source
                 expression = v
                 isSpread = false
-                name = function.valueParameters.last().name
+                name = function.konstueParameters.last().name
             }
             nonLambdaArguments.removeAt(nonLambdaArguments.size - 1)
             nonLambdaArguments.add(namedV)
         }
     }
 
-    val processor = FirCallArgumentsProcessor(session, function, this, originScope, isIndexedSetOperator)
+    konst processor = FirCallArgumentsProcessor(session, function, this, originScope, isIndexedSetOperator)
     processor.processNonLambdaArguments(nonLambdaArguments)
     if (externalArgument != null) {
         processor.processExternalArgument(externalArgument)
@@ -121,11 +121,11 @@ fun BodyResolveComponents.mapArguments(
 }
 
 private class FirCallArgumentsProcessor(
-    private val useSiteSession: FirSession,
-    private val function: FirFunction,
-    private val bodyResolveComponents: BodyResolveComponents,
-    private val originScope: FirScope?,
-    private val isIndexedSetOperator: Boolean
+    private konst useSiteSession: FirSession,
+    private konst function: FirFunction,
+    private konst bodyResolveComponents: BodyResolveComponents,
+    private konst originScope: FirScope?,
+    private konst isIndexedSetOperator: Boolean
 ) {
     private var state = State.POSITION_ARGUMENTS
     private var currentPositionedParameterIndex = 0
@@ -133,9 +133,9 @@ private class FirCallArgumentsProcessor(
     private var nameToParameter: Map<Name, FirValueParameter>? = null
     var diagnostics: MutableList<ResolutionDiagnostic>? = null
         private set
-    val result: LinkedHashMap<FirValueParameter, ResolvedCallArgument> = LinkedHashMap(function.valueParameters.size)
+    konst result: LinkedHashMap<FirValueParameter, ResolvedCallArgument> = LinkedHashMap(function.konstueParameters.size)
 
-    val forbiddenNamedArgumentsTarget: ForbiddenNamedArgumentsTarget? by lazy {
+    konst forbiddenNamedArgumentsTarget: ForbiddenNamedArgumentsTarget? by lazy {
         function.getAsForbiddenNamedArgumentsTarget(useSiteSession, originScope as? FirTypeScope)
     }
 
@@ -150,7 +150,7 @@ private class FirCallArgumentsProcessor(
             if (argument is FirVarargArgumentsExpression) {
                 // If the argument list was already resolved, any arguments for a vararg parameter will be in a FirVarargArgumentsExpression.
                 // This can happen when getting all the candidates for an already resolved function call.
-                val varargArguments = argument.arguments
+                konst varargArguments = argument.arguments
                 for ((varargArgumentIndex, varargArgument) in varargArguments.withIndex()) {
                     processNonLambdaArgument(
                         varargArgument,
@@ -196,14 +196,14 @@ private class FirCallArgumentsProcessor(
             return false
         }
 
-        // The last parameter of an indexed set operator should be reserved for the last argument (the assigned value).
-        // We don't want the assigned value mapped to an index parameter if some of the index arguments are absent.
-        val assignedParameterIndex = if (isIndexedSetOperator) {
-            val lastParameterIndex = parameters.lastIndex
+        // The last parameter of an indexed set operator should be reserved for the last argument (the assigned konstue).
+        // We don't want the assigned konstue mapped to an index parameter if some of the index arguments are absent.
+        konst assignedParameterIndex = if (isIndexedSetOperator) {
+            konst lastParameterIndex = parameters.lastIndex
             when {
                 isLastArgument -> lastParameterIndex
                 currentPositionedParameterIndex >= lastParameterIndex -> {
-                    // This is an extra index argument that should NOT be mapped to the parameter for the assigned value.
+                    // This is an extra index argument that should NOT be mapped to the parameter for the assigned konstue.
                     -1
                 }
                 else -> {
@@ -214,7 +214,7 @@ private class FirCallArgumentsProcessor(
         } else {
             currentPositionedParameterIndex
         }
-        val parameter = parameters.getOrNull(assignedParameterIndex)
+        konst parameter = parameters.getOrNull(assignedParameterIndex)
         if (parameter == null) {
             addDiagnostic(TooManyArguments(argument, function))
             return false
@@ -238,9 +238,9 @@ private class FirCallArgumentsProcessor(
             addDiagnostic(NamedArgumentNotAllowed(argument, function, it))
         }
 
-        val stateAllowsMixedNamedAndPositionArguments = state != State.NAMED_ONLY_ARGUMENTS
+        konst stateAllowsMixedNamedAndPositionArguments = state != State.NAMED_ONLY_ARGUMENTS
         state = State.NAMED_ONLY_ARGUMENTS
-        val parameter = findParameterByName(argument) ?: return
+        konst parameter = findParameterByName(argument) ?: return
 
         result[parameter]?.let {
             addDiagnostic(ArgumentPassedTwice(argument, parameter, it))
@@ -256,7 +256,7 @@ private class FirCallArgumentsProcessor(
     }
 
     fun processExternalArgument(externalArgument: FirExpression) {
-        val lastParameter = parameters.lastOrNull()
+        konst lastParameter = parameters.lastOrNull()
         if (lastParameter == null) {
             addDiagnostic(TooManyArguments(externalArgument, function))
             return
@@ -268,7 +268,7 @@ private class FirCallArgumentsProcessor(
                 return
             }
 
-            val previousOccurrence = result[lastParameter]
+            konst previousOccurrence = result[lastParameter]
             if (previousOccurrence != null) {
                 addDiagnostic(TooManyArguments(externalArgument, function))
                 return
@@ -276,7 +276,7 @@ private class FirCallArgumentsProcessor(
 
             result[lastParameter] = ResolvedCallArgument.SimpleArgument(externalArgument)
         } else {
-            val existing = result[lastParameter]
+            konst existing = result[lastParameter]
             if (existing == null) {
                 result[lastParameter] = ResolvedCallArgument.SimpleArgument(externalArgument)
             } else {
@@ -319,7 +319,7 @@ private class FirCallArgumentsProcessor(
 
     private fun completeVarargPositionArguments() {
         assert(state == State.VARARG_POSITION) { "Incorrect state: $state" }
-        val parameter = parameters[currentPositionedParameterIndex]
+        konst parameter = parameters[currentPositionedParameterIndex]
         result[parameter] = ResolvedCallArgument.VarargArgument(varargArguments!!)
     }
 
@@ -340,13 +340,13 @@ private class FirCallArgumentsProcessor(
     private fun findParameterByName(argument: FirNamedArgumentExpression): FirValueParameter? {
         var parameter = getParameterByName(argument.name)
 
-        val symbol = function.symbol as? FirNamedFunctionSymbol
+        konst symbol = function.symbol as? FirNamedFunctionSymbol
         var matchedIndex = -1
 
         // Note: should be called when parameter != null && matchedIndex != -1
         fun List<FirValueParameterSymbol>.findAndReportValueParameterWithDifferentName(): ProcessorAction {
-            val someParameter = getOrNull(matchedIndex)?.fir
-            val someName = someParameter?.name
+            konst someParameter = getOrNull(matchedIndex)?.fir
+            konst someName = someParameter?.name
             if (someName != null && someName != argument.name) {
                 addDiagnostic(
                     NameForAmbiguousParameter(argument, matchedParameter = parameter!!, someParameter)
@@ -363,7 +363,7 @@ private class FirCallArgumentsProcessor(
                     if (it.fir.getAsForbiddenNamedArgumentsTarget(useSiteSession) != null) {
                         return@processOverriddenFunctions ProcessorAction.NEXT
                     }
-                    val someParameterSymbols = it.valueParameterSymbols
+                    konst someParameterSymbols = it.konstueParameterSymbols
                     if (matchedIndex != -1) {
                         someParameterSymbols.findAndReportValueParameterWithDifferentName()
                     } else {
@@ -372,7 +372,7 @@ private class FirCallArgumentsProcessor(
                         }
                         if (matchedIndex != -1) {
                             parameter = parameters[matchedIndex]
-                            val someParameter = allowedParameters?.getOrNull(matchedIndex)?.fir
+                            konst someParameter = allowedParameters?.getOrNull(matchedIndex)?.fir
                             if (someParameter != null) {
                                 addDiagnostic(
                                     NameForAmbiguousParameter(argument, matchedParameter = parameter!!, anotherParameter = someParameter)
@@ -401,7 +401,7 @@ private class FirCallArgumentsProcessor(
                         if (it.fir.getAsForbiddenNamedArgumentsTarget(useSiteSession) != null) {
                             return@processOverriddenFunctions ProcessorAction.NEXT
                         }
-                        it.valueParameterSymbols.findAndReportValueParameterWithDifferentName()
+                        it.konstueParameterSymbols.findAndReportValueParameterWithDifferentName()
                     }
                 }
             }
@@ -417,9 +417,9 @@ private class FirCallArgumentsProcessor(
         diagnostics!!.add(diagnostic)
     }
 
-    private val FirExpression.isSpread: Boolean
+    private konst FirExpression.isSpread: Boolean
         get() = this is FirWrappedArgumentExpression && isSpread
 
-    private val parameters: List<FirValueParameter>
-        get() = function.valueParameters
+    private konst parameters: List<FirValueParameter>
+        get() = function.konstueParameters
 }

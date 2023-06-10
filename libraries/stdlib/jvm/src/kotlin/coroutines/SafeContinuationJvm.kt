@@ -13,13 +13,13 @@ import kotlin.coroutines.jvm.internal.CoroutineStackFrame
 @SinceKotlin("1.3")
 internal actual class SafeContinuation<in T>
 internal actual constructor(
-    private val delegate: Continuation<T>,
+    private konst delegate: Continuation<T>,
     initialResult: Any?
 ) : Continuation<T>, CoroutineStackFrame {
     @PublishedApi
     internal actual constructor(delegate: Continuation<T>) : this(delegate, UNDECIDED)
 
-    public actual override val context: CoroutineContext
+    public actual override konst context: CoroutineContext
         get() = delegate.context
 
     @Volatile
@@ -27,16 +27,16 @@ internal actual constructor(
 
     private companion object {
         @Suppress("UNCHECKED_CAST")
-        private val RESULT = AtomicReferenceFieldUpdater.newUpdater<SafeContinuation<*>, Any?>(
+        private konst RESULT = AtomicReferenceFieldUpdater.newUpdater<SafeContinuation<*>, Any?>(
             SafeContinuation::class.java, Any::class.java as Class<Any?>, "result"
         )
     }
 
     public actual override fun resumeWith(result: Result<T>) {
         while (true) { // lock-free loop
-            val cur = this.result // atomic read
+            konst cur = this.result // atomic read
             when {
-                cur === UNDECIDED -> if (RESULT.compareAndSet(this, UNDECIDED, result.value)) return
+                cur === UNDECIDED -> if (RESULT.compareAndSet(this, UNDECIDED, result.konstue)) return
                 cur === COROUTINE_SUSPENDED -> if (RESULT.compareAndSet(this, COROUTINE_SUSPENDED, RESUMED)) {
                     delegate.resumeWith(result)
                     return
@@ -62,7 +62,7 @@ internal actual constructor(
 
     // --- CoroutineStackFrame implementation
 
-    public override val callerFrame: CoroutineStackFrame?
+    public override konst callerFrame: CoroutineStackFrame?
         get() = delegate as? CoroutineStackFrame
 
     override fun getStackTraceElement(): StackTraceElement? =

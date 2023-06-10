@@ -16,8 +16,8 @@ import test.*
 fun box(): String {
     var z = "fail"
     inlineFun {
-        val obj = object  {
-            val _delegate by lazy {
+        konst obj = object  {
+            konst _delegate by lazy {
                 z = "OK"
             }
         }

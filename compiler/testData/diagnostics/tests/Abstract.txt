@@ -4,8 +4,8 @@ public fun foo(/*0*/ c: B3): kotlin.Unit
 
 public abstract class B1 {
     public constructor B1(/*0*/ i: kotlin.Int, /*1*/ s: kotlin.String)
-    public final val i: kotlin.Int
-    public final val s: kotlin.String
+    public final konst i: kotlin.Int
+    public final konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -13,8 +13,8 @@ public abstract class B1 {
 
 public final class B2 : B1 {
     public constructor B2()
-    public final override /*1*/ /*fake_override*/ val i: kotlin.Int
-    public final override /*1*/ /*fake_override*/ val s: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst i: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst s: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -28,10 +28,10 @@ public abstract class B3 {
 }
 
 package MyPackage {
-    public val a: kotlin.Int
-    public val a1: kotlin.Int = 1
-    public val a2: kotlin.Int
-    public val a3: kotlin.Int = 1
+    public konst a: kotlin.Int
+    public konst a1: kotlin.Int = 1
+    public konst a2: kotlin.Int
+    public konst a3: kotlin.Int = 1
     public var b: kotlin.Int
     public var b1: kotlin.Int
     public var b2: kotlin.Int
@@ -40,10 +40,10 @@ package MyPackage {
     public var c1: kotlin.Int
     public var c2: kotlin.Int
     public var c3: kotlin.Int
-    public val e: kotlin.Int
-    public val e1: kotlin.Int = 0
-    public val e2: kotlin.Int
-    public val e3: kotlin.Int = 0
+    public konst e: kotlin.Int
+    public konst e1: kotlin.Int = 0
+    public konst e2: kotlin.Int
+    public konst e3: kotlin.Int = 0
     public var i: kotlin.Int
     public var i1: kotlin.Int
     public var j: kotlin.Int

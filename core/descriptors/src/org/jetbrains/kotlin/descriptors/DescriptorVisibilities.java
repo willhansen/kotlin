@@ -91,14 +91,14 @@ public class DescriptorVisibilities {
     /**
      * This visibility is needed for the next case:
      *  class A<in T>(t: T) {
-     *      private val t: T = t // visibility for t is PRIVATE_TO_THIS
+     *      private konst t: T = t // visibility for t is PRIVATE_TO_THIS
      *
      *      fun test() {
-     *          val x: T = t // correct
-     *          val y: T = this.t // also correct
+     *          konst x: T = t // correct
+     *          konst y: T = this.t // also correct
      *      }
      *      fun foo(a: A<String>) {
-     *         val x: String = a.t // incorrect, because a.t can be Any
+     *         konst x: String = a.t // incorrect, because a.t can be Any
      *      }
      *  }
      */
@@ -393,7 +393,7 @@ public class DescriptorVisibilities {
     public static final DescriptorVisibility DEFAULT_VISIBILITY = PUBLIC;
 
     /**
-     * This value should be used for receiverValue parameter of Visibility.isVisible
+     * This konstue should be used for receiverValue parameter of Visibility.isVisible
      * iff there is intention to determine if member is visible for any receiver.
      */
     private static final ReceiverValue IRRELEVANT_RECEIVER = new ReceiverValue() {
@@ -417,7 +417,7 @@ public class DescriptorVisibilities {
     };
 
     /**
-     * This value should be used for receiverValue parameter of Visibility.isVisible
+     * This konstue should be used for receiverValue parameter of Visibility.isVisible
      * iff there is intention to determine if member is visible without receiver related checks being performed.
      */
     public static final ReceiverValue ALWAYS_SUITABLE_RECEIVER = new ReceiverValue() {

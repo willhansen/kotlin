@@ -7,7 +7,7 @@ KtFunctionSymbol:
   contextReceivers: []
   contractEffects: [
     KtContractCallsInPlaceContractEffectDeclaration:
-      valueParameterReference:
+      konstueParameterReference:
         KtContractParameterValue:
           parameterSymbol:
             KtValueParameterSymbol:
@@ -59,7 +59,7 @@ KtFunctionSymbol:
     type: kotlin/Unit
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

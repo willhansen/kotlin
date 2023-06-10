@@ -15,7 +15,7 @@
  */
 package org.jetbrains.kotlin.test
 
-enum class TestJdkKind(val requiresSeparateProcess: Boolean = false) {
+enum class TestJdkKind(konst requiresSeparateProcess: Boolean = false) {
     MOCK_JDK,
 
     // Differs from common mock JDK only by one additional 'nonExistingMethod' in Collection and constructor from Double in Throwable

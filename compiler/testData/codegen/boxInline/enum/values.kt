@@ -4,8 +4,8 @@
 package test
 
 inline fun <reified T : Enum<T>> myValues(): String {
-    val values = enumValues<T>()
-    return values.joinToString("")
+    konst konstues = enumValues<T>()
+    return konstues.joinToString("")
 }
 
 enum class Z {

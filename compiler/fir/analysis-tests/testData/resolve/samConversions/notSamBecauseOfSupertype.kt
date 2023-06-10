@@ -24,7 +24,7 @@ fun main() {
 
     JavaUsage.foo(<!ARGUMENT_TYPE_MISMATCH!>{ <!UNRESOLVED_REFERENCE!>it<!> > 1 }<!>)
 
-    val x = { x: Int -> x > 1 }
+    konst x = { x: Int -> x > 1 }
 
     JavaUsage.foo(<!ARGUMENT_TYPE_MISMATCH!>x<!>)
 }

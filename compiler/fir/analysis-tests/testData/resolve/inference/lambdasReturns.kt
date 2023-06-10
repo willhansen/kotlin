@@ -5,8 +5,8 @@ fun <R> myRun(b: () -> R): R = b()
 fun <T> materialize(): T = TODO()
 
 fun foo(x: String?) {
-    val r = myRun {
-        val y = x ?: return@myRun materialize()
+    konst r = myRun {
+        konst y = x ?: return@myRun materialize()
         y.length
     }
 

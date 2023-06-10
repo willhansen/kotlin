@@ -2,7 +2,7 @@
 // It's important to keep these names until we fix the binary compatibility issue KT-49030.
 
 operator fun String.getValue(thisRef: Any?, prop: Any?): String = this
-operator fun String.setValue(thisRef: Any?, prop: Any?, value: String) {}
+operator fun String.setValue(thisRef: Any?, prop: Any?, konstue: String) {}
 
 inline fun foo(): String {
     var x by "OK"

@@ -23,9 +23,9 @@ import org.jetbrains.kotlin.fir.resolve.transformers.body.resolve.ImplicitBodyRe
 internal abstract class LLFirAbstractBodyTargetResolver(
     resolveTarget: LLFirResolveTarget,
     lockProvider: LLFirLockProvider,
-    private val scopeSession: ScopeSession,
+    private konst scopeSession: ScopeSession,
     resolvePhase: FirResolvePhase,
-    protected val implicitBodyResolveComputationSession: ImplicitBodyResolveComputationSession = ImplicitBodyResolveComputationSession(),
+    protected konst implicitBodyResolveComputationSession: ImplicitBodyResolveComputationSession = ImplicitBodyResolveComputationSession(),
     isJumpingPhase: Boolean = false
 ) : LLFirTargetResolver(resolveTarget, lockProvider, resolvePhase, isJumpingPhase) {
     protected fun createReturnTypeCalculator(
@@ -37,7 +37,7 @@ internal abstract class LLFirAbstractBodyTargetResolver(
         towerDataContextCollector,
     )
 
-    abstract val transformer: FirAbstractBodyResolveTransformerDispatcher
+    abstract konst transformer: FirAbstractBodyResolveTransformerDispatcher
 
     override fun checkResolveConsistency() {
         check(resolverPhase == transformer.transformerPhase) {
@@ -62,7 +62,7 @@ internal abstract class LLFirAbstractBodyTargetResolver(
     }
 
     protected fun calculateLazyBodies(declaration: FirElementWithResolveState) {
-        val firDesignation = FirDesignationWithFile(nestedClassesStack, declaration, resolveTarget.firFile)
+        konst firDesignation = FirDesignationWithFile(nestedClassesStack, declaration, resolveTarget.firFile)
         FirLazyBodiesCalculator.calculateBodies(firDesignation)
     }
 }

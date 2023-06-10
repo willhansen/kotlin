@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 import org.jetbrains.kotlin.name.Name
 
 class SyntheticFieldDescriptor private constructor(
-    val propertyDescriptor: PropertyDescriptor,
+    konst propertyDescriptor: PropertyDescriptor,
     accessorDescriptor: PropertyAccessorDescriptor,
     sourceElement: SourceElement
 ) : LocalVariableDescriptor(
@@ -39,17 +39,17 @@ class SyntheticFieldDescriptor private constructor(
 
     override fun getDispatchReceiverParameter() = null
 
-    fun getDispatchReceiverForBackend() = getDispatchReceiverParameterForBackend()?.value
+    fun getDispatchReceiverForBackend() = getDispatchReceiverParameterForBackend()?.konstue
 
     fun getDispatchReceiverParameterForBackend() = propertyDescriptor.dispatchReceiverParameter
 
     companion object {
         @JvmField
-        val NAME = Name.identifier("field")
+        konst NAME = Name.identifier("field")
     }
 }
 
-val DeclarationDescriptor.referencedProperty: PropertyDescriptor?
+konst DeclarationDescriptor.referencedProperty: PropertyDescriptor?
     get() = when (this) {
         is SyntheticFieldDescriptor -> this.propertyDescriptor
         is PropertyDescriptor -> this

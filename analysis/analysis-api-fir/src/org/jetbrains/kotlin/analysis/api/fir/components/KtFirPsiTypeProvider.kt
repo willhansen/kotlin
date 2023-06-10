@@ -45,8 +45,8 @@ import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 import java.text.StringCharacterIterator
 
 internal class KtFirPsiTypeProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtPsiTypeProvider(), KtFirAnalysisSessionComponent {
 
     override fun asPsiTypeElement(
@@ -56,7 +56,7 @@ internal class KtFirPsiTypeProvider(
         isAnnotationMethod: Boolean,
         allowErrorTypes: Boolean
     ): PsiTypeElement? {
-        val coneType = type.coneType
+        konst coneType = type.coneType
 
         with(rootModuleSession.typeContext) {
             if (!allowErrorTypes && coneType.contains { it.isError() }) {
@@ -89,13 +89,13 @@ private fun ConeKotlinType.simplifyType(
     session: FirSession,
     useSitePosition: PsiElement,
 ): ConeKotlinType {
-    val substitutor = AnonymousTypesSubstitutor(session)
-    val visibilityForApproximation = useSitePosition.visibilityForApproximation
+    konst substitutor = AnonymousTypesSubstitutor(session)
+    konst visibilityForApproximation = useSitePosition.visibilityForApproximation
     // TODO: See if the given [useSitePosition] is an `inline` method
-    val isInlineFunction = false
+    konst isInlineFunction = false
     var currentType = this
     do {
-        val oldType = currentType
+        konst oldType = currentType
         currentType = currentType.fullyExpandedType(session)
         if (currentType is ConeDynamicType) {
             return currentType
@@ -104,7 +104,7 @@ private fun ConeKotlinType.simplifyType(
         if (visibilityForApproximation != Visibilities.Local) {
             currentType = substitutor.substituteOrSelf(currentType)
         }
-        val needLocalTypeApproximation = needLocalTypeApproximation(visibilityForApproximation, isInlineFunction, session, useSitePosition)
+        konst needLocalTypeApproximation = needLocalTypeApproximation(visibilityForApproximation, isInlineFunction, session, useSitePosition)
         // TODO: can we approximate local types in type arguments *selectively* ?
         currentType = PublicTypeApproximator.approximateTypeToPublicDenotable(currentType, session, needLocalTypeApproximation)
             ?: currentType
@@ -123,33 +123,33 @@ private fun ConeKotlinType.needLocalTypeApproximation(
     useSitePosition: PsiElement
 ): Boolean {
     if (!shouldApproximateAnonymousTypesOfNonLocalDeclaration(visibilityForApproximation, isInlineFunction)) return false
-    val localTypes: List<ConeKotlinType> = if (isLocal(session)) listOf(this) else {
+    konst localTypes: List<ConeKotlinType> = if (isLocal(session)) listOf(this) else {
         typeArguments.mapNotNull {
             if (it is ConeKotlinTypeProjection && it.type.isLocal(session)) {
                 it.type
             } else null
         }
     }
-    val unavailableLocalTypes = localTypes.filterNot { it.isLocalButAvailableAtPosition(session, useSitePosition) }
+    konst unavailableLocalTypes = localTypes.filterNot { it.isLocalButAvailableAtPosition(session, useSitePosition) }
     // Need to approximate if there are local types that are not available in this scope
     return localTypes.isNotEmpty() && unavailableLocalTypes.isNotEmpty()
 }
 
 // Mimic FirDeclaration.visibilityForApproximation
-private val PsiElement.visibilityForApproximation: Visibility
+private konst PsiElement.visibilityForApproximation: Visibility
     get() {
         if (this !is PsiMember) return Visibilities.Local
-        val containerVisibility =
+        konst containerVisibility =
             if (parent is KtLightClassForFacade) Visibilities.Public
             else (parent as? PsiClass)?.visibility ?: Visibilities.Local
-        val visibility = visibility
+        konst visibility = visibility
         if (containerVisibility == Visibilities.Local || visibility == Visibilities.Local) return Visibilities.Local
         if (containerVisibility == Visibilities.Private) return Visibilities.Private
         return visibility
     }
 
 // Mimic JavaElementUtil#getVisibility
-private val PsiModifierListOwner.visibility: Visibility
+private konst PsiModifierListOwner.visibility: Visibility
     get() {
         if (parents.any { it is PsiMethod }) return Visibilities.Local
         if (hasModifierProperty(PsiModifier.PUBLIC)) {
@@ -180,9 +180,9 @@ private fun ConeKotlinType.isLocalButAvailableAtPosition(
     session: FirSession,
     useSitePosition: PsiElement,
 ): Boolean {
-    val localClassSymbol = this.toRegularClassSymbol(session) ?: return false
-    val localPsi = localClassSymbol.source?.psi ?: return false
-    val context = (useSitePosition as? KtLightElement<*, *>)?.kotlinOrigin ?: useSitePosition
+    konst localClassSymbol = this.toRegularClassSymbol(session) ?: return false
+    konst localPsi = localClassSymbol.source?.psi ?: return false
+    konst context = (useSitePosition as? KtLightElement<*, *>)?.kotlinOrigin ?: useSitePosition
     // Local type is available if it's inside the same context (containing declaration)
     // or containing declaration is inside the local type, e.g., a member of the local class
     return localPsi == context ||
@@ -202,45 +202,45 @@ private fun ConeKotlinType.asPsiTypeElement(
 
     (this as? ConeClassLikeType)?.lookupTag?.toSymbol(session)?.lazyResolveToPhase(FirResolvePhase.STATUS)
 
-    val signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
+    konst signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
 
     //TODO Check thread safety
     session.jvmTypeMapper.mapType(this, mode, signatureWriter) {
-        val containingFile = useSitePosition.containingKtFile
+        konst containingFile = useSitePosition.containingKtFile
         // parameters for default setters does not have kotlin origin, but setter has
             ?: (useSitePosition as? KtLightParameter)?.parent?.parent?.containingKtFile
             ?: return@mapType null
-        val correspondingImport = containingFile.findImportByAlias(it) ?: return@mapType null
+        konst correspondingImport = containingFile.findImportByAlias(it) ?: return@mapType null
         correspondingImport.importPath?.pathStr
     }
 
-    val canonicalSignature = signatureWriter.toString()
+    konst canonicalSignature = signatureWriter.toString()
     require(!canonicalSignature.contains(SpecialNames.ANONYMOUS_STRING))
 
     if (canonicalSignature.contains("L<error>")) return null
     if (canonicalSignature.contains(SpecialNames.NO_NAME_PROVIDED.asString())) return null
 
-    val signature = StringCharacterIterator(canonicalSignature)
-    val javaType = SignatureParsing.parseTypeString(signature, StubBuildingVisitor.GUESSING_MAPPER)
-    val typeInfo = TypeInfo.fromString(javaType, false)
-    val typeText = TypeInfo.createTypeText(typeInfo) ?: return null
+    konst signature = StringCharacterIterator(canonicalSignature)
+    konst javaType = SignatureParsing.parseTypeString(signature, StubBuildingVisitor.GUESSING_MAPPER)
+    konst typeInfo = TypeInfo.fromString(javaType, false)
+    konst typeText = TypeInfo.createTypeText(typeInfo) ?: return null
 
     return ClsTypeElementImpl(useSitePosition, typeText, '\u0000')
 }
 
-private val PsiElement.containingKtFile: KtFile?
+private konst PsiElement.containingKtFile: KtFile?
     get() = (this as? KtLightElement<*, *>)?.kotlinOrigin?.containingKtFile
 
 private class AnonymousTypesSubstitutor(
-    private val session: FirSession,
+    private konst session: FirSession,
 ) : AbstractConeSubstitutor(session.typeContext) {
     override fun substituteType(type: ConeKotlinType): ConeKotlinType? {
         if (type !is ConeClassLikeType) return null
 
-        val hasStableName = type.classId?.isLocal == true
+        konst hasStableName = type.classId?.isLocal == true
         if (!hasStableName) return null
 
-        val firClassNode = type.lookupTag.toSymbol(session) as? FirClassSymbol
+        konst firClassNode = type.lookupTag.toSymbol(session) as? FirClassSymbol
         if (firClassNode != null) {
             firClassNode.resolvedSuperTypes.singleOrNull()?.let { return it }
         }

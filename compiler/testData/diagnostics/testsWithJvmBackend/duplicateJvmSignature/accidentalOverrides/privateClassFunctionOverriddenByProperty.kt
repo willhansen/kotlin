@@ -4,6 +4,6 @@ open class B {
 }
 
 class C : B() {
-    val x: Int
+    konst x: Int
         get() = 1
 }

@@ -14,7 +14,7 @@ import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 import kotlin.reflect.full.primaryConstructor
 import kotlin.script.experimental.api.ResultWithDiagnostics
-import kotlin.script.experimental.api.valueOrThrow
+import kotlin.script.experimental.api.konstueOrThrow
 import kotlin.script.experimental.dependencies.*
 import kotlin.script.experimental.dependencies.impl.DependenciesResolverOptionsName
 import kotlin.script.experimental.dependencies.impl.SimpleExternalDependenciesResolverOptionsParser
@@ -34,12 +34,12 @@ class MavenResolverTest : ResolversTestBase() {
         contract {
             callsInPlace(checkBody, InvocationKind.EXACTLY_ONCE)
         }
-        val resolver = MavenDependenciesResolver()
-        val result = runBlocking { resolver.resolve(coordinates, options) }
+        konst resolver = MavenDependenciesResolver()
+        konst result = runBlocking { resolver.resolve(coordinates, options) }
         if (result is ResultWithDiagnostics.Failure) {
             Assert.fail(result.reports.joinToString("\n") { it.exception?.toString() ?: it.message })
         }
-        val files = result.valueOrThrow()
+        konst files = result.konstueOrThrow()
         if (!checkBody(files)) {
             Assert.fail("Unexpected resolving results:\n  ${files.joinToString("\n  ")}")
         }
@@ -52,12 +52,12 @@ class MavenResolverTest : ResolversTestBase() {
         })
     }
 
-    private fun parseOptions(options: String) = SimpleExternalDependenciesResolverOptionsParser(options).valueOrThrow()
+    private fun parseOptions(options: String) = SimpleExternalDependenciesResolverOptionsParser(options).konstueOrThrow()
 
-    private val resolvedKotlinVersion = "1.5.31"
+    private konst resolvedKotlinVersion = "1.5.31"
 
     fun testDefaultSettings() {
-        val settings = createMavenSettings()
+        konst settings = createMavenSettings()
         assertNotNull(settings.localRepository)
     }
 
@@ -69,9 +69,9 @@ class MavenResolverTest : ResolversTestBase() {
 
     fun testResolveWithRuntime() {
         // Need a minimal library with an extra runtime dependency
-        val lib = "org.jetbrains.kotlin:kotlin-util-io:$resolvedKotlinVersion"
-        val compileOnlyFiles = resolveAndCheck(lib, buildOptions(DependenciesResolverOptionsName.SCOPE to "compile"))
-        val compileRuntimeFiles = resolveAndCheck(lib, buildOptions(DependenciesResolverOptionsName.SCOPE to "compile,runtime"))
+        konst lib = "org.jetbrains.kotlin:kotlin-util-io:$resolvedKotlinVersion"
+        konst compileOnlyFiles = resolveAndCheck(lib, buildOptions(DependenciesResolverOptionsName.SCOPE to "compile"))
+        konst compileRuntimeFiles = resolveAndCheck(lib, buildOptions(DependenciesResolverOptionsName.SCOPE to "compile,runtime"))
 
         assertTrue(
             "Compile only dependencies count should be less than compile + runtime\n" +
@@ -82,7 +82,7 @@ class MavenResolverTest : ResolversTestBase() {
     }
 
     fun testTransitiveOption() {
-        val dependency = "junit:junit:4.11"
+        konst dependency = "junit:junit:4.11"
 
         var transitiveFiles: Iterable<File>
 
@@ -97,9 +97,9 @@ class MavenResolverTest : ResolversTestBase() {
             true
         }
 
-        val tCount = transitiveFiles.count()
-        val ntCount = nonTransitiveFiles.count()
-        val artifact = nonTransitiveFiles.single()
+        konst tCount = transitiveFiles.count()
+        konst ntCount = nonTransitiveFiles.count()
+        konst artifact = nonTransitiveFiles.single()
 
         assertTrue(ntCount < tCount)
         assertEquals("jar", artifact.extension)
@@ -129,32 +129,32 @@ class MavenResolverTest : ResolversTestBase() {
     // TODO: find a way to enable it back
     @Ignore
     fun ignore_testAuth() {
-        val resolver = MavenDependenciesResolver()
-        val options = buildOptions(
+        konst resolver = MavenDependenciesResolver()
+        konst options = buildOptions(
             DependenciesResolverOptionsName.USERNAME to "<FirstName.LastName>",
             DependenciesResolverOptionsName.PASSWORD to "<Space token>",
         )
         resolver.addRepository("https://packages.jetbrains.team/maven/p/crl/maven/", options)
-        val files = runBlocking {
+        konst files = runBlocking {
             resolver.resolve("com.jetbrains:space-sdk:1.0-dev")
-        }.valueOrThrow()
+        }.konstueOrThrow()
         assertTrue(files.any { it.name.startsWith("space-sdk") })
     }
 
     fun testAuthFailure() {
-        val resolver = MavenDependenciesResolver()
-        val options = buildOptions(
-            DependenciesResolverOptionsName.USERNAME to "invalid name",
-            DependenciesResolverOptionsName.PASSWORD to "invalid password",
+        konst resolver = MavenDependenciesResolver()
+        konst options = buildOptions(
+            DependenciesResolverOptionsName.USERNAME to "inkonstid name",
+            DependenciesResolverOptionsName.PASSWORD to "inkonstid password",
         )
         resolver.addRepository("https://packages.jetbrains.team/maven/p/crl/maven/", options)
         // If the real space-sdk is in Maven Local, test will not fail
-        val result = runBlocking {
+        konst result = runBlocking {
             resolver.resolve("com.jetbrains:fake-space-sdk:1.0-dev")
         } as ResultWithDiagnostics.Failure
 
         assertEquals(1, result.reports.size)
-        val diagnostic = result.reports.single()
+        konst diagnostic = result.reports.single()
         assertEquals(
             "ArtifactResolutionException: Could not transfer artifact com.jetbrains:fake-space-sdk:pom:1.0-dev " +
                     "from/to https___packages.jetbrains.team_maven_p_crl_maven_ (https://packages.jetbrains.team/maven/p/crl/maven/): " +
@@ -166,14 +166,14 @@ class MavenResolverTest : ResolversTestBase() {
     }
 
     fun testAuthIncorrectEnvUsage() {
-        val resolver = MavenDependenciesResolver()
-        val options = buildOptions(
+        konst resolver = MavenDependenciesResolver()
+        konst options = buildOptions(
             DependenciesResolverOptionsName.USERNAME to "\$MY_USERNAME_XXX",
             DependenciesResolverOptionsName.KEY_PASSPHRASE to "\$MY_KEY_PASSPHRASE_YYY",
         )
-        val result = resolver.addRepository("https://packages.jetbrains.team/maven/p/crl/maven/", options) as ResultWithDiagnostics.Failure
+        konst result = resolver.addRepository("https://packages.jetbrains.team/maven/p/crl/maven/", options) as ResultWithDiagnostics.Failure
 
-        val messages = result.reports.map { it.message }
+        konst messages = result.reports.map { it.message }
         assertEquals(
             listOf(
                 "Environment variable `MY_USERNAME_XXX` for username is not set",
@@ -185,31 +185,31 @@ class MavenResolverTest : ResolversTestBase() {
 
     @Ignore("ignored because spark is a very heavy dependency")
     fun ignore_testPartialResolution() {
-        val resolver = MavenDependenciesResolver()
-        val options = buildOptions(
+        konst resolver = MavenDependenciesResolver()
+        konst options = buildOptions(
             DependenciesResolverOptionsName.PARTIAL_RESOLUTION to "true",
             DependenciesResolverOptionsName.CLASSIFIER to "sources",
             DependenciesResolverOptionsName.EXTENSION to "jar",
         )
 
-        val result = runBlocking {
+        konst result = runBlocking {
             resolver.resolve("org.jetbrains.kotlinx.spark:kotlin-spark-api_3.3.0_2.13:1.2.1", options)
         }
 
         result as ResultWithDiagnostics.Success
         assertTrue(result.reports.isNotEmpty())
-        assertTrue(result.value.isNotEmpty())
+        assertTrue(result.konstue.isNotEmpty())
     }
 
     // Ignored - tests with custom repos often break the CI due to the caching issues
     // TODO: find a way to enable it back
     @Ignore
     fun ignore_testCustomRepositoryId() {
-        val resolver = MavenDependenciesResolver()
+        konst resolver = MavenDependenciesResolver()
         resolver.addRepository("https://repo.osgeo.org/repository/release/")
-        val files = runBlocking {
+        konst files = runBlocking {
             resolver.resolve("org.geotools:gt-shapefile:[23,)")
-        }.valueOrThrow()
+        }.konstueOrThrow()
         assertTrue(files.any { it.name.startsWith("gt-shapefile") })
     }
 
@@ -217,17 +217,17 @@ class MavenResolverTest : ResolversTestBase() {
     // TODO: find a way to enable it back
     @Ignore
     fun ignore_testResolveFromAnnotationsWillResolveTheSameRegardlessOfAnnotationOrder() {
-        val dependsOnConstructor = DependsOn::class.primaryConstructor!!
-        val repositoryConstructor = Repository::class.primaryConstructor!!
+        konst dependsOnConstructor = DependsOn::class.primaryConstructor!!
+        konst repositoryConstructor = Repository::class.primaryConstructor!!
 
         // @DepensOn("eu.jrie.jetbrains:kotlin-shell-core:0.2")
-        val dependsOn = dependsOnConstructor.callBy(
+        konst dependsOn = dependsOnConstructor.callBy(
             mapOf(
                 dependsOnConstructor.parameters.first() to arrayOf("eu.jrie.jetbrains:kotlin-shell-core:0.2")
             )
         )
 
-        val repositories = repositoryConstructor.callBy(
+        konst repositories = repositoryConstructor.callBy(
             mapOf(
                 repositoryConstructor.parameters.first() to arrayOf(
                     "TODO - REWRITE TEST TO OTHER REPOSITORY: https://dl.bbiintray.com/jakubriegel/kotlin-shell"
@@ -235,16 +235,16 @@ class MavenResolverTest : ResolversTestBase() {
             )
         )
 
-        val annotationsWithReposFirst = listOf(repositories, dependsOn)
-        val annotationsWithDependsOnFirst = listOf(dependsOn, repositories)
+        konst annotationsWithReposFirst = listOf(repositories, dependsOn)
+        konst annotationsWithDependsOnFirst = listOf(dependsOn, repositories)
 
-        val filesWithReposFirst = runBlocking {
+        konst filesWithReposFirst = runBlocking {
             MavenDependenciesResolver().resolveFromAnnotations(annotationsWithReposFirst)
-        }.valueOrThrow()
+        }.konstueOrThrow()
 
-        val filesWithDependsOnFirst = runBlocking {
+        konst filesWithDependsOnFirst = runBlocking {
             MavenDependenciesResolver().resolveFromAnnotations(annotationsWithDependsOnFirst)
-        }.valueOrThrow()
+        }.konstueOrThrow()
 
         // Tests that the jar was resolved
         assert(

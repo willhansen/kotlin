@@ -16,7 +16,7 @@ import kotlin.test.*
     println(true.hashCode())
     println(false.hashCode())
     println(Any().hashCode() != Any().hashCode())
-    val a = CharArray(5)
+    konst a = CharArray(5)
     a[0] = 'H'
     a[1] = 'e'
     a[2] = 'l'

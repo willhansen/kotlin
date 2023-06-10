@@ -19,7 +19,7 @@ class B : A()
 
 actual interface S1 {
     fun o(): S = "O"
-    val p: Boolean
+    konst p: Boolean
         get() = true
 }
 
@@ -30,7 +30,7 @@ actual interface S2 {
 actual typealias S = String
 
 fun box(): String {
-    val b = B()
+    konst b = B()
     return if (b.p) {
         b.o() + b.k()
     } else {

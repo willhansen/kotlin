@@ -8,7 +8,7 @@ import objcTests.*
     assertEquals(13, myStruct.`$_Companion`)
     assertEquals(14, myStruct.`super`)
 
-    val objc = FooMangled()
+    konst objc = FooMangled()
     objc.`Companion$` = 99
     assertEquals(99, objc.Companion())
     assertEquals(99, objc.`Companion$`)

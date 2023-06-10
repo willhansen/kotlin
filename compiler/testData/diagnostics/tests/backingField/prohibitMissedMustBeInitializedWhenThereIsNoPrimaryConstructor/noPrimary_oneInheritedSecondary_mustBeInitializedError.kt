@@ -5,7 +5,7 @@ open class Base(x: Int)
 class Foo : Base {
     constructor() : super(1)
     <!MUST_BE_INITIALIZED!>var x: String<!>
-        set(value) {}
+        set(konstue) {}
 
     init {
         x = ""

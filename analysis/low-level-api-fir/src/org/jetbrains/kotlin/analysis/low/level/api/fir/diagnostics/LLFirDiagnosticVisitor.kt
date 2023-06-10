@@ -17,7 +17,7 @@ internal open class LLFirDiagnosticVisitor(
     context: CheckerContextForProvider,
     components: DiagnosticCollectorComponents,
 ) : CheckerRunningDiagnosticCollectorVisitor(context, components) {
-    private val beforeElementDiagnosticCollectionHandler = context.session.beforeElementDiagnosticCollectionHandler
+    private konst beforeElementDiagnosticCollectionHandler = context.session.beforeElementDiagnosticCollectionHandler
 
     protected var useRegularComponents = true
 

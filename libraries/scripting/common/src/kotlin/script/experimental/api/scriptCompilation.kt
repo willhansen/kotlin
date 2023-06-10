@@ -47,7 +47,7 @@ open class ScriptCompilationConfiguration(baseConfigurations: Iterable<ScriptCom
  * to the original one, otherwise returns original
  */
 fun ScriptCompilationConfiguration?.with(body: ScriptCompilationConfiguration.Builder.() -> Unit): ScriptCompilationConfiguration {
-    val newConfiguration =
+    konst newConfiguration =
         if (this == null) ScriptCompilationConfiguration(body = body)
         else ScriptCompilationConfiguration(this, body = body)
     return if (newConfiguration == this) this else newConfiguration
@@ -56,12 +56,12 @@ fun ScriptCompilationConfiguration?.with(body: ScriptCompilationConfiguration.Bu
 /**
  * The script type display name
  */
-val ScriptCompilationConfigurationKeys.displayName by PropertiesCollection.key<String>()
+konst ScriptCompilationConfigurationKeys.displayName by PropertiesCollection.key<String>()
 
 /**
  * The default script class name
  */
-val ScriptCompilationConfigurationKeys.defaultIdentifier by PropertiesCollection.key<String>("Script")
+konst ScriptCompilationConfigurationKeys.defaultIdentifier by PropertiesCollection.key<String>("Script")
 
 /**
  * The script filename extension
@@ -69,21 +69,21 @@ val ScriptCompilationConfigurationKeys.defaultIdentifier by PropertiesCollection
  * For Intellij IDEA support, it is important to have this extension set to a non-ambiguous name.
  * See also {@link ScriptCompilationConfigurationKeys#filePathPattern} parameter for more fine-grained script definition selection
  */
-val ScriptCompilationConfigurationKeys.fileExtension by PropertiesCollection.key<String>("kts")
+konst ScriptCompilationConfigurationKeys.fileExtension by PropertiesCollection.key<String>("kts")
 
 /**
  * Additional (to the filename extension) RegEx pattern with that the script file path is checked
  * It is used in the hosts that may have several script definitions registered and need to distinguish script file types not only by extension
- * The argument passed to the RegEx matcher is equivalent to the File.path, taken relatively from a base path defined by the host
+ * The argument passed to the RegEx matcher is equikonstent to the File.path, taken relatively from a base path defined by the host
  * (usually should be the project root or the current directory)
  * See also {@link ScriptCompilationConfigurationKeys#fileExtension} parameter for the primary script definition selection
  */
-val ScriptCompilationConfigurationKeys.filePathPattern by PropertiesCollection.key<String>()
+konst ScriptCompilationConfigurationKeys.filePathPattern by PropertiesCollection.key<String>()
 
 /**
  * The superclass for target script class
  */
-val ScriptCompilationConfigurationKeys.baseClass by PropertiesCollection.key<KotlinType>(KotlinType(Any::class)) // script base class
+konst ScriptCompilationConfigurationKeys.baseClass by PropertiesCollection.key<KotlinType>(KotlinType(Any::class)) // script base class
 
 /**
  * The list of classes that will be used as implicit receivers in the script body, as if the whole body is wrapped with "with" calls:
@@ -98,89 +98,89 @@ val ScriptCompilationConfigurationKeys.baseClass by PropertiesCollection.key<Kot
  * }
  * </pre>
  *
- * Note: the actual receivers values should be passed to the constructor of the generated script class
+ * Note: the actual receivers konstues should be passed to the constructor of the generated script class
  */
-val ScriptCompilationConfigurationKeys.implicitReceivers by PropertiesCollection.key<List<KotlinType>>() // in the order from outer to inner scope
+konst ScriptCompilationConfigurationKeys.implicitReceivers by PropertiesCollection.key<List<KotlinType>>() // in the order from outer to inner scope
 
 /**
  * The map of names to the types
  */
-val ScriptCompilationConfigurationKeys.providedProperties by PropertiesCollection.key<Map<String, KotlinType>>() // external variables
+konst ScriptCompilationConfigurationKeys.providedProperties by PropertiesCollection.key<Map<String, KotlinType>>() // external variables
 
 /**
  * Variable name that holds a {@link File} instance pointing to the location of the script file
  */
-val ScriptCompilationConfigurationKeys.scriptFileLocationVariable by PropertiesCollection.key<String>()
+konst ScriptCompilationConfigurationKeys.scriptFileLocationVariable by PropertiesCollection.key<String>()
 
 /**
  * File pointing to the location of the script file. Note that in some cases it might not be possible
  * to determine script file location properly - in this case the file is an empty file
  */
-val ScriptCompilationConfigurationKeys.scriptFileLocation by PropertiesCollection.key<File>()
+konst ScriptCompilationConfigurationKeys.scriptFileLocation by PropertiesCollection.key<File>()
 
 /**
  * The list of import expressions that will be implicitly applied to the script body, the syntax is the same as for the "import" statement
  */
-val ScriptCompilationConfigurationKeys.defaultImports by PropertiesCollection.key<List<String>>()
+konst ScriptCompilationConfigurationKeys.defaultImports by PropertiesCollection.key<List<String>>()
 
 /**
  * The list of script sources that should be compiled along with the script and imported into it
  */
-val ScriptCompilationConfigurationKeys.importScripts by PropertiesCollection.key<List<SourceCode>>()
+konst ScriptCompilationConfigurationKeys.importScripts by PropertiesCollection.key<List<SourceCode>>()
 
 /**
  * The name of the generated script class field to assign the script results to, empty means disabled
  * see also ReplScriptCompilationConfigurationKeys.resultFieldPrefix
  */
-val ScriptCompilationConfigurationKeys.resultField by PropertiesCollection.key<String>("\$\$result")
+konst ScriptCompilationConfigurationKeys.resultField by PropertiesCollection.key<String>("\$\$result")
 
 /**
  * The list of script dependencies - platform specific
  */
-val ScriptCompilationConfigurationKeys.dependencies by PropertiesCollection.key<List<ScriptDependency>>()
+konst ScriptCompilationConfigurationKeys.dependencies by PropertiesCollection.key<List<ScriptDependency>>()
 
 /**
  * The list of compiler options that will be applied on script compilation, the syntax is the same as for CLI compiler
  */
-val ScriptCompilationConfigurationKeys.compilerOptions by PropertiesCollection.key<List<String>>() // Q: CommonCompilerOptions instead?
+konst ScriptCompilationConfigurationKeys.compilerOptions by PropertiesCollection.key<List<String>>() // Q: CommonCompilerOptions instead?
 
 /**
  * The callback that will be called on the script compilation before parsing the script
  */
-val ScriptCompilationConfigurationKeys.refineConfigurationBeforeParsing by PropertiesCollection.key<List<RefineConfigurationUnconditionallyData>>(isTransient = true)
+konst ScriptCompilationConfigurationKeys.refineConfigurationBeforeParsing by PropertiesCollection.key<List<RefineConfigurationUnconditionallyData>>(isTransient = true)
 
 /**
  * The callback that will be called on the script compilation after parsing script file annotations
  */
-val ScriptCompilationConfigurationKeys.refineConfigurationOnAnnotations by PropertiesCollection.key<List<RefineConfigurationOnAnnotationsData>>(isTransient = true)
+konst ScriptCompilationConfigurationKeys.refineConfigurationOnAnnotations by PropertiesCollection.key<List<RefineConfigurationOnAnnotationsData>>(isTransient = true)
 
 /**
  * The callback that will be called on the script compilation immediately before starting the compilation
  */
-val ScriptCompilationConfigurationKeys.refineConfigurationBeforeCompiling by PropertiesCollection.key<List<RefineConfigurationUnconditionallyData>>(isTransient = true)
+konst ScriptCompilationConfigurationKeys.refineConfigurationBeforeCompiling by PropertiesCollection.key<List<RefineConfigurationUnconditionallyData>>(isTransient = true)
 
 /**
  * The list of script fragments that should be compiled instead of the whole text
  * (for use primary with the refinement callbacks)
  */
-val ScriptCompilationConfigurationKeys.sourceFragments by PropertiesCollection.key<List<ScriptSourceNamedFragment>>()
+konst ScriptCompilationConfigurationKeys.sourceFragments by PropertiesCollection.key<List<ScriptSourceNamedFragment>>()
 
 /**
  * Scripting host configuration
  */
-val ScriptCompilationConfigurationKeys.hostConfiguration by PropertiesCollection.key<ScriptingHostConfiguration>(isTransient = true)
+konst ScriptCompilationConfigurationKeys.hostConfiguration by PropertiesCollection.key<ScriptingHostConfiguration>(isTransient = true)
 
 /**
  * Should the script be always considered standalone
  * If true, it is ignored when compiled along with other sources (starting from 1.9, according to SkipStandaloneScriptsInSourceRoots language feature)
  * true by default
  */
-val ScriptCompilationConfigurationKeys.isStandalone by PropertiesCollection.key<Boolean>(true)
+konst ScriptCompilationConfigurationKeys.isStandalone by PropertiesCollection.key<Boolean>(true)
 
 /**
  * The sub-builder DSL for configuring refinement callbacks
  */
-val ScriptCompilationConfiguration.Builder.refineConfiguration get() = RefineConfigurationBuilder()
+konst ScriptCompilationConfiguration.Builder.refineConfiguration get() = RefineConfigurationBuilder()
 
 
 class RefineConfigurationBuilder : PropertiesCollection.Builder() {
@@ -261,19 +261,19 @@ typealias SimpleRefineScriptCompilationConfigurationHandler =
             (ScriptConfigurationRefinementContext) -> ScriptCompilationConfiguration
 
 data class RefineConfigurationUnconditionallyData(
-    val handler: RefineScriptCompilationConfigurationHandler
+    konst handler: RefineScriptCompilationConfigurationHandler
 ) : Serializable {
     companion object {
-        private const val serialVersionUID: Long = 1L
+        private const konst serialVersionUID: Long = 1L
     }
 }
 
 data class RefineConfigurationOnAnnotationsData(
-    val annotations: List<KotlinType>,
-    val handler: RefineScriptCompilationConfigurationHandler
+    konst annotations: List<KotlinType>,
+    konst handler: RefineScriptCompilationConfigurationHandler
 ) : Serializable {
     companion object {
-        private const val serialVersionUID: Long = 1L
+        private const konst serialVersionUID: Long = 1L
     }
 }
 
@@ -290,10 +290,10 @@ fun ScriptCompilationConfiguration.refineOnAnnotations(
     script: SourceCode,
     collectedData: ScriptCollectedData
 ): ResultWithDiagnostics<ScriptCompilationConfiguration> {
-    val foundAnnotationNames = collectedData[ScriptCollectedData.foundAnnotations]?.mapTo(HashSet()) { it.annotationClass.java.name }
+    konst foundAnnotationNames = collectedData[ScriptCollectedData.foundAnnotations]?.mapTo(HashSet()) { it.annotationClass.java.name }
     if (foundAnnotationNames.isNullOrEmpty()) return this.asSuccess()
 
-    val thisResult: ResultWithDiagnostics<ScriptCompilationConfiguration> = this.asSuccess()
+    konst thisResult: ResultWithDiagnostics<ScriptCompilationConfiguration> = this.asSuccess()
     return this[ScriptCompilationConfiguration.refineConfigurationOnAnnotations]
         ?.fold(thisResult) { config, (annotations, handler) ->
             config.onSuccess {
@@ -318,7 +318,7 @@ internal inline fun <Configuration: PropertiesCollection, RefineData> Configurat
 ): ResultWithDiagnostics<Configuration> = (
         this[key]
             ?.fold(this) { config, refineData ->
-                refineFn(config, refineData).valueOr { return it }
+                refineFn(config, refineData).konstueOr { return it }
             } ?: this
         ).asSuccess()
 
@@ -347,30 +347,30 @@ interface CompiledScript {
     /**
      * The location identifier for the script source, taken from SourceCode.locationId
      */
-    val sourceLocationId: String?
+    konst sourceLocationId: String?
         get() = null
 
     /**
      * The compilation configuration used for script compilation
      */
-    val compilationConfiguration: ScriptCompilationConfiguration
+    konst compilationConfiguration: ScriptCompilationConfiguration
 
     /**
      * The function that loads compiled script class
-     * @param scriptEvaluationConfiguration the script evaluation configuration properties
+     * @param scriptEkonstuationConfiguration the script ekonstuation configuration properties
      * @return result wrapper, if successful - with loaded KClass
      */
-    suspend fun getClass(scriptEvaluationConfiguration: ScriptEvaluationConfiguration?): ResultWithDiagnostics<KClass<*>>
+    suspend fun getClass(scriptEkonstuationConfiguration: ScriptEkonstuationConfiguration?): ResultWithDiagnostics<KClass<*>>
 
     /**
      * The scripts compiled along with this one in one module, imported or otherwise included into compilation
      */
-    val otherScripts: List<CompiledScript>
+    konst otherScripts: List<CompiledScript>
         get() = emptyList()
 
     /**
      * The name and the type of the script's result field, if any
      */
-    val resultField: Pair<String, KotlinType>?
+    konst resultField: Pair<String, KotlinType>?
         get() = null
 }

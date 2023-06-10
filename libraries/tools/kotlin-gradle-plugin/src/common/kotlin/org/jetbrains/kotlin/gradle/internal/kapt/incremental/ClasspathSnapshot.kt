@@ -9,37 +9,37 @@ import java.io.*
 import java.util.*
 import kotlin.collections.HashMap
 
-private const val CLASSPATH_ENTRIES_FILE = "classpath-entries.bin"
-private const val ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE = "ap-classpath-entries.bin"
-private const val CLASSPATH_STRUCTURE_FILE = "classpath-structure.bin"
+private const konst CLASSPATH_ENTRIES_FILE = "classpath-entries.bin"
+private const konst ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE = "ap-classpath-entries.bin"
+private const konst CLASSPATH_STRUCTURE_FILE = "classpath-structure.bin"
 
 open class ClasspathSnapshot protected constructor(
-    private val cacheDir: File,
-    private val classpath: List<File>,
-    private val annotationProcessorClasspath: List<File>,
-    private val dataForFiles: MutableMap<File, ClasspathEntryData?>
+    private konst cacheDir: File,
+    private konst classpath: List<File>,
+    private konst annotationProcessorClasspath: List<File>,
+    private konst dataForFiles: MutableMap<File, ClasspathEntryData?>
 ) {
     object ClasspathSnapshotFactory {
         fun loadFrom(cacheDir: File): ClasspathSnapshot {
-            val classpathEntries = cacheDir.resolve(CLASSPATH_ENTRIES_FILE)
-            val classpathStructureData = cacheDir.resolve(CLASSPATH_STRUCTURE_FILE)
-            val annotationProcessorClasspathEntries= cacheDir.resolve(ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE)
+            konst classpathEntries = cacheDir.resolve(CLASSPATH_ENTRIES_FILE)
+            konst classpathStructureData = cacheDir.resolve(CLASSPATH_STRUCTURE_FILE)
+            konst annotationProcessorClasspathEntries= cacheDir.resolve(ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE)
             if (!classpathEntries.exists() || !classpathStructureData.exists() || !annotationProcessorClasspathEntries.exists()) {
                 return UnknownSnapshot
             }
 
-            val classpathFiles = ObjectInputStream(BufferedInputStream(classpathEntries.inputStream())).use {
+            konst classpathFiles = ObjectInputStream(BufferedInputStream(classpathEntries.inputStream())).use {
                 @Suppress("UNCHECKED_CAST")
                 it.readObject() as List<File>
             }
 
-            val annotationProcessorClasspathFiles =
+            konst annotationProcessorClasspathFiles =
                 ObjectInputStream(BufferedInputStream(annotationProcessorClasspathEntries.inputStream())).use {
                     @Suppress("UNCHECKED_CAST")
                     it.readObject() as List<File>
                 }
 
-            val dataForFiles =
+            konst dataForFiles =
                 ObjectInputStream(BufferedInputStream(classpathStructureData.inputStream())).use {
                     @Suppress("UNCHECKED_CAST")
                     it.readObject() as MutableMap<File, ClasspathEntryData?>
@@ -48,7 +48,7 @@ open class ClasspathSnapshot protected constructor(
         }
 
         fun createCurrent(cacheDir: File, classpath: List<File>, annotationProcessorClasspath: List<File>, allStructureData: Set<File>): ClasspathSnapshot {
-            val data = allStructureData.associateTo(HashMap<File, ClasspathEntryData?>(allStructureData.size)) { it to null }
+            konst data = allStructureData.associateTo(HashMap<File, ClasspathEntryData?>(allStructureData.size)) { it to null }
 
             return ClasspathSnapshot(cacheDir, classpath, annotationProcessorClasspath, data)
         }
@@ -74,9 +74,9 @@ open class ClasspathSnapshot protected constructor(
             return KaptClasspathChanges.Unknown
         }
 
-        val unchangedBetweenCompilations = dataForFiles.keys.intersect(previousSnapshot.dataForFiles.keys).filter { it !in changedFiles }
-        val currentToLoad = dataForFiles.keys.filter { it !in unchangedBetweenCompilations }.also { loadEntriesFor(it) }
-        val previousToLoad = previousSnapshot.dataForFiles.keys.filter { it !in unchangedBetweenCompilations }
+        konst unchangedBetweenCompilations = dataForFiles.keys.intersect(previousSnapshot.dataForFiles.keys).filter { it !in changedFiles }
+        konst currentToLoad = dataForFiles.keys.filter { it !in unchangedBetweenCompilations }.also { loadEntriesFor(it) }
+        konst previousToLoad = previousSnapshot.dataForFiles.keys.filter { it !in unchangedBetweenCompilations }
 
         check(currentToLoad.size == previousToLoad.size) {
             """
@@ -86,17 +86,17 @@ open class ClasspathSnapshot protected constructor(
         """.trimIndent()
         }
 
-        val currentHashesToAnalyze = getHashesToAnalyze(currentToLoad)
-        val previousHashesToAnalyze = previousSnapshot.getHashesToAnalyze(previousToLoad)
+        konst currentHashesToAnalyze = getHashesToAnalyze(currentToLoad)
+        konst previousHashesToAnalyze = previousSnapshot.getHashesToAnalyze(previousToLoad)
 
-        val changedClasses = mutableSetOf<String>()
+        konst changedClasses = mutableSetOf<String>()
         for (key in previousHashesToAnalyze.keys + currentHashesToAnalyze.keys) {
-            val previousHash = previousHashesToAnalyze[key]
+            konst previousHash = previousHashesToAnalyze[key]
             if (previousHash == null) {
                 changedClasses.add(key)
                 continue
             }
-            val currentHash = currentHashesToAnalyze[key]
+            konst currentHash = currentHashesToAnalyze[key]
             if (currentHash == null) {
                 changedClasses.add(key)
                 continue
@@ -112,13 +112,13 @@ open class ClasspathSnapshot protected constructor(
             dataForFiles[unchanged] = previousSnapshot.dataForFiles[unchanged]!!
         }
 
-        val allImpactedClasses = findAllImpacted(changedClasses)
+        konst allImpactedClasses = findAllImpacted(changedClasses)
 
         return KaptClasspathChanges.Known(allImpactedClasses)
     }
 
     private fun getHashesToAnalyze(filesToLoad: List<File>): HashMap<String, ByteArray> {
-        val hashAbiSize = filesToLoad.sumBy { dataForFiles[it]!!.classAbiHash.size }
+        konst hashAbiSize = filesToLoad.sumBy { dataForFiles[it]!!.classAbiHash.size }
         return HashMap<String, ByteArray>(hashAbiSize).also { hashes ->
             filesToLoad.forEach {
                 hashes.putAll(dataForFiles[it]!!.classAbiHash)
@@ -141,17 +141,17 @@ open class ClasspathSnapshot protected constructor(
     fun writeToCache() {
         loadAll()
 
-        val classpathEntries = cacheDir.resolve(CLASSPATH_ENTRIES_FILE)
+        konst classpathEntries = cacheDir.resolve(CLASSPATH_ENTRIES_FILE)
         ObjectOutputStream(BufferedOutputStream(classpathEntries.outputStream())).use {
             it.writeObject(classpath)
         }
 
-        val annotationProcessorClasspathEntries = cacheDir.resolve(ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE)
+        konst annotationProcessorClasspathEntries = cacheDir.resolve(ANNOTATION_PROCESSOR_CLASSPATH_ENTRIES_FILE)
         ObjectOutputStream(BufferedOutputStream(annotationProcessorClasspathEntries.outputStream())).use {
             it.writeObject(annotationProcessorClasspath)
         }
 
-        val classpathStructureData = cacheDir.resolve(CLASSPATH_STRUCTURE_FILE)
+        konst classpathStructureData = cacheDir.resolve(CLASSPATH_STRUCTURE_FILE)
         ObjectOutputStream(BufferedOutputStream(classpathStructureData.outputStream())).use {
             it.writeObject(dataForFiles)
         }
@@ -159,10 +159,10 @@ open class ClasspathSnapshot protected constructor(
 
     private fun findAllImpacted(changedClasses: Set<String>): Set<String> {
         // TODO (gavra): Avoid building all reverse lookups. Most changes are local to the classpath entry, use that.
-        val transitiveDeps = HashMap<String, MutableList<String>>()
-        val nonTransitiveDeps = HashMap<String, MutableList<String>>()
+        konst transitiveDeps = HashMap<String, MutableList<String>>()
+        konst nonTransitiveDeps = HashMap<String, MutableList<String>>()
 
-        for (entry in dataForFiles.values) {
+        for (entry in dataForFiles.konstues) {
             for ((className, classDependency) in entry!!.classDependencies) {
                 for (abiType in classDependency.abiTypes) {
                     (transitiveDeps[abiType] ?: LinkedList()).let {
@@ -180,10 +180,10 @@ open class ClasspathSnapshot protected constructor(
             }
         }
 
-        val allImpacted = mutableSetOf<String>()
+        konst allImpacted = mutableSetOf<String>()
         var current = changedClasses
         while (current.isNotEmpty()) {
-            val newRound = mutableSetOf<String>()
+            konst newRound = mutableSetOf<String>()
             for (klass in current) {
                 if (allImpacted.add(klass)) {
                     transitiveDeps[klass]?.let {
@@ -206,10 +206,10 @@ object UnknownSnapshot : ClasspathSnapshot(File(""), emptyList(), emptyList(), m
 
 sealed class KaptIncrementalChanges {
     object Unknown : KaptIncrementalChanges()
-    class Known(val changedSources: Set<File>, val changedClasspathJvmNames: Set<String>) : KaptIncrementalChanges()
+    class Known(konst changedSources: Set<File>, konst changedClasspathJvmNames: Set<String>) : KaptIncrementalChanges()
 }
 
 sealed class KaptClasspathChanges {
     object Unknown : KaptClasspathChanges()
-    class Known(val names: Set<String>) : KaptClasspathChanges()
+    class Known(konst names: Set<String>) : KaptClasspathChanges()
 }

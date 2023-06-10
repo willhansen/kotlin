@@ -7,9 +7,9 @@ import transitiveStory.bottomActual.mppBeginning.tlInternalInCommon
 //import transitiveStory.bottomActual.mppBeginning.tlInternalInCommon
 
 class InBottomActualIntermediate {
-    val p = 42
+    konst p = 42
     // https://youtrack.jetbrains.com/issue/KT-37264
-    val callingInteral = tlInternalInCommon
+    konst callingInteral = tlInternalInCommon
 }
 
 expect class IntermediateMPPClassInBottomActual()
@@ -20,18 +20,18 @@ class Subclass : Outer() {
     // b, c and d are visible
     // Nested and e are visible
 
-    override val b = 5   // 'b' is protected
+    override konst b = 5   // 'b' is protected
 }
 
 class ChildOfCommonInShared : Outer() {
-    override val b: Int
+    override konst b: Int
         get() = super.b + 243
-//    val callAlso = super.c // internal in Outer
+//    konst callAlso = super.c // internal in Outer
 
-    private val other = Nested()
+    private konst other = Nested()
 }
 
 class ChildOfMPOuterInShared : MPOuter() {
-    private val sav = MPNested()
+    private konst sav = MPNested()
 }
 

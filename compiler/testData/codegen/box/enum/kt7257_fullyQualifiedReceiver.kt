@@ -1,11 +1,11 @@
 enum class X {
     B {
-        override val value2 = "K"
-        override val value = "O" + X.B.value2
+        override konst konstue2 = "K"
+        override konst konstue = "O" + X.B.konstue2
     };
 
-    abstract val value2: String
-    abstract val value: String
+    abstract konst konstue2: String
+    abstract konst konstue: String
 }
 
-fun box() = X.B.value
+fun box() = X.B.konstue

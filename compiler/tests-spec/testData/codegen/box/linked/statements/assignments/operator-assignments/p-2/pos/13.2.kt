@@ -16,9 +16,9 @@
 class B(var a: Int) {
     var rem = false
 
-    operator fun rem(value: Int): B {
+    operator fun rem(konstue: Int): B {
         rem = true
-        a= a % value
+        a= a % konstue
         return this
     }
 

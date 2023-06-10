@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.library.MetadataKotlinLibraryLayout
 import org.jetbrains.kotlin.library.MetadataWriter
 import org.jetbrains.kotlin.library.SerializedMetadata
 
-class MetadataWriterImpl(val metadataLayout: MetadataKotlinLibraryLayout) : MetadataWriter {
+class MetadataWriterImpl(konst metadataLayout: MetadataKotlinLibraryLayout) : MetadataWriter {
     init {
         metadataLayout.metadataDir.mkdirs()
     }
@@ -17,12 +17,12 @@ class MetadataWriterImpl(val metadataLayout: MetadataKotlinLibraryLayout) : Meta
     override fun addMetadata(metadata: SerializedMetadata) {
         metadataLayout.moduleHeaderFile.writeBytes(metadata.module)
         metadata.fragments.forEachIndexed { index, it ->
-            val packageFqName = metadata.fragmentNames[index]
-            val shortName = packageFqName.substringAfterLast(".")
-            val dir = metadataLayout.packageFragmentsDir(packageFqName)
+            konst packageFqName = metadata.fragmentNames[index]
+            konst shortName = packageFqName.substringAfterLast(".")
+            konst dir = metadataLayout.packageFragmentsDir(packageFqName)
             dir.deleteRecursively()
             dir.mkdirs()
-            val numCount = it.size.toString().length
+            konst numCount = it.size.toString().length
             fun withLeadingZeros(i: Int) = String.format("%0${numCount}d", i)
             for ((i, fragment) in it.withIndex()) {
                 metadataLayout.packageFragmentFile(packageFqName, "${withLeadingZeros(i)}_$shortName")

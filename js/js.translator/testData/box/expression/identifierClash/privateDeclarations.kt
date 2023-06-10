@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1286
 open class A {
-    private val `.` = "A"
-    private val `;` = "B"
+    private konst `.` = "A"
+    private konst `;` = "B"
 
     private fun `@`() = "C"
     private fun `#`() = "D"
@@ -10,7 +10,7 @@ open class A {
 }
 
 fun box(): String {
-    val x = A().foo()
+    konst x = A().foo()
     if (x != "ABCD") return "fail: $x"
 
     return "OK"

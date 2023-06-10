@@ -31,9 +31,9 @@
 
 package kotlin.math.fdlibm
 
-private const val one = 1.0
-private const val huge = 1e300
-private const val zero = 0.0
+private const konst one = 1.0
+private const konst huge = 1e300
+private const konst zero = 0.0
 
 internal fun __ieee754_atanh(_x: Double): Double {
     var x: Double = _x

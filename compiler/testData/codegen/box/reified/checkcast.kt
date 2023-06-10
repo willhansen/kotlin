@@ -8,13 +8,13 @@ inline fun<reified T> checkcast(x: Any?): T {
 }
 
 fun box(): String {
-    val x = checkcast<String>("abc")
+    konst x = checkcast<String>("abc")
     assertEquals("abc", x)
-    val y = checkcast<Int>(1)
+    konst y = checkcast<Int>(1)
     assertEquals(1, y)
 
     try {
-        val z = checkcast<Int>("abc")
+        konst z = checkcast<Int>("abc")
     } catch (e: Exception) {
         return "OK"
     }

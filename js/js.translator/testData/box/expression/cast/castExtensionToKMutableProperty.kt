@@ -8,7 +8,7 @@ class A
 
 var A.x: Int
     get() = 23
-    set(value) { }
+    set(konstue) { }
 
 fun box(): String {
     assertEquals(true, (A::x as Any) is KProperty1<*, *>)

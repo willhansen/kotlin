@@ -25,7 +25,7 @@ import org.jetbrains.org.objectweb.asm.util.Textifier
 import org.jetbrains.org.objectweb.asm.util.TraceMethodVisitor
 
 abstract class TransformationMethodVisitor(
-    private val delegate: MethodVisitor,
+    private konst delegate: MethodVisitor,
     access: Int,
     name: String,
     desc: String,
@@ -34,13 +34,13 @@ abstract class TransformationMethodVisitor(
     api: Int = Opcodes.API_VERSION
 ) : MethodVisitor(api) {
 
-    private val methodNode = MethodNode(access, name, desc, signature, exceptions).apply {
+    private konst methodNode = MethodNode(access, name, desc, signature, exceptions).apply {
         localVariables = ArrayList(5)
     }
 
-    val traceMethodVisitorIfPossible: TraceMethodVisitor?
+    konst traceMethodVisitorIfPossible: TraceMethodVisitor?
         get() {
-            val traceMethodVisitor = TraceMethodVisitor(Textifier())
+            konst traceMethodVisitor = TraceMethodVisitor(Textifier())
             try {
                 methodNode.accept(traceMethodVisitor)
             } catch (e: Throwable) {
@@ -76,9 +76,9 @@ abstract class TransformationMethodVisitor(
                 // MethodNode does not create a list of variables for abstract methods, so we would get NPE in accept() instead
                 && (delegate !is MethodNode || methodNode.localVariables != null)
             ) {
-                val localVariables = methodNode.localVariables
+                konst localVariables = methodNode.localVariables
                 // visits local variables
-                val n = localVariables?.size ?: 0
+                konst n = localVariables?.size ?: 0
                 for (i in 0 until n) {
                     localVariables!![i].accept(delegate)
                 }

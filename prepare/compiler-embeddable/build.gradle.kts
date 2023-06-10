@@ -11,8 +11,8 @@ plugins {
     kotlin("jvm")
 }
 
-val testCompilationClasspath by configurations.creating
-val testCompilerClasspath by configurations.creating {
+konst testCompilationClasspath by configurations.creating
+konst testCompilerClasspath by configurations.creating {
     isCanBeConsumed = false
     extendsFrom(configurations["runtimeElements"])
     attributes {
@@ -43,23 +43,23 @@ compilerDummyJar(compilerDummyForDependenciesRewriting("compilerDummy") {
 })
 
 
-val runtimeJar = runtimeJar(embeddableCompiler()) {
+konst runtimeJar = runtimeJar(embeddableCompiler()) {
     exclude("com/sun/jna/**")
     exclude("org/jetbrains/annotations/**")
     mergeServiceFiles()
 }
 
-val sourcesJar = sourcesJar {
-    val compilerTask = project(":kotlin-compiler").tasks.named<Jar>("sourcesJar")
+konst sourcesJar = sourcesJar {
+    konst compilerTask = project(":kotlin-compiler").tasks.named<Jar>("sourcesJar")
     dependsOn(compilerTask)
-    val archiveOperations = serviceOf<ArchiveOperations>()
+    konst archiveOperations = serviceOf<ArchiveOperations>()
     from(compilerTask.map { it.archiveFile }.map { archiveOperations.zipTree(it) })
 }
 
-val javadocJar = javadocJar {
-    val compilerTask = project(":kotlin-compiler").tasks.named<Jar>("javadocJar")
+konst javadocJar = javadocJar {
+    konst compilerTask = project(":kotlin-compiler").tasks.named<Jar>("javadocJar")
     dependsOn(compilerTask)
-    val archiveOperations = serviceOf<ArchiveOperations>()
+    konst archiveOperations = serviceOf<ArchiveOperations>()
     from(compilerTask.map { it.archiveFile }.map { archiveOperations.zipTree(it) })
 }
 
@@ -69,9 +69,9 @@ publish {
 
 projectTest {
     dependsOn(runtimeJar)
-    val testCompilerClasspathProvider = project.provider { testCompilerClasspath.asPath }
-    val testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
-    val runtimeJarPathProvider = project.provider { runtimeJar.get().outputs.files.asPath }
+    konst testCompilerClasspathProvider = project.provider { testCompilerClasspath.asPath }
+    konst testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
+    konst runtimeJarPathProvider = project.provider { runtimeJar.get().outputs.files.asPath }
     doFirst {
         systemProperty("compilerClasspath", "${runtimeJarPathProvider.get()}${File.pathSeparator}${testCompilerClasspathProvider.get()}")
         systemProperty("compilationClasspath", testCompilationClasspathProvider.get())

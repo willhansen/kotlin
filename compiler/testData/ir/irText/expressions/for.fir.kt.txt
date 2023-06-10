@@ -1,8 +1,8 @@
 fun testEmpty(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val s: String = <iterator>.next()
+      konst s: String = <iterator>.next()
       { // BLOCK
       }
     }
@@ -11,9 +11,9 @@ fun testEmpty(ss: List<String>) {
 
 fun testIterable(ss: List<String>) {
   { // BLOCK
-    val <iterator>: Iterator<String> = ss.iterator()
+    konst <iterator>: Iterator<String> = ss.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val s: String = <iterator>.next()
+      konst s: String = <iterator>.next()
       println(message = s)
     }
   }
@@ -21,11 +21,11 @@ fun testIterable(ss: List<String>) {
 
 fun testDestructuring(pp: List<Pair<Int, String>>) {
   { // BLOCK
-    val <iterator>: Iterator<Pair<Int, String>> = pp.iterator()
+    konst <iterator>: Iterator<Pair<Int, String>> = pp.iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val <destruct>: Pair<Int, String> = <iterator>.next()
-      val i: Int = <destruct>.component1()
-      val s: String = <destruct>.component2()
+      konst <destruct>: Pair<Int, String> = <iterator>.next()
+      konst i: Int = <destruct>.component1()
+      konst s: String = <destruct>.component2()
       { // BLOCK
         println(message = i)
         println(message = s)
@@ -36,9 +36,9 @@ fun testDestructuring(pp: List<Pair<Int, String>>) {
 
 fun testRange() {
   { // BLOCK
-    val <iterator>: IntIterator = 1.rangeTo(other = 10).iterator()
+    konst <iterator>: IntIterator = 1.rangeTo(other = 10).iterator()
     while (<iterator>.hasNext()) { // BLOCK
-      val i: Int = <iterator>.next()
+      konst i: Int = <iterator>.next()
       { // BLOCK
       }
     }

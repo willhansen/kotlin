@@ -1,1 +1,1 @@
-val a by A(); val b by A();
+konst a by A(); konst b by A();

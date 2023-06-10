@@ -14,7 +14,7 @@ external <!NESTED_JS_MODULE_PROHIBITED!>object B<!>
 external fun foo(): Int<!>
 
 <!NESTED_JS_MODULE_PROHIBITED!>@JsModule("bar")
-external val bar: Int<!>
+external konst bar: Int<!>
 
 <!NESTED_JS_MODULE_PROHIBITED!>@JsNonModule
-external val baz: Int<!>
+external konst baz: Int<!>

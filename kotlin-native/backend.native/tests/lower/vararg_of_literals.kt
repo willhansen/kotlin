@@ -13,7 +13,7 @@ import kotlin.test.*
 }
 
 fun foo() {
-    val array = arrayOf("a", "b")
+    konst array = arrayOf("a", "b")
     println(array[0])
     array[0] = "42"
 }

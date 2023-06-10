@@ -6,9 +6,9 @@
 package kotlin.collections
 
 /**
- * Returns an array of objects of the given type with the given [size], initialized with _uninitialized_ values.
- * Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
- * either throwing exception or returning some kind of implementation-specific default value.
+ * Returns an array of objects of the given type with the given [size], initialized with _uninitialized_ konstues.
+ * Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+ * either throwing exception or returning some kind of implementation-specific default konstue.
  */
 @Suppress("NOTHING_TO_INLINE")
 @PublishedApi

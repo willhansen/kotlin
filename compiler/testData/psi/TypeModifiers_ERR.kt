@@ -1,12 +1,12 @@
-val p1: suspend
-val p2: suspend (a) ->
-val p3: suspend (suspend) ->
-val p4: suspend (suspend ->
-val p5: suspend (a) -> suspend
-val p6: suspend a.() ->
-val p7: suspend a.(suspend) ->
-val p8: a<suspend in a>
-val p9: a<in suspend a
-val p10: a<in suspend, a>
-val p11: a<suspend in a
-val p12: a<suspend in
+konst p1: suspend
+konst p2: suspend (a) ->
+konst p3: suspend (suspend) ->
+konst p4: suspend (suspend ->
+konst p5: suspend (a) -> suspend
+konst p6: suspend a.() ->
+konst p7: suspend a.(suspend) ->
+konst p8: a<suspend in a>
+konst p9: a<in suspend a
+konst p10: a<in suspend, a>
+konst p11: a<suspend in a
+konst p12: a<suspend in

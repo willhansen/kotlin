@@ -19,6 +19,6 @@ class Derived : BaseJava() {
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     return d.foo()
 }

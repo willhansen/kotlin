@@ -4,7 +4,7 @@ package foo
 
 @JsModule("lib")
 external object A {
-    val x: Int = definedExternally
+    konst x: Int = definedExternally
 
     fun foo(y: Int): Int = definedExternally
 }

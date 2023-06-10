@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.NativeKotl
 import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.factory.NativeKotlinCompilationTaskNamesContainerFactory
 
 open class KotlinNativeCompilationFactory internal constructor(
-    override val target: KotlinNativeTarget
+    override konst target: KotlinNativeTarget
 ) : KotlinCompilationFactory<KotlinNativeCompilation> {
 
-    override val itemClass: Class<KotlinNativeCompilation>
+    override konst itemClass: Class<KotlinNativeCompilation>
         get() = KotlinNativeCompilation::class.java
 
-    private val compilationImplFactory: KotlinCompilationImplFactory =
+    private konst compilationImplFactory: KotlinCompilationImplFactory =
         KotlinCompilationImplFactory(
             compilationTaskNamesContainerFactory = NativeKotlinCompilationTaskNamesContainerFactory,
             compilationDependencyConfigurationsFactory = NativeKotlinCompilationDependencyConfigurationsFactory,

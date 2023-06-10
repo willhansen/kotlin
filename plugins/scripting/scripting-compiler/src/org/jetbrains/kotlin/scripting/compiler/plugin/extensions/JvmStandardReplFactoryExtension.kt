@@ -34,8 +34,8 @@ class JvmStandardReplFactoryExtension : ReplFactoryExtension {
     private fun makeScriptDefinition(
         templateClasspath: List<File>, templateClassName: String, baseClassLoader: ClassLoader?
     ): KotlinScriptDefinition = try {
-        val classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), baseClassLoader)
-        val cls = classloader.loadClass(templateClassName)
+        konst classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), baseClassLoader)
+        konst cls = classloader.loadClass(templateClassName)
         KotlinScriptDefinitionFromAnnotatedTemplate(cls.kotlin, emptyMap())
     } catch (ex: ClassNotFoundException) {
         throw IllegalStateException("Cannot find script definition template class $templateClassName", ex)

@@ -10,22 +10,22 @@
 
 class A
 
-val a = A()
-val aa = A()
+konst a = A()
+konst aa = A()
 
 fun A?.foo() {}
 
 var A?.bar: Int
     get() = 42
-    set(value) {}
+    set(konstue) {}
 
-val aFoo = a::foo
-val A_foo = A::foo
-val nullFoo = null::foo
+konst aFoo = a::foo
+konst A_foo = A::foo
+konst nullFoo = null::foo
 
-val aBar = a::bar
-val A_bar = A::bar
-val nullBar = null::bar
+konst aBar = a::bar
+konst A_bar = A::bar
+konst nullBar = null::bar
 
 fun box(): String =
         when {

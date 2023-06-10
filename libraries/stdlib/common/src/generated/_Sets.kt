@@ -23,7 +23,7 @@ import kotlin.ranges.reversed
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.minus(element: T): Set<T> {
-    val result = LinkedHashSet<T>(mapCapacity(size))
+    konst result = LinkedHashSet<T>(mapCapacity(size))
     var removed = false
     return this.filterTo(result) { if (!removed && it == element) { removed = true; false } else true }
 }
@@ -34,7 +34,7 @@ public operator fun <T> Set<T>.minus(element: T): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.minus(elements: Array<out T>): Set<T> {
-    val result = LinkedHashSet<T>(this)
+    konst result = LinkedHashSet<T>(this)
     result.removeAll(elements)
     return result
 }
@@ -45,12 +45,12 @@ public operator fun <T> Set<T>.minus(elements: Array<out T>): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.minus(elements: Iterable<T>): Set<T> {
-    val other = elements.convertToListIfNotCollection()
+    konst other = elements.convertToListIfNotCollection()
     if (other.isEmpty())
         return this.toSet()
     if (other is Set)
         return this.filterNotTo(LinkedHashSet<T>()) { it in other }
-    val result = LinkedHashSet<T>(this)
+    konst result = LinkedHashSet<T>(this)
     result.removeAll(other)
     return result
 }
@@ -61,7 +61,7 @@ public operator fun <T> Set<T>.minus(elements: Iterable<T>): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.minus(elements: Sequence<T>): Set<T> {
-    val result = LinkedHashSet<T>(this)
+    konst result = LinkedHashSet<T>(this)
     result.removeAll(elements)
     return result
 }
@@ -82,7 +82,7 @@ public inline fun <T> Set<T>.minusElement(element: T): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.plus(element: T): Set<T> {
-    val result = LinkedHashSet<T>(mapCapacity(size + 1))
+    konst result = LinkedHashSet<T>(mapCapacity(size + 1))
     result.addAll(this)
     result.add(element)
     return result
@@ -95,7 +95,7 @@ public operator fun <T> Set<T>.plus(element: T): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.plus(elements: Array<out T>): Set<T> {
-    val result = LinkedHashSet<T>(mapCapacity(this.size + elements.size))
+    konst result = LinkedHashSet<T>(mapCapacity(this.size + elements.size))
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -107,7 +107,7 @@ public operator fun <T> Set<T>.plus(elements: Array<out T>): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.plus(elements: Iterable<T>): Set<T> {
-    val result = LinkedHashSet<T>(mapCapacity(elements.collectionSizeOrNull()?.let { this.size + it } ?: this.size * 2))
+    konst result = LinkedHashSet<T>(mapCapacity(elements.collectionSizeOrNull()?.let { this.size + it } ?: this.size * 2))
     result.addAll(this)
     result.addAll(elements)
     return result
@@ -120,7 +120,7 @@ public operator fun <T> Set<T>.plus(elements: Iterable<T>): Set<T> {
  * The returned set preserves the element iteration order of the original set.
  */
 public operator fun <T> Set<T>.plus(elements: Sequence<T>): Set<T> {
-    val result = LinkedHashSet<T>(mapCapacity(this.size * 2))
+    konst result = LinkedHashSet<T>(mapCapacity(this.size * 2))
     result.addAll(this)
     result.addAll(elements)
     return result

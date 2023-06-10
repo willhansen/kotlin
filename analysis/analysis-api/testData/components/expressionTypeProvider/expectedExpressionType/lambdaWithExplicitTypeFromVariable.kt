@@ -1,3 +1,3 @@
-val x: () -> Unit = {<caret>
-    val (a, b) = listOf(1, 2)
+konst x: () -> Unit = {<caret>
+    konst (a, b) = listOf(1, 2)
 }

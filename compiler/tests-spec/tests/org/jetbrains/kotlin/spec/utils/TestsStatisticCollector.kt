@@ -10,8 +10,8 @@ import org.jetbrains.kotlin.spec.utils.models.AbstractSpecTest
 import org.jetbrains.kotlin.spec.utils.parsers.CommonParser
 import java.io.File
 
-open class SpecTestsStatElement(val type: SpecTestsStatElementType) {
-    val elements: MutableMap<Any, SpecTestsStatElement> = mutableMapOf()
+open class SpecTestsStatElement(konst type: SpecTestsStatElementType) {
+    konst elements: MutableMap<Any, SpecTestsStatElement> = mutableMapOf()
     var number = 0
     fun increment() {
         number++
@@ -32,18 +32,18 @@ object TestsStatisticCollector {
 
         baseStatElement.increment()
 
-        for ((elementType, value) in elementTypes) {
+        for ((elementType, konstue) in elementTypes) {
             currentStatElement = currentStatElement.run {
-                elements.computeIfAbsent(value) { SpecTestsStatElement(elementType) }.apply { increment() }
+                elements.computeIfAbsent(konstue) { SpecTestsStatElement(elementType) }.apply { increment() }
             }
         }
     }
 
     fun collect(testLinkedType: SpecTestLinkedType): Map<TestArea, SpecTestsStatElement> {
-        val statistic = mutableMapOf<TestArea, SpecTestsStatElement>()
+        konst statistic = mutableMapOf<TestArea, SpecTestsStatElement>()
 
-        for (specTestArea in TestArea.values()) {
-            val specTestsPath = "$SPEC_TESTDATA_PATH/${specTestArea.name.lowercase().replace("_", "/")}/${testLinkedType.testDataPath}"
+        for (specTestArea in TestArea.konstues()) {
+            konst specTestsPath = "$SPEC_TESTDATA_PATH/${specTestArea.name.lowercase().replace("_", "/")}/${testLinkedType.testDataPath}"
 
             statistic[specTestArea] =
                 SpecTestsStatElement(SpecTestsStatElementType.AREA)
@@ -51,7 +51,7 @@ object TestsStatisticCollector {
             File(specTestsPath).walkTopDown().forEach areaTests@{
                 if (!it.isFile || it.extension != "kt") return@areaTests
 
-                val (specTest, _) = CommonParser.parseSpecTest(it.canonicalPath, mapOf("main.kt" to it.readText()))
+                konst (specTest, _) = CommonParser.parseSpecTest(it.canonicalPath, mapOf("main.kt" to it.readText()))
 
                 incrementStatCounters(
                     statistic[specTestArea]!!,

@@ -32,23 +32,23 @@ import org.jetbrains.kotlin.types.checker.NewKotlinTypeChecker
 
 
 class KotlinCallComponents(
-    val statelessCallbacks: KotlinResolutionStatelessCallbacks,
-    val argumentsToParametersMapper: ArgumentsToParametersMapper,
-    val typeArgumentsToParametersMapper: TypeArgumentsToParametersMapper,
-    val constraintInjector: ConstraintInjector,
-    val reflectionTypes: ReflectionTypes,
-    val builtIns: KotlinBuiltIns,
-    val languageVersionSettings: LanguageVersionSettings,
-    val samConversionOracle: SamConversionOracle,
-    val samConversionResolver: SamConversionResolver,
-    val kotlinTypeChecker: NewKotlinTypeChecker,
-    val lookupTracker: LookupTracker,
-    val kotlinTypeRefiner: KotlinTypeRefiner,
-    val callableReferenceArgumentResolver: CallableReferenceArgumentResolver
+    konst statelessCallbacks: KotlinResolutionStatelessCallbacks,
+    konst argumentsToParametersMapper: ArgumentsToParametersMapper,
+    konst typeArgumentsToParametersMapper: TypeArgumentsToParametersMapper,
+    konst constraintInjector: ConstraintInjector,
+    konst reflectionTypes: ReflectionTypes,
+    konst builtIns: KotlinBuiltIns,
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst samConversionOracle: SamConversionOracle,
+    konst samConversionResolver: SamConversionResolver,
+    konst kotlinTypeChecker: NewKotlinTypeChecker,
+    konst lookupTracker: LookupTracker,
+    konst kotlinTypeRefiner: KotlinTypeRefiner,
+    konst callableReferenceArgumentResolver: CallableReferenceArgumentResolver
 )
 
 class GivenCandidate(
-    val descriptor: FunctionDescriptor,
-    val dispatchReceiver: ReceiverValueWithSmartCastInfo?,
-    val knownTypeParametersResultingSubstitutor: TypeSubstitutor?
+    konst descriptor: FunctionDescriptor,
+    konst dispatchReceiver: ReceiverValueWithSmartCastInfo?,
+    konst knownTypeParametersResultingSubstitutor: TypeSubstitutor?
 )

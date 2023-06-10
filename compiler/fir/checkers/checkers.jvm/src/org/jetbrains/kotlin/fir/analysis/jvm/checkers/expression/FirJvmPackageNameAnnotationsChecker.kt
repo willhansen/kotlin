@@ -22,20 +22,20 @@ import org.jetbrains.kotlin.name.isValidJavaFqName
 
 object FirJvmPackageNameAnnotationsChecker : FirAnnotationChecker() {
 
-    private val jvmPackageNameClassId = ClassId.topLevel(FqName("kotlin.jvm.JvmPackageName"))
+    private konst jvmPackageNameClassId = ClassId.topLevel(FqName("kotlin.jvm.JvmPackageName"))
 
     override fun check(expression: FirAnnotation, context: CheckerContext, reporter: DiagnosticReporter) {
-        val lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
+        konst lookupTag = expression.annotationTypeRef.coneTypeSafe<ConeClassLikeType>()?.lookupTag ?: return
         if (lookupTag.classId != jvmPackageNameClassId) return
 
-        val nameValue = expression.getStringArgument(StandardNames.NAME) ?: return
+        konst nameValue = expression.getStringArgument(StandardNames.NAME) ?: return
         if (nameValue.isEmpty()) {
             reporter.reportOn(expression.source, FirJvmErrors.JVM_PACKAGE_NAME_CANNOT_BE_EMPTY, context)
         } else if (!isValidJavaFqName(nameValue)) {
             reporter.reportOn(expression.source, FirJvmErrors.JVM_PACKAGE_NAME_MUST_BE_VALID_NAME, context)
         }
 
-        val file = context.containingFile ?: return
+        konst file = context.containingFile ?: return
         if (file.declarations.any { it is FirClass }) {
             reporter.reportOn(expression.source, FirJvmErrors.JVM_PACKAGE_NAME_NOT_SUPPORTED_IN_FILES_WITH_CLASSES, context)
         }

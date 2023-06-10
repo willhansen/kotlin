@@ -35,7 +35,7 @@ class MinMaxUShortArrayTest {
 
     @Test
     fun minMaxEmpty() {
-        val empty = ushortArrayOf()
+        konst empty = ushortArrayOf()
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -61,7 +61,7 @@ class MinMaxUShortArrayTest {
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = ushortArrayOf()
+        konst empty = ushortArrayOf()
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -86,7 +86,7 @@ class MinMaxUShortArrayTest {
 
     @Test
     fun minMaxByEmpty() {
-        val empty = ushortArrayOf()
+        konst empty = ushortArrayOf()
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -94,8 +94,8 @@ class MinMaxUShortArrayTest {
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = ushortArrayOf(1U, 2U, UShort.MAX_VALUE)
+    fun minBySelectorEkonstuateOnce() {
+        konst source = ushortArrayOf(1U, 2U, UShort.MAX_VALUE)
         var c = 0
         source.minBy { c++ }
         assertEquals(3, c)
@@ -105,8 +105,8 @@ class MinMaxUShortArrayTest {
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = ushortArrayOf(1U, 2U, UShort.MAX_VALUE)
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = ushortArrayOf(1U, 2U, UShort.MAX_VALUE)
         var c = 0
         source.maxBy { c++ }
         assertEquals(3, c)
@@ -133,8 +133,8 @@ class MinMaxUShortArrayTest {
     
     @Test
     fun minMaxOfDouble() {
-        val middle = 2U
-        val items = ushortArrayOf(1U, 2U, UShort.MAX_VALUE).apply { shuffle() }
+        konst middle = 2U
+        konst items = ushortArrayOf(1U, 2U, UShort.MAX_VALUE).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -148,8 +148,8 @@ class MinMaxUShortArrayTest {
     
     @Test
     fun minMaxOfFloat() {
-        val middle = 2U
-        val items = ushortArrayOf(1U, 2U, UShort.MAX_VALUE).apply { shuffle() }
+        konst middle = 2U
+        konst items = ushortArrayOf(1U, 2U, UShort.MAX_VALUE).apply { shuffle() }
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -163,7 +163,7 @@ class MinMaxUShortArrayTest {
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = ushortArrayOf()
+        konst empty = ushortArrayOf()
 
         assertNull(empty.minOfOrNull { it.toString() })
         assertNull(empty.maxOfOrNull { it.toString() })
@@ -203,7 +203,7 @@ class MinMaxUShortArrayTest {
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = ushortArrayOf()
+        konst empty = ushortArrayOf()
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

@@ -23,20 +23,20 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    private val Family.sourceFileRanges: SourceFile
+    private konst Family.sourceFileRanges: SourceFile
         get() = when (this) {
             Generic, Primitives -> SourceFile.Ranges
             Unsigned -> SourceFile.URanges
             else -> error(this)
         }
-    private val Family.sourceFileComparisons: SourceFile
+    private konst Family.sourceFileComparisons: SourceFile
         get() = when (this) {
             Generic, Primitives -> SourceFile.Comparisons
             Unsigned -> SourceFile.UComparisons
             else -> error(this)
         }
 
-    private val Family.sampleSuffix: String
+    private konst Family.sampleSuffix: String
         get() = when (this) {
             Primitives -> ""
             Unsigned -> "Unsigned"
@@ -44,12 +44,12 @@ object ComparableOps : TemplateGroupBase() {
             else -> error(this)
         }
 
-    private val numericPrimitives = PrimitiveType.numericPrimitives.sortedBy { it.capacity }.toSet()
-    private val intPrimitives = setOf(PrimitiveType.Int, PrimitiveType.Long)
-    private val shortIntPrimitives = setOf(PrimitiveType.Byte, PrimitiveType.Short)
-    private val uintPrimitives = setOf(PrimitiveType.UInt, PrimitiveType.ULong)
+    private konst numericPrimitives = PrimitiveType.numericPrimitives.sortedBy { it.capacity }.toSet()
+    private konst intPrimitives = setOf(PrimitiveType.Int, PrimitiveType.Long)
+    private konst shortIntPrimitives = setOf(PrimitiveType.Byte, PrimitiveType.Short)
+    private konst uintPrimitives = setOf(PrimitiveType.UInt, PrimitiveType.ULong)
 
-    val f_coerceAtLeast = fn("coerceAtLeast(minimumValue: SELF)") {
+    konst f_coerceAtLeast = fn("coerceAtLeast(minimumValue: SELF)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -59,9 +59,9 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         doc {
             """
-            Ensures that this value is not less than the specified [minimumValue].
+            Ensures that this konstue is not less than the specified [minimumValue].
 
-            @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+            @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
             """
         }
         sample("samples.comparisons.ComparableOps.coerceAtLeast${f.sampleSuffix}")
@@ -72,7 +72,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_coerceAtMost = fn("coerceAtMost(maximumValue: SELF)") {
+    konst f_coerceAtMost = fn("coerceAtMost(maximumValue: SELF)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -82,9 +82,9 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         doc {
             """
-            Ensures that this value is not greater than the specified [maximumValue].
+            Ensures that this konstue is not greater than the specified [maximumValue].
 
-            @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+            @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
             """
         }
         sample("samples.comparisons.ComparableOps.coerceAtMost${f.sampleSuffix}")
@@ -95,7 +95,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_coerceIn_range_primitive = fn("coerceIn(range: ClosedRange<T>)") {
+    konst f_coerceIn_range_primitive = fn("coerceIn(range: ClosedRange<T>)") {
         include(Generic)
         include(Primitives, intPrimitives)
         include(Unsigned, uintPrimitives)
@@ -105,9 +105,9 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         doc {
             """
-            Ensures that this value lies in the specified [range].
+            Ensures that this konstue lies in the specified [range].
 
-            @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+            @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
             """
         }
         sample("samples.comparisons.ComparableOps.coerceIn${f.sampleSuffix}")
@@ -116,7 +116,7 @@ object ComparableOps : TemplateGroupBase() {
             if (range is ClosedFloatingPointRange) {
                 return this.coerceIn<T>(range)
             }
-            if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: ${'$'}range.")
+            if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: ${'$'}range.")
             return when {
                 this < range.start -> range.start
                 this > range.endInclusive -> range.endInclusive
@@ -126,7 +126,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_coerceIn_fpRange = fn("coerceIn(range: ClosedFloatingPointRange<T>)") {
+    konst f_coerceIn_fpRange = fn("coerceIn(range: ClosedFloatingPointRange<T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileRanges)
@@ -135,15 +135,15 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         doc {
             """
-            Ensures that this value lies in the specified [range].
+            Ensures that this konstue lies in the specified [range].
 
-            @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+            @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
             """
         }
         sample("samples.comparisons.ComparableOps.coerceInFloatingPointRange")
         body(Generic) {
             """
-            if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: ${'$'}range.")
+            if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: ${'$'}range.")
             return when {
                 // this < start equiv to this <= start && !(this >= start)
                 range.lessThanOrEquals(this, range.start) && !range.lessThanOrEquals(range.start, this) -> range.start
@@ -156,7 +156,7 @@ object ComparableOps : TemplateGroupBase() {
     }
 
 
-    val f_minOf_2 = fn("minOf(a: T, b: T)") {
+    konst f_minOf_2 = fn("minOf(a: T, b: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -166,17 +166,17 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         returns("T")
         receiver("")
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the smaller of two values.",
+            konst lines = listOfNotNull(
+                "Returns the smaller of two konstues.",
                 "",
-                "If values are equal, returns the first one.".takeIf { primitive == null },
-                "If either value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If konstues are equal, returns the first one.".takeIf { primitive == null },
+                "If either konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
-        val defaultImpl = "if (a <= b) a else b"
+        konst defaultImpl = "if (a <= b) a else b"
         body { "return $defaultImpl" }
         specialFor(Primitives) {
             inlineOnly()
@@ -219,7 +219,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_minOf_3 = fn("minOf(a: T, b: T, c: T)") {
+    konst f_minOf_3 = fn("minOf(a: T, b: T, c: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -230,13 +230,13 @@ object ComparableOps : TemplateGroupBase() {
         returns("T")
         receiver("")
         specialFor(Primitives, Unsigned) { inlineOnly() }
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the smaller of three values.",
+            konst lines = listOfNotNull(
+                "Returns the smaller of three konstues.",
                 "",
-                "If there are multiple equal minimal values, returns the first of them.".takeIf { primitive == null },
-                "If any value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If there are multiple equal minimal konstues, returns the first of them.".takeIf { primitive == null },
+                "If any konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
@@ -264,7 +264,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_minOf_vararg = fn("minOf(a: T, vararg other: T)") {
+    konst f_minOf_vararg = fn("minOf(a: T, vararg other: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -274,13 +274,13 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         returns("T")
         receiver("")
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the smaller of the given values.",
+            konst lines = listOfNotNull(
+                "Returns the smaller of the given konstues.",
                 "",
-                "If there are multiple equal minimal values, returns the first of them.".takeIf { primitive == null },
-                "If any value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If there are multiple equal minimal konstues, returns the first of them.".takeIf { primitive == null },
+                "If any konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
@@ -296,7 +296,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_minOf_2_comparator = fn("minOf(a: T, b: T, comparator: Comparator<in T>)") {
+    konst f_minOf_2_comparator = fn("minOf(a: T, b: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -305,9 +305,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the smaller of two values according to the order specified by the given [comparator].
+            Returns the smaller of two konstues according to the order specified by the given [comparator].
             
-            If values are equal, returns the first one.
+            If konstues are equal, returns the first one.
             """
         }
         body {
@@ -315,7 +315,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_minOf_3_comparator = fn("minOf(a: T, b: T, c: T, comparator: Comparator<in T>)") {
+    konst f_minOf_3_comparator = fn("minOf(a: T, b: T, c: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -324,9 +324,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the smaller of three values according to the order specified by the given [comparator].
+            Returns the smaller of three konstues according to the order specified by the given [comparator].
             
-            If there are multiple equal minimal values, returns the first of them.
+            If there are multiple equal minimal konstues, returns the first of them.
             """
         }
         body {
@@ -334,7 +334,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_minOf_vararg_comparator = fn("minOf(a: T, vararg other: T, comparator: Comparator<in T>)") {
+    konst f_minOf_vararg_comparator = fn("minOf(a: T, vararg other: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -343,9 +343,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the smaller of the given values according to the order specified by the given [comparator].
+            Returns the smaller of the given konstues according to the order specified by the given [comparator].
 
-            If there are multiple equal minimal values, returns the first of them.
+            If there are multiple equal minimal konstues, returns the first of them.
             """
         }
         body {
@@ -357,7 +357,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_2 = fn("maxOf(a: T, b: T)") {
+    konst f_maxOf_2 = fn("maxOf(a: T, b: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -367,17 +367,17 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         returns("T")
         receiver("")
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the greater of two values.",
+            konst lines = listOfNotNull(
+                "Returns the greater of two konstues.",
                 "",
-                "If values are equal, returns the first one.".takeIf { primitive == null },
-                "If either value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If konstues are equal, returns the first one.".takeIf { primitive == null },
+                "If either konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
-        val defaultImpl = "if (a >= b) a else b"
+        konst defaultImpl = "if (a >= b) a else b"
         body { "return $defaultImpl" }
         specialFor(Primitives) {
             inlineOnly()
@@ -416,7 +416,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_3 = fn("maxOf(a: T, b: T, c: T)") {
+    konst f_maxOf_3 = fn("maxOf(a: T, b: T, c: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -427,13 +427,13 @@ object ComparableOps : TemplateGroupBase() {
         returns("T")
         receiver("")
         specialFor(Primitives, Unsigned) { inlineOnly() }
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the greater of three values.",
+            konst lines = listOfNotNull(
+                "Returns the greater of three konstues.",
                 "",
-                "If there are multiple equal maximal values, returns the first of them.".takeIf { primitive == null },
-                "If any value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If there are multiple equal maximal konstues, returns the first of them.".takeIf { primitive == null },
+                "If any konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
@@ -461,7 +461,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_vararg = fn("maxOf(a: T, vararg other: T)") {
+    konst f_maxOf_vararg = fn("maxOf(a: T, vararg other: T)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -471,13 +471,13 @@ object ComparableOps : TemplateGroupBase() {
         typeParam("T : Comparable<T>")
         returns("T")
         receiver("")
-        val isFloat = primitive?.isFloatingPoint() == true
+        konst isFloat = primitive?.isFloatingPoint() == true
         doc {
-            val lines = listOfNotNull(
-                "Returns the greater of the given values.",
+            konst lines = listOfNotNull(
+                "Returns the greater of the given konstues.",
                 "",
-                "If there are multiple equal maximal values, returns the first of them.".takeIf { primitive == null },
-                "If any value is `NaN`, returns `NaN`.".takeIf { isFloat }
+                "If there are multiple equal maximal konstues, returns the first of them.".takeIf { primitive == null },
+                "If any konstue is `NaN`, returns `NaN`.".takeIf { isFloat }
             )
             lines.joinToString("\n")
         }
@@ -493,7 +493,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_2_comparator = fn("maxOf(a: T, b: T, comparator: Comparator<in T>)") {
+    konst f_maxOf_2_comparator = fn("maxOf(a: T, b: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -502,9 +502,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the greater of two values according to the order specified by the given [comparator].
+            Returns the greater of two konstues according to the order specified by the given [comparator].
             
-            If values are equal, returns the first one.
+            If konstues are equal, returns the first one.
             """
         }
         body {
@@ -512,7 +512,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_3_comparator = fn("maxOf(a: T, b: T, c: T, comparator: Comparator<in T>)") {
+    konst f_maxOf_3_comparator = fn("maxOf(a: T, b: T, c: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -521,9 +521,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the greater of three values according to the order specified by the given [comparator].
+            Returns the greater of three konstues according to the order specified by the given [comparator].
              
-            If there are multiple equal maximal values, returns the first of them.
+            If there are multiple equal maximal konstues, returns the first of them.
            """
         }
         body {
@@ -531,7 +531,7 @@ object ComparableOps : TemplateGroupBase() {
         }
     }
 
-    val f_maxOf_vararg_comparator = fn("maxOf(a: T, vararg other: T, comparator: Comparator<in T>)") {
+    konst f_maxOf_vararg_comparator = fn("maxOf(a: T, vararg other: T, comparator: Comparator<in T>)") {
         include(Generic)
     } builder {
         sourceFile(f.sourceFileComparisons)
@@ -540,9 +540,9 @@ object ComparableOps : TemplateGroupBase() {
         receiver("")
         doc {
             """
-            Returns the greater of the given values according to the order specified by the given [comparator].
+            Returns the greater of the given konstues according to the order specified by the given [comparator].
             
-            If there are multiple equal maximal values, returns the first of them.
+            If there are multiple equal maximal konstues, returns the first of them.
             """
         }
         body {
@@ -555,7 +555,7 @@ object ComparableOps : TemplateGroupBase() {
     }
 
 
-    val f_coerceIn_min_max = fn("coerceIn(minimumValue: SELF, maximumValue: SELF)") {
+    konst f_coerceIn_min_max = fn("coerceIn(minimumValue: SELF, maximumValue: SELF)") {
         include(Generic)
         include(Primitives, numericPrimitives)
         include(Unsigned)
@@ -567,15 +567,15 @@ object ComparableOps : TemplateGroupBase() {
         returns("SELF")
         doc {
             """
-            Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+            Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
 
-            @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+            @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
             """
         }
         sample("samples.comparisons.ComparableOps.coerceIn${f.sampleSuffix}")
         body(Primitives, Unsigned) {
             """
-            if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum ${'$'}maximumValue is less than minimum ${'$'}minimumValue.")
+            if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum ${'$'}maximumValue is less than minimum ${'$'}minimumValue.")
             if (this < minimumValue) return minimumValue
             if (this > maximumValue) return maximumValue
             return this
@@ -584,7 +584,7 @@ object ComparableOps : TemplateGroupBase() {
         body(Generic) {
             """
             if (minimumValue !== null && maximumValue !== null) {
-                if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum ${'$'}maximumValue is less than minimum ${'$'}minimumValue.")
+                if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum ${'$'}maximumValue is less than minimum ${'$'}minimumValue.")
                 if (this < minimumValue) return minimumValue
                 if (this > maximumValue) return maximumValue
             }

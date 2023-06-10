@@ -16,7 +16,7 @@ object FirTypeArgumentsNotAllowedExpressionChecker : FirQualifiedAccessExpressio
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         // analyze type parameters near
         // package names
-        val explicitReceiver = expression.explicitReceiver
+        konst explicitReceiver = expression.explicitReceiver
 
         if (explicitReceiver is FirResolvedQualifier && explicitReceiver.symbol == null) {
             if (explicitReceiver.typeArguments.isNotEmpty()) {

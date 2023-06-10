@@ -33,12 +33,12 @@ class BuildLogParserParametrizedTest {
     fun testParser() {
         fun String.normalizeSeparators() = replace("\r\n", "\n").trim()
 
-        val testDir = File(TEST_ROOT, testDirName)
-        val logFile = File(testDir, LOG_FILE_NAME)
+        konst testDir = File(TEST_ROOT, testDirName)
+        konst logFile = File(testDir, LOG_FILE_NAME)
         assert(logFile.isFile) { "Log file: $logFile does not exist" }
 
-        val actualNormalized = dumpBuildLog(parseTestBuildLog(logFile)).normalizeSeparators()
-        val expectedFile = File(testDir, EXPECTED_PARSED_LOG_FILE_NAME)
+        konst actualNormalized = dumpBuildLog(parseTestBuildLog(logFile)).normalizeSeparators()
+        konst expectedFile = File(testDir, EXPECTED_PARSED_LOG_FILE_NAME)
 
         if (!expectedFile.isFile) {
             expectedFile.createNewFile()
@@ -47,24 +47,24 @@ class BuildLogParserParametrizedTest {
             throw AssertionError("Expected file log did not exist, created: $expectedFile")
         }
 
-        val expectedNormalized = expectedFile.readText().normalizeSeparators()
+        konst expectedNormalized = expectedFile.readText().normalizeSeparators()
         Assert.assertEquals("Parsed content was unexpected: ", expectedNormalized, actualNormalized)
 
         // parse expected, dump again and compare (to check that dumped log can be parsed again)
-        val reparsedActualNormalized = dumpBuildLog(parseTestBuildLog(expectedFile)).normalizeSeparators()
+        konst reparsedActualNormalized = dumpBuildLog(parseTestBuildLog(expectedFile)).normalizeSeparators()
         Assert.assertEquals("Reparsed content was unexpected: ", expectedNormalized, reparsedActualNormalized)
     }
 
     companion object {
-        private val TEST_ROOT = File("compiler/incremental-compilation-impl/testData/buildLogsParserData")
-        private val LOG_FILE_NAME = "build.log"
-        private val EXPECTED_PARSED_LOG_FILE_NAME = "expected.txt"
+        private konst TEST_ROOT = File("compiler/incremental-compilation-impl/testData/buildLogsParserData")
+        private konst LOG_FILE_NAME = "build.log"
+        private konst EXPECTED_PARSED_LOG_FILE_NAME = "expected.txt"
 
         @Suppress("unused")
         @Parameterized.Parameters(name = "{index}: {0}")
         @JvmStatic
         fun data(): List<Array<String>> {
-            val directories = TEST_ROOT.listFiles().filter { it.isDirectory }
+            konst directories = TEST_ROOT.listFiles().filter { it.isDirectory }
             return directories.map { arrayOf(it.name) }
         }
     }

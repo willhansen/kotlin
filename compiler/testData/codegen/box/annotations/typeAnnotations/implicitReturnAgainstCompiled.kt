@@ -37,7 +37,7 @@ class Kotlin {
     fun foo() = ImplicitReturn().bar()
 
     @JvmField
-    val field = ImplicitReturn().bar()
+    konst field = ImplicitReturn().bar()
 }
 
 fun box(): String {

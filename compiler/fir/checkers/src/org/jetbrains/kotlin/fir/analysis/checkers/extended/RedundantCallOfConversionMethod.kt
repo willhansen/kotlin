@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.psi.KtSafeQualifiedExpression
 object RedundantCallOfConversionMethod : FirQualifiedAccessExpressionChecker() {
     override fun check(expression: FirQualifiedAccessExpression, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression !is FirFunctionCall) return
-        val functionName = expression.calleeReference.name.asString()
-        val qualifiedType = targetClassMap[functionName] ?: return
+        konst functionName = expression.calleeReference.name.asString()
+        konst qualifiedType = targetClassMap[functionName] ?: return
 
         if (expression.explicitReceiver?.isRedundant(qualifiedType) == true) {
             reporter.reportOn(expression.source, FirErrors.REDUNDANT_CALL_OF_CONVERSION_METHOD, context)
@@ -35,7 +35,7 @@ object RedundantCallOfConversionMethod : FirQualifiedAccessExpressionChecker() {
     }
 
     private fun FirExpression.isRedundant(qualifiedClassId: ClassId): Boolean {
-        val thisType = if (this is FirConstExpression<*>) {
+        konst thisType = if (this is FirConstExpression<*>) {
             this.typeRef.coneType.classId
         } else {
             when {
@@ -49,7 +49,7 @@ object RedundantCallOfConversionMethod : FirQualifiedAccessExpressionChecker() {
         return thisType == qualifiedClassId
     }
 
-    private val targetClassMap = hashMapOf(
+    private konst targetClassMap = hashMapOf(
         "toString" to StandardClassIds.String,
         "toDouble" to StandardClassIds.Double,
         "toFloat" to StandardClassIds.Float,

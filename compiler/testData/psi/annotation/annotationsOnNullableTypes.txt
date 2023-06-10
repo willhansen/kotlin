@@ -102,7 +102,7 @@ KtFile: annotationsOnNullableTypes.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('baz')
     PsiElement(COLON)(':')
@@ -240,7 +240,7 @@ KtFile: annotationsOnNullableTypes.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('baz1')
     PsiElement(COLON)(':')
@@ -414,7 +414,7 @@ KtFile: annotationsOnNullableTypes.kt
       PsiElement(RBRACE)('}')
   PsiWhiteSpace('\n\n')
   PROPERTY
-    PsiElement(val)('val')
+    PsiElement(konst)('konst')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('baz2')
     PsiElement(COLON)(':')

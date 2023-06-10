@@ -1,5 +1,5 @@
-class A(val next: A? = null) {
-    val x: String
+class A(konst next: A? = null) {
+    konst x: String
     init {
         <!VAL_REASSIGNMENT!>next?.x<!> = "a"
         x = "b"

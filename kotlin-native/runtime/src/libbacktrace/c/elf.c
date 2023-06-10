@@ -145,7 +145,7 @@ dl_iterate_phdr (int (*callback) (struct dl_phdr_info *,
 #endif
 
 /* <link.h> might #include <elf.h> which might define our constants
-   with slightly different values.  Undefine them to be safe.  */
+   with slightly different konstues.  Undefine them to be safe.  */
 
 #undef EI_NIDENT
 #undef EI_MAG0
@@ -280,7 +280,7 @@ typedef struct {
 typedef struct
 {
   b_elf_word	st_name;		/* Symbol name, index in string tbl */
-  b_elf_addr	st_value;		/* Symbol value */
+  b_elf_addr	st_konstue;		/* Symbol konstue */
   b_elf_word	st_size;		/* Symbol size */
   unsigned char	st_info;		/* Symbol binding and type */
   unsigned char	st_other;		/* Visibility and other data */
@@ -295,7 +295,7 @@ typedef struct
   unsigned char	st_info;		/* Symbol binding and type */
   unsigned char	st_other;		/* Visibility and other data */
   b_elf_half	st_shndx;		/* Symbol section index */
-  b_elf_addr	st_value;		/* Symbol value */
+  b_elf_addr	st_konstue;		/* Symbol konstue */
   b_elf_xword	st_size;		/* Symbol size */
 } b_elf_sym;  /* Elf_Sym.  */
 
@@ -686,12 +686,12 @@ elf_initialize_syminfo (struct backtrace_state *state,
 	 is a function descriptor, read the actual code address from the
 	 descriptor.  */
       if (opd
-	  && sym->st_value >= opd->addr
-	  && sym->st_value < opd->addr + opd->size)
+	  && sym->st_konstue >= opd->addr
+	  && sym->st_konstue < opd->addr + opd->size)
 	elf_symbols[j].address
-	  = *(const b_elf_addr *) (opd->data + (sym->st_value - opd->addr));
+	  = *(const b_elf_addr *) (opd->data + (sym->st_konstue - opd->addr));
       else
-	elf_symbols[j].address = sym->st_value;
+	elf_symbols[j].address = sym->st_konstue;
       elf_symbols[j].address += base_address;
       elf_symbols[j].size = sym->st_size;
       ++j;
@@ -749,7 +749,7 @@ elf_add_syminfo_data (struct backtrace_state *state,
     }
 }
 
-/* Return the symbol name and value for an ADDR.  */
+/* Return the symbol name and konstue for an ADDR.  */
 
 static void
 elf_syminfo (struct backtrace_state *state, uintptr_t addr,
@@ -1101,26 +1101,26 @@ elf_uncompress_failed(void)
 {
 }
 
-/* *PVAL is the current value being read from the stream, and *PBITS
-   is the number of valid bits.  Ensure that *PVAL holds at least 15
+/* *PVAL is the current konstue being read from the stream, and *PBITS
+   is the number of konstid bits.  Ensure that *PVAL holds at least 15
    bits by reading additional bits from *PPIN, up to PINEND, as
    needed.  Updates *PPIN, *PVAL and *PBITS.  Returns 1 on success, 0
    on error.  */
 
 static int
 elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
-		uint64_t *pval, unsigned int *pbits)
+		uint64_t *pkonst, unsigned int *pbits)
 {
   unsigned int bits;
   const unsigned char *pin;
-  uint64_t val;
+  uint64_t konst;
   uint32_t next;
 
   bits = *pbits;
   if (bits >= 15)
     return 1;
   pin = *ppin;
-  val = *pval;
+  konst = *pkonst;
 
   if (unlikely (pinend - pin < 4))
     {
@@ -1142,7 +1142,7 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
   next = pin[0] | (pin[1] << 8) | (pin[2] << 16) | (pin[3] << 24);
 #endif
 
-  val |= (uint64_t)next << bits;
+  konst |= (uint64_t)next << bits;
   bits += 32;
   pin += 4;
 
@@ -1150,7 +1150,7 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
   __builtin_prefetch (pin, 0, 0);
 
   *ppin = pin;
-  *pval = val;
+  *pkonst = konst;
   *pbits = bits;
   return 1;
 }
@@ -1165,7 +1165,7 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
    the table in the overall memory storage.
 
    The deflate format says that all codes of a given bit length are
-   lexicographically consecutive.  Perhaps we could have 130 values
+   lexicographically consecutive.  Perhaps we could have 130 konstues
    that require a 15-bit code, perhaps requiring three secondary
    tables of size 128.  I don't know if this is actually possible, but
    it suggests that the maximum size required for secondary tables is
@@ -1174,15 +1174,15 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
    the primary table, with two bytes per entry, and with the two
    tables we need, that gives us a page.
 
-   A single table entry needs to store a value or (for the main table
+   A single table entry needs to store a konstue or (for the main table
    only) the index and size of a secondary table.  Values range from 0
    to 285, inclusive.  Secondary table indexes, per above, range from
-   0 to 510.  For a value we need to store the number of bits we need
-   to determine that value (one value may appear multiple times in the
+   0 to 510.  For a konstue we need to store the number of bits we need
+   to determine that konstue (one konstue may appear multiple times in the
    table), which is 1 to 8.  For a secondary table we need to store
    the number of bits used to index into the table, which is 1 to 7.
-   And of course we need 1 bit to decide whether we have a value or a
-   secondary table index.  So each entry needs 9 bits for value/table
+   And of course we need 1 bit to decide whether we have a konstue or a
+   secondary table index.  So each entry needs 9 bits for konstue/table
    index, 3 bits for size, 1 bit what it is.  For simplicity we use 16
    bits per entry.  */
 
@@ -1191,7 +1191,7 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
 
 #define HUFFMAN_TABLE_SIZE (1024)
 
-/* Bit masks and shifts for the values in the table.  */
+/* Bit masks and shifts for the konstues in the table.  */
 
 #define HUFFMAN_VALUE_MASK 0x01ff
 #define HUFFMAN_BITS_SHIFT 9
@@ -1199,7 +1199,7 @@ elf_zlib_fetch (const unsigned char **ppin, const unsigned char *pinend,
 #define HUFFMAN_SECONDARY_SHIFT 12
 
 /* For working memory while inflating we need two code tables, we need
-   an array of code lengths (max value 15, so we use unsigned char),
+   an array of code lengths (max konstue 15, so we use unsigned char),
    and an array of unsigned shorts used while building a table.  The
    latter two arrays must be large enough to hold the maximum number
    of code lengths, which RFC 1951 defines as 286 + 30.  */
@@ -1243,8 +1243,8 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
   unsigned int code;
   size_t next_secondary;
 
-  /* Count the number of code of each length.  Set NEXT[val] to be the
-     next value after VAL with the same bit length.  */
+  /* Count the number of code of each length.  Set NEXT[konst] to be the
+     next konstue after VAL with the same bit length.  */
 
   next = (uint16_t *) (((unsigned char *) zdebug_table)
 		       + ZDEBUG_TABLE_WORK_OFFSET);
@@ -1277,13 +1277,13 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 
   memset (table, 0, HUFFMAN_TABLE_SIZE * sizeof (uint16_t));
 
-  /* Handle the values that do not require a secondary table.  */
+  /* Handle the konstues that do not require a secondary table.  */
 
   code = 0;
   for (j = 1; j <= 8; ++j)
     {
       unsigned int jcnt;
-      unsigned int val;
+      unsigned int konst;
 
       jcnt = count[j];
       if (jcnt == 0)
@@ -1295,27 +1295,27 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 	  return 0;
 	}
 
-      /* There are JCNT values that have this length, the values
+      /* There are JCNT konstues that have this length, the konstues
 	 starting from START[j] continuing through NEXT[VAL].  Those
-	 values are assigned consecutive values starting at CODE.  */
+	 konstues are assigned consecutive konstues starting at CODE.  */
 
-      val = start[j];
+      konst = start[j];
       for (i = 0; i < jcnt; ++i)
 	{
-	  uint16_t tval;
+	  uint16_t tkonst;
 	  size_t ind;
 	  unsigned int incr;
 
-	  /* In the compressed bit stream, the value VAL is encoded as
-	     J bits with the value C.  */
+	  /* In the compressed bit stream, the konstue VAL is encoded as
+	     J bits with the konstue C.  */
 
-	  if (unlikely ((val & ~HUFFMAN_VALUE_MASK) != 0))
+	  if (unlikely ((konst & ~HUFFMAN_VALUE_MASK) != 0))
 	    {
 	      elf_uncompress_failed ();
 	      return 0;
 	    }
 
-	  tval = val | ((j - 1) << HUFFMAN_BITS_SHIFT);
+	  tkonst = konst | ((j - 1) << HUFFMAN_BITS_SHIFT);
 
 	  /* The table lookup uses 8 bits.  If J is less than 8, we
 	     don't know what the other bits will be.  We need to fill
@@ -1330,19 +1330,19 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 		  elf_uncompress_failed ();
 		  return 0;
 		}
-	      table[ind] = tval;
+	      table[ind] = tkonst;
 	    }
 
-	  /* Advance to the next value with this length.  */
+	  /* Advance to the next konstue with this length.  */
 	  if (i + 1 < jcnt)
-	    val = next[val];
+	    konst = next[konst];
 
 	  /* The Huffman codes are stored in the bitstream with the
 	     most significant bit first, as is required to make them
 	     unambiguous.  The effect is that when we read them from
 	     the bitstream we see the bit sequence in reverse order:
 	     the most significant bit of the Huffman code is the least
-	     significant bit of the value we read from the bitstream.
+	     significant bit of the konstue we read from the bitstream.
 	     That means that to make our table lookups work, we need
 	     to reverse the bits of CODE.  Since reversing bits is
 	     tedious and in general requires using a table, we instead
@@ -1352,7 +1352,7 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 	     to say the numbers from 0 to 7 but with the bits
 	     reversed.  Going to more bits, aka incrementing J,
 	     effectively just adds more zero bits as the beginning,
-	     and as such does not change the numeric value of CODE.
+	     and as such does not change the numeric konstue of CODE.
 
 	     To increment CODE of length J in reverse order, find the
 	     most significant zero bit and set it to one while
@@ -1372,7 +1372,7 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 	}
     }
 
-  /* Handle the values that require a secondary table.  */
+  /* Handle the konstues that require a secondary table.  */
 
   /* Set FIRSTCODE, the number at which the codes start, for each
      length.  */
@@ -1386,9 +1386,9 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
       if (jcnt == 0)
 	continue;
 
-      /* There are JCNT values that have this length, the values
-	 starting from START[j].  Those values are assigned
-	 consecutive values starting at CODE.  */
+      /* There are JCNT konstues that have this length, the konstues
+	 starting from START[j].  Those konstues are assigned
+	 consecutive konstues starting at CODE.  */
 
       firstcode[j - 9] = code;
 
@@ -1421,7 +1421,7 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
     }
 
   /* For J from 9 to 15, inclusive, we store COUNT[J] consecutive
-     values starting at START[J] with consecutive codes starting at
+     konstues starting at START[J] with consecutive codes starting at
      FIRSTCODE[J - 9].  In the primary table we need to point to the
      secondary table, and the secondary table will be indexed by J - 9
      bits.  We count down from 15 so that we install the larger
@@ -1432,7 +1432,7 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
   for (j = 15; j >= 9; j--)
     {
       unsigned int jcnt;
-      unsigned int val;
+      unsigned int konst;
       size_t primary; /* Current primary index.  */
       size_t secondary; /* Offset to current secondary table.  */
       size_t secondary_bits; /* Bit size of current secondary table.  */
@@ -1441,14 +1441,14 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
       if (jcnt == 0)
 	continue;
 
-      val = start[j];
+      konst = start[j];
       code = firstcode[j - 9];
       primary = 0x100;
       secondary = 0;
       secondary_bits = 0;
       for (i = 0; i < jcnt; ++i)
 	{
-	  uint16_t tval;
+	  uint16_t tkonst;
 	  size_t ind;
 	  unsigned int incr;
 
@@ -1502,7 +1502,7 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 
 	  /* Fill in secondary table entries.  */
 
-	  tval = val | ((j - 8) << HUFFMAN_BITS_SHIFT);
+	  tkonst = konst | ((j - 8) << HUFFMAN_BITS_SHIFT);
 
 	  for (ind = code >> 8;
 	       ind < (1U << secondary_bits);
@@ -1513,11 +1513,11 @@ elf_zlib_inflate_table (unsigned char *codes, size_t codes_len,
 		  elf_uncompress_failed ();
 		  return 0;
 		}
-	      table[secondary + 0x100 + ind] = tval;
+	      table[secondary + 0x100 + ind] = tkonst;
 	    }
 
 	  if (i + 1 < jcnt)
-	    val = next[val];
+	    konst = next[konst];
 
 	  incr = 1U << (j - 1);
 	  while ((code & incr) != 0)
@@ -1717,7 +1717,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
   poutend = pout + sout;
   while ((pinend - pin) > 4)
     {
-      uint64_t val;
+      uint64_t konst;
       unsigned int bits;
       int last;
 
@@ -1743,8 +1743,8 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	  elf_uncompress_failed ();
 	  return 0;
 	}
-      val = (pin[0] << 8) | pin[1];
-      if (unlikely (val % 31 != 0))
+      konst = (pin[0] << 8) | pin[1];
+      if (unlikely (konst % 31 != 0))
 	{
 	  /* Header check failure.  */
 	  elf_uncompress_failed ();
@@ -1754,11 +1754,11 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 
       /* Align PIN to a 32-bit boundary.  */
 
-      val = 0;
+      konst = 0;
       bits = 0;
       while ((((uintptr_t) pin) & 3) != 0)
 	{
-	  val |= (uint64_t)*pin << bits;
+	  konst |= (uint64_t)*pin << bits;
 	  bits += 8;
 	  ++pin;
 	}
@@ -1773,17 +1773,17 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	  const uint16_t *tlit;
 	  const uint16_t *tdist;
 
-	  if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	  if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 	    return 0;
 
-	  last = val & 1;
-	  type = (val >> 1) & 3;
-	  val >>= 3;
+	  last = konst & 1;
+	  type = (konst >> 1) & 3;
+	  konst >>= 3;
 	  bits -= 3;
 
 	  if (unlikely (type == 3))
 	    {
-	      /* Invalid block type.  */
+	      /* Inkonstid block type.  */
 	      elf_uncompress_failed ();
 	      return 0;
 	    }
@@ -1802,7 +1802,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 		  bits -= 8;
 		}
 
-	      val = 0;
+	      konst = 0;
 	      bits = 0;
 	      if (unlikely ((pinend - pin) < 4))
 		{
@@ -1834,7 +1834,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	      /* Align PIN.  */
 	      while ((((uintptr_t) pin) & 3) != 0)
 		{
-		  val |= (uint64_t)*pin << bits;
+		  konst |= (uint64_t)*pin << bits;
 		  bits += 8;
 		  ++pin;
 		}
@@ -1861,15 +1861,15 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	      /* Read a Huffman encoding table.  The various magic
 		 numbers here are from RFC 1951.  */
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      nlit = (val & 0x1f) + 257;
-	      val >>= 5;
-	      ndist = (val & 0x1f) + 1;
-	      val >>= 5;
-	      nclen = (val & 0xf) + 4;
-	      val >>= 4;
+	      nlit = (konst & 0x1f) + 257;
+	      konst >>= 5;
+	      ndist = (konst & 0x1f) + 1;
+	      konst >>= 5;
+	      nclen = (konst & 0xf) + 4;
+	      konst >>= 4;
 	      bits -= 14;
 	      if (unlikely (nlit > 286 || ndist > 30))
 		{
@@ -1886,128 +1886,128 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	      /* There are always at least 4 elements in the
 		 table.  */
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      codebits[16] = val & 7;
-	      codebits[17] = (val >> 3) & 7;
-	      codebits[18] = (val >> 6) & 7;
-	      codebits[0] = (val >> 9) & 7;
-	      val >>= 12;
+	      codebits[16] = konst & 7;
+	      codebits[17] = (konst >> 3) & 7;
+	      codebits[18] = (konst >> 6) & 7;
+	      codebits[0] = (konst >> 9) & 7;
+	      konst >>= 12;
 	      bits -= 12;
 
 	      if (nclen == 4)
 		goto codebitsdone;
 
-	      codebits[8] = val & 7;
-	      val >>= 3;
+	      codebits[8] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 5)
 		goto codebitsdone;
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      codebits[7] = val & 7;
-	      val >>= 3;
+	      codebits[7] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 6)
 		goto codebitsdone;
 
-	      codebits[9] = val & 7;
-	      val >>= 3;
+	      codebits[9] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 7)
 		goto codebitsdone;
 
-	      codebits[6] = val & 7;
-	      val >>= 3;
+	      codebits[6] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 8)
 		goto codebitsdone;
 
-	      codebits[10] = val & 7;
-	      val >>= 3;
+	      codebits[10] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 9)
 		goto codebitsdone;
 
-	      codebits[5] = val & 7;
-	      val >>= 3;
+	      codebits[5] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 10)
 		goto codebitsdone;
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      codebits[11] = val & 7;
-	      val >>= 3;
+	      codebits[11] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 11)
 		goto codebitsdone;
 
-	      codebits[4] = val & 7;
-	      val >>= 3;
+	      codebits[4] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 12)
 		goto codebitsdone;
 
-	      codebits[12] = val & 7;
-	      val >>= 3;
+	      codebits[12] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 13)
 		goto codebitsdone;
 
-	      codebits[3] = val & 7;
-	      val >>= 3;
+	      codebits[3] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 14)
 		goto codebitsdone;
 
-	      codebits[13] = val & 7;
-	      val >>= 3;
+	      codebits[13] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 15)
 		goto codebitsdone;
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      codebits[2] = val & 7;
-	      val >>= 3;
+	      codebits[2] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 16)
 		goto codebitsdone;
 
-	      codebits[14] = val & 7;
-	      val >>= 3;
+	      codebits[14] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 17)
 		goto codebitsdone;
 
-	      codebits[1] = val & 7;
-	      val >>= 3;
+	      codebits[1] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	      if (nclen == 18)
 		goto codebitsdone;
 
-	      codebits[15] = val & 7;
-	      val >>= 3;
+	      codebits[15] = konst & 7;
+	      konst >>= 3;
 	      bits -= 3;
 
 	    codebitsdone:
@@ -2030,10 +2030,10 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 		  unsigned int b;
 		  uint16_t v;
 
-		  if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+		  if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		    return 0;
 
-		  t = zdebug_table[val & 0xff];
+		  t = zdebug_table[konst & 0xff];
 
 		  /* The compression here uses bit lengths up to 7, so
 		     a secondary table is never necessary.  */
@@ -2044,7 +2044,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 		    }
 
 		  b = (t >> HUFFMAN_BITS_SHIFT) & HUFFMAN_BITS_MASK;
-		  val >>= b + 1;
+		  konst >>= b + 1;
 		  bits -= b + 1;
 
 		  v = t & HUFFMAN_VALUE_MASK;
@@ -2067,8 +2067,8 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 			 elf_zlib_fetch, so we have at least 8 bits
 			 available here.  */
 
-		      c = 3 + (val & 0x3);
-		      val >>= 2;
+		      c = 3 + (konst & 0x3);
+		      konst >>= 2;
 		      bits -= 2;
 		      if (unlikely ((unsigned int) (plenend - plen) < c))
 			{
@@ -2102,8 +2102,8 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 			 elf_zlib_fetch, so we have at least 8 bits
 			 available here.  */
 
-		      c = 3 + (val & 0x7);
-		      val >>= 3;
+		      c = 3 + (konst & 0x7);
+		      konst >>= 3;
 		      bits -= 3;
 		      if (unlikely ((unsigned int) (plenend - plen) < c))
 			{
@@ -2148,8 +2148,8 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 			 elf_zlib_fetch, so we have at least 8 bits
 			 available here.  */
 
-		      c = 11 + (val & 0x7f);
-		      val >>= 7;
+		      c = 11 + (konst & 0x7f);
+		      konst >>= 7;
 		      bits -= 7;
 		      if (unlikely ((unsigned int) (plenend - plen) < c))
 			{
@@ -2188,7 +2188,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	      tdist = zdebug_table + HUFFMAN_TABLE_SIZE;
 	    }
 
-	  /* Inflate values until the end of the block.  This is the
+	  /* Inflate konstues until the end of the block.  This is the
 	     main loop of the inflation code.  */
 
 	  while (1)
@@ -2198,25 +2198,25 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 	      uint16_t v;
 	      unsigned int lit;
 
-	      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+	      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		return 0;
 
-	      t = tlit[val & 0xff];
+	      t = tlit[konst & 0xff];
 	      b = (t >> HUFFMAN_BITS_SHIFT) & HUFFMAN_BITS_MASK;
 	      v = t & HUFFMAN_VALUE_MASK;
 
 	      if ((t & (1U << HUFFMAN_SECONDARY_SHIFT)) == 0)
 		{
 		  lit = v;
-		  val >>= b + 1;
+		  konst >>= b + 1;
 		  bits -= b + 1;
 		}
 	      else
 		{
-		  t = tlit[v + 0x100 + ((val >> 8) & ((1U << b) - 1))];
+		  t = tlit[v + 0x100 + ((konst >> 8) & ((1U << b) - 1))];
 		  b = (t >> HUFFMAN_BITS_SHIFT) & HUFFMAN_BITS_MASK;
 		  lit = t & HUFFMAN_VALUE_MASK;
-		  val >>= b + 8;
+		  konst >>= b + 8;
 		  bits -= b + 8;
 		}
 
@@ -2260,7 +2260,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 		    {
 		      unsigned int extra;
 
-		      if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+		      if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 			return 0;
 
 		      /* This is an expression for the table of length
@@ -2270,30 +2270,30 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 		      len = (lit & 3) << extra;
 		      len += 11;
 		      len += ((1U << (extra - 1)) - 1) << 3;
-		      len += val & ((1U << extra) - 1);
-		      val >>= extra;
+		      len += konst & ((1U << extra) - 1);
+		      konst >>= extra;
 		      bits -= extra;
 		    }
 
-		  if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+		  if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 		    return 0;
 
-		  t = tdist[val & 0xff];
+		  t = tdist[konst & 0xff];
 		  b = (t >> HUFFMAN_BITS_SHIFT) & HUFFMAN_BITS_MASK;
 		  v = t & HUFFMAN_VALUE_MASK;
 
 		  if ((t & (1U << HUFFMAN_SECONDARY_SHIFT)) == 0)
 		    {
 		      dist = v;
-		      val >>= b + 1;
+		      konst >>= b + 1;
 		      bits -= b + 1;
 		    }
 		  else
 		    {
-		      t = tdist[v + 0x100 + ((val >> 8) & ((1U << b) - 1))];
+		      t = tdist[v + 0x100 + ((konst >> 8) & ((1U << b) - 1))];
 		      b = (t >> HUFFMAN_BITS_SHIFT) & HUFFMAN_BITS_MASK;
 		      dist = t & HUFFMAN_VALUE_MASK;
-		      val >>= b + 8;
+		      konst >>= b + 8;
 		      bits -= b + 8;
 		    }
 
@@ -2332,7 +2332,7 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 			{
 			  unsigned int extra;
 
-			  if (!elf_zlib_fetch (&pin, pinend, &val, &bits))
+			  if (!elf_zlib_fetch (&pin, pinend, &konst, &bits))
 			    return 0;
 
 			  /* This is an expression for the table of
@@ -2342,8 +2342,8 @@ elf_zlib_inflate (const unsigned char *pin, size_t sin, uint16_t *zdebug_table,
 			  dist = (dist & 1) << extra;
 			  dist += 5;
 			  dist += ((1U << (extra - 1)) - 1) << 2;
-			  dist += val & ((1U << extra) - 1);
-			  val >>= extra;
+			  dist += konst & ((1U << extra) - 1);
+			  konst >>= extra;
 			  bits -= extra;
 			}
 
@@ -2673,9 +2673,9 @@ backtrace_uncompress_zdebug (struct backtrace_state *state,
 /* Number of LZMA states.  */
 #define LZMA_STATES (12)
 
-/* Number of LZMA position states.  The pb value of the property byte
+/* Number of LZMA position states.  The pb konstue of the property byte
    is the number of bits to include in these states, and the maximum
-   value of pb is 4.  */
+   konstue of pb is 4.  */
 #define LZMA_POS_STATES (16)
 
 /* Number of LZMA distance states.  These are used match distances
@@ -2686,7 +2686,7 @@ backtrace_uncompress_zdebug (struct backtrace_state *state,
    match lengths, so 1 << 6 possible probabilities.  */
 #define LZMA_DIST_SLOTS (64)
 
-/* LZMA distances 0 to 3 are encoded directly, larger values use a
+/* LZMA distances 0 to 3 are encoded directly, larger konstues use a
    probability model.  */
 #define LZMA_DIST_MODEL_START (4)
 
@@ -2840,7 +2840,7 @@ backtrace_uncompress_zdebug (struct backtrace_state *state,
 
 static int
 elf_lzma_varint (const unsigned char *compressed, size_t compressed_size,
-		 size_t *poffset, uint64_t *val)
+		 size_t *poffset, uint64_t *konst)
 {
   size_t off;
   int i;
@@ -2863,7 +2863,7 @@ elf_lzma_varint (const unsigned char *compressed, size_t compressed_size,
       if ((b & 0x80) == 0)
 	{
 	  *poffset = off;
-	  *val = v;
+	  *konst = v;
 	  return 1;
 	}
       ++i;
@@ -2960,11 +2960,11 @@ elf_lzma_reverse_integer (const unsigned char *compressed,
 			  uint32_t *pcode)
 {
   uint32_t sym;
-  uint32_t val;
+  uint32_t konst;
   uint32_t i;
 
   sym = 1;
-  val = 0;
+  konst = 0;
   for (i = 0; i < bits; i++)
     {
       int bit;
@@ -2973,9 +2973,9 @@ elf_lzma_reverse_integer (const unsigned char *compressed,
 			  prange, pcode);
       sym <<= 1;
       sym += bit;
-      val += bit << i;
+      konst += bit << i;
     }
-  return val;
+  return konst;
 }
 
 /* Read a length from the LZMA stream.  IS_REP picks either LZMA_MATCH
@@ -3216,7 +3216,7 @@ elf_uncompress_lzma_block (const unsigned char *compressed,
 	{
 	  size_t chunk_size;
 
-	  /* The only valid values here are 1 or 2.  A 1 means to
+	  /* The only konstid konstues here are 1 or 2.  A 1 means to
 	     reset the dictionary (done above).  Then we see an
 	     uncompressed chunk.  */
 
@@ -3585,7 +3585,7 @@ elf_uncompress_lzma_block (const unsigned char *compressed,
 		  uint16_t *lit_probs;
 		  unsigned int sym;
 
-		  /* Literal value.  */
+		  /* Literal konstue.  */
 
 		  if (uncompressed_offset > 0)
 		    prev = uncompressed[uncompressed_offset - 1];
@@ -3995,13 +3995,13 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
   unsigned int shnum;
   unsigned int shstrndx;
   struct elf_view shdrs_view;
-  int shdrs_view_valid;
+  int shdrs_view_konstid;
   const b_elf_shdr *shdrs;
   const b_elf_shdr *shstrhdr;
   size_t shstr_size;
   off_t shstr_off;
   struct elf_view names_view;
-  int names_view_valid;
+  int names_view_konstid;
   const char *names;
   unsigned int symtab_shndx;
   unsigned int dynsym_shndx;
@@ -4009,24 +4009,24 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
   struct debug_section_info sections[DEBUG_MAX];
   struct debug_section_info zsections[DEBUG_MAX];
   struct elf_view symtab_view;
-  int symtab_view_valid;
+  int symtab_view_konstid;
   struct elf_view strtab_view;
-  int strtab_view_valid;
+  int strtab_view_konstid;
   struct elf_view buildid_view;
-  int buildid_view_valid;
+  int buildid_view_konstid;
   const char *buildid_data;
   uint32_t buildid_size;
   struct elf_view debuglink_view;
-  int debuglink_view_valid;
+  int debuglink_view_konstid;
   const char *debuglink_name;
   uint32_t debuglink_crc;
   struct elf_view debugaltlink_view;
-  int debugaltlink_view_valid;
+  int debugaltlink_view_konstid;
   const char *debugaltlink_name;
   const char *debugaltlink_buildid_data;
   uint32_t debugaltlink_buildid_size;
   struct elf_view gnu_debugdata_view;
-  int gnu_debugdata_view_valid;
+  int gnu_debugdata_view_konstid;
   size_t gnu_debugdata_size;
   unsigned char *gnu_debugdata_uncompressed;
   size_t gnu_debugdata_uncompressed_size;
@@ -4034,11 +4034,11 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
   off_t max_offset;
   off_t debug_size;
   struct elf_view debug_view;
-  int debug_view_valid;
+  int debug_view_konstid;
   unsigned int using_debug_view;
   uint16_t *zdebug_table;
   struct elf_view split_debug_view[DEBUG_MAX];
-  unsigned char split_debug_view_valid[DEBUG_MAX];
+  unsigned char split_debug_view_konstid[DEBUG_MAX];
   struct elf_ppc64_opd_data opd_data, *opd;
   struct dwarf_sections dwarf_sections;
 
@@ -4048,24 +4048,24 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
       *found_dwarf = 0;
     }
 
-  shdrs_view_valid = 0;
-  names_view_valid = 0;
-  symtab_view_valid = 0;
-  strtab_view_valid = 0;
-  buildid_view_valid = 0;
+  shdrs_view_konstid = 0;
+  names_view_konstid = 0;
+  symtab_view_konstid = 0;
+  strtab_view_konstid = 0;
+  buildid_view_konstid = 0;
   buildid_data = NULL;
   buildid_size = 0;
-  debuglink_view_valid = 0;
+  debuglink_view_konstid = 0;
   debuglink_name = NULL;
   debuglink_crc = 0;
-  debugaltlink_view_valid = 0;
+  debugaltlink_view_konstid = 0;
   debugaltlink_name = NULL;
   debugaltlink_buildid_data = NULL;
   debugaltlink_buildid_size = 0;
-  gnu_debugdata_view_valid = 0;
+  gnu_debugdata_view_konstid = 0;
   gnu_debugdata_size = 0;
-  debug_view_valid = 0;
-  memset (&split_debug_view_valid[0], 0, sizeof split_debug_view_valid);
+  debug_view_konstid = 0;
+  memset (&split_debug_view_konstid[0], 0, sizeof split_debug_view_konstid);
   opd = NULL;
 
   if (!elf_get_view (state, descriptor, memory, memory_size, 0, sizeof ehdr,
@@ -4169,7 +4169,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 		     (shnum - 1) * sizeof (b_elf_shdr),
 		     error_callback, data, &shdrs_view))
     goto fail;
-  shdrs_view_valid = 1;
+  shdrs_view_konstid = 1;
   shdrs = (const b_elf_shdr *) shdrs_view.view.data;
 
   /* Read the section names.  */
@@ -4181,7 +4181,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
   if (!elf_get_view (state, descriptor, memory, memory_size, shstr_off,
 		     shstrhdr->sh_size, error_callback, data, &names_view))
     goto fail;
-  names_view_valid = 1;
+  names_view_konstid = 1;
   names = (const char *) names_view.view.data;
 
   symtab_shndx = 0;
@@ -4242,7 +4242,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	 SHT_NOTE section with the right note name and type, but gdb
 	 looks for a specific section name.  */
       if ((!debuginfo || with_buildid_data != NULL)
-	  && !buildid_view_valid
+	  && !buildid_view_konstid
 	  && strcmp (name, ".note.gnu.build-id") == 0)
 	{
 	  const b_elf_note *note;
@@ -4252,7 +4252,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			     data, &buildid_view))
 	    goto fail;
 
-	  buildid_view_valid = 1;
+	  buildid_view_konstid = 1;
 	  note = (const b_elf_note *) buildid_view.view.data;
 	  if (note->type == NT_GNU_BUILD_ID
 	      && note->namesz == 4
@@ -4275,7 +4275,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 
       /* Read the debuglink file if present.  */
       if (!debuginfo
-	  && !debuglink_view_valid
+	  && !debuglink_view_konstid
 	  && strcmp (name, ".gnu_debuglink") == 0)
 	{
 	  const char *debuglink_data;
@@ -4286,7 +4286,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			     data, &debuglink_view))
 	    goto fail;
 
-	  debuglink_view_valid = 1;
+	  debuglink_view_konstid = 1;
 	  debuglink_data = (const char *) debuglink_view.view.data;
 	  crc_offset = strnlen (debuglink_data, shdr->sh_size);
 	  crc_offset = (crc_offset + 3) & ~3;
@@ -4297,7 +4297,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	    }
 	}
 
-      if (!debugaltlink_view_valid
+      if (!debugaltlink_view_konstid
 	  && strcmp (name, ".gnu_debugaltlink") == 0)
 	{
 	  const char *debugaltlink_data;
@@ -4308,7 +4308,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			     data, &debugaltlink_view))
 	    goto fail;
 
-	  debugaltlink_view_valid = 1;
+	  debugaltlink_view_konstid = 1;
 	  debugaltlink_data = (const char *) debugaltlink_view.view.data;
 	  debugaltlink_name = debugaltlink_data;
 	  debugaltlink_name_len = strnlen (debugaltlink_data, shdr->sh_size);
@@ -4323,7 +4323,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	    }
 	}
 
-      if (!gnu_debugdata_view_valid
+      if (!gnu_debugdata_view_konstid
 	  && strcmp (name, ".gnu_debugdata") == 0)
 	{
 	  if (!elf_get_view (state, descriptor, memory, memory_size,
@@ -4332,7 +4332,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	    goto fail;
 
 	  gnu_debugdata_size = shdr->sh_size;
-	  gnu_debugdata_view_valid = 1;
+	  gnu_debugdata_view_konstid = 1;
 	}
 
       /* Read the .opd section on PowerPC64 ELFv1.  */
@@ -4376,13 +4376,13 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			 symtab_shdr->sh_offset, symtab_shdr->sh_size,
 			 error_callback, data, &symtab_view))
 	goto fail;
-      symtab_view_valid = 1;
+      symtab_view_konstid = 1;
 
       if (!elf_get_view (state, descriptor, memory, memory_size,
 			 strtab_shdr->sh_offset, strtab_shdr->sh_size,
 			 error_callback, data, &strtab_view))
 	goto fail;
-      strtab_view_valid = 1;
+      strtab_view_konstid = 1;
 
       sdata = ((struct elf_syminfo_data *)
 	       backtrace_alloc (state, sizeof *sdata, error_callback, data));
@@ -4401,8 +4401,8 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
       /* We no longer need the symbol table, but we hold on to the
 	 string table permanently.  */
       elf_release_view (state, &symtab_view, error_callback, data);
-      symtab_view_valid = 0;
-      strtab_view_valid = 0;
+      symtab_view_konstid = 0;
+      strtab_view_konstid = 0;
 
       *found_sym = 1;
 
@@ -4410,9 +4410,9 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
     }
 
   elf_release_view (state, &shdrs_view, error_callback, data);
-  shdrs_view_valid = 0;
+  shdrs_view_konstid = 0;
   elf_release_view (state, &names_view, error_callback, data);
-  names_view_valid = 0;
+  names_view_konstid = 0;
 
   /* If the debug info is in a separate file, read that one instead.  */
 
@@ -4427,9 +4427,9 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	  int ret;
 
 	  elf_release_view (state, &buildid_view, error_callback, data);
-	  if (debuglink_view_valid)
+	  if (debuglink_view_konstid)
 	    elf_release_view (state, &debuglink_view, error_callback, data);
-	  if (debugaltlink_view_valid)
+	  if (debugaltlink_view_konstid)
 	    elf_release_view (state, &debugaltlink_view, error_callback, data);
 	  ret = elf_add (state, "", d, NULL, 0, base_address, error_callback,
 			 data, fileline_fn, found_sym, found_dwarf, NULL, 0,
@@ -4442,10 +4442,10 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	}
     }
 
-  if (buildid_view_valid)
+  if (buildid_view_konstid)
     {
       elf_release_view (state, &buildid_view, error_callback, data);
-      buildid_view_valid = 0;
+      buildid_view_konstid = 0;
     }
 
   if (opd)
@@ -4466,7 +4466,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	  int ret;
 
 	  elf_release_view (state, &debuglink_view, error_callback, data);
-	  if (debugaltlink_view_valid)
+	  if (debugaltlink_view_konstid)
 	    elf_release_view (state, &debugaltlink_view, error_callback, data);
 	  ret = elf_add (state, "", d, NULL, 0, base_address, error_callback,
 			 data, fileline_fn, found_sym, found_dwarf, NULL, 0,
@@ -4479,10 +4479,10 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	}
     }
 
-  if (debuglink_view_valid)
+  if (debuglink_view_konstid)
     {
       elf_release_view (state, &debuglink_view, error_callback, data);
-      debuglink_view_valid = 0;
+      debuglink_view_konstid = 0;
     }
 
   struct dwarf_data *fileline_altlink = NULL;
@@ -4501,7 +4501,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			 found_dwarf, &fileline_altlink, 0, 1,
 			 debugaltlink_buildid_data, debugaltlink_buildid_size);
 	  elf_release_view (state, &debugaltlink_view, error_callback, data);
-	  debugaltlink_view_valid = 0;
+	  debugaltlink_view_konstid = 0;
 	  if (ret < 0)
 	    {
 	      backtrace_close (d, error_callback, data);
@@ -4510,13 +4510,13 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	}
     }
 
-  if (debugaltlink_view_valid)
+  if (debugaltlink_view_konstid)
     {
       elf_release_view (state, &debugaltlink_view, error_callback, data);
-      debugaltlink_view_valid = 0;
+      debugaltlink_view_konstid = 0;
     }
 
-  if (gnu_debugdata_view_valid)
+  if (gnu_debugdata_view_konstid)
     {
       int ret;
 
@@ -4528,7 +4528,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 				 &gnu_debugdata_uncompressed_size);
 
       elf_release_view (state, &gnu_debugdata_view, error_callback, data);
-      gnu_debugdata_view_valid = 0;
+      gnu_debugdata_view_konstid = 0;
 
       if (ret)
 	{
@@ -4592,7 +4592,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			 max_offset - min_offset, error_callback, data,
 			 &debug_view))
 	goto fail;
-      debug_view_valid = 1;
+      debug_view_konstid = 1;
     }
   else
     {
@@ -4612,7 +4612,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 			     dsec->offset, dsec->size, error_callback, data,
 			     &split_debug_view[i]))
 	    goto fail;
-	  split_debug_view_valid[i] = 1;
+	  split_debug_view_konstid[i] = 1;
 
 	  if (sections[i].size != 0)
 	    sections[i].data = ((const unsigned char *)
@@ -4632,7 +4632,7 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
     }
 
   using_debug_view = 0;
-  if (debug_view_valid)
+  if (debug_view_konstid)
     {
       for (i = 0; i < (int) DEBUG_MAX; ++i)
 	{
@@ -4683,11 +4683,11 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
 	  sections[i].size = uncompressed_size;
 	  sections[i].compressed = 0;
 
-	  if (split_debug_view_valid[i])
+	  if (split_debug_view_konstid[i])
 	    {
 	      elf_release_view (state, &split_debug_view[i],
 				error_callback, data);
-	      split_debug_view_valid[i] = 0;
+	      split_debug_view_konstid[i] = 0;
 	    }
 	}
     }
@@ -4721,12 +4721,12 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
       sections[i].size = uncompressed_size;
       sections[i].compressed = 0;
 
-      if (debug_view_valid)
+      if (debug_view_konstid)
 	--using_debug_view;
-      else if (split_debug_view_valid[i])
+      else if (split_debug_view_konstid[i])
 	{
 	  elf_release_view (state, &split_debug_view[i], error_callback, data);
-	  split_debug_view_valid[i] = 0;
+	  split_debug_view_konstid[i] = 0;
 	}
     }
 
@@ -4734,10 +4734,10 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
     backtrace_free (state, zdebug_table, ZDEBUG_TABLE_SIZE,
 		    error_callback, data);
 
-  if (debug_view_valid && using_debug_view == 0)
+  if (debug_view_konstid && using_debug_view == 0)
     {
       elf_release_view (state, &debug_view, error_callback, data);
-      debug_view_valid = 0;
+      debug_view_konstid = 0;
     }
 
   for (i = 0; i < (int) DEBUG_MAX; ++i)
@@ -4758,27 +4758,27 @@ elf_add (struct backtrace_state *state, const char *filename, int descriptor,
   return 1;
 
  fail:
-  if (shdrs_view_valid)
+  if (shdrs_view_konstid)
     elf_release_view (state, &shdrs_view, error_callback, data);
-  if (names_view_valid)
+  if (names_view_konstid)
     elf_release_view (state, &names_view, error_callback, data);
-  if (symtab_view_valid)
+  if (symtab_view_konstid)
     elf_release_view (state, &symtab_view, error_callback, data);
-  if (strtab_view_valid)
+  if (strtab_view_konstid)
     elf_release_view (state, &strtab_view, error_callback, data);
-  if (debuglink_view_valid)
+  if (debuglink_view_konstid)
     elf_release_view (state, &debuglink_view, error_callback, data);
-  if (debugaltlink_view_valid)
+  if (debugaltlink_view_konstid)
     elf_release_view (state, &debugaltlink_view, error_callback, data);
-  if (gnu_debugdata_view_valid)
+  if (gnu_debugdata_view_konstid)
     elf_release_view (state, &gnu_debugdata_view, error_callback, data);
-  if (buildid_view_valid)
+  if (buildid_view_konstid)
     elf_release_view (state, &buildid_view, error_callback, data);
-  if (debug_view_valid)
+  if (debug_view_konstid)
     elf_release_view (state, &debug_view, error_callback, data);
   for (i = 0; i < (int) DEBUG_MAX; ++i)
     {
-      if (split_debug_view_valid[i])
+      if (split_debug_view_konstid[i])
 	elf_release_view (state, &split_debug_view[i], error_callback, data);
     }
   if (opd)

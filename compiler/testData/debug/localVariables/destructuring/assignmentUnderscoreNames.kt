@@ -2,9 +2,9 @@
 
 // FILE: test.kt
 fun box(): String {
-    val p = Triple("X","O","K")
+    konst p = Triple("X","O","K")
 
-    val ( _ , o, k ) = p
+    konst ( _ , o, k ) = p
 
     return o + k
 }

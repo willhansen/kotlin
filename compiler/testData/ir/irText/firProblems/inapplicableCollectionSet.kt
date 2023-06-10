@@ -1,9 +1,9 @@
 // WITH_STDLIB
 // FULL_JDK
 
-class Flaf(val javaName: String) {
+class Flaf(konst javaName: String) {
 
-    private val INSTANCES = mutableMapOf<String, Flaf>()
+    private konst INSTANCES = mutableMapOf<String, Flaf>()
 
     fun forJavaName(javaName: String): Flaf {
         var result: Flaf? = INSTANCES[javaName]

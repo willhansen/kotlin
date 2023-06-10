@@ -19,16 +19,16 @@ class PackagePartFromClassLoaderProvider(
     languageVersionSettings: LanguageVersionSettings,
     messageCollector: MessageCollector
 ) : JvmPackagePartProviderBase<String>() {
-    override val deserializationConfiguration = JvmCompilerDeserializationConfiguration(languageVersionSettings)
+    override konst deserializationConfiguration = JvmCompilerDeserializationConfiguration(languageVersionSettings)
 
-    override val loadedModules: MutableList<ModuleMappingInfo<String>> = SmartList()
+    override konst loadedModules: MutableList<ModuleMappingInfo<String>> = SmartList()
 
     init {
         classLoader.forAllMatchingFiles("META-INF/*.${ModuleMapping.MAPPING_FILE_EXT}") { name, stream ->
             tryLoadModuleMapping(
                 { stream.readBytes() }, name, name, deserializationConfiguration, messageCollector
             )?.let {
-                val moduleName = name.removePrefix("META-INF/").removeSuffix(".${ModuleMapping.MAPPING_FILE_EXT}")
+                konst moduleName = name.removePrefix("META-INF/").removeSuffix(".${ModuleMapping.MAPPING_FILE_EXT}")
                 loadedModules.add(ModuleMappingInfo(name, it, moduleName))
             }
         }

@@ -1,6 +1,6 @@
 fun box(): String {
-    val plusZero: Double? = 0.0
-    val minusZero: Double = -0.0
+    konst plusZero: Double? = 0.0
+    konst minusZero: Double = -0.0
 
     useBoxed(plusZero)
 

@@ -29,8 +29,8 @@ class ExternalKotlinTargetApiTests {
     class FakeTarget(delegate: Delegate) : DecoratedExternalKotlinTarget(delegate)
     class FakeCompilation(delegate: Delegate) : DecoratedExternalKotlinCompilation(delegate)
 
-    val project = buildProjectWithMPP()
-    val kotlin = project.multiplatformExtension
+    konst project = buildProjectWithMPP()
+    konst kotlin = project.multiplatformExtension
 
     private fun ExternalKotlinTargetDescriptorBuilder<FakeTarget>.defaults() {
         targetName = "fake"
@@ -46,16 +46,16 @@ class ExternalKotlinTargetApiTests {
 
     @Test
     fun `test - sourceSetClassifier - default`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
-        val compilation = target.createCompilation<FakeCompilation> { defaults() }
+        konst target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
+        konst compilation = target.createCompilation<FakeCompilation> { defaults() }
 
         assertEquals(SourceSetTree("fake"), SourceSetTree.orNull(compilation))
     }
 
     @Test
     fun `test - sourceSetClassifier - custom name`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
-        val compilation = target.createCompilation<FakeCompilation> {
+        konst target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
+        konst compilation = target.createCompilation<FakeCompilation> {
             defaults()
             sourceSetTreeClassifier = SourceSetTreeClassifier.Name("mySourceSetTree")
         }
@@ -65,17 +65,17 @@ class ExternalKotlinTargetApiTests {
 
     @Test
     fun `test - sourceSetClassifier - custom property`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val myProperty = project.objects.property<SourceSetTree>()
-        val nullProperty = project.objects.property<SourceSetTree>()
+        konst myProperty = project.objects.property<SourceSetTree>()
+        konst nullProperty = project.objects.property<SourceSetTree>()
 
-        val target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
+        konst target = kotlin.createExternalKotlinTarget<FakeTarget> { defaults() }
 
-        val mainCompilation = target.createCompilation<FakeCompilation> {
+        konst mainCompilation = target.createCompilation<FakeCompilation> {
             defaults()
             sourceSetTreeClassifier = SourceSetTreeClassifier.Property(myProperty)
         }
 
-        val auxCompilation = target.createCompilation<FakeCompilation>() {
+        konst auxCompilation = target.createCompilation<FakeCompilation>() {
             compilationName = "aux"
             compilationFactory = CompilationFactory(::FakeCompilation)
             defaultSourceSet = kotlin.sourceSets.create("aux")

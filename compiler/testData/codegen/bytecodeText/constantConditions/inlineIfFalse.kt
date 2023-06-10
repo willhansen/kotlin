@@ -1,7 +1,7 @@
 package inlineInIfFalseDex
 
 fun inlineIfFalse() {
-    val bar = ""
+    konst bar = ""
     //Breakpoint!
     if (inlineCall { true }) {
         foo()

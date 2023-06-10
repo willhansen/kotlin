@@ -3,10 +3,10 @@
 package test
 
 @Suppress("INLINE_CLASS_DEPRECATED", "EXPERIMENTAL_FEATURE_WARNING")
-expect inline class ExpectInlineActualInline(val value: Int)
+expect inline class ExpectInlineActualInline(konst konstue: Int)
 
 @Suppress("INLINE_CLASS_DEPRECATED", "EXPERIMENTAL_FEATURE_WARNING")
-expect inline class ExpectInlineActualValue(val value: Int)
+expect inline class ExpectInlineActualValue(konst konstue: Int)
 
 actual typealias ExpectInlineActualInline = lib.InlineClass
 actual typealias ExpectInlineActualValue = lib.ValueClass

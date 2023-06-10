@@ -12,15 +12,15 @@ import Kt
 #if !NO_GENERICS
 private func testIncompatiblePropertyType() throws {
     let c = TestIncompatiblePropertyTypeWarning.ClassOverridingInterfaceWithGenericProperty(
-            p: TestIncompatiblePropertyTypeWarningGeneric<NSString>(value: "cba")
+            p: TestIncompatiblePropertyTypeWarningGeneric<NSString>(konstue: "cba")
     )
 
     let pc: TestIncompatiblePropertyTypeWarningGeneric<NSString> = c.p
-    try assertEquals(actual: pc.value, expected: "cba")
+    try assertEquals(actual: pc.konstue, expected: "cba")
 
     let i: TestIncompatiblePropertyTypeWarningInterfaceWithGenericProperty = c
     let pi: TestIncompatiblePropertyTypeWarningGeneric<AnyObject> = i.p
-    try assertEquals(actual: pi.value as! String, expected: "cba")
+    try assertEquals(actual: pi.konstue as! String, expected: "cba")
 }
 #endif
 

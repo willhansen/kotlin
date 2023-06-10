@@ -21,7 +21,7 @@ public class KtSourceModuleBuilder : KtModuleBuilder() {
     public lateinit var moduleName: String
     public var languageVersionSettings: LanguageVersionSettings =
         LanguageVersionSettingsImpl(LanguageVersion.LATEST_STABLE, ApiVersion.LATEST)
-    private val sourceRoots: MutableList<PsiFileSystemItem> = mutableListOf()
+    private konst sourceRoots: MutableList<PsiFileSystemItem> = mutableListOf()
 
     public fun addSourceRoot(file: PsiFileSystemItem) {
         sourceRoots.add(file)

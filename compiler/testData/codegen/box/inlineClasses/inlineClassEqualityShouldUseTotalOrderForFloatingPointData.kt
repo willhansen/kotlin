@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineFloat(val data: Float)
+konstue class InlineFloat(konst data: Float)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineDouble(val data: Double)
+konstue class InlineDouble(konst data: Double)
 
 fun box(): String {
     if (InlineFloat(0.0f) == InlineFloat(-0.0f)) throw AssertionError()

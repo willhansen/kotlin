@@ -7,7 +7,7 @@ inline fun test(s: (String) -> Unit) {
 }
 
 fun box(a: String, b: String?) {
-    val s = a + "1" + "2" + 3 + 4L + b + 5.0 + 6F + '7' + A()
+    konst s = a + "1" + "2" + 3 + 4L + b + 5.0 + 6F + '7' + A()
 }
 
 // 1 INVOKEDYNAMIC makeConcatWithConstants

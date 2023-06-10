@@ -13,13 +13,13 @@ public inline fun <T> T.myapply(block: T.() -> Unit): T {
 import test.*
 var globalResult = ""
 
-class Test(val value: () -> String) {
+class Test(konst konstue: () -> String) {
     fun test(): String {
         globalResult = ""
         try {
             myapply {
                 try {
-                    return value()
+                    return konstue()
                 } catch (e: Exception) {
                     globalResult += "Exception"
                 } catch (e: Throwable) {
@@ -45,7 +45,7 @@ fun box(): String {
         return "fail 2: $globalResult"
     }
 
-    val result = Test { "OK" }.test()
+    konst result = Test { "OK" }.test()
 
     if (globalResult != " Finally") {
         return "fail 3: $globalResult"

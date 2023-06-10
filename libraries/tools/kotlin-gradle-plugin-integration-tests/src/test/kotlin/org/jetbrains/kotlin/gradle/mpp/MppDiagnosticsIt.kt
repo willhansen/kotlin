@@ -18,7 +18,7 @@ class MppDiagnosticsIt : KGPBaseTest() {
     @GradleTest
     fun testDiagnosticsRenderingSmoke(gradleVersion: GradleVersion) {
         project("diagnosticsRenderingSmoke", gradleVersion) {
-            val expectedOutputFile = projectName.testProjectPath.resolve("expectedOutput.txt").toFile()
+            konst expectedOutputFile = projectName.testProjectPath.resolve("expectedOutput.txt").toFile()
             build {
                 assertEqualsToFile(expectedOutputFile, extractProjectsAndTheirVerboseDiagnostics())
             }
@@ -35,7 +35,7 @@ class MppDiagnosticsIt : KGPBaseTest() {
                     prefix = System.lineSeparator(),
                     postfix = System.lineSeparator(),
                     separator = System.lineSeparator(),
-                ) { (prop, value) -> "$prop=$value" }
+                ) { (prop, konstue) -> "$prop=$konstue" }
             )
             checkDeprecatedProperties(isDeprecationExpected = true)
 
@@ -59,11 +59,11 @@ class MppDiagnosticsIt : KGPBaseTest() {
             )
             buildGradleKts.appendText("""
                 
-                val distinguishAttribute = Attribute.of(String::class.java) 
-                fun org.jetbrains.kotlin.gradle.plugin.KotlinTarget.applyDistinguishingAttributeIfSet(value: String) {
+                konst distinguishAttribute = Attribute.of(String::class.java) 
+                fun org.jetbrains.kotlin.gradle.plugin.KotlinTarget.applyDistinguishingAttributeIfSet(konstue: String) {
                     if (project.properties.containsKey("applyDistinguishingAttribute")) {
                         attributes { 
-                            attribute(distinguishAttribute, value)
+                            attribute(distinguishAttribute, konstue)
                         }
                     }
                 }
@@ -74,7 +74,7 @@ class MppDiagnosticsIt : KGPBaseTest() {
                 }
             """.trimIndent())
 
-            val warningMessage = """w: The following targets are not distinguishable:
+            konst warningMessage = """w: The following targets are not distinguishable:
                     |  * 'jvm2', 'jvm6'
                     |  * 'linuxArm_A', 'linuxArm_B'""".trimMargin()
 
@@ -97,7 +97,7 @@ class MppDiagnosticsIt : KGPBaseTest() {
         }
     }
 
-    private val defaultFlags: Map<String, String>
+    private konst defaultFlags: Map<String, String>
         get() = mapOf(
             "kotlin.mpp.enableGranularSourceSetsMetadata" to "true",
             "kotlin.mpp.enableCompatibilityMetadataVariant" to "false",

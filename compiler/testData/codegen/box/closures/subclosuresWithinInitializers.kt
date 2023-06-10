@@ -1,12 +1,12 @@
 fun <R> run(block: () -> R) = block()
 inline fun <R> inlineRun(block: () -> R) = block()
 
-class Outer(val outerProp: String) {
+class Outer(konst outerProp: String) {
     fun foo(arg: String): String {
         class Local {
-            val work1 = run { outerProp + arg }
-            val work2 = inlineRun { outerProp + arg }
-            val obj = object : Any() {
+            konst work1 = run { outerProp + arg }
+            konst work2 = inlineRun { outerProp + arg }
+            konst obj = object : Any() {
                 override fun toString() = outerProp + arg
             }
 
@@ -18,7 +18,7 @@ class Outer(val outerProp: String) {
 }
 
 fun box(): String {
-    val res = Outer("O").foo("K")
+    konst res = Outer("O").foo("K")
     if (res != "OK#OK#OK") return "fail: $res"
     return "OK"
 }

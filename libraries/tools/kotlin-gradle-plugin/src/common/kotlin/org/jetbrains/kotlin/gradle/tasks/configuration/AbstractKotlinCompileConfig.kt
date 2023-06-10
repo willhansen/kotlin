@@ -42,15 +42,15 @@ import org.jetbrains.kotlin.project.model.LanguageSettings
  */
 internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile<*>>(
     project: Project,
-    val ext: KotlinTopLevelExtension,
-    private val languageSettings: Provider<LanguageSettings>
+    konst ext: KotlinTopLevelExtension,
+    private konst languageSettings: Provider<LanguageSettings>
 ) : TaskConfigAction<TASK>(project) {
 
     init {
         configureTaskProvider { taskProvider ->
-            project.runOnceAfterEvaluated("apply properties and language settings to ${taskProvider.name}") {
+            project.runOnceAfterEkonstuated("apply properties and language settings to ${taskProvider.name}") {
                 taskProvider.configure {
-                    // KaptGenerateStubs will receive value from linked KotlinCompile task
+                    // KaptGenerateStubs will receive konstue from linked KotlinCompile task
                     if (it is KaptGenerateStubsTask) return@configure
 
                     applyLanguageSettingsToCompilerOptions(
@@ -61,30 +61,30 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
             }
         }
 
-        val compilerSystemPropertiesService = CompilerSystemPropertiesService.registerIfAbsent(project)
-        val buildMetricsService = BuildMetricsService.registerIfAbsent(project)
-        val incrementalModuleInfoProvider =
+        konst compilerSystemPropertiesService = CompilerSystemPropertiesService.registerIfAbsent(project)
+        konst buildMetricsService = BuildMetricsService.registerIfAbsent(project)
+        konst incrementalModuleInfoProvider =
             IncrementalModuleInfoBuildService.registerIfAbsent(project, objectFactory.providerWithLazyConvention {
                 GradleCompilerRunner.buildModulesInfo(project.gradle)
             })
-        val buildFinishedListenerService = BuildFinishedListenerService.registerIfAbsent(project)
-        val cachedClassLoadersService = ClassLoadersCachingBuildService.registerIfAbsent(project)
+        konst buildFinishedListenerService = BuildFinishedListenerService.registerIfAbsent(project)
+        konst cachedClassLoadersService = ClassLoadersCachingBuildService.registerIfAbsent(project)
         configureTask { task ->
-            val propertiesProvider = project.kotlinPropertiesProvider
+            konst propertiesProvider = project.kotlinPropertiesProvider
 
             task.taskBuildCacheableOutputDirectory
-                .value(getKotlinBuildDir(task).map { it.dir("cacheable") })
+                .konstue(getKotlinBuildDir(task).map { it.dir("cacheable") })
                 .disallowChanges()
             task.taskBuildLocalStateDirectory
-                .value(getKotlinBuildDir(task).map { it.dir("local-state") })
+                .konstue(getKotlinBuildDir(task).map { it.dir("local-state") })
                 .disallowChanges()
 
             task.localStateDirectories.from(task.taskBuildLocalStateDirectory).disallowChanges()
             buildMetricsService?.also { metricsService ->
-                task.buildMetricsService.value(metricsService).disallowChanges()
+                task.buildMetricsService.konstue(metricsService).disallowChanges()
             }
-            task.systemPropertiesService.value(compilerSystemPropertiesService).disallowChanges()
-            task.incrementalModuleInfoProvider.value(incrementalModuleInfoProvider).disallowChanges()
+            task.systemPropertiesService.konstue(compilerSystemPropertiesService).disallowChanges()
+            task.incrementalModuleInfoProvider.konstue(incrementalModuleInfoProvider).disallowChanges()
 
             propertiesProvider.kotlinDaemonJvmArgs?.let { kotlinDaemonJvmArgs ->
                 task.kotlinDaemonJvmArguments.set(providers.provider {
@@ -112,18 +112,18 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
             task.suppressExperimentalIcOptimizationsWarning
                 .convention(propertiesProvider.suppressExperimentalICOptimizationsWarning)
                 .finalizeValueOnRead()
-            task.buildFinishedListenerService.value(buildFinishedListenerService).disallowChanges()
+            task.buildFinishedListenerService.konstue(buildFinishedListenerService).disallowChanges()
 
             task.incremental = false
             task.useModuleDetection.convention(false)
             if (propertiesProvider.useK2 == true) {
-                task.compilerOptions.useK2.value(true)
+                task.compilerOptions.useK2.konstue(true)
             }
             task.runViaBuildToolsApi.convention(propertiesProvider.runKotlinCompilerViaBuildToolsApi).finalizeValueOnRead()
-            task.classLoadersCachingService.value(cachedClassLoadersService).disallowChanges()
+            task.classLoadersCachingService.konstue(cachedClassLoadersService).disallowChanges()
 
             task.explicitApiMode
-                .value(project.providers.provider { ext.explicitApi })
+                .konstue(project.providers.provider { ext.explicitApi })
                 .finalizeValueOnRead()
         }
     }
@@ -143,7 +143,7 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
             task.friendPaths.from({ compilationInfo.friendPaths })
             compilationInfo.tcsOrNull?.compilation?.let { compilation ->
                 task.friendSourceSets
-                    .value(providers.provider { compilation.associateWithClosure.map { it.name } })
+                    .konstue(providers.provider { compilation.associateWithClosure.map { it.name } })
                     .disallowChanges()
                 task.pluginClasspath.from(
                     compilation.internal.configurations.pluginConfiguration
@@ -152,8 +152,8 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
 
             @Suppress("DEPRECATION")
             task.ownModuleName.set(project.provider { compilationInfo.moduleName })
-            task.sourceSetName.value(providers.provider { compilationInfo.compilationName })
-            task.multiPlatformEnabled.value(
+            task.sourceSetName.konstue(providers.provider { compilationInfo.compilationName })
+            task.multiPlatformEnabled.konstue(
                 providers.provider {
                     compilationInfo.project.plugins.any {
                         it is KotlinPlatformPluginBase ||
@@ -164,15 +164,15 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
             )
 
             task.explicitApiMode
-                .value(
+                .konstue(
                     project.providers.provider {
                         // Plugin explicitly does not configures 'explicitApi' mode for test sources
                         // compilation, as test sources are not published
-                        val compilation = compilationInfo.tcsOrNull?.compilation
-                        val isCommonCompilation = compilation?.target is KotlinMetadataTarget
+                        konst compilation = compilationInfo.tcsOrNull?.compilation
+                        konst isCommonCompilation = compilation?.target is KotlinMetadataTarget
 
-                        val androidCompilation = compilationInfo.tcsOrNull?.compilation as? KotlinJvmAndroidCompilation
-                        val isMainAndroidCompilation = androidCompilation?.let {
+                        konst androidCompilation = compilationInfo.tcsOrNull?.compilation as? KotlinJvmAndroidCompilation
+                        konst isMainAndroidCompilation = androidCompilation?.let {
                             getTestedVariantData(it.androidVariant) == null
                         } ?: false
 
@@ -188,16 +188,16 @@ internal abstract class AbstractKotlinCompileConfig<TASK : AbstractKotlinCompile
     }
 }
 
-internal abstract class TaskConfigAction<TASK : Task>(protected val project: Project) {
+internal abstract class TaskConfigAction<TASK : Task>(protected konst project: Project) {
 
-    protected val objectFactory: ObjectFactory = project.objects
-    protected val providers: ProviderFactory = project.providers
-    protected val propertiesProvider = project.kotlinPropertiesProvider
+    protected konst objectFactory: ObjectFactory = project.objects
+    protected konst providers: ProviderFactory = project.providers
+    protected konst propertiesProvider = project.kotlinPropertiesProvider
 
     private var executed = false
 
     // Collect all task configurations, and run them later (in order they were added).
-    private val taskConfigActions = ArrayDeque<(TaskProvider<TASK>) -> Unit>()
+    private konst taskConfigActions = ArrayDeque<(TaskProvider<TASK>) -> Unit>()
 
     fun configureTaskProvider(configAction: (TaskProvider<TASK>) -> Unit) {
         check(!executed) {

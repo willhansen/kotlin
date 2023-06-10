@@ -15,7 +15,7 @@ class A {
     }
 
     fun test() {
-        val s = object {
+        konst s = object {
             <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic fun a3()<!> {
 
             }
@@ -41,7 +41,7 @@ interface B {
     }
 
     fun test() {
-        val s = object {
+        konst s = object {
             <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic fun a3()<!> {
 
             }

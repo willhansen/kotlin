@@ -12,44 +12,44 @@ import kotlin.native.concurrent.*
 import kotlin.native.internal.*
 import kotlin.native.runtime.GC
 
-val thrashGC = AtomicInt(1)
-val canStartCreating = AtomicInt(0)
-val createdCount = AtomicInt(0)
-val canStartReading = AtomicInt(0)
-const val atomicsCount = 1000
-const val workersCount = 10
+konst thrashGC = AtomicInt(1)
+konst canStartCreating = AtomicInt(0)
+konst createdCount = AtomicInt(0)
+konst canStartReading = AtomicInt(0)
+const konst atomicsCount = 1000
+const konst workersCount = 10
 
 fun main() {
-    val gcWorker = Worker.start()
-    val future = gcWorker.execute(TransferMode.SAFE, {}, {
-        canStartCreating.value = 1
-        while (thrashGC.value != 0) {
+    konst gcWorker = Worker.start()
+    konst future = gcWorker.execute(TransferMode.SAFE, {}, {
+        canStartCreating.konstue = 1
+        while (thrashGC.konstue != 0) {
             GC.collectCyclic()
         }
         GC.collect()
     })
 
-    while (canStartCreating.value == 0) {}
+    while (canStartCreating.konstue == 0) {}
 
-    val workers = Array(workersCount) { Worker.start() }
-    val futures = workers.map {
+    konst workers = Array(workersCount) { Worker.start() }
+    konst futures = workers.map {
         it.execute(TransferMode.SAFE, {}, {
-            val atomics = Array(atomicsCount) {
+            konst atomics = Array(atomicsCount) {
                 AtomicReference<Any?>(Any().freeze())
             }
             createdCount.increment()
-            while (canStartReading.value == 0) {}
+            while (canStartReading.konstue == 0) {}
             GC.collect()
-            atomics.all { it.value != null }
+            atomics.all { it.konstue != null }
         })
     }
 
-    while (createdCount.value != workersCount) {}
+    while (createdCount.konstue != workersCount) {}
 
-    thrashGC.value = 0
+    thrashGC.konstue = 0
     future.result
     GC.collect()
-    canStartReading.value = 1
+    canStartReading.konstue = 1
 
     assertTrue(futures.all { it.result })
 

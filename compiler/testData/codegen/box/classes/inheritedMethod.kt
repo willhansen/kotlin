@@ -7,7 +7,7 @@ class Bar(): Foo() {
 }
 
 fun box() : String {
-  val bar = Bar()
-  val f = bar.test()
+  konst bar = Bar()
+  konst f = bar.test()
   return if (f == "xyzzy") "OK" else "fail"
 }

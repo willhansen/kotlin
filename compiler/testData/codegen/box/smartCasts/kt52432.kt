@@ -13,7 +13,7 @@ abstract class Base {
 
 class Derived : Base() {
     override fun bar(): String = "O"
-    val k: String get() = "K"
+    konst k: String get() = "K"
 }
 
 fun box(): String {

@@ -7,6 +7,6 @@ public class A {
 
 // FILE: test.kt
 fun box(): String {
-    val m = mapOf<A, String>()
+    konst m = mapOf<A, String>()
     return m[A.nil()] ?: "OK"
 }

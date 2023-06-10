@@ -11,7 +11,7 @@ fun k(): Boolean {
 }
 
 fun box(): String {
-    val b = o() and k()
+    konst b = o() and k()
     if (b)
         return "fail: b should be false"
     return s

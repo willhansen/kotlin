@@ -25,10 +25,10 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 object JvmSimpleNameBacktickChecker : IdentifierChecker {
     // See The Java Virtual Machine Specification, section 4.7.9.1 https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7.9.1
-    val INVALID_CHARS = setOf('.', ';', '[', ']', '/', '<', '>', ':', '\\')
+    konst INVALID_CHARS = setOf('.', ';', '[', ']', '/', '<', '>', ':', '\\')
 
     // These characters can cause problems on Windows. '?*"|' are not allowed in file names, and % leads to unexpected env var expansion.
-    private val DANGEROUS_CHARS = setOf('?', '*', '"', '|', '%')
+    private konst DANGEROUS_CHARS = setOf('?', '*', '"', '|', '%')
 
     override fun checkIdentifier(simpleNameExpression: KtSimpleNameExpression, diagnosticHolder: DiagnosticSink) {
         reportIfNeeded(simpleNameExpression.getReferencedName(), { simpleNameExpression.getIdentifier() }, diagnosticHolder)
@@ -39,7 +39,7 @@ object JvmSimpleNameBacktickChecker : IdentifierChecker {
             declaration.entries.forEach { checkNamed(it, diagnosticHolder) }
         }
         if (declaration is KtCallableDeclaration) {
-            declaration.valueParameters.forEach { checkNamed(it, diagnosticHolder) }
+            declaration.konstueParameters.forEach { checkNamed(it, diagnosticHolder) }
         }
         if (declaration is KtTypeParameterListOwner) {
             declaration.typeParameters.forEach { checkNamed(it, diagnosticHolder) }
@@ -50,13 +50,13 @@ object JvmSimpleNameBacktickChecker : IdentifierChecker {
     }
 
     private fun checkNamed(declaration: KtNamedDeclaration, diagnosticHolder: DiagnosticSink) {
-        val name = declaration.name ?: return
+        konst name = declaration.name ?: return
 
         reportIfNeeded(name, { declaration.nameIdentifier ?: declaration }, diagnosticHolder)
     }
 
     private fun reportIfNeeded(name: String, reportOn: () -> PsiElement?, diagnosticHolder: DiagnosticSink) {
-        val text = KtPsiUtil.unquoteIdentifier(name)
+        konst text = KtPsiUtil.unquoteIdentifier(name)
         when {
             text.isEmpty() -> {
                 diagnosticHolder.report(Errors.INVALID_CHARACTERS.on(reportOn() ?: return, "should not be empty"))

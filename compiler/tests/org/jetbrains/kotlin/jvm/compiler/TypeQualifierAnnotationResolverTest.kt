@@ -45,11 +45,11 @@ import java.io.File
 
 class TypeQualifierAnnotationResolverTest : KtUsefulTestCase() {
     companion object {
-        private const val TEST_DATA_PATH = "compiler/testData/typeQualifierNickname/"
+        private const konst TEST_DATA_PATH = "compiler/testData/typeQualifierNickname/"
     }
 
     fun testBasicJSRNullabilityAnnotations() {
-        val (typeQualifierResolver, aClass) = buildTypeQualifierResolverAndFindClass("A")
+        konst (typeQualifierResolver, aClass) = buildTypeQualifierResolverAndFindClass("A")
 
         assertMethodHasUnwrappedAnnotation(
             aClass, typeQualifierResolver,
@@ -77,7 +77,7 @@ class TypeQualifierAnnotationResolverTest : KtUsefulTestCase() {
     }
 
     fun testCustomNullabilityAnnotation() {
-        val (typeQualifierResolver, aClass) = buildTypeQualifierResolverAndFindClass("B")
+        konst (typeQualifierResolver, aClass) = buildTypeQualifierResolverAndFindClass("B")
 
         assertMethodHasUnwrappedAnnotation(
             aClass, typeQualifierResolver,
@@ -87,8 +87,8 @@ class TypeQualifierAnnotationResolverTest : KtUsefulTestCase() {
     }
 
     private fun buildTypeQualifierResolverAndFindClass(className: String): Pair<AnnotationTypeQualifierResolver, ClassDescriptor> {
-        val jsr305Jar = MockLibraryUtilExt.compileJavaFilesLibraryToJar(JSR_305_SOURCES_PATH, "jsr305")
-        val configuration = KotlinTestUtils.newConfiguration(
+        konst jsr305Jar = MockLibraryUtilExt.compileJavaFilesLibraryToJar(JSR_305_SOURCES_PATH, "jsr305")
+        konst configuration = KotlinTestUtils.newConfiguration(
             ConfigurationKind.ALL, TestJdkKind.FULL_JDK,
             listOf(
                 KtTestUtil.getAnnotationsJar(),
@@ -110,11 +110,11 @@ class TypeQualifierAnnotationResolverTest : KtUsefulTestCase() {
             )
         }
 
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
-        val container = JvmResolveUtil.createContainer(environment)
-        val typeQualifierResolver = container.get<JavaResolverComponents>().annotationTypeQualifierResolver
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst container = JvmResolveUtil.createContainer(environment)
+        konst typeQualifierResolver = container.get<JavaResolverComponents>().annotationTypeQualifierResolver
 
-        val aClass = container.get<ModuleDescriptor>().resolveClassByFqName(FqName(className), NoLookupLocation.FROM_TEST)!!
+        konst aClass = container.get<ModuleDescriptor>().resolveClassByFqName(FqName(className), NoLookupLocation.FROM_TEST)!!
 
         return typeQualifierResolver to aClass
     }

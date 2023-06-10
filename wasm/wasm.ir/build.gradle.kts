@@ -26,25 +26,25 @@ repositories {
     }
 }
 
-val wabtDir = File(buildDir, "wabt")
-val wabtVersion = "1.0.19"
-val testSuiteRevision = "18f8340"
-val testSuiteDir = File(buildDir, "testsuite")
+konst wabtDir = File(buildDir, "wabt")
+konst wabtVersion = "1.0.19"
+konst testSuiteRevision = "18f8340"
+konst testSuiteDir = File(buildDir, "testsuite")
 
-val gradleOs = org.gradle.internal.os.OperatingSystem.current()
-val wabtOS = when {
+konst gradleOs = org.gradle.internal.os.OperatingSystem.current()
+konst wabtOS = when {
     gradleOs.isMacOsX -> "macos"
     gradleOs.isWindows -> "windows"
     gradleOs.isLinux -> "ubuntu"
     else -> error("Unsupported OS: $gradleOs")
 }
 
-val wabt by configurations.creating {
+konst wabt by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
 
-val testSuite by configurations.creating {
+konst testSuite by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
@@ -64,7 +64,7 @@ dependencies {
     wabt("webassembly:wabt:$wabtVersion:$wabtOS@tar.gz")
 }
 
-val unzipTestSuite by task<Copy> {
+konst unzipTestSuite by task<Copy> {
     dependsOn(testSuite)
 
     from(provider {
@@ -74,7 +74,7 @@ val unzipTestSuite by task<Copy> {
     into(testSuiteDir)
 }
 
-val unzipWabt by task<Copy> {
+konst unzipWabt by task<Copy> {
     dependsOn(wabt)
 
     from(provider {

@@ -1,5 +1,5 @@
 fun box(): String {
-    val f = "kotlin"::length
-    val result = f.get()
+    konst f = "kotlin"::length
+    konst result = f.get()
     return if (result == 6) "OK" else "Fail: $result"
 }

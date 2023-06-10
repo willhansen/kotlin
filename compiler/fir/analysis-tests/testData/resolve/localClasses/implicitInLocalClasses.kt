@@ -5,11 +5,11 @@ fun main() {
         fun foo(x: Int) = bar(x)
         fun bar(y: Int) = this.hashCode() + y > 0
 
-        val w get() = z
-        val z get() = this.hashCode() == 0
+        konst w get() = z
+        konst z get() = this.hashCode() == 0
     }
 
-    val a = A()
+    konst a = A()
 
     useBoolean(a.foo(1))
     useBoolean(a.bar(1))
@@ -20,15 +20,15 @@ fun main() {
         fun foo(x: Int) = inner.w
         fun bar(y: Int) = this.hashCode() + y > 0
 
-        val inner = Inner()
+        konst inner = Inner()
 
         inner class Inner {
-            val w get() = z
-            val z get() = bar(1)
+            konst w get() = z
+            konst z get() = bar(1)
         }
     }
 
-    val b = B()
+    konst b = B()
 
     useBoolean(b.foo(1))
     useBoolean(b.bar(1))

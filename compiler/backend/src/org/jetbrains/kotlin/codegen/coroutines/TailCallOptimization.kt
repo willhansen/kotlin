@@ -21,17 +21,17 @@ import org.jetbrains.org.objectweb.asm.tree.analysis.BasicInterpreter
 import org.jetbrains.org.objectweb.asm.tree.analysis.BasicValue
 
 internal fun MethodNode.allSuspensionPointsAreTailCalls(suspensionPoints: List<SuspensionPoint>, optimizeReturnUnit: Boolean): Boolean {
-    val frames = MethodTransformer.analyze("fake", this, TcoInterpreter(suspensionPoints))
-    val controlFlowGraph = ControlFlowGraph.build(this)
+    konst frames = MethodTransformer.analyze("fake", this, TcoInterpreter(suspensionPoints))
+    konst controlFlowGraph = ControlFlowGraph.build(this)
 
     fun AbstractInsnNode.isSafe(): Boolean =
         !isMeaningful || opcode in SAFE_OPCODES || isInvisibleInDebugVarInsn(this@allSuspensionPointsAreTailCalls) || isInlineMarker(this)
 
     fun AbstractInsnNode.transitiveSuccessorsAreSafeOrReturns(): Boolean {
-        val visited = mutableSetOf(this)
-        val stack = mutableListOf(this)
+        konst visited = mutableSetOf(this)
+        konst stack = mutableListOf(this)
         while (stack.isNotEmpty()) {
-            val insn = stack.popLast()
+            konst insn = stack.popLast()
             // In Unit-returning functions, the last statement is followed by POP + GETSTATIC Unit.INSTANCE
             // if it is itself not Unit-returning.
             if (insn.opcode == Opcodes.ARETURN || (optimizeReturnUnit && insn.isPopBeforeReturnUnit)) {
@@ -42,7 +42,7 @@ internal fun MethodNode.allSuspensionPointsAreTailCalls(suspensionPoints: List<S
                 return false
             } else {
                 for (nextIndex in controlFlowGraph.getSuccessorsIndices(insn)) {
-                    val nextInsn = instructions.get(nextIndex)
+                    konst nextInsn = instructions.get(nextIndex)
                     if (visited.add(nextInsn)) {
                         stack.add(nextInsn)
                     }
@@ -53,7 +53,7 @@ internal fun MethodNode.allSuspensionPointsAreTailCalls(suspensionPoints: List<S
     }
 
     return suspensionPoints.all { suspensionPoint ->
-        val index = instructions.indexOf(suspensionPoint.suspensionCallBegin)
+        konst index = instructions.indexOf(suspensionPoint.suspensionCallBegin)
         tryCatchBlocks.all { index < instructions.indexOf(it.start) || instructions.indexOf(it.end) <= index } &&
                 suspensionPoint.suspensionCallEnd.transitiveSuccessorsAreSafeOrReturns()
     }
@@ -66,7 +66,7 @@ internal fun MethodNode.addCoroutineSuspendedChecks(suspensionPoints: List<Suspe
             continue
         }
         instructions.insert(suspensionPoint.suspensionCallEnd, withInstructionAdapter {
-            val label = Label()
+            konst label = Label()
             dup()
             loadCoroutineSuspendedMarker()
             ifacmpne(label)
@@ -78,7 +78,7 @@ internal fun MethodNode.addCoroutineSuspendedChecks(suspensionPoints: List<Suspe
 
 private fun AbstractInsnNode?.skipUntilMeaningful(): AbstractInsnNode? {
     var cursor: AbstractInsnNode? = this ?: return null
-    val visited = mutableSetOf<AbstractInsnNode>()
+    konst visited = mutableSetOf<AbstractInsnNode>()
     while (cursor != null) {
         if (!visited.add(cursor)) return null
         when {
@@ -90,24 +90,24 @@ private fun AbstractInsnNode?.skipUntilMeaningful(): AbstractInsnNode? {
     return null
 }
 
-private val AbstractInsnNode.nextMeaningful: AbstractInsnNode?
+private konst AbstractInsnNode.nextMeaningful: AbstractInsnNode?
     get() = next.skipUntilMeaningful()
 
-private val AbstractInsnNode.isReturnUnit: Boolean
+private konst AbstractInsnNode.isReturnUnit: Boolean
     get() = isUnitInstance() && nextMeaningful?.let { it.opcode == Opcodes.ARETURN || it.isPopBeforeReturnUnit } == true
 
-private val AbstractInsnNode.isPopBeforeReturnUnit: Boolean
+private konst AbstractInsnNode.isPopBeforeReturnUnit: Boolean
     get() = opcode == Opcodes.POP && nextMeaningful?.isReturnUnit == true
 
 private fun AbstractInsnNode?.isInvisibleInDebugVarInsn(methodNode: MethodNode): Boolean {
-    val insns = methodNode.instructions
-    val index = insns.indexOf(this)
+    konst insns = methodNode.instructions
+    konst index = insns.indexOf(this)
     return (this is VarInsnNode && methodNode.localVariables.none {
         it.index == `var` && index in it.start.let(insns::indexOf)..it.end.let(insns::indexOf)
     })
 }
 
-private val SAFE_OPCODES = buildSet {
+private konst SAFE_OPCODES = buildSet {
     add(Opcodes.NOP)
     addAll(Opcodes.POP..Opcodes.SWAP) // POP*, DUP*, SWAP
     addAll(Opcodes.IFEQ..Opcodes.GOTO) // IF*, GOTO
@@ -123,36 +123,36 @@ private object FromSuspensionPointValue : BasicValue(AsmTypes.OBJECT_TYPE) {
 
 private fun BasicValue?.toFromSuspensionPoint(): BasicValue? = if (this?.type?.sort == Type.OBJECT) FromSuspensionPointValue else this
 
-private class TcoInterpreter(private val suspensionPoints: List<SuspensionPoint>) : BasicInterpreter(Opcodes.API_VERSION) {
-    override fun copyOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
-        return super.copyOperation(insn, value).convert(insn)
+private class TcoInterpreter(private konst suspensionPoints: List<SuspensionPoint>) : BasicInterpreter(Opcodes.API_VERSION) {
+    override fun copyOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
+        return super.copyOperation(insn, konstue).convert(insn)
     }
 
     private fun BasicValue?.convert(insn: AbstractInsnNode): BasicValue? = if (insn in suspensionPoints) toFromSuspensionPoint() else this
 
-    override fun naryOperation(insn: AbstractInsnNode, values: MutableList<out BasicValue?>?): BasicValue? {
-        return super.naryOperation(insn, values).convert(insn)
+    override fun naryOperation(insn: AbstractInsnNode, konstues: MutableList<out BasicValue?>?): BasicValue? {
+        return super.naryOperation(insn, konstues).convert(insn)
     }
 
-    override fun ternaryOperation(insn: AbstractInsnNode, value1: BasicValue?, value2: BasicValue?, value3: BasicValue?): BasicValue? {
-        return super.ternaryOperation(insn, value1, value2, value3).convert(insn)
+    override fun ternaryOperation(insn: AbstractInsnNode, konstue1: BasicValue?, konstue2: BasicValue?, konstue3: BasicValue?): BasicValue? {
+        return super.ternaryOperation(insn, konstue1, konstue2, konstue3).convert(insn)
     }
 
-    override fun merge(value1: BasicValue?, value2: BasicValue?): BasicValue {
-        return if (value1 is FromSuspensionPointValue || value2 is FromSuspensionPointValue) FromSuspensionPointValue
-        else super.merge(value1, value2)
+    override fun merge(konstue1: BasicValue?, konstue2: BasicValue?): BasicValue {
+        return if (konstue1 is FromSuspensionPointValue || konstue2 is FromSuspensionPointValue) FromSuspensionPointValue
+        else super.merge(konstue1, konstue2)
     }
 
-    override fun unaryOperation(insn: AbstractInsnNode, value: BasicValue?): BasicValue? {
+    override fun unaryOperation(insn: AbstractInsnNode, konstue: BasicValue?): BasicValue? {
         // Assume, that CHECKCAST Object does not break tail-call optimization
-        if (value is FromSuspensionPointValue && insn.opcode == Opcodes.CHECKCAST) {
-            return value
+        if (konstue is FromSuspensionPointValue && insn.opcode == Opcodes.CHECKCAST) {
+            return konstue
         }
-        return super.unaryOperation(insn, value).convert(insn)
+        return super.unaryOperation(insn, konstue).convert(insn)
     }
 
-    override fun binaryOperation(insn: AbstractInsnNode, value1: BasicValue?, value2: BasicValue?): BasicValue? {
-        return super.binaryOperation(insn, value1, value2).convert(insn)
+    override fun binaryOperation(insn: AbstractInsnNode, konstue1: BasicValue?, konstue2: BasicValue?): BasicValue? {
+        return super.binaryOperation(insn, konstue1, konstue2).convert(insn)
     }
 
     override fun newOperation(insn: AbstractInsnNode): BasicValue? {

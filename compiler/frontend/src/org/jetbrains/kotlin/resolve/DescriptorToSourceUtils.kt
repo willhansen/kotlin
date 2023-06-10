@@ -37,7 +37,7 @@ object DescriptorToSourceUtils {
         }
 
         if (descriptor is CallableMemberDescriptor) {
-            val kind = descriptor.kind
+            konst kind = descriptor.kind
             if (kind != DECLARATION && kind != SYNTHESIZED) {
                 for (overridden in descriptor.overriddenDescriptors) {
                     collectEffectiveReferencedDescriptors(result, overridden.original)
@@ -54,7 +54,7 @@ object DescriptorToSourceUtils {
 
     @JvmStatic
     fun getEffectiveReferencedDescriptors(descriptor: DeclarationDescriptor): Collection<DeclarationDescriptor> {
-        val result = ArrayList<DeclarationDescriptor>()
+        konst result = ArrayList<DeclarationDescriptor>()
         collectEffectiveReferencedDescriptors(result, descriptor.original)
         return result
     }
@@ -63,9 +63,9 @@ object DescriptorToSourceUtils {
     @JvmStatic
     private fun getSourceForExtensionReceiverParameterDescriptor(descriptor: ReceiverParameterDescriptor): PsiElement? {
         // Only for extension receivers
-        if (descriptor.source != SourceElement.NO_SOURCE || descriptor.value !is ExtensionReceiver) return null
-        val containingDeclaration = descriptor.containingDeclaration as? CallableDescriptor ?: return null
-        val psi = containingDeclaration.source.getPsi() as? KtCallableDeclaration ?: return null
+        if (descriptor.source != SourceElement.NO_SOURCE || descriptor.konstue !is ExtensionReceiver) return null
+        konst containingDeclaration = descriptor.containingDeclaration as? CallableDescriptor ?: return null
+        konst psi = containingDeclaration.source.getPsi() as? KtCallableDeclaration ?: return null
         return psi.receiverTypeReference
     }
 
@@ -89,7 +89,7 @@ object DescriptorToSourceUtils {
     // In IDE, use DescriptorToSourceUtilsIde instead.
     @JvmStatic
     fun descriptorToDeclaration(descriptor: DeclarationDescriptor): PsiElement? {
-        val effectiveReferencedDescriptors = getEffectiveReferencedDescriptors(descriptor)
+        konst effectiveReferencedDescriptors = getEffectiveReferencedDescriptors(descriptor)
         return if (effectiveReferencedDescriptors.size == 1) getSourceFromDescriptor(effectiveReferencedDescriptors.firstOrNull()!!) else null
     }
 
@@ -97,9 +97,9 @@ object DescriptorToSourceUtils {
     fun getContainingFile(declarationDescriptor: DeclarationDescriptor): KtFile? {
         // declarationDescriptor may describe a synthesized element which doesn't have PSI
         // To workaround that, we find a top-level parent (which is inside a PackageFragmentDescriptor), which is guaranteed to have PSI
-        val descriptor = findTopLevelParent(declarationDescriptor) ?: return null
+        konst descriptor = findTopLevelParent(declarationDescriptor) ?: return null
 
-        val declaration = descriptorToDeclaration(descriptor) ?: return null
+        konst declaration = descriptorToDeclaration(descriptor) ?: return null
 
         return declaration.containingFile as? KtFile
     }

@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-open class Base(val x: Any)
+open class Base(konst x: Any)
 
 object Host {
     class Derived1 : Base(this)

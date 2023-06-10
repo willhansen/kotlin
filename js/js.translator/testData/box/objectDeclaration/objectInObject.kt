@@ -3,14 +3,14 @@ package foo
 
 object A {
     object query {
-        val status = "complete"
+        konst status = "complete"
     }
 }
 
 object B {
-    private val ov = "d"
+    private konst ov = "d"
     object query {
-        val status = "complete" + ov
+        konst status = "complete" + ov
     }
 }
 
@@ -19,7 +19,7 @@ class C {
         fun ov() = "d"
     }
     object query {
-        val status = "complete" + ov()
+        konst status = "complete" + ov()
     }
 }
 

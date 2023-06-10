@@ -39,7 +39,7 @@ interface IdSignatureComputer {
     fun inFile(file: IrFileSymbol?, block: () -> Unit)
 }
 
-class DescToIrIdSignatureComputer(private val delegate: IdSignatureDescriptor) : IdSignatureComputer {
+class DescToIrIdSignatureComputer(private konst delegate: IdSignatureDescriptor) : IdSignatureComputer {
     override fun computeSignature(declaration: IrDeclaration): IdSignature? {
         return when (declaration) {
             is IrEnumEntry -> delegate.composeEnumEntrySignature(declaration.descriptor)

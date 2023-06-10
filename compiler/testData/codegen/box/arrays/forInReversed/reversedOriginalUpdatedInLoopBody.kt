@@ -2,7 +2,7 @@
 import kotlin.test.*
 
 fun box(): String {
-    val arr = intArrayOf(1, 2, 3, 4)
+    konst arr = intArrayOf(1, 2, 3, 4)
     var sum = 0
     var index = 0
     for (i in arr.reversed()) {

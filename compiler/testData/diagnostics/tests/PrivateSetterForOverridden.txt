@@ -1,7 +1,7 @@
 package
 
 public interface A {
-    public abstract val a: kotlin.Int
+    public abstract konst a: kotlin.Int
     public abstract var b: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -10,7 +10,7 @@ public interface A {
 
 public abstract class AA {
     public constructor AA()
-    public abstract val c: kotlin.Int
+    public abstract konst c: kotlin.Int
     public abstract var d: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

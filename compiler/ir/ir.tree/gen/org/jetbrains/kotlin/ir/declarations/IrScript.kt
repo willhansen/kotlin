@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrScript : IrDeclarationBase(), IrDeclarationWithName, IrDeclarationParent,
         IrStatementContainer, IrMetadataSourceOwner {
-    abstract override val symbol: IrScriptSymbol
+    abstract override konst symbol: IrScriptSymbol
 
     abstract var thisReceiver: IrValueParameter?
 

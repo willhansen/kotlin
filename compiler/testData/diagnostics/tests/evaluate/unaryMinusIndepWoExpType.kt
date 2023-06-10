@@ -1,9 +1,9 @@
-val p1 = -1
-val p2 = -1.toLong()
-val p3 = (-1).toByte()
-val p4 = -1.toInt()
-val p5 = (-1).toShort()
-val p6 = -1111111111111111111
+konst p1 = -1
+konst p2 = -1.toLong()
+konst p3 = (-1).toByte()
+konst p4 = -1.toInt()
+konst p5 = (-1).toShort()
+konst p6 = -1111111111111111111
 
 fun fooInt(p: Int) = p
 fun fooLong(p: Long) = p

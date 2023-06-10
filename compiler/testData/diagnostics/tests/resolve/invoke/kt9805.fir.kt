@@ -1,5 +1,5 @@
 class A {
-    val foo: B.() -> Unit get() = null!!
+    konst foo: B.() -> Unit get() = null!!
 }
 
 class B

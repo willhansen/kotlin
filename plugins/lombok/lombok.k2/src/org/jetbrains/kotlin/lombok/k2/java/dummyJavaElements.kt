@@ -12,11 +12,11 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 object JavaClasses {
-    val Object = DummyJavaClass("Object", javaLangName("Object"), numberOfTypeParameters = 0)
-    val Iterable = DummyJavaClass("Iterable", javaLangName("Iterable"), numberOfTypeParameters = 1)
-    val Collection = DummyJavaClass("Collection", javaUtilName("Collection"), numberOfTypeParameters = 1)
-    val Map = DummyJavaClass("Map", javaUtilName("Map"), numberOfTypeParameters = 2)
-    val Table = DummyJavaClass("Table", LombokNames.TABLE, numberOfTypeParameters = 3)
+    konst Object = DummyJavaClass("Object", javaLangName("Object"), numberOfTypeParameters = 0)
+    konst Iterable = DummyJavaClass("Iterable", javaLangName("Iterable"), numberOfTypeParameters = 1)
+    konst Collection = DummyJavaClass("Collection", javaUtilName("Collection"), numberOfTypeParameters = 1)
+    konst Map = DummyJavaClass("Map", javaUtilName("Map"), numberOfTypeParameters = 2)
+    konst Table = DummyJavaClass("Table", LombokNames.TABLE, numberOfTypeParameters = 3)
 
 
     private fun javaUtilName(name: String): FqName {
@@ -28,64 +28,64 @@ object JavaClasses {
     }
 }
 
-class DummyJavaClass(name: String, override val fqName: FqName, numberOfTypeParameters: Int) : JavaClass {
-    override val name: Name = Name.identifier(name)
+class DummyJavaClass(name: String, override konst fqName: FqName, numberOfTypeParameters: Int) : JavaClass {
+    override konst name: Name = Name.identifier(name)
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = shouldNotBeCalled()
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = shouldNotBeCalled()
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = shouldNotBeCalled()
 
     override fun findAnnotation(fqName: FqName): JavaAnnotation? {
         return null
     }
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = shouldNotBeCalled()
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = shouldNotBeCalled()
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = shouldNotBeCalled()
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = shouldNotBeCalled()
-    override val typeParameters: List<JavaTypeParameter> = (1..numberOfTypeParameters).map {
+    override konst typeParameters: List<JavaTypeParameter> = (1..numberOfTypeParameters).map {
         DummyJavaTypeParameter(Name.identifier("T_$it"))
     }
 
-    override val supertypes: Collection<JavaClassifierType>
+    override konst supertypes: Collection<JavaClassifierType>
         get() = shouldNotBeCalled()
-    override val innerClassNames: Collection<Name>
+    override konst innerClassNames: Collection<Name>
         get() = shouldNotBeCalled()
 
     override fun findInnerClass(name: Name): JavaClass? {
         shouldNotBeCalled()
     }
 
-    override val outerClass: JavaClass?
+    override konst outerClass: JavaClass?
         get() = null
-    override val isInterface: Boolean
+    override konst isInterface: Boolean
         get() = shouldNotBeCalled()
-    override val isAnnotationType: Boolean
+    override konst isAnnotationType: Boolean
         get() = shouldNotBeCalled()
-    override val isEnum: Boolean
+    override konst isEnum: Boolean
         get() = shouldNotBeCalled()
-    override val isRecord: Boolean
+    override konst isRecord: Boolean
         get() = shouldNotBeCalled()
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = shouldNotBeCalled()
-    override val permittedTypes: Collection<JavaClassifierType>
+    override konst permittedTypes: Collection<JavaClassifierType>
         get() = shouldNotBeCalled()
-    override val lightClassOriginKind: LightClassOriginKind?
+    override konst lightClassOriginKind: LightClassOriginKind?
         get() = shouldNotBeCalled()
-    override val methods: Collection<JavaMethod>
+    override konst methods: Collection<JavaMethod>
         get() = shouldNotBeCalled()
-    override val fields: Collection<JavaField>
+    override konst fields: Collection<JavaField>
         get() = shouldNotBeCalled()
-    override val constructors: Collection<JavaConstructor>
+    override konst constructors: Collection<JavaConstructor>
         get() = shouldNotBeCalled()
-    override val recordComponents: Collection<JavaRecordComponent>
+    override konst recordComponents: Collection<JavaRecordComponent>
         get() = shouldNotBeCalled()
 
     override fun hasDefaultConstructor(): Boolean {
@@ -93,19 +93,19 @@ class DummyJavaClass(name: String, override val fqName: FqName, numberOfTypePara
     }
 }
 
-class DummyJavaTypeParameter(override val name: Name) : JavaTypeParameter {
-    override val isFromSource: Boolean
+class DummyJavaTypeParameter(override konst name: Name) : JavaTypeParameter {
+    override konst isFromSource: Boolean
         get() = shouldNotBeCalled()
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = shouldNotBeCalled()
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = shouldNotBeCalled()
 
     override fun findAnnotation(fqName: FqName): JavaAnnotation? {
         shouldNotBeCalled()
     }
 
-    override val upperBounds: Collection<JavaClassifierType>
+    override konst upperBounds: Collection<JavaClassifierType>
         get() = emptyList()
 }
 

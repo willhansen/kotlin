@@ -9,15 +9,15 @@ import java.io.File
 import kotlin.reflect.KProperty1
 
 interface CompilerArgumentsSerializer<T : CommonToolArguments> {
-    val arguments: T
+    konst arguments: T
     fun serializeTo(element: Element): Element
 }
 
-class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override val arguments: T) : CompilerArgumentsSerializer<T> {
+class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override konst arguments: T) : CompilerArgumentsSerializer<T> {
 
     override fun serializeTo(element: Element): Element = Element(COMPILER_ARGUMENTS_ELEMENT_NAME).apply {
-        val newInstance = arguments::class.java.getConstructor().newInstance()
-        val flagArgumentsByName = CompilerArgumentsContentProspector.getFlagCompilerArgumentProperties(arguments::class)
+        konst newInstance = arguments::class.java.getConstructor().newInstance()
+        konst flagArgumentsByName = CompilerArgumentsContentProspector.getFlagCompilerArgumentProperties(arguments::class)
             .mapNotNull { prop ->
                 prop.safeAs<KProperty1<T, Boolean?>>()
                     ?.takeIf { it.get(arguments) != it.get(newInstance) }
@@ -26,7 +26,7 @@ class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override val argume
             }.toMap()
         saveFlagArguments(this, flagArgumentsByName)
 
-        val stringArgumentsByName = CompilerArgumentsContentProspector.getStringCompilerArgumentProperties(arguments::class)
+        konst stringArgumentsByName = CompilerArgumentsContentProspector.getStringCompilerArgumentProperties(arguments::class)
             .mapNotNull { prop ->
                 prop.safeAs<KProperty1<T, String?>>()
                     ?.takeIf { it.get(arguments) != it.get(newInstance) }
@@ -35,7 +35,7 @@ class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override val argume
             }.toMap()
         saveStringArguments(this, stringArgumentsByName)
 
-        val arrayArgumentsByName = CompilerArgumentsContentProspector.getArrayCompilerArgumentProperties(arguments::class)
+        konst arrayArgumentsByName = CompilerArgumentsContentProspector.getArrayCompilerArgumentProperties(arguments::class)
             .mapNotNull { prop ->
                 prop.safeAs<KProperty1<T, Array<String>?>>()
                     ?.takeIf { it.get(arguments)?.contentEquals(it.get(newInstance)) != true }
@@ -43,9 +43,9 @@ class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override val argume
                     ?.let { prop.name to it }
             }.toMap()
         saveArrayArguments(this, arrayArgumentsByName)
-        val freeArgs = CompilerArgumentsContentProspector.freeArgsProperty.get(arguments)
+        konst freeArgs = CompilerArgumentsContentProspector.freeArgsProperty.get(arguments)
         saveElementsList(this, FREE_ARGS_ROOT_ELEMENTS_NAME, FREE_ARGS_ELEMENT_NAME, freeArgs)
-        val internalArguments = CompilerArgumentsContentProspector.internalArgumentsProperty.get(arguments).map { it.stringRepresentation }
+        konst internalArguments = CompilerArgumentsContentProspector.internalArgumentsProperty.get(arguments).map { it.stringRepresentation }
         saveElementsList(this, INTERNAL_ARGS_ROOT_ELEMENTS_NAME, INTERNAL_ARGS_ELEMENT_NAME, internalArguments)
         restoreNormalOrdering(arguments)
         element.addContent(this)
@@ -89,7 +89,7 @@ class CompilerArgumentsSerializerV5<T : CommonToolArguments>(override val argume
         private fun saveElementsList(element: Element, rootElementName: String, elementName: String, elementList: List<String>) {
             if (elementList.isEmpty()) return
             saveElementConfigurable(element, rootElementName) {
-                val singleModule = elementList.singleOrNull()
+                konst singleModule = elementList.singleOrNull()
                 if (singleModule != null) {
                     addContent(singleModule)
                 } else {

@@ -4,7 +4,7 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-abstract class A(val v: String) {
+abstract class A(konst v: String) {
     suspend abstract fun foo(v: String): String
 
     suspend fun suspendThere(v: String): String = suspendCoroutineUninterceptedOrReturn { x ->

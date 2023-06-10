@@ -11,13 +11,13 @@ public interface Kt3302 {
     }
 
     public interface LinkedHashMap<K, V> {
-        public V put(K key, V value);
+        public V put(K key, V konstue);
 
         void dummy(); // to avoid loading as SAM interface
     }
 
     public interface BasicBSONObject extends LinkedHashMap<String, Object>, BSONObject {
         @Override
-        public Object put(String key, Object value);
+        public Object put(String key, Object konstue);
     }
 }

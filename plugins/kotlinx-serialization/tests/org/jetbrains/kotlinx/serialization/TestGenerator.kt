@@ -11,7 +11,7 @@ import org.jetbrains.kotlinx.serialization.runners.*
 fun main(args: Array<String>) {
     System.setProperty("java.awt.headless", "true")
 
-    val excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
+    konst excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
 
     generateTestGroupSuiteWithJUnit5(args) {
         testGroup(

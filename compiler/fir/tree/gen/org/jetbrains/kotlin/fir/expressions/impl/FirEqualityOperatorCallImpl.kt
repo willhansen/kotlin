@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirEqualityOperatorCallImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var argumentList: FirArgumentList,
-    override val operation: FirOperation,
+    override konst operation: FirOperation,
 ) : FirEqualityOperatorCall() {
     override var typeRef: FirTypeRef = FirImplicitBooleanTypeRef(null)
 

@@ -5,7 +5,7 @@ open class Foo(y : Int) {
 }
 
 object ~A~A : Foo(0) {
-  ~x~val x : Int = 2
+  ~x~konst x : Int = 2
 
   fun test() {
     return `x`x + `foo()`foo()
@@ -14,10 +14,10 @@ object ~A~A : Foo(0) {
 
 object B : A {}
 
-~ns.x~val x = `A`A.`foo()`foo()
+~ns.x~konst x = `A`A.`foo()`foo()
 
 fun f() {
-  ~y~val y = object : Foo(`ns.x`x) {
+  ~y~konst y = object : Foo(`ns.x`x) {
     init {
       `ns.x`x + 12
     }
@@ -25,5 +25,5 @@ fun f() {
     ~y.foo()~override fun foo() : Int = 1
   }
 
-  val z = `y`y.`y.foo()`foo()
+  konst z = `y`y.`y.foo()`foo()
 }

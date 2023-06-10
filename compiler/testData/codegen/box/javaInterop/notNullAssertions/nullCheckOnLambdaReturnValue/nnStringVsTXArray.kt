@@ -3,7 +3,7 @@
 fun <T> useTX(x: T, fn: () -> T) = fn()
 
 fun box(): String {
-    val xs = Array(1) { "" }
+    konst xs = Array(1) { "" }
     try {
         useTX(xs) { J.notNullString() }
     } catch (e: NullPointerException) {

@@ -4,7 +4,7 @@
 package foo
 
 @Target(AnnotationTarget.TYPE_PARAMETER)
-annotation class TypeParameterAnn(val name: String)
+annotation class TypeParameterAnn(konst name: String)
 
 class Kotlin {
 

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.utils.rethrow
 import java.util.concurrent.atomic.AtomicLong
 
 open class ExceptionTracker : ModificationTracker, LockBasedStorageManager.ExceptionHandlingStrategy {
-    private val cancelledTracker: AtomicLong = AtomicLong()
+    private konst cancelledTracker: AtomicLong = AtomicLong()
 
     override fun handleException(throwable: Throwable): RuntimeException {
         // should not increment counter when ReenteringLazyValueComputationException is thrown since it implements correct frontend behaviour
@@ -39,12 +39,12 @@ open class ExceptionTracker : ModificationTracker, LockBasedStorageManager.Excep
 }
 
 object CacheResetOnProcessCanceled {
-    private const val PROPERTY = "kotlin.internal.cacheResetOnProcessCanceled"
-    private const val DEFAULT_VALUE = false
+    private const konst PROPERTY = "kotlin.internal.cacheResetOnProcessCanceled"
+    private const konst DEFAULT_VALUE = false
 
     var enabled: Boolean
         get() = PropertiesComponent.getInstance()?.getBoolean(PROPERTY, DEFAULT_VALUE) ?: DEFAULT_VALUE
-        set(value) {
-            PropertiesComponent.getInstance()?.setValue(PROPERTY, value, DEFAULT_VALUE)
+        set(konstue) {
+            PropertiesComponent.getInstance()?.setValue(PROPERTY, konstue, DEFAULT_VALUE)
         }
 }

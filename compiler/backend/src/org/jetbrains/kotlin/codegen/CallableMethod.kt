@@ -18,36 +18,36 @@ import org.jetbrains.org.objectweb.asm.commons.Method
 import org.jetbrains.org.objectweb.asm.util.Printer
 
 class CallableMethod(
-    override val owner: Type,
-    private val defaultImplOwner: Type?,
+    override konst owner: Type,
+    private konst defaultImplOwner: Type?,
     computeDefaultMethod: () -> Method,
-    private val signature: JvmMethodSignature,
-    val invokeOpcode: Int,
-    override val dispatchReceiverType: Type?,
-    override val dispatchReceiverKotlinType: KotlinType?,
-    override val extensionReceiverType: Type?,
-    override val extensionReceiverKotlinType: KotlinType?,
-    override val generateCalleeType: Type?,
-    override val returnKotlinType: KotlinType?,
-    val isInterfaceMethod: Boolean,
-    private val isDefaultMethodInInterface: Boolean,
-    private val boxInlineClassBeforeInvoke: Boolean
+    private konst signature: JvmMethodSignature,
+    konst invokeOpcode: Int,
+    override konst dispatchReceiverType: Type?,
+    override konst dispatchReceiverKotlinType: KotlinType?,
+    override konst extensionReceiverType: Type?,
+    override konst extensionReceiverKotlinType: KotlinType?,
+    override konst generateCalleeType: Type?,
+    override konst returnKotlinType: KotlinType?,
+    konst isInterfaceMethod: Boolean,
+    private konst isDefaultMethodInInterface: Boolean,
+    private konst boxInlineClassBeforeInvoke: Boolean
 ) : Callable {
-    private val defaultImplMethod: Method by lazy(LazyThreadSafetyMode.PUBLICATION, computeDefaultMethod)
+    private konst defaultImplMethod: Method by lazy(LazyThreadSafetyMode.PUBLICATION, computeDefaultMethod)
 
-    private val defaultImplMethodName: String get() = defaultImplMethod.name
-    private val defaultMethodDesc: String get() = defaultImplMethod.descriptor
+    private konst defaultImplMethodName: String get() = defaultImplMethod.name
+    private konst defaultMethodDesc: String get() = defaultImplMethod.descriptor
 
     fun getValueParameters(): List<JvmMethodParameterSignature> =
-        signature.valueParameters
+        signature.konstueParameters
 
-    override val valueParameterTypes: List<Type>
-        get() = signature.valueParameters.filter { it.kind == JvmMethodParameterKind.VALUE }.map { it.asmType }
+    override konst konstueParameterTypes: List<Type>
+        get() = signature.konstueParameters.filter { it.kind == JvmMethodParameterKind.VALUE }.map { it.asmType }
 
     fun getAsmMethod(): Method =
         signature.asmMethod
 
-    override val parameterTypes: Array<Type>
+    override konst parameterTypes: Array<Type>
         get() = getAsmMethod().argumentTypes
 
     override fun genInvokeInstruction(v: InstructionAdapter) {
@@ -68,7 +68,7 @@ class CallableMethod(
             throw IllegalStateException()
         }
 
-        val method = getAsmMethod()
+        konst method = getAsmMethod()
 
         if ("<init>" == method.name) {
             v.visitMethodInsn(INVOKESPECIAL, defaultImplOwner.internalName, "<init>", defaultMethodDesc, false)
@@ -86,7 +86,7 @@ class CallableMethod(
         }
     }
 
-    override val returnType: Type
+    override konst returnType: Type
         get() = signature.returnType
 
     override fun isStaticCall(): Boolean =

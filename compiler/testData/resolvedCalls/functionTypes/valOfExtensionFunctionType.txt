@@ -1,5 +1,5 @@
 interface A {
-    val foo: Int.()->Unit
+    konst foo: Int.()->Unit
 
     fun test() {
         1.<caret>foo()
@@ -10,7 +10,7 @@ interface A {
 
 Resolved call:
 
-Resulting descriptor: val foo: Int.() -> Unit defined in A
+Resulting descriptor: konst foo: Int.() -> Unit defined in A
 
 Explicit receiver kind = NO_EXPLICIT_RECEIVER
 Dispatch receiver = Class{A}

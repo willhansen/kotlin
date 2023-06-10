@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_VALUE
 
 fun foo(f: Boolean): Int {
-    val i: Int
+    konst i: Int
     if (f) {
         i = 1
     }

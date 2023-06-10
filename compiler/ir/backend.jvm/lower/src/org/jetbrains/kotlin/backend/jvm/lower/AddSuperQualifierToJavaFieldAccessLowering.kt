@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 
-internal val addSuperQualifierToJavaFieldAccessPhase = makeIrFilePhase(
+internal konst addSuperQualifierToJavaFieldAccessPhase = makeIrFilePhase(
     { context ->
         if (context.state.configuration.getBoolean(CommonConfigurationKeys.USE_FIR)) {
             AddSuperQualifierToJavaFieldAccessLowering
@@ -50,7 +50,7 @@ private object AddSuperQualifierToJavaFieldAccessLowering : IrElementVisitorVoid
     }
 
     override fun visitFieldAccess(expression: IrFieldAccessExpression) {
-        val dispatchReceiver = expression.receiver
+        konst dispatchReceiver = expression.receiver
         if (dispatchReceiver != null) {
             expression.superQualifierSymbol = superQualifierSymbolForField(dispatchReceiver, expression.symbol.owner)?.symbol
         }
@@ -61,8 +61,8 @@ private object AddSuperQualifierToJavaFieldAccessLowering : IrElementVisitorVoid
     // However, currently there seems to be no better way to support it.
     private fun superQualifierSymbolForField(dispatchReceiver: IrExpression, field: IrField): IrClass? {
         if (field.correspondingPropertySymbol != null) return null
-        val originalContainingClass = field.parentClassOrNull ?: return null
-        val dispatchReceiverRepresentativeClass = dispatchReceiver.type.erasedUpperBound
+        konst originalContainingClass = field.parentClassOrNull ?: return null
+        konst dispatchReceiverRepresentativeClass = dispatchReceiver.type.erasedUpperBound
         // Find first Java super class to avoid possible visibility exposure & separate compilation problems
         return getJavaFieldContainingClassSymbol(dispatchReceiverRepresentativeClass, originalContainingClass)
     }
@@ -82,11 +82,11 @@ private object AddSuperQualifierToJavaFieldAccessLowering : IrElementVisitorVoid
     private fun findMostSpecificJavaClassWithoutKotlinSuperclasses(current: IrClass, top: IrClass): SearchResult? {
         if (current == top) return SearchResult(top, false)
 
-        val superClass = current.superTypes.firstNotNullOfOrNull { supertype ->
+        konst superClass = current.superTypes.firstNotNullOfOrNull { supertype ->
             supertype.getClass()?.takeIf { it.isClass || it.isEnumClass }
         } ?: return null
 
-        val result = findMostSpecificJavaClassWithoutKotlinSuperclasses(superClass, top) ?: return null
+        konst result = findMostSpecificJavaClassWithoutKotlinSuperclasses(superClass, top) ?: return null
         return if (current.isFromJava()) {
             if (result.hasKotlinSuperclasses) result else SearchResult(current, false)
         } else {
@@ -94,5 +94,5 @@ private object AddSuperQualifierToJavaFieldAccessLowering : IrElementVisitorVoid
         }
     }
 
-    private class SearchResult(val resultingClass: IrClass, val hasKotlinSuperclasses: Boolean)
+    private class SearchResult(konst resultingClass: IrClass, konst hasKotlinSuperclasses: Boolean)
 }

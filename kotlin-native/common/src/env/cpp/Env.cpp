@@ -8,16 +8,16 @@
 
 #include <windows.h>
 
-void setEnv(const char* name, const char* value) {
-  SetEnvironmentVariableA(name, value);
+void setEnv(const char* name, const char* konstue) {
+  SetEnvironmentVariableA(name, konstue);
 }
 
 #else
 
 #include <cstdlib>
 
-void setEnv(const char* name, const char* value) {
-  setenv(name, value, 1);
+void setEnv(const char* name, const char* konstue) {
+  setenv(name, konstue, 1);
 }
 
 #endif

@@ -57,7 +57,7 @@ internal fun FirAnnotationContainer.setAnnotationsFromJava(
     javaAnnotationOwner: JavaAnnotationOwner,
     javaTypeParameterStack: JavaTypeParameterStack
 ) {
-    val annotations = mutableListOf<FirAnnotation>()
+    konst annotations = mutableListOf<FirAnnotation>()
     javaAnnotationOwner.annotations.mapTo(annotations) { it.toFirAnnotationCall(session, javaTypeParameterStack) }
     replaceAnnotations(annotations)
 }
@@ -85,9 +85,9 @@ internal fun JavaAnnotationArgument.toFirExpression(
     session: FirSession, javaTypeParameterStack: JavaTypeParameterStack, expectedTypeRef: FirTypeRef?
 ): FirExpression {
     return when (this) {
-        is JavaLiteralAnnotationArgument -> value.createConstantOrError(session)
+        is JavaLiteralAnnotationArgument -> konstue.createConstantOrError(session)
         is JavaArrayAnnotationArgument -> buildArrayOfCall {
-            val argumentTypeRef = expectedTypeRef?.let {
+            konst argumentTypeRef = expectedTypeRef?.let {
                 typeRef = it
                 buildResolvedTypeRef {
                     type = it.coneTypeSafe<ConeKotlinType>()?.lowerBoundIfFlexible()?.arrayElementType()
@@ -100,8 +100,8 @@ internal fun JavaAnnotationArgument.toFirExpression(
         }
         is JavaEnumValueAnnotationArgument -> buildEnumCall(session, enumClassId, entryName)
         is JavaClassObjectAnnotationArgument -> buildGetClassCall {
-            val resolvedClassTypeRef = getReferencedType().toFirResolvedTypeRef(session, javaTypeParameterStack)
-            val resolvedTypeRef = buildResolvedTypeRef {
+            konst resolvedClassTypeRef = getReferencedType().toFirResolvedTypeRef(session, javaTypeParameterStack)
+            konst resolvedTypeRef = buildResolvedTypeRef {
                 type = StandardClassIds.KClass.constructClassLikeType(arrayOf(resolvedClassTypeRef.type), false)
             }
             argumentList = buildUnaryArgumentList(
@@ -119,13 +119,13 @@ internal fun JavaAnnotationArgument.toFirExpression(
     }
 }
 
-private val JAVA_RETENTION_TO_KOTLIN: Map<String, AnnotationRetention> = mapOf(
+private konst JAVA_RETENTION_TO_KOTLIN: Map<String, AnnotationRetention> = mapOf(
     "RUNTIME" to AnnotationRetention.RUNTIME,
     "CLASS" to AnnotationRetention.BINARY,
     "SOURCE" to AnnotationRetention.SOURCE
 )
 
-private val JAVA_TARGETS_TO_KOTLIN = mapOf(
+private konst JAVA_TARGETS_TO_KOTLIN = mapOf(
     "TYPE" to EnumSet.of(AnnotationTarget.CLASS, AnnotationTarget.FILE),
     "ANNOTATION_TYPE" to EnumSet.of(AnnotationTarget.ANNOTATION_CLASS),
     "TYPE_PARAMETER" to EnumSet.of(AnnotationTarget.TYPE_PARAMETER),
@@ -139,7 +139,7 @@ private val JAVA_TARGETS_TO_KOTLIN = mapOf(
 
 private fun buildEnumCall(session: FirSession, classId: ClassId?, entryName: Name?): FirPropertyAccessExpression {
     return buildPropertyAccessExpression {
-        val resolvedCalleeReference: FirResolvedNamedReference? = if (classId != null && entryName != null) {
+        konst resolvedCalleeReference: FirResolvedNamedReference? = if (classId != null && entryName != null) {
             session.symbolProvider.getClassDeclaredPropertySymbols(classId, entryName)
                 .firstOrNull()?.let { propertySymbol ->
                     buildResolvedNamedReference {
@@ -177,12 +177,12 @@ private fun buildEnumCall(session: FirSession, classId: ClassId?, entryName: Nam
 
 private fun List<JavaAnnotationArgument>.mapJavaTargetArguments(session: FirSession): FirExpression? {
     return buildVarargArgumentsExpression {
-        val resultSet = EnumSet.noneOf(AnnotationTarget::class.java)
+        konst resultSet = EnumSet.noneOf(AnnotationTarget::class.java)
         for (target in this@mapJavaTargetArguments) {
             if (target !is JavaEnumValueAnnotationArgument) return null
             resultSet.addAll(JAVA_TARGETS_TO_KOTLIN[target.entryName?.asString()] ?: continue)
         }
-        val classId = StandardClassIds.AnnotationTarget
+        konst classId = StandardClassIds.AnnotationTarget
         resultSet.mapTo(arguments) { buildEnumCall(session, classId, Name.identifier(it.name)) }
         varargElementType = buildResolvedTypeRef {
             type = ConeClassLikeTypeImpl(
@@ -210,15 +210,15 @@ private fun fillAnnotationArgumentMapping(
 ) {
     if (annotationArguments.isEmpty()) return
 
-    val annotationClassSymbol = lookupTag.toSymbol(session).also {
+    konst annotationClassSymbol = lookupTag.toSymbol(session).also {
         lookupTag.bindSymbolToLookupTag(session, it)
     }
-    val annotationConstructor = (annotationClassSymbol?.fir as FirRegularClass?)
+    konst annotationConstructor = (annotationClassSymbol?.fir as FirRegularClass?)
         ?.declarations
         ?.firstIsInstanceOrNull<FirConstructor>()
     annotationArguments.associateTo(destination) { argument ->
-        val name = argument.name ?: StandardClassIds.Annotations.ParameterNames.value
-        val parameter = annotationConstructor?.valueParameters?.find { it.name == name }
+        konst name = argument.name ?: StandardClassIds.Annotations.ParameterNames.konstue
+        konst parameter = annotationConstructor?.konstueParameters?.find { it.name == name }
         name to argument.toFirExpression(session, javaTypeParameterStack, parameter?.returnTypeRef)
     }
 }
@@ -227,7 +227,7 @@ private fun JavaAnnotation.toFirAnnotationCall(
     session: FirSession, javaTypeParameterStack: JavaTypeParameterStack
 ): FirAnnotation {
     return buildAnnotation {
-        val lookupTag = when (classId) {
+        konst lookupTag = when (classId) {
             StandardClassIds.Annotations.Java.Target -> StandardClassIds.Annotations.Target
             StandardClassIds.Annotations.Java.Retention -> StandardClassIds.Annotations.Retention
             StandardClassIds.Annotations.Java.Documented -> StandardClassIds.Annotations.MustBeDocumented
@@ -239,14 +239,14 @@ private fun JavaAnnotation.toFirAnnotationCall(
                 type = ConeClassLikeTypeImpl(lookupTag, emptyArray(), isNullable = false)
             }
         } else {
-            val unresolvedName = classId?.shortClassName ?: SpecialNames.NO_NAME_PROVIDED
+            konst unresolvedName = classId?.shortClassName ?: SpecialNames.NO_NAME_PROVIDED
             buildErrorTypeRef { diagnostic = ConeUnresolvedReferenceError(unresolvedName) }
         }
 
         argumentMapping = buildAnnotationArgumentMapping {
             when (classId) {
                 StandardClassIds.Annotations.Java.Target -> {
-                    when (val argument = arguments.firstOrNull()) {
+                    when (konst argument = arguments.firstOrNull()) {
                         is JavaArrayAnnotationArgument -> argument.getElements().mapJavaTargetArguments(session)
                         is JavaEnumValueAnnotationArgument -> listOf(argument).mapJavaTargetArguments(session)
                         else -> null

@@ -16,4 +16,4 @@ fun box(): String {
     return "OK"
 }
 
-val prop = bar(foo())
+konst prop = bar(foo())

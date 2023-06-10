@@ -19,7 +19,7 @@ after end of analysis occurrences of such types are replaced with corresponding 
 Ex:
 ```kotlin
 buildList { /* this: MutableList<Stub(T)> -> */
-    val self/*: MutableList<Stub(T)> */ = this
+    konst self/*: MutableList<Stub(T)> */ = this
     self.add("") // String <: Stub(T) from argument
 }
 ```

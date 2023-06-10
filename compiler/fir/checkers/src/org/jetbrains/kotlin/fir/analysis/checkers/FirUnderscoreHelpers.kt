@@ -19,7 +19,7 @@ fun checkUnderscoreDiagnostics(
     reporter: DiagnosticReporter,
     isExpression: Boolean
 ) {
-    val sourceKind = source?.kind ?: return
+    konst sourceKind = source?.kind ?: return
 
     if (sourceKind is KtRealSourceElementKind || sourceKind is KtFakeSourceElementKind.ReferenceInAtomicQualifiedAccess) {
         with(SourceNavigator.forSource(source)) {
@@ -34,5 +34,5 @@ fun checkUnderscoreDiagnostics(
     }
 }
 
-val CharSequence.isUnderscore: Boolean
+konst CharSequence.isUnderscore: Boolean
     get() = all { it == '_' }

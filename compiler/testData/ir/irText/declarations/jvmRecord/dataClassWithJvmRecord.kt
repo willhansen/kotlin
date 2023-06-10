@@ -4,7 +4,7 @@
 // JVM_TARGET: 17
 
 @JvmRecord
-data class MyRec(val name: String)
+data class MyRec(konst name: String)
 
 fun test(rec: MyRec) {
     rec.name

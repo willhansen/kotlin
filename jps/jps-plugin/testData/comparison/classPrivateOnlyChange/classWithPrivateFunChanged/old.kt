@@ -1,7 +1,7 @@
 package test
 
 class ClassWithPrivateFunAdded {
-    val s = "20"
+    konst s = "20"
 }
 
 class ClassWithPrivateFunRemoved {

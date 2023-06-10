@@ -5,7 +5,7 @@ open class L<LL : Any?> {
 
   }
 
-  val ll: LL
+  konst ll: LL
     field = ll
     get
 
@@ -18,13 +18,13 @@ class Rec<T : Any?> {
 
   }
 
-  val rt: T
+  konst rt: T
     field = rt
     get
 
 }
 
-val <PT : Any?> Rec<PT>.p: L<PT>
+konst <PT : Any?> Rec<PT>.p: L<PT>
   get(): L<PT> {
     local class PLocal<LT : Any?> : L<LT> {
       constructor(lt: LT, pt: PT) /* primary */ {
@@ -33,7 +33,7 @@ val <PT : Any?> Rec<PT>.p: L<PT>
 
       }
 
-      val pt: PT
+      konst pt: PT
         field = pt
         get
 
@@ -50,7 +50,7 @@ fun <FT : Any?> Rec<FT>.fn(): L<FT> {
 
     }
 
-    val pt: FT
+    konst pt: FT
       field = pt
       get
 

@@ -22,7 +22,7 @@ object GradleKpmDefaultKotlinSourceArchiveTaskConfigurator : GradleKpmSourceArch
             project = variant.project,
             sourceSets = variant.project.future {
                 GradleKpmFragmentSourcesProvider().getSourcesFromRefinesClosureAsMap(variant)
-                    .entries.associate { it.key.unambiguousNameInProject to it.value.get() }
+                    .entries.associate { it.key.unambiguousNameInProject to it.konstue.get() }
             },
             artifactNameAppendix = variant.name,
             componentTypeName = "variant",

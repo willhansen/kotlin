@@ -28,10 +28,10 @@ FILE: classWithGeneratedMembersAndNestedClass.kt
 
     }
     public final fun test_1(foo: R|Foo|): R|kotlin/Unit| {
-        lval foo2: R|Foo| = R|<local>/foo|.R|/Foo.materialize|()
-        lval nested: R|Foo.Nested| = Q|Foo|.R|/Foo.Nested|()
+        lkonst foo2: R|Foo| = R|<local>/foo|.R|/Foo.materialize|()
+        lkonst nested: R|Foo.Nested| = Q|Foo|.R|/Foo.Nested|()
     }
     public final fun test_2(bar: R|Bar|): R|kotlin/Unit| {
-        lval foo2: R|Bar| = R|<local>/bar|.<Unresolved name: materialize>#()
-        lval nested: <ERROR TYPE REF: Unresolved name: Nested> = Q|Bar|.<Unresolved name: Nested>#()
+        lkonst foo2: R|Bar| = R|<local>/bar|.<Unresolved name: materialize>#()
+        lkonst nested: <ERROR TYPE REF: Unresolved name: Nested> = Q|Bar|.<Unresolved name: Nested>#()
     }

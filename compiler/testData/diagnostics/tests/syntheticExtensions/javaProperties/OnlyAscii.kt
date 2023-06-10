@@ -14,7 +14,7 @@ public class JavaClass {
         return 0;
     }
 
-    public void setКакоеТоСвойство(int value) {
+    public void setКакоеТоСвойство(int konstue) {
     }
 
     public int getКУ() {

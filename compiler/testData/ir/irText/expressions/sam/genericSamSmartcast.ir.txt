@@ -18,6 +18,6 @@ FILE fqName:<root> fileName:/genericSamSmartcast.kt
                         VALUE_PARAMETER name:y index:0 type:kotlin.Any?
                         BLOCK_BODY
                           RETURN type=kotlin.Nothing from='local final fun <anonymous> (y: kotlin.Any?): @[FlexibleNullability] kotlin.String? declared in <root>.f'
-                            CONST String type=kotlin.String value="OK"
+                            CONST String type=kotlin.String konstue="OK"
       RETURN type=kotlin.Nothing from='public final fun f (x: kotlin.Any): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="Fail"
+        CONST String type=kotlin.String konstue="Fail"

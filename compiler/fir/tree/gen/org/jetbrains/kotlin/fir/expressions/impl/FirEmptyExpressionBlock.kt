@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 class FirEmptyExpressionBlock : FirBlock() {
-    override val source: KtSourceElement? get() = null
-    override val annotations: List<FirAnnotation> get() = emptyList()
-    override val statements: List<FirStatement> get() = emptyList()
+    override konst source: KtSourceElement? get() = null
+    override konst annotations: List<FirAnnotation> get() = emptyList()
+    override konst statements: List<FirStatement> get() = emptyList()
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

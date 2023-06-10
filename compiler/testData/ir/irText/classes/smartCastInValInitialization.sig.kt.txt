@@ -5,7 +5,7 @@ open class MessageBusImpl {
   // CHECK:
   //   Mangled name: MessageBusImpl{}parentBus
   //   Public signature: /MessageBusImpl.parentBus|4372009635220349355[0]
-  val parentBus: Any?
+  konst parentBus: Any?
     // CHECK JVM_IR:
     //   Mangled name: MessageBusImpl#<get-parentBus>(){}kotlin.Any?
     //   Public signature: /MessageBusImpl.parentBus.<get-parentBus>|-5686140196600425134[0]
@@ -33,7 +33,7 @@ class RootBus : MessageBusImpl {
   // CHECK:
   //   Mangled name: RootBus{}parentBus
   //   Public signature: /RootBus.parentBus|4372009635220349355[0]
-  /* fake */ override val parentBus: Any?
+  /* fake */ override konst parentBus: Any?
     // CHECK JVM_IR:
     //   Mangled name: RootBus#<get-parentBus>(){}kotlin.Any?
     //   Public signature: /RootBus.parentBus.<get-parentBus>|-5686140196600425134[0]

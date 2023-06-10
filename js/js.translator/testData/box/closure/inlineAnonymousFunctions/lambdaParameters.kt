@@ -3,9 +3,9 @@ fun <T> bar(x: T, y: (T) -> Boolean): Boolean = y(x) && jsTypeOf(x.asDynamic()) 
 fun typeOf(x: dynamic) = js("typeof x")
 
 fun box(): String {
-    val f = { x: Char ->
-        val a: Char = x
-        val b: Any = x
+    konst f = { x: Char ->
+        konst a: Char = x
+        konst b: Any = x
         typeOf(a) == "number" && typeOf(b) == "object"
     }
 

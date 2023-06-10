@@ -9,7 +9,7 @@ interface Interface {
                 it
             }
         }
-        set(value) {
-            myProperty = value
+        set(konstue) {
+            myProperty = konstue
         }
 }

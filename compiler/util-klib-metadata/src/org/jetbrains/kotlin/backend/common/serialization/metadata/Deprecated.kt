@@ -26,7 +26,7 @@ typealias KlibMetadataVersion = org.jetbrains.kotlin.library.metadata.KlibMetada
     "This property has been moved from package org.jetbrains.kotlin.backend.common.serialization.metadata to package org.jetbrains.kotlin.library.metadata",
     ReplaceWith("metadataVersion", "org.jetbrains.kotlin.library.metadata.metadataVersion")
 )
-inline val KotlinLibrary.metadataVersion: org.jetbrains.kotlin.library.metadata.KlibMetadataVersion?
+inline konst KotlinLibrary.metadataVersion: org.jetbrains.kotlin.library.metadata.KlibMetadataVersion?
     get() = metadataVersion
 
 @Deprecated(

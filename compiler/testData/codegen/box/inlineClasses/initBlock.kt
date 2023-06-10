@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class SingleInitBlock(val s: String) {
+konstue class SingleInitBlock(konst s: String) {
     init {
         res = s
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class MultipleInitBlocks(val a: Any?) {
+konstue class MultipleInitBlocks(konst a: Any?) {
     init {
         res = "O"
     }
@@ -20,17 +20,17 @@ value class MultipleInitBlocks(val a: Any?) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Lambda(val s: String) {
+konstue class Lambda(konst s: String) {
     init {
-        val lambda = { res = s }
+        konst lambda = { res = s }
         lambda()
     }
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class FunLiteral(val s: String) {
+konstue class FunLiteral(konst s: String) {
     init {
-        val funLiteral = fun() {
+        konst funLiteral = fun() {
             res = s
         }
         funLiteral()
@@ -38,9 +38,9 @@ value class FunLiteral(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ObjectLiteral(val s: String) {
+konstue class ObjectLiteral(konst s: String) {
     init {
-        val objectLiteral = object {
+        konst objectLiteral = object {
             fun run() {
                 res = s
             }
@@ -50,7 +50,7 @@ value class ObjectLiteral(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class LocalFunction(val s: String) {
+konstue class LocalFunction(konst s: String) {
     init {
         fun local() {
             res = s
@@ -60,7 +60,7 @@ value class LocalFunction(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class LocalClass(val s: String) {
+konstue class LocalClass(konst s: String) {
     init {
         class Local {
             fun run() {
@@ -72,27 +72,27 @@ value class LocalClass(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Getter(val s: String) {
+konstue class Getter(konst s: String) {
     init {
         res = ok
     }
 
-    val ok: String
+    konst ok: String
         get() = s
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class GetterThis(val s: String) {
+konstue class GetterThis(konst s: String) {
     init {
         res = this.ok
     }
 
-    val ok: String
+    konst ok: String
         get() = s
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Method(val s: String) {
+konstue class Method(konst s: String) {
     init {
         res = ok(this)
     }
@@ -101,7 +101,7 @@ value class Method(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class MethodThis(val s: String) {
+konstue class MethodThis(konst s: String) {
     init {
         res = this.ok(this)
     }
@@ -110,7 +110,7 @@ value class MethodThis(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineFun(val s: String) {
+konstue class InlineFun(konst s: String) {
     init {
         res = ok()
     }
@@ -119,7 +119,7 @@ value class InlineFun(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineFunThis(val s: String) {
+konstue class InlineFunThis(konst s: String) {
     init {
         res = this.ok()
     }
@@ -128,7 +128,7 @@ value class InlineFunThis(val s: String) {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineClass(val s: String) {
+konstue class InlineClass(konst s: String) {
     init {
         SingleInitBlock(s)
     }

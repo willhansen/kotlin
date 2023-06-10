@@ -21,20 +21,20 @@ import org.jetbrains.org.objectweb.asm.Type
 
 class KClassJavaPrimitiveTypeProperty : IntrinsicPropertyGetter() {
     override fun generate(resolvedCall: ResolvedCall<*>?, codegen: ExpressionCodegen, returnType: Type, receiver: StackValue): StackValue? {
-        val receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
-        val classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
-        val receiverExpression = classLiteralExpression.receiverExpression ?: return null
-        val lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
+        konst receiverValue = resolvedCall!!.extensionReceiver as? ExpressionReceiver ?: return null
+        konst classLiteralExpression = receiverValue.expression as? KtClassLiteralExpression ?: return null
+        konst receiverExpression = classLiteralExpression.receiverExpression ?: return null
+        konst lhs = codegen.bindingContext.get(DOUBLE_COLON_LHS, receiverExpression) ?: return null
         if (TypeUtils.isTypeParameter(lhs.type)) {
-            // TODO: add new operation kind to ReifiedTypeInliner.OperationKind to generate a null value or a field access to TYPE
+            // TODO: add new operation kind to ReifiedTypeInliner.OperationKind to generate a null konstue or a field access to TYPE
             return null
         }
         if (lhs is DoubleColonLHS.Expression && !lhs.isObjectQualifier) {
-            val receiverType = codegen.bindingContext.getType(receiverExpression) ?: return null
+            konst receiverType = codegen.bindingContext.getType(receiverExpression) ?: return null
             if (!KotlinBuiltIns.isPrimitiveTypeOrNullablePrimitiveType(receiverType)) return null
         }
 
-        val lhsType = codegen.asmType(lhs.type)
+        konst lhsType = codegen.asmType(lhs.type)
         return StackValue.operation(returnType) { iv ->
             when {
                 lhs is DoubleColonLHS.Expression && !lhs.isObjectQualifier -> {

@@ -20,9 +20,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 
 public interface AbstractDeclarationFromBinaryModuleProvider {
-    public val scope: GlobalSearchScope
-    public val packagePartProvider: PackagePartProvider
-    public val jarFileSystem: CoreJarFileSystem
+    public konst scope: GlobalSearchScope
+    public konst packagePartProvider: PackagePartProvider
+    public konst jarFileSystem: CoreJarFileSystem
 
     /**
      * Collect [VirtualFile]s that belong to the package with the given [FqName],
@@ -41,8 +41,8 @@ public interface AbstractDeclarationFromBinaryModuleProvider {
         binaryModule: KtBinaryModule,
         fqName: FqName,
     ): Set<VirtualFile> {
-        val fqNameString = fqName.asString()
-        val packageParts = packagePartProvider.findPackageParts(fqNameString)
+        konst fqNameString = fqName.asString()
+        konst packageParts = packagePartProvider.findPackageParts(fqNameString)
         return if (packageParts.isNotEmpty()) {
             binaryModule.getBinaryRoots().flatMap r@{ rootPath ->
                 if (!Files.isRegularFile(rootPath) || ".jar" !in rootPath.toString()) return@r emptySet<VirtualFile>()
@@ -79,18 +79,18 @@ public interface AbstractDeclarationFromBinaryModuleProvider {
         fqName: FqName,
         isPackageName: Boolean,
     ): Set<VirtualFile> {
-        val fqNameString = fqName.asString()
-        val fs = StandardFileSystems.local()
+        konst fqNameString = fqName.asString()
+        konst fs = StandardFileSystems.local()
         return binaryModule.getBinaryRoots().flatMap r@{ rootPath ->
-            val root = findRoot(rootPath, fs) ?: return@r emptySet()
-            val files = mutableSetOf<VirtualFile>()
+            konst root = findRoot(rootPath, fs) ?: return@r emptySet()
+            konst files = mutableSetOf<VirtualFile>()
             VfsUtilCore.iterateChildrenRecursively(
                 root,
                 /*filter=*/filter@{
                     // Return `false` will skip the children.
                     if (it == root) return@filter true
                     // If it is a directory, then check if its path starts with fq name of interest
-                    val relativeFqName = relativeFqName(root, it)
+                    konst relativeFqName = relativeFqName(root, it)
                     if (it.isDirectory && fqNameString.startsWith(relativeFqName)) {
                         return@filter true
                     }
@@ -133,7 +133,7 @@ public interface AbstractDeclarationFromBinaryModuleProvider {
         virtualFile: VirtualFile,
     ): String {
         return if (root.isDirectory) {
-            val fragments = buildList {
+            konst fragments = buildList {
                 var cur = virtualFile
                 while (cur != root) {
                     add(cur.nameWithoutExtension)

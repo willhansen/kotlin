@@ -1,34 +1,34 @@
 fun test(p: Int?) {
     if (p != null) {
-        val a = p.toByte() //intValue & I2B
-        val b = p.toShort() //intValue & I2S
-        val c = p.toInt() //intValue
-        val d = p.toLong() //intValue & I2L
-        val e = p.toFloat() //intValue & I2F
-        val f = p.toDouble() //intValue & I2D
+        konst a = p.toByte() //intValue & I2B
+        konst b = p.toShort() //intValue & I2S
+        konst c = p.toInt() //intValue
+        konst d = p.toLong() //intValue & I2L
+        konst e = p.toFloat() //intValue & I2F
+        konst f = p.toDouble() //intValue & I2D
     }
 }
 
 fun test(p: Byte?) {
     if (p != null) {
-        val a = p.toByte() //byteValue
-        val b = p.toShort() //byteValue & I2S
-        val c = p.toInt() //byteValue
-        val d = p.toLong() //byteValue & I2L
-        val e = p.toFloat() //byteValue & I2F
-        val f = p.toDouble() //byteValue & I2D
+        konst a = p.toByte() //byteValue
+        konst b = p.toShort() //byteValue & I2S
+        konst c = p.toInt() //byteValue
+        konst d = p.toLong() //byteValue & I2L
+        konst e = p.toFloat() //byteValue & I2F
+        konst f = p.toDouble() //byteValue & I2D
     }
 }
 
 
 fun test(p: Char?) {
     if (p != null) {
-        val a = p.toByte() //charValue & I2B
-        val b = p.toShort() //charValue & I2S
-        val c = p.toInt() //charValue
-        val d = p.toLong() //charValue & I2L
-        val e = p.toFloat() //charValue & I2F
-        val f = p.toDouble() //charValue & I2D
+        konst a = p.toByte() //charValue & I2B
+        konst b = p.toShort() //charValue & I2S
+        konst c = p.toInt() //charValue
+        konst d = p.toLong() //charValue & I2L
+        konst e = p.toFloat() //charValue & I2F
+        konst f = p.toDouble() //charValue & I2D
     }
 }
 

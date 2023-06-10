@@ -4,6 +4,6 @@ enum class MyEnum {
 
 @OptIn(ExperimentalStdlibApi::class)
 fun box(): String {
-    val entries = MyEnum.entries
+    konst entries = MyEnum.entries
     return "OK"
 }

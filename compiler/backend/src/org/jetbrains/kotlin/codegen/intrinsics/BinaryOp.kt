@@ -25,17 +25,17 @@ import org.jetbrains.org.objectweb.asm.Opcodes.ISHR
 import org.jetbrains.org.objectweb.asm.Opcodes.IUSHR
 import org.jetbrains.org.objectweb.asm.Type
 
-class BinaryOp(private val opcode: Int) : IntrinsicMethod() {
+class BinaryOp(private konst opcode: Int) : IntrinsicMethod() {
     private fun shift(): Boolean =
             opcode == ISHL || opcode == ISHR || opcode == IUSHR
 
     override fun toCallable(method: CallableMethod): Callable {
-        val returnType = method.returnType
+        konst returnType = method.returnType
         assert(method.getValueParameters().size == 1)
 
-        val arg0Type: Type
-        val arg1Type: Type
-        val intermediateResultType: Type
+        konst arg0Type: Type
+        konst arg1Type: Type
+        konst intermediateResultType: Type
 
         if (method.owner != Type.CHAR_TYPE) {
             intermediateResultType = numberFunctionOperandType(returnType)

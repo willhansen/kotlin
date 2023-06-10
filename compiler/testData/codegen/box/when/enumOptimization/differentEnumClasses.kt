@@ -9,16 +9,16 @@ enum class B {
 }
 
 fun box(): String {
-    val a = A.O
-    val r1 = when (a) {
+    konst a = A.O
+    konst r1 = when (a) {
         A.O -> "O"
         A.K -> "K"
         B.O -> "fail 1"
         B.K -> "fail 2"
     }
 
-    val b = B.K
-    val r2 = when (b) {
+    konst b = B.K
+    konst r2 = when (b) {
         A.O -> "fail 3"
         A.K -> "fail 4"
         B.O -> "O"

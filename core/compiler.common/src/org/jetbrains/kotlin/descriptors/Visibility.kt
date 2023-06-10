@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.descriptors
 import org.jetbrains.kotlin.name.FqName
 
 abstract class Visibility protected constructor(
-    val name: String,
-    val isPublicAPI: Boolean
+    konst name: String,
+    konst isPublicAPI: Boolean
 ) {
-    open val internalDisplayName: String
+    open konst internalDisplayName: String
         get() = name
 
-    open val externalDisplayName: String
+    open konst externalDisplayName: String
         get() = internalDisplayName
 
     abstract fun mustCheckInImports(): Boolean

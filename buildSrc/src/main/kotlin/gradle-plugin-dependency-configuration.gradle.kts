@@ -17,7 +17,7 @@ configureKotlinCompileTasksGradleCompatibility()
 addBomCheckTask()
 extensions.extraProperties["kotlin.stdlib.default.dependency"] = "false"
 
-val commonSourceSet = createGradleCommonSourceSet()
+konst commonSourceSet = createGradleCommonSourceSet()
 reconfigureMainSourcesSetForGradlePlugin(commonSourceSet)
 
 // Used for Gradle 7.0 version

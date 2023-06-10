@@ -12,6 +12,6 @@ import test.*
 
 fun box() : String {
     var zeroSlot = "fail";
-    val z = "O"
+    konst z = "O"
     return foo(z::id, "K")
 }

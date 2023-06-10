@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.ir.types.IrTypeAbbreviation
 import org.jetbrains.kotlin.ir.types.IrTypeArgument
 
 class IrTypeAbbreviationImpl(
-    override val typeAlias: IrTypeAliasSymbol,
-    override val hasQuestionMark: Boolean,
-    override val arguments: List<IrTypeArgument>,
-    override val annotations: List<IrConstructorCall>
+    override konst typeAlias: IrTypeAliasSymbol,
+    override konst hasQuestionMark: Boolean,
+    override konst arguments: List<IrTypeArgument>,
+    override konst annotations: List<IrConstructorCall>
 ) : IrTypeAbbreviation
 
 class IrTypeAbbreviationBuilder {

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.fir.symbols.lazyResolveToPhaseWithCallableMembers
 import org.jetbrains.kotlin.fir.types.*
 
 class FirKotlinScopeProvider(
-    val declaredMemberScopeDecorator: (
+    konst declaredMemberScopeDecorator: (
         klass: FirClass,
         declaredMemberScope: FirContainingNamesAwareScope,
         useSiteSession: FirSession,
@@ -45,22 +45,22 @@ class FirKotlinScopeProvider(
         }
 
         return scopeSession.getOrBuild(klass.symbol, USE_SITE) {
-            val declaredScope = useSiteSession.declaredMemberScope(klass, memberRequiredPhase)
-            val decoratedDeclaredMemberScope = declaredMemberScopeDecorator(
+            konst declaredScope = useSiteSession.declaredMemberScope(klass, memberRequiredPhase)
+            konst decoratedDeclaredMemberScope = declaredMemberScopeDecorator(
                 klass,
                 declaredScope,
                 useSiteSession,
                 scopeSession,
                 memberRequiredPhase
             ).let {
-                val delegateFields = klass.delegateFields
+                konst delegateFields = klass.delegateFields
                 if (delegateFields.isEmpty())
                     it
                 else
                     FirDelegatedMemberScope(useSiteSession, scopeSession, klass, it, delegateFields)
             }
 
-            val scopes = lookupSuperTypes(
+            konst scopes = lookupSuperTypes(
                 klass, lookupInterfaces = true, deep = false, useSiteSession = useSiteSession, substituteTypes = true
             ).mapNotNull { useSiteSuperType ->
                 useSiteSuperType.scopeForSupertype(useSiteSession, scopeSession, klass, memberRequiredPhase = memberRequiredPhase)
@@ -104,10 +104,10 @@ class FirKotlinScopeProvider(
 
 
 data class ConeSubstitutionScopeKey(
-    val lookupTag: ConeClassLikeLookupTag,
-    val isFromExpectClass: Boolean,
-    val substitutor: ConeSubstitutor,
-    val derivedClassLookupTag: ConeClassLikeLookupTag?
+    konst lookupTag: ConeClassLikeLookupTag,
+    konst isFromExpectClass: Boolean,
+    konst substitutor: ConeSubstitutor,
+    konst derivedClassLookupTag: ConeClassLikeLookupTag?
 ) : ScopeSessionKey<FirClass, FirClassSubstitutionScope>()
 
 fun FirClass.unsubstitutedScope(
@@ -116,7 +116,7 @@ fun FirClass.unsubstitutedScope(
     withForcedTypeCalculator: Boolean,
     memberRequiredPhase: FirResolvePhase?,
 ): FirTypeScope {
-    val scope = scopeProvider.getUseSiteMemberScope(this, useSiteSession, scopeSession, memberRequiredPhase)
+    konst scope = scopeProvider.getUseSiteMemberScope(this, useSiteSession, scopeSession, memberRequiredPhase)
     if (withForcedTypeCalculator) return FirScopeWithFakeOverrideTypeCalculator(scope, FakeOverrideTypeCalculator.Forced)
     return scope
 }
@@ -155,9 +155,9 @@ fun ConeKotlinType.scopeForSupertype(
     if (this !is ConeClassLikeType) return null
     if (this is ConeErrorType) return null
 
-    val symbol = lookupTag.toSymbol(useSiteSession) as? FirRegularClassSymbol ?: return null
+    konst symbol = lookupTag.toSymbol(useSiteSession) as? FirRegularClassSymbol ?: return null
 
-    val substitutor = when {
+    konst substitutor = when {
         this.type.attributes.contains(CompilerConeAttributes.RawType) -> ConeRawScopeSubstitutor(useSiteSession)
         else -> substitutor(symbol, this, useSiteSession)
     }
@@ -176,7 +176,7 @@ fun ConeKotlinType.scopeForSupertype(
 
 private fun substitutor(symbol: FirRegularClassSymbol, type: ConeClassLikeType, useSiteSession: FirSession): ConeSubstitutor {
     if (type.typeArguments.isEmpty()) return ConeSubstitutor.Empty
-    val originalSubstitution = createSubstitutionForScope(symbol.fir.typeParameters, type, useSiteSession)
+    konst originalSubstitution = createSubstitutionForScope(symbol.fir.typeParameters, type, useSiteSession)
     return substitutorByMap(originalSubstitution, useSiteSession)
 }
 
@@ -190,10 +190,10 @@ private fun FirClass.scopeForClassImpl(
     memberOwnerLookupTag: ConeClassLikeLookupTag?,
     memberRequiredPhase: FirResolvePhase?,
 ): FirTypeScope {
-    val basicScope = unsubstitutedScope(useSiteSession, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase)
+    konst basicScope = unsubstitutedScope(useSiteSession, scopeSession, withForcedTypeCalculator = false, memberRequiredPhase)
     if (substitutor == ConeSubstitutor.Empty) return basicScope
 
-    val key = ConeSubstitutionScopeKey(
+    konst key = ConeSubstitutionScopeKey(
         classFirDispatchReceiver.symbol.toLookupTag(),
         isFromExpectClass,
         substitutor,
@@ -218,4 +218,4 @@ private fun FirClass.scopeForClassImpl(
     }
 }
 
-val FirSession.kotlinScopeProvider: FirKotlinScopeProvider by FirSession.sessionComponentAccessor()
+konst FirSession.kotlinScopeProvider: FirKotlinScopeProvider by FirSession.sessionComponentAccessor()

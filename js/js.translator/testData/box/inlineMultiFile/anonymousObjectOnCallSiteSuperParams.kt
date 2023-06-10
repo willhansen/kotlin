@@ -10,10 +10,10 @@ package foo
 import test.*
 
 fun box() : String {
-    val o = "O"
-    val result = doWork {
-        val k = "K"
-        val s = object : A<String>("11") {
+    konst o = "O"
+    konst result = doWork {
+        konst k = "K"
+        konst s = object : A<String>("11") {
             override fun getO(): String {
                 return o;
             }
@@ -35,7 +35,7 @@ fun box() : String {
 // FILE: test.kt
 package test
 
-abstract class A<R>(val param: R) {
+abstract class A<R>(konst param: R) {
     abstract fun getO() : R
 
     abstract fun getK() : R

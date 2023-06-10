@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.fir.contracts.builder.buildEffectDeclaration
 import org.jetbrains.kotlin.fir.contracts.description.ConeContractDescriptionElement
 import org.jetbrains.kotlin.fir.contracts.description.ConeEffectDeclaration
 
-val FirContractDescription.effects: List<FirEffectDeclaration>?
+konst FirContractDescription.effects: List<FirEffectDeclaration>?
     get() = (this as? FirResolvedContractDescription)?.effects
 
 fun ConeEffectDeclaration.toFirElement(source: KtSourceElement? = null): FirEffectDeclaration =

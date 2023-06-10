@@ -18,7 +18,7 @@ import java.nio.file.Files
 class ScriptingWithCliCompilerTest {
 
     companion object {
-        const val TEST_DATA_DIR = "plugins/scripting/scripting-compiler/testData"
+        const konst TEST_DATA_DIR = "plugins/scripting/scripting-compiler/testData"
     }
 
     init {
@@ -56,7 +56,7 @@ class ScriptingWithCliCompilerTest {
         runWithK2JVMCompiler(
             arrayOf(
                 "-expression",
-                "val x = 7; println(x * 6); for (arg in args) println(arg)",
+                "konst x = 7; println(x * 6); for (arg in args) println(arg)",
                 "--",
                 "hi",
                 "there"
@@ -98,7 +98,7 @@ class ScriptingWithCliCompilerTest {
 
     @Test
     fun testScriptAsMainKts() {
-        val scriptFile = Files.createTempFile("someScript", "").toFile()
+        konst scriptFile = Files.createTempFile("someScript", "").toFile()
         scriptFile.writeText("@file:CompilerOptions(\"-abracadabra\")\n42")
 
         // testing that without specifying default to .main.kts the script with extension .txt is not recognized
@@ -122,7 +122,7 @@ class ScriptingWithCliCompilerTest {
             ),
             expectedExitCode = 1,
             expectedSomeErrPatterns = listOf(
-                "error: invalid argument: -abracadabra"
+                "error: inkonstid argument: -abracadabra"
             )
         )
         runWithK2JVMCompiler(
@@ -134,7 +134,7 @@ class ScriptingWithCliCompilerTest {
             ),
             expectedExitCode = 1,
             expectedSomeErrPatterns = listOf(
-                "error: invalid argument: -abracadabra"
+                "error: inkonstid argument: -abracadabra"
             )
         )
     }
@@ -165,7 +165,7 @@ class ScriptingWithCliCompilerTest {
 
     @Test
     fun testExceptionWithCause() {
-        val (_, err, _) = captureOutErrRet {
+        konst (_, err, _) = captureOutErrRet {
             CLITool.doMainNoExit(
                 K2JVMCompiler(),
                 arrayOf(
@@ -174,7 +174,7 @@ class ScriptingWithCliCompilerTest {
                 )
             )
         }
-        val filteredErr = err.linesSplitTrim().filterNot { it.startsWith("WARN: ") }
+        konst filteredErr = err.linesSplitTrim().filterNot { it.startsWith("WARN: ") }
         Assert.assertEquals(
             """
                 java.lang.Exception: Top
@@ -193,7 +193,7 @@ class ScriptingWithCliCompilerTest {
 
         fun compileVariant(vararg flags: String, withScriptInstance: Boolean = true): Pair<List<String>, ExitCode> {
             return withTempDir { tmpdir ->
-                val (_, err, exitCode) = captureOutErrRet {
+                konst (_, err, exitCode) = captureOutErrRet {
                     CLITool.doMainNoExit(
                         K2JVMCompiler(),
                         arrayOf(
@@ -212,10 +212,10 @@ class ScriptingWithCliCompilerTest {
             }
         }
 
-        val scriptInSourceRootWarning =
+        konst scriptInSourceRootWarning =
             "warning: script 'simpleScript.main.kts' is not supposed to be used along with regular Kotlin sources, and will be ignored in the future versions"
 
-        val unresolvedScriptError =
+        konst unresolvedScriptError =
             "simpleScriptInstance.kt:3:13: error: unresolved reference: SimpleScript_main"
 
         compileVariant("-language-version", "1.7").let { (errLines, exitCode) ->
@@ -253,7 +253,7 @@ class ScriptingWithCliCompilerTest {
         withTempDir { tmpdir ->
 
             fun compileSuccessfullyGetStdErr(fileArg: String): List<String> {
-                val (_, err, ret) = captureOutErrRet {
+                konst (_, err, ret) = captureOutErrRet {
                     CLITool.doMainNoExit(
                         K2JVMCompiler(),
                         arrayOf(
@@ -267,12 +267,12 @@ class ScriptingWithCliCompilerTest {
                 return err.linesSplitTrim()
             }
 
-            val loadMainKtsMessage = "logging: configure scripting: loading script definition class org.jetbrains.kotlin.mainKts.MainKtsScript using classpath"
+            konst loadMainKtsMessage = "logging: configure scripting: loading script definition class org.jetbrains.kotlin.mainKts.MainKtsScript using classpath"
 
-            val res1 = compileSuccessfullyGetStdErr("$TEST_DATA_DIR/compiler/mixedCompilation/nonScript.kt")
+            konst res1 = compileSuccessfullyGetStdErr("$TEST_DATA_DIR/compiler/mixedCompilation/nonScript.kt")
             Assert.assertTrue(res1.none { it.startsWith(loadMainKtsMessage) })
 
-            val res2 = compileSuccessfullyGetStdErr("$TEST_DATA_DIR/compiler/mixedCompilation/simpleScript.main.kts")
+            konst res2 = compileSuccessfullyGetStdErr("$TEST_DATA_DIR/compiler/mixedCompilation/simpleScript.main.kts")
             Assert.assertTrue(res2.any { it.startsWith(loadMainKtsMessage) })
         }
     }

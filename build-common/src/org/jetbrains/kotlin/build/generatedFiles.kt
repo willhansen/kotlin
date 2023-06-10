@@ -24,9 +24,9 @@ import java.io.File
 
 open class GeneratedFile(
     sourceFiles: Collection<File>,
-    val outputFile: File
+    konst outputFile: File
 ) {
-    val sourceFiles = sourceFiles.sortedBy { it.path }
+    konst sourceFiles = sourceFiles.sortedBy { it.path }
 
     override fun toString(): String = "${this::class.java.simpleName}: $outputFile"
 }
@@ -36,8 +36,8 @@ class GeneratedJvmClass(
     outputFile: File,
     jvmMetadataVersionFromLanguageVersion: JvmMetadataVersion
 ) : GeneratedFile(sourceFiles, outputFile) {
-    val outputClass = LocalFileKotlinClass.create(outputFile, jvmMetadataVersionFromLanguageVersion).sure {
-        "Couldn't load KotlinClass from $outputFile; it may happen because class doesn't have valid Kotlin annotations"
+    konst outputClass = LocalFileKotlinClass.create(outputFile, jvmMetadataVersionFromLanguageVersion).sure {
+        "Couldn't load KotlinClass from $outputFile; it may happen because class doesn't have konstid Kotlin annotations"
     }
 }
 

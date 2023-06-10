@@ -35,9 +35,9 @@ public open class ClassWithOpen() {
     <!NO_EXPLICIT_VISIBILITY_IN_API_MODE!>open fun openMethod<!>() {}
 }
 
-public data class FooData(val i: Int, val s: String)
+public data class FooData(konst i: Int, konst s: String)
 
-<!NO_EXPLICIT_VISIBILITY_IN_API_MODE!>data class FooData2<!>(val i: Int, val s: String)
+<!NO_EXPLICIT_VISIBILITY_IN_API_MODE!>data class FooData2<!>(konst i: Int, konst s: String)
 
 public class WithNested {
     <!NO_EXPLICIT_VISIBILITY_IN_API_MODE!>class Nested<!> {}

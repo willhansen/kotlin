@@ -24,10 +24,10 @@ public abstract class SimpleScriptTemplate()
 /**
  * Script definition template with standard argv-like parameter; default for regular kotlin scripts
  */
-public abstract class ScriptTemplateWithArgs(val args: Array<String>)
+public abstract class ScriptTemplateWithArgs(konst args: Array<String>)
 
 /**
  * Script definition template with generic bindings parameter (String to Object)
  */
-public abstract class ScriptTemplateWithBindings(val bindings: Map<String, Any?>)
+public abstract class ScriptTemplateWithBindings(konst bindings: Map<String, Any?>)
 

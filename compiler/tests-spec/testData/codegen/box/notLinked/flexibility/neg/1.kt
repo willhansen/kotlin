@@ -21,10 +21,10 @@ public class JavaClass{
 // FILE: KotlinClass.kt
 
 fun box(): String {
-    val x = JavaClass.id(null) // Nothing!
+    konst x = JavaClass.id(null) // Nothing!
 
     return try {
-        val a = if (x) {
+        konst a = if (x) {
             "NOK"
         } else "NOK"
         a

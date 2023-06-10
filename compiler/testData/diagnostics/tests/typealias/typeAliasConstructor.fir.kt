@@ -1,15 +1,15 @@
-class C(val x: String) {
+class C(konst x: String) {
     constructor(): this("")
 }
 
 typealias TC = C
 
-val test1: C = TC("")
-val test2: TC = TC("")
-val test3: C = TC()
-val test4: TC = TC()
+konst test1: C = TC("")
+konst test2: TC = TC("")
+konst test3: C = TC()
+konst test4: TC = TC()
 
-val test5 = <!NONE_APPLICABLE!>TC<!>("", "")
+konst test5 = <!NONE_APPLICABLE!>TC<!>("", "")
 
 interface Interface
 typealias TI = Interface
@@ -17,8 +17,8 @@ typealias TI = Interface
 object AnObject
 typealias TO = AnObject
 
-val test6 = <!RESOLUTION_TO_CLASSIFIER!>TI<!>()
-val test6a = <!RESOLUTION_TO_CLASSIFIER!>Interface<!>()
+konst test6 = <!RESOLUTION_TO_CLASSIFIER!>TI<!>()
+konst test6a = <!RESOLUTION_TO_CLASSIFIER!>Interface<!>()
 
-val test7 = <!UNRESOLVED_REFERENCE!>TO<!>()
-val test7a = <!UNRESOLVED_REFERENCE!>AnObject<!>()
+konst test7 = <!UNRESOLVED_REFERENCE!>TO<!>()
+konst test7a = <!UNRESOLVED_REFERENCE!>AnObject<!>()

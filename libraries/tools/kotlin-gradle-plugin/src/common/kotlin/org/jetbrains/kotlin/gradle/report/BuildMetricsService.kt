@@ -50,34 +50,34 @@ import java.lang.management.ManagementFactory
 
 internal interface UsesBuildMetricsService : Task {
     @get:Internal
-    val buildMetricsService: Property<BuildMetricsService?>
+    konst buildMetricsService: Property<BuildMetricsService?>
 }
 
 abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters>, AutoCloseable, OperationCompletionListener {
 
     //Part of BuildReportService
     interface Parameters : BuildServiceParameters {
-        val startParameters: Property<BuildStartParameters>
-        val reportingSettings: Property<ReportingSettings>
-        val httpService: Property<HttpReportService>
+        konst startParameters: Property<BuildStartParameters>
+        konst reportingSettings: Property<ReportingSettings>
+        konst httpService: Property<HttpReportService>
 
-        val projectDir: DirectoryProperty
-        val label: Property<String?>
-        val projectName: Property<String>
-        val kotlinVersion: Property<String>
-        val buildConfigurationTags: ListProperty<StatTag>
+        konst projectDir: DirectoryProperty
+        konst label: Property<String?>
+        konst projectName: Property<String>
+        konst kotlinVersion: Property<String>
+        konst buildConfigurationTags: ListProperty<StatTag>
     }
 
-    private val log = Logging.getLogger(this.javaClass)
-    private val buildReportService = BuildReportsService()
+    private konst log = Logging.getLogger(this.javaClass)
+    private konst buildReportService = BuildReportsService()
 
     // Tasks and transforms' records
-    private val buildOperationRecords = ConcurrentLinkedQueue<BuildOperationRecord>()
-    private val failureMessages = ConcurrentLinkedQueue<String>()
+    private konst buildOperationRecords = ConcurrentLinkedQueue<BuildOperationRecord>()
+    private konst failureMessages = ConcurrentLinkedQueue<String>()
 
     // Info for tasks only
-    private val taskPathToMetricsReporter = ConcurrentHashMap<String, BuildMetricsReporter>()
-    private val taskPathToTaskClass = ConcurrentHashMap<String, String>()
+    private konst taskPathToMetricsReporter = ConcurrentHashMap<String, BuildMetricsReporter>()
+    private konst taskPathToTaskClass = ConcurrentHashMap<String, String>()
 
     open fun addTask(taskPath: String, taskClass: Class<*>, metricsReporter: BuildMetricsReporter) {
         taskPathToMetricsReporter.put(taskPath, metricsReporter).also {
@@ -104,33 +104,33 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
     }
 
     private fun updateBuildOperationRecord(event: TaskFinishEvent): TaskRecord {
-        val result = event.result
-        val taskPath = event.descriptor.taskPath
-        val totalTimeMs = result.endTime - result.startTime
+        konst result = event.result
+        konst taskPath = event.descriptor.taskPath
+        konst totalTimeMs = result.endTime - result.startTime
 
-        val buildMetrics = BuildMetrics()
+        konst buildMetrics = BuildMetrics()
         buildMetrics.buildTimes.addTimeMs(BuildTime.GRADLE_TASK, totalTimeMs)
         taskPathToMetricsReporter[taskPath]?.let {
             buildMetrics.addAll(it.getMetrics())
         }
-        val taskExecutionResult = TaskExecutionResults[taskPath]
+        konst taskExecutionResult = TaskExecutionResults[taskPath]
         taskExecutionResult?.buildMetrics?.also {
             buildMetrics.addAll(it)
 
             KotlinBuildStatsService.applyIfInitialised { collector ->
                 collector.report(NumericalMetrics.COMPILATION_DURATION, totalTimeMs)
                 collector.report(BooleanMetrics.KOTLIN_COMPILATION_FAILED, event.result is FailureResult)
-                val metricsMap = buildMetrics.buildPerformanceMetrics.asMap()
+                konst metricsMap = buildMetrics.buildPerformanceMetrics.asMap()
 
-                val linesOfCode = metricsMap[BuildPerformanceMetric.ANALYZED_LINES_NUMBER]
+                konst linesOfCode = metricsMap[BuildPerformanceMetric.ANALYZED_LINES_NUMBER]
                 if (linesOfCode != null && linesOfCode > 0 && totalTimeMs > 0) {
                     collector.report(NumericalMetrics.COMPILED_LINES_OF_CODE, linesOfCode)
                     collector.report(NumericalMetrics.COMPILATION_LINES_PER_SECOND, linesOfCode * 1000 / totalTimeMs, null, linesOfCode)
-                    metricsMap[BuildPerformanceMetric.ANALYSIS_LPS]?.also { value ->
-                        collector.report(NumericalMetrics.ANALYSIS_LINES_PER_SECOND, value, null, linesOfCode)
+                    metricsMap[BuildPerformanceMetric.ANALYSIS_LPS]?.also { konstue ->
+                        collector.report(NumericalMetrics.ANALYSIS_LINES_PER_SECOND, konstue, null, linesOfCode)
                     }
-                    metricsMap[BuildPerformanceMetric.CODE_GENERATION_LPS]?.also { value ->
-                        collector.report(NumericalMetrics.CODE_GENERATION_LINES_PER_SECOND, value, null, linesOfCode)
+                    metricsMap[BuildPerformanceMetric.CODE_GENERATION_LPS]?.also { konstue ->
+                        collector.report(NumericalMetrics.CODE_GENERATION_LINES_PER_SECOND, konstue, null, linesOfCode)
                     }
                 }
                 collector.report(NumericalMetrics.COMPILATIONS_COUNT, 1)
@@ -141,7 +141,7 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
             }
         }
 
-        val buildOperation = TaskRecord(
+        konst buildOperation = TaskRecord(
             path = taskPath,
             classFqName = taskPathToTaskClass[taskPath] ?: "unknown",
             startTimeMs = result.startTime,
@@ -168,15 +168,15 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
 
     override fun onFinish(event: FinishEvent?) {
         if (event is TaskFinishEvent) {
-            val buildOperation = updateBuildOperationRecord(event)
-            val buildParameters = parameters.toBuildReportParameters()
+            konst buildOperation = updateBuildOperationRecord(event)
+            konst buildParameters = parameters.toBuildReportParameters()
             buildReportService.onFinish(event, buildOperation, buildParameters)
         }
     }
 
     companion object {
-        private val serviceClass = BuildMetricsService::class.java
-        private val serviceName = "${serviceClass.name}_${serviceClass.classLoader.hashCode()}"
+        private konst serviceClass = BuildMetricsService::class.java
+        private konst serviceName = "${serviceClass.name}_${serviceClass.classLoader.hashCode()}"
 
         private fun Parameters.toBuildReportParameters() = BuildReportParameters(
             startParameters = startParameters.get(),
@@ -199,12 +199,12 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
             }
 
             //do not need to collect metrics if there aren't consumers for this data
-            val reportingSettings = reportingSettings(project)
+            konst reportingSettings = reportingSettings(project)
             if (reportingSettings.buildReportOutputs.isEmpty()) {
                 return null
             }
 
-            val kotlinVersion = project.getKotlinPluginVersion()
+            konst kotlinVersion = project.getKotlinPluginVersion()
 
             return project.gradle.sharedServices.registerIfAbsent(serviceName, serviceClass) {
                 it.parameters.label.set(reportingSettings.buildReportLabel)
@@ -223,7 +223,7 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
                 }
                 it.parameters.projectDir.set(project.rootProject.layout.projectDirectory)
                 //init gradle tags for build scan and http reports
-                it.parameters.buildConfigurationTags.value(setupTags(project.gradle))
+                it.parameters.buildConfigurationTags.konstue(setupTags(project.gradle))
             }.also {
                 subscribeForTaskEvents(project, it)
             }
@@ -232,11 +232,11 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
 
         private fun subscribeForTaskEvents(project: Project, buildMetricServiceProvider: Provider<BuildMetricsService>) {
             // BuildScanExtension cant be parameter nor BuildService's field
-            val buildScanExtension = project.rootProject.extensions.findByName("buildScan")
-            val buildScan = buildScanExtension?.let { BuildScanExtensionHolder(it) }
-            val buildMetricService = buildMetricServiceProvider.get()
-            val buildScanReportSettings = buildMetricService.parameters.reportingSettings.orNull?.buildScanReportSettings
-            val gradle80withBuildScanReport =
+            konst buildScanExtension = project.rootProject.extensions.findByName("buildScan")
+            konst buildScan = buildScanExtension?.let { BuildScanExtensionHolder(it) }
+            konst buildMetricService = buildMetricServiceProvider.get()
+            konst buildScanReportSettings = buildMetricService.parameters.reportingSettings.orNull?.buildScanReportSettings
+            konst gradle80withBuildScanReport =
                 GradleVersion.current().baseVersion == GradleVersion.version("8.0") && buildScanReportSettings != null && buildScan != null
 
             if (!gradle80withBuildScanReport) {
@@ -256,9 +256,9 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
                             BuildEventsListenerRegistryHolder.getInstance(project).listenerRegistry.onTaskCompletion(project.provider {
                                 OperationCompletionListener { event ->
                                     if (event is TaskFinishEvent) {
-                                        val buildOperation = buildMetricService.updateBuildOperationRecord(event)
-                                        val buildParameters = buildMetricService.parameters.toBuildReportParameters()
-                                        val buildReportService = buildMetricServiceProvider.map { it.buildReportService }.get()
+                                        konst buildOperation = buildMetricService.updateBuildOperationRecord(event)
+                                        konst buildParameters = buildMetricService.parameters.toBuildReportParameters()
+                                        konst buildReportService = buildMetricServiceProvider.map { it.buildReportService }.get()
                                         buildReportService.addBuildScanReport(event, buildOperation, buildParameters, buildScanHolder)
                                         buildReportService.onFinish(event, buildOperation, buildParameters)
                                     }
@@ -281,14 +281,14 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
         }
 
         private fun setupTags(gradle: Gradle): ArrayList<StatTag> {
-            val additionalTags = ArrayList<StatTag>()
+            konst additionalTags = ArrayList<StatTag>()
             if (isConfigurationCacheAvailable(gradle)) {
                 additionalTags.add(StatTag.CONFIGURATION_CACHE)
             }
             if (gradle.startParameter.isBuildCacheEnabled) {
                 additionalTags.add(StatTag.BUILD_CACHE)
             }
-            val debugConfiguration = "-agentlib:"
+            konst debugConfiguration = "-agentlib:"
             if (ManagementFactory.getRuntimeMXBean().inputArguments.firstOrNull { it.startsWith(debugConfiguration) } != null) {
                 additionalTags.add(StatTag.GRADLE_DEBUG)
             }
@@ -306,31 +306,31 @@ abstract class BuildMetricsService : BuildService<BuildMetricsService.Parameters
 }
 
 internal class TaskRecord(
-    override val path: String,
-    override val classFqName: String,
-    override val startTimeMs: Long,
-    override val totalTimeMs: Long,
-    override val buildMetrics: BuildMetrics,
-    override val didWork: Boolean,
-    override val skipMessage: String?,
-    override val icLogLines: List<String>,
-    val kotlinLanguageVersion: KotlinVersion?,
-    val changedFiles: ChangedFiles? = null,
-    val compilerArguments: Array<String> = emptyArray(),
-    val statTags: Set<StatTag> = emptySet(),
+    override konst path: String,
+    override konst classFqName: String,
+    override konst startTimeMs: Long,
+    override konst totalTimeMs: Long,
+    override konst buildMetrics: BuildMetrics,
+    override konst didWork: Boolean,
+    override konst skipMessage: String?,
+    override konst icLogLines: List<String>,
+    konst kotlinLanguageVersion: KotlinVersion?,
+    konst changedFiles: ChangedFiles? = null,
+    konst compilerArguments: Array<String> = emptyArray(),
+    konst statTags: Set<StatTag> = emptySet(),
 ) : BuildOperationRecord {
-    override val isFromKotlinPlugin: Boolean = classFqName.startsWith("org.jetbrains.kotlin")
+    override konst isFromKotlinPlugin: Boolean = classFqName.startsWith("org.jetbrains.kotlin")
 }
 
 private class TransformRecord(
-    override val path: String,
-    override val classFqName: String,
-    override val isFromKotlinPlugin: Boolean,
-    override val startTimeMs: Long,
-    override val totalTimeMs: Long,
-    override val buildMetrics: BuildMetrics
+    override konst path: String,
+    override konst classFqName: String,
+    override konst isFromKotlinPlugin: Boolean,
+    override konst startTimeMs: Long,
+    override konst totalTimeMs: Long,
+    override konst buildMetrics: BuildMetrics
 ) : BuildOperationRecord {
-    override val didWork: Boolean = true
-    override val skipMessage: String? = null
-    override val icLogLines: List<String> = emptyList()
+    override konst didWork: Boolean = true
+    override konst skipMessage: String? = null
+    override konst icLogLines: List<String> = emptyList()
 }

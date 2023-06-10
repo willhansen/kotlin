@@ -5,7 +5,7 @@
 
 inline fun f(block: () -> Unit) {
     try {
-        val z = 32
+        konst z = 32
         for (j in 0 until 1) {
             return
         }
@@ -18,22 +18,22 @@ var x: String = ""
 
 fun compute(): String {
     try {
-        val y = 42
+        konst y = 42
         for (i in 0 until 1) {
             f {
                 return "NON_LOCAL_RETURN"
             }
         }
     } finally {
-        val s2 = "OK"
+        konst s2 = "OK"
         x = s2
     }
     return "FAIL"
 }
 
 fun box() {
-    val result = compute()
-    val localX = x
+    konst result = compute()
+    konst localX = x
 }
 
 // EXPECTATIONS JVM JVM_IR

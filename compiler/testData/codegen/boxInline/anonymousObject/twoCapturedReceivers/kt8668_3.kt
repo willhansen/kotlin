@@ -4,7 +4,7 @@
 
 package test
 
-class Person(val name: String) {
+class Person(konst name: String) {
 
     fun sayName() = doSayName { name }
 
@@ -22,7 +22,7 @@ class Person(val name: String) {
 import test.*
 
 fun box(): String {
-    val res = Person("OK").sayName()
+    konst res = Person("OK").sayName()
     if (res != "OKsubOK")  return "fail: $res"
 
     return "OK"

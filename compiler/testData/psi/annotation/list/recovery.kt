@@ -1,6 +1,6 @@
 @[]
 class A {
-    @[] val x = 1
+    @[] konst x = 1
 
     @[@q]
     fun foo() {

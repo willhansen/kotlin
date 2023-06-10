@@ -7,7 +7,7 @@ suspend fun A.foo() {}
 suspend fun A.foo1(l: Long) {
     foo()
     foo()
-    val dead = l
+    konst dead = l
 }
 
 suspend fun box() {

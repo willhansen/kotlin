@@ -214,7 +214,7 @@ abstract class FirVisitor<out R, in D> {
 
     open fun visitVariable(variable: FirVariable, data: D): R  = visitElement(variable, data)
 
-    open fun visitValueParameter(valueParameter: FirValueParameter, data: D): R  = visitElement(valueParameter, data)
+    open fun visitValueParameter(konstueParameter: FirValueParameter, data: D): R  = visitElement(konstueParameter, data)
 
     open fun visitReceiverParameter(receiverParameter: FirReceiverParameter, data: D): R  = visitElement(receiverParameter, data)
 

@@ -14,41 +14,41 @@ import org.jetbrains.kotlin.config.JpsPluginSettings
 
 var JpsProject.kotlinCompilerSettings
     get() = kotlinCompilerSettingsContainer.compilerSettings
-    internal set(value) {
-        getOrCreateSettings().compilerSettings = value
+    internal set(konstue) {
+        getOrCreateSettings().compilerSettings = konstue
     }
 
 var JpsProject.kotlinJpsPluginSettings
     get() = kotlinCompilerSettingsContainer.jpsPluginSettings
-    internal set(value) {
-        getOrCreateSettings().jpsPluginSettings = value
+    internal set(konstue) {
+        getOrCreateSettings().jpsPluginSettings = konstue
     }
 
 var JpsProject.kotlinCommonCompilerArguments
     get() = kotlinCompilerSettingsContainer.commonCompilerArguments
-    internal set(value) {
-        getOrCreateSettings().commonCompilerArguments = value
+    internal set(konstue) {
+        getOrCreateSettings().commonCompilerArguments = konstue
     }
 
 var JpsProject.k2MetadataCompilerArguments
     get() = kotlinCompilerSettingsContainer.k2MetadataCompilerArguments
-    internal set(value) {
-        getOrCreateSettings().k2MetadataCompilerArguments = value
+    internal set(konstue) {
+        getOrCreateSettings().k2MetadataCompilerArguments = konstue
     }
 
 var JpsProject.k2JsCompilerArguments
     get() = kotlinCompilerSettingsContainer.k2JsCompilerArguments
-    internal set(value) {
-        getOrCreateSettings().k2JsCompilerArguments = value
+    internal set(konstue) {
+        getOrCreateSettings().k2JsCompilerArguments = konstue
     }
 
 var JpsProject.k2JvmCompilerArguments
     get() = kotlinCompilerSettingsContainer.k2JvmCompilerArguments
-    internal set(value) {
-        getOrCreateSettings().k2JvmCompilerArguments = value
+    internal set(konstue) {
+        getOrCreateSettings().k2JvmCompilerArguments = konstue
     }
 
-internal val JpsProject.kotlinCompilerSettingsContainer
+internal konst JpsProject.kotlinCompilerSettingsContainer
     get() = container.getChild(JpsKotlinCompilerSettings.ROLE) ?: JpsKotlinCompilerSettings()
 
 private fun JpsProject.getOrCreateSettings(): JpsKotlinCompilerSettings {
@@ -77,7 +77,7 @@ class JpsKotlinCompilerSettings : JpsElementBase<JpsKotlinCompilerSettings>() {
     }
 
     override fun createCopy(): JpsKotlinCompilerSettings {
-        val copy = JpsKotlinCompilerSettings()
+        konst copy = JpsKotlinCompilerSettings()
         copy.commonCompilerArguments = this.commonCompilerArguments
         copy.k2MetadataCompilerArguments = this.k2MetadataCompilerArguments
         copy.k2JvmCompilerArguments = this.k2JvmCompilerArguments
@@ -92,6 +92,6 @@ class JpsKotlinCompilerSettings : JpsElementBase<JpsKotlinCompilerSettings>() {
     }
 
     companion object {
-        internal val ROLE = JpsElementChildRoleBase.create<JpsKotlinCompilerSettings>("Kotlin Compiler Settings")
+        internal konst ROLE = JpsElementChildRoleBase.create<JpsKotlinCompilerSettings>("Kotlin Compiler Settings")
     }
 }

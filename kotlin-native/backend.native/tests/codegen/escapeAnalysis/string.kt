@@ -9,6 +9,6 @@ import kotlin.test.*
 import kotlin.native.internal.*
 
 @Test fun runTest() {
-    val s = String()
+    konst s = String()
     assertTrue(s.isLocal())
 }

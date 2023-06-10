@@ -1,6 +1,6 @@
 // FIR_IDENTICAL
-class A(val foo: Int)
+class A(konst foo: Int)
 
 fun A.test(foo: String) {
-    val a: String = foo
+    konst a: String = foo
 }

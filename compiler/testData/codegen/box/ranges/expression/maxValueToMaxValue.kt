@@ -2,15 +2,15 @@
 // WITH_STDLIB
 
 
-val MaxI = Int.MAX_VALUE
-val MaxB = Byte.MAX_VALUE
-val MaxS = Short.MAX_VALUE
-val MaxL = Long.MAX_VALUE
-val MaxC = Char.MAX_VALUE
+konst MaxI = Int.MAX_VALUE
+konst MaxB = Byte.MAX_VALUE
+konst MaxS = Short.MAX_VALUE
+konst MaxL = Long.MAX_VALUE
+konst MaxC = Char.MAX_VALUE
 
 fun box(): String {
-    val list1 = ArrayList<Int>()
-    val range1 = MaxI..MaxI
+    konst list1 = ArrayList<Int>()
+    konst range1 = MaxI..MaxI
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -19,8 +19,8 @@ fun box(): String {
         return "Wrong elements for MaxI..MaxI: $list1"
     }
 
-    val list2 = ArrayList<Int>()
-    val range2 = MaxB..MaxB
+    konst list2 = ArrayList<Int>()
+    konst range2 = MaxB..MaxB
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break
@@ -29,8 +29,8 @@ fun box(): String {
         return "Wrong elements for MaxB..MaxB: $list2"
     }
 
-    val list3 = ArrayList<Int>()
-    val range3 = MaxS..MaxS
+    konst list3 = ArrayList<Int>()
+    konst range3 = MaxS..MaxS
     for (i in range3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -39,8 +39,8 @@ fun box(): String {
         return "Wrong elements for MaxS..MaxS: $list3"
     }
 
-    val list4 = ArrayList<Long>()
-    val range4 = MaxL..MaxL
+    konst list4 = ArrayList<Long>()
+    konst range4 = MaxL..MaxL
     for (i in range4) {
         list4.add(i)
         if (list4.size > 23) break
@@ -49,8 +49,8 @@ fun box(): String {
         return "Wrong elements for MaxL..MaxL: $list4"
     }
 
-    val list5 = ArrayList<Char>()
-    val range5 = MaxC..MaxC
+    konst list5 = ArrayList<Char>()
+    konst range5 = MaxC..MaxC
     for (i in range5) {
         list5.add(i)
         if (list5.size > 23) break

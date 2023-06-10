@@ -11,7 +11,7 @@ fun f(xs: Iterator<Int>): Int {
 }
 
 fun box(): String {
-    val list = arrayListOf(1, 2, 3)
-    val result = f(list.iterator())
+    konst list = arrayListOf(1, 2, 3)
+    konst result = f(list.iterator())
     return if (6 == result) "OK" else "fail"
 }

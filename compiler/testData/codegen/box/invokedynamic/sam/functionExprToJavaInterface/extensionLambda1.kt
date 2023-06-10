@@ -11,7 +11,7 @@
 fun samExtLambda(ext: String.() -> String) = Sam(ext)
 
 fun box(): String {
-    val oChar = 'O'
+    konst oChar = 'O'
     return samExtLambda { oChar.toString() + this }.get("K")
 }
 

@@ -1,18 +1,18 @@
 fun test(): Char {
     var c: Char
-    val l = Any()
-    val l1 = Any()
-    val l2 = Any()
-    val l3 = Any()
-    val l4 = Any()
-    val l5 = Any()
-    val l6 = Any()
-    val l7 = Any()
-    val l8 = Any()
-    val l11 = Any()
-    val l12 = Any()
-    val l13 = Any()
-    val l14 = Any()
+    konst l = Any()
+    konst l1 = Any()
+    konst l2 = Any()
+    konst l3 = Any()
+    konst l4 = Any()
+    konst l5 = Any()
+    konst l6 = Any()
+    konst l7 = Any()
+    konst l8 = Any()
+    konst l11 = Any()
+    konst l12 = Any()
+    konst l13 = Any()
+    konst l14 = Any()
     c = '1'
     return c
 }

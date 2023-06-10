@@ -31,10 +31,10 @@ abstract class IrType : KotlinTypeMarker, IrAnnotationContainer {
 
 abstract class IrErrorType(
     kotlinType: KotlinType?,
-    private val errorClassStubSymbol: IrClassSymbol,
-    val isMarkedNullable: Boolean = false
+    private konst errorClassStubSymbol: IrClassSymbol,
+    konst isMarkedNullable: Boolean = false
 ) : IrTypeBase(kotlinType), SimpleTypeMarker {
-    val symbol: IrClassSymbol
+    konst symbol: IrClassSymbol
         get() = errorClassStubSymbol
 }
 
@@ -51,21 +51,21 @@ enum class SimpleTypeNullability {
 }
 
 abstract class IrSimpleType(kotlinType: KotlinType?) : IrTypeBase(kotlinType), SimpleTypeMarker, TypeArgumentListMarker {
-    abstract val classifier: IrClassifierSymbol
+    abstract konst classifier: IrClassifierSymbol
 
     /**
      * If type is explicitly marked as nullable, [nullability] is [SimpleTypeNullability.MARKED_NULLABLE]
      *
-     * If classifier is type parameter, not marked as nullable, but can store null values,
+     * If classifier is type parameter, not marked as nullable, but can store null konstues,
      * if corresponding argument would be nullable, [nullability] is [SimpleTypeNullability.NOT_SPECIFIED]
      *
-     * If type can't store null values, [nullability] is [SimpleTypeNullability.DEFINITELY_NOT_NULL]
+     * If type can't store null konstues, [nullability] is [SimpleTypeNullability.DEFINITELY_NOT_NULL]
      *
      * Direct usages of this property should be avoided in most cases. Use relevant util functions instead.
      *
      * In most cases one of following is needed:
      *
-     * Use [IrType.isNullable] to check if null value is possible for this type
+     * Use [IrType.isNullable] to check if null konstue is possible for this type
      *
      * Use [IrType.isMarkedNullable] to check if type is marked with question mark in code
      *
@@ -73,9 +73,9 @@ abstract class IrSimpleType(kotlinType: KotlinType?) : IrTypeBase(kotlinType), S
      *
      * Use [IrType.makeNotNull] or [IrType.makeNullable] to transfer nullability from one type to another
      */
-    abstract val nullability: SimpleTypeNullability
-    abstract val arguments: List<IrTypeArgument>
-    abstract val abbreviation: IrTypeAbbreviation?
+    abstract konst nullability: SimpleTypeNullability
+    abstract konst arguments: List<IrTypeArgument>
+    abstract konst abbreviation: IrTypeAbbreviation?
 
     /**
      * This property was deprecated and replaced with [nullability] property.
@@ -88,7 +88,7 @@ abstract class IrSimpleType(kotlinType: KotlinType?) : IrTypeBase(kotlinType), S
         level = DeprecationLevel.WARNING,
         message = "hasQuestionMark has ambiguous meaning. Use isNullable() or isMarkedNullable() instead.",
     )
-    val hasQuestionMark: Boolean
+    konst hasQuestionMark: Boolean
         get() = nullability == SimpleTypeNullability.MARKED_NULLABLE
 }
 
@@ -103,12 +103,12 @@ sealed interface IrTypeArgument : TypeArgumentMarker {
 interface IrStarProjection : IrTypeArgument
 
 interface IrTypeProjection : IrTypeArgument {
-    val variance: Variance
-    val type: IrType
+    konst variance: Variance
+    konst type: IrType
 }
 
 interface IrTypeAbbreviation : IrAnnotationContainer {
-    val typeAlias: IrTypeAliasSymbol
-    val hasQuestionMark: Boolean
-    val arguments: List<IrTypeArgument>
+    konst typeAlias: IrTypeAliasSymbol
+    konst hasQuestionMark: Boolean
+    konst arguments: List<IrTypeArgument>
 }

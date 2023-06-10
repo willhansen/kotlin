@@ -1,5 +1,5 @@
 
 class RequiredClass {
 
-    val value = "required"
+    konst konstue = "required"
 }

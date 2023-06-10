@@ -8,8 +8,8 @@ package test.collections
 import kotlin.test.*
 
 class ListSpecificTest {
-    val data = listOf("foo", "bar")
-    val empty = listOf<String>()
+    konst data = listOf("foo", "bar")
+    konst empty = listOf<String>()
 
     @Test
     fun _toString() {
@@ -18,14 +18,14 @@ class ListSpecificTest {
 
     @Test
     fun tail() {
-        val data = listOf("foo", "bar", "whatnot")
-        val actual = data.drop(1)
+        konst data = listOf("foo", "bar", "whatnot")
+        konst actual = data.drop(1)
         assertEquals(listOf("bar", "whatnot"), actual)
     }
 
     @Test
     fun slice() {
-        val list = listOf('A', 'B', 'C', 'D')
+        konst list = listOf('A', 'B', 'C', 'D')
 
         assertEquals(emptyList(), list.slice(IntRange.EMPTY))
 
@@ -34,12 +34,12 @@ class ListSpecificTest {
         assertEquals(listOf('B', 'C', 'D'), list.slice(1..3))
         assertEquals(listOf('D', 'C', 'B'), list.slice(3 downTo 1))
 
-        val iter = listOf(2, 0, 3)
+        konst iter = listOf(2, 0, 3)
         assertEquals(listOf('C', 'A', 'D'), list.slice(iter))
 
         for (range in listOf(-1 until 0, 0 until 2, 2..2)) {
-            val bounds = "range: $range"
-            val exClass = IndexOutOfBoundsException::class
+            konst bounds = "range: $range"
+            konst exClass = IndexOutOfBoundsException::class
             assertFailsWith(exClass, bounds) { listOf("x").slice(range) }
             assertFailsWith(exClass, bounds) { listOf("x").slice(range.asIterable()) }
         }
@@ -77,7 +77,7 @@ class ListSpecificTest {
 
     @Test
     fun mutableList() {
-        val items = listOf("beverage", "location", "name")
+        konst items = listOf("beverage", "location", "name")
 
         var list = listOf<String>()
         for (item in items) {

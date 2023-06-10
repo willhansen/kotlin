@@ -19,7 +19,7 @@ package usage
 
 import api.*
 
-open class Base(val i: I)
+open class Base(konst i: I)
 
 @OptIn(ExperimentalAPI::class)
 class Derived : Base(Impl())
@@ -28,5 +28,5 @@ class Derived : Base(Impl())
 class Delegated : I by Impl()
 
 @OptIn(ExperimentalAPI::class)
-val delegatedProperty by Impl()
+konst delegatedProperty by Impl()
 operator fun I.getValue(x: Any?, y: Any?) = null

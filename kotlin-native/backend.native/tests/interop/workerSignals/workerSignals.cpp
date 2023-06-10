@@ -8,10 +8,10 @@
 namespace {
 
 int pendingValue = 0;
-thread_local int value = 0;
+thread_local int konstue = 0;
 
 void signalHandler(int signal) {
-    value = pendingValue;
+    konstue = pendingValue;
 }
 
 } // namespace
@@ -20,8 +20,8 @@ extern "C" void setupSignalHandler(void) {
     signal(SIGUSR1, &signalHandler);
 }
 
-extern "C" void signalThread(uint64_t thread, int value) {
-    pendingValue = value;
+extern "C" void signalThread(uint64_t thread, int konstue) {
+    pendingValue = konstue;
     pthread_t t = {};
     memcpy(&t, &thread, sizeof(pthread_t));
     auto result = pthread_kill(t, SIGUSR1);
@@ -29,5 +29,5 @@ extern "C" void signalThread(uint64_t thread, int value) {
 }
 
 extern "C" int getValue(void) {
-    return value;
+    return konstue;
 }

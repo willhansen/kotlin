@@ -47,7 +47,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -74,7 +74,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -122,7 +122,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -149,7 +149,7 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   LocalScope, index = 1, empty
@@ -184,7 +184,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -211,7 +211,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -259,7 +259,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -286,7 +286,7 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   LocalScope, index = 4, empty
@@ -377,7 +377,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: LOCAL
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Local
 
   LocalScope, index = 8
@@ -492,7 +492,7 @@ scopes:
         typeParameters: [
           KtTypeParameterSymbol(T)
         ]
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -540,7 +540,7 @@ scopes:
           type: kotlin/Boolean
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -588,7 +588,7 @@ scopes:
           type: kotlin/Int
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
       KtFunctionSymbol:
         annotationsList: []
@@ -615,7 +615,7 @@ scopes:
           type: kotlin/String
         symbolKind: CLASS_MEMBER
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   StaticMemberScope, index = 11
@@ -771,7 +771,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -828,7 +828,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -885,7 +885,7 @@ scopes:
           type: kotlin/Unit
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: [
+        konstueParameters: [
           KtValueParameterSymbol:
             annotationsList: []
             callableIdIfNonLocal: null
@@ -942,7 +942,7 @@ scopes:
           type: kotlin/Int
         symbolKind: TOP_LEVEL
         typeParameters: []
-        valueParameters: []
+        konstueParameters: []
         visibility: Public
 
   DefaultSimpleImportingScope, index = 15

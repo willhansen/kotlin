@@ -1,7 +1,7 @@
 class RootBus: MessageBusImpl()
 
 open class MessageBusImpl {
-    val parentBus: Any?
+    konst parentBus: Any?
 
     init {
         this as RootBus

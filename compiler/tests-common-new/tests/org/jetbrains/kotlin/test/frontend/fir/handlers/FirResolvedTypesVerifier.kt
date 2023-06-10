@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 
 class FirResolvedTypesVerifier(testServices: TestServices) : FirAnalysisHandler(testServices, failureDisablesNextSteps = true) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
-        val visitor = Visitor()
-        for (firFile in info.mainFirFiles.values) {
+        konst visitor = Visitor()
+        for (firFile in info.mainFirFiles.konstues) {
             firFile.acceptChildren(visitor, firFile)
         }
-        val ignored = IGNORE_LEAKED_INTERNAL_TYPES in module.directives
+        konst ignored = IGNORE_LEAKED_INTERNAL_TYPES in module.directives
         try {
             assertions.assertAll(
                 { visitor.detectedImplicitTypesParents.check("implicit") },
@@ -53,13 +53,13 @@ class FirResolvedTypesVerifier(testServices: TestServices) : FirAnalysisHandler(
     private fun Collection<FirElement>.check(typeName: String) {
         assertions.assertTrue(this.isEmpty()) {
             buildString {
-                val count = size
+                konst count = size
                 if (count == 1) {
                     appendLine("One $typeName type was found:")
                 } else {
                     appendLine("$count $typeName types were found:")
                 }
-                val types = joinToString(separator = "\n") {
+                konst types = joinToString(separator = "\n") {
                     "   - Type in ${it.render()}"
                 }
                 append(types)
@@ -68,9 +68,9 @@ class FirResolvedTypesVerifier(testServices: TestServices) : FirAnalysisHandler(
     }
 
     private inner class Visitor : FirDefaultVisitor<Unit, FirElement>() {
-        val detectedImplicitTypesParents = mutableSetOf<FirElement>()
-        val detectedTypeVariableTypesParents = mutableSetOf<FirElement>()
-        val detectedStubTypesParents = mutableSetOf<FirElement>()
+        konst detectedImplicitTypesParents = mutableSetOf<FirElement>()
+        konst detectedTypeVariableTypesParents = mutableSetOf<FirElement>()
+        konst detectedStubTypesParents = mutableSetOf<FirElement>()
 
         override fun visitElement(element: FirElement, data: FirElement) {
             if (element is FirDiagnosticHolder) {

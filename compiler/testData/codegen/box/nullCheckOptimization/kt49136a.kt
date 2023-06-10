@@ -5,12 +5,12 @@ abstract class Z {
         check(this)
     }
 
-    abstract val b: B
+    abstract konst b: B
 }
 
-class A(override val b: B) : Z()
+class A(override konst b: B) : Z()
 
-class B(val c: String)
+class B(konst c: String)
 
 fun use(a: Any?) {}
 

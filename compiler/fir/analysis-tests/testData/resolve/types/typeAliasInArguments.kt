@@ -16,6 +16,6 @@ typealias ImmutableSet<E> = MySet<E>
 
 private typealias ImmutableMultimap<K, V> = ImmutableMap<K, ImmutableSet<V>>
 
-private fun <K, V> ImmutableMultimap<K, V>.put(key: K, value: V, oldSet: ImmutableSet<V>): ImmutableMultimap<K, V> {
-    return put(key, oldSet.add(value))
+private fun <K, V> ImmutableMultimap<K, V>.put(key: K, konstue: V, oldSet: ImmutableSet<V>): ImmutableMultimap<K, V> {
+    return put(key, oldSet.add(konstue))
 }

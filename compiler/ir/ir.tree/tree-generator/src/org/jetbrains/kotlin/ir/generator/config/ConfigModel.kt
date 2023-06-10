@@ -12,19 +12,19 @@ import org.jetbrains.kotlin.ir.generator.BASE_PACKAGE
 import org.jetbrains.kotlin.ir.generator.util.*
 
 class Config(
-    val elements: List<ElementConfig>,
-    val rootElement: ElementConfig,
+    konst elements: List<ElementConfig>,
+    konst rootElement: ElementConfig,
 )
 
 class ElementConfig(
-    val propertyName: String,
-    val name: String,
-    val category: Category
+    konst propertyName: String,
+    konst name: String,
+    konst category: Category
 ) : ElementConfigOrRef {
-    val params = mutableListOf<TypeVariable>()
-    val parents = mutableListOf<TypeRef>()
-    val fields = mutableListOf<FieldConfig>()
-    val additionalImports = mutableListOf<Import>()
+    konst params = mutableListOf<TypeVariable>()
+    konst parents = mutableListOf<TypeRef>()
+    konst fields = mutableListOf<FieldConfig>()
+    konst additionalImports = mutableListOf<Import>()
 
     var visitorName: String? = null
     var visitorParent: ElementConfig? = null
@@ -43,9 +43,9 @@ class ElementConfig(
     var suppressPrint = false
     var kDoc: String? = null
 
-    override val element get() = this
-    override val args get() = emptyMap<NamedTypeParameterRef, TypeRef>()
-    override val nullable get() = false
+    override konst element get() = this
+    override konst args get() = emptyMap<NamedTypeParameterRef, TypeRef>()
+    override konst nullable get() = false
     override fun copy(args: Map<NamedTypeParameterRef, TypeRef>) = ElementConfigRef(this, args, false)
     override fun copy(nullable: Boolean) = ElementConfigRef(this, args, nullable)
 
@@ -59,23 +59,23 @@ class ElementConfig(
 
     override fun toString() = element.name
 
-    enum class Category(private val packageDir: String, val defaultVisitorParam: String) {
+    enum class Category(private konst packageDir: String, konst defaultVisitorParam: String) {
         Expression("expressions", "expression"),
         Declaration("declarations", "declaration"),
         Other("", "element");
 
-        val packageName: String get() = BASE_PACKAGE + if (packageDir.isNotEmpty()) ".$packageDir" else ""
+        konst packageName: String get() = BASE_PACKAGE + if (packageDir.isNotEmpty()) ".$packageDir" else ""
     }
 }
 
 sealed interface ElementConfigOrRef : ParametrizedTypeRef<ElementConfigOrRef, NamedTypeParameterRef>, TypeRefWithNullability {
-    val element: ElementConfig
+    konst element: ElementConfig
 }
 
 class ElementConfigRef(
-    override val element: ElementConfig,
-    override val args: Map<NamedTypeParameterRef, TypeRef>,
-    override val nullable: Boolean
+    override konst element: ElementConfig,
+    override konst args: Map<NamedTypeParameterRef, TypeRef>,
+    override konst nullable: Boolean
 ) : ElementConfigOrRef {
     override fun copy(args: Map<NamedTypeParameterRef, TypeRef>) = ElementConfigRef(element, args, nullable)
     override fun copy(nullable: Boolean) = ElementConfigRef(element, args, nullable)
@@ -84,8 +84,8 @@ class ElementConfigRef(
 }
 
 sealed class FieldConfig(
-    val name: String,
-    val isChild: Boolean,
+    konst name: String,
+    konst isChild: Boolean,
 ) {
     var baseDefaultValue: CodeBlock? = null
     var baseGetter: CodeBlock? = null
@@ -101,17 +101,17 @@ sealed class FieldConfig(
 
 class SimpleFieldConfig(
     name: String,
-    val type: TypeRef?,
-    val nullable: Boolean,
-    val mutable: Boolean,
+    konst type: TypeRef?,
+    konst nullable: Boolean,
+    konst mutable: Boolean,
     isChildElement: Boolean,
 ) : FieldConfig(name, isChildElement)
 
 class ListFieldConfig(
     name: String,
-    val elementType: TypeRef?,
-    val nullable: Boolean,
-    val mutability: Mutability,
+    konst elementType: TypeRef?,
+    konst nullable: Boolean,
+    konst mutability: Mutability,
     isChildElement: Boolean,
 ) : FieldConfig(name, isChildElement) {
     enum class Mutability {

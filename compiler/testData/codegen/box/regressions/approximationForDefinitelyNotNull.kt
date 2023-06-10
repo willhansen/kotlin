@@ -8,7 +8,7 @@ public class CachedValuesManager {
     public @NotNull <T> CachedValue<T> createCachedValue(final @NotNull CachedValueProvider<T> provider) {
         return new CachedValue<T>() {
             public T getValue() {
-                return provider.compute().value;
+                return provider.compute().konstue;
             }
         };
     }
@@ -25,9 +25,9 @@ public interface CachedValueProvider<T> {
     Result<T> compute();
 
     class Result<T> {
-        public final T value;
-        public Result(@Nullable T value) {
-            this.value = value;
+        public final T konstue;
+        public Result(@Nullable T konstue) {
+            this.konstue = konstue;
         }
     }
 }
@@ -51,7 +51,7 @@ fun <T> cachedValue(manager: CachedValuesManager, createValue: () -> T) =
 // FILE: main.kt
 
 fun box(): String {
-    val value = cachedValue(CachedValuesManager()) { Pair("O", "K") }.value
+    konst konstue = cachedValue(CachedValuesManager()) { Pair("O", "K") }.konstue
 
-    return value.first + value.second
+    return konstue.first + konstue.second
 }

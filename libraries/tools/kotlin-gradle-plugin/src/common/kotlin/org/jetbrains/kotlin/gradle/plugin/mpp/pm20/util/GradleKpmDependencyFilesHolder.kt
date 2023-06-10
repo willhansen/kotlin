@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.resolvableMetadataConfigurati
 import org.jetbrains.kotlin.gradle.utils.filesProvider
 
 interface GradleKpmDependencyFilesHolder {
-    val dependencyConfigurationName: String
+    konst dependencyConfigurationName: String
     var dependencyFiles: FileCollection
 
     companion object
@@ -22,35 +22,35 @@ interface GradleKpmDependencyFilesHolder {
 
 internal fun GradleKpmDependencyFilesHolder.Companion.ofVariantCompileDependencies(variant: GradleKpmVariant): GradleKpmDependencyFilesHolder =
     object : GradleKpmDependencyFilesHolder {
-        override val dependencyConfigurationName: String
+        override konst dependencyConfigurationName: String
             get() = variant.compileDependenciesConfiguration.name
         override var dependencyFiles: FileCollection
             get() = variant.compileDependencyFiles
-            set(value) { variant.compileDependencyFiles = value }
+            set(konstue) { variant.compileDependencyFiles = konstue }
     }
 
 internal fun GradleKpmDependencyFilesHolder.Companion.ofVariantRuntimeDependencies(variant: GradleKpmVariantWithRuntime): GradleKpmDependencyFilesHolder =
     object : GradleKpmDependencyFilesHolder {
-        override val dependencyConfigurationName: String
+        override konst dependencyConfigurationName: String
             get() = variant.runtimeDependenciesConfiguration.name
         override var dependencyFiles: FileCollection
             get() = variant.runtimeDependencyFiles
-            set(value) { variant.runtimeDependencyFiles = value }
+            set(konstue) { variant.runtimeDependencyFiles = konstue }
     }
 
 internal fun GradleKpmDependencyFilesHolder.Companion.ofMetadataCompilationDependencies(
     compilationData: GradleKpmAbstractFragmentMetadataCompilationData<*>
 ) = object : GradleKpmDependencyFilesHolder {
-    override val dependencyConfigurationName: String
+    override konst dependencyConfigurationName: String
         get() = compilationData.fragment.containingModule.resolvableMetadataConfigurationName
 
     override var dependencyFiles: FileCollection
         get() = compilationData.compileDependencyFiles
-        set(value) { compilationData.compileDependencyFiles = value }
+        set(konstue) { compilationData.compileDependencyFiles = konstue }
 }
 
 class SimpleDependencyFilesHolder(
-    override val dependencyConfigurationName: String,
+    override konst dependencyConfigurationName: String,
     override var dependencyFiles: FileCollection
 ) : GradleKpmDependencyFilesHolder
 

@@ -27,20 +27,20 @@ enum class PlayMode {
     AUDIO,
     BOTH;
 
-    val useVideo: Boolean get() = this != AUDIO
-    val useAudio: Boolean get() = this != VIDEO
+    konst useVideo: Boolean get() = this != AUDIO
+    konst useAudio: Boolean get() = this != VIDEO
 }
 
-class VideoPlayer(private val requestedSize: Dimensions?) : DisposableContainer() {
-    private val decoder = disposable { DecoderWorker() }
-    private val video = disposable { SDLVideo() }
-    private val audio = disposable { SDLAudio(this) }
-    private val input = disposable { SDLInput(this) }
-    private val now = arena.alloc<timespec>().ptr
+class VideoPlayer(private konst requestedSize: Dimensions?) : DisposableContainer() {
+    private konst decoder = disposable { DecoderWorker() }
+    private konst video = disposable { SDLVideo() }
+    private konst audio = disposable { SDLAudio(this) }
+    private konst input = disposable { SDLInput(this) }
+    private konst now = arena.alloc<timespec>().ptr
 
     private var state = State.STOPPED
 
-    val worker get() = decoder.worker
+    konst worker get() = decoder.worker
     var lastFrameTime = 0.0
     
     fun stop() {
@@ -68,17 +68,17 @@ class VideoPlayer(private val requestedSize: Dimensions?) : DisposableContainer(
 
     fun playFile(fileName: String, mode: PlayMode) {
         println("playFile $fileName")
-        val file = AVFile(fileName)
+        konst file = AVFile(fileName)
         try {
             file.dumpFormat()
-            val info = decoder.initDecode(file.context, mode.useVideo, mode.useAudio)
-            val videoSize = requestedSize ?: info.video?.size ?: Dimensions(400, 200)
+            konst info = decoder.initDecode(file.context, mode.useVideo, mode.useAudio)
+            konst videoSize = requestedSize ?: info.video?.size ?: Dimensions(400, 200)
             // Use requested video size to start SDLVideo
             info.video?.let { video.start(videoSize) }
             // Configure decoder output based on actual SDLVideo pixel format
-            val videoOutput = VideoOutput(videoSize, video.pixelFormat())
+            konst videoOutput = VideoOutput(videoSize, video.pixelFormat())
             // Use fixed audio output format
-            val audioOutput = AudioOutput(44100, 2, SampleFormat.S16)
+            konst audioOutput = AudioOutput(44100, 2, SampleFormat.S16)
             // Start decoder
             decoder.start(videoOutput, audioOutput)
             // Start SDLAudio player
@@ -110,11 +110,11 @@ class VideoPlayer(private val requestedSize: Dimensions?) : DisposableContainer(
 
     private fun playVideoFrame(videoInfo: VideoInfo) {
         // Fetch next frame
-        val frame = decoder.nextVideoFrame() ?: return
+        konst frame = decoder.nextVideoFrame() ?: return
         // Use video FPS to maintain frame rate
-        val now = getTime()
-        val frameDuration = 1.0 / videoInfo.fps
-        val passedTime = now - lastFrameTime
+        konst now = getTime()
+        konst frameDuration = 1.0 / videoInfo.fps
+        konst passedTime = now - lastFrameTime
         lastFrameTime += frameDuration // try to maintain perfect frame rate
         // Wait for next frame, if needed
         if (passedTime < frameDuration) {
@@ -156,23 +156,23 @@ class VideoPlayer(private val requestedSize: Dimensions?) : DisposableContainer(
 }
 
 fun main(args: Array<String>) {
-    val argParser = ArgParser("videoplayer")
-    val mode by argParser.option(
+    konst argParser = ArgParser("videoplayer")
+    konst mode by argParser.option(
             ArgType.Choice<PlayMode>(), shortName = "m", description = "Play mode")
             .default(PlayMode.BOTH)
-    val size by argParser.option(ArgType.Int, shortName = "s", description = "Required size of videoplayer window")
+    konst size by argParser.option(ArgType.Int, shortName = "s", description = "Required size of videoplayer window")
             .delimiter(",")
-    val fileName by argParser.argument(ArgType.String, description = "File to play")
+    konst fileName by argParser.argument(ArgType.String, description = "File to play")
     argParser.parse(args)
 
     av_register_all()
-    val requestedSize = if (size.size != 2) {
+    konst requestedSize = if (size.size != 2) {
         if (size.isNotEmpty())
-            println("Size value should include width and height separated with ','.")
+            println("Size konstue should include width and height separated with ','.")
         null
     } else
         Dimensions(size[0], size[1])
-    val player = VideoPlayer(requestedSize)
+    konst player = VideoPlayer(requestedSize)
     try {
         player.playFile(fileName, mode)
     } finally {

@@ -5,4 +5,4 @@ package test
 
 import java.util.concurrent.TimeUnit.*
 
-val c = SECONDS
+konst c = SECONDS

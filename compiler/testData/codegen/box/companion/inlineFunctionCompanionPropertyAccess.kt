@@ -1,6 +1,6 @@
 class A {
     companion object {
-        val s = "OK"
+        konst s = "OK"
         var v = "NOT OK"
     }
 
@@ -12,7 +12,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.f() != "OK") return "FAIL0"
     a.g()
     return A.v

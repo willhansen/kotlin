@@ -1,8 +1,8 @@
-class Generic<P : Any>(val p: P)
+class Generic<P : Any>(konst p: P)
 
 class Host {
     fun t() {}
-    val v = "OK"
+    konst v = "OK"
 }
 
 fun box(): String {

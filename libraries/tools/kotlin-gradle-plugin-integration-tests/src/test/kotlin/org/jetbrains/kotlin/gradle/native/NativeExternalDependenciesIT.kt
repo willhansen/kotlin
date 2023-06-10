@@ -32,7 +32,7 @@ internal class NativeExternalDependenciesIT : KGPBaseTest() {
     @DisplayName("Should build with ktor 1.5.4 and coroutines 1.5.0-RC-native-mt")
     @GradleTest
     @DisabledOnOs(
-        value = [OS.MAC],
+        konstue = [OS.MAC],
         architectures = ["aarch64"],
         disabledReason = "These versions of Ktor and coroutines don't support macos-arm64"
     )
@@ -103,7 +103,7 @@ internal class NativeExternalDependenciesIT : KGPBaseTest() {
                 """
                 |
                 |kotlin {
-                |    val commonMain by sourceSets.getting {
+                |    konst commonMain by sourceSets.getting {
                 |        dependencies {${dependencies.joinToString("") { "\n|            implementation(\"$it\")" }}
                 |        }
                 |    }
@@ -114,8 +114,8 @@ internal class NativeExternalDependenciesIT : KGPBaseTest() {
             build("buildExternalDependenciesFile") {
                 assertTasksExecuted(":buildExternalDependenciesFile")
 
-                val externalDependenciesFile = findParameterInOutput("for_test_external_dependencies_file", output)?.let(::File)
-                val externalDependenciesText = if (externalDependenciesFile?.exists() == true) {
+                konst externalDependenciesFile = findParameterInOutput("for_test_external_dependencies_file", output)?.let(::File)
+                konst externalDependenciesText = if (externalDependenciesFile?.exists() == true) {
                     externalDependenciesFile.readText()
                         .lineSequence()
                         .map { line ->

@@ -20,23 +20,23 @@ import com.sun.source.tree.CompilationUnitTree
 import com.sun.tools.javac.tree.JCTree
 import org.jetbrains.kotlin.javac.JavaClassWithClassId
 import org.jetbrains.kotlin.javac.JavacWrapper
-import org.jetbrains.kotlin.javac.resolve.ConstantEvaluator
+import org.jetbrains.kotlin.javac.resolve.ConstantEkonstuator
 import org.jetbrains.kotlin.load.java.structure.*
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 class TreeBasedAnnotation(
-    val annotation: JCTree.JCAnnotation,
-    val compilationUnit: CompilationUnitTree,
-    val javac: JavacWrapper,
-    val onElement: JavaElement
+    konst annotation: JCTree.JCAnnotation,
+    konst compilationUnit: CompilationUnitTree,
+    konst javac: JavacWrapper,
+    konst onElement: JavaElement
 ) : JavaElement, JavaAnnotation {
 
-    override val arguments: Collection<JavaAnnotationArgument>
+    override konst arguments: Collection<JavaAnnotationArgument>
         get() = createAnnotationArguments(this, javac, onElement)
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = (resolve() as? JavaClassWithClassId)?.classId ?: ClassId.topLevel(
             FqName(
                 annotation.annotationType.toString().substringAfter("@")
@@ -48,40 +48,40 @@ class TreeBasedAnnotation(
 }
 
 sealed class TreeBasedAnnotationArgument(
-    override val name: Name,
-    val javac: JavacWrapper
+    override konst name: Name,
+    konst javac: JavacWrapper
 ) : JavaAnnotationArgument, JavaElement
 
 class TreeBasedLiteralAnnotationArgument(
     name: Name,
-    override val value: Any?,
+    override konst konstue: Any?,
     javac: JavacWrapper
 ) : TreeBasedAnnotationArgument(name, javac), JavaLiteralAnnotationArgument
 
 class TreeBasedReferenceAnnotationArgument(
     name: Name,
-    private val compilationUnit: CompilationUnitTree,
-    private val field: JCTree.JCFieldAccess,
+    private konst compilationUnit: CompilationUnitTree,
+    private konst field: JCTree.JCFieldAccess,
     javac: JavacWrapper,
-    private val onElement: JavaElement
+    private konst onElement: JavaElement
 ) : TreeBasedAnnotationArgument(name, javac), JavaEnumValueAnnotationArgument {
     // TODO: do not run resolve here
-    private val javaField: JavaField? by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        val javaClass = javac.resolve(field.selected, compilationUnit, onElement) as? JavaClass
-        val fieldName = Name.identifier(field.name.toString())
+    private konst javaField: JavaField? by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        konst javaClass = javac.resolve(field.selected, compilationUnit, onElement) as? JavaClass
+        konst fieldName = Name.identifier(field.name.toString())
 
         javaClass?.fields?.find { it.name == fieldName }
     }
 
-    override val enumClassId: ClassId?
+    override konst enumClassId: ClassId?
         get() = javaField?.containingClass?.classId
 
-    override val entryName: Name?
+    override konst entryName: Name?
         get() = javaField?.name
 }
 
 class TreeBasedArrayAnnotationArgument(
-    val args: List<JavaAnnotationArgument>,
+    konst args: List<JavaAnnotationArgument>,
     name: Name,
     javac: JavacWrapper
 ) : TreeBasedAnnotationArgument(name, javac), JavaArrayAnnotationArgument {
@@ -90,11 +90,11 @@ class TreeBasedArrayAnnotationArgument(
 }
 
 class TreeBasedJavaClassObjectAnnotationArgument(
-    private val type: JCTree.JCExpression,
+    private konst type: JCTree.JCExpression,
     name: Name,
-    private val compilationUnit: CompilationUnitTree,
+    private konst compilationUnit: CompilationUnitTree,
     javac: JavacWrapper,
-    private val onElement: JavaElement
+    private konst onElement: JavaElement
 ) : TreeBasedAnnotationArgument(name, javac), JavaClassObjectAnnotationArgument {
 
     override fun getReferencedType(): JavaType =
@@ -103,11 +103,11 @@ class TreeBasedJavaClassObjectAnnotationArgument(
 }
 
 class TreeBasedAnnotationAsAnnotationArgument(
-    private val annotation: JCTree.JCAnnotation,
+    private konst annotation: JCTree.JCAnnotation,
     name: Name,
-    private val compilationUnit: CompilationUnitTree,
+    private konst compilationUnit: CompilationUnitTree,
     javac: JavacWrapper,
-    private val onElement: JavaElement
+    private konst onElement: JavaElement
 ) : TreeBasedAnnotationArgument(name, javac), JavaAnnotationAsAnnotationArgument {
     override fun getAnnotation(): JavaAnnotation =
         TreeBasedAnnotation(annotation, compilationUnit, javac, onElement)
@@ -118,7 +118,7 @@ private fun createAnnotationArguments(
     annotation: TreeBasedAnnotation, javac: JavacWrapper, onElement: JavaElement
 ): Collection<JavaAnnotationArgument> =
     annotation.annotation.arguments.mapNotNull {
-        val name = if (it is JCTree.JCAssign) Name.identifier(it.lhs.toString()) else Name.identifier("value")
+        konst name = if (it is JCTree.JCAssign) Name.identifier(it.lhs.toString()) else Name.identifier("konstue")
         createAnnotationArgument(it, name, annotation.compilationUnit, javac, annotation.resolve(), onElement)
     }
 
@@ -131,7 +131,7 @@ internal fun createAnnotationArgument(
     onElement: JavaElement
 ): JavaAnnotationArgument? =
     when (argument) {
-        is JCTree.JCLiteral -> TreeBasedLiteralAnnotationArgument(name, argument.value, javac)
+        is JCTree.JCLiteral -> TreeBasedLiteralAnnotationArgument(name, argument.konstue, javac)
         is JCTree.JCFieldAccess -> {
             if (argument.name.contentEquals("class")) {
                 TreeBasedJavaClassObjectAnnotationArgument(argument.selected, name, compilationUnit, javac, onElement)
@@ -158,6 +158,6 @@ private fun resolveArgumentValue(
     javac: JavacWrapper
 ): JavaAnnotationArgument? {
     if (containingClass == null) return null
-    val evaluator = ConstantEvaluator(containingClass, javac, compilationUnit)
-    return evaluator.getValue(argument)?.let { TreeBasedLiteralAnnotationArgument(name, it, javac) }
+    konst ekonstuator = ConstantEkonstuator(containingClass, javac, compilationUnit)
+    return ekonstuator.getValue(argument)?.let { TreeBasedLiteralAnnotationArgument(name, it, javac) }
 }

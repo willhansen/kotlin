@@ -7,6 +7,6 @@ annotation class TypeAnno
 
 class A {
     @Anno
-    val @TypeAnno Int?.a: String
+    konst @TypeAnno Int?.a: String
         get() = ""
 }

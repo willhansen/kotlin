@@ -5,19 +5,19 @@ class Foo<out T>(name: T) {
         private set
 
     fun testProp() {
-        val ok1 = this::prop
-        val ok2 = this@Foo::prop
-        val ok3 = object { val y: Any = this@Foo::prop }
+        konst ok1 = this::prop
+        konst ok2 = this@Foo::prop
+        konst ok3 = object { konst y: Any = this@Foo::prop }
 
-        val fail1 = Foo(prop)::<!UNRESOLVED_REFERENCE!>prop<!>
+        konst fail1 = Foo(prop)::<!UNRESOLVED_REFERENCE!>prop<!>
     }
 
     fun testFunc() {
-        val ok1 = this::func
-        val ok2 = this@Foo::func
-        val ok3 = object { val y: Any = this@Foo::func }
+        konst ok1 = this::func
+        konst ok2 = this@Foo::func
+        konst ok3 = object { konst y: Any = this@Foo::func }
 
-        val fail1 = Foo(prop)::<!UNRESOLVED_REFERENCE!>func<!>
+        konst fail1 = Foo(prop)::<!UNRESOLVED_REFERENCE!>func<!>
     }
 
     private fun func(t: T): T = t

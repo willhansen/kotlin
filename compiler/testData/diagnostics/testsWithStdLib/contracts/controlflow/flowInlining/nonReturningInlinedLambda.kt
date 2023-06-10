@@ -14,9 +14,9 @@ inline fun myRun(block: () -> Unit): Unit {
 fun getBool(): Boolean = false
 
 fun withLabeledReturn() {
-    val y: Int
+    konst y: Int
 
-    val x = myRun outer@ {
+    konst x = myRun outer@ {
         myRun { return@outer Unit }
         <!UNREACHABLE_CODE!>y = 42<!>
     }

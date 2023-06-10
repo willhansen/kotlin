@@ -63,10 +63,10 @@ FILE: [ResolvedTo(RAW_FIR)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -156,10 +156,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -249,10 +249,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -342,10 +342,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -435,10 +435,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -528,10 +528,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] val p: P = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst p: P = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): P
 
-        public? final? [ResolvedTo(RAW_FIR)] val r: <implicit> = LAZY_EXPRESSION
+        public? final? [ResolvedTo(RAW_FIR)] konst r: <implicit> = LAZY_EXPRESSION
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -621,10 +621,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -714,10 +714,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -807,10 +807,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -900,10 +900,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -993,10 +993,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -1086,10 +1086,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -1179,10 +1179,10 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(STATUS)] val p: R|P| = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst p: R|P| = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(STATUS)] val r: <implicit> = LAZY_EXPRESSION
+        public final [ResolvedTo(STATUS)] konst r: <implicit> = LAZY_EXPRESSION
             public [ResolvedTo(STATUS)] [ContainingClassKey=P] get(): <implicit>
 
     }
@@ -1272,7 +1272,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] val p: R|P| = object : R|P| {
+        public final [ResolvedTo(BODY_RESOLVE)] konst p: R|P| = object : R|P| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|P|>()
             }
@@ -1281,7 +1281,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=P] get(): R|P|
 
-        public final [ResolvedTo(BODY_RESOLVE)] val r: R|P| = object : R|P| {
+        public final [ResolvedTo(BODY_RESOLVE)] konst r: R|P| = object : R|P| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|P|>()
             }
@@ -1318,7 +1318,7 @@ FILE: [ResolvedTo(IMPORTS)] complexRedeclaration.kt
 
         }
 
-        [ResolvedTo(BODY_RESOLVE)] lval a: R|<anonymous>| = object : R|P| {
+        [ResolvedTo(BODY_RESOLVE)] lkonst a: R|<anonymous>| = object : R|P| {
             private [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=<anonymous>] constructor(): R|<anonymous>| {
                 super<R|P|>()
             }

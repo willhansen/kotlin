@@ -1,5 +1,5 @@
 class Y {
     <expr>
-    val x: String = ""
+    konst x: String = ""
     </expr>
 }

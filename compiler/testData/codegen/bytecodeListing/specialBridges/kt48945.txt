@@ -34,7 +34,7 @@ public final class Test_GMStringString_AbstractMapStringString {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -58,7 +58,7 @@ public final class Test_GMStringString_JMapFinalRemove {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -82,7 +82,7 @@ public final class Test_MSS_AbstractMapStringString {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -106,7 +106,7 @@ public final class Test_MSS_JMapFinalRemove {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -130,7 +130,7 @@ public final class Test_MapStringString_AbstractMapStringString {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -154,7 +154,7 @@ public final class Test_MapStringString_JMapFinalRemove {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -178,7 +178,7 @@ public final class Test_SMSS_AbstractMapStringString {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -202,5 +202,5 @@ public final class Test_SMSS_JMapFinalRemove {
     public bridge method remove(p0: java.lang.String): java.lang.String
     public bridge method remove(p0: java.lang.String, p1: java.lang.String): boolean
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }

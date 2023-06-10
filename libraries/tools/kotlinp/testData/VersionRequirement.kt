@@ -16,4 +16,4 @@ typealias Typealias = String
 fun function() {}
 
 @RequireKotlin("1.3", "property must not be used!")
-val property = ""
+konst property = ""

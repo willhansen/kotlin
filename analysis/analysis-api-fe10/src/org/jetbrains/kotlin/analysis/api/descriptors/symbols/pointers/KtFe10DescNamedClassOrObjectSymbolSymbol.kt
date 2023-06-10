@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 import org.jetbrains.kotlin.descriptors.findClassAcrossModuleDependencies
 import org.jetbrains.kotlin.name.ClassId
 
-class KtFe10DescNamedClassOrObjectSymbolSymbol(private val classId: ClassId) : KtSymbolPointer<KtNamedClassOrObjectSymbol>() {
+class KtFe10DescNamedClassOrObjectSymbolSymbol(private konst classId: ClassId) : KtSymbolPointer<KtNamedClassOrObjectSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtNamedClassOrObjectSymbol? {
         check(analysisSession is KtFe10AnalysisSession)
-        val analysisContext = analysisSession.analysisContext
+        konst analysisContext = analysisSession.analysisContext
 
-        val descriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId) ?: return null
+        konst descriptor = analysisContext.resolveSession.moduleDescriptor.findClassAcrossModuleDependencies(classId) ?: return null
         return KtFe10DescNamedClassOrObjectSymbol(descriptor, analysisContext)
     }
 

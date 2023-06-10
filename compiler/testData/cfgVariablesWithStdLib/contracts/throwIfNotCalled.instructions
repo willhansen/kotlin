@@ -71,7 +71,7 @@ sink:
 =====================
 == throwIfNotCalled ==
 fun throwIfNotCalled() {
-    val x: Int
+    konst x: Int
     myRun outer@ {
         unknownRun {
             myRun {
@@ -86,8 +86,8 @@ fun throwIfNotCalled() {
 ---------------------
 L0:
   1 <START>                                                                                                                                                                  INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val x: Int myRun outer@ { unknownRun { myRun { x = 42 return@outer } } throw java.lang.IllegalArgumentException() } println(<!UNINITIALIZED_VARIABLE!>x<!>) })
-    v(val x: Int)                                                                                                                                                            INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int myRun outer@ { unknownRun { myRun { x = 42 return@outer } } throw java.lang.IllegalArgumentException() } println(<!UNINITIALIZED_VARIABLE!>x<!>) })
+    v(konst x: Int)                                                                                                                                                            INIT: in: {} out: {x=D}
     mark(outer@ { unknownRun { myRun { x = 42 return@outer } } throw java.lang.IllegalArgumentException() })                                                                 INIT: in: {x=D} out: {x=D}
     mark({ unknownRun { myRun { x = 42 return@outer } } throw java.lang.IllegalArgumentException() })
     r({ unknownRun { myRun { x = 42 return@outer } } throw java.lang.IllegalArgumentException() }) -> <v0>

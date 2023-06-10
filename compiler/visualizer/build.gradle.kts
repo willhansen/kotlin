@@ -23,7 +23,7 @@ dependencies {
     testRuntimeOnly(commonDependency("org.jetbrains.intellij.deps.jna:jna"))
 }
 
-val generationRoot = projectDir.resolve("tests-gen")
+konst generationRoot = projectDir.resolve("tests-gen")
 
 sourceSets {
     "main" { projectDefault() }
@@ -48,4 +48,4 @@ projectTest(parallel = true, jUnitMode = JUnitMode.JUnit5) {
 
 testsJar()
 
-val generateVisualizerTests by generator("org.jetbrains.kotlin.visualizer.GenerateVisualizerTestsKt")
+konst generateVisualizerTests by generator("org.jetbrains.kotlin.visualizer.GenerateVisualizerTestsKt")

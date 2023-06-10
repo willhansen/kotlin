@@ -1,8 +1,8 @@
 fun box(): String {
-    val shouldBeTrue = 555555555555555555L in 123456789123456789L..987654321987654321L
+    konst shouldBeTrue = 555555555555555555L in 123456789123456789L..987654321987654321L
     if (!shouldBeTrue) return "Fail 1"
 
-    val shouldBeFalse = 5000000000L in 6000000000L..9000000000L
+    konst shouldBeFalse = 5000000000L in 6000000000L..9000000000L
     if (shouldBeFalse) return "Fail 2"
 
     if (123123123123L !in 100100100100L..200200200200L) return "Fail 3"

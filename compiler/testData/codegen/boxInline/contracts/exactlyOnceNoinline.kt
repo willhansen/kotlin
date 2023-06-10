@@ -19,7 +19,7 @@ public inline fun myrun(noinline block: () -> Unit): Unit {
 import test.*
 
 fun box(): String {
-    val x: Long
+    konst x: Long
     myrun {
         x = 42L
     }

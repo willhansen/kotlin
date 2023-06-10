@@ -14,10 +14,10 @@ fun <T : FirElement, D> T.transformSingle(transformer: FirTransformer<D>, data: 
 }
 
 fun <T : FirElement, D> MutableList<T>.transformInplace(transformer: FirTransformer<D>, data: D) {
-    val iterator = this.listIterator()
+    konst iterator = this.listIterator()
     while (iterator.hasNext()) {
-        val next = iterator.next() as FirPureAbstractElement
-        val result = next.transform<T, D>(transformer, data)
+        konst next = iterator.next() as FirPureAbstractElement
+        konst result = next.transform<T, D>(transformer, data)
         if (result !== next) {
             iterator.set(result)
         }
@@ -29,20 +29,20 @@ fun <T : FirElement, D> MutableOrEmptyList<T>.transformInplace(transformer: FirT
 }
 
 sealed class TransformData<out D> {
-    class Data<D>(val value: D) : TransformData<D>()
+    class Data<D>(konst konstue: D) : TransformData<D>()
     object Nothing : TransformData<kotlin.Nothing>()
 }
 
 inline fun <T : FirElement, D> MutableList<T>.transformInplace(transformer: FirTransformer<D>, dataProducer: (Int) -> TransformData<D>) {
-    val iterator = this.listIterator()
+    konst iterator = this.listIterator()
     var index = 0
     while (iterator.hasNext()) {
-        val next = iterator.next() as FirPureAbstractElement
-        val data = when (val data = dataProducer(index++)) {
-            is TransformData.Data<D> -> data.value
+        konst next = iterator.next() as FirPureAbstractElement
+        konst data = when (konst data = dataProducer(index++)) {
+            is TransformData.Data<D> -> data.konstue
             TransformData.Nothing -> continue
         }
-        val result = next.transform<T, D>(transformer, data)
+        konst result = next.transform<T, D>(transformer, data)
         if (result !== next) {
             iterator.set(result)
         }

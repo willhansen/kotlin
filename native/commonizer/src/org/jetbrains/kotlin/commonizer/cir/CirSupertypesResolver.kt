@@ -23,8 +23,8 @@ internal interface CirSupertypesResolver {
  * - Supertypes from dependencies are resolved in a "best effort" manner.
  */
 internal class SimpleCirSupertypesResolver(
-    private val classifiers: CirClassifierIndex,
-    private val dependencies: CirProvidedClassifiers,
+    private konst classifiers: CirClassifierIndex,
+    private konst dependencies: CirProvidedClassifiers,
 ) : CirSupertypesResolver {
 
     override fun supertypes(type: CirClassType): Set<CirClassType> {

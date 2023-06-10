@@ -125,7 +125,7 @@ kotlin-native/backend.native/tests/compilerChecks/t54.kt:1:44: error: no spread 
 kotlin-native/backend.native/tests/compilerChecks/t55.kt
 kotlin-native/backend.native/tests/compilerChecks/t55.kt:1:37: error: all elements of binary blob must be constants
 kotlin-native/backend.native/tests/compilerChecks/t56.kt
-kotlin-native/backend.native/tests/compilerChecks/t56.kt:1:29: error: incorrect value for binary data: 1000
+kotlin-native/backend.native/tests/compilerChecks/t56.kt:1:29: error: incorrect konstue for binary data: 1000
 kotlin-native/backend.native/tests/compilerChecks/t57.kt
 kotlin-native/backend.native/tests/compilerChecks/t57.kt:1:13: error: expected at least one element
 kotlin-native/backend.native/tests/compilerChecks/t58.kt

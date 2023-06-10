@@ -5,11 +5,11 @@
 
 package org.jetbrains.kotlin.generators.imltogradle
 
-sealed class GradleDependencyNotation(val dependencyNotation: String) {
+sealed class GradleDependencyNotation(konst dependencyNotation: String) {
     init {
         require(dependencyNotation.isNotEmpty())
     }
 
-    data class IntellijMavenDepGradleDependencyNotation(val groupId: String, val artifactId: String) :
+    data class IntellijMavenDepGradleDependencyNotation(konst groupId: String, konst artifactId: String) :
         GradleDependencyNotation("""intellijMavenDep("$groupId", "$artifactId")""")
 }

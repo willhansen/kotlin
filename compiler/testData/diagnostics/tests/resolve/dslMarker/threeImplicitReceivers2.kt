@@ -12,13 +12,13 @@ annotation class Ann2
 annotation class Ann3
 
 class A {
-    val B.y: (C.() -> Unit) get() = null!!
+    konst B.y: (C.() -> Unit) get() = null!!
 }
 
 class B
 
 class C {
-    val D.x: (A.() -> Unit) get() = null!!
+    konst D.x: (A.() -> Unit) get() = null!!
 }
 
 class D

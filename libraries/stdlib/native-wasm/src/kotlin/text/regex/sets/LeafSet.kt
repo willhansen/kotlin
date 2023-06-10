@@ -27,24 +27,24 @@ package kotlin.text.regex
  */
 internal abstract class LeafSet : SimpleSet(AbstractSet.TYPE_LEAF) {
 
-    open val charCount = 1
+    open konst charCount = 1
 
     /** Returns "shift", the number of accepted chars. Commonly internal function, but called by quantifiers. */
     abstract fun accepts(startIndex: Int, testString: CharSequence): Int
 
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = true
 
     /**
      * Checks if we can enter this state and pass the control to the next one.
-     * Return positive value if match succeeds, negative otherwise.
+     * Return positive konstue if match succeeds, negative otherwise.
      */
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
         if (startIndex + charCount > testString.length) {
             return -1
         }
 
-        val shift = accepts(startIndex, testString) // TODO: may be move the check above in accept function.
+        konst shift = accepts(startIndex, testString) // TODO: may be move the check above in accept function.
         if (shift < 0) {
             return -1
         }

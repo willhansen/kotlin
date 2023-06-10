@@ -31,20 +31,20 @@ import org.jetbrains.kotlin.storage.LockBasedStorageManager
 import org.jetbrains.kotlin.storage.StorageManager
 
 interface GlobalContext {
-    val storageManager: StorageManager
-    val exceptionTracker: ExceptionTracker
+    konst storageManager: StorageManager
+    konst exceptionTracker: ExceptionTracker
 }
 
 interface ProjectContext : GlobalContext {
-    val project: Project
+    konst project: Project
 }
 
 interface ModuleContext : ProjectContext {
-    val module: ModuleDescriptor
+    konst module: ModuleDescriptor
 }
 
 interface MutableModuleContext : ModuleContext {
-    override val module: ModuleDescriptorImpl
+    override konst module: ModuleDescriptorImpl
 
     fun setDependencies(vararg dependencies: ModuleDescriptorImpl) {
         module.setDependencies(*dependencies)
@@ -60,34 +60,34 @@ interface MutableModuleContext : ModuleContext {
 }
 
 open class SimpleGlobalContext(
-    override val storageManager: StorageManager,
-    override val exceptionTracker: ExceptionTracker
+    override konst storageManager: StorageManager,
+    override konst exceptionTracker: ExceptionTracker
 ) : GlobalContext
 
 open class GlobalContextImpl(
     storageManager: LockBasedStorageManager,
     exceptionTracker: ExceptionTracker
 ) : SimpleGlobalContext(storageManager, exceptionTracker) {
-    override val storageManager: LockBasedStorageManager = super.storageManager as LockBasedStorageManager
+    override konst storageManager: LockBasedStorageManager = super.storageManager as LockBasedStorageManager
 }
 
 class ProjectContextImpl(
-    override val project: Project,
-    private val globalContext: GlobalContext
+    override konst project: Project,
+    private konst globalContext: GlobalContext
 ) : ProjectContext, GlobalContext by globalContext
 
 class ModuleContextImpl(
-    override val module: ModuleDescriptor,
+    override konst module: ModuleDescriptor,
     projectContext: ProjectContext
 ) : ModuleContext, ProjectContext by projectContext
 
 class MutableModuleContextImpl(
-    override val module: ModuleDescriptorImpl,
+    override konst module: ModuleDescriptorImpl,
     projectContext: ProjectContext
 ) : MutableModuleContext, ProjectContext by projectContext
 
 fun GlobalContext(debugName: String): GlobalContextImpl {
-    val tracker = ExceptionTracker()
+    konst tracker = ExceptionTracker()
     return GlobalContextImpl(LockBasedStorageManager.createWithExceptionHandling(debugName, tracker, {
         ProgressManager.checkCanceled()
     }, { throw ProcessCanceledException(it) }), tracker)
@@ -107,6 +107,6 @@ fun ContextForNewModule(
     platform: TargetPlatform?,
     capabilities: Map<ModuleCapability<*>, Any?> = emptyMap(),
 ): MutableModuleContext {
-    val module = ModuleDescriptorImpl(moduleName, projectContext.storageManager, builtIns, platform, capabilities)
+    konst module = ModuleDescriptorImpl(moduleName, projectContext.storageManager, builtIns, platform, capabilities)
     return MutableModuleContextImpl(module, projectContext)
 }

@@ -4,6 +4,6 @@ class Delegate {
     fun getValue(_this: Nothing?, p: KProperty<*>): Int = 0
 }
 
-val a = Delegate()
+konst a = Delegate()
 
-val b by a
+konst b by a

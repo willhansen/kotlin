@@ -20,9 +20,9 @@ import org.jetbrains.kotlin.ir.symbols.IrSymbol
 import org.jetbrains.kotlin.ir.util.fileOrNull
 
 internal class CallStack {
-    private val frames = ArrayDeque<Frame>()
-    private val currentFrame get() = frames.last()
-    internal val currentFrameOwner get() = currentFrame.currentSubFrameOwner
+    private konst frames = ArrayDeque<Frame>()
+    private konst currentFrame get() = frames.last()
+    internal konst currentFrameOwner get() = currentFrame.currentSubFrameOwner
 
     fun newFrame(frameOwner: IrElement, irFile: IrFile? = null) {
         frames.add(Frame(frameOwner, irFile))
@@ -41,7 +41,7 @@ internal class CallStack {
     }
 
     fun dropFrameAndCopyResult() {
-        val result = peekState() ?: return dropFrame()
+        konst result = peekState() ?: return dropFrame()
         popState()
         dropFrame()
         pushState(result)
@@ -52,8 +52,8 @@ internal class CallStack {
     }
 
     fun returnFromFrameWithResult(irReturn: IrReturn) {
-        val result = popState()
-        val returnTarget = irReturn.returnTargetSymbol.owner
+        konst result = popState()
+        konst returnTarget = irReturn.returnTargetSymbol.owner
         var frameOwner = currentFrameOwner
         while (frameOwner != returnTarget) {
             when (frameOwner) {
@@ -65,7 +65,7 @@ internal class CallStack {
                     return
                 }
                 is IrCatch -> {
-                    val tryBlock = currentFrame.dropInstructions()!!.element as IrTry// last instruction in `catch` block is `try`
+                    konst tryBlock = currentFrame.dropInstructions()!!.element as IrTry// last instruction in `catch` block is `try`
                     dropSubFrame()
                     pushState(result)
                     pushSimpleInstruction(irReturn)
@@ -97,7 +97,7 @@ internal class CallStack {
                     return
                 }
                 is IrCatch -> {
-                    val tryInstruction = currentFrame.dropInstructions()!! // last instruction in `catch` block is `try`
+                    konst tryInstruction = currentFrame.dropInstructions()!! // last instruction in `catch` block is `try`
                     currentFrame.removeSubFrameWithoutDataPropagation()
                     pushCompoundInstruction(breakOrContinue)
                     newSubFrame(tryInstruction.element!!)  // will be deleted when interpret 'try'
@@ -123,17 +123,17 @@ internal class CallStack {
     }
 
     fun dropFramesUntilTryCatch() {
-        val exception = popState()
+        konst exception = popState()
         var frameOwner = currentFrameOwner
         while (frames.isNotEmpty()) {
-            val frame = currentFrame
+            konst frame = currentFrame
             while (!frame.hasNoSubFrames()) {
                 frameOwner = frame.currentSubFrameOwner
                 when (frameOwner) {
                     is IrTry -> {
                         dropSubFrame()  // drop all instructions that left
                         newSubFrame(frameOwner)
-                        pushSimpleInstruction(frameOwner) // to evaluate finally at the end
+                        pushSimpleInstruction(frameOwner) // to ekonstuate finally at the end
                         frameOwner.catches.reversed().forEach { pushCompoundInstruction(it) }
                         pushState(exception)
                         return

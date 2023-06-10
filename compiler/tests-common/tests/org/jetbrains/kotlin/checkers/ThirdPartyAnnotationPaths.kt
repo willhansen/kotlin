@@ -16,6 +16,6 @@
 
 package org.jetbrains.kotlin.checkers
 
-const val FOREIGN_ANNOTATIONS_SOURCES_PATH = "third-party/annotations"
-const val JSR_305_SOURCES_PATH = "third-party/jsr305"
-const val FOREIGN_JDK8_ANNOTATIONS_SOURCES_PATH = "third-party/java8-annotations"
+const konst FOREIGN_ANNOTATIONS_SOURCES_PATH = "third-party/annotations"
+const konst JSR_305_SOURCES_PATH = "third-party/jsr305"
+const konst FOREIGN_JDK8_ANNOTATIONS_SOURCES_PATH = "third-party/java8-annotations"

@@ -6,18 +6,18 @@
 
 @file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
-annotation class AnnoUB(val ub0: UByte, val ub1: UByte)
-annotation class AnnoUS(val us0: UShort, val us1: UShort)
-annotation class AnnoUI(val ui0: UInt, val ui1: UInt, val ui2: UInt, val ui3: UInt)
-annotation class AnnoUL(val ul0: ULong, val ul1: ULong)
+annotation class AnnoUB(konst ub0: UByte, konst ub1: UByte)
+annotation class AnnoUS(konst us0: UShort, konst us1: UShort)
+annotation class AnnoUI(konst ui0: UInt, konst ui1: UInt, konst ui2: UInt, konst ui3: UInt)
+annotation class AnnoUL(konst ul0: ULong, konst ul1: ULong)
 
-const val ub0 = UByte(1)
-const val us0 = UShort(2)
-const val ul0 = ULong(3)
+const konst ub0 = UByte(1)
+const konst us0 = UShort(2)
+const konst ul0 = ULong(3)
 
-const val ui0 = UInt(-1)
-const val ui1 = UInt(0)
-const val ui2 = UInt(40 + 2)
+const konst ui0 = UInt(-1)
+const konst ui1 = UInt(0)
+const konst ui2 = UInt(40 + 2)
 
 object Foo {
     @AnnoUB(UByte(1), ub0)
@@ -34,7 +34,7 @@ object Foo {
 }
 
 fun <T> check(ann: Annotation, f: T.() -> Boolean) {
-    val result = (ann as T).f()
+    konst result = (ann as T).f()
     if (!result) throw RuntimeException("fail for $ann")
 }
 

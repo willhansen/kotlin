@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.resolve.calls.model.*
 import org.jetbrains.kotlin.resolve.descriptorUtil.overriddenTreeUniqueAsSequence
 import org.jetbrains.kotlin.utils.mapToIndex
 
-class ArgumentAndDeclIndex(val arg: ResolvedValueArgument, val declIndex: Int)
+class ArgumentAndDeclIndex(konst arg: ResolvedValueArgument, konst declIndex: Int)
 
 abstract class ArgumentGenerator {
     /**
@@ -35,33 +35,33 @@ abstract class ArgumentGenerator {
      * @see kotlin.reflect.jvm.internal.KCallableImpl.callBy
      */
     open fun generate(
-        valueArgumentsByIndex: List<ResolvedValueArgument>,
+        konstueArgumentsByIndex: List<ResolvedValueArgument>,
         actualArgs: List<ResolvedValueArgument>,
         // may be null for a constructor of an object literal
         calleeDescriptor: CallableDescriptor?
     ): DefaultCallArgs {
-        assert(valueArgumentsByIndex.size == actualArgs.size) {
-            "Value arguments collection should have same size, but ${valueArgumentsByIndex.size} != ${actualArgs.size}"
+        assert(konstueArgumentsByIndex.size == actualArgs.size) {
+            "Value arguments collection should have same size, but ${konstueArgumentsByIndex.size} != ${actualArgs.size}"
         }
 
-        val arg2Index = valueArgumentsByIndex.mapToIndex()
+        konst arg2Index = konstueArgumentsByIndex.mapToIndex()
 
-        val actualArgsWithDeclIndex = actualArgs.filter { it !is DefaultValueArgument }.map {
+        konst actualArgsWithDeclIndex = actualArgs.filter { it !is DefaultValueArgument }.map {
             ArgumentAndDeclIndex(it, arg2Index[it]!!)
         }.toMutableList()
 
-        for ((index, value) in valueArgumentsByIndex.withIndex()) {
-            if (value is DefaultValueArgument) {
-                actualArgsWithDeclIndex.add(index, ArgumentAndDeclIndex(value, index))
+        for ((index, konstue) in konstueArgumentsByIndex.withIndex()) {
+            if (konstue is DefaultValueArgument) {
+                actualArgsWithDeclIndex.add(index, ArgumentAndDeclIndex(konstue, index))
             }
         }
 
-        // Use unwrapped version, because additional synthetic parameters can't have default values
-        val defaultArgs = DefaultCallArgs(calleeDescriptor?.unwrapFrontendVersion()?.valueParameters?.size ?: 0)
+        // Use unwrapped version, because additional synthetic parameters can't have default konstues
+        konst defaultArgs = DefaultCallArgs(calleeDescriptor?.unwrapFrontendVersion()?.konstueParameters?.size ?: 0)
 
         for (argumentWithDeclIndex in actualArgsWithDeclIndex) {
-            val argument = argumentWithDeclIndex.arg
-            val declIndex = argumentWithDeclIndex.declIndex
+            konst argument = argumentWithDeclIndex.arg
+            konst declIndex = argumentWithDeclIndex.declIndex
 
             when (argument) {
                 is ExpressionValueArgument -> {
@@ -86,19 +86,19 @@ abstract class ArgumentGenerator {
     }
 
     protected open fun generateExpression(i: Int, argument: ExpressionValueArgument) {
-        throw UnsupportedOperationException("Unsupported expression value argument #$i: $argument")
+        throw UnsupportedOperationException("Unsupported expression konstue argument #$i: $argument")
     }
 
     protected open fun generateDefault(i: Int, argument: DefaultValueArgument) {
-        throw UnsupportedOperationException("Unsupported default value argument #$i: $argument")
+        throw UnsupportedOperationException("Unsupported default konstue argument #$i: $argument")
     }
 
     protected open fun generateVararg(i: Int, argument: VarargValueArgument) {
-        throw UnsupportedOperationException("Unsupported vararg value argument #$i: $argument")
+        throw UnsupportedOperationException("Unsupported vararg konstue argument #$i: $argument")
     }
 
     protected open fun generateOther(i: Int, argument: ResolvedValueArgument) {
-        throw UnsupportedOperationException("Unsupported value argument #$i: $argument")
+        throw UnsupportedOperationException("Unsupported konstue argument #$i: $argument")
     }
 
     protected open fun reorderArgumentsIfNeeded(args: List<ArgumentAndDeclIndex>) {
@@ -111,16 +111,16 @@ fun getFunctionWithDefaultArguments(functionDescriptor: FunctionDescriptor): Fun
     if (functionDescriptor.overriddenDescriptors.isEmpty()) return functionDescriptor
 
     // We are calling a function with some arguments mapped as defaults.
-    // Multiple override-equivalent functions from different supertypes with (potentially different) default values
+    // Multiple override-equikonstent functions from different supertypes with (potentially different) default konstues
     // can't be overridden by any function in a subtype.
-    // Also, a function overriding some other function can't introduce default parameter values.
+    // Also, a function overriding some other function can't introduce default parameter konstues.
     // Thus, among all overridden functions should be one (and only one) function
-    // that doesn't override anything and has parameters with default values.
+    // that doesn't override anything and has parameters with default konstues.
     return functionDescriptor.overriddenTreeUniqueAsSequence(true)
         .firstOrNull { function ->
             function.kind == CallableMemberDescriptor.Kind.DECLARATION &&
                     function.overriddenDescriptors.isEmpty() &&
-                    function.valueParameters.any { valueParameter -> valueParameter.hasDefaultValue() }
+                    function.konstueParameters.any { konstueParameter -> konstueParameter.hasDefaultValue() }
         }
         ?: functionDescriptor
 }

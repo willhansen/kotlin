@@ -17,8 +17,8 @@ class AsyncTest {
     @Test
     fun test1(): Promise<JsAny?> {
         var thenExecuted = false
-        val p = jsAsyncFoo().then { value ->
-            state = value
+        konst p = jsAsyncFoo().then { konstue ->
+            state = konstue
             thenExecuted = true
             null
         }
@@ -30,7 +30,7 @@ class AsyncTest {
     fun test2(): Promise<JsAny?> {
         assertEquals(state, jsFoo())
         var thenExecuted = false
-        val p = jsAsyncFoo().then {
+        konst p = jsAsyncFoo().then {
             assertEquals(state, jsFoo())
             thenExecuted = true
             null
@@ -45,7 +45,7 @@ class AsyncTest {
 
     @Test
     fun testJsValueToThrowableOrNull1(): Promise<JsAny?> {
-        val p = jsAsyncFoo().then {
+        konst p = jsAsyncFoo().then {
             throw MyThrowable()
         }.catch { e ->
             assert(e.toThrowableOrNull() is MyThrowable)
@@ -56,7 +56,7 @@ class AsyncTest {
 
     @Test
     fun testJsValueToThrowableOrNull2() {
-        val e = MyThrowable()
+        konst e = MyThrowable()
         assertEquals((e.toJsReference()).toThrowableOrNull(), e)
     }
 }

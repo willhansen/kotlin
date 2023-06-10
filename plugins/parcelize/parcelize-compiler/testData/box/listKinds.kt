@@ -11,21 +11,21 @@ import java.util.*
 
 @Parcelize
 data class Test(
-        val a: List<String>,
-        val b: MutableList<String>,
-        val c: ArrayList<String>,
-        val d: LinkedList<String>,
-        val e: Set<String>,
-        val f: MutableSet<String>,
-        val g: TreeSet<String>,
-        val h: HashSet<String>,
-        val i: LinkedHashSet<String>,
-        val j: NavigableSet<String>,
-        val k: SortedSet<String>
+        konst a: List<String>,
+        konst b: MutableList<String>,
+        konst c: ArrayList<String>,
+        konst d: LinkedList<String>,
+        konst e: Set<String>,
+        konst f: MutableSet<String>,
+        konst g: TreeSet<String>,
+        konst h: HashSet<String>,
+        konst i: LinkedHashSet<String>,
+        konst j: NavigableSet<String>,
+        konst k: SortedSet<String>
 ) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Test(
+    konst first = Test(
             a = listOf("A"),
             b = mutableListOf("B"),
             c = ArrayList<String>().apply { this += "C" },
@@ -41,11 +41,11 @@ fun box() = parcelTest { parcel ->
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val first2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst first2 = parcelableCreator<Test>().createFromParcel(parcel)
 
     assert(first == first2)
     assert((first.d as LinkedList<*>).size == 1)

@@ -2,7 +2,7 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses
 
-fun <T1> underlying(a: IC): T1 = bar(a) { it.value as T1 }
+fun <T1> underlying(a: IC): T1 = bar(a) { it.konstue as T1 }
 
 fun <T2> extension(a: IC): T2 = bar(a) { it.extensionValue() }
 
@@ -14,17 +14,17 @@ fun interface FunIFace<T0, R> {
     fun call(ic: T0): R
 }
 
-fun <T5, R> bar(value: T5, f: FunIFace<T5, R>): R {
-    return f.call(value)
+fun <T5, R> bar(konstue: T5, f: FunIFace<T5, R>): R {
+    return f.call(konstue)
 }
 
-fun <T6> IC.extensionValue(): T6 = value as T6
+fun <T6> IC.extensionValue(): T6 = konstue as T6
 
-fun <T7> normalValue(ic: IC): T7 = ic.value as T7
+fun <T7> normalValue(ic: IC): T7 = ic.konstue as T7
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC(val value: Int) {
-    fun <T8> dispatchValue(): T8 = value as T8
+konstue class IC(konst konstue: Int) {
+    fun <T8> dispatchValue(): T8 = konstue as T8
 }
 
 fun box(): String {

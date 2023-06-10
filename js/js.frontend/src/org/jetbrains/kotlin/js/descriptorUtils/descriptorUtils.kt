@@ -16,23 +16,23 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.types.KotlinType
 
-val KotlinType.nameIfStandardType: Name?
+konst KotlinType.nameIfStandardType: Name?
     get() = constructor.declarationDescriptor?.takeIf(KotlinBuiltIns::isBuiltIn)?.name
 
 @Deprecated(message = "Use getKotlinTypeFqName(Boolean) instead")
 fun KotlinType.getJetTypeFqName(printTypeArguments: Boolean): String = getKotlinTypeFqName(printTypeArguments)
 
 fun KotlinType.getKotlinTypeFqName(printTypeArguments: Boolean): String {
-    val declaration = requireNotNull(constructor.declarationDescriptor) {
+    konst declaration = requireNotNull(constructor.declarationDescriptor) {
         "declarationDescriptor is null for constructor = $constructor with ${constructor.javaClass}"
     }
     if (declaration is TypeParameterDescriptor) {
         return StringUtil.join(declaration.upperBounds, { type -> type.getKotlinTypeFqName(printTypeArguments) }, "&")
     }
 
-    val typeArguments = arguments
-    val typeArgumentsAsString = if (printTypeArguments && !typeArguments.isEmpty()) {
-        val joinedTypeArguments = StringUtil.join(typeArguments, { projection -> projection.type.getKotlinTypeFqName(false) }, ", ")
+    konst typeArguments = arguments
+    konst typeArgumentsAsString = if (printTypeArguments && !typeArguments.isEmpty()) {
+        konst joinedTypeArguments = StringUtil.join(typeArguments, { projection -> projection.type.getKotlinTypeFqName(false) }, ", ")
 
         "<$joinedTypeArguments>"
     }
@@ -45,7 +45,7 @@ fun KotlinType.getKotlinTypeFqName(printTypeArguments: Boolean): String {
 
 fun ClassDescriptor.hasPrimaryConstructor(): Boolean = unsubstitutedPrimaryConstructor != null
 
-val DeclarationDescriptor.isCoroutineLambda: Boolean
+konst DeclarationDescriptor.isCoroutineLambda: Boolean
     get() = this is AnonymousFunctionDescriptor && isSuspend
 
 

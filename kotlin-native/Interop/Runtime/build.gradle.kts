@@ -13,12 +13,12 @@ plugins {
 }
 
 native {
-    val isWindows = PlatformInfo.isWindows()
-    val obj = if (isWindows) "obj" else "o"
-    val lib = if (isWindows) "lib" else "a"
-    val host = rootProject.project(":kotlin-native").extra["hostName"]
-    val hostLibffiDir = rootProject.project(":kotlin-native").extra["${host}LibffiDir"]
-    val cflags = mutableListOf("-I$hostLibffiDir/include",
+    konst isWindows = PlatformInfo.isWindows()
+    konst obj = if (isWindows) "obj" else "o"
+    konst lib = if (isWindows) "lib" else "a"
+    konst host = rootProject.project(":kotlin-native").extra["hostName"]
+    konst hostLibffiDir = rootProject.project(":kotlin-native").extra["${host}LibffiDir"]
+    konst cflags = mutableListOf("-I$hostLibffiDir/include",
                                *platformManager.hostPlatform.clangForJni.hostCompilerArgsForJni)
     suffixes {
         (".c" to ".$obj") {
@@ -31,7 +31,7 @@ native {
             dir("src/callbacks/c")
         }
     }
-    val objSet = sourceSets["callbacks"]!!.transform(".c" to ".$obj")
+    konst objSet = sourceSets["callbacks"]!!.transform(".c" to ".$obj")
 
     target(solib("callbacks"), objSet) {
         tool(*platformManager.hostPlatform.clangForJni.clangCXX("").toTypedArray())
@@ -67,8 +67,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 }
 
 
-val nativelibs = project.tasks.create<Copy>("nativelibs") {
-    val callbacksSolib = solib("callbacks")
+konst nativelibs = project.tasks.create<Copy>("nativelibs") {
+    konst callbacksSolib = solib("callbacks")
     dependsOn(callbacksSolib)
 
     from("$buildDir/$callbacksSolib")

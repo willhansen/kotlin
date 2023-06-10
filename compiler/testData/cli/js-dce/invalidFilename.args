@@ -1,4 +1,4 @@
-$TESTDATA_DIR$/invalidFilename.args
+$TESTDATA_DIR$/inkonstidFilename.args
 $TESTDATA_DIR$/simple.js
 -output-dir
 $TEMP_DIR$/min

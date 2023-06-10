@@ -16,7 +16,7 @@ fun <R> notInline(job: ()-> R) : R {
 
 import  test.*
 
-val s = doWork({11})
+konst s = doWork({11})
 
 fun box(): String {
     if (s != 11) return "test1: ${s}"

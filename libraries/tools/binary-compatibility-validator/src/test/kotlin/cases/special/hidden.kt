@@ -6,7 +6,7 @@ public class HiddenClass
     public constructor() {
 
     @Deprecated("For binary compatibility", level = DeprecationLevel.HIDDEN)
-    val hiddenVal = 1
+    konst hiddenVal = 1
 
     @Deprecated("For binary compatibility", level = DeprecationLevel.HIDDEN)
     var hiddenVar = 2

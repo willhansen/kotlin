@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.psi.KtExpression
 import org.jetbrains.kotlin.psi.KtForExpression
 import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
-class PrimitiveProgressionRangeValue(private val rangeExpression: KtExpression) : RangeValue {
+class PrimitiveProgressionRangeValue(private konst rangeExpression: KtExpression) : RangeValue {
 
     override fun createForLoopGenerator(codegen: ExpressionCodegen, forExpression: KtForExpression) =
         ForInProgressionExpressionLoopGenerator(codegen, forExpression, rangeExpression)

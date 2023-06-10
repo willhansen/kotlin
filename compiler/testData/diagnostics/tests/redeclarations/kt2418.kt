@@ -17,7 +17,7 @@ enum class B {
 enum class C {
     <!REDECLARATION!>FOO<!>;
     
-    val <!REDECLARATION!>FOO<!> = 1
+    konst <!REDECLARATION!>FOO<!> = 1
 }
 
 enum class D {

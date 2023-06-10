@@ -16,8 +16,8 @@ private object Case1 {
     }
 
     public final class CompositeValidator</*0*/ T> {
-        public constructor CompositeValidator</*0*/ T>(/*0*/ vararg validators: Case1.Validator<T> /*kotlin.Array<out Case1.Validator<T>>*/)
-        public final val validators: kotlin.Array<out Case1.Validator<T>>
+        public constructor CompositeValidator</*0*/ T>(/*0*/ vararg konstidators: Case1.Validator<T> /*kotlin.Array<out Case1.Validator<T>>*/)
+        public final konst konstidators: kotlin.Array<out Case1.Validator<T>>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -25,7 +25,7 @@ private object Case1 {
 
     public final class PredicateValidator</*0*/ T> : Case1.Validator<T> {
         public constructor PredicateValidator</*0*/ T>(/*0*/ predicate: (T) -> kotlin.Boolean)
-        public final val predicate: (T) -> kotlin.Boolean
+        public final konst predicate: (T) -> kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -48,8 +48,8 @@ private object Case2 {
 
     public final data class Add : Case2.Expr<kotlin.Int> {
         public constructor Add(/*0*/ left: Case2.Expr<kotlin.Int>, /*1*/ right: Case2.Expr<kotlin.Int>)
-        public final val left: Case2.Expr<kotlin.Int>
-        public final val right: Case2.Expr<kotlin.Int>
+        public final konst left: Case2.Expr<kotlin.Int>
+        public final konst right: Case2.Expr<kotlin.Int>
         public final operator /*synthesized*/ fun component1(): Case2.Expr<kotlin.Int>
         public final operator /*synthesized*/ fun component2(): Case2.Expr<kotlin.Int>
         public final /*synthesized*/ fun copy(/*0*/ left: Case2.Expr<kotlin.Int> = ..., /*1*/ right: Case2.Expr<kotlin.Int> = ...): Case2.Add
@@ -66,8 +66,8 @@ private object Case2 {
 
     public final data class Subtract : Case2.Expr<kotlin.Int> {
         public constructor Subtract(/*0*/ left: Case2.Expr<kotlin.Int>, /*1*/ right: Case2.Expr<kotlin.Int>)
-        public final val left: Case2.Expr<kotlin.Int>
-        public final val right: Case2.Expr<kotlin.Int>
+        public final konst left: Case2.Expr<kotlin.Int>
+        public final konst right: Case2.Expr<kotlin.Int>
         public final operator /*synthesized*/ fun component1(): Case2.Expr<kotlin.Int>
         public final operator /*synthesized*/ fun component2(): Case2.Expr<kotlin.Int>
         public final /*synthesized*/ fun copy(/*0*/ left: Case2.Expr<kotlin.Int> = ..., /*1*/ right: Case2.Expr<kotlin.Int> = ...): Case2.Subtract

@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val obj = "" as java.lang.Object
+    konst obj = "" as java.lang.Object
 
     synchronized (obj) {
         synchronized (obj) {

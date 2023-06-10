@@ -8,71 +8,71 @@ package kotlinx.cli
 /**
  * Possible types of arguments.
  *
- * Inheritors describe type of argument value. New types can be added by user.
+ * Inheritors describe type of argument konstue. New types can be added by user.
  * In case of options type can have parameter or not.
  */
-abstract class ArgType<T : Any>(val hasParameter: kotlin.Boolean) {
+abstract class ArgType<T : Any>(konst hasParameter: kotlin.Boolean) {
     /**
      * Text description of type for helpMessage.
      */
-    abstract val description: kotlin.String
+    abstract konst description: kotlin.String
 
     /**
-     * Function to convert string argument value to its type.
+     * Function to convert string argument konstue to its type.
      * In case of error during conversion also provides help message.
      *
-     * @param value value
+     * @param konstue konstue
      */
-    abstract fun convert(value: kotlin.String, name: kotlin.String): T
+    abstract fun convert(konstue: kotlin.String, name: kotlin.String): T
 
     /**
      * Argument type for flags that can be only set/unset.
      */
     object Boolean : ArgType<kotlin.Boolean>(false) {
-        override val description: kotlin.String
+        override konst description: kotlin.String
             get() = ""
 
-        override fun convert(value: kotlin.String, name: kotlin.String): kotlin.Boolean =
-            value != "false"
+        override fun convert(konstue: kotlin.String, name: kotlin.String): kotlin.Boolean =
+            konstue != "false"
     }
 
     /**
-     * Argument type for string values.
+     * Argument type for string konstues.
      */
     object String : ArgType<kotlin.String>(true) {
-        override val description: kotlin.String
+        override konst description: kotlin.String
             get() = "{ String }"
 
-        override fun convert(value: kotlin.String, name: kotlin.String): kotlin.String = value
+        override fun convert(konstue: kotlin.String, name: kotlin.String): kotlin.String = konstue
     }
 
     /**
-     * Argument type for integer values.
+     * Argument type for integer konstues.
      */
     object Int : ArgType<kotlin.Int>(true) {
-        override val description: kotlin.String
+        override konst description: kotlin.String
             get() = "{ Int }"
 
-        override fun convert(value: kotlin.String, name: kotlin.String): kotlin.Int =
-            value.toIntOrNull()
-                    ?: throw ParsingException("Option $name is expected to be integer number. $value is provided.")
+        override fun convert(konstue: kotlin.String, name: kotlin.String): kotlin.Int =
+            konstue.toIntOrNull()
+                    ?: throw ParsingException("Option $name is expected to be integer number. $konstue is provided.")
     }
 
     /**
-     * Argument type for double values.
+     * Argument type for double konstues.
      */
     object Double : ArgType<kotlin.Double>(true) {
-        override val description: kotlin.String
+        override konst description: kotlin.String
             get() = "{ Double }"
 
-        override fun convert(value: kotlin.String, name: kotlin.String): kotlin.Double =
-            value.toDoubleOrNull()
-                    ?: throw ParsingException("Option $name is expected to be double number. $value is provided.")
+        override fun convert(konstue: kotlin.String, name: kotlin.String): kotlin.Double =
+            konstue.toDoubleOrNull()
+                    ?: throw ParsingException("Option $name is expected to be double number. $konstue is provided.")
     }
 
     companion object {
         /**
-         * Helper for arguments that have limited set of possible values represented as enumeration constants.
+         * Helper for arguments that have limited set of possible konstues represented as enumeration constants.
          */
         inline fun <reified T: Enum<T>> Choice(
             noinline toVariant: (kotlin.String) -> T = {
@@ -85,12 +85,12 @@ abstract class ArgType<T : Any>(val hasParameter: kotlin.Boolean) {
     }
 
     /**
-     * Type for arguments that have limited set of possible values.
+     * Type for arguments that have limited set of possible konstues.
      */
     class Choice<T: Any>(choices: List<T>,
-                             val toVariant: (kotlin.String) -> T,
-                             val variantToString: (T) -> kotlin.String = { it.toString() }): ArgType<T>(true) {
-        private val choicesMap: Map<kotlin.String, T> = choices.associateBy { variantToString(it) }
+                             konst toVariant: (kotlin.String) -> T,
+                             konst variantToString: (T) -> kotlin.String = { it.toString() }): ArgType<T>(true) {
+        private konst choicesMap: Map<kotlin.String, T> = choices.associateBy { variantToString(it) }
 
         init {
             require(choicesMap.size == choices.size) {
@@ -98,16 +98,16 @@ abstract class ArgType<T : Any>(val hasParameter: kotlin.Boolean) {
             }
         }
 
-        override val description: kotlin.String
+        override konst description: kotlin.String
             get() {
                 return "{ Value should be one of ${choicesMap.keys} }"
             }
 
-        override fun convert(value: kotlin.String, name: kotlin.String) =
+        override fun convert(konstue: kotlin.String, name: kotlin.String) =
             try {
-                toVariant(value)
+                toVariant(konstue)
             } catch (e: Exception) {
-                throw ParsingException("Option $name is expected to be one of ${choicesMap.keys}. $value is provided.")
+                throw ParsingException("Option $name is expected to be one of ${choicesMap.keys}. $konstue is provided.")
             }
     }
 }

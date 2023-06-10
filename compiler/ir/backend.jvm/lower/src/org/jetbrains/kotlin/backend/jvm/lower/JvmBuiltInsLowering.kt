@@ -21,30 +21,30 @@ import org.jetbrains.kotlin.ir.util.dump
 import org.jetbrains.kotlin.ir.util.fqNameForIrSerialization
 import org.jetbrains.kotlin.ir.util.render
 
-internal val jvmBuiltInsPhase = makeIrFilePhase(
+internal konst jvmBuiltInsPhase = makeIrFilePhase(
     ::JvmBuiltInsLowering,
     name = "JvmBuiltInsLowering",
     description = "JVM-specific implementations of some built-ins"
 )
 
-class JvmBuiltInsLowering(val context: JvmBackendContext) : FileLoweringPass {
+class JvmBuiltInsLowering(konst context: JvmBackendContext) : FileLoweringPass {
 
     override fun lower(irFile: IrFile) {
-        val transformer = object : IrElementTransformerVoidWithContext() {
+        konst transformer = object : IrElementTransformerVoidWithContext() {
             override fun visitCall(expression: IrCall): IrExpression {
                 expression.transformChildren(this, null)
 
-                val callee = expression.symbol.owner
-                val parentClassName = callee.parent.fqNameForIrSerialization.asString()
-                val functionName = callee.name.asString()
+                konst callee = expression.symbol.owner
+                konst parentClassName = callee.parent.fqNameForIrSerialization.asString()
+                konst functionName = callee.name.asString()
                 if (parentClassName == "kotlin.CompareToKt" && functionName == "compareTo") {
-                    val operandType = expression.getValueArgument(0)!!.type
+                    konst operandType = expression.getValueArgument(0)!!.type
                     when {
                         operandType.isUInt() -> return expression.replaceWithCallTo(context.ir.symbols.compareUnsignedInt)
                         operandType.isULong() -> return expression.replaceWithCallTo(context.ir.symbols.compareUnsignedLong)
                     }
                 }
-                val jvm8Replacement = jvm8builtInReplacements[parentClassName to functionName]
+                konst jvm8Replacement = jvm8builtInReplacements[parentClassName to functionName]
                 if (jvm8Replacement != null) {
                     return expression.replaceWithCallTo(jvm8Replacement)
                 }
@@ -66,7 +66,7 @@ class JvmBuiltInsLowering(val context: JvmBackendContext) : FileLoweringPass {
         irFile.transformChildren(transformer, null)
     }
 
-    private val jvm8builtInReplacements = mapOf(
+    private konst jvm8builtInReplacements = mapOf(
         ("kotlin.UInt" to "compareTo") to context.ir.symbols.compareUnsignedInt,
         ("kotlin.UInt" to "div") to context.ir.symbols.divideUnsignedInt,
         ("kotlin.UInt" to "rem") to context.ir.symbols.remainderUnsignedInt,
@@ -78,30 +78,30 @@ class JvmBuiltInsLowering(val context: JvmBackendContext) : FileLoweringPass {
     )
 
     // Originals are so far only instance methods and extensions, while the replacements are
-    // statics, so we copy dispatch and extension receivers to a value argument if needed.
+    // statics, so we copy dispatch and extension receivers to a konstue argument if needed.
     // If we can't coerce arguments to required types, keep original expression (see below).
     private fun IrCall.replaceWithCallTo(replacement: IrSimpleFunctionSymbol): IrExpression {
-        val expectedType = this.type
-        val intrinsicCallType = replacement.owner.returnType
+        konst expectedType = this.type
+        konst intrinsicCallType = replacement.owner.returnType
 
-        val intrinsicCall = IrCallImpl.fromSymbolOwner(
+        konst intrinsicCall = IrCallImpl.fromSymbolOwner(
             startOffset,
             endOffset,
             intrinsicCallType,
             replacement
         ).also { newCall ->
-            var valueArgumentOffset = 0
+            var konstueArgumentOffset = 0
 
             fun tryToAddCoercedArgument(expr: IrExpression): Boolean {
-                val coercedExpr = expr.coerceIfPossible(replacement.owner.valueParameters[valueArgumentOffset].type)
+                konst coercedExpr = expr.coerceIfPossible(replacement.owner.konstueParameters[konstueArgumentOffset].type)
                     ?: return false
-                newCall.putValueArgument(valueArgumentOffset++, coercedExpr)
+                newCall.putValueArgument(konstueArgumentOffset++, coercedExpr)
                 return true
             }
 
             this.extensionReceiver?.let { if (!tryToAddCoercedArgument(it)) return this@replaceWithCallTo }
             this.dispatchReceiver?.let { if (!tryToAddCoercedArgument(it)) return this@replaceWithCallTo }
-            for (index in 0 until valueArgumentsCount) {
+            for (index in 0 until konstueArgumentsCount) {
                 if (!tryToAddCoercedArgument(getValueArgument(index)!!)) return this@replaceWithCallTo
             }
         }
@@ -118,8 +118,8 @@ class JvmBuiltInsLowering(val context: JvmBackendContext) : FileLoweringPass {
     private fun IrExpression.coerceIfPossible(toType: IrType): IrExpression? {
         // TODO maybe UnsafeCoerce could handle types with different, but coercible underlying representations.
         // See KT-43286 and related tests for details.
-        val fromJvmType = context.defaultTypeMapper.mapType(type)
-        val toJvmType = context.defaultTypeMapper.mapType(toType)
+        konst fromJvmType = context.defaultTypeMapper.mapType(type)
+        konst toJvmType = context.defaultTypeMapper.mapType(toType)
         return if (fromJvmType != toJvmType)
             null
         else

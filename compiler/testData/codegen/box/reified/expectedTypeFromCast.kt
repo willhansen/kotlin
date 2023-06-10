@@ -8,10 +8,10 @@ inline fun <reified T> foo(): T {
 }
 
 fun box(): String {
-    val fooCall = foo() as String
+    konst fooCall = foo() as String
     assertEquals("java.lang.String", fooCall)
 
-    val safeFooCall = foo() as? String
+    konst safeFooCall = foo() as? String
     assertEquals("java.lang.String", safeFooCall)
 
     return "OK"

@@ -1,7 +1,7 @@
 interface IBase<T : Any?> {
   abstract fun foo(x: Int)
 
-  abstract val bar: Int
+  abstract konst bar: Int
     abstract get
 
   abstract fun <X : Any?> qux(t: T, x: X)
@@ -23,11 +23,11 @@ class Test<TT : Any?> : IBase<TT> {
     <this>.#$$delegate_0.qux<X>(t = t, x = x)
   }
 
-  override val bar: Int
+  override konst bar: Int
     override get(): Int {
       return <this>.#$$delegate_0.<get-bar>()
     }
 
-  private /* final field */ val $$delegate_0: IBase<TT> = impl
+  private /* final field */ konst $$delegate_0: IBase<TT> = impl
 
 }

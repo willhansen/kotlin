@@ -15,12 +15,12 @@ internal class OneToManyTitlecaseMappingsBuilder(bmpUnicodeDataLines: List<Unico
     }
 
     override fun SpecialCasingLine.mapping(): List<String>? {
-        val title = titlecaseMapping.map { it.hexToInt().toChar() }.joinToString(separator = "")
-        val upperFirst = uppercaseMapping[0].hexToInt().toChar()
+        konst title = titlecaseMapping.map { it.hexToInt().toChar() }.joinToString(separator = "")
+        konst upperFirst = uppercaseMapping[0].hexToInt().toChar()
 
         // The version of Unicode in JVM executing this code is likely different than the version of the Unicode being parsed.
         // Thus use the Unicode data being parsed to convert chars to lowercase.
-        val lowercasedTail = uppercaseMapping.drop(1).map { lower(it.hexToInt()).toChar() }.joinToString(separator = "")
+        konst lowercasedTail = uppercaseMapping.drop(1).map { lower(it.hexToInt()).toChar() }.joinToString(separator = "")
 
         // Skip titlecase mappings that can be derived by lowercasing tail characters
         if (title == upperFirst + lowercasedTail) {

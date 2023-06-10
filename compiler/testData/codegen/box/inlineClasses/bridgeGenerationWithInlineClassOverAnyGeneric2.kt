@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Result<T: Any>(val a: T?) {
+konstue class Result<T: Any>(konst a: T?) {
     fun getOrThrow(): T? = a
 }
 
@@ -20,8 +20,8 @@ fun <T: Any> ResultReceiver(f: (Result<T>) -> Unit): ResultReceiver<T> =
 
 fun test() {
     var invoked = false
-    val receiver = ResultReceiver<Int> { result ->
-        val intResult = result.getOrThrow()
+    konst receiver = ResultReceiver<Int> { result ->
+        konst intResult = result.getOrThrow()
         invoked = true
     }
 

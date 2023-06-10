@@ -43,18 +43,18 @@ import kotlin.script.experimental.jvm.util.SnippetsHistory
 
 open class ReplCodeAnalyzerBase(
     environment: KotlinCoreEnvironment,
-    val trace: BindingTraceContext = NoScopeRecordCliBindingTrace(),
+    konst trace: BindingTraceContext = NoScopeRecordCliBindingTrace(),
     implicitsResolutionFilter: ImplicitsExtensionsResolutionFilter? = null
 ) {
-    protected val scriptDeclarationFactory: ScriptMutableDeclarationProviderFactory
+    protected konst scriptDeclarationFactory: ScriptMutableDeclarationProviderFactory
 
-    protected val container: ComponentProvider
-    protected val topDownAnalysisContext: TopDownAnalysisContext
-    private val topDownAnalyzer: LazyTopDownAnalyzer
-    protected val resolveSession: ResolveSession
-    protected val replState = ResettableAnalyzerState()
+    protected konst container: ComponentProvider
+    protected konst topDownAnalysisContext: TopDownAnalysisContext
+    private konst topDownAnalyzer: LazyTopDownAnalyzer
+    protected konst resolveSession: ResolveSession
+    protected konst replState = ResettableAnalyzerState()
 
-    val module: ModuleDescriptorImpl
+    konst module: ModuleDescriptorImpl
 
     init {
         // Module source scope is empty because all binary classes are in the dependency module, and all source classes are guaranteed
@@ -81,18 +81,18 @@ open class ReplCodeAnalyzerBase(
     }
 
     interface ReplLineAnalysisResult {
-        val scriptDescriptor: ClassDescriptorWithResolutionScopes?
-        val diagnostics: Diagnostics
+        konst scriptDescriptor: ClassDescriptorWithResolutionScopes?
+        konst diagnostics: Diagnostics
 
         data class Successful(
-            override val scriptDescriptor: ClassDescriptorWithResolutionScopes,
-            override val diagnostics: Diagnostics
+            override konst scriptDescriptor: ClassDescriptorWithResolutionScopes,
+            override konst diagnostics: Diagnostics
         ) :
             ReplLineAnalysisResult
 
-        data class WithErrors(override val diagnostics: Diagnostics) :
+        data class WithErrors(override konst diagnostics: Diagnostics) :
             ReplLineAnalysisResult {
-            override val scriptDescriptor: ClassDescriptorWithResolutionScopes? get() = null
+            override konst scriptDescriptor: ClassDescriptorWithResolutionScopes? get() = null
         }
     }
 
@@ -107,7 +107,7 @@ open class ReplCodeAnalyzerBase(
         topDownAnalysisContext.scripts.clear()
         trace.clearDiagnostics()
 
-        val script = psiFile.script!!
+        konst script = psiFile.script!!
 
         script.putUserData(ScriptPriorities.PRIORITY_KEY, priority)
     }
@@ -137,17 +137,17 @@ open class ReplCodeAnalyzerBase(
         )
         replState.submitLine(linePsi)
 
-        val context = runAnalyzer(linePsi, importedScripts)
+        konst context = runAnalyzer(linePsi, importedScripts)
 
-        val diagnostics = trace.bindingContext.diagnostics
-        val hasErrors = diagnostics.any { it.severity == Severity.ERROR }
+        konst diagnostics = trace.bindingContext.diagnostics
+        konst hasErrors = diagnostics.any { it.severity == Severity.ERROR }
         return if (hasErrors) {
             replState.lineFailure(linePsi)
             ReplLineAnalysisResult.WithErrors(
                 diagnostics
             )
         } else {
-            val scriptDescriptor = context.scripts[linePsi.script]!!
+            konst scriptDescriptor = context.scripts[linePsi.script]!!
             replState.lineSuccess(linePsi, codeLine, scriptDescriptor)
             ReplLineAnalysisResult.Successful(
                 scriptDescriptor,
@@ -163,7 +163,7 @@ open class ReplCodeAnalyzerBase(
         fun setDelegateFactory(delegateFactory: DeclarationProviderFactory) {
             this.delegateFactory = delegateFactory
 
-            val provider = delegateFactory.getPackageMemberDeclarationProvider(FqName.ROOT)!!
+            konst provider = delegateFactory.getPackageMemberDeclarationProvider(FqName.ROOT)!!
             try {
                 rootPackageProvider.addDelegateProvider(provider)
             } catch (e: UninitializedPropertyAccessException) {
@@ -194,8 +194,8 @@ open class ReplCodeAnalyzerBase(
             private var delegateProvider: PackageMemberDeclarationProvider
         ) : DelegatePackageMemberDeclarationProvider(delegateProvider) {
             fun addDelegateProvider(provider: PackageMemberDeclarationProvider) {
-                val combinedDelegateProvider = delegateProvider as? CombinedPackageMemberDeclarationProvider
-                val providers =
+                konst combinedDelegateProvider = delegateProvider as? CombinedPackageMemberDeclarationProvider
+                konst providers =
                     if (combinedDelegateProvider != null) listOf(provider) + combinedDelegateProvider.providers
                     else listOf(provider, delegateProvider)
                 delegateProvider = CombinedPackageMemberDeclarationProvider(providers)
@@ -205,18 +205,18 @@ open class ReplCodeAnalyzerBase(
         }
     }
 
-    data class CompiledCode(val className: String, val source: SourceCodeByReplLine)
+    data class CompiledCode(konst className: String, konst source: SourceCodeByReplLine)
 
     // TODO: merge with org.jetbrains.kotlin.resolve.repl.ReplState when switching to new REPL infrastructure everywhere
     // TODO: review its place in the extracted state infrastructure (now the analyzer itself is a part of the state)
     class ResettableAnalyzerState {
         @Suppress("DEPRECATION")
-        private val successfulLines = ResettableSnippetsHistory<LineInfo.SuccessfulLine>()
+        private konst successfulLines = ResettableSnippetsHistory<LineInfo.SuccessfulLine>()
 
-        private val submittedLines = hashMapOf<KtFile, LineInfo>()
+        private konst submittedLines = hashMapOf<KtFile, LineInfo>()
 
         fun resetToLine(lineId: ILineId): List<SourceCodeByReplLine> {
-            val removed = successfulLines.resetToLine(lineId)
+            konst removed = successfulLines.resetToLine(lineId)
             removed.forEach { submittedLines.remove(it.second.linePsi) }
             return removed.map { it.first }
         }
@@ -227,7 +227,7 @@ open class ReplCodeAnalyzerBase(
         }
 
         fun submitLine(ktFile: KtFile) {
-            val line =
+            konst line =
                 LineInfo.SubmittedLine(
                     ktFile,
                     successfulLines.lastValue()
@@ -241,7 +241,7 @@ open class ReplCodeAnalyzerBase(
         }
 
         fun lineSuccess(ktFile: KtFile, codeLine: SourceCodeByReplLine, scriptDescriptor: ClassDescriptorWithResolutionScopes) {
-            val successfulLine =
+            konst successfulLine =
                 LineInfo.SuccessfulLine(
                     ktFile,
                     successfulLines.lastValue(),
@@ -268,29 +268,29 @@ open class ReplCodeAnalyzerBase(
 
         // use sealed?
         private sealed class LineInfo {
-            abstract val linePsi: KtFile
-            abstract val parentLine: SuccessfulLine?
+            abstract konst linePsi: KtFile
+            abstract konst parentLine: SuccessfulLine?
 
-            class SubmittedLine(override val linePsi: KtFile, override val parentLine: SuccessfulLine?) : LineInfo()
+            class SubmittedLine(override konst linePsi: KtFile, override konst parentLine: SuccessfulLine?) : LineInfo()
             class SuccessfulLine(
-                override val linePsi: KtFile,
-                override val parentLine: SuccessfulLine?,
-                val lineDescriptor: ClassDescriptorWithResolutionScopes
+                override konst linePsi: KtFile,
+                override konst parentLine: SuccessfulLine?,
+                konst lineDescriptor: ClassDescriptorWithResolutionScopes
             ) : LineInfo()
 
-            class FailedLine(override val linePsi: KtFile, override val parentLine: SuccessfulLine?) : LineInfo()
+            class FailedLine(override konst linePsi: KtFile, override konst parentLine: SuccessfulLine?) : LineInfo()
         }
 
         private fun computeFileScopes(lineInfo: LineInfo, fileScopeFactory: FileScopeFactory): FileScopes? {
-            val linePsi = lineInfo.linePsi
-            val hasImports = linePsi.importDirectives.isNotEmpty() ||
+            konst linePsi = lineInfo.linePsi
+            konst hasImports = linePsi.importDirectives.isNotEmpty() ||
                     ExtraImportsProviderExtension.getInstance(linePsi.project).getExtraImports(linePsi).isNotEmpty()
 
             // create scope that wraps previous line lexical scope and adds imports from this line
-            val lexicalScopeAfterLastLine = lineInfo.parentLine?.lineDescriptor?.scopeForInitializerResolution ?: return null
-            val lastLineImports = lexicalScopeAfterLastLine.parentsWithSelf.first { it is ImportingScope } as ImportingScope
-            val scopesForThisLine = fileScopeFactory.createScopesForFile(linePsi, lastLineImports, false)
-            val combinedLexicalScopes = if (hasImports)
+            konst lexicalScopeAfterLastLine = lineInfo.parentLine?.lineDescriptor?.scopeForInitializerResolution ?: return null
+            konst lastLineImports = lexicalScopeAfterLastLine.parentsWithSelf.first { it is ImportingScope } as ImportingScope
+            konst scopesForThisLine = fileScopeFactory.createScopesForFile(linePsi, lastLineImports, false)
+            konst combinedLexicalScopes = if (hasImports)
                 lexicalScopeAfterLastLine.replaceImportingScopes(scopesForThisLine.importingScope)
             else
                 lexicalScopeAfterLastLine
@@ -304,10 +304,10 @@ fun ReplCodeLine.toSourceCode() = SourceCodeByReplLine(code, no)
 internal fun SourceCode.addNo(no: Int) = SourceCodeByReplLine(text, no, name, locationId)
 
 data class SourceCodeByReplLine(
-    override val text: String,
-    val no: Int,
-    override val name: String? = null,
-    override val locationId: String? = null
+    override konst text: String,
+    konst no: Int,
+    override konst name: String? = null,
+    override konst locationId: String? = null
 ) : SourceCode
 
 private typealias ReplSourceHistoryList<ResultT> = List<CompiledHistoryItem<SourceCodeByReplLine, ResultT>>
@@ -317,7 +317,7 @@ private class ResettableSnippetsHistory<ResultT>(startingHistory: CompiledHistor
     SnippetsHistory<ReplCodeAnalyzerBase.CompiledCode, ResultT>(startingHistory) {
 
     fun resetToLine(line: ILineId): ReplSourceHistoryList<ResultT> {
-        val removed = arrayListOf<Pair<SourceCodeByReplLine, ResultT>>()
+        konst removed = arrayListOf<Pair<SourceCodeByReplLine, ResultT>>()
         while ((history.lastOrNull()?.first?.source?.no ?: -1) > line.no) {
             removed.add(history.removeAt(history.size - 1).let { Pair(it.first.source, it.second) })
         }
@@ -325,7 +325,7 @@ private class ResettableSnippetsHistory<ResultT>(startingHistory: CompiledHistor
     }
 
     fun reset(): ReplSourceHistoryList<ResultT> {
-        val removed = history.map { Pair(it.first.source, it.second) }
+        konst removed = history.map { Pair(it.first.source, it.second) }
         history.clear()
         return removed
     }

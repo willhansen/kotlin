@@ -33,13 +33,13 @@ public class J {
 class A
 
 fun call(f: (A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A) -> String): String {
-    val a = A()
+    konst a = A()
     return f(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a)
 }
 
 fun box(): String {
     @Suppress("DEPRECATION_ERROR")
-    val f = J.FIELD as Function30<
+    konst f = J.FIELD as Function30<
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,
@@ -49,7 +49,7 @@ fun box(): String {
     if (call(f) != "OK") return "Fail field call"
 
     @Suppress("DEPRECATION_ERROR")
-    val m = J.getViaMethod() as Function30<
+    konst m = J.getViaMethod() as Function30<
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,
             Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?, Any?,

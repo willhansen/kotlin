@@ -32,14 +32,14 @@ import org.jetbrains.kotlin.ir.util.createStaticFunctionWithReceivers
 import org.jetbrains.kotlin.ir.util.irCall
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-internal val staticDefaultFunctionPhase = makeIrFilePhase(
+internal konst staticDefaultFunctionPhase = makeIrFilePhase(
     ::StaticDefaultFunctionLowering,
     name = "StaticDefaultFunction",
     description = "Make function adapters for default arguments static",
     prerequisite = setOf(jvmStaticInObjectPhase),
 )
 
-private class StaticDefaultFunctionLowering(val context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
+private class StaticDefaultFunctionLowering(konst context: JvmBackendContext) : IrElementTransformerVoid(), FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.accept(this, null)
     }
@@ -54,11 +54,11 @@ private class StaticDefaultFunctionLowering(val context: JvmBackendContext) : Ir
     )
 
     override fun visitReturn(expression: IrReturn): IrExpression {
-        val irFunction = context.staticDefaultStubs[expression.returnTargetSymbol]
+        konst irFunction = context.staticDefaultStubs[expression.returnTargetSymbol]
         return super.visitReturn(
             if (irFunction != null) {
                 with(expression) {
-                    IrReturnImpl(startOffset, endOffset, type, irFunction.symbol, value)
+                    IrReturnImpl(startOffset, endOffset, type, irFunction.symbol, konstue)
                 }
             } else {
                 expression
@@ -67,13 +67,13 @@ private class StaticDefaultFunctionLowering(val context: JvmBackendContext) : Ir
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val callee = expression.symbol.owner
+        konst callee = expression.symbol.owner
         if (callee.origin !== IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER || expression.dispatchReceiver == null) {
             return super.visitCall(expression)
         }
 
-        val newCallee = getStaticFunctionWithReceivers(callee)
-        val newCall = irCall(expression, newCallee, receiversAsArguments = true)
+        konst newCallee = getStaticFunctionWithReceivers(callee)
+        konst newCall = irCall(expression, newCallee, receiversAsArguments = true)
 
         return super.visitCall(newCall)
     }

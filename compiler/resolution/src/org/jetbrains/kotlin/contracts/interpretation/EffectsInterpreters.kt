@@ -26,29 +26,29 @@ import org.jetbrains.kotlin.contracts.model.SimpleEffect
 import org.jetbrains.kotlin.contracts.model.structure.ESCalls
 import org.jetbrains.kotlin.contracts.model.structure.ESReturns
 
-internal class CallsEffectInterpreter(private val dispatcher: ContractInterpretationDispatcher) : EffectDeclarationInterpreter {
+internal class CallsEffectInterpreter(private konst dispatcher: ContractInterpretationDispatcher) : EffectDeclarationInterpreter {
     override fun tryInterpret(effectDeclaration: EffectDeclaration): ESEffect? {
         if (effectDeclaration !is CallsEffectDeclaration) return null
 
-        val variable = dispatcher.interpretVariable(effectDeclaration.variableReference) ?: return null
-        val kind = effectDeclaration.kind
+        konst variable = dispatcher.interpretVariable(effectDeclaration.variableReference) ?: return null
+        konst kind = effectDeclaration.kind
         return ESCalls(variable, kind)
     }
 }
 
-internal class ConditionalEffectInterpreter(private val dispatcher: ContractInterpretationDispatcher) {
+internal class ConditionalEffectInterpreter(private konst dispatcher: ContractInterpretationDispatcher) {
     fun interpret(conditionalEffectDeclaration: ConditionalEffectDeclaration): ConditionalEffect? {
-        val effect = dispatcher.interpretEffect(conditionalEffectDeclaration.effect) as? SimpleEffect ?: return null
-        val condition = dispatcher.interpretCondition(conditionalEffectDeclaration.condition) ?: return null
+        konst effect = dispatcher.interpretEffect(conditionalEffectDeclaration.effect) as? SimpleEffect ?: return null
+        konst condition = dispatcher.interpretCondition(conditionalEffectDeclaration.condition) ?: return null
 
         return ConditionalEffect(condition, effect)
     }
 }
 
-internal class ReturnsEffectInterpreter(private val dispatcher: ContractInterpretationDispatcher) : EffectDeclarationInterpreter {
+internal class ReturnsEffectInterpreter(private konst dispatcher: ContractInterpretationDispatcher) : EffectDeclarationInterpreter {
     override fun tryInterpret(effectDeclaration: EffectDeclaration): ESEffect? {
         if (effectDeclaration !is ReturnsEffectDeclaration) return null
-        val returnedValue = dispatcher.interpretConstant(effectDeclaration.value) ?: return null
+        konst returnedValue = dispatcher.interpretConstant(effectDeclaration.konstue) ?: return null
         return ESReturns(returnedValue)
     }
 }

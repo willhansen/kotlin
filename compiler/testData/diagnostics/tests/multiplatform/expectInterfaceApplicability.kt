@@ -6,9 +6,9 @@ expect interface My {
     open fun openFunNegative()
     abstract fun abstractFun()
 
-    open val openValPositive: Int
-    open val openValNegative: Int
-    abstract val abstractVal: Int
+    open konst openValPositive: Int
+    open konst openValNegative: Int
+    abstract konst abstractVal: Int
 }
 
 // MODULE: m1-jvm()()(m1-common)
@@ -18,7 +18,7 @@ actual interface My {
     actual fun <!ACTUAL_WITHOUT_EXPECT!>openFunNegative<!>()
     actual fun abstractFun()
 
-    actual val openValPositive: Int get() = 0
-    actual val <!ACTUAL_WITHOUT_EXPECT!>openValNegative<!>: Int
-    actual val abstractVal: Int
+    actual konst openValPositive: Int get() = 0
+    actual konst <!ACTUAL_WITHOUT_EXPECT!>openValNegative<!>: Int
+    actual konst abstractVal: Int
 }

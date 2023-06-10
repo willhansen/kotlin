@@ -10,59 +10,59 @@ interface ITest {
     var nullableTest: Z?
 }
 
-inline class Z(val x: Int) : ITest {
+inline class Z(konst x: Int) : ITest {
     override var nonNullTest: Z
         get() = Z(global.x + this.x)
-        set(value) {
-            global = Z(this.x + value.x)
+        set(konstue) {
+            global = Z(this.x + konstue.x)
         }
 
     override var nullableTest: Z?
         get() = Z(global.x + this.x)
-        set(value) {
-            global = Z(this.x + value!!.x)
+        set(konstue) {
+            global = Z(this.x + konstue!!.x)
         }
 }
 
-inline class S(val x: String) : ITest {
+inline class S(konst x: String) : ITest {
     override var nonNullTest: Z
         get() = Z(global.x + x.toInt())
-        set(value) {
-            global = Z(this.x.toInt() + value.x)
+        set(konstue) {
+            global = Z(this.x.toInt() + konstue.x)
         }
 
     override var nullableTest: Z?
         get() = Z(global.x + x.toInt())
-        set(value) {
-            global = Z(this.x.toInt() + value!!.x)
+        set(konstue) {
+            global = Z(this.x.toInt() + konstue!!.x)
         }
 }
 
-inline class A(val x: Any) : ITest {
+inline class A(konst x: Any) : ITest {
     override var nonNullTest: Z
         get() = Z(global.x + this.x as Int)
-        set(value) {
-            global = Z(this.x as Int + value.x)
+        set(konstue) {
+            global = Z(this.x as Int + konstue.x)
         }
 
     override var nullableTest: Z?
         get() = Z(global.x + this.x as Int)
-        set(value) {
-            global = Z(this.x as Int + value!!.x)
+        set(konstue) {
+            global = Z(this.x as Int + konstue!!.x)
         }
 
 }
 
 fun box(): String {
-    val zZero = Z(0)
-    val zOne = Z(1)
-    val zTwo = Z(2)
-    val zThree = Z(3)
-    val zFour = Z(4)
+    konst zZero = Z(0)
+    konst zOne = Z(1)
+    konst zTwo = Z(2)
+    konst zThree = Z(3)
+    konst zFour = Z(4)
 
-    val sOne = S("1")
+    konst sOne = S("1")
 
-    val aOne = A(1)
+    konst aOne = A(1)
 
     global = zZero
     assertEquals(zOne, Z::nonNullTest.call(zOne))

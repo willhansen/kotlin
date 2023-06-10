@@ -7,7 +7,7 @@ package example
 
 @JsExport
 class Child {
-    val name: String = "Child"
+    konst name: String = "Child"
 }
 
 fun main() {

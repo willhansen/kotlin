@@ -13,7 +13,7 @@ fun <K> select(x: K, y: K): K = x
 fun <R> foo(f: () -> R): R = f()
 
 fun test(n: Number) {
-    val a = select(foo { JavaTest.createNumberArray() }, emptyArray())
+    konst a = select(foo { JavaTest.createNumberArray() }, emptyArray())
 
     a
 }

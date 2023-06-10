@@ -12,7 +12,7 @@ FILE: protectedVisibilityAndSmartcast_overrideChangesType.fir.kt
             super<R|kotlin/Any|>()
         }
 
-        protected abstract val a: R|Base|
+        protected abstract konst a: R|Base|
             protected get(): R|Base|
 
         public final fun fest_1(other: R|A|): R|kotlin/Unit| {
@@ -45,7 +45,7 @@ FILE: protectedVisibilityAndSmartcast_overrideChangesType.fir.kt
                 super<R|A|>()
             }
 
-            protected open override val a: R|Derived| = R|<local>/a|
+            protected open override konst a: R|Derived| = R|<local>/a|
                 protected get(): R|Derived|
 
             public final class Nested : R|kotlin/Any| {
@@ -87,7 +87,7 @@ FILE: protectedVisibilityAndSmartcast_overrideChangesType.fir.kt
                 super<R|A.B|>(R|<local>/a|)
             }
 
-            protected open override val a: R|Derived| = R|<local>/a|
+            protected open override konst a: R|Derived| = R|<local>/a|
                 protected get(): R|Derived|
 
             public final fun fest_4(other: R|A|): R|kotlin/Unit| {
@@ -122,7 +122,7 @@ FILE: protectedVisibilityAndSmartcast_overrideChangesType.fir.kt
                 super<R|A|>()
             }
 
-            protected open override val a: R|Derived| = R|<local>/a|
+            protected open override konst a: R|Derived| = R|<local>/a|
                 protected get(): R|Derived|
 
             public final fun fest_5(other: R|A|): R|kotlin/Unit| {

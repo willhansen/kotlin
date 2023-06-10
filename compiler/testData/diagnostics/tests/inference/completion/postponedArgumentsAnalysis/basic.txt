@@ -37,7 +37,7 @@ public final class A2 : (kotlin.Int, kotlin.String, kotlin.Float) -> kotlin.Floa
 
 public final class A3 : kotlin.reflect.KFunction1<kotlin.Number, kotlin.String> {
     public constructor A3()
-    public open override /*1*/ val name: kotlin.String
+    public open override /*1*/ konst name: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public final fun foo1(/*0*/ x: kotlin.Any?): kotlin.Unit
     public final fun foo1(/*0*/ x: kotlin.Int): kotlin.Unit
@@ -87,7 +87,7 @@ public final class C : A {
 
 public final class Inv</*0*/ T> {
     public constructor Inv</*0*/ T>(/*0*/ x: T)
-    public final val x: T
+    public final konst x: T
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

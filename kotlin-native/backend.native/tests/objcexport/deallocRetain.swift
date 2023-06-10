@@ -42,12 +42,12 @@ private class DeallocRetain : DeallocRetainBase {
     override init() {
         super.init()
         DeallocRetain.weakObject = self
-        DeallocRetain.kotlinWeakRef = DeallocRetainKt.createWeakReference(value: self)
+        DeallocRetain.kotlinWeakRef = DeallocRetainKt.createWeakReference(konstue: self)
     }
 
     func checkWeak() throws {
         try assertSame(actual: DeallocRetain.weakObject, expected: self)
-        try assertSame(actual: DeallocRetain.kotlinWeakRef!.value as AnyObject, expected: self)
+        try assertSame(actual: DeallocRetain.kotlinWeakRef!.konstue as AnyObject, expected: self)
     }
 
     deinit {
@@ -55,7 +55,7 @@ private class DeallocRetain : DeallocRetainBase {
         DeallocRetain.retainObject = nil
 
         try! assertNil(DeallocRetain.weakObject)
-        try! assertNil(DeallocRetain.kotlinWeakRef!.value)
+        try! assertNil(DeallocRetain.kotlinWeakRef!.konstue)
 
         try! assertFalse(DeallocRetain.deallocated)
         DeallocRetain.deallocated = true
@@ -68,7 +68,7 @@ private class DeallocRetainAndAccess : DeallocRetainBase {
 
     deinit {
         DeallocRetainAndAccess.retainObject = self
-        DeallocRetainKt.assertNull(value: DeallocRetainAndAccess.retainObject)
+        DeallocRetainKt.assertNull(konstue: DeallocRetainAndAccess.retainObject)
         DeallocRetainAndAccess.retainObject = nil
 
         try! assertFalse(DeallocRetainAndAccess.deallocated)

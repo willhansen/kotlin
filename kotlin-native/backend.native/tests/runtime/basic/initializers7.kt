@@ -11,8 +11,8 @@ object A {
     init {
         assertAUninitialized()
     }
-    val a1 = 7
-    val a2 = 12
+    konst a1 = 7
+    konst a2 = 12
 }
 
 // Check that A is initialized dynamically.
@@ -25,8 +25,8 @@ object B {
     init {
         assertBUninitialized()
     }
-    val b1 = A.a2
-    val b2 = C.c1
+    konst b1 = A.a2
+    konst b2 = C.c1
 }
 
 // Check that B is initialized dynamically.
@@ -39,10 +39,10 @@ object C {
     init {
         assertCUninitialized()
     }
-    val c1 = 42
-    val c2 = A.a1
-    val c3 = B.b1
-    val c4 = B.b2
+    konst c1 = 42
+    konst c2 = A.a1
+    konst c3 = B.b1
+    konst c4 = B.b2
 }
 
 // Check that C is initialized dynamically.

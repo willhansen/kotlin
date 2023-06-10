@@ -5,16 +5,16 @@
 // MUTE_SIGNATURE_COMPARISON_K2: ANY
 // ^ KT-57428
 
-class O(val o: String)
+class O(konst o: String)
 
 context(O)
-class OK(val k: String) {
-    val result: String = o + k
+class OK(konst k: String) {
+    konst result: String = o + k
 }
 
 fun box(): String {
     return with(O("O")) {
-        val ok = OK("K")
+        konst ok = OK("K")
         ok.result
     }
 }

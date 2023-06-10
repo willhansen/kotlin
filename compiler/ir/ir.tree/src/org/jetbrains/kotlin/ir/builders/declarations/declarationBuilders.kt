@@ -112,7 +112,7 @@ inline fun IrProperty.addGetter(builder: IrFunctionBuilder.() -> Unit = {}): IrS
     }
 
 fun IrProperty.addDefaultGetter(parentClass: IrClass, builtIns: IrBuiltIns) {
-    val field = backingField!!
+    konst field = backingField!!
     addGetter {
         origin = IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR
         returnType = field.type
@@ -216,7 +216,7 @@ fun IrClass.addFunction(
         this.origin = origin
     }.apply {
         if (!isStatic) {
-            val thisReceiver = parentAsClass.thisReceiver!!
+            konst thisReceiver = parentAsClass.thisReceiver!!
             dispatchReceiverParameter = thisReceiver.copyTo(this, type = thisReceiver.type)
         }
     }
@@ -276,10 +276,10 @@ inline fun IrFunction.addValueParameter(builder: IrValueParameterBuilder.() -> U
     IrValueParameterBuilder().run {
         builder()
         if (index == UNDEFINED_PARAMETER_INDEX) {
-            index = valueParameters.size
+            index = konstueParameters.size
         }
-        factory.buildValueParameter(this, this@addValueParameter).also { valueParameter ->
-            valueParameters = valueParameters + valueParameter
+        factory.buildValueParameter(this, this@addValueParameter).also { konstueParameter ->
+            konstueParameters = konstueParameters + konstueParameter
         }
     }
 

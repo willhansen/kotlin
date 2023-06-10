@@ -9,5 +9,5 @@ class Delegate {
 }
 
 class Bar(delegate: Delegate) {
-    private val unknown: Unknown by delegate
+    private konst unknown: Unknown by delegate
 }

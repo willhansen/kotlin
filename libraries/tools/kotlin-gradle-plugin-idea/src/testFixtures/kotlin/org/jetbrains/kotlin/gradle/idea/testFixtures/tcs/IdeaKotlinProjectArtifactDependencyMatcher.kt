@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.gradle.idea.tcs.extras.artifactsClasspath
 import java.io.File
 
 internal class IdeaKotlinProjectArtifactDependencyMatcher(
-    val type: IdeaKotlinSourceDependency.Type,
-    val buildId: String,
-    val projectPath: String,
-    val artifactFilePath: FilePathRegex
+    konst type: IdeaKotlinSourceDependency.Type,
+    konst buildId: String,
+    konst projectPath: String,
+    konst artifactFilePath: FilePathRegex
 ) : IdeaKotlinDependencyMatcher {
-    override val description: String
+    override konst description: String
         get() = "project($type)::$projectPath/${artifactFilePath}"
 
     override fun matches(dependency: IdeaKotlinDependency): Boolean {
@@ -33,7 +33,7 @@ internal class IdeaKotlinProjectArtifactDependencyMatcher(
 
 fun FilePathRegex(pattern: String): FilePathRegex = FilePathRegex.from(pattern)
 
-class FilePathRegex private constructor(private val normalizedRegex: Regex) {
+class FilePathRegex private constructor(private konst normalizedRegex: Regex) {
     override fun toString(): String {
         return normalizedRegex.toString()
     }

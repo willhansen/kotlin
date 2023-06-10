@@ -1,6 +1,6 @@
 
 
-val foo: Pair<List<Int>, String> = null!!
+konst foo: Pair<List<Int>, String> = null!!
 /*
 psi: Pair<List<Int>, String>
 type: Pair<List<Int>, String>

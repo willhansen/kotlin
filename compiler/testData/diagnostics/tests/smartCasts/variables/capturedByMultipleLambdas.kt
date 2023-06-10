@@ -14,13 +14,13 @@ fun test() {
     var s: String? = <!VARIABLE_WITH_REDUNDANT_INITIALIZER!>null<!>
     s = ""
     foo(
-        { <!SMARTCAST_IMPOSSIBLE!>s<!>.length }, // unstable since lambda evaluation order is indeterministic
+        { <!SMARTCAST_IMPOSSIBLE!>s<!>.length }, // unstable since lambda ekonstuation order is indeterministic
         { s = null },
     )
     s = ""
     foo(
         { s = null },
-        { <!SMARTCAST_IMPOSSIBLE!>s<!>.length }, // unstable since lambda evaluation order is indeterministic
+        { <!SMARTCAST_IMPOSSIBLE!>s<!>.length }, // unstable since lambda ekonstuation order is indeterministic
     )
     s = ""
     foo(

@@ -4,26 +4,26 @@
 // FILE: lib.kt
 package lib
 
-val foo = 23
+konst foo = 23
 
-val boo: Int
+konst boo: Int
     get() = 42
 
-external val bar: Int = definedExternally
+external konst bar: Int = definedExternally
 
-external val far: Int
+external konst far: Int
     get() = definedExternally
 
 // TODO: annotations like this are not serialized properly. Uncomment after KT-14529 gets fixed
 /*
-val fuzz: Int
+konst fuzz: Int
     @JsName("getBuzz") get() = 55
     */
 
 inline fun fetchFoo() = foo
 
 @JsName("fee")
-val tee = 2525
+konst tee = 2525
 
 // FILE: lib.js
 

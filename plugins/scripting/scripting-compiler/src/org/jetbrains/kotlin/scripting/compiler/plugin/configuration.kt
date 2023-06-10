@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.scripting.definitions.loadScriptTemplatesFromClasspa
 import kotlin.script.experimental.host.ScriptingHostConfiguration
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 
-const val KOTLIN_SCRIPTING_PLUGIN_ID = "kotlin.scripting"
+const konst KOTLIN_SCRIPTING_PLUGIN_ID = "kotlin.scripting"
 
 fun configureScriptDefinitions(
     scriptTemplates: List<String>,
@@ -25,7 +25,7 @@ fun configureScriptDefinitions(
     hostConfiguration: ScriptingHostConfiguration
 ) {
     // TODO: consider using escaping to allow kotlin escaped names in class names
-    val templatesFromClasspath = loadScriptTemplatesFromClasspath(
+    konst templatesFromClasspath = loadScriptTemplatesFromClasspath(
         scriptTemplates, configuration.jvmClasspathRoots, emptyList(), baseClassloader, hostConfiguration, messageCollector.reporter
     )
     configuration.addAll(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS, templatesFromClasspath.toList())

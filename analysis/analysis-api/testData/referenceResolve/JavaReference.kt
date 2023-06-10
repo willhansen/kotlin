@@ -1,1 +1,1 @@
-val h: java.util.<caret>HashSet<Int>? = null
+konst h: java.util.<caret>HashSet<Int>? = null

@@ -7,7 +7,7 @@ class Word : Acceptor<Visitor<Word>>
 
 class V : Visitor<Word>
 
-class S<T : Acceptor<U>, U : Visitor<T>>(val visitor: U, val acceptor: T) {
+class S<T : Acceptor<U>, U : Visitor<T>>(konst visitor: U, konst acceptor: T) {
     fun test() {
         visitor is V
         acceptor is Word

@@ -5,7 +5,7 @@ import O.d
 enum class E { X }
 
 object O {
-    val E.d: Delegate get() = Delegate()
+    konst E.d: Delegate get() = Delegate()
 }
 
 class Delegate {
@@ -13,6 +13,6 @@ class Delegate {
         if (thisRef == null) "OK" else "Failed"
 }
 
-val result by E.X.d
+konst result by E.X.d
 
 fun box(): String = result

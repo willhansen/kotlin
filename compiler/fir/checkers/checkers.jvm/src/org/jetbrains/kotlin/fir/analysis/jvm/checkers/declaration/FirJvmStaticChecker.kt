@@ -41,7 +41,7 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
             return
         }
 
-        val declarationAnnotation = declaration.findAnnotation(StandardClassIds.Annotations.JvmStatic)
+        konst declarationAnnotation = declaration.findAnnotation(StandardClassIds.Annotations.JvmStatic)
 
         if (declarationAnnotation != null) {
             checkAnnotated(declaration, context, reporter, declaration.source)
@@ -51,7 +51,7 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
             if (!it.hasAnnotation(StandardClassIds.Annotations.JvmStatic, context.session)) {
                 return
             }
-            val targetSource = it.source ?: declaration.source
+            konst targetSource = it.source ?: declaration.source
             checkAnnotated(it, context, reporter, targetSource, declaration as? FirProperty)
         }
 
@@ -72,9 +72,9 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
             return
         }
 
-        val container = context.getContainerAt(0) ?: return
-        val supportsJvmStaticInInterface = context.supports(LanguageFeature.JvmStaticInInterface)
-        val containerIsAnonymous = container.classId.shortClassName == SpecialNames.ANONYMOUS
+        konst container = context.getContainerAt(0) ?: return
+        konst supportsJvmStaticInInterface = context.supports(LanguageFeature.JvmStaticInInterface)
+        konst containerIsAnonymous = container.classId.shortClassName == SpecialNames.ANONYMOUS
 
         if (
             container.classKind != ClassKind.OBJECT ||
@@ -102,7 +102,7 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
         supportsJvmStaticInInterface: Boolean,
         targetSource: KtSourceElement?,
     ) {
-        val properDiagnostic = if (supportsJvmStaticInInterface) {
+        konst properDiagnostic = if (supportsJvmStaticInInterface) {
             FirJvmErrors.JVM_STATIC_NOT_IN_OBJECT_OR_COMPANION
         } else {
             FirJvmErrors.JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION
@@ -121,13 +121,13 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
             return
         }
 
-        val visibility = if (declaration is FirProperty) {
+        konst visibility = if (declaration is FirProperty) {
             declaration.getMinimumVisibility()
         } else {
             declaration.visibility
         }
 
-        val isExternal = if (declaration is FirProperty) {
+        konst isExternal = if (declaration is FirProperty) {
             declaration.hasExternalParts()
         } else {
             declaration.isExternal
@@ -169,7 +169,7 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
     }
 
     private fun chooseMostSpecific(a: Visibility, b: Visibility): Visibility {
-        val difference = a.compareTo(b) ?: return a
+        konst difference = a.compareTo(b) ?: return a
         return if (difference > 0) {
             b
         } else {
@@ -184,7 +184,7 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
         targetSource: KtSourceElement?,
         outerProperty: FirProperty? = null,
     ) {
-        val isOverride = outerProperty?.isOverride ?: declaration.isOverride
+        konst isOverride = outerProperty?.isOverride ?: declaration.isOverride
 
         if (!isOverride || !context.containerIsNonCompanionObject(0)) {
             return
@@ -210,21 +210,21 @@ object FirJvmStaticChecker : FirBasicDeclarationChecker() {
     }
 
     private fun CheckerContext.containerIsNonCompanionObject(outerLevel: Int): Boolean {
-        val containingClassSymbol = this.getContainerAt(outerLevel) ?: return false
+        konst containingClassSymbol = this.getContainerAt(outerLevel) ?: return false
 
         @OptIn(SymbolInternals::class)
-        val containingClass = (containingClassSymbol.fir as? FirRegularClass) ?: return false
+        konst containingClass = (containingClassSymbol.fir as? FirRegularClass) ?: return false
 
         return containingClass.classKind == ClassKind.OBJECT && !containingClass.isCompanion
     }
 
     private fun CheckerContext.getContainerAt(outerLevel: Int): FirClassLikeSymbol<*>? {
-        val correction = if (this.containingDeclarations.lastOrNull() is FirProperty) {
+        konst correction = if (this.containingDeclarations.lastOrNull() is FirProperty) {
             1
         } else {
             0
         }
-        val last = this.containingDeclarations.asReversed().getOrNull(outerLevel + correction)
+        konst last = this.containingDeclarations.asReversed().getOrNull(outerLevel + correction)
         return if (last is FirClassLikeDeclaration) {
             last.symbol
         } else {

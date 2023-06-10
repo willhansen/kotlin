@@ -36,29 +36,29 @@ import org.jetbrains.kotlin.types.TypeAttributeTranslator
 import org.jetbrains.kotlin.types.checker.NewKotlinTypeChecker
 
 class DeserializationComponents(
-    val storageManager: StorageManager,
-    val moduleDescriptor: ModuleDescriptor,
-    val configuration: DeserializationConfiguration,
-    val classDataFinder: ClassDataFinder,
-    val annotationAndConstantLoader: AnnotationAndConstantLoader<AnnotationDescriptor, ConstantValue<*>>,
-    val packageFragmentProvider: PackageFragmentProvider,
-    val localClassifierTypeSettings: LocalClassifierTypeSettings,
-    val errorReporter: ErrorReporter,
-    val lookupTracker: LookupTracker,
-    val flexibleTypeDeserializer: FlexibleTypeDeserializer,
-    val fictitiousClassDescriptorFactories: Iterable<ClassDescriptorFactory>,
-    val notFoundClasses: NotFoundClasses,
-    val contractDeserializer: ContractDeserializer,
-    val additionalClassPartsProvider: AdditionalClassPartsProvider = AdditionalClassPartsProvider.None,
-    val platformDependentDeclarationFilter: PlatformDependentDeclarationFilter = PlatformDependentDeclarationFilter.All,
-    val extensionRegistryLite: ExtensionRegistryLite,
-    val kotlinTypeChecker: NewKotlinTypeChecker = NewKotlinTypeChecker.Default,
-    val samConversionResolver: SamConversionResolver,
-    val platformDependentTypeTransformer: PlatformDependentTypeTransformer = PlatformDependentTypeTransformer.None,
-    val typeAttributeTranslators: List<TypeAttributeTranslator> = listOf(DefaultTypeAttributeTranslator),
-    val enumEntriesDeserializationSupport: EnumEntriesDeserializationSupport = EnumEntriesDeserializationSupport.Default,
+    konst storageManager: StorageManager,
+    konst moduleDescriptor: ModuleDescriptor,
+    konst configuration: DeserializationConfiguration,
+    konst classDataFinder: ClassDataFinder,
+    konst annotationAndConstantLoader: AnnotationAndConstantLoader<AnnotationDescriptor, ConstantValue<*>>,
+    konst packageFragmentProvider: PackageFragmentProvider,
+    konst localClassifierTypeSettings: LocalClassifierTypeSettings,
+    konst errorReporter: ErrorReporter,
+    konst lookupTracker: LookupTracker,
+    konst flexibleTypeDeserializer: FlexibleTypeDeserializer,
+    konst fictitiousClassDescriptorFactories: Iterable<ClassDescriptorFactory>,
+    konst notFoundClasses: NotFoundClasses,
+    konst contractDeserializer: ContractDeserializer,
+    konst additionalClassPartsProvider: AdditionalClassPartsProvider = AdditionalClassPartsProvider.None,
+    konst platformDependentDeclarationFilter: PlatformDependentDeclarationFilter = PlatformDependentDeclarationFilter.All,
+    konst extensionRegistryLite: ExtensionRegistryLite,
+    konst kotlinTypeChecker: NewKotlinTypeChecker = NewKotlinTypeChecker.Default,
+    konst samConversionResolver: SamConversionResolver,
+    konst platformDependentTypeTransformer: PlatformDependentTypeTransformer = PlatformDependentTypeTransformer.None,
+    konst typeAttributeTranslators: List<TypeAttributeTranslator> = listOf(DefaultTypeAttributeTranslator),
+    konst enumEntriesDeserializationSupport: EnumEntriesDeserializationSupport = EnumEntriesDeserializationSupport.Default,
 ) {
-    val classDeserializer: ClassDeserializer = ClassDeserializer(this)
+    konst classDeserializer: ClassDeserializer = ClassDeserializer(this)
 
     fun deserializeClass(classId: ClassId): ClassDescriptor? = classDeserializer.deserializeClass(classId)
 
@@ -78,25 +78,25 @@ class DeserializationComponents(
 
 
 class DeserializationContext(
-    val components: DeserializationComponents,
-    val nameResolver: NameResolver,
-    val containingDeclaration: DeclarationDescriptor,
-    val typeTable: TypeTable,
-    val versionRequirementTable: VersionRequirementTable,
-    val metadataVersion: BinaryVersion,
-    val containerSource: DeserializedContainerSource?,
+    konst components: DeserializationComponents,
+    konst nameResolver: NameResolver,
+    konst containingDeclaration: DeclarationDescriptor,
+    konst typeTable: TypeTable,
+    konst versionRequirementTable: VersionRequirementTable,
+    konst metadataVersion: BinaryVersion,
+    konst containerSource: DeserializedContainerSource?,
     parentTypeDeserializer: TypeDeserializer?,
     typeParameters: List<ProtoBuf.TypeParameter>
 ) {
-    val typeDeserializer: TypeDeserializer = TypeDeserializer(
+    konst typeDeserializer: TypeDeserializer = TypeDeserializer(
         this, parentTypeDeserializer, typeParameters,
         "Deserializer for \"${containingDeclaration.name}\"",
         containerSource?.presentableString ?: "[container not found]"
     )
 
-    val memberDeserializer: MemberDeserializer = MemberDeserializer(this)
+    konst memberDeserializer: MemberDeserializer = MemberDeserializer(this)
 
-    val storageManager: StorageManager get() = components.storageManager
+    konst storageManager: StorageManager get() = components.storageManager
 
     fun childContext(
         descriptor: DeclarationDescriptor,

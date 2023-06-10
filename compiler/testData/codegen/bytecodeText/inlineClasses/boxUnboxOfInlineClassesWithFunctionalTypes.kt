@@ -1,15 +1,15 @@
 // !LANGUAGE: +InlineClasses
 
-inline class UInt(val value: Int)
-inline class ULong(val value: Long)
+inline class UInt(konst konstue: Int)
+inline class ULong(konst konstue: Long)
 
 fun foo(u: UInt, f: (UInt) -> ULong): ULong = f(u)
 
 fun takeUInt(u: UInt) {}
 
 fun test() {
-    val u = UInt(0)
-    val l = foo(u) { // box unbox UInt
+    konst u = UInt(0)
+    konst l = foo(u) { // box unbox UInt
         takeUInt(it)
 
         ULong(0) // box ULong
@@ -23,6 +23,6 @@ fun test() {
 // 1 INVOKESTATIC ULong\.box
 // 2 INVOKEVIRTUAL ULong.unbox
 
-// 0 valueOf
+// 0 konstueOf
 // 0 intValue
 // 0 longValue

@@ -76,7 +76,7 @@ class KRaw : JRaw {
     return <this>.#$$delegate_0.returnsRawGenericOut() /*!! @RawType GenericOut<Number> */
   }
 
-  private /* final field */ val $$delegate_0: JRaw = j
+  private /* final field */ konst $$delegate_0: JRaw = j
 
 }
 

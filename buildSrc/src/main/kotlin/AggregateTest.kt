@@ -40,8 +40,8 @@ open class AggregateTest : Test() { // Inherit from Test to see test results in 
             .asSequence()
             .filter { it.isNotEmpty() }
             .forEach { line ->
-                // patternType is exclude or include value
-                val (pattern, patternType) = line.split(',').map { it.trim() }
+                // patternType is exclude or include konstue
+                konst (pattern, patternType) = line.split(',').map { it.trim() }
                 patterns.getOrPut(patternType) { mutableListOf() }.add(pattern)
             }
     }

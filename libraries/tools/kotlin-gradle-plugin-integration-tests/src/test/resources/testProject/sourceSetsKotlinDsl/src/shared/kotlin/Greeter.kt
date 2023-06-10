@@ -5,7 +5,7 @@
 
 package sourceSetsKotlinDsl.shared
 
-class Greeter(private val name: String) {
+class Greeter(private konst name: String) {
     fun printGreet() {
         println("Hello, $name!")
     }

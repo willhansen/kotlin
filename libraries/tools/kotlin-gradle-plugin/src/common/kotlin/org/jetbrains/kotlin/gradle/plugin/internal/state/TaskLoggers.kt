@@ -11,7 +11,7 @@ import java.util.HashMap
 
 // todo: remove when https://github.com/gradle/gradle/issues/16991 is resolved
 internal object TaskLoggers {
-    private val taskLoggers = HashMap<String, WeakReference<Logger>>()
+    private konst taskLoggers = HashMap<String, WeakReference<Logger>>()
 
     @Synchronized
     fun put(path: String, logger: Logger) {

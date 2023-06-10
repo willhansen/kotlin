@@ -12,7 +12,7 @@ package foo.bar
     /*p:foo.bar(A)*/a /*c:foo.bar.A(minus) p:foo.bar(minus)*/- /*p:kotlin(Int)*/b
     /*c:foo.bar.A(not) p:foo.bar(not)*/!/*p:foo.bar(A)*/a
 
-    // for val
+    // for konst
     /*p:foo.bar(A)*/a /*c:foo.bar.A(timesAssign)*/*= /*p:kotlin(Int)*/b
     /*p:foo.bar(A)*/a /*c:foo.bar.A(divAssign) p:foo.bar(divAssign)*//= /*p:kotlin(Int)*/b
 

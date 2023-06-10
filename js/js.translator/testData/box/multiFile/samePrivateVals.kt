@@ -1,15 +1,15 @@
 // FILE: file1.kt
 package foo
 
-private val jsObject: dynamic = js("{str: 'File1Str'}")
-private val fileString: String = jsObject.str
+private konst jsObject: dynamic = js("{str: 'File1Str'}")
+private konst fileString: String = jsObject.str
 fun file1Fun() = fileString
 
 // FILE: file2.kt
 package foo
 
-private val jsObject: dynamic = js("{str: 'File2Str'}")
-private val fileString: String = jsObject.str
+private konst jsObject: dynamic = js("{str: 'File2Str'}")
+private konst fileString: String = jsObject.str
 fun file2Fun() = fileString
 
 // FILE: box.kt

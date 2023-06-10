@@ -15,7 +15,7 @@ import kotlin.io.path.exists
 @DisplayName("Compiler plugin incremental compilation")
 @OtherGradlePluginTests
 open class CompilerPluginsIncrementalIT : KGPBaseTest() {
-    override val defaultBuildOptions: BuildOptions
+    override konst defaultBuildOptions: BuildOptions
         get() = super.defaultBuildOptions.copy(
             incremental = true
         )
@@ -27,10 +27,10 @@ open class CompilerPluginsIncrementalIT : KGPBaseTest() {
         project("incrementalChangeInPlugin".prefix, gradleVersion) {
             build("assemble")
 
-            val genDir = subProject("library").projectPath.resolve("build/sample-dir/plugin/test/gen")
+            konst genDir = subProject("library").projectPath.resolve("build/sample-dir/plugin/test/gen")
             assert(genDir.exists()) { "$genDir does not exists!" }
 
-            val generatedFiles = genDir.toFile()
+            konst generatedFiles = genDir.toFile()
                 .walkTopDown()
                 .asSequence()
                 .filterNot { it.isDirectory }
@@ -66,10 +66,10 @@ open class CompilerPluginsIncrementalIT : KGPBaseTest() {
         }
     }
 
-    private val String.prefix get() = "compilerPlugins/$this"
+    private konst String.prefix get() = "compilerPlugins/$this"
 }
 
 @DisplayName("Compiler plugin incremental compilation with precise compilation outputs backup")
 class CompilerPluginsIncrementalWithPreciseBackupIT : CompilerPluginsIncrementalIT() {
-    override val defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
+    override konst defaultBuildOptions = super.defaultBuildOptions.copy(usePreciseOutputsBackup = true, keepIncrementalCompilationCachesInMemory = true)
 }

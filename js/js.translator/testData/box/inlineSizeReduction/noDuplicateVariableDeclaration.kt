@@ -5,7 +5,7 @@ package foo
 // CHECK_VARS_COUNT: function=test count=3 TARGET_BACKENDS=JS
 
 inline fun if1(f: (Int) -> Int, a: Int, b: Int, c: Int): Int {
-    val result = f(a)
+    konst result = f(a)
 
     if (result == b) {
         return f(a)
@@ -15,7 +15,7 @@ inline fun if1(f: (Int) -> Int, a: Int, b: Int, c: Int): Int {
 }
 
 fun test(x: Int): Int {
-    val test1 = if1({ it }, x, 2, 3)
+    konst test1 = if1({ it }, x, 2, 3)
     return test1
 }
 

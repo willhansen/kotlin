@@ -6,11 +6,11 @@ fun <T> id(x: T): T = x
 fun <T> baz(x: T, y: T): T = TODO()
 
 fun test() {
-    val x1: (Int) -> Unit = id(id(::foo))
-    val x2: (Int) -> Unit = baz(id(::foo), ::foo)
-    val x3: (Int) -> Unit = baz(id(::foo), id(id(::foo)))
-    val x4: (String) -> Unit = baz(id(::foo), id(id(::foo)))
-    val x5: (Double) -> Unit = baz(id(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>), id(id(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>)))
+    konst x1: (Int) -> Unit = id(id(::foo))
+    konst x2: (Int) -> Unit = baz(id(::foo), ::foo)
+    konst x3: (Int) -> Unit = baz(id(::foo), id(id(::foo)))
+    konst x4: (String) -> Unit = baz(id(::foo), id(id(::foo)))
+    konst x5: (Double) -> Unit = baz(id(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>), id(id(::<!CALLABLE_REFERENCE_RESOLUTION_AMBIGUITY!>foo<!>)))
 
 
     id<(Int) -> Unit>(id(id(::foo)))

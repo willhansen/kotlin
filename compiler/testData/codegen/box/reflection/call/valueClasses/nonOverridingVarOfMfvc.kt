@@ -7,61 +7,61 @@ import kotlin.test.assertEquals
 var global = Z(0U, 0)
 
 @JvmInline
-value class Z(val x1: UInt, val x2: Int) {
+konstue class Z(konst x1: UInt, konst x2: Int) {
     var nonNullTest: Z
         get() = Z(global.x1 + this.x1, global.x2 + this.x2)
-        set(value) {
-            global = Z(this.x1 + value.x1, this.x2 + value.x2)
+        set(konstue) {
+            global = Z(this.x1 + konstue.x1, this.x2 + konstue.x2)
         }
 
     var nullableTest: Z?
         get() = Z(global.x1 + this.x1, global.x2 + this.x2)
-        set(value) {
-            global = Z(this.x1 + value!!.x1, this.x2 + value!!.x2)
+        set(konstue) {
+            global = Z(this.x1 + konstue!!.x1, this.x2 + konstue!!.x2)
         }
 }
 
 @JvmInline
-value class S(val x1: String, val x2: String) {
+konstue class S(konst x1: String, konst x2: String) {
     var nonNullTest: Z
         get() = Z(global.x1 + x1.toUInt(), global.x2 + x2.toInt())
-        set(value) {
-            global = Z(this.x1.toUInt() + value.x1, this.x2.toInt() + value.x2)
+        set(konstue) {
+            global = Z(this.x1.toUInt() + konstue.x1, this.x2.toInt() + konstue.x2)
         }
 
     var nullableTest: Z?
         get() = Z(global.x1 + x1.toUInt(), global.x2 + x2.toInt())
-        set(value) {
-            global = Z(this.x1.toUInt() + value!!.x1, this.x2.toInt() + value!!.x2)
+        set(konstue) {
+            global = Z(this.x1.toUInt() + konstue!!.x1, this.x2.toInt() + konstue!!.x2)
         }
 }
 
 @JvmInline
-value class A(val x1: Any, val x2: Any) {
+konstue class A(konst x1: Any, konst x2: Any) {
     var nonNullTest: Z
         get() = Z(global.x1 + this.x1 as UInt, global.x2 + this.x2 as Int)
-        set(value) {
-            global = Z(this.x1 as UInt + value.x1, this.x2 as Int + value.x2)
+        set(konstue) {
+            global = Z(this.x1 as UInt + konstue.x1, this.x2 as Int + konstue.x2)
         }
 
     var nullableTest: Z?
         get() = Z(global.x1 + this.x1 as UInt, global.x2 + this.x2 as Int)
-        set(value) {
-            global = Z(this.x1 as UInt + value!!.x1, this.x2 as Int + value!!.x2)
+        set(konstue) {
+            global = Z(this.x1 as UInt + konstue!!.x1, this.x2 as Int + konstue!!.x2)
         }
 
 }
 
 fun box(): String {
-    val zZero = Z(0U, 0)
-    val zOne = Z(1U, -1)
-    val zTwo = Z(2U, -2)
-    val zThree = Z(3U, -3)
-    val zFour = Z(4U, -4)
+    konst zZero = Z(0U, 0)
+    konst zOne = Z(1U, -1)
+    konst zTwo = Z(2U, -2)
+    konst zThree = Z(3U, -3)
+    konst zFour = Z(4U, -4)
 
-    val sOne = S("1", "-1")
+    konst sOne = S("1", "-1")
 
-    val aOne = A(1U, -1)
+    konst aOne = A(1U, -1)
 
     global = zZero
     assertEquals(zOne, Z::nonNullTest.call(zOne))

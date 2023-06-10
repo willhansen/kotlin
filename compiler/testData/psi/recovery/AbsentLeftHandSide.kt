@@ -3,7 +3,7 @@ fun import() {
 }
 
 fun composite() {
-    val s = 13+~/12
+    konst s = 13+~/12
 }
 
 fun html() {

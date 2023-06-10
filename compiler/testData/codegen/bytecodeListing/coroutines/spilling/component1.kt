@@ -14,6 +14,6 @@ fun test() {
     use {
         // This component1 accesses both dispatch and extension receivers,
         // So, there should be p$
-        val (value) = generate()
+        konst (konstue) = generate()
     }
 }

@@ -180,7 +180,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
         KotlinTypeInfo typeInfo = callExpressionResolver.getSimpleNameExpressionTypeInfo(expression, null, null, context);
         checkNull(expression, context, typeInfo.getType());
 
-        components.constantExpressionEvaluator.evaluateExpression(
+        components.constantExpressionEkonstuator.ekonstuateExpression(
                 expression, context.trace, context.expectedType
         );
         return components.dataFlowAnalyzer.checkType(typeInfo, expression, context); // TODO : Extensions to this
@@ -216,15 +216,15 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             checkUnderscores(expression, elementType, context);
         }
 
-        CompileTimeConstant<?> compileTimeConstant = components.constantExpressionEvaluator.evaluateExpression(
+        CompileTimeConstant<?> compileTimeConstant = components.constantExpressionEkonstuator.ekonstuateExpression(
                 expression, context.trace, context.expectedType
         );
 
         if (compileTimeConstant instanceof UnsignedErrorValueTypeConstant) {
-            ErrorValue.ErrorValueWithMessage value = ((UnsignedErrorValueTypeConstant) compileTimeConstant).getErrorValue();
+            ErrorValue.ErrorValueWithMessage konstue = ((UnsignedErrorValueTypeConstant) compileTimeConstant).getErrorValue();
             context.trace.report(Errors.UNSIGNED_LITERAL_WITHOUT_DECLARATIONS_ON_CLASSPATH.on(expression));
 
-            return TypeInfoFactoryKt.createTypeInfo(value.getType(components.moduleDescriptor), context);
+            return TypeInfoFactoryKt.createTypeInfo(konstue.getType(components.moduleDescriptor), context);
         }
         else if (!(compileTimeConstant instanceof IntegerValueTypeConstant)) {
             CompileTimeConstantChecker constantChecker = new CompileTimeConstantChecker(context, components.moduleDescriptor, false);
@@ -240,7 +240,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
         }
 
         assert compileTimeConstant != null :
-                "CompileTimeConstant should be evaluated for constant expression or an error should be recorded " +
+                "CompileTimeConstant should be ekonstuated for constant expression or an error should be recorded " +
                 expression.getText();
         return components.dataFlowAnalyzer.createCompileTimeConstantTypeInfo(compileTimeConstant, expression, context);
     }
@@ -318,8 +318,8 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             checkBinaryWithTypeRHS(expression, context, targetType, subjectType);
             DataFlowInfo dataFlowInfo = typeInfo.getDataFlowInfo();
             if (operationType == AS_KEYWORD) {
-                DataFlowValue value = components.dataFlowValueFactory.createDataFlowValue(left, subjectType, context);
-                typeInfo = typeInfo.replaceDataFlowInfo(dataFlowInfo.establishSubtyping(value, targetType,
+                DataFlowValue konstue = components.dataFlowValueFactory.createDataFlowValue(left, subjectType, context);
+                typeInfo = typeInfo.replaceDataFlowInfo(dataFlowInfo.establishSubtyping(konstue, targetType,
                                                                                         components.languageVersionSettings));
             }
         }
@@ -499,9 +499,9 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
                 }
             }
 
-            boolean validClassifier = classifierCandidate != null && !ErrorUtils.isError(classifierCandidate);
-            boolean validType = supertype != null && !KotlinTypeKt.isError(supertype);
-            if (result == null && (validClassifier || validType)) {
+            boolean konstidClassifier = classifierCandidate != null && !ErrorUtils.isError(classifierCandidate);
+            boolean konstidType = supertype != null && !KotlinTypeKt.isError(supertype);
+            if (result == null && (konstidClassifier || konstidType)) {
                 context.trace.report(NOT_A_SUPERTYPE.on(superTypeQualifier));
             }
             else if (redundantTypeArguments != null) {
@@ -510,7 +510,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
 
             if (!components.languageVersionSettings.supportsFeature(LanguageFeature.QualifiedSupertypeMayBeExtendedByOtherSupertype) &&
                 result != null &&
-                (validClassifier || validType)
+                (konstidClassifier || konstidType)
             ) {
                 checkResolvedExplicitlyQualifiedSupertype(context.trace, result, supertypes, superTypeQualifier);
             }
@@ -818,7 +818,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
                 }
                 else {
                     result = receiverType;
-                    // Also record data flow information for x++ value (= x)
+                    // Also record data flow information for x++ konstue (= x)
                     DataFlowValue returnValue = components.dataFlowValueFactory.createDataFlowValue(expression, receiverType, contextWithExpectedType);
                     typeInfo = typeInfo.replaceDataFlowInfo(typeInfo.getDataFlowInfo().assign(returnValue, receiverValue,
                                                                                               components.languageVersionSettings));
@@ -829,11 +829,11 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             result = returnType;
         }
 
-        CompileTimeConstant<?> value = components.constantExpressionEvaluator.evaluateExpression(
+        CompileTimeConstant<?> konstue = components.constantExpressionEkonstuator.ekonstuateExpression(
                 expression, contextWithExpectedType.trace, contextWithExpectedType.expectedType
         );
-        if (value != null) {
-            return components.dataFlowAnalyzer.createCompileTimeConstantTypeInfo(value, expression, contextWithExpectedType);
+        if (konstue != null) {
+            return components.dataFlowAnalyzer.createCompileTimeConstantTypeInfo(konstue, expression, contextWithExpectedType);
         }
 
         return components.dataFlowAnalyzer.checkType(typeInfo.replaceType(result),
@@ -875,8 +875,8 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             context.trace.report(UNNECESSARY_NOT_NULL_ASSERTION.on(operationSign, TypeUtils.makeNotNullable(baseType)));
         }
         else {
-            DataFlowValue value = components.dataFlowValueFactory.createDataFlowValue(baseExpression, baseType, context);
-            baseTypeInfo = baseTypeInfo.replaceDataFlowInfo(dataFlowInfo.disequate(value, DataFlowValue.nullValue(components.builtIns),
+            DataFlowValue konstue = components.dataFlowValueFactory.createDataFlowValue(baseExpression, baseType, context);
+            baseTypeInfo = baseTypeInfo.replaceDataFlowInfo(dataFlowInfo.disequate(konstue, DataFlowValue.nullValue(components.builtIns),
                                                                                    components.languageVersionSettings));
         }
         KotlinType resultingType = components.languageVersionSettings.supportsFeature(LanguageFeature.NewInference)
@@ -970,7 +970,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
                     || operationType == KtTokens.PLUSPLUS || operationType == KtTokens.MINUSMINUS) {
                 ResolvedCall<FunctionDescriptor> resolvedCall = traceWithIndexedLValue.get(INDEXED_LVALUE_SET, expression);
                 if (resolvedCall != null && trace.wantsDiagnostics()) {
-                    // Call must be validated with the actual, not temporary trace in order to report operator diagnostic
+                    // Call must be konstidated with the actual, not temporary trace in order to report operator diagnostic
                     // Only unary assignment expressions (++, --) and +=/... must be checked, normal assignments have the proper trace
                     CallCheckerContext callCheckerContext =
                             new CallCheckerContext(
@@ -1125,11 +1125,11 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             context.trace.report(UNSUPPORTED.on(operationSign, "Unknown operation"));
             result = TypeInfoFactoryKt.noTypeInfo(context);
         }
-        CompileTimeConstant<?> value = components.constantExpressionEvaluator.evaluateExpression(
+        CompileTimeConstant<?> konstue = components.constantExpressionEkonstuator.ekonstuateExpression(
                 expression, contextWithExpectedType.trace, contextWithExpectedType.expectedType
         );
-        if (value != null) {
-            return components.dataFlowAnalyzer.createCompileTimeConstantTypeInfo(value, expression, contextWithExpectedType);
+        if (konstue != null) {
+            return components.dataFlowAnalyzer.createCompileTimeConstantTypeInfo(konstue, expression, contextWithExpectedType);
         }
         return components.dataFlowAnalyzer.checkType(result, expression, contextWithExpectedType);
     }
@@ -1233,8 +1233,8 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
             if (ErrorUtils.isError(descriptor)) return true;
 
             if (descriptor.getValueParameters().size() != 1) return false;
-            ValueParameterDescriptor valueParameter = descriptor.getValueParameters().get(0);
-            return KotlinBuiltIns.isNullableAny(valueParameter.getType());
+            ValueParameterDescriptor konstueParameter = descriptor.getValueParameters().get(0);
+            return KotlinBuiltIns.isNullableAny(konstueParameter.getType());
         });
     }
 
@@ -1590,9 +1590,9 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
 
             @Override
             public void visitEscapeStringTemplateEntry(@NotNull KtEscapeStringTemplateEntry entry) {
-                CompileTimeConstantChecker.CharacterWithDiagnostic value =
+                CompileTimeConstantChecker.CharacterWithDiagnostic konstue =
                         CompileTimeConstantChecker.escapedStringToCharacter(entry.getText(), entry);
-                Diagnostic diagnostic = value.getDiagnostic();
+                Diagnostic diagnostic = konstue.getDiagnostic();
                 if (diagnostic != null) {
                     context.trace.report(diagnostic);
                 }
@@ -1602,7 +1602,7 @@ public class BasicExpressionTypingVisitor extends ExpressionTypingVisitor {
         for (KtStringTemplateEntry entry : expression.getEntries()) {
             entry.accept(visitor);
         }
-        components.constantExpressionEvaluator.evaluateExpression(expression, context.trace, contextWithExpectedType.expectedType);
+        components.constantExpressionEkonstuator.ekonstuateExpression(expression, context.trace, contextWithExpectedType.expectedType);
         return components.dataFlowAnalyzer.checkType(visitor.typeInfo.replaceType(components.builtIns.getStringType()),
                                                      expression,
                                                      contextWithExpectedType);

@@ -14,16 +14,16 @@ class UIntTest {
     private fun identity(u: UInt): UInt =
         (u.toInt() + 0).toUInt()
 
-    val zero = 0u
-    val one = 1u
-    val max = UInt.MAX_VALUE
+    konst zero = 0u
+    konst one = 1u
+    konst max = UInt.MAX_VALUE
 
     @Test
     fun equality() {
 
         fun testEqual(uv1: UInt, uv2: UInt) {
-            assertEquals(uv1, uv2, "Boxed values should be equal")
-            assertTrue(uv1.equals(uv2), "Boxed values should be equal: $uv1, $uv2")
+            assertEquals(uv1, uv2, "Boxed konstues should be equal")
+            assertTrue(uv1.equals(uv2), "Boxed konstues should be equal: $uv1, $uv2")
             assertTrue(uv1 == uv2, "Values should be equal: $uv1, $uv2")
             assertEquals(uv1.hashCode(), uv2.hashCode())
             assertEquals((uv1 as Any).hashCode(), (uv2 as Any).hashCode())
@@ -35,7 +35,7 @@ class UIntTest {
         testEqual(max, identity(max))
 
         fun testNotEqual(uv1: UInt, uv2: UInt) {
-            assertNotEquals(uv1, uv2, "Boxed values should be equal")
+            assertNotEquals(uv1, uv2, "Boxed konstues should be equal")
             assertTrue(uv1 != uv2, "Values should be not equal: $uv1, $uv2")
             assertNotEquals(uv1.toString(), uv2.toString())
             assertNotEquals((uv1 as Any).toString(), (uv2 as Any).toString())
@@ -54,12 +54,12 @@ class UIntTest {
         }
 
         repeat(100) {
-            val v = Random.nextBits(UInt.SIZE_BITS - 1)
+            konst v = Random.nextBits(UInt.SIZE_BITS - 1)
             testToString(v.toString(), v.toUInt())
         }
 
         repeat(100) {
-            val v = Random.nextInt(294967295 + 1)
+            konst v = Random.nextInt(294967295 + 1)
             testToString("4${v.toString().padStart(9, '0')}", (2_000_000_000.toUInt() * 2.toUInt() + v.toUInt()))
         }
 
@@ -97,8 +97,8 @@ class UIntTest {
 
     @Test
     fun divRem() = repeat(1000) {
-        val number = Random.nextUInt()
-        val divisor = Random.nextUInt(until = UInt.MAX_VALUE) + 1u
+        konst number = Random.nextUInt()
+        konst divisor = Random.nextUInt(until = UInt.MAX_VALUE) + 1u
         testMulDivRem(number, divisor, number / divisor, number % divisor)
     }
 
@@ -107,7 +107,7 @@ class UIntTest {
         fun <T> compare(op1: Comparable<T>, op2: T) = op1.compareTo(op2)
 
         fun testComparison(uv1: UInt, uv2: UInt, expected: Int) {
-            val desc = "${uv1.toString()}, ${uv2.toString()}"
+            konst desc = "${uv1.toString()}, ${uv2.toString()}"
             assertEquals(expected, uv1.compareTo(uv2).sign, "compareTo: $desc")
             assertEquals(expected, (uv1 as Comparable<UInt>).compareTo(uv2).sign, "Comparable.compareTo: $desc")
             assertEquals(expected, compare(uv1, uv2).sign, "Generic compareTo: $desc")
@@ -144,7 +144,7 @@ class UIntTest {
         testEquals(0xFFFF_FFFF.toFloat(), max)
 
         repeat(100) {
-            val long = Random.nextLong(0, 0xFFFF_FFFF)
+            konst long = Random.nextLong(0, 0xFFFF_FFFF)
             testEquals(long.toFloat(), long.toUInt())
         }
     }
@@ -158,16 +158,16 @@ class UIntTest {
         testEquals(max.toLong().toDouble(), max)
 
         repeat(100) {
-            val long = Random.nextLong(0, max.toLong())
+            konst long = Random.nextLong(0, max.toLong())
             testEquals(long.toDouble(), long.toUInt())
         }
 
         fun testRounding(from: UInt, count: UInt) {
             for (x in from..(from + count)) {
-                val double = x.toDouble()
-                val v = double.toUInt()
-                val down = double.nextDown().toUInt()
-                val up = double.nextUp().toUInt()
+                konst double = x.toDouble()
+                konst v = double.toUInt()
+                konst down = double.nextDown().toUInt()
+                konst up = double.nextUp().toUInt()
 
                 assertTrue(down <= x && down <= v)
                 assertTrue(up >= x && up >= v)
@@ -208,17 +208,17 @@ class UIntTest {
         testEquals(Double.POSITIVE_INFINITY, max)
 
         repeat(100) {
-            val v = -Random.nextDouble(until = 2.0.pow(UInt.SIZE_BITS + 8))
+            konst v = -Random.nextDouble(until = 2.0.pow(UInt.SIZE_BITS + 8))
             testEquals(v, zero)
         }
 
         repeat(100) {
-            val v = Random.nextDouble(from = max.toDouble(), until = 2.0.pow(UInt.SIZE_BITS + 8))
+            konst v = Random.nextDouble(from = max.toDouble(), until = 2.0.pow(UInt.SIZE_BITS + 8))
             testEquals(v, max)
         }
 
         repeat(100) {
-            val v = Random.nextDouble(until = max.toDouble())
+            konst v = Random.nextDouble(until = max.toDouble())
             testEquals(v, v.toLong().toUInt())
         }
     }

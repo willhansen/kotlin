@@ -8,7 +8,7 @@ import kotlin.experimental.ExperimentalNativeApi
 import kotlin.native.internal.GCUnsafeCall
 
 /**
- * Those operations allows to extract primitive values out of the [ByteArray] byte buffers.
+ * Those operations allows to extract primitive konstues out of the [ByteArray] byte buffers.
  * Data is treated as if it was in Least-Significant-Byte first (little-endian) byte order.
  * If index is outside of array boundaries  - [IndexOutOfBoundsException] is thrown.
  */
@@ -101,7 +101,7 @@ public external fun ByteArray.getDoubleAt(index: Int): Double
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_set")
-public external fun ByteArray.setUByteAt(index: Int, value: UByte)
+public external fun ByteArray.setUByteAt(index: Int, konstue: UByte)
 
 /**
  * Sets [Char] out of the [ByteArray] byte buffer at specified index [index]
@@ -109,7 +109,7 @@ public external fun ByteArray.setUByteAt(index: Int, value: UByte)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setCharAt")
-public external fun ByteArray.setCharAt(index: Int, value: Char)
+public external fun ByteArray.setCharAt(index: Int, konstue: Char)
 
 /**
  * Sets [Short] out of the [ByteArray] byte buffer at specified index [index]
@@ -117,7 +117,7 @@ public external fun ByteArray.setCharAt(index: Int, value: Char)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setShortAt")
-public external fun ByteArray.setShortAt(index: Int, value: Short)
+public external fun ByteArray.setShortAt(index: Int, konstue: Short)
 
 /**
  * Sets [UShort] out of the [ByteArray] byte buffer at specified index [index]
@@ -126,7 +126,7 @@ public external fun ByteArray.setShortAt(index: Int, value: Short)
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setShortAt")
 @ExperimentalUnsignedTypes
-public external fun ByteArray.setUShortAt(index: Int, value: UShort)
+public external fun ByteArray.setUShortAt(index: Int, konstue: UShort)
 
 /**
  * Sets [Int] out of the [ByteArray] byte buffer at specified index [index]
@@ -134,7 +134,7 @@ public external fun ByteArray.setUShortAt(index: Int, value: UShort)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setIntAt")
-public external fun ByteArray.setIntAt(index: Int, value: Int)
+public external fun ByteArray.setIntAt(index: Int, konstue: Int)
 
 /**
  * Sets [UInt] out of the [ByteArray] byte buffer at specified index [index]
@@ -142,7 +142,7 @@ public external fun ByteArray.setIntAt(index: Int, value: Int)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setIntAt")
-public external fun ByteArray.setUIntAt(index: Int, value: UInt)
+public external fun ByteArray.setUIntAt(index: Int, konstue: UInt)
 
 /**
  * Sets [Long] out of the [ByteArray] byte buffer at specified index [index]
@@ -150,7 +150,7 @@ public external fun ByteArray.setUIntAt(index: Int, value: UInt)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setLongAt")
-public external fun ByteArray.setLongAt(index: Int, value: Long)
+public external fun ByteArray.setLongAt(index: Int, konstue: Long)
 
 /**
  * Sets [ULong] out of the [ByteArray] byte buffer at specified index [index]
@@ -159,7 +159,7 @@ public external fun ByteArray.setLongAt(index: Int, value: Long)
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setLongAt")
 @ExperimentalUnsignedTypes
-public external fun ByteArray.setULongAt(index: Int, value: ULong)
+public external fun ByteArray.setULongAt(index: Int, konstue: ULong)
 
 /**
  * Sets [Float] out of the [ByteArray] byte buffer at specified index [index]
@@ -167,7 +167,7 @@ public external fun ByteArray.setULongAt(index: Int, value: ULong)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setFloatAt")
-public external fun ByteArray.setFloatAt(index: Int, value: Float)
+public external fun ByteArray.setFloatAt(index: Int, konstue: Float)
 
 /**
  * Sets [Double] out of the [ByteArray] byte buffer at specified index [index]
@@ -175,4 +175,4 @@ public external fun ByteArray.setFloatAt(index: Int, value: Float)
  */
 @ExperimentalNativeApi
 @GCUnsafeCall("Kotlin_ByteArray_setDoubleAt")
-public external fun ByteArray.setDoubleAt(index: Int, value: Double)
+public external fun ByteArray.setDoubleAt(index: Int, konstue: Double)

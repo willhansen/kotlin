@@ -12,5 +12,5 @@ fun runTest() {
     println(Bar(42).x)
 }
 
-class Foo(val x: Int)
+class Foo(konst x: Int)
 typealias Bar = Foo

@@ -8,8 +8,8 @@
         <key>screen_main_plural_string</key>
         <dict>
             <key>NSStringLocalizedFormatKey</key>
-            <string>%#@value@</string>
-            <key>value</key>
+            <string>%#@konstue@</string>
+            <key>konstue</key>
             <dict>
                 <key>NSStringFormatSpecTypeKey</key>
                 <string>NSStringPluralRuleType</string>

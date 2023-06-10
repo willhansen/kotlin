@@ -14,7 +14,7 @@ fun test() {
 
     }
 
-    when (val it = materialize<Boolean>()) {
+    when (konst it = materialize<Boolean>()) {
         materialize() -> {}
         else -> {}
     }

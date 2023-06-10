@@ -12,7 +12,7 @@ class Outer {
 
     }
 
-    val x: Int
+    konst x: Int
       field = x
       get
 
@@ -27,7 +27,7 @@ class Host {
 
   }
 
-  val y: Int
+  konst y: Int
     field = y
     get
 
@@ -40,7 +40,7 @@ class Host {
 
         }
 
-        val xx: Int
+        konst xx: Int
           field = <this>.<get-x>().plus(other = <this>.<get-y>())
           get
 

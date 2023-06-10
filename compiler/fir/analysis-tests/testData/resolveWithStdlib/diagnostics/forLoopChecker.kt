@@ -35,7 +35,7 @@ abstract class NotRange5() {
 
 abstract class AmbiguousHasNextIterator {
     abstract operator fun hasNext() : Boolean
-    val hasNext : Boolean get() = false
+    konst hasNext : Boolean get() = false
     abstract operator fun next() : Int
 }
 
@@ -44,7 +44,7 @@ abstract class NotRange6() {
 }
 
 abstract class ImproperIterator4 {
-    val hasNext : Int get() = 1
+    konst hasNext : Int get() = 1
     abstract operator fun next() : Int
 }
 
@@ -66,7 +66,7 @@ abstract class Range1() {
 }
 
 abstract class ImproperIterator5 {
-    abstract val String.hasNext : Boolean
+    abstract konst String.hasNext : Boolean
     abstract operator fun next() : Int
 }
 

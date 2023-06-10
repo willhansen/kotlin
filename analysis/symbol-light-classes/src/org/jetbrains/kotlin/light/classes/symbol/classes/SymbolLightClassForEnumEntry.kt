@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.asJava.elements.KtLightMethod
 import org.jetbrains.kotlin.light.classes.symbol.cachedValue
 import org.jetbrains.kotlin.light.classes.symbol.codeReferences.SymbolLightPsiJavaCodeReferenceElementWithNoReference
 import org.jetbrains.kotlin.light.classes.symbol.fields.SymbolLightFieldForEnumEntry
-import org.jetbrains.kotlin.light.classes.symbol.isOriginEquivalentTo
+import org.jetbrains.kotlin.light.classes.symbol.isOriginEquikonstentTo
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.InitializedModifiersBox
 import org.jetbrains.kotlin.light.classes.symbol.modifierLists.SymbolLightClassModifierList
 import org.jetbrains.kotlin.load.java.structure.LightClassOriginKind
 import org.jetbrains.kotlin.psi.KtEnumEntry
 
 internal class SymbolLightClassForEnumEntry(
-    private val enumConstant: SymbolLightFieldForEnumEntry,
-    private val enumClass: SymbolLightClassBase,
+    private konst enumConstant: SymbolLightFieldForEnumEntry,
+    private konst enumClass: SymbolLightClassBase,
     ktModule: KtModule,
 ) : SymbolLightClassBase(ktModule, enumConstant.manager), PsiEnumConstantInitializer {
     override fun getBaseClassType(): PsiClassType = enumConstant.type as PsiClassType //???TODO
@@ -47,11 +47,11 @@ internal class SymbolLightClassForEnumEntry(
 
     override fun toString(): String = "SymbolLightClassForEnumEntry:$name"
 
-    override fun isEquivalentTo(another: PsiElement?): Boolean {
-        return super.isEquivalentTo(another) || isOriginEquivalentTo(another)
+    override fun isEquikonstentTo(another: PsiElement?): Boolean {
+        return super.isEquikonstentTo(another) || isOriginEquikonstentTo(another)
     }
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightClassModifierList(
             containingDeclaration = this,
             modifiersBox = InitializedModifiersBox(PsiModifier.STATIC, PsiModifier.FINAL),
@@ -71,8 +71,8 @@ internal class SymbolLightClassForEnumEntry(
 
     override fun isEnum(): Boolean = false
 
-    private val _extendsList: PsiReferenceList? by lazyPub {
-        val mappedType = enumConstant.withEnumEntrySymbol { symbol ->
+    private konst _extendsList: PsiReferenceList? by lazyPub {
+        konst mappedType = enumConstant.withEnumEntrySymbol { symbol ->
             symbol.returnType.asPsiType(
                 this@SymbolLightClassForEnumEntry,
                 allowErrorTypes = true,
@@ -104,7 +104,7 @@ internal class SymbolLightClassForEnumEntry(
 
     override fun getOwnFields(): List<KtLightField> = cachedValue {
         enumConstant.withEnumEntrySymbol { enumEntrySymbol ->
-            val result = mutableListOf<KtLightField>()
+            konst result = mutableListOf<KtLightField>()
 
             // Then, add instance fields: properties from parameters, and then member properties
             addPropertyBackingFields(result, enumEntrySymbol)
@@ -115,10 +115,10 @@ internal class SymbolLightClassForEnumEntry(
 
     override fun getOwnMethods(): List<KtLightMethod> = cachedValue {
         enumConstant.withEnumEntrySymbol { enumEntrySymbol ->
-            val result = mutableListOf<KtLightMethod>()
+            konst result = mutableListOf<KtLightMethod>()
 
-            val declaredMemberScope = enumEntrySymbol.getDeclaredMemberScope()
-            val visibleDeclarations = declaredMemberScope.getCallableSymbols()
+            konst declaredMemberScope = enumEntrySymbol.getDeclaredMemberScope()
+            konst visibleDeclarations = declaredMemberScope.getCallableSymbols()
 
             createMethods(visibleDeclarations, result)
             createConstructors(declaredMemberScope.getConstructors(), result)
@@ -143,7 +143,7 @@ internal class SymbolLightClassForEnumEntry(
     override fun isInterface(): Boolean = false
     override fun isAnnotationType(): Boolean = false
     override fun isInheritorDeep(baseClass: PsiClass?, classToByPass: PsiClass?): Boolean = false
-    override val kotlinOrigin: KtEnumEntry get() = enumConstant.kotlinOrigin
-    override val originKind: LightClassOriginKind = LightClassOriginKind.SOURCE
+    override konst kotlinOrigin: KtEnumEntry get() = enumConstant.kotlinOrigin
+    override konst originKind: LightClassOriginKind = LightClassOriginKind.SOURCE
     override fun isValid(): Boolean = enumConstant.isValid
 }

@@ -16,18 +16,18 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.KProperty
 
 class A {
-    val c = 1
+    konst c = 1
     fun bb() {}
-    val b = 2
-    val a = 10
+    konst b = 2
+    konst a = 10
     fun aa() {}
 }
 
 fun listMembers(kClass: KClass<*>): String {
     return kClass.members.joinToString(" | ") { member ->
-        val prefix = when (member) {
+        konst prefix = when (member) {
             is KFunction -> "fun"
-            is KProperty -> "val"
+            is KProperty -> "konst"
             else -> "wtf"
         }
         "$prefix ${member.name}"
@@ -35,15 +35,15 @@ fun listMembers(kClass: KClass<*>): String {
 }
 
 fun box(): String {
-    val aMembers = listMembers(A::class)
+    konst aMembers = listMembers(A::class)
 
     // After migration of reflection to K2 the order will be following:
-    // "val c | val b | val a | fun bb | fun aa | fun equals | fun hashCode | fun toString"
-    if (aMembers != "val a | val b | val c | fun aa | fun bb | fun equals | fun hashCode | fun toString") return "Fail A: $aMembers"
+    // "konst c | konst b | konst a | fun bb | fun aa | fun equals | fun hashCode | fun toString"
+    if (aMembers != "konst a | konst b | konst c | fun aa | fun bb | fun equals | fun hashCode | fun toString") return "Fail A: $aMembers"
 
 // Looks like property order is different on different JDK, so it's pointless to test it
-//    val bMembers = listMembers(B::class)
-//    if (bMembers != "fun aa | fun bb | val c | val b | val a | fun equals | fun hashCode | fun toString") return "Fail B: $bMembers"
+//    konst bMembers = listMembers(B::class)
+//    if (bMembers != "fun aa | fun bb | konst c | konst b | konst a | fun equals | fun hashCode | fun toString") return "Fail B: $bMembers"
 
     return "OK"
 }

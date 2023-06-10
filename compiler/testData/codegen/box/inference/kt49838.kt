@@ -5,8 +5,8 @@ inline fun <
         reified TEvent : Event<TService>> event(
     noinline handler: suspend (TEvent) -> Unit
 ) {
-    val serviceKlass = TService::class
-    val eventKlass = TEvent::class
+    konst serviceKlass = TService::class
+    konst eventKlass = TEvent::class
 }
 
 interface Service<

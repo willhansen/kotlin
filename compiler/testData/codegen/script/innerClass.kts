@@ -1,7 +1,7 @@
 
-val b = "K"
+konst b = "K"
 
-inner class InnerClass(val s: String) {
+inner class InnerClass(konst s: String) {
     fun test1() = s + b
 
     inner class C1 {
@@ -24,6 +24,6 @@ inner class InnerClass(val s: String) {
     fun test3() = C2().test()
 }
 
-val rv = InnerClass("O").test1() + InnerClass("_O").test2() + InnerClass("__O").test3()
+konst rv = InnerClass("O").test1() + InnerClass("_O").test2() + InnerClass("__O").test3()
 
 // expected: rv: OK_OK!__OK?

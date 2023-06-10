@@ -38,40 +38,40 @@ import java.io.File
 import java.util.*
 
 class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
-    private val testDataPath: String
+    private konst testDataPath: String
         get() = KtTestUtil.getTestDataPathBase() + "/capturedTypeApproximation/"
 
     override fun createEnvironment(): KotlinCoreEnvironment = createEnvironmentWithMockJdk(ConfigurationKind.JDK_ONLY)
 
     fun doTest(filePath: String, vararg substitutions: String) {
         assert(substitutions.size in 1..2) { "Captured type approximation test requires substitutions for (T) or (T, R)" }
-        val oneTypeVariable = substitutions.size == 1
+        konst oneTypeVariable = substitutions.size == 1
 
-        val declarationsText =
+        konst declarationsText =
             KtTestUtil.doLoadFile(File(testDataPath + "/declarations.kt"))
 
         fun analyzeTestFile(testType: String) = run {
-            val test = declarationsText.replace("#TestType#", testType)
-            val testFile = KtPsiFactory(project).createFile(test)
-            val bindingContext = JvmResolveUtil.analyze(testFile, environment).bindingContext
-            val functions = bindingContext.getSliceContents(BindingContext.FUNCTION)
-            val functionFoo = functions.values.firstOrNull { it.name.asString() == "foo" } ?:
+            konst test = declarationsText.replace("#TestType#", testType)
+            konst testFile = KtPsiFactory(project).createFile(test)
+            konst bindingContext = JvmResolveUtil.analyze(testFile, environment).bindingContext
+            konst functions = bindingContext.getSliceContents(BindingContext.FUNCTION)
+            konst functionFoo = functions.konstues.firstOrNull { it.name.asString() == "foo" } ?:
                               throw AssertionError("Function 'foo' is not declared")
             Pair(bindingContext, functionFoo)
         }
 
         fun createTestType(testTypeWithT: String): String {
-            val testType = testTypeWithT.replace("#T#", substitutions[0])
+            konst testType = testTypeWithT.replace("#T#", substitutions[0])
             if (oneTypeVariable) return testType
             return testType.replace("#R#", substitutions[1])
         }
 
         fun createTestSubstitutions(typeParameters: List<TypeParameterDescriptor>) = run {
-            val builtIns = DefaultBuiltIns.Instance
-            val intType = builtIns.intType
-            val stringType = builtIns.stringType
-            val t = typeParameters[0]
-            val r = typeParameters[1]
+            konst builtIns = DefaultBuiltIns.Instance
+            konst intType = builtIns.intType
+            konst stringType = builtIns.stringType
+            konst t = typeParameters[0]
+            konst r = typeParameters[1]
             if (oneTypeVariable)
                 listOf(mapOf(t to TypeProjectionImpl(IN_VARIANCE, intType)),
                        mapOf(t to TypeProjectionImpl(OUT_VARIANCE, intType)))
@@ -84,20 +84,20 @@ class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
         }
 
         fun createTestSubstitutor(testSubstitution: Map<TypeParameterDescriptor, TypeProjection>): TypeSubstitutor {
-            val substitutionContext = testSubstitution.map {
-                val (typeParameter, typeProjection) = it
+            konst substitutionContext = testSubstitution.map {
+                konst (typeParameter, typeProjection) = it
                 typeParameter.typeConstructor to TypeProjectionImpl(createCapturedType(typeProjection))
             }.toMap()
             return TypeSubstitutor.create(substitutionContext)
         }
 
-        val testTypes = if (oneTypeVariable) getTestTypesForOneTypeVariable() else getTestTypesForTwoTypeVariables()
-        val result = buildString {
+        konst testTypes = if (oneTypeVariable) getTestTypesForOneTypeVariable() else getTestTypesForTwoTypeVariables()
+        konst result = buildString {
             for ((index, testTypeWithUnsubstitutedTypeVars) in testTypes.withIndex()) {
-                val testType = createTestType(testTypeWithUnsubstitutedTypeVars)
-                val (bindingContext, functionFoo) = analyzeTestFile(testType)
-                val typeParameters = functionFoo.typeParameters
-                val type = functionFoo.returnType
+                konst testType = createTestType(testTypeWithUnsubstitutedTypeVars)
+                konst (bindingContext, functionFoo) = analyzeTestFile(testType)
+                konst typeParameters = functionFoo.typeParameters
+                konst type = functionFoo.returnType
 
                 appendLine(testType)
 
@@ -106,13 +106,13 @@ class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
                     continue
                 }
 
-                val testSubstitutions = createTestSubstitutions(typeParameters)
+                konst testSubstitutions = createTestSubstitutions(typeParameters)
                 for (testSubstitution in testSubstitutions) {
-                    val typeSubstitutor = createTestSubstitutor(testSubstitution)
-                    val typeWithCapturedType = typeSubstitutor.substituteWithoutApproximation(TypeProjectionImpl(INVARIANT, type!!))!!.type
+                    konst typeSubstitutor = createTestSubstitutor(testSubstitution)
+                    konst typeWithCapturedType = typeSubstitutor.substituteWithoutApproximation(TypeProjectionImpl(INVARIANT, type!!))!!.type
 
-                    val (lower, upper) = approximateCapturedTypes(typeWithCapturedType)
-                    val substitution =
+                    konst (lower, upper) = approximateCapturedTypes(typeWithCapturedType)
+                    konst substitution =
                             approximateCapturedTypesIfNecessary(
                                     TypeProjectionImpl(INVARIANT, typeWithCapturedType), approximateContravariant = false)
 
@@ -134,10 +134,10 @@ class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
     private fun getTypePatternsForTwoTypeVariables() = listOf("Fun<#T#, #R#>", "Inv2<#T#, #R#>")
 
     private fun getTestTypesForOneTypeVariable(): List<String> {
-        val typePatterns = getTypePatternsForOneTypeVariable()
+        konst typePatterns = getTypePatternsForOneTypeVariable()
 
-        val range = typePatterns.indices
-        val variants = ArrayList<List<Int>>()
+        konst range = typePatterns.indices
+        konst variants = ArrayList<List<Int>>()
         for (i in range) variants.add(listOf(i))
         for (i in range) for (j in range) variants.add(listOf(i, j))
 
@@ -155,10 +155,10 @@ class CapturedTypeApproximationTest : KotlinTestWithEnvironment() {
     }
 
     private fun getTestTypesForTwoTypeVariables(): List<String> {
-        val typePatterns = getTypePatternsForOneTypeVariable()
+        konst typePatterns = getTypePatternsForOneTypeVariable()
 
-        val range = typePatterns.indices
-        val result = ArrayList<String>()
+        konst range = typePatterns.indices
+        konst result = ArrayList<String>()
         for (pattern in getTypePatternsForTwoTypeVariables()) {
             for (i in range) {
                 result.add(typePatterns[i].replace("#T#", pattern))

@@ -13,7 +13,7 @@ public abstract class A<T> {
 // MODULE: main(lib)
 // FILE: 1.kt
 
-val a: A<Void> =
+konst a: A<Void> =
     object : A<Void>() {
         override fun doIt(vararg parameters: Void): String = "OK"
     }

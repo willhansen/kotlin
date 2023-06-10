@@ -3,7 +3,7 @@ class Another {
     @Deprecated("Object")
     companion object {
         fun use() {}
-        const val USE = 42
+        const konst USE = 42
     }
 }
 
@@ -14,8 +14,8 @@ fun first() {
 }
 
 fun useCompanion() {
-    val d = <!DEPRECATION!>Another<!>
-    val x = Another.<!DEPRECATION!>Companion<!>
+    konst d = <!DEPRECATION!>Another<!>
+    konst x = Another.<!DEPRECATION!>Companion<!>
     Another.<!DEPRECATION!>Companion<!>.use()
     <!DEPRECATION!>Another<!>.use()
 }

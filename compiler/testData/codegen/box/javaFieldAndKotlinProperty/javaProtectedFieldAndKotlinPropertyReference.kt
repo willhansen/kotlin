@@ -9,12 +9,12 @@ public class BaseJava {
 
 // FILE: Derived.kt
 class Derived : BaseJava() {
-    private val a = "OK"
+    private konst a = "OK"
 
     fun foo() = this::a.get()
 }
 
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     return d.foo()
 }

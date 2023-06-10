@@ -10,7 +10,7 @@ enum class E1 : I {
         override fun foo() {
             <!EQUALITY_NOT_APPLICABLE!>this == E2.A<!>
 
-            val q = this
+            konst q = this
             when (q) {
                 this -> {}
                 E1.A -> {}

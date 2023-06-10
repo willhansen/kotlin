@@ -4,17 +4,17 @@ plugins {
 
 kotlin {
     js {
-        val otherCompilation = compilations.create("other")
+        konst otherCompilation = compilations.create("other")
         tasks.register<Zip>("otherKlib") {
             from(otherCompilation.output.allOutputs)
             archiveExtension.set("klib")
         }
 
-        val otherDist by configurations.creating {
+        konst otherDist by configurations.creating {
             isCanBeConsumed = true
             isCanBeResolved = false
         }
-        val runtimeOnly by configurations.getting
+        konst runtimeOnly by configurations.getting
         runtimeOnly.extendsFrom(otherDist)
         artifacts {
             add(otherDist.name, tasks.named("otherKlib").map { it.outputs.files.files.first() })
@@ -25,10 +25,10 @@ kotlin {
     }
 
     sourceSets {
-        val main by getting {
+        konst main by getting {
             kotlin.exclude("**/other/**")
         }
-        val other by getting {
+        konst other by getting {
             kotlin.srcDirs("src/main/kotlin/other")
             dependencies {
                 implementation(project(path = project.path))

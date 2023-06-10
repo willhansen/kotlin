@@ -1,2 +1,2 @@
-val a = 10
-<expr>val x = 1</expr>
+konst a = 10
+<expr>konst x = 1</expr>

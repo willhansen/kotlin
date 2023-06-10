@@ -31,18 +31,18 @@ internal class MatchResultImpl
  *  @param input an input sequence for matching/searching.
  *  @param regex a [Regex] instance used for matching/searching.
  */
-constructor (internal val input: CharSequence,
-             internal val regex: Regex) : MatchResult {
+constructor (internal konst input: CharSequence,
+             internal konst regex: Regex) : MatchResult {
 
     // Harmony's implementation ========================================================================================
-    private val nativePattern = regex.nativePattern
-    private val groupCount = nativePattern.capturingGroups.size
-    private val groupBounds = IntArray(groupCount * 2) { -1 }
+    private konst nativePattern = regex.nativePattern
+    private konst groupCount = nativePattern.capturingGroups.size
+    private konst groupBounds = IntArray(groupCount * 2) { -1 }
 
-    private val consumers = IntArray(nativePattern.consumersCount + 1) { -1 }
+    private konst consumers = IntArray(nativePattern.consumersCount + 1) { -1 }
 
     // Used by quantifiers to store a count of a quantified expression occurrences.
-    val enterCounters: IntArray = IntArray( maxOf(nativePattern.groupQuantifierCount, 0) )
+    konst enterCounters: IntArray = IntArray( maxOf(nativePattern.groupQuantifierCount, 0) )
 
     var startIndex: Int = 0
         set (startIndex: Int) {
@@ -55,8 +55,8 @@ constructor (internal val input: CharSequence,
     var previousMatch = -1
     var mode = Regex.Mode.MATCH
 
-    private data class MatchResultState(val groupBounds: IntArray, val consumers: IntArray, val enterCounters: IntArray,
-                                        val startIndex: Int, val previousMatch: Int)
+    private data class MatchResultState(konst groupBounds: IntArray, konst consumers: IntArray, konst enterCounters: IntArray,
+                                        konst startIndex: Int, konst previousMatch: Int)
 
     private var state: MatchResultState? = null
 
@@ -77,11 +77,11 @@ constructor (internal val input: CharSequence,
 
     // MatchResult interface ===========================================================================================
     /** The range of indices in the original string where match was captured. */
-    override val range: IntRange
+    override konst range: IntRange
         get() = getStart(0) until getEnd(0)
 
     /** The substring from the input string captured by this match. */
-    override val value: String
+    override konst konstue: String
         get() = group(0) ?: throw AssertionError("No groupIndex #0 in the match result.")
 
     /**
@@ -91,8 +91,8 @@ constructor (internal val input: CharSequence,
      * Groups are indexed from 1 to `groupCount` and group with the index 0 corresponds to the entire match.
      */
     // Create one object or several ones?
-    override val groups: MatchGroupCollection = object: MatchNamedGroupCollection, AbstractCollection<MatchGroup?>() {
-        override val size: Int
+    override konst groups: MatchGroupCollection = object: MatchNamedGroupCollection, AbstractCollection<MatchGroup?>() {
+        override konst size: Int
             get() = this@MatchResultImpl.groupCount
 
 
@@ -114,19 +114,19 @@ constructor (internal val input: CharSequence,
         }
 
         override fun get(index: Int): MatchGroup? {
-            val value = group(index) ?: return null
-            return MatchGroup(value, getStart(index) until getEnd(index))
+            konst konstue = group(index) ?: return null
+            return MatchGroup(konstue, getStart(index) until getEnd(index))
         }
 
         override fun get(name: String): MatchGroup? {
-            val index = nativePattern.groupNameToIndex[name]
+            konst index = nativePattern.groupNameToIndex[name]
                 ?: throw IllegalArgumentException("Capturing group with name {$name} does not exist")
             return get(index)
         }
     }
 
     /**
-     * A list of matched indexed group values.
+     * A list of matched indexed group konstues.
      *
      * This list has size of `groupCount + 1` where `groupCount` is the count of groups in the regular expression.
      * Groups are indexed from 1 to `groupCount` and group with the index 0 corresponds to the entire match.
@@ -136,7 +136,7 @@ constructor (internal val input: CharSequence,
      *
      * @sample: samples.text.Regexps.matchDestructuringToGroupValues
      */
-    override val groupValues: List<String>
+    override konst groupValues: List<String>
         get() = mutableListOf<String>().apply {
             for (i in 0 until groupCount) {
                 this.add(group(i) ?: "")
@@ -158,8 +158,8 @@ constructor (internal val input: CharSequence,
 
 
     // Harmony's implementation ========================================================================================
-    fun setConsumed(counter: Int, value: Int) {
-        this.consumers[counter] = value
+    fun setConsumed(counter: Int, konstue: Int) {
+        this.consumers[counter] = konstue
     }
 
     fun getConsumed(counter: Int): Int {
@@ -210,8 +210,8 @@ constructor (internal val input: CharSequence,
      * @return the text that matched the group.
      */
     fun group(group: Int = 0): String? {
-        val start = getStart(group)
-        val end = getEnd(group)
+        konst start = getStart(group)
+        konst end = getEnd(group)
         if (start < 0 || end < 0) {
             return null
         }

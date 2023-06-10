@@ -21,21 +21,21 @@ import org.jetbrains.kotlin.protobuf.ExtensionRegistryLite
 import org.jetbrains.kotlin.protobuf.GeneratedMessageLite.GeneratedExtension
 
 open class SerializerExtensionProtocol(
-    val extensionRegistry: ExtensionRegistryLite,
-    val packageFqName: GeneratedExtension<ProtoBuf.Package, Int>,
-    val constructorAnnotation: GeneratedExtension<ProtoBuf.Constructor, List<ProtoBuf.Annotation>>,
-    val classAnnotation: GeneratedExtension<ProtoBuf.Class, List<ProtoBuf.Annotation>>,
-    val functionAnnotation: GeneratedExtension<ProtoBuf.Function, List<ProtoBuf.Annotation>>,
-    val functionExtensionReceiverAnnotation: GeneratedExtension<ProtoBuf.Function, List<ProtoBuf.Annotation>>?,
-    val propertyAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
-    val propertyGetterAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
-    val propertySetterAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
-    val propertyExtensionReceiverAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
-    val propertyBackingFieldAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
-    val propertyDelegatedFieldAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
-    val enumEntryAnnotation: GeneratedExtension<ProtoBuf.EnumEntry, List<ProtoBuf.Annotation>>,
-    val compileTimeValue: GeneratedExtension<ProtoBuf.Property, ProtoBuf.Annotation.Argument.Value>,
-    val parameterAnnotation: GeneratedExtension<ProtoBuf.ValueParameter, List<ProtoBuf.Annotation>>,
-    val typeAnnotation: GeneratedExtension<ProtoBuf.Type, List<ProtoBuf.Annotation>>,
-    val typeParameterAnnotation: GeneratedExtension<ProtoBuf.TypeParameter, List<ProtoBuf.Annotation>>
+    konst extensionRegistry: ExtensionRegistryLite,
+    konst packageFqName: GeneratedExtension<ProtoBuf.Package, Int>,
+    konst constructorAnnotation: GeneratedExtension<ProtoBuf.Constructor, List<ProtoBuf.Annotation>>,
+    konst classAnnotation: GeneratedExtension<ProtoBuf.Class, List<ProtoBuf.Annotation>>,
+    konst functionAnnotation: GeneratedExtension<ProtoBuf.Function, List<ProtoBuf.Annotation>>,
+    konst functionExtensionReceiverAnnotation: GeneratedExtension<ProtoBuf.Function, List<ProtoBuf.Annotation>>?,
+    konst propertyAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
+    konst propertyGetterAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
+    konst propertySetterAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>,
+    konst propertyExtensionReceiverAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
+    konst propertyBackingFieldAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
+    konst propertyDelegatedFieldAnnotation: GeneratedExtension<ProtoBuf.Property, List<ProtoBuf.Annotation>>?,
+    konst enumEntryAnnotation: GeneratedExtension<ProtoBuf.EnumEntry, List<ProtoBuf.Annotation>>,
+    konst compileTimeValue: GeneratedExtension<ProtoBuf.Property, ProtoBuf.Annotation.Argument.Value>,
+    konst parameterAnnotation: GeneratedExtension<ProtoBuf.ValueParameter, List<ProtoBuf.Annotation>>,
+    konst typeAnnotation: GeneratedExtension<ProtoBuf.Type, List<ProtoBuf.Annotation>>,
+    konst typeParameterAnnotation: GeneratedExtension<ProtoBuf.TypeParameter, List<ProtoBuf.Annotation>>
 )

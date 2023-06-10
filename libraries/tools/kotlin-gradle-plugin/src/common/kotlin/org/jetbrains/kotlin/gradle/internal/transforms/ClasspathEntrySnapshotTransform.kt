@@ -28,26 +28,26 @@ abstract class ClasspathEntrySnapshotTransform : TransformAction<ClasspathEntryS
 
     abstract class Parameters : TransformParameters {
         @get:Internal
-        abstract val gradleUserHomeDir: DirectoryProperty
+        abstract konst gradleUserHomeDir: DirectoryProperty
 
         @get:Internal
-        abstract val buildMetricsService: Property<BuildMetricsService>
+        abstract konst buildMetricsService: Property<BuildMetricsService>
     }
 
     @get:Classpath
     @get:InputArtifact
-    abstract val inputArtifact: Provider<FileSystemLocation>
+    abstract konst inputArtifact: Provider<FileSystemLocation>
 
     override fun transform(outputs: TransformOutputs) {
-        val classpathEntryInputDirOrJar = inputArtifact.get().asFile
-        val snapshotOutputFile = outputs.file(classpathEntryInputDirOrJar.name.replace('.', '_') + "-snapshot.bin")
+        konst classpathEntryInputDirOrJar = inputArtifact.get().asFile
+        konst snapshotOutputFile = outputs.file(classpathEntryInputDirOrJar.name.replace('.', '_') + "-snapshot.bin")
 
-        val granularity = getClassSnapshotGranularity(classpathEntryInputDirOrJar, parameters.gradleUserHomeDir.get().asFile)
+        konst granularity = getClassSnapshotGranularity(classpathEntryInputDirOrJar, parameters.gradleUserHomeDir.get().asFile)
 
-        val buildMetricsReporterService = parameters.buildMetricsService.orNull
-        val metricsReporter = buildMetricsReporterService?.let { BuildMetricsReporterImpl() } ?: DoNothingBuildMetricsReporter
+        konst buildMetricsReporterService = parameters.buildMetricsService.orNull
+        konst metricsReporter = buildMetricsReporterService?.let { BuildMetricsReporterImpl() } ?: DoNothingBuildMetricsReporter
 
-        val startTimeMs = System.currentTimeMillis()
+        konst startTimeMs = System.currentTimeMillis()
         var failureMessage: String? = null
         try {
             doTransform(classpathEntryInputDirOrJar, snapshotOutputFile, granularity, metricsReporter)
@@ -87,7 +87,7 @@ abstract class ClasspathEntrySnapshotTransform : TransformAction<ClasspathEntryS
         granularity: ClassSnapshotGranularity, metrics: BuildMetricsReporter
     ) {
         metrics.measure(BuildTime.CLASSPATH_ENTRY_SNAPSHOT_TRANSFORM) {
-            val snapshot = ClasspathEntrySnapshotter.snapshot(classpathEntryInputDirOrJar, granularity, metrics)
+            konst snapshot = ClasspathEntrySnapshotter.snapshot(classpathEntryInputDirOrJar, granularity, metrics)
             metrics.measure(BuildTime.SAVE_CLASSPATH_ENTRY_SNAPSHOT) {
                 ClasspathEntrySnapshotExternalizer.saveToFile(snapshotOutputFile, snapshot)
             }

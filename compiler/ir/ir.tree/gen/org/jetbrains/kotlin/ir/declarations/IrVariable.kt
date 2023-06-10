@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrVariable : IrDeclarationBase(), IrValueDeclaration {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: VariableDescriptor
+    abstract override konst descriptor: VariableDescriptor
 
-    abstract override val symbol: IrVariableSymbol
+    abstract override konst symbol: IrVariableSymbol
 
     abstract var isVar: Boolean
 

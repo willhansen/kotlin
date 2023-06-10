@@ -17,7 +17,7 @@ var p: Int
 // CHECK:
 //   Mangled name: {}arr
 //   Public signature: /arr|3895543167155351037[0]
-val arr: IntArray
+konst arr: IntArray
   // CHECK JVM_IR:
   //   Mangled name: #<get-arr>(){}kotlin.IntArray
   //   Public signature: /arr.<get-arr>|-3280308842233711836[0]
@@ -62,7 +62,7 @@ class C {
   // CHECK:
   //   Mangled name: C#set(kotlin.Int;kotlin.Int){}
   //   Public signature: /C.set|-213984015376347786[0]
-  operator fun set(i: Int, value: Int): Unit
+  operator fun set(i: Int, konstue: Int): Unit
 
 }
 
@@ -102,7 +102,7 @@ object O {
   // CHECK:
   //   Mangled name: O#set(kotlin.Int;kotlin.Int){}
   //   Public signature: /O.set|-213984015376347786[0]
-  operator fun set(i: Int, value: Int): Unit
+  operator fun set(i: Int, konstue: Int): Unit
 
 }
 

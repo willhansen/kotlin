@@ -28,19 +28,19 @@ import java.io.File
 import java.nio.file.Path
 
 class LightTree2Fir(
-    val session: FirSession,
-    private val scopeProvider: FirScopeProvider,
-    private val diagnosticsReporter: DiagnosticReporter? = null,
+    konst session: FirSession,
+    private konst scopeProvider: FirScopeProvider,
+    private konst diagnosticsReporter: DiagnosticReporter? = null,
 ) {
     companion object {
-        private val parserDefinition = KotlinParserDefinition()
+        private konst parserDefinition = KotlinParserDefinition()
         private fun makeLexer() = KotlinLexer()
 
         fun buildLightTree(
             code: CharSequence,
             errorListener: LightTreeParsingErrorListener?,
         ): FlyweightCapableTreeStructure<LighterASTNode> {
-            val builder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, makeLexer(), code)
+            konst builder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, makeLexer(), code)
             return KotlinLightParser.parse(builder).also {
                 if (errorListener != null) reportErrors(it.root, it, errorListener)
             }
@@ -53,13 +53,13 @@ class LightTree2Fir(
             ref: Ref<Array<LighterASTNode?>> = Ref<Array<LighterASTNode?>>(),
         ) {
             tree.getChildren(node, ref)
-            val kidsArray = ref.get() ?: return
+            konst kidsArray = ref.get() ?: return
 
             for (kid in kidsArray) {
                 if (kid == null) break
-                val tokenType = kid.tokenType
+                konst tokenType = kid.tokenType
                 if (tokenType == TokenType.ERROR_ELEMENT) {
-                    val message = PsiBuilderImpl.getErrorMessage(kid)
+                    konst message = PsiBuilderImpl.getErrorMessage(kid)
                     errorListener.onError(kid.startOffset, kid.endOffset, message)
                 }
 
@@ -75,8 +75,8 @@ class LightTree2Fir(
     }
 
     fun buildFirFile(file: File): FirFile {
-        val sourceFile = KtIoFileSourceFile(file)
-        val (code, linesMapping) = with(file.inputStream().reader(Charsets.UTF_8)) {
+        konst sourceFile = KtIoFileSourceFile(file)
+        konst (code, linesMapping) = with(file.inputStream().reader(Charsets.UTF_8)) {
             this.readSourceFileWithMapping()
         }
         return buildFirFile(code, sourceFile, linesMapping)
@@ -92,13 +92,13 @@ class LightTree2Fir(
     }
 
     fun buildFirFile(code: CharSequence, sourceFile: KtSourceFile, linesMapping: KtSourceFileLinesMapping): FirFile {
-        val errorListener = makeErrorListener(sourceFile)
-        val lightTree = buildLightTree(code, errorListener)
+        konst errorListener = makeErrorListener(sourceFile)
+        konst lightTree = buildLightTree(code, errorListener)
         return buildFirFile(lightTree, sourceFile, linesMapping)
     }
 
     private fun makeErrorListener(sourceFile: KtSourceFile): LightTreeParsingErrorListener? {
-        val diagnosticsReporter = diagnosticsReporter ?: return null
+        konst diagnosticsReporter = diagnosticsReporter ?: return null
         return diagnosticsReporter.toKotlinParsingErrorListener(sourceFile, session.languageVersionSettings)
     }
 }

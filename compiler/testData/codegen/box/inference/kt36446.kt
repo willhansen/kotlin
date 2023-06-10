@@ -7,7 +7,7 @@ import kotlin.reflect.KProperty
 fun box(): String {
     definition<Transaction> {
         conversion<Unit> {
-            val offset by argument<Int> {
+            konst offset by argument<Int> {
                 // UnsupportedOperationException: no descriptor for type constructor of IntegerLiteralType[Int,Long,Byte,Short]
                 defaultInt(0)
             }

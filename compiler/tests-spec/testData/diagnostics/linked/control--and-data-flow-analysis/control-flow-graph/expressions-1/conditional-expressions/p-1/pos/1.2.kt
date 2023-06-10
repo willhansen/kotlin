@@ -16,9 +16,9 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
-    val c = true
-    val a = if (b) {
+    konst b = true
+    konst c = true
+    konst a = if (b) {
         "first true"
     } else if (c) {
         "else if true"
@@ -29,6 +29,6 @@ fun case1() {
 
 fun case2() {
     var b = true
-    val c = true
-    val a = if (b) 1 else if (c) 2 else Unit;
+    konst c = true
+    konst a = if (b) 1 else if (c) 2 else Unit;
 }

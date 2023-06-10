@@ -13,13 +13,13 @@ class CommonBuildMetaInfo : BuildMetaInfo() {
     override fun checkIfPlatformSpecificCompilerArgumentWasChanged(key: String, currentValue: String, previousValue: String): Boolean? {
         when (key) {
             CustomKeys.METADATA_VERSION_STRING.name -> {
-                val currentVersionIntArray = BinaryVersion.parseVersionArray(currentValue)
+                konst currentVersionIntArray = BinaryVersion.parseVersionArray(currentValue)
                 if (currentVersionIntArray?.size != 3) return null
-                val currentVersion = JvmMetadataVersion(currentVersionIntArray[0], currentVersionIntArray[1], currentVersionIntArray[2])
+                konst currentVersion = JvmMetadataVersion(currentVersionIntArray[0], currentVersionIntArray[1], currentVersionIntArray[2])
 
-                val previousVersionIntArray = BinaryVersion.parseVersionArray(previousValue)
+                konst previousVersionIntArray = BinaryVersion.parseVersionArray(previousValue)
                 if (previousVersionIntArray?.size != 3) return null
-                val previousVersion = JvmMetadataVersion(previousVersionIntArray[0], previousVersionIntArray[1], previousVersionIntArray[2])
+                konst previousVersion = JvmMetadataVersion(previousVersionIntArray[0], previousVersionIntArray[1], previousVersionIntArray[2])
                 return currentVersion == previousVersion
             }
         }
@@ -27,10 +27,10 @@ class CommonBuildMetaInfo : BuildMetaInfo() {
     }
 
     override fun createPropertiesMapFromCompilerArguments(args: CommonCompilerArguments): Map<String, String> {
-        val resultMap = mutableMapOf<String, String>()
-        val metadataVersionArray = args.metadataVersion?.let { BinaryVersion.parseVersionArray(it) }
-        val metadataVersion = metadataVersionArray?.let(::JvmMetadataVersion) ?: JvmMetadataVersion.INSTANCE
-        val metadataVersionString = metadataVersion.toString()
+        konst resultMap = mutableMapOf<String, String>()
+        konst metadataVersionArray = args.metadataVersion?.let { BinaryVersion.parseVersionArray(it) }
+        konst metadataVersion = metadataVersionArray?.let(::JvmMetadataVersion) ?: JvmMetadataVersion.INSTANCE
+        konst metadataVersionString = metadataVersion.toString()
         resultMap[CustomKeys.METADATA_VERSION_STRING.name] = metadataVersionString
 
         return super.createPropertiesMapFromCompilerArguments(args) + resultMap

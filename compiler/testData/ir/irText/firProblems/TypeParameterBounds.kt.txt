@@ -6,7 +6,7 @@ open annotation class TypeAnn : Annotation {
 
   }
 
-  val name: String
+  konst name: String
     field = name
     get
 
@@ -23,7 +23,7 @@ open annotation class TypeParameterAnn : Annotation {
 }
 
 @Target(allowedTargets = [AnnotationTarget.TYPE_PARAMETER])
-@Retention(value = AnnotationRetention.BINARY)
+@Retention(konstue = AnnotationRetention.BINARY)
 open annotation class TypeParameterAnnBinary : Annotation {
   constructor() /* primary */ {
     super/*Any*/()

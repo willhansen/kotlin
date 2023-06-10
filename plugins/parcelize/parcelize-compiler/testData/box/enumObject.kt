@@ -8,14 +8,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-enum class Color(val rgba8: Long) : Parcelable { BLACK(0x000000FFL), WHITE(0xFFFFFFFFL) }
+enum class Color(konst rgba8: Long) : Parcelable { BLACK(0x000000FFL), WHITE(0xFFFFFFFFL) }
 
 @Parcelize
 object Obj : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val black = Color.BLACK
-    val obj = Obj
+    konst black = Color.BLACK
+    konst obj = Obj
 
     black.writeToParcel(parcel, 0)
     obj.writeToParcel(parcel, 0)
@@ -23,12 +23,12 @@ fun box() = parcelTest { parcel ->
     println(black)
     println(obj)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val black2 = parcelableCreator<Color>().createFromParcel(parcel)
-    val obj2 = parcelableCreator<Obj>().createFromParcel(parcel)
+    konst black2 = parcelableCreator<Color>().createFromParcel(parcel)
+    konst obj2 = parcelableCreator<Obj>().createFromParcel(parcel)
 
     println(black2)
     println(obj2)

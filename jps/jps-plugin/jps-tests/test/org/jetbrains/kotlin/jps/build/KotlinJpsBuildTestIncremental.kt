@@ -29,7 +29,7 @@ import java.io.File
 import kotlin.reflect.KMutableProperty1
 
 class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
-    private val enableICFixture = EnableICFixture()
+    private konst enableICFixture = EnableICFixture()
 
     override fun setUp() {
         super.setUp()
@@ -48,16 +48,16 @@ class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
             assertTrue("Daemon was not enabled!", isDaemonEnabled())
 
             doTest()
-            val module = myProject.modules[0]
-            val mainKtClassFile = findFileInOutputDir(module, "MainKt.class")
+            konst module = myProject.modules[0]
+            konst mainKtClassFile = findFileInOutputDir(module, "MainKt.class")
             assertTrue("$mainKtClassFile does not exist!", mainKtClassFile.exists())
 
-            val fooKt = File(workDir, "src/Foo.kt")
+            konst fooKt = File(workDir, "src/Foo.kt")
             change(fooKt.path, null)
             buildAllModules().assertSuccessful()
             assertCompiled(KotlinBuilder.KOTLIN_BUILDER_NAME, "src/Foo.kt")
 
-            change(fooKt.path, "class Foo(val x: Int = 0)")
+            change(fooKt.path, "class Foo(konst x: Int = 0)")
             buildAllModules().assertSuccessful()
             assertCompiled(KotlinBuilder.KOTLIN_BUILDER_NAME, "src/main.kt", "src/Foo.kt")
         }
@@ -72,7 +72,7 @@ class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
     fun testManyFiles() {
         doTest()
 
-        val module = myProject.modules[0]
+        konst module = myProject.modules[0]
         assertFilesExistInOutput(module, "foo/MainKt.class", "boo/BooKt.class", "foo/Bar.class")
 
         checkWhen(touch("src/main.kt"), null, packageClasses("kotlinProject", "src/main.kt", "foo.MainKt"))
@@ -94,7 +94,7 @@ class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
     fun testManyFilesForPackage() {
         doTest()
 
-        val module = myProject.modules[0]
+        konst module = myProject.modules[0]
         assertFilesExistInOutput(module, "foo/MainKt.class", "boo/BooKt.class", "foo/Bar.class")
 
         checkWhen(touch("src/main.kt"), null, packageClasses("kotlinProject", "src/main.kt", "foo.MainKt"))
@@ -140,13 +140,13 @@ class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
     @WorkingDir("LanguageOrApiVersionChanged")
     fun testLanguageVersionExperimental() {
         initProject(LibraryDependency.JVM_MOCK_RUNTIME)
-        val module = myProject.modules.first()
-        val args = module.kotlinCompilerArguments
+        konst module = myProject.modules.first()
+        konst args = module.kotlinCompilerArguments
 
         // Try to set Language version to Stable+2 (there is no promises that metadata will be supported)
-        val experimentalLevelVersion: LanguageVersion
+        konst experimentalLevelVersion: LanguageVersion
         try {
-            experimentalLevelVersion = LanguageVersion.values()[LanguageVersion.LATEST_STABLE.ordinal + 2]
+            experimentalLevelVersion = LanguageVersion.konstues()[LanguageVersion.LATEST_STABLE.ordinal + 2]
         } catch (e: ArrayIndexOutOfBoundsException) {
             // there is no Stable+2 version for now, skiping test
             return
@@ -162,8 +162,8 @@ class KotlinJpsBuildTestIncremental : KotlinJpsBuildTest() {
         initProject(LibraryDependency.JVM_MOCK_RUNTIME)
 
         assertEquals(1, myProject.modules.size)
-        val module = myProject.modules.first()
-        val args = module.kotlinCompilerArguments
+        konst module = myProject.modules.first()
+        konst args = module.kotlinCompilerArguments
 
         fun setVersion(newVersion: String) {
             versionProperty.set(args, newVersion)

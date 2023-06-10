@@ -5,7 +5,7 @@
 
 package test
 inline fun inlineFun(capturedParam: String, crossinline lambda: () -> String = { capturedParam }): String {
-    val lambda2 = {
+    konst lambda2 = {
         lambda()
     }; return lambda2()
 }

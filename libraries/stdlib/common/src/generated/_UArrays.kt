@@ -954,7 +954,7 @@ public inline fun UShortArray.last(): UShort {
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.last(predicate: (UInt) -> Boolean): UInt {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     throw NoSuchElementException("Array contains no element matching the predicate.")
@@ -972,7 +972,7 @@ public inline fun UIntArray.last(predicate: (UInt) -> Boolean): UInt {
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.last(predicate: (ULong) -> Boolean): ULong {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     throw NoSuchElementException("Array contains no element matching the predicate.")
@@ -990,7 +990,7 @@ public inline fun ULongArray.last(predicate: (ULong) -> Boolean): ULong {
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.last(predicate: (UByte) -> Boolean): UByte {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     throw NoSuchElementException("Array contains no element matching the predicate.")
@@ -1008,7 +1008,7 @@ public inline fun UByteArray.last(predicate: (UByte) -> Boolean): UByte {
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.last(predicate: (UShort) -> Boolean): UShort {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     throw NoSuchElementException("Array contains no element matching the predicate.")
@@ -1108,7 +1108,7 @@ public fun UShortArray.lastOrNull(): UShort? {
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.lastOrNull(predicate: (UInt) -> Boolean): UInt? {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     return null
@@ -1124,7 +1124,7 @@ public inline fun UIntArray.lastOrNull(predicate: (UInt) -> Boolean): UInt? {
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.lastOrNull(predicate: (ULong) -> Boolean): ULong? {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     return null
@@ -1140,7 +1140,7 @@ public inline fun ULongArray.lastOrNull(predicate: (ULong) -> Boolean): ULong? {
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.lastOrNull(predicate: (UByte) -> Boolean): UByte? {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     return null
@@ -1156,7 +1156,7 @@ public inline fun UByteArray.lastOrNull(predicate: (UByte) -> Boolean): UByte? {
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.lastOrNull(predicate: (UShort) -> Boolean): UShort? {
     for (index in this.indices.reversed()) {
-        val element = this[index]
+        konst element = this[index]
         if (predicate(element)) return element
     }
     return null
@@ -1784,7 +1784,7 @@ public inline fun UShortArray.dropLastWhile(predicate: (UShort) -> Boolean): Lis
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.dropWhile(predicate: (UInt) -> Boolean): List<UInt> {
     var yielding = false
-    val list = ArrayList<UInt>()
+    konst list = ArrayList<UInt>()
     for (item in this)
         if (yielding)
             list.add(item)
@@ -1805,7 +1805,7 @@ public inline fun UIntArray.dropWhile(predicate: (UInt) -> Boolean): List<UInt> 
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.dropWhile(predicate: (ULong) -> Boolean): List<ULong> {
     var yielding = false
-    val list = ArrayList<ULong>()
+    konst list = ArrayList<ULong>()
     for (item in this)
         if (yielding)
             list.add(item)
@@ -1826,7 +1826,7 @@ public inline fun ULongArray.dropWhile(predicate: (ULong) -> Boolean): List<ULon
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.dropWhile(predicate: (UByte) -> Boolean): List<UByte> {
     var yielding = false
-    val list = ArrayList<UByte>()
+    konst list = ArrayList<UByte>()
     for (item in this)
         if (yielding)
             list.add(item)
@@ -1847,7 +1847,7 @@ public inline fun UByteArray.dropWhile(predicate: (UByte) -> Boolean): List<UByt
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.dropWhile(predicate: (UShort) -> Boolean): List<UShort> {
     var yielding = false
-    val list = ArrayList<UShort>()
+    konst list = ArrayList<UShort>()
     for (item in this)
         if (yielding)
             list.add(item)
@@ -1909,7 +1909,7 @@ public inline fun UShortArray.filter(predicate: (UShort) -> Boolean): List<UShor
 /**
  * Returns a list containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -1923,7 +1923,7 @@ public inline fun UIntArray.filterIndexed(predicate: (index: Int, UInt) -> Boole
 /**
  * Returns a list containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -1937,7 +1937,7 @@ public inline fun ULongArray.filterIndexed(predicate: (index: Int, ULong) -> Boo
 /**
  * Returns a list containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -1951,7 +1951,7 @@ public inline fun UByteArray.filterIndexed(predicate: (index: Int, UByte) -> Boo
 /**
  * Returns a list containing only elements matching the given [predicate].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexed
  */
@@ -1965,7 +1965,7 @@ public inline fun UShortArray.filterIndexed(predicate: (index: Int, UShort) -> B
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -1982,7 +1982,7 @@ public inline fun <C : MutableCollection<in UInt>> UIntArray.filterIndexedTo(des
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -1999,7 +1999,7 @@ public inline fun <C : MutableCollection<in ULong>> ULongArray.filterIndexedTo(d
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -2016,7 +2016,7 @@ public inline fun <C : MutableCollection<in UByte>> UByteArray.filterIndexedTo(d
 /**
  * Appends all elements matching the given [predicate] to the given [destination].
  * @param [predicate] function that takes the index of an element and the element itself
- * and returns the result of predicate evaluation on the element.
+ * and returns the result of predicate ekonstuation on the element.
  * 
  * @sample samples.collections.Collections.Filtering.filterIndexedTo
  */
@@ -2228,9 +2228,9 @@ public fun UShortArray.slice(indices: IntRange): List<UShort> {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 public fun UIntArray.slice(indices: Iterable<Int>): List<UInt> {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
-    val list = ArrayList<UInt>(size)
+    konst list = ArrayList<UInt>(size)
     for (index in indices) {
         list.add(get(index))
     }
@@ -2243,9 +2243,9 @@ public fun UIntArray.slice(indices: Iterable<Int>): List<UInt> {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 public fun ULongArray.slice(indices: Iterable<Int>): List<ULong> {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
-    val list = ArrayList<ULong>(size)
+    konst list = ArrayList<ULong>(size)
     for (index in indices) {
         list.add(get(index))
     }
@@ -2258,9 +2258,9 @@ public fun ULongArray.slice(indices: Iterable<Int>): List<ULong> {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 public fun UByteArray.slice(indices: Iterable<Int>): List<UByte> {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
-    val list = ArrayList<UByte>(size)
+    konst list = ArrayList<UByte>(size)
     for (index in indices) {
         list.add(get(index))
     }
@@ -2273,9 +2273,9 @@ public fun UByteArray.slice(indices: Iterable<Int>): List<UByte> {
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 public fun UShortArray.slice(indices: Iterable<Int>): List<UShort> {
-    val size = indices.collectionSizeOrDefault(10)
+    konst size = indices.collectionSizeOrDefault(10)
     if (size == 0) return emptyList()
-    val list = ArrayList<UShort>(size)
+    konst list = ArrayList<UShort>(size)
     for (index in indices) {
         list.add(get(index))
     }
@@ -2369,7 +2369,7 @@ public fun UIntArray.take(n: Int): List<UInt> {
     if (n >= size) return toList()
     if (n == 1) return listOf(this[0])
     var count = 0
-    val list = ArrayList<UInt>(n)
+    konst list = ArrayList<UInt>(n)
     for (item in this) {
         list.add(item)
         if (++count == n)
@@ -2393,7 +2393,7 @@ public fun ULongArray.take(n: Int): List<ULong> {
     if (n >= size) return toList()
     if (n == 1) return listOf(this[0])
     var count = 0
-    val list = ArrayList<ULong>(n)
+    konst list = ArrayList<ULong>(n)
     for (item in this) {
         list.add(item)
         if (++count == n)
@@ -2417,7 +2417,7 @@ public fun UByteArray.take(n: Int): List<UByte> {
     if (n >= size) return toList()
     if (n == 1) return listOf(this[0])
     var count = 0
-    val list = ArrayList<UByte>(n)
+    konst list = ArrayList<UByte>(n)
     for (item in this) {
         list.add(item)
         if (++count == n)
@@ -2441,7 +2441,7 @@ public fun UShortArray.take(n: Int): List<UShort> {
     if (n >= size) return toList()
     if (n == 1) return listOf(this[0])
     var count = 0
-    val list = ArrayList<UShort>(n)
+    konst list = ArrayList<UShort>(n)
     for (item in this) {
         list.add(item)
         if (++count == n)
@@ -2462,10 +2462,10 @@ public fun UShortArray.take(n: Int): List<UShort> {
 public fun UIntArray.takeLast(n: Int): List<UInt> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
-    val size = size
+    konst size = size
     if (n >= size) return toList()
     if (n == 1) return listOf(this[size - 1])
-    val list = ArrayList<UInt>(n)
+    konst list = ArrayList<UInt>(n)
     for (index in size - n until size)
         list.add(this[index])
     return list
@@ -2483,10 +2483,10 @@ public fun UIntArray.takeLast(n: Int): List<UInt> {
 public fun ULongArray.takeLast(n: Int): List<ULong> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
-    val size = size
+    konst size = size
     if (n >= size) return toList()
     if (n == 1) return listOf(this[size - 1])
-    val list = ArrayList<ULong>(n)
+    konst list = ArrayList<ULong>(n)
     for (index in size - n until size)
         list.add(this[index])
     return list
@@ -2504,10 +2504,10 @@ public fun ULongArray.takeLast(n: Int): List<ULong> {
 public fun UByteArray.takeLast(n: Int): List<UByte> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
-    val size = size
+    konst size = size
     if (n >= size) return toList()
     if (n == 1) return listOf(this[size - 1])
-    val list = ArrayList<UByte>(n)
+    konst list = ArrayList<UByte>(n)
     for (index in size - n until size)
         list.add(this[index])
     return list
@@ -2525,10 +2525,10 @@ public fun UByteArray.takeLast(n: Int): List<UByte> {
 public fun UShortArray.takeLast(n: Int): List<UShort> {
     require(n >= 0) { "Requested element count $n is less than zero." }
     if (n == 0) return emptyList()
-    val size = size
+    konst size = size
     if (n >= size) return toList()
     if (n == 1) return listOf(this[size - 1])
-    val list = ArrayList<UShort>(n)
+    konst list = ArrayList<UShort>(n)
     for (index in size - n until size)
         list.add(this[index])
     return list
@@ -2611,7 +2611,7 @@ public inline fun UShortArray.takeLastWhile(predicate: (UShort) -> Boolean): Lis
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun UIntArray.takeWhile(predicate: (UInt) -> Boolean): List<UInt> {
-    val list = ArrayList<UInt>()
+    konst list = ArrayList<UInt>()
     for (item in this) {
         if (!predicate(item))
             break
@@ -2629,7 +2629,7 @@ public inline fun UIntArray.takeWhile(predicate: (UInt) -> Boolean): List<UInt> 
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun ULongArray.takeWhile(predicate: (ULong) -> Boolean): List<ULong> {
-    val list = ArrayList<ULong>()
+    konst list = ArrayList<ULong>()
     for (item in this) {
         if (!predicate(item))
             break
@@ -2647,7 +2647,7 @@ public inline fun ULongArray.takeWhile(predicate: (ULong) -> Boolean): List<ULon
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun UByteArray.takeWhile(predicate: (UByte) -> Boolean): List<UByte> {
-    val list = ArrayList<UByte>()
+    konst list = ArrayList<UByte>()
     for (item in this) {
         if (!predicate(item))
             break
@@ -2665,7 +2665,7 @@ public inline fun UByteArray.takeWhile(predicate: (UByte) -> Boolean): List<UByt
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun UShortArray.takeWhile(predicate: (UShort) -> Boolean): List<UShort> {
-    val list = ArrayList<UShort>()
+    konst list = ArrayList<UShort>()
     for (item in this) {
         if (!predicate(item))
             break
@@ -2785,7 +2785,7 @@ public inline fun UShortArray.reverse(fromIndex: Int, toIndex: Int): Unit {
 @ExperimentalUnsignedTypes
 public fun UIntArray.reversed(): List<UInt> {
     if (isEmpty()) return emptyList()
-    val list = toMutableList()
+    konst list = toMutableList()
     list.reverse()
     return list
 }
@@ -2797,7 +2797,7 @@ public fun UIntArray.reversed(): List<UInt> {
 @ExperimentalUnsignedTypes
 public fun ULongArray.reversed(): List<ULong> {
     if (isEmpty()) return emptyList()
-    val list = toMutableList()
+    konst list = toMutableList()
     list.reverse()
     return list
 }
@@ -2809,7 +2809,7 @@ public fun ULongArray.reversed(): List<ULong> {
 @ExperimentalUnsignedTypes
 public fun UByteArray.reversed(): List<UByte> {
     if (isEmpty()) return emptyList()
-    val list = toMutableList()
+    konst list = toMutableList()
     list.reverse()
     return list
 }
@@ -2821,7 +2821,7 @@ public fun UByteArray.reversed(): List<UByte> {
 @ExperimentalUnsignedTypes
 public fun UShortArray.reversed(): List<UShort> {
     if (isEmpty()) return emptyList()
-    val list = toMutableList()
+    konst list = toMutableList()
     list.reverse()
     return list
 }
@@ -2911,8 +2911,8 @@ public fun UShortArray.shuffle(): Unit {
 @ExperimentalUnsignedTypes
 public fun UIntArray.shuffle(random: Random): Unit {
     for (i in lastIndex downTo 1) {
-        val j = random.nextInt(i + 1)
-        val copy = this[i]
+        konst j = random.nextInt(i + 1)
+        konst copy = this[i]
         this[i] = this[j]
         this[j] = copy
     }
@@ -2927,8 +2927,8 @@ public fun UIntArray.shuffle(random: Random): Unit {
 @ExperimentalUnsignedTypes
 public fun ULongArray.shuffle(random: Random): Unit {
     for (i in lastIndex downTo 1) {
-        val j = random.nextInt(i + 1)
-        val copy = this[i]
+        konst j = random.nextInt(i + 1)
+        konst copy = this[i]
         this[i] = this[j]
         this[j] = copy
     }
@@ -2943,8 +2943,8 @@ public fun ULongArray.shuffle(random: Random): Unit {
 @ExperimentalUnsignedTypes
 public fun UByteArray.shuffle(random: Random): Unit {
     for (i in lastIndex downTo 1) {
-        val j = random.nextInt(i + 1)
-        val copy = this[i]
+        konst j = random.nextInt(i + 1)
+        konst copy = this[i]
         this[i] = this[j]
         this[j] = copy
     }
@@ -2959,8 +2959,8 @@ public fun UByteArray.shuffle(random: Random): Unit {
 @ExperimentalUnsignedTypes
 public fun UShortArray.shuffle(random: Random): Unit {
     for (i in lastIndex downTo 1) {
-        val j = random.nextInt(i + 1)
-        val copy = this[i]
+        konst j = random.nextInt(i + 1)
+        konst copy = this[i]
         this[i] = this[j]
         this[j] = copy
     }
@@ -3556,10 +3556,10 @@ public inline fun UShortArray.copyOf(): UShortArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -3570,10 +3570,10 @@ public inline fun UIntArray.copyOf(newSize: Int): UIntArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -3584,10 +3584,10 @@ public inline fun ULongArray.copyOf(newSize: Int): ULongArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -3598,10 +3598,10 @@ public inline fun UByteArray.copyOf(newSize: Int): UByteArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -3675,7 +3675,7 @@ public inline fun UShortArray.copyOfRange(fromIndex: Int, toIndex: Int): UShortA
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -3690,7 +3690,7 @@ public fun UIntArray.fill(element: UInt, fromIndex: Int = 0, toIndex: Int = size
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -3705,7 +3705,7 @@ public fun ULongArray.fill(element: ULong, fromIndex: Int = 0, toIndex: Int = si
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -3720,7 +3720,7 @@ public fun UByteArray.fill(element: UByte, fromIndex: Int = 0, toIndex: Int = si
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -3735,67 +3735,67 @@ public fun UShortArray.fill(element: UShort, fromIndex: Int = 0, toIndex: Int = 
 }
 
 /**
- * Returns the range of valid indices for the array.
+ * Returns the range of konstid indices for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UIntArray.indices: IntRange
+public inline konst UIntArray.indices: IntRange
     get() = storage.indices
 
 /**
- * Returns the range of valid indices for the array.
+ * Returns the range of konstid indices for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val ULongArray.indices: IntRange
+public inline konst ULongArray.indices: IntRange
     get() = storage.indices
 
 /**
- * Returns the range of valid indices for the array.
+ * Returns the range of konstid indices for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UByteArray.indices: IntRange
+public inline konst UByteArray.indices: IntRange
     get() = storage.indices
 
 /**
- * Returns the range of valid indices for the array.
+ * Returns the range of konstid indices for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UShortArray.indices: IntRange
+public inline konst UShortArray.indices: IntRange
     get() = storage.indices
 
 /**
- * Returns the last valid index for the array.
+ * Returns the last konstid index for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UIntArray.lastIndex: Int
+public inline konst UIntArray.lastIndex: Int
     get() = storage.lastIndex
 
 /**
- * Returns the last valid index for the array.
+ * Returns the last konstid index for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val ULongArray.lastIndex: Int
+public inline konst ULongArray.lastIndex: Int
     get() = storage.lastIndex
 
 /**
- * Returns the last valid index for the array.
+ * Returns the last konstid index for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UByteArray.lastIndex: Int
+public inline konst UByteArray.lastIndex: Int
     get() = storage.lastIndex
 
 /**
- * Returns the last valid index for the array.
+ * Returns the last konstid index for the array.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
-public inline val UShortArray.lastIndex: Int
+public inline konst UShortArray.lastIndex: Int
     get() = storage.lastIndex
 
 /**
@@ -3845,7 +3845,7 @@ public inline operator fun UShortArray.plus(element: UShort): UShortArray {
 @ExperimentalUnsignedTypes
 public operator fun UIntArray.plus(elements: Collection<UInt>): UIntArray {
     var index = size
-    val result = storage.copyOf(size + elements.size)
+    konst result = storage.copyOf(size + elements.size)
     for (element in elements) result[index++] = element.toInt()
     return UIntArray(result)
 }
@@ -3857,7 +3857,7 @@ public operator fun UIntArray.plus(elements: Collection<UInt>): UIntArray {
 @ExperimentalUnsignedTypes
 public operator fun ULongArray.plus(elements: Collection<ULong>): ULongArray {
     var index = size
-    val result = storage.copyOf(size + elements.size)
+    konst result = storage.copyOf(size + elements.size)
     for (element in elements) result[index++] = element.toLong()
     return ULongArray(result)
 }
@@ -3869,7 +3869,7 @@ public operator fun ULongArray.plus(elements: Collection<ULong>): ULongArray {
 @ExperimentalUnsignedTypes
 public operator fun UByteArray.plus(elements: Collection<UByte>): UByteArray {
     var index = size
-    val result = storage.copyOf(size + elements.size)
+    konst result = storage.copyOf(size + elements.size)
     for (element in elements) result[index++] = element.toByte()
     return UByteArray(result)
 }
@@ -3881,7 +3881,7 @@ public operator fun UByteArray.plus(elements: Collection<UByte>): UByteArray {
 @ExperimentalUnsignedTypes
 public operator fun UShortArray.plus(elements: Collection<UShort>): UShortArray {
     var index = size
-    val result = storage.copyOf(size + elements.size)
+    konst result = storage.copyOf(size + elements.size)
     for (element in elements) result[index++] = element.toShort()
     return UShortArray(result)
 }
@@ -4271,8 +4271,8 @@ public inline fun ShortArray.toUShortArray(): UShortArray {
 }
 
 /**
- * Returns a [Map] where keys are elements from the given array and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given array and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -4283,14 +4283,14 @@ public inline fun ShortArray.toUShortArray(): UShortArray {
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> UIntArray.associateWith(valueSelector: (UInt) -> V): Map<UInt, V> {
-    val result = LinkedHashMap<UInt, V>(mapCapacity(size).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <V> UIntArray.associateWith(konstueSelector: (UInt) -> V): Map<UInt, V> {
+    konst result = LinkedHashMap<UInt, V>(mapCapacity(size).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Returns a [Map] where keys are elements from the given array and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given array and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -4301,14 +4301,14 @@ public inline fun <V> UIntArray.associateWith(valueSelector: (UInt) -> V): Map<U
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> ULongArray.associateWith(valueSelector: (ULong) -> V): Map<ULong, V> {
-    val result = LinkedHashMap<ULong, V>(mapCapacity(size).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <V> ULongArray.associateWith(konstueSelector: (ULong) -> V): Map<ULong, V> {
+    konst result = LinkedHashMap<ULong, V>(mapCapacity(size).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Returns a [Map] where keys are elements from the given array and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given array and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -4319,14 +4319,14 @@ public inline fun <V> ULongArray.associateWith(valueSelector: (ULong) -> V): Map
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> UByteArray.associateWith(valueSelector: (UByte) -> V): Map<UByte, V> {
-    val result = LinkedHashMap<UByte, V>(mapCapacity(size).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <V> UByteArray.associateWith(konstueSelector: (UByte) -> V): Map<UByte, V> {
+    konst result = LinkedHashMap<UByte, V>(mapCapacity(size).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Returns a [Map] where keys are elements from the given array and values are
- * produced by the [valueSelector] function applied to each element.
+ * Returns a [Map] where keys are elements from the given array and konstues are
+ * produced by the [konstueSelector] function applied to each element.
  * 
  * If any two elements are equal, the last one gets added to the map.
  * 
@@ -4337,79 +4337,79 @@ public inline fun <V> UByteArray.associateWith(valueSelector: (UByte) -> V): Map
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V> UShortArray.associateWith(valueSelector: (UShort) -> V): Map<UShort, V> {
-    val result = LinkedHashMap<UShort, V>(mapCapacity(size).coerceAtLeast(16))
-    return associateWithTo(result, valueSelector)
+public inline fun <V> UShortArray.associateWith(konstueSelector: (UShort) -> V): Map<UShort, V> {
+    konst result = LinkedHashMap<UShort, V>(mapCapacity(size).coerceAtLeast(16))
+    return associateWithTo(result, konstueSelector)
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given array,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given array,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : MutableMap<in UInt, in V>> UIntArray.associateWithTo(destination: M, valueSelector: (UInt) -> V): M {
+public inline fun <V, M : MutableMap<in UInt, in V>> UIntArray.associateWithTo(destination: M, konstueSelector: (UInt) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given array,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given array,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : MutableMap<in ULong, in V>> ULongArray.associateWithTo(destination: M, valueSelector: (ULong) -> V): M {
+public inline fun <V, M : MutableMap<in ULong, in V>> ULongArray.associateWithTo(destination: M, konstueSelector: (ULong) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given array,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given array,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : MutableMap<in UByte, in V>> UByteArray.associateWithTo(destination: M, valueSelector: (UByte) -> V): M {
+public inline fun <V, M : MutableMap<in UByte, in V>> UByteArray.associateWithTo(destination: M, konstueSelector: (UByte) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs for each element of the given array,
- * where key is the element itself and value is provided by the [valueSelector] function applied to that key.
+ * Populates and returns the [destination] mutable map with key-konstue pairs for each element of the given array,
+ * where key is the element itself and konstue is provided by the [konstueSelector] function applied to that key.
  * 
- * If any two elements are equal, the last one overwrites the former value in the map.
+ * If any two elements are equal, the last one overwrites the former konstue in the map.
  * 
  * @sample samples.collections.Collections.Transformations.associateWithTo
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <V, M : MutableMap<in UShort, in V>> UShortArray.associateWithTo(destination: M, valueSelector: (UShort) -> V): M {
+public inline fun <V, M : MutableMap<in UShort, in V>> UShortArray.associateWithTo(destination: M, konstueSelector: (UShort) -> V): M {
     for (element in this) {
-        destination.put(element, valueSelector(element))
+        destination.put(element, konstueSelector(element))
     }
     return destination
 }
@@ -4534,7 +4534,7 @@ public inline fun <R> UShortArray.flatMapIndexed(transform: (index: Int, UShort)
 public inline fun <R, C : MutableCollection<in R>> UIntArray.flatMapIndexedTo(destination: C, transform: (index: Int, UInt) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(index++, element)
+        konst list = transform(index++, element)
         destination.addAll(list)
     }
     return destination
@@ -4552,7 +4552,7 @@ public inline fun <R, C : MutableCollection<in R>> UIntArray.flatMapIndexedTo(de
 public inline fun <R, C : MutableCollection<in R>> ULongArray.flatMapIndexedTo(destination: C, transform: (index: Int, ULong) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(index++, element)
+        konst list = transform(index++, element)
         destination.addAll(list)
     }
     return destination
@@ -4570,7 +4570,7 @@ public inline fun <R, C : MutableCollection<in R>> ULongArray.flatMapIndexedTo(d
 public inline fun <R, C : MutableCollection<in R>> UByteArray.flatMapIndexedTo(destination: C, transform: (index: Int, UByte) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(index++, element)
+        konst list = transform(index++, element)
         destination.addAll(list)
     }
     return destination
@@ -4588,7 +4588,7 @@ public inline fun <R, C : MutableCollection<in R>> UByteArray.flatMapIndexedTo(d
 public inline fun <R, C : MutableCollection<in R>> UShortArray.flatMapIndexedTo(destination: C, transform: (index: Int, UShort) -> Iterable<R>): C {
     var index = 0
     for (element in this) {
-        val list = transform(index++, element)
+        konst list = transform(index++, element)
         destination.addAll(list)
     }
     return destination
@@ -4602,7 +4602,7 @@ public inline fun <R, C : MutableCollection<in R>> UShortArray.flatMapIndexedTo(
 @kotlin.internal.InlineOnly
 public inline fun <R, C : MutableCollection<in R>> UIntArray.flatMapTo(destination: C, transform: (UInt) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -4616,7 +4616,7 @@ public inline fun <R, C : MutableCollection<in R>> UIntArray.flatMapTo(destinati
 @kotlin.internal.InlineOnly
 public inline fun <R, C : MutableCollection<in R>> ULongArray.flatMapTo(destination: C, transform: (ULong) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -4630,7 +4630,7 @@ public inline fun <R, C : MutableCollection<in R>> ULongArray.flatMapTo(destinat
 @kotlin.internal.InlineOnly
 public inline fun <R, C : MutableCollection<in R>> UByteArray.flatMapTo(destination: C, transform: (UByte) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -4644,7 +4644,7 @@ public inline fun <R, C : MutableCollection<in R>> UByteArray.flatMapTo(destinat
 @kotlin.internal.InlineOnly
 public inline fun <R, C : MutableCollection<in R>> UShortArray.flatMapTo(destination: C, transform: (UShort) -> Iterable<R>): C {
     for (element in this) {
-        val list = transform(element)
+        konst list = transform(element)
         destination.addAll(list)
     }
     return destination
@@ -4711,9 +4711,9 @@ public inline fun <K> UShortArray.groupBy(keySelector: (UShort) -> K): Map<K, Li
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original array.
  * 
@@ -4722,14 +4722,14 @@ public inline fun <K> UShortArray.groupBy(keySelector: (UShort) -> K): Map<K, Li
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> UIntArray.groupBy(keySelector: (UInt) -> K, valueTransform: (UInt) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <K, V> UIntArray.groupBy(keySelector: (UInt) -> K, konstueTransform: (UInt) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original array.
  * 
@@ -4738,14 +4738,14 @@ public inline fun <K, V> UIntArray.groupBy(keySelector: (UInt) -> K, valueTransf
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> ULongArray.groupBy(keySelector: (ULong) -> K, valueTransform: (ULong) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <K, V> ULongArray.groupBy(keySelector: (ULong) -> K, konstueTransform: (ULong) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original array.
  * 
@@ -4754,14 +4754,14 @@ public inline fun <K, V> ULongArray.groupBy(keySelector: (ULong) -> K, valueTran
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> UByteArray.groupBy(keySelector: (UByte) -> K, valueTransform: (UByte) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <K, V> UByteArray.groupBy(keySelector: (UByte) -> K, konstueTransform: (UByte) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and returns a map where each group key is associated with a list of corresponding values.
+ * and returns a map where each group key is associated with a list of corresponding konstues.
  * 
  * The returned map preserves the entry iteration order of the keys produced from the original array.
  * 
@@ -4770,8 +4770,8 @@ public inline fun <K, V> UByteArray.groupBy(keySelector: (UByte) -> K, valueTran
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V> UShortArray.groupBy(keySelector: (UShort) -> K, valueTransform: (UShort) -> V): Map<K, List<V>> {
-    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, valueTransform)
+public inline fun <K, V> UShortArray.groupBy(keySelector: (UShort) -> K, konstueTransform: (UShort) -> V): Map<K, List<V>> {
+    return groupByTo(LinkedHashMap<K, MutableList<V>>(), keySelector, konstueTransform)
 }
 
 /**
@@ -4787,8 +4787,8 @@ public inline fun <K, V> UShortArray.groupBy(keySelector: (UShort) -> K, valueTr
 @kotlin.internal.InlineOnly
 public inline fun <K, M : MutableMap<in K, MutableList<UInt>>> UIntArray.groupByTo(destination: M, keySelector: (UInt) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<UInt>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<UInt>() }
         list.add(element)
     }
     return destination
@@ -4807,8 +4807,8 @@ public inline fun <K, M : MutableMap<in K, MutableList<UInt>>> UIntArray.groupBy
 @kotlin.internal.InlineOnly
 public inline fun <K, M : MutableMap<in K, MutableList<ULong>>> ULongArray.groupByTo(destination: M, keySelector: (ULong) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<ULong>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<ULong>() }
         list.add(element)
     }
     return destination
@@ -4827,8 +4827,8 @@ public inline fun <K, M : MutableMap<in K, MutableList<ULong>>> ULongArray.group
 @kotlin.internal.InlineOnly
 public inline fun <K, M : MutableMap<in K, MutableList<UByte>>> UByteArray.groupByTo(destination: M, keySelector: (UByte) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<UByte>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<UByte>() }
         list.add(element)
     }
     return destination
@@ -4847,17 +4847,17 @@ public inline fun <K, M : MutableMap<in K, MutableList<UByte>>> UByteArray.group
 @kotlin.internal.InlineOnly
 public inline fun <K, M : MutableMap<in K, MutableList<UShort>>> UShortArray.groupByTo(destination: M, keySelector: (UShort) -> K): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<UShort>() }
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<UShort>() }
         list.add(element)
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
@@ -4866,19 +4866,19 @@ public inline fun <K, M : MutableMap<in K, MutableList<UShort>>> UShortArray.gro
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UIntArray.groupByTo(destination: M, keySelector: (UInt) -> K, valueTransform: (UInt) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UIntArray.groupByTo(destination: M, keySelector: (UInt) -> K, konstueTransform: (UInt) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
@@ -4887,19 +4887,19 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UIntArray.groupBy
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> ULongArray.groupByTo(destination: M, keySelector: (ULong) -> K, valueTransform: (ULong) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> ULongArray.groupByTo(destination: M, keySelector: (ULong) -> K, konstueTransform: (ULong) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
@@ -4908,19 +4908,19 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> ULongArray.groupB
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UByteArray.groupByTo(destination: M, keySelector: (UByte) -> K, valueTransform: (UByte) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UByteArray.groupByTo(destination: M, keySelector: (UByte) -> K, konstueTransform: (UByte) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
 
 /**
- * Groups values returned by the [valueTransform] function applied to each element of the original array
+ * Groups konstues returned by the [konstueTransform] function applied to each element of the original array
  * by the key returned by the given [keySelector] function applied to the element
- * and puts to the [destination] map each group key associated with a list of corresponding values.
+ * and puts to the [destination] map each group key associated with a list of corresponding konstues.
  * 
  * @return The [destination] map.
  * 
@@ -4929,11 +4929,11 @@ public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UByteArray.groupB
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
-public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UShortArray.groupByTo(destination: M, keySelector: (UShort) -> K, valueTransform: (UShort) -> V): M {
+public inline fun <K, V, M : MutableMap<in K, MutableList<V>>> UShortArray.groupByTo(destination: M, keySelector: (UShort) -> K, konstueTransform: (UShort) -> V): M {
     for (element in this) {
-        val key = keySelector(element)
-        val list = destination.getOrPut(key) { ArrayList<V>() }
-        list.add(valueTransform(element))
+        konst key = keySelector(element)
+        konst list = destination.getOrPut(key) { ArrayList<V>() }
+        list.add(konstueTransform(element))
     }
     return destination
 }
@@ -5415,12 +5415,12 @@ public inline fun UShortArray.count(predicate: (UShort) -> Boolean): Int {
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5432,12 +5432,12 @@ public inline fun <R> UIntArray.fold(initial: R, operation: (acc: R, UInt) -> R)
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5449,12 +5449,12 @@ public inline fun <R> ULongArray.fold(initial: R, operation: (acc: R, ULong) -> 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5466,12 +5466,12 @@ public inline fun <R> UByteArray.fold(initial: R, operation: (acc: R, UByte) -> 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5483,13 +5483,13 @@ public inline fun <R> UShortArray.fold(initial: R, operation: (acc: R, UShort) -
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5502,13 +5502,13 @@ public inline fun <R> UIntArray.foldIndexed(initial: R, operation: (index: Int, 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5521,13 +5521,13 @@ public inline fun <R> ULongArray.foldIndexed(initial: R, operation: (index: Int,
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5540,13 +5540,13 @@ public inline fun <R> UByteArray.foldIndexed(initial: R, operation: (index: Int,
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5559,12 +5559,12 @@ public inline fun <R> UShortArray.foldIndexed(initial: R, operation: (index: Int
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5579,12 +5579,12 @@ public inline fun <R> UIntArray.foldRight(initial: R, operation: (UInt, acc: R) 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5599,12 +5599,12 @@ public inline fun <R> ULongArray.foldRight(initial: R, operation: (ULong, acc: R
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5619,12 +5619,12 @@ public inline fun <R> UByteArray.foldRight(initial: R, operation: (UByte, acc: R
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value, and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5639,13 +5639,13 @@ public inline fun <R> UShortArray.foldRight(initial: R, operation: (UShort, acc:
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
  * @param [operation] function that takes the index of an element, the element itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5661,13 +5661,13 @@ public inline fun <R> UIntArray.foldRightIndexed(initial: R, operation: (index: 
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
  * @param [operation] function that takes the index of an element, the element itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5683,13 +5683,13 @@ public inline fun <R> ULongArray.foldRightIndexed(initial: R, operation: (index:
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
  * @param [operation] function that takes the index of an element, the element itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5705,13 +5705,13 @@ public inline fun <R> UByteArray.foldRightIndexed(initial: R, operation: (index:
 }
 
 /**
- * Accumulates value starting with [initial] value and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with [initial] konstue and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
- * Returns the specified [initial] value if the array is empty.
+ * Returns the specified [initial] konstue if the array is empty.
  * 
  * @param [operation] function that takes the index of an element, the element itself
- * and current accumulator value, and calculates the next accumulator value.
+ * and current accumulator konstue, and calculates the next accumulator konstue.
  */
 @SinceKotlin("1.3")
 @ExperimentalUnsignedTypes
@@ -5831,7 +5831,7 @@ public fun UIntArray.max(): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -5850,7 +5850,7 @@ public fun ULongArray.max(): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -5869,7 +5869,7 @@ public fun UByteArray.max(): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -5888,14 +5888,14 @@ public fun UShortArray.max(): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -5909,12 +5909,12 @@ public fun UShortArray.max(): UShort {
 public inline fun <R : Comparable<R>> UIntArray.maxBy(selector: (UInt) -> R): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -5924,7 +5924,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxBy(selector: (UInt) -> R): UI
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -5938,12 +5938,12 @@ public inline fun <R : Comparable<R>> UIntArray.maxBy(selector: (UInt) -> R): UI
 public inline fun <R : Comparable<R>> ULongArray.maxBy(selector: (ULong) -> R): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -5953,7 +5953,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxBy(selector: (ULong) -> R): 
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -5967,12 +5967,12 @@ public inline fun <R : Comparable<R>> ULongArray.maxBy(selector: (ULong) -> R): 
 public inline fun <R : Comparable<R>> UByteArray.maxBy(selector: (UByte) -> R): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -5982,7 +5982,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxBy(selector: (UByte) -> R): 
 }
 
 /**
- * Returns the first element yielding the largest value of the given function.
+ * Returns the first element yielding the largest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -5996,12 +5996,12 @@ public inline fun <R : Comparable<R>> UByteArray.maxBy(selector: (UByte) -> R): 
 public inline fun <R : Comparable<R>> UShortArray.maxBy(selector: (UShort) -> R): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -6011,7 +6011,7 @@ public inline fun <R : Comparable<R>> UShortArray.maxBy(selector: (UShort) -> R)
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -6021,12 +6021,12 @@ public inline fun <R : Comparable<R>> UShortArray.maxBy(selector: (UShort) -> R)
 public inline fun <R : Comparable<R>> UIntArray.maxByOrNull(selector: (UInt) -> R): UInt? {
     if (isEmpty()) return null
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -6036,7 +6036,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxByOrNull(selector: (UInt) -> 
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -6046,12 +6046,12 @@ public inline fun <R : Comparable<R>> UIntArray.maxByOrNull(selector: (UInt) -> 
 public inline fun <R : Comparable<R>> ULongArray.maxByOrNull(selector: (ULong) -> R): ULong? {
     if (isEmpty()) return null
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -6061,7 +6061,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxByOrNull(selector: (ULong) -
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -6071,12 +6071,12 @@ public inline fun <R : Comparable<R>> ULongArray.maxByOrNull(selector: (ULong) -
 public inline fun <R : Comparable<R>> UByteArray.maxByOrNull(selector: (UByte) -> R): UByte? {
     if (isEmpty()) return null
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -6086,7 +6086,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxByOrNull(selector: (UByte) -
 }
 
 /**
- * Returns the first element yielding the largest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the largest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.maxByOrNull
  */
@@ -6096,12 +6096,12 @@ public inline fun <R : Comparable<R>> UByteArray.maxByOrNull(selector: (UByte) -
 public inline fun <R : Comparable<R>> UShortArray.maxByOrNull(selector: (UShort) -> R): UShort? {
     if (isEmpty()) return null
     var maxElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return maxElem
     var maxValue = selector(maxElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (maxValue < v) {
             maxElem = e
             maxValue = v
@@ -6111,10 +6111,10 @@ public inline fun <R : Comparable<R>> UShortArray.maxByOrNull(selector: (UShort)
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6127,17 +6127,17 @@ public inline fun UIntArray.maxOf(selector: (UInt) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6150,17 +6150,17 @@ public inline fun ULongArray.maxOf(selector: (ULong) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6173,17 +6173,17 @@ public inline fun UByteArray.maxOf(selector: (UByte) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6196,17 +6196,17 @@ public inline fun UShortArray.maxOf(selector: (UShort) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6219,17 +6219,17 @@ public inline fun UIntArray.maxOf(selector: (UInt) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6242,17 +6242,17 @@ public inline fun ULongArray.maxOf(selector: (ULong) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6265,17 +6265,17 @@ public inline fun UByteArray.maxOf(selector: (UByte) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6288,14 +6288,14 @@ public inline fun UShortArray.maxOf(selector: (UShort) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -6309,7 +6309,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxOf(selector: (UInt) -> R): R 
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6318,7 +6318,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxOf(selector: (UInt) -> R): R 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -6332,7 +6332,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxOf(selector: (ULong) -> R): 
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6341,7 +6341,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxOf(selector: (ULong) -> R): 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -6355,7 +6355,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxOf(selector: (UByte) -> R): 
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6364,7 +6364,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxOf(selector: (UByte) -> R): 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -6378,7 +6378,7 @@ public inline fun <R : Comparable<R>> UShortArray.maxOf(selector: (UShort) -> R)
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6387,10 +6387,10 @@ public inline fun <R : Comparable<R>> UShortArray.maxOf(selector: (UShort) -> R)
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6401,17 +6401,17 @@ public inline fun UIntArray.maxOfOrNull(selector: (UInt) -> Double): Double? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6422,17 +6422,17 @@ public inline fun ULongArray.maxOfOrNull(selector: (ULong) -> Double): Double? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6443,17 +6443,17 @@ public inline fun UByteArray.maxOfOrNull(selector: (UByte) -> Double): Double? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6464,17 +6464,17 @@ public inline fun UShortArray.maxOfOrNull(selector: (UShort) -> Double): Double?
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6485,17 +6485,17 @@ public inline fun UIntArray.maxOfOrNull(selector: (UInt) -> Float): Float? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6506,17 +6506,17 @@ public inline fun ULongArray.maxOfOrNull(selector: (ULong) -> Float): Float? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6527,17 +6527,17 @@ public inline fun UByteArray.maxOfOrNull(selector: (UByte) -> Float): Float? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6548,14 +6548,14 @@ public inline fun UShortArray.maxOfOrNull(selector: (UShort) -> Float): Float? {
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         maxValue = maxOf(maxValue, v)
     }
     return maxValue
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -6567,7 +6567,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxOfOrNull(selector: (UInt) -> 
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6576,7 +6576,7 @@ public inline fun <R : Comparable<R>> UIntArray.maxOfOrNull(selector: (UInt) -> 
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -6588,7 +6588,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxOfOrNull(selector: (ULong) -
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6597,7 +6597,7 @@ public inline fun <R : Comparable<R>> ULongArray.maxOfOrNull(selector: (ULong) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -6609,7 +6609,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxOfOrNull(selector: (UByte) -
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6618,7 +6618,7 @@ public inline fun <R : Comparable<R>> UByteArray.maxOfOrNull(selector: (UByte) -
 }
 
 /**
- * Returns the largest value among all values produced by [selector] function
+ * Returns the largest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -6630,7 +6630,7 @@ public inline fun <R : Comparable<R>> UShortArray.maxOfOrNull(selector: (UShort)
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (maxValue < v) {
             maxValue = v
         }
@@ -6639,8 +6639,8 @@ public inline fun <R : Comparable<R>> UShortArray.maxOfOrNull(selector: (UShort)
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6653,7 +6653,7 @@ public inline fun <R> UIntArray.maxOfWith(comparator: Comparator<in R>, selector
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6662,8 +6662,8 @@ public inline fun <R> UIntArray.maxOfWith(comparator: Comparator<in R>, selector
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6676,7 +6676,7 @@ public inline fun <R> ULongArray.maxOfWith(comparator: Comparator<in R>, selecto
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6685,8 +6685,8 @@ public inline fun <R> ULongArray.maxOfWith(comparator: Comparator<in R>, selecto
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6699,7 +6699,7 @@ public inline fun <R> UByteArray.maxOfWith(comparator: Comparator<in R>, selecto
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6708,8 +6708,8 @@ public inline fun <R> UByteArray.maxOfWith(comparator: Comparator<in R>, selecto
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6722,7 +6722,7 @@ public inline fun <R> UShortArray.maxOfWith(comparator: Comparator<in R>, select
     if (isEmpty()) throw NoSuchElementException()
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6731,8 +6731,8 @@ public inline fun <R> UShortArray.maxOfWith(comparator: Comparator<in R>, select
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6743,7 +6743,7 @@ public inline fun <R> UIntArray.maxOfWithOrNull(comparator: Comparator<in R>, se
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6752,8 +6752,8 @@ public inline fun <R> UIntArray.maxOfWithOrNull(comparator: Comparator<in R>, se
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6764,7 +6764,7 @@ public inline fun <R> ULongArray.maxOfWithOrNull(comparator: Comparator<in R>, s
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6773,8 +6773,8 @@ public inline fun <R> ULongArray.maxOfWithOrNull(comparator: Comparator<in R>, s
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6785,7 +6785,7 @@ public inline fun <R> UByteArray.maxOfWithOrNull(comparator: Comparator<in R>, s
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6794,8 +6794,8 @@ public inline fun <R> UByteArray.maxOfWithOrNull(comparator: Comparator<in R>, s
 }
 
 /**
- * Returns the largest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the largest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -6806,7 +6806,7 @@ public inline fun <R> UShortArray.maxOfWithOrNull(comparator: Comparator<in R>, 
     if (isEmpty()) return null
     var maxValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(maxValue, v) < 0) {
             maxValue = v
         }
@@ -6823,7 +6823,7 @@ public fun UIntArray.maxOrNull(): UInt? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -6838,7 +6838,7 @@ public fun ULongArray.maxOrNull(): ULong? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -6853,7 +6853,7 @@ public fun UByteArray.maxOrNull(): UByte? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
@@ -6868,14 +6868,14 @@ public fun UShortArray.maxOrNull(): UShort? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (max < e) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6887,14 +6887,14 @@ public fun UIntArray.maxWith(comparator: Comparator<in UInt>): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6906,14 +6906,14 @@ public fun ULongArray.maxWith(comparator: Comparator<in ULong>): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6925,14 +6925,14 @@ public fun UByteArray.maxWith(comparator: Comparator<in UByte>): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator].
+ * Returns the first element having the largest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -6944,14 +6944,14 @@ public fun UShortArray.maxWith(comparator: Comparator<in UShort>): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -6959,14 +6959,14 @@ public fun UIntArray.maxWithOrNull(comparator: Comparator<in UInt>): UInt? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -6974,14 +6974,14 @@ public fun ULongArray.maxWithOrNull(comparator: Comparator<in ULong>): ULong? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -6989,14 +6989,14 @@ public fun UByteArray.maxWithOrNull(comparator: Comparator<in UByte>): UByte? {
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
 }
 
 /**
- * Returns the first element having the largest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the largest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -7004,7 +7004,7 @@ public fun UShortArray.maxWithOrNull(comparator: Comparator<in UShort>): UShort?
     if (isEmpty()) return null
     var max = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(max, e) < 0) max = e
     }
     return max
@@ -7023,7 +7023,7 @@ public fun UIntArray.min(): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -7042,7 +7042,7 @@ public fun ULongArray.min(): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -7061,7 +7061,7 @@ public fun UByteArray.min(): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -7080,14 +7080,14 @@ public fun UShortArray.min(): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -7101,12 +7101,12 @@ public fun UShortArray.min(): UShort {
 public inline fun <R : Comparable<R>> UIntArray.minBy(selector: (UInt) -> R): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7116,7 +7116,7 @@ public inline fun <R : Comparable<R>> UIntArray.minBy(selector: (UInt) -> R): UI
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -7130,12 +7130,12 @@ public inline fun <R : Comparable<R>> UIntArray.minBy(selector: (UInt) -> R): UI
 public inline fun <R : Comparable<R>> ULongArray.minBy(selector: (ULong) -> R): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7145,7 +7145,7 @@ public inline fun <R : Comparable<R>> ULongArray.minBy(selector: (ULong) -> R): 
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -7159,12 +7159,12 @@ public inline fun <R : Comparable<R>> ULongArray.minBy(selector: (ULong) -> R): 
 public inline fun <R : Comparable<R>> UByteArray.minBy(selector: (UByte) -> R): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7174,7 +7174,7 @@ public inline fun <R : Comparable<R>> UByteArray.minBy(selector: (UByte) -> R): 
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function.
+ * Returns the first element yielding the smallest konstue of the given function.
  * 
  * @throws NoSuchElementException if the array is empty.
  * 
@@ -7188,12 +7188,12 @@ public inline fun <R : Comparable<R>> UByteArray.minBy(selector: (UByte) -> R): 
 public inline fun <R : Comparable<R>> UShortArray.minBy(selector: (UShort) -> R): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7203,7 +7203,7 @@ public inline fun <R : Comparable<R>> UShortArray.minBy(selector: (UShort) -> R)
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -7213,12 +7213,12 @@ public inline fun <R : Comparable<R>> UShortArray.minBy(selector: (UShort) -> R)
 public inline fun <R : Comparable<R>> UIntArray.minByOrNull(selector: (UInt) -> R): UInt? {
     if (isEmpty()) return null
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7228,7 +7228,7 @@ public inline fun <R : Comparable<R>> UIntArray.minByOrNull(selector: (UInt) -> 
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -7238,12 +7238,12 @@ public inline fun <R : Comparable<R>> UIntArray.minByOrNull(selector: (UInt) -> 
 public inline fun <R : Comparable<R>> ULongArray.minByOrNull(selector: (ULong) -> R): ULong? {
     if (isEmpty()) return null
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7253,7 +7253,7 @@ public inline fun <R : Comparable<R>> ULongArray.minByOrNull(selector: (ULong) -
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -7263,12 +7263,12 @@ public inline fun <R : Comparable<R>> ULongArray.minByOrNull(selector: (ULong) -
 public inline fun <R : Comparable<R>> UByteArray.minByOrNull(selector: (UByte) -> R): UByte? {
     if (isEmpty()) return null
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7278,7 +7278,7 @@ public inline fun <R : Comparable<R>> UByteArray.minByOrNull(selector: (UByte) -
 }
 
 /**
- * Returns the first element yielding the smallest value of the given function or `null` if there are no elements.
+ * Returns the first element yielding the smallest konstue of the given function or `null` if there are no elements.
  * 
  * @sample samples.collections.Collections.Aggregates.minByOrNull
  */
@@ -7288,12 +7288,12 @@ public inline fun <R : Comparable<R>> UByteArray.minByOrNull(selector: (UByte) -
 public inline fun <R : Comparable<R>> UShortArray.minByOrNull(selector: (UShort) -> R): UShort? {
     if (isEmpty()) return null
     var minElem = this[0]
-    val lastIndex = this.lastIndex
+    konst lastIndex = this.lastIndex
     if (lastIndex == 0) return minElem
     var minValue = selector(minElem)
     for (i in 1..lastIndex) {
-        val e = this[i]
-        val v = selector(e)
+        konst e = this[i]
+        konst v = selector(e)
         if (minValue > v) {
             minElem = e
             minValue = v
@@ -7303,10 +7303,10 @@ public inline fun <R : Comparable<R>> UShortArray.minByOrNull(selector: (UShort)
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7319,17 +7319,17 @@ public inline fun UIntArray.minOf(selector: (UInt) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7342,17 +7342,17 @@ public inline fun ULongArray.minOf(selector: (ULong) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7365,17 +7365,17 @@ public inline fun UByteArray.minOf(selector: (UByte) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7388,17 +7388,17 @@ public inline fun UShortArray.minOf(selector: (UShort) -> Double): Double {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7411,17 +7411,17 @@ public inline fun UIntArray.minOf(selector: (UInt) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7434,17 +7434,17 @@ public inline fun ULongArray.minOf(selector: (ULong) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7457,17 +7457,17 @@ public inline fun UByteArray.minOf(selector: (UByte) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7480,14 +7480,14 @@ public inline fun UShortArray.minOf(selector: (UShort) -> Float): Float {
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -7501,7 +7501,7 @@ public inline fun <R : Comparable<R>> UIntArray.minOf(selector: (UInt) -> R): R 
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7510,7 +7510,7 @@ public inline fun <R : Comparable<R>> UIntArray.minOf(selector: (UInt) -> R): R 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -7524,7 +7524,7 @@ public inline fun <R : Comparable<R>> ULongArray.minOf(selector: (ULong) -> R): 
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7533,7 +7533,7 @@ public inline fun <R : Comparable<R>> ULongArray.minOf(selector: (ULong) -> R): 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -7547,7 +7547,7 @@ public inline fun <R : Comparable<R>> UByteArray.minOf(selector: (UByte) -> R): 
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7556,7 +7556,7 @@ public inline fun <R : Comparable<R>> UByteArray.minOf(selector: (UByte) -> R): 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
@@ -7570,7 +7570,7 @@ public inline fun <R : Comparable<R>> UShortArray.minOf(selector: (UShort) -> R)
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7579,10 +7579,10 @@ public inline fun <R : Comparable<R>> UShortArray.minOf(selector: (UShort) -> R)
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7593,17 +7593,17 @@ public inline fun UIntArray.minOfOrNull(selector: (UInt) -> Double): Double? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7614,17 +7614,17 @@ public inline fun ULongArray.minOfOrNull(selector: (ULong) -> Double): Double? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7635,17 +7635,17 @@ public inline fun UByteArray.minOfOrNull(selector: (UByte) -> Double): Double? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7656,17 +7656,17 @@ public inline fun UShortArray.minOfOrNull(selector: (UShort) -> Double): Double?
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7677,17 +7677,17 @@ public inline fun UIntArray.minOfOrNull(selector: (UInt) -> Float): Float? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7698,17 +7698,17 @@ public inline fun ULongArray.minOfOrNull(selector: (ULong) -> Float): Float? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7719,17 +7719,17 @@ public inline fun UByteArray.minOfOrNull(selector: (UByte) -> Float): Float? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  * 
- * If any of values produced by [selector] function is `NaN`, the returned result is `NaN`.
+ * If any of konstues produced by [selector] function is `NaN`, the returned result is `NaN`.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7740,14 +7740,14 @@ public inline fun UShortArray.minOfOrNull(selector: (UShort) -> Float): Float? {
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         minValue = minOf(minValue, v)
     }
     return minValue
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -7759,7 +7759,7 @@ public inline fun <R : Comparable<R>> UIntArray.minOfOrNull(selector: (UInt) -> 
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7768,7 +7768,7 @@ public inline fun <R : Comparable<R>> UIntArray.minOfOrNull(selector: (UInt) -> 
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -7780,7 +7780,7 @@ public inline fun <R : Comparable<R>> ULongArray.minOfOrNull(selector: (ULong) -
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7789,7 +7789,7 @@ public inline fun <R : Comparable<R>> ULongArray.minOfOrNull(selector: (ULong) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -7801,7 +7801,7 @@ public inline fun <R : Comparable<R>> UByteArray.minOfOrNull(selector: (UByte) -
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7810,7 +7810,7 @@ public inline fun <R : Comparable<R>> UByteArray.minOfOrNull(selector: (UByte) -
 }
 
 /**
- * Returns the smallest value among all values produced by [selector] function
+ * Returns the smallest konstue among all konstues produced by [selector] function
  * applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
@@ -7822,7 +7822,7 @@ public inline fun <R : Comparable<R>> UShortArray.minOfOrNull(selector: (UShort)
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (minValue > v) {
             minValue = v
         }
@@ -7831,8 +7831,8 @@ public inline fun <R : Comparable<R>> UShortArray.minOfOrNull(selector: (UShort)
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7845,7 +7845,7 @@ public inline fun <R> UIntArray.minOfWith(comparator: Comparator<in R>, selector
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7854,8 +7854,8 @@ public inline fun <R> UIntArray.minOfWith(comparator: Comparator<in R>, selector
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7868,7 +7868,7 @@ public inline fun <R> ULongArray.minOfWith(comparator: Comparator<in R>, selecto
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7877,8 +7877,8 @@ public inline fun <R> ULongArray.minOfWith(comparator: Comparator<in R>, selecto
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7891,7 +7891,7 @@ public inline fun <R> UByteArray.minOfWith(comparator: Comparator<in R>, selecto
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7900,8 +7900,8 @@ public inline fun <R> UByteArray.minOfWith(comparator: Comparator<in R>, selecto
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array.
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -7914,7 +7914,7 @@ public inline fun <R> UShortArray.minOfWith(comparator: Comparator<in R>, select
     if (isEmpty()) throw NoSuchElementException()
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7923,8 +7923,8 @@ public inline fun <R> UShortArray.minOfWith(comparator: Comparator<in R>, select
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7935,7 +7935,7 @@ public inline fun <R> UIntArray.minOfWithOrNull(comparator: Comparator<in R>, se
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7944,8 +7944,8 @@ public inline fun <R> UIntArray.minOfWithOrNull(comparator: Comparator<in R>, se
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7956,7 +7956,7 @@ public inline fun <R> ULongArray.minOfWithOrNull(comparator: Comparator<in R>, s
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7965,8 +7965,8 @@ public inline fun <R> ULongArray.minOfWithOrNull(comparator: Comparator<in R>, s
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7977,7 +7977,7 @@ public inline fun <R> UByteArray.minOfWithOrNull(comparator: Comparator<in R>, s
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -7986,8 +7986,8 @@ public inline fun <R> UByteArray.minOfWithOrNull(comparator: Comparator<in R>, s
 }
 
 /**
- * Returns the smallest value according to the provided [comparator]
- * among all values produced by [selector] function applied to each element in the array or `null` if there are no elements.
+ * Returns the smallest konstue according to the provided [comparator]
+ * among all konstues produced by [selector] function applied to each element in the array or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -7998,7 +7998,7 @@ public inline fun <R> UShortArray.minOfWithOrNull(comparator: Comparator<in R>, 
     if (isEmpty()) return null
     var minValue = selector(this[0])
     for (i in 1..lastIndex) {
-        val v = selector(this[i])
+        konst v = selector(this[i])
         if (comparator.compare(minValue, v) > 0) {
             minValue = v
         }
@@ -8015,7 +8015,7 @@ public fun UIntArray.minOrNull(): UInt? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -8030,7 +8030,7 @@ public fun ULongArray.minOrNull(): ULong? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -8045,7 +8045,7 @@ public fun UByteArray.minOrNull(): UByte? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
@@ -8060,14 +8060,14 @@ public fun UShortArray.minOrNull(): UShort? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (min > e) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -8079,14 +8079,14 @@ public fun UIntArray.minWith(comparator: Comparator<in UInt>): UInt {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -8098,14 +8098,14 @@ public fun ULongArray.minWith(comparator: Comparator<in ULong>): ULong {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -8117,14 +8117,14 @@ public fun UByteArray.minWith(comparator: Comparator<in UByte>): UByte {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator].
+ * Returns the first element having the smallest konstue according to the provided [comparator].
  * 
  * @throws NoSuchElementException if the array is empty.
  */
@@ -8136,14 +8136,14 @@ public fun UShortArray.minWith(comparator: Comparator<in UShort>): UShort {
     if (isEmpty()) throw NoSuchElementException()
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -8151,14 +8151,14 @@ public fun UIntArray.minWithOrNull(comparator: Comparator<in UInt>): UInt? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -8166,14 +8166,14 @@ public fun ULongArray.minWithOrNull(comparator: Comparator<in ULong>): ULong? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -8181,14 +8181,14 @@ public fun UByteArray.minWithOrNull(comparator: Comparator<in UByte>): UByte? {
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
 }
 
 /**
- * Returns the first element having the smallest value according to the provided [comparator] or `null` if there are no elements.
+ * Returns the first element having the smallest konstue according to the provided [comparator] or `null` if there are no elements.
  */
 @SinceKotlin("1.4")
 @ExperimentalUnsignedTypes
@@ -8196,7 +8196,7 @@ public fun UShortArray.minWithOrNull(comparator: Comparator<in UShort>): UShort?
     if (isEmpty()) return null
     var min = this[0]
     for (i in 1..lastIndex) {
-        val e = this[i]
+        konst e = this[i]
         if (comparator.compare(min, e) > 0) min = e
     }
     return min
@@ -8395,14 +8395,14 @@ public inline fun UShortArray.onEachIndexed(action: (index: Int, UShort) -> Unit
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8420,14 +8420,14 @@ public inline fun UIntArray.reduce(operation: (acc: UInt, UInt) -> UInt): UInt {
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8445,14 +8445,14 @@ public inline fun ULongArray.reduce(operation: (acc: ULong, ULong) -> ULong): UL
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8470,14 +8470,14 @@ public inline fun UByteArray.reduce(operation: (acc: UByte, UByte) -> UByte): UB
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8495,14 +8495,14 @@ public inline fun UShortArray.reduce(operation: (acc: UShort, UShort) -> UShort)
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8520,14 +8520,14 @@ public inline fun UIntArray.reduceIndexed(operation: (index: Int, acc: UInt, UIn
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8545,14 +8545,14 @@ public inline fun ULongArray.reduceIndexed(operation: (index: Int, acc: ULong, U
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8570,14 +8570,14 @@ public inline fun UByteArray.reduceIndexed(operation: (index: Int, acc: UByte, U
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduce
  */
@@ -8595,13 +8595,13 @@ public inline fun UShortArray.reduceIndexed(operation: (index: Int, acc: UShort,
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8619,13 +8619,13 @@ public inline fun UIntArray.reduceIndexedOrNull(operation: (index: Int, acc: UIn
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8643,13 +8643,13 @@ public inline fun ULongArray.reduceIndexedOrNull(operation: (index: Int, acc: UL
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8667,13 +8667,13 @@ public inline fun UByteArray.reduceIndexedOrNull(operation: (index: Int, acc: UB
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element with its index in the original array.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element with its index in the original array.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value and the element itself,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue and the element itself,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8691,13 +8691,13 @@ public inline fun UShortArray.reduceIndexedOrNull(operation: (index: Int, acc: U
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8716,13 +8716,13 @@ public inline fun UIntArray.reduceOrNull(operation: (acc: UInt, UInt) -> UInt): 
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8741,13 +8741,13 @@ public inline fun ULongArray.reduceOrNull(operation: (acc: ULong, ULong) -> ULon
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8766,13 +8766,13 @@ public inline fun UByteArray.reduceOrNull(operation: (acc: UByte, UByte) -> UByt
 }
 
 /**
- * Accumulates value starting with the first element and applying [operation] from left to right
- * to current accumulator value and each element.
+ * Accumulates konstue starting with the first element and applying [operation] from left to right
+ * to current accumulator konstue and each element.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes current accumulator value and an element,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceOrNull
  */
@@ -8791,14 +8791,14 @@ public inline fun UShortArray.reduceOrNull(operation: (acc: UShort, UShort) -> U
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8816,14 +8816,14 @@ public inline fun UIntArray.reduceRight(operation: (UInt, acc: UInt) -> UInt): U
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8841,14 +8841,14 @@ public inline fun ULongArray.reduceRight(operation: (ULong, acc: ULong) -> ULong
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8866,14 +8866,14 @@ public inline fun UByteArray.reduceRight(operation: (UByte, acc: UByte) -> UByte
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8891,14 +8891,14 @@ public inline fun UShortArray.reduceRight(operation: (UShort, acc: UShort) -> US
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8917,14 +8917,14 @@ public inline fun UIntArray.reduceRightIndexed(operation: (index: Int, UInt, acc
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8943,14 +8943,14 @@ public inline fun ULongArray.reduceRightIndexed(operation: (index: Int, ULong, a
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8969,14 +8969,14 @@ public inline fun UByteArray.reduceRightIndexed(operation: (index: Int, UByte, a
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Throws an exception if this array is empty. If the array can be empty in an expected way,
  * please use [reduceRightIndexedOrNull] instead. It returns `null` when its receiver is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRight
  */
@@ -8995,13 +8995,13 @@ public inline fun UShortArray.reduceRightIndexed(operation: (index: Int, UShort,
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9020,13 +9020,13 @@ public inline fun UIntArray.reduceRightIndexedOrNull(operation: (index: Int, UIn
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9045,13 +9045,13 @@ public inline fun ULongArray.reduceRightIndexedOrNull(operation: (index: Int, UL
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9070,13 +9070,13 @@ public inline fun UByteArray.reduceRightIndexedOrNull(operation: (index: Int, UB
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element with its index in the original array and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element with its index in the original array and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes the index of an element, the element itself and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, the element itself and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9095,13 +9095,13 @@ public inline fun UShortArray.reduceRightIndexedOrNull(operation: (index: Int, U
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9120,13 +9120,13 @@ public inline fun UIntArray.reduceRightOrNull(operation: (UInt, acc: UInt) -> UI
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9145,13 +9145,13 @@ public inline fun ULongArray.reduceRightOrNull(operation: (ULong, acc: ULong) ->
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9170,13 +9170,13 @@ public inline fun UByteArray.reduceRightOrNull(operation: (UByte, acc: UByte) ->
 }
 
 /**
- * Accumulates value starting with the last element and applying [operation] from right to left
- * to each element and current accumulator value.
+ * Accumulates konstue starting with the last element and applying [operation] from right to left
+ * to each element and current accumulator konstue.
  * 
  * Returns `null` if the array is empty.
  * 
- * @param [operation] function that takes an element and current accumulator value,
- * and calculates the next accumulator value.
+ * @param [operation] function that takes an element and current accumulator konstue,
+ * and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.reduceRightOrNull
  */
@@ -9195,13 +9195,13 @@ public inline fun UShortArray.reduceRightOrNull(operation: (UShort, acc: UShort)
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9210,7 +9210,7 @@ public inline fun UShortArray.reduceRightOrNull(operation: (UShort, acc: UShort)
 @kotlin.internal.InlineOnly
 public inline fun <R> UIntArray.runningFold(initial: R, operation: (acc: R, UInt) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -9220,13 +9220,13 @@ public inline fun <R> UIntArray.runningFold(initial: R, operation: (acc: R, UInt
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9235,7 +9235,7 @@ public inline fun <R> UIntArray.runningFold(initial: R, operation: (acc: R, UInt
 @kotlin.internal.InlineOnly
 public inline fun <R> ULongArray.runningFold(initial: R, operation: (acc: R, ULong) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -9245,13 +9245,13 @@ public inline fun <R> ULongArray.runningFold(initial: R, operation: (acc: R, ULo
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9260,7 +9260,7 @@ public inline fun <R> ULongArray.runningFold(initial: R, operation: (acc: R, ULo
 @kotlin.internal.InlineOnly
 public inline fun <R> UByteArray.runningFold(initial: R, operation: (acc: R, UByte) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -9270,13 +9270,13 @@ public inline fun <R> UByteArray.runningFold(initial: R, operation: (acc: R, UBy
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9285,7 +9285,7 @@ public inline fun <R> UByteArray.runningFold(initial: R, operation: (acc: R, UBy
 @kotlin.internal.InlineOnly
 public inline fun <R> UShortArray.runningFold(initial: R, operation: (acc: R, UShort) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (element in this) {
         accumulator = operation(accumulator, element)
@@ -9295,14 +9295,14 @@ public inline fun <R> UShortArray.runningFold(initial: R, operation: (acc: R, US
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9311,7 +9311,7 @@ public inline fun <R> UShortArray.runningFold(initial: R, operation: (acc: R, US
 @kotlin.internal.InlineOnly
 public inline fun <R> UIntArray.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, UInt) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (index in indices) {
         accumulator = operation(index, accumulator, this[index])
@@ -9321,14 +9321,14 @@ public inline fun <R> UIntArray.runningFoldIndexed(initial: R, operation: (index
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9337,7 +9337,7 @@ public inline fun <R> UIntArray.runningFoldIndexed(initial: R, operation: (index
 @kotlin.internal.InlineOnly
 public inline fun <R> ULongArray.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, ULong) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (index in indices) {
         accumulator = operation(index, accumulator, this[index])
@@ -9347,14 +9347,14 @@ public inline fun <R> ULongArray.runningFoldIndexed(initial: R, operation: (inde
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9363,7 +9363,7 @@ public inline fun <R> ULongArray.runningFoldIndexed(initial: R, operation: (inde
 @kotlin.internal.InlineOnly
 public inline fun <R> UByteArray.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, UByte) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (index in indices) {
         accumulator = operation(index, accumulator, this[index])
@@ -9373,14 +9373,14 @@ public inline fun <R> UByteArray.runningFoldIndexed(initial: R, operation: (inde
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningFold
  */
@@ -9389,7 +9389,7 @@ public inline fun <R> UByteArray.runningFoldIndexed(initial: R, operation: (inde
 @kotlin.internal.InlineOnly
 public inline fun <R> UShortArray.runningFoldIndexed(initial: R, operation: (index: Int, acc: R, UShort) -> R): List<R> {
     if (isEmpty()) return listOf(initial)
-    val result = ArrayList<R>(size + 1).apply { add(initial) }
+    konst result = ArrayList<R>(size + 1).apply { add(initial) }
     var accumulator = initial
     for (index in indices) {
         accumulator = operation(index, accumulator, this[index])
@@ -9399,13 +9399,13 @@ public inline fun <R> UShortArray.runningFoldIndexed(initial: R, operation: (ind
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9415,7 +9415,7 @@ public inline fun <R> UShortArray.runningFoldIndexed(initial: R, operation: (ind
 public inline fun UIntArray.runningReduce(operation: (acc: UInt, UInt) -> UInt): List<UInt> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UInt>(size).apply { add(accumulator) }
+    konst result = ArrayList<UInt>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(accumulator, this[index])
         result.add(accumulator)
@@ -9424,13 +9424,13 @@ public inline fun UIntArray.runningReduce(operation: (acc: UInt, UInt) -> UInt):
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9440,7 +9440,7 @@ public inline fun UIntArray.runningReduce(operation: (acc: UInt, UInt) -> UInt):
 public inline fun ULongArray.runningReduce(operation: (acc: ULong, ULong) -> ULong): List<ULong> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<ULong>(size).apply { add(accumulator) }
+    konst result = ArrayList<ULong>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(accumulator, this[index])
         result.add(accumulator)
@@ -9449,13 +9449,13 @@ public inline fun ULongArray.runningReduce(operation: (acc: ULong, ULong) -> ULo
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9465,7 +9465,7 @@ public inline fun ULongArray.runningReduce(operation: (acc: ULong, ULong) -> ULo
 public inline fun UByteArray.runningReduce(operation: (acc: UByte, UByte) -> UByte): List<UByte> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UByte>(size).apply { add(accumulator) }
+    konst result = ArrayList<UByte>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(accumulator, this[index])
         result.add(accumulator)
@@ -9474,13 +9474,13 @@ public inline fun UByteArray.runningReduce(operation: (acc: UByte, UByte) -> UBy
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9490,7 +9490,7 @@ public inline fun UByteArray.runningReduce(operation: (acc: UByte, UByte) -> UBy
 public inline fun UShortArray.runningReduce(operation: (acc: UShort, UShort) -> UShort): List<UShort> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UShort>(size).apply { add(accumulator) }
+    konst result = ArrayList<UShort>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(accumulator, this[index])
         result.add(accumulator)
@@ -9499,14 +9499,14 @@ public inline fun UShortArray.runningReduce(operation: (acc: UShort, UShort) -> 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9516,7 +9516,7 @@ public inline fun UShortArray.runningReduce(operation: (acc: UShort, UShort) -> 
 public inline fun UIntArray.runningReduceIndexed(operation: (index: Int, acc: UInt, UInt) -> UInt): List<UInt> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UInt>(size).apply { add(accumulator) }
+    konst result = ArrayList<UInt>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(index, accumulator, this[index])
         result.add(accumulator)
@@ -9525,14 +9525,14 @@ public inline fun UIntArray.runningReduceIndexed(operation: (index: Int, acc: UI
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9542,7 +9542,7 @@ public inline fun UIntArray.runningReduceIndexed(operation: (index: Int, acc: UI
 public inline fun ULongArray.runningReduceIndexed(operation: (index: Int, acc: ULong, ULong) -> ULong): List<ULong> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<ULong>(size).apply { add(accumulator) }
+    konst result = ArrayList<ULong>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(index, accumulator, this[index])
         result.add(accumulator)
@@ -9551,14 +9551,14 @@ public inline fun ULongArray.runningReduceIndexed(operation: (index: Int, acc: U
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9568,7 +9568,7 @@ public inline fun ULongArray.runningReduceIndexed(operation: (index: Int, acc: U
 public inline fun UByteArray.runningReduceIndexed(operation: (index: Int, acc: UByte, UByte) -> UByte): List<UByte> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UByte>(size).apply { add(accumulator) }
+    konst result = ArrayList<UByte>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(index, accumulator, this[index])
         result.add(accumulator)
@@ -9577,14 +9577,14 @@ public inline fun UByteArray.runningReduceIndexed(operation: (index: Int, acc: U
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with the first element of this array.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with the first element of this array.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.runningReduce
  */
@@ -9594,7 +9594,7 @@ public inline fun UByteArray.runningReduceIndexed(operation: (index: Int, acc: U
 public inline fun UShortArray.runningReduceIndexed(operation: (index: Int, acc: UShort, UShort) -> UShort): List<UShort> {
     if (isEmpty()) return emptyList()
     var accumulator = this[0]
-    val result = ArrayList<UShort>(size).apply { add(accumulator) }
+    konst result = ArrayList<UShort>(size).apply { add(accumulator) }
     for (index in 1 until size) {
         accumulator = operation(index, accumulator, this[index])
         result.add(accumulator)
@@ -9603,13 +9603,13 @@ public inline fun UShortArray.runningReduceIndexed(operation: (index: Int, acc: 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9622,13 +9622,13 @@ public inline fun <R> UIntArray.scan(initial: R, operation: (acc: R, UInt) -> R)
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9641,13 +9641,13 @@ public inline fun <R> ULongArray.scan(initial: R, operation: (acc: R, ULong) -> 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9660,13 +9660,13 @@ public inline fun <R> UByteArray.scan(initial: R, operation: (acc: R, UByte) -> 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes current accumulator value and an element, and calculates the next accumulator value.
+ * @param [operation] function that takes current accumulator konstue and an element, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9679,14 +9679,14 @@ public inline fun <R> UShortArray.scan(initial: R, operation: (acc: R, UShort) -
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9699,14 +9699,14 @@ public inline fun <R> UIntArray.scanIndexed(initial: R, operation: (index: Int, 
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9719,14 +9719,14 @@ public inline fun <R> ULongArray.scanIndexed(initial: R, operation: (index: Int,
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9739,14 +9739,14 @@ public inline fun <R> UByteArray.scanIndexed(initial: R, operation: (index: Int,
 }
 
 /**
- * Returns a list containing successive accumulation values generated by applying [operation] from left to right
- * to each element, its index in the original array and current accumulator value that starts with [initial] value.
+ * Returns a list containing successive accumulation konstues generated by applying [operation] from left to right
+ * to each element, its index in the original array and current accumulator konstue that starts with [initial] konstue.
  * 
- * Note that `acc` value passed to [operation] function should not be mutated;
- * otherwise it would affect the previous value in resulting list.
+ * Note that `acc` konstue passed to [operation] function should not be mutated;
+ * otherwise it would affect the previous konstue in resulting list.
  * 
- * @param [operation] function that takes the index of an element, current accumulator value
- * and the element itself, and calculates the next accumulator value.
+ * @param [operation] function that takes the index of an element, current accumulator konstue
+ * and the element itself, and calculates the next accumulator konstue.
  * 
  * @sample samples.collections.Collections.Aggregates.scan
  */
@@ -9759,7 +9759,7 @@ public inline fun <R> UShortArray.scanIndexed(initial: R, operation: (index: Int
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9775,7 +9775,7 @@ public inline fun UIntArray.sumBy(selector: (UInt) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9791,7 +9791,7 @@ public inline fun ULongArray.sumBy(selector: (ULong) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9807,7 +9807,7 @@ public inline fun UByteArray.sumBy(selector: (UByte) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9823,7 +9823,7 @@ public inline fun UShortArray.sumBy(selector: (UShort) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9839,7 +9839,7 @@ public inline fun UIntArray.sumByDouble(selector: (UInt) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9855,7 +9855,7 @@ public inline fun ULongArray.sumByDouble(selector: (ULong) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9871,7 +9871,7 @@ public inline fun UByteArray.sumByDouble(selector: (UByte) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @Deprecated("Use sumOf instead.", ReplaceWith("this.sumOf(selector)"))
 @DeprecatedSinceKotlin(warningSince = "1.5")
@@ -9887,7 +9887,7 @@ public inline fun UShortArray.sumByDouble(selector: (UShort) -> Double): Double 
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9905,7 +9905,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9923,7 +9923,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9941,7 +9941,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9959,7 +9959,7 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> Double): Double {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9977,7 +9977,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -9995,7 +9995,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10013,7 +10013,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10031,7 +10031,7 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> Int): Int {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10049,7 +10049,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10067,7 +10067,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10085,7 +10085,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10103,7 +10103,7 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> Long): Long {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10122,7 +10122,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10141,7 +10141,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10160,7 +10160,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10179,7 +10179,7 @@ public inline fun UShortArray.sumOf(selector: (UShort) -> UInt): UInt {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10198,7 +10198,7 @@ public inline fun UIntArray.sumOf(selector: (UInt) -> ULong): ULong {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10217,7 +10217,7 @@ public inline fun ULongArray.sumOf(selector: (ULong) -> ULong): ULong {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10236,7 +10236,7 @@ public inline fun UByteArray.sumOf(selector: (UByte) -> ULong): ULong {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the array.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the array.
  */
 @SinceKotlin("1.5")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -10303,7 +10303,7 @@ public infix fun <R> UShortArray.zip(other: Array<out R>): List<Pair<UShort, R>>
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10313,8 +10313,8 @@ public infix fun <R> UShortArray.zip(other: Array<out R>): List<Pair<UShort, R>>
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UIntArray.zip(other: Array<out R>, transform: (a: UInt, b: R) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10322,7 +10322,7 @@ public inline fun <R, V> UIntArray.zip(other: Array<out R>, transform: (a: UInt,
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10332,8 +10332,8 @@ public inline fun <R, V> UIntArray.zip(other: Array<out R>, transform: (a: UInt,
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> ULongArray.zip(other: Array<out R>, transform: (a: ULong, b: R) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10341,7 +10341,7 @@ public inline fun <R, V> ULongArray.zip(other: Array<out R>, transform: (a: ULon
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10351,8 +10351,8 @@ public inline fun <R, V> ULongArray.zip(other: Array<out R>, transform: (a: ULon
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UByteArray.zip(other: Array<out R>, transform: (a: UByte, b: R) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10360,7 +10360,7 @@ public inline fun <R, V> UByteArray.zip(other: Array<out R>, transform: (a: UByt
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10370,8 +10370,8 @@ public inline fun <R, V> UByteArray.zip(other: Array<out R>, transform: (a: UByt
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UShortArray.zip(other: Array<out R>, transform: (a: UShort, b: R) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10427,7 +10427,7 @@ public infix fun <R> UShortArray.zip(other: Iterable<R>): List<Pair<UShort, R>> 
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] collection with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] collection with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10437,8 +10437,8 @@ public infix fun <R> UShortArray.zip(other: Iterable<R>): List<Pair<UShort, R>> 
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UIntArray.zip(other: Iterable<R>, transform: (a: UInt, b: R) -> V): List<V> {
-    val arraySize = size
-    val list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
+    konst arraySize = size
+    konst list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
     var i = 0
     for (element in other) {
         if (i >= arraySize) break
@@ -10448,7 +10448,7 @@ public inline fun <R, V> UIntArray.zip(other: Iterable<R>, transform: (a: UInt, 
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] collection with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] collection with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10458,8 +10458,8 @@ public inline fun <R, V> UIntArray.zip(other: Iterable<R>, transform: (a: UInt, 
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> ULongArray.zip(other: Iterable<R>, transform: (a: ULong, b: R) -> V): List<V> {
-    val arraySize = size
-    val list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
+    konst arraySize = size
+    konst list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
     var i = 0
     for (element in other) {
         if (i >= arraySize) break
@@ -10469,7 +10469,7 @@ public inline fun <R, V> ULongArray.zip(other: Iterable<R>, transform: (a: ULong
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] collection with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] collection with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10479,8 +10479,8 @@ public inline fun <R, V> ULongArray.zip(other: Iterable<R>, transform: (a: ULong
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UByteArray.zip(other: Iterable<R>, transform: (a: UByte, b: R) -> V): List<V> {
-    val arraySize = size
-    val list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
+    konst arraySize = size
+    konst list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
     var i = 0
     for (element in other) {
         if (i >= arraySize) break
@@ -10490,7 +10490,7 @@ public inline fun <R, V> UByteArray.zip(other: Iterable<R>, transform: (a: UByte
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] collection with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] collection with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest collection.
  * 
@@ -10500,8 +10500,8 @@ public inline fun <R, V> UByteArray.zip(other: Iterable<R>, transform: (a: UByte
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <R, V> UShortArray.zip(other: Iterable<R>, transform: (a: UShort, b: R) -> V): List<V> {
-    val arraySize = size
-    val list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
+    konst arraySize = size
+    konst list = ArrayList<V>(minOf(other.collectionSizeOrDefault(10), arraySize))
     var i = 0
     for (element in other) {
         if (i >= arraySize) break
@@ -10559,7 +10559,7 @@ public infix fun UShortArray.zip(other: UShortArray): List<Pair<UShort, UShort>>
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest array.
  * 
@@ -10569,8 +10569,8 @@ public infix fun UShortArray.zip(other: UShortArray): List<Pair<UShort, UShort>>
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <V> UIntArray.zip(other: UIntArray, transform: (a: UInt, b: UInt) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10578,7 +10578,7 @@ public inline fun <V> UIntArray.zip(other: UIntArray, transform: (a: UInt, b: UI
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest array.
  * 
@@ -10588,8 +10588,8 @@ public inline fun <V> UIntArray.zip(other: UIntArray, transform: (a: UInt, b: UI
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <V> ULongArray.zip(other: ULongArray, transform: (a: ULong, b: ULong) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10597,7 +10597,7 @@ public inline fun <V> ULongArray.zip(other: ULongArray, transform: (a: ULong, b:
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest array.
  * 
@@ -10607,8 +10607,8 @@ public inline fun <V> ULongArray.zip(other: ULongArray, transform: (a: ULong, b:
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <V> UByteArray.zip(other: UByteArray, transform: (a: UByte, b: UByte) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }
@@ -10616,7 +10616,7 @@ public inline fun <V> UByteArray.zip(other: UByteArray, transform: (a: UByte, b:
 }
 
 /**
- * Returns a list of values built from the elements of `this` array and the [other] array with the same index
+ * Returns a list of konstues built from the elements of `this` array and the [other] array with the same index
  * using the provided [transform] function applied to each pair of elements.
  * The returned list has length of the shortest array.
  * 
@@ -10626,8 +10626,8 @@ public inline fun <V> UByteArray.zip(other: UByteArray, transform: (a: UByte, b:
 @ExperimentalUnsignedTypes
 @kotlin.internal.InlineOnly
 public inline fun <V> UShortArray.zip(other: UShortArray, transform: (a: UShort, b: UShort) -> V): List<V> {
-    val size = minOf(size, other.size)
-    val list = ArrayList<V>(size)
+    konst size = minOf(size, other.size)
+    konst list = ArrayList<V>(size)
     for (i in 0 until size) {
         list.add(transform(this[i], other[i]))
     }

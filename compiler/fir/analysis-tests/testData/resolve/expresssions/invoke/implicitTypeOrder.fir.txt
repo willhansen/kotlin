@@ -16,5 +16,5 @@ FILE: implicitTypeOrder.kt
     public final fun create(): R|A| {
         ^create R|/A.A|()
     }
-    public final val foo: R|A| = R|/create|()
+    public final konst foo: R|A| = R|/create|()
         public get(): R|A|

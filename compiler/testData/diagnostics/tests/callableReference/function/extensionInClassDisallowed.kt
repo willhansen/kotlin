@@ -13,7 +13,7 @@ class A {
     }
 }
 
-fun eat(value: Any) {}
+fun eat(konstue: Any) {}
 
 fun main() {
     A::<!UNRESOLVED_REFERENCE!>extInt<!>

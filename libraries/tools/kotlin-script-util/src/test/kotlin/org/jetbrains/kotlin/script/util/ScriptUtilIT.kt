@@ -52,23 +52,23 @@ import java.io.File
 import java.io.PrintStream
 import kotlin.reflect.KClass
 import kotlin.script.experimental.api.onSuccess
-import kotlin.script.experimental.api.valueOr
+import kotlin.script.experimental.api.konstueOr
 import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.impl.internalScriptingRunSuspend
 import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 import kotlin.script.experimental.jvm.util.scriptCompilationClasspathFromContext
 
-const val KOTLIN_JAVA_RUNTIME_JAR = "kotlin-stdlib.jar"
+const konst KOTLIN_JAVA_RUNTIME_JAR = "kotlin-stdlib.jar"
 
 class ScriptUtilIT {
 
     companion object {
-        private const val argsHelloWorldOutput =
+        private const konst argsHelloWorldOutput =
             """Hello, world!
 a1
 done
 """
-        private const val bindingsHelloWorldOutput =
+        private const konst bindingsHelloWorldOutput =
             """Hello, world!
 a1 = 42
 done
@@ -77,9 +77,9 @@ done
 
     @Test
     fun testArgsHelloWorld() {
-        val scriptClass = compileScript("args-hello-world.kts", StandardArgsScriptTemplateWithLocalResolving::class)
+        konst scriptClass = compileScript("args-hello-world.kts", StandardArgsScriptTemplateWithLocalResolving::class)
         Assert.assertNotNull(scriptClass)
-        val ctor = scriptClass?.getConstructor(Array<String>::class.java)
+        konst ctor = scriptClass?.getConstructor(Array<String>::class.java)
         Assert.assertNotNull(ctor)
         captureOut {
             ctor!!.newInstance(arrayOf("a1"))
@@ -90,9 +90,9 @@ done
 
     @Test
     fun testBndHelloWorld() {
-        val scriptClass = compileScript("bindings-hello-world.kts", BindingsScriptTemplateWithLocalResolving::class)
+        konst scriptClass = compileScript("bindings-hello-world.kts", BindingsScriptTemplateWithLocalResolving::class)
         Assert.assertNotNull(scriptClass)
-        val ctor = scriptClass?.getConstructor(Map::class.java)
+        konst ctor = scriptClass?.getConstructor(Map::class.java)
         Assert.assertNotNull(ctor)
         captureOut {
             ctor!!.newInstance(hashMapOf("a1" to 42))
@@ -120,13 +120,13 @@ done
         scriptDefinition: KotlinScriptDefinition,
         suppressOutput: Boolean
     ): Class<*>? {
-        val messageCollector =
+        konst messageCollector =
             if (suppressOutput) MessageCollector.NONE
             else PrintingMessageCollector(System.err, MessageRenderer.PLAIN_FULL_PATHS, true)
 
-        val rootDisposable = Disposer.newDisposable()
+        konst rootDisposable = Disposer.newDisposable()
         try {
-            val configuration = CompilerConfiguration().apply {
+            konst configuration = CompilerConfiguration().apply {
                 addJvmClasspathRoots(scriptCompilationClasspathFromContext(KOTLIN_JAVA_RUNTIME_JAR))
                 configureJdkClasspathRoots()
 
@@ -150,7 +150,7 @@ done
                 add(ComponentRegistrar.PLUGIN_COMPONENT_REGISTRARS, ScriptingCompilerConfigurationComponentRegistrar())
             }
 
-            val environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+            konst environment = KotlinCoreEnvironment.createForTests(rootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
 
             environment.getSourceFiles().forEach {
                 messageCollector.report(CompilerMessageSeverity.LOGGING, "file: $it -> script def: ${it.findScriptDefinition()?.name}")
@@ -160,17 +160,17 @@ done
                 "compilation classpath:\n  ${environment.configuration.jvmClasspathRoots.joinToString("\n  ")}"
             )
 
-            val scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
+            konst scriptCompiler = ScriptJvmCompilerFromEnvironment(environment)
 
             return try {
-                val script = File(scriptPath).toScriptSource()
-                val newScriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
-                val compiledScript = scriptCompiler.compile(script, newScriptDefinition.compilationConfiguration).onSuccess {
+                konst script = File(scriptPath).toScriptSource()
+                konst newScriptDefinition = ScriptDefinitionProvider.getInstance(environment.project)!!.findDefinition(script)!!
+                konst compiledScript = scriptCompiler.compile(script, newScriptDefinition.compilationConfiguration).onSuccess {
                     @Suppress("DEPRECATION_ERROR")
                     internalScriptingRunSuspend {
-                        it.getClass(newScriptDefinition.evaluationConfiguration)
+                        it.getClass(newScriptDefinition.ekonstuationConfiguration)
                     }
-                }.valueOr {
+                }.konstueOr {
                     for (report in it.reports) {
                         messageCollector.report(report.severity.toCompilerMessageSeverity(), report.render(withSeverity = false))
                     }
@@ -202,10 +202,10 @@ done
     private fun captureOut(body: () -> Unit): String = captureOutAndErr(body).first
 
     private fun captureOutAndErr(body: () -> Unit): Pair<String, String> {
-        val outStream = ByteArrayOutputStream()
-        val errStream = ByteArrayOutputStream()
-        val prevOut = System.out
-        val prevErr = System.err
+        konst outStream = ByteArrayOutputStream()
+        konst errStream = ByteArrayOutputStream()
+        konst prevOut = System.out
+        konst prevErr = System.err
         System.setOut(PrintStream(outStream))
         System.setErr(PrintStream(errStream))
         try {

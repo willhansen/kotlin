@@ -21,9 +21,9 @@ class MyMapEntry : Test.MapEntryImpl()
 
 fun box(): String {
 
-    val b = MyMapEntry()
+    konst b = MyMapEntry()
     b.key
-    b.value
+    b.konstue
     b.setValue(null)
 
     return "OK"

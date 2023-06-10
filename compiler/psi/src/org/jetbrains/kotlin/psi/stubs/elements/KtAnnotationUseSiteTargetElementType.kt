@@ -20,7 +20,7 @@ class KtAnnotationUseSiteTargetElementType(debugName: String) :
     ) {
 
     override fun createStub(psi: KtAnnotationUseSiteTarget, parentStub: StubElement<out PsiElement>): KotlinAnnotationUseSiteTargetStub {
-        val useSiteTarget = psi.getAnnotationUseSiteTarget().name
+        konst useSiteTarget = psi.getAnnotationUseSiteTarget().name
         return KotlinAnnotationUseSiteTargetStubImpl(parentStub, StringRef.fromString(useSiteTarget)!!)
     }
 
@@ -29,7 +29,7 @@ class KtAnnotationUseSiteTargetElementType(debugName: String) :
     }
 
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<PsiElement>): KotlinAnnotationUseSiteTargetStub {
-        val useSiteTarget = dataStream.readName()
+        konst useSiteTarget = dataStream.readName()
         return KotlinAnnotationUseSiteTargetStubImpl(parentStub, useSiteTarget!!)
     }
 }

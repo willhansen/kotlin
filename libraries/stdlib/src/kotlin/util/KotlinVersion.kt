@@ -14,13 +14,13 @@ package kotlin
  * @constructor Creates a version from all three components.
  */
 @SinceKotlin("1.1")
-public class KotlinVersion(val major: Int, val minor: Int, val patch: Int) : Comparable<KotlinVersion> {
+public class KotlinVersion(konst major: Int, konst minor: Int, konst patch: Int) : Comparable<KotlinVersion> {
     /**
      * Creates a version from [major] and [minor] components, leaving [patch] component zero.
      */
     public constructor(major: Int, minor: Int) : this(major, minor, 0)
 
-    private val version = versionOf(major, minor, patch)
+    private konst version = versionOf(major, minor, patch)
 
     private fun versionOf(major: Int, minor: Int, patch: Int): Int {
         require(major in 0..MAX_COMPONENT_VALUE && minor in 0..MAX_COMPONENT_VALUE && patch in 0..MAX_COMPONENT_VALUE) {
@@ -36,7 +36,7 @@ public class KotlinVersion(val major: Int, val minor: Int, val patch: Int) : Com
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        val otherVersion = (other as? KotlinVersion) ?: return false
+        konst otherVersion = (other as? KotlinVersion) ?: return false
         return this.version == otherVersion.version
     }
 
@@ -63,21 +63,21 @@ public class KotlinVersion(val major: Int, val minor: Int, val patch: Int) : Com
 
     companion object {
         /**
-         * Maximum value a version component can have, a constant value 255.
+         * Maximum konstue a version component can have, a constant konstue 255.
          */
         // NOTE: Must be placed before CURRENT because its initialization requires this field being initialized in JS
-        public const val MAX_COMPONENT_VALUE = 255
+        public const konst MAX_COMPONENT_VALUE = 255
 
         /**
          * Returns the current version of the Kotlin standard library.
          */
         @kotlin.jvm.JvmField
-        public val CURRENT: KotlinVersion = KotlinVersionCurrentValue.get()
+        public konst CURRENT: KotlinVersion = KotlinVersionCurrentValue.get()
     }
 }
 
 // this class is ignored during classpath normalization when considering whether to recompile dependencies in Kotlin build
 private object KotlinVersionCurrentValue {
     @kotlin.jvm.JvmStatic
-    fun get(): KotlinVersion = KotlinVersion(1, 9, 255) // value is written here automatically during build
+    fun get(): KotlinVersion = KotlinVersion(1, 9, 255) // konstue is written here automatically during build
 }

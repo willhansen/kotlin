@@ -16,7 +16,7 @@ package javapackage {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final val publicStaticField: kotlin.String = "OK"
+        public const final konst publicStaticField: kotlin.String = "OK"
         public open fun publicStaticMethod(): kotlin.Unit
     }
 
@@ -27,6 +27,6 @@ package javapackage {
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
         // Static members
-        public const final override /*1*/ /*fake_override*/ val publicStaticField: kotlin.String = "OK"
+        public const final override /*1*/ /*fake_override*/ konst publicStaticField: kotlin.String = "OK"
     }
 }

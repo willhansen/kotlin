@@ -16,7 +16,7 @@ fun bar(s: String?, t: String?): String {
     return ""
 }
 
-val String?.baz: String
+konst String?.baz: String
     get() {
         this?.let {
             return it

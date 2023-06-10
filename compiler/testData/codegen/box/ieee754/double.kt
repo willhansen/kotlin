@@ -23,7 +23,7 @@ public class JavaClass {
 // FILE: b.kt
 
 fun box(): String {
-    val jClass = JavaClass()
+    konst jClass = JavaClass()
 
     if (jClass.minus0() < jClass.plus0()) return "fail 1"
 
@@ -38,14 +38,14 @@ fun box(): String {
 
     if (jClass.minus0() != jClass.plus0()) return "fail 5"
 
-    var value = jClass.minus0() == jClass.plus0()
-    if (!value) return "fail 6"
+    var konstue = jClass.minus0() == jClass.plus0()
+    if (!konstue) return "fail 6"
 
     if (jClass.null0() == jClass.plus0()) return "fail 7"
     if (jClass.plus0() == jClass.null0()) return "fail 8"
 
-    value = jClass.null0() == jClass.null0()
-    if (!value) return "fail 9"
+    konstue = jClass.null0() == jClass.null0()
+    if (!konstue) return "fail 9"
 
     return "OK"
 }

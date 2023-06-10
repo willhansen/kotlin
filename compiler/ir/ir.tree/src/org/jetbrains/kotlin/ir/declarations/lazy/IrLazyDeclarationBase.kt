@@ -19,10 +19,10 @@ import kotlin.properties.ReadWriteProperty
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 interface IrLazyDeclarationBase : IrDeclaration {
-    val stubGenerator: DeclarationStubGenerator
-    val typeTranslator: TypeTranslator
+    konst stubGenerator: DeclarationStubGenerator
+    konst typeTranslator: TypeTranslator
 
-    override val factory: IrFactory
+    override konst factory: IrFactory
         get() = stubGenerator.symbolTable.irFactory
 
     fun KotlinType.toIrType(): IrType =
@@ -42,14 +42,14 @@ interface IrLazyDeclarationBase : IrDeclaration {
     fun createLazyParent(): ReadWriteProperty<Any?, IrDeclarationParent> = lazyVar(stubGenerator.lock, ::lazyParent)
 
     fun lazyParent(): IrDeclarationParent {
-        val currentDescriptor = descriptor
+        konst currentDescriptor = descriptor
 
-        val containingDeclaration =
+        konst containingDeclaration =
             ((currentDescriptor as? PropertyAccessorDescriptor)?.correspondingProperty ?: currentDescriptor).containingDeclaration
 
         return when (containingDeclaration) {
             is PackageFragmentDescriptor -> run {
-                val parent = this.takeUnless { it is IrClass }?.let {
+                konst parent = this.takeUnless { it is IrClass }?.let {
                     stubGenerator.generateOrGetFacadeClass(descriptor)
                 } ?: stubGenerator.generateOrGetEmptyExternalPackageFragmentStub(containingDeclaration)
                 parent.declarations.add(this)

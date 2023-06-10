@@ -12,6 +12,6 @@ abstract class A : Collection<String> {
 }
 
 fun box(): String {
-    val method = A::class.java.declaredMethods.single { it.name == "foo" }
+    konst method = A::class.java.declaredMethods.single { it.name == "foo" }
     return if (Modifier.isProtected(method.modifiers)) "OK" else "Fail: $method"
 }

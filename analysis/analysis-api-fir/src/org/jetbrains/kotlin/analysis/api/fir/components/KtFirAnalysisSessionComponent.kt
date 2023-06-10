@@ -35,13 +35,13 @@ import org.jetbrains.kotlin.types.model.convertVariance
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 internal interface KtFirAnalysisSessionComponent {
-    val analysisSession: KtFirAnalysisSession
+    konst analysisSession: KtFirAnalysisSession
 
-    val project: Project get() = analysisSession.project
-    val rootModuleSession: FirSession get() = analysisSession.firResolveSession.useSiteFirSession
-    val typeContext: ConeInferenceContext get() = rootModuleSession.typeContext
-    val firSymbolBuilder get() = analysisSession.firSymbolBuilder
-    val firResolveSession get() = analysisSession.firResolveSession
+    konst project: Project get() = analysisSession.project
+    konst rootModuleSession: FirSession get() = analysisSession.firResolveSession.useSiteFirSession
+    konst typeContext: ConeInferenceContext get() = rootModuleSession.typeContext
+    konst firSymbolBuilder get() = analysisSession.firSymbolBuilder
+    konst firResolveSession get() = analysisSession.firResolveSession
 
     fun ConeKotlinType.asKtType() = analysisSession.firSymbolBuilder.typeBuilder.buildKtType(this)
 
@@ -52,18 +52,18 @@ internal interface KtFirAnalysisSessionComponent {
         source: KtSourceElement,
         qualifiedAccessSource: KtSourceElement?,
     ): KtDiagnosticWithPsi<*>? {
-        val firDiagnostic = toFirDiagnostics(analysisSession.useSiteSession, source, qualifiedAccessSource).firstOrNull() ?: return null
+        konst firDiagnostic = toFirDiagnostics(analysisSession.useSiteSession, source, qualifiedAccessSource).firstOrNull() ?: return null
         check(firDiagnostic is KtPsiDiagnostic)
         return firDiagnostic.asKtDiagnostic()
     }
 
-    val KtType.coneType: ConeKotlinType
+    konst KtType.coneType: ConeKotlinType
         get() {
             require(this is KtFirType)
             return coneType
         }
 
-    val KtTypeProjection.coneTypeProjection: ConeTypeProjection
+    konst KtTypeProjection.coneTypeProjection: ConeTypeProjection
         get() = when (this) {
             is KtStarTypeProjection -> ConeStarProjection
             is KtTypeArgumentWithVariance -> {
@@ -91,7 +91,7 @@ internal interface KtFirAnalysisSessionComponent {
     }
 
     fun FirQualifiedAccessExpression.createConeSubstitutorFromTypeArguments(discardErrorTypes: Boolean = false): ConeSubstitutor? {
-        val symbol = calleeReference.toResolvedCallableSymbol() ?: return null
+        konst symbol = calleeReference.toResolvedCallableSymbol() ?: return null
         return createConeSubstitutorFromTypeArguments(symbol, discardErrorTypes)
     }
 
@@ -102,12 +102,12 @@ internal interface KtFirAnalysisSessionComponent {
         callableSymbol: FirCallableSymbol<*>,
         discardErrorTypes: Boolean = false
     ): ConeSubstitutor {
-        val typeArgumentMap = buildMap {
+        konst typeArgumentMap = buildMap {
             // Type arguments are ignored defensively if `callableSymbol` can't provide enough type parameters (and vice versa). For
             // example, when call candidates are collected, the candidate's `callableSymbol` might have fewer type parameters than the
             // inferred call's type arguments.
             typeArguments.zip(callableSymbol.typeParameterSymbols).forEach { (typeArgument, typeParameterSymbol) ->
-                val type = typeArgument.safeAs<FirTypeProjectionWithVariance>()?.typeRef?.coneType ?: return@forEach
+                konst type = typeArgument.safeAs<FirTypeProjectionWithVariance>()?.typeRef?.coneType ?: return@forEach
                 if (type is ConeErrorType && discardErrorTypes) return@forEach
                 put(typeParameterSymbol, type)
             }

@@ -5,14 +5,14 @@ interface I {
     fun foo()
 }
 
-data class Pair<X, Y>(val fst: X, val snd: Y)
+data class Pair<X, Y>(konst fst: X, konst snd: Y)
 
 class A(f: Pair<Int, (I) -> Unit>? = null)
 
 class B(f: ((I) -> Unit)? = null)
 
 fun main() {
-    val cond = true
+    konst cond = true
     A(
         if (cond) {
             Pair(1, { baz -> baz.foo() })

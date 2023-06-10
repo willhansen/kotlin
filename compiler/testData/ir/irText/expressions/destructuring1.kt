@@ -6,5 +6,5 @@ object B {
 }
 
 fun B.test() {
-    val (x, y) = A
+    konst (x, y) = A
 }

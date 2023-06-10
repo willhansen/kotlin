@@ -4,7 +4,7 @@ FILE: init.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: Int
+        public? final? konst x: Int
             public? get(): Int
 
         init { LAZY_BLOCK }

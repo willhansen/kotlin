@@ -14,11 +14,11 @@ private class NSObjectImpl : NSObject() {
 }
 
 fun run() = withWorker {
-    val obj = NSObjectImpl()
+    konst obj = NSObjectImpl()
     setObject(obj)
 
     println("Before")
-    val isAlive = try {
+    konst isAlive = try {
         execute(TransferMode.SAFE, {}) {
             isObjectAliveShouldCrash()
         }.result

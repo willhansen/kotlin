@@ -15,22 +15,22 @@ import kotlin.reflect.KClass
 
 object PsiSourceManager {
     fun <E : PsiElement> findPsiElement(irElement: IrElement, irFile: IrFile, psiElementClass: KClass<E>): E? {
-        val psiFileEntry = irFile.fileEntry as? PsiIrFileEntry ?: return null
+        konst psiFileEntry = irFile.fileEntry as? PsiIrFileEntry ?: return null
         return psiFileEntry.findPsiElement(irElement, psiElementClass)
     }
 
     fun findPsiElement(irElement: IrElement, irFile: IrFile): PsiElement? {
-        val psiFileEntry = irFile.fileEntry as? PsiIrFileEntry ?: return null
+        konst psiFileEntry = irFile.fileEntry as? PsiIrFileEntry ?: return null
         return psiFileEntry.findPsiElement(irElement)
     }
 
     fun <E : PsiElement> findPsiElement(irElement: IrElement, irDeclaration: IrDeclaration, psiElementClass: KClass<E>): E? {
-        val irFile = irDeclaration.fileOrNull ?: return null
+        konst irFile = irDeclaration.fileOrNull ?: return null
         return findPsiElement(irElement, irFile, psiElementClass)
     }
 
     fun findPsiElement(irElement: IrElement, irDeclaration: IrDeclaration): PsiElement? {
-        val irFile = irDeclaration.fileOrNull ?: return null
+        konst irFile = irDeclaration.fileOrNull ?: return null
         return findPsiElement(irElement, irFile)
     }
 

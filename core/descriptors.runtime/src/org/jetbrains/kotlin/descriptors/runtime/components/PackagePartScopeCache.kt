@@ -16,23 +16,23 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 import org.jetbrains.kotlin.utils.jvmMetadataVersionOrDefault
 import java.util.concurrent.ConcurrentHashMap
 
-class PackagePartScopeCache(private val resolver: DeserializedDescriptorResolver, private val kotlinClassFinder: ReflectKotlinClassFinder) {
-    private val cache = ConcurrentHashMap<ClassId, MemberScope>()
+class PackagePartScopeCache(private konst resolver: DeserializedDescriptorResolver, private konst kotlinClassFinder: ReflectKotlinClassFinder) {
+    private konst cache = ConcurrentHashMap<ClassId, MemberScope>()
 
     fun getPackagePartScope(fileClass: ReflectKotlinClass): MemberScope = cache.getOrPut(fileClass.classId) {
-        val fqName = fileClass.classId.packageFqName
+        konst fqName = fileClass.classId.packageFqName
 
-        val parts =
+        konst parts =
             if (fileClass.classHeader.kind == KotlinClassHeader.Kind.MULTIFILE_CLASS)
                 fileClass.classHeader.multifilePartNames.mapNotNull { partName ->
-                    val classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
+                    konst classId = ClassId.topLevel(JvmClassName.byInternalName(partName).fqNameForTopLevelClassMaybeWithDollars)
                     kotlinClassFinder.findKotlinClass(classId, resolver.components.configuration.jvmMetadataVersionOrDefault())
                 }
             else listOf(fileClass)
 
-        val packageFragment = EmptyPackageFragmentDescriptor(resolver.components.moduleDescriptor, fqName)
+        konst packageFragment = EmptyPackageFragmentDescriptor(resolver.components.moduleDescriptor, fqName)
 
-        val scopes = parts.mapNotNull { part ->
+        konst scopes = parts.mapNotNull { part ->
             resolver.createKotlinPackagePartScope(packageFragment, part)
         }.toList()
 

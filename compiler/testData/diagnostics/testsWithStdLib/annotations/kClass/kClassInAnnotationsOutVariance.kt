@@ -4,7 +4,7 @@ open class A
 class B1 : A()
 class B2 : A()
 
-annotation class Ann1(val arg: KClass<out A>)
+annotation class Ann1(konst arg: KClass<out A>)
 
 @Ann1(A::class)
 class MyClass1
@@ -15,7 +15,7 @@ class MyClass1a
 @Ann1(B1::class)
 class MyClass2
 
-annotation class Ann2(val arg: KClass<out B1>)
+annotation class Ann2(konst arg: KClass<out B1>)
 
 @Ann2(<!TYPE_MISMATCH!>A::class<!>)
 class MyClass3

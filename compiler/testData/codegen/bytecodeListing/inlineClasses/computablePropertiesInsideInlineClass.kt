@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val x: Int) {
-    val prop: Int get() = 1
-    val asThis: Foo get() = this
+inline class Foo(konst x: Int) {
+    konst prop: Int get() = 1
+    konst asThis: Foo get() = this
 }

@@ -15,17 +15,17 @@ import java.nio.file.FileSystemNotFoundException
 import java.nio.file.Paths
 
 class KaptStubLineInformation {
-    private val offsets = mutableMapOf<JCTree.JCCompilationUnit, FileInfo>()
-    private val declarations = mutableMapOf<JCTree.JCCompilationUnit, List<JCTree>>()
+    private konst offsets = mutableMapOf<JCTree.JCCompilationUnit, FileInfo>()
+    private konst declarations = mutableMapOf<JCTree.JCCompilationUnit, List<JCTree>>()
 
     companion object {
-        const val KAPT_METADATA_EXTENSION = ".kapt_metadata"
-        const val METADATA_VERSION = 1
+        const konst KAPT_METADATA_EXTENSION = ".kapt_metadata"
+        const konst METADATA_VERSION = 1
 
         fun parseFileInfo(file: JCTree.JCCompilationUnit): FileInfo {
-            val uri = file.sourcefile?.toUri() ?: return FileInfo.EMPTY
+            konst uri = file.sourcefile?.toUri() ?: return FileInfo.EMPTY
 
-            val sourceFile = try {
+            konst sourceFile = try {
                 Paths.get(uri).toFile()
             } catch (e: FileSystemNotFoundException) {
                 return FileInfo.EMPTY
@@ -33,7 +33,7 @@ class KaptStubLineInformation {
                 return FileInfo.EMPTY
             }
 
-            val kaptMetadataFile = File(sourceFile.parentFile, sourceFile.nameWithoutExtension + KAPT_METADATA_EXTENSION)
+            konst kaptMetadataFile = File(sourceFile.parentFile, sourceFile.nameWithoutExtension + KAPT_METADATA_EXTENSION)
 
             if (!kaptMetadataFile.isFile) {
                 return FileInfo.EMPTY
@@ -43,30 +43,30 @@ class KaptStubLineInformation {
         }
 
         private fun deserialize(data: ByteArray): FileInfo {
-            val lineInfo: LineInfoMap = mutableMapOf()
-            val signatureInfo = mutableMapOf<String, String>()
+            konst lineInfo: LineInfoMap = mutableMapOf()
+            konst signatureInfo = mutableMapOf<String, String>()
 
-            val ois = ObjectInputStream(ByteArrayInputStream(data))
+            konst ois = ObjectInputStream(ByteArrayInputStream(data))
 
-            val version = ois.readInt()
+            konst version = ois.readInt()
             if (version != METADATA_VERSION) {
                 return FileInfo.EMPTY
             }
 
-            val lineInfoCount = ois.readInt()
+            konst lineInfoCount = ois.readInt()
             repeat(lineInfoCount) {
-                val fqName = ois.readUTF()
-                val path = ois.readUTF()
-                val isRelative = ois.readBoolean()
-                val pos = ois.readInt()
+                konst fqName = ois.readUTF()
+                konst path = ois.readUTF()
+                konst isRelative = ois.readBoolean()
+                konst pos = ois.readInt()
 
                 lineInfo[fqName] = KotlinPosition(path, isRelative, pos)
             }
 
-            val signatureCount = ois.readInt()
+            konst signatureCount = ois.readInt()
             repeat(signatureCount) {
-                val javacSignature = ois.readUTF()
-                val methodDesc = ois.readUTF()
+                konst javacSignature = ois.readUTF()
+                konst methodDesc = ois.readUTF()
 
                 signatureInfo[javacSignature] = methodDesc
             }
@@ -76,16 +76,16 @@ class KaptStubLineInformation {
     }
 
     fun getPositionInKotlinFile(file: JCTree.JCCompilationUnit, element: JCTree): KotlinPosition? {
-        val declaration = findDeclarationFor(element, file) ?: return null
+        konst declaration = findDeclarationFor(element, file) ?: return null
 
-        val fileInfo = offsets.getOrPut(file) { parseFileInfo(file) }
-        val elementDescriptor = getKaptDescriptor(declaration, file, fileInfo) ?: return null
+        konst fileInfo = offsets.getOrPut(file) { parseFileInfo(file) }
+        konst elementDescriptor = getKaptDescriptor(declaration, file, fileInfo) ?: return null
 
         return fileInfo.getPositionFor(elementDescriptor)
     }
 
     private fun findDeclarationFor(element: JCTree, file: JCTree.JCCompilationUnit): JCTree? {
-        val fileDeclarations = declarations.getOrPut(file) { collectDeclarations(file) }
+        konst fileDeclarations = declarations.getOrPut(file) { collectDeclarations(file) }
         return fileDeclarations.firstOrNull { element.isLocatedInside(it) }
     }
 
@@ -101,8 +101,8 @@ class KaptStubLineInformation {
                     return null
                 }
                 is JCTree.JCClassDecl -> {
-                    val className = parent.simpleName.toString()
-                    val newName = if (currentName.isEmpty()) className else currentName + "$" + className
+                    konst className = parent.simpleName.toString()
+                    konst newName = if (currentName.isEmpty()) className else currentName + "$" + className
                     if (declaration === parent) {
                         return newName
                     }
@@ -123,7 +123,7 @@ class KaptStubLineInformation {
                 is JCTree.JCMethodDecl -> {
                     // We don't need to process local declarations here as kapt does not support locals entirely.
                     if (declaration === parent) {
-                        val nameAndSignature = fileInfo.getMethodDescriptor(parent) ?: return null
+                        konst nameAndSignature = fileInfo.getMethodDescriptor(parent) ?: return null
                         return currentName + "#" + nameAndSignature
                     }
 
@@ -135,13 +135,13 @@ class KaptStubLineInformation {
 
         // Unfortunately, we have to do this the hard way, as symbols may be not available yet
         // (for instance, if this code is called inside the "enterTrees()")
-        val simpleDescriptor = getFqName(declaration, file, "")
-        val packageName = file.getPackageNameJava9Aware()?.toString()?.replace('.', '/')
+        konst simpleDescriptor = getFqName(declaration, file, "")
+        konst packageName = file.getPackageNameJava9Aware()?.toString()?.replace('.', '/')
         return if (packageName == null) simpleDescriptor else "$packageName/$simpleDescriptor"
     }
 
     private fun collectDeclarations(file: JCTree.JCCompilationUnit): List<JCTree> {
-        val declarations = mutableListOf<JCTree>()
+        konst declarations = mutableListOf<JCTree>()
 
         // Note that super.visit...() is above the declarations saving.
         // This allows us to get the deepest declarations in the beginning of the list.

@@ -1,6 +1,6 @@
 package
 
-public val a: T
+public konst a: T
 
 public final annotation class Ann : C {
     public constructor Ann()

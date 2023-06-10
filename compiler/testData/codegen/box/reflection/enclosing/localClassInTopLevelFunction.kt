@@ -6,7 +6,7 @@
 fun box(): String {
     class C
 
-    val name = C::class.java.getSimpleName()
+    konst name = C::class.java.getSimpleName()
     if (name != "box\$C" && name != "C") return "Fail: $name"
 
     return "OK"

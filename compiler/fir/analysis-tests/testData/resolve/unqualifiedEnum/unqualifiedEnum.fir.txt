@@ -9,13 +9,13 @@ FILE: unqualifiedEnum.kt
         public final static enum entry FIRST: R|test/Sample|
         public final static enum entry SECOND: R|test/Sample|
         public final static enum entry THIRD: R|test/Sample|
-        public final static fun values(): R|kotlin/Array<test/Sample>| {
+        public final static fun konstues(): R|kotlin/Array<test/Sample>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|test/Sample| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|test/Sample| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<test/Sample>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<test/Sample>|
             public get(): R|kotlin/enums/EnumEntries<test/Sample>|
 
     }
@@ -55,11 +55,11 @@ FILE: unqualifiedEnum.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val SECOND: R|test/Sample| = Q|test/Sample|.R|test/Sample.SECOND|
+        public final konst SECOND: R|test/Sample| = Q|test/Sample|.R|test/Sample.SECOND|
             public get(): R|test/Sample|
 
         public final fun priority(s: R|test/Sample|): R|kotlin/Int| {
-            lval FIRST: R|test/Sample| = Q|test/Sample|.R|test/Sample.THIRD|
+            lkonst FIRST: R|test/Sample| = Q|test/Sample|.R|test/Sample.THIRD|
             ^priority when (R|<local>/s|) {
                 ==($subj$, R|<local>/FIRST|) ->  {
                     Int(3)

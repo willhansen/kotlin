@@ -7,21 +7,21 @@ interface IActing {
     fun act(): String
 }
 
-class CActing(val value: String = "OK") : IActing {
-    override fun act(): String = value
+class CActing(konst konstue: String = "OK") : IActing {
+    override fun act(): String = konstue
 }
 
 // final so no need in delegate field
-class Test(val acting: CActing = CActing()) : IActing by acting {
+class Test(konst acting: CActing = CActing()) : IActing by acting {
 }
 
 // even if open so we don't need delegate field
-open class Test2(open val acting: CActing = CActing()) : IActing by acting {
+open class Test2(open konst acting: CActing = CActing()) : IActing by acting {
 }
 
 // even if open the backing field is final, so we don't need delegate field
 class Test3() : Test2() {
-    override val acting = CActing("OKOK")
+    override konst acting = CActing("OKOK")
 }
 
 fun box(): String {
@@ -43,6 +43,6 @@ fun box(): String {
 
     if (Test3().acting.act() != "OKOK") return "Fail Test3"
 
-    val test = Test()
+    konst test = Test()
     return test.act()
 }

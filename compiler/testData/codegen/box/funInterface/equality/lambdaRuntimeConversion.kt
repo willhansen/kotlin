@@ -18,7 +18,7 @@ fun interface FunInterface {
 
 private fun id(f: FunInterface): Any = f
 
-val lambda = {}
+konst lambda = {}
 
 fun box(): String {
     checkEqual(id(lambda), id(lambda))

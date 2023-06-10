@@ -1,3 +1,3 @@
-inline class Z(val z: Int)
+inline class Z(konst z: Int)
 
-class Test(val z: Z = Z(42))
+class Test(konst z: Z = Z(42))

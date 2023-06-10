@@ -44,7 +44,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
   // request
   void open(ByteString method, USVString url);
   void open(ByteString method, USVString url, boolean async, optional USVString? username = null, optional USVString? password = null);
-  void setRequestHeader(ByteString name, ByteString value);
+  void setRequestHeader(ByteString name, ByteString konstue);
            attribute unsigned long timeout;
            attribute boolean withCredentials;
   readonly attribute XMLHttpRequestUpload upload;
@@ -68,14 +68,14 @@ typedef (File or USVString) FormDataEntryValue;
 [Constructor(optional HTMLFormElement form),
  Exposed=(Window,Worker)]
 interface FormData {
-  void append(USVString name, USVString value);
-  void append(USVString name, Blob value, optional USVString filename);
+  void append(USVString name, USVString konstue);
+  void append(USVString name, Blob konstue, optional USVString filename);
   void delete(USVString name);
   FormDataEntryValue? get(USVString name);
   sequence<FormDataEntryValue> getAll(USVString name);
   boolean has(USVString name);
-  void set(USVString name, USVString value);
-  void set(USVString name, Blob value, optional USVString filename);
+  void set(USVString name, USVString konstue);
+  void set(USVString name, Blob konstue, optional USVString filename);
   iterable<USVString, FormDataEntryValue>;
 };
 [Constructor(DOMString type, optional ProgressEventInit eventInitDict),

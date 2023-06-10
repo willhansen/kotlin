@@ -5,7 +5,7 @@ class A {
 
   }
 
-  private val b: <no name provided>
+  private konst b: <no name provided>
     field = { // BLOCK
       local class <no name provided> : DoubleExpression {
         constructor() /* primary */ {

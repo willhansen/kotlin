@@ -1,10 +1,10 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     companion object {
         fun funInCompanion() {}
 
-        private const val constValInCompanion = 1
+        private const konst constValInCompanion = 1
     }
 
     fun inInlineClass() {}

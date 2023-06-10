@@ -14,14 +14,14 @@ interface GradleKpmFragmentDependencyConfigurationsFactory {
 object GradleKpmDefaultFragmentDependencyConfigurationsFactory : GradleKpmFragmentDependencyConfigurationsFactory {
 
     override fun create(module: GradleKpmModule, names: GradleKpmNameDisambiguation): GradleKpmFragmentDependencyConfigurations {
-        val configurations = module.project.configurations
-        val apiConfiguration = configurations.maybeCreate(names.disambiguateName("api"))
-        val implementationConfiguration = configurations.maybeCreate(names.disambiguateName("implementation"))
-        val compileOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("compileOnly"))
-        val runtimeOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("runtimeOnly"))
-        val transitiveApiConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveApi"))
-        val transitiveImplementationConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveImplementation"))
-        val transitiveRuntimeOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveRuntimeOnly"))
+        konst configurations = module.project.configurations
+        konst apiConfiguration = configurations.maybeCreate(names.disambiguateName("api"))
+        konst implementationConfiguration = configurations.maybeCreate(names.disambiguateName("implementation"))
+        konst compileOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("compileOnly"))
+        konst runtimeOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("runtimeOnly"))
+        konst transitiveApiConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveApi"))
+        konst transitiveImplementationConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveImplementation"))
+        konst transitiveRuntimeOnlyConfiguration = configurations.maybeCreate(names.disambiguateName("transitiveRuntimeOnly"))
 
         listOf(
             apiConfiguration,

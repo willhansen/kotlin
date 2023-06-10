@@ -1,6 +1,6 @@
 @Volatile var vol = 1
 @kotlin.concurrent.Volatile var vol2 = 1
-@Transient val tra = 1
+@Transient konst tra = 1
 
 @Strictfp fun str() {}
 @Synchronized fun sync() {}

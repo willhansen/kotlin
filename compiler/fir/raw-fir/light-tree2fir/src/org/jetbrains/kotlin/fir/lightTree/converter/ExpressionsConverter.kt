@@ -56,12 +56,12 @@ import org.jetbrains.kotlin.util.OperatorNameConventions
 class ExpressionsConverter(
     session: FirSession,
     tree: FlyweightCapableTreeStructure<LighterASTNode>,
-    private val declarationsConverter: DeclarationsConverter,
+    private konst declarationsConverter: DeclarationsConverter,
     context: Context<LighterASTNode> = Context(),
 ) : BaseConverter(session, tree, context) {
 
     inline fun <reified R : FirElement> getAsFirExpression(expression: LighterASTNode?, errorReason: String = ""): R {
-        val converted = expression?.let { convertExpression(it, errorReason) }
+        konst converted = expression?.let { convertExpression(it, errorReason) }
         return converted as? R
             ?: buildErrorExpression(
                 expression?.toFirSourceElement(),
@@ -103,7 +103,7 @@ class ExpressionsConverter(
             RETURN -> convertReturn(expression)
             THROW -> convertThrow(expression)
             PARENTHESIZED -> {
-                val content = expression.getExpressionInParentheses()
+                konst content = expression.getExpressionInParentheses()
                 context.forwardLabelUsagePermission(expression, content)
                 getAsFirExpression(content, "Empty parentheses")
             }
@@ -124,22 +124,22 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.visitLambdaExpression
      */
     private fun convertLambdaExpression(lambdaExpression: LighterASTNode): FirExpression {
-        val valueParameterList = mutableListOf<ValueParameter>()
+        konst konstueParameterList = mutableListOf<ValueParameter>()
         var block: LighterASTNode? = null
         var hasArrow = false
 
-        val functionSymbol = FirAnonymousFunctionSymbol()
+        konst functionSymbol = FirAnonymousFunctionSymbol()
         lambdaExpression.getChildNodesByType(FUNCTION_LITERAL).first().forEachChildren {
             when (it.tokenType) {
-                VALUE_PARAMETER_LIST -> valueParameterList += declarationsConverter.convertValueParameters(it, functionSymbol, ValueParameterDeclaration.LAMBDA)
+                VALUE_PARAMETER_LIST -> konstueParameterList += declarationsConverter.convertValueParameters(it, functionSymbol, ValueParameterDeclaration.LAMBDA)
                 BLOCK -> block = it
                 ARROW -> hasArrow = true
             }
         }
 
-        val expressionSource = lambdaExpression.toFirSourceElement()
-        val target: FirFunctionTarget
-        val anonymousFunction = buildAnonymousFunction {
+        konst expressionSource = lambdaExpression.toFirSourceElement()
+        konst target: FirFunctionTarget
+        konst anonymousFunction = buildAnonymousFunction {
             source = expressionSource
             moduleData = baseModuleData
             origin = FirDeclarationOrigin.Source
@@ -156,17 +156,17 @@ class ExpressionsConverter(
             }
             target = FirFunctionTarget(labelName = label?.name, isLambda = true)
             context.firFunctionTargets += target
-            val destructuringStatements = mutableListOf<FirStatement>()
-            for (valueParameter in valueParameterList) {
-                val multiDeclaration = valueParameter.destructuringDeclaration
-                valueParameters += if (multiDeclaration != null) {
-                    val name = SpecialNames.DESTRUCT
-                    val multiParameter = buildValueParameter {
-                        source = valueParameter.firValueParameter.source
+            konst destructuringStatements = mutableListOf<FirStatement>()
+            for (konstueParameter in konstueParameterList) {
+                konst multiDeclaration = konstueParameter.destructuringDeclaration
+                konstueParameters += if (multiDeclaration != null) {
+                    konst name = SpecialNames.DESTRUCT
+                    konst multiParameter = buildValueParameter {
+                        source = konstueParameter.firValueParameter.source
                         containingFunctionSymbol = functionSymbol
                         moduleData = baseModuleData
                         origin = FirDeclarationOrigin.Source
-                        returnTypeRef = valueParameter.firValueParameter.returnTypeRef
+                        returnTypeRef = konstueParameter.firValueParameter.returnTypeRef
                         this.name = name
                         symbol = FirValueParameterSymbol(name)
                         defaultValue = null
@@ -182,7 +182,7 @@ class ExpressionsConverter(
                     ).statements
                     multiParameter
                 } else {
-                    valueParameter.firValueParameter
+                    konstueParameter.firValueParameter
                 }
             }
 
@@ -248,21 +248,21 @@ class ExpressionsConverter(
             }
         }
 
-        val baseSource = binaryExpression.toFirSourceElement()
-        val operationToken = operationTokenName.getOperationSymbol()
+        konst baseSource = binaryExpression.toFirSourceElement()
+        konst operationToken = operationTokenName.getOperationSymbol()
         if (operationToken == IDENTIFIER) {
             context.calleeNamesForLambda += operationTokenName.nameAsSafeName()
         } else {
             context.calleeNamesForLambda += null
         }
 
-        val rightArgAsFir =
+        konst rightArgAsFir =
             if (rightArg != null)
                 getAsFirExpression<FirExpression>(rightArg, "No right operand")
             else
                 buildErrorExpression(null, ConeSyntaxDiagnostic("No right operand"))
 
-        val leftArgAsFir = getAsFirExpression<FirExpression>(leftArgNode, "No left operand")
+        konst leftArgAsFir = getAsFirExpression<FirExpression>(leftArgNode, "No left operand")
 
         // No need for the callee name since arguments are already generated
         context.calleeNamesForLambda.removeLast()
@@ -277,7 +277,7 @@ class ExpressionsConverter(
             in OperatorConventions.COMPARISON_OPERATIONS ->
                 return leftArgAsFir.generateComparisonExpression(rightArgAsFir, operationToken, baseSource, operationReferenceSource)
         }
-        val conventionCallName = operationToken.toBinaryName()
+        konst conventionCallName = operationToken.toBinaryName()
         return if (conventionCallName != null || operationToken == IDENTIFIER) {
             buildFunctionCall {
                 source = binaryExpression.toFirSourceElement()
@@ -290,7 +290,7 @@ class ExpressionsConverter(
                 origin = if (conventionCallName != null) FirFunctionCallOrigin.Operator else FirFunctionCallOrigin.Infix
             }
         } else {
-            val firOperation = operationToken.toFirOperation()
+            konst firOperation = operationToken.toFirOperation()
             if (firOperation in FirOperation.ASSIGNMENTS) {
                 return leftArgNode.generateAssignment(
                     binaryExpression.toFirSourceElement(),
@@ -352,8 +352,8 @@ class ExpressionsConverter(
             context.setNewLabelUserNode(it)
             when (it.tokenType) {
                 LABEL_QUALIFIER -> {
-                    val rawName = it.toString()
-                    val pair = buildLabelAndErrorSource(
+                    konst rawName = it.toString()
+                    konst pair = buildLabelAndErrorSource(
                         rawName.substring(0, rawName.length - 1),
                         it.getChildNodesByType(LABEL).single().toFirSourceElement()
                     )
@@ -390,8 +390,8 @@ class ExpressionsConverter(
             }
         }
 
-        val operationToken = operationTokenName.getOperationSymbol()
-        val conventionCallName = operationToken.toUnaryName()
+        konst operationToken = operationTokenName.getOperationSymbol()
+        konst conventionCallName = operationToken.toUnaryName()
         return when {
             operationToken == EXCLEXCL -> {
                 buildCheckNotNullCall {
@@ -410,7 +410,7 @@ class ExpressionsConverter(
                         prefix = unaryExpression.tokenType == PREFIX_EXPRESSION
                     ) { getAsFirExpression(this) }
                 }
-                val receiver = getAsFirExpression<FirExpression>(argument, "No operand")
+                konst receiver = getAsFirExpression<FirExpression>(argument, "No operand")
                 convertUnaryPlusMinusCallOnIntegerLiteralIfNecessary(unaryExpression, receiver, operationToken)?.let { return it }
                 buildFunctionCall {
                     source = unaryExpression.toFirSourceElement()
@@ -432,7 +432,7 @@ class ExpressionsConverter(
      */
     private fun convertAnnotatedExpression(annotatedExpression: LighterASTNode): FirElement {
         var firExpression: FirElement? = null
-        val firAnnotationList = mutableListOf<FirAnnotation>()
+        konst firAnnotationList = mutableListOf<FirAnnotation>()
         annotatedExpression.forEachChildren {
             when (it.tokenType) {
                 ANNOTATION -> firAnnotationList += declarationsConverter.convertAnnotation(it)
@@ -445,7 +445,7 @@ class ExpressionsConverter(
             }
         }
 
-        val result = firExpression ?: buildErrorExpression(null, ConeNotAnnotationContainer("???"))
+        konst result = firExpression ?: buildErrorExpression(null, ConeNotAnnotationContainer("???"))
         require(result is FirAnnotationContainer)
         result.replaceAnnotations(result.annotations.smartPlus(firAnnotationList))
         return result
@@ -511,18 +511,18 @@ class ExpressionsConverter(
         var firSelector: FirExpression? = null
         var firReceiver: FirExpression? = null //before dot
         dotQualifiedExpression.forEachChildren {
-            when (val tokenType = it.tokenType) {
+            when (konst tokenType = it.tokenType) {
                 DOT -> isSelector = true
                 SAFE_ACCESS -> {
                     isSafe = true
                     isSelector = true
                 }
                 else -> {
-                    val isEffectiveSelector = isSelector && tokenType != TokenType.ERROR_ELEMENT
-                    val firExpression =
+                    konst isEffectiveSelector = isSelector && tokenType != TokenType.ERROR_ELEMENT
+                    konst firExpression =
                         getAsFirExpression<FirExpression>(it, "Incorrect ${if (isEffectiveSelector) "selector" else "receiver"} expression")
                     if (isEffectiveSelector) {
-                        val callExpressionCallee = if (tokenType == CALL_EXPRESSION) it.getFirstChildExpressionUnwrapped() else null
+                        konst callExpressionCallee = if (tokenType == CALL_EXPRESSION) it.getFirstChildExpressionUnwrapped() else null
                         firSelector =
                             if (tokenType is KtNameReferenceExpressionElementType ||
                                 (tokenType == CALL_EXPRESSION && callExpressionCallee?.tokenType != LAMBDA_EXPRESSION)
@@ -559,7 +559,7 @@ class ExpressionsConverter(
             result = convertFirSelector(it, dotQualifiedExpression.toFirSourceElement(), firReceiver!!)
         }
 
-        val receiver = firReceiver
+        konst receiver = firReceiver
         if (receiver != null) {
             (firSelector as? FirErrorExpression)?.let { errorExpression ->
                 return buildQualifiedErrorAccessExpression {
@@ -585,8 +585,8 @@ class ExpressionsConverter(
      */
     private fun convertCallExpression(callSuffix: LighterASTNode): FirExpression {
         var name: String? = null
-        val firTypeArguments = mutableListOf<FirTypeProjection>()
-        val valueArguments = mutableListOf<LighterASTNode>()
+        konst firTypeArguments = mutableListOf<FirTypeProjection>()
+        konst konstueArguments = mutableListOf<LighterASTNode>()
         var additionalArgument: FirExpression? = null
         var hasArguments = false
         var superNode: LighterASTNode? = null
@@ -607,7 +607,7 @@ class ExpressionsConverter(
                     }
                     VALUE_ARGUMENT_LIST, LAMBDA_ARGUMENT -> {
                         hasArguments = true
-                        valueArguments += node
+                        konstueArguments += node
                     }
                     else -> if (node.tokenType != TokenType.ERROR_ELEMENT) {
                         additionalArgument = getAsFirExpression(node, "Incorrect invoke receiver")
@@ -618,9 +618,9 @@ class ExpressionsConverter(
             process(child)
         }
 
-        val source = callSuffix.toFirSourceElement()
+        konst source = callSuffix.toFirSourceElement()
 
-        val (calleeReference, explicitReceiver, isImplicitInvoke) = when {
+        konst (calleeReference, explicitReceiver, isImplicitInvoke) = when {
             name != null -> CalleeAndReceiver(
                 buildSimpleNamedReference {
                     this.source = callSuffix.getFirstChildExpressionUnwrapped()?.toFirSourceElement() ?: source
@@ -642,7 +642,7 @@ class ExpressionsConverter(
             superNode != null -> {
                 CalleeAndReceiver(
                     buildErrorNamedReference {
-                        val node = superNode!!
+                        konst node = superNode!!
                         this.source = node.toFirSourceElement()
                         diagnostic = ConeSimpleDiagnostic("Super cannot be a callee", DiagnosticKind.SuperNotAllowed)
                     }
@@ -657,14 +657,14 @@ class ExpressionsConverter(
             )
         }
 
-        val builder: FirQualifiedAccessExpressionBuilder = if (hasArguments) {
-            val builder = if (isImplicitInvoke) FirImplicitInvokeCallBuilder() else FirFunctionCallBuilder()
+        konst builder: FirQualifiedAccessExpressionBuilder = if (hasArguments) {
+            konst builder = if (isImplicitInvoke) FirImplicitInvokeCallBuilder() else FirFunctionCallBuilder()
             builder.apply {
                 this.source = source
                 this.calleeReference = calleeReference
 
                 context.calleeNamesForLambda += calleeReference.name
-                this.extractArgumentsFrom(valueArguments.flatMap { convertValueArguments(it) })
+                this.extractArgumentsFrom(konstueArguments.flatMap { convertValueArguments(it) })
                 context.calleeNamesForLambda.removeLast()
             }
         } else {
@@ -708,8 +708,8 @@ class ExpressionsConverter(
     private fun convertWhenExpression(whenExpression: LighterASTNode): FirExpression {
         var subjectExpression: FirExpression? = null
         var subjectVariable: FirVariable? = null
-        val whenEntryNodes = mutableListOf<LighterASTNode>()
-        val whenEntries = mutableListOf<WhenEntry>()
+        konst whenEntryNodes = mutableListOf<LighterASTNode>()
+        konst whenEntries = mutableListOf<WhenEntry>()
         whenExpression.forEachChildren {
             when (it.tokenType) {
                 PROPERTY -> subjectVariable = (declarationsConverter.convertPropertyDeclaration(it) as FirVariable).let { variable ->
@@ -734,10 +734,10 @@ class ExpressionsConverter(
             }
         }
         subjectExpression = subjectVariable?.initializer ?: subjectExpression
-        val hasSubject = subjectExpression != null
+        konst hasSubject = subjectExpression != null
 
         @OptIn(FirContractViolation::class)
-        val subject = FirExpressionRef<FirWhenExpression>()
+        konst subject = FirExpressionRef<FirWhenExpression>()
         whenEntryNodes.mapTo(whenEntries) {
             convertWhenEntry(
                 it,
@@ -750,18 +750,18 @@ class ExpressionsConverter(
             this.subjectVariable = subjectVariable
             usedAsExpression = whenExpression.usedAsExpression
             for (entry in whenEntries) {
-                val branch = entry.firBlock
-                val entrySource = entry.node.toFirSourceElement()
+                konst branch = entry.firBlock
+                konst entrySource = entry.node.toFirSourceElement()
                 branches += if (!entry.isElse) {
                     if (hasSubject) {
-                        val firCondition = entry.toFirWhenCondition()
+                        konst firCondition = entry.toFirWhenCondition()
                         buildWhenBranch {
                             source = entrySource
                             condition = firCondition
                             result = branch
                         }
                     } else {
-                        val firCondition = entry.toFirWhenConditionWithoutSubject()
+                        konst firCondition = entry.toFirWhenConditionWithoutSubject()
                         buildWhenBranch {
                             source = entrySource
                             condition = firCondition
@@ -793,7 +793,7 @@ class ExpressionsConverter(
     ): WhenEntry {
         var isElse = false
         var firBlock: FirBlock = buildEmptyExpressionBlock()
-        val conditions = mutableListOf<FirExpression>()
+        konst conditions = mutableListOf<FirExpression>()
         whenEntry.forEachChildren {
             when (it.tokenType) {
                 WHEN_CONDITION_EXPRESSION -> conditions += convertWhenConditionExpression(it, whenRefWithSubject)
@@ -819,7 +819,7 @@ class ExpressionsConverter(
             }
         }
 
-        val calculatedFirExpression = firExpression ?: buildErrorExpression(
+        konst calculatedFirExpression = firExpression ?: buildErrorExpression(
             source = null,
             ConeSyntaxDiagnostic("No expression in condition with expression")
         )
@@ -850,7 +850,7 @@ class ExpressionsConverter(
         var conditionSource: KtLightSourceElement? = null
         whenCondition.forEachChildren {
             when {
-                it.tokenType == OPERATION_REFERENCE && it.asText == NOT_IN.value -> {
+                it.tokenType == OPERATION_REFERENCE && it.asText == NOT_IN.konstue -> {
                     conditionSource = it.toFirSourceElement()
                     isNegate = true
                 }
@@ -861,7 +861,7 @@ class ExpressionsConverter(
             }
         }
 
-        val subjectExpression = if (whenRefWithSubject != null) {
+        konst subjectExpression = if (whenRefWithSubject != null) {
             buildWhenSubjectExpression {
                 whenRef = whenRefWithSubject
                 source = whenCondition.toFirSourceElement()
@@ -876,7 +876,7 @@ class ExpressionsConverter(
             }
         }
 
-        val calculatedFirExpression = firExpression ?: buildErrorExpression(
+        konst calculatedFirExpression = firExpression ?: buildErrorExpression(
             null,
             ConeSyntaxDiagnostic("No range in condition with range")
         )
@@ -903,7 +903,7 @@ class ExpressionsConverter(
             }
         }
 
-        val subjectExpression = if (whenRefWithSubject != null) {
+        konst subjectExpression = if (whenRefWithSubject != null) {
             buildWhenSubjectExpression {
                 source = whenCondition.toFirSourceElement()
                 whenRef = whenRefWithSubject
@@ -932,16 +932,16 @@ class ExpressionsConverter(
      */
     private fun convertArrayAccessExpression(arrayAccess: LighterASTNode): FirExpression {
         var firExpression: FirExpression? = null
-        val indices: MutableList<FirExpression> = mutableListOf()
+        konst indices: MutableList<FirExpression> = mutableListOf()
         arrayAccess.forEachChildren {
             when (it.tokenType) {
                 INDICES -> indices += convertIndices(it)
                 else -> if (it.isExpression()) firExpression = getAsFirExpression(it, "No array expression")
             }
         }
-        val getArgument = context.arraySetArgument.remove(arrayAccess)
+        konst getArgument = context.arraySetArgument.remove(arrayAccess)
         return buildFunctionCall {
-            val isGet = getArgument == null
+            konst isGet = getArgument == null
             source = (if (isGet) arrayAccess else arrayAccess.getParent()!!).toFirSourceElement()
             calleeReference = buildSimpleNamedReference {
                 source = arrayAccess.toFirSourceElement().fakeElement(KtFakeSourceElementKind.ArrayAccessNameReference)
@@ -961,7 +961,7 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinExpressionParsing.parseCollectionLiteralExpression
      */
     private fun convertCollectionLiteralExpression(expression: LighterASTNode): FirExpression {
-        val firExpressionList = mutableListOf<FirExpression>()
+        konst firExpressionList = mutableListOf<FirExpression>()
         expression.forEachChildren {
             if (it.isExpression()) firExpressionList += getAsFirExpression<FirExpression>(it, "Incorrect collection literal argument")
         }
@@ -978,7 +978,7 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinExpressionParsing.parseAsCollectionLiteralExpression
      */
     private fun convertIndices(indices: LighterASTNode): List<FirExpression> {
-        val firExpressionList: MutableList<FirExpression> = mutableListOf()
+        konst firExpressionList: MutableList<FirExpression> = mutableListOf()
         indices.forEachChildren {
             if (it.isExpression()) firExpressionList += getAsFirExpression<FirExpression>(it, "Incorrect index expression")
         }
@@ -991,14 +991,14 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.visitSimpleNameExpression
      */
     private fun convertSimpleNameExpression(referenceExpression: LighterASTNode): FirQualifiedAccessExpression {
-        val nameSource = referenceExpression.toFirSourceElement()
-        val referenceSourceElement = if (nameSource.kind is KtFakeSourceElementKind) {
+        konst nameSource = referenceExpression.toFirSourceElement()
+        konst referenceSourceElement = if (nameSource.kind is KtFakeSourceElementKind) {
             nameSource
         } else {
             nameSource.fakeElement(KtFakeSourceElementKind.ReferenceInAtomicQualifiedAccess)
         }
         return buildPropertyAccessExpression {
-            val rawText = referenceExpression.asText
+            konst rawText = referenceExpression.asText
             if (rawText.isUnderscore) {
                 nonFatalDiagnostics.add(ConeUnderscoreUsageWithoutBackticks(nameSource))
             }
@@ -1025,7 +1025,7 @@ class ExpressionsConverter(
         var block: LighterASTNode? = null
         var firCondition: FirExpression? = null
 
-        val target: FirLoopTarget
+        konst target: FirLoopTarget
         return FirDoWhileLoopBuilder().apply {
             source = doWhileLoop.toFirSourceElement()
             // For break/continue in the do-while loop condition, prepare the loop target first so that it can refer to the same loop.
@@ -1055,7 +1055,7 @@ class ExpressionsConverter(
             }
         }
 
-        val target: FirLoopTarget
+        konst target: FirLoopTarget
         return FirWhileLoopBuilder().apply {
             source = whileLoop.toFirSourceElement()
             condition =
@@ -1082,14 +1082,14 @@ class ExpressionsConverter(
             }
         }
 
-        val calculatedRangeExpression =
+        konst calculatedRangeExpression =
             rangeExpression ?: buildErrorExpression(null, ConeSyntaxDiagnostic("No range in for loop"))
-        val fakeSource = forLoop.toFirSourceElement(KtFakeSourceElementKind.DesugaredForLoop)
-        val target: FirLoopTarget
+        konst fakeSource = forLoop.toFirSourceElement(KtFakeSourceElementKind.DesugaredForLoop)
+        konst target: FirLoopTarget
         // NB: FirForLoopChecker relies on this block existence and structure
         return buildBlock {
             source = fakeSource
-            val iteratorVal = generateTemporaryVariable(
+            konst iteratorVal = generateTemporaryVariable(
                 baseModuleData,
                 calculatedRangeExpression.source?.fakeElement(KtFakeSourceElementKind.DesugaredForLoop),
                 SpecialNames.ITERATOR,
@@ -1119,12 +1119,12 @@ class ExpressionsConverter(
             }.configure(target) {
                 buildBlock block@{
                     source = blockNode?.toFirSourceElement()
-                    val valueParameter = parameter ?: return@block
-                    val multiDeclaration = valueParameter.destructuringDeclaration
-                    val firLoopParameter = generateTemporaryVariable(
+                    konst konstueParameter = parameter ?: return@block
+                    konst multiDeclaration = konstueParameter.destructuringDeclaration
+                    konst firLoopParameter = generateTemporaryVariable(
                         baseModuleData,
-                        valueParameter.source,
-                        if (multiDeclaration != null) SpecialNames.DESTRUCT else valueParameter.name,
+                        konstueParameter.source,
+                        if (multiDeclaration != null) SpecialNames.DESTRUCT else konstueParameter.name,
                         buildFunctionCall {
                             source = fakeSource
                             calleeReference = buildSimpleNamedReference {
@@ -1133,10 +1133,10 @@ class ExpressionsConverter(
                             }
                             explicitReceiver = generateResolvedAccessExpression(fakeSource, iteratorVal)
                         },
-                        valueParameter.returnTypeRef
+                        konstueParameter.returnTypeRef
                     )
                     if (multiDeclaration != null) {
-                        val destructuringBlock = generateDestructuringBlock(
+                        konst destructuringBlock = generateDestructuringBlock(
                             baseModuleData,
                             multiDeclaration,
                             firLoopParameter,
@@ -1186,7 +1186,7 @@ class ExpressionsConverter(
      */
     private fun convertTryExpression(tryExpression: LighterASTNode): FirExpression {
         lateinit var tryBlock: FirBlock
-        val catchClauses = mutableListOf<Triple<ValueParameter?, FirBlock, KtLightSourceElement>>()
+        konst catchClauses = mutableListOf<Triple<ValueParameter?, FirBlock, KtLightSourceElement>>()
         var finallyBlock: FirBlock? = null
         tryExpression.forEachChildren {
             when (it.tokenType) {
@@ -1227,17 +1227,17 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinExpressionParsing.parseTry
      */
     private fun convertCatchClause(catchClause: LighterASTNode): Triple<ValueParameter?, FirBlock, KtLightSourceElement>? {
-        var valueParameter: ValueParameter? = null
+        var konstueParameter: ValueParameter? = null
         var blockNode: LighterASTNode? = null
         catchClause.forEachChildren {
             when (it.tokenType) {
-                VALUE_PARAMETER_LIST -> valueParameter = declarationsConverter.convertValueParameters(it, FirAnonymousFunctionSymbol()/*TODO*/, ValueParameterDeclaration.CATCH)
+                VALUE_PARAMETER_LIST -> konstueParameter = declarationsConverter.convertValueParameters(it, FirAnonymousFunctionSymbol()/*TODO*/, ValueParameterDeclaration.CATCH)
                     .firstOrNull() ?: return null
                 BLOCK -> blockNode = it
             }
         }
 
-        return Triple(valueParameter, declarationsConverter.convertBlock(blockNode), catchClause.toFirSourceElement())
+        return Triple(konstueParameter, declarationsConverter.convertBlock(blockNode), catchClause.toFirSourceElement())
     }
 
     /**
@@ -1265,7 +1265,7 @@ class ExpressionsConverter(
             source = ifExpression.toFirSourceElement()
             whenBranches@ while (true) {
                 with(components) {
-                    val trueBranch = convertLoopBody(thenBlock)
+                    konst trueBranch = convertLoopBody(thenBlock)
                     branches += buildWhenBranch {
                         source = thenBlock?.toFirSourceElement()
                         condition = firCondition ?: buildErrorExpression(
@@ -1285,7 +1285,7 @@ class ExpressionsConverter(
                 }
                 if (!cascadeIf) {
                     with(components) {
-                        val elseBranch = convertLoopOrIfBody(elseBlock)
+                        konst elseBranch = convertLoopOrIfBody(elseBlock)
                         if (elseBranch != null) {
                             branches += buildWhenBranch {
                                 source = elseBlock?.toFirSourceElement()
@@ -1301,7 +1301,7 @@ class ExpressionsConverter(
         }
     }
 
-    private class IfNodeComponents(val firCondition: FirExpression?, val thenBlock: LighterASTNode?, val elseBlock: LighterASTNode?)
+    private class IfNodeComponents(konst firCondition: FirExpression?, konst thenBlock: LighterASTNode?, konst elseBlock: LighterASTNode?)
 
     private fun parseIfExpression(ifExpression: LighterASTNode): IfNodeComponents {
         var firCondition: FirExpression? = null
@@ -1317,7 +1317,7 @@ class ExpressionsConverter(
         return IfNodeComponents(firCondition, thenBlock, elseBlock)
     }
 
-    private val LighterASTNode.usedAsExpression: Boolean
+    private konst LighterASTNode.usedAsExpression: Boolean
         get() {
             var parent = getParent() ?: return true
             while (parent.elementType == ANNOTATED_EXPRESSION ||
@@ -1325,13 +1325,13 @@ class ExpressionsConverter(
             ) {
                 parent = parent.getParent() ?: return true
             }
-            val parentTokenType = parent.tokenType
+            konst parentTokenType = parent.tokenType
             if (parentTokenType == BLOCK) return false
             if (parentTokenType == THEN || parentTokenType == ELSE || parentTokenType == WHEN_ENTRY) {
                 return parent.getParent()?.usedAsExpression ?: true
             }
             if (parentTokenType != BODY) return true
-            val type = parent.getParent()?.tokenType ?: return true
+            konst type = parent.getParent()?.tokenType ?: return true
             return !(type == FOR || type == WHILE || type == DO_WHILE)
         }
 
@@ -1349,8 +1349,8 @@ class ExpressionsConverter(
             }
         }
 
-        val jumpBuilder = if (isBreak) FirBreakExpressionBuilder() else FirContinueExpressionBuilder()
-        val sourceElement = jump.toFirSourceElement()
+        konst jumpBuilder = if (isBreak) FirBreakExpressionBuilder() else FirContinueExpressionBuilder()
+        konst sourceElement = jump.toFirSourceElement()
         return jumpBuilder.apply {
             source = sourceElement
         }.bindLabel(jump).build()
@@ -1370,7 +1370,7 @@ class ExpressionsConverter(
             }
         }
 
-        val calculatedFirExpression = firExpression ?: buildUnitExpression {
+        konst calculatedFirExpression = firExpression ?: buildUnitExpression {
             source = returnExpression.toFirSourceElement(KtFakeSourceElementKind.ImplicitUnit)
         }
         return calculatedFirExpression.toReturn(
@@ -1401,7 +1401,7 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.visitThisExpression
      */
     private fun convertThisExpression(thisExpression: LighterASTNode): FirQualifiedAccessExpression {
-        val label: String? = thisExpression.getLabelName()
+        konst label: String? = thisExpression.getLabelName()
         return buildThisReceiverExpression {
             source = thisExpression.toFirSourceElement()
             calleeReference = buildExplicitThisReference { labelName = label }
@@ -1413,7 +1413,7 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.visitSuperExpression
      */
     private fun convertSuperExpression(superExpression: LighterASTNode): FirQualifiedAccessExpression {
-        val label: String? = superExpression.getLabelName()
+        konst label: String? = superExpression.getLabelName()
         var superTypeRef: FirTypeRef = implicitType
         superExpression.forEachChildren {
             when (it.tokenType) {
@@ -1433,14 +1433,14 @@ class ExpressionsConverter(
     /**
      * @see org.jetbrains.kotlin.parsing.KotlinExpressionParsing.parseValueArgumentList
      */
-    fun convertValueArguments(valueArguments: LighterASTNode): List<FirExpression> {
-        return valueArguments.forEachChildrenReturnList { node, container ->
+    fun convertValueArguments(konstueArguments: LighterASTNode): List<FirExpression> {
+        return konstueArguments.forEachChildrenReturnList { node, container ->
             when (node.tokenType) {
                 VALUE_ARGUMENT -> container += convertValueArgument(node)
                 LAMBDA_EXPRESSION,
                 LABELED_EXPRESSION,
                 ANNOTATED_EXPRESSION -> container += buildLambdaArgumentExpression {
-                    source = valueArguments.toFirSourceElement()
+                    source = konstueArguments.toFirSourceElement()
                     expression = getAsFirExpression(node)
                 }
             }
@@ -1451,11 +1451,11 @@ class ExpressionsConverter(
      * @see org.jetbrains.kotlin.parsing.KotlinExpressionParsing.parseValueArgument
      * @see org.jetbrains.kotlin.fir.builder.RawFirBuilder.Visitor.toFirExpression(org.jetbrains.kotlin.psi.ValueArgument)
      */
-    private fun convertValueArgument(valueArgument: LighterASTNode): FirExpression {
+    private fun convertValueArgument(konstueArgument: LighterASTNode): FirExpression {
         var identifier: String? = null
         var isSpread = false
         var firExpression: FirExpression? = null
-        valueArgument.forEachChildren {
+        konstueArgument.forEachChildren {
             when (it.tokenType) {
                 VALUE_ARGUMENT_NAME -> identifier = it.asText
                 MUL -> isSpread = true
@@ -1464,17 +1464,17 @@ class ExpressionsConverter(
                 else -> if (it.isExpression()) firExpression = getAsFirExpression(it, "Argument is absent")
             }
         }
-        val calculatedFirExpression =
+        konst calculatedFirExpression =
             firExpression ?: buildErrorExpression(null, ConeSyntaxDiagnostic("Argument is absent"))
         return when {
             identifier != null -> buildNamedArgumentExpression {
-                source = valueArgument.toFirSourceElement()
+                source = konstueArgument.toFirSourceElement()
                 expression = calculatedFirExpression
                 this.isSpread = isSpread
                 name = identifier.nameAsSafeName()
             }
             isSpread -> buildSpreadArgumentExpression {
-                source = valueArgument.toFirSourceElement()
+                source = konstueArgument.toFirSourceElement()
                 expression = calculatedFirExpression
             }
             else -> calculatedFirExpression

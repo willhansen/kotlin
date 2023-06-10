@@ -5,14 +5,14 @@ package html {
     public fun main(/*0*/ args: kotlin.Array<kotlin.String>): kotlin.Unit
     public fun print(/*0*/ message: kotlin.Any?): kotlin.Unit
     public fun println(/*0*/ message: kotlin.Any?): kotlin.Unit
-    public operator fun </*0*/ K, /*1*/ V> kotlin.collections.MutableMap<K, V>.set(/*0*/ key: K, /*1*/ value: V): V?
+    public operator fun </*0*/ K, /*1*/ V> kotlin.collections.MutableMap<K, V>.set(/*0*/ key: K, /*1*/ konstue: V): V?
 
     public final class A : html.BodyTag {
         public constructor A()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
         public final var href: kotlin.String?
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -29,9 +29,9 @@ package html {
 
     public final class B : html.BodyTag {
         public constructor B()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -48,9 +48,9 @@ package html {
 
     public final class Body : html.BodyTag {
         public constructor Body()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -67,9 +67,9 @@ package html {
 
     public abstract class BodyTag : html.TagWithText {
         public constructor BodyTag(/*0*/ name: kotlin.String)
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -94,9 +94,9 @@ package html {
 
     public final class H1 : html.BodyTag {
         public constructor H1()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -113,9 +113,9 @@ package html {
 
     public final class HTML : html.TagWithText {
         public constructor HTML()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final fun body(/*0*/ init: html.Body.() -> kotlin.Unit): html.Body
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -129,9 +129,9 @@ package html {
 
     public final class Head : html.TagWithText {
         public constructor Head()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun </*0*/ T : html.Element> initTag(/*0*/ tag: T, /*1*/ init: T.() -> kotlin.Unit): T
@@ -144,9 +144,9 @@ package html {
 
     public final class LI : html.BodyTag {
         public constructor LI()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -163,9 +163,9 @@ package html {
 
     public final class P : html.BodyTag {
         public constructor P()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -182,9 +182,9 @@ package html {
 
     public abstract class Tag : html.Element {
         public constructor Tag(/*0*/ name: kotlin.String)
-        public final val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final val children: java.util.ArrayList<html.Element>
-        public final val name: kotlin.String
+        public final konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final konst children: java.util.ArrayList<html.Element>
+        public final konst name: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         protected final fun </*0*/ T : html.Element> initTag(/*0*/ tag: T, /*1*/ init: T.() -> kotlin.Unit): T
@@ -195,9 +195,9 @@ package html {
 
     public abstract class TagWithText : html.Tag {
         public constructor TagWithText(/*0*/ name: kotlin.String)
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun </*0*/ T : html.Element> initTag(/*0*/ tag: T, /*1*/ init: T.() -> kotlin.Unit): T
@@ -209,7 +209,7 @@ package html {
 
     public final class TextElement : html.Element {
         public constructor TextElement(/*0*/ text: kotlin.String)
-        public final val text: kotlin.String
+        public final konst text: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ fun render(/*0*/ builder: kotlin.text.StringBuilder /* = java.lang.StringBuilder */, /*1*/ indent: kotlin.String): kotlin.Unit
@@ -218,9 +218,9 @@ package html {
 
     public final class Title : html.TagWithText {
         public constructor Title()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         protected final override /*1*/ /*fake_override*/ fun </*0*/ T : html.Element> initTag(/*0*/ tag: T, /*1*/ init: T.() -> kotlin.Unit): T
@@ -232,9 +232,9 @@ package html {
 
     public final class UL : html.BodyTag {
         public constructor UL()
-        public final override /*1*/ /*fake_override*/ val attributes: java.util.HashMap<kotlin.String, kotlin.String>
-        public final override /*1*/ /*fake_override*/ val children: java.util.ArrayList<html.Element>
-        public final override /*1*/ /*fake_override*/ val name: kotlin.String
+        public final override /*1*/ /*fake_override*/ konst attributes: java.util.HashMap<kotlin.String, kotlin.String>
+        public final override /*1*/ /*fake_override*/ konst children: java.util.ArrayList<html.Element>
+        public final override /*1*/ /*fake_override*/ konst name: kotlin.String
         public final override /*1*/ /*fake_override*/ fun a(/*0*/ href: kotlin.String, /*1*/ init: html.A.() -> kotlin.Unit): kotlin.Unit
         public final override /*1*/ /*fake_override*/ fun b(/*0*/ init: html.B.() -> kotlin.Unit): html.B
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

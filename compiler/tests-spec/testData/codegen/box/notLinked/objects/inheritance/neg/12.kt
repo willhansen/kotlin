@@ -9,11 +9,11 @@
  * EXCEPTION: runtime
  */
 
-val prop = MyObject
+konst prop = MyObject
 
 object MyObject : Foo(prop)
 
-open class Foo(val x: MyObject)
+open class Foo(konst x: MyObject)
 
 fun box(): String? {
     if (MyObject == null) return null

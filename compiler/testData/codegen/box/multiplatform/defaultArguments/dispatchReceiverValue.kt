@@ -9,14 +9,14 @@
 // FILE: common.kt
 
 expect class C {
-    val value: String
+    konst konstue: String
 
-    fun test(result: String = value): String
+    fun test(result: String = konstue): String
 }
 
 // FILE: platform.kt
 
-actual class C(actual val value: String) {
+actual class C(actual konst konstue: String) {
     actual fun test(result: String): String = result
 }
 

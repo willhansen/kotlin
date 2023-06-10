@@ -13,7 +13,7 @@ KtApplicableCallCandidateInfo:
         receiverType = kotlin.String
         returnType = kotlin.Unit
         symbol = /foo(<extension receiver>: kotlin.String): kotlin.Unit
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = /foo
     typeArgumentsMapping = {}
     argumentMapping = {}

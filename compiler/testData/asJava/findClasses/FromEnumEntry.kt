@@ -1,6 +1,6 @@
 enum class Direction {
     NORTH,
-    SOUTH(val x : Int) {
+    SOUTH(konst x : Int) {
         fun again() : String {
             return "Hello"
         }

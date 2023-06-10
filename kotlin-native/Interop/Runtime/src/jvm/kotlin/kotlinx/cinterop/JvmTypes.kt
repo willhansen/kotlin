@@ -24,12 +24,12 @@ internal typealias NonNullNativePtr = NativePtr
 @PublishedApi internal fun NonNullNativePtr.toNativePtr() = this
 internal fun NativePtr.toNonNull(): NonNullNativePtr = this
 
-public val nativeNullPtr: NativePtr = 0L
+public konst nativeNullPtr: NativePtr = 0L
 
 // TODO: the functions below should eventually be intrinsified
 
 @Suppress("DEPRECATION")
-private val typeOfCache = ConcurrentHashMap<Class<*>, CVariable.Type>()
+private konst typeOfCache = ConcurrentHashMap<Class<*>, CVariable.Type>()
 
 @Deprecated("Use sizeOf<T>() or alignOf<T>() instead.")
 @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE")
@@ -52,7 +52,7 @@ inline fun <reified T : NativePointed> interpretNullablePointed(ptr: NativePtr):
     if (ptr == nativeNullPtr) {
         return null
     } else {
-        val result = nativeMemUtils.allocateInstance<T>()
+        konst result = nativeMemUtils.allocateInstance<T>()
         result.rawPtr = ptr
         return result
     }
@@ -74,8 +74,8 @@ internal fun CPointer<*>.cPointerToString() = "CPointer(raw=0x%x)".format(rawVal
 
 @Target(AnnotationTarget.PROPERTY)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class CLength(val value: Int)
+annotation class CLength(konst konstue: Int)
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class CNaturalStruct(vararg val fieldNames: String)
+annotation class CNaturalStruct(vararg konst fieldNames: String)

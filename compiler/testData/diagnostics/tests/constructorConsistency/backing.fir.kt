@@ -1,17 +1,17 @@
 class My {
     var x = 1
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
         }
 
     var y: Int = 1
-        set(value) {
-            field = value + if (w == "") 0 else 1
+        set(konstue) {
+            field = konstue + if (w == "") 0 else 1
         }
 
     var z: Int = 2
-        set(value) {
-            field = value + if (w == "") 1 else 0
+        set(konstue) {
+            field = konstue + if (w == "") 1 else 0
         }
 
     var m: Int = 2
@@ -26,5 +26,5 @@ class My {
         this.z = 5
     }
 
-    val w = "6"
+    konst w = "6"
 }

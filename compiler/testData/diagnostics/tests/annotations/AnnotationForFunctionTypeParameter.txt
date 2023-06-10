@@ -12,7 +12,7 @@ public final annotation class A1 : kotlin.Annotation {
 
 public final annotation class A2 : kotlin.Annotation {
     public constructor A2(/*0*/ some: kotlin.Int = ...)
-    public final val some: kotlin.Int
+    public final konst some: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -45,7 +45,7 @@ public final class SomeClassTPA {
 
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.TYPE_PARAMETER}) public final annotation class TPA : kotlin.Annotation {
     public constructor TPA(/*0*/ some: kotlin.Int = ...)
-    public final val some: kotlin.Int
+    public final konst some: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

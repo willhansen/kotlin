@@ -1,8 +1,8 @@
 class A {
-    val x: Int
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor() {
         x = 1

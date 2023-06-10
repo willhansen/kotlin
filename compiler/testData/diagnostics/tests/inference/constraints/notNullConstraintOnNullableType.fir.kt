@@ -13,7 +13,7 @@ fun <T: Any> doA(i: A<T?>) { throw Exception("$i") }
 fun test(out: Out<Int>, i: In<Int>, inv: A<Int>) {
     // T? >: Int => T = Int
     doT(1)
-    val r = doOut(out)
+    konst r = doOut(out)
     r checkType { _<Int>() }
 
     // T? <: Int => error

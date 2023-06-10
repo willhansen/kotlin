@@ -17,15 +17,15 @@ FILE: privateFromInAnonymousObject.kt
                     super<R|kotlin/Any|>()
                 }
 
-                public final val x: R|Base.Private| = R|/Base.Private.Private|()
+                public final konst x: R|Base.Private| = R|/Base.Private.Private|()
                     public get(): R|Base.Private|
 
                 init {
-                    lval y: R|Base.Private| = R|/Base.Private.Private|()
+                    lkonst y: R|Base.Private| = R|/Base.Private.Private|()
                 }
 
                 public final fun foo(): R|kotlin/Unit| {
-                    lval z: R|Base.Private| = R|/Base.Private.Private|()
+                    lkonst z: R|Base.Private| = R|/Base.Private.Private|()
                 }
 
             }

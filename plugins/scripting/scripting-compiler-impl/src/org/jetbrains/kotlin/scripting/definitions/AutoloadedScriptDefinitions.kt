@@ -11,17 +11,17 @@ import kotlin.script.experimental.jvm.impl.tryGetResourcePathForClass
 import kotlin.script.experimental.jvm.util.matchMaybeVersionedFile
 
 class AutoloadedScriptDefinitions(
-    private val hostConfiguration: ScriptingHostConfiguration,
-    private val baseClassloader: ClassLoader,
-    private val messageReporter: MessageReporter
+    private konst hostConfiguration: ScriptingHostConfiguration,
+    private konst baseClassloader: ClassLoader,
+    private konst messageReporter: MessageReporter
 ) : ScriptDefinitionsSource {
 
-    private val basePath by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst basePath by lazy(LazyThreadSafetyMode.PUBLICATION) {
         tryGetResourcePathForClass(AutoloadedScriptDefinitions::class.java)?.parentFile?.takeIf { it.isDirectory } ?: File(".")
     }
 
-    override val definitions: Sequence<ScriptDefinition> = sequence {
-        val mainKtsJars = basePath.listFiles { f: File ->
+    override konst definitions: Sequence<ScriptDefinition> = sequence {
+        konst mainKtsJars = basePath.listFiles { f: File ->
             MAIN_KTS_JARS.any { expected ->
                 f.matchMaybeVersionedFile(expected) && f.extension == "jar"
             }
@@ -41,6 +41,6 @@ class AutoloadedScriptDefinitions(
     }
 
     companion object {
-        private val MAIN_KTS_JARS = listOf("kotlin-main-kts", "kotlin-stdlib", "kotlin-script-runtime", "kotlin-reflect")
+        private konst MAIN_KTS_JARS = listOf("kotlin-main-kts", "kotlin-stdlib", "kotlin-script-runtime", "kotlin-reflect")
     }
 }

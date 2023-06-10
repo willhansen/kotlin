@@ -1,15 +1,15 @@
 class JvmStaticTest {
     companion object {
         @JvmStatic
-        val one = 1
+        konst one = 1
 
-        const val two = 2
+        const konst two = 2
 
-        const val c: Char = 'C'
+        const konst c: Char = 'C'
     }
 
-    const val three: Byte = 3.toByte()
-    const val d: Char = 'D'
+    const konst three: Byte = 3.toByte()
+    const konst d: Char = 'D'
 }
 
 interface FooComponent {

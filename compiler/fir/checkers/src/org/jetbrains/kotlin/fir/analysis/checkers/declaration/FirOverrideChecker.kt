@@ -41,16 +41,16 @@ import org.jetbrains.kotlin.types.TypeCheckerState
 
 object FirOverrideChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val typeCheckerState = context.session.typeContext.newTypeCheckerState(
+        konst typeCheckerState = context.session.typeContext.newTypeCheckerState(
             errorTypesEqualToAnything = false,
             stubTypesEqualToAnything = false
         )
 
-        val firTypeScope = declaration.unsubstitutedScope(context)
+        konst firTypeScope = declaration.unsubstitutedScope(context)
 
         for (it in declaration.declarations) {
             if (it is FirSimpleFunction || it is FirProperty) {
-                val callable = it as FirCallableDeclaration
+                konst callable = it as FirCallableDeclaration
                 checkMember(callable.symbol, declaration, reporter, typeCheckerState, firTypeScope, context)
             }
         }
@@ -77,19 +77,19 @@ object FirOverrideChecker : FirClassChecker() {
         baseDeclaration: FirCallableSymbol<*>,
         context: CheckerContext
     ): ConeKotlinType {
-        val overrideTypeParameters = overrideDeclaration.typeParameterSymbols
+        konst overrideTypeParameters = overrideDeclaration.typeParameterSymbols
         if (overrideTypeParameters.isEmpty()) {
             return this
         }
 
-        val baseTypeParameters = baseDeclaration.typeParameterSymbols
+        konst baseTypeParameters = baseDeclaration.typeParameterSymbols
 
-        val map = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
-        val size = minOf(overrideTypeParameters.size, baseTypeParameters.size)
+        konst map = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
+        konst size = minOf(overrideTypeParameters.size, baseTypeParameters.size)
 
         for (it in 0 until size) {
-            val to = overrideTypeParameters[it]
-            val from = baseTypeParameters[it]
+            konst to = overrideTypeParameters[it]
+            konst from = baseTypeParameters[it]
 
             map[from] = to.toConeType()
         }
@@ -101,8 +101,8 @@ object FirOverrideChecker : FirClassChecker() {
         overriddenSymbols: List<FirCallableSymbol<*>>,
     ): FirCallableSymbol<*>? {
         for (overridden in overriddenSymbols) {
-            val modality = overridden.modality
-            val isEffectivelyFinal = modality == null || modality == Modality.FINAL
+            konst modality = overridden.modality
+            konst isEffectivelyFinal = modality == null || modality == Modality.FINAL
             if (isEffectivelyFinal) {
                 return overridden
             }
@@ -124,7 +124,7 @@ object FirOverrideChecker : FirClassChecker() {
         context: CheckerContext
     ) {
         if (overriddenSymbols.isEmpty()) return
-        val visibilities = overriddenSymbols.map {
+        konst visibilities = overriddenSymbols.map {
             it to it.visibility
         }.sortedBy { pair ->
             // Regard `null` compare as Int.MIN so that we can report CANNOT_CHANGE_... first deterministically
@@ -146,7 +146,7 @@ object FirOverrideChecker : FirClassChecker() {
             )
         } else {
             for ((overridden, overriddenVisibility) in visibilities) {
-                val compare = Visibilities.compare(visibility, overriddenVisibility)
+                konst compare = Visibilities.compare(visibility, overriddenVisibility)
                 if (compare == null) {
                     reporter.reportCannotChangeAccessPrivilege(this, overridden, context)
                     break
@@ -158,13 +158,13 @@ object FirOverrideChecker : FirClassChecker() {
         }
 
         if (this is FirPropertyAccessorSymbol) return
-        val file = context.containingFile ?: return
-        val containingDeclarations = context.containingDeclarations + containingClass
-        val visibilityChecker = context.session.visibilityChecker
-        val hasVisibleBase = overriddenSymbols.any {
+        konst file = context.containingFile ?: return
+        konst containingDeclarations = context.containingDeclarations + containingClass
+        konst visibilityChecker = context.session.visibilityChecker
+        konst hasVisibleBase = overriddenSymbols.any {
             it.lazyResolveToPhase(FirResolvePhase.STATUS)
             @OptIn(SymbolInternals::class)
-            val fir = it.fir
+            konst fir = it.fir
             visibilityChecker.isVisible(
                 fir,
                 context.session,
@@ -187,13 +187,13 @@ object FirOverrideChecker : FirClassChecker() {
         overriddenSymbols: List<FirCallableSymbol<*>>,
         context: CheckerContext
     ) {
-        val ownDeprecation = this.getDeprecation(context.session.languageVersionSettings.apiVersion)
+        konst ownDeprecation = this.getDeprecation(context.session.languageVersionSettings.apiVersion)
         if (ownDeprecation == null || ownDeprecation.isNotEmpty()) return
         for (overriddenSymbol in overriddenSymbols) {
-            val deprecationInfoFromOverridden = overriddenSymbol.getDeprecation(context.session.languageVersionSettings.apiVersion)
+            konst deprecationInfoFromOverridden = overriddenSymbol.getDeprecation(context.session.languageVersionSettings.apiVersion)
                 ?: continue
-            val deprecationFromOverriddenSymbol = deprecationInfoFromOverridden.all
-                ?: deprecationInfoFromOverridden.bySpecificSite?.values?.firstOrNull()
+            konst deprecationFromOverriddenSymbol = deprecationInfoFromOverridden.all
+                ?: deprecationInfoFromOverridden.bySpecificSite?.konstues?.firstOrNull()
                 ?: continue
             reporter.reportOn(source, FirErrors.OVERRIDE_DEPRECATION, overriddenSymbol, deprecationFromOverriddenSymbol, context)
             return
@@ -206,21 +206,21 @@ object FirOverrideChecker : FirClassChecker() {
         typeCheckerState: TypeCheckerState,
         context: CheckerContext,
     ): FirCallableSymbol<*>? {
-        val overridingReturnType = resolvedReturnTypeRef.coneType
+        konst overridingReturnType = resolvedReturnTypeRef.coneType
 
         // Don't report *_ON_OVERRIDE diagnostics according to an error return type. That should be reported separately.
         if (overridingReturnType is ConeErrorType) {
             return null
         }
 
-        val bounds = overriddenSymbols.map { context.returnTypeCalculator.tryCalculateReturnType(it).coneType }
+        konst bounds = overriddenSymbols.map { context.returnTypeCalculator.tryCalculateReturnType(it).coneType }
 
         for (it in bounds.indices) {
-            val overriddenDeclaration = overriddenSymbols[it]
+            konst overriddenDeclaration = overriddenSymbols[it]
 
-            val overriddenReturnType = bounds[it].substituteAllTypeParameters(this, overriddenDeclaration, context)
+            konst overriddenReturnType = bounds[it].substituteAllTypeParameters(this, overriddenDeclaration, context)
 
-            val isReturnTypeOkForOverride =
+            konst isReturnTypeOkForOverride =
                 if (overriddenDeclaration is FirPropertySymbol && overriddenDeclaration.isVar)
                     AbstractTypeChecker.equalTypes(typeCheckerState, overridingReturnType, overriddenReturnType)
                 else
@@ -242,7 +242,7 @@ object FirOverrideChecker : FirClassChecker() {
         firTypeScope: FirTypeScope,
         context: CheckerContext
     ) {
-        val overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(member)
+        konst overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(member)
 
         if (!member.isOverride) {
             if (overriddenMemberSymbols.isEmpty() ||
@@ -250,7 +250,7 @@ object FirOverrideChecker : FirClassChecker() {
             ) {
                 return
             }
-            val kind = member.source?.kind
+            konst kind = member.source?.kind
             // Only report if the current member has real source or it's a member property declared inside the primary constructor.
 
             if (kind is KtFakeSourceElementKind.DataClassGeneratedMembers) {
@@ -268,12 +268,12 @@ object FirOverrideChecker : FirClassChecker() {
 
             if (kind !is KtRealSourceElementKind && kind !is KtFakeSourceElementKind.PropertyFromParameter) return
 
-            val visibilityChecker = context.session.visibilityChecker
-            val file = context.containingFile ?: return
-            val containingDeclarations = context.containingDeclarations + containingClass
+            konst visibilityChecker = context.session.visibilityChecker
+            konst file = context.containingFile ?: return
+            konst containingDeclarations = context.containingDeclarations + containingClass
 
             @OptIn(SymbolInternals::class)
-            val overridden = overriddenMemberSymbols.firstOrNull {
+            konst overridden = overriddenMemberSymbols.firstOrNull {
                 it.lazyResolveToPhase(FirResolvePhase.STATUS)
                 visibilityChecker.isVisible(
                     it.originalOrSelf().fir,
@@ -284,7 +284,7 @@ object FirOverrideChecker : FirClassChecker() {
                     skipCheckForContainingClassVisibility = true
                 )
             }?.originalOrSelf() ?: return
-            val originalContainingClassSymbol = overridden.containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol ?: return
+            konst originalContainingClassSymbol = overridden.containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol ?: return
             reporter.reportOn(
                 member.source,
                 FirErrors.VIRTUAL_MEMBER_HIDDEN,
@@ -316,7 +316,7 @@ object FirOverrideChecker : FirClassChecker() {
 
         member.checkDeprecation(reporter, overriddenMemberSymbols, context)
 
-        val restriction = member.checkReturnType(
+        konst restriction = member.checkReturnType(
             overriddenSymbols = overriddenMemberSymbols,
             typeCheckerState = typeCheckerState,
             context = context,
@@ -341,9 +341,9 @@ object FirOverrideChecker : FirClassChecker() {
         reporter: DiagnosticReporter
     ) {
         with(FirOptInUsageBaseChecker) {
-            val overriddenExperimentalities = mutableSetOf<Experimentality>()
-            val session = context.session
-            val overriddenSymbolsWithUnwrappedIntersectionOverrides = overriddenMemberSymbols.flatMap {
+            konst overriddenExperimentalities = mutableSetOf<Experimentality>()
+            konst session = context.session
+            konst overriddenSymbolsWithUnwrappedIntersectionOverrides = overriddenMemberSymbols.flatMap {
                 when (it) {
                     is FirIntersectionOverridePropertySymbol -> it.intersections
                     is FirIntersectionOverrideFunctionSymbol -> it.intersections
@@ -386,7 +386,7 @@ object FirOverrideChecker : FirClassChecker() {
         overridden: FirCallableSymbol<*>,
         context: CheckerContext
     ) {
-        val containingClass = overridden.containingClassLookupTag() ?: return
+        konst containingClass = overridden.containingClassLookupTag() ?: return
         reportOn(
             overriding.source,
             FirErrors.CANNOT_WEAKEN_ACCESS_PRIVILEGE,
@@ -402,7 +402,7 @@ object FirOverrideChecker : FirClassChecker() {
         overridden: FirCallableSymbol<*>,
         context: CheckerContext
     ) {
-        val containingClass = overridden.containingClassLookupTag() ?: return
+        konst containingClass = overridden.containingClassLookupTag() ?: return
         reportOn(
             overriding.source,
             FirErrors.CANNOT_CHANGE_ACCESS_PRIVILEGE,

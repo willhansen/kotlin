@@ -35,16 +35,16 @@ import org.jetbrains.kotlin.name.Name
 
 object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
 
-    private val objCNameClassId = ClassId.topLevel(FqName("kotlin.native.ObjCName"))
-    private val swiftNameName = Name.identifier("swiftName")
-    private val exactName = Name.identifier("exact")
+    private konst objCNameClassId = ClassId.topLevel(FqName("kotlin.native.ObjCName"))
+    private konst swiftNameName = Name.identifier("swiftName")
+    private konst exactName = Name.identifier("exact")
 
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         checkDeclaration(declaration, context, reporter)
         if (declaration is FirCallableDeclaration && (declaration is FirSimpleFunction || declaration is FirProperty)) {
-            val containingClass = context.containingDeclarations.lastOrNull() as? FirClass
+            konst containingClass = context.containingDeclarations.lastOrNull() as? FirClass
             if (containingClass != null) {
-                val firTypeScope = containingClass.unsubstitutedScope(context)
+                konst firTypeScope = containingClass.unsubstitutedScope(context)
                 check(firTypeScope, declaration.symbol, declaration, context, reporter)
             }
         }
@@ -52,7 +52,7 @@ object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
 
     private fun checkDeclaration(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
         if (declaration is FirValueParameter) return // those are checked with the FirFunction
-        val objCNames = declaration.symbol.getObjCNames(context.session).filterNotNull()
+        konst objCNames = declaration.symbol.getObjCNames(context.session).filterNotNull()
         if (objCNames.isEmpty()) return
         if (declaration is FirCallableDeclaration && declaration.isOverride) {
             for (objCName in objCNames) {
@@ -62,12 +62,12 @@ object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
         objCNames.forEach { checkObjCName(it, declaration, context, reporter) }
     }
 
-    // We only allow valid ObjC identifiers (even for Swift names)
-    private val validFirstChars = ('A'..'Z').toSet() + ('a'..'z').toSet() + '_'
-    private val validChars = validFirstChars + ('0'..'9').toSet()
+    // We only allow konstid ObjC identifiers (even for Swift names)
+    private konst konstidFirstChars = ('A'..'Z').toSet() + ('a'..'z').toSet() + '_'
+    private konst konstidChars = konstidFirstChars + ('0'..'9').toSet()
 
     private fun checkObjCName(objCName: ObjCName, declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val annotationSource = objCName.annotation.source
+        konst annotationSource = objCName.annotation.source
         for ((_, argument) in objCName.annotation.argumentMapping.mapping) {
             if (argument is FirConstExpression<*>) continue
             reporter.reportOn(argument.source, NON_LITERAL_OBJC_NAME_ARG, context)
@@ -75,20 +75,20 @@ object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
         if (objCName.name == null && objCName.swiftName == null) {
             reporter.reportOn(annotationSource, INVALID_OBJC_NAME, context)
         }
-        val invalidNameFirstChar = objCName.name?.firstOrNull()?.takeUnless(validFirstChars::contains)
-        val invalidSwiftNameFirstChar = objCName.swiftName?.firstOrNull()?.takeUnless(validFirstChars::contains)
-        val invalidFirstChars = setOfNotNull(invalidNameFirstChar, invalidSwiftNameFirstChar)
-        if (invalidFirstChars.isNotEmpty()) {
-            reporter.reportOn(annotationSource, INVALID_OBJC_NAME_FIRST_CHAR, invalidFirstChars.joinToString(""), context)
+        konst inkonstidNameFirstChar = objCName.name?.firstOrNull()?.takeUnless(konstidFirstChars::contains)
+        konst inkonstidSwiftNameFirstChar = objCName.swiftName?.firstOrNull()?.takeUnless(konstidFirstChars::contains)
+        konst inkonstidFirstChars = setOfNotNull(inkonstidNameFirstChar, inkonstidSwiftNameFirstChar)
+        if (inkonstidFirstChars.isNotEmpty()) {
+            reporter.reportOn(annotationSource, INVALID_OBJC_NAME_FIRST_CHAR, inkonstidFirstChars.joinToString(""), context)
         }
         if (objCName.name?.isEmpty() == true || objCName.swiftName?.isEmpty() == true) {
             reporter.reportOn(annotationSource, EMPTY_OBJC_NAME, context)
         }
-        val invalidNameChars = objCName.name?.toSet()?.subtract(validChars) ?: emptySet()
-        val invalidSwiftNameChars = objCName.swiftName?.toSet()?.subtract(validChars) ?: emptySet()
-        val invalidChars = invalidNameChars + invalidSwiftNameChars
-        if (invalidChars.isNotEmpty()) {
-            reporter.reportOn(annotationSource, INVALID_OBJC_NAME_CHARS, invalidFirstChars.joinToString(""), context)
+        konst inkonstidNameChars = objCName.name?.toSet()?.subtract(konstidChars) ?: emptySet()
+        konst inkonstidSwiftNameChars = objCName.swiftName?.toSet()?.subtract(konstidChars) ?: emptySet()
+        konst inkonstidChars = inkonstidNameChars + inkonstidSwiftNameChars
+        if (inkonstidChars.isNotEmpty()) {
+            reporter.reportOn(annotationSource, INVALID_OBJC_NAME_CHARS, inkonstidFirstChars.joinToString(""), context)
         }
         if (objCName.exact && (declaration !is FirClass || declaration.classKind == ClassKind.ENUM_ENTRY)) {
             reporter.reportOn(annotationSource, INAPPLICABLE_EXACT_OBJC_NAME, context)
@@ -99,11 +99,11 @@ object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
     }
 
     class ObjCName(
-        val annotation: FirAnnotation
+        konst annotation: FirAnnotation
     ) {
-        val name: String? = annotation.getStringArgument(StandardNames.NAME)
-        val swiftName: String? = annotation.getStringArgument(swiftNameName)
-        val exact: Boolean = annotation.getBooleanArgument(exactName) ?: false
+        konst name: String? = annotation.getStringArgument(StandardNames.NAME)
+        konst swiftName: String? = annotation.getStringArgument(swiftNameName)
+        konst exact: Boolean = annotation.getBooleanArgument(exactName) ?: false
 
         override fun equals(other: Any?): Boolean =
             other is ObjCName && name == other.name && swiftName == other.swiftName && exact == other.exact
@@ -127,7 +127,7 @@ object FirNativeObjCNameChecker : FirBasicDeclarationChecker() {
             add((this@getObjCNames as FirBasedSymbol<*>).getObjCName(session))
             add(resolvedReceiverTypeRef?.getObjCName(session))
             add(receiverParameter?.getObjCName(session))
-            valueParameterSymbols.forEach { add(it.getObjCName(session)) }
+            konstueParameterSymbols.forEach { add(it.getObjCName(session)) }
         }
 
         else -> listOf(getObjCName(session))

@@ -15,17 +15,17 @@ fun TypeSystemCommonBackendContext.computeExpandedTypeForInlineClass(inlineClass
 private fun TypeSystemCommonBackendContext.computeExpandedTypeInner(
     kotlinType: KotlinTypeMarker, visitedClassifiers: HashSet<TypeConstructorMarker>
 ): KotlinTypeMarker? {
-    val classifier = kotlinType.typeConstructor()
+    konst classifier = kotlinType.typeConstructor()
     if (!visitedClassifiers.add(classifier)) return null
 
-    val typeParameter = classifier.getTypeParameterClassifier()
+    konst typeParameter = classifier.getTypeParameterClassifier()
 
     return when {
         typeParameter != null -> {
-            val upperBound = typeParameter.getRepresentativeUpperBound()
+            konst upperBound = typeParameter.getRepresentativeUpperBound()
             computeExpandedTypeInner(upperBound, visitedClassifiers)
                 ?.let { expandedUpperBound ->
-                    val upperBoundIsPrimitiveOrInlineClass =
+                    konst upperBoundIsPrimitiveOrInlineClass =
                         upperBound.typeConstructor().isInlineClass() || upperBound is SimpleTypeMarker && upperBound.isPrimitiveType()
                     when {
                         expandedUpperBound is SimpleTypeMarker && expandedUpperBound.isPrimitiveType() &&
@@ -39,8 +39,8 @@ private fun TypeSystemCommonBackendContext.computeExpandedTypeInner(
         classifier.isInlineClass() -> {
             // kotlinType is the boxed inline class type
 
-            val underlyingType = kotlinType.getUnsubstitutedUnderlyingType() ?: return null
-            val expandedUnderlyingType = computeExpandedTypeInner(underlyingType, visitedClassifiers) ?: return null
+            konst underlyingType = kotlinType.getUnsubstitutedUnderlyingType() ?: return null
+            konst expandedUnderlyingType = computeExpandedTypeInner(underlyingType, visitedClassifiers) ?: return null
             when {
                 !kotlinType.isNullableType() -> expandedUnderlyingType
 

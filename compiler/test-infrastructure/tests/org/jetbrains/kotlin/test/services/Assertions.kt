@@ -9,4 +9,4 @@ import org.jetbrains.kotlin.test.Assertions
 
 abstract class AssertionsService : Assertions(), TestService
 
-val TestServices.assertions: AssertionsService by TestServices.testServiceAccessor()
+konst TestServices.assertions: AssertionsService by TestServices.testServiceAccessor()

@@ -5,7 +5,7 @@ object A {
 
     interface X
 
-    val a = object : Any() {
+    konst a = object : Any() {
         <!LOCAL_OBJECT_NOT_ALLOWED!>object D<!> {
             <!LOCAL_OBJECT_NOT_ALLOWED!>object G<!>
             <!LOCAL_INTERFACE_NOT_ALLOWED, NESTED_CLASS_NOT_ALLOWED!>interface Z<!>
@@ -22,8 +22,8 @@ object A {
 
         <!LOCAL_INTERFACE_NOT_ALLOWED!>interface N<!>
 
-        val c = object : Any() {
-            val t = "test"
+        konst c = object : Any() {
+            konst t = "test"
 
             <!LOCAL_INTERFACE_NOT_ALLOWED!>interface U<!>
         }

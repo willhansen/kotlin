@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val a: String)
+konstue class A(konst a: String)
 
 fun isEqualNA(x: A?, y: A) = x == y
 fun isEqualAN(x: A, y: A?) = x == y

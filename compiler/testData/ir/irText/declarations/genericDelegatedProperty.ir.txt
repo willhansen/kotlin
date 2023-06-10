@@ -31,7 +31,7 @@ FILE fqName:<root> fileName:/genericDelegatedProperty.kt
       VALUE_PARAMETER name:kProp index:1 type:kotlin.Any?
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun getValue (thisRef: kotlin.Any?, kProp: kotlin.Any?): kotlin.Int declared in <root>.Delegate'
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
     FUN name:setValue visibility:public modality:FINAL <> ($this:<root>.Delegate, thisRef:kotlin.Any?, kProp:kotlin.Any?, newValue:kotlin.Int) returnType:kotlin.Unit [operator]
       $this: VALUE_PARAMETER name:<this> type:<root>.Delegate
       VALUE_PARAMETER name:thisRef index:0 type:kotlin.Any?

@@ -18,4 +18,4 @@ package kotlin.script.extensions
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class SamWithReceiverAnnotations(vararg val annotations: String)
+annotation class SamWithReceiverAnnotations(vararg konst annotations: String)

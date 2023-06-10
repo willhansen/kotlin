@@ -9,39 +9,39 @@ import org.jetbrains.kotlin.commonizer.cir.*
 import org.jetbrains.kotlin.commonizer.mergedtree.CirProvidedClassifiers
 
 data class CirTreeRoot(
-    val modules: List<CirTreeModule> = emptyList(),
-    val dependencies: CirProvidedClassifiers = CirProvidedClassifiers.EMPTY
+    konst modules: List<CirTreeModule> = emptyList(),
+    konst dependencies: CirProvidedClassifiers = CirProvidedClassifiers.EMPTY
 )
 
 data class CirTreeModule(
-    val module: CirModule,
-    val packages: List<CirTreePackage> = emptyList()
+    konst module: CirModule,
+    konst packages: List<CirTreePackage> = emptyList()
 )
 
 data class CirTreePackage(
-    val pkg: CirPackage,
-    val properties: List<CirProperty> = emptyList(),
-    val functions: List<CirFunction> = emptyList(),
-    val classes: List<CirTreeClass> = emptyList(),
-    val typeAliases: List<CirTreeTypeAlias> = emptyList()
+    konst pkg: CirPackage,
+    konst properties: List<CirProperty> = emptyList(),
+    konst functions: List<CirFunction> = emptyList(),
+    konst classes: List<CirTreeClass> = emptyList(),
+    konst typeAliases: List<CirTreeTypeAlias> = emptyList()
 )
 
 sealed interface CirTreeClassifier {
-    val id: CirEntityId
+    konst id: CirEntityId
 }
 
 data class CirTreeTypeAlias(
-    override val id: CirEntityId,
-    val typeAlias: CirTypeAlias
+    override konst id: CirEntityId,
+    konst typeAlias: CirTypeAlias
 ) : CirTreeClassifier
 
 data class CirTreeClass(
-    override val id: CirEntityId,
-    val clazz: CirClass,
-    val properties: List<CirProperty> = emptyList(),
-    val functions: List<CirFunction> = emptyList(),
-    val constructors: List<CirClassConstructor> = emptyList(),
-    val classes: List<CirTreeClass> = emptyList(),
+    override konst id: CirEntityId,
+    konst clazz: CirClass,
+    konst properties: List<CirProperty> = emptyList(),
+    konst functions: List<CirFunction> = emptyList(),
+    konst constructors: List<CirClassConstructor> = emptyList(),
+    konst classes: List<CirTreeClass> = emptyList(),
 ) : CirTreeClassifier
 
 

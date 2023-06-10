@@ -7,8 +7,8 @@ import kotlin.reflect.KFunction
 import kotlin.test.assertEquals
 
 @JvmInline
-value class Z(val value1: UInt, val value2: Int) {
-    operator fun plus(other: Z): Z = Z(this.value1 + other.value1, this.value2 + other.value2)
+konstue class Z(konst konstue1: UInt, konst konstue2: Int) {
+    operator fun plus(other: Z): Z = Z(this.konstue1 + other.konstue1, this.konstue2 + other.konstue2)
 }
 
 object C {
@@ -24,18 +24,18 @@ interface I {
 }
 
 fun box(): String {
-    val one = Z(1U, -1)
-    val two = Z(2U, -2)
-    val four = Z(4U, -4)
-    val seven = Z(7U, -7)
+    konst one = Z(1U, -1)
+    konst two = Z(2U, -2)
+    konst four = Z(4U, -4)
+    konst seven = Z(7U, -7)
 
     assertEquals(seven, C::foo.call(one, 2U, -2, four))
     assertEquals(seven, (I)::bar.call(1U, -1, two, four))
 
-    val unboundFoo = C::class.members.single { it.name == "foo" } as KFunction<*>
+    konst unboundFoo = C::class.members.single { it.name == "foo" } as KFunction<*>
     assertEquals(seven, unboundFoo.call(C, one, 2U, -2, four))
 
-    val unboundBar = I.Companion::class.members.single { it.name == "bar" } as KFunction<*>
+    konst unboundBar = I.Companion::class.members.single { it.name == "bar" } as KFunction<*>
     assertEquals(seven, unboundBar.call(I, 1U, -1, two, four))
 
     return "OK"

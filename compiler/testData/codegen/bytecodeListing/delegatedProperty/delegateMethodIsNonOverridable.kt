@@ -1,14 +1,14 @@
 // WITH_STDLIB
 
-val a = 1
-val b = 2
+konst a = 1
+konst b = 2
 
 open class C {
-    open val x by run { ::a }
-    open val y by ::a
+    open konst x by run { ::a }
+    open konst y by ::a
 }
 
 class D : C() {
-    override val x by run { ::b }
-    override val y by ::b
+    override konst x by run { ::b }
+    override konst y by ::b
 }

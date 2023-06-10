@@ -10,7 +10,7 @@ package kotlin.ranges
 import kotlin.internal.getProgressionLastElement
 
 /**
- * A progression of values of type `Char`.
+ * A progression of konstues of type `Char`.
  */
 public open class CharProgression
     internal constructor
@@ -27,17 +27,17 @@ public open class CharProgression
     /**
      * The first element in the progression.
      */
-    public val first: Char = start
+    public konst first: Char = start
 
     /**
      * The last element in the progression.
      */
-    public val last: Char = getProgressionLastElement(start.code, endInclusive.code, step).toChar()
+    public konst last: Char = getProgressionLastElement(start.code, endInclusive.code, step).toChar()
 
     /**
      * The step of the progression.
      */
-    public val step: Int = step
+    public konst step: Int = step
 
     override fun iterator(): CharIterator = CharProgressionIterator(first, last, step)
 
@@ -62,7 +62,7 @@ public open class CharProgression
         /**
          * Creates CharProgression within the specified bounds of a closed range.
          *
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `Int.MIN_VALUE` and not equal to zero.
@@ -72,7 +72,7 @@ public open class CharProgression
 }
 
 /**
- * A progression of values of type `Int`.
+ * A progression of konstues of type `Int`.
  */
 public open class IntProgression
     internal constructor
@@ -89,17 +89,17 @@ public open class IntProgression
     /**
      * The first element in the progression.
      */
-    public val first: Int = start
+    public konst first: Int = start
 
     /**
      * The last element in the progression.
      */
-    public val last: Int = getProgressionLastElement(start, endInclusive, step)
+    public konst last: Int = getProgressionLastElement(start, endInclusive, step)
 
     /**
      * The step of the progression.
      */
-    public val step: Int = step
+    public konst step: Int = step
 
     override fun iterator(): IntIterator = IntProgressionIterator(first, last, step)
 
@@ -124,7 +124,7 @@ public open class IntProgression
         /**
          * Creates IntProgression within the specified bounds of a closed range.
          *
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `Int.MIN_VALUE` and not equal to zero.
@@ -134,7 +134,7 @@ public open class IntProgression
 }
 
 /**
- * A progression of values of type `Long`.
+ * A progression of konstues of type `Long`.
  */
 public open class LongProgression
     internal constructor
@@ -151,17 +151,17 @@ public open class LongProgression
     /**
      * The first element in the progression.
      */
-    public val first: Long = start
+    public konst first: Long = start
 
     /**
      * The last element in the progression.
      */
-    public val last: Long = getProgressionLastElement(start, endInclusive, step)
+    public konst last: Long = getProgressionLastElement(start, endInclusive, step)
 
     /**
      * The step of the progression.
      */
-    public val step: Long = step
+    public konst step: Long = step
 
     override fun iterator(): LongIterator = LongProgressionIterator(first, last, step)
 
@@ -186,7 +186,7 @@ public open class LongProgression
         /**
          * Creates LongProgression within the specified bounds of a closed range.
          *
-         * The progression starts with the [rangeStart] value and goes toward the [rangeEnd] value not excluding it, with the specified [step].
+         * The progression starts with the [rangeStart] konstue and goes toward the [rangeEnd] konstue not excluding it, with the specified [step].
          * In order to go backwards the [step] must be negative.
          *
          * [step] must be greater than `Long.MIN_VALUE` and not equal to zero.

@@ -7,7 +7,7 @@ class Div {
 
     companion object {
         operator fun invoke(init: Div.() -> Unit): Div {
-            val div = Div()
+            konst div = Div()
             div.init()
             return div
         }
@@ -15,7 +15,7 @@ class Div {
 }
 
 fun box(): String {
-    val x = Div {
+    konst x = Div {
         className = "ui container"
     }
     assertEquals("ui container", x.className)

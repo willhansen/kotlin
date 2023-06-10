@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.load.java.structure.JavaAnnotationArgument
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
-class ReflectJavaAnnotation(val annotation: Annotation) : ReflectJavaElement(), JavaAnnotation {
-    override val arguments: Collection<JavaAnnotationArgument>
+class ReflectJavaAnnotation(konst annotation: Annotation) : ReflectJavaElement(), JavaAnnotation {
+    override konst arguments: Collection<JavaAnnotationArgument>
         get() = annotation.annotationClass.java.declaredMethods.map { method ->
             ReflectJavaAnnotationArgument.create(method.invoke(annotation), Name.identifier(method.name))
         }
 
-    override val classId: ClassId
+    override konst classId: ClassId
         get() = annotation.annotationClass.java.classId
 
     override fun resolve() = ReflectJavaClass(annotation.annotationClass.java)

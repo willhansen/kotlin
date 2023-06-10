@@ -5,7 +5,7 @@ class NoiseMaker {
 }
 
 fun noiseMaker(f: NoiseMaker.() -> Unit) {
-    val noiseMaker = NoiseMaker()
+    konst noiseMaker = NoiseMaker()
     noiseMaker.f()
 }
 

@@ -1,9 +1,9 @@
 inline fun myRun(x: () -> String) = x()
 
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class C {
-    val x = myRun { eval { "OK" } }
+    konst x = myRun { ekonst { "OK" } }
 
     constructor(y: Int)
     constructor(y: String)

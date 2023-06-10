@@ -36,7 +36,7 @@ interface InnerClassConsumer {
         fun classForInnerClassRecord(descriptor: ClassDescriptor, defaultImpls: Boolean): ClassDescriptor? {
             if (defaultImpls) {
                 if (DescriptorUtils.isLocal(descriptor)) return null
-                val classDescriptorImpl = ClassDescriptorImpl(
+                konst classDescriptorImpl = ClassDescriptorImpl(
                     descriptor, Name.identifier(JvmAbi.DEFAULT_IMPLS_CLASS_NAME),
                     Modality.FINAL, ClassKind.CLASS, Collections.emptyList(), SourceElement.NO_SOURCE,
                     /* isExternal = */ false, LockBasedStorageManager.NO_LOCKS

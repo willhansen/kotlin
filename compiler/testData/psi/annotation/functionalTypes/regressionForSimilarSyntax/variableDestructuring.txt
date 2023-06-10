@@ -17,7 +17,7 @@ KtFile: variableDestructuring.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Annotations are not allowed in this position
           ANNOTATION_ENTRY
@@ -138,7 +138,7 @@ KtFile: variableDestructuring.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Annotations are not allowed in this position
           ANNOTATION_ENTRY
@@ -181,7 +181,7 @@ KtFile: variableDestructuring.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiErrorElement:Annotations are not allowed in this position
           ANNOTATION_ENTRY

@@ -20,11 +20,11 @@ class Event<T : Any> {
     operator fun plusAssign(handler: EventHandler<T>) = subscribe(handler)
     operator fun minusAssign(handler: EventHandler<T>) = unsubscribe(handler)
 
-    operator fun invoke(value: T) {
+    operator fun invoke(konstue: T) {
         var exception: Throwable? = null
         for (handler in handlers) {
             try {
-                handler(value)
+                handler(konstue)
             } catch (e: Throwable) {
                 exception = e
             }

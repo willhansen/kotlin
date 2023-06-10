@@ -5,5 +5,5 @@ package foo
         inner class B
     }
 
-    val b = A().B()
+    konst b = A().B()
 }

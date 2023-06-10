@@ -16,7 +16,7 @@
 
 package org.jetbrains.ring
 
-val OBJ = Any()
+konst OBJ = Any()
 
 open class ParameterNotNullAssertionBenchmark {
     

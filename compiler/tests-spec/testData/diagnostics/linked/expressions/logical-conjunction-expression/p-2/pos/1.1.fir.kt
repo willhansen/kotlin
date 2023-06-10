@@ -27,18 +27,18 @@ fun foo() = run { false && JavaClass.VALUE && throw Exception() }
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val a1 = false
-    val a2 = JavaClass.VALUE
-    val a3 = foo()
-    val a4 = JavaClass().getValue()
-    val a5 = JavaClass.VALUE_OBJ
+    konst a1 = false
+    konst a2 = JavaClass.VALUE
+    konst a3 = foo()
+    konst a4 = JavaClass().getValue()
+    konst a5 = JavaClass.VALUE_OBJ
 
     checkSubtype<Boolean>(a1)
     checkSubtype<Boolean>(a2)
     checkSubtype<Boolean>(a3)
     checkSubtype<Boolean>(a4)
 
-    val x3 = a1 && a2 && a3 && a4 && a5 as Boolean
+    konst x3 = a1 && a2 && a3 && a4 && a5 as Boolean
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Boolean")!>x3<!>
 
     x3 <!OVERLOAD_RESOLUTION_AMBIGUITY!>checkType<!> { <!NONE_APPLICABLE!>check<!><Boolean>()}

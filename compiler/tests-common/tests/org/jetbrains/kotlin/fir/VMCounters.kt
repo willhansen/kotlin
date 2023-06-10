@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.daemon.common.threadCpuTime
 import org.jetbrains.kotlin.daemon.common.threadUserTime
 import sun.management.ManagementFactoryHelper
 
-data class GCInfo(val name: String, val gcTime: Long, val collections: Long) {
+data class GCInfo(konst name: String, konst gcTime: Long, konst collections: Long) {
     operator fun minus(other: GCInfo): GCInfo {
         return this.copy(
             gcTime = gcTime - other.gcTime,
@@ -27,13 +27,13 @@ data class GCInfo(val name: String, val gcTime: Long, val collections: Long) {
 }
 
 data class VMCounters(
-    val userTime: Long = 0,
-    val cpuTime: Long = 0,
-    val gcInfo: Map<String, GCInfo> = emptyMap(),
+    konst userTime: Long = 0,
+    konst cpuTime: Long = 0,
+    konst gcInfo: Map<String, GCInfo> = emptyMap(),
 
-    val safePointTotalTime: Long = 0,
-    val safePointSyncTime: Long = 0,
-    val safePointCount: Long = 0,
+    konst safePointTotalTime: Long = 0,
+    konst safePointSyncTime: Long = 0,
+    konst safePointCount: Long = 0,
 ) {
 
 
@@ -62,10 +62,10 @@ data class VMCounters(
 }
 
 
-private fun <K, V : Any> merge(first: Map<K, V>, second: Map<K, V>, valueOp: (V, V) -> V): Map<K, V> {
-    val result = first.toMutableMap()
+private fun <K, V : Any> merge(first: Map<K, V>, second: Map<K, V>, konstueOp: (V, V) -> V): Map<K, V> {
+    konst result = first.toMutableMap()
     for ((k, v) in second) {
-        result.merge(k, v, valueOp)
+        result.merge(k, v, konstueOp)
     }
     return result
 }
@@ -78,8 +78,8 @@ object Init {
 
 fun vmStateSnapshot(): VMCounters {
     Init
-    val threadMXBean = ManagementFactoryHelper.getThreadMXBean()
-    val hotspotRuntimeMBean = ManagementFactoryHelper.getHotspotRuntimeMBean()
+    konst threadMXBean = ManagementFactoryHelper.getThreadMXBean()
+    konst hotspotRuntimeMBean = ManagementFactoryHelper.getHotspotRuntimeMBean()
 
     return VMCounters(
         threadMXBean.threadUserTime(), threadMXBean.threadCpuTime(),

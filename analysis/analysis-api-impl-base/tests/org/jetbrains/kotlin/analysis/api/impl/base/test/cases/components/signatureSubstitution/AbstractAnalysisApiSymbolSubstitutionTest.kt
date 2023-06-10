@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractAnalysisApiSymbolSubstitutionTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtCallableDeclaration>(ktFile)
-        val actual = analyseForTest(declaration) {
-            val symbol = declaration.getSymbolOfType<KtCallableSymbol>()
+        konst declaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtCallableDeclaration>(ktFile)
+        konst actual = analyseForTest(declaration) {
+            konst symbol = declaration.getSymbolOfType<KtCallableSymbol>()
 
-            val substitutor = SubstitutionParser.parseSubstitutor(ktFile, declaration)
+            konst substitutor = SubstitutionParser.parseSubstitutor(ktFile, declaration)
 
-            val signature = symbol.substitute(substitutor)
+            konst signature = symbol.substitute(substitutor)
             prettyPrint {
                 appendLine("KtDeclaration: ${declaration::class.simpleName}")
 

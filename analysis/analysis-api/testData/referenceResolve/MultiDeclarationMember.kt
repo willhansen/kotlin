@@ -6,7 +6,7 @@ class MyPair {
 }
 
 fun main(args: Array<String>) {
-    val p = MyPair()
-    val (a, <caret>b) = p
+    konst p = MyPair()
+    konst (a, <caret>b) = p
 }
 

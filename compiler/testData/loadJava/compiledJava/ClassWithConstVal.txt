@@ -2,6 +2,6 @@ package test
 
 public final class ClassWithConstVal {
     public constructor ClassWithConstVal()
-    public final val f: kotlin.Int = 1
-    public final val f2: kotlin.Int = 1
+    public final konst f: kotlin.Int = 1
+    public final konst f2: kotlin.Int = 1
 }

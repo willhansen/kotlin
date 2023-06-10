@@ -10,10 +10,10 @@ public class A {
 import kotlin.reflect.KProperty
 
 class C {
-    private val valueState = A.create()
-    private val value by valueState
+    private konst konstueState = A.create()
+    private konst konstue by konstueState
 
-    fun get(): String = value
+    fun get(): String = konstue
 }
 
 operator fun A.getValue(thisRef: Any?, property: KProperty<*>): String = "OK"

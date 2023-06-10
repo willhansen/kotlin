@@ -1,6 +1,6 @@
 package
 
-public val test: FooStr /* = Foo<kotlin.String> */
+public konst test: FooStr /* = Foo<kotlin.String> */
 
 public open class Foo</*0*/ T> {
     public constructor Foo</*0*/ T>()

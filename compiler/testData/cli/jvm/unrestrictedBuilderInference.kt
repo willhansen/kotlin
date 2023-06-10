@@ -1,6 +1,6 @@
 @OptIn(ExperimentalStdlibApi::class)
 fun main() {
-    val x = buildMap {
-        val y = put(1, "")
+    konst x = buildMap {
+        konst y = put(1, "")
     }
 }

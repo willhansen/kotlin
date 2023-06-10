@@ -44,12 +44,12 @@ public final class Foo /* Foo*/ {
   private java.lang.String protectedWithPrivateSet;
 
   @org.jetbrains.annotations.NotNull()
-  public final java.lang.String CONSTANT_WITH_ESCAPES = "A\tB\nC\rD'E\"F\\G$H" /* initializer type: java.lang.String */ /* constant value A	B
+  public final java.lang.String CONSTANT_WITH_ESCAPES = "A\tB\nC\rD'E\"F\\G$H" /* initializer type: java.lang.String */ /* constant konstue A	B
   C
 D'E"F\G$H */;
 
   @org.jetbrains.annotations.NotNull()
-  public final java.lang.String SUBSYSTEM_DEPRECATED = "This subsystem is deprecated" /* initializer type: java.lang.String */ /* constant value This subsystem is deprecated */;
+  public final java.lang.String SUBSYSTEM_DEPRECATED = "This subsystem is deprecated" /* initializer type: java.lang.String */ /* constant konstue This subsystem is deprecated */;
 
   @org.jetbrains.annotations.NotNull()
   public static final Foo.Companion Companion;

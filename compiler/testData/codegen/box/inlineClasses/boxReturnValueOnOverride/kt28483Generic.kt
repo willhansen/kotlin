@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ResultOrClosed<T>(val x: T)
+konstue class ResultOrClosed<T>(konst x: T)
 
 interface A<T> {
     fun foo(): T
@@ -14,7 +14,7 @@ class B : A<ResultOrClosed<String>> {
 }
 
 fun box(): String {
-    val foo: Any = (B() as A<ResultOrClosed<String>>).foo()
+    konst foo: Any = (B() as A<ResultOrClosed<String>>).foo()
     if (foo !is ResultOrClosed<*>) throw AssertionError("foo: $foo")
     return foo.x.toString()
 }

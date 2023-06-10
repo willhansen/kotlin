@@ -5,10 +5,10 @@ package lib
 
 open class C {
     fun o() = "O"
-    val k = "K"
+    konst k = "K"
 }
 
-inline fun inlineFun(f: () -> String = { val cc = object : C() {}; cc.o() + cc.k; }): String {
+inline fun inlineFun(f: () -> String = { konst cc = object : C() {}; cc.o() + cc.k; }): String {
     return f()
 }
 

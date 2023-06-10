@@ -38,26 +38,26 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirRegularClassImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val typeParameters: MutableList<FirTypeParameterRef>,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst typeParameters: MutableList<FirTypeParameterRef>,
     override var status: FirDeclarationStatus,
     override var deprecationsProvider: DeprecationsProvider,
-    override val classKind: ClassKind,
-    override val declarations: MutableList<FirDeclaration>,
+    override konst classKind: ClassKind,
+    override konst declarations: MutableList<FirDeclaration>,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val scopeProvider: FirScopeProvider,
-    override val name: Name,
-    override val symbol: FirRegularClassSymbol,
+    override konst scopeProvider: FirScopeProvider,
+    override konst name: Name,
+    override konst symbol: FirRegularClassSymbol,
     override var companionObjectSymbol: FirRegularClassSymbol?,
-    override val superTypeRefs: MutableList<FirTypeRef>,
+    override konst superTypeRefs: MutableList<FirTypeRef>,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
 ) : FirRegularClass() {
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
-    override val hasLazyNestedClassifiers: Boolean get() = false
+    override konst hasLazyNestedClassifiers: Boolean get() = false
 
     init {
         symbol.bind(this)

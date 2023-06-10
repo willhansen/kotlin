@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.js.config.JSConfigurationKeys
  * [AddContinuationToNonLocalSuspendFunctionsLowering] to transform function declarations first.
  */
 class AddContinuationToFunctionCallsLowering(
-    override val context: JsCommonBackendContext
+    override konst context: JsCommonBackendContext
 ) : AbstractAddContinuationToFunctionCallsLowering() {
     override fun IrSimpleFunction.isContinuationItself(): Boolean = overriddenSymbols.any { overriddenSymbol ->
         overriddenSymbol.owner.name.asString() == "doResume" && overriddenSymbol.owner.parent == context.coroutineSymbols.coroutineImpl.owner

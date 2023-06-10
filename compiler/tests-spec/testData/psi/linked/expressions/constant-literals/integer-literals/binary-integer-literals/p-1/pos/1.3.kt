@@ -7,5 +7,5 @@
  * DESCRIPTION: Binary integer literals with prefix only (without digit symbols).
  */
 
-val value = 0b
-val value = 0B
+konst konstue = 0b
+konst konstue = 0B

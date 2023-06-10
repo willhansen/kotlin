@@ -1,7 +1,7 @@
 
 var result = ""
 
-class C(val token: String) {
+class C(konst token: String) {
     fun target(): Int {
         result += token
         return 42

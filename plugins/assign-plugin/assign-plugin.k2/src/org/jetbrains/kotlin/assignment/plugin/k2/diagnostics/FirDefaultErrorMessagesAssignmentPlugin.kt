@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnosticRenderer
 
 object FirDefaultErrorMessagesAssignmentPlugin {
     fun getRendererForDiagnostic(diagnostic: KtDiagnostic): KtDiagnosticRenderer {
-        val factory = diagnostic.factory
+        konst factory = diagnostic.factory
         return MAP[factory] ?: factory.ktRenderer
     }
 
-    val MAP = KtDiagnosticFactoryToRendererMap("ValueContainerAssignment").also { map ->
+    konst MAP = KtDiagnosticFactoryToRendererMap("ValueContainerAssignment").also { map ->
         map.put(
             DECLARATION_ERROR_ASSIGN_METHOD_SHOULD_RETURN_UNIT,
             "Function 'assign' used for '=' overload should return 'Unit'"

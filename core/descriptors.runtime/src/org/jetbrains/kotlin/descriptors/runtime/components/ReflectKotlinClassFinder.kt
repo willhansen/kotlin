@@ -27,8 +27,8 @@ import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInSerial
 import org.jetbrains.kotlin.serialization.deserialization.builtins.BuiltInsResourceLoader
 import java.io.InputStream
 
-class ReflectKotlinClassFinder(private val classLoader: ClassLoader) : KotlinClassFinder {
-    private val builtInsResourceLoader = BuiltInsResourceLoader()
+class ReflectKotlinClassFinder(private konst classLoader: ClassLoader) : KotlinClassFinder {
+    private konst builtInsResourceLoader = BuiltInsResourceLoader()
 
     private fun findKotlinClass(fqName: String): KotlinClassFinder.Result? {
         return classLoader.tryLoadClass(fqName)?.let { ReflectKotlinClass.create(it) }?.let(::KotlinClass)
@@ -59,6 +59,6 @@ class ReflectKotlinClassFinder(private val classLoader: ClassLoader) : KotlinCla
 }
 
 private fun ClassId.toRuntimeFqName(): String {
-    val className = relativeClassName.asString().replace('.', '$')
+    konst className = relativeClassName.asString().replace('.', '$')
     return if (packageFqName.isRoot) className else "$packageFqName.$className"
 }

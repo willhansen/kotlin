@@ -27,7 +27,7 @@ object FirThrowableSubclassChecker : FirClassChecker() {
                 reporter.reportOn(it, FirErrors.GENERIC_THROWABLE_SUBCLASS, context)
             }
 
-            val shouldReport = when (declaration) {
+            konst shouldReport = when (declaration) {
                 is FirRegularClass -> declaration.isInner || declaration.isLocal
                 is FirAnonymousObject -> true
                 else -> false

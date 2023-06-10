@@ -68,13 +68,13 @@ FILE: returns.kt
     public final fun <T> runHigherOrder(f: R|() -> T|): R|T| {
         ^runHigherOrder R|<local>/f|.R|SubstitutionOverride<kotlin/Function0.invoke: R|T|>|()
     }
-    public final val R|kotlin/String|.ext: R|kotlin/Int|
+    public final konst R|kotlin/String|.ext: R|kotlin/Int|
         public get(): R|kotlin/Int| {
             ^ this@R|/ext|.R|kotlin/String.length|
         }
     public final fun test_4(a: R|kotlin/Any?|): R|kotlin/Unit| {
-        lval s: R|kotlin/String?| = (R|<local>/a| as? R|kotlin/String|)
-        lval length: R|kotlin/Int| = R|<local>/s|?.{ $subj$.R|/ext| } ?: ^test_4 Unit
+        lkonst s: R|kotlin/String?| = (R|<local>/a| as? R|kotlin/String|)
+        lkonst length: R|kotlin/Int| = R|<local>/s|?.{ $subj$.R|/ext| } ?: ^test_4 Unit
         R|/runHigherOrder|<R|kotlin/Int|>(<L> = runHigherOrder@fun <anonymous>(): R|kotlin/Int| <inline=NoInline>  {
             ^ R|<local>/s|.R|kotlin/String.length|
         }

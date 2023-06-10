@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.types.KotlinType
 
 sealed class LocalVariableAccessorDescriptor(
-    final override val correspondingVariable: LocalVariableDescriptor,
+    final override konst correspondingVariable: LocalVariableDescriptor,
     isGetter: Boolean
 ) : SimpleFunctionDescriptorImpl(
     correspondingVariable.containingDeclaration,
@@ -37,12 +37,12 @@ sealed class LocalVariableAccessorDescriptor(
     class Setter(correspondingVariable: LocalVariableDescriptor) : LocalVariableAccessorDescriptor(correspondingVariable, false)
 
     init {
-        val valueParameters =
-            if (isGetter) emptyList() else listOf(createValueParameter(Name.identifier("value"), correspondingVariable.type))
-        val returnType =
+        konst konstueParameters =
+            if (isGetter) emptyList() else listOf(createValueParameter(Name.identifier("konstue"), correspondingVariable.type))
+        konst returnType =
             if (isGetter) correspondingVariable.type else correspondingVariable.builtIns.unitType
         @Suppress("LeakingThis")
-        initialize(null, null, emptyList(), emptyList(), valueParameters, returnType, Modality.FINAL, DescriptorVisibilities.LOCAL)
+        initialize(null, null, emptyList(), emptyList(), konstueParameters, returnType, Modality.FINAL, DescriptorVisibilities.LOCAL)
     }
 
     private fun createValueParameter(name: Name, type: KotlinType): ValueParameterDescriptorImpl {

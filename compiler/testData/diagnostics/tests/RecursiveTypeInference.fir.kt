@@ -2,7 +2,7 @@
 
 // FILE: a.kt
 package a
-    val foo = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>bar()<!>
+    konst foo = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>bar()<!>
 
     fun bar() = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>foo<!>
 
@@ -23,7 +23,7 @@ package c
 // FILE: d.kt
 
     package ok.a
-        val foo = bar()
+        konst foo = bar()
 
         fun bar() : Int = foo
 

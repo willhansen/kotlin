@@ -18,16 +18,16 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class KotlinToolingMetadataMppIT : BaseGradleIT() {
-    override val defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
+    override konst defaultGradleVersion: GradleVersionRequired = GradleVersionRequired.FOR_MPP_SUPPORT
 
-    private val defaultKotlinToolingMetadataJsonPath get() =
+    private konst defaultKotlinToolingMetadataJsonPath get() =
         if (isKpmModelMappingEnabled) {
             "build/kotlinToolingMetadata/main/kotlin-tooling-metadata.json"
         } else {
             "build/kotlinToolingMetadata/kotlin-tooling-metadata.json"
         }
 
-    private val buildKotlinToolingMetadataTaskName get() =
+    private konst buildKotlinToolingMetadataTaskName get() =
         if (isKpmModelMappingEnabled) {
             taskNameForKotlinModule(GradleKpmModule.MAIN_MODULE_NAME)
         } else {
@@ -42,8 +42,8 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
             assertTasksExecuted(":$buildKotlinToolingMetadataTaskName")
             /* Check metadata file in build dir */
             assertFileExists(defaultKotlinToolingMetadataJsonPath)
-            val metadataJson = projectDir.resolve(defaultKotlinToolingMetadataJsonPath).readText()
-            val metadata = KotlinToolingMetadata.parseJsonOrThrow(metadataJson)
+            konst metadataJson = projectDir.resolve(defaultKotlinToolingMetadataJsonPath).readText()
+            konst metadata = KotlinToolingMetadata.parseJsonOrThrow(metadataJson)
             assertEquals(
                 listOfNotNull(
                     KotlinPlatformType.common.name.takeIf { !isKpmModelMappingEnabled },
@@ -55,7 +55,7 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
             )
 
             /* Check metadata file in published repository */
-            val publishedMetadataJson = projectDir.parentFile.resolve(
+            konst publishedMetadataJson = projectDir.parentFile.resolve(
                 "repo/com/example/bar/my-lib-bar/1.0/my-lib-bar-1.0-kotlin-tooling-metadata.json"
             ).readText()
 
@@ -73,7 +73,7 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
         }
 
         // Adding macos target
-        val buildFile = projectDir.resolve("build.gradle.kts")
+        konst buildFile = projectDir.resolve("build.gradle.kts")
         buildFile.writeText(
             buildFile.readText().replace(
                 "linuxX64()", "linuxX64()\nmacosX64()"
@@ -83,7 +83,7 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
         build("publish") {
             assertSuccessful()
             assertTasksExecuted(":$buildKotlinToolingMetadataTaskName")
-            val metadata = KotlinToolingMetadata.parseJsonOrThrow(projectDir.resolve(defaultKotlinToolingMetadataJsonPath).readText())
+            konst metadata = KotlinToolingMetadata.parseJsonOrThrow(projectDir.resolve(defaultKotlinToolingMetadataJsonPath).readText())
             assertEquals(
                 listOf(KonanTarget.LINUX_X64.name, KonanTarget.MACOS_X64.name).sorted(),
                 metadata.projectTargets.mapNotNull { it.extras.native?.konanTarget }.sorted()
@@ -121,13 +121,13 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
         if (isKpmModelMappingEnabled) throw AssumptionViolatedException("Pure KPM tests don't need KPM model mapping flag")
 
         with(transformProjectWithPluginsDsl("kpm-multi-module-published")) {
-            val expectedMetadataByModule = mapOf<String, KotlinToolingMetadata.() -> Unit>(
+            konst expectedMetadataByModule = mapOf<String, KotlinToolingMetadata.() -> Unit>(
                 GradleKpmModule.MAIN_MODULE_NAME to {
-                    val nativeTarget = projectTargets.single { it.platformType == KotlinPlatformType.native.name }
+                    konst nativeTarget = projectTargets.single { it.platformType == KotlinPlatformType.native.name }
                     assertEquals(KonanTarget.LINUX_X64.name, nativeTarget.extras.native?.konanTarget)
                 },
                 "secondaryModule" to {
-                    val nativeTarget = projectTargets.single { it.platformType == KotlinPlatformType.native.name }
+                    konst nativeTarget = projectTargets.single { it.platformType == KotlinPlatformType.native.name }
                     assertEquals(KonanTarget.LINUX_ARM64.name, nativeTarget.extras.native?.konanTarget)
                 },
             )
@@ -139,10 +139,10 @@ class KotlinToolingMetadataMppIT : BaseGradleIT() {
                 expectedMetadataByModule.forEach { (moduleName, assertExpected) ->
                     assertTasksExecuted(":${taskNameForKotlinModule(moduleName)}")
 
-                    val pathToMetadata = "build/kotlinToolingMetadata/$moduleName/kotlin-tooling-metadata.json"
+                    konst pathToMetadata = "build/kotlinToolingMetadata/$moduleName/kotlin-tooling-metadata.json"
                     assertFileExists(pathToMetadata)
-                    val metadataJson = projectDir.resolve(pathToMetadata).readText()
-                    val metadata = KotlinToolingMetadata.parseJsonOrThrow(metadataJson)
+                    konst metadataJson = projectDir.resolve(pathToMetadata).readText()
+                    konst metadata = KotlinToolingMetadata.parseJsonOrThrow(metadataJson)
 
                     metadata.assertExpected()
                 }

@@ -19,36 +19,36 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractSymbolRestoreFromDifferentModuleTest : AbstractAnalysisApiBasedTest() {
-    private val defaultRenderer = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES
+    private konst defaultRenderer = KtDeclarationRendererForDebug.WITH_QUALIFIED_NAMES
 
     override fun doTestByModuleStructure(moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val declaration =
+        konst declaration =
             testServices.expressionMarkerProvider.getElementsOfTypeAtCarets<KtDeclaration>(moduleStructure, testServices).single().first
 
-        val restoreAt =
+        konst restoreAt =
             testServices.expressionMarkerProvider.getElementsOfTypeAtCarets<KtElement>(
                 moduleStructure,
                 testServices,
                 caretTag = "restoreAt"
             ).single().first
 
-        val project = declaration.project
-        val declarationModule = ProjectStructureProvider.getModule(project, declaration, contextualModule = null)
-        val restoreAtModule = ProjectStructureProvider.getModule(project, restoreAt, contextualModule = null)
+        konst project = declaration.project
+        konst declarationModule = ProjectStructureProvider.getModule(project, declaration, contextualModule = null)
+        konst restoreAtModule = ProjectStructureProvider.getModule(project, restoreAt, contextualModule = null)
 
-        val (debugRendered, prettyRendered, pointer) = analyseForTest(declaration) {
-            val symbol = declaration.getSymbol()
-            val pointer = symbol.createPointer()
+        konst (debugRendered, prettyRendered, pointer) = analyseForTest(declaration) {
+            konst symbol = declaration.getSymbol()
+            konst pointer = symbol.createPointer()
             Triple(DebugSymbolRenderer().render(symbol), symbol.render(defaultRenderer), pointer)
         }
         configurator.doOutOfBlockModification(declaration.containingKtFile)
 
-        val (debugRenderedRestored, prettyRenderedRestored) = analyseForTest(restoreAt) {
-            val symbol = pointer.restoreSymbol() as? KtDeclarationSymbol
+        konst (debugRenderedRestored, prettyRenderedRestored) = analyseForTest(restoreAt) {
+            konst symbol = pointer.restoreSymbol() as? KtDeclarationSymbol
             symbol?.let { DebugSymbolRenderer().render(it) } to symbol?.render(defaultRenderer)
         }
 
-        val actualDebug = prettyPrint {
+        konst actualDebug = prettyPrint {
             appendLine("Inital from ${declarationModule.moduleDescription}:")
             appendLine(debugRendered)
             appendLine()
@@ -57,7 +57,7 @@ abstract class AbstractSymbolRestoreFromDifferentModuleTest : AbstractAnalysisAp
         }
         testServices.assertions.assertEqualsToTestDataFileSibling(actualDebug)
 
-        val actualPretty = prettyPrint {
+        konst actualPretty = prettyPrint {
             appendLine("Inital from ${declarationModule.moduleDescription}:")
             appendLine(prettyRendered)
             appendLine()
@@ -68,7 +68,7 @@ abstract class AbstractSymbolRestoreFromDifferentModuleTest : AbstractAnalysisAp
     }
 
     companion object {
-        private const val NOT_RESTORED = "<NOT RESTORED>"
+        private const konst NOT_RESTORED = "<NOT RESTORED>"
     }
 }
 

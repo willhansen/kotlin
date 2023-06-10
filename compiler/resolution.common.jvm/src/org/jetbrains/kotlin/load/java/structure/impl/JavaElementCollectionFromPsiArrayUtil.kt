@@ -57,7 +57,7 @@ internal fun constructors(methods: Collection<PsiMethod>, sourceFactory: JavaEle
 internal fun fields(fields: Collection<PsiField>, sourceFactory: JavaElementSourceFactory): Collection<JavaField> =
         fields.convert { JavaFieldImpl(sourceFactory.createPsiSource(it)) }
 
-internal fun valueParameters(parameters: Array<PsiParameter>, sourceFactory: JavaElementSourceFactory): List<JavaValueParameter> =
+internal fun konstueParameters(parameters: Array<PsiParameter>, sourceFactory: JavaElementSourceFactory): List<JavaValueParameter> =
         parameters.convert { JavaValueParameterImpl(sourceFactory.createPsiSource(it)) }
 
 internal fun typeParameters(typeParameters: Array<PsiTypeParameter>, sourceFactory: JavaElementSourceFactory): List<JavaTypeParameter> =
@@ -72,14 +72,14 @@ internal fun annotations(annotations: Array<out PsiAnnotation>, sourceFactory: J
 internal fun nullabilityAnnotations(annotations: Array<out PsiAnnotation>, sourceFactory: JavaElementSourceFactory): Collection<JavaAnnotation> =
         annotations.convert { JavaAnnotationImpl(sourceFactory.createPsiSource(it)) }
                 .filter { annotation ->
-                    val fqName = annotation.classId?.asSingleFqName() ?: return@filter false
+                    konst fqName = annotation.classId?.asSingleFqName() ?: return@filter false
                     fqName in NULLABILITY_ANNOTATIONS
                 }
 
 
 internal fun namedAnnotationArguments(nameValuePairs: Array<PsiNameValuePair>, sourceFactory: JavaElementSourceFactory): Collection<JavaAnnotationArgument> =
         nameValuePairs.convert { psi ->
-            val name = psi.name?.let(Name::identifier)
-            val value = psi.value ?: error("Annotation argument value cannot be null: $name")
-            JavaAnnotationArgumentImpl.create(value, name, sourceFactory)
+            konst name = psi.name?.let(Name::identifier)
+            konst konstue = psi.konstue ?: error("Annotation argument konstue cannot be null: $name")
+            JavaAnnotationArgumentImpl.create(konstue, name, sourceFactory)
         }

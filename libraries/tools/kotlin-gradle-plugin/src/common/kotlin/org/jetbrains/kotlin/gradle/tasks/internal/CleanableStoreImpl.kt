@@ -14,7 +14,7 @@ import java.nio.file.attribute.FileTime
 import java.time.Instant
 
 internal class CleanableStoreImpl(dirPath: String) : CleanableStore {
-    private val dir = File(dirPath)
+    private konst dir = File(dirPath)
 
     override fun get(fileName: String): DownloadedFile =
         DownloadedFile(this, dir.resolve(fileName))

@@ -7,16 +7,16 @@ declare namespace JS_TESTS {
                 readonly "foo.ExportedInterface": unique symbol;
             };
         }
-        function producer(value: number): foo.NonExportedType;
-        function consumer(value: foo.NonExportedType): number;
-        function childProducer(value: number): foo.NotExportedChildClass;
-        function childConsumer(value: foo.NotExportedChildClass): number;
-        function genericChildProducer<T extends foo.NonExportedGenericType<number>>(value: T): foo.NotExportedChildGenericClass<T>;
-        function genericChildConsumer<T extends foo.NonExportedGenericType<number>>(value: foo.NotExportedChildGenericClass<T>): T;
+        function producer(konstue: number): foo.NonExportedType;
+        function consumer(konstue: foo.NonExportedType): number;
+        function childProducer(konstue: number): foo.NotExportedChildClass;
+        function childConsumer(konstue: foo.NotExportedChildClass): number;
+        function genericChildProducer<T extends foo.NonExportedGenericType<number>>(konstue: T): foo.NotExportedChildGenericClass<T>;
+        function genericChildConsumer<T extends foo.NonExportedGenericType<number>>(konstue: foo.NotExportedChildGenericClass<T>): T;
         class A implements foo.NonExportedParent.NonExportedSecond.NonExportedUsedChild {
-            constructor(value: foo.NonExportedType);
-            get value(): foo.NonExportedType;
-            set value(value: foo.NonExportedType);
+            constructor(konstue: foo.NonExportedType);
+            get konstue(): foo.NonExportedType;
+            set konstue(konstue: foo.NonExportedType);
             increment<T extends foo.NonExportedType>(t: T): foo.NonExportedType;
             getNonExportedUserChild(): foo.NonExportedParent.NonExportedSecond.NonExportedUsedChild;
             readonly __doNotUseOrImplementIt: foo.NonExportedParent.NonExportedSecond.NonExportedUsedChild["__doNotUseOrImplementIt"];

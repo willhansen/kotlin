@@ -5,4 +5,4 @@ inline fun <L> runLogged(action: () -> L): L {
 operator fun <V> V.getValue(receiver: Any?, p: Any): V =
     runLogged { this }
 
-val testK by runLogged { "K" }
+konst testK by runLogged { "K" }

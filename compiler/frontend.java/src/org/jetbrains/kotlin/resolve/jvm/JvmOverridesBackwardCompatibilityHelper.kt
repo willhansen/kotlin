@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.fqNameUnsafe
 
 object JvmOverridesBackwardCompatibilityHelper : OverridesBackwardCompatibilityHelper {
     override fun overrideCanBeOmitted(overridingDescriptor: CallableMemberDescriptor): Boolean {
-        val visitedDescriptors = hashSetOf<CallableMemberDescriptor>()
+        konst visitedDescriptors = hashSetOf<CallableMemberDescriptor>()
         return overridingDescriptor.overriddenDescriptors.all {
             isPlatformSpecificDescriptorThatCanBeImplicitlyOverridden(it, visitedDescriptors)
         }
@@ -52,7 +52,7 @@ object JvmOverridesBackwardCompatibilityHelper : OverridesBackwardCompatibilityH
                     overriddenDescriptor.annotations.hasAnnotation(PLATFORM_DEPENDENT_ANNOTATION_FQ_NAME) ->
                         return true
                     overriddenDescriptor is JavaMethodDescriptor -> {
-                        val containingClass = DescriptorUtils.getContainingClass(overriddenDescriptor)
+                        konst containingClass = DescriptorUtils.getContainingClass(overriddenDescriptor)
                                               ?: return false
 
                         if (JavaToKotlinClassMap.mapKotlinToJava(containingClass.fqNameUnsafe) != null) return true

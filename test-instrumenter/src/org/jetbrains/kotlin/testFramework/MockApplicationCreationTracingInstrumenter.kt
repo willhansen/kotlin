@@ -23,14 +23,14 @@ import java.lang.instrument.ClassFileTransformer
 import java.security.ProtectionDomain
 
 
-class MockApplicationCreationTracingInstrumenter(private val debugInfo: Boolean) : ClassFileTransformer {
+class MockApplicationCreationTracingInstrumenter(private konst debugInfo: Boolean) : ClassFileTransformer {
 
     private fun loadTransformAndSerialize(classfileBuffer: ByteArray, lambda: (out: ClassVisitor) -> ClassVisitor): ByteArray {
-        val reader = ClassReader(classfileBuffer)
+        konst reader = ClassReader(classfileBuffer)
 
-        val writer = ClassWriter(ClassWriter.COMPUTE_FRAMES or ClassWriter.COMPUTE_MAXS)
+        konst writer = ClassWriter(ClassWriter.COMPUTE_FRAMES or ClassWriter.COMPUTE_MAXS)
 
-        val pv = if (debugInfo) {
+        konst pv = if (debugInfo) {
             TraceClassVisitor(writer, PrintWriter(System.out.writer()))
         }
         else {
@@ -77,7 +77,7 @@ class MockApplicationCreationTracingInstrumenter(private val debugInfo: Boolean)
             var visited = false
 
             override fun visitMethod(access: Int, name: String, desc: String, signature: String?, exceptions: Array<out String>?): MethodVisitor {
-                val original = super.visitMethod(access, name, desc, signature, exceptions)
+                konst original = super.visitMethod(access, name, desc, signature, exceptions)
                 return if (predicate(name, desc)) {
                     assert(!visited)
                     visited = true

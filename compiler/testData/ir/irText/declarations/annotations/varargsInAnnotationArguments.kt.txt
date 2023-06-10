@@ -5,7 +5,7 @@ open annotation class A1 : Annotation {
 
   }
 
-  val xs: IntArray
+  konst xs: IntArray
     field = xs
     get
 
@@ -18,7 +18,7 @@ open annotation class A2 : Annotation {
 
   }
 
-  val xs: Array<out String>
+  konst xs: Array<out String>
     field = xs
     get
 
@@ -31,7 +31,7 @@ open annotation class AA : Annotation {
 
   }
 
-  val xs: Array<out A1>
+  konst xs: Array<out A1>
     field = xs
     get
 

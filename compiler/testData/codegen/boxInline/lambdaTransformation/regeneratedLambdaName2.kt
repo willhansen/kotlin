@@ -17,7 +17,7 @@ inline fun sameName(s: Long): String = call { "FAIL" }
 inline fun sameName(s: Int): String = call { "OK" }
 
 fun box(): String {
-    val result = sameName(1)
+    konst result = sameName(1)
     sameName(1L)
     return result
 }

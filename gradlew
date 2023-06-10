@@ -88,7 +88,7 @@ APP_HOME=$( cd "${APP_HOME:-./}" && pwd -P ) || exit
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
-# Use the maximum available, or set MAX_FD != -1 to use that value.
+# Use the maximum available, or set MAX_FD != -1 to use that konstue.
 MAX_FD=maximum
 
 warn () {
@@ -126,7 +126,7 @@ if [ -n "$JAVA_HOME" ] ; then
         JAVACMD=$JAVA_HOME/bin/java
     fi
     if [ ! -x "$JAVACMD" ] ; then
-        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+        die "ERROR: JAVA_HOME is set to an inkonstid directory: $JAVA_HOME
 
 Please set the JAVA_HOME variable in your environment to match the
 location of your Java installation."
@@ -191,7 +191,7 @@ if "$cygwin" || "$msys" ; then
         #
         # NB: a `for` loop captures its iteration list before it begins, so
         # changing the positional parameters here affects neither the number of
-        # iterations, nor the values presented in `arg`.
+        # iterations, nor the konstues presented in `arg`.
         shift                   # remove old arg
         set -- "$@" "$arg"      # push replacement arg
     done
@@ -226,7 +226,7 @@ fi
 #
 # but POSIX shell has neither arrays nor command substitution, so instead we
 # post-process each arg (as a line of input to sed) to backslash-escape any
-# character that might be a shell metacharacter, then use eval to reverse
+# character that might be a shell metacharacter, then use ekonst to reverse
 # that process (while maintaining the separation between arguments), and wrap
 # the whole thing up as a single "set" statement.
 #
@@ -234,7 +234,7 @@ fi
 # an unmatched quote.
 #
 
-eval "set -- $(
+ekonst "set -- $(
         printf '%s\n' "$DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS" |
         xargs -n1 |
         sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |

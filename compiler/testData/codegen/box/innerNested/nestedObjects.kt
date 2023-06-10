@@ -1,7 +1,7 @@
 object A {
     object B {
         object C {
-            val ok = "OK"
+            konst ok = "OK"
         }
     }
 }

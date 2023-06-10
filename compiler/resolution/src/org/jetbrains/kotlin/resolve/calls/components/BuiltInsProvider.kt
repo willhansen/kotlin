@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.resolve.calls.inference.model.NewConstraintSystemImp
 
 
 interface BuiltInsProvider {
-    val builtIns: KotlinBuiltIns
+    konst builtIns: KotlinBuiltIns
 }
 
-internal val ConstraintSystemBuilder.builtIns: KotlinBuiltIns get() = ((this as NewConstraintSystemImpl).typeSystemContext as BuiltInsProvider).builtIns
-internal val NewConstraintSystem.builtIns: KotlinBuiltIns get() = ((this as NewConstraintSystemImpl).typeSystemContext as BuiltInsProvider).builtIns
+internal konst ConstraintSystemBuilder.builtIns: KotlinBuiltIns get() = ((this as NewConstraintSystemImpl).typeSystemContext as BuiltInsProvider).builtIns
+internal konst NewConstraintSystem.builtIns: KotlinBuiltIns get() = ((this as NewConstraintSystemImpl).typeSystemContext as BuiltInsProvider).builtIns

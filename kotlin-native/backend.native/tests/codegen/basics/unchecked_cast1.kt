@@ -16,11 +16,11 @@ fun runTest() {
 }
 
 fun <T> foo(x: Any?) {
-    val y = x as T
+    konst y = x as T
     println(y.toString())
 }
 
 fun <T> bar(x: Any?) {
-    val y = x as? T
+    konst y = x as? T
     println(y.toString())
 }

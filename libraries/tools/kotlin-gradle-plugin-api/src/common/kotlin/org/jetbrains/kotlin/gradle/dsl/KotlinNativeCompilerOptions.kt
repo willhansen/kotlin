@@ -9,9 +9,9 @@ interface KotlinNativeCompilerOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCo
 
     /**
      * Specify a name for the compilation module
-     * Default value: null
+     * Default konstue: null
      */
     @get:org.gradle.api.tasks.Optional
     @get:org.gradle.api.tasks.Input
-    val moduleName: org.gradle.api.provider.Property<kotlin.String>
+    konst moduleName: org.gradle.api.provider.Property<kotlin.String>
 }

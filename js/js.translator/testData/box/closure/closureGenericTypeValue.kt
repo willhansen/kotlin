@@ -1,8 +1,8 @@
 // EXPECTED_REACHABLE_NODES: 1287
 package foo
 
-class A<T>(val a: T) {
-    val foo = { a }
+class A<T>(konst a: T) {
+    konst foo = { a }
 }
 
 fun <T> T.bar() = { this }

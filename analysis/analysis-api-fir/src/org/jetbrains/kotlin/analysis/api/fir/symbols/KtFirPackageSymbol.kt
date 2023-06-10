@@ -24,16 +24,16 @@ import org.jetbrains.kotlin.analysis.providers.createPackageProvider
 import org.jetbrains.kotlin.name.FqName
 
 class KtFirPackageSymbol(
-    override val fqName: FqName,
-    private val project: Project,
-    override val token: KtLifetimeToken
+    override konst fqName: FqName,
+    private konst project: Project,
+    override konst token: KtLifetimeToken
 ) : KtPackageSymbol(), KtLifetimeOwner {
-    override val psi: PsiElement? by cached {
+    override konst psi: PsiElement? by cached {
         JavaPsiFacade.getInstance(project).findPackage(fqName.asString())
             ?: KtPackage(PsiManager.getInstance(project), fqName, GlobalSearchScope.allScope(project)/*TODO*/)
     }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { KtSymbolOrigin.SOURCE } // TODO
 
     context(KtAnalysisSession)
@@ -60,8 +60,8 @@ class KtFirPackageSymbol(
 
 class KtPackage(
     manager: PsiManager,
-    private val fqName: FqName,
-    private val scope: GlobalSearchScope
+    private konst fqName: FqName,
+    private konst scope: GlobalSearchScope
 ) : PsiPackageImpl(manager, fqName.asString().replace('/', '.')) {
     override fun copy() = KtPackage(manager, fqName, scope)
 

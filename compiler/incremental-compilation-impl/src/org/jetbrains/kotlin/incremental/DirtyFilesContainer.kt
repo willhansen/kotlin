@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.name.FqName
 import java.io.File
 
 class DirtyFilesContainer(
-    private val caches: IncrementalCachesManager<*>,
-    private val reporter: ICReporter,
-    private val sourceFilesExtensions: List<String>
+    private konst caches: IncrementalCachesManager<*>,
+    private konst reporter: ICReporter,
+    private konst sourceFilesExtensions: List<String>
 ) {
-    private val myDirtyFiles = HashSet<File>()
+    private konst myDirtyFiles = HashSet<File>()
 
     fun isEmpty() = myDirtyFiles.isEmpty()
 
@@ -22,7 +22,7 @@ class DirtyFilesContainer(
         LinkedHashSet(myDirtyFiles)
 
     fun add(files: Iterable<File>, reason: String?) {
-        val existingKotlinFiles = files.filter { it.isKotlinFile(sourceFilesExtensions) }
+        konst existingKotlinFiles = files.filter { it.isKotlinFile(sourceFilesExtensions) }
         if (existingKotlinFiles.isNotEmpty()) {
             myDirtyFiles.addAll(existingKotlinFiles)
             if (reason != null) {
@@ -34,7 +34,7 @@ class DirtyFilesContainer(
     fun addByDirtySymbols(lookupSymbols: Collection<LookupSymbol>) {
         if (lookupSymbols.isEmpty()) return
 
-        val dirtyFilesFromLookups = mapLookupSymbolsToFiles(caches.lookupCache, lookupSymbols, reporter)
+        konst dirtyFilesFromLookups = mapLookupSymbolsToFiles(caches.lookupCache, lookupSymbols, reporter)
         // reason is null, because files are reported in mapLookupSymbolsToFiles
         add(dirtyFilesFromLookups, reason = null)
     }
@@ -42,13 +42,13 @@ class DirtyFilesContainer(
     fun addByDirtyClasses(dirtyClassesFqNames: Collection<FqName>) {
         if (dirtyClassesFqNames.isEmpty()) return
 
-        val fqNamesWithSubtypes = dirtyClassesFqNames.flatMap {
+        konst fqNamesWithSubtypes = dirtyClassesFqNames.flatMap {
             withSubtypes(
                 it,
                 listOf(caches.platformCache)
             )
         }
-        val dirtyFilesFromFqNames =
+        konst dirtyFilesFromFqNames =
             mapClassesFqNamesToFiles(listOf(caches.platformCache), fqNamesWithSubtypes, reporter)
         // reason is null, because files are reported in mapClassesFqNamesToFiles
         add(dirtyFilesFromFqNames, reason = null)

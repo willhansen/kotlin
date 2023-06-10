@@ -12,6 +12,6 @@ class B : A<Int>
 class C : A<String>
 
 fun <K : <!FINAL_UPPER_BOUND!>Out<C><!>> main() {
-    val foo = Foo<K>()
+    konst foo = Foo<K>()
     Bar<Out<B>>().takeFoo(foo) // error in 1.3.72, no error in 1.4.31
 }

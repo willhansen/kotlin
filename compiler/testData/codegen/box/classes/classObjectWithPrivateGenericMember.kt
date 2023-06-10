@@ -4,7 +4,7 @@ class C() {
     }
 
     class ZZZ {
-        val c = C.create<String>()
+        konst c = C.create<String>()
     }
 }
 

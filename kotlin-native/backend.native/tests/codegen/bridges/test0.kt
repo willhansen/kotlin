@@ -17,8 +17,8 @@ open class C : A() {
 }
 
 @Test fun runTest() {
-    val c = C()
-    val a: A = c
+    konst c = C()
+    konst a: A = c
     println(c.foo().toString())
     println(a.foo().toString())
 }

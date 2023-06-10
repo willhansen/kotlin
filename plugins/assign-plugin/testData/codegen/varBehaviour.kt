@@ -13,7 +13,7 @@ data class StringProperty(var v: String) {
 
 data class Task(var input: StringProperty)
 
-fun `test local var reference and value`(): String {
+fun `test local var reference and konstue`(): String {
     var property = StringProperty("OK")
     var originalProperty = property
     property = StringProperty("Fail")
@@ -25,9 +25,9 @@ fun `test local var reference and value`(): String {
     }
 }
 
-fun `test class property var reference and value`(): String {
-    val task = Task(StringProperty("OK"))
-    val originalProperty = task.input
+fun `test class property var reference and konstue`(): String {
+    konst task = Task(StringProperty("OK"))
+    konst originalProperty = task.input
     task.input = StringProperty("Fail")
 
     return when {
@@ -37,9 +37,9 @@ fun `test class property var reference and value`(): String {
     }
 }
 
-fun `test class property var reference and value with apply`(): String {
-    val task = Task(StringProperty("OK"))
-    val originalProperty = task.input
+fun `test class property var reference and konstue with apply`(): String {
+    konst task = Task(StringProperty("OK"))
+    konst originalProperty = task.input
     task.apply {
         input = StringProperty("Fail")
     }
@@ -52,13 +52,13 @@ fun `test class property var reference and value with apply`(): String {
 }
 
 fun box(): String {
-    var result = `test local var reference and value`()
+    var result = `test local var reference and konstue`()
     if (result != "OK") return result
 
-    result = `test class property var reference and value`()
+    result = `test class property var reference and konstue`()
     if (result != "OK") return result
 
-    result = `test class property var reference and value with apply`()
+    result = `test class property var reference and konstue with apply`()
     if (result != "OK") return result
 
     return "OK"

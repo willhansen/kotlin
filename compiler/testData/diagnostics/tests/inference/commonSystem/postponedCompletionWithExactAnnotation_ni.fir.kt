@@ -26,13 +26,13 @@ fun test(nullableSample: ISample, any: Any) {
         any
     )
 
-    val a: String? = null
+    konst a: String? = null
 
-    val x1: String? = run {
+    konst x1: String? = run {
         a ?: a?.materialize()
     }
 
-    val x2 = run {
+    konst x2 = run {
         a ?: a?.materialize()
     }
 }

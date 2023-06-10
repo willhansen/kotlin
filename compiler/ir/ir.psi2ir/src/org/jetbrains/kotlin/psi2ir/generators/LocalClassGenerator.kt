@@ -27,15 +27,15 @@ import org.jetbrains.kotlin.psi.psiUtil.startOffsetSkippingComments
 
 internal class LocalClassGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
     fun generateObjectLiteral(ktObjectLiteral: KtObjectLiteralExpression): IrStatement {
-        val startOffset = ktObjectLiteral.startOffsetSkippingComments
-        val endOffset = ktObjectLiteral.endOffset
-        val objectLiteralType = getTypeInferredByFrontendOrFail(ktObjectLiteral).toIrType()
-        val irBlock = IrBlockImpl(startOffset, endOffset, objectLiteralType, IrStatementOrigin.OBJECT_LITERAL)
+        konst startOffset = ktObjectLiteral.startOffsetSkippingComments
+        konst endOffset = ktObjectLiteral.endOffset
+        konst objectLiteralType = getTypeInferredByFrontendOrFail(ktObjectLiteral).toIrType()
+        konst irBlock = IrBlockImpl(startOffset, endOffset, objectLiteralType, IrStatementOrigin.OBJECT_LITERAL)
 
-        val irClass = DeclarationGenerator(statementGenerator.context).generateClassOrObjectDeclaration(ktObjectLiteral.objectDeclaration)
+        konst irClass = DeclarationGenerator(statementGenerator.context).generateClassOrObjectDeclaration(ktObjectLiteral.objectDeclaration)
         irBlock.statements.add(irClass)
 
-        val objectConstructor = irClass.descriptor.unsubstitutedPrimaryConstructor
+        konst objectConstructor = irClass.descriptor.unsubstitutedPrimaryConstructor
             ?: throw AssertionError("Object literal should have a primary constructor: ${irClass.descriptor}")
         assert(objectConstructor.dispatchReceiverParameter == null) {
             "Object literal constructor should have no dispatch receiver parameter: $objectConstructor"
@@ -43,8 +43,8 @@ internal class LocalClassGenerator(statementGenerator: StatementGenerator) : Sta
         assert(objectConstructor.extensionReceiverParameter == null) {
             "Object literal constructor should have no extension receiver parameter: $objectConstructor"
         }
-        assert(objectConstructor.valueParameters.size == 0) {
-            "Object literal constructor should have no value parameters: $objectConstructor"
+        assert(objectConstructor.konstueParameters.size == 0) {
+            "Object literal constructor should have no konstue parameters: $objectConstructor"
         }
 
         irBlock.statements.add(

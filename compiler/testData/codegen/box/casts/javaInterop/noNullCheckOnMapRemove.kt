@@ -7,6 +7,6 @@ public class A {
 
 // FILE: test.kt
 fun box(): String {
-    val m = mutableMapOf<A, String>()
+    konst m = mutableMapOf<A, String>()
     return if (m.remove(A.nil()) == null) "OK" else "Fail"
 }

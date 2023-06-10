@@ -11,7 +11,7 @@ public inline fun <R> doCall(block: ()-> R) : R {
 import test.*
 
 fun test1(nonLocal: String): String {
-    val localResult = doCall<String> {
+    konst localResult = doCall<String> {
         return nonLocal
     }
 

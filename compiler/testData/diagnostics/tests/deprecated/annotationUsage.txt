@@ -23,7 +23,7 @@ package
 
 @kotlin.Deprecated(message = "text") public final annotation class obsoleteWithParam : kotlin.Annotation {
     public constructor obsoleteWithParam(/*0*/ text: kotlin.String)
-    public final val text: kotlin.String
+    public final konst text: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

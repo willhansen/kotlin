@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.types.KotlinTypeFactory
 import org.jetbrains.kotlin.types.Variance
 
 class LazyJavaTypeParameterDescriptor(
-    private val c: LazyJavaResolverContext,
-    val javaTypeParameter: JavaTypeParameter,
+    private konst c: LazyJavaResolverContext,
+    konst javaTypeParameter: JavaTypeParameter,
     index: Int,
     containingDeclaration: DeclarationDescriptor
 ) : AbstractLazyTypeParameterDescriptor(
@@ -50,7 +50,7 @@ class LazyJavaTypeParameterDescriptor(
     }
 
     private fun computeNotEnhancedBounds(): List<KotlinType> {
-        val bounds = javaTypeParameter.upperBounds
+        konst bounds = javaTypeParameter.upperBounds
         if (bounds.isEmpty()) {
             return listOf(
                 KotlinTypeFactory.flexibleType(

@@ -2,6 +2,6 @@
 
 @Suppress("INCOMPATIBLE_MODIFIERS")
 open data class ValidatedProperties(
-    open val test1: String,
-    open val test2: String
+    open konst test1: String,
+    open konst test2: String
 )

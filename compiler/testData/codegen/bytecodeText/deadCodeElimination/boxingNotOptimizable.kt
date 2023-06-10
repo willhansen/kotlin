@@ -3,15 +3,15 @@ class A
 fun foo(x: Any?) {}
 
 fun box(u: Int) {
-    val x: Int? = 1
+    konst x: Int? = 1
     x!!
 
-    val z: Int? = if (u == 1) x else null
+    konst z: Int? = if (u == 1) x else null
     z!!
 
     foo(1 as java.lang.Integer)
 
-    val y: Any? = if (u == 1) x else A()
+    konst y: Any? = if (u == 1) x else A()
     y!!
 }
 

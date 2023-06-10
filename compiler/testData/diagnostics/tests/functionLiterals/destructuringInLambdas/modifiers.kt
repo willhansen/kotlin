@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER
-data class A(val x: Int, val y: String)
+data class A(konst x: Int, konst y: String)
 
 fun foo(block: (A) -> Unit) { }
 

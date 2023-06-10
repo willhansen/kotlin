@@ -154,9 +154,9 @@ public final class Container$$serializer : java/lang/Object, kotlinx/serializati
 
     public final kotlinx.serialization.descriptors.SerialDescriptor getDescriptor()
 
-    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, Container value)
+    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, Container konstue)
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue)
 
     public kotlinx.serialization.KSerializer[] typeParametersSerializers()
 }
@@ -607,9 +607,9 @@ public final class Result$OK$$serializer : java/lang/Object, kotlinx/serializati
 
     public final kotlinx.serialization.descriptors.SerialDescriptor getDescriptor()
 
-    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, Result$OK value)
+    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, Result$OK konstue)
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value)
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue)
 
     public kotlinx.serialization.KSerializer[] typeParametersSerializers()
 }

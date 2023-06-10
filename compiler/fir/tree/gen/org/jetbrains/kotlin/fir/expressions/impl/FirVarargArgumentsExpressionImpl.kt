@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirVarargArgumentsExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val arguments: MutableList<FirExpression>,
+    override konst arguments: MutableList<FirExpression>,
     override var varargElementType: FirTypeRef,
 ) : FirVarargArgumentsExpression() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

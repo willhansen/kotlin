@@ -6,9 +6,9 @@ package test
 interface I {
     companion object {
         @JvmField
-        val x = "x"
+        konst x = "x"
 
         @JvmField
-        val y = "y"
+        konst y = "y"
     }
 }

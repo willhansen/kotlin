@@ -16,7 +16,7 @@ FILE: kt56283.fir.kt
             super<R|kotlin/Any|>()
         }
 
-        protected open val foo: R|Base| = R|<local>/foo|
+        protected open konst foo: R|Base| = R|<local>/foo|
             protected get(): R|Base|
 
         protected open fun bar(): R|Base| {
@@ -41,7 +41,7 @@ FILE: kt56283.fir.kt
             super<R|A|>(R|<local>/foo|)
         }
 
-        protected open override val foo: R|Derived| = R|<local>/foo|
+        protected open override konst foo: R|Derived| = R|<local>/foo|
             protected get(): R|Derived|
 
         protected open override fun bar(): R|Derived| {

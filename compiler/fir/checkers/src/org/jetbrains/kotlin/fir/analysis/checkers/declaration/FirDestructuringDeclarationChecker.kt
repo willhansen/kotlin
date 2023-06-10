@@ -29,48 +29,48 @@ import org.jetbrains.kotlin.types.AbstractTypeChecker
 
 object FirDestructuringDeclarationChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = declaration.source ?: return
-        // val (...) = `destructuring_declaration`
+        konst source = declaration.source ?: return
+        // konst (...) = `destructuring_declaration`
         if (source.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION) {
             checkInitializer(source, declaration.initializer, reporter, context)
             return
         }
 
-        // val (`destructuring_declaration_entry`, ...) = ...
+        // konst (`destructuring_declaration_entry`, ...) = ...
         if (source.elementType != KtNodeTypes.DESTRUCTURING_DECLARATION_ENTRY) return
 
-        val componentCall = declaration.initializer as? FirComponentCall ?: return
-        val originalExpression = componentCall.explicitReceiverOfQualifiedAccess ?: return
-        val originalDestructuringDeclaration = originalExpression.resolvedVariable ?: return
-        val originalDestructuringDeclarationOrInitializer =
+        konst componentCall = declaration.initializer as? FirComponentCall ?: return
+        konst originalExpression = componentCall.explicitReceiverOfQualifiedAccess ?: return
+        konst originalDestructuringDeclaration = originalExpression.resolvedVariable ?: return
+        konst originalDestructuringDeclarationOrInitializer =
             when (originalDestructuringDeclaration) {
                 is FirProperty -> {
                     if (originalDestructuringDeclaration.initializer?.source?.elementType == KtNodeTypes.FOR) {
                         // for ((entry, ...) = `destructuring_declaration`) { ... }
                         // It will be wrapped as `next()` call whose explicit receiver is `iterator()` on the actual source.
-                        val iterator = originalDestructuringDeclaration.initializer?.explicitReceiverOfQualifiedAccess
+                        konst iterator = originalDestructuringDeclaration.initializer?.explicitReceiverOfQualifiedAccess
                         (iterator?.resolvedVariable as? FirProperty)?.initializer?.explicitReceiverOfQualifiedAccess
                     } else {
-                        // val (entry, ...) = `destructuring_declaration`
+                        // konst (entry, ...) = `destructuring_declaration`
                         originalDestructuringDeclaration.initializer
                     }
                 }
                 is FirValueParameter -> {
-                    // ... = { `(entry, ...)` -> ... } // value parameter itself is a destructuring declaration
+                    // ... = { `(entry, ...)` -> ... } // konstue parameter itself is a destructuring declaration
                     originalDestructuringDeclaration
                 }
                 else -> null
             } ?: return
-        val originalDestructuringDeclarationOrInitializerSource = originalDestructuringDeclarationOrInitializer.source ?: return
-        val originalDestructuringDeclarationType =
+        konst originalDestructuringDeclarationOrInitializerSource = originalDestructuringDeclarationOrInitializer.source ?: return
+        konst originalDestructuringDeclarationType =
             when (originalDestructuringDeclarationOrInitializer) {
                 is FirVariable -> originalDestructuringDeclarationOrInitializer.returnTypeRef.coneType
                 is FirExpression -> originalDestructuringDeclarationOrInitializer.typeRef.coneType
                 else -> null
             } ?: return
 
-        val reference = componentCall.calleeReference
-        val diagnostic = if (reference.isError()) reference.diagnostic else null
+        konst reference = componentCall.calleeReference
+        konst diagnostic = if (reference.isError()) reference.diagnostic else null
         if (diagnostic != null) {
             checkComponentCall(
                 originalDestructuringDeclarationOrInitializerSource,
@@ -91,7 +91,7 @@ object FirDestructuringDeclarationChecker : FirPropertyChecker() {
         reporter: DiagnosticReporter,
         context: CheckerContext
     ) {
-        val needToReport =
+        konst needToReport =
             when (initializer) {
                 null -> true
                 is FirErrorExpression -> initializer.diagnostic is ConeSyntaxDiagnostic
@@ -151,18 +151,18 @@ object FirDestructuringDeclarationChecker : FirPropertyChecker() {
                 }
             }
             is ConeConstraintSystemHasContradiction -> {
-                val componentType = componentCall.typeRef.coneType
+                konst componentType = componentCall.typeRef.coneType
                 if (componentType is ConeErrorType) {
                     // There will be other errors on this error type.
                     return
                 }
-                val expectedType = property.returnTypeRef.coneType
+                konst expectedType = property.returnTypeRef.coneType
                 if (!AbstractTypeChecker.isSubtypeOf(context.session.typeContext, componentType, expectedType)) {
-                    val typeMismatchSource =
+                    konst typeMismatchSource =
                         // ... = { `(entry, ...)` -> ... } // Report on specific `entry`
                         if (destructuringDeclaration is FirValueParameter)
                             property.source
-                        // val (entry, ...) = `destructuring_declaration` // Report on a destructuring declaration
+                        // konst (entry, ...) = `destructuring_declaration` // Report on a destructuring declaration
                         else
                             source
                     reporter.reportOn(
@@ -187,10 +187,10 @@ object FirDestructuringDeclarationChecker : FirPropertyChecker() {
         }
     }
 
-    private val FirExpression.explicitReceiverOfQualifiedAccess: FirQualifiedAccessExpression?
+    private konst FirExpression.explicitReceiverOfQualifiedAccess: FirQualifiedAccessExpression?
         get() = (this as? FirQualifiedAccessExpression)?.explicitReceiver?.unwrapped as? FirQualifiedAccessExpression
 
-    private val FirExpression.unwrapped: FirExpression
+    private konst FirExpression.unwrapped: FirExpression
         get() =
             when (this) {
                 is FirSmartCastExpression -> this.originalExpression
@@ -198,9 +198,9 @@ object FirDestructuringDeclarationChecker : FirPropertyChecker() {
                 else -> this
             }
 
-    private val FirQualifiedAccessExpression.resolvedVariable: FirVariable?
+    private konst FirQualifiedAccessExpression.resolvedVariable: FirVariable?
         get() {
-            val symbol = calleeReference.toResolvedVariableSymbol() ?: return null
+            konst symbol = calleeReference.toResolvedVariableSymbol() ?: return null
             symbol.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
             @OptIn(SymbolInternals::class)
             return symbol.fir

@@ -15,7 +15,7 @@ public actual interface KFunction<out R> : KCallable<R>, Function<R> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isInline: Boolean
+    public konst isInline: Boolean
 
     /**
      * `true` if this function is `external`.
@@ -23,7 +23,7 @@ public actual interface KFunction<out R> : KCallable<R>, Function<R> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isExternal: Boolean
+    public konst isExternal: Boolean
 
     /**
      * `true` if this function is `operator`.
@@ -31,7 +31,7 @@ public actual interface KFunction<out R> : KCallable<R>, Function<R> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isOperator: Boolean
+    public konst isOperator: Boolean
 
     /**
      * `true` if this function is `infix`.
@@ -39,11 +39,11 @@ public actual interface KFunction<out R> : KCallable<R>, Function<R> {
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isInfix: Boolean
+    public konst isInfix: Boolean
 
     /**
      * `true` if this is a suspending function.
      */
     @SinceKotlin("1.1")
-    public override val isSuspend: Boolean
+    public override konst isSuspend: Boolean
 }

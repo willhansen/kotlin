@@ -8,12 +8,12 @@ class OverloadTest {
 
 object Literal
 
-inline fun <T : Any> OverloadTest.overload(value: T?, function: OverloadTest.(T) -> Unit) {
-    if (value == null) foo(Literal) else function(value)
+inline fun <T : Any> OverloadTest.overload(konstue: T?, function: OverloadTest.(T) -> Unit) {
+    if (konstue == null) foo(Literal) else function(konstue)
 }
 
 // Overload resolution ambiguity
-fun OverloadTest.overloadBoolean(value: Boolean?) = overload(value, OverloadTest::foo)
+fun OverloadTest.overloadBoolean(konstue: Boolean?) = overload(konstue, OverloadTest::foo)
 
 // Works fine
-fun OverloadTest.overloadBoolean2(value: Boolean?) = overload(value) { foo(it) }
+fun OverloadTest.overloadBoolean2(konstue: Boolean?) = overload(konstue) { foo(it) }

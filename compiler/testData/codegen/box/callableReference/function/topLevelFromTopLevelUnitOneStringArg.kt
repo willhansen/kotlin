@@ -5,7 +5,7 @@ fun foo(newResult: String) {
 }
 
 fun box(): String {
-    val x = ::foo
+    konst x = ::foo
     x("OK")
     return result
 }

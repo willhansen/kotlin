@@ -33,7 +33,7 @@ class CacheVersionTest {
 
     @Test
     fun testConstructDeconstruct() {
-        val version = CacheVersion(
+        konst version = CacheVersion(
             1,
             JvmBytecodeBinaryVersion(2, 3),
             JvmMetadataVersion(4, 5)

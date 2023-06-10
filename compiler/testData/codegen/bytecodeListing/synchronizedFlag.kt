@@ -17,7 +17,7 @@ class C {
     }
 }
 
-inline class IC(val x: Int) {
+inline class IC(konst x: Int) {
     @Synchronized
     fun testInlineClassFun() {}
 }

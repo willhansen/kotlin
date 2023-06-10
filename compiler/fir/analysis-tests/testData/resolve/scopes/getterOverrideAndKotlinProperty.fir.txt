@@ -4,7 +4,7 @@ FILE: B.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val foo: R|kotlin/Int| = Int(1)
+        private final konst foo: R|kotlin/Int| = Int(1)
             private get(): R|kotlin/Int|
 
         public open override fun getFoo(): R|kotlin/String| {

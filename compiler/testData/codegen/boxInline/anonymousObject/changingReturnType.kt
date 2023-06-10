@@ -3,7 +3,7 @@
 
 package test
 
-open class Entity(val value: String)
+open class Entity(konst konstue: String)
 
 public abstract class Task<T>() {
     abstract fun calc(): T
@@ -26,5 +26,5 @@ inline fun<reified Self : Entity> Self.directed(): Task<Self> =
 import test.*
 
 fun box(): String {
-    return Entity("OK").directed().calc().value
+    return Entity("OK").directed().calc().konstue
 }

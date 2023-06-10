@@ -44,7 +44,7 @@ object AnalysisApiFe10TestServiceRegistrar : AnalysisApiTestServiceRegistrar() {
             registerService(KotlinReferenceProviderContributor::class.java, KtFe10KotlinReferenceProviderContributor::class.java)
         }
         testServices.ktModuleProvider.getModuleStructure().mainModules.forEach { module ->
-            val sourceModule = module.ktModule as? KtSourceModule ?: return@forEach
+            konst sourceModule = module.ktModule as? KtSourceModule ?: return@forEach
             AnalysisHandlerExtension.registerExtension(project, KtFe10AnalysisHandlerExtension(sourceModule))
         }
         KotlinCoreEnvironment.registerKotlinLightClassSupport(project)

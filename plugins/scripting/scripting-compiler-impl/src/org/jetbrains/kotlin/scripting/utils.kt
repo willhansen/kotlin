@@ -13,7 +13,7 @@ fun SourceCode.scriptFileName(
     mainScript: SourceCode,
     scriptCompilationConfiguration: ScriptCompilationConfiguration
 ): String {
-    val mainExtension = scriptCompilationConfiguration[ScriptCompilationConfiguration.fileExtension]
+    konst mainExtension = scriptCompilationConfiguration[ScriptCompilationConfiguration.fileExtension]
     return when {
         name != null -> withCorrectExtension(name!!, mainExtension)
         mainScript == this -> withCorrectExtension("script", mainExtension)

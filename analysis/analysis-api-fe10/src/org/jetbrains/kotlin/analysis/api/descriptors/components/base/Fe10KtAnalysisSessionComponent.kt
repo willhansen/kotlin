@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.analysis.api.descriptors.Fe10AnalysisContext
 import org.jetbrains.kotlin.analysis.api.descriptors.KtFe10AnalysisSession
 
 interface Fe10KtAnalysisSessionComponent {
-    val analysisSession: KtFe10AnalysisSession
+    konst analysisSession: KtFe10AnalysisSession
 
-    val analysisContext: Fe10AnalysisContext
+    konst analysisContext: Fe10AnalysisContext
         get() = analysisSession.analysisContext
 }

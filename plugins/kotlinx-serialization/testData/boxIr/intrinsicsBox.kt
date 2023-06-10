@@ -9,15 +9,15 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.modules.*
 
 @Serializable
-class Simple(val firstName: String, val lastName: String)
+class Simple(konst firstName: String, konst lastName: String)
 
 @Serializable
-data class Box<out T>(val boxed: T)
+data class Box<out T>(konst boxed: T)
 
 @Serializable
 object SerializableObject {}
 
-val module = SerializersModule {}
+konst module = SerializersModule {}
 
 inline fun <reified T : Any> getSer(module: SerializersModule): KSerializer<T> {
     return module.serializer<T>()

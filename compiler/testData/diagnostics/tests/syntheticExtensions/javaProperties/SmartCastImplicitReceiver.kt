@@ -10,7 +10,7 @@ fun Any.foo(): Int {
 // FILE: JavaClass.java
 public abstract class JavaClass extends BaseClass implements JavaInterface {
     public int getSomething() { return 1; }
-    public void setSomething(int value) { }
+    public void setSomething(int konstue) { }
 }
 
 // FILE: BaseClass.java

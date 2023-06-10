@@ -39,12 +39,12 @@ internal interface ToolchainSupport {
 }
 
 internal abstract class DefaultToolchainSupport @Inject constructor(
-    private val extensions: ExtensionContainer,
-    private val tasks: TaskContainer,
-    private val plugins: PluginContainer,
-    private val kotlinExtension: KotlinTopLevelExtensionConfig
+    private konst extensions: ExtensionContainer,
+    private konst tasks: TaskContainer,
+    private konst plugins: PluginContainer,
+    private konst kotlinExtension: KotlinTopLevelExtensionConfig
 ) : ToolchainSupport {
-    private val toolchainSpec: JavaToolchainSpec
+    private konst toolchainSpec: JavaToolchainSpec
         get() = extensions
             .getByType(JavaPluginExtension::class.java)
             .toolchain
@@ -61,9 +61,9 @@ internal abstract class DefaultToolchainSupport @Inject constructor(
 
     private fun wireToolchainToTasks() {
         plugins.withId("org.gradle.java-base") {
-            val toolchainService = extensions.findByType(JavaToolchainService::class.java)
+            konst toolchainService = extensions.findByType(JavaToolchainService::class.java)
                 ?: error("Gradle JavaToolchainService is not available!")
-            val javaLauncher = toolchainService.launcherFor(toolchainSpec)
+            konst javaLauncher = toolchainService.launcherFor(toolchainSpec)
 
             tasks
                 .withType<UsesKotlinJavaToolchain>()

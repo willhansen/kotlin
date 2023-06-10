@@ -18,7 +18,7 @@ fun testArrayCapturedInLocalFun() {
 fun testArrayCapturedInLabmda() {
     var xs = arrayOf("a", "b", "c")
 
-    val updateXs = { xs = arrayOf("d", "e", "f") }
+    konst updateXs = { xs = arrayOf("d", "e", "f") }
 
     for (x in xs) {
         println(x)
@@ -40,7 +40,7 @@ fun testArrayCapturedInInlineLambda() {
 fun testArrayCapturedInLocalObject() {
     var xs = arrayOf("a", "b", "c")
 
-    val updateXs = object : () -> Unit {
+    konst updateXs = object : () -> Unit {
         override fun invoke() {
             xs = arrayOf("d", "e", "f")
         }
@@ -61,7 +61,7 @@ fun testArrayCapturedInLocalClass() {
         }
     }
 
-    val updater = LocalClass()
+    konst updater = LocalClass()
 
     for (x in xs) {
         println(x)
@@ -76,7 +76,7 @@ fun testCapturedInLambdaAfterLoop() {
         println(x)
         xs = intArrayOf(4, 5, 6)
     }
-    val lambda = { xs = intArrayOf() }
+    konst lambda = { xs = intArrayOf() }
     lambda()
 }
 
@@ -86,7 +86,7 @@ fun testCapturedInLambdaInLoopAfterAssignment() {
     for (x in xs) {
         println(x)
         xs = intArrayOf(4, 5, 6)
-        val lambda = { xs = intArrayOf() }
+        konst lambda = { xs = intArrayOf() }
         lambda()
     }
 }
@@ -94,7 +94,7 @@ fun testCapturedInLambdaInLoopAfterAssignment() {
 fun testCapturedInNonChangingClosure() {
     // NB false positive
     var xs = intArrayOf(1, 2, 3)
-    val lambda = { println(xs) }
+    konst lambda = { println(xs) }
     for (x in xs) {
         println(x)
         xs = intArrayOf(4, 5, 6)

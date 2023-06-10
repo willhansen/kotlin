@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.psi.KtVariableDeclaration
 import org.jetbrains.kotlin.resolve.DescriptorResolver.transformAnonymousTypeIfNeeded
 import org.jetbrains.kotlin.resolve.calls.components.InferenceSession
 import org.jetbrains.kotlin.resolve.calls.smartcasts.DataFlowInfo
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 import org.jetbrains.kotlin.storage.StorageManager
 import org.jetbrains.kotlin.types.*
@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.types.expressions.ExpressionTypingServices
 import org.jetbrains.kotlin.types.expressions.PreliminaryDeclarationVisitor
 
 class VariableTypeAndInitializerResolver(
-    private val storageManager: StorageManager,
-    private val expressionTypingServices: ExpressionTypingServices,
-    private val typeResolver: TypeResolver,
-    private val constantExpressionEvaluator: ConstantExpressionEvaluator,
-    private val delegatedPropertyResolver: DelegatedPropertyResolver,
-    private val wrappedTypeFactory: WrappedTypeFactory,
-    private val typeApproximator: TypeApproximator,
-    private val declarationReturnTypeSanitizer: DeclarationReturnTypeSanitizer,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val anonymousTypeTransformers: Iterable<DeclarationSignatureAnonymousTypeTransformer>
+    private konst storageManager: StorageManager,
+    private konst expressionTypingServices: ExpressionTypingServices,
+    private konst typeResolver: TypeResolver,
+    private konst constantExpressionEkonstuator: ConstantExpressionEkonstuator,
+    private konst delegatedPropertyResolver: DelegatedPropertyResolver,
+    private konst wrappedTypeFactory: WrappedTypeFactory,
+    private konst typeApproximator: TypeApproximator,
+    private konst declarationReturnTypeSanitizer: DeclarationReturnTypeSanitizer,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst anonymousTypeTransformers: Iterable<DeclarationSignatureAnonymousTypeTransformer>
 ) {
     companion object {
         @JvmStatic
@@ -72,7 +72,7 @@ class VariableTypeAndInitializerResolver(
         trace: BindingTrace,
         local: Boolean
     ): KotlinType? {
-        val propertyTypeRef = variable.typeReference
+        konst propertyTypeRef = variable.typeReference
         return when {
             propertyTypeRef != null -> typeResolver.resolveType(scopeForInitializer, propertyTypeRef, trace, true)
 
@@ -91,7 +91,7 @@ class VariableTypeAndInitializerResolver(
                             variable, trace,
                             expressionTypingServices.languageVersionSettings
                         )
-                        val initializerType = resolveInitializerType(
+                        konst initializerType = resolveInitializerType(
                             scopeForInitializer, variable.initializer!!, dataFlowInfo, inferenceSession, trace, local
                         )
                         transformAnonymousTypeIfNeeded(
@@ -124,10 +124,10 @@ class VariableTypeAndInitializerResolver(
                             variableType
                         )) return@computeInitializer null
 
-                    val initializer = variable.initializer
-                    val initializerType =
+                    konst initializer = variable.initializer
+                    konst initializerType =
                         expressionTypingServices.safeGetType(scope, initializer!!, variableType, dataFlowInfo, inferenceSession, trace)
-                    val constant = constantExpressionEvaluator.evaluateExpression(initializer, trace, initializerType)
+                    konst constant = constantExpressionEkonstuator.ekonstuateExpression(initializer, trace, initializerType)
                         ?: return@computeInitializer null
 
                     if (constant.usesNonConstValAsConstant && variableDescriptor.isConst) {
@@ -150,16 +150,16 @@ class VariableTypeAndInitializerResolver(
         trace: BindingTrace,
         local: Boolean
     ) = wrappedTypeFactory.createRecursionIntolerantDeferredType(trace) {
-        val delegateExpression = property.delegateExpression!!
-        val type = delegatedPropertyResolver.resolveDelegateExpression(
+        konst delegateExpression = property.delegateExpression!!
+        konst type = delegatedPropertyResolver.resolveDelegateExpression(
             delegateExpression, property, variableDescriptor, scopeForInitializer, trace, dataFlowInfo, inferenceSession
         )
 
-        val getterReturnType = delegatedPropertyResolver.getGetValueMethodReturnType(
+        konst getterReturnType = delegatedPropertyResolver.getGetValueMethodReturnType(
             variableDescriptor, delegateExpression, type, trace, scopeForInitializer, dataFlowInfo, inferenceSession
         )
 
-        val delegatedType = getterReturnType?.let { approximateType(it, local) }
+        konst delegatedType = getterReturnType?.let { approximateType(it, local) }
             ?: ErrorUtils.createErrorType(ErrorTypeKind.TYPE_FOR_DELEGATION, delegateExpression.text)
 
         transformAnonymousTypeIfNeeded(
@@ -175,10 +175,10 @@ class VariableTypeAndInitializerResolver(
         trace: BindingTrace,
         local: Boolean
     ): KotlinType {
-        val inferredType = expressionTypingServices.safeGetType(
+        konst inferredType = expressionTypingServices.safeGetType(
             scope, initializer, TypeUtils.NO_EXPECTED_TYPE, dataFlowInfo, inferenceSession, trace
         )
-        val approximatedType = approximateType(inferredType, local)
+        konst approximatedType = approximateType(inferredType, local)
         return declarationReturnTypeSanitizer.sanitizeReturnType(approximatedType, wrappedTypeFactory, trace, languageVersionSettings)
     }
 

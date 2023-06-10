@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.name.SpecialNames
  */
 class CompanionGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val PREDICATE = LookupPredicate.create { annotated("CompanionWithFoo".fqn()) }
-        private val FOO_NAME = Name.identifier("foo")
+        private konst PREDICATE = LookupPredicate.create { annotated("CompanionWithFoo".fqn()) }
+        private konst FOO_NAME = Name.identifier("foo")
     }
 
     override fun generateNestedClassLikeDeclaration(owner: FirClassSymbol<*>, name: Name, context: NestedClassGenerationContext): FirClassLikeSymbol<*>? {
@@ -35,25 +35,25 @@ class CompanionGenerator(session: FirSession) : FirDeclarationGenerationExtensio
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner ?: return emptyList()
-        val ownerKey = (owner.origin as? FirDeclarationOrigin.Plugin)?.key ?: return emptyList()
+        konst owner = context?.owner ?: return emptyList()
+        konst ownerKey = (owner.origin as? FirDeclarationOrigin.Plugin)?.key ?: return emptyList()
         if (ownerKey != Key) return emptyList()
         if (callableId.callableName != FOO_NAME) return emptyList()
-        val function = createMemberFunction(owner, Key, callableId.callableName, session.builtinTypes.intType.type)
+        konst function = createMemberFunction(owner, Key, callableId.callableName, session.builtinTypes.intType.type)
         return listOf(function.symbol)
     }
 
     override fun generateConstructors(context: MemberGenerationContext): List<FirConstructorSymbol> {
-        val constructor = createDefaultPrivateConstructor(context.owner, Key)
+        konst constructor = createDefaultPrivateConstructor(context.owner, Key)
         return listOf(constructor.symbol)
     }
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
         if (classSymbol.classKind != ClassKind.OBJECT) return emptySet()
         if (classSymbol !is FirRegularClassSymbol) return emptySet()
-        val classId = classSymbol.classId
+        konst classId = classSymbol.classId
         if (!classId.isNestedClass || classId.shortClassName != SpecialNames.DEFAULT_NAME_FOR_COMPANION_OBJECT) return emptySet()
-        val origin = classSymbol.origin as? FirDeclarationOrigin.Plugin
+        konst origin = classSymbol.origin as? FirDeclarationOrigin.Plugin
         return if (origin?.key == Key) {
             setOf(FOO_NAME, SpecialNames.INIT)
         } else {

@@ -14,18 +14,18 @@ import org.jetbrains.kotlin.gradle.scripting.internal.ScriptingGradleSubplugin
 import org.jetbrains.kotlin.gradle.tasks.*
 import org.jetbrains.kotlin.gradle.utils.configureExperimentalTryK2
 
-const val KOTLIN_DSL_NAME = "kotlin"
+const konst KOTLIN_DSL_NAME = "kotlin"
 
-@Deprecated("Should be removed with 'platform.js' plugin removal")
-const val KOTLIN_JS_DSL_NAME = "kotlin2js"
-const val KOTLIN_OPTIONS_DSL_NAME = "kotlinOptions"
+@Deprecated("Should be removed with 'platform.js' plugin remokonst")
+const konst KOTLIN_JS_DSL_NAME = "kotlin2js"
+const konst KOTLIN_OPTIONS_DSL_NAME = "kotlinOptions"
 
 internal open class KotlinJvmPlugin(
     registry: ToolingModelBuilderRegistry
 ) : AbstractKotlinPlugin(KotlinTasksProvider(), registry) {
 
     internal companion object {
-        private const val targetName = "" // use empty suffix for the task names
+        private const konst targetName = "" // use empty suffix for the task names
 
         internal fun Project.configureCompilerOptionsForTarget(
             extensionCompilerOptions: KotlinJvmCompilerOptions,
@@ -38,7 +38,7 @@ internal open class KotlinJvmPlugin(
                 project
             )
             compilationsContainer.configureEach {
-                val jvmCompilerOptions = it.compilerOptions.options as KotlinJvmCompilerOptions
+                konst jvmCompilerOptions = it.compilerOptions.options as KotlinJvmCompilerOptions
                 KotlinJvmCompilerOptionsHelper.syncOptionsAsConvention(
                     from = extensionCompilerOptions,
                     into = jvmCompilerOptions
@@ -56,14 +56,14 @@ internal open class KotlinJvmPlugin(
 
     override fun apply(project: Project) {
         @Suppress("UNCHECKED_CAST")
-        val target = (project.objects.newInstance(
+        konst target = (project.objects.newInstance(
             KotlinWithJavaTarget::class.java,
             project,
             KotlinPlatformType.jvm,
             targetName,
             {
                 object : HasCompilerOptions<KotlinJvmCompilerOptions> {
-                    override val options: KotlinJvmCompilerOptions =
+                    override konst options: KotlinJvmCompilerOptions =
                         project.objects
                             .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
                             .configureExperimentalTryK2(project)
@@ -71,14 +71,14 @@ internal open class KotlinJvmPlugin(
             },
             { compilerOptions: KotlinJvmCompilerOptions ->
                 object : KotlinJvmOptions {
-                    override val options: KotlinJvmCompilerOptions get() = compilerOptions
+                    override konst options: KotlinJvmCompilerOptions get() = compilerOptions
                 }
             }
         ) as KotlinWithJavaTarget<KotlinJvmOptions, KotlinJvmCompilerOptions>)
             .apply {
                 disambiguationClassifier = null // don't add anything to the task names
             }
-        val kotlinExtension = project.kotlinExtension as KotlinJvmProjectExtension
+        konst kotlinExtension = project.kotlinExtension as KotlinJvmProjectExtension
         kotlinExtension.target = target
 
         super.apply(project)

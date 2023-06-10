@@ -38,7 +38,7 @@ package com.google.gwt.dev.js.rhino;
 
 final class BinaryDigitReader {
     int lgBase;         // Logarithm of base of number
-    int digit;          // Current digit value in radix given by base
+    int digit;          // Current digit konstue in radix given by base
     int digitPos;       // Bit position of last bit extracted from digit
     String digits;      // String containing the digits
     int start;          // Index of the first remaining digit

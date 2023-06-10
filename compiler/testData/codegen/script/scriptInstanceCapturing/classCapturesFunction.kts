@@ -2,8 +2,8 @@
 
 // expected: rv: 42
 
-val x = 6
-val y = 7
+konst x = 6
+konst y = 7
 
 fun foo() = x
 
@@ -11,4 +11,4 @@ class A {
     fun bar() = foo() * y
 }
 
-val rv = A().bar()
+konst rv = A().bar()

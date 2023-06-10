@@ -15,35 +15,35 @@ enum class E { E0 }
 annotation class Empty
 
 annotation class A(
-    val b: Byte,
-    val s: Short,
-    val i: Int,
-    val f: Float,
-    val d: Double,
-    val l: Long,
-    val c: Char,
-    val bool: Boolean
+    konst b: Byte,
+    konst s: Short,
+    konst i: Int,
+    konst f: Float,
+    konst d: Double,
+    konst l: Long,
+    konst c: Char,
+    konst bool: Boolean
 )
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Anno(
-    val s: String,
-    val i: Int,
-    val f: Double,
-    val u: UInt,
-    val e: E,
-    val a: A,
-    val k: KClass<*>,
-    val arr: Array<String>,
-    val intArr: IntArray,
-    val arrOfE: Array<E>,
-    val arrOfA: Array<Empty>,
-    val arrOfK: Array<KClass<*>>
+    konst s: String,
+    konst i: Int,
+    konst f: Double,
+    konst u: UInt,
+    konst e: E,
+    konst a: A,
+    konst k: KClass<*>,
+    konst arr: Array<String>,
+    konst intArr: IntArray,
+    konst arrOfE: Array<E>,
+    konst arrOfA: Array<Empty>,
+    konst arrOfK: Array<KClass<*>>
 )
 
 
 fun box(): String {
-    val anno = Anno(
+    konst anno = Anno(
         "OK", 42, 2.718281828, 43u, E.E0,
         A(1, 1, 1, 1.0.toFloat(), 1.0, 1, 'c', true),
         A::class, emptyArray(), intArrayOf(1, 2), arrayOf(E.E0), arrayOf(Empty()), arrayOf(E::class, Empty::class)
@@ -60,7 +60,7 @@ fun box(): String {
     assert(anno.arrOfE.contentEquals(arrayOf(E.E0)))
     assert(anno.arrOfA.size == 1)
     assert(anno.arrOfK.size == 2)
-    val ann = anno.a
+    konst ann = anno.a
     assertEquals(ann.b, 1.toByte())
     assertEquals(ann.s, 1.toShort())
     assertEquals(ann.i, 1)

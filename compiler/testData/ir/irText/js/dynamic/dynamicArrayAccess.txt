@@ -5,7 +5,7 @@ FILE fqName:<root> fileName:/dynamicArrayAccess.kt
       RETURN type=kotlin.Nothing from='public final fun testArrayAccess1 (d: dynamic): dynamic declared in <root>'
         DYN_OP operator=ARRAY_ACCESS type=dynamic
           receiver: GET_VAR 'd: dynamic declared in <root>.testArrayAccess1' type=dynamic origin=null
-          0: CONST String type=kotlin.String value="KEY"
+          0: CONST String type=kotlin.String konstue="KEY"
   FUN name:testArrayAccess2 visibility:public modality:FINAL <> (d:dynamic) returnType:dynamic
     VALUE_PARAMETER name:d index:0 type:dynamic
     BLOCK_BODY
@@ -13,7 +13,7 @@ FILE fqName:<root> fileName:/dynamicArrayAccess.kt
         DYN_OP operator=ARRAY_ACCESS type=dynamic
           receiver: DYN_OP operator=INVOKE type=dynamic
             receiver: GET_VAR 'd: dynamic declared in <root>.testArrayAccess2' type=dynamic origin=VARIABLE_AS_FUNCTION
-          0: CONST String type=kotlin.String value="KEY"
+          0: CONST String type=kotlin.String konstue="KEY"
   FUN name:testArrayAccess3 visibility:public modality:FINAL <> (d:dynamic) returnType:dynamic
     VALUE_PARAMETER name:d index:0 type:dynamic
     BLOCK_BODY
@@ -21,4 +21,4 @@ FILE fqName:<root> fileName:/dynamicArrayAccess.kt
         DYN_OP operator=INVOKE type=dynamic
           receiver: DYN_MEMBER memberName='get' type=dynamic
             GET_VAR 'd: dynamic declared in <root>.testArrayAccess3' type=dynamic origin=null
-          0: CONST String type=kotlin.String value="KEY"
+          0: CONST String type=kotlin.String konstue="KEY"

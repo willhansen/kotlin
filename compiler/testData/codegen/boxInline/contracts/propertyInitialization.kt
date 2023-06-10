@@ -18,7 +18,7 @@ public inline fun <R> myrun(block: () -> R): R {
 import test.*
 
 class A {
-    val z: String
+    konst z: String
     init {
         myrun {
             z = "OK"

@@ -5,7 +5,7 @@ operator fun Any.get(index: Function0<Unit>): Int {
   return 42
 }
 
-operator fun Any.set(index: Function0<Unit>, value: Int) {
+operator fun Any.set(index: Function0<Unit>, konstue: Int) {
 }
 
 fun test1(a: Any) {
@@ -17,22 +17,22 @@ fun test1(a: Any) {
 
 fun test2(a: Any) {
   { // BLOCK
-    val <array>: Any = a
-    val <index_0>: Function0<Unit> = local fun <anonymous>() {
+    konst <array>: Any = a
+    konst <index_0>: Function0<Unit> = local fun <anonymous>() {
       return Unit
     }
 
-    <array>.set(index = <index_0>, value = <array>.get(index = <index_0>).plus(other = 42))
+    <array>.set(index = <index_0>, konstue = <array>.get(index = <index_0>).plus(other = 42))
   }
 }
 
 fun test3(a: Any) {
-  val <array>: Any = a
-  val <index_0>: Function0<Unit> = local fun <anonymous>() {
+  konst <array>: Any = a
+  konst <index_0>: Function0<Unit> = local fun <anonymous>() {
     return Unit
   }
 
-  val <unary>: Int = <array>.get(index = <index_0>)
-  <array>.set(index = <index_0>, value = <unary>.inc())
+  konst <unary>: Int = <array>.get(index = <index_0>)
+  <array>.set(index = <index_0>, konstue = <unary>.inc())
   <unary> /*~> Unit */
 }

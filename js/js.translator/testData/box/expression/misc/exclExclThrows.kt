@@ -3,7 +3,7 @@ package foo
 
 
 fun box(): String {
-    val a: Int? = null
+    konst a: Int? = null
 
     try {
         if ((a!! + 3) == 3) return "fail1"

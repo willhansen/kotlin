@@ -6,11 +6,11 @@ typedef (Headers or sequence<sequence<ByteString>> or OpenEndedDictionary<ByteSt
 [Constructor(optional HeadersInit init),
  Exposed=(Window,Worker)]
 interface Headers {
-  void append(ByteString name, ByteString value);
+  void append(ByteString name, ByteString konstue);
   void delete(ByteString name);
   ByteString? get(ByteString name);
   boolean has(ByteString name);
-  void set(ByteString name, ByteString value);
+  void set(ByteString name, ByteString konstue);
   iterable<ByteString, ByteString>;
 };
 typedef (Blob or BufferSource or FormData or URLSearchParams or USVString) BodyInit;

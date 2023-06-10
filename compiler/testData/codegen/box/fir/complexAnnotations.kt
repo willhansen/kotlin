@@ -18,7 +18,7 @@ public @interface State {
 public @interface Storage {
     String file() default "";
 
-    String value() default "";
+    String konstue() default "";
 
     boolean deprecated() default false;
 
@@ -41,14 +41,14 @@ public class StoragePathMacros {
 // FILE: test.kt
 
 @State(name = "RecentDirectoryProjectsManager",
-       storages = [Storage(value = "recentProjectDirectories.xml", roamingType = RoamingType.DISABLED, deprecated = true)],
+       storages = [Storage(konstue = "recentProjectDirectories.xml", roamingType = RoamingType.DISABLED, deprecated = true)],
        reportStatistic = false)
 class Some
 
-@State(name = "RecentProjectsManager", storages = [Storage(value = "recentProjects.xml", roamingType = RoamingType.DISABLED)])
+@State(name = "RecentProjectsManager", storages = [Storage(konstue = "recentProjects.xml", roamingType = RoamingType.DISABLED)])
 class Other
 
-@State(name = "A", storages = [(Storage(value = StoragePathMacros.NON_ROAMABLE_FILE))])
+@State(name = "A", storages = [(Storage(konstue = StoragePathMacros.NON_ROAMABLE_FILE))])
 class Another
 
 fun box(): String {
@@ -56,7 +56,7 @@ fun box(): String {
     Other()
     Another()
     run {
-        @State(name = "A", storages = [(Storage(value = StoragePathMacros.NON_ROAMABLE_FILE))])
+        @State(name = "A", storages = [(Storage(konstue = StoragePathMacros.NON_ROAMABLE_FILE))])
         class Local
         Local()
     }

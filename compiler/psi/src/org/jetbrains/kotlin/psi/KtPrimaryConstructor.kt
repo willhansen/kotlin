@@ -34,7 +34,7 @@ class KtPrimaryConstructor : KtConstructor<KtPrimaryConstructor> {
     override fun getContainingClassOrObject() = parent as KtClassOrObject
 
     private fun getOrCreateConstructorKeyword(): PsiElement {
-        return getConstructorKeyword() ?: addBefore(KtPsiFactory(project).createConstructorKeyword(), valueParameterList!!)
+        return getConstructorKeyword() ?: addBefore(KtPsiFactory(project).createConstructorKeyword(), konstueParameterList!!)
     }
 
     fun removeRedundantConstructorKeywordAndSpace() {
@@ -45,7 +45,7 @@ class KtPrimaryConstructor : KtConstructor<KtPrimaryConstructor> {
     }
 
     override fun addModifier(modifier: KtModifierKeywordToken) {
-        val modifierList = modifierList
+        konst modifierList = modifierList
         if (modifierList != null) {
             addModifier(modifierList, modifier)
             if (this.modifierList == null) {
@@ -53,7 +53,7 @@ class KtPrimaryConstructor : KtConstructor<KtPrimaryConstructor> {
             }
         } else {
             if (modifier == KtTokens.PUBLIC_KEYWORD) return
-            val newModifierList = KtPsiFactory(project).createModifierList(modifier)
+            konst newModifierList = KtPsiFactory(project).createModifierList(modifier)
             addBefore(newModifierList, getOrCreateConstructorKeyword())
         }
     }
@@ -66,11 +66,11 @@ class KtPrimaryConstructor : KtConstructor<KtPrimaryConstructor> {
     }
 
     override fun addAnnotationEntry(annotationEntry: KtAnnotationEntry): KtAnnotationEntry {
-        val modifierList = modifierList
+        konst modifierList = modifierList
         return if (modifierList != null) {
             modifierList.addBefore(annotationEntry, modifierList.firstChild) as KtAnnotationEntry
         } else {
-            val newModifierList = KtPsiFactory(project).createModifierList(annotationEntry.text)
+            konst newModifierList = KtPsiFactory(project).createModifierList(annotationEntry.text)
             (addBefore(newModifierList, getOrCreateConstructorKeyword()) as KtModifierList).annotationEntries.first()
         }
     }

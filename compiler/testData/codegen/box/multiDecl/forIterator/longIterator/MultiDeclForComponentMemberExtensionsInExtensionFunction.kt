@@ -13,10 +13,10 @@ fun M.doTest(l : ArrayList<Long>): String {
 }
 
 fun box(): String {
-  val l = ArrayList<Long>()
+  konst l = ArrayList<Long>()
   l.add(0)
   l.add(1)
   l.add(2)
-  val s = M().doTest(l)
+  konst s = M().doTest(l)
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

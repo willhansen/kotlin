@@ -52,8 +52,8 @@ suspend fun baz() {
     fDouble { }
 }
 
-// The inline functions will contain boxing for the value passed to the lambda.
-// 8 valueOf
+// The inline functions will contain boxing for the konstue passed to the lambda.
+// 8 konstueOf
 
 // After inlining there will be boxing and unboxing that is not needed. That should be optimized out.
 // 0 intValue

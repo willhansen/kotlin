@@ -1,5 +1,5 @@
 fun box(): String {
-    val a = IntArray(5)
+    konst a = IntArray(5)
     var sum = 0
     for (i in 0..4) {
         a[i] = i + 1

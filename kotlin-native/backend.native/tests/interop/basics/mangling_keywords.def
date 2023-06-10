@@ -16,6 +16,6 @@
 #define true "true"
 #define try "try"
 #define typealias "typealias"
-#define val "val"
+#define konst "konst"
 #define var "var"
 #define when "when"

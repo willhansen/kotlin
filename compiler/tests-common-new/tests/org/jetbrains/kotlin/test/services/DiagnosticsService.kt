@@ -10,29 +10,29 @@ import org.jetbrains.kotlin.test.directives.DiagnosticsDirectives
 import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.util.*
 
-class DiagnosticsService(val testServices: TestServices) : TestService {
+class DiagnosticsService(konst testServices: TestServices) : TestService {
     companion object {
-        private val severityNameMapping = mapOf(
+        private konst severityNameMapping = mapOf(
             "infos" to Severity.INFO,
             "warnings" to Severity.WARNING,
             "errors" to Severity.ERROR,
         )
     }
 
-    private val conditionsPerModule: MutableMap<TestModule, DiagnosticConditions> = mutableMapOf()
+    private konst conditionsPerModule: MutableMap<TestModule, DiagnosticConditions> = mutableMapOf()
 
     private data class DiagnosticConditions(
-        val allowedDiagnostics: Set<String>,
-        val disabledDiagnostics: Set<String>,
-        val severityMap: Map<Severity, Boolean>
+        konst allowedDiagnostics: Set<String>,
+        konst disabledDiagnostics: Set<String>,
+        konst severityMap: Map<Severity, Boolean>
     )
 
     fun shouldRenderDiagnostic(module: TestModule, name: String, severity: Severity): Boolean {
-        val conditions = conditionsPerModule.getOrPut(module) {
+        konst conditions = conditionsPerModule.getOrPut(module) {
             computeDiagnosticConditionForModule(module)
         }
 
-        val severityAllowed = conditions.severityMap.getOrDefault(severity, true)
+        konst severityAllowed = conditions.severityMap.getOrDefault(severity, true)
 
         return if (severityAllowed) {
             name !in conditions.disabledDiagnostics || name in conditions.allowedDiagnostics
@@ -42,22 +42,22 @@ class DiagnosticsService(val testServices: TestServices) : TestService {
     }
 
     private fun computeDiagnosticConditionForModule(module: TestModule): DiagnosticConditions {
-        val diagnosticsInDirective = module.directives[DiagnosticsDirectives.DIAGNOSTICS]
-        val enabledNames = mutableSetOf<String>()
-        val disabledNames = mutableSetOf<String>()
-        val severityMap = mutableMapOf<Severity, Boolean>()
+        konst diagnosticsInDirective = module.directives[DiagnosticsDirectives.DIAGNOSTICS]
+        konst enabledNames = mutableSetOf<String>()
+        konst disabledNames = mutableSetOf<String>()
+        konst severityMap = mutableMapOf<Severity, Boolean>()
         for (diagnosticInDirective in diagnosticsInDirective) {
-            val enabled = when {
+            konst enabled = when {
                 diagnosticInDirective.startsWith("+") -> true
                 diagnosticInDirective.startsWith("-") -> false
                 else -> error("Incorrect diagnostics directive syntax. See reference:\n${DiagnosticsDirectives.DIAGNOSTICS.description}")
             }
-            val name = diagnosticInDirective.substring(1)
-            val severity = severityNameMapping[name]
+            konst name = diagnosticInDirective.substring(1)
+            konst severity = severityNameMapping[name]
             if (severity != null) {
                 severityMap[severity] = enabled
             } else {
-                val collection = if (enabled) enabledNames else disabledNames
+                konst collection = if (enabled) enabledNames else disabledNames
                 collection += name
             }
         }
@@ -69,4 +69,4 @@ class DiagnosticsService(val testServices: TestServices) : TestService {
     }
 }
 
-val TestServices.diagnosticsService: DiagnosticsService by TestServices.testServiceAccessor()
+konst TestServices.diagnosticsService: DiagnosticsService by TestServices.testServiceAccessor()

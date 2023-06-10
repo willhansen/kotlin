@@ -155,7 +155,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
     @SuppressWarnings({"UnusedDeclaration"})
     public enum Precedence {
         POSTFIX(PLUSPLUS, MINUSMINUS, EXCLEXCL,
-                DOT, SAFE_ACCESS), // typeArguments? valueArguments : typeArguments : arrayAccess
+                DOT, SAFE_ACCESS), // typeArguments? konstueArguments : typeArguments : arrayAccess
 
         PREFIX(MINUS, PLUS, MINUSMINUS, PLUSPLUS, EXCL) { // annotations
 
@@ -203,10 +203,10 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
         ;
 
         static {
-            Precedence[] values = values();
-            for (Precedence precedence : values) {
+            Precedence[] konstues = konstues();
+            for (Precedence precedence : konstues) {
                 int ordinal = precedence.ordinal();
-                precedence.higher = ordinal > 0 ? values[ordinal - 1] : null;
+                precedence.higher = ordinal > 0 ? konstues[ordinal - 1] : null;
             }
         }
 
@@ -252,8 +252,8 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
 
     static {
         Set<IElementType> operations = new HashSet<>();
-        Precedence[] values = Precedence.values();
-        for (Precedence precedence : values) {
+        Precedence[] konstues = Precedence.konstues();
+        for (Precedence precedence : konstues) {
             operations.addAll(Arrays.asList(precedence.getOperations().getTypes()));
         }
         ALL_OPERATIONS = TokenSet.create(operations.toArray(new IElementType[0]));
@@ -306,7 +306,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
      *   : declaration
      *   : jump
      *   : loop
-     *   // block is syntactically equivalent to a functionLiteral with no parameters
+     *   // block is syntactically equikonstent to a functionLiteral with no parameters
      *   ;
      */
     public void parseExpression() {
@@ -444,7 +444,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
      *
      * postfixUnaryOperation
      *   : "++" : "--" : "!!"
-     *   : typeArguments? valueArguments (getEntryPoint? functionLiteral)
+     *   : typeArguments? konstueArguments (getEntryPoint? functionLiteral)
      *   : typeArguments (getEntryPoint? functionLiteral)
      *   : arrayAccess
      *   : memberAccessOperation postfixUnaryExpression // TODO: Review
@@ -498,7 +498,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
 
     /*
      * callSuffix
-     *   : typeArguments? valueArguments annotatedLambda
+     *   : typeArguments? konstueArguments annotatedLambda
      *   : typeArguments annotatedLambda
      *   ;
      */
@@ -530,7 +530,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
     }
 
     /*
-     * atomicExpression typeParameters? valueParameters? functionLiteral*
+     * atomicExpression typeParameters? konstueParameters? functionLiteral*
      */
     private void parseSelectorCallExpression() {
         PsiBuilder.Marker mark = mark();
@@ -849,7 +849,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
 
     /*
      * when
-     *   : "when" ("(" (modifiers "val" SimpleName "=")? element ")")? "{"
+     *   : "when" ("(" (modifiers "konst" SimpleName "=")? element ")")? "{"
      *         whenEntry*
      *     "}"
      *   ;
@@ -1227,13 +1227,13 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
 
     private boolean rollbackOrDrop(PsiBuilder.Marker rollbackMarker,
             KtToken expected, String expectMessage,
-            IElementType validForDrop) {
+            IElementType konstidForDrop) {
         if (at(expected)) {
             advance(); // dropAt
             rollbackMarker.drop();
             return true;
         }
-        else if (at(validForDrop)) {
+        else if (at(konstidForDrop)) {
             rollbackMarker.drop();
             expect(expected, expectMessage);
             return true;
@@ -1467,7 +1467,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
 
     /*
      * for
-     *   : "for" "(" annotations ("val" | "var")? (multipleVariableDeclarations | variableDeclarationEntry) "in" expression ")" expression
+     *   : "for" "(" annotations ("konst" | "var")? (multipleVariableDeclarations | variableDeclarationEntry) "in" expression ")" expression
      *   ;
      *
      *   TODO: empty loop body (at the end of the block)?
@@ -1851,7 +1851,7 @@ public class KotlinExpressionParsing extends AbstractKotlinParsing {
     }
 
     /*
-     * valueArguments
+     * konstueArguments
      *   : "(" (SimpleName "=")? "*"? element{","} ")"
      *   ;
      */

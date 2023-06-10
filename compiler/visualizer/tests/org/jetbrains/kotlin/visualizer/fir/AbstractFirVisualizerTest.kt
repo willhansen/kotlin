@@ -11,6 +11,6 @@ import org.jetbrains.kotlin.test.model.*
 import org.jetbrains.kotlin.visualizer.AbstractVisualizerTest
 
 abstract class AbstractFirVisualizerTest : AbstractVisualizerTest() {
-    override val frontendKind: FrontendKind<*> = FrontendKinds.FIR
-    override val handler: Constructor<FrontendOutputHandler<*>> = ::FirOutputHandler
+    override konst frontendKind: FrontendKind<*> = FrontendKinds.FIR
+    override konst handler: Constructor<FrontendOutputHandler<*>> = ::FirOutputHandler
 }

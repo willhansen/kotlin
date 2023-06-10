@@ -13,10 +13,10 @@ class Provider {
 
 class Test {
     companion object {
-        val instance = Test()
+        konst instance = Test()
     }
 
-    val message by Provider()
+    konst message by Provider()
 }
 
 fun box() = Test.instance.message

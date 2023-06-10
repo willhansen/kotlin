@@ -1,8 +1,8 @@
 // WITH_STDLIB
 
 class A {
-    val s: Sequence<String> = sequence {
-        val a = {}
+    konst s: Sequence<String> = sequence {
+        konst a = {}
         yield("OK")
     }
 }

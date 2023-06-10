@@ -1,5 +1,5 @@
 object Test {
-    val ok = "OK"
+    konst ok = "OK"
 }
 
 fun box(): String =

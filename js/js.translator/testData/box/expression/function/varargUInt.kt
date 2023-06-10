@@ -22,7 +22,7 @@ fun testSpreadOperator(vararg args: UInt): Boolean {
     return testSize(args.size, *args) && testSum(sum, *args)
 }
 
-class Bar(val size: Int, val sum: UInt) {
+class Bar(konst size: Int, konst sum: UInt) {
     fun test(vararg args: UInt) = testSize(size, *args) && testSum(sum, *args)
 }
 
@@ -79,8 +79,8 @@ fun box(): String {
     if (!testVarargWithFunLit(1u, 2u, 3u) { args -> args.size == 3 })
         return "failed when call function with vararg and fun literal"
 
-    val a = arrayOf(1u, 2u, 3u)
-    val b = arrayOf(4u, 5u)
+    konst a = arrayOf(1u, 2u, 3u)
+    konst b = arrayOf(4u, 5u)
 
     assertEquals(5, arrayOf(*a, *b).size)
     assertEquals(8, arrayOf(10u, *a, 20u,  *b, 30u).size)
@@ -105,7 +105,7 @@ fun box(): String {
     assertEquals(3, idArrayVarArg(arrayOf(1u, 2u), *arrayOf(arrayOf(3u, 4u), arrayOf(5u, 6u))).size)
     assertEquals(6, idArrayVarArg(arrayOf(1u, 2u), *arrayOf(arrayOf(3u, 4u), arrayOf(5u, 6u)), arrayOf(7u), *arrayOf(arrayOf(8u, 9u), arrayOf(10u, 11u))).size)
 
-    val c = arrayOf(*a)
+    konst c = arrayOf(*a)
     assertFalse(a === c, "Spread operator should copy its argument")
 
     return "OK"

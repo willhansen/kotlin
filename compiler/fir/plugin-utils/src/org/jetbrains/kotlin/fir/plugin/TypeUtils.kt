@@ -18,7 +18,7 @@ public fun ClassId.createConeType(
     typeArguments: Array<ConeTypeProjection> = emptyArray(),
     nullable: Boolean = false
 ): ConeClassLikeType {
-    val symbol = session.symbolProvider.getClassLikeSymbolByClassId(this) as? FirClassSymbol<*>
+    konst symbol = session.symbolProvider.getClassLikeSymbolByClassId(this) as? FirClassSymbol<*>
 
     return when {
         symbol != null -> when {

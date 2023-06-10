@@ -1,4 +1,4 @@
-class A(val x: String) {
+class A(konst x: String) {
     fun y() = x
     // Both `x` and `y()` assumed to respect their nullability information,
     // so only `a` and `b` need to be checked.

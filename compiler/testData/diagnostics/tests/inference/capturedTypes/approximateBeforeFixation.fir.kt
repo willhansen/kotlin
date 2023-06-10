@@ -1,6 +1,6 @@
 
 fun <T> Array<out T>.intersect(other: Iterable<T>) {
-    val set = toMutableSet()
+    konst set = toMutableSet()
     set.retainAll(other)
 }
 

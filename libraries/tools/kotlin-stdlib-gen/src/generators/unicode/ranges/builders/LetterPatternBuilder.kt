@@ -22,7 +22,7 @@ internal class LetterRangesBuilder : RangesBuilder() {
         return categoryId == "NL"
     }
 
-    override val makeOnePeriodCategory: (Array<String>) -> Int
+    override konst makeOnePeriodCategory: (Array<String>) -> Int
         get() = ::periodPatternCategory
 
     override fun evolveLastRange(lastRange: RangePattern, charCode: Int, categoryId: String): RangePattern? {
@@ -45,7 +45,7 @@ internal class LetterRangesBuilder : RangesBuilder() {
     }
 }
 
-private val letterCategoryCodes = listOf(
+private konst letterCategoryCodes = listOf(
     CharCategory.UPPERCASE_LETTER.code,
     CharCategory.LOWERCASE_LETTER.code,
     CharCategory.TITLECASE_LETTER.code,
@@ -65,8 +65,8 @@ private fun bitmask(categoryId: String) = when (categoryId) {
 private fun periodPatternCategory(categoryIds: Array<String>): Int {
     var pattern = 0
     for (index in categoryIds.indices) {
-        val value = bitmask(categoryIds[index])
-        pattern = pattern or (value shl (2 * index))
+        konst konstue = bitmask(categoryIds[index])
+        pattern = pattern or (konstue shl (2 * index))
     }
     pattern = pattern or (1 shl (2 * categoryIds.size))
     check(pattern and 0x3 != 0)
@@ -77,8 +77,8 @@ private fun gapPatternCategory(start: Int, @Suppress("UNUSED_PARAMETER") end: In
     var pattern = 0
     var shift = 2
     for (i in gaps.indices) {
-        val gap = gaps[i]
-        val charsBeforeGap = gap.start - if (i == 0) start else gaps[i - 1].let { it.start + it.length }
+        konst gap = gaps[i]
+        konst charsBeforeGap = gap.start - if (i == 0) start else gaps[i - 1].let { it.start + it.length }
         pattern += charsBeforeGap shl shift
         shift += GapRangePattern.CHARS_BITS
         pattern += gap.length shl shift

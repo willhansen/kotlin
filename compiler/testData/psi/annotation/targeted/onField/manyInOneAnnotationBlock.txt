@@ -41,7 +41,7 @@ KtFile: manyInOneAnnotationBlock.kt
                       PsiElement(IDENTIFIER)('third')
             PsiElement(RBRACKET)(']')
         PsiWhiteSpace('\n    ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('a')
         PsiWhiteSpace(' ')

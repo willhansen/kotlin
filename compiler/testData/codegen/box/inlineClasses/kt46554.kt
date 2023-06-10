@@ -5,11 +5,11 @@
 var result = "Fail"
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val value: String) {
+konstue class A(konst konstue: String) {
     constructor() : this("OK")
 
     init {
-        result = value
+        result = konstue
     }
 }
 

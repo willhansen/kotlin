@@ -8,11 +8,11 @@ object Z : A<String>() {
 
 
 fun box(): String {
-    val z = object : A<String>() {
+    konst z = object : A<String>() {
         override fun foo(t: String) = "z"
     }
-    val az: A<String> = Z
-    val a: A<String> = z
+    konst az: A<String> = Z
+    konst a: A<String> = z
     return when {
         Z.foo("") != "Z" -> "Fail #1"
         z.foo("") != "z" -> "Fail #2"

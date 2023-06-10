@@ -8,20 +8,20 @@
 package org.jetbrains.kotlin.gradle.plugin
 
 interface KotlinJsCompilerTypeHolder {
-    val compilerTypeFromProperties: KotlinJsCompilerType?
+    konst compilerTypeFromProperties: KotlinJsCompilerType?
 
-    val defaultJsCompilerType: KotlinJsCompilerType
+    konst defaultJsCompilerType: KotlinJsCompilerType
         get() = compilerTypeFromProperties ?: KotlinJsCompilerType.IR
 
     // Necessary to get rid of KotlinJsCompilerType import in build script
     @Deprecated("Legacy compiler is deprecated. Migrate your project to the new IR-based compiler")
-    val LEGACY: KotlinJsCompilerType
+    konst LEGACY: KotlinJsCompilerType
         get() = KotlinJsCompilerType.LEGACY
 
-    val IR: KotlinJsCompilerType
+    konst IR: KotlinJsCompilerType
         get() = KotlinJsCompilerType.IR
 
     @Deprecated("Legacy compiler is deprecated. Migrate your project to the new IR-based compiler")
-    val BOTH: KotlinJsCompilerType
+    konst BOTH: KotlinJsCompilerType
         get() = KotlinJsCompilerType.BOTH
 }

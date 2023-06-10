@@ -9,7 +9,7 @@ import org.jetbrains.benchmarksLauncher.Blackhole
 import org.jetbrains.benchmarksLauncher.Random
 
 private object A {
-    val a = Random.nextInt(100)
+    konst a = Random.nextInt(100)
 }
 
 open class SingletonBenchmark {

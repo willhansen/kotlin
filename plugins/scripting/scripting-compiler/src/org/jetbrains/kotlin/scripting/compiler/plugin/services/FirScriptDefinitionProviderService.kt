@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.scripting.definitions.ScriptDependenciesProvider
 
 class FirScriptDefinitionProviderService(
     session: FirSession,
-    private val makeDefaultDefinitionProvider: () -> ScriptDefinitionProvider,
-    private val makeDefaultConfigurationProvider: () -> ScriptDependenciesProvider
+    private konst makeDefaultDefinitionProvider: () -> ScriptDefinitionProvider,
+    private konst makeDefaultConfigurationProvider: () -> ScriptDependenciesProvider
 ) : FirExtensionSessionComponent(session) {
 
     // TODO: get rid of project-based implementation, write and use own singleton in K2
@@ -31,7 +31,7 @@ class FirScriptDefinitionProviderService(
             if (_definitionProvider == null) _definitionProvider = makeDefaultDefinitionProvider()
             _definitionProvider
         }
-        set(value) { synchronized(this) { _definitionProvider = value} }
+        set(konstue) { synchronized(this) { _definitionProvider = konstue} }
 
     private var _configurationProvider: ScriptDependenciesProvider? = null
     var configurationProvider: ScriptDependenciesProvider?
@@ -39,7 +39,7 @@ class FirScriptDefinitionProviderService(
             if (_configurationProvider == null) _configurationProvider = makeDefaultConfigurationProvider()
             _configurationProvider
         }
-        set(value) { synchronized(this) { _configurationProvider = value} }
+        set(konstue) { synchronized(this) { _configurationProvider = konstue} }
 
     companion object {
         fun getFactory(
@@ -65,4 +65,4 @@ class FirScriptDefinitionProviderService(
     }
 }
 
-val FirSession.scriptDefinitionProviderService: FirScriptDefinitionProviderService? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.scriptDefinitionProviderService: FirScriptDefinitionProviderService? by FirSession.nullableSessionComponentAccessor()

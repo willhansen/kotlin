@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <option name="DEFAULT_COMPILER" value="Javac" />
+    <option name="DEFAULT_COMPILER" konstue="Javac" />
   </component>
   <component name="KotlinCompilerSettings">
-    <option name="copyJsLibraryFiles" value="false" />
+    <option name="copyJsLibraryFiles" konstue="false" />
   </component>
   <component name="ProjectModuleManager">
     <modules>

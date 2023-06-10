@@ -34,15 +34,15 @@ import org.jetbrains.kotlin.utils.addIfNotNull
 
 object FirOptInUsageBaseChecker {
     data class Experimentality(
-        val annotationClassId: ClassId,
-        val severity: Severity,
-        val message: String?,
-        val supertypeName: String? = null,
-        val fromSupertype: Boolean = false
+        konst annotationClassId: ClassId,
+        konst severity: Severity,
+        konst message: String?,
+        konst supertypeName: String? = null,
+        konst fromSupertype: Boolean = false
     ) {
         enum class Severity { WARNING, ERROR }
         companion object {
-            val DEFAULT_SEVERITY = Severity.ERROR
+            konst DEFAULT_SEVERITY = Severity.ERROR
         }
 
         override fun equals(other: Any?): Boolean {
@@ -86,8 +86,8 @@ object FirOptInUsageBaseChecker {
         fromSupertype: Boolean
     ) {
         for (annotation in annotations) {
-            val annotationType = annotation.annotationTypeRef.coneTypeSafe<ConeClassLikeType>() ?: continue
-            val className = when (this) {
+            konst annotationType = annotation.annotationTypeRef.coneTypeSafe<ConeClassLikeType>() ?: continue
+            konst className = when (this) {
                 is FirRegularClass -> name.asString()
                 is FirCallableDeclaration -> symbol.callableId.className?.shortName()?.asString()
                 else -> null
@@ -99,7 +99,7 @@ object FirOptInUsageBaseChecker {
             )
             if (fromSupertype) {
                 if (annotationType.lookupTag.classId == OptInNames.SUBCLASS_OPT_IN_REQUIRED_CLASS_ID) {
-                    val annotationClass = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
+                    konst annotationClass = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
                     result.addIfNotNull(
                         annotationClass.extractClassFromArgument(session)
                             ?.loadExperimentalityForMarkerAnnotation(session)?.copy(fromSupertype = true)
@@ -122,7 +122,7 @@ object FirOptInUsageBaseChecker {
         typeArguments: List<ConeTypeProjection>
     ): Set<Experimentality> {
         if (typeArguments.isEmpty()) return emptySet()
-        val result = SmartSet.create<Experimentality>()
+        konst result = SmartSet.create<Experimentality>()
         typeArguments.forEach {
             if (!it.isStarProjection) it.type?.addExperimentalities(context, result)
         }
@@ -150,10 +150,10 @@ object FirOptInUsageBaseChecker {
         fromSupertype: Boolean,
     ): Set<Experimentality> {
         lazyResolveToPhase(FirResolvePhase.STATUS)
-        val fir = this.fir
+        konst fir = this.fir
         if (!visited.add(fir)) return emptySet()
-        val result = knownExperimentalities ?: SmartSet.create()
-        val session = context.session
+        konst result = knownExperimentalities ?: SmartSet.create()
+        konst session = context.session
         when (fir) {
             is FirCallableDeclaration ->
                 fir.loadCallableSpecificExperimentalities(this, context, visited, fromSetter, dispatchReceiverType, result)
@@ -165,7 +165,7 @@ object FirOptInUsageBaseChecker {
         fir.loadExperimentalitiesFromAnnotationTo(session, result, fromSupertype)
 
         if (fir.getAnnotationByClassId(OptInNames.WAS_EXPERIMENTAL_CLASS_ID, session) != null) {
-            val accessibility = fir.checkSinceKotlinVersionAccessibility(context)
+            konst accessibility = fir.checkSinceKotlinVersionAccessibility(context)
             if (accessibility is FirSinceKotlinAccessibility.NotAccessibleButWasExperimental) {
                 accessibility.markerClasses.forEach {
                     it.lazyResolveToPhase(FirResolvePhase.STATUS)
@@ -186,7 +186,7 @@ object FirOptInUsageBaseChecker {
         dispatchReceiverType: ConeKotlinType?,
         result: SmartSet<Experimentality>
     ) {
-        val parentClassSymbol = containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol
+        konst parentClassSymbol = containingClassLookupTag()?.toSymbol(context.session) as? FirRegularClassSymbol
         if (this is FirConstructor) {
             // For other callable we check dispatch receiver type instead
             parentClassSymbol?.loadExperimentalities(
@@ -199,7 +199,7 @@ object FirOptInUsageBaseChecker {
         }
         dispatchReceiverType?.addExperimentalities(context, result, visited)
         if (this is FirFunction) {
-            valueParameters.forEach {
+            konstueParameters.forEach {
                 it.returnTypeRef.coneType.addExperimentalities(context, result, visited)
             }
         }
@@ -218,7 +218,7 @@ object FirOptInUsageBaseChecker {
     ) {
         when (this) {
             is FirRegularClass -> if (symbol is FirRegularClassSymbol) {
-                val parentClassSymbol = symbol.outerClassSymbol(context)
+                konst parentClassSymbol = symbol.outerClassSymbol(context)
                 parentClassSymbol?.loadExperimentalities(
                     context, result, visited, fromSetter = false, dispatchReceiverType = null, fromSupertype = false
                 )
@@ -250,13 +250,13 @@ object FirOptInUsageBaseChecker {
         session: FirSession,
         annotatedOwnerClassName: String? = null
     ): Experimentality? {
-        val experimental = getAnnotationByClassId(OptInNames.REQUIRES_OPT_IN_CLASS_ID, session)
+        konst experimental = getAnnotationByClassId(OptInNames.REQUIRES_OPT_IN_CLASS_ID, session)
             ?: return null
 
-        val levelArgument = experimental.findArgumentByName(LEVEL) as? FirQualifiedAccessExpression
-        val levelName = levelArgument?.calleeReference?.resolved?.name?.asString()
-        val level = OptInLevel.values().firstOrNull { it.name == levelName } ?: OptInLevel.DEFAULT
-        val message = (experimental.findArgumentByName(MESSAGE) as? FirConstExpression<*>)?.value as? String
+        konst levelArgument = experimental.findArgumentByName(LEVEL) as? FirQualifiedAccessExpression
+        konst levelName = levelArgument?.calleeReference?.resolved?.name?.asString()
+        konst level = OptInLevel.konstues().firstOrNull { it.name == levelName } ?: OptInLevel.DEFAULT
+        konst message = (experimental.findArgumentByName(MESSAGE) as? FirConstExpression<*>)?.konstue as? String
         return Experimentality(symbol.classId, level.severity, message, annotatedOwnerClassName)
     }
 
@@ -269,12 +269,12 @@ object FirOptInUsageBaseChecker {
     ) {
         for ((annotationClassId, severity, message, _, fromSupertype) in experimentalities) {
             if (!isExperimentalityAcceptableInContext(annotationClassId, context, fromSupertype)) {
-                val (diagnostic, verb) = when (severity) {
+                konst (diagnostic, verb) = when (severity) {
                     Experimentality.Severity.WARNING -> FirErrors.OPT_IN_USAGE to "should"
                     Experimentality.Severity.ERROR -> FirErrors.OPT_IN_USAGE_ERROR to "must"
                 }
-                val fqName = annotationClassId.asSingleFqName()
-                val reportedMessage = message?.takeIf { it.isNotBlank() }
+                konst fqName = annotationClassId.asSingleFqName()
+                konst reportedMessage = message?.takeIf { it.isNotBlank() }
                     ?: OptInNames.buildDefaultDiagnosticMessage(OptInNames.buildMessagePrefix(verb), fqName.asString())
                 reporter.reportOn(source, diagnostic, fqName, reportedMessage, context)
             }
@@ -292,11 +292,11 @@ object FirOptInUsageBaseChecker {
             if (!symbol.fir.isExperimentalityAcceptable(context.session, annotationClassId, fromSupertype = false) &&
                 !isExperimentalityAcceptableInContext(annotationClassId, context, fromSupertype = false)
             ) {
-                val (diagnostic, verb) = when (severity) {
+                konst (diagnostic, verb) = when (severity) {
                     Experimentality.Severity.WARNING -> FirErrors.OPT_IN_OVERRIDE to "should"
                     Experimentality.Severity.ERROR -> FirErrors.OPT_IN_OVERRIDE_ERROR to "must"
                 }
-                val message = OptInNames.buildOverrideMessage(
+                konst message = OptInNames.buildOverrideMessage(
                     supertypeName ?: "???",
                     markerMessage,
                     verb,
@@ -312,8 +312,8 @@ object FirOptInUsageBaseChecker {
         context: CheckerContext,
         fromSupertype: Boolean
     ): Boolean {
-        val languageVersionSettings = context.session.languageVersionSettings
-        val fqNameAsString = annotationClassId.asFqNameString()
+        konst languageVersionSettings = context.session.languageVersionSettings
+        konst fqNameAsString = annotationClassId.asFqNameString()
         if (fqNameAsString in languageVersionSettings.getFlag(AnalysisFlags.optIn)) {
             return true
         }
@@ -343,18 +343,18 @@ object FirOptInUsageBaseChecker {
         annotationClassId: ClassId
     ): Boolean {
         if (this !is FirProperty) return false
-        val parameterSymbol = correspondingValueParameterFromPrimaryConstructor ?: return false
+        konst parameterSymbol = correspondingValueParameterFromPrimaryConstructor ?: return false
 
         return parameterSymbol.fir.isExperimentalityAcceptable(session, annotationClassId, fromSupertype = false)
     }
 
     private fun FirAnnotationContainer.isAnnotatedWithOptIn(annotationClassId: ClassId, session: FirSession): Boolean {
         for (annotation in annotations) {
-            val coneType = annotation.annotationTypeRef.coneType as? ConeClassLikeType
+            konst coneType = annotation.annotationTypeRef.coneType as? ConeClassLikeType
             if (coneType?.lookupTag?.classId != OptInNames.OPT_IN_CLASS_ID) {
                 continue
             }
-            val annotationClasses = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
+            konst annotationClasses = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
             if (annotationClasses.extractClassesFromArgument(session).any { it.classId == annotationClassId }) {
                 return true
             }
@@ -367,11 +367,11 @@ object FirOptInUsageBaseChecker {
         annotationClassId: ClassId
     ): Boolean {
         for (annotation in annotations) {
-            val coneType = annotation.annotationTypeRef.coneType as? ConeClassLikeType
+            konst coneType = annotation.annotationTypeRef.coneType as? ConeClassLikeType
             if (coneType?.lookupTag?.classId != OptInNames.SUBCLASS_OPT_IN_REQUIRED_CLASS_ID) {
                 continue
             }
-            val annotationClass = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
+            konst annotationClass = annotation.findArgumentByName(OptInNames.OPT_IN_ANNOTATION_CLASS) ?: continue
             if (annotationClass.extractClassFromArgument(session)?.classId == annotationClassId) {
                 return true
             }
@@ -379,10 +379,10 @@ object FirOptInUsageBaseChecker {
         return false
     }
 
-    private val LEVEL = Name.identifier("level")
-    private val MESSAGE = Name.identifier("message")
+    private konst LEVEL = Name.identifier("level")
+    private konst MESSAGE = Name.identifier("message")
 
-    private enum class OptInLevel(val severity: Experimentality.Severity) {
+    private enum class OptInLevel(konst severity: Experimentality.Severity) {
         WARNING(Experimentality.Severity.WARNING),
         ERROR(Experimentality.Severity.ERROR),
         DEFAULT(Experimentality.DEFAULT_SEVERITY)

@@ -15,12 +15,12 @@ import java.util.concurrent.atomic.AtomicReference
 internal object CommonizerMemoryTracker {
     private class CommonizerMemoryTrackerRunner(
         phaseName: String,
-        private val intervalMillis: Long,
-        private val forceGC: Boolean,
-        private val writerFactory: () -> Writer
+        private konst interkonstMillis: Long,
+        private konst forceGC: Boolean,
+        private konst writerFactory: () -> Writer
     ) : Thread("CommonizerMemoryTrackerRunner") {
-        private val runtime = Runtime.getRuntime()
-        private val phaseName = AtomicReference(phaseName)
+        private konst runtime = Runtime.getRuntime()
+        private konst phaseName = AtomicReference(phaseName)
 
         fun updatePhase(phaseName: String) {
             this.phaseName.set(phaseName)
@@ -30,7 +30,7 @@ internal object CommonizerMemoryTracker {
             writerFactory().use { writer ->
                 writer.writeHeader()
 
-                val startTime = System.currentTimeMillis()
+                konst startTime = System.currentTimeMillis()
 
                 try {
                     while (!interrupted()) {
@@ -38,16 +38,16 @@ internal object CommonizerMemoryTracker {
                             runtime.gc()
                         }
 
-                        val currentTime = System.currentTimeMillis() - startTime
+                        konst currentTime = System.currentTimeMillis() - startTime
 
-                        val free = runtime.freeMemory()
-                        val total = runtime.totalMemory()
-                        val used = total - free
-                        val max = runtime.maxMemory()
+                        konst free = runtime.freeMemory()
+                        konst total = runtime.totalMemory()
+                        konst used = total - free
+                        konst max = runtime.maxMemory()
 
                         writer.writeRow(currentTime, phaseName.get(), used, free, total, max)
 
-                        sleep(intervalMillis)
+                        sleep(interkonstMillis)
                     }
                 } catch (_: InterruptedException) {
                     // do nothing, just leave the loop
@@ -56,10 +56,10 @@ internal object CommonizerMemoryTracker {
         }
     }
 
-    private val activeRunner = AtomicReference<CommonizerMemoryTrackerRunner>()
+    private konst activeRunner = AtomicReference<CommonizerMemoryTrackerRunner>()
 
-    fun startTracking(phaseName: String, intervalMillis: Long, forceGC: Boolean) {
-        val runner = CommonizerMemoryTrackerRunner(phaseName, intervalMillis, forceGC) {
+    fun startTracking(phaseName: String, interkonstMillis: Long, forceGC: Boolean) {
+        konst runner = CommonizerMemoryTrackerRunner(phaseName, interkonstMillis, forceGC) {
             System.out.writer() // TODO: add ability to supply custom writer here
         }
 
@@ -73,7 +73,7 @@ internal object CommonizerMemoryTracker {
     }
 
     fun stopTracking() {
-        val runner = activeRunner.getAndSet(null) ?: error("No active runner")
+        konst runner = activeRunner.getAndSet(null) ?: error("No active runner")
         runner.interrupt()
     }
 

@@ -13,24 +13,24 @@ class SomeClass {
     constructor()
 
     @field:Ann
-    protected val simpleProperty: String = "text"
+    protected konst simpleProperty: String = "text"
 
     @field:[Ann]
-    protected val simplePropertyWithAnnotationList: String = "text"
+    protected konst simplePropertyWithAnnotationList: String = "text"
 
     @field:Ann
-    protected val delegatedProperty: String by CustomDelegate()
+    protected konst delegatedProperty: String by CustomDelegate()
 
     @field:Ann
-    val propertyWithCustomGetter: Int
+    konst propertyWithCustomGetter: Int
         get() = 5
 
     @field:Ann
     fun anotherFun(@field:Ann s: String) {
         @field:Ann
-        val localVariable = 5
+        konst localVariable = 5
     }
 
 }
 
-class WithPrimaryConstructor(@field:Ann val a: String)
+class WithPrimaryConstructor(@field:Ann konst a: String)

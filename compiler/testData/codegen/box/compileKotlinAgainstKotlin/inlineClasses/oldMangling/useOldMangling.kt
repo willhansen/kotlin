@@ -6,7 +6,7 @@
 // FILE: 1.kt
 package test
 
-inline class IC(val s: String)
+inline class IC(konst s: String)
 
 fun ordinary(s: String, ic: IC): String = s + ic.s
 

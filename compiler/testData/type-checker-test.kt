@@ -1,6 +1,6 @@
 package testData
 
-class Pair<out A, out B> (val first: A, val second: B}
+class Pair<out A, out B> (konst first: A, konst second: B}
 
 open class Base_T<T>()
 open class Derived_T<T>() : Base_T<T>
@@ -14,8 +14,8 @@ open class Base_outT<out T>()
 open class Derived_outT<out T>() : Base_outT<T>
 open class MDerived_T<T>() : Base_outT<out T>, Base_T<T>
 
-class Properties() { val p : Int }
-class Props<T>() { val p : T }
+class Properties() { konst p : Int }
+class Props<T>() { konst p : T }
 class Functions<T>() {
   fun f() : Unit {}
   fun f(a : Int) : Int {}
@@ -26,7 +26,7 @@ class Functions<T>() {
 class WithPredicate() {
   fun isValid() : Boolean
   fun isValid(x : Int) : Boolean
-  val p : Boolean
+  konst p : Boolean
 }
 
 open class InvList<E>()

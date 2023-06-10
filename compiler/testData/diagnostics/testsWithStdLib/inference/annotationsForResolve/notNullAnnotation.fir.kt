@@ -7,7 +7,7 @@ public class SmartFMap<K, V> implements java.util.Map<K, V> {
         return null;
     }
 
-    public SmartFMap < K, V> plus(@org.jetbrains.annotations.NotNull K key, V value) {
+    public SmartFMap < K, V> plus(@org.jetbrains.annotations.NotNull K key, V konstue) {
         return null;
     }
 }

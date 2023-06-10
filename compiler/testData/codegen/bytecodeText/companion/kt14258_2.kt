@@ -3,7 +3,7 @@
 
 class My {
     companion object {
-        private val my: String = "OK"
+        private konst my: String = "OK"
 
         fun test(): String {
             // accessor is required because field is move to Foo

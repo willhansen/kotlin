@@ -2,7 +2,7 @@
 // KT-44234
 
 class App {
-    val context: Context = Context()
+    konst context: Context = Context()
 
     fun onCreate() {
         instance = this
@@ -10,7 +10,7 @@ class App {
 
     companion object {
         private lateinit var instance: App set
-        val context: Context get() = instance.context
+        konst context: Context get() = instance.context
     }
 
 }
@@ -20,7 +20,7 @@ class Context {
 }
 
 fun box(): String {
-    val app = App()
+    konst app = App()
     app.onCreate()
     return App.context.print()
 }

@@ -17,14 +17,14 @@
 package org.jetbrains.kotlinx.serialization.compiler.backend.jvm
 
 // :kludge: for stripped-down version of ASM inside kotlin-compiler-embeddable.jar
-const val VOID = 0
-const val BOOLEAN = 1
-const val CHAR = 2
-const val BYTE = 3
-const val SHORT = 4
-const val INT = 5
-const val FLOAT = 6
-const val LONG = 7
-const val DOUBLE = 8
-const val ARRAY = 9
-const val OBJECT = 10
+const konst VOID = 0
+const konst BOOLEAN = 1
+const konst CHAR = 2
+const konst BYTE = 3
+const konst SHORT = 4
+const konst INT = 5
+const konst FLOAT = 6
+const konst LONG = 7
+const konst DOUBLE = 8
+const konst ARRAY = 9
+const konst OBJECT = 10

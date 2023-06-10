@@ -6,6 +6,6 @@ FILE: lowPriorityInResolution.kt
         ^foo String()
     }
     public final fun test(): R|kotlin/Unit| {
-        lval s: R|kotlin/String| = R|/foo|()
+        lkonst s: R|kotlin/String| = R|/foo|()
         R|<local>/s|.R|kotlin/String.length|
     }

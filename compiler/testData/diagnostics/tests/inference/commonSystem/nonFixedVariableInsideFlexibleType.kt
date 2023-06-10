@@ -21,7 +21,7 @@ fun <K, T> addElementToSlice(
     key: K,
     element: T
 ) {
-    val a = select(JavaSet.get(slice, key), JavaSet.newIdentityHashSet())
+    konst a = select(JavaSet.get(slice, key), JavaSet.newIdentityHashSet())
 
     <!DEBUG_INFO_EXPRESSION_TYPE("(kotlin.collections.MutableCollection<T>..kotlin.collections.Collection<T>?)")!>a<!>
 

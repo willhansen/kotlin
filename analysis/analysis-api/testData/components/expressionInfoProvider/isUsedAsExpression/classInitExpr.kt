@@ -1,5 +1,5 @@
 class Test {
     init {
-        <expr>"value"</expr>
+        <expr>"konstue"</expr>
     }
 }

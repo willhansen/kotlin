@@ -24,12 +24,12 @@ fun box(): String {
 }
 
 fun fff(): Int {
-    val y = 0
+    konst y = 0
     return 0.myalso {
         fun increase(x: Int): Int = x + y
 
-        val values = listOf(1).mymapNotNull { something(::increase, it) }
-        result = values[0]!!
+        konst konstues = listOf(1).mymapNotNull { something(::increase, it) }
+        result = konstues[0]!!
     }
 }
 

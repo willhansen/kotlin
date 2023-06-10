@@ -3,9 +3,9 @@
  * Use of this source code is governed by the Apache 2.0 license that can be found in the license/LICENSE.txt file.
  */
 
-value class A(val i: Int)
-value class B(val a: A)
-value class C(val s: String)
+konstue class A(konst i: Int)
+konstue class B(konst a: A)
+konstue class C(konst s: String)
 
 fun defaultInt(a: Int = 1, aa: Int = 1) = a
 fun defaultA(a: A = A(1), aa: A = A(1)) = a.i

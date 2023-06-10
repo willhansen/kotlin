@@ -46,7 +46,7 @@ digraph jumps_kt {
                 22 [label="Exit when branch result" style="filled" fillcolor=gray];
                 23 [label="Exit when"];
             }
-            24 [label="Variable declaration: lval y: R|kotlin/Int|"];
+            24 [label="Variable declaration: lkonst y: R|kotlin/Int|"];
             25 [label="Access variable R|<local>/y|"];
             26 [label="Function call: R|<local>/y|.R|kotlin/Int.inc|()" style="filled" fillcolor=yellow];
             27 [label="Access variable R|<local>/x|"];
@@ -130,7 +130,7 @@ digraph jumps_kt {
                 53 [label="Exit when branch result"];
                 54 [label="Exit when"];
             }
-            55 [label="Variable declaration: lval y: R|kotlin/Int?|"];
+            55 [label="Variable declaration: lkonst y: R|kotlin/Int?|"];
             56 [label="Access variable R|<local>/y|"];
             57 [label="Function call: R|<local>/y|.R|kotlin/Int.inc<Inapplicable(UNSAFE_CALL): kotlin/Int.inc>#|()" style="filled" fillcolor=yellow];
             58 [label="Exit block"];

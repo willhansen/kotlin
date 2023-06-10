@@ -34,15 +34,15 @@ import javax.xml.parsers.SAXParserFactory
 
 object CompilerOutputParser {
     fun parseCompilerMessagesFromReader(messageCollector: MessageCollector, reader: Reader, collector: OutputItemsCollector) {
-        // Sometimes the compiler doesn't output valid XML.
+        // Sometimes the compiler doesn't output konstid XML.
         // Example: error in command line arguments passed to the compiler.
         // The compiler will print the usage and the SAX parser will break.
         // In this case, we want to read everything from this stream and report it as an IDE error.
-        val stringBuilder = StringBuilder()
-        val wrappingReader = object : Reader() {
+        konst stringBuilder = StringBuilder()
+        konst wrappingReader = object : Reader() {
             @Throws(IOException::class)
             override fun read(cbuf: CharArray, off: Int, len: Int): Int {
-                val read = reader.read(cbuf, off, len)
+                konst read = reader.read(cbuf, off, len)
                 stringBuilder.append(cbuf, off, len)
                 return read
             }
@@ -57,12 +57,12 @@ object CompilerOutputParser {
             }
         }
         try {
-            val factory = SAXParserFactory.newInstance()
+            konst factory = SAXParserFactory.newInstance()
             factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true)
             factory.setFeature("http://xml.org/sax/features/external-general-entities", false)
             factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false)
-            factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false)
-            val parser = factory.newSAXParser()
+            factory.setFeature("http://apache.org/xml/features/nonkonstidating/load-external-dtd", false)
+            konst parser = factory.newSAXParser()
             parser.parse(InputSource(wrappingReader), CompilerOutputSAXHandler(messageCollector, collector))
         }
         catch (e: Throwable) {
@@ -75,7 +75,7 @@ object CompilerOutputParser {
                 reportException(messageCollector, ioException)
             }
 
-            val message = stringBuilder.toString()
+            konst message = stringBuilder.toString()
             reportException(messageCollector, IllegalStateException(message, e))
             messageCollector.report(ERROR, message)
         }
@@ -89,10 +89,10 @@ object CompilerOutputParser {
         }
     }
 
-    private class CompilerOutputSAXHandler(private val messageCollector: MessageCollector, private val collector: OutputItemsCollector) : DefaultHandler() {
+    private class CompilerOutputSAXHandler(private konst messageCollector: MessageCollector, private konst collector: OutputItemsCollector) : DefaultHandler() {
 
-        private val message = StringBuilder()
-        private val tags = Stack<String>()
+        private konst message = StringBuilder()
+        private konst tags = Stack<String>()
         private var path: String? = null
         private var line: Int = 0
         private var column: Int = 0
@@ -112,7 +112,7 @@ object CompilerOutputParser {
         override fun characters(ch: CharArray?, start: Int, length: Int) {
             if (tags.size == 1) {
                 // We're directly inside the root tag: <MESSAGES>
-                val message = String(ch!!, start, length)
+                konst message = String(ch!!, start, length)
                 if (!message.trim { it <= ' ' }.isEmpty()) {
                     messageCollector.report(ERROR, "Unhandled compiler output: $message")
                 }
@@ -128,13 +128,13 @@ object CompilerOutputParser {
                 // We're directly inside the root tag: <MESSAGES>
                 return
             }
-            val qNameLowerCase = qName.lowercase()
+            konst qNameLowerCase = qName.lowercase()
             var category: CompilerMessageSeverity? = CATEGORIES[qNameLowerCase]
             if (category == null) {
                 messageCollector.report(ERROR, "Unknown compiler message tag: $qName")
                 category = INFO
             }
-            val text = message.toString()
+            konst text = message.toString()
 
             if (category == OUTPUT) {
                 reportToCollector(text)
@@ -146,14 +146,14 @@ object CompilerOutputParser {
         }
 
         private fun reportToCollector(text: String) {
-            val output = OutputMessageUtil.parseOutputMessage(text)
+            konst output = OutputMessageUtil.parseOutputMessage(text)
             if (output != null) {
                 collector.add(output.sourceFiles, output.outputFile)
             }
         }
 
         companion object {
-            private val CATEGORIES = mapOf(
+            private konst CATEGORIES = mapOf(
                     "error" to ERROR,
                     "warning" to WARNING,
                     "logging" to LOGGING,
@@ -162,12 +162,12 @@ object CompilerOutputParser {
                     "info" to INFO,
                     "messages" to INFO)
 
-            private fun safeParseInt(value: String?, defaultValue: Int): Int {
-                if (value == null) {
+            private fun safeParseInt(konstue: String?, defaultValue: Int): Int {
+                if (konstue == null) {
                     return defaultValue
                 }
                 try {
-                    return Integer.parseInt(value.trim { it <= ' ' })
+                    return Integer.parseInt(konstue.trim { it <= ' ' })
                 }
                 catch (e: NumberFormatException) {
                     return defaultValue

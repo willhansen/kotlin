@@ -36,11 +36,11 @@ interface ContractParsingDiagnosticsCollector {
     }
 }
 
-class TraceBasedCollector(private val bindingTrace: BindingTrace, mainCall: KtExpression) : ContractParsingDiagnosticsCollector {
+class TraceBasedCollector(private konst bindingTrace: BindingTrace, mainCall: KtExpression) : ContractParsingDiagnosticsCollector {
     constructor(callContext: ContractCallContext) : this(callContext.trace, callContext.contractCallExpression)
 
-    private val reportedErrors: MutableList<Diagnostic> = mutableListOf()
-    private val mainCallReportTarget = (mainCall as? KtCallExpression)?.calleeExpression ?: mainCall
+    private konst reportedErrors: MutableList<Diagnostic> = mutableListOf()
+    private konst mainCallReportTarget = (mainCall as? KtCallExpression)?.calleeExpression ?: mainCall
 
     override fun contractNotAllowed(message: String) {
         reportedErrors += Errors.CONTRACT_NOT_ALLOWED.on(mainCallReportTarget, message)

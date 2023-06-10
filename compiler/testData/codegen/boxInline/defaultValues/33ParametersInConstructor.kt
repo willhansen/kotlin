@@ -20,7 +20,7 @@ class Test(
         p11: String = "11",
         p12: String = "12",
         p13: String = "13",
-        val p14: String = "O".test(),
+        konst p14: String = "O".test(),
         p15: String = "15",
         p16: String = "16",
         p17: String = "17",
@@ -39,13 +39,13 @@ class Test(
         p30: String = "30",
         p31: String = "31",
         p32: String = "32",
-        val p33: String = "K".test()
+        konst p33: String = "K".test()
 )
 // FILE: 2.kt
 
 import test.*
 
 fun box(): String {
-    val test = Test()
+    konst test = Test()
     return test.p14 + test.p33
 }

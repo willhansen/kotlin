@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 abstract class IrWhen : IrExpression() {
     abstract var origin: IrStatementOrigin?
 
-    abstract val branches: MutableList<IrBranch>
+    abstract konst branches: MutableList<IrBranch>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitWhen(this, data)

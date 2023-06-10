@@ -21,27 +21,27 @@ import org.jetbrains.kotlin.builtins.PrimitiveType
 interface JavaType : ListBasedJavaAnnotationOwner
 
 interface JavaArrayType : JavaType {
-    val componentType: JavaType
+    konst componentType: JavaType
 }
 
 interface JavaClassifierType : JavaType {
-    val classifier: JavaClassifier?
-    val typeArguments: List<JavaType?>
+    konst classifier: JavaClassifier?
+    konst typeArguments: List<JavaType?>
 
-    val isRaw: Boolean
+    konst isRaw: Boolean
 
-    val classifierQualifiedName: String
-    val presentableText: String
+    konst classifierQualifiedName: String
+    konst presentableText: String
 }
 
 interface JavaPrimitiveType : JavaType {
     /** `null` means the `void` type. */
-    val type: PrimitiveType?
+    konst type: PrimitiveType?
 }
 
 interface JavaWildcardType : JavaType {
-    val bound: JavaType?
-    val isExtends: Boolean
+    konst bound: JavaType?
+    konst isExtends: Boolean
 }
 
 fun JavaType?.isSuperWildcard(): Boolean = (this as? JavaWildcardType)?.let { it.bound != null && !it.isExtends } ?: false

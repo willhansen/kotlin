@@ -12,22 +12,22 @@ annotation class ImplicitIntegerCoercion
 import kotlin.internal.ImplicitIntegerCoercion
 
 @ImplicitIntegerCoercion
-const val IMPLICIT_INT = 255
+const konst IMPLICIT_INT = 255
 
 @ImplicitIntegerCoercion
-const val EXPLICIT_INT: Int = 255
+const konst EXPLICIT_INT: Int = 255
 
 @ImplicitIntegerCoercion
-const val LONG_CONST = 255L
+const konst LONG_CONST = 255L
 
 @ImplicitIntegerCoercion
-val NON_CONST = 255
+konst NON_CONST = 255
 
 @ImplicitIntegerCoercion
-const val BIGGER_THAN_UBYTE = 256
+const konst BIGGER_THAN_UBYTE = 256
 
 @ImplicitIntegerCoercion
-const val UINT_CONST = 42u
+const konst UINT_CONST = 42u
 
 fun takeUByte(@ImplicitIntegerCoercion u: UByte) {}
 fun takeUShort(@ImplicitIntegerCoercion u: UShort) {}

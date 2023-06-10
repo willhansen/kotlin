@@ -33,16 +33,16 @@ import org.jetbrains.kotlin.contracts.description.expressions.VariableReference
  *  - if [effect] wasn't observed, we *can't* reason that [condition] is false
  *  - if [condition] is true, we *can't* reason that [effect] will be observed.
  */
-class ConditionalEffectDeclaration(val effect: EffectDeclaration, val condition: BooleanExpression) : EffectDeclaration {
+class ConditionalEffectDeclaration(konst effect: EffectDeclaration, konst condition: BooleanExpression) : EffectDeclaration {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitConditionalEffectDeclaration(this, data)
 }
 
 
 /**
- * Effect which specifies that subroutine returns some particular value
+ * Effect which specifies that subroutine returns some particular konstue
  */
-class ReturnsEffectDeclaration(val value: ConstantReference) : EffectDeclaration {
+class ReturnsEffectDeclaration(konst konstue: ConstantReference) : EffectDeclaration {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitReturnsEffectDeclaration(this, data)
 
@@ -53,7 +53,7 @@ class ReturnsEffectDeclaration(val value: ConstantReference) : EffectDeclaration
  * Effect which specifies, that during execution of subroutine, callable [variableReference] will be invoked
  * [kind] amount of times, and will never be invoked after subroutine call is finished.
  */
-class CallsEffectDeclaration(val variableReference: VariableReference, val kind: EventOccurrencesRange) : EffectDeclaration {
+class CallsEffectDeclaration(konst variableReference: VariableReference, konst kind: EventOccurrencesRange) : EffectDeclaration {
     override fun <R, D> accept(contractDescriptionVisitor: ContractDescriptionVisitor<R, D>, data: D): R =
         contractDescriptionVisitor.visitCallsEffectDeclaration(this, data)
 }

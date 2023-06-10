@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.types.model.CaptureStatus
 import org.jetbrains.kotlin.types.model.CapturedTypeConstructorMarker
 import org.jetbrains.kotlin.types.model.CapturedTypeMarker
 
-abstract class IrTypeBase(val kotlinType: KotlinType?) : IrType(), IrTypeProjection {
-    override val type: IrType get() = this
+abstract class IrTypeBase(konst kotlinType: KotlinType?) : IrType(), IrTypeProjection {
+    override konst type: IrType get() = this
 }
 
 class IrErrorTypeImpl(
     kotlinType: KotlinType?,
-    override val annotations: List<IrConstructorCall>,
-    override val variance: Variance,
+    override konst annotations: List<IrConstructorCall>,
+    override konst variance: Variance,
     isMarkedNullable: Boolean = false
 ) : IrErrorType(kotlinType, IrErrorClassImpl.symbol, isMarkedNullable) {
     override fun equals(other: Any?): Boolean = other is IrErrorTypeImpl
@@ -33,15 +33,15 @@ class IrErrorTypeImpl(
 
 class IrDynamicTypeImpl(
     kotlinType: KotlinType?,
-    override val annotations: List<IrConstructorCall>,
-    override val variance: Variance,
+    override konst annotations: List<IrConstructorCall>,
+    override konst variance: Variance,
 ) : IrDynamicType(kotlinType) {
     override fun equals(other: Any?): Boolean = other is IrDynamicTypeImpl
 
     override fun hashCode(): Int = IrDynamicTypeImpl::class.java.hashCode()
 }
 
-val IrType.originalKotlinType: KotlinType?
+konst IrType.originalKotlinType: KotlinType?
     get() = (this as? IrTypeBase)?.kotlinType
 
 object IrStarProjectionImpl : IrStarProjection {
@@ -61,7 +61,7 @@ object IrStarProjectionImpl : IrStarProjection {
  * especially in Kotlin/JS where function return types are not present in the resulting binary files.
  */
 object IrUninitializedType : IrType() {
-    override val annotations: List<IrConstructorCall> = emptyList()
+    override konst annotations: List<IrConstructorCall> = emptyList()
 
     override fun equals(other: Any?): Boolean = this === other
 
@@ -75,34 +75,34 @@ class ReturnTypeIsNotInitializedException(function: IrFunction) : IllegalStateEx
 
 // Please note this type is not denotable which means it could only exist inside type system
 class IrCapturedType(
-    val captureStatus: CaptureStatus,
-    val lowerType: IrType?,
+    konst captureStatus: CaptureStatus,
+    konst lowerType: IrType?,
     projection: IrTypeArgument,
     typeParameter: IrTypeParameter
 ) : IrSimpleType(null), CapturedTypeMarker {
 
-    override val variance: Variance
+    override konst variance: Variance
         get() = TODO("Not yet implemented")
 
-    class Constructor(val argument: IrTypeArgument, val typeParameter: IrTypeParameter) :
+    class Constructor(konst argument: IrTypeArgument, konst typeParameter: IrTypeParameter) :
         CapturedTypeConstructorMarker {
 
         private var _superTypes: List<IrType> = emptyList()
 
-        val superTypes: List<IrType> get() = _superTypes
+        konst superTypes: List<IrType> get() = _superTypes
 
         fun initSuperTypes(superTypes: List<IrType>) {
             _superTypes = superTypes
         }
     }
 
-    val constructor: Constructor = Constructor(projection, typeParameter)
+    konst constructor: Constructor = Constructor(projection, typeParameter)
 
-    override val classifier: IrClassifierSymbol get() = error("Captured Type does not have a classifier")
-    override val arguments: List<IrTypeArgument> get() = emptyList()
-    override val abbreviation: IrTypeAbbreviation? get () = null
-    override val nullability: SimpleTypeNullability get() = SimpleTypeNullability.DEFINITELY_NOT_NULL
-    override val annotations: List<IrConstructorCall> get() = emptyList()
+    override konst classifier: IrClassifierSymbol get() = error("Captured Type does not have a classifier")
+    override konst arguments: List<IrTypeArgument> get() = emptyList()
+    override konst abbreviation: IrTypeAbbreviation? get () = null
+    override konst nullability: SimpleTypeNullability get() = SimpleTypeNullability.DEFINITELY_NOT_NULL
+    override konst annotations: List<IrConstructorCall> get() = emptyList()
 
     override fun equals(other: Any?): Boolean {
         return other is IrCapturedType

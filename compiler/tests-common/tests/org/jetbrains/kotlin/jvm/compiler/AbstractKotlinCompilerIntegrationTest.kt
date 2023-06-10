@@ -33,9 +33,9 @@ import java.util.jar.Manifest
 import java.util.regex.Pattern
 
 abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
-    protected abstract val testDataPath: String
+    protected abstract konst testDataPath: String
 
-    protected val testDataDirectory: File
+    protected konst testDataDirectory: File
         get() = File(testDataPath, getTestName(true))
 
     protected fun getTestDataFileWithExtension(extension: String): File {
@@ -62,16 +62,16 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
         manifest: Manifest? = null,
         extraClassPath: List<File> = emptyList()
     ): File {
-        val sourceDir = File(testDataDirectory, libraryName)
-        val javaFiles = FileUtil.findFilesByMask(JAVA_FILES, sourceDir)
-        val kotlinFiles = FileUtil.findFilesByMask(KOTLIN_FILES, sourceDir)
+        konst sourceDir = File(testDataDirectory, libraryName)
+        konst javaFiles = FileUtil.findFilesByMask(JAVA_FILES, sourceDir)
+        konst kotlinFiles = FileUtil.findFilesByMask(KOTLIN_FILES, sourceDir)
         assert(javaFiles.isNotEmpty() || kotlinFiles.isNotEmpty()) { "There should be either .kt or .java files in the directory" }
 
-        val isJar = destination.name.endsWith(".jar")
+        konst isJar = destination.name.endsWith(".jar")
 
-        val outputDir = if (isJar) File(tmpdir, "output-$libraryName") else destination
+        konst outputDir = if (isJar) File(tmpdir, "output-$libraryName") else destination
         if (kotlinFiles.isNotEmpty()) {
-            val output = compileKotlin(libraryName, outputDir, extraClassPath, K2JVMCompiler(), additionalOptions, expectedFileName = null)
+            konst output = compileKotlin(libraryName, outputDir, extraClassPath, K2JVMCompiler(), additionalOptions, expectedFileName = null)
             checkKotlinOutput(normalizeOutput(output))
         }
 
@@ -84,7 +84,7 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
 
         if (isJar) {
             destination.delete()
-            val stream =
+            konst stream =
                 if (manifest != null) JarOutputStream(destination.outputStream(), manifest)
                 else JarOutputStream(destination.outputStream())
             stream.use { jar ->
@@ -105,8 +105,8 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
         additionalOptions: List<String> = emptyList(),
         checkKotlinOutput: (String) -> Unit = { actual -> assertEquals(normalizeOutput("" to ExitCode.OK), actual) }
     ): File {
-        val destination = File(tmpdir, "$libraryName.js")
-        val output = compileKotlin(
+        konst destination = File(tmpdir, "$libraryName.js")
+        konst output = compileKotlin(
             libraryName, destination, compiler = K2JSCompiler(), additionalOptions = additionalOptions, expectedFileName = null
         )
         checkKotlinOutput(normalizeOutput(output))
@@ -123,8 +123,8 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
         additionalOptions: List<String> = emptyList(),
         checkKotlinOutput: (String) -> Unit = { actual -> assertEquals(normalizeOutput("" to ExitCode.OK), actual) }
     ): File {
-        val destination = File(tmpdir, libraryName)
-        val output = compileKotlin(
+        konst destination = File(tmpdir, libraryName)
+        konst output = compileKotlin(
             libraryName, destination, compiler = K2MetadataCompiler(), additionalOptions = additionalOptions, expectedFileName = null
         )
         checkKotlinOutput(normalizeOutput(output))
@@ -151,8 +151,8 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
         expectedFileName: String? = "output.txt",
         additionalSources: List<String> = emptyList(),
     ): Pair<String, ExitCode> {
-        val args = mutableListOf<String>()
-        val sourceFile = File(testDataDirectory, fileName)
+        konst args = mutableListOf<String>()
+        konst sourceFile = File(testDataDirectory, fileName)
         assert(sourceFile.exists()) { "Source file does not exist: ${sourceFile.absolutePath}" }
         args.add(sourceFile.path)
 
@@ -180,7 +180,7 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
 
         args.addAll(additionalOptions)
 
-        val result = AbstractCliTest.executeCompilerGrabOutput(compiler, args)
+        konst result = AbstractCliTest.executeCompilerGrabOutput(compiler, args)
         if (expectedFileName != null) {
             KotlinTestUtils.assertEqualsToFile(File(testDataDirectory, expectedFileName), normalizeOutput(result))
         }
@@ -188,9 +188,9 @@ abstract class AbstractKotlinCompilerIntegrationTest : TestCaseWithTmpdir() {
     }
 
     companion object {
-        private val KOTLIN_FILES = Pattern.compile(".*\\.kt$")
+        private konst KOTLIN_FILES = Pattern.compile(".*\\.kt$")
 
         @JvmStatic
-        protected val JAVA_FILES = Pattern.compile(".*\\.java$")!!
+        protected konst JAVA_FILES = Pattern.compile(".*\\.java$")!!
     }
 }

@@ -7,13 +7,13 @@ package codegen.delegatedProperty.map
 
 import kotlin.test.*
 
-class User(val map: Map<String, Any?>) {
-    val name: String by map
-    val age: Int     by map
+class User(konst map: Map<String, Any?>) {
+    konst name: String by map
+    konst age: Int     by map
 }
 
 @Test fun runTest() {
-    val user = User(mapOf(
+    konst user = User(mapOf(
             "name" to "John Doe",
             "age"  to 25
     ))

@@ -30,21 +30,21 @@ import org.jetbrains.kotlin.types.TypeProjectionImpl
 
 class JavaClassOnCompanionChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
         if (descriptor !is PropertyDescriptor || descriptor.name.asString() != "javaClass") return
 
-        val container = descriptor.containingDeclaration
+        konst container = descriptor.containingDeclaration
         if (container !is PackageFragmentDescriptor || container.fqName.asString() != "kotlin.jvm") return
 
-        val actualType = descriptor.type
+        konst actualType = descriptor.type
 
-        val companionObject = actualType.arguments.singleOrNull()?.type?.constructor?.declarationDescriptor as? ClassDescriptor ?: return
+        konst companionObject = actualType.arguments.singleOrNull()?.type?.constructor?.declarationDescriptor as? ClassDescriptor ?: return
         if (companionObject.isCompanionObject) {
-            val containingClass = companionObject.containingDeclaration as ClassDescriptor
-            val javaLangClass = actualType.constructor.declarationDescriptor as? ClassDescriptor ?: return
+            konst containingClass = companionObject.containingDeclaration as ClassDescriptor
+            konst javaLangClass = actualType.constructor.declarationDescriptor as? ClassDescriptor ?: return
 
-            val arguments = listOf(TypeProjectionImpl(containingClass.defaultType))
-            val expectedType = KotlinTypeFactory.simpleType(
+            konst arguments = listOf(TypeProjectionImpl(containingClass.defaultType))
+            konst expectedType = KotlinTypeFactory.simpleType(
                 TypeAttributes.Empty, javaLangClass.typeConstructor, arguments,
                 actualType.isMarkedNullable)
             context.trace.report(ErrorsJvm.JAVA_CLASS_ON_COMPANION.on(reportOn, actualType, expectedType))

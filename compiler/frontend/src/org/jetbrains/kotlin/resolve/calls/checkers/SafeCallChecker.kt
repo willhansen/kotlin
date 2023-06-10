@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.resolve.calls.tasks.ExplicitReceiverKind
 
 class SafeCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val operationNode = resolvedCall.call.callOperationNode ?: return
+        konst operationNode = resolvedCall.call.callOperationNode ?: return
 
         if (operationNode.elementType == KtTokens.SAFE_ACCESS &&
             resolvedCall.explicitReceiverKind == ExplicitReceiverKind.NO_EXPLICIT_RECEIVER) {

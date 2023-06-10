@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.fir.declarations.utils.classId
 import org.jetbrains.kotlin.name.ClassId
 
 internal class LLFirSealedClassInheritorsProcessorFactoryForTests : FirSealedClassInheritorsProcessorFactory() {
-    private val inheritorsByModule = mutableMapOf<KtModule, Map<ClassId, List<ClassId>>>()
+    private konst inheritorsByModule = mutableMapOf<KtModule, Map<ClassId, List<ClassId>>>()
 
     fun registerInheritors(ktModule: KtModule, inheritors: Map<ClassId, List<ClassId>>) {
         inheritorsByModule[ktModule] = inheritors
@@ -26,11 +26,11 @@ internal class LLFirSealedClassInheritorsProcessorFactoryForTests : FirSealedCla
 }
 
 private class SealedClassInheritorsProviderForTests(
-    private val inheritorsByModule: Map<KtModule, Map<ClassId, List<ClassId>>>
+    private konst inheritorsByModule: Map<KtModule, Map<ClassId, List<ClassId>>>
 ) : SealedClassInheritorsProvider() {
     override fun getSealedClassInheritors(firClass: FirRegularClass): List<ClassId> {
-        val ktModule = firClass.llFirModuleData.ktModule
-        val inheritorsForModuleMap = inheritorsByModule.getValue(ktModule)
+        konst ktModule = firClass.llFirModuleData.ktModule
+        konst inheritorsForModuleMap = inheritorsByModule.getValue(ktModule)
         return inheritorsForModuleMap[firClass.classId].orEmpty()
     }
 

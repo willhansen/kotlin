@@ -17,7 +17,7 @@ public fun CliCommonizer(classLoader: ClassLoader): CliCommonizer {
     return CliCommonizer(CommonizerClassLoaderExecutor(classLoader))
 }
 
-public class CliCommonizer(private val executor: Executor) : NativeDistributionCommonizer, CInteropCommonizer {
+public class CliCommonizer(private konst executor: Executor) : NativeDistributionCommonizer, CInteropCommonizer {
     public fun interface Executor {
         public operator fun invoke(arguments: List<String>)
     }
@@ -32,7 +32,7 @@ public class CliCommonizer(private val executor: Executor) : NativeDistributionC
         additionalSettings: List<AdditionalCommonizerSetting<*>>,
     ) {
         if (inputLibraries.isEmpty()) return
-        val arguments = mutableListOf<String>().apply {
+        konst arguments = mutableListOf<String>().apply {
             add("native-klib-commonize")
             add("-$NATIVE_DISTRIBUTION_PATH_ALIAS"); add(konanHome.absolutePath)
             add("-$INPUT_LIBRARIES_ALIAS"); add(inputLibraries.joinToString(";") { it.absolutePath })
@@ -56,7 +56,7 @@ public class CliCommonizer(private val executor: Executor) : NativeDistributionC
         logLevel: CommonizerLogLevel,
         additionalSettings: List<AdditionalCommonizerSetting<*>>,
     ) {
-        val arguments = mutableListOf<String>().apply {
+        konst arguments = mutableListOf<String>().apply {
             add("native-dist-commonize")
             add("-$NATIVE_DISTRIBUTION_PATH_ALIAS"); add(konanHome.absolutePath)
             add("-$OUTPUT_PATH_ALIAS"); add(outputDirectory.absolutePath)
@@ -71,16 +71,16 @@ public class CliCommonizer(private val executor: Executor) : NativeDistributionC
     }
 }
 
-private class CommonizerClassLoaderExecutor(private val commonizerClassLoader: ClassLoader) : CliCommonizer.Executor {
+private class CommonizerClassLoaderExecutor(private konst commonizerClassLoader: ClassLoader) : CliCommonizer.Executor {
     companion object {
-        private const val commonizerMainClass = "org.jetbrains.kotlin.commonizer.cli.CommonizerCLI"
-        private const val commonizerMainFunction = "main"
+        private const konst commonizerMainClass = "org.jetbrains.kotlin.commonizer.cli.CommonizerCLI"
+        private const konst commonizerMainFunction = "main"
     }
 
     @Throws(Throwable::class)
     override fun invoke(arguments: List<String>) {
-        val commonizerMainClass = commonizerClassLoader.loadClass(commonizerMainClass)
-        val commonizerMainMethod = commonizerMainClass.methods.singleOrNull { it.name == commonizerMainFunction }
+        konst commonizerMainClass = commonizerClassLoader.loadClass(commonizerMainClass)
+        konst commonizerMainMethod = commonizerMainClass.methods.singleOrNull { it.name == commonizerMainFunction }
             ?: throw IllegalArgumentException(
                 "Missing or conflicting $commonizerMainFunction function in " +
                         "Class ${commonizerMainClass.name} from ClassLoader $commonizerClassLoader"

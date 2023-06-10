@@ -24,7 +24,7 @@ fun box(): String {
     assertEquals("java.lang.String", lambdaShouldBeReified<String>())
     assertEquals("java.lang.Integer", lambdaShouldBeReified<Int>())
 
-    val x: A = AFactory<String, Int>()
+    konst x: A = AFactory<String, Int>()
 
     assertEquals("java.lang.String", x.f())
     assertEquals("java.lang.Integer", x.g())

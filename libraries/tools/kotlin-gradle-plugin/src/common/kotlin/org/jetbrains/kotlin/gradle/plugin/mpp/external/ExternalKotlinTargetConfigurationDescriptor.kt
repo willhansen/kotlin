@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.gradle.ExternalKotlinTargetApi
 
 @ExternalKotlinTargetApi
 interface ExternalKotlinTargetConfigurationDescriptor<T : DecoratedExternalKotlinTarget> {
-    val configure: ((target: T, configuration: Configuration) -> Unit)?
+    konst configure: ((target: T, configuration: Configuration) -> Unit)?
 }
 
 @ExternalKotlinTargetApi
@@ -19,7 +19,7 @@ class ExternalKotlinTargetConfigurationDescriptorBuilder<T : DecoratedExternalKo
     internal var configure: ((target: T, configuration: Configuration) -> Unit)? = null
 
     fun configure(action: (target: T, configuration: Configuration) -> Unit) = apply {
-        val configure = this.configure
+        konst configure = this.configure
         if (configure == null) this.configure = action
         else this.configure = { target, configuration ->
             configure(target, configuration)
@@ -33,5 +33,5 @@ class ExternalKotlinTargetConfigurationDescriptorBuilder<T : DecoratedExternalKo
 }
 
 private data class ExternalKotlinTargetConfigurationDescriptorImpl<T : DecoratedExternalKotlinTarget>(
-    override val configure: ((target: T, configuration: Configuration) -> Unit)?
+    override konst configure: ((target: T, configuration: Configuration) -> Unit)?
 ) : ExternalKotlinTargetConfigurationDescriptor<T>

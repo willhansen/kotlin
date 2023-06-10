@@ -31,7 +31,7 @@ object FirDelegationInInterfaceSyntaxChecker : FirDeclarationSyntaxChecker<FirRe
         reporter: DiagnosticReporter
     ) {
         for (superTypeRef in element.superTypeRefs) {
-            val superSource = superTypeRef.source ?: continue
+            konst superSource = superTypeRef.source ?: continue
             if (superSource.psi?.parent is KtDelegatedSuperTypeEntry) {
                 reporter.reportOn(superSource, FirErrors.DELEGATION_IN_INTERFACE, context)
             }
@@ -45,7 +45,7 @@ object FirDelegationInInterfaceSyntaxChecker : FirDeclarationSyntaxChecker<FirRe
         reporter: DiagnosticReporter
     ) {
         for (superTypeRef in element.superTypeRefs) {
-            val superSource = superTypeRef.source ?: continue
+            konst superSource = superTypeRef.source ?: continue
             if (superSource.treeStructure.getParent(superSource.lighterASTNode)?.tokenType == KtNodeTypes.DELEGATED_SUPER_TYPE_ENTRY) {
                 reporter.reportOn(superSource, FirErrors.DELEGATION_IN_INTERFACE, context)
             }

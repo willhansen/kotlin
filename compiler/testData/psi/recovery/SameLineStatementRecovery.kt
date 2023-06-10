@@ -1,10 +1,10 @@
 fun f1() {
-    val a = 12 if (a == 12) {
+    konst a = 12 if (a == 12) {
     }
 }
 
 fun f2() {
-    val a = 12 for (a in array(12, 13)) {
+    konst a = 12 for (a in array(12, 13)) {
     }
 }
 
@@ -13,12 +13,12 @@ fun f3() {
     } class A {
     }
 
-    val b2 : Int annotation class Annotation
+    konst b2 : Int annotation class Annotation
 }
 
 fun f4() {
-    val a = 12 val b = 12
-    val a1 = 12val b1 = 12
+    konst a = 12 konst b = 12
+    konst a1 = 12konst b1 = 12
 }
 
 fun f6() {
@@ -39,24 +39,24 @@ fun f10() {
 }
 
 fun f11() {
-    val a1: Int as 12
-    val a2: Int in 12
-    val a3: Int !in 12
-    val a4: Int is 12
-    val a5: Int !is 12
-    val a6: Int as 12
-    val a7: Int as? 12
+    konst a1: Int as 12
+    konst a2: Int in 12
+    konst a3: Int !in 12
+    konst a4: Int is 12
+    konst a5: Int !is 12
+    konst a6: Int as 12
+    konst a7: Int as? 12
 }
 
 fun f12() {
-    val a = 12 return
+    konst a = 12 return
 }
 
-val g: Int get() { return 12 }
+konst g: Int get() { return 12 }
 fun f13() {
-    val l: Int get() { return 12 }
+    konst l: Int get() { return 12 }
 }
 
 fun f13() {
-    val l: Int by Some
+    konst l: Int by Some
 }

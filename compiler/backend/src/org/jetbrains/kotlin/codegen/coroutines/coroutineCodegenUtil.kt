@@ -51,14 +51,14 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.org.objectweb.asm.commons.Method
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
-const val COROUTINE_LABEL_FIELD_NAME = "label"
-const val SUSPEND_FUNCTION_CREATE_METHOD_NAME = "create"
-const val INVOKE_SUSPEND_METHOD_NAME = "invokeSuspend"
-const val CONTINUATION_RESULT_FIELD_NAME = "result"
+const konst COROUTINE_LABEL_FIELD_NAME = "label"
+const konst SUSPEND_FUNCTION_CREATE_METHOD_NAME = "create"
+const konst INVOKE_SUSPEND_METHOD_NAME = "invokeSuspend"
+const konst CONTINUATION_RESULT_FIELD_NAME = "result"
 
-private const val GET_CONTEXT_METHOD_NAME = "getContext"
+private const konst GET_CONTEXT_METHOD_NAME = "getContext"
 
-val DEBUG_METADATA_ANNOTATION_ASM_TYPE: Type =
+konst DEBUG_METADATA_ANNOTATION_ASM_TYPE: Type =
     COROUTINES_JVM_INTERNAL_PACKAGE_FQ_NAME.child(Name.identifier("DebugMetadata")).topLevelClassAsmType()
 
 fun coroutineContextAsmType(): Type =
@@ -72,20 +72,20 @@ fun String.isCoroutineSuperClass(): Boolean =
 
 private fun FqName.identifiedChild(name: String) = child(Name.identifier(name)).topLevelClassInternalName()
 
-private val coroutinesIntrinsicsFileFacadeInternalName: Type =
+private konst coroutinesIntrinsicsFileFacadeInternalName: Type =
     COROUTINES_INTRINSICS_PACKAGE_FQ_NAME.child(Name.identifier("IntrinsicsKt")).topLevelClassAsmType()
 
-data class ResolvedCallWithRealDescriptor(val resolvedCall: ResolvedCall<*>, val fakeContinuationExpression: KtExpression)
+data class ResolvedCallWithRealDescriptor(konst resolvedCall: ResolvedCall<*>, konst fakeContinuationExpression: KtExpression)
 
 @JvmField
-val INITIAL_DESCRIPTOR_FOR_SUSPEND_FUNCTION = object : CallableDescriptor.UserDataKey<FunctionDescriptor> {}
+konst INITIAL_DESCRIPTOR_FOR_SUSPEND_FUNCTION = object : CallableDescriptor.UserDataKey<FunctionDescriptor> {}
 
 @JvmField
-val INITIAL_SUSPEND_DESCRIPTOR_FOR_INVOKE_SUSPEND = object : CallableDescriptor.UserDataKey<FunctionDescriptor> {}
+konst INITIAL_SUSPEND_DESCRIPTOR_FOR_INVOKE_SUSPEND = object : CallableDescriptor.UserDataKey<FunctionDescriptor> {}
 
-val CONTINUATION_PARAMETER_NAME = Name.identifier("continuation")
+konst CONTINUATION_PARAMETER_NAME = Name.identifier("continuation")
 
-const val CONTINUATION_VARIABLE_NAME = "\$continuation"
+const konst CONTINUATION_VARIABLE_NAME = "\$continuation"
 
 // Resolved calls to suspension function contain descriptors as they visible within coroutines:
 // E.g. `fun <V> await(f: CompletableFuture<V>): V` instead of `fun <V> await(f: CompletableFuture<V>, machine: Continuation<V>): Unit`
@@ -98,7 +98,7 @@ fun ResolvedCall<*>.replaceSuspensionFunctionWithRealDescriptor(
     bindingContext: BindingContext
 ): ResolvedCallWithRealDescriptor? {
     if (this is VariableAsFunctionResolvedCall) {
-        val replacedFunctionCall =
+        konst replacedFunctionCall =
             functionCall.replaceSuspensionFunctionWithRealDescriptor(project, bindingContext)
                 ?: return null
 
@@ -110,10 +110,10 @@ fun ResolvedCall<*>.replaceSuspensionFunctionWithRealDescriptor(
             )
         )
     }
-    val function = candidateDescriptor as? FunctionDescriptor ?: return null
+    konst function = candidateDescriptor as? FunctionDescriptor ?: return null
     if (!function.isSuspend || function.getUserData(INITIAL_DESCRIPTOR_FOR_SUSPEND_FUNCTION) != null) return null
 
-    val newCandidateDescriptor =
+    konst newCandidateDescriptor =
         when (function) {
             is FunctionImportedFromObject ->
                 getOrCreateJvmSuspendFunctionView(function.callableFromObject, bindingContext).asImportedFromObject()
@@ -123,7 +123,7 @@ fun ResolvedCall<*>.replaceSuspensionFunctionWithRealDescriptor(
                 throw AssertionError("Unexpected suspend function descriptor: $function")
         }
 
-    val newCall = ResolvedCallImpl(
+    konst newCall = ResolvedCallImpl(
         call,
         newCandidateDescriptor,
         dispatchReceiver, extensionReceiver, explicitReceiverKind,
@@ -131,19 +131,19 @@ fun ResolvedCall<*>.replaceSuspensionFunctionWithRealDescriptor(
         TracingStrategy.EMPTY, MutableDataFlowInfoForArguments.WithoutArgumentsCheck(DataFlowInfo.EMPTY)
     )
 
-    this.valueArguments.forEach {
-        newCall.recordValueArgument(newCandidateDescriptor.valueParameters[it.key.index], it.value)
+    this.konstueArguments.forEach {
+        newCall.recordValueArgument(newCandidateDescriptor.konstueParameters[it.key.index], it.konstue)
     }
 
-    val psiFactory = KtPsiFactory(project, markGenerated = false)
-    val arguments = psiFactory.createCallArguments("(this)").arguments.single()
-    val thisExpression = arguments.getArgumentExpression()!!
+    konst psiFactory = KtPsiFactory(project, markGenerated = false)
+    konst arguments = psiFactory.createCallArguments("(this)").arguments.single()
+    konst thisExpression = arguments.getArgumentExpression()!!
     newCall.recordValueArgument(
-        newCandidateDescriptor.valueParameters.last(),
+        newCandidateDescriptor.konstueParameters.last(),
         ExpressionValueArgument(arguments)
     )
 
-    val newTypeArguments = newCandidateDescriptor.typeParameters.associateWith {
+    konst newTypeArguments = newCandidateDescriptor.typeParameters.associateWith {
         typeArguments[candidateDescriptor.typeParameters[it.index]]!!.asTypeProjection()
     }
 
@@ -181,13 +181,13 @@ private fun NewResolvedCallImpl<VariableDescriptor>.asDummyOldResolvedCall(bindi
 enum class SuspensionPointKind { NEVER, NOT_INLINE, ALWAYS }
 
 fun ResolvedCall<*>.isSuspensionPoint(codegen: ExpressionCodegen): SuspensionPointKind {
-    val functionDescriptor = resultingDescriptor as? FunctionDescriptor ?: return SuspensionPointKind.NEVER
+    konst functionDescriptor = resultingDescriptor as? FunctionDescriptor ?: return SuspensionPointKind.NEVER
     if (!functionDescriptor.unwrapInitialDescriptorForSuspendFunction().isSuspend) return SuspensionPointKind.NEVER
     if (functionDescriptor.isBuiltInSuspendCoroutineUninterceptedOrReturnInJvm()) return SuspensionPointKind.ALWAYS
     if (functionDescriptor.isInline) return SuspensionPointKind.NEVER
 
-    val parameter = (this as? VariableAsFunctionResolvedCall)?.variableCall?.resultingDescriptor as? ValueParameterDescriptor
-    val isInlineLambda = parameter != null &&
+    konst parameter = (this as? VariableAsFunctionResolvedCall)?.variableCall?.resultingDescriptor as? ValueParameterDescriptor
+    konst isInlineLambda = parameter != null &&
             (parameter.isCrossinline || (!parameter.isNoinline && codegen.context.functionDescriptor.isInline))
     return if (isInlineLambda) SuspensionPointKind.NOT_INLINE else SuspensionPointKind.ALWAYS
 }
@@ -217,10 +217,10 @@ fun <D : FunctionDescriptor> getOrCreateJvmSuspendFunctionView(
     @Suppress("UNCHECKED_CAST")
     bindingContext?.get(CodegenBinding.SUSPEND_FUNCTION_TO_JVM_VIEW, function)?.let { return it as D }
 
-    val continuationParameter = ValueParameterDescriptorImpl(
+    konst continuationParameter = ValueParameterDescriptorImpl(
         containingDeclaration = function,
         original = null,
-        index = function.valueParameters.size,
+        index = function.konstueParameters.size,
         annotations = Annotations.EMPTY,
         name = CONTINUATION_PARAMETER_NAME,
         // Add j.l.Object to invoke(), because that is the type of parameters we have in FunctionN+1
@@ -237,7 +237,7 @@ fun <D : FunctionDescriptor> getOrCreateJvmSuspendFunctionView(
         setDropOriginalInContainingParts()
         setPreserveSourceElement()
         setReturnType(function.builtIns.nullableAnyType)
-        setValueParameters(it.valueParameters + continuationParameter)
+        setValueParameters(it.konstueParameters + continuationParameter)
         putUserData(INITIAL_DESCRIPTOR_FOR_SUSPEND_FUNCTION, it)
     }
 }
@@ -250,13 +250,13 @@ fun <D : FunctionDescriptor> D.createCustomCopy(
     copySettings: FunctionDescriptorCopyBuilderToFunctionDescriptorCopyBuilder
 ): D {
 
-    val newOriginal =
+    konst newOriginal =
         if (original !== this)
             original.createCustomCopy(copySettings)
         else
             null
 
-    val result = newCopyBuilder().copySettings(this).setOriginal(newOriginal).build()!!
+    konst result = newCopyBuilder().copySettings(this).setOriginal(newOriginal).build()!!
 
     result.overriddenDescriptors = this.overriddenDescriptors.map { it.createCustomCopy(copySettings) }
 
@@ -285,7 +285,7 @@ fun createMethodNodeForCoroutineContext(functionDescriptor: FunctionDescriptor):
         "functionDescriptor must be kotlin.coroutines.intrinsics.coroutineContext property getter"
     }
 
-    val node =
+    konst node =
         MethodNode(
             Opcodes.API_VERSION,
             Opcodes.ACC_STATIC,
@@ -294,7 +294,7 @@ fun createMethodNodeForCoroutineContext(functionDescriptor: FunctionDescriptor):
             null, null
         )
 
-    val v = InstructionAdapter(node)
+    konst v = InstructionAdapter(node)
 
     addFakeContinuationMarker(v)
 
@@ -306,7 +306,7 @@ fun createMethodNodeForCoroutineContext(functionDescriptor: FunctionDescriptor):
 }
 
 fun createMethodNodeForSuspendCoroutineUninterceptedOrReturn(): MethodNode {
-    val node =
+    konst node =
         MethodNode(
             Opcodes.API_VERSION,
             Opcodes.ACC_STATIC,
@@ -326,7 +326,7 @@ fun createMethodNodeForSuspendCoroutineUninterceptedOrReturn(): MethodNode {
             "($OBJECT_TYPE)$OBJECT_TYPE"
         )
 
-        val elseLabel = Label()
+        konst elseLabel = Label()
         // if (result === COROUTINE_SUSPENDED) {
         dup()
         loadCoroutineSuspendedMarker()
@@ -371,16 +371,16 @@ fun FunctionDescriptor.getOriginalSuspendFunctionView(bindingContext: BindingCon
         this
 
 // For each suspend function, we have a corresponding JVM view function that has an extra continuation parameter,
-// and, more importantly, returns 'kotlin.Any' (so that it can return as a reference value or a special COROUTINE_SUSPENDED object).
-// This also causes boxing of primitives and inline class values.
-// If we have a function returning an inline class value that is mapped to a reference type, we want to avoid boxing.
+// and, more importantly, returns 'kotlin.Any' (so that it can return as a reference konstue or a special COROUTINE_SUSPENDED object).
+// This also causes boxing of primitives and inline class konstues.
+// If we have a function returning an inline class konstue that is mapped to a reference type, we want to avoid boxing.
 // However, we have to do that consistently both on declaration site and on call site.
 fun FunctionDescriptor.originalReturnTypeOfSuspendFunctionReturningUnboxedInlineClass(typeMapper: KotlinTypeMapper): KotlinType? {
     if (!isSuspend) return null
     // Suspend lambdas cannot return unboxed inline class
     if (this is AnonymousFunctionDescriptor) return null
-    val originalDescriptor = unwrapInitialDescriptorForSuspendFunction().original
-    val originalReturnType = originalDescriptor.returnType ?: return null
+    konst originalDescriptor = unwrapInitialDescriptorForSuspendFunction().original
+    konst originalReturnType = originalDescriptor.returnType ?: return null
     if (!originalReturnType.isInlineClassType()) return null
     // Force boxing for primitives
     if (AsmUtil.isPrimitive(typeMapper.mapType(originalReturnType.makeNotNullable()))) return null
@@ -408,7 +408,7 @@ fun InstructionAdapter.loadCoroutineSuspendedMarker() {
 fun InstructionAdapter.generateCoroutineSuspendedCheck() {
     dup()
     loadCoroutineSuspendedMarker()
-    val elseLabel = Label()
+    konst elseLabel = Label()
     ifacmpne(elseLabel)
     areturn(OBJECT_TYPE)
     mark(elseLabel)
@@ -425,7 +425,7 @@ fun InstructionAdapter.invokeInvokeSuspendWithUnit(thisName: String) {
     )
 }
 
-const val SUSPEND_IMPL_NAME_SUFFIX = "\$suspendImpl"
+const konst SUSPEND_IMPL_NAME_SUFFIX = "\$suspendImpl"
 
 fun Method.getImplForOpenMethod(ownerInternalName: String) =
     Method(name + SUSPEND_IMPL_NAME_SUFFIX, returnType, arrayOf(Type.getObjectType(ownerInternalName)) + argumentTypes)
@@ -440,12 +440,12 @@ fun FunctionDescriptor.isLocalSuspendFunctionNotSuspendLambda(): Boolean =
     isSuspendLambdaOrLocalFunction() && this !is AnonymousFunctionDescriptor
 
 @JvmField
-val CONTINUATION_ASM_TYPE = StandardNames.CONTINUATION_INTERFACE_FQ_NAME.topLevelClassAsmType()
+konst CONTINUATION_ASM_TYPE = StandardNames.CONTINUATION_INTERFACE_FQ_NAME.topLevelClassAsmType()
 
 fun FunctionDescriptor.isInvokeSuspendOfLambda(): Boolean {
     if (this !is SimpleFunctionDescriptor) return false
-    if (valueParameters.size != 1 ||
-        valueParameters[0].name.asString() != SUSPEND_CALL_RESULT_NAME ||
+    if (konstueParameters.size != 1 ||
+        konstueParameters[0].name.asString() != SUSPEND_CALL_RESULT_NAME ||
         name.asString() != INVOKE_SUSPEND_METHOD_NAME
     ) return false
     return containingDeclaration is SyntheticClassDescriptorForLambda

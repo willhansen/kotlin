@@ -5,7 +5,7 @@ data class Test1<T : Any?> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
@@ -35,7 +35,7 @@ data class Test1<T : Any?> {
     when {
       other !is Test1<T> -> return false
     }
-    val tmp0_other_with_cast: Test1<T> = other as Test1<T>
+    konst tmp0_other_with_cast: Test1<T> = other as Test1<T>
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -51,7 +51,7 @@ data class Test2<T : Number> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
@@ -78,7 +78,7 @@ data class Test2<T : Number> {
     when {
       other !is Test2<T> -> return false
     }
-    val tmp0_other_with_cast: Test2<T> = other as Test2<T>
+    konst tmp0_other_with_cast: Test2<T> = other as Test2<T>
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -94,7 +94,7 @@ data class Test3<T : Any?> {
 
   }
 
-  val x: List<T>
+  konst x: List<T>
     field = x
     get
 
@@ -121,7 +121,7 @@ data class Test3<T : Any?> {
     when {
       other !is Test3<T> -> return false
     }
-    val tmp0_other_with_cast: Test3<T> = other as Test3<T>
+    konst tmp0_other_with_cast: Test3<T> = other as Test3<T>
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }
@@ -137,7 +137,7 @@ data class Test4 {
 
   }
 
-  val x: List<String>
+  konst x: List<String>
     field = x
     get
 
@@ -164,7 +164,7 @@ data class Test4 {
     when {
       other !is Test4 -> return false
     }
-    val tmp0_other_with_cast: Test4 = other as Test4
+    konst tmp0_other_with_cast: Test4 = other as Test4
     when {
       EQEQ(arg0 = <this>.#x, arg1 = tmp0_other_with_cast.#x).not() -> return false
     }

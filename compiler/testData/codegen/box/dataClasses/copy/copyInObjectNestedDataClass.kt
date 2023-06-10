@@ -1,4 +1,4 @@
-class Bar(val name: String)
+class Bar(konst name: String)
 
 abstract class Foo {
   public abstract fun foo(): String
@@ -6,7 +6,7 @@ abstract class Foo {
 
 fun box(): String {
     return object: Foo() {
-      inner class NestedFoo(val bar: Bar) {
+      inner class NestedFoo(konst bar: Bar) {
           fun copy(bar: Bar) = NestedFoo(bar)
       }
 

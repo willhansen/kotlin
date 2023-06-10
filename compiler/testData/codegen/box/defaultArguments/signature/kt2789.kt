@@ -11,9 +11,9 @@ class FooClass : FooTrait<String> {
 }
 
 fun box(): String {
-    val explicitParam = FooClass().make(16)
-    val defaultRes = FooClass().make()
-    val defaultTraitRes = FooClass().makeFromTraitImpl()
+    konst explicitParam = FooClass().make(16)
+    konst defaultRes = FooClass().make()
+    konst defaultTraitRes = FooClass().makeFromTraitImpl()
     if (explicitParam != defaultRes) return  "fail 1: ${explicitParam} != ${defaultRes}"
     if (explicitParam != "16") return  "fail 2: ${explicitParam}"
 

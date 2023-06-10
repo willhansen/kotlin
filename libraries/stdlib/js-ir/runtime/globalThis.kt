@@ -18,4 +18,4 @@ package kotlin.js
     delete Object.prototype.__magic__;
 }());
 """)
-internal external val globalThis: dynamic
+internal external konst globalThis: dynamic

@@ -26,8 +26,8 @@ object FirConventionFunctionCallChecker : FirFunctionCallChecker() {
         // PROPERTY_AS_OPERATOR can only happen for function calls and it's reported on the receiver expression.
         checkPropertyAsOperator(expression, expression.dispatchReceiver, context, reporter)
         checkPropertyAsOperator(expression, expression.extensionReceiver, context, reporter)
-        val calleeReference = expression.calleeReference as? FirErrorNamedReference ?: return
-        val diagnostic = calleeReference.diagnostic as? ConeUnresolvedNameError ?: return
+        konst calleeReference = expression.calleeReference as? FirErrorNamedReference ?: return
+        konst diagnostic = calleeReference.diagnostic as? ConeUnresolvedNameError ?: return
 
         if (expression.calleeReference.source?.kind == KtFakeSourceElementKind.ArrayAccessNameReference) {
             when (diagnostic.name) {
@@ -43,14 +43,14 @@ object FirConventionFunctionCallChecker : FirFunctionCallChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val sourceKind = callExpression.source?.kind
+        konst sourceKind = callExpression.source?.kind
         if (sourceKind !is KtRealSourceElementKind &&
             sourceKind !is KtFakeSourceElementKind.GeneratedComparisonExpression &&
             sourceKind !is KtFakeSourceElementKind.DesugaredCompoundAssignment
         ) return
-        val unwrapped = receiver.unwrapSmartcastExpression()
+        konst unwrapped = receiver.unwrapSmartcastExpression()
         if (unwrapped !is FirPropertyAccessExpression) return
-        val diagnostic = unwrapped.nonFatalDiagnostics.firstIsInstanceOrNull<ConePropertyAsOperator>() ?: return
+        konst diagnostic = unwrapped.nonFatalDiagnostics.firstIsInstanceOrNull<ConePropertyAsOperator>() ?: return
         reporter.reportOn(callExpression.calleeReference.source, FirErrors.PROPERTY_AS_OPERATOR, diagnostic.symbol, context)
     }
 }

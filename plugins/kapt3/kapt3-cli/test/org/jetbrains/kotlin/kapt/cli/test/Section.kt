@@ -8,15 +8,15 @@ package org.jetbrains.kotlin.kapt.cli.test
 import org.jetbrains.kotlin.kapt.cli.test.Section.Companion.SECTION_INDICATOR
 import java.io.File
 
-class Section(val name: String, val content: String) {
+class Section(konst name: String, konst content: String) {
     companion object {
-        const val SECTION_INDICATOR = "# "
+        const konst SECTION_INDICATOR = "# "
 
         fun parse(file: File): List<Section> {
-            val sections = mutableListOf<Section>()
+            konst sections = mutableListOf<Section>()
 
             var currentName = ""
-            val currentContent = StringBuilder()
+            konst currentContent = StringBuilder()
 
             fun saveCurrent() {
                 if (currentName.isNotEmpty()) {
@@ -51,7 +51,7 @@ fun List<Section>.render(): String = buildString {
 }.trim()
 
 fun List<Section>.replacingSection(name: String, newContent: String): List<Section> {
-    val result = mutableListOf<Section>()
+    konst result = mutableListOf<Section>()
     var found = false
 
     for (section in this) {

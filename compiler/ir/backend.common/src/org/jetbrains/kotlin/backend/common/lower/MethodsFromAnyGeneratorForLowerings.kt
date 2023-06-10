@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.ir.types.isArray
 import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.utils.memoryOptimizedMapNotNull
 
-class MethodsFromAnyGeneratorForLowerings(val context: BackendContext, val irClass: IrClass, val origin: IrDeclarationOrigin) {
+class MethodsFromAnyGeneratorForLowerings(konst context: BackendContext, konst irClass: IrClass, konst origin: IrDeclarationOrigin) {
     private fun IrClass.addSyntheticFunction(name: String, returnType: IrType) =
         addFunction(name, returnType, startOffset = SYNTHETIC_OFFSET, endOffset = SYNTHETIC_OFFSET)
 
@@ -49,7 +49,7 @@ class MethodsFromAnyGeneratorForLowerings(val context: BackendContext, val irCla
 }
 
 open class LoweringDataClassMemberGenerator(
-    val backendContext: BackendContext,
+    konst backendContext: BackendContext,
     irClass: IrClass,
     origin: IrDeclarationOrigin,
     forbidDirectFieldAccess: Boolean = false
@@ -80,14 +80,14 @@ open class LoweringDataClassMemberGenerator(
     }
 
     override fun getHashCodeFunctionInfo(type: IrType): HashCodeFunctionInfo {
-        val symbol = if (type.isArray() || type.isPrimitiveArray()) {
+        konst symbol = if (type.isArray() || type.isPrimitiveArray()) {
             context.irBuiltIns.dataClassArrayMemberHashCodeSymbol
         } else {
             type.classOrNull?.functions?.singleOrNull { it.owner.isHashCode() }
                 ?: context.irBuiltIns.anyClass.functions.single { it.owner.name.asString() == "hashCode" }
         }
         return object : HashCodeFunctionInfo {
-            override val symbol: IrSimpleFunctionSymbol = symbol
+            override konst symbol: IrSimpleFunctionSymbol = symbol
 
             override fun commitSubstituted(irMemberAccessExpression: IrMemberAccessExpression<*>) {}
         }

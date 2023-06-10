@@ -2,17 +2,17 @@
 package foo
 
 open class D {
-    open val name = "D"
+    open konst name = "D"
     fun boo() = "D[$name]::boo;"
 }
 
 open class Z : D() {
-    override val name = "Z"
+    override konst name = "Z"
     fun bar() = "Z[$name]::bar;"
     private fun baz() = "Z[$name]::baz;"
 
     inner class X : Z() {
-        override val name = "X"
+        override konst name = "X"
         fun foo() = "X[$name]::foo;"
 
         fun test() {

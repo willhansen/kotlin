@@ -1,9 +1,9 @@
 open class Base {
-    open val foo = "Base"
+    open konst foo = "Base"
 }
 
 class Derived : Base() {
-    override val foo = "OK"
+    override konst foo = "OK"
 }
 
 fun box() = (Base::foo).get(Derived())

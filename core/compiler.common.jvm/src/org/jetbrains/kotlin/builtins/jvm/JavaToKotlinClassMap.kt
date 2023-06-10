@@ -14,43 +14,43 @@ import org.jetbrains.kotlin.name.*
 import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 
 object JavaToKotlinClassMap {
-    private val NUMBERED_FUNCTION_PREFIX: String =
+    private konst NUMBERED_FUNCTION_PREFIX: String =
         FunctionTypeKind.Function.packageFqName.toString() + "." + FunctionTypeKind.Function.classNamePrefix
-    private val NUMBERED_K_FUNCTION_PREFIX: String =
+    private konst NUMBERED_K_FUNCTION_PREFIX: String =
         FunctionTypeKind.KFunction.packageFqName.toString() + "." + FunctionTypeKind.KFunction.classNamePrefix
-    private val NUMBERED_SUSPEND_FUNCTION_PREFIX: String =
+    private konst NUMBERED_SUSPEND_FUNCTION_PREFIX: String =
         FunctionTypeKind.SuspendFunction.packageFqName.toString() + "." + FunctionTypeKind.SuspendFunction.classNamePrefix
-    private val NUMBERED_K_SUSPEND_FUNCTION_PREFIX: String =
+    private konst NUMBERED_K_SUSPEND_FUNCTION_PREFIX: String =
         FunctionTypeKind.KSuspendFunction.packageFqName.toString() + "." + FunctionTypeKind.KSuspendFunction.classNamePrefix
 
-    private val FUNCTION_N_CLASS_ID: ClassId = ClassId.topLevel(FqName("kotlin.jvm.functions.FunctionN"))
-    val FUNCTION_N_FQ_NAME: FqName = FUNCTION_N_CLASS_ID.asSingleFqName()
-    private val K_FUNCTION_CLASS_ID: ClassId = StandardClassIds.KFunction
-    private val K_CLASS_CLASS_ID: ClassId = StandardClassIds.KClass
-    private val CLASS_CLASS_ID: ClassId = classId(Class::class.java)
+    private konst FUNCTION_N_CLASS_ID: ClassId = ClassId.topLevel(FqName("kotlin.jvm.functions.FunctionN"))
+    konst FUNCTION_N_FQ_NAME: FqName = FUNCTION_N_CLASS_ID.asSingleFqName()
+    private konst K_FUNCTION_CLASS_ID: ClassId = StandardClassIds.KFunction
+    private konst K_CLASS_CLASS_ID: ClassId = StandardClassIds.KClass
+    private konst CLASS_CLASS_ID: ClassId = classId(Class::class.java)
 
-    private val javaToKotlin = HashMap<FqNameUnsafe, ClassId>()
-    private val kotlinToJava = HashMap<FqNameUnsafe, ClassId>()
+    private konst javaToKotlin = HashMap<FqNameUnsafe, ClassId>()
+    private konst kotlinToJava = HashMap<FqNameUnsafe, ClassId>()
 
-    private val mutableToReadOnly = HashMap<FqNameUnsafe, FqName>()
-    private val readOnlyToMutable = HashMap<FqNameUnsafe, FqName>()
+    private konst mutableToReadOnly = HashMap<FqNameUnsafe, FqName>()
+    private konst readOnlyToMutable = HashMap<FqNameUnsafe, FqName>()
 
-    private val mutableToReadOnlyClassId = HashMap<ClassId, ClassId>()
-    private val readOnlyToMutableClassId = HashMap<ClassId, ClassId>()
+    private konst mutableToReadOnlyClassId = HashMap<ClassId, ClassId>()
+    private konst readOnlyToMutableClassId = HashMap<ClassId, ClassId>()
 
-    // describes mapping for a java class that has separate readOnly and mutable equivalents in Kotlin
+    // describes mapping for a java class that has separate readOnly and mutable equikonstents in Kotlin
     data class PlatformMutabilityMapping(
-        val javaClass: ClassId,
-        val kotlinReadOnly: ClassId,
-        val kotlinMutable: ClassId
+        konst javaClass: ClassId,
+        konst kotlinReadOnly: ClassId,
+        konst kotlinMutable: ClassId
     )
 
     private inline fun <reified T> mutabilityMapping(kotlinReadOnly: ClassId, kotlinMutable: FqName): PlatformMutabilityMapping {
-        val mutableClassId = ClassId(kotlinReadOnly.packageFqName, kotlinMutable.tail(kotlinReadOnly.packageFqName), false)
+        konst mutableClassId = ClassId(kotlinReadOnly.packageFqName, kotlinMutable.tail(kotlinReadOnly.packageFqName), false)
         return PlatformMutabilityMapping(classId(T::class.java), kotlinReadOnly, mutableClassId)
     }
 
-    val mutabilityMappings = listOf(
+    konst mutabilityMappings = listOf(
         mutabilityMapping<Iterable<*>>(ClassId.topLevel(FqNames.iterable), FqNames.mutableIterable),
         mutabilityMapping<Iterator<*>>(ClassId.topLevel(FqNames.iterator), FqNames.mutableIterator),
         mutabilityMapping<Collection<*>>(ClassId.topLevel(FqNames.collection), FqNames.mutableCollection),
@@ -78,7 +78,7 @@ object JavaToKotlinClassMap {
             addMapping(platformCollection)
         }
 
-        for (jvmType in JvmPrimitiveType.values()) {
+        for (jvmType in JvmPrimitiveType.konstues()) {
             add(
                 ClassId.topLevel(jvmType.wrapperFqName),
                 ClassId.topLevel(StandardNames.getPrimitiveFqName(jvmType.primitiveType))
@@ -97,8 +97,8 @@ object JavaToKotlinClassMap {
             addKotlinToJava(FqName(NUMBERED_K_FUNCTION_PREFIX + i), K_FUNCTION_CLASS_ID)
         }
         for (i in 0 until BuiltInFunctionArity.BIG_ARITY - 1) {
-            val kSuspendFunction = FunctionTypeKind.KSuspendFunction
-            val kSuspendFun = kSuspendFunction.packageFqName.toString() + "." + kSuspendFunction.classNamePrefix
+            konst kSuspendFunction = FunctionTypeKind.KSuspendFunction
+            konst kSuspendFun = kSuspendFunction.packageFqName.toString() + "." + kSuspendFunction.classNamePrefix
             addKotlinToJava(FqName(kSuspendFun + i), K_FUNCTION_CLASS_ID)
         }
 
@@ -150,24 +150,24 @@ object JavaToKotlinClassMap {
     }
 
     private fun isKotlinFunctionWithBigArity(kotlinFqName: FqNameUnsafe, prefix: String): Boolean {
-        val arityString = kotlinFqName.asString().substringAfter(prefix, "")
+        konst arityString = kotlinFqName.asString().substringAfter(prefix, "")
         if (arityString.isNotEmpty() && !arityString.startsWith('0')) {
-            val arity = arityString.toIntOrNull()
+            konst arity = arityString.toIntOrNull()
             return arity != null && arity >= BuiltInFunctionArity.BIG_ARITY
         }
         return false
     }
 
     private fun addMapping(platformMutabilityMapping: PlatformMutabilityMapping) {
-        val (javaClassId, readOnlyClassId, mutableClassId) = platformMutabilityMapping
+        konst (javaClassId, readOnlyClassId, mutableClassId) = platformMutabilityMapping
         add(javaClassId, readOnlyClassId)
         addKotlinToJava(mutableClassId.asSingleFqName(), javaClassId)
 
         mutableToReadOnlyClassId[mutableClassId] = readOnlyClassId
         readOnlyToMutableClassId[readOnlyClassId] = mutableClassId
 
-        val readOnlyFqName = readOnlyClassId.asSingleFqName()
-        val mutableFqName = mutableClassId.asSingleFqName()
+        konst readOnlyFqName = readOnlyClassId.asSingleFqName()
+        konst mutableFqName = mutableClassId.asSingleFqName()
         mutableToReadOnly[mutableClassId.asSingleFqName().toUnsafe()] = readOnlyFqName
         readOnlyToMutable[readOnlyFqName.toUnsafe()] = mutableFqName
     }
@@ -208,8 +208,8 @@ object JavaToKotlinClassMap {
     fun isReadOnly(classId: ClassId?): Boolean = readOnlyToMutableClassId.containsKey(classId)
 
     private fun classId(clazz: Class<*>): ClassId {
-        assert(!clazz.isPrimitive && !clazz.isArray) { "Invalid class: $clazz" }
-        val outer = clazz.declaringClass
+        assert(!clazz.isPrimitive && !clazz.isArray) { "Inkonstid class: $clazz" }
+        konst outer = clazz.declaringClass
         return if (outer == null)
             ClassId.topLevel(FqName(clazz.canonicalName))
         else

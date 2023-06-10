@@ -59,8 +59,8 @@ class JavaClassFinderImpl : AbstractJavaClassFinder() {
         psiPackage: PsiPackage,
         mayHaveAnnotations: Boolean,
     ): JavaPackageImpl {
-        val project = javaFacade.project
-        val sourceFactory = JavaElementSourceFactory.getInstance(project)
+        konst project = javaFacade.project
+        konst sourceFactory = JavaElementSourceFactory.getInstance(project)
         return JavaPackageImpl(sourceFactory.createPsiSource(psiPackage), javaSearchScope, mayHaveAnnotations)
     }
 

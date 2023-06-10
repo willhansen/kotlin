@@ -9,14 +9,14 @@ fun UnresolvedLibrary(path: String, libraryVersion: String?, lenient: Boolean): 
     if (lenient) LenientUnresolvedLibrary(path, libraryVersion) else RequiredUnresolvedLibrary(path, libraryVersion)
 
 sealed class UnresolvedLibrary {
-    abstract val path: String
-    abstract val libraryVersion: String?
+    abstract konst path: String
+    abstract konst libraryVersion: String?
     abstract fun substitutePath(newPath: String): UnresolvedLibrary
 }
 
 data class RequiredUnresolvedLibrary(
-    override val path: String,
-    override val libraryVersion: String?
+    override konst path: String,
+    override konst libraryVersion: String?
 ) : UnresolvedLibrary() {
     override fun substitutePath(newPath: String): RequiredUnresolvedLibrary {
         return copy(path = newPath)
@@ -24,8 +24,8 @@ data class RequiredUnresolvedLibrary(
 }
 
 data class LenientUnresolvedLibrary(
-    override val path: String,
-    override val libraryVersion: String?
+    override konst path: String,
+    override konst libraryVersion: String?
 ) : UnresolvedLibrary() {
     override fun substitutePath(newPath: String): LenientUnresolvedLibrary {
         return copy(path = newPath)

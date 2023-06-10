@@ -3,7 +3,7 @@
 // FIR status: context receivers aren't yet supported
 
 class A {
-    val result = "OK"
+    konst result = "OK"
 }
 
 fun <T> test(receiver: T, action: context(T) () -> String) = action(receiver)

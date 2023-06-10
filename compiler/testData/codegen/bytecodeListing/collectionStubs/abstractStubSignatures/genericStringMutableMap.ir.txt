@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<<K:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Map<TK;Ljava/lang/String;>;Lkotlin/jvm/internal/markers/KMutableMap;>  GenericStringMutableMap {
     // source: 'genericStringMutableMap.kt'
-    public bridge final <()Ljava/util/Collection<Ljava/lang/String;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<Ljava/lang/String;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TK;Ljava/lang/String;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TK;>;> method keySet(): java.util.Set
     public <null> method <init>(): void

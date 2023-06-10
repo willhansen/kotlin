@@ -1,9 +1,9 @@
-open class Outer(val fn: (() -> String)?) {
+open class Outer(konst fn: (() -> String)?) {
     companion object {
-        val ok = "OK"
+        konst ok = "OK"
     }
 
-    val ok = "Fail: Outer.ok"
+    konst ok = "Fail: Outer.ok"
 
     inner class Inner : Outer({ ok })
 }

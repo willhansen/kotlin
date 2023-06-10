@@ -20,20 +20,20 @@ object FirSuspendModifierChecker : FirTypeRefChecker() {
         // We are only interested in source type refs (i.e., Fir(Dynamic|User|Function)TypeRef).
         if (typeRef !is FirTypeRefWithNullability) return
 
-        val suspendModifier = typeRef.getModifier(KtTokens.SUSPEND_KEYWORD) ?: return
+        konst suspendModifier = typeRef.getModifier(KtTokens.SUSPEND_KEYWORD) ?: return
 
-        // `suspend` is invalid for non-function types (i.e., FirDynamicTypeRef or FirUserTypeRef).
+        // `suspend` is inkonstid for non-function types (i.e., FirDynamicTypeRef or FirUserTypeRef).
         //
-        // It is also invalid for nullable function types, e.g., `suspend (() -> Int)?`.
+        // It is also inkonstid for nullable function types, e.g., `suspend (() -> Int)?`.
         // The correct way to denote a nullable suspend function type is `(suspend () -> Int)?`.
         // (To clarify: You can "mark nullable" a suspend function type, but you cannot "mark suspend" a nullable function type.)
         //
-        // In both invalid and correct cases, the source for the FirFunctionTypeRef is the TYPE_REFERENCE element.
-        // In the invalid case, the `suspend` modifier is in the source TYPE_REFERENCE element.
+        // In both inkonstid and correct cases, the source for the FirFunctionTypeRef is the TYPE_REFERENCE element.
+        // In the inkonstid case, the `suspend` modifier is in the source TYPE_REFERENCE element.
         // But in the correct case, the `suspend` modifier is in the child NULLABLE_TYPE element, i.e., the source TYPE_REFERENCE element
         // will not have the `suspend` modifier.
         //
-        // In both cases, the FirFunctionTypeRef is marked nullable. But it is invalid to have the `suspend` modifier on the source element.
+        // In both cases, the FirFunctionTypeRef is marked nullable. But it is inkonstid to have the `suspend` modifier on the source element.
         if (typeRef !is FirFunctionTypeRef || typeRef.isMarkedNullable) {
             reporter.reportOn(
                 suspendModifier.source,

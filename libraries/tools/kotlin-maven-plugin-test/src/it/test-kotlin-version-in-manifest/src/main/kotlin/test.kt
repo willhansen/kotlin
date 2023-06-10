@@ -20,7 +20,7 @@ import java.net.URL
 import java.util.jar.Attributes
 import java.util.jar.Manifest
 
-val LIBRARIES = listOf(
+konst LIBRARIES = listOf(
         "kotlin-stdlib",
         "kotlin-stdlib-common",
         "kotlin-stdlib-jdk7",
@@ -29,20 +29,20 @@ val LIBRARIES = listOf(
         "kotlin-script-runtime"
 )
 
-const val KOTLIN_VERSION = "Kotlin-Version"
-const val KOTLIN_RUNTIME_COMPONENT = "Kotlin-Runtime-Component"
-const val KOTLIN_RUNTIME_COMPONENT_VALUE = "Main"
-val KOTLIN_VERSION_VALUE = with(KotlinVersion.CURRENT) { "$major.$minor" }
+const konst KOTLIN_VERSION = "Kotlin-Version"
+const konst KOTLIN_RUNTIME_COMPONENT = "Kotlin-Runtime-Component"
+const konst KOTLIN_RUNTIME_COMPONENT_VALUE = "Main"
+konst KOTLIN_VERSION_VALUE = with(KotlinVersion.CURRENT) { "$major.$minor" }
 
 fun main(args: Array<String>) {
-    val implementationTitles = arrayListOf<String>()
+    konst implementationTitles = arrayListOf<String>()
 
-    val versionValues = hashMapOf<URL, String?>()
-    val runtimeComponentValues = hashMapOf<URL, String?>()
+    konst versionValues = hashMapOf<URL, String?>()
+    konst runtimeComponentValues = hashMapOf<URL, String?>()
 
     for (resource in object {}.javaClass.classLoader.getResources("META-INF/MANIFEST.MF")) {
-        val manifest = resource.openStream().use(::Manifest).mainAttributes
-        val title = manifest.getValue(Attributes.Name.IMPLEMENTATION_TITLE) ?: continue
+        konst manifest = resource.openStream().use(::Manifest).mainAttributes
+        konst title = manifest.getValue(Attributes.Name.IMPLEMENTATION_TITLE) ?: continue
         if ("kotlin" !in title.toLowerCase()) continue
 
         implementationTitles.add(title)
@@ -50,9 +50,9 @@ fun main(args: Array<String>) {
         runtimeComponentValues[resource] = manifest.getValue(KOTLIN_RUNTIME_COMPONENT)
     }
 
-    val errors = StringBuilder()
+    konst errors = StringBuilder()
 
-    val uncheckedLibraries = LIBRARIES - implementationTitles
+    konst uncheckedLibraries = LIBRARIES - implementationTitles
     if (uncheckedLibraries.isNotEmpty()) {
         errors.appendLine("These libraries are not found in the dependencies of this test project, thus their manifests cannot be checked. " +
                         "Please ensure they are listed in the <dependencies> section in the corresponding pom.xml:\n$uncheckedLibraries")
@@ -61,24 +61,24 @@ fun main(args: Array<String>) {
     }
 
     fun renderEntry(entry: Map.Entry<URL, String?>) = buildString {
-        val (url, value) = entry
+        konst (url, konstue) = entry
         append(url)
-        if (value != null) append(" (actual value: $value)")
+        if (konstue != null) append(" (actual konstue: $konstue)")
         else append(" (attribute is not found)")
     }
 
-    val incorrectVersionValues = versionValues.filterValues { it != KOTLIN_VERSION_VALUE }
+    konst incorrectVersionValues = versionValues.filterValues { it != KOTLIN_VERSION_VALUE }
     if (incorrectVersionValues.isNotEmpty()) {
-        errors.appendLine("Manifests at these locations do not have the correct value of the $KOTLIN_VERSION attribute ($KOTLIN_VERSION_VALUE). " +
-                        "Please ensure that kotlin_language_version in libraries/build.gradle corresponds to the value in kotlin.KotlinVersion:")
+        errors.appendLine("Manifests at these locations do not have the correct konstue of the $KOTLIN_VERSION attribute ($KOTLIN_VERSION_VALUE). " +
+                        "Please ensure that kotlin_language_version in libraries/build.gradle corresponds to the konstue in kotlin.KotlinVersion:")
         incorrectVersionValues.entries.joinTo(errors, "\n", transform = ::renderEntry)
         errors.appendLine()
         errors.appendLine()
     }
 
-    val incorrectRuntimeComponentValues = runtimeComponentValues.filterValues { it != KOTLIN_RUNTIME_COMPONENT_VALUE }
+    konst incorrectRuntimeComponentValues = runtimeComponentValues.filterValues { it != KOTLIN_RUNTIME_COMPONENT_VALUE }
     if (incorrectRuntimeComponentValues.isNotEmpty()) {
-        errors.appendLine("Manifests at these locations do not have the correct value of the $KOTLIN_RUNTIME_COMPONENT attribute ($KOTLIN_RUNTIME_COMPONENT_VALUE):")
+        errors.appendLine("Manifests at these locations do not have the correct konstue of the $KOTLIN_RUNTIME_COMPONENT attribute ($KOTLIN_RUNTIME_COMPONENT_VALUE):")
         incorrectRuntimeComponentValues.entries.joinTo(errors, "\n", transform = ::renderEntry)
     }
 

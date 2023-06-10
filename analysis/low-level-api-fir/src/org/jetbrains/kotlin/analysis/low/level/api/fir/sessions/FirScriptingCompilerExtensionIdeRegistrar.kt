@@ -18,14 +18,14 @@ import kotlin.script.experimental.host.ScriptingHostConfiguration
  * [org.jetbrains.kotlin.config.CompilerConfiguration] replaced with a pair of explicit [scriptDefinitionSources] and [scriptDefinitions].
  */
 internal class FirScriptingCompilerExtensionIdeRegistrar(
-    private val hostConfiguration: ScriptingHostConfiguration,
-    private val scriptDefinitionSources: List<ScriptDefinitionsSource>,
-    private val scriptDefinitions: List<ScriptDefinition>
+    private konst hostConfiguration: ScriptingHostConfiguration,
+    private konst scriptDefinitionSources: List<ScriptDefinitionsSource>,
+    private konst scriptDefinitions: List<ScriptDefinition>
 ) : FirExtensionRegistrar() {
 
     override fun ExtensionRegistrarContext.configurePlugin() {
-        val definitionSources = scriptDefinitionSources
-        val definitions = scriptDefinitions
+        konst definitionSources = scriptDefinitionSources
+        konst definitions = scriptDefinitions
         if (definitionSources.isNotEmpty() || definitions.isNotEmpty()) {
             +FirScriptDefinitionProviderService.getFactory(definitions, definitionSources)
         }

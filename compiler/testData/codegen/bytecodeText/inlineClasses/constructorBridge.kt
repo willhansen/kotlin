@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 // FILE: test.kt
-inline class A(val x: String)
-class B(val y: A)
+inline class A(konst x: String)
+class B(konst y: A)
 
 fun box() =
     B(A("OK")).y.x

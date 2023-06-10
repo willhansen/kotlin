@@ -4,7 +4,7 @@ FILE: delegateWithArgInference.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val data: R|T| = R|<local>/data|
+        public final konst data: R|T| = R|<local>/data|
             public get(): R|T|
 
         public final operator fun getValue(thisRef: R|kotlin/Nothing?|, prop: R|kotlin/reflect/KProperty<*>|): R|T| {
@@ -27,8 +27,8 @@ FILE: delegateWithArgInference.kt
     public final fun <Q> id(v: R|Q|): R|Q| {
         ^id R|<local>/v|
     }
-    public final val x: R|kotlin/Int|by R|/makeIntDelegate|(R|kotlin/run|<R|kotlin/Int|>(<L> = run@fun <anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
-        lval x: R|kotlin/String| = R|/materialize|<R|kotlin/String|>()
+    public final konst x: R|kotlin/Int|by R|/makeIntDelegate|(R|kotlin/run|<R|kotlin/Int|>(<L> = run@fun <anonymous>(): R|kotlin/Int| <inline=Inline, kind=EXACTLY_ONCE>  {
+        lkonst x: R|kotlin/String| = R|/materialize|<R|kotlin/String|>()
         ^ R|/materialize2|<R|kotlin/Int|>()
     }
     ))

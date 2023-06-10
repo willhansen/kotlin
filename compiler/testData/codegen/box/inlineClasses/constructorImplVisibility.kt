@@ -7,16 +7,16 @@
 import java.lang.reflect.Modifier
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC1 public constructor(val i: Int)
+konstue class IC1 public constructor(konst i: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC11 internal constructor(val i: Int)
+konstue class IC11 internal constructor(konst i: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC2 private constructor(val i: Int)
+konstue class IC2 private constructor(konst i: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC4 protected constructor(val i: Int)
+konstue class IC4 protected constructor(konst i: Int)
 
 fun box(): String {
     if (!Modifier.isPublic(IC1::class.java.declaredMethods.single { it.name == "constructor-impl" }.modifiers)) return "FAIL 1"

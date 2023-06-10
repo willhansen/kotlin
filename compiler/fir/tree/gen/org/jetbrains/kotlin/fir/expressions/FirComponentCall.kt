@@ -20,18 +20,18 @@ import org.jetbrains.kotlin.fir.FirImplementationDetail
  */
 
 abstract class FirComponentCall : FirFunctionCall() {
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val contextReceiverArguments: List<FirExpression>
-    abstract override val typeArguments: List<FirTypeProjection>
-    abstract override val dispatchReceiver: FirExpression
-    abstract override val extensionReceiver: FirExpression
-    abstract override val source: KtSourceElement?
-    abstract override val argumentList: FirArgumentList
-    abstract override val calleeReference: FirNamedReference
-    abstract override val origin: FirFunctionCallOrigin
-    abstract override val explicitReceiver: FirExpression
-    abstract val componentIndex: Int
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst contextReceiverArguments: List<FirExpression>
+    abstract override konst typeArguments: List<FirTypeProjection>
+    abstract override konst dispatchReceiver: FirExpression
+    abstract override konst extensionReceiver: FirExpression
+    abstract override konst source: KtSourceElement?
+    abstract override konst argumentList: FirArgumentList
+    abstract override konst calleeReference: FirNamedReference
+    abstract override konst origin: FirFunctionCallOrigin
+    abstract override konst explicitReceiver: FirExpression
+    abstract konst componentIndex: Int
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitComponentCall(this, data)
 

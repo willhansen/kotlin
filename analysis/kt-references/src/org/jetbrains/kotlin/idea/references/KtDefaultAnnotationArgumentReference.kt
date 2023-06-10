@@ -32,10 +32,10 @@ import org.jetbrains.kotlin.psi.psiUtil.getStrictParentOfType
  * ```
  */
 class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractKtReference<KtValueArgument>(element) {
-    override val resolver: ResolveCache.PolyVariantResolver<KtReference>
+    override konst resolver: ResolveCache.PolyVariantResolver<KtReference>
         get() = Resolver
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() = listOf(Name.identifier(PsiAnnotation.DEFAULT_REFERENCED_METHOD_NAME))
 
     override fun getRangeInElement() = TextRange.EMPTY_RANGE
@@ -43,7 +43,7 @@ class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractK
     override fun getCanonicalText() = PsiAnnotation.DEFAULT_REFERENCED_METHOD_NAME
 
     override fun isReferenceTo(candidateTarget: PsiElement): Boolean {
-        val unwrapped = candidateTarget.unwrapped
+        konst unwrapped = candidateTarget.unwrapped
         return (unwrapped is PsiMethod || unwrapped is KtParameter) && unwrapped == resolve()
     }
 
@@ -52,20 +52,20 @@ class KtDefaultAnnotationArgumentReference(element: KtValueArgument) : AbstractK
     private object Resolver : ResolveCache.PolyVariantResolver<KtReference> {
         override fun resolve(t: KtReference, incompleteCode: Boolean): Array<ResolveResult> {
             require(t is KtDefaultAnnotationArgumentReference)
-            val annotationPsi = t.resolveAnnotationCallee() ?: return emptyArray()
+            konst annotationPsi = t.resolveAnnotationCallee() ?: return emptyArray()
             return when (annotationPsi) {
                 is PsiClass -> {
-                    val name = PsiAnnotation.DEFAULT_REFERENCED_METHOD_NAME
-                    val signature = MethodSignatureUtil.createMethodSignature(
+                    konst name = PsiAnnotation.DEFAULT_REFERENCED_METHOD_NAME
+                    konst signature = MethodSignatureUtil.createMethodSignature(
                         name, PsiType.EMPTY_ARRAY, PsiTypeParameter.EMPTY_ARRAY, PsiSubstitutor.EMPTY
                     )
-                    val method = MethodSignatureUtil.findMethodBySignature(annotationPsi, signature, false) ?: return emptyArray()
+                    konst method = MethodSignatureUtil.findMethodBySignature(annotationPsi, signature, false) ?: return emptyArray()
                     arrayOf(PsiElementResolveResult(method))
                 }
                 is KtPrimaryConstructor -> {
                     // parameters in primary constructor on Kotlin annotation can have any names,
                     // so we just take the first parameter
-                    val property = annotationPsi.valueParameters.firstOrNull() ?: return emptyArray()
+                    konst property = annotationPsi.konstueParameters.firstOrNull() ?: return emptyArray()
                     arrayOf(PsiElementResolveResult(property))
                 }
                 else -> emptyArray()

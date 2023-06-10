@@ -22,8 +22,8 @@ fun setByteRes(x: Byte) {
 
 fun box(): String {
     builder {
-        val a = byteArrayOf(1)
-        val x = a[0]
+        konst a = byteArrayOf(1)
+        konst x = a[0]
         suspendHere()
         setByteRes(x)
     }

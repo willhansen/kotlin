@@ -15,32 +15,32 @@
 import kotlin.reflect.KClass
 
 expect annotation class Anno(
-    val b: Byte = 1.toByte(),
-    val c: Char = 'x',
-    val d: Double = 3.14,
-    val f: Float = -2.72f,
-    val i: Int = 42424242,
-    val i2: Int = 53535353,
-    val j: Long = 239239239239239L,
-    val j2: Long = 239239L,
-    val s: Short = 42.toShort(),
-    val z: Boolean = true,
-    val ba: ByteArray = [(-1).toByte()],
-    val ca: CharArray = ['y'],
-    val da: DoubleArray = [-3.14159],
-    val fa: FloatArray = [2.7218f],
-    val ia: IntArray = [424242],
-    val ja: LongArray = [239239239239L, 239239L],
-    val sa: ShortArray = [(-43).toShort()],
-    val za: BooleanArray = [false, true],
-    val str: String = "fizz",
-    val k: KClass<*> = Number::class,
-    // val e: E = E.E1,
-    // TODO: val a: A = A("1"),
-    val stra: Array<String> = ["bu", "zz"],
-    val ka: Array<KClass<*>> = [Double::class, String::class, LongArray::class, Array<Array<Array<Int>>>::class, Unit::class]
-    // val ea: Array<E> = [E.E2, E.E3],
-    // TODO: val aa: Array<A> = [A("2"), A("3")]
+    konst b: Byte = 1.toByte(),
+    konst c: Char = 'x',
+    konst d: Double = 3.14,
+    konst f: Float = -2.72f,
+    konst i: Int = 42424242,
+    konst i2: Int = 53535353,
+    konst j: Long = 239239239239239L,
+    konst j2: Long = 239239L,
+    konst s: Short = 42.toShort(),
+    konst z: Boolean = true,
+    konst ba: ByteArray = [(-1).toByte()],
+    konst ca: CharArray = ['y'],
+    konst da: DoubleArray = [-3.14159],
+    konst fa: FloatArray = [2.7218f],
+    konst ia: IntArray = [424242],
+    konst ja: LongArray = [239239239239L, 239239L],
+    konst sa: ShortArray = [(-43).toShort()],
+    konst za: BooleanArray = [false, true],
+    konst str: String = "fizz",
+    konst k: KClass<*> = Number::class,
+    // konst e: E = E.E1,
+    // TODO: konst a: A = A("1"),
+    konst stra: Array<String> = ["bu", "zz"],
+    konst ka: Array<KClass<*>> = [Double::class, String::class, LongArray::class, Array<Array<Array<Int>>>::class, Unit::class]
+    // konst ea: Array<E> = [E.E2, E.E3],
+    // TODO: konst aa: Array<A> = [A("2"), A("3")]
 )
 
 // MODULE: lib()()(common)
@@ -86,7 +86,7 @@ actual typealias Anno = Jnno
 // MODULE: main(lib)
 // FILE: main.kt
 
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 @Anno
 fun test() {}

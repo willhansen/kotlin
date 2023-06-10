@@ -9,14 +9,14 @@ import org.jetbrains.kotlin.ir.declarations.IrField
 import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 
 internal class DescriptorStorageForContextReceivers {
-    private val syntheticFieldStorage: MutableMap<ReceiverValue, IrField> = mutableMapOf()
+    private konst syntheticFieldStorage: MutableMap<ReceiverValue, IrField> = mutableMapOf()
 
     fun put(receiverValue: ReceiverValue, irField: IrField) {
         syntheticFieldStorage[receiverValue] = irField
     }
 
     fun getSyntheticField(receiverValue: ReceiverValue) =
-        syntheticFieldStorage[receiverValue] ?: error("No synthetic field for receiver value $receiverValue")
+        syntheticFieldStorage[receiverValue] ?: error("No synthetic field for receiver konstue $receiverValue")
 
     fun addAllFrom(storage: DescriptorStorageForContextReceivers) {
         syntheticFieldStorage.putAll(storage.syntheticFieldStorage)

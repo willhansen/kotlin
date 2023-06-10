@@ -30,10 +30,10 @@ import org.jetbrains.kotlin.types.model.safeSubstitute
 import org.jetbrains.kotlin.utils.addToStdlib.same
 
 class KotlinCallCompleter(
-    private val postponedArgumentsAnalyzer: PostponedArgumentsAnalyzer,
-    private val kotlinConstraintSystemCompleter: KotlinConstraintSystemCompleter,
-    private val trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
-    private val languageVersionSettings: LanguageVersionSettings
+    private konst postponedArgumentsAnalyzer: PostponedArgumentsAnalyzer,
+    private konst kotlinConstraintSystemCompleter: KotlinConstraintSystemCompleter,
+    private konst trivialConstraintTypeInferenceOracle: TrivialConstraintTypeInferenceOracle,
+    private konst languageVersionSettings: LanguageVersionSettings
 ) {
 
     fun runCompletion(
@@ -42,15 +42,15 @@ class KotlinCallCompleter(
         expectedType: UnwrappedType?,
         resolutionCallbacks: KotlinResolutionCallbacks
     ): CallResolutionResult {
-        val diagnosticHolder = KotlinDiagnosticsHolder.SimpleHolder()
+        konst diagnosticHolder = KotlinDiagnosticsHolder.SimpleHolder()
 
         when {
             candidates.isEmpty() -> diagnosticHolder.addDiagnostic(NoneCandidatesCallDiagnostic())
             candidates.size > 1 -> diagnosticHolder.addDiagnostic(ManyCandidatesCallDiagnostic(candidates))
         }
 
-        val candidate = prepareCandidateForCompletion(factory, candidates, resolutionCallbacks)
-        val resultType = when (candidate) {
+        konst candidate = prepareCandidateForCompletion(factory, candidates, resolutionCallbacks)
+        konst resultType = when (candidate) {
             is SimpleResolutionCandidate -> {
                 candidate.checkSamWithVararg(diagnosticHolder)
                 candidate.substitutedReturnType().also {
@@ -61,7 +61,7 @@ class KotlinCallCompleter(
             is CallableReferenceResolutionCandidate -> candidate.substitutedReflectionType()
         }
 
-        val completionMode = CompletionModeCalculator.computeCompletionMode(
+        konst completionMode = CompletionModeCalculator.computeCompletionMode(
             candidate, expectedType, resultType, trivialConstraintTypeInferenceOracle, resolutionCallbacks.inferenceSession
         )
 
@@ -89,17 +89,17 @@ class KotlinCallCompleter(
         candidates: Set<SimpleResolutionCandidate>,
         resolutionCallbacks: KotlinResolutionCallbacks
     ): Set<SimpleResolutionCandidate> {
-        val lambdas = candidates.flatMap { candidate ->
+        konst lambdas = candidates.flatMap { candidate ->
             candidate.getSubResolvedAtoms()
                 .filter { it is ResolvedLambdaAtom && !it.analyzed }
                 .map { candidate to it as ResolvedLambdaAtom }
         }.groupBy { (_, atom) -> atom.atom }
-            .values
+            .konstues
             .singleOrNull()
             ?.toMap() ?: return candidates
 
-        if (!lambdas.values.same { it.parameters.size }) return candidates
-        if (!lambdas.values.all { it.expectedType?.isFunctionTypeOrSubtype == true }) return candidates
+        if (!lambdas.konstues.same { it.parameters.size }) return candidates
+        if (!lambdas.konstues.all { it.expectedType?.isFunctionTypeOrSubtype == true }) return candidates
 
         for (candidate in lambdas.keys) {
             candidate.runCompletion(
@@ -112,17 +112,17 @@ class KotlinCallCompleter(
             return candidates
         }
 
-        val newAtoms = lambdas.mapValues { (candidate, atom) ->
+        konst newAtoms = lambdas.mapValues { (candidate, atom) ->
             kotlinConstraintSystemCompleter.prepareLambdaAtomForFactoryPattern(atom, candidate, candidate)
         }
 
-        val diagnosticHolderForLambda = KotlinDiagnosticsHolder.SimpleHolder()
-        val iterator = newAtoms.entries.iterator()
-        val (firstCandidate, firstAtom) = iterator.next()
+        konst diagnosticHolderForLambda = KotlinDiagnosticsHolder.SimpleHolder()
+        konst iterator = newAtoms.entries.iterator()
+        konst (firstCandidate, firstAtom) = iterator.next()
 
         resolutionCallbacks.recordInlinabilityOfLambda(lambdas.entries)
 
-        val results = postponedArgumentsAnalyzer.analyzeLambda(
+        konst results = postponedArgumentsAnalyzer.analyzeLambda(
             firstCandidate.getSystem().asPostponedArgumentsAnalyzerContext(),
             resolutionCallbacks,
             firstAtom,
@@ -132,7 +132,7 @@ class KotlinCallCompleter(
         propagateLambdaAnalysisDiagnostics(diagnosticHolderForLambda, firstCandidate)
 
         while (iterator.hasNext()) {
-            val (candidate, atom) = iterator.next()
+            konst (candidate, atom) = iterator.next()
             postponedArgumentsAnalyzer.applyResultsOfAnalyzedLambdaToCandidateSystem(
                 candidate.getSystem().asPostponedArgumentsAnalyzerContext(),
                 atom,
@@ -143,8 +143,8 @@ class KotlinCallCompleter(
             propagateLambdaAnalysisDiagnostics(diagnosticHolderForLambda, candidate)
         }
 
-        val errorCandidates = mutableSetOf<SimpleResolutionCandidate>()
-        val successfulCandidates = mutableSetOf<SimpleResolutionCandidate>()
+        konst errorCandidates = mutableSetOf<SimpleResolutionCandidate>()
+        konst successfulCandidates = mutableSetOf<SimpleResolutionCandidate>()
 
         for (candidate in candidates) {
             if (candidate.isSuccessful) {
@@ -163,12 +163,12 @@ class KotlinCallCompleter(
         diagnosticHolder: KotlinDiagnosticsHolder.SimpleHolder,
         candidate: SimpleResolutionCandidate
     ) {
-        val dontLoseDiagnosticsDuringOverloadResolutionByReturnType =
+        konst dontLoseDiagnosticsDuringOverloadResolutionByReturnType =
             languageVersionSettings.supportsFeature(LanguageFeature.DontLoseDiagnosticsDuringOverloadResolutionByReturnType)
 
         for (diagnostic in diagnosticHolder.getDiagnostics()) {
             if (diagnostic is TransformableToWarning<*>) {
-                val transformedDiagnostic =
+                konst transformedDiagnostic =
                     if (dontLoseDiagnosticsDuringOverloadResolutionByReturnType) diagnostic else diagnostic.transformToWarning()
                 if (transformedDiagnostic != null) {
                     candidate.addDiagnostic(transformedDiagnostic)
@@ -178,9 +178,9 @@ class KotlinCallCompleter(
     }
 
     private fun SimpleResolutionCandidate.getInputTypesOfLambdaAtom(atom: ResolvedLambdaAtom): List<UnwrappedType> {
-        val result = mutableListOf<UnwrappedType>()
-        val substitutor = getSystem().getBuilder().buildCurrentSubstitutor()
-        val ctx = getSystem().asConstraintSystemCompleterContext()
+        konst result = mutableListOf<UnwrappedType>()
+        konst substitutor = getSystem().getBuilder().buildCurrentSubstitutor()
+        konst ctx = getSystem().asConstraintSystemCompleterContext()
         for (inputType in atom.inputTypes) {
             result += substitutor.safeSubstitute(ctx, inputType) as UnwrappedType
         }
@@ -189,15 +189,15 @@ class KotlinCallCompleter(
 
 
     private fun ResolutionCandidate.checkSamWithVararg(diagnosticHolder: KotlinDiagnosticsHolder.SimpleHolder) {
-        val samConversionPerArgumentWithWarningsForVarargAfterSam =
+        konst samConversionPerArgumentWithWarningsForVarargAfterSam =
             callComponents.languageVersionSettings.supportsFeature(LanguageFeature.SamConversionPerArgument) &&
                     !callComponents.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitVarargAsArrayAfterSamArgument)
 
-        val candidateDescriptor = resolvedCall.candidateDescriptor
+        konst candidateDescriptor = resolvedCall.candidateDescriptor
         if (samConversionPerArgumentWithWarningsForVarargAfterSam && candidateDescriptor is SyntheticMemberDescriptor<*>) {
-            val declarationDescriptor = candidateDescriptor.baseDescriptorForSynthetic as? FunctionDescriptor ?: return
+            konst declarationDescriptor = candidateDescriptor.baseDescriptorForSynthetic as? FunctionDescriptor ?: return
 
-            if (declarationDescriptor.valueParameters.lastOrNull()?.isVararg == true) {
+            if (declarationDescriptor.konstueParameters.lastOrNull()?.isVararg == true) {
                 diagnosticHolder.addDiagnostic(
                     ResolvedToSamWithVarargDiagnostic(resolvedCall.atom.argumentsInParenthesis.lastOrNull() ?: return)
                 )
@@ -210,8 +210,8 @@ class KotlinCallCompleter(
         expectedType: UnwrappedType?,
         resolutionCallbacks: KotlinResolutionCallbacks
     ): CallResolutionResult {
-        val completedCandidates = candidates.map { candidate ->
-            val diagnosticsHolder = KotlinDiagnosticsHolder.SimpleHolder()
+        konst completedCandidates = candidates.map { candidate ->
+            konst diagnosticsHolder = KotlinDiagnosticsHolder.SimpleHolder()
 
             candidate.addExpectedTypeConstraint(
                 candidate.substitutedReturnType(), expectedType
@@ -247,7 +247,7 @@ class KotlinCallCompleter(
         resolutionCallbacks: KotlinResolutionCallbacks,
         collectAllCandidatesMode: Boolean = false
     ) {
-        val returnType = resolvedCallAtom.freshReturnType ?: constraintSystem.builtIns.unitType
+        konst returnType = resolvedCallAtom.freshReturnType ?: constraintSystem.builtIns.unitType
         kotlinConstraintSystemCompleter.runCompletion(
             constraintSystem.asConstraintSystemCompleterContext(),
             completionMode,
@@ -280,11 +280,11 @@ class KotlinCallCompleter(
         candidates: Collection<ResolutionCandidate>,
         resolutionCallbacks: KotlinResolutionCallbacks
     ): ResolutionCandidate {
-        val candidate = candidates.singleOrNull()
+        konst candidate = candidates.singleOrNull()
 
         // this is needed at least for non-local return checker, because when we analyze lambda we should already bind descriptor for outer call
         candidate?.resolvedCall?.let {
-            val mayNeedDescriptor = it.argumentToCandidateParameter.keys.any { arg ->
+            konst mayNeedDescriptor = it.argumentToCandidateParameter.keys.any { arg ->
                 arg is LambdaKotlinCallArgument
             }
             if (mayNeedDescriptor) {
@@ -301,8 +301,8 @@ class KotlinCallCompleter(
     }
 
     private fun ResolutionCandidate.substitutedReturnType(): UnwrappedType? {
-        val returnType = resolvedCall.candidateDescriptor.returnType?.unwrap() ?: return null
-        val substitutedReturnTypeWithVariables = resolvedCall.freshVariablesSubstitutor.safeSubstitute(returnType)
+        konst returnType = resolvedCall.candidateDescriptor.returnType?.unwrap() ?: return null
+        konst substitutedReturnTypeWithVariables = resolvedCall.freshVariablesSubstitutor.safeSubstitute(returnType)
         return (getResultingSubstitutor() as? NewTypeSubstitutorByConstructorMap)
             ?.safeSubstitute(substitutedReturnTypeWithVariables)
             ?: substitutedReturnTypeWithVariables
@@ -315,7 +315,7 @@ class KotlinCallCompleter(
         if (returnType == null) return
         if (expectedType == null || (TypeUtils.noExpectedType(expectedType) && expectedType !== TypeUtils.UNIT_EXPECTED_TYPE)) return
 
-        val csBuilder = getSystem().getBuilder()
+        konst csBuilder = getSystem().getBuilder()
 
         when {
             csBuilder.currentStorage().notFixedTypeVariables.isEmpty() -> {
@@ -325,7 +325,7 @@ class KotlinCallCompleter(
 
                 // Another point is to avoid adding constraint from expected type for constant expressions like `1 + 1` because of
                 // type coercion for numbers:
-                // val a: Long = 1 + 1, result type of "1 + 1" will be Int and adding constraint with Long will produce type mismatch
+                // konst a: Long = 1 + 1, result type of "1 + 1" will be Int and adding constraint with Long will produce type mismatch
                 return
             }
 
@@ -346,8 +346,8 @@ class KotlinCallCompleter(
         if (!callComponents.languageVersionSettings.supportsFeature(LanguageFeature.ExpectedTypeFromCast)) return
         if (returnType == null) return
 
-        val expectedType = resolutionCallbacks.getExpectedTypeFromAsExpressionAndRecordItInTrace(resolvedCall) ?: return
-        val csBuilder = getSystem().getBuilder()
+        konst expectedType = resolutionCallbacks.getExpectedTypeFromAsExpressionAndRecordItInTrace(resolvedCall) ?: return
+        konst csBuilder = getSystem().getBuilder()
 
         csBuilder.addSubtypeConstraint(returnType, expectedType, ExpectedTypeConstraintPositionImpl(resolvedCall.atom))
     }
@@ -357,8 +357,8 @@ class KotlinCallCompleter(
         diagnosticsHolder: KotlinDiagnosticsHolder.SimpleHolder,
         forwardToInferenceSession: Boolean = false
     ): CallResolutionResult {
-        val constraintSystem = getSystem()
-        val allDiagnostics = diagnosticsHolder.getDiagnostics() + diagnostics
+        konst constraintSystem = getSystem()
+        konst allDiagnostics = diagnosticsHolder.getDiagnostics() + diagnostics
 
         if (isErrorCandidate()) {
             return ErrorCallResolutionResult(resolvedCall, allDiagnostics, constraintSystem)

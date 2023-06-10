@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.ir.symbols.IrFieldSymbol
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.fieldAccessExpression]
  */
 abstract class IrFieldAccessExpression : IrDeclarationReference() {
-    abstract override val symbol: IrFieldSymbol
+    abstract override konst symbol: IrFieldSymbol
 
     abstract var superQualifierSymbol: IrClassSymbol?
 

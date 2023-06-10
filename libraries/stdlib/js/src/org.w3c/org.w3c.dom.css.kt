@@ -27,12 +27,12 @@ public inline operator fun MediaList.get(index: Int): String? = asDynamic()[inde
  * Exposes the JavaScript [StyleSheet](https://developer.mozilla.org/en/docs/Web/API/StyleSheet) to Kotlin
  */
 public external abstract class StyleSheet {
-    open val type: String
-    open val href: String?
-    open val ownerNode: UnionElementOrProcessingInstruction?
-    open val parentStyleSheet: StyleSheet?
-    open val title: String?
-    open val media: MediaList
+    open konst type: String
+    open konst href: String?
+    open konst ownerNode: UnionElementOrProcessingInstruction?
+    open konst parentStyleSheet: StyleSheet?
+    open konst title: String?
+    open konst media: MediaList
     open var disabled: Boolean
 }
 
@@ -40,8 +40,8 @@ public external abstract class StyleSheet {
  * Exposes the JavaScript [CSSStyleSheet](https://developer.mozilla.org/en/docs/Web/API/CSSStyleSheet) to Kotlin
  */
 public external abstract class CSSStyleSheet : StyleSheet {
-    open val ownerRule: CSSRule?
-    open val cssRules: CSSRuleList
+    open konst ownerRule: CSSRule?
+    open konst cssRules: CSSRuleList
     fun insertRule(rule: String, index: Int): Int
     fun deleteRule(index: Int)
 }
@@ -61,7 +61,7 @@ public inline operator fun StyleSheetList.get(index: Int): StyleSheet? = asDynam
  * Exposes the JavaScript [LinkStyle](https://developer.mozilla.org/en/docs/Web/API/LinkStyle) to Kotlin
  */
 public external interface LinkStyle {
-    val sheet: StyleSheet?
+    konst sheet: StyleSheet?
         get() = definedExternally
 }
 
@@ -80,20 +80,20 @@ public inline operator fun CSSRuleList.get(index: Int): CSSRule? = asDynamic()[i
  * Exposes the JavaScript [CSSRule](https://developer.mozilla.org/en/docs/Web/API/CSSRule) to Kotlin
  */
 public external abstract class CSSRule {
-    open val type: Short
+    open konst type: Short
     open var cssText: String
-    open val parentRule: CSSRule?
-    open val parentStyleSheet: CSSStyleSheet?
+    open konst parentRule: CSSRule?
+    open konst parentStyleSheet: CSSStyleSheet?
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -102,34 +102,34 @@ public external abstract class CSSRule {
  */
 public external abstract class CSSStyleRule : CSSRule {
     open var selectorText: String
-    open val style: CSSStyleDeclaration
+    open konst style: CSSStyleDeclaration
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
 public external abstract class CSSImportRule : CSSRule {
-    open val href: String
-    open val media: MediaList
-    open val styleSheet: CSSStyleSheet
+    open konst href: String
+    open konst media: MediaList
+    open konst styleSheet: CSSStyleSheet
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -137,19 +137,19 @@ public external abstract class CSSImportRule : CSSRule {
  * Exposes the JavaScript [CSSGroupingRule](https://developer.mozilla.org/en/docs/Web/API/CSSGroupingRule) to Kotlin
  */
 public external abstract class CSSGroupingRule : CSSRule {
-    open val cssRules: CSSRuleList
+    open konst cssRules: CSSRuleList
     fun insertRule(rule: String, index: Int): Int
     fun deleteRule(index: Int)
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -157,17 +157,17 @@ public external abstract class CSSGroupingRule : CSSRule {
  * Exposes the JavaScript [CSSMediaRule](https://developer.mozilla.org/en/docs/Web/API/CSSMediaRule) to Kotlin
  */
 public external abstract class CSSMediaRule : CSSGroupingRule {
-    open val media: MediaList
+    open konst media: MediaList
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -176,33 +176,33 @@ public external abstract class CSSMediaRule : CSSGroupingRule {
  */
 public external abstract class CSSPageRule : CSSGroupingRule {
     open var selectorText: String
-    open val style: CSSStyleDeclaration
+    open konst style: CSSStyleDeclaration
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
 public external abstract class CSSMarginRule : CSSRule {
-    open val name: String
-    open val style: CSSStyleDeclaration
+    open konst name: String
+    open konst style: CSSStyleDeclaration
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -210,18 +210,18 @@ public external abstract class CSSMarginRule : CSSRule {
  * Exposes the JavaScript [CSSNamespaceRule](https://developer.mozilla.org/en/docs/Web/API/CSSNamespaceRule) to Kotlin
  */
 public external abstract class CSSNamespaceRule : CSSRule {
-    open val namespaceURI: String
-    open val prefix: String
+    open konst namespaceURI: String
+    open konst prefix: String
 
     companion object {
-        val STYLE_RULE: Short
-        val CHARSET_RULE: Short
-        val IMPORT_RULE: Short
-        val MEDIA_RULE: Short
-        val FONT_FACE_RULE: Short
-        val PAGE_RULE: Short
-        val MARGIN_RULE: Short
-        val NAMESPACE_RULE: Short
+        konst STYLE_RULE: Short
+        konst CHARSET_RULE: Short
+        konst IMPORT_RULE: Short
+        konst MEDIA_RULE: Short
+        konst FONT_FACE_RULE: Short
+        konst PAGE_RULE: Short
+        konst MARGIN_RULE: Short
+        konst NAMESPACE_RULE: Short
     }
 }
 
@@ -230,7 +230,7 @@ public external abstract class CSSNamespaceRule : CSSRule {
  */
 public external abstract class CSSStyleDeclaration : ItemArrayLike<String> {
     open var cssText: String
-    open val parentRule: CSSRule?
+    open konst parentRule: CSSRule?
     open var cssFloat: String
     open var alignContent: String
     open var alignItems: String
@@ -460,8 +460,8 @@ public external abstract class CSSStyleDeclaration : ItemArrayLike<String> {
     open var _webkit_cased_attribute: String
     fun getPropertyValue(property: String): String
     fun getPropertyPriority(property: String): String
-    fun setProperty(property: String, value: String, priority: String = definedExternally)
-    fun setPropertyValue(property: String, value: String)
+    fun setProperty(property: String, konstue: String, priority: String = definedExternally)
+    fun setPropertyValue(property: String, konstue: String)
     fun setPropertyPriority(property: String, priority: String)
     fun removeProperty(property: String): String
     override fun item(index: Int): String
@@ -472,7 +472,7 @@ public external abstract class CSSStyleDeclaration : ItemArrayLike<String> {
 public inline operator fun CSSStyleDeclaration.get(index: Int): String? = asDynamic()[index]
 
 public external interface ElementCSSInlineStyle {
-    val style: CSSStyleDeclaration
+    konst style: CSSStyleDeclaration
 }
 
 /**

@@ -35,13 +35,13 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
-class SecondaryConstructorLowering(val context: JsIrBackendContext) : DeclarationTransformer {
+class SecondaryConstructorLowering(konst context: JsIrBackendContext) : DeclarationTransformer {
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (context.es6mode) return null
 
         if (declaration is IrConstructor && !declaration.isPrimary) {
-            val irClass = declaration.parentAsClass
+            konst irClass = declaration.parentAsClass
 
             if (context.inlineClassesUtils.isClassInlineLike(irClass)) return null
 
@@ -52,9 +52,9 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
     }
 
     private fun transformConstructor(constructor: IrConstructor, irClass: IrClass): List<IrSimpleFunction> {
-        val delegate = context.buildConstructorDelegate(constructor, irClass)
+        konst delegate = context.buildConstructorDelegate(constructor, irClass)
 
-        val factory = context.buildConstructorFactory(constructor, irClass)
+        konst factory = context.buildConstructorFactory(constructor, irClass)
 
         generateStubsBody(constructor, irClass, delegate, factory)
 
@@ -77,7 +77,7 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
         //   return $this
         // }
         // Foo_init_$Create$(...) {
-        //   val t = Object.create(Foo.prototype);
+        //   konst t = Object.create(Foo.prototype);
         //   return Foo_init_$Init$(..., t)
         // }
         generateInitBody(constructor, irClass, delegate)
@@ -86,23 +86,23 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
 
     private fun generateFactoryBody(constructor: IrConstructor, irClass: IrClass, stub: IrSimpleFunction, delegate: IrSimpleFunction) {
         stub.body = context.irFactory.createBlockBody(UNDEFINED_OFFSET, UNDEFINED_OFFSET) {
-            val type = irClass.defaultType
-            val createFunctionIntrinsic = context.intrinsics.jsObjectCreateSymbol
-            val irCreateCall = JsIrBuilder.buildCall(createFunctionIntrinsic, type, listOf(type))
-            val irDelegateCall = JsIrBuilder.buildCall(delegate.symbol, type).also { call ->
+            konst type = irClass.defaultType
+            konst createFunctionIntrinsic = context.intrinsics.jsObjectCreateSymbol
+            konst irCreateCall = JsIrBuilder.buildCall(createFunctionIntrinsic, type, listOf(type))
+            konst irDelegateCall = JsIrBuilder.buildCall(delegate.symbol, type).also { call ->
                 for (i in 0 until stub.typeParameters.size) {
                     call.putTypeArgument(i, stub.typeParameters[i].toIrType())
                 }
 
-                for (i in 0 until stub.valueParameters.size) {
-                    call.putValueArgument(i, JsIrBuilder.buildGetValue(stub.valueParameters[i].symbol))
+                for (i in 0 until stub.konstueParameters.size) {
+                    call.putValueArgument(i, JsIrBuilder.buildGetValue(stub.konstueParameters[i].symbol))
                 }
 
-                call.putValueArgument(constructor.valueParameters.size, irCreateCall)
+                call.putValueArgument(constructor.konstueParameters.size, irCreateCall)
             }
 
             if (irClass.isSubclassOf(context.irBuiltIns.throwableClass.owner)) {
-                val tmp = JsIrBuilder.buildVar(
+                konst tmp = JsIrBuilder.buildVar(
                     type = irDelegateCall.type,
                     parent = stub,
                     initializer = irDelegateCall
@@ -118,7 +118,7 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
                 }
                 statements += JsIrBuilder.buildReturn(stub.symbol, JsIrBuilder.buildGetValue(tmp.symbol), context.irBuiltIns.nothingType)
             } else {
-                val irReturn = JsIrBuilder.buildReturn(stub.symbol, irDelegateCall, context.irBuiltIns.nothingType)
+                konst irReturn = JsIrBuilder.buildReturn(stub.symbol, irDelegateCall, context.irBuiltIns.nothingType)
                 statements += irReturn
             }
 
@@ -126,10 +126,10 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
     }
 
     private fun generateInitBody(constructor: IrConstructor, irClass: IrClass, delegate: IrSimpleFunction) {
-        val thisParam = delegate.valueParameters.last()
-        val oldThisReceiver = irClass.thisReceiver!!
-        val constructorBody = constructor.body
-        val oldValueParameters = constructor.valueParameters + oldThisReceiver
+        konst thisParam = delegate.konstueParameters.last()
+        konst oldThisReceiver = irClass.thisReceiver!!
+        konst constructorBody = constructor.body
+        konst oldValueParameters = constructor.konstueParameters + oldThisReceiver
 
         // TODO: replace parameters as well
         if (constructorBody != null) {
@@ -145,7 +145,7 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
                         constructor.symbol,
                         delegate.symbol,
                         oldValueParameters
-                            .zip(delegate.valueParameters)
+                            .zip(delegate.konstueParameters)
                             .associate { (old, new) -> old.symbol to new.symbol }
                     )
                 )
@@ -154,11 +154,11 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
     }
 
     private class ThisUsageReplaceTransformer(
-        val constructor: IrConstructorSymbol,
-        val function: IrFunctionSymbol,
+        konst constructor: IrConstructorSymbol,
+        konst function: IrFunctionSymbol,
         symbolMapping: Map<IrValueSymbol, IrValueSymbol>
     ) : ValueRemapper(symbolMapping) {
-        private val newThisSymbol = symbolMapping.values.last()
+        private konst newThisSymbol = symbolMapping.konstues.last()
 
         override fun visitReturn(expression: IrReturn): IrExpression =
             if (expression.returnTargetSymbol != constructor)
@@ -177,9 +177,9 @@ class SecondaryConstructorLowering(val context: JsIrBackendContext) : Declaratio
 private fun IrTypeParameter.toIrType() = IrSimpleTypeImpl(symbol, true, emptyList(), emptyList())
 
 private fun JsIrBackendContext.buildInitDeclaration(constructor: IrConstructor, irClass: IrClass): IrSimpleFunction {
-    val type = irClass.defaultType
-    val constructorName = "${irClass.name}_init"
-    val functionName = "${constructorName}_\$Init\$"
+    konst type = irClass.defaultType
+    konst constructorName = "${irClass.name}_init"
+    konst functionName = "${constructorName}_\$Init\$"
 
     return irFactory.buildFun {
         startOffset = constructor.startOffset
@@ -195,15 +195,15 @@ private fun JsIrBackendContext.buildInitDeclaration(constructor: IrConstructor, 
         it.parent = constructor.parent
         it.copyTypeParametersFrom(constructor.parentAsClass)
 
-        it.valueParameters = constructor.valueParameters.memoryOptimizedMap { p -> p.copyTo(it) }
-        it.valueParameters = it.valueParameters memoryOptimizedPlus JsIrBuilder.buildValueParameter(it, "\$this", constructor.valueParameters.size, type)
+        it.konstueParameters = constructor.konstueParameters.memoryOptimizedMap { p -> p.copyTo(it) }
+        it.konstueParameters = it.konstueParameters memoryOptimizedPlus JsIrBuilder.buildValueParameter(it, "\$this", constructor.konstueParameters.size, type)
     }
 }
 
 private fun JsIrBackendContext.buildFactoryDeclaration(constructor: IrConstructor, irClass: IrClass): IrSimpleFunction {
-    val type = irClass.defaultType
-    val constructorName = "${irClass.name}_init"
-    val functionName = "${constructorName}_\$Create\$"
+    konst type = irClass.defaultType
+    konst constructorName = "${irClass.name}_init"
+    konst functionName = "${constructorName}_\$Create\$"
 
     return irFactory.buildFun {
         startOffset = constructor.startOffset
@@ -217,7 +217,7 @@ private fun JsIrBackendContext.buildFactoryDeclaration(constructor: IrConstructo
     }.also { factory ->
         factory.parent = constructor.parent
         factory.copyTypeParametersFrom(constructor.parentAsClass)
-        factory.valueParameters = factory.valueParameters memoryOptimizedPlus constructor.valueParameters.map { p -> p.copyTo(factory) }
+        factory.konstueParameters = factory.konstueParameters memoryOptimizedPlus constructor.konstueParameters.map { p -> p.copyTo(factory) }
         factory.annotations = constructor.annotations
     }
 }
@@ -234,7 +234,7 @@ private fun JsIrBackendContext.buildConstructorFactory(constructor: IrConstructo
     }
 }
 
-class SecondaryFactoryInjectorLowering(val context: JsIrBackendContext) : BodyLoweringPass {
+class SecondaryFactoryInjectorLowering(konst context: JsIrBackendContext) : BodyLoweringPass {
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         if (context.es6mode) return
@@ -242,7 +242,7 @@ class SecondaryFactoryInjectorLowering(val context: JsIrBackendContext) : BodyLo
         var parentFunction: IrFunction? = container as? IrFunction
         var declaration = container
         while (parentFunction == null) {
-            val parent = declaration.parent
+            konst parent = declaration.parent
 
             if (parent is IrFunction) {
                 parentFunction = parent
@@ -255,11 +255,11 @@ class SecondaryFactoryInjectorLowering(val context: JsIrBackendContext) : BodyLo
     }
 }
 
-private class CallsiteRedirectionTransformer(private val context: JsIrBackendContext) : IrElementTransformer<IrFunction?> {
+private class CallsiteRedirectionTransformer(private konst context: JsIrBackendContext) : IrElementTransformer<IrFunction?> {
 
-    private val defaultThrowableConstructor = context.defaultThrowableCtor
+    private konst defaultThrowableConstructor = context.defaultThrowableCtor
 
-    private val IrConstructor.isSecondaryConstructorCall
+    private konst IrConstructor.isSecondaryConstructorCall
         get() =
             !isPrimary && this != defaultThrowableConstructor && !isExternal && !context.inlineClassesUtils.isClassInlineLike(parentAsClass)
 
@@ -268,9 +268,9 @@ private class CallsiteRedirectionTransformer(private val context: JsIrBackendCon
     override fun visitConstructorCall(expression: IrConstructorCall, data: IrFunction?): IrElement {
         super.visitConstructorCall(expression, data)
 
-        val target = expression.symbol.owner
+        konst target = expression.symbol.owner
         return if (target.isSecondaryConstructorCall) {
-            val factory = context.buildConstructorFactory(target, target.parentAsClass)
+            konst factory = context.buildConstructorFactory(target, target.parentAsClass)
             replaceSecondaryConstructorWithFactoryFunction(expression, factory.symbol)
         } else expression
     }
@@ -278,24 +278,24 @@ private class CallsiteRedirectionTransformer(private val context: JsIrBackendCon
     override fun visitDelegatingConstructorCall(expression: IrDelegatingConstructorCall, data: IrFunction?): IrElement {
         super.visitDelegatingConstructorCall(expression, data)
 
-        val target = expression.symbol.owner
+        konst target = expression.symbol.owner
 
         return if (target.isSecondaryConstructorCall) {
-            val klass = target.parentAsClass
-            val delegate = context.buildConstructorDelegate(target, klass)
-            val newCall = replaceSecondaryConstructorWithFactoryFunction(expression, delegate.symbol)
+            konst klass = target.parentAsClass
+            konst delegate = context.buildConstructorDelegate(target, klass)
+            konst newCall = replaceSecondaryConstructorWithFactoryFunction(expression, delegate.symbol)
 
-            val readThis = expression.run {
+            konst readThis = expression.run {
                 if (data is IrConstructor) {
-                    val thisReceiver = data.constructedClass.thisReceiver!!
+                    konst thisReceiver = data.constructedClass.thisReceiver!!
                     IrGetValueImpl(startOffset, endOffset, thisReceiver.type, thisReceiver.symbol)
                 } else {
-                    val lastValueParameter = data!!.valueParameters.last()
+                    konst lastValueParameter = data!!.konstueParameters.last()
                     IrGetValueImpl(startOffset, endOffset, lastValueParameter.type, lastValueParameter.symbol)
                 }
             }
 
-            newCall.apply { putValueArgument(expression.valueArgumentsCount, readThis) }
+            newCall.apply { putValueArgument(expression.konstueArgumentsCount, readThis) }
         } else expression
     }
 
@@ -303,16 +303,16 @@ private class CallsiteRedirectionTransformer(private val context: JsIrBackendCon
         call: IrFunctionAccessExpression,
         newTarget: IrSimpleFunctionSymbol
     ): IrCall {
-        val irClass = call.symbol.owner.parentAsClass
+        konst irClass = call.symbol.owner.parentAsClass
         return IrCallImpl(
             call.startOffset, call.endOffset, call.type, newTarget,
             typeArgumentsCount = call.typeArgumentsCount,
-            valueArgumentsCount = newTarget.owner.valueParameters.size,
+            konstueArgumentsCount = newTarget.owner.konstueParameters.size,
             superQualifierSymbol = irClass.symbol.takeIf { context.es6mode && call.isSyntheticDelegatingReplacement }
         ).apply {
             copyTypeArgumentsFrom(call)
 
-            for (i in 0 until call.valueArgumentsCount) {
+            for (i in 0 until call.konstueArgumentsCount) {
                 putValueArgument(i, call.getValueArgument(i))
             }
         }

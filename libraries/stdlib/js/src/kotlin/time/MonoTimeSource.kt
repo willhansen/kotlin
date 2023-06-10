@@ -22,8 +22,8 @@ internal interface DefaultTimeSource : TimeSource.WithComparableMarks {
 @SinceKotlin("1.3")
 internal actual object MonotonicTimeSource : DefaultTimeSource, TimeSource.WithComparableMarks {  // TODO: interface should not be required here
 
-    private val actualSource: DefaultTimeSource = run {
-        val isNode: Boolean = js("typeof process !== 'undefined' && process.versions && !!process.versions.node")
+    private konst actualSource: DefaultTimeSource = run {
+        konst isNode: Boolean = js("typeof process !== 'undefined' && process.versions && !!process.versions.node")
 
         if (isNode)
             HrTimeSource(js("process").unsafeCast<Process>())
@@ -48,9 +48,9 @@ internal external interface Process {
 }
 
 @SinceKotlin("1.3")
-internal class HrTimeSource(private val process: Process) : DefaultTimeSource {
+internal class HrTimeSource(private konst process: Process) : DefaultTimeSource {
     @Suppress("NOTHING_TO_INLINE")
-    private class Reading(val components: Array<Double>) {
+    private class Reading(konst components: Array<Double>) {
         inline operator fun component1(): Double = components.component1()
         inline operator fun component2(): Double = components.component2()
         override fun equals(other: Any?): Boolean = other is Reading && this.components contentEquals other.components
@@ -66,15 +66,15 @@ internal class HrTimeSource(private val process: Process) : DefaultTimeSource {
             .let { (seconds, nanos) -> seconds.toDuration(DurationUnit.SECONDS) + nanos.toDuration(DurationUnit.NANOSECONDS) }
 
     override fun differenceBetween(one: ValueTimeMark, another: ValueTimeMark): Duration {
-        val (s1, n1) = one.reading as Reading
-        val (s2, n2) = another.reading as Reading
+        konst (s1, n1) = one.reading as Reading
+        konst (s2, n2) = another.reading as Reading
         return (if (s1 == s2 && n1 == n2) Duration.ZERO else (s1 - s2).toDuration(DurationUnit.SECONDS)) + (n1 - n2).toDuration(DurationUnit.NANOSECONDS)
     }
 
     override fun adjustReading(timeMark: ValueTimeMark, duration: Duration): ValueTimeMark =
         (timeMark.reading as Reading).let { (seconds, nanos) ->
             duration.toComponents { _, addNanos ->
-                val resultSeconds = sumCheckNaN(seconds + truncate(duration.toDouble(DurationUnit.SECONDS)))
+                konst resultSeconds = sumCheckNaN(seconds + truncate(duration.toDouble(DurationUnit.SECONDS)))
                 Reading(arrayOf(resultSeconds, if (resultSeconds.isFinite()) nanos + addNanos else 0.0))
             }
         }.let(TimeSource.Monotonic::ValueTimeMark)
@@ -84,7 +84,7 @@ internal class HrTimeSource(private val process: Process) : DefaultTimeSource {
 }
 
 @SinceKotlin("1.3")
-internal class PerformanceTimeSource(private val performance: Performance) :
+internal class PerformanceTimeSource(private konst performance: Performance) :
     DefaultTimeSource { // AbstractDoubleTimeSource(unit = DurationUnit.MILLISECONDS) {
     private fun read(): Double = performance.now()
 
@@ -92,8 +92,8 @@ internal class PerformanceTimeSource(private val performance: Performance) :
     override fun elapsedFrom(timeMark: ValueTimeMark): Duration = (read() - timeMark.reading as Double).milliseconds
 
     override fun differenceBetween(one: ValueTimeMark, another: ValueTimeMark): Duration {
-        val ms1 = one.reading as Double
-        val ms2 = another.reading as Double
+        konst ms1 = one.reading as Double
+        konst ms2 = another.reading as Double
         return if (ms1 == ms2) Duration.ZERO else (ms1 - ms2).milliseconds
     }
 
@@ -111,8 +111,8 @@ internal object DateNowTimeSource : DefaultTimeSource {
     override fun elapsedFrom(timeMark: ValueTimeMark): Duration = (read() - timeMark.reading as Double).milliseconds
 
     override fun differenceBetween(one: ValueTimeMark, another: ValueTimeMark): Duration {
-        val ms1 = one.reading as Double
-        val ms2 = another.reading as Double
+        konst ms1 = one.reading as Double
+        konst ms2 = another.reading as Double
         return if (ms1 == ms2) Duration.ZERO else (ms1 - ms2).milliseconds
     }
 
@@ -123,11 +123,11 @@ internal object DateNowTimeSource : DefaultTimeSource {
 }
 
 internal external interface GlobalPerformance {
-    val performance: Performance
+    konst performance: Performance
 }
 
 internal external interface Performance {
     fun now(): Double
 }
 
-private fun sumCheckNaN(value: Double): Double = value.also { if (it.isNaN()) throw IllegalArgumentException("Summing infinities of different signs") }
+private fun sumCheckNaN(konstue: Double): Double = konstue.also { if (it.isNaN()) throw IllegalArgumentException("Summing infinities of different signs") }

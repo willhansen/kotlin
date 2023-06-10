@@ -7,22 +7,22 @@ public inline fun UIntArray.elementAtOrElse(index: Int, defaultValue: (Int) -> U
     return if (index >= 0 && index <= lastIndex) get(index) else defaultValue(index)
 }
 
-public inline val UIntArray.indices: IntRange
+public inline konst UIntArray.indices: IntRange
     get() = storage.indices
-public inline val ULongArray.indices: IntRange
+public inline konst ULongArray.indices: IntRange
     get() = storage.indices
-public inline val UByteArray.indices: IntRange
+public inline konst UByteArray.indices: IntRange
     get() = storage.indices
-public inline val UShortArray.indices: IntRange
+public inline konst UShortArray.indices: IntRange
     get() = storage.indices
 
-public inline val UIntArray.lastIndex: Int
+public inline konst UIntArray.lastIndex: Int
     get() = storage.lastIndex
-public inline val ULongArray.lastIndex: Int
+public inline konst ULongArray.lastIndex: Int
     get() = storage.lastIndex
-public inline val UByteArray.lastIndex: Int
+public inline konst UByteArray.lastIndex: Int
     get() = storage.lastIndex
-public inline val UShortArray.lastIndex: Int
+public inline konst UShortArray.lastIndex: Int
     get() = storage.lastIndex
 
 public inline fun UIntArray.first(): UInt {

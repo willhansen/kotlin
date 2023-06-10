@@ -28,7 +28,7 @@ object MapPsiToAsmDesc {
         is PsiArrayType -> "[" + typeDesc(type.componentType)
 
         is PsiClassType -> {
-            val resolved = type.resolve()
+            konst resolved = type.resolve()
             when (resolved) {
                 is PsiTypeParameter -> resolved.superTypes.firstOrNull()?.let { typeDesc(it) } ?: "Ljava/lang/Object;"
                 is PsiClass -> classDesc(resolved)
@@ -42,7 +42,7 @@ object MapPsiToAsmDesc {
 
     private fun classDesc(psiClass: PsiClass) = buildString {
         append("L")
-        val classes = generateSequence(psiClass) { it.containingClass }.toList().reversed()
+        konst classes = generateSequence(psiClass) { it.containingClass }.toList().reversed()
         append(classes.first().qualifiedName!!.replace(".", "/"))
         classes.drop(1).forEach {
             append("$")
@@ -68,5 +68,5 @@ object MapPsiToAsmDesc {
 
     private fun primitive(asmType: Type) = asmType.descriptor
 
-    private val LOG = Logger.getInstance(this::class.java)
+    private konst LOG = Logger.getInstance(this::class.java)
 }

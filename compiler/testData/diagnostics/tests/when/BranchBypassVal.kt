@@ -11,7 +11,7 @@
 class A
 
 fun test(a: Any): String {
-    val q: String? = null
+    konst q: String? = null
 
     when (a) {
         is A -> q!!

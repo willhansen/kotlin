@@ -12,7 +12,7 @@ inline fun inlineDemo(): Unit {
 
 // CHECK_CALLED_IN_SCOPE: scope=testUsualCall function=Unit_getInstance
 fun testUsualCall() {
-    val x = demo()
+    konst x = demo()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }
@@ -27,7 +27,7 @@ fun testUsualCallNoVar() {
 fun testUsualCallInReturn() {
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testUsualCallInReturn$test function=Unit_getInstance
     fun test() { return demo() }
-    val x = test()
+    konst x = test()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }
@@ -44,7 +44,7 @@ fun testUsualCallInReturnNoVar() {
 fun testUsualCallInExpressionBody() {
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testUsualCallInExpressionBody$test function=Unit_getInstance
     fun test() = demo()
-    val x = test()
+    konst x = test()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }
@@ -59,7 +59,7 @@ fun testUsualCallInExpressionBodyNoVar() {
 
 // CHECK_CALLED_IN_SCOPE: scope=testInlineCall function=Unit_getInstance
 fun testInlineCall() {
-    val x = inlineDemo()
+    konst x = inlineDemo()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }
@@ -74,7 +74,7 @@ fun testInlineCallNoVar() {
 fun testInlineCallInReturn() {
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testInlineCallInReturn$test function=Unit_getInstance
     fun test() { return inlineDemo() }
-    val x = test()
+    konst x = test()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }
@@ -91,7 +91,7 @@ fun testInlineCallInReturnNoVar() {
 fun testInlineCallInExpressionBody() {
     // CHECK_NOT_CALLED_IN_SCOPE: scope=testInlineCallInExpressionBody$test function=Unit_getInstance
     fun test() = inlineDemo()
-    val x = test()
+    konst x = test()
     assertEquals(flushDemoCallCounter(), 1)
     assertEquals(x.toString(), "kotlin.Unit")
 }

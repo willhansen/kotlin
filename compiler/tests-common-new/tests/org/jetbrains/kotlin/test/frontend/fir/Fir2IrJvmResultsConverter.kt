@@ -63,38 +63,38 @@ class Fir2IrJvmResultsConverter(
         module: TestModule,
         inputArtifact: FirOutputArtifact
     ): IrBackendInput.JvmIrBackendInput {
-        val compilerConfigurationProvider = testServices.compilerConfigurationProvider
-        val configuration = compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst compilerConfigurationProvider = testServices.compilerConfigurationProvider
+        konst configuration = compilerConfigurationProvider.getCompilerConfiguration(module)
 
-        val irMangler = JvmIrMangler
-        val fir2IrExtensions = JvmFir2IrExtensions(configuration, JvmIrDeserializerImpl(), irMangler)
+        konst irMangler = JvmIrMangler
+        konst fir2IrExtensions = JvmFir2IrExtensions(configuration, JvmIrDeserializerImpl(), irMangler)
 
         // Create and initialize the module and its dependencies
-        val project = compilerConfigurationProvider.getProject(module)
+        konst project = compilerConfigurationProvider.getProject(module)
         // TODO: handle fir from light tree
-        val ktFiles = inputArtifact.mainFirFiles.mapNotNull { it.value.psi as KtFile? }
-        val sourceFiles = inputArtifact.mainFirFiles.mapNotNull { it.value.sourceFile }
-        val container = TopDownAnalyzerFacadeForJVM.createContainer(
+        konst ktFiles = inputArtifact.mainFirFiles.mapNotNull { it.konstue.psi as KtFile? }
+        konst sourceFiles = inputArtifact.mainFirFiles.mapNotNull { it.konstue.sourceFile }
+        konst container = TopDownAnalyzerFacadeForJVM.createContainer(
             project, ktFiles, NoScopeRecordCliBindingTrace(), configuration,
             compilerConfigurationProvider.getPackagePartProviderFactory(module),
             ::FileBasedDeclarationProviderFactory, CompilerEnvironment,
             TopDownAnalyzerFacadeForJVM.newModuleSearchScope(project, ktFiles), emptyList()
         )
 
-        val phaseConfig = configuration.get(CLIConfigurationKeys.PHASE_CONFIG)
+        konst phaseConfig = configuration.get(CLIConfigurationKeys.PHASE_CONFIG)
 
-        val dependentIrParts = mutableListOf<IrModuleFragment>()
+        konst dependentIrParts = mutableListOf<IrModuleFragment>()
         lateinit var backendInput: JvmIrCodegenFactory.JvmIrBackendInput
         lateinit var mainModuleComponents: Fir2IrComponents
 
-        val firAnalyzerFacade = inputArtifact.partsForDependsOnModules.last().firAnalyzerFacade as? FirAnalyzerFacade
-        val generateSignatures = firAnalyzerFacade?.fir2IrConfiguration?.linkViaSignatures == true
+        konst firAnalyzerFacade = inputArtifact.partsForDependsOnModules.last().firAnalyzerFacade as? FirAnalyzerFacade
+        konst generateSignatures = firAnalyzerFacade?.fir2IrConfiguration?.linkViaSignatures == true
 
-        val commonMemberStorage = Fir2IrCommonMemberStorage(signatureComposerForJvmFir2Ir(generateSignatures), FirJvmKotlinMangler())
+        konst commonMemberStorage = Fir2IrCommonMemberStorage(signatureComposerForJvmFir2Ir(generateSignatures), FirJvmKotlinMangler())
         var irBuiltIns: IrBuiltInsOverFir? = null
 
         for ((index, firOutputPart) in inputArtifact.partsForDependsOnModules.withIndex()) {
-            val (irModuleFragment, components, pluginContext) = firOutputPart.firAnalyzerFacade.convertToIr(
+            konst (irModuleFragment, components, pluginContext) = firOutputPart.firAnalyzerFacade.convertToIr(
                 fir2IrExtensions, commonMemberStorage, irBuiltIns
             )
             irBuiltIns = components.irBuiltIns
@@ -116,8 +116,8 @@ class Fir2IrJvmResultsConverter(
             }
         }
 
-        val codegenFactory = JvmIrCodegenFactory(configuration, phaseConfig)
-        val generationState = GenerationState.Builder(
+        konst codegenFactory = JvmIrCodegenFactory(configuration, phaseConfig)
+        konst generationState = GenerationState.Builder(
             project, ClassBuilderFactories.TEST,
             container.get(), NoScopeRecordCliBindingTrace().bindingContext, configuration
         ).isIrBackend(

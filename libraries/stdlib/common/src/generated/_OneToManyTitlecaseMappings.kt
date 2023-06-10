@@ -12,7 +12,7 @@ package kotlin.text
 
 // 10 mappings totally
 internal fun Char.titlecaseImpl(): String {
-    val uppercase = uppercase()
+    konst uppercase = uppercase()
     if (uppercase.length > 1) {
         return if (this == '\u0149') uppercase else uppercase[0] + uppercase.substring(1).lowercase()
     }

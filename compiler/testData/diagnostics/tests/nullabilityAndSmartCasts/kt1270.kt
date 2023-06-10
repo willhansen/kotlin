@@ -5,10 +5,10 @@
 package kt1270
 
 fun foo() {
-    val sc = java.util.HashMap<String, SomeClass>()[""]
-    val value = sc<!UNSAFE_CALL!>.<!>value
+    konst sc = java.util.HashMap<String, SomeClass>()[""]
+    konst konstue = sc<!UNSAFE_CALL!>.<!>konstue
 }
 
 private class SomeClass() {
-    val value : Int = 5
+    konst konstue : Int = 5
 }

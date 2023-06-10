@@ -10,35 +10,35 @@ import kotlin.native.concurrent.*
 import kotlinx.cinterop.*
 import platform.posix.memcpy
 
-// This global variable only set to != null value in the decoding worker.
+// This global variable only set to != null konstue in the decoding worker.
 @ThreadLocal
 private var decoder: Decoder? = null
 
-data class VideoInfo(val size: Dimensions, val fps: Double)
-data class AudioInfo(val sampleRate: Int, val channels: Int)
+data class VideoInfo(konst size: Dimensions, konst fps: Double)
+data class AudioInfo(konst sampleRate: Int, konst channels: Int)
 
-data class CodecInfo(val video: VideoInfo?, val audio: AudioInfo?) {
-    val hasVideo = video != null
-    val hasAudio = audio != null
+data class CodecInfo(konst video: VideoInfo?, konst audio: AudioInfo?) {
+    konst hasVideo = video != null
+    konst hasAudio = audio != null
 }
 
-class VideoFrame(val buffer: CPointer<AVBufferRef>, val lineSize: Int, val timeStamp: Double) {
+class VideoFrame(konst buffer: CPointer<AVBufferRef>, konst lineSize: Int, konst timeStamp: Double) {
     fun unref() = av_buffer_unref2(buffer)
 }
 
-class AudioFrame(val buffer: CPointer<AVBufferRef>, var position: Int, val size: Int, val timeStamp: Double) {
+class AudioFrame(konst buffer: CPointer<AVBufferRef>, var position: Int, konst size: Int, konst timeStamp: Double) {
     fun unref() = av_buffer_unref2(buffer)
 }
 
 private fun Int.checkAVError() {
     if (this != 0) {
-        val buffer = ByteArray(1024)
+        konst buffer = ByteArray(1024)
         av_strerror(this, buffer.refTo(0), buffer.size.convert())
         throw Error("AVError: ${buffer.decodeToString()}")
     }
 }
 
-private val AVFormatContext.codecs: List<AVCodecContext?>
+private konst AVFormatContext.codecs: List<AVCodecContext?>
     get() = List(nb_streams.toInt()) { streams?.get(it)?.pointed?.codec?.pointed }
 
 private fun AVFormatContext.streamAt(index: Int): AVStream? =
@@ -46,8 +46,8 @@ private fun AVFormatContext.streamAt(index: Int): AVStream? =
 
 private fun AVStream.openCodec(tag: String): AVCodecContext {
     // Get codec context for the video stream.
-    val codecContext = codec!!.pointed
-    val codec = avcodec_find_decoder(codecContext.codec_id)?.pointed ?:
+    konst codecContext = codec!!.pointed
+    konst codec = avcodec_find_decoder(codecContext.codec_id)?.pointed ?:
         throw Error("Unsupported $tag codec with id ${codecContext.codec_id}...")
     // Open codec.
     if (avcodec_open2(codecContext.ptr, codec.ptr, null) < 0)
@@ -55,13 +55,13 @@ private fun AVStream.openCodec(tag: String): AVCodecContext {
     return codecContext
 }
 
-class AVFile(private val fileName: String) : DisposableContainer() {
-    private val contextPtrPtr = arena.alloc<CPointerVar<AVFormatContext>>().ptr
-    private val contextPtr: CPointer<AVFormatContext>
+class AVFile(private konst fileName: String) : DisposableContainer() {
+    private konst contextPtrPtr = arena.alloc<CPointerVar<AVFormatContext>>().ptr
+    private konst contextPtr: CPointer<AVFormatContext>
 
     init {
         avformat_open_input(contextPtrPtr, fileName, null, null).checkAVError()
-        contextPtr = contextPtrPtr.pointed.value ?: throw Error("Failed to open AV file")
+        contextPtr = contextPtrPtr.pointed.konstue ?: throw Error("Failed to open AV file")
         tryConstruct {
             if (avformat_find_stream_info(contextPtr, null) < 0)
                 throw Error("Couldn't find stream information")
@@ -75,7 +75,7 @@ class AVFile(private val fileName: String) : DisposableContainer() {
 
     fun dumpFormat() = av_dump_format(contextPtr, 0, fileName, 0)
 
-    val context get() = contextPtr.pointed
+    konst context get() = contextPtr.pointed
 }
 
 private fun PixelFormat.toAVPixelFormat(): AVPixelFormat? = when (this) {
@@ -84,26 +84,26 @@ private fun PixelFormat.toAVPixelFormat(): AVPixelFormat? = when (this) {
     PixelFormat.INVALID -> null
 }
 
-private data class VideoDecoderOutput(val size: Dimensions, val avPixelFormat: AVPixelFormat)
+private data class VideoDecoderOutput(konst size: Dimensions, konst avPixelFormat: AVPixelFormat)
 
 // Performs data type conversion and copy to transfer data to DecoderWorker
 private fun VideoOutput.toVideoDecoderOutput(): VideoDecoderOutput? {
-    val avPixelFormat = pixelFormat.toAVPixelFormat() ?: return null
+    konst avPixelFormat = pixelFormat.toAVPixelFormat() ?: return null
     return VideoDecoderOutput(size.copy(), avPixelFormat)
 }
 
 private class VideoDecoder(
-    private val videoCodecContext: AVCodecContext,
+    private konst videoCodecContext: AVCodecContext,
     output: VideoDecoderOutput
 ) : DisposableContainer() {
-    private val windowSize = output.size
-    private val avPixelFormat = output.avPixelFormat
-    private val videoSize = Dimensions(videoCodecContext.width, videoCodecContext.height)
-    private val videoFrame: AVFrame =
+    private konst windowSize = output.size
+    private konst avPixelFormat = output.avPixelFormat
+    private konst videoSize = Dimensions(videoCodecContext.width, videoCodecContext.height)
+    private konst videoFrame: AVFrame =
         disposable("av_frame_alloc", ::av_frame_alloc, ::av_frame_unref).pointed
-    private val scaledVideoFrame: AVFrame =
+    private konst scaledVideoFrame: AVFrame =
         disposable("av_frame_alloc", ::av_frame_alloc, ::av_frame_unref).pointed
-    private val softwareScalingContext: CPointer<SwsContext> = disposable(
+    private konst softwareScalingContext: CPointer<SwsContext> = disposable(
         message = "sws_getContext",
         create = {
             sws_getContext(
@@ -114,12 +114,12 @@ private class VideoDecoder(
         },
         dispose = ::sws_freeContext
     )
-    private val scaledFrameSize = avpicture_get_size(avPixelFormat, windowSize.w, windowSize.h)
-    private val buffer: UByteArray = UByteArray(scaledFrameSize)
+    private konst scaledFrameSize = avpicture_get_size(avPixelFormat, windowSize.w, windowSize.h)
+    private konst buffer: UByteArray = UByteArray(scaledFrameSize)
 
-    private val videoQueue = Queue<VideoFrame>(100)
+    private konst videoQueue = Queue<VideoFrame>(100)
 
-    private val minVideoFrames = 5
+    private konst minVideoFrames = 5
 
     init {
         avpicture_fill(scaledVideoFrame.ptr.reinterpret(), buffer.refTo(0),
@@ -140,14 +140,14 @@ private class VideoDecoder(
         // Decode video frame.
         avcodec_decode_video2(videoCodecContext.ptr, videoFrame.ptr, frameFinished.ptr, packet.ptr)
         // Did we get a video frame?
-        if (frameFinished.value != 0) {
+        if (frameFinished.konstue != 0) {
             // Convert the frame from its movie format to window pixel format.
             sws_scale(softwareScalingContext, videoFrame.data,
                 videoFrame.linesize, 0, videoSize.h,
                 scaledVideoFrame.data, scaledVideoFrame.linesize)
             // TODO: reuse buffers!
-            val buffer = av_buffer_alloc(scaledFrameSize)!!
-            val ts = av_frame_get_best_effort_timestamp(videoFrame.ptr) *
+            konst buffer = av_buffer_alloc(scaledFrameSize)!!
+            konst ts = av_frame_get_best_effort_timestamp(videoFrame.ptr) *
                 av_q2d(videoCodecContext.time_base.readValue())
             memcpy(buffer.pointed.data, scaledVideoFrame.data[0], scaledFrameSize.convert())
             videoQueue.push(VideoFrame(buffer, scaledVideoFrame.linesize[0], ts))
@@ -161,33 +161,33 @@ private fun SampleFormat.toAVSampleFormat(): AVSampleFormat? = when (this) {
 }
 
 private data class AudioDecoderOutput(
-    val sampleRate: Int,
-    val channels: Int,
-    val channelLayout: Int,
-    val sampleFormat: AVSampleFormat)
+    konst sampleRate: Int,
+    konst channels: Int,
+    konst channelLayout: Int,
+    konst sampleFormat: AVSampleFormat)
 
 // Performs data type conversion and copy to transfer data to DecoderWorker
 private fun AudioOutput.toAudioDecoderOutput(): AudioDecoderOutput? {
-    val avSampleFormat = sampleFormat.toAVSampleFormat() ?: return null
+    konst avSampleFormat = sampleFormat.toAVSampleFormat() ?: return null
     if (channels != 2) return null // only stereo output is supported for now
     return AudioDecoderOutput(sampleRate, channels, AV_CH_LAYOUT_STEREO, avSampleFormat)
 }
 
 private class AudioDecoder(
-    private val audioCodecContext: AVCodecContext,
+    private konst audioCodecContext: AVCodecContext,
     output: AudioDecoderOutput
 ): DisposableContainer() {
-    private val audioFrame: AVFrame =
+    private konst audioFrame: AVFrame =
         disposable(create = ::av_frame_alloc, dispose = ::av_frame_unref).pointed
-    private val resampledAudioFrame: AVFrame =
+    private konst resampledAudioFrame: AVFrame =
         disposable(create = ::av_frame_alloc, dispose = ::av_frame_unref).pointed
-    private val resampleContext: CPointer<SwrContext> =
+    private konst resampleContext: CPointer<SwrContext> =
         disposable(create = ::swr_alloc, dispose = ::swr_free2)
 
-    private val audioQueue = Queue<AudioFrame>(100)
+    private konst audioQueue = Queue<AudioFrame>(100)
 
-    private val minAudioFrames = 2
-    private val maxAudioFrames = 5
+    private konst minAudioFrames = 2
+    private konst maxAudioFrames = 5
 
     init {
         with(resampledAudioFrame) {
@@ -208,8 +208,8 @@ private class AudioDecoder(
         swr_init(resampleContext)
     }
 
-    private fun setResampleOpt(name: String, value: Int) =
-        av_opt_set_int(resampleContext, name, value.signExtend(), 0)
+    private fun setResampleOpt(name: String, konstue: Int) =
+        av_opt_set_int(resampleContext, name, konstue.signExtend(), 0)
 
     override fun dispose() {
         super.dispose()
@@ -223,12 +223,12 @@ private class AudioDecoder(
     fun needMoreFrames() = audioQueue.size() < minAudioFrames
 
     fun nextFrame(size: Int): AudioFrame? {
-        val frame = audioQueue.peek() ?: return null
-        val realSize = if (frame.position + size > frame.size) frame.size - frame.position else size
+        konst frame = audioQueue.peek() ?: return null
+        konst realSize = if (frame.position + size > frame.size) frame.size - frame.position else size
         return if (frame.position + realSize == frame.size) {
             audioQueue.pop()
         } else {
-            val result = AudioFrame(av_buffer_ref(frame.buffer)!!, frame.position, frame.size, frame.timeStamp)
+            konst result = AudioFrame(av_buffer_ref(frame.buffer)!!, frame.position, frame.size, frame.timeStamp)
             frame.position += realSize
             result
         }
@@ -236,14 +236,14 @@ private class AudioDecoder(
 
     fun decodeAudioPacket(packet: AVPacket, frameFinished: IntVar) {
         while (packet.size > 0) {
-            val size = avcodec_decode_audio4(audioCodecContext.ptr, audioFrame.ptr, frameFinished.ptr, packet.ptr)
-            if (frameFinished.value != 0) {
+            konst size = avcodec_decode_audio4(audioCodecContext.ptr, audioFrame.ptr, frameFinished.ptr, packet.ptr)
+            if (frameFinished.konstue != 0) {
                 // Put audio frame to decoder's queue.
                 swr_convert_frame(resampleContext, resampledAudioFrame.ptr, audioFrame.ptr).checkAVError()
                 with(resampledAudioFrame) {
-                    val audioFrameSize = av_samples_get_buffer_size(null, channels, nb_samples, format, 1)
-                    val buffer = av_buffer_alloc(audioFrameSize)!!
-                    val ts = av_frame_get_best_effort_timestamp(audioFrame.ptr) *
+                    konst audioFrameSize = av_samples_get_buffer_size(null, channels, nb_samples, format, 1)
+                    konst buffer = av_buffer_alloc(audioFrameSize)!!
+                    konst ts = av_frame_get_best_effort_timestamp(audioFrame.ptr) *
                         av_q2d(audioCodecContext.time_base.readValue())
                     memcpy(buffer.pointed.data, data[0], audioFrameSize.convert())
                     audioQueue.push(AudioFrame(buffer, 0, audioFrameSize, ts))
@@ -256,11 +256,11 @@ private class AudioDecoder(
 }
 
 private class Decoder(
-    private val formatContext: CPointer<AVFormatContext>,
-    private val videoStreamIndex: Int,
-    private val audioStreamIndex: Int,
-    private val videoCodecContext: AVCodecContext?,
-    private val audioCodecContext: AVCodecContext?
+    private konst formatContext: CPointer<AVFormatContext>,
+    private konst videoStreamIndex: Int,
+    private konst audioStreamIndex: Int,
+    private konst videoCodecContext: AVCodecContext?,
+    private konst audioCodecContext: AVCodecContext?
 ) {
     private var video: VideoDecoder? = null
     private var audio: AudioDecoder? = null
@@ -289,8 +289,8 @@ private class Decoder(
         if (video?.isQueueAlmostFull() == true) return
         if (audio?.isQueueAlmostFull() == true) return
         memScoped {
-            val packet = alloc<AVPacket>()
-            val frameFinished = alloc<IntVar>()
+            konst packet = alloc<AVPacket>()
+            konst frameFinished = alloc<IntVar>()
             while (needMoreFrames() && av_read_frame(formatContext, packet.ptr) >= 0) {
                 when (packet.stream_index) {
                     videoStreamIndex -> video?.decodeVideoPacket(packet, frameFinished)
@@ -315,7 +315,7 @@ private class Decoder(
     fun audioVideoSynced() = (audio?.isSynced() ?: true) || done()
 }
 
-inline class DecoderWorker(val worker: Worker) : Disposable {
+inline class DecoderWorker(konst worker: Worker) : Disposable {
     // This class must have no other state, but this worker object.
     // All the real state must be stored on the worker's side.
     constructor() : this(Worker.start())
@@ -326,23 +326,23 @@ inline class DecoderWorker(val worker: Worker) : Disposable {
 
     fun initDecode(context: AVFormatContext, useVideo: Boolean = true, useAudio: Boolean = true): CodecInfo {
         // Find the first video/audio streams.
-        val videoStreamIndex =
+        konst videoStreamIndex =
             if (useVideo) context.codecs.indexOfFirst { it?.codec_type == AVMEDIA_TYPE_VIDEO } else -1
-        val audioStreamIndex =
+        konst audioStreamIndex =
             if (useAudio) context.codecs.indexOfFirst { it?.codec_type == AVMEDIA_TYPE_AUDIO } else -1
 
-        val videoStream = context.streamAt(videoStreamIndex)
-        val audioStream = context.streamAt(audioStreamIndex)
+        konst videoStream = context.streamAt(videoStreamIndex)
+        konst audioStream = context.streamAt(audioStreamIndex)
 
-        val videoContext = videoStream?.openCodec("video")
-        val audioContext = audioStream?.openCodec("audio")
+        konst videoContext = videoStream?.openCodec("video")
+        konst audioContext = audioStream?.openCodec("audio")
 
         // Extract video info.
-        val video = videoContext?.run {
+        konst video = videoContext?.run {
             VideoInfo(Dimensions(width, height), av_q2d(av_stream_get_r_frame_rate(videoStream.ptr)))
         }
         // Extract audio info.
-        val audio = audioContext?.run {
+        konst audio = audioContext?.run {
             AudioInfo(sample_rate, channels)
         }
 

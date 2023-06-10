@@ -12,9 +12,9 @@ repositories {
 }
 
 kotlin {
-    val nodeJs = js("nodeJs")
+    konst nodeJs = js("nodeJs")
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("com.example:sample-lib:1.0")
             }

@@ -14,6 +14,6 @@ open class A : I {
 }
 
 open class B : I by A() {
-    val x = 117
-    val y = "zzz"
+    konst x = 117
+    konst y = "zzz"
 }

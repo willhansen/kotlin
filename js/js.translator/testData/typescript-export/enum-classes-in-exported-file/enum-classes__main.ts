@@ -17,11 +17,11 @@ function box(): string {
     assert(TestEnumClass.A.constructorParameter == "aConstructorParameter")
     assert(TestEnumClass.B.constructorParameter == "bConstructorParameter")
 
-    assert(TestEnumClass.valueOf("A") === TestEnumClass.A)
-    assert(TestEnumClass.valueOf("B") === TestEnumClass.B)
+    assert(TestEnumClass.konstueOf("A") === TestEnumClass.A)
+    assert(TestEnumClass.konstueOf("B") === TestEnumClass.B)
 
-    assert(TestEnumClass.values().indexOf(TestEnumClass.A) != -1)
-    assert(TestEnumClass.values().indexOf(TestEnumClass.B) != -1)
+    assert(TestEnumClass.konstues().indexOf(TestEnumClass.A) != -1)
+    assert(TestEnumClass.konstues().indexOf(TestEnumClass.B) != -1)
 
     assert(TestEnumClass.A.name === "A")
     assert(TestEnumClass.B.name === "B")
@@ -30,11 +30,11 @@ function box(): string {
 
     assert(new TestEnumClass.Nested().prop == "hello2")
 
-    assert(OuterClass.NestedEnum.valueOf("A") === OuterClass.NestedEnum.A)
-    assert(OuterClass.NestedEnum.valueOf("B") === OuterClass.NestedEnum.B)
+    assert(OuterClass.NestedEnum.konstueOf("A") === OuterClass.NestedEnum.A)
+    assert(OuterClass.NestedEnum.konstueOf("B") === OuterClass.NestedEnum.B)
 
-    assert(OuterClass.NestedEnum.values().indexOf(OuterClass.NestedEnum.A) != -1)
-    assert(OuterClass.NestedEnum.values().indexOf(OuterClass.NestedEnum.B) != -1)
+    assert(OuterClass.NestedEnum.konstues().indexOf(OuterClass.NestedEnum.A) != -1)
+    assert(OuterClass.NestedEnum.konstues().indexOf(OuterClass.NestedEnum.B) != -1)
 
     assert(OuterClass.NestedEnum.A.name === "A")
     assert(OuterClass.NestedEnum.B.name === "B")

@@ -13,8 +13,8 @@ public interface Deprecated {
 }
 
 @kotlin.annotation.Target(allowedTargets=[PROPERTY])
-@java.lang.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Target(value=[])
+@java.lang.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Target(konstue=[])
 @kotlin.Metadata
 public annotation class Foo {
     // source: 'interfaceProperty.kt'

@@ -36,30 +36,30 @@ import javax.inject.Inject
 
 internal open class NativeDistributionCommonizerTask
 @Inject constructor(
-    private val objectFactory: ObjectFactory,
-    private val execOperations: ExecOperations,
+    private konst objectFactory: ObjectFactory,
+    private konst execOperations: ExecOperations,
 ) : DefaultTask() {
 
-    private val konanHome = project.file(project.konanHome)
+    private konst konanHome = project.file(project.konanHome)
 
-    private val commonizerTargets: Set<SharedCommonizerTarget> by lazy {
+    private konst commonizerTargets: Set<SharedCommonizerTarget> by lazy {
         project.collectAllSharedCommonizerTargetsFromBuild()
     }
 
     @get:Internal
-    internal val kotlinPluginVersion: Property<String> = objectFactory
+    internal konst kotlinPluginVersion: Property<String> = objectFactory
         .property<String>()
         .chainedFinalizeValueOnRead()
 
     @get:Classpath
-    internal val commonizerClasspath: ConfigurableFileCollection = objectFactory.fileCollection()
+    internal konst commonizerClasspath: ConfigurableFileCollection = objectFactory.fileCollection()
 
     @get:Input
-    internal val customJvmArgs: ListProperty<String> = objectFactory
+    internal konst customJvmArgs: ListProperty<String> = objectFactory
         .listProperty<String>()
         .chainedFinalizeValueOnRead()
 
-    private val runnerSettings: Provider<KotlinNativeCommonizerToolRunner.Settings> = kotlinPluginVersion
+    private konst runnerSettings: Provider<KotlinNativeCommonizerToolRunner.Settings> = kotlinPluginVersion
         .zip(customJvmArgs) { pluginVersion, customJvmArgs ->
             KotlinNativeCommonizerToolRunner.Settings(
                 pluginVersion,
@@ -68,19 +68,19 @@ internal open class NativeDistributionCommonizerTask
             )
         }
 
-    private val logLevel = project.commonizerLogLevel
+    private konst logLevel = project.commonizerLogLevel
 
-    private val additionalSettings = project.additionalCommonizerSettings
+    private konst additionalSettings = project.additionalCommonizerSettings
 
     @get:Internal
-    internal val rootOutputDirectory: File = project.file {
+    internal konst rootOutputDirectory: File = project.file {
         project.file(project.konanHome)
             .resolve(KONAN_DISTRIBUTION_KLIB_DIR)
             .resolve(KONAN_DISTRIBUTION_COMMONIZED_LIBS_DIR)
             .resolve(URLEncoder.encode(project.getKotlinPluginVersion(), Charsets.UTF_8.name()))
     }
 
-    private val commonizerCache = NativeDistributionCommonizerCache(
+    private konst commonizerCache = NativeDistributionCommonizerCache(
         outputDirectory = rootOutputDirectory,
         konanHome = konanHome,
         logger = logger,
@@ -89,13 +89,13 @@ internal open class NativeDistributionCommonizerTask
 
     @TaskAction
     protected fun run() {
-        val commonizerRunner = KotlinNativeCommonizerToolRunner(
+        konst commonizerRunner = KotlinNativeCommonizerToolRunner(
             context = KotlinToolRunner.GradleExecutionContext.fromTaskContext(objectFactory, execOperations, logger),
             settings = runnerSettings.get()
         )
 
         commonizerCache.writeCacheForUncachedTargets(commonizerTargets) { todoOutputTargets ->
-            val commonizer = GradleCliCommonizer(commonizerRunner)
+            konst commonizer = GradleCliCommonizer(commonizerRunner)
             /* Invoke commonizer with only 'to do' targets */
             commonizer.commonizeNativeDistribution(
                 konanHome, rootOutputDirectory, todoOutputTargets, logLevel, additionalSettings

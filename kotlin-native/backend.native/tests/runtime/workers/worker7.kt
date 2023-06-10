@@ -11,8 +11,8 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 @Test fun runTest() {
-    val worker = Worker.start(false)
-    val future = worker.execute(TransferMode.SAFE, { "Input" }) {
+    konst worker = Worker.start(false)
+    konst future = worker.execute(TransferMode.SAFE, { "Input" }) {
         input -> println(input)
     }
     future.consume {

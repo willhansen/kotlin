@@ -2,13 +2,13 @@ package
 
 public interface Test</*0*/ in I, /*1*/ out O> {
     public abstract var interlan_private_set: O
-    public abstract val internal_val: I
+    public abstract konst internal_konst: I
     private/*private to this*/ abstract var private_private_set: O
-    private/*private to this*/ abstract val private_val: I
+    private/*private to this*/ abstract konst private_konst: I
     protected abstract var protected_private_set: O
-    protected abstract val protected_val: I
+    protected abstract konst protected_konst: I
     public abstract var public_private_set: O
-    public abstract val public_val: I
+    public abstract konst public_konst: I
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public abstract fun internal_fun(/*0*/ i: O): I

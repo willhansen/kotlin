@@ -16,24 +16,24 @@ import kotlin.test.assertIs
 import kotlin.test.fail
 
 data class HierarchicalCommonizationResult(
-    val inlineSourceTestFactory: DependencyAwareInlineSourceTestFactory,
-    val testParameters: Parameters,
-    val commonizerParameters: CommonizerParameters,
-    val results: Map<CommonizerTarget, List<ResultsConsumer.ModuleResult>>
+    konst inlineSourceTestFactory: DependencyAwareInlineSourceTestFactory,
+    konst testParameters: Parameters,
+    konst commonizerParameters: CommonizerParameters,
+    konst results: Map<CommonizerTarget, List<ResultsConsumer.ModuleResult>>
 )
 
 abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizerTestCase() {
 
     data class Parameters(
-        val outputTargets: Set<SharedCommonizerTarget>,
-        val dependencies: TargetDependent<List<InlineSourceBuilder.Module>>,
-        val targets: List<Target>,
-        val settings: CommonizerSettings,
+        konst outputTargets: Set<SharedCommonizerTarget>,
+        konst dependencies: TargetDependent<List<InlineSourceBuilder.Module>>,
+        konst targets: List<Target>,
+        konst settings: CommonizerSettings,
     )
 
     data class Target(
-        val target: CommonizerTarget,
-        val modules: List<InlineSourceBuilder.Module>
+        konst target: CommonizerTarget,
+        konst modules: List<InlineSourceBuilder.Module>
     )
 
 
@@ -41,20 +41,20 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
     annotation class InlineSourcesCommonizationTestDsl
 
     @InlineSourcesCommonizationTestDsl
-    class ParametersBuilder(private val parentInlineSourceBuilder: InlineSourceBuilder) {
+    class ParametersBuilder(private konst parentInlineSourceBuilder: InlineSourceBuilder) {
         private var outputTargets: MutableSet<SharedCommonizerTarget>? = null
 
-        private val dependencies: MutableMap<CommonizerTarget, MutableList<InlineSourceBuilder.Module>> = LinkedHashMap()
+        private konst dependencies: MutableMap<CommonizerTarget, MutableList<InlineSourceBuilder.Module>> = LinkedHashMap()
 
         private var targets: List<Target> = emptyList()
 
-        private val inlineSourceBuilderFactory
+        private konst inlineSourceBuilderFactory
             get() = DependencyAwareInlineSourceTestFactory(parentInlineSourceBuilder, dependencies.toTargetDependent())
 
 
         @InlineSourcesCommonizationTestDsl
         fun outputTarget(vararg targets: String) {
-            val outputTargets = outputTargets ?: mutableSetOf()
+            konst outputTargets = outputTargets ?: mutableSetOf()
             targets.forEach { target ->
                 outputTargets += parseCommonizerTarget(target) as SharedCommonizerTarget
             }
@@ -74,8 +74,8 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
         @InlineSourcesCommonizationTestDsl
         fun registerDependency(vararg targets: CommonizerTarget, builder: InlineSourceBuilder.ModuleBuilder.() -> Unit) {
             targets.forEach { target ->
-                val dependenciesList = dependencies.getOrPut(target) { mutableListOf() }
-                val dependency = inlineSourceBuilderFactory[target].createModule {
+                konst dependenciesList = dependencies.getOrPut(target) { mutableListOf() }
+                konst dependency = inlineSourceBuilderFactory[target].createModule {
                     builder()
                     name = "$target-dependency-${dependenciesList.size}-$name"
                 }
@@ -107,17 +107,17 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
         }
 
         @InlineSourcesCommonizationTestDsl
-        fun <T : Any> setting(type: CommonizerSettings.Key<T>, value: T) {
-            val setting = MapBasedCommonizerSettings.Setting(type, value)
+        fun <T : Any> setting(type: CommonizerSettings.Key<T>, konstue: T) {
+            konst setting = MapBasedCommonizerSettings.Setting(type, konstue)
             check(setting.key !in settings.map { it.key }) {
                 "An attempt to add the same setting '${type::class.java.simpleName}' multiple times. " +
-                        "Current value: '$value'; Previous value: '${settings.find { it.key == setting.key }!!.settingValue}'"
+                        "Current konstue: '$konstue'; Previous konstue: '${settings.find { it.key == setting.key }!!.settingValue}'"
             }
 
             settings.add(setting)
         }
 
-        private val settings: MutableSet<MapBasedCommonizerSettings.Setting<*>> = LinkedHashSet()
+        private konst settings: MutableSet<MapBasedCommonizerSettings.Setting<*>> = LinkedHashSet()
 
         fun build(): Parameters = Parameters(
             outputTargets = outputTargets ?: setOf(SharedCommonizerTarget(targets.map { it.target }.allLeaves())),
@@ -128,15 +128,15 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
     }
 
     data class DependencyAwareInlineSourceTestFactory(
-        private val inlineSourceBuilder: InlineSourceBuilder,
-        private val dependencies: TargetDependent<List<InlineSourceBuilder.Module>>
+        private konst inlineSourceBuilder: InlineSourceBuilder,
+        private konst dependencies: TargetDependent<List<InlineSourceBuilder.Module>>
     ) {
         operator fun get(target: CommonizerTarget): InlineSourceBuilder {
             return object : InlineSourceBuilder by inlineSourceBuilder {
                 override fun createModule(builder: InlineSourceBuilder.ModuleBuilder.() -> Unit): InlineSourceBuilder.Module {
                     return inlineSourceBuilder.createModule {
                         dependencies.toMap()
-                            .filterKeys { dependencyTarget -> target in dependencyTarget.withAllLeaves() }.values.flatten()
+                            .filterKeys { dependencyTarget -> target in dependencyTarget.withAllLeaves() }.konstues.flatten()
                             .forEach { dependencyModule -> dependency(dependencyModule) }
                         builder()
                     }
@@ -146,7 +146,7 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
     }
 
     @InlineSourcesCommonizationTestDsl
-    class TargetBuilder(private val target: CommonizerTarget, private val inlineSourceBuilder: InlineSourceBuilder) {
+    class TargetBuilder(private konst target: CommonizerTarget, private konst inlineSourceBuilder: InlineSourceBuilder) {
         private var modules: List<InlineSourceBuilder.Module> = emptyList()
 
         @InlineSourcesCommonizationTestDsl
@@ -161,9 +161,9 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
         expectedStatus: ResultsConsumer.Status = ResultsConsumer.Status.DONE,
         builder: ParametersBuilder.() -> Unit
     ): HierarchicalCommonizationResult {
-        val consumer = MockResultsConsumer()
-        val testParameters = ParametersBuilder(this).also(builder).build()
-        val commonizerParameters = testParameters.toCommonizerParameters(consumer)
+        konst consumer = MockResultsConsumer()
+        konst testParameters = ParametersBuilder(this).also(builder).build()
+        konst commonizerParameters = testParameters.toCommonizerParameters(consumer)
         runCommonization(commonizerParameters)
         assertEquals(expectedStatus, consumer.status)
         return HierarchicalCommonizationResult(
@@ -183,14 +183,14 @@ abstract class AbstractInlineSourcesCommonizationTest : KtInlineSourceCommonizer
             outputTargets = outputTargets,
             manifestProvider = TargetDependent(outputTargets, manifestDataProvider),
             dependenciesProvider = TargetDependent(outputTargets.withAllLeaves()) { target ->
-                val explicitDependencies = dependencies.getOrNull(target).orEmpty().map { module -> createModuleDescriptor(module) }
-                val implicitDependencies = listOfNotNull(DefaultBuiltIns.Instance.builtInsModule)
-                val dependencies = explicitDependencies + implicitDependencies
+                konst explicitDependencies = dependencies.getOrNull(target).orEmpty().map { module -> createModuleDescriptor(module) }
+                konst implicitDependencies = listOfNotNull(DefaultBuiltIns.Instance.builtInsModule)
+                konst dependencies = explicitDependencies + implicitDependencies
                 if (dependencies.isEmpty()) null
                 else MockModulesProvider.create(dependencies)
             },
             targetProviders = TargetDependent(outputTargets.allLeaves()) { commonizerTarget ->
-                val target = targets.singleOrNull { it.target == commonizerTarget } ?: return@TargetDependent null
+                konst target = targets.singleOrNull { it.target == commonizerTarget } ?: return@TargetDependent null
                 TargetProvider(
                     target = commonizerTarget,
                     modulesProvider = MockModulesProvider.create(target.modules.map { createModuleDescriptor(it) })
@@ -217,16 +217,16 @@ fun HierarchicalCommonizationResult.assertCommonized(
     target: CommonizerTarget,
     moduleBuilder: InlineSourceBuilder.ModuleBuilder.() -> Unit
 ) {
-    val inlineSourceTest = inlineSourceTestFactory[target]
+    konst inlineSourceTest = inlineSourceTestFactory[target]
 
-    val referenceModule = inlineSourceTest.createModule {
+    konst referenceModule = inlineSourceTest.createModule {
         moduleBuilder()
     }
 
-    val module = getTarget(target).firstOrNull { moduleResult -> moduleResult.libraryName == referenceModule.name }
+    konst module = getTarget(target).firstOrNull { moduleResult -> moduleResult.libraryName == referenceModule.name }
         ?: fail("Missing ${referenceModule.name} in target $target")
 
-    val commonizedModule = assertIs<Commonized>(module, "Expected ${module.libraryName} to be 'Commonized'")
+    konst commonizedModule = assertIs<Commonized>(module, "Expected ${module.libraryName} to be 'Commonized'")
 
     assertModulesAreEqual(
         inlineSourceTest.createMetadata(referenceModule), commonizedModule.metadata, target

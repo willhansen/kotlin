@@ -34,13 +34,13 @@ fun checkJsModuleUsage(
         callee: DeclarationDescriptor,
         reportOn: PsiElement
 ) {
-    val module = DescriptorUtils.getContainingModule(container)
-    val moduleKind = bindingContext[MODULE_KIND, module] ?: return
-    val calleeRootContainer = findRoot(callee)
+    konst module = DescriptorUtils.getContainingModule(container)
+    konst moduleKind = bindingContext[MODULE_KIND, module] ?: return
+    konst calleeRootContainer = findRoot(callee)
 
-    val callToModule = AnnotationsUtils.getModuleName(calleeRootContainer) != null ||
+    konst callToModule = AnnotationsUtils.getModuleName(calleeRootContainer) != null ||
                        AnnotationsUtils.getFileModuleName(bindingContext, calleeRootContainer) != null
-    val callToNonModule = AnnotationsUtils.isNonModule(calleeRootContainer) ||
+    konst callToNonModule = AnnotationsUtils.isNonModule(calleeRootContainer) ||
                           AnnotationsUtils.isFromNonModuleFile(bindingContext, calleeRootContainer)
 
     if (moduleKind == ModuleKind.UMD) {

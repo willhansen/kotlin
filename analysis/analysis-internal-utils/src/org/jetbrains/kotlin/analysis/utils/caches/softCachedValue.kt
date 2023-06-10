@@ -8,7 +8,7 @@ import kotlin.reflect.KProperty
 
 
 @Suppress("NOTHING_TO_INLINE")
-public inline operator fun <T> CachedValue<T>.getValue(thisRef: Any?, property: KProperty<*>): T = value
+public inline operator fun <T> CachedValue<T>.getValue(thisRef: Any?, property: KProperty<*>): T = konstue
 
 public inline fun <T> softCachedValue(
     project: Project,

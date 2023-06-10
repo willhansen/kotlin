@@ -1,10 +1,10 @@
 // TARGET_BACKEND: JVM
 
 fun box(): String {
-    val o = "O"
+    konst o = "O"
     var result = ""
 
-    val r = Runnable { result = o + "K" } //capturing local vals and local var
+    konst r = Runnable { result = o + "K" } //capturing local konsts and local var
     r.run()
     return result
 }

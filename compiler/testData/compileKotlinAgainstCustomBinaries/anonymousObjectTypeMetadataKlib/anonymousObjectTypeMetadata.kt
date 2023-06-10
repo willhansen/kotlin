@@ -2,12 +2,12 @@ package test
 
 import lib.*
 
-val w = W()
-val v1 = fn()
-val v2 = O.o()
-val v3 = w.w()
+konst w = W()
+konst v1 = fn()
+konst v2 = O.o()
+konst v3 = w.w()
 
 // private
-val e1 = o3
-val e2 = w.o7
-val e3 = O.o10
+konst e1 = o3
+konst e2 = w.o7
+konst e3 = O.o10

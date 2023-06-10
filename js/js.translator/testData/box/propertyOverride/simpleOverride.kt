@@ -13,14 +13,14 @@ class B : A() {
         return super.a
     }
 
-    fun setSuperA(value: Int) {
-        super.a = value
+    fun setSuperA(konstue: Int) {
+        super.a = konstue
     }
 }
 
 fun box(): String {
-    val a = A()
-    val b = B()
+    konst a = A()
+    konst b = B()
     if (a.getAInA() != 1) return "a.getAInA() != 1, it: ${a.getAInA()}"
     if (b.getAInA() != 2) return "b.getAInA() != 2, it: ${b.getAInA()}"
 

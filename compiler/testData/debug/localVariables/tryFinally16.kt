@@ -6,8 +6,8 @@ fun box(): String {
     try {
         for (i in 0 until 1) {
             try {
-                val x = "x"
-                val y = "y"
+                konst x = "x"
+                konst y = "y"
             } finally {
                 return "FAIL1"
             }

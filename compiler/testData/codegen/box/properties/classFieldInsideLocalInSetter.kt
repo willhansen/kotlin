@@ -1,8 +1,8 @@
-fun <T> eval(fn: () -> T) = fn()
+fun <T> ekonst(fn: () -> T) = fn()
 
 class My {
     var my: String = "U"
-        get() = eval { field }
+        get() = ekonst { field }
         set(arg) {
             class Local {
                 fun foo() {
@@ -14,7 +14,7 @@ class My {
 }
 
 fun box(): String {
-    val m = My()
+    konst m = My()
     m.my = "O"
     return m.my
 }

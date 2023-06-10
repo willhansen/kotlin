@@ -10,7 +10,7 @@ class Bar {
 }
 
 fun baz() {
-    val f = Foo() % 1
-    val b = Bar()
+    konst f = Foo() % 1
+    konst b = Bar()
     b %= 1
 }

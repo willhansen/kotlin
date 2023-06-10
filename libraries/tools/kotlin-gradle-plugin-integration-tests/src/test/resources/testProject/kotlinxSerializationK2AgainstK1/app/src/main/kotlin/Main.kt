@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.Serializable
 
 @Serializable
-class Derived(val d: Long = 1000000000000) : Base(2, "world", listOf("b", "c")) {
+class Derived(konst d: Long = 1000000000000) : Base(2, "world", listOf("b", "c")) {
     override fun equals(other: Any?): Boolean {
         if (other !is Derived) return false
         return a == other.a && b == other.b && c == other.c && d == other.d
@@ -26,12 +26,12 @@ fun processAbstractBase(abstractBase: AbstractBase) {
 }
 
 fun main() {
-    val expected = Derived(12)
-    val result = Json.encodeToString(Derived.serializer(), expected)
+    konst expected = Derived(12)
+    konst result = Json.encodeToString(Derived.serializer(), expected)
     if (result != """{"c":2,"b":"world","a":["b","c"],"d":12}""") {
         throw IllegalStateException("Error: $result")
     }
-    val actual = Json.decodeFromString(Derived.serializer(), result)
+    konst actual = Json.decodeFromString(Derived.serializer(), result)
     if (expected != actual) {
         throw IllegalStateException("expected: $expected\nactual: $actual")
     }

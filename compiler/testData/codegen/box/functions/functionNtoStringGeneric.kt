@@ -20,7 +20,7 @@ class Baz<T, V> {
     }
 }
 
-open class Foo<T, U : List<T>>(val lambda: (T) -> U)
+open class Foo<T, U : List<T>>(konst lambda: (T) -> U)
 class Bar<T> : Foo<T, List<T>>({ listOf(it) })
 
 fun box(): String {

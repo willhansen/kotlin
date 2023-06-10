@@ -25,11 +25,11 @@ fun <T, R> Sequence<T>.myFlatMap(transform: (T) -> Sequence<R>): Sequence<R> {
 }
 
 interface A {
-    val supertypes: Collection<B>
+    konst supertypes: Collection<B>
 }
 
 interface B {
-    val descriptors: Sequence<C>?
+    konst descriptors: Sequence<C>?
 }
 
 interface C

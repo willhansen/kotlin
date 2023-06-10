@@ -3,7 +3,7 @@
 // TARGET_BACKEND: JVM
 // FILE: lib.kt
 @JvmInline
-value class S(val value: String)
+konstue class S(konst konstue: String)
 
 interface A {
     fun f(s: S): S = s
@@ -16,5 +16,5 @@ interface B : A
 interface C : B
 
 fun box(): String {
-    return object : C {}.f(S("OK")).value
+    return object : C {}.f(S("OK")).konstue
 }

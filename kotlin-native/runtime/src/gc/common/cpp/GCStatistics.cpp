@@ -17,12 +17,12 @@
 using namespace kotlin;
 
 extern "C" {
-void Kotlin_Internal_GC_GCInfoBuilder_setEpoch(KRef thiz, KLong value);
-void Kotlin_Internal_GC_GCInfoBuilder_setStartTime(KRef thiz, KLong value);
-void Kotlin_Internal_GC_GCInfoBuilder_setEndTime(KRef thiz, KLong value);
-void Kotlin_Internal_GC_GCInfoBuilder_setPauseStartTime(KRef thiz, KLong value);
-void Kotlin_Internal_GC_GCInfoBuilder_setPauseEndTime(KRef thiz, KLong value);
-void Kotlin_Internal_GC_GCInfoBuilder_setPostGcCleanupTime(KRef thiz, KLong value);
+void Kotlin_Internal_GC_GCInfoBuilder_setEpoch(KRef thiz, KLong konstue);
+void Kotlin_Internal_GC_GCInfoBuilder_setStartTime(KRef thiz, KLong konstue);
+void Kotlin_Internal_GC_GCInfoBuilder_setEndTime(KRef thiz, KLong konstue);
+void Kotlin_Internal_GC_GCInfoBuilder_setPauseStartTime(KRef thiz, KLong konstue);
+void Kotlin_Internal_GC_GCInfoBuilder_setPauseEndTime(KRef thiz, KLong konstue);
+void Kotlin_Internal_GC_GCInfoBuilder_setPostGcCleanupTime(KRef thiz, KLong konstue);
 void Kotlin_Internal_GC_GCInfoBuilder_setRootSet(KRef thiz,
                                                  KLong threadLocalReferences, KLong stackReferences,
                                                  KLong globalReferences, KLong stableReferences);

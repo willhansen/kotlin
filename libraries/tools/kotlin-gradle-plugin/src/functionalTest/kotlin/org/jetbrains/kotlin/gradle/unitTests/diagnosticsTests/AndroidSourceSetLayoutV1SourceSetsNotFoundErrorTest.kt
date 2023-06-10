@@ -59,15 +59,15 @@ class AndroidSourceSetLayoutV1SourceSetsNotFoundErrorTest {
     }
 
     private fun diagnosticsForTestProjectRequestingMissingSourceSet(sourceSetName: String): List<ToolingDiagnostic> {
-        val project = buildProjectWithMPP()
+        konst project = buildProjectWithMPP()
         project.androidApplication { compileSdk = 32 }
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
-        project.launchInStage(KotlinPluginLifecycle.Stage.AfterEvaluateBuildscript) {
+        project.launchInStage(KotlinPluginLifecycle.Stage.AfterEkonstuateBuildscript) {
             kotlin.sourceSets.getByName(sourceSetName)
         }
 
-        assertFails { project.evaluate() }
+        assertFails { project.ekonstuate() }
         return project.kotlinToolingDiagnosticsCollector.getDiagnosticsForProject(project).toList()
     }
 }

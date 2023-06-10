@@ -36,12 +36,12 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
             return
         }
         do {
-            val changes = ConstantConditionsOptimization(internalClassName, methodNode).run()
+            konst changes = ConstantConditionsOptimization(internalClassName, methodNode).run()
         } while (changes)
     }
 
     private fun MethodNode.hasOptimizableConditions(): Boolean {
-        val insns = instructions.toArray()
+        konst insns = instructions.toArray()
         return insns.any { it.isIntJump() } && insns.any { it.isIntConst() }
     }
 
@@ -52,23 +52,23 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
     private fun AbstractInsnNode.isIntJump() =
         opcode in Opcodes.IFEQ..Opcodes.IFLE || opcode in Opcodes.IF_ICMPEQ..Opcodes.IF_ICMPLE
 
-    private class ConstantConditionsOptimization(val internalClassName: String, val methodNode: MethodNode) {
+    private class ConstantConditionsOptimization(konst internalClassName: String, konst methodNode: MethodNode) {
         fun run(): Boolean {
-            val actions = collectRewriteActions()
+            konst actions = collectRewriteActions()
             actions.forEach { it() }
             return actions.isNotEmpty()
         }
 
         private fun collectRewriteActions(): List<() -> Unit> =
             arrayListOf<() -> Unit>().also { actions ->
-                val deadCode = ArrayList<AbstractInsnNode>()
+                konst deadCode = ArrayList<AbstractInsnNode>()
 
-                val frames = analyze(internalClassName, methodNode, ConstantPropagationInterpreter())
-                val insns = methodNode.instructions.toArray()
+                konst frames = analyze(internalClassName, methodNode, ConstantPropagationInterpreter())
+                konst insns = methodNode.instructions.toArray()
 
                 for (i in frames.indices) {
-                    val insn = insns[i]
-                    val frame = frames[i]
+                    konst insn = insns[i]
+                    konst frame = frames[i]
 
                     if (frame == null) {
                         if (insn !is LabelNode) {
@@ -94,15 +94,15 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
             }
 
         private fun tryRewriteComparisonWithZero(insn: JumpInsnNode, frame: Frame<BasicValue>, actions: ArrayList<() -> Unit>) {
-            val top = frame.top()!! as? IConstValue ?: return
+            konst top = frame.top()!! as? IConstValue ?: return
 
-            val constCondition = when (insn.opcode) {
-                Opcodes.IFEQ -> top.value == 0
-                Opcodes.IFNE -> top.value != 0
-                Opcodes.IFGE -> top.value >= 0
-                Opcodes.IFGT -> top.value > 0
-                Opcodes.IFLE -> top.value <= 0
-                Opcodes.IFLT -> top.value < 0
+            konst constCondition = when (insn.opcode) {
+                Opcodes.IFEQ -> top.konstue == 0
+                Opcodes.IFNE -> top.konstue != 0
+                Opcodes.IFGE -> top.konstue >= 0
+                Opcodes.IFGT -> top.konstue > 0
+                Opcodes.IFLE -> top.konstue <= 0
+                Opcodes.IFLT -> top.konstue < 0
                 else -> throw AssertionError("Unexpected instruction: ${insn.insnText}")
             }
 
@@ -118,24 +118,24 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
         }
 
         private fun tryRewriteBinaryComparison(insn: JumpInsnNode, frame: Frame<BasicValue>, actions: ArrayList<() -> Unit>) {
-            val arg1 = frame.peek(1)!!
-            val arg2 = frame.peek(0)!!
+            konst arg1 = frame.peek(1)!!
+            konst arg2 = frame.peek(0)!!
 
             if (arg1 is IConstValue && arg2 is IConstValue) {
-                rewriteBinaryComparisonOfConsts(insn, arg1.value, arg2.value, actions)
-            } else if (arg2 is IConstValue && arg2.value == 0) {
+                rewriteBinaryComparisonOfConsts(insn, arg1.konstue, arg2.konstue, actions)
+            } else if (arg2 is IConstValue && arg2.konstue == 0) {
                 rewriteBinaryComparisonWith0(insn, actions)
             }
         }
 
-        private fun rewriteBinaryComparisonOfConsts(insn: JumpInsnNode, value1: Int, value2: Int, actions: ArrayList<() -> Unit>) {
-            val constCondition = when (insn.opcode) {
-                Opcodes.IF_ICMPEQ -> value1 == value2
-                Opcodes.IF_ICMPNE -> value1 != value2
-                Opcodes.IF_ICMPLE -> value1 <= value2
-                Opcodes.IF_ICMPLT -> value1 < value2
-                Opcodes.IF_ICMPGE -> value1 >= value2
-                Opcodes.IF_ICMPGT -> value1 > value2
+        private fun rewriteBinaryComparisonOfConsts(insn: JumpInsnNode, konstue1: Int, konstue2: Int, actions: ArrayList<() -> Unit>) {
+            konst constCondition = when (insn.opcode) {
+                Opcodes.IF_ICMPEQ -> konstue1 == konstue2
+                Opcodes.IF_ICMPNE -> konstue1 != konstue2
+                Opcodes.IF_ICMPLE -> konstue1 <= konstue2
+                Opcodes.IF_ICMPLT -> konstue1 < konstue2
+                Opcodes.IF_ICMPGE -> konstue1 >= konstue2
+                Opcodes.IF_ICMPGT -> konstue1 > konstue2
                 else -> throw AssertionError("Unexpected instruction: ${insn.insnText}")
             }
 
@@ -156,7 +156,7 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
             actions.add {
                 methodNode.instructions.run {
                     insertBefore(insn, InsnNode(Opcodes.POP))
-                    val cmpWith0Opcode = when (insn.opcode) {
+                    konst cmpWith0Opcode = when (insn.opcode) {
                         Opcodes.IF_ICMPEQ -> Opcodes.IFEQ
                         Opcodes.IF_ICMPNE -> Opcodes.IFNE
                         Opcodes.IF_ICMPLE -> Opcodes.IFLE
@@ -171,23 +171,23 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
         }
     }
 
-    private class IConstValue private constructor(val value: Int) : StrictBasicValue(Type.INT_TYPE) {
+    private class IConstValue private constructor(konst konstue: Int) : StrictBasicValue(Type.INT_TYPE) {
         override fun equals(other: Any?): Boolean =
             other === this ||
-                    other is IConstValue && other.value == this.value
+                    other is IConstValue && other.konstue == this.konstue
 
-        override fun hashCode(): Int = value
+        override fun hashCode(): Int = konstue
 
-        override fun toString(): String = "IConst($value)"
+        override fun toString(): String = "IConst($konstue)"
 
         companion object {
-            private val ICONST_CACHE = Array(7) { IConstValue(it - 1) }
+            private konst ICONST_CACHE = Array(7) { IConstValue(it - 1) }
 
-            fun of(value: Int) =
-                if (value in -1..5)
-                    ICONST_CACHE[value + 1]
+            fun of(konstue: Int) =
+                if (konstue in -1..5)
+                    ICONST_CACHE[konstue + 1]
                 else
-                    IConstValue(value)
+                    IConstValue(konstue)
         }
     }
 
@@ -199,7 +199,7 @@ class ConstantConditionEliminationMethodTransformer : MethodTransformer() {
                 Opcodes.BIPUSH, Opcodes.SIPUSH ->
                     IConstValue.of((insn as IntInsnNode).operand)
                 Opcodes.LDC -> {
-                    val operand = (insn as LdcInsnNode).cst
+                    konst operand = (insn as LdcInsnNode).cst
                     if (operand is Int)
                         IConstValue.of(operand)
                     else

@@ -5,5 +5,5 @@ class Annotation {
 
 fun registerQuickFix(annotation: Annotation) {
     annotation.setProblemGroup()
-    val fixes = annotation.getQuickFixes()
+    konst fixes = annotation.getQuickFixes()
 }

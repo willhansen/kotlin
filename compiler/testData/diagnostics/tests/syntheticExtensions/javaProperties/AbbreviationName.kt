@@ -14,8 +14,8 @@ fun foo(javaClass: JavaClass) {
 // FILE: JavaClass.java
 public class JavaClass {
     public String getURL() { return true; }
-    public void setURL(String value) { }
+    public void setURL(String konstue) { }
 
     public String getHTMLFile() { return true; }
-    public void setHTMLFile(String value) { }
+    public void setHTMLFile(String konstue) { }
 }

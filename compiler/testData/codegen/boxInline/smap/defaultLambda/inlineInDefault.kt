@@ -32,7 +32,7 @@ inline fun kValue() = "K"
 inline fun lParams(initParams: () -> String = {
     "O" + kValue()
 }): String {
-    val z = "body"
+    konst z = "body"
     return initParams()
 }
 

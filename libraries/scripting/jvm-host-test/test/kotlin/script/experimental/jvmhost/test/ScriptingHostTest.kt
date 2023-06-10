@@ -37,24 +37,24 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testSimpleUsage() {
-        val greeting = "Hello from script!"
-        val output = captureOut {
-            evalScript("println(\"$greeting\")").throwOnFailure()
+        konst greeting = "Hello from script!"
+        konst output = captureOut {
+            ekonstScript("println(\"$greeting\")").throwOnFailure()
         }
         Assert.assertEquals(greeting, output)
         // another API
-        val output2 = captureOut {
-            BasicJvmScriptingHost().evalWithTemplate<SimpleScriptTemplate>("println(\"$greeting\")".toScriptSource()).throwOnFailure()
+        konst output2 = captureOut {
+            BasicJvmScriptingHost().ekonstWithTemplate<SimpleScriptTemplate>("println(\"$greeting\")".toScriptSource()).throwOnFailure()
         }
         Assert.assertEquals(greeting, output2)
     }
 
     @Test
     fun testSourceWithName() {
-        val greeting = "Hello from script!"
-        val output = captureOut {
-            val basicJvmScriptingHost = BasicJvmScriptingHost()
-            basicJvmScriptingHost.evalWithTemplate<SimpleScript>(
+        konst greeting = "Hello from script!"
+        konst output = captureOut {
+            konst basicJvmScriptingHost = BasicJvmScriptingHost()
+            basicJvmScriptingHost.ekonstWithTemplate<SimpleScript>(
                 "println(\"$greeting\")".toScriptSource("name"),
                 compilation = {
                     updateClasspath(classpathFromClass<SimpleScript>())
@@ -66,50 +66,50 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testValueResult() {
-        val evalScriptWithResult = evalScriptWithResult("42")
-        val resVal = evalScriptWithResult as ResultValue.Value
-        Assert.assertEquals(42, resVal.value)
+        konst ekonstScriptWithResult = ekonstScriptWithResult("42")
+        konst resVal = ekonstScriptWithResult as ResultValue.Value
+        Assert.assertEquals(42, resVal.konstue)
         Assert.assertEquals("\$\$result", resVal.name)
         Assert.assertEquals("kotlin.Int", resVal.type)
-        val resField = resVal.scriptInstance!!::class.java.getDeclaredField("\$\$result")
+        konst resField = resVal.scriptInstance!!::class.java.getDeclaredField("\$\$result")
         Assert.assertEquals(42, resField.get(resVal.scriptInstance!!))
     }
 
     @Test
     fun testUnitResult() {
-        val resVal = evalScriptWithResult("val x = 42")
+        konst resVal = ekonstScriptWithResult("konst x = 42")
         Assert.assertTrue(resVal is ResultValue.Unit)
     }
 
     @Test
     fun testErrorResult() {
-        val resVal = evalScriptWithResult("throw RuntimeException(\"abc\")")
+        konst resVal = ekonstScriptWithResult("throw RuntimeException(\"abc\")")
         Assert.assertTrue(resVal is ResultValue.Error)
-        val resValError = (resVal as ResultValue.Error).error
+        konst resValError = (resVal as ResultValue.Error).error
         Assert.assertTrue(resValError is RuntimeException)
         Assert.assertEquals("abc", resValError.message)
     }
 
     @Test
     fun testCustomResultField() {
-        val resVal = evalScriptWithResult("42") {
+        konst resVal = ekonstScriptWithResult("42") {
             resultField("outcome")
         } as ResultValue.Value
         Assert.assertEquals("outcome", resVal.name)
-        val resField = resVal.scriptInstance!!::class.java.getDeclaredField("outcome")
+        konst resField = resVal.scriptInstance!!::class.java.getDeclaredField("outcome")
         Assert.assertEquals(42, resField.get(resVal.scriptInstance!!))
     }
 
     @Test
     fun testSaveToClasses() {
-        val greeting = "Hello from script classes!"
-        val outDir = Files.createTempDirectory("saveToClassesOut").toFile()
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
-        val host = BasicJvmScriptingHost(evaluator = BasicJvmScriptClassFilesGenerator(outDir))
-        host.eval("println(\"$greeting\")".toScriptSource(name = "SavedScript.kts"), compilationConfiguration, null).throwOnFailure()
-        val classloader = URLClassLoader(arrayOf(outDir.toURI().toURL()), ScriptingHostTest::class.java.classLoader)
-        val scriptClass = classloader.loadClass("SavedScript")
-        val output = captureOut {
+        konst greeting = "Hello from script classes!"
+        konst outDir = Files.createTempDirectory("saveToClassesOut").toFile()
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
+        konst host = BasicJvmScriptingHost(ekonstuator = BasicJvmScriptClassFilesGenerator(outDir))
+        host.ekonst("println(\"$greeting\")".toScriptSource(name = "SavedScript.kts"), compilationConfiguration, null).throwOnFailure()
+        konst classloader = URLClassLoader(arrayOf(outDir.toURI().toURL()), ScriptingHostTest::class.java.classLoader)
+        konst scriptClass = classloader.loadClass("SavedScript")
+        konst output = captureOut {
             scriptClass.newInstance()
         }
         Assert.assertEquals(greeting, output)
@@ -117,15 +117,15 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testSaveToJar() {
-        val greeting = "Hello from script jar!"
-        val outJar = Files.createTempFile("saveToJar", ".jar").toFile()
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
-        val host = BasicJvmScriptingHost(evaluator = BasicJvmScriptJarGenerator(outJar))
-        host.eval("println(\"$greeting\")".toScriptSource(name = "SavedScript.kts"), compilationConfiguration, null).throwOnFailure()
+        konst greeting = "Hello from script jar!"
+        konst outJar = Files.createTempFile("saveToJar", ".jar").toFile()
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
+        konst host = BasicJvmScriptingHost(ekonstuator = BasicJvmScriptJarGenerator(outJar))
+        host.ekonst("println(\"$greeting\")".toScriptSource(name = "SavedScript.kts"), compilationConfiguration, null).throwOnFailure()
         Thread.sleep(100)
-        val classloader = URLClassLoader(arrayOf(outJar.toURI().toURL()), ScriptingHostTest::class.java.classLoader)
-        val scriptClass = classloader.loadClass("SavedScript")
-        val output = captureOut {
+        konst classloader = URLClassLoader(arrayOf(outJar.toURI().toURL()), ScriptingHostTest::class.java.classLoader)
+        konst scriptClass = classloader.loadClass("SavedScript")
+        konst output = captureOut {
             scriptClass.newInstance()
         }
         Assert.assertEquals(greeting, output)
@@ -133,37 +133,37 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testSaveToRunnableJar() {
-        val greeting = "Hello from script jar!"
-        val outJar = Files.createTempFile("saveToRunnableJar", ".jar").toFile()
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>() {
+        konst greeting = "Hello from script jar!"
+        konst outJar = Files.createTempFile("saveToRunnableJar", ".jar").toFile()
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>() {
             updateClasspath(classpathFromClass<SimpleScriptTemplate>())
             updateClasspath(KotlinJars.kotlinScriptStandardJarsWithReflect)
         }
-        val compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
-        val scriptName = "SavedRunnableScript"
-        val compiledScript = runBlocking {
+        konst compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
+        konst scriptName = "SavedRunnableScript"
+        konst compiledScript = runBlocking {
             compiler("println(\"$greeting\")".toScriptSource(name = "$scriptName.kts"), compilationConfiguration).throwOnFailure()
-                .valueOrNull()!!
+                .konstueOrNull()!!
         }
-        val saver = BasicJvmScriptJarGenerator(outJar)
+        konst saver = BasicJvmScriptJarGenerator(outJar)
         runBlocking {
-            saver(compiledScript, ScriptEvaluationConfiguration.Default).throwOnFailure()
+            saver(compiledScript, ScriptEkonstuationConfiguration.Default).throwOnFailure()
         }
 
         Thread.sleep(100)
 
-        val classpathFromJar = run {
-            val manifest = JarFile(outJar).manifest
+        konst classpathFromJar = run {
+            konst manifest = JarFile(outJar).manifest
             manifest.mainAttributes.getValue("Class-Path").split(" ") // TODO: quoted paths
                 .map { File(it).toURI().toURL() }
         } + outJar.toURI().toURL()
 
         fun checkInvokeMain(baseClassLoader: ClassLoader?) {
-            val classloader = URLClassLoader(classpathFromJar.toTypedArray(), baseClassLoader)
-            val scriptClass = classloader.loadClass(scriptName)
-            val mainMethod = scriptClass.methods.find { it.name == "main" }
+            konst classloader = URLClassLoader(classpathFromJar.toTypedArray(), baseClassLoader)
+            konst scriptClass = classloader.loadClass(scriptName)
+            konst mainMethod = scriptClass.methods.find { it.name == "main" }
             Assert.assertNotNull(mainMethod)
-            val output = captureOutAndErr {
+            konst output = captureOutAndErr {
                 mainMethod!!.invoke(null, emptyArray<String>())
             }.toList().filterNot(String::isEmpty).joinToString("\n")
             Assert.assertEquals(greeting, output)
@@ -172,52 +172,52 @@ class ScriptingHostTest : TestCase() {
         checkInvokeMain(null) // isolated
         checkInvokeMain(Thread.currentThread().contextClassLoader)
 
-        val outputFromProcess = runScriptFromJar(outJar)
+        konst outputFromProcess = runScriptFromJar(outJar)
         Assert.assertEquals(listOf(greeting), outputFromProcess)
     }
 
     @Test
     fun testSimpleRequire() {
-        val greeting = "Hello from required!"
-        val script = "val subj = RequiredClass().value\nprintln(\"Hello from \$subj!\")"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst greeting = "Hello from required!"
+        konst script = "konst subj = RequiredClass().konstue\nprintln(\"Hello from \$subj!\")"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             importScripts(File(TEST_DATA_DIR, "importTest/requiredSrc.kt").toScriptSource())
         }
-        val output = captureOut {
-            BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration, null).throwOnFailure()
+        konst output = captureOut {
+            BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration, null).throwOnFailure()
         }
         Assert.assertEquals(greeting, output)
     }
 
     @Test
     fun testSimpleImport() {
-        val greeting = listOf("Hello from helloWithVal script!", "Hello from imported helloWithVal script!")
-        val script = "println(\"Hello from imported \$helloScriptName script!\")"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst greeting = listOf("Hello from helloWithVal script!", "Hello from imported helloWithVal script!")
+        konst script = "println(\"Hello from imported \$helloScriptName script!\")"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             makeSimpleConfigurationWithTestImport()
         }
-        val output = captureOut {
-            BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration, null).throwOnFailure()
+        konst output = captureOut {
+            BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration, null).throwOnFailure()
         }.lines()
         Assert.assertEquals(greeting, output)
     }
 
     @Test
     fun testSimpleImportWithImplicitReceiver() {
-        val greeting = listOf("Hello from helloWithVal script!", "Hello from imported helloWithVal script!")
-        val script = "println(\"Hello from imported \$helloScriptName script!\")"
-        val definition = createJvmScriptDefinitionFromTemplate<SimpleScriptTemplate>(
+        konst greeting = listOf("Hello from helloWithVal script!", "Hello from imported helloWithVal script!")
+        konst script = "println(\"Hello from imported \$helloScriptName script!\")"
+        konst definition = createJvmScriptDefinitionFromTemplate<SimpleScriptTemplate>(
             compilation = {
                 makeSimpleConfigurationWithTestImport()
                 implicitReceivers(String::class)
             },
-            evaluation = {
+            ekonstuation = {
                 implicitReceivers("abc")
             }
         )
-        val output = captureOut {
-            BasicJvmScriptingHost().eval(
-                script.toScriptSource(), definition.compilationConfiguration, definition.evaluationConfiguration
+        konst output = captureOut {
+            BasicJvmScriptingHost().ekonst(
+                script.toScriptSource(), definition.compilationConfiguration, definition.ekonstuationConfiguration
             ).throwOnFailure()
         }.lines()
         Assert.assertEquals(greeting, output)
@@ -225,65 +225,65 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testProvidedPropertiesNullability() {
-        val stringType = KotlinType(String::class)
-        val definition = createJvmScriptDefinitionFromTemplate<SimpleScriptTemplate>(
+        konst stringType = KotlinType(String::class)
+        konst definition = createJvmScriptDefinitionFromTemplate<SimpleScriptTemplate>(
             compilation = {
                 providedProperties(
                     "notNullable" to stringType,
                     "nullable" to stringType.withNullability(true)
                 )
             },
-            evaluation = {
+            ekonstuation = {
                 providedProperties(
                     "notNullable" to "something",
                     "nullable" to null
                 )
             }
         )
-        val defaultEvalConfig = definition.evaluationConfiguration
-        val notNullEvalConfig = defaultEvalConfig.with {
+        konst defaultEkonstConfig = definition.ekonstuationConfiguration
+        konst notNullEkonstConfig = defaultEkonstConfig.with {
             providedProperties("nullable" to "!")
         }
-        val wrongNullEvalConfig = defaultEvalConfig.with {
+        konst wrongNullEkonstConfig = defaultEkonstConfig.with {
             providedProperties("notNullable" to null)
         }
 
         with(BasicJvmScriptingHost()) {
             // compile time
-            val comp0 = runBlocking {
+            konst comp0 = runBlocking {
                 compiler("nullable.length".toScriptSource(), definition.compilationConfiguration)
             }
             assertTrue(comp0 is ResultWithDiagnostics.Failure)
-            val errors = comp0.reports.filter { it.severity == ScriptDiagnostic.Severity.ERROR }
+            konst errors = comp0.reports.filter { it.severity == ScriptDiagnostic.Severity.ERROR }
             assertTrue( errors.any { it.message.contains( "Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type ") })
 
             // runtime
-            fun evalWith(evalConfig: ScriptEvaluationConfiguration) =
-                eval("notNullable+(nullable ?: \"0\")".toScriptSource(), definition.compilationConfiguration, evalConfig).valueOrThrow().returnValue
+            fun ekonstWith(ekonstConfig: ScriptEkonstuationConfiguration) =
+                ekonst("notNullable+(nullable ?: \"0\")".toScriptSource(), definition.compilationConfiguration, ekonstConfig).konstueOrThrow().returnValue
 
-            val ret0 = evalWith(defaultEvalConfig)
-            assertEquals("something0", (ret0 as? ResultValue.Value)?.value)
+            konst ret0 = ekonstWith(defaultEkonstConfig)
+            assertEquals("something0", (ret0 as? ResultValue.Value)?.konstue)
 
-            val ret1 = evalWith(notNullEvalConfig)
-            assertEquals("something!", (ret1 as? ResultValue.Value)?.value)
+            konst ret1 = ekonstWith(notNullEkonstConfig)
+            assertEquals("something!", (ret1 as? ResultValue.Value)?.konstue)
 
-            val ret2 = evalWith(wrongNullEvalConfig)
+            konst ret2 = ekonstWith(wrongNullEkonstConfig)
             assertTrue((ret2 as? ResultValue.Error)?.error is java.lang.NullPointerException)
         }
     }
 
     @Test
     fun testDiamondImportWithoutSharing() {
-        val greeting = listOf("Hi from common", "Hi from middle", "Hi from common", "sharedVar == 3")
-        val output = doDiamondImportTest()
+        konst greeting = listOf("Hi from common", "Hi from middle", "Hi from common", "sharedVar == 3")
+        konst output = doDiamondImportTest()
         Assert.assertEquals(greeting, output)
     }
 
     @Test
     fun testDiamondImportWithSharing() {
-        val greeting = listOf("Hi from common", "Hi from middle", "sharedVar == 5")
-        val output = doDiamondImportTest(
-            ScriptEvaluationConfiguration {
+        konst greeting = listOf("Hi from common", "Hi from middle", "sharedVar == 5")
+        konst output = doDiamondImportTest(
+            ScriptEkonstuationConfiguration {
                 enableScriptsInstancesSharing()
             }
         )
@@ -291,16 +291,16 @@ class ScriptingHostTest : TestCase() {
     }
 
     @Test
-    fun testEvalWithWrapper() {
-        val greeting = "Hello from script!"
+    fun testEkonstWithWrapper() {
+        konst greeting = "Hello from script!"
         var output = ""
-        BasicJvmScriptingHost().evalWithTemplate<SimpleScriptTemplate>(
+        BasicJvmScriptingHost().ekonstWithTemplate<SimpleScriptTemplate>(
             "println(\"$greeting\")".toScriptSource(),
             {},
             {
                 scriptExecutionWrapper<Any?> {
-                    val outStream = ByteArrayOutputStream()
-                    val prevOut = System.out
+                    konst outStream = ByteArrayOutputStream()
+                    konst prevOut = System.out
                     System.setOut(PrintStream(outStream))
                     try {
                         it()
@@ -317,15 +317,15 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testKotlinPackage() {
-        val greeting = "Hello from script!"
-        val error = "Only the Kotlin standard library is allowed to use the 'kotlin' package"
-        val script = "package kotlin\nprintln(\"$greeting\")"
-        val res0 = evalScript(script)
+        konst greeting = "Hello from script!"
+        konst error = "Only the Kotlin standard library is allowed to use the 'kotlin' package"
+        konst script = "package kotlin\nprintln(\"$greeting\")"
+        konst res0 = ekonstScript(script)
         Assert.assertTrue(res0.reports.any { it.message == error })
         Assert.assertTrue(res0 is ResultWithDiagnostics.Failure)
 
-        val output = captureOut {
-            val res1 = evalScriptWithConfiguration(script) {
+        konst output = captureOut {
+            konst res1 = ekonstScriptWithConfiguration(script) {
                 compilerOptions("-Xallow-kotlin-package")
             }
             Assert.assertTrue(res1.reports.none { it.message == error })
@@ -334,11 +334,11 @@ class ScriptingHostTest : TestCase() {
         Assert.assertEquals(greeting, output)
     }
 
-    private fun doDiamondImportTest(evaluationConfiguration: ScriptEvaluationConfiguration? = null): List<String> {
-        val mainScript = "sharedVar += 1\nprintln(\"sharedVar == \$sharedVar\")".toScriptSource("main.kts")
-        val middleScript = File(TEST_DATA_DIR, "importTest/diamondImportMiddle.kts").toScriptSource()
-        val commonScript = File(TEST_DATA_DIR, "importTest/diamondImportCommon.kts").toScriptSource()
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+    private fun doDiamondImportTest(ekonstuationConfiguration: ScriptEkonstuationConfiguration? = null): List<String> {
+        konst mainScript = "sharedVar += 1\nprintln(\"sharedVar == \$sharedVar\")".toScriptSource("main.kts")
+        konst middleScript = File(TEST_DATA_DIR, "importTest/diamondImportMiddle.kts").toScriptSource()
+        konst commonScript = File(TEST_DATA_DIR, "importTest/diamondImportCommon.kts").toScriptSource()
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             refineConfiguration {
                 beforeCompiling { ctx ->
                     when (ctx.script.name) {
@@ -353,16 +353,16 @@ class ScriptingHostTest : TestCase() {
                 }
             }
         }
-        val output = captureOut {
-            BasicJvmScriptingHost().eval(mainScript, compilationConfiguration, evaluationConfiguration).throwOnFailure()
+        konst output = captureOut {
+            BasicJvmScriptingHost().ekonst(mainScript, compilationConfiguration, ekonstuationConfiguration).throwOnFailure()
         }.lines()
         return output
     }
 
     @Test
     fun testImportError() {
-        val script = "println(\"Hello from imported \$helloScriptName script!\")"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst script = "println(\"Hello from imported \$helloScriptName script!\")"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             refineConfiguration {
                 beforeCompiling { ctx ->
                     ScriptCompilationConfiguration(ctx.compilationConfiguration) {
@@ -371,20 +371,20 @@ class ScriptingHostTest : TestCase() {
                 }
             }
         }
-        val res = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration, null)
+        konst res = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration, null)
         assertTrue(res is ResultWithDiagnostics.Failure)
-        val report = res.reports.find { it.message.startsWith("Imported source file not found") }
+        konst report = res.reports.find { it.message.startsWith("Imported source file not found") }
         assertNotNull(report)
         assertEquals("script.kts", report?.sourcePath)
     }
 
     @Test
     fun testCompileOptionsLanguageVersion() {
-        val script = "sealed interface Interface {\n    fun invoke()\n}"
-        val compilationConfiguration1 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst script = "sealed interface Interface {\n    fun invoke()\n}"
+        konst compilationConfiguration1 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             compilerOptions("-language-version", "1.4")
         }
-        val res = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration1, null)
+        konst res = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration1, null)
         assertTrue(res is ResultWithDiagnostics.Failure)
         res.reports.find { it.message.startsWith("The feature \"sealed interfaces\" is only available since language version 1.5") }
             ?: fail("Error report about language version not found. Reported:\n  ${res.reports.joinToString("\n  ") { it.message }}")
@@ -392,16 +392,16 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testCompileOptionsNoStdlib() {
-        val script = "println(\"Hi\")"
+        konst script = "println(\"Hi\")"
 
-        val res1 = evalScriptWithConfiguration(script) {
+        konst res1 = ekonstScriptWithConfiguration(script) {
             compilerOptions("-no-stdlib")
         }
         assertTrue(res1 is ResultWithDiagnostics.Failure)
         res1.reports.find { it.message.startsWith("Unresolved reference: println") }
             ?: fail("Expected unresolved reference report. Reported:\n  ${res1.reports.joinToString("\n  ") { it.message }}")
 
-        val res2 = evalScriptWithConfiguration(script) {
+        konst res2 = ekonstScriptWithConfiguration(script) {
             refineConfiguration {
                 beforeCompiling { ctx ->
                     ScriptCompilationConfiguration(ctx.compilationConfiguration) {
@@ -416,16 +416,16 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testErrorOnParsingOptions() {
-        val script = "println(\"Hi\")"
+        konst script = "println(\"Hi\")"
 
-        val compilationConfiguration1 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst compilationConfiguration1 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             compilerOptions("-jvm-target->1.8")
         }
-        val res1 = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration1, null)
+        konst res1 = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration1, null)
         assertTrue(res1 is ResultWithDiagnostics.Failure)
-        assertNotNull(res1.reports.find { it.message == "Invalid argument: -jvm-target->1.8" })
+        assertNotNull(res1.reports.find { it.message == "Inkonstid argument: -jvm-target->1.8" })
 
-        val compilationConfiguration2 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst compilationConfiguration2 = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             refineConfiguration {
                 beforeCompiling { ctx ->
                     ScriptCompilationConfiguration(ctx.compilationConfiguration) {
@@ -434,15 +434,15 @@ class ScriptingHostTest : TestCase() {
                 }
             }
         }
-        val res2 = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration2, null)
+        konst res2 = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration2, null)
         assertTrue(res2 is ResultWithDiagnostics.Failure)
-        assertNotNull(res2.reports.find { it.message == "Invalid argument: -jvm-target->1.6" })
+        assertNotNull(res2.reports.find { it.message == "Inkonstid argument: -jvm-target->1.6" })
     }
 
     @Test
-    fun testInvalidOptionsWarning() {
-        val script = "1"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+    fun testInkonstidOptionsWarning() {
+        konst script = "1"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             compilerOptions("-Xunknown1")
             refineConfiguration {
                 beforeCompiling { ctx ->
@@ -452,7 +452,7 @@ class ScriptingHostTest : TestCase() {
                 }
             }
         }
-        val res = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration, null)
+        konst res = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration, null)
         assertTrue(res is ResultWithDiagnostics.Success)
         assertNotNull(res.reports.find { it.message == "Flag is not supported by this version of the compiler: -Xunknown1" })
         assertNotNull(res.reports.find { it.message == "Flag is not supported by this version of the compiler: -Xunknown2" })
@@ -460,8 +460,8 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testIgnoredOptionsWarning() {
-        val script = "println(\"Hi\")"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst script = "println(\"Hi\")"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             compilerOptions("-version", "-d", "destDir", "-Xreport-perf", "-no-reflect")
             refineConfiguration {
                 beforeCompiling { ctx ->
@@ -471,7 +471,7 @@ class ScriptingHostTest : TestCase() {
                 }
             }
         }
-        val res = BasicJvmScriptingHost().eval(script.toScriptSource(), compilationConfiguration, null)
+        konst res = BasicJvmScriptingHost().ekonst(script.toScriptSource(), compilationConfiguration, null)
         assertTrue(res is ResultWithDiagnostics.Success)
         assertNotNull(res.reports.find { it.message == "The following compiler arguments are ignored on script compilation: -version, -d, -Xreport-perf" })
         assertNotNull(res.reports.find { it.message == "The following compiler arguments are ignored on script compilation: -Xdump-perf" })
@@ -479,17 +479,17 @@ class ScriptingHostTest : TestCase() {
     }
 
     fun jvmTargetTestImpl(target: String, expectedVersion: Int) {
-        val script = "println(\"Hi\")"
-        val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
+        konst script = "println(\"Hi\")"
+        konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate> {
             compilerOptions("-jvm-target", target)
         }
-        val compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
-        val compiledScript = runBlocking { compiler(script.toScriptSource(name = "SavedScript.kts"), compilationConfiguration) }
+        konst compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
+        konst compiledScript = runBlocking { compiler(script.toScriptSource(name = "SavedScript.kts"), compilationConfiguration) }
         assertTrue(compiledScript is ResultWithDiagnostics.Success)
 
-        val jvmCompiledScript = compiledScript.valueOrNull()!! as KJvmCompiledScript
-        val jvmCompiledModule = jvmCompiledScript.getCompiledModule() as KJvmCompiledModuleInMemoryImpl
-        val bytes = jvmCompiledModule.compilerOutputFiles["SavedScript.class"]!!
+        konst jvmCompiledScript = compiledScript.konstueOrNull()!! as KJvmCompiledScript
+        konst jvmCompiledModule = jvmCompiledScript.getCompiledModule() as KJvmCompiledModuleInMemoryImpl
+        konst bytes = jvmCompiledModule.compilerOutputFiles["SavedScript.class"]!!
 
         var classFileVersion: Int? = null
         ClassReader(bytes).accept(object : ClassVisitor(Opcodes.API_VERSION) {
@@ -512,30 +512,30 @@ class ScriptingHostTest : TestCase() {
 
     @Test
     fun testCompiledScriptClassLoader() {
-        val script = "val x = 1"
-        val scriptCompilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
-        val compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
-        val compiledScript = runBlocking {
-            val res = compiler(script.toScriptSource(), scriptCompilationConfiguration).throwOnFailure()
-            (res as ResultWithDiagnostics.Success<CompiledScript>).value
+        konst script = "konst x = 1"
+        konst scriptCompilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>()
+        konst compiler = JvmScriptCompiler(defaultJvmScriptingHostConfiguration)
+        konst compiledScript = runBlocking {
+            konst res = compiler(script.toScriptSource(), scriptCompilationConfiguration).throwOnFailure()
+            (res as ResultWithDiagnostics.Success<CompiledScript>).konstue
         }
-        val compiledScriptClass = runBlocking { compiledScript.getClass(null).throwOnFailure().valueOrNull()!! }
-        val classLoader = compiledScriptClass.java.classLoader
+        konst compiledScriptClass = runBlocking { compiledScript.getClass(null).throwOnFailure().konstueOrNull()!! }
+        konst classLoader = compiledScriptClass.java.classLoader
 
         Assert.assertTrue(classLoader is CompiledScriptClassLoader)
-        val anotherClass = classLoader.loadClass(compiledScriptClass.qualifiedName)
+        konst anotherClass = classLoader.loadClass(compiledScriptClass.qualifiedName)
 
         Assert.assertEquals(compiledScriptClass.java, anotherClass)
 
-        val classResourceName = compiledScriptClass.qualifiedName!!.replace('.', '/') + ".class"
-        val classAsResourceUrl = classLoader.getResource(classResourceName)
-        val classAssResourceStream = classLoader.getResourceAsStream(classResourceName)
+        konst classResourceName = compiledScriptClass.qualifiedName!!.replace('.', '/') + ".class"
+        konst classAsResourceUrl = classLoader.getResource(classResourceName)
+        konst classAssResourceStream = classLoader.getResourceAsStream(classResourceName)
 
         Assert.assertNotNull(classAsResourceUrl)
         Assert.assertNotNull(classAssResourceStream)
 
-        val classAsResourceData = classAsResourceUrl!!.openConnection().getInputStream().readBytes()
-        val classAsResourceStreamData = classAssResourceStream!!.readBytes()
+        konst classAsResourceData = classAsResourceUrl!!.openConnection().getInputStream().readBytes()
+        konst classAsResourceStreamData = classAssResourceStream!!.readBytes()
 
         Assert.assertArrayEquals(classAsResourceData, classAsResourceStreamData)
 
@@ -544,14 +544,14 @@ class ScriptingHostTest : TestCase() {
 }
 
 internal fun runScriptFromJar(jar: File): List<String> {
-    val javaExecutable = File(File(System.getProperty("java.home"), "bin"), "java")
-    val args = listOf(javaExecutable.absolutePath, "-jar", jar.path)
-    val processBuilder = ProcessBuilder(args)
+    konst javaExecutable = File(File(System.getProperty("java.home"), "bin"), "java")
+    konst args = listOf(javaExecutable.absolutePath, "-jar", jar.path)
+    konst processBuilder = ProcessBuilder(args)
     processBuilder.redirectErrorStream(true)
-    val r = run {
-        val process = processBuilder.start()
+    konst r = run {
+        konst process = processBuilder.start()
         process.waitFor(10, TimeUnit.SECONDS)
-        val out = process.inputStream.reader().readText()
+        konst out = process.inputStream.reader().readText()
         if (process.isAlive) {
             process.destroyForcibly()
             "Error: timeout, killing script process\n$out"
@@ -564,38 +564,38 @@ internal fun runScriptFromJar(jar: File): List<String> {
 
 fun <T> ResultWithDiagnostics<T>.throwOnFailure(): ResultWithDiagnostics<T> = apply {
     if (this is ResultWithDiagnostics.Failure) {
-        val firstExceptionFromReports = reports.find { it.exception != null }?.exception
+        konst firstExceptionFromReports = reports.find { it.exception != null }?.exception
         throw Exception(
-            "Compilation/evaluation failed:\n  ${reports.joinToString("\n  ") { it.exception?.toString() ?: it.message }}",
+            "Compilation/ekonstuation failed:\n  ${reports.joinToString("\n  ") { it.exception?.toString() ?: it.message }}",
             firstExceptionFromReports
         )
     }
 }
 
-private fun evalScript(script: String, host: BasicScriptingHost = BasicJvmScriptingHost()): ResultWithDiagnostics<*> =
-    evalScriptWithConfiguration(script, host)
+private fun ekonstScript(script: String, host: BasicScriptingHost = BasicJvmScriptingHost()): ResultWithDiagnostics<*> =
+    ekonstScriptWithConfiguration(script, host)
 
-private fun evalScriptWithResult(
+private fun ekonstScriptWithResult(
     script: String,
     host: BasicScriptingHost = BasicJvmScriptingHost(),
     body: ScriptCompilationConfiguration.Builder.() -> Unit = {}
 ): ResultValue =
-    evalScriptWithConfiguration(script, host, body).throwOnFailure().valueOrNull()!!.returnValue
+    ekonstScriptWithConfiguration(script, host, body).throwOnFailure().konstueOrNull()!!.returnValue
 
-internal fun evalScriptWithConfiguration(
+internal fun ekonstScriptWithConfiguration(
     script: String,
     host: BasicScriptingHost = BasicJvmScriptingHost(),
     body: ScriptCompilationConfiguration.Builder.() -> Unit = {}
-): ResultWithDiagnostics<EvaluationResult> {
-    val compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>(body = body)
-    return host.eval(script.toScriptSource(), compilationConfiguration, null)
+): ResultWithDiagnostics<EkonstuationResult> {
+    konst compilationConfiguration = createJvmCompilationConfigurationFromTemplate<SimpleScriptTemplate>(body = body)
+    return host.ekonst(script.toScriptSource(), compilationConfiguration, null)
 }
 
 internal fun ScriptCompilationConfiguration.Builder.makeSimpleConfigurationWithTestImport() {
     updateClasspath(classpathFromClass<ScriptingHostTest>()) // the lambda below should be in the classpath
     refineConfiguration {
         beforeCompiling { ctx ->
-            val importedScript = File(TEST_DATA_DIR, "importTest/helloWithVal.kts")
+            konst importedScript = File(TEST_DATA_DIR, "importTest/helloWithVal.kts")
             if ((ctx.script as? FileBasedScriptSource)?.file?.canonicalFile == importedScript.canonicalFile) {
                 ctx.compilationConfiguration
             } else {
@@ -610,10 +610,10 @@ internal fun ScriptCompilationConfiguration.Builder.makeSimpleConfigurationWithT
 internal fun captureOut(body: () -> Unit): String = captureOutAndErr(body).first
 
 internal fun captureOutAndErr(body: () -> Unit): Pair<String, String> {
-    val outStream = ByteArrayOutputStream()
-    val errStream = ByteArrayOutputStream()
-    val prevOut = System.out
-    val prevErr = System.err
+    konst outStream = ByteArrayOutputStream()
+    konst errStream = ByteArrayOutputStream()
+    konst prevOut = System.out
+    konst prevErr = System.err
     System.setOut(PrintStream(outStream))
     System.setErr(PrintStream(errStream))
     try {

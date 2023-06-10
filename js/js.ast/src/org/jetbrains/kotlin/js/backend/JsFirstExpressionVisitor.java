@@ -17,16 +17,16 @@ import org.jetbrains.annotations.NotNull;
  * <p/>
  * For example the following require parentheses:<br>
  * <ul>
- * <li>{ key : 'value'}</li>
- * <li>{ key : 'value'}.key</li>
+ * <li>{ key : 'konstue'}</li>
+ * <li>{ key : 'konstue'}.key</li>
  * <li>function () {return 1;}()</li>
  * <li>function () {return 1;}.prototype</li>
  * </ul>
  * <p/>
  * The following do not require parentheses:<br>
  * <ul>
- * <li>var x = { key : 'value'}</li>
- * <li>"string" + { key : 'value'}.key</li>
+ * <li>var x = { key : 'konstue'}</li>
+ * <li>"string" + { key : 'konstue'}.key</li>
  * <li>function func() {}</li>
  * <li>function() {}</li>
  * </ul>

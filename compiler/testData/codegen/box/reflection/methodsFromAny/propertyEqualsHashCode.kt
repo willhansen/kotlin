@@ -6,11 +6,11 @@
 
 import kotlin.test.*
 
-val top = 42
+konst top = 42
 var top2 = -23
 
-val Int.intExt: Int get() = this
-val Char.charExt: Int get() = this.toInt()
+konst Int.intExt: Int get() = this
+konst Char.charExt: Int get() = this.toInt()
 
 class A(var mem: String)
 class B(var mem: String)

@@ -71,10 +71,10 @@ class JavaIncompatibilityRulesOverridabilityCondition : ExternalOverridabilityCo
             return false
         }
 
-        val overriddenBuiltin = superDescriptor.getOverriddenSpecialBuiltin()
+        konst overriddenBuiltin = superDescriptor.getOverriddenSpecialBuiltin()
 
         // Checking second condition: special hidden override is not supposed to be an override to non-special irrelevant Java declaration
-        val isOneOfDescriptorsHidden =
+        konst isOneOfDescriptorsHidden =
             subDescriptor.isHiddenToOvercomeSignatureClash != (superDescriptor as? FunctionDescriptor)?.isHiddenToOvercomeSignatureClash
         if (isOneOfDescriptorsHidden &&
             (overriddenBuiltin == null || !subDescriptor.isHiddenToOvercomeSignatureClash)
@@ -118,7 +118,7 @@ class JavaIncompatibilityRulesOverridabilityCondition : ExternalOverridabilityCo
 
     companion object {
         /**
-         * Checks if any pair of corresponding value parameters has different type kinds, e.g. one is primitive and another is not
+         * Checks if any pair of corresponding konstue parameters has different type kinds, e.g. one is primitive and another is not
          *
          * As it comes from it's name it only checks overrides in Java classes
          */
@@ -127,13 +127,13 @@ class JavaIncompatibilityRulesOverridabilityCondition : ExternalOverridabilityCo
             subDescriptor: CallableDescriptor
         ): Boolean {
             if (subDescriptor !is JavaMethodDescriptor || superDescriptor !is FunctionDescriptor) return false
-            assert(subDescriptor.valueParameters.size == superDescriptor.valueParameters.size) {
-                "External overridability condition with CONFLICTS_ONLY should not be run with different value parameters size"
+            assert(subDescriptor.konstueParameters.size == superDescriptor.konstueParameters.size) {
+                "External overridability condition with CONFLICTS_ONLY should not be run with different konstue parameters size"
             }
 
-            for ((subParameter, superParameter) in subDescriptor.original.valueParameters.zip(superDescriptor.original.valueParameters)) {
-                val isSubPrimitive = mapValueParameterType(subDescriptor, subParameter) is JvmType.Primitive
-                val isSuperPrimitive = mapValueParameterType(superDescriptor, superParameter) is JvmType.Primitive
+            for ((subParameter, superParameter) in subDescriptor.original.konstueParameters.zip(superDescriptor.original.konstueParameters)) {
+                konst isSubPrimitive = mapValueParameterType(subDescriptor, subParameter) is JvmType.Primitive
+                konst isSuperPrimitive = mapValueParameterType(superDescriptor, superParameter) is JvmType.Primitive
 
                 if (isSubPrimitive != isSuperPrimitive) {
                     return true
@@ -143,21 +143,21 @@ class JavaIncompatibilityRulesOverridabilityCondition : ExternalOverridabilityCo
             return false
         }
 
-        private fun mapValueParameterType(f: FunctionDescriptor, valueParameterDescriptor: ValueParameterDescriptor) =
+        private fun mapValueParameterType(f: FunctionDescriptor, konstueParameterDescriptor: ValueParameterDescriptor) =
             if (forceSingleValueParameterBoxing(f) || isPrimitiveCompareTo(f))
-                valueParameterDescriptor.type.makeNullable().mapToJvmType()
+                konstueParameterDescriptor.type.makeNullable().mapToJvmType()
             else
-                valueParameterDescriptor.type.mapToJvmType()
+                konstueParameterDescriptor.type.mapToJvmType()
 
-        // It's useful here to suppose that 'Int.compareTo(Int)' requires boxing of it's value parameter
+        // It's useful here to suppose that 'Int.compareTo(Int)' requires boxing of it's konstue parameter
         // As it happens in java.lang.Integer analogue
         // It only affects additional built-ins loading (see 'testLoadBuiltIns' tests)
         private fun isPrimitiveCompareTo(f: FunctionDescriptor): Boolean {
-            if (f.valueParameters.size != 1) return false
-            val classDescriptor =
+            if (f.konstueParameters.size != 1) return false
+            konst classDescriptor =
                 f.containingDeclaration as? ClassDescriptor ?: return false
-            val parameterClass =
-                f.valueParameters.single().type.constructor.declarationDescriptor as? ClassDescriptor
+            konst parameterClass =
+                f.konstueParameters.single().type.constructor.declarationDescriptor as? ClassDescriptor
                     ?: return false
             return KotlinBuiltIns.isPrimitiveClass(classDescriptor) && classDescriptor.fqNameSafe == parameterClass.fqNameSafe
         }

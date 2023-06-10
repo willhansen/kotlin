@@ -5,13 +5,13 @@ class View {
 
   }
 
-  val coefficient: Int
+  konst coefficient: Int
     field = 42
     get
 
 }
 
-val Int.dp: Int
+konst Int.dp: Int
   get($context_receiver_0: View): Int {
     return $context_receiver_0.<get-coefficient>().times(other = <this>)
   }

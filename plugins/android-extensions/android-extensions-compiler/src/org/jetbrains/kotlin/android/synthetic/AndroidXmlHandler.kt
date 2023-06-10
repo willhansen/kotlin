@@ -21,7 +21,7 @@ import org.xml.sax.Attributes
 import org.xml.sax.helpers.DefaultHandler
 import java.util.HashMap
 
-class AndroidXmlHandler(private val elementCallback: (ResourceIdentifier, String) -> Unit) : DefaultHandler() {
+class AndroidXmlHandler(private konst elementCallback: (ResourceIdentifier, String) -> Unit) : DefaultHandler() {
     override fun startDocument() {
         super.startDocument()
     }
@@ -32,10 +32,10 @@ class AndroidXmlHandler(private val elementCallback: (ResourceIdentifier, String
 
     override fun startElement(uri: String, localName: String, qName: String, attributes: Attributes) {
         if (isWidgetTypeIgnored(localName)) return
-        val attributesMap = attributes.toMap()
-        val idAttribute = attributesMap[AndroidConst.ID_ATTRIBUTE_NO_NAMESPACE]
-        val widgetType = attributesMap[AndroidConst.CLASS_ATTRIBUTE_NO_NAMESPACE] ?: localName
-        val name = idAttribute?.let { androidIdToName(idAttribute) }
+        konst attributesMap = attributes.toMap()
+        konst idAttribute = attributesMap[AndroidConst.ID_ATTRIBUTE_NO_NAMESPACE]
+        konst widgetType = attributesMap[AndroidConst.CLASS_ATTRIBUTE_NO_NAMESPACE] ?: localName
+        konst name = idAttribute?.let { androidIdToName(idAttribute) }
         if (name != null) elementCallback(name, widgetType)
     }
 
@@ -43,10 +43,10 @@ class AndroidXmlHandler(private val elementCallback: (ResourceIdentifier, String
 }
 
 private fun Attributes.toMap(): HashMap<String, String> {
-    val res = HashMap<String, String>()
+    konst res = HashMap<String, String>()
     for (index in 0..length - 1) {
-        val attrName = getLocalName(index)!!
-        val attrVal = getValue(index)!!
+        konst attrName = getLocalName(index)!!
+        konst attrVal = getValue(index)!!
         res[attrName] = attrVal
     }
     return res

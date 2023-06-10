@@ -29,7 +29,7 @@ internal object KDocReferenceResolver {
      * we need to resolve the whole qualifier to understand which parts of the qualifier are package or class qualifiers.
      * And then we will be able to resolve the qualifier selected by the user to the proper class, package or callable.
      *
-     * It's possible that the whole qualifier is invalid, in this case we still want to resolve our [selectedFqName].
+     * It's possible that the whole qualifier is inkonstid, in this case we still want to resolve our [selectedFqName].
      * To do this, we are trying to resolve the whole qualifier until we succeed.
      *
      * @param selectedFqName the selected fully qualified name of the KDoc
@@ -41,13 +41,13 @@ internal object KDocReferenceResolver {
      */
     context(KtAnalysisSession)
     internal fun resolveKdocFqName(selectedFqName: FqName, fullFqName: FqName, contextElement: KtElement): Collection<KtSymbol> {
-        val fullSymbolsResolved = resolveKdocFqName(fullFqName, contextElement)
+        konst fullSymbolsResolved = resolveKdocFqName(fullFqName, contextElement)
         if (selectedFqName == fullFqName) return fullSymbolsResolved
         if (fullSymbolsResolved.isEmpty()) {
-            val parent = fullFqName.parent()
+            konst parent = fullFqName.parent()
             return resolveKdocFqName(selectedFqName = selectedFqName, fullFqName = parent, contextElement = contextElement)
         }
-        val goBackSteps = fullFqName.pathSegments().size - selectedFqName.pathSegments().size
+        konst goBackSteps = fullFqName.pathSegments().size - selectedFqName.pathSegments().size
         check(goBackSteps > 0) {
             "Selected FqName ($selectedFqName) should be smaller than the whole FqName ($fullFqName)"
         }
@@ -78,7 +78,7 @@ internal object KDocReferenceResolver {
     context(KtAnalysisSession)
     private fun resolveKdocFqName(fqName: FqName, contextElement: KtElement): Collection<KtSymbol> {
         getSymbolsFromParentMemberScopes(fqName, contextElement).ifNotEmpty { return this }
-        val importScopeContext = contextElement.containingKtFile.getImportingScopeContext()
+        konst importScopeContext = contextElement.containingKtFile.getImportingScopeContext()
         getSymbolsFromImportingScope(importScopeContext, fqName, KtScopeKind.ExplicitSimpleImportingScope::class).ifNotEmpty { return this }
         getSymbolsFromPackageScope(fqName, contextElement).ifNotEmpty { return this }
         getSymbolsFromImportingScope(importScopeContext, fqName, KtScopeKind.DefaultSimpleImportingScope::class).ifNotEmpty { return this }
@@ -103,7 +103,7 @@ internal object KDocReferenceResolver {
             }
         }
         if (owner is KtCallableDeclaration) {
-            for (typeParameter in owner.valueParameters) {
+            for (typeParameter in owner.konstueParameters) {
                 if (typeParameter.nameAsName == name) {
                     add(typeParameter.getParameterSymbol())
                 }
@@ -122,14 +122,14 @@ internal object KDocReferenceResolver {
                 getSymbolsFromDeclaration(fqName.shortName(), ktDeclaration).ifNotEmpty { return this }
             }
             if (ktDeclaration is KtClassOrObject) {
-                val symbol = ktDeclaration.getClassOrObjectSymbol() ?: continue
+                konst symbol = ktDeclaration.getClassOrObjectSymbol() ?: continue
 
-                val scope = listOfNotNull(
+                konst scope = listOfNotNull(
                     symbol.getMemberScope(),
                     getCompanionObjectMemberScope(symbol),
                 ).asCompositeScope()
 
-                val symbolsFromScope = getSymbolsFromMemberScope(fqName, scope)
+                konst symbolsFromScope = getSymbolsFromMemberScope(fqName, scope)
                 if (symbolsFromScope.isNotEmpty()) return symbolsFromScope
             }
         }
@@ -138,16 +138,16 @@ internal object KDocReferenceResolver {
 
     context(KtAnalysisSession)
     private fun getCompanionObjectMemberScope(classSymbol: KtClassOrObjectSymbol): KtScope? {
-        val namedClassSymbol = classSymbol as? KtNamedClassOrObjectSymbol ?: return null
-        val companionSymbol = namedClassSymbol.companionObject ?: return null
+        konst namedClassSymbol = classSymbol as? KtNamedClassOrObjectSymbol ?: return null
+        konst companionSymbol = namedClassSymbol.companionObject ?: return null
         return companionSymbol.getMemberScope()
     }
 
     context(KtAnalysisSession)
     private fun getSymbolsFromPackageScope(fqName: FqName, contextElement: KtElement): Collection<KtDeclarationSymbol> {
-        val packageFqName = contextElement.containingKtFile.packageFqName
-        val packageSymbol = getPackageSymbolIfPackageExists(packageFqName) ?: return emptyList()
-        val packageScope = packageSymbol.getPackageScope()
+        konst packageFqName = contextElement.containingKtFile.packageFqName
+        konst packageSymbol = getPackageSymbolIfPackageExists(packageFqName) ?: return emptyList()
+        konst packageScope = packageSymbol.getPackageScope()
         return getSymbolsFromMemberScope(fqName, packageScope)
     }
 
@@ -157,13 +157,13 @@ internal object KDocReferenceResolver {
         fqName: FqName,
         acceptScopeKind: KClass<out KtScopeKind>,
     ): Collection<KtDeclarationSymbol> {
-        val importingScope = scopeContext.getCompositeScope { acceptScopeKind.java.isAssignableFrom(it::class.java) }
+        konst importingScope = scopeContext.getCompositeScope { acceptScopeKind.java.isAssignableFrom(it::class.java) }
         return getSymbolsFromMemberScope(fqName, importingScope)
     }
 
     context(KtAnalysisSession)
     private fun getSymbolsFromMemberScope(fqName: FqName, scope: KtScope): Collection<KtDeclarationSymbol> {
-        val finalScope = fqName.pathSegments()
+        konst finalScope = fqName.pathSegments()
             .dropLast(1)
             .fold(scope) { currentScope, fqNamePart ->
                 currentScope
@@ -177,7 +177,7 @@ internal object KDocReferenceResolver {
     }
 
     private fun KtScope.getAllSymbolsFromScopeByShortName(fqName: FqName): Collection<KtDeclarationSymbol> {
-        val shortName = fqName.shortName()
+        konst shortName = fqName.shortName()
         return buildSet {
             addAll(getCallableSymbols(shortName))
             addAll(getClassifierSymbols(shortName))
@@ -222,7 +222,7 @@ internal object KDocReferenceResolver {
 
     context(KtAnalysisSession)
     private fun MutableCollection<KtSymbol>.collectSymbolsByFqNameInterpretationAsCallableId(callableId: CallableId) {
-        when (val classId = callableId.classId) {
+        when (konst classId = callableId.classId) {
             null -> {
                 addAll(getTopLevelCallableSymbols(callableId.packageName, callableId.callableName))
             }
@@ -238,7 +238,7 @@ internal object KDocReferenceResolver {
 
 
     private fun generateNameInterpretations(fqName: FqName): Sequence<FqNameInterpretation> = sequence {
-        val parts = fqName.pathSegments()
+        konst parts = fqName.pathSegments()
         if (parts.isEmpty()) {
             yield(FqNameInterpretation.create(packageParts = emptyList(), classParts = emptyList(), callable = null))
             return@sequence
@@ -267,14 +267,14 @@ internal object KDocReferenceResolver {
 
 private sealed class FqNameInterpretation {
 
-    data class FqNameInterpretationAsPackage(val packageFqName: FqName) : FqNameInterpretation()
-    data class FqNameInterpretationAsClassId(val classId: ClassId) : FqNameInterpretation()
-    data class FqNameInterpretationAsCallableId(val callableId: CallableId) : FqNameInterpretation()
+    data class FqNameInterpretationAsPackage(konst packageFqName: FqName) : FqNameInterpretation()
+    data class FqNameInterpretationAsClassId(konst classId: ClassId) : FqNameInterpretation()
+    data class FqNameInterpretationAsCallableId(konst callableId: CallableId) : FqNameInterpretation()
 
     companion object {
         fun create(packageParts: List<Name>, classParts: List<Name>, callable: Name?): FqNameInterpretation {
-            val packageName = FqName.fromSegments(packageParts.map { it.asString() })
-            val relativeClassName = FqName.fromSegments(classParts.map { it.asString() })
+            konst packageName = FqName.fromSegments(packageParts.map { it.asString() })
+            konst relativeClassName = FqName.fromSegments(classParts.map { it.asString() })
 
             return when {
                 classParts.isEmpty() && callable == null -> FqNameInterpretationAsPackage(packageName)

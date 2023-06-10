@@ -10,7 +10,7 @@
 var test = "Failed"
 
 fun box(): String {
-    val ok = "OK"
+    konst ok = "OK"
     J.run { test = ok }
     return test
 }

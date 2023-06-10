@@ -7,7 +7,7 @@ class A {
         fun bar() = "K"
     }
 
-    val f = { foo() + bar() }
+    konst f = { foo() + bar() }
 }
 
 fun box(): String = A().f()

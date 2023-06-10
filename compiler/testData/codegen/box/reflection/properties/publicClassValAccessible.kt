@@ -5,11 +5,11 @@
 import kotlin.reflect.jvm.isAccessible
 
 class Result {
-    public val value: String = "OK"
+    public konst konstue: String = "OK"
 }
 
 fun box(): String {
-    val p = Result::value
+    konst p = Result::konstue
     p.isAccessible = false
     // setAccessible(false) should have no effect on the accessibility of a public reflection object
     return p.get(Result())

@@ -22,7 +22,7 @@ import org.gradle.api.Project
 class SpringGradleSubplugin : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(AllOpenGradleSubplugin::class.java)
-        val allOpenExtension = AllOpenGradleSubplugin.getAllOpenExtension(project)
+        konst allOpenExtension = AllOpenGradleSubplugin.getAllOpenExtension(project)
         allOpenExtension.myPresets += "spring"
     }
 }

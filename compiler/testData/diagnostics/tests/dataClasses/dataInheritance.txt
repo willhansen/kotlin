@@ -2,7 +2,7 @@ package
 
 public abstract data class Base {
     public constructor Base(/*0*/ x: kotlin.Int)
-    public final val x: kotlin.Int
+    public final konst x: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ x: kotlin.Int = ...): Base
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -12,7 +12,7 @@ public abstract data class Base {
 
 public final data class Complex : SuperInterface, SuperClass {
     public constructor Complex(/*0*/ y: kotlin.Int)
-    public final val y: kotlin.Int
+    public final konst y: kotlin.Int
     public final operator /*synthesized*/ fun component1(): kotlin.Int
     public final /*synthesized*/ fun copy(/*0*/ y: kotlin.Int = ...): Complex
     public open override /*2*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -22,7 +22,7 @@ public final data class Complex : SuperInterface, SuperClass {
 
 public final class Derived : Base {
     public constructor Derived()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
     public final override /*1*/ /*fake_override*/ fun component1(): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun copy(/*0*/ x: kotlin.Int = ...): Base
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
@@ -32,9 +32,9 @@ public final class Derived : Base {
 
 public final data class Nasty : Base {
     public constructor Nasty(/*0*/ z: kotlin.Int, /*1*/ y: kotlin.Int)
-    public final override /*1*/ /*fake_override*/ val x: kotlin.Int
-    public final val y: kotlin.Int
-    public final val z: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
+    public final konst y: kotlin.Int
+    public final konst z: kotlin.Int
     public final override /*1*/ /*synthesized*/ fun component1(): kotlin.Int
     public final operator /*synthesized*/ fun component2(): kotlin.Int
     public final override /*1*/ /*fake_override*/ fun copy(/*0*/ x: kotlin.Int = ...): Base
@@ -46,8 +46,8 @@ public final data class Nasty : Base {
 
 public final data class SubData : Complex {
     public constructor SubData(/*0*/ sss: kotlin.String)
-    public final val sss: kotlin.String
-    public final override /*1*/ /*fake_override*/ val y: kotlin.Int
+    public final konst sss: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst y: kotlin.Int
     public final override /*1*/ /*synthesized*/ fun component1(): kotlin.String
     public final override /*1*/ /*fake_override*/ fun copy(/*0*/ y: kotlin.Int = ...): Complex
     public final /*synthesized*/ fun copy(/*0*/ sss: kotlin.String = ...): SubData

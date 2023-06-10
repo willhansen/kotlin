@@ -15,9 +15,9 @@ fun testForInListDestructured() {
 }
 
 fun testDesugaredForInList() {
-    val iterator = J.listOfNotNull().iterator()
+    konst iterator = J.listOfNotNull().iterator()
     while (iterator.hasNext()) {
-        val x = iterator.next()
+        konst x = iterator.next()
     }
 }
 
@@ -46,7 +46,7 @@ interface K {
     fun arrayOfNotNull(): Array<P>
 }
 
-data class P(val x: Int, val y: Int)
+data class P(konst x: Int, konst y: Int)
 
 // FILE: J.java
 import java.util.*;

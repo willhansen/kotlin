@@ -14,14 +14,14 @@ import kotlin.reflect.KProperty
  * as long as your property delegate has methods with the same signatures.
  *
  * @param T the type of object which owns the delegated property.
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public fun interface ReadOnlyProperty<in T, out V> {
     /**
-     * Returns the value of the property for the given object.
-     * @param thisRef the object for which the value is requested.
+     * Returns the konstue of the property for the given object.
+     * @param thisRef the object for which the konstue is requested.
      * @param property the metadata for the property.
-     * @return the property value.
+     * @return the property konstue.
      */
     public operator fun getValue(thisRef: T, property: KProperty<*>): V
 }
@@ -33,24 +33,24 @@ public fun interface ReadOnlyProperty<in T, out V> {
  * as long as your property delegate has methods with the same signatures.
  *
  * @param T the type of object which owns the delegated property.
- * @param V the type of the property value.
+ * @param V the type of the property konstue.
  */
 public interface ReadWriteProperty<in T, V> : ReadOnlyProperty<T, V> {
     /**
-     * Returns the value of the property for the given object.
-     * @param thisRef the object for which the value is requested.
+     * Returns the konstue of the property for the given object.
+     * @param thisRef the object for which the konstue is requested.
      * @param property the metadata for the property.
-     * @return the property value.
+     * @return the property konstue.
      */
     public override operator fun getValue(thisRef: T, property: KProperty<*>): V
 
     /**
-     * Sets the value of the property for the given object.
-     * @param thisRef the object for which the value is requested.
+     * Sets the konstue of the property for the given object.
+     * @param thisRef the object for which the konstue is requested.
      * @param property the metadata for the property.
-     * @param value the value to set.
+     * @param konstue the konstue to set.
      */
-    public operator fun setValue(thisRef: T, property: KProperty<*>, value: V)
+    public operator fun setValue(thisRef: T, property: KProperty<*>, konstue: V)
 }
 
 /**
@@ -67,7 +67,7 @@ public fun interface PropertyDelegateProvider<in T, out D> {
     /**
      * Returns the delegate of the property for the given object.
      *
-     * This function can be used to extend the logic of creating the object (e.g. perform validation checks)
+     * This function can be used to extend the logic of creating the object (e.g. perform konstidation checks)
      * to which the property implementation is delegated.
      *
      * @param thisRef the object for which property delegate is requested.

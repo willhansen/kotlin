@@ -115,9 +115,9 @@ digraph delegateWithAnonymousObject_kt {
                     color=blue
                     38 [label="Enter block"];
                     39 [label="Function call: R|/IssueListView.IssueListView|()" style="filled" fillcolor=yellow];
-                    40 [label="Access variable R|<local>/value|"];
+                    40 [label="Access variable R|<local>/konstue|"];
                     41 [label="Function call: R|/IssueListView.IssueListView|().R|/IssueListView.updateFrom|(...)" style="filled" fillcolor=yellow];
-                    42 [label="Jump: ^setValue R|/IssueListView.IssueListView|().R|/IssueListView.updateFrom|(R|<local>/value|)"];
+                    42 [label="Jump: ^setValue R|/IssueListView.IssueListView|().R|/IssueListView.updateFrom|(R|<local>/konstue|)"];
                     43 [label="Stub" style="filled" fillcolor=gray];
                     44 [label="Exit block" style="filled" fillcolor=gray];
                 }

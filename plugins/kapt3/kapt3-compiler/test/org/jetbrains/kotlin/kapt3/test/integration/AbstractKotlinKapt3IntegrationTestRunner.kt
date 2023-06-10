@@ -27,10 +27,10 @@ import javax.lang.model.element.TypeElement
 
 class AbstractKotlinKapt3IntegrationTestRunner(
     targetBackend: TargetBackend,
-    private val processorOptions: Map<String, String>,
-    private val supportedAnnotations: List<String>,
-    private val additionalPluginExtension: IrGenerationExtension?,
-    private val process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit
+    private konst processorOptions: Map<String, String>,
+    private konst supportedAnnotations: List<String>,
+    private konst additionalPluginExtension: IrGenerationExtension?,
+    private konst process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
 
     init {

@@ -1,4 +1,4 @@
-class Annotation(val x: Int) {
+class Annotation(konst x: Int) {
     fun baz() {}
     fun bar() = x
 }

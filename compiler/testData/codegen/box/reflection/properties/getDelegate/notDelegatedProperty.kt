@@ -5,12 +5,12 @@ import kotlin.reflect.KProperty2
 import kotlin.reflect.jvm.isAccessible
 import kotlin.test.*
 
-val topLevel: Boolean = true
-val String.extension: Boolean get() = true
+konst topLevel: Boolean = true
+konst String.extension: Boolean get() = true
 
 class Foo {
-    val member: Boolean = true
-    val String.memberExtension: Boolean get() = true
+    konst member: Boolean = true
+    konst String.memberExtension: Boolean get() = true
 }
 
 fun box(): String {
@@ -22,7 +22,7 @@ fun box(): String {
     assertNull(Foo::member.apply { isAccessible = true }.getDelegate(Foo()))
     assertNull(Foo()::member.apply { isAccessible = true }.getDelegate())
 
-    val me = Foo::class.members.single { it.name == "memberExtension" } as KProperty2<Foo, String, Boolean>
+    konst me = Foo::class.members.single { it.name == "memberExtension" } as KProperty2<Foo, String, Boolean>
     assertNull(me.apply { isAccessible = true }.getDelegate(Foo(), ""))
 
     return "OK"

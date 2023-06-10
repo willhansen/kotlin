@@ -10,11 +10,11 @@ import java.io.Serializable
 
 class CompileIterationResult(
     @Suppress("unused") // used in Gradle
-        val sourceFiles: Iterable<File>,
+        konst sourceFiles: Iterable<File>,
     @Suppress("unused") // used in Gradle
-        val exitCode: String
+        konst exitCode: String
 ) : Serializable {
     companion object {
-        const val serialVersionUID: Long = 0
+        const konst serialVersionUID: Long = 0
     }
 }

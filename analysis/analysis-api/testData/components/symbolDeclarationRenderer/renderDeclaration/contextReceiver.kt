@@ -4,8 +4,8 @@ interface Context2<A> {
     fun getContextElement(): A
 }
 
-class Context2Impl<A>(val value: A) : Context2<A> {
-    override fun getContextElement(): A = value
+class Context2Impl<A>(konst konstue: A) : Context2<A> {
+    override fun getContextElement(): A = konstue
 }
 
 context(Int, String)
@@ -21,7 +21,7 @@ class B {
 
 context(Context2<A>)
 class C<A> {
-    val a: A
+    konst a: A
         get() = getContextElement()
 }
 

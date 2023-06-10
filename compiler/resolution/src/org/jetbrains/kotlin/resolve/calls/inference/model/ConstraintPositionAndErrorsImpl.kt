@@ -29,19 +29,19 @@ class ExpectedTypeConstraintPositionImpl(topLevelCall: KotlinCall) : ExpectedTyp
 
 class DeclaredUpperBoundConstraintPositionImpl(
     typeParameter: TypeParameterDescriptor,
-    val kotlinCall: KotlinCall
+    konst kotlinCall: KotlinCall
 ) : DeclaredUpperBoundConstraintPosition<TypeParameterDescriptor>(typeParameter) {
     override fun toString() = "DeclaredUpperBound ${typeParameter.name} from ${typeParameter.containingDeclaration}"
 }
 
 class ArgumentConstraintPositionImpl(argument: KotlinCallArgument) : ArgumentConstraintPosition<KotlinCallArgument>(argument)
 
-class CallableReferenceConstraintPositionImpl(val callableReferenceCall: CallableReferenceKotlinCall) :
+class CallableReferenceConstraintPositionImpl(konst callableReferenceCall: CallableReferenceKotlinCall) :
     CallableReferenceConstraintPosition<CallableReferenceResolutionAtom>(callableReferenceCall)
 
 class ReceiverConstraintPositionImpl(
     argument: KotlinCallArgument,
-    val selectorCall: KotlinCall?
+    konst selectorCall: KotlinCall?
 ) : ReceiverConstraintPosition<KotlinCallArgument>(argument)
 
 class FixVariableConstraintPositionImpl(

@@ -1,4 +1,4 @@
 fun foo(x: Int) {
-    val (a, b) = x
+    konst (a, b) = x
     a
 }

@@ -22,7 +22,7 @@ public inline fun <R> synchronized(lock: Any, block: () -> R): R {
     // Force the lock object into a local and use that local for monitor enter/exit.
     // This ensures that the JVM can prove that locking is balanced which is a
     // prerequisite for using fast locking implementations. See KT-48367 for details.
-    val lockLocal = lock
+    konst lockLocal = lock
 
     @Suppress("NON_PUBLIC_CALL_FROM_PUBLIC_INLINE", "INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
     monitorEnter(lockLocal)

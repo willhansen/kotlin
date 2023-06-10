@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 class FirSimpleNamedReference @FirImplementationDetail constructor(
-    override val source: KtSourceElement?,
-    override val name: Name,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
 ) : FirNamedReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

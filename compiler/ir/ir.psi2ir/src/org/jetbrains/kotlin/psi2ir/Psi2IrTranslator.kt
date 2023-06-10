@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.psi2ir.generators.GeneratorContext
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorExtensions
 import org.jetbrains.kotlin.psi2ir.generators.ModuleGenerator
 import org.jetbrains.kotlin.psi2ir.generators.TypeTranslatorImpl
-import org.jetbrains.kotlin.psi2ir.generators.fragments.EvaluatorFragmentInfo
+import org.jetbrains.kotlin.psi2ir.generators.fragments.EkonstuatorFragmentInfo
 import org.jetbrains.kotlin.psi2ir.generators.fragments.FragmentContext
 import org.jetbrains.kotlin.psi2ir.generators.fragments.FragmentModuleGenerator
 import org.jetbrains.kotlin.resolve.BindingContext
@@ -41,9 +41,9 @@ fun interface Psi2IrPostprocessingStep {
 }
 
 class Psi2IrTranslator(
-    val languageVersionSettings: LanguageVersionSettings,
-    val configuration: Psi2IrConfiguration,
-    private val checkNoUnboundSymbols: (SymbolTable, String) -> Unit
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst configuration: Psi2IrConfiguration,
+    private konst checkNoUnboundSymbols: (SymbolTable, String) -> Unit
 ) {
     @Deprecated("Only for backward compatibility with older versions of IDE", level = DeprecationLevel.ERROR)
     constructor(
@@ -51,7 +51,7 @@ class Psi2IrTranslator(
         configuration: Psi2IrConfiguration
     ) : this(languageVersionSettings, configuration, checkNoUnboundSymbols = { _, _ -> })
 
-    private val postprocessingSteps = SmartList<Psi2IrPostprocessingStep>()
+    private konst postprocessingSteps = SmartList<Psi2IrPostprocessingStep>()
 
     fun addPostprocessingStep(step: Psi2IrPostprocessingStep) {
         postprocessingSteps.add(step)
@@ -64,7 +64,7 @@ class Psi2IrTranslator(
         extensions: GeneratorExtensions = GeneratorExtensions(),
         fragmentContext: FragmentContext? = null
     ): GeneratorContext {
-        val typeTranslator = TypeTranslatorImpl(
+        konst typeTranslator = TypeTranslatorImpl(
             symbolTable, languageVersionSettings, moduleDescriptor, extensions = extensions,
             allowErrorTypeInAnnotations = configuration.skipBodies,
         )
@@ -87,16 +87,16 @@ class Psi2IrTranslator(
         irProviders: List<IrProvider>,
         linkerExtensions: Collection<IrDeserializer.IrLinkerExtension>,
         expectDescriptorToSymbol: MutableMap<DeclarationDescriptor, IrSymbol>? = null,
-        fragmentInfo: EvaluatorFragmentInfo? = null
+        fragmentInfo: EkonstuatorFragmentInfo? = null
     ): IrModuleFragment {
 
-        val moduleGenerator = fragmentInfo?.let {
+        konst moduleGenerator = fragmentInfo?.let {
             FragmentModuleGenerator(context, it)
         } ?: ModuleGenerator(context, expectDescriptorToSymbol)
 
-        val irModule = moduleGenerator.generateModuleFragment(ktFiles)
+        konst irModule = moduleGenerator.generateModuleFragment(ktFiles)
 
-        val deserializers = irProviders.filterIsInstance<IrDeserializer>()
+        konst deserializers = irProviders.filterIsInstance<IrDeserializer>()
         deserializers.forEach { it.init(irModule, linkerExtensions) }
 
         moduleGenerator.generateUnboundSymbolsAsDependencies(irProviders)

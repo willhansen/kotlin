@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
-class List<out T>(val size : Int) {
+class List<out T>(konst size : Int) {
     companion object {
-        val Nil = List<Nothing>(0)
+        konst Nil = List<Nothing>(0)
     }
 }
 

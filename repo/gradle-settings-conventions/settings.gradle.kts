@@ -10,7 +10,7 @@ pluginManagement {
 }
 
 buildscript {
-    val buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
+    konst buildGradlePluginVersion = extra.get("kotlin.build.gradlePlugin.version")
     dependencies {
         classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:$buildGradlePluginVersion")
     }
@@ -29,7 +29,7 @@ include(":internal-gradle-setup")
 // Unfortunately it is not possible to apply build-cache.settings.gradle.kts as script compilation
 // could not then find types from "kotlin-build-gradle-plugin"
 // Sync below to the content of settings plugin
-val buildProperties = getKotlinBuildPropertiesForSettings(settings)
+konst buildProperties = getKotlinBuildPropertiesForSettings(settings)
 
 buildCache {
     local {
@@ -39,7 +39,7 @@ buildCache {
         }
     }
 
-    val remoteBuildCacheUrl = buildProperties.buildCacheUrl
+    konst remoteBuildCacheUrl = buildProperties.buildCacheUrl
     if (remoteBuildCacheUrl != null) {
         remote<HttpBuildCache> {
             url = uri(remoteBuildCacheUrl)

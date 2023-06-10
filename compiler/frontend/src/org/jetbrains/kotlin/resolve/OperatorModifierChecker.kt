@@ -39,11 +39,11 @@ object OperatorModifierChecker {
         diagnosticHolder: DiagnosticSink,
         languageVersionSettings: LanguageVersionSettings
     ) {
-        val functionDescriptor = descriptor as? FunctionDescriptor ?: return
+        konst functionDescriptor = descriptor as? FunctionDescriptor ?: return
         if (!functionDescriptor.isOperator) return
-        val modifier = declaration.modifierList?.getModifier(KtTokens.OPERATOR_KEYWORD) ?: return
+        konst modifier = declaration.modifierList?.getModifier(KtTokens.OPERATOR_KEYWORD) ?: return
 
-        val checkResult = OperatorChecks.check(functionDescriptor)
+        konst checkResult = OperatorChecks.check(functionDescriptor)
         if (checkResult.isSuccess) {
             when {
                 functionDescriptor.name in REM_TO_MOD_OPERATION_NAMES.keys ->
@@ -56,24 +56,24 @@ object OperatorModifierChecker {
                     checkSupportsFeature(LanguageFeature.CustomEqualsInValueClasses, languageVersionSettings, diagnosticHolder, modifier)
             }
 
-            if (functionDescriptor.name in REM_TO_MOD_OPERATION_NAMES.values &&
+            if (functionDescriptor.name in REM_TO_MOD_OPERATION_NAMES.konstues &&
                 languageVersionSettings.supportsFeature(LanguageFeature.OperatorRem)
             ) {
-                val diagnosticFactory = if (!KotlinBuiltIns.isUnderKotlinPackage(descriptor) &&
+                konst diagnosticFactory = if (!KotlinBuiltIns.isUnderKotlinPackage(descriptor) &&
                     languageVersionSettings.supportsFeature(LanguageFeature.ProhibitOperatorMod)
                 )
                     Errors.FORBIDDEN_BINARY_MOD
                 else
                     Errors.DEPRECATED_BINARY_MOD
 
-                val newNameConvention = REM_TO_MOD_OPERATION_NAMES.inverse()[functionDescriptor.name]
+                konst newNameConvention = REM_TO_MOD_OPERATION_NAMES.inverse()[functionDescriptor.name]
                 diagnosticHolder.report(diagnosticFactory.on(modifier, functionDescriptor, newNameConvention!!.asString()))
             }
 
             return
         }
 
-        val errorDescription = (checkResult as? CheckResult.IllegalSignature)?.error ?: "illegal function name"
+        konst errorDescription = (checkResult as? CheckResult.IllegalSignature)?.error ?: "illegal function name"
 
         diagnosticHolder.report(Errors.INAPPLICABLE_OPERATOR_MODIFIER.on(modifier, errorDescription))
     }

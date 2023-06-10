@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.ir.util.isFromJava
 import org.jetbrains.kotlin.ir.util.parentAsClass
 import java.util.concurrent.ConcurrentHashMap
 
-class CollectionStubComputer(val context: JvmBackendContext) {
+class CollectionStubComputer(konst context: JvmBackendContext) {
     private class LazyStubsForCollectionClass(
-        override val readOnlyClass: IrClassSymbol,
-        override val mutableClass: IrClassSymbol
+        override konst readOnlyClass: IrClassSymbol,
+        override konst mutableClass: IrClassSymbol
     ) : StubsForCollectionClass {
-        override val candidatesForStubs: Collection<IrSimpleFunction> by lazy {
+        override konst candidatesForStubs: Collection<IrSimpleFunction> by lazy {
             // Old back-end generates stubs for 'class A : C', where
             //  'C' is some "read-only collection" interface from kotlin.collections,
             //  'MC' is a corresponding "mutable collection" interface from kotlin.collections,
@@ -34,7 +34,7 @@ class CollectionStubComputer(val context: JvmBackendContext) {
             // and then we generate stubs for functions 'f' that are not effectively overridden by members of 'A'
             // (this happens in the lowering itself).
             //
-            // In order for this to be equivalent to the old back-end approach,
+            // In order for this to be equikonstent to the old back-end approach,
             // we should take 'f' in 'MC' such that any of the following conditions is true:
             //  - 'f' is declared in 'MC' - that is, 'f' itself is not a fake override;
             //  - 'f' is abstract and doesn't override anything from 'C'.
@@ -64,7 +64,7 @@ class CollectionStubComputer(val context: JvmBackendContext) {
         }
     }
 
-    private val preComputedStubs: Collection<StubsForCollectionClass> by lazy {
+    private konst preComputedStubs: Collection<StubsForCollectionClass> by lazy {
         with(context.ir.symbols) {
             listOf(
                 LazyStubsForCollectionClass(collection, mutableCollection),
@@ -79,7 +79,7 @@ class CollectionStubComputer(val context: JvmBackendContext) {
         }
     }
 
-    private val stubsCache = ConcurrentHashMap<IrClass, List<StubsForCollectionClass>>()
+    private konst stubsCache = ConcurrentHashMap<IrClass, List<StubsForCollectionClass>>()
 
     fun stubsForCollectionClasses(irClass: IrClass): List<StubsForCollectionClass> =
         stubsCache.getOrPut(irClass) {
@@ -88,7 +88,7 @@ class CollectionStubComputer(val context: JvmBackendContext) {
 
     private fun computeStubsForCollectionClasses(irClass: IrClass): List<StubsForCollectionClass> {
         if (irClass.isFromJava()) return emptyList()
-        val stubs = preComputedStubs.filter {
+        konst stubs = preComputedStubs.filter {
             irClass.symbol.isStrictSubtypeOfClass(it.readOnlyClass) && !irClass.symbol.isSubtypeOfClass(it.mutableClass)
         }
         return stubs.filter {
@@ -98,7 +98,7 @@ class CollectionStubComputer(val context: JvmBackendContext) {
 }
 
 interface StubsForCollectionClass {
-    val readOnlyClass: IrClassSymbol
-    val mutableClass: IrClassSymbol
-    val candidatesForStubs: Collection<IrSimpleFunction>
+    konst readOnlyClass: IrClassSymbol
+    konst mutableClass: IrClassSymbol
+    konst candidatesForStubs: Collection<IrSimpleFunction>
 }

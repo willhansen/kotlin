@@ -15,14 +15,14 @@ class B(var a: Int) {
     var rem = false
     var remAssign = false
 
-    operator fun rem(value: Int): B {
+    operator fun rem(konstue: Int): B {
         rem = true
-        return B(a % value)
+        return B(a % konstue)
     }
 
-    operator fun remAssign(value: Int) {
+    operator fun remAssign(konstue: Int) {
         remAssign = true
-        a = a % value
+        a = a % konstue
     }
 }
 

@@ -1,7 +1,7 @@
 enum class MyEnum {
     O;
     companion object {
-        val K = "K"
+        konst K = "K"
     }
 }
 

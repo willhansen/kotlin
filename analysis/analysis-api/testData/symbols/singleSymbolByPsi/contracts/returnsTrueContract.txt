@@ -9,7 +9,7 @@ KtFunctionSymbol:
     KtContractConditionalContractEffectDeclaration:
       effect:
         KtContractReturnsSpecificValueEffectDeclaration:
-          value:
+          konstue:
             KtContractConstantValue:
               constantType: TRUE
       condition:
@@ -61,7 +61,7 @@ KtFunctionSymbol:
     type: kotlin/Boolean
   symbolKind: TOP_LEVEL
   typeParameters: []
-  valueParameters: [
+  konstueParameters: [
     KtValueParameterSymbol:
       annotationsList: []
       callableIdIfNonLocal: null

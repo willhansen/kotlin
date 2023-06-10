@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.test.services.assertions
 internal class LLDiagnosticParameterChecker(testServices: TestServices) : FirAnalysisHandler(testServices) {
     override fun processModule(module: TestModule, info: FirOutputArtifact) {
         for (part in info.partsForDependsOnModules) {
-            val diagnostics = part.firAnalyzerFacade.runCheckers().values.flatten()
+            konst diagnostics = part.firAnalyzerFacade.runCheckers().konstues.flatten()
 
             for (diagnostic in diagnostics) {
                 checkDiagnosticIsSuitableForFirIde(diagnostic as KtPsiDiagnostic)
@@ -28,7 +28,7 @@ internal class LLDiagnosticParameterChecker(testServices: TestServices) : FirAna
     }
 
     private fun checkDiagnosticIsSuitableForFirIde(diagnostic: KtPsiDiagnostic) {
-        val parameters = diagnostic.allParameters()
+        konst parameters = diagnostic.allParameters()
         for (parameter in parameters) {
             checkDiagnosticParameter(diagnostic, parameter)
         }
@@ -41,9 +41,9 @@ internal class LLDiagnosticParameterChecker(testServices: TestServices) : FirAna
     }
 
     private fun checkType(parameter: ConeKotlinType, diagnostic: KtDiagnostic) {
-        val containsTypeVariableType = parameter.contains { it is ConeTypeVariableType }
+        konst containsTypeVariableType = parameter.contains { it is ConeTypeVariableType }
         if (containsTypeVariableType) {
-            val rendered = RootDiagnosticRendererFactory(diagnostic).render(diagnostic)
+            konst rendered = RootDiagnosticRendererFactory(diagnostic).render(diagnostic)
             testServices.assertions.fail {
                 "ConeTypeVariableType should not be exposed from diagnostic. But it was for ${diagnostic.factoryName} $rendered"
             }

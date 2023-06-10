@@ -8,7 +8,7 @@ package kotlin.time
 import kotlin.contracts.*
 
 /**
- * Executes the given function [block] and returns the duration of elapsed time interval.
+ * Executes the given function [block] and returns the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with [TimeSource.Monotonic].
  */
@@ -23,7 +23,7 @@ public inline fun measureTime(block: () -> Unit): Duration {
 
 
 /**
- * Executes the given function [block] and returns the duration of elapsed time interval.
+ * Executes the given function [block] and returns the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with the specified `this` [TimeSource] instance.
  */
@@ -34,13 +34,13 @@ public inline fun TimeSource.measureTime(block: () -> Unit): Duration {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 
-    val mark = markNow()
+    konst mark = markNow()
     block()
     return mark.elapsedNow()
 }
 
 /**
- * Executes the given function [block] and returns the duration of elapsed time interval.
+ * Executes the given function [block] and returns the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with the specified `this` [TimeSource.Monotonic] instance.
  */
@@ -51,25 +51,25 @@ public inline fun TimeSource.Monotonic.measureTime(block: () -> Unit): Duration 
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 
-    val mark = markNow()
+    konst mark = markNow()
     block()
     return mark.elapsedNow()
 }
 
 
 /**
- * Data class representing a result of executing an action, along with the duration of elapsed time interval.
+ * Data class representing a result of executing an action, along with the duration of elapsed time interkonst.
  *
- * @property value the result of the action.
+ * @property konstue the result of the action.
  * @property duration the time elapsed to execute the action.
  */
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalTime::class)
-public data class TimedValue<T>(val value: T, val duration: Duration)
+public data class TimedValue<T>(konst konstue: T, konst duration: Duration)
 
 /**
  * Executes the given function [block] and returns an instance of [TimedValue] class, containing both
- * the result of the function execution and the duration of elapsed time interval.
+ * the result of the function execution and the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with [TimeSource.Monotonic].
  */
@@ -85,7 +85,7 @@ public inline fun <T> measureTimedValue(block: () -> T): TimedValue<T> {
 
 /**
  * Executes the given [block] and returns an instance of [TimedValue] class, containing both
- * the result of function execution and the duration of elapsed time interval.
+ * the result of function execution and the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with the specified `this` [TimeSource] instance.
  */
@@ -96,14 +96,14 @@ public inline fun <T> TimeSource.measureTimedValue(block: () -> T): TimedValue<T
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 
-    val mark = markNow()
-    val result = block()
+    konst mark = markNow()
+    konst result = block()
     return TimedValue(result, mark.elapsedNow())
 }
 
 /**
  * Executes the given [block] and returns an instance of [TimedValue] class, containing both
- * the result of function execution and the duration of elapsed time interval.
+ * the result of function execution and the duration of elapsed time interkonst.
  *
  * The elapsed time is measured with the specified `this` [TimeSource.Monotonic] instance.
  */
@@ -114,7 +114,7 @@ public inline fun <T> TimeSource.Monotonic.measureTimedValue(block: () -> T): Ti
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
 
-    val mark = markNow()
-    val result = block()
+    konst mark = markNow()
+    konst result = block()
     return TimedValue(result, mark.elapsedNow())
 }

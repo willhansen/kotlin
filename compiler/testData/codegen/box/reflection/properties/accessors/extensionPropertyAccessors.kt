@@ -11,10 +11,10 @@ var state: String = ""
 
 var String.prop: String
     get() = length.toString()
-    set(value) { state = this + value }
+    set(konstue) { state = this + konstue }
 
 fun box(): String {
-    val prop = String::prop
+    konst prop = String::prop
 
     assertEquals("3", prop.getter.invoke("abc"))
     assertEquals("5", prop.getter("defgh"))

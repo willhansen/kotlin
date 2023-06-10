@@ -1,9 +1,9 @@
-val a = "1"
+konst a = "1"
 
 fun nonConst(): String = "1"
 
 fun test() {
-    val b = "b"
+    konst b = "b"
 
     js(a)
     js((b))

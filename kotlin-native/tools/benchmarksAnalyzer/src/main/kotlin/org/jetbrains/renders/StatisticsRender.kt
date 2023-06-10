@@ -14,27 +14,27 @@ enum class Status {
 
 // Report render to short summary statistics.
 class StatisticsRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "statistics"
 
     private var content = StringBuilder()
 
     override fun render(report: SummaryBenchmarksReport, onlyChanges: Boolean): String {
-        val benchmarksWithChangedStatus = report.benchmarksWithChangedStatus
-        val newPasses = benchmarksWithChangedStatus
+        konst benchmarksWithChangedStatus = report.benchmarksWithChangedStatus
+        konst newPasses = benchmarksWithChangedStatus
                 .filter { it.current == BenchmarkResult.Status.PASSED }
-        val newFailures = benchmarksWithChangedStatus
+        konst newFailures = benchmarksWithChangedStatus
                 .filter { it.current == BenchmarkResult.Status.FAILED }
         if (report.failedBenchmarks.isNotEmpty()) {
             content.append("failed: ${report.failedBenchmarks.size}\n")
         }
-        val regressionsSize = report.detailedMetricReports.values.fold(0) { acc, it ->
+        konst regressionsSize = report.detailedMetricReports.konstues.fold(0) { acc, it ->
             acc + it.regressions.size
         }
-        val improvementsSize = report.detailedMetricReports.values.fold(0) { acc, it ->
+        konst improvementsSize = report.detailedMetricReports.konstues.fold(0) { acc, it ->
             acc + it.improvements.size
         }
-        val status = when {
+        konst status = when {
             newFailures.isNotEmpty() -> {
                 content.append("new failures: ${newFailures.size}\n")
                 Status.FAILED

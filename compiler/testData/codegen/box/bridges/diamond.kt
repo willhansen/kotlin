@@ -12,10 +12,10 @@ class Z : B<Int>, C<String> {
 
 
 fun box(): String {
-    val z = Z()
-    val c: C<String> = z
-    val b: B<Int> = z
-    val a: A<String, Int> = z
+    konst z = Z()
+    konst c: C<String> = z
+    konst b: B<Int> = z
+    konst a: A<String, Int> = z
     return when {
         z.foo("", 0) != "Z" -> "Fail #1"
         c.foo("", 0) != "Z" -> "Fail #2"

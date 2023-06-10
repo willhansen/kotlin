@@ -11,7 +11,7 @@ open class Override(message: String? = null, cause: Throwable? = null) : Base2(m
 
     var i = 0
 
-    override val message: String?
+    override konst message: String?
         get() = "Override: " + super.message + "${i++}"
 }
 
@@ -19,10 +19,10 @@ open class OverBase(message: String? = null, cause: Throwable? = null): Override
 
 open class OverOverride(message: String? = null, cause: Throwable? = null) : OverBase(message, cause) {
 
-    override val message: String?
+    override konst message: String?
         get() = "OverOver: " + super.message + "${i++}"
 
-    override val cause: Throwable?
+    override konst cause: Throwable?
         get() = super.cause ?: this
 
 }
@@ -40,8 +40,8 @@ fun check(t: Throwable, msg: String) {
     try {
         throw t
     } catch (e: Throwable) {
-        val c = t.cause
-        val m = if (c != null) t.message!! + c.message!! else t.message!!
+        konst c = t.cause
+        konst m = if (c != null) t.message!! + c.message!! else t.message!!
         if (m != msg) throw AssertionError(m)
     }
 }

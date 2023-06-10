@@ -51,9 +51,9 @@ public interface MutableResolvedCall<D extends CallableDescriptor> extends Resol
     boolean isCompleted();
 
 
-    void recordValueArgument(@NotNull ValueParameterDescriptor valueParameter, @NotNull ResolvedValueArgument valueArgument);
+    void recordValueArgument(@NotNull ValueParameterDescriptor konstueParameter, @NotNull ResolvedValueArgument konstueArgument);
 
-    void recordArgumentMatchStatus(@NotNull ValueArgument valueArgument, @NotNull ArgumentMatchStatus matchStatus);
+    void recordArgumentMatchStatus(@NotNull ValueArgument konstueArgument, @NotNull ArgumentMatchStatus matchStatus);
 
     @Override
     @NotNull
@@ -69,7 +69,7 @@ public interface MutableResolvedCall<D extends CallableDescriptor> extends Resol
     @Nullable
     TypeSubstitutor getKnownTypeParametersSubstitutor();
 
-    //todo remove: use value to parameter map status
+    //todo remove: use konstue to parameter map status
     boolean hasInferredReturnType();
 
     void setSmartCastDispatchReceiverType(@NotNull KotlinType smartCastDispatchReceiverType);

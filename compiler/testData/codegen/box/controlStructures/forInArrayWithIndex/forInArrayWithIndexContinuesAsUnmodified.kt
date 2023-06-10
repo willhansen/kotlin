@@ -4,8 +4,8 @@
 
 fun testUnoptimized(): String {
     var arr = intArrayOf(1, 2, 3, 4)
-    val sb = StringBuilder()
-    val ixs = arr.withIndex()
+    konst sb = StringBuilder()
+    konst ixs = arr.withIndex()
     for ((i, x) in ixs) {
         sb.append("$i:$x;")
         arr = intArrayOf(10, 20)
@@ -14,16 +14,16 @@ fun testUnoptimized(): String {
 }
 
 fun box(): String {
-    val tn = testUnoptimized()
+    konst tn = testUnoptimized()
 
     var arr = intArrayOf(1, 2, 3, 4)
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     for ((i, x) in arr.withIndex()) {
         sb.append("$i:$x;")
         arr = intArrayOf(10, 20)
     }
 
-    val s = sb.toString()
+    konst s = sb.toString()
     if (s != "0:1;1:2;2:3;3:4;") return "Fail: '$s'; unoptimized: '$tn'"
 
     return "OK"

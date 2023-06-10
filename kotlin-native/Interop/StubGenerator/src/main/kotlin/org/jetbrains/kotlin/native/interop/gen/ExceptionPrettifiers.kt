@@ -24,7 +24,7 @@ sealed interface ExceptionPrettifier {
  */
 object ClangModulesDisabledPrettifier : ExceptionPrettifier {
 
-    private val supportedPatterns = listOf(
+    private konst supportedPatterns = listOf(
             "use of '@import' when modules are disabled"
     )
 
@@ -48,7 +48,7 @@ inline fun <T> withExceptionPrettifier(disabled: Boolean = false, action: () -> 
     return try {
         action()
     } catch (throwable: Throwable) {
-        val prettifiers = listOf(
+        konst prettifiers = listOf(
                 ClangModulesDisabledPrettifier,
         )
         throw prettifiers.firstOrNull { it.matches(throwable) }?.prettify(throwable) ?: throwable

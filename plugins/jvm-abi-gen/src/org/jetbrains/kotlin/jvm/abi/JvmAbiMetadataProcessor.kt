@@ -24,33 +24,33 @@ fun abiMetadataProcessor(annotationVisitor: AnnotationVisitor): AnnotationVisito
     kotlinClassHeaderVisitor { header ->
         // kotlinx-metadata only supports writing Kotlin metadata of version >= 1.4, so we need to
         // update the metadata version if we encounter older metadata annotations.
-        val metadataVersion = header.metadataVersion.takeIf { v ->
-            val major = v.getOrNull(0) ?: 0
-            val minor = v.getOrNull(1) ?: 0
+        konst metadataVersion = header.metadataVersion.takeIf { v ->
+            konst major = v.getOrNull(0) ?: 0
+            konst minor = v.getOrNull(1) ?: 0
             major > 1 || major == 1 && minor >= 4
         } ?: intArrayOf(1, 4)
 
-        val newHeader = when (val metadata = KotlinClassMetadata.read(header)) {
+        konst newHeader = when (konst metadata = KotlinClassMetadata.read(header)) {
             is KotlinClassMetadata.Class -> {
-                val klass = metadata.toKmClass()
+                konst klass = metadata.toKmClass()
                 klass.removePrivateDeclarations()
                 KotlinClassMetadata.writeClass(klass, metadataVersion, header.extraInt).annotationData
             }
             is KotlinClassMetadata.FileFacade -> {
-                val pkg = metadata.toKmPackage()
+                konst pkg = metadata.toKmPackage()
                 pkg.removePrivateDeclarations()
                 KotlinClassMetadata.writeFileFacade(pkg, metadataVersion, header.extraInt).annotationData
             }
             is KotlinClassMetadata.MultiFileClassPart -> {
-                val pkg = metadata.toKmPackage()
+                konst pkg = metadata.toKmPackage()
                 pkg.removePrivateDeclarations()
                 KotlinClassMetadata.writeMultiFileClassPart(pkg, metadata.facadeClassName, metadataVersion, header.extraInt).annotationData
             }
             null -> {
                 // TODO: maybe jvm-abi-gen should throw this exception by default, and not only in tests.
                 if (System.getProperty("idea.is.unit.test").toBoolean()) {
-                    val actual = "${metadataVersion[0]}.${metadataVersion[1]}"
-                    val expected = KotlinClassMetadata.COMPATIBLE_METADATA_VERSION.let { "${it[0]}.${it[1]}" }
+                    konst actual = "${metadataVersion[0]}.${metadataVersion[1]}"
+                    konst expected = KotlinClassMetadata.COMPATIBLE_METADATA_VERSION.let { "${it[0]}.${it[1]}" }
                     throw AssertionError(
                         "jvm-abi-gen can't process class file with the new metadata version because the version of kotlinx-metadata-jvm " +
                                 "it depends on is too old.\n" +
@@ -85,25 +85,25 @@ private fun kotlinClassHeaderVisitor(body: (Metadata) -> Unit): AnnotationVisito
         var packageName: String? = null
         var extraInt: Int = 0
 
-        override fun visit(name: String, value: Any?) {
+        override fun visit(name: String, konstue: Any?) {
             when (name) {
-                KIND_FIELD_NAME -> kind = value as Int
-                METADATA_EXTRA_INT_FIELD_NAME -> extraInt = value as Int
-                METADATA_VERSION_FIELD_NAME -> metadataVersion = value as IntArray
-                METADATA_EXTRA_STRING_FIELD_NAME -> extraString = value as String
-                METADATA_PACKAGE_NAME_FIELD_NAME -> packageName = value as String
+                KIND_FIELD_NAME -> kind = konstue as Int
+                METADATA_EXTRA_INT_FIELD_NAME -> extraInt = konstue as Int
+                METADATA_VERSION_FIELD_NAME -> metadataVersion = konstue as IntArray
+                METADATA_EXTRA_STRING_FIELD_NAME -> extraString = konstue as String
+                METADATA_PACKAGE_NAME_FIELD_NAME -> packageName = konstue as String
             }
         }
 
         override fun visitArray(name: String): AnnotationVisitor? {
-            val destination = when (name) {
+            konst destination = when (name) {
                 METADATA_DATA_FIELD_NAME -> data1
                 METADATA_STRINGS_FIELD_NAME -> data2
                 else -> return null
             }
             return object : AnnotationVisitor(Opcodes.API_VERSION) {
-                override fun visit(name: String?, value: Any?) {
-                    destination += value as String
+                override fun visit(name: String?, konstue: Any?) {
+                    destination += konstue as String
                 }
             }
         }

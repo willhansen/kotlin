@@ -9,7 +9,7 @@ enum class A {
     companion object
 }
 
-val A.Companion.entries: Int get() = 0
+konst A.Companion.entries: Int get() = 0
 
 fun test() {
     A.<!DEBUG_INFO_CALL("fqName: pckg.entries; typeCall: variable"), DEPRECATED_ACCESS_TO_ENUM_ENTRY_COMPANION_PROPERTY!>entries<!>
@@ -24,6 +24,6 @@ fun test() {
         <!DEBUG_INFO_CALL("fqName: pckg.entries; typeCall: variable")!>entries<!>
     }
 
-    val aCompanion = A.Companion
+    konst aCompanion = A.Companion
     aCompanion.<!DEBUG_INFO_CALL("fqName: pckg.entries; typeCall: variable")!>entries<!>
 }

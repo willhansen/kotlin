@@ -11,26 +11,26 @@ import java.io.File
 import kotlin.time.Duration
 
 internal sealed interface TestRunCheck {
-    sealed class ExecutionTimeout(val timeout: Duration) : TestRunCheck {
+    sealed class ExecutionTimeout(konst timeout: Duration) : TestRunCheck {
         class ShouldNotExceed(timeout: Duration) : ExecutionTimeout(timeout)
         class ShouldExceed(timeout: Duration) : ExecutionTimeout(timeout)
     }
 
     sealed class ExitCode : TestRunCheck {
         object AnyNonZero : ExitCode()
-        class Expected(val expectedExitCode: Int) : ExitCode()
+        class Expected(konst expectedExitCode: Int) : ExitCode()
     }
 
-    class OutputDataFile(val file: File) : TestRunCheck
+    class OutputDataFile(konst file: File) : TestRunCheck
 
-    class OutputMatcher(val match: (String) -> Boolean): TestRunCheck
+    class OutputMatcher(konst match: (String) -> Boolean): TestRunCheck
 }
 
 internal class TestRunChecks(
-    val executionTimeoutCheck: ExecutionTimeout,
-    private val exitCodeCheck: ExitCode,
-    val outputDataFile: OutputDataFile?,
-    val outputMatcher: OutputMatcher?
+    konst executionTimeoutCheck: ExecutionTimeout,
+    private konst exitCodeCheck: ExitCode,
+    konst outputDataFile: OutputDataFile?,
+    konst outputMatcher: OutputMatcher?
 ) : Iterable<TestRunCheck> {
 
     override fun iterator() = iterator {

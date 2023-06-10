@@ -46,7 +46,7 @@ import org.jetbrains.kotlin.parcelize.fir.diagnostics.KtErrorsParcelize.PROPERTY
 import org.jetbrains.kotlin.parcelize.fir.diagnostics.KtErrorsParcelize.REDUNDANT_TYPE_PARCELER
 
 object KtDefaultErrorMessagesParcelize : BaseDiagnosticRendererFactory() {
-    override val MAP = KtDiagnosticFactoryToRendererMap("Parcelize").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("Parcelize").also { map ->
         map.put(
             PARCELABLE_SHOULD_BE_CLASS,
             "'Parcelable' should be a class"
@@ -94,7 +94,7 @@ object KtDefaultErrorMessagesParcelize : BaseDiagnosticRendererFactory() {
 
         map.put(
             PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR,
-            "'Parcelable' constructor parameter should be 'val' or 'var'"
+            "'Parcelable' constructor parameter should be 'konst' or 'var'"
         )
 
         map.put(
@@ -153,7 +153,7 @@ object KtDefaultErrorMessagesParcelize : BaseDiagnosticRendererFactory() {
 
         map.put(
             INAPPLICABLE_IGNORED_ON_PARCEL_CONSTRUCTOR_PROPERTY,
-            "'@IgnoredOnParcel' is inapplicable to properties without default value declared in the primary constructor"
+            "'@IgnoredOnParcel' is inapplicable to properties without default konstue declared in the primary constructor"
         )
 
         map.put(

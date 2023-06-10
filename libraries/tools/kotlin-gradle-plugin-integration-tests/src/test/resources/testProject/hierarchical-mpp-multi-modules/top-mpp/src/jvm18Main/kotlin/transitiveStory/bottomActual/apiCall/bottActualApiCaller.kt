@@ -10,7 +10,7 @@ open class Jvm18JApiInheritor : JavaApiContainer() {
 }
 
 open class Jvm18KApiInheritor : KotlinApiContainer() {
-    public override val protectedKotlinDeclaration =
+    public override konst protectedKotlinDeclaration =
         "I'm an overridden Kotlin string in `$this` from `" + moduleName +
                 "` and shall be never visible to the other modules except my subclasses."
 }
@@ -29,16 +29,16 @@ open class FindMyDocumantationPlease
 fun iWantSomeDocumentationFromDokka(f: FindMyDocumantationPlease) {}
 
 fun bottActualApiCaller(k: KotlinApiContainer, s: JavaApiContainer, ij: Jvm18JApiInheritor, ik: Jvm18KApiInheritor) {
-    // val first = k.privateKotlinDeclaration
-    // val second = k.packageVisibleKotlinDeclaration
-    // val third = k.protectedKotlinDeclaration
-    val fourth = ik.protectedKotlinDeclaration
-    val fifth = k.publicKotlinDeclaration
-    val sixth = KotlinApiContainer.publicStaticKotlinDeclaration
+    // konst first = k.privateKotlinDeclaration
+    // konst second = k.packageVisibleKotlinDeclaration
+    // konst third = k.protectedKotlinDeclaration
+    konst fourth = ik.protectedKotlinDeclaration
+    konst fifth = k.publicKotlinDeclaration
+    konst sixth = KotlinApiContainer.publicStaticKotlinDeclaration
 
-    // val seventh = s.privateJavaDeclaration
-    // val eighth = s.packageVisibleJavaDeclaration
-    val ninth = s.publicJavaDeclaration
-    val tenth = JavaApiContainer.publicStaticJavaDeclaration
-    // val eleventh = ij.protectedJavaDeclaration
+    // konst seventh = s.privateJavaDeclaration
+    // konst eighth = s.packageVisibleJavaDeclaration
+    konst ninth = s.publicJavaDeclaration
+    konst tenth = JavaApiContainer.publicStaticJavaDeclaration
+    // konst eleventh = ij.protectedJavaDeclaration
 }

@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.fir.visitors.FirVisitorVoid
 
 object FirPropertyInitializationChecker : FirRegularClassChecker() {
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val declaredLater = mutableSetOf<FirPropertySymbol>()
-        val visitor = object : FirVisitorVoid() {
+        konst declaredLater = mutableSetOf<FirPropertySymbol>()
+        konst visitor = object : FirVisitorVoid() {
             override fun visitElement(element: FirElement) = element.acceptChildren(this)
 
             override fun visitConstructor(constructor: FirConstructor) {}
@@ -39,7 +39,7 @@ object FirPropertyInitializationChecker : FirRegularClassChecker() {
 
             override fun visitVariableAssignment(variableAssignment: FirVariableAssignment) {
                 variableAssignment.acceptChildren(this)
-                val propertySymbol = variableAssignment.calleeReference?.toResolvedCallableSymbol() as? FirPropertySymbol ?: return
+                konst propertySymbol = variableAssignment.calleeReference?.toResolvedCallableSymbol() as? FirPropertySymbol ?: return
                 if (propertySymbol !in declaredLater) return
                 reporter.reportOn(variableAssignment.lValue.source, FirErrors.INITIALIZATION_BEFORE_DECLARATION, propertySymbol, context)
             }

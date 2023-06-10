@@ -8,7 +8,7 @@ package codegen.`try`.try3
 import kotlin.test.*
 
 @Test fun runTest() {
-    val x = try {
+    konst x = try {
         throw Error()
     } catch (e: Throwable) {
         6

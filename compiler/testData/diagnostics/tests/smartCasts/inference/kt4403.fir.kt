@@ -7,5 +7,5 @@ fun <T> T.f(): T = this
 
 fun test(a: A) {
     if (a !is B) return
-    val c = a.f() // type mismatch
+    konst c = a.f() // type mismatch
 }

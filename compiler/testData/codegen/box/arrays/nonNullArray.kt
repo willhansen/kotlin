@@ -1,5 +1,5 @@
 class A() {
-    class B(val i: Int) {
+    class B(konst i: Int) {
     }
 
     fun test() = Array<B> (10, { B(it) })

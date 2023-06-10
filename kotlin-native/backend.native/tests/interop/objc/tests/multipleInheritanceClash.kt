@@ -3,8 +3,8 @@ import kotlin.test.*
 import objcTests.*
 
 @Test fun testMultipleInheritanceClash() {
-    val clash1 = MultipleInheritanceClash1()
-    val clash2 = MultipleInheritanceClash2()
+    konst clash1 = MultipleInheritanceClash1()
+    konst clash2 = MultipleInheritanceClash2()
 
     clash1.delegate = clash1
     assertEquals(clash1, clash1.delegate)

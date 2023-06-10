@@ -6,7 +6,7 @@ import dependency.Bar
 class MyClass
 
 fun usage() {
-    val a = Bar<MyClass>::foo
+    konst a = Bar<MyClass>::foo
 }
 
 // FILE: dependency.kt

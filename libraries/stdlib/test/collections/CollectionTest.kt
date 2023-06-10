@@ -17,31 +17,31 @@ import kotlin.random.Random
 class CollectionTest {
 
     @Test fun createListWithInit() {
-        val list = List(3) { index -> "x".repeat(index + 1) }
+        konst list = List(3) { index -> "x".repeat(index + 1) }
         assertEquals(3, list.size)
         assertEquals(listOf("x", "xx", "xxx"), list)
     }
 
     @Test fun joinTo() {
-        val data = listOf("foo", "bar")
-        val buffer = StringBuilder()
+        konst data = listOf("foo", "bar")
+        konst buffer = StringBuilder()
         data.joinTo(buffer, "-", "{", "}")
         assertEquals("{foo-bar}", buffer.toString())
     }
 
     @Test fun joinToString() {
-        val data = listOf("foo", "bar")
-        val text = data.joinToString("-", "<", ">")
+        konst data = listOf("foo", "bar")
+        konst text = data.joinToString("-", "<", ">")
         assertEquals("<foo-bar>", text)
 
-        val mixed = listOf('a', "b", StringBuilder("c"), null, "d", 'e', 'f')
-        val text2 = mixed.joinToString(limit = 4, truncated = "*")
+        konst mixed = listOf('a', "b", StringBuilder("c"), null, "d", 'e', 'f')
+        konst text2 = mixed.joinToString(limit = 4, truncated = "*")
         assertEquals("a, b, c, null, *", text2)
     }
 
     @Test fun filterNotNull() {
-        val data = listOf(null, "foo", null, "bar")
-        val foo = data.filterNotNull()
+        konst data = listOf(null, "foo", null, "bar")
+        konst foo = data.filterNotNull()
 
         assertEquals(2, foo.size)
         assertEquals(listOf("foo", "bar"), foo)
@@ -51,29 +51,29 @@ class CollectionTest {
 
 
     @Test fun flatMap() {
-        val source = listOf(null, "foo", "bar")
-        val result1 = source.flatMap { it.orEmpty().asSequence() }
-        val result2 = source.flatMap { it.orEmpty().asIterable() }
+        konst source = listOf(null, "foo", "bar")
+        konst result1 = source.flatMap { it.orEmpty().asSequence() }
+        konst result2 = source.flatMap { it.orEmpty().asIterable() }
 
-        val expected = "foobar".toList()
+        konst expected = "foobar".toList()
         assertEquals(expected, result1)
         assertEquals(expected, result2)
     }
 
     @Test fun flatMapIndexed() {
-        val source = listOf(null, "foo", "bar")
-        val result1 = source.flatMapIndexed { index, it -> it.orEmpty().take(index + 1).asSequence() }
-        val result2 = source.flatMapIndexed { index, it -> it.orEmpty().take(index + 1).asIterable() }
+        konst source = listOf(null, "foo", "bar")
+        konst result1 = source.flatMapIndexed { index, it -> it.orEmpty().take(index + 1).asSequence() }
+        konst result2 = source.flatMapIndexed { index, it -> it.orEmpty().take(index + 1).asIterable() }
 
-        val expected = "fobar".toList()
+        konst expected = "fobar".toList()
         assertEquals(expected, result1)
         assertEquals(expected, result2)
     }
 
     /*
     @Test fun mapNotNull() {
-        val data = listOf(null, "foo", null, "bar")
-        val foo = data.mapNotNull { it.length() }
+        konst data = listOf(null, "foo", null, "bar")
+        konst foo = data.mapNotNull { it.length() }
         assertEquals(2, foo.size())
         assertEquals(listOf(3, 3), foo)
 
@@ -84,32 +84,32 @@ class CollectionTest {
     */
 
     @Test fun listOfNotNull() {
-        val l1: List<Int> = listOfNotNull(null)
+        konst l1: List<Int> = listOfNotNull(null)
         assertTrue(l1.isEmpty())
 
-        val s: String? = "value"
-        val l2: List<String> = listOfNotNull(s)
+        konst s: String? = "konstue"
+        konst l2: List<String> = listOfNotNull(s)
         assertEquals(s, l2.single())
 
-        val l3: List<String> = listOfNotNull("value1", null, "value2")
-        assertEquals(listOf("value1", "value2"), l3)
+        konst l3: List<String> = listOfNotNull("konstue1", null, "konstue2")
+        assertEquals(listOf("konstue1", "konstue2"), l3)
     }
 
     @Test fun setOfNotNull() {
-        val l1: Set<Int> = setOfNotNull(null)
+        konst l1: Set<Int> = setOfNotNull(null)
         assertTrue(l1.isEmpty())
 
-        val s: String? = "value"
-        val l2: Set<String> = setOfNotNull(s)
+        konst s: String? = "konstue"
+        konst l2: Set<String> = setOfNotNull(s)
         assertEquals(s, l2.single())
 
-        val l3: Set<String> = setOfNotNull("value1", null, "value2")
-        assertEquals(setOf("value1", "value2"), l3)
+        konst l3: Set<String> = setOfNotNull("konstue1", null, "konstue2")
+        assertEquals(setOf("konstue1", "konstue2"), l3)
     }
 
     @Test fun filterIntoSet() {
-        val data = listOf("foo", "bar")
-        val foo = data.filterTo(hashSetOf<String>()) { it.startsWith("f") }
+        konst data = listOf("foo", "bar")
+        konst foo = data.filterTo(hashSetOf<String>()) { it.startsWith("f") }
 
         assertTrue {
             foo.all { it.startsWith("f") }
@@ -121,100 +121,100 @@ class CollectionTest {
     }
 
     @Test fun filterIsInstanceList() {
-        val values: List<Any> = listOf(1, 2, 3.0, "abc", "cde")
+        konst konstues: List<Any> = listOf(1, 2, 3.0, "abc", "cde")
 
-        val numberValues: List<Number> = values.filterIsInstance<Number>()
+        konst numberValues: List<Number> = konstues.filterIsInstance<Number>()
         assertEquals(listOf(1, 2, 3.0), numberValues)
 
         // doesn't distinguish double from int in JS
-//        val doubleValues: List<Double> = values.filterIsInstance<Double>()
+//        konst doubleValues: List<Double> = konstues.filterIsInstance<Double>()
 //        assertEquals(listOf(3.0), doubleValues)
 
-        val stringValues: List<String> = values.filterIsInstance<String>()
+        konst stringValues: List<String> = konstues.filterIsInstance<String>()
         assertEquals(listOf("abc", "cde"), stringValues)
 
         // is Any doesn't work in JS, see KT-7665
-//        val anyValues: List<Any> = values.filterIsInstance<Any>()
-//        assertEquals(values.toList(), anyValues)
+//        konst anyValues: List<Any> = konstues.filterIsInstance<Any>()
+//        assertEquals(konstues.toList(), anyValues)
 
-        val charValues: List<Char> = values.filterIsInstance<Char>()
+        konst charValues: List<Char> = konstues.filterIsInstance<Char>()
         assertEquals(0, charValues.size)
     }
 
     @Test fun filterIsInstanceArray() {
-        val src: Array<Any> = arrayOf(1, 2, 3.0, "abc", "cde")
+        konst src: Array<Any> = arrayOf(1, 2, 3.0, "abc", "cde")
 
-        val numberValues: List<Number> = src.filterIsInstance<Number>()
+        konst numberValues: List<Number> = src.filterIsInstance<Number>()
         assertEquals(listOf(1, 2, 3.0), numberValues)
 
         // doesn't distinguish double from int in JS
-//        val doubleValues: List<Double> = src.filterIsInstance<Double>()
+//        konst doubleValues: List<Double> = src.filterIsInstance<Double>()
 //        assertEquals(listOf(3.0), doubleValues)
 
-        val stringValues: List<String> = src.filterIsInstance<String>()
+        konst stringValues: List<String> = src.filterIsInstance<String>()
         assertEquals(listOf("abc", "cde"), stringValues)
 
         // is Any doesn't work in JS, see KT-7665
-//        val anyValues: List<Any> = src.filterIsInstance<Any>()
+//        konst anyValues: List<Any> = src.filterIsInstance<Any>()
 //        assertEquals(src.toList(), anyValues)
 
-        val charValues: List<Char> = src.filterIsInstance<Char>()
+        konst charValues: List<Char> = src.filterIsInstance<Char>()
         assertEquals(0, charValues.size)
     }
 
     @Test fun foldIndexed() {
         expect(42) {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.foldIndexed(0) { index, a, b -> index * (a + b) }
         }
 
         expect(0) {
-            val numbers = arrayListOf<Int>()
+            konst numbers = arrayListOf<Int>()
             numbers.foldIndexed(0) { index, a, b -> index * (a + b) }
         }
 
         expect("11234") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.map { it.toString() }.foldIndexed("") { index, a, b -> if (index == 0) a + b + b else a + b }
         }
     }
 
     @Test fun foldIndexedWithDifferentTypes() {
         expect(10) {
-            val numbers = listOf("a", "ab", "abc")
+            konst numbers = listOf("a", "ab", "abc")
             numbers.foldIndexed(1) { index, a, b -> a + b.length + index }
         }
 
         expect("11223344") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.foldIndexed("") { index, a, b -> a + b + (index + 1) }
         }
     }
 
     @Test fun foldIndexedWithNonCommutativeOperation() {
         expect(4) {
-            val numbers = listOf(1, 2, 3)
+            konst numbers = listOf(1, 2, 3)
             numbers.foldIndexed(7) { index, a, b -> index + a - b }
         }
     }
 
     @Test fun foldRightIndexed() {
         expect("12343210") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.map { it.toString() }.foldRightIndexed("") { index, a, b -> a + b + index }
         }
     }
 
     @Test fun foldRightIndexedWithDifferentTypes() {
         expect("12343210") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.foldRightIndexed("") { index, a, b -> "" + a + b + index }
         }
     }
 
     @Test fun foldRightIndexedWithNonCommutativeOperation() {
         expect(-4) {
-            val numbers = listOf(1, 2, 3)
+            konst numbers = listOf(1, 2, 3)
             numbers.foldRightIndexed(7) { index, a, b -> index + a - b }
         }
     }
@@ -222,58 +222,58 @@ class CollectionTest {
     @Test fun fold() {
         // lets calculate the sum of some numbers
         expect(10) {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.fold(0) { a, b -> a + b }
         }
 
         expect(0) {
-            val numbers = arrayListOf<Int>()
+            konst numbers = arrayListOf<Int>()
             numbers.fold(0) { a, b -> a + b }
         }
 
         // lets concatenate some strings
         expect("1234") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.map { it.toString() }.fold("") { a, b -> a + b }
         }
     }
 
     @Test fun foldWithDifferentTypes() {
         expect(7) {
-            val numbers = listOf("a", "ab", "abc")
+            konst numbers = listOf("a", "ab", "abc")
             numbers.fold(1) { a, b -> a + b.length }
         }
 
         expect("1234") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.fold("") { a, b -> a + b }
         }
     }
 
     @Test fun foldWithNonCommutativeOperation() {
         expect(1) {
-            val numbers = listOf(1, 2, 3)
+            konst numbers = listOf(1, 2, 3)
             numbers.fold(7) { a, b -> a - b }
         }
     }
 
     @Test fun foldRight() {
         expect("1234") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.map { it.toString() }.foldRight("") { a, b -> a + b }
         }
     }
 
     @Test fun foldRightWithDifferentTypes() {
         expect("1234") {
-            val numbers = listOf(1, 2, 3, 4)
+            konst numbers = listOf(1, 2, 3, 4)
             numbers.foldRight("") { a, b -> "" + a + b }
         }
     }
 
     @Test fun foldRightWithNonCommutativeOperation() {
         expect(-5) {
-            val numbers = listOf(1, 2, 3)
+            konst numbers = listOf(1, 2, 3)
             numbers.foldRight(7) { a, b -> a - b }
         }
     }
@@ -293,8 +293,8 @@ class CollectionTest {
     }
 
     @Test fun partition() {
-        val data = listOf("foo", "bar", "something", "xyz")
-        val pair = data.partition { it.length == 3 }
+        konst data = listOf("foo", "bar", "something", "xyz")
+        konst pair = data.partition { it.length == 3 }
 
         assertEquals(listOf("foo", "bar", "xyz"), pair.first, "pair.first")
         assertEquals(listOf("something"), pair.second, "pair.second")
@@ -302,7 +302,7 @@ class CollectionTest {
 
     @Test fun reduceIndexed() {
         expect("123") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceIndexed { index, a, b -> if (index == 3) a else a + b }
         }
 
@@ -322,7 +322,7 @@ class CollectionTest {
 
     @Test fun reduceIndexedOrNull() {
         expect("123") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceIndexedOrNull { index, a, b -> if (index == 3) a else a + b }
         }
 
@@ -340,7 +340,7 @@ class CollectionTest {
 
     @Test fun reduceRightIndexed() {
         expect("234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceRightIndexed { index, a, b -> if (index == 0) b else a + b }
         }
 
@@ -360,7 +360,7 @@ class CollectionTest {
 
     @Test fun reduceRightIndexedOrNull() {
         expect("234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceRightIndexedOrNull { index, a, b -> if (index == 0) b else a + b }
         }
 
@@ -378,7 +378,7 @@ class CollectionTest {
 
     @Test fun reduce() {
         expect("1234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduce { a, b -> a + b }
         }
 
@@ -389,7 +389,7 @@ class CollectionTest {
 
     @Test fun reduceOrNull() {
         expect("1234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceOrNull { a, b -> a + b }
         }
 
@@ -398,7 +398,7 @@ class CollectionTest {
 
     @Test fun reduceRight() {
         expect("1234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceRight { a, b -> a + b }
         }
 
@@ -409,7 +409,7 @@ class CollectionTest {
 
     @Test fun reduceRightOrNull() {
         expect("1234") {
-            val list = listOf("1", "2", "3", "4")
+            konst list = listOf("1", "2", "3", "4")
             list.reduceRightOrNull { a, b -> a + b }
         }
 
@@ -419,7 +419,7 @@ class CollectionTest {
     @Test
     fun scan() {
         for (size in 0 until 4) {
-            val expected = listOf("", "0", "01", "012", "0123").take(size + 1)
+            konst expected = listOf("", "0", "01", "012", "0123").take(size + 1)
             assertEquals(expected, List(size) { it }.scan("") { acc, e -> acc + e })
             assertEquals(expected, List(size) { it }.runningFold("") { acc, e -> acc + e })
         }
@@ -428,7 +428,7 @@ class CollectionTest {
     @Test
     fun scanIndexed() {
         for (size in 0 until 4) {
-            val expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").take(size + 1)
+            konst expected = listOf("+", "+[0: a]", "+[0: a][1: b]", "+[0: a][1: b][2: c]", "+[0: a][1: b][2: c][3: d]").take(size + 1)
             assertEquals(expected, List(size) { 'a' + it }.scanIndexed("+") { index, acc, e -> "$acc[$index: $e]" })
             assertEquals(expected, List(size) { 'a' + it }.runningFoldIndexed("+") { index, acc, e -> "$acc[$index: $e]" })
         }
@@ -437,7 +437,7 @@ class CollectionTest {
     @Test
     fun runningReduce() {
         for (size in 0 until 4) {
-            val expected = listOf(0, 1, 3, 6).take(size)
+            konst expected = listOf(0, 1, 3, 6).take(size)
             assertEquals(expected, List(size) { it }.runningReduce { acc, e -> acc + e })
         }
     }
@@ -445,14 +445,14 @@ class CollectionTest {
     @Test
     fun runningReduceIndexed() {
         for (size in 0 until 4) {
-            val expected = listOf(0, 1, 6, 27).take(size)
+            konst expected = listOf(0, 1, 6, 27).take(size)
             assertEquals(expected, List(size) { it }.runningReduceIndexed { index, acc, e -> index * (acc + e) })
         }
     }
 
     @Test fun groupBy() {
-        val words = listOf("a", "abc", "ab", "def", "abcd")
-        val byLength = words.groupBy { it.length }
+        konst words = listOf("a", "abc", "ab", "def", "abcd")
+        konst byLength = words.groupBy { it.length }
         assertEquals(4, byLength.size)
 
         // verify that order of keys is preserved
@@ -463,13 +463,13 @@ class CollectionTest {
                 4 to listOf("abcd")
         ), byLength.toList())
 
-        val l3 = byLength[3].orEmpty()
+        konst l3 = byLength[3].orEmpty()
         assertEquals(listOf("abc", "def"), l3)
     }
 
     @Test fun groupByKeysAndValues() {
-        val nameToTeam = listOf("Alice" to "Marketing", "Bob" to "Sales", "Carol" to "Marketing")
-        val namesByTeam = nameToTeam.groupBy({ it.second }, { it.first })
+        konst nameToTeam = listOf("Alice" to "Marketing", "Bob" to "Sales", "Carol" to "Marketing")
+        konst namesByTeam = nameToTeam.groupBy({ it.second }, { it.first })
         assertEquals(
                 listOf(
                     "Marketing" to listOf("Alice", "Carol"),
@@ -478,37 +478,37 @@ class CollectionTest {
                 namesByTeam.toList())
 
 
-        val mutableNamesByTeam = nameToTeam.groupByTo(HashMap(), { it.second }, { it.first })
+        konst mutableNamesByTeam = nameToTeam.groupByTo(HashMap(), { it.second }, { it.first })
         assertEquals(namesByTeam, mutableNamesByTeam)
     }
 
     @Test fun associateWith() {
-        val items = listOf("Alice", "Bob", "Carol")
-        val itemsWithTheirLength = items.associateWith { it.length }
+        konst items = listOf("Alice", "Bob", "Carol")
+        konst itemsWithTheirLength = items.associateWith { it.length }
 
         assertEquals(mapOf("Alice" to 5, "Bob" to 3, "Carol" to 5), itemsWithTheirLength)
 
-        val updatedLength =
+        konst updatedLength =
             items.drop(1).associateWithTo(itemsWithTheirLength.toMutableMap()) { name -> name.lowercase().count { it in "aeuio" }}
 
         assertEquals(mapOf("Alice" to 5, "Bob" to 1, "Carol" to 2), updatedLength)
     }
 
     @Test fun plusRanges() {
-        val range1 = 1..3
-        val range2 = 4..7
-        val combined = range1 + range2
+        konst range1 = 1..3
+        konst range2 = 4..7
+        konst combined = range1 + range2
         assertEquals((1..7).toList(), combined)
     }
 
     @Test fun mapRanges() {
-        val range = (1..3).map { it * 2 }
+        konst range = (1..3).map { it * 2 }
         assertEquals(listOf(2, 4, 6), range)
     }
 
     fun testPlus(doPlus: (List<String>) -> List<String>) {
-        val list = listOf("foo", "bar")
-        val list2: List<String> = doPlus(list)
+        konst list = listOf("foo", "bar")
+        konst list2: List<String> = doPlus(list)
         assertEquals(listOf("foo", "bar"), list)
         assertEquals(listOf("foo", "bar", "cheese", "wine"), list2)
     }
@@ -519,27 +519,27 @@ class CollectionTest {
     @Test fun plusSequence() = testPlus { it + sequenceOf("cheese", "wine") }
 
     @Test fun plusCollectionBug() {
-        val list = listOf("foo", "bar") + listOf("cheese", "wine")
+        konst list = listOf("foo", "bar") + listOf("cheese", "wine")
         assertEquals(listOf("foo", "bar", "cheese", "wine"), list)
     }
 
     @Test fun plusCollectionInference() {
-        val listOfLists = listOf(listOf("s"))
-        val elementList = listOf("a")
-        val result: List<List<String>> = listOfLists.plusElement(elementList)
+        konst listOfLists = listOf(listOf("s"))
+        konst elementList = listOf("a")
+        konst result: List<List<String>> = listOfLists.plusElement(elementList)
         assertEquals(listOf(listOf("s"), listOf("a")), result, "should be list + element")
 
-        val listOfAny = listOf<Any>("a") + listOf<Any>("b")
+        konst listOfAny = listOf<Any>("a") + listOf<Any>("b")
         assertEquals(listOf("a", "b"), listOfAny,  "should be list + list")
 
-        val listOfAnyAndList = listOf<Any>("a") + listOf<Any>("b") as Any
+        konst listOfAnyAndList = listOf<Any>("a") + listOf<Any>("b") as Any
         assertEquals(listOf("a", listOf("b")), listOfAnyAndList, "should be list + Any")
     }
 
     @Test fun plusAssign() {
         // lets use a mutable variable of readonly list
         var l: List<String> = listOf("cheese")
-        val lOriginal = l
+        konst lOriginal = l
         l += "foo"
         l += listOf("beer")
         l += arrayOf("cheese", "wine")
@@ -547,7 +547,7 @@ class CollectionTest {
         assertEquals(listOf("cheese", "foo", "beer", "cheese", "wine", "bar", "foo"), l)
         assertTrue(l !== lOriginal)
 
-        val ml = arrayListOf("cheese")
+        konst ml = arrayListOf("cheese")
         ml += "foo"
         ml += listOf("beer")
         ml += arrayOf("cheese", "wine")
@@ -557,9 +557,9 @@ class CollectionTest {
 
 
     private fun testMinus(expected: List<String>? = null, doMinus: (List<String>) -> List<String>) {
-        val a = listOf("foo", "bar", "bar")
-        val b: List<String> = doMinus(a)
-        val expected_ = expected ?: listOf("foo")
+        konst a = listOf("foo", "bar", "bar")
+        konst b: List<String> = doMinus(a)
+        konst expected_ = expected ?: listOf("foo")
         assertEquals(expected_, b.toList())
     }
 
@@ -569,9 +569,9 @@ class CollectionTest {
     @Test fun minusSequence() = testMinus { it - sequenceOf("bar", "zoo") }
 
     @Test fun minusIsEager() {
-        val source = listOf("foo", "bar")
-        val list = arrayListOf<String>()
-        val result = source - list
+        konst source = listOf("foo", "bar")
+        konst list = arrayListOf<String>()
+        konst result = source - list
 
         list += "foo"
         assertEquals(source, result)
@@ -581,7 +581,7 @@ class CollectionTest {
 
     @Test fun minusAssign() {
         // lets use a mutable variable of readonly list
-        val data: List<String> = listOf("cheese", "foo", "beer", "cheese", "wine")
+        konst data: List<String> = listOf("cheese", "foo", "beer", "cheese", "wine")
         var l = data
         l -= "cheese"
         assertEquals(listOf("foo", "beer", "cheese", "wine"), l)
@@ -591,7 +591,7 @@ class CollectionTest {
         l -= arrayOf("wine", "bar")
         assertEquals(listOf("foo"), l)
 
-        val ml = arrayListOf("cheese", "cheese", "foo", "beer", "cheese", "wine")
+        konst ml = arrayListOf("cheese", "cheese", "foo", "beer", "cheese", "wine")
         ml -= "cheese"
         assertEquals(listOf("cheese", "foo", "beer", "cheese", "wine"), ml)
         ml -= listOf("cheese", "beer")
@@ -603,11 +603,11 @@ class CollectionTest {
 
 
     @Test fun requireNoNulls() {
-        val data = arrayListOf<String?>("foo", "bar")
-        val notNull = data.requireNoNulls()
+        konst data = arrayListOf<String?>("foo", "bar")
+        konst notNull = data.requireNoNulls()
         assertEquals(listOf("foo", "bar"), notNull)
 
-        val hasNulls = listOf("foo", null, "bar")
+        konst hasNulls = listOf("foo", null, "bar")
 
         assertFailsWith<IllegalArgumentException> {
             // should throw an exception as we have a null
@@ -616,7 +616,7 @@ class CollectionTest {
     }
 
     @Test fun reverseInPlace() {
-        val data = arrayListOf<String>()
+        konst data = arrayListOf<String>()
         data.reverse()
         assertTrue(data.isEmpty())
 
@@ -634,26 +634,26 @@ class CollectionTest {
     }
 
     @Test fun reversed() {
-        val data = listOf("foo", "bar")
-        val rev = data.reversed()
+        konst data = listOf("foo", "bar")
+        konst rev = data.reversed()
         assertEquals(listOf("bar", "foo"), rev)
         assertNotEquals(data, rev)
     }
 
 
     @Test fun drop() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(listOf("bar", "abc"), coll.drop(1))
         assertEquals(listOf("abc"), coll.drop(2))
     }
 
     @Test fun dropWhile() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(listOf("bar", "abc"), coll.dropWhile { it.startsWith("f") })
     }
 
     @Test fun dropLast() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(coll, coll.dropLast(0))
         assertEquals(emptyList<String>(), coll.dropLast(coll.size))
         assertEquals(emptyList<String>(), coll.dropLast(coll.size + 1))
@@ -664,7 +664,7 @@ class CollectionTest {
     }
 
     @Test fun dropLastWhile() {
-        val coll = listOf("Foo", "bare", "abc" )
+        konst coll = listOf("Foo", "bare", "abc" )
         assertEquals(coll, coll.dropLastWhile { false })
         assertEquals(listOf<String>(), coll.dropLastWhile { true })
         assertEquals(listOf("Foo", "bare"), coll.dropLastWhile { it.length < 4 })
@@ -672,7 +672,7 @@ class CollectionTest {
     }
 
     @Test fun take() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(emptyList<String>(), coll.take(0))
         assertEquals(listOf("foo"), coll.take(1))
         assertEquals(listOf("foo", "bar"), coll.take(2))
@@ -683,7 +683,7 @@ class CollectionTest {
     }
 
     @Test fun takeWhile() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(emptyList<String>(), coll.takeWhile { false })
         assertEquals(coll, coll.takeWhile { true })
         assertEquals(listOf("foo"), coll.takeWhile { it.startsWith("f") })
@@ -691,7 +691,7 @@ class CollectionTest {
     }
 
     @Test fun takeLast() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
 
         assertEquals(emptyList<String>(), coll.takeLast(0))
         assertEquals(listOf("abc"), coll.takeLast(1))
@@ -701,13 +701,13 @@ class CollectionTest {
 
         assertFails { coll.takeLast(-1) }
 
-        val collWithoutRandomAccess = object : List<String> by coll {}
+        konst collWithoutRandomAccess = object : List<String> by coll {}
         assertEquals(listOf("abc"), collWithoutRandomAccess.takeLast(1))
         assertEquals(listOf("bar", "abc"), collWithoutRandomAccess.takeLast(2))
     }
 
     @Test fun takeLastWhile() {
-        val coll = listOf("foo", "bar", "abc")
+        konst coll = listOf("foo", "bar", "abc")
         assertEquals(emptyList<String>(), coll.takeLastWhile { false })
         assertEquals(coll, coll.takeLastWhile { true })
         assertEquals(listOf("abc"), coll.takeLastWhile { it.startsWith("a") })
@@ -715,21 +715,21 @@ class CollectionTest {
     }
 
     @Test fun copyToArray() {
-        val data = listOf("foo", "bar")
-        val arr = data.toTypedArray()
+        konst data = listOf("foo", "bar")
+        konst arr = data.toTypedArray()
         println("Got array ${arr}")
         assertEquals(2, arr.size)
     }
 
     @Test fun count() {
-        val data = listOf("foo", "bar")
+        konst data = listOf("foo", "bar")
         assertEquals(2, data.count())
         assertEquals(3, hashSetOf(12, 14, 15).count())
         assertEquals(0, ArrayList<Double>().count())
     }
 
     @Test fun first() {
-        val data = listOf("foo", "bar")
+        konst data = listOf("foo", "bar")
         assertEquals("foo", data.first())
         assertEquals(15, listOf(15, 19, 20, 25).first())
         assertEquals('a', listOf('a').first())
@@ -737,7 +737,7 @@ class CollectionTest {
     }
 
     @Test fun last() {
-        val data = listOf("foo", "bar")
+        konst data = listOf("foo", "bar")
         assertEquals("bar", data.last())
         assertEquals(25, listOf(15, 19, 20, 25).last())
         assertEquals('a', listOf('a').last())
@@ -745,24 +745,24 @@ class CollectionTest {
     }
 
     @Test fun random() {
-        val list = List(100) { it }
-        val set = list.toSet()
+        konst list = List(100) { it }
+        konst set = list.toSet()
         listOf(list, set).forEach { collection: Collection<Int> ->
-            val tosses = List(10) { collection.random() }
+            konst tosses = List(10) { collection.random() }
             assertTrue(tosses.distinct().size > 1, "Should be some distinct elements in $tosses")
 
-            val seed = Random.nextInt()
-            val random1 = Random(seed)
-            val random2 = Random(seed)
+            konst seed = Random.nextInt()
+            konst random1 = Random(seed)
+            konst random2 = Random(seed)
 
-            val tosses1 = List(10) { collection.random(random1) }
-            val tosses2 = List(10) { collection.random(random2) }
+            konst tosses1 = List(10) { collection.random(random1) }
+            konst tosses2 = List(10) { collection.random(random2) }
 
             assertEquals(tosses1, tosses2)
         }
 
         listOf("x").let { singletonList ->
-            val tosses = List(10) { singletonList.random() }
+            konst tosses = List(10) { singletonList.random() }
             assertEquals(singletonList, tosses.distinct())
         }
 
@@ -770,24 +770,24 @@ class CollectionTest {
     }
 
     @Test fun randomOrNull() {
-        val list = List(100) { it }
-        val set = list.toSet()
+        konst list = List(100) { it }
+        konst set = list.toSet()
         listOf(list, set).forEach { collection: Collection<Int> ->
-            val tosses = List(10) { collection.randomOrNull() }
+            konst tosses = List(10) { collection.randomOrNull() }
             assertTrue(tosses.distinct().size > 1, "Should be some distinct elements in $tosses")
 
-            val seed = Random.nextInt()
-            val random1 = Random(seed)
-            val random2 = Random(seed)
+            konst seed = Random.nextInt()
+            konst random1 = Random(seed)
+            konst random2 = Random(seed)
 
-            val tosses1 = List(10) { collection.randomOrNull(random1) }
-            val tosses2 = List(10) { collection.randomOrNull(random2) }
+            konst tosses1 = List(10) { collection.randomOrNull(random1) }
+            konst tosses2 = List(10) { collection.randomOrNull(random2) }
 
             assertEquals(tosses1, tosses2)
         }
 
         listOf("x").let { singletonList ->
-            val tosses = List(10) { singletonList.randomOrNull() }
+            konst tosses = List(10) { singletonList.randomOrNull() }
             assertEquals(singletonList, tosses.distinct())
         }
 
@@ -795,14 +795,14 @@ class CollectionTest {
     }
 
     @Test fun subscript() {
-        val list = arrayListOf("foo", "bar")
+        konst list = arrayListOf("foo", "bar")
         assertEquals("foo", list[0])
         assertEquals("bar", list[1])
 
         // lists throw an exception if out of range
         assertFails {
             @Suppress("UNUSED_VARIABLE")
-            val outOfBounds = list[2]
+            konst outOfBounds = list[2]
         }
 
         // lets try update the list
@@ -819,8 +819,8 @@ class CollectionTest {
     }
 
     @Test fun indices() {
-        val data = listOf("foo", "bar")
-        val indices = data.indices
+        konst data = listOf("foo", "bar")
+        konst indices = data.indices
         assertEquals(0, indices.start)
         assertEquals(1, indices.endInclusive)
         assertEquals(0..data.size - 1, indices)
@@ -895,7 +895,7 @@ class CollectionTest {
         expect(2, { listOf(2, 3).asSequence().maxByOrNull { -it } })
     }
 
-    @Test fun minByOrNullEvaluateOnce() {
+    @Test fun minByOrNullEkonstuateOnce() {
         var c = 0
         expect(1, { listOf(5, 4, 3, 2, 1).minByOrNull { c++; it * it } })
         assertEquals(5, c)
@@ -904,7 +904,7 @@ class CollectionTest {
         assertEquals(5, c)
     }
 
-    @Test fun maxByOrNullEvaluateOnce() {
+    @Test fun maxByOrNullEkonstuateOnce() {
         var c = 0
         expect(5, { listOf(5, 4, 3, 2, 1).maxByOrNull { c++; it * it } })
         assertEquals(5, c)
@@ -933,9 +933,9 @@ class CollectionTest {
     }
 
     @Test fun minOfWith() {
-        val data = listOf("abca", "bcaa", "cabb")
-        val result = data.minOfWith(compareBy { it.reversed() }) { it.take(3) }
-        val resultOrNull = data.minOfWithOrNull(compareBy { it.reversed() }) { it.take(3) }
+        konst data = listOf("abca", "bcaa", "cabb")
+        konst result = data.minOfWith(compareBy { it.reversed() }) { it.take(3) }
+        konst resultOrNull = data.minOfWithOrNull(compareBy { it.reversed() }) { it.take(3) }
         assertEquals("bca", result)
         assertEquals(result, resultOrNull)
 
@@ -961,9 +961,9 @@ class CollectionTest {
     }
 
     @Test fun maxOfWith() {
-        val data = listOf("abca", "bcaa", "cabb")
-        val result = data.maxOfWith(compareBy { it.reversed() }) { it.take(3) }
-        val resultOrNull = data.maxOfWithOrNull(compareBy { it.reversed() }) { it.take(3) }
+        konst data = listOf("abca", "bcaa", "cabb")
+        konst result = data.maxOfWith(compareBy { it.reversed() }) { it.take(3) }
+        konst resultOrNull = data.maxOfWithOrNull(compareBy { it.reversed() }) { it.take(3) }
         assertEquals("abc", result)
         assertEquals(result, resultOrNull)
 
@@ -989,7 +989,7 @@ class CollectionTest {
         assertEquals(0UL, emptyList<Nothing>().sumOf { 1UL })
         assertEquals(0.0, emptyList<Nothing>().sumOf { 1.0 })
 
-        val items = listOf("", "a", "bc", "de", "fgh", "klmnop")
+        konst items = listOf("", "a", "bc", "de", "fgh", "klmnop")
         assertEquals(items.size + 14, items.sumOf { it.length + 1 })
         assertEquals(14L, items.sumOf { it.length.toLong() })
         assertEquals(items.size.toUInt(), items.sumOf { 1U.toUInt() })
@@ -1003,8 +1003,8 @@ class CollectionTest {
         expect(3.8) { listOf(1, 2, 5, 8, 3).average() }
         expect(2.1) { sequenceOf(1.6, 2.6, 3.6, 0.6).average() }
         expect(100.0) { arrayListOf<Byte>(100, 100, 100, 100, 100, 100).average() }
-        val n = 100
-        val range = 0..n
+        konst n = 100
+        konst range = 0..n
         expect(n.toDouble()/2) { range.average() }
     }
 
@@ -1020,26 +1020,26 @@ class CollectionTest {
     }
 
     @Test fun sortInPlace() {
-        val data = listOf(11, 3, 7)
+        konst data = listOf(11, 3, 7)
 
-        val asc = data.toMutableList()
+        konst asc = data.toMutableList()
         asc.sort()
         assertEquals(listOf(3, 7, 11), asc)
 
-        val desc = data.toMutableList()
+        konst desc = data.toMutableList()
         desc.sortDescending()
         assertEquals(listOf(11, 7, 3), desc)
     }
 
     @Test fun sorted() {
-        val data = listOf(11, 3, 7)
+        konst data = listOf(11, 3, 7)
         assertEquals(listOf(3, 7, 11), data.sorted())
         assertEquals(listOf(11, 7, 3), data.sortedDescending())
 
         assertEquals(listOf(-0.0, 0.0), listOf(0.0, -0.0).sorted())
         assertNotEquals(listOf(0.0, -0.0), listOf(0.0, -0.0).sorted())
 
-        val dataDouble = listOf(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.MIN_VALUE, -Double.MIN_VALUE,
+        konst dataDouble = listOf(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, Double.MIN_VALUE, -Double.MIN_VALUE,
                                 1.0, -1.0, Double.MAX_VALUE, -Double.MAX_VALUE, Double.NaN, 0.0, -0.0)
         assertEquals(listOf(Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -Double.MIN_VALUE, -0.0,
                             0.0, Double.MIN_VALUE, 1.0, Double.MAX_VALUE, Double.POSITIVE_INFINITY, Double.NaN), dataDouble.sorted())
@@ -1048,7 +1048,7 @@ class CollectionTest {
     }
 
     @Test fun sortByInPlace() {
-        val data = arrayListOf("aa" to 20, "ab" to 3, "aa" to 3)
+        konst data = arrayListOf("aa" to 20, "ab" to 3, "aa" to 3)
         data.sortBy { it.second }
         assertEquals(listOf("ab" to 3, "aa" to 3, "aa" to 20), data)
 
@@ -1060,9 +1060,9 @@ class CollectionTest {
     }
 
     @Test fun sortStable() {
-        val keyRange = 'A'..'D'
+        konst keyRange = 'A'..'D'
         for (size in listOf(10, 100, 2000)) {
-            val list = MutableList(size) { index -> Sortable(keyRange.random(), index) }
+            konst list = MutableList(size) { index -> Sortable(keyRange.random(), index) }
 
             list.sorted().assertStableSorted()
             list.sortedDescending().assertStableSorted(descending = true)
@@ -1099,8 +1099,8 @@ class CollectionTest {
     }
 
     @Test fun sortedWith() {
-        val comparator = compareBy<String> { it.uppercase().reversed() }
-        val data = listOf("cat", "dad", "BAD")
+        konst comparator = compareBy<String> { it.uppercase().reversed() }
+        konst data = listOf("cat", "dad", "BAD")
 
         expect(listOf("BAD", "dad", "cat")) { data.sortedWith(comparator) }
         expect(listOf("cat", "dad", "BAD")) { data.sortedWith(comparator.reversed()) }
@@ -1108,9 +1108,9 @@ class CollectionTest {
     }
 
     @Test fun sortByStable() {
-        val keyRange = 'A'..'D'
+        konst keyRange = 'A'..'D'
         for (size in listOf(10, 100, 2000)) {
-            val list = MutableList(size) { index -> Sortable(keyRange.random(), index) }
+            konst list = MutableList(size) { index -> Sortable(keyRange.random(), index) }
 
             list.sortedBy { it.key }.assertStableSorted()
             list.sortedByDescending { it.key }.assertStableSorted(descending = true)
@@ -1124,9 +1124,9 @@ class CollectionTest {
     }
 
     @Test fun shuffled() {
-        val data = List(100) { it }
-        val list = data.toMutableList()
-        val shuffled = list.shuffled()
+        konst data = List(100) { it }
+        konst list = data.toMutableList()
+        konst shuffled = list.shuffled()
 
         assertEquals(data, list)
         assertNotEquals(list, shuffled)
@@ -1135,33 +1135,33 @@ class CollectionTest {
     }
 
     @Test fun shuffledPredictably() {
-        val data = List(10) { it }
-        val list = data.toMutableList()
-        val shuffled1 = list.shuffled(Random(1))
-        val shuffled11 = list.shuffled(Random(1))
+        konst data = List(10) { it }
+        konst list = data.toMutableList()
+        konst shuffled1 = list.shuffled(Random(1))
+        konst shuffled11 = list.shuffled(Random(1))
 
         assertEquals(data, list)
 
         assertEquals(shuffled1, shuffled11)
         assertEquals("[1, 4, 0, 6, 2, 8, 9, 7, 3, 5]", shuffled1.toString())
 
-        val shuffled2 = list.shuffled(Random(42))
+        konst shuffled2 = list.shuffled(Random(42))
         assertEquals("[5, 0, 4, 9, 2, 8, 1, 7, 6, 3]", shuffled2.toString())
     }
 
     @Test fun decomposeFirst() {
-        val (first) = listOf(1, 2)
+        konst (first) = listOf(1, 2)
         assertEquals(first, 1)
     }
 
     @Test fun decomposeSplit() {
-        val (key, value) = "key = value".split("=").map { it.trim() }
+        konst (key, konstue) = "key = konstue".split("=").map { it.trim() }
         assertEquals(key, "key")
-        assertEquals(value, "value")
+        assertEquals(konstue, "konstue")
     }
 
     @Test fun decomposeList() {
-        val (a, b, c, d, e) = listOf(1, 2, 3, 4, 5)
+        konst (a, b, c, d, e) = listOf(1, 2, 3, 4, 5)
         assertEquals(a, 1)
         assertEquals(b, 2)
         assertEquals(c, 3)
@@ -1170,7 +1170,7 @@ class CollectionTest {
     }
 
     @Test fun decomposeArray() {
-        val (a, b, c, d, e) = arrayOf(1, 2, 3, 4, 5)
+        konst (a, b, c, d, e) = arrayOf(1, 2, 3, 4, 5)
         assertEquals(a, 1)
         assertEquals(b, 2)
         assertEquals(c, 3)
@@ -1179,7 +1179,7 @@ class CollectionTest {
     }
 
     @Test fun decomposeIntArray() {
-        val (a, b, c, d, e) = intArrayOf(1, 2, 3, 4, 5)
+        konst (a, b, c, d, e) = intArrayOf(1, 2, 3, 4, 5)
         assertEquals(a, 1)
         assertEquals(b, 2)
         assertEquals(c, 3)
@@ -1188,15 +1188,15 @@ class CollectionTest {
     }
 
     @Test fun unzipList() {
-        val list = listOf(1 to 'a', 2 to 'b', 3 to 'c')
-        val (ints, chars) = list.unzip()
+        konst list = listOf(1 to 'a', 2 to 'b', 3 to 'c')
+        konst (ints, chars) = list.unzip()
         assertEquals(listOf(1, 2, 3), ints)
         assertEquals(listOf('a', 'b', 'c'), chars)
     }
 
     @Test fun unzipArray() {
-        val array = arrayOf(1 to 'a', 2 to 'b', 3 to 'c')
-        val (ints, chars) = array.unzip()
+        konst array = arrayOf(1 to 'a', 2 to 'b', 3 to 'c')
+        konst (ints, chars) = array.unzip()
         assertEquals(listOf(1, 2, 3), ints)
         assertEquals(listOf('a', 'b', 'c'), chars)
     }
@@ -1204,13 +1204,13 @@ class CollectionTest {
     @Test fun specialLists() {
         compare(arrayListOf<Int>(), listOf<Int>()) { listBehavior() }
         compare(arrayListOf<Double>(), emptyList<Double>()) { listBehavior() }
-        compare(arrayListOf("value"), listOf("value")) { listBehavior() }
+        compare(arrayListOf("konstue"), listOf("konstue")) { listBehavior() }
     }
 
     @Test fun specialSets() {
         compare(linkedSetOf<Int>(), setOf<Int>()) { setBehavior() }
         compare(hashSetOf<Double>(), emptySet<Double>()) { setBehavior() }
-        compare(listOf("value").toMutableSet(), setOf("value")) { setBehavior() }
+        compare(listOf("konstue").toMutableSet(), setOf("konstue")) { setBehavior() }
     }
 
     @Test fun specialMaps() {
@@ -1232,9 +1232,9 @@ class CollectionTest {
     }
 
     @Test fun abstractCollectionToArray() {
-        class TestCollection<out E>(val data: Collection<E>) : AbstractCollection<E>() {
-            val invocations = mutableListOf<String>()
-            override val size get() = data.size
+        class TestCollection<out E>(konst data: Collection<E>) : AbstractCollection<E>() {
+            konst invocations = mutableListOf<String>()
+            override konst size get() = data.size
             override fun iterator() = data.iterator()
 
             override fun toArray(): Array<Any?> {
@@ -1246,14 +1246,14 @@ class CollectionTest {
                 return super.toArray(array)
             }
         }
-        val data = listOf("abc", "def")
-        val coll = TestCollection(data)
+        konst data = listOf("abc", "def")
+        konst coll = TestCollection(data)
 
-        val arr1 = coll.toTypedArray()
+        konst arr1 = coll.toTypedArray()
         assertEquals(data, arr1.asList())
         assertTrue("toArray1" in coll.invocations || "toArray2" in coll.invocations)
 
-        val arr2: Array<String> = coll.toArray(Array(coll.size + 1) { "" })
+        konst arr2: Array<String> = coll.toArray(Array(coll.size + 1) { "" })
         assertEquals(data + listOf(null), arr2.asList())
     }
 

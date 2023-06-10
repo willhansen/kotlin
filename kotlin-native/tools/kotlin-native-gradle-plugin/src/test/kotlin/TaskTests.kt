@@ -24,15 +24,15 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class TaskTests {
-    val tmpFolder = TemporaryFolder()
+    konst tmpFolder = TemporaryFolder()
         @Rule get
 
-    val projectDirectory: File
+    konst projectDirectory: File
         get() = tmpFolder.root
 
     @Test
     fun `Plugin should support separate run tasks for different binaries`() {
-        val project = KonanProject.createEmpty(projectDirectory).apply {
+        konst project = KonanProject.createEmpty(projectDirectory).apply {
             buildFile.appendText("""
                 konanArtifacts {
                     program('foo') {
@@ -52,10 +52,10 @@ class TaskTests {
                 listOf("src", "bar", "kotlin"),
                 "main.kt",
                 "fun main(args: Array<String>) = println(\"Run Bar: \${args[0]}, \${args[1]}\")")
-        val resultFoo = project.createRunner()
+        konst resultFoo = project.createRunner()
                 .withArguments("runFoo", "-PrunArgs=arg1 arg2")
                 .build()
-        val resultAll = project.createRunner()
+        konst resultAll = project.createRunner()
                 .withArguments("run", "-PrunArgs=arg1 arg2")
                 .build()
 

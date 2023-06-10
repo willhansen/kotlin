@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.types.typeUtil.makeNullable
 @DefaultImplementation(impl = KotlinTypePreparator.Default::class)
 abstract class KotlinTypePreparator : AbstractTypePreparator() {
     private fun transformToNewType(type: SimpleType): SimpleType {
-        when (val constructor = type.constructor) {
+        when (konst constructor = type.constructor) {
             // Type itself can be just SimpleTypeImpl, not CapturedType. see KT-16147
             is CapturedTypeConstructorImpl -> {
-                val lowerType = constructor.projection.takeIf { it.projectionKind == Variance.IN_VARIANCE }?.type?.unwrap()
+                konst lowerType = constructor.projection.takeIf { it.projectionKind == Variance.IN_VARIANCE }?.type?.unwrap()
 
                 // it is incorrect calculate this type directly because of recursive star projections
                 if (constructor.newTypeConstructor == null) {
@@ -33,7 +33,7 @@ abstract class KotlinTypePreparator : AbstractTypePreparator() {
             }
 
             is IntegerValueTypeConstructor -> {
-                val newConstructor =
+                konst newConstructor =
                     IntersectionTypeConstructor(constructor.supertypes.map { TypeUtils.makeNullableAsSpecified(it, type.isMarkedNullable) })
                 return KotlinTypeFactory.simpleTypeWithNonTrivialMemberScope(
                     type.attributes,
@@ -45,7 +45,7 @@ abstract class KotlinTypePreparator : AbstractTypePreparator() {
             }
 
             is IntersectionTypeConstructor -> if (type.isMarkedNullable) {
-                val newConstructor = constructor.transformComponents(transform = { it.makeNullable() }) ?: constructor
+                konst newConstructor = constructor.transformComponents(transform = { it.makeNullable() }) ?: constructor
                 return newConstructor.createType()
 
             }
@@ -56,12 +56,12 @@ abstract class KotlinTypePreparator : AbstractTypePreparator() {
 
     override fun prepareType(type: KotlinTypeMarker): UnwrappedType {
         require(type is KotlinType)
-        val unwrappedType = type.unwrap()
+        konst unwrappedType = type.unwrap()
         return when (unwrappedType) {
             is SimpleType -> transformToNewType(unwrappedType)
             is FlexibleType -> {
-                val newLower = transformToNewType(unwrappedType.lowerBound)
-                val newUpper = transformToNewType(unwrappedType.upperBound)
+                konst newLower = transformToNewType(unwrappedType.lowerBound)
+                konst newUpper = transformToNewType(unwrappedType.upperBound)
                 if (newLower !== unwrappedType.lowerBound || newUpper !== unwrappedType.upperBound) {
                     KotlinTypeFactory.flexibleType(newLower, newUpper)
                 } else {

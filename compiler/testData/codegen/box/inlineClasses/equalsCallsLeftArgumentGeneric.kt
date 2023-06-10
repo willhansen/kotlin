@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: String>(val x: T)
+konstue class A<T: String>(konst x: T)
 
 class B {
     override fun equals(other: Any?) = true
 }
 
 fun box(): String {
-    val x: Any? = B()
-    val y: A<String> = A("")
+    konst x: Any? = B()
+    konst y: A<String> = A("")
     if (x != y) return "Fail"
     return "OK"
 }

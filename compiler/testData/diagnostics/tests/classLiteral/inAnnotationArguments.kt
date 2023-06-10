@@ -3,8 +3,8 @@
 
 import kotlin.reflect.KClass
 
-annotation class Ann(val k: KClass<*>)
-annotation class AnnArray(val kk: Array<KClass<*>>)
+annotation class Ann(konst k: KClass<*>)
+annotation class AnnArray(konst kk: Array<KClass<*>>)
 
 object AnObject
 
@@ -35,12 +35,12 @@ fun test7() {}
 @AnnArray(arrayOf(<!ANNOTATION_ARGUMENT_MUST_BE_KCLASS_LITERAL!>""::class<!>, String::class, AnObject::class))
 fun test8() {}
 
-inline val <reified T> T.test9
+inline konst <reified T> T.test9
     get() = @AnnArray(<!NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION!>arrayOf(
         <!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER_ERROR!>T::class<!>,
         <!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER_ERROR!>Array<T>::class<!>,
         <!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER_ERROR!>Array<Array<Array<T>>>::class<!>
     )<!>) object {}
 
-inline val <reified T> T.test10
+inline konst <reified T> T.test10
     get() = @AnnArray(<!NON_CONST_VAL_USED_IN_CONSTANT_EXPRESSION!>[<!ANNOTATION_ARGUMENT_KCLASS_LITERAL_OF_TYPE_PARAMETER_ERROR!>T::class<!>]<!>) object {}

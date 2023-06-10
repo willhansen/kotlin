@@ -36,7 +36,7 @@ internal object IdeVisibleMultiplatformSourceDependencyResolver : IdeDependencyR
     private fun resolveSourceDependencies(
         resolution: MetadataDependencyResolution.ChooseVisibleSourceSets,
     ): Iterable<IdeaKotlinDependency> {
-        val projectComponentIdentifier = resolution.dependency.id as? ProjectComponentIdentifier ?: return emptyList()
+        konst projectComponentIdentifier = resolution.dependency.id as? ProjectComponentIdentifier ?: return emptyList()
         return resolution.allVisibleSourceSetNames.map { visibleSourceSetName ->
             IdeaKotlinSourceDependency(
                 type = IdeaKotlinSourceDependency.Type.Regular,

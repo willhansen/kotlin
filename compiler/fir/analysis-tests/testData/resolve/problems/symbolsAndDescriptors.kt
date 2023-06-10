@@ -5,26 +5,26 @@ class IrClassSymbolImpl(descriptor: String? = null) :
 interface IrClassSymbol : IrClassifierSymbol, IrBindableSymbol<String>
 
 interface IrClassifierSymbol : IrSymbol, TypeConstructorMarker {
-    override val descriptor: CharSequence
+    override konst descriptor: CharSequence
 }
 
 interface IrSymbol {
-    val descriptor: Any
+    konst descriptor: Any
 }
 
 interface TypeConstructorMarker
 
 interface IrBindableSymbol<out D : Any> : IrSymbol {
-    override val descriptor: D
+    override konst descriptor: D
 }
 
 abstract class IrBindableSymbolBase<out D : Any>(descriptor: D?) :
     IrBindableSymbol<D>, IrSymbolBase<D>(descriptor)
 
 abstract class IrSymbolBase<out D : Any>(
-    private val _descriptor: D?
+    private konst _descriptor: D?
 ) : IrSymbol {
-    override val descriptor: D
+    override konst descriptor: D
         get() = _descriptor!!
 }
 

@@ -53,7 +53,7 @@ FILE: contractDescription.kt
 
             ^ IntegerLiteral(1)
         }
-        public? set(value: Int): R|kotlin/Unit|
+        public? set(konstue: Int): R|kotlin/Unit|
             [Contract description] <
                 kotlin#.contracts#.contract#(<L> = contract@fun <implicit>.<anonymous>(): <implicit> <inline=Unknown>  {
                     callsInPlace#()

@@ -4,7 +4,7 @@ FILE: unstableSmartcastAndAmbiguity.kt
             super<R|kotlin/Any|>()
         }
 
-        public abstract val settingsLogic: R|kotlin/String|
+        public abstract konst settingsLogic: R|kotlin/String|
             public get(): R|kotlin/String|
 
     }
@@ -13,7 +13,7 @@ FILE: unstableSmartcastAndAmbiguity.kt
             super<R|XdSwimlaneSettings|>()
         }
 
-        public open override val settingsLogic: R|kotlin/String|
+        public open override konst settingsLogic: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(hello)
             }
@@ -26,10 +26,10 @@ FILE: unstableSmartcastAndAmbiguity.kt
 
         public final var swimlaneSettings: R|XdSwimlaneSettings?| = R|<local>/swimlaneSettings|
             public get(): R|XdSwimlaneSettings?|
-            public set(value: R|XdSwimlaneSettings?|): R|kotlin/Unit|
+            public set(konstue: R|XdSwimlaneSettings?|): R|kotlin/Unit|
 
     }
     public final fun test(x: R|XdAgile|): R|kotlin/Unit| {
-        lval y: R|XdIssueBasedSwimlaneSettings| = (R|<local>/x|.R|/XdAgile.swimlaneSettings| as R|XdIssueBasedSwimlaneSettings|)
+        lkonst y: R|XdIssueBasedSwimlaneSettings| = (R|<local>/x|.R|/XdAgile.swimlaneSettings| as R|XdIssueBasedSwimlaneSettings|)
         R|<local>/x|.R|/XdAgile.swimlaneSettings|!!.R|/XdSwimlaneSettings.settingsLogic|
     }

@@ -40,7 +40,7 @@ data class DataClass : Derived, Delegate {
     <this>.#delegate.bar()
   }
 
-  val delegate: Delegate
+  konst delegate: Delegate
     field = delegate
     get
 
@@ -59,7 +59,7 @@ data class DataClass : Derived, Delegate {
     when {
       other !is DataClass -> return false
     }
-    val tmp0_other_with_cast: DataClass = other as DataClass
+    konst tmp0_other_with_cast: DataClass = other as DataClass
     when {
       EQEQ(arg0 = <this>.#delegate, arg1 = tmp0_other_with_cast.#delegate).not() -> return false
     }

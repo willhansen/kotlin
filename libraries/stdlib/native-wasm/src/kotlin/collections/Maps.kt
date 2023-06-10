@@ -26,7 +26,7 @@ internal inline actual fun <K, V> Map<K, V>.toSingletonMapOrSelf(): Map<K, V> = 
 
 // creates a singleton copy of map
 internal actual fun <K, V> Map<out K, V>.toSingletonMap(): Map<K, V>
-        = with(entries.iterator().next()) { mutableMapOf(key to value) }
+        = with(entries.iterator().next()) { mutableMapOf(key to konstue) }
 
 
 /**
@@ -37,7 +37,7 @@ internal actual fun mapCapacity(expectedSize: Int) = expectedSize
 
 /**
  * Returns a new read-only map, mapping only the specified key to the
- * specified value.
+ * specified konstue.
  *
  * @sample samples.collections.Maps.Instantiation.mapFromPairs
  */

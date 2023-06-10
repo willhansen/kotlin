@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Inner(val result: String)
+konstue class Inner(konst result: String)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val inner: Inner = Inner("OK"))
+konstue class A(konst inner: Inner = Inner("OK"))
 
 fun box(): String {
     return A().inner.result

@@ -7,7 +7,7 @@ enum class MyEnum {
 
     companion object {
         @OptIn(ExperimentalStdlibApi::class)
-        val ok = entries[0]
+        konst ok = entries[0]
     }
 }
 

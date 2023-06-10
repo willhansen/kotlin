@@ -21,45 +21,45 @@ import kotlin.reflect.jvm.jvmErasure
 import java.lang.reflect.Array as ReflectArray
 
 internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwnerImpl {
-    abstract val descriptor: CallableMemberDescriptor
+    abstract konst descriptor: CallableMemberDescriptor
 
     // The instance which is used to perform a positional call, i.e. `call`
-    abstract val caller: Caller<*>
+    abstract konst caller: Caller<*>
 
     // The instance which is used to perform a call "by name", i.e. `callBy`
-    abstract val defaultCaller: Caller<*>?
+    abstract konst defaultCaller: Caller<*>?
 
-    abstract val container: KDeclarationContainerImpl
+    abstract konst container: KDeclarationContainerImpl
 
-    abstract val isBound: Boolean
+    abstract konst isBound: Boolean
 
-    private val _annotations = ReflectProperties.lazySoft { descriptor.computeAnnotations() }
+    private konst _annotations = ReflectProperties.lazySoft { descriptor.computeAnnotations() }
 
-    override val annotations: List<Annotation> get() = _annotations()
+    override konst annotations: List<Annotation> get() = _annotations()
 
-    private val _parameters = ReflectProperties.lazySoft {
-        val descriptor = descriptor
-        val result = ArrayList<KParameter>()
+    private konst _parameters = ReflectProperties.lazySoft {
+        konst descriptor = descriptor
+        konst result = ArrayList<KParameter>()
         var index = 0
 
         if (!isBound) {
-            val instanceReceiver = descriptor.instanceReceiverParameter
+            konst instanceReceiver = descriptor.instanceReceiverParameter
             if (instanceReceiver != null) {
                 result.add(KParameterImpl(this, index++, KParameter.Kind.INSTANCE) { instanceReceiver })
             }
 
-            val extensionReceiver = descriptor.extensionReceiverParameter
+            konst extensionReceiver = descriptor.extensionReceiverParameter
             if (extensionReceiver != null) {
                 result.add(KParameterImpl(this, index++, KParameter.Kind.EXTENSION_RECEIVER) { extensionReceiver })
             }
         }
 
-        for (i in descriptor.valueParameters.indices) {
-            result.add(KParameterImpl(this, index++, KParameter.Kind.VALUE) { descriptor.valueParameters[i] })
+        for (i in descriptor.konstueParameters.indices) {
+            result.add(KParameterImpl(this, index++, KParameter.Kind.VALUE) { descriptor.konstueParameters[i] })
         }
 
         // Constructor parameters of Java annotations are not ordered in any way, we order them by name here to be more stable.
-        // Note that positional call (via "call") is not allowed unless there's a single non-"value" parameter,
+        // Note that positional call (via "call") is not allowed unless there's a single non-"konstue" parameter,
         // so the order of parameters of Java annotation constructors here can be arbitrary
         if (isAnnotationConstructor && descriptor is JavaCallableMemberDescriptor) {
             result.sortBy { it.name }
@@ -69,38 +69,38 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
         result
     }
 
-    override val parameters: List<KParameter>
+    override konst parameters: List<KParameter>
         get() = _parameters()
 
-    private val _returnType = ReflectProperties.lazySoft {
+    private konst _returnType = ReflectProperties.lazySoft {
         KTypeImpl(descriptor.returnType!!) {
             extractContinuationArgument() ?: caller.returnType
         }
     }
 
-    override val returnType: KType
+    override konst returnType: KType
         get() = _returnType()
 
-    private val _typeParameters = ReflectProperties.lazySoft {
+    private konst _typeParameters = ReflectProperties.lazySoft {
         descriptor.typeParameters.map { descriptor -> KTypeParameterImpl(this, descriptor) }
     }
 
-    override val typeParameters: List<KTypeParameter>
+    override konst typeParameters: List<KTypeParameter>
         get() = _typeParameters()
 
-    override val visibility: KVisibility?
+    override konst visibility: KVisibility?
         get() = descriptor.visibility.toKVisibility()
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = descriptor.modality == Modality.FINAL
 
-    override val isOpen: Boolean
+    override konst isOpen: Boolean
         get() = descriptor.modality == Modality.OPEN
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = descriptor.modality == Modality.ABSTRACT
 
-    protected val isAnnotationConstructor: Boolean
+    protected konst isAnnotationConstructor: Boolean
         get() = name == "<init>" && container.jClass.isAnnotation
 
     @Suppress("UNCHECKED_CAST")
@@ -112,16 +112,16 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
         return if (isAnnotationConstructor) callAnnotationConstructor(args) else callDefaultMethod(args, null)
     }
 
-    private val _absentArguments = ReflectProperties.lazySoft {
-        val parameterSize = parameters.size + (if (isSuspend) 1 else 0)
-        val flattenedParametersSize =
-            if (parametersNeedMFVCFlattening.value) parameters.sumOf { getParameterTypeSize(it) } else parameters.size
-        val maskSize = (flattenedParametersSize + Integer.SIZE - 1) / Integer.SIZE
+    private konst _absentArguments = ReflectProperties.lazySoft {
+        konst parameterSize = parameters.size + (if (isSuspend) 1 else 0)
+        konst flattenedParametersSize =
+            if (parametersNeedMFVCFlattening.konstue) parameters.sumOf { getParameterTypeSize(it) } else parameters.size
+        konst maskSize = (flattenedParametersSize + Integer.SIZE - 1) / Integer.SIZE
 
         // Array containing the actual function arguments, masks, and +1 for DefaultConstructorMarker or MethodHandle.
-        val arguments = arrayOfNulls<Any?>(parameterSize + maskSize + 1)
+        konst arguments = arrayOfNulls<Any?>(parameterSize + maskSize + 1)
 
-        // Set values of primitive (and inline class) arguments to the boxed default values (such as 0, 0.0, false) instead of nulls.
+        // Set konstues of primitive (and inline class) arguments to the boxed default konstues (such as 0, 0.0, false) instead of nulls.
         parameters.forEach { parameter ->
             if (parameter.isOptional && !parameter.type.isInlineClassType) {
                 // For inline class types, the javaType refers to the underlying type of the inline class,
@@ -143,9 +143,9 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
 
     // See ArgumentGenerator#generate
     internal fun callDefaultMethod(args: Map<KParameter, Any?>, continuationArgument: Continuation<*>?): R {
-        val parameters = parameters
+        konst parameters = parameters
 
-        // Optimization for functions without value/receiver parameters.
+        // Optimization for functions without konstue/receiver parameters.
         if (parameters.isEmpty()) {
             @Suppress("UNCHECKED_CAST")
             return reflectionCall {
@@ -153,33 +153,33 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
             }
         }
 
-        val parameterSize = parameters.size + (if (isSuspend) 1 else 0)
+        konst parameterSize = parameters.size + (if (isSuspend) 1 else 0)
 
-        val arguments = getAbsentArguments().apply {
+        konst arguments = getAbsentArguments().apply {
             if (isSuspend) {
                 this[parameters.size] = continuationArgument
             }
         }
 
-        var valueParameterIndex = 0
+        var konstueParameterIndex = 0
         var anyOptional = false
 
-        val hasMfvcParameters = parametersNeedMFVCFlattening.value
+        konst hasMfvcParameters = parametersNeedMFVCFlattening.konstue
         for (parameter in parameters) {
-            val parameterTypeSize = if (hasMfvcParameters) getParameterTypeSize(parameter) else 1
+            konst parameterTypeSize = if (hasMfvcParameters) getParameterTypeSize(parameter) else 1
             when {
                 args.containsKey(parameter) -> {
                     arguments[parameter.index] = args[parameter]
                 }
                 parameter.isOptional -> {
                     if (hasMfvcParameters) {
-                        for (valueSubParameterIndex in valueParameterIndex until (valueParameterIndex + parameterTypeSize)) {
-                            val maskIndex = parameterSize + (valueSubParameterIndex / Integer.SIZE)
-                            arguments[maskIndex] = (arguments[maskIndex] as Int) or (1 shl (valueSubParameterIndex % Integer.SIZE))
+                        for (konstueSubParameterIndex in konstueParameterIndex until (konstueParameterIndex + parameterTypeSize)) {
+                            konst maskIndex = parameterSize + (konstueSubParameterIndex / Integer.SIZE)
+                            arguments[maskIndex] = (arguments[maskIndex] as Int) or (1 shl (konstueSubParameterIndex % Integer.SIZE))
                         }
                     } else {
-                        val maskIndex = parameterSize + (valueParameterIndex / Integer.SIZE)
-                        arguments[maskIndex] = (arguments[maskIndex] as Int) or (1 shl (valueParameterIndex % Integer.SIZE))
+                        konst maskIndex = parameterSize + (konstueParameterIndex / Integer.SIZE)
+                        arguments[maskIndex] = (arguments[maskIndex] as Int) or (1 shl (konstueParameterIndex % Integer.SIZE))
                     }
                     anyOptional = true
                 }
@@ -190,7 +190,7 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
             }
 
             if (parameter.kind == KParameter.Kind.VALUE) {
-                valueParameterIndex += parameterTypeSize
+                konstueParameterIndex += parameterTypeSize
             }
         }
 
@@ -201,7 +201,7 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
             }
         }
 
-        val caller = defaultCaller ?: throw KotlinReflectionInternalError("This callable does not support a default call: $descriptor")
+        konst caller = defaultCaller ?: throw KotlinReflectionInternalError("This callable does not support a default call: $descriptor")
 
         @Suppress("UNCHECKED_CAST")
         return reflectionCall {
@@ -209,14 +209,14 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
         }
     }
 
-    private val parametersNeedMFVCFlattening = lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst parametersNeedMFVCFlattening = lazy(LazyThreadSafetyMode.PUBLICATION) {
         parameters.any { it.type.needsMultiFieldValueClassFlattening }
     }
 
     private fun getParameterTypeSize(parameter: KParameter): Int {
-        require(parametersNeedMFVCFlattening.value) { "Check if parametersNeedMFVCFlattening is true before" }
+        require(parametersNeedMFVCFlattening.konstue) { "Check if parametersNeedMFVCFlattening is true before" }
         return if (parameter.type.needsMultiFieldValueClassFlattening) {
-            val type = (parameter.type as KTypeImpl).type.asSimpleType()
+            konst type = (parameter.type as KTypeImpl).type.asSimpleType()
             getMfvcUnboxMethods(type)!!.size
         } else {
             1
@@ -224,10 +224,10 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
     }
 
     private fun callAnnotationConstructor(args: Map<KParameter, Any?>): R {
-        val arguments = parameters.map { parameter ->
+        konst arguments = parameters.map { parameter ->
             when {
                 args.containsKey(parameter) -> {
-                    args[parameter] ?: throw IllegalArgumentException("Annotation argument value cannot be null ($parameter)")
+                    args[parameter] ?: throw IllegalArgumentException("Annotation argument konstue cannot be null ($parameter)")
                 }
                 parameter.isOptional -> null
                 parameter.isVararg -> defaultEmptyArray(parameter.type)
@@ -235,7 +235,7 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
             }
         }
 
-        val caller = defaultCaller ?: throw KotlinReflectionInternalError("This callable does not support a default call: $descriptor")
+        konst caller = defaultCaller ?: throw KotlinReflectionInternalError("This callable does not support a default call: $descriptor")
 
         @Suppress("UNCHECKED_CAST")
         return reflectionCall {
@@ -254,10 +254,10 @@ internal abstract class KCallableImpl<out R> : KCallable<R>, KTypeParameterOwner
     private fun extractContinuationArgument(): Type? {
         if (isSuspend) {
             // kotlin.coroutines.Continuation<? super java.lang.String>
-            val continuationType = caller.parameterTypes.lastOrNull() as? ParameterizedType
+            konst continuationType = caller.parameterTypes.lastOrNull() as? ParameterizedType
             if (continuationType?.rawType == Continuation::class.java) {
                 // ? super java.lang.String
-                val wildcard = continuationType.actualTypeArguments.single() as? WildcardType
+                konst wildcard = continuationType.actualTypeArguments.single() as? WildcardType
                 // java.lang.String
                 return wildcard?.lowerBounds?.first()
             }

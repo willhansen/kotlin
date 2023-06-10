@@ -61,7 +61,7 @@ fun generatedPlusMemberString(str1: String, str2: String): String {
     return "$str1$str2"
 }
 
-data class Foo(val bar: Int)
+data class Foo(konst bar: Int)
 
 // CHECK-LABEL: define %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_plus_member#manualPlusMemberFoo
 // CHECK-NOT: kfun:kotlin.String#plus(kotlin.Any?)
@@ -93,7 +93,7 @@ fun manualPlusMemberMaybeFoo(str1: String, foo: Foo?): kotlin.String =
 
 @Test
 fun runTest() {
-    val foo = Foo(42)
+    konst foo = Foo(42)
     println(manualPlusMemberAny("foo", foo))
     println(manualPlusMemberAny("foo", null))
     println(manualPlusMemberString("foo", "bar"))

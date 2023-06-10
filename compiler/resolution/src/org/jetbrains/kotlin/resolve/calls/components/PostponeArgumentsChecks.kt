@@ -66,10 +66,10 @@ private fun preprocessLambdaArgument(
 
     if (expectedType != null && !forceResolution) {
         // postpone lambda processing if expected type is a type variable that could be fixed into something non-trivial
-        val expectedTypeVariableWithConstraints = csBuilder.currentStorage().notFixedTypeVariables[expectedType.constructor]
+        konst expectedTypeVariableWithConstraints = csBuilder.currentStorage().notFixedTypeVariables[expectedType.constructor]
 
         if (expectedTypeVariableWithConstraints != null) {
-            val explicitTypeArgument = expectedTypeVariableWithConstraints.constraints.find {
+            konst explicitTypeArgument = expectedTypeVariableWithConstraints.constraints.find {
                 it.kind == ConstraintKind.EQUALITY && it.position.from is ExplicitTypeParameterConstraintPosition<*>
             }?.type as? KotlinType
 
@@ -79,11 +79,11 @@ private fun preprocessLambdaArgument(
         }
     }
 
-    val resolvedArgument = extractLambdaInfoFromFunctionalType(expectedType, argument, returnTypeVariable)
+    konst resolvedArgument = extractLambdaInfoFromFunctionalType(expectedType, argument, returnTypeVariable)
         ?: extraLambdaInfo(expectedType, argument, csBuilder, diagnosticsHolder)
 
     if (expectedType != null) {
-        val lambdaType = createFunctionType(
+        konst lambdaType = createFunctionType(
             csBuilder.builtIns, Annotations.EMPTY, resolvedArgument.receiver, resolvedArgument.contextReceivers,
             resolvedArgument.parameters, null, resolvedArgument.returnType, resolvedArgument.isSuspend
         )
@@ -99,20 +99,20 @@ private fun extraLambdaInfo(
     csBuilder: ConstraintSystemBuilder,
     diagnosticsHolder: KotlinDiagnosticsHolder
 ): ResolvedLambdaAtom {
-    val builtIns = csBuilder.builtIns
-    val isSuspend = expectedType?.isSuspendFunctionType ?: false
+    konst builtIns = csBuilder.builtIns
+    konst isSuspend = expectedType?.isSuspendFunctionType ?: false
 
-    val isFunctionSupertype = expectedType != null && KotlinBuiltIns.isNotNullOrNullableFunctionSupertype(expectedType)
-    val argumentAsFunctionExpression = argument as? FunctionExpression
+    konst isFunctionSupertype = expectedType != null && KotlinBuiltIns.isNotNullOrNullableFunctionSupertype(expectedType)
+    konst argumentAsFunctionExpression = argument as? FunctionExpression
 
-    val typeVariable = TypeVariableForLambdaReturnType(builtIns, "_L")
+    konst typeVariable = TypeVariableForLambdaReturnType(builtIns, "_L")
 
-    val receiverType = argumentAsFunctionExpression?.receiverType
-    val returnType =
+    konst receiverType = argumentAsFunctionExpression?.receiverType
+    konst returnType =
         argumentAsFunctionExpression?.returnType ?: expectedType?.arguments?.singleOrNull()?.type?.unwrap()?.takeIf { isFunctionSupertype }
         ?: typeVariable.defaultType
 
-    val contextReceiversTypes = argumentAsFunctionExpression?.contextReceiversTypes?.mapIndexed { index, contextReceiverType ->
+    konst contextReceiversTypes = argumentAsFunctionExpression?.contextReceiversTypes?.mapIndexed { index, contextReceiverType ->
         if (contextReceiverType != null) {
             contextReceiverType
         } else {
@@ -120,7 +120,7 @@ private fun extraLambdaInfo(
             ErrorUtils.createErrorType(ErrorTypeKind.UNINFERRED_LAMBDA_CONTEXT_RECEIVER_TYPE)
         }
     } ?: emptyList()
-    val parameters = argument.parametersTypes?.mapIndexed { index, parameterType ->
+    konst parameters = argument.parametersTypes?.mapIndexed { index, parameterType ->
         if (parameterType != null) {
             parameterType
         } else {
@@ -129,7 +129,7 @@ private fun extraLambdaInfo(
         }
     } ?: emptyList()
 
-    val newTypeVariableUsed = returnType == typeVariable.defaultType
+    konst newTypeVariableUsed = returnType == typeVariable.defaultType
     if (newTypeVariableUsed) csBuilder.registerVariable(typeVariable)
 
     return ResolvedLambdaAtom(
@@ -150,19 +150,19 @@ private fun extractLambdaInfoFromFunctionalType(
     returnTypeVariable: TypeVariableForLambdaReturnType? = null
 ): ResolvedLambdaAtom? {
     if (expectedType == null || !expectedType.isBuiltinFunctionalType) return null
-    val parametersTypes = argument.parametersTypes
-    val expectedParameters = expectedType.getValueParameterTypesFromFunctionType()
-    val expectedReceiver = expectedType.getReceiverTypeFromFunctionType()?.unwrap()
-    val expectedContextReceivers = expectedType.getContextReceiverTypesFromFunctionType().map { it.unwrap() }.toTypedArray()
-    val argumentAsFunctionExpression = argument as? FunctionExpression
+    konst parametersTypes = argument.parametersTypes
+    konst expectedParameters = expectedType.getValueParameterTypesFromFunctionType()
+    konst expectedReceiver = expectedType.getReceiverTypeFromFunctionType()?.unwrap()
+    konst expectedContextReceivers = expectedType.getContextReceiverTypesFromFunctionType().map { it.unwrap() }.toTypedArray()
+    konst argumentAsFunctionExpression = argument as? FunctionExpression
 
-    val receiverFromExpected = argumentAsFunctionExpression?.receiverType == null && expectedReceiver != null
+    konst receiverFromExpected = argumentAsFunctionExpression?.receiverType == null && expectedReceiver != null
 
     fun UnwrappedType?.orExpected(index: Int) =
         this ?: expectedParameters.getOrNull(index)?.type?.unwrap() ?: expectedType.builtIns.nullableAnyType
 
     // Extracting parameters and receiver type, taking into account the actual lambda definition and expected lambda type
-    val (parameters, receiver) = when {
+    konst (parameters, receiver) = when {
         argumentAsFunctionExpression != null -> {
             // lambda has explicit functional type - use types from it if available
             (parametersTypes?.mapIndexed { index, type ->
@@ -194,9 +194,9 @@ private fun extractLambdaInfoFromFunctionalType(
                 type.orExpected(index)
             } ?: expectedParameters.map { it.type.unwrap() }) to (if (receiverFromExpected) expectedReceiver else null)
     }
-    val contextReceivers = (argumentAsFunctionExpression?.contextReceiversTypes ?: expectedContextReceivers).filterNotNull()
+    konst contextReceivers = (argumentAsFunctionExpression?.contextReceiversTypes ?: expectedContextReceivers).filterNotNull()
 
-    val returnType = argumentAsFunctionExpression?.returnType ?: expectedType.getReturnTypeFromFunctionType().unwrap()
+    konst returnType = argumentAsFunctionExpression?.returnType ?: expectedType.getReturnTypeFromFunctionType().unwrap()
 
     return ResolvedLambdaAtom(
         argument,
@@ -216,9 +216,9 @@ fun LambdaWithTypeVariableAsExpectedTypeAtom.transformToResolvedLambda(
     expectedType: UnwrappedType? = null,
     returnTypeVariable: TypeVariableForLambdaReturnType? = null
 ): ResolvedLambdaAtom {
-    val fixedExpectedType = (csBuilder.buildCurrentSubstitutor() as NewTypeSubstitutor)
+    konst fixedExpectedType = (csBuilder.buildCurrentSubstitutor() as NewTypeSubstitutor)
         .safeSubstitute(expectedType ?: this.expectedType)
-    val resolvedLambdaAtom = preprocessLambdaArgument(
+    konst resolvedLambdaAtom = preprocessLambdaArgument(
         csBuilder,
         atom,
         fixedExpectedType,
@@ -256,11 +256,11 @@ private fun preprocessCallableReference(
     expectedType: UnwrappedType?,
     diagnosticsHolder: KotlinDiagnosticsHolder
 ): ResolvedAtom {
-    val result = EagerCallableReferenceAtom(argument, expectedType)
+    konst result = EagerCallableReferenceAtom(argument, expectedType)
 
     if (expectedType == null) return result
 
-    val notCallableTypeConstructor =
+    konst notCallableTypeConstructor =
         csBuilder.getProperSuperTypeConstructors(expectedType)
             .firstOrNull { !ReflectionTypes.isPossibleExpectedCallableType(it.requireIs()) }
 

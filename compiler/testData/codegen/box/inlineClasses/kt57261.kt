@@ -4,11 +4,11 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Ic(val x: Int)
+konstue class Ic(konst x: Int)
 
 fun box(): String {
 
-    val strAsAny : Any = "a"
+    konst strAsAny : Any = "a"
 
     if ("a".equals(Ic(1))) return "Fail 1"
     if (strAsAny.equals(Ic(1))) return "Fail 2"

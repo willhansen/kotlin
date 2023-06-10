@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 
 /**
- * {@link Nullable} is a type annotation that indicates that the value is not
+ * {@link Nullable} is a type annotation that indicates that the konstue is not
  * known to be non-null (see {@link NonNull}). Only if an expression has a
  * {@link Nullable} type may it be assigned {@code null}.
  *

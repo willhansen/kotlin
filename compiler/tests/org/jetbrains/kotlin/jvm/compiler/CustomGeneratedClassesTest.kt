@@ -22,9 +22,9 @@ class CustomGeneratedClassesTest : TestCase() {
     @Test
     fun testEmulatedScalaStdlibSyntheticMethodLoading() {
         // #KT-38325 and #KT-39799
-        val classFqn = "org/jetbrains/kotlin/compiler/test/GeneratedScalalikeTraversableOncePart"
+        konst classFqn = "org/jetbrains/kotlin/compiler/test/GeneratedScalalikeTraversableOncePart"
 
-        val classNode = ClassNode(Opcodes.API_VERSION).apply {
+        konst classNode = ClassNode(Opcodes.API_VERSION).apply {
             version = Opcodes.V1_6
             access = Opcodes.ACC_PUBLIC
             name = classFqn
@@ -46,7 +46,7 @@ class CustomGeneratedClassesTest : TestCase() {
             )
         }
 
-        val classWriter = ClassWriter(0).also {
+        konst classWriter = ClassWriter(0).also {
             classNode.accept(it)
         }
 

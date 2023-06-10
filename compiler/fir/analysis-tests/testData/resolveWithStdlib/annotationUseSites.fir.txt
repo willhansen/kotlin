@@ -10,7 +10,7 @@ FILE: test.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val message: R|kotlin/String| = R|<local>/message|
+        public final konst message: R|kotlin/String| = R|<local>/message|
             @PROPERTY_GETTER:R|KotlinMessage|() public get(): R|kotlin/String|
 
         public final operator fun component1(): R|kotlin/String|
@@ -28,7 +28,7 @@ FILE: test.kt
                 super<R|kotlin/Any|>()
             }
 
-            public open val INSTANCE: R|kotlin/String|
+            public open konst INSTANCE: R|kotlin/String|
                 @PROPERTY_GETTER:R|kotlin/jvm/JvmName|(name = String(getInstance)) public get(): R|kotlin/String| {
                     ^ String(Omega)
                 }

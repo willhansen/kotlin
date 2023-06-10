@@ -6,7 +6,7 @@ compiler/testData/compileKotlinAgainstCustomBinaries/incompleteHierarchyWithExte
 fun simpleFun(arg: Sub): Sub = Sub()
                                ^
 compiler/testData/compileKotlinAgainstCustomBinaries/incompleteHierarchyWithExtendedCompilerChecks/source.kt:19:18: error: cannot access 'test.Super' which is a supertype of 'Sub'. Check your module classpath for missing or conflicting dependencies
-    val x: Sub = Sub()
+    konst x: Sub = Sub()
                  ^
 compiler/testData/compileKotlinAgainstCustomBinaries/incompleteHierarchyWithExtendedCompilerChecks/source.kt:21:18: error: cannot access 'test.Super' which is a supertype of 'Sub'. Check your module classpath for missing or conflicting dependencies
     useCallRef(::Sub)

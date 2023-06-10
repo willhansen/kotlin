@@ -6,7 +6,7 @@ import kotlinx.parcelize.*
 import android.os.Parcelable
 
 @Parcelize
-class TestNullable(val a: Size?): Parcelable
+class TestNullable(konst a: Size?): Parcelable
 
 @Parcelize
-class TestNotNull(val a: Size): Parcelable
+class TestNotNull(konst a: Size): Parcelable

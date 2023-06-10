@@ -23,26 +23,26 @@ import kotlin.script.experimental.jvm.util.isIncomplete
  * REPL Compilation wrapper for "legacy" REPL APIs defined in the org.jetbrains.kotlin.cli.common.repl package
  */
 class JvmReplCompiler(
-    val scriptCompilationConfiguration: ScriptCompilationConfiguration,
-    val hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration
+    konst scriptCompilationConfiguration: ScriptCompilationConfiguration,
+    konst hostConfiguration: ScriptingHostConfiguration = defaultJvmScriptingHostConfiguration
 ) : ReplCompilerWithoutCheck {
 
     override fun createState(lock: ReentrantReadWriteLock): IReplStageState<*> =
         JvmReplCompilerState({ KJvmReplCompilerBase.createCompilationState(it, hostConfiguration) }, lock)
 
     override fun compile(state: IReplStageState<*>, codeLine: ReplCodeLine): ReplCompileResult = state.lock.write {
-        val replCompilerState = state.asState(JvmReplCompilerState::class.java)
-        val snippet = codeLine.toSourceCode(scriptCompilationConfiguration)
+        konst replCompilerState = state.asState(JvmReplCompilerState::class.java)
+        konst snippet = codeLine.toSourceCode(scriptCompilationConfiguration)
 
-        val replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>(
+        konst replCompiler = KJvmReplCompilerBase<ReplCodeAnalyzerBase>(
             hostConfiguration.withDefaultsFrom(defaultJvmScriptingHostConfiguration),
             replCompilerState
         )
 
-        val lineId = LineId(codeLine.no, codeLine.generation, snippet.hashCode())
+        konst lineId = LineId(codeLine.no, codeLine.generation, snippet.hashCode())
 
         @Suppress("DEPRECATION_ERROR")
-        val res = internalScriptingRunSuspend {
+        konst res = internalScriptingRunSuspend {
             replCompiler.compile(
                 listOf(snippet),
                 scriptCompilationConfiguration.with {
@@ -59,14 +59,14 @@ class JvmReplCompiler(
                     replCompiler.state.history.map { it.id },
                     snippet.name!!,
                     emptyList(),
-                    res.value.get().resultField != null,
+                    res.konstue.get().resultField != null,
                     emptyList(),
-                    res.value.get().resultField?.second?.typeName,
-                    res.value
+                    res.konstue.get().resultField?.second?.typeName,
+                    res.konstue
                 )
             }
             else -> {
-                val message = res.reports.joinToString("\n")
+                konst message = res.reports.joinToString("\n")
                 if (res.isIncomplete()) {
                     ReplCompileResult.Incomplete(message)
                 } else {
@@ -79,17 +79,17 @@ class JvmReplCompiler(
 
 
 internal class SourceCodeFromReplCodeLine(
-    val codeLine: ReplCodeLine,
+    konst codeLine: ReplCodeLine,
     compilationConfiguration: ScriptCompilationConfiguration
 ) : SourceCode {
-    override val text: String get() = codeLine.code
-    override val name: String =
+    override konst text: String get() = codeLine.code
+    override konst name: String =
         "${
             compilationConfiguration[ScriptCompilationConfiguration.repl.makeSnippetIdentifier]!!(
                 compilationConfiguration, ReplSnippetIdImpl(codeLine.no, codeLine.generation, 0)
             )
         }.${compilationConfiguration[ScriptCompilationConfiguration.fileExtension]}"
-    override val locationId: String? = null
+    override konst locationId: String? = null
 }
 
 internal fun ReplCodeLine.toSourceCode(compilationConfiguration: ScriptCompilationConfiguration): SourceCode =

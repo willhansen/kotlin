@@ -19,29 +19,29 @@ import org.w3c.workers.*
 public external open class Notification(title: String, options: NotificationOptions = definedExternally) : EventTarget {
     var onclick: ((MouseEvent) -> dynamic)?
     var onerror: ((Event) -> dynamic)?
-    open val title: String
-    open val dir: NotificationDirection
-    open val lang: String
-    open val body: String
-    open val tag: String
-    open val image: String
-    open val icon: String
-    open val badge: String
-    open val sound: String
-    open val vibrate: Array<out Int>
-    open val timestamp: Number
-    open val renotify: Boolean
-    open val silent: Boolean
-    open val noscreen: Boolean
-    open val requireInteraction: Boolean
-    open val sticky: Boolean
-    open val data: Any?
-    open val actions: Array<out NotificationAction>
+    open konst title: String
+    open konst dir: NotificationDirection
+    open konst lang: String
+    open konst body: String
+    open konst tag: String
+    open konst image: String
+    open konst icon: String
+    open konst badge: String
+    open konst sound: String
+    open konst vibrate: Array<out Int>
+    open konst timestamp: Number
+    open konst renotify: Boolean
+    open konst silent: Boolean
+    open konst noscreen: Boolean
+    open konst requireInteraction: Boolean
+    open konst sticky: Boolean
+    open konst data: Any?
+    open konst actions: Array<out NotificationAction>
     fun close()
 
     companion object {
-        val permission: NotificationPermission
-        val maxActions: Int
+        konst permission: NotificationPermission
+        konst maxActions: Int
         fun requestPermission(deprecatedCallback: (NotificationPermission) -> Unit = definedExternally): Promise<NotificationPermission>
     }
 }
@@ -49,61 +49,61 @@ public external open class Notification(title: String, options: NotificationOpti
 public external interface NotificationOptions {
     var dir: NotificationDirection? /* = NotificationDirection.AUTO */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lang: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var body: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var tag: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var image: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var icon: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var badge: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var sound: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var vibrate: dynamic
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var timestamp: Number?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var renotify: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var silent: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var noscreen: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var requireInteraction: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var sticky: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var data: Any? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var actions: Array<NotificationAction>? /* = arrayOf() */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun NotificationOptions(dir: NotificationDirection? = NotificationDirection.AUTO, lang: String? = "", body: String? = "", tag: String? = "", image: String? = undefined, icon: String? = undefined, badge: String? = undefined, sound: String? = undefined, vibrate: dynamic = undefined, timestamp: Number? = undefined, renotify: Boolean? = false, silent: Boolean? = false, noscreen: Boolean? = false, requireInteraction: Boolean? = false, sticky: Boolean? = false, data: Any? = null, actions: Array<NotificationAction>? = arrayOf()): NotificationOptions {
-    val o = js("({})")
+    konst o = js("({})")
     o["dir"] = dir
     o["lang"] = lang
     o["body"] = body
@@ -129,13 +129,13 @@ public external interface NotificationAction {
     var title: String?
     var icon: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun NotificationAction(action: String?, title: String?, icon: String? = undefined): NotificationAction {
-    val o = js("({})")
+    konst o = js("({})")
     o["action"] = action
     o["title"] = title
     o["icon"] = icon
@@ -145,13 +145,13 @@ public inline fun NotificationAction(action: String?, title: String?, icon: Stri
 public external interface GetNotificationOptions {
     var tag: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun GetNotificationOptions(tag: String? = ""): GetNotificationOptions {
-    val o = js("({})")
+    konst o = js("({})")
     o["tag"] = tag
     return o
 }
@@ -160,14 +160,14 @@ public inline fun GetNotificationOptions(tag: String? = ""): GetNotificationOpti
  * Exposes the JavaScript [NotificationEvent](https://developer.mozilla.org/en/docs/Web/API/NotificationEvent) to Kotlin
  */
 public external open class NotificationEvent(type: String, eventInitDict: NotificationEventInit) : ExtendableEvent {
-    open val notification: Notification
-    open val action: String
+    open konst notification: Notification
+    open konst action: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -175,13 +175,13 @@ public external interface NotificationEventInit : ExtendableEventInit {
     var notification: Notification?
     var action: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("INVISIBLE_REFERENCE", "INVISIBLE_MEMBER")
 @kotlin.internal.InlineOnly
 public inline fun NotificationEventInit(notification: Notification?, action: String? = "", bubbles: Boolean? = false, cancelable: Boolean? = false, composed: Boolean? = false): NotificationEventInit {
-    val o = js("({})")
+    konst o = js("({})")
     o["notification"] = notification
     o["action"] = action
     o["bubbles"] = bubbles
@@ -197,11 +197,11 @@ public external interface NotificationPermission {
     companion object
 }
 
-public inline val NotificationPermission.Companion.DEFAULT: NotificationPermission get() = "default".asDynamic().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.DEFAULT: NotificationPermission get() = "default".asDynamic().unsafeCast<NotificationPermission>()
 
-public inline val NotificationPermission.Companion.DENIED: NotificationPermission get() = "denied".asDynamic().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.DENIED: NotificationPermission get() = "denied".asDynamic().unsafeCast<NotificationPermission>()
 
-public inline val NotificationPermission.Companion.GRANTED: NotificationPermission get() = "granted".asDynamic().unsafeCast<NotificationPermission>()
+public inline konst NotificationPermission.Companion.GRANTED: NotificationPermission get() = "granted".asDynamic().unsafeCast<NotificationPermission>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -210,8 +210,8 @@ public external interface NotificationDirection {
     companion object
 }
 
-public inline val NotificationDirection.Companion.AUTO: NotificationDirection get() = "auto".asDynamic().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.AUTO: NotificationDirection get() = "auto".asDynamic().unsafeCast<NotificationDirection>()
 
-public inline val NotificationDirection.Companion.LTR: NotificationDirection get() = "ltr".asDynamic().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.LTR: NotificationDirection get() = "ltr".asDynamic().unsafeCast<NotificationDirection>()
 
-public inline val NotificationDirection.Companion.RTL: NotificationDirection get() = "rtl".asDynamic().unsafeCast<NotificationDirection>()
+public inline konst NotificationDirection.Companion.RTL: NotificationDirection get() = "rtl".asDynamic().unsafeCast<NotificationDirection>()

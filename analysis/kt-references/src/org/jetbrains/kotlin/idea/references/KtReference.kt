@@ -17,15 +17,15 @@ import org.jetbrains.kotlin.psi.psiUtil.getParentOfTypeAndBranch
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 interface KtReference : PsiPolyVariantReference {
-    val resolver: ResolveCache.PolyVariantResolver<KtReference>
+    konst resolver: ResolveCache.PolyVariantResolver<KtReference>
 
     override fun getElement(): KtElement
 
-    val resolvesByNames: Collection<Name>
+    konst resolvesByNames: Collection<Name>
 }
 
 abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantReferenceBase<T>(element), KtReference {
-    val expression: T
+    konst expression: T
         get() = element
 
     override fun multiResolve(incompleteCode: Boolean): Array<ResolveResult> =
@@ -61,7 +61,7 @@ abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantRe
     override fun isReferenceTo(candidateTarget: PsiElement): Boolean {
         if (!canBeReferenceTo(candidateTarget)) return false
 
-        val unwrappedCandidate = candidateTarget.unwrapped?.originalElement ?: return false
+        konst unwrappedCandidate = candidateTarget.unwrapped?.originalElement ?: return false
 
         // Optimizations to return early for cases where this reference cannot
         // refer to the candidate target.
@@ -80,7 +80,7 @@ abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantRe
             }
         }
 
-        val element = element
+        konst element = element
 
         if (candidateTarget is KtImportAlias &&
             (element is KtSimpleNameExpression && element.getReferencedName() == candidateTarget.name ||
@@ -95,24 +95,24 @@ abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantRe
                     if (it !is KtFunctionLiteral && !(it is KtNamedFunction && it.name.isNullOrEmpty())) return@forEach
                     it as KtFunction
 
-                    val labeledExpression = it.getLabeledParent(element.getReferencedName())
+                    konst labeledExpression = it.getLabeledParent(element.getReferencedName())
                     if (labeledExpression != null) {
                         if (candidateTarget == labeledExpression) return true else return@forEach
                     }
-                    val calleeReference = it.getCalleeByLambdaArgument()?.mainReference ?: return@forEach
+                    konst calleeReference = it.getCalleeByLambdaArgument()?.mainReference ?: return@forEach
                     if (calleeReference.isReferenceTo(candidateTarget)) return true
                 }
                 is KtBreakExpression, is KtContinueExpression -> unwrappedTargets.forEach {
-                    val labeledExpression = (it as? KtExpression)?.getLabeledParent(element.getReferencedName()) ?: return@forEach
+                    konst labeledExpression = (it as? KtExpression)?.getLabeledParent(element.getReferencedName()) ?: return@forEach
                     if (candidateTarget == labeledExpression) return true
                 }
             }
         }
 
-        val targets = unwrappedTargets
-        val manager = candidateTarget.manager
+        konst targets = unwrappedTargets
+        konst manager = candidateTarget.manager
 
-        if (targets.any { manager.areElementsEquivalent(unwrappedCandidate, it) }) {
+        if (targets.any { manager.areElementsEquikonstent(unwrappedCandidate, it) }) {
             return true
         }
 
@@ -126,13 +126,13 @@ abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantRe
         // NOTE: Accessor references are handled separately, see SyntheticPropertyAccessorReference
         if (element == (element.parent as? KtCallExpression)?.calleeExpression) return true
 
-        val callableReference = element.getParentOfTypeAndBranch<KtCallableReferenceExpression> { callableReference }
+        konst callableReference = element.getParentOfTypeAndBranch<KtCallableReferenceExpression> { callableReference }
         if (callableReference != null) return true
 
-        val binaryOperator = element.getParentOfTypeAndBranch<KtBinaryExpression> { operationReference }
+        konst binaryOperator = element.getParentOfTypeAndBranch<KtBinaryExpression> { operationReference }
         if (binaryOperator != null) return true
 
-        val unaryOperator = element.getParentOfTypeAndBranch<KtUnaryExpression> { operationReference }
+        konst unaryOperator = element.getParentOfTypeAndBranch<KtUnaryExpression> { operationReference }
         if (unaryOperator != null) return true
 
         if (element.getNonStrictParentOfType<KtImportDirective>() != null) return true
@@ -145,7 +145,7 @@ abstract class AbstractKtReference<T : KtElement>(element: T) : PsiPolyVariantRe
             // call to Java constructor
             this is PsiMethod && isConstructor && containingClass == unwrappedCandidate -> true
             // call to Kotlin constructor
-            this is KtConstructor<*> && getContainingClassOrObject().isEquivalentTo(unwrappedCandidate) -> true
+            this is KtConstructor<*> && getContainingClassOrObject().isEquikonstentTo(unwrappedCandidate) -> true
             else -> false
         }
 }

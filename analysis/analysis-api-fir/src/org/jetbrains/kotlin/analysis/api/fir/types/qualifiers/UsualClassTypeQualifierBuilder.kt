@@ -28,7 +28,7 @@ internal object UsualClassTypeQualifierBuilder {
         builder: KtSymbolByFirBuilder
     ): List<KtClassTypeQualifier.KtResolvedClassTypeQualifier> {
 
-        val classSymbolToRender = coneType.lookupTag.toSymbol(builder.rootSession)
+        konst classSymbolToRender = coneType.lookupTag.toSymbol(builder.rootSession)
             ?: errorWithFirSpecificEntries("ConeClassLikeTypeImpl is not resolved to symbol for on-error type", coneType = coneType) {
                 withEntry("useSiteSession", builder.rootSession) { it.toString() }
             }
@@ -44,8 +44,8 @@ internal object UsualClassTypeQualifierBuilder {
             )
         }
 
-        val designation = classSymbolToRender.fir.let {
-            val nonLocalDesignation = it.tryCollectDesignation()
+        konst designation = classSymbolToRender.fir.let {
+            konst nonLocalDesignation = it.tryCollectDesignation()
             nonLocalDesignation?.toSequence(includeTarget = true)?.toList()
                 ?: collectDesignationPathForLocal(it)
         }
@@ -60,13 +60,13 @@ internal object UsualClassTypeQualifierBuilder {
                     (designation[index + 1] as? FirRegularClass)?.isInner == true
         }
 
-        val result = mutableListOf<KtClassTypeQualifier.KtResolvedClassTypeQualifier>()
+        konst result = mutableListOf<KtClassTypeQualifier.KtResolvedClassTypeQualifier>()
         designation.forEachIndexed { index, currentClass ->
             check(currentClass is FirRegularClass)
-            val typeParameters = if (needToRenderTypeParameters(index)) {
-                val typeParametersCount = currentClass.typeParameters.count { it is FirTypeParameter }
-                val begin = typeParametersLeft - typeParametersCount
-                val end = typeParametersLeft
+            konst typeParameters = if (needToRenderTypeParameters(index)) {
+                konst typeParametersCount = currentClass.typeParameters.count { it is FirTypeParameter }
+                konst begin = typeParametersLeft - typeParametersCount
+                konst end = typeParametersLeft
                 check(begin >= 0)
                 typeParametersLeft -= typeParametersCount
                 coneType.typeArguments.slice(begin until end).map { builder.typeBuilder.buildTypeProjection(it) }
@@ -83,10 +83,10 @@ internal object UsualClassTypeQualifierBuilder {
     private fun FirRegularClass.collectForLocal(): List<FirClassLikeDeclaration> {
         require(isLocal)
         var containingClassLookUp = containingClassForLocal()
-        val designation = mutableListOf<FirClassLikeDeclaration>(this)
+        konst designation = mutableListOf<FirClassLikeDeclaration>(this)
         @OptIn(LookupTagInternals::class)
         while (containingClassLookUp != null && containingClassLookUp.classId.isLocal) {
-            val currentClass = containingClassLookUp.toFirRegularClass(moduleData.session) ?: break
+            konst currentClass = containingClassLookUp.toFirRegularClass(moduleData.session) ?: break
             designation.add(currentClass)
             containingClassLookUp = currentClass.containingClassForLocal()
         }
@@ -104,7 +104,7 @@ internal object UsualClassTypeQualifierBuilder {
             is FirAnonymousObject -> listOf(declaration)
             is FirRegularClass -> declaration.collectForLocal()
             is FirTypeAlias -> listOf(declaration) // TODO: handle type aliases
-            else -> error("Invalid declaration ${declaration.renderWithType()}")
+            else -> error("Inkonstid declaration ${declaration.renderWithType()}")
         }
     }
 }

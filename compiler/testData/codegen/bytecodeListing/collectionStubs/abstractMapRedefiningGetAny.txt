@@ -18,5 +18,5 @@ public abstract class MindMap {
     public abstract method remove(p0: int): java.lang.String
     public bridge final method remove(p0: java.lang.Object): java.lang.Object
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }

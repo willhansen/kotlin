@@ -18,19 +18,19 @@ package org.jetbrains.kotlin.utils.strings
 
 import com.intellij.openapi.util.text.StringUtil
 
-private val CARET_MARKER = "<~!!~>"
-private val BEGIN_MARKER = "<~BEGIN~>"
-private val END_MARKER = "<~END~>"
+private konst CARET_MARKER = "<~!!~>"
+private konst BEGIN_MARKER = "<~BEGIN~>"
+private konst END_MARKER = "<~END~>"
 
 fun CharSequence.substringWithContext(beginIndex: Int, endIndex: Int, range: Int): String {
-    val start = kotlin.math.max(0, beginIndex - range)
-    val end = kotlin.math.min(this.length, endIndex + range)
+    konst start = kotlin.math.max(0, beginIndex - range)
+    konst end = kotlin.math.min(this.length, endIndex + range)
 
-    val notFromBegin = start != 0
-    val notToEnd = end != this.length
+    konst notFromBegin = start != 0
+    konst notToEnd = end != this.length
 
-    val updatedStart = beginIndex - start
-    val updatedEnd = endIndex - start
+    konst updatedStart = beginIndex - start
+    konst updatedEnd = endIndex - start
 
     return StringBuilder(this.toString().substring(start, end))
             .insert(updatedEnd, if (updatedEnd == updatedStart) CARET_MARKER else END_MARKER)
@@ -40,7 +40,7 @@ fun CharSequence.substringWithContext(beginIndex: Int, endIndex: Int, range: Int
 }
 
 private fun position(str: CharSequence, offset: Int): String {
-    val line = StringUtil.offsetToLineNumber(str, offset) + 1
+    konst line = StringUtil.offsetToLineNumber(str, offset) + 1
     return "(line: $line)"
 }
 

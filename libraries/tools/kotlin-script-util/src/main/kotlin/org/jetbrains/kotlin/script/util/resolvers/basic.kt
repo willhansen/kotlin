@@ -36,11 +36,11 @@ class DirectResolver : GenericRepositoryWithBridge {
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies")
 class FlatLibDirectoryResolver(vararg paths: File) : GenericRepositoryWithBridge {
 
-    private val localRepos = arrayListOf<File>()
+    private konst localRepos = arrayListOf<File>()
 
     init {
         for (path in paths) {
-            if (!path.exists() || !path.isDirectory) throw IllegalArgumentException("Invalid flat lib directory repository path '$path'")
+            if (!path.exists() || !path.isDirectory) throw IllegalArgumentException("Inkonstid flat lib directory repository path '$path'")
         }
         localRepos.addAll(paths)
     }
@@ -48,7 +48,7 @@ class FlatLibDirectoryResolver(vararg paths: File) : GenericRepositoryWithBridge
     override fun tryResolve(artifactCoordinates: GenericArtifactCoordinates): Iterable<File>? {
         for (path in localRepos) {
             // TODO: add coordinates and wildcard matching
-            val res = artifactCoordinates.string.takeUnless(String::isBlank)
+            konst res = artifactCoordinates.string.takeUnless(String::isBlank)
                 ?.let { File(path, it) }
                 ?.takeIf { it.exists() && (it.isFile || it.isDirectory) }
             if (res != null) return listOf(res)
@@ -57,7 +57,7 @@ class FlatLibDirectoryResolver(vararg paths: File) : GenericRepositoryWithBridge
     }
 
     override fun tryAddRepository(repositoryCoordinates: GenericRepositoryCoordinates): Boolean {
-        val repoDir = repositoryCoordinates.file ?: return false
+        konst repoDir = repositoryCoordinates.file ?: return false
         localRepos.add(repoDir)
         return true
     }
@@ -65,7 +65,7 @@ class FlatLibDirectoryResolver(vararg paths: File) : GenericRepositoryWithBridge
     companion object {
         fun tryCreate(annotation: Repository): FlatLibDirectoryResolver? = tryCreate(
             BasicRepositoryCoordinates(
-                annotation.url.takeUnless(String::isBlank) ?: annotation.value, annotation.id.takeUnless(String::isBlank)
+                annotation.url.takeUnless(String::isBlank) ?: annotation.konstue, annotation.id.takeUnless(String::isBlank)
             )
         )
 

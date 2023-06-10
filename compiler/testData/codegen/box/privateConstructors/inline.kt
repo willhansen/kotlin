@@ -6,6 +6,6 @@ public open class Outer private constructor() {
 }
 
 fun box(): String {
-    val outer = Outer.foo()
+    konst outer = Outer.foo()
     return "OK"
 }

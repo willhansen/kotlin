@@ -1,16 +1,16 @@
 class RemovedClassImpl : RemovedClass() {
-    val p2 = "p2"
+    konst p2 = "p2"
     fun f2() = "f2"
 }
 
 class RemovedInterfaceImpl : RemovedInterface {
-    override val p1 = "p1"
-    val p3 = "p3"
+    override konst p1 = "p1"
+    konst p3 = "p3"
     override fun f1() = "f1"
     fun f3() = "f3"
 }
 
-// This is required to check that function references for unchanged classes are evaluated correctly.
+// This is required to check that function references for unchanged classes are ekonstuated correctly.
 class StableClass {
     fun foo(i: Int): String = i.toString()
     inner class Inner {
@@ -81,7 +81,7 @@ class StableFunctionsHolder: StableAbstractFunctionsHolder() {
     override fun foo(): String = "foo"
     fun baz(): String = "baz"
 }
-data class StableClassWithEquals(val value: Int)
+data class StableClassWithEquals(konst konstue: Int)
 
 fun referencingMemberFunctionFoo(sfh: StableFunctionsHolder): String = run(sfh::foo)
 fun referencingMemberFunctionBar(sfh: StableFunctionsHolder): String = run(sfh::bar)

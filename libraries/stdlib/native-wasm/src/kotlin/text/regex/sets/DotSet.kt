@@ -27,25 +27,25 @@ import kotlin.experimental.ExperimentalNativeApi
 /**
  * Node accepting any character except line terminators.
  */
-internal class DotSet(val lt: AbstractLineTerminator, val matchLineTerminator: Boolean)
+internal class DotSet(konst lt: AbstractLineTerminator, konst matchLineTerminator: Boolean)
     : SimpleSet(AbstractSet.TYPE_DOTSET) {
 
     // This node consumes any character. If the character is supplementary, this node consumes both surrogate chars representing it.
     // Otherwise, consumes a single char.
     // Thus, for a given [testString] and [startIndex] a fixed amount of chars are consumed.
-    override val consumesFixedLength: Boolean
+    override konst consumesFixedLength: Boolean
         get() = true
 
     @OptIn(ExperimentalNativeApi::class)
     override fun matches(startIndex: Int, testString: CharSequence, matchResult: MatchResultImpl): Int {
-        val rightBound = testString.length
+        konst rightBound = testString.length
         if (startIndex >= rightBound) {
             return -1
         }
 
-        val high = testString[startIndex]
+        konst high = testString[startIndex]
         if (high.isHighSurrogate() && startIndex + 2 <= rightBound) {
-            val low = testString[startIndex + 1]
+            konst low = testString[startIndex + 1]
             if (Char.isSurrogatePair(high, low)) {
                 if (!matchLineTerminator && lt.isLineTerminator(Char.toCodePoint(high, low))) {
                     return -1
@@ -62,6 +62,6 @@ internal class DotSet(val lt: AbstractLineTerminator, val matchLineTerminator: B
     }
 
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean = true
-    override val name: String
+    override konst name: String
         get() = "."
 }

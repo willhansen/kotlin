@@ -17,9 +17,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirNamedReferenceWithCandidateBase : FirNamedReference() {
-    abstract override val source: KtSourceElement?
-    abstract override val name: Name
-    abstract val candidateSymbol: FirBasedSymbol<*>
+    abstract override konst source: KtSourceElement?
+    abstract override konst name: Name
+    abstract konst candidateSymbol: FirBasedSymbol<*>
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitNamedReferenceWithCandidateBase(this, data)
 

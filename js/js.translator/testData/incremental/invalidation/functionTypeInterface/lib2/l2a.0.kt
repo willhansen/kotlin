@@ -1,4 +1,4 @@
 fun getString(): String {
-    val s: suspend () -> Unit = {}
+    konst s: suspend () -> Unit = {}
     return getTypeName(s)
 }

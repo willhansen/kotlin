@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.ir.util.IdSignature
 import org.jetbrains.kotlin.ir.util.IdSignatureComposer
 
 class WrappedDescriptorSignatureComposer(
-    private val delegate: IdSignatureComposer,
-    private val firComposer: Fir2IrSignatureComposer
+    private konst delegate: IdSignatureComposer,
+    private konst firComposer: Fir2IrSignatureComposer
 ) : IdSignatureComposer by delegate {
     override fun withFileSignature(fileSignature: IdSignature.FileSignature, body: () -> Unit) {
         firComposer.withFileSignature(fileSignature) {

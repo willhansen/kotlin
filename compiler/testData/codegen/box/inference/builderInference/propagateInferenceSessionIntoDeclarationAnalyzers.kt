@@ -11,7 +11,7 @@ public interface SendChannelX<in E> {
 }
 
 public interface ProducerScopeX<in E>   {
-    public val channel: SendChannelX<E>
+    public konst channel: SendChannelX<E>
     fun foo(x: E)
 }
 

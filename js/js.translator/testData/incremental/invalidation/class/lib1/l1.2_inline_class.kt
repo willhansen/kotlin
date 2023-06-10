@@ -1,2 +1,2 @@
-inline class Demo(val x: Int) {
+inline class Demo(konst x: Int) {
 }

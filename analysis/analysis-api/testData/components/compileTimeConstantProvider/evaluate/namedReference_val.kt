@@ -1,8 +1,8 @@
 class Test {
-    val bar : Int = 42
+    konst bar : Int = 42
 }
 
 fun box() {
-    val t = Test()
+    konst t = Test()
     t.<expr>bar</expr>
 }

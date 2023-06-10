@@ -6,7 +6,7 @@ inline fun <reified T : Any> Any.classRefExtFun(): KClass<T> {
   return T::class
 }
 
-val <reified T : Any> T.classRefExtVal: KClass<T>
+konst <reified T : Any> T.classRefExtVal: KClass<T>
   inline get(): KClass<T> {
     return T::class
   }
@@ -26,7 +26,7 @@ class Host {
     return TF::class
   }
 
-  val <reified TV : Any> TV.classRefGenericMemberExtVal: KClass<TV>
+  konst <reified TV : Any> TV.classRefGenericMemberExtVal: KClass<TV>
     inline get(): KClass<TV> {
       return TV::class
     }

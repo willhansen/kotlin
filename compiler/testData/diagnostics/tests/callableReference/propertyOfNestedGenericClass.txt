@@ -13,8 +13,8 @@ public final class Scope {
 
     public abstract class Nested</*0*/ T> {
         public constructor Nested</*0*/ T>()
-        public abstract val key: kotlin.Int
-        public abstract val keyT: T
+        public abstract konst key: kotlin.Int
+        public abstract konst keyT: T
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

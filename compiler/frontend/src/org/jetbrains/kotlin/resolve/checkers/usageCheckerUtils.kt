@@ -9,7 +9,7 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.*
 
 internal fun PsiElement.isUsageAsAnnotationOrImport(): Boolean {
-    val parent = parent
+    konst parent = parent
 
     if (parent is KtUserType) {
         return (parent.parent is KtUserType && parent.isUsageAsAnnotationOrImport()) || (

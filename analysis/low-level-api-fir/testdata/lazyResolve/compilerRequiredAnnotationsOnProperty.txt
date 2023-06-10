@@ -6,13 +6,13 @@ FILE: [ResolvedTo(RAW_FIR)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Deprecated[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] set([ResolvedTo(RAW_FIR)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Deprecated[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] set([ResolvedTo(RAW_FIR)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 IMPORTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -22,13 +22,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(RAW_FIR)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Deprecated[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] set([ResolvedTo(RAW_FIR)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:Deprecated[Unresolved](LAZY_EXPRESSION) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Deprecated[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(RAW_FIR)] set([ResolvedTo(RAW_FIR)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 COMPILER_REQUIRED_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -38,13 +38,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(property)) @Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(getter)) @Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] set([ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] set([ResolvedTo(COMPILER_REQUIRED_ANNOTATIONS)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 COMPANION_GENERATION:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -54,13 +54,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(property)) @Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(COMPANION_GENERATION)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(getter)) @Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPANION_GENERATION)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPANION_GENERATION)] set([ResolvedTo(COMPANION_GENERATION)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(COMPANION_GENERATION)] set([ResolvedTo(COMPANION_GENERATION)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 SUPER_TYPES:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -70,13 +70,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(property)) @Anno[Unresolved](LAZY_EXPRESSION) public? final? [ResolvedTo(SUPER_TYPES)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(getter)) @Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(SUPER_TYPES)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(SUPER_TYPES)] set([ResolvedTo(SUPER_TYPES)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setter)) @Anno[Unresolved](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[CompilerRequiredAnnotations](String(setparam)) @SETTER_PARAMETER:Anno[Unresolved](LAZY_EXPRESSION) public? [ResolvedTo(SUPER_TYPES)] set([ResolvedTo(SUPER_TYPES)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 TYPES:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -86,13 +86,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[Types](String(property)) @R|Anno|[Types](LAZY_EXPRESSION) public? final? [ResolvedTo(TYPES)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](LAZY_EXPRESSION) public? [ResolvedTo(TYPES)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public? [ResolvedTo(TYPES)] set([ResolvedTo(TYPES)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public? [ResolvedTo(TYPES)] set([ResolvedTo(TYPES)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 STATUS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -102,13 +102,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[Types](String(property)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(STATUS)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] set([ResolvedTo(STATUS)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(STATUS)] set([ResolvedTo(STATUS)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 EXPECT_ACTUAL_MATCHING:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -118,13 +118,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[Types](String(property)) @R|Anno|[Types](LAZY_EXPRESSION) public final [ResolvedTo(EXPECT_ACTUAL_MATCHING)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](LAZY_EXPRESSION) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](LAZY_EXPRESSION) public [ResolvedTo(EXPECT_ACTUAL_MATCHING)] set([ResolvedTo(EXPECT_ACTUAL_MATCHING)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 ARGUMENTS_OF_ANNOTATIONS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -134,13 +134,13 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
     @R|kotlin/Deprecated|[Types](String(property)) @R|Anno|[Types](String(property)) public final [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] var memberProperty: <implicit> = LAZY_EXPRESSION
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](String(getter)) public [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] get(): <implicit> { LAZY_BLOCK }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] set([ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] value: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] set([ResolvedTo(ARGUMENTS_OF_ANNOTATIONS)] konstue: <implicit>): R|kotlin/Unit| { LAZY_BLOCK }
 
 CONTRACTS:
 FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
@@ -150,7 +150,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] val s: String = R|<local>/s|
+        public? final? [ResolvedTo(RAW_FIR)] [IsFromPrimaryConstructor=true] konst s: String = R|<local>/s|
             public? [ResolvedTo(RAW_FIR)] [ContainingClassKey=Anno] get(): String
 
     }
@@ -158,8 +158,8 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](String(getter)) public [ResolvedTo(CONTRACTS)] get(): <implicit> {
             ^ field#
         }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] value: <implicit>): R|kotlin/Unit| {
-            field# = value#
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(CONTRACTS)] set([ResolvedTo(CONTRACTS)] konstue: <implicit>): R|kotlin/Unit| {
+            field# = konstue#
         }
 
 IMPLICIT_TYPES_BODY_RESOLVE:
@@ -170,7 +170,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -178,8 +178,8 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
         @R|kotlin/Deprecated|[Types](String(getter)) @R|Anno|[Types](String(getter)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ field#
         }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
-            field# = value#
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](String(setter)) @R|Anno|[Types](String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](String(setparam)) public [ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] set([ResolvedTo(IMPLICIT_TYPES_BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit| {
+            field# = konstue#
         }
 
 ANNOTATIONS_ARGUMENTS_MAPPING:
@@ -190,7 +190,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -198,8 +198,8 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
         @R|kotlin/Deprecated|[Types](message = String(getter)) @R|Anno|[Types](s = String(getter)) public [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] get(): R|kotlin/Int| {
             ^ field#
         }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] set([ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] value: R|kotlin/Int|): R|kotlin/Unit| {
-            field# = value#
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] set([ResolvedTo(ANNOTATIONS_ARGUMENTS_MAPPING)] konstue: R|kotlin/Int|): R|kotlin/Unit| {
+            field# = konstue#
         }
 
 BODY_RESOLVE:
@@ -210,7 +210,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(STATUS)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(STATUS)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -218,8 +218,8 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
         @R|kotlin/Deprecated|[Types](message = String(getter)) @R|Anno|[Types](s = String(getter)) public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ F|/memberProperty|
         }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
-            F|/memberProperty| = R|<local>/value|
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit| {
+            F|/memberProperty| = R|<local>/konstue|
         }
 
 FILE RAW TO BODY:
@@ -230,7 +230,7 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
             super<R|kotlin/Any|>()
         }
 
-        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] val s: R|kotlin/String| = R|<local>/s|
+        public final [ResolvedTo(BODY_RESOLVE)] [IsFromPrimaryConstructor=true] konst s: R|kotlin/String| = R|<local>/s|
             public [ResolvedTo(BODY_RESOLVE)] [ContainingClassKey=Anno] get(): R|kotlin/String|
 
     }
@@ -238,6 +238,6 @@ FILE: [ResolvedTo(IMPORTS)] compilerRequiredAnnotationsOnProperty.kt
         @R|kotlin/Deprecated|[Types](message = String(getter)) @R|Anno|[Types](s = String(getter)) public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int| {
             ^ F|/memberProperty|
         }
-        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit| {
-            F|/memberProperty| = R|<local>/value|
+        @PROPERTY_SETTER:R|kotlin/Deprecated|[Types](message = String(setter)) @R|Anno|[Types](s = String(setter)) @SETTER_PARAMETER:R|kotlin/Deprecated|[Types](message = String(setparam)) @SETTER_PARAMETER:R|Anno|[Types](s = String(setparam)) public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit| {
+            F|/memberProperty| = R|<local>/konstue|
         }

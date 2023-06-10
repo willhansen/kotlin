@@ -1,11 +1,11 @@
 == O ==
 object O {
-    val y = 1
+    konst y = 1
 }
 ---------------------
 L0:
   1 <START>
-    v(val y = 1)
+    v(konst y = 1)
     r(1) -> <v0>
     w(y|<v0>)
 L1:
@@ -16,14 +16,14 @@ sink:
     <SINK>          PREV:[<ERROR>, <END>]
 =====================
 == E ==
-enum class E(val x: Int) {
+enum class E(konst x: Int) {
     E1(0)
 }
 ---------------------
 L0:
   1 <START>
-    v(val x: Int)
-    magic[FAKE_INITIALIZER](val x: Int) -> <v0>
+    v(konst x: Int)
+    magic[FAKE_INITIALIZER](konst x: Int) -> <v0>
     w(x|<v0>)
     v(E1(0))
     magic[FAKE_INITIALIZER](E1(0)) -> <v1>
@@ -41,7 +41,7 @@ sink:
 == C ==
 class C {
     companion object {
-        val z = 2
+        konst z = 2
     }
 }
 ---------------------

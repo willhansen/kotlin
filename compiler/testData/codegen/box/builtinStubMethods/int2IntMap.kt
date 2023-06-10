@@ -42,7 +42,7 @@ public class Int2IntMapImpl implements Int2IntMap {
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(Object konstue) {
         return false;
     }
 
@@ -52,7 +52,7 @@ public class Int2IntMapImpl implements Int2IntMap {
     }
 
     @Override
-    public Integer put(Integer key, Integer value) {
+    public Integer put(Integer key, Integer konstue) {
         return null;
     }
 
@@ -77,7 +77,7 @@ public class Int2IntMapImpl implements Int2IntMap {
     }
 
     @Override
-    public Collection<Integer> values() {
+    public Collection<Integer> konstues() {
         return null;
     }
 

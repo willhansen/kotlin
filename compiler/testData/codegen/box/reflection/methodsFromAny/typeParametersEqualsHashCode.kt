@@ -27,8 +27,8 @@ fun box(): String {
 
     assertNotEquals(A::class.typeParameters.single(), B::class.typeParameters.single())
 
-    val fi = Fourple::class.typeParameters
-    val fj = Fourple::class.typeParameters
+    konst fi = Fourple::class.typeParameters
+    konst fj = Fourple::class.typeParameters
     for (i in 0..fi.size - 1) {
         for (j in 0..fj.size - 1) {
             if (i == j) {

@@ -30,7 +30,7 @@ import libModule.*
 import checkSubtype
 // TESTCASE NUMBER: 1
 fun case1() {
-    val a = JavaContainer.ab
+    konst a = JavaContainer.ab
     if (a) { "true" } else "false"
     checkSubtype<Boolean>(a)
     checkSubtype<Boolean>(false)
@@ -38,14 +38,14 @@ fun case1() {
 
 // TESTCASE NUMBER: 2
 fun case2() {
-    val a = JavaContainer.aB
+    konst a = JavaContainer.aB
     if (a) { "true" } else "false"
     checkSubtype<Boolean>(a)
 }
 
 // TESTCASE NUMBER: 3
 fun case3() {
-    val a = JavaContainer.aO as Boolean
+    konst a = JavaContainer.aO as Boolean
     if (a) { "true" } else "false"
     checkSubtype<Boolean>(a)
 }

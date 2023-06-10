@@ -6,10 +6,10 @@ enum class E {
 }
 
 // Test resolve from source
-val a: Enum<E> = E.ENTRY
+konst a: Enum<E> = E.ENTRY
 
 // Test Java resolve
-val b: Enum<RetentionPolicy> = RetentionPolicy.RUNTIME
+konst b: Enum<RetentionPolicy> = RetentionPolicy.RUNTIME
 
 // Test deserialized resolve
-val c: Enum<AnnotationTarget> = AnnotationTarget.CLASS
+konst c: Enum<AnnotationTarget> = AnnotationTarget.CLASS

@@ -21,7 +21,7 @@ interface DescriptorAwareStringTable : StringTable {
             throw IllegalStateException("Cannot get FQ name of error class: ${renderDescriptor(descriptor)}")
         }
 
-        val classId = descriptor.classId
+        konst classId = descriptor.classId
             ?: getLocalClassIdReplacement(descriptor)
             ?: throw IllegalStateException("Cannot get FQ name of local class: ${renderDescriptor(descriptor)}")
 
@@ -31,11 +31,11 @@ interface DescriptorAwareStringTable : StringTable {
     fun getLocalClassIdReplacement(descriptor: ClassifierDescriptorWithTypeParameters): ClassId? = null
 
     /**
-     * true if this [StringTable] replaces absent [ClassId] of a local class descriptor with a semantic equivalent that
+     * true if this [StringTable] replaces absent [ClassId] of a local class descriptor with a semantic equikonstent that
      * still expects original type arguments when used in a type
      * false otherwise
      */
-    val isLocalClassIdReplacementKeptGeneric: Boolean
+    konst isLocalClassIdReplacementKeptGeneric: Boolean
         get() = false
 
     private fun renderDescriptor(descriptor: ClassifierDescriptorWithTypeParameters): String =

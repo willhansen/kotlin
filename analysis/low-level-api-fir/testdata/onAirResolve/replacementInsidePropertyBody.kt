@@ -1,12 +1,12 @@
 
-val x: Int get() {
-    val qqq = "Hello"
-    /*PLACE*/val x = 42
+konst x: Int get() {
+    konst qqq = "Hello"
+    /*PLACE*/konst x = 42
     2
 }
 
-val y: String get() {
-    /*ONAIR*/val z = qqq
+konst y: String get() {
+    /*ONAIR*/konst z = qqq
     ""
 }
 

@@ -1,14 +1,14 @@
 interface Foo
 
 fun foo() {
-    val x: Int = 1
+    konst x: Int = 1
     class Bar : Foo {
-        val y: String = ""
+        konst y: String = ""
         fun Int.bar(s: String): Boolean {
-            val z: Double = 0.0
+            konst z: Double = 0.0
             return true
         }
-        val Boolean.w: Char get() = ' '
+        konst Boolean.w: Char get() = ' '
         fun <T : Foo> id(arg: T): T = arg
     }
 }

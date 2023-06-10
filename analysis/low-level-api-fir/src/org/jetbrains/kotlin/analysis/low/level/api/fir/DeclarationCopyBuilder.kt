@@ -39,10 +39,10 @@ internal object DeclarationCopyBuilder {
     }
 
     fun FirProperty.withBodyFrom(propertyWithBody: FirProperty): FirProperty {
-        val newSetter = getAccessorToUse(this, propertyWithBody) { it.setter }
-        val newGetter = getAccessorToUse(this, propertyWithBody) { it.getter }
+        konst newSetter = getAccessorToUse(this, propertyWithBody) { it.setter }
+        konst newGetter = getAccessorToUse(this, propertyWithBody) { it.getter }
 
-        val propertyResolvePhase = minOf(
+        konst propertyResolvePhase = minOf(
             this@withBodyFrom.resolvePhase,
             FirResolvePhase.DECLARATIONS,
             newGetter?.resolvePhase ?: FirResolvePhase.BODY_RESOLVE,
@@ -72,8 +72,8 @@ internal object DeclarationCopyBuilder {
         replacementProperty: FirProperty,
         getAccessor: (FirProperty) -> FirPropertyAccessor?
     ): FirPropertyAccessor? {
-        val originalAccessor = getAccessor(originalProperty)
-        val replacementAccessor = getAccessor(replacementProperty)
+        konst originalAccessor = getAccessor(originalProperty)
+        konst replacementAccessor = getAccessor(replacementProperty)
 
         // accessor has a header type, and we want it type to be resolved
         return if (originalAccessor != null && replacementAccessor != null) {

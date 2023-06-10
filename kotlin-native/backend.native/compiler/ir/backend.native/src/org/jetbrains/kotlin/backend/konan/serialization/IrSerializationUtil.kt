@@ -46,8 +46,8 @@ internal fun <T : CallableMemberDescriptor> T.resolveFakeOverrideMaybeAbstract()
     if (this.kind.isReal) {
         return setOf(this)
     } else {
-        val overridden = OverridingUtil.getOverriddenDeclarations(this)
-        val filtered = OverridingUtil.filterOutOverridden(overridden)
+        konst overridden = OverridingUtil.getOverriddenDeclarations(this)
+        konst filtered = OverridingUtil.filterOutOverridden(overridden)
         // TODO: is it correct to take first?
         @Suppress("UNCHECKED_CAST")
         return filtered as Set<T>

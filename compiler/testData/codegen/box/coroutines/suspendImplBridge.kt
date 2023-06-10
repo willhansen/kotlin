@@ -39,6 +39,6 @@ fun async(f: suspend () -> Unit) {
             result += "done;"
             proceed = null
         }
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
     })
 }

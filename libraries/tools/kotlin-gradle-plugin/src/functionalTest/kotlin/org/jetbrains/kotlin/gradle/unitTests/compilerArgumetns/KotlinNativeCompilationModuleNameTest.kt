@@ -16,43 +16,43 @@ class KotlinNativeCompilationModuleNameTest {
 
     @Test
     fun `main compilation module name convention`() {
-        val project = buildProjectWithMPP(
+        konst project = buildProjectWithMPP(
             projectBuilder = {
                 withName(PROJECT_NAME)
             }
         )
-        val linuxX64Target = project.multiplatformExtension.linuxX64()
+        konst linuxX64Target = project.multiplatformExtension.linuxX64()
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             PROJECT_NAME,
             linuxX64Target.compilations.main.compilerOptions.options.moduleName.get(),
-            "Main compilation moduleName value is not expected!"
+            "Main compilation moduleName konstue is not expected!"
         )
     }
 
     @Test
     fun `test compilation module name convention`() {
-        val project = buildProjectWithMPP(
+        konst project = buildProjectWithMPP(
             projectBuilder = {
                 withName(PROJECT_NAME)
             }
         )
-        val linuxX64Target = project.multiplatformExtension.linuxX64()
+        konst linuxX64Target = project.multiplatformExtension.linuxX64()
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals(
             "${PROJECT_NAME}_test",
             linuxX64Target.compilations.test.compilerOptions.options.moduleName.get(),
-            "Test compilation moduleName value is not expected!"
+            "Test compilation moduleName konstue is not expected!"
         )
     }
 
     @Test
     fun `Metadata compilation module name convention`() {
-        val project = buildProjectWithMPP(
+        konst project = buildProjectWithMPP(
             projectBuilder = {
                 withName(PROJECT_NAME)
             }
@@ -64,9 +64,9 @@ class KotlinNativeCompilationModuleNameTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val compilerOptions = project
+        konst compilerOptions = project
             .multiplatformExtension
             .metadata()
             .compilations
@@ -75,11 +75,11 @@ class KotlinNativeCompilationModuleNameTest {
         assertEquals(
             "${PROJECT_NAME}_linuxMain",
             compilerOptions.moduleName.get(),
-            "Main compilation moduleName value is not expected!"
+            "Main compilation moduleName konstue is not expected!"
         )
     }
 
     companion object {
-        const val PROJECT_NAME = "nativeProject"
+        const konst PROJECT_NAME = "nativeProject"
     }
 }

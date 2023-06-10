@@ -22,7 +22,7 @@ fun use1() {
     <!OPT_IN_USAGE!>f<!>()
 }
 
-val use2 = <!OPT_IN_USAGE!>f<!>()
+konst use2 = <!OPT_IN_USAGE!>f<!>()
 
 // FILE: inline-usage.kt
 
@@ -38,7 +38,7 @@ inline var inlineUse2: Unit
     get() {
         <!OPT_IN_USAGE!>f<!>()
     }
-    set(value) {
+    set(konstue) {
         <!OPT_IN_USAGE!>f<!>()
     }
 
@@ -47,7 +47,7 @@ var inlineUse3: Unit
         <!OPT_IN_USAGE!>f<!>()
     }
     @API
-    inline set(value) {
+    inline set(konstue) {
         f()
     }
 
@@ -74,7 +74,7 @@ private inline var privateInline3: Unit
     get() {
         <!OPT_IN_USAGE!>f<!>()
     }
-    set(value) {
+    set(konstue) {
         <!OPT_IN_USAGE!>f<!>()
     }
 

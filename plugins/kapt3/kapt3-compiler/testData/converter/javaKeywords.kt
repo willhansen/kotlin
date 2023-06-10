@@ -1,4 +1,4 @@
 class default {
-    lateinit val extends: String
+    lateinit konst extends: String
     fun implements(instanceof: Int) {}
 }

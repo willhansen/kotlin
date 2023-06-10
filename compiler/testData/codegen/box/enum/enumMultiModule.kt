@@ -2,7 +2,7 @@
 // MODULE: lib
 // FILE: common.kt
 
-enum class FooEnum(val s: String) {
+enum class FooEnum(konst s: String) {
     O("O"),
     FAIL("FAIL"),
     K("K");
@@ -12,7 +12,7 @@ enum class FooEnum(val s: String) {
 // MODULE: bar(lib)
 // FILE: second.kt
 
-fun bar(): String = FooEnum.valueOf("O").s + FooEnum.values()[2].s
+fun bar(): String = FooEnum.konstueOf("O").s + FooEnum.konstues()[2].s
 
 // MODULE: main(bar)
 // FILE: main.kt

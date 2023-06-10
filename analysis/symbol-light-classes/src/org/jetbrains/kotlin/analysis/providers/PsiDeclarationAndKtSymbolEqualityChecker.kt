@@ -21,7 +21,7 @@ internal object PsiDeclarationAndKtSymbolEqualityChecker {
         // TODO: receiver type comparison?
         if (!returnTypesMatch(psi, symbol)) return false
         if (!typeParametersMatch(psi, symbol)) return false
-        if (symbol is KtFunctionLikeSymbol && !valueParametersMatch(psi, symbol)) return false
+        if (symbol is KtFunctionLikeSymbol && !konstueParametersMatch(psi, symbol)) return false
         return true
     }
 
@@ -47,24 +47,24 @@ internal object PsiDeclarationAndKtSymbolEqualityChecker {
         return true
     }
 
-    private fun KtAnalysisSession.valueParametersMatch(psi: PsiMethod, symbol: KtFunctionLikeSymbol): Boolean {
-        val valueParameterCount = if (symbol.isExtension) symbol.valueParameters.size + 1 else symbol.valueParameters.size
-        if (psi.parameterList.parametersCount != valueParameterCount) return false
+    private fun KtAnalysisSession.konstueParametersMatch(psi: PsiMethod, symbol: KtFunctionLikeSymbol): Boolean {
+        konst konstueParameterCount = if (symbol.isExtension) symbol.konstueParameters.size + 1 else symbol.konstueParameters.size
+        if (psi.parameterList.parametersCount != konstueParameterCount) return false
         if (symbol.isExtension) {
-            val psiParameter = psi.parameterList.parameters[0]
+            konst psiParameter = psi.parameterList.parameters[0]
             if (symbol.receiverType?.let { isTheSameTypes(psi, psiParameter.type, it, isVararg = false) } != true) return false
         }
-        val offset = if (symbol.isExtension) 1 else 0
-        symbol.valueParameters.forEachIndexed { index, valueParameterSymbol ->
-            val psiParameter = psi.parameterList.parameters[index + offset]
-            if (valueParameterSymbol.name.asString() != psiParameter.name) return false
-            if (valueParameterSymbol.isVararg != psiParameter.isVarArgs) return false
+        konst offset = if (symbol.isExtension) 1 else 0
+        symbol.konstueParameters.forEachIndexed { index, konstueParameterSymbol ->
+            konst psiParameter = psi.parameterList.parameters[index + offset]
+            if (konstueParameterSymbol.name.asString() != psiParameter.name) return false
+            if (konstueParameterSymbol.isVararg != psiParameter.isVarArgs) return false
             if (!isTheSameTypes(
                     psi,
                     psiParameter.type,
-                    valueParameterSymbol.returnType,
+                    konstueParameterSymbol.returnType,
                     KtTypeMappingMode.VALUE_PARAMETER,
-                    valueParameterSymbol.isVararg
+                    konstueParameterSymbol.isVararg
                 )
             ) return false
         }
@@ -80,8 +80,8 @@ internal object PsiDeclarationAndKtSymbolEqualityChecker {
     ): Boolean {
         // Shortcut: primitive void == Unit as a function return type
         if (psi == PsiType.VOID && ktType.isUnit) return true
-        val ktTypeRendered = ktType.asPsiType(context, allowErrorTypes = true, mode) ?: return false
-        val rendered = if (isVararg) ktTypeRendered.createArrayType() else ktTypeRendered
+        konst ktTypeRendered = ktType.asPsiType(context, allowErrorTypes = true, mode) ?: return false
+        konst rendered = if (isVararg) ktTypeRendered.createArrayType() else ktTypeRendered
         return rendered == psi
     }
 }

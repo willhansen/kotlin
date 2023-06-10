@@ -32,7 +32,7 @@ fun box(): String {
     var res: Any? = null
 
     builder {
-        val base: Base<*> = Derived2()
+        konst base: Base<*> = Derived2()
         res = base.generic()
     }
 

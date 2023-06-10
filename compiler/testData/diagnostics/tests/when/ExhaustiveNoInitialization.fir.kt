@@ -11,8 +11,8 @@
  */
 
 fun foo(b: Boolean): Int {
-    val x: Int
-    val y: Int
+    konst x: Int
+    konst y: Int
     when (b) {
         true -> y = 1
         false -> y = 0

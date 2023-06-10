@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.ir.util.*
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformer
 
 
-class ThrowableLowering(val context: JsIrBackendContext, val extendThrowableFunction: IrSimpleFunctionSymbol) : BodyLoweringPass {
-    private val throwableConstructors = context.throwableConstructors
-    private val newThrowableFunction = context.newThrowableSymbol
+class ThrowableLowering(konst context: JsIrBackendContext, konst extendThrowableFunction: IrSimpleFunctionSymbol) : BodyLoweringPass {
+    private konst throwableConstructors = context.throwableConstructors
+    private konst newThrowableFunction = context.newThrowableSymbol
 
     private fun undefinedValue(): IrExpression = context.getVoid()
 
     data class ThrowableArguments(
-        val message: IrExpression,
-        val cause: IrExpression
+        konst message: IrExpression,
+        konst cause: IrExpression
     )
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
@@ -39,15 +39,15 @@ class ThrowableLowering(val context: JsIrBackendContext, val extendThrowableFunc
     }
 
     private fun IrFunctionAccessExpression.extractThrowableArguments(): ThrowableArguments =
-        when (valueArgumentsCount) {
+        when (konstueArgumentsCount) {
             0 -> ThrowableArguments(undefinedValue(), undefinedValue())
             2 -> ThrowableArguments(
                 message = getValueArgument(0)!!,
                 cause = getValueArgument(1)!!
             )
             else -> {
-                val arg = getValueArgument(0)!!
-                val parameter = symbol.owner.valueParameters[0]
+                konst arg = getValueArgument(0)!!
+                konst parameter = symbol.owner.konstueParameters[0]
                 when {
                     parameter.type.isNullableString() -> ThrowableArguments(message = arg, cause = undefinedValue())
                     else -> {
@@ -59,7 +59,7 @@ class ThrowableLowering(val context: JsIrBackendContext, val extendThrowableFunc
         }
 
     inner class Transformer : IrElementTransformer<IrDeclarationParent> {
-        private val anyConstructor = context.irBuiltIns.anyClass.constructors.first()
+        private konst anyConstructor = context.irBuiltIns.anyClass.constructors.first()
 
         override fun visitClass(declaration: IrClass, data: IrDeclarationParent) = super.visitClass(declaration, declaration)
 
@@ -67,12 +67,12 @@ class ThrowableLowering(val context: JsIrBackendContext, val extendThrowableFunc
             expression.transformChildren(this, data)
             if (expression.symbol !in throwableConstructors) return expression
 
-            val (messageArg, causeArg) = expression.extractThrowableArguments()
+            konst (messageArg, causeArg) = expression.extractThrowableArguments()
 
             return expression.run {
                 IrCallImpl(
                     startOffset, endOffset, type, newThrowableFunction,
-                    valueArgumentsCount = 2,
+                    konstueArgumentsCount = 2,
                     typeArgumentsCount = 0
                 ).also {
                     it.putValueArgument(0, messageArg)
@@ -85,15 +85,15 @@ class ThrowableLowering(val context: JsIrBackendContext, val extendThrowableFunc
             expression.transformChildren(this, data)
             if (expression.symbol !in throwableConstructors) return expression
 
-            val (messageArg, causeArg) = expression.extractThrowableArguments()
+            konst (messageArg, causeArg) = expression.extractThrowableArguments()
 
-            val klass = data as IrClass
-            val thisReceiver = IrGetValueImpl(expression.startOffset, expression.endOffset, klass.thisReceiver!!.symbol)
+            konst klass = data as IrClass
+            konst thisReceiver = IrGetValueImpl(expression.startOffset, expression.endOffset, klass.thisReceiver!!.symbol)
 
-            val expressionReplacement = expression.run {
+            konst expressionReplacement = expression.run {
                 IrCallImpl(
                     startOffset, endOffset, type, extendThrowableFunction,
-                    valueArgumentsCount = 3,
+                    konstueArgumentsCount = 3,
                     typeArgumentsCount = 0
                 ).also {
                     it.putValueArgument(0, thisReceiver)

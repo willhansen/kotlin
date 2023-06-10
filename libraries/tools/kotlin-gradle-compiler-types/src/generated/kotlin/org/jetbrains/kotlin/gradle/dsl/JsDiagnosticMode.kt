@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JsDiagnosticMode(val mode: String) {
+enum class JsDiagnosticMode(konst mode: String) {
     RUNTIME_DIAGNOSTIC_EXCEPTION("exception"),
     RUNTIME_DIAGNOSTIC_LOG("log"),
     ;
 
     companion object {
         fun fromMode(mode: String): JsDiagnosticMode =
-            JsDiagnosticMode.values().firstOrNull { it.mode == mode }
+            JsDiagnosticMode.konstues().firstOrNull { it.mode == mode }
                 ?: throw IllegalArgumentException("Unknown JS diagnostic mode: $mode")
     }
 }

@@ -4,10 +4,10 @@ abstract class Base {
     final override fun equals(other: Any?) = false
 }
 
-data class DataClass(val field: String) : Base()
+data class DataClass(konst field: String) : Base()
 
 fun box(): String {
-    val d = DataClass("x")
+    konst d = DataClass("x")
 
     if (d.toString() != "OK") return "Fail toString"
     if (d.hashCode() != 42) return "Fail hashCode"

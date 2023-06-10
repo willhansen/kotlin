@@ -36,12 +36,12 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.expressions.DoubleColonLHS
 import java.util.*
 
-class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : BaseRenderer() {
-    private val bindingContext = analysisResult.bindingContext
-    private val filePackage = file.packageFqName.toString().replace(".", "/")
-    private val argumentsLabel = "<PLACE-FOR-ARGUMENTS>"
+class PsiVisualizer(private konst file: KtFile, analysisResult: AnalysisResult) : BaseRenderer() {
+    private konst bindingContext = analysisResult.bindingContext
+    private konst filePackage = file.packageFqName.toString().replace(".", "/")
+    private konst argumentsLabel = "<PLACE-FOR-ARGUMENTS>"
 
-    val descriptorRenderer = PsiDescriptorRenderer()
+    konst descriptorRenderer = PsiDescriptorRenderer()
 
     override fun render(): String {
         file.accept(Renderer())
@@ -49,7 +49,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
     }
 
     inner class Renderer : KtVisitorVoid() {
-        private val implicitReceivers = mutableListOf<ReceiverValue>()
+        private konst implicitReceivers = mutableListOf<ReceiverValue>()
         private var lastCallWithLambda = ""
 
         private fun renderType(type: KotlinType?): String {
@@ -92,7 +92,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         private fun renderVariableType(variable: KtVariableDeclaration) {
-            val descriptor = bindingContext[VARIABLE, variable]
+            konst descriptor = bindingContext[VARIABLE, variable]
             if (variable.isSingleUnderscore) return
             addAnnotation(renderType(descriptor), variable.nameIdentifier!!)
             variable.acceptChildren(this)
@@ -116,7 +116,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
                 return super.visitTypeReference(typeReference)
             }
 
-            val hasResolvedCall = with(object : KtVisitorVoid() {
+            konst hasResolvedCall = with(object : KtVisitorVoid() {
                 var hasCall: Boolean = false
                 override fun visitKtElement(element: KtElement) {
                     if (!hasCall) {
@@ -132,7 +132,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
             }
 
             if (!hasResolvedCall) {
-                val type = typeReference.getAbbreviatedTypeOrType(bindingContext)
+                konst type = typeReference.getAbbreviatedTypeOrType(bindingContext)
                 addAnnotation(renderType(type), typeReference)
             }
         }
@@ -150,8 +150,8 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         private fun renderCall(expression: KtExpression, renderOn: PsiElement = expression): ResolvedCall<out CallableDescriptor>? {
-            val call = expression.getCall(bindingContext)
-            val resolvedCall = expression.getResolvedCall(bindingContext)
+            konst call = expression.getCall(bindingContext)
+            konst resolvedCall = expression.getResolvedCall(bindingContext)
             if (call == null) {
                 return null
             } else if (resolvedCall == null) {
@@ -161,7 +161,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
 
             fun addReceiverAnnotation(receiver: ReceiverValue?, receiverKind: ExplicitReceiverKind) {
                 if (receiver != null && resolvedCall.explicitReceiverKind != receiverKind) {
-                    val index = implicitReceivers.indexOf(receiver)
+                    konst index = implicitReceivers.indexOf(receiver)
                     if (index != -1) {
                         addAnnotation("this@$index", expression, deleteDuplicate = false)
                     }
@@ -171,20 +171,20 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
             addReceiverAnnotation(resolvedCall.extensionReceiver, ExplicitReceiverKind.EXTENSION_RECEIVER)
             addReceiverAnnotation(resolvedCall.dispatchReceiver, ExplicitReceiverKind.DISPATCH_RECEIVER)
 
-            val descriptor = resolvedCall.candidateDescriptor.let {
+            konst descriptor = resolvedCall.candidateDescriptor.let {
                 if (it is TypeAliasConstructorDescriptor) it.underlyingConstructorDescriptor else it
             }
-            val typeArguments = resolvedCall.typeArguments
+            konst typeArguments = resolvedCall.typeArguments
                 .takeIf { it.isNotEmpty() }
-                ?.values?.joinToString(", ", "<", ">") { renderType(it) } ?: ""
-            val annotation = descriptorRenderer.render(descriptor).replace(argumentsLabel, typeArguments)
+                ?.konstues?.joinToString(", ", "<", ">") { renderType(it) } ?: ""
+            konst annotation = descriptorRenderer.render(descriptor).replace(argumentsLabel, typeArguments)
             addAnnotation(annotation, renderOn, deleteDuplicate = false)
 
             return resolvedCall
         }
 
         override fun visitDotQualifiedExpression(expression: KtDotQualifiedExpression) {
-            val descriptor = bindingContext[QUALIFIER, expression]?.descriptor
+            konst descriptor = bindingContext[QUALIFIER, expression]?.descriptor
             if (descriptor is ClassDescriptor && descriptor.kind == ClassKind.ENUM_ENTRY) {
                 // if not here, enum entry will be processed as KtSimpleNameExpression
                 // at this point it is easier to get corresponding qualifier
@@ -194,7 +194,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         override fun visitSimpleNameExpression(expression: KtSimpleNameExpression) {
-            val descriptor = bindingContext[QUALIFIER, expression]?.descriptor
+            konst descriptor = bindingContext[QUALIFIER, expression]?.descriptor
             if (descriptor != null) {
                 addAnnotation(descriptorRenderer.render(descriptor), expression)
             } else {
@@ -203,7 +203,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         override fun visitBinaryExpression(expression: KtBinaryExpression) {
-            val opName = expression.operationReference.getReferencedName()
+            konst opName = expression.operationReference.getReferencedName()
             if (opName == "==" || opName == "!=") {
                 addAnnotation("EQ operator call", expression.operationReference)
                 expression.left?.accept(this)
@@ -232,17 +232,17 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         override fun visitLambdaExpression(lambdaExpression: KtLambdaExpression) {
-            val descriptor = bindingContext[DECLARATION_TO_DESCRIPTOR, lambdaExpression.functionLiteral] as AnonymousFunctionDescriptor
-            val extensionReceiver = descriptor.extensionReceiverParameter ?: return super.visitLambdaExpression(lambdaExpression)
+            konst descriptor = bindingContext[DECLARATION_TO_DESCRIPTOR, lambdaExpression.functionLiteral] as AnonymousFunctionDescriptor
+            konst extensionReceiver = descriptor.extensionReceiverParameter ?: return super.visitLambdaExpression(lambdaExpression)
             addAnnotation("$lastCallWithLambda@${implicitReceivers.size}", lambdaExpression)
 
-            implicitReceivers += extensionReceiver.value
+            implicitReceivers += extensionReceiver.konstue
             super.visitLambdaExpression(lambdaExpression)
-            implicitReceivers -= extensionReceiver.value
+            implicitReceivers -= extensionReceiver.konstue
         }
 
         override fun visitCallExpression(expression: KtCallExpression) {
-            val resolvedCall = renderCall(expression) ?: return super.visitCallExpression(expression)
+            konst resolvedCall = renderCall(expression) ?: return super.visitCallExpression(expression)
 
             if (expression.getChildOfType<KtLambdaArgument>() != null) {
                 lastCallWithLambda = resolvedCall.resultingDescriptor.name.asString()
@@ -255,14 +255,14 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         override fun visitClassLiteralExpression(expression: KtClassLiteralExpression) {
-            val doubleColonLhs = bindingContext[DOUBLE_COLON_LHS, expression.receiverExpression]
+            konst doubleColonLhs = bindingContext[DOUBLE_COLON_LHS, expression.receiverExpression]
             doubleColonLhs?.takeIf { it is DoubleColonLHS.Type }?.let {
                 addAnnotation(descriptorRenderer.render(it.type.constructor.declarationDescriptor!!), expression)
             } ?: super.visitClassLiteralExpression(expression)
         }
 
         override fun visitPrefixExpression(expression: KtPrefixExpression) {
-            val opName = expression.operationReference.getReferencedName()
+            konst opName = expression.operationReference.getReferencedName()
             if (expression.baseExpression?.node?.elementType == KtNodeTypes.INTEGER_CONSTANT && opName == "-") {
                 return expression.baseExpression!!.accept(this)
             }
@@ -271,9 +271,9 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
     }
 
     inner class PsiDescriptorRenderer(
-        private val needToRenderSpecialFun: Boolean = false
+        private konst needToRenderSpecialFun: Boolean = false
     ) : DeclarationDescriptorVisitor<Unit, StringBuilder> {
-        private val typeRenderer: DescriptorRenderer = DescriptorRenderer.withOptions {
+        private konst typeRenderer: DescriptorRenderer = DescriptorRenderer.withOptions {
             withDefinedIn = false
             modifiers = emptySet()
             classifierNamePolicy = object : ClassifierNamePolicy {
@@ -331,17 +331,17 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
 
         private fun renderFqName(descriptor: DeclarationDescriptor, removeCurrentPackage: Boolean = true): String {
             if (descriptor is TypeParameterDescriptor) return descriptor.name.render()
-            val fqName = qualifierNameCombine(descriptor)
+            konst fqName = qualifierNameCombine(descriptor)
             return if (removeCurrentPackage) removeCurrentFilePackage(fqName) else fqName
         }
 
         private fun qualifierNameCombine(descriptor: DeclarationDescriptor): String {
-            val nameString = descriptor.name.render().let { if (it == SpecialNames.NO_NAME_PROVIDED.asString()) "<anonymous>" else it }
+            konst nameString = descriptor.name.render().let { if (it == SpecialNames.NO_NAME_PROVIDED.asString()) "<anonymous>" else it }
             if (nameString == FqName.ROOT.toString()) return ""
 
-            val containingDeclaration = descriptor.containingDeclaration
-            val qualifier = qualifierName(containingDeclaration)
-            val separator =
+            konst containingDeclaration = descriptor.containingDeclaration
+            konst qualifier = qualifierName(containingDeclaration)
+            konst separator =
                 if (containingDeclaration is PackageFragmentDescriptor || containingDeclaration is PackageViewDescriptor) "/" else "."
             return if (qualifier != "") qualifier + separator + nameString else nameString
         }
@@ -374,7 +374,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         private fun renderSuperTypes(klass: ClassDescriptor, builder: StringBuilder) {
             if (KotlinBuiltIns.isNothing(klass.defaultType)) return
 
-            val supertypes = klass.typeConstructor.supertypes
+            konst supertypes = klass.typeConstructor.supertypes
                 .filter { !KotlinBuiltIns.isAnyOrNullableAny(it) }
                 .map { renderType(it) }
                 .sorted()
@@ -393,13 +393,13 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         private fun renderVariable(variable: VariableDescriptor, includeName: Boolean, data: StringBuilder, topLevel: Boolean) {
-            val realType = variable.type
+            konst realType = variable.type
 
-            val varargElementType = (variable as? ValueParameterDescriptor)?.varargElementType
-            val typeToRender = varargElementType ?: realType
+            konst varargElementType = (variable as? ValueParameterDescriptor)?.varargElementType
+            konst typeToRender = varargElementType ?: realType
             if (varargElementType != null) data.append("vararg ")
 
-            if (topLevel && variable !is ValueParameterDescriptor) data.append(if (variable.isVar) "var" else "val").append(" ")
+            if (topLevel && variable !is ValueParameterDescriptor) data.append(if (variable.isVar) "var" else "konst").append(" ")
             if (includeName) {
                 data.append(renderName(variable)).append(": ")
             }
@@ -408,16 +408,16 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         private fun renderSpecialFunction(descriptor: CallableDescriptor): String {
-            val descriptorName = descriptor.name.asString()
-            val name = when {
+            konst descriptorName = descriptor.name.asString()
+            konst name = when {
                 descriptorName.contains("ELVIS") -> "?:"
                 descriptorName.contains("EXCLEXCL") -> "!!"
                 else -> "UNKNOWN"
             }
-            val valueParameters = buildString { visitValueParameters(descriptor.valueParameters, this) }
-            val returnType = descriptor.returnType?.let { renderType(it) } ?: "[ERROR: unknown type]"
+            konst konstueParameters = buildString { visitValueParameters(descriptor.konstueParameters, this) }
+            konst returnType = descriptor.returnType?.let { renderType(it) } ?: "[ERROR: unknown type]"
 
-            return "fun $name $valueParameters: $returnType"
+            return "fun $name $konstueParameters: $returnType"
         }
 
         override fun visitPackageFragmentDescriptor(descriptor: PackageFragmentDescriptor, data: StringBuilder) {
@@ -440,7 +440,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
             if (function.typeParameters.isNotEmpty()) data.append(" ")
 
             //render receiver
-            val receiver = renderReceiver(function, data)
+            konst receiver = renderReceiver(function, data)
 
             //render name
             data.append(renderName(function, receiver != null))
@@ -448,18 +448,18 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
             //render type arguments
             data.append(argumentsLabel)
 
-            //render value parameters
-            visitValueParameters(function.valueParameters, data)
+            //render konstue parameters
+            visitValueParameters(function.konstueParameters, data)
 
             //render return type
-            val returnType = function.returnType
+            konst returnType = function.returnType
             data.append(": ").append(if (returnType == null) "[NULL]" else renderType(returnType))
 
             renderWhereSuffix(function.typeParameters, data)
         }
 
         private fun renderWhereSuffix(typeParameters: List<TypeParameterDescriptor>, data: StringBuilder) {
-            val upperBoundStrings = ArrayList<String>(0)
+            konst upperBoundStrings = ArrayList<String>(0)
 
             for (typeParameter in typeParameters) {
                 typeParameter.upperBounds
@@ -476,9 +476,9 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         private fun visitTypeParameters(typeParameters: List<TypeParameterDescriptor>, data: StringBuilder) {
             if (typeParameters.isNotEmpty()) {
                 data.append("<")
-                val iterator = typeParameters.iterator()
+                konst iterator = typeParameters.iterator()
                 while (iterator.hasNext()) {
-                    val typeParameterDescriptor = iterator.next()
+                    konst typeParameterDescriptor = iterator.next()
                     visitTypeParameterDescriptor(typeParameterDescriptor, data)
                     if (iterator.hasNext()) {
                         data.append(", ")
@@ -490,9 +490,9 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
 
         override fun visitTypeParameterDescriptor(typeParameter: TypeParameterDescriptor, data: StringBuilder) {
             data.append(renderName(typeParameter, true))
-            val upperBoundsCount = typeParameter.upperBounds.size
+            konst upperBoundsCount = typeParameter.upperBounds.size
             if (upperBoundsCount >= 1) {
-                val upperBound = typeParameter.upperBounds.iterator().next()
+                konst upperBound = typeParameter.upperBounds.iterator().next()
                 if (!KotlinBuiltIns.isDefaultBound(upperBound)) {
                     data.append(" : ").append(renderType(upperBound))
                 }
@@ -529,12 +529,12 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         override fun visitConstructorDescriptor(constructor: ConstructorDescriptor, data: StringBuilder) {
             data.append("constructor").append(" ")
 
-            val classDescriptor = constructor.containingDeclaration
+            konst classDescriptor = constructor.containingDeclaration
 
             data.append(renderName(classDescriptor))
             visitTypeParameters(constructor.typeParameters, data)
 
-            visitValueParameters(constructor.valueParameters, data)
+            visitValueParameters(constructor.konstueParameters, data)
 
             renderWhereSuffix(constructor.typeParameters, data)
         }
@@ -544,7 +544,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
         }
 
         override fun visitPropertyDescriptor(property: PropertyDescriptor, data: StringBuilder) {
-            data.append(if (property.isVar) "var" else "val").append(" ")
+            data.append(if (property.isVar) "var" else "konst").append(" ")
 
             if (property !is SyntheticPropertyDescriptor) {
                 visitTypeParameters(property.typeParameters, data)
@@ -552,7 +552,7 @@ class PsiVisualizer(private val file: KtFile, analysisResult: AnalysisResult) : 
             }
 
             //render receiver
-            val receiver = when (property) {
+            konst receiver = when (property) {
                 is SyntheticPropertyDescriptor -> renderReceiver(property.getMethod, data)
                 else -> renderReceiver(property, data)
             }

@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 
 class C {
     companion object {
-        val visited = mutableListOf<Int>()
+        konst visited = mutableListOf<Int>()
 
         init {
             for (i in 1..5) {
@@ -19,7 +19,7 @@ class C {
         }
     }
 
-    val visited = mutableListOf<Int>()
+    konst visited = mutableListOf<Int>()
 
     init {
         for (i in 1..5) {
@@ -33,7 +33,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     assertEquals(listOf(1, 3), C.visited)
     assertEquals(listOf(2, 3), c.visited)
     return "OK"

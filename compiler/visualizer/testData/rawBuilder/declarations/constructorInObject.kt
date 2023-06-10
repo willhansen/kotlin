@@ -19,6 +19,6 @@ class C {
 
 //  Any
 //  │
-val anonObject = object {
+konst anonObject = object {
     constructor()
 }

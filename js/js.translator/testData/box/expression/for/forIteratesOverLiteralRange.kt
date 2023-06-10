@@ -4,9 +4,9 @@ package foo
 
 var global: String = ""
 
-fun up(s: String, value: Int): Int {
+fun up(s: String, konstue: Int): Int {
     global += s
-    return value
+    return konstue
 }
 
 fun box(): String {
@@ -22,7 +22,7 @@ fun box(): String {
         n++
     assertEquals(4, n)
 
-    // Evaluation order
+    // Ekonstuation order
     for (i in up("A", 0)..up("B", 5)) {
     }
     assertEquals("AB", global)

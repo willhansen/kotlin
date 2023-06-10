@@ -12,10 +12,10 @@ import test.*
 
 class A {
 
-    private val prop : String = "O"
+    private konst prop : String = "O"
         get() = call {field + "K" }
 
-    private val prop2 : String = "O"
+    private konst prop2 : String = "O"
         get() = call { call {field + "K" } }
 
     fun test1(): String {
@@ -29,7 +29,7 @@ class A {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.test1() != "OK") return "fail 1: ${a.test1()}"
     return a.test2()
 }

@@ -31,7 +31,7 @@ object FirNativeObjCRefinementOverridesChecker : FirClassChecker() {
 
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
         // We just need to check intersection overrides, all other declarations are checked by FirNativeObjCRefinementChecker
-        val firTypeScope = declaration.unsubstitutedScope(context)
+        konst firTypeScope = declaration.unsubstitutedScope(context)
         firTypeScope.processAllFunctions { symbol ->
             if (!symbol.isIntersectionOverride) return@processAllFunctions
             check(firTypeScope, symbol, declaration, context, reporter, emptyList(), emptyList())
@@ -51,14 +51,14 @@ object FirNativeObjCRefinementOverridesChecker : FirClassChecker() {
         objCAnnotations: List<FirAnnotation>,
         swiftAnnotations: List<FirAnnotation>
     ) {
-        val overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(memberSymbol)
+        konst overriddenMemberSymbols = firTypeScope.retrieveDirectOverriddenOf(memberSymbol)
         if (overriddenMemberSymbols.isEmpty()) return
         var isHiddenFromObjC = objCAnnotations.isNotEmpty()
         var isRefinedInSwift = swiftAnnotations.isNotEmpty()
-        val supersNotHiddenFromObjC = mutableListOf<FirCallableSymbol<*>>()
-        val supersNotRefinedInSwift = mutableListOf<FirCallableSymbol<*>>()
+        konst supersNotHiddenFromObjC = mutableListOf<FirCallableSymbol<*>>()
+        konst supersNotRefinedInSwift = mutableListOf<FirCallableSymbol<*>>()
         for (symbol in overriddenMemberSymbols) {
-            val (superIsHiddenFromObjC, superIsRefinedInSwift) = symbol.inheritsRefinedAnnotations(context.session, firTypeScope)
+            konst (superIsHiddenFromObjC, superIsRefinedInSwift) = symbol.inheritsRefinedAnnotations(context.session, firTypeScope)
             if (superIsHiddenFromObjC) isHiddenFromObjC = true else supersNotHiddenFromObjC.add(symbol)
             if (superIsRefinedInSwift) isRefinedInSwift = true else supersNotRefinedInSwift.add(symbol)
         }
@@ -71,12 +71,12 @@ object FirNativeObjCRefinementOverridesChecker : FirClassChecker() {
     }
 
     private fun FirCallableSymbol<*>.inheritsRefinedAnnotations(session: FirSession, firTypeScope: FirTypeScope): Pair<Boolean, Boolean> {
-        val (hasObjC, hasSwift) = hasRefinedAnnotations(session)
+        konst (hasObjC, hasSwift) = hasRefinedAnnotations(session)
         if (hasObjC && hasSwift) return true to true
         // Note: `checkMember` requires all overridden symbols to be either refined or not refined.
-        val overriddenMemberSymbol = firTypeScope.retrieveDirectOverriddenOf(this).firstOrNull()
+        konst overriddenMemberSymbol = firTypeScope.retrieveDirectOverriddenOf(this).firstOrNull()
             ?: return hasObjC to hasSwift
-        val (inheritsObjC, inheritsSwift) = overriddenMemberSymbol.inheritsRefinedAnnotations(session, firTypeScope)
+        konst (inheritsObjC, inheritsSwift) = overriddenMemberSymbol.inheritsRefinedAnnotations(session, firTypeScope)
         return (hasObjC || inheritsObjC) to (hasSwift || inheritsSwift)
     }
 
@@ -84,7 +84,7 @@ object FirNativeObjCRefinementOverridesChecker : FirClassChecker() {
         var hasObjC = false
         var hasSwift = false
         for (annotation in resolvedAnnotationsWithClassIds) {
-            val metaAnnotations = annotation.toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty()
+            konst metaAnnotations = annotation.toAnnotationClassLikeSymbol(session)?.resolvedAnnotationsWithClassIds.orEmpty()
             for (metaAnnotation in metaAnnotations) {
                 when (metaAnnotation.toAnnotationClassId(session)) {
                     hidesFromObjCClassId -> {
@@ -109,7 +109,7 @@ object FirNativeObjCRefinementOverridesChecker : FirClassChecker() {
         notRefinedSupers: List<FirCallableSymbol<*>>,
         context: CheckerContext
     ) {
-        val containingDeclarations = notRefinedSupers.mapNotNull { it.containingClassLookupTag()?.toFirRegularClassSymbol(context.session) }
+        konst containingDeclarations = notRefinedSupers.mapNotNull { it.containingClassLookupTag()?.toFirRegularClassSymbol(context.session) }
         if (annotations.isEmpty()) {
             reportOn(declaration.source, INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE, declaration.symbol, containingDeclarations, context)
         } else {

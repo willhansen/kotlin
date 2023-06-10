@@ -12,22 +12,22 @@
 
 
 class A() {
-    val list = arrayListOf(1, 2, 3)
-    operator fun set(a: Int, value: Int) {
-        this.list.add(a, value)
+    konst list = arrayListOf(1, 2, 3)
+    operator fun set(a: Int, konstue: Int) {
+        this.list.add(a, konstue)
     }
 
-    operator fun set(a: Int, b: Int, value: Int) {
-        this.list.add(a, value)
-        this.list.add(b, value)
+    operator fun set(a: Int, b: Int, konstue: Int) {
+        this.list.add(a, konstue)
+        this.list.add(b, konstue)
     }
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a[0] = 0
 
-    val b = A()
+    konst b = A()
     b[0, 2] = 0
 
     if (a.list == arrayListOf(0, 1, 2, 3) &&

@@ -10,7 +10,7 @@ expect class NumericalLauncher() : Launcher {
 }
 
 fun main(args: Array<String>) {
-    val launcher = NumericalLauncher()
+    konst launcher = NumericalLauncher()
     BenchmarksRunner.runBenchmarks(args, { arguments: BenchmarkArguments ->
         if (arguments is BaseBenchmarkArguments) {
             launcher.launch(arguments.warmup, arguments.repeat, arguments.prefix,

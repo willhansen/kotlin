@@ -3,7 +3,7 @@
 // ISSUE: KT-35967
 
 interface A {
-    val s: String
+    konst s: String
 }
 fun test(list: List<A>) {
     sequence {

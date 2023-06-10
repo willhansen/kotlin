@@ -16,13 +16,13 @@ object EmptyClass {}
 
 
 object ClassWithConstants {
-    const val A = 1
-    const val B = 2L
-    const val C = 3.0
-    const val D = 4.0f
-    const val E = 5.toShort()
-    const val F = 6.toByte()
-    const val G = "8"
+    const konst A = 1
+    const konst B = 2L
+    const konst C = 3.0
+    const konst D = 4.0f
+    const konst E = 5.toShort()
+    const konst F = 6.toByte()
+    const konst G = "8"
 }
 
 @Test fun checkInit() {
@@ -51,24 +51,24 @@ object ClassWithConstructor {
     init {
         ClassWithConstructorInitialized += 1
     }
-    const val A = 1;
+    const konst A = 1;
 }
 
 @Test fun checkConstructor() {
     assertEquals(0, ClassWithConstructorInitialized)
     assertEquals(1, ClassWithConstructor.A)
     assertEquals(0, ClassWithConstructorInitialized)
-    val unused1 = ClassWithConstructor
+    konst unused1 = ClassWithConstructor
     assertEquals(1, unused1.A)
     assertEquals(1, ClassWithConstructorInitialized)
-    val unused2 = ClassWithConstructor
+    konst unused2 = ClassWithConstructor
     assertEquals(1, unused2.A)
     assertEquals(1, ClassWithConstructorInitialized)
     assertFalse(ClassWithConstructor.isPermanent())
 }
 
 object ClassWithField {
-    val x = 4
+    konst x = 4
 }
 
 @Test fun checkField() {
@@ -76,7 +76,7 @@ object ClassWithField {
 }
 
 object ClassWithComputedField {
-    val x : Int
+    konst x : Int
        get() = 4
 }
 

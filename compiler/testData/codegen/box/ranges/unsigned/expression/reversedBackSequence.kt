@@ -4,8 +4,8 @@
 
 
 fun box(): String {
-    val list1 = ArrayList<UInt>()
-    val range1 = (5u downTo 3u).reversed()
+    konst list1 = ArrayList<UInt>()
+    konst range1 = (5u downTo 3u).reversed()
     for (i in range1) {
         list1.add(i)
         if (list1.size > 23) break
@@ -14,8 +14,8 @@ fun box(): String {
         return "Wrong elements for (5u downTo 3u).reversed(): $list1"
     }
 
-    val list2 = ArrayList<UInt>()
-    val range2 = (5u.toUByte() downTo 3u.toUByte()).reversed()
+    konst list2 = ArrayList<UInt>()
+    konst range2 = (5u.toUByte() downTo 3u.toUByte()).reversed()
     for (i in range2) {
         list2.add(i)
         if (list2.size > 23) break
@@ -24,8 +24,8 @@ fun box(): String {
         return "Wrong elements for (5u.toUByte() downTo 3u.toUByte()).reversed(): $list2"
     }
 
-    val list3 = ArrayList<UInt>()
-    val range3 = (5u.toUShort() downTo 3u.toUShort()).reversed()
+    konst list3 = ArrayList<UInt>()
+    konst range3 = (5u.toUShort() downTo 3u.toUShort()).reversed()
     for (i in range3) {
         list3.add(i)
         if (list3.size > 23) break
@@ -34,8 +34,8 @@ fun box(): String {
         return "Wrong elements for (5u.toUShort() downTo 3u.toUShort()).reversed(): $list3"
     }
 
-    val list4 = ArrayList<ULong>()
-    val range4 = (5uL downTo 3uL).reversed()
+    konst list4 = ArrayList<ULong>()
+    konst range4 = (5uL downTo 3uL).reversed()
     for (i in range4) {
         list4.add(i)
         if (list4.size > 23) break

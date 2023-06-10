@@ -10,14 +10,14 @@ class A {
     get(): Int {
       return <this>.#it.plus(other = 10).toInt()
     }
-    set(value: Int) {
-      <this>.#it = value.minus(other = 10).toDouble()
+    set(konstue: Int) {
+      <this>.#it = konstue.minus(other = 10).toDouble()
     }
 
 }
 
 fun test() {
-  val a: A = A()
-  val it: Int = A().<get-it>().and(other = 10)
-  a.<set-it>(value = it)
+  konst a: A = A()
+  konst it: Int = A().<get-it>().and(other = 10)
+  a.<set-it>(konstue = it)
 }

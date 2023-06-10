@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 
 fun main() {
-    val appendable = <!NO_COMPANION_OBJECT!>Appendable<!>
-    val stringBuilder = <!NO_COMPANION_OBJECT!>StringBuilder<!>
-    val exception = <!NO_COMPANION_OBJECT!>IllegalStateException<!>
+    konst appendable = <!NO_COMPANION_OBJECT!>Appendable<!>
+    konst stringBuilder = <!NO_COMPANION_OBJECT!>StringBuilder<!>
+    konst exception = <!NO_COMPANION_OBJECT!>IllegalStateException<!>
 }

@@ -1,6 +1,6 @@
 fun test() {
-  val nullStr: @FlexibleNullability String? = nullString()
-  val nonnullStr: @FlexibleNullability String? = nonnullString()
+  konst nullStr: @FlexibleNullability String? = nullString()
+  konst nonnullStr: @FlexibleNullability String? = nonnullString()
   nullStr.foo<@FlexibleNullability String?>() /*~> Unit */
   nonnullStr.foo<@FlexibleNullability String?>() /*~> Unit */
   nullStr.fooN<@FlexibleNullability String?>() /*~> Unit */

@@ -5,12 +5,12 @@ class A {
         }
     }
     companion object {
-        val B = ""
+        konst B = ""
     }
 }
 
-val ab = A.B // property
-val abc = A.B.C // object
+konst ab = A.B // property
+konst abc = A.B.C // object
 
 object D {
     class E {
@@ -20,25 +20,25 @@ object D {
     }
 }
 
-val D.E get() = ""
+konst D.E get() = ""
 
-val def = D.E.F // object
+konst def = D.E.F // object
 // See KT-46409
-val de = D.E
+konst de = D.E
 
 enum class G {
     H;
 
     fun foo() {
-        values()
+        konstues()
     }
 
     companion object {
-        val H = ""
+        konst H = ""
 
-        fun values(): Int = 42
+        fun konstues(): Int = 42
     }
 }
 
-val gh = G.H // companion property
-val gv = G.values() // static function
+konst gh = G.H // companion property
+konst gv = G.konstues() // static function

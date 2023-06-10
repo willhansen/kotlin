@@ -52,12 +52,12 @@ typealias SyntheticModulesOrigin = org.jetbrains.kotlin.library.metadata.Synthet
     "This property has been moved from package org.jetbrains.kotlin.descriptors.konan to package org.jetbrains.kotlin.library.metadata",
     ReplaceWith("klibModuleOrigin", "org.jetbrains.kotlin.library.metadata.klibModuleOrigin")
 )
-inline val ModuleDescriptor.klibModuleOrigin: org.jetbrains.kotlin.library.metadata.KlibModuleOrigin
+inline konst ModuleDescriptor.klibModuleOrigin: org.jetbrains.kotlin.library.metadata.KlibModuleOrigin
     get() = klibModuleOrigin
 
 @Deprecated(
     "This property has been moved from package org.jetbrains.kotlin.descriptors.konan to package org.jetbrains.kotlin.library.metadata",
     ReplaceWith("kotlinLibrary", "org.jetbrains.kotlin.library.metadata.kotlinLibrary")
 )
-inline val ModuleDescriptor.kotlinLibrary: KotlinLibrary
+inline konst ModuleDescriptor.kotlinLibrary: KotlinLibrary
     get() = kotlinLibrary

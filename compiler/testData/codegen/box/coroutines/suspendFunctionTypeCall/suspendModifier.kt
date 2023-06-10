@@ -12,7 +12,7 @@ suspend fun suspendHere(v: String): String = suspendCoroutineUninterceptedOrRetu
 suspend fun foo(): String {
     var a = "OK"
     var i = 0
-    val x = suspend {
+    konst x = suspend {
         suspendHere(a[i++].toString())
     }
 

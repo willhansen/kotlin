@@ -10,7 +10,7 @@ KtSuccessCallInfo:
         name = instance
         receiverType = null
         returnType = KtSubClass
-        symbol = val instance: KtSubClass
+        symbol = konst instance: KtSubClass
         callableIdIfNonLocal = /KtClass.instance
     simpleAccess = Read:
 

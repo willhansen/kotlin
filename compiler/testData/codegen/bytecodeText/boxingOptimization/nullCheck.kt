@@ -11,7 +11,7 @@ fun bar() {
     foo(1, 2) { x -> if (x != null) 1 else 2 }
 }
 
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)
 // 0 IFNULL
 // 1 IFNONNULL

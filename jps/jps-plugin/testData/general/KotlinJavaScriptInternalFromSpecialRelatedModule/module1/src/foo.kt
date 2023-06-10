@@ -14,14 +14,14 @@ internal annotation class InternalFunctionAnnotation1()
 
 internal open class InternalClass1
 
-abstract class ClassA1(internal val member: Int)
+abstract class ClassA1(internal konst member: Int)
 
 abstract class ClassB1 {
-    internal abstract val member: Int
+    internal abstract konst member: Int
     internal fun func() = 1
 }
 
-internal val internalProp = 1
+internal konst internalProp = 1
 
 internal fun internalFun() {}
 

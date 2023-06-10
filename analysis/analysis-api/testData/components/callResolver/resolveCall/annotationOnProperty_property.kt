@@ -1,4 +1,4 @@
 annotation class Anno
 
 <expr>@property:Anno</expr>
-val p : Int = 42
+konst p : Int = 42

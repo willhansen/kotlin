@@ -21,7 +21,7 @@ import org.jetbrains.org.objectweb.asm.commons.SignatureRemapper
 import org.jetbrains.org.objectweb.asm.signature.SignatureReader
 import org.jetbrains.org.objectweb.asm.signature.SignatureVisitor
 
-class AsmTypeRemapper(val typeRemapper: TypeRemapper, val result: InlineResult) : Remapper() {
+class AsmTypeRemapper(konst typeRemapper: TypeRemapper, konst result: InlineResult) : Remapper() {
     override fun map(type: String): String {
         return typeRemapper.map(type)
     }
@@ -30,7 +30,7 @@ class AsmTypeRemapper(val typeRemapper: TypeRemapper, val result: InlineResult) 
         return object : SignatureRemapper(v, this) {
             override fun visitTypeVariable(name: String) {
                 /*TODO try to erase absent type variable*/
-                val mapping = typeRemapper.mapTypeParameter(name)
+                konst mapping = typeRemapper.mapTypeParameter(name)
                 if (mapping != null) {
                     // TODO: what is this condition
                     if (mapping.isReified) {

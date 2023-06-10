@@ -7,6 +7,6 @@ fun <T> getT(): T = null!!
 fun getString() = ""
 
 fun test() {
-    val a : () -> String = ::getString
-    val b : () -> String = ::getT
+    konst a : () -> String = ::getString
+    konst b : () -> String = ::getT
 }

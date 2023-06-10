@@ -29,14 +29,14 @@ internal fun TestProject.resolveIdeDependencies(
 }
 
 internal fun TestProject.readIdeDependencies(subproject: String? = null): IdeaKotlinDependenciesContainer {
-    val subprojectPathPrefix = subproject?.removePrefix(":")?.takeIf { it.isNotEmpty() }?.replace(":", "/")?.plus("/") ?: ""
-    val output = projectPath.resolve("${subprojectPathPrefix}build/ide/dependencies/proto").toFile()
+    konst subprojectPathPrefix = subproject?.removePrefix(":")?.takeIf { it.isNotEmpty() }?.replace(":", "/")?.plus("/") ?: ""
+    konst output = projectPath.resolve("${subprojectPathPrefix}build/ide/dependencies/proto").toFile()
     if (!output.isDirectory) fail("Missing output directory: $output")
 
-    val dependenciesBySourceSetName = output.listFiles().orEmpty().associate { sourceSetDirectory ->
+    konst dependenciesBySourceSetName = output.listFiles().orEmpty().associate { sourceSetDirectory ->
         if (!sourceSetDirectory.isDirectory) fail("Expected $sourceSetDirectory to be directory")
-        val serializedDependencyFiles = sourceSetDirectory.listFiles().orEmpty()
-        val deserializedDependencies = serializedDependencyFiles.map { dependencyFile ->
+        konst serializedDependencyFiles = sourceSetDirectory.listFiles().orEmpty()
+        konst deserializedDependencies = serializedDependencyFiles.map { dependencyFile ->
             deserializeIdeaKotlinDependencyOrFail(dependencyFile)
         }
 
@@ -53,8 +53,8 @@ private fun deserializeIdeaKotlinDependencyOrFail(file: File): IdeaKotlinDepende
 }
 
 private object GradleIntegrationTestIdeaKotlinSerializationContext : IdeaKotlinSerializationContext {
-    override val extrasSerializationExtension = kotlinExtrasSerialization
-    override val logger: IdeaKotlinSerializationLogger = object : IdeaKotlinSerializationLogger {
+    override konst extrasSerializationExtension = kotlinExtrasSerialization
+    override konst logger: IdeaKotlinSerializationLogger = object : IdeaKotlinSerializationLogger {
         override fun report(severity: IdeaKotlinSerializationLogger.Severity, message: String, cause: Throwable?) {
             println("$severity: $message")
             if (cause != null) println(cause.stackTraceToString())
@@ -63,7 +63,7 @@ private object GradleIntegrationTestIdeaKotlinSerializationContext : IdeaKotlinS
 }
 
 class IdeaKotlinDependenciesContainer(
-    private val dependencies: Map<String, Set<IdeaKotlinDependency>>
+    private konst dependencies: Map<String, Set<IdeaKotlinDependency>>
 ) {
     operator fun get(sourceSetName: String) = dependencies[sourceSetName]
         ?: fail("SourceSet with name $sourceSetName not found. Found: ${dependencies.keys}")

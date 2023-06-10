@@ -4,13 +4,13 @@ fun test() {
     js(<!JSCODE_NO_JAVASCRIPT_PRODUCED!>"""
                """<!>)
 
-    val empty = ""
+    konst empty = ""
     js(<!JSCODE_NO_JAVASCRIPT_PRODUCED!>empty<!>)
 
-    val whitespace = "  "
+    konst whitespace = "  "
     js(<!JSCODE_NO_JAVASCRIPT_PRODUCED!>whitespace<!>)
 
-    val multiline = """
+    konst multiline = """
     """
     js(<!JSCODE_NO_JAVASCRIPT_PRODUCED!>multiline<!>)
 }

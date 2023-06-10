@@ -6,7 +6,7 @@
 import kotlin.UninitializedPropertyAccessException
 
 fun box(): String {
-    val o = object {
+    konst o = object {
         lateinit var x: Any
     }
     try {

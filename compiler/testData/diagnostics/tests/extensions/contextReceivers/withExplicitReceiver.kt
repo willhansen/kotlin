@@ -9,7 +9,7 @@ context(A)
 fun B.f() {}
 
 fun main() {
-    val b = B()
+    konst b = B()
 
     b.<!NO_CONTEXT_RECEIVER!>f<!>()
     with(A()) {

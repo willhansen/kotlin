@@ -21,13 +21,13 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
 class LombokConstructorsGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
-    private val parts: List<AbstractConstructorGeneratorPart<*>> = listOf(
+    private konst parts: List<AbstractConstructorGeneratorPart<*>> = listOf(
         AllArgsConstructorGeneratorPart(session),
         NoArgsConstructorGeneratorPart(session),
         RequiredArgsConstructorGeneratorPart(session)
     )
 
-    private val cache: FirCache<FirClassSymbol<*>, Collection<FirFunctionSymbol<*>>?, Nothing?> =
+    private konst cache: FirCache<FirClassSymbol<*>, Collection<FirFunctionSymbol<*>>?, Nothing?> =
         session.firCachesFactory.createCache(::createConstructors)
 
     override fun getCallableNamesForClass(classSymbol: FirClassSymbol<*>, context: MemberGenerationContext): Set<Name> {
@@ -41,13 +41,13 @@ class LombokConstructorsGenerator(session: FirSession) : FirDeclarationGeneratio
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner ?: return emptyList()
+        konst owner = context?.owner ?: return emptyList()
         if (!owner.isSuitableJavaClass()) return emptyList()
         return cache.getValue(owner)?.filterIsInstance<FirNamedFunctionSymbol>().orEmpty()
     }
 
     override fun generateConstructors(context: MemberGenerationContext): List<FirConstructorSymbol> {
-        val owner = context.owner
+        konst owner = context.owner
         if (!owner.isSuitableJavaClass()) return emptyList()
         return cache.getValue(owner)?.filterIsInstance<FirConstructorSymbol>().orEmpty()
     }

@@ -1,8 +1,8 @@
-data class MyClass(val unusedField: String) {
+data class MyClass(konst unusedField: String) {
     class NestedClass {
         inline fun foo() = field
 
-        val field = 5
+        konst field = 5
     }
 
     fun unusedFunction() = -1

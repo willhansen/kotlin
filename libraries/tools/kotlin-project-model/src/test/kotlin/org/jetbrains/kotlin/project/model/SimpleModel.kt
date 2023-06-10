@@ -44,8 +44,8 @@ fun KpmBasicFragment.refines(fragment: KpmBasicFragment) {
 
 // ---
 
-internal data class ModuleBundle(val modules: List<KpmBasicModule>) {
-    val main: KpmBasicModule
+internal data class ModuleBundle(konst modules: List<KpmBasicModule>) {
+    konst main: KpmBasicModule
         get() = modules.single { it.moduleIdentifier.moduleClassifier == null }
 
     operator fun get(modulePurpose: String): KpmBasicModule = when (modulePurpose) {
@@ -57,9 +57,9 @@ internal data class ModuleBundle(val modules: List<KpmBasicModule>) {
 internal fun simpleModuleBundle(name: String): ModuleBundle {
     fun createModule(purpose: String): KpmBasicModule =
         module(name, purpose.takeIf { it != "main" }).apply {
-            val common = fragment("common")
+            konst common = fragment("common")
 
-            val (jvm, js, linux) = listOf("jvm", "js", "linux").map { platform ->
+            konst (jvm, js, linux) = listOf("jvm", "js", "linux").map { platform ->
                 variant(platform).apply {
                     variantAttributes[KotlinPlatformTypeAttribute] = when (platform) {
                         "jvm" -> KotlinPlatformTypeAttribute.JVM
@@ -84,8 +84,8 @@ internal fun simpleModuleBundle(name: String): ModuleBundle {
             }
         }
 
-    val main = createModule("main")
-    val test = createModule("test")
+    konst main = createModule("main")
+    konst test = createModule("test")
 
     test.fragment("common").depends(main)
 

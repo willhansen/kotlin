@@ -34,15 +34,15 @@ import kotlin.reflect.jvm.internal.calls.toJvmDescriptor
 internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContainer {
     abstract inner class Data {
         // This is stored here on a soft reference to prevent GC from destroying the weak reference to it in the moduleByClassLoader cache
-        val moduleData: RuntimeModuleData by ReflectProperties.lazySoft {
+        konst moduleData: RuntimeModuleData by ReflectProperties.lazySoft {
             jClass.getOrCreateModule()
         }
     }
 
-    protected open val methodOwner: Class<*>
+    protected open konst methodOwner: Class<*>
         get() = jClass.wrapperByPrimitive ?: jClass
 
-    abstract val constructorDescriptors: Collection<ConstructorDescriptor>
+    abstract konst constructorDescriptors: Collection<ConstructorDescriptor>
 
     abstract fun getProperties(name: Name): Collection<PropertyDescriptor>
 
@@ -51,7 +51,7 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     abstract fun getLocalProperty(index: Int): PropertyDescriptor?
 
     protected fun getMembers(scope: MemberScope, belonginess: MemberBelonginess): Collection<KCallableImpl<*>> {
-        val visitor = object : CreateKCallableVisitor(this) {
+        konst visitor = object : CreateKCallableVisitor(this) {
             override fun visitConstructorDescriptor(descriptor: ConstructorDescriptor, data: Unit): KCallableImpl<*> =
                 throw IllegalStateException("No constructors should appear here: $descriptor")
         }
@@ -72,14 +72,14 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     }
 
     fun findPropertyDescriptor(name: String, signature: String): PropertyDescriptor {
-        val match = LOCAL_PROPERTY_SIGNATURE.matchEntire(signature)
+        konst match = LOCAL_PROPERTY_SIGNATURE.matchEntire(signature)
         if (match != null) {
-            val (number) = match.destructured
+            konst (number) = match.destructured
             return getLocalProperty(number.toInt())
                 ?: throw KotlinReflectionInternalError("Local property #$number not found in $jClass")
         }
 
-        val properties = getProperties(Name.identifier(name))
+        konst properties = getProperties(Name.identifier(name))
             .filter { descriptor ->
                 RuntimeTypeMapper.mapPropertySignature(descriptor).asString() == signature
             }
@@ -95,20 +95,20 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
             // between the two. So we assume that one of the properties must have a greater visibility than the other, and try loading
             // that one first.
             // Note that this heuristic may result in _incorrect behavior_ if a KProperty object for a less visible property is obtained
-            // by other means (through reflection API) and then the soft-referenced descriptor instance for that property is invalidated
+            // by other means (through reflection API) and then the soft-referenced descriptor instance for that property is inkonstidated
             // because there's no more memory left. In that case the KProperty object will now point to another (more visible) property.
             // TODO: consider writing additional info (besides signature) to property reference objects to distinguish them in this case
 
-            val mostVisibleProperties = properties
+            konst mostVisibleProperties = properties
                 .groupBy { it.visibility }
                 .toSortedMap { first, second ->
                     DescriptorVisibilities.compare(first, second) ?: 0
-                }.values.last()
+                }.konstues.last()
             if (mostVisibleProperties.size == 1) {
                 return mostVisibleProperties.first()
             }
 
-            val allMembers = getProperties(Name.identifier(name)).joinToString("\n") { descriptor ->
+            konst allMembers = getProperties(Name.identifier(name)).joinToString("\n") { descriptor ->
                 DescriptorRenderer.DEBUG_TEXT.render(descriptor) + " | " + RuntimeTypeMapper.mapPropertySignature(descriptor).asString()
             }
             throw KotlinReflectionInternalError(
@@ -121,15 +121,15 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     }
 
     fun findFunctionDescriptor(name: String, signature: String): FunctionDescriptor {
-        val members: Collection<FunctionDescriptor>
-        val functions: List<FunctionDescriptor>
+        konst members: Collection<FunctionDescriptor>
+        konst functions: List<FunctionDescriptor>
         if (name == "<init>") {
             members = constructorDescriptors.toList()
             functions = members.filter { descriptor ->
-                val descriptorSignature = if (descriptor.isPrimary && descriptor.containingDeclaration.isMultiFieldValueClass()) {
-                    val initial = RuntimeTypeMapper.mapSignature(descriptor).asString()
+                konst descriptorSignature = if (descriptor.isPrimary && descriptor.containingDeclaration.isMultiFieldValueClass()) {
+                    konst initial = RuntimeTypeMapper.mapSignature(descriptor).asString()
                     require(initial.startsWith("constructor-impl") && initial.endsWith(")V")) {
-                        "Invalid signature of $descriptor: $initial"
+                        "Inkonstid signature of $descriptor: $initial"
                     }
                     initial.removeSuffix("V") + descriptor.containingDeclaration.toJvmDescriptor()
                 } else {
@@ -143,7 +143,7 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
         }
 
         if (functions.size != 1) {
-            val allMembers = members.joinToString("\n") { descriptor ->
+            konst allMembers = members.joinToString("\n") { descriptor ->
                 DescriptorRenderer.DEBUG_TEXT.render(descriptor) + " | " + RuntimeTypeMapper.mapSignature(descriptor).asString()
             }
             throw KotlinReflectionInternalError(
@@ -173,7 +173,7 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
 
             // Static "$default" methods should be looked up in each DefaultImpls class, see KT-33430
             if (isStaticDefault) {
-                val defaultImpls = superInterface.safeClassLoader.tryLoadClass(superInterface.name + JvmAbi.DEFAULT_IMPLS_SUFFIX)
+                konst defaultImpls = superInterface.safeClassLoader.tryLoadClass(superInterface.name + JvmAbi.DEFAULT_IMPLS_SUFFIX)
                 if (defaultImpls != null) {
                     parameterTypes[0] = superInterface
                     defaultImpls.tryGetMethod(name, parameterTypes, returnType)?.let { return it }
@@ -186,14 +186,14 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
 
     private fun Class<*>.tryGetMethod(name: String, parameterTypes: Array<Class<*>>, returnType: Class<*>): Method? =
         try {
-            val result = getDeclaredMethod(name, *parameterTypes)
+            konst result = getDeclaredMethod(name, *parameterTypes)
 
             if (result.returnType == returnType) result
             else {
                 // If we've found a method with an unexpected return type, it's likely that there are several methods in this class
                 // with the given parameter types and Java reflection API has returned not the one we're looking for.
                 // Falling back to enumerating all methods in the class in this (rather rare) case.
-                // Example: class A(val x: Int) { fun getX(): String = ... }
+                // Example: class A(konst x: Int) { fun getX(): String = ... }
                 declaredMethods.firstOrNull { method ->
                     method.name == name && method.returnType == returnType && method.parameterTypes.contentEquals(parameterTypes)
                 }
@@ -212,8 +212,8 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     fun findMethodBySignature(name: String, desc: String): Method? {
         if (name == "<init>") return null
 
-        val parameterTypes = loadParameterTypes(desc).toTypedArray()
-        val returnType = loadReturnType(desc)
+        konst parameterTypes = loadParameterTypes(desc).toTypedArray()
+        konst returnType = loadReturnType(desc)
         methodOwner.lookupMethod(name, parameterTypes, returnType, false)?.let { return it }
 
         // Methods from java.lang.Object (equals, hashCode, toString) cannot be found in the interface via
@@ -228,9 +228,9 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     fun findDefaultMethod(name: String, desc: String, isMember: Boolean): Method? {
         if (name == "<init>") return null
 
-        val parameterTypes = arrayListOf<Class<*>>()
+        konst parameterTypes = arrayListOf<Class<*>>()
         if (isMember) {
-            // Note that this value is replaced inside the lookupMethod call below, for each class/interface in the hierarchy.
+            // Note that this konstue is replaced inside the lookupMethod call below, for each class/interface in the hierarchy.
             parameterTypes.add(jClass)
         }
         addParametersAndMasks(parameterTypes, desc, false)
@@ -249,14 +249,14 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
         })
 
     private fun addParametersAndMasks(result: MutableList<Class<*>>, desc: String, isConstructor: Boolean) {
-        val valueParameters = loadParameterTypes(desc)
-        result.addAll(valueParameters)
-        repeat((valueParameters.size + Integer.SIZE - 1) / Integer.SIZE) {
+        konst konstueParameters = loadParameterTypes(desc)
+        result.addAll(konstueParameters)
+        repeat((konstueParameters.size + Integer.SIZE - 1) / Integer.SIZE) {
             result.add(Integer.TYPE)
         }
 
         if (isConstructor) {
-            // Constructors that include the value class as an argument will include DEFAULT_CONSTRUCTOR_MARKER as an argument,
+            // Constructors that include the konstue class as an argument will include DEFAULT_CONSTRUCTOR_MARKER as an argument,
             // regardless of whether there is a default argument.
             // On the other hand, when searching for the default constructor,
             // DEFAULT_CONSTRUCTOR_MARKER needs to be present only at the end, so it is removed here.
@@ -266,7 +266,7 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
     }
 
     private fun loadParameterTypes(desc: String): List<Class<*>> {
-        val result = arrayListOf<Class<*>>()
+        konst result = arrayListOf<Class<*>>()
 
         var begin = 1
         while (desc[begin] != ')') {
@@ -306,8 +306,8 @@ internal abstract class KDeclarationContainerImpl : ClassBasedDeclarationContain
         parseType(desc, desc.indexOf(')') + 1, desc.length)
 
     companion object {
-        private val DEFAULT_CONSTRUCTOR_MARKER = Class.forName("kotlin.jvm.internal.DefaultConstructorMarker")
+        private konst DEFAULT_CONSTRUCTOR_MARKER = Class.forName("kotlin.jvm.internal.DefaultConstructorMarker")
 
-        internal val LOCAL_PROPERTY_SIGNATURE = "<v#(\\d+)>".toRegex()
+        internal konst LOCAL_PROPERTY_SIGNATURE = "<v#(\\d+)>".toRegex()
     }
 }

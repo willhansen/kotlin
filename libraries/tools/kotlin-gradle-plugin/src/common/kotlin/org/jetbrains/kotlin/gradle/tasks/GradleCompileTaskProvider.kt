@@ -32,36 +32,36 @@ abstract class GradleCompileTaskProvider @Inject constructor(
 ) {
 
     @get:Internal
-    val path: Provider<String> = objectFactory.property(task.path)
+    konst path: Provider<String> = objectFactory.property(task.path)
 
     @get:Internal
-    val logger: Provider<Logger> = objectFactory.property(task.logger)
+    konst logger: Provider<Logger> = objectFactory.property(task.logger)
 
     @get:Internal
-    val buildDir: DirectoryProperty = projectLayout.buildDirectory
+    konst buildDir: DirectoryProperty = projectLayout.buildDirectory
 
     @get:Internal
-    val projectDir: Provider<File> = objectFactory
+    konst projectDir: Provider<File> = objectFactory
         .property(project.rootProject.projectDir)
 
     @get:Internal
-    val projectCacheDir: Provider<File> = objectFactory
+    konst projectCacheDir: Provider<File> = objectFactory
         .property(gradle.projectCacheDir)
 
     @get:Internal
-    val sessionsDir: Provider<File> = objectFactory
+    konst sessionsDir: Provider<File> = objectFactory
         .property(GradleCompilerRunner.sessionsDir(gradle.projectCacheDir))
 
     @get:Internal
-    val projectName: Provider<String> = objectFactory
+    konst projectName: Provider<String> = objectFactory
         .property(project.rootProject.name.normalizeForFlagFile())
 
     @get:Internal
-    val buildModulesInfo: Provider<out IncrementalModuleInfoProvider> = objectFactory
+    konst buildModulesInfo: Provider<out IncrementalModuleInfoProvider> = objectFactory
         .property(incrementalModuleInfoProvider)
 
     @get:Internal
-    val errorsFile: Provider<File?> = objectFactory
+    konst errorsFile: Provider<File?> = objectFactory
         .property(
             gradle.rootProject.rootDir.resolve(".gradle/kotlin/errors/").also { it.mkdirs() }
                 .resolve("errors-${System.currentTimeMillis()}.log"))

@@ -70,17 +70,17 @@ import java.io.File
 
 fun IrDeclaration.getJvmNameFromAnnotation(): String? {
     // TODO lower @JvmName?
-    val const = getAnnotation(DescriptorUtils.JVM_NAME)?.getValueArgument(0) as? IrConst<*> ?: return null
-    val value = const.value as? String ?: return null
+    konst const = getAnnotation(DescriptorUtils.JVM_NAME)?.getValueArgument(0) as? IrConst<*> ?: return null
+    konst konstue = const.konstue as? String ?: return null
     return when (origin) {
-        IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER -> "$value\$default"
+        IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER -> "$konstue\$default"
         JvmLoweredDeclarationOrigin.FOR_INLINE_STATE_MACHINE_TEMPLATE,
-        JvmLoweredDeclarationOrigin.FOR_INLINE_STATE_MACHINE_TEMPLATE_CAPTURES_CROSSINLINE -> "$value$FOR_INLINE_SUFFIX"
-        else -> value
+        JvmLoweredDeclarationOrigin.FOR_INLINE_STATE_MACHINE_TEMPLATE_CAPTURES_CROSSINLINE -> "$konstue$FOR_INLINE_SUFFIX"
+        else -> konstue
     }
 }
 
-val IrFunction.propertyIfAccessor: IrDeclaration
+konst IrFunction.propertyIfAccessor: IrDeclaration
     get() = (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner ?: this
 
 fun IrFunction.isSimpleFunctionCompiledToJvmDefault(jvmDefaultMode: JvmDefaultMode): Boolean {
@@ -93,7 +93,7 @@ fun IrSimpleFunction.isCompiledToJvmDefault(jvmDefaultMode: JvmDefaultMode): Boo
     }
     if (origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB) return false
     if (hasJvmDefault()) return true
-    when (val klass = parentAsClass) {
+    when (konst klass = parentAsClass) {
         is IrLazyClass -> klass.classProto?.let {
             return JvmProtoBufUtil.isNewPlaceForBodyGeneration(it)
         }
@@ -115,7 +115,7 @@ fun IrDeclaration.isInCurrentModule(): Boolean =
 
 // Determine if the IrExpression is smartcast, and if so, if it is cast from higher than nullable target types.
 // This is needed to pinpoint exceptional treatment of IEEE754 floating point comparisons, where proper IEEE
-// comparisons are used "if values are statically known to be of primitive numeric types", taken to mean as
+// comparisons are used "if konstues are statically known to be of primitive numeric types", taken to mean as
 // "not learned through smartcasting".
 fun IrExpression.isSmartcastFromHigherThanNullable(context: JvmBackendContext): Boolean {
     return when (this) {
@@ -124,7 +124,7 @@ fun IrExpression.isSmartcastFromHigherThanNullable(context: JvmBackendContext): 
         is IrGetValue -> {
             // Check if the variable initializer is smartcast. In FIR, if the subject of a `when` is smartcast,
             // the IMPLICIT_CAST is in the initializer of the variable for the subject.
-            val variable = (symbol as? IrVariableSymbol)?.owner ?: return false
+            konst variable = (symbol as? IrVariableSymbol)?.owner ?: return false
             !variable.isVar && variable.initializer?.isSmartcastFromHigherThanNullable(context) == true
         }
         else -> false
@@ -181,7 +181,7 @@ fun createDelegatingCallWithPlaceholderTypeArguments(
         existingCall.type,
         redirectTarget.symbol,
         typeArgumentsCount = redirectTarget.typeParameters.size,
-        valueArgumentsCount = redirectTarget.valueParameters.size,
+        konstueArgumentsCount = redirectTarget.konstueParameters.size,
         origin = existingCall.origin
     ).apply {
         copyFromWithPlaceholderTypeArguments(existingCall, irBuiltIns)
@@ -215,7 +215,7 @@ fun firstSuperMethodFromKotlin(
     implementation: IrSimpleFunction
 ): IrSimpleFunctionSymbol {
     return override.overriddenSymbols.firstOrNull {
-        val owner = it.owner
+        konst owner = it.owner
         owner.modality != Modality.ABSTRACT && owner.overrides(implementation)
     } ?: error("No super method found for: ${override.render()}")
 }
@@ -223,8 +223,8 @@ fun firstSuperMethodFromKotlin(
 // MethodSignatureMapper uses the corresponding property of a function to determine correct names
 // for property accessors.
 fun IrSimpleFunction.copyCorrespondingPropertyFrom(source: IrSimpleFunction) {
-    val property = source.correspondingPropertySymbol?.owner ?: return
-    val target = this
+    konst property = source.correspondingPropertySymbol?.owner ?: return
+    konst target = this
 
     correspondingPropertySymbol = factory.buildProperty {
         name = property.name
@@ -243,26 +243,26 @@ fun IrSimpleFunction.copyCorrespondingPropertyFrom(source: IrSimpleFunction) {
 fun IrProperty.needsAccessor(accessor: IrSimpleFunction): Boolean = when {
     // Properties in annotation classes become abstract methods named after the property.
     (parent as? IrClass)?.kind == ClassKind.ANNOTATION_CLASS -> true
-    // Multi-field value class accessors must always be added.
+    // Multi-field konstue class accessors must always be added.
     accessor.isGetter && accessor.contextReceiverParametersCount == 0 && accessor.extensionReceiverParameter == null &&
             accessor.returnType.needsMfvcFlattening() -> true
     accessor.isSetter && accessor.contextReceiverParametersCount == 0 && accessor.extensionReceiverParameter == null &&
-            accessor.valueParameters.single().type.needsMfvcFlattening() -> true
+            accessor.konstueParameters.single().type.needsMfvcFlattening() -> true
     // @JvmField properties have no getters/setters
     resolveFakeOverride()?.backingField?.hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME) == true -> false
     // We do not produce default accessors for private fields
     else -> accessor.origin != IrDeclarationOrigin.DEFAULT_PROPERTY_ACCESSOR || !DescriptorVisibilities.isPrivate(accessor.visibility)
 }
 
-val IrDeclaration.isStaticInlineClassReplacement: Boolean
+konst IrDeclaration.isStaticInlineClassReplacement: Boolean
     get() = origin == JvmLoweredDeclarationOrigin.STATIC_INLINE_CLASS_REPLACEMENT
             || origin == JvmLoweredDeclarationOrigin.STATIC_INLINE_CLASS_CONSTRUCTOR
 
-val IrDeclaration.isStaticMultiFieldValueClassReplacement: Boolean
+konst IrDeclaration.isStaticMultiFieldValueClassReplacement: Boolean
     get() = origin == JvmLoweredDeclarationOrigin.STATIC_MULTI_FIELD_VALUE_CLASS_REPLACEMENT
             || origin == JvmLoweredDeclarationOrigin.STATIC_MULTI_FIELD_VALUE_CLASS_CONSTRUCTOR
 
-val IrDeclaration.isStaticValueClassReplacement: Boolean
+konst IrDeclaration.isStaticValueClassReplacement: Boolean
     get() = isStaticMultiFieldValueClassReplacement || isStaticInlineClassReplacement
 
 // On the IR backend we represent raw types as star projected types with a special synthetic annotation.
@@ -279,7 +279,7 @@ fun IrClass.rawType(context: JvmBackendContext): IrType =
 fun IrSimpleType.isRawType(): Boolean =
     hasAnnotation(JvmSymbols.RAW_TYPE_ANNOTATION_FQ_NAME)
 
-val IrClass.isJvmInterface: Boolean
+konst IrClass.isJvmInterface: Boolean
     get() = isAnnotationClass || isInterface
 
 fun IrClass.getSingleAbstractMethod(): IrSimpleFunction? =
@@ -289,7 +289,7 @@ fun IrFile.getKtFile(): KtFile? =
     (fileEntry as? PsiIrFileEntry)?.psiFile as KtFile?
 
 fun IrFile.getIoFile(): File? =
-    when (val fe = fileEntry) {
+    when (konst fe = fileEntry) {
         is PsiIrFileEntry -> fe.psiFile.virtualFile?.path?.let(::File)
         else -> File(fe.name)
     }
@@ -306,11 +306,11 @@ inline fun IrElement.hasChild(crossinline block: (IrElement) -> Boolean): Boolea
     return result
 }
 
-val IrClass.isSyntheticSingleton: Boolean
+konst IrClass.isSyntheticSingleton: Boolean
     get() = (origin == JvmLoweredDeclarationOrigin.LAMBDA_IMPL
             || origin == JvmLoweredDeclarationOrigin.FUNCTION_REFERENCE_IMPL
             || origin == JvmLoweredDeclarationOrigin.GENERATED_PROPERTY_REFERENCE)
-            && primaryConstructor!!.valueParameters.isEmpty()
+            && primaryConstructor!!.konstueParameters.isEmpty()
 
 fun IrSimpleFunction.suspendFunctionOriginal(): IrSimpleFunction =
     if (isSuspend &&
@@ -357,15 +357,15 @@ fun IrClass.hasAssertionsDisabledField(context: JvmBackendContext) =
     fields.any { it.isAssertionsDisabledField(context) }
 
 fun IrField.constantValue(): IrConst<*>? {
-    val value = initializer?.expression as? IrConst<*> ?: return null
+    konst konstue = initializer?.expression as? IrConst<*> ?: return null
 
     // JVM has a ConstantValue attribute which does two things:
     //   1. allows the field to be inlined into other modules;
     //   2. implicitly generates an initialization of that field in <clinit>
     // It is only allowed on final fields of primitive/string types. Java applies it whenever possible; Kotlin only applies it to
-    // `const val`s to avoid making values part of the library's ABI unless explicitly requested by the author.
-    val implicitConst = isFinal && isStatic && origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
-    return if (implicitConst || correspondingPropertySymbol?.owner?.isConst == true) value else null
+    // `const konst`s to avoid making konstues part of the library's ABI unless explicitly requested by the author.
+    konst implicitConst = isFinal && isStatic && origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB
+    return if (implicitConst || correspondingPropertySymbol?.owner?.isConst == true) konstue else null
 }
 
 fun IrBuilderWithScope.kClassReference(classType: IrType): IrClassReference =
@@ -398,13 +398,13 @@ fun findSuperDeclaration(function: IrSimpleFunction, isSuperCall: Boolean, jvmDe
     var current = function
     while (current.isFakeOverride) {
         // TODO: probably isJvmInterface instead of isInterface, here and in KotlinTypeMapper
-        val classCallable = current.overriddenSymbols.firstOrNull { !it.owner.parentAsClass.isInterface }?.owner
+        konst classCallable = current.overriddenSymbols.firstOrNull { !it.owner.parentAsClass.isInterface }?.owner
         if (classCallable != null) {
             current = classCallable
             continue
         }
         if (isSuperCall && !current.parentAsClass.isInterface) {
-            val overridden = current.resolveFakeOverride()
+            konst overridden = current.resolveFakeOverride()
             if (overridden != null && (overridden.isMethodOfAny() || !overridden.isCompiledToJvmDefault(jvmDefaultMode))) {
                 return current
             }
@@ -419,7 +419,7 @@ fun findSuperDeclaration(function: IrSimpleFunction, isSuperCall: Boolean, jvmDe
 fun IrMemberAccessExpression<*>.getIntConstArgument(i: Int): Int =
     getValueArgument(i)?.let {
         if (it is IrConst<*> && it.kind == IrConstKind.Int)
-            it.value as Int
+            it.konstue as Int
         else
             null
     } ?: throw AssertionError("Value argument #$i should be an Int const: ${dump()}")
@@ -427,7 +427,7 @@ fun IrMemberAccessExpression<*>.getIntConstArgument(i: Int): Int =
 fun IrMemberAccessExpression<*>.getStringConstArgument(i: Int): String =
     getValueArgument(i)?.let {
         if (it is IrConst<*> && it.kind == IrConstKind.String)
-            it.value as String
+            it.konstue as String
         else
             null
     } ?: throw AssertionError("Value argument #$i should be a String const: ${dump()}")
@@ -435,46 +435,46 @@ fun IrMemberAccessExpression<*>.getStringConstArgument(i: Int): String =
 fun IrMemberAccessExpression<*>.getBooleanConstArgument(i: Int): Boolean =
     getValueArgument(i)?.let {
         if (it is IrConst<*> && it.kind == IrConstKind.Boolean)
-            it.value as Boolean
+            it.konstue as Boolean
         else
             null
     } ?: throw AssertionError("Value argument #$i should be a Boolean const: ${dump()}")
 
-val IrDeclaration.fileParent: IrFile
+konst IrDeclaration.fileParent: IrFile
     get() = fileParentOrNull ?: error("No file parent: $this")
 
 @Suppress("RecursivePropertyAccessor")
-val IrDeclaration.fileParentOrNull: IrFile?
-    get() = when (val myParent = parent) {
+konst IrDeclaration.fileParentOrNull: IrFile?
+    get() = when (konst myParent = parent) {
         is IrFile -> myParent
         is IrDeclaration -> myParent.fileParentOrNull
         else -> null
     }
 
-private val RETENTION_PARAMETER_NAME = Name.identifier("value")
+private konst RETENTION_PARAMETER_NAME = Name.identifier("konstue")
 
 fun IrClass.getAnnotationRetention(): KotlinRetention? {
-    val retentionArgument =
+    konst retentionArgument =
         getAnnotation(StandardNames.FqNames.retention)?.getValueArgument(RETENTION_PARAMETER_NAME)
                 as? IrGetEnumValue ?: return null
-    val retentionArgumentValue = retentionArgument.symbol.owner
-    return KotlinRetention.valueOf(retentionArgumentValue.name.asString())
+    konst retentionArgumentValue = retentionArgument.symbol.owner
+    return KotlinRetention.konstueOf(retentionArgumentValue.name.asString())
 }
 
 // To be generalized to IrMemberAccessExpression as soon as properties get symbols.
 fun IrConstructorCall.getValueArgument(name: Name): IrExpression? {
-    val index = symbol.owner.valueParameters.find { it.name == name }?.index ?: return null
+    konst index = symbol.owner.konstueParameters.find { it.name == name }?.index ?: return null
     return getValueArgument(index)
 }
 
-val IrMemberWithContainerSource.parentClassId: ClassId?
+konst IrMemberWithContainerSource.parentClassId: ClassId?
     get() = ((this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner ?: this).let { directMember ->
         (directMember.containerSource as? JvmPackagePartSource)?.classId ?: (directMember.parent as? IrClass)?.classId
     }
 
 // Translated into IR-based terms from classifierDescriptor?.classId
-private val IrClass.classId: ClassId?
-    get() = when (val parent = parent) {
+private konst IrClass.classId: ClassId?
+    get() = when (konst parent = parent) {
         is IrExternalPackageFragment -> ClassId(parent.packageFqName, name)
         // TODO: there's `context.classNameOverride`; theoretically it's only relevant for top-level members,
         //       where `containerSource` is a `JvmPackagePartSource` anyway, but I'm not 100% sure.
@@ -482,35 +482,35 @@ private val IrClass.classId: ClassId?
         else -> null
     }
 
-val IrClass.isOptionalAnnotationClass: Boolean
+konst IrClass.isOptionalAnnotationClass: Boolean
     get() = kind == ClassKind.ANNOTATION_CLASS &&
             isExpect &&
             hasAnnotation(OptionalAnnotationUtil.OPTIONAL_EXPECTATION_FQ_NAME)
 
 fun IrFunctionAccessExpression.receiverAndArgs(): List<IrExpression> {
     return (arrayListOf(this.dispatchReceiver, this.extensionReceiver) +
-            symbol.owner.valueParameters.mapIndexed { i, _ -> getValueArgument(i) }).filterNotNull()
+            symbol.owner.konstueParameters.mapIndexed { i, _ -> getValueArgument(i) }).filterNotNull()
 }
 
 fun classFileContainsMethod(classId: ClassId, function: IrFunction, context: JvmBackendContext): Boolean? {
-    val originalSignature = context.defaultMethodSignatureMapper.mapAsmMethod(function)
-    val originalDescriptor = originalSignature.descriptor
-    val descriptor = if (function.isSuspend)
+    konst originalSignature = context.defaultMethodSignatureMapper.mapAsmMethod(function)
+    konst originalDescriptor = originalSignature.descriptor
+    konst descriptor = if (function.isSuspend)
         listOf(*Type.getArgumentTypes(originalDescriptor), Type.getObjectType("kotlin/coroutines/Continuation"))
             .joinToString(prefix = "(", postfix = ")", separator = "") + AsmTypes.OBJECT_TYPE
     else originalDescriptor
     return org.jetbrains.kotlin.codegen.classFileContainsMethod(classId, context.state, Method(originalSignature.name, descriptor))
 }
 
-val DeclarationDescriptorWithSource.psiElement: PsiElement?
+konst DeclarationDescriptorWithSource.psiElement: PsiElement?
     get() = (source as? PsiSourceElement)?.psi
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-val IrDeclaration.psiElement: PsiElement?
+konst IrDeclaration.psiElement: PsiElement?
     get() = (descriptor as? DeclarationDescriptorWithSource)?.psiElement
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
-val IrMemberAccessExpression<*>.psiElement: PsiElement?
+konst IrMemberAccessExpression<*>.psiElement: PsiElement?
     get() = (symbol.descriptor.original as? DeclarationDescriptorWithSource)?.psiElement
 
 fun IrFunction.extensionReceiverName(state: GenerationState): String {
@@ -523,7 +523,7 @@ fun IrFunction.extensionReceiverName(state: GenerationState): String {
             return it.name.asString()
         }
     }
-    val callableName = (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner?.name ?: name
+    konst callableName = (this as? IrSimpleFunction)?.correspondingPropertySymbol?.owner?.name ?: name
     return if (callableName.isSpecial || !Name.isValidIdentifier(callableName.asString()))
         AsmUtil.RECEIVER_PARAMETER_NAME
     else

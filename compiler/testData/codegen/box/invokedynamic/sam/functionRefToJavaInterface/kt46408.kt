@@ -31,7 +31,7 @@ class Container {
 }
 
 fun box(): String {
-    val c = Container()
+    konst c = Container()
     UserAc().doStuff(c)
     return c.id.ok
 }

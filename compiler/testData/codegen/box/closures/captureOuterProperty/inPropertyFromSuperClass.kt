@@ -2,11 +2,11 @@ interface T {
     fun result(): String
 }
 
-open class B(val x: String)
+open class B(konst x: String)
 
 class A : B("OK") {
     fun foo() = object : T {
-        val bar = x
+        konst bar = x
 
         override fun result() = bar
     }

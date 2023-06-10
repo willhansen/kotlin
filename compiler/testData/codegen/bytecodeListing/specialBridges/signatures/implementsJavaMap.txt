@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<<A:Ljava/lang/Object;B:Ljava/lang/Object;>Ljava/lang/Object;LJMap<TA;TB;>;>  JMapImpl {
     // source: 'implementsJavaMap.kt'
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TA;>;> method keySet(): java.util.Set
     public <null> method <init>(): void
@@ -19,7 +19,7 @@ public abstract class<<A:Ljava/lang/Object;B:Ljava/lang/Object;>Ljava/lang/Objec
 @kotlin.Metadata
 public abstract class<<A:Ljava/lang/Number;B:Ljava/lang/Object;>Ljava/lang/Object;LJMapN<TA;TB;>;>  JMapNImpl {
     // source: 'implementsJavaMap.kt'
-    public bridge final <()Ljava/util/Collection<TB;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TB;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TA;TB;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TA;>;> method keySet(): java.util.Set
     public bridge final <(Ljava/lang/Object;)TB;> method get(p0: java.lang.Object): java.lang.Object

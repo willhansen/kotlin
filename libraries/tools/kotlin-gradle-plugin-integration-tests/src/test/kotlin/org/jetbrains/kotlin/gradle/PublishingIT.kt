@@ -22,7 +22,7 @@ import kotlin.test.assertTrue
 @JvmGradlePluginTests
 class PublishingIT : KGPBaseTest() {
 
-    private val String.fullProjectName get() = "publishing/$this"
+    private konst String.fullProjectName get() = "publishing/$this"
 
     @DisplayName("Should allow to publish library in project which is using BOM (KT-47444)")
     @GradleTest
@@ -56,7 +56,7 @@ class PublishingIT : KGPBaseTest() {
             )
 
             build("publish") {
-                val pomText = projectPath
+                konst pomText = projectPath
                     .resolve("build/repo/com/example/simpleProject/1.0/simpleProject-1.0.pom")
                     .readText()
                     .replace("\\s+|\\n".toRegex(), "")
@@ -105,9 +105,9 @@ class PublishingIT : KGPBaseTest() {
                 "publishAllPublicationsToMavenRepository",
             ) {
                 assertTasksExecuted(":compileKotlin", ":compileTestKotlin")
-                val pomLines = projectPath.resolve("build/publications/myLibrary/pom-default.xml").readLines()
-                val stdlibVersionLineNumber = pomLines.indexOfFirst { "<artifactId>kotlin-stdlib-jdk8</artifactId>" in it } + 1
-                val versionLine = pomLines[stdlibVersionLineNumber]
+                konst pomLines = projectPath.resolve("build/publications/myLibrary/pom-default.xml").readLines()
+                konst stdlibVersionLineNumber = pomLines.indexOfFirst { "<artifactId>kotlin-stdlib-jdk8</artifactId>" in it } + 1
+                konst versionLine = pomLines[stdlibVersionLineNumber]
                 assertTrue { "<version>${buildOptions.kotlinVersion}</version>" in versionLine }
             }
         }
@@ -130,10 +130,10 @@ class PublishingIT : KGPBaseTest() {
             )
         ) {
             build("uploadArchives") {
-                val publishingDir = localRepoDir.resolve("org.jetbrains.kotlin.example").resolve("1.0.0")
+                konst publishingDir = localRepoDir.resolve("org.jetbrains.kotlin.example").resolve("1.0.0")
                 assertDirectoryExists(publishingDir)
                 assertFileExists(publishingDir.resolve("org.jetbrains.kotlin.example-1.0.0.jar"))
-                val pomFile = publishingDir.resolve("org.jetbrains.kotlin.example-1.0.0.pom")
+                konst pomFile = publishingDir.resolve("org.jetbrains.kotlin.example-1.0.0.pom")
                 assertFileExists(pomFile)
                 assertFileContains(
                     pomFile,

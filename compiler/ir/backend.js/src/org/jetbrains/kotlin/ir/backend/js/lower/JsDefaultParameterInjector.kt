@@ -48,21 +48,21 @@ class JsDefaultParameterInjector(context: JsIrBackendContext) :
     }
 
     override fun IrBlockBuilder.argumentsForCall(expression: IrFunctionAccessExpression, stubFunction: IrFunction): Map<IrValueParameter, IrExpression?> {
-        val startOffset = expression.startOffset
-        val endOffset = expression.endOffset
+        konst startOffset = expression.startOffset
+        konst endOffset = expression.endOffset
 
         return buildMap {
             stubFunction.dispatchReceiverParameter?.let { put(it, expression.dispatchReceiver) }
             stubFunction.extensionReceiverParameter?.let { put(it, expression.extensionReceiver) }
-            for (i in 0 until expression.valueArgumentsCount) {
-                val declaredParameter = stubFunction.valueParameters[i]
-                val actualArgument = expression.getValueArgument(i)
+            for (i in 0 until expression.konstueArgumentsCount) {
+                konst declaredParameter = stubFunction.konstueParameters[i]
+                konst actualArgument = expression.getValueArgument(i)
                 put(declaredParameter, actualArgument ?: nullConst(startOffset, endOffset, declaredParameter))
             }
 
             if (expression is IrCall && stubFunction.hasSuperContextParameter()) {
                 put(
-                    stubFunction.valueParameters[expression.valueArgumentsCount],
+                    stubFunction.konstueParameters[expression.konstueArgumentsCount],
                     expression.superQualifierSymbol?.prototypeOf() ?: this@JsDefaultParameterInjector.context.getVoid()
                 )
             }
@@ -70,7 +70,7 @@ class JsDefaultParameterInjector(context: JsIrBackendContext) :
     }
 
     private fun IrFunction.hasSuperContextParameter(): Boolean {
-        return valueParameters.lastOrNull()?.origin == JsLoweredDeclarationOrigin.JS_SUPER_CONTEXT_PARAMETER
+        return konstueParameters.lastOrNull()?.origin == JsLoweredDeclarationOrigin.JS_SUPER_CONTEXT_PARAMETER
     }
 
     private fun IrClassSymbol.prototypeOf(): IrExpression {

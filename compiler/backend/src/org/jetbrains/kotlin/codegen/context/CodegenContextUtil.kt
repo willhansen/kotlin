@@ -37,7 +37,7 @@ object CodegenContextUtil {
     @JvmStatic
     fun isImplementationOwner(owner: CodegenContext<*>, descriptor: DeclarationDescriptor): Boolean {
         if (descriptor is CallableDescriptor && descriptor.containingDeclaration.isInlineClass()) {
-            val isInErasedMethod = owner.contextKind == OwnerKind.ERASED_INLINE_CLASS
+            konst isInErasedMethod = owner.contextKind == OwnerKind.ERASED_INLINE_CLASS
 
             if (descriptor.isGetterOfUnderlyingPropertyOfInlineClass()) {
                 return !isInErasedMethod

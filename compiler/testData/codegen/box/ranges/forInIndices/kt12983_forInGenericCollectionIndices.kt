@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-abstract class BaseGeneric<T>(val t: T) {
+abstract class BaseGeneric<T>(konst t: T) {
     abstract fun iterate()
 }
 
@@ -16,7 +16,7 @@ class Derived<T>(t: List<T>) : BaseGeneric<List<T>>(t) {
 }
 
 fun box(): String {
-    val t = Derived(listOf("", "", "", ""))
+    konst t = Derived(listOf("", "", "", ""))
     t.iterate()
     return if (t.test == 1234) "OK" else "Fail: ${t.test}"
 }

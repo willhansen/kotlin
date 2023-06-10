@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.samWithReceiver.k2
 
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 
-class FirSamWithReceiverExtensionRegistrar(private val annotations: List<String>) : FirExtensionRegistrar() {
+class FirSamWithReceiverExtensionRegistrar(private konst annotations: List<String>) : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +::FirSamWithReceiverConventionTransformer.bind(annotations)
     }

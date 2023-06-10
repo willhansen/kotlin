@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.noarg.fir
 
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 
-class FirNoArgExtensionRegistrar(val noArgAnnotationFqNames: List<String>) : FirExtensionRegistrar() {
+class FirNoArgExtensionRegistrar(konst noArgAnnotationFqNames: List<String>) : FirExtensionRegistrar() {
     override fun ExtensionRegistrarContext.configurePlugin() {
         +FirNoArgPredicateMatcher.getFactory(noArgAnnotationFqNames)
         +::FirNoArgCheckers

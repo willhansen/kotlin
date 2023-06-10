@@ -21,14 +21,14 @@ public enum FooImpl {
     ENTRY("OK") {
         @Override
         public String getResult() {
-            return value;
+            return konstue;
         }
     };
 
-    protected final String value;
+    protected final String konstue;
 
-    public FooImpl(String value) {
-        this.value = value;
+    public FooImpl(String konstue) {
+        this.konstue = konstue;
     }
 
     public abstract String getResult();

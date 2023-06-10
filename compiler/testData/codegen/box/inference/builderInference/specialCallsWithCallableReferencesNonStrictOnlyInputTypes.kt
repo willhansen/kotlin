@@ -8,7 +8,7 @@ import kotlin.experimental.ExperimentalTypeInference
 @OptIn(ExperimentalTypeInference::class)
 fun <R> scopedFlow(block: suspend CoroutineScope.(FlowCollector<R>) -> Unit): Flow<R> =
     flow {
-        val collector = this
+        konst collector = this
         flowScope { block(collector) }
     }
 

@@ -16,7 +16,7 @@ abstract class NumberLikeCompare(
     left: StackValue,
     right: StackValue,
     operandType: Type,
-    private val opToken: IElementType
+    private konst opToken: IElementType
 ) : BranchedValue(left, right, operandType, NumberCompare.getNumberCompareOpcode(opToken)) {
     override fun patchOpcode(opcode: Int, v: InstructionAdapter): Int =
         NumberCompare.patchOpcode(opcode, v, opToken, operandType)
@@ -28,12 +28,12 @@ abstract class SafeCallFusedWithPrimitiveEqualityBase(
     left: StackValue,
     right: StackValue
 ) : NumberLikeCompare(left, right, operandType, opToken) {
-    private val trueIfEqual = opToken == KtTokens.EQEQ || opToken == KtTokens.EQEQEQ
+    private konst trueIfEqual = opToken == KtTokens.EQEQ || opToken == KtTokens.EQEQEQ
 
     protected abstract fun cleanupOnNullReceiver(v: InstructionAdapter)
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
-        val endLabel = Label()
+        konst endLabel = Label()
 
         arg1.put(operandType, v)
         arg2!!.put(operandType, v)
@@ -49,15 +49,15 @@ abstract class SafeCallFusedWithPrimitiveEqualityBase(
     }
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {
-        val falseLabel = Label()
-        val endLabel = Label()
+        konst falseLabel = Label()
+        konst endLabel = Label()
 
         arg1.put(operandType, v)
         arg2!!.put(operandType, v)
         v.visitJumpInsn(patchOpcode(opcode, v), falseLabel)
 
         if (!trueIfEqual) {
-            val trueLabel = Label()
+            konst trueLabel = Label()
             v.goTo(trueLabel)
             cleanupOnNullReceiver(v)
             v.mark(trueLabel)
@@ -84,8 +84,8 @@ class SafeCallToPrimitiveEquality(
     operandType: Type,
     left: StackValue,
     right: StackValue,
-    private val safeReceiverType: Type,
-    private val safeReceiverIsNull: Label
+    private konst safeReceiverType: Type,
+    private konst safeReceiverIsNull: Label
 ) : SafeCallFusedWithPrimitiveEqualityBase(opToken, operandType, left, right) {
     override fun cleanupOnNullReceiver(v: InstructionAdapter) {
         v.mark(safeReceiverIsNull)
@@ -99,8 +99,8 @@ class PrimitiveToSafeCallEquality(
     operandType: Type,
     left: StackValue,
     right: StackValue,
-    private val safeReceiverType: Type,
-    private val safeReceiverIsNull: Label
+    private konst safeReceiverType: Type,
+    private konst safeReceiverIsNull: Label
 ) : SafeCallFusedWithPrimitiveEqualityBase(opToken, operandType, left, right) {
     override fun cleanupOnNullReceiver(v: InstructionAdapter) {
         v.mark(safeReceiverIsNull)
@@ -114,13 +114,13 @@ class BoxedToPrimitiveEquality private constructor(
     leftBoxed: StackValue,
     rightPrimitive: StackValue,
     primitiveType: Type,
-    private val frameMap: FrameMap
+    private konst frameMap: FrameMap
 ) : NumberLikeCompare(leftBoxed, rightPrimitive, primitiveType, KtTokens.EQEQ) {
-    private val boxedType = arg1.type
+    private konst boxedType = arg1.type
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
         if (arg2!!.canHaveSideEffects()) {
-            val tmp = frameMap.enterTemp(operandType)
+            konst tmp = frameMap.enterTemp(operandType)
             doJump(
                 v, jumpLabel, jumpIfFalse,
                 {
@@ -147,8 +147,8 @@ class BoxedToPrimitiveEquality private constructor(
         putArg1: () -> Unit,
         putArg2: () -> Unit
     ) {
-        val notNullLabel = Label()
-        val endLabel = Label()
+        konst notNullLabel = Label()
+        konst endLabel = Label()
 
         putArg1()
         AsmUtil.dup(v, boxedType)
@@ -197,12 +197,12 @@ protected constructor(
     right: StackValue,
     primitiveType: Type
 ) : NumberLikeCompare(leftPrimitive, right, primitiveType, KtTokens.EQEQ) {
-    protected val primitiveType = leftPrimitive.type
-    protected val rightType = right.type
+    protected konst primitiveType = leftPrimitive.type
+    protected konst rightType = right.type
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
-        val notNullLabel = Label()
-        val endLabel = Label()
+        konst notNullLabel = Label()
+        konst endLabel = Label()
 
         arg1.put(primitiveType, v)
         arg2!!.put(rightType, v)
@@ -230,7 +230,7 @@ class PrimitiveToBoxedEquality private constructor(
     rightBoxed: StackValue,
     primitiveType: Type
 ) : PrimitiveToSomethingEquality(leftPrimitive, rightBoxed, primitiveType) {
-    private val boxedType = rightBoxed.type
+    private konst boxedType = rightBoxed.type
 
     override fun jumpIfCanCompareTopWithPrimitive(v: InstructionAdapter, label: Label) {
         v.ifnonnull(label)
@@ -265,7 +265,7 @@ class PrimitiveToObjectEquality private constructor(
     rightObject: StackValue,
     primitiveType: Type
 ) : PrimitiveToSomethingEquality(leftPrimitive, rightObject, primitiveType) {
-    private val boxedType = AsmUtil.boxType(primitiveType)
+    private konst boxedType = AsmUtil.boxType(primitiveType)
 
     override fun jumpIfCanCompareTopWithPrimitive(v: InstructionAdapter, label: Label) {
         v.instanceOf(boxedType)
@@ -298,7 +298,7 @@ class PrimitiveToObjectEquality private constructor(
 
 
 class Ieee754Equality private constructor(
-    private val frameMap: FrameMap,
+    private konst frameMap: FrameMap,
     left: StackValue,
     right: StackValue,
     operandType: Type
@@ -310,21 +310,21 @@ class Ieee754Equality private constructor(
         }
     }
 
-    private val leftType = left.type
-    private val rightType = right.type
+    private konst leftType = left.type
+    private konst rightType = right.type
 
     override fun condJump(jumpLabel: Label, v: InstructionAdapter, jumpIfFalse: Boolean) {
-        val leftIsBoxed = !AsmUtil.isPrimitive(leftType)
-        val rightIsBoxed = !AsmUtil.isPrimitive(rightType)
+        konst leftIsBoxed = !AsmUtil.isPrimitive(leftType)
+        konst rightIsBoxed = !AsmUtil.isPrimitive(rightType)
 
-        frameMap.evaluateOnce(arg1, leftType, v) { left ->
-            frameMap.evaluateOnce(arg2!!, rightType, v) { right ->
-                val endLabel = Label()
-                val bothNonNullLabel = Label()
+        frameMap.ekonstuateOnce(arg1, leftType, v) { left ->
+            frameMap.ekonstuateOnce(arg2!!, rightType, v) { right ->
+                konst endLabel = Label()
+                konst bothNonNullLabel = Label()
 
                 when {
                     leftIsBoxed && rightIsBoxed -> {
-                        val leftNonNullLabel = Label()
+                        konst leftNonNullLabel = Label()
                         left.put(leftType, v)
                         v.ifnonnull(leftNonNullLabel)
                         // left == null

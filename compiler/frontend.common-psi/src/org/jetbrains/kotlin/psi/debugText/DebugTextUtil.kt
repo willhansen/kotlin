@@ -17,7 +17,7 @@ fun KtElement.getDebugText(): String {
         return text
     }
     if (this is KtPackageDirective) {
-        val fqName = fqName
+        konst fqName = fqName
         if (fqName.isRoot) {
             return ""
         }
@@ -29,7 +29,7 @@ fun KtElement.getDebugText(): String {
 
 private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
 
-    private val LOG = Logger.getInstance(this::class.java)
+    private konst LOG = Logger.getInstance(this::class.java)
 
     override fun visitKtFile(file: KtFile, data: Unit?): String? {
         return "STUB file: ${file.name}"
@@ -43,8 +43,8 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
     }
 
     override fun visitImportDirective(importDirective: KtImportDirective, data: Unit?): String? {
-        val importPath = importDirective.importPath ?: return "import <invalid>"
-        val aliasStr = if (importPath.hasAlias()) " as " + importPath.alias!!.asString() else ""
+        konst importPath = importDirective.importPath ?: return "import <inkonstid>"
+        konst aliasStr = if (importPath.hasAlias()) " as " + importPath.alias!!.asString() else ""
         return "import ${importPath.pathStr}" + aliasStr
     }
 
@@ -136,9 +136,9 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
 
     override fun visitTypeProjection(typeProjection: KtTypeProjection, data: Unit?): String? {
         return buildText {
-            val token = typeProjection.projectionKind.token
-            appendInn(token?.value)
-            val typeReference = typeProjection.typeReference
+            konst token = typeProjection.projectionKind.token
+            appendInn(token?.konstue)
+            konst typeReference = typeProjection.typeReference
             if (token != null && typeReference != null) {
                 append(" ")
             }
@@ -154,7 +154,7 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
                     if (!first) {
                         append(" ")
                     }
-                    append(modifierKeywordToken.value)
+                    append(modifierKeywordToken.konstue)
                     first = false
                 }
             }
@@ -170,18 +170,18 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
     }
 
     override fun visitAnonymousInitializer(initializer: KtAnonymousInitializer, data: Unit?): String? {
-        val containingDeclaration = KtStubbedPsiUtil.getContainingDeclaration(initializer)
+        konst containingDeclaration = KtStubbedPsiUtil.getContainingDeclaration(initializer)
         return "initializer in " + (containingDeclaration?.getDebugText() ?: "...")
     }
 
     override fun visitClassBody(classBody: KtClassBody, data: Unit?): String? {
-        val containingDeclaration = KtStubbedPsiUtil.getContainingDeclaration(classBody)
+        konst containingDeclaration = KtStubbedPsiUtil.getContainingDeclaration(classBody)
         return "class body for " + (containingDeclaration?.getDebugText() ?: "...")
     }
 
     override fun visitPropertyAccessor(accessor: KtPropertyAccessor, data: Unit?): String? {
-        val containingProperty = KtStubbedPsiUtil.getContainingDeclaration(accessor, KtProperty::class.java)
-        val what = (if (accessor.isGetter) "getter" else "setter")
+        konst containingProperty = KtStubbedPsiUtil.getContainingDeclaration(accessor, KtProperty::class.java)
+        konst what = (if (accessor.isGetter) "getter" else "setter")
         return what + " for " + (containingProperty?.getDebugText() ?: "...")
     }
 
@@ -204,7 +204,7 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
             appendInn(function.modifierList, suffix = " ")
             append("fun ")
 
-            val typeParameterList = function.typeParameterList
+            konst typeParameterList = function.typeParameterList
             if (function.hasTypeParameterListBeforeFunctionName()) {
                 appendInn(typeParameterList, suffix = " ")
             }
@@ -213,7 +213,7 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
             if (!function.hasTypeParameterListBeforeFunctionName()) {
                 appendInn(typeParameterList)
             }
-            appendInn(function.valueParameterList)
+            appendInn(function.konstueParameterList)
             appendInn(function.typeReference, prefix = ": ")
             appendInn(function.typeConstraintList, prefix = " ")
         }
@@ -232,11 +232,11 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
     override fun visitParameter(parameter: KtParameter, data: Unit?): String? {
         return buildText {
             if (parameter.hasValOrVar()) {
-                if (parameter.isMutable) append("var ") else append("val ")
+                if (parameter.isMutable) append("var ") else append("konst ")
             }
-            val name = parameter.nameAsName
+            konst name = parameter.nameAsName
             appendInn(name)
-            val typeReference = parameter.typeReference
+            konst typeReference = parameter.typeReference
             if (typeReference != null && name != null) {
                 append(": ")
             }
@@ -248,7 +248,7 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
         return buildText {
             append("STUB: ")
             appendInn(property.modifierList, suffix = " ")
-            append(if (property.isVar) "var " else "val ")
+            append(if (property.isVar) "var " else "konst ")
             appendInn(property.nameAsName)
             appendInn(property.typeReference, prefix = ": ")
         }
@@ -262,13 +262,13 @@ private object DebugTextBuildingVisitor : KtVisitor<String, Unit>() {
     }
 
     fun buildText(body: StringBuilder.() -> Unit): String? {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.body()
         return sb.toString()
     }
 
     fun renderChildren(element: KtElementImplStub<*>, separator: String, prefix: String = "", postfix: String = ""): String? {
-        val childrenTexts = element.stub?.childrenStubs?.mapNotNull { (it?.psi as? KtElement)?.getDebugText() }
+        konst childrenTexts = element.stub?.childrenStubs?.mapNotNull { (it?.psi as? KtElement)?.getDebugText() }
         return childrenTexts?.joinToString(separator, prefix, postfix) ?: element.text
     }
 

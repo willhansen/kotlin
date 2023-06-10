@@ -5,7 +5,7 @@ interface ImmutableCollection<out E> : Collection<E> {
 }
 
 class ImmutableCollectionmpl<E> : ImmutableCollection<E> {
-    override val size: Int
+    override konst size: Int
         get() = throw UnsupportedOperationException()
 
     override fun contains(element: E): Boolean {

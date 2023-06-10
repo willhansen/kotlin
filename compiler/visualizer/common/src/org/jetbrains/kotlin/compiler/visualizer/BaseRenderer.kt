@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.compiler.visualizer
 import com.intellij.psi.PsiElement
 
 abstract class BaseRenderer {
-    private val annotations = mutableSetOf<Annotator.AnnotationInfo>()
-    private val unnecessaryData = mapOf(
+    private konst annotations = mutableSetOf<Annotator.AnnotationInfo>()
+    private konst unnecessaryData = mapOf(
         "kotlin/" to ""
     )
 
@@ -18,8 +18,8 @@ abstract class BaseRenderer {
         annotations.removeIf { it.range.startOffset == element.textRange.startOffset && deleteDuplicate }
 
         var textWithOutUnnecessaryData = annotationText
-        for ((key, value) in unnecessaryData) {
-            textWithOutUnnecessaryData = textWithOutUnnecessaryData.replace(key, value)
+        for ((key, konstue) in unnecessaryData) {
+            textWithOutUnnecessaryData = textWithOutUnnecessaryData.replace(key, konstue)
         }
         if (textWithOutUnnecessaryData != element.text && textWithOutUnnecessaryData.isNotEmpty()) {
             annotations.add(Annotator.AnnotationInfo(textWithOutUnnecessaryData, element.textRange))

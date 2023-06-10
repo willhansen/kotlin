@@ -3,14 +3,14 @@
 // WORKS_WHEN_VALUE_CLASS
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val x: T)
+konstue class S<T: String>(konst x: T)
 
 class Test {
     fun getO() = S("O")
-    val k = S("K")
+    konst k = S("K")
 }
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     return t.getO().x + t.k.x
 }

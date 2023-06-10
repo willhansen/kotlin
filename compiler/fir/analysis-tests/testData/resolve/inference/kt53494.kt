@@ -1,7 +1,7 @@
 // ISSUE: KT-53494
 
 open class C<out T>
-data class Wrapped<out T>(val value: T) : C<T>()
+data class Wrapped<out T>(konst konstue: T) : C<T>()
 object Default : C<Nothing>()
 
 inline fun <reified T> test_1(t: T?): C<T> {

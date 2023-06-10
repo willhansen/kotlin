@@ -2,18 +2,18 @@ plugins {
     id("base")
 }
 
-val aggregation by configurations.creating {
+konst aggregation by configurations.creating {
     isCanBeConsumed = false
     isCanBeResolved = true
     attributes {
         attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.DOCUMENTATION))
         attribute(Usage.USAGE_ATTRIBUTE, objects.named("custom-aggregation-for-reporting"))
-        attribute(Attribute.of("custom-attribute-type", String::class.java), "custom-attribute-value")
+        attribute(Attribute.of("custom-attribute-type", String::class.java), "custom-attribute-konstue")
     }
 }
 
 dependencies {
-    val projectPath = path
+    konst projectPath = path
     rootProject.subprojects {
         if (path != projectPath) {
             aggregation(project)
@@ -21,7 +21,7 @@ dependencies {
     }
 }
 
-val matches = aggregation.incoming.artifactView { lenient(true) }
+konst matches = aggregation.incoming.artifactView { lenient(true) }
 
 tasks.register("aggregate") {
     inputs.files(matches.files).withPropertyName("matches")

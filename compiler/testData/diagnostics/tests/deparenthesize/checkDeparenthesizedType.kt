@@ -12,10 +12,10 @@ fun test(i: Int?) {
         foo((<!REDUNDANT_LABEL_WARNING!>l3@<!> <!DEBUG_INFO_SMARTCAST!>i<!>))
     }
 
-    val a: Int = <!REDUNDANT_LABEL_WARNING!>l4@<!> <!TYPE_MISMATCH!>""<!>
-    val b: Int = (<!TYPE_MISMATCH!>""<!>)
-    val c: Int = checkSubtype<Int>(<!TYPE_MISMATCH!>""<!>)
-    val d: Int = <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>checkSubtype<Long>(<!TYPE_MISMATCH!>""<!>)<!>
+    konst a: Int = <!REDUNDANT_LABEL_WARNING!>l4@<!> <!TYPE_MISMATCH!>""<!>
+    konst b: Int = (<!TYPE_MISMATCH!>""<!>)
+    konst c: Int = checkSubtype<Int>(<!TYPE_MISMATCH!>""<!>)
+    konst d: Int = <!TYPE_MISMATCH, TYPE_MISMATCH, TYPE_MISMATCH!>checkSubtype<Long>(<!TYPE_MISMATCH!>""<!>)<!>
 
 
     foo(<!REDUNDANT_LABEL_WARNING!>l4@<!> <!TYPE_MISMATCH!>""<!>)

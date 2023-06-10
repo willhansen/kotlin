@@ -13,9 +13,9 @@ class ListBuilderTest {
     @Test
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
     fun toArray() {
-        val numberOfElements = 5
-        val expected = ArrayList<Int>().apply { addAll(0 until numberOfElements) }
-        val builder = ListBuilder<Int>().apply { addAll(0 until numberOfElements) }
+        konst numberOfElements = 5
+        konst expected = ArrayList<Int>().apply { addAll(0 until numberOfElements) }
+        konst builder = ListBuilder<Int>().apply { addAll(0 until numberOfElements) }
 
         fun testToArray(getter: List<Int>.() -> Array<Any?>) {
             assertTrue(expected.getter() contentEquals builder.getter())
@@ -28,18 +28,18 @@ class ListBuilderTest {
     @Test
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN", "UNCHECKED_CAST")
     fun toArrayDestination() {
-        val numberOfElements = 5
-        val expected = ArrayList<Int>().apply { addAll(0 until numberOfElements) }
-        val builder = ListBuilder<Int>().apply { addAll(0 until numberOfElements) }
+        konst numberOfElements = 5
+        konst expected = ArrayList<Int>().apply { addAll(0 until numberOfElements) }
+        konst builder = ListBuilder<Int>().apply { addAll(0 until numberOfElements) }
 
         fun testToArray(destSize: Int, getter: List<Int>.(Array<Int>) -> Array<Int>) {
             repeat(2) { index ->
-                val expectedDest = Array(destSize) { -it - 1 }
-                val builderDest = Array(destSize) { -it - 1 }
+                konst expectedDest = Array(destSize) { -it - 1 }
+                konst builderDest = Array(destSize) { -it - 1 }
 
-                val takeSubList = index == 1
-                val expectedResult = (if (!takeSubList) expected else expected.subList(2, 4)).getter(expectedDest)
-                val builderResult = (if (!takeSubList) builder else builder.subList(2, 4)).getter(builderDest)
+                konst takeSubList = index == 1
+                konst expectedResult = (if (!takeSubList) expected else expected.subList(2, 4)).getter(expectedDest)
+                konst builderResult = (if (!takeSubList) builder else builder.subList(2, 4)).getter(builderDest)
 
                 if (expectedResult.size <= expectedDest.size) {
                     assertSame(expectedDest, expectedResult)
@@ -58,11 +58,11 @@ class ListBuilderTest {
 
     @Test
     fun capacityOverflow() {
-        val builderSize = 15
-        val giantListSize = Int.MAX_VALUE - builderSize + 1
+        konst builderSize = 15
+        konst giantListSize = Int.MAX_VALUE - builderSize + 1
 
-        val giantList = object : AbstractList<String>() {
-            override val size: Int get() = giantListSize
+        konst giantList = object : AbstractList<String>() {
+            override konst size: Int get() = giantListSize
             override fun get(index: Int): String = "element"
         }
 

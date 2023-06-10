@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
 public interface Base {
-    val test: String
+    konst test: String
         get() = "OK"
 }
 
 open class Delegate : Base {
-    override val test: String
+    override konst test: String
         get() = "OK"
 }
 

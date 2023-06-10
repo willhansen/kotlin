@@ -5,7 +5,7 @@ interface Base1 {
 }
 
 interface Base2 {
-    val x: Int
+    konst x: Int
         get() = 1
 }
 

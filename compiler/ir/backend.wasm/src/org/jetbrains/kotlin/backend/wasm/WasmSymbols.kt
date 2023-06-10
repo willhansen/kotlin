@@ -29,110 +29,110 @@ import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class WasmSymbols(
-    private val context: WasmBackendContext,
-    private val symbolTable: SymbolTable
+    private konst context: WasmBackendContext,
+    private konst symbolTable: SymbolTable
 ) : Symbols(context.irBuiltIns, symbolTable) {
 
-    private val kotlinTopLevelPackage: PackageViewDescriptor =
+    private konst kotlinTopLevelPackage: PackageViewDescriptor =
         context.module.getPackage(FqName("kotlin"))
-    private val enumsInternalPackage: PackageViewDescriptor =
+    private konst enumsInternalPackage: PackageViewDescriptor =
         context.module.getPackage(FqName("kotlin.enums"))
-    private val wasmInternalPackage: PackageViewDescriptor =
+    private konst wasmInternalPackage: PackageViewDescriptor =
         context.module.getPackage(FqName("kotlin.wasm.internal"))
-    private val kotlinJsPackage: PackageViewDescriptor =
+    private konst kotlinJsPackage: PackageViewDescriptor =
         context.module.getPackage(FqName("kotlin.js"))
-    private val collectionsPackage: PackageViewDescriptor =
+    private konst collectionsPackage: PackageViewDescriptor =
         context.module.getPackage(StandardNames.COLLECTIONS_PACKAGE_FQ_NAME)
-    private val builtInsPackage: PackageViewDescriptor =
+    private konst builtInsPackage: PackageViewDescriptor =
         context.module.getPackage(StandardNames.BUILT_INS_PACKAGE_FQ_NAME)
-    private val kotlinTestPackage: PackageViewDescriptor =
+    private konst kotlinTestPackage: PackageViewDescriptor =
         context.module.getPackage(FqName("kotlin.test"))
 
     internal inner class WasmReflectionSymbols : ReflectionSymbols {
-        override val createKType: IrSimpleFunctionSymbol = getInternalFunction("createKType")
-        override val getClassData: IrSimpleFunctionSymbol = getInternalFunction("wasmGetTypeInfoData")
-        override val getKClass: IrSimpleFunctionSymbol = getInternalFunction("getKClass")
-        override val getKClassFromExpression: IrSimpleFunctionSymbol = getInternalFunction("getKClassFromExpression")
-        override val createDynamicKType: IrSimpleFunctionSymbol get() = error("Dynamic type is not supported by WASM")
-        override val createKTypeParameter: IrSimpleFunctionSymbol = getInternalFunction("createKTypeParameter")
-        override val getStarKTypeProjection = getInternalFunction("getStarKTypeProjection")
-        override val createCovariantKTypeProjection = getInternalFunction("createCovariantKTypeProjection")
-        override val createInvariantKTypeProjection = getInternalFunction("createInvariantKTypeProjection")
-        override val createContravariantKTypeProjection = getInternalFunction("createContravariantKTypeProjection")
+        override konst createKType: IrSimpleFunctionSymbol = getInternalFunction("createKType")
+        override konst getClassData: IrSimpleFunctionSymbol = getInternalFunction("wasmGetTypeInfoData")
+        override konst getKClass: IrSimpleFunctionSymbol = getInternalFunction("getKClass")
+        override konst getKClassFromExpression: IrSimpleFunctionSymbol = getInternalFunction("getKClassFromExpression")
+        override konst createDynamicKType: IrSimpleFunctionSymbol get() = error("Dynamic type is not supported by WASM")
+        override konst createKTypeParameter: IrSimpleFunctionSymbol = getInternalFunction("createKTypeParameter")
+        override konst getStarKTypeProjection = getInternalFunction("getStarKTypeProjection")
+        override konst createCovariantKTypeProjection = getInternalFunction("createCovariantKTypeProjection")
+        override konst createInvariantKTypeProjection = getInternalFunction("createInvariantKTypeProjection")
+        override konst createContravariantKTypeProjection = getInternalFunction("createContravariantKTypeProjection")
 
-        override val primitiveClassesObject = getInternalClass("PrimitiveClasses")
-        override val kTypeClass: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KClass"))
+        override konst primitiveClassesObject = getInternalClass("PrimitiveClasses")
+        override konst kTypeClass: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KClass"))
 
-        val getTypeInfoTypeDataByPtr: IrSimpleFunctionSymbol = getInternalFunction("getTypeInfoTypeDataByPtr")
-        val wasmTypeInfoData: IrClassSymbol = getInternalClass("TypeInfoData")
+        konst getTypeInfoTypeDataByPtr: IrSimpleFunctionSymbol = getInternalFunction("getTypeInfoTypeDataByPtr")
+        konst wasmTypeInfoData: IrClassSymbol = getInternalClass("TypeInfoData")
     }
 
-    internal val reflectionSymbols: WasmReflectionSymbols = WasmReflectionSymbols()
+    internal konst reflectionSymbols: WasmReflectionSymbols = WasmReflectionSymbols()
 
-    internal val eagerInitialization: IrClassSymbol = getIrClass(FqName("kotlin.EagerInitialization"))
+    internal konst eagerInitialization: IrClassSymbol = getIrClass(FqName("kotlin.EagerInitialization"))
 
-    internal val isNotFirstWasmExportCall: IrPropertySymbol = symbolTable.referenceProperty(
+    internal konst isNotFirstWasmExportCall: IrPropertySymbol = symbolTable.referenceProperty(
         getProperty(FqName.fromSegments(listOf("kotlin", "wasm", "internal", "isNotFirstWasmExportCall")))
     )
 
-    internal val initAssociatedObjects = getInternalFunction("initAssociatedObjects")
-    internal val addAssociatedObject = getInternalFunction("addAssociatedObject")
+    internal konst initAssociatedObjects = getInternalFunction("initAssociatedObjects")
+    internal konst addAssociatedObject = getInternalFunction("addAssociatedObject")
 
-    internal val throwAsJsException: IrSimpleFunctionSymbol = getInternalFunction("throwAsJsException")
+    internal konst throwAsJsException: IrSimpleFunctionSymbol = getInternalFunction("throwAsJsException")
 
-    override val throwNullPointerException = getInternalFunction("THROW_NPE")
-    override val throwISE = getInternalFunction("THROW_ISE")
-    override val throwTypeCastException = getInternalFunction("THROW_CCE")
-    val throwIAE = getInternalFunction("THROW_IAE")
-    val throwNoBranchMatchedException =
+    override konst throwNullPointerException = getInternalFunction("THROW_NPE")
+    override konst throwISE = getInternalFunction("THROW_ISE")
+    override konst throwTypeCastException = getInternalFunction("THROW_CCE")
+    konst throwIAE = getInternalFunction("THROW_IAE")
+    konst throwNoBranchMatchedException =
         getInternalFunction("throwNoBranchMatchedException")
-    override val throwUninitializedPropertyAccessException =
+    override konst throwUninitializedPropertyAccessException =
         getInternalFunction("throwUninitializedPropertyAccessException")
-    override val defaultConstructorMarker =
+    override konst defaultConstructorMarker =
         getIrClass(FqName("kotlin.wasm.internal.DefaultConstructorMarker"))
-    override val throwKotlinNothingValueException: IrSimpleFunctionSymbol
+    override konst throwKotlinNothingValueException: IrSimpleFunctionSymbol
         get() = TODO()
-    override val stringBuilder =
+    override konst stringBuilder =
         getIrClass(FqName("kotlin.text.StringBuilder"))
-    override val coroutineImpl =
+    override konst coroutineImpl =
         context.coroutineSymbols.coroutineImpl
-    override val coroutineSuspendedGetter =
+    override konst coroutineSuspendedGetter =
         context.coroutineSymbols.coroutineSuspendedGetter
-    override val getContinuation =
+    override konst getContinuation =
         getInternalFunction("getContinuation")
-    override val continuationClass =
+    override konst continuationClass =
         context.coroutineSymbols.continuationClass
-    override val coroutineContextGetter =
+    override konst coroutineContextGetter =
         symbolTable.referenceSimpleFunction(context.coroutineSymbols.coroutineContextProperty.getter!!)
-    override val suspendCoroutineUninterceptedOrReturn =
+    override konst suspendCoroutineUninterceptedOrReturn =
         getInternalFunction("suspendCoroutineUninterceptedOrReturn")
-    override val coroutineGetContext =
+    override konst coroutineGetContext =
         getInternalFunction("getCoroutineContext")
-    override val returnIfSuspended =
+    override konst returnIfSuspended =
         getInternalFunction("returnIfSuspended")
 
-    val enumEntries = getIrClass(FqName.fromSegments(listOf("kotlin", "enums", "EnumEntries")))
-    val createEnumEntries = findFunctions(enumsInternalPackage.memberScope, Name.identifier("enumEntries"))
-        .find { it.valueParameters.firstOrNull()?.type?.isFunctionType == false }
+    konst enumEntries = getIrClass(FqName.fromSegments(listOf("kotlin", "enums", "EnumEntries")))
+    konst createEnumEntries = findFunctions(enumsInternalPackage.memberScope, Name.identifier("enumEntries"))
+        .find { it.konstueParameters.firstOrNull()?.type?.isFunctionType == false }
         .let { symbolTable.referenceSimpleFunction(it!!) }
 
-    val enumValueOfIntrinsic = getInternalFunction("enumValueOfIntrinsic")
-    val enumValuesIntrinsic = getInternalFunction("enumValuesIntrinsic")
+    konst enumValueOfIntrinsic = getInternalFunction("enumValueOfIntrinsic")
+    konst enumValuesIntrinsic = getInternalFunction("enumValuesIntrinsic")
 
-    val coroutineEmptyContinuation: IrPropertySymbol = symbolTable.referenceProperty(
+    konst coroutineEmptyContinuation: IrPropertySymbol = symbolTable.referenceProperty(
         getProperty(FqName.fromSegments(listOf("kotlin", "wasm", "internal", "EmptyContinuation")))
     )
 
-    override val functionAdapter: IrClassSymbol
+    override konst functionAdapter: IrClassSymbol
         get() = TODO()
 
-    val wasmUnreachable = getInternalFunction("wasm_unreachable")
+    konst wasmUnreachable = getInternalFunction("wasm_unreachable")
 
-    val voidClass = getIrClass(FqName("kotlin.wasm.internal.Void"))
-    val voidType by lazy { voidClass.defaultType }
+    konst voidClass = getIrClass(FqName("kotlin.wasm.internal.Void"))
+    konst voidType by lazy { voidClass.defaultType }
 
-    private val consumeAnyIntoVoid = getInternalFunction("consumeAnyIntoVoid")
-    private val consumePrimitiveIntoVoid = mapOf(
+    private konst consumeAnyIntoVoid = getInternalFunction("consumeAnyIntoVoid")
+    private konst consumePrimitiveIntoVoid = mapOf(
         context.irBuiltIns.booleanType to getInternalFunction("consumeBooleanIntoVoid"),
         context.irBuiltIns.byteType to getInternalFunction("consumeByteIntoVoid"),
         context.irBuiltIns.shortType to getInternalFunction("consumeShortIntoVoid"),
@@ -146,7 +146,7 @@ class WasmSymbols(
     fun findVoidConsumer(type: IrType): IrSimpleFunctionSymbol =
         consumePrimitiveIntoVoid[type] ?: consumeAnyIntoVoid
 
-    val equalityFunctions = mapOf(
+    konst equalityFunctions = mapOf(
         context.irBuiltIns.booleanType to getInternalFunction("wasm_i32_eq"),
         context.irBuiltIns.byteType to getInternalFunction("wasm_i32_eq"),
         context.irBuiltIns.shortType to getInternalFunction("wasm_i32_eq"),
@@ -155,7 +155,7 @@ class WasmSymbols(
         context.irBuiltIns.longType to getInternalFunction("wasm_i64_eq")
     )
 
-    val floatEqualityFunctions = mapOf(
+    konst floatEqualityFunctions = mapOf(
         context.irBuiltIns.floatType to getInternalFunction("wasm_f32_eq"),
         context.irBuiltIns.doubleType to getInternalFunction("wasm_f64_eq")
     )
@@ -170,7 +170,7 @@ class WasmSymbols(
         }
     }
 
-    val comparisonBuiltInsToWasmIntrinsics = context.irBuiltIns.run {
+    konst comparisonBuiltInsToWasmIntrinsics = context.irBuiltIns.run {
         listOf(
             lessFunByOperandType to "lt",
             lessOrEqualFunByOperandType to "le",
@@ -178,23 +178,23 @@ class WasmSymbols(
             greaterFunByOperandType to "gt"
         ).map { (typeToBuiltIn, wasmOp) ->
             typeToBuiltIn.map { (type, builtin) ->
-                val wasmType = wasmPrimitiveTypeName(type)
-                val markSign = if (wasmType == "i32" || wasmType == "i64") "_s" else ""
+                konst wasmType = wasmPrimitiveTypeName(type)
+                konst markSign = if (wasmType == "i32" || wasmType == "i64") "_s" else ""
                 builtin to getInternalFunction("wasm_${wasmType}_$wasmOp$markSign")
             }
         }.flatten().toMap()
     }
 
-    val booleanAnd = getInternalFunction("wasm_i32_and")
-    val refEq = getInternalFunction("wasm_ref_eq")
-    val refIsNull = getInternalFunction("wasm_ref_is_null")
-    val externRefIsNull = getInternalFunction("wasm_externref_is_null")
-    val refTest = getInternalFunction("wasm_ref_test")
-    val refCastNull = getInternalFunction("wasm_ref_cast_null")
-    val wasmArrayCopy = getInternalFunction("wasm_array_copy")
-    val wasmArrayNewData0 = getInternalFunction("array_new_data0")
+    konst booleanAnd = getInternalFunction("wasm_i32_and")
+    konst refEq = getInternalFunction("wasm_ref_eq")
+    konst refIsNull = getInternalFunction("wasm_ref_is_null")
+    konst externRefIsNull = getInternalFunction("wasm_externref_is_null")
+    konst refTest = getInternalFunction("wasm_ref_test")
+    konst refCastNull = getInternalFunction("wasm_ref_cast_null")
+    konst wasmArrayCopy = getInternalFunction("wasm_array_copy")
+    konst wasmArrayNewData0 = getInternalFunction("array_new_data0")
 
-    val primitiveTypeToCreateTypedArray = mapOf(
+    konst primitiveTypeToCreateTypedArray = mapOf(
         context.irBuiltIns.arrayClass to getFunction("createAnyArray", kotlinTopLevelPackage),
         context.irBuiltIns.booleanArray to getFunction("createBooleanArray", kotlinTopLevelPackage),
         context.irBuiltIns.byteArray to getFunction("createByteArray", kotlinTopLevelPackage),
@@ -206,69 +206,69 @@ class WasmSymbols(
         context.irBuiltIns.doubleArray to getFunction("createDoubleArray", kotlinTopLevelPackage),
     )
 
-    val intToLong = getInternalFunction("wasm_i64_extend_i32_s")
+    konst intToLong = getInternalFunction("wasm_i64_extend_i32_s")
 
-    val rangeCheck = getInternalFunction("rangeCheck")
-    val assertFuncs = findFunctions(kotlinTopLevelPackage.memberScope, Name.identifier("assert")).map { symbolTable.referenceSimpleFunction(it) }
+    konst rangeCheck = getInternalFunction("rangeCheck")
+    konst assertFuncs = findFunctions(kotlinTopLevelPackage.memberScope, Name.identifier("assert")).map { symbolTable.referenceSimpleFunction(it) }
 
-    val boxIntrinsic: IrSimpleFunctionSymbol = getInternalFunction("boxIntrinsic")
-    val unboxIntrinsic: IrSimpleFunctionSymbol = getInternalFunction("unboxIntrinsic")
+    konst boxIntrinsic: IrSimpleFunctionSymbol = getInternalFunction("boxIntrinsic")
+    konst unboxIntrinsic: IrSimpleFunctionSymbol = getInternalFunction("unboxIntrinsic")
 
-    val stringGetLiteral = getFunction("stringLiteral", builtInsPackage)
-    val stringGetPoolSize = getInternalFunction("stringGetPoolSize")
+    konst stringGetLiteral = getFunction("stringLiteral", builtInsPackage)
+    konst stringGetPoolSize = getInternalFunction("stringGetPoolSize")
 
-    val testFun = maybeGetFunction("test", kotlinTestPackage)
-    val suiteFun = maybeGetFunction("suite", kotlinTestPackage)
-    val startUnitTests = maybeGetFunction("startUnitTests", kotlinTestPackage)
+    konst testFun = maybeGetFunction("test", kotlinTestPackage)
+    konst suiteFun = maybeGetFunction("suite", kotlinTestPackage)
+    konst startUnitTests = maybeGetFunction("startUnitTests", kotlinTestPackage)
 
-    val wasmTypeId = getInternalFunction("wasmTypeId")
+    konst wasmTypeId = getInternalFunction("wasmTypeId")
 
-    val wasmIsInterface = getInternalFunction("wasmIsInterface")
+    konst wasmIsInterface = getInternalFunction("wasmIsInterface")
 
-    val nullableEquals = getInternalFunction("nullableEquals")
-    val anyNtoString = getInternalFunction("anyNtoString")
+    konst nullableEquals = getInternalFunction("nullableEquals")
+    konst anyNtoString = getInternalFunction("anyNtoString")
 
-    val nullableFloatIeee754Equals = getInternalFunction("nullableFloatIeee754Equals")
-    val nullableDoubleIeee754Equals = getInternalFunction("nullableDoubleIeee754Equals")
+    konst nullableFloatIeee754Equals = getInternalFunction("nullableFloatIeee754Equals")
+    konst nullableDoubleIeee754Equals = getInternalFunction("nullableDoubleIeee754Equals")
 
-    val unsafeGetScratchRawMemory = getInternalFunction("unsafeGetScratchRawMemory")
-    val returnArgumentIfItIsKotlinAny = getInternalFunction("returnArgumentIfItIsKotlinAny")
+    konst unsafeGetScratchRawMemory = getInternalFunction("unsafeGetScratchRawMemory")
+    konst returnArgumentIfItIsKotlinAny = getInternalFunction("returnArgumentIfItIsKotlinAny")
 
-    val newJsArray = getInternalFunction("newJsArray")
-    val jsArrayPush = getInternalFunction("jsArrayPush")
+    konst newJsArray = getInternalFunction("newJsArray")
+    konst jsArrayPush = getInternalFunction("jsArrayPush")
 
-    val startCoroutineUninterceptedOrReturnIntrinsics =
+    konst startCoroutineUninterceptedOrReturnIntrinsics =
         (0..2).map { getInternalFunction("startCoroutineUninterceptedOrReturnIntrinsic$it") }
 
     // KProperty implementations
-    val kLocalDelegatedPropertyImpl: IrClassSymbol = this.getInternalClass("KLocalDelegatedPropertyImpl")
-    val kLocalDelegatedMutablePropertyImpl: IrClassSymbol = this.getInternalClass("KLocalDelegatedMutablePropertyImpl")
-    val kProperty0Impl: IrClassSymbol = this.getInternalClass("KProperty0Impl")
-    val kProperty1Impl: IrClassSymbol = this.getInternalClass("KProperty1Impl")
-    val kProperty2Impl: IrClassSymbol = this.getInternalClass("KProperty2Impl")
-    val kMutableProperty0Impl: IrClassSymbol = this.getInternalClass("KMutableProperty0Impl")
-    val kMutableProperty1Impl: IrClassSymbol = this.getInternalClass("KMutableProperty1Impl")
-    val kMutableProperty2Impl: IrClassSymbol = this.getInternalClass("KMutableProperty2Impl")
-    val kMutableProperty0: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty0"))
-    val kMutableProperty1: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty1"))
-    val kMutableProperty2: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty2"))
+    konst kLocalDelegatedPropertyImpl: IrClassSymbol = this.getInternalClass("KLocalDelegatedPropertyImpl")
+    konst kLocalDelegatedMutablePropertyImpl: IrClassSymbol = this.getInternalClass("KLocalDelegatedMutablePropertyImpl")
+    konst kProperty0Impl: IrClassSymbol = this.getInternalClass("KProperty0Impl")
+    konst kProperty1Impl: IrClassSymbol = this.getInternalClass("KProperty1Impl")
+    konst kProperty2Impl: IrClassSymbol = this.getInternalClass("KProperty2Impl")
+    konst kMutableProperty0Impl: IrClassSymbol = this.getInternalClass("KMutableProperty0Impl")
+    konst kMutableProperty1Impl: IrClassSymbol = this.getInternalClass("KMutableProperty1Impl")
+    konst kMutableProperty2Impl: IrClassSymbol = this.getInternalClass("KMutableProperty2Impl")
+    konst kMutableProperty0: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty0"))
+    konst kMutableProperty1: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty1"))
+    konst kMutableProperty2: IrClassSymbol = getIrClass(FqName("kotlin.reflect.KMutableProperty2"))
 
-    val kTypeStub = getInternalFunction("kTypeStub")
+    konst kTypeStub = getInternalFunction("kTypeStub")
 
-    val arraysCopyInto = findFunctions(collectionsPackage.memberScope, Name.identifier("copyInto"))
+    konst arraysCopyInto = findFunctions(collectionsPackage.memberScope, Name.identifier("copyInto"))
         .map { symbolTable.referenceSimpleFunction(it) }
 
-    private val contentToString: List<IrSimpleFunctionSymbol> =
+    private konst contentToString: List<IrSimpleFunctionSymbol> =
         findFunctions(collectionsPackage.memberScope, Name.identifier("contentToString"))
             .map { symbolTable.referenceSimpleFunction(it) }
 
-    private val contentHashCode: List<IrSimpleFunctionSymbol> =
+    private konst contentHashCode: List<IrSimpleFunctionSymbol> =
         findFunctions(collectionsPackage.memberScope, Name.identifier("contentHashCode"))
             .map { symbolTable.referenceSimpleFunction(it) }
 
     private fun findOverloadForReceiver(arrayType: IrType, overloadsList: List<IrSimpleFunctionSymbol>): IrSimpleFunctionSymbol =
         overloadsList.first {
-            val receiverType = it.owner.extensionReceiverParameter?.type
+            konst receiverType = it.owner.extensionReceiverParameter?.type
             receiverType != null && arrayType.isNullable() == receiverType.isNullable() && arrayType.classOrNull == receiverType.classOrNull
         }
 
@@ -276,81 +276,81 @@ class WasmSymbols(
 
     fun findContentHashCodeOverload(arrayType: IrType): IrSimpleFunctionSymbol = findOverloadForReceiver(arrayType, contentHashCode)
 
-    private val getProgressionLastElementSymbols =
+    private konst getProgressionLastElementSymbols =
         irBuiltIns.findFunctions(Name.identifier("getProgressionLastElement"), "kotlin", "internal")
 
-    override val getProgressionLastElementByReturnType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
+    override konst getProgressionLastElementByReturnType: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
         getProgressionLastElementSymbols.associateBy { it.owner.returnType.classifierOrFail }
     }
 
-    private val toUIntSymbols = irBuiltIns.findFunctions(Name.identifier("toUInt"), "kotlin")
+    private konst toUIntSymbols = irBuiltIns.findFunctions(Name.identifier("toUInt"), "kotlin")
 
-    override val toUIntByExtensionReceiver: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
+    override konst toUIntByExtensionReceiver: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
         toUIntSymbols.associateBy {
             it.owner.extensionReceiverParameter?.type?.classifierOrFail
                 ?: error("Expected extension receiver for ${it.owner.render()}")
         }
     }
 
-    private val toULongSymbols = irBuiltIns.findFunctions(Name.identifier("toULong"), "kotlin")
+    private konst toULongSymbols = irBuiltIns.findFunctions(Name.identifier("toULong"), "kotlin")
 
-    override val toULongByExtensionReceiver: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
+    override konst toULongByExtensionReceiver: Map<IrClassifierSymbol, IrSimpleFunctionSymbol> by lazy {
         toULongSymbols.associateBy {
             it.owner.extensionReceiverParameter?.type?.classifierOrFail
                 ?: error("Expected extension receiver for ${it.owner.render()}")
         }
     }
 
-    private val wasmStructRefClass = getIrClass(FqName("kotlin.wasm.internal.reftypes.structref"))
-    val wasmStructRefType by lazy { wasmStructRefClass.defaultType }
+    private konst wasmStructRefClass = getIrClass(FqName("kotlin.wasm.internal.reftypes.structref"))
+    konst wasmStructRefType by lazy { wasmStructRefClass.defaultType }
 
-    val wasmAnyRefClass = getIrClass(FqName("kotlin.wasm.internal.reftypes.anyref"))
+    konst wasmAnyRefClass = getIrClass(FqName("kotlin.wasm.internal.reftypes.anyref"))
 
-    private val jsAnyClass = getIrClass(FqName("kotlin.js.JsAny"))
-    val jsAnyType by lazy { jsAnyClass.defaultType }
+    private konst jsAnyClass = getIrClass(FqName("kotlin.js.JsAny"))
+    konst jsAnyType by lazy { jsAnyClass.defaultType }
 
     inner class JsInteropAdapters {
-        val kotlinToJsStringAdapter = getInternalFunction("kotlinToJsStringAdapter")
-        val kotlinToJsAnyAdapter = getInternalFunction("kotlinToJsAnyAdapter")
-        val numberToDoubleAdapter = getInternalFunction("numberToDoubleAdapter")
+        konst kotlinToJsStringAdapter = getInternalFunction("kotlinToJsStringAdapter")
+        konst kotlinToJsAnyAdapter = getInternalFunction("kotlinToJsAnyAdapter")
+        konst numberToDoubleAdapter = getInternalFunction("numberToDoubleAdapter")
 
-        val jsCheckIsNullOrUndefinedAdapter = getInternalFunction("jsCheckIsNullOrUndefinedAdapter")
+        konst jsCheckIsNullOrUndefinedAdapter = getInternalFunction("jsCheckIsNullOrUndefinedAdapter")
 
-        val jsToKotlinStringAdapter = getInternalFunction("jsToKotlinStringAdapter")
-        val jsToKotlinAnyAdapter = getInternalFunction("jsToKotlinAnyAdapter")
+        konst jsToKotlinStringAdapter = getInternalFunction("jsToKotlinStringAdapter")
+        konst jsToKotlinAnyAdapter = getInternalFunction("jsToKotlinAnyAdapter")
 
-        val jsToKotlinByteAdapter = getInternalFunction("jsToKotlinByteAdapter")
-        val jsToKotlinShortAdapter = getInternalFunction("jsToKotlinShortAdapter")
-        val jsToKotlinCharAdapter = getInternalFunction("jsToKotlinCharAdapter")
+        konst jsToKotlinByteAdapter = getInternalFunction("jsToKotlinByteAdapter")
+        konst jsToKotlinShortAdapter = getInternalFunction("jsToKotlinShortAdapter")
+        konst jsToKotlinCharAdapter = getInternalFunction("jsToKotlinCharAdapter")
 
-        val externRefToKotlinIntAdapter = getInternalFunction("externRefToKotlinIntAdapter")
-        val externRefToKotlinBooleanAdapter = getInternalFunction("externRefToKotlinBooleanAdapter")
-        val externRefToKotlinLongAdapter = getInternalFunction("externRefToKotlinLongAdapter")
-        val externRefToKotlinFloatAdapter = getInternalFunction("externRefToKotlinFloatAdapter")
-        val externRefToKotlinDoubleAdapter = getInternalFunction("externRefToKotlinDoubleAdapter")
+        konst externRefToKotlinIntAdapter = getInternalFunction("externRefToKotlinIntAdapter")
+        konst externRefToKotlinBooleanAdapter = getInternalFunction("externRefToKotlinBooleanAdapter")
+        konst externRefToKotlinLongAdapter = getInternalFunction("externRefToKotlinLongAdapter")
+        konst externRefToKotlinFloatAdapter = getInternalFunction("externRefToKotlinFloatAdapter")
+        konst externRefToKotlinDoubleAdapter = getInternalFunction("externRefToKotlinDoubleAdapter")
 
-        val kotlinIntToExternRefAdapter = getInternalFunction("kotlinIntToExternRefAdapter")
-        val kotlinBooleanToExternRefAdapter = getInternalFunction("kotlinBooleanToExternRefAdapter")
-        val kotlinLongToExternRefAdapter = getInternalFunction("kotlinLongToExternRefAdapter")
-        val kotlinFloatToExternRefAdapter = getInternalFunction("kotlinFloatToExternRefAdapter")
-        val kotlinDoubleToExternRefAdapter = getInternalFunction("kotlinDoubleToExternRefAdapter")
-        val kotlinByteToExternRefAdapter = getInternalFunction("kotlinByteToExternRefAdapter")
-        val kotlinShortToExternRefAdapter = getInternalFunction("kotlinShortToExternRefAdapter")
-        val kotlinCharToExternRefAdapter = getInternalFunction("kotlinCharToExternRefAdapter")
+        konst kotlinIntToExternRefAdapter = getInternalFunction("kotlinIntToExternRefAdapter")
+        konst kotlinBooleanToExternRefAdapter = getInternalFunction("kotlinBooleanToExternRefAdapter")
+        konst kotlinLongToExternRefAdapter = getInternalFunction("kotlinLongToExternRefAdapter")
+        konst kotlinFloatToExternRefAdapter = getInternalFunction("kotlinFloatToExternRefAdapter")
+        konst kotlinDoubleToExternRefAdapter = getInternalFunction("kotlinDoubleToExternRefAdapter")
+        konst kotlinByteToExternRefAdapter = getInternalFunction("kotlinByteToExternRefAdapter")
+        konst kotlinShortToExternRefAdapter = getInternalFunction("kotlinShortToExternRefAdapter")
+        konst kotlinCharToExternRefAdapter = getInternalFunction("kotlinCharToExternRefAdapter")
     }
 
-    val jsInteropAdapters = JsInteropAdapters()
+    konst jsInteropAdapters = JsInteropAdapters()
 
-    private val jsExportClass = getIrClass(FqName("kotlin.js.JsExport"))
-    val jsExportConstructor by lazy { jsExportClass.constructors.single() }
+    private konst jsExportClass = getIrClass(FqName("kotlin.js.JsExport"))
+    konst jsExportConstructor by lazy { jsExportClass.constructors.single() }
 
-    private val jsNameClass = getIrClass(FqName("kotlin.js.JsName"))
-    val jsNameConstructor by lazy { jsNameClass.constructors.single() }
+    private konst jsNameClass = getIrClass(FqName("kotlin.js.JsName"))
+    konst jsNameConstructor by lazy { jsNameClass.constructors.single() }
 
-    private val jsFunClass = getIrClass(FqName("kotlin.JsFun"))
-    val jsFunConstructor by lazy { jsFunClass.constructors.single() }
+    private konst jsFunClass = getIrClass(FqName("kotlin.JsFun"))
+    konst jsFunConstructor by lazy { jsFunClass.constructors.single() }
 
-    val jsCode = getFunction("js", kotlinJsPackage)
+    konst jsCode = getFunction("js", kotlinJsPackage)
 
     private fun findClass(memberScope: MemberScope, name: Name): ClassDescriptor =
         memberScope.getContributedClassifier(name, NoLookupLocation.FROM_BACKEND) as ClassDescriptor
@@ -372,7 +372,7 @@ class WasmSymbols(
     }
 
     private fun maybeGetFunction(name: String, ownerPackage: PackageViewDescriptor): IrSimpleFunctionSymbol? {
-        val tmp = findFunctions(ownerPackage.memberScope, Name.identifier(name))
+        konst tmp = findFunctions(ownerPackage.memberScope, Name.identifier(name))
         if (tmp.isEmpty())
             return null
         return symbolTable.referenceSimpleFunction(tmp.single())

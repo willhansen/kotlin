@@ -23,9 +23,9 @@ abstract class IrProperty : IrDeclarationBase(), IrPossiblyExternalDeclaration,
         IrOverridableDeclaration<IrPropertySymbol>, IrMetadataSourceOwner, IrAttributeContainer,
         IrMemberWithContainerSource {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: PropertyDescriptor
+    abstract override konst descriptor: PropertyDescriptor
 
-    abstract override val symbol: IrPropertySymbol
+    abstract override konst symbol: IrPropertySymbol
 
     abstract var isVar: Boolean
 

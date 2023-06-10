@@ -1,4 +1,4 @@
-val foo: List<in Int> = null!!
+konst foo: List<in Int> = null!!
 /*
 psi: List<in Int>
 type: List<in Int>

@@ -4,7 +4,7 @@ fun box(): String {
 
 interface SomeInterface <V> {
 
-    val value: V
+    konst konstue: V
 
 }
 

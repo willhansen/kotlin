@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirImplicitThisReference(
-    override val boundSymbol: FirBasedSymbol<*>?,
+    override konst boundSymbol: FirBasedSymbol<*>?,
     override var contextReceiverNumber: Int,
 ) : FirThisReference() {
-    override val source: KtSourceElement? get() = null
-    override val labelName: String? get() = null
+    override konst source: KtSourceElement? get() = null
+    override konst labelName: String? get() = null
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

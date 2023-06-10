@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.resolve.lazy.descriptors.LazyClassMemberScope
 class LazyScriptClassMemberScope(
     resolveSession: ResolveSession,
     declarationProvider: ClassMemberDeclarationProvider,
-    private val scriptDescriptor: LazyScriptDescriptor,
+    private konst scriptDescriptor: LazyScriptDescriptor,
     trace: BindingTrace
 ) : LazyClassMemberScope(resolveSession, declarationProvider, scriptDescriptor, trace) {
 
-    private val _variableNames: MutableSet<Name>
+    private konst _variableNames: MutableSet<Name>
             by lazy(LazyThreadSafetyMode.PUBLICATION) {
                 super.getVariableNames().apply {
                     scriptDescriptor.scriptProvidedProperties.forEach {
@@ -36,7 +36,7 @@ class LazyScriptClassMemberScope(
             }
 
     override fun resolvePrimaryConstructor(): ClassConstructorDescriptor {
-        val constructor = scriptDescriptor.scriptPrimaryConstructorWithParams().constructor
+        konst constructor = scriptDescriptor.scriptPrimaryConstructorWithParams().constructor
         setDeferredReturnType(constructor)
         return constructor
     }
@@ -63,7 +63,7 @@ class LazyScriptClassMemberScope(
         location: LookupLocation
     ) {
         for (entry in declaration.entries) {
-            val name = entry.nameAsSafeName
+            konst name = entry.nameAsSafeName
             if (nameFilter(name) && name.identifierOrNullIfSpecial != "_") {
                 result.addAll(getContributedVariables(name, location))
             }
@@ -71,8 +71,8 @@ class LazyScriptClassMemberScope(
     }
 
     companion object {
-        const val IMPLICIT_RECEIVER_PARAM_NAME_PREFIX = "\$\$implicitReceiver"
-        const val IMPORTED_SCRIPT_PARAM_NAME_PREFIX = "\$\$importedScript"
+        const konst IMPLICIT_RECEIVER_PARAM_NAME_PREFIX = "\$\$implicitReceiver"
+        const konst IMPORTED_SCRIPT_PARAM_NAME_PREFIX = "\$\$importedScript"
     }
 }
 

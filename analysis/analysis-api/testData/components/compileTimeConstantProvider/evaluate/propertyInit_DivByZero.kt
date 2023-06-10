@@ -1,1 +1,1 @@
-val p = <expr>42 / 0</expr>
+konst p = <expr>42 / 0</expr>

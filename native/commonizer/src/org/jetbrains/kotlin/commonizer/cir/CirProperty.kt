@@ -10,27 +10,27 @@ import org.jetbrains.kotlin.descriptors.Modality
 import org.jetbrains.kotlin.descriptors.Visibility
 
 data class CirProperty(
-    override val annotations: List<CirAnnotation>,
-    override val name: CirName,
-    override val typeParameters: List<CirTypeParameter>,
-    override val visibility: Visibility,
-    override val modality: Modality,
-    override val containingClass: CirContainingClass?,
-    override val extensionReceiver: CirExtensionReceiver?,
-    override val returnType: CirType,
-    override val kind: CallableMemberDescriptor.Kind,
-    val isVar: Boolean,
-    val isLateInit: Boolean,
-    val isConst: Boolean,
-    val isDelegate: Boolean,
-    val getter: CirPropertyGetter?,
-    val setter: CirPropertySetter?,
-    val backingFieldAnnotations: List<CirAnnotation>,
-    val delegateFieldAnnotations: List<CirAnnotation>,
-    val compileTimeInitializer: CirConstantValue
+    override konst annotations: List<CirAnnotation>,
+    override konst name: CirName,
+    override konst typeParameters: List<CirTypeParameter>,
+    override konst visibility: Visibility,
+    override konst modality: Modality,
+    override konst containingClass: CirContainingClass?,
+    override konst extensionReceiver: CirExtensionReceiver?,
+    override konst returnType: CirType,
+    override konst kind: CallableMemberDescriptor.Kind,
+    konst isVar: Boolean,
+    konst isLateInit: Boolean,
+    konst isConst: Boolean,
+    konst isDelegate: Boolean,
+    konst getter: CirPropertyGetter?,
+    konst setter: CirPropertySetter?,
+    konst backingFieldAnnotations: List<CirAnnotation>,
+    konst delegateFieldAnnotations: List<CirAnnotation>,
+    konst compileTimeInitializer: CirConstantValue
 ) : CirFunctionOrProperty, CirLiftedUpDeclaration {
     // const property in "common" fragment is already lifted up
-    override val isLiftedUp get() = isConst
+    override konst isLiftedUp get() = isConst
 
     override fun withContainingClass(containingClass: CirContainingClass): CirProperty {
         return copy(containingClass = containingClass)

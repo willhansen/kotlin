@@ -13,4 +13,4 @@ fun test() {
 // FILE: dep.kt
 package dependency
 
-class T<E>(value: Int)
+class T<E>(konstue: Int)

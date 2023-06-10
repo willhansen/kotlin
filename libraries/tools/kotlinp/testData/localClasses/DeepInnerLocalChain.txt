@@ -27,7 +27,7 @@ local final inner class .DeepInnerLocalChainKt$test$Local.Inner : kotlin/Any {
 
   // field: prop:LDeepInnerLocalChainKt$test$Local$Inner$prop$1;
   // getter: getProp()LDeepInnerLocalChainKt$test$Local$Inner$prop$1;
-  public final val prop: .DeepInnerLocalChainKt$test$Local$Inner$prop$1
+  public final konst prop: .DeepInnerLocalChainKt$test$Local$Inner$prop$1
     public final get
 
   // module name: test-module

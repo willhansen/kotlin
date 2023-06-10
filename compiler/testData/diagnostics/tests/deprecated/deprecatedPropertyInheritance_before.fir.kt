@@ -34,48 +34,48 @@ open class SetterDeprecated {
 class WD: WarningDeprecated() {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {}
+        set(konstue) {}
 }
 
 class ED: ErrorDeprecated() {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
 class GD: GetterDeprecated() {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
 class SD: SetterDeprecated() {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
 class SDH: SetterDeprecated(), HiddenDeprecated {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
 class EDH: ErrorDeprecated(), HiddenDeprecated {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
 class NED: ErrorDeprecated(), NoDeprecation {
     override var <!OVERRIDE_DEPRECATION!>p<!>: Int
         get() = 3
-        set(value) {
+        set(konstue) {
         }
 }
 
@@ -83,7 +83,7 @@ class Diff {
     @Deprecated("", level = DeprecationLevel.WARNING)
     var p: Int
         @Deprecated("", level = DeprecationLevel.ERROR) get() = 3
-        @Deprecated("", level = DeprecationLevel.HIDDEN) set(value) {
+        @Deprecated("", level = DeprecationLevel.HIDDEN) set(konstue) {
 
         }
 }

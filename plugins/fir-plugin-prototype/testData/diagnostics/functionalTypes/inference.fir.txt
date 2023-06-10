@@ -10,7 +10,7 @@ FILE: inference.kt
             ^@id Unit
         }
         )
-        lval f: R|() -> kotlin/Unit| = R|/id<CS errors: /id>#|<R|() -> kotlin/Unit|>(@R|org/jetbrains/kotlin/fir/plugin/MyComposable|() id@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
+        lkonst f: R|() -> kotlin/Unit| = R|/id<CS errors: /id>#|<R|() -> kotlin/Unit|>(@R|org/jetbrains/kotlin/fir/plugin/MyComposable|() id@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             ^@id Unit
         }
         )

@@ -20,8 +20,8 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import kotlin.math.max
 
-internal class LocalVariablesManager(val context: FixStackContext, val methodNode: MethodNode) {
-    private class AllocatedHandle(val savedStackDescriptor: SavedStackDescriptor, var numRestoreMarkers: Int) {
+internal class LocalVariablesManager(konst context: FixStackContext, konst methodNode: MethodNode) {
+    private class AllocatedHandle(konst savedStackDescriptor: SavedStackDescriptor, var numRestoreMarkers: Int) {
         fun isFullyEmitted(): Boolean =
             numRestoreMarkers == 0
 
@@ -31,8 +31,8 @@ internal class LocalVariablesManager(val context: FixStackContext, val methodNod
         }
     }
 
-    private val initialMaxLocals = methodNode.maxLocals
-    private val allocatedHandles = hashMapOf<AbstractInsnNode, AllocatedHandle>()
+    private konst initialMaxLocals = methodNode.maxLocals
+    private konst allocatedHandles = hashMapOf<AbstractInsnNode, AllocatedHandle>()
 
     private fun updateMaxLocals(newValue: Int) {
         methodNode.maxLocals = max(methodNode.maxLocals, newValue)
@@ -42,7 +42,7 @@ internal class LocalVariablesManager(val context: FixStackContext, val methodNod
         saveStackMarker: AbstractInsnNode,
         savedStackValues: List<FixStackValue>
     ): SavedStackDescriptor {
-        val numRestoreStackMarkers = context.restoreStackMarkersForSaveMarker[saveStackMarker]!!.size
+        konst numRestoreStackMarkers = context.restoreStackMarkersForSaveMarker[saveStackMarker]!!.size
         return allocateNewHandle(numRestoreStackMarkers, saveStackMarker, savedStackValues)
     }
 
@@ -52,29 +52,29 @@ internal class LocalVariablesManager(val context: FixStackContext, val methodNod
         savedStackValues: List<FixStackValue>
     ): SavedStackDescriptor {
         if (savedStackValues.any { it == FixStackValue.UNINITIALIZED }) {
-            throw AssertionError("Uninitialized value on stack at ${methodNode.instructions.indexOf(saveStackMarker)}: $savedStackValues")
+            throw AssertionError("Uninitialized konstue on stack at ${methodNode.instructions.indexOf(saveStackMarker)}: $savedStackValues")
         }
 
-        val firstUnusedLocalVarIndex = getFirstUnusedLocalVariableIndex()
-        val savedStackDescriptor = SavedStackDescriptor(savedStackValues, firstUnusedLocalVarIndex)
+        konst firstUnusedLocalVarIndex = getFirstUnusedLocalVariableIndex()
+        konst savedStackDescriptor = SavedStackDescriptor(savedStackValues, firstUnusedLocalVarIndex)
         updateMaxLocals(savedStackDescriptor.firstUnusedLocalVarIndex)
-        val allocatedHandle = AllocatedHandle(savedStackDescriptor, numRestoreStackMarkers)
+        konst allocatedHandle = AllocatedHandle(savedStackDescriptor, numRestoreStackMarkers)
         allocatedHandles[saveStackMarker] = allocatedHandle
         return savedStackDescriptor
     }
 
     fun getSavedStackDescriptor(restoreStackMarker: AbstractInsnNode): SavedStackDescriptor {
-        val saveStackMarker = context.saveStackMarkerForRestoreMarker[restoreStackMarker]
+        konst saveStackMarker = context.saveStackMarkerForRestoreMarker[restoreStackMarker]
         return allocatedHandles[saveStackMarker]!!.savedStackDescriptor
     }
 
     private fun getFirstUnusedLocalVariableIndex(): Int =
-        allocatedHandles.values.fold(initialMaxLocals) { index, handle ->
+        allocatedHandles.konstues.fold(initialMaxLocals) { index, handle ->
             max(index, handle.savedStackDescriptor.firstUnusedLocalVarIndex)
         }
 
     fun markRestoreStackMarkerEmitted(restoreStackMarker: AbstractInsnNode) {
-        val saveStackMarker = context.saveStackMarkerForRestoreMarker[restoreStackMarker]
+        konst saveStackMarker = context.saveStackMarkerForRestoreMarker[restoreStackMarker]
         markEmitted(saveStackMarker!!)
     }
 
@@ -86,17 +86,17 @@ internal class LocalVariablesManager(val context: FixStackContext, val methodNod
     }
 
     fun getBeforeInlineDescriptor(afterInlineMarker: AbstractInsnNode): SavedStackDescriptor {
-        val beforeInlineMarker = context.openingInlineMethodMarker[afterInlineMarker]
+        konst beforeInlineMarker = context.openingInlineMethodMarker[afterInlineMarker]
         return allocatedHandles[beforeInlineMarker]!!.savedStackDescriptor
     }
 
     fun markAfterInlineMarkerEmitted(afterInlineMarker: AbstractInsnNode) {
-        val beforeInlineMarker = context.openingInlineMethodMarker[afterInlineMarker]
+        konst beforeInlineMarker = context.openingInlineMethodMarker[afterInlineMarker]
         markEmitted(beforeInlineMarker!!)
     }
 
     private fun markEmitted(saveStackMarker: AbstractInsnNode) {
-        val allocatedHandle = allocatedHandles[saveStackMarker]!!
+        konst allocatedHandle = allocatedHandles[saveStackMarker]!!
         allocatedHandle.markRestoreNodeEmitted()
         if (allocatedHandle.isFullyEmitted()) {
             allocatedHandles.remove(saveStackMarker)
@@ -104,7 +104,7 @@ internal class LocalVariablesManager(val context: FixStackContext, val methodNod
     }
 
     fun createReturnValueVariable(returnValue: FixStackValue): Int {
-        val returnValueIndex = getFirstUnusedLocalVariableIndex()
+        konst returnValueIndex = getFirstUnusedLocalVariableIndex()
         updateMaxLocals(returnValueIndex + returnValue.size)
         return returnValueIndex
     }

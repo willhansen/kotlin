@@ -18,14 +18,14 @@ class KT55347JsProjectImport {
 
     @Test
     fun `GranularMetadataTransformation should be accessible in pure js projects -- IR`() {
-        val project = buildProject { plugins.apply("org.jetbrains.kotlin.js") }
-        val kotlin = project.kotlinExtension as KotlinJsProjectExtension
+        konst project = buildProject { plugins.apply("org.jetbrains.kotlin.js") }
+        konst kotlin = project.kotlinExtension as KotlinJsProjectExtension
         with(kotlin) {
             js(IR) {
                 nodejs()
             }
         }
-        project.evaluate()
+        project.ekonstuate()
         kotlin.sourceSets
             .filterIsInstance<DefaultKotlinSourceSet>()
             .forEach { assertTrue(it.getDependenciesTransformation().toList().isEmpty()) }

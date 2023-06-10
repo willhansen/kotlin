@@ -29,7 +29,7 @@ object FirUpperBoundViolatedExpressionChecker : FirQualifiedAccessExpressionChec
         // declarations with their declared bounds.
         // it may be the called function declaration
         // or the class declaration
-        val calleeSymbol = when (val calleeReference = expression.calleeReference) {
+        konst calleeSymbol = when (konst calleeReference = expression.calleeReference) {
             is FirResolvedErrorReference -> {
                 if (calleeReference.diagnostic is ConeInapplicableWrongReceiver) {
                     return
@@ -40,11 +40,11 @@ object FirUpperBoundViolatedExpressionChecker : FirQualifiedAccessExpressionChec
             else -> null
         }
 
-        val typeArguments: List<ConeTypeProjection>
-        val typeParameters: List<FirTypeParameterSymbol>
+        konst typeArguments: List<ConeTypeProjection>
+        konst typeParameters: List<FirTypeParameterSymbol>
 
         if (calleeSymbol is FirConstructorSymbol && calleeSymbol.isTypeAliasedConstructor) {
-            val constructedType = expression.typeRef.coneType.fullyExpandedType(context.session)
+            konst constructedType = expression.typeRef.coneType.fullyExpandedType(context.session)
             // Updating arguments with source information after expanding the type seems extremely brittle as it relies on identity equality
             // of the expression type arguments and the expanded type arguments. This cannot be applied before expanding the type because it
             // seems like the type is already expended.
@@ -70,8 +70,8 @@ object FirUpperBoundViolatedExpressionChecker : FirQualifiedAccessExpressionChec
 
         if (typeArguments.size != typeParameters.size) return
 
-        val substitutor = substitutorByMap(
-            typeParameters.withIndex().associate { Pair(it.value, typeArguments[it.index] as ConeKotlinType) },
+        konst substitutor = substitutorByMap(
+            typeParameters.withIndex().associate { Pair(it.konstue, typeArguments[it.index] as ConeKotlinType) },
             context.session,
         )
 
@@ -86,13 +86,13 @@ object FirUpperBoundViolatedExpressionChecker : FirQualifiedAccessExpressionChec
 
     private fun ConeTypeProjection.withSourceRecursive(expression: FirQualifiedAccessExpression): ConeTypeProjection {
         // Recursively apply source to any arguments of this type.
-        val type = when {
+        konst type = when {
             this is ConeClassLikeType && typeArguments.isNotEmpty() -> withArguments { it.withSourceRecursive(expression) }
             else -> this
         }
 
         // Try to match the expanded type arguments back to the original expression type arguments.
-        return when (val argument = expression.typeArguments.find { it.toConeTypeProjection() === this }) {
+        return when (konst argument = expression.typeArguments.find { it.toConeTypeProjection() === this }) {
             // Unable to find a matching argument, fall back to marking the entire expression.
             null -> type.withSource(FirTypeRefSource(null, expression.source))
             // Found the original argument!

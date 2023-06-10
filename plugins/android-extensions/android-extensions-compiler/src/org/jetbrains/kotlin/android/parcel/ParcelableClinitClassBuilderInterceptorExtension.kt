@@ -47,8 +47,8 @@ class ParcelableClinitClassBuilderInterceptorExtension :
     }
 
     private inner class ParcelableClinitClassBuilderFactory(
-            private val delegateFactory: ClassBuilderFactory,
-            val bindingContext: BindingContext
+            private konst delegateFactory: ClassBuilderFactory,
+            konst bindingContext: BindingContext
     ) : ClassBuilderFactory {
 
         override fun newClassBuilder(origin: JvmDeclarationOrigin): ClassBuilder {
@@ -71,9 +71,9 @@ class ParcelableClinitClassBuilderInterceptorExtension :
     }
 
     private inner class AndroidOnDestroyCollectorClassBuilder(
-            val declarationOrigin: JvmDeclarationOrigin,
-            internal val delegateClassBuilder: ClassBuilder,
-            val bindingContext: BindingContext
+            konst declarationOrigin: JvmDeclarationOrigin,
+            internal konst delegateClassBuilder: ClassBuilder,
+            konst bindingContext: BindingContext
     ) : DelegatingClassBuilder() {
         private var currentClass: KtClassOrObject? = null
         private var currentClassName: String? = null
@@ -104,10 +104,10 @@ class ParcelableClinitClassBuilderInterceptorExtension :
 
         override fun done(generateSmapCopyToAnnotation: Boolean) {
             if (!isClinitGenerated && currentClass != null && currentClassName != null) {
-                val descriptor = bindingContext[BindingContext.CLASS, currentClass]
+                konst descriptor = bindingContext[BindingContext.CLASS, currentClass]
                 if (descriptor != null && declarationOrigin.descriptor == descriptor && descriptor.isParcelize) {
-                    val baseVisitor = super.newMethod(JvmDeclarationOrigin.NO_ORIGIN, ACC_STATIC, "<clinit>", "()V", null, null)
-                    val visitor = ClinitAwareMethodVisitor(currentClassName!!, baseVisitor)
+                    konst baseVisitor = super.newMethod(JvmDeclarationOrigin.NO_ORIGIN, ACC_STATIC, "<clinit>", "()V", null, null)
+                    konst visitor = ClinitAwareMethodVisitor(currentClassName!!, baseVisitor)
 
                     visitor.visitCode()
                     visitor.visitInsn(Opcodes.RETURN)
@@ -129,7 +129,7 @@ class ParcelableClinitClassBuilderInterceptorExtension :
             if (name == "<clinit>" && currentClass != null && currentClassName != null) {
                 isClinitGenerated = true
 
-                val descriptor = bindingContext[BindingContext.CLASS, currentClass]
+                konst descriptor = bindingContext[BindingContext.CLASS, currentClass]
                 if (descriptor != null && declarationOrigin.descriptor == descriptor && descriptor.isParcelize) {
                     return ClinitAwareMethodVisitor(
                             currentClassName!!,
@@ -145,12 +145,12 @@ class ParcelableClinitClassBuilderInterceptorExtension :
         }
     }
 
-    private class ClinitAwareMethodVisitor(val parcelableName: String, mv: MethodVisitor) : MethodVisitor(Opcodes.API_VERSION, mv) {
+    private class ClinitAwareMethodVisitor(konst parcelableName: String, mv: MethodVisitor) : MethodVisitor(Opcodes.API_VERSION, mv) {
         override fun visitInsn(opcode: Int) {
             if (opcode == Opcodes.RETURN) {
-                val iv = InstructionAdapter(this)
-                val creatorName = "$parcelableName\$Creator"
-                val creatorType = Type.getObjectType(creatorName)
+                konst iv = InstructionAdapter(this)
+                konst creatorName = "$parcelableName\$Creator"
+                konst creatorType = Type.getObjectType(creatorName)
 
                 iv.anew(creatorType)
                 iv.dup()

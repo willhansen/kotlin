@@ -16,7 +16,7 @@ import kotlin.reflect.KType
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.superclasses
 
-private val CLASSES_TO_PROCESS: List<KClass<*>> = listOf(
+private konst CLASSES_TO_PROCESS: List<KClass<*>> = listOf(
     JpsPluginSettings::class,
     CompilerSettings::class,
     K2MetadataCompilerArguments::class,
@@ -26,13 +26,13 @@ private val CLASSES_TO_PROCESS: List<KClass<*>> = listOf(
     K2JVMCompilerArguments::class,
 )
 
-private val PACKAGE_TO_DIR_MAPPING: Map<Package, File> = mapOf(
+private konst PACKAGE_TO_DIR_MAPPING: Map<Package, File> = mapOf(
     K2JVMCompilerArguments::class.java.`package` to File("compiler/cli/cli-common/gen"),
     JpsPluginSettings::class.java.`package` to File("jps/jps-common/gen"),
 )
 
 fun generateCompilerArgumentsCopy(withPrinterToFile: (targetFile: File, Printer.() -> Unit) -> Unit) {
-    val processed = mutableSetOf<KClass<*>>()
+    konst processed = mutableSetOf<KClass<*>>()
     for (klass in CLASSES_TO_PROCESS) {
         generateRec(klass, withPrinterToFile, processed)
     }
@@ -45,10 +45,10 @@ private fun generateRec(
 ) {
     if (!processed.add(klass)) return
 
-    val klassName = klass.simpleName!!
-    val fqn = klass.qualifiedName!!
-    val `package` = klass.java.`package`
-    val destDir = PACKAGE_TO_DIR_MAPPING[`package`]!!.resolve(`package`.name.replace('.', '/'))
+    konst klassName = klass.simpleName!!
+    konst fqn = klass.qualifiedName!!
+    konst `package` = klass.java.`package`
+    konst destDir = PACKAGE_TO_DIR_MAPPING[`package`]!!.resolve(`package`.name.replace('.', '/'))
     withPrinterToFile(destDir.resolve(klassName + "CopyGenerated.kt")) {
         println(
             """
@@ -64,7 +64,7 @@ private fun generateRec(
         )
 
         fun isSupportedImmutable(type: KType): Boolean {
-            val classifier: KClassifier = type.classifier!!
+            konst classifier: KClassifier = type.classifier!!
             return when {
                 classifier is KClass<*> && classifier == List::class -> isSupportedImmutable(type.arguments.single().type!!)
                 classifier == InternalArgument::class -> true
@@ -78,12 +78,12 @@ private fun generateRec(
         println("@OptIn(org.jetbrains.kotlin.utils.IDEAPluginsCompatibilityAPI::class)")
         println("fun copy$klassName(from: $klassName, to: $klassName): $klassName {")
         withIndent {
-            val superClasses: List<KClass<*>> = klass.superclasses.filterNot { it.java.isInterface }
+            konst superClasses: List<KClass<*>> = klass.superclasses.filterNot { it.java.isInterface }
             check(superClasses.size < 2) {
                 "too many super classes in $klass: ${superClasses.joinToString()}"
             }
 
-            val superKlass = superClasses.singleOrNull()
+            konst superKlass = superClasses.singleOrNull()
             if (superKlass != null && superKlass != Freezable::class) {
                 generateRec(superKlass, withPrinterToFile, processed)
                 if (superKlass.java.`package` != `package`) {
@@ -93,18 +93,18 @@ private fun generateRec(
                 println()
             }
 
-            val properties = collectProperties(klass, false)
+            konst properties = collectProperties(klass, false)
 
             for (property in properties.filter { klass.declaredMemberProperties.contains(it) }) {
-                val type = property.returnType
-                val classifier: KClassifier = type.classifier!!
+                konst type = property.returnType
+                konst classifier: KClassifier = type.classifier!!
                 when {
                     // Please add cases on the go
                     // Please add a test to GenerateCompilerArgumentsCopyTest if the change is not trivial
 
                     classifier is KClass<*> && classifier.java.isArray -> {
-                        val arrayElementType = type.arguments.single().type!!
-                        val nullableMarker = if (type.isMarkedNullable) "?" else ""
+                        konst arrayElementType = type.arguments.single().type!!
+                        konst nullableMarker = if (type.isMarkedNullable) "?" else ""
                         when (arrayElementType.classifier) {
                             String::class -> println("to.${property.name} = from.${property.name}${nullableMarker}.copyOf()")
                             else -> error("Unsupported array element type $arrayElementType (member '${property.name}' of $fqn)")

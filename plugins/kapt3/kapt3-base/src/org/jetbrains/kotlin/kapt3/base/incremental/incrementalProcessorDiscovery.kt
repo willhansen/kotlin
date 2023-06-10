@@ -11,19 +11,19 @@ import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 
-private val INCREMENTAL_DECLARED_TYPES =
+private konst INCREMENTAL_DECLARED_TYPES =
     setOf(DeclaredProcType.AGGREGATING.name, DeclaredProcType.ISOLATING.name, DeclaredProcType.DYNAMIC.name)
-private const val INCREMENTAL_ANNOTATION_FLAG = "META-INF/gradle/incremental.annotation.processors"
+private const konst INCREMENTAL_ANNOTATION_FLAG = "META-INF/gradle/incremental.annotation.processors"
 
 /** Checks the incremental annotation processor information for the annotation processor classpath. */
 fun getIncrementalProcessorsFromClasspath(
     names: Set<String>, classpath: Iterable<File>
 ): Map<String, DeclaredProcType> {
-    val finalValues = mutableMapOf<String, DeclaredProcType>()
+    konst finalValues = mutableMapOf<String, DeclaredProcType>()
 
     classpath.forEach { entry ->
-        val fromEntry = processSingleClasspathEntry(entry)
-        fromEntry.filter { names.contains(it.key) }.forEach { finalValues[it.key] = it.value }
+        konst fromEntry = processSingleClasspathEntry(entry)
+        fromEntry.filter { names.contains(it.key) }.forEach { finalValues[it.key] = it.konstue }
 
         if (finalValues.size == names.size) return finalValues
     }
@@ -32,9 +32,9 @@ fun getIncrementalProcessorsFromClasspath(
 }
 
 private fun processSingleClasspathEntry(rootFile: File): Map<String, DeclaredProcType> {
-    val text: List<String> = when {
+    konst text: List<String> = when {
         rootFile.isDirectory -> {
-            val markerFile = rootFile.resolve(INCREMENTAL_ANNOTATION_FLAG)
+            konst markerFile = rootFile.resolve(INCREMENTAL_ANNOTATION_FLAG)
             if (markerFile.exists()) {
                 markerFile.bufferedReader().readLines()
             } else {
@@ -42,18 +42,18 @@ private fun processSingleClasspathEntry(rootFile: File): Map<String, DeclaredPro
             }
         }
         rootFile.extension == "jar" -> ZipFile(rootFile).use { zipFile ->
-            val content: InputStream? = zipFile.getInputStream(ZipEntry(INCREMENTAL_ANNOTATION_FLAG))
+            konst content: InputStream? = zipFile.getInputStream(ZipEntry(INCREMENTAL_ANNOTATION_FLAG))
 
             content?.bufferedReader()?.readLines() ?: emptyList()
         }
         else -> emptyList()
     }
 
-    val nameToType = mutableMapOf<String, DeclaredProcType>()
+    konst nameToType = mutableMapOf<String, DeclaredProcType>()
     for (line in text) {
-        val parts = line.split(",")
+        konst parts = line.split(",")
         if (parts.size == 2) {
-            val kind = parts[1].uppercase()
+            konst kind = parts[1].uppercase()
             if (INCREMENTAL_DECLARED_TYPES.contains(kind)) {
                 nameToType[parts[0]] = enumValueOf(kind)
             }

@@ -3,7 +3,7 @@
 interface Result
 
 interface Foo {
-    val Result.value: Any
+    konst Result.konstue: Any
         get() = TODO()
 }
 
@@ -13,6 +13,6 @@ fun generate(): Result = TODO()
 
 fun test() {
     use {
-        val value = generate().value
+        konst konstue = generate().konstue
     }
 }

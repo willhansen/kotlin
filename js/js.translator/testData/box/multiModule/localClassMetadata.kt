@@ -16,39 +16,39 @@ abstract class G<T> {
 }
 
 class C {
-    private val propA = object : A() {
+    private konst propA = object : A() {
         override fun bar() = "propA.bar"
     }
 
-    private val propI = object : I {
+    private konst propI = object : I {
         override fun foo() = "propI.foo"
     }
 
-    private val propAI = object : A(), I {
+    private konst propAI = object : A(), I {
         override fun foo() = "propAI.foo"
 
         override fun bar() = "propAI.bar"
     }
 
-    private val propG = object : G<String>() {
+    private konst propG = object : G<String>() {
         override fun baz() = "propG.baz"
     }
 
-    private val propInner = object {
+    private konst propInner = object {
         inner class D {
             fun df() = "propInner.df"
         }
         fun d(): D = D()
     }.d()
 
-    private val propL = run {
+    private konst propL = run {
         class L {
             fun l() = "propL.l"
         }
         L()
     }
 
-    private val propL2 = run {
+    private konst propL2 = run {
         class L {
             inner class L1 {
                 inner class L2 {
@@ -66,7 +66,7 @@ class C {
 // MODULE: main(lib)
 // FILE: main.kt
 fun box(): String {
-    val result = C().test()
+    konst result = C().test()
     if (result != "propA.bar;propI.foo;propAI.foo;propAI.bar;propG.baz;propInner.df;propL.l;propL2.l2") return "fail: $result"
 
     return "OK"

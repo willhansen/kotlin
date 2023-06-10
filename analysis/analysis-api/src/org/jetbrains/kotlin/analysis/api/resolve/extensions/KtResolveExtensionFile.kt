@@ -62,7 +62,7 @@ public abstract class KtResolveExtensionFile {
     /**
      * Creates the generated Kotlin source file text.
      *
-     * The resulted String should be a valid Kotlin code.
+     * The resulted String should be a konstid Kotlin code.
      * It should be consistent with other declarations which are present in the [KtResolveExtensionFile], more specifically:
      * 1. [getFilePackageName] should be equal to the file's package name.
      * 2. All classifier names should be contained in the [getTopLevelClassifierNames].

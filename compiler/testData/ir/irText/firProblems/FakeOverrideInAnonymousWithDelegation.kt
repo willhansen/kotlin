@@ -4,11 +4,11 @@
 // ^ KT-57430
 
 class Wrapper {
-    private val dummy = object : Bar {}
-    private val bar = object : Bar by dummy {}
+    private konst dummy = object : Bar {}
+    private konst bar = object : Bar by dummy {}
 }
 
 interface Bar {
-    val foo: String
+    konst foo: String
         get() = ""
 }

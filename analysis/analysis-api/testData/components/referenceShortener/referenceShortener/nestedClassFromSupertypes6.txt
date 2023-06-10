@@ -1,4 +1,4 @@
-Before shortening: val prop: MyBaseClass.Nested = MyBaseClass.Nested()
+Before shortening: konst prop: MyBaseClass.Nested = MyBaseClass.Nested()
 with DO_NOT_SHORTEN:
 with SHORTEN_IF_ALREADY_IMPORTED:
 with SHORTEN_AND_IMPORT:

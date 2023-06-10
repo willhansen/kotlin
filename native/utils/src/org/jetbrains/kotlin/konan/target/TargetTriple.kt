@@ -18,10 +18,10 @@ package org.jetbrains.kotlin.konan.target
  * @see <a href="https://clang.llvm.org/docs/CrossCompilation.html#target-triple">Clang documentation for target triple</a>.
  */
 data class TargetTriple(
-        val architecture: String,
-        val vendor: String,
-        val os: String,
-        val environment: String?
+        konst architecture: String,
+        konst vendor: String,
+        konst os: String,
+        konst environment: String?
 ) {
     companion object {
         /**
@@ -30,7 +30,7 @@ data class TargetTriple(
          * TODO: Support normalization like LLVM's Triple::normalize.
          */
         fun fromString(tripleString: String): TargetTriple {
-            val components = tripleString.split('-')
+            konst components = tripleString.split('-')
             // TODO: There might be other cases (e.g. of size 2 or 5),
             //  but let's support only these for now.
             require(components.size == 3 || components.size == 4) {
@@ -46,7 +46,7 @@ data class TargetTriple(
     }
 
     override fun toString(): String {
-        val envSuffix = environment?.let { "-$environment" }
+        konst envSuffix = environment?.let { "-$environment" }
                 ?: ""
         return "$architecture-$vendor-$os$envSuffix"
     }
@@ -55,7 +55,7 @@ data class TargetTriple(
 /**
  * Check that given target is Apple simulator.
  */
-val TargetTriple.isSimulator: Boolean
+konst TargetTriple.isSimulator: Boolean
     get() = environment == "simulator"
 
 /**
@@ -73,7 +73,7 @@ fun TargetTriple.withOSVersion(osVersion: String): TargetTriple =
  *  but this class is not that flexible yet.
  */
 fun TargetTriple.withoutVendor(): String {
-    val envSuffix = environment?.let { "-$environment" }
+    konst envSuffix = environment?.let { "-$environment" }
             ?: ""
     return "$architecture-$os$envSuffix"
 }

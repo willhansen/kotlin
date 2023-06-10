@@ -4,7 +4,7 @@
  */
 
 // FILE: lib.kt
-val y = computeY()
+konst y = computeY()
 
 private fun computeY() = 42
 

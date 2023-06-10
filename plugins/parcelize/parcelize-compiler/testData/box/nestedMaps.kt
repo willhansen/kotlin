@@ -9,20 +9,20 @@ import android.os.Parcelable
 import java.util.Arrays
 
 @Parcelize
-class Data(val data: Map<Array<Int>, Array<Int>>) : Parcelable
+class Data(konst data: Map<Array<Int>, Array<Int>>) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val first = Data(mapOf(arrayOf(0) to arrayOf(1)))
+    konst first = Data(mapOf(arrayOf(0) to arrayOf(1)))
 
     first.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val second = parcelableCreator<Data>().createFromParcel(parcel)
+    konst second = parcelableCreator<Data>().createFromParcel(parcel)
     assert(second.data.size == 1)
-    val entry = second.data.entries.single()
+    konst entry = second.data.entries.single()
     assert(Arrays.equals(entry.key, arrayOf(0)))
-    assert(Arrays.equals(entry.value, arrayOf(1)))
+    assert(Arrays.equals(entry.konstue, arrayOf(1)))
 }

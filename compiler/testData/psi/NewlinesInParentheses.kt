@@ -1,22 +1,22 @@
 fun foo() {
-  val a = a + b
-  val a = a +
+  konst a = a + b
+  konst a = a +
     b
-  val a = a
+  konst a = a
   + b
-  val a = (a
+  konst a = (a
   + b)
-  val a = ({a
+  konst a = ({a
   + b})
-  val a = ({a
+  konst a = ({a
   + b}
   + b)
 
-  val a = b[c
+  konst a = b[c
     + d]
-  val a = b[{c
+  konst a = b[{c
     + d}]
-  val a = b[{c
+  konst a = b[{c
     + d}
     + d]
 
@@ -33,6 +33,6 @@ fun foo() {
     f
     () -> a
   }
-  val f = a is T
+  konst f = a is T
   <X>
 }

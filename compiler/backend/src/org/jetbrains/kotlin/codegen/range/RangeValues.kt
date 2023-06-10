@@ -37,23 +37,23 @@ fun ExpressionCodegen.createRangeValueForExpression(rangeExpression: KtExpressio
     // also look into org.jetbrains.kotlin.generators.tests and update related testData generators
     // (e.g., GenerateInRangeExpressionTestData).
 
-    val resolvedCall = getResolvedCallForRangeExpression(bindingContext, rangeExpression)
+    konst resolvedCall = getResolvedCallForRangeExpression(bindingContext, rangeExpression)
     if (resolvedCall != null) {
-        val intrinsicRangeValue = createIntrinsifiedRangeValueOrNull(resolvedCall)
+        konst intrinsicRangeValue = createIntrinsifiedRangeValueOrNull(resolvedCall)
         if (intrinsicRangeValue != null) {
             return intrinsicRangeValue
         }
     }
 
-    val rangeType = bindingContext.getType(rangeExpression)!!
-    val asmRangeType = asmType(rangeType)
+    konst rangeType = bindingContext.getType(rangeExpression)!!
+    konst asmRangeType = asmType(rangeType)
 
-    val loopRangeIteratorResolvedCall = bindingContext[BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL, rangeExpression]
+    konst loopRangeIteratorResolvedCall = bindingContext[BindingContext.LOOP_RANGE_ITERATOR_RESOLVED_CALL, rangeExpression]
 
-    val builtIns = state.module.builtIns
+    konst builtIns = state.module.builtIns
     return when {
         asmRangeType.sort == Type.ARRAY -> {
-            val properForInArraySemantics =
+            konst properForInArraySemantics =
                 state.languageVersionSettings.supportsFeature(LanguageFeature.ProperForInArrayLoopRangeVariableAssignmentSemantic)
             ArrayRangeValue(
                 properForInArraySemantics || !isLocalVarReference(rangeExpression, bindingContext),
@@ -76,7 +76,7 @@ fun ExpressionCodegen.createRangeValueForExpression(rangeExpression: KtExpressio
 
 fun isLocalVarReference(rangeExpression: KtExpression, bindingContext: BindingContext): Boolean {
     if (rangeExpression !is KtSimpleNameExpression) return false
-    val resultingDescriptor = rangeExpression.getResolvedCall(bindingContext)?.resultingDescriptor ?: return false
+    konst resultingDescriptor = rangeExpression.getResolvedCall(bindingContext)?.resultingDescriptor ?: return false
     return resultingDescriptor is LocalVariableDescriptor &&
             resultingDescriptor !is SyntheticFieldDescriptor &&
             !resultingDescriptor.isDelegated &&
@@ -93,7 +93,7 @@ private fun getResolvedCallForRangeExpression(
     bindingContext: BindingContext,
     rangeExpression: KtExpression
 ): ResolvedCall<out CallableDescriptor>? {
-    val expression = KtPsiUtil.deparenthesize(rangeExpression) ?: return null
+    konst expression = KtPsiUtil.deparenthesize(rangeExpression) ?: return null
 
     return when (expression) {
         is KtQualifiedExpression ->
@@ -114,7 +114,7 @@ private fun getResolvedCallForRangeExpression(
 }
 
 private fun ExpressionCodegen.createIntrinsifiedRangeValueOrNull(rangeCall: ResolvedCall<out CallableDescriptor>): RangeValue? {
-    val rangeCallee = rangeCall.resultingDescriptor
+    konst rangeCallee = rangeCall.resultingDescriptor
 
     return when {
         isPrimitiveNumberRangeTo(rangeCallee) || isUnsignedIntegerRangeTo(rangeCallee) ->
@@ -147,8 +147,8 @@ private fun ExpressionCodegen.createIntrinsifiedRangeValueOrNull(rangeCall: Reso
 }
 
 private fun ExpressionCodegen.createReversedRangeValueOrNull(rangeCall: ResolvedCall<out CallableDescriptor>): RangeValue? {
-    val receiver = rangeCall.extensionReceiver as? ExpressionReceiver ?: return null
-    val receiverRangeValue = createRangeValueForExpression(receiver.expression) as? ReversableRangeValue ?: return null
+    konst receiver = rangeCall.extensionReceiver as? ExpressionReceiver ?: return null
+    konst receiverRangeValue = createRangeValueForExpression(receiver.expression) as? ReversableRangeValue ?: return null
     return ReversedRangeValue(receiverRangeValue)
 }
 

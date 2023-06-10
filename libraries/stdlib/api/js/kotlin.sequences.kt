@@ -37,19 +37,19 @@ public inline fun <T, K, V> kotlin.sequences.Sequence<T>.associate(transform: (T
 
 public inline fun <T, K> kotlin.sequences.Sequence<T>.associateBy(keySelector: (T) -> K): kotlin.collections.Map<K, T>
 
-public inline fun <T, K, V> kotlin.sequences.Sequence<T>.associateBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, V>
+public inline fun <T, K, V> kotlin.sequences.Sequence<T>.associateBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, V>
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, in T>> kotlin.sequences.Sequence<T>.associateByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.sequences.Sequence<T>.associateByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.sequences.Sequence<T>.associateByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.sequences.Sequence<T>.associateTo(destination: M, transform: (T) -> kotlin.Pair<K, V>): M
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <K, V> kotlin.sequences.Sequence<K>.associateWith(valueSelector: (K) -> V): kotlin.collections.Map<K, V>
+public inline fun <K, V> kotlin.sequences.Sequence<K>.associateWith(konstueSelector: (K) -> V): kotlin.collections.Map<K, V>
 
 @kotlin.SinceKotlin(version = "1.3")
-public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.sequences.Sequence<K>.associateWithTo(destination: M, valueSelector: (K) -> V): M
+public inline fun <K, V, M : kotlin.collections.MutableMap<in K, in V>> kotlin.sequences.Sequence<K>.associateWithTo(destination: M, konstueSelector: (K) -> V): M
 
 @kotlin.jvm.JvmName(name = "averageOfByte")
 public fun kotlin.sequences.Sequence<kotlin.Byte>.average(): kotlin.Double
@@ -191,11 +191,11 @@ public inline fun <T> kotlin.sequences.Sequence<T>.forEachIndexed(action: (index
 
 public inline fun <T, K> kotlin.sequences.Sequence<T>.groupBy(keySelector: (T) -> K): kotlin.collections.Map<K, kotlin.collections.List<T>>
 
-public inline fun <T, K, V> kotlin.sequences.Sequence<T>.groupBy(keySelector: (T) -> K, valueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
+public inline fun <T, K, V> kotlin.sequences.Sequence<T>.groupBy(keySelector: (T) -> K, konstueTransform: (T) -> V): kotlin.collections.Map<K, kotlin.collections.List<V>>
 
 public inline fun <T, K, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<T>>> kotlin.sequences.Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K): M
 
-public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.sequences.Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K, valueTransform: (T) -> V): M
+public inline fun <T, K, V, M : kotlin.collections.MutableMap<in K, kotlin.collections.MutableList<V>>> kotlin.sequences.Sequence<T>.groupByTo(destination: M, keySelector: (T) -> K, konstueTransform: (T) -> V): M
 
 @kotlin.SinceKotlin(version = "1.1")
 public inline fun <T, K> kotlin.sequences.Sequence<T>.groupingBy(crossinline keySelector: (T) -> K): kotlin.collections.Grouping<T, K>
@@ -608,7 +608,7 @@ public interface Sequence<out T> {
 @kotlin.coroutines.RestrictsSuspension
 @kotlin.SinceKotlin(version = "1.3")
 public abstract class SequenceScope<in T> {
-    public abstract suspend fun yield(value: T): kotlin.Unit
+    public abstract suspend fun yield(konstue: T): kotlin.Unit
 
     public final suspend fun yieldAll(elements: kotlin.collections.Iterable<T>): kotlin.Unit
 

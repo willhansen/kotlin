@@ -16,7 +16,7 @@ private class TopLevelClass {
     }
 }
 
-private enum class TopLevelEnum(private val e: NestedEnum) {
+private enum class TopLevelEnum(private konst e: NestedEnum) {
     E1(NestedEntry);
 
     private enum class NestedEnum {

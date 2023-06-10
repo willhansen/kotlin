@@ -8,7 +8,7 @@ enum class TestFinalEnum1 {
     X1
 }
 
-enum class TestFinalEnum2(val x: Int) {
+enum class TestFinalEnum2(konst x: Int) {
     X1(1)
 }
 

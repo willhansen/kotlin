@@ -1,5 +1,5 @@
 FILE: reassignOfNonMemberProperty_lateInitialization.kt
-    public final val R|Some|.z: R|kotlin/String|
+    public final konst R|Some|.z: R|kotlin/String|
         public get(): R|kotlin/String| {
             ^ String(ok)
         }
@@ -8,10 +8,10 @@ FILE: reassignOfNonMemberProperty_lateInitialization.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/String|
+        public final konst x: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public final val y: R|kotlin/String|
+        public final konst y: R|kotlin/String|
             public get(): R|kotlin/String|
 
         init {
@@ -26,7 +26,7 @@ FILE: reassignOfNonMemberProperty_lateInitialization.kt
 
         }
 
-        public final val a: R|kotlin/String| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/String|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
+        public final konst a: R|kotlin/String| = this@R|/Some|.R|kotlin/run|<R|Some|, R|kotlin/String|>(<L> = run@fun R|Some|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
             this@R|special/anonymous|.R|/Some.x| = String(error)
             this@R|special/anonymous|.R|/Some.y| = String(error)
             this@R|special/anonymous|.R|/z| = String(error)
@@ -35,7 +35,7 @@ FILE: reassignOfNonMemberProperty_lateInitialization.kt
         )
             public get(): R|kotlin/String|
 
-        public final val b: R|kotlin/String| = Int(123).R|kotlin/run|<R|kotlin/Int|, R|kotlin/String|>(<L> = run@fun R|kotlin/Int|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
+        public final konst b: R|kotlin/String| = Int(123).R|kotlin/run|<R|kotlin/Int|, R|kotlin/String|>(<L> = run@fun R|kotlin/Int|.<anonymous>(): R|kotlin/String| <inline=Inline, kind=EXACTLY_ONCE>  {
             this@R|/Some|.R|/Some.x| = String(error)
             this@R|/Some|.R|/Some.y| = String(ok)
             this@R|/Some|.R|/Some.y| = String(error)

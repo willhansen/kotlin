@@ -37,8 +37,8 @@ public class DataFlowInfoForArgumentsImpl extends MutableDataFlowInfoForArgument
         initNextArgMap(call.getValueArguments());
     }
 
-    private void initNextArgMap(@NotNull List<? extends ValueArgument> valueArguments) {
-        Iterator<? extends ValueArgument> iterator = valueArguments.iterator();
+    private void initNextArgMap(@NotNull List<? extends ValueArgument> konstueArguments) {
+        Iterator<? extends ValueArgument> iterator = konstueArguments.iterator();
         ValueArgument prev = null;
         while (iterator.hasNext()) {
             ValueArgument argument = iterator.next();
@@ -54,8 +54,8 @@ public class DataFlowInfoForArgumentsImpl extends MutableDataFlowInfoForArgument
 
     @NotNull
     @Override
-    public DataFlowInfo getInfo(@NotNull ValueArgument valueArgument) {
-        DataFlowInfo infoForArgument = infoMap == null ? null : infoMap.get(valueArgument);
+    public DataFlowInfo getInfo(@NotNull ValueArgument konstueArgument) {
+        DataFlowInfo infoForArgument = infoMap == null ? null : infoMap.get(konstueArgument);
         if (infoForArgument == null) {
             return initialDataFlowInfo;
         }
@@ -63,8 +63,8 @@ public class DataFlowInfoForArgumentsImpl extends MutableDataFlowInfoForArgument
     }
 
     @Override
-    public void updateInfo(@NotNull ValueArgument valueArgument, @NotNull DataFlowInfo dataFlowInfo) {
-        ValueArgument next = nextArgument == null ? null : nextArgument.get(valueArgument);
+    public void updateInfo(@NotNull ValueArgument konstueArgument, @NotNull DataFlowInfo dataFlowInfo) {
+        ValueArgument next = nextArgument == null ? null : nextArgument.get(konstueArgument);
         if (next != null) {
             if (infoMap == null) {
                 infoMap = new HashMap<>();

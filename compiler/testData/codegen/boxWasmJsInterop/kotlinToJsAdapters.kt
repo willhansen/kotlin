@@ -34,7 +34,7 @@ fun getExternRef(): ExternRef =
     js("'abc'")
 
 fun testExterRef() {
-    val externRef = getExternRef()
+    konst externRef = getExternRef()
     notNullExternRef(externRef)
     nullExternRef(externRef)
     null2ExternRef(null)

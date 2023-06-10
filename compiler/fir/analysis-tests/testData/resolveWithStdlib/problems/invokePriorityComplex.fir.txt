@@ -4,7 +4,7 @@ FILE: invokePriorityComplex.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/Int| = R|<local>/a|
+        public final konst a: R|kotlin/Int| = R|<local>/a|
             public get(): R|kotlin/Int|
 
     }
@@ -18,7 +18,7 @@ FILE: invokePriorityComplex.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val a: R|kotlin/Int| = Int(42)
+            public final konst a: R|kotlin/Int| = Int(42)
                 public get(): R|kotlin/Int|
 
         }
@@ -28,7 +28,7 @@ FILE: invokePriorityComplex.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val foo: R|AHolder| = R|/AHolder.AHolder|(Int(52))
+            public final konst foo: R|AHolder| = R|/AHolder.AHolder|(Int(52))
                 public get(): R|AHolder|
 
         }
@@ -51,7 +51,7 @@ FILE: invokePriorityComplex.kt
                 super<R|kotlin/Any|>()
             }
 
-            public final val foo: R|AHolder| = R|/AHolder.AHolder|(Int(52))
+            public final konst foo: R|AHolder| = R|/AHolder.AHolder|(Int(52))
                 public get(): R|AHolder|
 
         }

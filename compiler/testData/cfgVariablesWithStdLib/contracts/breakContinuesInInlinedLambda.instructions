@@ -67,7 +67,7 @@ sink:
 =====================
 == test ==
 fun test() {
-    val x: Int
+    konst x: Int
 
     if (getBoolean())
         myRun {
@@ -99,8 +99,8 @@ fun test() {
 ---------------------
 L0:
   1 <START>                                                                                                                                                                                                                                             INIT: in: {} out: {}            USE: in: {} out: {}
-  2 mark({ val x: Int if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) { x = 42 } else { x = 43 } } break } while (getBoolean()) myRun { x.inc() } myRun { x = 42 } break } x = 42 } else myRun { x = 42 } x.inc() })
-    v(val x: Int)                                                                                                                                                                                                                                       INIT: in: {} out: {x=D}
+  2 mark({ konst x: Int if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) { x = 42 } else { x = 43 } } break } while (getBoolean()) myRun { x.inc() } myRun { x = 42 } break } x = 42 } else myRun { x = 42 } x.inc() })
+    v(konst x: Int)                                                                                                                                                                                                                                       INIT: in: {} out: {x=D}
     mark(if (getBoolean()) myRun { while (getBoolean()) { do { myRun { if (getBoolean()) { x = 42 } else { x = 43 } } break } while (getBoolean()) myRun { x.inc() } myRun { x = 42 } break } x = 42 } else myRun { x = 42 })                           INIT: in: {x=D} out: {x=D}
     mark(getBoolean())
     call(getBoolean(), getBoolean) -> <v0>

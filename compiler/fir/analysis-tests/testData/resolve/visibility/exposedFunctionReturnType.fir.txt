@@ -38,13 +38,13 @@ FILE: exposedFunctionReturnType.kt
 
         public abstract fun foo(): R|Some|
 
-        public final static fun values(): R|kotlin/Array<Some>| {
+        public final static fun konstues(): R|kotlin/Array<Some>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|Some| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|Some| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<Some>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<Some>|
             public get(): R|kotlin/enums/EnumEntries<Some>|
 
     }

@@ -31,13 +31,13 @@ projectTest(parallel = true) {
     dependsOn(":dist")
 }
 
-val generateSpecTests by generator("org.jetbrains.kotlin.spec.utils.tasks.GenerateSpecTestsKt")
+konst generateSpecTests by generator("org.jetbrains.kotlin.spec.utils.tasks.GenerateSpecTestsKt")
 
-val generateFeatureInteractionSpecTestData by generator("org.jetbrains.kotlin.spec.utils.tasks.GenerateFeatureInteractionSpecTestDataKt")
+konst generateFeatureInteractionSpecTestData by generator("org.jetbrains.kotlin.spec.utils.tasks.GenerateFeatureInteractionSpecTestDataKt")
 
-val printSpecTestsStatistic by generator("org.jetbrains.kotlin.spec.utils.tasks.PrintSpecTestsStatisticKt")
+konst printSpecTestsStatistic by generator("org.jetbrains.kotlin.spec.utils.tasks.PrintSpecTestsStatisticKt")
 
-val specConsistencyTests by task<Test> {
+konst specConsistencyTests by task<Test> {
     workingDir = rootDir
     filter {
         includeTestsMatching("org.jetbrains.kotlin.spec.consistency.SpecTestsConsistencyTest")

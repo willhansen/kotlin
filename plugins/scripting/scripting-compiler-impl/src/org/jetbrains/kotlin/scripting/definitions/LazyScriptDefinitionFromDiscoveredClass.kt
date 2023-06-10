@@ -12,11 +12,11 @@ import kotlin.script.experimental.host.*
 import kotlin.script.experimental.jvm.JvmDependency
 
 class LazyScriptDefinitionFromDiscoveredClass internal constructor(
-    private val baseHostConfiguration: ScriptingHostConfiguration,
-    private val annotationsFromAsm: ArrayList<BinAnnData>,
-    private val className: String,
-    private val classpath: List<File>,
-    private val messageReporter: MessageReporter
+    private konst baseHostConfiguration: ScriptingHostConfiguration,
+    private konst annotationsFromAsm: ArrayList<BinAnnData>,
+    private konst className: String,
+    private konst classpath: List<File>,
+    private konst messageReporter: MessageReporter
 ) : ScriptDefinition.FromConfigurationsBase() {
 
     constructor(
@@ -27,7 +27,7 @@ class LazyScriptDefinitionFromDiscoveredClass internal constructor(
         messageReporter: MessageReporter
     ) : this(baseHostConfiguration, loadAnnotationsFromClass(classBytes), className, classpath, messageReporter)
 
-    private val definition: kotlin.script.experimental.host.ScriptDefinition by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst definition: kotlin.script.experimental.host.ScriptDefinition by lazy(LazyThreadSafetyMode.PUBLICATION) {
         messageReporter(
             ScriptDiagnostic.Severity.DEBUG,
             "Configure scripting: loading script definition class $className using classpath $classpath\n.  ${Thread.currentThread().stackTrace}"
@@ -44,35 +44,35 @@ class LazyScriptDefinitionFromDiscoveredClass internal constructor(
             )
         } catch (ex: ClassNotFoundException) {
             messageReporter(ScriptDiagnostic.Severity.ERROR, "Cannot find script definition class $className")
-            InvalidScriptDefinition
+            InkonstidScriptDefinition
         } catch (ex: Exception) {
             messageReporter(
                 ScriptDiagnostic.Severity.ERROR,
                 "Error processing script definition class $className: ${ex.message}\nclasspath:\n${classpath.joinToString("\n", "    ")}"
             )
-            InvalidScriptDefinition
+            InkonstidScriptDefinition
         }
     }
 
-    override val hostConfiguration: ScriptingHostConfiguration
+    override konst hostConfiguration: ScriptingHostConfiguration
         get() = definition.compilationConfiguration[ScriptCompilationConfiguration.hostConfiguration] ?: baseHostConfiguration
 
-    override val compilationConfiguration: ScriptCompilationConfiguration get() = definition.compilationConfiguration
-    override val evaluationConfiguration: ScriptEvaluationConfiguration get() = definition.evaluationConfiguration
+    override konst compilationConfiguration: ScriptCompilationConfiguration get() = definition.compilationConfiguration
+    override konst ekonstuationConfiguration: ScriptEkonstuationConfiguration get() = definition.ekonstuationConfiguration
 
-    override val fileExtension: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst fileExtension: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
         annotationsFromAsm.find { it.name == KotlinScript::class.java.simpleName }?.args
-            ?.find { it.name == "fileExtension" }?.value
+            ?.find { it.name == "fileExtension" }?.konstue
             ?: compilationConfiguration.let {
                 it[ScriptCompilationConfiguration.fileExtension] ?: super.fileExtension
             }
     }
 
-    override val name: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        annotationsFromAsm.find { it.name == KotlinScript::class.java.simpleName!! }?.args?.find { it.name == "name" }?.value
+    override konst name: String by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        annotationsFromAsm.find { it.name == KotlinScript::class.java.simpleName!! }?.args?.find { it.name == "name" }?.konstue
             ?: super.name
     }
 }
 
-val InvalidScriptDefinition =
-    ScriptDefinition(ScriptCompilationConfiguration(), ScriptEvaluationConfiguration())
+konst InkonstidScriptDefinition =
+    ScriptDefinition(ScriptCompilationConfiguration(), ScriptEkonstuationConfiguration())

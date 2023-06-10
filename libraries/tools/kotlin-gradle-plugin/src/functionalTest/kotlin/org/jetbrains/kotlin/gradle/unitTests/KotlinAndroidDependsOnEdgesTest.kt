@@ -20,28 +20,28 @@ import kotlin.test.assertEquals
 class KotlinAndroidDependsOnEdgesTest {
     @Test
     fun `default android source set declares dependsOn commonMain`() {
-        val project = createProject()
+        konst project = createProject()
 
         project.plugins.apply("kotlin-multiplatform")
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         /* Minimal MPP setup */
-        val kotlin = project.kotlinExtension as KotlinMultiplatformExtension
+        konst kotlin = project.kotlinExtension as KotlinMultiplatformExtension
         kotlin.androidTarget("android")
 
-        /* Force evaluation */
+        /* Force ekonstuation */
         project as ProjectInternal
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val androidMain = kotlin.sourceSets.getByName("androidMain")
-        val androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
-        val androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst androidMain = kotlin.sourceSets.getByName("androidMain")
+        konst androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
+        konst androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
 
         assertEquals(
             setOf(commonMain), androidMain.dependsOn,
@@ -61,19 +61,19 @@ class KotlinAndroidDependsOnEdgesTest {
 
     @Test
     fun `custom dependsOn edges`() {
-        val project = createProject()
+        konst project = createProject()
         project.plugins.apply("kotlin-multiplatform")
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         /* Custom MPP setup */
-        val kotlin = project.kotlinExtension as KotlinMultiplatformExtension
+        konst kotlin = project.kotlinExtension as KotlinMultiplatformExtension
         kotlin.androidTarget("android")
         kotlin.sourceSets.apply {
-            val jvmMain = create("jvmMain") {
+            konst jvmMain = create("jvmMain") {
                 it.dependsOn(getByName("commonMain"))
             }
             getByName("androidMain") {
@@ -81,16 +81,16 @@ class KotlinAndroidDependsOnEdgesTest {
             }
         }
 
-        /* Force evaluation */
+        /* Force ekonstuation */
         project as ProjectInternal
-        project.evaluate()
+        project.ekonstuate()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val jvmMain = kotlin.sourceSets.getByName("jvmMain")
-        val androidMain = kotlin.sourceSets.getByName("androidMain")
-        val androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
-        val androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst jvmMain = kotlin.sourceSets.getByName("jvmMain")
+        konst androidMain = kotlin.sourceSets.getByName("androidMain")
+        konst androidUnitTest = kotlin.sourceSets.getByName("androidUnitTest")
+        konst androidInstrumentedTest = kotlin.sourceSets.getByName("androidInstrumentedTest")
 
         assertEquals(
             setOf(commonMain, jvmMain).sorted(), androidMain.dependsOn.sorted(),

@@ -17,7 +17,7 @@
 
 using namespace kotlin;
 
-// this values will be substituted by compiler
+// this konstues will be substituted by compiler
 extern "C" const void **Kotlin_callsCheckerKnownFunctions = nullptr;
 extern "C" int Kotlin_callsCheckerKnownFunctionsCount = 0;
 
@@ -242,7 +242,7 @@ extern "C" const char* Kotlin_callsCheckerGoodFunctionNames[] = {
         // Not used in Runnable state, but this would be ok.
         // If we don't include it to the good functions list, the code generator will emit redundant state check at the callsite,
         // and this would ruin the code: the state check would be inserted between retainAutoreleasedReturnValue and the actual call
-        // producing "autoreleased return value", so the latter won't be able to detect the former, and the autorelease elimination
+        // producing "autoreleased return konstue", so the latter won't be able to detect the former, and the autorelease elimination
         // won't work.
         "llvm.objc.retainAutoreleasedReturnValue",
         "llvm.objectsize.*",

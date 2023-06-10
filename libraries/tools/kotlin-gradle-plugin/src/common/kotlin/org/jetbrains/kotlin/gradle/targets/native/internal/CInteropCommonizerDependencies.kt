@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.gradle.utils.future
 import java.io.File
 
 internal fun Project.setupCInteropCommonizerDependencies() {
-    val kotlin = this.multiplatformExtensionOrNull ?: return
+    konst kotlin = this.multiplatformExtensionOrNull ?: return
 
     kotlin.forAllSharedNativeCompilations { compilation ->
         setupCInteropCommonizerDependenciesForCompilation(compilation)
@@ -31,10 +31,10 @@ internal fun Project.setupCInteropCommonizerDependencies() {
 }
 
 private fun Project.setupCInteropCommonizerDependenciesForCompilation(compilation: KotlinSharedNativeCompilation) {
-    val cinteropCommonizerTask = project.commonizeCInteropTask ?: return
+    konst cinteropCommonizerTask = project.commonizeCInteropTask ?: return
 
     compilation.compileDependencyFiles += filesProvider {
-        val cinteropCommonizerDependent = future { CInteropCommonizerDependent.from(compilation) }.getOrThrow()
+        konst cinteropCommonizerDependent = future { CInteropCommonizerDependent.from(compilation) }.getOrThrow()
             ?: return@filesProvider emptySet<File>()
         cinteropCommonizerTask.get().commonizedOutputLibraries(cinteropCommonizerDependent)
     }
@@ -50,12 +50,12 @@ private fun Project.setupCInteropCommonizerDependenciesForIde(sourceSet: Default
 }
 
 internal fun Project.cinteropCommonizerDependencies(sourceSet: DefaultKotlinSourceSet): FileCollection {
-    val cinteropCommonizerTask = project.copyCommonizeCInteropForIdeTask ?: return project.files()
+    konst cinteropCommonizerTask = project.copyCommonizeCInteropForIdeTask ?: return project.files()
 
     return filesProvider {
         future {
-            val directlyDependent = CInteropCommonizerDependent.from(sourceSet)
-            val associateDependent = CInteropCommonizerDependent.fromAssociateCompilations(sourceSet)
+            konst directlyDependent = CInteropCommonizerDependent.from(sourceSet)
+            konst associateDependent = CInteropCommonizerDependent.fromAssociateCompilations(sourceSet)
 
             listOfNotNull(directlyDependent, associateDependent).map { cinteropCommonizerDependent ->
                 cinteropCommonizerTask.get().commonizedOutputLibraries(cinteropCommonizerDependent)

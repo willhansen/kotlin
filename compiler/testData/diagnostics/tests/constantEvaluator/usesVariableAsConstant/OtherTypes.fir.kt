@@ -4,19 +4,19 @@ enum class MyEnum { A, B }
 
 fun foo(): Boolean = true
 
-val x = 1
+konst x = 1
 
-// val prop1: false
-val prop1 = MyEnum.A
+// konst prop1: false
+konst prop1 = MyEnum.A
 
-// val prop2: null
-val prop2 = foo()
+// konst prop2: null
+konst prop2 = foo()
 
-// val prop3: true
-val prop3 = "$x"
+// konst prop3: true
+konst prop3 = "$x"
 
-// val prop4: false
-val prop4 = intArrayOf(1, 2, 3)
+// konst prop4: false
+konst prop4 = intArrayOf(1, 2, 3)
 
-// val prop5: true
-val prop5 = intArrayOf(1, 2, x, x)
+// konst prop5: true
+konst prop5 = intArrayOf(1, 2, x, x)

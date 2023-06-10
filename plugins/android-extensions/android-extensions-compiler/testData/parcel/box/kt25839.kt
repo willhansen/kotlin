@@ -14,13 +14,13 @@ class User : Parcelable
 class User2() : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val user = User()
-    val user2 = User2()
+    konst user = User()
+    konst user2 = User2()
 
     user.writeToParcel(parcel, 0)
     user2.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 

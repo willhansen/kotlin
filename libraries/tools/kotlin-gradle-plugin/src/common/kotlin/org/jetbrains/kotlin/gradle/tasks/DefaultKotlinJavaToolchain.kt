@@ -28,29 +28,29 @@ import java.io.File
 import javax.inject.Inject
 
 internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
-    private val objects: ObjectFactory,
+    private konst objects: ObjectFactory,
     projectLayout: ProjectLayout,
     jvmCompilerOptions: () -> KotlinJvmCompilerOptions?
 ) : KotlinJavaToolchain {
 
     @get:Internal
-    internal val gradleJvm: Provider<Jvm> = objects
+    internal konst gradleJvm: Provider<Jvm> = objects
         .property(Jvm.current())
         .chainedDisallowChanges()
         .chainedFinalizeValueOnRead()
 
     @get:Internal
-    internal val providedJvm: Property<Jvm> = objects
+    internal konst providedJvm: Property<Jvm> = objects
         .property<Jvm>()
         .chainedFinalizeValueOnRead()
 
     @get:Internal
-    internal val buildJvm: Provider<Jvm> = objects
+    internal konst buildJvm: Provider<Jvm> = objects
         .property(providedJvm.orElse(gradleJvm))
         .chainedDisallowChanges()
         .chainedFinalizeValueOnRead()
 
-    final override val javaVersion: Provider<JavaVersion> = objects
+    final override konst javaVersion: Provider<JavaVersion> = objects
         .property(
             buildJvm
                 .map { jvm ->
@@ -64,9 +64,9 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
         .chainedFinalizeValueOnRead()
 
     @get:Internal
-    internal val javaExecutable: RegularFileProperty = objects
+    internal konst javaExecutable: RegularFileProperty = objects
         .fileProperty()
-        .value(
+        .konstue(
             buildJvm.flatMap { jvm ->
                 projectLayout.file(
                     objects.property<File>(
@@ -103,10 +103,10 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
     }
 
     @get:Internal
-    internal val jdkToolsJar: Provider<File?> = getToolsJarFromJvm(buildJvm, javaVersion)
+    internal konst jdkToolsJar: Provider<File?> = getToolsJarFromJvm(buildJvm, javaVersion)
 
     @get:Internal
-    internal val currentJvmJdkToolsJar: Provider<File?> = getToolsJarFromJvm(
+    internal konst currentJvmJdkToolsJar: Provider<File?> = getToolsJarFromJvm(
         gradleJvm,
         gradleJvm.map {
             // Current JVM should always have java version
@@ -114,22 +114,22 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
         }
     )
 
-    final override val jdk: KotlinJavaToolchain.JdkSetter = DefaultJdkSetter(
+    final override konst jdk: KotlinJavaToolchain.JdkSetter = DefaultJdkSetter(
         providedJvm,
         objects,
         jvmCompilerOptions
     )
 
-    final override val toolchain: KotlinJavaToolchain.JavaToolchainSetter =
+    final override konst toolchain: KotlinJavaToolchain.JavaToolchainSetter =
         DefaultJavaToolchainSetter(
             providedJvm,
             jvmCompilerOptions
         )
 
     private class DefaultJdkSetter(
-        private val providedJvm: Property<Jvm>,
-        private val objects: ObjectFactory,
-        private val jvmCompilerOptions: () -> KotlinJvmCompilerOptions?
+        private konst providedJvm: Property<Jvm>,
+        private konst objects: ObjectFactory,
+        private konst jvmCompilerOptions: () -> KotlinJvmCompilerOptions?
     ) : KotlinJavaToolchain.JdkSetter {
 
         override fun use(
@@ -137,7 +137,7 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
             jdkVersion: JavaVersion
         ) {
             require(jdkHomeLocation.isDirectory) {
-                "Supplied jdkHomeLocation must be a valid directory. You supplied: $jdkHomeLocation"
+                "Supplied jdkHomeLocation must be a konstid directory. You supplied: $jdkHomeLocation"
             }
             require(jdkHomeLocation.exists()) {
                 "Supplied jdkHomeLocation does not exist. You supplied: $jdkHomeLocation"
@@ -156,8 +156,8 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
     }
 
     internal class DefaultJavaToolchainSetter(
-        private val providedJvm: Property<Jvm>,
-        private val jvmCompilerOptions: () -> KotlinJvmCompilerOptions?
+        private konst providedJvm: Property<Jvm>,
+        private konst jvmCompilerOptions: () -> KotlinJvmCompilerOptions?
     ) : KotlinJavaToolchain.JavaToolchainSetter {
 
         internal fun useAsConvention(
@@ -187,7 +187,7 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
                 toolchainJvm.map { jvm ->
                     // For Java 9 and Java 10 JavaVersion returns "1.9" or "1.10" accordingly
                     // that is not accepted by Kotlin compiler
-                    val normalizedVersion = when (jvm.javaVersion) {
+                    konst normalizedVersion = when (jvm.javaVersion) {
                         JavaVersion.VERSION_1_9 -> "9"
                         JavaVersion.VERSION_1_10 -> "10"
                         else -> jvm.javaVersion.toString()
@@ -210,19 +210,19 @@ internal abstract class DefaultKotlinJavaToolchain @Inject constructor(
             project: Project,
         ) {
             project.plugins.withId("org.gradle.java-base") {
-                val toolchainService = project.extensions.findByType(JavaToolchainService::class.java)
+                konst toolchainService = project.extensions.findByType(JavaToolchainService::class.java)
                     ?: error("Gradle JavaToolchainService is not available!")
-                val toolchainSpec = project.extensions
+                konst toolchainSpec = project.extensions
                     .getByType(JavaPluginExtension::class.java)
                     .toolchain
-                val javaLauncher = toolchainService.launcherFor(toolchainSpec)
+                konst javaLauncher = toolchainService.launcherFor(toolchainSpec)
                 wireJvmTargetToToolchain(compilerOptions, javaLauncher)
             }
         }
 
         private fun mapToJvm(javaLauncher: JavaLauncher): Jvm {
-            val metadata = javaLauncher.metadata
-            val javaVersion = JavaVersion.toVersion(metadata.languageVersion.asInt())
+            konst metadata = javaLauncher.metadata
+            konst javaVersion = JavaVersion.toVersion(metadata.languageVersion.asInt())
             return Jvm.discovered(
                 metadata.installationPath.asFile,
                 null,

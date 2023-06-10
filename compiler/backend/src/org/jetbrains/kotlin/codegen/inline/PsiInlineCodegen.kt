@@ -32,12 +32,12 @@ import org.jetbrains.org.objectweb.asm.commons.Method
 class PsiInlineCodegen(
     codegen: ExpressionCodegen,
     state: GenerationState,
-    private val functionDescriptor: FunctionDescriptor,
+    private konst functionDescriptor: FunctionDescriptor,
     signature: JvmMethodSignature,
     typeParameterMappings: TypeParameterMappings<KotlinType>,
     sourceCompiler: SourceCompilerForInline,
-    private val methodOwner: Type,
-    private val actualDispatchReceiver: Type,
+    private konst methodOwner: Type,
+    private konst actualDispatchReceiver: Type,
     reportErrorsOn: KtElement,
 ) : InlineCodegen<ExpressionCodegen>(
     codegen, state, signature, typeParameterMappings, sourceCompiler,
@@ -78,19 +78,19 @@ class PsiInlineCodegen(
     }
 
     private fun registerLineNumberAfterwards(resolvedCall: ResolvedCall<*>?): Boolean {
-        val callElement = resolvedCall?.call?.callElement ?: return false
-        val parentIfCondition = callElement.getParentOfType<KtIfExpression>(true)?.condition ?: return false
+        konst callElement = resolvedCall?.call?.callElement ?: return false
+        konst parentIfCondition = callElement.getParentOfType<KtIfExpression>(true)?.condition ?: return false
         return parentIfCondition.isAncestor(callElement, false)
     }
 
-    private val hiddenParameters = mutableListOf<Pair<ParameterInfo, Int>>()
+    private konst hiddenParameters = mutableListOf<Pair<ParameterInfo, Int>>()
 
     override fun processHiddenParameters() {
         if (!DescriptorAsmUtil.isStaticMethod((sourceCompiler as PsiSourceCompilerForInline).context.contextKind, functionDescriptor)) {
             hiddenParameters += invocationParamBuilder.addNextParameter(methodOwner, false, actualDispatchReceiver) to
                     codegen.frameMap.enterTemp(methodOwner)
         }
-        for (param in jvmSignature.valueParameters) {
+        for (param in jvmSignature.konstueParameters) {
             if (param.kind == JvmMethodParameterKind.VALUE) {
                 break
             }
@@ -102,36 +102,36 @@ class PsiInlineCodegen(
 
     override fun putHiddenParamsIntoLocals() {
         for (i in hiddenParameters.indices.reversed()) {
-            val (param, offset) = hiddenParameters[i]
+            konst (param, offset) = hiddenParameters[i]
             StackValue.local(offset, param.type).store(StackValue.onStack(param.typeOnStack), codegen.visitor)
         }
         hiddenParameters.clear()
     }
 
     override fun genValueAndPut(
-        valueParameterDescriptor: ValueParameterDescriptor?,
+        konstueParameterDescriptor: ValueParameterDescriptor?,
         argumentExpression: KtExpression,
         parameterType: JvmKotlinType,
         parameterIndex: Int
     ) {
-        requireNotNull(valueParameterDescriptor) {
+        requireNotNull(konstueParameterDescriptor) {
             "Parameter descriptor can only be null in case a @PolymorphicSignature function is called, " +
                     "which cannot be declared in Kotlin and thus be inline: $codegen"
         }
 
-        val isInlineParameter = InlineUtil.isInlineParameter(valueParameterDescriptor)
+        konst isInlineParameter = InlineUtil.isInlineParameter(konstueParameterDescriptor)
         //TODO deparenthesize typed
         if (isInlineParameter && isInlinableParameterExpression(KtPsiUtil.deparenthesize(argumentExpression))) {
-            rememberClosure(argumentExpression, parameterType.type, valueParameterDescriptor)
+            rememberClosure(argumentExpression, parameterType.type, konstueParameterDescriptor)
         } else {
-            val value = codegen.gen(argumentExpression)
-            val kind = when {
-                isCallSiteIsSuspend(valueParameterDescriptor) && parameterType.kotlinType?.isSuspendFunctionTypeOrSubtype == true ->
+            konst konstue = codegen.gen(argumentExpression)
+            konst kind = when {
+                isCallSiteIsSuspend(konstueParameterDescriptor) && parameterType.kotlinType?.isSuspendFunctionTypeOrSubtype == true ->
                     ValueKind.READ_OF_INLINE_LAMBDA_FOR_INLINE_SUSPEND_PARAMETER
-                isInlineSuspendParameter(valueParameterDescriptor) -> ValueKind.READ_OF_OBJECT_FOR_INLINE_SUSPEND_PARAMETER
+                isInlineSuspendParameter(konstueParameterDescriptor) -> ValueKind.READ_OF_OBJECT_FOR_INLINE_SUSPEND_PARAMETER
                 else -> ValueKind.GENERAL
             }
-            putValueIfNeeded(parameterType, value, kind, parameterIndex)
+            putValueIfNeeded(parameterType, konstue, kind, parameterIndex)
         }
     }
 
@@ -141,30 +141,30 @@ class PsiInlineCodegen(
     private fun isCallSiteIsSuspend(descriptor: ValueParameterDescriptor): Boolean =
         state.bindingContext[CodegenBinding.CALL_SITE_IS_SUSPEND_FOR_CROSSINLINE_LAMBDA, descriptor] == true
 
-    private val closuresToGenerate = mutableListOf<PsiExpressionLambda>()
+    private konst closuresToGenerate = mutableListOf<PsiExpressionLambda>()
 
     private fun rememberClosure(expression: KtExpression, type: Type, parameter: ValueParameterDescriptor) {
-        val ktLambda = KtPsiUtil.deparenthesize(expression)
+        konst ktLambda = KtPsiUtil.deparenthesize(expression)
         assert(isInlinableParameterExpression(ktLambda)) { "Couldn't find inline expression in ${expression.text}" }
 
-        val boundReceiver = if (ktLambda is KtCallableReferenceExpression) {
-            val resolvedCall = ktLambda.callableReference.getResolvedCallWithAssert(state.bindingContext)
+        konst boundReceiver = if (ktLambda is KtCallableReferenceExpression) {
+            konst resolvedCall = ktLambda.callableReference.getResolvedCallWithAssert(state.bindingContext)
             JvmCodegenUtil.getBoundCallableReferenceReceiver(resolvedCall)
         } else null
 
-        val lambda = PsiExpressionLambda(ktLambda!!, state, parameter.isCrossinline, boundReceiver != null)
+        konst lambda = PsiExpressionLambda(ktLambda!!, state, parameter.isCrossinline, boundReceiver != null)
         rememberClosure(type, parameter.index, lambda)
         closuresToGenerate += lambda
         if (boundReceiver != null) {
-            // Has to be done immediately to preserve evaluation order.
-            val receiver = codegen.generateReceiverValue(boundReceiver, false)
-            val receiverKotlinType = receiver.kotlinType
-            val boxedReceiver =
+            // Has to be done immediately to preserve ekonstuation order.
+            konst receiver = codegen.generateReceiverValue(boundReceiver, false)
+            konst receiverKotlinType = receiver.kotlinType
+            konst boxedReceiver =
                 if (receiverKotlinType != null)
                     DescriptorAsmUtil.boxType(receiver.type, receiverKotlinType, state.typeMapper)
                 else
                     AsmUtil.boxType(receiver.type)
-            val receiverValue = StackValue.coercion(receiver, boxedReceiver, receiverKotlinType)
+            konst receiverValue = StackValue.coercion(receiver, boxedReceiver, receiverKotlinType)
             putClosureParametersOnStack(lambda, receiverValue)
         }
     }
@@ -178,65 +178,65 @@ class PsiInlineCodegen(
         activeLambda = null
     }
 
-    override fun putValueIfNeeded(parameterType: JvmKotlinType, value: StackValue, kind: ValueKind, parameterIndex: Int) =
-        putArgumentToLocalVal(parameterType, value, parameterIndex, kind)
+    override fun putValueIfNeeded(parameterType: JvmKotlinType, konstue: StackValue, kind: ValueKind, parameterIndex: Int) =
+        putArgumentToLocalVal(parameterType, konstue, parameterIndex, kind)
 
-    override fun putCapturedValueOnStack(stackValue: StackValue, valueType: Type, paramIndex: Int) =
+    override fun putCapturedValueOnStack(stackValue: StackValue, konstueType: Type, paramIndex: Int) =
         putCapturedToLocalVal(stackValue, activeLambda!!.capturedVars[paramIndex], stackValue.kotlinType)
 
-    override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, valueParameterTypes: List<Type>) = Unit
+    override fun reorderArgumentsIfNeeded(actualArgsWithDeclIndex: List<ArgumentAndDeclIndex>, konstueParameterTypes: List<Type>) = Unit
 }
 
-private val FunctionDescriptor.explicitParameters
-    get() = listOfNotNull(extensionReceiverParameter) + valueParameters
+private konst FunctionDescriptor.explicitParameters
+    get() = listOfNotNull(extensionReceiverParameter) + konstueParameters
 
 class PsiExpressionLambda(
     expression: KtExpression,
-    private val state: GenerationState,
-    val isCrossInline: Boolean,
-    val isBoundCallableReference: Boolean
+    private konst state: GenerationState,
+    konst isCrossInline: Boolean,
+    konst isBoundCallableReference: Boolean
 ) : ExpressionLambda() {
-    override val lambdaClassType: Type
+    override konst lambdaClassType: Type
 
-    override val invokeMethod: Method
+    override konst invokeMethod: Method
 
-    val invokeMethodDescriptor: FunctionDescriptor
+    konst invokeMethodDescriptor: FunctionDescriptor
 
-    override val invokeMethodParameters: List<KotlinType?>
+    override konst invokeMethodParameters: List<KotlinType?>
         get() {
-            val actualInvokeDescriptor = if (invokeMethodDescriptor.isSuspend)
+            konst actualInvokeDescriptor = if (invokeMethodDescriptor.isSuspend)
                 getOrCreateJvmSuspendFunctionView(invokeMethodDescriptor, state)
             else
                 invokeMethodDescriptor
             return actualInvokeDescriptor.explicitParameters.map { it.returnType }
         }
 
-    override val invokeMethodReturnType: KotlinType?
+    override konst invokeMethodReturnType: KotlinType?
         get() = invokeMethodDescriptor.returnType
 
-    val classDescriptor: ClassDescriptor
+    konst classDescriptor: ClassDescriptor
 
-    val propertyReferenceInfo: PropertyReferenceInfo?
+    konst propertyReferenceInfo: PropertyReferenceInfo?
 
-    val functionWithBodyOrCallableReference: KtExpression = (expression as? KtLambdaExpression)?.functionLiteral ?: expression
+    konst functionWithBodyOrCallableReference: KtExpression = (expression as? KtLambdaExpression)?.functionLiteral ?: expression
 
-    override val returnLabels: Map<String, Label?>
+    override konst returnLabels: Map<String, Label?>
 
-    val closure: CalculatedClosure
+    konst closure: CalculatedClosure
 
     init {
-        val bindingContext = state.bindingContext
-        val function = bindingContext.get(BindingContext.FUNCTION, functionWithBodyOrCallableReference)
+        konst bindingContext = state.bindingContext
+        konst function = bindingContext.get(BindingContext.FUNCTION, functionWithBodyOrCallableReference)
         if (function == null && expression is KtCallableReferenceExpression) {
-            val variableDescriptor =
+            konst variableDescriptor =
                 bindingContext.get(BindingContext.VARIABLE, functionWithBodyOrCallableReference) as? VariableDescriptorWithAccessors
                     ?: throw AssertionError("Reference expression not resolved to variable descriptor with accessors: ${expression.getText()}")
             classDescriptor = bindingContext.get(CodegenBinding.CLASS_FOR_CALLABLE, variableDescriptor)
                 ?: throw IllegalStateException("Class for callable not found: $variableDescriptor\n${expression.text}")
             lambdaClassType = state.typeMapper.mapClass(classDescriptor)
-            val getFunction = PropertyReferenceCodegen.findGetFunction(variableDescriptor)
+            konst getFunction = PropertyReferenceCodegen.findGetFunction(variableDescriptor)
             invokeMethodDescriptor = PropertyReferenceCodegen.createFakeOpenDescriptor(getFunction, classDescriptor)
-            val resolvedCall = expression.callableReference.getResolvedCallWithAssert(bindingContext)
+            konst resolvedCall = expression.callableReference.getResolvedCallWithAssert(bindingContext)
             propertyReferenceInfo = PropertyReferenceInfo(resolvedCall.resultingDescriptor as VariableDescriptor, getFunction)
         } else {
             propertyReferenceInfo = null
@@ -253,30 +253,30 @@ class PsiExpressionLambda(
     }
 
     // This can only be computed after generating the body, hence `lazy`.
-    override val capturedVars: List<CapturedParamDesc> by lazy {
+    override konst capturedVars: List<CapturedParamDesc> by lazy {
         arrayListOf<CapturedParamDesc>().apply {
-            val captureThis = closure.capturedOuterClassDescriptor
+            konst captureThis = closure.capturedOuterClassDescriptor
             if (captureThis != null) {
                 add(capturedParamDesc(AsmUtil.CAPTURED_THIS_FIELD, state.typeMapper.mapType(captureThis.defaultType), isSuspend = false))
             }
 
-            val capturedReceiver = closure.capturedReceiverFromOuterContext
+            konst capturedReceiver = closure.capturedReceiverFromOuterContext
             if (capturedReceiver != null) {
-                val fieldName = closure.getCapturedReceiverFieldName(state.typeMapper.bindingContext, state.languageVersionSettings)
-                val type = if (isBoundCallableReference)
+                konst fieldName = closure.getCapturedReceiverFieldName(state.typeMapper.bindingContext, state.languageVersionSettings)
+                konst type = if (isBoundCallableReference)
                     state.typeMapper.mapType(capturedReceiver, null, TypeMappingMode.GENERIC_ARGUMENT)
                 else
                     state.typeMapper.mapType(capturedReceiver)
                 add(capturedParamDesc(fieldName, type, isSuspend = false))
             }
 
-            closure.captureVariables.forEach { (parameter, value) ->
-                val isSuspend = parameter is ValueParameterDescriptor && parameter.type.isSuspendFunctionTypeOrSubtype
-                add(capturedParamDesc(value.fieldName, value.type, isSuspend))
+            closure.captureVariables.forEach { (parameter, konstue) ->
+                konst isSuspend = parameter is ValueParameterDescriptor && parameter.type.isSuspendFunctionTypeOrSubtype
+                add(capturedParamDesc(konstue.fieldName, konstue.type, isSuspend))
             }
         }
     }
 
-    val isPropertyReference: Boolean
+    konst isPropertyReference: Boolean
         get() = propertyReferenceInfo != null
 }

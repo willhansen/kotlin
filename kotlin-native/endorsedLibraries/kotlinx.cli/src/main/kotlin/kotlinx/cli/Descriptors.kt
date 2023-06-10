@@ -10,31 +10,31 @@ package kotlinx.cli
  * @property type option/argument type, one of [ArgType].
  * @property fullName option/argument full name.
  * @property description text description of option/argument.
- * @property defaultValue default value for option/argument.
+ * @property defaultValue default konstue for option/argument.
  * @property required if option/argument is required or not. If it's required and not provided in command line, error will be generated.
  * @property deprecatedWarning text message with information in case if option is deprecated.
  */
-internal abstract class Descriptor<T : Any, TResult>(val type: ArgType<T>,
+internal abstract class Descriptor<T : Any, TResult>(konst type: ArgType<T>,
                                                      var fullName: String? = null,
-                                                     val description: String? = null,
-                                                     val defaultValue: TResult? = null,
-                                                     val required: Boolean = false,
-                                                     val deprecatedWarning: String? = null) {
+                                                     konst description: String? = null,
+                                                     konst defaultValue: TResult? = null,
+                                                     konst required: Boolean = false,
+                                                     konst deprecatedWarning: String? = null) {
     /**
      * Text description for help message.
      */
-    abstract val textDescription: String
+    abstract konst textDescription: String
     /**
      * Help message for descriptor.
      */
-    abstract val helpMessage: String
+    abstract konst helpMessage: String
 
     /**
-     * Provide text description of value.
+     * Provide text description of konstue.
      *
-     * @param value value got getting text description for.
+     * @param konstue konstue got getting text description for.
      */
-    fun valueDescription(value: TResult?) = value?.let {
+    fun konstueDescription(konstue: TResult?) = konstue?.let {
         if (it is List<*> && it.isNotEmpty())
             " [${it.joinToString()}]"
         else if (it !is List<*>)
@@ -43,9 +43,9 @@ internal abstract class Descriptor<T : Any, TResult>(val type: ArgType<T>,
     }
 
     /**
-     * Flag to check if descriptor has set default value for option/argument.
+     * Flag to check if descriptor has set default konstue for option/argument.
      */
-    val defaultValueSet by lazy {
+    konst defaultValueSet by lazy {
         defaultValue != null && (defaultValue is List<*> && defaultValue.isNotEmpty() || defaultValue !is List<*>)
     }
 }
@@ -53,7 +53,7 @@ internal abstract class Descriptor<T : Any, TResult>(val type: ArgType<T>,
 /**
  * Option descriptor.
  *
- * Command line entity started with some prefix (-/--) and can have value as next entity in command line string.
+ * Command line entity started with some prefix (-/--) and can have konstue as next entity in command line string.
  *
  * @property optionFullFormPrefix prefix used before full form of option.
  * @property optionShortFromPrefix prefix used before short form of option.
@@ -61,35 +61,35 @@ internal abstract class Descriptor<T : Any, TResult>(val type: ArgType<T>,
  * @property fullName option full name.
  * @property shortName option short name.
  * @property description text description of option.
- * @property defaultValue default value for option.
+ * @property defaultValue default konstue for option.
  * @property required if option is required or not. If it's required and not provided in command line, error will be generated.
- * @property multiple if option can be repeated several times in command line with different values. All values are stored.
- * @property delimiter delimiter that separate option provided as one string to several values.
+ * @property multiple if option can be repeated several times in command line with different konstues. All konstues are stored.
+ * @property delimiter delimiter that separate option provided as one string to several konstues.
  * @property deprecatedWarning text message with information in case if option is deprecated.
  */
 internal class OptionDescriptor<T : Any, TResult>(
-        val optionFullFormPrefix: String,
-        val optionShortFromPrefix: String,
+        konst optionFullFormPrefix: String,
+        konst optionShortFromPrefix: String,
         type: ArgType<T>,
         fullName: String? = null,
-        val shortName: String ? = null,
+        konst shortName: String ? = null,
         description: String? = null,
         defaultValue: TResult? = null,
         required: Boolean = false,
-        val multiple: Boolean = false,
-        val delimiter: String? = null,
+        konst multiple: Boolean = false,
+        konst delimiter: String? = null,
         deprecatedWarning: String? = null) : Descriptor<T, TResult>(type, fullName, description, defaultValue,
         required, deprecatedWarning) {
 
-    override val textDescription: String
+    override konst textDescription: String
         get() = "option $optionFullFormPrefix$fullName"
 
-    override val helpMessage: String
+    override konst helpMessage: String
         get() {
-            val result = StringBuilder()
+            konst result = StringBuilder()
             result.append("    $optionFullFormPrefix$fullName")
             shortName?.let { result.append(", $optionShortFromPrefix$it") }
-            valueDescription(defaultValue)?.let {
+            konstueDescription(defaultValue)?.let {
                 result.append(it)
             }
             description?.let {result.append(" -> $it")}
@@ -108,16 +108,16 @@ internal class OptionDescriptor<T : Any, TResult>(
  *
  * @property type argument type, one of [ArgType].
  * @property fullName argument full name.
- * @property number expected number of values. Null means any possible number of values.
+ * @property number expected number of konstues. Null means any possible number of konstues.
  * @property description text description of argument.
- * @property defaultValue default value for argument.
- * @property required if argument is required or not. If it's required and not provided in command line and have no default value, error will be generated.
+ * @property defaultValue default konstue for argument.
+ * @property required if argument is required or not. If it's required and not provided in command line and have no default konstue, error will be generated.
  * @property deprecatedWarning text message with information in case if argument is deprecated.
  */
 internal class ArgDescriptor<T : Any, TResult>(
         type: ArgType<T>,
         fullName: String?,
-        val number: Int? = null,
+        konst number: Int? = null,
         description: String? = null,
         defaultValue: TResult? = null,
         required: Boolean = true,
@@ -132,14 +132,14 @@ internal class ArgDescriptor<T : Any, TResult>(
         }
     }
 
-    override val textDescription: String
+    override konst textDescription: String
         get() = "argument $fullName"
 
-    override val helpMessage: String
+    override konst helpMessage: String
         get() {
-            val result = StringBuilder()
+            konst result = StringBuilder()
             result.append("    ${fullName}")
-            valueDescription(defaultValue)?.let {
+            konstueDescription(defaultValue)?.let {
                 result.append(it)
             }
             description?.let { result.append(" -> $it") }

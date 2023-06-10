@@ -23,7 +23,7 @@ class KT41641AbsentAndroidTarget : MultiplatformExtensionTest() {
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         kotlin.jvm()
@@ -39,7 +39,7 @@ class KT41641AbsentAndroidTarget : MultiplatformExtensionTest() {
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         kotlin.jvm()
@@ -63,7 +63,7 @@ class KT41641AbsentAndroidTarget : MultiplatformExtensionTest() {
         project.plugins.apply("android-library")
 
         /* Arbitrary minimal Android setup */
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
 
         kotlin.jvm()

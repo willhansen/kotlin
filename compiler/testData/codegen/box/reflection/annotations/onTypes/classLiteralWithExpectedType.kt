@@ -8,9 +8,9 @@ import kotlin.test.assertEquals
 
 @Target(AnnotationTarget.TYPE)
 annotation class Anno(
-    val k1: KClass<out CharSequence>,
-    val k2: KClass<in String>,
-    val ka: Array<KClass<out Number>>
+    konst k1: KClass<out CharSequence>,
+    konst k2: KClass<in String>,
+    konst ka: Array<KClass<out Number>>
 )
 
 fun f(): @Anno(String::class, CharSequence::class, [Double::class, Long::class, Int::class]) Unit {}

@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
  * Actually that interfaces must be sealed.
  */
 interface ESDataFlowValue {
-    val dataFlowValue: DataFlowValue
+    konst dataFlowValue: DataFlowValue
 
     fun dataFlowEquals(other: Any?): Boolean {
         if (this === other) return true
@@ -48,7 +48,7 @@ interface ESDataFlowValue {
  */
 class ESVariableWithDataFlowValue(
     descriptor: ValueDescriptor,
-    override val dataFlowValue: DataFlowValue
+    override konst dataFlowValue: DataFlowValue
 ) : ESVariable(descriptor), ESDataFlowValue {
     override fun equals(other: Any?): Boolean = dataFlowEquals(other)
 
@@ -63,7 +63,7 @@ class ESVariableWithDataFlowValue(
  */
 class ESReceiverWithDataFlowValue(
     receiverValue: ReceiverValue,
-    override val dataFlowValue: DataFlowValue
+    override konst dataFlowValue: DataFlowValue
 ) : ESReceiverValue(receiverValue), ESDataFlowValue {
     override fun equals(other: Any?): Boolean = dataFlowEquals(other)
 
@@ -76,7 +76,7 @@ class ESReceiverWithDataFlowValue(
 /**
  * [ESLambda] represents lambda functions in Effect System
  */
-class ESLambda(val lambda: KtLambdaExpression) : AbstractESValue(null) {
+class ESLambda(konst lambda: KtLambdaExpression) : AbstractESValue(null) {
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T {
         return visitor.visitLambda(this)
     }

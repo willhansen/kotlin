@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtVariableLikeSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.receiverType
 
 internal class KtFe10SignatureSubstitutor(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : AbstractKtSignatureSubstitutor(), Fe10KtAnalysisSessionComponent {
     override fun <S : KtFunctionLikeSymbol> asSignature(symbol: S): KtFunctionLikeSignature<S> {
-        return KtFe10FunctionLikeSignature(symbol, symbol.returnType, symbol.receiverType, symbol.valueParameters.map { asSignature(it) })
+        return KtFe10FunctionLikeSignature(symbol, symbol.returnType, symbol.receiverType, symbol.konstueParameters.map { asSignature(it) })
     }
 
     override fun <S : KtVariableLikeSymbol> asSignature(symbol: S): KtVariableLikeSignature<S> {

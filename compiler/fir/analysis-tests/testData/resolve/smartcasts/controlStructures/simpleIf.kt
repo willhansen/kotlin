@@ -7,7 +7,7 @@ fun test_1(x: Any) {
 }
 
 fun test_2(x: Any) {
-    val b = x is String
+    konst b = x is String
     if (b) {
         x.length
     }

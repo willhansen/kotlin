@@ -3,9 +3,9 @@
 
 class TowerDataElementsForName() {
     @OptIn(ExperimentalStdlibApi::class)
-    val reversedFilteredLocalScopes = buildList {
+    konst reversedFilteredLocalScopes = buildList {
         class Foo {
-            val reversedFilteredLocalScopes = {
+            konst reversedFilteredLocalScopes = {
                 add("OK")
             }
         }

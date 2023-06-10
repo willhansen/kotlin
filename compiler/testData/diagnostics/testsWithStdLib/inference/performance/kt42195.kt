@@ -1,24 +1,24 @@
 // FIR_IDENTICAL
 
 sealed class Tree<TIndex, out TCommon, out TInner, out TLeaf> {
-    abstract val value: TCommon
-    abstract val children: Map<TIndex, Tree<TIndex, TCommon, TInner, TLeaf>>
+    abstract konst konstue: TCommon
+    abstract konst children: Map<TIndex, Tree<TIndex, TCommon, TInner, TLeaf>>
 
     data class Inner<TIndex, TCommon, TInner, TLeaf>(
-        override val value: TCommon,
-        val innerValue: TInner,
-        override val children: Map<TIndex, Tree<TIndex, TCommon, TInner, TLeaf>>
+        override konst konstue: TCommon,
+        konst innerValue: TInner,
+        override konst children: Map<TIndex, Tree<TIndex, TCommon, TInner, TLeaf>>
     ) : Tree<TIndex, TCommon, TInner, TLeaf>()
 
     data class Leaf<TIndex, TCommon, TLeaf>(
-        override val value: TCommon,
-        val leafValue: TLeaf
+        override konst konstue: TCommon,
+        konst leafValue: TLeaf
     ) : Tree<TIndex, TCommon, Nothing, TLeaf>() {
-        override val children: Map<TIndex, Tree<TIndex, TCommon, Nothing, TLeaf>> get() = emptyMap()
+        override konst children: Map<TIndex, Tree<TIndex, TCommon, Nothing, TLeaf>> get() = emptyMap()
     }
 }
 
-val tree = Tree.Inner(
+konst tree = Tree.Inner(
     "root",
     Unit,
     mapOf(

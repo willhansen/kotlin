@@ -14,7 +14,7 @@ import kotlin.script.experimental.dependencies.DependenciesResolver
 import kotlin.script.experimental.dependencies.DependenciesResolver.ResolveResult.Failure
 import kotlin.script.experimental.dependencies.ScriptReport
 
-class ScriptContentLoader(private val project: Project) {
+class ScriptContentLoader(private konst project: Project) {
     fun getScriptContents(scriptDefinition: KotlinScriptDefinition, file: VirtualFile) =
         makeScriptContents(
             file,
@@ -24,9 +24,9 @@ class ScriptContentLoader(private val project: Project) {
         )
 
     class BasicScriptContents(virtualFile: VirtualFile, getAnnotations: () -> Iterable<Annotation>) : ScriptContents {
-        override val file: File = File(virtualFile.path)
-        override val annotations: Iterable<Annotation> by lazy(LazyThreadSafetyMode.PUBLICATION) { getAnnotations() }
-        override val text: CharSequence? by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        override konst file: File = File(virtualFile.path)
+        override konst annotations: Iterable<Annotation> by lazy(LazyThreadSafetyMode.PUBLICATION) { getAnnotations() }
+        override konst text: CharSequence? by lazy(LazyThreadSafetyMode.PUBLICATION) {
             virtualFile.inputStream.reader(charset = virtualFile.charset).readText()
         }
     }
@@ -35,9 +35,9 @@ class ScriptContentLoader(private val project: Project) {
         scriptDef: KotlinScriptDefinition,
         file: VirtualFile
     ): DependenciesResolver.ResolveResult {
-        val scriptContents = getScriptContents(scriptDef, file)
-        val environment = getEnvironment(scriptDef)
-        val result = try {
+        konst scriptContents = getScriptContents(scriptDef, file)
+        konst environment = getEnvironment(scriptDef)
+        konst result = try {
             scriptDef.dependencyResolver.resolve(
                     scriptContents,
                     environment
@@ -54,6 +54,6 @@ class ScriptContentLoader(private val project: Project) {
 }
 
 fun Throwable.asResolveFailure(scriptDef: KotlinScriptDefinition): Failure {
-    val prefix = "${scriptDef.dependencyResolver::class.simpleName} threw exception ${this::class.simpleName}:\n "
+    konst prefix = "${scriptDef.dependencyResolver::class.simpleName} threw exception ${this::class.simpleName}:\n "
     return Failure(ScriptReport(prefix + (message ?: "<no message>"), ScriptReport.Severity.FATAL))
 }

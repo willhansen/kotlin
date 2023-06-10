@@ -9,11 +9,11 @@ import java.lang.reflect.Member
 import java.lang.reflect.Type
 
 internal interface Caller<out M : Member?> {
-    val member: M
+    konst member: M
 
-    val returnType: Type
+    konst returnType: Type
 
-    val parameterTypes: List<Type>
+    konst parameterTypes: List<Type>
 
     fun checkArguments(args: Array<*>) {
         if (arity != args.size) {
@@ -24,7 +24,7 @@ internal interface Caller<out M : Member?> {
     fun call(args: Array<*>): Any?
 }
 
-internal val Caller<*>.arity: Int
+internal konst Caller<*>.arity: Int
     get() = parameterTypes.size
 
 /**

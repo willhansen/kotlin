@@ -4,20 +4,20 @@
 
 import kotlin.contracts.*
 
-inline fun <reified T> requireIsInstance(value: Any?) {
+inline fun <reified T> requireIsInstance(konstue: Any?) {
     contract {
-        returns() implies (value is T)
+        returns() implies (konstue is T)
     }
-    if (value !is T) {
+    if (konstue !is T) {
         throw IllegalArgumentException()
     }
 }
 
-inline fun <reified T> cast(value: Any?): T {
+inline fun <reified T> cast(konstue: Any?): T {
     contract {
-        returns() implies (value is T)
+        returns() implies (konstue is T)
     }
-    return value as T
+    return konstue as T
 }
 
 fun test_1(x: Any) {
@@ -26,6 +26,6 @@ fun test_1(x: Any) {
 }
 
 fun test_2(x: Any) {
-    val s: String = cast(x)
+    konst s: String = cast(x)
     x.length
 }

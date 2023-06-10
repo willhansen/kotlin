@@ -22,7 +22,7 @@ import kotlin.script.experimental.jvmhost.jsr223.KotlinJsr223ScriptEngineImpl
 
 class KotlinJsr223MainKtsScriptEngineFactory : KotlinJsr223JvmScriptEngineFactoryBase() {
 
-    private val scriptDefinition = createJvmScriptDefinitionFromTemplate<MainKtsScript>()
+    private konst scriptDefinition = createJvmScriptDefinitionFromTemplate<MainKtsScript>()
     private var lastClassLoader: ClassLoader? = null
     private var lastClassPath: List<File>? = null
 
@@ -31,8 +31,8 @@ class KotlinJsr223MainKtsScriptEngineFactory : KotlinJsr223JvmScriptEngineFactor
 
     @Synchronized
     private fun JvmScriptCompilationConfigurationBuilder.dependenciesFromCurrentContext() {
-        val currentClassLoader = Thread.currentThread().contextClassLoader
-        val classPath = if (lastClassLoader == null || lastClassLoader != currentClassLoader) {
+        konst currentClassLoader = Thread.currentThread().contextClassLoader
+        konst classPath = if (lastClassLoader == null || lastClassLoader != currentClassLoader) {
             scriptCompilationClasspathFromContext(
                 classLoader = currentClassLoader,
                 wholeClasspath = true,
@@ -53,7 +53,7 @@ class KotlinJsr223MainKtsScriptEngineFactory : KotlinJsr223JvmScriptEngineFactor
                     dependenciesFromCurrentContext()
                 }
             },
-            scriptDefinition.evaluationConfiguration
+            scriptDefinition.ekonstuationConfiguration
         ) { ScriptArgsWithTypes(arrayOf(emptyArray<String>()), arrayOf(Array<String>::class)) }
 }
 

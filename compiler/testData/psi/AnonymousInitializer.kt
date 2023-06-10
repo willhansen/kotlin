@@ -2,7 +2,7 @@ class Foo {
 
   init {
     foo()
-    val c = f
+    konst c = f
   }
 
 }

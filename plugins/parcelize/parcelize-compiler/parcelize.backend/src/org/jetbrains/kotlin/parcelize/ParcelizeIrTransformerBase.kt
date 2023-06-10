@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.parcelize.ParcelizeNames.NEW_ARRAY_NAME
 import org.jetbrains.kotlin.parcelize.serializers.ParcelizeExtensionBase
 
 abstract class ParcelizeIrTransformerBase(
-    protected val context: IrPluginContext,
-    protected val androidSymbols: AndroidSymbols
+    protected konst context: IrPluginContext,
+    protected konst androidSymbols: AndroidSymbols
 ) : ParcelizeExtensionBase, IrElementVisitorVoid {
-    private val irFactory: IrFactory = IrFactoryImpl
+    private konst irFactory: IrFactory = IrFactoryImpl
 
-    protected val deferredOperations = mutableListOf<() -> Unit>()
+    protected konst deferredOperations = mutableListOf<() -> Unit>()
     protected fun defer(block: () -> Unit) = deferredOperations.add(block)
 
     protected fun IrSimpleFunction.generateDescribeContentsBody(parcelableProperties: List<ParcelableProperty?>) {
-        val flags = if (parcelableProperties.any { it != null && it.field.type.containsFileDescriptors }) 1 else 0
+        konst flags = if (parcelableProperties.any { it != null && it.field.type.containsFileDescriptors }) 1 else 0
         body = context.createIrBuilder(symbol).run {
             irExprBody(irInt(flags))
         }
@@ -81,8 +81,8 @@ abstract class ParcelizeIrTransformerBase(
 
     protected fun generateCreator(declaration: IrClass, parcelerObject: IrClass?, parcelableProperties: List<ParcelableProperty?>) {
         // Since the `CREATOR` object cannot refer to the type parameters of the parcelable class we use a star projected type
-        val declarationType = declaration.symbol.starProjectedType
-        val creatorType = androidSymbols.androidOsParcelableCreator.typeWith(declarationType)
+        konst declarationType = declaration.symbol.starProjectedType
+        konst creatorType = androidSymbols.androidOsParcelableCreator.typeWith(declarationType)
 
         declaration.addField {
             name = CREATOR_NAME
@@ -90,8 +90,8 @@ abstract class ParcelizeIrTransformerBase(
             isStatic = true
             isFinal = true
         }.apply {
-            val irField = this
-            val creatorClass = irFactory.buildClass {
+            konst irField = this
+            konst creatorClass = irFactory.buildClass {
                 name = Name.identifier("Creator")
                 visibility = DescriptorVisibilities.LOCAL
             }.apply {
@@ -107,10 +107,10 @@ abstract class ParcelizeIrTransformerBase(
                     }
                 }
 
-                val arrayType = context.irBuiltIns.arrayClass.typeWith(declarationType.makeNullable())
+                konst arrayType = context.irBuiltIns.arrayClass.typeWith(declarationType.makeNullable())
                 addFunction(NEW_ARRAY_NAME.identifier, arrayType).apply {
                     overriddenSymbols = listOf(androidSymbols.androidOsParcelableCreator.getSimpleFunction(name.asString())!!)
-                    val sizeParameter = addValueParameter("size", context.irBuiltIns.intType)
+                    konst sizeParameter = addValueParameter("size", context.irBuiltIns.intType)
                     body = context.createIrBuilder(symbol).run {
                         irExprBody(
                             parcelerNewArray(parcelerObject, sizeParameter)
@@ -124,7 +124,7 @@ abstract class ParcelizeIrTransformerBase(
 
                 addFunction(CREATE_FROM_PARCEL_NAME.identifier, declarationType).apply {
                     overriddenSymbols = listOf(androidSymbols.androidOsParcelableCreator.getSimpleFunction(name.asString())!!)
-                    val parcelParameter = addValueParameter("parcel", androidSymbols.androidOsParcel.defaultType)
+                    konst parcelParameter = addValueParameter("parcel", androidSymbols.androidOsParcel.defaultType)
 
                     // We need to defer the construction of the create method, since it may refer to the [Parcelable.Creator]
                     // instances in other @Parcelize classes in the current module, which may not exist yet.
@@ -162,32 +162,32 @@ abstract class ParcelizeIrTransformerBase(
         }
     }
 
-    private val IrClass.classParceler: IrParcelSerializer
+    private konst IrClass.classParceler: IrParcelSerializer
         get() = if (kind == ClassKind.CLASS) {
             IrNoParameterClassParcelSerializer(this)
         } else {
             serializerFactory.get(defaultType, parcelizeType = defaultType, strict = true, toplevel = true, scope = getParcelerScope())
         }
 
-    protected class ParcelableProperty(val field: IrField, parcelerThunk: () -> IrParcelSerializer) {
-        val parceler by lazy(parcelerThunk)
+    protected class ParcelableProperty(konst field: IrField, parcelerThunk: () -> IrParcelSerializer) {
+        konst parceler by lazy(parcelerThunk)
     }
 
-    private val serializerFactory = IrParcelSerializerFactory(androidSymbols)
+    private konst serializerFactory = IrParcelSerializerFactory(androidSymbols)
 
-    protected val IrClass.parcelableProperties: List<ParcelableProperty?>
+    protected konst IrClass.parcelableProperties: List<ParcelableProperty?>
         get() {
             if (kind != ClassKind.CLASS) return emptyList()
 
-            val constructor = primaryConstructor ?: return emptyList()
-            val topLevelScope = getParcelerScope()
+            konst constructor = primaryConstructor ?: return emptyList()
+            konst topLevelScope = getParcelerScope()
 
-            return constructor.valueParameters.map { parameter ->
-                val property = properties.firstOrNull { it.name == parameter.name }
+            return constructor.konstueParameters.map { parameter ->
+                konst property = properties.firstOrNull { it.name == parameter.name }
                 if (property == null || property.hasAnyAnnotation(IGNORED_ON_PARCEL_FQ_NAMES)) {
                     null
                 } else {
-                    val localScope = property.getParcelerScope(topLevelScope)
+                    konst localScope = property.getParcelerScope(topLevelScope)
                     ParcelableProperty(property.backingField!!) {
                         serializerFactory.get(parameter.type, parcelizeType = defaultType, scope = localScope)
                     }
@@ -196,7 +196,7 @@ abstract class ParcelizeIrTransformerBase(
         }
 
     // *Heuristic* to determine if a Parcelable contains file descriptors.
-    private val IrType.containsFileDescriptors: Boolean
+    private konst IrType.containsFileDescriptors: Boolean
         get() = erasedUpperBound.fqNameWhenAvailable == ParcelizeExtensionBase.FILE_DESCRIPTOR_FQNAME ||
                 (this as? IrSimpleType)?.arguments?.any { argument ->
                     argument.typeOrNull?.containsFileDescriptors == true

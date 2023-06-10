@@ -31,11 +31,11 @@ internal class MainPackageGuesser {
             return null
         }
 
-        val allPackages = modules.flatMap {
+        konst allPackages = modules.flatMap {
             it.getPackageFragments() // Includes also all parent packages, e.g. the root one.
         }
 
-        val nonEmptyPackages = allPackages
+        konst nonEmptyPackages = allPackages
                 .filter { it.getMemberScope().getContributedDescriptors().isNotEmpty() }
                 .map { it.fqName }.distinct()
 

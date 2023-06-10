@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-//KT-2972 Wrong "unused value" warning when finally is present
+//KT-2972 Wrong "unused konstue" warning when finally is present
 
 import java.io.Closeable
 

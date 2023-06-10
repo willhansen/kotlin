@@ -16,7 +16,7 @@ import utils.*
 
 // CHECK_CONTAINS_NO_CALLS: test except=imul
 
-internal class A(val n: Int)
+internal class A(konst n: Int)
 
 internal fun test(a: A, m: Int): Int = apply(a) { n * m }
 

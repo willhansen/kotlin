@@ -25,26 +25,26 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 @OptIn(PrivateSessionConstructor::class)
 abstract class LLFirSession(
-    val ktModule: KtModule,
+    konst ktModule: KtModule,
     dependencyTracker: ModificationTracker,
-    override val builtinTypes: BuiltinTypes,
+    override konst builtinTypes: BuiltinTypes,
     kind: Kind
 ) : FirSession(sessionProvider = null, kind) {
     abstract fun getScopeSession(): ScopeSession
 
-    private val initialModificationCount: Long
-    private val isExplicitlyInvalidated = AtomicBoolean(false)
+    private konst initialModificationCount: Long
+    private konst isExplicitlyInkonstidated = AtomicBoolean(false)
 
-    val modificationTracker: ModificationTracker
+    konst modificationTracker: ModificationTracker
 
-    val project: Project
+    konst project: Project
         get() = ktModule.project
 
     init {
-        val trackerFactory = KotlinModificationTrackerFactory.getService(ktModule.project)
-        val validityTracker = trackerFactory.createModuleStateTracker(ktModule)
+        konst trackerFactory = KotlinModificationTrackerFactory.getService(ktModule.project)
+        konst konstidityTracker = trackerFactory.createModuleStateTracker(ktModule)
 
-        val outOfBlockTracker = when (ktModule) {
+        konst outOfBlockTracker = when (ktModule) {
             is KtSourceModule -> trackerFactory.createModuleWithoutDependenciesOutOfBlockModificationTracker(ktModule)
             is KtNotUnderContentRootModule -> ktModule.file?.let(::FileModificationTracker)
             is KtScriptModule -> FileModificationTracker(ktModule.file)
@@ -54,8 +54,8 @@ abstract class LLFirSession(
 
         modificationTracker = CompositeModificationTracker.createFlattened(
             buildList {
-                add(ExplicitInvalidationTracker(ktModule, isExplicitlyInvalidated))
-                add(ModuleStateModificationTracker(ktModule, validityTracker))
+                add(ExplicitInkonstidationTracker(ktModule, isExplicitlyInkonstidated))
+                add(ModuleStateModificationTracker(ktModule, konstidityTracker))
                 addIfNotNull(outOfBlockTracker)
                 add(dependencyTracker)
                 llResolveExtensionTool?.modificationTrackers?.let(::addAll)
@@ -65,36 +65,36 @@ abstract class LLFirSession(
         initialModificationCount = modificationTracker.modificationCount
     }
 
-    private class ModuleStateModificationTracker(val module: KtModule, val tracker: KtModuleStateTracker) : ModificationTracker {
+    private class ModuleStateModificationTracker(konst module: KtModule, konst tracker: KtModuleStateTracker) : ModificationTracker {
         override fun getModificationCount(): Long = tracker.rootModificationCount
         override fun toString(): String = "Module state tracker for module '${module.moduleDescription}'"
     }
 
-    private class ExplicitInvalidationTracker(val module: KtModule, val isExplicitlyInvalidated: AtomicBoolean) : ModificationTracker {
-        override fun getModificationCount(): Long = if (isExplicitlyInvalidated.get()) 1 else 0
-        override fun toString(): String = "Explicit invalidation tracker for module '${module.moduleDescription}'"
+    private class ExplicitInkonstidationTracker(konst module: KtModule, konst isExplicitlyInkonstidated: AtomicBoolean) : ModificationTracker {
+        override fun getModificationCount(): Long = if (isExplicitlyInkonstidated.get()) 1 else 0
+        override fun toString(): String = "Explicit inkonstidation tracker for module '${module.moduleDescription}'"
     }
 
     private class FileModificationTracker(file: PsiFile) : ModificationTracker {
-        private val pointer = SmartPointerManager.getInstance(file.project).createSmartPsiElementPointer(file)
+        private konst pointer = SmartPointerManager.getInstance(file.project).createSmartPsiElementPointer(file)
 
         override fun getModificationCount(): Long {
-            val file = pointer.element ?: return Long.MAX_VALUE
+            konst file = pointer.element ?: return Long.MAX_VALUE
             return file.modificationStamp
         }
 
         override fun toString(): String {
-            val file = pointer.element ?: return "File tracker for a collected file"
-            val virtualFile = file.virtualFile ?: return "File tracker for a non-physical file '${file.name}'"
+            konst file = pointer.element ?: return "File tracker for a collected file"
+            konst virtualFile = file.virtualFile ?: return "File tracker for a non-physical file '${file.name}'"
             return "File tracker for path '${virtualFile.path}'"
         }
     }
 
-    fun invalidate() {
-        isExplicitlyInvalidated.set(true)
+    fun inkonstidate() {
+        isExplicitlyInkonstidated.set(true)
     }
 
-    val isValid: Boolean
+    konst isValid: Boolean
         get() = modificationTracker.modificationCount == initialModificationCount
 }
 
@@ -105,8 +105,8 @@ abstract class LLFirModuleSession(
     kind: Kind
 ) : LLFirSession(ktModule, dependencyTracker, builtinTypes, kind)
 
-val FirElementWithResolveState.llFirSession: LLFirSession
+konst FirElementWithResolveState.llFirSession: LLFirSession
     get() = moduleData.session as LLFirSession
 
-val FirBasedSymbol<*>.llFirSession: LLFirSession
+konst FirBasedSymbol<*>.llFirSession: LLFirSession
     get() = moduleData.session as LLFirSession

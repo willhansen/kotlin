@@ -4,11 +4,11 @@ abstract class Runnable {
 }
 
 fun foo(): Int {
-    val c: Int? = null
+    konst c: Int? = null
     if (c is Int) {
-        val d: Int = c
+        konst d: Int = c
         // This object breaks data flow info propagation
-        val k = object: Runnable() {
+        konst k = object: Runnable() {
             override fun run() = Unit
         }
         k.run()

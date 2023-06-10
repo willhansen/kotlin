@@ -25,7 +25,7 @@ var ~setter3~Int.setter3: Int = 1
 
 var ~setter4~Int.setter4: Int = 1
     set(i: Int) {
-        val extFun = { Int.() ->
+        konst extFun = { Int.() ->
             `setter4`this@setter4
         }
         `setter4`this@setter4.extFun()

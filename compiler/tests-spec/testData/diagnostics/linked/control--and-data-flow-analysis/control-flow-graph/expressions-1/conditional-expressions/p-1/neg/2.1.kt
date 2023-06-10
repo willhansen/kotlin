@@ -15,18 +15,18 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
+    konst b = true
     if (!b) {
         println("this is statement")
     }
-    val statement = <!INVALID_IF_AS_EXPRESSION!>if<!> (!b) { println("statement could not be assigned") }
+    konst statement = <!INVALID_IF_AS_EXPRESSION!>if<!> (!b) { println("statement could not be assigned") }
 }
 
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val a = 1
-    val b = 2
+    konst a = 1
+    konst b = 2
     if (a > b) a else ; //statement
-    val expression: Any = <!INVALID_IF_AS_EXPRESSION!>if<!> (a > b) a else ;
+    konst expression: Any = <!INVALID_IF_AS_EXPRESSION!>if<!> (a > b) a else ;
 }

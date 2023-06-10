@@ -58,7 +58,7 @@ fun normalizePath(path: String): String {
     }
 
     for (i in start until path.length) {
-        val c = path[i]
+        konst c = path[i]
         if (c == '/') {
             if (separator) {
                 return normalizeTail(i, path, true)
@@ -78,7 +78,7 @@ private fun normalizeTail(prefixEnd: Int, path: String, separator: Boolean): Str
     @Suppress("NAME_SHADOWING")
     var separator = separator
 
-    val result = StringBuilder(path.length)
+    konst result = StringBuilder(path.length)
     result.append(path, 0, prefixEnd)
     var start = prefixEnd
     if (start == 0 && isWindows && (path.startsWith("//") || path.startsWith("\\\\"))) {
@@ -88,7 +88,7 @@ private fun normalizeTail(prefixEnd: Int, path: String, separator: Boolean): Str
     }
 
     for (i in start until path.length) {
-        val c = path[i]
+        konst c = path[i]
         if (c == '/' || c == '\\') {
             if (!separator) result.append('/')
             separator = true

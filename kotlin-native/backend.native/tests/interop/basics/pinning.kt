@@ -8,10 +8,10 @@ import kotlin.test.*
 import kotlinx.cinterop.*
 
 @Test fun pinnedByteArrayAddressOf() {
-    val arr = ByteArray(10) { 0 }
+    konst arr = ByteArray(10) { 0 }
     arr.usePinned {
-        assertEquals(0, it.addressOf(0).pointed.value)
-        assertEquals(0, it.addressOf(9).pointed.value)
+        assertEquals(0, it.addressOf(0).pointed.konstue)
+        assertEquals(0, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -28,7 +28,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedStringAddressOf() {
-    val str = "0000000000"
+    konst str = "0000000000"
     str.usePinned {
         it.addressOf(0)
         it.addressOf(9)
@@ -48,7 +48,7 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedCharArrayAddressOf() {
-    val arr = CharArray(10) { '0' }
+    konst arr = CharArray(10) { '0' }
     arr.usePinned {
         it.addressOf(0)
         it.addressOf(9)
@@ -68,10 +68,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedShortArrayAddressOf() {
-    val arr = ShortArray(10) { 0 }
+    konst arr = ShortArray(10) { 0 }
     arr.usePinned {
-        assertEquals(0, it.addressOf(0).pointed.value)
-        assertEquals(0, it.addressOf(9).pointed.value)
+        assertEquals(0, it.addressOf(0).pointed.konstue)
+        assertEquals(0, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -88,10 +88,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedIntArrayAddressOf() {
-    val arr = IntArray(10) { 0 }
+    konst arr = IntArray(10) { 0 }
     arr.usePinned {
-        assertEquals(0, it.addressOf(0).pointed.value)
-        assertEquals(0, it.addressOf(9).pointed.value)
+        assertEquals(0, it.addressOf(0).pointed.konstue)
+        assertEquals(0, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -108,10 +108,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedLongArrayAddressOf() {
-    val arr = LongArray(10) { 0 }
+    konst arr = LongArray(10) { 0 }
     arr.usePinned {
-        assertEquals(0, it.addressOf(0).pointed.value)
-        assertEquals(0, it.addressOf(9).pointed.value)
+        assertEquals(0, it.addressOf(0).pointed.konstue)
+        assertEquals(0, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -128,10 +128,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedUByteArrayAddressOf() {
-    val arr = UByteArray(10) { 0U }
+    konst arr = UByteArray(10) { 0U }
     arr.usePinned {
-        assertEquals(0U, it.addressOf(0).pointed.value)
-        assertEquals(0U, it.addressOf(9).pointed.value)
+        assertEquals(0U, it.addressOf(0).pointed.konstue)
+        assertEquals(0U, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -148,10 +148,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedUShortArrayAddressOf() {
-    val arr = UShortArray(10) { 0U }
+    konst arr = UShortArray(10) { 0U }
     arr.usePinned {
-        assertEquals(0U, it.addressOf(0).pointed.value)
-        assertEquals(0U, it.addressOf(9).pointed.value)
+        assertEquals(0U, it.addressOf(0).pointed.konstue)
+        assertEquals(0U, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -168,10 +168,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedUIntArrayAddressOf() {
-    val arr = UIntArray(10) { 0U }
+    konst arr = UIntArray(10) { 0U }
     arr.usePinned {
-        assertEquals(0U, it.addressOf(0).pointed.value)
-        assertEquals(0U, it.addressOf(9).pointed.value)
+        assertEquals(0U, it.addressOf(0).pointed.konstue)
+        assertEquals(0U, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -188,10 +188,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedULongArrayAddressOf() {
-    val arr = ULongArray(10) { 0U }
+    konst arr = ULongArray(10) { 0U }
     arr.usePinned {
-        assertEquals(0U, it.addressOf(0).pointed.value)
-        assertEquals(0U, it.addressOf(9).pointed.value)
+        assertEquals(0U, it.addressOf(0).pointed.konstue)
+        assertEquals(0U, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -208,10 +208,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedFloatArrayAddressOf() {
-    val arr = FloatArray(10) { 0.0f }
+    konst arr = FloatArray(10) { 0.0f }
     arr.usePinned {
-        assertEquals(0.0f, it.addressOf(0).pointed.value)
-        assertEquals(0.0f, it.addressOf(9).pointed.value)
+        assertEquals(0.0f, it.addressOf(0).pointed.konstue)
+        assertEquals(0.0f, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }
@@ -228,10 +228,10 @@ import kotlinx.cinterop.*
 }
 
 @Test fun pinnedDoubleArrayAddressOf() {
-    val arr = DoubleArray(10) { 0.0 }
+    konst arr = DoubleArray(10) { 0.0 }
     arr.usePinned {
-        assertEquals(0.0, it.addressOf(0).pointed.value)
-        assertEquals(0.0, it.addressOf(9).pointed.value)
+        assertEquals(0.0, it.addressOf(0).pointed.konstue)
+        assertEquals(0.0, it.addressOf(9).pointed.konstue)
         assertFailsWith<IndexOutOfBoundsException> {
             it.addressOf(10)
         }

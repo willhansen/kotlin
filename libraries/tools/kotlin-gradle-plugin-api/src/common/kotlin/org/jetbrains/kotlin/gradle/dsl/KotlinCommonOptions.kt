@@ -6,40 +6,40 @@
 package org.jetbrains.kotlin.gradle.dsl
 
 interface KotlinCommonOptions : org.jetbrains.kotlin.gradle.dsl.KotlinCommonToolOptions {
-    override val options: org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
+    override konst options: org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 
-    private val kotlin.String?.apiVersionCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.KotlinVersion.fromVersion(this) else null
+    private konst kotlin.String?.apiVersionCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.KotlinVersion.fromVersion(this) else null
 
-    private val org.jetbrains.kotlin.gradle.dsl.KotlinVersion?.apiVersionKotlinOption get() = this?.version
+    private konst org.jetbrains.kotlin.gradle.dsl.KotlinVersion?.apiVersionKotlinOption get() = this?.version
 
     /**
      * Allow using declarations only from the specified version of bundled libraries
-     * Possible values: "1.4 (deprecated)", "1.5 (deprecated)", "1.6", "1.7", "1.8", "1.9", "2.0 (experimental)", "2.1 (experimental)"
-     * Default value: null
+     * Possible konstues: "1.4 (deprecated)", "1.5 (deprecated)", "1.6", "1.7", "1.8", "1.9", "2.0 (experimental)", "2.1 (experimental)"
+     * Default konstue: null
      */
     var apiVersion: kotlin.String?
         get() = options.apiVersion.orNull.apiVersionKotlinOption
-        set(value) = options.apiVersion.set(value.apiVersionCompilerOption)
+        set(konstue) = options.apiVersion.set(konstue.apiVersionCompilerOption)
 
-    private val kotlin.String?.languageVersionCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.KotlinVersion.fromVersion(this) else null
+    private konst kotlin.String?.languageVersionCompilerOption get() = if (this != null) org.jetbrains.kotlin.gradle.dsl.KotlinVersion.fromVersion(this) else null
 
-    private val org.jetbrains.kotlin.gradle.dsl.KotlinVersion?.languageVersionKotlinOption get() = this?.version
+    private konst org.jetbrains.kotlin.gradle.dsl.KotlinVersion?.languageVersionKotlinOption get() = this?.version
 
     /**
      * Provide source compatibility with the specified version of Kotlin
-     * Possible values: "1.4 (deprecated)", "1.5 (deprecated)", "1.6", "1.7", "1.8", "1.9", "2.0 (experimental)", "2.1 (experimental)"
-     * Default value: null
+     * Possible konstues: "1.4 (deprecated)", "1.5 (deprecated)", "1.6", "1.7", "1.8", "1.9", "2.0 (experimental)", "2.1 (experimental)"
+     * Default konstue: null
      */
     var languageVersion: kotlin.String?
         get() = options.languageVersion.orNull.languageVersionKotlinOption
-        set(value) = options.languageVersion.set(value.languageVersionCompilerOption)
+        set(konstue) = options.languageVersion.set(konstue.languageVersionCompilerOption)
 
     /**
      * Compile using experimental K2. K2 is a new compiler pipeline, no compatibility guarantees are yet provided
-     * Default value: false
+     * Default konstue: false
      */
     @Deprecated(message = "Compiler flag -Xuse-k2 is deprecated; please use language version 2.0 instead", level = DeprecationLevel.WARNING)
     var useK2: kotlin.Boolean
         get() = options.useK2.get()
-        set(value) = options.useK2.set(value)
+        set(konstue) = options.useK2.set(konstue)
 }

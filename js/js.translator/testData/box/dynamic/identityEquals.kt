@@ -2,13 +2,13 @@
 package foo
 
 fun box(): String {
-    val a: dynamic = 12
+    konst a: dynamic = 12
     var b: dynamic = 33.4
     var c: dynamic = "text"
-    val d: dynamic = true
+    konst d: dynamic = true
 
-    val v: dynamic = 42
-    val tt: dynamic = "object t {}"
+    konst v: dynamic = 42
+    konst tt: dynamic = "object t {}"
 
     testFalse { a === 34 }
     testFalse { a === "34" }

@@ -2,7 +2,7 @@
 package foo
 
 fun test(f: () -> String): String {
-    val funLit = { f() }
+    konst funLit = { f() }
     return funLit()
 }
 

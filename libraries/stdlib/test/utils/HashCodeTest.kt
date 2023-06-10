@@ -13,15 +13,15 @@ class HashCodeTest {
     fun hashCodeOfNull() {
         assertEquals(0, null.hashCode())
 
-        val foo: Any? = null
+        konst foo: Any? = null
         assertEquals(0, foo.hashCode())
     }
 
     @Test
     fun hashCodeOfNotNull() {
-        val value = "test"
-        val nullableValue: String? = value
+        konst konstue = "test"
+        konst nullableValue: String? = konstue
 
-        assertEquals(value.hashCode(), nullableValue.hashCode())
+        assertEquals(konstue.hashCode(), nullableValue.hashCode())
     }
 }

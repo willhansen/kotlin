@@ -35,7 +35,7 @@ public class SpecializedMap extends AbstractSpecializedMap {
     }
 
     @Override
-    public Double put(Integer key, Double value) {
+    public Double put(Integer key, Double konstue) {
         return null;
     }
 
@@ -78,7 +78,7 @@ public class SpecializedMap extends AbstractSpecializedMap {
 
     @NotNull
     @Override
-    public Collection<Double> values() {
+    public Collection<Double> konstues() {
         return null;
     }
 
@@ -102,7 +102,7 @@ public class SpecializedMap extends AbstractSpecializedMap {
 // MODULE: main(lib)
 // FILE: main.kt
 fun box(): String {
-    val x = SpecializedMap()
+    konst x = SpecializedMap()
     if (!x.containsKey(1)) return "fail 1"
     if (x.containsKey(null)) return "fail 2"
 

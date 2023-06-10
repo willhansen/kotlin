@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A(val x: String)
+konstue class A(konst x: String)
 
 fun isNullVacuousLeft(s: A) = s == null
 fun isNullVacuousRight(s: A) = null == s

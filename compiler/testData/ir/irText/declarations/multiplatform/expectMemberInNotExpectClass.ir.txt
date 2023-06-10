@@ -4,10 +4,10 @@ FILE fqName:<root> fileName:/expectMemberInNotExpectClass.kt
     CONSTRUCTOR visibility:public <> () returnType:<root>.C1 [primary,expect]
     FUN name:f visibility:public modality:FINAL <> ($this:<root>.C1) returnType:kotlin.String [expect]
       $this: VALUE_PARAMETER name:<this> type:<root>.C1
-    PROPERTY name:p visibility:public modality:FINAL [expect,val]
+    PROPERTY name:p visibility:public modality:FINAL [expect,konst]
       FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final]
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:FINAL <> ($this:<root>.C1) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [expect,val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [expect,konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C1
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
@@ -32,11 +32,11 @@ FILE fqName:<root> fileName:/expectMemberInNotExpectClass.kt
       overridden:
         public final fun f (): kotlin.String declared in <root>.C1
       $this: VALUE_PARAMETER name:<this> type:<root>.C1
-    PROPERTY FAKE_OVERRIDE name:p visibility:public modality:FINAL [fake_override,val]
+    PROPERTY FAKE_OVERRIDE name:p visibility:public modality:FINAL [fake_override,konst]
       overridden:
         public final p: kotlin.Int
       FUN FAKE_OVERRIDE name:<get-p> visibility:public modality:FINAL <> ($this:<root>.C1) returnType:kotlin.Int [fake_override]
-        correspondingProperty: PROPERTY FAKE_OVERRIDE name:p visibility:public modality:FINAL [fake_override,val]
+        correspondingProperty: PROPERTY FAKE_OVERRIDE name:p visibility:public modality:FINAL [fake_override,konst]
         overridden:
           public final fun <get-p> (): kotlin.Int declared in <root>.C1
         $this: VALUE_PARAMETER name:<this> type:<root>.C1
@@ -63,13 +63,13 @@ FILE fqName:<root> fileName:/expectMemberInNotExpectClass.kt
       $this: VALUE_PARAMETER name:<this> type:<root>.C1
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public final fun f (): kotlin.String declared in <root>.C1'
-          CONST String type=kotlin.String value="O"
-    PROPERTY name:p visibility:public modality:FINAL [val]
+          CONST String type=kotlin.String konstue="O"
+    PROPERTY name:p visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:p type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-p> visibility:public modality:FINAL <> ($this:<root>.C1) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:p visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C1
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-p> (): kotlin.Int declared in <root>.C1'

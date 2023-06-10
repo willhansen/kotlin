@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.konan.file.File as KFile
 import org.jetbrains.kotlin.konan.target.Architecture as TargetArchitecture
 
 // These properties are used by the 'konan' plugin, thus we set them before applying it.
-val distDir: File by project
-val konanHome: String by extra(distDir.absolutePath)
+konst distDir: File by project
+konst konanHome: String by extra(distDir.absolutePath)
 extra["org.jetbrains.kotlin.native.home"] = konanHome
 
 plugins {
@@ -33,8 +33,8 @@ googletest {
     refresh = project.hasProperty("refresh-gtest")
 }
 
-val hostName: String by project
-val targetList: List<String> by project
+konst hostName: String by project
+konst targetList: List<String> by project
 
 bitcode {
     allTargets {
@@ -78,14 +78,14 @@ bitcode {
         }
 
         module("libbacktrace") {
-            val elfSize = when (target.architecture) {
+            konst elfSize = when (target.architecture) {
                 TargetArchitecture.X64, TargetArchitecture.ARM64 -> 64
                 TargetArchitecture.X86, TargetArchitecture.ARM32,
                 TargetArchitecture.MIPS32, TargetArchitecture.MIPSEL32,
                 TargetArchitecture.WASM32 -> 32
             }
-            val useMachO = target.family.isAppleFamily
-            val useElf = target.family in listOf(Family.LINUX, Family.ANDROID)
+            konst useMachO = target.family.isAppleFamily
+            konst useElf = target.family in listOf(Family.LINUX, Family.ANDROID)
 
             sourceSets {
                 main {
@@ -367,7 +367,7 @@ bitcode {
     }
 }
 
-val runtimeBitcode by configurations.creating {
+konst runtimeBitcode by configurations.creating {
     isCanBeConsumed = false
     isCanBeResolved = true
     attributes {
@@ -385,7 +385,7 @@ targetList.forEach { targetName ->
     tasks.register("${targetName}Runtime") {
         description = "Build all main runtime modules for $targetName"
         group = CompileToBitcodeExtension.BUILD_TASK_GROUP
-        val dependencies = runtimeBitcode.incoming.artifactView {
+        konst dependencies = runtimeBitcode.incoming.artifactView {
             attributes {
                 attribute(TargetWithSanitizer.TARGET_ATTRIBUTE, project.platformManager.targetByName(targetName).withSanitizer())
             }
@@ -394,13 +394,13 @@ targetList.forEach { targetName ->
     }
 }
 
-val hostRuntime by tasks.registering {
+konst hostRuntime by tasks.registering {
     description = "Build all main runtime modules for host"
     group = CompileToBitcodeExtension.BUILD_TASK_GROUP
     dependsOn("${hostName}Runtime")
 }
 
-val hostRuntimeTests by tasks.registering {
+konst hostRuntimeTests by tasks.registering {
     description = "Runs all runtime tests for host"
     group = CompileToBitcodeExtension.VERIFICATION_TASK_GROUP
     dependsOn("${hostName}RuntimeTests")
@@ -410,7 +410,7 @@ tasks.named("assemble") {
     dependsOn(targetList.map { "${it}Runtime" })
 }
 
-val hostAssemble by tasks.registering {
+konst hostAssemble by tasks.registering {
     dependsOn("${hostName}Runtime")
 }
 
@@ -420,13 +420,13 @@ tasks.named("clean") {
     }
 }
 
-val generateJsMath by tasks.registering {
+konst generateJsMath by tasks.registering {
     dependsOn(":distCompiler")
     doLast {
-        val distDir: File by project
-        val jsinteropScript = if (PlatformInfo.isWindows()) "jsinterop.bat" else "jsinterop"
-        val jsinterop = "$distDir/bin/$jsinteropScript"
-        val targetDir = "$buildDir/generated"
+        konst distDir: File by project
+        konst jsinteropScript = if (PlatformInfo.isWindows()) "jsinterop.bat" else "jsinterop"
+        konst jsinterop = "$distDir/bin/$jsinteropScript"
+        konst targetDir = "$buildDir/generated"
 
         project.exec {
             commandLine(
@@ -437,8 +437,8 @@ val generateJsMath by tasks.registering {
             )
         }
 
-        val generated = file("$targetDir/math-build/natives/js_stubs.js")
-        val mathJs = file("src/main/js/math.js")
+        konst generated = file("$targetDir/math-build/natives/js_stubs.js")
+        konst mathJs = file("src/main/js/math.js")
         mathJs.writeText(
             "// NOTE: THIS FILE IS AUTO-GENERATED!\n" +
             "// Run ':runtime:generateJsMath' to re-generate it.\n\n"
@@ -449,7 +449,7 @@ val generateJsMath by tasks.registering {
 
 // region: Stdlib
 
-val commonStdlibSrcDirs = project(":kotlin-stdlib-common")
+konst commonStdlibSrcDirs = project(":kotlin-stdlib-common")
         .files(
                 "src/kotlin",
                 "src/generated",
@@ -457,16 +457,16 @@ val commonStdlibSrcDirs = project(":kotlin-stdlib-common")
                 "../src"
         ).files
 
-val interopRuntimeCommonSrcDir = project(":kotlin-native:Interop:Runtime").file("src/main/kotlin")
-val interopSrcDirs = listOf(
+konst interopRuntimeCommonSrcDir = project(":kotlin-native:Interop:Runtime").file("src/main/kotlin")
+konst interopSrcDirs = listOf(
         project(":kotlin-native:Interop:Runtime").file("src/native/kotlin"),
         project(":kotlin-native:Interop:JsRuntime").file("src/main/kotlin")
 )
 
-val testAnnotationCommonSrcDir = project(":kotlin-test:kotlin-test-annotations-common").files("src/main/kotlin").files
-val testCommonSrcDir = project(":kotlin-test:kotlin-test-common").files("src/main/kotlin").files
+konst testAnnotationCommonSrcDir = project(":kotlin-test:kotlin-test-annotations-common").files("src/main/kotlin").files
+konst testCommonSrcDir = project(":kotlin-test:kotlin-test-common").files("src/main/kotlin").files
 
-val stdLibSrcDirs =  interopSrcDirs + listOf(
+konst stdLibSrcDirs =  interopSrcDirs + listOf(
         project.file("src/main/kotlin"),
         project(":kotlin-stdlib-common").file("../native-wasm/src/")
 )
@@ -517,7 +517,7 @@ targetList.forEach { targetName ->
         destinationDir = project.buildDir.resolve("${targetName}Stdlib")
 
         from(project.buildDir.resolve("stdlib/${hostName}/stdlib"))
-        val runtimeFiles = runtimeBitcode.incoming.artifactView {
+        konst runtimeFiles = runtimeBitcode.incoming.artifactView {
             attributes {
                 attribute(TargetWithSanitizer.TARGET_ATTRIBUTE, project.platformManager.targetByName(targetName).withSanitizer())
             }
@@ -531,7 +531,7 @@ targetList.forEach { targetName ->
             doLast {
                 // Change target in manifest file
                 with(KFile(destinationDir.resolve("default/manifest").absolutePath)) {
-                    val props = loadProperties()
+                    konst props = loadProperties()
                     props[KLIB_PROPERTY_NATIVE_TARGETS] = targetName
                     saveProperties(props)
                 }
@@ -539,7 +539,7 @@ targetList.forEach { targetName ->
         }
     }
 
-    val cacheableTargetNames: List<String> by project
+    konst cacheableTargetNames: List<String> by project
 
     if (targetName in cacheableTargetNames) {
         tasks.register("${targetName}StdlibCache", KonanCacheTask::class.java) {

@@ -4,5 +4,5 @@ open class MyBaseClass {
 }
 
 class Foo : MyBaseClass() {
-    <expr>val prop: MyBaseClass.Nested = MyBaseClass.Nested()</expr>
+    <expr>konst prop: MyBaseClass.Nested = MyBaseClass.Nested()</expr>
 }

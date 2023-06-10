@@ -29,7 +29,7 @@ operator fun <T : Any> T?.iterator() = object : MyIterator<T> {
 }
 
 fun main() {
-  val i : Int? = 1
+  konst i : Int? = 1
   for (x in i) {
     System.out.println(x)
   }

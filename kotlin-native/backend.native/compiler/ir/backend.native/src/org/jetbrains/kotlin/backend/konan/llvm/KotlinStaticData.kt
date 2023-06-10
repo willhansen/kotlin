@@ -15,8 +15,8 @@ private fun ConstPointer.add(index: LLVMValueRef): ConstPointer {
     return constPointer(LLVMConstGEP(llvm, cValuesOf(index), 1)!!)
 }
 
-internal class KotlinStaticData(override val generationState: NativeGenerationState, override val llvm: CodegenLlvmHelpers, module: LLVMModuleRef) : ContextUtils, StaticData(module, llvm) {
-    private val stringLiterals = mutableMapOf<String, ConstPointer>()
+internal class KotlinStaticData(override konst generationState: NativeGenerationState, override konst llvm: CodegenLlvmHelpers, module: LLVMModuleRef) : ContextUtils, StaticData(module, llvm) {
+    private konst stringLiterals = mutableMapOf<String, ConstPointer>()
 
     // Must match OBJECT_TAG_PERMANENT_CONTAINER in C++.
     private fun permanentTag(typeInfo: ConstPointer): ConstPointer {
@@ -36,30 +36,30 @@ internal class KotlinStaticData(override val generationState: NativeGenerationSt
 
     private fun createRef(objHeaderPtr: ConstPointer) = objHeaderPtr.bitcast(kObjHeaderPtr)
 
-    private fun createKotlinStringLiteral(value: String): ConstPointer {
-        val elements = value.toCharArray().map(llvm::constChar16)
-        val objRef = createConstKotlinArray(context.ir.symbols.string.owner, elements)
+    private fun createKotlinStringLiteral(konstue: String): ConstPointer {
+        konst elements = konstue.toCharArray().map(llvm::constChar16)
+        konst objRef = createConstKotlinArray(context.ir.symbols.string.owner, elements)
         return objRef
     }
 
-    fun kotlinStringLiteral(value: String) = stringLiterals.getOrPut(value) { createKotlinStringLiteral(value) }
+    fun kotlinStringLiteral(konstue: String) = stringLiterals.getOrPut(konstue) { createKotlinStringLiteral(konstue) }
 
     fun createConstKotlinArray(arrayClass: IrClass, elements: List<LLVMValueRef>) =
             createConstKotlinArray(arrayClass, elements.map { constValue(it) }).llvm
 
     fun createConstKotlinArray(arrayClass: IrClass, elements: List<ConstValue>): ConstPointer {
-        val typeInfo = arrayClass.typeInfoPtr
+        konst typeInfo = arrayClass.typeInfoPtr
 
-        val bodyElementType: LLVMTypeRef = elements.firstOrNull()?.llvmType ?: llvm.int8Type
+        konst bodyElementType: LLVMTypeRef = elements.firstOrNull()?.llvmType ?: llvm.int8Type
         // (use [0 x i8] as body if there are no elements)
-        val arrayBody = ConstArray(bodyElementType, elements)
+        konst arrayBody = ConstArray(bodyElementType, elements)
 
-        val compositeType = llvm.structType(runtime.arrayHeaderType, arrayBody.llvmType)
+        konst compositeType = llvm.structType(runtime.arrayHeaderType, arrayBody.llvmType)
 
-        val global = this.createGlobal(compositeType, "")
+        konst global = this.createGlobal(compositeType, "")
 
-        val objHeaderPtr = global.pointer.getElementPtr(llvm, 0)
-        val arrayHeader = arrayHeader(typeInfo, elements.size)
+        konst objHeaderPtr = global.pointer.getElementPtr(llvm, 0)
+        konst arrayHeader = arrayHeader(typeInfo, elements.size)
 
         global.setInitializer(Struct(compositeType, arrayHeader, arrayBody))
         global.setConstant(true)
@@ -69,11 +69,11 @@ internal class KotlinStaticData(override val generationState: NativeGenerationSt
     }
 
     fun createConstKotlinObject(type: IrClass, vararg fields: ConstValue): ConstPointer {
-        val global = this.placeGlobal("", createConstKotlinObjectBody(type, *fields))
+        konst global = this.placeGlobal("", createConstKotlinObjectBody(type, *fields))
         global.setUnnamedAddr(true)
         global.setConstant(true)
 
-        val objHeaderPtr = global.pointer.getElementPtr(llvm, 0)
+        konst objHeaderPtr = global.pointer.getElementPtr(llvm, 0)
 
         return createRef(objHeaderPtr)
     }
@@ -86,17 +86,17 @@ internal class KotlinStaticData(override val generationState: NativeGenerationSt
     fun createUniqueInstance(
             kind: UniqueKind, bodyType: LLVMTypeRef, typeInfo: ConstPointer): ConstPointer {
         assert(getStructElements(bodyType).size == 1) // ObjHeader only.
-        val objHeader = when (kind) {
+        konst objHeader = when (kind) {
             UniqueKind.UNIT -> objHeader(typeInfo)
             UniqueKind.EMPTY_ARRAY -> arrayHeader(typeInfo, 0)
         }
-        val global = this.placeGlobal(kind.llvmName, objHeader, isExported = true)
+        konst global = this.placeGlobal(kind.llvmName, objHeader, isExported = true)
         global.setConstant(true)
         return global.pointer
     }
 
     fun unique(kind: UniqueKind): ConstPointer {
-        val descriptor = when (kind) {
+        konst descriptor = when (kind) {
             UniqueKind.UNIT -> context.ir.symbols.unit.owner
             UniqueKind.EMPTY_ARRAY -> context.ir.symbols.array.owner
         }
@@ -108,15 +108,15 @@ internal class KotlinStaticData(override val generationState: NativeGenerationSt
     }
 
     /**
-     * Creates static instance of `konan.ImmutableByteArray` with given values of elements.
+     * Creates static instance of `konan.ImmutableByteArray` with given konstues of elements.
      *
      * @param args data for constant creation.
      */
-    fun createImmutableBlob(value: IrConst<String>): LLVMValueRef {
-        val args = value.value.map { llvm.int8(it.code.toByte()) }
+    fun createImmutableBlob(konstue: IrConst<String>): LLVMValueRef {
+        konst args = konstue.konstue.map { llvm.int8(it.code.toByte()) }
         return createConstKotlinArray(context.ir.symbols.immutableBlob.owner, args)
     }
 }
 
-internal val ContextUtils.theUnitInstanceRef: ConstPointer
+internal konst ContextUtils.theUnitInstanceRef: ConstPointer
     get() = staticData.unique(UniqueKind.UNIT)

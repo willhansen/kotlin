@@ -1,6 +1,6 @@
-val (a, b, c) = <!COMPONENT_FUNCTION_MISSING, COMPONENT_FUNCTION_MISSING, COMPONENT_FUNCTION_MISSING, NO_VALUE_FOR_PARAMETER!>A()<!>
+konst (a, b, c) = <!COMPONENT_FUNCTION_MISSING, COMPONENT_FUNCTION_MISSING, COMPONENT_FUNCTION_MISSING, NO_VALUE_FOR_PARAMETER!>A()<!>
 
-class A(val a: Int) {
+class A(konst a: Int) {
     operator fun component1() {}
     operator fun component2() {}
     operator fun component3() {}

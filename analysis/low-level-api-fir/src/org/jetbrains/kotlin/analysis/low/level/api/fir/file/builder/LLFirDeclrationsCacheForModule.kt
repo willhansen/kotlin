@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentMap
  */
 @ThreadSafe
 internal abstract class ModuleFileCache {
-    abstract val moduleComponents: LLFirModuleResolveComponents
+    abstract konst moduleComponents: LLFirModuleResolveComponents
 
     /**
      * @return [FirFile] by [file] if it was previously built or runs [createValue] otherwise
@@ -33,15 +33,15 @@ internal abstract class ModuleFileCache {
     abstract fun getCachedFirFile(ktFile: KtFile): FirFile?
 }
 
-internal class ModuleFileCacheImpl(override val moduleComponents: LLFirModuleResolveComponents) : ModuleFileCache() {
-    private val ktFileToFirFile: ConcurrentMap<KtFile, FirFile> = MapMaker().weakKeys().makeMap()
+internal class ModuleFileCacheImpl(override konst moduleComponents: LLFirModuleResolveComponents) : ModuleFileCache() {
+    private konst ktFileToFirFile: ConcurrentMap<KtFile, FirFile> = MapMaker().weakKeys().makeMap()
     override fun fileCached(file: KtFile, createValue: () -> FirFile): FirFile =
         ktFileToFirFile.computeIfAbsent(file) { createValue() }
 
     override fun getCachedFirFile(ktFile: KtFile): FirFile? = ktFileToFirFile[ktFile]
 
     override fun getContainerFirFile(declaration: FirDeclaration): FirFile? {
-        val ktFile = declaration.psi?.containingFile as? KtFile ?: return null
+        konst ktFile = declaration.psi?.containingFile as? KtFile ?: return null
         return getCachedFirFile(ktFile)
     }
 }

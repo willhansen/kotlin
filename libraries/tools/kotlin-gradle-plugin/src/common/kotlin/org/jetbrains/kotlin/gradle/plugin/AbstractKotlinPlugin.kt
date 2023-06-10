@@ -32,15 +32,15 @@ import org.jetbrains.kotlin.gradle.tasks.locateTask
 import org.jetbrains.kotlin.gradle.tasks.registerTask
 import org.jetbrains.kotlin.gradle.utils.archivePathCompatible
 
-const val PLUGIN_CLASSPATH_CONFIGURATION_NAME = "kotlinCompilerPluginClasspath"
-const val NATIVE_COMPILER_PLUGIN_CLASSPATH_CONFIGURATION_NAME = "kotlinNativeCompilerPluginClasspath"
-const val COMPILER_CLASSPATH_CONFIGURATION_NAME = "kotlinCompilerClasspath"
-internal const val BUILD_TOOLS_API_CLASSPATH_CONFIGURATION_NAME = "kotlinBuildToolsApiClasspath"
-internal const val KLIB_COMMONIZER_CLASSPATH_CONFIGURATION_NAME = "kotlinKlibCommonizerClasspath"
+const konst PLUGIN_CLASSPATH_CONFIGURATION_NAME = "kotlinCompilerPluginClasspath"
+const konst NATIVE_COMPILER_PLUGIN_CLASSPATH_CONFIGURATION_NAME = "kotlinNativeCompilerPluginClasspath"
+const konst COMPILER_CLASSPATH_CONFIGURATION_NAME = "kotlinCompilerClasspath"
+internal const konst BUILD_TOOLS_API_CLASSPATH_CONFIGURATION_NAME = "kotlinBuildToolsApiClasspath"
+internal const konst KLIB_COMMONIZER_CLASSPATH_CONFIGURATION_NAME = "kotlinKlibCommonizerClasspath"
 
 internal abstract class AbstractKotlinPlugin(
-    val tasksProvider: KotlinTasksProvider,
-    val registry: ToolingModelBuilderRegistry
+    konst tasksProvider: KotlinTasksProvider,
+    konst registry: ToolingModelBuilderRegistry
 ) : Plugin<Project> {
 
     internal abstract fun buildSourceSetProcessor(
@@ -49,10 +49,10 @@ internal abstract class AbstractKotlinPlugin(
     ): KotlinSourceSetProcessor<*>
 
     override fun apply(project: Project) {
-        val kotlinPluginVersion = project.getKotlinPluginVersion()
+        konst kotlinPluginVersion = project.getKotlinPluginVersion()
         project.plugins.apply(JavaPlugin::class.java)
 
-        val target = (project.kotlinExtension as KotlinSingleJavaTargetExtension).target
+        konst target = (project.kotlinExtension as KotlinSingleJavaTargetExtension).target
 
         configureTarget(
             target,
@@ -75,8 +75,8 @@ internal abstract class AbstractKotlinPlugin(
         // Check if task was already added by one of plugin implementations
         if (project.tasks.names.contains(INSPECT_IC_CLASSES_TASK_NAME)) return
 
-        val classesTask = project.locateTask<Task>(JavaPlugin.CLASSES_TASK_NAME)
-        val jarTask = project.locateTask<Jar>(JavaPlugin.JAR_TASK_NAME)
+        konst classesTask = project.locateTask<Task>(JavaPlugin.CLASSES_TASK_NAME)
+        konst jarTask = project.locateTask<Jar>(JavaPlugin.JAR_TASK_NAME)
 
         if (classesTask == null || jarTask == null) {
             project.logger.info(
@@ -87,7 +87,7 @@ internal abstract class AbstractKotlinPlugin(
             return
         }
 
-        val inspectTask = project.registerTask<InspectClassesForMultiModuleIC>(INSPECT_IC_CLASSES_TASK_NAME) { inspectTask ->
+        konst inspectTask = project.registerTask<InspectClassesForMultiModuleIC>(INSPECT_IC_CLASSES_TASK_NAME) { inspectTask ->
             inspectTask.archivePath.set(jarTask.map { it.archivePathCompatible.normalize().absolutePath })
             inspectTask.archivePath.disallowChanges()
 
@@ -103,7 +103,7 @@ internal abstract class AbstractKotlinPlugin(
             )
             inspectTask.classesListFile.disallowChanges()
 
-            val sourceSetClassesDir = project
+            konst sourceSetClassesDir = project
                 .variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSetsIfAvailable
@@ -126,15 +126,15 @@ internal abstract class AbstractKotlinPlugin(
     }
 
     private fun rewriteMppDependenciesInPom(target: AbstractKotlinTarget) {
-        val project = target.project
+        konst project = target.project
 
-        val shouldRewritePoms = project.provider {
+        konst shouldRewritePoms = project.provider {
             PropertiesProvider(project).keepMppDependenciesIntactInPoms != true
         }
 
         project.pluginManager.withPlugin("maven-publish") {
             project.extensions.configure(PublishingExtension::class.java) { publishing ->
-                val pomRewriter = PomDependenciesRewriter(project, target.kotlinComponents.single())
+                konst pomRewriter = PomDependenciesRewriter(project, target.kotlinComponents.single())
                 publishing.publications.withType(MavenPublication::class.java).all { publication ->
                     rewritePom(publication.pom, pomRewriter, shouldRewritePoms)
                 }
@@ -148,7 +148,7 @@ internal abstract class AbstractKotlinPlugin(
     }
 
     companion object {
-        private const val INSPECT_IC_CLASSES_TASK_NAME = "inspectClassesForKotlinIC"
+        private const konst INSPECT_IC_CLASSES_TASK_NAME = "inspectClassesForKotlinIC"
 
         fun configureProjectGlobalSettings(project: Project) {
             customizeKotlinDependencies(project)
@@ -168,22 +168,22 @@ internal abstract class AbstractKotlinPlugin(
             kotlinTarget: KotlinTarget,
             duplicateJavaSourceSetsAsKotlinSourceSets: Boolean = true
         ) {
-            val project = kotlinTarget.project
-            val javaSourceSets = project
+            konst project = kotlinTarget.project
+            konst javaSourceSets = project
                 .variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
                 .getInstance(project)
                 .sourceSets
 
-            @Suppress("DEPRECATION") val kotlinSourceSetDslName = when (kotlinTarget.platformType) {
+            @Suppress("DEPRECATION") konst kotlinSourceSetDslName = when (kotlinTarget.platformType) {
                 KotlinPlatformType.js -> KOTLIN_JS_DSL_NAME
                 else -> KOTLIN_DSL_NAME
             }
 
             javaSourceSets.all { javaSourceSet ->
-                val kotlinCompilation = kotlinTarget.compilations.maybeCreate(javaSourceSet.name)
+                konst kotlinCompilation = kotlinTarget.compilations.maybeCreate(javaSourceSet.name)
 
                 if (duplicateJavaSourceSetsAsKotlinSourceSets) {
-                    val kotlinSourceSet = project.kotlinExtension.sourceSets.maybeCreate(kotlinCompilation.name)
+                    konst kotlinSourceSet = project.kotlinExtension.sourceSets.maybeCreate(kotlinCompilation.name)
                     kotlinSourceSet.kotlin.source(javaSourceSet.java)
                     // Registering resources from KotlinSourceSet as Java SourceSet resources. In case of KotlinPlugin
                     // Java Sources set will create ProcessResources task to process all resources into output
@@ -214,11 +214,11 @@ internal abstract class AbstractKotlinPlugin(
             // Since the 'java' plugin (as opposed to 'java-library') doesn't known anything about the 'api' configurations,
             // add the API dependencies of the main compilation directly to the 'apiElements' configuration, so that the 'api' dependencies
             // are properly published with the 'compile' scope (KT-28355):
-            project.whenEvaluated {
+            project.whenEkonstuated {
                 project.configurations.apply {
-                    val apiElementsConfiguration = getByName(kotlinTarget.apiElementsConfigurationName)
-                    val mainCompilation = kotlinTarget.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
-                    val compilationApiConfiguration = getByName(mainCompilation.apiConfigurationName)
+                    konst apiElementsConfiguration = getByName(kotlinTarget.apiElementsConfigurationName)
+                    konst mainCompilation = kotlinTarget.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+                    konst compilationApiConfiguration = getByName(mainCompilation.apiConfigurationName)
                     apiElementsConfiguration.extendsFrom(compilationApiConfiguration)
                 }
             }
@@ -227,7 +227,7 @@ internal abstract class AbstractKotlinPlugin(
         private fun configureAttributes(
             kotlinTarget: KotlinWithJavaTarget<*, *>
         ) {
-            val project = kotlinTarget.project
+            konst project = kotlinTarget.project
 
             // Setup the consuming configurations:
             project.dependencies.attributesSchema.attribute(KotlinPlatformType.attribute)

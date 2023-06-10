@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.resolve.konan.diagnostics
 
 import org.jetbrains.kotlin.diagnostics.rendering.*
 
-private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
+private konst DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
     DiagnosticFactoryToRendererMap("Native").apply {
         put(ErrorsNative.THROWS_LIST_EMPTY, "@Throws must have non-empty class list")
         put(
@@ -25,7 +25,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         )
         put(
             ErrorsNative.INAPPLICABLE_SHARED_IMMUTABLE_PROPERTY,
-            "@SharedImmutable is applicable only to val with backing field or to property with delegation"
+            "@SharedImmutable is applicable only to konst with backing field or to property with delegation"
         )
         put(ErrorsNative.INAPPLICABLE_SHARED_IMMUTABLE_TOP_LEVEL, "@SharedImmutable is applicable only to top level declarations")
         put(
@@ -49,7 +49,7 @@ private val DIAGNOSTIC_FACTORY_TO_RENDERER by lazy {
         )
         put(ErrorsNative.INAPPLICABLE_EXACT_OBJC_NAME, "Exact @ObjCName is only applicable to classes, objects and interfaces")
         put(ErrorsNative.MISSING_EXACT_OBJC_NAME, "Exact @ObjCName is required to have an ObjC name")
-        put(ErrorsNative.NON_LITERAL_OBJC_NAME_ARG, "@ObjCName accepts only literal string and boolean values")
+        put(ErrorsNative.NON_LITERAL_OBJC_NAME_ARG, "@ObjCName accepts only literal string and boolean konstues")
         put(ErrorsNative.REDUNDANT_SWIFT_REFINEMENT, "An ObjC refined declaration can't also be refined in Swift")
         put(
             ErrorsNative.INCOMPATIBLE_OBJC_REFINEMENT_OVERRIDE,

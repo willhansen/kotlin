@@ -20,7 +20,7 @@ public final class Derived : Base {
 
 public final class Inv</*0*/ I> {
     public constructor Inv</*0*/ I>(/*0*/ arg: I)
-    public final val arg: I
+    public final konst arg: I
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -28,7 +28,7 @@ public final class Inv</*0*/ I> {
 
 public final class InvExact</*0*/ E> {
     public constructor InvExact</*0*/ E>(/*0*/ arg: E)
-    public final val arg: E
+    public final konst arg: E
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

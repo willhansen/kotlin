@@ -10,7 +10,7 @@ fun bar(result: String) {
 }
 
 fun box(): String {
-    val f = (String::foo).call("abc")
+    konst f = (String::foo).call("abc")
     if (f != 3) return "Fail: $f"
 
     try {

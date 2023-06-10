@@ -34,12 +34,12 @@ sealed class ArrayMap<T : Any> : Iterable<T> {
   // CHECK:
   //   Mangled name: ArrayMap#set(kotlin.Int;1:0){}
   //   Public signature: /ArrayMap.set|366827667513302185[0]
-  abstract operator fun set(index: Int, value: T): Unit
+  abstract operator fun set(index: Int, konstue: T): Unit
 
   // CHECK:
   //   Mangled name: ArrayMap{}size
   //   Public signature: /ArrayMap.size|-6253659984320132064[0]
-  abstract val size: Int
+  abstract konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: ArrayMap#<get-size>(){}kotlin.Int
     //   Public signature: /ArrayMap.size.<get-size>|-3941649985161900780[0]
@@ -93,7 +93,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     // CHECK:
     //   Mangled name: ArrayMapImpl.Entry{}key
     //   Public signature: /ArrayMapImpl.Entry.key|1144547298251177939[0]
-    override val key: Int
+    override konst key: Int
       // CHECK JVM_IR:
       //   Mangled name: ArrayMapImpl.Entry#<get-key>(){}kotlin.Int
       //   Public signature: /ArrayMapImpl.Entry.key.<get-key>|-7928552352363699078[0]
@@ -103,21 +103,21 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
       override get
 
     // CHECK:
-    //   Mangled name: ArrayMapImpl.Entry{}value
-    //   Public signature: /ArrayMapImpl.Entry.value|1987073854177347439[0]
-    override val value: T
+    //   Mangled name: ArrayMapImpl.Entry{}konstue
+    //   Public signature: /ArrayMapImpl.Entry.konstue|1987073854177347439[0]
+    override konst konstue: T
       // CHECK JVM_IR:
-      //   Mangled name: ArrayMapImpl.Entry#<get-value>(){}1:0
-      //   Public signature: /ArrayMapImpl.Entry.value.<get-value>|3167862337988859752[0]
+      //   Mangled name: ArrayMapImpl.Entry#<get-konstue>(){}1:0
+      //   Public signature: /ArrayMapImpl.Entry.konstue.<get-konstue>|3167862337988859752[0]
       // CHECK JS_IR NATIVE:
-      //   Mangled name: ArrayMapImpl.Entry#<get-value>(){}
-      //   Public signature: /ArrayMapImpl.Entry.value.<get-value>|3260093555963109437[0]
+      //   Mangled name: ArrayMapImpl.Entry#<get-konstue>(){}
+      //   Public signature: /ArrayMapImpl.Entry.konstue.<get-konstue>|3260093555963109437[0]
       override get
 
     // CHECK:
     //   Mangled name: ArrayMapImpl.Entry#<init>(kotlin.Int;1:0){}
     //   Public signature: /ArrayMapImpl.Entry.<init>|437318787564761214[0]
-    constructor(key: Int, value: T) /* primary */
+    constructor(key: Int, konstue: T) /* primary */
     // CHECK JVM_IR:
     //   Mangled name: ArrayMapImpl.Entry#component1(){}kotlin.Int
     //   Public signature: /ArrayMapImpl.Entry.component1|-8217597213800111288[0]
@@ -140,7 +140,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     // CHECK JS_IR NATIVE:
     //   Mangled name: ArrayMapImpl.Entry#copy(kotlin.Int;1:0){}
     //   Public signature: /ArrayMapImpl.Entry.copy|4234458596034602341[0]
-    fun copy(key: Int, value: T): Entry<T>
+    fun copy(key: Int, konstue: T): Entry<T>
 
     // CHECK JVM_IR:
     //   Mangled name: ArrayMapImpl.Entry#equals(kotlin.Any?){}kotlin.Boolean
@@ -180,7 +180,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     // CHECK:
     //   Mangled name: ArrayMapImpl.Companion{}DEFAULT_SIZE
     //   Public signature: /ArrayMapImpl.Companion.DEFAULT_SIZE|-2519126992484260687[0]
-    private const val DEFAULT_SIZE: Int
+    private const konst DEFAULT_SIZE: Int
       // CHECK JVM_IR:
       //   Mangled name: ArrayMapImpl.Companion#<get-DEFAULT_SIZE>(){}kotlin.Int
       //   Public signature: /ArrayMapImpl.Companion.DEFAULT_SIZE.<get-DEFAULT_SIZE>|-825092515895884543[0]
@@ -192,7 +192,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
     // CHECK:
     //   Mangled name: ArrayMapImpl.Companion{}INCREASE_K
     //   Public signature: /ArrayMapImpl.Companion.INCREASE_K|7964000577208016171[0]
-    private const val INCREASE_K: Int
+    private const konst INCREASE_K: Int
       // CHECK JVM_IR:
       //   Mangled name: ArrayMapImpl.Companion#<get-INCREASE_K>(){}kotlin.Int
       //   Public signature: /ArrayMapImpl.Companion.INCREASE_K.<get-INCREASE_K>|-381728285012206517[0]
@@ -257,7 +257,7 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
   // CHECK:
   //   Mangled name: ArrayMapImpl#set(kotlin.Int;1:0){}
   //   Public signature: /ArrayMapImpl.set|366827667513302185[0]
-  override operator fun set(index: Int, value: T): Unit
+  override operator fun set(index: Int, konstue: T): Unit
 
 }
 
@@ -266,21 +266,21 @@ internal class ArrayMapImpl<T : Any> : ArrayMap<T> {
 //   Public signature: /OneElementArrayMap|null[0]
 internal class OneElementArrayMap<T : Any> : ArrayMap<T> {
   // CHECK:
-  //   Mangled name: OneElementArrayMap{}value
-  //   Public signature: /OneElementArrayMap.value|1987073854177347439[0]
-  val value: T
+  //   Mangled name: OneElementArrayMap{}konstue
+  //   Public signature: /OneElementArrayMap.konstue|1987073854177347439[0]
+  konst konstue: T
     // CHECK JVM_IR:
-    //   Mangled name: OneElementArrayMap#<get-value>(){}1:0
-    //   Public signature: /OneElementArrayMap.value.<get-value>|3167862337988859752[0]
+    //   Mangled name: OneElementArrayMap#<get-konstue>(){}1:0
+    //   Public signature: /OneElementArrayMap.konstue.<get-konstue>|3167862337988859752[0]
     // CHECK JS_IR NATIVE:
-    //   Mangled name: OneElementArrayMap#<get-value>(){}
-    //   Public signature: /OneElementArrayMap.value.<get-value>|3260093555963109437[0]
+    //   Mangled name: OneElementArrayMap#<get-konstue>(){}
+    //   Public signature: /OneElementArrayMap.konstue.<get-konstue>|3260093555963109437[0]
     get
 
   // CHECK:
   //   Mangled name: OneElementArrayMap{}index
   //   Public signature: /OneElementArrayMap.index|-7442989064208524072[0]
-  val index: Int
+  konst index: Int
     // CHECK JVM_IR:
     //   Mangled name: OneElementArrayMap#<get-index>(){}kotlin.Int
     //   Public signature: /OneElementArrayMap.index.<get-index>|-8397313606796909404[0]
@@ -292,7 +292,7 @@ internal class OneElementArrayMap<T : Any> : ArrayMap<T> {
   // CHECK:
   //   Mangled name: OneElementArrayMap#<init>(1:0;kotlin.Int){}
   //   Public signature: /OneElementArrayMap.<init>|7281397193015694517[0]
-  constructor(value: T, index: Int) /* primary */
+  constructor(konstue: T, index: Int) /* primary */
 
   // CHECK JVM_IR:
   //   Mangled name: OneElementArrayMap#copy(){}ArrayMap<1:0>
@@ -321,12 +321,12 @@ internal class OneElementArrayMap<T : Any> : ArrayMap<T> {
   // CHECK:
   //   Mangled name: OneElementArrayMap#set(kotlin.Int;1:0){}
   //   Public signature: /OneElementArrayMap.set|366827667513302185[0]
-  override operator fun set(index: Int, value: T): Unit
+  override operator fun set(index: Int, konstue: T): Unit
 
   // CHECK:
   //   Mangled name: OneElementArrayMap{}size
   //   Public signature: /OneElementArrayMap.size|-6253659984320132064[0]
-  override val size: Int
+  override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: OneElementArrayMap#<get-size>(){}kotlin.Int
     //   Public signature: /OneElementArrayMap.size.<get-size>|-3941649985161900780[0]
@@ -373,12 +373,12 @@ internal object EmptyArrayMap : ArrayMap<Nothing> {
   // CHECK:
   //   Mangled name: EmptyArrayMap#set(kotlin.Int;kotlin.Nothing){}
   //   Public signature: /EmptyArrayMap.set|-6638106378891901866[0]
-  override operator fun set(index: Int, value: Nothing): Unit
+  override operator fun set(index: Int, konstue: Nothing): Unit
 
   // CHECK:
   //   Mangled name: EmptyArrayMap{}size
   //   Public signature: /EmptyArrayMap.size|-6253659984320132064[0]
-  override val size: Int
+  override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: EmptyArrayMap#<get-size>(){}kotlin.Int
     //   Public signature: /EmptyArrayMap.size.<get-size>|-3941649985161900780[0]

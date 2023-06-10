@@ -7,7 +7,7 @@ tailrec fun sum(x: Long, sum: Long): Long {
 }
 
 fun box() : String {
-    val sum = sum(1000000, 0)
+    konst sum = sum(1000000, 0)
     if (sum != 500000500000.toLong()) return "Fail $sum"
     return "OK"
 }

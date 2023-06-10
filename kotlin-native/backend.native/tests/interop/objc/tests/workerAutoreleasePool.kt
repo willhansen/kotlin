@@ -71,23 +71,23 @@ private fun testExecuteAfter10(context: Context, yieldMethod: Yield) =
 private fun <F> test(method: ExecuteMethod<F>, context: Context, yieldMethod: Yield) {
     context.withWorker { worker ->
         fun execute(block: () -> Unit) {
-            val future = method.submit(worker, block)
+            konst future = method.submit(worker, block)
             yieldMethod.yield()
             method.wait(future)
         }
 
-        val deallocated = CreateAutoreleaseDeallocated()
+        konst deallocated = CreateAutoreleaseDeallocated()
 
         execute {
             CreateAutorelease.createAutorelease(deallocated)
             // Object is still in autorelease pool:
-            assertFalse(deallocated.value)
+            assertFalse(deallocated.konstue)
         }
 
         // autorelease pool is processed after the job is finished, so the object should be deallocated;
         // Checking in a job to make sure previous job is completely processed:
         execute {
-            assertTrue(deallocated.value)
+            assertTrue(deallocated.konstue)
         }
     }
 }
@@ -108,19 +108,19 @@ object Execute : ExecuteMethod<Future<Unit>> {
 }
 
 abstract class ExecuteAfter : ExecuteMethod<AtomicReference<Any?>> {
-    abstract val timeout: Long
+    abstract konst timeout: Long
 
     abstract fun sleepAndYield()
 
     override fun submit(worker: Worker, block: () -> Unit): AtomicReference<Any?> {
-        val result = AtomicReference<Any?>(null)
+        konst result = AtomicReference<Any?>(null)
 
         worker.executeAfter(timeout, {
             try {
                 block()
-                result.value = true
+                result.konstue = true
             } catch (e: Throwable) {
-                result.value = e.freeze()
+                result.konstue = e.freeze()
             }
         }.freeze())
 
@@ -130,7 +130,7 @@ abstract class ExecuteAfter : ExecuteMethod<AtomicReference<Any?>> {
     override fun wait(future: AtomicReference<Any?>) {
         while (true) {
             sleepAndYield()
-            when (val it = future.value) {
+            when (konst it = future.konstue) {
                 null -> continue
                 true -> return
                 else -> throw it as Throwable
@@ -140,15 +140,15 @@ abstract class ExecuteAfter : ExecuteMethod<AtomicReference<Any?>> {
 }
 
 object ExecuteAfter0 : ExecuteAfter() {
-    override val timeout = 0L
+    override konst timeout = 0L
 
     override fun sleepAndYield() {
         // No sleep or additional yield required.
     }
 }
 
-class ExecuteAfter10(val yieldMethod: Yield) : ExecuteAfter() {
-    override val timeout = 10L
+class ExecuteAfter10(konst yieldMethod: Yield) : ExecuteAfter() {
+    override konst timeout = 10L
 
     override fun sleepAndYield() {
         Worker.current.park(timeout + 1L, process = false)
@@ -172,7 +172,7 @@ object InMainToWorker : Context {
 
 object InWorker : Context {
     override fun withWorker(block: (Worker) -> Unit) = kotlin.native.concurrent.withWorker {
-        val method = Execute
+        konst method = Execute
         method.wait(method.submit(this) {
             block(this)
         })

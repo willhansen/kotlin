@@ -5,7 +5,7 @@
 expect open class A() {
     fun foo()
 
-    val x: Int
+    konst x: Int
 }
 
 open class B : A()
@@ -18,7 +18,7 @@ actual open class A {
 
     fun bar() {}
 
-    actual val x = 42
+    actual konst x = 42
 }
 
 class C : B() {

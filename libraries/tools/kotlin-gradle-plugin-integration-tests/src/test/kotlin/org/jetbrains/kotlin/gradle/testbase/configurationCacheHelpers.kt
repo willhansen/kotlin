@@ -25,7 +25,7 @@ fun TestProject.assertSimpleConfigurationCacheScenarioWorks(
 ) {
     // First, run a build that serializes the tasks state for configuration cache in further builds
 
-    val executedTask: List<String> = executedTaskNames ?: buildArguments.toList()
+    konst executedTask: List<String> = executedTaskNames ?: buildArguments.toList()
 
     build(*buildArguments, buildOptions = buildOptions) {
         assertTasksExecuted(*executedTask.toTypedArray())
@@ -59,5 +59,5 @@ fun BuildResult.assertConfigurationCacheReused() {
     assertOutputContains("Reusing configuration cache.")
 }
 
-val BuildOptions.withConfigurationCache: BuildOptions
+konst BuildOptions.withConfigurationCache: BuildOptions
     get() = copy(configurationCache = true, configurationCacheProblems = BaseGradleIT.ConfigurationCacheProblems.FAIL)

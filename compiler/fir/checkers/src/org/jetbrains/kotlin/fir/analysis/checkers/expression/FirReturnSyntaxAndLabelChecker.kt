@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirFunctionSymbol
 
 object FirReturnSyntaxAndLabelChecker : FirReturnExpressionChecker() {
     override fun check(expression: FirReturnExpression, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = expression.source
+        konst source = expression.source
         if (source?.kind is KtFakeSourceElementKind.ImplicitReturn) return
 
-        val labeledElement = expression.target.labeledElement
-        val targetSymbol = labeledElement.symbol
+        konst labeledElement = expression.target.labeledElement
+        konst targetSymbol = labeledElement.symbol
         if (labeledElement is FirErrorFunction && (labeledElement.diagnostic as? ConeSimpleDiagnostic)?.kind == DiagnosticKind.NotAFunctionLabel) {
             reporter.reportOn(source, FirErrors.NOT_A_FUNCTION_LABEL, context)
         } else if (!isReturnAllowed(targetSymbol, context)) {
@@ -34,9 +34,9 @@ object FirReturnSyntaxAndLabelChecker : FirReturnExpressionChecker() {
         }
 
         if (targetSymbol is FirAnonymousFunctionSymbol) {
-            val label = targetSymbol.label
+            konst label = targetSymbol.label
             if (label?.source?.kind !is KtRealSourceElementKind) {
-                val functionCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.asReversed().find {
+                konst functionCall = context.qualifiedAccessOrAssignmentsOrAnnotationCalls.asReversed().find {
                     it is FirFunctionCall &&
                             (it.calleeReference.toResolvedFunctionSymbol())?.callableId ==
                             FirSuspendCallChecker.KOTLIN_SUSPEND_BUILT_IN_FUNCTION_CALLABLE_ID
@@ -52,7 +52,7 @@ object FirReturnSyntaxAndLabelChecker : FirReturnExpressionChecker() {
             }
         }
 
-        val containingDeclaration = context.containingDeclarations.last()
+        konst containingDeclaration = context.containingDeclarations.last()
         if (containingDeclaration is FirFunction &&
             containingDeclaration.body is FirSingleExpressionBlock &&
             containingDeclaration.source?.kind != KtFakeSourceElementKind.DelegatedPropertyAccessor

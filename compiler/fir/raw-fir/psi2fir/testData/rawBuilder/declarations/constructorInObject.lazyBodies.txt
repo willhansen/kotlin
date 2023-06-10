@@ -13,13 +13,13 @@ FILE: constructorInObject.kt
         }
 
         public final static enum entry X: R|B| = LAZY_EXPRESSION
-        public final static fun values(): R|kotlin/Array<B>| {
+        public final static fun konstues(): R|kotlin/Array<B>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|B| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|B| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<B>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<B>|
             public get(): R|kotlin/enums/EnumEntries<B>|
 
     }
@@ -36,5 +36,5 @@ FILE: constructorInObject.kt
         }
 
     }
-    public? final? val anonObject: <implicit> = LAZY_EXPRESSION
+    public? final? konst anonObject: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>

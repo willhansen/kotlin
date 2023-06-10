@@ -24,7 +24,7 @@ internal class Kotlin2JsSourceSetProcessor(
     kotlinCompilation = kotlinCompilation
 ) {
     override fun doRegisterTask(project: Project, taskName: String): TaskProvider<out Kotlin2JsCompile> {
-        val configAction = Kotlin2JsCompileConfig(compilationInfo)
+        konst configAction = Kotlin2JsCompileConfig(compilationInfo)
         applyStandardTaskConfiguration(configAction)
         return tasksProvider.registerKotlinJSTask(
             project,
@@ -41,8 +41,8 @@ internal class Kotlin2JsSourceSetProcessor(
 
         compilationInfo.tcsOrNull?.compilation?.run { this as? KotlinWithJavaCompilation<*, *> }?.javaSourceSet?.clearJavaSrcDirs()
 
-        project.whenEvaluated {
-            val subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
+        project.whenEkonstuated {
+            konst subpluginEnvironment: SubpluginEnvironment = SubpluginEnvironment.loadSubplugins(project)
 
             /* Not supported in KPM */
             compilationInfo.tcsOrNull?.compilation?.let { compilation ->

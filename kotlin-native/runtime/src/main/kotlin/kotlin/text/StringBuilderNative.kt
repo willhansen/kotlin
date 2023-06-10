@@ -7,35 +7,35 @@ package kotlin.text
 
 import kotlin.native.internal.GCUnsafeCall
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Byte): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Byte): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Short): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Short): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Int): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Int): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Long): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Long): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Float): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Float): StringBuilder = append(konstue).appendLine()
 
-/** Appends [value] to this [StringBuilder], followed by a line feed character (`\n`). */
+/** Appends [konstue] to this [StringBuilder], followed by a line feed character (`\n`). */
 @SinceKotlin("1.4")
 @kotlin.internal.InlineOnly
-public inline fun StringBuilder.appendLine(value: Double): StringBuilder = append(value).appendLine()
+public inline fun StringBuilder.appendLine(konstue: Double): StringBuilder = append(konstue).appendLine()
 
 
 @DeprecatedSinceKotlin(warningSince = "1.4", errorSince = "1.6")
@@ -79,7 +79,7 @@ public fun StringBuilder.appendln(it: Any?): StringBuilder = appendLine(it)
 public fun StringBuilder.appendln(): StringBuilder = appendLine()
 
 @GCUnsafeCall("Kotlin_StringBuilder_insertString")
-internal external fun insertString(array: CharArray, distIndex: Int, value: String, sourceIndex: Int, count: Int): Int
+internal external fun insertString(array: CharArray, distIndex: Int, konstue: String, sourceIndex: Int, count: Int): Int
 
 @GCUnsafeCall("Kotlin_StringBuilder_insertInt")
-internal external fun insertInt(array: CharArray, start: Int, value: Int): Int
+internal external fun insertInt(array: CharArray, start: Int, konstue: Int): Int

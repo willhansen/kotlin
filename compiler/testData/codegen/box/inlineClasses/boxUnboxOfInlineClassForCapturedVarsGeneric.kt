@@ -3,13 +3,13 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt<T: Int>(private val value: T) {
-    operator fun plus(other: UInt<Int>): UInt<Int> = UInt<Int>(value + other.asValue())
+konstue class UInt<T: Int>(private konst konstue: T) {
+    operator fun plus(other: UInt<Int>): UInt<Int> = UInt<Int>(konstue + other.asValue())
 
-    fun asValue(): Int = value
+    fun asValue(): Int = konstue
 }
 
-val Int.u get() = UInt(this)
+konst Int.u get() = UInt(this)
 
 var global = 0.u
 
@@ -58,7 +58,7 @@ inline fun <T> T.myLet(f: (T) -> Unit) = f(this)
 fun <T> T.nonInlineLet(f: (T) -> Unit) = f(this)
 
 fun box(): String {
-    val u = 1.u
+    konst u = 1.u
     testInlined(u, true)
     if (global.asValue() != 6) return "fail 1"
 

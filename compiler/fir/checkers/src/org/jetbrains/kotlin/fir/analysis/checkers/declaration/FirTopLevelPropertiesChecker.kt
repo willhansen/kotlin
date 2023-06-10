@@ -32,11 +32,11 @@ object FirTopLevelPropertiesChecker : FirPropertyChecker() {
         // Only report on top level callable declarations
         if (context.containingDeclarations.size > 1) return
 
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
         // If multiple (potentially conflicting) modality modifiers are specified, not all modifiers are recorded at `status`.
         // So, our source of truth should be the full modifier list retrieved from the source.
-        val modifierList = source.getModifierList()
+        konst modifierList = source.getModifierList()
 
         checkPropertyInitializer(
             containingClass = null,
@@ -77,11 +77,11 @@ internal fun checkPropertyInitializer(
     context: CheckerContext,
     reachable: Boolean = true
 ) {
-    val inInterface = containingClass?.isInterface == true
-    val hasAbstractModifier = KtTokens.ABSTRACT_KEYWORD in modifierList
-    val isAbstract = property.isAbstract || hasAbstractModifier
+    konst inInterface = containingClass?.isInterface == true
+    konst hasAbstractModifier = KtTokens.ABSTRACT_KEYWORD in modifierList
+    konst isAbstract = property.isAbstract || hasAbstractModifier
     if (isAbstract) {
-        val returnTypeRef = property.returnTypeRef
+        konst returnTypeRef = property.returnTypeRef
         if (property.initializer == null &&
             property.delegate == null &&
             returnTypeRef is FirErrorTypeRef && returnTypeRef.diagnostic is ConeLocalVariableNoTypeOrInitializer
@@ -93,14 +93,14 @@ internal fun checkPropertyInitializer(
         return
     }
 
-    val backingFieldRequired = property.hasBackingField
+    konst backingFieldRequired = property.hasBackingField
     if (inInterface && backingFieldRequired && property.hasAnyAccessorImplementation) {
         property.source?.let {
             reporter.reportOn(it, FirErrors.BACKING_FIELD_IN_INTERFACE, context)
         }
     }
 
-    val isExpect = property.isEffectivelyExpect(containingClass, context)
+    konst isExpect = property.isEffectivelyExpect(containingClass, context)
 
     when {
         property.initializer != null -> {
@@ -134,9 +134,9 @@ internal fun checkPropertyInitializer(
             }
         }
         else -> {
-            val propertySource = property.source ?: return
-            val isExternal = property.isEffectivelyExternal(containingClass, context)
-            val isCorrectlyInitialized =
+            konst propertySource = property.source ?: return
+            konst isExternal = property.isEffectivelyExternal(containingClass, context)
+            konst isCorrectlyInitialized =
                 property.initializer != null || isDefinitelyAssignedInConstructor && !property.hasSetterAccessorImplementation &&
                         property.getEffectiveModality(containingClass, context.languageVersionSettings) != Modality.OPEN
             if (
@@ -178,24 +178,24 @@ private fun reportMustBeInitialized(
     context: CheckerContext,
 ) {
     check(!property.isAbstract) { "${::reportMustBeInitialized.name} isn't called for abstract properties" }
-    val suggestMakingItFinal = containingClass != null &&
+    konst suggestMakingItFinal = containingClass != null &&
             !property.hasSetterAccessorImplementation &&
             property.getEffectiveModality(containingClass, context.languageVersionSettings) != Modality.FINAL &&
             isDefinitelyAssignedInConstructor
-    val suggestMakingItAbstract = containingClass != null && !property.hasAnyAccessorImplementation
-    val isOpenValDeferredInitDeprecationWarning =
+    konst suggestMakingItAbstract = containingClass != null && !property.hasAnyAccessorImplementation
+    konst isOpenValDeferredInitDeprecationWarning =
         !context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitOpenValDeferredInitialization) &&
                 property.getEffectiveModality(containingClass, context.languageVersionSettings) == Modality.OPEN && property.isVal &&
                 isDefinitelyAssignedInConstructor
     if (isOpenValDeferredInitDeprecationWarning && !suggestMakingItFinal && suggestMakingItAbstract) {
-        error("Not reachable case. Every \"open val + deferred init\" case that could be made `abstract`, also could be made `final`")
+        error("Not reachable case. Every \"open konst + deferred init\" case that could be made `abstract`, also could be made `final`")
     }
-    val isMissedMustBeInitializedDeprecationWarning =
+    konst isMissedMustBeInitializedDeprecationWarning =
         !context.languageVersionSettings.supportsFeature(LanguageFeature.ProhibitMissedMustBeInitializedWhenThereIsNoPrimaryConstructor) &&
                 containingClass != null &&
                 containingClass.primaryConstructorIfAny(context.session) == null &&
                 isDefinitelyAssignedInConstructor
-    val factory = when {
+    konst factory = when {
         suggestMakingItFinal && suggestMakingItAbstract -> FirErrors.MUST_BE_INITIALIZED_OR_FINAL_OR_ABSTRACT
         suggestMakingItFinal -> FirErrors.MUST_BE_INITIALIZED_OR_BE_FINAL
         suggestMakingItAbstract -> FirErrors.MUST_BE_INITIALIZED_OR_BE_ABSTRACT
@@ -211,7 +211,7 @@ private fun reportMustBeInitialized(
     )
 }
 
-private val KtDiagnosticFactory0.deprecationWarning
+private konst KtDiagnosticFactory0.deprecationWarning
     get() = when (this) {
         FirErrors.MUST_BE_INITIALIZED -> FirErrors.MUST_BE_INITIALIZED_WARNING
         FirErrors.MUST_BE_INITIALIZED_OR_BE_ABSTRACT -> FirErrors.MUST_BE_INITIALIZED_OR_BE_ABSTRACT_WARNING
@@ -220,11 +220,11 @@ private val KtDiagnosticFactory0.deprecationWarning
         else -> error("Only MUST_BE_INITIALIZED is supported")
     }
 
-private val FirPropertyAccessor?.hasImplementation: Boolean
+private konst FirPropertyAccessor?.hasImplementation: Boolean
     get() = (this !is FirDefaultPropertyAccessor && this?.hasBody == true)
-private val FirProperty.hasSetterAccessorImplementation: Boolean
+private konst FirProperty.hasSetterAccessorImplementation: Boolean
     get() = setter.hasImplementation
-private val FirProperty.hasAnyAccessorImplementation: Boolean
+private konst FirProperty.hasAnyAccessorImplementation: Boolean
     get() = getter.hasImplementation || setter.hasImplementation
 
 private fun FirProperty.getEffectiveModality(containingClass: FirClass?, languageVersionSettings: LanguageVersionSettings): Modality? =

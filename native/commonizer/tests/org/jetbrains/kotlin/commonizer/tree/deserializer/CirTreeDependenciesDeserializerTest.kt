@@ -14,18 +14,18 @@ import kotlin.test.assertIs
 class CirTreeDependenciesDeserializerTest : AbstractCirTreeDeserializerTest() {
 
     fun `test deserialize with dependencies`() {
-        val module = createCirTree {
+        konst module = createCirTree {
             dependency {
                 source("interface Dependency", "dependencies.kt")
             }
             source("object X: Dependency", "source.kt")
         }
 
-        val xObject = module.assertSingleClass()
+        konst xObject = module.assertSingleClass()
         assertEquals(ClassKind.OBJECT, xObject.clazz.kind, "Expected object 'X' to be object")
         assertEquals(1, xObject.clazz.supertypes.size, "Expected single supertype. Found ${xObject.clazz.supertypes}")
 
-        val dependencyType = assertIs<CirClassType>(xObject.clazz.supertypes.single(), "Expected 'Dependency' to be class")
+        konst dependencyType = assertIs<CirClassType>(xObject.clazz.supertypes.single(), "Expected 'Dependency' to be class")
         assertEquals("/Dependency", dependencyType.classifierId.toString())
     }
 }

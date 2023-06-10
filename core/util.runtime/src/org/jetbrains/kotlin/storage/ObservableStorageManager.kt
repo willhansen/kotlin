@@ -18,9 +18,9 @@ package org.jetbrains.kotlin.storage
 
 import java.util.concurrent.ConcurrentMap
 
-abstract class ObservableStorageManager(private val delegate: StorageManager) : StorageManager {
-    protected abstract val <T> (() -> T).observable: () -> T
-    protected abstract val <K, V> ((K) -> V).observable: (K) -> V
+abstract class ObservableStorageManager(private konst delegate: StorageManager) : StorageManager {
+    protected abstract konst <T> (() -> T).observable: () -> T
+    protected abstract konst <K, V> ((K) -> V).observable: (K) -> V
 
     override fun <K, V: Any> createMemoizedFunction(compute: (K) -> V): MemoizedFunctionToNotNull<K, V> {
         return delegate.createMemoizedFunction(compute.observable)

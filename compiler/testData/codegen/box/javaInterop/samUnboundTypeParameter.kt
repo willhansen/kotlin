@@ -5,16 +5,16 @@ import java.lang.Runnable;
 import java.lang.IllegalStateException;
 
 public class Base<T> {
-    public <S> S add(Base<S> value, Runnable block) { return null; }
+    public <S> S add(Base<S> konstue, Runnable block) { return null; }
 }
 
 // FILE: Derived.kt
-class Derived<T>(val value: T) : Base<T>() {
+class Derived<T>(konst konstue: T) : Base<T>() {
     init {
         add(this) {}
     }
 }
 
 fun box(): String {
-    return Derived("OK").value
+    return Derived("OK").konstue
 }

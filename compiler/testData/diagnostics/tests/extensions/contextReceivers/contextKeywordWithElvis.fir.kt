@@ -1,6 +1,6 @@
-class Context(val project: Any?)
+class Context(konst project: Any?)
 
 fun calculateResult(context: Context?) {
     context!!
-    val project = context.project!!
+    konst project = context.project!!
 }

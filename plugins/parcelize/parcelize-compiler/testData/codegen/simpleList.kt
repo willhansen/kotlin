@@ -5,4 +5,4 @@ import kotlinx.parcelize.*
 import android.os.Parcelable
 
 @Parcelize
-class Test(val names: List<String>): Parcelable
+class Test(konst names: List<String>): Parcelable

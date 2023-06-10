@@ -15,8 +15,8 @@ import java.io.Serializable
  * Can be used as a gradle attribute: `attribute(TargetWithSanitizer.TARGET_ATTRIBUTE, target.withSanitizer())`
  */
 class TargetWithSanitizer(
-        val target: KonanTarget,
-        val sanitizer: SanitizerKind?,
+        konst target: KonanTarget,
+        konst sanitizer: SanitizerKind?,
 ) : Named, Serializable {
     override fun getName(): String = "$target${sanitizer.targetSuffix}"
 
@@ -27,16 +27,16 @@ class TargetWithSanitizer(
     }
 
     override fun equals(other: Any?): Boolean {
-        val otherTarget = other as? TargetWithSanitizer ?: return false
+        konst otherTarget = other as? TargetWithSanitizer ?: return false
         return name == otherTarget.name
     }
 
     companion object {
         @JvmField
-        val TARGET_ATTRIBUTE = Attribute.of("org.jetbrains.kotlin.target", TargetWithSanitizer::class.java)
+        konst TARGET_ATTRIBUTE = Attribute.of("org.jetbrains.kotlin.target", TargetWithSanitizer::class.java)
 
         @JvmField
-        val host = TargetWithSanitizer(HostManager.host, null)
+        konst host = TargetWithSanitizer(HostManager.host, null)
     }
 }
 
@@ -48,7 +48,7 @@ fun KonanTarget.withSanitizer(sanitizer: SanitizerKind? = null) = TargetWithSani
 /**
  * All known targets with their sanitizers.
  */
-val PlatformManager.allTargetsWithSanitizers
+konst PlatformManager.allTargetsWithSanitizers
     get() = this.enabled.flatMap { target ->
         listOf(target.withSanitizer()) + target.supportedSanitizers().map {
             target.withSanitizer(it)

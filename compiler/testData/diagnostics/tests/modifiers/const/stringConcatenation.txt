@@ -1,13 +1,13 @@
 package
 
-public val nonConst: kotlin.Int = 0
-public const val printA: kotlin.String
-public const val printB: kotlin.String
-public const val simple: kotlin.String = "OK 3.0"
-public const val withInnerConcatenation: kotlin.String = "1 2 3 4 5 6"
-public const val withNonConst: kotlin.String = "A 0 B"
-public const val withNull: kotlin.String = "1 null"
-public const val withNullPlus: kotlin.String
+public konst nonConst: kotlin.Int = 0
+public const konst printA: kotlin.String
+public const konst printB: kotlin.String
+public const konst simple: kotlin.String = "OK 3.0"
+public const konst withInnerConcatenation: kotlin.String = "1 2 3 4 5 6"
+public const konst withNonConst: kotlin.String = "A 0 B"
+public const konst withNull: kotlin.String = "1 null"
+public const konst withNullPlus: kotlin.String
 
 public object A {
     private constructor A()

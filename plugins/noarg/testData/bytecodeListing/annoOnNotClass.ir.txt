@@ -6,12 +6,12 @@ public final enum class Colors {
     private synthetic final static field $VALUES: Colors[]
     public final enum static field RED: Colors
     public final enum static field WHITE: Colors
-    private synthetic final static method $values(): Colors[]
+    private synthetic final static method $konstues(): Colors[]
     static method <clinit>(): void
     private method <init>(p0: java.lang.String, p1: int): void
     public static @org.jetbrains.annotations.NotNull method getEntries(): kotlin.enums.EnumEntries
-    public static method valueOf(p0: java.lang.String): Colors
-    public static method values(): Colors[]
+    public static method konstueOf(p0: java.lang.String): Colors
+    public static method konstues(): Colors[]
 }
 
 @NoArg
@@ -31,7 +31,7 @@ public final class MyClass {
 }
 
 @NoArg
-@java.lang.annotation.Retention(value=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class NoArg {
     // source: 'annoOnNotClass.kt'

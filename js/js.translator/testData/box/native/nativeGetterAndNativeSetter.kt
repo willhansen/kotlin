@@ -68,7 +68,7 @@ fun testExtensions(obj: JsObject, key: String, oldValue: Any?, newValue: Any) {
 }
 
 fun box(): String {
-    val a = getTestObject()
+    konst a = getTestObject()
 
     test(a, "foo", "boo", "moo")
     test(a, "bar", 35, 67)
@@ -79,7 +79,7 @@ fun box(): String {
     test(a, 2, undefined, "HI")
     test(a, 5, undefined, t)
 
-    val b = getTestObject()
+    konst b = getTestObject()
 
     testExtensions(b, "foo", "boo", "moo")
     testExtensions(b, "bar", 35, 67)

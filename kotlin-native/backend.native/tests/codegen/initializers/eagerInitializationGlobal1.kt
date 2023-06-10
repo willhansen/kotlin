@@ -12,7 +12,7 @@ import kotlin.test.*
 
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
-val x = foo()
+konst x = foo()
 
 private fun foo(): Int {
     z1 = true
@@ -20,7 +20,7 @@ private fun foo(): Int {
 }
 
 // Will be initialized since [x]'s initializer calls a function from the file.
-val y = run { z2 = true; 117 }
+konst y = run { z2 = true; 117 }
 
 // FILE: main.kt
 import kotlin.test.*

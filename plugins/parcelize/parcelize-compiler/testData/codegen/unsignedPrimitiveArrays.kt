@@ -7,12 +7,12 @@ import android.os.Parcelable
 
 @Parcelize
 data class Test(
-    val a: UByteArray,
-    val b: UShortArray,
-    val c: UIntArray,
-    val d: ULongArray,
-    val e: UByteArray?,
-    val f: UShortArray?,
-    val g: UIntArray?,
-    val h: ULongArray?,
+    konst a: UByteArray,
+    konst b: UShortArray,
+    konst c: UIntArray,
+    konst d: ULongArray,
+    konst e: UByteArray?,
+    konst f: UShortArray?,
+    konst g: UIntArray?,
+    konst h: ULongArray?,
 ) : Parcelable

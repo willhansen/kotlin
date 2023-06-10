@@ -11,44 +11,44 @@ import org.jetbrains.kotlin.ir.backend.js.utils.MutableReference
 import org.jetbrains.kotlin.ir.declarations.*
 
 class JsMapping : DefaultMapping() {
-    val esClassWhichNeedBoxParameters = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, Boolean>()
-    val esClassToPossibilityForOptimization = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, MutableReference<Boolean>>()
+    konst esClassWhichNeedBoxParameters = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, Boolean>()
+    konst esClassToPossibilityForOptimization = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, MutableReference<Boolean>>()
 
-    val outerThisFieldSymbols = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
-    val innerClassConstructors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrConstructor>()
-    val originalInnerClassPrimaryConstructorByClass = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrConstructor>()
-    val secondaryConstructorToDelegate = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
-    val secondaryConstructorToFactory = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
-    val objectToGetInstanceFunction = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
-    val objectToInstanceField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
-    val classToSyntheticPrimaryConstructor = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrConstructor>()
-    val privateMemberToCorrespondingStatic = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrFunction, IrSimpleFunction>()
+    konst outerThisFieldSymbols = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
+    konst innerClassConstructors = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrConstructor>()
+    konst originalInnerClassPrimaryConstructorByClass = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrConstructor>()
+    konst secondaryConstructorToDelegate = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
+    konst secondaryConstructorToFactory = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrSimpleFunction>()
+    konst objectToGetInstanceFunction = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst objectToInstanceField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrField>()
+    konst classToSyntheticPrimaryConstructor = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrConstructor>()
+    konst privateMemberToCorrespondingStatic = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrFunction, IrSimpleFunction>()
 
-    val enumEntryToGetInstanceFun = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrSimpleFunction>()
-    val enumEntryToInstanceField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrField>()
-    val enumConstructorToNewConstructor = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrConstructor>()
-    val enumClassToCorrespondingEnumEntry = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrEnumEntry>()
-    val enumConstructorOldToNewValueParameters = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrValueDeclaration, IrValueParameter>()
-    val enumEntryToCorrespondingField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrField>()
-    val fieldToEnumEntry = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrField, IrEnumEntry>()
-    val enumClassToInitEntryInstancesFun = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
+    konst enumEntryToGetInstanceFun = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrSimpleFunction>()
+    konst enumEntryToInstanceField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrField>()
+    konst enumConstructorToNewConstructor = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrConstructor, IrConstructor>()
+    konst enumClassToCorrespondingEnumEntry = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrEnumEntry>()
+    konst enumConstructorOldToNewValueParameters = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrValueDeclaration, IrValueParameter>()
+    konst enumEntryToCorrespondingField = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrEnumEntry, IrField>()
+    konst fieldToEnumEntry = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrField, IrEnumEntry>()
+    konst enumClassToInitEntryInstancesFun = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
 
-    val suspendArityStore = DefaultDelegateFactory.newDeclarationToDeclarationCollectionMapping<IrClass, Collection<IrSimpleFunction>>()
+    konst suspendArityStore = DefaultDelegateFactory.newDeclarationToDeclarationCollectionMapping<IrClass, Collection<IrSimpleFunction>>()
 
-    val objectsWithPureInitialization = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, Boolean>()
+    konst objectsWithPureInitialization = DefaultDelegateFactory.newDeclarationToValueMapping<IrClass, Boolean>()
 
-    val inlineFunctionsBeforeInlining = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrFunction, IrFunction>()
+    konst inlineFunctionsBeforeInlining = DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrFunction, IrFunction>()
 
     // Wasm mappings
-    val wasmJsInteropFunctionToWrapper =
+    konst wasmJsInteropFunctionToWrapper =
         DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrSimpleFunction, IrSimpleFunction>()
 
-    val wasmNestedExternalToNewTopLevelFunction =
+    konst wasmNestedExternalToNewTopLevelFunction =
         DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrFunction, IrSimpleFunction>()
 
-    val wasmExternalObjectToGetInstanceFunction =
+    konst wasmExternalObjectToGetInstanceFunction =
         DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
 
-    val wasmExternalClassToInstanceCheck =
+    konst wasmExternalClassToInstanceCheck =
         DefaultDelegateFactory.newDeclarationToDeclarationMapping<IrClass, IrSimpleFunction>()
 }

@@ -54,18 +54,18 @@ class EncodeSignatureTest {
 
     @Test
     fun property() {
-        assertSignature("", "val test: Int = 23")
-        assertSignature("", "class A(val test: Int)")
+        assertSignature("", "konst test: Int = 23")
+        assertSignature("", "class A(konst test: Int)")
     }
 
     @Test
     fun extensionProperty() {
-        assertSignature("kotlin.String/", "val String.test: Int = 23")
-        assertSignature("kotlin.String/", "val String.test: Int = 23", "<get-test>")
+        assertSignature("kotlin.String/", "konst String.test: Int = 23")
+        assertSignature("kotlin.String/", "konst String.test: Int = 23", "<get-test>")
         assertSignature("kotlin.String/kotlin.Int", "var String.test: Int = 23", "<set-test>")
 
-        assertSignature("kotlin.String/", "class A { val String.test: Int get() = 23 }")
-        assertSignature("kotlin.String/", "class A { val String.test: Int get() = 23 }", "<get-test>")
+        assertSignature("kotlin.String/", "class A { konst String.test: Int get() = 23 }")
+        assertSignature("kotlin.String/", "class A { konst String.test: Int get() = 23 }", "<get-test>")
         assertSignature("kotlin.String/kotlin.Int", "class A { var String.test: Int get() = 23; set(_) {} }", "<set-test>")
     }
 
@@ -195,34 +195,34 @@ class EncodeSignatureTest {
 
     @Suppress("ObjectLiteralToLambda")
     private fun assertSignature(expectedEncoding: String, codeSnippet: String, name: String = "test") {
-        val disposable = object : Disposable {
+        konst disposable = object : Disposable {
             override fun dispose() {
             }
         }
 
-        val environment = createEnvironment(disposable)
+        konst environment = createEnvironment(disposable)
         try {
-            val project = environment.project
+            konst project = environment.project
 
-            val fs = MockVirtualFileSystem()
-            val file = (fs.file("sample.kt", codeSnippet) as VirtualFileSystem).findFileByPath("/sample.kt")!!
-            val psiManager = PsiManager.getInstance(project)
-            val psiFile = psiManager.findFile(file) as KtFile
+            konst fs = MockVirtualFileSystem()
+            konst file = (fs.file("sample.kt", codeSnippet) as VirtualFileSystem).findFileByPath("/sample.kt")!!
+            konst psiManager = PsiManager.getInstance(project)
+            konst psiFile = psiManager.findFile(file) as KtFile
 
-            val configuration = environment.configuration.copy()
+            konst configuration = environment.configuration.copy()
             configuration.put(JSConfigurationKeys.LIBRARIES, JsConfig.JS_STDLIB)
             configuration.put(CommonConfigurationKeys.MODULE_NAME, "sample")
 
-            val analysisResult = TopDownAnalyzerFacadeForJS.analyzeFiles(
+            konst analysisResult = TopDownAnalyzerFacadeForJS.analyzeFiles(
                 listOf(psiFile),
                 JsConfig(project, configuration, CompilerEnvironment),
             )
-            val module = analysisResult.moduleDescriptor
-            val rootPackage = module.getPackage(FqName.ROOT)
+            konst module = analysisResult.moduleDescriptor
+            konst rootPackage = module.getPackage(FqName.ROOT)
 
-            val testDescriptor = findTestCallable(rootPackage, name) ?:
+            konst testDescriptor = findTestCallable(rootPackage, name) ?:
                                  error("Descriptor named `$name` was not found in provided snippet: $codeSnippet")
-            val actualEncoding = encodeSignature(testDescriptor)
+            konst actualEncoding = encodeSignature(testDescriptor)
             Assert.assertEquals(expectedEncoding, actualEncoding)
         }
         finally {

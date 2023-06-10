@@ -12,17 +12,17 @@ import org.jetbrains.kotlin.gradle.dsl.pm20Extension
 import org.jetbrains.kotlin.project.model.KpmModuleIdentifier
 
 internal interface GradleKpmProjectModelContainer {
-    val modules: NamedDomainObjectContainer<GradleKpmModule>
-    val metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>
-    val rootPublication: MavenPublication?
+    konst modules: NamedDomainObjectContainer<GradleKpmModule>
+    konst metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>
+    konst rootPublication: MavenPublication?
 }
 
-internal val Project.metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>
+internal konst Project.metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>
     get() = this.pm20Extension.kpmModelContainer.metadataCompilationRegistryByModuleId
 
 internal class GradleKpmDefaultProjectModelContainer(
-    override val modules: NamedDomainObjectContainer<GradleKpmModule>,
-    override val metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>,
+    override konst modules: NamedDomainObjectContainer<GradleKpmModule>,
+    override konst metadataCompilationRegistryByModuleId: MutableMap<KpmModuleIdentifier, MetadataCompilationRegistry>,
 ) : GradleKpmProjectModelContainer {
     override var rootPublication: MavenPublication? = null
 

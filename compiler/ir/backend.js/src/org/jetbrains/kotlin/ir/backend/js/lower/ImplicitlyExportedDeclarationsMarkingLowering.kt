@@ -23,13 +23,13 @@ import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.js.config.JSConfigurationKeys
 import org.jetbrains.kotlin.utils.memoryOptimizedPlus
 
-class ImplicitlyExportedDeclarationsMarkingLowering(private val context: JsIrBackendContext) : DeclarationTransformer {
-    private val strictImplicitExport = context.configuration.getBoolean(JSConfigurationKeys.GENERATE_STRICT_IMPLICIT_EXPORT)
+class ImplicitlyExportedDeclarationsMarkingLowering(private konst context: JsIrBackendContext) : DeclarationTransformer {
+    private konst strictImplicitExport = context.configuration.getBoolean(JSConfigurationKeys.GENERATE_STRICT_IMPLICIT_EXPORT)
 
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (!strictImplicitExport || !declaration.isExported(context)) return null
 
-        val implicitlyExportedDeclarations = when (declaration) {
+        konst implicitlyExportedDeclarations = when (declaration) {
             is IrFunction -> declaration.collectImplicitlyExportedDeclarations()
             is IrClass -> declaration.collectImplicitlyExportedDeclarations()
             is IrProperty -> declaration.collectImplicitlyExportedDeclarations()
@@ -51,9 +51,9 @@ class ImplicitlyExportedDeclarationsMarkingLowering(private val context: JsIrBac
 
 
     private fun IrFunction.collectImplicitlyExportedDeclarations(): Set<IrDeclaration> {
-        val types = buildSet {
+        konst types = buildSet {
             add(returnType)
-            addAll(valueParameters.map { it.type })
+            addAll(konstueParameters.map { it.type })
             addAll(typeParameters.flatMap { it.superTypes })
         }
 
@@ -61,9 +61,9 @@ class ImplicitlyExportedDeclarationsMarkingLowering(private val context: JsIrBac
     }
 
     private fun IrProperty.collectImplicitlyExportedDeclarations(): Set<IrDeclaration> {
-        val getterImplicitlyExportedDeclarations = getter?.collectImplicitlyExportedDeclarations() ?: emptySet()
-        val setterImplicitlyExportedDeclarations = setter?.collectImplicitlyExportedDeclarations() ?: emptySet()
-        val fieldImplicitlyExportedDeclarations = backingField?.type?.collectImplicitlyExportedDeclarations() ?: emptySet()
+        konst getterImplicitlyExportedDeclarations = getter?.collectImplicitlyExportedDeclarations() ?: emptySet()
+        konst setterImplicitlyExportedDeclarations = setter?.collectImplicitlyExportedDeclarations() ?: emptySet()
+        konst fieldImplicitlyExportedDeclarations = backingField?.type?.collectImplicitlyExportedDeclarations() ?: emptySet()
 
         return getterImplicitlyExportedDeclarations + setterImplicitlyExportedDeclarations + fieldImplicitlyExportedDeclarations
     }
@@ -72,8 +72,8 @@ class ImplicitlyExportedDeclarationsMarkingLowering(private val context: JsIrBac
         if (this is IrDynamicType || this !is IrSimpleType)
             return emptySet()
 
-        val nonNullType = makeNotNull() as IrSimpleType
-        val classifier = nonNullType.classifier
+        konst nonNullType = makeNotNull() as IrSimpleType
+        konst classifier = nonNullType.classifier
 
         return when {
             nonNullType.isPrimitiveType() || nonNullType.isPrimitiveArray() || nonNullType.isAny() || nonNullType.isUnit() -> emptySet()
@@ -90,7 +90,7 @@ class ImplicitlyExportedDeclarationsMarkingLowering(private val context: JsIrBac
     }
 
     private fun IrDeclaration.markWithJsImplicitExport() {
-        val jsImplicitExportCtor = context.intrinsics.jsImplicitExportAnnotationSymbol.constructors.single()
+        konst jsImplicitExportCtor = context.intrinsics.jsImplicitExportAnnotationSymbol.constructors.single()
         annotations = annotations memoryOptimizedPlus JsIrBuilder.buildConstructorCall(jsImplicitExportCtor)
 
         parentClassOrNull?.takeIf { it.shouldBeMarkedWithImplicitExport() }?.markWithJsImplicitExport()

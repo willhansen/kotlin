@@ -4,7 +4,7 @@
 interface A
 class B : A
 
-val String.ext: A
+konst String.ext: A
     get() = TODO()
 
 class Cls {

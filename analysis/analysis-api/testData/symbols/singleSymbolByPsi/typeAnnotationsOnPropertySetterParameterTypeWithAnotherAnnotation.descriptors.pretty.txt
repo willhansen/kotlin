@@ -1,1 +1,1 @@
-set(value: @Anno4 @Anno2 @Anno1 BaseInterface)
+set(konstue: @Anno4 @Anno2 @Anno1 BaseInterface)

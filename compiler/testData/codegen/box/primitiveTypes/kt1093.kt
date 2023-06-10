@@ -1,4 +1,4 @@
-val f : (Any) -> String = { it.toString() }
+konst f : (Any) -> String = { it.toString() }
 
 fun box() : String {
     if(!(f === f)) return "fail 1"

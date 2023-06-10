@@ -8,7 +8,7 @@ function box(): string {
         new JS_TESTS.Class().publicFun()
     ];
 
-    if (!tens.every(value => value === 10))
+    if (!tens.every(konstue => konstue === 10))
         return "Fail 1";
     if (!(new Class() instanceof Class))
         return "Fail 2";

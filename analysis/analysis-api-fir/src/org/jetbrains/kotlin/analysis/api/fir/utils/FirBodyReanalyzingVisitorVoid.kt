@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
  * separately.
  *
  * ATM we don't re-analyze constructors and init blocks because of KTIJ-25785. We also don't re-analyze the parts of the function's
- * signature (like types, parameters or default values), because changes to them trigger OOB modification tracker,
+ * signature (like types, parameters or default konstues), because changes to them trigger OOB modification tracker,
  * and the whole FIR is rebuilt.
  *
  * Important points:
@@ -41,12 +41,12 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
  * Instead, we get the PSI of an outside declaration, and get the required PSI parts from it.
  * - When KT-58257 is implemented, there might be no need for this hack, so we should consider removing it.
  */
-internal abstract class FirBodyReanalyzingVisitorVoid(private val firResolveSession: LLFirResolveSession) : FirVisitorVoid() {
+internal abstract class FirBodyReanalyzingVisitorVoid(private konst firResolveSession: LLFirResolveSession) : FirVisitorVoid() {
 
     /**
      * To avoid using labeled this in the [acceptChildrenAndForceBodyReanalysis] functions.
      */
-    private val thisVisitor: FirBodyReanalyzingVisitorVoid get() = this
+    private konst thisVisitor: FirBodyReanalyzingVisitorVoid get() = this
 
     final override fun visitSimpleFunction(simpleFunction: FirSimpleFunction) {
         if (simpleFunction.isLocal) {
@@ -76,9 +76,9 @@ internal abstract class FirBodyReanalyzingVisitorVoid(private val firResolveSess
         receiverParameter?.accept(thisVisitor)
         contextReceivers.forEach { it.accept(thisVisitor) }
         controlFlowGraphReference?.accept(thisVisitor)
-        valueParameters.forEach { it.accept(thisVisitor) }
+        konstueParameters.forEach { it.accept(thisVisitor) }
 
-        val simpleFunctionPsi = psi as? KtFunction
+        konst simpleFunctionPsi = psi as? KtFunction
         simpleFunctionPsi?.bodyExpression?.getOrBuildFir(firResolveSession)?.accept(thisVisitor)
 
         contractDescription.accept(thisVisitor)
@@ -96,7 +96,7 @@ internal abstract class FirBodyReanalyzingVisitorVoid(private val firResolveSess
         returnTypeRef.accept(thisVisitor)
         receiverParameter?.accept(thisVisitor)
 
-        val propertyPsi = psi as? KtProperty
+        konst propertyPsi = psi as? KtProperty
         propertyPsi?.initializer?.getOrBuildFir(firResolveSession)?.accept(thisVisitor)
         reanalyzePsiAccessorOrUseDefault(propertyPsi?.getter, getter)?.accept(thisVisitor)
         reanalyzePsiAccessorOrUseDefault(propertyPsi?.setter, setter)?.accept(thisVisitor)
@@ -125,9 +125,9 @@ internal abstract class FirBodyReanalyzingVisitorVoid(private val firResolveSess
         returnTypeRef.accept(thisVisitor)
         contextReceivers.forEach { it.accept(thisVisitor) }
         controlFlowGraphReference?.accept(thisVisitor)
-        valueParameters.forEach { it.accept(thisVisitor) }
+        konstueParameters.forEach { it.accept(thisVisitor) }
 
-        val propertyAccessorPsi = psi as? KtPropertyAccessor
+        konst propertyAccessorPsi = psi as? KtPropertyAccessor
         propertyAccessorPsi?.bodyExpression?.getOrBuildFir(firResolveSession)?.accept(thisVisitor)
 
         contractDescription.accept(thisVisitor)

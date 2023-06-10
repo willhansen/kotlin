@@ -2,7 +2,7 @@
 package test
 import kotlin.reflect.KClass
 
-annotation class AnnClass(val a: KClass<*>)
+annotation class AnnClass(konst a: KClass<*>)
 
 class MyClass {
 

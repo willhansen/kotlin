@@ -22,12 +22,12 @@ class AmbiguousAstSourcePropagation : RecursiveJsVisitor() {
     private var lastSource: Any? = null
 
     override fun visitElement(node: JsNode) {
-        val source = node.source
+        konst source = node.source
         if (source == null && node is JsExpression) {
             node.source = lastSource
         }
 
-        val oldLastSource = lastSource
+        konst oldLastSource = lastSource
         lastSource = node.source
         super.visitElement(node)
         lastSource = oldLastSource

@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(a: kotlin.Char): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = a
             receiverType = null
@@ -40,7 +40,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(b: kotlin.Boolean): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = b
             receiverType = null
@@ -71,7 +71,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Unit
         symbol = /function(c: kotlin.String): kotlin.Unit
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = c
             receiverType = null

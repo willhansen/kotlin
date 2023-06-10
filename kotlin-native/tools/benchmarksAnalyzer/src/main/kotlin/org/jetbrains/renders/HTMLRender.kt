@@ -12,15 +12,15 @@ import kotlin.math.sin
 import kotlin.math.abs
 import kotlin.math.pow
 
-private fun <T : Comparable<T>> clamp(value: T, minValue: T, maxValue: T): T =
-        minOf(maxOf(value, minValue), maxValue)
+private fun <T : Comparable<T>> clamp(konstue: T, minValue: T, maxValue: T): T =
+        minOf(maxOf(konstue, minValue), maxValue)
 
 // Natural number.
 class Natural(initValue: Int) {
-    val value = if (initValue > 0) initValue else error("Provided value $initValue isn't natural")
+    konst konstue = if (initValue > 0) initValue else error("Provided konstue $initValue isn't natural")
 
     override fun toString(): String {
-        return value.toString()
+        return konstue.toString()
     }
 }
 
@@ -28,7 +28,7 @@ interface Element {
     fun render(builder: StringBuilder, indent: String)
 }
 
-class TextElement(val text: String) : Element {
+class TextElement(konst text: String) : Element {
     override fun render(builder: StringBuilder, indent: String) {
         builder.append("$indent$text\n")
     }
@@ -38,9 +38,9 @@ class TextElement(val text: String) : Element {
 annotation class HtmlTagMarker
 
 @HtmlTagMarker
-abstract class Tag(val name: String) : Element {
-    val children = arrayListOf<Element>()
-    val attributes = hashMapOf<String, String>()
+abstract class Tag(konst name: String) : Element {
+    konst children = arrayListOf<Element>()
+    konst attributes = hashMapOf<String, String>()
 
     protected fun <T : Element> initTag(tag: T, init: T.() -> Unit): T {
         tag.init()
@@ -57,12 +57,12 @@ abstract class Tag(val name: String) : Element {
     }
 
     private fun renderAttributes(): String =
-            attributes.map { (attr, value) ->
-                "$attr=\"$value\""
+            attributes.map { (attr, konstue) ->
+                "$attr=\"$konstue\""
             }.joinToString(separator = " ", prefix = " ")
 
     override fun toString(): String {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         render(builder, "")
         return builder.toString()
     }
@@ -97,12 +97,12 @@ abstract class BodyTag(name: String) : TagWithText(name) {
     fun h4(init: H4.() -> Unit) = initTag(H4(), init)
     fun hr(init: HR.() -> Unit) = initTag(HR(), init)
     fun a(href: String, init: A.() -> Unit) {
-        val a = initTag(A(), init)
+        konst a = initTag(A(), init)
         a.href = href
     }
 
     fun img(src: String, init: Image.() -> Unit) {
-        val element = initTag(Image(), init)
+        konst element = initTag(Image(), init)
         element.src = src
     }
 
@@ -113,7 +113,7 @@ abstract class BodyTag(name: String) : TagWithText(name) {
     fun span(classAttr: String, init: Span.() -> Unit) = initTag(Span(classAttr), init)
 }
 
-abstract class BodyTagWithClass(name: String, val classAttr: String) : BodyTag(name) {
+abstract class BodyTagWithClass(name: String, konst classAttr: String) : BodyTag(name) {
     init {
         attributes["class"] = classAttr
     }
@@ -156,22 +156,22 @@ class TBody : TableBlock("tbody")
 
 abstract class TableRowTag(name: String) : TableBlock(name) {
     var colspan = Natural(1)
-        set(value) {
-            attributes["colspan"] = value.toString()
+        set(konstue) {
+            attributes["colspan"] = konstue.toString()
         }
     var rowspan = Natural(1)
-        set(value) {
-            attributes["rowspan"] = value.toString()
+        set(konstue) {
+            attributes["rowspan"] = konstue.toString()
         }
 
     fun th(rowspan: Natural = Natural(1), colspan: Natural = Natural(1), init: TableHeadInfo.() -> Unit) {
-        val element = initTag(TableHeadInfo(), init)
+        konst element = initTag(TableHeadInfo(), init)
         element.rowspan = rowspan
         element.colspan = colspan
     }
 
     fun td(rowspan: Natural = Natural(1), colspan: Natural = Natural(1), init: TableDataInfo.() -> Unit) {
-        val element = initTag(TableDataInfo(), init)
+        konst element = initTag(TableDataInfo(), init)
         element.rowspan = rowspan
         element.colspan = colspan
     }
@@ -182,14 +182,14 @@ class TableHeadInfo : TableRowTag("th")
 class TableDataInfo : TableRowTag("td")
 
 fun html(init: HTML.() -> Unit): HTML {
-    val html = HTML()
+    konst html = HTML()
     html.init()
     return html
 }
 
 // Report render to html format.
 class HTMLRender: Render() {
-    override val name: String
+    override konst name: String
         get() = "html"
 
     override fun render (report: SummaryBenchmarksReport, onlyChanges: Boolean) =
@@ -270,8 +270,8 @@ class HTMLRender: Render() {
         table {
             attributes["class"] = "table table-sm table-bordered table-hover"
             attributes["style"] = "width:initial;"
-            val firstEnvironment = environments.first
-            val secondEnvironment = environments.second
+            konst firstEnvironment = environments.first
+            konst secondEnvironment = environments.second
             // Table header.
             thead {
                 tr {
@@ -311,8 +311,8 @@ class HTMLRender: Render() {
         table {
             attributes["class"] = "table table-sm table-bordered table-hover"
             attributes["style"] = "width:initial;"
-            val firstCompiler = compilers.first
-            val secondCompiler = compilers.second
+            konst firstCompiler = compilers.first
+            konst secondCompiler = compilers.second
 
             // Table header.
             thead {
@@ -348,8 +348,8 @@ class HTMLRender: Render() {
 
     private fun BodyTag.renderCollapsedData(name: String, isCollapsed: Boolean = false, colorStyle: String = "",
                                             init: BodyTag.() -> Unit) {
-        val show = if (!isCollapsed) "show" else ""
-        val tagName = name.replace(' ', '_')
+        konst show = if (!isCollapsed) "show" else ""
+        konst tagName = name.replace(' ', '_')
         div("accordion") {
             div("card") {
                 attributes["style"] = "border-bottom: 1px solid rgba(0,0,0,.125);"
@@ -392,7 +392,7 @@ class HTMLRender: Render() {
 
     private fun BodyTag.renderStatusSummary(report: SummaryBenchmarksReport) {
         h4 { +"Status Summary" }
-        val failedBenchmarks = report.failedBenchmarks
+        konst failedBenchmarks = report.failedBenchmarks
         if (failedBenchmarks.isEmpty()) {
             div("alert alert-success") {
                 attributes["role"] = "alert"
@@ -405,10 +405,10 @@ class HTMLRender: Render() {
             }
         }
 
-        val benchmarksWithChangedStatus = report.benchmarksWithChangedStatus
-        val newFailures = benchmarksWithChangedStatus
+        konst benchmarksWithChangedStatus = report.benchmarksWithChangedStatus
+        konst newFailures = benchmarksWithChangedStatus
                 .filter { it.current == BenchmarkResult.Status.FAILED }
-        val newPasses = benchmarksWithChangedStatus
+        konst newPasses = benchmarksWithChangedStatus
                 .filter { it.current == BenchmarkResult.Status.PASSED }
 
         table {
@@ -439,10 +439,10 @@ class HTMLRender: Render() {
                 table {
                     attributes["class"] = "table table-sm table-striped table-hover"
                     attributes["style"] = "width:initial; font-size: 11pt;"
-                    val newFailuresList = newFailures.map { it.field }
+                    konst newFailuresList = newFailures.map { it.field }
                     renderTableFromList(newFailuresList, "New Failures")
 
-                    val existingFailures = failedBenchmarks.filter { it !in newFailuresList }
+                    konst existingFailures = failedBenchmarks.filter { it !in newFailuresList }
                     renderTableFromList(existingFailures, "Existing Failures")
                 }
             }
@@ -479,8 +479,8 @@ class HTMLRender: Render() {
     }
 
     private fun BodyTag.renderPerformanceSummary(report: SummaryBenchmarksReport) {
-        if (report.detailedMetricReports.values.any { it.improvements.isNotEmpty() } ||
-                report.detailedMetricReports.values.any { it.regressions.isNotEmpty() }) {
+        if (report.detailedMetricReports.konstues.any { it.improvements.isNotEmpty() } ||
+                report.detailedMetricReports.konstues.any { it.regressions.isNotEmpty() }) {
             h4 { +"Performance Summary" }
             table {
                 attributes["class"] = "table table-sm table-striped table-hover"
@@ -489,7 +489,7 @@ class HTMLRender: Render() {
                     tr {
                         th(rowspan = Natural(2)) { +"Change" }
                         report.detailedMetricReports.forEach { (metric, _) ->
-                            th(colspan = Natural(3)) { +metric.value }
+                            th(colspan = Natural(3)) { +metric.konstue }
                         }
                     }
                     tr {
@@ -504,13 +504,13 @@ class HTMLRender: Render() {
                 tbody {
                     tr {
                         th { +"Regressions" }
-                        report.detailedMetricReports.values.forEach { report ->
-                            val maximumRegression = report.maximumRegression
-                            val regressionsGeometricMean = report.regressionsGeometricMean
-                            val maximumImprovement = report.maximumImprovement
-                            val improvementsGeometricMean = report.improvementsGeometricMean
-                            val maximumChange = maxOf(maximumRegression, abs(maximumImprovement))
-                            val maximumChangeGeoMean = maxOf(regressionsGeometricMean,
+                        report.detailedMetricReports.konstues.forEach { report ->
+                            konst maximumRegression = report.maximumRegression
+                            konst regressionsGeometricMean = report.regressionsGeometricMean
+                            konst maximumImprovement = report.maximumImprovement
+                            konst improvementsGeometricMean = report.improvementsGeometricMean
+                            konst maximumChange = maxOf(maximumRegression, abs(maximumImprovement))
+                            konst maximumChangeGeoMean = maxOf(regressionsGeometricMean,
                                     abs(improvementsGeometricMean))
                             if (!report.regressions.isEmpty()) {
                                 td { +"${report.regressions.size}" }
@@ -533,13 +533,13 @@ class HTMLRender: Render() {
 
                         tr {
                             th { +"Improvements" }
-                            report.detailedMetricReports.values.forEach { report ->
-                                val maximumRegression = report.maximumRegression
-                                val regressionsGeometricMean = report.regressionsGeometricMean
-                                val maximumImprovement = report.maximumImprovement
-                                val improvementsGeometricMean = report.improvementsGeometricMean
-                                val maximumChange = maxOf(maximumRegression, abs(maximumImprovement))
-                                val maximumChangeGeoMean = maxOf(regressionsGeometricMean,
+                            report.detailedMetricReports.konstues.forEach { report ->
+                                konst maximumRegression = report.maximumRegression
+                                konst regressionsGeometricMean = report.regressionsGeometricMean
+                                konst maximumImprovement = report.maximumImprovement
+                                konst improvementsGeometricMean = report.improvementsGeometricMean
+                                konst maximumChange = maxOf(maximumRegression, abs(maximumImprovement))
+                                konst maximumChangeGeoMean = maxOf(regressionsGeometricMean,
                                         abs(improvementsGeometricMean))
                                 if (!report.improvements.isEmpty()) {
                                     td { +"${report.improvements.size}" }
@@ -571,7 +571,7 @@ class HTMLRender: Render() {
                                                    bucket: Map<String, ScoreChange>? = null, rowStyle: String? = null) {
         if (bucket != null && !bucket.isEmpty()) {
             // Find max ratio.
-            val maxRatio = bucket.values.map { it.second.mean }.maxOrNull()!!
+            konst maxRatio = bucket.konstues.map { it.second.mean }.maxOrNull()!!
             // There are changes in performance.
             // Output changed benchmarks.
             for ((name, change) in bucket) {
@@ -583,13 +583,13 @@ class HTMLRender: Render() {
                     td { +"${fullSet.getValue(name).first?.description}" }
                     td { +"${fullSet.getValue(name).second?.description}" }
                     td {
-                        attributes["bgcolor"] = ColoredCell(if (bucket.values.first().first.mean == 0.0) null
-                            else change.first.mean / abs(bucket.values.first().first.mean))
+                        attributes["bgcolor"] = ColoredCell(if (bucket.konstues.first().first.mean == 0.0) null
+                            else change.first.mean / abs(bucket.konstues.first().first.mean))
                                 .backgroundStyle
                         +"${change.first.description + " %"}"
                     }
                     td {
-                        val scaledRatio = if (maxRatio == 0.0) null else change.second.mean / maxRatio
+                        konst scaledRatio = if (maxRatio == 0.0) null else change.second.mean / maxRatio
                         attributes["bgcolor"] = ColoredCell(scaledRatio,
                                 borderPositive = { cellValue -> cellValue > 1.0 / maxRatio }).backgroundStyle
                         +"${change.second.description}"
@@ -597,13 +597,13 @@ class HTMLRender: Render() {
                 }
             }
         } else if (bucket == null) {
-            // Output all values without performance changes.
-            val placeholder = "-"
-            for ((name, value) in fullSet) {
+            // Output all konstues without performance changes.
+            konst placeholder = "-"
+            for ((name, konstue) in fullSet) {
                 tr {
                     th { +name }
-                    td { +"${value.first?.description ?: placeholder}" }
-                    td { +"${value.second?.description ?: placeholder}" }
+                    td { +"${konstue.first?.description ?: placeholder}" }
+                    td { +"${konstue.second?.description ?: placeholder}" }
                     td { +placeholder }
                     td { +placeholder }
                 }
@@ -619,8 +619,8 @@ class HTMLRender: Render() {
                 if (filterUnstable) name in unstableBenchmarks else name !in unstableBenchmarks
             }
 
-        val filteredRegressions = filterBenchmarks(detailedReport.regressions)
-        val filteredImprovements = filterBenchmarks(detailedReport.improvements)
+        konst filteredRegressions = filterBenchmarks(detailedReport.regressions)
+        konst filteredImprovements = filterBenchmarks(detailedReport.improvements)
         renderBenchmarksDetails(detailedReport.mergedReport, filteredRegressions)
         renderBenchmarksDetails(detailedReport.mergedReport, filteredImprovements)
         if (!onlyChanges) {
@@ -634,8 +634,8 @@ class HTMLRender: Render() {
 
     private fun BodyTag.renderPerformanceDetails(report: SummaryBenchmarksReport, onlyChanges: Boolean) {
         if (onlyChanges) {
-            if (report.detailedMetricReports.values.all { it.improvements.isEmpty() } &&
-                    report.detailedMetricReports.values.all { it.regressions.isEmpty() }) {
+            if (report.detailedMetricReports.konstues.all { it.improvements.isEmpty() } &&
+                    report.detailedMetricReports.konstues.all { it.regressions.isEmpty() }) {
                 div("alert alert-success") {
                     attributes["role"] = "alert"
                     +"All becnhmarks are stable!"
@@ -643,7 +643,7 @@ class HTMLRender: Render() {
             }
         }
         report.detailedMetricReports.forEach { (metric, detailedReport) ->
-            renderCollapsedData(metric.value, false) {
+            renderCollapsedData(metric.konstue, false) {
                 table {
                     attributes["id"] = "result"
                     attributes["class"] = "table table-striped table-bordered"
@@ -656,17 +656,17 @@ class HTMLRender: Render() {
                             th { +"Ratio" }
                         }
                     }
-                    val geoMeanChangeMap = detailedReport.geoMeanScoreChange?.let {
+                    konst geoMeanChangeMap = detailedReport.geoMeanScoreChange?.let {
                         mapOf(detailedReport.geoMeanBenchmark.first!!.name to detailedReport.geoMeanScoreChange!!)
                     }
 
                     tbody {
-                        val boldRowStyle = "border-bottom: 2.3pt solid black; border-top: 2.3pt solid black"
+                        konst boldRowStyle = "border-bottom: 2.3pt solid black; border-top: 2.3pt solid black"
                         renderBenchmarksDetails(
                                 mutableMapOf(detailedReport.geoMeanBenchmark.first!!.name to detailedReport.geoMeanBenchmark),
                                 geoMeanChangeMap, boldRowStyle)
 
-                        val unstableBenchmarks = report.getUnstableBenchmarksForMetric(metric)
+                        konst unstableBenchmarks = report.getUnstableBenchmarksForMetric(metric)
 
                         if (unstableBenchmarks.isNotEmpty()) {
                             tr {
@@ -692,7 +692,7 @@ class HTMLRender: Render() {
         }
     }
 
-    data class Color(val red: Double, val green: Double, val blue: Double) {
+    data class Color(konst red: Double, konst green: Double, konst blue: Double) {
         operator fun times(coefficient: Double) =
                 Color(red * coefficient, green * coefficient, blue * coefficient)
 
@@ -707,33 +707,33 @@ class HTMLRender: Render() {
             }
     }
 
-    class ColoredCell(val scaledValue: Double?, val reverse: Boolean = false,
-                      val borderPositive: (cellValue: Double) -> Boolean = { cellValue -> cellValue > 0 }) {
-        val value: Double
-        val neutralColor = Color(1.0,1.0 , 1.0)
-        val negativeColor = Color(0.0, 1.0, 0.0)
-        val positiveColor = Color(1.0, 0.0, 0.0)
+    class ColoredCell(konst scaledValue: Double?, konst reverse: Boolean = false,
+                      konst borderPositive: (cellValue: Double) -> Boolean = { cellValue -> cellValue > 0 }) {
+        konst konstue: Double
+        konst neutralColor = Color(1.0,1.0 , 1.0)
+        konst negativeColor = Color(0.0, 1.0, 0.0)
+        konst positiveColor = Color(1.0, 0.0, 0.0)
 
         init {
-            value = scaledValue?.let { if (abs(scaledValue) <= 1.0) scaledValue else error ("Value should be scaled in range [-1.0; 1.0]") }
+            konstue = scaledValue?.let { if (abs(scaledValue) <= 1.0) scaledValue else error ("Value should be scaled in range [-1.0; 1.0]") }
                     ?: 0.0
         }
 
-        val backgroundStyle: String
+        konst backgroundStyle: String
             get() = scaledValue?.let { getColor().toString() } ?: ""
 
         fun getColor(): Color {
-            val currentValue = clamp(value, -1.0, 1.0)
-            val cellValue = if (reverse) -currentValue else currentValue
-            val baseColor = if (borderPositive(cellValue)) positiveColor else negativeColor
+            konst currentValue = clamp(konstue, -1.0, 1.0)
+            konst cellValue = if (reverse) -currentValue else currentValue
+            konst baseColor = if (borderPositive(cellValue)) positiveColor else negativeColor
             // Smooth mapping to put first 20% of change into 50% of range,
             // although really we should compensate for luma.
-            val color = sin((abs(cellValue).pow(.477)) * kotlin.math.PI * .5)
+            konst color = sin((abs(cellValue).pow(.477)) * kotlin.math.PI * .5)
             return linearInterpolation(neutralColor, baseColor, color)
         }
 
         private fun linearInterpolation(a: Color, b: Color, coefficient: Double): Color {
-            val reversedCoefficient = 1.0 - coefficient
+            konst reversedCoefficient = 1.0 - coefficient
             return a * reversedCoefficient + b * coefficient
         }
     }

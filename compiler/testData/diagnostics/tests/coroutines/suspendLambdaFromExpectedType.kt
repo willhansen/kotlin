@@ -4,7 +4,7 @@
 fun <T> runBlocking(block: suspend () -> T): T = TODO()
 
 fun foo() = runBlocking<Unit> {
-    val foo: suspend (String) -> Int = {
+    konst foo: suspend (String) -> Int = {
         it.length
     }
 }

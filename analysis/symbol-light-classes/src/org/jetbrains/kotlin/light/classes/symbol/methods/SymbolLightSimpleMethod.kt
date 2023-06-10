@@ -36,9 +36,9 @@ internal class SymbolLightSimpleMethod(
     lightMemberOrigin: LightMemberOrigin?,
     containingClass: SymbolLightClassBase,
     methodIndex: Int,
-    private val isTopLevel: Boolean,
+    private konst isTopLevel: Boolean,
     argumentsSkipMask: BitSet? = null,
-    private val suppressStatic: Boolean = false,
+    private konst suppressStatic: Boolean = false,
 ) : SymbolLightMethod<KtFunctionSymbol>(
     ktAnalysisSession = ktAnalysisSession,
     functionSymbol = functionSymbol,
@@ -47,7 +47,7 @@ internal class SymbolLightSimpleMethod(
     methodIndex = methodIndex,
     argumentsSkipMask = argumentsSkipMask,
 ) {
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         withFunctionSymbol { functionSymbol ->
             functionSymbol.computeJvmMethodName(
                 functionSymbol.name.asString(),
@@ -58,7 +58,7 @@ internal class SymbolLightSimpleMethod(
 
     override fun getName(): String = _name
 
-    private val _typeParameterList: PsiTypeParameterList? by lazyPub {
+    private konst _typeParameterList: PsiTypeParameterList? by lazyPub {
         hasTypeParameters().ifTrue {
             SymbolLightTypeParameterList(
                 owner = this,
@@ -77,7 +77,7 @@ internal class SymbolLightSimpleMethod(
     private fun computeModifiers(modifier: String): Map<String, Boolean>? = when (modifier) {
         in GranularModifiersBox.MODALITY_MODIFIERS -> {
             ifInlineOnly { return modifiersForInlineOnlyCase() }
-            val modality = if (isTopLevel) {
+            konst modality = if (isTopLevel) {
                 PsiModifier.FINAL
             } else {
                 withFunctionSymbol { functionSymbol ->
@@ -95,7 +95,7 @@ internal class SymbolLightSimpleMethod(
 
         PsiModifier.STATIC -> {
             ifInlineOnly { return null }
-            val isStatic = if (suppressStatic) {
+            konst isStatic = if (suppressStatic) {
                 false
             } else {
                 isTopLevel || withFunctionSymbol { it.isStatic || it.hasJvmStaticAnnotation() }
@@ -106,19 +106,19 @@ internal class SymbolLightSimpleMethod(
 
         PsiModifier.NATIVE -> {
             ifInlineOnly { return null }
-            val isExternal = functionDeclaration?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: withFunctionSymbol { it.isExternal }
+            konst isExternal = functionDeclaration?.hasModifier(KtTokens.EXTERNAL_KEYWORD) ?: withFunctionSymbol { it.isExternal }
             mapOf(modifier to isExternal)
         }
 
         PsiModifier.STRICTFP -> {
             ifInlineOnly { return null }
-            val hasAnnotation = withFunctionSymbol { it.hasAnnotation(STRICTFP_ANNOTATION_CLASS_ID) }
+            konst hasAnnotation = withFunctionSymbol { it.hasAnnotation(STRICTFP_ANNOTATION_CLASS_ID) }
             mapOf(modifier to hasAnnotation)
         }
 
         PsiModifier.SYNCHRONIZED -> {
             ifInlineOnly { return null }
-            val hasAnnotation = withFunctionSymbol { it.hasAnnotation(SYNCHRONIZED_ANNOTATION_CLASS_ID) }
+            konst hasAnnotation = withFunctionSymbol { it.hasAnnotation(SYNCHRONIZED_ANNOTATION_CLASS_ID) }
             mapOf(modifier to hasAnnotation)
         }
 
@@ -137,9 +137,9 @@ internal class SymbolLightSimpleMethod(
         it[PsiModifier.PRIVATE] = true
     }
 
-    private val hasInlineOnlyAnnotation: Boolean by lazyPub { withFunctionSymbol { it.hasInlineOnlyAnnotation() } }
+    private konst hasInlineOnlyAnnotation: Boolean by lazyPub { withFunctionSymbol { it.hasInlineOnlyAnnotation() } }
 
-    private val _modifierList: PsiModifierList by lazyPub {
+    private konst _modifierList: PsiModifierList by lazyPub {
         SymbolLightMemberModifierList(
             containingDeclaration = this,
             modifiersBox = GranularModifiersBox(computer = ::computeModifiers),
@@ -157,7 +157,7 @@ internal class SymbolLightSimpleMethod(
                                 if (functionSymbol.isSuspend) { // Any?
                                     NullabilityType.Nullable
                                 } else {
-                                    val returnType = functionSymbol.returnType
+                                    konst returnType = functionSymbol.returnType
                                     if (returnType.isVoidType) NullabilityType.Unknown else getTypeNullability(returnType)
                                 }
                             }
@@ -175,14 +175,14 @@ internal class SymbolLightSimpleMethod(
 
     override fun isOverride(): Boolean = _isOverride
 
-    private val _isOverride: Boolean by lazyPub {
+    private konst _isOverride: Boolean by lazyPub {
         if (isTopLevel) false else withFunctionSymbol { it.isOverride }
     }
 
     // Inspired by KotlinTypeMapper#forceBoxedReturnType
     private fun forceBoxedReturnType(): Boolean {
         return withFunctionSymbol { functionSymbol ->
-            val returnType = functionSymbol.returnType
+            konst returnType = functionSymbol.returnType
             // 'invoke' methods for lambdas, function literals, and callable references
             // implicitly override generic 'invoke' from a corresponding base class.
             if (functionSymbol.isBuiltinFunctionInvoke && returnType.isInlineClassType)
@@ -195,20 +195,20 @@ internal class SymbolLightSimpleMethod(
         }
     }
 
-    private val KtType.isInlineClassType: Boolean
+    private konst KtType.isInlineClassType: Boolean
         get() = ((this as? KtNonErrorClassType)?.classSymbol as? KtNamedClassOrObjectSymbol)?.isInline == true
 
-    private val KtType.isVoidType: Boolean get() = isUnit && nullabilityType != NullabilityType.Nullable
+    private konst KtType.isVoidType: Boolean get() = isUnit && nullabilityType != NullabilityType.Nullable
 
-    private val _returnedType: PsiType by lazyPub {
+    private konst _returnedType: PsiType by lazyPub {
         withFunctionSymbol { functionSymbol ->
-            val ktType = if (functionSymbol.isSuspend) {
+            konst ktType = if (functionSymbol.isSuspend) {
                 analysisSession.builtinTypes.NULLABLE_ANY // Any?
             } else {
                 functionSymbol.returnType.takeUnless { it.isVoidType } ?: return@withFunctionSymbol PsiType.VOID
             }
 
-            val typeMappingMode = if (forceBoxedReturnType()) KtTypeMappingMode.RETURN_TYPE_BOXED else KtTypeMappingMode.RETURN_TYPE
+            konst typeMappingMode = if (forceBoxedReturnType()) KtTypeMappingMode.RETURN_TYPE_BOXED else KtTypeMappingMode.RETURN_TYPE
 
             ktType.asPsiTypeElement(
                 this@SymbolLightSimpleMethod,

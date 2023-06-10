@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.ir2cfg.graph.ControlFlowGraph
 import org.jetbrains.kotlin.ir2cfg.nodes.MergeCfgElement
 
-class FunctionGenerator(val function: IrFunction) {
+class FunctionGenerator(konst function: IrFunction) {
 
-    val builder = FunctionBuilder(function)
+    konst builder = FunctionBuilder(function)
 
-    val exit = MergeCfgElement(function, "Function exit")
+    konst exit = MergeCfgElement(function, "Function exit")
 
-    val loopEntries = mutableMapOf<IrLoop, IrStatement>()
+    konst loopEntries = mutableMapOf<IrLoop, IrStatement>()
 
-    val loopExits = mutableMapOf<IrLoop, IrStatement>()
+    konst loopExits = mutableMapOf<IrLoop, IrStatement>()
 
     fun generate(): ControlFlowGraph {
-        val visitor = FunctionVisitor()
+        konst visitor = FunctionVisitor()
         function.accept(visitor, true)
         return builder.build()
     }
@@ -40,7 +40,7 @@ class FunctionGenerator(val function: IrFunction) {
             if (data) {
                 builder.add(declaration)
             }
-            val result = declaration.body?.process() ?: if (data) declaration else null
+            konst result = declaration.body?.process() ?: if (data) declaration else null
             if (result != null && !result.isNothing()) {
                 builder.jump(exit, from = result)
             }
@@ -74,7 +74,7 @@ class FunctionGenerator(val function: IrFunction) {
         }
 
         override fun visitReturn(expression: IrReturn, data: Boolean): IrStatement? {
-            expression.value.process()
+            expression.konstue.process()
             if (data) {
                 builder.add(expression)
             }
@@ -97,15 +97,15 @@ class FunctionGenerator(val function: IrFunction) {
             if (data) {
                 builder.add(expression)
             }
-            val whenExit = MergeCfgElement(expression, "When exit")
-            val branches = expression.branches
+            konst whenExit = MergeCfgElement(expression, "When exit")
+            konst branches = expression.branches
             for (branch in branches) {
-                val condition = branch.condition
+                konst condition = branch.condition
                 condition.process(includeSelf = false)
                 builder.jump(condition)
             }
             for (branch in branches) {
-                val result = branch.result
+                konst result = branch.result
                 builder.move(branch.condition)
                 if (!result.process().isNothing()) {
                     builder.jump(whenExit)
@@ -120,15 +120,15 @@ class FunctionGenerator(val function: IrFunction) {
             if (data) {
                 builder.add(loop)
             }
-            val exit = MergeCfgElement(loop, "While exit")
+            konst exit = MergeCfgElement(loop, "While exit")
             loopExits[loop] = exit
-            val entry = MergeCfgElement(loop, "While entry")
+            konst entry = MergeCfgElement(loop, "While entry")
             loopEntries[loop] = entry
             builder.jump(entry)
-            val condition = loop.condition
+            konst condition = loop.condition
             condition.process(includeSelf = false)
             builder.jump(condition)
-            val body = loop.body
+            konst body = loop.body
             if (!body?.process().isNothing()) {
                 builder.jump(entry)
             }
@@ -140,13 +140,13 @@ class FunctionGenerator(val function: IrFunction) {
             if (data) {
                 builder.add(loop)
             }
-            val exit = MergeCfgElement(loop, "Do..while exit")
+            konst exit = MergeCfgElement(loop, "Do..while exit")
             loopExits[loop] = exit
-            val entry = MergeCfgElement(loop, "Do..while entry")
+            konst entry = MergeCfgElement(loop, "Do..while entry")
             loopEntries[loop] = entry
             builder.jump(entry)
-            val body = loop.body
-            val condition = loop.condition
+            konst body = loop.body
+            konst condition = loop.condition
             if (!body?.process().isNothing()) {
                 condition.process(includeSelf = false)
                 builder.jump(condition)
@@ -176,9 +176,9 @@ class FunctionGenerator(val function: IrFunction) {
         override fun visitMemberAccess(expression: IrMemberAccessExpression<*>, data: Boolean): IrStatement? {
             expression.dispatchReceiver?.process()
             expression.extensionReceiver?.process()
-            val callee = expression.symbol.owner as IrFunction
-            for (valueParameter in callee.valueParameters) {
-                expression.getValueArgument(valueParameter.index)?.process()
+            konst callee = expression.symbol.owner as IrFunction
+            for (konstueParameter in callee.konstueParameters) {
+                expression.getValueArgument(konstueParameter.index)?.process()
             }
             if (data) {
                 builder.add(expression)

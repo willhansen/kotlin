@@ -11,7 +11,7 @@ class Controller {
 var x = 0
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val cc = Controller()
+    konst cc = Controller()
     c.startCoroutine(cc, EmptyContinuation)
     return cc.result
 }

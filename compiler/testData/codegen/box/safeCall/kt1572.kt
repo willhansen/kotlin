@@ -1,11 +1,11 @@
 //KT-1572 Frontend doesn't mark all vars included in closure as refs.
 
-class A(val t : Int) {}
+class A(konst t : Int) {}
 
 fun testKt1572() : Boolean {
     var a = A(0)
     var b = A(3)
-    val changer = {a = b}
+    konst changer = {a = b}
     b = A(10) // this change has no effect on changer
     changer()
     return (a.t == 10)
@@ -14,7 +14,7 @@ fun testKt1572() : Boolean {
 fun testPrimitives() : Boolean {
     var a = 0
     var b = 3
-    val changer = {a = b}
+    konst changer = {a = b}
     b = 10
     changer()
     return (a == 10)

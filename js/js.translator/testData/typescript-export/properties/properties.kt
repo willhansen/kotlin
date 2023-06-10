@@ -9,28 +9,28 @@
 package foo
 
 @JsExport
-const val _const_val: Int = 1
+const konst _const_konst: Int = 1
 
 @JsExport
-val _val: Int = 1
+konst _konst: Int = 1
 
 @JsExport
 var _var: Int = 1
 
 @JsExport
-val _valCustom: Int
+konst _konstCustom: Int
     get() = 1
 
 @JsExport
-val _valCustomWithField: Int = 1
+konst _konstCustomWithField: Int = 1
     get() = field + 1
 
 @JsExport
 var _varCustom: Int
     get() = 1
-    set(value) {}
+    set(konstue) {}
 
 @JsExport
 var _varCustomWithField: Int = 1
     get() = field * 10
-    set(value) { field = value * 10 }
+    set(konstue) { field = konstue * 10 }

@@ -26,8 +26,8 @@ import kotlin.native.internal.*
 public actual inline fun <T> (suspend () -> T).startCoroutineUninterceptedOrReturn(
         completion: Continuation<T>
 ): Any? {
-    val wrappedCompletion = wrapWithContinuationImpl(completion)
-    val function = this as? Function1<Continuation<T>, Any?>
+    konst wrappedCompletion = wrapWithContinuationImpl(completion)
+    konst function = this as? Function1<Continuation<T>, Any?>
     return if (function == null)
         startCoroutineUninterceptedOrReturnFallback(this, wrappedCompletion)
     else
@@ -42,7 +42,7 @@ internal fun <T> startCoroutineUninterceptedOrReturnFallback(
 ): Any? {
     // Unlike `function`, `wrapper` class is generated and lowered entirely by Kotlin compiler,
     // so the cast below will succeed.
-    val wrapper: suspend () -> T = { function() }
+    konst wrapper: suspend () -> T = { function() }
     return (wrapper as Function1<Continuation<T>, Any?>).invoke(completion)
 }
 
@@ -64,8 +64,8 @@ public actual inline fun <R, T> (suspend R.() -> T).startCoroutineUninterceptedO
         receiver: R,
         completion: Continuation<T>
 ): Any? {
-    val wrappedCompletion = wrapWithContinuationImpl(completion)
-    val function = this as? Function2<R, Continuation<T>, Any?>
+    konst wrappedCompletion = wrapWithContinuationImpl(completion)
+    konst function = this as? Function2<R, Continuation<T>, Any?>
     return if (function == null)
         startCoroutineUninterceptedOrReturnFallback(this, receiver, wrappedCompletion)
     else
@@ -81,7 +81,7 @@ internal fun <R, T> startCoroutineUninterceptedOrReturnFallback(
 ): Any? {
     // Unlike `function`, `wrapper` class is generated and lowered entirely by Kotlin compiler,
     // so the cast below will succeed.
-    val wrapper: suspend R.() -> T = { this.function() }
+    konst wrapper: suspend R.() -> T = { this.function() }
     return (wrapper as Function2<R, Continuation<T>, Any?>).invoke(receiver, completion)
 }
 
@@ -92,8 +92,8 @@ internal actual inline fun <R, P, T> (suspend R.(P) -> T).startCoroutineUninterc
         param: P,
         completion: Continuation<T>
 ): Any? {
-    val wrappedCompletion = wrapWithContinuationImpl(completion)
-    val function = this as? Function3<R, P, Continuation<T>, Any?>
+    konst wrappedCompletion = wrapWithContinuationImpl(completion)
+    konst function = this as? Function3<R, P, Continuation<T>, Any?>
     return if (function == null)
         startCoroutineUninterceptedOrReturnFallback(this, receiver, param, wrappedCompletion)
     else
@@ -109,7 +109,7 @@ internal fun <R, P, T> startCoroutineUninterceptedOrReturnFallback(
 ): Any? {
     // Unlike `function`, `wrapper` class is generated and lowered entirely by Kotlin compiler,
     // so the cast below will succeed.
-    val wrapper: suspend R.(P) -> T = { this.function(it) }
+    konst wrapper: suspend R.(P) -> T = { this.function(it) }
     return (wrapper as Function3<R, P, Continuation<T>, Any?>).invoke(receiver, param, completion)
 }
 
@@ -142,7 +142,7 @@ private object CoroutineSuspendedMarker
 public actual fun <T> (suspend () -> T).createCoroutineUnintercepted(
         completion: Continuation<T>
 ): Continuation<Unit> {
-    val probeCompletion = probeCoroutineCreated(completion)
+    konst probeCompletion = probeCoroutineCreated(completion)
     return if (this is BaseContinuationImpl)
         create(probeCompletion)
     else
@@ -178,7 +178,7 @@ public actual fun <R, T> (suspend R.() -> T).createCoroutineUnintercepted(
         receiver: R,
         completion: Continuation<T>
 ): Continuation<Unit> {
-    val probeCompletion = probeCoroutineCreated(completion)
+    konst probeCompletion = probeCoroutineCreated(completion)
     return if (this is BaseContinuationImpl)
         create(receiver, probeCompletion)
     else {
@@ -222,7 +222,7 @@ private inline fun <T> createCoroutineFromSuspendFunction(
         completion: Continuation<T>,
         crossinline block: (Continuation<T>) -> Any?
 ): Continuation<Unit> {
-    val context = completion.context
+    konst context = completion.context
     // label == 0 when coroutine is not started yet (initially) or label == 1 when it was
     return if (context === EmptyCoroutineContext)
         object : RestrictedContinuationImpl(completion as Continuation<Any?>) {
@@ -271,7 +271,7 @@ private inline fun <T> createCoroutineFromSuspendFunction(
  * It can be thought as a state machine of
  * ```
  * suspend fun foo() {
- *     val result = runCatching { <suspended here> }
+ *     konst result = runCatching { <suspended here> }
  *     callback(result)
  * }
  * ```
@@ -308,7 +308,7 @@ internal fun <T> wrapWithContinuationImpl(completion: Continuation<T>) =
 private fun <T> createSimpleCoroutineForSuspendFunction(
         completion: Continuation<T>
 ): Continuation<T> {
-    val context = completion.context
+    konst context = completion.context
     return if (context === EmptyCoroutineContext)
         object : RestrictedContinuationImpl(completion as Continuation<Any?>) {
             override fun invokeSuspend(result: Result<Any?>): Any? {

@@ -36,7 +36,7 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 class JavaAnnotationCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor.original
+        konst resultingDescriptor = resolvedCall.resultingDescriptor.original
         if (resultingDescriptor !is JavaClassConstructorDescriptor ||
             resultingDescriptor.containingDeclaration.kind != ClassKind.ANNOTATION_CLASS) return
 
@@ -45,8 +45,8 @@ class JavaAnnotationCallChecker : CallChecker {
     }
 
     private fun reportDeprecatedJavaAnnotation(resolvedCall: ResolvedCall<*>, context: CallCheckerContext) {
-        val annotationEntry = resolvedCall.call.callElement as? KtAnnotationEntry ?: return
-        val type = context.trace.get(BindingContext.TYPE, annotationEntry.typeReference) ?: return
+        konst annotationEntry = resolvedCall.call.callElement as? KtAnnotationEntry ?: return
+        konst type = context.trace.get(BindingContext.TYPE, annotationEntry.typeReference) ?: return
         javaToKotlinNameMap[type.constructor.declarationDescriptor?.let { DescriptorUtils.getFqNameSafe(it) }]?.let {
             context.trace.report(ErrorsJvm.DEPRECATED_JAVA_ANNOTATION.on(annotationEntry, it))
         }
@@ -63,8 +63,8 @@ class JavaAnnotationCallChecker : CallChecker {
             arguments: Map.Entry<ValueParameterDescriptor, ResolvedValueArgument>,
             diagnostic: DiagnosticFactory0<KtExpression>
     ) {
-        for (valueArgument in arguments.value.arguments) {
-            val argumentExpression = valueArgument.getArgumentExpression() ?: continue
+        for (konstueArgument in arguments.konstue.arguments) {
+            konst argumentExpression = konstueArgument.getArgumentExpression() ?: continue
             context.trace.report(diagnostic.on(argumentExpression))
         }
     }
@@ -73,11 +73,11 @@ class JavaAnnotationCallChecker : CallChecker {
         fun getJavaAnnotationCallValueArgumentsThatShouldBeNamed(
                 resolvedCall: ResolvedCall<*>
         ): Map<ValueParameterDescriptor, ResolvedValueArgument> =
-                resolvedCall.valueArguments.filter {
+                resolvedCall.konstueArguments.filter {
                     p ->
                     p.key.name != JvmAnnotationNames.DEFAULT_ANNOTATION_MEMBER_NAME &&
-                    p.value is ExpressionValueArgument &&
-                    !((p.value as ExpressionValueArgument).valueArgument?.isNamed() ?: true)
+                    p.konstue is ExpressionValueArgument &&
+                    !((p.konstue as ExpressionValueArgument).konstueArgument?.isNamed() ?: true)
                 }
     }
 }

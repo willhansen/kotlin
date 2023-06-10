@@ -14,7 +14,7 @@ fun bar() {
     foo(true, false) { x, y -> x || y }
 }
 
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)
 // 1 LOCALVARIABLE x I (.*) 6
 // 1 LOCALVARIABLE y I (.*) 5

@@ -9,6 +9,6 @@ class Bar<T> {
 class Out<out K>
 
 fun <K : L, L : N, N: <!FINAL_UPPER_BOUND!>Out<Int><!>> main() {
-    val foo = Foo<K>()
-    val x: Out<Float> = <!TYPE_MISMATCH!>Bar<Out<String>>().<!TYPE_MISMATCH!>takeFoo<!>(foo)<!>
+    konst foo = Foo<K>()
+    konst x: Out<Float> = <!TYPE_MISMATCH!>Bar<Out<String>>().<!TYPE_MISMATCH!>takeFoo<!>(foo)<!>
 }

@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-val arr = arrayOf("a", "b", "c", "d")
+konst arr = arrayOf("a", "b", "c", "d")
 
 fun box(): String {
     var count = 0

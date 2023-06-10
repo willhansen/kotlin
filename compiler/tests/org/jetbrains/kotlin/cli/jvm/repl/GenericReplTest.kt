@@ -44,148 +44,148 @@ import java.util.concurrent.locks.ReentrantReadWriteLock
 class GenericReplTest : KtUsefulTestCase() {
     fun testReplBasics() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            val res1 = repl.replCompiler.check(state, ReplCodeLine(0, 0, "val x ="))
+            konst res1 = repl.replCompiler.check(state, ReplCodeLine(0, 0, "konst x ="))
             TestCase.assertTrue("Unexpected check results: $res1", res1 is ReplCheckResult.Incomplete)
 
-            assertEvalResult(repl, state, "val l1 = listOf(1 + 2)\nl1.first()", 3)
+            assertEkonstResult(repl, state, "konst l1 = listOf(1 + 2)\nl1.first()", 3)
 
-            assertEvalUnit(repl, state, "val x = 5")
+            assertEkonstUnit(repl, state, "konst x = 5")
 
-            assertEvalResult(repl, state, "x + 2", 7)
+            assertEkonstResult(repl, state, "x + 2", 7)
         }
     }
 
     fun testReplErrors() {
         TestRepl().use { repl ->
-            val state = repl.createState()
-            repl.compileAndEval(state, repl.nextCodeLine("val x = 10"))
+            konst state = repl.createState()
+            repl.compileAndEkonst(state, repl.nextCodeLine("konst x = 10"))
 
-            val res = repl.compileAndEval(state, repl.nextCodeLine("java.util.fish"))
+            konst res = repl.compileAndEkonst(state, repl.nextCodeLine("java.util.fish"))
             TestCase.assertTrue("Expected compile error", res.first is ReplCompileResult.Error)
 
-            val result = repl.compileAndEval(state, repl.nextCodeLine("x"))
-            assertEquals(res.second.toString(), 10, (result.second as? ReplEvalResult.ValueResult)?.value)
+            konst result = repl.compileAndEkonst(state, repl.nextCodeLine("x"))
+            assertEquals(res.second.toString(), 10, (result.second as? ReplEkonstResult.ValueResult)?.konstue)
         }
     }
 
     fun testReplCodeFormat() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            val codeLine0 = ReplCodeLine(0, 0, "val l1 = 1\r\nl1\r\n")
-            val res0 = repl.replCompiler.check(state, codeLine0)
-            val res0c = res0 as? ReplCheckResult.Ok
+            konst codeLine0 = ReplCodeLine(0, 0, "konst l1 = 1\r\nl1\r\n")
+            konst res0 = repl.replCompiler.check(state, codeLine0)
+            konst res0c = res0 as? ReplCheckResult.Ok
             TestCase.assertNotNull("Unexpected compile result: $res0", res0c)
         }
     }
 
     fun testRepPackage() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            assertEvalResult(repl, state, "package mypackage\n\nval x = 1\nx+2", 3)
+            assertEkonstResult(repl, state, "package mypackage\n\nkonst x = 1\nx+2", 3)
 
-            assertEvalResult(repl, state, "x+4", 5)
+            assertEkonstResult(repl, state, "x+4", 5)
         }
     }
 
-    fun testCompilingReplEvaluator() {
+    fun testCompilingReplEkonstuator() {
         TestRepl().use { replBase ->
-            val repl = GenericReplCompilingEvaluator(
+            konst repl = GenericReplCompilingEkonstuator(
                 replBase.replCompiler, replBase.baseClasspath, Thread.currentThread().contextClassLoader,
                 fallbackScriptArgs = replBase.emptyScriptArgs
             )
 
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            val res1 = repl.compileAndEval(state, ReplCodeLine(0, 0, "val x = 10"))
-            assertTrue(res1 is ReplEvalResult.UnitResult)
+            konst res1 = repl.compileAndEkonst(state, ReplCodeLine(0, 0, "konst x = 10"))
+            assertTrue(res1 is ReplEkonstResult.UnitResult)
 
-            val res2 = repl.compileAndEval(state, ReplCodeLine(1, 0, "x"))
-            assertEquals(res2.toString(), 10, (res2 as? ReplEvalResult.ValueResult)?.value)
+            konst res2 = repl.compileAndEkonst(state, ReplCodeLine(1, 0, "x"))
+            assertEquals(res2.toString(), 10, (res2 as? ReplEkonstResult.ValueResult)?.konstue)
         }
     }
 
-    fun test256Evals() {
+    fun test256Ekonsts() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            repl.compileAndEval(state, ReplCodeLine(0, 0, "val x0 = 0"))
+            repl.compileAndEkonst(state, ReplCodeLine(0, 0, "konst x0 = 0"))
 
-            val evals = 256
-            for (i in 1..evals) {
-                repl.compileAndEval(state, ReplCodeLine(i, 0, "val x$i = x${i-1} + 1"))
+            konst ekonsts = 256
+            for (i in 1..ekonsts) {
+                repl.compileAndEkonst(state, ReplCodeLine(i, 0, "konst x$i = x${i-1} + 1"))
             }
 
-            val res = repl.compileAndEval(state, ReplCodeLine(evals + 1, 0, "x$evals"))
-            assertEquals(res.second.toString(), evals, (res.second as? ReplEvalResult.ValueResult)?.value)
+            konst res = repl.compileAndEkonst(state, ReplCodeLine(ekonsts + 1, 0, "x$ekonsts"))
+            assertEquals(res.second.toString(), ekonsts, (res.second as? ReplEkonstResult.ValueResult)?.konstue)
         }
     }
 
     fun testReplSlowdownKt22740() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            repl.compileAndEval(state, ReplCodeLine(0, 0, "class Test<T>(val x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()))
+            repl.compileAndEkonst(state, ReplCodeLine(0, 0, "class Test<T>(konst x: T) { fun <R> map(f: (T) -> R): R = f(x) }".trimIndent()))
 
             // We expect that analysis time is not exponential
             for (i in 1..60) {
-                repl.compileAndEval(state, ReplCodeLine(i, 0, "fun <T> Test<T>.map(f: (T) -> Double): List<Double> = listOf(f(this.x))"))
+                repl.compileAndEkonst(state, ReplCodeLine(i, 0, "fun <T> Test<T>.map(f: (T) -> Double): List<Double> = listOf(f(this.x))"))
             }
         }
     }
 
     fun testReplResultFieldWithFunction() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            assertEvalResultIs<Function0<Int>>(repl, state, "{ 1 + 2 }")
-            assertEvalResultIs<Function0<Int>>(repl, state, "res0")
-            assertEvalResult(repl, state, "res0()", 3)
+            assertEkonstResultIs<Function0<Int>>(repl, state, "{ 1 + 2 }")
+            assertEkonstResultIs<Function0<Int>>(repl, state, "res0")
+            assertEkonstResult(repl, state, "res0()", 3)
         }
     }
 
     fun testReplResultField() {
         TestRepl().use { repl ->
-            val state = repl.createState()
+            konst state = repl.createState()
 
-            assertEvalResult(repl, state, "5 * 4", 20)
-            assertEvalResult(repl, state, "res0 + 3", 23)
+            assertEkonstResult(repl, state, "5 * 4", 20)
+            assertEkonstResult(repl, state, "res0 + 3", 23)
         }
     }
 
-    private fun assertEvalUnit(repl: TestRepl, state: IReplStageState<*>, line: String) {
-        val compiledClasses = checkCompile(repl, state, line)
+    private fun assertEkonstUnit(repl: TestRepl, state: IReplStageState<*>, line: String) {
+        konst compiledClasses = checkCompile(repl, state, line)
 
-        val evalResult = repl.compiledEvaluator.eval(state, compiledClasses!!)
-        val unitResult = evalResult as? ReplEvalResult.UnitResult
-        TestCase.assertNotNull("Unexpected eval result: $evalResult", unitResult)
+        konst ekonstResult = repl.compiledEkonstuator.ekonst(state, compiledClasses!!)
+        konst unitResult = ekonstResult as? ReplEkonstResult.UnitResult
+        TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", unitResult)
     }
 
-    private fun<R> assertEvalResult(repl: TestRepl, state: IReplStageState<*>, line: String, expectedResult: R) {
-        val compiledClasses = checkCompile(repl, state, line)
+    private fun<R> assertEkonstResult(repl: TestRepl, state: IReplStageState<*>, line: String, expectedResult: R) {
+        konst compiledClasses = checkCompile(repl, state, line)
 
-        val evalResult = repl.compiledEvaluator.eval(state, compiledClasses!!)
-        val valueResult = evalResult as? ReplEvalResult.ValueResult
-        TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-        TestCase.assertEquals(expectedResult, valueResult!!.value)
+        konst ekonstResult = repl.compiledEkonstuator.ekonst(state, compiledClasses!!)
+        konst konstueResult = ekonstResult as? ReplEkonstResult.ValueResult
+        TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+        TestCase.assertEquals(expectedResult, konstueResult!!.konstue)
     }
 
-    private inline fun<reified R> assertEvalResultIs(repl: TestRepl, state: IReplStageState<*>, line: String) {
-        val compiledClasses = checkCompile(repl, state, line)
+    private inline fun<reified R> assertEkonstResultIs(repl: TestRepl, state: IReplStageState<*>, line: String) {
+        konst compiledClasses = checkCompile(repl, state, line)
 
-        val evalResult = repl.compiledEvaluator.eval(state, compiledClasses!!)
-        val valueResult = evalResult as? ReplEvalResult.ValueResult
-        TestCase.assertNotNull("Unexpected eval result: $evalResult", valueResult)
-        TestCase.assertTrue(valueResult!!.value is R)
+        konst ekonstResult = repl.compiledEkonstuator.ekonst(state, compiledClasses!!)
+        konst konstueResult = ekonstResult as? ReplEkonstResult.ValueResult
+        TestCase.assertNotNull("Unexpected ekonst result: $ekonstResult", konstueResult)
+        TestCase.assertTrue(konstueResult!!.konstue is R)
     }
 
     private fun checkCompile(repl: TestRepl, state: IReplStageState<*>, line: String): ReplCompileResult.CompiledClasses? {
-        val codeLine = repl.nextCodeLine(line)
-        val compileResult = repl.replCompiler.compile(state, codeLine)
-        val compiledClasses = compileResult as? ReplCompileResult.CompiledClasses
+        konst codeLine = repl.nextCodeLine(line)
+        konst compileResult = repl.replCompiler.compile(state, codeLine)
+        konst compiledClasses = compileResult as? ReplCompileResult.CompiledClasses
         TestCase.assertNotNull("Unexpected compile result: $compileResult", compiledClasses)
         return compiledClasses
     }
@@ -197,41 +197,41 @@ internal class TestRepl(
         templateClassName: String = "kotlin.script.templates.standard.ScriptTemplateWithArgs",
         repeatingMode: ReplRepeatingMode = ReplRepeatingMode.NONE
 ) : Closeable {
-    val application = ApplicationManager.getApplication()
+    konst application = ApplicationManager.getApplication()
 
-    private val disposable: Disposable by lazy { Disposer.newDisposable() }
+    private konst disposable: Disposable by lazy { Disposer.newDisposable() }
 
-    val emptyScriptArgs = ScriptArgsWithTypes(arrayOf(emptyArray<String>()), arrayOf(Array<String>::class))
+    konst emptyScriptArgs = ScriptArgsWithTypes(arrayOf(emptyArray<String>()), arrayOf(Array<String>::class))
 
-    private val configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.MOCK_JDK, *templateClasspath.toTypedArray()).apply {
+    private konst configuration = KotlinTestUtils.newConfiguration(ConfigurationKind.ALL, TestJdkKind.MOCK_JDK, *templateClasspath.toTypedArray()).apply {
         put(CommonConfigurationKeys.MODULE_NAME, "kotlin-script")
         loadScriptingPlugin(this)
     }
 
-    val baseClasspath: List<File> get() = configuration.jvmClasspathRoots
+    konst baseClasspath: List<File> get() = configuration.jvmClasspathRoots
 
-    val currentLineCounter = AtomicInteger()
+    konst currentLineCounter = AtomicInteger()
 
     fun nextCodeLine(code: String): ReplCodeLine = ReplCodeLine(currentLineCounter.getAndIncrement(), 0, code)
 
     private fun makeScriptDefinition(templateClasspath: List<File>, templateClassName: String): KotlinScriptDefinition {
-        val classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), this::class.java.classLoader)
-        val cls = classloader.loadClass(templateClassName)
+        konst classloader = URLClassLoader(templateClasspath.map { it.toURI().toURL() }.toTypedArray(), this::class.java.classLoader)
+        konst cls = classloader.loadClass(templateClassName)
         return KotlinScriptDefinitionFromAnnotatedTemplate(cls.kotlin, emptyMap())
     }
 
-    private val scriptDef = makeScriptDefinition(templateClasspath, templateClassName)
+    private konst scriptDef = makeScriptDefinition(templateClasspath, templateClassName)
 
-    val replCompiler : GenericReplCompiler by lazy {
+    konst replCompiler : GenericReplCompiler by lazy {
         GenericReplCompiler(disposable, scriptDef, configuration, PrintingMessageCollector(System.out, MessageRenderer.WITHOUT_PATHS, false))
     }
 
-    val compiledEvaluator: ReplEvaluator by lazy {
-        GenericReplEvaluator(baseClasspath, Thread.currentThread().contextClassLoader, emptyScriptArgs, repeatingMode)
+    konst compiledEkonstuator: ReplEkonstuator by lazy {
+        GenericReplEkonstuator(baseClasspath, Thread.currentThread().contextClassLoader, emptyScriptArgs, repeatingMode)
     }
 
     fun createState(lock: ReentrantReadWriteLock = ReentrantReadWriteLock()): IReplStageState<*> =
-            AggregatedReplStageState(replCompiler.createState(lock), compiledEvaluator.createState(lock), lock)
+            AggregatedReplStageState(replCompiler.createState(lock), compiledEkonstuator.createState(lock), lock)
 
     override fun close() {
         Disposer.dispose(disposable)
@@ -239,13 +239,13 @@ internal class TestRepl(
     }
 }
 
-private fun TestRepl.compileAndEval(state: IReplStageState<*>, codeLine: ReplCodeLine): Pair<ReplCompileResult, ReplEvalResult?> {
+private fun TestRepl.compileAndEkonst(state: IReplStageState<*>, codeLine: ReplCodeLine): Pair<ReplCompileResult, ReplEkonstResult?> {
 
-    val compRes = replCompiler.compile(state, codeLine)
+    konst compRes = replCompiler.compile(state, codeLine)
 
-    val evalRes = (compRes as? ReplCompileResult.CompiledClasses)?.let {
+    konst ekonstRes = (compRes as? ReplCompileResult.CompiledClasses)?.let {
 
-        compiledEvaluator.eval(state, it)
+        compiledEkonstuator.ekonst(state, it)
     }
-    return compRes to evalRes
+    return compRes to ekonstRes
 }

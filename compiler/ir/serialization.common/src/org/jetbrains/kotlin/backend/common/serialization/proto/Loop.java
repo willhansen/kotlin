@@ -30,7 +30,7 @@ public final class Loop extends
   private Loop(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -96,10 +96,10 @@ public final class Loop extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -117,7 +117,7 @@ public final class Loop extends
     public Loop parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new Loop(input, extensionRegistry);
     }
   };
@@ -299,23 +299,23 @@ public final class Loop extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Loop parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Loop parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Loop parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Loop parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.Loop parseFrom(java.io.InputStream input)
@@ -487,7 +487,7 @@ public final class Loop extends
       org.jetbrains.kotlin.backend.common.serialization.proto.Loop parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.Loop) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -515,9 +515,9 @@ public final class Loop extends
     /**
      * <code>required int32 loop_id = 1;</code>
      */
-    public Builder setLoopId(int value) {
+    public Builder setLoopId(int konstue) {
       bitField0_ |= 0x00000001;
-      loopId_ = value;
+      loopId_ = konstue;
       
       return this;
     }
@@ -547,11 +547,11 @@ public final class Loop extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression condition = 2;</code>
      */
-    public Builder setCondition(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setCondition(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      condition_ = value;
+      condition_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -569,13 +569,13 @@ public final class Loop extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression condition = 2;</code>
      */
-    public Builder mergeCondition(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeCondition(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           condition_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         condition_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(condition_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(condition_).mergeFrom(konstue).buildPartial();
       } else {
-        condition_ = value;
+        condition_ = konstue;
       }
 
       bitField0_ |= 0x00000002;
@@ -607,9 +607,9 @@ public final class Loop extends
     /**
      * <code>optional int32 label = 3;</code>
      */
-    public Builder setLabel(int value) {
+    public Builder setLabel(int konstue) {
       bitField0_ |= 0x00000004;
-      label_ = value;
+      label_ = konstue;
       
       return this;
     }
@@ -639,11 +639,11 @@ public final class Loop extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression body = 4;</code>
      */
-    public Builder setBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      body_ = value;
+      body_ = konstue;
 
       bitField0_ |= 0x00000008;
       return this;
@@ -661,13 +661,13 @@ public final class Loop extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression body = 4;</code>
      */
-    public Builder mergeBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeBody(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (((bitField0_ & 0x00000008) == 0x00000008) &&
           body_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         body_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(body_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder(body_).mergeFrom(konstue).buildPartial();
       } else {
-        body_ = value;
+        body_ = konstue;
       }
 
       bitField0_ |= 0x00000008;
@@ -699,9 +699,9 @@ public final class Loop extends
     /**
      * <code>optional int32 origin_name = 5;</code>
      */
-    public Builder setOriginName(int value) {
+    public Builder setOriginName(int konstue) {
       bitField0_ |= 0x00000010;
-      originName_ = value;
+      originName_ = konstue;
       
       return this;
     }

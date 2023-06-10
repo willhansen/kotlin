@@ -6,13 +6,13 @@
 // JVM_IR_TEMPLATES
 // 1 java/lang/invoke/LambdaMetafactory
 
-inline class Z(val value: Any?)
+inline class Z(konst konstue: Any?)
 
 fun foo1(fs: (Z) -> Z) = fs(Z(1))
 
 fun box(): String {
-    val t = foo1 { Z((it.value as Int) + 41) }
-    if (t.value != 42) return "Failed: t=$t"
+    konst t = foo1 { Z((it.konstue as Int) + 41) }
+    if (t.konstue != 42) return "Failed: t=$t"
 
     return "OK"
 }

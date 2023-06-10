@@ -24,25 +24,25 @@ import org.jetbrains.kotlin.resolve.calls.inference.returnTypeOrNothing
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 
 internal class KtFe10DescAnonymousFunctionSymbol(
-    override val descriptor: FunctionDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: FunctionDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtAnonymousFunctionSymbol(), KtFe10DescMemberSymbol<FunctionDescriptor> {
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { descriptor.isExtension }
 
-    override val valueParameters: List<KtValueParameterSymbol>
-        get() = withValidityAssertion { descriptor.valueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
+    override konst konstueParameters: List<KtValueParameterSymbol>
+        get() = withValidityAssertion { descriptor.konstueParameters.map { KtFe10DescValueParameterSymbol(it, analysisContext) } }
 
-    override val hasStableParameterNames: Boolean
+    override konst hasStableParameterNames: Boolean
         get() = withValidityAssertion { descriptor.ktHasStableParameterNames }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.returnTypeOrNothing.toKtType(analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor.createContextReceivers(analysisContext) }
 
     context(KtAnalysisSession)

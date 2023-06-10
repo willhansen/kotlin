@@ -1,7 +1,7 @@
 interface Foo1 {
     fun foo()
     fun bar()
-    val str: String
+    konst str: String
 
     class ClassFromInterface
 }
@@ -9,17 +9,17 @@ interface Foo1 {
 interface Foo2 : Foo1 {
     fun foo(i: Int)
     fun bar(s: String)
-    val isBoo: Boolean
+    konst isBoo: Boolean
 }
 
 interface Foo3 : Foo1 {
     fun foo(i: Int)
     fun bar(s: String)
-    val isBoo: Boolean
+    konst isBoo: Boolean
 }
 
 abstract class OuterClass : Foo1 {
-    val s<caret>t: String = 1
+    konst s<caret>t: String = 1
     class SimpleNestedClass {
         fun foo() {
 

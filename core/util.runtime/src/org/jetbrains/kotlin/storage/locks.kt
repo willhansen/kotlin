@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
 
-private const val CHECK_CANCELLATION_PERIOD_MS: Long = 50
+private const konst CHECK_CANCELLATION_PERIOD_MS: Long = 50
 
 interface SimpleLock {
     fun lock()
@@ -43,7 +43,7 @@ object EmptySimpleLock : SimpleLock {
     }
 }
 
-open class DefaultSimpleLock(protected val lock: Lock = ReentrantLock()) : SimpleLock {
+open class DefaultSimpleLock(protected konst lock: Lock = ReentrantLock()) : SimpleLock {
 
     override fun lock() = lock.lock()
 
@@ -53,8 +53,8 @@ open class DefaultSimpleLock(protected val lock: Lock = ReentrantLock()) : Simpl
 
 class CancellableSimpleLock(
     lock: Lock,
-    private val checkCancelled: Runnable,
-    private val interruptedExceptionHandler: (InterruptedException) -> Unit
+    private konst checkCancelled: Runnable,
+    private konst interruptedExceptionHandler: (InterruptedException) -> Unit
 ) : DefaultSimpleLock(lock) {
     constructor(checkCancelled: Runnable, interruptedExceptionHandler: (InterruptedException) -> Unit) : this(
         checkCancelled = checkCancelled,

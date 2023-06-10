@@ -49,14 +49,14 @@ class DownToProgressionRangeValue(rangeCall: ResolvedCall<out CallableDescriptor
             ?: ForInSimpleProgressionLoopGenerator.fromBoundedValueWithStep1(
                 codegen, forExpression, getBoundedValue(codegen),
                 getComparisonGeneratorForKotlinType(elementKotlinType),
-                inverseBoundsEvaluationOrder = true
+                inverseBoundsEkonstuationOrder = true
             )
 
     private fun createConstBoundedForInDownToGenerator(
         codegen: ExpressionCodegen,
         forExpression: KtForExpression
     ): ForLoopGenerator? {
-        val endExpression = rangeCall.getFirstArgumentExpression() ?: return null
+        konst endExpression = rangeCall.getFirstArgumentExpression() ?: return null
         return createConstBoundedForLoopGeneratorOrNull(
             codegen, forExpression,
             codegen.generateCallReceiver(rangeCall),
@@ -69,7 +69,7 @@ class DownToProgressionRangeValue(rangeCall: ResolvedCall<out CallableDescriptor
         codegen: ExpressionCodegen,
         forExpression: KtForExpression
     ): ForLoopGenerator? {
-        val endExpression = rangeCall.getReceiverExpression() ?: return null
+        konst endExpression = rangeCall.getReceiverExpression() ?: return null
         return createConstBoundedForLoopGeneratorOrNull(
             codegen, forExpression,
             codegen.generateCallSingleArgument(rangeCall),

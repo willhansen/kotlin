@@ -25,19 +25,19 @@ class Ranges {
 
     @Sample
     fun rangeFromComparable() {
-        val start = Date.valueOf("2017-01-01")
-        val end = Date.valueOf("2017-12-31")
-        val range = start..end
+        konst start = Date.konstueOf("2017-01-01")
+        konst end = Date.konstueOf("2017-12-31")
+        konst range = start..end
         assertPrints(range, "2017-01-01..2017-12-31")
 
-        assertTrue(Date.valueOf("2017-05-27") in range)
-        assertFalse(Date.valueOf("2018-01-01") in range)
-        assertTrue(Date.valueOf("2018-01-01") !in range)
+        assertTrue(Date.konstueOf("2017-05-27") in range)
+        assertFalse(Date.konstueOf("2018-01-01") in range)
+        assertTrue(Date.konstueOf("2018-01-01") !in range)
     }
 
     @Sample
     fun rangeFromDouble() {
-        val range = 1.0..100.0
+        konst range = 1.0..100.0
         assertPrints(range, "1.0..100.0")
 
         assertTrue(3.14 in range)
@@ -46,7 +46,7 @@ class Ranges {
 
     @Sample
     fun rangeFromFloat() {
-        val range = 1f..100f
+        konst range = 1f..100f
         assertPrints(range, "1.0..100.0")
 
         assertTrue(3.14f in range)

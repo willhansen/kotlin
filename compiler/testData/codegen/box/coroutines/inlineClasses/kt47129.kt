@@ -11,7 +11,7 @@ fun <T> runBlocking(c: suspend () -> T): T {
 
 fun box(): String = runBlocking {          // Non-inline lambda;
     run {                                  // In it an inline lambda
-        val foo = { Result.success("OK") } // Unboxes Result.
+        konst foo = { Result.success("OK") } // Unboxes Result.
         foo().getOrNull()!!
     }
 }

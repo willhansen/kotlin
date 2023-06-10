@@ -4,8 +4,8 @@ import dagger.Lazy
 import javax.inject.Inject
 
 class CoffeeMaker @Inject constructor(
-        private val heater: Lazy<Heater>,
-        private val pump: Pump
+        private konst heater: Lazy<Heater>,
+        private konst pump: Pump
 ) {
 
     fun brew() {

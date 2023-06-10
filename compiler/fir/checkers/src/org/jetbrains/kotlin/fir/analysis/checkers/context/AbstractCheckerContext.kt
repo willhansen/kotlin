@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.fir.resolve.SessionHolder
 import org.jetbrains.kotlin.fir.resolve.transformers.ReturnTypeCalculator
 
 abstract class AbstractCheckerContext(
-    override val sessionHolder: SessionHolder,
-    override val returnTypeCalculator: ReturnTypeCalculator,
-    override val allInfosSuppressed: Boolean,
-    override val allWarningsSuppressed: Boolean,
-    override val allErrorsSuppressed: Boolean
+    override konst sessionHolder: SessionHolder,
+    override konst returnTypeCalculator: ReturnTypeCalculator,
+    override konst allInfosSuppressed: Boolean,
+    override konst allWarningsSuppressed: Boolean,
+    override konst allErrorsSuppressed: Boolean
 ) : CheckerContext()

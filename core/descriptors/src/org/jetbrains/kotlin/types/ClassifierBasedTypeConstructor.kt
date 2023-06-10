@@ -18,11 +18,11 @@ abstract class ClassifierBasedTypeConstructor : TypeConstructor {
     abstract override fun getDeclarationDescriptor(): ClassifierDescriptor
 
     override fun hashCode(): Int {
-        val cachedHashCode = hashCode
+        konst cachedHashCode = hashCode
         if (cachedHashCode != 0) return cachedHashCode
 
-        val descriptor = declarationDescriptor
-        val computedHashCode = if (hasMeaningfulFqName(descriptor)) {
+        konst descriptor = declarationDescriptor
+        konst computedHashCode = if (hasMeaningfulFqName(descriptor)) {
             DescriptorUtils.getFqName(descriptor).hashCode()
         } else {
             System.identityHashCode(this)
@@ -43,8 +43,8 @@ abstract class ClassifierBasedTypeConstructor : TypeConstructor {
         // To avoid problems in type checker we suppose that it is different type constructors.
         if (other.parameters.size != parameters.size) return false
 
-        val myDescriptor = declarationDescriptor
-        val otherDescriptor = other.declarationDescriptor ?: return false
+        konst myDescriptor = declarationDescriptor
+        konst otherDescriptor = other.declarationDescriptor ?: return false
         if (!hasMeaningfulFqName(myDescriptor) || !hasMeaningfulFqName(otherDescriptor)) {
             // All error types and local classes have the same descriptor,
             // but we've already checked identity equality in the beginning of the method

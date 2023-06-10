@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtUserType
 
 internal class KtFe10ReferenceShortener(
-    override val analysisSession: KtFe10AnalysisSession,
+    override konst analysisSession: KtFe10AnalysisSession,
 ) : KtReferenceShortener(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun collectShortenings(
@@ -35,16 +35,16 @@ internal class KtFe10ReferenceShortener(
     ): ShortenCommand {
         // Compiler implementation does nothing.
         // Descriptor-based shortening is implemented on the IDE plugin side.
-        val ktFilePointer = SmartPointerManager.createPointer(file)
+        konst ktFilePointer = SmartPointerManager.createPointer(file)
 
         return object : ShortenCommand {
-            override val targetFile: SmartPsiElementPointer<KtFile> get() = ktFilePointer
-            override val importsToAdd: List<FqName> get() = emptyList()
-            override val starImportsToAdd: List<FqName> get() = emptyList()
-            override val typesToShorten: List<SmartPsiElementPointer<KtUserType>> get() = emptyList()
-            override val qualifiersToShorten: List<SmartPsiElementPointer<KtDotQualifiedExpression>> get() = emptyList()
+            override konst targetFile: SmartPsiElementPointer<KtFile> get() = ktFilePointer
+            override konst importsToAdd: List<FqName> get() = emptyList()
+            override konst starImportsToAdd: List<FqName> get() = emptyList()
+            override konst typesToShorten: List<SmartPsiElementPointer<KtUserType>> get() = emptyList()
+            override konst qualifiersToShorten: List<SmartPsiElementPointer<KtDotQualifiedExpression>> get() = emptyList()
 
-            override val isEmpty: Boolean get() = true
+            override konst isEmpty: Boolean get() = true
         }
     }
 }

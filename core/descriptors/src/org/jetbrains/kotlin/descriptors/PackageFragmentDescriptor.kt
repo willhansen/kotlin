@@ -23,7 +23,7 @@ interface PackageFragmentDescriptor : ClassOrPackageFragmentDescriptor {
 
     override fun getContainingDeclaration(): ModuleDescriptor
 
-    val fqName: FqName
+    konst fqName: FqName
 
     fun getMemberScope(): MemberScope
 }

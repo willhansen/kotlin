@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.name.Name
 
 open class FirCallArgumentsRenderer {
     internal lateinit var components: FirRendererComponents
-    protected val visitor get() = components.visitor
-    protected val printer get() = components.printer
+    protected konst visitor get() = components.visitor
+    protected konst printer get() = components.printer
 
     open fun renderArgumentMapping(argumentMapping: FirAnnotationArgumentMapping) {
         printer.print("(")
@@ -29,7 +29,7 @@ open class FirCallArgumentsRenderer {
 
     private fun Map<Name, FirElement>.renderSeparated() {
         for ((index, element) in this.entries.withIndex()) {
-            val (name, argument) = element
+            konst (name, argument) = element
             if (index > 0) {
                 printer.print(", ")
             }

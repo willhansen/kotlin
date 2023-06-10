@@ -15,6 +15,6 @@ public class RImpl extends R<RImpl> {
 
 // FILE: main.kt
 fun test() {
-    val x: R<RImpl> = R(RImpl())
+    konst x: R<RImpl> = R(RImpl())
     R<RImpl, RImpl>(RImpl())
 }

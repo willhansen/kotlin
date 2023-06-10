@@ -32,10 +32,10 @@ class H(c: C) : I, C by c
 fun test1() {
     log = ""
 
-    val g1 = G(object: C {})
+    konst g1 = G(object: C {})
     g1.foo(2)
     g1.foo()
-    val g2 = G(object: C {
+    konst g2 = G(object: C {
         override fun foo(x: Int) {
             log("[2] object:C.foo($x)")
         }
@@ -47,10 +47,10 @@ fun test1() {
 fun test2() {
     log = ""
 
-    val h1 = H(object: C {})
+    konst h1 = H(object: C {})
     h1.foo(2)
     h1.foo()
-    val h2 = H(object: C {
+    konst h2 = H(object: C {
         override fun foo(x: Int) {
             log("[2] object:C.foo($x)")
         }

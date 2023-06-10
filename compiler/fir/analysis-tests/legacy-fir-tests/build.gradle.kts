@@ -31,7 +31,7 @@ dependencies {
     testRuntimeOnly(intellijCore())
 }
 
-val generationRoot = projectDir.resolve("tests-gen")
+konst generationRoot = projectDir.resolve("tests-gen")
 
 sourceSets {
     "main" { none() }

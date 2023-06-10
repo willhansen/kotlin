@@ -1,9 +1,9 @@
 fun baz(s: String?): String {
-    val t = if (s == null) {
+    konst t = if (s == null) {
         ""
     }
     else {
-        val u: String? = null
+        konst u: String? = null
         when (u) {
             null -> ""
             else -> <!DEBUG_INFO_SMARTCAST!>u<!>

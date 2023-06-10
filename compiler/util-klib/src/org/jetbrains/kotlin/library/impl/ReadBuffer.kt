@@ -11,17 +11,17 @@ import java.nio.ByteBuffer
 
 sealed class ReadBuffer {
 
-    abstract val size: Int
+    abstract konst size: Int
     abstract fun get(result: ByteArray, offset: Int, length: Int)
     abstract var position: Int
 
 
-    abstract val int: Int
-    abstract val long: Long
+    abstract konst int: Int
+    abstract konst long: Long
 
-    abstract class NIOReader(private val buffer: ByteBuffer) : ReadBuffer() {
+    abstract class NIOReader(private konst buffer: ByteBuffer) : ReadBuffer() {
 
-        override val size: Int
+        override konst size: Int
             get() = buffer.limit()
 
         override fun get(result: ByteArray, offset: Int, length: Int) {
@@ -30,12 +30,12 @@ sealed class ReadBuffer {
 
         override var position: Int
             get() = buffer.position()
-            set(value) { buffer.position(value) }
+            set(konstue) { buffer.position(konstue) }
 
-        override val int: Int
+        override konst int: Int
             get() = buffer.int
 
-        override val long: Long
+        override konst long: Long
             get() = buffer.long
     }
 
@@ -43,26 +43,26 @@ sealed class ReadBuffer {
 
     class DirectFileBuffer(file: File) : NIOReader(file.readBytes().buffer)
 
-    class WeakFileBuffer(private val file: File) : ReadBuffer() {
-        override val size: Int
+    class WeakFileBuffer(private konst file: File) : ReadBuffer() {
+        override konst size: Int
             get() = file.length().toInt()
 
         override fun get(result: ByteArray, offset: Int, length: Int) {
-            val buf = ensureBuffer()
+            konst buf = ensureBuffer()
             pos += length
             buf.get(result, offset, length)
         }
 
-        override val int: Int
+        override konst int: Int
             get(): Int {
-                val buf = ensureBuffer()
+                konst buf = ensureBuffer()
                 pos += Int.SIZE_BYTES
                 return buf.int
             }
 
-        override val long: Long
+        override konst long: Long
             get(): Long {
-                val buf = ensureBuffer()
+                konst buf = ensureBuffer()
                 pos += Long.SIZE_BYTES
                 return buf.long
             }
@@ -71,10 +71,10 @@ sealed class ReadBuffer {
 
         override var position: Int
             get() = pos.also { assert(it == ensureBuffer().position()) }
-            set(value) {
-                val buf = ensureBuffer()
-                pos = value
-                buf.position(value)
+            set(konstue) {
+                konst buf = ensureBuffer()
+                pos = konstue
+                buf.position(konstue)
             }
 
         private fun ensureBuffer(): ByteBuffer {

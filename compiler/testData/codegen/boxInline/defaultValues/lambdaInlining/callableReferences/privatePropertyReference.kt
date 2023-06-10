@@ -2,7 +2,7 @@
 // FILE: 1.kt
 package test
 
-private val ok = "OK"
+private konst ok = "OK"
 
 internal inline fun inlineFun(lambda: () -> String = ::ok): String {
     return lambda()

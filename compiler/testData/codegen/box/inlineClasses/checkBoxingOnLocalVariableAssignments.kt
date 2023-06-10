@@ -3,54 +3,54 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullPrimitive(val x: Int)
+konstue class InlineNotNullPrimitive(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNullablePrimitive(val x: Int?)
+konstue class InlineNullablePrimitive(konst x: Int?)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullReference(val a: Any)
+konstue class InlineNotNullReference(konst a: Any)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNullableReference(val a: Any?)
+konstue class InlineNullableReference(konst a: Any?)
 
 fun test1(a: InlineNotNullPrimitive) {
-    val a0 = a
-    val a1: Any = a // box
-    val a2: Any? = a // box
-    val a3: InlineNotNullPrimitive = a
-    val a4: InlineNotNullPrimitive? = a // box
+    konst a0 = a
+    konst a1: Any = a // box
+    konst a2: Any? = a // box
+    konst a3: InlineNotNullPrimitive = a
+    konst a4: InlineNotNullPrimitive? = a // box
 }
 
 fun test2(b: InlineNullablePrimitive) {
-    val b0 = b
-    val b1: Any = b // box
-    val b2: Any? = b // box
-    val b3: InlineNullablePrimitive = b
-    val b4: InlineNullablePrimitive? = b // box
+    konst b0 = b
+    konst b1: Any = b // box
+    konst b2: Any? = b // box
+    konst b3: InlineNullablePrimitive = b
+    konst b4: InlineNullablePrimitive? = b // box
 }
 
 fun test3(c: InlineNotNullReference) {
-    val c0 = c
-    val c1: Any = c // box
-    val c2: Any? = c // box
-    val c3: InlineNotNullReference = c
-    val c4: InlineNotNullReference? = c
+    konst c0 = c
+    konst c1: Any = c // box
+    konst c2: Any? = c // box
+    konst c3: InlineNotNullReference = c
+    konst c4: InlineNotNullReference? = c
 }
 
 fun test4(d: InlineNullableReference) {
-    val d0 = d
-    val d1: Any = d // box
-    val d2: Any? = d // box
-    val d3: InlineNullableReference = d
-    val d4: InlineNullableReference? = d // box
+    konst d0 = d
+    konst d1: Any = d // box
+    konst d2: Any? = d // box
+    konst d3: InlineNullableReference = d
+    konst d4: InlineNullableReference? = d // box
 }
 
 fun box(): String {
-    val a = InlineNotNullPrimitive(1)
-    val b = InlineNullablePrimitive(1)
-    val c = InlineNotNullReference("some")
-    val d = InlineNullableReference("other")
+    konst a = InlineNotNullPrimitive(1)
+    konst b = InlineNullablePrimitive(1)
+    konst c = InlineNotNullReference("some")
+    konst d = InlineNullableReference("other")
 
     test1(a)
     test2(b)

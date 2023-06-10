@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.jps.targets.KotlinModuleBuildTarget
 import java.io.File
 
 class MessageCollectorAdapter(
-    private val context: CompileContext,
-    private val kotlinTarget: KotlinModuleBuildTarget<*>?
+    private konst context: CompileContext,
+    private konst kotlinTarget: KotlinModuleBuildTarget<*>?
 ) : MessageCollector {
     private var hasErrors = false
 
@@ -30,11 +30,11 @@ class MessageCollectorAdapter(
             prefix = CompilerRunnerConstants.INTERNAL_ERROR_PREFIX
         }
 
-        val kind = kind(severity)
+        konst kind = kind(severity)
         if (kind != null) {
             // Report target when cross-compiling common files
             if (location != null && kotlinTarget != null && kotlinTarget.isFromIncludedSourceRoot(File(location.path))) {
-                val moduleName = kotlinTarget.module.name
+                konst moduleName = kotlinTarget.module.name
                 prefix += "[$moduleName] "
             }
 
@@ -50,7 +50,7 @@ class MessageCollectorAdapter(
                 )
             )
         } else {
-            val path = if (location != null) "${location.path}:${location.line}:${location.column}: " else ""
+            konst path = if (location != null) "${location.path}:${location.line}:${location.column}: " else ""
             KotlinBuilder.LOG.debug(path + message)
         }
     }

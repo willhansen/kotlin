@@ -6,4 +6,4 @@
 @Retention(AnnotationRetention.BINARY)
 annotation class E1
 
-class My(@E1 val x: Int)
+class My(@E1 konst x: Int)

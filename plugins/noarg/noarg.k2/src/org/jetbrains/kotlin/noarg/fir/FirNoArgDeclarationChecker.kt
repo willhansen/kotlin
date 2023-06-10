@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.fir.types.toRegularClassSymbol
 
 object FirNoArgDeclarationChecker : FirRegularClassChecker() {
     override fun check(declaration: FirRegularClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (declaration.classKind != ClassKind.CLASS) return
-        val matcher = context.session.noArgPredicateMatcher
+        konst matcher = context.session.noArgPredicateMatcher
         if (!matcher.isAnnotated(declaration.symbol)) return
 
         when {
@@ -35,7 +35,7 @@ object FirNoArgDeclarationChecker : FirRegularClassChecker() {
             declaration.isLocal -> reporter.reportOn(source, KtErrorsNoArg.NOARG_ON_LOCAL_CLASS_ERROR, context)
         }
 
-        val superClassSymbol = declaration.symbol.getSuperClassSymbolOrAny(context.session)
+        konst superClassSymbol = declaration.symbol.getSuperClassSymbolOrAny(context.session)
         if (superClassSymbol.declarationSymbols.filterIsInstance<FirConstructorSymbol>().none { it.isNoArgConstructor() } && !matcher.isAnnotated(superClassSymbol)) {
             reporter.reportOn(source, KtErrorsNoArg.NO_NOARG_CONSTRUCTOR_IN_SUPERCLASS, context)
         }
@@ -44,13 +44,13 @@ object FirNoArgDeclarationChecker : FirRegularClassChecker() {
 
     private fun FirRegularClassSymbol.getSuperClassSymbolOrAny(session: FirSession): FirRegularClassSymbol {
         for (superType in resolvedSuperTypes) {
-            val symbol = superType.fullyExpandedType(session).toRegularClassSymbol(session) ?: continue
+            konst symbol = superType.fullyExpandedType(session).toRegularClassSymbol(session) ?: continue
             if (symbol.classKind == ClassKind.CLASS) return symbol
         }
         return session.builtinTypes.anyType.type.toRegularClassSymbol(session) ?: error("Symbol for Any not found")
     }
 
     private fun FirConstructorSymbol.isNoArgConstructor(): Boolean {
-        return valueParameterSymbols.all { it.hasDefaultValue }
+        return konstueParameterSymbols.all { it.hasDefaultValue }
     }
 }

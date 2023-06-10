@@ -21,10 +21,10 @@ abstract class DeprecationsProvider {
 
 class DeprecationsProviderImpl(
     firCachesFactory: FirCachesFactory,
-    private val all: List<DeprecationAnnotationInfo>?,
-    private val bySpecificSite: Map<AnnotationUseSiteTarget, List<DeprecationAnnotationInfo>>?
+    private konst all: List<DeprecationAnnotationInfo>?,
+    private konst bySpecificSite: Map<AnnotationUseSiteTarget, List<DeprecationAnnotationInfo>>?
 ) : DeprecationsProvider() {
-    private val cache: FirCache<ApiVersion, DeprecationsPerUseSite, Nothing?> = firCachesFactory.createCache { version ->
+    private konst cache: FirCache<ApiVersion, DeprecationsPerUseSite, Nothing?> = firCachesFactory.createCache { version ->
         @Suppress("UNCHECKED_CAST")
         DeprecationsPerUseSite(
             all?.computeDeprecationInfoOrNull(version),
@@ -59,14 +59,14 @@ sealed interface DeprecationAnnotationInfo {
 }
 
 data class FutureApiDeprecationInfo(
-    override val deprecationLevel: DeprecationLevelValue,
-    override val propagatesToOverrides: Boolean,
-    val sinceVersion: ApiVersion,
+    override konst deprecationLevel: DeprecationLevelValue,
+    override konst propagatesToOverrides: Boolean,
+    konst sinceVersion: ApiVersion,
 ) : DeprecationInfo() {
-    override val message: String? get() = null
+    override konst message: String? get() = null
 }
 
-class SinceKotlinInfo(val sinceVersion: ApiVersion) : DeprecationAnnotationInfo {
+class SinceKotlinInfo(konst sinceVersion: ApiVersion) : DeprecationAnnotationInfo {
     override fun computeDeprecationInfo(apiVersion: ApiVersion): DeprecationInfo? {
         return runUnless(sinceVersion <= apiVersion) {
             FutureApiDeprecationInfo(
@@ -79,9 +79,9 @@ class SinceKotlinInfo(val sinceVersion: ApiVersion) : DeprecationAnnotationInfo 
 }
 
 class DeprecatedInfo(
-    val level: DeprecationLevelValue,
-    val propagatesToOverride: Boolean,
-    val message: String?
+    konst level: DeprecationLevelValue,
+    konst propagatesToOverride: Boolean,
+    konst message: String?
 ) : DeprecationAnnotationInfo {
     override fun computeDeprecationInfo(apiVersion: ApiVersion): DeprecationInfo {
         return SimpleDeprecationInfo(
@@ -93,16 +93,16 @@ class DeprecatedInfo(
 }
 
 class DeprecatedSinceKotlinInfo(
-    val warningVersion: ApiVersion?,
-    val errorVersion: ApiVersion?,
-    val hiddenVersion: ApiVersion?,
-    val message: String?,
-    val propagatesToOverride: Boolean
+    konst warningVersion: ApiVersion?,
+    konst errorVersion: ApiVersion?,
+    konst hiddenVersion: ApiVersion?,
+    konst message: String?,
+    konst propagatesToOverride: Boolean
 ) : DeprecationAnnotationInfo {
     override fun computeDeprecationInfo(apiVersion: ApiVersion): DeprecationInfo? {
         fun ApiVersion.takeLevelIfDeprecated(level: DeprecationLevelValue) = level.takeIf { this <= apiVersion }
 
-        val appliedLevel = hiddenVersion?.takeLevelIfDeprecated(DeprecationLevelValue.HIDDEN)
+        konst appliedLevel = hiddenVersion?.takeLevelIfDeprecated(DeprecationLevelValue.HIDDEN)
             ?: errorVersion?.takeLevelIfDeprecated(DeprecationLevelValue.ERROR)
             ?: warningVersion?.takeLevelIfDeprecated(DeprecationLevelValue.WARNING)
 

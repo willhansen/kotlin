@@ -2,7 +2,7 @@ fun foo(first: Boolean, second: Boolean, third: Boolean): Int {
     if (first) {
         return 4
     } else if (second) {
-        val x = 3
+        konst x = 3
         return x + 2
     } else {
         // Yet we don't flatten this 'if', it matches the current PSI2IR behavior
@@ -13,12 +13,12 @@ fun foo(first: Boolean, second: Boolean, third: Boolean): Int {
 }
 
 fun example() {
-    val a = if (true) true else false
-    val b = if (true) else false
-    val c = if (true) true
-    val d = if (true) true else;
-    val e = if (true) {} else false
-    val f = if (true) true else {}
+    konst a = if (true) true else false
+    konst b = if (true) else false
+    konst c = if (true) true
+    konst d = if (true) true else;
+    konst e = if (true) {} else false
+    konst f = if (true) true else {}
 
     {
         if (true) true

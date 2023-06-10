@@ -5,39 +5,39 @@ public abstract class MyMap implements java.util.Map<String, String> {}
 
 // FILE: test.kt
 fun test(map: MyMap) {
-    val result = map.getOrPut("key") { "value" } // Cannot be resolved without early J2K mapping
+    konst result = map.getOrPut("key") { "konstue" } // Cannot be resolved without early J2K mapping
     // In contrast, should be taken from JDK
-    val otherResult = map.getOrDefault("key", "value")
-    val anotherResult = map.replace("key", "value")
+    konst otherResult = map.getOrDefault("key", "konstue")
+    konst anotherResult = map.replace("key", "konstue")
     // Java forEach
-    map.forEach { key, value ->
-        println("$key: $value")
+    map.forEach { key, konstue ->
+        println("$key: $konstue")
         key.length
-        value.length
+        konstue.length
     }
     // Kotlin forEach
-    map.forEach { (key, value) ->
-        println("$key: $value")
+    map.forEach { (key, konstue) ->
+        println("$key: $konstue")
         key.length
-        value.length
+        konstue.length
     }
 }
 
 fun test(map: MutableMap<String, String>) {
-    val result = map.getOrPut("key") { "value" } // Cannot be resolved without early J2K mapping
+    konst result = map.getOrPut("key") { "konstue" } // Cannot be resolved without early J2K mapping
     // In contrast, should be taken from JDK
-    val otherResult = map.getOrDefault("key", "value")
-    val anotherResult = map.replace("key", "value")
+    konst otherResult = map.getOrDefault("key", "konstue")
+    konst anotherResult = map.replace("key", "konstue")
     // Java forEach
-    map.forEach { key, value ->
-        println("$key: $value")
+    map.forEach { key, konstue ->
+        println("$key: $konstue")
         key.length
-        value.length
+        konstue.length
     }
     // Kotlin forEach
-    map.forEach { (key, value) ->
-        println("$key: $value")
+    map.forEach { (key, konstue) ->
+        println("$key: $konstue")
         key.length
-        value.length
+        konstue.length
     }
 }

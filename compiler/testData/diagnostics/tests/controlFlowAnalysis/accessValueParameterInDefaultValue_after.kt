@@ -29,8 +29,8 @@ interface Foo {
 
 fun test_5(
     x: Foo = object : Foo {
-        val z1 = <!UNINITIALIZED_PARAMETER, UNINITIALIZED_PARAMETER!>y<!> // Error
-        val z2 = run { <!UNINITIALIZED_PARAMETER!>y<!> } // Error
+        konst z1 = <!UNINITIALIZED_PARAMETER, UNINITIALIZED_PARAMETER!>y<!> // Error
+        konst z2 = run { <!UNINITIALIZED_PARAMETER!>y<!> } // Error
 
         init {
             println(<!UNINITIALIZED_PARAMETER!>y<!>) // Error
@@ -46,8 +46,8 @@ fun test_5(
 fun test_6(
     x: String = "OK",
     y: Foo = object : Foo {
-        val z1 = x // OK
-        val z2 = run { x } // OK
+        konst z1 = x // OK
+        konst z2 = run { x } // OK
 
         init {
             println(x) // OK

@@ -12,7 +12,7 @@ kotlin {
     macosX64()
     mingwX64("windowsX64")
 
-    val commonMain by sourceSets.getting
+    konst commonMain by sourceSets.getting
 
     commonMain.dependencies {
         implementation(project(":p1"))

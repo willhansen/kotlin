@@ -72,7 +72,7 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
     private List<String> compilerPlugins;
 
     /**
-     * A list of plugin options in format (pluginId):(parameter)=(value)
+     * A list of plugin options in format (pluginId):(parameter)=(konstue)
      */
     @Parameter
     private List<String> pluginOptions;
@@ -177,7 +177,7 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
     protected String apiVersion;
 
     /**
-     * possible values are: enable, error, warn
+     * possible konstues are: enable, error, warn
      */
     @Parameter(property = "kotlin.compiler.experimental.coroutines")
     @Nullable
@@ -257,18 +257,18 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
             try {
                 Field[] fields = arguments.getClass().getFields();
                 for (Field f : fields) {
-                    Object value = f.get(arguments);
+                    Object konstue = f.get(arguments);
 
-                    String valueString;
-                    if (value instanceof Object[]) {
-                        valueString = Arrays.deepToString((Object[]) value);
-                    } else if (value != null) {
-                        valueString = String.valueOf(value);
+                    String konstueString;
+                    if (konstue instanceof Object[]) {
+                        konstueString = Arrays.deepToString((Object[]) konstue);
+                    } else if (konstue != null) {
+                        konstueString = String.konstueOf(konstue);
                     } else {
-                        valueString = "(null)";
+                        konstueString = "(null)";
                     }
 
-                    getLog().debug(f.getName() + "=" + valueString);
+                    getLog().debug(f.getName() + "=" + konstueString);
                 }
                 getLog().debug("End of arguments");
             } catch (Exception e) {
@@ -393,7 +393,7 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
                 if (renderedOptions.length() > 1) {
                     renderedOptions.append(", ");
                 }
-                renderedOptions.append(option.key).append(": ").append(option.value);
+                renderedOptions.append(option.key).append(": ").append(option.konstue);
             }
             renderedOptions.append("]");
 
@@ -418,13 +418,13 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
 
             String pluginName = matcher.group(1);
             String key = matcher.group(2);
-            String value = matcher.group(3);
+            String konstue = matcher.group(3);
             KotlinMavenPluginExtension plugin = plugins.get(pluginName);
             if (plugin == null) {
                 throw new PluginNotFoundException(pluginName);
             }
 
-            pluginOptions.add(new PluginOption(pluginName, plugin.getCompilerPluginId(), key, value));
+            pluginOptions.add(new PluginOption(pluginName, plugin.getCompilerPluginId(), key, konstue));
         }
 
         return pluginOptions;
@@ -437,7 +437,7 @@ public abstract class KotlinCompileMojoBase<A extends CommonCompilerArguments> e
             if (sourceDir.exists()) {
                 sourceRoots.add(sourceDir);
             }
-            // unfortunately there is no good way to detect generated sources directory so we simply keep hardcoded value
+            // unfortunately there is no good way to detect generated sources directory so we simply keep hardcoded konstue
             else if (!sourceDir.getPath().contains("generated-sources")) {
                 getLog().warn("Source root doesn't exist: " + sourceDir);
             }

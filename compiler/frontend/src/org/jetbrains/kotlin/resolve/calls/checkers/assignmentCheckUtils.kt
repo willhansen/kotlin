@@ -14,11 +14,11 @@ fun isAssignmentCorrectWithDataFlowInfo(
     rightType: KotlinType,
     context: CallCheckerContext
 ): Boolean {
-    val kotlinTypeChecker = context.callComponents.kotlinTypeChecker
+    konst kotlinTypeChecker = context.callComponents.kotlinTypeChecker
     if (kotlinTypeChecker.isSubtypeOf(rightType, leftType)) return true
-    val dfi = context.dataFlowInfo
-    val dfvFactory = context.dataFlowValueFactory
-    val stableTypesFromDataFlow = dfi.getStableTypes(
+    konst dfi = context.dataFlowInfo
+    konst dfvFactory = context.dataFlowValueFactory
+    konst stableTypesFromDataFlow = dfi.getStableTypes(
         dfvFactory.createDataFlowValue(rightExpression, rightType, context.trace.bindingContext, context.moduleDescriptor),
         context.languageVersionSettings
     )

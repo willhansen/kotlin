@@ -25,11 +25,11 @@ import kotlin.script.experimental.api.SourceCode
 import kotlin.script.experimental.api.asErrorDiagnostics
 import kotlin.script.experimental.jvm.util.toSourceCodePosition
 
-class ScriptDiagnosticsMessageCollector(private val parentMessageCollector: MessageCollector?) : MessageCollector {
+class ScriptDiagnosticsMessageCollector(private konst parentMessageCollector: MessageCollector?) : MessageCollector {
 
-    private val _diagnostics = arrayListOf<ScriptDiagnostic>()
+    private konst _diagnostics = arrayListOf<ScriptDiagnostic>()
 
-    val diagnostics: List<ScriptDiagnostic> get() = _diagnostics
+    konst diagnostics: List<ScriptDiagnostic> get() = _diagnostics
 
     override fun clear() {
         _diagnostics.clear()
@@ -40,9 +40,9 @@ class ScriptDiagnosticsMessageCollector(private val parentMessageCollector: Mess
         _diagnostics.any { it.severity == ScriptDiagnostic.Severity.ERROR } || parentMessageCollector?.hasErrors() == true
 
     override fun report(severity: CompilerMessageSeverity, message: String, location: CompilerMessageSourceLocation?) {
-        val mappedSeverity = severity.toScriptingSeverity()
+        konst mappedSeverity = severity.toScriptingSeverity()
         if (mappedSeverity != null) {
-            val mappedLocation = location?.let {
+            konst mappedLocation = location?.let {
                 if (it.line < 0 && it.column < 0) null // special location created by CompilerMessageLocation.create
                 else if (it.lineEnd < 0 && it.columnEnd < 0) SourceCode.Location(
                     SourceCode.Position(
@@ -75,7 +75,7 @@ class ScriptDiagnosticsMessageCollector(private val parentMessageCollector: Mess
             return
         }
 
-        val locationStart = diagnostic.location?.start
+        konst locationStart = diagnostic.location?.start
         parentMessageCollector.report(
             diagnostic.severity.toCompilerMessageSeverity(),
             diagnostic.message,
@@ -126,7 +126,7 @@ internal fun reportArgumentsNotAllowed(
     messageCollector: MessageCollector,
     reportingState: IgnoredOptionsReportingState
 ) =
-    reportInvalidArguments(
+    reportInkonstidArguments(
         arguments,
         "The following compiler arguments are not allowed in the script compilation configuration: ",
         CompilerMessageSeverity.ERROR,
@@ -141,7 +141,7 @@ internal fun reportArgumentsIgnoredGenerally(
     messageCollector: MessageCollector,
     reportingState: IgnoredOptionsReportingState
 ) =
-    reportInvalidArguments(
+    reportInkonstidArguments(
         arguments,
         "The following compiler arguments are ignored on script compilation: ",
         CompilerMessageSeverity.STRONG_WARNING,
@@ -168,7 +168,7 @@ internal fun reportArgumentsIgnoredGenerally(
 internal fun reportArgumentsIgnoredFromRefinement(
     arguments: K2JVMCompilerArguments, messageCollector: MessageCollector, reportingState: IgnoredOptionsReportingState
 ) =
-    reportInvalidArguments(
+    reportInkonstidArguments(
         arguments,
         "The following compiler arguments are ignored when configured from refinement callbacks: ",
         CompilerMessageSeverity.STRONG_WARNING,
@@ -186,45 +186,45 @@ internal fun reportArgumentsIgnoredFromRefinement(
     )
 
 
-private fun reportInvalidArguments(
+private fun reportInkonstidArguments(
     arguments: K2JVMCompilerArguments,
     message: String, severity: CompilerMessageSeverity,
     messageCollector: MessageCollector, reportingState: IgnoredOptionsReportingState,
     vararg toIgnore: KMutableProperty1<K2JVMCompilerArguments, *>
 ): Boolean {
-    val invalidArgKeys = toIgnore.mapNotNull { argProperty ->
+    konst inkonstidArgKeys = toIgnore.mapNotNull { argProperty ->
         if (argProperty.get(arguments) != argProperty.get(reportingState.currentArguments)) {
-            argProperty.annotations.firstIsInstanceOrNull<Argument>()?.value
+            argProperty.annotations.firstIsInstanceOrNull<Argument>()?.konstue
                 ?: throw IllegalStateException("unknown compiler argument property: $argProperty: no Argument annotation found")
         } else null
     }
 
-    if (invalidArgKeys.isNotEmpty()) {
-        messageCollector.report(severity, "$message${invalidArgKeys.joinToString(", ")}")
+    if (inkonstidArgKeys.isNotEmpty()) {
+        messageCollector.report(severity, "$message${inkonstidArgKeys.joinToString(", ")}")
         return true
     }
     return false
 }
 
-val MessageCollector.reporter: MessageReporter
+konst MessageCollector.reporter: MessageReporter
     get() = { severity, message ->
         this.report(severity.toCompilerMessageSeverity(), message)
     }
 
 fun KtDiagnostic.asScriptDiagnostic(sourceCode: SourceCode): ScriptDiagnostic {
-    val (diagnosticCode, scriptSeverity) = when (severity) {
+    konst (diagnosticCode, scriptSeverity) = when (severity) {
         Severity.INFO -> ScriptDiagnostic.unspecifiedInfo to ScriptDiagnostic.Severity.INFO
         Severity.ERROR -> ScriptDiagnostic.unspecifiedError to ScriptDiagnostic.Severity.ERROR
         Severity.WARNING -> ScriptDiagnostic.unspecifiedInfo to ScriptDiagnostic.Severity.WARNING
     }
 
-    val renderer = RootDiagnosticRendererFactory(this)
+    konst renderer = RootDiagnosticRendererFactory(this)
 
-    val location = if (textRanges.isEmpty()) {
+    konst location = if (textRanges.isEmpty()) {
         null
     } else {
-        val firstRange = textRanges.first()
-        val lastRange = textRanges.last()
+        konst firstRange = textRanges.first()
+        konst lastRange = textRanges.last()
         SourceCode.LocationWithId(
             element.psi?.containingFile?.virtualFile?.path.orEmpty(),
             SourceCode.Location(

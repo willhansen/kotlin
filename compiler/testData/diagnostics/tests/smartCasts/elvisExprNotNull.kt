@@ -1,5 +1,5 @@
 fun foo(s: Any?): String {
-    val t = when {
+    konst t = when {
         // To resolve: String U Nothing? = String?
         s is String -> <!DEBUG_INFO_SMARTCAST!>s<!>
         else -> null
@@ -9,11 +9,11 @@ fun foo(s: Any?): String {
 
 fun bar(s: Any?): String {
     // To resolve: String U Nothing? = String?
-    val t = (if (s == null) {
+    konst t = (if (s == null) {
         null
     }
     else {
-        val u: Any? = null
+        konst u: Any? = null
         if (u !is String) return ""
         <!DEBUG_INFO_SMARTCAST!>u<!>
     }) ?: "xyz"
@@ -22,7 +22,7 @@ fun bar(s: Any?): String {
 }
 
 fun baz(s: String?, r: String?): String {
-    val t = r ?: when {
+    konst t = r ?: when {
         s != null -> <!DEBUG_INFO_SMARTCAST!>s<!>
         else -> ""
     }
@@ -30,7 +30,7 @@ fun baz(s: String?, r: String?): String {
 }
 
 fun withNull(s: String?): String {
-    val t = s <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
+    konst t = s <!USELESS_ELVIS_RIGHT_IS_NULL!>?: null<!>
     // Error: nullable
     return <!TYPE_MISMATCH!>t<!>
 }

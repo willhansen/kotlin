@@ -25,11 +25,11 @@ import org.jetbrains.kotlin.ir.types.IrTypeSystemContext
 import org.jetbrains.kotlin.name.FqName
 
 interface BackendContext {
-    val ir: Ir<CommonBackendContext>
-    val builtIns: KotlinBuiltIns
-    val irBuiltIns: IrBuiltIns
-    val typeSystem: IrTypeSystemContext
-    val sharedVariablesManager: SharedVariablesManager
-    val internalPackageFqn: FqName
-    val irFactory: IrFactory
+    konst ir: Ir<CommonBackendContext>
+    konst builtIns: KotlinBuiltIns
+    konst irBuiltIns: IrBuiltIns
+    konst typeSystem: IrTypeSystemContext
+    konst sharedVariablesManager: SharedVariablesManager
+    konst internalPackageFqn: FqName
+    konst irFactory: IrFactory
 }

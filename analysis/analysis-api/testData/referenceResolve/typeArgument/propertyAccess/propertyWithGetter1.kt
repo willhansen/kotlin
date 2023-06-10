@@ -1,5 +1,5 @@
 // COMPILATION_ERRORS
-val property: Int
+konst property: Int
     get() = 10
 
 fun foo() {

@@ -24,27 +24,27 @@ import kotlin.contracts.ExperimentalContracts
 
 abstract class BaseConverter(
     baseSession: FirSession,
-    val tree: FlyweightCapableTreeStructure<LighterASTNode>,
+    konst tree: FlyweightCapableTreeStructure<LighterASTNode>,
     context: Context<LighterASTNode> = Context()
 ) : BaseFirBuilder<LighterASTNode>(baseSession, context) {
-    protected val implicitType = FirImplicitTypeRefImplWithoutSource
+    protected konst implicitType = FirImplicitTypeRefImplWithoutSource
 
     override fun LighterASTNode.toFirSourceElement(kind: KtFakeSourceElementKind?): KtLightSourceElement {
-        val startOffset = tree.getStartOffset(this)
-        val endOffset = tree.getEndOffset(this)
+        konst startOffset = tree.getStartOffset(this)
+        konst endOffset = tree.getEndOffset(this)
         return toKtLightSourceElement(tree, kind ?: context.forcedElementSourceKind ?: KtRealSourceElementKind, startOffset, endOffset)
     }
 
-    override val LighterASTNode.elementType: IElementType
+    override konst LighterASTNode.elementType: IElementType
         get() = this.tokenType
 
-    override val LighterASTNode.asText: String
+    override konst LighterASTNode.asText: String
         get() = this.toString()
 
-    override val LighterASTNode.unescapedValue: String
+    override konst LighterASTNode.unescapedValue: String
         get() {
-            val escape = this.asText
-            return escapedStringToCharacter(escape).value?.toString()
+            konst escape = this.asText
+            return escapedStringToCharacter(escape).konstue?.toString()
                 ?: escape.replace("\\", "").replace("u", "\\u")
         }
 
@@ -80,7 +80,7 @@ abstract class BaseConverter(
     }
 
     protected fun LighterASTNode.getFirstChildExpressionUnwrapped(): LighterASTNode? {
-        val expression = getFirstChildExpression() ?: return null
+        konst expression = getFirstChildExpression() ?: return null
         return if (expression.tokenType == KtNodeTypes.PARENTHESIZED) {
             expression.getFirstChildExpressionUnwrapped()
         } else {
@@ -103,7 +103,7 @@ abstract class BaseConverter(
         return this.getChildNodesByType(type).firstOrNull()
     }
 
-    override val LighterASTNode?.receiverExpression: LighterASTNode?
+    override konst LighterASTNode?.receiverExpression: LighterASTNode?
         get() {
             var candidate: LighterASTNode? = null
             this?.forEachChildren {
@@ -115,7 +115,7 @@ abstract class BaseConverter(
             return null
         }
 
-    override val LighterASTNode?.selectorExpression: LighterASTNode?
+    override konst LighterASTNode?.selectorExpression: LighterASTNode?
         get() {
             var isSelector = false
             this?.forEachChildren {
@@ -127,10 +127,10 @@ abstract class BaseConverter(
             return null
         }
 
-    override val LighterASTNode?.arrayExpression: LighterASTNode?
+    override konst LighterASTNode?.arrayExpression: LighterASTNode?
         get() = this?.getFirstChildExpression()
 
-    override val LighterASTNode?.indexExpressions: List<LighterASTNode>?
+    override konst LighterASTNode?.indexExpressions: List<LighterASTNode>?
         get() = this?.getLastChildExpression()?.getChildrenAsArray()?.filterNotNull()?.filter { it.isExpression() }
 
     fun LighterASTNode.getParent(): LighterASTNode? {
@@ -158,7 +158,7 @@ abstract class BaseConverter(
     fun LighterASTNode?.getChildrenAsArray(): Array<out LighterASTNode?> {
         if (this == null) return arrayOf()
 
-        val kidsRef = Ref<Array<LighterASTNode?>>()
+        konst kidsRef = Ref<Array<LighterASTNode?>>()
         tree.getChildren(this, kidsRef)
         return kidsRef.get()
     }
@@ -168,22 +168,22 @@ abstract class BaseConverter(
     }
 
     protected inline fun LighterASTNode.forEachChildren(vararg skipTokens: KtToken, f: (LighterASTNode) -> Unit) {
-        val kidsArray = this.getChildrenAsArray()
+        konst kidsArray = this.getChildrenAsArray()
         for (kid in kidsArray) {
             if (kid == null) break
-            val tokenType = kid.tokenType
+            konst tokenType = kid.tokenType
             if (COMMENTS.contains(tokenType) || tokenType == WHITE_SPACE || tokenType == SEMICOLON || tokenType in skipTokens || tokenType == TokenType.ERROR_ELEMENT) continue
             f(kid)
         }
     }
 
     protected inline fun <T> LighterASTNode.forEachChildrenReturnList(f: (LighterASTNode, MutableList<T>) -> Unit): List<T> {
-        val kidsArray = this.getChildrenAsArray()
+        konst kidsArray = this.getChildrenAsArray()
 
-        val container = mutableListOf<T>()
+        konst container = mutableListOf<T>()
         for (kid in kidsArray) {
             if (kid == null) break
-            val tokenType = kid.tokenType
+            konst tokenType = kid.tokenType
             if (COMMENTS.contains(tokenType) || tokenType == WHITE_SPACE || tokenType == SEMICOLON || tokenType == TokenType.ERROR_ELEMENT) continue
             f(kid, container)
         }

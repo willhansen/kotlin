@@ -1,4 +1,4 @@
-val p = 0
+konst p = 0
 fun foo() = 1
 
 fun test(a: IntArray) =

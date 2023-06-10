@@ -12,7 +12,7 @@ fun test1() {
 }
 
 class Test {
-  private val MyObject1 = object {
+  private konst MyObject1 = object {
       private var message: String = "'Static'"
   }
 

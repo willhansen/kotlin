@@ -7,11 +7,11 @@ class C {
 }
 
 fun test1(c: C) {
-    val (a, b) = c
+    konst (a, b) = c
 }
 
 fun test2(c: C) {
-    val (a, b) = c
+    konst (a, b) = c
     a + 3
 }
 

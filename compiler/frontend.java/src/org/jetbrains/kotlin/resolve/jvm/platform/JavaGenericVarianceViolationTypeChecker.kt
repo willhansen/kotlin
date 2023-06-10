@@ -33,7 +33,7 @@ object JavaGenericVarianceViolationTypeChecker : AdditionalTypeChecker {
     // Example:
     // class JavaClass { static void fillWithDefaultObjects(List<Object> list); // add Object's to list }
     //
-    // val x: MutableList<String>
+    // konst x: MutableList<String>
     // JavaClass.fillWithDefaultObjects(x) // using `x` after this call may lead to CCE
     override fun checkType(
             expression: KtExpression,
@@ -41,21 +41,21 @@ object JavaGenericVarianceViolationTypeChecker : AdditionalTypeChecker {
             expressionTypeWithSmartCast: KotlinType,
             c: ResolutionContext<*>
     ) {
-        val expectedType = c.expectedType
+        konst expectedType = c.expectedType
         if (TypeUtils.noExpectedType(expectedType) || ErrorUtils.containsErrorType(expectedType) || ErrorUtils.containsUninferredTypeVariable(expectedType)) return
 
         // optimization: if no arguments or flexibility, everything is OK
         if (expectedType.arguments.isEmpty() || !expectedType.isFlexible()) return
 
-        val lowerBound = expectedType.asFlexibleType().lowerBound
-        val upperBound = expectedType.asFlexibleType().upperBound
+        konst lowerBound = expectedType.asFlexibleType().lowerBound
+        konst upperBound = expectedType.asFlexibleType().upperBound
 
         // Use site variance projection is always the same for flexible types
         if (lowerBound.constructor == upperBound.constructor) return
         // Anything is acceptable for raw types
         if (expectedType.unwrap() is RawTypeImpl) return
 
-        val correspondingSubType = TypeCheckingProcedure.findCorrespondingSupertype(expressionTypeWithSmartCast, lowerBound) ?: return
+        konst correspondingSubType = TypeCheckingProcedure.findCorrespondingSupertype(expressionTypeWithSmartCast, lowerBound) ?: return
 
         assert(lowerBound.arguments.size == upperBound.arguments.size) {
             "Different arguments count in flexible bounds: " +
@@ -68,13 +68,13 @@ object JavaGenericVarianceViolationTypeChecker : AdditionalTypeChecker {
         }
 
 
-        val lowerParameters = lowerBound.constructor.parameters
-        val upperParameters = upperBound.constructor.parameters
-        val lowerArguments = lowerBound.arguments
+        konst lowerParameters = lowerBound.constructor.parameters
+        konst upperParameters = upperBound.constructor.parameters
+        konst lowerArguments = lowerBound.arguments
 
         correspondingSubType.arguments.indices.forEach {
             index ->
-            val lowerArgument = lowerArguments[index]
+            konst lowerArgument = lowerArguments[index]
             // Currently we don't have flexible types with different constructors with contravariant arguments
             // So check just covariant case
             if (lowerParameters[index].variance == Variance.INVARIANT

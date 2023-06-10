@@ -20,7 +20,7 @@ public class Test {
 // FILE: test.kt
 
 public inline fun test(): String {
-    val p = object : Test() {}
+    konst p = object : Test() {}
     return p.data + Test.testStatic();
 }
 

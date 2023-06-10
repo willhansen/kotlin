@@ -2,7 +2,7 @@ package test
 
 public abstract class Mine : java.util.List<kotlin.String> {
     public constructor Mine()
-    public abstract /*fake_override*/ val size: kotlin.Int
+    public abstract /*fake_override*/ konst size: kotlin.Int
     public abstract /*fake_override*/ fun add(/*0*/ kotlin.Int, /*1*/ kotlin.String!): kotlin.Unit
     public abstract /*fake_override*/ fun add(/*0*/ kotlin.String!): kotlin.Boolean
     public abstract /*fake_override*/ fun addAll(/*0*/ kotlin.Int, /*1*/ (kotlin.collections.MutableCollection<out kotlin.String!>..kotlin.collections.Collection<kotlin.String!>?)): kotlin.Boolean

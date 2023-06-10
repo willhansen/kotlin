@@ -1,5 +1,5 @@
 fun test(): UInt {
-    val c: UInt
+    konst c: UInt
     run {
         c = 1u
     }

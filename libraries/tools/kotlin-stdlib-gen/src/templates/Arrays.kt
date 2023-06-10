@@ -21,7 +21,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_isEmpty = fn("isEmpty()") {
+    konst f_isEmpty = fn("isEmpty()") {
         include(ArraysOfObjects, ArraysOfPrimitives)
     } builder {
         inlineOnly()
@@ -32,7 +32,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_isNotEmpty = fn("isNotEmpty()") {
+    konst f_isNotEmpty = fn("isNotEmpty()") {
         include(ArraysOfObjects, ArraysOfPrimitives)
     } builder {
         inlineOnly()
@@ -44,10 +44,10 @@ object ArrayOps : TemplateGroupBase() {
     }
 
 
-    val f_lastIndex = pval("lastIndex") {
+    konst f_lastIndex = pkonst("lastIndex") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
-        doc { "Returns the last valid index for the array." }
+        doc { "Returns the last konstid index for the array." }
         returns("Int")
         body {
             "get() = size - 1"
@@ -63,10 +63,10 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_indices = pval("indices") {
+    konst f_indices = pkonst("indices") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
-        doc { "Returns the range of valid indices for the array." }
+        doc { "Returns the range of konstid indices for the array." }
         returns("IntRange")
         body {
             "get() = IntRange(0, lastIndex)"
@@ -87,7 +87,7 @@ object ArrayOps : TemplateGroupBase() {
         annotation("""@DeprecatedSinceKotlin(hiddenSince = "1.4")""")
     }
 
-    val f_contentEquals = fn("contentEquals(other: SELF)") {
+    konst f_contentEquals = fn("contentEquals(other: SELF)") {
         platforms(Platform.Native)
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
@@ -113,7 +113,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentEquals_nullable = fn("contentEquals(other: SELF?)") {
+    konst f_contentEquals_nullable = fn("contentEquals(other: SELF?)") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -171,7 +171,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepEquals = fn("contentDeepEquals(other: SELF)") {
+    konst f_contentDeepEquals = fn("contentDeepEquals(other: SELF)") {
         include(ArraysOfObjects)
     } builder {
         since("1.1")
@@ -197,7 +197,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepEquals_nullable = fn("contentDeepEquals(other: SELF?)") {
+    konst f_contentDeepEquals_nullable = fn("contentDeepEquals(other: SELF?)") {
         include(ArraysOfObjects)
     } builder {
         since("1.4")
@@ -245,7 +245,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentToString = fn("contentToString()") {
+    konst f_contentToString = fn("contentToString()") {
         platforms(Platform.Native)
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
@@ -264,7 +264,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentToString_nullable = fn("contentToString()") {
+    konst f_contentToString_nullable = fn("contentToString()") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -299,7 +299,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepToString = fn("contentDeepToString()") {
+    konst f_contentDeepToString = fn("contentDeepToString()") {
         include(ArraysOfObjects)
     } builder {
         since("1.1")
@@ -322,7 +322,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepToString_nullable = fn("contentDeepToString()") {
+    konst f_contentDeepToString_nullable = fn("contentDeepToString()") {
         include(ArraysOfObjects)
     } builder {
         since("1.4")
@@ -364,7 +364,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentHashCode = fn("contentHashCode()") {
+    konst f_contentHashCode = fn("contentHashCode()") {
         platforms(Platform.Native)
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
@@ -380,7 +380,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentHashCode_nullable = fn("contentHashCode()") {
+    konst f_contentHashCode_nullable = fn("contentHashCode()") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.4")
@@ -420,7 +420,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepHashCode = fn("contentDeepHashCode()") {
+    konst f_contentDeepHashCode = fn("contentDeepHashCode()") {
         include(ArraysOfObjects)
     } builder {
         since("1.1")
@@ -441,7 +441,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_contentDeepHashCode_nullable = fn("contentDeepHashCode()") {
+    konst f_contentDeepHashCode_nullable = fn("contentDeepHashCode()") {
         include(ArraysOfObjects)
     } builder {
         since("1.4")
@@ -481,12 +481,12 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_toPrimitiveArray = fn("toPrimitiveArray()") {
-        include(ArraysOfObjects, PrimitiveType.values().toSet())
-        include(Collections, PrimitiveType.values().toSet())
+    konst f_toPrimitiveArray = fn("toPrimitiveArray()") {
+        include(ArraysOfObjects, PrimitiveType.konstues().toSet())
+        include(Collections, PrimitiveType.konstues().toSet())
     } builder {
-        val primitive = checkNotNull(primitive)
-        val arrayType = primitive.name + "Array"
+        konst primitive = checkNotNull(primitive)
+        konst arrayType = primitive.name + "Array"
         signature("to$arrayType()")
         returns(arrayType)
 
@@ -514,7 +514,7 @@ object ArrayOps : TemplateGroupBase() {
             doc { "Returns an array of ${primitive.name} containing all of the elements of this collection." }
             body {
                 """
-                val result = $arrayType(size)
+                konst result = $arrayType(size)
                 var index = 0
                 for (element in this)
                     result[index++] = element
@@ -524,10 +524,10 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_asSignedArray = fn("asSignedArray()") {
+    konst f_asSignedArray = fn("asSignedArray()") {
         include(ArraysOfUnsigned)
     } builder {
-        val arrayType = primitive!!.name.drop(1) + "Array"
+        konst arrayType = primitive!!.name.drop(1) + "Array"
         signature("as$arrayType()")
         returns(arrayType)
 
@@ -542,10 +542,10 @@ object ArrayOps : TemplateGroupBase() {
         body { """return storage""" }
     }
 
-    val f_toSignedArray = fn("toSignedArray()") {
+    konst f_toSignedArray = fn("toSignedArray()") {
         include(ArraysOfUnsigned)
     } builder {
-        val arrayType = primitive!!.name.drop(1) + "Array"
+        konst arrayType = primitive!!.name.drop(1) + "Array"
         signature("to$arrayType()")
         returns(arrayType)
 
@@ -560,10 +560,10 @@ object ArrayOps : TemplateGroupBase() {
         body { """return storage.copyOf()""" }
     }
 
-    val f_asUnsignedArray = fn("asUnsignedArray()") {
+    konst f_asUnsignedArray = fn("asUnsignedArray()") {
         include(ArraysOfUnsigned)
     } builder {
-        val arrayType = primitive!!.name.drop(1) + "Array"
+        konst arrayType = primitive!!.name.drop(1) + "Array"
         receiver(arrayType)
         signature("asU$arrayType()")
         returns("SELF")
@@ -579,10 +579,10 @@ object ArrayOps : TemplateGroupBase() {
         body { """return U$arrayType(this)""" }
     }
 
-    val f_toUnsignedArray = fn("toUnsignedArray()") {
+    konst f_toUnsignedArray = fn("toUnsignedArray()") {
         include(ArraysOfUnsigned)
     } builder {
-        val arrayType = primitive!!.name.drop(1) + "Array"
+        konst arrayType = primitive!!.name.drop(1) + "Array"
         receiver(arrayType)
         signature("toU$arrayType()")
         returns("SELF")
@@ -598,7 +598,7 @@ object ArrayOps : TemplateGroupBase() {
         body { """return U$arrayType(this.copyOf())""" }
     }
 
-    val f_plusElement = fn("plusElement(element: T)") {
+    konst f_plusElement = fn("plusElement(element: T)") {
         include(InvariantArraysOfObjects)
     } builder {
         returns("SELF")
@@ -630,7 +630,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_plus = fn("plus(element: T)") {
+    konst f_plus = fn("plus(element: T)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builderWith { primitive ->
         doc { "Returns an array containing all elements of the original array and then the given [element]." }
@@ -639,7 +639,7 @@ object ArrayOps : TemplateGroupBase() {
 
         specialFor(ArraysOfUnsigned) {
             inlineOnly()
-            val signedPrimitiveName = primitive!!.name.drop(1)
+            konst signedPrimitiveName = primitive!!.name.drop(1)
             body {
                 """
                 return SELF(storage + element.to$signedPrimitiveName())
@@ -651,8 +651,8 @@ object ArrayOps : TemplateGroupBase() {
             on(Platform.JVM) {
                 body {
                     """
-                    val index = size
-                    val result = java.util.Arrays.copyOf(this, index + 1)
+                    konst index = size
+                    konst result = java.util.Arrays.copyOf(this, index + 1)
                     result[index] = element
                     return result
                     """
@@ -677,8 +677,8 @@ object ArrayOps : TemplateGroupBase() {
             on(Platform.Native) {
                 body {
                     """
-                    val index = size
-                    val result = copyOfUninitializedElements(index + 1)
+                    konst index = size
+                    konst result = copyOfUninitializedElements(index + 1)
                     result[index] = element
                     return result
                     """
@@ -693,7 +693,7 @@ object ArrayOps : TemplateGroupBase() {
     }
 
 
-    val f_plus_collection = fn("plus(elements: Collection<T>)") {
+    konst f_plus_collection = fn("plus(elements: Collection<T>)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         operator()
@@ -701,11 +701,11 @@ object ArrayOps : TemplateGroupBase() {
         doc { "Returns an array containing all elements of the original array and then all elements of the given [elements] collection." }
 
         specialFor(ArraysOfUnsigned) {
-            val signedPrimitiveName = primitive!!.name.drop(1)
+            konst signedPrimitiveName = primitive!!.name.drop(1)
             body {
                 """
                 var index = size
-                val result = storage.copyOf(size + elements.size)
+                konst result = storage.copyOf(size + elements.size)
                 for (element in elements) result[index++] = element.to$signedPrimitiveName()
                 return SELF(result)
                 """
@@ -716,7 +716,7 @@ object ArrayOps : TemplateGroupBase() {
                 body {
                     """
                     var index = size
-                    val result = java.util.Arrays.copyOf(this, index + elements.size)
+                    konst result = java.util.Arrays.copyOf(this, index + elements.size)
                     for (element in elements) result[index++] = element
                     return result
                     """
@@ -747,7 +747,7 @@ object ArrayOps : TemplateGroupBase() {
                             body {
                                 """
                                 var index = size
-                                val result = this.copyOf(size + elements.size)
+                                konst result = this.copyOf(size + elements.size)
                                 for (element in elements) result[index++] = element
                                 return result
                                 """
@@ -760,7 +760,7 @@ object ArrayOps : TemplateGroupBase() {
                 body {
                     """
                     var index = size
-                    val result = copyOfUninitializedElements(index + elements.size)
+                    konst result = copyOfUninitializedElements(index + elements.size)
                     for (element in elements) result[index++] = element
                     return result
                     """
@@ -774,7 +774,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_plus_array = fn("plus(elements: SELF)") {
+    konst f_plus_array = fn("plus(elements: SELF)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         operator(true)
@@ -793,9 +793,9 @@ object ArrayOps : TemplateGroupBase() {
             on(Platform.JVM) {
                 body {
                     """
-                    val thisSize = size
-                    val arraySize = elements.size
-                    val result = java.util.Arrays.copyOf(this, thisSize + arraySize)
+                    konst thisSize = size
+                    konst arraySize = elements.size
+                    konst result = java.util.Arrays.copyOf(this, thisSize + arraySize)
                     System.arraycopy(elements, 0, result, thisSize, arraySize)
                     return result
                     """
@@ -817,9 +817,9 @@ object ArrayOps : TemplateGroupBase() {
             on(Platform.Native) {
                 body {
                     """
-                    val thisSize = size
-                    val arraySize = elements.size
-                    val result = copyOfUninitializedElements(thisSize + arraySize)
+                    konst thisSize = size
+                    konst arraySize = elements.size
+                    konst result = copyOfUninitializedElements(thisSize + arraySize)
                     elements.copyInto(result, thisSize)
                     return result
                     """
@@ -833,7 +833,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_copyInto = fn("copyInto(destination: SELF, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size)") {
+    konst f_copyInto = fn("copyInto(destination: SELF, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         since("1.3")
@@ -886,7 +886,7 @@ object ArrayOps : TemplateGroupBase() {
                 signature("copyInto(destination: SELF, destinationOffset: Int = 0, startIndex: Int = 0, endIndex: Int = size)")
                 inlineOnly()
                 body {
-                    val cast = ".unsafeCast<Array<$primitive>>()".takeIf { family == ArraysOfPrimitives } ?: ""
+                    konst cast = ".unsafeCast<Array<$primitive>>()".takeIf { family == ArraysOfPrimitives } ?: ""
                     """
                     arrayCopy(this$cast, destination$cast, destinationOffset, startIndex, endIndex)
                     return destination
@@ -914,7 +914,7 @@ object ArrayOps : TemplateGroupBase() {
                     body {
                         """
                         AbstractList.checkRangeIndexes(startIndex, endIndex, this.size)
-                        val rangeSize = endIndex - startIndex
+                        konst rangeSize = endIndex - startIndex
                         AbstractList.checkRangeIndexes(destinationOffset, destinationOffset + rangeSize, destination.size)
                         kotlin.wasm.internal.copyWasmArray(this.storage, destination.storage, startIndex, destinationOffset, rangeSize)
                         return destination
@@ -925,7 +925,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_copyOfRangeJvmImpl = fn("copyOfRangeImpl(fromIndex: Int, toIndex: Int)") {
+    konst f_copyOfRangeJvmImpl = fn("copyOfRangeImpl(fromIndex: Int, toIndex: Int)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives)
         platforms(Platform.JVM)
     } builderWith { _ ->
@@ -942,7 +942,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_copyOfRange = fn("copyOfRange(fromIndex: Int, toIndex: Int)") {
+    konst f_copyOfRange = fn("copyOfRange(fromIndex: Int, toIndex: Int)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builderWith { primitive ->
         doc {
@@ -965,7 +965,7 @@ object ArrayOps : TemplateGroupBase() {
                     suppress("ACTUAL_WITHOUT_EXPECT") // TODO: KT-21937
                     returns("Array<T>")
                 }
-                val rangeCheck = "AbstractList.checkRangeIndexes(fromIndex, toIndex, size)"
+                konst rangeCheck = "AbstractList.checkRangeIndexes(fromIndex, toIndex, size)"
                 when (primitive) {
                     PrimitiveType.Char, PrimitiveType.Boolean, PrimitiveType.Long ->
                         body { "return withType(\"${primitive}Array\", this.asDynamic().slice(fromIndex, toIndex))" }
@@ -1005,7 +1005,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_copyOfUninitializedElements_size = fn("copyOfUninitializedElements(newSize: Int)") {
+    konst f_copyOfUninitializedElements_size = fn("copyOfUninitializedElements(newSize: Int)") {
         include(InvariantArraysOfObjects)
         include(ArraysOfPrimitives)
         platforms(Platform.Native)
@@ -1014,15 +1014,15 @@ object ArrayOps : TemplateGroupBase() {
         returns("SELF")
         doc {
             """
-            Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ values.
-            Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
-            either throwing exception or returning some kind of implementation-specific default value.
+            Returns new array which is a copy of the original array with new elements filled with **lateinit** _uninitialized_ konstues.
+            Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+            either throwing exception or returning some kind of implementation-specific default konstue.
             """
         }
         body { "return copyOfUninitializedElements(0, newSize)" }
     }
 
-    val f_copyOfUninitializedElements_range = fn("copyOfUninitializedElements(fromIndex: Int, toIndex: Int)") {
+    konst f_copyOfUninitializedElements_range = fn("copyOfUninitializedElements(fromIndex: Int, toIndex: Int)") {
         include(InvariantArraysOfObjects)
         include(ArraysOfPrimitives)
         platforms(Platform.Native)
@@ -1032,25 +1032,25 @@ object ArrayOps : TemplateGroupBase() {
         doc {
             """
             Returns new array which is a copy of the original array's range between [fromIndex] (inclusive)
-            and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ values.
-            Attempts to read _uninitialized_ values from this array work in implementation-dependent manner,
-            either throwing exception or returning some kind of implementation-specific default value.
+            and [toIndex] (exclusive) with new elements filled with **lateinit** _uninitialized_ konstues.
+            Attempts to read _uninitialized_ konstues from this array work in implementation-dependent manner,
+            either throwing exception or returning some kind of implementation-specific default konstue.
             """
         }
         body {
             """
-            val newSize = toIndex - fromIndex
+            konst newSize = toIndex - fromIndex
             if (newSize < 0) {
                 throw IllegalArgumentException("${'$'}fromIndex > ${'$'}toIndex")
             }
-            val result = ${if (f == InvariantArraysOfObjects) "arrayOfUninitializedElements<T>" else "SELF"}(newSize)
+            konst result = ${if (f == InvariantArraysOfObjects) "arrayOfUninitializedElements<T>" else "SELF"}(newSize)
             this.copyInto(result, 0, fromIndex, toIndex.coerceAtMost(size))
             return result
             """
         }
     }
 
-    val f_copyOf = fn("copyOf()") {
+    konst f_copyOf = fn("copyOf()") {
         include(InvariantArraysOfObjects)
         include(ArraysOfPrimitives, PrimitiveType.defaultPrimitives)
         include(ArraysOfUnsigned)
@@ -1098,7 +1098,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_copyOf_newSize = fn("copyOf(newSize: Int)") {
+    konst f_copyOf_newSize = fn("copyOf(newSize: Int)") {
         include(ArraysOfPrimitives, PrimitiveType.defaultPrimitives)
         include(InvariantArraysOfObjects)
         include(ArraysOfUnsigned)
@@ -1106,13 +1106,13 @@ object ArrayOps : TemplateGroupBase() {
         doc {
             """
             Returns new array which is a copy of the original array, resized to the given [newSize].
-            The copy is either truncated or padded at the end with ${primitive.zero} values if necessary.
+            The copy is either truncated or padded at the end with ${primitive.zero} konstues if necessary.
 
             - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
-            - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with ${primitive.zero} values.
+            - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with ${primitive.zero} konstues.
             """
         }
-        val newSizeCheck = """require(newSize >= 0) { "Invalid new array size: ${'$'}newSize." }"""
+        konst newSizeCheck = """require(newSize >= 0) { "Inkonstid new array size: ${'$'}newSize." }"""
         specialFor(ArraysOfUnsigned) {
             inlineOnly()
             returns("SELF")
@@ -1168,7 +1168,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sort = fn("sort()") {
+    konst f_sort = fn("sort()") {
         include(ArraysOfPrimitives, PrimitiveType.numericPrimitives + PrimitiveType.Char)
         include(ArraysOfUnsigned)
         include(ArraysOfObjects)
@@ -1204,7 +1204,7 @@ object ArrayOps : TemplateGroupBase() {
                         on(Backend.IR) {
                             if (primitive == PrimitiveType.Char) {
                                 // Requires comparator because default comparator of 'Array.prototype.sort' compares
-                                // string representation of values
+                                // string representation of konstues
                                 body { "nativeSort(::primitiveCompareTo)" }
                             } else {
                                 body { "nativeSort()" }
@@ -1242,7 +1242,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sortWith = fn("sortWith(comparator: Comparator<in T>)") {
+    konst f_sortWith = fn("sortWith(comparator: Comparator<in T>)") {
         include(ArraysOfObjects)
     } builder {
         doc { "Sorts the array in-place according to the order specified by the given [comparator]." }
@@ -1263,7 +1263,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sort_comparison = fn("sort(comparison: (a: T, b: T) -> Int)") {
+    konst f_sort_comparison = fn("sort(comparison: (a: T, b: T) -> Int)") {
         platforms(Platform.JS)
         include(ArraysOfObjects, ArraysOfPrimitives)
         exclude(PrimitiveType.Boolean)
@@ -1285,7 +1285,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sort_objects = fn("sort()") {
+    konst f_sort_objects = fn("sort()") {
         // left with more generic signature for JVM only
         platforms(Platform.JVM)
         include(ArraysOfObjects)
@@ -1305,7 +1305,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sort_range_jvm = fn("sort(fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_sort_range_jvm = fn("sort(fromIndex: Int = 0, toIndex: Int = size)") {
         platforms(Platform.JVM)
         include(ArraysOfObjects)
     } builder {
@@ -1323,7 +1323,7 @@ object ArrayOps : TemplateGroupBase() {
         body { "java.util.Arrays.sort(this, fromIndex, toIndex)" }
     }
 
-    val f_sort_range = fn("sort(fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_sort_range = fn("sort(fromIndex: Int = 0, toIndex: Int = size)") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
     } builder {
@@ -1392,7 +1392,7 @@ object ArrayOps : TemplateGroupBase() {
                     } else {
                         """
                         AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-                        val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<SELF>()
+                        konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<SELF>()
                         subarray.sort()
                         """
                     }
@@ -1401,7 +1401,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sortWith_range = fn("sortWith(comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_sortWith_range = fn("sortWith(comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size)") {
         include(ArraysOfObjects)
     } builder {
         doc {
@@ -1441,7 +1441,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_sortDescending_range = fn("sortDescending(fromIndex: Int, toIndex: Int)") {
+    konst f_sortDescending_range = fn("sortDescending(fromIndex: Int, toIndex: Int)") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
     } builder {
@@ -1469,7 +1469,7 @@ object ArrayOps : TemplateGroupBase() {
     }
 
 
-    val f_asList = fn("asList()") {
+    konst f_asList = fn("asList()") {
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc { "Returns a [List] that wraps the original array." }
@@ -1481,9 +1481,9 @@ object ArrayOps : TemplateGroupBase() {
             body { """return ArrayList<T>(this.unsafeCast<Array<Any?>>())""" }
         }
 
-        val objectLiteralImpl = if (primitive in PrimitiveType.floatingPointPrimitives) """
+        konst objectLiteralImpl = if (primitive in PrimitiveType.floatingPointPrimitives) """
             return object : AbstractList<T>(), RandomAccess {
-                override val size: Int get() = this@asList.size
+                override konst size: Int get() = this@asList.size
                 override fun isEmpty(): Boolean = this@asList.isEmpty()
                 override fun contains(element: T): Boolean = this@asList.any { it.toBits() == element.toBits() }
                 override fun get(index: Int): T = this@asList[index]
@@ -1493,7 +1493,7 @@ object ArrayOps : TemplateGroupBase() {
             """
         else """
             return object : AbstractList<T>(), RandomAccess {
-                override val size: Int get() = this@asList.size
+                override konst size: Int get() = this@asList.size
                 override fun isEmpty(): Boolean = this@asList.isEmpty()
                 override fun contains(element: T): Boolean = this@asList.contains(element)
                 override fun get(index: Int): T = this@asList[index]
@@ -1510,7 +1510,7 @@ object ArrayOps : TemplateGroupBase() {
                     body {
                         """
                         return object : AbstractList<T>(), RandomAccess {
-                            override val size: Int get() = this@asList.size
+                            override konst size: Int get() = this@asList.size
                             override fun isEmpty(): Boolean = this@asList.isEmpty()
                             override fun contains(element: T): Boolean = this@asList.contains(element)
                             override fun get(index: Int): T {
@@ -1542,7 +1542,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_toTypedArray = fn("toTypedArray()") {
+    konst f_toTypedArray = fn("toTypedArray()") {
         include(ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         returns("Array<T>")
@@ -1556,7 +1556,7 @@ object ArrayOps : TemplateGroupBase() {
             on(Platform.JVM) {
                 body {
                     """
-                val result = arrayOfNulls<T>(size)
+                konst result = arrayOfNulls<T>(size)
                 for (index in indices)
                     result[index] = this[index]
                 @Suppress("UNCHECKED_CAST")
@@ -1591,12 +1591,12 @@ object ArrayOps : TemplateGroupBase() {
         ${rangeThrowsDoc()}
         """.trimIndent()
 
-    val f_fill = fn("fill(element: T, fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_fill = fn("fill(element: T, fromIndex: Int = 0, toIndex: Int = size)") {
         include(InvariantArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
     } builder {
         doc {
             """
-            Fills this array or its subrange with the specified [element] value.
+            Fills this array or its subrange with the specified [element] konstue.
             
             ${rangeDoc(hasDefault = true, action = "fill")}
             """
@@ -1604,7 +1604,7 @@ object ArrayOps : TemplateGroupBase() {
         returns("Unit")
 
         specialFor(ArraysOfUnsigned) {
-            val signedPrimitiveName = primitive!!.name.drop(1)
+            konst signedPrimitiveName = primitive!!.name.drop(1)
             body {
                 "storage.fill(element.to$signedPrimitiveName(), fromIndex, toIndex)"
             }
@@ -1650,7 +1650,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_binarySearch = fn("binarySearch(element: T, fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_binarySearch = fn("binarySearch(element: T, fromIndex: Int = 0, toIndex: Int = size)") {
         platforms(Platform.JVM)
         include(ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned)
         exclude(PrimitiveType.Boolean)
@@ -1679,9 +1679,9 @@ object ArrayOps : TemplateGroupBase() {
         }
 
         specialFor(ArraysOfUnsigned) {
-            val elementConversion: String
-            val midValConversion: String
-            val compareFunction: String
+            konst elementConversion: String
+            konst midValConversion: String
+            konst compareFunction: String
             when (primitive!!) {
                 PrimitiveType.UByte, PrimitiveType.UShort -> {
                     elementConversion = ".toInt()"
@@ -1706,14 +1706,14 @@ object ArrayOps : TemplateGroupBase() {
                 """
                 AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
 
-                val signedElement = element$elementConversion
+                konst signedElement = element$elementConversion
                 var low = fromIndex
                 var high = toIndex - 1
 
                 while (low <= high) {
-                    val mid = (low + high).ushr(1) // safe from overflows
-                    val midVal = storage[mid]
-                    val cmp = $compareFunction(midVal$midValConversion, signedElement)
+                    konst mid = (low + high).ushr(1) // safe from overflows
+                    konst midVal = storage[mid]
+                    konst cmp = $compareFunction(midVal$midValConversion, signedElement)
 
                     if (cmp < 0)
                         low = mid + 1
@@ -1728,7 +1728,7 @@ object ArrayOps : TemplateGroupBase() {
         }
     }
 
-    val f_binarySearch_comparator = fn("binarySearch(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size)") {
+    konst f_binarySearch_comparator = fn("binarySearch(element: T, comparator: Comparator<in T>, fromIndex: Int = 0, toIndex: Int = size)") {
         platforms(Platform.JVM)
         include(ArraysOfObjects)
     } builder {

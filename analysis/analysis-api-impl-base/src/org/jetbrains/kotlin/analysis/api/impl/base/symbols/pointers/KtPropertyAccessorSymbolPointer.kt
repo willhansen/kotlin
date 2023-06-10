@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 
 @KtAnalysisApiInternals
 class KtPropertyAccessorSymbolPointer(
-    private val propertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
-    private val isGetter: Boolean,
+    private konst propertySymbolPointer: KtSymbolPointer<KtPropertySymbol>,
+    private konst isGetter: Boolean,
 ) : KtSymbolPointer<KtPropertyAccessorSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtPropertyAccessorSymbol? {
-        val propertySymbol = with(analysisSession) {
+        konst propertySymbol = with(analysisSession) {
             propertySymbolPointer.restoreSymbol()
         } ?: return null
 

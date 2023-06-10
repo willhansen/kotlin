@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.fir.types.renderForDebugging
 class ConeContractRenderer : KtContractDescriptionVisitor<Unit, Nothing?, ConeKotlinType, ConeDiagnostic>() {
 
     internal lateinit var components: FirRendererComponents
-    private val printer get() = components.printer
-    private val visitor get() = components.visitor
+    private konst printer get() = components.printer
+    private konst visitor get() = components.visitor
 
     fun render(declaration: FirDeclaration) {
-        val contractDescription = (declaration as? FirContractDescriptionOwner)?.contractDescription ?: return
+        konst contractDescription = (declaration as? FirContractDescriptionOwner)?.contractDescription ?: return
         render(contractDescription)
     }
 
@@ -30,7 +30,7 @@ class ConeContractRenderer : KtContractDescriptionVisitor<Unit, Nothing?, ConeKo
         printer.pushIndent()
         if (contractDescription !is FirEmptyContractDescription) {
             printer.newLine()
-            val prefix = if (contractDescription is FirResolvedContractDescription) "R|" else ""
+            konst prefix = if (contractDescription is FirResolvedContractDescription) "R|" else ""
             printer.print("[${prefix}Contract description]")
         }
         when (contractDescription) {
@@ -85,13 +85,13 @@ class ConeContractRenderer : KtContractDescriptionVisitor<Unit, Nothing?, ConeKo
 
     override fun visitReturnsEffectDeclaration(returnsEffect: KtReturnsEffectDeclaration<ConeKotlinType, ConeDiagnostic>, data: Nothing?) {
         printer.print("Returns(")
-        returnsEffect.value.accept(this, data)
+        returnsEffect.konstue.accept(this, data)
         printer.print(")")
     }
 
     override fun visitCallsEffectDeclaration(callsEffect: KtCallsEffectDeclaration<ConeKotlinType, ConeDiagnostic>, data: Nothing?) {
         printer.print("CallsInPlace(")
-        callsEffect.valueParameterReference.accept(this, data)
+        callsEffect.konstueParameterReference.accept(this, data)
         printer.print(", ${callsEffect.kind})")
     }
 
@@ -120,8 +120,8 @@ class ConeContractRenderer : KtContractDescriptionVisitor<Unit, Nothing?, ConeKo
         printer.print(constantReference.name)
     }
 
-    override fun visitValueParameterReference(valueParameterReference: KtValueParameterReference<ConeKotlinType, ConeDiagnostic>, data: Nothing?) {
-        printer.print(valueParameterReference.name)
+    override fun visitValueParameterReference(konstueParameterReference: KtValueParameterReference<ConeKotlinType, ConeDiagnostic>, data: Nothing?) {
+        printer.print(konstueParameterReference.name)
     }
 
     private fun inBracketsIfNecessary(parent: KtContractDescriptionElement<ConeKotlinType, ConeDiagnostic>, child: KtContractDescriptionElement<ConeKotlinType, ConeDiagnostic>, block: () -> Unit) {

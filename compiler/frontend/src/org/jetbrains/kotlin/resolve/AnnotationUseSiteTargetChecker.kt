@@ -33,9 +33,9 @@ object AnnotationUseSiteTargetChecker {
         }
 
         if (annotated is KtFunction) {
-            for (parameter in annotated.valueParameters) {
+            for (parameter in annotated.konstueParameters) {
                 if (parameter.hasValOrVar()) continue
-                val parameterDescriptor = trace.bindingContext[BindingContext.VALUE_PARAMETER, parameter] ?: continue
+                konst parameterDescriptor = trace.bindingContext[BindingContext.VALUE_PARAMETER, parameter] ?: continue
 
                 trace.checkDeclaration(parameter, languageVersionSettings, parameterDescriptor)
                 parameter.typeReference?.let { trace.checkTypeReference(it, languageVersionSettings, isReceiver = false) }
@@ -63,10 +63,10 @@ object AnnotationUseSiteTargetChecker {
         isReceiver: Boolean
     ) {
         for (annotationEntry in topLevelTypeReference.annotationEntries) {
-            val target = annotationEntry.useSiteTarget?.getAnnotationUseSiteTarget() ?: continue
+            konst target = annotationEntry.useSiteTarget?.getAnnotationUseSiteTarget() ?: continue
 
             if (target != AnnotationUseSiteTarget.RECEIVER || !isReceiver) {
-                val diagnostic =
+                konst diagnostic =
                     if (languageVersionSettings.supportsFeature(LanguageFeature.RestrictionOfWrongAnnotationsWithUseSiteTargetsOnTypes))
                         WRONG_ANNOTATION_TARGET_WITH_USE_SITE_TARGET.on(annotationEntry, "undefined target", target.renderName)
                     else
@@ -83,8 +83,8 @@ object AnnotationUseSiteTargetChecker {
         descriptor: DeclarationDescriptor
     ) {
         for (annotation in annotated.annotationEntries) {
-            val useSiteTarget = annotation.useSiteTarget
-            val target = useSiteTarget?.getAnnotationUseSiteTarget() ?: continue
+            konst useSiteTarget = annotation.useSiteTarget
+            konst target = useSiteTarget?.getAnnotationUseSiteTarget() ?: continue
 
             when (target) {
                 AnnotationUseSiteTarget.FIELD -> checkIfHasBackingField(annotated, descriptor, annotation)
@@ -103,7 +103,7 @@ object AnnotationUseSiteTargetChecker {
                     if (annotated !is KtParameter) {
                         report(INAPPLICABLE_PARAM_TARGET.on(annotation))
                     } else {
-                        val containingDeclaration = bindingContext[BindingContext.VALUE_PARAMETER, annotated]?.containingDeclaration
+                        konst containingDeclaration = bindingContext[BindingContext.VALUE_PARAMETER, annotated]?.containingDeclaration
                         if (containingDeclaration !is ConstructorDescriptor || !containingDeclaration.isPrimary) {
                             report(INAPPLICABLE_PARAM_TARGET.on(annotation))
                         } else if (!annotated.hasValOrVar()) {
@@ -143,7 +143,7 @@ object AnnotationUseSiteTargetChecker {
     private fun BindingTrace.checkIfMutableProperty(annotated: KtAnnotated, annotation: KtAnnotationEntry) {
         if (!checkIfProperty(annotated, annotation, INAPPLICABLE_TARGET_ON_PROPERTY)) return
 
-        val isMutable = when (annotated) {
+        konst isMutable = when (annotated) {
             is KtProperty -> annotated.isVar
             is KtParameter -> annotated.isMutable
             else -> false
@@ -159,7 +159,7 @@ object AnnotationUseSiteTargetChecker {
         annotation: KtAnnotationEntry,
         diagnosticFactory: DiagnosticFactory1<PsiElement, String>
     ): Boolean {
-        val isProperty = when (annotated) {
+        konst isProperty = when (annotated) {
             is KtProperty -> !annotated.isLocal
             is KtParameter -> annotated.hasValOrVar()
             else -> false

@@ -4,13 +4,13 @@ import kotlin.reflect.KProperty
 
 class NotImplemented<T>(){
     operator fun getValue(thisRef: Any?, prop: KProperty<*>): T = notImplemented()
-    operator fun setValue(thisRef: Any?, prop: KProperty<*>, value: T): Nothing = notImplemented()
+    operator fun setValue(thisRef: Any?, prop: KProperty<*>, konstue: T): Nothing = notImplemented()
 }
 
 fun notImplemented() : Nothing = notImplemented()
 
 class Test {
-    val x: Int by NotImplemented<Int>()
+    konst x: Int by NotImplemented<Int>()
 }
 
 fun box(): String {

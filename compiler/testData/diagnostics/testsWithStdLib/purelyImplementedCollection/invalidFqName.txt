@@ -1,12 +1,12 @@
 package
 
-public val x: A<kotlin.String>
-public val y: B<kotlin.String>
+public konst x: A<kotlin.String>
+public konst y: B<kotlin.String>
 
-@kotlin.jvm.PurelyImplements(value = "") public open class A</*0*/ T : kotlin.Any!> : java.util.AbstractList<T!> {
+@kotlin.jvm.PurelyImplements(konstue = "") public open class A</*0*/ T : kotlin.Any!> : java.util.AbstractList<T!> {
     public constructor A</*0*/ T : kotlin.Any!>()
     protected/*protected and package*/ final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
-    @get:java.lang.Override public open override /*1*/ val size: kotlin.Int
+    @get:java.lang.Override public open override /*1*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: T!): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: T!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<T!>): kotlin.Boolean
@@ -37,15 +37,15 @@ public val y: B<kotlin.String>
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val MAX_ARRAY_SIZE: kotlin.Int = 2147483639
+    invisible_fake const final override /*1*/ /*fake_override*/ konst MAX_ARRAY_SIZE: kotlin.Int = 2147483639
     invisible_fake open override /*1*/ /*fake_override*/ fun </*0*/ T : kotlin.Any!> finishToArray(/*0*/ r: kotlin.Array<(out) T!>!, /*1*/ it: kotlin.collections.(Mutable)Iterator<*>!): kotlin.Array<(out) T!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun hugeCapacity(/*0*/ minCapacity: kotlin.Int): kotlin.Int
 }
 
-@kotlin.jvm.PurelyImplements(value = "[INVALID]") public open class B</*0*/ T : kotlin.Any!> : java.util.AbstractList<T!> {
+@kotlin.jvm.PurelyImplements(konstue = "[INVALID]") public open class B</*0*/ T : kotlin.Any!> : java.util.AbstractList<T!> {
     public constructor B</*0*/ T : kotlin.Any!>()
     protected/*protected and package*/ final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
-    public abstract override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public abstract override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: T!): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: T!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<T!>): kotlin.Boolean
@@ -76,7 +76,7 @@ public val y: B<kotlin.String>
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     // Static members
-    invisible_fake const final override /*1*/ /*fake_override*/ val MAX_ARRAY_SIZE: kotlin.Int = 2147483639
+    invisible_fake const final override /*1*/ /*fake_override*/ konst MAX_ARRAY_SIZE: kotlin.Int = 2147483639
     invisible_fake open override /*1*/ /*fake_override*/ fun </*0*/ T : kotlin.Any!> finishToArray(/*0*/ r: kotlin.Array<(out) T!>!, /*1*/ it: kotlin.collections.(Mutable)Iterator<*>!): kotlin.Array<(out) T!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun hugeCapacity(/*0*/ minCapacity: kotlin.Int): kotlin.Int
 }

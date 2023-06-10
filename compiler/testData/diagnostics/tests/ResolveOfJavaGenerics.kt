@@ -8,7 +8,7 @@ fun test(a : java.lang.annotation.RetentionPolicy) {
 
 fun test() {
   java.util.Collections.<!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>emptyList<!>()
-  val a : Collection<String>? = java.util.Collections.emptyList()
+  konst a : Collection<String>? = java.util.Collections.emptyList()
 }
 
 fun test(a : <!PLATFORM_CLASS_MAPPED_TO_KOTLIN!>java.lang.Comparable<Int><!>) {

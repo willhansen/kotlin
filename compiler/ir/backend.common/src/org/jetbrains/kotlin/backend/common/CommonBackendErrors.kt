@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.diagnostics.rendering.Renderers.MODULE_WITH_PLATFORM
 import org.jetbrains.kotlin.diagnostics.rendering.RootDiagnosticRendererFactory
 
 object CommonBackendErrors {
-    val NO_ACTUAL_FOR_EXPECT by error2<PsiElement, String, ModuleDescriptor>()
-    val MANY_INTERFACES_MEMBER_NOT_IMPLEMENTED by error2<PsiElement, String, String>()
-    val MANY_IMPL_MEMBER_NOT_IMPLEMENTED by error2<PsiElement, String, String>()
+    konst NO_ACTUAL_FOR_EXPECT by error2<PsiElement, String, ModuleDescriptor>()
+    konst MANY_INTERFACES_MEMBER_NOT_IMPLEMENTED by error2<PsiElement, String, String>()
+    konst MANY_IMPL_MEMBER_NOT_IMPLEMENTED by error2<PsiElement, String, String>()
 
     init {
         RootDiagnosticRendererFactory.registerFactory(KtDefaultCommonBackendErrorMessages)
@@ -25,7 +25,7 @@ object CommonBackendErrors {
 }
 
 object KtDefaultCommonBackendErrorMessages : BaseDiagnosticRendererFactory() {
-    override val MAP = KtDiagnosticFactoryToRendererMap("KT").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("KT").also { map ->
         map.put(
             CommonBackendErrors.NO_ACTUAL_FOR_EXPECT,
             "Expected {0} has no actual declaration in module {1}",

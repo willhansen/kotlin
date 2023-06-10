@@ -26,13 +26,13 @@ object FirKClassWithIncorrectTypeArgumentChecker : FirCallableDeclarationChecker
         // When a type parameter is used as a type argument for KClass, it shouldn't be nullable.
         //  bad:  fun <T> test1() = T::class
         //  okay: fun <T: Any> test2() = T::class
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
 
-        val returnType = declaration.returnTypeRef.coneType
+        konst returnType = declaration.returnTypeRef.coneType
         if (!returnType.isKClassTypeWithErrorOrNullableArgument(context.session.typeContext)) return
 
-        val typeArgument = (returnType.typeArguments[0] as ConeKotlinTypeProjection).type
+        konst typeArgument = (returnType.typeArguments[0] as ConeKotlinTypeProjection).type
         typeArgument.typeParameterFromError?.let {
             reporter.reportOn(source, FirErrors.KCLASS_WITH_NULLABLE_TYPE_PARAMETER_IN_SIGNATURE, it, context)
         }
@@ -40,7 +40,7 @@ object FirKClassWithIncorrectTypeArgumentChecker : FirCallableDeclarationChecker
 
     private fun ConeKotlinType.isKClassTypeWithErrorOrNullableArgument(context: ConeInferenceContext): Boolean {
         if (!this.isKClassType()) return false
-        val argumentType = typeArguments.toList().singleOrNull()?.let {
+        konst argumentType = typeArguments.toList().singleOrNull()?.let {
             when (it) {
                 is ConeStarProjection -> null
                 is ConeKotlinTypeProjection -> it.type
@@ -54,7 +54,7 @@ object FirKClassWithIncorrectTypeArgumentChecker : FirCallableDeclarationChecker
         }
     }
 
-    private val ConeKotlinType.typeParameterFromError: FirTypeParameterSymbol?
+    private konst ConeKotlinType.typeParameterFromError: FirTypeParameterSymbol?
         get() = ((this as? ConeErrorType)?.diagnostic as? ConeTypeParameterInQualifiedAccess)?.symbol
 
 }

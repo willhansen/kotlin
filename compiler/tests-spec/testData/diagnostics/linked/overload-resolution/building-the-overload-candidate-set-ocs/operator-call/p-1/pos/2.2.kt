@@ -23,7 +23,7 @@ fun case2(a: A?, c: C) {
     <!DEBUG_INFO_CALL("fqName: testPackCase2.plusAssign; typeCall: operator extension function")!>a?.b <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>+=<!> c<!>
     a?.b.<!DEBUG_INFO_CALL("fqName: testPackCase2.plusAssign; typeCall: operator extension function")!>plusAssign(c)<!>
 
-    val x = {
+    konst x = {
         <!DEBUG_INFO_CALL("fqName: testPackCase2.plusAssign; typeCall: operator extension function")!>a?.b <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>+=<!> c<!>
         a?.b.<!DEBUG_INFO_CALL("fqName: testPackCase2.plusAssign; typeCall: operator extension function")!>plusAssign(c)<!>
     }()
@@ -34,7 +34,7 @@ fun case2(a: A?, c: C) {
 
 }
 
-class A(val b: B)
+class A(konst b: B)
 
 class B {
     operator fun plusAssign(c: C) {
@@ -62,7 +62,7 @@ fun case3(a: A?, c: C) {
     <!DEBUG_INFO_CALL("fqName: testPackCase3.plusAssign; typeCall: operator extension function")!>a?.b <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>+=<!> c<!>
     a?.b.<!DEBUG_INFO_CALL("fqName: testPackCase3.plusAssign; typeCall: operator extension function")!>plusAssign(c)<!>
 
-    val x = {
+    konst x = {
         <!DEBUG_INFO_CALL("fqName: testPackCase3.plusAssign; typeCall: operator extension function")!>a?.b <!NULLABLE_EXTENSION_OPERATOR_WITH_SAFE_CALL_RECEIVER!>+=<!> c<!>
         a?.b.<!DEBUG_INFO_CALL("fqName: testPackCase3.plusAssign; typeCall: operator extension function")!>plusAssign(c)<!>
     }()
@@ -73,7 +73,7 @@ fun case3(a: A?, c: C) {
 
 }
 
-class A(val b: B)
+class A(konst b: B)
 
 class B {
     operator fun plusAssign(c: C) {

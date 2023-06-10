@@ -10,9 +10,9 @@ import android.os.Parcel
 import android.os.Parcelable
 
 @Parcelize
-data class Test(val sealedClass1 : SealedClass1<*, *>) : Parcelable
+data class Test(konst sealedClass1 : SealedClass1<*, *>) : Parcelable
 
-sealed class SealedClass1<out SC1 : SealedClass1<SC1, SC2>, out SC2 : SealedClass2<SC1, SC2>>(val sealedClass2Type: Class<out SC2>) : Parcelable {
+sealed class SealedClass1<out SC1 : SealedClass1<SC1, SC2>, out SC2 : SealedClass2<SC1, SC2>>(konst sealedClass2Type: Class<out SC2>) : Parcelable {
     @Parcelize
     object SealedClass1Impl1 : SealedClass1<SealedClass1Impl1, SealedClass2.SealedClass2Impl1>(SealedClass2.SealedClass2Impl1::class.java)
 }
@@ -23,13 +23,13 @@ sealed class SealedClass2<out SC1 : SealedClass1<SC1, SC2>, out SC2 : SealedClas
 }
 
 fun box() = parcelTest { parcel ->
-    val test = Test(SealedClass1.SealedClass1Impl1)
+    konst test = Test(SealedClass1.SealedClass1Impl1)
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = parcelableCreator<Test>().createFromParcel(parcel)
+    konst test2 = parcelableCreator<Test>().createFromParcel(parcel)
     assert(test == test2)
 }

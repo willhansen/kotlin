@@ -13,7 +13,7 @@ INCOMING <- BB 0
     CALL 'public final fun greater (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GT
 CONTENT
 OUTGOING -> BB 3
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 BB 2
 INCOMING <- BB 0
     CALL 'public final fun greater (arg0: kotlin.Int, arg1: kotlin.Int): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=GT
@@ -23,7 +23,7 @@ OUTGOING -> BB 4
     When exit: WHEN type=kotlin.Int origin=IF
 BB 3
 INCOMING <- BB 1
-    CONST Boolean type=kotlin.Boolean value=true
+    CONST Boolean type=kotlin.Boolean konstue=true
 CONTENT
       1 GET_VAR 'y: kotlin.Int declared in <root>.max' type=kotlin.Int origin=null
 OUTGOING -> BB 4

@@ -1,2 +1,2 @@
-val abc = <caret>[1, 2, 3]
+konst abc = <caret>[1, 2, 3]
 

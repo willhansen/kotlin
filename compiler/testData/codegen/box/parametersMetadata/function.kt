@@ -11,10 +11,10 @@ class A() {
 }
 
 fun box(): String {
-    val clazz = A::class.java
-    val method = clazz.getDeclaredMethod("test", String::class.java)
-    val parameters = method.getParameters()
+    konst clazz = A::class.java
+    konst method = clazz.getDeclaredMethod("test", String::class.java)
+    konst parameters = method.getParameters()
 
-    if (parameters[0].modifiers != 0) return "wrong modifier on value parameter: ${parameters[0].modifiers}"
+    if (parameters[0].modifiers != 0) return "wrong modifier on konstue parameter: ${parameters[0].modifiers}"
     return parameters[0].name
 }

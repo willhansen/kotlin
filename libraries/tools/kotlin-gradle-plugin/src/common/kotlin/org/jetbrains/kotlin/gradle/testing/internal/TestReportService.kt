@@ -23,7 +23,7 @@ internal typealias TaskError = Pair<String, Error>
 
 internal interface UsesTestReportService : Task {
     @get:Internal
-    val testReportServiceProvider: Property<TestReportService>
+    konst testReportServiceProvider: Property<TestReportService>
 }
 
 /**
@@ -31,13 +31,13 @@ internal interface UsesTestReportService : Task {
  */
 internal abstract class TestReportService : BuildService<TestReportService.TestReportServiceParameters>, AutoCloseable {
     internal interface TestReportServiceParameters : BuildServiceParameters {
-        val testTasksStateFile: RegularFileProperty
+        konst testTasksStateFile: RegularFileProperty
     }
 
-    private val log = Logging.getLogger(this.javaClass)
-    private val previouslyFailedTestTasks = readPreviouslyFailedTasks()
-    private val reportHasFailedTests = ConcurrentHashMap<String, Boolean>()
-    private val testTaskSuppressedFailures = ConcurrentHashMap<String, MutableList<TaskError>>()
+    private konst log = Logging.getLogger(this.javaClass)
+    private konst previouslyFailedTestTasks = readPreviouslyFailedTasks()
+    private konst reportHasFailedTests = ConcurrentHashMap<String, Boolean>()
+    private konst testTaskSuppressedFailures = ConcurrentHashMap<String, MutableList<TaskError>>()
 
     /**
      * Marks [KotlinTestReport] with [reportTaskPath] as a report containing failed tests during the build.
@@ -81,11 +81,11 @@ internal abstract class TestReportService : BuildService<TestReportService.TestR
      */
     fun hasTestTaskFailedPreviously(path: String) = previouslyFailedTestTasks.remove(path)
 
-    private val binaryStateFile: File
+    private konst binaryStateFile: File
         get() = parameters.testTasksStateFile.get().asFile
 
     private fun readPreviouslyFailedTasks(): MutableSet<String> {
-        val failedTasksSet: MutableSet<String> = ConcurrentHashMap.newKeySet()
+        konst failedTasksSet: MutableSet<String> = ConcurrentHashMap.newKeySet()
         if (!binaryStateFile.exists()) return failedTasksSet
         try {
             ObjectInputStream(FileInputStream(binaryStateFile)).use {
@@ -99,7 +99,7 @@ internal abstract class TestReportService : BuildService<TestReportService.TestR
     }
 
     private fun writePreviouslyFailedTasks() {
-        previouslyFailedTestTasks += testTaskSuppressedFailures.values.flatMap { taskErrors -> taskErrors.map { (taskPath, _) -> taskPath } }
+        previouslyFailedTestTasks += testTaskSuppressedFailures.konstues.flatMap { taskErrors -> taskErrors.map { (taskPath, _) -> taskPath } }
         binaryStateFile.parentFile.mkdirs()
         try {
             ObjectOutputStream(FileOutputStream(binaryStateFile)).use {

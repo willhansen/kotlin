@@ -64,7 +64,7 @@ KtFile: LocalDeclarations.kt
         MODIFIER_LIST
           PsiElement(out)('out')
         PsiWhiteSpace(' ')
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('foo')
         PsiWhiteSpace(' ')

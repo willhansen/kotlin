@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.name.Name
  * diagnostic, which surfaces as "SMARTCAST_IMPOSSIBLE" diagnostic.
  */
 class FirUnstableSmartcastTypeScope(
-    private val smartcastScope: FirTypeScope,
-    private val originalScope: FirTypeScope
+    private konst smartcastScope: FirTypeScope,
+    private konst originalScope: FirTypeScope
 ) : FirTypeScope() {
-    private val scopes = listOf(originalScope, smartcastScope)
-    private val symbolsFromUnstableSmartcast = mutableSetOf<FirCallableSymbol<*>>()
+    private konst scopes = listOf(originalScope, smartcastScope)
+    private konst symbolsFromUnstableSmartcast = mutableSetOf<FirCallableSymbol<*>>()
     override fun processClassifiersByNameWithSubstitution(
         name: Name,
         processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit
@@ -38,7 +38,7 @@ class FirUnstableSmartcastTypeScope(
         name: Name,
         noinline processor: (T) -> Unit
     ) {
-        val unique = mutableSetOf<T>()
+        konst unique = mutableSetOf<T>()
         originalScope.process(name) {
             unique += it
             processor(it)
@@ -64,7 +64,7 @@ class FirUnstableSmartcastTypeScope(
         name: N,
         noinline processor: (T, FirTypeScope) -> ProcessorAction
     ): ProcessorAction {
-        val unique = mutableSetOf<T>()
+        konst unique = mutableSetOf<T>()
         originalScope.process(name) { symbol, firTypeScope ->
             unique += symbol
             processor(symbol, firTypeScope)
@@ -109,7 +109,7 @@ class FirUnstableSmartcastTypeScope(
         return scopes.flatMapTo(hashSetOf()) { it.getClassifierNames() }
     }
 
-    override val scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst scopeOwnerLookupNames: List<String> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         scopes.flatMap { it.scopeOwnerLookupNames }
     }
 }

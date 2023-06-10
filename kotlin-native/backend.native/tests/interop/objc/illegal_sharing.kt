@@ -17,8 +17,8 @@ private class NSObjectImpl : NSObject() {
 
 // Also see counterpart in interop/objc/tests/sharing.kt
 fun main() = withWorker {
-    val obj = NSObjectImpl()
-    val array: NSArray = NSMutableArray().apply {
+    konst obj = NSObjectImpl()
+    konst array: NSArray = NSMutableArray().apply {
         addObject(obj)
     }
 

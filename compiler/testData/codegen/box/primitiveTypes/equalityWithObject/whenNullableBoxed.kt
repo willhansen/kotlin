@@ -1,13 +1,13 @@
-class CInt(val value: Int)
-val nCInt3: CInt? = CInt(3)
+class CInt(konst konstue: Int)
+konst nCInt3: CInt? = CInt(3)
 
-class CLong(val value: Long)
-val nCLong3: CLong? = CLong(3)
+class CLong(konst konstue: Long)
+konst nCLong3: CLong? = CLong(3)
 
-var subjectEvaluated: Int = 0
+var subjectEkonstuated: Int = 0
 
 fun <T> subject(x: T): T {
-    subjectEvaluated++
+    subjectEkonstuated++
     return x
 }
 
@@ -15,7 +15,7 @@ fun doTestInt(i: Int?) =
         when (subject(i)) {
             null -> "null"
             0 -> "zero"
-            nCInt3?.value -> "three"
+            nCInt3?.konstue -> "three"
             42 -> "magic"
             else -> "other"
         }
@@ -24,22 +24,22 @@ fun doTestLong(i: Long?) =
         when (subject(i)) {
             null -> "null"
             0L -> "zero"
-            nCLong3?.value -> "three"
+            nCLong3?.konstue -> "three"
             42L -> "magic"
             else -> "other"
         }
 
 fun testInt(i: Int?): String {
-    subjectEvaluated = 0
-    val result = doTestInt(i)
-    if (subjectEvaluated != 1) throw AssertionError("Subject evaluated $subjectEvaluated")
+    subjectEkonstuated = 0
+    konst result = doTestInt(i)
+    if (subjectEkonstuated != 1) throw AssertionError("Subject ekonstuated $subjectEkonstuated")
     return result
 }
 
 fun testLong(i: Long?): String {
-    subjectEvaluated = 0
-    val result = doTestLong(i)
-    if (subjectEvaluated != 1) throw AssertionError("Subject evaluated $subjectEvaluated")
+    subjectEkonstuated = 0
+    konst result = doTestLong(i)
+    if (subjectEkonstuated != 1) throw AssertionError("Subject ekonstuated $subjectEkonstuated")
     return result
 }
 

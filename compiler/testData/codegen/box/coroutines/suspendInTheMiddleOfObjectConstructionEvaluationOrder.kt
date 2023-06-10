@@ -19,9 +19,9 @@ fun builder(c: suspend Controller.() -> Unit) {
     c.startCoroutine(Controller(), EmptyContinuation)
 }
 
-val logger = StringBuilder()
+konst logger = StringBuilder()
 
-class A(val first: String, val second: String) {
+class A(konst first: String, konst second: String) {
     init {
         logger.append("A.<init>;")
     }

@@ -1,6 +1,6 @@
 object TestObject {
-    val testFloat: Float = 0.9999.toFloat()
-    val otherFloat: Float = 1.01.toFloat()
+    konst testFloat: Float = 0.9999.toFloat()
+    konst otherFloat: Float = 1.01.toFloat()
 }
 
 fun box(): String {

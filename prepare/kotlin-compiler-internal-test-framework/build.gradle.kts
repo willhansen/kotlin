@@ -2,7 +2,7 @@ plugins {
     java
 }
 
-val testModules = listOf(
+konst testModules = listOf(
     ":compiler:test-infrastructure",
     ":compiler:test-infrastructure-utils",
     ":compiler:tests-compiler-utils",
@@ -10,7 +10,7 @@ val testModules = listOf(
     ":generators:test-generator"
 )
 
-val mainModules = listOf(
+konst mainModules = listOf(
     ":generators"
 )
 

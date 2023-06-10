@@ -32,24 +32,24 @@ import java.util.*
 
 
 fun <RC : ResolvedCall<*>> RC.createFlatSignature(): FlatSignature<RC> {
-    val originalDescriptor = candidateDescriptor.original
-    val originalValueParameters = originalDescriptor.valueParameters
+    konst originalDescriptor = candidateDescriptor.original
+    konst originalValueParameters = originalDescriptor.konstueParameters
 
     var numDefaults = 0
-    val valueArgumentToParameterType = HashMap<ValueArgument, KotlinType>()
-    for ((valueParameter, resolvedValueArgument) in valueArguments.entries) {
+    konst konstueArgumentToParameterType = HashMap<ValueArgument, KotlinType>()
+    for ((konstueParameter, resolvedValueArgument) in konstueArguments.entries) {
         if (resolvedValueArgument is DefaultValueArgument) {
             numDefaults++
         } else {
-            val originalValueParameter = originalValueParameters[valueParameter.index]
-            val parameterType = originalValueParameter.argumentValueType
-            for (valueArgument in resolvedValueArgument.arguments) {
-                valueArgumentToParameterType[valueArgument] = parameterType
+            konst originalValueParameter = originalValueParameters[konstueParameter.index]
+            konst parameterType = originalValueParameter.argumentValueType
+            for (konstueArgument in resolvedValueArgument.arguments) {
+                konstueArgumentToParameterType[konstueArgument] = parameterType
             }
         }
     }
 
-    return FlatSignature.create(this, originalDescriptor, numDefaults, call.valueArguments.map { valueArgumentToParameterType[it] })
+    return FlatSignature.create(this, originalDescriptor, numDefaults, call.konstueArguments.map { konstueArgumentToParameterType[it] })
 }
 
 fun createOverloadingConflictResolver(

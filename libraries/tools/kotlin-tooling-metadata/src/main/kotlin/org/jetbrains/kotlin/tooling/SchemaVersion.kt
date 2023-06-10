@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.tooling
 
-internal data class SchemaVersion(val major: Int, val minor: Int, val patch: Int) : Comparable<SchemaVersion> {
+internal data class SchemaVersion(konst major: Int, konst minor: Int, konst patch: Int) : Comparable<SchemaVersion> {
     override fun compareTo(other: SchemaVersion): Int {
         (this.major - other.major).takeIf { it != 0 }?.let { return it }
         (this.minor - other.minor).takeIf { it != 0 }?.let { return it }
@@ -17,7 +17,7 @@ internal data class SchemaVersion(val major: Int, val minor: Int, val patch: Int
     }
 
     companion object {
-        val current by lazy { SchemaVersion.parseStringOrThrow(KotlinToolingMetadata.currentSchemaVersion) }
+        konst current by lazy { SchemaVersion.parseStringOrThrow(KotlinToolingMetadata.currentSchemaVersion) }
     }
 }
 
@@ -26,7 +26,7 @@ internal fun SchemaVersion.Companion.parseStringOrThrow(schemaVersion: String): 
         "Illegal schemaVersion $schemaVersion. Expected {major}.{minor}.{patch}"
     )
 
-    val parts = schemaVersion.split(".")
+    konst parts = schemaVersion.split(".")
     if (parts.size != 3) throwIllegalSchemaVersion()
 
     return SchemaVersion(

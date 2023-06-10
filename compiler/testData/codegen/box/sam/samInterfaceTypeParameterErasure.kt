@@ -18,6 +18,6 @@ class J {
 // FILE: 1.kt
 
 fun box(): String {
-    val supertypes = J.foo { a, b, c, d, e -> }
+    konst supertypes = J.foo { a, b, c, d, e -> }
     return if (supertypes == "[interface S]") "OK" else "Fail: $supertypes"
 }

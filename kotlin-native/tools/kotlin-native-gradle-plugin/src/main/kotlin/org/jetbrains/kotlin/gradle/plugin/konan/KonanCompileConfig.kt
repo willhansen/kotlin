@@ -32,7 +32,7 @@ abstract class KonanCompileConfig<T: KonanCompileTask>(name: String,
                                                        targets: Iterable<String>)
     : KonanBuildingConfig<T>(name, type, project, targets), KonanCompileSpec {
 
-    protected abstract val typeForDescription: String
+    protected abstract konst typeForDescription: String
 
     override fun generateTaskDescription(task: T) =
             "Build the Kotlin/Native $typeForDescription '${task.name}' for target '${task.konanTarget}'"
@@ -60,8 +60,8 @@ abstract class KonanCompileConfig<T: KonanCompileTask>(name: String,
     override fun commonSrcFiles(vararg files: Any) = tasks().forEach { it.configure { commonSrcFiles(*files) } }
     override fun commonSrcFiles(files: Collection<Any>) = tasks().forEach { it.configure { commonSrcFiles(files) } }
 
-    override fun linkerOpts(values: List<String>) = tasks().forEach { it.configure { linkerOpts(values) } }
-    override fun linkerOpts(vararg values: String) = tasks().forEach { it.configure { linkerOpts(*values) } }
+    override fun linkerOpts(konstues: List<String>) = tasks().forEach { it.configure { linkerOpts(konstues) } }
+    override fun linkerOpts(vararg konstues: String) = tasks().forEach { it.configure { linkerOpts(*konstues) } }
 
     override fun enableDebug(flag: Boolean) = tasks().forEach { it.configure { enableDebug(flag) } }
     override fun noStdLib(flag: Boolean) = tasks().forEach { it.configure { noStdLib(flag) } }
@@ -85,10 +85,10 @@ open class KonanProgram(name: String,
         project,
         targets
 ) {
-    override val typeForDescription: String
+    override konst typeForDescription: String
         get() = "executable"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanBinBaseDir
 }
 
@@ -100,10 +100,10 @@ open class KonanDynamic(name: String,
         project,
         targets
 ) {
-    override val typeForDescription: String
+    override konst typeForDescription: String
         get() = "dynamic library"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanBinBaseDir
 
     override fun targetIsSupported(target: KonanTarget): Boolean = target != WASM32
@@ -117,10 +117,10 @@ open class KonanFramework(name: String,
         project,
         targets
 ) {
-    override val typeForDescription: String
+    override konst typeForDescription: String
         get() = "framework"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanBinBaseDir
 
     override fun targetIsSupported(target: KonanTarget): Boolean =
@@ -135,10 +135,10 @@ open class KonanLibrary(name: String,
         project,
         targets
 ) {
-    override val typeForDescription: String
+    override konst typeForDescription: String
         get() = "library"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanLibsBaseDir
 }
 
@@ -150,7 +150,7 @@ open class KonanBitcode(name: String,
         project,
         targets
 ) {
-    override val typeForDescription: String
+    override konst typeForDescription: String
         get() = "bitcode"
 
     override fun generateTaskDescription(task: KonanCompileBitcodeTask) =
@@ -162,6 +162,6 @@ open class KonanBitcode(name: String,
     override fun generateTargetAliasTaskDescription(task: Task, targetName: String) =
             "Generates bitcode for the artifact '${task.name}' for '$targetName'"
 
-    override val defaultBaseDir: File
+    override konst defaultBaseDir: File
         get() = project.konanBitcodeBaseDir
 }

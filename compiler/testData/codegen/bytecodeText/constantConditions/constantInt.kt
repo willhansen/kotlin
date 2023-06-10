@@ -1,5 +1,5 @@
 // FILE: util.kt
-const val MAGIC = 42
+const konst MAGIC = 42
 
 fun doStuffEq() {}
 fun doStuffNotEq() {}

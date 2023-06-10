@@ -31,13 +31,13 @@ import kotlin.reflect.KClass
  */
 abstract class FirDeclarationGenerationExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("ExistingClassModification")
+        konst NAME = FirExtensionPointName("ExistingClassModification")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirDeclarationGenerationExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirDeclarationGenerationExtension::class
 
     /*
      * Can be called on SUPERTYPES stage
@@ -79,17 +79,17 @@ abstract class FirDeclarationGenerationExtension(session: FirSession) : FirExten
     // ----------------------------------- internal utils -----------------------------------
 
     @FirExtensionApiInternals
-    val nestedClassifierNamesCache: FirCache<FirClassSymbol<*>, Set<Name>, NestedClassGenerationContext> =
+    konst nestedClassifierNamesCache: FirCache<FirClassSymbol<*>, Set<Name>, NestedClassGenerationContext> =
         session.firCachesFactory.createCache { symbol, context ->
             getNestedClassifiersNames(symbol, context)
         }
 
     @FirExtensionApiInternals
-    val topLevelClassIdsCache: FirLazyValue<Set<ClassId>> =
+    konst topLevelClassIdsCache: FirLazyValue<Set<ClassId>> =
         session.firCachesFactory.createLazyValue { getTopLevelClassIds() }
 
     @FirExtensionApiInternals
-    val topLevelCallableIdsCache: FirLazyValue<Set<CallableId>> =
+    konst topLevelCallableIdsCache: FirLazyValue<Set<CallableId>> =
         session.firCachesFactory.createLazyValue { getTopLevelCallableIds() }
 
 }
@@ -98,17 +98,17 @@ typealias MemberGenerationContext = DeclarationGenerationContext.Member
 typealias NestedClassGenerationContext = DeclarationGenerationContext.Nested
 
 sealed class DeclarationGenerationContext<T : FirContainingNamesAwareScope>(
-    val owner: FirClassSymbol<*>,
-    val declaredScope: T?,
+    konst owner: FirClassSymbol<*>,
+    konst declaredScope: T?,
 ) {
     // is needed for `hashCode` implementation
-    protected abstract val kind: Int
+    protected abstract konst kind: Int
 
     class Member(
         owner: FirClassSymbol<*>,
         declaredScope: FirClassDeclaredMemberScope?,
     ) : DeclarationGenerationContext<FirClassDeclaredMemberScope>(owner, declaredScope) {
-        override val kind: Int
+        override konst kind: Int
             get() = 1
     }
 
@@ -116,7 +116,7 @@ sealed class DeclarationGenerationContext<T : FirContainingNamesAwareScope>(
         owner: FirClassSymbol<*>,
         declaredScope: FirNestedClassifierScope?,
     ) : DeclarationGenerationContext<FirNestedClassifierScope>(owner, declaredScope) {
-        override val kind: Int
+        override konst kind: Int
             get() = 2
     }
 
@@ -133,4 +133,4 @@ sealed class DeclarationGenerationContext<T : FirContainingNamesAwareScope>(
     }
 }
 
-val FirExtensionService.declarationGenerators: List<FirDeclarationGenerationExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.declarationGenerators: List<FirDeclarationGenerationExtension> by FirExtensionService.registeredExtensions()

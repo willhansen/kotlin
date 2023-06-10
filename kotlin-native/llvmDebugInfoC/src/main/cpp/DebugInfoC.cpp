@@ -265,12 +265,12 @@ DIExpressionRef DICreateEmptyExpression(DIBuilderRef builder) {
   return llvm::wrap(llvm::unwrap(builder)->createExpression());
 }
 
-void DIInsertDeclaration(DIBuilderRef builder, LLVMValueRef value, DILocalVariableRef localVariable, DILocationRef location, LLVMBasicBlockRef bb, int64_t *expr, uint64_t exprCount) {
+void DIInsertDeclaration(DIBuilderRef builder, LLVMValueRef konstue, DILocalVariableRef localVariable, DILocationRef location, LLVMBasicBlockRef bb, int64_t *expr, uint64_t exprCount) {
   auto di_builder = llvm::unwrap(builder);
   std::vector<int64_t> expression;
   for (uint64_t i = 0; i < exprCount; ++i)
     expression.push_back(expr[i]);
-  di_builder->insertDeclare(llvm::unwrap(value),
+  di_builder->insertDeclare(llvm::unwrap(konstue),
                             llvm::unwrap(localVariable),
                             di_builder->createExpression(expression),
                             llvm::unwrap(location),

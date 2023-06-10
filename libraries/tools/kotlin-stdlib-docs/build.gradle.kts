@@ -8,22 +8,22 @@ plugins {
     id("org.jetbrains.dokka")
 }
 
-val isTeamcityBuild = project.hasProperty("teamcity.version")
+konst isTeamcityBuild = project.hasProperty("teamcity.version")
 
 // kotlin/libraries/tools/kotlin-stdlib-docs  ->  kotlin
-val kotlin_root = rootProject.file("../../../").absoluteFile.invariantSeparatorsPath
-val kotlin_libs by extra("$buildDir/libs")
+konst kotlin_root = rootProject.file("../../../").absoluteFile.invariantSeparatorsPath
+konst kotlin_libs by extra("$buildDir/libs")
 
-val rootProperties = java.util.Properties().apply {
+konst rootProperties = java.util.Properties().apply {
     file(kotlin_root).resolve("gradle.properties").inputStream().use { stream -> load(stream) }
 }
-val defaultSnapshotVersion: String by rootProperties
-val kotlinLanguageVersion: String by rootProperties
+konst defaultSnapshotVersion: String by rootProperties
+konst kotlinLanguageVersion: String by rootProperties
 
-val githubRevision = if (isTeamcityBuild) project.property("githubRevision") else "master"
-val artifactsVersion by extra(if (isTeamcityBuild) project.property("deployVersion") as String else defaultSnapshotVersion)
-val artifactsRepo by extra(if (isTeamcityBuild) project.property("kotlinLibsRepo") as String else "$kotlin_root/build/repo")
-val dokka_version: String by project
+konst githubRevision = if (isTeamcityBuild) project.property("githubRevision") else "master"
+konst artifactsVersion by extra(if (isTeamcityBuild) project.property("deployVersion") as String else defaultSnapshotVersion)
+konst artifactsRepo by extra(if (isTeamcityBuild) project.property("kotlinLibsRepo") as String else "$kotlin_root/build/repo")
+konst dokka_version: String by project
 
 println("# Parameters summary:")
 println("    isTeamcityBuild: $isTeamcityBuild")
@@ -34,13 +34,13 @@ println("    artifacts version: $artifactsVersion")
 println("    artifacts repo: $artifactsRepo")
 
 
-val outputDir = file(findProperty("docsBuildDir") as String? ?: "$buildDir/doc")
-val inputDirPrevious = file(findProperty("docsPreviousVersionsDir") as String? ?: "$outputDir/previous")
-val outputDirPartial = outputDir.resolve("partial")
-val kotlin_native_root = file("$kotlin_root/kotlin-native").absolutePath
-val templatesDir = file(findProperty("templatesDir") as String? ?: "$projectDir/templates").invariantSeparatorsPath
+konst outputDir = file(findProperty("docsBuildDir") as String? ?: "$buildDir/doc")
+konst inputDirPrevious = file(findProperty("docsPreviousVersionsDir") as String? ?: "$outputDir/previous")
+konst outputDirPartial = outputDir.resolve("partial")
+konst kotlin_native_root = file("$kotlin_root/kotlin-native").absolutePath
+konst templatesDir = file(findProperty("templatesDir") as String? ?: "$projectDir/templates").invariantSeparatorsPath
 
-val cleanDocs by tasks.registering(Delete::class) {
+konst cleanDocs by tasks.registering(Delete::class) {
     delete(outputDir)
 }
 
@@ -48,7 +48,7 @@ tasks.clean {
     dependsOn(cleanDocs)
 }
 
-val prepare by tasks.registering {
+konst prepare by tasks.registering {
     dependsOn(":kotlin_big:extractLibs")
 }
 
@@ -63,12 +63,12 @@ fun createStdLibVersionedDocTask(version: String, isLatest: Boolean) =
     tasks.register<DokkaTaskPartial>("kotlin-stdlib_" + version + (if (isLatest) "_latest" else "")) {
         dependsOn(prepare)
 
-        val kotlin_stdlib_dir = file("$kotlin_root/libraries/stdlib")
+        konst kotlin_stdlib_dir = file("$kotlin_root/libraries/stdlib")
 
-        val stdlibIncludeMd = file("$kotlin_root/libraries/stdlib/src/Module.md")
-        val stdlibSamples = file("$kotlin_root/libraries/stdlib/samples/test")
+        konst stdlibIncludeMd = file("$kotlin_root/libraries/stdlib/src/Module.md")
+        konst stdlibSamples = file("$kotlin_root/libraries/stdlib/samples/test")
 
-        val suppressedPackages = listOf(
+        konst suppressedPackages = listOf(
                 "kotlin.internal",
                 "kotlin.jvm.internal",
                 "kotlin.js.internal",
@@ -77,10 +77,10 @@ fun createStdLibVersionedDocTask(version: String, isLatest: Boolean) =
                 "kotlin.coroutines.jvm.internal",
         )
 
-        val kotlinLanguageVersion = version
+        konst kotlinLanguageVersion = version
 
         moduleName.set("kotlin-stdlib")
-        val moduleDirName = "kotlin-stdlib"
+        konst moduleDirName = "kotlin-stdlib"
         with(pluginsMapConfiguration) {
             put("org.jetbrains.dokka.base.DokkaBase"                      , """{ "mergeImplicitExpectActualDeclarations": "true", "templatesDir": "$templatesDir" }""")
             put("org.jetbrains.dokka.kotlinlang.StdLibConfigurationPlugin", """{ "ignoreCommonBuiltIns": "true" }""")
@@ -190,15 +190,15 @@ fun createKotlinReflectVersionedDocTask(version: String, isLatest: Boolean) =
     tasks.register<DokkaTaskPartial>("kotlin-reflect_" + version + (if (isLatest) "_latest" else "")) {
         dependsOn(prepare)
 
-        val kotlinReflectIncludeMd = file("$kotlin_root/libraries/reflect/Module.md")
+        konst kotlinReflectIncludeMd = file("$kotlin_root/libraries/reflect/Module.md")
 
-        val kotlinReflectClasspath = fileTree("$kotlin_libs/kotlin-reflect")
+        konst kotlinReflectClasspath = fileTree("$kotlin_libs/kotlin-reflect")
 
-        val kotlinLanguageVersion = version
+        konst kotlinLanguageVersion = version
 
         moduleName.set("kotlin-reflect")
 
-        val moduleDirName = "kotlin-reflect"
+        konst moduleDirName = "kotlin-reflect"
         with(pluginsMapConfiguration) {
             put("org.jetbrains.dokka.base.DokkaBase", """{ "templatesDir": "$templatesDir" }""")
             put("org.jetbrains.dokka.versioning.VersioningPlugin", """{ "version": "$version" }""")
@@ -235,20 +235,20 @@ fun createKotlinTestVersionedDocTask(version: String, isLatest: Boolean) =
     tasks.register<DokkaTaskPartial>("kotlin-test_" + version + (if (isLatest) "_latest" else "")) {
         dependsOn(prepare)
 
-        val kotlinTestIncludeMd = file("$kotlin_root/libraries/kotlin.test/Module.md")
+        konst kotlinTestIncludeMd = file("$kotlin_root/libraries/kotlin.test/Module.md")
 
-        val kotlinTestCommonClasspath = fileTree("$kotlin_libs/kotlin-test-common")
-        val kotlinTestJunitClasspath = fileTree("$kotlin_libs/kotlin-test-junit")
-        val kotlinTestJunit5Classpath = fileTree("$kotlin_libs/kotlin-test-junit5")
-        val kotlinTestTestngClasspath = fileTree("$kotlin_libs/kotlin-test-testng")
-        val kotlinTestJsClasspath = fileTree("$kotlin_libs/kotlin-test-js")
-        val kotlinTestJvmClasspath = fileTree("$kotlin_libs/kotlin-test")
+        konst kotlinTestCommonClasspath = fileTree("$kotlin_libs/kotlin-test-common")
+        konst kotlinTestJunitClasspath = fileTree("$kotlin_libs/kotlin-test-junit")
+        konst kotlinTestJunit5Classpath = fileTree("$kotlin_libs/kotlin-test-junit5")
+        konst kotlinTestTestngClasspath = fileTree("$kotlin_libs/kotlin-test-testng")
+        konst kotlinTestJsClasspath = fileTree("$kotlin_libs/kotlin-test-js")
+        konst kotlinTestJvmClasspath = fileTree("$kotlin_libs/kotlin-test")
 
-        val kotlinLanguageVersion = version
+        konst kotlinLanguageVersion = version
 
         moduleName.set("kotlin-test")
 
-        val moduleDirName = "kotlin-test"
+        konst moduleDirName = "kotlin-test"
         with(pluginsMapConfiguration) {
             put("org.jetbrains.dokka.base.DokkaBase", """{ "templatesDir": "$templatesDir" }""")
             put("org.jetbrains.dokka.versioning.VersioningPlugin", """{ "version": "$version" }""")
@@ -368,9 +368,9 @@ fun createAllLibsVersionedDocTask(version: String, isLatest: Boolean, vararg lib
             parent.outputDirectory.dir(child.moduleName)
         })
 
-        val moduleDirName = "all-libs"
-        val outputDirLatest = file("$outputDir/latest")
-        val outputDirPrevious = file("$outputDir/previous")
+        konst moduleDirName = "all-libs"
+        konst outputDirLatest = file("$outputDir/latest")
+        konst outputDirPrevious = file("$outputDir/previous")
         pluginsMapConfiguration.put("org.jetbrains.dokka.base.DokkaBase", """{ "templatesDir": "$templatesDir" }""")
         if (isLatest) {
             outputDirectory.set(outputDirLatest.resolve(moduleDirName))
@@ -396,26 +396,26 @@ fun GradleDokkaSourceSetBuilder.sourceLinksFromRoot() {
 }
 
 run {
-    val versions = listOf(/*"1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7",*/ kotlinLanguageVersion)
-    val latestVersion = versions.last()
+    konst versions = listOf(/*"1.0", "1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7",*/ kotlinLanguageVersion)
+    konst latestVersion = versions.last()
 
     // builds this version/all versions as historical for the next versions builds
-    val buildAllVersions by tasks.registering
+    konst buildAllVersions by tasks.registering
     // builds the latest version incorporating all previous historical versions docs
-    val buildLatestVersion by tasks.registering
+    konst buildLatestVersion by tasks.registering
 
-    val latestStdlib = createStdLibVersionedDocTask(latestVersion, true)
-    val latestReflect = createKotlinReflectVersionedDocTask(latestVersion, true)
-    val latestTest = createKotlinTestVersionedDocTask(latestVersion, true)
-    val latestAll = createAllLibsVersionedDocTask(latestVersion, true, latestStdlib, latestReflect, latestTest)
+    konst latestStdlib = createStdLibVersionedDocTask(latestVersion, true)
+    konst latestReflect = createKotlinReflectVersionedDocTask(latestVersion, true)
+    konst latestTest = createKotlinTestVersionedDocTask(latestVersion, true)
+    konst latestAll = createAllLibsVersionedDocTask(latestVersion, true, latestStdlib, latestReflect, latestTest)
 
     buildLatestVersion.configure { dependsOn(latestStdlib, latestTest, latestReflect, latestAll) }
 
     versions.forEach { version ->
-        val versionStdlib = createStdLibVersionedDocTask(version, false)
-        val versionReflect = createKotlinReflectVersionedDocTask(version, false)
-        val versionTest = createKotlinTestVersionedDocTask(version, false)
-        val versionAll = createAllLibsVersionedDocTask(version, isLatest = false, versionStdlib, versionReflect, versionTest)
+        konst versionStdlib = createStdLibVersionedDocTask(version, false)
+        konst versionReflect = createKotlinReflectVersionedDocTask(version, false)
+        konst versionTest = createKotlinTestVersionedDocTask(version, false)
+        konst versionAll = createAllLibsVersionedDocTask(version, isLatest = false, versionStdlib, versionReflect, versionTest)
         if (version != latestVersion) {
             latestAll.configure { dependsOn(versionAll) }
         }

@@ -14,7 +14,7 @@
 
 
 fun box(): String {
-    val inputList = listOf(0, 1, 2)
+    konst inputList = listOf(0, 1, 2)
     var x = 0
     var y = 0
     var list1 = mutableListOf<Any>()

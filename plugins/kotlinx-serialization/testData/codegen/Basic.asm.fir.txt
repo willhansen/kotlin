@@ -159,13 +159,13 @@ public final class ListOfUsers$$serializer : java/lang/Object, kotlinx/serializa
         LABEL (L1)
     }
 
-    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, ListOfUsers value) {
+    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, ListOfUsers konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           GETSTATIC (ListOfUsers$$serializer, descriptor, Lkotlinx/serialization/descriptors/SerialDescriptor;)
           ASTORE (3)
@@ -184,7 +184,7 @@ public final class ListOfUsers$$serializer : java/lang/Object, kotlinx/serializa
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
           ALOAD (0)
           ALOAD (1)
@@ -463,13 +463,13 @@ public final class OptionalUser$$serializer : java/lang/Object, kotlinx/serializ
         LABEL (L1)
     }
 
-    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, OptionalUser value) {
+    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, OptionalUser konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           GETSTATIC (OptionalUser$$serializer, descriptor, Lkotlinx/serialization/descriptors/SerialDescriptor;)
           ASTORE (3)
@@ -488,7 +488,7 @@ public final class OptionalUser$$serializer : java/lang/Object, kotlinx/serializ
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
           ALOAD (0)
           ALOAD (1)
@@ -846,13 +846,13 @@ public final class User$$serializer : java/lang/Object, kotlinx/serialization/in
         LABEL (L1)
     }
 
-    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, User value) {
+    public final void serialize(kotlinx.serialization.encoding.Encoder encoder, User konstue) {
         LABEL (L0)
           ALOAD (1)
           LDC (encoder)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (2)
-          LDC (value)
+          LDC (konstue)
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           GETSTATIC (User$$serializer, descriptor, Lkotlinx/serialization/descriptors/SerialDescriptor;)
           ASTORE (3)
@@ -871,7 +871,7 @@ public final class User$$serializer : java/lang/Object, kotlinx/serialization/in
         LABEL (L1)
     }
 
-    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object value) {
+    public void serialize(kotlinx.serialization.encoding.Encoder encoder, java.lang.Object konstue) {
         LABEL (L0)
           ALOAD (0)
           ALOAD (1)

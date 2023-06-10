@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 
 abstract class AbstractSymbolByFqNameTest : AbstractSymbolTest() {
     override fun KtAnalysisSession.collectSymbols(ktFile: KtFile, testServices: TestServices): SymbolsData {
-        val symbolData = SymbolByFqName.getSymbolDataFromFile(testDataPath)
+        konst symbolData = SymbolByFqName.getSymbolDataFromFile(testDataPath)
         return SymbolsData(with(symbolData) { toSymbols() })
     }
 

@@ -15,8 +15,8 @@ interface Base2 : Base1 {
 
 class Base2Impl() : Base2 {
     override var prop: String = ""
-        set(value) {
-            field = "prop:${value}"
+        set(konstue) {
+            field = "prop:${konstue}"
         }
 }
 

@@ -7,7 +7,7 @@ open annotation class Ann : Annotation {
 
 }
 
-val test1: Int /* by */
+konst test1: Int /* by */
   field = lazy<Int>(initializer = local fun <anonymous>(): Int {
     return 42
   }

@@ -9,8 +9,8 @@ import org.jetbrains.kotlin.gradle.internal.testing.ParsedStackTrace
 import org.jetbrains.kotlin.gradle.utils.appendLine
 
 data class NodeJsStackTrace(
-    val message: String?,
-    val stackTrace: List<NodeJsStackTraceElement>?
+    konst message: String?,
+    konst stackTrace: List<NodeJsStackTraceElement>?
 ) {
     fun toJvm() = ParsedStackTrace(
         message,
@@ -24,11 +24,11 @@ data class NodeJsStackTrace(
 }
 
 data class NodeJsStackTraceElement(
-    val className: String? = null,
-    val methodName: String? = null,
-    val fileName: String? = null,
-    val lineNumber: Int = -1,
-    val colNumber: Int = -1
+    konst className: String? = null,
+    konst methodName: String? = null,
+    konst fileName: String? = null,
+    konst lineNumber: Int = -1,
+    konst colNumber: Int = -1
 ) {
     fun toJvmStackTraceElement() = StackTraceElement(
         className ?: "<global>",
@@ -42,13 +42,13 @@ fun parseNodeJsStackTraceAsJvm(stackTrace: String): ParsedStackTrace? =
     parseNodeJsStackTrace(stackTrace).toJvm()
 
 fun parseNodeJsStackTrace(stackTrace: String): NodeJsStackTrace {
-    val message = StringBuilder()
+    konst message = StringBuilder()
     var firstLines = true
-    val stack = mutableListOf<NodeJsStackTraceElement>()
+    konst stack = mutableListOf<NodeJsStackTraceElement>()
 
     // see examples at NodeJsStackTraceParserKtTest
     stackTrace.lines().forEach {
-        val srcLine = it.trim()
+        konst srcLine = it.trim()
 
         var className: String? = null
         var methodName: String? = null
@@ -57,7 +57,7 @@ fun parseNodeJsStackTrace(stackTrace: String): NodeJsStackTrace {
         var colNumber: Int? = null
 
         fun parsePos(fileAndPos: String) {
-            val components = fileAndPos.split(":").toMutableList()
+            konst components = fileAndPos.split(":").toMutableList()
             if (components.size > 2) {
                 colNumber = components.removeAt(components.size - 1).toIntOrNull()
             }
@@ -69,10 +69,10 @@ fun parseNodeJsStackTrace(stackTrace: String): NodeJsStackTrace {
 
         if (srcLine.startsWith("at ")) {
             firstLines = false
-            val line = srcLine.removePrefix("at ")
+            konst line = srcLine.removePrefix("at ")
 
-            val classAndMethod: String? = if (line.endsWith(")") && "(" in line) {
-                val fileAndPos = line.substringAfterLast("(").removeSuffix(")")
+            konst classAndMethod: String? = if (line.endsWith(")") && "(" in line) {
+                konst fileAndPos = line.substringAfterLast("(").removeSuffix(")")
                 parsePos(fileAndPos)
                 line.substringBeforeLast("(")
             } else if (line.contains(":")) {
@@ -135,7 +135,7 @@ fun filterClassName(className: String): String =
 
 private fun filterMethodName(name: String): String =
     if ("_" in name) {
-        val suffix = name.substringAfterLast("_")
+        konst suffix = name.substringAfterLast("_")
         if (suffix.endsWith("$") || suffix.toIntOrNull() != null) name.substringBeforeLast("_")
         else name
     } else name

@@ -12,4 +12,4 @@ fun <T> Flow<T>.debounce(timeoutMillis: (T) -> Long): Flow<T> = this
 @OverloadResolutionByLambdaReturnType
 fun <T> Flow<T>.debounce(timeout: (T) -> String): Flow<T> = this
 
-fun invalidFlow(x: Flow<Int>): Flow<Int> = x.debounce { value -> 0 }
+fun inkonstidFlow(x: Flow<Int>): Flow<Int> = x.debounce { konstue -> 0 }

@@ -12,7 +12,7 @@
 package test
 
 expect class Foo {
-    val value: String
+    konst konstue: String
 }
 
 // FILE: jvm.kt
@@ -21,8 +21,8 @@ expect class Foo {
 @file:JvmName("Test")
 package test
 
-actual class Foo(actual val value: String)
+actual class Foo(actual konst konstue: String)
 
 fun box(): String {
-    return Foo("OK").value
+    return Foo("OK").konstue
 }

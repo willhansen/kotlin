@@ -1,10 +1,10 @@
 package test
 
 annotation class Ann(
-        val b1: Byte,
-        val b2: Byte,
-        val b3: Byte,
-        val b4: Byte
+        konst b1: Byte,
+        konst b2: Byte,
+        konst b3: Byte,
+        konst b4: Byte
 )
 
 @Ann(1, 1.toByte(), 128.toByte(), <!CONSTANT_EXPECTED_TYPE_MISMATCH!>128<!>) class MyClass

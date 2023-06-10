@@ -16,15 +16,15 @@ import org.jetbrains.kotlin.ir.types.IrType
 /**
  * A non-leaf IR tree element.
  *
- * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.valueDeclaration]
+ * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.konstueDeclaration]
  */
 interface IrValueDeclaration : IrDeclarationWithName, IrSymbolOwner {
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: ValueDescriptor
+    override konst descriptor: ValueDescriptor
 
-    override val symbol: IrValueSymbol
+    override konst symbol: IrValueSymbol
 
     var type: IrType
 
-    val isAssignable: Boolean
+    konst isAssignable: Boolean
 }

@@ -7,13 +7,13 @@ fun foo(c: C<Int>) {}
 fun <T> bar() : C<T> {<!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 
 fun main() {
-  val a : C<Int> = C();
-  val x : C<in String> = C()
-  val y : C<out String> = C()
-  val z : C<*> = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>C<!>()
+  konst a : C<Int> = C();
+  konst x : C<in String> = C()
+  konst y : C<out String> = C()
+  konst z : C<*> = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>C<!>()
 
-  val ba : C<Int> = bar();
-  val bx : C<in String> = bar()
-  val by : C<out String> = bar()
-  val bz : C<*> = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>bar<!>()
+  konst ba : C<Int> = bar();
+  konst bx : C<in String> = bar()
+  konst by : C<out String> = bar()
+  konst bz : C<*> = <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>bar<!>()
 }

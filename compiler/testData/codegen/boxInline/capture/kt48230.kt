@@ -4,11 +4,11 @@ inline fun withO(block: String.() -> String) = "O".block()
 
 // FILE: 2.kt
 interface I {
-    val k: String
+    konst k: String
 
     fun foo() = withO { this + k }
 }
 
 fun box(): String = object : I {
-    override val k = "K"
+    override konst k = "K"
 }.foo()

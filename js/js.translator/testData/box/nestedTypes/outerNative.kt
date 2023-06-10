@@ -4,12 +4,12 @@ package foo
 external class A(x: Int) {
     var x: Int
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 
     fun foo(): Int = definedExternally
 
-    class B(value: Int) {
-        val value: Int
+    class B(konstue: Int) {
+        konst konstue: Int
 
         fun bar(): Int = definedExternally
     }

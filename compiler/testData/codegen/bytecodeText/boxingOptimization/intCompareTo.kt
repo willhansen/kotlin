@@ -1,7 +1,7 @@
 fun box(): String {
-    val a: Any = 1
-    val b: Any = 42
-    val test = (a as Comparable<Any>).compareTo(b)
+    konst a: Any = 1
+    konst b: Any = 42
+    konst test = (a as Comparable<Any>).compareTo(b)
     if (test != -1) return "Fail: $test"
 
     return "OK"

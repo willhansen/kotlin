@@ -37,28 +37,28 @@ import org.jetbrains.kotlin.types.typeUtil.isNothing
 import org.jetbrains.kotlin.utils.keysToMapExceptNulls
 
 class DelegationResolver<T : CallableMemberDescriptor> private constructor(
-    private val classOrObject: KtPureClassOrObject,
-    private val ownerDescriptor: ClassDescriptor,
-    private val existingMembers: Collection<CallableDescriptor>,
-    private val trace: BindingTrace,
-    private val memberExtractor: MemberExtractor<T>,
-    private val typeResolver: TypeResolver,
-    private val delegationFilter: DelegationFilter,
-    private val languageVersionSettings: LanguageVersionSettings
+    private konst classOrObject: KtPureClassOrObject,
+    private konst ownerDescriptor: ClassDescriptor,
+    private konst existingMembers: Collection<CallableDescriptor>,
+    private konst trace: BindingTrace,
+    private konst memberExtractor: MemberExtractor<T>,
+    private konst typeResolver: TypeResolver,
+    private konst delegationFilter: DelegationFilter,
+    private konst languageVersionSettings: LanguageVersionSettings
 ) {
 
     private fun generateDelegatedMembers(): Collection<T> {
-        val delegatedMembers = hashSetOf<T>()
+        konst delegatedMembers = hashSetOf<T>()
         for (delegationSpecifier in classOrObject.superTypeListEntries) {
             if (delegationSpecifier !is KtDelegatedSuperTypeEntry) {
                 continue
             }
-            val typeReference = delegationSpecifier.typeReference ?: continue
-            val delegatedInterfaceType = typeResolver.resolve(typeReference)
+            konst typeReference = delegationSpecifier.typeReference ?: continue
+            konst delegatedInterfaceType = typeResolver.resolve(typeReference)
             if (delegatedInterfaceType == null || delegatedInterfaceType.isError) {
                 continue
             }
-            val delegatesForInterface = generateDelegatesForInterface(delegatedMembers, delegatedInterfaceType)
+            konst delegatesForInterface = generateDelegatesForInterface(delegatedMembers, delegatedInterfaceType)
             delegatedMembers.addAll(delegatesForInterface)
         }
         return delegatedMembers
@@ -72,7 +72,7 @@ class DelegationResolver<T : CallableMemberDescriptor> private constructor(
 
     private fun generateDelegationCandidates(delegatedInterfaceType: KotlinType): Collection<T> =
         getDelegatableMembers(delegatedInterfaceType).map { memberDescriptor ->
-            val newModality = if (memberDescriptor.modality == Modality.ABSTRACT) Modality.OPEN else memberDescriptor.modality
+            konst newModality = if (memberDescriptor.modality == Modality.ABSTRACT) Modality.OPEN else memberDescriptor.modality
             @Suppress("UNCHECKED_CAST")
             memberDescriptor.newCopyBuilder()
                 .setOwner(ownerDescriptor)
@@ -85,7 +85,7 @@ class DelegationResolver<T : CallableMemberDescriptor> private constructor(
         }
 
     private fun checkClashWithOtherDelegatedMember(candidate: T, delegatedMembers: Collection<T>): Boolean {
-        val alreadyDelegated = delegatedMembers.firstOrNull { isOverridableBy(it, candidate) }
+        konst alreadyDelegated = delegatedMembers.firstOrNull { isOverridableBy(it, candidate) }
         if (alreadyDelegated != null) {
             if (classOrObject is KtClassOrObject) // report errors only for physical (non-synthetic) classes or objects
                 trace.report(MANY_IMPL_MEMBER_NOT_IMPLEMENTED.on(classOrObject, classOrObject, alreadyDelegated))
@@ -152,10 +152,10 @@ class DelegationResolver<T : CallableMemberDescriptor> private constructor(
         //   toInterface = Bar
         //   delegateExpressionType = typeof(baz)
         //
-        // This method returns a map where keys are members of Foo, and values are members of typeof(baz).
+        // This method returns a map where keys are members of Foo, and konstues are members of typeof(baz).
         //
         // In case delegation is to an error type, which is useful for KAPT stub generation mode, typeof(baz) has no members, so we return
-        // a map from each element to it (so keys = values in the returned map).
+        // a map from each element to it (so keys = konstues in the returned map).
         fun getDelegates(
             descriptor: ClassDescriptor,
             toInterface: ClassDescriptor,
@@ -163,7 +163,7 @@ class DelegationResolver<T : CallableMemberDescriptor> private constructor(
         ): Map<CallableMemberDescriptor, CallableMemberDescriptor> {
             if (delegateExpressionType?.isDynamic() ?: false) return emptyMap()
 
-            val delegatedMembers = descriptor.defaultType.memberScope.getContributedDescriptors().asSequence()
+            konst delegatedMembers = descriptor.defaultType.memberScope.getContributedDescriptors().asSequence()
                 .filterIsInstance<CallableMemberDescriptor>()
                 .filter { it.kind == CallableMemberDescriptor.Kind.DELEGATION }
                 .asIterable()
@@ -171,18 +171,18 @@ class DelegationResolver<T : CallableMemberDescriptor> private constructor(
 
             // If delegate type is Nothing interface declarations could be missed so
             // to make it work propagate nothing type into delegating interface type
-            val scopeType = delegateExpressionType?.takeUnless { it.isNothing() } ?: toInterface.defaultType
-            val scope = scopeType.memberScope
+            konst scopeType = delegateExpressionType?.takeUnless { it.isNothing() } ?: toInterface.defaultType
+            konst scope = scopeType.memberScope
 
             return delegatedMembers
                 .keysToMapExceptNulls { delegatingMember ->
-                    val actualDelegates = DescriptorUtils.getAllOverriddenDescriptors(delegatingMember)
+                    konst actualDelegates = DescriptorUtils.getAllOverriddenDescriptors(delegatingMember)
                         .filter { it.containingDeclaration == toInterface }
                         .map { overriddenDescriptor ->
                             if (scopeType.isError) {
                                 overriddenDescriptor
                             } else {
-                                val name = overriddenDescriptor.name
+                                konst name = overriddenDescriptor.name
                                 // This is the actual member of delegateExpressionType that we are delegating to.
                                 (scope.getContributedFunctions(name, NoLookupLocation.WHEN_CHECK_OVERRIDES) +
                                         scope.getContributedVariables(name, NoLookupLocation.WHEN_CHECK_OVERRIDES))

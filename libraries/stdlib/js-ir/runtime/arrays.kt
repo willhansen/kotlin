@@ -21,7 +21,7 @@ internal fun <T> fillArrayVal(array: Array<T>, initValue: T): Array<T> {
 internal inline fun <T> arrayWithFun(size: Int, init: (Int) -> T) = fillArrayFun(Array<T>(size), init)
 
 internal inline fun <T> fillArrayFun(array: dynamic, init: (Int) -> T): Array<T> {
-    val result = array.unsafeCast<Array<T>>()
+    konst result = array.unsafeCast<Array<T>>()
     var i = 0
     while (i != result.size) {
         result[i] = init(i)

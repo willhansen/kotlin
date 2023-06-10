@@ -2,8 +2,8 @@
 // See KT-7674
 package foo
 
-class A(val a: Int) {
-    val plus: (Int)->Int
+class A(konst a: Int) {
+    konst plus: (Int)->Int
         get() {
             log("get plus fun")
             return {

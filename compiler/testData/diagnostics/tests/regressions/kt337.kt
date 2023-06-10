@@ -6,10 +6,10 @@ class A() {
 }
 
 fun test() {
-    val a = A()
+    konst a = A()
 
     a
 
-      .foo() // Should be a valid expression
+      .foo() // Should be a konstid expression
 
 }

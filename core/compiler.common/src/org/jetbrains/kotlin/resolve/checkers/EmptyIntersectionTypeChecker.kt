@@ -18,26 +18,26 @@ internal object EmptyIntersectionTypeChecker {
         if (types.isEmpty()) return null
 
         @Suppress("NAME_SHADOWING")
-        val types = types.toList()
+        konst types = types.toList()
         var possibleEmptyIntersectionTypeInfo: EmptyIntersectionTypeInfo? = null
 
         for (i in types.indices) {
-            val firstType = types[i]
+            konst firstType = types[i]
 
             if (!mayCauseEmptyIntersection(firstType)) continue
 
-            val firstSubstitutedType by lazy { firstType.eraseContainingTypeParameters() }
+            konst firstSubstitutedType by lazy { firstType.eraseContainingTypeParameters() }
 
             for (j in i + 1 until types.size) {
-                val secondType = types[j]
+                konst secondType = types[j]
 
                 if (!mayCauseEmptyIntersection(secondType)) continue
 
-                val secondSubstitutedType = secondType.eraseContainingTypeParameters()
+                konst secondSubstitutedType = secondType.eraseContainingTypeParameters()
 
                 if (!mayCauseEmptyIntersection(secondSubstitutedType) && !mayCauseEmptyIntersection(firstSubstitutedType)) continue
 
-                val typeInfo = computeByHavingCommonSubtype(firstSubstitutedType, secondSubstitutedType) ?: continue
+                konst typeInfo = computeByHavingCommonSubtype(firstSubstitutedType, secondSubstitutedType) ?: continue
 
                 if (typeInfo.kind.isDefinitelyEmpty) {
                     return typeInfo
@@ -60,20 +60,20 @@ internal object EmptyIntersectionTypeChecker {
                 type.typeConstructor().supertypes().toList()
             } else listOf(type)
 
-        val expandedTypes = extractIntersectionComponentsIfNeeded(first) + extractIntersectionComponentsIfNeeded(second)
-        val typeCheckerState by lazy { newTypeCheckerState(errorTypesEqualToAnything = true, stubTypesEqualToAnything = true) }
+        konst expandedTypes = extractIntersectionComponentsIfNeeded(first) + extractIntersectionComponentsIfNeeded(second)
+        konst typeCheckerState by lazy { newTypeCheckerState(errorTypesEqualToAnything = true, stubTypesEqualToAnything = true) }
         var possibleEmptyIntersectionKind: EmptyIntersectionTypeInfo? = null
 
         for (i in expandedTypes.indices) {
-            val firstType = expandedTypes[i].withNullability(false)
-            val firstTypeConstructor = firstType.typeConstructor()
+            konst firstType = expandedTypes[i].withNullability(false)
+            konst firstTypeConstructor = firstType.typeConstructor()
 
             if (!mayCauseEmptyIntersection(firstType))
                 continue
 
             for (j in i + 1 until expandedTypes.size) {
-                val secondType = expandedTypes[j].withNullability(false)
-                val secondTypeConstructor = secondType.typeConstructor()
+                konst secondType = expandedTypes[j].withNullability(false)
+                konst secondTypeConstructor = secondType.typeConstructor()
 
                 when {
                     !mayCauseEmptyIntersection(secondType) -> {
@@ -113,7 +113,7 @@ internal object EmptyIntersectionTypeChecker {
             return false
         }
 
-        val typeConstructor = type.typeConstructor()
+        konst typeConstructor = type.typeConstructor()
 
         if (!typeConstructor.isClassTypeConstructor() && !typeConstructor.isTypeParameterTypeConstructor())
             return false
@@ -128,4 +128,4 @@ internal object EmptyIntersectionTypeChecker {
 
 }
 
-class EmptyIntersectionTypeInfo(val kind: EmptyIntersectionTypeKind, vararg val casingTypes: KotlinTypeMarker)
+class EmptyIntersectionTypeInfo(konst kind: EmptyIntersectionTypeKind, vararg konst casingTypes: KotlinTypeMarker)

@@ -1,14 +1,14 @@
 class `:)` {
-    lateinit val f: String
+    lateinit konst f: String
 }
 
 // Commented declarations won't compile with the current Kotlin
 class Test {
     class `(^_^)`
 
-    lateinit val simpleName: String
-    lateinit val `strange name`: String
-//    lateinit val strangeType: List<`!A@`>
+    lateinit konst simpleName: String
+    lateinit konst `strange name`: String
+//    lateinit konst strangeType: List<`!A@`>
 
     fun simpleFun() {}
 
@@ -22,14 +22,14 @@ class Test {
 //    fun strangeFun5(a: `A B`.C) {}
 }
 
-enum class StrangeEnum(val size: String) {
+enum class StrangeEnum(konst size: String) {
     `60x60`("60x60"),
     `70x70`("70x70"),
     `80x80`("80x80"),
-    InvalidFieldName("0x0") // Workaround to pass javac analysis
+    InkonstidFieldName("0x0") // Workaround to pass javac analysis
 }
 
-annotation class Anno(val size: StrangeEnum, val name: String, val `A B`: String)
+annotation class Anno(konst size: StrangeEnum, konst name: String, konst `A B`: String)
 
 class `!A@`
 class `A()B()`
@@ -37,4 +37,4 @@ class `A B` {
     class C
 }
 
-// EXPECTED_ERROR: (other:-1:-1) '60x60' is an invalid Java enum value name
+// EXPECTED_ERROR: (other:-1:-1) '60x60' is an inkonstid Java enum konstue name

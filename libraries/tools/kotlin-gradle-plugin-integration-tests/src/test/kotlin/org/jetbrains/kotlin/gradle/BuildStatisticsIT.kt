@@ -17,9 +17,9 @@ class BuildStatisticsIT : KGPBaseTest() {
 
     @DisplayName("Http build report url problems are logged only ones")
     @GradleTest
-    fun testHttpServiceWithInvalidUrl(gradleVersion: GradleVersion) {
+    fun testHttpServiceWithInkonstidUrl(gradleVersion: GradleVersion) {
         project("incrementalMultiproject", gradleVersion) {
-            enableStatisticReports(BuildReportType.HTTP, "invalid/url")
+            enableStatisticReports(BuildReportType.HTTP, "inkonstid/url")
             build("assemble") {
                 assertOutputContainsExactTimes("Unable to open connection to")
             }

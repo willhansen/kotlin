@@ -21,9 +21,9 @@ class KotlinMetadataTargetPreset(
         forTarget: KotlinMetadataTarget
     ): KotlinCompilationFactory<KotlinCompilation<*>> =
         object : KotlinCompilationFactory<KotlinCompilation<*>> {
-            override val target: KotlinTarget = forTarget
+            override konst target: KotlinTarget = forTarget
 
-            override val itemClass: Class<KotlinCompilation<*>>
+            override konst itemClass: Class<KotlinCompilation<*>>
                 get() = KotlinCompilation::class.java
 
             override fun create(name: String): InternalKotlinCompilation<*> = when (name) {
@@ -35,11 +35,11 @@ class KotlinMetadataTargetPreset(
             }
         }
 
-    override val platformType: KotlinPlatformType
+    override konst platformType: KotlinPlatformType
         get() = KotlinPlatformType.common
 
     companion object {
-        const val PRESET_NAME = "metadata"
+        const konst PRESET_NAME = "metadata"
     }
 
     override fun createKotlinTargetConfigurator(): AbstractKotlinTargetConfigurator<KotlinMetadataTarget> =
@@ -51,13 +51,13 @@ class KotlinMetadataTargetPreset(
 
     override fun createTarget(name: String): KotlinMetadataTarget =
         super.createTarget(name).apply {
-            val mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
-            val commonMainSourceSet = project.kotlinExtension.sourceSets.getByName(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME)
+            konst mainCompilation = compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+            konst commonMainSourceSet = project.kotlinExtension.sourceSets.getByName(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME)
 
             @Suppress("DEPRECATION")
             mainCompilation.source(commonMainSourceSet)
 
-            project.whenEvaluated {
+            project.whenEkonstuated {
                 // Since there's no default source set, apply language settings from commonMain:
                 mainCompilation.compileTaskProvider.configure { compileKotlinMetadata ->
                     applyLanguageSettingsToCompilerOptions(commonMainSourceSet.languageSettings, compileKotlinMetadata.compilerOptions)

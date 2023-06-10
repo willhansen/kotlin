@@ -5,7 +5,7 @@ fun box(): String {
     var a: dynamic = 12
     var b: dynamic = 33.4
     var c: dynamic = "text"
-    val d: dynamic = true
+    konst d: dynamic = true
 
     a += d
     assertEquals(13, a)

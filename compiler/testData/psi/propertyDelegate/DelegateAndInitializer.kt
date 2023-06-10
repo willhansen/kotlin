@@ -1,3 +1,3 @@
-val a: Int = 1 by A()
-val b: Int = 1 by A()
-val c: Int by A(); = 3
+konst a: Int = 1 by A()
+konst b: Int = 1 by A()
+konst c: Int by A(); = 3

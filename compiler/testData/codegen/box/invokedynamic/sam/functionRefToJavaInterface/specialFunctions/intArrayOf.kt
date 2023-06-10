@@ -8,8 +8,8 @@
 
 // FILE: intArrayOf.kt
 fun box(): String {
-    val sam = Sam(::intArrayOf)
-    val arr = sam.get(intArrayOf('O'.toInt(), 'K'.toInt()))
+    konst sam = Sam(::intArrayOf)
+    konst arr = sam.get(intArrayOf('O'.toInt(), 'K'.toInt()))
     return "${arr[0].toChar()}${arr[1].toChar()}"
 }
 

@@ -29,10 +29,10 @@ class SymbolBasedConstructor(
         javac: JavacWrapper
 ) : SymbolBasedMember<ExecutableElement>(element, containingClass, javac), JavaConstructor {
 
-    override val typeParameters: List<JavaTypeParameter>
+    override konst typeParameters: List<JavaTypeParameter>
         get() = element.typeParameters.map { SymbolBasedTypeParameter(it, javac) }
 
-    override val valueParameters: List<JavaValueParameter>
-        get() = element.valueParameters(javac)
+    override konst konstueParameters: List<JavaValueParameter>
+        get() = element.konstueParameters(javac)
 
 }

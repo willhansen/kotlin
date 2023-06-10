@@ -1,8 +1,8 @@
 package module
 
-public class B(private val c: C) {
+public class B(private konst c: C) {
     fun foo() {
-        val a = c.getA()
+        konst a = c.getA()
         a.oldFun()
     }
 }

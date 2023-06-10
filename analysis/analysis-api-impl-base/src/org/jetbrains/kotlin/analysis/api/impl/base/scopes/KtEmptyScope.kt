@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.analysis.api.scopes.KtScopeNameFilter
 import org.jetbrains.kotlin.analysis.api.symbols.*
 import org.jetbrains.kotlin.name.Name
 
-class KtEmptyScope(override val token: KtLifetimeToken) : KtScope {
+class KtEmptyScope(override konst token: KtLifetimeToken) : KtScope {
     override fun getAllPossibleNames(): Set<Name> = withValidityAssertion {
         return emptySet()
     }

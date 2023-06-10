@@ -31,6 +31,6 @@ package test
 
 fun box(): String {
     ZipZap()[{ 42 }]++
-    val result = ZipZap.result
+    konst result = ZipZap.result
     return if (result == "zap: 42|x: 43") "OK" else "Fail: $result"
 }

@@ -5,9 +5,9 @@ fun interface Foo {
     fun run()
 }
 
-val x = ::Foo
-val y = Foo { }
-val z = ::<!JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE!>Runnable<!>
-val w = id(::Foo)
+konst x = ::Foo
+konst y = Foo { }
+konst z = ::<!JAVA_SAM_INTERFACE_CONSTRUCTOR_REFERENCE!>Runnable<!>
+konst w = id(::Foo)
 
 fun <T> id(t: T): T = t

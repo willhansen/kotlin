@@ -4,7 +4,7 @@ package test;
 class AnnotatedParameterInInnerClassConstructor {
 
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     class JavaEnum {

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.contracts.model.*
 import org.jetbrains.kotlin.contracts.model.structure.*
 import org.jetbrains.kotlin.contracts.model.visitors.Reducer
 
-class IsFunctor(val type: ESType, val isNegated: Boolean) : AbstractFunctor() {
+class IsFunctor(konst type: ESType, konst isNegated: Boolean) : AbstractFunctor() {
     override fun doInvocation(arguments: List<Computation>, typeSubstitution: ESTypeSubstitution, reducer: Reducer): List<ESEffect> {
         assert(arguments.size == 1) { "Wrong size of arguments list for Unary operator: expected 1, got ${arguments.size}" }
         return invokeWithArguments(arguments[0], typeSubstitution)
@@ -33,16 +33,16 @@ class IsFunctor(val type: ESType, val isNegated: Boolean) : AbstractFunctor() {
             emptyList()
     }
 
-    private fun invokeWithValue(value: ESValue, typeSubstitution: ESTypeSubstitution): List<ConditionalEffect> {
-        val substitutedKotlinType = typeSubstitution.substitutor.safeSubstitute(type.toKotlinType(typeSubstitution.builtIns).unwrap())
+    private fun invokeWithValue(konstue: ESValue, typeSubstitution: ESTypeSubstitution): List<ConditionalEffect> {
+        konst substitutedKotlinType = typeSubstitution.substitutor.safeSubstitute(type.toKotlinType(typeSubstitution.builtIns).unwrap())
 
-        val substitutedType = ESKotlinType(substitutedKotlinType)
+        konst substitutedType = ESKotlinType(substitutedKotlinType)
 
-        val trueIs = ESIs(value, IsFunctor(substitutedType, isNegated))
-        val falseIs = ESIs(value, IsFunctor(substitutedType, isNegated.not()))
+        konst trueIs = ESIs(konstue, IsFunctor(substitutedType, isNegated))
+        konst falseIs = ESIs(konstue, IsFunctor(substitutedType, isNegated.not()))
 
-        val trueResult = ConditionalEffect(trueIs, ESReturns(ESConstants.trueValue))
-        val falseResult = ConditionalEffect(falseIs, ESReturns(ESConstants.falseValue))
+        konst trueResult = ConditionalEffect(trueIs, ESReturns(ESConstants.trueValue))
+        konst falseResult = ConditionalEffect(falseIs, ESReturns(ESConstants.falseValue))
         return listOf(trueResult, falseResult)
     }
 }

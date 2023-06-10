@@ -2,8 +2,8 @@
 // TARGET_BACKEND: JVM_IR
 
 fun foo() {
-    val result = Result.success("yes!")
-    val other = Result.success("nope")
+    konst result = Result.success("yes!")
+    konst other = Result.success("nope")
 
     result == other
     result != other

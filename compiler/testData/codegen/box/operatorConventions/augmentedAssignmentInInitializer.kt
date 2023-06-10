@@ -1,10 +1,10 @@
 // !LANGUAGE: -ProhibitOpenValDeferredInitialization
 abstract class A {
-    val b = B("O")
+    konst b = B("O")
 
-    open val c: B
+    open konst c: B
 
-    val d: B
+    konst d: B
         get() = field
 
     var e: String
@@ -22,9 +22,9 @@ abstract class A {
     }
 }
 
-class B(var value: String) {
+class B(var konstue: String) {
     operator fun plusAssign(o: String) {
-        value += o
+        konstue += o
     }
 }
 
@@ -38,8 +38,8 @@ class C : A() {
 }
 
 fun box(): String {
-    val c = C()
-    val result = "${c.b.value} ${c.c.value} ${c.d.value} ${c.e}"
+    konst c = C()
+    konst result = "${c.b.konstue} ${c.c.konstue} ${c.d.konstue} ${c.e}"
     if (result != "O,K O.K O;K O|K") return "fail: $result"
 
     return "OK"

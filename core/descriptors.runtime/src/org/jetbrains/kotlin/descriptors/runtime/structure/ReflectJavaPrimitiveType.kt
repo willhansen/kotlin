@@ -21,14 +21,14 @@ import org.jetbrains.kotlin.load.java.structure.JavaAnnotation
 import org.jetbrains.kotlin.load.java.structure.JavaPrimitiveType
 import org.jetbrains.kotlin.resolve.jvm.JvmPrimitiveType
 
-class ReflectJavaPrimitiveType(override val reflectType: Class<*>) : ReflectJavaType(), JavaPrimitiveType {
-    override val type: PrimitiveType?
+class ReflectJavaPrimitiveType(override konst reflectType: Class<*>) : ReflectJavaType(), JavaPrimitiveType {
+    override konst type: PrimitiveType?
         get() = if (reflectType == Void.TYPE)
             null
         else
             JvmPrimitiveType.get(reflectType.name).primitiveType
 
     // TODO: support type use annotations in reflection
-    override val annotations: Collection<JavaAnnotation> = emptyList()
-    override val isDeprecatedInJavaDoc = false
+    override konst annotations: Collection<JavaAnnotation> = emptyList()
+    override konst isDeprecatedInJavaDoc = false
 }

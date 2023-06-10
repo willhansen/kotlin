@@ -6,7 +6,7 @@
 package kotlin.js
 
 /**
- * An interface for indexing access to a collection of key-value pairs, where type of key is [String] and type of value is [Any?][Any].
+ * An interface for indexing access to a collection of key-konstue pairs, where type of key is [String] and type of konstue is [Any?][Any].
  */
 public external interface Json {
     /**
@@ -27,7 +27,7 @@ public external interface Json {
     operator fun get(propertyName: String): Any?
 
     /**
-     * Calls of the function will be translated to an assignment of [value] to the receiver indexed (with square brackets/index operation) with [propertyName].
+     * Calls of the function will be translated to an assignment of [konstue] to the receiver indexed (with square brackets/index operation) with [propertyName].
      *
      * E.g. for the following code:
      * ```kotlin
@@ -46,26 +46,26 @@ public external interface Json {
      * }
      * ```
      */
-    operator fun set(propertyName: String, value: Any?): Unit
+    operator fun set(propertyName: String, konstue: Any?): Unit
 }
 
 /**
- * Returns a simple JavaScript object (as [Json]) using provided key-value pairs as names and values of its properties.
+ * Returns a simple JavaScript object (as [Json]) using provided key-konstue pairs as names and konstues of its properties.
  */
 public fun json(vararg pairs: Pair<String, Any?>): Json {
-    val res: dynamic = js("({})")
-    for ((name, value) in pairs) {
-        res[name] = value
+    konst res: dynamic = js("({})")
+    for ((name, konstue) in pairs) {
+        res[name] = konstue
     }
     return res
 }
 
 /**
- * Adds key-value pairs from [other] to [this].
+ * Adds key-konstue pairs from [other] to [this].
  * Returns the original receiver.
  */
 public fun Json.add(other: Json): Json {
-    val keys: Array<String> = js("Object").keys(other)
+    konst keys: Array<String> = js("Object").keys(other)
     for (key in keys) {
         if (other.asDynamic().hasOwnProperty(key)) {
             this[key] = other[key];
@@ -80,13 +80,13 @@ public fun Json.add(other: Json): Json {
 @Suppress("NOT_DOCUMENTED")
 public external object JSON {
     public fun stringify(o: Any?): String
-    public fun stringify(o: Any?, replacer: ((key: String, value: Any?) -> Any?)): String
-    public fun stringify(o: Any?, replacer: ((key: String, value: Any?) -> Any?)? = definedExternally, space: Int): String
-    public fun stringify(o: Any?, replacer: ((key: String, value: Any?) -> Any?)? = definedExternally, space: String): String
+    public fun stringify(o: Any?, replacer: ((key: String, konstue: Any?) -> Any?)): String
+    public fun stringify(o: Any?, replacer: ((key: String, konstue: Any?) -> Any?)? = definedExternally, space: Int): String
+    public fun stringify(o: Any?, replacer: ((key: String, konstue: Any?) -> Any?)? = definedExternally, space: String): String
     public fun stringify(o: Any?, replacer: Array<String>): String
     public fun stringify(o: Any?, replacer: Array<String>, space: Int): String
     public fun stringify(o: Any?, replacer: Array<String>, space: String): String
 
     public fun <T> parse(text: String): T
-    public fun <T> parse(text: String, reviver: ((key: String, value: Any?) -> Any?)): T
+    public fun <T> parse(text: String, reviver: ((key: String, konstue: Any?) -> Any?)): T
 }

@@ -7,7 +7,7 @@
  * DESCRIPTION: The long literal mark after not integer literals.
  */
 
-val value = 'a'l
-val value = .09L
-val value = 10.10l
-val value = "..."L
+konst konstue = 'a'l
+konst konstue = .09L
+konst konstue = 10.10l
+konst konstue = "..."L

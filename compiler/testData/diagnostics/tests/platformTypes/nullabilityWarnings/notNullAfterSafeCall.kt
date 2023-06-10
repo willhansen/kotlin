@@ -10,7 +10,7 @@ public class J {
 // FILE: k.kt
 
 fun test(j: J?) {
-    val s = j?.nn()
+    konst s = j?.nn()
     if (s != null) {
 
     }

@@ -5,6 +5,6 @@ class A {
 fun foo(x: (String) -> Int) {}
 
 fun main() {
-    val a = A()
+    konst a = A()
     foo(a::bar)
 }

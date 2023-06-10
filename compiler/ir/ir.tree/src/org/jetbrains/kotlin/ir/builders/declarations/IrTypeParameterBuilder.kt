@@ -14,7 +14,7 @@ class IrTypeParameterBuilder : IrDeclarationBuilder() {
     var index: Int = UNDEFINED_PARAMETER_INDEX
     var variance: Variance = Variance.INVARIANT
     var isReified: Boolean = false
-    val superTypes: MutableList<IrType> = SmartList()
+    konst superTypes: MutableList<IrType> = SmartList()
 
     fun updateFrom(from: IrTypeParameter) {
         super.updateFrom(from)

@@ -25,7 +25,7 @@ fun run() {
     testExportObjCClass()
     testLocalizedStrings()
 
-    assertEquals(2, ForwardDeclaredEnum.TWO.value)
+    assertEquals(2, ForwardDeclaredEnum.TWO.konstue)
 
     println(
             getSupplier(
@@ -33,9 +33,9 @@ fun run() {
             )!!()
     )
 
-    val foo = Foo()
+    konst foo = Foo()
 
-    val classGetter = getClassGetter(foo)
+    konst classGetter = getClassGetter(foo)
     invoke2 { println(classGetter()) }
 
     foo.hello()
@@ -48,17 +48,17 @@ fun run() {
 
     Bar().hello()
 
-    val pair = MutablePairImpl(42, 17)
+    konst pair = MutablePairImpl(42, 17)
     replacePairElements(pair, 1, 2)
     pair.swap()
     println("${pair.first}, ${pair.second}")
 
-    val defaultPair = MutablePairImpl()
+    konst defaultPair = MutablePairImpl()
     assertEquals(defaultPair.first(), 123)
     assertEquals(defaultPair.second(), 321)
 
     // equals and hashCode (virtually):
-    val map = mapOf(foo to pair, pair to foo)
+    konst map = mapOf(foo to pair, pair to foo)
 
     // equals (directly):
     if (!foo.equals(pair)) {
@@ -67,8 +67,8 @@ fun run() {
     }
 
     // hashCode (directly):
-    // hash() returns value of NSUInteger type.
-    val hash = if (sizeOf<NSUIntegerVar>() == 4L) {
+    // hash() returns konstue of NSUInteger type.
+    konst hash = if (sizeOf<NSUIntegerVar>() == 4L) {
         foo.hash().toInt()
     } else {
         foo.hash().let { it.toInt() xor (it shr 32).toInt() }
@@ -165,7 +165,7 @@ fun testTypeOps() {
 
     assertFalse(Any() is ObjCProtocol)
     assertTrue(getPrinterProtocolRaw() is ObjCProtocol)
-    val printerProtocol = getPrinterProtocol()!!
+    konst printerProtocol = getPrinterProtocol()!!
     assertTrue(printerProtocol.asAny() is ObjCProtocol)
 
     assertEquals(3u, ("foo" as NSString).length())
@@ -211,12 +211,12 @@ fun testCustomRetain() {
     assertFalse(unexpectedDeallocation)
 }
 
-private const val TestExportObjCClass1Name = "TestExportObjCClass"
+private const konst TestExportObjCClass1Name = "TestExportObjCClass"
 @ExportObjCClass(TestExportObjCClass1Name) class TestExportObjCClass1 : NSObject()
 
 @ExportObjCClass class TestExportObjCClass2 : NSObject()
 
-const val TestExportObjCClass34Name = "TestExportObjCClass34"
+const konst TestExportObjCClass34Name = "TestExportObjCClass34"
 @ExportObjCClass(TestExportObjCClass34Name) class TestExportObjCClass3 : NSObject()
 @ExportObjCClass(TestExportObjCClass34Name) class TestExportObjCClass4 : NSObject()
 
@@ -229,13 +229,13 @@ fun testExportObjCClass() {
 }
 
 fun testLocalizedStrings() {
-    val key = "screen_main_plural_string"
-    val localizedString = NSBundle.mainBundle.localizedStringForKey(key, value = "", table = "Localizable")
-    val string = NSString.localizedStringWithFormat(localizedString, 5)
+    konst key = "screen_main_plural_string"
+    konst localizedString = NSBundle.mainBundle.localizedStringForKey(key, konstue = "", table = "Localizable")
+    konst string = NSString.localizedStringWithFormat(localizedString, 5)
     assertEquals("Plural: 5 apples", string)
 }
 
-private val Any.objCClassName: String
+private konst Any.objCClassName: String
     get() = object_getClassName(this)!!.toKString()
 
 fun Any?.asAny(): Any? = this

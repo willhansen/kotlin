@@ -1,5 +1,5 @@
-annotation class A(val a: Int, val c: KClass<*>)
+annotation class A(konst a: Int, konst c: KClass<*>)
 
 @property:A(1, Int::class)
-val f<caret>oo : Int
+konst f<caret>oo : Int
     get() = 10

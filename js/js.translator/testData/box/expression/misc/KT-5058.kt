@@ -2,8 +2,8 @@
 package foo
 
 fun test():Any {
-    val a: Any = "OK"
-    val f: Any =
+    konst a: Any = "OK"
+    konst f: Any =
             if (true) {
                 when {
                     false -> "1"

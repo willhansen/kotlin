@@ -4,7 +4,7 @@ import kotlin.test.*
 
 var log: String = ""
 
-val dispatcher = hashMapOf<String, String>()
+konst dispatcher = hashMapOf<String, String>()
 
 inline fun <T> runLogged(entry: String, action: () -> T): T {
     log += entry
@@ -26,7 +26,7 @@ operator fun String.setValue(receiver: Any?, p: Any, newValue: String) {
 
 var testO by runLogged("K;") { "K" }
 var testK by runLogged("O;") { "O" }
-val testOK = runLogged("OK;") {
+konst testOK = runLogged("OK;") {
     testO = "O"
     testK = "K"
     testO + testK

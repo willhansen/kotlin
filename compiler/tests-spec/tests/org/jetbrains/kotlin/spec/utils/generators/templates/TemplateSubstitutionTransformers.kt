@@ -9,6 +9,6 @@ enum class TemplateValidationTransformerType {
     TRIM_BACKTICKS
 }
 
-val templateValidationTransformers = mapOf<TemplateValidationTransformerType, (String) -> String>(
+konst templateValidationTransformers = mapOf<TemplateValidationTransformerType, (String) -> String>(
     TemplateValidationTransformerType.TRIM_BACKTICKS to { element -> element.trim('`') }
 )

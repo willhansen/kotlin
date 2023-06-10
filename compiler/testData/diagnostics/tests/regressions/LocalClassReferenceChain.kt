@@ -10,6 +10,6 @@ fun test2() {
     }
 
     fun LocalA.LocalB.blah() {
-        val c: LocalA.LocalB.LocalC = LocalC()
+        konst c: LocalA.LocalB.LocalC = LocalC()
     }
 }

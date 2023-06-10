@@ -9,13 +9,13 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class Foo<T>(val x: <!UNSUPPORTED_FEATURE!>T<!>)
+konstue class Foo<T>(konst x: <!UNSUPPORTED_FEATURE!>T<!>)
 @JvmInline
-value class FooNullable<T>(val x: <!UNSUPPORTED_FEATURE!>T?<!>)
+konstue class FooNullable<T>(konst x: <!UNSUPPORTED_FEATURE!>T?<!>)
 
 @JvmInline
-value class FooGenericArray<T>(val x: <!UNSUPPORTED_FEATURE!>Array<T><!>)
+konstue class FooGenericArray<T>(konst x: <!UNSUPPORTED_FEATURE!>Array<T><!>)
 @JvmInline
-value class FooGenericArray2<T>(val x: <!UNSUPPORTED_FEATURE!>Array<Array<T>><!>)
+konstue class FooGenericArray2<T>(konst x: <!UNSUPPORTED_FEATURE!>Array<Array<T>><!>)
 
 

@@ -5,8 +5,8 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-annotation class D(val d: Double)
-annotation class F(val f: Float)
+annotation class D(konst d: Double)
+annotation class F(konst f: Float)
 
 /*
 // TODO: uncomment once KT-13887 is implemented
@@ -32,7 +32,7 @@ fun check(x: Any, y: Any, regexString: String) {
     assertEquals(y, x)
     assertEquals(x.hashCode(), y.hashCode())
 
-    val regex = regexString.toRegex()
+    konst regex = regexString.toRegex()
     assertTrue(regex.matches(x.toString()))
     assertTrue(regex.matches(y.toString()))
 }
@@ -50,10 +50,10 @@ fun box(): String {
     check(::fnan.annotations.single() as F, F::class.constructors.single().call(Float.NaN))
 */
 
-    val dmz = D::class.constructors.single().call(-0.0)
-    val dpz = D::class.constructors.single().call(+0.0)
-    val fmz = F::class.constructors.single().call(-0.0f)
-    val fpz = F::class.constructors.single().call(+0.0f)
+    konst dmz = D::class.constructors.single().call(-0.0)
+    konst dpz = D::class.constructors.single().call(+0.0)
+    konst fmz = F::class.constructors.single().call(-0.0f)
+    konst fpz = F::class.constructors.single().call(+0.0f)
     check(::dMinusZero.annotations.single() as D, dmz, "@test.D\\(d=-0.0\\)")
     check(::dPlusZero.annotations.single() as D, dpz, "@test.D\\(d=0.0\\)")
     check(::fMinusZero.annotations.single() as F, fmz, "@test.F\\(f=-0.0f?\\)")

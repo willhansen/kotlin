@@ -36,8 +36,8 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 // FIXME support module classifiers for PM2.0 or drop this class in favor of KotlinModuleIdentifier
 open class ModuleDependencyIdentifier(
-    open val groupId: String?,
-    open val moduleId: String
+    open konst groupId: String?,
+    open konst moduleId: String
 ) : Serializable {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -64,20 +64,20 @@ open class ModuleDependencyIdentifier(
 }
 
 class ChangingModuleDependencyIdentifier(
-    val groupIdProvider: () -> String?,
-    val moduleIdProvider: () -> String
+    konst groupIdProvider: () -> String?,
+    konst moduleIdProvider: () -> String
 ) : ModuleDependencyIdentifier(groupIdProvider(), moduleIdProvider()) {
-    override val groupId: String?
+    override konst groupId: String?
         get() = groupIdProvider()
-    override val moduleId: String
+    override konst moduleId: String
         get() = moduleIdProvider()
 }
 
 sealed class SourceSetMetadataLayout(
     @get:Input
-    val name: String,
+    konst name: String,
     @get:Internal
-    val archiveExtension: String
+    konst archiveExtension: String
 ) : Serializable {
     object METADATA : SourceSetMetadataLayout("metadata", "jar")
     object KLIB : SourceSetMetadataLayout("klib", "klib")
@@ -85,9 +85,9 @@ sealed class SourceSetMetadataLayout(
     override fun toString(): String = name
 
     companion object {
-        private val values get() = listOf(METADATA, KLIB)
+        private konst konstues get() = listOf(METADATA, KLIB)
 
-        fun byName(name: String): SourceSetMetadataLayout? = values.firstOrNull { it.name == name }
+        fun byName(name: String): SourceSetMetadataLayout? = konstues.firstOrNull { it.name == name }
 
         fun chooseForProducingProject() =
             /** A producing project will now only generate Granular source sets metadata as a KLIB */
@@ -102,72 +102,72 @@ sealed class SourceSetMetadataLayout(
  */
 data class KotlinProjectStructureMetadata(
     @Input
-    val sourceSetNamesByVariantName: Map<String, Set<String>>,
+    konst sourceSetNamesByVariantName: Map<String, Set<String>>,
 
     @Input
-    val sourceSetsDependsOnRelation: Map<String, Set<String>>,
+    konst sourceSetsDependsOnRelation: Map<String, Set<String>>,
 
     @Nested
-    val sourceSetBinaryLayout: Map<String, SourceSetMetadataLayout>,
+    konst sourceSetBinaryLayout: Map<String, SourceSetMetadataLayout>,
 
     @Internal
-    val sourceSetModuleDependencies: Map<String, Set<ModuleDependencyIdentifier>>,
+    konst sourceSetModuleDependencies: Map<String, Set<ModuleDependencyIdentifier>>,
 
     @Input
-    val sourceSetCInteropMetadataDirectory: Map<String, String>,
+    konst sourceSetCInteropMetadataDirectory: Map<String, String>,
 
     @Input
-    val hostSpecificSourceSets: Set<String>,
+    konst hostSpecificSourceSets: Set<String>,
 
     @get:Input
-    val isPublishedAsRoot: Boolean,
+    konst isPublishedAsRoot: Boolean,
 
     @get:Input
-    val sourceSetNames: Set<String>,
+    konst sourceSetNames: Set<String>,
 
     @Input
-    val formatVersion: String = FORMAT_VERSION_0_3_3
+    konst formatVersion: String = FORMAT_VERSION_0_3_3
 ) : Serializable {
     @Suppress("UNUSED") // Gradle input
     @get:Input
-    internal val sourceSetModuleDependenciesInput: Map<String, Set<Pair<String, String>>>
+    internal konst sourceSetModuleDependenciesInput: Map<String, Set<Pair<String, String>>>
         get() = sourceSetModuleDependencies.mapValues { (_, ids) -> ids.map { (group, module) -> group.orEmpty() to module }.toSet() }
 
     companion object {
-        internal const val FORMAT_VERSION_0_1 = "0.1"
+        internal const konst FORMAT_VERSION_0_1 = "0.1"
 
         // + binaryFormat (klib, metadata/jar)
-        internal const val FORMAT_VERSION_0_2 = "0.2"
+        internal const konst FORMAT_VERSION_0_2 = "0.2"
 
         // + 'hostSpecific' flag for source sets
-        internal const val FORMAT_VERSION_0_3 = "0.3"
+        internal const konst FORMAT_VERSION_0_3 = "0.3"
 
         // + 'isPublishedInRootModule' top-level flag
-        internal const val FORMAT_VERSION_0_3_1 = "0.3.1"
+        internal const konst FORMAT_VERSION_0_3_1 = "0.3.1"
 
         // + 'sourceSetCInteropMetadataDirectory' map
-        internal const val FORMAT_VERSION_0_3_2 = "0.3.2"
+        internal const konst FORMAT_VERSION_0_3_2 = "0.3.2"
 
         // + 'sourceSetsNames'
-        internal const val FORMAT_VERSION_0_3_3 = "0.3.3"
+        internal const konst FORMAT_VERSION_0_3_3 = "0.3.3"
     }
 }
 
 
-internal val KotlinMultiplatformExtension.kotlinProjectStructureMetadata: KotlinProjectStructureMetadata
+internal konst KotlinMultiplatformExtension.kotlinProjectStructureMetadata: KotlinProjectStructureMetadata
     get() = project.extensions.extraProperties.getOrPut("org.jetbrains.kotlin.gradle.plugin.mpp.kotlinProjectStructureMetadata") {
         buildKotlinProjectStructureMetadata(this)
     }
 
 private fun buildKotlinProjectStructureMetadata(extension: KotlinMultiplatformExtension): KotlinProjectStructureMetadata {
-    val project = extension.project
+    konst project = extension.project
     require(project.state.executed) { "Cannot build 'KotlinProjectStructureMetadata' during project configuration phase" }
 
-    val sourceSetsWithMetadataCompilations = extension.targets
+    konst sourceSetsWithMetadataCompilations = extension.targets
         .getByName(KotlinMultiplatformPlugin.METADATA_TARGET_NAME)
         .compilations.associateBy { it.defaultSourceSet }
 
-    val publishedVariantsNamesWithCompilation = project.future { getPublishedPlatformCompilations(project).mapKeys { it.key.name } }
+    konst publishedVariantsNamesWithCompilation = project.future { getPublishedPlatformCompilations(project).mapKeys { it.key.name } }
         .getOrThrow()
 
     return KotlinProjectStructureMetadata(
@@ -183,16 +183,16 @@ private fun buildKotlinProjectStructureMetadata(extension: KotlinMultiplatformEx
              * published as API dependencies of the metadata module to get into the resolution result, see
              * [KotlinMetadataTargetConfigurator.exportDependenciesForPublishing].
              */
-            val isNativeSharedSourceSet = sourceSet.isNativeSourceSet.getOrThrow()
-            val scopes = listOfNotNull(
+            konst isNativeSharedSourceSet = sourceSet.isNativeSourceSet.getOrThrow()
+            konst scopes = listOfNotNull(
                 KotlinDependencyScope.API_SCOPE,
                 KotlinDependencyScope.IMPLEMENTATION_SCOPE.takeIf { isNativeSharedSourceSet }
             )
-            val sourceSetsToIncludeDependencies =
+            konst sourceSetsToIncludeDependencies =
                 if (isNativeSharedSourceSet)
                     dependsOnClosureWithInterCompilationDependencies(sourceSet).plus(sourceSet)
                 else listOf(sourceSet)
-            val sourceSetExportedDependencies = scopes.flatMap { scope ->
+            konst sourceSetExportedDependencies = scopes.flatMap { scope ->
                 sourceSetsToIncludeDependencies.flatMap { hierarchySourceSet ->
                     project.configurations.sourceSetDependencyConfigurationByScope(hierarchySourceSet, scope).allDependencies.toList()
                 }
@@ -214,21 +214,21 @@ private fun buildKotlinProjectStructureMetadata(extension: KotlinMultiplatformEx
 }
 
 internal fun buildProjectStructureMetadata(module: GradleKpmModule): KotlinProjectStructureMetadata {
-    val kotlinVariantToGradleVariantNames = module.variants.associate { it.name to it.gradleVariantNames }
+    konst kotlinVariantToGradleVariantNames = module.variants.associate { it.name to it.gradleVariantNames }
 
     fun <T> expandVariantKeys(map: Map<String, T>) =
-        map.entries.flatMap { (key, value) ->
-            kotlinVariantToGradleVariantNames[key].orEmpty().plus(key).map { it to value }
+        map.entries.flatMap { (key, konstue) ->
+            kotlinVariantToGradleVariantNames[key].orEmpty().plus(key).map { it to konstue }
         }.toMap()
 
-    val kotlinFragmentsPerKotlinVariant =
+    konst kotlinFragmentsPerKotlinVariant =
         module.variants.associate { variant -> variant.name to variant.withRefinesClosure.map { it.name }.toSet() }
-    val fragmentRefinesRelation =
+    konst fragmentRefinesRelation =
         module.fragments.associate { it.name to it.declaredRefinesDependencies.map { it.fragmentName }.toSet() }
 
     // FIXME: support native implementation-as-api-dependencies
     // FIXME: support dependencies on auxiliary modules
-    val fragmentDependencies =
+    konst fragmentDependencies =
         module.fragments.associate { fragment ->
             fragment.name to fragment.declaredModuleDependencies.map {
                 ModuleIds.lossyFromModuleIdentifier(module.project, it.moduleIdentifier)
@@ -252,18 +252,18 @@ internal fun <Serializer> KotlinProjectStructureMetadata.serialize(
     node: Serializer.(name: String, Serializer.() -> Unit) -> Unit,
     multiNodes: Serializer.(name: String, Serializer.() -> Unit) -> Unit,
     multiNodesItem: Serializer.(name: String, Serializer.() -> Unit) -> Unit,
-    value: Serializer.(key: String, value: String) -> Unit,
-    multiValue: Serializer.(name: String, values: List<String>) -> Unit
+    konstue: Serializer.(key: String, konstue: String) -> Unit,
+    multiValue: Serializer.(name: String, konstues: List<String>) -> Unit
 ) = with(serializer) {
     node(ROOT_NODE_NAME) {
-        value(FORMAT_VERSION_NODE_NAME, formatVersion)
+        konstue(FORMAT_VERSION_NODE_NAME, formatVersion)
 
-        value(PUBLISHED_AS_ROOT_NAME, isPublishedAsRoot.toString())
+        konstue(PUBLISHED_AS_ROOT_NAME, isPublishedAsRoot.toString())
 
         multiNodes(VARIANTS_NODE_NAME) {
             sourceSetNamesByVariantName.forEach { (variantName, sourceSets) ->
                 multiNodesItem(VARIANT_NODE_NAME) {
-                    value(NAME_NODE_NAME, variantName)
+                    konstue(NAME_NODE_NAME, variantName)
                     multiValue(SOURCE_SET_NODE_NAME, sourceSets.toList())
                 }
             }
@@ -272,19 +272,19 @@ internal fun <Serializer> KotlinProjectStructureMetadata.serialize(
         multiNodes(SOURCE_SETS_NODE_NAME) {
             for (sourceSet in sourceSetNames) {
                 multiNodesItem(SOURCE_SET_NODE_NAME) {
-                    value(NAME_NODE_NAME, sourceSet)
+                    konstue(NAME_NODE_NAME, sourceSet)
                     multiValue(DEPENDS_ON_NODE_NAME, sourceSetsDependsOnRelation[sourceSet].orEmpty().toList())
                     multiValue(MODULE_DEPENDENCY_NODE_NAME, sourceSetModuleDependencies[sourceSet].orEmpty().map { moduleDependency ->
                         moduleDependency.groupId + ":" + moduleDependency.moduleId
                     })
                     sourceSetCInteropMetadataDirectory[sourceSet]?.let { cinteropMetadataDirectory ->
-                        value(SOURCE_SET_CINTEROP_METADATA_NODE_NAME, cinteropMetadataDirectory)
+                        konstue(SOURCE_SET_CINTEROP_METADATA_NODE_NAME, cinteropMetadataDirectory)
                     }
                     sourceSetBinaryLayout[sourceSet]?.let { binaryLayout ->
-                        value(BINARY_LAYOUT_NODE_NAME, binaryLayout.name)
+                        konstue(BINARY_LAYOUT_NODE_NAME, binaryLayout.name)
                     }
                     if (sourceSet in hostSpecificSourceSets) {
-                        value(HOST_SPECIFIC_NODE_NAME, "true")
+                        konstue(HOST_SPECIFIC_NODE_NAME, "true")
                     }
                 }
             }
@@ -294,52 +294,52 @@ internal fun <Serializer> KotlinProjectStructureMetadata.serialize(
 
 internal fun KotlinProjectStructureMetadata.toXmlDocument(): Document {
     return DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument().apply {
-        val node: Node.(String, Node.() -> Unit) -> Unit = { name, content -> appendChild(createElement(name).apply(content)) }
-        val textNode: Node.(String, String) -> Unit =
-            { name, value -> appendChild(createElement(name).apply { appendChild(createTextNode(value)) }) }
-        serialize(this as Node, node, node, node, textNode, { name, values -> for (v in values) textNode(name, v) })
+        konst node: Node.(String, Node.() -> Unit) -> Unit = { name, content -> appendChild(createElement(name).apply(content)) }
+        konst textNode: Node.(String, String) -> Unit =
+            { name, konstue -> appendChild(createElement(name).apply { appendChild(createTextNode(konstue)) }) }
+        serialize(this as Node, node, node, node, textNode, { name, konstues -> for (v in konstues) textNode(name, v) })
     }
 }
 
 internal fun KotlinProjectStructureMetadata.toJson(): String {
-    val gson = GsonBuilder().setPrettyPrinting().create()
-    val stringWriter = StringWriter()
+    konst gson = GsonBuilder().setPrettyPrinting().create()
+    konst stringWriter = StringWriter()
     with(gson.newJsonWriter(stringWriter)) {
-        val obj: JsonWriter.(String, JsonWriter.() -> Unit) -> Unit =
+        konst obj: JsonWriter.(String, JsonWriter.() -> Unit) -> Unit =
             { name, content -> if (name.isNotEmpty()) name(name); beginObject(); content(); endObject() }
-        val property: JsonWriter.(String, String) -> Unit = { name, value -> name(name); value(value) }
-        val array: JsonWriter.(String, JsonWriter.() -> Unit) -> Unit =
+        konst property: JsonWriter.(String, String) -> Unit = { name, konstue -> name(name); konstue(konstue) }
+        konst array: JsonWriter.(String, JsonWriter.() -> Unit) -> Unit =
             { name, contents -> name(name); beginArray(); contents(); endArray() }
 
         beginObject()
-        serialize(this, obj, array, { _, fn -> obj("", fn) }, property, { key, values -> array(key) { values.forEach { value(it) } } })
+        serialize(this, obj, array, { _, fn -> obj("", fn) }, property, { key, konstues -> array(key) { konstues.forEach { konstue(it) } } })
         endObject()
     }
     return stringWriter.toString()
 }
 
-private val NodeList.elements: Iterable<Element> get() = (0 until length).map { this@elements.item(it) }.filterIsInstance<Element>()
+private konst NodeList.elements: Iterable<Element> get() = (0 until length).map { this@elements.item(it) }.filterIsInstance<Element>()
 
 internal fun parseKotlinSourceSetMetadataFromJson(string: String): KotlinProjectStructureMetadata {
     @Suppress("DEPRECATION") // The replacement doesn't compile against old dependencies such as AS 4.0
-    val json = JsonParser().parse(string).asJsonObject
-    val valueNamed: JsonObject.(String) -> String? = { name -> get(name)?.asString }
-    val multiObjects: JsonObject.(String?) -> Iterable<JsonObject> = { name -> get(name).asJsonArray.map { it.asJsonObject } }
-    val multiValues: JsonObject.(String?) -> Iterable<String> = { name -> get(name).asJsonArray.map { it.asString } }
+    konst json = JsonParser().parse(string).asJsonObject
+    konst konstueNamed: JsonObject.(String) -> String? = { name -> get(name)?.asString }
+    konst multiObjects: JsonObject.(String?) -> Iterable<JsonObject> = { name -> get(name).asJsonArray.map { it.asJsonObject } }
+    konst multiValues: JsonObject.(String?) -> Iterable<String> = { name -> get(name).asJsonArray.map { it.asString } }
 
-    return parseKotlinSourceSetMetadata({ json.get(ROOT_NODE_NAME).asJsonObject }, valueNamed, multiObjects, multiValues)
+    return parseKotlinSourceSetMetadata({ json.get(ROOT_NODE_NAME).asJsonObject }, konstueNamed, multiObjects, multiValues)
 }
 
 internal fun parseKotlinSourceSetMetadataFromXml(document: Document): KotlinProjectStructureMetadata {
-    val nodeNamed: Element.(String) -> Element? = { name -> getElementsByTagName(name).elements.singleOrNull() }
-    val valueNamed: Element.(String) -> String? =
+    konst nodeNamed: Element.(String) -> Element? = { name -> getElementsByTagName(name).elements.singleOrNull() }
+    konst konstueNamed: Element.(String) -> String? =
         { name -> getElementsByTagName(name).run { if (length > 0) item(0).textContent else null } }
-    val multiObjects: Element.(String) -> Iterable<Element> = { name -> nodeNamed(name)?.childNodes?.elements ?: emptyList() }
-    val multiValues: Element.(String) -> Iterable<String> = { name -> getElementsByTagName(name).elements.map { it.textContent } }
+    konst multiObjects: Element.(String) -> Iterable<Element> = { name -> nodeNamed(name)?.childNodes?.elements ?: emptyList() }
+    konst multiValues: Element.(String) -> Iterable<String> = { name -> getElementsByTagName(name).elements.map { it.textContent } }
 
     return parseKotlinSourceSetMetadata(
         { document.getElementsByTagName(ROOT_NODE_NAME).elements.single() },
-        valueNamed,
+        konstueNamed,
         multiObjects,
         multiValues
     )
@@ -347,52 +347,52 @@ internal fun parseKotlinSourceSetMetadataFromXml(document: Document): KotlinProj
 
 internal fun <ParsingContext> parseKotlinSourceSetMetadata(
     getRoot: () -> ParsingContext,
-    valueNamed: ParsingContext.(key: String) -> String?,
+    konstueNamed: ParsingContext.(key: String) -> String?,
     multiObjects: ParsingContext.(named: String) -> Iterable<ParsingContext>,
     multiValues: ParsingContext.(named: String) -> Iterable<String>
 ): KotlinProjectStructureMetadata {
-    val projectStructureNode = getRoot()
+    konst projectStructureNode = getRoot()
 
-    val formatVersion = checkNotNull(projectStructureNode.valueNamed(FORMAT_VERSION_NODE_NAME))
-    val variantsNode = projectStructureNode.multiObjects(VARIANTS_NODE_NAME)
+    konst formatVersion = checkNotNull(projectStructureNode.konstueNamed(FORMAT_VERSION_NODE_NAME))
+    konst variantsNode = projectStructureNode.multiObjects(VARIANTS_NODE_NAME)
 
-    val isPublishedAsRoot = projectStructureNode.valueNamed(PUBLISHED_AS_ROOT_NAME)?.toBoolean() ?: false
-    val sourceSetsByVariant = mutableMapOf<String, Set<String>>()
+    konst isPublishedAsRoot = projectStructureNode.konstueNamed(PUBLISHED_AS_ROOT_NAME)?.toBoolean() ?: false
+    konst sourceSetsByVariant = mutableMapOf<String, Set<String>>()
 
     variantsNode.forEach { variantNode ->
-        val variantName = requireNotNull(variantNode.valueNamed(NAME_NODE_NAME))
-        val sourceSets = variantNode.multiValues(SOURCE_SET_NODE_NAME).toSet()
+        konst variantName = requireNotNull(variantNode.konstueNamed(NAME_NODE_NAME))
+        konst sourceSets = variantNode.multiValues(SOURCE_SET_NODE_NAME).toSet()
 
         sourceSetsByVariant[variantName] = sourceSets
     }
 
-    val sourceSetDependsOnRelation = mutableMapOf<String, Set<String>>()
-    val sourceSetModuleDependencies = mutableMapOf<String, Set<ModuleDependencyIdentifier>>()
-    val sourceSetBinaryLayout = mutableMapOf<String, SourceSetMetadataLayout>()
-    val sourceSetCInteropMetadataDirectory = mutableMapOf<String, String>()
-    val hostSpecificSourceSets = mutableSetOf<String>()
-    val sourceSetNames = mutableSetOf<String>()
+    konst sourceSetDependsOnRelation = mutableMapOf<String, Set<String>>()
+    konst sourceSetModuleDependencies = mutableMapOf<String, Set<ModuleDependencyIdentifier>>()
+    konst sourceSetBinaryLayout = mutableMapOf<String, SourceSetMetadataLayout>()
+    konst sourceSetCInteropMetadataDirectory = mutableMapOf<String, String>()
+    konst hostSpecificSourceSets = mutableSetOf<String>()
+    konst sourceSetNames = mutableSetOf<String>()
 
-    val sourceSetsNode = projectStructureNode.multiObjects(SOURCE_SETS_NODE_NAME)
+    konst sourceSetsNode = projectStructureNode.multiObjects(SOURCE_SETS_NODE_NAME)
 
     sourceSetsNode.forEach { sourceSetNode ->
-        val sourceSetName = checkNotNull(sourceSetNode.valueNamed(NAME_NODE_NAME))
+        konst sourceSetName = checkNotNull(sourceSetNode.konstueNamed(NAME_NODE_NAME))
         sourceSetNames.add(sourceSetName)
 
-        val dependsOn = sourceSetNode.multiValues(DEPENDS_ON_NODE_NAME).toSet()
-        val moduleDependencies = sourceSetNode.multiValues(MODULE_DEPENDENCY_NODE_NAME).mapTo(mutableSetOf()) {
-            val (groupId, moduleId) = it.split(":")
+        konst dependsOn = sourceSetNode.multiValues(DEPENDS_ON_NODE_NAME).toSet()
+        konst moduleDependencies = sourceSetNode.multiValues(MODULE_DEPENDENCY_NODE_NAME).mapTo(mutableSetOf()) {
+            konst (groupId, moduleId) = it.split(":")
             ModuleDependencyIdentifier(groupId, moduleId)
         }
 
-        sourceSetNode.valueNamed(SOURCE_SET_CINTEROP_METADATA_NODE_NAME)?.let { cinteropMetadataDirectory ->
+        sourceSetNode.konstueNamed(SOURCE_SET_CINTEROP_METADATA_NODE_NAME)?.let { cinteropMetadataDirectory ->
             sourceSetCInteropMetadataDirectory[sourceSetName] = cinteropMetadataDirectory
         }
 
-        sourceSetNode.valueNamed(HOST_SPECIFIC_NODE_NAME)
+        sourceSetNode.konstueNamed(HOST_SPECIFIC_NODE_NAME)
             ?.let { if (it.toBoolean()) hostSpecificSourceSets.add(sourceSetName) }
 
-        sourceSetNode.valueNamed(BINARY_LAYOUT_NODE_NAME)
+        sourceSetNode.konstueNamed(BINARY_LAYOUT_NODE_NAME)
             ?.let { SourceSetMetadataLayout.byName(it) }
             ?.let { sourceSetBinaryLayout[sourceSetName] = it }
 
@@ -414,7 +414,7 @@ internal fun <ParsingContext> parseKotlinSourceSetMetadata(
 }
 
 internal object GlobalProjectStructureMetadataStorage {
-    private const val propertyPrefix = "kotlin.projectStructureMetadata.build"
+    private const konst propertyPrefix = "kotlin.projectStructureMetadata.build"
 
     fun propertyName(buildName: String, projectPath: String) = "$propertyPrefix.$buildName.path.$projectPath"
 
@@ -438,13 +438,13 @@ internal object GlobalProjectStructureMetadataStorage {
     }
 
     private fun Any.getProjectStructureMetadataOrNull(): KotlinProjectStructureMetadata? {
-        val jsonStringProvider = this as? Function0<*> ?: return null
-        val jsonString = jsonStringProvider.invoke() as? String ?: return null
+        konst jsonStringProvider = this as? Function0<*> ?: return null
+        konst jsonString = jsonStringProvider.invoke() as? String ?: return null
         return parseKotlinSourceSetMetadataFromJson(jsonString)
     }
 
     private fun String.toProjectPathWithBuildName(): ProjectPathWithBuildName {
-        val (buildName, projectPath) = removePrefix("$propertyPrefix.").split(".path.")
+        konst (buildName, projectPath) = removePrefix("$propertyPrefix.").split(".path.")
         return ProjectPathWithBuildName(
             projectPath = projectPath,
             buildName = buildName
@@ -452,16 +452,16 @@ internal object GlobalProjectStructureMetadataStorage {
     }
 }
 
-private const val ROOT_NODE_NAME = "projectStructure"
-private const val PUBLISHED_AS_ROOT_NAME = "isPublishedAsRoot"
-private const val FORMAT_VERSION_NODE_NAME = "formatVersion"
-private const val VARIANTS_NODE_NAME = "variants"
-private const val VARIANT_NODE_NAME = "variant"
-private const val NAME_NODE_NAME = "name"
-private const val SOURCE_SETS_NODE_NAME = "sourceSets"
-private const val SOURCE_SET_NODE_NAME = "sourceSet"
-private const val SOURCE_SET_CINTEROP_METADATA_NODE_NAME = "sourceSetCInteropMetadataDirectory"
-private const val DEPENDS_ON_NODE_NAME = "dependsOn"
-private const val MODULE_DEPENDENCY_NODE_NAME = "moduleDependency"
-private const val BINARY_LAYOUT_NODE_NAME = "binaryLayout"
-private const val HOST_SPECIFIC_NODE_NAME = "hostSpecific"
+private const konst ROOT_NODE_NAME = "projectStructure"
+private const konst PUBLISHED_AS_ROOT_NAME = "isPublishedAsRoot"
+private const konst FORMAT_VERSION_NODE_NAME = "formatVersion"
+private const konst VARIANTS_NODE_NAME = "variants"
+private const konst VARIANT_NODE_NAME = "variant"
+private const konst NAME_NODE_NAME = "name"
+private const konst SOURCE_SETS_NODE_NAME = "sourceSets"
+private const konst SOURCE_SET_NODE_NAME = "sourceSet"
+private const konst SOURCE_SET_CINTEROP_METADATA_NODE_NAME = "sourceSetCInteropMetadataDirectory"
+private const konst DEPENDS_ON_NODE_NAME = "dependsOn"
+private const konst MODULE_DEPENDENCY_NODE_NAME = "moduleDependency"
+private const konst BINARY_LAYOUT_NODE_NAME = "binaryLayout"
+private const konst HOST_SPECIFIC_NODE_NAME = "hostSpecific"

@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.types.*
 
 class LazyTypeAliasDescriptor(
     storageManager: StorageManager,
-    private val trace: BindingTrace,
+    private konst trace: BindingTrace,
     containingDeclaration: DeclarationDescriptor,
     annotations: Annotations,
     name: Name,
@@ -41,7 +41,7 @@ class LazyTypeAliasDescriptor(
     visibility: DescriptorVisibility
 ) : AbstractTypeAliasDescriptor(storageManager, containingDeclaration, annotations, name, sourceElement, visibility),
     TypeAliasDescriptor {
-    override val constructors: Collection<TypeAliasConstructorDescriptor> by storageManager.createLazyValue {
+    override konst constructors: Collection<TypeAliasConstructorDescriptor> by storageManager.createLazyValue {
         getTypeAliasConstructors()
     }
 
@@ -49,11 +49,11 @@ class LazyTypeAliasDescriptor(
     private lateinit var expandedTypeImpl: NotNullLazyValue<SimpleType>
     private lateinit var defaultTypeImpl: NotNullLazyValue<SimpleType>
     private lateinit var classDescriptorImpl: NullableLazyValue<ClassDescriptor>
-    private val isActual = (source.getPsi() as? KtTypeAlias)?.hasActualModifier() == true
+    private konst isActual = (source.getPsi() as? KtTypeAlias)?.hasActualModifier() == true
 
-    override val underlyingType: SimpleType get() = underlyingTypeImpl()
-    override val expandedType: SimpleType get() = expandedTypeImpl()
-    override val classDescriptor: ClassDescriptor? get() = classDescriptorImpl()
+    override konst underlyingType: SimpleType get() = underlyingTypeImpl()
+    override konst expandedType: SimpleType get() = expandedTypeImpl()
+    override konst classDescriptor: ClassDescriptor? get() = classDescriptorImpl()
     override fun getDefaultType(): SimpleType = defaultTypeImpl()
 
     override fun isActual(): Boolean = isActual
@@ -72,7 +72,7 @@ class LazyTypeAliasDescriptor(
 
     private fun computeClassDescriptor(): ClassDescriptor? {
         if (underlyingType.isError) return null
-        val underlyingTypeDescriptor = underlyingType.constructor.declarationDescriptor
+        konst underlyingTypeDescriptor = underlyingType.constructor.declarationDescriptor
         return when (underlyingTypeDescriptor) {
             is ClassDescriptor -> underlyingTypeDescriptor
             is TypeAliasDescriptor -> underlyingTypeDescriptor.classDescriptor
@@ -80,7 +80,7 @@ class LazyTypeAliasDescriptor(
         }
     }
 
-    private val lazyTypeConstructorParameters =
+    private konst lazyTypeConstructorParameters =
         storageManager.createRecursionTolerantLazyValue({ this.computeConstructorTypeParameters() }, emptyList())
 
     fun initialize(
@@ -95,7 +95,7 @@ class LazyTypeAliasDescriptor(
 
     override fun substitute(substitutor: TypeSubstitutor): TypeAliasDescriptor {
         if (substitutor.isEmpty) return this
-        val substituted = LazyTypeAliasDescriptor(
+        konst substituted = LazyTypeAliasDescriptor(
             storageManager, trace,
             containingDeclaration, annotations, name, source, visibility
         )

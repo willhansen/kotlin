@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.metadata.deserialization.isInstanceType
 import org.jetbrains.kotlin.serialization.deserialization.ProtoBufContractDeserializer
 
-class FirContractDeserializer(private val c: FirDeserializationContext) :
+class FirContractDeserializer(private konst c: FirDeserializationContext) :
     ProtoBufContractDeserializer<ConeKotlinType, ConeDiagnostic, FirContractDescriptionOwner>() {
     fun loadContract(proto: ProtoBuf.Contract, owner: FirContractDescriptionOwner): FirContractDescription? {
-        val effects = proto.effectList.map { loadPossiblyConditionalEffect(it, owner) ?: return null }
+        konst effects = proto.effectList.map { loadPossiblyConditionalEffect(it, owner) ?: return null }
         return buildResolvedContractDescription {
             this.effects += effects.map { it.toFirElement() }
         }
@@ -35,28 +35,28 @@ class FirContractDeserializer(private val c: FirDeserializationContext) :
     }
 
     override fun extractVariable(
-        valueParameterIndex: Int,
+        konstueParameterIndex: Int,
         owner: FirContractDescriptionOwner
     ): KtValueParameterReference<ConeKotlinType, ConeDiagnostic>?  {
-        val name: String
-        val ownerFunction = owner as FirSimpleFunction
-        val typeRef = if (valueParameterIndex < 0) {
+        konst name: String
+        konst ownerFunction = owner as FirSimpleFunction
+        konst typeRef = if (konstueParameterIndex < 0) {
             name = "this"
             ownerFunction.receiverParameter?.typeRef
         } else {
-            val parameter = ownerFunction.valueParameters.getOrNull(valueParameterIndex) ?: return null
+            konst parameter = ownerFunction.konstueParameters.getOrNull(konstueParameterIndex) ?: return null
             name = parameter.name.asString()
             parameter.returnTypeRef
         } ?: return null
 
         return if (!typeRef.isBoolean)
-            KtValueParameterReference(valueParameterIndex, name)
+            KtValueParameterReference(konstueParameterIndex, name)
         else
-            KtBooleanValueParameterReference(valueParameterIndex, name)
+            KtBooleanValueParameterReference(konstueParameterIndex, name)
     }
 
-    override fun loadConstant(value: ProtoBuf.Expression.ConstantValue): KtConstantReference<ConeKotlinType, ConeDiagnostic> {
-        return when (value) {
+    override fun loadConstant(konstue: ProtoBuf.Expression.ConstantValue): KtConstantReference<ConeKotlinType, ConeDiagnostic> {
+        return when (konstue) {
             ProtoBuf.Expression.ConstantValue.TRUE -> ConeContractConstantValues.TRUE
             ProtoBuf.Expression.ConstantValue.FALSE -> ConeContractConstantValues.FALSE
             ProtoBuf.Expression.ConstantValue.NULL -> ConeContractConstantValues.NULL

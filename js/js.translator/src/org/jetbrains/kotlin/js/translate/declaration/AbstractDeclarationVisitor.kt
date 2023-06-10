@@ -35,40 +35,40 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isExtensionProperty
 abstract class AbstractDeclarationVisitor : TranslatorVisitor<Unit>()  {
     override fun emptyResult(context: TranslationContext) { }
 
-    open val enumInitializerName: JsName?
+    open konst enumInitializerName: JsName?
         get() = null
 
     override fun visitClassOrObject(classOrObject: KtClassOrObject, context: TranslationContext) {
         ClassTranslator.translate(classOrObject, context, enumInitializerName)
-        val descriptor = BindingUtils.getClassDescriptor(context.bindingContext(), classOrObject)
+        konst descriptor = BindingUtils.getClassDescriptor(context.bindingContext(), classOrObject)
         context.export(descriptor)
     }
 
     override fun visitProperty(expression: KtProperty, context: TranslationContext) {
-        val descriptor = BindingUtils.getPropertyDescriptor(context.bindingContext(), expression)
+        konst descriptor = BindingUtils.getPropertyDescriptor(context.bindingContext(), expression)
         if (descriptor.modality === Modality.ABSTRACT) return
 
-        val propertyContext = context.newDeclaration(descriptor)
+        konst propertyContext = context.newDeclaration(descriptor)
 
-        val defaultTranslator = DefaultPropertyTranslator(descriptor, context, getBackingFieldReference(descriptor))
-        val getter = descriptor.getter!!
-        val getterExpr = if (expression.hasCustomGetter()) {
+        konst defaultTranslator = DefaultPropertyTranslator(descriptor, context, getBackingFieldReference(descriptor))
+        konst getter = descriptor.getter!!
+        konst getterExpr = if (expression.hasCustomGetter()) {
             translateFunction(getter, expression.getter!!, propertyContext).first
         }
         else {
-            val function = context.getFunctionObject(getter)
+            konst function = context.getFunctionObject(getter)
             function.source = expression
             defaultTranslator.generateDefaultGetterFunction(getter, function)
             function
         }
 
-        val setterExpr = if (descriptor.isVar) {
-            val setter = descriptor.setter!!
+        konst setterExpr = if (descriptor.isVar) {
+            konst setter = descriptor.setter!!
             if (expression.hasCustomSetter()) {
                 translateFunction(setter, expression.setter!!, propertyContext).first
             }
             else {
-                val function = context.getFunctionObject(setter)
+                konst function = context.getFunctionObject(setter)
                 function.source = expression
                 defaultTranslator.generateDefaultSetterFunction(setter, function)
                 function
@@ -88,8 +88,8 @@ abstract class AbstractDeclarationVisitor : TranslatorVisitor<Unit>()  {
     }
 
     override fun visitNamedFunction(expression: KtNamedFunction, context: TranslationContext) {
-        val descriptor = BindingUtils.getFunctionDescriptor(context.bindingContext(), expression)
-        val functionAndContext = if (descriptor.modality != Modality.ABSTRACT) {
+        konst descriptor = BindingUtils.getFunctionDescriptor(context.bindingContext(), expression)
+        konst functionAndContext = if (descriptor.modality != Modality.ABSTRACT) {
             translateFunction(descriptor, expression, context)
         }
         else {
@@ -106,10 +106,10 @@ abstract class AbstractDeclarationVisitor : TranslatorVisitor<Unit>()  {
             expression: KtDeclarationWithBody,
             context: TranslationContext
     ): Pair<JsExpression, TranslationContext> {
-        val function = context.getFunctionObject(descriptor)
+        konst function = context.getFunctionObject(descriptor)
         function.source = expression
         function.body.source = expression.finalElement as? LeafPsiElement
-        val innerContext = context.newDeclaration(descriptor).translateAndAliasParameters(descriptor, function.parameters)
+        konst innerContext = context.newDeclaration(descriptor).translateAndAliasParameters(descriptor, function.parameters)
 
         if (descriptor.isSuspend) {
             function.fillCoroutineMetadata(innerContext, descriptor, hasController = false)

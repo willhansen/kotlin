@@ -95,7 +95,7 @@ public class KtUserTypeElementType extends KtStubElementType<KotlinUserTypeStub,
 
     @Nullable
     public static KotlinTypeBean deserializeType(@NotNull StubInputStream dataStream) throws IOException {
-        KotlinTypeBeanKind typeKind = KotlinTypeBeanKind.values()[dataStream.readInt()];
+        KotlinTypeBeanKind typeKind = KotlinTypeBeanKind.konstues()[dataStream.readInt()];
         switch (typeKind) {
             case CLASS: {
                 ClassId classId = Objects.requireNonNull(StubUtils.deserializeClassId(dataStream));
@@ -106,7 +106,7 @@ public class KtUserTypeElementType extends KtStubElementType<KotlinUserTypeStub,
                     int kind = dataStream.readInt();
                     KotlinTypeArgumentBean argument;
                     if (kind != KtProjectionKind.STAR.ordinal()) {
-                        argument = new KotlinTypeArgumentBean(KtProjectionKind.values()[kind], deserializeType(dataStream));
+                        argument = new KotlinTypeArgumentBean(KtProjectionKind.konstues()[kind], deserializeType(dataStream));
                     }
                     else {
                         argument = new KotlinTypeArgumentBean(KtProjectionKind.STAR, null);

@@ -1,12 +1,12 @@
-val x get() = 1
+konst x get() = 1
 
-val y: Int get() = 1
+konst y: Int get() = 1
 
-val z = 1
+konst z = 1
     get() = field
 
-val w: Int get(): Int = 1
+konst w: Int get(): Int = 1
 
 interface Some {
-    val bar: Int get() = 1
+    konst bar: Int get() = 1
 }

@@ -18,8 +18,8 @@ import org.jetbrains.utils.*
 
 // TODO - create DSL for ES requests?
 
-const val teamCityUrl = "https://buildserver.labs.intellij.net/app/rest"
-const val artifactoryUrl = "https://repo.labs.intellij.net/kotlin-native-benchmarks"
+const konst teamCityUrl = "https://buildserver.labs.intellij.net/app/rest"
+const konst artifactoryUrl = "https://repo.labs.intellij.net/kotlin-native-benchmarks"
 
 operator fun <K, V> Map<K, V>?.get(key: K) = this?.get(key)
 
@@ -29,17 +29,17 @@ external fun decodeURIComponent(url: String): String
 
 // Convert saved old report to expected new format.
 internal fun convertToNewFormat(data: JsonObject): List<Any> {
-    val env = Environment.create(data.getRequiredField("env"))
-    val benchmarksObj = data.getRequiredField("benchmarks")
-    val compilerDescription = data.getRequiredField("kotlin")
-    val compiler = Compiler.create(compilerDescription)
-    val backend = (compilerDescription as JsonObject).getRequiredField("backend")
-    val flagsArray = (backend as JsonObject).getOptionalField("flags")
+    konst env = Environment.create(data.getRequiredField("env"))
+    konst benchmarksObj = data.getRequiredField("benchmarks")
+    konst compilerDescription = data.getRequiredField("kotlin")
+    konst compiler = Compiler.create(compilerDescription)
+    konst backend = (compilerDescription as JsonObject).getRequiredField("backend")
+    konst flagsArray = (backend as JsonObject).getOptionalField("flags")
     var flags: List<String> = emptyList()
     if (flagsArray != null && flagsArray is JsonArray) {
         flags = flagsArray.jsonArray.map { (it as JsonLiteral).unquoted() }
     }
-    val benchmarksList = parseBenchmarksArray(benchmarksObj)
+    konst benchmarksList = parseBenchmarksArray(benchmarksObj)
 
     return listOf(env, compiler, benchmarksList, flags)
 }
@@ -47,13 +47,13 @@ internal fun convertToNewFormat(data: JsonObject): List<Any> {
 // Convert data results to expected format.
 @Suppress("UNCHECKED_CAST")
 internal fun convert(json: String, buildNumber: String, target: String): List<BenchmarksReport> {
-    val data = JsonTreeParser.parse(json)
-    val reports = if (data is JsonArray) {
+    konst data = JsonTreeParser.parse(json)
+    konst reports = if (data is JsonArray) {
         data.map { convertToNewFormat(it as JsonObject) }
     } else listOf(convertToNewFormat(data as JsonObject))
 
     // Restored flags for old reports.
-    val knownFlags = mapOf(
+    konst knownFlags = mapOf(
             "Cinterop" to listOf("-opt"),
             "FrameworkBenchmarksAnalyzer" to listOf("-g"),
             "HelloWorld" to if (target == "Mac OS X")
@@ -70,51 +70,51 @@ internal fun convert(json: String, buildNumber: String, target: String): List<Be
     )
 
     return reports.map { elements ->
-        val benchmarks = (elements[2] as List<BenchmarkResult>).groupBy { it.name.substringBefore('.').substringBefore(':') }
-        val parsedFlags = elements[3] as List<String>
+        konst benchmarks = (elements[2] as List<BenchmarkResult>).groupBy { it.name.substringBefore('.').substringBefore(':') }
+        konst parsedFlags = elements[3] as List<String>
         benchmarks.map { (setName, results) ->
-            val flags = if (parsedFlags.isNotEmpty() && parsedFlags[0] == "-opt") knownFlags[setName]!! else parsedFlags
-            val savedCompiler = elements[1] as Compiler
-            val compiler = Compiler(Compiler.Backend(savedCompiler.backend.type, savedCompiler.backend.version, flags),
+            konst flags = if (parsedFlags.isNotEmpty() && parsedFlags[0] == "-opt") knownFlags[setName]!! else parsedFlags
+            konst savedCompiler = elements[1] as Compiler
+            konst compiler = Compiler(Compiler.Backend(savedCompiler.backend.type, savedCompiler.backend.version, flags),
                     savedCompiler.kotlinVersion)
-            val newReport = BenchmarksReport(elements[0] as Environment, results, compiler)
+            konst newReport = BenchmarksReport(elements[0] as Environment, results, compiler)
             newReport.buildNumber = buildNumber
             newReport
         }
     }.flatten()
 }
 
-// Golden result value used to get normalized results.
+// Golden result konstue used to get normalized results.
 external interface GoldenResult {
-    val benchmarkName: String
-    val metric: String
-    val value: Double
-    val unstable: Boolean
+    konst benchmarkName: String
+    konst metric: String
+    konst konstue: Double
+    konst unstable: Boolean
 }
 external interface GoldenResultsInfo {
-    val goldenResults: Array<GoldenResult>
+    konst goldenResults: Array<GoldenResult>
 }
 
 // Convert information about golden results to benchmarks report format.
 fun GoldenResultsInfo.toBenchmarksReport(): BenchmarksReport {
-    val benchmarksSamples = goldenResults.map {
+    konst benchmarksSamples = goldenResults.map {
         BenchmarkWithStabilityState(it.benchmarkName, BenchmarkResult.Status.PASSED,
-                it.value, BenchmarkResult.metricFromString(it.metric)!!, it.value, 1, 0, it.unstable)
+                it.konstue, BenchmarkResult.metricFromString(it.metric)!!, it.konstue, 1, 0, it.unstable)
     }
-    val compiler = Compiler(Compiler.Backend(Compiler.BackendType.NATIVE, "golden", emptyList()), "golden")
-    val environment = Environment(Environment.Machine("golden", "golden"), Environment.JDKInstance("golden", "golden"))
+    konst compiler = Compiler(Compiler.Backend(Compiler.BackendType.NATIVE, "golden", emptyList()), "golden")
+    konst environment = Environment(Environment.Machine("golden", "golden"), Environment.JDKInstance("golden", "golden"))
     return BenchmarksReport(environment, benchmarksSamples, compiler)
 }
 
 // Build information provided from request.
-data class TCBuildInfo(val buildNumber: String, val branch: String, val startTime: String,
-                       val finishTime: String, val buildType: String?)
+data class TCBuildInfo(konst buildNumber: String, konst branch: String, konst startTime: String,
+                       konst finishTime: String, konst buildType: String?)
 
-data class BuildRegister(val buildId: String, val teamCityUser: String, val teamCityPassword: String,
-                         val bundleSize: String?, val fileWithResult: String, val buildNumberSuffix: String?) {
+data class BuildRegister(konst buildId: String, konst teamCityUser: String, konst teamCityPassword: String,
+                         konst bundleSize: String?, konst fileWithResult: String, konst buildNumberSuffix: String?) {
     companion object {
         fun create(json: String): BuildRegister {
-            val requestDetails = JSON.parse<dynamic>(json)
+            konst requestDetails = JSON.parse<dynamic>(json)
             // Parse method doesn't create real instance with all methods. So create it by hands.
             return BuildRegister(
                     requestDetails.buildId,
@@ -126,13 +126,13 @@ data class BuildRegister(val buildId: String, val teamCityUser: String, val team
         }
     }
 
-    private val teamCityBuildUrl: String by lazy { "builds/id:$buildId" }
+    private konst teamCityBuildUrl: String by lazy { "builds/id:$buildId" }
 
-    val changesListUrl: String by lazy {
+    konst changesListUrl: String by lazy {
         "changes/?locator=build:id:$buildId"
     }
 
-    val teamCityArtifactsUrl: String by lazy { "builds/id:$buildId/artifacts/content/$fileWithResult" }
+    konst teamCityArtifactsUrl: String by lazy { "builds/id:$buildId/artifacts/content/$fileWithResult" }
 
     fun sendTeamCityRequest(url: String, json: Boolean = false) =
             UrlNetworkConnector(teamCityUrl).sendRequest(RequestMethod.GET, url, teamCityUser, teamCityPassword, json)
@@ -149,15 +149,15 @@ data class BuildRegister(val buildId: String, val teamCityUser: String, val team
     }
 
     fun getBranchName(projects: List<String>): Promise<String> {
-        val url = "builds?locator=id:$buildId&fields=build(revisions(revision(vcsBranchName,vcs-root-instance)))"
+        konst url = "builds?locator=id:$buildId&fields=build(revisions(revision(vcsBranchName,vcs-root-instance)))"
         var branch: String? = null
         return sendTeamCityRequest(url, true).then { response ->
-            val data = JsonTreeParser.parse(response).jsonObject
+            konst data = JsonTreeParser.parse(response).jsonObject
             data.getArray("build").forEach {
                 (it as JsonObject).getObject("revisions").getArray("revision").forEach {
                     it as JsonObject
-                    val currentBranch = it.getPrimitive("vcsBranchName").content.removePrefix("refs/heads/")
-                    val currentProject = it.getObject("vcs-root-instance").getPrimitive("name").content
+                    konst currentBranch = it.getPrimitive("vcsBranchName").content.removePrefix("refs/heads/")
+                    konst currentProject = it.getObject("vcs-root-instance").getPrimitive("name").content
                     if (projects.anyMatches(currentProject)) {
                         branch = currentBranch
                     }
@@ -168,7 +168,7 @@ data class BuildRegister(val buildId: String, val teamCityUser: String, val team
     }
 
     private fun getBuildType(): Promise<String?> {
-        val url = "$teamCityBuildUrl/resulting-properties/env.BUILD_TYPE"
+        konst url = "$teamCityBuildUrl/resulting-properties/env.BUILD_TYPE"
         return sendTeamCityOptionalRequest(url, false).then { response ->
             response
         }
@@ -183,33 +183,33 @@ data class BuildRegister(val buildId: String, val teamCityUser: String, val team
                         "Kotlin_KotlinRelease_(\\d+)_Kotlin")),
                 sendTeamCityRequest("$teamCityBuildUrl/startDate"),
                 getBuildType())).then { results ->
-            val (buildNumber, branch, startTime, buildType) = results
-            val currentTime = Date()
-            val timeZone = currentTime.getTimezoneOffset() / -60    // Convert to hours.
+            konst (buildNumber, branch, startTime, buildType) = results
+            konst currentTime = Date()
+            konst timeZone = currentTime.getTimezoneOffset() / -60    // Convert to hours.
             // Get finish time as current time, because buid on TeamCity isn't finished.
-            val finishTime = "${format(currentTime.getUTCFullYear())}" +
+            konst finishTime = "${format(currentTime.getUTCFullYear())}" +
                     "${format(currentTime.getUTCMonth() + 1)}" +
                     "${format(currentTime.getUTCDate())}" +
                     "T${format(currentTime.getUTCHours())}" +
                     "${format(currentTime.getUTCMinutes())}" +
                     "${format(currentTime.getUTCSeconds())}" +
                     "${if (timeZone > 0) "+" else "-"}${format(timeZone)}${format(0)}"
-            val resultBuildNumber = buildNumberSuffix?.let { "$buildNumber($it)" } ?: buildNumber!!
+            konst resultBuildNumber = buildNumberSuffix?.let { "$buildNumber($it)" } ?: buildNumber!!
             TCBuildInfo(resultBuildNumber, branch!!, startTime!!, finishTime, buildType)
         }
     }
 }
 
 // Get builds numbers in right order.
-internal fun <T> orderedValues(values: List<T>, buildElement: (T) -> CompositeBuildNumber,
+internal fun <T> orderedValues(konstues: List<T>, buildElement: (T) -> CompositeBuildNumber,
                       skipMilestones: Boolean = false) =
-        values.sortedWith(
+        konstues.sortedWith(
                 compareBy(
                         { if (buildElement(it).first != null) 1 else 0 }, // Old builds have no set build type.
                         { buildElement(it).second.substringBefore(".").toInt() },       // Kotlin version
                         { buildElement(it).second.substringAfter(".").substringBefore("-").substringBefore("(").toDouble() },
                         {  // Milestones and release candidates.
-                            val buildNumber = buildElement(it).second
+                            konst buildNumber = buildElement(it).second
                             if (skipMilestones && buildElement(it).first == null ) 0
                             else if (buildNumber.substringAfter("-").startsWith("M"))
                                 buildNumber.substringAfter("M").substringBefore("-").toInt()
@@ -228,25 +228,25 @@ internal fun <T> orderedValues(values: List<T>, buildElement: (T) -> CompositeBu
                 )
         )
 
-fun urlParameterToBaseFormat(value: dynamic) =
-        value.toString().replace("_", " ")
+fun urlParameterToBaseFormat(konstue: dynamic) =
+        konstue.toString().replace("_", " ")
 
 @JsExport
-class ExportedPair<T, U>(val first: T, val second: U)
+class ExportedPair<T, U>(konst first: T, konst second: U)
 
 
 // Routing of requests to current server.
 fun router(connector: ElasticSearchConnector) {
-    val express = require("express")
-    val router = express.Router()
-    val benchmarksDispatcher = BenchmarksIndexesDispatcher(connector, "target",
+    konst express = require("express")
+    konst router = express.Router()
+    konst benchmarksDispatcher = BenchmarksIndexesDispatcher(connector, "target",
             listOf("Linux", "Mac OS X", "Windows 10", "Mac OS X Arm64")
     )
-    val goldenIndex = GoldenResultsIndex(connector)
-    val buildInfoIndex = BuildInfoIndex(connector)
+    konst goldenIndex = GoldenResultsIndex(connector)
+    konst buildInfoIndex = BuildInfoIndex(connector)
 
     router.get("/showMappingsQueries") { _, response ->
-        val queries = listOf(
+        konst queries = listOf(
                 buildInfoIndex.createMappingQuery,
                 goldenIndex.createMappingQuery,
         ) + benchmarksDispatcher.createMappingQueries
@@ -259,12 +259,12 @@ fun router(connector: ElasticSearchConnector) {
         var currentBuildInfo = buildInfoInstance
         if (buildExists(currentBuildInfo, buildInfoIndex)) {
             // Check if benchmarks aren't repeated.
-            val existingBecnhmarks = benchmarksDispatcher.getBenchmarksList(currentBuildInfo.buildNumber,
+            konst existingBecnhmarks = benchmarksDispatcher.getBenchmarksList(currentBuildInfo.buildNumber,
                     currentBuildInfo.agentInfo).await()
-            val benchmarksToRegister = reports.map { it.benchmarks.keys }.flatten()
+            konst benchmarksToRegister = reports.map { it.benchmarks.keys }.flatten()
             if (existingBecnhmarks.toTypedArray().intersect(benchmarksToRegister).isNotEmpty()) {
                 // Build was rerun.
-                val buildNumber = "${currentBuildInfo.buildNumber}.$rerunNumber"
+                konst buildNumber = "${currentBuildInfo.buildNumber}.$rerunNumber"
                 currentBuildInfo = BuildInfo(buildNumber, currentBuildInfo.startTime, currentBuildInfo.endTime,
                         currentBuildInfo.commitsList, currentBuildInfo.branch, currentBuildInfo.agentInfo,
                         currentBuildInfo.buildType)
@@ -276,26 +276,26 @@ fun router(connector: ElasticSearchConnector) {
 
     // Register build on Artifactory.
     router.post("/register") { request, response ->
-        val register = BuildRegister.create(JSON.stringify(request.body))
+        konst register = BuildRegister.create(JSON.stringify(request.body))
 
         // Get information from TeamCity.
         register.getBuildInformation().then { buildInfo ->
             register.sendTeamCityRequest(register.changesListUrl, true).then { changes ->
-                val commitsList = CommitsList(JsonTreeParser.parse(changes))
+                konst commitsList = CommitsList(JsonTreeParser.parse(changes))
                 // Get artifact.
-                val content  = if(register.fileWithResult.contains("/"))
+                konst content  = if(register.fileWithResult.contains("/"))
                     UrlNetworkConnector(artifactoryUrl).sendRequest(RequestMethod.GET, register.fileWithResult)
                 else register.sendTeamCityRequest(register.teamCityArtifactsUrl)
                 content.then { resultsContent ->
                     launch {
-                        val reportData = JsonTreeParser.parse(resultsContent)
-                        val reports = if (reportData is JsonArray) {
+                        konst reportData = JsonTreeParser.parse(resultsContent)
+                        konst reports = if (reportData is JsonArray) {
                             reportData.map { BenchmarksReport.create(it as JsonObject) }
                         } else listOf(BenchmarksReport.create(reportData as JsonObject))
-                        val goldenResultPromise = getGoldenResults(goldenIndex)
-                        val goldenResults = goldenResultPromise.await()
+                        konst goldenResultPromise = getGoldenResults(goldenIndex)
+                        konst goldenResults = goldenResultPromise.await()
                         // Register build information.
-                        val target = reports[0].env.machine.os.let {
+                        konst target = reports[0].env.machine.os.let {
                             if (it == "Mac OS X" && reports[0].env.machine.cpu == "aarch64")
                                 "$it Arm64"
                             else it
@@ -307,10 +307,10 @@ fun router(connector: ElasticSearchConnector) {
                         )
                         if (register.bundleSize != null) {
                             // Add bundle size.
-                            val bundleSizeBenchmark = BenchmarkResult("KotlinNative",
+                            konst bundleSizeBenchmark = BenchmarkResult("KotlinNative",
                                     BenchmarkResult.Status.PASSED, register.bundleSize.toDouble(),
                                     BenchmarkResult.Metric.BUNDLE_SIZE, 0.0, 1, 0)
-                            val bundleSizeReport = BenchmarksReport(reports[0].env,
+                            konst bundleSizeReport = BenchmarksReport(reports[0].env,
                                     listOf(bundleSizeBenchmark), reports[0].compiler)
                             bundleSizeReport.buildNumber = buildInfoInstance.buildNumber
                             benchmarksDispatcher.insert(bundleSizeReport, target).then { _ ->
@@ -320,8 +320,8 @@ fun router(connector: ElasticSearchConnector) {
                                 println(errorResponse)
                             }
                         }
-                        val insertResults = reports.map {
-                            val benchmarksReport = SummaryBenchmarksReport(it).getBenchmarksReport()
+                        konst insertResults = reports.map {
+                            konst benchmarksReport = SummaryBenchmarksReport(it).getBenchmarksReport()
                                     .normalizeBenchmarksSet(goldenResults)
                             benchmarksReport.buildNumber = buildInfoInstance.buildNumber
                             // Save results in database.
@@ -347,8 +347,8 @@ fun router(connector: ElasticSearchConnector) {
 
     // Register golden results to normalize on Artifactory.
     router.post("/registerGolden", { request, response ->
-        val goldenResultsInfo: GoldenResultsInfo = JSON.parse<GoldenResultsInfo>(JSON.stringify(request.body))
-        val goldenReport = goldenResultsInfo.toBenchmarksReport()
+        konst goldenResultsInfo: GoldenResultsInfo = JSON.parse<GoldenResultsInfo>(JSON.stringify(request.body))
+        konst goldenReport = goldenResultsInfo.toBenchmarksReport()
         goldenIndex.insert(goldenReport).then { _ ->
             response.sendStatus(200)
         }.catch {
@@ -359,7 +359,7 @@ fun router(connector: ElasticSearchConnector) {
     // Get builds description with additional information.
     router.get("/buildsDesc/:target", { request, response ->
         CachableResponseDispatcher.getResponse(request, response) { success, reject ->
-            val target = request.params.target.toString().replace('_', ' ')
+            konst target = request.params.target.toString().replace('_', ' ')
 
             var branch: String? = null
             var type: String? = null
@@ -386,7 +386,7 @@ fun router(connector: ElasticSearchConnector) {
 
             getBuildsInfo(type, branch, target, buildsCountToShow, buildInfoIndex, beforeDate, afterDate)
                     .then { buildsInfo ->
-                val buildNumbers = buildsInfo.map { it.buildNumber }
+                konst buildNumbers = buildsInfo.map { it.buildNumber }
                 // Get number of failed benchmarks for each build.
                 benchmarksDispatcher.getFailuresNumber(target, buildNumbers).then { failures ->
                     success(orderedValues(buildsInfo, { it -> it.buildType to it.buildNumber }, branch == "master").map {
@@ -406,11 +406,11 @@ fun router(connector: ElasticSearchConnector) {
         }
     })
 
-    // Get values of current metric.
+    // Get konstues of current metric.
     router.get("/metricValue/:target/:metric", { request, response ->
         CachableResponseDispatcher.getResponse(request, response) { success, reject ->
-            val metric = request.params.metric
-            val target = request.params.target.toString().replace('_', ' ')
+            konst metric = request.params.metric
+            konst target = request.params.target.toString().replace('_', ' ')
             var samples: List<String> = emptyList()
             var aggregation = "geomean"
             var normalize = false
@@ -513,8 +513,8 @@ fun router(connector: ElasticSearchConnector) {
 
     // Conert data and migrate it from Artifactory to DB.
     router.get("/migrate/:target", { request, response ->
-        val target = urlParameterToBaseFormat(request.params.target)
-        val targetPathName = target.replace(" ", "")
+        konst target = urlParameterToBaseFormat(request.params.target)
+        konst targetPathName = target.replace(" ", "")
         var buildNumber: String? = null
         if (request.query != undefined) {
             if (request.query.buildNumber != undefined) {
@@ -524,14 +524,14 @@ fun router(connector: ElasticSearchConnector) {
         }
         getBuildsInfoFromArtifactory(targetPathName).then { buildInfo ->
             launch {
-                val buildsDescription = buildInfo.lines().drop(1)
+                konst buildsDescription = buildInfo.lines().drop(1)
                 var shouldConvert = buildNumber?.let { false } ?: true
-                val goldenResultPromise = getGoldenResults(goldenIndex)
-                val goldenResults = goldenResultPromise.await()
-                val buildsSet = mutableSetOf<String>()
+                konst goldenResultPromise = getGoldenResults(goldenIndex)
+                konst goldenResults = goldenResultPromise.await()
+                konst buildsSet = mutableSetOf<String>()
                 buildsDescription.forEach {
                     if (!it.isEmpty()) {
-                        val currentBuildNumber = it.substringBefore(',')
+                        konst currentBuildNumber = it.substringBefore(',')
                         if (!"\\d+(\\.\\d+)+(-M\\d)?-\\w+-\\d+(\\.\\d+)?".toRegex().matches(currentBuildNumber)) {
                             error("Build number $currentBuildNumber differs from expected format. File with data for " +
                                     "target $target could be corrupted.")
@@ -541,22 +541,22 @@ fun router(connector: ElasticSearchConnector) {
                         }
                         if (shouldConvert) {
                             // Save data from Artifactory into database.
-                            val artifactoryUrlConnector = UrlNetworkConnector(artifactoryUrl)
-                            val fileName = "nativeReport.json"
-                            val accessFileUrl = "$targetPathName/$currentBuildNumber/$fileName"
-                            val extrenalFileName = if (target == "Linux") "externalReport.json" else "spaceFrameworkReport.json"
-                            val accessExternalFileUrl = "$targetPathName/$currentBuildNumber/$extrenalFileName"
-                            val infoParts = it.split(", ")
+                            konst artifactoryUrlConnector = UrlNetworkConnector(artifactoryUrl)
+                            konst fileName = "nativeReport.json"
+                            konst accessFileUrl = "$targetPathName/$currentBuildNumber/$fileName"
+                            konst extrenalFileName = if (target == "Linux") "externalReport.json" else "spaceFrameworkReport.json"
+                            konst accessExternalFileUrl = "$targetPathName/$currentBuildNumber/$extrenalFileName"
+                            konst infoParts = it.split(", ")
                             if ((infoParts[3] == "master" || "eap" in currentBuildNumber || "release" in currentBuildNumber) &&
                                     currentBuildNumber !in buildsSet) {
                                 try {
                                     buildsSet.add(currentBuildNumber)
-                                    val jsonReport = artifactoryUrlConnector.sendRequest(RequestMethod.GET, accessFileUrl).await()
+                                    konst jsonReport = artifactoryUrlConnector.sendRequest(RequestMethod.GET, accessFileUrl).await()
                                     var reports = convert(jsonReport, currentBuildNumber, target)
-                                    val buildInfoRecord = BuildInfo(currentBuildNumber, infoParts[1], infoParts[2],
+                                    konst buildInfoRecord = BuildInfo(currentBuildNumber, infoParts[1], infoParts[2],
                                             CommitsList.parse(infoParts[4]), infoParts[3], target, null)
 
-                                    val externalJsonReport = artifactoryUrlConnector.sendOptionalRequest(RequestMethod.GET, accessExternalFileUrl)
+                                    konst externalJsonReport = artifactoryUrlConnector.sendOptionalRequest(RequestMethod.GET, accessExternalFileUrl)
                                             .await()
                                     buildInfoIndex.insert(buildInfoRecord).then { _ ->
                                         println("[BUILD INFO] Success insert build number ${buildInfoRecord.buildNumber}")
@@ -564,7 +564,7 @@ fun router(connector: ElasticSearchConnector) {
                                             var externalReports = convert(externalJsonReport.replace("circlet_iosX64", "SpaceFramework_iosX64"),
                                                     currentBuildNumber, target)
                                             externalReports.forEach { externalReport ->
-                                                val extrenalAdditionalReport = SummaryBenchmarksReport(externalReport)
+                                                konst extrenalAdditionalReport = SummaryBenchmarksReport(externalReport)
                                                         .getBenchmarksReport().normalizeBenchmarksSet(goldenResults)
                                                 extrenalAdditionalReport.buildNumber = currentBuildNumber
                                                 benchmarksDispatcher.insert(extrenalAdditionalReport, target).then { _ ->
@@ -576,13 +576,13 @@ fun router(connector: ElasticSearchConnector) {
                                             }
                                         }
 
-                                        val bundleSize = if (infoParts[10] != "-") infoParts[10] else null
+                                        konst bundleSize = if (infoParts[10] != "-") infoParts[10] else null
                                         if (bundleSize != null) {
                                             // Add bundle size.
-                                            val bundleSizeBenchmark = BenchmarkResult("KotlinNative",
+                                            konst bundleSizeBenchmark = BenchmarkResult("KotlinNative",
                                                     BenchmarkResult.Status.PASSED, bundleSize.toDouble(),
                                                     BenchmarkResult.Metric.BUNDLE_SIZE, 0.0, 1, 0)
-                                            val bundleSizeReport = BenchmarksReport(reports[0].env,
+                                            konst bundleSizeReport = BenchmarksReport(reports[0].env,
                                                     listOf(bundleSizeBenchmark), reports[0].compiler)
                                             bundleSizeReport.buildNumber = currentBuildNumber
                                             benchmarksDispatcher.insert(bundleSizeReport, target).then { _ ->
@@ -594,7 +594,7 @@ fun router(connector: ElasticSearchConnector) {
                                         }
 
                                         reports.forEach { report ->
-                                            val summaryReport = SummaryBenchmarksReport(report).getBenchmarksReport()
+                                            konst summaryReport = SummaryBenchmarksReport(report).getBenchmarksReport()
                                                     .normalizeBenchmarksSet(goldenResults)
                                             summaryReport.buildNumber = currentBuildNumber
                                             // Save results in database.
@@ -626,7 +626,7 @@ fun router(connector: ElasticSearchConnector) {
     })
 
     router.get("/delete/:target", { request, response ->
-        val target = urlParameterToBaseFormat(request.params.target)
+        konst target = urlParameterToBaseFormat(request.params.target)
         var buildNumber: String? = null
         if (request.query != undefined) {
             if (request.query.buildNumber != undefined) {
@@ -658,8 +658,8 @@ fun router(connector: ElasticSearchConnector) {
     })
 
     router.get("/report/:target/:buildNumber", { request, response ->
-        val target = urlParameterToBaseFormat(request.params.target)
-        val buildNumber = request.params.buildNumber.toString()
+        konst target = urlParameterToBaseFormat(request.params.target)
+        konst buildNumber = request.params.buildNumber.toString()
         benchmarksDispatcher.getBenchmarksReports(buildNumber, target).then { reports ->
             response.send(reports.joinToString(", ", "[", "]"))
         }.catch {
@@ -681,15 +681,15 @@ fun router(connector: ElasticSearchConnector) {
 }
 
 fun getBuildsInfoFromArtifactory(target: String): Promise<String> {
-    val buildsFileName = "buildsSummary.csv"
-    val artifactoryBuildsDirectory = "builds"
+    konst buildsFileName = "buildsSummary.csv"
+    konst artifactoryBuildsDirectory = "builds"
     return UrlNetworkConnector(artifactoryUrl).sendRequest(RequestMethod.GET,
             "$artifactoryBuildsDirectory/$target/$buildsFileName")
 }
 
 fun BenchmarksReport.normalizeBenchmarksSet(dataForNormalization: Map<String, List<BenchmarkResult>>): BenchmarksReport {
-    val resultBenchmarksList = benchmarks.map { benchmarksList ->
-        benchmarksList.value.map {
+    konst resultBenchmarksList = benchmarks.map { benchmarksList ->
+        benchmarksList.konstue.map {
             NormalizedMeanVarianceBenchmark(it.name, it.status, it.score, it.metric,
                     it.runtimeInUs, it.repeat, it.warmup, (it as MeanVarianceBenchmark).variance,
                     dataForNormalization[benchmarksList.key]?.get(0)?.score?.let { golden -> it.score.toDouble() / golden } ?: 0.0)

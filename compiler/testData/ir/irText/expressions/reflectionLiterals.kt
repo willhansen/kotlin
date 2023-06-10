@@ -4,11 +4,11 @@ class A {
     fun foo() {}
 }
 fun bar() {}
-val qux = 1
+konst qux = 1
 
-val test1 = A::class
-val test2 = qux::class
-val test3 = A::foo
-val test4 = ::A
-val test5 = A()::foo
-val test6 = ::bar
+konst test1 = A::class
+konst test2 = qux::class
+konst test3 = A::foo
+konst test4 = ::A
+konst test5 = A()::foo
+konst test6 = ::bar

@@ -7,7 +7,7 @@
 // 1 java/lang/invoke/LambdaMetafactory
 
 // FILE: boundMemberRef.kt
-class C(val t: String) {
+class C(konst t: String) {
     fun test() = t
 }
 

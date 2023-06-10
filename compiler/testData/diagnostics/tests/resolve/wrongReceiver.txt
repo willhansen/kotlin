@@ -1,8 +1,8 @@
 package
 
 package some {
-    public val kotlin.Int.foo: kotlin.Int
-    public val kotlin.Int.some: kotlin.Int
+    public konst kotlin.Int.foo: kotlin.Int
+    public konst kotlin.Int.some: kotlin.Int
     public fun kotlin.Int.extFun(): kotlin.Int
     public fun kotlin.String.test(): kotlin.Unit
 

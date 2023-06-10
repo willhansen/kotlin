@@ -33,62 +33,62 @@ import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.error.ErrorUtils
 import org.jetbrains.kotlin.types.typeUtil.replaceArgumentsWithStarProjections
 
-abstract class ConstantValue<out T>(open val value: T) {
+abstract class ConstantValue<out T>(open konst konstue: T) {
     abstract fun getType(module: ModuleDescriptor): KotlinType
 
     abstract fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R
 
-    override fun equals(other: Any?): Boolean = this === other || value == (other as? ConstantValue<*>)?.value
+    override fun equals(other: Any?): Boolean = this === other || konstue == (other as? ConstantValue<*>)?.konstue
 
-    override fun hashCode(): Int = value?.hashCode() ?: 0
+    override fun hashCode(): Int = konstue?.hashCode() ?: 0
 
-    override fun toString(): String = value.toString()
+    override fun toString(): String = konstue.toString()
 
-    open fun boxedValue(): Any? = value
+    open fun boxedValue(): Any? = konstue
 }
 
-abstract class IntegerValueConstant<out T> protected constructor(value: T) : ConstantValue<T>(value)
-abstract class UnsignedValueConstant<out T> protected constructor(value: T) : ConstantValue<T>(value)
+abstract class IntegerValueConstant<out T> protected constructor(konstue: T) : ConstantValue<T>(konstue)
+abstract class UnsignedValueConstant<out T> protected constructor(konstue: T) : ConstantValue<T>(konstue)
 
-class AnnotationValue(value: AnnotationDescriptor) : ConstantValue<AnnotationDescriptor>(value) {
-    override fun getType(module: ModuleDescriptor): KotlinType = value.type
+class AnnotationValue(konstue: AnnotationDescriptor) : ConstantValue<AnnotationDescriptor>(konstue) {
+    override fun getType(module: ModuleDescriptor): KotlinType = konstue.type
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitAnnotationValue(this, data)
 }
 
 open class ArrayValue(
-    value: List<ConstantValue<*>>,
-    private val computeType: (ModuleDescriptor) -> KotlinType
-) : ConstantValue<List<ConstantValue<*>>>(value) {
+    konstue: List<ConstantValue<*>>,
+    private konst computeType: (ModuleDescriptor) -> KotlinType
+) : ConstantValue<List<ConstantValue<*>>>(konstue) {
     override fun getType(module: ModuleDescriptor): KotlinType = computeType(module).also { type ->
         assert(KotlinBuiltIns.isArray(type) || KotlinBuiltIns.isPrimitiveArray(type) || KotlinBuiltIns.isUnsignedArrayType(type)) {
-            "Type should be an array, but was $type: $value"
+            "Type should be an array, but was $type: $konstue"
         }
     }
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitArrayValue(this, data)
 }
 
-class TypedArrayValue(value: List<ConstantValue<*>>, val type: KotlinType) : ArrayValue(value, { type })
+class TypedArrayValue(konstue: List<ConstantValue<*>>, konst type: KotlinType) : ArrayValue(konstue, { type })
 
-class BooleanValue(value: Boolean) : ConstantValue<Boolean>(value) {
+class BooleanValue(konstue: Boolean) : ConstantValue<Boolean>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.booleanType
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitBooleanValue(this, data)
 }
 
-class ByteValue(value: Byte) : IntegerValueConstant<Byte>(value) {
+class ByteValue(konstue: Byte) : IntegerValueConstant<Byte>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.byteType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitByteValue(this, data)
-    override fun toString(): String = "$value.toByte()"
+    override fun toString(): String = "$konstue.toByte()"
 }
 
-class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
+class CharValue(konstue: Char) : IntegerValueConstant<Char>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.charType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitCharValue(this, data)
 
-    override fun toString() = "\\u%04X ('%s')".format(value.code, getPrintablePart(value))
+    override fun toString() = "\\u%04X ('%s')".format(konstue.code, getPrintablePart(konstue))
 
     private fun getPrintablePart(c: Char): String = when (c) {
         '\b' -> "\\b"
@@ -101,7 +101,7 @@ class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
     }
 
     private fun isPrintableUnicode(c: Char): Boolean {
-        val t = Character.getType(c).toByte()
+        konst t = Character.getType(c).toByte()
         return t != Character.UNASSIGNED &&
                t != Character.LINE_SEPARATOR &&
                t != Character.PARAGRAPH_SEPARATOR &&
@@ -112,15 +112,15 @@ class CharValue(value: Char) : IntegerValueConstant<Char>(value) {
     }
 }
 
-class DoubleValue(value: Double) : ConstantValue<Double>(value) {
+class DoubleValue(konstue: Double) : ConstantValue<Double>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.doubleType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitDoubleValue(this, data)
 
-    override fun toString() = "$value.toDouble()"
+    override fun toString() = "$konstue.toDouble()"
 }
 
-class EnumValue(val enumClassId: ClassId, val enumEntryName: Name) : ConstantValue<Pair<ClassId, Name>>(enumClassId to enumEntryName) {
+class EnumValue(konst enumClassId: ClassId, konst enumEntryName: Name) : ConstantValue<Pair<ClassId, Name>>(enumClassId to enumEntryName) {
     override fun getType(module: ModuleDescriptor): KotlinType =
             module.findClassAcrossModuleDependencies(enumClassId)?.takeIf(DescriptorUtils::isEnumClass)?.defaultType
             ?: ErrorUtils.createErrorType(ErrorTypeKind.ERROR_ENUM_TYPE, enumClassId.toString(), enumEntryName.toString())
@@ -135,13 +135,13 @@ abstract class ErrorValue : ConstantValue<Unit>(Unit) {
         Unit
     }
 
-    @Deprecated("Should not be called, for this is not a real value, but an indication of an error")
-    override val value: Unit
+    @Deprecated("Should not be called, for this is not a real konstue, but an indication of an error")
+    override konst konstue: Unit
         get() = throw UnsupportedOperationException()
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitErrorValue(this, data)
 
-    class ErrorValueWithMessage(val message: String) : ErrorValue() {
+    class ErrorValueWithMessage(konst message: String) : ErrorValue() {
         override fun getType(module: ModuleDescriptor) = ErrorUtils.createErrorType(ErrorTypeKind.ERROR_CONSTANT_VALUE, message)
 
         override fun toString() = message
@@ -154,31 +154,31 @@ abstract class ErrorValue : ConstantValue<Unit>(Unit) {
     }
 }
 
-class FloatValue(value: Float) : ConstantValue<Float>(value) {
+class FloatValue(konstue: Float) : ConstantValue<Float>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.floatType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitFloatValue(this, data)
 
-    override fun toString() = "$value.toFloat()"
+    override fun toString() = "$konstue.toFloat()"
 }
 
-class IntValue(value: Int) : IntegerValueConstant<Int>(value) {
+class IntValue(konstue: Int) : IntegerValueConstant<Int>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.intType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitIntValue(this, data)
 }
 
-class KClassValue(value: Value) : ConstantValue<KClassValue.Value>(value) {
+class KClassValue(konstue: Value) : ConstantValue<KClassValue.Value>(konstue) {
     sealed class Value {
-        data class NormalClass(val value: ClassLiteralValue) : Value() {
-            val classId: ClassId get() = value.classId
-            val arrayDimensions: Int get() = value.arrayNestedness
+        data class NormalClass(konst konstue: ClassLiteralValue) : Value() {
+            konst classId: ClassId get() = konstue.classId
+            konst arrayDimensions: Int get() = konstue.arrayNestedness
         }
 
-        data class LocalClass(val type: KotlinType) : Value()
+        data class LocalClass(konst type: KotlinType) : Value()
     }
 
-    constructor(value: ClassLiteralValue) : this(Value.NormalClass(value))
+    constructor(konstue: ClassLiteralValue) : this(Value.NormalClass(konstue))
 
     constructor(classId: ClassId, arrayDimensions: Int) : this(ClassLiteralValue(classId, arrayDimensions))
 
@@ -186,14 +186,14 @@ class KClassValue(value: Value) : ConstantValue<KClassValue.Value>(value) {
         KotlinTypeFactory.simpleNotNullType(TypeAttributes.Empty, module.builtIns.kClass, listOf(TypeProjectionImpl(getArgumentType(module))))
 
     fun getArgumentType(module: ModuleDescriptor): KotlinType {
-        when (value) {
-            is Value.LocalClass -> return value.type
+        when (konstue) {
+            is Value.LocalClass -> return konstue.type
             is Value.NormalClass -> {
-                val (classId, arrayDimensions) = value.value
-                val descriptor = module.findClassAcrossModuleDependencies(classId)
+                konst (classId, arrayDimensions) = konstue.konstue
+                konst descriptor = module.findClassAcrossModuleDependencies(classId)
                     ?: return ErrorUtils.createErrorType(ErrorTypeKind.UNRESOLVED_KCLASS_CONSTANT_VALUE, classId.toString(), arrayDimensions.toString())
 
-                // If this value refers to a class named test.Foo.Bar where both Foo and Bar have generic type parameters,
+                // If this konstue refers to a class named test.Foo.Bar where both Foo and Bar have generic type parameters,
                 // we're constructing a type `test.Foo<*>.Bar<*>` below
                 var type = descriptor.defaultType.replaceArgumentsWithStarProjections()
                 repeat(arrayDimensions) {
@@ -218,9 +218,9 @@ class KClassValue(value: Value) : ConstantValue<KClassValue.Value>(value) {
                 arrayDimensions++
             }
 
-            return when (val descriptor = type.constructor.declarationDescriptor) {
+            return when (konst descriptor = type.constructor.declarationDescriptor) {
                 is ClassDescriptor -> {
-                    val classId = descriptor.classId ?: return KClassValue(KClassValue.Value.LocalClass(argumentType))
+                    konst classId = descriptor.classId ?: return KClassValue(KClassValue.Value.LocalClass(argumentType))
                     KClassValue(classId, arrayDimensions)
                 }
                 is TypeParameterDescriptor -> {
@@ -236,12 +236,12 @@ class KClassValue(value: Value) : ConstantValue<KClassValue.Value>(value) {
     }
 }
 
-class LongValue(value: Long) : IntegerValueConstant<Long>(value) {
+class LongValue(konstue: Long) : IntegerValueConstant<Long>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.longType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitLongValue(this, data)
 
-    override fun toString() = "$value.toLong()"
+    override fun toString() = "$konstue.toLong()"
 }
 
 class NullValue : ConstantValue<Void?>(null) {
@@ -250,20 +250,20 @@ class NullValue : ConstantValue<Void?>(null) {
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitNullValue(this, data)
 }
 
-class ShortValue(value: Short) : IntegerValueConstant<Short>(value) {
+class ShortValue(konstue: Short) : IntegerValueConstant<Short>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.shortType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitShortValue(this, data)
 
-    override fun toString() = "$value.toShort()"
+    override fun toString() = "$konstue.toShort()"
 }
 
-class StringValue(value: String) : ConstantValue<String>(value) {
+class StringValue(konstue: String) : ConstantValue<String>(konstue) {
     override fun getType(module: ModuleDescriptor) = module.builtIns.stringType
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitStringValue(this, data)
 
-    override fun toString() = "\"$value\""
+    override fun toString() = "\"$konstue\""
 }
 
 class UByteValue(byteValue: Byte) : UnsignedValueConstant<Byte>(byteValue) {
@@ -274,9 +274,9 @@ class UByteValue(byteValue: Byte) : UnsignedValueConstant<Byte>(byteValue) {
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitUByteValue(this, data)
 
-    override fun toString() = "$value.toUByte()"
+    override fun toString() = "$konstue.toUByte()"
 
-    override fun boxedValue(): Any = value.toUByte()
+    override fun boxedValue(): Any = konstue.toUByte()
 }
 
 class UShortValue(shortValue: Short) : UnsignedValueConstant<Short>(shortValue) {
@@ -287,9 +287,9 @@ class UShortValue(shortValue: Short) : UnsignedValueConstant<Short>(shortValue) 
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitUShortValue(this, data)
 
-    override fun toString() = "$value.toUShort()"
+    override fun toString() = "$konstue.toUShort()"
 
-    override fun boxedValue(): Any = value.toUShort()
+    override fun boxedValue(): Any = konstue.toUShort()
 }
 
 class UIntValue(intValue: Int) : UnsignedValueConstant<Int>(intValue) {
@@ -300,9 +300,9 @@ class UIntValue(intValue: Int) : UnsignedValueConstant<Int>(intValue) {
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D) = visitor.visitUIntValue(this, data)
 
-    override fun toString() = "$value.toUInt()"
+    override fun toString() = "$konstue.toUInt()"
 
-    override fun boxedValue(): Any = value.toUInt()
+    override fun boxedValue(): Any = konstue.toUInt()
 }
 
 class ULongValue(longValue: Long) : UnsignedValueConstant<Long>(longValue) {
@@ -313,7 +313,7 @@ class ULongValue(longValue: Long) : UnsignedValueConstant<Long>(longValue) {
 
     override fun <R, D> accept(visitor: AnnotationArgumentVisitor<R, D>, data: D): R = visitor.visitULongValue(this, data)
 
-    override fun toString() = "$value.toULong()"
+    override fun toString() = "$konstue.toULong()"
 
-    override fun boxedValue(): Any = value.toULong()
+    override fun boxedValue(): Any = konstue.toULong()
 }

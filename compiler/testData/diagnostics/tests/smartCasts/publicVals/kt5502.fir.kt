@@ -1,8 +1,8 @@
 // NB: should work after KT-5907 / KT-4450 fix
 
-val currentTimeMillis = 1234L
+konst currentTimeMillis = 1234L
 
-public class Foo(protected val maxParsingTimeInMillis: Long?) {
+public class Foo(protected konst maxParsingTimeInMillis: Long?) {
 
     var parsingStartTimeStamp = 0L
 

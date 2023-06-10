@@ -21,20 +21,20 @@ import kotlin.test.*
 class KotlinJvmRunTest {
     @Test
     fun `test - simple jvm target`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         assertNotNull(kotlin.jvm())
         project.configurationResult.await()
 
-        val task = project.tasks.findByName("jvmRun") ?: fail("Missing 'jvmRun' run task")
+        konst task = project.tasks.findByName("jvmRun") ?: fail("Missing 'jvmRun' run task")
         if (task !is JavaExec) fail("Expected $task to implement '${JavaExec::class}'")
         assertNoDiagnostics()
     }
 
     @Test
     fun `test - mainClass - set via DSL`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = project.multiplatformExtension
-        val mainRun = assertNotNull(kotlin.jvm().mainRun.await())
-        val mainRunTask = mainRun.task.get()
+        konst kotlin = project.multiplatformExtension
+        konst mainRun = assertNotNull(kotlin.jvm().mainRun.await())
+        konst mainRunTask = mainRun.task.get()
 
         assertNull(
             mainRunTask.mainClass.orNull,
@@ -49,8 +49,8 @@ class KotlinJvmRunTest {
 
     @Test
     fun `test - args`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = project.multiplatformExtension
-        val task = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
+        konst kotlin = project.multiplatformExtension
+        konst task = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
 
         /* Set properties using 'args()' */
         kotlin.jvm().mainRun {
@@ -78,9 +78,9 @@ class KotlinJvmRunTest {
         repositories.mavenLocal()
         repositories.mavenCentralCacheRedirector()
 
-        val kotlin = project.multiplatformExtension
-        val mainRunTask = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
-        val mainCompilation = kotlin.jvm().compilations.main
+        konst kotlin = project.multiplatformExtension
+        konst mainRunTask = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
+        konst mainCompilation = kotlin.jvm().compilations.main
 
         configurationResult.await()
 
@@ -95,7 +95,7 @@ class KotlinJvmRunTest {
         repositories.mavenLocal()
         repositories.mavenCentralCacheRedirector()
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm().compilations.main.defaultSourceSet.dependencies {
             implementation(project.files("implementation.jar"))
@@ -105,7 +105,7 @@ class KotlinJvmRunTest {
 
 
         configurationResult.await()
-        val mainRunTask = assertNotNull(kotlin.jvm().mainRun.await()?.task?.get())
+        konst mainRunTask = assertNotNull(kotlin.jvm().mainRun.await()?.task?.get())
 
         if (project.file("implementation.jar") !in mainRunTask.classpath) {
             fail("Missing file from 'implementation' scope")
@@ -124,12 +124,12 @@ class KotlinJvmRunTest {
     fun `test - classpath - add file`() = buildProjectWithMPP().runLifecycleAwareTest {
         repositories.mavenLocal()
         repositories.mavenCentralCacheRedirector()
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm().mainRun { classpath(file("custom.jar")) }
 
         configurationResult.await()
 
-        val task = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
+        konst task = assertNotNull(kotlin.jvm().mainRun.await()).task.get()
         if (file("custom.jar") !in task.classpath.files) {
             fail("Missing custom.jar in classpath")
         }
@@ -143,7 +143,7 @@ class KotlinJvmRunTest {
     fun `test - setClasspath`() = buildProjectWithMPP().runLifecycleAwareTest {
         repositories.mavenLocal()
         repositories.mavenCentralCacheRedirector()
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.jvm().mainRun {
             setClasspath(project.files("a.jar", "b.jar"))
         }
@@ -157,7 +157,7 @@ class KotlinJvmRunTest {
 
     @Test
     fun `test - jvmRun task is already registered`() = buildProjectWithMPP().runLifecycleAwareTest {
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.jvm()
         tasks.register("jvmRun")
         configurationResult.await()
@@ -167,7 +167,7 @@ class KotlinJvmRunTest {
     @Test
     fun `test - jvmRun task is using kotlin configured toolchain - jvm 11`() = buildProjectWithMPP().runLifecycleAwareTest {
         Assume.assumeFalse("https://github.com/gradle/native-platform/issues/274", HostManager.hostIsMingw)
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.jvmToolchain(11)
         kotlin.jvm()
         configurationResult.await()
@@ -177,7 +177,7 @@ class KotlinJvmRunTest {
     @Test
     fun `test - jvmRun task is using kotlin configured toolchain - jvm 17`() = buildProjectWithMPP().runLifecycleAwareTest {
         Assume.assumeFalse("https://github.com/gradle/native-platform/issues/274", HostManager.hostIsMingw)
-        val kotlin = multiplatformExtension
+        konst kotlin = multiplatformExtension
         kotlin.jvmToolchain(17)
         kotlin.jvm()
         configurationResult.await()

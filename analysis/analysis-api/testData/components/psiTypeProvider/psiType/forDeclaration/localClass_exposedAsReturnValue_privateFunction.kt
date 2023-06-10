@@ -4,5 +4,5 @@ private fun f<caret>oo() = run {
             return this
         }
     }
-    val p = Local().bar()
+    konst p = Local().bar()
 }

@@ -23,10 +23,10 @@ import java.io.PrintWriter
 class KotlinTestFailure(
     className: String,
     message: String?,
-    private val stackTraceString: String?,
-    private val stackTrace: List<StackTraceElement>? = null,
-    val expected: String? = null,
-    val actual: String? = null
+    private konst stackTraceString: String?,
+    private konst stackTrace: List<StackTraceElement>? = null,
+    konst expected: String? = null,
+    konst actual: String? = null
 ) : PlaceholderException(
     className,
     message,

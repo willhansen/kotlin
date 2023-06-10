@@ -1,7 +1,7 @@
 import kotlin.contracts.*
 
 class FirAnnotationArgumentMappingBuilder {
-    val mapping: MutableMap<String, String> = mutableMapOf()
+    konst mapping: MutableMap<String, String> = mutableMapOf()
 
     fun build(): FirAnnotationArgumentMapping {
         return FirAnnotationArgumentMapping(mapping)
@@ -18,23 +18,23 @@ fun buildAnnotationArgumentMapping(init: FirAnnotationArgumentMappingBuilder.() 
 
 class FirAnnotationArgumentMapping(mapping: Map<String, String>)
 
-class ValueParameter(val name: String)
-class Argument(val name: String)
+class ValueParameter(konst name: String)
+class Argument(konst name: String)
 
 fun createArgumentMapping(
-    valueParameters: List<ValueParameter>?,
+    konstueParameters: List<ValueParameter>?,
     arguments: List<Argument>
 ): FirAnnotationArgumentMapping {
     return buildAnnotationArgumentMapping build@{
-        val parameterByName: Map<String, ValueParameter>? by lazy {
-            val valueParameters = valueParameters ?: return@lazy null
-            valueParameters.associateBy { it.name }
+        konst parameterByName: Map<String, ValueParameter>? by lazy {
+            konst konstueParameters = konstueParameters ?: return@lazy null
+            konstueParameters.associateBy { it.name }
         }
 
         arguments.mapNotNull {
-            val name = it.name
-            val value = parameterByName?.get(name)?.name ?: return@mapNotNull null
-            name to value
+            konst name = it.name
+            konst konstue = parameterByName?.get(name)?.name ?: return@mapNotNull null
+            name to konstue
         }.toMap(mapping)
     }
 }

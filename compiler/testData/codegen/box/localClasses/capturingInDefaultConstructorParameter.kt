@@ -1,9 +1,9 @@
 // IGNORE_BACKEND: JVM
-open class Base(val fn: () -> String)
+open class Base(konst fn: () -> String)
 
 class Test(x: String) :
     Base({
-             class Local(val t: String = x)
+             class Local(konst t: String = x)
              Local().t
          })
 

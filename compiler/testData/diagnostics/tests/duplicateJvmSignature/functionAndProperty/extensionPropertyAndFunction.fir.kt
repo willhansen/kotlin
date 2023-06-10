@@ -2,6 +2,6 @@
 
 class C {
     fun getX(t: Any) = 1
-    val Any.x: Int
+    konst Any.x: Int
         get() = 1
 }

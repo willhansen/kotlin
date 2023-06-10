@@ -29,9 +29,9 @@ object Second : Bound1, Bound2
 
 fun <S : Bound1> intersect(vararg elements: S): S = TODO()
 
-class Inv<T>(val prop: T)
+class Inv<T>(konst prop: T)
 class In<in I>(arg: I)
-class Out<out O>(val arg: O)
+class Out<out O>(konst arg: O)
 
 fun test1(first: First, second: Second) = Inv(Inv(intersect(first, second)))
 fun test2(first: First, second: Second) = Inv(In(intersect(first, second)))

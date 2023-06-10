@@ -10,4 +10,4 @@ fun <T : Any, TProperty : Any?> property(property: KProperty1<T, TProperty>) = A
 
 fun <TProperty> property(property: KProperty0<TProperty>) = A
 
-val <K> K.key get() : A = property(Map.Entry<K, *>::key) // overload resolution ambiguity in the NI, OK in the OI
+konst <K> K.key get() : A = property(Map.Entry<K, *>::key) // overload resolution ambiguity in the NI, OK in the OI

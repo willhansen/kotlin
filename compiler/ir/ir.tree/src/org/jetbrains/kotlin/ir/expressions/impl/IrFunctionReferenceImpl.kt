@@ -26,18 +26,18 @@ import org.jetbrains.kotlin.ir.util.initializeParameterArguments
 import org.jetbrains.kotlin.ir.util.initializeTypeArguments
 
 class IrFunctionReferenceImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrFunctionSymbol,
+    override konst symbol: IrFunctionSymbol,
     typeArgumentsCount: Int,
-    valueArgumentsCount: Int,
+    konstueArgumentsCount: Int,
     override var reflectionTarget: IrFunctionSymbol? = symbol,
     override var origin: IrStatementOrigin? = null,
 ) : IrFunctionReference() {
-    override val typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
+    override konst typeArguments: Array<IrType?> = initializeTypeArguments(typeArgumentsCount)
 
-    override val valueArguments: Array<IrExpression?> = initializeParameterArguments(valueArgumentsCount)
+    override konst konstueArguments: Array<IrExpression?> = initializeParameterArguments(konstueArgumentsCount)
 
     companion object {
         @ObsoleteDescriptorBasedAPI
@@ -54,7 +54,7 @@ class IrFunctionReferenceImpl(
             type,
             symbol,
             typeArgumentsCount,
-            symbol.descriptor.valueParameters.size + symbol.descriptor.contextReceiverParameters.size,
+            symbol.descriptor.konstueParameters.size + symbol.descriptor.contextReceiverParameters.size,
             reflectionTarget,
             origin
         )
@@ -72,7 +72,7 @@ class IrFunctionReferenceImpl(
             type,
             symbol,
             typeArgumentsCount,
-            symbol.owner.valueParameters.size,
+            symbol.owner.konstueParameters.size,
             reflectionTarget,
             origin
         )

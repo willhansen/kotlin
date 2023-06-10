@@ -81,7 +81,7 @@ import org.jetbrains.kotlin.fir.analysis.diagnostics.jvm.FirJvmErrors.VALUE_CLAS
 
 object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
-    override val MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
+    override konst MAP = KtDiagnosticFactoryToRendererMap("FIR").also { map ->
         map.put(CONFLICTING_JVM_DECLARATIONS, "Platform declaration clash")
         map.put(JAVA_TYPE_MISMATCH, "Java type mismatch expected {0} but found {1}. Use explicit cast", RENDER_TYPE, RENDER_TYPE)
         map.put(UPPER_BOUND_CANNOT_BE_ARRAY, "Upper bound of a type parameter cannot be an array")
@@ -101,10 +101,10 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         )
         map.put(DEPRECATED_JAVA_ANNOTATION, "This annotation is deprecated in Kotlin. Use ''@{0}'' instead", TO_STRING)
         map.put(POSITIONED_VALUE_ARGUMENT_FOR_JAVA_ANNOTATION, "Only named arguments are available for Java annotations")
-        map.put(JVM_PACKAGE_NAME_CANNOT_BE_EMPTY, "'@JvmPackageName' annotation value cannot be empty")
+        map.put(JVM_PACKAGE_NAME_CANNOT_BE_EMPTY, "'@JvmPackageName' annotation konstue cannot be empty")
         map.put(
             JVM_PACKAGE_NAME_MUST_BE_VALID_NAME,
-            "'@JvmPackageName' annotation value must be a valid dot-qualified name of a package"
+            "'@JvmPackageName' annotation konstue must be a konstid dot-qualified name of a package"
         )
         map.put(
             JVM_PACKAGE_NAME_NOT_SUPPORTED_IN_FILES_WITH_CLASSES,
@@ -123,7 +123,7 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
             JVM_RECORD_WITHOUT_PRIMARY_CONSTRUCTOR_PARAMETERS,
             "Primary constructor with parameters is required for @JvmRecord class"
         )
-        map.put(JVM_RECORD_NOT_VAL_PARAMETER, "Constructor parameter of @JvmRecord class should be a val")
+        map.put(JVM_RECORD_NOT_VAL_PARAMETER, "Constructor parameter of @JvmRecord class should be a konst")
         map.put(JVM_RECORD_NOT_LAST_VARARG_PARAMETER, "Only the last constructor parameter of @JvmRecord may be a vararg")
         map.put(JVM_RECORD_EXTENDS_CLASS, "Record cannot inherit a class", RENDER_TYPE)
         map.put(INNER_JVM_RECORD, "@JvmRecord class should not be inner")
@@ -160,7 +160,7 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(FUNCTION_DELEGATE_MEMBER_NAME_CLASH, "Spread operator is prohibited for arguments to signature-polymorphic calls")
 
         map.put(VALUE_CLASS_WITHOUT_JVM_INLINE_ANNOTATION, "Value classes without @JvmInline annotation are not supported yet")
-        map.put(JVM_INLINE_WITHOUT_VALUE_CLASS, "@JvmInline annotation is only applicable to value classes")
+        map.put(JVM_INLINE_WITHOUT_VALUE_CLASS, "@JvmInline annotation is only applicable to konstue classes")
 
         map.put(JVM_DEFAULT_IN_DECLARATION, "Usage of ''@{0}'' is only allowed with -Xjvm-default option", STRING)
         map.put(
@@ -204,13 +204,13 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
 
         map.put(
             REPEATABLE_CONTAINER_MUST_HAVE_VALUE_ARRAY,
-            "Container annotation ''{0}'' must have a property ''value'' of type ''Array<{1}>''.",
+            "Container annotation ''{0}'' must have a property ''konstue'' of type ''Array<{1}>''.",
             TO_STRING,
             TO_STRING
         )
         map.put(
             REPEATABLE_CONTAINER_HAS_NON_DEFAULT_PARAMETER,
-            "Container annotation ''{0}'' does not have a default value for ''{1}''.",
+            "Container annotation ''{0}'' does not have a default konstue for ''{1}''.",
             TO_STRING,
             TO_STRING
         )
@@ -240,7 +240,7 @@ object FirJvmErrorsDefaultMessages : BaseDiagnosticRendererFactory() {
         map.put(
             CONCURRENT_HASH_MAP_CONTAINS_OPERATOR,
             "Method 'contains' from ConcurrentHashMap may have unexpected semantics: it calls 'containsValue' instead of 'containsKey'. " +
-                    "Use explicit form of the call to 'containsKey'/'containsValue'/'contains' or cast the value to kotlin.collections.Map instead. " +
+                    "Use explicit form of the call to 'containsKey'/'containsValue'/'contains' or cast the konstue to kotlin.collections.Map instead. " +
                     "See https://youtrack.jetbrains.com/issue/KT-18053 for more details"
         )
         map.put(

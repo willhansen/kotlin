@@ -8,7 +8,7 @@ import java.util.stream.Collectors
 import java.util.stream.Stream
 
 fun box(): String {
-    val mutableListOf = mutableListOf("OK", "B", "C")
+    konst mutableListOf = mutableListOf("OK", "B", "C")
 
     return test((mutableListOf as java.util.Collection<String>).stream()) as String
 }

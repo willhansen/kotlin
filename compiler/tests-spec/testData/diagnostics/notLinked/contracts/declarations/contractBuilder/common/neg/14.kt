@@ -25,7 +25,7 @@ fun case_2() = <!CONTRACT_NOT_ALLOWED!>contract<!> { }
 
 // TESTCASE NUMBER: 3
 inline fun case_3(block: () -> Unit) {
-    val value_1 = <!CONTRACT_NOT_ALLOWED!>contract<!> {
+    konst konstue_1 = <!CONTRACT_NOT_ALLOWED!>contract<!> {
         callsInPlace(block, InvocationKind.EXACTLY_ONCE)
     }
     block()

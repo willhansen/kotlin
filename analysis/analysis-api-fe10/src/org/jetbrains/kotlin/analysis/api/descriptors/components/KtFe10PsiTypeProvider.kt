@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 import java.text.StringCharacterIterator
 
 internal class KtFe10PsiTypeProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtPsiTypeProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
-    private val typeMapper by lazy { KtFe10JvmTypeMapperContext(analysisContext.resolveSession) }
+    private konst typeMapper by lazy { KtFe10JvmTypeMapperContext(analysisContext.resolveSession) }
 
     override fun asPsiTypeElement(
         type: KtType,
@@ -43,7 +43,7 @@ internal class KtFe10PsiTypeProvider(
         isAnnotationMethod: Boolean,
         allowErrorTypes: Boolean
     ): PsiTypeElement? {
-        val kotlinType = (type as KtFe10Type).fe10Type
+        konst kotlinType = (type as KtFe10Type).fe10Type
 
         with(typeMapper.typeContext) {
             if (kotlinType.contains { it.isError() }) {
@@ -73,7 +73,7 @@ internal class KtFe10PsiTypeProvider(
     private fun simplifyType(type: UnwrappedType): KotlinType {
         var result = type
         do {
-            val oldResult = result
+            konst oldResult = result
             result = when (type) {
                 is FlexibleType -> type.upperBound
                 is DefinitelyNotNullType -> type.original
@@ -86,19 +86,19 @@ internal class KtFe10PsiTypeProvider(
     private fun asPsiTypeElement(type: KotlinType, useSitePosition: PsiElement, mode: TypeMappingMode): PsiTypeElement? {
         if (type !is SimpleTypeMarker) return null
 
-        val signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
+        konst signatureWriter = BothSignatureWriter(BothSignatureWriter.Mode.SKIP_CHECKS)
         typeMapper.mapType(type, mode, signatureWriter)
 
-        val canonicalSignature = signatureWriter.toString()
+        konst canonicalSignature = signatureWriter.toString()
         require(!canonicalSignature.contains(SpecialNames.ANONYMOUS_STRING))
 
         if (canonicalSignature.contains("L<error>")) return null
         if (canonicalSignature.contains(SpecialNames.NO_NAME_PROVIDED.asString())) return null
 
-        val signature = StringCharacterIterator(canonicalSignature)
-        val javaType = SignatureParsing.parseTypeString(signature, StubBuildingVisitor.GUESSING_MAPPER)
-        val typeInfo = TypeInfo.fromString(javaType, false)
-        val typeText = TypeInfo.createTypeText(typeInfo) ?: return null
+        konst signature = StringCharacterIterator(canonicalSignature)
+        konst javaType = SignatureParsing.parseTypeString(signature, StubBuildingVisitor.GUESSING_MAPPER)
+        konst typeInfo = TypeInfo.fromString(javaType, false)
+        konst typeText = TypeInfo.createTypeText(typeInfo) ?: return null
 
         return ClsTypeElementImpl(useSitePosition, typeText, '\u0000')
     }

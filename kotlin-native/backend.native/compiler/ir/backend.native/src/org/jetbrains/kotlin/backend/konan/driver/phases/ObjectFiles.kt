@@ -10,11 +10,11 @@ import org.jetbrains.kotlin.backend.konan.driver.PhaseContext
 import java.io.File
 
 internal data class ObjectFilesPhaseInput(
-        val bitcodeFile: File,
-        val objectFile: File,
+        konst bitcodeFile: File,
+        konst objectFile: File,
 )
 
-internal val ObjectFilesPhase = createSimpleNamedCompilerPhase<PhaseContext, ObjectFilesPhaseInput>(
+internal konst ObjectFilesPhase = createSimpleNamedCompilerPhase<PhaseContext, ObjectFilesPhaseInput>(
         name = "ObjectFiles",
         description = "Bitcode to object file",
 ) { context, input ->

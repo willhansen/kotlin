@@ -2,7 +2,7 @@
 
 class A
 
-class B(val items: Collection<A>)
+class B(konst items: Collection<A>)
 
 class C {
     fun foo(p: Int) {

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.konan.blackboxtest.AbstractNativeSimpleTest
  * [allInstances] - all test class instances ordered from innermost to outermost
  * [enclosingTestInstance] - the outermost test instance
  */
-internal class SimpleTestInstances(val allInstances: List<Any>) {
-    val enclosingTestInstance: AbstractNativeSimpleTest
+internal class SimpleTestInstances(konst allInstances: List<Any>) {
+    konst enclosingTestInstance: AbstractNativeSimpleTest
         get() = allInstances.firstOrNull() as AbstractNativeSimpleTest
 }

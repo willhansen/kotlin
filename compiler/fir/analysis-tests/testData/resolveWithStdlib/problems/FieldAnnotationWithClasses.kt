@@ -2,12 +2,12 @@
 
 import kotlin.reflect.*
 
-annotation class Ann(vararg val allowedTypes: KClass<*>)
+annotation class Ann(vararg konst allowedTypes: KClass<*>)
 
 fun foo() {
     class Local {
         @field:Ann(allowedTypes = [Some::class, Other::class])
-        val x: Int = 42
+        konst x: Int = 42
     }
 }
 

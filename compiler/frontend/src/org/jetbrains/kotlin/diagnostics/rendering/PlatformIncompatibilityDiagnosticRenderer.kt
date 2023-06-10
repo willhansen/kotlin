@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.descriptors.MemberDescriptor
 import org.jetbrains.kotlin.resolve.multiplatform.ExpectActualCompatibility.Incompatible
 
 class PlatformIncompatibilityDiagnosticRenderer(
-    private val mode: MultiplatformDiagnosticRenderingMode
+    private konst mode: MultiplatformDiagnosticRenderingMode
 ) : DiagnosticParameterRenderer<Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>> {
     override fun render(
         obj: Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>,
@@ -37,12 +37,12 @@ class PlatformIncompatibilityDiagnosticRenderer(
 
     companion object {
         @JvmField
-        val TEXT = PlatformIncompatibilityDiagnosticRenderer(MultiplatformDiagnosticRenderingMode())
+        konst TEXT = PlatformIncompatibilityDiagnosticRenderer(MultiplatformDiagnosticRenderingMode())
     }
 }
 
 class IncompatibleExpectedActualClassScopesRenderer(
-    private val mode: MultiplatformDiagnosticRenderingMode
+    private konst mode: MultiplatformDiagnosticRenderingMode
 ) : DiagnosticParameterRenderer<List<Pair<MemberDescriptor, Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>>>> {
     override fun render(
         obj: List<Pair<MemberDescriptor, Map<Incompatible<MemberDescriptor>, Collection<MemberDescriptor>>>>,
@@ -58,7 +58,7 @@ class IncompatibleExpectedActualClassScopesRenderer(
 
     companion object {
         @JvmField
-        val TEXT = IncompatibleExpectedActualClassScopesRenderer(MultiplatformDiagnosticRenderingMode())
+        konst TEXT = IncompatibleExpectedActualClassScopesRenderer(MultiplatformDiagnosticRenderingMode())
     }
 }
 
@@ -116,7 +116,7 @@ private fun StringBuilder.renderIncompatibleClassScopes(
 ) {
     mode.renderList(this, unfulfilled.indices.map { index ->
         {
-            val (descriptor, mapping) = unfulfilled[index]
+            konst (descriptor, mapping) = unfulfilled[index]
             mode.renderDescriptor(this, descriptor, context, indent)
             if (mapping.isNotEmpty()) {
                 mode.newLine(this)
@@ -129,4 +129,4 @@ private fun StringBuilder.renderIncompatibleClassScopes(
     })
 }
 
-private const val INDENTATION_UNIT = "    "
+private const konst INDENTATION_UNIT = "    "

@@ -17,12 +17,12 @@
 package org.jetbrains.kotlin.cfg.pseudocode
 
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.cfg.pseudocode.instructions.eval.InstructionWithValue
+import org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst.InstructionWithValue
 
 class PseudoValueImpl(
-    override val debugName: String,
-    override val element: KtElement?,
-    override val createdAt: InstructionWithValue?
+    override konst debugName: String,
+    override konst element: KtElement?,
+    override konst createdAt: InstructionWithValue?
 ) : PseudoValue {
     override fun toString(): String = debugName
 }

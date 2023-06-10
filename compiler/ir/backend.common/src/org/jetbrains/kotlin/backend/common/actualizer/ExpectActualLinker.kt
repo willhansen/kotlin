@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.ir.util.SymbolRenamer
 import org.jetbrains.kotlin.ir.util.TypeRemapper
 import org.jetbrains.kotlin.utils.memoryOptimizedMap
 
-internal class ActualizerSymbolRemapper(private val expectActualMap: Map<IrSymbol, IrSymbol>) : SymbolRemapper {
+internal class ActualizerSymbolRemapper(private konst expectActualMap: Map<IrSymbol, IrSymbol>) : SymbolRemapper {
     override fun getDeclaredClass(symbol: IrClassSymbol) = symbol
 
     override fun getDeclaredScript(symbol: IrScriptSymbol) = symbol
@@ -75,7 +75,7 @@ internal class ActualizerSymbolRemapper(private val expectActualMap: Map<IrSymbo
     private inline fun <reified S : IrSymbol> S.actualizeSymbol(): S = (expectActualMap[this] as? S) ?: this
 }
 
-internal open class ActualizerVisitor(private val symbolRemapper: SymbolRemapper, typeRemapper: TypeRemapper) :
+internal open class ActualizerVisitor(private konst symbolRemapper: SymbolRemapper, typeRemapper: TypeRemapper) :
     DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper, SymbolRenamer.DEFAULT) {
     override fun visitModuleFragment(declaration: IrModuleFragment) =
         declaration.also { it.transformChildren(this, null) }

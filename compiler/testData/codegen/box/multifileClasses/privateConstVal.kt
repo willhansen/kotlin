@@ -5,7 +5,7 @@
 @file:JvmMultifileClass
 package test
 
-private const val x = "O"
+private const konst x = "O"
 
 fun foo() = x
 
@@ -14,7 +14,7 @@ fun foo() = x
 @file:JvmMultifileClass
 package test
 
-private const val x = "K"
+private const konst x = "K"
 
 fun bar() = x
 

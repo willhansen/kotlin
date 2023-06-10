@@ -4,10 +4,10 @@
 
 import kotlin.test.*
 
-var component1Evaluated = false
+var component1Ekonstuated = false
 
 // NB extension receiver is nullable
-operator fun J?.component1() = 1.also { component1Evaluated = true }
+operator fun J?.component1() = 1.also { component1Ekonstuated = true }
 
 private operator fun J.component2() = 2
 
@@ -15,9 +15,9 @@ fun use(x: Any) {}
 
 fun box(): String {
     assertFailsWith<NullPointerException> {
-        val (a, b) = J.j()
+        konst (a, b) = J.j()
     }
-    if (!component1Evaluated) return "component1 should be evaluated"
+    if (!component1Ekonstuated) return "component1 should be ekonstuated"
     return "OK"
 }
 

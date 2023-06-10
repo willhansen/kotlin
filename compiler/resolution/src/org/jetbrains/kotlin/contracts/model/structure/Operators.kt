@@ -22,28 +22,28 @@ import org.jetbrains.kotlin.contracts.model.ESOperator
 import org.jetbrains.kotlin.contracts.model.ESValue
 import org.jetbrains.kotlin.contracts.model.functors.*
 
-class ESAnd(val left: ESExpression, val right: ESExpression) : ESOperator {
-    override val functor: AndFunctor = AndFunctor()
+class ESAnd(konst left: ESExpression, konst right: ESExpression) : ESOperator {
+    override konst functor: AndFunctor = AndFunctor()
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitAnd(this)
 }
 
-class ESOr(val left: ESExpression, val right: ESExpression) : ESOperator {
-    override val functor: OrFunctor = OrFunctor()
+class ESOr(konst left: ESExpression, konst right: ESExpression) : ESOperator {
+    override konst functor: OrFunctor = OrFunctor()
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitOr(this)
 }
 
-class ESNot(val arg: ESExpression) : ESOperator {
-    override val functor = NotFunctor()
+class ESNot(konst arg: ESExpression) : ESOperator {
+    override konst functor = NotFunctor()
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitNot(this)
 }
 
-class ESIs(val left: ESValue, override val functor: IsFunctor) : ESOperator {
-    val type = functor.type
+class ESIs(konst left: ESValue, override konst functor: IsFunctor) : ESOperator {
+    konst type = functor.type
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitIs(this)
 }
 
-class ESEqual(val left: ESValue, val right: ESValue, isNegated: Boolean) : ESOperator {
-    override val functor: EqualsFunctor = EqualsFunctor(isNegated)
+class ESEqual(konst left: ESValue, konst right: ESValue, isNegated: Boolean) : ESOperator {
+    override konst functor: EqualsFunctor = EqualsFunctor(isNegated)
     override fun <T> accept(visitor: ESExpressionVisitor<T>): T = visitor.visitEqual(this)
 }
 

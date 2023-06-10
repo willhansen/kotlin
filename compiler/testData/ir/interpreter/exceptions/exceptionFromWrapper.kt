@@ -1,10 +1,10 @@
 @CompileTimeCalculation
-fun append(sb: StringBuilder, value: CharSequence, start: Int, end: Int): String {
-    return sb.append(value, start, end).toString()
+fun append(sb: StringBuilder, konstue: CharSequence, start: Int, end: Int): String {
+    return sb.append(konstue, start, end).toString()
 }
 
-const val a = <!EVALUATED: `Some string with not zero length!!!`!>append(StringBuilder("Some string with not zero length"), "!!!", 0, 3)<!>
-const val b = <!WAS_NOT_EVALUATED: `
+const konst a = <!EVALUATED: `Some string with not zero length!!!`!>append(StringBuilder("Some string with not zero length"), "!!!", 0, 3)<!>
+const konst b = <!WAS_NOT_EVALUATED: `
 Exception java.lang.IndexOutOfBoundsException: start -1, end 0, s.length() 3
 	at <JDK>
 	at ExceptionFromWrapperKt.append(exceptionFromWrapper.kt:3)

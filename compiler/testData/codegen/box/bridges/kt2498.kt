@@ -13,11 +13,11 @@ class StringList: BaseStringList() {
 }
 
 fun box(): String {
-    val myStringList = StringList()
+    konst myStringList = StringList()
     myStringList.add("first element")
     if (myStringList.get(0) != "StringList.get()") return "Fail #1"
-    val b: BaseStringList = myStringList
-    val a: ArrayList<String> = myStringList
+    konst b: BaseStringList = myStringList
+    konst a: ArrayList<String> = myStringList
     if (b.get(0) != "StringList.get()") return "Fail #2"
     if (a.get(0) != "StringList.get()") return "Fail #3"
     return "OK"

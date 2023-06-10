@@ -48,7 +48,7 @@ KtKotlinPropertySymbol:
       type: kotlin/enums/EnumEntries<MyKotlinEnum>
     symbolKind: ACCESSOR
     typeParameters: []
-    valueParameters: []
+    konstueParameters: []
     visibility: Public
     getContainingModule: KtSourceModule "Sources of main"
     deprecationStatus: null

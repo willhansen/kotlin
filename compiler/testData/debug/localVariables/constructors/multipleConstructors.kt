@@ -3,7 +3,7 @@ open class Base(i: Int)
 
 class Derived(): Base(1) {
     constructor(p: Int): this() {
-        val a = 2
+        konst a = 2
     }
 
     constructor(p1: Int, p2: Int): this()

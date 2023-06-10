@@ -1,5 +1,5 @@
-inline class A(val x: Int)
-class B(val a: A = A(0))
+inline class A(konst x: Int)
+class B(konst a: A = A(0))
 
 // @B.class:
 // 1 private <init>\(I\)V

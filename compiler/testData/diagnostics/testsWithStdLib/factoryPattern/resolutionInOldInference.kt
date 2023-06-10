@@ -20,6 +20,6 @@ fun create(f: (Int) -> String): String = ""
 fun takeString(s: String) {}
 
 fun test_1() {
-    val x = create { "" }
+    konst x = create { "" }
     takeString("")
 }

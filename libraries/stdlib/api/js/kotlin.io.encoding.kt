@@ -18,14 +18,14 @@ public open class Base64 {
     public final fun encodeToByteArray(source: kotlin.ByteArray, startIndex: kotlin.Int = ..., endIndex: kotlin.Int = ...): kotlin.ByteArray
 
     public companion object of Base64 Default : kotlin.io.encoding.Base64 {
-        public final val Mime: kotlin.io.encoding.Base64 { get; }
+        public final konst Mime: kotlin.io.encoding.Base64 { get; }
 
-        public final val UrlSafe: kotlin.io.encoding.Base64 { get; }
+        public final konst UrlSafe: kotlin.io.encoding.Base64 { get; }
     }
 }
 
 @kotlin.RequiresOptIn(level = Level.ERROR)
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.CLASS, AnnotationTarget.ANNOTATION_CLASS, AnnotationTarget.PROPERTY, AnnotationTarget.FIELD, AnnotationTarget.LOCAL_VARIABLE, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.CONSTRUCTOR, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER, AnnotationTarget.TYPEALIAS})
 @kotlin.annotation.MustBeDocumented
 @kotlin.SinceKotlin(version = "1.8")

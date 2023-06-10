@@ -3,12 +3,12 @@
 class My {
     companion object {
         private var my: String = "OK"
-            set(value) { field = value }
+            set(konstue) { field = konstue }
     }
 
     fun getMyValue(): String {
         // INVOKESTATIC My$Companion.access$setMy$p
-        my = "Overriden value"
+        my = "Overriden konstue"
         // GETSTATIC My.my
         return my
     }

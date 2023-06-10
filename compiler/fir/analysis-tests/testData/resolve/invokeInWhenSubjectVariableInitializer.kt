@@ -1,3 +1,3 @@
 fun test(func: () -> String?) {
-    val x = func() ?: ""
+    konst x = func() ?: ""
 }

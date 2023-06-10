@@ -1,7 +1,7 @@
 @kotlin.Metadata
 public abstract class<<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Map<TK;TV;>;Lkotlin/jvm/internal/markers/KMappedMarker;>  GenericMap {
     // source: 'genericMap.kt'
-    public bridge final <()Ljava/util/Collection<TV;>;> method values(): java.util.Collection
+    public bridge final <()Ljava/util/Collection<TV;>;> method konstues(): java.util.Collection
     public bridge final <()Ljava/util/Set<Ljava/util/Map$Entry<TK;TV;>;>;> method entrySet(): java.util.Set
     public bridge final <()Ljava/util/Set<TK;>;> method keySet(): java.util.Set
     public <(Ljava/lang/Object;)TV;> method remove(p0: java.lang.Object): java.lang.Object

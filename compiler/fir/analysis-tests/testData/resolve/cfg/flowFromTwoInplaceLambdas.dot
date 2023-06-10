@@ -647,7 +647,7 @@ digraph flowFromTwoInplaceLambdas_kt {
         subgraph cluster_50 {
             color=blue
             240 [label="Enter block"];
-            241 [label="Variable declaration: lval x: R|kotlin/String|"];
+            241 [label="Variable declaration: lkonst x: R|kotlin/String|"];
             242 [label="Postponed enter to lambda"];
             subgraph cluster_51 {
                 color=blue
@@ -718,8 +718,8 @@ digraph flowFromTwoInplaceLambdas_kt {
             color=blue
             265 [label="Enter block"];
             266 [label="Const: String()"];
-            267 [label="Variable declaration: lval x: R|kotlin/Any?|"];
-            268 [label="Variable declaration: lval y: R|kotlin/Any?|"];
+            267 [label="Variable declaration: lkonst x: R|kotlin/Any?|"];
+            268 [label="Variable declaration: lkonst y: R|kotlin/Any?|"];
             269 [label="Postponed enter to lambda"];
             subgraph cluster_57 {
                 color=blue

@@ -1,15 +1,15 @@
 // ISSUE: KT-52580
 
 interface Base {
-    val a: String
+    konst a: String
 }
 
 interface Derived : Base {
-    override val a: String
-    val b: Int
+    override konst a: String
+    konst b: Int
 }
 
-class BaseImpl(override val a: String) : Base
+class BaseImpl(override konst a: String) : Base
 
 fun test(base: Base): String {
     return consume(
@@ -24,7 +24,7 @@ fun consume(s1: String, s2: String?, s3: String): String {
 }
 
 fun box(): String {
-    val result = test(BaseImpl("Base"))
+    konst result = test(BaseImpl("Base"))
     return when (result) {
         "Base|null|Base" -> "OK"
         else -> "Fail: $result"

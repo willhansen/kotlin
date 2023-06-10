@@ -10,7 +10,7 @@ import kotlin.test.*
 
 class AbstractCoroutineContextElementTest {
 
-    private val CoroutineContext.size get() = fold(0) { acc, _ -> acc + 1 }
+    private konst CoroutineContext.size get() = fold(0) { acc, _ -> acc + 1 }
 
     abstract class Base : AbstractCoroutineContextElement(Key) {
         companion object Key : CoroutineContext.Key<Base>
@@ -45,7 +45,7 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testDerivedWithoutKey() {
-        val derivedWithoutKey = DerivedWithoutKey()
+        konst derivedWithoutKey = DerivedWithoutKey()
         assertSame(Base.Key, derivedWithoutKey.key)
         testDerivedWithoutKey(EmptyCoroutineContext, derivedWithoutKey) // Single element
         testDerivedWithoutKey(IrrelevantElement, derivedWithoutKey) // Combined context
@@ -53,7 +53,7 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testDerivedWithoutKeyOverridesDerived() {
-        val context = DerivedWithKey() + DerivedWithoutKey()
+        konst context = DerivedWithKey() + DerivedWithoutKey()
         assertEquals(1, context.size)
         assertTrue(context[Base] is DerivedWithoutKey)
         assertNull(context[DerivedWithKey])
@@ -62,7 +62,7 @@ class AbstractCoroutineContextElementTest {
     }
 
     private fun testDerivedWithoutKey(context: CoroutineContext, element: CoroutineContext.Element) {
-        val ctx = context + element
+        konst ctx = context + element
         assertEquals(context.size + 1, ctx.size)
         assertSame(element, ctx[Base]!!)
         assertNull(ctx[DerivedWithKey])
@@ -72,14 +72,14 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testDerivedWithKey() {
-        val derivedWithKey = DerivedWithKey()
+        konst derivedWithKey = DerivedWithKey()
         assertSame(Base.Key, derivedWithKey.key)
         testDerivedWithKey(EmptyCoroutineContext, derivedWithKey) // Single element
         testDerivedWithKey(IrrelevantElement, derivedWithKey) // Combined context
     }
 
     private fun testDerivedWithKey(context: CoroutineContext, element: CoroutineContext.Element) {
-        val ctx = context + element
+        konst ctx = context + element
         assertEquals(context.size + 1, ctx.size)
         assertSame(element, ctx[Base]!!)
         assertSame(element, ctx[DerivedWithKey]!!)
@@ -89,14 +89,14 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testSubDerivedWithKey() {
-        val subDerivedWithKey = SubDerivedWithKey()
+        konst subDerivedWithKey = SubDerivedWithKey()
         assertSame(Base.Key, subDerivedWithKey.key)
         testSubDerivedWithKey(EmptyCoroutineContext, subDerivedWithKey)
         testSubDerivedWithKey(IrrelevantElement, subDerivedWithKey)
     }
 
     private fun testSubDerivedWithKey(context: CoroutineContext, element: CoroutineContext.Element) {
-        val ctx = context + element
+        konst ctx = context + element
         assertEquals(context.size + 1, ctx.size)
         assertSame(element, ctx[Base]!!)
         assertSame(element, ctx[DerivedWithKey]!!)
@@ -110,14 +110,14 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testSubDerivedWithKeyAndDifferentBase() {
-        val subDerivedWithKeyAndDifferentBase = SubDerivedWithKeyAndDifferentBase()
+        konst subDerivedWithKeyAndDifferentBase = SubDerivedWithKeyAndDifferentBase()
         assertSame(Base.Key, subDerivedWithKeyAndDifferentBase.key)
         testSubDerivedWithKeyAndDifferentBase(EmptyCoroutineContext, subDerivedWithKeyAndDifferentBase)
         testSubDerivedWithKeyAndDifferentBase(IrrelevantElement, subDerivedWithKeyAndDifferentBase)
     }
 
     private fun testSubDerivedWithKeyAndDifferentBase(context: CoroutineContext, element: CoroutineContext.Element) {
-        val ctx = context + element
+        konst ctx = context + element
         assertEquals(context.size + 1, ctx.size)
         assertSame(element, ctx[Base]!!)
         assertSame(element, ctx[DerivedWithKey]!!)
@@ -131,7 +131,7 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testDerivedWithKeyOverridesDerived() {
-        val context = DerivedWithoutKey() + DerivedWithKey()
+        konst context = DerivedWithoutKey() + DerivedWithKey()
         assertEquals(1, context.size)
         assertTrue { context[Base] is DerivedWithKey }
         assertTrue { context[DerivedWithKey] is DerivedWithKey }
@@ -141,7 +141,7 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testSubDerivedOverrides() {
-        val key = SubDerivedWithKeyAndDifferentBase
+        konst key = SubDerivedWithKeyAndDifferentBase
         testSubDerivedOverrides<SubDerivedWithKeyAndDifferentBase>(DerivedWithoutKey() + SubDerivedWithKeyAndDifferentBase(), key)
         testSubDerivedOverrides<SubDerivedWithKeyAndDifferentBase>(DerivedWithKey() + SubDerivedWithKeyAndDifferentBase(), key)
         testSubDerivedOverrides<SubDerivedWithKeyAndDifferentBase>(SubDerivedWithKeyAndDifferentBase() + SubDerivedWithKeyAndDifferentBase(), key)
@@ -149,7 +149,7 @@ class AbstractCoroutineContextElementTest {
 
     @Test
     fun testSubDerivedWithDifferentBaseOverrides() {
-        val key = SubDerivedWithKey
+        konst key = SubDerivedWithKey
         testSubDerivedOverrides<SubDerivedWithKey>(DerivedWithoutKey() + SubDerivedWithKey(), key)
         testSubDerivedOverrides<SubDerivedWithKey>(DerivedWithKey() + SubDerivedWithKey(), key)
         testSubDerivedOverrides<SubDerivedWithKey>(SubDerivedWithKeyAndDifferentBase() + SubDerivedWithKey(), key)

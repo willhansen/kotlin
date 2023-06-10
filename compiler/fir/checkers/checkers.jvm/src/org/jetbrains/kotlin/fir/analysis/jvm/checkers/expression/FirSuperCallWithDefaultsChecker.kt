@@ -20,10 +20,10 @@ object FirSuperCallWithDefaultsChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.explicitReceiverIsNotSuperReference()) return
 
-        val functionSymbol = expression.calleeReference.toResolvedFunctionSymbol() ?: return
-        if (!functionSymbol.valueParameterSymbols.any { it.hasDefaultValue }) return
-        val arguments = expression.argumentList as? FirResolvedArgumentList ?: return
-        if (arguments.arguments.size < functionSymbol.valueParameterSymbols.size) {
+        konst functionSymbol = expression.calleeReference.toResolvedFunctionSymbol() ?: return
+        if (!functionSymbol.konstueParameterSymbols.any { it.hasDefaultValue }) return
+        konst arguments = expression.argumentList as? FirResolvedArgumentList ?: return
+        if (arguments.arguments.size < functionSymbol.konstueParameterSymbols.size) {
             reporter.reportOn(
                 expression.calleeReference.source,
                 FirJvmErrors.SUPER_CALL_WITH_DEFAULT_PARAMETERS,

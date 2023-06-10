@@ -59,8 +59,8 @@ fun case_4(x: Int?, y: List<Nothing?>) {
  * ISSUES: KT-28265
  */
 fun case_5(x: Int?) {
-    val y = object {
-        val z = null
+    konst y = object {
+        konst z = null
     }
 
     if (x == y.z == true) {
@@ -75,7 +75,7 @@ fun case_5(x: Int?) {
  * ISSUES: KT-28265
  */
 fun case_6(x: Int?) {
-    val y = null
+    konst y = null
 
     if (x == y == true) {
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!>
@@ -89,8 +89,8 @@ fun case_6(x: Int?) {
  * ISSUES: KT-28265
  */
 fun case_7(x: Int?) {
-    val y = object {
-        val z: Nothing?
+    konst y = object {
+        konst z: Nothing?
             get() = null
     }
 

@@ -4,7 +4,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
 @JvmInline
-value class IC1(val x: Any) {
+konstue class IC1(konst x: Any) {
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>() {}
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>(x: Any) {}
 
@@ -16,7 +16,7 @@ value class IC1(val x: Any) {
 }
 
 @JvmInline
-value class IC2(val x: Any) {
+konstue class IC2(konst x: Any) {
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>(x: Any) {}
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>(): Any = TODO()
 
@@ -28,7 +28,7 @@ value class IC2(val x: Any) {
 }
 
 @JvmInline
-value class IC3(val x: Any) {
+konstue class IC3(konst x: Any) {
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>(x: Any): Any = TODO()
     fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>unbox<!>(x: Any): Any = TODO()
 
@@ -40,33 +40,33 @@ interface WithBox {
 }
 
 @JvmInline
-value class IC4(val s: String) : WithBox {
+konstue class IC4(konst s: String) : WithBox {
     override fun <!RESERVED_MEMBER_INSIDE_VALUE_CLASS!>box<!>(): String = ""
 }
 
 @JvmInline
-value class IC5(val a: String) {
+konstue class IC5(konst a: String) {
     constructor(i: Int) : this(i.toString()) {
         TODO("something")
     }
 }
 
 @JvmInline
-value class IC6(val a: String) {
+konstue class IC6(konst a: String) {
     fun <!TYPE_PARAMETERS_NOT_ALLOWED!><T><!> equals(other: IC6): Boolean = true
 }
 
 @JvmInline
-value class IC7<T>(val a: String) {
+konstue class IC7<T>(konst a: String) {
     fun equals(other: IC7<*>): Boolean = true
 }
 
 @JvmInline
-value class IC8<T>(val a: String) {
+konstue class IC8<T>(konst a: String) {
     fun equals(other: <!TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS!>IC8<T><!>): Boolean = true
 }
 
 @JvmInline
-value class IC9<T>(val a: String) {
+konstue class IC9<T>(konst a: String) {
     fun equals(other: <!TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS!>IC9<String><!>): Boolean = true
 }

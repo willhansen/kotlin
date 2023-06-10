@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.isEffectivelyExternal
 import org.jetbrains.kotlin.resolve.isValueClass
 import org.jetbrains.kotlin.types.KotlinType
 
-val ParameterDescriptor.indexOrMinusOne: Int
+konst ParameterDescriptor.indexOrMinusOne: Int
     get() = if (this is ValueParameterDescriptor) index else -1
 
-val ParameterDescriptor.varargElementType: KotlinType?
+konst ParameterDescriptor.varargElementType: KotlinType?
     get() = (this as? ValueParameterDescriptor)?.varargElementType
 
-val ParameterDescriptor.isCrossinline: Boolean
+konst ParameterDescriptor.isCrossinline: Boolean
     get() = this is ValueParameterDescriptor && isCrossinline
 
-val ParameterDescriptor.isNoinline: Boolean
+konst ParameterDescriptor.isNoinline: Boolean
     get() = this is ValueParameterDescriptor && isNoinline
 
 fun IrFactory.createIrClassFromDescriptor(

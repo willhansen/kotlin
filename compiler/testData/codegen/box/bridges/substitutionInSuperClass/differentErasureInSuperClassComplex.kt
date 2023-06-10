@@ -16,18 +16,18 @@ interface D {
 class B : A<A<String>>(), C<A<String>>, D
 
 fun box(): String {
-    val x: A<String> = A()
-    val y: A<A<String>> = A()
+    konst x: A<String> = A()
+    konst y: A<A<String>> = A()
 
-    val b = B()
-    val bResult = b.foo(x) + b.foo(y)
+    konst b = B()
+    konst bResult = b.foo(x) + b.foo(y)
     if (bResult != "OK") return "fail 1: $bResult"
 
-    val c: C<A<String>> = B()
-    val cResult = c.foo(x) + c.foo(y)
+    konst c: C<A<String>> = B()
+    konst cResult = c.foo(x) + c.foo(y)
     if (cResult != "OK") return "fail 2: $cResult"
 
-    val d: D = B()
+    konst d: D = B()
 
     if (d.foo(y) != "K") return "fail 3"
 

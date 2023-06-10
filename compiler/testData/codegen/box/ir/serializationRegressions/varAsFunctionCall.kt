@@ -1,7 +1,7 @@
 // MODULE: lib
 // FILE: l1.kt
 
-val <T : CharSequence> T.z
+konst <T : CharSequence> T.z
     get() = { x: T -> this }
 
 // FILE: l2.kt

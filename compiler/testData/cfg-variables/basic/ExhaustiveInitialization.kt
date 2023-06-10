@@ -3,7 +3,7 @@ enum class Direction {
 }
 
 fun foo(dir: Direction): Int {
-    val res: Int
+    konst res: Int
     when (dir) {
         Direction.NORTH -> res = 1
         Direction.SOUTH -> res = 2

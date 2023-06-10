@@ -19,15 +19,15 @@ import java.nio.channels.FileChannel
 
 private typealias RandomAccessFileAndBuffer = Pair<RandomAccessFile, MappedByteBuffer>
 
-class FastJarFileSystem private constructor(internal val unmapBuffer: MappedByteBuffer.() -> Unit) : DeprecatedVirtualFileSystem() {
-    private val myHandlers: MutableMap<String, FastJarHandler> =
+class FastJarFileSystem private constructor(internal konst unmapBuffer: MappedByteBuffer.() -> Unit) : DeprecatedVirtualFileSystem() {
+    private konst myHandlers: MutableMap<String, FastJarHandler> =
         ConcurrentFactoryMap.createMap { key: String -> FastJarHandler(this@FastJarFileSystem, key) }
 
-    internal val cachedOpenFileHandles: FileAccessorCache<File, RandomAccessFileAndBuffer> =
+    internal konst cachedOpenFileHandles: FileAccessorCache<File, RandomAccessFileAndBuffer> =
         object : FileAccessorCache<File, RandomAccessFileAndBuffer>(20, 10) {
             @Throws(IOException::class)
             override fun createAccessor(file: File): RandomAccessFileAndBuffer {
-                val randomAccessFile = RandomAccessFile(file, "r")
+                konst randomAccessFile = RandomAccessFile(file, "r")
                 return Pair(randomAccessFile, randomAccessFile.channel.map(FileChannel.MapMode.READ_ONLY, 0, randomAccessFile.length()))
             }
 
@@ -37,8 +37,8 @@ class FastJarFileSystem private constructor(internal val unmapBuffer: MappedByte
                 fileAccessor.second.unmapBuffer()
             }
 
-            override fun isEqual(val1: File, val2: File): Boolean {
-                return val1 == val2 // reference equality to handle different jars for different ZipHandlers on the same path
+            override fun isEqual(konst1: File, konst2: File): Boolean {
+                return konst1 == konst2 // reference equality to handle different jars for different ZipHandlers on the same path
             }
         }
 
@@ -47,7 +47,7 @@ class FastJarFileSystem private constructor(internal val unmapBuffer: MappedByte
     }
 
     override fun findFileByPath(path: String): VirtualFile? {
-        val pair = splitPath(path)
+        konst pair = splitPath(path)
         return myHandlers[pair.first]!!.findFileByPath(pair.second)
     }
 
@@ -67,35 +67,35 @@ class FastJarFileSystem private constructor(internal val unmapBuffer: MappedByte
 
     companion object {
         fun splitPath(path: String): Couple<String> {
-            val separator = path.indexOf("!/")
+            konst separator = path.indexOf("!/")
             require(separator >= 0) { "Path in JarFileSystem must contain a separator: $path" }
-            val localPath = path.substring(0, separator)
-            val pathInJar = path.substring(separator + 2)
+            konst localPath = path.substring(0, separator)
+            konst pathInJar = path.substring(separator + 2)
             return Couple.of(localPath, pathInJar)
         }
 
         fun createIfUnmappingPossible(): FastJarFileSystem? {
-            val cleanerCallBack = prepareCleanerCallback() ?: return null
+            konst cleanerCallBack = prepareCleanerCallback() ?: return null
             return FastJarFileSystem(cleanerCallBack)
         }
     }
 }
 
 
-private val IS_PRIOR_9_JRE = System.getProperty("java.specification.version", "").startsWith("1.")
+private konst IS_PRIOR_9_JRE = System.getProperty("java.specification.version", "").startsWith("1.")
 
 private fun prepareCleanerCallback(): ((ByteBuffer) -> Unit)? {
     return try {
         if (IS_PRIOR_9_JRE) {
-            val cleaner = Class.forName("java.nio.DirectByteBuffer").getMethod("cleaner")
+            konst cleaner = Class.forName("java.nio.DirectByteBuffer").getMethod("cleaner")
             cleaner.isAccessible = true
 
-            val clean = Class.forName("sun.misc.Cleaner").getMethod("clean")
+            konst clean = Class.forName("sun.misc.Cleaner").getMethod("clean")
             clean.isAccessible = true
 
             { buffer: ByteBuffer -> clean.invoke(cleaner.invoke(buffer)) }
         } else {
-            val unsafeClass = try {
+            konst unsafeClass = try {
                 Class.forName("sun.misc.Unsafe")
             } catch (ex: Exception) {
                 // jdk.internal.misc.Unsafe doesn't yet have an invokeCleaner() method,
@@ -103,13 +103,13 @@ private fun prepareCleanerCallback(): ((ByteBuffer) -> Unit)? {
                 Class.forName("jdk.internal.misc.Unsafe")
             }
 
-            val clean = unsafeClass.getMethod("invokeCleaner", ByteBuffer::class.java)
+            konst clean = unsafeClass.getMethod("invokeCleaner", ByteBuffer::class.java)
             clean.isAccessible = true
 
-            val theUnsafeField = unsafeClass.getDeclaredField("theUnsafe")
+            konst theUnsafeField = unsafeClass.getDeclaredField("theUnsafe")
             theUnsafeField.isAccessible = true
 
-            val theUnsafe = theUnsafeField.get(null);
+            konst theUnsafe = theUnsafeField.get(null);
 
             { buffer: ByteBuffer -> clean.invoke(theUnsafe, buffer) }
         }

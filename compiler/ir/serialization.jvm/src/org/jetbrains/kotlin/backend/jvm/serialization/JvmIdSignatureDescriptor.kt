@@ -23,7 +23,7 @@ class JvmIdSignatureDescriptor(mangler: KotlinMangler.DescriptorMangler) : IdSig
     private inner class JvmDescriptorBasedSignatureBuilder(type: SpecialDeclarationType) :
         DescriptorBasedSignatureBuilder(type) {
 
-        override val currentFileSignature: IdSignature.FileSignature?
+        override konst currentFileSignature: IdSignature.FileSignature?
             get() = externallyGivenFileSignature ?: storedFileSignature
 
         override fun platformSpecificFunction(descriptor: FunctionDescriptor) {
@@ -63,9 +63,9 @@ class JvmIdSignatureDescriptor(mangler: KotlinMangler.DescriptorMangler) : IdSig
 
         private fun keepTrackOfOverridesForPossiblyClashingFakeOverride(descriptor: CallableMemberDescriptor) {
             if (descriptor.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE) return
-            val containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
+            konst containingClass = descriptor.containingDeclaration as? ClassDescriptor ?: return
 
-            val possiblyClashingMembers = when (descriptor) {
+            konst possiblyClashingMembers = when (descriptor) {
                 is PropertyAccessorDescriptor ->
                     containingClass.unsubstitutedMemberScope
                         .getContributedVariables(descriptor.correspondingProperty.name, NoLookupLocation.FROM_BACKEND)
@@ -80,7 +80,7 @@ class JvmIdSignatureDescriptor(mangler: KotlinMangler.DescriptorMangler) : IdSig
             }
             if (possiblyClashingMembers.size <= 1) return
 
-            val capturingOverrides = descriptor.overriddenTreeAsSequence(true).filter {
+            konst capturingOverrides = descriptor.overriddenTreeAsSequence(true).filter {
                 it.kind != CallableMemberDescriptor.Kind.FAKE_OVERRIDE && isCapturingTypeParameter(it)
             }.toList()
             if (capturingOverrides.isNotEmpty()) {
@@ -92,11 +92,11 @@ class JvmIdSignatureDescriptor(mangler: KotlinMangler.DescriptorMangler) : IdSig
 
         private fun isCapturingTypeParameter(member: CallableMemberDescriptor): Boolean =
             member.extensionReceiverParameter?.isCapturingTypeParameter() == true ||
-                    member.valueParameters.any { it.isCapturingTypeParameter() }
+                    member.konstueParameters.any { it.isCapturingTypeParameter() }
 
         private fun ParameterDescriptor.isCapturingTypeParameter(): Boolean =
             type.contains {
-                val descriptor = it.constructor.declarationDescriptor
+                konst descriptor = it.constructor.declarationDescriptor
                 descriptor is TypeParameterDescriptor && descriptor.containingDeclaration is ClassDescriptor
             }
 

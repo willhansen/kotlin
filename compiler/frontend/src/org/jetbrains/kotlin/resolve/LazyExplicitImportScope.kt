@@ -30,12 +30,12 @@ import org.jetbrains.kotlin.utils.Printer
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class LazyExplicitImportScope(
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val packageOrClassDescriptor: DeclarationDescriptor,
-    private val packageFragmentForVisibilityCheck: PackageFragmentDescriptor?,
-    private val declaredName: Name,
-    private val aliasName: Name,
-    private val storeReferences: CallOnceFunction<Collection<DeclarationDescriptor>, Unit>
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst packageOrClassDescriptor: DeclarationDescriptor,
+    private konst packageFragmentForVisibilityCheck: PackageFragmentDescriptor?,
+    private konst declaredName: Name,
+    private konst aliasName: Name,
+    private konst storeReferences: CallOnceFunction<Collection<DeclarationDescriptor>, Unit>
 ) : BaseImportingScope(null) {
 
     override fun getContributedClassifier(name: Name, location: LookupLocation): ClassifierDescriptor? {
@@ -65,7 +65,7 @@ class LazyExplicitImportScope(
         nameFilter: (Name) -> Boolean,
         changeNamesForAliased: Boolean
     ): Collection<DeclarationDescriptor> {
-        val descriptors = SmartList<DeclarationDescriptor>()
+        konst descriptors = SmartList<DeclarationDescriptor>()
 
         if (kindFilter.acceptsKinds(DescriptorKindFilter.CLASSIFIERS_MASK)) {
             descriptors.addIfNotNull(getContributedClassifier(aliasName, NoLookupLocation.WHEN_GET_ALL_DESCRIPTORS))
@@ -79,8 +79,8 @@ class LazyExplicitImportScope(
 
         if (changeNamesForAliased && aliasName != declaredName) {
             for (i in descriptors.indices) {
-                val descriptor = descriptors[i]
-                val newDescriptor: DeclarationDescriptor = when (descriptor) {
+                konst descriptor = descriptors[i]
+                konst newDescriptor: DeclarationDescriptor = when (descriptor) {
                     is ClassDescriptor -> {
                         object : ClassDescriptor by descriptor {
                             override fun getName() = aliasName
@@ -123,16 +123,16 @@ class LazyExplicitImportScope(
         location: LookupLocation,
         getDescriptors: MemberScope.(Name, LookupLocation) -> Collection<D>
     ): Collection<D> {
-        val descriptors = SmartList<D>()
+        konst descriptors = SmartList<D>()
 
         when (packageOrClassDescriptor) {
             is PackageViewDescriptor -> {
-                val packageScope = packageOrClassDescriptor.memberScope
+                konst packageScope = packageOrClassDescriptor.memberScope
                 descriptors.addAll(packageScope.getDescriptors(declaredName, location))
             }
 
             is ClassDescriptor -> {
-                val staticClassScope = packageOrClassDescriptor.staticScope
+                konst staticClassScope = packageOrClassDescriptor.staticScope
                 descriptors.addAll(staticClassScope.getDescriptors(declaredName, location))
 
                 if (packageOrClassDescriptor.kind == ClassKind.OBJECT) {

@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.resolve.PlatformAnnotationFeaturesSupport
 import org.jetbrains.kotlin.resolve.descriptorUtil.getAnnotationRetention
 
 class JvmPlatformAnnotationFeaturesSupport(
-    private val languageVersionSettings: LanguageVersionSettings,
+    private konst languageVersionSettings: LanguageVersionSettings,
 ) : PlatformAnnotationFeaturesSupport {
     override fun isRepeatableAnnotationClass(descriptor: ClassDescriptor): Boolean {
         check(descriptor.kind == ClassKind.ANNOTATION_CLASS) { descriptor }

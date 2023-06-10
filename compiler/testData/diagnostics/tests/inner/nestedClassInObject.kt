@@ -10,7 +10,7 @@ object Object {
     }
 
     fun outerFun() {}
-    val outerVal = 4
+    konst outerVal = 4
 
     object OuterObject
     class OuterClass

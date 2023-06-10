@@ -1,6 +1,6 @@
 class Command {
-    class Add(val arg: String? = "OK")
-    inner class InnerAdd(val arg: String? = "OK")
+    class Add(konst arg: String? = "OK")
+    inner class InnerAdd(konst arg: String? = "OK")
 }
 
 fun execute(func: () -> Command.Add) = func()

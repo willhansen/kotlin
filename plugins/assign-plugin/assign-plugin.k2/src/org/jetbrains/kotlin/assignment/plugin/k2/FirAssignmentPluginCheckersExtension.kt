@@ -18,13 +18,13 @@ class FirAssignmentPluginCheckersExtension(
     session: FirSession
 ) : FirAdditionalCheckersExtension(session) {
 
-    override val declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
-        override val simpleFunctionCheckers: Set<FirSimpleFunctionChecker>
+    override konst declarationCheckers: DeclarationCheckers = object : DeclarationCheckers() {
+        override konst simpleFunctionCheckers: Set<FirSimpleFunctionChecker>
             get() = setOf(FirAssignmentPluginFunctionChecker)
     }
 
-    override val expressionCheckers: ExpressionCheckers = object : ExpressionCheckers() {
-        override val functionCallCheckers: Set<FirFunctionCallChecker>
+    override konst expressionCheckers: ExpressionCheckers = object : ExpressionCheckers() {
+        override konst functionCallCheckers: Set<FirFunctionCallChecker>
             get() = setOf(FirAssignmentPluginFunctionCallChecker)
     }
 }

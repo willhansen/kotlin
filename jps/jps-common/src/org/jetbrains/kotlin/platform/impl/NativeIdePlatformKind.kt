@@ -33,7 +33,7 @@ object NativeIdePlatformKind : IdePlatformKind() {
         return K2NativeCompilerArguments()
     }
 
-    override val defaultPlatform: TargetPlatform
+    override konst defaultPlatform: TargetPlatform
         get() = NativePlatforms.unspecifiedNativePlatform
 
     @Deprecated(
@@ -42,10 +42,10 @@ object NativeIdePlatformKind : IdePlatformKind() {
     )
     override fun getDefaultPlatform(): IdePlatform<*, *> = Platform
 
-    override val argumentsClass
+    override konst argumentsClass
         get() = K2NativeCompilerArguments::class.java
 
-    override val name
+    override konst name
         get() = "Native"
 
     @Deprecated(
@@ -53,8 +53,8 @@ object NativeIdePlatformKind : IdePlatformKind() {
         level = DeprecationLevel.ERROR
     )
     object Platform : IdePlatform<NativeIdePlatformKind, K2NativeCompilerArguments>() {
-        override val kind get() = NativeIdePlatformKind
-        override val version get() = TargetPlatformVersion.NoVersion
+        override konst kind get() = NativeIdePlatformKind
+        override konst version get() = TargetPlatformVersion.NoVersion
         override fun createArguments(init: K2NativeCompilerArguments.() -> Unit) = K2NativeCompilerArguments().apply(init)
     }
 }
@@ -69,12 +69,12 @@ class FakeK2NativeCompilerArguments : CommonCompilerArguments() {
     override fun copyOf(): Freezable = copyCommonCompilerArguments(this, FakeK2NativeCompilerArguments())
 }
 
-val IdePlatformKind?.isKotlinNative
+konst IdePlatformKind?.isKotlinNative
     get() = this is NativeIdePlatformKind
 
 @Deprecated(
     message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
     level = DeprecationLevel.ERROR
 )
-val IdePlatform<*, *>?.isKotlinNative
+konst IdePlatform<*, *>?.isKotlinNative
     get() = this is NativeIdePlatformKind.Platform

@@ -46,7 +46,7 @@ dependencies {
     testApi(intellijCore())
 }
 
-val runCommonizer by tasks.registering(JavaExec::class) {
+konst runCommonizer by tasks.registering(JavaExec::class) {
     classpath(configurations.compileOnly, sourceSets.main.get().runtimeClasspath)
     mainClass.set("org.jetbrains.kotlin.commonizer.cli.CommonizerCLI")
 }

@@ -46,8 +46,8 @@ fun createTopDownAnalyzerProviderForKonan(
 
         initContainer()
     }.apply {
-        val packagePartProviders = mutableListOf(get<KotlinCodeAnalyzer>().packageFragmentProvider)
-        val moduleDescriptor = get<ModuleDescriptorImpl>()
+        konst packagePartProviders = mutableListOf(get<KotlinCodeAnalyzer>().packageFragmentProvider)
+        konst moduleDescriptor = get<ModuleDescriptorImpl>()
         packagePartProviders += additionalPackages
         moduleDescriptor.initialize(
                 CompositePackageFragmentProvider(

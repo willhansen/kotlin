@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.ir2cfg.graph.BlockConnector
 
 class SplitBlockConnector(
         previous: BasicBlock,
-        override val element: IrStatement,
-        override val nextBlocks: List<BasicBlock>
+        override konst element: IrStatement,
+        override konst nextBlocks: List<BasicBlock>
 ) : BlockConnector {
 
-    override val previousBlocks = listOf(previous)
+    override konst previousBlocks = listOf(previous)
 }

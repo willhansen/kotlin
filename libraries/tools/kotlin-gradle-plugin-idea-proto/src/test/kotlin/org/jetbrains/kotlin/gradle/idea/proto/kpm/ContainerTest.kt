@@ -18,12 +18,12 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class ContainerTest : IdeaKotlinSerializationContext {
-    override val logger = TestIdeaKotlinSerializationLogger()
-    override val extrasSerializationExtension = TestIdeaExtrasSerializationExtension
+    override konst logger = TestIdeaKotlinSerializationLogger()
+    override konst extrasSerializationExtension = TestIdeaExtrasSerializationExtension
 
     @Test
     fun `deserialize - with error future message - returns null`() {
-        val data = ideaKpmContainerProto {
+        konst data = ideaKpmContainerProto {
             schemaVersionMajor = IdeaKpmProtoSchema.versionMajor + 1
             schemaVersionMinor = IdeaKpmProtoSchema.versionMinor
             schemaVersionPatch = IdeaKpmProtoSchema.versionPatch
@@ -43,7 +43,7 @@ class ContainerTest : IdeaKotlinSerializationContext {
 
     @Test
     fun `deserialize - with lower major version - returns object`() {
-        val data = ideaKpmContainerProto {
+        konst data = ideaKpmContainerProto {
             schemaVersionMajor = IdeaKpmProtoSchema.versionMajor - 1
             schemaVersionMinor = IdeaKpmProtoSchema.versionMinor
             schemaVersionPatch = IdeaKpmProtoSchema.versionPatch

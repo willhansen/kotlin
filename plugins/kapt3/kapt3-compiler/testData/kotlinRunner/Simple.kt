@@ -28,6 +28,6 @@ internal enum class EnumClass {
 }
 
 
-internal enum class EnumClass2 private constructor(private val blah: String) {
+internal enum class EnumClass2 private constructor(private konst blah: String) {
     WHITE("A"), RED("B")
 }

@@ -23,8 +23,8 @@ import org.jetbrains.kotlin.ir.expressions.IrBlockBody
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrBlockBodyImpl(
-    override val startOffset: Int,
-    override val endOffset: Int
+    override konst startOffset: Int,
+    override konst endOffset: Int
 ) : IrBlockBody() {
     constructor(startOffset: Int, endOffset: Int, statements: List<IrStatement>) : this(startOffset, endOffset) {
         this.statements.addAll(statements)
@@ -34,8 +34,8 @@ class IrBlockBodyImpl(
         this.initializer()
     }
 
-    override val statements: MutableList<IrStatement> = ArrayList(2)
+    override konst statements: MutableList<IrStatement> = ArrayList(2)
 
-    override val factory: IrFactory
+    override konst factory: IrFactory
         get() = IrFactoryImpl
 }

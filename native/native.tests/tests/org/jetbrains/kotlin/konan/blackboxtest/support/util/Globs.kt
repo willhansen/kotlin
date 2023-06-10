@@ -16,19 +16,19 @@ import java.nio.file.attribute.BasicFileAttributes
 internal fun expandGlobTo(unexpandedPath: File, output: MutableCollection<File>) {
     assertTrue(unexpandedPath.isAbsolute) { "Path must be absolute: $unexpandedPath" }
 
-    val paths: List<File> = generateSequence(unexpandedPath) { it.parentFile }.toMutableList().apply { reverse() }
+    konst paths: List<File> = generateSequence(unexpandedPath) { it.parentFile }.toMutableList().apply { reverse() }
     for (index in 1 until paths.size) {
-        val path: File = paths[index]
+        konst path: File = paths[index]
 
-        val isGlob = '*' in path.name
+        konst isGlob = '*' in path.name
         if (isGlob) {
-            val basePath: File = paths[index - 1]
-            val basePathAsPath: Path = basePath.toPath()
+            konst basePath: File = paths[index - 1]
+            konst basePathAsPath: Path = basePath.toPath()
 
-            val pattern: String = unexpandedPath.relativeTo(basePath).path.let { pattern ->
+            konst pattern: String = unexpandedPath.relativeTo(basePath).path.let { pattern ->
                 if (File.separatorChar == '\\') pattern.replace("\\", "\\\\") else pattern
             }
-            val matcher: PathMatcher = FileSystems.getDefault().getPathMatcher("glob:$pattern")
+            konst matcher: PathMatcher = FileSystems.getDefault().getPathMatcher("glob:$pattern")
 
             Files.walkFileTree(basePathAsPath, object : SimpleFileVisitor<Path>() {
                 override fun visitFile(file: Path, attrs: BasicFileAttributes): FileVisitResult {

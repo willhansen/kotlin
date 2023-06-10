@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.konan.target.Architecture
 import org.jetbrains.kotlin.konan.target.Family
 import org.jetbrains.kotlin.konan.target.KonanTarget
 
-internal val KonanTarget.compressedName: String
+internal konst KonanTarget.compressedName: String
     get() = buildString {
         append(family.compressedName)
         name.splitToSequence('_')
@@ -21,7 +21,7 @@ internal val KonanTarget.compressedName: String
         append(architecture.compressedName)
     }
 
-internal val Family.compressedName: Char
+internal konst Family.compressedName: Char
     get() = when (this) {
         Family.OSX -> 'o'
         Family.IOS -> 'i'
@@ -34,7 +34,7 @@ internal val Family.compressedName: Char
         Family.ZEPHYR -> 'z'
     }
 
-internal val Architecture.compressedName: String
+internal konst Architecture.compressedName: String
     get() = when (this) {
         Architecture.X64 -> "x64"
         Architecture.X86 -> "x86"
@@ -45,17 +45,17 @@ internal val Architecture.compressedName: String
         Architecture.WASM32 -> "w32"
     }
 
-internal val Class<*>.compressedSimpleName: String
+internal konst Class<*>.compressedSimpleName: String
     get() = splitByCharacterTypeCamelCase(simpleName).joinToString("") { it.take(3) }
 
-internal val PackageName.compressedPackageName: String
+internal konst PackageName.compressedPackageName: String
     get() {
-        val sanitizedName = segments.joinToString("_")
+        konst sanitizedName = segments.joinToString("_")
         return if (sanitizedName.length > COMPRESSED_PACKAGE_FQN_MAX_LENGTH) {
-            val suffix = "-" + prettyHash(sanitizedName.hashCode())
+            konst suffix = "-" + prettyHash(sanitizedName.hashCode())
             sanitizedName.substring(0, COMPRESSED_PACKAGE_FQN_MAX_LENGTH - suffix.length) + suffix
         } else
             sanitizedName
     }
 
-private const val COMPRESSED_PACKAGE_FQN_MAX_LENGTH = 40
+private const konst COMPRESSED_PACKAGE_FQN_MAX_LENGTH = 40

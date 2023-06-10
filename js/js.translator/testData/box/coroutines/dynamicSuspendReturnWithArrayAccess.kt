@@ -11,14 +11,14 @@ suspend fun foo(): dynamic {
 
 fun builder(c: suspend () -> Unit) {
     c.startCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
         override fun resumeWith(result: Result<Unit>) {}
     })
 }
 
 fun box(): String {
     var result: dynamic = 0
-    val count = 0;
+    konst count = 0;
 
     builder {
         result += foo()[count + 0] + foo()[count + 1] * foo()[count + 2]

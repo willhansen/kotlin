@@ -10,13 +10,13 @@ import libCase1.*
 import kotlin.text.format
 
 fun case1() {
-    val y2 : () ->String =(String)::format
+    konst y2 : () ->String =(String)::format
 }
 
 // FILE: LibCase1.kt
 package libCase1
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 
@@ -28,18 +28,18 @@ import kotlin.text.format
 
 fun case2() {
     //
-    val x = "".format::invoke
+    konst x = "".format::invoke
     //
-    val y = String.format::invoke
+    konst y = String.format::invoke
 }
 
 fun String.invoke(format: String, vararg args: Any?): String = "" //(2)
 
-val String.format: String
+konst String.format: String
     get() = "1"
 
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 
@@ -47,13 +47,13 @@ val String.Companion.format: String
 package libCase2
 
 
-val String.Companion.format: String
+konst String.Companion.format: String
     get() = "1"
 
 fun String.invoke(format: String, vararg args: Any?): String = ""
 
 
-val String.format: String
+konst String.format: String
     get() = "1"
 
 
@@ -65,18 +65,18 @@ import libCase3.format
 import kotlin.text.*
 
 fun case3() {
-    val y1 =(String)::format
+    konst y1 =(String)::format
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty1<kotlin.String, kotlin.Int>")!>y1<!>
 
-    val y2 =""::format
+    konst y2 =""::format
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.reflect.KProperty0<kotlin.Int>")!>y2<!>
 }
 
 // FILE: LibCase3.kt
 package libCase3
 
-val String.Companion.format: Unit
+konst String.Companion.format: Unit
     get() = TODO()
 
-val String.format: Int
+konst String.format: Int
     get() = TODO()

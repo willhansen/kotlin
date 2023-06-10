@@ -14,7 +14,7 @@ public class Foo {
 @Retention(AnnotationRetention.RUNTIME)
 annotation class A
 
-enum class KEnum(@A val value: Any) {
+enum class KEnum(@A konst konstue: Any) {
     O("K") {
         fun foo() {}
     }

@@ -11,7 +11,7 @@ fun register(arg: Base) {
     arg.foo()
 }
 
-class Derived(val x: Int) : Base() {
+class Derived(konst x: Int) : Base() {
     override fun foo() {
         x.hashCode() // NPE in Base constructor
     }
@@ -19,7 +19,7 @@ class Derived(val x: Int) : Base() {
 
 enum class MyEnum {
     FIRST() {
-        val x: Int = 42
+        konst x: Int = 42
 
         override fun foo() {
             x.hashCode() // NPE in MyEnum constructor

@@ -1,5 +1,5 @@
 // !RENDER_DIAGNOSTICS_FULL_TEXT
-fun <T> flowOf(value: T): Flow<T> = TODO()
+fun <T> flowOf(konstue: T): Flow<T> = TODO()
 
 interface FlowCollector<in T> {}
 

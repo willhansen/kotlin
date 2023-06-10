@@ -4,11 +4,11 @@ object O : C()
 
 object K : C()
 
-class D(val value: String) {
-    operator fun getValue(thisRef: C, property: Any): String = value
+class D(konst konstue: String) {
+    operator fun getValue(thisRef: C, property: Any): String = konstue
 }
 
-val O.prop by D("O")
-val K.prop by D("K")
+konst O.prop by D("O")
+konst K.prop by D("K")
 
 fun box() = O.prop + K.prop

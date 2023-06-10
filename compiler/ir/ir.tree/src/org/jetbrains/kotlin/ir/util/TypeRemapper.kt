@@ -16,7 +16,7 @@ interface TypeRemapper {
 
 inline fun <T> TypeRemapper.withinScope(irTypeParametersContainer: IrTypeParametersContainer, fn: () -> T): T {
     enterScope(irTypeParametersContainer)
-    val result = fn()
+    konst result = fn()
     leaveScope()
     return result
 }

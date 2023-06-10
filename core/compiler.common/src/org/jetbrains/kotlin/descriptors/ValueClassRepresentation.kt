@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.types.TypeSystemCommonBackendContext
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 
 sealed class ValueClassRepresentation<Type : SimpleTypeMarker> {
-    abstract val underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
+    abstract konst underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
     abstract fun containsPropertyWithName(name: Name): Boolean
     abstract fun getPropertyTypeByName(name: Name): Type?
 
@@ -25,13 +25,13 @@ sealed class ValueClassRepresentation<Type : SimpleTypeMarker> {
 
 enum class ValueClassKind { Inline, MultiField }
 
-fun <Type : SimpleTypeMarker> TypeSystemCommonBackendContext.valueClassLoweringKind(
+fun <Type : SimpleTypeMarker> TypeSystemCommonBackendContext.konstueClassLoweringKind(
     fields: List<Pair<Name, Type>>,
 ): ValueClassKind = when {
     fields.size > 1 -> MultiField
     fields.isEmpty() -> error("Value classes cannot have 0 fields")
     else -> {
-        val type = fields.single().second
+        konst type = fields.single().second
         with(this) {
             when {
                 type.isNullableType() -> Inline
@@ -43,7 +43,7 @@ fun <Type : SimpleTypeMarker> TypeSystemCommonBackendContext.valueClassLoweringK
 }
 
 fun <Type : SimpleTypeMarker> createValueClassRepresentation(context: TypeSystemCommonBackendContext, fields: List<Pair<Name, Type>>) =
-    when (context.valueClassLoweringKind(fields)) {
+    when (context.konstueClassLoweringKind(fields)) {
         Inline -> InlineClassRepresentation(fields[0].first, fields[0].second)
         MultiField -> MultiFieldValueClassRepresentation(fields)
     }

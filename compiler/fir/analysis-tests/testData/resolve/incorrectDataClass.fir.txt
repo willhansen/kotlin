@@ -4,10 +4,10 @@ FILE: incorrectDataClass.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val b: R|kotlin/Int| = R|<local>/b|
+        public final konst b: R|kotlin/Int| = R|<local>/b|
             public get(): R|kotlin/Int|
 
-        public final val c: R|kotlin/Int| = Int(4)
+        public final konst c: R|kotlin/Int| = Int(4)
             public get(): R|kotlin/Int|
 
         public final operator fun component1(): R|kotlin/Int|

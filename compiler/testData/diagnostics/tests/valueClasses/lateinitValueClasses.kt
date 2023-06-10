@@ -9,7 +9,7 @@ package kotlin.jvm
 annotation class JvmInline
 
 @JvmInline
-value class Foo(val x: Int)
+konstue class Foo(konst x: Int)
 
 <!INAPPLICABLE_LATEINIT_MODIFIER!>lateinit<!> var a: Foo
 

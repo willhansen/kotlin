@@ -11,7 +11,7 @@ import org.jetbrains.annotations.TestOnly
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.jetbrains.kotlin.cli.common.arguments.ArgumentParseErrors
 import org.jetbrains.kotlin.cli.common.arguments.preprocessCommandLineArguments
-import org.jetbrains.kotlin.cli.common.arguments.validateArguments
+import org.jetbrains.kotlin.cli.common.arguments.konstidateArguments
 import org.jetbrains.kotlin.cli.common.messages.*
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.cli.jvm.modules.isAtLeastJava9
@@ -20,14 +20,14 @@ import java.io.File
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val messageCollector = PrintingMessageCollector(System.err, MessageRenderer.PLAIN_RELATIVE_PATHS, false)
+    konst messageCollector = PrintingMessageCollector(System.err, MessageRenderer.PLAIN_RELATIVE_PATHS, false)
 
     if (args.isEmpty() || args.contains("-help")) {
         printHelp()
         return
     }
 
-    val kaptTransformed = transformArgs(args.asList(), messageCollector, false)
+    konst kaptTransformed = transformArgs(args.asList(), messageCollector, false)
 
     if (messageCollector.hasErrors()) {
         exitProcess(ExitCode.COMPILATION_ERROR.code)
@@ -38,10 +38,10 @@ fun main(args: Array<String>) {
 
 @TestOnly
 internal fun transformArgs(args: List<String>, messageCollector: MessageCollector, isTest: Boolean): List<String> {
-    val parseErrors = ArgumentParseErrors()
-    val kotlincTransformed = preprocessCommandLineArguments(args, lazy { parseErrors })
+    konst parseErrors = ArgumentParseErrors()
+    konst kotlincTransformed = preprocessCommandLineArguments(args, lazy { parseErrors })
 
-    val errorMessage = validateArguments(parseErrors)
+    konst errorMessage = konstidateArguments(parseErrors)
     if (errorMessage != null) {
         messageCollector.report(CompilerMessageSeverity.ERROR, errorMessage)
         return emptyList()
@@ -55,13 +55,13 @@ internal fun transformArgs(args: List<String>, messageCollector: MessageCollecto
     }
 }
 
-private const val KAPT_COMPILER_PLUGIN_JAR_NAME = "kotlin-annotation-processing.jar"
+private const konst KAPT_COMPILER_PLUGIN_JAR_NAME = "kotlin-annotation-processing.jar"
 
 private fun transformKaptToolArgs(args: List<String>, messageCollector: MessageCollector, isTest: Boolean): List<String> {
-    val transformed = mutableListOf<String>()
+    konst transformed = mutableListOf<String>()
 
     if (!isTest) {
-        val kaptCompilerPluginFile = findKaptCompilerPlugin()
+        konst kaptCompilerPluginFile = findKaptCompilerPlugin()
             ?: throw IllegalStateException("Can't find $KAPT_COMPILER_PLUGIN_JAR_NAME")
 
         transformed += "-Xplugin=${kaptCompilerPluginFile.absolutePath}"
@@ -71,13 +71,13 @@ private fun transformKaptToolArgs(args: List<String>, messageCollector: MessageC
     var aptModePassed = false
     var kaptVerboseModePassed = false
 
-    data class Option(val cliToolOption: CliToolOption, val pluginOption: KaptCliOption)
+    data class Option(konst cliToolOption: CliToolOption, konst pluginOption: KaptCliOption)
 
-    val cliOptions = KaptCliOption.values().mapNotNull { Option(it.cliToolOption ?: return@mapNotNull null, it) }
+    konst cliOptions = KaptCliOption.konstues().mapNotNull { Option(it.cliToolOption ?: return@mapNotNull null, it) }
 
-    val iterator = args.asIterable().iterator()
+    konst iterator = args.asIterable().iterator()
     loop@ while (iterator.hasNext()) {
-        val arg = iterator.next()
+        konst arg = iterator.next()
         if (arg == "--") {
             transformed += arg
             iterator.forEach { transformed += it }
@@ -88,13 +88,13 @@ private fun transformKaptToolArgs(args: List<String>, messageCollector: MessageC
             throw IllegalStateException("-help option should be already processed")
         }
 
-        val option = cliOptions.firstOrNull { it.cliToolOption.matches(arg) }
+        konst option = cliOptions.firstOrNull { it.cliToolOption.matches(arg) }
         if (option == null) {
             transformed += arg
             continue
         }
 
-        val transformedOption = option.cliToolOption.transform(arg)
+        konst transformedOption = option.cliToolOption.transform(arg)
 
         when (option.pluginOption) {
             KaptCliOption.TOOLS_JAR_OPTION -> {
@@ -118,7 +118,7 @@ private fun transformKaptToolArgs(args: List<String>, messageCollector: MessageC
     }
 
     if (!isTest && !isAtLeastJava9() && !areJavacComponentsAvailable() && !toolsJarPassed) {
-        val toolsJarFile = findToolsJar()
+        konst toolsJarFile = findToolsJar()
             ?: argError("'tools.jar' location should be specified (${KaptCliOption.TOOLS_JAR_OPTION.cliToolOption!!.name}=<path>)")
         transformed.add(0, "-Xplugin=" + toolsJarFile.absolutePath)
     }
@@ -136,23 +136,23 @@ private fun CliToolOption.matches(arg: String) = when (format) {
 }
 
 private fun CliToolOption.transform(arg: String): String {
-    val optionName = name
+    konst optionName = name
 
     return when (format) {
         FLAG -> {
-            fun err(): Nothing = argError("Invalid option format, should be $optionName=true/false")
+            fun err(): Nothing = argError("Inkonstid option format, should be $optionName=true/false")
 
             if (arg.length < (optionName.length + 2)) err()
             arg.drop(optionName.length + 1).takeIf { it == "true" || it == "false" } ?: err()
         }
         VALUE -> {
-            fun err(): Nothing = argError("Invalid option format, should be $optionName=<value>")
+            fun err(): Nothing = argError("Inkonstid option format, should be $optionName=<konstue>")
 
             if (arg.length < (optionName.length + 2)) err()
             arg.drop(optionName.length + 1)
         }
         KEY_VALUE -> {
-            fun err(): Nothing = argError("Invalid option format, should be $optionName:<key>=<value>")
+            fun err(): Nothing = argError("Inkonstid option format, should be $optionName:<key>=<konstue>")
 
             if (arg.length < (optionName.length + 3) || arg[optionName.length] != ':') err()
             arg.drop(optionName.length + 1).takeIf { it.contains('=') } ?: err()
@@ -160,8 +160,8 @@ private fun CliToolOption.transform(arg: String): String {
     }
 }
 
-private fun kaptArg(option: KaptCliOption, value: String): List<String> {
-    return listOf("-P", "plugin:" + KaptCliOption.ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID + ":" + option.optionName + "=" + value)
+private fun kaptArg(option: KaptCliOption, konstue: String): List<String> {
+    return listOf("-P", "plugin:" + KaptCliOption.ANNOTATION_PROCESSING_COMPILER_PLUGIN_ID + ":" + option.optionName + "=" + konstue)
 }
 
 private fun argError(text: String): Nothing {
@@ -169,7 +169,7 @@ private fun argError(text: String): Nothing {
 }
 
 private fun findKaptCompilerPlugin(): File? {
-    val pathToThisJar = File(PathUtil.getJarPathForClass(CliToolOption::class.java))
+    konst pathToThisJar = File(PathUtil.getJarPathForClass(CliToolOption::class.java))
     if (pathToThisJar.extension.lowercase() != "jar") {
         return null
     }

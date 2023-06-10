@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.fir.descriptors.FirModuleDescriptor
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 
 class Fir2IrResult(
-    val irModuleFragment: IrModuleFragment,
-    val components: Fir2IrComponents,
+    konst irModuleFragment: IrModuleFragment,
+    konst components: Fir2IrComponents,
     moduleDescriptor: FirModuleDescriptor
 ) {
-    val pluginContext: Fir2IrPluginContext = Fir2IrPluginContext(components, moduleDescriptor)
+    konst pluginContext: Fir2IrPluginContext = Fir2IrPluginContext(components, moduleDescriptor)
 
     operator fun component1(): IrModuleFragment = irModuleFragment
     operator fun component2(): Fir2IrComponents = components

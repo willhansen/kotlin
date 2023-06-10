@@ -7,7 +7,7 @@ fun testFunction(a: Any, b: Any) {
 fun testProperty(a: Any, b: Any) {
   a as Cell<String> /*~> Unit */
   b as String /*~> Unit */
-  a /*as Cell<String> */.<set-value>(<set-?> = b /*as String */)
+  a /*as Cell<String> */.<set-konstue>(<set-?> = b /*as String */)
 }
 
 fun testInnerClass(a: Any, b: Any, c: Any) {
@@ -24,14 +24,14 @@ fun <T : Any?> testNonSubstitutedTypeParameter(a: Any, b: Any) {
 }
 
 class Cell<T : Any?> {
-  constructor(value: T) /* primary */ {
+  constructor(konstue: T) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  var value: T
-    field = value
+  var konstue: T
+    field = konstue
     get
     set
 

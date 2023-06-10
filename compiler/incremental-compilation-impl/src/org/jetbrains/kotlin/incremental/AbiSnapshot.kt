@@ -14,17 +14,17 @@ import org.jetbrains.kotlin.protobuf.MessageLite
 import java.io.*
 
 interface AbiSnapshot {
-    val protos: MutableMap<FqName, ProtoData>
+    konst protos: MutableMap<FqName, ProtoData>
 }
 
 
 
-class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiSnapshot {
+class AbiSnapshotImpl(override konst protos: MutableMap<FqName, ProtoData>) : AbiSnapshot {
 
     companion object {
         fun ObjectInputStream.readStringArray(): Array<String> {
-            val size = readInt()
-            val stringArray = arrayOfNulls<String>(size)
+            konst size = readInt()
+            konst stringArray = arrayOfNulls<String>(size)
             repeat(size) {
                 stringArray[it] = readUTF()
             }
@@ -43,23 +43,23 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
             //   protodata via JvmProtoBufUtil
             //   string array with size
             // }
-            val size = readInt()
-            val mutableMap = hashMapOf<FqName, ProtoData>()
+            konst size = readInt()
+            konst mutableMap = hashMapOf<FqName, ProtoData>()
             repeat(size) {
-                val fqNameString = readUTF()
-                val isClassProtoData = readBoolean()
+                konst fqNameString = readUTF()
+                konst isClassProtoData = readBoolean()
                 if (isClassProtoData) {
-                    val fqName = FqName(fqNameString)
-                    val bytes = readStringArray()
-                    val strings = readStringArray()
-                    val (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(bytes, strings)
+                    konst fqName = FqName(fqNameString)
+                    konst bytes = readStringArray()
+                    konst strings = readStringArray()
+                    konst (nameResolver, classProto) = JvmProtoBufUtil.readClassDataFrom(bytes, strings)
                     mutableMap[fqName] = ClassProtoData(classProto, nameResolver)
                 } else {
-                    val fqName = FqName(fqNameString)
-                    val packageFqName = FqName(readUTF())
-                    val bytes = readStringArray()
-                    val strings = readStringArray()
-                    val (nameResolver, proto) = JvmProtoBufUtil.readPackageDataFrom(bytes, strings)
+                    konst fqName = FqName(fqNameString)
+                    konst packageFqName = FqName(readUTF())
+                    konst bytes = readStringArray()
+                    konst strings = readStringArray()
+                    konst (nameResolver, proto) = JvmProtoBufUtil.readPackageDataFrom(bytes, strings)
                     mutableMap[fqName] = PackagePartProtoData(proto, nameResolver, packageFqName)
                 }
             }
@@ -72,15 +72,15 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
         }
 
         fun ObjectOutputStream.writeAbiSnapshot(abiSnapshot: AbiSnapshot) {
-            //TODO(valtman) temp solution while packageProto is not fully support
+            //TODO(konsttman) temp solution while packageProto is not fully support
             writeInt(abiSnapshot.protos.size)
             for (entry in abiSnapshot.protos) {
                 writeUTF(entry.key.asString())
-                val protoData = entry.value
+                konst protoData = entry.konstue
                 when (protoData) {
                     is ClassProtoData -> {
-                        writeBoolean(true) //TODO(valtman) until PackageProto doesn't work
-                        val nameResolver = protoData.nameResolver
+                        writeBoolean(true) //TODO(konsttman) until PackageProto doesn't work
+                        konst nameResolver = protoData.nameResolver
                         when (nameResolver) {
                             is NameResolverImpl -> {
                                 writeMessageWithNameResolverImpl(protoData.proto, nameResolver)
@@ -95,7 +95,7 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
                         writeBoolean(false)
                         writeUTF(protoData.packageFqName.asString())
 
-                        val nameResolver = protoData.nameResolver
+                        konst nameResolver = protoData.nameResolver
                         when (nameResolver) {
                             is JvmNameResolver -> {
                                 writeMessageWithJvmNameResolver(protoData.proto, nameResolver)
@@ -115,7 +115,7 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
             message: MessageLite,
             nameResolver: NameResolverImpl
         ) {
-            val stringTable = JvmStringTable()
+            konst stringTable = JvmStringTable()
             repeat(nameResolver.strings.getStringCount()) {
                 stringTable.getStringIndex(nameResolver.getString(it))
             }
@@ -125,12 +125,12 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
                     nameResolver.isLocalClassName(it)
                 )
             }
-            val writeData = JvmProtoBufUtil.writeData(message, stringTable)
+            konst writeData = JvmProtoBufUtil.writeData(message, stringTable)
             writeStringArray(writeData)
-            val size = nameResolver.strings.getStringCount()
+            konst size = nameResolver.strings.getStringCount()
             writeInt(size)
             repeat(size) {
-                val string = nameResolver.getString(it)
+                konst string = nameResolver.getString(it)
                 writeUTF(string)
             }
         }
@@ -139,7 +139,7 @@ class AbiSnapshotImpl(override val protos: MutableMap<FqName, ProtoData>) : AbiS
             message: MessageLite,
             nameResolver: JvmNameResolver
         ) {
-            val writeData = JvmProtoBufUtil.writeData(message, JvmStringTable(nameResolver))
+            konst writeData = JvmProtoBufUtil.writeData(message, JvmStringTable(nameResolver))
             writeStringArray(writeData)
             writeStringArray(nameResolver.strings)
         }

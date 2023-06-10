@@ -15,13 +15,13 @@ class C() {
     infix operator fun invoke(i: Int) { } //(1)
 }
 
-class B(val memberValCNull: C? = null) {
+class B(konst memberValCNull: C? = null) {
     infix fun bar(i: Int) {}
 }
 
 // TESTCASE NUMBER: 1
 fun case1() {
-    val b: B = B()
+    konst b: B = B()
 //    b memberValCNull 1                 //nok  (UNSAFE_INFIX_CALL)
 //    b.memberValCNull.invoke(1)         //nok (UNSAFE_CALL)
 

@@ -12,20 +12,20 @@ object Obj1 {
 }
 
 @Parcelize
-data class Test(val o1: Obj1, val o2: Obj1.Obj2, val com: Com) : Parcelable {
+data class Test(konst o1: Obj1, konst o2: Obj1.Obj2, konst com: Com) : Parcelable {
     companion object Com {
 
     }
 }
 
 fun box() = parcelTest { parcel ->
-    val test = Test(Obj1, Obj1.Obj2, Test.Com)
+    konst test = Test(Obj1, Obj1.Obj2, Test.Com)
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<Test>(parcel)
+    konst test2 = readFromParcel<Test>(parcel)
     assert(test == test2)
 }

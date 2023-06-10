@@ -21,7 +21,7 @@ import com.intellij.psi.search.SearchScope
 import org.jetbrains.kotlin.load.java.structure.JavaClass
 
 interface VirtualFileBoundJavaClass : JavaClass {
-    val virtualFile: VirtualFile?
+    konst virtualFile: VirtualFile?
 
     fun isFromSourceCodeInScope(scope: SearchScope): Boolean
 }

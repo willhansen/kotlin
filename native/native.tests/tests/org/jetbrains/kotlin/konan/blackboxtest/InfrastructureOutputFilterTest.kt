@@ -16,9 +16,9 @@ import org.junit.jupiter.api.Test
 class InfrastructureOutputFilterTest {
     @Test
     fun noFiltering() {
-        val randomTestOutput = List(100) { (Char.MIN_VALUE..Char.MAX_VALUE).random() }.joinToString("")
+        konst randomTestOutput = List(100) { (Char.MIN_VALUE..Char.MAX_VALUE).random() }.joinToString("")
 
-        val (filteredOutput, testReport) = TestOutputFilter.NO_FILTERING.filter(randomTestOutput)
+        konst (filteredOutput, testReport) = TestOutputFilter.NO_FILTERING.filter(randomTestOutput)
 
         assertEquals(null, testReport)
         assertTrue(randomTestOutput === filteredOutput)
@@ -26,7 +26,7 @@ class InfrastructureOutputFilterTest {
 
     @Test
     fun noTCMessages() {
-        val testOutput = """
+        konst testOutput = """
             1
             2
             3
@@ -34,7 +34,7 @@ class InfrastructureOutputFilterTest {
             5
         """.trimIndent()
 
-        val (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
+        konst (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
         testReport ?: throw AssertionError("Test report expected")
 
         assertTrue(testReport.isEmpty())
@@ -43,7 +43,7 @@ class InfrastructureOutputFilterTest {
 
     @Test
     fun mixedTCMessages() {
-        val testOutput = """
+        konst testOutput = """
             1
             ##teamcity[testSuiteStarted name='sample.test.Foo']
             2
@@ -84,7 +84,7 @@ class InfrastructureOutputFilterTest {
             
         """.trimIndent()
 
-        val (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
+        konst (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
         testReport ?: throw AssertionError("Test report expected")
 
         assertTrue(!testReport.isEmpty())
@@ -132,7 +132,7 @@ class InfrastructureOutputFilterTest {
 
     @Test
     fun interruptedTestTCMessage() {
-        val testOutput = """
+        konst testOutput = """
             1
             ##teamcity[testSuiteStarted name='sample.test.Foo']
             2
@@ -145,7 +145,7 @@ class InfrastructureOutputFilterTest {
             
         """.trimIndent()
 
-        val (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
+        konst (filteredOutput, testReport) = TCTestOutputFilter.filter(testOutput)
         testReport ?: throw AssertionError("Test report expected")
 
         assertTrue(!testReport.isEmpty())

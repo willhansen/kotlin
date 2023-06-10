@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.fir.types.toSymbol
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 fun FirClass.constructors(session: FirSession): List<FirConstructorSymbol> {
-    val result = mutableListOf<FirConstructorSymbol>()
+    konst result = mutableListOf<FirConstructorSymbol>()
     session.declaredMemberScope(this, memberRequiredPhase = null).processDeclaredConstructors { result += it }
     return result
 }
@@ -44,7 +44,7 @@ fun FirClassSymbol<*>.collectEnumEntries(): Collection<FirEnumEntrySymbol> {
     return fir.collectEnumEntries().map { it.symbol }
 }
 
-val FirConstructorSymbol.delegatedThisConstructor: FirConstructorSymbol?
+konst FirConstructorSymbol.delegatedThisConstructor: FirConstructorSymbol?
     get() = runIf(delegatedConstructorCallIsThis) { this.resolvedDelegatedConstructor }
 
 
@@ -103,20 +103,20 @@ fun FirRegularClassSymbol.isInlineOrValueClass(): Boolean {
 }
 
 @PrivateForInline
-inline val FirDeclarationOrigin.isJavaOrEnhancement: Boolean
+inline konst FirDeclarationOrigin.isJavaOrEnhancement: Boolean
     get() = this is FirDeclarationOrigin.Java || this == FirDeclarationOrigin.Enhancement
 
 @OptIn(PrivateForInline::class)
-val FirDeclaration.isJavaOrEnhancement: Boolean
+konst FirDeclaration.isJavaOrEnhancement: Boolean
     get() = origin.isJavaOrEnhancement ||
             (this as? FirCallableDeclaration)?.importedFromObjectOrStaticData?.original?.isJavaOrEnhancement == true
 
 @OptIn(PrivateForInline::class)
-inline val FirBasedSymbol<*>.isJavaOrEnhancement: Boolean
+inline konst FirBasedSymbol<*>.isJavaOrEnhancement: Boolean
     get() = origin.isJavaOrEnhancement ||
             (fir as? FirCallableDeclaration)?.importedFromObjectOrStaticData?.original?.isJavaOrEnhancement == true
 
 fun FirFunctionSymbol<*>?.containsDefaultValue(index: Int): Boolean {
     if (this == null) return false
-    return this.fir.valueParameters[index].defaultValue != null
+    return this.fir.konstueParameters[index].defaultValue != null
 }

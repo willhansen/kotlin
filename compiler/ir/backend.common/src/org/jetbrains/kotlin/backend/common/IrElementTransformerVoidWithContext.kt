@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.ir.symbols.IrPropertySymbol
 import org.jetbrains.kotlin.ir.symbols.IrScriptSymbol
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 
-open class ScopeWithIr(val scope: Scope, val irElement: IrElement)
+open class ScopeWithIr(konst scope: Scope, konst irElement: IrElement)
 
 abstract class IrElementTransformerVoidWithContext : IrElementTransformerVoid() {
 
-    protected open val scopeStack = mutableListOf<ScopeWithIr>()
+    protected open konst scopeStack = mutableListOf<ScopeWithIr>()
 
     protected open fun createScope(declaration: IrSymbolOwner): ScopeWithIr =
         ScopeWithIr(Scope(declaration.symbol), declaration)
@@ -45,78 +45,78 @@ abstract class IrElementTransformerVoidWithContext : IrElementTransformerVoid() 
 
     protected inline fun <T> withinScope(declaration: IrSymbolOwner, fn: () -> T): T {
         unsafeEnterScope(declaration)
-        val result = fn()
+        konst result = fn()
         unsafeLeaveScope()
         return result
     }
 
     final override fun visitFile(declaration: IrFile): IrFile {
         scopeStack.push(createScope(declaration))
-        val result = visitFileNew(declaration)
+        konst result = visitFileNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitClass(declaration: IrClass): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitClassNew(declaration)
+        konst result = visitClassNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitProperty(declaration: IrProperty): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitPropertyNew(declaration)
+        konst result = visitPropertyNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitField(declaration: IrField): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitFieldNew(declaration)
+        konst result = visitFieldNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitFunction(declaration: IrFunction): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitFunctionNew(declaration)
+        konst result = visitFunctionNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitAnonymousInitializer(declaration: IrAnonymousInitializer): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitAnonymousInitializerNew(declaration)
+        konst result = visitAnonymousInitializerNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitValueParameter(declaration: IrValueParameter): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitValueParameterNew(declaration)
+        konst result = visitValueParameterNew(declaration)
         scopeStack.pop()
         return result
     }
 
     final override fun visitScript(declaration: IrScript): IrStatement {
         scopeStack.push(createScope(declaration))
-        val result = visitScriptNew(declaration)
+        konst result = visitScriptNew(declaration)
         scopeStack.pop()
         return result
     }
 
-    protected val currentFile get() = scopeStack.lastOrNull { it.irElement is IrFile }!!.irElement as IrFile
-    protected val currentScript get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrScriptSymbol }
-    protected val currentClass get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrClassSymbol }
-    protected val currentFunction get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrFunctionSymbol }
-    protected val currentProperty get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrPropertySymbol }
-    protected val currentAnonymousInitializer get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrAnonymousInitializer }
-    protected val currentValueParameter get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrValueParameter }
-    protected val currentScope get() = scopeStack.peek()
-    protected val parentScope get() = if (scopeStack.size < 2) null else scopeStack[scopeStack.size - 2]
-    protected val allScopes get() = scopeStack
-    protected val currentDeclarationParent get() = scopeStack.lastOrNull { it.irElement is IrDeclarationParent }?.irElement as? IrDeclarationParent
+    protected konst currentFile get() = scopeStack.lastOrNull { it.irElement is IrFile }!!.irElement as IrFile
+    protected konst currentScript get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrScriptSymbol }
+    protected konst currentClass get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrClassSymbol }
+    protected konst currentFunction get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrFunctionSymbol }
+    protected konst currentProperty get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrPropertySymbol }
+    protected konst currentAnonymousInitializer get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrAnonymousInitializer }
+    protected konst currentValueParameter get() = scopeStack.lastOrNull { it.scope.scopeOwnerSymbol is IrValueParameter }
+    protected konst currentScope get() = scopeStack.peek()
+    protected konst parentScope get() = if (scopeStack.size < 2) null else scopeStack[scopeStack.size - 2]
+    protected konst allScopes get() = scopeStack
+    protected konst currentDeclarationParent get() = scopeStack.lastOrNull { it.irElement is IrDeclarationParent }?.irElement as? IrDeclarationParent
 
     open fun visitFileNew(declaration: IrFile): IrFile {
         return super.visitFile(declaration)

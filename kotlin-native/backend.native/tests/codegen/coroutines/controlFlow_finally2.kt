@@ -10,7 +10,7 @@ import kotlin.test.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
@@ -44,7 +44,7 @@ fun builder(c: suspend () -> Unit) {
     var result = 0
 
     builder {
-        val x = try {
+        konst x = try {
             f1()
         } catch (t: Throwable) {
             f2()

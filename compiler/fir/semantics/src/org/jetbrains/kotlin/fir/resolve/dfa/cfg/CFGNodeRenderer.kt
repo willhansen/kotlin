@@ -108,10 +108,10 @@ fun CFGNode<*>.render(): String =
 
                 is FakeExpressionEnterNode -> "Enter fake expression"
 
-                is EnterValueParameterNode -> "Enter default value of ${fir.name}"
-                is EnterDefaultArgumentsNode -> "Enter default value of ${fir.name}"
-                is ExitDefaultArgumentsNode -> "Exit default value of ${fir.name}"
-                is ExitValueParameterNode -> "Exit default value of ${fir.name}"
+                is EnterValueParameterNode -> "Enter default konstue of ${fir.name}"
+                is EnterDefaultArgumentsNode -> "Enter default konstue of ${fir.name}"
+                is ExitDefaultArgumentsNode -> "Exit default konstue of ${fir.name}"
+                is ExitValueParameterNode -> "Exit default konstue of ${fir.name}"
 
                 is ElvisLhsExitNode -> "Exit lhs of ?:"
                 is ElvisLhsIsNotNullNode -> "Lhs of ?: is not null"
@@ -127,7 +127,7 @@ fun CFGNode<*>.render(): String =
     }
 
 // NB: renderer has a state, so we have to create it each time
-private val CfgRenderer
+private konst CfgRenderer
     get() = FirRenderer(annotationRenderer = null, callArgumentsRenderer = FirCallNoArgumentsRenderer())
 
 private fun FirLoop.type(): String = when (this) {

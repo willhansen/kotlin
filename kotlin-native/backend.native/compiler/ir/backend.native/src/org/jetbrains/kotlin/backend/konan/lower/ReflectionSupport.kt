@@ -27,12 +27,12 @@ private fun IrBuilderWithScope.irConstantInt(int: Int) = irConstantPrimitive(irI
 private fun IrBuilderWithScope.irConstantBoolean(boolean: Boolean) = irConstantPrimitive(irBoolean(boolean))
 
 internal class KTypeGenerator(
-        val context: KonanBackendContext,
-        val irFile: IrFile,
-        val irElement: IrElement,
-        val needExactTypeParameters: Boolean = false
+        konst context: KonanBackendContext,
+        konst irFile: IrFile,
+        konst irElement: IrElement,
+        konst needExactTypeParameters: Boolean = false
 ) {
-    private val symbols = context.ir.symbols
+    private konst symbols = context.ir.symbols
 
     fun IrBuilderWithScope.irKType(type: IrType, leaveReifiedForLater: Boolean = false) =
             irKType(type, leaveReifiedForLater, mutableSetOf())
@@ -56,7 +56,7 @@ internal class KTypeGenerator(
             )
         }
         try {
-            val kClassifier = when (val classifier = type.classifier) {
+            konst kClassifier = when (konst classifier = type.classifier) {
                 is IrClassSymbol -> irKClass(classifier)
                 is IrTypeParameterSymbol -> {
                     if (classifier.owner.isReified && leaveReifiedForLater) {
@@ -107,7 +107,7 @@ internal class KTypeGenerator(
     ): IrConstantValue {
         if (!seenTypeParameters.add(typeParameter))
             throw RecursiveBoundsException("Non-reified type parameters with recursive bounds are not supported yet: ${typeParameter.render()}")
-        val result = irConstantObject(symbols.kTypeParameterImpl.owner, mapOf(
+        konst result = irConstantObject(symbols.kTypeParameterImpl.owner, mapOf(
                 "name" to irConstantString(typeParameter.name.asString()),
                 "containerFqName" to irConstantString(typeParameter.parentUniqueName),
                 "upperBoundsArray" to irKTypeArray(typeParameter.superTypes, leaveReifiedForLater, seenTypeParameters),
@@ -118,8 +118,8 @@ internal class KTypeGenerator(
         return result
     }
 
-    private val IrTypeParameter.parentUniqueName
-        get() = when (val parent = parent) {
+    private konst IrTypeParameter.parentUniqueName
+        get() = when (konst parent = parent) {
             is IrFunction -> parent.computeFullName()
             else -> parent.fqNameForIrSerialization.asString()
         }
@@ -129,7 +129,7 @@ internal class KTypeGenerator(
             leaveReifiedForLater: Boolean,
             seenTypeParameters: MutableSet<IrTypeParameter>
     ): IrConstantValue {
-        val itemType = symbols.kType.defaultType
+        konst itemType = symbols.kType.defaultType
         return irConstantArray(symbols.array.typeWith(itemType),
                 types.map { irKType(it, leaveReifiedForLater, seenTypeParameters) }
         )
@@ -147,7 +147,7 @@ internal class KTypeGenerator(
             leaveReifiedForLater: Boolean,
             seenTypeParameters: MutableSet<IrTypeParameter>
     ): IrConstantValue {
-        val variance = irConstantArray(
+        konst variance = irConstantArray(
                 symbols.intArrayType,
                 irTypeArguments.map { argument ->
                     when (argument) {
@@ -155,7 +155,7 @@ internal class KTypeGenerator(
                         is IrTypeProjection -> irConstantInt(mapVariance(argument.variance))
                     }
                 })
-        val type = irConstantArray(
+        konst type = irConstantArray(
                 symbols.array.typeWith(symbols.kType.defaultType.makeNullable()),
                 irTypeArguments.map { argument ->
                     when (argument) {
@@ -173,7 +173,7 @@ internal class KTypeGenerator(
 }
 
 internal fun IrBuilderWithScope.irKClass(context: KonanBackendContext, symbol: IrClassSymbol): IrConstantValue {
-    val symbols = context.ir.symbols
+    konst symbols = context.ir.symbols
 
     fun IrClass.isNativePointedChild() : Boolean =
             this.symbol == context.ir.symbols.nativePointed || getSuperClassNotAny()?.isNativePointedChild() == true

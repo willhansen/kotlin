@@ -13,16 +13,16 @@ import java.io.Serializable
  * Implementation of the [KotlinProject] interface.
  */
 data class KotlinProjectImpl(
-    override val name: String,
-    override val kotlinVersion: String,
-    override val projectType: KotlinProject.ProjectType,
-    override val sourceSets: Collection<SourceSet>,
-    override val expectedByDependencies: Collection<String>,
+    override konst name: String,
+    override konst kotlinVersion: String,
+    override konst projectType: KotlinProject.ProjectType,
+    override konst sourceSets: Collection<SourceSet>,
+    override konst expectedByDependencies: Collection<String>,
 ) : KotlinProject, Serializable {
 
-    override val modelVersion = serialVersionUID
+    override konst modelVersion = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

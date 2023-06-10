@@ -19,15 +19,15 @@ import org.jetbrains.kotlin.fir.FirImplementationDetail
  */
 
 abstract class FirQualifiedAccessExpression : FirExpression(), FirResolvable, FirContextReceiverArgumentListOwner {
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val calleeReference: FirReference
-    abstract override val contextReceiverArguments: List<FirExpression>
-    abstract val typeArguments: List<FirTypeProjection>
-    abstract val explicitReceiver: FirExpression?
-    abstract val dispatchReceiver: FirExpression
-    abstract val extensionReceiver: FirExpression
-    abstract override val source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst calleeReference: FirReference
+    abstract override konst contextReceiverArguments: List<FirExpression>
+    abstract konst typeArguments: List<FirTypeProjection>
+    abstract konst explicitReceiver: FirExpression?
+    abstract konst dispatchReceiver: FirExpression
+    abstract konst extensionReceiver: FirExpression
+    abstract override konst source: KtSourceElement?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitQualifiedAccessExpression(this, data)
 

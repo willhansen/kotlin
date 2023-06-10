@@ -5,13 +5,13 @@ open class A {
 object B : A() {
     override fun test(s: String) = "fail"
 
-    val doTest = { super.test("O") }
+    konst doTest = { super.test("O") }
 }
 
 object C : A() {
     override fun test(s: String) = "fail"
 
-    val doTest = { super.test("K") }
+    konst doTest = { super.test("K") }
 }
 
 fun box(): String {

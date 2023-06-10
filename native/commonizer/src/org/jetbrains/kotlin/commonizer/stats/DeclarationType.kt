@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.commonizer.stats
 
-enum class DeclarationType(val alias: String) {
+enum class DeclarationType(konst alias: String) {
     TOP_LEVEL_CONST_VAL("TOP-LEVEL CONST-VAL"),
     TOP_LEVEL_VAL("TOP-LEVEL VAL"),
     TOP_LEVEL_FUN("TOP-LEVEL FUN"),

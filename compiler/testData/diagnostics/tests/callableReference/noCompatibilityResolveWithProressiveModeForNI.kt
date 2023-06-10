@@ -10,10 +10,10 @@ object Scope {
     fun bar(x: Int = 0): String = ""
 
     fun test() {
-        val r1 = foo(::bar)
+        konst r1 = foo(::bar)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>r1<!>
 
-        val r2 = foo(Scope::bar)
+        konst r2 = foo(Scope::bar)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>r2<!>
     }
 }

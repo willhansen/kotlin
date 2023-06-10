@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.statistics.metrics.StringAnonymizationPolicy.*
 import org.jetbrains.kotlin.statistics.metrics.StringOverridePolicy.*
 
 
-enum class StringMetrics(val type: StringOverridePolicy, val anonymization: StringAnonymizationPolicy, val perProject: Boolean = false) {
+enum class StringMetrics(konst type: StringOverridePolicy, konst anonymization: StringAnonymizationPolicy, konst perProject: Boolean = false) {
 
     // User environment
     GRADLE_VERSION(OVERRIDE, ComponentVersionAnonymizer()),
@@ -91,6 +91,6 @@ enum class StringMetrics(val type: StringOverridePolicy, val anonymization: Stri
     JS_PROPERTY_LAZY_INITIALIZATION(CONCAT, AllowedListAnonymizer(listOf("true", "false")));
 
     companion object {
-        const val VERSION = 1
+        const konst VERSION = 1
     }
 }

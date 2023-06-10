@@ -19,11 +19,11 @@ class TestJVMTest {
         fail("Expected AssertionError to be thrown.")
     }
 
-    private val message = "Some details"
-    private val expected = object {
+    private konst message = "Some details"
+    private konst expected = object {
         override fun toString() = "expected"
     }
-    private val actual = object {
+    private konst actual = object {
         override fun toString() = "actual"
     }
 

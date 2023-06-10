@@ -7,10 +7,10 @@ FILE: for.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val x: Int = R|<local>/x|
+        public? final? konst x: Int = R|<local>/x|
             public? get(): Int
 
-        public? final? val y: Int = R|<local>/y|
+        public? final? konst y: Int = R|<local>/y|
             public? get(): Int
 
         public? final operator fun component1(): Int

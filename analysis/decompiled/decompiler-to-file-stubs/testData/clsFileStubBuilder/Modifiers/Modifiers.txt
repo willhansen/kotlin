@@ -26,7 +26,7 @@ PsiJetFileStubImpl[package=test]
         PROPERTY_ACCESSOR[hasBlockBody=true, hasBody=true, isGetter=false]
           MODIFIER_LIST[public final external]
           VALUE_PARAMETER_LIST
-            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=value]
+            VALUE_PARAMETER[fqName=null, hasDefaultValue=false, hasValOrVar=false, isMutable=false, name=konstue]
               TYPE_REFERENCE
                 USER_TYPE
                   USER_TYPE

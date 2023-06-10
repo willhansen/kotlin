@@ -23,22 +23,22 @@ interface OutputFileCollection {
     fun asList(): List<OutputFile>
 }
 
-class SimpleOutputFileCollection(private val outputFiles: List<OutputFile>) : OutputFileCollection {
+class SimpleOutputFileCollection(private konst outputFiles: List<OutputFile>) : OutputFileCollection {
     override fun get(relativePath: String): OutputFile? = outputFiles.firstOrNull { it.relativePath == relativePath }
     override fun asList(): List<OutputFile> = outputFiles
 }
 
 interface OutputFile {
-    val relativePath: String
-    val sourceFiles: List<File>
+    konst relativePath: String
+    konst sourceFiles: List<File>
     fun asByteArray(): ByteArray
     fun asText(): String
 }
 
 class SimpleOutputFile(
-        override val sourceFiles: List<File>,
-        override val relativePath: String,
-        private val content: String
+        override konst sourceFiles: List<File>,
+        override konst relativePath: String,
+        private konst content: String
 ) : OutputFile {
     override fun asByteArray(): ByteArray = content.toByteArray()
     override fun asText(): String = content
@@ -47,9 +47,9 @@ class SimpleOutputFile(
 }
 
 class SimpleOutputBinaryFile(
-        override val sourceFiles: List<File>,
-        override val relativePath: String,
-        private val content: ByteArray
+        override konst sourceFiles: List<File>,
+        override konst relativePath: String,
+        private konst content: ByteArray
 ) : OutputFile {
     override fun asByteArray(): ByteArray = content
     override fun asText(): String = String(content)

@@ -26,7 +26,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
-internal val markNecessaryInlinedClassesAsRegenerated = makeIrModulePhase(
+internal konst markNecessaryInlinedClassesAsRegenerated = makeIrModulePhase(
     { context ->
         if (!context.irInlinerIsEnabled()) return@makeIrModulePhase FileLoweringPass.Empty
         MarkNecessaryInlinedClassesAsRegeneratedLowering(context)
@@ -36,7 +36,7 @@ internal val markNecessaryInlinedClassesAsRegenerated = makeIrModulePhase(
     prerequisite = setOf(functionInliningPhase, createSeparateCallForInlinedLambdas)
 )
 
-class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendContext) : IrElementVisitorVoid, FileLoweringPass {
+class MarkNecessaryInlinedClassesAsRegeneratedLowering(konst context: JvmBackendContext) : IrElementVisitorVoid, FileLoweringPass {
     override fun lower(irFile: IrFile) {
         irFile.acceptChildrenVoid(this)
     }
@@ -47,14 +47,14 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
 
     override fun visitBlock(expression: IrBlock) {
         if (expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
-            val element = expression.inlineDeclaration
+            konst element = expression.inlineDeclaration
             if (context.visitedDeclarationsForRegenerationLowering.add(element)) {
                 // Note: functions from other module will not be affected here, they are loaded as IrLazy declarations.
                 // BUT during IR serialization support we need to carefully test this logic.
                 element.acceptVoid(this)
             }
 
-            val mustBeRegenerated = expression.collectDeclarationsThatMustBeRegenerated()
+            konst mustBeRegenerated = expression.collectDeclarationsThatMustBeRegenerated()
             expression.setUpCorrectAttributesForAllInnerElements(mustBeRegenerated)
             return
         }
@@ -63,15 +63,15 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
     }
 
     private fun IrInlinedFunctionBlock.collectDeclarationsThatMustBeRegenerated(): Set<IrAttributeContainer> {
-        val classesToRegenerate = mutableSetOf<IrAttributeContainer>()
+        konst classesToRegenerate = mutableSetOf<IrAttributeContainer>()
         this.acceptVoid(object : IrElementVisitorVoid {
-            private val containersStack = mutableListOf<IrAttributeContainer>()
-            private val inlinableParameters = mutableListOf<IrValueParameter>()
-            private val reifiedArguments = mutableListOf<IrType>()
+            private konst containersStack = mutableListOf<IrAttributeContainer>()
+            private konst inlinableParameters = mutableListOf<IrValueParameter>()
+            private konst reifiedArguments = mutableListOf<IrType>()
             private var processingBeforeInlineDeclaration = false
 
             fun IrInlinedFunctionBlock.getInlinableParameters(): List<IrValueParameter> {
-                val callee = this.inlineDeclaration
+                konst callee = this.inlineDeclaration
                 if (callee !is IrFunction) return emptyList()
                 // Must pass `callee` explicitly because there can be problems if call was created for fake override
                 return this.inlineCall.getAllArgumentsWithIr(callee)
@@ -83,7 +83,7 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
             }
 
             fun IrInlinedFunctionBlock.getReifiedArguments(): List<IrType> {
-                val callee = this.inlineDeclaration
+                konst callee = this.inlineDeclaration
                 if (callee !is IrFunction) return emptyList()
                 return callee.typeParameters.mapIndexedNotNull { index, param ->
                     this.inlineCall.getTypeArgument(index)?.takeIf { param.isReified }
@@ -136,7 +136,7 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
 
             override fun visitCall(expression: IrCall) {
                 if (expression.symbol == context.ir.symbols.singleArgumentInlineFunction) {
-                    when (val lambda = expression.getValueArgument(0)) {
+                    when (konst lambda = expression.getValueArgument(0)) {
                         is IrBlock -> (lambda.statements.last() as IrFunctionReference).acceptVoid(this)
                         is IrFunctionExpression -> lambda.function.acceptVoid(this)
                         else -> lambda?.acceptVoid(this) // for example IrFunctionReference
@@ -152,8 +152,8 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
 
             override fun visitContainerExpression(expression: IrContainerExpression) {
                 if (expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
-                    val additionalInlinableParameters = expression.getInlinableParameters()
-                    val additionalTypeArguments = expression.getReifiedArguments()
+                    konst additionalInlinableParameters = expression.getInlinableParameters()
+                    konst additionalTypeArguments = expression.getReifiedArguments()
 
                     inlinableParameters.addAll(additionalInlinableParameters)
                     reifiedArguments.addAll(additionalTypeArguments)
@@ -178,7 +178,7 @@ class MarkNecessaryInlinedClassesAsRegeneratedLowering(val context: JvmBackendCo
         }
 
         this.acceptVoid(object : IrElementVisitorVoid {
-            private val visitedClasses = mutableSetOf<IrClass>()
+            private konst visitedClasses = mutableSetOf<IrClass>()
 
             override fun visitElement(element: IrElement) {
                 if (hasReified) return

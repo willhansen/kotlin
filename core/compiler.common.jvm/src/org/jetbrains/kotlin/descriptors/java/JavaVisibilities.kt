@@ -24,10 +24,10 @@ object JavaVisibilities {
             return Visibilities.Protected
         }
 
-        override val internalDisplayName: String
+        override konst internalDisplayName: String
             get() = "public/*package*/"
 
-        override val externalDisplayName: String
+        override konst externalDisplayName: String
             get() = "package-private"
 
         override fun customEffectiveVisibility(): EffectiveVisibility? {
@@ -46,10 +46,10 @@ object JavaVisibilities {
             return Visibilities.Protected
         }
 
-        override val internalDisplayName: String
+        override konst internalDisplayName: String
             get() = "protected/*protected static*/"
 
-        override val externalDisplayName: String
+        override konst externalDisplayName: String
             get() = "protected"
     }
 
@@ -66,10 +66,10 @@ object JavaVisibilities {
 
         override fun mustCheckInImports(): Boolean = false
 
-        override val internalDisplayName: String
+        override konst internalDisplayName: String
             get() = "protected/*protected and package*/"
 
-        override val externalDisplayName: String
+        override konst externalDisplayName: String
             get() = "protected"
     }
 }

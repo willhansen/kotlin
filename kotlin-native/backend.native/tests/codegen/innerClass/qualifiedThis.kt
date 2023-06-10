@@ -18,14 +18,14 @@ open class BBase
 }
 
 class D() {
-    val z = "d"
+    konst z = "d"
 }
 
 class A: ABase() { // implicit label @A
-    val z = "a"
+    konst z = "a"
     override fun zzz() = "a"
     inner class B: BBase() { // implicit label @B
-        val z = "b"
+        konst z = "b"
         override fun zzz() = "b"
         fun D.foo() : String { // implicit label @foo
             if(this@A.z != "a") return "Fail1"

@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.expressions.IrSyntheticBodyKind
 import org.jetbrains.kotlin.ir.util.parentClassOrNull
 import org.jetbrains.kotlin.ir.util.primaryConstructor
 
-class ExcludeSyntheticDeclarationsFromExportLowering(val context: JsIrBackendContext) : DeclarationTransformer {
+class ExcludeSyntheticDeclarationsFromExportLowering(konst context: JsIrBackendContext) : DeclarationTransformer {
     override fun transformFlat(declaration: IrDeclaration): List<IrDeclaration>? {
         if (declaration.shouldBeExcludedFromExport()) {
             if (declaration is IrSimpleFunction) {
@@ -37,8 +37,8 @@ class ExcludeSyntheticDeclarationsFromExportLowering(val context: JsIrBackendCon
 
     private fun IrDeclaration.isComponentMethodOfDataClass(): Boolean {
         if (this !is IrSimpleFunction) return false
-        val original = getOriginalFunction()
-        val parent = original.parentClassOrNull ?: return false
+        konst original = getOriginalFunction()
+        konst parent = original.parentClassOrNull ?: return false
         return parent.isExported(context) &&
                 original.origin == IrDeclarationOrigin.GENERATED_DATA_CLASS_MEMBER &&
                 original.name.identifier.startsWith(StandardNames.DATA_CLASS_COMPONENT_PREFIX)

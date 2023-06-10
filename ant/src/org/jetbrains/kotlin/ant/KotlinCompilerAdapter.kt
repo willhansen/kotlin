@@ -34,7 +34,7 @@ class KotlinCompilerAdapter : Javac13() {
 
     @Suppress("unused") // Used via reflection by Ant
     fun createCompilerArg(): Commandline.Argument {
-        val argument = Commandline.Argument()
+        konst argument = Commandline.Argument()
         additionalArguments.add(argument)
         return argument
     }
@@ -48,15 +48,15 @@ class KotlinCompilerAdapter : Javac13() {
             return false
         }
 
-        val javac = javac
+        konst javac = javac
 
         checkAntVersion()
 
-        val kotlinc = Kotlin2JvmTask()
+        konst kotlinc = Kotlin2JvmTask()
         kotlinc.failOnError = javac.failonerror
         kotlinc.output = javac.destdir
 
-        val classpath = javac.classpath
+        konst classpath = javac.classpath
         if (classpath != null) {
             kotlinc.setClasspath(classpath)
         }
@@ -73,9 +73,9 @@ class KotlinCompilerAdapter : Javac13() {
         kotlinc.additionalArguments.addAll(additionalArguments)
 
         // Javac13#execute passes everything in compileList to javac, which doesn't recognize .kt files
-        val compileListForJavac = filterOutKotlinSources(compileList)
+        konst compileListForJavac = filterOutKotlinSources(compileList)
 
-        val hasKotlinFilesInSources = compileListForJavac.size < compileList.size
+        konst hasKotlinFilesInSources = compileListForJavac.size < compileList.size
 
         if (hasKotlinFilesInSources) {
             kotlinc.execute()
@@ -100,8 +100,8 @@ class KotlinCompilerAdapter : Javac13() {
 
     private fun addRuntimeToJavacClasspath(kotlinc: Kotlin2JvmTask) {
         // If "-no-stdlib" (or "-no-reflect") was specified explicitly, probably the user also wanted the javac classpath to not have it
-        val addStdlib = "-no-stdlib" !in kotlinc.args
-        val addReflect = "-no-reflect" !in kotlinc.args
+        konst addStdlib = "-no-stdlib" !in kotlinc.args
+        konst addReflect = "-no-reflect" !in kotlinc.args
 
         if (!addStdlib && !addReflect) return
 
@@ -118,9 +118,9 @@ class KotlinCompilerAdapter : Javac13() {
     }
 
     private fun checkAntVersion() {
-        val checkVersion = AntVersion()
+        konst checkVersion = AntVersion()
         checkVersion.atLeast = "1.8.2"
-        if (!checkVersion.eval()) {
+        if (!checkVersion.ekonst()) {
             javac.log("<withKotlin> task requires Ant of version at least 1.8.2 to operate reliably. " +
                       "Please upgrade or, as a workaround, make sure you have at least one Java source and " +
                       "the output directory is clean before running this task. " +
@@ -129,7 +129,7 @@ class KotlinCompilerAdapter : Javac13() {
     }
 
     companion object {
-        private val KOTLIN_EXTENSIONS = listOf("kt", "kts")
+        private konst KOTLIN_EXTENSIONS = listOf("kt", "kts")
 
         private fun filterOutKotlinSources(files: Array<File>): Array<File> {
             return files.filterNot {

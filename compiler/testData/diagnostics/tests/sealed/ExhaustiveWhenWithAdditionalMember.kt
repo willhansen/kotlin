@@ -1,9 +1,9 @@
 // FIR_IDENTICAL
-sealed class Sealed(val x: Int) {
-    data class Tuple(val x: Int, val y: Int)
+sealed class Sealed(konst x: Int) {
+    data class Tuple(konst x: Int, konst y: Int)
     object First: Sealed(12)
     open class NonFirst(tuple: Tuple): Sealed(tuple.x) {
-        val y: Int = tuple.y
+        konst y: Int = tuple.y
         object Second: NonFirst(Tuple(34, 2))
         object Third: NonFirst(Tuple(56, 3))
     }

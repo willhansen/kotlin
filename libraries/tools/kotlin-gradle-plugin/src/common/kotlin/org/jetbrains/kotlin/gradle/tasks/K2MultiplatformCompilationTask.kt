@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
  */
 internal interface K2MultiplatformCompilationTask : Task {
     @get:Nested
-    val compilerOptions: KotlinCommonCompilerOptions
+    konst compilerOptions: KotlinCommonCompilerOptions
 
     @get:Nested
-    val multiplatformStructure: K2MultiplatformStructure
+    konst multiplatformStructure: K2MultiplatformStructure
 }

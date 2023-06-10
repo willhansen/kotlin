@@ -27,10 +27,10 @@ class SymbolBasedTypeParameter(
         javac: JavacWrapper
 ) : SymbolBasedClassifier<TypeParameterElement>(element, javac), JavaTypeParameter {
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(element.simpleName.toString())
 
-    override val upperBounds: Collection<JavaClassifierType>
+    override konst upperBounds: Collection<JavaClassifierType>
         get() = element.bounds.map { SymbolBasedClassifierType(it, javac) }
 
 }

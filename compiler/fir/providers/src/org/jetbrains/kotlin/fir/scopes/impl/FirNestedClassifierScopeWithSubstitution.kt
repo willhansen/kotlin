@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.types.ConeClassLikeType
 import org.jetbrains.kotlin.name.Name
 
 class FirNestedClassifierScopeWithSubstitution internal constructor(
-    private val scope: FirContainingNamesAwareScope,
-    private val substitutor: ConeSubstitutor
+    private konst scope: FirContainingNamesAwareScope,
+    private konst substitutor: ConeSubstitutor
 ) : FirContainingNamesAwareScope() {
 
     override fun processFunctionsByName(name: Name, processor: (FirNamedFunctionSymbol) -> Unit) {
@@ -37,15 +37,15 @@ class FirNestedClassifierScopeWithSubstitution internal constructor(
     }
 
     override fun processClassifiersByNameWithSubstitution(name: Name, processor: (FirClassifierSymbol<*>, ConeSubstitutor) -> Unit) {
-        val matchedClass = scope.getSingleClassifier(name) as? FirRegularClassSymbol ?: return
-        val substitutor = substitutor.takeIf { matchedClass.fir.isInner } ?: ConeSubstitutor.Empty
+        konst matchedClass = scope.getSingleClassifier(name) as? FirRegularClassSymbol ?: return
+        konst substitutor = substitutor.takeIf { matchedClass.fir.isInner } ?: ConeSubstitutor.Empty
         processor(matchedClass, substitutor)
     }
 
     override fun getCallableNames(): Set<Name> = scope.getCallableNames()
     override fun getClassifierNames(): Set<Name> = scope.getClassifierNames()
 
-    override val scopeOwnerLookupNames: List<String>
+    override konst scopeOwnerLookupNames: List<String>
         get() = scope.scopeOwnerLookupNames
 }
 
@@ -53,6 +53,6 @@ fun FirContainingNamesAwareScope.wrapNestedClassifierScopeWithSubstitutionForSup
     superType: ConeClassLikeType,
     session: FirSession
 ): FirContainingNamesAwareScope {
-    val substitutor = createSubstitutionForSupertype(superType, session)
+    konst substitutor = createSubstitutionForSupertype(superType, session)
     return FirNestedClassifierScopeWithSubstitution(this, substitutor)
 }

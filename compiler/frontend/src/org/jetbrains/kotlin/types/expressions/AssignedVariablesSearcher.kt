@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.psi.*
 
 abstract class AssignedVariablesSearcher : KtTreeVisitorVoid() {
 
-    data class Writer(val assignment: KtBinaryExpression, val declaration: KtDeclaration?)
+    data class Writer(konst assignment: KtBinaryExpression, konst declaration: KtDeclaration?)
 
-    private val assignedNames: SetMultimap<Name, Writer> = LinkedHashMultimap.create()
+    private konst assignedNames: SetMultimap<Name, Writer> = LinkedHashMultimap.create()
 
     open fun writers(variableDescriptor: VariableDescriptor): MutableSet<Writer> = assignedNames[variableDescriptor.name]
 
@@ -36,7 +36,7 @@ abstract class AssignedVariablesSearcher : KtTreeVisitorVoid() {
     private var currentDeclaration: KtDeclaration? = null
 
     override fun visitDeclaration(declaration: KtDeclaration) {
-        val previous = currentDeclaration
+        konst previous = currentDeclaration
         if (declaration is KtDeclarationWithBody || declaration is KtClassOrObject || declaration is KtAnonymousInitializer) {
             currentDeclaration = declaration
         }
@@ -45,7 +45,7 @@ abstract class AssignedVariablesSearcher : KtTreeVisitorVoid() {
     }
 
     override fun visitLambdaExpression(lambdaExpression: KtLambdaExpression) {
-        val previous = currentDeclaration
+        konst previous = currentDeclaration
         currentDeclaration = lambdaExpression.functionLiteral
         super.visitLambdaExpression(lambdaExpression)
         currentDeclaration = previous
@@ -53,7 +53,7 @@ abstract class AssignedVariablesSearcher : KtTreeVisitorVoid() {
 
     override fun visitBinaryExpression(binaryExpression: KtBinaryExpression) {
         if (binaryExpression.operationToken === KtTokens.EQ) {
-            val left = KtPsiUtil.deparenthesize(binaryExpression.left)
+            konst left = KtPsiUtil.deparenthesize(binaryExpression.left)
             if (left is KtNameReferenceExpression) {
                 assignedNames.put(left.getReferencedNameAsName(), Writer(binaryExpression, currentDeclaration))
             }

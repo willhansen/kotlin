@@ -1,11 +1,11 @@
 abstract class A {
     abstract protected fun foo(): String
-    abstract protected val bar: String
+    abstract protected konst bar: String
 }
 
 interface B {
     fun foo(): String
-    val bar: String
+    konst bar: String
 }
 
 fun test(x: A) {

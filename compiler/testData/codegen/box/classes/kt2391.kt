@@ -1,6 +1,6 @@
 // KJS_WITH_FULL_RUNTIME
 public interface LoggerAware {
-    public val logger: StringBuilder
+    public konst logger: StringBuilder
 }
 
 public abstract class HttpServer(): LoggerAware {
@@ -10,11 +10,11 @@ public abstract class HttpServer(): LoggerAware {
 }
 
 public class MyHttpServer(): HttpServer() {
-    public override val logger = StringBuilder()
+    public override konst logger = StringBuilder()
 }
 
 fun box(): String {
-    val server = MyHttpServer()
+    konst server = MyHttpServer()
     server.start()
     return server.logger.toString()!!
 }

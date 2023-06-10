@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 class SettingType<out V : Any>(
-    val type : KClass<out V>
+    konst type : KClass<out V>
 )
 
 class SettingReference<V : Any, T : SettingType<V>>(
@@ -23,10 +23,10 @@ class IdeWizard {
 
     private fun <V : Any, T : SettingType<V>> setting(reference: SettingReference<V, T>) =
         object : ReadWriteProperty<Any?, V?> {
-            override fun setValue(thisRef: Any?, property: KProperty<*>, value: V?) {
-                if (value == null) return
-                reference.t = SettingType(value::class) as T
-                reference.v = value
+            override fun setValue(thisRef: Any?, property: KProperty<*>, konstue: V?) {
+                if (konstue == null) return
+                reference.t = SettingType(konstue::class) as T
+                reference.v = konstue
             }
 
             override fun getValue(thisRef: Any?, property: KProperty<*>): V? {

@@ -24,14 +24,14 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.builtIns
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 class StarProjectionImpl(
-    private val typeParameter: TypeParameterDescriptor
+    private konst typeParameter: TypeParameterDescriptor
 ) : TypeProjectionBase() {
     override fun isStarProjection() = true
 
     override fun getProjectionKind() = Variance.OUT_VARIANCE
 
     // No synchronization here: there's no problem in accidentally computing this twice
-    private val _type: KotlinType by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst _type: KotlinType by lazy(LazyThreadSafetyMode.PUBLICATION) {
         typeParameter.starProjectionType()
     }
 
@@ -60,7 +60,7 @@ private fun buildStarProjectionTypeByTypeParameters(
 ).substitute(upperBounds.first(), Variance.OUT_VARIANCE) ?: builtIns.defaultBound
 
 fun TypeParameterDescriptor.starProjectionType(): KotlinType {
-    return when (val descriptor = this.containingDeclaration) {
+    return when (konst descriptor = this.containingDeclaration) {
         is ClassifierDescriptorWithTypeParameters -> {
             buildStarProjectionTypeByTypeParameters(
                 typeParameters = descriptor.typeConstructor.parameters.map { it.typeConstructor },
@@ -83,7 +83,7 @@ fun TypeParameterDescriptor.starProjectionType(): KotlinType {
 class StarProjectionForAbsentTypeParameter(
     kotlinBuiltIns: KotlinBuiltIns
 ) : TypeProjectionBase() {
-    private val nullableAnyType: KotlinType = kotlinBuiltIns.nullableAnyType
+    private konst nullableAnyType: KotlinType = kotlinBuiltIns.nullableAnyType
 
     override fun isStarProjection() = true
 

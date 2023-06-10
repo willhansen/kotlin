@@ -10,9 +10,9 @@ import kotlin.test.*
 class JsArrayTest {
 
     @Test fun arraySizeAndToList() {
-        val a1 = arrayOf<String>()
-        val a2 = arrayOf("foo")
-        val a3 = arrayOf("foo", "bar")
+        konst a1 = arrayOf<String>()
+        konst a2 = arrayOf("foo")
+        konst a3 = arrayOf("foo", "bar")
 
         assertEquals(0, a1.size)
         assertEquals(1, a2.size)

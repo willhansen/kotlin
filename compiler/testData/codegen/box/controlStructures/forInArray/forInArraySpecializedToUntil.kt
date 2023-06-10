@@ -4,7 +4,7 @@
 // WITH_STDLIB
 
 fun checkByteArray(): Boolean {
-    val byteArray = byteArrayOf(1, 2, 3)
+    konst byteArray = byteArrayOf(1, 2, 3)
     var sum = 0
     for (i in 0..byteArray.size - 1) {
         sum += byteArray[i]
@@ -14,7 +14,7 @@ fun checkByteArray(): Boolean {
 }
 
 fun checkShortArray(): Boolean {
-    val shortArray = shortArrayOf(1, 2, 3)
+    konst shortArray = shortArrayOf(1, 2, 3)
     var sum = 0
     for (i in 0..shortArray.size - 1) {
         sum += shortArray[i]
@@ -24,7 +24,7 @@ fun checkShortArray(): Boolean {
 }
 
 fun checkCharArray(): Boolean {
-    val charArray = charArrayOf('1', '2', '3')
+    konst charArray = charArrayOf('1', '2', '3')
     var sum = ""
     for (i in 0..charArray.size - 1) {
         sum += charArray[i]
@@ -34,7 +34,7 @@ fun checkCharArray(): Boolean {
 }
 
 fun checkIntArray(): Boolean {
-    val intArray = intArrayOf(1, 2, 3)
+    konst intArray = intArrayOf(1, 2, 3)
     var sum = 0
     for (i in 0..intArray.size - 1) {
         sum += intArray[i]
@@ -44,7 +44,7 @@ fun checkIntArray(): Boolean {
 }
 
 fun checkLongArray(): Boolean {
-    val longArray = longArrayOf(1L, 2L, 3L)
+    konst longArray = longArrayOf(1L, 2L, 3L)
     var sum = 0L
     for (i in 0..longArray.size - 1) {
         sum += longArray[i]
@@ -54,7 +54,7 @@ fun checkLongArray(): Boolean {
 }
 
 fun checkFloatArray(): Boolean {
-    val floatArray = floatArrayOf(1.1f, 2.2f, 3.3f)
+    konst floatArray = floatArrayOf(1.1f, 2.2f, 3.3f)
     var sum = 0f
     for (i in 0..floatArray.size - 1) {
         sum += floatArray[i]
@@ -64,7 +64,7 @@ fun checkFloatArray(): Boolean {
 }
 
 fun checkDoubleArray(): Boolean {
-    val doubleArray = doubleArrayOf(1.1, 2.2, 3.3)
+    konst doubleArray = doubleArrayOf(1.1, 2.2, 3.3)
     var sum = 0.0
     for (i in 0..doubleArray.size - 1) {
         sum += doubleArray[i]
@@ -74,7 +74,7 @@ fun checkDoubleArray(): Boolean {
 }
 
 fun checkBooleanArray(): Boolean {
-    val booleanArray = booleanArrayOf(false, false, true)
+    konst booleanArray = booleanArrayOf(false, false, true)
     var result = false
     for (i in 0..booleanArray.size - 1) {
         result = booleanArray[i]
@@ -82,13 +82,13 @@ fun checkBooleanArray(): Boolean {
     return result
 }
 
-class Value(val value: Int) {}
+class Value(konst konstue: Int) {}
 
 fun checkObjectArray(): Boolean {
-    val objectArray = arrayOf(Value(1), Value(2), Value(3))
+    konst objectArray = arrayOf(Value(1), Value(2), Value(3))
     var sum = 0
     for (i in 0..objectArray.size - 1) {
-        sum += objectArray[i].value
+        sum += objectArray[i].konstue
     }
     if (sum != 6) return false
     return true
@@ -106,7 +106,7 @@ fun checkWithArrayUpdate(): Boolean {
 }
 
 fun checkIntArrayMinusArbitraryConstant(): Boolean {
-    val intArray = intArrayOf(1, 2, 3)
+    konst intArray = intArrayOf(1, 2, 3)
     var sum = 0
     for (i in 0..intArray.size - 2) {
         sum += intArray[i]
@@ -116,7 +116,7 @@ fun checkIntArrayMinusArbitraryConstant(): Boolean {
 }
 
 fun checkReversedIntArray(): Boolean {
-    val intArray = intArrayOf(1, 2, 3)
+    konst intArray = intArrayOf(1, 2, 3)
     var start = 0
     var sum = 0
     for (i in (start..intArray.size - 1).reversed()) {
@@ -127,7 +127,7 @@ fun checkReversedIntArray(): Boolean {
 }
 
 fun checkIntArrayMethodCallBound(): Boolean {
-    val intArray = intArrayOf(1, 2, 3)
+    konst intArray = intArrayOf(1, 2, 3)
     var start = 0
     var sum = 0
     for (i in 0..intArray.size.coerceAtMost(10) - 1) {

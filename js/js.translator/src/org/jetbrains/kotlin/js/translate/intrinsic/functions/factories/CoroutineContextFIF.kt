@@ -39,10 +39,10 @@ object CoroutineContextFIF : FunctionIntrinsicFactory {
 
     object Intrinsic : FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val continuation = TranslationUtils.getEnclosingContinuationParameter(context)
-            val continuationDescriptor = continuation.type.constructor.declarationDescriptor as? ClassDescriptor ?: error("Continuation is not a class")
-            val contContext = DescriptorUtils.getPropertyByName(continuationDescriptor.unsubstitutedMemberScope, Name.identifier("context"))
-            val res = JsNameRef(
+            konst continuation = TranslationUtils.getEnclosingContinuationParameter(context)
+            konst continuationDescriptor = continuation.type.constructor.declarationDescriptor as? ClassDescriptor ?: error("Continuation is not a class")
+            konst contContext = DescriptorUtils.getPropertyByName(continuationDescriptor.unsubstitutedMemberScope, Name.identifier("context"))
+            konst res = JsNameRef(
                 context.getNameForDescriptor(contContext),
                 if (context.declarationDescriptor?.isCoroutineLambda == true) JsAstUtils.stateMachineReceiver()
                 else TranslationUtils.translateContinuationArgument(context)

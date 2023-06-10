@@ -1,3 +1,3 @@
 class PrivateVal() {
-  private val prop = 0;
+  private konst prop = 0;
 }

@@ -29,13 +29,13 @@ import org.jetbrains.kotlin.gradle.plugin.sources.sourceSetDependencyConfigurati
 import org.jetbrains.kotlin.gradle.targets.js.npm.SemVer
 import org.jetbrains.kotlin.gradle.utils.withType
 
-internal const val KOTLIN_STDLIB_COMMON_MODULE_NAME = "kotlin-stdlib-common"
-internal const val KOTLIN_STDLIB_MODULE_NAME = "kotlin-stdlib"
-internal const val KOTLIN_STDLIB_JDK7_MODULE_NAME = "kotlin-stdlib-jdk7"
-internal const val KOTLIN_STDLIB_JDK8_MODULE_NAME = "kotlin-stdlib-jdk8"
-internal const val KOTLIN_STDLIB_JS_MODULE_NAME = "kotlin-stdlib-js"
-internal const val KOTLIN_STDLIB_WASM_MODULE_NAME = "kotlin-stdlib-wasm"
-internal const val KOTLIN_ANDROID_JVM_STDLIB_MODULE_NAME = KOTLIN_STDLIB_JDK8_MODULE_NAME
+internal const konst KOTLIN_STDLIB_COMMON_MODULE_NAME = "kotlin-stdlib-common"
+internal const konst KOTLIN_STDLIB_MODULE_NAME = "kotlin-stdlib"
+internal const konst KOTLIN_STDLIB_JDK7_MODULE_NAME = "kotlin-stdlib-jdk7"
+internal const konst KOTLIN_STDLIB_JDK8_MODULE_NAME = "kotlin-stdlib-jdk8"
+internal const konst KOTLIN_STDLIB_JS_MODULE_NAME = "kotlin-stdlib-js"
+internal const konst KOTLIN_STDLIB_WASM_MODULE_NAME = "kotlin-stdlib-wasm"
+internal const konst KOTLIN_ANDROID_JVM_STDLIB_MODULE_NAME = KOTLIN_STDLIB_JDK8_MODULE_NAME
 
 internal fun Project.configureStdlibDefaultDependency(
     topLevelExtension: KotlinTopLevelExtension,
@@ -115,8 +115,8 @@ private fun addStdlibToKpmProject(
             }
         }
         main.variants.configureEach { variant ->
-            val dependencyHandler = project.dependencies
-            val stdlibModule = when (variant.platformType) {
+            konst dependencyHandler = project.dependencies
+            konst stdlibModule = when (variant.platformType) {
                 KotlinPlatformType.common -> error("variants are not expected to be common")
                 KotlinPlatformType.jvm -> KOTLIN_STDLIB_JDK8_MODULE_NAME
                 KotlinPlatformType.js -> KOTLIN_STDLIB_JS_MODULE_NAME
@@ -140,7 +140,7 @@ private fun KotlinTarget.addStdlibDependency(
 ) {
     compilations.configureEach { compilation ->
         compilation.allKotlinSourceSets.forEach { kotlinSourceSet ->
-            val scope = if (compilation.isTest() ||
+            konst scope = if (compilation.isTest() ||
                 (this is KotlinAndroidTarget &&
                         kotlinSourceSet.isRelatedToAndroidTestSourceSet()
                         )
@@ -149,14 +149,14 @@ private fun KotlinTarget.addStdlibDependency(
             } else {
                 KotlinDependencyScope.API_SCOPE
             }
-            val scopeConfiguration = configurations
+            konst scopeConfiguration = configurations
                 .sourceSetDependencyConfigurationByScope(kotlinSourceSet, scope)
 
             scopeConfiguration.withDependencies { dependencySet ->
                 // Check if stdlib is directly added to SourceSet
                 if (isStdlibAddedByUser(configurations, stdlibModules, kotlinSourceSet)) return@withDependencies
 
-                val stdlibModule = compilation
+                konst stdlibModule = compilation
                     .platformType
                     .stdlibPlatformType(this, kotlinSourceSet)
                     ?: return@withDependencies
@@ -189,7 +189,7 @@ internal fun isStdlibAddedByUser(
     return sourceSets
         .asSequence()
         .flatMap { sourceSet ->
-            KotlinDependencyScope.values().map { scope ->
+            KotlinDependencyScope.konstues().map { scope ->
                 configurations.sourceSetDependencyConfigurationByScope(sourceSet, scope)
             }.asSequence()
         }
@@ -221,16 +221,16 @@ internal fun KotlinPlatformType.stdlibPlatformType(
         KOTLIN_STDLIB_COMMON_MODULE_NAME
 }
 
-private val androidTestVariants = setOf(AndroidVariantType.UnitTest, AndroidVariantType.InstrumentedTest)
+private konst androidTestVariants = setOf(AndroidVariantType.UnitTest, AndroidVariantType.InstrumentedTest)
 
-private val kotlin180Version = SemVer(1.toBigInteger(), 8.toBigInteger(), 0.toBigInteger())
+private konst kotlin180Version = SemVer(1.toBigInteger(), 8.toBigInteger(), 0.toBigInteger())
 
 private fun KotlinSourceSet.isRelatedToAndroidTestSourceSet(): Boolean {
-    val androidVariant = androidSourceSetInfoOrNull?.androidVariantType ?: return false
+    konst androidVariant = androidSourceSetInfoOrNull?.androidVariantType ?: return false
     return androidVariant in androidTestVariants
 }
 
-internal val stdlibModules = setOf(
+internal konst stdlibModules = setOf(
     KOTLIN_STDLIB_COMMON_MODULE_NAME,
     KOTLIN_STDLIB_MODULE_NAME,
     KOTLIN_STDLIB_JDK7_MODULE_NAME,

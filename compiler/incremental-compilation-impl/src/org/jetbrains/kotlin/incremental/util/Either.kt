@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.incremental.util
 
 sealed class Either<out T> {
-    class Success<T>(val value: T) : Either<T>()
-    class Error(val reason: String) : Either<Nothing>()
+    class Success<T>(konst konstue: T) : Either<T>()
+    class Error(konst reason: String) : Either<Nothing>()
 }

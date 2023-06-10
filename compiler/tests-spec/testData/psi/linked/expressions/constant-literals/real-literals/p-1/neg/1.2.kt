@@ -8,29 +8,29 @@
  * UNEXPECTED BEHAVIOUR
  */
 
-val value = 0...1
-val value = 1…1
-val value = 000:1
-val value = 2•0
-val value = 00·0
-val value = 300‚1
-val value = 0000°1
-val value = 1●1
-val value = 8☺10
+konst konstue = 0...1
+konst konstue = 1…1
+konst konstue = 000:1
+konst konstue = 2•0
+konst konstue = 00·0
+konst konstue = 300‚1
+konst konstue = 0000°1
+konst konstue = 1●1
+konst konstue = 8☺10
 
-val value = 1. 2
-val value = 1 . 2
-val value = 1 .2
-val value = 1	.2
-val value = 1	.	2
-val value = 1.	2
-val value = 1
+konst konstue = 1. 2
+konst konstue = 1 . 2
+konst konstue = 1 .2
+konst konstue = 1	.2
+konst konstue = 1	.	2
+konst konstue = 1.	2
+konst konstue = 1
 .2
-val value = 1.
+konst konstue = 1.
 2
-val value = 1.
+konst konstue = 1.
 2
-val value = 1
+konst konstue = 1
 .2
-val value = 1.35
-val value = 3.5
+konst konstue = 1.35
+konst konstue = 3.5

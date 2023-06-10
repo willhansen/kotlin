@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.load.java
 import org.jetbrains.kotlin.name.FqName
 
 class JavaTypeEnhancementState(
-    val jsr305: Jsr305Settings,
-    val getReportLevelForAnnotation: (FqName) -> ReportLevel
+    konst jsr305: Jsr305Settings,
+    konst getReportLevelForAnnotation: (FqName) -> ReportLevel
 ) {
-    val disabledDefaultAnnotations = jsr305.isDisabled || getReportLevelForAnnotation(JSPECIFY_ANNOTATIONS_PACKAGE) == ReportLevel.IGNORE
+    konst disabledDefaultAnnotations = jsr305.isDisabled || getReportLevelForAnnotation(JSPECIFY_ANNOTATIONS_PACKAGE) == ReportLevel.IGNORE
 
     companion object {
-        val DEFAULT = JavaTypeEnhancementState(getDefaultJsr305Settings(), ::getDefaultReportLevelForAnnotation)
+        konst DEFAULT = JavaTypeEnhancementState(getDefaultJsr305Settings(), ::getDefaultReportLevelForAnnotation)
     }
 
     override fun toString(): String {

@@ -5,44 +5,44 @@
 
 fun use(x: Any, y: Any) {}
 
-class P(val x: Int, val y: Int) {
+class P(konst x: Int, konst y: Int) {
     operator fun component1() = x
     operator fun component2() = y
 }
 
-class Q<T1, T2>(val x: T1, val y: T2) {
+class Q<T1, T2>(konst x: T1, konst y: T2) {
     operator fun component1() = x
     operator fun component2() = y
 }
 
 fun test1() {
     // See KT-36344
-    val (x, y) = J.notNullP()
+    konst (x, y) = J.notNullP()
     use(x, y)
 }
 
 fun test2() {
     // See KT-36347
-    val (x, y) = J.notNullComponents()
+    konst (x, y) = J.notNullComponents()
     use(x, y)
 }
 
 fun test2Desugared() {
-    val tmp = J.notNullComponents()
-    val x = tmp.component1()
-    val y = tmp.component2()
+    konst tmp = J.notNullComponents()
+    konst x = tmp.component1()
+    konst y = tmp.component2()
     use(x, y)
 }
 
 fun test3() {
     // See KT-36347
-    val (x, y) = J.notNullQAndComponents()
+    konst (x, y) = J.notNullQAndComponents()
     use(x, y)
 }
 
 fun test4() {
     // See KT-36347
-    val (x, y) = J.listOfNotNull().withIndex().first()
+    konst (x, y) = J.listOfNotNull().withIndex().first()
     use(x, y)
 }
 

@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10FileScope(
-    private val ktFile: KtFile,
-    private val analysisContext: Fe10AnalysisContext,
-    override val token: KtLifetimeToken,
+    private konst ktFile: KtFile,
+    private konst analysisContext: Fe10AnalysisContext,
+    override konst token: KtLifetimeToken,
 ) : KtScope {
     override fun getPossibleCallableNames(): Set<Name> = withValidityAssertion {
         ktFile.declarations.mapNotNullTo(mutableSetOf()) { (it as? KtCallableDeclaration)?.nameAsName }
@@ -38,13 +38,13 @@ internal class KtFe10FileScope(
     }
 
     override fun getCallableSymbols(nameFilter: KtScopeNameFilter): Sequence<KtCallableSymbol> = withValidityAssertion {
-        val context = analysisContext.analyze(ktFile)
+        konst context = analysisContext.analyze(ktFile)
 
         sequence {
             for (declaration in ktFile.declarations) {
                 if (declaration is KtCallableDeclaration) {
-                    val descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, declaration] as? CallableDescriptor ?: continue
-                    val ktSymbol = descriptor.takeIf { nameFilter(it.name) }?.toKtCallableSymbol(analysisContext) ?: continue
+                    konst descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, declaration] as? CallableDescriptor ?: continue
+                    konst ktSymbol = descriptor.takeIf { nameFilter(it.name) }?.toKtCallableSymbol(analysisContext) ?: continue
                     yield(ktSymbol)
                 }
             }
@@ -53,18 +53,18 @@ internal class KtFe10FileScope(
 
     override fun getCallableSymbols(names: Collection<Name>): Sequence<KtCallableSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getCallableSymbols { it in namesSet }
     }
 
     override fun getClassifierSymbols(nameFilter: KtScopeNameFilter): Sequence<KtClassifierSymbol> = withValidityAssertion {
-        val context = analysisContext.analyze(ktFile)
+        konst context = analysisContext.analyze(ktFile)
 
         sequence {
             for (declaration in ktFile.declarations) {
                 if (declaration is KtClassLikeDeclaration) {
-                    val descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, declaration] as? ClassifierDescriptor ?: continue
-                    val ktSymbol = descriptor.takeIf { nameFilter(it.name) }?.toKtClassifierSymbol(analysisContext) ?: continue
+                    konst descriptor = context[BindingContext.DECLARATION_TO_DESCRIPTOR, declaration] as? ClassifierDescriptor ?: continue
+                    konst ktSymbol = descriptor.takeIf { nameFilter(it.name) }?.toKtClassifierSymbol(analysisContext) ?: continue
                     yield(ktSymbol)
                 }
             }
@@ -73,7 +73,7 @@ internal class KtFe10FileScope(
 
     override fun getClassifierSymbols(names: Collection<Name>): Sequence<KtClassifierSymbol> = withValidityAssertion {
         if (names.isEmpty()) return emptySequence()
-        val namesSet = names.toSet()
+        konst namesSet = names.toSet()
         return getClassifierSymbols { it in namesSet }
     }
 

@@ -27,11 +27,11 @@ class Bottom: Y()
 
 fun testData(results: String): String {
     if (results != "OK") return results
-    val serial = Bottom.serializer()
-    val j = Json { encodeDefaults = true }
-    val s = j.encodeToString(serial, Bottom())
+    konst serial = Bottom.serializer()
+    konst j = Json { encodeDefaults = true }
+    konst s = j.encodeToString(serial, Bottom())
     if (s != """{"x":"X","y":"Y"}""") return "Incorrect encoding: $s"
-    val decoded = j.decodeFromString(serial, """{"x":"1","y":"2"}""")
+    konst decoded = j.decodeFromString(serial, """{"x":"1","y":"2"}""")
     if (decoded.exposeX() != "1") return "Incorrect X"
     if (decoded.exposeY() != "2") return "Incorrect Y"
     return "OK"
@@ -42,7 +42,7 @@ fun testKinds(): String {
     if (I.serializer().descriptor.kind != PolymorphicKind.SEALED) return "Not sealed: I"
     if (X.serializer().descriptor.kind != PolymorphicKind.SEALED) return "Not sealed: X"
     if (Y.serializer().descriptor.kind != PolymorphicKind.OPEN) return "Not polymorphic: Y"
-    val serial = Bottom.serializer()
+    konst serial = Bottom.serializer()
     if (serial.descriptor.kind != StructureKind.CLASS) return "Not class: Bottom"
     return "OK"
 }

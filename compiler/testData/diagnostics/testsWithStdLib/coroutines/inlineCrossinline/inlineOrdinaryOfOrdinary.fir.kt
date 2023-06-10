@@ -16,12 +16,12 @@ import helpers.*
 
 inline fun test(c: () -> Unit) {
     c()
-    val o = object : Runnable {
+    konst o = object : Runnable {
         override fun run() {
             c()
         }
     }
-    val l = { c() }
+    konst l = { c() }
     <!USAGE_IS_NOT_INLINABLE!>c<!>.startCoroutine(EmptyContinuation)
 }
 

@@ -16,8 +16,8 @@ import org.jetbrains.org.objectweb.asm.Type
 //
 // The need for this is to coerce the IR codegen backend to generate an
 // otherwise illegal invokeSpecial for the express purpose of being
-// _interpreted_ by eval4j in the fragment evaluator and not actually run on
-// the JVM. This allows the "evaluate expression" functionality of the Kotlin
+// _interpreted_ by ekonst4j in the fragment ekonstuator and not actually run on
+// the JVM. This allows the "ekonstuate expression" functionality of the Kotlin
 // JVM Debugger Plug-in in IntelliJ to simulate the invocation of `super` calls
 // in the context of a breakpoint.
 //
@@ -27,10 +27,10 @@ import org.jetbrains.org.objectweb.asm.Type
 // lowerings in between.
 object JvmDebuggerInvokeSpecial : IntrinsicMethod() {
     override fun invoke(expression: IrFunctionAccessExpression, codegen: ExpressionCodegen, data: BlockInfo): PromisedValue {
-        val owner = expression.getStringConstArgument(0)
-        val name = expression.getStringConstArgument(1)
-        val descriptor = expression.getStringConstArgument(2)
-        val isInterface = expression.getBooleanConstArgument(3)
+        konst owner = expression.getStringConstArgument(0)
+        konst name = expression.getStringConstArgument(1)
+        konst descriptor = expression.getStringConstArgument(2)
+        konst isInterface = expression.getBooleanConstArgument(3)
 
         expression.dispatchReceiver!!.accept(codegen, data).materialize()
         codegen.mv.invokespecial(owner, name, descriptor, isInterface)

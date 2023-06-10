@@ -595,9 +595,9 @@ public class KlibIrTextTestCaseGenerated extends AbstractKlibIrTextTestCase {
                 runTest("compiler/testData/ir/irText/declarations/annotations/typeParametersWithAnnotations.kt");
             }
 
-            @TestMetadata("valueParametersWithAnnotations.kt")
+            @TestMetadata("konstueParametersWithAnnotations.kt")
             public void testValueParametersWithAnnotations() throws Exception {
-                runTest("compiler/testData/ir/irText/declarations/annotations/valueParametersWithAnnotations.kt");
+                runTest("compiler/testData/ir/irText/declarations/annotations/konstueParametersWithAnnotations.kt");
             }
 
             @TestMetadata("varargsInAnnotationArguments.kt")
@@ -1620,9 +1620,9 @@ public class KlibIrTextTestCaseGenerated extends AbstractKlibIrTextTestCase {
             runTest("compiler/testData/ir/irText/expressions/useImportedMember.kt");
         }
 
-        @TestMetadata("values.kt")
+        @TestMetadata("konstues.kt")
         public void testValues() throws Exception {
-            runTest("compiler/testData/ir/irText/expressions/values.kt");
+            runTest("compiler/testData/ir/irText/expressions/konstues.kt");
         }
 
         @TestMetadata("vararg.kt")
@@ -2120,9 +2120,9 @@ public class KlibIrTextTestCaseGenerated extends AbstractKlibIrTextTestCase {
             runTest("compiler/testData/ir/irText/firProblems/typeVariableAfterBuildMap.kt");
         }
 
-        @TestMetadata("valueClassEquals.kt")
+        @TestMetadata("konstueClassEquals.kt")
         public void testValueClassEquals() throws Exception {
-            runTest("compiler/testData/ir/irText/firProblems/valueClassEquals.kt");
+            runTest("compiler/testData/ir/irText/firProblems/konstueClassEquals.kt");
         }
 
         @TestMetadata("VarInInit.kt")

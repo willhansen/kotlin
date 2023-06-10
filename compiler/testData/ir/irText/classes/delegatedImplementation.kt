@@ -14,19 +14,19 @@ object BaseImpl : IBase {
 }
 
 interface IOther {
-    val x: String
+    konst x: String
     var y: Int
-    val Byte.z1: Int
+    konst Byte.z1: Int
     var Byte.z2: Int
 }
 
 fun otherImpl(x0: String, y0: Int): IOther = object : IOther {
-    override val x: String = x0
+    override konst x: String = x0
     override var y: Int = y0
-    override val Byte.z1: Int get() = 1
+    override konst Byte.z1: Int get() = 1
     override var Byte.z2: Int
         get() = 2
-        set(value) {}
+        set(konstue) {}
 }
 
 class Test1 : IBase by BaseImpl

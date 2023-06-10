@@ -12,15 +12,15 @@ import java.io.Serializable
  * Implementation of the [NoArg] interface.
  */
 data class NoArgImpl(
-    override val name: String,
-    override val annotations: List<String>,
-    override val presets: List<String>,
-    override val isInvokeInitializers: Boolean
+    override konst name: String,
+    override konst annotations: List<String>,
+    override konst presets: List<String>,
+    override konst isInvokeInitializers: Boolean
 ) : NoArg, Serializable {
 
-    override val modelVersion = serialVersionUID
+    override konst modelVersion = serialVersionUID
 
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

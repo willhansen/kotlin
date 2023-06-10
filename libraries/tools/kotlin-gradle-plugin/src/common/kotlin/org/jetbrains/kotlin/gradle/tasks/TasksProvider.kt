@@ -47,7 +47,7 @@ internal fun <T : Task> Project.registerTask(
     constructorArgs: List<Any> = emptyList(),
     body: ((T) -> (Unit))? = null
 ): TaskProvider<T> {
-    val resultProvider = project.tasks.register(name, type, *constructorArgs.toTypedArray())
+    konst resultProvider = project.tasks.register(name, type, *constructorArgs.toTypedArray())
     if (body != null) {
         resultProvider.configure(body)
     }

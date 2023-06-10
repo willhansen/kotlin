@@ -4,6 +4,6 @@ fun test(a: String, b: String?): String {
 }
 
 fun box(): String {
-    val test = test("O", "K")
+    konst test = test("O", "K")
     return if (test != "O\u0001\u0002\u00034K5.06.07K\u0002\u0001") "fail  ${test}" else "OK"
 }

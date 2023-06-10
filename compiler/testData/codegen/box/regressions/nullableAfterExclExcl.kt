@@ -1,8 +1,8 @@
 interface Sample {
-    val callMe: Int
+    konst callMe: Int
 }
 
-class Caller<out M : Sample?>(val member: M) {
+class Caller<out M : Sample?>(konst member: M) {
     fun test() {
         member!!.callMe
     }

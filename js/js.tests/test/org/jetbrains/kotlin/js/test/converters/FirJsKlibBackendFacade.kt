@@ -38,10 +38,10 @@ import java.io.File
 
 class FirJsKlibBackendFacade(
     testServices: TestServices,
-    private val firstTimeCompilation: Boolean
+    private konst firstTimeCompilation: Boolean
 ) : IrBackendFacade<BinaryArtifacts.KLib>(testServices, ArtifactKinds.KLib) {
 
-    override val additionalServices: List<ServiceRegistrationData>
+    override konst additionalServices: List<ServiceRegistrationData>
         get() = listOf(service(::JsIrIncrementalDataProvider), service(::ModuleDescriptorProvider))
 
     constructor(testServices: TestServices) : this(testServices, firstTimeCompilation = true)
@@ -55,17 +55,17 @@ class FirJsKlibBackendFacade(
             "JsKlibBackendFacade expects IrBackendInput.JsIrBackendInput as input"
         }
 
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
-        val outputFile = JsEnvironmentConfigurator.getJsKlibArtifactPath(testServices, module.name)
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst outputFile = JsEnvironmentConfigurator.getJsKlibArtifactPath(testServices, module.name)
 
         // TODO: consider avoiding repeated libraries resolution
-        val libraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
+        konst libraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
 
         // TODO: find out how to pass diagnostics to the test infra in this case
-        val diagnosticReporter = DiagnosticReporterFactory.createReporter()
+        konst diagnosticReporter = DiagnosticReporterFactory.createReporter()
 
         if (firstTimeCompilation) {
-            val irActualizedResult =
+            konst irActualizedResult =
                 if (module.frontendKind == FrontendKinds.FIR && module.languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)) {
                     IrActualizer.actualize(
                         inputArtifact.irModuleFragment,
@@ -98,12 +98,12 @@ class FirJsKlibBackendFacade(
         }
 
         // TODO: consider avoiding repeated libraries resolution
-        val lib = CommonKLibResolver.resolve(
+        konst lib = CommonKLibResolver.resolve(
             getAllJsDependenciesPaths(module, testServices) + listOf(outputFile),
             configuration.resolverLogger
         ).getFullResolvedList().last().library
 
-        val moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
+        konst moduleDescriptor = JsFactories.DefaultDeserializedDescriptorFactory.createDescriptorOptionalBuiltIns(
             lib,
             configuration.languageVersionSettings,
             LockBasedStorageManager("ModulesStructure"),

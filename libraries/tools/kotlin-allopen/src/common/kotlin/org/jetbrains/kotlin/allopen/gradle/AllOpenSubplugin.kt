@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class AllOpenGradleSubplugin
 @Inject internal constructor(
-    private val registry: ToolingModelBuilderRegistry
+    private konst registry: ToolingModelBuilderRegistry
 ) : KotlinCompilerPluginSupportPlugin {
 
     companion object {
@@ -33,10 +33,10 @@ class AllOpenGradleSubplugin
             return project.extensions.getByType(AllOpenExtension::class.java)
         }
 
-        private const val ALLOPEN_ARTIFACT_NAME = "kotlin-allopen-compiler-plugin-embeddable"
+        private const konst ALLOPEN_ARTIFACT_NAME = "kotlin-allopen-compiler-plugin-embeddable"
 
-        private const val ANNOTATION_ARG_NAME = "annotation"
-        private const val PRESET_ARG_NAME = "preset"
+        private const konst ANNOTATION_ARG_NAME = "annotation"
+        private const konst PRESET_ARG_NAME = "preset"
     }
 
     override fun apply(target: Project) {
@@ -49,12 +49,12 @@ class AllOpenGradleSubplugin
     override fun applyToCompilation(
         kotlinCompilation: KotlinCompilation<*>
     ): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
-        val allOpenExtension = project.extensions.getByType(AllOpenExtension::class.java)
+        konst allOpenExtension = project.extensions.getByType(AllOpenExtension::class.java)
 
         return project.provider {
-            val options = mutableListOf<SubpluginOption>()
+            konst options = mutableListOf<SubpluginOption>()
 
             for (anno in allOpenExtension.myAnnotations) {
                 options += SubpluginOption(ANNOTATION_ARG_NAME, anno)

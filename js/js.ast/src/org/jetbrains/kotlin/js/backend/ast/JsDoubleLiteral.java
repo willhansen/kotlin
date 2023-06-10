@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.js.backend.ast;
 import org.jetbrains.annotations.NotNull;
 
 public final class JsDoubleLiteral extends JsNumberLiteral {
-    public final double value;
+    public final double konstue;
 
-    public JsDoubleLiteral(double value) {
-        this.value = value;
+    public JsDoubleLiteral(double konstue) {
+        this.konstue = konstue;
     }
 
     @Override
@@ -31,7 +31,7 @@ public final class JsDoubleLiteral extends JsNumberLiteral {
     }
 
     public String toString() {
-        return String.valueOf(value);
+        return String.konstueOf(konstue);
     }
 
     @Override
@@ -43,6 +43,6 @@ public final class JsDoubleLiteral extends JsNumberLiteral {
     @NotNull
     @Override
     public JsDoubleLiteral deepCopy() {
-        return new JsDoubleLiteral(value).withMetadataFrom(this);
+        return new JsDoubleLiteral(konstue).withMetadataFrom(this);
     }
 }

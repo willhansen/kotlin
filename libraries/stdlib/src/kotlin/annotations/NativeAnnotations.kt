@@ -18,7 +18,7 @@ import kotlin.experimental.ExperimentalObjCRefinement
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.BINARY)
 @OptionalExpectation
-public expect annotation class CName(val externName: String = "", val shortName: String = "")
+public expect annotation class CName(konst externName: String = "", konst shortName: String = "")
 
 /**
  * Freezing API is deprecated since 1.7.20.
@@ -66,7 +66,7 @@ expect annotation class FreezingIsDeprecated
 @OptionalExpectation
 @ExperimentalObjCName
 @SinceKotlin("1.8")
-public expect annotation class ObjCName(val name: String = "", val swiftName: String = "", val exact: Boolean = false)
+public expect annotation class ObjCName(konst name: String = "", konst swiftName: String = "", konst exact: Boolean = false)
 
 /**
  * Meta-annotation that instructs the Kotlin compiler to remove the annotated class, function or property from the public Objective-C API.

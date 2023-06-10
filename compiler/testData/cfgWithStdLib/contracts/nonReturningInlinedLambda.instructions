@@ -67,7 +67,7 @@ sink:
 =====================
 == withLabeledReturn ==
 fun withLabeledReturn(y: Int) {
-    val x = myRun outer@ {
+    konst x = myRun outer@ {
         myRun { return@outer Unit }
         println(y)
     }
@@ -81,8 +81,8 @@ L0:
     v(y: Int)
     magic[FAKE_INITIALIZER](y: Int) -> <v0>
     w(y|<v0>)
-  2 mark({ val x = myRun outer@ { myRun { return@outer Unit } println(y) } println(y) println(x) })
-    v(val x = myRun outer@ { myRun { return@outer Unit } println(y) })
+  2 mark({ konst x = myRun outer@ { myRun { return@outer Unit } println(y) } println(y) println(x) })
+    v(konst x = myRun outer@ { myRun { return@outer Unit } println(y) })
     mark(outer@ { myRun { return@outer Unit } println(y) })
     mark({ myRun { return@outer Unit } println(y) })
     r({ myRun { return@outer Unit } println(y) }) -> <v1>

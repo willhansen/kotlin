@@ -15,7 +15,7 @@ fun nullable(r: SoftReference<String?>) {
 }
 
 fun platform() {
-    val r = SoftReference("x")
+    konst r = SoftReference("x")
     r.get()
         // SUCCESS
         // ORIGINAL:    fun get(): T? defined in java.lang.ref.SoftReference

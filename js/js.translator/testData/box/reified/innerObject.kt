@@ -19,10 +19,10 @@ inline fun <reified T> typePredicate(): TypePredicate =
         }
 
 fun box(): String {
-    val isA = typePredicate<A>()
-    val a: Any = A()
-    val b: Any = B()
-    val c: Any = C()
+    konst isA = typePredicate<A>()
+    konst a: Any = A()
+    konst b: Any = B()
+    konst c: Any = C()
 
     assertEquals(true, isA(a), "isA(a)")
     assertEquals(false, isA(b), "isA(b)")

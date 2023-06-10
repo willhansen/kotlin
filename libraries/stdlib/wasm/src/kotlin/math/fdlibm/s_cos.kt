@@ -44,7 +44,7 @@
 package kotlin.math.fdlibm
 
 internal fun cos(x: Double): Double {
-    val y: DoubleArray = DoubleArray(2)
+    konst y: DoubleArray = DoubleArray(2)
     var z: Double = 0.0
     var n: Int
     var ix: Int

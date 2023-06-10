@@ -12,39 +12,39 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 //Sensitive data. This object is used directly for statistic via http
-private val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").also { it.timeZone = TimeZone.getTimeZone("UTC")}
+private konst formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").also { it.timeZone = TimeZone.getTimeZone("UTC")}
 data class CompileStatisticsData(
-    val version: Int = 3,
-    val projectName: String?,
-    val label: String?,
-    val taskName: String,
-    val taskResult: String?,
-    val startTimeMs: Long,
-    val durationMs: Long,
-    val tags: Set<StatTag>,
-    val changes: List<String>,
-    val buildUuid: String = "Unset",
-    val kotlinVersion: String,
-    val kotlinLanguageVersion: String?,
-    val hostName: String? = "Unset",
-    val finishTime: Long,
-    val timestamp: String = formatter.format(finishTime),
-    val compilerArguments: List<String>,
-    val nonIncrementalAttributes: Set<BuildAttribute>,
+    konst version: Int = 3,
+    konst projectName: String?,
+    konst label: String?,
+    konst taskName: String,
+    konst taskResult: String?,
+    konst startTimeMs: Long,
+    konst durationMs: Long,
+    konst tags: Set<StatTag>,
+    konst changes: List<String>,
+    konst buildUuid: String = "Unset",
+    konst kotlinVersion: String,
+    konst kotlinLanguageVersion: String?,
+    konst hostName: String? = "Unset",
+    konst finishTime: Long,
+    konst timestamp: String = formatter.format(finishTime),
+    konst compilerArguments: List<String>,
+    konst nonIncrementalAttributes: Set<BuildAttribute>,
     //TODO think about it,time in milliseconds
-    val buildTimesMetrics: Map<BuildTime, Long>,
-    val performanceMetrics: Map<BuildPerformanceMetric, Long>,
-    val gcTimeMetrics: Map<String, Long>?,
-    val gcCountMetrics: Map<String, Long>?,
-    val type: String = BuildDataType.TASK_DATA.name,
-    val fromKotlinPlugin: Boolean?,
-    val compiledSources: List<String> = emptyList(),
-    val skipMessage: String?,
-    val icLogLines: List<String>,
+    konst buildTimesMetrics: Map<BuildTime, Long>,
+    konst performanceMetrics: Map<BuildPerformanceMetric, Long>,
+    konst gcTimeMetrics: Map<String, Long>?,
+    konst gcCountMetrics: Map<String, Long>?,
+    konst type: String = BuildDataType.TASK_DATA.name,
+    konst fromKotlinPlugin: Boolean?,
+    konst compiledSources: List<String> = emptyList(),
+    konst skipMessage: String?,
+    konst icLogLines: List<String>,
 )
 
 
-enum class StatTag(val readableString: String) {
+enum class StatTag(konst readableString: String) {
     ABI_SNAPSHOT("ABI Snapshot"),
     ARTIFACT_TRANSFORM("Classpath Snapshot"),
     INCREMENTAL("Incremental compilation"),
@@ -67,26 +67,26 @@ enum class BuildDataType {
 
 //Sensitive data. This object is used directly for statistic via http
 data class BuildStartParameters(
-    val tasks: List<String>,
-    val excludedTasks: Set<String> = emptySet(),
-    val currentDir: String? = null,
-    val projectProperties: List<String> = emptyList(),
-    val systemProperties: List<String> = emptyList(),
+    konst tasks: List<String>,
+    konst excludedTasks: Set<String> = emptySet(),
+    konst currentDir: String? = null,
+    konst projectProperties: List<String> = emptyList(),
+    konst systemProperties: List<String> = emptyList(),
 ) : java.io.Serializable
 
 //Sensitive data. This object is used directly for statistic via http
 data class BuildFinishStatisticsData(
-    val projectName: String,
-    val startParameters: BuildStartParameters,
-    val buildUuid: String = "Unset",
-    val label: String?,
-    val totalTime: Long,
-    val type: String = BuildDataType.BUILD_DATA.name,
-    val finishTime: Long,
-    val timestamp: String = formatter.format(finishTime),
-    val hostName: String? = "Unset",
-    val tags: Set<StatTag>,
-    val gitBranch: String = "Unset"
+    konst projectName: String,
+    konst startParameters: BuildStartParameters,
+    konst buildUuid: String = "Unset",
+    konst label: String?,
+    konst totalTime: Long,
+    konst type: String = BuildDataType.BUILD_DATA.name,
+    konst finishTime: Long,
+    konst timestamp: String = formatter.format(finishTime),
+    konst hostName: String? = "Unset",
+    konst tags: Set<StatTag>,
+    konst gitBranch: String = "Unset"
 )
 
 

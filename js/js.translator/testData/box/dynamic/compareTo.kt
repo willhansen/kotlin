@@ -2,10 +2,10 @@
 package foo
 
 fun box(): String {
-    val a: dynamic = 12
+    konst a: dynamic = 12
     var b: dynamic = 33.4
     var c: dynamic = "text"
-    val d: dynamic = true
+    konst d: dynamic = true
 
     testFalse { a > b }
     testTrue { b <= 34 }

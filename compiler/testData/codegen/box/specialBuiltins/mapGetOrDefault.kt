@@ -27,7 +27,7 @@ public class TestMap implements Map<String, Object> {
     }
 
     @Override
-    public boolean containsValue(Object value) {
+    public boolean containsValue(Object konstue) {
         return false;
     }
 
@@ -38,7 +38,7 @@ public class TestMap implements Map<String, Object> {
 
 
     @Override
-    public Object put(String key, Object value) {
+    public Object put(String key, Object konstue) {
         return null;
     }
 
@@ -65,7 +65,7 @@ public class TestMap implements Map<String, Object> {
 
 
     @Override
-    public Collection<Object> values() {
+    public Collection<Object> konstues() {
         return null;
     }
 
@@ -81,7 +81,7 @@ public class TestMap implements Map<String, Object> {
 class MyMap: TestMap()
 
 fun box(): String {
-    val map = MyMap()
+    konst map = MyMap()
     if (map.remove("aaa", 42)) return "fail 1"
     if (map.getOrDefault("aaa", 42) != 42) return "fail 2"
 

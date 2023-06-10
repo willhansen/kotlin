@@ -10,8 +10,8 @@
  */
 
 fun box(): String {
-    val u2 = mutableListOf<Int>(1, 2, 3)
-    val u3 = u1
+    konst u2 = mutableListOf<Int>(1, 2, 3)
+    konst u3 = u1
     if (u1 !== u2 && u1 === u3
     ) {
         return ("OK")
@@ -19,5 +19,5 @@ fun box(): String {
     return ("NOK")
 }
 
-val u1 = mutableListOf<Int>(1, 2, 3)
+konst u1 = mutableListOf<Int>(1, 2, 3)
 

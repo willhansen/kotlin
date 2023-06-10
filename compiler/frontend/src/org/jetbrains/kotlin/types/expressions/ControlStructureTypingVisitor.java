@@ -246,7 +246,7 @@ public class ControlStructureTypingVisitor extends ExpressionTypingVisitor {
         );
 
         KtExpression condition = expression.getCondition();
-        // Extract data flow info from condition itself without taking value into account
+        // Extract data flow info from condition itself without taking konstue into account
         DataFlowInfo dataFlowInfo = checkCondition(condition, context);
 
         KtExpression body = expression.getBody();
@@ -826,7 +826,7 @@ public class ControlStructureTypingVisitor extends ExpressionTypingVisitor {
         KtDeclaration parentDeclaration = context.getContextParentOfType(expression, KtDeclaration.class);
 
         if (parentDeclaration instanceof KtParameter) {
-            // In a default value for parameter
+            // In a default konstue for parameter
             context.trace.report(RETURN_NOT_ALLOWED.on(expression));
         }
 

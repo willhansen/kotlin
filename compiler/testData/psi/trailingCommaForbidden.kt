@@ -5,8 +5,8 @@ class A<T1, T2> where
     T2: Iterable<Iterable<Number>>, { }
 
 class A(
-    val x: String,
-    val y: String,,
+    konst x: String,
+    konst y: String,,
     ) {
     constructor(,) {}
 }
@@ -34,27 +34,27 @@ fun foo() = listOf(
     )
 
 fun foo() {
-    val x = x[
+    konst x = x[
             1,
             3,
             ,]
-    val y = x[,]
-    val z1 = x[,1]
-    val z2 = x[,,1]
-    val z3 = x[,1,]
+    konst y = x[,]
+    konst z1 = x[,1]
+    konst z2 = x[,,1]
+    konst z3 = x[,1,]
 }
 
 fun main() {
-    val x = { x: Comparable<Comparable<Number>>,
+    konst x = { x: Comparable<Comparable<Number>>,
               y: Iterable<Iterable<Number>>,
               , ->
         println("1")
     }
-    val y = { , ->
+    konst y = { , ->
         println("1")
     }
-    val () = Pair(1,2)
-    val (,) = Pair(1,2)
+    konst () = Pair(1,2)
+    konst (,) = Pair(1,2)
 }
 
 fun foo(x: Any) = when (x) {

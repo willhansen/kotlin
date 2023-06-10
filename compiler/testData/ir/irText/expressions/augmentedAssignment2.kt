@@ -6,10 +6,10 @@ operator fun A.timesAssign(s: String) {}
 operator fun A.divAssign(s: String) {}
 operator fun A.remAssign(s: String) {}
 
-val p = A()
+konst p = A()
 
 fun testVariable() {
-    val a = A()
+    konst a = A()
     a += "+="
     a -= "-="
     a *= "*="

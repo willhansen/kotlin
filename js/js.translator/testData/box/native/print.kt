@@ -4,11 +4,11 @@
 // IGNORE_BACKEND: JS_IR_ES6
 // KJS_WITH_FULL_RUNTIME
 // SKIP_MINIFICATION
-// This test uses eval
+// This test uses ekonst
 // SKIP_NODE_JS
 package foo
 
-val EXPECTED = """Hello, World
+konst EXPECTED = """Hello, World
 ^^
 ^^
 ^^
@@ -16,7 +16,7 @@ val EXPECTED = """Hello, World
 ##null23##
 """
 
-val EXPECTED_NEWLINE_FOR_EACH = """Hello
+konst EXPECTED_NEWLINE_FOR_EACH = """Hello
 , World
 
 ^^
@@ -36,7 +36,7 @@ external var buffer: String = definedExternally
 fun test(expected: String, initCode: String, getResult: () -> String) {
     buffer = ""
 
-    eval("kotlin.kotlin.io.output = new $initCode")
+    ekonst("kotlin.kotlin.io.output = new $initCode")
 
     print("Hello")
     print(", World")
@@ -49,7 +49,7 @@ fun test(expected: String, initCode: String, getResult: () -> String) {
     print("##")
     println()
 
-    val actual = getResult()
+    konst actual = getResult()
 
     assertEquals(expected, actual, initCode)
 }
@@ -64,7 +64,7 @@ fun box(): String {
     }
 
     test(EXPECTED, "kotlin.kotlin.io.BufferedOutput()") {
-        eval("kotlin.kotlin.io.output.buffer") as String
+        ekonst("kotlin.kotlin.io.output.buffer") as String
     }
 
     test(EXPECTED, "kotlin.kotlin.io.BufferedOutputToConsoleLog()") {

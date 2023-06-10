@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.fir.backend
 
 import org.jetbrains.kotlin.constant.ConstantValue
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 import org.jetbrains.kotlin.fir.expressions.FirQualifiedAccessExpression
@@ -18,24 +18,24 @@ import org.jetbrains.kotlin.name.Name
 class ConstValueProviderImpl(
     components: Fir2IrComponents,
 ) : ConstValueProvider() {
-    override val session: FirSession = components.session
-    override val evaluatedConstTracker: EvaluatedConstTracker = components.configuration.evaluatedConstTracker
+    override konst session: FirSession = components.session
+    override konst ekonstuatedConstTracker: EkonstuatedConstTracker = components.configuration.ekonstuatedConstTracker
 
     override fun findConstantValueFor(firExpression: FirExpression?): ConstantValue<*>? {
-        val firFile = processingFirFile
+        konst firFile = processingFirFile
         if (firExpression == null || firFile == null) return null
 
-        val fileName = firFile.packageFqName.child(Name.identifier(firFile.name)).asString()
+        konst fileName = firFile.packageFqName.child(Name.identifier(firFile.name)).asString()
         return if (firExpression is FirQualifiedAccessExpression) {
             // TODO check that this behavior is expected in ConversionUtils and if not fix it
-            val calleeReference = firExpression.calleeReference
-            val start = calleeReference.source?.startOffsetSkippingComments() ?: calleeReference.source?.startOffset ?: UNDEFINED_OFFSET
-            val end = firExpression.source?.endOffset ?: return null
-            evaluatedConstTracker.load(start, end, fileName)
+            konst calleeReference = firExpression.calleeReference
+            konst start = calleeReference.source?.startOffsetSkippingComments() ?: calleeReference.source?.startOffset ?: UNDEFINED_OFFSET
+            konst end = firExpression.source?.endOffset ?: return null
+            ekonstuatedConstTracker.load(start, end, fileName)
         } else {
-            val start = firExpression.source?.startOffset ?: return null
-            val end = firExpression.source?.endOffset ?: return null
-            evaluatedConstTracker.load(start, end, fileName)
+            konst start = firExpression.source?.startOffset ?: return null
+            konst end = firExpression.source?.endOffset ?: return null
+            ekonstuatedConstTracker.load(start, end, fileName)
         }
     }
 }

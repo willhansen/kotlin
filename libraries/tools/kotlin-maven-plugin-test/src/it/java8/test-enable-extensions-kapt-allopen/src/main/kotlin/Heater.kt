@@ -3,5 +3,5 @@ package coffee
 interface Heater {
     fun on()
     fun off()
-    val isHot: Boolean
+    konst isHot: Boolean
 }

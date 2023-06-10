@@ -33,7 +33,7 @@ import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant;
 import org.jetbrains.kotlin.resolve.constants.IntegerLiteralTypeConstructor;
 import org.jetbrains.kotlin.resolve.constants.IntegerValueTypeConstant;
 import org.jetbrains.kotlin.resolve.constants.IntegerValueTypeConstructor;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.resolve.scopes.LexicalScope;
 import org.jetbrains.kotlin.types.*;
 import org.jetbrains.kotlin.types.checker.KotlinTypeChecker;
@@ -58,7 +58,7 @@ public class ArgumentTypeResolver {
     @NotNull private final TypeResolver typeResolver;
     @NotNull private final KotlinBuiltIns builtIns;
     @NotNull private final ReflectionTypes reflectionTypes;
-    @NotNull private final ConstantExpressionEvaluator constantExpressionEvaluator;
+    @NotNull private final ConstantExpressionEkonstuator constantExpressionEkonstuator;
     @NotNull private final FunctionPlaceholders functionPlaceholders;
     @NotNull private final ModuleDescriptor moduleDescriptor;
     @NotNull private final KotlinTypeChecker kotlinTypeChecker;
@@ -70,7 +70,7 @@ public class ArgumentTypeResolver {
             @NotNull TypeResolver typeResolver,
             @NotNull KotlinBuiltIns builtIns,
             @NotNull ReflectionTypes reflectionTypes,
-            @NotNull ConstantExpressionEvaluator constantExpressionEvaluator,
+            @NotNull ConstantExpressionEkonstuator constantExpressionEkonstuator,
             @NotNull FunctionPlaceholders functionPlaceholders,
             @NotNull ModuleDescriptor moduleDescriptor,
             @NotNull KotlinTypeChecker kotlinTypeChecker
@@ -78,7 +78,7 @@ public class ArgumentTypeResolver {
         this.typeResolver = typeResolver;
         this.builtIns = builtIns;
         this.reflectionTypes = reflectionTypes;
-        this.constantExpressionEvaluator = constantExpressionEvaluator;
+        this.constantExpressionEkonstuator = constantExpressionEkonstuator;
         this.functionPlaceholders = functionPlaceholders;
         this.moduleDescriptor = moduleDescriptor;
         this.kotlinTypeChecker = kotlinTypeChecker;
@@ -111,8 +111,8 @@ public class ArgumentTypeResolver {
     ) {
         if (context.checkArguments != CheckArgumentTypesMode.CHECK_VALUE_ARGUMENTS) return;
 
-        for (ValueArgument valueArgument : context.call.getValueArguments()) {
-            KtExpression argumentExpression = valueArgument.getArgumentExpression();
+        for (ValueArgument konstueArgument : context.call.getValueArguments()) {
+            KtExpression argumentExpression = konstueArgument.getArgumentExpression();
             if (argumentExpression != null && !(argumentExpression instanceof KtLambdaExpression)) {
                 checkArgumentTypeWithNoCallee(context, argumentExpression);
             }
@@ -134,8 +134,8 @@ public class ArgumentTypeResolver {
     private void checkTypesForFunctionArgumentsWithNoCallee(@NotNull CallResolutionContext<?> context) {
         if (context.checkArguments != CheckArgumentTypesMode.CHECK_VALUE_ARGUMENTS) return;
 
-        for (ValueArgument valueArgument : context.call.getValueArguments()) {
-            KtExpression argumentExpression = valueArgument.getArgumentExpression();
+        for (ValueArgument konstueArgument : context.call.getValueArguments()) {
+            KtExpression argumentExpression = konstueArgument.getArgumentExpression();
             if (argumentExpression != null && isFunctionLiteralArgument(argumentExpression, context)) {
                 checkArgumentTypeWithNoCallee(context, argumentExpression);
             }
@@ -380,12 +380,12 @@ public class ArgumentTypeResolver {
                            builtIns, Annotations.Companion.getEMPTY(), null, Collections.emptyList(), Collections.emptyList(), null, DONT_CARE
                    );
         }
-        List<KtParameter> valueParameters = function.getValueParameters();
+        List<KtParameter> konstueParameters = function.getValueParameters();
         TemporaryBindingTrace temporaryTrace = TemporaryBindingTrace.create(
                 trace, "trace to resolve function literal parameter types");
-        List<KotlinType> parameterTypes = new ArrayList<>(valueParameters.size());
-        List<Name> parameterNames = new ArrayList<>(valueParameters.size());
-        for (KtParameter parameter : valueParameters) {
+        List<KotlinType> parameterTypes = new ArrayList<>(konstueParameters.size());
+        List<Name> parameterNames = new ArrayList<>(konstueParameters.size());
+        for (KtParameter parameter : konstueParameters) {
             parameterTypes.add(resolveTypeRefWithDefault(parameter.getTypeReference(), scope, temporaryTrace, DONT_CARE));
             Name name = parameter.getNameAsName();
             if (name == null) {
@@ -476,13 +476,13 @@ public class ArgumentTypeResolver {
             if (typeConstructor instanceof IntegerValueTypeConstructor) {
                 IntegerValueTypeConstructor constructor = (IntegerValueTypeConstructor) typeConstructor;
                 KotlinType primitiveType = TypeUtils.getPrimitiveNumberType(constructor, expectedType);
-                constantExpressionEvaluator.updateNumberType(primitiveType, expression, statementFilter, trace);
+                constantExpressionEkonstuator.updateNumberType(primitiveType, expression, statementFilter, trace);
                 return primitiveType;
             }
             if (typeConstructor instanceof IntegerLiteralTypeConstructor) {
                 IntegerLiteralTypeConstructor constructor = (IntegerLiteralTypeConstructor) typeConstructor;
                 KotlinType primitiveType = TypeUtils.getPrimitiveNumberType(constructor, expectedType);
-                constantExpressionEvaluator.updateNumberType(primitiveType, expression, statementFilter, trace);
+                constantExpressionEkonstuator.updateNumberType(primitiveType, expression, statementFilter, trace);
                 return primitiveType;
             }
         }

@@ -11,7 +11,7 @@ public class A {
 fun box(): String {
     // There is a null check on both arguments of MutableMap.remove, so we expect this code to throw an exception.
     // Which exception this is depends on the language version (it's a NullPointerException in Kotlin 1.4).
-    val m = mutableMapOf<A, A>()
+    konst m = mutableMapOf<A, A>()
     try {
         m.remove(A.nil(), A())
     } catch (e: Exception) {

@@ -5,7 +5,7 @@ package kt1078
 
 fun test() : B {
     do {
-        val x = foo()
+        konst x = foo()
     } while(x.bar()) // x is not visible here!
     return B()
 }

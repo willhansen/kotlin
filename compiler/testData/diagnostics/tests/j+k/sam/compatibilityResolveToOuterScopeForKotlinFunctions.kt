@@ -5,7 +5,7 @@ object Test0 {
     fun foo(x: () -> String): String = ""
 
     fun test(f: () -> Unit) {
-        val result = foo(f)
+        konst result = foo(f)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int")!>result<!>
     }
 }
@@ -40,7 +40,7 @@ object Test3 {
     fun foo(n: Number, f: () -> Unit): String = ""
 
     fun test(f: () -> Unit) {
-        val result = foo(1, f)
+        konst result = foo(1, f)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>result<!>
     }
 }
@@ -52,7 +52,7 @@ object Test4 {
     fun bar() {}
 
     fun test() {
-        val result = foo(1, ::bar)
+        konst result = foo(1, ::bar)
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>result<!>
     }
 }

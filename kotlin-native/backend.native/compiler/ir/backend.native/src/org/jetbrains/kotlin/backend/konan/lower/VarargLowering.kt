@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-internal class VarargInjectionLowering constructor(val context: KonanBackendContext): DeclarationContainerLoweringPass {
+internal class VarargInjectionLowering constructor(konst context: KonanBackendContext): DeclarationContainerLoweringPass {
     override fun lower(irDeclarationContainer: IrDeclarationContainer) {
         irDeclarationContainer.declarations.forEach{
             when (it) {
@@ -67,16 +67,16 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
                 return declaration
             }
 
-            val transformer = this
+            konst transformer = this
 
             private fun replaceEmptyParameterWithEmptyArray(expression: IrFunctionAccessExpression) {
-                val callee = expression.symbol.owner
+                konst callee = expression.symbol.owner
                 log { "call of: ${callee.fqNameForIrSerialization}" }
                 context.createIrBuilder(owner, expression.startOffset, expression.endOffset).apply {
-                    callee.valueParameters.forEach {
+                    callee.konstueParameters.forEach {
                         log { "varargElementType: ${it.varargElementType} expr: ${ir2string(expression.getValueArgument(it.index))}" }
                     }
-                    callee.valueParameters
+                    callee.konstueParameters
                         .filter { it.varargElementType != null && expression.getValueArgument(it.index) == null }
                         .forEach {
                             expression.putValueArgument(
@@ -101,11 +101,11 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
             override fun visitVararg(expression: IrVararg): IrExpression {
                 expression.transformChildrenVoid(transformer)
 
-                val hasSpreadElement = hasSpreadElement(expression)
-                val type = expression.varargElementType
-                val arrayHandle = arrayType(expression.type)
-                val irBuilder = context.createIrBuilder(owner, expression.startOffset, expression.endOffset)
-                val isConstantVararg = expression.elements.all {
+                konst hasSpreadElement = hasSpreadElement(expression)
+                konst type = expression.varargElementType
+                konst arrayHandle = arrayType(expression.type)
+                konst irBuilder = context.createIrBuilder(owner, expression.startOffset, expression.endOffset)
+                konst isConstantVararg = expression.elements.all {
                     it is IrConst<*> || it is IrConstantValue
                 }
                 if (isConstantVararg) {
@@ -124,23 +124,23 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
                 return irBuilder.irBlock(expression, null, expression.type) {
                     log { "$expression: array type:$type, is array of primitives ${!expression.type.isArray()}" }
 
-                    val vars = expression.elements.map {
+                    konst vars = expression.elements.map {
                         it to irTemporary(
                                 (it as? IrSpreadElement)?.expression ?: it as IrExpression,
                                 "elem".synthesizedString,
                         )
                     }.toMap()
-                    val arraySize = calculateArraySize(arrayHandle, hasSpreadElement, scope, expression, vars)
-                    val array = arrayHandle.createArray(this, expression.varargElementType, arraySize)
+                    konst arraySize = calculateArraySize(arrayHandle, hasSpreadElement, scope, expression, vars)
+                    konst array = arrayHandle.createArray(this, expression.varargElementType, arraySize)
 
-                    val arrayTmpVariable = irTemporary(array, "array".synthesizedString)
+                    konst arrayTmpVariable = irTemporary(array, "array".synthesizedString)
                     lateinit var indexTmpVariable: IrVariable
                     if (hasSpreadElement)
                         indexTmpVariable = irTemporary(kIntZero, "index".synthesizedString, isMutable = true)
                     expression.elements.forEachIndexed { i, element ->
                         irBuilder.at(element.startOffset, element.endOffset)
                         log { "element:$i> ${ir2string(element)}" }
-                        val dst = vars[element]!!
+                        konst dst = vars[element]!!
                         if (element !is IrSpreadElement) {
                             +irCall(arrayHandle.setMethodSymbol).apply {
                                 dispatchReceiver = irGet(arrayTmpVariable)
@@ -150,7 +150,7 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
                             if (hasSpreadElement)
                                 +incrementVariable(indexTmpVariable, kIntOne)
                         } else {
-                            val arraySizeVariable = irTemporary(irArraySize(arrayHandle, irGet(dst)), "length".synthesizedString)
+                            konst arraySizeVariable = irTemporary(irArraySize(arrayHandle, irGet(dst)), "length".synthesizedString)
                             +irCall(arrayHandle.copyIntoSymbol.owner).apply {
                                 extensionReceiver = irGet(dst)
                                 putValueArgument(0, irGet(arrayTmpVariable))  /* destination */
@@ -168,28 +168,28 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
         })
     }
 
-    private val symbols = context.ir.symbols
-    private val intPlusInt = symbols.getBinaryOperator(
+    private konst symbols = context.ir.symbols
+    private konst intPlusInt = symbols.getBinaryOperator(
             OperatorNameConventions.PLUS, context.irBuiltIns.intType, context.irBuiltIns.intType
     ).owner
 
     private fun arrayType(type: IrType): ArrayHandle {
-        val arrayClass = type.classifierOrFail
+        konst arrayClass = type.classifierOrFail
         return arrayToHandle[arrayClass] ?: error(arrayClass)
     }
 
     private fun IrBuilderWithScope.intPlus() = irCall(intPlusInt)
-    private fun IrBuilderWithScope.increment(expression: IrExpression, value: IrExpression): IrExpression {
+    private fun IrBuilderWithScope.increment(expression: IrExpression, konstue: IrExpression): IrExpression {
         return intPlus().apply {
             dispatchReceiver = expression
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         }
     }
 
-    private fun IrBuilderWithScope.incrementVariable(variable: IrVariable, value: IrExpression): IrExpression {
+    private fun IrBuilderWithScope.incrementVariable(variable: IrVariable, konstue: IrExpression): IrExpression {
         return irSet(variable.symbol, intPlus().apply {
             dispatchReceiver = irGet(variable)
-            putValueArgument(0, value)
+            putValueArgument(0, konstue)
         })
     }
 
@@ -197,17 +197,17 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
         context.createIrBuilder(scope.scopeOwnerSymbol, expression.startOffset, expression.endOffset).run {
             if (!hasSpreadElement)
                 return irConstInt(expression.elements.size)
-            val notSpreadElementCount = expression.elements.filter { it !is IrSpreadElement}.size
-            val initialValue = irConstInt(notSpreadElementCount) as IrExpression
+            konst notSpreadElementCount = expression.elements.filter { it !is IrSpreadElement}.size
+            konst initialValue = irConstInt(notSpreadElementCount) as IrExpression
             return vars.filter{it.key is IrSpreadElement}.toList().fold( initial = initialValue) { result, it ->
-                val arraySize = irArraySize(arrayHandle, irGet(it.second))
+                konst arraySize = irArraySize(arrayHandle, irGet(it.second))
                 increment(result, arraySize)
             }
         }
     }
 
     private fun IrBuilderWithScope.irArraySize(arrayHandle: ArrayHandle, expression: IrExpression): IrExpression {
-        val arraySize = irCall(arrayHandle.sizeGetterSymbol.owner).apply {
+        konst arraySize = irCall(arrayHandle.sizeGetterSymbol.owner).apply {
             dispatchReceiver = expression
         }
         return arraySize
@@ -220,22 +220,22 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
         context.log { "VARARG-INJECTOR:    ${msg()}" }
     }
 
-    abstract inner class ArrayHandle(val arraySymbol: IrClassSymbol) {
-        val setMethodSymbol = with(arraySymbol.owner.functions) {
+    abstract inner class ArrayHandle(konst arraySymbol: IrClassSymbol) {
+        konst setMethodSymbol = with(arraySymbol.owner.functions) {
             // For unsigned types use set method.
             singleOrNull { it.name == KonanNameConventions.setWithoutBoundCheck } ?: single { it.name == OperatorNameConventions.SET }
         }
-        val sizeGetterSymbol = arraySymbol.getPropertyGetter("size")!!
-        val copyIntoSymbol = symbols.copyInto[arraySymbol]!!
-        val copyOfSymbol = symbols.copyOf[arraySymbol]!!
-        protected val singleParameterConstructor =
-                arraySymbol.owner.constructors.find { it.valueParameters.size == 1 }!!
+        konst sizeGetterSymbol = arraySymbol.getPropertyGetter("size")!!
+        konst copyIntoSymbol = symbols.copyInto[arraySymbol]!!
+        konst copyOfSymbol = symbols.copyOf[arraySymbol]!!
+        protected konst singleParameterConstructor =
+                arraySymbol.owner.constructors.find { it.konstueParameters.size == 1 }!!
 
         abstract fun createArray(builder: IrBuilderWithScope, elementType: IrType, size: IrExpression): IrExpression
         abstract fun createStatic(
                 builder: IrBuilderWithScope,
                 elementType: IrType,
-                values: List<IrConstantValue>): IrConstantValue
+                konstues: List<IrConstantValue>): IrConstantValue
     }
 
     inner class ReferenceArrayHandle : ArrayHandle(symbols.array) {
@@ -249,10 +249,10 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
         override fun createStatic(
                 builder: IrBuilderWithScope,
                 elementType: IrType,
-                values: List<IrConstantValue>): IrConstantValue {
+                konstues: List<IrConstantValue>): IrConstantValue {
             return builder.irConstantArray(
                     arraySymbol.typeWith(listOf(elementType)),
-                    values
+                    konstues
             )
         }
     }
@@ -266,42 +266,42 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
             }
         }
 
-        override fun createStatic(builder: IrBuilderWithScope, elementType: IrType, values: List<IrConstantValue>): IrConstantValue {
+        override fun createStatic(builder: IrBuilderWithScope, elementType: IrType, konstues: List<IrConstantValue>): IrConstantValue {
             return builder.irConstantArray(
                     arraySymbol.defaultType,
-                    values
+                    konstues
             )
         }
     }
 
     inner class UnsignedArrayHandle(
             arraySymbol: IrClassSymbol,
-            private val wrappedArrayHandle: PrimitiveArrayHandle
+            private konst wrappedArrayHandle: PrimitiveArrayHandle
     ) : ArrayHandle(arraySymbol) {
 
         override fun createArray(builder: IrBuilderWithScope, elementType: IrType, size: IrExpression): IrExpression {
-            val wrappedArray = wrappedArrayHandle.createArray(builder, elementType, size)
+            konst wrappedArray = wrappedArrayHandle.createArray(builder, elementType, size)
             return builder.irCall(singleParameterConstructor).apply {
                 putValueArgument(0, wrappedArray)
             }
         }
 
-        override fun createStatic(builder: IrBuilderWithScope, elementType: IrType, values: List<IrConstantValue>): IrConstantValue {
-            val casted = values.map {
+        override fun createStatic(builder: IrBuilderWithScope, elementType: IrType, konstues: List<IrConstantValue>): IrConstantValue {
+            konst casted = konstues.map {
                 require(it.type == elementType)
                 when (it) {
                     is IrConstantPrimitive -> {
-                        val castedConst = when (it.value.kind) {
-                            IrConstKind.Byte -> IrConstImpl.byte(it.startOffset, it.endOffset, symbols.byte.defaultType, it.value.value as Byte)
-                            IrConstKind.Short -> IrConstImpl.short(it.startOffset, it.endOffset, symbols.short.defaultType, it.value.value as Short)
-                            IrConstKind.Int -> IrConstImpl.int(it.startOffset, it.endOffset, symbols.int.defaultType, it.value.value as Int)
-                            IrConstKind.Long -> IrConstImpl.long(it.startOffset, it.endOffset, symbols.long.defaultType, it.value.value as Long)
+                        konst castedConst = when (it.konstue.kind) {
+                            IrConstKind.Byte -> IrConstImpl.byte(it.startOffset, it.endOffset, symbols.byte.defaultType, it.konstue.konstue as Byte)
+                            IrConstKind.Short -> IrConstImpl.short(it.startOffset, it.endOffset, symbols.short.defaultType, it.konstue.konstue as Short)
+                            IrConstKind.Int -> IrConstImpl.int(it.startOffset, it.endOffset, symbols.int.defaultType, it.konstue.konstue as Int)
+                            IrConstKind.Long -> IrConstImpl.long(it.startOffset, it.endOffset, symbols.long.defaultType, it.konstue.konstue as Long)
                             else -> error("Unsupported unsigned constant")
                         }
                         builder.irConstantPrimitive(castedConst)
                     }
                     is IrConstantObject -> {
-                        it.valueArguments.singleOrNull()
+                        it.konstueArguments.singleOrNull()
                                 ?: error("Constant of type ${it.type.render()} is expected to have exactly one field")
                     }
                     else -> error("unsigned integer can't be represented as ${it::class.qualifiedName}")
@@ -316,11 +316,11 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
         }
     }
 
-    private val primitiveArrayHandles = PrimitiveType.values().associate { it to PrimitiveArrayHandle(it) }
+    private konst primitiveArrayHandles = PrimitiveType.konstues().associate { it to PrimitiveArrayHandle(it) }
 
-    private val unsignedArrayHandles = UnsignedType.values().mapNotNull { unsignedType ->
+    private konst unsignedArrayHandles = UnsignedType.konstues().mapNotNull { unsignedType ->
         symbols.unsignedTypesToUnsignedArrays[unsignedType]?.let {
-            val primitiveType = when (unsignedType) {
+            konst primitiveType = when (unsignedType) {
                 UnsignedType.UBYTE -> PrimitiveType.BYTE
                 UnsignedType.USHORT -> PrimitiveType.SHORT
                 UnsignedType.UINT -> PrimitiveType.INT
@@ -331,12 +331,12 @@ internal class VarargInjectionLowering constructor(val context: KonanBackendCont
     }
 
 
-    val arrayToHandle =
-        (primitiveArrayHandles.values + unsignedArrayHandles + ReferenceArrayHandle()).associateBy { it.arraySymbol }
+    konst arrayToHandle =
+        (primitiveArrayHandles.konstues + unsignedArrayHandles + ReferenceArrayHandle()).associateBy { it.arraySymbol }
 
 }
 
-private fun IrBuilderWithScope.irConstInt(value: Int): IrConst<Int> =
-    IrConstImpl.int(startOffset, endOffset, context.irBuiltIns.intType, value)
-private val IrBuilderWithScope.kIntZero get() = irConstInt(0)
-private val IrBuilderWithScope.kIntOne get() = irConstInt(1)
+private fun IrBuilderWithScope.irConstInt(konstue: Int): IrConst<Int> =
+    IrConstImpl.int(startOffset, endOffset, context.irBuiltIns.intType, konstue)
+private konst IrBuilderWithScope.kIntZero get() = irConstInt(0)
+private konst IrBuilderWithScope.kIntOne get() = irConstInt(1)

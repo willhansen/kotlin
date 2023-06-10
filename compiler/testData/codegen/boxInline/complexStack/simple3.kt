@@ -17,7 +17,7 @@ inline fun processRecords(block: (String) -> String): String {
 import test.*
 
 fun box(): String {
-    val result = processRecords { "B" + it }
+    konst result = processRecords { "B" + it }
 
     return if (result == "BOK1") "OK" else "fail: $result"
 }

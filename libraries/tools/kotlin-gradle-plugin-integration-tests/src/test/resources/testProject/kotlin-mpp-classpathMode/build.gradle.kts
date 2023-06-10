@@ -9,7 +9,7 @@ plugins {
 
 tasks.create("listCollectedErrors") {
     doFirst {
-        val exceptionCollector = serviceOf<ClassPathModeExceptionCollector>()
+        konst exceptionCollector = serviceOf<ClassPathModeExceptionCollector>()
         logger.quiet("Collected ${exceptionCollector.exceptions.size} exception(s)")
         exceptionCollector.exceptions.forEach { e ->
             logger.log(LogLevel.ERROR, "Exception: ${e.message}", e)

@@ -37,12 +37,12 @@ fun getJavaPrimitiveType7():Class<*>? {
 }
 
 fun getJavaPrimitiveType8():Class<*>? {
-    val i:Int? = 1
+    konst i:Int? = 1
     return i!!::class.javaPrimitiveType
 }
 
 fun getJavaPrimitiveType9():Class<*>? {
-    val i:Int = 1
+    konst i:Int = 1
     return i::class.javaPrimitiveType
 }
 

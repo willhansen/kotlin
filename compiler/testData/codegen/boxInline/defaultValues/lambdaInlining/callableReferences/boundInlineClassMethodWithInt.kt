@@ -4,7 +4,7 @@
 // FILE: 1.kt
 package test
 
-inline class C(val x: Int) {
+inline class C(konst x: Int) {
     fun f() = x.toString()
 }
 
@@ -14,6 +14,6 @@ inline fun inlineFun(lambda: () -> String = C(1)::f): String = lambda()
 import test.*
 
 fun box(): String {
-    val result = inlineFun()
+    konst result = inlineFun()
     return if (result == "1") "OK" else result
 }

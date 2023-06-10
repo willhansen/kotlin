@@ -33,7 +33,7 @@ enum class ProgressionDirection {
 /** Information about a loop that is required by [HeaderProcessor] to build a [ForLoopHeader]. */
 sealed class HeaderInfo {
     /**
-     * Returns a copy of this [HeaderInfo] with the values reversed.
+     * Returns a copy of this [HeaderInfo] with the konstues reversed.
      * I.e., first and last are swapped, step is negated.
      * Returns null if the iterable cannot be iterated in reverse.
      */
@@ -42,29 +42,29 @@ sealed class HeaderInfo {
 
 // TODO: Update comments and member names in this file.
 internal class FloatingPointRangeHeaderInfo(
-    val start: IrExpression,
-    val endInclusive: IrExpression
+    konst start: IrExpression,
+    konst endInclusive: IrExpression
 ) : HeaderInfo() {
     // No reverse() in ClosedFloatingPointRange.
     override fun asReversed(): HeaderInfo? = null
 }
 
 internal class ComparableRangeInfo(
-    val start: IrExpression,
-    val endInclusive: IrExpression
+    konst start: IrExpression,
+    konst endInclusive: IrExpression
 ) : HeaderInfo() {
     override fun asReversed(): HeaderInfo? = null
 }
 
 sealed class NumericHeaderInfo(
-    val progressionType: ProgressionType,
-    val first: IrExpression,
-    val last: IrExpression,
-    val step: IrExpression,
-    val isLastInclusive: Boolean,
-    val canCacheLast: Boolean,
-    val isReversed: Boolean,
-    val direction: ProgressionDirection
+    konst progressionType: ProgressionType,
+    konst first: IrExpression,
+    konst last: IrExpression,
+    konst step: IrExpression,
+    konst isLastInclusive: Boolean,
+    konst canCacheLast: Boolean,
+    konst isReversed: Boolean,
+    konst direction: ProgressionDirection
 ) : HeaderInfo()
 
 /** Information about a for-loop over a progression. */
@@ -77,8 +77,8 @@ class ProgressionHeaderInfo(
     isReversed: Boolean = false,
     canOverflow: Boolean? = null,
     direction: ProgressionDirection,
-    val additionalStatements: List<IrStatement> = listOf(),
-    val originalLastInclusive: IrExpression? = null
+    konst additionalStatements: List<IrStatement> = listOf(),
+    konst originalLastInclusive: IrExpression? = null
 ) : NumericHeaderInfo(
     progressionType, first, last, step, isLastInclusive,
     canCacheLast = true,
@@ -102,11 +102,11 @@ class ProgressionHeaderInfo(
             )
         }
 
-    val canOverflow: Boolean by lazy {
+    konst canOverflow: Boolean by lazy {
         if (canOverflow != null) return@lazy canOverflow
 
         // We can't determine the safe limit at compile-time if "step" is not const.
-        val stepValueAsLong = step.constLongValue ?: return@lazy true
+        konst stepValueAsLong = step.constLongValue ?: return@lazy true
 
         if (direction == ProgressionDirection.UNKNOWN) {
             // If we don't know the direction, we can't be sure which limit to use.
@@ -134,27 +134,27 @@ class ProgressionHeaderInfo(
 
         if (progressionType is UnsignedProgressionType) {
             // "step" is still signed for unsigned progressions.
-            val lastValueAsULong = last.constLongValue?.toULong() ?: return@lazy true  // If "last" is not a const Number or Char.
+            konst lastValueAsULong = last.constLongValue?.toULong() ?: return@lazy true  // If "last" is not a const Number or Char.
             when (direction) {
                 ProgressionDirection.DECREASING -> {
-                    val constLimitAsULong = progressionType.minValueAsLong.toULong()
+                    konst constLimitAsULong = progressionType.minValueAsLong.toULong()
                     lastValueAsULong < (constLimitAsULong - stepValueAsLong.toULong())
                 }
                 ProgressionDirection.INCREASING -> {
-                    val constLimitAsULong = progressionType.maxValueAsLong.toULong()
+                    konst constLimitAsULong = progressionType.maxValueAsLong.toULong()
                     lastValueAsULong > (constLimitAsULong - stepValueAsLong.toULong())
                 }
                 else -> error("Unexpected progression direction")
             }
         } else {
-            val lastValueAsLong = last.constLongValue ?: return@lazy true  // If "last" is not a const Number or Char.
+            konst lastValueAsLong = last.constLongValue ?: return@lazy true  // If "last" is not a const Number or Char.
             when (direction) {
                 ProgressionDirection.DECREASING -> {
-                    val constLimitAsLong = progressionType.minValueAsLong
+                    konst constLimitAsLong = progressionType.minValueAsLong
                     lastValueAsLong < (constLimitAsLong - stepValueAsLong)
                 }
                 ProgressionDirection.INCREASING -> {
-                    val constLimitAsLong = progressionType.maxValueAsLong
+                    konst constLimitAsLong = progressionType.maxValueAsLong
                     lastValueAsLong > (constLimitAsLong - stepValueAsLong)
                 }
                 else -> error("Unexpected progression direction")
@@ -191,8 +191,8 @@ class IndexedGetHeaderInfo(
     last: IrExpression,
     step: IrExpression,
     canCacheLast: Boolean = true,
-    val objectVariable: IrVariable,
-    val expressionHandler: IndexedGetIterationHandler
+    konst objectVariable: IrVariable,
+    konst expressionHandler: IndexedGetIterationHandler
 ) : NumericHeaderInfo(
     IntProgressionType(symbols), first, last, step,
     isLastInclusive = false,
@@ -205,7 +205,7 @@ class IndexedGetHeaderInfo(
     // with a copy of the array elements, which means that the original array can be modified with
     // no effect on the iteration over the reversed array. That is:
     //
-    //   val arr = intArrayOf(1, 2, 3, 4)
+    //   konst arr = intArrayOf(1, 2, 3, 4)
     //   for (i in arr.reversed()) {
     //     arr[0] = 0  // Does not affect iteration over reversed array
     //     print(i)    // Should print "4321"
@@ -219,8 +219,8 @@ class IndexedGetHeaderInfo(
 /**
  * Information about a for-loop over an iterable returned by `withIndex()`.
  */
-class WithIndexHeaderInfo(val nestedInfo: HeaderInfo) : HeaderInfo() {
-    // We cannot easily reverse `withIndex()` so we do not attempt to handle it. We would have to start from the last value of the index,
+class WithIndexHeaderInfo(konst nestedInfo: HeaderInfo) : HeaderInfo() {
+    // We cannot easily reverse `withIndex()` so we do not attempt to handle it. We would have to start from the last konstue of the index,
     // which is not easily calculable (or even impossible) in most cases.
     override fun asReversed(): HeaderInfo? = null
 }
@@ -228,7 +228,7 @@ class WithIndexHeaderInfo(val nestedInfo: HeaderInfo) : HeaderInfo() {
 /**
  * Information about a for-loop over an Iterable or Sequence.
  */
-internal class IterableHeaderInfo(val iteratorVariable: IrVariable) : HeaderInfo() {
+internal class IterableHeaderInfo(konst iteratorVariable: IrVariable) : HeaderInfo() {
     override fun asReversed(): HeaderInfo? = null
 }
 
@@ -256,12 +256,12 @@ internal interface HeaderInfoHandler<E : IrExpression, D> {
 
 internal abstract class HeaderInfoBuilder(
     context: CommonBackendContext,
-    private val scopeOwnerSymbol: () -> IrSymbol,
-    private val allowUnsignedBounds: Boolean = false
+    private konst scopeOwnerSymbol: () -> IrSymbol,
+    private konst allowUnsignedBounds: Boolean = false
 ) : IrElementVisitor<HeaderInfo?, IrCall?> {
-    private val symbols = context.ir.symbols
+    private konst symbols = context.ir.symbols
 
-    protected open val progressionHandlers = listOf(
+    protected open konst progressionHandlers = listOf(
         CollectionIndicesHandler(context),
         ArrayIndicesHandler(context),
         CharSequenceIndicesHandler(context),
@@ -272,8 +272,8 @@ internal abstract class HeaderInfoBuilder(
         StepHandler(context, this)
     )
 
-    protected abstract val callHandlers: List<HeaderInfoHandler<IrCall, Nothing?>>
-    protected abstract val expressionHandlers: List<HeaderInfoHandler<IrExpression, Nothing?>>
+    protected abstract konst callHandlers: List<HeaderInfoHandler<IrCall, Nothing?>>
+    protected abstract konst expressionHandlers: List<HeaderInfoHandler<IrExpression, Nothing?>>
 
     override fun visitElement(element: IrElement, data: IrCall?): HeaderInfo? = null
 
@@ -281,13 +281,13 @@ internal abstract class HeaderInfoBuilder(
     override fun visitCall(expression: IrCall, data: IrCall?): HeaderInfo? {
         // Return the HeaderInfo from the first successful match.
         // First, try to match a `reversed()` or `withIndex()` call.
-        val callHeaderInfo = callHandlers.firstNotNullOfOrNull { it.handle(expression, data, null, scopeOwnerSymbol()) }
+        konst callHeaderInfo = callHandlers.firstNotNullOfOrNull { it.handle(expression, data, null, scopeOwnerSymbol()) }
         if (callHeaderInfo != null)
             return callHeaderInfo
 
         // Try to match a call to build a progression (e.g., `.indices`, `downTo`).
-        val progressionType = ProgressionType.fromIrType(expression.type, symbols, allowUnsignedBounds)
-        val progressionHeaderInfo =
+        konst progressionType = ProgressionType.fromIrType(expression.type, symbols, allowUnsignedBounds)
+        konst progressionHeaderInfo =
             progressionType?.run { progressionHandlers.firstNotNullOfOrNull { it.handle(expression, data, this, scopeOwnerSymbol()) } }
 
         return progressionHeaderInfo ?: super.visitCall(expression, data)
@@ -302,7 +302,7 @@ internal abstract class HeaderInfoBuilder(
 
 internal class DefaultHeaderInfoBuilder(context: CommonBackendContext, scopeOwnerSymbol: () -> IrSymbol) :
     HeaderInfoBuilder(context, scopeOwnerSymbol) {
-    override val callHandlers = listOf(
+    override konst callHandlers = listOf(
         ReversedHandler(context, this),
         WithIndexHandler(
             context,
@@ -315,7 +315,7 @@ internal class DefaultHeaderInfoBuilder(context: CommonBackendContext, scopeOwne
 
     // NOTE: StringIterationHandler MUST come before CharSequenceIterationHandler.
     // String is subtype of CharSequence and therefore its handler is more specialized.
-    override val expressionHandlers = listOf(
+    override konst expressionHandlers = listOf(
         ArrayIterationHandler(context),
         DefaultProgressionHandler(context),
         StringIterationHandler(context),
@@ -331,14 +331,14 @@ internal class DefaultHeaderInfoBuilder(context: CommonBackendContext, scopeOwne
 internal class NestedHeaderInfoBuilderForWithIndex(context: CommonBackendContext, scopeOwnerSymbol: () -> IrSymbol) :
     HeaderInfoBuilder(context, scopeOwnerSymbol) {
     // NOTE: No WithIndexHandler; we cannot lower `iterable.withIndex().withIndex()`.
-    override val callHandlers = listOf(
+    override konst callHandlers = listOf(
         ReversedHandler(context, this)
     )
 
     // NOTE: StringIterationHandler MUST come before CharSequenceIterationHandler.
     // String is subtype of CharSequence and therefore its handler is more specialized.
     // Default(Iterable|Sequence)Handler must come last as they handle iterables not handled by more specialized handlers.
-    override val expressionHandlers = listOf(
+    override konst expressionHandlers = listOf(
         ArrayIterationHandler(context),
         DefaultProgressionHandler(context),
         StringIterationHandler(context),

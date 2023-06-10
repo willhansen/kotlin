@@ -11,7 +11,7 @@ private fun createAnonObject() =
             fun qux() {}
         }
 
-private val propOfAnonObject = object : IFoo, IBar {
+private konst propOfAnonObject = object : IFoo, IBar {
             override fun foo() {}
             fun qux() {}
         }

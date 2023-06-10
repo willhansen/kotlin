@@ -4,7 +4,7 @@ import java.util.concurrent.CyclicBarrier
 import kotlin.concurrent.thread
 import kotlin.reflect.jvm.*
 
-const val N_THREADS = 50
+const konst N_THREADS = 50
 
 class Delegate {
     operator fun getValue(x: Any?, y: Any?): String = "OK"
@@ -14,9 +14,9 @@ class Delegate {
 var property by Delegate()
 
 fun main() {
-    val reference = ::property
+    konst reference = ::property
 
-    val gate = CyclicBarrier(N_THREADS + 1)
+    konst gate = CyclicBarrier(N_THREADS + 1)
     var fail = AtomicReference<Throwable?>(null)
     var finished = AtomicInteger(0)
     for (i in 0 until N_THREADS) {

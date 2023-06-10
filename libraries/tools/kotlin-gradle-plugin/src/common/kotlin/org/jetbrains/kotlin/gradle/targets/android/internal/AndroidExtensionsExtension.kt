@@ -8,19 +8,19 @@ package org.jetbrains.kotlin.gradle.internal
 
 import java.util.*
 
-enum class CacheImplementation(val optionName: String) {
+enum class CacheImplementation(konst optionName: String) {
     HASH_MAP("hashMap"),
     SPARSE_ARRAY("sparseArray"),
     NONE("none")
 }
 
-enum class AndroidExtensionsFeature(val featureName: String) {
+enum class AndroidExtensionsFeature(konst featureName: String) {
     VIEWS("views"),
     PARCELIZE("parcelize");
 
     internal companion object {
         internal fun parseFeatures(features: Set<String>): SortedSet<AndroidExtensionsFeature> {
-            fun find(name: String) = AndroidExtensionsFeature.values().firstOrNull { it.featureName == name }
+            fun find(name: String) = AndroidExtensionsFeature.konstues().firstOrNull { it.featureName == name }
                 ?: error("Can't find Android Extensions feature $name")
             return features.mapTo(sortedSetOf()) { find(it) }
         }
@@ -30,7 +30,7 @@ enum class AndroidExtensionsFeature(val featureName: String) {
 open class AndroidExtensionsExtension {
     open var isExperimental: Boolean = false
 
-    open var features: Set<String> = AndroidExtensionsFeature.values().mapTo(mutableSetOf()) { it.featureName }
+    open var features: Set<String> = AndroidExtensionsFeature.konstues().mapTo(mutableSetOf()) { it.featureName }
 
     open var defaultCacheImplementation: CacheImplementation = CacheImplementation.HASH_MAP
 }

@@ -9,7 +9,7 @@
  * EXCEPTION: runtime
  */
 
-open class Bar(val x: Int)
+open class Bar(konst x: Int)
 
 open class Foo {
      object MyObject : Bar(MyObject.x)

@@ -1,7 +1,7 @@
 // !LANGUAGE: -InlineClasses, -JvmInlineValueClasses
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-inline class Foo(val x: Int)
+inline class Foo(konst x: Int)
 
 <!WRONG_MODIFIER_TARGET!>inline<!> annotation class InlineAnn
 <!WRONG_MODIFIER_TARGET!>inline<!> object InlineObject

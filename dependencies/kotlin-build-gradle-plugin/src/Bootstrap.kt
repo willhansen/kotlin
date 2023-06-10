@@ -7,12 +7,12 @@ import java.net.URI
 
 var Project.bootstrapKotlinVersion: String
     get() = property("bootstrapKotlinVersion") as String
-    private set(value) {
-        extensions.extraProperties.set("bootstrapKotlinVersion", value)
+    private set(konstue) {
+        extensions.extraProperties.set("bootstrapKotlinVersion", konstue)
     }
 
 var Project.bootstrapKotlinRepo: String?
     get() = property("bootstrapKotlinRepo") as String?
-    private set(value) {
-        extensions.extraProperties.set("bootstrapKotlinRepo", value)
+    private set(konstue) {
+        extensions.extraProperties.set("bootstrapKotlinRepo", konstue)
     }

@@ -1,7 +1,7 @@
 // FILE: Hello.kt
 private class <!PACKAGE_OR_CLASSIFIER_REDECLARATION!>Hello<!>()
 {
-    val a = 4
+    konst a = 4
 }
 
 fun test() {

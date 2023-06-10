@@ -17,7 +17,7 @@ import java.io.Closeable
 import java.nio.file.Files
 import java.nio.file.Path
 
-private class CacheMock(private val throwsException: Boolean = false) : Closeable {
+private class CacheMock(private konst throwsException: Boolean = false) : Closeable {
     var closed = false
     override fun close() {
         if (throwsException) {
@@ -34,7 +34,7 @@ private class InMemoryStorageWrapperMock : InMemoryStorageWrapper<Any, Any> {
         reset = true
     }
 
-    override val keys: Collection<Any> = emptyList()
+    override konst keys: Collection<Any> = emptyList()
 
     override fun clean() {}
 
@@ -42,11 +42,11 @@ private class InMemoryStorageWrapperMock : InMemoryStorageWrapper<Any, Any> {
 
     override fun close() {}
 
-    override fun append(key: Any, value: Any) {}
+    override fun append(key: Any, konstue: Any) {}
 
     override fun remove(key: Any) {}
 
-    override fun set(key: Any, value: Any) {}
+    override fun set(key: Any, konstue: Any) {}
 
     override fun get(key: Any) = null
 
@@ -73,7 +73,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testCachesClosedOnSuccessfulTransaction() {
-        val cacheMock = CacheMock()
+        konst cacheMock = CacheMock()
         useTransaction {
             cachesManager = cacheMock
             markAsSuccessful()
@@ -83,7 +83,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testCachesClosedOnNonSuccessfulTransaction() {
-        val cacheMock = CacheMock()
+        konst cacheMock = CacheMock()
         useTransaction {
             cachesManager = cacheMock
         }
@@ -92,7 +92,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testCachesClosedOnExceptionInsideTransaction() {
-        val cacheMock = CacheMock()
+        konst cacheMock = CacheMock()
         assertThrows<Exception> {
             useTransaction {
                 cachesManager = cacheMock
@@ -104,7 +104,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testCachesCloseExceptionIsWrapped() {
-        val cacheMock = CacheMock(true)
+        konst cacheMock = CacheMock(true)
         assertThrows<CachesManagerCloseException> {
             useTransaction {
                 cachesManager = cacheMock
@@ -114,7 +114,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testInMemoryWrappersAreResetOnUnsuccessfulTransaction() {
-        val inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
+        konst inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
         useTransaction {
             registerInMemoryStorageWrapper(inMemoryStorageWrapperMock)
         }
@@ -123,7 +123,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testInMemoryWrappersAreResetOnExecutionException() {
-        val inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
+        konst inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
         assertThrows<Exception> {
             useTransaction {
                 registerInMemoryStorageWrapper(inMemoryStorageWrapperMock)
@@ -136,7 +136,7 @@ abstract class BaseCompilationTransactionTest {
 
     @Test
     fun testInMemoryWrappersAreNotResetOnSuccessfulTransaction() {
-        val inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
+        konst inMemoryStorageWrapperMock = InMemoryStorageWrapperMock()
         useTransaction {
             registerInMemoryStorageWrapper(inMemoryStorageWrapperMock)
             markAsSuccessful()
@@ -150,7 +150,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testModifyingExistingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             registerAddedOrChangedFile(file)
@@ -162,7 +162,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testAddingNewFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             registerAddedOrChangedFile(file)
             Files.write(file, "other".toByteArray())
@@ -173,7 +173,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testDeletingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             deleteFile(file)
@@ -184,7 +184,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testDeletingNotExistingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             deleteFile(file)
             markAsSuccessful()
@@ -194,7 +194,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testModifyingExistingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             registerAddedOrChangedFile(file)
@@ -205,7 +205,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testAddingNewFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             registerAddedOrChangedFile(file)
             Files.write(file, "other".toByteArray())
@@ -215,7 +215,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testDeletingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             deleteFile(file)
@@ -225,7 +225,7 @@ class NonRecoverableCompilationTransactionTest : BaseCompilationTransactionTest(
 
     @Test
     fun testDeletingNotExistingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             deleteFile(file)
         }
@@ -238,7 +238,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testModifyingExistingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             registerAddedOrChangedFile(file)
@@ -250,7 +250,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testAddingNewFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             registerAddedOrChangedFile(file)
             Files.write(file, "other".toByteArray())
@@ -261,7 +261,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testDeletingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             deleteFile(file)
@@ -272,7 +272,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testDeletingNotExistingFileOnSuccess() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             deleteFile(file)
             markAsSuccessful()
@@ -282,7 +282,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testModifyingExistingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             registerAddedOrChangedFile(file)
@@ -293,7 +293,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testAddingNewFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             registerAddedOrChangedFile(file)
             Files.write(file, "other".toByteArray())
@@ -303,7 +303,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testDeletingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         Files.write(file, "something".toByteArray())
         useTransaction {
             deleteFile(file)
@@ -313,7 +313,7 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testDeletingNotExistingFileOnFailure() {
-        val file = workingDir.resolve("1.txt")
+        konst file = workingDir.resolve("1.txt")
         useTransaction {
             deleteFile(file)
         }
@@ -322,8 +322,8 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testChangesAreRevertedOnExecutionException() {
-        val file1 = workingDir.resolve("1.txt")
-        val file2 = workingDir.resolve("2.txt")
+        konst file1 = workingDir.resolve("1.txt")
+        konst file2 = workingDir.resolve("2.txt")
         Files.write(file1, "something".toByteArray())
         assertThrows<Exception> {
             useTransaction {
@@ -341,8 +341,8 @@ class RecoverableCompilationTransactionTest : BaseCompilationTransactionTest() {
 
     @Test
     fun testChangesAreRevertedOnCachesCloseException() {
-        val file1 = workingDir.resolve("1.txt")
-        val file2 = workingDir.resolve("2.txt")
+        konst file1 = workingDir.resolve("1.txt")
+        konst file2 = workingDir.resolve("2.txt")
         Files.write(file1, "something".toByteArray())
         assertThrows<CachesManagerCloseException> {
             useTransaction {

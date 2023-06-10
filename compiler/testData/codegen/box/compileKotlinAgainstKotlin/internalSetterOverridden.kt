@@ -12,7 +12,7 @@ class Derived: Base() {
 // MODULE: main()(lib)
 // FILE: B.kt
 fun box(): String {
-    val d = Derived()
+    konst d = Derived()
     d.x = "OK"
     return d.x
 }

@@ -35,12 +35,12 @@ import org.jetbrains.kotlin.types.typeUtil.isTypeParameter
 
 object ReferencingToUnderscoreNamedParameterOfCatchBlockChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val descriptor = resolvedCall.resultingDescriptor
+        konst descriptor = resolvedCall.resultingDescriptor
 
         if (descriptor !is LocalVariableDescriptor || !descriptor.isUnderscoreNamed) return
 
-        val sourceElement = descriptor.source as? KotlinSourceElement ?: return
-        val ktParameter = sourceElement.psi as? KtParameter ?: return
+        konst sourceElement = descriptor.source as? KotlinSourceElement ?: return
+        konst ktParameter = sourceElement.psi as? KtParameter ?: return
 
         if (ktParameter.isCatchParameter) {
             context.trace.reportDiagnosticOnce(Errors.RESOLVED_TO_UNDERSCORE_NAMED_CATCH_PARAMETER.on(reportOn))

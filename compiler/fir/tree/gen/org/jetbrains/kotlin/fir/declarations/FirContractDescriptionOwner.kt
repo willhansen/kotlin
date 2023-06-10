@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 sealed interface FirContractDescriptionOwner : FirElement {
-    override val source: KtSourceElement?
-    val contractDescription: FirContractDescription
+    override konst source: KtSourceElement?
+    konst contractDescription: FirContractDescription
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitContractDescriptionOwner(this, data)
 

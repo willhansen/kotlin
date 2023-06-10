@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1298
 package foo
 
-class A(val s: String)
+class A(konst s: String)
 
 fun <T> castsNotNullToNullableT(a: Any) {
     a as T
@@ -36,7 +36,7 @@ fun <T : Any> castsNullableToNotNullT(a: Any?) {
 }
 
 fun box(): String {
-    val a = A("OK")
+    konst a = A("OK")
 
     success("castsNotNullToNullableT<A>(a)") { castsNotNullToNullableT<A>(a) }
     success("castsNullableToNullableT<A>(a)") { castsNullableToNullableT<A>(a) }

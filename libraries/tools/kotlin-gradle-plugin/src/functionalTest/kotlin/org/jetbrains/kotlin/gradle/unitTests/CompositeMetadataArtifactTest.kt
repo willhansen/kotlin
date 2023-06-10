@@ -18,16 +18,16 @@ import kotlin.test.*
 class CompositeMetadataArtifactTest {
 
     @get:Rule
-    val temporaryFolder = TemporaryFolder()
+    konst temporaryFolder = TemporaryFolder()
 
     @Test
     fun `empty jar - contains no metadataBinary and no cinteropMetadataBinaries`() {
-        val primaryArtifactContent = temporaryFolder.newFolder()
-        val primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
+        konst primaryArtifactContent = temporaryFolder.newFolder()
+        konst primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
         zipTo(primaryArtifactFile, primaryArtifactContent)
         assertTrue(primaryArtifactFile.isFile, "Expected primaryArtifactFile.isFile")
 
-        val metadataArtifact = CompositeMetadataArtifactImpl(
+        konst metadataArtifact = CompositeMetadataArtifactImpl(
             moduleDependencyIdentifier = ModuleDependencyIdentifier("test-group", "test-module"),
             moduleDependencyVersion = "1.0.0",
             kotlinProjectStructureMetadata = createProjectStructureMetadata(
@@ -42,7 +42,7 @@ class CompositeMetadataArtifactTest {
 
         metadataArtifact.read { artifactContent ->
             if (artifactContent.sourceSets.size != 1) fail("Expected one SourceSet in metadataArtifact")
-            val sourceSetContent = artifactContent.sourceSets.first()
+            konst sourceSetContent = artifactContent.sourceSets.first()
             assertEquals("testSourceSetName", sourceSetContent.sourceSetName)
             assertNull(sourceSetContent.metadataBinary, "Expected no 'metadataBinary' listed for SourceSet")
 
@@ -57,17 +57,17 @@ class CompositeMetadataArtifactTest {
 
     @Test
     fun `stub metadata library - can be unzipped`() {
-        val testSourceSetName = "testSourceSetName"
-        val primaryArtifactContent = temporaryFolder.newFolder()
-        val stubFile = primaryArtifactContent.resolve(testSourceSetName).resolve("stub.txt")
+        konst testSourceSetName = "testSourceSetName"
+        konst primaryArtifactContent = temporaryFolder.newFolder()
+        konst stubFile = primaryArtifactContent.resolve(testSourceSetName).resolve("stub.txt")
         stubFile.parentFile.mkdirs()
         stubFile.writeText("stub!")
 
-        val primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
+        konst primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
         zipTo(primaryArtifactFile, primaryArtifactContent)
         assertTrue(primaryArtifactFile.isFile, "Expected primaryArtifactFile.isFile")
 
-        val metadataArtifact = CompositeMetadataArtifactImpl(
+        konst metadataArtifact = CompositeMetadataArtifactImpl(
             moduleDependencyIdentifier = ModuleDependencyIdentifier("test-group", "test-module"),
             moduleDependencyVersion = "1.0.0",
             kotlinProjectStructureMetadata = createProjectStructureMetadata(
@@ -82,15 +82,15 @@ class CompositeMetadataArtifactTest {
             if (artifactContent.sourceSets.size != 1)
                 fail("Expected exactly one SourceSet in ${artifactContent.sourceSets.map { it.sourceSetName }}")
 
-            val sourceSet = artifactContent.getSourceSet(testSourceSetName)
-            val metadataOutputDirectory = temporaryFolder.newFolder()
-            val metadataFile = metadataOutputDirectory.resolve("testSourceSet.klib")
+            konst sourceSet = artifactContent.getSourceSet(testSourceSetName)
+            konst metadataOutputDirectory = temporaryFolder.newFolder()
+            konst metadataFile = metadataOutputDirectory.resolve("testSourceSet.klib")
 
-            val metadataBinary = sourceSet.metadataBinary ?: fail("Missing metadataBinary for ${sourceSet.sourceSetName}")
+            konst metadataBinary = sourceSet.metadataBinary ?: fail("Missing metadataBinary for ${sourceSet.sourceSetName}")
             assertTrue(metadataBinary.copyTo(metadataFile), "Expected 'copyTo' to perform copy action")
             assertTrue(metadataFile.isFile)
 
-            val unzippedMetadataFile = metadataOutputDirectory.resolve("unzipped")
+            konst unzippedMetadataFile = metadataOutputDirectory.resolve("unzipped")
             unzipTo(unzippedMetadataFile, metadataFile)
 
             assertEquals(setOf(unzippedMetadataFile.resolve("stub.txt")), unzippedMetadataFile.listFiles().orEmpty().toSet())
@@ -100,12 +100,12 @@ class CompositeMetadataArtifactTest {
 
     @Test
     fun `empty jar - returns no cinteropMetadataBinaries`() {
-        val primaryArtifactContent = temporaryFolder.newFolder()
-        val primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
+        konst primaryArtifactContent = temporaryFolder.newFolder()
+        konst primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
         zipTo(primaryArtifactFile, primaryArtifactContent)
         assertTrue(primaryArtifactFile.isFile, "Expected primaryArtifactFile.isFile")
 
-        val metadataArtifact = CompositeMetadataArtifactImpl(
+        konst metadataArtifact = CompositeMetadataArtifactImpl(
             moduleDependencyIdentifier = ModuleDependencyIdentifier("test-group", "test-module"),
             moduleDependencyVersion = "1.0.0",
             kotlinProjectStructureMetadata = createProjectStructureMetadata(
@@ -116,7 +116,7 @@ class CompositeMetadataArtifactTest {
         )
 
         metadataArtifact.read { artifactContent ->
-            val sourceSet = artifactContent.getSourceSet("testSourceSetName")
+            konst sourceSet = artifactContent.getSourceSet("testSourceSetName")
             assertEquals(listOf(sourceSet), artifactContent.sourceSets)
 
             assertEquals(emptyList(), sourceSet.cinteropMetadataBinaries, "Expected empty cinteropMetadataBinaries")
@@ -126,7 +126,7 @@ class CompositeMetadataArtifactTest {
     @Test
     fun `copy metadataBinary`() {
         /* Setup Artifact content */
-        val primaryArtifactContent = temporaryFolder.newFolder()
+        konst primaryArtifactContent = temporaryFolder.newFolder()
 
         primaryArtifactContent.resolve("sourceSetA/sourceSetAStub1.txt")
             .withParentDirectoriesCreated()
@@ -145,10 +145,10 @@ class CompositeMetadataArtifactTest {
             .writeText("Content of sourceSetB stub2")
 
         /* Create metadata jar */
-        val primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
+        konst primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
         zipTo(primaryArtifactFile, primaryArtifactContent)
 
-        val metadataArtifact = CompositeMetadataArtifactImpl(
+        konst metadataArtifact = CompositeMetadataArtifactImpl(
             moduleDependencyIdentifier = ModuleDependencyIdentifier("test-group", "test-module"),
             moduleDependencyVersion = "1.0.0",
             kotlinProjectStructureMetadata = createProjectStructureMetadata(
@@ -162,11 +162,11 @@ class CompositeMetadataArtifactTest {
         )
 
         metadataArtifact.read { artifactContent ->
-            val metadataOutputDirectory = temporaryFolder.newFolder()
+            konst metadataOutputDirectory = temporaryFolder.newFolder()
 
             /* Extract and assert sourceSetA */
             artifactContent.getSourceSet("sourceSetA").also { sourceSetA ->
-                val sourceSetAMetadataFile = metadataOutputDirectory.resolve("sourceSetA.klib")
+                konst sourceSetAMetadataFile = metadataOutputDirectory.resolve("sourceSetA.klib")
                 assertNotNull(sourceSetA.metadataBinary).copyTo(sourceSetAMetadataFile)
                 assertTrue(sourceSetAMetadataFile.isFile, "Expected sourceSetAMetadataFile.isFile")
                 assertEquals(
@@ -182,7 +182,7 @@ class CompositeMetadataArtifactTest {
 
             /* Extract and assert sourceSetB */
             artifactContent.getSourceSet("sourceSetB").also { sourceSetB ->
-                val sourceSetBMetadataFile = metadataOutputDirectory.resolve("sourceSetB.jar")
+                konst sourceSetBMetadataFile = metadataOutputDirectory.resolve("sourceSetB.jar")
                 assertNotNull(sourceSetB.metadataBinary).copyTo(sourceSetBMetadataFile)
                 assertTrue(sourceSetBMetadataFile.isFile, "Expected sourceSetBMetadataFile.isFile")
                 assertEquals(
@@ -201,7 +201,7 @@ class CompositeMetadataArtifactTest {
     @Test
     fun `copy cinteropMetadataBinaries`() {
         /* Setup Artifact content */
-        val primaryArtifactContent = temporaryFolder.newFolder()
+        konst primaryArtifactContent = temporaryFolder.newFolder()
 
         primaryArtifactContent.resolve("sourceSetA-cinterop/interopA0/stub0")
             .withParentDirectoriesCreated()
@@ -220,10 +220,10 @@ class CompositeMetadataArtifactTest {
             .writeText("stub3 content")
 
         /* Create metadata jar */
-        val primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
+        konst primaryArtifactFile = temporaryFolder.newFile("metadata.jar")
         zipTo(primaryArtifactFile, primaryArtifactContent)
 
-        val metadataArtifact = CompositeMetadataArtifactImpl(
+        konst metadataArtifact = CompositeMetadataArtifactImpl(
             moduleDependencyIdentifier = ModuleDependencyIdentifier("test-group", "test-module"),
             moduleDependencyVersion = "1.0.0",
             kotlinProjectStructureMetadata = createProjectStructureMetadata(
@@ -239,8 +239,8 @@ class CompositeMetadataArtifactTest {
         metadataArtifact.read { artifactContent ->
             /* Assertions on sourceSetA */
             artifactContent.getSourceSet("sourceSetA").also { sourceSetA ->
-                val sourceSetAOutputDirectory = temporaryFolder.newFolder()
-                val sourceSetAInteropMetadataFiles = sourceSetA.cinteropMetadataBinaries.map { cinteropLibrary ->
+                konst sourceSetAOutputDirectory = temporaryFolder.newFolder()
+                konst sourceSetAInteropMetadataFiles = sourceSetA.cinteropMetadataBinaries.map { cinteropLibrary ->
                     sourceSetAOutputDirectory.resolve("${cinteropLibrary.cinteropLibraryName}.klib").also { file ->
                         cinteropLibrary.copyTo(file)
                     }
@@ -249,7 +249,7 @@ class CompositeMetadataArtifactTest {
 
                 /* Assertions on interopA0 */
                 run {
-                    val interopA0MetadataFile = sourceSetAInteropMetadataFiles.firstOrNull { it.name == "interopA0.klib" }
+                    konst interopA0MetadataFile = sourceSetAInteropMetadataFiles.firstOrNull { it.name == "interopA0.klib" }
                         ?: fail("Failed to find 'interopA0.klib'")
                     assertZipContentEquals(
                         temporaryFolder,
@@ -260,7 +260,7 @@ class CompositeMetadataArtifactTest {
 
                 /* Assertions on interopA1 */
                 run {
-                    val interopA1MetadataFile = sourceSetAInteropMetadataFiles.firstOrNull { it.name == "interopA1.klib" }
+                    konst interopA1MetadataFile = sourceSetAInteropMetadataFiles.firstOrNull { it.name == "interopA1.klib" }
                         ?: fail("Failed to find 'interopA1.klib")
                     assertZipContentEquals(
                         temporaryFolder,
@@ -272,14 +272,14 @@ class CompositeMetadataArtifactTest {
 
             /* Assertions on sourceSetB */
             artifactContent.getSourceSet("sourceSetB").also { sourceSetB ->
-                val sourceSetBOutputDirectory = temporaryFolder.newFolder()
-                val sourceSetBInteropMetadataFiles = sourceSetB.cinteropMetadataBinaries.map { cinteropLibrary ->
+                konst sourceSetBOutputDirectory = temporaryFolder.newFolder()
+                konst sourceSetBInteropMetadataFiles = sourceSetB.cinteropMetadataBinaries.map { cinteropLibrary ->
                     sourceSetBOutputDirectory.resolve("${cinteropLibrary.cinteropLibraryName}.klib").also { file ->
                         cinteropLibrary.copyTo(file)
                     }
                 }
                 assertEquals(1, sourceSetBInteropMetadataFiles.size, "Expected only one cinterop in sourceSetB")
-                val interopB0MetadataFile = sourceSetBInteropMetadataFiles.firstOrNull { it.name == "interopB0.klib" }
+                konst interopB0MetadataFile = sourceSetBInteropMetadataFiles.firstOrNull { it.name == "interopB0.klib" }
                     ?: fail("Failed to find 'interopB0.klib'")
                 assertZipContentEquals(
                     temporaryFolder,
@@ -299,7 +299,7 @@ private fun createProjectStructureMetadata(
     sourceSetModuleDependencies: Map<String, Set<ModuleDependencyIdentifier>> = emptyMap(),
     hostSpecificSourceSets: Set<String> = emptySet(),
     sourceSetNames: Set<String> = hostSpecificSourceSets +
-            sourceSetNamesByVariantName.values.flatten() +
+            sourceSetNamesByVariantName.konstues.flatten() +
             sourceSetsDependsOnRelation.keys +
             sourceSetCInteropMetadataDirectory.keys +
             sourceSetBinaryLayout.keys +

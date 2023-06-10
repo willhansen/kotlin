@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val map = mutableMapOf(1 to 1, 2 to 2, 3 to 3)
+    konst map = mutableMapOf(1 to 1, 2 to 2, 3 to 3)
     var optimized = ""
     for (i in 0..map.size - 1) optimized += map[i]
 }

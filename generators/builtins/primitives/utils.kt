@@ -7,7 +7,7 @@ package org.jetbrains.kotlin.generators.builtins.numbers.primitives
 
 import org.jetbrains.kotlin.generators.builtins.PrimitiveType
 
-internal const val END_LINE = "\n"
+internal const konst END_LINE = "\n"
 
 internal fun PrimitiveType.castToIfNecessary(otherType: PrimitiveType): String {
     if (this !in PrimitiveType.onlyNumeric || otherType !in PrimitiveType.onlyNumeric) {
@@ -35,5 +35,5 @@ internal fun operatorSign(methodName: String): String {
 }
 
 internal fun String.toPrimitiveType(): PrimitiveType {
-    return PrimitiveType.valueOf(this.uppercase())
+    return PrimitiveType.konstueOf(this.uppercase())
 }

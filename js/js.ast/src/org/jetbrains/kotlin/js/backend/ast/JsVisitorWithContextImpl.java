@@ -108,7 +108,7 @@ public class JsVisitorWithContextImpl extends JsVisitorWithContext {
         }
     }
 
-    private class LvalueContext extends NodeContext<JsExpression> {
+    private class LkonstueContext extends NodeContext<JsExpression> {
     }
 
     private class NodeContext<T extends JsNode> extends JsContext<T> {
@@ -148,8 +148,8 @@ public class JsVisitorWithContextImpl extends JsVisitorWithContext {
     }
 
     @Override
-    protected JsExpression doAcceptLvalue(JsExpression expr) {
-        return new LvalueContext().traverse(expr);
+    protected JsExpression doAcceptLkonstue(JsExpression expr) {
+        return new LkonstueContext().traverse(expr);
     }
 
     @Override

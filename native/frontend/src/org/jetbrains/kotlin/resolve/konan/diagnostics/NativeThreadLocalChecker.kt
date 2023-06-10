@@ -24,19 +24,19 @@ internal fun DeclarationChecker.check(
 ) {
     if (successCondition(descriptor)) return
     descriptor.annotations.findAnnotation(annotationFqName)?.let {
-        val reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
+        konst reportLocation = DescriptorToSourceUtils.getSourceFromAnnotation(it) ?: declaration
         context.trace.report(error.on(reportLocation))
     }
 }
 
 object NativeThreadLocalChecker : DeclarationChecker {
-    private val threadLocalFqName = FqName("kotlin.native.concurrent.ThreadLocal")
+    private konst threadLocalFqName = FqName("kotlin.native.concurrent.ThreadLocal")
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         check(threadLocalFqName, declaration, descriptor, context, ErrorsNative.INAPPLICABLE_THREAD_LOCAL) {
-            val isVariable = descriptor is VariableDescriptor
-            val hasBackingField = descriptor is PropertyDescriptor && descriptor.hasBackingField(context.trace.bindingContext)
-            val hasDelegate = declaration is KtProperty && declaration.delegate != null
+            konst isVariable = descriptor is VariableDescriptor
+            konst hasBackingField = descriptor is PropertyDescriptor && descriptor.hasBackingField(context.trace.bindingContext)
+            konst hasDelegate = declaration is KtProperty && declaration.delegate != null
             (isVariable && (hasBackingField || hasDelegate)) ||
                     (descriptor is ClassDescriptor && descriptor.kind == ClassKind.OBJECT)
         }

@@ -10,8 +10,8 @@ import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.extensions.ExtensionPointName
 
-open class ApplicationExtensionDescriptor<T : Any>(name: String, private val extensionClass: Class<T>) {
-    private val extensionPointName: ExtensionPointName<T> = ExtensionPointName.create(name)
+open class ApplicationExtensionDescriptor<T : Any>(name: String, private konst extensionClass: Class<T>) {
+    private konst extensionPointName: ExtensionPointName<T> = ExtensionPointName.create(name)
 
     fun registerExtensionPoint() {
         CoreApplicationEnvironment.registerExtensionPoint(
@@ -26,7 +26,7 @@ open class ApplicationExtensionDescriptor<T : Any>(name: String, private val ext
     }
 
     fun getInstances(): List<T> {
-        val projectArea = ApplicationManager.getApplication().extensionArea
+        konst projectArea = ApplicationManager.getApplication().extensionArea
         if (!projectArea.hasExtensionPoint(extensionPointName.name)) return listOf()
 
         return projectArea.getExtensionPoint(extensionPointName).extensions.toList()

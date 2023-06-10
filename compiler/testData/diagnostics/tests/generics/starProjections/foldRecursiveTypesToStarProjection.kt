@@ -4,11 +4,11 @@
 
 object KT32183 {
     interface AGraphExecutionEntity {
-        val jobs: Sequence<AJobExecutionEntity>
+        konst jobs: Sequence<AJobExecutionEntity>
     }
 
     interface AJobExecutionEntity {
-        val meta: ProjectJob.Process<*, *>
+        konst meta: ProjectJob.Process<*, *>
     }
 
     sealed class ProjectJob {
@@ -18,7 +18,7 @@ object KT32183 {
     }
 
     fun test(graph: AGraphExecutionEntity) {
-        val statusByMeta = graph.jobs.associateBy { it.meta }
+        konst statusByMeta = graph.jobs.associateBy { it.meta }
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.Map<KT32183.ProjectJob.Process<*, *>, KT32183.AJobExecutionEntity>")!>statusByMeta<!>
     }
 }
@@ -29,7 +29,7 @@ object KT31474 {
     class C : A<C>()
 
     fun test() {
-        val a = listOf(B(), C())
+        konst a = listOf(B(), C())
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.collections.List<KT31474.A<*>>")!>a<!>
     }
 }
@@ -40,7 +40,7 @@ object KT31853 {
     interface C : A<C>
 
     fun test(b: B, c: C) {
-        val a = if (true) b else c
+        konst a = if (true) b else c
         <!DEBUG_INFO_EXPRESSION_TYPE("KT31853.A<*>")!>a<!>
     }
 }

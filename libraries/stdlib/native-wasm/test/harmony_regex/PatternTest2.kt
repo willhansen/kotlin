@@ -21,14 +21,14 @@ import kotlin.test.*
 
 class PatternTest2 {
 
-    fun assertTrue(msg: String, value: Boolean) = assertTrue(value, msg)
-    fun assertFalse(msg: String, value: Boolean) = assertFalse(value, msg)
+    fun assertTrue(msg: String, konstue: Boolean) = assertTrue(konstue, msg)
+    fun assertFalse(msg: String, konstue: Boolean) = assertFalse(konstue, msg)
 
     /**
      * Tests simple pattern compilation and matching methods
      */
     @Test fun testSimpleMatch() {
-        val regex = Regex("foo.*")
+        konst regex = Regex("foo.*")
 
         var testString = "foo123"
         assertTrue(regex.matches(testString))
@@ -47,7 +47,7 @@ class PatternTest2 {
     }
 
     @Test fun testCursors() {
-        val regex: Regex
+        konst regex: Regex
         var result: MatchResult?
 
         try {
@@ -103,7 +103,7 @@ class PatternTest2 {
     }
 
     @Test fun testGroups() {
-        val regex: Regex
+        konst regex: Regex
         var result: MatchResult?
 
         regex = Regex("(p[0-9]*)#?(q[0-9]*)")
@@ -119,7 +119,7 @@ class PatternTest2 {
         assertEquals(2, result.groups[1]!!.range.endInclusive + 1)
         assertEquals(3, result.groups[2]!!.range.start)
         assertEquals(5, result.groups[2]!!.range.endInclusive + 1)
-        assertEquals("p1#q3", result.value)
+        assertEquals("p1#q3", result.konstue)
         assertEquals("p1#q3", result.groupValues[0])
         assertEquals("p1", result.groupValues[1])
         assertEquals("q3", result.groupValues[2])
@@ -134,7 +134,7 @@ class PatternTest2 {
         assertEquals(7, result.groups[1]!!.range.endInclusive + 1)
         assertEquals(7, result.groups[2]!!.range.start)
         assertEquals(10, result.groups[2]!!.range.endInclusive + 1)
-        assertEquals("p2q42", result.value)
+        assertEquals("p2q42", result.konstue)
         assertEquals("p2q42", result.groupValues[0])
         assertEquals("p2", result.groupValues[1])
         assertEquals("q42", result.groupValues[2])
@@ -150,7 +150,7 @@ class PatternTest2 {
         assertEquals(18, result.groups[1]!!.range.endInclusive + 1)
         assertEquals(19, result.groups[2]!!.range.start)
         assertEquals(23, result.groups[2]!!.range.endInclusive + 1)
-        assertEquals("p63#q888", result.value)
+        assertEquals("p63#q888", result.konstue)
         assertEquals("p63#q888", result.groupValues[0])
         assertEquals("p63", result.groupValues[1])
         assertEquals("q888", result.groupValues[2])
@@ -246,7 +246,7 @@ class PatternTest2 {
         assertEquals("44", result!!.groupValues[1])
         assertNull(result.next())
 
-        // Test invalid unicode sequences // TODO: Double check it.
+        // Test inkonstid unicode sequences // TODO: Double check it.
         try {
             regex = Regex("\\u")
             fail("IllegalArgumentException expected")
@@ -271,7 +271,7 @@ class PatternTest2 {
         } catch (e: IllegalArgumentException) {
         }
 
-        // Test invalid hex sequences
+        // Test inkonstid hex sequences
         try {
             regex = Regex("\\x")
             fail("IllegalArgumentException expected")
@@ -309,7 +309,7 @@ class PatternTest2 {
         assertEquals("44", result!!.groupValues[1])
         assertNull(result.next())
 
-        // Test invalid octal sequences
+        // Test inkonstid octal sequences
         try {
             regex = Regex("\\08")
             fail("IllegalArgumentException expected")
@@ -361,7 +361,7 @@ class PatternTest2 {
         }
 
 
-        // Test invalid control escapes
+        // Test inkonstid control escapes
         try {
             regex = Regex("\\c")
             fail("IllegalArgumentException expected")
@@ -507,7 +507,7 @@ class PatternTest2 {
         regex = Regex("<[a-zA-Z]+\\s+[0-9]+[\\sx][^\\s]>")
         assertTrue(regex.matches("<cat \t1 x>"))
         assertFalse(regex.matches("<cat \t1  >"))
-        val result = regex.find("xyz <foo\n\r22 5> <pp \t\n \r \u000b41x\u1234><pp \nx7\rc> zzz")
+        konst result = regex.find("xyz <foo\n\r22 5> <pp \t\n \r \u000b41x\u1234><pp \nx7\rc> zzz")
         assertNotNull(result)
         assertNotNull(result!!.next())
         assertNull(result.next()!!.next())
@@ -558,7 +558,7 @@ class PatternTest2 {
         regex = Regex("\\p{Lower}+")
         assertTrue(regex.matches("abcdefghijklmnopqrstuvwxyz"))
 
-        // Invalid uses of \p{Lower}
+        // Inkonstid uses of \p{Lower}
         try {
             regex = Regex("\\p")
             fail("IllegalArgumentException expected")
@@ -605,7 +605,7 @@ class PatternTest2 {
         regex = Regex("\\p{Upper}+")
         assertTrue(regex.matches("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
 
-        // Invalid uses of \p{Upper}
+        // Inkonstid uses of \p{Upper}
         try {
             regex = Regex("\\p{Upper")
             fail("IllegalArgumentException expected")
@@ -633,7 +633,7 @@ class PatternTest2 {
             assertFalse(regex.matches("${i.toChar()}"))
         }
 
-        // Invalid uses of \p{ASCII}
+        // Inkonstid uses of \p{ASCII}
         try {
             regex = Regex("\\p{ASCII")
             fail("IllegalArgumentException expected")
@@ -850,7 +850,7 @@ class PatternTest2 {
         assertFalse(regex.matches("abc;\\Qdef;\\Qfoo99;\\E123"))
 
         regex = Regex("[a-z]+;(foo[0-9]-\\Q(...)\\E);[0-9]+")
-        val result = regex.matchEntire("abc;foo5-(...);123")
+        konst result = regex.matchEntire("abc;foo5-(...);123")
         assertNotNull(result)
         assertEquals("foo5-(...)", result!!.groupValues[1])
         assertFalse(regex.matches("abc;foo9-(xxx);789"))
@@ -872,14 +872,14 @@ class PatternTest2 {
     }
 
     @Test fun testCompile1() {
-        val regex = Regex("[0-9A-Za-z][0-9A-Za-z\\x2e\\x3a\\x2d\\x5f]*")
-        val name = "iso-8859-1"
+        konst regex = Regex("[0-9A-Za-z][0-9A-Za-z\\x2e\\x3a\\x2d\\x5f]*")
+        konst name = "iso-8859-1"
         assertTrue(regex.matches(name))
     }
 
     @Test fun testCompile2() {
-        val findString = "\\Qimport\\E"
-        val regex = Regex(findString)
+        konst findString = "\\Qimport\\E"
+        konst regex = Regex(findString)
         assertTrue(regex in "import a.A;\n\n import b.B;\nclass C {}")
     }
 
@@ -890,13 +890,13 @@ class PatternTest2 {
         regex = Regex("a$")
         result = regex.find("a\n")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         assertNull(result.next())
 
         regex = Regex("(a$)")
         result = regex.find("a\n")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         assertEquals("a", result.groupValues[1])
         assertNull(result.next())
 
@@ -904,45 +904,45 @@ class PatternTest2 {
 
         result = regex.find("a\n")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         assertNull(result.next())
 
         result = regex.find("a\nb\n")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         result = result.next()
         assertNotNull(result)
-        assertEquals("b", result!!.value)
+        assertEquals("b", result!!.konstue)
         assertNull(result.next())
 
         result = regex.find("a\nb")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         result = result.next()
         assertNotNull(result)
-        assertEquals("b", result!!.value)
+        assertEquals("b", result!!.konstue)
         assertNull(result.next())
 
         result = regex.find("\naa\r\nbb\rcc\n\n")
         assertNotNull(result)
-        assertTrue(result!!.value == "")
+        assertTrue(result!!.konstue == "")
         result = result.next()
         assertNotNull(result)
-        assertEquals("aa", result!!.value)
+        assertEquals("aa", result!!.konstue)
         result = result.next()
         assertNotNull(result)
-        assertEquals("bb", result!!.value)
+        assertEquals("bb", result!!.konstue)
         result = result.next()
         assertNotNull(result)
-        assertEquals("cc", result!!.value)
+        assertEquals("cc", result!!.konstue)
         result = result.next()
         assertNotNull(result)
-        assertTrue(result!!.value == "")
+        assertTrue(result!!.konstue == "")
         assertNull(result.next())
 
         result = regex.find("a")
         assertNotNull(result)
-        assertEquals("a", result!!.value)
+        assertEquals("a", result!!.konstue)
         assertNull(result.next())
 
         result = regex.find("")
@@ -951,16 +951,16 @@ class PatternTest2 {
         regex = Regex("^.*$")
         result = regex.find("")
         assertNotNull(result)
-        assertTrue(result!!.value == "")
+        assertTrue(result!!.konstue == "")
         assertNull(result.next())
     }
 
     @Test fun testCompile4() {
-        val findString = "\\Qpublic\\E"
-        val text = StringBuilder("    public class Class {\n" + "    public class Class {")
-        val regex = Regex(findString)
+        konst findString = "\\Qpublic\\E"
+        konst text = StringBuilder("    public class Class {\n" + "    public class Class {")
+        konst regex = Regex(findString)
 
-        val result = regex.find(text)
+        konst result = regex.find(text)
         assertNotNull(result)
         assertEquals(4, result!!.range.start)
 
@@ -972,8 +972,8 @@ class PatternTest2 {
     }
 
     @Test fun testCompile5() {
-        val p = Regex("^[0-9]")
-        val s = p.split("12", 0)
+        konst p = Regex("^[0-9]")
+        konst s = p.split("12", 0)
         assertEquals("", s[0])
         assertEquals("2", s[1])
         assertEquals(2, s.size)
@@ -1016,7 +1016,7 @@ class PatternTest2 {
     // };
 
     // A table representing the unicode character blocks
-    private val UBlocks = arrayOf(
+    private konst UBlocks = arrayOf(
             /* 0000; 007F; Basic Latin */
             UBInfo(0x0000, 0x007F, "BasicLatin"), // Character.UnicodeBlock.BASIC_LATIN
             /* 0080; 00FF; Latin-1 Supplement */

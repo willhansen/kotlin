@@ -26,9 +26,9 @@ internal fun dce(
         moduleDFG: ModuleDFG,
         devirtualizationAnalysisResult: DevirtualizationAnalysis.AnalysisResult,
 ): Set<IrFunction> {
-    val externalModulesDFG = ExternalModulesDFG(emptyList(), emptyMap(), emptyMap(), emptyMap())
+    konst externalModulesDFG = ExternalModulesDFG(emptyList(), emptyMap(), emptyMap(), emptyMap())
 
-    val callGraph = CallGraphBuilder(
+    konst callGraph = CallGraphBuilder(
             context,
             irModule,
             moduleDFG,
@@ -38,12 +38,12 @@ internal fun dce(
             nonDevirtualizedCallSitesUnfoldFactor = Int.MAX_VALUE
     ).build()
 
-    val referencedFunctions = mutableSetOf<IrFunction>()
+    konst referencedFunctions = mutableSetOf<IrFunction>()
     callGraph.rootExternalFunctions.forEach {
         if (!it.isStaticFieldInitializer)
             referencedFunctions.add(it.irFunction ?: error("No IR for: $it"))
     }
-    for (node in callGraph.directEdges.values) {
+    for (node in callGraph.directEdges.konstues) {
         if (!node.symbol.isStaticFieldInitializer)
             referencedFunctions.add(node.symbol.irFunction ?: error("No IR for: ${node.symbol}"))
         node.callSites.forEach {

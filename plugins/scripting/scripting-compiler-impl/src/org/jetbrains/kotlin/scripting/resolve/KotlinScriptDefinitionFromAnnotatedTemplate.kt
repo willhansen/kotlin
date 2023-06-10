@@ -30,13 +30,13 @@ import kotlin.script.templates.ScriptTemplateDefinition
 
 open class KotlinScriptDefinitionFromAnnotatedTemplate(
         template: KClass<out Any>,
-        val environment: Map<String, Any?>? = null,
-        val templateClasspath: List<File> = emptyList()
+        konst environment: Map<String, Any?>? = null,
+        konst templateClasspath: List<File> = emptyList()
 ) : KotlinScriptDefinition(template) {
-    val scriptFilePattern by lazy(LazyThreadSafetyMode.PUBLICATION) {
-        val pattern =
+    konst scriptFilePattern by lazy(LazyThreadSafetyMode.PUBLICATION) {
+        konst pattern =
             takeUnlessError {
-                val ann = template.annotations.firstIsInstanceOrNull<kotlin.script.templates.ScriptTemplateDefinition>()
+                konst ann = template.annotations.firstIsInstanceOrNull<kotlin.script.templates.ScriptTemplateDefinition>()
                 ann?.scriptFilePattern
             }
                     ?: takeUnlessError { template.annotations.firstIsInstanceOrNull<ScriptTemplateDefinition>()?.scriptFilePattern }
@@ -44,17 +44,17 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
         Regex(pattern)
     }
 
-    override val dependencyResolver: DependenciesResolver by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst dependencyResolver: DependenciesResolver by lazy(LazyThreadSafetyMode.PUBLICATION) {
         resolverFromAnnotation(template) ?:
         DependenciesResolver.NoDependencies
     }
 
     private fun resolverFromAnnotation(template: KClass<out Any>): DependenciesResolver? {
-        val defAnn = takeUnlessError {
+        konst defAnn = takeUnlessError {
             template.annotations.firstIsInstanceOrNull<kotlin.script.templates.ScriptTemplateDefinition>()
         } ?: return null
 
-        val resolver = instantiateResolver(defAnn.resolver)
+        konst resolver = instantiateResolver(defAnn.resolver)
         return when (resolver) {
             is AsyncDependenciesResolver -> AsyncDependencyResolverWrapper(resolver)
             is DependenciesResolver -> resolver
@@ -67,7 +67,7 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
             resolverClass.objectInstance?.let {
                 return it
             }
-            val constructorWithoutParameters = resolverClass.constructors.find { it.parameters.all { it.isOptional } }
+            konst constructorWithoutParameters = resolverClass.constructors.find { it.parameters.all { it.isOptional } }
             if (constructorWithoutParameters == null) {
                 log.warn("[kts] ${resolverClass.qualifiedName} must have a constructor without required parameters")
                 return null
@@ -80,11 +80,11 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
         }
     }
 
-    private val samWithReceiverAnnotations: List<String>? by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst samWithReceiverAnnotations: List<String>? by lazy(LazyThreadSafetyMode.PUBLICATION) {
         takeUnlessError { template.annotations.firstIsInstanceOrNull<kotlin.script.extensions.SamWithReceiverAnnotations>()?.annotations?.toList() }
     }
 
-    override val acceptedAnnotations: List<KClass<out Annotation>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst acceptedAnnotations: List<KClass<out Annotation>> by lazy(LazyThreadSafetyMode.PUBLICATION) {
 
         fun sameSignature(left: KFunction<*>, right: KFunction<*>): Boolean =
                 left.name == right.name &&
@@ -94,7 +94,7 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
                     it.first.name == it.second.name
                 }
 
-        val resolveFunctions = getResolveFunctions()
+        konst resolveFunctions = getResolveFunctions()
 
         dependencyResolver.unwrap()::class.memberFunctions
                 .filter { function -> resolveFunctions.any { sameSignature(function, it) } }
@@ -114,13 +114,13 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
         }
     }
 
-    override val scriptExpectedLocations: List<ScriptExpectedLocation> by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst scriptExpectedLocations: List<ScriptExpectedLocation> by lazy(LazyThreadSafetyMode.PUBLICATION) {
         takeUnlessError {
             template.annotations.firstIsInstanceOrNull<ScriptExpectedLocations>()
-        }?.value?.toList() ?: super.scriptExpectedLocations
+        }?.konstue?.toList() ?: super.scriptExpectedLocations
     }
 
-    override val name = template.simpleName!!
+    override konst name = template.simpleName!!
 
     override fun isScript(fileName: String): Boolean =
         scriptFilePattern.matches(fileName)
@@ -130,14 +130,14 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
 
     override fun toString(): String = "KotlinScriptDefinitionFromAnnotatedTemplate - ${template.simpleName}"
 
-    override val annotationsForSamWithReceivers: List<String>
+    override konst annotationsForSamWithReceivers: List<String>
         get() = samWithReceiverAnnotations ?: super.annotationsForSamWithReceivers
 
     @Deprecated("temporary workaround for missing functionality, will be replaced by the new API soon")
-    override val additionalCompilerArguments: Iterable<String>? by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    override konst additionalCompilerArguments: Iterable<String>? by lazy(LazyThreadSafetyMode.PUBLICATION) {
         takeUnlessError {
             template.annotations.firstIsInstanceOrNull<kotlin.script.templates.ScriptTemplateAdditionalCompilerArguments>()?.let {
-                val res = it.provider.primaryConstructor?.call(it.arguments.asIterable())
+                konst res = it.provider.primaryConstructor?.call(it.arguments.asIterable())
                 res
             }
         }?.getAdditionalCompilerArguments(environment)
@@ -149,21 +149,21 @@ open class KotlinScriptDefinitionFromAnnotatedTemplate(
             }
             catch (ex: Throwable) {
                 if (reportError) {
-                    log.error("Invalid script template: " + template.qualifiedName, ex)
+                    log.error("Inkonstid script template: " + template.qualifiedName, ex)
                 }
                 else {
-                    log.warn("Invalid script template: " + template.qualifiedName, ex)
+                    log.warn("Inkonstid script template: " + template.qualifiedName, ex)
                 }
                 null
             }
 
     companion object {
-        internal val log = Logger.getInstance(KotlinScriptDefinitionFromAnnotatedTemplate::class.java)
+        internal konst log = Logger.getInstance(KotlinScriptDefinitionFromAnnotatedTemplate::class.java)
     }
 }
 
 interface DependencyResolverWrapper<T : ScriptDependenciesResolver> {
-    val delegate: T
+    konst delegate: T
 }
 
 fun ScriptDependenciesResolver.unwrap(): ScriptDependenciesResolver {

@@ -5,7 +5,7 @@ import kotlin.experimental.ExperimentalTypeInference
 class A
 class B<K> {}
 class Scope<K11, K22>(
-    val key: K11,
+    konst key: K11,
 ) {
     fun emit(key: K22) {}
 }

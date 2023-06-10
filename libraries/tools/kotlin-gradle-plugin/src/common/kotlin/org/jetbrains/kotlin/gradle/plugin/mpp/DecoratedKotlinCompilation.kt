@@ -13,15 +13,15 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.compilationImpl.KotlinCompilationI
 
 @InternalKotlinGradlePluginApi
 abstract class DecoratedKotlinCompilation<T : KotlinCommonOptions> internal constructor(
-    internal val compilation: KotlinCompilationImpl,
+    internal konst compilation: KotlinCompilationImpl,
 ) : InternalKotlinCompilation<T> by compilation as InternalKotlinCompilation<T> {
     override fun toString(): String = compilation.toString()
 }
 
-internal inline val <reified T : KotlinCommonOptions> InternalKotlinCompilation<T>.decoratedInstance: DecoratedKotlinCompilation<T>
+internal inline konst <reified T : KotlinCommonOptions> InternalKotlinCompilation<T>.decoratedInstance: DecoratedKotlinCompilation<T>
     get() = if (this is DecoratedKotlinCompilation<T>) this
     else (target.compilations.getByName(compilationName).internal.castKotlinOptionsType<T>() as DecoratedKotlinCompilation<T>)
 
-internal inline val <reified T : KotlinCommonOptions> InternalKotlinCompilation<T>.decoratedInstanceOrNull: DecoratedKotlinCompilation<T>?
+internal inline konst <reified T : KotlinCommonOptions> InternalKotlinCompilation<T>.decoratedInstanceOrNull: DecoratedKotlinCompilation<T>?
     get() = if (this is DecoratedKotlinCompilation<T>) this
     else (target.compilations.findByName(compilationName)?.internal?.castKotlinOptionsType<T>() as? DecoratedKotlinCompilation<T>)

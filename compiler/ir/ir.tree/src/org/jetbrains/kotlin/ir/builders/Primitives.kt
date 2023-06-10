@@ -36,7 +36,7 @@ fun primitiveOp1(
     IrCallImpl(
         startOffset, endOffset, primitiveOpReturnType, primitiveOpSymbol,
         typeArgumentsCount = 0,
-        valueArgumentsCount = 0,
+        konstueArgumentsCount = 0,
         origin = origin
     ).also {
         it.dispatchReceiver = dispatchReceiver
@@ -54,7 +54,7 @@ fun primitiveOp2(
         primitiveOpReturnType,
         primitiveOpSymbol,
         typeArgumentsCount = 0,
-        valueArgumentsCount = 2,
+        konstueArgumentsCount = 2,
         origin = origin
     ).apply {
         putValueArgument(0, argument1)
@@ -80,8 +80,8 @@ fun IrGeneratorContextInterface.constFalse(startOffset: Int, endOffset: Int) =
     IrConstImpl.constFalse(startOffset, endOffset, irBuiltIns.booleanType)
 
 fun IrGeneratorContextInterface.elseBranch(elseExpr: IrExpression): IrElseBranch {
-    val startOffset = elseExpr.startOffset
-    val endOffset = elseExpr.endOffset
+    konst startOffset = elseExpr.startOffset
+    konst endOffset = elseExpr.endOffset
     return IrElseBranchImpl(startOffset, endOffset, constTrue(startOffset, endOffset), elseExpr)
 }
 

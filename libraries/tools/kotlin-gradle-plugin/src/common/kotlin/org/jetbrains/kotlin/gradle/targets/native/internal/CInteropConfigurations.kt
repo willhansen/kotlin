@@ -26,9 +26,9 @@ internal fun createCInteropApiElementsKlibArtifact(
     settings: DefaultCInteropSettings,
     interopTask: TaskProvider<out CInteropProcess>,
 ) {
-    val project = target.project
-    val configurationName = cInteropApiElementsConfigurationName(target)
-    val configuration = project.configurations.getByName(configurationName)
+    konst project = target.project
+    konst configurationName = cInteropApiElementsConfigurationName(target)
+    konst configuration = project.configurations.getByName(configurationName)
     project.artifacts.add(configuration.name, interopTask.map { it.outputFile }) { artifact ->
         artifact.extension = "klib"
         artifact.type = "klib"
@@ -42,8 +42,8 @@ internal fun Project.locateOrCreateCInteropDependencyConfiguration(
 ): Configuration {
     configurations.findByName(compilation.cInteropDependencyConfigurationName)?.let { return it }
 
-    val compileOnlyConfiguration = configurations.getByName(compilation.compileOnlyConfigurationName)
-    val implementationConfiguration = configurations.getByName(compilation.implementationConfigurationName)
+    konst compileOnlyConfiguration = configurations.getByName(compilation.compileOnlyConfigurationName)
+    konst implementationConfiguration = configurations.getByName(compilation.implementationConfigurationName)
 
     return configurations.create(compilation.cInteropDependencyConfigurationName).apply {
         extendsFrom(compileOnlyConfiguration, implementationConfiguration)
@@ -63,11 +63,11 @@ internal fun Project.locateOrCreateCInteropDependencyConfiguration(
     }
 }
 
-internal val KotlinNativeCompilation.cInteropDependencyConfigurationName: String
+internal konst KotlinNativeCompilation.cInteropDependencyConfigurationName: String
     get() = compilation.disambiguateName("CInterop")
 
 internal fun Project.locateOrCreateCInteropApiElementsConfiguration(target: KotlinTarget): Configuration {
-    val configurationName = cInteropApiElementsConfigurationName(target)
+    konst configurationName = cInteropApiElementsConfigurationName(target)
     configurations.findByName(configurationName)?.let { return it }
 
     return configurations.create(configurationName).apply {
@@ -91,7 +91,7 @@ private fun cInteropApiElementsConfigurationName(target: KotlinTarget): String {
 }
 
 internal object CInteropKlibLibraryElements {
-    const val CINTEROP_KLIB = "cinterop-klib"
+    const konst CINTEROP_KLIB = "cinterop-klib"
 
     fun Project.cinteropKlibLibraryElements(): LibraryElements = objects.named(LibraryElements::class.java, CINTEROP_KLIB)
 

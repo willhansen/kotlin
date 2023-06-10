@@ -4,7 +4,7 @@
 
 import kotlin.reflect.typeOf
 
-class Inv<T>(val v: T)
+class Inv<T>(konst v: T)
 
 interface X
 interface Y
@@ -14,9 +14,9 @@ object B : X, Y
 
 fun <T> sel(a: T, b: T) = a
 
-inline fun <reified T> T.valueTypeOf() = typeOf<T>()
+inline fun <reified T> T.konstueTypeOf() = typeOf<T>()
 
 fun box(): String {
-    val t = sel(Inv(A), Inv(B)).v.valueTypeOf()
+    konst t = sel(Inv(A), Inv(B)).v.konstueTypeOf()
     return if (t == typeOf<Any>()) "OK" else "Fail: $t"
 }

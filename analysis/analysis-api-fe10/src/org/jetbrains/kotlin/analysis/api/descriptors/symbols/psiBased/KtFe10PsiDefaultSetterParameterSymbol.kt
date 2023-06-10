@@ -32,42 +32,42 @@ import org.jetbrains.kotlin.psi.KtPropertyAccessor
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiDefaultSetterParameterSymbol(
-    private val accessorPsi: KtPropertyAccessor,
-    override val analysisContext: Fe10AnalysisContext
+    private konst accessorPsi: KtPropertyAccessor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtValueParameterSymbol(), KtFe10Symbol {
-    val descriptor: VariableDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(accessorPsi, AnalysisMode.PARTIAL)
-        bindingContext[BindingContext.PROPERTY_ACCESSOR, accessorPsi]?.valueParameters?.single()
+    konst descriptor: VariableDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(accessorPsi, AnalysisMode.PARTIAL)
+        bindingContext[BindingContext.PROPERTY_ACCESSOR, accessorPsi]?.konstueParameters?.single()
     }
 
-    override val origin: KtSymbolOrigin
+    override konst origin: KtSymbolOrigin
         get() = withValidityAssertion { KtSymbolOrigin.SOURCE_MEMBER_GENERATED }
 
-    override val hasDefaultValue: Boolean
+    override konst hasDefaultValue: Boolean
         get() = withValidityAssertion { false }
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = withValidityAssertion { false }
 
-    override val isCrossinline: Boolean
+    override konst isCrossinline: Boolean
         get() = withValidityAssertion { false }
 
-    override val isNoinline: Boolean
+    override konst isNoinline: Boolean
         get() = withValidityAssertion { false }
 
-    override val isImplicitLambdaParameter: Boolean
+    override konst isImplicitLambdaParameter: Boolean
         get() = withValidityAssertion { false }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor?.type?.toKtType(analysisContext) ?: createErrorType() }
 
-    override val psi: PsiElement?
+    override konst psi: PsiElement?
         get() = withValidityAssertion { null }
 
-    override val name: Name
-        get() = withValidityAssertion { descriptor?.name ?: Name.identifier("value") }
+    override konst name: Name
+        get() = withValidityAssertion { descriptor?.name ?: Name.identifier("konstue") }
 
-    override val annotationsList: KtAnnotationsList
+    override konst annotationsList: KtAnnotationsList
         get() = withValidityAssertion { KtEmptyAnnotationsList(token) }
 
     context(KtAnalysisSession)

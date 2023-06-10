@@ -69,19 +69,19 @@ abstract class AbstractJavaClassFinder : JavaClassFinder {
     inner class FilterOutKotlinSourceFilesScope(baseScope: GlobalSearchScope) : DelegatingGlobalSearchScope(baseScope),
         TopPackageNamesProvider {
 
-        override val topPackageNames: Set<String>?
+        override konst topPackageNames: Set<String>?
             get() = (myBaseScope as? TopPackageNamesProvider)?.topPackageNames
 
         override fun contains(file: VirtualFile): Boolean {
             // KTIJ-20095: optimization to avoid heavy file.fileType calculation
-            val extension = file.extension
-            val ktFile =
+            konst extension = file.extension
+            konst ktFile =
                 when {
                     file.isDirectory -> false
                     extension == KotlinFileType.EXTENSION -> true
                     extension == JavaFileType.DEFAULT_EXTENSION || extension == JavaClassFileType.INSTANCE.defaultExtension -> false
                     else -> {
-                        val fileTypeByFileName = FileTypeRegistry.getInstance().getFileTypeByFileName(file.name)
+                        konst fileTypeByFileName = FileTypeRegistry.getInstance().getFileTypeByFileName(file.name)
                         fileTypeByFileName == KotlinFileType.INSTANCE || fileTypeByFileName == UnknownFileType.INSTANCE &&
                                 FileTypeRegistry.getInstance().isFileOfType(file, KotlinFileType.INSTANCE)
                     }
@@ -89,7 +89,7 @@ abstract class AbstractJavaClassFinder : JavaClassFinder {
             return !ktFile && myBaseScope.contains(file)
         }
 
-        val base: GlobalSearchScope = myBaseScope
+        konst base: GlobalSearchScope = myBaseScope
 
         //NOTE: expected by class finder to be not null
         override fun getProject(): Project = this@AbstractJavaClassFinder.project

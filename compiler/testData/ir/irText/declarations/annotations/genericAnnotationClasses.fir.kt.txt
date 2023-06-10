@@ -7,7 +7,7 @@ open annotation class Test1<T : Any?> : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -20,7 +20,7 @@ open annotation class Test2<T1 : Any, T2 : Any?> : Annotation {
 
   }
 
-  val x: Int
+  konst x: Int
     field = x
     get
 
@@ -37,7 +37,7 @@ open annotation class Test3<T1 : Any?, T2 : I<T1>> : Annotation {
 
   }
 
-  val x: Test1<I<T2>>
+  konst x: Test1<I<T2>>
     field = x
     get
 
@@ -59,7 +59,7 @@ open annotation class Test4 : Annotation {
 
   }
 
-  val x: Array<Test3<Int, C<Int>>>
+  konst x: Array<Test3<Int, C<Int>>>
     field = x
     get
 
@@ -81,7 +81,7 @@ open annotation class Test5<T : Any?> : Annotation {
 
   }
 
-  val xs: Array<out Test3<T, C<T>>>
+  konst xs: Array<out Test3<T, C<T>>>
     field = xs
     get
 

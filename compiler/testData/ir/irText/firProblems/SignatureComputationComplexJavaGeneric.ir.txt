@@ -7,12 +7,12 @@ FILE fqName:<root> fileName:/test.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Inv modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:T of <root>.Inv visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: T of <root>.Inv declared in <root>.Inv.<init>' type=T of <root>.Inv origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.Inv<T of <root>.Inv>) returnType:T of <root>.Inv
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Inv<T of <root>.Inv>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): T of <root>.Inv declared in <root>.Inv'
@@ -40,12 +40,12 @@ FILE fqName:<root> fileName:/test.kt
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in <root>.JavaClass1'
           <T>: TT of <root>.Test_1
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Test_1 modality:FINAL visibility:public superTypes:[<root>.JavaClass1<TT of <root>.Test_1>]'
-    PROPERTY name:x visibility:public modality:FINAL [val]
+    PROPERTY name:x visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:x type:TT of <root>.Test_1 visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'x: TT of <root>.Test_1 declared in <root>.Test_1.<init>' type=TT of <root>.Test_1 origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-x> visibility:public modality:FINAL <> ($this:<root>.Test_1<TT of <root>.Test_1>) returnType:TT of <root>.Test_1
-        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:x visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.Test_1<TT of <root>.Test_1>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-x> (): TT of <root>.Test_1 declared in <root>.Test_1'

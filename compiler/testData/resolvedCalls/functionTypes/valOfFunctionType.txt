@@ -1,5 +1,5 @@
 interface A {
-    val foo: (Int)->Int
+    konst foo: (Int)->Int
 }
 
 fun test(a: A) {
@@ -9,7 +9,7 @@ fun test(a: A) {
 
 Resolved call:
 
-Resulting descriptor: val foo: (Int) -> Int defined in A
+Resulting descriptor: konst foo: (Int) -> Int defined in A
 
 Explicit receiver kind = DISPATCH_RECEIVER
 Dispatch receiver = a {A}

@@ -28,7 +28,7 @@ fun testClassObjectCall(): String {
 }
 
 fun testInstanceCall(): String {
-    val inlineX = InlineAll()
+    konst inlineX = InlineAll()
     return inlineX.inline({"instance"})
 }
 

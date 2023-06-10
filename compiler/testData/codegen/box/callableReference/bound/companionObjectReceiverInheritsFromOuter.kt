@@ -4,19 +4,19 @@
 
 open class A {
     fun instance() = true
-    val instanceProp = true
+    konst instanceProp = true
 
     companion object : A() {
         fun companion() = true
-        val companionProp = true
+        konst companionProp = true
     }
 }
 
 fun A.ext() = true
-val A.extProp get() = true
+konst A.extProp get() = true
 
 fun A.Companion.companionExt() = true
-val A.Companion.companionExtProp get() = true
+konst A.Companion.companionExtProp get() = true
 
 inline fun call(f: () -> Boolean) = f()
 inline fun callExtension(f: A.() -> Boolean, receiver: A) = receiver.f()
@@ -66,10 +66,10 @@ fun box(): String {
         if (!call(::companionExtProp)) return "Fail imlicit bound prop 8"
     }
 
-    val instance = A::instance
-    val ext = A::ext
-    val instanceProp = A::instanceProp
-    val extProp = A::extProp
+    konst instance = A::instance
+    konst ext = A::ext
+    konst instanceProp = A::instanceProp
+    konst extProp = A::extProp
 
     if (!callParameter(instance, A.Companion)) return "Fail unbound variable 1"
     if (!callParameter(ext, A.Companion)) return "Fail unbound variable 2"

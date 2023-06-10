@@ -1,4 +1,4 @@
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 public abstract @interface Ann /* Ann*/ {
   public abstract SimpleAnn[] t();//  t()
 
@@ -25,7 +25,7 @@ public final class Derived /* Derived*/ implements Base {
   public  Derived(@org.jetbrains.annotations.NotNull() Base);//  .ctor(Base)
 }
 
-@java.lang.annotation.Retention(value = java.lang.annotation.RetentionPolicy.RUNTIME)
+@java.lang.annotation.Retention(konstue = java.lang.annotation.RetentionPolicy.RUNTIME)
 public abstract @interface SimpleAnn /* SimpleAnn*/ {
-  public abstract java.lang.String value();//  value()
+  public abstract java.lang.String konstue();//  konstue()
 }

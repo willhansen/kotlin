@@ -4,19 +4,19 @@ FILE: privateToThis.fir.kt
             super<R|kotlin/Any|>()
         }
 
-        private/*private to this*/ final val t: R|T| = R|<local>/t|
+        private/*private to this*/ final konst t: R|T| = R|<local>/t|
             private/*private to this*/ get(): R|T|
 
-        private final val i: R|A.B<T>| = this@R|/A|.R|SubstitutionOverride</A.B.B>|()
+        private final konst i: R|A.B<T>| = this@R|/A|.R|SubstitutionOverride</A.B.B>|()
             private get(): R|A.B<T>|
 
         public final fun test(): R|kotlin/Unit| {
-            lval x: R|T| = this@R|/A|.R|/A.t|
-            lval y: R|T| = this@R|/A|.R|/A.t|
+            lkonst x: R|T| = this@R|/A|.R|/A.t|
+            lkonst y: R|T| = this@R|/A|.R|/A.t|
         }
 
         public final fun foo(a: R|A<kotlin/String>|): R|kotlin/Unit| {
-            lval x: R|kotlin/String| = R|<local>/a|.R|SubstitutionOverride</A.t: R|kotlin/String|><HIDDEN: /A.t is invisible>#|
+            lkonst x: R|kotlin/String| = R|<local>/a|.R|SubstitutionOverride</A.t: R|kotlin/String|><HIDDEN: /A.t is invisible>#|
         }
 
         public final fun bar(a: R|A<*>|): R|kotlin/Unit| {

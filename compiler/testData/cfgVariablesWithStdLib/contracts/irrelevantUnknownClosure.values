@@ -36,7 +36,7 @@ block()       <v2>: *                 NEW: call(block(), invoke|<v1>) -> <v2>
 =====================
 == foo ==
 fun foo() {
-    val x: Int
+    konst x: Int
     myRun {
         unknownRun { println("shouldn't change anything") }
         x = 42
@@ -48,7 +48,7 @@ fun foo() {
 myRun { unknownRun { println("shouldn't change anything") } x = 42 }                             <v1>: *                 NEW: call(myRun { unknownRun { println("shouldn't change anything") } x = 42 }, myRun|<v0>) -> <v1>
 x                                                                                                <v2>: Int               NEW: r(x) -> <v2>
 println(x)                                                                                       <v3>: *                 NEW: call(println(x), println|<v2>) -> <v3>
-{ val x: Int myRun { unknownRun { println("shouldn't change anything") } x = 42 } println(x) }   <v3>: *                 COPY
+{ konst x: Int myRun { unknownRun { println("shouldn't change anything") } x = 42 } println(x) }   <v3>: *                 COPY
 =====================
 == inlined anonymous_1 ==
 {

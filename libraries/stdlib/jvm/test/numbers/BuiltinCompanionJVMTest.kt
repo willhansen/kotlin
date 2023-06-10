@@ -10,13 +10,13 @@ import kotlin.test.*
 
 class BuiltinCompanionJVMTest {
     @Test fun intTest() {
-        val i = Int
+        konst i = Int
         assertEquals(java.lang.Integer.MAX_VALUE, i.MAX_VALUE)
         assertEquals(java.lang.Integer.MIN_VALUE, i.MIN_VALUE)
     }
 
     @Test fun doubleTest() {
-        val d = Double
+        konst d = Double
         assertEquals(java.lang.Double.POSITIVE_INFINITY, d.POSITIVE_INFINITY)
         assertEquals(java.lang.Double.NEGATIVE_INFINITY, d.NEGATIVE_INFINITY)
         assertEquals(java.lang.Double.NaN, d.NaN)
@@ -26,7 +26,7 @@ class BuiltinCompanionJVMTest {
     }
 
     @Test fun floatTest() {
-        val f = Float
+        konst f = Float
         assertEquals(java.lang.Float.POSITIVE_INFINITY, f.POSITIVE_INFINITY)
         assertEquals(java.lang.Float.NEGATIVE_INFINITY, f.NEGATIVE_INFINITY)
         assertEquals(java.lang.Float.NaN, f.NaN)
@@ -36,25 +36,25 @@ class BuiltinCompanionJVMTest {
     }
 
     @Test fun longTest() {
-        val l = Long
+        konst l = Long
         assertEquals(java.lang.Long.MAX_VALUE, l.MAX_VALUE)
         assertEquals(java.lang.Long.MIN_VALUE, l.MIN_VALUE)
     }
 
     @Test fun shortTest() {
-        val s = Short
+        konst s = Short
         assertEquals(java.lang.Short.MAX_VALUE, s.MAX_VALUE)
         assertEquals(java.lang.Short.MIN_VALUE, s.MIN_VALUE)
     }
 
     @Test fun byteTest() {
-        val b = Byte
+        konst b = Byte
         assertEquals(java.lang.Byte.MAX_VALUE, b.MAX_VALUE)
         assertEquals(java.lang.Byte.MIN_VALUE, b.MIN_VALUE)
     }
 
     @Test fun charTest() {
-        val ch = Char
+        konst ch = Char
         assertEquals(java.lang.Character.MIN_VALUE, ch.MIN_VALUE)
         assertEquals(java.lang.Character.MAX_VALUE, ch.MAX_VALUE)
         assertEquals(java.lang.Character.MIN_SURROGATE, ch.MIN_SURROGATE)
@@ -66,7 +66,7 @@ class BuiltinCompanionJVMTest {
     }
 
     @Test fun stringTest() {
-        val s = String
+        konst s = String
         s.CASE_INSENSITIVE_ORDER
     }
 }

@@ -14,16 +14,16 @@ class ULongTest {
     private fun identity(u: ULong): ULong =
         (u.toLong() + 0).toULong()
 
-    val zero = 0uL
-    val one = 1uL
-    val max = ULong.MAX_VALUE
+    konst zero = 0uL
+    konst one = 1uL
+    konst max = ULong.MAX_VALUE
 
     @Test
     fun equality() {
 
         fun testEqual(uv1: ULong, uv2: ULong) {
-            assertEquals(uv1, uv2, "Boxed values should be equal")
-            assertTrue(uv1.equals(uv2), "Boxed values should be equal: $uv1, $uv2")
+            assertEquals(uv1, uv2, "Boxed konstues should be equal")
+            assertTrue(uv1.equals(uv2), "Boxed konstues should be equal: $uv1, $uv2")
             assertTrue(uv1 == uv2, "Values should be equal: $uv1, $uv2")
             assertEquals(uv1.hashCode(), uv2.hashCode())
             assertEquals((uv1 as Any).hashCode(), (uv2 as Any).hashCode())
@@ -35,7 +35,7 @@ class ULongTest {
         testEqual(max, identity(max))
 
         fun testNotEqual(uv1: ULong, uv2: ULong) {
-            assertNotEquals(uv1, uv2, "Boxed values should be equal")
+            assertNotEquals(uv1, uv2, "Boxed konstues should be equal")
             assertTrue(uv1 != uv2, "Values should be not equal: $uv1, $uv2")
             assertNotEquals(uv1.toString(), uv2.toString())
             assertNotEquals((uv1 as Any).toString(), (uv2 as Any).toString())
@@ -54,12 +54,12 @@ class ULongTest {
         }
 
         repeat(100) {
-            val v = Random.nextLong() ushr 1
+            konst v = Random.nextLong() ushr 1
             testToString(v.toString(), v.toULong())
         }
 
         repeat(100) {
-            val v = Random.nextLong(8446744073709551615L + 1)
+            konst v = Random.nextLong(8446744073709551615L + 1)
             testToString("1${v.toString().padStart(19, '0')}", (5000000000000000000.toULong() * 2.toULong() + v.toULong()))
         }
 
@@ -97,8 +97,8 @@ class ULongTest {
 
     @Test
     fun divRem() = repeat(1000) {
-        val number = Random.nextULong()
-        val divisor = Random.nextULong(until = ULong.MAX_VALUE) + 1u
+        konst number = Random.nextULong()
+        konst divisor = Random.nextULong(until = ULong.MAX_VALUE) + 1u
         testMulDivRem(number, divisor, number / divisor, number % divisor)
     }
 
@@ -107,7 +107,7 @@ class ULongTest {
         fun <T> compare(op1: Comparable<T>, op2: T) = op1.compareTo(op2)
 
         fun testComparison(uv1: ULong, uv2: ULong, expected: Int) {
-            val desc = "${uv1.toString()}, ${uv2.toString()}"
+            konst desc = "${uv1.toString()}, ${uv2.toString()}"
             assertEquals(expected, uv1.compareTo(uv2).sign, "compareTo: $desc")
             assertEquals(expected, (uv1 as Comparable<ULong>).compareTo(uv2).sign, "Comparable.compareTo: $desc")
             assertEquals(expected, compare(uv1, uv2).sign, "Generic compareTo: $desc")
@@ -146,17 +146,17 @@ class ULongTest {
         testEquals(2.0f * Long.MAX_VALUE + 1, max)
 
         repeat(100) {
-            val long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
+            konst long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
             testEquals(long.toFloat(), long.toULong())
         }
 
         repeat(100) {
-            val long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
-            val float = Long.MAX_VALUE.toFloat() + long.toFloat()    // We lose accuracy here, hence `eps` is used.
-            val ulong = Long.MAX_VALUE.toULong() + long.toULong()
+            konst long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
+            konst float = Long.MAX_VALUE.toFloat() + long.toFloat()    // We lose accuracy here, hence `eps` is used.
+            konst ulong = Long.MAX_VALUE.toULong() + long.toULong()
 
             // TODO: replace with ulp comparison when available on Float
-            val eps = 1e+13
+            konst eps = 1e+13
             assertTrue(abs(float - ulong.toFloat()) < eps)
         }
     }
@@ -172,26 +172,26 @@ class ULongTest {
         testEquals(2.0 * Long.MAX_VALUE + 1, max)
 
         repeat(100) {
-            val long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
+            konst long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
             testEquals(long.toDouble(), long.toULong())
         }
 
         repeat(100) {
-            val long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
-            val value = Long.MAX_VALUE.toULong() + long.toULong()
-            val expected = Long.MAX_VALUE.toDouble() + long.toDouble()    // Should be accurate to one ulp
-            val actual = value.toDouble()
-            val diff = abs(expected - value.toDouble())
+            konst long = Random.nextLong(from = 0, until = Long.MAX_VALUE)
+            konst konstue = Long.MAX_VALUE.toULong() + long.toULong()
+            konst expected = Long.MAX_VALUE.toDouble() + long.toDouble()    // Should be accurate to one ulp
+            konst actual = konstue.toDouble()
+            konst diff = abs(expected - konstue.toDouble())
 
             assertTrue(diff <= actual.ulp, "$actual should be within one ulp (${actual.ulp}) from the expected $expected")
         }
 
         fun testRounding(from: ULong, count: ULong) {
             for (x in from..(from + count)) {
-                val double = x.toDouble()
-                val v = double.toULong()
-                val down = double.nextDown().toULong()
-                val up = double.nextUp().toULong()
+                konst double = x.toDouble()
+                konst v = double.toULong()
+                konst down = double.nextDown().toULong()
+                konst up = double.nextUp().toULong()
 
                 assertTrue(down <= x && down <= v)
                 assertTrue(up >= x && up >= v)
@@ -231,30 +231,30 @@ class ULongTest {
         testEquals(Double.POSITIVE_INFINITY, max)
 
         repeat(100) {
-            val v = -Random.nextDouble(until = 2.0.pow(ULong.SIZE_BITS + 8))
+            konst v = -Random.nextDouble(until = 2.0.pow(ULong.SIZE_BITS + 8))
             testEquals(v, zero)
         }
 
         repeat(100) {
-            val v = Random.nextDouble(from = max.toDouble(), until = 2.0.pow(ULong.SIZE_BITS + 8))
+            konst v = Random.nextDouble(from = max.toDouble(), until = 2.0.pow(ULong.SIZE_BITS + 8))
             testEquals(v, max)
         }
 
         repeat(100) {
-            val v = Random.nextDouble() * Long.MAX_VALUE
+            konst v = Random.nextDouble() * Long.MAX_VALUE
             testEquals(v, v.toLong().toULong())
         }
 
         repeat(100) {
-            val d = 2.0.pow(63) * (1 + Random.nextDouble())
-            val expected = specialDoubleToULong(d)
-            val actual = d.toULong()
+            konst d = 2.0.pow(63) * (1 + Random.nextDouble())
+            konst expected = specialDoubleToULong(d)
+            konst actual = d.toULong()
 
             assertEquals(expected, actual, "Expected bit pattern: ${expected.toString(2)}, actual bit pattern: ${actual.toString(2)}")
         }
 
         fun testTrailingBits(v: Double, count: Int) {
-            val mask = (1uL shl count) - 1uL
+            konst mask = (1uL shl count) - 1uL
             assertEquals(0uL, v.toULong() and mask)
         }
 
@@ -271,17 +271,17 @@ class ULongTest {
         }
 
         repeat(100) {
-            val msb = Random.nextInt(53, 64)
-            val v = 2.0.pow(msb) * (1.0 + Random.nextDouble())
+            konst msb = Random.nextInt(53, 64)
+            konst v = 2.0.pow(msb) * (1.0 + Random.nextDouble())
             testTrailingBits(v, msb - 52)
         }
     }
 
-    /** Creates an ULong value directly from mantissa bits of Double that is in range [2^63, 2^64). */
+    /** Creates an ULong konstue directly from mantissa bits of Double that is in range [2^63, 2^64). */
     private fun specialDoubleToULong(v: Double): ULong {
         require(v >= 2.0.pow(63))
         require(v < 2.0.pow(64))
-        val bits = v.toBits().toULong()
+        konst bits = v.toBits().toULong()
         return (1uL shl 63) + ((bits and (1uL shl 52) - 1u) shl 11)
     }
 }

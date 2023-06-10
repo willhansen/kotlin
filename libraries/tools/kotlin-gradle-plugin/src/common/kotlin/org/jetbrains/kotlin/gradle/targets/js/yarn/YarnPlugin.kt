@@ -34,15 +34,15 @@ open class YarnPlugin : Plugin<Project> {
             "YarnPlugin can be applied only to root project"
         }
 
-        val yarnRootExtension = this.extensions.create(YarnRootExtension.YARN, YarnRootExtension::class.java, this)
+        konst yarnRootExtension = this.extensions.create(YarnRootExtension.YARN, YarnRootExtension::class.java, this)
         NodeJsRootPlugin.apply(project)
-        val nodeJs = this.kotlinNodeJsExtension
-        val nodeJsTaskProviders = this.kotlinNodeJsExtension
+        konst nodeJs = this.kotlinNodeJsExtension
+        konst nodeJsTaskProviders = this.kotlinNodeJsExtension
 
-        yarnRootExtension.platform.value(nodeJs.platform)
+        yarnRootExtension.platform.konstue(nodeJs.platform)
             .disallowChanges()
 
-        val setupTask = registerTask<YarnSetupTask>(YarnSetupTask.NAME) {
+        konst setupTask = registerTask<YarnSetupTask>(YarnSetupTask.NAME) {
             it.dependsOn(nodeJsTaskProviders.nodeJsSetupTaskProvider)
 
             it.configuration = provider {
@@ -52,14 +52,14 @@ open class YarnPlugin : Plugin<Project> {
             }
         }
 
-        val kotlinNpmResolutionManager = project.kotlinNpmResolutionManager
+        konst kotlinNpmResolutionManager = project.kotlinNpmResolutionManager
 
-        val rootPackageJson = tasks.register(RootPackageJsonTask.NAME, RootPackageJsonTask::class.java) { task ->
+        konst rootPackageJson = tasks.register(RootPackageJsonTask.NAME, RootPackageJsonTask::class.java) { task ->
             task.dependsOn(nodeJsTaskProviders.npmCachesSetupTaskProvider)
             task.group = NodeJsRootPlugin.TASKS_GROUP_NAME
             task.description = "Create root package.json"
 
-            task.npmResolutionManager.value(kotlinNpmResolutionManager)
+            task.npmResolutionManager.konstue(kotlinNpmResolutionManager)
                 .disallowChanges()
 
             task.onlyIfCompat("Prepare NPM project only in configuring state") {
@@ -70,7 +70,7 @@ open class YarnPlugin : Plugin<Project> {
 
         configureRequiresNpmDependencies(project, rootPackageJson)
 
-        val kotlinNpmInstall = tasks.named(KotlinNpmInstallTask.NAME)
+        konst kotlinNpmInstall = tasks.named(KotlinNpmInstallTask.NAME)
         kotlinNpmInstall.configure {
             it.dependsOn(rootPackageJson)
             it.dependsOn(setupTask)
@@ -82,7 +82,7 @@ open class YarnPlugin : Plugin<Project> {
             it.description = "Clean unused local yarn version"
         }
 
-        val packageJsonUmbrella = nodeJsTaskProviders
+        konst packageJsonUmbrella = nodeJsTaskProviders
             .packageJsonUmbrellaTaskProvider
 
         yarnRootExtension.rootPackageJsonTaskProvider.configure {
@@ -107,8 +107,8 @@ open class YarnPlugin : Plugin<Project> {
             task.fileName.set(yarnRootExtension.lockFileName)
         }
 
-        val restoreYarnLock = tasks.register(RESTORE_YARN_LOCK_NAME, YarnLockCopyTask::class.java) {
-            val lockFile = yarnRootExtension.lockFileDirectory.resolve(yarnRootExtension.lockFileName)
+        konst restoreYarnLock = tasks.register(RESTORE_YARN_LOCK_NAME, YarnLockCopyTask::class.java) {
+            konst lockFile = yarnRootExtension.lockFileDirectory.resolve(yarnRootExtension.lockFileName)
             it.inputFile.set(yarnRootExtension.lockFileDirectory.resolve(yarnRootExtension.lockFileName))
             it.outputDirectory.set(nodeJs.rootPackageDir)
             it.fileName.set("yarn.lock")
@@ -133,7 +133,7 @@ open class YarnPlugin : Plugin<Project> {
         project: Project,
         rootPackageJson: TaskProvider<RootPackageJsonTask>
     ) {
-        val fn: (Project) -> Unit = {
+        konst fn: (Project) -> Unit = {
             it.tasks.implementing(RequiresNpmDependencies::class)
                 .forEach {}
         }
@@ -149,7 +149,7 @@ open class YarnPlugin : Plugin<Project> {
         project.allprojects
             .forEach {
                 if (!it.state.executed) {
-                    it.afterEvaluate { project ->
+                    it.afterEkonstuate { project ->
                         rootPackageJson.configure {
                             fn(project)
                         }
@@ -160,7 +160,7 @@ open class YarnPlugin : Plugin<Project> {
 
     companion object {
         fun apply(project: Project): YarnRootExtension {
-            val rootProject = project.rootProject
+            konst rootProject = project.rootProject
             rootProject.plugins.apply(YarnPlugin::class.java)
             return rootProject.extensions.getByName(YarnRootExtension.YARN) as YarnRootExtension
         }

@@ -1,6 +1,6 @@
 package
 
-public val @receiver:Ann kotlin.String.extensionProperty: kotlin.String
+public konst @receiver:Ann kotlin.String.extensionProperty: kotlin.String
 public fun @receiver:Ann kotlin.String.length2(): kotlin.Int
 
 public final annotation class Ann : kotlin.Annotation {
@@ -12,8 +12,8 @@ public final annotation class Ann : kotlin.Annotation {
 
 @Ann public final class SomeClass {
     public constructor SomeClass(/*0*/ a: kotlin.String)
-    protected final val simpleProperty: kotlin.String = "text"
-    public final val @receiver:Ann kotlin.String.extensionProperty2: kotlin.String
+    protected final konst simpleProperty: kotlin.String = "text"
+    public final konst @receiver:Ann kotlin.String.extensionProperty2: kotlin.String
     public final fun anotherFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

@@ -2,7 +2,7 @@
 @file:JvmName("Test")
 package test
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 @Anno(constant)
-const val constant = "OK"
+const konst constant = "OK"

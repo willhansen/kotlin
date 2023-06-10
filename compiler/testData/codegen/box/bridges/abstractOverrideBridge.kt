@@ -16,6 +16,6 @@ class Implementation : Derived() {
 }
 
 fun box(): String {
-    val base = Implementation() as Base<String>
+    konst base = Implementation() as Base<String>
     return base.f("OK")
 }

@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.utils.SmartList
 
 class IrTryImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
 ) : IrTry() {
     constructor(
@@ -43,14 +43,14 @@ class IrTryImpl(
 
     override lateinit var tryResult: IrExpression
 
-    override val catches: MutableList<IrCatch> = SmartList()
+    override konst catches: MutableList<IrCatch> = SmartList()
 
     override var finallyExpression: IrExpression? = null
 }
 
 class IrCatchImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var catchParameter: IrVariable,
 ) : IrCatch() {
     constructor(

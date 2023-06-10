@@ -16,7 +16,7 @@ sealed class S
 
 object First : S()
 
-class Derived(val s: String) : S()
+class Derived(konst s: String) : S()
 
 object Last : S()
 

@@ -34,7 +34,7 @@ object ESBooleanType : ESType() {
     override fun toKotlinType(builtIns: KotlinBuiltIns): KotlinType = builtIns.booleanType
 }
 
-class ESKotlinType(val type: KotlinType) : ESType() {
+class ESKotlinType(konst type: KotlinType) : ESType() {
     override fun toKotlinType(builtIns: KotlinBuiltIns): KotlinType = type
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

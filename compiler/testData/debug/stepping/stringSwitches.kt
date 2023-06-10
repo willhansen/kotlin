@@ -1,21 +1,21 @@
 // FILE: test.kt
 
 fun stringSwitch(x: String) {
-    val l = when {
+    konst l = when {
         x == "x" -> 1
         x == "xy" -> 2
         x == "xyz" -> 3
         else -> -1
     }
 
-    val l2 = when (x) {
+    konst l2 = when (x) {
         "x" -> 1
         "xy" -> 2
         "xyz" -> 3
         else -> -1
     }
 
-    val l3 = when
+    konst l3 = when
         (x)
     {
         "x" -> 1
@@ -38,7 +38,7 @@ fun box() {
 // then to the right branch.
 
 // JVM_IR uses optimized lookup/table switches for all these cases. JVM
-// does not. So on JVM there are steps on each condition evaluation for
+// does not. So on JVM there are steps on each condition ekonstuation for
 // the first `when`.
 
 // EXPECTATIONS JVM JVM_IR

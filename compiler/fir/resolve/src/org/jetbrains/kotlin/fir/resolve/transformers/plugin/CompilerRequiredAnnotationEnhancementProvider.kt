@@ -14,4 +14,4 @@ abstract class CompilerRequiredAnnotationEnhancementProvider : FirSessionCompone
     abstract fun enhance(enumSymbol: FirClassSymbol<*>, enumEntrySymbol: FirEnumEntrySymbol, session: FirSession): FirEnumEntrySymbol
 }
 
-internal val FirSession.compilerRequiredAnnotationEnhancementProvider: CompilerRequiredAnnotationEnhancementProvider? by FirSession.nullableSessionComponentAccessor<CompilerRequiredAnnotationEnhancementProvider>()
+internal konst FirSession.compilerRequiredAnnotationEnhancementProvider: CompilerRequiredAnnotationEnhancementProvider? by FirSession.nullableSessionComponentAccessor<CompilerRequiredAnnotationEnhancementProvider>()

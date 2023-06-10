@@ -6,7 +6,7 @@ enum class Direction {
     @Some NORTH, SOUTH, WEST, EAST
 }
 
-enum class Color(val rgb: Int = 5) {
+enum class Color(konst rgb: Int = 5) {
         RED(0xFF0000),
         GREEN(0x00FF00),
         BLUE("0x0000FF");
@@ -38,5 +38,5 @@ enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
 }
 
 class C {
-    val enumConst: Direction? = Direction.EAST
+    konst enumConst: Direction? = Direction.EAST
 }

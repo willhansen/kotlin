@@ -10,7 +10,7 @@ class Controller {
     var res = "FAIL 1"
 }
 
-val defaultController = Controller()
+konst defaultController = Controller()
 
 suspend inline fun test(controller: Controller, c: () -> Unit =  { controller.res = "OK" }) {
     c()

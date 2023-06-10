@@ -1,7 +1,7 @@
 // !LANGUAGE: +InlineClasses
 // WITH_STDLIB
 // FILE: test.kt
-inline class A(val s: String) {
+inline class A(konst s: String) {
     fun fromResult(x: Result<String>) =
         x.getOrNull() ?: s
 }

@@ -72,7 +72,7 @@ fun foo(b: Boolean) = when (b) {
 }
 
 fun useJava(): String {
-    val me = MyEnum.getInstance()
+    konst me = MyEnum.getInstance()
     return when (me) {
         MyEnum.SINGLE -> "OK"
         else -> "FAIL" // no warning

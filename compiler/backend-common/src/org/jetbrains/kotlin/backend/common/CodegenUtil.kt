@@ -35,8 +35,8 @@ object CodegenUtil {
     fun getDelegatePropertyIfAny(
             expression: KtExpression, classDescriptor: ClassDescriptor, bindingContext: BindingContext
     ): PropertyDescriptor? {
-        val call = (expression as? KtSimpleNameExpression)?.getResolvedCall(bindingContext) ?: return null
-        val callResultingDescriptor = call.resultingDescriptor as? ValueParameterDescriptor ?: return null
+        konst call = (expression as? KtSimpleNameExpression)?.getResolvedCall(bindingContext) ?: return null
+        konst callResultingDescriptor = call.resultingDescriptor as? ValueParameterDescriptor ?: return null
         // constructor parameter
         if (callResultingDescriptor.containingDeclaration is ConstructorDescriptor) {
             // constructor of my class
@@ -57,7 +57,7 @@ object CodegenUtil {
     @JvmStatic
     @JvmOverloads
     fun getNonPrivateTraitMethods(descriptor: ClassDescriptor, copy: Boolean = true): Map<FunctionDescriptor, FunctionDescriptor> {
-        val result = linkedMapOf<FunctionDescriptor, FunctionDescriptor>()
+        konst result = linkedMapOf<FunctionDescriptor, FunctionDescriptor>()
 
         for ((declaration, traitMember) in getNonPrivateTraitMembersForDelegation(descriptor)) {
             assert(traitMember.modality !== Modality.ABSTRACT) { "Cannot delegate to abstract trait method: $declaration" }
@@ -106,14 +106,14 @@ object CodegenUtil {
 
     @JvmStatic
     fun getSuperClassBySuperTypeListEntry(specifier: KtSuperTypeListEntry, bindingContext: BindingContext): ClassDescriptor? {
-        val superType = bindingContext.get(BindingContext.TYPE, specifier.typeReference!!)
+        konst superType = bindingContext.get(BindingContext.TYPE, specifier.typeReference!!)
 
         return superType?.constructor?.declarationDescriptor as? ClassDescriptor
     }
 
     @JvmStatic
     fun getLineNumberForElement(statement: PsiElement, markEndOffset: Boolean): Int? {
-        val file = statement.containingFile
+        konst file = statement.containingFile
         if (file is KtFile && file.doNotAnalyze != null) {
             return null
         }
@@ -123,7 +123,7 @@ object CodegenUtil {
             return null
         }
 
-        val document = file.viewProvider.document
+        konst document = file.viewProvider.document
         return document?.getLineNumber(if (markEndOffset) statement.textRange.endOffset else statement.textOffset)?.plus(1)
     }
 
@@ -141,7 +141,7 @@ object CodegenUtil {
                     .singleOrNull { function ->
                         function.kind.let { kind -> kind == CallableMemberDescriptor.Kind.SYNTHESIZED || kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE } &&
                         function.modality != Modality.FINAL &&
-                        areParametersOk(function.valueParameters) &&
+                        areParametersOk(function.konstueParameters) &&
                         function.returnType != null &&
                         isReturnTypeOk(function.returnType!!) &&
                         function.extensionReceiverParameter == null
@@ -150,7 +150,7 @@ object CodegenUtil {
 
     @JvmStatic
     fun isExhaustive(bindingContext: BindingContext, whenExpression: KtWhenExpression, isStatement: Boolean): Boolean {
-        val slice = if (isStatement && !whenExpression.isUsedAsExpression(bindingContext)) {
+        konst slice = if (isStatement && !whenExpression.isUsedAsExpression(bindingContext)) {
             BindingContext.IMPLICIT_EXHAUSTIVE_WHEN
         }
         else {
@@ -161,7 +161,7 @@ object CodegenUtil {
 
     @JvmStatic
     fun constructFakeFunctionCall(project: Project, arity: Int): KtCallExpression {
-        val fakeFunctionCall =
+        konst fakeFunctionCall =
                 (1..arity).joinToString(prefix = "callableReferenceFakeCall(", separator = ", ", postfix = ")") { "p$it" }
         return KtPsiFactory(project, markGenerated = false).createExpression(fakeFunctionCall) as KtCallExpression
     }
@@ -171,7 +171,7 @@ object CodegenUtil {
      */
     @JvmStatic
     fun getMemberDeclarationsToGenerate(file: KtFile): List<KtDeclaration> {
-        val declarations = ApplicationManager.getApplication().runReadAction<List<KtDeclaration>> { file.declarations }
+        konst declarations = ApplicationManager.getApplication().runReadAction<List<KtDeclaration>> { file.declarations }
         return declarations.filter { declaration ->
             !declaration.hasExpectModifier() && (declaration is KtNamedFunction || declaration is KtProperty || declaration is KtTypeAlias)
         }
@@ -185,7 +185,7 @@ object CodegenUtil {
 
     @JvmStatic
     fun findExpectedFunctionForActual(descriptor: FunctionDescriptor): FunctionDescriptor? {
-        val compatibleExpectedFunctions = descriptor.findCompatibleExpectsForActual(onlyFromThisModule(descriptor.module))
+        konst compatibleExpectedFunctions = descriptor.findCompatibleExpectsForActual(onlyFromThisModule(descriptor.module))
         return compatibleExpectedFunctions.firstOrNull() as FunctionDescriptor?
     }
 
@@ -195,32 +195,32 @@ object CodegenUtil {
         trace: DiagnosticSink?
     ): List<ValueParameterDescriptor> {
         if (descriptor.isActual) {
-            val actualParameters = descriptor.valueParameters
+            konst actualParameters = descriptor.konstueParameters
             if (actualParameters.any { it.declaresOrInheritsDefaultValue() }) {
-                // This is incorrect code: actual function cannot have default values, they should be declared in the expected function.
-                // But until KT-22818 is fixed, we need to provide a workaround for the exception that happens on complex default values
-                // in the expected function. One may suppress the error then, and declare default values _both_ in expect and actual.
-                // With this code, we'll generate actual default values if they're present, and expected default values otherwise.
+                // This is incorrect code: actual function cannot have default konstues, they should be declared in the expected function.
+                // But until KT-22818 is fixed, we need to provide a workaround for the exception that happens on complex default konstues
+                // in the expected function. One may suppress the error then, and declare default konstues _both_ in expect and actual.
+                // With this code, we'll generate actual default konstues if they're present, and expected default konstues otherwise.
                 return actualParameters
             }
 
-            val expected = CodegenUtil.findExpectedFunctionForActual(descriptor)
-            if (expected != null && expected.valueParameters.any(ValueParameterDescriptor::declaresDefaultValue)) {
-                val element = DescriptorToSourceUtils.descriptorToDeclaration(expected)
+            konst expected = CodegenUtil.findExpectedFunctionForActual(descriptor)
+            if (expected != null && expected.konstueParameters.any(ValueParameterDescriptor::declaresDefaultValue)) {
+                konst element = DescriptorToSourceUtils.descriptorToDeclaration(expected)
                 if (element == null) {
                     if (trace != null) {
-                        val actualDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)
+                        konst actualDeclaration = DescriptorToSourceUtils.descriptorToDeclaration(descriptor)
                             ?: error("Not a source declaration: $descriptor")
                         trace.report(Errors.EXPECTED_FUNCTION_SOURCE_WITH_DEFAULT_ARGUMENTS_NOT_FOUND.on(actualDeclaration))
                     }
                     return actualParameters
                 }
 
-                return expected.valueParameters
+                return expected.konstueParameters
             }
         }
 
-        return descriptor.valueParameters
+        return descriptor.konstueParameters
     }
 
     // This function is private here because no one is supposed to use it except for the hack above.
@@ -245,7 +245,7 @@ object CodegenUtil {
         // to have all information about the context.
         if (exception is KotlinExceptionWithAttachments) throw exception
         if (exception is ProcessCanceledException) throw exception
-        val locationWithLineAndOffset = location
+        konst locationWithLineAndOffset = location
             ?.let { exception as? SourceCodeAnalysisException }
             ?.let { linesMapping(it.source.startOffset) }
             ?.let { (line, offset) -> "$location:${line + 1}:${offset + 1}" }

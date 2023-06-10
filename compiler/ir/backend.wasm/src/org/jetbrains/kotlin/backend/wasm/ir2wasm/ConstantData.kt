@@ -9,14 +9,14 @@ import org.jetbrains.kotlin.wasm.ir.WasmSymbol
 
 // Representation of constant data in Wasm memory
 
-internal const val CHAR_SIZE_BYTES = 2
-internal const val BYTE_SIZE_BYTES = 1
-internal const val SHORT_SIZE_BYTES = 2
-internal const val INT_SIZE_BYTES = 4
-internal const val LONG_SIZE_BYTES = 8
+internal const konst CHAR_SIZE_BYTES = 2
+internal const konst BYTE_SIZE_BYTES = 1
+internal const konst SHORT_SIZE_BYTES = 2
+internal const konst INT_SIZE_BYTES = 4
+internal const konst LONG_SIZE_BYTES = 8
 
 sealed class ConstantDataElement {
-    abstract val sizeInBytes: Int
+    abstract konst sizeInBytes: Int
     abstract fun dump(indent: String = "", startAddress: Int = 0): String
     abstract fun toBytes(): ByteArray
 }
@@ -24,78 +24,78 @@ sealed class ConstantDataElement {
 private fun addressToString(address: Int): String =
     address.toString().padEnd(6, ' ')
 
-class ConstantDataCharField(val name: String, val value: WasmSymbol<Char>) : ConstantDataElement() {
-    constructor(name: String, value: Char) : this(name, WasmSymbol(value))
+class ConstantDataCharField(konst name: String, konst konstue: WasmSymbol<Char>) : ConstantDataElement() {
+    constructor(name: String, konstue: Char) : this(name, WasmSymbol(konstue))
 
-    override fun toBytes(): ByteArray = value.owner.toLittleEndianBytes()
-
-    override fun dump(indent: String, startAddress: Int): String {
-        return "${addressToString(startAddress)}: $indent i32   : ${value.owner}    ;; $name\n"
-    }
-
-    override val sizeInBytes: Int = CHAR_SIZE_BYTES
-}
-
-class ConstantDataIntField(val name: String, val value: WasmSymbol<Int>) : ConstantDataElement() {
-    constructor(name: String, value: Int) : this(name, WasmSymbol(value))
-
-    override fun toBytes(): ByteArray = value.owner.toLittleEndianBytes()
+    override fun toBytes(): ByteArray = konstue.owner.toLittleEndianBytes()
 
     override fun dump(indent: String, startAddress: Int): String {
-        return "${addressToString(startAddress)}: $indent i32   : ${value.owner}    ;; $name\n"
+        return "${addressToString(startAddress)}: $indent i32   : ${konstue.owner}    ;; $name\n"
     }
 
-    override val sizeInBytes: Int = INT_SIZE_BYTES
+    override konst sizeInBytes: Int = CHAR_SIZE_BYTES
 }
 
-class ConstantDataIntegerArray(val name: String, val value: List<Long>, private val integerSize: Int) : ConstantDataElement() {
+class ConstantDataIntField(konst name: String, konst konstue: WasmSymbol<Int>) : ConstantDataElement() {
+    constructor(name: String, konstue: Int) : this(name, WasmSymbol(konstue))
+
+    override fun toBytes(): ByteArray = konstue.owner.toLittleEndianBytes()
+
+    override fun dump(indent: String, startAddress: Int): String {
+        return "${addressToString(startAddress)}: $indent i32   : ${konstue.owner}    ;; $name\n"
+    }
+
+    override konst sizeInBytes: Int = INT_SIZE_BYTES
+}
+
+class ConstantDataIntegerArray(konst name: String, konst konstue: List<Long>, private konst integerSize: Int) : ConstantDataElement() {
     override fun toBytes(): ByteArray {
-        val array = ByteArray(value.size * integerSize)
-        repeat(value.size) { i ->
-            value[i].toLittleEndianBytesTo(array, i * integerSize, integerSize)
+        konst array = ByteArray(konstue.size * integerSize)
+        repeat(konstue.size) { i ->
+            konstue[i].toLittleEndianBytesTo(array, i * integerSize, integerSize)
         }
         return array
     }
 
     override fun dump(indent: String, startAddress: Int): String {
-        if (value.isEmpty()) return ""
+        if (konstue.isEmpty()) return ""
         return "${addressToString(startAddress)}: $indent i${integerSize * 8}[] : ${toBytes().contentToString()}   ;; $name\n"
     }
 
-    override val sizeInBytes: Int = value.size * integerSize
+    override konst sizeInBytes: Int = konstue.size * integerSize
 }
 
-class ConstantDataIntArray(val name: String, val value: List<WasmSymbol<Int>>) : ConstantDataElement() {
+class ConstantDataIntArray(konst name: String, konst konstue: List<WasmSymbol<Int>>) : ConstantDataElement() {
     override fun toBytes(): ByteArray {
-        return value.fold(byteArrayOf()) { acc, el -> acc + el.owner.toLittleEndianBytes() }
+        return konstue.fold(byteArrayOf()) { acc, el -> acc + el.owner.toLittleEndianBytes() }
     }
 
     override fun dump(indent: String, startAddress: Int): String {
-        if (value.isEmpty()) return ""
-        return "${addressToString(startAddress)}: $indent i32[] : ${value.map { it.owner }.toIntArray().contentToString()}   ;; $name\n"
+        if (konstue.isEmpty()) return ""
+        return "${addressToString(startAddress)}: $indent i32[] : ${konstue.map { it.owner }.toIntArray().contentToString()}   ;; $name\n"
     }
 
-    override val sizeInBytes: Int = value.size * INT_SIZE_BYTES
+    override konst sizeInBytes: Int = konstue.size * INT_SIZE_BYTES
 }
 
-class ConstantDataCharArray(val name: String, val value: List<WasmSymbol<Char>>) : ConstantDataElement() {
-    constructor(name: String, value: CharArray) : this(name, value.map { WasmSymbol(it) })
+class ConstantDataCharArray(konst name: String, konst konstue: List<WasmSymbol<Char>>) : ConstantDataElement() {
+    constructor(name: String, konstue: CharArray) : this(name, konstue.map { WasmSymbol(it) })
 
     override fun toBytes(): ByteArray {
-        return value
+        return konstue
             .map { it.owner.toLittleEndianBytes() }
             .fold(byteArrayOf(), ByteArray::plus)
     }
 
     override fun dump(indent: String, startAddress: Int): String {
-        if (value.isEmpty()) return ""
-        return "${addressToString(startAddress)}: $indent i16[] : ${value.map { it.owner }.toCharArray().contentToString()}   ;; $name\n"
+        if (konstue.isEmpty()) return ""
+        return "${addressToString(startAddress)}: $indent i16[] : ${konstue.map { it.owner }.toCharArray().contentToString()}   ;; $name\n"
     }
 
-    override val sizeInBytes: Int = value.size * CHAR_SIZE_BYTES
+    override konst sizeInBytes: Int = konstue.size * CHAR_SIZE_BYTES
 }
 
-class ConstantDataStruct(val name: String, val elements: List<ConstantDataElement>) : ConstantDataElement() {
+class ConstantDataStruct(konst name: String, konst elements: List<ConstantDataElement>) : ConstantDataElement() {
     override fun toBytes(): ByteArray {
         return elements.fold(byteArrayOf()) { acc, el -> acc + el.toBytes() }
     }
@@ -112,7 +112,7 @@ class ConstantDataStruct(val name: String, val elements: List<ConstantDataElemen
         return res
     }
 
-    override val sizeInBytes: Int = elements.map { it.sizeInBytes }.sum()
+    override konst sizeInBytes: Int = elements.map { it.sizeInBytes }.sum()
 }
 
 fun Long.toLittleEndianBytesTo(to: ByteArray, offset: Int, size: Int) {

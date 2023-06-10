@@ -1,9 +1,9 @@
 interface A {
-    val result: Any get() = "Fail"
+    konst result: Any get() = "Fail"
 }
 
 interface B : A {
-    override val result: String get() = "OK"
+    override konst result: String get() = "OK"
 }
 
 abstract class AImpl : A

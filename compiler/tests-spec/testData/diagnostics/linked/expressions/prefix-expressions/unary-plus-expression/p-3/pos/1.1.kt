@@ -19,7 +19,7 @@ class Case1(var a: Int) {
 }
 
 fun case1() {
-    val a = +Case1(1)
+    konst a = +Case1(1)
 }
 
 // TESTCASE NUMBER: 2
@@ -28,6 +28,6 @@ class Case2(var a: Int) {
 }
 
 fun case2() {
-    val a = +Case2(1)
+    konst a = +Case2(1)
 }
 

@@ -1,10 +1,10 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val a = Array<Int>(5, {it})
-    val x = a.indices.iterator()
+    konst a = Array<Int>(5, {it})
+    konst x = a.indices.iterator()
     while (x.hasNext()) {
-        val i = x.next()
+        konst i = x.next()
         if (a[i] != i) return "Fail $i ${a[i]}"
     }
     return "OK"

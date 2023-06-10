@@ -6,7 +6,7 @@ class Owner {
     }
 
     fun bar() {
-        val n = Nested()
+        konst n = Nested()
         n.baz()
     }
 
@@ -17,7 +17,7 @@ class Owner {
         }
 
         fun gau() {
-            val o = Owner()
+            konst o = Owner()
             o.foo()
         }
 
@@ -29,8 +29,8 @@ class Owner {
 }
 
 fun test() {
-    val o = Owner()
+    konst o = Owner()
     o.foo()
-    val n = Owner.Nested()
+    konst n = Owner.Nested()
     n.baz()
 }

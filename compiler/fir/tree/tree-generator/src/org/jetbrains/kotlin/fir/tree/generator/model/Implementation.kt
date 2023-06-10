@@ -6,38 +6,38 @@
 package org.jetbrains.kotlin.fir.tree.generator.model
 
 class ImplementationWithArg(
-    val implementation: Implementation,
-    val argument: Importable?
+    konst implementation: Implementation,
+    konst argument: Importable?
 ) : FieldContainer by implementation, KindOwner by implementation {
-    val element: Element get() = implementation.element
+    konst element: Element get() = implementation.element
 }
 
-class Implementation(val element: Element, val name: String?) : FieldContainer, KindOwner {
-    private val _parents = mutableListOf<ImplementationWithArg>()
-    val parents: List<ImplementationWithArg> get() = _parents
+class Implementation(konst element: Element, konst name: String?) : FieldContainer, KindOwner {
+    private konst _parents = mutableListOf<ImplementationWithArg>()
+    konst parents: List<ImplementationWithArg> get() = _parents
 
-    override val allParents: List<KindOwner> get() = listOf(element) + parents
-    val isDefault = name == null
-    override val type = name ?: element.type + "Impl"
-    override val allFields = element.allFields.toMutableList().mapTo(mutableListOf()) {
+    override konst allParents: List<KindOwner> get() = listOf(element) + parents
+    konst isDefault = name == null
+    override konst type = name ?: element.type + "Impl"
+    override konst allFields = element.allFields.toMutableList().mapTo(mutableListOf()) {
         FieldWithDefault(it)
     }
     override var kind: Kind? = null
-        set(value) {
-            field = value
+        set(konstue) {
+            field = konstue
             if (kind != Kind.FinalClass) {
                 isPublic = true
             }
-            if (value?.hasLeafBuilder == true) {
+            if (konstue?.hasLeafBuilder == true) {
                 builder = builder ?: LeafBuilder(this)
             } else {
                 builder = null
             }
         }
 
-    override val packageName = element.packageName + ".impl"
-    val usedTypes = mutableListOf<Importable>()
-    val arbitraryImportables = mutableListOf<ArbitraryImportable>()
+    override konst packageName = element.packageName + ".impl"
+    konst usedTypes = mutableListOf<Importable>()
+    konst arbitraryImportables = mutableListOf<ArbitraryImportable>()
 
     var isPublic = false
     var requiresOptIn = false
@@ -62,7 +62,7 @@ class Implementation(val element: Element, val name: String?) : FieldContainer, 
     fun updateMutabilityAccordingParents() {
         for (parent in parents) {
             for (field in allFields) {
-                val fieldFromParent = parent[field.name] ?: continue
+                konst fieldFromParent = parent[field.name] ?: continue
                 field.isMutable = field.isMutable || fieldFromParent.isMutable
                 if (field.isMutable && field.customSetter == null) {
                     field.withGetter = false
@@ -71,10 +71,10 @@ class Implementation(val element: Element, val name: String?) : FieldContainer, 
         }
     }
 
-    val fieldsWithoutDefault by lazy { allFields.filter { it.defaultValueInImplementation == null } }
-    val fieldsWithDefault by lazy { allFields.filter { it.defaultValueInImplementation != null } }
+    konst fieldsWithoutDefault by lazy { allFields.filter { it.defaultValueInImplementation == null } }
+    konst fieldsWithDefault by lazy { allFields.filter { it.defaultValueInImplementation != null } }
 
-    enum class Kind(val title: String, val hasLeafBuilder: Boolean, val isInterface: Boolean) {
+    enum class Kind(konst title: String, konst hasLeafBuilder: Boolean, konst isInterface: Boolean) {
         Interface("interface", hasLeafBuilder = false, isInterface = true),
         FinalClass("class", hasLeafBuilder = true, isInterface = false),
         OpenClass("open class", hasLeafBuilder = true, isInterface = false),

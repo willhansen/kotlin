@@ -2,12 +2,12 @@
 // IGNORE_BACKEND_K1: JVM_IR
 
 open class Base {
-    open val x: CharSequence = "BASE"
+    open konst x: CharSequence = "BASE"
          // field = "BASE"
 }
 
 class Ok : Base() {
-    override val x: CharSequence
+    override konst x: CharSequence
         internal field: String = "OK"
 }
 

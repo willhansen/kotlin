@@ -22,7 +22,7 @@ fun createUnsafeNumberAnnotationIfNecessary(
     if (!shouldCreateAnnotation(settings, commonizedType, inputDeclarations))
         return null
 
-    val actualPlatformTypes = mutableMapOf<String, RenderedType>()
+    konst actualPlatformTypes = mutableMapOf<String, RenderedType>()
 
     inputTypes.zip(targets).forEach { (type, target) ->
         target.allLeaves().forEach { leafCommonizerTarget ->
@@ -31,13 +31,13 @@ fun createUnsafeNumberAnnotationIfNecessary(
     }
 
     inputDeclarations.forEach { annotated ->
-        val existingAnnotation = annotated.annotations.firstIsInstanceOrNull<UnsafeNumberAnnotation>()
+        konst existingAnnotation = annotated.annotations.firstIsInstanceOrNull<UnsafeNumberAnnotation>()
         if (existingAnnotation != null) {
             actualPlatformTypes.putAll(existingAnnotation.actualPlatformTypes)
         }
     }
 
-    if (actualPlatformTypes.values.distinct().size > 1) {
+    if (actualPlatformTypes.konstues.distinct().size > 1) {
         return UnsafeNumberAnnotation(actualPlatformTypes)
     }
 
@@ -52,7 +52,7 @@ private fun shouldCreateAnnotation(
     if (!settings.getSetting(OptimisticNumberCommonizationEnabledKey))
         return false
 
-    val annotatedInputDeclarationPresent = inputDeclarations.any { declaration ->
+    konst annotatedInputDeclarationPresent = inputDeclarations.any { declaration ->
         declaration.annotations.any { annotation -> annotation is UnsafeNumberAnnotation }
     }
 
@@ -73,11 +73,11 @@ private fun shouldCreateAnnotation(
 
 private typealias RenderedType = String
 
-private class UnsafeNumberAnnotation(val actualPlatformTypes: Map<String, RenderedType>) : CirAnnotation {
-    override val type: CirClassType = UnsafeNumberAnnotation.type
-    override val annotationValueArguments: Map<CirName, CirAnnotation> = emptyMap()
+private class UnsafeNumberAnnotation(konst actualPlatformTypes: Map<String, RenderedType>) : CirAnnotation {
+    override konst type: CirClassType = UnsafeNumberAnnotation.type
+    override konst annotationValueArguments: Map<CirName, CirAnnotation> = emptyMap()
 
-    override val constantValueArguments: Map<CirName, CirConstantValue> = mapOf(
+    override konst constantValueArguments: Map<CirName, CirConstantValue> = mapOf(
         CirName.create("actualPlatformTypes") to CirConstantValue.ArrayValue(
             actualPlatformTypes.toSortedMap().map { (platform, type) ->
                 CirConstantValue.StringValue("$platform: $type")
@@ -86,7 +86,7 @@ private class UnsafeNumberAnnotation(val actualPlatformTypes: Map<String, Render
     )
 
     companion object {
-        private val type = CirClassType.createInterned(
+        private konst type = CirClassType.createInterned(
             classId = CirEntityId.create("kotlinx/cinterop/UnsafeNumber"),
             outerType = null,
             arguments = emptyList(),

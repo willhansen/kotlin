@@ -16,13 +16,13 @@ import org.jetbrains.kotlin.ir.declarations.IrMetadataSourceOwner
 import org.jetbrains.kotlin.ir.util.KotlinMangler
 
 interface FirMangler : KotlinMangler<FirDeclaration> {
-    override val manglerName: String
+    override konst manglerName: String
         get() = "Fir"
 }
 
-class Ir2FirManglerAdapter(private val delegate: FirMangler) : AbstractKotlinMangler<IrDeclaration>(),
+class Ir2FirManglerAdapter(private konst delegate: FirMangler) : AbstractKotlinMangler<IrDeclaration>(),
     KotlinMangler.IrMangler {
-    override val manglerName: String
+    override konst manglerName: String
         get() = delegate.manglerName
 
     private fun IrDeclaration.fir(): FirDeclaration = ((this as IrMetadataSourceOwner).metadata as FirMetadataSource).fir!!

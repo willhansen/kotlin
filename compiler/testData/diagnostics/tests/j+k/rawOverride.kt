@@ -14,7 +14,7 @@ import org.jetbrains.annotations.*;
 
 public class IStubFileElementType<X extends StubElement> extends ObjectStubSerializer<X> {
     @Override
-    // IMO value parameter type should be T (may be I'm wrong)
+    // IMO konstue parameter type should be T (may be I'm wrong)
     public void indexStub(@NotNull final StubElement stub) {}
 }
 

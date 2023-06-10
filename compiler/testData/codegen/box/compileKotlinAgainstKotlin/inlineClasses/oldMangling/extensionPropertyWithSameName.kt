@@ -4,13 +4,13 @@
 // USE_OLD_INLINE_CLASSES_MANGLING_SCHEME
 // FILE: A.kt
 
-inline class A(val value: String) {
-    val Char.value: String get() = this + nonExtensionValue()
+inline class A(konst konstue: String) {
+    konst Char.konstue: String get() = this + nonExtensionValue()
 
-    fun nonExtensionValue(): String = value
+    fun nonExtensionValue(): String = konstue
 }
 
 // MODULE: main(lib)
 // FILE: B.kt
 
-fun box(): String = with(A("K")) { 'O'.value }
+fun box(): String = with(A("K")) { 'O'.konstue }

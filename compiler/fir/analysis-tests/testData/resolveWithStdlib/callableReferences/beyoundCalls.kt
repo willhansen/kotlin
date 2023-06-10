@@ -5,10 +5,10 @@ fun baz(x: String): Int = 1
 fun <T, R> foobaz(x: T): R = TODO()
 
 fun foo() {
-    val x: (String) -> Int = ::bar
-    val y = ::bar
-    val z = ::baz
-    val w: (String) -> Int = ::foobaz
+    konst x: (String) -> Int = ::bar
+    konst y = ::bar
+    konst z = ::baz
+    konst w: (String) -> Int = ::foobaz
 
     ::baz
 }

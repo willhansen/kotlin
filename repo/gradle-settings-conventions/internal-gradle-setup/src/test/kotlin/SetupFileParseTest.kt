@@ -25,7 +25,7 @@ class SetupFileParseTest {
 
     @Test
     fun testSimpleParsing() {
-        val setupFile = openPropertiesJsonStream("properties").use {
+        konst setupFile = openPropertiesJsonStream("properties").use {
             parseSetupFile(it)
         }
         assertSampleSetupFileIsParsedCorrectly(setupFile)
@@ -34,7 +34,7 @@ class SetupFileParseTest {
 
     @Test
     fun testUnknownFieldsDoNotBreakParsing() {
-        val setupFile = openPropertiesJsonStream("properties-with-unknown-fields").use {
+        konst setupFile = openPropertiesJsonStream("properties-with-unknown-fields").use {
             parseSetupFile(it)
         }
         assertSampleSetupFileIsParsedCorrectly(setupFile)
@@ -43,7 +43,7 @@ class SetupFileParseTest {
 
     @Test
     fun testParsingWithConsentDetailsLink() {
-        val setupFile = openPropertiesJsonStream("properties-with-consent-details").use {
+        konst setupFile = openPropertiesJsonStream("properties-with-consent-details").use {
             parseSetupFile(it)
         }
         assertSampleSetupFileIsParsedCorrectly(setupFile)

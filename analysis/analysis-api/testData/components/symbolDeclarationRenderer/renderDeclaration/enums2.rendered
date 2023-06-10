@@ -14,6 +14,6 @@ enum class SomeEnum(x: Some) {
 
   abstract fun check(y: Some): Boolean
 
-  val x: Some
+  konst x: Some
 }
 

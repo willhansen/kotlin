@@ -1295,7 +1295,7 @@ public class BlackBoxCodegenTestSpecGenerated extends AbstractBlackBoxCodegenTes
                     }
                 }
 
-                @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions")
+                @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions")
                 @TestDataPath("$PROJECT_ROOT")
                 @RunWith(JUnit3RunnerWithInners.class)
                 public static class Value_equality_expressions extends AbstractBlackBoxCodegenTestSpec {
@@ -1304,10 +1304,10 @@ public class BlackBoxCodegenTestSpecGenerated extends AbstractBlackBoxCodegenTes
                     }
 
                     public void testAllFilesPresentInValue_equality_expressions() throws Exception {
-                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions"), Pattern.compile("^(.+)\\.kt$"), null, true);
+                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions"), Pattern.compile("^(.+)\\.kt$"), null, true);
                     }
 
-                    @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2")
+                    @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2")
                     @TestDataPath("$PROJECT_ROOT")
                     @RunWith(JUnit3RunnerWithInners.class)
                     public static class P_2 extends AbstractBlackBoxCodegenTestSpec {
@@ -1316,10 +1316,10 @@ public class BlackBoxCodegenTestSpecGenerated extends AbstractBlackBoxCodegenTes
                         }
 
                         public void testAllFilesPresentInP_2() throws Exception {
-                            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2"), Pattern.compile("^(.+)\\.kt$"), null, true);
+                            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2"), Pattern.compile("^(.+)\\.kt$"), null, true);
                         }
 
-                        @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos")
+                        @TestMetadata("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos")
                         @TestDataPath("$PROJECT_ROOT")
                         @RunWith(JUnit3RunnerWithInners.class)
                         public static class Pos extends AbstractBlackBoxCodegenTestSpec {
@@ -1329,56 +1329,56 @@ public class BlackBoxCodegenTestSpecGenerated extends AbstractBlackBoxCodegenTes
 
                             @TestMetadata("1.1.kt")
                             public void test1_1() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/1.1.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/1.1.kt");
                             }
 
                             @TestMetadata("1.2.kt")
                             public void test1_2() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/1.2.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/1.2.kt");
                             }
 
                             @TestMetadata("1.3.kt")
                             public void test1_3() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/1.3.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/1.3.kt");
                             }
 
                             @TestMetadata("1.4.kt")
                             public void test1_4() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/1.4.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/1.4.kt");
                             }
 
                             @TestMetadata("1.5.kt")
                             public void test1_5() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/1.5.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/1.5.kt");
                             }
 
                             @TestMetadata("2.1.kt")
                             public void test2_1() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/2.1.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/2.1.kt");
                             }
 
                             @TestMetadata("2.2.kt")
                             public void test2_2() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/2.2.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/2.2.kt");
                             }
 
                             @TestMetadata("2.3.kt")
                             public void test2_3() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/2.3.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/2.3.kt");
                             }
 
                             @TestMetadata("2.4.kt")
                             public void test2_4() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/2.4.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/2.4.kt");
                             }
 
                             @TestMetadata("2.5.kt")
                             public void test2_5() throws Exception {
-                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos/2.5.kt");
+                                runTest("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos/2.5.kt");
                             }
 
                             public void testAllFilesPresentInPos() throws Exception {
-                                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/value-equality-expressions/p-2/pos"), Pattern.compile("^(.+)\\.kt$"), null, true);
+                                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/tests-spec/testData/codegen/box/linked/expressions/equality-expressions/konstue-equality-expressions/p-2/pos"), Pattern.compile("^(.+)\\.kt$"), null, true);
                             }
                         }
                     }

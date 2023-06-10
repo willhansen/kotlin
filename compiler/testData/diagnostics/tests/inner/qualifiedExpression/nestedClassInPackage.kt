@@ -6,4 +6,4 @@ class B {
     }
 }
 
-val a = A.B.C()
+konst a = A.B.C()

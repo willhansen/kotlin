@@ -14,8 +14,8 @@ import kotlin.concurrent.AtomicLong
 import kotlin.concurrent.AtomicReference
 
 fun test1(workers: Array<Worker>) {
-    val atomic = AtomicInt(15)
-    val futures = Array(workers.size, { workerIndex ->
+    konst atomic = AtomicInt(15)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { atomic }) {
             input -> input.addAndGet(1)
         }
@@ -23,47 +23,47 @@ fun test1(workers: Array<Worker>) {
     futures.forEach {
         it.result
     }
-    println(atomic.value)
+    println(atomic.konstue)
 }
 
 fun test2(workers: Array<Worker>) {
-    val atomic = AtomicInt(1)
-    val counter = AtomicInt(0)
-    val futures = Array(workers.size, { workerIndex ->
+    konst atomic = AtomicInt(1)
+    konst counter = AtomicInt(0)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { Triple(atomic, workerIndex, counter) }) {
             (place, index, result) ->
             // Here we simulate mutex using [place] location to store tag of the current worker.
             // When it is negative - worker executes exclusively.
-            val tag = index + 1
+            konst tag = index + 1
             while (place.compareAndExchange(tag, -tag) != tag) {}
-            val ok1 = result.addAndGet(1) == index + 1
+            konst ok1 = result.addAndGet(1) == index + 1
             // Now, let the next worker run.
-            val ok2 = place.compareAndExchange(-tag, tag + 1) == -tag
+            konst ok2 = place.compareAndExchange(-tag, tag + 1) == -tag
             ok1 && ok2
         }
     })
     futures.forEach {
         assertEquals(it.result, true)
     }
-    println(counter.value)
+    println(counter.konstue)
 }
 
-data class Data(val value: Int)
+data class Data(konst konstue: Int)
 
 fun test3(workers: Array<Worker>) {
-    val common = AtomicReference<Data?>(null)
-    val futures = Array(workers.size, { workerIndex ->
+    konst common = AtomicReference<Data?>(null)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { Pair(common, workerIndex) }) {
             (place, index) ->
-            val mine = Data(index).freeze()
+            konst mine = Data(index).freeze()
             // Try to publish our own data, until successful, in a tight loop.
             while (!place.compareAndSet(null, mine)) {}
         }
     })
-    val seen = mutableSetOf<Data>()
+    konst seen = mutableSetOf<Data>()
     for (i in 0 until workers.size) {
         do {
-            val current = common.value
+            konst current = common.konstue
             if (current != null && !seen.contains(current)) {
                 seen += current
                 // Let others publish.
@@ -79,28 +79,28 @@ fun test3(workers: Array<Worker>) {
 }
 
 fun test4LegacyMM() {
-    assertFailsWith<InvalidMutabilityException> {
+    assertFailsWith<InkonstidMutabilityException> {
         AtomicReference(Data(1))
     }
-    assertFailsWith<InvalidMutabilityException> {
+    assertFailsWith<InkonstidMutabilityException> {
         AtomicReference<Data?>(null).compareAndExchange(null, Data(2))
     }
 }
 
 fun test4() {
     run {
-        val ref = AtomicReference(Data(1))
-        assertEquals(1, ref.value.value)
+        konst ref = AtomicReference(Data(1))
+        assertEquals(1, ref.konstue.konstue)
     }
     run {
-        val ref = AtomicReference<Data?>(null)
+        konst ref = AtomicReference<Data?>(null)
         ref.compareAndExchange(null, Data(2))
-        assertEquals(2, ref.value!!.value)
+        assertEquals(2, ref.konstue!!.konstue)
     }
     if (Platform.isFreezingEnabled) {
         run {
-            val ref = AtomicReference<Data?>(null).freeze()
-            assertFailsWith<InvalidMutabilityException> {
+            konst ref = AtomicReference<Data?>(null).freeze()
+            assertFailsWith<InkonstidMutabilityException> {
                 ref.compareAndExchange(null, Data(2))
             }
         }
@@ -108,56 +108,56 @@ fun test4() {
 }
 
 fun test5LegacyMM() {
-    assertFailsWith<InvalidMutabilityException> {
-        AtomicReference<Data?>(null).value = Data(2)
+    assertFailsWith<InkonstidMutabilityException> {
+        AtomicReference<Data?>(null).konstue = Data(2)
     }
-    val ref = AtomicReference<Data?>(null)
-    val value = Data(3).freeze()
-    assertEquals(null, ref.value)
-    ref.value = value
-    assertEquals(3, ref.value!!.value)
+    konst ref = AtomicReference<Data?>(null)
+    konst konstue = Data(3).freeze()
+    assertEquals(null, ref.konstue)
+    ref.konstue = konstue
+    assertEquals(3, ref.konstue!!.konstue)
 }
 
 fun test5() {
-    val ref = AtomicReference<Data?>(null)
-    ref.value = Data(2)
-    assertEquals(2, ref.value!!.value)
-    ref.value = Data(3).freeze()
-    assertEquals(3, ref.value!!.value)
+    konst ref = AtomicReference<Data?>(null)
+    ref.konstue = Data(2)
+    assertEquals(2, ref.konstue!!.konstue)
+    ref.konstue = Data(3).freeze()
+    assertEquals(3, ref.konstue!!.konstue)
 }
 
 fun test6() {
-    val int = AtomicInt(0)
-    int.value = 239
-    assertEquals(239, int.value)
-    val long = AtomicLong(0)
-    long.value = 239L
-    assertEquals(239L, long.value)
+    konst int = AtomicInt(0)
+    int.konstue = 239
+    assertEquals(239, int.konstue)
+    konst long = AtomicLong(0)
+    long.konstue = 239L
+    assertEquals(239L, long.konstue)
 }
 
 @Suppress("DEPRECATION_ERROR")
 fun test7() {
-    val ref = FreezableAtomicReference(Array(1) { "hey" })
-    ref.value[0] = "ho"
-    assertEquals(ref.value[0], "ho")
-    ref.value = Array(1) { "po" }
-    assertEquals(ref.value[0], "po")
+    konst ref = FreezableAtomicReference(Array(1) { "hey" })
+    ref.konstue[0] = "ho"
+    assertEquals(ref.konstue[0], "ho")
+    ref.konstue = Array(1) { "po" }
+    assertEquals(ref.konstue[0], "po")
     ref.freeze()
     if (Platform.isFreezingEnabled) {
-        assertFailsWith<InvalidMutabilityException> {
-            ref.value = Array(1) { "no" }
+        assertFailsWith<InkonstidMutabilityException> {
+            ref.konstue = Array(1) { "no" }
         }
-        assertFailsWith<InvalidMutabilityException> {
-            ref.value[0] = "go"
+        assertFailsWith<InkonstidMutabilityException> {
+            ref.konstue[0] = "go"
         }
     }
-    ref.value = Array(1) { "so" }.freeze()
-    assertEquals(ref.value[0], "so")
+    ref.konstue = Array(1) { "so" }.freeze()
+    assertEquals(ref.konstue[0], "so")
 }
 
 @Test fun runTest() {
-    val COUNT = 20
-    val workers = Array(COUNT, { _ -> Worker.start()})
+    konst COUNT = 20
+    konst workers = Array(COUNT, { _ -> Worker.start()})
 
     test1(workers)
     test2(workers)

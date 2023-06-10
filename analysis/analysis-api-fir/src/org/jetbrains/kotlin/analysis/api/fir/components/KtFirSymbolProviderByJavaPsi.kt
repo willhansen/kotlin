@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.name.Name
 
 @OptIn(KtAnalysisApiInternals::class)
 internal class KtFirSymbolProviderByJavaPsi(
-    override val analysisSession: KtFirAnalysisSession,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtSymbolProviderByJavaPsi(), KtFirAnalysisSessionComponent {
     override fun getNamedClassSymbol(psiClass: PsiClass): KtNamedClassOrObjectSymbol? {
         if (psiClass.qualifiedName == null) return null
@@ -35,9 +35,9 @@ internal class KtFirSymbolProviderByJavaPsi(
 
     override fun getCallableSymbol(callable: PsiMember): KtCallableSymbol? {
         if (callable !is PsiMethod && callable !is PsiField) return null
-        val name = callable.name?.let(Name::identifier) ?: return null
-        val containingClass = callable.containingClass ?: return null
-        val classSymbol = getNamedClassSymbol(containingClass) ?: return null
+        konst name = callable.name?.let(Name::identifier) ?: return null
+        konst containingClass = callable.containingClass ?: return null
+        konst classSymbol = getNamedClassSymbol(containingClass) ?: return null
         return with(analysisSession) {
             classSymbol.getDeclaredMemberScope()
                 .getCallableSymbols(name)

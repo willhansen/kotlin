@@ -22,8 +22,8 @@ external interface Baz {
 import foo.Bar
 import boo.Baz
 
-external val bar: Bar
-external val baz: Baz
+external konst bar: Bar
+external konst baz: Baz
 
 // FILE: test.kt
 fun box(): String {

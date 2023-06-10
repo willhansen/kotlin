@@ -23,7 +23,7 @@ import java.io.File
  */
 class ClasspathOrderTest : TestCaseWithTmpdir() {
     companion object {
-        private val sourceDir
+        private konst sourceDir
             get() = File(AbstractKotlinJpsBuildTestCase.TEST_DATA_PATH + "/../../../compiler/testData/classpathOrder").absoluteFile
     }
 
@@ -32,7 +32,7 @@ class ClasspathOrderTest : TestCaseWithTmpdir() {
     }
 
     fun testClasspathOrderForModuleScriptBuild() {
-        val xmlContent = KotlinModuleXmlBuilder().addModule(
+        konst xmlContent = KotlinModuleXmlBuilder().addModule(
             "name",
             File(tmpdir, "output").absolutePath,
             listOf(sourceDir),
@@ -47,7 +47,7 @@ class ClasspathOrderTest : TestCaseWithTmpdir() {
             IncrementalCompilation.isEnabledForJvm()
         ).asText().toString()
 
-        val xml = File(tmpdir, "module.xml")
+        konst xml = File(tmpdir, "module.xml")
         xml.writeText(xmlContent)
 
         MockLibraryUtil.compileKotlinModule(xml.absolutePath)

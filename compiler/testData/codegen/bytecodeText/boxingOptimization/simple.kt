@@ -7,5 +7,5 @@ fun bar() {
     foo(1) { x -> x + 1 }
 }
 
-// 1 java/lang/Integer.valueOf
+// 1 java/lang/Integer.konstueOf
 // 1 intValue

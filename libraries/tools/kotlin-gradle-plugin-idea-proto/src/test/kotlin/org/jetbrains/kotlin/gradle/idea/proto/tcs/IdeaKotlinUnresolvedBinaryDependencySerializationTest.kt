@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.tooling.core.toMutableExtras
 import kotlin.test.Test
 
 class IdeaKotlinUnresolvedBinaryDependencySerializationTest : AbstractSerializationTest<IdeaKotlinUnresolvedBinaryDependency>() {
-    override fun serialize(value: IdeaKotlinUnresolvedBinaryDependency): ByteArray =
-        IdeaKotlinUnresolvedBinaryDependencyProto(value).toByteArray()
+    override fun serialize(konstue: IdeaKotlinUnresolvedBinaryDependency): ByteArray =
+        IdeaKotlinUnresolvedBinaryDependencyProto(konstue).toByteArray()
 
     override fun deserialize(data: ByteArray) =
         IdeaKotlinUnresolvedBinaryDependency(IdeaKotlinUnresolvedBinaryDependencyProto.parseFrom(data))

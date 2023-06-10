@@ -32,30 +32,30 @@ import org.jetbrains.kotlin.util.getChildren
 
 object CanBeReplacedWithOperatorAssignmentChecker : FirVariableAssignmentChecker() {
     override fun check(expression: FirVariableAssignment, context: CheckerContext, reporter: DiagnosticReporter) {
-        val lValue = expression.calleeReference
+        konst lValue = expression.calleeReference
         if (lValue !is FirResolvedNamedReference) return
         if (expression.source?.kind is KtFakeSourceElementKind) return
 
-        val rValue = expression.rValue as? FirFunctionCall ?: return
+        konst rValue = expression.rValue as? FirFunctionCall ?: return
         if (rValue.source?.kind is KtFakeSourceElementKind) return
 
         if (rValue.explicitReceiver?.typeRef?.coneType?.isPrimitive != true) return
-        val rValueResolvedSymbol = rValue.toResolvedCallableSymbol() ?: return
+        konst rValueResolvedSymbol = rValue.toResolvedCallableSymbol() ?: return
         if (rValueResolvedSymbol.dispatchReceiverClassTypeOrNull()?.isPrimitive != true) return
 
         var needToReport = false
-        val assignmentSource = expression.source
+        konst assignmentSource = expression.source
 
         if (assignmentSource is KtPsiSourceElement) {
-            val lValuePsi = lValue.psi as? KtNameReferenceExpression ?: return
-            val rValuePsi = rValue.psi as? KtBinaryExpression ?: return
+            konst lValuePsi = lValue.psi as? KtNameReferenceExpression ?: return
+            konst rValuePsi = rValue.psi as? KtBinaryExpression ?: return
 
             if (rValuePsi.matcher(lValuePsi)) {
                 needToReport = true
             }
         } else if (assignmentSource is KtLightSourceElement) {
-            val lValueLightTree = lValue.source!!.lighterASTNode
-            val rValueLightTree = rValue.source!!.lighterASTNode
+            konst lValueLightTree = lValue.source!!.lighterASTNode
+            konst rValueLightTree = rValue.source!!.lighterASTNode
             if (lightTreeMatcher(lValueLightTree, rValueLightTree, assignmentSource)) {
                 needToReport = true
             }
@@ -73,14 +73,14 @@ object CanBeReplacedWithOperatorAssignmentChecker : FirVariableAssignmentChecker
         source: KtLightSourceElement,
         prevOperator: LighterASTNode? = null
     ): Boolean {
-        val tree = source.treeStructure
-        val children = expression.getChildren(tree)
+        konst tree = source.treeStructure
+        konst children = expression.getChildren(tree)
 
-        val operator = children.firstOrNull { it.tokenType == KtNodeTypes.OPERATION_REFERENCE }
+        konst operator = children.firstOrNull { it.tokenType == KtNodeTypes.OPERATION_REFERENCE }
         if (prevOperator != null && !isLightNodesHierarchicallyTrue(prevOperator, operator)) return false
         if (operator?.canBeAugmented() == false) return false
 
-        val commutative = operator != null && isCommutativeOperator(operator)
+        konst commutative = operator != null && isCommutativeOperator(operator)
         var afterOperatorNode = false
         children.forEach {
             when (it.tokenType) {
@@ -104,19 +104,19 @@ object CanBeReplacedWithOperatorAssignmentChecker : FirVariableAssignmentChecker
         if ((right as? KtNameReferenceExpression)?.getReferencedName() == variable.getReferencedName() && isCommutative()) return true
 
         return if (isCommutative()) {
-            val leftExpression = left as? KtBinaryExpression
-            val rightExpression = right as? KtBinaryExpression
+            konst leftExpression = left as? KtBinaryExpression
+            konst rightExpression = right as? KtBinaryExpression
 
-            val isLeftMatch = isHierarchicallyTrue(operationToken, leftExpression?.operationToken)
+            konst isLeftMatch = isHierarchicallyTrue(operationToken, leftExpression?.operationToken)
                     && leftExpression?.matcher(variable) == true
             if (isLeftMatch) return true
-            val isRightMatch = isHierarchicallyTrue(operationToken, rightExpression?.operationToken)
+            konst isRightMatch = isHierarchicallyTrue(operationToken, rightExpression?.operationToken)
                     && rightExpression?.matcher(variable) == true
             if (isRightMatch) return true
 
             false
         } else {
-            val leftExpression = left as? KtBinaryExpression
+            konst leftExpression = left as? KtBinaryExpression
 
             isHierarchicallyTrue(operationToken, leftExpression?.operationToken)
                     && leftExpression?.matcher(variable) == true

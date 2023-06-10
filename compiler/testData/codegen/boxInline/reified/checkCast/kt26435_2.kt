@@ -3,7 +3,7 @@
 
 package test
 
-open class Base(val name: String)
+open class Base(konst name: String)
 class A(name: String) : Base(name)
 class B(name: String) : Base(name)
 
@@ -16,7 +16,7 @@ fun foo(base: Base) {
 fun cond() = true
 
 inline fun <reified T : Base, reified Y : Base> process(a: Base) {
-    val z = if (cond())
+    konst z = if (cond())
         a as T
     else
         a as Y

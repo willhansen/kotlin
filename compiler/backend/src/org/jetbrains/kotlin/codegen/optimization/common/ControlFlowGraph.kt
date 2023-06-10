@@ -10,9 +10,9 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.*
 
 
-class ControlFlowGraph private constructor(private val insns: InsnList) {
-    private val successors: Array<MutableList<Int>> = Array(insns.size()) { ArrayList(2) }
-    private val predecessors: Array<MutableList<Int>> = Array(insns.size()) { ArrayList(2) }
+class ControlFlowGraph private constructor(private konst insns: InsnList) {
+    private konst successors: Array<MutableList<Int>> = Array(insns.size()) { ArrayList(2) }
+    private konst predecessors: Array<MutableList<Int>> = Array(insns.size()) { ArrayList(2) }
 
     fun getSuccessorsIndices(insn: AbstractInsnNode): List<Int> = getSuccessorsIndices(insns.indexOf(insn))
     fun getSuccessorsIndices(index: Int): List<Int> = successors[index]
@@ -20,24 +20,24 @@ class ControlFlowGraph private constructor(private val insns: InsnList) {
     fun getPredecessorsIndices(index: Int): List<Int> = predecessors[index]
 
     private class Builder(
-        private val method: MethodNode,
-        private val followExceptions: Boolean
+        private konst method: MethodNode,
+        private konst followExceptions: Boolean
     ) {
-        private val instructions = method.instructions
-        private val nInsns = instructions.size()
+        private konst instructions = method.instructions
+        private konst nInsns = instructions.size()
 
-        private val handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
+        private konst handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
 
-        private val queued = BooleanArray(nInsns)
-        private val queue = IntArray(nInsns)
+        private konst queued = BooleanArray(nInsns)
+        private konst queue = IntArray(nInsns)
         private var top = 0
 
-        private val predecessors = Array(nInsns) { TIntHashSet() }
+        private konst predecessors = Array(nInsns) { TIntHashSet() }
 
-        private val AbstractInsnNode.indexOf get() = instructions.indexOf(this)
+        private konst AbstractInsnNode.indexOf get() = instructions.indexOf(this)
 
         fun build(): ControlFlowGraph {
-            val graph = ControlFlowGraph(method.instructions)
+            konst graph = ControlFlowGraph(method.instructions)
             if (nInsns == 0) return graph
 
             checkAssertions()
@@ -56,9 +56,9 @@ class ControlFlowGraph private constructor(private val insns: InsnList) {
 
         private fun traverseCfg() {
             while (top > 0) {
-                val insn = queue[--top]
-                val insnNode = method.instructions[insn]
-                val insnOpcode = insnNode.opcode
+                konst insn = queue[--top]
+                konst insnNode = method.instructions[insn]
+                konst insnOpcode = insnNode.opcode
 
                 when (insnNode.type) {
                     AbstractInsnNode.LABEL, AbstractInsnNode.LINE, AbstractInsnNode.FRAME ->
@@ -114,7 +114,7 @@ class ControlFlowGraph private constructor(private val insns: InsnList) {
             if (insnOpcode != Opcodes.GOTO && insnOpcode != Opcodes.JSR) {
                 visitEdge(insn, insn + 1)
             }
-            val jump = insnNode.label.indexOf
+            konst jump = insnNode.label.indexOf
             visitEdge(insn, jump)
         }
 
@@ -125,10 +125,10 @@ class ControlFlowGraph private constructor(private val insns: InsnList) {
 
         private fun computeExceptionHandlersForEachInsn() {
             for (tcb in method.tryCatchBlocks) {
-                val begin = tcb.start.indexOf
-                val end = tcb.end.indexOf
+                konst begin = tcb.start.indexOf
+                konst end = tcb.end.indexOf
                 for (j in begin until end) {
-                    val insnHandlers = handlers[j]
+                    konst insnHandlers = handlers[j]
                         ?: ArrayList<TryCatchBlockNode>().also { handlers[j] = it }
                     insnHandlers.add(tcb)
                 }

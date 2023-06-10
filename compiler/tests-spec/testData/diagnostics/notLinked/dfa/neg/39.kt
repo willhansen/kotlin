@@ -16,7 +16,7 @@
  * ISSUES: KT-24652
  */
 fun case_1() {
-    val x: String? = null
+    konst x: String? = null
     while (true) {
         println(x ?: break)
     }
@@ -30,7 +30,7 @@ fun case_1() {
  * ISSUES: KT-24652
  */
 fun case_2(y: MutableList<Int>) {
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         y[x ?: break] = 10
     }
@@ -44,7 +44,7 @@ fun case_2(y: MutableList<Int>) {
  * ISSUES: KT-24652
  */
 fun case_3(y: MutableList<Int>) {
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         y[0] = x ?: break
     }
@@ -54,7 +54,7 @@ fun case_3(y: MutableList<Int>) {
 
 // TESTCASE NUMBER: 4
 fun case_4() {
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         x ?: break
     }
@@ -64,7 +64,7 @@ fun case_4() {
 
 // TESTCASE NUMBER: 5
 fun case_5(y: Boolean) {
-    val x: Boolean? = null
+    konst x: Boolean? = null
     while (true) {
         y && (x ?: break)
     }
@@ -74,7 +74,7 @@ fun case_5(y: Boolean) {
 
 // TESTCASE NUMBER: 6
 fun case_6(y: Boolean) {
-    val x: Boolean? = null
+    konst x: Boolean? = null
     while (true) {
         y || (x ?: break)
     }
@@ -84,7 +84,7 @@ fun case_6(y: Boolean) {
 
 // TESTCASE NUMBER: 7
 fun case_7(y: Boolean?) {
-    val x: Boolean? = null
+    konst x: Boolean? = null
     while (true) {
         y ?: x ?: break
     }
@@ -99,7 +99,7 @@ fun case_7(y: Boolean?) {
  */
 fun case_8() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         y += x ?: break
     }
@@ -114,7 +114,7 @@ fun case_8() {
  */
 fun case_9() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         y -= x ?: break
     }
@@ -129,9 +129,9 @@ fun case_9() {
  */
 fun case_10() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
-        val z = y - (x ?: break)
+        konst z = y - (x ?: break)
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.inv()
@@ -144,9 +144,9 @@ fun case_10() {
  */
 fun case_11() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
-        val z = y * (x ?: break)
+        konst z = y * (x ?: break)
     }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>x<!>.inv()
@@ -155,7 +155,7 @@ fun case_11() {
 // TESTCASE NUMBER: 12
 fun case_12() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
         y += if (x == null) break else 10
     }
@@ -166,9 +166,9 @@ fun case_12() {
 // TESTCASE NUMBER: 13
 fun case_13() {
     var y: Int = 10
-    val x: Int? = null
+    konst x: Int? = null
     while (true) {
-        val z = y * if (x != null) break else 10
+        konst z = y * if (x != null) break else 10
     }
     <!DEBUG_INFO_CONSTANT, DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int? & kotlin.Nothing?")!>x<!><!UNSAFE_CALL!>.<!>inv()

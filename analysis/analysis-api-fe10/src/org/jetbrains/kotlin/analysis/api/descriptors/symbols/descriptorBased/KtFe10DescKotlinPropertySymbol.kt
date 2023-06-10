@@ -30,89 +30,89 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.descriptorUtil.isExtension
 
 internal class KtFe10DescKotlinPropertySymbol(
-    override val descriptor: PropertyDescriptorImpl,
-    override val analysisContext: Fe10AnalysisContext
+    override konst descriptor: PropertyDescriptorImpl,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtKotlinPropertySymbol(), KtFe10DescMemberSymbol<PropertyDescriptorImpl> {
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { descriptor.name }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { descriptor.ktSymbolKind }
 
-    override val isLateInit: Boolean
+    override konst isLateInit: Boolean
         get() = withValidityAssertion { descriptor.isLateInit }
 
-    override val isConst: Boolean
+    override konst isConst: Boolean
         get() = withValidityAssertion { descriptor.isConst }
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = withValidityAssertion { !descriptor.isVar }
 
-    override val isExtension: Boolean
+    override konst isExtension: Boolean
         get() = withValidityAssertion { descriptor.isExtension }
 
-    override val isFromPrimaryConstructor: Boolean
+    override konst isFromPrimaryConstructor: Boolean
         get() = withValidityAssertion { descriptor.containingDeclaration is ConstructorDescriptor }
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = withValidityAssertion { DescriptorUtils.isEnumEntry(descriptor) }
 
-    override val isOverride: Boolean
+    override konst isOverride: Boolean
         get() = withValidityAssertion { descriptor.isExplicitOverride }
 
-    override val hasGetter: Boolean
+    override konst hasGetter: Boolean
         get() = withValidityAssertion { true }
 
-    override val hasSetter: Boolean
+    override konst hasSetter: Boolean
         get() = withValidityAssertion { descriptor.isVar }
 
-    override val callableIdIfNonLocal: CallableId?
+    override konst callableIdIfNonLocal: CallableId?
         get() = withValidityAssertion { descriptor.callableIdIfNotLocal }
 
-    override val initializer: KtInitializerValue?
+    override konst initializer: KtInitializerValue?
         get() = withValidityAssertion { createKtInitializerValue(source as? KtProperty, descriptor, analysisContext) }
 
-    override val getter: KtPropertyGetterSymbol
+    override konst getter: KtPropertyGetterSymbol
         get() = withValidityAssertion {
-            val getter = descriptor.getter ?: return KtFe10DescDefaultPropertyGetterSymbol(descriptor, analysisContext)
+            konst getter = descriptor.getter ?: return KtFe10DescDefaultPropertyGetterSymbol(descriptor, analysisContext)
             return KtFe10DescPropertyGetterSymbol(getter, analysisContext)
         }
 
-    override val setter: KtPropertySetterSymbol?
+    override konst setter: KtPropertySetterSymbol?
         get() = withValidityAssertion {
             if (!descriptor.isVar) {
                 return null
             }
 
-            val setter = descriptor.setter ?: return KtFe10DescDefaultPropertySetterSymbol(descriptor, analysisContext)
+            konst setter = descriptor.setter ?: return KtFe10DescDefaultPropertySetterSymbol(descriptor, analysisContext)
             return KtFe10DescPropertySetterSymbol(setter, analysisContext)
         }
 
-    override val backingFieldSymbol: KtBackingFieldSymbol?
+    override konst backingFieldSymbol: KtBackingFieldSymbol?
         get() = withValidityAssertion {
             if (descriptor.containingDeclaration is FunctionDescriptor) null
             else KtFe10DescDefaultBackingFieldSymbol(descriptor.backingField, this, analysisContext)
         }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor.type.toKtType(analysisContext) }
 
-    override val receiverParameter: KtReceiverParameterSymbol?
+    override konst receiverParameter: KtReceiverParameterSymbol?
         get() = withValidityAssertion { descriptor.extensionReceiverParameter?.toKtReceiverParameterSymbol(analysisContext) }
 
-    override val contextReceivers: List<KtContextReceiver>
+    override konst contextReceivers: List<KtContextReceiver>
         get() = withValidityAssertion { descriptor.createContextReceivers(analysisContext) }
 
-    override val typeParameters: List<KtTypeParameterSymbol>
+    override konst typeParameters: List<KtTypeParameterSymbol>
         get() = withValidityAssertion { descriptor.typeParameters.map { it.toKtTypeParameter(analysisContext) } }
 
-    override val hasBackingField: Boolean
+    override konst hasBackingField: Boolean
         get() = withValidityAssertion {
-            val bindingContext = analysisContext.resolveSession.bindingContext
+            konst bindingContext = analysisContext.resolveSession.bindingContext
             return bindingContext[BindingContext.BACKING_FIELD_REQUIRED, descriptor] == true
         }
 
-    override val isDelegatedProperty: Boolean
+    override konst isDelegatedProperty: Boolean
         get() = withValidityAssertion { descriptor.isDelegated }
 
     context(KtAnalysisSession)

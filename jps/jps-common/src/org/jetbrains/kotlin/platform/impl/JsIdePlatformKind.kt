@@ -27,8 +27,8 @@ object JsIdePlatformKind : IdePlatformKind() {
             null
     }
 
-    val platforms get() = listOf(JsPlatforms.defaultJsPlatform)
-    override val defaultPlatform get() = JsPlatforms.defaultJsPlatform
+    konst platforms get() = listOf(JsPlatforms.defaultJsPlatform)
+    override konst defaultPlatform get() = JsPlatforms.defaultJsPlatform
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
@@ -40,27 +40,27 @@ object JsIdePlatformKind : IdePlatformKind() {
         return K2JSCompilerArguments()
     }
 
-    override val argumentsClass get() = K2JSCompilerArguments::class.java
+    override konst argumentsClass get() = K2JSCompilerArguments::class.java
 
-    override val name get() = "JavaScript"
+    override konst name get() = "JavaScript"
 
     @Deprecated(
         message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
         level = DeprecationLevel.ERROR
     )
     object Platform : IdePlatform<JsIdePlatformKind, K2JSCompilerArguments>() {
-        override val kind get() = JsIdePlatformKind
-        override val version get() = TargetPlatformVersion.NoVersion
+        override konst kind get() = JsIdePlatformKind
+        override konst version get() = TargetPlatformVersion.NoVersion
         override fun createArguments(init: K2JSCompilerArguments.() -> Unit) = K2JSCompilerArguments().apply(init)
     }
 }
 
-val IdePlatformKind?.isJavaScript
+konst IdePlatformKind?.isJavaScript
     get() = this is JsIdePlatformKind
 
 @Deprecated(
     message = "IdePlatform is deprecated and will be removed soon, please, migrate to org.jetbrains.kotlin.platform.TargetPlatform",
     level = DeprecationLevel.ERROR
 )
-val IdePlatform<*, *>?.isJavaScript
+konst IdePlatform<*, *>?.isJavaScript
     get() = this is JsIdePlatformKind.Platform

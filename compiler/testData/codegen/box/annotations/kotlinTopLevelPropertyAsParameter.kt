@@ -5,7 +5,7 @@
 @Ann(i, s, f, d, l, b, bool, c, str) class MyClass
 
 fun box(): String {
-    val ann = MyClass::class.java.getAnnotation(Ann::class.java)
+    konst ann = MyClass::class.java.getAnnotation(Ann::class.java)
     if (ann == null) return "fail: cannot find Ann on MyClass}"
     if (ann.i != 2) return "fail: annotation parameter i should be 2, but was ${ann.i}"
     if (ann.s != 2.toShort()) return "fail: annotation parameter i should be 2, but was ${ann.i}"
@@ -21,23 +21,23 @@ fun box(): String {
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Ann(
-        val i: Int,
-        val s: Short,
-        val f: Float,
-        val d: Double,
-        val l: Long,
-        val b: Byte,
-        val bool: Boolean,
-        val c: Char,
-        val str: String
+        konst i: Int,
+        konst s: Short,
+        konst f: Float,
+        konst d: Double,
+        konst l: Long,
+        konst b: Byte,
+        konst bool: Boolean,
+        konst c: Char,
+        konst str: String
 )
 
-const val i: Int = 2
-const val s: Short = 2
-const val f: Float = 2.0.toFloat()
-const val d: Double = 2.0
-const val l: Long = 2
-const val b: Byte = 2
-const val bool: Boolean = true
-const val c: Char = 'c'
-const val str: String = "str"
+const konst i: Int = 2
+const konst s: Short = 2
+const konst f: Float = 2.0.toFloat()
+const konst d: Double = 2.0
+const konst l: Long = 2
+const konst b: Byte = 2
+const konst bool: Boolean = true
+const konst c: Char = 'c'
+const konst str: String = "str"

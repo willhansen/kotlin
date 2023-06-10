@@ -6,7 +6,7 @@ import kotlin.reflect.KProperty
 open class Base
 class Derived: Base()
 
-val a: Base by A()
+konst a: Base by A()
 
 class A {
   operator fun getValue(t: Any?, p: KProperty<*>): Derived {

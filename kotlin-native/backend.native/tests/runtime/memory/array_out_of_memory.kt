@@ -6,7 +6,7 @@
 import kotlin.test.*
 
 fun testArrayAllocation(size: Int) {
-    val arr = IntArray(size)
+    konst arr = IntArray(size)
     // Force a write into the memory.
     // TODO: How to make sure the optimizer never deletes this write?
     arr[size - 1] = 42

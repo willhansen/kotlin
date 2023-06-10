@@ -1,9 +1,9 @@
 fun box(): String {
-    val b: Byte = 42
-    val c: Char = 'z'
-    val s: Short = 239
-    val i: Int = -1
-    val j: Long = -42L
+    konst b: Byte = 42
+    konst c: Char = 'z'
+    konst s: Short = 239
+    konst i: Int = -1
+    konst j: Long = -42L
 
     b.rangeTo(b)
     b..b
@@ -49,7 +49,7 @@ fun box(): String {
 
 /*
 fun main(args: Array<String>) {
-    val s = "bcsij"
+    konst s = "bcsij"
     for (i in s) {
         for (j in s) {
             if ((i == 'c') != (j == 'c')) continue

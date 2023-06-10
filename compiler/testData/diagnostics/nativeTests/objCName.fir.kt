@@ -9,7 +9,7 @@ package kotlin.native
 )
 @Retention(AnnotationRetention.BINARY)
 @MustBeDocumented
-public annotation class ObjCName(val name: String = "", val swiftName: String = "", val exact: Boolean = false)
+public annotation class ObjCName(konst name: String = "", konst swiftName: String = "", konst exact: Boolean = false)
 
 // FILE: test.kt
 @ObjCName("ObjCClass", "SwiftClass")
@@ -33,40 +33,40 @@ class KotlinSubClass: KotlinClass() {
 }
 
 <!INVALID_OBJC_NAME!>@ObjCName()<!>
-val invalidObjCName: Int = 0
+konst inkonstidObjCName: Int = 0
 
 <!EMPTY_OBJC_NAME!>@ObjCName("", "")<!>
-val emptyObjCNameA: Int = 0
+konst emptyObjCNameA: Int = 0
 
-<!EMPTY_OBJC_NAME!>@ObjCName("validName", "")<!>
-val emptyObjCNameB: Int = 0
+<!EMPTY_OBJC_NAME!>@ObjCName("konstidName", "")<!>
+konst emptyObjCNameB: Int = 0
 
-<!EMPTY_OBJC_NAME!>@ObjCName("", "validName")<!>
-val emptyObjCNameC: Int = 0
+<!EMPTY_OBJC_NAME!>@ObjCName("", "konstidName")<!>
+konst emptyObjCNameC: Int = 0
 
-@ObjCName("validName")
-val validObjCNameA: Int = 0
+@ObjCName("konstidName")
+konst konstidObjCNameA: Int = 0
 
-@ObjCName(swiftName = "validName")
-val validObjCNameB: Int = 0
+@ObjCName(swiftName = "konstidName")
+konst konstidObjCNameB: Int = 0
 
-<!INVALID_OBJC_NAME_CHARS!>@ObjCName("validName", "invalid.name")<!>
-val invalidCharactersObjCNameA: Int = 0
+<!INVALID_OBJC_NAME_CHARS!>@ObjCName("konstidName", "inkonstid.name")<!>
+konst inkonstidCharactersObjCNameA: Int = 0
 
-<!INVALID_OBJC_NAME_CHARS!>@ObjCName("invalid.name", "validName")<!>
-val invalidCharactersObjCNameB: Int = 0
+<!INVALID_OBJC_NAME_CHARS!>@ObjCName("inkonstid.name", "konstidName")<!>
+konst inkonstidCharactersObjCNameB: Int = 0
 
-<!INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("validName1", "1validName")<!>
-val invalidFirstCharacterObjCNameA: Int = 0
+<!INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("konstidName1", "1konstidName")<!>
+konst inkonstidFirstCharacterObjCNameA: Int = 0
 
-<!INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("1validName", "validName1")<!>
-val invalidFirstCharacterObjCNameB: Int = 0
+<!INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("1konstidName", "konstidName1")<!>
+konst inkonstidFirstCharacterObjCNameB: Int = 0
 
-<!INVALID_OBJC_NAME_CHARS, INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("validName", " ")<!>
-val blankObjCNameA: Int = 0
+<!INVALID_OBJC_NAME_CHARS, INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName("konstidName", " ")<!>
+konst blankObjCNameA: Int = 0
 
-<!INVALID_OBJC_NAME_CHARS, INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName(" ", "validName")<!>
-val blankObjCNameB: Int = 0
+<!INVALID_OBJC_NAME_CHARS, INVALID_OBJC_NAME_FIRST_CHAR!>@ObjCName(" ", "konstidName")<!>
+konst blankObjCNameB: Int = 0
 
 <!MISSING_EXACT_OBJC_NAME!>@ObjCName(swiftName = "SwiftMissingExactName", exact = true)<!>
 class MissingExactName
@@ -186,15 +186,15 @@ open class Derived2 : Derived() {
     override fun foo() {}
 }
 
-private const val exact = false
-private const val objcName = "nonLiteralArgsObjC"
+private const konst exact = false
+private const konst objcName = "nonLiteralArgsObjC"
 
 <!INVALID_OBJC_NAME!>@ObjCName(
     <!NON_LITERAL_OBJC_NAME_ARG!>objcName<!>,
     <!NON_LITERAL_OBJC_NAME_ARG!>"nonLiteralArgs" + "Swift"<!>,
     <!NON_LITERAL_OBJC_NAME_ARG!>exact<!>
 )<!>
-val nonLiteralArgs: Int = 0
+konst nonLiteralArgs: Int = 0
 
-@ObjCName("invalidArgsObjC", <!ARGUMENT_TYPE_MISMATCH!>false<!>, <!ARGUMENT_TYPE_MISMATCH!>"not a boolean"<!>)
-val invalidArgs: Int = 0
+@ObjCName("inkonstidArgsObjC", <!ARGUMENT_TYPE_MISMATCH!>false<!>, <!ARGUMENT_TYPE_MISMATCH!>"not a boolean"<!>)
+konst inkonstidArgs: Int = 0

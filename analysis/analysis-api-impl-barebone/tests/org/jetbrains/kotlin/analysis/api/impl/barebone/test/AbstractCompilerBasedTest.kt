@@ -16,7 +16,7 @@ import org.junit.jupiter.api.TestInfo
 
 abstract class AbstractCompilerBasedTest : AbstractKotlinCompilerTest() {
     private var _disposable: Disposable? = null
-    protected val disposable: Disposable get() = _disposable!!
+    protected konst disposable: Disposable get() = _disposable!!
 
     @BeforeEach
     fun initDisposable(testInfo: TestInfo) {
@@ -30,7 +30,7 @@ abstract class AbstractCompilerBasedTest : AbstractKotlinCompilerTest() {
     }
 
     protected fun ignoreTest(filePath: String, configuration: TestConfiguration): Boolean {
-        val modules = configuration.moduleStructureExtractor.splitTestDataByModules(filePath, configuration.directives)
+        konst modules = configuration.moduleStructureExtractor.splitTestDataByModules(filePath, configuration.directives)
 
         if (modules.modules.none { it.files.any { it.isKtFile } }) {
             return true // nothing to highlight

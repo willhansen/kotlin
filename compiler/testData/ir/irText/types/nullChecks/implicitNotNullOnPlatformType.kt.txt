@@ -8,7 +8,7 @@ class MySet : Set<String> {
 
   }
 
-  override val size: Int
+  override konst size: Int
     override get(): Int {
       return TODO()
     }

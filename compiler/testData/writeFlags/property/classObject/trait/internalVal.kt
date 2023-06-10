@@ -1,6 +1,6 @@
 interface Test {
   companion object {
-    internal val prop: Int = 0;
+    internal konst prop: Int = 0;
   }
 }
 

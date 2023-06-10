@@ -10,10 +10,10 @@ import org.jetbrains.kotlin.diagnostics.KtDiagnostic
 import org.jetbrains.kotlin.diagnostics.Severity
 
 class SimpleDiagnosticsCollector : BaseDiagnosticsCollector() {
-    private val _diagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
-    override val diagnostics: List<KtDiagnostic>
-        get() = _diagnosticsByFilePath.flatMap { it.value }
-    override val diagnosticsByFilePath: Map<String?, List<KtDiagnostic>>
+    private konst _diagnosticsByFilePath: MutableMap<String?, MutableList<KtDiagnostic>> = mutableMapOf()
+    override konst diagnostics: List<KtDiagnostic>
+        get() = _diagnosticsByFilePath.flatMap { it.konstue }
+    override konst diagnosticsByFilePath: Map<String?, List<KtDiagnostic>>
         get() = _diagnosticsByFilePath
 
     override var hasErrors = false

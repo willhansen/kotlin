@@ -7,13 +7,13 @@ KtSuccessCallInfo:
         isSafeNavigation = false
         type = CInt32VarX<kotlin.Int>
       signature = KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = CInt32VarX<kotlin.Int>
         returnType = kotlin.Int
-        symbol = var value: T
-        callableIdIfNonLocal = /value
+        symbol = var konstue: T
+        callableIdIfNonLocal = /konstue
     simpleAccess = Write:
-      value = 42
+      konstue = 42
     typeArgumentsMapping = {
       T -> (kotlin.Int)
     }

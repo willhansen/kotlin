@@ -13,7 +13,7 @@ inline fun myRun(block: () -> Unit): Unit {
 fun getBool(): Boolean = false
 
 fun withLabeledReturn(y: Int) {
-    val x = myRun outer@ {
+    konst x = myRun outer@ {
         myRun { return@outer Unit }
         println(y)
     }

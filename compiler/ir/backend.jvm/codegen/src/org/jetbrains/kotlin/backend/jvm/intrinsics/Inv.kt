@@ -25,8 +25,8 @@ import org.jetbrains.org.objectweb.asm.Type
 object Inv : IntrinsicMethod() {
     /*TODO new this type*/
     override fun toCallable(expression: IrFunctionAccessExpression, signature: JvmMethodSignature, classCodegen: ClassCodegen): IrIntrinsicFunction {
-        val returnType = signature.returnType
-        val type = numberFunctionOperandType(returnType)
+        konst returnType = signature.returnType
+        konst type = numberFunctionOperandType(returnType)
         return IrIntrinsicFunction.create(expression, signature, classCodegen, type) {
             if (returnType == Type.LONG_TYPE) {
                 it.lconst(-1)

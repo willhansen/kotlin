@@ -23,10 +23,10 @@ public class M {
 package b
 
 fun f() {
-  val c1: a.M.Inner
-  val c2: a.M.Nested
-  val c3: <!INVISIBLE_REFERENCE!>a.M.PrInner<!>
-  val c4: <!INVISIBLE_REFERENCE!>a.M.PrNested<!>
+  konst c1: a.M.Inner
+  konst c2: a.M.Nested
+  konst c3: <!INVISIBLE_REFERENCE!>a.M.PrInner<!>
+  konst c4: <!INVISIBLE_REFERENCE!>a.M.PrNested<!>
 
 }
 

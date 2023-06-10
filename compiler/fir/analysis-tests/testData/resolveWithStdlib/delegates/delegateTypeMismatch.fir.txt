@@ -15,7 +15,7 @@ FILE: delegateTypeMismatch.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val isLocked: R|kotlin/Boolean| = R|<local>/isLocked|
+        public final konst isLocked: R|kotlin/Boolean| = R|<local>/isLocked|
             public get(): R|kotlin/Boolean|
 
         private final fun <T> property(initialValue: R|T|): R|kotlin/properties/ReadWriteProperty<A, T>| {

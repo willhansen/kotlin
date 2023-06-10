@@ -1,21 +1,21 @@
 fun test() {
-    ~x~val x = 1
+    ~x~konst x = 1
     try {
-      ~y~val y = `x`x
+      ~y~konst y = `x`x
     }
     catch (~e1~e : Exception) {
-      val z = `e1`e
-      val zz = `!`y
-      val zzz = `x`x
+      konst z = `e1`e
+      konst zz = `!`y
+      konst zzz = `x`x
     }
     catch (~e2~e : Exception) {
-      val z = `e2`e
-      val zz = `!`y
-      val zzz = `x`x
+      konst z = `e2`e
+      konst zz = `!`y
+      konst zzz = `x`x
     }
     finally {
-      val z = `!`e
-      val zz = `!`y
-      val zzz = `x`x
+      konst z = `!`e
+      konst zz = `!`y
+      konst zzz = `x`x
     }
 }

@@ -1,40 +1,40 @@
 class Delegate {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
   operator fun getValue(thisRef: Any?, property: Any?): String {
-    return <this>.<get-value>()
+    return <this>.<get-konstue>()
   }
 
 }
 
 class DelegateProvider {
-  constructor(value: String) /* primary */ {
+  constructor(konstue: String) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: String
-    field = value
+  konst konstue: String
+    field = konstue
     get
 
   operator fun provideDelegate(thisRef: Any?, property: Any?): Delegate {
-    return Delegate(value = <this>.<get-value>())
+    return Delegate(konstue = <this>.<get-konstue>())
   }
 
 }
 
 fun foo() {
-  val testMember: String
-    val testMember$delegate: Delegate = DelegateProvider(value = "OK").provideDelegate(thisRef = null, property = ::testMember)
+  konst testMember: String
+    konst testMember$delegate: Delegate = DelegateProvider(konstue = "OK").provideDelegate(thisRef = null, property = ::testMember)
     local get(): String {
       return testMember$delegate.getValue(thisRef = null, property = ::testMember)
     }

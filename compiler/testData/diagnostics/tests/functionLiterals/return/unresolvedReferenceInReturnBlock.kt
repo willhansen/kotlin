@@ -1,8 +1,8 @@
-val a = l@ {
+konst a = l@ {
     return@l <!UNRESOLVED_REFERENCE!>r<!>
 }
 
-val b = l@ {
+konst b = l@ {
     if ("" == "OK") return@l
 
     return@l <!RETURN_TYPE_MISMATCH, UNRESOLVED_REFERENCE!>r<!>

@@ -7,12 +7,12 @@ fun compute(): String {
     var result = ""
     for (x in listOf("A", "B")) {
         try {
-            val y = "y"
+            konst y = "y"
             result += y
             return result
         }
         finally {
-            val z = "z"
+            konst z = "z"
             result += z
         }
     }

@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
 
 class Fir2IrScopeCache {
-    private val parameterCache = mutableMapOf<FirValueParameter, IrValueParameter>()
+    private konst parameterCache = mutableMapOf<FirValueParameter, IrValueParameter>()
 
-    private val variableCache = mutableMapOf<FirVariable, IrVariable>()
+    private konst variableCache = mutableMapOf<FirVariable, IrVariable>()
 
-    private val localFunctionCache = mutableMapOf<FirFunction, IrSimpleFunction>()
+    private konst localFunctionCache = mutableMapOf<FirFunction, IrSimpleFunction>()
 
-    private val delegatedPropertyCache = mutableMapOf<FirProperty, IrLocalDelegatedProperty>()
+    private konst delegatedPropertyCache = mutableMapOf<FirProperty, IrLocalDelegatedProperty>()
 
     fun getParameter(parameter: FirValueParameter): IrValueParameter? = parameterCache[parameter]
 

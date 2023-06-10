@@ -27,34 +27,34 @@ import org.jetbrains.kotlin.serialization.deserialization.DeserializationConfigu
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedPackageMemberScope
 
 fun DeserializerForClassfileDecompiler(classFile: VirtualFile): DeserializerForClassfileDecompiler {
-    val kotlinClassHeaderInfo =
+    konst kotlinClassHeaderInfo =
         ClsKotlinBinaryClassCache.getInstance().getKotlinBinaryClassHeaderData(classFile)
             ?: error("Decompiled data factory shouldn't be called on an unsupported file: $classFile")
-    val packageFqName = kotlinClassHeaderInfo.classId.packageFqName
+    konst packageFqName = kotlinClassHeaderInfo.classId.packageFqName
     return DeserializerForClassfileDecompiler(classFile.parent!!, packageFqName, kotlinClassHeaderInfo.metadataVersion)
 }
 
 class DeserializerForClassfileDecompiler(
     packageDirectory: VirtualFile,
     directoryPackageFqName: FqName,
-    private val jvmMetadataVersion: JvmMetadataVersion
+    private konst jvmMetadataVersion: JvmMetadataVersion
 ) : DeserializerForDecompilerBase(directoryPackageFqName) {
-    override val builtIns: KotlinBuiltIns get() = DefaultBuiltIns.Instance
+    override konst builtIns: KotlinBuiltIns get() = DefaultBuiltIns.Instance
 
-    private val classFinder = DirectoryBasedClassFinder(packageDirectory, directoryPackageFqName)
+    private konst classFinder = DirectoryBasedClassFinder(packageDirectory, directoryPackageFqName)
 
-    override val deserializationComponents: DeserializationComponents
+    override konst deserializationComponents: DeserializationComponents
 
     init {
-        val classDataFinder = DirectoryBasedDataFinder(classFinder, LOG, jvmMetadataVersion)
-        val notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
-        val annotationAndConstantLoader = createBinaryClassAnnotationAndConstantLoader(
+        konst classDataFinder = DirectoryBasedDataFinder(classFinder, LOG, jvmMetadataVersion)
+        konst notFoundClasses = NotFoundClasses(storageManager, moduleDescriptor)
+        konst annotationAndConstantLoader = createBinaryClassAnnotationAndConstantLoader(
             moduleDescriptor, notFoundClasses, storageManager, classFinder, jvmMetadataVersion
         )
 
-        val configuration = object : DeserializationConfiguration {
-            override val readDeserializedContracts: Boolean = true
-            override val preserveDeclarationsOrdering: Boolean = true
+        konst configuration = object : DeserializationConfiguration {
+            override konst readDeserializedContracts: Boolean = true
+            override konst preserveDeclarationsOrdering: Boolean = true
         }
 
         deserializationComponents = DeserializationComponents(
@@ -69,21 +69,21 @@ class DeserializerForClassfileDecompiler(
     }
 
     override fun resolveDeclarationsInFacade(facadeFqName: FqName): List<DeclarationDescriptor> {
-        val packageFqName = facadeFqName.parent()
+        konst packageFqName = facadeFqName.parent()
         assert(packageFqName == directoryPackageFqName) {
             "Was called for $facadeFqName; only members of $directoryPackageFqName package are expected."
         }
-        val binaryClassForPackageClass = classFinder.findKotlinClass(ClassId.topLevel(facadeFqName), jvmMetadataVersion)
-        val header = binaryClassForPackageClass?.classHeader
-        val annotationData = header?.data
-        val strings = header?.strings
+        konst binaryClassForPackageClass = classFinder.findKotlinClass(ClassId.topLevel(facadeFqName), jvmMetadataVersion)
+        konst header = binaryClassForPackageClass?.classHeader
+        konst annotationData = header?.data
+        konst strings = header?.strings
         if (annotationData == null || strings == null) {
             LOG.error("Could not read annotation data for $facadeFqName from ${binaryClassForPackageClass?.classId}")
             return emptyList()
         }
-        val (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(annotationData, strings)
-        val dummyPackageFragment = createDummyPackageFragment(header.packageName?.let(::FqName) ?: facadeFqName.parent())
-        val membersScope = DeserializedPackageMemberScope(
+        konst (nameResolver, packageProto) = JvmProtoBufUtil.readPackageDataFrom(annotationData, strings)
+        konst dummyPackageFragment = createDummyPackageFragment(header.packageName?.let(::FqName) ?: facadeFqName.parent())
+        konst membersScope = DeserializedPackageMemberScope(
             dummyPackageFragment,
             packageProto, nameResolver, header.metadataVersion,
             JvmPackagePartSource(binaryClassForPackageClass, packageProto, nameResolver), deserializationComponents,
@@ -93,6 +93,6 @@ class DeserializerForClassfileDecompiler(
     }
 
     companion object {
-        private val LOG = Logger.getInstance(DeserializerForClassfileDecompiler::class.java)
+        private konst LOG = Logger.getInstance(DeserializerForClassfileDecompiler::class.java)
     }
 }

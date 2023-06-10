@@ -5,6 +5,6 @@ interface I {
     fun foo()
 }
 
-val o = <!UNRESOLVED_REFERENCE!>data<!><!SYNTAX!><!> object<!SYNTAX!><!>: I {
+konst o = <!UNRESOLVED_REFERENCE!>data<!><!SYNTAX!><!> object<!SYNTAX!><!>: I {
     override fun foo() {}
 }

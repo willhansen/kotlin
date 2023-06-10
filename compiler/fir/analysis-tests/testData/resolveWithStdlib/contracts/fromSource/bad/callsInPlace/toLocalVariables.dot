@@ -47,7 +47,7 @@ digraph toLocalVariables_kt {
                     color=blue
                     15 [label="Enter block"];
                     16 [label="Access variable R|<local>/y|"];
-                    17 [label="Variable declaration: lval yCopy: R|() -> kotlin/Unit|"];
+                    17 [label="Variable declaration: lkonst yCopy: R|() -> kotlin/Unit|"];
                     18 [label="Function call: R|<local>/yCopy|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()" style="filled" fillcolor=yellow];
                     19 [label="Exit block"];
                 }
@@ -63,7 +63,7 @@ digraph toLocalVariables_kt {
                 26 [label="Exit when branch result"];
                 27 [label="Exit when"];
             }
-            28 [label="Variable declaration: lval zCopy: R|() -> kotlin/Unit|"];
+            28 [label="Variable declaration: lkonst zCopy: R|() -> kotlin/Unit|"];
             29 [label="Access variable R|<local>/z|"];
             30 [label="Assignment: R|<local>/zCopy|"];
             31 [label="Function call: R|<local>/zCopy|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()" style="filled" fillcolor=yellow];

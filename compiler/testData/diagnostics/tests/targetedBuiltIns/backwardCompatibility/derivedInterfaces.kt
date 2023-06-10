@@ -4,11 +4,11 @@
 interface IBase : Map<String, String>
 
 interface TestDerivedInterfaceHiding : IBase {
-    fun replace(key: String, value: String): String?
+    fun replace(key: String, konstue: String): String?
 }
 
 interface TestDerivedInterfaceDefault : IBase {
-    fun replace(key: String, value: String): String? = TODO()
+    fun replace(key: String, konstue: String): String? = TODO()
 }
 
 

@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.modules.Module
 import java.util.*
 
 class ModuleBuilder(
-    private val name: String,
-    private val outputDir: String,
-    private val type: String
+    private konst name: String,
+    private konst outputDir: String,
+    private konst type: String
 ) : Module {
-    private val sourceFiles = ArrayList<String>()
-    private val commonSourceFiles = ArrayList<String>()
-    private val classpathRoots = ArrayList<String>()
-    private val javaSourceRoots = ArrayList<JavaRootPath>()
-    private val friendDirs = ArrayList<String>()
+    private konst sourceFiles = ArrayList<String>()
+    private konst commonSourceFiles = ArrayList<String>()
+    private konst classpathRoots = ArrayList<String>()
+    private konst javaSourceRoots = ArrayList<JavaRootPath>()
+    private konst friendDirs = ArrayList<String>()
     override var modularJdkRoot: String? = null
 
     fun addSourceFiles(path: String) {

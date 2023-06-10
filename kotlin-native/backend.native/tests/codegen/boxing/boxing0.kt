@@ -8,14 +8,14 @@ package codegen.boxing.boxing0
 import kotlin.test.*
 
 class Box<T>(t: T) {
-    var value = t
+    var konstue = t
 }
 
 @Test fun runTest() {
-    val box: Box<Int> = Box<Int>(17)
-    println(box.value)
-    val nonConst = 17
-    val box2: Box<Int> = Box<Int>(nonConst)
-    println(box2.value)
+    konst box: Box<Int> = Box<Int>(17)
+    println(box.konstue)
+    konst nonConst = 17
+    konst box2: Box<Int> = Box<Int>(nonConst)
+    println(box2.konstue)
 }
 

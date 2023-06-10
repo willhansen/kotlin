@@ -17,6 +17,6 @@ public class SubBug implements Bug {
 
 fun TestBug() {
    SubBug().save() // can resolve on subtype
-   val bug: Bug = SubBug()
+   konst bug: Bug = SubBug()
    bug.save<Bug>() // can resolve on supertype
 }

@@ -5,7 +5,7 @@ plugins {
     kotlin("jvm")
 }
 
-val kotlinxSerializationGradlePluginClasspath by configurations.creating
+konst kotlinxSerializationGradlePluginClasspath by configurations.creating
 
 dependencies {
     testApi(project(":kotlin-main-kts"))
@@ -25,7 +25,7 @@ sourceSets {
 
 projectTest(parallel = true) {
     dependsOn(":dist", ":kotlinx-serialization-compiler-plugin.embeddable:embeddable")
-    val localKotlinxSerializationPluginClasspath: FileCollection = kotlinxSerializationGradlePluginClasspath
+    konst localKotlinxSerializationPluginClasspath: FileCollection = kotlinxSerializationGradlePluginClasspath
     doFirst {
         systemProperty("kotlin.script.test.kotlinx.serialization.plugin.classpath", localKotlinxSerializationPluginClasspath.asPath)
     }

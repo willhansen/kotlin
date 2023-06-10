@@ -1,3 +1,3 @@
 struct ProducerCLibraryStruct {
-    int value;
+    int konstue;
 };

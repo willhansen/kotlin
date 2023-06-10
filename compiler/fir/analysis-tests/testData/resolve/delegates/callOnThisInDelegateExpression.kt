@@ -13,7 +13,7 @@ interface Some
 fun <Self : Some, Target : Some> Self.delegateOf(clazz: Class<Target>): Delegate<Self, Target?> = null!!
 
 abstract class SomeImpl<R : Some> : Some {
-    abstract val type: Class<R>
+    abstract konst type: Class<R>
 
     var bundle by delegateOf(type) resource getFactory()
 

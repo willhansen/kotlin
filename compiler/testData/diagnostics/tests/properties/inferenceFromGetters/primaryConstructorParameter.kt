@@ -6,16 +6,16 @@ object Delegate {
 
 fun <T> delegateFactory(p: Any) = Delegate
 
-class C(p: Any, val v: Any) {
+class C(p: Any, konst v: Any) {
 
-    val test1 get() = <!UNRESOLVED_REFERENCE!>p<!>
+    konst test1 get() = <!UNRESOLVED_REFERENCE!>p<!>
 
-    val test2 get() = v
+    konst test2 get() = v
 
     // NB here we can use both 'T' (property type parameter) and 'p' (primary constructor parameter)
-    val <T> List<T>.test3 by delegateFactory<T>(p)
+    konst <T> List<T>.test3 by delegateFactory<T>(p)
 
-    <!PROPERTY_WITH_NO_TYPE_NO_INITIALIZER!>val test4<!> get() { return <!UNRESOLVED_REFERENCE!>p<!> }
+    <!PROPERTY_WITH_NO_TYPE_NO_INITIALIZER!>konst test4<!> get() { return <!UNRESOLVED_REFERENCE!>p<!> }
 
     <!PROPERTY_WITH_NO_TYPE_NO_INITIALIZER!>var test5<!>
         get() { return <!UNRESOLVED_REFERENCE!>p<!> }

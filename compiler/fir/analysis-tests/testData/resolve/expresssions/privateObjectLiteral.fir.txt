@@ -4,7 +4,7 @@ FILE: privateObjectLiteral.kt
             super<R|kotlin/Any|>()
         }
 
-        private final val x: R|<anonymous>| = object : R|kotlin/Any| {
+        private final konst x: R|<anonymous>| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -17,10 +17,10 @@ FILE: privateObjectLiteral.kt
 
             private get(): R|<anonymous>|
 
-        public final val y: R|kotlin/Int| = this@R|/C|.R|/C.x|.R|/<anonymous>.foo|()
+        public final konst y: R|kotlin/Int| = this@R|/C|.R|/C.x|.R|/<anonymous>.foo|()
             public get(): R|kotlin/Int|
 
-        internal final val z: R|kotlin/Any| = object : R|kotlin/Any| {
+        internal final konst z: R|kotlin/Any| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -33,7 +33,7 @@ FILE: privateObjectLiteral.kt
 
             internal get(): R|kotlin/Any|
 
-        public final val w: <ERROR TYPE REF: Unresolved name: foo> = this@R|/C|.R|/C.z|.<Unresolved name: foo>#()
+        public final konst w: <ERROR TYPE REF: Unresolved name: foo> = this@R|/C|.R|/C.z|.<Unresolved name: foo>#()
             public get(): <ERROR TYPE REF: Unresolved name: foo>
 
     }

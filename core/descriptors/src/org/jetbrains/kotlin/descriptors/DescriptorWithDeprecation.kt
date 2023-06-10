@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.descriptors
 
-data class DescriptorWithDeprecation<out T : DeclarationDescriptor>(val descriptor: T, val isDeprecated: Boolean) {
+data class DescriptorWithDeprecation<out T : DeclarationDescriptor>(konst descriptor: T, konst isDeprecated: Boolean) {
     companion object {
         fun <T : DeclarationDescriptor> createNonDeprecated(descriptor: T): DescriptorWithDeprecation<T> =
             DescriptorWithDeprecation(descriptor, false)

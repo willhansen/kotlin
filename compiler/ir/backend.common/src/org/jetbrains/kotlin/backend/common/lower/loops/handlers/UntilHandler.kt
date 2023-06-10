@@ -15,12 +15,12 @@ import org.jetbrains.kotlin.ir.util.kotlinFqName
 import org.jetbrains.kotlin.name.FqName
 
 /** Builds a [HeaderInfo] for progressions built using the `until` extension function. */
-internal class UntilHandler(private val context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
-    private val progressionElementTypes = context.ir.symbols.progressionElementTypes
+internal class UntilHandler(private konst context: CommonBackendContext) : HeaderInfoHandler<IrCall, ProgressionType> {
+    private konst progressionElementTypes = context.ir.symbols.progressionElementTypes
 
     override fun matchIterable(expression: IrCall): Boolean {
-        val callee = expression.symbol.owner
-        return callee.valueParameters.singleOrNull()?.type in progressionElementTypes &&
+        konst callee = expression.symbol.owner
+        return callee.konstueParameters.singleOrNull()?.type in progressionElementTypes &&
                 callee.extensionReceiverParameter?.type in progressionElementTypes &&
                 callee.kotlinFqName == FqName("kotlin.ranges.until")
     }

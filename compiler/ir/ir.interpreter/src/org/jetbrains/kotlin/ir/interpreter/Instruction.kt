@@ -9,13 +9,13 @@ import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.interpreter.stack.CallStack
 
 internal interface Instruction {
-    val element: IrElement?
+    konst element: IrElement?
 }
 
-internal class CompoundInstruction(override val element: IrElement?) : Instruction // must unwind first
-internal class SimpleInstruction(override val element: IrElement) : Instruction    // must interpret as is
-internal class CustomInstruction(val evaluate: () -> Unit) : Instruction {
-    override val element: IrElement? = null
+internal class CompoundInstruction(override konst element: IrElement?) : Instruction // must unwind first
+internal class SimpleInstruction(override konst element: IrElement) : Instruction    // must interpret as is
+internal class CustomInstruction(konst ekonstuate: () -> Unit) : Instruction {
+    override konst element: IrElement? = null
 }
 
 internal fun CallStack.pushSimpleInstruction(element: IrElement) {

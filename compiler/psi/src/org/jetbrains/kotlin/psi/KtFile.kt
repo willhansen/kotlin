@@ -39,7 +39,7 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtPlaceHolderStubElementType
 import org.jetbrains.kotlin.psi.stubs.elements.KtStubElementTypes
 import org.jetbrains.kotlin.psi.stubs.elements.KtTokenSets
 
-open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
+open class KtFile(viewProvider: FileViewProvider, konst isCompiled: Boolean) :
     PsiFileBase(viewProvider, KotlinLanguage.INSTANCE),
     KtDeclarationContainer,
     KtAnnotated,
@@ -57,56 +57,56 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     @Volatile
     private var pathCached: String? = null
 
-    val importList: KtImportList?
+    konst importList: KtImportList?
         get() = importLists.firstOrNull()
 
-    private val importLists: Array<out KtImportList>
+    private konst importLists: Array<out KtImportList>
         get() = findChildrenByTypeOrClass(KtStubElementTypes.IMPORT_LIST, KtImportList::class.java)
 
-    val fileAnnotationList: KtFileAnnotationList?
+    konst fileAnnotationList: KtFileAnnotationList?
         get() = findChildByTypeOrClass(KtStubElementTypes.FILE_ANNOTATION_LIST, KtFileAnnotationList::class.java)
 
-    open val importDirectives: List<KtImportDirective>
+    open konst importDirectives: List<KtImportDirective>
         get() = importLists.flatMap { it.imports }
 
     // scripts have no package directive, all other files must have package directives
-    val packageDirective: KtPackageDirective?
+    konst packageDirective: KtPackageDirective?
         get() {
-            val stub = stub
+            konst stub = stub
             if (stub != null) {
-                val packageDirectiveStub = stub.findChildStubByType(KtStubElementTypes.PACKAGE_DIRECTIVE)
+                konst packageDirectiveStub = stub.findChildStubByType(KtStubElementTypes.PACKAGE_DIRECTIVE)
                 return packageDirectiveStub?.psi
             }
             return packageDirectiveByTree
         }
 
-    private val packageDirectiveByTree: KtPackageDirective?
+    private konst packageDirectiveByTree: KtPackageDirective?
         get() {
-            val ast = node.findChildByType(KtNodeTypes.PACKAGE_DIRECTIVE)
+            konst ast = node.findChildByType(KtNodeTypes.PACKAGE_DIRECTIVE)
             return if (ast != null) ast.psi as KtPackageDirective else null
         }
 
     var packageFqName: FqName
         get() = stub?.getPackageFqName() ?: packageFqNameByTree
-        set(value) {
-            val packageDirective = packageDirective
+        set(konstue) {
+            konst packageDirective = packageDirective
             if (packageDirective != null) {
-                packageDirective.fqName = value
+                packageDirective.fqName = konstue
             } else {
-                val newPackageDirective = KtPsiFactory(project).createPackageDirectiveIfNeeded(value) ?: return
+                konst newPackageDirective = KtPsiFactory(project).createPackageDirectiveIfNeeded(konstue) ?: return
                 addAfter(newPackageDirective, null)
             }
         }
 
-    val packageFqNameByTree: FqName
+    konst packageFqNameByTree: FqName
         get() = packageDirectiveByTree?.fqName ?: FqName.ROOT
 
-    val script: KtScript?
+    konst script: KtScript?
         get() {
             isScript?.let { if (!it) return null }
             stub?.let { if (!it.isScript()) return null }
 
-            val result = getChildOfType<KtScript>()
+            konst result = getChildOfType<KtScript>()
             if (isScript == null) {
                 isScript = result != null
             }
@@ -114,7 +114,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
             return result
         }
 
-    val virtualFilePath
+    konst virtualFilePath
         get(): String {
             pathCached?.let { return it }
 
@@ -123,15 +123,15 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
             }
         }
 
-    val isScriptByTree: Boolean
+    konst isScriptByTree: Boolean
         get() = script != null
 
     /**
      * @return modifier lists that do not belong to any declaration due to incomplete code or syntax errors
      */
-    val danglingModifierLists: Array<out KtModifierList>
+    konst danglingModifierLists: Array<out KtModifierList>
         get() {
-            val stub = stub
+            konst stub = stub
             return stub?.getChildrenByType(
                 KtStubElementTypes.MODIFIER_LIST,
                 KtStubElementTypes.MODIFIER_LIST.arrayFactory
@@ -141,7 +141,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     /**
      * @return annotations that do not belong to any declaration due to incomplete code or syntax errors
      */
-    val danglingAnnotations: List<KtAnnotationEntry>
+    konst danglingAnnotations: List<KtAnnotationEntry>
         get() = danglingModifierLists.flatMap { obj: KtModifierList -> obj.annotationEntries }
 
     override fun getFileType(): FileType = KotlinFileType.INSTANCE
@@ -149,7 +149,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     override fun toString(): String = "KtFile: $name"
 
     override fun getDeclarations(): List<KtDeclaration> {
-        val stub = stub
+        konst stub = stub
         return stub?.getChildrenByType(FILE_DECLARATION_TYPES, KtDeclaration.ARRAY_FACTORY)?.toList()
             ?: PsiTreeUtil.getChildrenOfTypeAsList(this, KtDeclaration::class.java)
     }
@@ -158,9 +158,9 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
         elementType: KtPlaceHolderStubElementType<T>,
         elementClass: Class<T>
     ): T? {
-        val stub = stub
+        konst stub = stub
         if (stub != null) {
-            val importListStub = stub.findChildStubByType(elementType)
+            konst importListStub = stub.findChildStubByType(elementType)
             return importListStub?.psi
         }
         return findChildByClass(elementClass)
@@ -170,9 +170,9 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
         elementType: KtPlaceHolderStubElementType<T>,
         elementClass: Class<T>
     ): Array<out T> {
-        val stub = stub
+        konst stub = stub
         if (stub != null) {
-            val arrayFactory: ArrayFactory<T> = elementType.arrayFactory
+            konst arrayFactory: ArrayFactory<T> = elementType.arrayFactory
             return stub.getChildrenByType(elementType, arrayFactory)
         }
         return findChildrenByClass(elementClass)
@@ -196,7 +196,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
 
     override fun getStub(): KotlinFileStub? {
         if (virtualFile !is VirtualFileWithId) return null
-        val stub = super.getStub()
+        konst stub = super.getStub()
         if (stub is KotlinFileStub?) {
             return stub
         }
@@ -205,7 +205,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     }
 
     override fun getClasses(): Array<PsiClass> {
-        val fileClassProvider = project.getService(KtFileClassProvider::class.java)
+        konst fileClassProvider = project.getService(KtFileClassProvider::class.java)
         return fileClassProvider?.getFileClasses(this) ?: PsiClass.EMPTY_ARRAY
     }
 
@@ -224,7 +224,7 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     fun hasTopLevelCallables(): Boolean {
         hasTopLevelCallables?.let { return it }
 
-        val result = declarations.any {
+        konst result = declarations.any {
             (it is KtProperty ||
                     it is KtNamedFunction ||
                     it is KtScript ||
@@ -262,8 +262,8 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
 
     @Throws(IncorrectOperationException::class)
     override fun setName(name: String): PsiElement {
-        val result = super.setName(name)
-        val willBeScript = name.endsWith(KotlinParserDefinition.STD_SCRIPT_EXT)
+        konst result = super.setName(name)
+        konst willBeScript = name.endsWith(KotlinParserDefinition.STD_SCRIPT_EXT)
         if (isScript() != willBeScript) {
             FileContentUtilCore.reparseFiles(listOfNotNull(virtualFile))
         }
@@ -278,6 +278,6 @@ open class KtFile(viewProvider: FileViewProvider, val isCompiled: Boolean) :
     }
 
     companion object {
-        val FILE_DECLARATION_TYPES = TokenSet.orSet(KtTokenSets.DECLARATION_TYPES, TokenSet.create(KtStubElementTypes.SCRIPT))
+        konst FILE_DECLARATION_TYPES = TokenSet.orSet(KtTokenSets.DECLARATION_TYPES, TokenSet.create(KtStubElementTypes.SCRIPT))
     }
 }

@@ -1,9 +1,9 @@
 public abstract class VirtualFile() {
-    public abstract val size : Long
+    public abstract konst size : Long
 }
 
 public class PhysicalVirtualFile : VirtualFile() {
-    public override val size: Long
+    public override konst size: Long
     get() = 11
 }
 

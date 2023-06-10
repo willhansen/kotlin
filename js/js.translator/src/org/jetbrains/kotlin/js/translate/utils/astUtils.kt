@@ -26,8 +26,8 @@ fun JsFunction.addStatement(stmt: JsStatement) {
 }
 
 fun JsFunction.addParameter(identifier: String, index: Int? = null): JsParameter {
-    val name = JsScope.declareTemporaryName(identifier)
-    val parameter = JsParameter(name)
+    konst name = JsScope.declareTemporaryName(identifier)
+    konst parameter = JsParameter(name)
 
     if (index == null) {
         parameters.add(parameter)
@@ -42,7 +42,7 @@ fun JsFunction.addParameter(identifier: String, index: Int? = null): JsParameter
  * Tests, if any node containing in receiver's AST matches, [predicate].
  */
 fun JsNode.any(predicate: (JsNode) -> Boolean): Boolean {
-    val visitor = object : RecursiveJsVisitor() {
+    konst visitor = object : RecursiveJsVisitor() {
         var matched: Boolean = false
 
         override fun visitElement(node: JsNode) {
@@ -63,7 +63,7 @@ fun JsExpression.toInvocationWith(
         parameterCount: Int,
         thisExpr: JsExpression
 ): JsExpression {
-    val qualifier: JsExpression
+    konst qualifier: JsExpression
     fun padArguments(arguments: List<JsExpression>) = arguments + (1..(parameterCount - arguments.size))
             .map { Namer.getUndefinedExpression() }
 
@@ -84,27 +84,27 @@ fun JsExpression.toInvocationWith(
 
 var JsWhile.test: JsExpression
     get() = condition
-    set(value) { condition = value }
+    set(konstue) { condition = konstue }
 
 var JsArrayAccess.index: JsExpression
     get() = indexExpression
-    set(value) { indexExpression = value }
+    set(konstue) { indexExpression = konstue }
 
 var JsArrayAccess.array: JsExpression
     get() = arrayExpression
-    set(value) { arrayExpression = value }
+    set(konstue) { arrayExpression = konstue }
 
 var JsConditional.test: JsExpression
     get() = testExpression
-    set(value) { testExpression = value }
+    set(konstue) { testExpression = konstue }
 
 var JsConditional.then: JsExpression
     get() = thenExpression
-    set(value) { thenExpression = value }
+    set(konstue) { thenExpression = konstue }
 
 var JsConditional.otherwise: JsExpression
     get() = elseExpression
-    set(value) { elseExpression = value }
+    set(konstue) { elseExpression = konstue }
 
 // Extension functions below produce aliased invocations.
 fun TranslationContext.invokeKotlinFunction(functionName: String, vararg arguments: JsExpression)

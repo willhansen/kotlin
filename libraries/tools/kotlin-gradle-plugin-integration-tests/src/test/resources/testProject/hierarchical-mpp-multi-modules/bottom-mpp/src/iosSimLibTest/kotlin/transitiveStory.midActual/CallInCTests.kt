@@ -6,12 +6,12 @@ import transitiveStory.bottomActual.mppBeginning.BottomActualDeclarations
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-val callInCTests = BottomActualDeclarations()
+konst callInCTests = BottomActualDeclarations()
 
 class CallInCTests {
     @Test
     fun someTestCallingTransitiveDeps() {
-        // val call = callMe307563354
+        // konst call = callMe307563354
 //        println(call)
         assertEquals(true, true)
     }

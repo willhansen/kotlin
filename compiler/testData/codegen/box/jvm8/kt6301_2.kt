@@ -14,7 +14,7 @@ interface Foo {
         fun foo() = "O"
 
 
-        val fooProp = "K"
+        konst fooProp = "K"
             @JvmStatic get
     }
 }

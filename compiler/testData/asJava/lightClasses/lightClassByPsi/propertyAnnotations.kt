@@ -1,10 +1,10 @@
 // !GENERATE_PROPERTY_ANNOTATIONS_METHODS
 
-annotation class Anno(val p: String = "")
+annotation class Anno(konst p: String = "")
 
 
 @Deprecated("deprecated")
-val deprecated = 0
+konst deprecated = 0
 
 @Volatile
 @Transient
@@ -13,20 +13,20 @@ var jvmFlags = 0
 class C {
     companion object {
         @Anno("x")
-        val x = 1
+        konst x = 1
 
         @JvmStatic
         @Anno("y")
-        val y = 2
+        konst y = 2
     }
 }
 
 @Anno("propery")
-val <T: Any> @receiver:Anno("receiver") List<T>.extensionProperty: Int
+konst <T: Any> @receiver:Anno("receiver") List<T>.extensionProperty: Int
     get() = 0
 
 @Anno("nullable")
-val nullable: String? = null
+konst nullable: String? = null
 
 @Anno("nonNullable")
-val nonNullable: String = ""
+konst nonNullable: String = ""

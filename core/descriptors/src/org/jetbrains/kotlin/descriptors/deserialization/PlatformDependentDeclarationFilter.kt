@@ -34,4 +34,4 @@ interface PlatformDependentDeclarationFilter {
     }
 }
 
-val PLATFORM_DEPENDENT_ANNOTATION_FQ_NAME = FqName("kotlin.internal.PlatformDependent")
+konst PLATFORM_DEPENDENT_ANNOTATION_FQ_NAME = FqName("kotlin.internal.PlatformDependent")

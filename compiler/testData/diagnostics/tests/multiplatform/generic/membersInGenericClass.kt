@@ -3,7 +3,7 @@
 // FILE: common.kt
 
 expect interface A<T> {
-    val x: T
+    konst x: T
     var y: List<T>
     fun f(p: Collection<T>): Map<T, A<T?>>
 }
@@ -12,7 +12,7 @@ expect interface A<T> {
 // FILE: jvm.kt
 
 actual interface A<T> {
-    actual val x: T
+    actual konst x: T
     actual var y: List<T>
     actual fun f(p: Collection<T>): Map<T, A<T?>>
 }

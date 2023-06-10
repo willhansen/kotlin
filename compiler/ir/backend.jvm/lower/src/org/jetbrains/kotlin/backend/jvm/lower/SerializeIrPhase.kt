@@ -15,14 +15,14 @@ import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
 import org.jetbrains.kotlin.ir.declarations.MetadataSource
 
-internal val serializeIrPhase = makeCustomPhase<JvmBackendContext, IrModuleFragment>(
+internal konst serializeIrPhase = makeCustomPhase<JvmBackendContext, IrModuleFragment>(
     { context, irModule -> SerializeIrPhase(context).lower(irModule) },
     name = "SerializeIr",
     description = "If specified by compiler options, save serialized IR in class annotations",
     prerequisite = setOf(expectDeclarationsRemovingPhase),
 )
 
-class SerializeIrPhase(val context: JvmBackendContext) : FileLoweringPass {
+class SerializeIrPhase(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
         context.irSerializer?.let { irSerializer ->
             (irFile.metadata as? MetadataSource.File)?.serializedIr = irSerializer.serializeIrFile(irFile)

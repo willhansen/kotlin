@@ -39,19 +39,19 @@ fun myFooRefined(): String = myFoo().toString()
 
 @OptIn(ExperimentalObjCRefinement::class)
 @HiddenFromObjC
-val bar: Int = 3
+konst bar: Int = 3
 
 @OptIn(ExperimentalObjCRefinement::class)
 @ShouldRefineInSwift
-val barRefined: String get() = bar.toString()
+konst barRefined: String get() = bar.toString()
 
 @OptIn(ExperimentalObjCRefinement::class)
 @MyHiddenFromObjC
-val myBar: Int = 4
+konst myBar: Int = 4
 
 @OptIn(ExperimentalObjCRefinement::class)
 @MyShouldRefineInSwift
-val myBarRefined: String get() = myBar.toString()
+konst myBarRefined: String get() = myBar.toString()
 
 open class RefinedClassA {
     @OptIn(ExperimentalObjCRefinement::class)
@@ -65,7 +65,7 @@ open class RefinedClassA {
 class RefinedClassB: RefinedClassA() {
     override fun foo(): Int = 2
     override fun fooRefined(): String {
-        val foo = foo()
+        konst foo = foo()
         return "$foo$foo"
     }
 }

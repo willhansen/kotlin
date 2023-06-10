@@ -2,7 +2,7 @@
 // WITH_STDLIB
 // FILE: test.kt
 fun box(): String {
-    class Local(val i: Int, val j: Int) : Foo() {
+    class Local(konst i: Int, konst j: Int) : Foo() {
         init {
             log.append("Local.<init>;")
         }
@@ -13,18 +13,18 @@ fun box(): String {
             logged("j;", 2.let { it })
     )
 
-    val result = log.toString()
+    konst result = log.toString()
     if (result != "i;j;Foo.<clinit>;Foo.<init>;Local.<init>;") return "Fail: '$result'"
 
     return "OK"
 }
 
 // FILE: util.kt
-val log = StringBuilder()
+konst log = StringBuilder()
 
-fun <T> logged(msg: String, value: T): T {
+fun <T> logged(msg: String, konstue: T): T {
     log.append(msg)
-    return value
+    return konstue
 }
 
 // FILE: Foo.kt

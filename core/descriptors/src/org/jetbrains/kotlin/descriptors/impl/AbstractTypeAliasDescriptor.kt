@@ -28,15 +28,15 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
 abstract class AbstractTypeAliasDescriptor(
-    protected val storageManager: StorageManager,
+    protected konst storageManager: StorageManager,
     containingDeclaration: DeclarationDescriptor,
     annotations: Annotations,
     name: Name,
     sourceElement: SourceElement,
-    private val visibilityImpl: DescriptorVisibility
+    private konst visibilityImpl: DescriptorVisibility
 ) : DeclarationDescriptorNonRootImpl(containingDeclaration, annotations, name, sourceElement),
     TypeAliasDescriptor {
-    override val constructors: Collection<TypeAliasConstructorDescriptor> by storageManager.createLazyValue {
+    override konst constructors: Collection<TypeAliasConstructorDescriptor> by storageManager.createLazyValue {
         getTypeAliasConstructors()
     }
 
@@ -56,7 +56,7 @@ abstract class AbstractTypeAliasDescriptor(
         // which will silently produce wrong result.
         TypeUtils.contains(underlyingType) { type ->
             !type.isError && run {
-                val constructorDescriptor = type.constructor.declarationDescriptor
+                konst constructorDescriptor = type.constructor.declarationDescriptor
                 constructorDescriptor is TypeParameterDescriptor &&
                         constructorDescriptor.containingDeclaration != this@AbstractTypeAliasDescriptor
             }
@@ -64,7 +64,7 @@ abstract class AbstractTypeAliasDescriptor(
 
 
     fun getTypeAliasConstructors(): Collection<TypeAliasConstructorDescriptor> {
-        val classDescriptor = this.classDescriptor ?: return emptyList()
+        konst classDescriptor = this.classDescriptor ?: return emptyList()
 
         return classDescriptor.constructors.mapNotNull {
             TypeAliasConstructorDescriptorImpl.createIfAvailable(storageManager, this, it)
@@ -99,7 +99,7 @@ abstract class AbstractTypeAliasDescriptor(
             kotlinTypeRefiner.refineDescriptor(this)?.defaultType
         }
 
-    private val typeConstructor = object : TypeConstructor {
+    private konst typeConstructor = object : TypeConstructor {
         override fun getDeclarationDescriptor(): TypeAliasDescriptor =
             this@AbstractTypeAliasDescriptor
 

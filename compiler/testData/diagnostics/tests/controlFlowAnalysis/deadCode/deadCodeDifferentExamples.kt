@@ -156,7 +156,7 @@ fun fail() : Nothing {
 }
 
 fun nullIsNotNothing() : Unit {
-    val x : Int? = 1
+    konst x : Int? = 1
     if (x != null) {
          return
     }

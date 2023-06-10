@@ -33,13 +33,13 @@ import java.io.File
 
 class ClassicJsBackendFacade(
     testServices: TestServices,
-    val incrementalCompilationEnabled: Boolean
+    konst incrementalCompilationEnabled: Boolean
 ) : ClassicBackendFacade<BinaryArtifacts.Js>(testServices, ArtifactKinds.Js) {
     companion object {
-        const val KOTLIN_TEST_INTERNAL = "\$kotlin_test_internal\$"
+        const konst KOTLIN_TEST_INTERNAL = "\$kotlin_test_internal\$"
 
         fun wrapWithModuleEmulationMarkers(content: String, moduleKind: ModuleKind, moduleId: String): String {
-            val escapedModuleId = StringUtil.escapeStringCharacters(moduleId)
+            konst escapedModuleId = StringUtil.escapeStringCharacters(moduleId)
 
             return when (moduleKind) {
                 ModuleKind.COMMON_JS -> "$KOTLIN_TEST_INTERNAL.beginModule();\n" +
@@ -58,29 +58,29 @@ class ClassicJsBackendFacade(
 
     constructor(testServices: TestServices) : this(testServices, incrementalCompilationEnabled = false)
 
-    override val additionalServices: List<ServiceRegistrationData>
+    override konst additionalServices: List<ServiceRegistrationData>
         get() = listOf(service(::JsClassicIncrementalDataProvider))
 
     override fun transform(module: TestModule, inputArtifact: ClassicBackendInput): BinaryArtifacts.Js {
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
-        val (psiFiles, analysisResult, project, _) = inputArtifact
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst (psiFiles, analysisResult, project, _) = inputArtifact
 
         // TODO how to reuse this config from frontend
-        val jsConfig = JsEnvironmentConfigurator.createJsConfig(project, configuration)
+        konst jsConfig = JsEnvironmentConfigurator.createJsConfig(project, configuration)
 
-        val unitsByPath: MutableMap<String, TranslationUnit> = psiFiles.associateTo(mutableMapOf()) {
+        konst unitsByPath: MutableMap<String, TranslationUnit> = psiFiles.associateTo(mutableMapOf()) {
             (it.virtualFile.canonicalPath ?: "") to TranslationUnit.SourceFile(it)
         }
         if (incrementalCompilationEnabled) {
-            val incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalData(module)
+            konst incrementalData = testServices.jsClassicIncrementalDataProvider.getIncrementalData(module)
             for ((file, data) in incrementalData.translatedFiles) {
                 unitsByPath[file.canonicalPath] = TranslationUnit.BinaryAst(data.binaryAst, data.inlineData)
             }
         }
 
-        val units = unitsByPath.entries.sortedBy { it.key }.map { it.value }
+        konst units = unitsByPath.entries.sortedBy { it.key }.map { it.konstue }
 
-        val mainCallParameters = when {
+        konst mainCallParameters = when {
             JsEnvironmentConfigurationDirectives.CALL_MAIN in module.directives -> MainCallParameters.mainWithArguments(listOf())
             JsEnvironmentConfigurationDirectives.MAIN_ARGS in module.directives -> {
                 MainCallParameters.mainWithArguments(module.directives[JsEnvironmentConfigurationDirectives.MAIN_ARGS].first())
@@ -88,15 +88,15 @@ class ClassicJsBackendFacade(
             else -> MainCallParameters.noCall()
         }
 
-        val translator = K2JSTranslator(jsConfig, false)
-        val translationResult = translator.translateUnits(
+        konst translator = K2JSTranslator(jsConfig, false)
+        konst translationResult = translator.translateUnits(
             JsEnvironmentConfigurator.Companion.ExceptionThrowingReporter, units, mainCallParameters, analysisResult as? JsAnalysisResult
         )
 
         if (!incrementalCompilationEnabled) {
             jsConfig.configuration[JSConfigurationKeys.INCREMENTAL_RESULTS_CONSUMER]?.let {
-                val incrementalData = JsClassicIncrementalDataProvider.IncrementalData()
-                val incrementalService = it as IncrementalResultsConsumerImpl
+                konst incrementalData = JsClassicIncrementalDataProvider.IncrementalData()
+                konst incrementalService = it as IncrementalResultsConsumerImpl
 
                 for ((srcFile, data) in incrementalService.packageParts) {
                     incrementalData.translatedFiles[srcFile] = data
@@ -109,19 +109,19 @@ class ClassicJsBackendFacade(
             }
         }
 
-        val outputFile = File(JsEnvironmentConfigurator.getJsModuleArtifactPath(testServices, module.name) + ".js")
+        konst outputFile = File(JsEnvironmentConfigurator.getJsModuleArtifactPath(testServices, module.name) + ".js")
         if (translationResult !is TranslationResult.Success) {
             return BinaryArtifacts.Js.OldJsArtifact(outputFile, translationResult)
         }
 
-        val outputPrefixFile = JsEnvironmentConfigurator.getPrefixFile(module)
-        val outputPostfixFile = JsEnvironmentConfigurator.getPostfixFile(module)
-        val outputFiles = translationResult.getOutputFiles(outputFile, outputPrefixFile, outputPostfixFile)
+        konst outputPrefixFile = JsEnvironmentConfigurator.getPrefixFile(module)
+        konst outputPostfixFile = JsEnvironmentConfigurator.getPostfixFile(module)
+        konst outputFiles = translationResult.getOutputFiles(outputFile, outputPrefixFile, outputPostfixFile)
         outputFiles.writeAllTo(JsEnvironmentConfigurator.getJsArtifactsOutputDir(testServices))
 
         if (jsConfig.moduleKind != ModuleKind.PLAIN) {
-            val content = FileUtil.loadFile(outputFile, true)
-            val wrappedContent = wrapWithModuleEmulationMarkers(content, moduleId = jsConfig.moduleId, moduleKind = jsConfig.moduleKind)
+            konst content = FileUtil.loadFile(outputFile, true)
+            konst wrappedContent = wrapWithModuleEmulationMarkers(content, moduleId = jsConfig.moduleId, moduleKind = jsConfig.moduleKind)
             FileUtil.writeToFile(outputFile, wrappedContent)
         }
 

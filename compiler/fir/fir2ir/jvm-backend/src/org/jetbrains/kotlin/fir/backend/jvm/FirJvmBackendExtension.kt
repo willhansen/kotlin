@@ -17,8 +17,8 @@ import org.jetbrains.kotlin.load.java.JvmAnnotationNames
 import org.jetbrains.org.objectweb.asm.Type
 
 class FirJvmBackendExtension(
-    private val components: Fir2IrComponents,
-    private val irActualizedResult: IrActualizedResult?
+    private konst components: Fir2IrComponents,
+    private konst irActualizedResult: IrActualizedResult?
 ) : JvmBackendExtension {
     override fun createSerializer(
         context: JvmBackendContext,

@@ -32,7 +32,7 @@ object SMAPTestUtil {
     private fun extractSmapFromTestDataFile(file: KotlinBaseTest.TestFile, separateCompilation: Boolean): SMAPAndFile? {
         if (!checkExtension(file, separateCompilation)) return null
 
-        val content = buildString {
+        konst content = buildString {
             StringReader(file.content).forEachLine { line ->
                 // Strip comments
                 if (!line.startsWith("//")) {
@@ -53,21 +53,21 @@ object SMAPTestUtil {
     fun checkSMAP(inputFiles: List<KotlinBaseTest.TestFile>, outputFiles: Iterable<OutputFile>, separateCompilation: Boolean) {
         if (!GENERATE_SMAP) return
 
-        val sourceData = inputFiles.mapNotNull { extractSmapFromTestDataFile(it, separateCompilation) }
-        val compiledSmaps = extractSMAPFromClasses(outputFiles)
-        val compiledData = compiledSmaps.groupBy {
+        konst sourceData = inputFiles.mapNotNull { extractSmapFromTestDataFile(it, separateCompilation) }
+        konst compiledSmaps = extractSMAPFromClasses(outputFiles)
+        konst compiledData = compiledSmaps.groupBy {
             it.sourceFile
         }.map {
-            val smap = it.value.sortedByDescending(SMAPAndFile::outputFile).mapNotNull(SMAPAndFile::smap).joinToString("\n")
+            konst smap = it.konstue.sortedByDescending(SMAPAndFile::outputFile).mapNotNull(SMAPAndFile::smap).joinToString("\n")
             SMAPAndFile(if (smap.isNotEmpty()) smap else null, it.key, "NOT_SORTED")
         }.associateBy { it.sourceFile }
 
         for (source in sourceData) {
-            val ktFileName = "/" + File(source.sourceFile).name
+            konst ktFileName = "/" + File(source.sourceFile).name
                 .replace(".smap-nonseparate-compilation", ".kt")
                 .replace(".smap-separate-compilation", ".kt")
                 .replace(".smap", ".kt")
-            val data = compiledData[ktFileName]
+            konst data = compiledData[ktFileName]
             Assert.assertEquals("Smap data differs for $ktFileName", normalize(source.smap), normalize(data?.smap))
         }
 

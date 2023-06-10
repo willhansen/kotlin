@@ -1,13 +1,13 @@
 // SKIP_TXT
 
 class C {
-    val x: String?
+    konst x: String?
         get() = null
 }
 
 fun test1() {
     var c = C()
-    val x = c.x
+    konst x = c.x
     if (x == null) return
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // smartcast
     c.x<!UNSAFE_CALL!>.<!>length // no smartcast
@@ -18,7 +18,7 @@ fun test1() {
 
 fun test2() {
     var c = C()
-    val x = c.x
+    konst x = c.x
     if (x == null) return
     while (true) {
         <!DEBUG_INFO_SMARTCAST!>x<!>.length // smartcast
@@ -31,7 +31,7 @@ fun test2() {
 
 fun test3(p: Boolean) {
     var c = C()
-    val x = c.x
+    konst x = c.x
     if (x == null) return
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // smartcast
     c.x<!UNSAFE_CALL!>.<!>length // no smartcast
@@ -44,7 +44,7 @@ fun test3(p: Boolean) {
 
 fun test4(p: Boolean, q: Boolean) {
     var c = C()
-    val x = c.x
+    konst x = c.x
     if (x == null) return
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // smartcast
     c.x<!UNSAFE_CALL!>.<!>length // no smartcast
@@ -67,8 +67,8 @@ fun test4(p: Boolean, q: Boolean) {
 
 fun test5() {
     var c = C()
-    val d = c
-    val x = d.x
+    konst d = c
+    konst x = d.x
     if (x == null) return
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // smartcast
     c.x<!UNSAFE_CALL!>.<!>length // no smartcast

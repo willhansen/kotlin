@@ -10,11 +10,11 @@ import {formatMessage, TYPED_MESSAGE} from "./src/teamcity-format";
 const ModuleNotFoundError = require("webpack/lib/ModuleNotFoundError")
 
 class TeamCityErrorPlugin {
-    warningsFilter(value) {
-        if (!Array.isArray(value)) {
-            value = value ? [value] : [];
+    warningsFilter(konstue) {
+        if (!Array.isArray(konstue)) {
+            konstue = konstue ? [konstue] : [];
         }
-        return value.map(filter => {
+        return konstue.map(filter => {
             if (typeof filter === "string") {
                 return (warning, warningString) => warningString.includes(filter);
             }

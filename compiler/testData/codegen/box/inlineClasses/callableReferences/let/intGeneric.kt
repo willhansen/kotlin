@@ -3,15 +3,15 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Value<T: Int>(val value: T)
+konstue class Value<T: Int>(konst konstue: T)
 
 object Foo {
-    fun foo(value: Value<Int>) {
-        res = value.value
+    fun foo(konstue: Value<Int>) {
+        res = konstue.konstue
     }
 
-    fun bar(value: Value<Int>?) {
-        res = value?.value
+    fun bar(konstue: Value<Int>?) {
+        res = konstue?.konstue
     }
 }
 

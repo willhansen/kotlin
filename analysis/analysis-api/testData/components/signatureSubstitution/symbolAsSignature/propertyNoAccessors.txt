@@ -1,11 +1,11 @@
 KtDeclaration: KtProperty
 Symbol:
-val foo: kotlin.Int
+konst foo: kotlin.Int
 
 Signature:
 KtVariableLikeSignature:
   name = foo
   receiverType = null
   returnType = kotlin.Int
-  symbol = val foo: kotlin.Int
+  symbol = konst foo: kotlin.Int
   callableIdIfNonLocal = /foo

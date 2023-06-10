@@ -45,7 +45,7 @@ public enum JvmPrimitiveType {
         TYPE_BY_PRIMITIVE_TYPE = new EnumMap<PrimitiveType, JvmPrimitiveType>(PrimitiveType.class);
         TYPE_BY_DESC = new HashMap<String, JvmPrimitiveType>();
 
-        for (JvmPrimitiveType type : values()) {
+        for (JvmPrimitiveType type : konstues()) {
             WRAPPERS_CLASS_NAMES.add(type.getWrapperFqName());
             TYPE_BY_NAME.put(type.getJavaKeywordName(), type);
             TYPE_BY_PRIMITIVE_TYPE.put(type.getPrimitiveType(), type);

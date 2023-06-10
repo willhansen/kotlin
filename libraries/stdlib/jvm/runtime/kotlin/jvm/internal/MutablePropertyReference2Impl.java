@@ -29,7 +29,7 @@ public class MutablePropertyReference2Impl extends MutablePropertyReference2 {
     }
 
     @Override
-    public void set(Object receiver1, Object receiver2, Object value) {
-        getSetter().call(receiver1, receiver2, value);
+    public void set(Object receiver1, Object receiver2, Object konstue) {
+        getSetter().call(receiver1, receiver2, konstue);
     }
 }

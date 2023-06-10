@@ -2,8 +2,8 @@
 // FILE: 1.kt
 package test
 
-class A(val value: String) {
-    fun ok() = value
+class A(konst konstue: String) {
+    fun ok() = konstue
 }
 
 inline fun inlineFun(a: String, lambda: (String) -> A = ::A): A {
@@ -15,5 +15,5 @@ inline fun inlineFun(a: String, lambda: (String) -> A = ::A): A {
 import test.*
 
 fun box(): String {
-    return inlineFun("OK").value
+    return inlineFun("OK").konstue
 }

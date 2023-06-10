@@ -71,7 +71,7 @@ public class ExpectedLoadErrorsUtil {
                 if (annotation == null) return null;
 
                 // we expect exactly one annotation argument
-                ConstantValue<?> argument = annotation.getAllValueArguments().values().iterator().next();
+                ConstantValue<?> argument = annotation.getAllValueArguments().konstues().iterator().next();
 
                 String error = (String) argument.getValue();
                 //noinspection ConstantConditions

@@ -2,21 +2,21 @@
 package
 
 public final expect class Foo1 {
-    public expect final val x: kotlin.String
+    public expect final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final expect class Foo2 {
-    public expect final val x: kotlin.String
+    public expect final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 public final expect class Foo3 {
-    public expect final val x: kotlin.String
+    public expect final konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -27,7 +27,7 @@ package
 
 public open actual class Foo1 : Open {
     public constructor Foo1()
-    public open override /*1*/ val x: kotlin.String
+    public open override /*1*/ konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -35,7 +35,7 @@ public open actual class Foo1 : Open {
 
 public open actual class Foo2 : Open {
     public constructor Foo2()
-    public open override /*1*/ /*fake_override*/ val x: kotlin.String
+    public open override /*1*/ /*fake_override*/ konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -43,7 +43,7 @@ public open actual class Foo2 : Open {
 
 public open actual class Foo3 : WithFinal {
     public constructor Foo3()
-    public final override /*1*/ /*fake_override*/ val x: kotlin.String
+    public final override /*1*/ /*fake_override*/ konst x: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -51,7 +51,7 @@ public open actual class Foo3 : WithFinal {
 
 public open class Open {
     public constructor Open()
-    public open val x: kotlin.String = "42"
+    public open konst x: kotlin.String = "42"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -59,7 +59,7 @@ public open class Open {
 
 public open class WithFinal {
     public constructor WithFinal()
-    public final val x: kotlin.String = "42"
+    public final konst x: kotlin.String = "42"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

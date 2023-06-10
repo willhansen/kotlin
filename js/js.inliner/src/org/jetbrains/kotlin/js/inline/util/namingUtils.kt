@@ -31,15 +31,15 @@ fun aliasArgumentsIfNeeded(
 ) {
     require(arguments.size <= parameters.size) { "arguments.size (${arguments.size}) should be less or equal to parameters.size (${parameters.size})" }
 
-    val defaultParams = mutableListOf<JsParameter>()
+    konst defaultParams = mutableListOf<JsParameter>()
     for ((arg, param) in arguments.zip(parameters)) {
         if (JsAstUtils.isUndefinedExpression(arg)) {
             defaultParams += param
             continue
         }
-        val paramName = param.name
+        konst paramName = param.name
 
-        val replacement = JsScope.declareTemporaryName(paramName.ident).apply {
+        konst replacement = JsScope.declareTemporaryName(paramName.ident).apply {
             staticRef = arg
             context.newVar(this, arg.deepCopy(), source = source)
         }.makeRef()
@@ -50,8 +50,8 @@ fun aliasArgumentsIfNeeded(
 
     defaultParams += parameters.subList(arguments.size, parameters.size)
     for (defaultParam in defaultParams) {
-        val paramName = defaultParam.name
-        val freshName = JsScope.declareTemporaryName(paramName.ident)
+        konst paramName = defaultParam.name
+        konst freshName = JsScope.declareTemporaryName(paramName.ident)
         freshName.copyMetadataFrom(paramName)
         context.newVar(freshName, source = source)
 
@@ -67,7 +67,7 @@ fun renameLocalNames(
         function: JsFunction
 ) {
     for (name in collectDefinedNames(function.body)) {
-        val temporaryName = JsScope.declareTemporaryName(name.ident).apply { staticRef = name.staticRef }
+        konst temporaryName = JsScope.declareTemporaryName(name.ident).apply { staticRef = name.staticRef }
         context.replaceName(name, temporaryName.makeRef())
     }
 }
@@ -78,6 +78,6 @@ fun refreshLabelNames(
 ): JsNode {
     if (scope !is JsFunctionScope) throw AssertionError("JsFunction is expected to have JsFunctionScope")
 
-    val visitor = LabelNameRefreshingVisitor(scope)
+    konst visitor = LabelNameRefreshingVisitor(scope)
     return visitor.accept(node)
 }

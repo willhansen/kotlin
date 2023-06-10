@@ -4,4 +4,4 @@ class A {
     }
 }
 
-val A.f: String.() -> Unit = {}
+konst A.f: String.() -> Unit = {}

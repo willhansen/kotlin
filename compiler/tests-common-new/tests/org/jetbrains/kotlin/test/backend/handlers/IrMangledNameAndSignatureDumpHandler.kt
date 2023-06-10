@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI
 import org.jetbrains.kotlin.ir.backend.js.utils.isEqualsInheritedFromAny
 import org.jetbrains.kotlin.ir.declarations.*
 import org.jetbrains.kotlin.ir.expressions.IrConstructorCall
-import org.jetbrains.kotlin.ir.interpreter.intrinsicConstEvaluationAnnotation
+import org.jetbrains.kotlin.ir.interpreter.intrinsicConstEkonstuationAnnotation
 import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.*
@@ -45,7 +45,7 @@ import org.jetbrains.kotlin.utils.addToStdlib.same
 import java.io.File
 import java.io.FileNotFoundException
 
-private const val CHECK_MARKER = "// CHECK"
+private const konst CHECK_MARKER = "// CHECK"
 
 /**
  * Prints a mangled name and an [IdSignature] for each declaration and compares the result with
@@ -74,7 +74,7 @@ private const val CHECK_MARKER = "// CHECK"
  * fun test(): Int
  * ```
  *
- * Here, on the JVM backend the mangled names include the return value, while on the JS and Native backends
+ * Here, on the JVM backend the mangled names include the return konstue, while on the JS and Native backends
  * this is not the case, so we use two `// CHECK` blocks to reflect that fact.
  *
  * When running a test against some backend, we do the following.
@@ -93,15 +93,15 @@ private const val CHECK_MARKER = "// CHECK"
 class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : AbstractIrHandler(testServices) {
 
     companion object {
-        const val DUMP_EXTENSION = "sig.kt.txt"
+        const konst DUMP_EXTENSION = "sig.kt.txt"
     }
 
-    private val dumper = MultiModuleInfoDumper("// MODULE: %s")
+    private konst dumper = MultiModuleInfoDumper("// MODULE: %s")
 
     /**
      * The file that stores the expected signatures of the test file.
      */
-    private val expectedFile: File by lazy {
+    private konst expectedFile: File by lazy {
         testServices.moduleStructure.originalTestDataFiles.first().withExtension(DUMP_EXTENSION)
     }
 
@@ -110,7 +110,7 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
      *
      * Each element is a list of `// CHECK` blocks for a single declaration.
      */
-    private val checkBlockGroupIterator: Iterator<CheckBlockGroup> by lazy {
+    private konst checkBlockGroupIterator: Iterator<CheckBlockGroup> by lazy {
         try {
             parseAllCheckBlocks(expectedFile.readText())
         } catch (e: FileNotFoundException) {
@@ -148,8 +148,8 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
 
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (dumper.isEmpty()) return
-        val frontendKind = testServices.defaultsProvider.defaultFrontend
-        val muteDirectives = listOfNotNull(
+        konst frontendKind = testServices.defaultsProvider.defaultFrontend
+        konst muteDirectives = listOfNotNull(
             MUTE_SIGNATURE_COMPARISON_K2.takeIf { frontendKind == FrontendKinds.FIR },
         )
         testServices.codegenSuppressionChecker.checkMuted<FileComparisonFailure>(muteDirectives) {
@@ -158,23 +158,23 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
     }
 
     private inner class DumpStrategy(
-        val module: TestModule,
-        val irMangler: KotlinMangler.IrMangler,
-        val descriptorMangler: KotlinMangler.DescriptorMangler,
-        val firMangler: FirMangler?,
-        val irBuiltIns: IrBuiltIns,
+        konst module: TestModule,
+        konst irMangler: KotlinMangler.IrMangler,
+        konst descriptorMangler: KotlinMangler.DescriptorMangler,
+        konst firMangler: FirMangler?,
+        konst irBuiltIns: IrBuiltIns,
     ) : CustomKotlinLikeDumpStrategy {
 
-        private val targetBackend: TargetBackend
+        private konst targetBackend: TargetBackend
             get() = module.targetBackend!!
 
-        private val IrDeclaration.isFunctionWithNonUnitReturnType: Boolean
+        private konst IrDeclaration.isFunctionWithNonUnitReturnType: Boolean
             get() = this is IrSimpleFunction && !returnType.isUnit()
 
-        private val IrDeclaration.isMainFunction: Boolean
+        private konst IrDeclaration.isMainFunction: Boolean
             get() = isTopLevel && this is IrSimpleFunction && name.asString() == "main"
 
-        private val IrDeclaration.potentiallyHasDifferentMangledNamesDependingOnBackend: Boolean
+        private konst IrDeclaration.potentiallyHasDifferentMangledNamesDependingOnBackend: Boolean
             get() = isMainFunction ||
                     isFunctionWithNonUnitReturnType ||
                     parent.let { it is IrDeclaration && it.potentiallyHasDifferentMangledNamesDependingOnBackend }
@@ -186,9 +186,9 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
         @OptIn(ObsoleteDescriptorBasedAPI::class)
         private fun Printer.printSignatureAndMangledName(declaration: IrDeclaration) {
 
-            val symbol = declaration.symbol
+            konst symbol = declaration.symbol
 
-            val computedMangledNames = mutableListOf<ComputedMangledName>()
+            konst computedMangledNames = mutableListOf<ComputedMangledName>()
 
             irMangler.addMangledNameTo(computedMangledNames, declaration)
             descriptorMangler.addMangledNameTo(computedMangledNames, symbol.descriptor)
@@ -212,11 +212,11 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
 
             var printedActualMangledNameAndSignature = false
             if (checkBlockGroupIterator.hasNext()) {
-                val checkBlockGroupForDeclaration = checkBlockGroupIterator.next()
+                konst checkBlockGroupForDeclaration = checkBlockGroupIterator.next()
                 for (checkBlock in checkBlockGroupForDeclaration) {
                     printlnCheckMarker(checkBlock.backends)
                     if (checkBlock.backends.isEmpty() || TargetBackend.ANY in checkBlock.backends || targetBackend in checkBlock.backends) {
-                        // If this // CHECK block corresponds to the current target backend, print the actual values
+                        // If this // CHECK block corresponds to the current target backend, print the actual konstues
                         printActualMangledNamesAndSignatures()
                         printedActualMangledNameAndSignature = true
                     } else {
@@ -290,7 +290,7 @@ class IrMangledNameAndSignatureDumpHandler(testServices: TestServices) : Abstrac
 /**
  * The annotations that are known not to affect signature computation but that may be generated inconsistently on K1 and K2.
  */
-private val EXCLUDED_ANNOTATIONS = setOf(
+private konst EXCLUDED_ANNOTATIONS = setOf(
     StandardNames.FqNames.deprecated,
     StandardNames.FqNames.unsafeVariance,
     StandardNames.FqNames.suppress,
@@ -301,15 +301,15 @@ private val EXCLUDED_ANNOTATIONS = setOf(
     StandardClassIds.Annotations.ContextFunctionTypeParams.asSingleFqName(),
     JvmAnnotationNames.JETBRAINS_NOT_NULL_ANNOTATION,
     JvmAnnotationNames.JETBRAINS_NULLABLE_ANNOTATION,
-    intrinsicConstEvaluationAnnotation,
+    intrinsicConstEkonstuationAnnotation,
 )
 
-private val HIDDEN_ENUM_METHOD_NAMES = setOf(Name.identifier("finalize"), Name.identifier("getDeclaringClass"))
+private konst HIDDEN_ENUM_METHOD_NAMES = setOf(Name.identifier("finalize"), Name.identifier("getDeclaringClass"))
 
 private data class ComputedMangledName(
-    val manglerName: String,
-    val compatibleMode: Boolean,
-    val value: String,
+    konst manglerName: String,
+    konst compatibleMode: Boolean,
+    konst konstue: String,
 )
 
 /**
@@ -337,21 +337,21 @@ private data class ComputedMangledName(
  * ```
  */
 private fun Iterable<Pair<String, String>>.aligned(): List<String> {
-    val maxPrefixLength = maxOf { it.first.length }
+    konst maxPrefixLength = maxOf { it.first.length }
     return map { (prefix, suffix) -> prefix.padEnd(maxPrefixLength) + suffix }
 }
 
 private inline fun Iterable<ComputedMangledName>.printAligned(printer: Printer, prefix: (ComputedMangledName) -> String) {
-    map { prefix(it) to it.value }.aligned().forEach(printer::println)
+    map { prefix(it) to it.konstue }.aligned().forEach(printer::println)
 }
 
 private fun Printer.printMangledNames(computedMangledNames: List<ComputedMangledName>) {
-    val distinctNames = computedMangledNames.distinctBy { it.value }
+    konst distinctNames = computedMangledNames.distinctBy { it.konstue }
 
     // If mangled names computed from all three representations (descriptors, IR, FIR) and modes match,
     // print just one mangled name.
     distinctNames.singleOrNull()?.let {
-        println("//   Mangled name: ${it.value}")
+        println("//   Mangled name: ${it.konstue}")
         return
     }
 
@@ -388,15 +388,15 @@ private fun <Declaration, Mangler : KotlinMangler<Declaration>> Mangler.addMangl
     declaration: Declaration
 ) {
     listOf(false, true).mapTo(collector) { compatibleMode ->
-        val mangledName = try {
+        konst mangledName = try {
             declaration.mangleString(compatibleMode)
         } catch (e: Throwable) {
             // Kotlin-like IR renderer suppresses exceptions thrown during rendering, which leads to missing renders that are hard to debug.
             // Because this routine is executed during rendering, we print the exception description instead of a proper mangled name.
-            val message = e.toString()
+            konst message = e.toString()
             buildString {
                 append("could not compute mangled name: ")
-                when (val newlineIndex = message.indexOf('\n')) {
+                when (konst newlineIndex = message.indexOf('\n')) {
                     -1 -> append(message)
                     else -> {
                         append(message.substring(0, newlineIndex))
@@ -415,7 +415,7 @@ private fun <Declaration, Mangler : KotlinMangler<Declaration>> Mangler.addMangl
  * @property backends The backends this `// CHECK` block is for.
  * @property expectations The list of expectation lines in this `// CHECK` block.
  */
-private data class CheckBlock(val backends: List<TargetBackend>, val expectations: List<String>)
+private data class CheckBlock(konst backends: List<TargetBackend>, konst expectations: List<String>)
 
 /**
  * A list of `// CHECK` blocks for a single declaration.
@@ -423,17 +423,17 @@ private data class CheckBlock(val backends: List<TargetBackend>, val expectation
 private typealias CheckBlockGroup = List<CheckBlock>
 
 private fun parseAllCheckBlocks(input: String): List<CheckBlockGroup> {
-    val result = mutableListOf<CheckBlockGroup>()
-    val lineIterator = input.lines().iterator()
+    konst result = mutableListOf<CheckBlockGroup>()
+    konst lineIterator = input.lines().iterator()
 
     var currentCheckBlockGroup = mutableListOf<CheckBlock>() // CHECK blocks for a single declaration
 
     var line = if (lineIterator.hasNext()) lineIterator.next() else return emptyList()
 
     while (true) {
-        val trimmed = line.trim()
+        konst trimmed = line.trim()
         if (trimmed.startsWith(CHECK_MARKER)) {
-            val (nextCheckMarker, checkBlock) = parseSingleCheckBlock(trimmed, lineIterator)
+            konst (nextCheckMarker, checkBlock) = parseSingleCheckBlock(trimmed, lineIterator)
             currentCheckBlockGroup.add(checkBlock)
             if (nextCheckMarker != null) {
                 line = nextCheckMarker
@@ -452,12 +452,12 @@ private fun parseAllCheckBlocks(input: String): List<CheckBlockGroup> {
     return result
 }
 
-private val whitespaceRegex = "\\s+".toRegex()
+private konst whitespaceRegex = "\\s+".toRegex()
 
 /**
  * Parses a single check block.
  *
- * The valid `// CHECK` block is multiline string that starts with the `// CHECK` comment optionally followed by a whitespace-separated list
+ * The konstid `// CHECK` block is multiline string that starts with the `// CHECK` comment optionally followed by a whitespace-separated list
  * of [TargetBackend] names, and ending with a colon. After that, an arbitrary number of single-line comments may follow. The `// CHECK` block
  * ends with the first non-comment line.
  *
@@ -487,19 +487,19 @@ private val whitespaceRegex = "\\s+".toRegex()
  */
 private fun parseSingleCheckBlock(trimmedCheckLine: String, lineIterator: Iterator<String>): Pair<String?, CheckBlock> {
     assert(trimmedCheckLine.startsWith(CHECK_MARKER))
-    val colonIndex = trimmedCheckLine.indexOf(':')
+    konst colonIndex = trimmedCheckLine.indexOf(':')
     if (colonIndex < 0) {
         error("Expected colon after '$CHECK_MARKER' in '$trimmedCheckLine'")
     }
-    val backends = trimmedCheckLine
+    konst backends = trimmedCheckLine
         .substring(CHECK_MARKER.length, colonIndex)
         .splitToSequence(whitespaceRegex)
         .filter { it.isNotEmpty() }
         .map { enumValueOf<TargetBackend>(it) }
         .toList()
-    val expectations = mutableListOf<String>()
+    konst expectations = mutableListOf<String>()
     for (line in lineIterator) {
-        val trimmed = line.trim()
+        konst trimmed = line.trim()
         if (trimmed.startsWith(CHECK_MARKER)) {
             // Encountered the next // CHECK block
             return trimmed to CheckBlock(backends, expectations)
@@ -511,6 +511,6 @@ private fun parseSingleCheckBlock(trimmedCheckLine: String, lineIterator: Iterat
             break
         }
     }
-    // Either we have no more lines, or the next line is not valid beginning of a `// CHECK` block.
+    // Either we have no more lines, or the next line is not konstid beginning of a `// CHECK` block.
     return null to CheckBlock(backends, expectations)
 }

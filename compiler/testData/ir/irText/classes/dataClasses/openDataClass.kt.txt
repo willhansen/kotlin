@@ -6,11 +6,11 @@ open data class ValidatedProperties {
 
   }
 
-  open val test1: String
+  open konst test1: String
     field = test1
     open get
 
-  open val test2: String
+  open konst test2: String
     field = test2
     open get
 
@@ -43,7 +43,7 @@ open data class ValidatedProperties {
     when {
       other !is ValidatedProperties -> return false
     }
-    val tmp0_other_with_cast: ValidatedProperties = other as ValidatedProperties
+    konst tmp0_other_with_cast: ValidatedProperties = other as ValidatedProperties
     when {
       EQEQ(arg0 = <this>.<get-test1>(), arg1 = tmp0_other_with_cast.<get-test1>()).not() -> return false
     }

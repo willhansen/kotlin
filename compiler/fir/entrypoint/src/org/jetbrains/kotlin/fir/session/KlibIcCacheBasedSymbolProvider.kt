@@ -20,7 +20,7 @@ class KlibIcCacheBasedSymbolProvider(
     session: FirSession,
     moduleDataProvider: SingleModuleDataProvider,
     kotlinScopeProvider: FirKotlinScopeProvider,
-    private val icData: KlibIcData,
+    private konst icData: KlibIcData,
     defaultDeserializationOrigin: FirDeclarationOrigin = FirDeclarationOrigin.Precompiled
 ) : MetadataLibraryBasedSymbolProvider<KlibIcData>(
     session,
@@ -32,7 +32,7 @@ class KlibIcCacheBasedSymbolProvider(
         return moduleDataProvider.allModuleData.single()
     }
 
-    override val fragmentNamesInLibraries: Map<String, List<KlibIcData>> by lazy {
+    override konst fragmentNamesInLibraries: Map<String, List<KlibIcData>> by lazy {
         buildMap<String, SmartList<KlibIcData>> {
             for (fragmentName in icData.packageFragmentNameList) {
                 getOrPut(fragmentName) { SmartList() }
@@ -41,7 +41,7 @@ class KlibIcCacheBasedSymbolProvider(
         }
     }
 
-    override val knownPackagesInLibraries: Set<FqName> by lazy {
+    override konst knownPackagesInLibraries: Set<FqName> by lazy {
         buildSet<FqName> {
             for (fragmentName in icData.packageFragmentNameList) {
                 var curPackage = FqName(fragmentName)

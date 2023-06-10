@@ -5,8 +5,8 @@ class Foo {
 }
 
 fun box() : String {
-  val a = Foo()
-  val b = Foo()
+  konst a = Foo()
+  konst b = Foo()
   if (a !== a) return "fail 1"
   if (b !== b) return "fail 2"
   if (b === a) return "fail 3"

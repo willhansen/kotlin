@@ -10,7 +10,7 @@ fun plus1(x: Int) = x + 1
 // CHECK-NOT: Int-unbox
 // CHECK: ret void
 fun main() {
-    val ref = ::plus1
+    konst ref = ::plus1
     var y = 0
     repeat(100000) {
         y += ref(it)  // Should be devirtualized and invoked without boxing/unboxing (`Int-box`/`Int-unbox`)

@@ -7,11 +7,11 @@
  * ISSUES: KT-25289
  */
 
-open class Bar(val x: Int)
+open class Bar(konst x: Int)
 
 open class Foo {
     companion object : Bar(Foo.prop) {
-         const val prop: Int = 10
+         const konst prop: Int = 10
     }
 }
 

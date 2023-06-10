@@ -44,7 +44,7 @@ public class KtTypeProjection extends KtModifierListOwnerStub<KotlinTypeProjecti
 
         PsiElement projectionToken = getProjectionToken();
         IElementType token = projectionToken != null ? projectionToken.getNode().getElementType() : null;
-        for (KtProjectionKind projectionKind : KtProjectionKind.values()) {
+        for (KtProjectionKind projectionKind : KtProjectionKind.konstues()) {
             if (projectionKind.getToken() == token) {
                 return projectionKind;
             }

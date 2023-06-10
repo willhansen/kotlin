@@ -1,12 +1,12 @@
 // FIR_IDENTICAL
-class TestInitValFromParameter(val x: Int)
+class TestInitValFromParameter(konst x: Int)
 
 class TestInitValInClass {
-    val x = 0
+    konst x = 0
 }
 
 class TestInitValInInitBlock {
-    val x: Int
+    konst x: Int
     init {
         x = 0
     }

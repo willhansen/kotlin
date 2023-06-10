@@ -36,7 +36,7 @@ class PrimitiveNumberRangeLiteralRangeValue(
     ReversableRangeValue {
 
     override fun getBoundedValue(codegen: ExpressionCodegen): BoundedValue {
-        val lowBound = codegen.generateCallReceiver(rangeCall)
+        konst lowBound = codegen.generateCallReceiver(rangeCall)
 
         if (codegen.canBeSpecializedByExcludingHighBound(rangeCall)) {
             return BoundedValue(
@@ -65,14 +65,14 @@ class PrimitiveNumberRangeLiteralRangeValue(
             ?: ForInSimpleProgressionLoopGenerator.fromBoundedValueWithStepMinus1(
                 codegen, forExpression, getBoundedValue(codegen),
                 getComparisonGeneratorForKotlinType(elementKotlinType),
-                inverseBoundsEvaluationOrder = true
+                inverseBoundsEkonstuationOrder = true
             )
 
     private fun createConstBoundedForInRangeLiteralGenerator(
         codegen: ExpressionCodegen,
         forExpression: KtForExpression
     ): ForLoopGenerator? {
-        val endExpression = rangeCall.getFirstArgumentExpression() ?: return null
+        konst endExpression = rangeCall.getFirstArgumentExpression() ?: return null
         return createConstBoundedForLoopGeneratorOrNull(
             codegen, forExpression,
             codegen.generateCallReceiver(rangeCall),
@@ -85,7 +85,7 @@ class PrimitiveNumberRangeLiteralRangeValue(
         codegen: ExpressionCodegen,
         forExpression: KtForExpression
     ): ForLoopGenerator? {
-        val endExpression = rangeCall.getReceiverExpression() ?: return null
+        konst endExpression = rangeCall.getReceiverExpression() ?: return null
         return createConstBoundedForLoopGeneratorOrNull(
             codegen, forExpression,
             codegen.generateCallSingleArgument(rangeCall),
@@ -107,15 +107,15 @@ private fun ExpressionCodegen.isArraySizeMinusOne(expression: KtExpression): Boo
             isConstantOne(expression.right!!)
 
 private fun ExpressionCodegen.isConstantOne(expression: KtExpression): Boolean {
-    val constantValue = getCompileTimeConstant(expression)
-    return constantValue is IntegerValueConstant<*> && constantValue.value == 1
+    konst constantValue = getCompileTimeConstant(expression)
+    return constantValue is IntegerValueConstant<*> && constantValue.konstue == 1
 }
 
 private fun ExpressionCodegen.isArraySizeAccess(expression: KtExpression): Boolean {
     return when {
         expression is KtDotQualifiedExpression -> {
-            val selector = expression.selectorExpression
-            val type = bindingContext.getType(expression.receiverExpression) ?: return false
+            konst selector = expression.selectorExpression
+            konst type = bindingContext.getType(expression.receiverExpression) ?: return false
             asmType(type).sort == Type.ARRAY &&
                     selector is KtNameReferenceExpression &&
                     selector.text == "size"

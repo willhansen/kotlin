@@ -18,19 +18,19 @@ suspend inline fun <reified T, reified R> bar(x: T, y: R, f: suspend (T) -> R, t
     return Pair(x, y)
 }
 
-data class Pair<A, B>(val a: A, val b: B)
+data class Pair<A, B>(konst a: A, konst b: B)
 
 fun box(): String {
     builder {
         bar(1, "", ::foo, "Int", "String")
 
-        val s1: Pair<Long, String?> = bar(1L, "", ::foo, "Long", "String")
-        val (a: Long, b: String?) = bar(1L, "", ::foo, "Long", "String")
+        konst s1: Pair<Long, String?> = bar(1L, "", ::foo, "Long", "String")
+        konst (a: Long, b: String?) = bar(1L, "", ::foo, "Long", "String")
 
-        val ns: String? = null
+        konst ns: String? = null
         bar(ns, ns, ::foo, "String", "String")
 
-        val s2: Pair<Int?, String?> = bar(null, null, ::foo, "Int", "String")
+        konst s2: Pair<Int?, String?> = bar(null, null, ::foo, "Int", "String")
     }
 
     return "OK"

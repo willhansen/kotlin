@@ -1,3 +1,3 @@
 package org.sample.two
 
-expect val qux: Int
+expect konst qux: Int

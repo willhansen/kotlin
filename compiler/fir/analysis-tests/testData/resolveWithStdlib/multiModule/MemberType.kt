@@ -6,7 +6,7 @@ expect class MyList {
     fun get(i: Int): Int
 }
 
-open class Wrapper(val list: MyList)
+open class Wrapper(konst list: MyList)
 
 // MODULE: m1-jvm(m1-common)
 // FILE: jvm.kt

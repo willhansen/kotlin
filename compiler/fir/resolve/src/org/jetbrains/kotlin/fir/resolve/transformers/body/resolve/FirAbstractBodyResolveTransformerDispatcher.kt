@@ -28,25 +28,25 @@ abstract class FirAbstractBodyResolveTransformerDispatcher(
     phase: FirResolvePhase,
     override var implicitTypeOnly: Boolean,
     scopeSession: ScopeSession,
-    val returnTypeCalculator: ReturnTypeCalculator = ReturnTypeCalculatorForFullBodyResolve,
+    konst returnTypeCalculator: ReturnTypeCalculator = ReturnTypeCalculatorForFullBodyResolve,
     outerBodyResolveContext: BodyResolveContext? = null,
-    val firTowerDataContextCollector: FirTowerDataContextCollector? = null,
+    konst firTowerDataContextCollector: FirTowerDataContextCollector? = null,
 ) : FirAbstractBodyResolveTransformer(phase) {
 
-    open val preserveCFGForClasses: Boolean get() = !implicitTypeOnly
+    open konst preserveCFGForClasses: Boolean get() = !implicitTypeOnly
 
-    final override val context: BodyResolveContext =
+    final override konst context: BodyResolveContext =
         outerBodyResolveContext ?: BodyResolveContext(returnTypeCalculator, DataFlowAnalyzerContext(session))
-    final override val components: BodyResolveTransformerComponents =
+    final override konst components: BodyResolveTransformerComponents =
         BodyResolveTransformerComponents(session, scopeSession, this, context)
 
-    final override val resolutionContext: ResolutionContext = ResolutionContext(session, components, context)
+    final override konst resolutionContext: ResolutionContext = ResolutionContext(session, components, context)
 
-    abstract val expressionsTransformer: FirExpressionsResolveTransformer
+    abstract konst expressionsTransformer: FirExpressionsResolveTransformer
 
-    abstract val declarationsTransformer: FirDeclarationsResolveTransformer
+    abstract konst declarationsTransformer: FirDeclarationsResolveTransformer
 
-    private val controlFlowStatementsTransformer = FirControlFlowStatementsResolveTransformer(this)
+    private konst controlFlowStatementsTransformer = FirControlFlowStatementsResolveTransformer(this)
 
     override fun transformFile(file: FirFile, data: ResolutionMode): FirFile {
         checkSessionConsistency(file)
@@ -70,7 +70,7 @@ abstract class FirAbstractBodyResolveTransformerDispatcher(
     }
 
     override fun transformTypeRef(typeRef: FirTypeRef, data: ResolutionMode): FirResolvedTypeRef {
-        val resolvedTypeRef = if (typeRef is FirResolvedTypeRef) {
+        konst resolvedTypeRef = if (typeRef is FirResolvedTypeRef) {
             typeRef
         } else {
             typeResolverTransformer.withFile(context.file) {
@@ -384,8 +384,8 @@ abstract class FirAbstractBodyResolveTransformerDispatcher(
         return expressionsTransformer.transformAnonymousFunctionExpression(anonymousFunctionExpression, data)
     }
 
-    override fun transformValueParameter(valueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
-        return declarationsTransformer.transformValueParameter(valueParameter, data)
+    override fun transformValueParameter(konstueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
+        return declarationsTransformer.transformValueParameter(konstueParameter, data)
     }
 
     override fun transformTypeAlias(typeAlias: FirTypeAlias, data: ResolutionMode): FirTypeAlias {
@@ -453,7 +453,7 @@ abstract class FirAbstractBodyResolveTransformerDispatcher(
     // --------------------------------------------------------------------------
 
     fun <D> FirElement.visitNoTransform(transformer: FirTransformer<D>, data: D) {
-        val result = this.transform<FirElement, D>(transformer, data)
+        konst result = this.transform<FirElement, D>(transformer, data)
         require(result === this) { "become $result: `${result.render()}`, was ${this}: `${this.render()}`" }
     }
 }

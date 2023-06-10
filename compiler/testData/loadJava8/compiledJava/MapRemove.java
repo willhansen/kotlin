@@ -10,7 +10,7 @@ public class MapRemove {
         public boolean remove(Object x, Object y) { return false; }
     }
 
-    public abstract class MyMapStringInvalid implements Map<String, Integer> {
+    public abstract class MyMapStringInkonstid implements Map<String, Integer> {
         public boolean remove(String x, Integer y) { return false; }
     }
 }

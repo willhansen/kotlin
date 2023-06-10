@@ -35,22 +35,22 @@ class Bottom2: Bottom() {
 
 @Serializable
 data class Full(
-    val b: Bottom2,
-    val i: Intermediate<String>
+    konst b: Bottom2,
+    konst i: Intermediate<String>
 )
 
 fun box(): String {
-    val j = Json { ignoreUnknownKeys = true }
-    val b = Bottom2().apply {
+    konst j = Json { ignoreUnknownKeys = true }
+    konst b = Bottom2().apply {
         top = listOf("a", "b")
         inter = "v"
         bot = "bot"
     }
-    val f = Full(b, b)
-    val encoded = j.encodeToString(f)
+    konst f = Full(b, b)
+    konst encoded = j.encodeToString(f)
     if (encoded != """{"b":{"top":["a","b"],"inter":"v","bot":"bot"},"i":{"top":["a","b"],"inter":"v"}}""") return "Encoded: $encoded"
 
-    val decoded = j.decodeFromString<Full>(encoded)
+    konst decoded = j.decodeFromString<Full>(encoded)
     if (decoded.toString() != "Full(b=Bottom2([a, b], v, bot), i=Intermediate([a, b], v))") return "Decoded: $decoded"
     return "OK"
 }

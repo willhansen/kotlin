@@ -9,19 +9,19 @@ internal abstract class KotlinCommonCompilerOptionsDefault @javax.inject.Inject 
     objectFactory: org.gradle.api.model.ObjectFactory
 ) : org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerToolOptionsDefault(objectFactory), org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions {
 
-    override val apiVersion: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.KotlinVersion> =
+    override konst apiVersion: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.KotlinVersion> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.KotlinVersion::class.java)
 
-    override val languageVersion: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.KotlinVersion> =
+    override konst languageVersion: org.gradle.api.provider.Property<org.jetbrains.kotlin.gradle.dsl.KotlinVersion> =
         objectFactory.property(org.jetbrains.kotlin.gradle.dsl.KotlinVersion::class.java)
 
-    override val optIn: org.gradle.api.provider.ListProperty<kotlin.String> =
+    override konst optIn: org.gradle.api.provider.ListProperty<kotlin.String> =
         objectFactory.listProperty(kotlin.String::class.java).convention(emptyList<String>())
 
-    override val progressiveMode: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst progressiveMode: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 
     @Deprecated(message = "Compiler flag -Xuse-k2 is deprecated; please use language version 2.0 instead", level = DeprecationLevel.WARNING)
-    override val useK2: org.gradle.api.provider.Property<kotlin.Boolean> =
+    override konst useK2: org.gradle.api.provider.Property<kotlin.Boolean> =
         objectFactory.property(kotlin.Boolean::class.java).convention(false)
 }

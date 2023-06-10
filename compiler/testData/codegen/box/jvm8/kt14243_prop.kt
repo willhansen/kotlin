@@ -2,23 +2,23 @@
 // JVM_TARGET: 1.8
 
 interface Z<T> {
-    val value: T
+    konst konstue: T
 
-    val z: T
-        get() = value
+    konst z: T
+        get() = konstue
 }
 
 open class ZImpl : Z<String> {
-    override val value: String
+    override konst konstue: String
         get() = "OK"
 }
 
 open class ZImpl2 : ZImpl() {
-    override val z: String
+    override konst z: String
         get() = super.z
 }
 
 
 fun box(): String {
-    return ZImpl2().value
+    return ZImpl2().konstue
 }

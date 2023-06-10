@@ -21,7 +21,7 @@ fun case1(){
 
 class MainClass {
     abstract class Base1() {
-        abstract val a: CharSequence
+        abstract konst a: CharSequence
         abstract var b: CharSequence
 
         abstract fun foo(): CharSequence
@@ -38,8 +38,8 @@ class OtherClass {
     abstract inner class ImplBase2() : MainClass.Base2() {
         override var b: CharSequence
             get() = TODO()
-            set(value) {}
-        override val a: CharSequence = ""
+            set(konstue) {}
+        override konst a: CharSequence = ""
 
         override fun boo(x: Int) {
             TODO()
@@ -48,7 +48,7 @@ class OtherClass {
     }
 
     fun zoooo(): ImplBase2 {
-        val k = object : ImplBase2() {
+        konst k = object : ImplBase2() {
             override fun foo(): CharSequence = ""
         }
         return k

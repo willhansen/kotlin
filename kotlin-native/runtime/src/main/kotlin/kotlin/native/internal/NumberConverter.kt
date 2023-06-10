@@ -33,27 +33,27 @@ internal class NumberConverter {
 
     private var getCount: Int = 0 // Number of times u and k have been set.
 
-    private val uArray = IntArray(64)
+    private konst uArray = IntArray(64)
 
     private var firstK: Int = 0
 
     private fun convertDouble(inputNumber: Double): String {
-        val p = 1023 + 52 // The power offset (precision).
+        konst p = 1023 + 52 // The power offset (precision).
         @Suppress("INTEGER_OVERFLOW")
-        val signMask = 0x7FFFFFFFFFFFFFFFL + 1 // The mask to get the sign of.
+        konst signMask = 0x7FFFFFFFFFFFFFFFL + 1 // The mask to get the sign of.
         // The number.
-        val eMask = 0x7FF0000000000000L // The mask to get the power bits.
-        val fMask = 0x000FFFFFFFFFFFFFL // The mask to get the significand.
+        konst eMask = 0x7FF0000000000000L // The mask to get the power bits.
+        konst fMask = 0x000FFFFFFFFFFFFFL // The mask to get the significand.
 
         // Bits.
-        val inputNumberBits = inputNumber.bits()
-        // The value of the sign... 0 is positive, ~0 is negative.
-        val signString = if (inputNumberBits and signMask == 0L) "" else "-"
-        // The value of the 'power bits' of the inputNumber.
-        val e = (inputNumberBits and eMask shr 52).toInt()
-        // The value of the 'significand bits' of the inputNumber.
+        konst inputNumberBits = inputNumber.bits()
+        // The konstue of the sign... 0 is positive, ~0 is negative.
+        konst signString = if (inputNumberBits and signMask == 0L) "" else "-"
+        // The konstue of the 'power bits' of the inputNumber.
+        konst e = (inputNumberBits and eMask shr 52).toInt()
+        // The konstue of the 'significand bits' of the inputNumber.
         var f = inputNumberBits and fMask
-        val mantissaIsZero = f == 0L
+        konst mantissaIsZero = f == 0L
         var pow: Int
         var numBits = 52
 
@@ -91,20 +91,20 @@ internal class NumberConverter {
     }
 
     private fun convertFloat(inputNumber: Float): String {
-        val p = 127 + 23 // The power offset (precision).
+        konst p = 127 + 23 // The power offset (precision).
         @Suppress("INTEGER_OVERFLOW")
-        val signMask = 0x7FFFFFFF + 1 // The mask to get the sign of the number.
-        val eMask = 0x7F800000 // The mask to get the power bits.
-        val fMask = 0x007FFFFF // The mask to get the significand bits.
+        konst signMask = 0x7FFFFFFF + 1 // The mask to get the sign of the number.
+        konst eMask = 0x7F800000 // The mask to get the power bits.
+        konst fMask = 0x007FFFFF // The mask to get the significand bits.
 
-        val inputNumberBits = inputNumber.bits()
-        // The value of the sign... 0 is positive, ~0 is negative.
-        val signString = if (inputNumberBits and signMask == 0) "" else "-"
-        // The value of the 'power bits' of the inputNumber.
-        val e = inputNumberBits and eMask shr 23
-        // The value of the 'significand bits' of the inputNumber.
+        konst inputNumberBits = inputNumber.bits()
+        // The konstue of the sign... 0 is positive, ~0 is negative.
+        konst signString = if (inputNumberBits and signMask == 0) "" else "-"
+        // The konstue of the 'power bits' of the inputNumber.
+        konst e = inputNumberBits and eMask shr 23
+        // The konstue of the 'significand bits' of the inputNumber.
         var f = inputNumberBits and fMask
-        val mantissaIsZero = f == 0
+        konst mantissaIsZero = f == 0
         var pow: Int
         var numBits = 23
 
@@ -114,7 +114,7 @@ internal class NumberConverter {
             if (mantissaIsZero)
                 return signString + "0.0"
             pow = 1 - p // A denormalized number.
-            if (f < 8) { // Want more precision with smallest values.
+            if (f < 8) { // Want more precision with smallest konstues.
                 f = f shl 2
                 pow -= 2
             }
@@ -143,14 +143,14 @@ internal class NumberConverter {
 
     private fun freeFormatExponential(): String {
         // Corresponds to process "Free-Format Exponential".
-        val formattedDecimal = CharArray(25)
+        konst formattedDecimal = CharArray(25)
         formattedDecimal[0] = ('0' + uArray[getCount++])
         formattedDecimal[1] = '.'
         // The position the next character is to be inserted into formattedDecimal.
         var charPos = 2
 
         var k = firstK
-        val expt = k
+        konst expt = k
         while (true) {
             k--
             if (getCount >= setCount)
@@ -167,7 +167,7 @@ internal class NumberConverter {
 
     private fun freeFormat(): String {
         // Corresponds to process "Free-Format".
-        val formattedDecimal = CharArray(25)
+        konst formattedDecimal = CharArray(25)
         // The position the next character is to be inserted into formattedDecimal.
         var charPos = 0
         var k = firstK
@@ -197,7 +197,7 @@ internal class NumberConverter {
 
     private fun bigIntDigitGeneratorInstImpl(f: Long, e: Int,
                                              isDenormalized: Boolean, mantissaIsZero: Boolean, p: Int) {
-        val results = IntArray(3)
+        konst results = IntArray(3)
         bigIntDigitGeneratorInstImpl(results, uArray, f, e, isDenormalized, mantissaIsZero, p)
         setCount = results[0]
         getCount = results[1]
@@ -229,12 +229,12 @@ internal class NumberConverter {
             }
         }
 
-        val k = ceil((e + p - 1) * invLogOfTenBaseTwo - 1e-10).toInt()
+        konst k = ceil((e + p - 1) * invLogOfTenBaseTwo - 1e-10).toInt()
 
         if (k > 0) {
             s *= TEN_TO_THE[k]
         } else if (k < 0) {
-            val scale = TEN_TO_THE[-k]
+            konst scale = TEN_TO_THE[-k]
             r *= scale
             m = if (m == 1L) scale else m * scale
         }
@@ -252,7 +252,7 @@ internal class NumberConverter {
         var low: Boolean
         var high: Boolean
         var u: Int
-        val si = longArrayOf(s, s shl 1, s shl 2, s shl 3)
+        konst si = longArrayOf(s, s shl 1, s shl 2, s shl 3)
         while (true) {
             // Set U to be floor (r / s) and r to be the remainder
             // using a kind of "binary search" to find the answer.
@@ -290,9 +290,9 @@ internal class NumberConverter {
 
     companion object {
 
-        private val invLogOfTenBaseTwo = 0.30102999566398114251
+        private konst invLogOfTenBaseTwo = 0.30102999566398114251
 
-        private val TEN_TO_THE = LongArray(20)
+        private konst TEN_TO_THE = LongArray(20)
 
         init {
             TEN_TO_THE[0] = 1L
@@ -301,7 +301,7 @@ internal class NumberConverter {
             }
         }
 
-        private val converter: NumberConverter
+        private konst converter: NumberConverter
             get() = NumberConverter()
 
         fun convert(input: Double): String {

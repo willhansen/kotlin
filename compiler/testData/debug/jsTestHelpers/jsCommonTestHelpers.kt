@@ -9,7 +9,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 external interface ValueDescriptionForSteppingTests {
     var isNull: Boolean?
     var isReferenceType: Boolean?
-    var valueDescription: String?
+    var konstueDescription: String?
     var typeName: String?
 }
 
@@ -21,29 +21,29 @@ external object JSON {
  * This function is only called from the debugger
  */
 @JsExport
-fun makeValueDescriptionForSteppingTests(value: Any?): ValueDescriptionForSteppingTests? {
-    val jsTypeName = jsTypeOf(value)
-    val displayedTypeName = when (jsTypeName) {
+fun makeValueDescriptionForSteppingTests(konstue: Any?): ValueDescriptionForSteppingTests? {
+    konst jsTypeName = jsTypeOf(konstue)
+    konst displayedTypeName = when (jsTypeName) {
         "undefined" -> return null
-        "string", "object", "function" -> if (value == null) jsTypeName else {
-            val klass = value::class
+        "string", "object", "function" -> if (konstue == null) jsTypeName else {
+            konst klass = konstue::class
             // Fully qualified names are not yet supported in Kotlin/JS reflection
             knownFqNames[klass] ?: klass.simpleName ?: "<anonymous>"
         }
         else -> jsTypeName
     }
     return js("{}").unsafeCast<ValueDescriptionForSteppingTests>().apply {
-        isNull = value == null
+        isNull = konstue == null
         isReferenceType = jsTypeName == "object" || jsTypeName == "function"
-        valueDescription = when (jsTypeName) {
-            "string" -> JSON.stringify(value)
-            else -> value.toString()
+        konstueDescription = when (jsTypeName) {
+            "string" -> JSON.stringify(konstue)
+            else -> konstue.toString()
         }
         typeName = displayedTypeName
     }
 }
 
-private val minimalFqNames = mapOf(
+private konst minimalFqNames = mapOf(
     Long::class to "kotlin.Long",
     String::class to "kotlin.String",
     Array::class to "kotlin.Array",
@@ -51,10 +51,10 @@ private val minimalFqNames = mapOf(
     ArithmeticException::class to "kotlin.ArithmeticException",
 )
 
-private val knownFqNames = minimalFqNames + stdlibFqNames
+private konst knownFqNames = minimalFqNames + stdlibFqNames
 
 private object EmptyContinuation: Continuation<Any?> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     override fun resumeWith(result: Result<Any?>) {

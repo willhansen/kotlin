@@ -14,7 +14,7 @@ fun test() {
         /*start*/
 
         /** doc */
-        val a = 12
+        konst a = 12
 
         /*end*/
     }

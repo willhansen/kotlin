@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir2cfg.builders.BlockConnectorBuilder
 import org.jetbrains.kotlin.ir2cfg.graph.BasicBlock
 
-class GeneralConnectorBuilder(private val element: IrStatement) : BlockConnectorBuilder {
+class GeneralConnectorBuilder(private konst element: IrStatement) : BlockConnectorBuilder {
 
-    private val next = linkedSetOf<BasicBlock>()
+    private konst next = linkedSetOf<BasicBlock>()
 
-    private val previous = linkedSetOf<BasicBlock>()
+    private konst previous = linkedSetOf<BasicBlock>()
 
     override fun addNext(basicBlock: BasicBlock) {
         next.add(basicBlock)

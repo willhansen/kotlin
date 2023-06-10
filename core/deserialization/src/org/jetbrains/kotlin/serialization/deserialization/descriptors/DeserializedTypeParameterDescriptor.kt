@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.serialization.deserialization.getName
 import org.jetbrains.kotlin.types.KotlinType
 
 class DeserializedTypeParameterDescriptor(
-    private val c: DeserializationContext,
-    val proto: ProtoBuf.TypeParameter,
+    private konst c: DeserializationContext,
+    konst proto: ProtoBuf.TypeParameter,
     index: Int
 ) : AbstractLazyTypeParameterDescriptor(
     c.storageManager, c.containingDeclaration,
@@ -39,12 +39,12 @@ class DeserializedTypeParameterDescriptor(
     c.nameResolver.getName(proto.name),
     ProtoEnumFlags.variance(proto.variance), proto.reified, index, SourceElement.NO_SOURCE, SupertypeLoopChecker.EMPTY,
 ) {
-    override val annotations = DeserializedAnnotations(c.storageManager) {
+    override konst annotations = DeserializedAnnotations(c.storageManager) {
         c.components.annotationAndConstantLoader.loadTypeParameterAnnotations(proto, c.nameResolver).toList()
     }
 
     override fun resolveUpperBounds(): List<KotlinType> {
-        val upperBounds = proto.upperBounds(c.typeTable)
+        konst upperBounds = proto.upperBounds(c.typeTable)
         if (upperBounds.isEmpty()) {
             return listOf(this.builtIns.defaultBound)
         }

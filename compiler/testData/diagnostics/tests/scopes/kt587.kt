@@ -5,7 +5,7 @@ class Main {
     companion object {
         class States() {
             companion object {
-                public val N: States = States() // : States unresolved
+                public konst N: States = States() // : States unresolved
             }
         }
     }

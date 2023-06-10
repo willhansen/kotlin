@@ -2,9 +2,9 @@ fun test(a: Any?) {
     if (a == null) return
     a.hashCode()
 
-    val b = a
+    konst b = a
     b.hashCode()
 
-    val c: Any? = a
+    konst c: Any? = a
     c<!UNSAFE_CALL!>.<!>hashCode()
 }

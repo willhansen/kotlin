@@ -27,17 +27,17 @@ import org.jetbrains.kotlin.name.Name
 //Also used in IDE for loading java classes separately from stub based kotlin classes
 open class JavaSymbolProvider(
     session: FirSession,
-    private val javaFacade: FirJavaFacade,
+    private konst javaFacade: FirJavaFacade,
 ) : FirSymbolProvider(session) {
     private class ClassCacheContext(
-        val parentClassSymbol: FirRegularClassSymbol? = null,
-        val foundJavaClass: JavaClass? = null,
+        konst parentClassSymbol: FirRegularClassSymbol? = null,
+        konst foundJavaClass: JavaClass? = null,
     )
 
-    private val classCache =
+    private konst classCache =
         session.firCachesFactory.createCacheWithPostCompute(
             createValue = createValue@{ classId: ClassId, context: ClassCacheContext? ->
-                val javaClass = context?.foundJavaClass ?: javaFacade.findClass(classId) ?: return@createValue (null to (null to null))
+                konst javaClass = context?.foundJavaClass ?: javaFacade.findClass(classId) ?: return@createValue (null to (null to null))
                 FirRegularClassSymbol(classId) to (javaClass to context?.parentClassSymbol)
             },
             postCompute = { _, classSymbol, (javaClass, parentClassSymbol) ->
@@ -70,10 +70,10 @@ open class JavaSymbolProvider(
 
     override fun getPackage(fqName: FqName): FqName? = javaFacade.getPackage(fqName)
 
-    override val symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
+    override konst symbolNamesProvider: FirSymbolNamesProvider = object : FirSymbolNamesProviderWithoutCallables() {
         override fun getTopLevelClassifierNamesInPackage(packageFqName: FqName): Set<String>? =
             javaFacade.knownClassNamesInPackage(packageFqName)
     }
 }
 
-val FirSession.javaSymbolProvider: JavaSymbolProvider? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.javaSymbolProvider: JavaSymbolProvider? by FirSession.nullableSessionComponentAccessor()

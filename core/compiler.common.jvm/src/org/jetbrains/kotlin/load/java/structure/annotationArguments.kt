@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.Name
 
 interface JavaAnnotationArgument {
-    val name: Name?
+    konst name: Name?
 }
 
 interface JavaLiteralAnnotationArgument : JavaAnnotationArgument {
-    val value: Any?
+    konst konstue: Any?
 }
 
 interface JavaArrayAnnotationArgument : JavaAnnotationArgument {
@@ -32,8 +32,8 @@ interface JavaArrayAnnotationArgument : JavaAnnotationArgument {
 }
 
 interface JavaEnumValueAnnotationArgument : JavaAnnotationArgument {
-    val enumClassId: ClassId?
-    val entryName: Name?
+    konst enumClassId: ClassId?
+    konst entryName: Name?
 }
 
 interface JavaClassObjectAnnotationArgument : JavaAnnotationArgument {

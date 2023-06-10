@@ -1,6 +1,6 @@
 // NI_EXPECTED_FILE
 
-class Bound<X, Y : X>(val x: X, val y: Y)
+class Bound<X, Y : X>(konst x: X, konst y: Y)
 typealias B<X, Y> = Bound<X, Y>
 typealias BOutIn<T> = Bound<out List<T>, in T>
 typealias BInIn<T> = Bound<in List<T>, in T>
@@ -10,6 +10,6 @@ fun <T> listOf(): List<T> = null!!
 // Unresolved reference is ok here:
 // we can't create a substituted signature for type alias constructor
 // since it has 'out' type projection in 'in' position.
-val test1 = <!UNRESOLVED_REFERENCE!>BOutIn<!>(listOf(), null!!)
+konst test1 = <!UNRESOLVED_REFERENCE!>BOutIn<!>(listOf(), null!!)
 
-val test2 = BInIn(listOf(), null!!)
+konst test2 = BInIn(listOf(), null!!)

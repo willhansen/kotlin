@@ -29,25 +29,25 @@ import org.jetbrains.kotlin.resolve.lazy.declarations.FileBasedDeclarationProvid
 
 internal object TopDownAnalyzerFacadeForKonan {
 
-    private val nativeFactories = KlibMetadataFactories(::KonanBuiltIns, NullFlexibleTypeDeserializer, NativeTypeTransformer())
+    private konst nativeFactories = KlibMetadataFactories(::KonanBuiltIns, NullFlexibleTypeDeserializer, NativeTypeTransformer())
 
     fun analyzeFiles(files: Collection<KtFile>, context: FrontendContext): AnalysisResult {
-        val config = context.config
-        val moduleName = Name.special("<${config.moduleId}>")
+        konst config = context.config
+        konst moduleName = Name.special("<${config.moduleId}>")
 
-        val projectContext = ProjectContext(config.project, "TopDownAnalyzer for Konan")
+        konst projectContext = ProjectContext(config.project, "TopDownAnalyzer for Konan")
 
-        val module = nativeFactories.DefaultDescriptorFactory.createDescriptorAndNewBuiltIns(
+        konst module = nativeFactories.DefaultDescriptorFactory.createDescriptorAndNewBuiltIns(
                 moduleName, projectContext.storageManager, origin = CurrentKlibModuleOrigin)
-        val moduleContext = MutableModuleContextImpl(module, projectContext)
+        konst moduleContext = MutableModuleContextImpl(module, projectContext)
 
-        val resolvedModuleDescriptors = nativeFactories.DefaultResolvedDescriptorsFactory.createResolved(
+        konst resolvedModuleDescriptors = nativeFactories.DefaultResolvedDescriptorsFactory.createResolved(
                 config.resolvedLibraries, projectContext.storageManager, module.builtIns, config.languageVersionSettings,
                 config.friendModuleFiles, config.refinesModuleFiles,
                 config.resolve.includedLibraries.map { it.libraryFile }.toSet(), listOf(module),
                 isForMetadataCompilation = config.metadataKlib)
 
-        val additionalPackages = mutableListOf<PackageFragmentProvider>()
+        konst additionalPackages = mutableListOf<PackageFragmentProvider>()
         if (!module.isNativeStdlib()) {
             module.setDependencies(ModuleDependenciesImpl(
                     allDependencies =
@@ -80,7 +80,7 @@ internal object TopDownAnalyzerFacadeForKonan {
             context.shouldPrintFiles()
         }?.forEach(::println)
 
-        val container = createTopDownAnalyzerProviderForKonan(
+        konst container = createTopDownAnalyzerProviderForKonan(
                 moduleContext, trace,
                 FileBasedDeclarationProviderFactory(moduleContext.storageManager, files),
                 context.config.configuration.get(CommonConfigurationKeys.LANGUAGE_VERSION_SETTINGS)!!,
@@ -91,10 +91,10 @@ internal object TopDownAnalyzerFacadeForKonan {
             postprocessComponents(context, files)
         }
 
-        val analyzerForKonan = container.get<LazyTopDownAnalyzer>()
-        val project = context.config.project
-        val moduleDescriptor = moduleContext.module
-        val analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
+        konst analyzerForKonan = container.get<LazyTopDownAnalyzer>()
+        konst project = context.config.project
+        konst moduleDescriptor = moduleContext.module
+        konst analysisHandlerExtensions = AnalysisHandlerExtension.getInstances(project)
 
         // Mimic the behavior in the jvm frontend. The extensions have 2 chances to override the normal analysis:
         // * If any of the extensions returns a non-null result, use it. Otherwise do the normal analysis.

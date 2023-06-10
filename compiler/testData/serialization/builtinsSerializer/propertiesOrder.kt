@@ -1,11 +1,11 @@
 package test
 
 class Some(
-    val c: Int,
-    val b: Int,
-    val a: Int,
+    konst c: Int,
+    konst b: Int,
+    konst a: Int,
 ) {
-    val z = 1
-    val y = 2
-    val x = 3
+    konst z = 1
+    konst y = 2
+    konst x = 3
 }

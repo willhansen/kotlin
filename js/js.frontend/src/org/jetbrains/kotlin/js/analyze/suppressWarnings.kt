@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.name.JsStandardClassIds
 import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.checkers.PlatformDiagnosticSuppressor
 
-private val nativeAnnotations = JsStandardClassIds.Annotations.nativeAnnotations.map { it.asSingleFqName() }
+private konst nativeAnnotations = JsStandardClassIds.Annotations.nativeAnnotations.map { it.asSingleFqName() }
 
 private fun DeclarationDescriptor.isLexicallyInsideJsNative(): Boolean {
     var descriptor: DeclarationDescriptor = this
     while (true) {
-        val annotations = descriptor.annotations
+        konst annotations = descriptor.annotations
         if (!annotations.isEmpty() && nativeAnnotations.any(annotations::hasAnnotation)) return true
         descriptor = descriptor.containingDeclaration ?: break
     }

@@ -6,7 +6,7 @@
 @file:Suppress("RESERVED_MEMBER_INSIDE_VALUE_CLASS")
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val data: Int) {
+konstue class Z(konst data: Int) {
     override fun equals(other: Any?): Boolean =
         other is Z &&
                 data % 256 == other.data % 256

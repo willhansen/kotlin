@@ -3,18 +3,18 @@
 // WITH_STDLIB
 // TARGET_BACKEND: JVM
 interface Base {
-    fun value(): String
+    fun konstue(): String
 }
 
 interface SubA : Base
 
 @JvmDefaultWithCompatibility
 interface SubB : Base {
-    override fun value(): String = "OK"
+    override fun konstue(): String = "OK"
 }
 
 interface SubAB : SubA, SubB
 
 fun box(): String {
-    return object : SubAB {}.value()
+    return object : SubAB {}.konstue()
 }

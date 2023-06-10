@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.test.runners.ir.interpreter
 
 import org.jetbrains.kotlin.config.*
-import org.jetbrains.kotlin.constant.EvaluatedConstTracker
+import org.jetbrains.kotlin.constant.EkonstuatedConstTracker
 import org.jetbrains.kotlin.platform.jvm.JvmPlatforms
 import org.jetbrains.kotlin.test.FirParser
 import org.jetbrains.kotlin.test.TargetBackend
@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.test.services.configuration.JvmEnvironmentConfigurat
 import org.jetbrains.kotlin.test.services.sourceProviders.IrInterpreterHelpersSourceFilesProvider
 
 open class AbstractIrInterpreterTest(
-    private val frontendKind: FrontendKind<*>, targetBackend: TargetBackend
+    private konst frontendKind: FrontendKind<*>, targetBackend: TargetBackend
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
     override fun TestConfigurationBuilder.configuration() {
         globalDefaults {
@@ -79,7 +79,7 @@ open class AbstractJvmIrInterpreterTest(frontendKind: FrontendKind<*>) : Abstrac
     }
 }
 
-abstract class AbstractJvmIrInterpreterAfterFir2IrTestBase(val parser: FirParser) : AbstractJvmIrInterpreterTest(FrontendKinds.FIR) {
+abstract class AbstractJvmIrInterpreterAfterFir2IrTestBase(konst parser: FirParser) : AbstractJvmIrInterpreterTest(FrontendKinds.FIR) {
     override fun configure(builder: TestConfigurationBuilder) {
         super.configure(builder)
         builder.configureFirParser(parser)

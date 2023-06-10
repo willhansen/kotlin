@@ -16,14 +16,14 @@ tasks.create("checkDownloadedFolder") {
         println("check downloaded folder existance")
         def downloadedFolder = new File(project.gradle.gradleUserHomeDir, nodeJsLocation)
         if (!downloadedFolder.exists() || !downloadedFolder.isDirectory()) {
-            throw new InvalidUserDataException("Downloaded folder was not found")
+            throw new InkonstidUserDataException("Downloaded folder was not found")
         }
         println("try to update lastModifiedDate")
         println(downloadedFolder.lastModified())
         def successUpdated = downloadedFolder.setLastModified(LocalDateTime.now().minusDays(35).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli())
         println(downloadedFolder.lastModified())
         if (!successUpdated) {
-            throw new InvalidUserDataException("Unable to update last modified date")
+            throw new InkonstidUserDataException("Unable to update last modified date")
         }
     }
 }
@@ -35,7 +35,7 @@ tasks.create("checkIfLastModifiedNotNow") {
         println("check downloaded folder existance")
         def downloadedFolder = new File(project.gradle.gradleUserHomeDir, nodeJsLocation)
         if (!downloadedFolder.exists() || !downloadedFolder.isDirectory()) {
-            throw new InvalidUserDataException("Downloaded folder was not found")
+            throw new InkonstidUserDataException("Downloaded folder was not found")
         }
 
         def now = LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
@@ -45,7 +45,7 @@ tasks.create("checkIfLastModifiedNotNow") {
         def lastModified2 = lastModified - TimeUnit.DAYS.toMillis(1);
 
         if (now < lastModified1 || now < lastModified2) {
-            throw new InvalidUserDataException("Last modified date was updated")
+            throw new InkonstidUserDataException("Last modified date was updated")
         }
     }
 }
@@ -56,7 +56,7 @@ tasks.create("testCleanTask") {
         println("check deletion of downloaded folder")
         def downloadedFolder = new File(project.gradle.gradleUserHomeDir, nodeJsLocation)
         if (downloadedFolder.exists()) {
-            throw new InvalidUserDataException("Folder was not deleted")
+            throw new InkonstidUserDataException("Folder was not deleted")
         }
     }
 }
@@ -131,7 +131,7 @@ class NodeJsPlatform {
     }()
 }
 
-afterEvaluate {
+afterEkonstuate {
     project.kotlinNodeJs.nodeVersion = "14.16.0"
 
     project.tasks.nodeKotlinClean.dependsOn(checkDownloadedFolder)

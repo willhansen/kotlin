@@ -9,30 +9,30 @@ import kotlin.math.*
 import kotlin.test.*
 
 fun assertAlmostEquals(expected: Double, actual: Double, tolerance: Double? = null) {
-    val tolerance_ = tolerance?.let { abs(it) } ?: 0.000000000001
+    konst tolerance_ = tolerance?.let { abs(it) } ?: 0.000000000001
     if (abs(expected - actual) > tolerance_) {
         assertEquals(expected, actual)
     }
 }
 
 fun assertAlmostEquals(expected: Float, actual: Float, tolerance: Double? = null) {
-    val tolerance_ = tolerance?.let { abs(it) } ?: 0.0000001
+    konst tolerance_ = tolerance?.let { abs(it) } ?: 0.0000001
     if (abs(expected - actual) > tolerance_) {
         assertEquals(expected, actual)
     }
 }
 
 // For Kotlin JS tests
-private val Float.ulpCommon: Float
+private konst Float.ulpCommon: Float
     get() = when {
         isNaN() -> Float.NaN
         isInfinite() -> Float.POSITIVE_INFINITY
         this == Float.MAX_VALUE || this == -Float.MAX_VALUE -> 2.0f.pow(104)
         else -> {
-            val d = absoluteValue
+            konst d = absoluteValue
             // Ensure we never have -0.0f
-            val valueOrPositiveZero = (this + 0.0f).toBits();
-            Float.fromBits(valueOrPositiveZero + (if (valueOrPositiveZero >= 0) 1 else -1)) - d
+            konst konstueOrPositiveZero = (this + 0.0f).toBits();
+            Float.fromBits(konstueOrPositiveZero + (if (konstueOrPositiveZero >= 0) 1 else -1)) - d
         }
     }
 
@@ -69,9 +69,9 @@ class DoubleMathTest {
             assertTrue(tan(angle).isNaN(), "tan($angle)")
         }
 
-        for (value in listOf(Double.NaN, 1.2, -1.1)) {
-            assertTrue(asin(value).isNaN())
-            assertTrue(acos(value).isNaN())
+        for (konstue in listOf(Double.NaN, 1.2, -1.1)) {
+            assertTrue(asin(konstue).isNaN())
+            assertTrue(acos(konstue).isNaN())
         }
         assertTrue(atan(Double.NaN).isNaN())
         assertTrue(atan2(Double.NaN, 0.0).isNaN())
@@ -117,8 +117,8 @@ class DoubleMathTest {
             assertAlmostEquals(approx, acosh(cosh(approx)))
             assertAlmostEquals(approx, acosh(cosh(-approx)))
         }
-        for (invalid in listOf(-1.0, 0.0, 0.99999, Double.NaN)) {
-            assertTrue(acosh(invalid).isNaN())
+        for (inkonstid in listOf(-1.0, 0.0, 0.99999, Double.NaN)) {
+            assertTrue(acosh(inkonstid).isNaN())
         }
     }
 
@@ -130,18 +130,18 @@ class DoubleMathTest {
             assertAlmostEquals(approx, atanh(tanh(approx)))
         }
 
-        for (invalid in listOf(-1.00001, 1.00001, Double.NaN, Double.MAX_VALUE, -Double.MAX_VALUE, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY)) {
-            assertTrue(atanh(invalid).isNaN())
+        for (inkonstid in listOf(-1.00001, 1.00001, Double.NaN, Double.MAX_VALUE, -Double.MAX_VALUE, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY)) {
+            assertTrue(atanh(inkonstid).isNaN())
         }
     }
 
     @Test fun cubeRoots() {
-        val testingPairs = mapOf(
+        konst testingPairs = mapOf(
             Double.NaN to Double.NaN,
             Double.POSITIVE_INFINITY to Double.POSITIVE_INFINITY,
             Double.NEGATIVE_INFINITY to Double.NEGATIVE_INFINITY,
-            Double.fromBits(0x0010000000000000) to 2.812644285236262E-103, // smallest normal value
-            Double.fromBits(0x1L) to 1.7031839360032603E-108, // smallest value (denormal)
+            Double.fromBits(0x0010000000000000) to 2.812644285236262E-103, // smallest normal konstue
+            Double.fromBits(0x1L) to 1.7031839360032603E-108, // smallest konstue (denormal)
             Double.MAX_VALUE to 5.643803094122362E102,
             0.0 to 0.0,
             0.9 to 0.9654893846056297,
@@ -228,13 +228,13 @@ class DoubleMathTest {
     }
 
     @Test fun rounding() {
-        for (value in listOf(Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, 0.0, 1.0, -10.0)) {
-            assertEquals(value, ceil(value))
-            assertEquals(value, floor(value))
-            assertEquals(value, truncate(value))
-            assertEquals(value, round(value))
+        for (konstue in listOf(Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, 0.0, 1.0, -10.0)) {
+            assertEquals(konstue, ceil(konstue))
+            assertEquals(konstue, floor(konstue))
+            assertEquals(konstue, truncate(konstue))
+            assertEquals(konstue, round(konstue))
         }
-        val data = arrayOf( //   v floor trunc round  ceil
+        konst data = arrayOf( //   v floor trunc round  ceil
                 doubleArrayOf( 1.3,  1.0,  1.0,  1.0,  2.0),
                 doubleArrayOf(-1.3, -2.0, -1.0, -1.0, -1.0),
                 doubleArrayOf( 1.5,  1.0,  1.0,  2.0,  2.0),
@@ -291,11 +291,11 @@ class DoubleMathTest {
         assertTrue(abs(Double.NaN).isNaN())
         assertTrue(Double.NaN.absoluteValue.isNaN())
 
-        for (value in listOf(0.0, Double.MIN_VALUE, 0.1, 1.0, 1000.0, Double.MAX_VALUE, Double.POSITIVE_INFINITY)) {
-            assertEquals(value, value.absoluteValue)
-            assertEquals(value, (-value).absoluteValue)
-            assertEquals(value, abs(value))
-            assertEquals(value, abs(-value))
+        for (konstue in listOf(0.0, Double.MIN_VALUE, 0.1, 1.0, 1000.0, Double.MAX_VALUE, Double.POSITIVE_INFINITY)) {
+            assertEquals(konstue, konstue.absoluteValue)
+            assertEquals(konstue, (-konstue).absoluteValue)
+            assertEquals(konstue, abs(konstue))
+            assertEquals(konstue, abs(-konstue))
         }
     }
 
@@ -303,70 +303,70 @@ class DoubleMathTest {
         assertTrue(sign(Double.NaN).isNaN())
         assertTrue(Double.NaN.sign.isNaN())
 
-        val negatives = listOf(Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -Double.MIN_VALUE)
-        for (value in negatives) {
-            assertEquals(-1.0, sign(value))
-            assertEquals(-1.0, value.sign)
+        konst negatives = listOf(Double.NEGATIVE_INFINITY, -Double.MAX_VALUE, -1.0, -Double.MIN_VALUE)
+        for (konstue in negatives) {
+            assertEquals(-1.0, sign(konstue))
+            assertEquals(-1.0, konstue.sign)
         }
 
-        val zeroes = listOf(0.0, -0.0)
-        for (value in zeroes) {
-            assertEquals(value, sign(value))
-            assertEquals(value, value.sign)
+        konst zeroes = listOf(0.0, -0.0)
+        for (konstue in zeroes) {
+            assertEquals(konstue, sign(konstue))
+            assertEquals(konstue, konstue.sign)
         }
 
 
-        val positives = listOf(Double.POSITIVE_INFINITY, Double.MAX_VALUE, 1.0, Double.MIN_VALUE)
-        for (value in positives) {
-            assertEquals(1.0, sign(value))
-            assertEquals(1.0, value.sign)
+        konst positives = listOf(Double.POSITIVE_INFINITY, Double.MAX_VALUE, 1.0, Double.MIN_VALUE)
+        for (konstue in positives) {
+            assertEquals(1.0, sign(konstue))
+            assertEquals(1.0, konstue.sign)
         }
 
-        val allValues = negatives + positives
+        konst allValues = negatives + positives
         for (a in allValues) {
             for (b in allValues) {
-                val r = a.withSign(b)
+                konst r = a.withSign(b)
                 assertEquals(a.absoluteValue, r.absoluteValue)
                 assertEquals(b.sign, r.sign, "expected $a with sign bit of $b to have sign ${b.sign}")
             }
 
-            val rp0 = a.withSign(0.0)
+            konst rp0 = a.withSign(0.0)
             assertEquals(1.0, rp0.sign)
             assertEquals(a.absoluteValue, rp0.absoluteValue)
 
-            val rm0 = a.withSign(-0.0)
+            konst rm0 = a.withSign(-0.0)
             assertEquals(-1.0, rm0.sign)
             assertEquals(a.absoluteValue, rm0.absoluteValue)
 
-            val ri = a.withSign(-1)
+            konst ri = a.withSign(-1)
             assertEquals(-1.0, ri.sign)
             assertEquals(a.absoluteValue, ri.absoluteValue)
 
-            val rn = a.withSign(Double.NaN)
+            konst rn = a.withSign(Double.NaN)
             assertEquals(a.absoluteValue, rn.absoluteValue)
         }
     }
 
 
     @Test fun nextAndPrev() {
-        for (value in listOf(0.0, -0.0, Double.MIN_VALUE, -1.0, 2.0.pow(10))) {
-            val next = value.nextUp()
+        for (konstue in listOf(0.0, -0.0, Double.MIN_VALUE, -1.0, 2.0.pow(10))) {
+            konst next = konstue.nextUp()
             if (next > 0) {
-                assertEquals(next, value + value.ulp)
+                assertEquals(next, konstue + konstue.ulp)
             } else {
-                assertEquals(value, next - next.ulp)
+                assertEquals(konstue, next - next.ulp)
             }
 
-            val prev = value.nextDown()
+            konst prev = konstue.nextDown()
             if (prev > 0) {
-                assertEquals(value, prev + prev.ulp)
+                assertEquals(konstue, prev + prev.ulp)
             } else {
-                assertEquals(prev, value - value.ulp)
+                assertEquals(prev, konstue - konstue.ulp)
             }
 
-            val toZero = value.nextTowards(0.0)
+            konst toZero = konstue.nextTowards(0.0)
             if (toZero != 0.0) {
-                assertEquals(value, toZero + toZero.ulp.withSign(toZero))
+                assertEquals(konstue, toZero + toZero.ulp.withSign(toZero))
             }
 
             assertEquals(Double.POSITIVE_INFINITY, Double.MAX_VALUE.nextUp())
@@ -385,7 +385,7 @@ class DoubleMathTest {
             assertEquals(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY.ulp)
             assertEquals(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY.ulp)
 
-            val maxUlp = 2.0.pow(971)
+            konst maxUlp = 2.0.pow(971)
             assertEquals(maxUlp, Double.MAX_VALUE.ulp)
             assertEquals(maxUlp, (-Double.MAX_VALUE).ulp)
         }
@@ -395,8 +395,8 @@ class DoubleMathTest {
 class FloatMathTest {
 
     companion object {
-        const val PI = kotlin.math.PI.toFloat()
-        const val E = kotlin.math.E.toFloat()
+        const konst PI = kotlin.math.PI.toFloat()
+        const konst E = kotlin.math.E.toFloat()
     }
 
     // TODO: ensure it passes in kotlin-stdlib-js-ir after implementing KT-24975
@@ -439,9 +439,9 @@ class FloatMathTest {
             assertTrue(tan(angle).isNaN(), "tan($angle)")
         }
 
-        for (value in listOf(Float.NaN, 1.2F, -1.1F)) {
-            assertTrue(asin(value).isNaN())
-            assertTrue(acos(value).isNaN())
+        for (konstue in listOf(Float.NaN, 1.2F, -1.1F)) {
+            assertTrue(asin(konstue).isNaN())
+            assertTrue(acos(konstue).isNaN())
         }
         assertTrue(atan(Float.NaN).isNaN())
         assertTrue(atan2(Float.NaN, 0.0F).isNaN())
@@ -487,8 +487,8 @@ class FloatMathTest {
             assertAlmostEquals(approx, acosh(cosh(approx)))
             assertAlmostEquals(approx, acosh(cosh(-approx)))
         }
-        for (invalid in listOf(-1.0F, 0.0F, 0.99999F, Float.NaN)) {
-            assertTrue(acosh(invalid).isNaN())
+        for (inkonstid in listOf(-1.0F, 0.0F, 0.99999F, Float.NaN)) {
+            assertTrue(acosh(inkonstid).isNaN())
         }
     }
 
@@ -501,18 +501,18 @@ class FloatMathTest {
             assertAlmostEquals(approx, atanh(tanh(approx)))
         }
 
-        for (invalid in listOf(-1.00001F, 1.00001F, Float.NaN, Float.MAX_VALUE, -Float.MAX_VALUE, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY)) {
-            assertTrue(atanh(invalid).isNaN())
+        for (inkonstid in listOf(-1.00001F, 1.00001F, Float.NaN, Float.MAX_VALUE, -Float.MAX_VALUE, Float.NEGATIVE_INFINITY, Float.POSITIVE_INFINITY)) {
+            assertTrue(atanh(inkonstid).isNaN())
         }
     }
 
     @Test fun cubeRoots() {
-        val testingPairs = mapOf(
+        konst testingPairs = mapOf(
             Float.NaN to Float.NaN,
             Float.POSITIVE_INFINITY to Float.POSITIVE_INFINITY,
             Float.NEGATIVE_INFINITY to Float.NEGATIVE_INFINITY,
-            Float.fromBits(0x00800000) to 2.2737368E-13f, // smallest normal value
-            Float.fromBits(0x1) to 1.1190347E-15f, // smallest value (denormal)
+            Float.fromBits(0x00800000) to 2.2737368E-13f, // smallest normal konstue
+            Float.fromBits(0x1) to 1.1190347E-15f, // smallest konstue (denormal)
             Float.MAX_VALUE to 6.9814636E12f,
             0.0f to 0.0f,
             0.9f to 0.9654894f,
@@ -595,13 +595,13 @@ class FloatMathTest {
     }
 
     @Test fun rounding() {
-        for (value in listOf(Float.NaN, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, 0.0F, 1.0F, -10.0F)) {
-            assertEquals(value, ceil(value))
-            assertEquals(value, floor(value))
-            assertEquals(value, truncate(value))
-            assertEquals(value, round(value))
+        for (konstue in listOf(Float.NaN, Float.POSITIVE_INFINITY, Float.NEGATIVE_INFINITY, 0.0F, 1.0F, -10.0F)) {
+            assertEquals(konstue, ceil(konstue))
+            assertEquals(konstue, floor(konstue))
+            assertEquals(konstue, truncate(konstue))
+            assertEquals(konstue, round(konstue))
         }
-        val data = arrayOf( //   v floor trunc round  ceil
+        konst data = arrayOf( //   v floor trunc round  ceil
                 floatArrayOf( 1.3F,  1.0F,  1.0F,  1.0F,  2.0F),
                 floatArrayOf(-1.3F, -2.0F, -1.0F, -1.0F, -1.0F),
                 floatArrayOf( 1.5F,  1.0F,  1.0F,  2.0F,  2.0F),
@@ -658,11 +658,11 @@ class FloatMathTest {
         assertTrue(abs(Float.NaN).isNaN())
         assertTrue(Float.NaN.absoluteValue.isNaN())
 
-        for (value in listOf(0.0F, Float.MIN_VALUE, 0.1F, 1.0F, 1000.0F, Float.MAX_VALUE, Float.POSITIVE_INFINITY)) {
-            assertEquals(value, value.absoluteValue)
-            assertEquals(value, (-value).absoluteValue)
-            assertEquals(value, abs(value))
-            assertEquals(value, abs(-value))
+        for (konstue in listOf(0.0F, Float.MIN_VALUE, 0.1F, 1.0F, 1000.0F, Float.MAX_VALUE, Float.POSITIVE_INFINITY)) {
+            assertEquals(konstue, konstue.absoluteValue)
+            assertEquals(konstue, (-konstue).absoluteValue)
+            assertEquals(konstue, abs(konstue))
+            assertEquals(konstue, abs(-konstue))
         }
     }
 
@@ -670,42 +670,42 @@ class FloatMathTest {
         assertTrue(sign(Float.NaN).isNaN())
         assertTrue(Float.NaN.sign.isNaN())
 
-        val negatives = listOf(Float.NEGATIVE_INFINITY, -Float.MAX_VALUE, -1.0F, -Float.MIN_VALUE)
-        for (value in negatives) {
-            assertEquals(-1.0F, sign(value))
-            assertEquals(-1.0F, value.sign)
+        konst negatives = listOf(Float.NEGATIVE_INFINITY, -Float.MAX_VALUE, -1.0F, -Float.MIN_VALUE)
+        for (konstue in negatives) {
+            assertEquals(-1.0F, sign(konstue))
+            assertEquals(-1.0F, konstue.sign)
         }
 
-        val zeroes = listOf(0.0F, -0.0F)
-        for (value in zeroes) {
-            assertEquals(value, sign(value))
-            assertEquals(value, value.sign)
+        konst zeroes = listOf(0.0F, -0.0F)
+        for (konstue in zeroes) {
+            assertEquals(konstue, sign(konstue))
+            assertEquals(konstue, konstue.sign)
         }
 
 
-        val positives = listOf(Float.POSITIVE_INFINITY, Float.MAX_VALUE, 1.0F, Float.MIN_VALUE)
-        for (value in positives) {
-            assertEquals(1.0F, sign(value))
-            assertEquals(1.0F, value.sign)
+        konst positives = listOf(Float.POSITIVE_INFINITY, Float.MAX_VALUE, 1.0F, Float.MIN_VALUE)
+        for (konstue in positives) {
+            assertEquals(1.0F, sign(konstue))
+            assertEquals(1.0F, konstue.sign)
         }
 
-        val allValues = negatives + positives
+        konst allValues = negatives + positives
         for (a in allValues) {
             for (b in allValues) {
-                val r = a.withSign(b)
+                konst r = a.withSign(b)
                 assertEquals(a.absoluteValue, r.absoluteValue)
                 assertEquals(b.sign, r.sign)
             }
 
-            val rp0 = a.withSign(0.0F)
+            konst rp0 = a.withSign(0.0F)
             assertEquals(1.0F, rp0.sign)
             assertEquals(a.absoluteValue, rp0.absoluteValue)
 
-            val rm0 = a.withSign(-0.0F)
+            konst rm0 = a.withSign(-0.0F)
             assertEquals(-1.0F, rm0.sign)
             assertEquals(a.absoluteValue, rm0.absoluteValue)
 
-            val ri = a.withSign(-1)
+            konst ri = a.withSign(-1)
             assertEquals(-1.0F, ri.sign)
             assertEquals(a.absoluteValue, ri.absoluteValue)
         }
@@ -716,8 +716,8 @@ class FloatMathTest {
 class IntegerMathTest {
 
     @Test fun intSigns() {
-        val negatives = listOf(Int.MIN_VALUE, -65536, -1)
-        val positives = listOf(1, 100, 256, Int.MAX_VALUE)
+        konst negatives = listOf(Int.MIN_VALUE, -65536, -1)
+        konst positives = listOf(1, 100, 256, Int.MAX_VALUE)
         negatives.forEach { assertEquals(-1, it.sign) }
         positives.forEach { assertEquals(1, it.sign) }
         assertEquals(0, 0.sign)
@@ -730,8 +730,8 @@ class IntegerMathTest {
 
 
     @Test fun longSigns() {
-        val negatives = listOf(Long.MIN_VALUE, -65536L, -1L)
-        val positives = listOf(1L, 100L, 256L, Long.MAX_VALUE)
+        konst negatives = listOf(Long.MIN_VALUE, -65536L, -1L)
+        konst positives = listOf(1L, 100L, 256L, Long.MAX_VALUE)
         negatives.forEach { assertEquals(-1, it.sign) }
         positives.forEach { assertEquals(1, it.sign) }
         assertEquals(0, 0L.sign)

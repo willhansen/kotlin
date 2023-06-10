@@ -23,8 +23,8 @@ import java.io.Reader
 import java.io.StringReader
 
 fun parse(code: String, reporter: ErrorReporter, scope: JsScope, fileName: String): List<JsStatement>? {
-    val insideFunction = scope is JsFunctionScope
-    val node = parse(code, CodePosition(0, 0), 0, reporter, insideFunction, Parser::parse)
+    konst insideFunction = scope is JsFunctionScope
+    konst node = parse(code, CodePosition(0, 0), 0, reporter, insideFunction, Parser::parse)
     return node?.toJsAst(scope, fileName) {
         mapStatements(it)
     }
@@ -35,10 +35,10 @@ fun parseExpressionOrStatement(
         reporter: ErrorReporter, scope: JsScope,
         startPosition: CodePosition, fileName: String
 ): List<JsStatement>? {
-    val accumulatingReporter = AccumulatingReporter()
-    val exprNode = try {
+    konst accumulatingReporter = AccumulatingReporter()
+    konst exprNode = try {
         parse(code, startPosition, 0, accumulatingReporter, true) {
-            val result = expr(it, false)
+            konst result = expr(it, false)
             if (it.token != TokenStream.EOF) {
                 accumulatingReporter.hasErrors = true
             }
@@ -53,13 +53,13 @@ fun parseExpressionOrStatement(
         for (warning in accumulatingReporter.warnings) {
             reporter.warning(warning.message, warning.startPosition, warning.endPosition)
         }
-        val expr = exprNode?.toJsAst(scope, fileName) {
+        konst expr = exprNode?.toJsAst(scope, fileName) {
             mapExpression(it)
         }
         expr?.let { listOf(JsExpressionStatement(it)) }
     }
     else {
-        val node = parse(code, startPosition, 0, reporter, true, Parser::parse)
+        konst node = parse(code, startPosition, 0, reporter, true, Parser::parse)
         node?.toJsAst(scope, fileName) {
             mapStatements(it)
         }
@@ -67,7 +67,7 @@ fun parseExpressionOrStatement(
 }
 
 fun parseFunction(code: String, fileName: String, position: CodePosition, offset: Int, reporter: ErrorReporter, scope: JsScope): JsFunction? {
-    val rootNode = parse(code, position, offset, reporter, insideFunction = false) {
+    konst rootNode = parse(code, position, offset, reporter, insideFunction = false) {
         addListener(FunctionParsingObserver())
         primaryExpr(it)
     }
@@ -100,8 +100,8 @@ private fun parse(
     Context.enter().errorReporter = reporter
 
     try {
-        val ts = TokenStream(StringReader(code, offset), "<parser>", startPosition)
-        val parser = Parser(IRFactory(ts), insideFunction)
+        konst ts = TokenStream(StringReader(code, offset), "<parser>", startPosition)
+        konst parser = Parser(IRFactory(ts), insideFunction)
         return parser.parseAction(ts) as? Node
     } finally {
         Context.exit()
@@ -113,14 +113,14 @@ private fun <T> Node.toJsAst(scope: JsScope, fileName: String, mapAction: JsAstM
         JsAstMapper(scope, fileName).mapAction(this)
 
 private fun StringReader(string: String, offset: Int): Reader {
-    val reader = StringReader(string)
+    konst reader = StringReader(string)
     reader.skip(offset.toLong())
     return reader
 }
 
 private class AccumulatingReporter : ErrorReporter {
     var hasErrors = false
-    val warnings = mutableListOf<Warning>()
+    konst warnings = mutableListOf<Warning>()
 
     override fun warning(message: String, startPosition: CodePosition, endPosition: CodePosition) {
         warnings += Warning(message, startPosition, endPosition)
@@ -130,6 +130,6 @@ private class AccumulatingReporter : ErrorReporter {
         hasErrors = true
     }
 
-    class Warning(val message: String, val startPosition: CodePosition, val endPosition: CodePosition)
+    class Warning(konst message: String, konst startPosition: CodePosition, konst endPosition: CodePosition)
 }
 

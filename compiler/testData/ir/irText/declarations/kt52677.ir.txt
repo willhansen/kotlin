@@ -8,12 +8,12 @@ FILE fqName:<root> fileName:/kt52677.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:MySerializable modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:c visibility:public modality:FINAL [val]
+    PROPERTY name:c visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:c type:kotlin.reflect.KClass<*> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'c: kotlin.reflect.KClass<*> declared in <root>.MySerializable.<init>' type=kotlin.reflect.KClass<*> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.MySerializable) returnType:kotlin.reflect.KClass<*>
-        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.MySerializable
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-c> (): kotlin.reflect.KClass<*> declared in <root>.MySerializable'
@@ -39,12 +39,12 @@ FILE fqName:<root> fileName:/kt52677.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:LoginSuccessPacket modality:FINAL visibility:public [data] superTypes:[kotlin.Any]'
-    PROPERTY name:id visibility:public modality:FINAL [val]
+    PROPERTY name:id visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:id type:@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid } visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'id: @[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid } declared in <root>.LoginSuccessPacket.<init>' type=@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid } origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-id> visibility:public modality:FINAL <> ($this:<root>.LoginSuccessPacket) returnType:@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid }
-        correspondingProperty: PROPERTY name:id visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:id visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.LoginSuccessPacket
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-id> (): @[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid } declared in <root>.LoginSuccessPacket'
@@ -73,11 +73,11 @@ FILE fqName:<root> fileName:/kt52677.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.LoginSuccessPacket'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="LoginSuccessPacket("
-            CONST String type=kotlin.String value="id="
+            CONST String type=kotlin.String konstue="LoginSuccessPacket("
+            CONST String type=kotlin.String konstue="id="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:id type:@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid } visibility:private [final]' type=@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid } origin=null
               receiver: GET_VAR '<this>: <root>.LoginSuccessPacket declared in <root>.LoginSuccessPacket.toString' type=<root>.LoginSuccessPacket origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"
     FUN GENERATED_DATA_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.LoginSuccessPacket) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -99,14 +99,14 @@ FILE fqName:<root> fileName:/kt52677.kt
               arg0: GET_VAR '<this>: <root>.LoginSuccessPacket declared in <root>.LoginSuccessPacket.equals' type=<root>.LoginSuccessPacket origin=null
               arg1: GET_VAR 'other: kotlin.Any? declared in <root>.LoginSuccessPacket.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.LoginSuccessPacket'
-              CONST Boolean type=kotlin.Boolean value=true
+              CONST Boolean type=kotlin.Boolean konstue=true
         WHEN type=kotlin.Unit origin=null
           BRANCH
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.LoginSuccessPacket
               GET_VAR 'other: kotlin.Any? declared in <root>.LoginSuccessPacket.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.LoginSuccessPacket'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.LoginSuccessPacket [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.LoginSuccessPacket [konst]
           TYPE_OP type=<root>.LoginSuccessPacket origin=CAST typeOperand=<root>.LoginSuccessPacket
             GET_VAR 'other: kotlin.Any? declared in <root>.LoginSuccessPacket.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
@@ -116,11 +116,11 @@ FILE fqName:<root> fileName:/kt52677.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:id type:@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid } visibility:private [final]' type=@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid } origin=null
                   receiver: GET_VAR '<this>: <root>.LoginSuccessPacket declared in <root>.LoginSuccessPacket.equals' type=<root>.LoginSuccessPacket origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:id type:@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid } visibility:private [final]' type=@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1{ <root>.Uuid } origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.LoginSuccessPacket declared in <root>.LoginSuccessPacket.equals' type=<root>.LoginSuccessPacket origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.LoginSuccessPacket declared in <root>.LoginSuccessPacket.equals' type=<root>.LoginSuccessPacket origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.LoginSuccessPacket'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.LoginSuccessPacket'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
   TYPEALIAS name:Uuid visibility:public expandedType:@[MySerializable(c = CLASS_REFERENCE 'CLASS OBJECT name:UuidSerializer modality:FINAL visibility:public superTypes:[<root>.MySerializer<@[MySerializable(c = ...)] <root>.Uuid1{ <root>.Uuid }>]' type=kotlin.reflect.KClass<<root>.UuidSerializer>)] <root>.Uuid1
   CLASS INTERFACE name:MySerializer modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.MySerializer<T of <root>.MySerializer>

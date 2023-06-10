@@ -21,10 +21,10 @@ import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.lexer.KtTokens
 
 interface KtDoubleColonExpression : KtExpression {
-    val receiverExpression: KtExpression?
+    konst receiverExpression: KtExpression?
         get() = node.firstChildNode.psi as? KtExpression
 
-    val hasQuestionMarks: Boolean
+    konst hasQuestionMarks: Boolean
         get() {
             for (element in generateSequence(node.firstChildNode, ASTNode::getTreeNext)) {
                 when (element.elementType) {
@@ -37,18 +37,18 @@ interface KtDoubleColonExpression : KtExpression {
 
     fun findColonColon(): PsiElement?
 
-    val doubleColonTokenReference: PsiElement
+    konst doubleColonTokenReference: PsiElement
         get() = findColonColon()!!
 
-    val lhs: PsiElement?
+    konst lhs: PsiElement?
         get() = doubleColonTokenReference.prevSibling
 
     fun setReceiverExpression(newReceiverExpression: KtExpression) {
-        val oldReceiverExpression = this.receiverExpression
+        konst oldReceiverExpression = this.receiverExpression
         oldReceiverExpression?.replace(newReceiverExpression) ?: addBefore(newReceiverExpression, doubleColonTokenReference)
     }
 
-    val isEmptyLHS: Boolean
+    konst isEmptyLHS: Boolean
         get() = lhs == null
 
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D): R {

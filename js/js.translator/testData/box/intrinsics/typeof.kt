@@ -1,6 +1,6 @@
 // EXPECTED_REACHABLE_NODES: 1303
-external val definedVariableX: Int
-external val undefinedVariableX: Int
+external konst definedVariableX: Int
+external konst undefinedVariableX: Int
 
 fun box(): String {
     if (jsTypeOf(definedVariableX) != "number") return "Fail 1"

@@ -30,7 +30,7 @@ class KlibBasedSymbolProvider(
     session: FirSession,
     moduleDataProvider: ModuleDataProvider,
     kotlinScopeProvider: FirKotlinScopeProvider,
-    private val resolvedLibraries: Collection<KotlinLibrary>,
+    private konst resolvedLibraries: Collection<KotlinLibrary>,
     defaultDeserializationOrigin: FirDeclarationOrigin = FirDeclarationOrigin.Library
 ) : MetadataLibraryBasedSymbolProvider<KotlinLibrary>(
     session,
@@ -38,11 +38,11 @@ class KlibBasedSymbolProvider(
     kotlinScopeProvider,
     defaultDeserializationOrigin
 ) {
-    private val moduleHeaders by lazy {
+    private konst moduleHeaders by lazy {
         resolvedLibraries.associate { it to parseModuleHeader(it.moduleHeaderData) }
     }
 
-    override val fragmentNamesInLibraries: Map<String, List<KotlinLibrary>> by lazy {
+    override konst fragmentNamesInLibraries: Map<String, List<KotlinLibrary>> by lazy {
         buildMap<String, SmartList<KotlinLibrary>> {
             for ((library, header) in moduleHeaders) {
                 for (fragmentName in header.packageFragmentNameList) {
@@ -53,7 +53,7 @@ class KlibBasedSymbolProvider(
         }
     }
 
-    override val knownPackagesInLibraries: Set<FqName> by lazy {
+    override konst knownPackagesInLibraries: Set<FqName> by lazy {
         buildSet<FqName> {
             for ((_, header) in moduleHeaders) {
                 for (fragmentName in header.packageFragmentNameList) {
@@ -68,7 +68,7 @@ class KlibBasedSymbolProvider(
     }
 
     override fun moduleData(library: KotlinLibrary): FirModuleData? {
-        val libraryPath = Paths.get(library.libraryFile.path)
+        konst libraryPath = Paths.get(library.libraryFile.path)
         return moduleDataProvider.getModuleData(libraryPath)
     }
 

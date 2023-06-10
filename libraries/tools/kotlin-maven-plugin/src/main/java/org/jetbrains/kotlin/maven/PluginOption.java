@@ -24,17 +24,17 @@ public class PluginOption {
     public final String pluginId;
 
     public final String key;
-    public final String value;
+    public final String konstue;
 
-    public PluginOption(String pluginName, String pluginId, String key, String value) {
+    public PluginOption(String pluginName, String pluginId, String key, String konstue) {
         this.pluginName = pluginName;
         this.pluginId = pluginId;
         this.key = key;
-        this.value = value;
+        this.konstue = konstue;
     }
 
     @Override
     public String toString() {
-        return "plugin:" + pluginId + ":" + key + "=" + value;
+        return "plugin:" + pluginId + ":" + key + "=" + konstue;
     }
 }

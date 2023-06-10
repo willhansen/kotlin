@@ -16,14 +16,14 @@ kotlin {
 
 // Gradle magical spell to access SoftwareComponentFactory
 abstract class SoftwareComponentFactoryProvider @Inject constructor(
-    val softwareComponentFactory: SoftwareComponentFactory
+    konst softwareComponentFactory: SoftwareComponentFactory
 )
-val softwareComponentFactoryProvider = project.objects.newInstance<SoftwareComponentFactoryProvider>()
-val customComponent = softwareComponentFactoryProvider.softwareComponentFactory.adhoc("customKotlin")
+konst softwareComponentFactoryProvider = project.objects.newInstance<SoftwareComponentFactoryProvider>()
+konst customComponent = softwareComponentFactoryProvider.softwareComponentFactory.adhoc("customKotlin")
 
-afterEvaluate {
+afterEkonstuate {
     kotlin.targets.all {
-        val configuration = configurations.getByName(apiElementsConfigurationName)
+        konst configuration = configurations.getByName(apiElementsConfigurationName)
         configuration.artifacts.forEach {
             it as ConfigurablePublishArtifact
             it.classifier = targetName

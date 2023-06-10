@@ -38,7 +38,7 @@ class EnumEntriesWithOutdatedStdlibTest : KGPBaseTest() {
     fun codeCompilesWithoutReferencingEntries(gradleVersion: GradleVersion) {
         project("enumEntriesNotAccessible", gradleVersion) {
             projectPath.resolve("src/main/kotlin/Main.kt")
-                .replaceText("entries", "values()")
+                .replaceText("entries", "konstues()")
 
             buildGradleKts.replaceText("\"<language-version>\"", "\"1.9\" // <language-version>")
             build(":compileKotlin")

@@ -2,7 +2,7 @@
 // FILE: test.kt
 
 fun box(): String {
-    val b = B(0)
+    konst b = B(0)
     return b.f() + b.g()
 }
 
@@ -11,7 +11,7 @@ interface A {
     fun g() = "K"
 }
 
-inline class B(val x: Int) : A
+inline class B(konst x: Int) : A
 
 // 1 public static f-impl\(I\)Ljava/lang/String;
 // 1 public f\(\)Ljava/lang/String;

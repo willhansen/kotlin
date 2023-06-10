@@ -1,5 +1,5 @@
 fun test1() {
-    val a = Unit
+    konst a = Unit
 
     if (a != null) {
         println("X1")

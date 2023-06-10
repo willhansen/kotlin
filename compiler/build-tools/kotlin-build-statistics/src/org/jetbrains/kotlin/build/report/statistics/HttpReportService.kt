@@ -15,18 +15,18 @@ import java.util.*
 import kotlin.system.measureTimeMillis
 
 class HttpReportService(
-    private val url: String,
-    private val password: String?,
-    private val user: String?,
+    private konst url: String,
+    private konst password: String?,
+    private konst user: String?,
 ) : Serializable {
 
-    private var invalidUrl = false
+    private var inkonstidUrl = false
     private var requestPreviousFailed = false
 
     private fun checkResponseAndLog(connection: HttpURLConnection, log: KotlinLogger) {
-        val isResponseBad = connection.responseCode !in 200..299
+        konst isResponseBad = connection.responseCode !in 200..299
         if (isResponseBad) {
-            val message = "Failed to send statistic to ${connection.url} with ${connection.responseCode}: ${connection.responseMessage}"
+            konst message = "Failed to send statistic to ${connection.url} with ${connection.responseCode}: ${connection.responseMessage}"
             if (!requestPreviousFailed) {
                 log.warn(message)
             } else {
@@ -37,21 +37,21 @@ class HttpReportService(
     }
 
     fun sendData(data: Any, log: KotlinLogger) {
-        val elapsedTime = measureTimeMillis {
-            if (invalidUrl) {
+        konst elapsedTime = measureTimeMillis {
+            if (inkonstidUrl) {
                 return
             }
-            val connection = try {
+            konst connection = try {
                 URL(url).openConnection() as HttpURLConnection
             } catch (e: IOException) {
                 log.warn("Unable to open connection to ${url}: ${e.message}")
-                invalidUrl = true
+                inkonstidUrl = true
                 return
             }
 
             try {
                 if (user != null && password != null) {
-                    val auth = Base64.getEncoder()
+                    konst auth = Base64.getEncoder()
                         .encode("${user}:${password}".toByteArray())
                         .toString(Charsets.UTF_8)
                     connection.addRequestProperty("Authorization", "Basic $auth")

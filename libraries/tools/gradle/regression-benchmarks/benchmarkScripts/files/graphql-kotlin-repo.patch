@@ -42,8 +42,8 @@ index f6fa7cee5..5bbb4828a 100644
 --- a/settings.gradle.kts
 +++ b/settings.gradle.kts
 @@ -9,6 +9,11 @@ pluginManagement {
-     val pluginPublishPluginVersion: String by settings
-     val springBootVersion: String by settings
+     konst pluginPublishPluginVersion: String by settings
+     konst springBootVersion: String by settings
  
 +    repositories {
 +        mavenLocal()

@@ -1,4 +1,4 @@
-data class C(val x: Int, val y: String)
+data class C(konst x: Int, konst y: String)
 
 fun foo1(block: (C) -> Unit) = block(C(0, ""))
 fun foo2(block: (C, C) -> Unit) = block(C(0, ""), C(0, ""))

@@ -1,5 +1,5 @@
 @Deprecated("No")
-val f: () -> Unit = {}
+konst f: () -> Unit = {}
 
 fun test() {
     f()

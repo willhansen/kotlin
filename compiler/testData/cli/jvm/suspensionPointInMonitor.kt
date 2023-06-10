@@ -1,6 +1,6 @@
 fun builder(c: suspend () -> Unit) {}
 
-private val lock = Any()
+private konst lock = Any()
 
 suspend fun suspensionPoint() {}
 

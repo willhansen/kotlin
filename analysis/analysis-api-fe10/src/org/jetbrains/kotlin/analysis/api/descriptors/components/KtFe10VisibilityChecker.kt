@@ -30,9 +30,9 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ExpressionReceiver
 import org.jetbrains.kotlin.resolve.scopes.utils.getImplicitReceiversHierarchy
 
 internal class KtFe10VisibilityChecker(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtVisibilityChecker(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun isVisible(
@@ -45,16 +45,16 @@ internal class KtFe10VisibilityChecker(
             return true
         }
 
-        val targetDescriptor = getSymbolDescriptor(candidateSymbol) as? DeclarationDescriptorWithVisibility ?: return false
+        konst targetDescriptor = getSymbolDescriptor(candidateSymbol) as? DeclarationDescriptorWithVisibility ?: return false
 
-        val useSiteDeclaration = findContainingNonLocalDeclaration(position) ?: return false
-        val bindingContextForUseSite = analysisContext.analyze(useSiteDeclaration)
-        val useSiteDescriptor = bindingContextForUseSite[BindingContext.DECLARATION_TO_DESCRIPTOR, useSiteDeclaration] ?: return false
+        konst useSiteDeclaration = findContainingNonLocalDeclaration(position) ?: return false
+        konst bindingContextForUseSite = analysisContext.analyze(useSiteDeclaration)
+        konst useSiteDescriptor = bindingContextForUseSite[BindingContext.DECLARATION_TO_DESCRIPTOR, useSiteDeclaration] ?: return false
 
         if (receiverExpression != null && !targetDescriptor.isExtension) {
-            val bindingContext = analysisContext.analyze(receiverExpression, AnalysisMode.PARTIAL)
-            val receiverType = bindingContext.getType(receiverExpression) ?: return false
-            val explicitReceiver = ExpressionReceiver.create(receiverExpression, receiverType, bindingContext)
+            konst bindingContext = analysisContext.analyze(receiverExpression, AnalysisMode.PARTIAL)
+            konst receiverType = bindingContext.getType(receiverExpression) ?: return false
+            konst explicitReceiver = ExpressionReceiver.create(receiverExpression, receiverType, bindingContext)
             return isVisible(
                 explicitReceiver,
                 targetDescriptor,
@@ -62,12 +62,12 @@ internal class KtFe10VisibilityChecker(
                 analysisContext.languageVersionSettings
             )
         } else {
-            val bindingContext = analysisContext.analyze(useSiteDeclaration, AnalysisMode.FULL)
+            konst bindingContext = analysisContext.analyze(useSiteDeclaration, AnalysisMode.FULL)
 
-            val lexicalScope = position.getResolutionScope(bindingContext)
+            konst lexicalScope = position.getResolutionScope(bindingContext)
             if (lexicalScope != null) {
                 return lexicalScope.getImplicitReceiversHierarchy().any {
-                    isVisible(it.value, targetDescriptor, useSiteDescriptor, analysisContext.languageVersionSettings)
+                    isVisible(it.konstue, targetDescriptor, useSiteDescriptor, analysisContext.languageVersionSettings)
                 }
             }
         }
@@ -76,7 +76,7 @@ internal class KtFe10VisibilityChecker(
     }
 
     override fun isPublicApi(symbol: KtSymbolWithVisibility): Boolean {
-        val descriptor = getSymbolDescriptor(symbol) as? DeclarationDescriptorWithVisibility ?: return false
+        konst descriptor = getSymbolDescriptor(symbol) as? DeclarationDescriptorWithVisibility ?: return false
         return descriptor.isEffectivelyPublicApi || descriptor.isPublishedApi()
     }
 }

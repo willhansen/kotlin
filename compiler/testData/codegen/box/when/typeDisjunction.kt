@@ -1,11 +1,11 @@
 fun foo(s: Any): String {
-    val x = when (s) {
+    konst x = when (s) {
         is String -> s
         is Int -> "$s"
         else -> return ""
     }
 
-    val y: String = x
+    konst y: String = x
     return y
 }
 

@@ -76,4 +76,4 @@ object FirEmptyPredicateBasedProvider : FirPredicateBasedProvider() {
     override fun matches(predicate: AbstractPredicate<*>, declaration: FirDeclaration): Boolean = false
 }
 
-val FirSession.predicateBasedProvider: FirPredicateBasedProvider by FirSession.sessionComponentAccessor()
+konst FirSession.predicateBasedProvider: FirPredicateBasedProvider by FirSession.sessionComponentAccessor()

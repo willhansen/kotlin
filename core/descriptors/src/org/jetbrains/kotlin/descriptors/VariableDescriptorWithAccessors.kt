@@ -17,9 +17,9 @@
 package org.jetbrains.kotlin.descriptors
 
 interface VariableDescriptorWithAccessors : VariableDescriptor {
-    val getter: VariableAccessorDescriptor?
+    konst getter: VariableAccessorDescriptor?
 
-    val setter: VariableAccessorDescriptor?
+    konst setter: VariableAccessorDescriptor?
 
     /**
      * Please be careful with this method. Depending on the fact that a property is delegated may be dangerous in the compiler.
@@ -29,8 +29,8 @@ interface VariableDescriptorWithAccessors : VariableDescriptor {
      *
      * This flag is needed for reflection however, that's why it's serialized to metadata and is exposed in this interface.
      */
-    val isDelegated: Boolean
+    konst isDelegated: Boolean
 }
 
-val VariableDescriptorWithAccessors.accessors: List<VariableAccessorDescriptor>
+konst VariableDescriptorWithAccessors.accessors: List<VariableAccessorDescriptor>
     get() = listOfNotNull(getter, setter)

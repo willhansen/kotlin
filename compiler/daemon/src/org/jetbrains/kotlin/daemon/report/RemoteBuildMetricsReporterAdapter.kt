@@ -11,16 +11,16 @@ import org.jetbrains.kotlin.daemon.common.CompilationResultCategory
 import org.jetbrains.kotlin.daemon.common.CompilationResults
 
 class RemoteBuildMetricsReporterAdapter(
-    private val delegate: BuildMetricsReporter,
-    private val shouldReport: Boolean,
-    private val compilationResults: CompilationResults
+    private konst delegate: BuildMetricsReporter,
+    private konst shouldReport: Boolean,
+    private konst compilationResults: CompilationResults
 ) :
     BuildMetricsReporter by delegate,
     RemoteBuildMetricsReporter {
 
     override fun flush() {
         if (shouldReport) {
-            val metrics = delegate.getMetrics()
+            konst metrics = delegate.getMetrics()
             compilationResults.add(CompilationResultCategory.BUILD_METRICS.code, metrics)
         }
     }

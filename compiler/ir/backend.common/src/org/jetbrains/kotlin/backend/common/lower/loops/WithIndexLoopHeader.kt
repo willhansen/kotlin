@@ -23,16 +23,16 @@ class WithIndexLoopHeader(
     context: CommonBackendContext
 ) : ForLoopHeader {
 
-    val nestedLoopHeader: ForLoopHeader
-    val indexVariable: IrVariable
-    private val ownsIndexVariable: Boolean
-    private val incrementIndexStatement: IrStatement?
+    konst nestedLoopHeader: ForLoopHeader
+    konst indexVariable: IrVariable
+    private konst ownsIndexVariable: Boolean
+    private konst incrementIndexStatement: IrStatement?
 
     init {
         with(builder) {
             // To build the optimized/lowered `for` loop over a `withIndex()` call, we first need the header for the underlying iterable,
             // so that we know how to build the loop for that iterable. More info in comments in initializeIteration().
-            nestedLoopHeader = when (val nestedInfo = headerInfo.nestedInfo) {
+            nestedLoopHeader = when (konst nestedInfo = headerInfo.nestedInfo) {
                 is IndexedGetHeaderInfo -> IndexedGetLoopHeader(nestedInfo, this@with, context)
                 is ProgressionHeaderInfo -> ProgressionLoopHeader(nestedInfo, this@with, context)
                 is IterableHeaderInfo -> IterableLoopHeader(nestedInfo)
@@ -60,10 +60,10 @@ class WithIndexLoopHeader(
                 ownsIndexVariable = true
                 // `index++` during iteration initialization
                 // TODO: KT-34665: Check for overflow for Iterable and Sequence (call to checkIndexOverflow()).
-                val plusFun = indexVariable.type.getClass()!!.functions.first {
+                konst plusFun = indexVariable.type.getClass()!!.functions.first {
                     it.name == OperatorNameConventions.PLUS &&
-                            it.valueParameters.size == 1 &&
-                            it.valueParameters[0].type.isInt()
+                            it.konstueParameters.size == 1 &&
+                            it.konstueParameters[0].type.isInt()
                 }
                 incrementIndexStatement =
                     irSet(
@@ -78,9 +78,9 @@ class WithIndexLoopHeader(
     }
 
     // Add the index variable (if owned) to the statements from the nested loop header.
-    override val loopInitStatements = nestedLoopHeader.loopInitStatements.let { if (ownsIndexVariable) it + indexVariable else it }
+    override konst loopInitStatements = nestedLoopHeader.loopInitStatements.let { if (ownsIndexVariable) it + indexVariable else it }
 
-    override val consumesLoopVariableComponents = true
+    override konst consumesLoopVariableComponents = true
 
     override fun initializeIteration(
         loopVariable: IrVariable?,
@@ -93,7 +93,7 @@ class WithIndexLoopHeader(
             // progression, Iterable, Sequence, CharSequence) into an IndexedValue containing the index of that element and the element
             // itself. The iterator for this lazy Iterable looks like this:
             //
-            //   internal class IndexingIterator<out T>(private val iterator: Iterator<T>) : Iterator<IndexedValue<T>> {
+            //   internal class IndexingIterator<out T>(private konst iterator: Iterator<T>) : Iterator<IndexedValue<T>> {
             //     private var index = 0
             //     override fun hasNext() = iterator.hasNext()
             //     override fun next() = IndexedValue(checkIndexOverflow(index++), iterator.next())
@@ -101,7 +101,7 @@ class WithIndexLoopHeader(
             //
             // IndexedValue looks like this:
             //
-            //   data class IndexedValue<out T>(val index: Int, val value: T)
+            //   data class IndexedValue<out T>(konst index: Int, konst konstue: T)
             //
             // For example, if the `for` loop is:
             //
@@ -110,11 +110,11 @@ class WithIndexLoopHeader(
             // ...the optimized loop for the underlying progression looks something like this:
             //
             //   var inductionVar = 1
-            //   val last = 10
-            //   val step = 2
+            //   konst last = 10
+            //   konst step = 2
             //   if (inductionVar <= last) {
             //     do {
-            //       val v = inductionVar
+            //       konst v = inductionVar
             //       inductionVar += step
             //       // Loop body
             //     } while (inductionVar <= last)
@@ -123,14 +123,14 @@ class WithIndexLoopHeader(
             // ...and the optimized loop with `withIndex()` looks something like this (see "// ADDED" statements):
             //
             //   var inductionVar = 1
-            //   val last = 10
-            //   val step = 2
+            //   konst last = 10
+            //   konst step = 2
             //   var index = 0   // ADDED
             //   if (inductionVar <= last) {
             //     do {
-            //       val i = index   // ADDED
+            //       konst i = index   // ADDED
             //       checkIndexOverflow(index++)   // ADDED
-            //       val v = inductionVar
+            //       konst v = inductionVar
             //       inductionVar += step
             //       // Loop body
             //     } while (inductionVar <= last)
@@ -144,16 +144,16 @@ class WithIndexLoopHeader(
             // in this case), we use DefaultIterableHandler to match it and IterableLoopHeader to build the underlying loop. The optimized
             // loop with `withIndex()` looks something like this:
             //
-            //   val iterator = listOf(2, 3, 5, 7, 11).iterator()
+            //   konst iterator = listOf(2, 3, 5, 7, 11).iterator()
             //   var index = 0
             //   while (it.hasNext())
-            //     val i = index
+            //     konst i = index
             //     checkIndexOverflow(index++)
-            //     val v = it.next()
+            //     konst v = it.next()
             //     // Loop body
             //   }
             //
-            // We "wire" the 1st destructured component to index, and the 2nd to the loop variable value from the underlying iterable.
+            // We "wire" the 1st destructured component to index, and the 2nd to the loop variable konstue from the underlying iterable.
             loopVariableComponents[1]?.initializer = irGet(indexVariable)
             listOfNotNull(loopVariableComponents[1], incrementIndexStatement) +
                     nestedLoopHeader.initializeIteration(loopVariableComponents[2], linkedMapOf(), builder, backendContext)

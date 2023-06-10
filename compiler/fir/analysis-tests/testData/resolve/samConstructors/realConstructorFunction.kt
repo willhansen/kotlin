@@ -16,7 +16,7 @@ fun main() {
 
     foo(<!ARGUMENT_TYPE_MISMATCH!>MyRunnable({ it > 1 })<!>)
 
-    val x = { x: Int -> x > 1 }
+    konst x = { x: Int -> x > 1 }
 
     foo(<!ARGUMENT_TYPE_MISMATCH!>MyRunnable(x)<!>)
 }

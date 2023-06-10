@@ -37,19 +37,19 @@ fun FirOperation.isEq(): Boolean {
 }
 
 @DfaInternals
-val FirExpression.coneType: ConeKotlinType
+konst FirExpression.coneType: ConeKotlinType
     get() = typeRef.coneType
 
 @DfaInternals
-val FirElement.symbol: FirBasedSymbol<*>?
+konst FirElement.symbol: FirBasedSymbol<*>?
     get() = when (this) {
         is FirResolvable -> symbol.unwrapFakeOverridesIfNecessary()
         is FirVariableAssignment -> unwrapLValue()?.symbol
         is FirDeclaration -> symbol.unwrapFakeOverridesIfNecessary()
-        is FirWhenSubjectExpression -> whenRef.value.subject?.symbol
+        is FirWhenSubjectExpression -> whenRef.konstue.subject?.symbol
         is FirSafeCallExpression -> selector.symbol
         is FirSmartCastExpression -> originalExpression.symbol
-        is FirDesugaredAssignmentValueReferenceExpression -> expressionRef.value.symbol
+        is FirDesugaredAssignmentValueReferenceExpression -> expressionRef.konstue.symbol
         else -> null
     }?.takeIf {
         (this as? FirExpression)?.unwrapSmartcastExpression() is FirThisReceiverExpression ||
@@ -67,8 +67,8 @@ private fun FirBasedSymbol<*>?.unwrapFakeOverridesIfNecessary(): FirBasedSymbol<
 }
 
 @DfaInternals
-internal val FirResolvable.symbol: FirBasedSymbol<*>?
-    get() = when (val reference = calleeReference) {
+internal konst FirResolvable.symbol: FirBasedSymbol<*>?
+    get() = when (konst reference = calleeReference) {
         is FirThisReference -> reference.boundSymbol
         is FirResolvedNamedReference -> reference.resolvedSymbol
         is FirNamedReferenceWithCandidateBase -> reference.candidateSymbol
@@ -77,10 +77,10 @@ internal val FirResolvable.symbol: FirBasedSymbol<*>?
 
 @DfaInternals
 fun FirElement.unwrapElement(): FirElement = when (this) {
-    is FirWhenSubjectExpression -> whenRef.value.let { it.subjectVariable ?: it.subject }?.unwrapElement() ?: this
+    is FirWhenSubjectExpression -> whenRef.konstue.let { it.subjectVariable ?: it.subject }?.unwrapElement() ?: this
     is FirSmartCastExpression -> originalExpression.unwrapElement()
     is FirSafeCallExpression -> selector.unwrapElement()
-    is FirCheckedSafeCallSubject -> originalReceiverRef.value.unwrapElement()
+    is FirCheckedSafeCallSubject -> originalReceiverRef.konstue.unwrapElement()
     is FirCheckNotNullCall -> argument.unwrapElement()
     else -> this
 }

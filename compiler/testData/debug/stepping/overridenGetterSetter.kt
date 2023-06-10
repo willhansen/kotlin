@@ -1,7 +1,7 @@
 // FILE: test.kt
 
 interface MyInterfaceWithoutBreakpoints {
-    val propVal2: Int
+    konst propVal2: Int
     var propVar2: Int
 
     fun testPropertyInInterface() {
@@ -14,7 +14,7 @@ interface MyInterfaceWithoutBreakpoints {
 // Breakpoint at GETFILED/PUTFIELD
 class MyInterfaceImplWithBreakpoints : MyInterfaceWithoutBreakpoints {
     //FieldWatchpoint! (propVal2)
-    override val propVal2 = 1
+    override konst propVal2 = 1
 
     //FieldWatchpoint! (propVar2)
     override var propVar2 = 1
@@ -27,7 +27,7 @@ class MyInterfaceImplWithBreakpoints : MyInterfaceWithoutBreakpoints {
 }
 
 fun box() {
-    val macwbi = MyInterfaceImplWithBreakpoints()
+    konst macwbi = MyInterfaceImplWithBreakpoints()
     macwbi.testPropertyInInterface()
     macwbi.testPropertyInInterfaceImpl()
 }

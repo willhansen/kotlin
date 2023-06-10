@@ -1,2 +1,2 @@
 // FIR_IDENTICAL
-private val s = "Hello"
+private konst s = "Hello"

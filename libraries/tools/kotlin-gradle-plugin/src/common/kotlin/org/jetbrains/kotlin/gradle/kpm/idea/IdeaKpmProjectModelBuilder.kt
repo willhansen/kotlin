@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.project.model.KpmVariant
 import java.io.File
 
 internal interface IdeaKpmProjectBuildingContext {
-    val dependencyResolver: IdeaKpmDependencyResolver
+    konst dependencyResolver: IdeaKpmDependencyResolver
 
     companion object Empty : IdeaKpmProjectBuildingContext {
-        override val dependencyResolver: IdeaKpmDependencyResolver = IdeaKpmDependencyResolver.Empty
+        override konst dependencyResolver: IdeaKpmDependencyResolver = IdeaKpmDependencyResolver.Empty
     }
 }
 
@@ -105,9 +105,9 @@ interface IdeaKpmProjectModelBuilder {
         operator fun invoke(fragment: GradleKpmFragment): Boolean
 
         companion object {
-            val unconstrained = FragmentConstraint { true }
-            val isVariant = FragmentConstraint { fragment -> fragment is KpmVariant }
-            val isNative = FragmentConstraint { fragment -> fragment.containingVariants.run { any() && all { it.platformType == native } } }
+            konst unconstrained = FragmentConstraint { true }
+            konst isVariant = FragmentConstraint { fragment -> fragment is KpmVariant }
+            konst isNative = FragmentConstraint { fragment -> fragment.containingVariants.run { any() && all { it.platformType == native } } }
         }
     }
 

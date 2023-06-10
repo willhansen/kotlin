@@ -1,7 +1,7 @@
 package test
 
 public fun usage() {
-    val a = A()
+    konst a = A()
     if (a.x != null) {
         a.x.dec()
     }

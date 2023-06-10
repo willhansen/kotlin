@@ -1,8 +1,8 @@
 // WITH_STDLIB
 // IGNORE_BACKEND: JS
 
-const val M1: UInt = 2147483648u
-const val M2: ULong = 9223372036854775808UL
+const konst M1: UInt = 2147483648u
+const konst M2: ULong = 9223372036854775808UL
 
 fun testUInt(x: UInt) =
     when (x) {
@@ -25,10 +25,10 @@ fun testULong(x: ULong) =
     }
 
 fun box(): String {
-    val t1 = listOf(0u, 1u, 2u, 3u, 4u, M1).map { testUInt(it) }
+    konst t1 = listOf(0u, 1u, 2u, 3u, 4u, M1).map { testUInt(it) }
     if (t1 != listOf("none", "one", "two", "three", "many", "M1")) throw AssertionError("UInt: $t1")
 
-    val t2 = listOf(0UL, 1UL, 2UL, 3UL, 4UL, M2).map { testULong(it) }
+    konst t2 = listOf(0UL, 1UL, 2UL, 3UL, 4UL, M2).map { testULong(it) }
     if (t2 != listOf("none", "one", "two", "three", "many", "M2")) throw AssertionError("ULong: $t2")
 
     return "OK"

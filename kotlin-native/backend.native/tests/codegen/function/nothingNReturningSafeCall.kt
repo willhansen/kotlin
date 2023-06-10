@@ -20,14 +20,14 @@ fun testFunction4(obj: Any?): Unit? = obj?.nothing()
 fun testFunction5(obj: Any?): Anything? = obj?.nothing()
 
 fun testLambda1() {
-    val block: (Any?) -> Nothing? = {
+    konst block: (Any?) -> Nothing? = {
         it?.nothing()
     }
     block(null)
 }
 
 fun testLambda2() {
-    val block: (Any?) -> Nothing? = {
+    konst block: (Any?) -> Nothing? = {
         println() // more than one statement inside of the body
         it?.nothing()
     }

@@ -18,7 +18,7 @@ interface ArgumentMapping {
 // FILE: f21.kt
 package impl
 
-private data class ApplicabilityResult(val applicable: Boolean)
+private data class ApplicabilityResult(konst applicable: Boolean)
 
 // FILE: f22.kt
 package impl

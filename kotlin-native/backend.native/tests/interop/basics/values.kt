@@ -2,7 +2,7 @@
 
 import kotlinx.cinterop.*
 import kotlin.test.*
-import cvalues.*
+import ckonstues.*
 
 fun main() {
     assertTrue(isNullString(null))

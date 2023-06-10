@@ -20,10 +20,10 @@ class FirNoArgPredicateMatcher(
         }
     }
 
-    override val predicate = DeclarationPredicate.create {
-        val annotationFqNames = noArgAnnotationFqNames.map { FqName(it) }
+    override konst predicate = DeclarationPredicate.create {
+        konst annotationFqNames = noArgAnnotationFqNames.map { FqName(it) }
         annotated(annotationFqNames) or metaAnnotated(annotationFqNames, includeItself = true)
     }
 }
 
-val FirSession.noArgPredicateMatcher: FirNoArgPredicateMatcher by FirSession.sessionComponentAccessor()
+konst FirSession.noArgPredicateMatcher: FirNoArgPredicateMatcher by FirSession.sessionComponentAccessor()

@@ -9,7 +9,7 @@ KtInapplicableCallCandidateInfo:
         receiverType = null
         returnType = A
         symbol = <constructor>(x: kotlin.String): A
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = x
             receiverType = null

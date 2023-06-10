@@ -10,7 +10,7 @@ import templates.SequenceClass.*
 
 object SetOps : TemplateGroupBase() {
 
-    val f_toMutableSet = fn("toMutableSet()") {
+    konst f_toMutableSet = fn("toMutableSet()") {
         includeDefault()
     } builder {
         doc {
@@ -31,19 +31,19 @@ object SetOps : TemplateGroupBase() {
             """
         }
         body(ArraysOfObjects, ArraysOfPrimitives) {
-            val capacity = "size" + if (primitive == PrimitiveType.Char) ".coerceAtMost(128)" else ""
+            konst capacity = "size" + if (primitive == PrimitiveType.Char) ".coerceAtMost(128)" else ""
             "return toCollection(LinkedHashSet<T>(mapCapacity($capacity)))"
         }
         body(Sequences) {
             """
-            val set = LinkedHashSet<T>()
+            konst set = LinkedHashSet<T>()
             for (item in this) set.add(item)
             return set
             """
         }
     }
 
-    val f_distinct = fn("distinct()") {
+    konst f_distinct = fn("distinct()") {
         includeDefault()
     } builder {
         doc {
@@ -65,7 +65,7 @@ object SetOps : TemplateGroupBase() {
         sample("samples.collections.Collections.Transformations.distinctAndDistinctBy")
     }
 
-    val f_distinctBy = fn("distinctBy(selector: (T) -> K)") {
+    konst f_distinctBy = fn("distinctBy(selector: (T) -> K)") {
         includeDefault()
     } builder {
         doc {
@@ -83,10 +83,10 @@ object SetOps : TemplateGroupBase() {
         returns("List<T>")
         body {
             """
-            val set = HashSet<K>()
-            val list = ArrayList<T>()
+            konst set = HashSet<K>()
+            konst list = ArrayList<T>()
             for (e in this) {
-                val key = selector(e)
+                konst key = selector(e)
                 if (set.add(key))
                     list.add(e)
             }
@@ -104,7 +104,7 @@ object SetOps : TemplateGroupBase() {
         sample("samples.collections.Collections.Transformations.distinctAndDistinctBy")
     }
 
-    val f_union = fn("union(other: Iterable<T>)") {
+    konst f_union = fn("union(other: Iterable<T>)") {
         include(Family.defaultFamilies - Sequences)
     } builder {
         infix(true)
@@ -122,14 +122,14 @@ object SetOps : TemplateGroupBase() {
         returns("Set<T>")
         body {
             """
-            val set = this.toMutableSet()
+            konst set = this.toMutableSet()
             set.addAll(other)
             return set
             """
         }
     }
 
-    val f_intersect = fn("intersect(other: Iterable<T>)") {
+    konst f_intersect = fn("intersect(other: Iterable<T>)") {
         include(Family.defaultFamilies - Sequences)
     } builder {
         infix()
@@ -145,14 +145,14 @@ object SetOps : TemplateGroupBase() {
         returns("Set<T>")
         body {
             """
-            val set = this.toMutableSet()
+            konst set = this.toMutableSet()
             set.retainAll(other)
             return set
             """
         }
     }
 
-    val f_subtract = fn("subtract(other: Iterable<T>)") {
+    konst f_subtract = fn("subtract(other: Iterable<T>)") {
         include(Family.defaultFamilies - Sequences)
     } builder {
         infix()
@@ -166,7 +166,7 @@ object SetOps : TemplateGroupBase() {
         returns("Set<T>")
         body {
             """
-            val set = this.toMutableSet()
+            konst set = this.toMutableSet()
             set.removeAll(other)
             return set
             """

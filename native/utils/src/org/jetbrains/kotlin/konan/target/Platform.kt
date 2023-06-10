@@ -18,51 +18,51 @@ package org.jetbrains.kotlin.konan.target
 
 import org.jetbrains.kotlin.konan.util.DependencyProcessor
 
-class Platform(val configurables: Configurables) 
+class Platform(konst configurables: Configurables) 
     : Configurables by configurables {
 
-    val clang: ClangArgs.Native by lazy {
+    konst clang: ClangArgs.Native by lazy {
         ClangArgs.Native(configurables)
     }
 
-    val clangForJni: ClangArgs.Jni by lazy {
+    konst clangForJni: ClangArgs.Jni by lazy {
         ClangArgs.Jni(configurables)
     }
 
-    val linker: LinkerFlags by lazy {
+    konst linker: LinkerFlags by lazy {
         linker(configurables)
     }
 }
 
-class PlatformManager private constructor(private val serialized: Serialized) :
+class PlatformManager private constructor(private konst serialized: Serialized) :
         HostManager(serialized.distribution, serialized.experimental), java.io.Serializable {
 
     constructor(konanHome: String, experimental: Boolean = false) : this(Distribution(konanHome), experimental)
     constructor(distribution: Distribution, experimental: Boolean = false) : this(Serialized(distribution, experimental))
 
-    private val distribution by serialized::distribution
+    private konst distribution by serialized::distribution
 
-    private val loaders = enabled.map {
+    private konst loaders = enabled.map {
         it to loadConfigurables(it, distribution.properties, DependencyProcessor.defaultDependenciesRoot.absolutePath)
     }.toMap()
 
-    private val platforms = loaders.map {
-        it.key to Platform(it.value)
+    private konst platforms = loaders.map {
+        it.key to Platform(it.konstue)
     }.toMap()
 
     fun platform(target: KonanTarget) = platforms.getValue(target)
-    val hostPlatform = platforms.getValue(host)
+    konst hostPlatform = platforms.getValue(host)
 
     fun loader(target: KonanTarget) = loaders.getValue(target)
 
     private fun writeReplace(): Any = serialized
 
     private data class Serialized(
-            val distribution: Distribution,
-            val experimental: Boolean
+            konst distribution: Distribution,
+            konst experimental: Boolean
     ) : java.io.Serializable {
         companion object {
-            private const val serialVersionUID: Long = 0L
+            private const konst serialVersionUID: Long = 0L
         }
 
         private fun readResolve(): Any = PlatformManager(this)

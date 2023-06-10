@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
 @ThreadSafeMutableState
-class FirCorrespondingSupertypesCache(private val session: FirSession) : FirSessionComponent {
-    private val cache =
+class FirCorrespondingSupertypesCache(private konst session: FirSession) : FirSessionComponent {
+    private konst cache =
         session.firCachesFactory.createCache<ConeClassLikeLookupTag, Map<ConeClassLikeLookupTag, List<ConeClassLikeType>>?, TypeCheckerState>(
             initialCapacity = 1000,
             loadFactor = 0.5f
@@ -35,21 +35,21 @@ class FirCorrespondingSupertypesCache(private val session: FirSession) : FirSess
     ): List<ConeClassLikeType>? {
         if (type !is ConeClassLikeType || supertypeConstructor !is ConeClassLikeLookupTag) return null
 
-        val typeContext = session.typeContext
-        val typeCheckerState = typeContext.newTypeCheckerState(
+        konst typeContext = session.typeContext
+        konst typeCheckerState = typeContext.newTypeCheckerState(
             errorTypesEqualToAnything = false,
             stubTypesEqualToAnything = true
         )
 
-        val lookupTag = type.lookupTag
+        konst lookupTag = type.lookupTag
         if (lookupTag == supertypeConstructor) return listOf(captureType(type, typeContext))
 
-        val resultTypes =
+        konst resultTypes =
             cache.getValue(lookupTag, typeCheckerState)?.getOrDefault(supertypeConstructor, emptyList()) ?: return null
         if (type.typeArguments.isEmpty()) return resultTypes
 
-        val capturedType = captureType(type, typeContext)
-        val substitutionSupertypePolicy = typeContext.substitutionSupertypePolicy(capturedType)
+        konst capturedType = captureType(type, typeContext)
+        konst substitutionSupertypePolicy = typeContext.substitutionSupertypePolicy(capturedType)
         return resultTypes.map {
             substitutionSupertypePolicy.transformType(typeCheckerState, it) as ConeClassLikeType
         }
@@ -62,11 +62,11 @@ class FirCorrespondingSupertypesCache(private val session: FirSession) : FirSess
         subtypeLookupTag: ConeClassLikeLookupTag,
         state: TypeCheckerState
     ): Map<ConeClassLikeLookupTag, MutableList<ConeClassLikeType>>? {
-        val resultingMap = HashMap<ConeClassLikeLookupTag, MutableList<ConeClassLikeType>>()
+        konst resultingMap = HashMap<ConeClassLikeLookupTag, MutableList<ConeClassLikeType>>()
 
-        val subtypeFirClass: FirClassLikeDeclaration = subtypeLookupTag.toSymbol(session)?.fir ?: return null
+        konst subtypeFirClass: FirClassLikeDeclaration = subtypeLookupTag.toSymbol(session)?.fir ?: return null
 
-        val defaultType = subtypeLookupTag.constructClassType(
+        konst defaultType = subtypeLookupTag.constructClassType(
             (subtypeFirClass as? FirTypeParameterRefsOwner)?.typeParameters?.map {
                 it.symbol.toLookupTag().constructType(emptyArray(), isNullable = false)
             }?.toTypedArray().orEmpty(),
@@ -91,11 +91,11 @@ class FirCorrespondingSupertypesCache(private val session: FirSession) : FirSess
         resultingMap: MutableMap<ConeClassLikeLookupTag, MutableList<ConeClassLikeType>>,
         state: TypeCheckerState
     ): TypeCheckerState.SupertypesPolicy {
-        val supertypeLookupTag = (supertype as ConeClassLikeType).lookupTag
-        val captured =
+        konst supertypeLookupTag = (supertype as ConeClassLikeType).lookupTag
+        konst captured =
             state.typeSystemContext.captureFromArguments(supertype, CaptureStatus.FOR_SUBTYPING) as ConeClassLikeType? ?: supertype
 
-        val list = resultingMap.computeIfAbsent(supertypeLookupTag) { mutableListOf() }
+        konst list = resultingMap.computeIfAbsent(supertypeLookupTag) { mutableListOf() }
         list += captured
 
         return when {
@@ -109,4 +109,4 @@ class FirCorrespondingSupertypesCache(private val session: FirSession) : FirSess
     }
 }
 
-val FirSession.correspondingSupertypesCache: FirCorrespondingSupertypesCache by FirSession.sessionComponentAccessor()
+konst FirSession.correspondingSupertypesCache: FirCorrespondingSupertypesCache by FirSession.sessionComponentAccessor()

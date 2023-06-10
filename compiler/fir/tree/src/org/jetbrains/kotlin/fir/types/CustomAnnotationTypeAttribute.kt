@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.fir.symbols.FirBasedSymbol
 import kotlin.reflect.KClass
 
 class CustomAnnotationTypeAttribute(
-    val annotations: List<FirAnnotation>,
-    val containerSymbols: List<FirBasedSymbol<*>> = emptyList(),
+    konst annotations: List<FirAnnotation>,
+    konst containerSymbols: List<FirBasedSymbol<*>> = emptyList(),
 ) : ConeAttribute<CustomAnnotationTypeAttribute>() {
     constructor(annotations: List<FirAnnotation>, containerSymbol: FirBasedSymbol<*>?) : this(
         annotations,
@@ -32,12 +32,12 @@ class CustomAnnotationTypeAttribute(
 
     override fun toString(): String = annotations.joinToString(separator = " ") { it.render() }
 
-    override val key: KClass<out CustomAnnotationTypeAttribute>
+    override konst key: KClass<out CustomAnnotationTypeAttribute>
         get() = CustomAnnotationTypeAttribute::class
 }
 
-val ConeAttributes.custom: CustomAnnotationTypeAttribute? by ConeAttributes.attributeAccessor<CustomAnnotationTypeAttribute>()
+konst ConeAttributes.custom: CustomAnnotationTypeAttribute? by ConeAttributes.attributeAccessor<CustomAnnotationTypeAttribute>()
 
-val ConeAttributes.customAnnotations: List<FirAnnotation> get() = custom?.annotations.orEmpty()
+konst ConeAttributes.customAnnotations: List<FirAnnotation> get() = custom?.annotations.orEmpty()
 
-val ConeKotlinType.customAnnotations: List<FirAnnotation> get() = attributes.customAnnotations
+konst ConeKotlinType.customAnnotations: List<FirAnnotation> get() = attributes.customAnnotations

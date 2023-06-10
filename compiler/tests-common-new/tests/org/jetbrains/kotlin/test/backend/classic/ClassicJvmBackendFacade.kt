@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.test.services.compilerConfigurationProvider
 class ClassicJvmBackendFacade(
     testServices: TestServices
 ) : ClassicBackendFacade<BinaryArtifacts.Jvm>(testServices, ArtifactKinds.Jvm) {
-    private val javaCompilerFacade = JavaCompilerFacade(testServices)
+    private konst javaCompilerFacade = JavaCompilerFacade(testServices)
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
     override fun transform(
         module: TestModule,
         inputArtifact: ClassicBackendInput
     ): BinaryArtifacts.Jvm {
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
-        val (psiFiles, analysisResult, project, _) = inputArtifact
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst (psiFiles, analysisResult, project, _) = inputArtifact
         // TODO: add configuring classBuilderFactory
-        val generationState = GenerationState.Builder(
+        konst generationState = GenerationState.Builder(
             project,
             ClassBuilderFactories.TEST,
             analysisResult.moduleDescriptor,

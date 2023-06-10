@@ -18,7 +18,7 @@ import kotlin.io.path.createDirectories
 import kotlin.io.path.deleteExisting
 import kotlin.io.path.writeText
 
-@DisplayName("JVM tasks target validation")
+@DisplayName("JVM tasks target konstidation")
 @JvmGradlePluginTests
 class JvmTargetValidationTest : KGPBaseTest() {
 
@@ -35,7 +35,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -44,14 +44,14 @@ class JvmTargetValidationTest : KGPBaseTest() {
                     "'compileJava' task (current target is 1.8) and 'compileKotlin' task (current target is 11) jvm target compatibility " +
                             "should be set to the same Java version.\n" +
                             "By default will become an error since Gradle 8.0+! " +
-                            "Read more: https://kotl.in/gradle/jvm/target-validation\n" +
+                            "Read more: https://kotl.in/gradle/jvm/target-konstidation\n" +
                             "Consider using JVM toolchain: https://kotl.in/gradle/jvm/toolchain"
                 )
             }
         }
     }
 
-    @DisplayName("Should allow to override validation mode for specific task")
+    @DisplayName("Should allow to override konstidation mode for specific task")
     @GradleTest
     internal fun overrideModeForTask(gradleVersion: GradleVersion) {
         project(
@@ -64,7 +64,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -83,7 +83,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
                     "'compileJava' task (current target is 1.8) and 'compileKotlin' task (current target is 11) jvm target compatibility " +
                             "should be set to the same Java version.\n" +
                             "By default will become an error since Gradle 8.0+! " +
-                            "Read more: https://kotl.in/gradle/jvm/target-validation\n" +
+                            "Read more: https://kotl.in/gradle/jvm/target-konstidation\n" +
                             "Consider using JVM toolchain: https://kotl.in/gradle/jvm/toolchain"
                 )
             }
@@ -103,7 +103,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -131,7 +131,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = ignore
+                kotlin.jvm.target.konstidation.mode = ignore
                 """.trimIndent()
             )
 
@@ -155,7 +155,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -183,7 +183,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -216,7 +216,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Should correctly validate JVM targets in mixed Kotlin/Java projects that are using <JDK1.8")
+    @DisplayName("Should correctly konstidate JVM targets in mixed Kotlin/Java projects that are using <JDK1.8")
     @GradleTest
     internal fun oldJdkMixedJavaKotlinTargetVerification(gradleVersion: GradleVersion) {
         project(
@@ -238,7 +238,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -246,7 +246,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Should skip JVM target validation if no Kotlin sources are available")
+    @DisplayName("Should skip JVM target konstidation if no Kotlin sources are available")
     @GradleTest
     internal fun shouldSkipJvmTargetValidationNoKotlinSources(gradleVersion: GradleVersion) {
         project(
@@ -258,7 +258,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -285,19 +285,19 @@ class JvmTargetValidationTest : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Should still do JVM target validation if no java sources are available")
+    @DisplayName("Should still do JVM target konstidation if no java sources are available")
     @GradleTest
     internal fun shouldDoJvmTargetValidationOnNoJavaSources(gradleVersion: GradleVersion) {
         project(
             projectName = "simple".fullProjectName,
             gradleVersion = gradleVersion,
-            buildJdk = getJdk11().javaHome // should differ from default Kotlin jvm target value
+            buildJdk = getJdk11().javaHome // should differ from default Kotlin jvm target konstue
         ) {
             //language=properties
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -310,14 +310,14 @@ class JvmTargetValidationTest : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Should do JVM target validation if java sources are added and configuration cache is reused")
+    @DisplayName("Should do JVM target konstidation if java sources are added and configuration cache is reused")
     @GradleTest
     internal fun shouldDoJvmTargetValidationOnNewJavaSourcesAndConfigurationCacheReuse(gradleVersion: GradleVersion) {
         project(
             projectName = "simple".fullProjectName,
             gradleVersion = gradleVersion,
             buildOptions = defaultBuildOptions.withConfigurationCache,
-            buildJdk = getJdk11().javaHome // should differ from default Kotlin jvm target value
+            buildJdk = getJdk11().javaHome // should differ from default Kotlin jvm target konstue
         ) {
             // Validation mode should be 'warning' because of https://github.com/gradle/gradle/issues/9339
             // which is fixed in Gradle 7.2
@@ -325,7 +325,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -367,7 +367,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
             gradleVersion = gradleVersion,
             buildJdk = getJdk11().javaHome
         ) {
-            val toolchainJavaVersion = if (gradleVersion < GradleVersion.version("6.9")) {
+            konst toolchainJavaVersion = if (gradleVersion < GradleVersion.version("6.9")) {
                 15
             } else {
                 16
@@ -375,7 +375,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -394,7 +394,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
         }
     }
 
-    @DisplayName("Default value becomes 'error' with Gradle 8+")
+    @DisplayName("Default konstue becomes 'error' with Gradle 8+")
     @GradleTestVersions(maxVersion = TestVersions.Gradle.G_8_0)
     @GradleTest
     internal fun errorByDefaultWithGradle8(gradleVersion: GradleVersion) {
@@ -432,7 +432,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
         project("kt-31468-multiple-jvm-targets-with-java", gradleVersion) {
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -460,7 +460,7 @@ class JvmTargetValidationTest : KGPBaseTest() {
         project("kt-31468-multiple-jvm-targets-with-java", gradleVersion) {
             gradleProperties.append(
                 """
-                kotlin.jvm.target.validation.mode = error
+                kotlin.jvm.target.konstidation.mode = error
                 """.trimIndent()
             )
 
@@ -521,5 +521,5 @@ class JvmTargetValidationTest : KGPBaseTest() {
 
     private fun getJdk11(): JavaInfo = Jvm.forHome(File(System.getProperty("jdk11Home")))
 
-    private val String.fullProjectName get() = "kotlin-java-toolchain/$this"
+    private konst String.fullProjectName get() = "kotlin-java-toolchain/$this"
 }

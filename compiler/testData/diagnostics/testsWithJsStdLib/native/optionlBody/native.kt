@@ -2,31 +2,31 @@
 // !DIAGNOSTICS: -UNREACHABLE_CODE
 // unreachable code suppressed due to KT-9586
 
-external val baz: Int
-val useBaz = baz
-external val boo: Int = definedExternally
-val useBoo = boo
+external konst baz: Int
+konst useBaz = baz
+external konst boo: Int = definedExternally
+konst useBoo = boo
 
 external fun foo()
 external fun bar() { definedExternally }
 
 external interface T {
-    val baz: Int
+    konst baz: Int
 
     fun foo()
     fun bar()
 }
 
 external class C {
-    val baz: Int
-    val boo: Int = definedExternally
+    konst baz: Int
+    konst boo: Int = definedExternally
 
     fun foo()
     fun bar() { definedExternally }
 
     companion object {
-        val baz: Int
-        val boo: Int = definedExternally
+        konst baz: Int
+        konst boo: Int = definedExternally
 
         fun foo()
         fun bar(): String = definedExternally
@@ -34,8 +34,8 @@ external class C {
 }
 
 external object O {
-    val baz: Int
-    val boo: Int = definedExternally
+    konst baz: Int
+    konst boo: Int = definedExternally
 
     fun foo(s: String): String
     fun bar(s: String): String = definedExternally

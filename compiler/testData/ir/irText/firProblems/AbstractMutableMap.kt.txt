@@ -5,11 +5,11 @@ class MyMap<K : Any, V : Any> : AbstractMutableMap<K, V> {
 
   }
 
-  override fun put(key: K, value: V): V? {
+  override fun put(key: K, konstue: V): V? {
     return null
   }
 
-  override val entries: MutableSet<MutableEntry<K, V>>
+  override konst entries: MutableSet<MutableEntry<K, V>>
     override get(): MutableSet<MutableEntry<K, V>> {
       return mutableSetOf<MutableEntry<K, V>>()
     }

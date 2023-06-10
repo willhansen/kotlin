@@ -3,11 +3,11 @@
 
 
 // TESTCASE NUMBER: 1
-class Case1<AT>(val x: AT) {
+class Case1<AT>(konst x: AT) {
 
-    class B(val y: <!UNRESOLVED_REFERENCE!>AT<!>) {
+    class B(konst y: <!UNRESOLVED_REFERENCE!>AT<!>) {
         fun case1() {
-            val k: <!UNRESOLVED_REFERENCE!>AT<!>
+            konst k: <!UNRESOLVED_REFERENCE!>AT<!>
         }
     }
 

@@ -52,7 +52,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
                 assertKaptSuccessful()
             }
 
-            val modifiedSource = javaSourcesDir().resolve("a.kt")
+            konst modifiedSource = javaSourcesDir().resolve("a.kt")
             modifiedSource.modify {
                 assert(it.contains("CrashMe2(1000)"))
                 it.replace("CrashMe2(1000)", "CrashMe2(2000)")
@@ -135,7 +135,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
             gradleProperties.append(
                 """
                 # suppress inspection "UnusedProperty"
-                kotlin.jvm.target.validation.mode = warning
+                kotlin.jvm.target.konstidation.mode = warning
                 """.trimIndent()
             )
 
@@ -156,7 +156,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
             )
 
             // The test must not contain any java sources in order to detect the issue.
-            val javaSources = projectPath.allJavaSources
+            konst javaSources = projectPath.allJavaSources
             assert(javaSources.isEmpty()) {
                 "Test project shouldn't contain any java sources, but it contains: $javaSources"
             }
@@ -218,15 +218,15 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
                 """.trimIndent()
             )
 
-            val inFile = subProject("Android").projectPath.resolve("in.txt")
+            konst inFile = subProject("Android").projectPath.resolve("in.txt")
             inFile.writeText("1234")
-            val argsFile = projectPath.resolve("args.txt")
+            konst argsFile = projectPath.resolve("args.txt")
             argsFile.writeText("1234")
 
-            val kaptTasks = listOf(":Android:kaptFlavor1DebugKotlin")
-            val javacTasks = listOf(":Android:compileFlavor1DebugJavaWithJavac")
+            konst kaptTasks = listOf(":Android:kaptFlavor1DebugKotlin")
+            konst javacTasks = listOf(":Android:compileFlavor1DebugJavaWithJavac")
 
-            val buildTasks = (kaptTasks + javacTasks).toTypedArray()
+            konst buildTasks = (kaptTasks + javacTasks).toTypedArray()
 
             build(*buildTasks) {
                 assertTasksExecuted(kaptTasks + javacTasks)
@@ -249,9 +249,9 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
         }
     }
 
-    @DisplayName("agp annotation processor nested arguments are not evaluated at configuration time")
+    @DisplayName("agp annotation processor nested arguments are not ekonstuated at configuration time")
     @GradleAndroidTest
-    fun testAgpNestedArgsNotEvaluatedDuringConfiguration(
+    fun testAgpNestedArgsNotEkonstuatedDuringConfiguration(
         gradleVersion: GradleVersion,
         agpVersion: String,
         jdkVersion: JdkVersions.ProvidedJdk,
@@ -292,7 +292,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
         }
     }
 
-    @DisplayName("KT-55334: Kapt generate stubs and related KotlinCompile tasks are using similar -module-name value")
+    @DisplayName("KT-55334: Kapt generate stubs and related KotlinCompile tasks are using similar -module-name konstue")
     @GradleAndroidTest
     fun kaptGenerateStubsModuleName(
         gradleVersion: GradleVersion,
@@ -306,7 +306,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
             buildJdk = jdkVersion.location
         ) {
             build(":app:compileDebugAndroidTestKotlin") {
-                val stubsFile = subProject("app")
+                konst stubsFile = subProject("app")
                     .projectPath
                     .resolve("build/tmp/kapt3/stubs/debugAndroidTest/com/example/dagger/kotlin/TestClass.java")
                 assertFileExists(stubsFile)
@@ -315,7 +315,7 @@ class Kapt3AndroidIT : Kapt3BaseIT() {
                     "public final void bar${'$'}app_debugAndroidTest() {"
                 )
 
-                val compiledClassFile = subProject("app")
+                konst compiledClassFile = subProject("app")
                     .projectPath
                     .resolve("build/tmp/kotlin-classes/debugAndroidTest/com/example/dagger/kotlin/TestClass.class")
                 assertFileExists(compiledClassFile)

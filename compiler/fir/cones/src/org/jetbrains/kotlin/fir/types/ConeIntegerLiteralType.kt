@@ -8,14 +8,14 @@ package org.jetbrains.kotlin.fir.types
 import org.jetbrains.kotlin.types.model.TypeConstructorMarker
 
 sealed class ConeIntegerLiteralType(
-    val isUnsigned: Boolean,
-    final override val nullability: ConeNullability
+    konst isUnsigned: Boolean,
+    final override konst nullability: ConeNullability
 ) : ConeSimpleKotlinType(), TypeConstructorMarker {
-    abstract val possibleTypes: Collection<ConeClassLikeType>
-    abstract val supertypes: List<ConeClassLikeType>
+    abstract konst possibleTypes: Collection<ConeClassLikeType>
+    abstract konst supertypes: List<ConeClassLikeType>
 
-    final override val typeArguments: Array<out ConeTypeProjection> = emptyArray()
-    final override val attributes: ConeAttributes get() = ConeAttributes.Empty
+    final override konst typeArguments: Array<out ConeTypeProjection> = emptyArray()
+    final override konst attributes: ConeAttributes get() = ConeAttributes.Empty
 
     abstract fun getApproximatedType(expectedType: ConeKotlinType? = null): ConeClassLikeType
 
@@ -40,7 +40,7 @@ sealed class ConeIntegerLiteralType(
 }
 
 abstract class ConeIntegerLiteralConstantType(
-    val value: Long,
+    konst konstue: Long,
     isUnsigned: Boolean,
     nullability: ConeNullability
 ) : ConeIntegerLiteralType(isUnsigned, nullability)

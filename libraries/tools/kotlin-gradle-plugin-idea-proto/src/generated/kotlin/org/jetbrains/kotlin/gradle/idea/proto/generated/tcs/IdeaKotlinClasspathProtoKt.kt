@@ -10,7 +10,7 @@ object IdeaKotlinClasspathProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinClasspathProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -32,58 +32,58 @@ object IdeaKotlinClasspathProtoKt {
      * <code>repeated string files = 1;</code>
      * @return A list containing the files.
      */
-     val files: com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>
+     konst files: com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>
       @kotlin.jvm.JvmSynthetic
       get() = com.google.protobuf.kotlin.DslList(
         _builder.getFilesList()
       )
     /**
      * <code>repeated string files = 1;</code>
-     * @param value The files to add.
+     * @param konstue The files to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addFiles")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.add(value: kotlin.String) {
-      _builder.addFiles(value)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.add(konstue: kotlin.String) {
+      _builder.addFiles(konstue)
     }
     /**
      * <code>repeated string files = 1;</code>
-     * @param value The files to add.
+     * @param konstue The files to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignFiles")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.plusAssign(value: kotlin.String) {
-      add(value)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.plusAssign(konstue: kotlin.String) {
+      add(konstue)
     }
     /**
      * <code>repeated string files = 1;</code>
-     * @param values The files to add.
+     * @param konstues The files to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("addAllFiles")
-    fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.addAll(values: kotlin.collections.Iterable<kotlin.String>) {
-      _builder.addAllFiles(values)
+    fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.addAll(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      _builder.addAllFiles(konstues)
     }
     /**
      * <code>repeated string files = 1;</code>
-     * @param values The files to add.
+     * @param konstues The files to add.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("plusAssignAllFiles")
     @Suppress("NOTHING_TO_INLINE")
-    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.plusAssign(values: kotlin.collections.Iterable<kotlin.String>) {
-      addAll(values)
+    inline operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.plusAssign(konstues: kotlin.collections.Iterable<kotlin.String>) {
+      addAll(konstues)
     }
     /**
      * <code>repeated string files = 1;</code>
-     * @param index The index to set the value at.
-     * @param value The files to set.
+     * @param index The index to set the konstue at.
+     * @param konstue The files to set.
      */
     @kotlin.jvm.JvmSynthetic
     @kotlin.jvm.JvmName("setFiles")
-    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.set(index: kotlin.Int, value: kotlin.String) {
-      _builder.setFiles(index, value)
+    operator fun com.google.protobuf.kotlin.DslList<kotlin.String, FilesProxy>.set(index: kotlin.Int, konstue: kotlin.String) {
+      _builder.setFiles(index, konstue)
     }/**
      * <code>repeated string files = 1;</code>
      */

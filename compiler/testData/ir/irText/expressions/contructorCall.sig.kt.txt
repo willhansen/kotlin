@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test
 //   Public signature: /test|-5712650070209114719[0]
-val test: A
+konst test: A
   // CHECK JVM_IR:
   //   Mangled name: #<get-test>(){}A
   //   Public signature: /test.<get-test>|1008694073924452605[0]

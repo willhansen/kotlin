@@ -1,3 +1,3 @@
-enum class Enum(val x: Int) {
+enum class Enum(konst x: Int) {
     A(1),
 }

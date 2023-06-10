@@ -10,13 +10,13 @@ import generators.unicode.toHexCharLiteral
 import generators.unicode.hexCharsToStringLiteral
 import java.io.FileWriter
 
-internal class OneToManyLowercaseMappingsWriter(private val strategy: RangesWritingStrategy) : OneToManyMappingsWriter {
+internal class OneToManyLowercaseMappingsWriter(private konst strategy: RangesWritingStrategy) : OneToManyMappingsWriter {
     override fun write(mappings: Map<Int, List<String>>, writer: FileWriter) {
         check(mappings.size == 1) { "Number of multi-char lowercase mappings has changed." }
 
-        val (key, value) = mappings.entries.single()
-        val char = key.toHexCharLiteral()
-        val result = value.hexCharsToStringLiteral()
+        konst (key, konstue) = mappings.entries.single()
+        konst char = key.toHexCharLiteral()
+        konst result = konstue.hexCharsToStringLiteral()
 
         writer.appendLine(lowercaseImpl(char, result))
     }

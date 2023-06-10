@@ -28,12 +28,12 @@ import org.jetbrains.kotlin.name.Name
  * WebAssembly allows only constant expressions to be used directly in
  * field initializers.
  */
-class FieldInitializersLowering(val context: WasmBackendContext) : FileLoweringPass {
-    private val stringPoolFqName = context.kotlinWasmInternalPackageFqn.child(Name.identifier("stringPool"))
+class FieldInitializersLowering(konst context: WasmBackendContext) : FileLoweringPass {
+    private konst stringPoolFqName = context.kotlinWasmInternalPackageFqn.child(Name.identifier("stringPool"))
 
     override fun lower(irFile: IrFile) {
-        val builder = context.createIrBuilder(context.fieldInitFunction.symbol)
-        val startFunctionBody = context.fieldInitFunction.body as IrBlockBody
+        konst builder = context.createIrBuilder(context.fieldInitFunction.symbol)
+        konst startFunctionBody = context.fieldInitFunction.body as IrBlockBody
 
         irFile.acceptChildrenVoid(object : IrElementVisitorVoid {
             override fun visitElement(element: IrElement) {
@@ -47,14 +47,14 @@ class FieldInitializersLowering(val context: WasmBackendContext) : FileLoweringP
                 if (declaration.isExternal) return
 
                 if (!declaration.isStatic) return
-                val initValue: IrExpression = declaration.initializer?.expression ?: return
+                konst initValue: IrExpression = declaration.initializer?.expression ?: return
                 // Constant primitive initializers without implicit casting can be processed by native wasm initializers
                 if (initValue is IrConst<*>) {
                     if (initValue.kind is IrConstKind.Null) return
                     if (initValue.type == declaration.type && initValue.kind !is IrConstKind.String) return
                 }
 
-                val initializerStatement = builder.at(initValue).irSetField(null, declaration, initValue)
+                konst initializerStatement = builder.at(initValue).irSetField(null, declaration, initValue)
 
                 when (declaration.fqNameWhenAvailable) {
                     stringPoolFqName -> startFunctionBody.statements.add(0, initializerStatement)

@@ -3,7 +3,7 @@
 fun foo(): Any = 1
 
 fun test() =
-    when (val y = foo()) {
+    when (konst y = foo()) {
         42 -> 1
         is String -> y.length
         !is Int -> 2

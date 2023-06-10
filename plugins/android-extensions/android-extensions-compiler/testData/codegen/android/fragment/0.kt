@@ -12,13 +12,13 @@ import kotlinx.android.synthetic.clearFindViewByIdCache
 class R {
     class id {
         companion object {
-            const val login = 5
+            const konst login = 5
         }
     }
 }
 
 class BaseView(ctx: Context) : View(ctx) {
-    val buttonWidget = MyButton(ctx)
+    konst buttonWidget = MyButton(ctx)
 
     override fun <T : View> findViewById(id: Int): T? {
         return when (id) {
@@ -29,15 +29,15 @@ class BaseView(ctx: Context) : View(ctx) {
 }
 
 class MyFragment(): Fragment() {
-    val baseActivity = Activity()
-    val baseView = BaseView(baseActivity)
+    konst baseActivity = Activity()
+    konst baseView = BaseView(baseActivity)
 
     override fun getActivity(): Activity = baseActivity
 
     override fun getView(): View = baseView
 
     public fun box(): String {
-        val result = if (login.toString() == "MyButton") "OK" else ""
+        konst result = if (login.toString() == "MyButton") "OK" else ""
         clearFindViewByIdCache()
         return result
     }

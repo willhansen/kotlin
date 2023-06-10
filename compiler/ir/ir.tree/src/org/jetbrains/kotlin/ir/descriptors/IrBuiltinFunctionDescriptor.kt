@@ -78,34 +78,34 @@ abstract class IrBuiltinOperatorDescriptorBase(containingDeclaration: Declaratio
 class IrSimpleBuiltinOperatorDescriptorImpl(
     containingDeclaration: DeclarationDescriptor,
     name: Name,
-    private val returnType: KotlinType
+    private konst returnType: KotlinType
 ) : IrBuiltinOperatorDescriptorBase(containingDeclaration, name), IrBuiltinOperatorDescriptor {
-    private val valueParameters: MutableList<IrBuiltinValueParameterDescriptor> = ArrayList()
+    private konst konstueParameters: MutableList<IrBuiltinValueParameterDescriptor> = ArrayList()
 
-    fun addValueParameter(valueParameter: IrBuiltinValueParameterDescriptor) {
-        valueParameters.add(valueParameter)
+    fun addValueParameter(konstueParameter: IrBuiltinValueParameterDescriptor) {
+        konstueParameters.add(konstueParameter)
     }
 
     override fun getReturnType(): KotlinType = returnType
-    override fun getValueParameters(): List<ValueParameterDescriptor> = valueParameters
+    override fun getValueParameters(): List<ValueParameterDescriptor> = konstueParameters
 
     override fun equals(other: Any?): Boolean {
         return this === other ||
                 other is IrSimpleBuiltinOperatorDescriptorImpl &&
                 name == other.name &&
-                valueParameters.map { it.type } == other.valueParameters.map { it.type } &&
+                konstueParameters.map { it.type } == other.konstueParameters.map { it.type } &&
                 containingDeclaration == other.containingDeclaration
     }
 
     override fun hashCode(): Int {
-        return (containingDeclaration.hashCode() * 31 + name.hashCode()) * 31 + valueParameters.map { it.type }.hashCode()
+        return (containingDeclaration.hashCode() * 31 + name.hashCode()) * 31 + konstueParameters.map { it.type }.hashCode()
     }
 }
 
 class IrBuiltinValueParameterDescriptorImpl(
-    private val containingDeclaration: CallableDescriptor,
+    private konst containingDeclaration: CallableDescriptor,
     name: Name,
-    override val index: Int,
+    override konst index: Int,
     outType: KotlinType
 ) : VariableDescriptorImpl(containingDeclaration, Annotations.EMPTY, name, outType, SourceElement.NO_SOURCE),
     IrBuiltinValueParameterDescriptor {
@@ -115,9 +115,9 @@ class IrBuiltinValueParameterDescriptorImpl(
     override fun declaresDefaultValue(): Boolean = false
     override fun getOriginal(): ValueParameterDescriptor = this
     override fun getOverriddenDescriptors(): Collection<ValueParameterDescriptor> = emptyList()
-    override val isCrossinline: Boolean get() = false
-    override val isNoinline: Boolean get() = false
-    override val varargElementType: KotlinType? get() = null
+    override konst isCrossinline: Boolean get() = false
+    override konst isNoinline: Boolean get() = false
+    override konst varargElementType: KotlinType? get() = null
     override fun getCompileTimeInitializer(): ConstantValue<*>? = null
     override fun cleanCompileTimeInitializerCache() {}
     override fun isVar(): Boolean = false

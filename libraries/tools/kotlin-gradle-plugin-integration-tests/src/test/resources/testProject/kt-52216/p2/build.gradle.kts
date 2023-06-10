@@ -12,21 +12,21 @@ repositories {
 }
 
 kotlin {
-    val targets = listOf(
+    konst targets = listOf(
         jvm(),
         js(),
         linuxX64()
     )
 
     sourceSets {
-        val commonMain by getting {
+        konst commonMain by getting {
             dependencies {
                 implementation("kt52216:lib:1.0")
             }
         }
 
         for (target in targets) {
-            val leafSourceSet = getByName(target.leafSourceSetName)
+            konst leafSourceSet = getByName(target.leafSourceSetName)
             create(target.intermediateSourceSetName) {
                 leafSourceSet.dependsOn(this)
                 dependsOn(commonMain)
@@ -35,8 +35,8 @@ kotlin {
     }
 }
 
-val org.jetbrains.kotlin.gradle.plugin.KotlinTarget.leafSourceSetName: String
+konst org.jetbrains.kotlin.gradle.plugin.KotlinTarget.leafSourceSetName: String
     get() = "${name}Main"
 
-val org.jetbrains.kotlin.gradle.plugin.KotlinTarget.intermediateSourceSetName: String
+konst org.jetbrains.kotlin.gradle.plugin.KotlinTarget.intermediateSourceSetName: String
     get() = "${name}Intermediate"

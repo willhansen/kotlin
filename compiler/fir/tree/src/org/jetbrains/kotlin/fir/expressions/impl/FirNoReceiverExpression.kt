@@ -14,9 +14,9 @@ import org.jetbrains.kotlin.fir.visitors.FirTransformer
 import org.jetbrains.kotlin.fir.visitors.FirVisitor
 
 object FirNoReceiverExpression : FirExpression() {
-    override val source: KtSourceElement? = null
-    override val typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: List<FirAnnotation> get() = emptyList()
+    override konst source: KtSourceElement? = null
+    override konst typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
+    override konst annotations: List<FirAnnotation> get() = emptyList()
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

@@ -1,4 +1,4 @@
 fun test(b: Boolean): Int {
-    <expr>val n: Int = b.hashCode()</expr>
+    <expr>konst n: Int = b.hashCode()</expr>
     return n * 2
 }

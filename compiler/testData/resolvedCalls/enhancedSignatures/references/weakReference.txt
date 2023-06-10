@@ -15,7 +15,7 @@ fun nullable(r: WeakReference<String?>) {
 }
 
 fun platform() {
-    val r = WeakReference("x")
+    konst r = WeakReference("x")
     r.get()
         // SUCCESS
         // ORIGINAL:    fun get(): T? defined in java.lang.ref.WeakReference

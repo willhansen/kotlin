@@ -16,17 +16,17 @@ import org.jetbrains.kotlin.types.error.ErrorTypeKind
 import org.jetbrains.kotlin.types.error.ErrorUtils
 
 internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpperBoundEraser? = null) : TypeSubstitution() {
-    private val projectionComputer = RawProjectionComputer()
-    private val typeParameterUpperBoundEraser = typeParameterUpperBoundEraser ?: TypeParameterUpperBoundEraser(projectionComputer)
+    private konst projectionComputer = RawProjectionComputer()
+    private konst typeParameterUpperBoundEraser = typeParameterUpperBoundEraser ?: TypeParameterUpperBoundEraser(projectionComputer)
 
     override fun get(key: KotlinType) = TypeProjectionImpl(eraseType(key))
 
     private fun eraseType(type: KotlinType, attr: JavaTypeAttributes = JavaTypeAttributes(TypeUsage.COMMON)): KotlinType {
-        return when (val declaration = type.constructor.declarationDescriptor) {
+        return when (konst declaration = type.constructor.declarationDescriptor) {
             is TypeParameterDescriptor ->
                 eraseType(typeParameterUpperBoundEraser.getErasedUpperBound(declaration, attr.markIsRaw(true)), attr)
             is ClassDescriptor -> {
-                val declarationForUpper =
+                konst declarationForUpper =
                     type.upperIfFlexible().constructor.declarationDescriptor
 
                 check(declarationForUpper is ClassDescriptor) {
@@ -34,8 +34,8 @@ internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpper
                             "but \"$declarationForUpper\" while for lower it's \"$declaration\""
                 }
 
-                val (lower, isRawL) = eraseInflexibleBasedOnClassDescriptor(type.lowerIfFlexible(), declaration, lowerTypeAttr)
-                val (upper, isRawU) = eraseInflexibleBasedOnClassDescriptor(type.upperIfFlexible(), declarationForUpper, upperTypeAttr)
+                konst (lower, isRawL) = eraseInflexibleBasedOnClassDescriptor(type.lowerIfFlexible(), declaration, lowerTypeAttr)
+                konst (upper, isRawU) = eraseInflexibleBasedOnClassDescriptor(type.upperIfFlexible(), declarationForUpper, upperTypeAttr)
 
                 if (isRawL || isRawU) {
                     RawTypeImpl(lower, upper)
@@ -54,8 +54,8 @@ internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpper
         if (type.constructor.parameters.isEmpty()) return type to false
 
         if (KotlinBuiltIns.isArray(type)) {
-            val componentTypeProjection = type.arguments[0]
-            val arguments = listOf(
+            konst componentTypeProjection = type.arguments[0]
+            konst arguments = listOf(
                 TypeProjectionImpl(componentTypeProjection.projectionKind, eraseType(componentTypeProjection.type, attr))
             )
             return KotlinTypeFactory.simpleType(
@@ -67,7 +67,7 @@ internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpper
             return ErrorUtils.createErrorType(ErrorTypeKind.ERROR_RAW_TYPE, type.constructor.toString()) to false
         }
 
-        val memberScope = declaration.getMemberScope(this)
+        konst memberScope = declaration.getMemberScope(this)
         return KotlinTypeFactory.simpleTypeWithNonTrivialMemberScope(
             type.attributes, declaration.typeConstructor,
             declaration.typeConstructor.parameters.map { parameter ->
@@ -75,10 +75,10 @@ internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpper
             },
             type.isMarkedNullable, memberScope
         ) factory@{ kotlinTypeRefiner ->
-            val classId = (declaration as? ClassDescriptor)?.classId ?: return@factory null
+            konst classId = (declaration as? ClassDescriptor)?.classId ?: return@factory null
 
             @OptIn(TypeRefinement::class)
-            val refinedClassDescriptor = kotlinTypeRefiner.findClassAcrossModuleDependencies(classId) ?: return@factory null
+            konst refinedClassDescriptor = kotlinTypeRefiner.findClassAcrossModuleDependencies(classId) ?: return@factory null
             if (refinedClassDescriptor == declaration) return@factory null
 
             eraseInflexibleBasedOnClassDescriptor(type, refinedClassDescriptor, attr).first
@@ -88,7 +88,7 @@ internal class RawSubstitution(typeParameterUpperBoundEraser: TypeParameterUpper
     override fun isEmpty() = false
 
     companion object {
-        private val lowerTypeAttr = TypeUsage.COMMON.toAttributes(isRaw = true).withFlexibility(JavaTypeFlexibility.FLEXIBLE_LOWER_BOUND)
-        private val upperTypeAttr = TypeUsage.COMMON.toAttributes(isRaw = true).withFlexibility(JavaTypeFlexibility.FLEXIBLE_UPPER_BOUND)
+        private konst lowerTypeAttr = TypeUsage.COMMON.toAttributes(isRaw = true).withFlexibility(JavaTypeFlexibility.FLEXIBLE_LOWER_BOUND)
+        private konst upperTypeAttr = TypeUsage.COMMON.toAttributes(isRaw = true).withFlexibility(JavaTypeFlexibility.FLEXIBLE_UPPER_BOUND)
     }
 }

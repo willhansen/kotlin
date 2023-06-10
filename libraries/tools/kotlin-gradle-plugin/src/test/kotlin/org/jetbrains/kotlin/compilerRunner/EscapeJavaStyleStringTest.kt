@@ -48,8 +48,8 @@ class EscapeJavaStyleStringTest {
         original: String,
         message: String? = null
     ) {
-        val converted: String = original.escapeJavaStyleString()
-        val assertMessage = "escapeJava(String) failed" + if (message == null) "" else ": $message"
+        konst converted: String = original.escapeJavaStyleString()
+        konst assertMessage = "escapeJava(String) failed" + if (message == null) "" else ": $message"
         assertEquals(assertMessage, expected, converted)
     }
 }

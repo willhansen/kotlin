@@ -14,7 +14,7 @@ inline fun <A, B, T : Map<A, List<B>>> takeTWithMap(t: T) {}
 import test.*
 
 fun box(): String {
-    val f = { null } as () -> Int
+    konst f = { null } as () -> Int
     takeT(f())
     // Without fix we are going to get following instructions
     //    CHECKCAST java/lang/Number
@@ -23,7 +23,7 @@ fun box(): String {
     takeU(f())
     takeR(f())
 
-    val g = { null } as () -> Map<Int, List<String>>
+    konst g = { null } as () -> Map<Int, List<String>>
     takeTWithMap(g())
     return "OK"
 }

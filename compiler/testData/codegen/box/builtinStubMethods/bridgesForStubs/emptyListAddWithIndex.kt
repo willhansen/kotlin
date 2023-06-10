@@ -2,7 +2,7 @@
 // FILE: emptyListAddWithIndex.kt
 
 object EmptyList : List<Nothing>, RandomAccess {
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
     override fun contains(element: Nothing): Boolean = false
     override fun containsAll(elements: Collection<Nothing>): Boolean = elements.isEmpty()

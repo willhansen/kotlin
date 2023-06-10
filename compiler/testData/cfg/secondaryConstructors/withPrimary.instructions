@@ -1,9 +1,9 @@
 == A ==
-class A(val w: Char) {
-    val x: Int
+class A(konst w: Char) {
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): this('a') {
         y = 2
@@ -27,13 +27,13 @@ class A(val w: Char) {
 ---------------------
 L0:
   1 <START>
-    v(val w: Char)
-    magic[FAKE_INITIALIZER](val w: Char) -> <v0>
+    v(konst w: Char)
+    magic[FAKE_INITIALIZER](konst w: Char) -> <v0>
     w(w|<v0>)
-    v(val x: Int)
+    v(konst x: Int)
     v(var y: Int)
-    v(val z: Int)
-    v(val v = -1)
+    v(konst z: Int)
+    v(konst v = -1)
     r(1) -> <v1>
     mark(-1)
     call(-1, unaryMinus|<v1>) -> <v2>
@@ -91,7 +91,7 @@ L0:
     v(b: Int = 3)
     jmp?(L2)                                       NEXT:[magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>, r(3) -> <v1>]
     r(3) -> <v1>
-L2 [after default value for parameter b]:
+L2 [after default konstue for parameter b]:
     magic[FAKE_INITIALIZER](b: Int = 3) -> <v2>    PREV:[jmp?(L2), r(3) -> <v1>]
     merge(b: Int = 3|<v1>, <v2>) -> <v3>
     w(b|<v3>)

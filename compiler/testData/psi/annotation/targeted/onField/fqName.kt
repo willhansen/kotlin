@@ -1,6 +1,6 @@
 class A {
 
     @field:kotlin.Deprecated
-    val a = "String"
+    konst a = "String"
 
 }

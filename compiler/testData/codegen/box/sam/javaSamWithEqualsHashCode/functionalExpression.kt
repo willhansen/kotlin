@@ -3,9 +3,9 @@
 // FULL_JDK
 
 fun box(): String {
-    val lambda: () -> Unit = { }
-    val r1 = Runnable(lambda)
-    val r2 = Runnable(lambda)
+    konst lambda: () -> Unit = { }
+    konst r1 = Runnable(lambda)
+    konst r2 = Runnable(lambda)
 
     if (r1 != r2)
         return "r1 != r2"

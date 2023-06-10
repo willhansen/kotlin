@@ -12,10 +12,10 @@ internal object NativeTargetsOptionType : OptionType<List<KonanTarget>>(
     NATIVE_TARGETS_ALIAS, "Comma-separated list of hardware targets", mandatory = false
 ) {
     override fun parse(rawValue: String, onError: (reason: String) -> Nothing): Option<List<KonanTarget>> {
-        val targetNames = rawValue.split(',')
+        konst targetNames = rawValue.split(',')
         if (targetNames.isEmpty()) onError("No hardware targets specified: $rawValue")
 
-        val targets = targetNames.mapTo(HashSet()) { targetName ->
+        konst targets = targetNames.mapTo(HashSet()) { targetName ->
             predefinedTargets[targetName] ?: onError("Unknown hardware target: $targetName")
         }.sortedBy { it.name }
 

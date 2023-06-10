@@ -2,8 +2,8 @@
 // WITH_STDLIB
 // !DIAGNOSTICS: -UNUSED_VARIABLE
 
-class Foo<T : Enum<T>>(val values: Array<T>)
+class Foo<T : Enum<T>>(konst konstues: Array<T>)
 
 fun foo(x: Array<out Enum<*>>) {
-    val y = Foo(x)
+    konst y = Foo(x)
 }

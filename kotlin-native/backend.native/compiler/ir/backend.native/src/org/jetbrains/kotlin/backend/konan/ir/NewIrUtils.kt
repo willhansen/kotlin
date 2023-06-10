@@ -38,7 +38,7 @@ fun IrClass.isUnit() = this.isClassTypeWithSignature(IdSignatureValues.unit)
 
 fun IrClass.isKotlinArray() = this.isClassTypeWithSignature(IdSignatureValues.array)
 
-val IrClass.superClasses get() = this.superTypes.map { it.classifierOrFail as IrClassSymbol }
+konst IrClass.superClasses get() = this.superTypes.map { it.classifierOrFail as IrClassSymbol }
 fun IrClass.getSuperClassNotAny() = this.superClasses.map { it.owner }.atMostOne { !it.isInterface && !it.isAny() }
 
 fun IrClass.isAny() = this.isClassTypeWithSignature(IdSignatureValues.any)
@@ -48,18 +48,18 @@ fun IrClass.isNothing() = this.isClassTypeWithSignature(IdSignatureValues.nothin
 fun IrClass.getSuperInterfaces() = this.superClasses.map { it.owner }.filter { it.isInterface }
 
 // Note: psi2ir doesn't set `origin = FAKE_OVERRIDE` for fields and properties yet.
-val IrProperty.isReal: Boolean get() = this.descriptor.kind.isReal
-val IrField.isReal: Boolean get() = this.descriptor.kind.isReal
+konst IrProperty.isReal: Boolean get() = this.descriptor.kind.isReal
+konst IrField.isReal: Boolean get() = this.descriptor.kind.isReal
 
 fun IrClass.isSpecialClassWithNoSupertypes() = this.isAny() || this.isNothing()
 
 inline fun <reified T> IrDeclaration.getAnnotationArgumentValue(fqName: FqName, argumentName: String): T? {
-    val annotation = this.annotations.findAnnotation(fqName) ?: return null
-    for (index in 0 until annotation.valueArgumentsCount) {
-        val parameter = annotation.symbol.owner.valueParameters[index]
+    konst annotation = this.annotations.findAnnotation(fqName) ?: return null
+    for (index in 0 until annotation.konstueArgumentsCount) {
+        konst parameter = annotation.symbol.owner.konstueParameters[index]
         if (parameter.name == Name.identifier(argumentName)) {
-            val actual = annotation.getValueArgument(index) as? IrConst<*> ?: return null
-            return actual.value as T
+            konst actual = annotation.getValueArgument(index) as? IrConst<*> ?: return null
+            return actual.konstue as T
         }
     }
     return null
@@ -68,18 +68,18 @@ inline fun <reified T> IrDeclaration.getAnnotationArgumentValue(fqName: FqName, 
 fun IrValueParameter.isInlineParameter(): Boolean =
     !this.isNoinline && (this.type.isFunction() || this.type.isSuspendFunction()) && !this.type.isMarkedNullable()
 
-val IrDeclaration.parentDeclarationsWithSelf: Sequence<IrDeclaration>
+konst IrDeclaration.parentDeclarationsWithSelf: Sequence<IrDeclaration>
     get() = generateSequence(this, { it.parent as? IrDeclaration })
 
 fun buildSimpleAnnotation(irBuiltIns: IrBuiltIns, startOffset: Int, endOffset: Int,
                           annotationClass: IrClass, vararg args: String): IrConstructorCall {
-    val constructor = annotationClass.constructors.let {
-        it.singleOrNull() ?: it.single { ctor -> ctor.valueParameters.size == args.size }
+    konst constructor = annotationClass.constructors.let {
+        it.singleOrNull() ?: it.single { ctor -> ctor.konstueParameters.size == args.size }
     }
     return IrConstructorCallImpl.fromSymbolOwner(startOffset, endOffset, constructor.returnType, constructor.symbol).apply {
         args.forEachIndexed { index, arg ->
-            assert(constructor.valueParameters[index].type == irBuiltIns.stringType) {
-                "String type expected but was ${constructor.valueParameters[index].type}"
+            assert(constructor.konstueParameters[index].type == irBuiltIns.stringType) {
+                "String type expected but was ${constructor.konstueParameters[index].type}"
             }
             putValueArgument(index, IrConstImpl.string(startOffset, endOffset, irBuiltIns.stringType, arg))
         }
@@ -89,33 +89,33 @@ fun buildSimpleAnnotation(irBuiltIns: IrBuiltIns, startOffset: Int, endOffset: I
 internal fun IrExpression.isBoxOrUnboxCall() =
         (this is IrCall && symbol.owner.origin == DECLARATION_ORIGIN_INLINE_CLASS_SPECIAL_FUNCTION)
 
-internal val IrFunctionAccessExpression.actualCallee: IrFunction
+internal konst IrFunctionAccessExpression.actualCallee: IrFunction
     get() {
-        val callee = symbol.owner
+        konst callee = symbol.owner
         return ((this as? IrCall)?.superQualifierSymbol?.owner?.getOverridingOf(callee) ?: callee).target
     }
 
-internal val IrFunctionAccessExpression.isVirtualCall: Boolean
+internal konst IrFunctionAccessExpression.isVirtualCall: Boolean
     get() = this is IrCall && this.superQualifierSymbol == null && this.symbol.owner.isOverridable
 
 private fun IrClass.getOverridingOf(function: IrFunction) = (function as? IrSimpleFunction)?.let {
     it.allOverriddenFunctions.atMostOne { it.parent == this }
 }
 
-val ModuleDescriptor.konanLibrary get() = (this.klibModuleOrigin as? DeserializedKlibModuleOrigin)?.library
-val IrModuleFragment.konanLibrary
+konst ModuleDescriptor.konanLibrary get() = (this.klibModuleOrigin as? DeserializedKlibModuleOrigin)?.library
+konst IrModuleFragment.konanLibrary
     get() = (this as? KonanIrModuleFragmentImpl)?.konanLibrary ?: descriptor.konanLibrary
-val IrPackageFragment.konanLibrary
+konst IrPackageFragment.konanLibrary
     get() = if (this is IrFile)
         this.konanLibrary
     else
         this.packageFragmentDescriptor.containingDeclaration.konanLibrary
-val IrFile.konanLibrary
+konst IrFile.konanLibrary
     get() = (metadata as? KonanFileMetadataSource)?.module?.konanLibrary ?: packageFragmentDescriptor.containingDeclaration.konanLibrary
-val IrDeclaration.konanLibrary: KotlinLibrary?
+konst IrDeclaration.konanLibrary: KotlinLibrary?
     get() {
         ((this as? IrMetadataSourceOwner)?.metadata as? KonanMetadata)?.let { return it.konanLibrary }
-        return when (val parent = parent) {
+        return when (konst parent = parent) {
             is IrFile -> parent.konanLibrary
             is IrPackageFragment -> parent.packageFragmentDescriptor.containingDeclaration.konanLibrary
             is IrDeclaration -> parent.konanLibrary

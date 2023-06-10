@@ -7,16 +7,16 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val xs = "abcd"
+konst xs = "abcd"
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
 
     for ((i, _) in xs.withIndex()) {
         s.append("$i;")
     }
 
-    val ss = s.toString()
+    konst ss = s.toString()
     return if (ss == "0;1;2;3;") "OK" else "fail: '$ss'"
 }
 

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinCommonCompilerOptions
 
 interface KotlinCompilationTask<out CO : KotlinCommonCompilerOptions> : Task {
     @get:Nested
-    val compilerOptions: CO
+    konst compilerOptions: CO
 
     fun compilerOptions(configure: CO.() -> Unit) {
         configure(compilerOptions)

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.load.java
 
-enum class AnnotationQualifierApplicabilityType(val javaTarget: String) {
+enum class AnnotationQualifierApplicabilityType(konst javaTarget: String) {
     METHOD_RETURN_TYPE("METHOD"),
     VALUE_PARAMETER("PARAMETER"),
     FIELD("FIELD"),

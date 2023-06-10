@@ -11,7 +11,7 @@ interface IFoo {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Str<T: String>(val str: T)
+konstue class Str<T: String>(konst str: T)
 
 class Derived : GenericBase<Str<String>>(), IFoo {
     override fun foo(x: Str<String>): Str<String> = x

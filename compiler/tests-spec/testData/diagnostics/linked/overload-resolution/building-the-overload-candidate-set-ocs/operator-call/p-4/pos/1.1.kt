@@ -24,7 +24,7 @@ class Arithmetic() {
 }
 class B() {
     operator fun plus(i: Int)  : B =B()
-    val plusAssign = Arithmetic()
+    konst plusAssign = Arithmetic()
 
     fun case7(){
         var b =B()
@@ -53,7 +53,7 @@ class Arithmetic() {
 
 class B() {
     operator fun plusAssign(i: Int) {}
-    val plus = Arithmetic()
+    konst plus = Arithmetic()
 
 
     fun case2(b: B) {

@@ -9,8 +9,8 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KProperty
 
 
-internal class ThreadLocalValue<V : Any>(private val init: () -> V) {
-    private val map = ConcurrentHashMap<Long, V>()
+internal class ThreadLocalValue<V : Any>(private konst init: () -> V) {
+    private konst map = ConcurrentHashMap<Long, V>()
 
     @Suppress("NOTHING_TO_INLINE")
     inline operator fun getValue(thisRef: Any?, property: KProperty<*>): V =

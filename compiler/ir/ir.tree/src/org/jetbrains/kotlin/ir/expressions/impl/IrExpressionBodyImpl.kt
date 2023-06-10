@@ -22,8 +22,8 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrExpressionBody
 
 class IrExpressionBodyImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     initializer: (IrExpressionBody.() -> Unit)? = null
 ) : IrExpressionBody() {
     init {
@@ -38,6 +38,6 @@ class IrExpressionBodyImpl(
 
     override lateinit var expression: IrExpression
 
-    override val factory: IrFactory
+    override konst factory: IrFactory
         get() = IrFactoryImpl
 }

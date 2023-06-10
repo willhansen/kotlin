@@ -5,7 +5,7 @@
         {
           "specVersion": "0.1-313",
           "casesNumber": 0,
-          "description": "finally block has no effect on the value returned by the try-expression",
+          "description": "finally block has no effect on the konstue returned by the try-expression",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-7/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -19,7 +19,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "The value of the try-expression is the same as the value of the last expression of the try or catch block",
+          "description": "The konstue of the try-expression is the same as the konstue of the last expression of the try or catch block",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-6/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -33,7 +33,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/neg/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -43,7 +43,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/neg/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -55,7 +55,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -63,7 +63,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -71,7 +71,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -81,7 +81,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -89,7 +89,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.3.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -97,7 +97,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "catch block is evaluated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
+          "description": "catch block is ekonstuated immediately after the exception is thrown and the exception itself is passed inside the catch block as the corresponding parameter.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-2/pos/2.2.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -129,7 +129,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack",
+          "description": "If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/neg/3.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -141,7 +141,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "the finally block is evaluated after the evaluation of the matching catch block.",
+          "description": "the finally block is ekonstuated after the ekonstuation of the matching catch block.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -151,7 +151,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack",
+          "description": "If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/3.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -161,7 +161,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If no exception is thrown during the evaluation of the try body, no catch blocks are executed, the finally block is evaluated after the try body, and the program execution continues as normal.",
+          "description": "If no exception is thrown during the ekonstuation of the try body, no catch blocks are executed, the finally block is ekonstuated after the try body, and the program execution continues as normal.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "main"
@@ -175,7 +175,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack",
+          "description": "If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/neg/3.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -187,7 +187,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "the finally block is evaluated after the evaluation of the matching catch block.",
+          "description": "the finally block is ekonstuated after the ekonstuation of the matching catch block.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/2.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -195,7 +195,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If an exception was thrown, but no catch block matched its type, the finally block is evaluated before propagating the exception up the call stack",
+          "description": "If an exception was thrown, but no catch block matched its type, the finally block is ekonstuated before propagating the exception up the call stack",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/3.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -203,7 +203,7 @@
         {
           "specVersion": "0.1-218",
           "casesNumber": 0,
-          "description": "If no exception is thrown during the evaluation of the try body, no catch blocks are executed, the finally block is evaluated after the try body, and the program execution continues as normal.",
+          "description": "If no exception is thrown during the ekonstuation of the try body, no catch blocks are executed, the finally block is ekonstuated after the try body, and the program execution continues as normal.",
           "path": "compiler/tests-spec/testData/codegen/box/linked/expressions/try-expression/p-5/pos/1.1.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"

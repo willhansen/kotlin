@@ -43,7 +43,7 @@ import org.jetbrains.kotlin.types.typeUtil.representativeUpperBound
  */
 internal class DataClassMembersGenerator(
     declarationGenerator: DeclarationGenerator,
-    private val generateBodies: Boolean
+    private konst generateBodies: Boolean
 ) : DeclarationGeneratorExtension(declarationGenerator) {
 
     fun generateSingleFieldValueClassMembers(ktClassOrObject: KtClassOrObject, irClass: IrClass) {
@@ -70,11 +70,11 @@ internal class DataClassMembersGenerator(
 
     private inner class MyDataClassMethodGenerator(
         ktClassOrObject: KtClassOrObject,
-        val irClass: IrClass,
-        val origin: IrDeclarationOrigin
+        konst irClass: IrClass,
+        konst origin: IrDeclarationOrigin
     ) : DataClassMethodGenerator(ktClassOrObject, declarationGenerator.context.bindingContext) {
 
-        private val irDataClassMembersGenerator = object : DataClassMembersGenerator(
+        private konst irDataClassMembersGenerator = object : DataClassMembersGenerator(
             context, context.symbolTable, irClass, ktClassOrObject.fqName, origin, generateBodies = generateBodies
         ) {
             override fun declareSimpleFunction(startOffset: Int, endOffset: Int, functionDescriptor: FunctionDescriptor): IrFunction =
@@ -86,7 +86,7 @@ internal class DataClassMembersGenerator(
 
             override fun getProperty(parameter: ValueParameterDescriptor?, irValueParameter: IrValueParameter?): IrProperty? =
                 parameter?.let {
-                    val property = getOrFail(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameter)
+                    konst property = getOrFail(BindingContext.VALUE_PARAMETER_AS_PROPERTY, parameter)
                     return getIrProperty(property)
                 }
 
@@ -95,7 +95,7 @@ internal class DataClassMembersGenerator(
 
             private fun MemberScope.findHashCodeFunctionOrNull() =
                 getContributedFunctions(Name.identifier("hashCode"), NoLookupLocation.FROM_BACKEND)
-                    .find { it.valueParameters.isEmpty() && it.extensionReceiverParameter == null }
+                    .find { it.konstueParameters.isEmpty() && it.extensionReceiverParameter == null }
 
             private fun getHashCodeFunction(type: KotlinType): FunctionDescriptor =
                 type.memberScope.findHashCodeFunctionOrNull()
@@ -105,7 +105,7 @@ internal class DataClassMembersGenerator(
                 type: KotlinType,
                 symbolResolve: (FunctionDescriptor) -> IrSimpleFunctionSymbol
             ): IrSimpleFunctionSymbol =
-                when (val typeConstructorDescriptor = type.constructor.declarationDescriptor) {
+                when (konst typeConstructorDescriptor = type.constructor.declarationDescriptor) {
                     is ClassDescriptor ->
                         if (KotlinBuiltIns.isArrayOrPrimitiveArray(typeConstructorDescriptor))
                             context.irBuiltIns.dataClassArrayMemberHashCodeSymbol
@@ -121,8 +121,8 @@ internal class DataClassMembersGenerator(
 
 
             inner class Psi2IrHashCodeFunctionInfo(
-                override val symbol: IrSimpleFunctionSymbol,
-                val substituted: CallableDescriptor
+                override konst symbol: IrSimpleFunctionSymbol,
+                konst substituted: CallableDescriptor
             ) : HashCodeFunctionInfo {
 
                 override fun commitSubstituted(irMemberAccessExpression: IrMemberAccessExpression<*>) {
@@ -133,7 +133,7 @@ internal class DataClassMembersGenerator(
 
             override fun getHashCodeFunctionInfo(type: IrType): HashCodeFunctionInfo {
                 var substituted: CallableDescriptor? = null
-                val symbol = getHashCodeFunction(type.toKotlinType()) { hashCodeDescriptor ->
+                konst symbol = getHashCodeFunction(type.toKotlinType()) { hashCodeDescriptor ->
                     substituted = hashCodeDescriptor
                     symbolTable.referenceSimpleFunction(hashCodeDescriptor.original)
                 }
@@ -144,16 +144,16 @@ internal class DataClassMembersGenerator(
         override fun generateComponentFunction(function: FunctionDescriptor, parameter: ValueParameterDescriptor) {
             if (!irClass.isData) return
 
-            val irProperty = irDataClassMembersGenerator.getProperty(parameter, null) ?: return
+            konst irProperty = irDataClassMembersGenerator.getProperty(parameter, null) ?: return
             irDataClassMembersGenerator.generateComponentFunction(function, irProperty)
         }
 
         override fun generateCopyFunction(function: FunctionDescriptor, constructorParameters: List<KtParameter>) {
             if (!irClass.isData) return
 
-            val dataClassConstructor = classDescriptor.unsubstitutedPrimaryConstructor
+            konst dataClassConstructor = classDescriptor.unsubstitutedPrimaryConstructor
                 ?: throw AssertionError("Data class should have a primary constructor: $classDescriptor")
-            val constructorSymbol = context.symbolTable.referenceConstructor(dataClassConstructor)
+            konst constructorSymbol = context.symbolTable.referenceConstructor(dataClassConstructor)
 
             irDataClassMembersGenerator.generateCopyFunction(function, constructorSymbol)
         }

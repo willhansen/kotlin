@@ -5,9 +5,9 @@
 // FILE: A.kt
 package lib
 
-inline class S(val string: String)
+inline class S(konst string: String)
 
-class Test(val s: S)
+class Test(konst s: S)
 
 // MODULE: main(lib)
 // FILE: B.kt

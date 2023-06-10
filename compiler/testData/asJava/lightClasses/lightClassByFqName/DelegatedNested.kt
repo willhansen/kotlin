@@ -2,7 +2,7 @@
 package p
 
 class B {
-    class A(private val f: I) : I by f {
+    class A(private konst f: I) : I by f {
     }
 }
 

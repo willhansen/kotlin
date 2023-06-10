@@ -20,24 +20,24 @@ import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.resolve.OverridingUtil.OverrideCompatibilityInfo
 import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 
-object DescriptorEquivalenceForOverrides {
+object DescriptorEquikonstenceForOverrides {
 
-    fun areEquivalent(
+    fun areEquikonstent(
         a: DeclarationDescriptor?,
         b: DeclarationDescriptor?,
         allowCopiesFromTheSameDeclaration: Boolean,
         distinguishExpectsAndNonExpects: Boolean = true
     ): Boolean {
         return when {
-            a is ClassDescriptor && b is ClassDescriptor -> areClassesEquivalent(a, b)
+            a is ClassDescriptor && b is ClassDescriptor -> areClassesEquikonstent(a, b)
 
-            a is TypeParameterDescriptor && b is TypeParameterDescriptor -> areTypeParametersEquivalent(
+            a is TypeParameterDescriptor && b is TypeParameterDescriptor -> areTypeParametersEquikonstent(
                 a,
                 b,
                 allowCopiesFromTheSameDeclaration
             )
 
-            a is CallableDescriptor && b is CallableDescriptor -> areCallableDescriptorsEquivalent(
+            a is CallableDescriptor && b is CallableDescriptor -> areCallableDescriptorsEquikonstent(
                 a,
                 b,
                 allowCopiesFromTheSameDeclaration = allowCopiesFromTheSameDeclaration,
@@ -51,22 +51,22 @@ object DescriptorEquivalenceForOverrides {
         }
     }
 
-    private fun areClassesEquivalent(a: ClassDescriptor, b: ClassDescriptor): Boolean {
+    private fun areClassesEquikonstent(a: ClassDescriptor, b: ClassDescriptor): Boolean {
         // type constructors are compared by fqName
         return a.typeConstructor == b.typeConstructor
     }
 
     @JvmOverloads
-    fun areTypeParametersEquivalent(
+    fun areTypeParametersEquikonstent(
         a: TypeParameterDescriptor,
         b: TypeParameterDescriptor,
         allowCopiesFromTheSameDeclaration: Boolean,
-        equivalentCallables: (DeclarationDescriptor?, DeclarationDescriptor?) -> Boolean = { _, _ -> false }
+        equikonstentCallables: (DeclarationDescriptor?, DeclarationDescriptor?) -> Boolean = { _, _ -> false }
     ): Boolean {
         if (a == b) return true
         if (a.containingDeclaration == b.containingDeclaration) return false
 
-        if (!ownersEquivalent(a, b, equivalentCallables, allowCopiesFromTheSameDeclaration)) return false
+        if (!ownersEquikonstent(a, b, equikonstentCallables, allowCopiesFromTheSameDeclaration)) return false
 
         return a.index == b.index // We ignore type parameter names
     }
@@ -77,7 +77,7 @@ object DescriptorEquivalenceForOverrides {
         return overriddenDescriptors.singleOrNull()?.singleSource()
     }
 
-    fun areCallableDescriptorsEquivalent(
+    fun areCallableDescriptorsEquikonstent(
         a: CallableDescriptor,
         b: CallableDescriptor,
         allowCopiesFromTheSameDeclaration: Boolean,
@@ -93,20 +93,20 @@ object DescriptorEquivalenceForOverrides {
             if (a.singleSource() != b.singleSource()) return false
         }
 
-        // Distinct locals are not equivalent
+        // Distinct locals are not equikonstent
         if (DescriptorUtils.isLocal(a) || DescriptorUtils.isLocal(b)) return false
 
-        if (!ownersEquivalent(a, b, { _, _ -> false }, allowCopiesFromTheSameDeclaration)) return false
+        if (!ownersEquikonstent(a, b, { _, _ -> false }, allowCopiesFromTheSameDeclaration)) return false
 
-        val overridingUtil = OverridingUtil.create(kotlinTypeRefiner) eq@{ c1, c2 ->
+        konst overridingUtil = OverridingUtil.create(kotlinTypeRefiner) eq@{ c1, c2 ->
             if (c1 == c2) return@eq true
 
-            val d1 = c1.declarationDescriptor
-            val d2 = c2.declarationDescriptor
+            konst d1 = c1.declarationDescriptor
+            konst d2 = c2.declarationDescriptor
 
             if (d1 !is TypeParameterDescriptor || d2 !is TypeParameterDescriptor) return@eq false
 
-            areTypeParametersEquivalent(d1, d2, allowCopiesFromTheSameDeclaration) { x, y -> x == a && y == b }
+            areTypeParametersEquikonstent(d1, d2, allowCopiesFromTheSameDeclaration) { x, y -> x == a && y == b }
         }
 
         return overridingUtil.isOverridableBy(a, b, null, !ignoreReturnType).result == OverrideCompatibilityInfo.Result.OVERRIDABLE
@@ -114,21 +114,21 @@ object DescriptorEquivalenceForOverrides {
 
     }
 
-    private fun ownersEquivalent(
+    private fun ownersEquikonstent(
         a: DeclarationDescriptor,
         b: DeclarationDescriptor,
-        equivalentCallables: (DeclarationDescriptor?, DeclarationDescriptor?) -> Boolean,
+        equikonstentCallables: (DeclarationDescriptor?, DeclarationDescriptor?) -> Boolean,
         allowCopiesFromTheSameDeclaration: Boolean
     ): Boolean {
-        val aOwner = a.containingDeclaration
-        val bOwner = b.containingDeclaration
+        konst aOwner = a.containingDeclaration
+        konst bOwner = b.containingDeclaration
 
-        // This check is needed when we call areTypeParametersEquivalent() from areCallableMemberDescriptorsEquivalent:
+        // This check is needed when we call areTypeParametersEquikonstent() from areCallableMemberDescriptorsEquikonstent:
         // if the type parameter owners are, e.g.,  functions, we'll go into infinite recursion here
         return if (aOwner is CallableMemberDescriptor || bOwner is CallableMemberDescriptor) {
-            equivalentCallables(aOwner, bOwner)
+            equikonstentCallables(aOwner, bOwner)
         } else {
-            areEquivalent(aOwner, bOwner, allowCopiesFromTheSameDeclaration)
+            areEquikonstent(aOwner, bOwner, allowCopiesFromTheSameDeclaration)
         }
     }
 

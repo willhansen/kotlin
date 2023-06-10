@@ -33,10 +33,10 @@ import c.d
 fun test(ab_c: c) {
     ab_c.ab_c()
 
-    val ab_c2: a.b.c = a.b.c()
+    konst ab_c2: a.b.c = a.b.c()
     ab_c2.ab_c()
 
-    val ab_c3 = a.b.c()
+    konst ab_c3 = a.b.c()
     ab_c3.ab_c()
 }
 
@@ -48,9 +48,9 @@ fun test2(ab_c: a.b.c) {
 fun test3() = d().getC()
 
 fun test4() {
-    val ab_c = test3()
+    konst ab_c = test3()
     ab_c.ab_c()
 
-    val ab_c2 = test3()
+    konst ab_c2 = test3()
     ab_c2.<!UNRESOLVED_REFERENCE!>a_bc<!>()
 }

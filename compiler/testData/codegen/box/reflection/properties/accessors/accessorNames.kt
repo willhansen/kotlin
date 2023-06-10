@@ -12,12 +12,12 @@ import kotlin.test.assertEquals
 var foo = ""
 var String.bar: String
     get() = this
-    set(value) {}
+    set(konstue) {}
 
 class A(var baz: Int) {
     var String.quux: String
         get() = this
-        set(value) {}
+        set(konstue) {}
 }
 
 fun box(): String {
@@ -30,7 +30,7 @@ fun box(): String {
     assertEquals("<get-baz>", A::baz.getter.name)
     assertEquals("<set-baz>", A::baz.setter.name)
 
-    val me = A::class.memberExtensionProperties.single() as KMutableProperty2<A, String, String>
+    konst me = A::class.memberExtensionProperties.single() as KMutableProperty2<A, String, String>
     assertEquals("<get-quux>", me.getter.name)
     assertEquals("<set-quux>", me.setter.name)
 

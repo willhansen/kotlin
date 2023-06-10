@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T> Expect<T>.and: Expect<T>
+public konst </*0*/ T> Expect<T>.and: Expect<T>
 public fun </*0*/ K> id(/*0*/ x: K): K
 public fun test(): Expect<kotlin.Int>.(Expect<kotlin.Int>.() -> kotlin.Unit) -> Expect<kotlin.Int>
 public infix fun </*0*/ T> Expect<T>.and(/*0*/ assertionCreator: Expect<T>.() -> kotlin.Unit): Expect<T>

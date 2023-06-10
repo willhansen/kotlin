@@ -13,17 +13,17 @@ import kotlin.reflect.KProperty
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
-abstract class DiagnosticList(internal val objectName: String) {
+abstract class DiagnosticList(internal konst objectName: String) {
     @Suppress("PropertyName")
     @PrivateForInline
-    val _groups = mutableListOf<AbstractDiagnosticGroup>()
+    konst _groups = mutableListOf<AbstractDiagnosticGroup>()
 
     @OptIn(PrivateForInline::class)
-    val groups: List<AbstractDiagnosticGroup>
+    konst groups: List<AbstractDiagnosticGroup>
         get() = _groups
 
     @OptIn(PrivateForInline::class)
-    val allDiagnostics: List<DiagnosticData>
+    konst allDiagnostics: List<DiagnosticData>
         get() = groups.flatMap { it.diagnostics }
 
 
@@ -32,18 +32,18 @@ abstract class DiagnosticList(internal val objectName: String) {
         thisRef: DiagnosticList,
         prop: KProperty<*>
     ): ReadOnlyProperty<DiagnosticList, DiagnosticGroup> {
-        val group = this
+        konst group = this
         _groups += group
         return ReadOnlyProperty { _, _ -> group }
     }
 
     @OptIn(PrivateForInline::class)
     operator fun plus(other: DiagnosticList): DiagnosticList {
-        val groupsByName = mutableMapOf<String, MutableList<AbstractDiagnosticGroup>>()
+        konst groupsByName = mutableMapOf<String, MutableList<AbstractDiagnosticGroup>>()
 
         fun collect(groups: List<AbstractDiagnosticGroup>) {
             for (group in groups) {
-                val list = groupsByName.getOrPut(group.name) { mutableListOf() }
+                konst list = groupsByName.getOrPut(group.name) { mutableListOf() }
                 list += group
             }
         }
@@ -51,7 +51,7 @@ abstract class DiagnosticList(internal val objectName: String) {
         collect(groups)
         collect(other.groups)
 
-        val resultingGroups = groupsByName.values.map {
+        konst resultingGroups = groupsByName.konstues.map {
             it.reduce { acc, group -> acc + group }
         }
 
@@ -67,14 +67,14 @@ abstract class DiagnosticList(internal val objectName: String) {
 }
 
 sealed class DiagnosticBuilder(
-    protected val containingObjectName: String,
-    protected val name: String,
-    protected val psiType: KType,
-    protected val positioningStrategy: PositioningStrategy,
+    protected konst containingObjectName: String,
+    protected konst name: String,
+    protected konst psiType: KType,
+    protected konst positioningStrategy: PositioningStrategy,
 ) {
     class Regular(
         containingObjectName: String,
-        private val severity: Severity,
+        private konst severity: Severity,
         name: String,
         psiType: KType,
         positioningStrategy: PositioningStrategy,
@@ -94,7 +94,7 @@ sealed class DiagnosticBuilder(
 
     class Deprecation(
         containingObjectName: String,
-        private val featureForError: LanguageFeature,
+        private konst featureForError: LanguageFeature,
         name: String,
         psiType: KType,
         positioningStrategy: PositioningStrategy,
@@ -113,7 +113,7 @@ sealed class DiagnosticBuilder(
     }
 
     @PrivateForInline
-    val parameters = mutableListOf<DiagnosticParameter>()
+    konst parameters = mutableListOf<DiagnosticParameter>()
 
     @OptIn(PrivateForInline::class)
     inline fun <reified T> parameter(name: String) {
@@ -129,6 +129,6 @@ sealed class DiagnosticBuilder(
     abstract fun build(): DiagnosticData
 
     companion object {
-        const val MAX_DIAGNOSTIC_PARAMETER_COUNT = 4
+        const konst MAX_DIAGNOSTIC_PARAMETER_COUNT = 4
     }
 }

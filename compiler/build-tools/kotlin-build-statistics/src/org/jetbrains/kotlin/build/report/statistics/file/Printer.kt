@@ -7,11 +7,11 @@ package org.jetbrains.kotlin.build.report.statistics.file
 
 import java.io.IOException
 
-private val LINE_SEPARATOR = System.getProperty("line.separator")
+private konst LINE_SEPARATOR = System.getProperty("line.separator")
 
 internal class Printer(
-    private val out: Appendable,
-    private val indentUnit: String = "  ",
+    private konst out: Appendable,
+    private konst indentUnit: String = "  ",
     private var indent: String = ""
 ) {
     private fun append(s: String) {

@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirLazyBlockImpl : FirLazyBlock() {
-    override val source: KtSourceElement? get() = error("FirLazyBlock should be calculated before accessing")
-    override val annotations: List<FirAnnotation> get() = error("FirLazyBlock should be calculated before accessing")
-    override val statements: List<FirStatement> get() = error("FirLazyBlock should be calculated before accessing")
-    override val typeRef: FirTypeRef get() = error("FirLazyBlock should be calculated before accessing")
+    override konst source: KtSourceElement? get() = error("FirLazyBlock should be calculated before accessing")
+    override konst annotations: List<FirAnnotation> get() = error("FirLazyBlock should be calculated before accessing")
+    override konst statements: List<FirStatement> get() = error("FirLazyBlock should be calculated before accessing")
+    override konst typeRef: FirTypeRef get() = error("FirLazyBlock should be calculated before accessing")
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
     }

@@ -18,8 +18,8 @@ fun del() = Delegate()
 // FILE: lib2.kt
 
 fun qux() = foo {
-    val f = object {
-        val a by del()
+    konst f = object {
+        konst a by del()
     }
 
     f.a

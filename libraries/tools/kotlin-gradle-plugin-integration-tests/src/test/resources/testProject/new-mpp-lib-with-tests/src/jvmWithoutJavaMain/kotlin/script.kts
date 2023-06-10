@@ -1,2 +1,2 @@
 
-val x = 0
+konst x = 0

@@ -23,9 +23,9 @@ import org.jetbrains.org.objectweb.asm.tree.AbstractInsnNode
 import org.jetbrains.org.objectweb.asm.tree.InsnList
 import org.jetbrains.org.objectweb.asm.tree.MethodInsnNode
 
-val PSEUDO_INSN_CALL_OWNER: String = "kotlin/jvm/internal/\$PseudoInsn"
+konst PSEUDO_INSN_CALL_OWNER: String = "kotlin/jvm/internal/\$PseudoInsn"
 
-enum class PseudoInsn(val signature: String = "()V") {
+enum class PseudoInsn(konst signature: String = "()V") {
     FIX_STACK_BEFORE_JUMP,
     FAKE_ALWAYS_TRUE_IFEQ("()I"),
     FAKE_ALWAYS_FALSE_IFEQ("()I"),
@@ -51,7 +51,7 @@ fun isPseudoInsn(insn: AbstractInsnNode): Boolean =
 
 fun parsePseudoInsnOrNull(insn: AbstractInsnNode): PseudoInsn? =
         if (isPseudoInsn(insn))
-            PseudoInsn.valueOf((insn as MethodInsnNode).name)
+            PseudoInsn.konstueOf((insn as MethodInsnNode).name)
         else null
 
 fun InstructionAdapter.fixStackAndJump(label: Label) {

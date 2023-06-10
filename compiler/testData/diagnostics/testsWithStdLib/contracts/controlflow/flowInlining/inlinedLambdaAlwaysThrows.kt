@@ -13,5 +13,5 @@ inline fun myRun(block: () -> Unit): Unit {
 
 fun test() {
     myRun { throw java.lang.IllegalArgumentException() }
-    <!UNREACHABLE_CODE!>val x: Int = 42<!>
+    <!UNREACHABLE_CODE!>konst x: Int = 42<!>
 }

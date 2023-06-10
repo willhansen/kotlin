@@ -106,10 +106,10 @@ public:
     }
 
     struct TestSupport : private Pinned {
-        static StackTrace constructFrom(std::initializer_list<void*> values) {
+        static StackTrace constructFrom(std::initializer_list<void*> konstues) {
             StackTrace result;
-            size_t elementsCount = std::min(values.size(), result.buffer_.size());
-            std::copy_n(values.begin(), elementsCount, result.buffer_.begin());
+            size_t elementsCount = std::min(konstues.size(), result.buffer_.size());
+            std::copy_n(konstues.begin(), elementsCount, result.buffer_.begin());
             result.size_ = elementsCount;
             return result;
         }
@@ -181,8 +181,8 @@ public:
     }
 
     struct TestSupport : private Pinned {
-        static StackTrace constructFrom(std::initializer_list<void*> values) {
-            std_support::vector<void*> traceElements(values);
+        static StackTrace constructFrom(std::initializer_list<void*> konstues) {
+            std_support::vector<void*> traceElements(konstues);
             return StackTrace(std::move(traceElements));
         }
     };
@@ -204,10 +204,10 @@ void PrintStackTraceStderr();
 
 template <size_t Capacity>
 struct std::hash<kotlin::StackTrace<Capacity>> {
-    size_t operator()(kotlin::StackTrace<Capacity> value) const {
+    size_t operator()(kotlin::StackTrace<Capacity> konstue) const {
         size_t result = 0;
         std::hash<void*> hasher;
-        for (void* p : value) {
+        for (void* p : konstue) {
             result += kotlin::CombineHash(result, hasher(p));
         }
         return result;

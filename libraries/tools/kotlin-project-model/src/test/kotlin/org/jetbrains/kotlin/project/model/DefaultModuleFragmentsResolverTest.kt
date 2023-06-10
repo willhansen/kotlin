@@ -11,17 +11,17 @@ import org.junit.jupiter.api.Assumptions.assumeTrue
 import org.junit.jupiter.api.Test
 
 internal class DefaultModuleFragmentsResolverTest {
-    val bundleFoo = simpleModuleBundle("foo")
-    val bundleBar = simpleModuleBundle("bar")
+    konst bundleFoo = simpleModuleBundle("foo")
+    konst bundleBar = simpleModuleBundle("bar")
 
-    val fragmentResolver = KpmDefaultFragmentsResolver(MatchVariantsByExactAttributes())
+    konst fragmentResolver = KpmDefaultFragmentsResolver(MatchVariantsByExactAttributes())
 
     @Test
     fun testFragmentVisibility() {
-        val moduleFooMain = bundleFoo.main
-        val moduleBarMain = bundleBar.main
+        konst moduleFooMain = bundleFoo.main
+        konst moduleBarMain = bundleBar.main
 
-        val expectedVisibleFragments = mapOf(
+        konst expectedVisibleFragments = mapOf(
             "common" to setOf("common"),
             "jvmAndJs" to setOf("common", "jvmAndJs"),
             "jsAndLinux" to setOf("common", "jsAndLinux"),
@@ -31,9 +31,9 @@ internal class DefaultModuleFragmentsResolverTest {
         )
 
         moduleBarMain.fragments.forEach { consumingFragment ->
-            val result = fragmentResolver.getChosenFragments(consumingFragment, moduleFooMain)
+            konst result = fragmentResolver.getChosenFragments(consumingFragment, moduleFooMain)
             assertTrue(result is KpmFragmentResolution.ChosenFragments)
-            val expected = expectedVisibleFragments.getValue(consumingFragment.fragmentName)
+            konst expected = expectedVisibleFragments.getValue(consumingFragment.fragmentName)
             assertEquals(expected, (result as KpmFragmentResolution.ChosenFragments).visibleFragments.map { it.fragmentName }.toSet())
         }
     }
@@ -43,15 +43,15 @@ internal class DefaultModuleFragmentsResolverTest {
         // TODO this behavior replicates 1.3.x MPP where a mismatched variant gets ignored and only matched variants are intersected.
         //  This helps with non-published local native targets.
         //  Consider making it more strict when we have a solution to the original problem.
-        val dependingModule = simpleModuleBundle("baz").main.apply {
+        konst dependingModule = simpleModuleBundle("baz").main.apply {
             variant("linux").variantAttributes.replace(KotlinNativeTargetAttribute, "notLinux")
         }
-        val moduleFooMain = bundleFoo.main
-        val variantResolution = MatchVariantsByExactAttributes().getChosenVariant(dependingModule.variant("linux"), moduleFooMain)
+        konst moduleFooMain = bundleFoo.main
+        konst variantResolution = MatchVariantsByExactAttributes().getChosenVariant(dependingModule.variant("linux"), moduleFooMain)
         assumeTrue(variantResolution is KpmVariantResolution.KpmNoVariantMatch)
 
-        val (commonMainResult, jsAndLinuxResult) = listOf("common", "jsAndLinux").map {
-            val chosenFragments = fragmentResolver.getChosenFragments(dependingModule.fragment(it), moduleFooMain)
+        konst (commonMainResult, jsAndLinuxResult) = listOf("common", "jsAndLinux").map {
+            konst chosenFragments = fragmentResolver.getChosenFragments(dependingModule.fragment(it), moduleFooMain)
             assertTrue(chosenFragments is KpmFragmentResolution.ChosenFragments)
             (chosenFragments as KpmFragmentResolution.ChosenFragments).visibleFragments.map { it.fragmentName }.toSet()
         }

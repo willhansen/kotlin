@@ -1,3 +1,3 @@
-val java.util.Map<*,*>.size : Int
+konst java.util.Map<*,*>.size : Int
 
 fun java.util.Map<*,*>.size() : Int = 1

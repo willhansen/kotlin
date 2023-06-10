@@ -18,13 +18,13 @@ public class A {
 }
 
 public class M1 {
-    public val a: A = A()
-    public val b: A.B = A.B()
-    public val c: A.C = A.C
-    public val d: A.Companion.D = A.Companion.D()
-    public val e: A.Companion.D.E = A.Companion.D.E
-    public val f: A.F = A().F()
-    public val g: A.Companion.G = A.Companion.G()
+    public konst a: A = A()
+    public konst b: A.B = A.B()
+    public konst c: A.C = A.C
+    public konst d: A.Companion.D = A.Companion.D()
+    public konst e: A.Companion.D.E = A.Companion.D.E
+    public konst f: A.F = A().F()
+    public konst g: A.Companion.G = A.Companion.G()
 }
 
 // MODULE: m2

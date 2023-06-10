@@ -1,3 +1,3 @@
 open class B {
-    val x: String = ""
+    konst x: String = ""
 }

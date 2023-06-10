@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.serialization.SerializerExtensionProtocol
 import org.jetbrains.kotlin.serialization.deserialization.*
 
 class AnnotationLoaderForStubBuilderImpl(
-    private val protocol: SerializerExtensionProtocol
+    private konst protocol: SerializerExtensionProtocol
 ) : AnnotationLoader<AnnotationWithArgs> {
 
     override fun loadClassAnnotations(container: ProtoContainer.Class): List<AnnotationWithArgs> =
@@ -26,7 +26,7 @@ class AnnotationLoaderForStubBuilderImpl(
         proto: MessageLite,
         kind: AnnotatedCallableKind
     ): List<AnnotationWithArgs> {
-        val annotations = when (proto) {
+        konst annotations = when (proto) {
             is ProtoBuf.Constructor -> proto.getExtension(protocol.constructorAnnotation)
             is ProtoBuf.Function -> proto.getExtension(protocol.functionAnnotation)
             is ProtoBuf.Property -> when (kind) {
@@ -74,7 +74,7 @@ class AnnotationLoaderForStubBuilderImpl(
         proto.getExtension(protocol.typeParameterAnnotation).orEmpty().map { loadAnnotation(it, nameResolver) }
 
     override fun loadAnnotation(proto: ProtoBuf.Annotation, nameResolver: NameResolver): AnnotationWithArgs {
-        val valueMap = proto.argumentList.associate { nameResolver.getName(it.nameId) to createConstantValue(it.value, nameResolver) }
-        return AnnotationWithArgs(nameResolver.getClassId(proto.id), valueMap)
+        konst konstueMap = proto.argumentList.associate { nameResolver.getName(it.nameId) to createConstantValue(it.konstue, nameResolver) }
+        return AnnotationWithArgs(nameResolver.getClassId(proto.id), konstueMap)
     }
 }

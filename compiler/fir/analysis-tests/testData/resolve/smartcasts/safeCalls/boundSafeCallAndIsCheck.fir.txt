@@ -1,6 +1,6 @@
 FILE: boundSafeCallAndIsCheck.kt
     public abstract interface A : R|kotlin/Any| {
-        public abstract val b: R|B|
+        public abstract konst b: R|B|
             public get(): R|B|
 
     }
@@ -14,7 +14,7 @@ FILE: boundSafeCallAndIsCheck.kt
         ^foo String()
     }
     public final fun main(a: R|A?|): R|kotlin/Unit| {
-        lval lb: R|B?| = R|<local>/a|?.{ $subj$.R|/A.b| }
+        lkonst lb: R|B?| = R|<local>/a|?.{ $subj$.R|/A.b| }
         when () {
             (R|<local>/lb| !is R|C|) ->  {
                 ^main Unit

@@ -183,7 +183,7 @@ public final class DebugBuiltInsProtoBuf {
       "ion:w\n\032property_setter_annotation\022\'.org.",
       "jetbrains.kotlin.metadata.Property\030\231\001 \003(" +
       "\0132).org.jetbrains.kotlin.metadata.Annota" +
-      "tion:~\n\022compile_time_value\022\'.org.jetbrai" +
+      "tion:~\n\022compile_time_konstue\022\'.org.jetbrai" +
       "ns.kotlin.metadata.Property\030\227\001 \001(\01328.org" +
       ".jetbrains.kotlin.metadata.Annotation.Ar" +
       "gument.Value:s\n\025enum_entry_annotation\022(." +

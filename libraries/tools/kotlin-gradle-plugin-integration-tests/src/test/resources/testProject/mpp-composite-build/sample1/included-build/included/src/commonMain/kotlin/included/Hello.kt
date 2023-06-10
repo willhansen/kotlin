@@ -1,6 +1,6 @@
 package included
 
-expect val sourceSet: String
+expect konst sourceSet: String
 
 fun greet() {
     println("Hello from sourceSet $sourceSet")

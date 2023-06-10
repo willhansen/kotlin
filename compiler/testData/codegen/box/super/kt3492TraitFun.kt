@@ -8,12 +8,12 @@ open class B : ATrait {
 
 class C : B() {
     inner class D {
-        val foo: String = super<B>@C.foo2()
+        konst foo: String = super<B>@C.foo2()
     }
 }
 
 fun box() : String {
-    val obj = C().D();
+    konst obj = C().D();
     return obj.foo
 }
 

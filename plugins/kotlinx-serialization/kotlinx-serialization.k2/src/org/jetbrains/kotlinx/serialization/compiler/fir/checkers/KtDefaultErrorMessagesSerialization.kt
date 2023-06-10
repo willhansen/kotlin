@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.diagnostics.rendering.CommonRenderers
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirDiagnosticRenderers
 
 object KtDefaultErrorMessagesSerialization : BaseDiagnosticRendererFactory() {
-    override val MAP = KtDiagnosticFactoryToRendererMap("Serialization").apply {
+    override konst MAP = KtDiagnosticFactoryToRendererMap("Serialization").apply {
         put(
             FirSerializationErrors.INLINE_CLASSES_NOT_SUPPORTED,
             "Inline classes require runtime serialization library version at least {0}, while your classpath has {1}.",
@@ -147,7 +147,7 @@ object KtDefaultErrorMessagesSerialization : BaseDiagnosticRendererFactory() {
 
         put(
             FirSerializationErrors.INCONSISTENT_INHERITABLE_SERIALINFO,
-            "Argument values for inheritable serial info annotation ''{0}'' must be the same as the values in parent type ''{1}''",
+            "Argument konstues for inheritable serial info annotation ''{0}'' must be the same as the konstues in parent type ''{1}''",
             FirDiagnosticRenderers.RENDER_TYPE,
             FirDiagnosticRenderers.RENDER_TYPE
         )

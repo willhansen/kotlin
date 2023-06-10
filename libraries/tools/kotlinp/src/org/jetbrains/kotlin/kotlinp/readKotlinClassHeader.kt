@@ -14,7 +14,7 @@ internal fun File.readKotlinClassHeader(): Metadata? {
     var header: Metadata? = null
 
     try {
-        val metadataDesc = Type.getDescriptor(Metadata::class.java)
+        konst metadataDesc = Type.getDescriptor(Metadata::class.java)
         ClassReader(FileInputStream(this)).accept(object : ClassVisitor(Opcodes.API_VERSION) {
             override fun visitAnnotation(desc: String, visible: Boolean): AnnotationVisitor? =
                 if (desc == metadataDesc) readMetadataVisitor { header = it }
@@ -37,13 +37,13 @@ private fun readMetadataVisitor(output: (Metadata) -> Unit): AnnotationVisitor =
         var packageName: String? = null
         var extraInt: Int? = null
 
-        override fun visit(name: String?, value: Any?) {
+        override fun visit(name: String?, konstue: Any?) {
             when (name) {
-                "k" -> kind = value as? Int
-                "mv" -> metadataVersion = value as? IntArray
-                "xs" -> extraString = value as? String
-                "xi" -> extraInt = value as? Int
-                "pn" -> packageName = value as? String
+                "k" -> kind = konstue as? Int
+                "mv" -> metadataVersion = konstue as? IntArray
+                "xs" -> extraString = konstue as? String
+                "xi" -> extraInt = konstue as? Int
+                "pn" -> packageName = konstue as? String
             }
         }
 
@@ -56,10 +56,10 @@ private fun readMetadataVisitor(output: (Metadata) -> Unit): AnnotationVisitor =
 
         private fun stringArrayVisitor(output: (Array<String>) -> Unit): AnnotationVisitor {
             return object : AnnotationVisitor(Opcodes.API_VERSION) {
-                val strings = mutableListOf<String>()
+                konst strings = mutableListOf<String>()
 
-                override fun visit(name: String?, value: Any?) {
-                    (value as? String)?.let(strings::add)
+                override fun visit(name: String?, konstue: Any?) {
+                    (konstue as? String)?.let(strings::add)
                 }
 
                 override fun visitEnd() {

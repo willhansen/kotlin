@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirComparisonExpression : FirExpression() {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract val operation: FirOperation
-    abstract val compareToCall: FirFunctionCall
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract konst operation: FirOperation
+    abstract konst compareToCall: FirFunctionCall
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitComparisonExpression(this, data)
 

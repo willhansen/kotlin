@@ -23,17 +23,17 @@ class ArchiveReproducibilityTest {
 
     @Test
     fun `test simple multiplatform project`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 js { browser() }
                 linuxX64()
                 linuxArm64()
 
-                val commonMain = sourceSets.getByName("commonMain")
-                val linuxX64Main = sourceSets.getByName("linuxX64Main")
-                val linuxArm64Main = sourceSets.getByName("linuxArm64Main")
-                val nativeMain = sourceSets.create("nativeMain")
+                konst commonMain = sourceSets.getByName("commonMain")
+                konst linuxX64Main = sourceSets.getByName("linuxX64Main")
+                konst linuxArm64Main = sourceSets.getByName("linuxArm64Main")
+                konst nativeMain = sourceSets.create("nativeMain")
 
                 nativeMain.dependsOn(commonMain)
                 linuxX64Main.dependsOn(nativeMain)
@@ -41,7 +41,7 @@ class ArchiveReproducibilityTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
         project.assertAllArchiveTasksAreReproducible()
     }
 

@@ -13,13 +13,13 @@ class Baz : Bar("") {
 }
 
 fun box(): String {
-    val p1: KProperty1<Bar, String> = Bar::foo
+    konst p1: KProperty1<Bar, String> = Bar::foo
     if (p1 is KMutableProperty<*>) return "Fail: p1 is a KMutableProperty"
 
-    val p2 = Baz().ref()
+    konst p2 = Baz().ref()
     if (p2 is KMutableProperty<*>) return "Fail: p2 is a KMutableProperty"
 
-    val p3 = Bar("")::foo
+    konst p3 = Bar("")::foo
     if (p3 is KMutableProperty<*>) return "Fail: p3 is a KMutableProperty"
 
     return p1.get(Bar("OK"))

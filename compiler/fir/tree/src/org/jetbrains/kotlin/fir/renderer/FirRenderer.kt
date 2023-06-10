@@ -33,25 +33,25 @@ import java.util.*
 
 class FirRenderer(
     builder: StringBuilder = StringBuilder(),
-    override val annotationRenderer: FirAnnotationRenderer? = FirAnnotationRenderer(),
-    override val bodyRenderer: FirBodyRenderer? = FirBodyRenderer(),
-    override val callArgumentsRenderer: FirCallArgumentsRenderer? = FirCallArgumentsRenderer(),
-    override val classMemberRenderer: FirClassMemberRenderer? = FirClassMemberRenderer(),
-    override val contractRenderer: ConeContractRenderer? = ConeContractRenderer(),
-    override val declarationRenderer: FirDeclarationRenderer? = FirDeclarationRenderer(),
-    override val idRenderer: ConeIdRenderer = ConeIdRendererForDebugging(),
-    override val modifierRenderer: FirModifierRenderer? = FirAllModifierRenderer(),
-    override val packageDirectiveRenderer: FirPackageDirectiveRenderer? = null,
-    override val propertyAccessorRenderer: FirPropertyAccessorRenderer? = FirPropertyAccessorRenderer(),
-    override val resolvePhaseRenderer: FirResolvePhaseRenderer? = null,
-    override val typeRenderer: ConeTypeRenderer = ConeTypeRendererForDebugging(),
-    override val valueParameterRenderer: FirValueParameterRenderer? = FirValueParameterRenderer(),
-    override val errorExpressionRenderer: FirErrorExpressionRenderer? = FirErrorExpressionOnlyErrorRenderer(),
-    override val fileAnnotationsContainerRenderer: FirFileAnnotationsContainerRenderer? = null,
+    override konst annotationRenderer: FirAnnotationRenderer? = FirAnnotationRenderer(),
+    override konst bodyRenderer: FirBodyRenderer? = FirBodyRenderer(),
+    override konst callArgumentsRenderer: FirCallArgumentsRenderer? = FirCallArgumentsRenderer(),
+    override konst classMemberRenderer: FirClassMemberRenderer? = FirClassMemberRenderer(),
+    override konst contractRenderer: ConeContractRenderer? = ConeContractRenderer(),
+    override konst declarationRenderer: FirDeclarationRenderer? = FirDeclarationRenderer(),
+    override konst idRenderer: ConeIdRenderer = ConeIdRendererForDebugging(),
+    override konst modifierRenderer: FirModifierRenderer? = FirAllModifierRenderer(),
+    override konst packageDirectiveRenderer: FirPackageDirectiveRenderer? = null,
+    override konst propertyAccessorRenderer: FirPropertyAccessorRenderer? = FirPropertyAccessorRenderer(),
+    override konst resolvePhaseRenderer: FirResolvePhaseRenderer? = null,
+    override konst typeRenderer: ConeTypeRenderer = ConeTypeRendererForDebugging(),
+    override konst konstueParameterRenderer: FirValueParameterRenderer? = FirValueParameterRenderer(),
+    override konst errorExpressionRenderer: FirErrorExpressionRenderer? = FirErrorExpressionOnlyErrorRenderer(),
+    override konst fileAnnotationsContainerRenderer: FirFileAnnotationsContainerRenderer? = null,
 ) : FirRendererComponents {
 
-    override val visitor = Visitor()
-    override val printer = FirPrinter(builder)
+    override konst visitor = Visitor()
+    override konst printer = FirPrinter(builder)
 
     companion object {
         fun noAnnotationBodiesAccessorAndArguments(): FirRenderer =
@@ -84,7 +84,7 @@ class FirRenderer(
         resolvePhaseRenderer?.components = this
         typeRenderer.builder = builder
         typeRenderer.idRenderer = idRenderer
-        valueParameterRenderer?.components = this
+        konstueParameterRenderer?.components = this
         errorExpressionRenderer?.components = this
         fileAnnotationsContainerRenderer?.components = this
     }
@@ -200,14 +200,14 @@ class FirRenderer(
             renderContexts(callableDeclaration.contextReceivers)
             annotationRenderer?.render(callableDeclaration)
             if (callableDeclaration is FirProperty) {
-                val backingField = callableDeclaration.backingField
+                konst backingField = callableDeclaration.backingField
                 if (backingField?.annotations?.isNotEmpty() == true) {
                     print("field:")
                     annotationRenderer?.render(backingField)
                 }
             }
             visitMemberDeclaration(callableDeclaration)
-            val receiverParameter = callableDeclaration.receiverParameter
+            konst receiverParameter = callableDeclaration.receiverParameter
             if (callableDeclaration !is FirProperty || callableDeclaration.isCatchParameter != true) {
                 print(" ")
             }
@@ -227,7 +227,7 @@ class FirRenderer(
             }
 
             if (callableDeclaration is FirFunction) {
-                valueParameterRenderer?.renderParameters(callableDeclaration.valueParameters)
+                konstueParameterRenderer?.renderParameters(callableDeclaration.konstueParameters)
             }
             print(": ")
             callableDeclaration.returnTypeRef.accept(this)
@@ -360,11 +360,11 @@ class FirRenderer(
             declarationRenderer?.render(constructor)
 
             constructor.typeParameters.renderTypeParameters()
-            valueParameterRenderer?.renderParameters(constructor.valueParameters)
+            konstueParameterRenderer?.renderParameters(constructor.konstueParameters)
             print(": ")
             constructor.returnTypeRef.accept(this)
-            val body = constructor.body
-            val delegatedConstructor = constructor.delegatedConstructor
+            konst body = constructor.body
+            konst delegatedConstructor = constructor.delegatedConstructor
             if (body == null) {
                 bodyRenderer?.renderDelegatedConstructor(delegatedConstructor)
             }
@@ -375,7 +375,7 @@ class FirRenderer(
             annotationRenderer?.render(propertyAccessor)
             modifierRenderer?.renderModifiers(propertyAccessor)
             declarationRenderer?.render(propertyAccessor)
-            valueParameterRenderer?.renderParameters(propertyAccessor.valueParameters)
+            konstueParameterRenderer?.renderParameters(propertyAccessor.konstueParameters)
             print(": ")
             propertyAccessor.returnTypeRef.accept(this)
             contractRenderer?.render(propertyAccessor)
@@ -391,19 +391,19 @@ class FirRenderer(
             modifierRenderer?.renderModifiers(anonymousFunction)
             declarationRenderer?.render(anonymousFunction)
             print(" ")
-            val receiverParameter = anonymousFunction.receiverParameter
+            konst receiverParameter = anonymousFunction.receiverParameter
             if (receiverParameter != null) {
                 receiverParameter.typeRef.accept(this)
                 print(".")
             }
             print("<anonymous>")
-            if (anonymousFunction.valueParameters.isEmpty() &&
+            if (anonymousFunction.konstueParameters.isEmpty() &&
                 anonymousFunction.hasExplicitParameterList &&
                 anonymousFunction.returnTypeRef is FirImplicitTypeRef
             ) {
                 print("(<no-parameters>)")
             }
-            valueParameterRenderer?.renderParameters(anonymousFunction.valueParameters)
+            konstueParameterRenderer?.renderParameters(anonymousFunction.konstueParameters)
             print(": ")
             anonymousFunction.returnTypeRef.accept(this)
             print(" <inline=${anonymousFunction.inlineStatus}")
@@ -415,7 +415,7 @@ class FirRenderer(
         }
 
         override fun visitFunction(function: FirFunction) {
-            valueParameterRenderer?.renderParameters(function.valueParameters)
+            konstueParameterRenderer?.renderParameters(function.konstueParameters)
             declarationRenderer?.render(function)
             bodyRenderer?.render(function)
         }
@@ -449,10 +449,10 @@ class FirRenderer(
             typeParameter.variance.renderVariance()
             print(typeParameter.name)
 
-            val meaningfulBounds = typeParameter.bounds.filter {
+            konst meaningfulBounds = typeParameter.bounds.filter {
                 if (it !is FirResolvedTypeRef) return@filter true
                 if (!it.type.isNullable) return@filter true
-                val type = it.type as? ConeLookupTagBasedType ?: return@filter true
+                konst type = it.type as? ConeLookupTagBasedType ?: return@filter true
                 (type.lookupTag as? ConeClassLikeLookupTag)?.classId != StandardClassIds.Any
             }
 
@@ -473,8 +473,8 @@ class FirRenderer(
             print("\$subj\$")
         }
 
-        override fun visitValueParameter(valueParameter: FirValueParameter) {
-            valueParameterRenderer?.renderParameter(valueParameter)
+        override fun visitValueParameter(konstueParameter: FirValueParameter) {
+            konstueParameterRenderer?.renderParameter(konstueParameter)
         }
 
         override fun visitImport(import: FirImport) {
@@ -492,12 +492,12 @@ class FirRenderer(
         override fun visitReturnExpression(returnExpression: FirReturnExpression) {
             annotationRenderer?.render(returnExpression)
             print("^")
-            val target = returnExpression.target
-            val labeledElement = target.labeledElement
+            konst target = returnExpression.target
+            konst labeledElement = target.labeledElement
             if (labeledElement is FirSimpleFunction) {
                 print("${labeledElement.name}")
             } else {
-                val labelName = target.labelName
+                konst labelName = target.labelName
                 if (labelName != null) {
                     print("@$labelName")
                 }
@@ -507,7 +507,7 @@ class FirRenderer(
         }
 
         override fun visitWhenBranch(whenBranch: FirWhenBranch) {
-            val condition = whenBranch.condition
+            konst condition = whenBranch.condition
             if (condition is FirElseIfTrueCondition) {
                 print("else")
             } else {
@@ -520,7 +520,7 @@ class FirRenderer(
         override fun visitWhenExpression(whenExpression: FirWhenExpression) {
             annotationRenderer?.render(whenExpression)
             print("when (")
-            val subjectVariable = whenExpression.subjectVariable
+            konst subjectVariable = whenExpression.subjectVariable
             if (subjectVariable != null) {
                 subjectVariable.accept(this)
             } else {
@@ -549,13 +549,13 @@ class FirRenderer(
                 print(")")
                 catchClause.block.accept(this)
             }
-            val finallyBlock = tryExpression.finallyBlock ?: return
+            konst finallyBlock = tryExpression.finallyBlock ?: return
             print("finally")
             finallyBlock.accept(this)
         }
 
         override fun visitDoWhileLoop(doWhileLoop: FirDoWhileLoop) {
-            val label = doWhileLoop.label
+            konst label = doWhileLoop.label
             if (label != null) {
                 print("${label.name}@")
             }
@@ -567,7 +567,7 @@ class FirRenderer(
         }
 
         override fun visitWhileLoop(whileLoop: FirWhileLoop) {
-            val label = whileLoop.label
+            konst label = whileLoop.label
             if (label != null) {
                 print("${label.name}@")
             }
@@ -577,7 +577,7 @@ class FirRenderer(
             whileLoop.block.accept(this)
         }
 
-        private val loopJumpStack = Stack<FirLoopJump>()
+        private konst loopJumpStack = Stack<FirLoopJump>()
 
         override fun visitLoopJump(loopJump: FirLoopJump) {
             if (loopJumpStack.contains(loopJump)) {
@@ -593,8 +593,8 @@ class FirRenderer(
                 return
             }
             loopJumpStack.push(loopJump)
-            val target = loopJump.target
-            val labeledElement = target.labeledElement
+            konst target = loopJump.target
+            konst labeledElement = target.labeledElement
             print("@@@[")
             labeledElement.condition.accept(this)
             print("] ")
@@ -632,16 +632,16 @@ class FirRenderer(
 
         override fun <T> visitConstExpression(constExpression: FirConstExpression<T>) {
             annotationRenderer?.render(constExpression)
-            val kind = constExpression.kind
-            val value = constExpression.value
+            konst kind = constExpression.kind
+            konst konstue = constExpression.konstue
             print("$kind(")
-            if (value !is Char) {
-                print(value.toString())
+            if (konstue !is Char) {
+                print(konstue.toString())
             } else {
-                if (value.code in 32..127) {
-                    print(value)
+                if (konstue.code in 32..127) {
+                    print(konstue)
                 } else {
-                    print(value.code)
+                    print(konstue.code)
                 }
             }
             print(")")
@@ -705,7 +705,7 @@ class FirRenderer(
 
         override fun visitDelegatedConstructorCall(delegatedConstructorCall: FirDelegatedConstructorCall) {
             if (delegatedConstructorCall !is FirLazyDelegatedConstructorCall) {
-                val dispatchReceiver = delegatedConstructorCall.dispatchReceiver
+                konst dispatchReceiver = delegatedConstructorCall.dispatchReceiver
                 if (dispatchReceiver !is FirNoReceiverExpression) {
                     dispatchReceiver.accept(this)
                     print(".")
@@ -803,7 +803,7 @@ class FirRenderer(
             typeRenderer.renderAsPossibleFunctionType(
                 resolvedTypeRef.type,
                 l@{
-                    val classId = it.classId ?: return@l null
+                    konst classId = it.classId ?: return@l null
                     FunctionTypeKindExtractor.Default.getFunctionalClassKind(classId.packageFqName, classId.shortClassName.asString())
                 }
             )
@@ -876,8 +876,8 @@ class FirRenderer(
 
         override fun visitResolvedNamedReference(resolvedNamedReference: FirResolvedNamedReference) {
             print("R|")
-            val symbol = resolvedNamedReference.resolvedSymbol
-            val isSubstitutionOverride = (symbol.fir as? FirCallableDeclaration)?.isSubstitutionOverride == true
+            konst symbol = resolvedNamedReference.resolvedSymbol
+            konst isSubstitutionOverride = (symbol.fir as? FirCallableDeclaration)?.isSubstitutionOverride == true
 
             if (isSubstitutionOverride) {
                 print("SubstitutionOverride<")
@@ -932,8 +932,8 @@ class FirRenderer(
 
         override fun visitThisReference(thisReference: FirThisReference) {
             print("this")
-            val labelName = thisReference.labelName
-            val symbol = thisReference.boundSymbol
+            konst labelName = thisReference.labelName
+            konst symbol = thisReference.boundSymbol
             when {
                 symbol != null -> print("@R|${symbol.render()}|")
                 labelName != null -> print("@$labelName#")
@@ -951,9 +951,9 @@ class FirRenderer(
         }
 
         private fun visitQualifiedAccessExpressionReceivers(qualifiedAccess: FirQualifiedAccessExpression) {
-            val explicitReceiver = qualifiedAccess.explicitReceiver
-            val dispatchReceiver = qualifiedAccess.dispatchReceiver
-            val extensionReceiver = qualifiedAccess.extensionReceiver
+            konst explicitReceiver = qualifiedAccess.explicitReceiver
+            konst dispatchReceiver = qualifiedAccess.dispatchReceiver
+            konst extensionReceiver = qualifiedAccess.extensionReceiver
             var hasSomeReceiver = true
             when {
                 dispatchReceiver !is FirNoReceiverExpression && extensionReceiver !is FirNoReceiverExpression -> {
@@ -1022,7 +1022,7 @@ class FirRenderer(
         }
 
         override fun visitDesugaredAssignmentValueReferenceExpression(desugaredAssignmentValueReferenceExpression: FirDesugaredAssignmentValueReferenceExpression) {
-            desugaredAssignmentValueReferenceExpression.expressionRef.value.accept(this)
+            desugaredAssignmentValueReferenceExpression.expressionRef.konstue.accept(this)
         }
 
         override fun visitVariableAssignment(variableAssignment: FirVariableAssignment) {
@@ -1079,7 +1079,7 @@ class FirRenderer(
 
         override fun visitIncrementDecrementExpression(incrementDecrementExpression: FirIncrementDecrementExpression) {
             annotationRenderer?.render(incrementDecrementExpression)
-            val operator = if (incrementDecrementExpression.operationName == OperatorNameConventions.INC) "++" else "--"
+            konst operator = if (incrementDecrementExpression.operationName == OperatorNameConventions.INC) "++" else "--"
             if (incrementDecrementExpression.isPrefix) print(operator)
             incrementDecrementExpression.expression.accept(visitor)
             if (!incrementDecrementExpression.isPrefix) print(operator)
@@ -1128,7 +1128,7 @@ class FirRenderer(
         override fun visitResolvedQualifier(resolvedQualifier: FirResolvedQualifier) {
             annotationRenderer?.render(resolvedQualifier)
             print("Q|")
-            val classId = resolvedQualifier.classId
+            konst classId = resolvedQualifier.classId
             if (classId != null) {
                 print(classId.asString())
             } else {

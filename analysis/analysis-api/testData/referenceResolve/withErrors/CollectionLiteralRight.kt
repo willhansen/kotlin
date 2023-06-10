@@ -1,2 +1,2 @@
-val abc: IntArray = [1, 2, 3<caret>]
+konst abc: IntArray = [1, 2, 3<caret>]
 

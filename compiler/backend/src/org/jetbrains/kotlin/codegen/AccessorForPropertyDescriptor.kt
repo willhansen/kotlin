@@ -28,16 +28,16 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.types.KotlinType
 
 open class AccessorForPropertyDescriptor private constructor(
-    override val calleeDescriptor: PropertyDescriptor,
+    override konst calleeDescriptor: PropertyDescriptor,
     propertyType: KotlinType,
     receiverType: KotlinType?,
     dispatchReceiverParameter: ReceiverParameterDescriptor?,
     containingDeclaration: DeclarationDescriptor,
-    override val superCallTarget: ClassDescriptor?,
-    val accessorSuffix: String,
-    val isWithSyntheticGetterAccessor: Boolean,
-    val isWithSyntheticSetterAccessor: Boolean,
-    final override val accessorKind: AccessorKind
+    override konst superCallTarget: ClassDescriptor?,
+    konst accessorSuffix: String,
+    konst isWithSyntheticGetterAccessor: Boolean,
+    konst isWithSyntheticSetterAccessor: Boolean,
+    final override konst accessorKind: AccessorKind
 ) : PropertyDescriptorImpl(
     containingDeclaration,
     null,
@@ -104,13 +104,13 @@ open class AccessorForPropertyDescriptor private constructor(
             original.contextReceiverParameters
         )
 
-        val getterDescriptor =
+        konst getterDescriptor =
             if (isWithSyntheticGetterAccessor) Getter(this, accessorKind) else calleeDescriptor.getter as PropertyGetterDescriptorImpl?
-        val setterDescriptor = if (isWithSyntheticSetterAccessor) Setter(this, accessorKind) else calleeDescriptor.setter
+        konst setterDescriptor = if (isWithSyntheticSetterAccessor) Setter(this, accessorKind) else calleeDescriptor.setter
         initialize(getterDescriptor, setterDescriptor)
     }
 
-    class Getter(property: AccessorForPropertyDescriptor, override val accessorKind: AccessorKind) : PropertyGetterDescriptorImpl(
+    class Getter(property: AccessorForPropertyDescriptor, override konst accessorKind: AccessorKind) : PropertyGetterDescriptorImpl(
         property,
         Annotations.EMPTY,
         Modality.FINAL,
@@ -123,10 +123,10 @@ open class AccessorForPropertyDescriptor private constructor(
         SourceElement.NO_SOURCE
     ), AccessorForCallableDescriptor<PropertyGetterDescriptor> {
 
-        override val calleeDescriptor: PropertyGetterDescriptor
+        override konst calleeDescriptor: PropertyGetterDescriptor
             get() = (correspondingProperty as AccessorForPropertyDescriptor).calleeDescriptor.getter!!
 
-        override val superCallTarget: ClassDescriptor?
+        override konst superCallTarget: ClassDescriptor?
             get() = (correspondingProperty as AccessorForPropertyDescriptor).superCallTarget
 
         init {
@@ -135,7 +135,7 @@ open class AccessorForPropertyDescriptor private constructor(
 
     }
 
-    class Setter(property: AccessorForPropertyDescriptor, override val accessorKind: AccessorKind) : PropertySetterDescriptorImpl(
+    class Setter(property: AccessorForPropertyDescriptor, override konst accessorKind: AccessorKind) : PropertySetterDescriptorImpl(
         property,
         Annotations.EMPTY,
         Modality.FINAL,
@@ -148,10 +148,10 @@ open class AccessorForPropertyDescriptor private constructor(
         SourceElement.NO_SOURCE
     ), AccessorForCallableDescriptor<PropertySetterDescriptor> {
 
-        override val calleeDescriptor: PropertySetterDescriptor
+        override konst calleeDescriptor: PropertySetterDescriptor
             get() = (correspondingProperty as AccessorForPropertyDescriptor).calleeDescriptor.setter!!
 
-        override val superCallTarget: ClassDescriptor?
+        override konst superCallTarget: ClassDescriptor?
             get() = (correspondingProperty as AccessorForPropertyDescriptor).superCallTarget
 
         init {

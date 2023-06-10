@@ -24,27 +24,27 @@ abstract class RootPackageJsonTask :
     // Only in configuration phase
     // Not part of configuration caching
 
-    private val nodeJs
+    private konst nodeJs
         get() = project.rootProject.kotlinNodeJsExtension
 
-    private val yarn
+    private konst yarn
         get() = project.rootProject.yarn
 
-    private val rootResolver: KotlinRootNpmResolver
+    private konst rootResolver: KotlinRootNpmResolver
         get() = nodeJs.resolver
 
     // -----
 
-    private val npmEnvironment by lazy {
+    private konst npmEnvironment by lazy {
         nodeJs.requireConfigured().asNpmEnvironment
     }
 
-    private val yarnEnv by lazy {
+    private konst yarnEnv by lazy {
         yarn.requireConfigured().asYarnEnvironment
     }
 
     @get:OutputFile
-    val rootPackageJson: File by lazy {
+    konst rootPackageJson: File by lazy {
         nodeJs.rootPackageDir.resolve(NpmProject.PACKAGE_JSON)
     }
 
@@ -52,8 +52,8 @@ abstract class RootPackageJsonTask :
     @get:IgnoreEmptyDirectories
     @get:NormalizeLineEndings
     @get:InputFiles
-    val packageJsonFiles: Collection<File> by lazy {
-        rootResolver.projectResolvers.values
+    konst packageJsonFiles: Collection<File> by lazy {
+        rootResolver.projectResolvers.konstues
             .flatMap { it.compilationResolvers }
             .map { it.compilationNpmResolution }
             .map { it.npmProjectPackageJsonFile }
@@ -65,6 +65,6 @@ abstract class RootPackageJsonTask :
     }
 
     companion object {
-        const val NAME = "rootPackageJson"
+        const konst NAME = "rootPackageJson"
     }
 }

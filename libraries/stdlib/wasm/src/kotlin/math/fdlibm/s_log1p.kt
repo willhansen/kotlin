@@ -34,7 +34,7 @@
  *	other words,
  *		        2      4      6      8      10      12      14
  *	    R(z) ~ Lp1*s +Lp2*s +Lp3*s +Lp4*s +Lp5*s  +Lp6*s  +Lp7*s
- *  	(the values of Lp1 to Lp7 are listed in the program)
+ *  	(the konstues of Lp1 to Lp7 are listed in the program)
  *	and
  *	    |      2          14          |     -58.45
  *	    | Lp1*s +...+Lp7*s    -  R(z) | <= 2 
@@ -60,10 +60,10 @@
  *	1 ulp (unit in the last place).
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following 
- * constants. The decimal values may be used, provided that the 
+ * The hexadecimal konstues are the intended ones for the following 
+ * constants. The decimal konstues may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough 
- * to produce the hexadecimal values shown.
+ * to produce the hexadecimal konstues shown.
  *
  * Note: Assuming log() return accurate answer, the following
  * 	 algorithm can be used to compute log1p(x) to within a few ULP:
@@ -78,18 +78,18 @@
 package kotlin.math.fdlibm
 
 
-private const val ln2_hi = 6.93147180369123816490e-01    /* 3fe62e42 fee00000 */
-private const val ln2_lo = 1.90821492927058770002e-10    /* 3dea39ef 35793c76 */
-private const val two54 = 1.80143985094819840000e+16  /* 43500000 00000000 */
-private const val Lp1 = 6.666666666666735130e-01  /* 3FE55555 55555593 */
-private const val Lp2 = 3.999999999940941908e-01  /* 3FD99999 9997FA04 */
-private const val Lp3 = 2.857142874366239149e-01  /* 3FD24924 94229359 */
-private const val Lp4 = 2.222219843214978396e-01  /* 3FCC71C5 1D8E78AF */
-private const val Lp5 = 1.818357216161805012e-01  /* 3FC74664 96CB03DE */
-private const val Lp6 = 1.531383769920937332e-01  /* 3FC39A09 D078C69F */
-private const val Lp7 = 1.479819860511658591e-01  /* 3FC2F112 DF3E5244 */
+private const konst ln2_hi = 6.93147180369123816490e-01    /* 3fe62e42 fee00000 */
+private const konst ln2_lo = 1.90821492927058770002e-10    /* 3dea39ef 35793c76 */
+private const konst two54 = 1.80143985094819840000e+16  /* 43500000 00000000 */
+private const konst Lp1 = 6.666666666666735130e-01  /* 3FE55555 55555593 */
+private const konst Lp2 = 3.999999999940941908e-01  /* 3FD99999 9997FA04 */
+private const konst Lp3 = 2.857142874366239149e-01  /* 3FD24924 94229359 */
+private const konst Lp4 = 2.222219843214978396e-01  /* 3FCC71C5 1D8E78AF */
+private const konst Lp5 = 1.818357216161805012e-01  /* 3FC74664 96CB03DE */
+private const konst Lp6 = 1.531383769920937332e-01  /* 3FC39A09 D078C69F */
+private const konst Lp7 = 1.479819860511658591e-01  /* 3FC2F112 DF3E5244 */
 
-private const val zero = 0.0
+private const konst zero = 0.0
 
 internal fun log1p(x: Double): Double {
     var hfsq: Double

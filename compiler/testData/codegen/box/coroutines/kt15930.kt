@@ -14,7 +14,7 @@ class A {
     }
 }
 
-val a = A()
+konst a = A()
 
 suspend fun foo5() {
     a -= "56"

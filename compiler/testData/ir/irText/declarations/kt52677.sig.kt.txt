@@ -6,7 +6,7 @@ open annotation class MySerializable : Annotation {
   // CHECK:
   //   Mangled name: MySerializable{}c
   //   Public signature: /MySerializable.c|-4416962153448040627[0]
-  val c: KClass<*>
+  konst c: KClass<*>
     // CHECK JVM_IR:
     //   Mangled name: MySerializable#<get-c>(){}kotlin.reflect.KClass<*>
     //   Public signature: /MySerializable.c.<get-c>|-6941111973387927723[0]
@@ -29,7 +29,7 @@ data class LoginSuccessPacket {
   // CHECK:
   //   Mangled name: LoginSuccessPacket{}id
   //   Public signature: /LoginSuccessPacket.id|4553357683448926321[0]
-  val id: @MySerializable(c = UuidSerializer::class) Uuid1
+  konst id: @MySerializable(c = UuidSerializer::class) Uuid1
     // CHECK JVM_IR:
     //   Mangled name: LoginSuccessPacket#<get-id>(){}Uuid1
     //   Public signature: /LoginSuccessPacket.id.<get-id>|1939250508314525801[0]

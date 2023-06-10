@@ -12,7 +12,7 @@ public final class A {
 
 public final class B {
     public constructor B()
-    public final val foo: A.() -> kotlin.Int
+    public final konst foo: A.() -> kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

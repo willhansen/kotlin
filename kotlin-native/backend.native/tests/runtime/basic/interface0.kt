@@ -19,7 +19,7 @@ class B(): A {
 }
 
 @Test fun runTest() {
-    val a:A = B()
+    konst a:A = B()
     a.b()
 }
 

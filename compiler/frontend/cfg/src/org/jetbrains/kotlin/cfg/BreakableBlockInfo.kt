@@ -20,8 +20,8 @@ import org.jetbrains.kotlin.psi.KtElement
 
 import java.util.Collections
 
-abstract class BreakableBlockInfo(open val element: KtElement, val entryPoint: Label, val exitPoint: Label) : BlockInfo() {
-    val referablePoints: MutableSet<Label> = hashSetOf()
+abstract class BreakableBlockInfo(open konst element: KtElement, konst entryPoint: Label, konst exitPoint: Label) : BlockInfo() {
+    konst referablePoints: MutableSet<Label> = hashSetOf()
 
     init {
         markReferablePoints(entryPoint, exitPoint)

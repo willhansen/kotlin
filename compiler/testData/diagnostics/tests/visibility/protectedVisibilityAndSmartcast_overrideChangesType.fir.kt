@@ -9,7 +9,7 @@ interface Derived : Base {
 }
 
 abstract class A {
-    abstract protected val a: Base
+    abstract protected konst a: Base
 
     fun fest_1(other: A) {
         other.a.baseFun() // OK
@@ -27,7 +27,7 @@ abstract class A {
         }
     }
 
-    open class B(override val a: Derived) : A() {
+    open class B(override konst a: Derived) : A() {
         class Nested {
             fun fest_3(other: A) {
                 other.a.baseFun() // OK
@@ -47,7 +47,7 @@ abstract class A {
         }
     }
 
-    class C(override val a: Derived) : B(a) {
+    class C(override konst a: Derived) : B(a) {
         fun fest_4(other: A) {
             other.a.baseFun() // OK
             if (other is B) {
@@ -65,7 +65,7 @@ abstract class A {
         }
     }
 
-    class D(override val a: Derived) : A() {
+    class D(override konst a: Derived) : A() {
         fun fest_5(other: A) {
             other.a.baseFun() // OK
             if (other is B) {

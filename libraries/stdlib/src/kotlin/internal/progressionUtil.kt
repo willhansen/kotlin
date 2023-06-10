@@ -7,12 +7,12 @@ package kotlin.internal
 
 // a mod b (in arithmetical sense)
 private fun mod(a: Int, b: Int): Int {
-    val mod = a % b
+    konst mod = a % b
     return if (mod >= 0) mod else mod + b
 }
 
 private fun mod(a: Long, b: Long): Long {
-    val mod = a % b
+    konst mod = a % b
     return if (mod >= 0) mod else mod + b
 }
 
@@ -30,7 +30,7 @@ private fun differenceModulo(a: Long, b: Long, c: Long): Long {
  * from [start] to [end] in case of a positive [step], or from [end] to [start] in case of a negative
  * [step].
  *
- * No validation on passed parameters is performed. The given parameters should satisfy the condition:
+ * No konstidation on passed parameters is performed. The given parameters should satisfy the condition:
  *
  * - either `step > 0` and `start <= end`,
  * - or `step < 0` and `start >= end`.
@@ -53,7 +53,7 @@ internal fun getProgressionLastElement(start: Int, end: Int, step: Int): Int = w
  * from [start] to [end] in case of a positive [step], or from [end] to [start] in case of a negative
  * [step].
  *
- * No validation on passed parameters is performed. The given parameters should satisfy the condition:
+ * No konstidation on passed parameters is performed. The given parameters should satisfy the condition:
  *
  * - either `step > 0` and `start <= end`,
  * - or `step < 0` and `start >= end`.

@@ -5,22 +5,22 @@ package foo
 
 fun box(): String {
 
-    val x = true
-    val y = false
+    konst x = true
+    konst y = false
 
-    val mapWithIntKeys = HashMap<Int, Int>()
+    konst mapWithIntKeys = HashMap<Int, Int>()
     mapWithIntKeys[1] = 1
     assertEquals("number", jsTypeOf (mapWithIntKeys.keys.iterator().next()), "mapWithIntKeys")
 
-    val mapWithShortKeys = HashMap<Short, Int>()
+    konst mapWithShortKeys = HashMap<Short, Int>()
     mapWithShortKeys[1.toShort()] = 1
     assertEquals("number", jsTypeOf (mapWithShortKeys.keys.iterator().next()), "mapWithShortKeys")
 
-    val mapWithByteKeys = HashMap<Byte, Int>()
+    konst mapWithByteKeys = HashMap<Byte, Int>()
     mapWithByteKeys[1.toByte()] = 1
     assertEquals("number", jsTypeOf (mapWithByteKeys.keys.iterator().next()), "mapWithByteKeys")
 
-    val mapWithDoubleKeys = HashMap<Double, Int>()
+    konst mapWithDoubleKeys = HashMap<Double, Int>()
     mapWithDoubleKeys[1.0] = 1
     assertEquals("number", jsTypeOf (mapWithDoubleKeys.keys.iterator().next()), "mapWithDoubleKeys")
 
@@ -42,7 +42,7 @@ fun box(): String {
     assertEquals(100, mapWithDoubleKeys[dNegativeInfinity])
     assertEquals("number", jsTypeOf (mapWithDoubleKeys.keys.iterator().next()), "dNegativeInfinity")
 
-    val mapWithFloatKeys = HashMap<Float, Int>()
+    konst mapWithFloatKeys = HashMap<Float, Int>()
     mapWithFloatKeys[1.0f] = 1
     assertEquals("number", jsTypeOf (mapWithFloatKeys.keys.iterator().next()), "mapWithFloatKeys")
 
@@ -64,19 +64,19 @@ fun box(): String {
     assertEquals(100, mapWithFloatKeys[NegativeInfinity])
     assertEquals("number", jsTypeOf (mapWithFloatKeys.keys.iterator().next()), "fNegativeInfinity")
 
-    val mapWithCharKeys = HashMap<Char, Int>()
+    konst mapWithCharKeys = HashMap<Char, Int>()
     mapWithCharKeys['A'] = 1
     assertEquals("object", jsTypeOf (mapWithCharKeys.keys.iterator().next()), "mapWithCharKeys")
 
-    val mapWithLongKeys = HashMap<Long, Int>()
+    konst mapWithLongKeys = HashMap<Long, Int>()
     mapWithLongKeys[1L] = 1
     assertEquals("object", jsTypeOf (mapWithLongKeys.keys.iterator().next()), "mapWithLongKeys")
 
-    val mapWithBooleanKeys = HashMap<Boolean, Int>()
+    konst mapWithBooleanKeys = HashMap<Boolean, Int>()
     mapWithBooleanKeys[true] = 1
     assertEquals("boolean", jsTypeOf (mapWithBooleanKeys.keys.iterator().next()), "mapWithBooleanKeys")
 
-    val mapWithStringKeys = HashMap<String, Int>()
+    konst mapWithStringKeys = HashMap<String, Int>()
     mapWithStringKeys["key"] = 1
     assertEquals("string", jsTypeOf (mapWithStringKeys.keys.iterator().next()), "mapWithStringKeys")
 

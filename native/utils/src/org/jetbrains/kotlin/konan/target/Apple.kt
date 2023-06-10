@@ -27,39 +27,39 @@ class AppleConfigurablesImpl(
         baseDir: String?
 ) : AppleConfigurables, KonanPropertiesLoader(target, properties, baseDir) {
 
-    private val sdkDependency = this.targetSysRoot!!
-    private val toolchainDependency = this.targetToolchain!!
-    private val xcodeAddonDependency = this.additionalToolsDir!!
+    private konst sdkDependency = this.targetSysRoot!!
+    private konst toolchainDependency = this.targetToolchain!!
+    private konst xcodeAddonDependency = this.additionalToolsDir!!
 
-    override val absoluteTargetSysRoot: String get() = when (val provider = xcodePartsProvider) {
+    override konst absoluteTargetSysRoot: String get() = when (konst provider = xcodePartsProvider) {
         is XcodePartsProvider.Local -> provider.xcode.pathToPlatformSdk(platformName())
         XcodePartsProvider.InternalServer -> absolute(sdkDependency)
     }
 
-    override val absoluteTargetToolchain: String get() = when (val provider = xcodePartsProvider) {
+    override konst absoluteTargetToolchain: String get() = when (konst provider = xcodePartsProvider) {
         is XcodePartsProvider.Local -> provider.xcode.toolchain
         XcodePartsProvider.InternalServer -> absolute(toolchainDependency)
     }
 
-    override val absoluteAdditionalToolsDir: String get() = when (val provider = xcodePartsProvider) {
+    override konst absoluteAdditionalToolsDir: String get() = when (konst provider = xcodePartsProvider) {
         is XcodePartsProvider.Local -> provider.xcode.additionalTools
         XcodePartsProvider.InternalServer -> absolute(additionalToolsDir)
     }
 
-    override val dependencies get() = super.dependencies + when (xcodePartsProvider) {
+    override konst dependencies get() = super.dependencies + when (xcodePartsProvider) {
         is XcodePartsProvider.Local -> emptyList()
         XcodePartsProvider.InternalServer -> listOf(sdkDependency, toolchainDependency, xcodeAddonDependency)
     }
 
-    private val xcodePartsProvider by lazy {
+    private konst xcodePartsProvider by lazy {
         if (InternalServer.isAvailable) {
             XcodePartsProvider.InternalServer
         } else {
-            val xcode = Xcode.findCurrent()
+            konst xcode = Xcode.findCurrent()
 
             if (properties.getProperty("ignoreXcodeVersionCheck") != "true") {
                 properties.getProperty("minimalXcodeVersion")?.let { minimalXcodeVersion ->
-                    val currentXcodeVersion = xcode.version
+                    konst currentXcodeVersion = xcode.version
                     checkXcodeVersion(minimalXcodeVersion, currentXcodeVersion)
                 }
             }
@@ -71,13 +71,13 @@ class AppleConfigurablesImpl(
     private fun checkXcodeVersion(minimalVersion: String, currentVersion: String) {
         // Xcode versions contain only numbers (even betas).
         // But we still split by '-' and whitespaces to take into account versions like 11.2-beta.
-        val minimalVersionParts = minimalVersion.split("(\\s+|\\.|-)".toRegex()).map { it.toIntOrNull() ?: 0 }
-        val currentVersionParts = currentVersion.split("(\\s+|\\.|-)".toRegex()).map { it.toIntOrNull() ?: 0 }
-        val size = max(minimalVersionParts.size, currentVersionParts.size)
+        konst minimalVersionParts = minimalVersion.split("(\\s+|\\.|-)".toRegex()).map { it.toIntOrNull() ?: 0 }
+        konst currentVersionParts = currentVersion.split("(\\s+|\\.|-)".toRegex()).map { it.toIntOrNull() ?: 0 }
+        konst size = max(minimalVersionParts.size, currentVersionParts.size)
 
         for (i in 0 until size) {
-            val currentPart = currentVersionParts.getOrElse(i) { 0 }
-            val minimalPart = minimalVersionParts.getOrElse(i) { 0 }
+            konst currentPart = currentVersionParts.getOrElse(i) { 0 }
+            konst minimalPart = minimalVersionParts.getOrElse(i) { 0 }
 
             when {
                 currentPart > minimalPart -> return
@@ -88,7 +88,7 @@ class AppleConfigurablesImpl(
     }
 
     private sealed class XcodePartsProvider {
-        class Local(val xcode: Xcode) : XcodePartsProvider()
+        class Local(konst xcode: Xcode) : XcodePartsProvider()
         object InternalServer : XcodePartsProvider()
     }
 }

@@ -11,6 +11,6 @@ operator fun Int.plus(s: String) : String {
 }
 
 fun box() : String {
-   val s = "${1 + "a"}"
+   konst s = "${1 + "a"}"
    return if(s == "a") "OK" else "fail"
 }

@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.test.KotlinTestWithEnvironment
 import java.io.File
 
 // use -Poverwrite.output=true or -Pfd.overwrite.output=true
-private val OVERWRITE_EXPECTED_OUTPUT = System.getProperty("overwrite.output")?.toBoolean() ?: false
+private konst OVERWRITE_EXPECTED_OUTPUT = System.getProperty("overwrite.output")?.toBoolean() ?: false
 
 class SafeguardTest : TestCase() {
 
@@ -52,27 +52,27 @@ class ApiTest : KotlinTestWithEnvironment() {
         irStdlibModuleApi.markUniqueLinesComparedTo(stdlibModuleApi).checkRecursively("libraries/stdlib/api/js")
     }
 
-    private val stdlibModuleApi: Map<FqName, String>
+    private konst stdlibModuleApi: Map<FqName, String>
         get() {
-            val project = environment.project
-            val configuration = environment.configuration
+            konst project = environment.project
+            konst configuration = environment.configuration
 
             configuration.put(CommonConfigurationKeys.MODULE_NAME, "test")
             configuration.put(JSConfigurationKeys.LIBRARIES, JsConfig.JS_STDLIB)
 
-            val config = JsConfig(project, configuration, CompilerEnvironment)
+            konst config = JsConfig(project, configuration, CompilerEnvironment)
 
             return config.moduleDescriptors.single().packagesSerialized()
         }
 
-    private val irStdlibModuleApi: Map<FqName, String>
+    private konst irStdlibModuleApi: Map<FqName, String>
         get() {
-            val fullRuntimeKlib: String = System.getProperty("kotlin.js.full.stdlib.path")
+            konst fullRuntimeKlib: String = System.getProperty("kotlin.js.full.stdlib.path")
 
-            val project = environment.project
-            val configuration = environment.configuration
+            konst project = environment.project
+            konst configuration = environment.configuration
 
-            val klibModule = ModulesStructure(
+            konst klibModule = ModulesStructure(
                 project,
                 MainModule.Klib(File(fullRuntimeKlib).canonicalPath),
                 configuration,
@@ -89,20 +89,20 @@ class ApiTest : KotlinTestWithEnvironment() {
 
     private fun Map<FqName, String>.markUniqueLinesComparedTo(other: Map<FqName, String>): Map<FqName, String> {
         return entries.map { (fqName, api) ->
-            val otherApiLines = other[fqName]?.lines() ?: emptyList()
-            val augmentedApi = diff(api.lines(), otherApiLines)
+            konst otherApiLines = other[fqName]?.lines() ?: emptyList()
+            konst augmentedApi = diff(api.lines(), otherApiLines)
 
             fqName to augmentedApi
         }.toMap()
     }
 
     private fun diff(aLines: List<String>, bLines: List<String>): String {
-        val d = Array(aLines.size + 1) { ByteArray(bLines.size + 1) }
-        val c = Array(aLines.size + 1) { ShortArray(bLines.size + 1) }
+        konst d = Array(aLines.size + 1) { ByteArray(bLines.size + 1) }
+        konst c = Array(aLines.size + 1) { ShortArray(bLines.size + 1) }
 
-        val DX = 1.toByte()
-        val DY = 2.toByte()
-        val DXY = 3.toByte()
+        konst DX = 1.toByte()
+        konst DY = 2.toByte()
+        konst DXY = 3.toByte()
 
         for (i in 0..aLines.size) {
             c[i][0] = i.toShort()
@@ -128,14 +128,14 @@ class ApiTest : KotlinTestWithEnvironment() {
             }
         }
 
-        val result = mutableListOf<String>()
+        konst result = mutableListOf<String>()
 
         var x = aLines.size
         var y = bLines.size
 
         while (x != 0 || y != 0) {
-            val tdx = if ((d[x][y].toInt() and DX.toInt()) == 0) 0 else -1
-            val tdy = if ((d[x][y].toInt() and DY.toInt()) == 0) 0 else -1
+            konst tdx = if ((d[x][y].toInt() and DX.toInt()) == 0) 0 else -1
+            konst tdy = if ((d[x][y].toInt() and DY.toInt()) == 0) 0 else -1
 
             if (tdx != 0) {
                 result += (if (tdy == 0) "/*∆*/ " else "") + aLines[x - 1]
@@ -149,7 +149,7 @@ class ApiTest : KotlinTestWithEnvironment() {
     }
 
     private fun String.listFiles(): Array<File> {
-        val dirFile = File(this)
+        konst dirFile = File(this)
         assertTrue("Directory does not exist: ${dirFile.absolutePath}", dirFile.exists())
         assertTrue("Not a directory: ${dirFile.absolutePath}", dirFile.isDirectory)
         return dirFile.listFiles()!!
@@ -166,9 +166,9 @@ class ApiTest : KotlinTestWithEnvironment() {
             dir.cleanDir()
         }
 
-        val files = dir.listFiles().map { it.name }.toMutableSet()
+        konst files = dir.listFiles().map { it.name }.toMutableSet()
         entries.forEach { (fqName, serialized) ->
-            val fileName = (if (fqName.isRoot) "ROOT" else fqName.asString()) + ".kt"
+            konst fileName = (if (fqName.isRoot) "ROOT" else fqName.asString()) + ".kt"
             files -= fileName
 
             if (OVERWRITE_EXPECTED_OUTPUT) {
@@ -185,7 +185,7 @@ class ApiTest : KotlinTestWithEnvironment() {
     }
 
     private fun ModuleDescriptor.allPackages(): Collection<FqName> {
-        val result = mutableListOf<FqName>()
+        konst result = mutableListOf<FqName>()
 
         fun impl(pkg: FqName) {
             result += pkg
@@ -199,7 +199,7 @@ class ApiTest : KotlinTestWithEnvironment() {
     }
 
     private fun PackageViewDescriptor.serialize(): String? {
-        val serialized = ModuleDescriptorApiGenerator.generate(this).trim()
+        konst serialized = ModuleDescriptorApiGenerator.generate(this).trim()
 
         if (serialized.count { it == '\n' } <= 1) return null
 
@@ -211,7 +211,7 @@ class ApiTest : KotlinTestWithEnvironment() {
     }
 }
 
-private val Renderer = DescriptorRenderer.withOptions {
+private konst Renderer = DescriptorRenderer.withOptions {
     withDefinedIn = false
     excludedAnnotationClasses = setOf(FqName(ExpectedLoadErrorsUtil.ANNOTATION_CLASS_NAME))
     overrideRenderingPolicy = OverrideRenderingPolicy.RENDER_OPEN_OVERRIDE
@@ -236,8 +236,8 @@ private object ModuleDescriptorApiGenerator {
 
     fun generate(packageView: PackageViewDescriptor): String {
         return buildString {
-            val fragments = packageView.fragments.filter { it.fqName == packageView.fqName }
-            val entities = fragments.flatMap { DescriptorUtils.getAllDescriptors(it.getMemberScope()) }
+            konst fragments = packageView.fragments.filter { it.fqName == packageView.fqName }
+            konst entities = fragments.flatMap { DescriptorUtils.getAllDescriptors(it.getMemberScope()) }
 
             appendEntities("", entities)
         }
@@ -278,7 +278,7 @@ private object ModuleDescriptorApiGenerator {
 
         appendLine(" {")
 
-        val members = DescriptorUtils.getAllDescriptors(descriptor.unsubstitutedMemberScope) + descriptor.constructors
+        konst members = DescriptorUtils.getAllDescriptors(descriptor.unsubstitutedMemberScope) + descriptor.constructors
         appendEntities("$indent    ", members)
 
         appendLine("$indent}")
@@ -287,8 +287,8 @@ private object ModuleDescriptorApiGenerator {
     private fun Appendable.appendProperty(indent: String, descriptor: PropertyDescriptor) {
         render(indent, descriptor)
 
-        val hasGetter = descriptor.getter?.isEffectivelyPublicApi ?: false
-        val hasSetter = descriptor.setter?.isEffectivelyPublicApi ?: false
+        konst hasGetter = descriptor.getter?.isEffectivelyPublicApi ?: false
+        konst hasSetter = descriptor.setter?.isEffectivelyPublicApi ?: false
 
         if (hasGetter || hasSetter) {
             append(" {")

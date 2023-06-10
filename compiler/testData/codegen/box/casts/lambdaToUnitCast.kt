@@ -1,4 +1,4 @@
-val foo: () -> Unit = {}
+konst foo: () -> Unit = {}
 
 fun box(): String {
     foo() as Unit

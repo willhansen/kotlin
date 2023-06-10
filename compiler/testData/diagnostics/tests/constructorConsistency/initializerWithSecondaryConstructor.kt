@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 
-private const val A = 0L
-private val B = 0L
+private const konst A = 0L
+private konst B = 0L
 private fun sample() = 0L
 
 private class PrivateClass

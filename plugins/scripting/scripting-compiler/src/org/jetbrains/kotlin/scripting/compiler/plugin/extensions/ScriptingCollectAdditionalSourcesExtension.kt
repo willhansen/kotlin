@@ -13,13 +13,13 @@ import org.jetbrains.kotlin.extensions.CollectAdditionalSourcesExtension
 import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.scripting.compiler.plugin.dependencies.collectScriptsCompilationDependencies
 
-class ScriptingCollectAdditionalSourcesExtension(val project: MockProject) : CollectAdditionalSourcesExtension {
+class ScriptingCollectAdditionalSourcesExtension(konst project: MockProject) : CollectAdditionalSourcesExtension {
     override fun collectAdditionalSourcesAndUpdateConfiguration(
         knownSources: Collection<KtFile>,
         configuration: CompilerConfiguration,
         project: Project
     ): Collection<KtFile> {
-        val (newSourcesClasspath, newSources, _) = collectScriptsCompilationDependencies(
+        konst (newSourcesClasspath, newSources, _) = collectScriptsCompilationDependencies(
             configuration,
             project,
             knownSources

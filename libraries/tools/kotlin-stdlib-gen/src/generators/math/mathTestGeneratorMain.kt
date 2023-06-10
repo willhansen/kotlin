@@ -8,7 +8,7 @@ import kotlin.math.*
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val baseDir: File
+    konst baseDir: File
     when (args.size) {
         1 -> {
             baseDir = File(args[0])
@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
 
     generateUtils(baseDir.resolve("mathTestUtils.kt"))
 
-    val trigonometryFunctions = listOf(
+    konst trigonometryFunctions = listOf(
         MathTestsGenerator.ModelFunction1(::sin),
         MathTestsGenerator.ModelFunction1(::cos),
         MathTestsGenerator.ModelFunction1(::tan, exact = false),
@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
     //workaround about method with receiver
     fun powWrapper(x: Double, y: Double): Double = x.pow(y)
 
-    val powerFunctions = listOf(
+    konst powerFunctions = listOf(
         MathTestsGenerator.ModelFunction2(::hypot),
         MathTestsGenerator.ModelFunction1(::sqrt),
         MathTestsGenerator.ModelFunction1(::exp, exact = false),
@@ -63,7 +63,7 @@ fun main(args: Array<String>) {
     ).generate()
 
 
-    val roundingFunctions = listOf(
+    konst roundingFunctions = listOf(
         MathTestsGenerator.ModelFunction1(::ceil),
         MathTestsGenerator.ModelFunction1(::floor),
         MathTestsGenerator.ModelFunction1(::truncate),
@@ -102,7 +102,7 @@ private fun getMantissa(d: Double): Double = Double.fromBits(((d.toBits().toULon
 private fun getExp(d: Double): Int = (((d.toBits() shr 52) and 0x7FF) - 1023).toInt()
 
 private fun compare(arg1: Double, arg2: Double?, result1: Double, result2: Double, exact: Boolean = false) {
-    val difference: Any? = when {
+    konst difference: Any? = when {
         result1.isNaN() -> if (result2.isNaN()) null else result1
         result1.isInfinite() -> if (result2.isInfinite() && result1.sign == result2.sign) null else result1
         result2.isNaN() -> result2
@@ -111,7 +111,7 @@ private fun compare(arg1: Double, arg2: Double?, result1: Double, result2: Doubl
             if (exact) {
                 if (result1.toBits() == result2.toBits()) null else abs(result1 - result2)
             } else {
-                val (toCompare1, toCompare2) = when (getExp(result1) - getExp(result2)) {
+                konst (toCompare1, toCompare2) = when (getExp(result1) - getExp(result2)) {
                     0 -> getMantissa(result1) to getMantissa(result2)
                     1 -> getMantissa(result1) to getMantissa(result2) / 2.0
                     -1 -> getMantissa(result1) / 2.0 to getMantissa(result2)
@@ -126,8 +126,8 @@ private fun compare(arg1: Double, arg2: Double?, result1: Double, result2: Doubl
 
 internal fun checkAnswers(function: Function1<Double, Double>, arguments: Array<ULong>, answers: Array<ULong>, exact: Boolean) {
     arguments.forEachIndexed { i, x ->
-        val argument1 = Double.fromBits(x.toLong())
-        val answer = Double.fromBits(answers[i].toLong())
+        konst argument1 = Double.fromBits(x.toLong())
+        konst answer = Double.fromBits(answers[i].toLong())
         compare(argument1, null, answer, function(argument1), exact = exact)
     }
 }
@@ -136,9 +136,9 @@ internal fun checkAnswers(function: Function2<Double, Double, Double>, arguments
     arguments
         .flatMap { lhsElem -> arguments.map { rhsElem -> lhsElem to rhsElem } }
         .forEachIndexed { i, x ->
-            val argument1 = Double.fromBits(x.first.toLong())
-            val argument2 = Double.fromBits(x.second.toLong())
-            val answer = Double.fromBits(answers[i].toLong())
+            konst argument1 = Double.fromBits(x.first.toLong())
+            konst argument2 = Double.fromBits(x.second.toLong())
+            konst answer = Double.fromBits(answers[i].toLong())
             compare(argument1, argument2, answer, function(argument1, argument2), exact = exact)
         }
 }

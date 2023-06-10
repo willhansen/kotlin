@@ -2,7 +2,7 @@
 // TARGET_BACKEND: JVM_IR
 
 class Outer {
-    val x: Int = 1
+    konst x: Int = 1
 }
 
 context(Outer)

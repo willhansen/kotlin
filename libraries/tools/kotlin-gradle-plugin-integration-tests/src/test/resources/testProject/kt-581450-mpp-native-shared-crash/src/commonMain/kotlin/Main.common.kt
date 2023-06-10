@@ -1,5 +1,5 @@
 open class ScopeCoroutine<T> {
-    val callerFrame: Any? = null
+    konst callerFrame: Any? = null
 }
 
 expect class UndispatchedCoroutine<T>(): ScopeCoroutine<T>

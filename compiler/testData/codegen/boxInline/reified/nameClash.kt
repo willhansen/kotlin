@@ -4,7 +4,7 @@ package test
 inline fun <reified T> f(x: () -> String) = x()
 
 inline fun <reified T> g() = f<Unit> {
-    val x = { T::class.simpleName }
+    konst x = { T::class.simpleName }
     x()!!
 }
 

@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.ir.types.isUnit
 import org.jetbrains.kotlin.ir.util.usesDefaultArguments
 import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 
-data class TailCalls(val ir: Set<IrCall>, val fromManyFunctions: Boolean)
+data class TailCalls(konst ir: Set<IrCall>, konst fromManyFunctions: Boolean)
 
 /**
  * Collects calls to be treated as tail recursion.
@@ -44,12 +44,12 @@ fun collectTailRecursionCalls(irFunction: IrFunction, followFunctionReference: (
         return TailCalls(emptySet(), false)
     }
 
-    class VisitorState(val isTailExpression: Boolean, val inOtherFunction: Boolean)
+    class VisitorState(konst isTailExpression: Boolean, konst inOtherFunction: Boolean)
 
-    val isUnitReturn = irFunction.returnType.isUnit()
-    val result = mutableSetOf<IrCall>()
+    konst isUnitReturn = irFunction.returnType.isUnit()
+    konst result = mutableSetOf<IrCall>()
     var someCallsAreInOtherFunctions = false
-    val visitor = object : IrElementVisitor<Unit, VisitorState> {
+    konst visitor = object : IrElementVisitor<Unit, VisitorState> {
         override fun visitElement(element: IrElement, data: VisitorState) {
             element.acceptChildren(this, VisitorState(isTailExpression = false, data.inOtherFunction))
         }
@@ -68,7 +68,7 @@ fun collectTailRecursionCalls(irFunction: IrFunction, followFunctionReference: (
         }
 
         override fun visitReturn(expression: IrReturn, data: VisitorState) {
-            expression.value.accept(this, VisitorState(expression.returnTargetSymbol == irFunction.symbol, data.inOtherFunction))
+            expression.konstue.accept(this, VisitorState(expression.returnTargetSymbol == irFunction.symbol, data.inOtherFunction))
         }
 
         override fun visitExpressionBody(body: IrExpressionBody, data: VisitorState) =
@@ -82,13 +82,13 @@ fun collectTailRecursionCalls(irFunction: IrFunction, followFunctionReference: (
 
         private fun visitStatementContainer(expression: IrStatementContainer, data: VisitorState) {
             expression.statements.forEachIndexed { index, irStatement ->
-                val isTailStatement = if (index == expression.statements.lastIndex) {
+                konst isTailStatement = if (index == expression.statements.lastIndex) {
                     // The last statement defines the result of the container expression, so it has the same kind.
                     data.isTailExpression
                 } else {
                     // In a Unit-returning function, any statement directly followed by a `return` is a tail statement.
                     isUnitReturn && expression.statements[index + 1].let {
-                        it is IrReturn && it.returnTargetSymbol == irFunction.symbol && it.value.isUnitRead()
+                        it is IrReturn && it.returnTargetSymbol == irFunction.symbol && it.konstue.isUnitRead()
                     }
                 }
                 irStatement.accept(this, VisitorState(isTailStatement, data.inOtherFunction))
@@ -109,7 +109,7 @@ fun collectTailRecursionCalls(irFunction: IrFunction, followFunctionReference: (
             expression.acceptChildren(this, VisitorState(isTailExpression = false, data.inOtherFunction))
 
             // TODO: the frontend generates diagnostics on calls that are not optimized. This may or may not
-            //   match what the backend does here. It'd be great to validate that the two are in agreement.
+            //   match what the backend does here. It'd be great to konstidate that the two are in agreement.
             if (!data.isTailExpression || expression.symbol != irFunction.symbol) {
                 return
             }
@@ -120,7 +120,7 @@ fun collectTailRecursionCalls(irFunction: IrFunction, followFunctionReference: (
                 return
             }
 
-            val hasSameDispatchReceiver =
+            konst hasSameDispatchReceiver =
                 irFunction.dispatchReceiverParameter?.type?.classOrNull?.owner?.kind?.isSingleton == true ||
                         expression.dispatchReceiver?.let { it is IrGetValue && it.symbol.owner == irFunction.dispatchReceiverParameter } != false
             if (!hasSameDispatchReceiver) {

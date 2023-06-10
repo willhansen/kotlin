@@ -44,8 +44,8 @@ enum class FakeCallKind {
 }
 
 class FakeCallResolver(
-    private val project: Project,
-    private val callResolver: CallResolver
+    private konst project: Project,
+    private konst callResolver: CallResolver
 ) {
     fun resolveFakeCall(
         context: ResolutionContext<*>,
@@ -54,23 +54,23 @@ class FakeCallResolver(
         callElement: KtExpression,
         reportErrorsOn: KtExpression,
         callKind: FakeCallKind,
-        valueArguments: List<KtExpression>
+        konstueArguments: List<KtExpression>
     ): OverloadResolutionResults<FunctionDescriptor> {
-        val fakeTrace = TemporaryBindingTrace.create(context.trace, "trace to resolve fake call for", name)
-        val fakeBindingTrace = context.replaceBindingTrace(fakeTrace)
+        konst fakeTrace = TemporaryBindingTrace.create(context.trace, "trace to resolve fake call for", name)
+        konst fakeBindingTrace = context.replaceBindingTrace(fakeTrace)
 
         var reportIsMissingError = false
-        val realExpression = RealExpression(reportErrorsOn, callKind)
-        val result =
-            makeAndResolveFakeCallInContext(receiver, fakeBindingTrace, valueArguments, name, callElement, realExpression) { fake ->
+        konst realExpression = RealExpression(reportErrorsOn, callKind)
+        konst result =
+            makeAndResolveFakeCallInContext(receiver, fakeBindingTrace, konstueArguments, name, callElement, realExpression) { fake ->
                 reportIsMissingError =
                         fakeTrace.bindingContext.diagnostics.noSuppression().forElement(fake).any { it.severity == Severity.ERROR }
                 fakeTrace.commit({ _, key -> key != fake }, true)
             }
 
-        val resolutionResults = result.second
+        konst resolutionResults = result.second
         if (reportIsMissingError) {
-            val diagnostic = when (callKind) {
+            konst diagnostic = when (callKind) {
                 FakeCallKind.ITERATOR -> Errors.ITERATOR_MISSING.on(reportErrorsOn)
                 FakeCallKind.COMPONENT -> if (receiver != null) Errors.COMPONENT_FUNCTION_MISSING.on(
                     reportErrorsOn,
@@ -90,9 +90,9 @@ class FakeCallResolver(
 
     private class TracingStrategyForComponentCall(
         fakeExpression: KtReferenceExpression,
-        val reportErrorsOn: KtExpression,
-        val name: Name,
-        val call: Call
+        konst reportErrorsOn: KtExpression,
+        konst name: Name,
+        konst call: Call
     ) : TracingStrategy by TracingStrategyImpl.create(fakeExpression, call) {
 
         override fun <D : CallableDescriptor?> ambiguity(trace: BindingTrace, resolvedCalls: Collection<ResolvedCall<D>>) {
@@ -104,7 +104,7 @@ class FakeCallResolver(
         }
 
         override fun typeInferenceFailed(context: ResolutionContext<*>, inferenceErrorData: InferenceErrorData) {
-            val diagnostic = AbstractTracingStrategy.typeInferenceFailedDiagnostic(context, inferenceErrorData, reportErrorsOn, call)
+            konst diagnostic = AbstractTracingStrategy.typeInferenceFailedDiagnostic(context, inferenceErrorData, reportErrorsOn, call)
             if (diagnostic != null) {
                 context.trace.report(diagnostic)
             }
@@ -113,8 +113,8 @@ class FakeCallResolver(
 
     private class TracingStrategyForIteratorCall(
         fakeExpression: KtReferenceExpression,
-        val reportErrorsOn: KtExpression,
-        val call: Call
+        konst reportErrorsOn: KtExpression,
+        konst call: Call
     ) : TracingStrategy by TracingStrategyImpl.create(fakeExpression, call) {
 
         override fun <D : CallableDescriptor?> ambiguity(trace: BindingTrace, resolvedCalls: Collection<ResolvedCall<D>>) {
@@ -126,7 +126,7 @@ class FakeCallResolver(
         }
 
         override fun typeInferenceFailed(context: ResolutionContext<*>, inferenceErrorData: InferenceErrorData) {
-            val diagnostic = AbstractTracingStrategy.typeInferenceFailedDiagnostic(context, inferenceErrorData, reportErrorsOn, call)
+            konst diagnostic = AbstractTracingStrategy.typeInferenceFailedDiagnostic(context, inferenceErrorData, reportErrorsOn, call)
             if (diagnostic != null) {
                 context.trace.report(diagnostic)
             }
@@ -137,16 +137,16 @@ class FakeCallResolver(
     fun makeAndResolveFakeCallInContext(
         receiver: ReceiverValue?,
         context: ResolutionContext<*>,
-        valueArguments: List<KtExpression>,
+        konstueArguments: List<KtExpression>,
         name: Name,
         callElement: KtExpression,
         realExpression: RealExpression? = null,
         onComplete: (KtSimpleNameExpression) -> Unit = { _ -> }
     ): Pair<Call, OverloadResolutionResults<FunctionDescriptor>> {
-        val fakeCalleeExpression = KtPsiFactory(project, markGenerated = false).createSimpleName(name.asString())
-        val call = CallMaker.makeCallWithExpressions(callElement, receiver, null, fakeCalleeExpression, valueArguments)
+        konst fakeCalleeExpression = KtPsiFactory(project, markGenerated = false).createSimpleName(name.asString())
+        konst call = CallMaker.makeCallWithExpressions(callElement, receiver, null, fakeCalleeExpression, konstueArguments)
 
-        val tracingStrategy = when (realExpression?.callKind) {
+        konst tracingStrategy = when (realExpression?.callKind) {
             FakeCallKind.ITERATOR -> TracingStrategyForIteratorCall(fakeCalleeExpression, realExpression.expressionToReportErrorsOn, call)
             FakeCallKind.COMPONENT -> TracingStrategyForComponentCall(
                 fakeCalleeExpression,
@@ -157,7 +157,7 @@ class FakeCallResolver(
             else -> null
         }
 
-        val results = if (tracingStrategy != null)
+        konst results = if (tracingStrategy != null)
             callResolver.resolveCallWithGivenName(context, call, name, tracingStrategy)
         else
             callResolver.resolveCallWithGivenName(context, call, fakeCalleeExpression, name)
@@ -167,5 +167,5 @@ class FakeCallResolver(
         return Pair(call, results)
     }
 
-    class RealExpression(val expressionToReportErrorsOn: KtExpression, val callKind: FakeCallKind)
+    class RealExpression(konst expressionToReportErrorsOn: KtExpression, konst callKind: FakeCallKind)
 }

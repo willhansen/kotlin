@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.idea.FrontendInternals
 import org.jetbrains.kotlin.psi.KtElement
 
 interface ResolutionFacade {
-    val project: Project
+    konst project: Project
 
     fun analyzeWithAllCompilerChecks(elements: Collection<KtElement>, callback: DiagnosticSink.DiagnosticsCallback? = null): AnalysisResult
 
-    val moduleDescriptor: ModuleDescriptor
+    konst moduleDescriptor: ModuleDescriptor
 
     // get service for the module this resolution was created for
     @FrontendInternals

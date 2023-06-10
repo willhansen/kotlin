@@ -17,7 +17,7 @@ fun callsAndInverts(b: Boolean, block: () -> Unit): Boolean {
 
 
 fun smartcastAndInitialization(x: Any?) {
-    val y: Int
+    konst y: Int
 
     if (callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -31,7 +31,7 @@ fun smartcastAndInitialization(x: Any?) {
 }
 
 fun inPresenceOfLazy(x: Any?, unknownBoolean: Boolean) {
-    val y: Int
+    konst y: Int
 
     if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) {
         println(y)

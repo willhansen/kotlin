@@ -44,33 +44,33 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirPropertyImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var status: FirDeclarationStatus,
     override var returnTypeRef: FirTypeRef,
     override var receiverParameter: FirReceiverParameter?,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
-    override val name: Name,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst name: Name,
     override var initializer: FirExpression?,
     override var delegate: FirExpression?,
-    override val isVar: Boolean,
+    override konst isVar: Boolean,
     override var getter: FirPropertyAccessor?,
     override var setter: FirPropertyAccessor?,
     override var backingField: FirBackingField?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val symbol: FirPropertySymbol,
-    override val delegateFieldSymbol: FirDelegateFieldSymbol?,
-    override val isLocal: Boolean,
+    override konst symbol: FirPropertySymbol,
+    override konst delegateFieldSymbol: FirDelegateFieldSymbol?,
+    override konst isLocal: Boolean,
     override var bodyResolveState: FirPropertyBodyResolveState,
-    override val typeParameters: MutableList<FirTypeParameter>,
+    override konst typeParameters: MutableList<FirTypeParameter>,
 ) : FirProperty() {
-    override val isVal: Boolean get() = !isVar
+    override konst isVal: Boolean get() = !isVar
     override var controlFlowGraphReference: FirControlFlowGraphReference? = null
 
     init {

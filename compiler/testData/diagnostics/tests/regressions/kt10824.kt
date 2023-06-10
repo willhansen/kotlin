@@ -25,7 +25,7 @@ fun bar(a: A?, aOther: A?): A {
     }
 }
 fun foo1(a: A?, aOther: A?): A {
-    val result = if (a == null) {
+    konst result = if (a == null) {
         A()
     }
     else {
@@ -38,7 +38,7 @@ fun foo1(a: A?, aOther: A?): A {
     return result
 }
 fun bar1(a: A?, aOther: A?): A {
-    val result = if (a == null) {
+    konst result = if (a == null) {
         A()
     }
     else {

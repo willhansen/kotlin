@@ -1,5 +1,5 @@
 fun box(): String {
-    val result = "OK"
+    konst result = "OK"
 
     fun foo() = result
 

@@ -165,7 +165,7 @@ public actual inline fun BooleanArray.asList(): List<Boolean> {
  */
 public actual fun CharArray.asList(): List<Char> {
     return object : AbstractList<Char>(), RandomAccess {
-        override val size: Int get() = this@asList.size
+        override konst size: Int get() = this@asList.size
         override fun isEmpty(): Boolean = this@asList.isEmpty()
         override fun contains(element: Char): Boolean = this@asList.contains(element)
         override fun get(index: Int): Char {
@@ -845,128 +845,128 @@ public actual fun CharArray.copyOf(): CharArray {
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun ByteArray.copyOf(newSize: Int): ByteArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return fillFrom(this, ByteArray(newSize))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun ShortArray.copyOf(newSize: Int): ShortArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return fillFrom(this, ShortArray(newSize))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun IntArray.copyOf(newSize: Int): IntArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return fillFrom(this, IntArray(newSize))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun LongArray.copyOf(newSize: Int): LongArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return withType("LongArray", arrayCopyResize(this, newSize, 0L))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun FloatArray.copyOf(newSize: Int): FloatArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return fillFrom(this, FloatArray(newSize))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with zero values if necessary.
+ * The copy is either truncated or padded at the end with zero konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with zero konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun DoubleArray.copyOf(newSize: Int): DoubleArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return fillFrom(this, DoubleArray(newSize))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `false` values if necessary.
+ * The copy is either truncated or padded at the end with `false` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `false` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun BooleanArray.copyOf(newSize: Int): BooleanArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return withType("BooleanArray", arrayCopyResize(this, newSize, false))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with null char (`\u0000`) values if necessary.
+ * The copy is either truncated or padded at the end with null char (`\u0000`) konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with null char (`\u0000`) konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizedPrimitiveCopyOf
  */
 public actual fun CharArray.copyOf(newSize: Int): CharArray {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return withType("CharArray", fillFrom(this, CharArray(newSize)))
 }
 
 /**
  * Returns new array which is a copy of the original array, resized to the given [newSize].
- * The copy is either truncated or padded at the end with `null` values if necessary.
+ * The copy is either truncated or padded at the end with `null` konstues if necessary.
  * 
  * - If [newSize] is less than the size of the original array, the copy array is truncated to the [newSize].
- * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` values.
+ * - If [newSize] is greater than the size of the original array, the extra elements in the copy array are filled with `null` konstues.
  * 
  * @sample samples.collections.Arrays.CopyOfOperations.resizingCopyOf
  */
 @Suppress("ACTUAL_WITHOUT_EXPECT")
 public actual fun <T> Array<out T>.copyOf(newSize: Int): Array<T?> {
-    require(newSize >= 0) { "Invalid new array size: $newSize." }
+    require(newSize >= 0) { "Inkonstid new array size: $newSize." }
     return arrayCopyResize(this, newSize, null)
 }
 
@@ -1098,7 +1098,7 @@ public actual fun CharArray.copyOfRange(fromIndex: Int, toIndex: Int): CharArray
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1114,7 +1114,7 @@ public actual fun <T> Array<T>.fill(element: T, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1130,7 +1130,7 @@ public actual fun ByteArray.fill(element: Byte, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1146,7 +1146,7 @@ public actual fun ShortArray.fill(element: Short, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1162,7 +1162,7 @@ public actual fun IntArray.fill(element: Int, fromIndex: Int = 0, toIndex: Int =
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1178,7 +1178,7 @@ public actual fun LongArray.fill(element: Long, fromIndex: Int = 0, toIndex: Int
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1194,7 +1194,7 @@ public actual fun FloatArray.fill(element: Float, fromIndex: Int = 0, toIndex: I
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1210,7 +1210,7 @@ public actual fun DoubleArray.fill(element: Double, fromIndex: Int = 0, toIndex:
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1226,7 +1226,7 @@ public actual fun BooleanArray.fill(element: Boolean, fromIndex: Int = 0, toInde
 }
 
 /**
- * Fills this array or its subrange with the specified [element] value.
+ * Fills this array or its subrange with the specified [element] konstue.
  * 
  * @param fromIndex the start of the range (inclusive) to fill, 0 by default.
  * @param toIndex the end of the range (exclusive) to fill, size of this array by default.
@@ -1326,7 +1326,7 @@ public actual operator fun <T> Array<out T>.plus(elements: Collection<T>): Array
  */
 public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1336,7 +1336,7 @@ public actual operator fun ByteArray.plus(elements: Collection<Byte>): ByteArray
  */
 public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1346,7 +1346,7 @@ public actual operator fun ShortArray.plus(elements: Collection<Short>): ShortAr
  */
 public actual operator fun IntArray.plus(elements: Collection<Int>): IntArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1363,7 +1363,7 @@ public actual operator fun LongArray.plus(elements: Collection<Long>): LongArray
  */
 public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1373,7 +1373,7 @@ public actual operator fun FloatArray.plus(elements: Collection<Float>): FloatAr
  */
 public actual operator fun DoubleArray.plus(elements: Collection<Double>): DoubleArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1390,7 +1390,7 @@ public actual operator fun BooleanArray.plus(elements: Collection<Boolean>): Boo
  */
 public actual operator fun CharArray.plus(elements: Collection<Char>): CharArray {
     var index = size
-    val result = this.copyOf(size + elements.size)
+    konst result = this.copyOf(size + elements.size)
     for (element in elements) result[index++] = element
     return result
 }
@@ -1596,7 +1596,7 @@ public actual fun <T : Comparable<T>> Array<out T>.sort(fromIndex: Int = 0, toIn
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun ByteArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<ByteArray>()
+    konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<ByteArray>()
     subarray.sort()
 }
 
@@ -1615,7 +1615,7 @@ public actual fun ByteArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit 
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun ShortArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<ShortArray>()
+    konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<ShortArray>()
     subarray.sort()
 }
 
@@ -1634,7 +1634,7 @@ public actual fun ShortArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun IntArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<IntArray>()
+    konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<IntArray>()
     subarray.sort()
 }
 
@@ -1671,7 +1671,7 @@ public actual fun LongArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit 
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun FloatArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<FloatArray>()
+    konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<FloatArray>()
     subarray.sort()
 }
 
@@ -1690,7 +1690,7 @@ public actual fun FloatArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit
 @Suppress("ACTUAL_FUNCTION_WITH_DEFAULT_ARGUMENTS")
 public actual fun DoubleArray.sort(fromIndex: Int = 0, toIndex: Int = size): Unit {
     AbstractList.checkRangeIndexes(fromIndex, toIndex, size)
-    val subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<DoubleArray>()
+    konst subarray = this.asDynamic().subarray(fromIndex, toIndex).unsafeCast<DoubleArray>()
     subarray.sort()
 }
 

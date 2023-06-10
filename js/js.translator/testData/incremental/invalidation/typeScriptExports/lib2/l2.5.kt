@@ -1,5 +1,5 @@
 @JsExport
-class MyClass(val stepId: Int) {
+class MyClass(konst stepId: Int) {
     @JsName("baz")
     fun qux() = foo() + stepId
 }

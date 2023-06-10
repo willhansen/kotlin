@@ -24,10 +24,10 @@ class CheckerJvmAssertInlineFunctionAssertionsDisabled {
 class Dummy
 
 fun disableAssertions(): CheckerJvmAssertInlineFunctionAssertionsDisabled {
-    val loader = Dummy::class.java.classLoader
+    konst loader = Dummy::class.java.classLoader
     loader.setClassAssertionStatus("CheckerJvmAssertInlineFunctionAssertionsDisabled", false)
     loader.setClassAssertionStatus("InlineKt", false)
-    val c = loader.loadClass("CheckerJvmAssertInlineFunctionAssertionsDisabled")
+    konst c = loader.loadClass("CheckerJvmAssertInlineFunctionAssertionsDisabled")
     return c.newInstance() as CheckerJvmAssertInlineFunctionAssertionsDisabled
 }
 

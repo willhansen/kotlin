@@ -30,35 +30,35 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.types.ConstantValueKind
 import org.jetbrains.kotlin.utils.addIfNotNull
 
-inline val FirAnnotation.unexpandedConeClassLikeType: ConeClassLikeType?
+inline konst FirAnnotation.unexpandedConeClassLikeType: ConeClassLikeType?
     get() = ((annotationTypeRef as? FirResolvedTypeRef)?.type as? ConeClassLikeType)
 
-inline val FirAnnotation.unexpandedClassId: ClassId?
+inline konst FirAnnotation.unexpandedClassId: ClassId?
     get() = unexpandedConeClassLikeType?.lookupTag?.classId
 
-fun <T> buildConstOrErrorExpression(source: KtSourceElement?, kind: ConstantValueKind<T>, value: T?, diagnostic: ConeDiagnostic): FirExpression =
-    value?.let {
+fun <T> buildConstOrErrorExpression(source: KtSourceElement?, kind: ConstantValueKind<T>, konstue: T?, diagnostic: ConeDiagnostic): FirExpression =
+    konstue?.let {
         buildConstExpression(source, kind, it)
     } ?: buildErrorExpression {
         this.source = source
         this.diagnostic = diagnostic
     }
 
-inline val FirCall.arguments: List<FirExpression> get() = argumentList.arguments
+inline konst FirCall.arguments: List<FirExpression> get() = argumentList.arguments
 
-inline val FirCall.argument: FirExpression get() = argumentList.arguments.first()
+inline konst FirCall.argument: FirExpression get() = argumentList.arguments.first()
 
-inline val FirCall.dynamicVararg: FirVarargArgumentsExpression?
+inline konst FirCall.dynamicVararg: FirVarargArgumentsExpression?
     get() = arguments.firstOrNull() as? FirVarargArgumentsExpression
 
-inline val FirCall.dynamicVarargArguments: List<FirExpression>?
+inline konst FirCall.dynamicVarargArguments: List<FirExpression>?
     get() = dynamicVararg?.arguments
 
-inline val FirFunctionCall.isCalleeDynamic: Boolean
+inline konst FirFunctionCall.isCalleeDynamic: Boolean
     get() = calleeReference.toResolvedFunctionSymbol()?.origin == FirDeclarationOrigin.DynamicScope
 
-inline val FirCall.resolvedArgumentMapping: LinkedHashMap<FirExpression, FirValueParameter>?
-    get() = when (val argumentList = argumentList) {
+inline konst FirCall.resolvedArgumentMapping: LinkedHashMap<FirExpression, FirValueParameter>?
+    get() = when (konst argumentList = argumentList) {
         is FirResolvedArgumentList -> argumentList.mapping
         else -> null
     }
@@ -71,7 +71,7 @@ fun FirExpression.toReference(): FirReference? {
     return when (this) {
         is FirWrappedArgumentExpression -> expression.toResolvedCallableReference()
         is FirSmartCastExpression -> originalExpression.toReference()
-        is FirDesugaredAssignmentValueReferenceExpression -> expressionRef.value.toReference()
+        is FirDesugaredAssignmentValueReferenceExpression -> expressionRef.konstue.toReference()
         is FirResolvable -> calleeReference
         else -> null
     }
@@ -109,7 +109,7 @@ fun <D> FirBlock.transformStatementsIndexed(transformer: FirTransformer<D>, data
     when (this) {
         is FirBlockImpl -> statements.transformInplace(transformer, dataProducer)
         is FirSingleExpressionBlock -> {
-            (dataProducer(0) as? TransformData.Data<D>)?.value?.let { transformStatements(transformer, it) }
+            (dataProducer(0) as? TransformData.Data<D>)?.konstue?.let { transformStatements(transformer, it) }
         }
     }
     return this
@@ -120,7 +120,7 @@ fun <T : FirStatement> FirBlock.replaceFirstStatement(factory: (T) -> FirStateme
         "replaceFirstStatement should not be called for ${this::class.simpleName}"
     }
     @Suppress("UNCHECKED_CAST")
-    val existing = statements[0] as T
+    konst existing = statements[0] as T
     statements[0] = factory(existing)
     return existing
 }
@@ -130,30 +130,30 @@ fun FirExpression.unwrapArgument(): FirExpression = (this as? FirWrappedArgument
 fun FirExpression.unwrapAndFlattenArgument(): List<FirExpression> = buildList { unwrapAndFlattenArgumentTo(this) }
 
 private fun FirExpression.unwrapAndFlattenArgumentTo(list: MutableList<FirExpression>) {
-    when (val unwrapped = unwrapArgument()) {
+    when (konst unwrapped = unwrapArgument()) {
         is FirArrayOfCall, is FirFunctionCall -> (unwrapped as FirCall).arguments.forEach { it.unwrapAndFlattenArgumentTo(list) }
         is FirVarargArgumentsExpression -> unwrapped.arguments.forEach { it.unwrapAndFlattenArgumentTo(list) }
         else -> list.add(unwrapped)
     }
 }
 
-val FirVariableAssignment.explicitReceiver: FirExpression? get() = unwrapLValue()?.explicitReceiver
+konst FirVariableAssignment.explicitReceiver: FirExpression? get() = unwrapLValue()?.explicitReceiver
 
-val FirVariableAssignment.dispatchReceiver: FirExpression get() = unwrapLValue()?.dispatchReceiver ?: FirNoReceiverExpression
+konst FirVariableAssignment.dispatchReceiver: FirExpression get() = unwrapLValue()?.dispatchReceiver ?: FirNoReceiverExpression
 
-val FirVariableAssignment.extensionReceiver: FirExpression get() = unwrapLValue()?.extensionReceiver ?: FirNoReceiverExpression
+konst FirVariableAssignment.extensionReceiver: FirExpression get() = unwrapLValue()?.extensionReceiver ?: FirNoReceiverExpression
 
-val FirVariableAssignment.calleeReference: FirReference? get() = lValue.toReference()
+konst FirVariableAssignment.calleeReference: FirReference? get() = lValue.toReference()
 
-val FirVariableAssignment.contextReceiverArguments: List<FirExpression> get() = unwrapLValue()?.contextReceiverArguments ?: emptyList()
+konst FirVariableAssignment.contextReceiverArguments: List<FirExpression> get() = unwrapLValue()?.contextReceiverArguments ?: emptyList()
 
 fun FirVariableAssignment.unwrapLValue(): FirQualifiedAccessExpression? {
-    val lValue = lValue
+    konst lValue = lValue
     return lValue as? FirQualifiedAccessExpression
-        ?: (lValue as? FirDesugaredAssignmentValueReferenceExpression)?.expressionRef?.value as? FirQualifiedAccessExpression
+        ?: (lValue as? FirDesugaredAssignmentValueReferenceExpression)?.expressionRef?.konstue as? FirQualifiedAccessExpression
 }
 
-val FirElement.calleeReference: FirReference?
+konst FirElement.calleeReference: FirReference?
     get() = (this as? FirResolvable)?.calleeReference ?: (this as? FirVariableAssignment)?.calleeReference
 
 fun FirExpression.unwrapSmartcastExpression(): FirExpression =
@@ -167,11 +167,11 @@ fun FirExpression.unwrapSmartcastExpression(): FirExpression =
  * - one of [dispatchReceiver] or [extensionReceiver] is **not** [FirNoReceiverExpression] and
  * - it's not referring to a static member.
  */
-val FirCallableReferenceAccess.isBound: Boolean
+konst FirCallableReferenceAccess.isBound: Boolean
     get() = (dispatchReceiver != FirNoReceiverExpression || extensionReceiver != FirNoReceiverExpression) &&
             calleeReference.toResolvedCallableSymbol()?.isStatic != true
 
-val FirQualifiedAccessExpression.allReceiverExpressions: List<FirExpression>
+konst FirQualifiedAccessExpression.allReceiverExpressions: List<FirExpression>
     get() = buildList {
         addIfNotNull(dispatchReceiver)
         addIfNotNull(extensionReceiver)

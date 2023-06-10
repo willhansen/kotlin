@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}p
 //   Public signature: /p|6715504260787941082[0]
-val p: Any?
+konst p: Any?
   // CHECK JVM_IR:
   //   Mangled name: #<get-p>(){}kotlin.Any?
   //   Public signature: /p.<get-p>|-8403090778350003178[0]

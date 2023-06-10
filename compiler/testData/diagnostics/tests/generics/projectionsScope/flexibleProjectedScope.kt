@@ -12,6 +12,6 @@ public class Clazz<Psi> {
 public fun <T, C : MutableCollection<in T>> Iterable<T>.filterTo(destination: C, predicate: (T) -> Boolean) {}
 
 fun test(clazz: Clazz<out Any>) {
-    val result = java.util.ArrayList<Any>()
+    konst result = java.util.ArrayList<Any>()
     clazz.foo().filterTo(result) { x -> true }
 }

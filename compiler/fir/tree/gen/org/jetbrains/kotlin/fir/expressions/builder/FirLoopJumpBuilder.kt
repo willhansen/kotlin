@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 interface FirLoopJumpBuilder {
     abstract var source: KtSourceElement?
-    abstract val annotations: MutableList<FirAnnotation>
+    abstract konst annotations: MutableList<FirAnnotation>
     abstract var target: FirTarget<FirLoop>
     fun build(): FirLoopJump
 }

@@ -5,6 +5,6 @@ class C : Comparable<C> {
 }
 
 fun box(): String {
-    val comparator = Comparable<C>::compareTo
+    konst comparator = Comparable<C>::compareTo
     return if (nullsFirst(comparator).compare(C(), C()) == 0) "OK" else "Fail"
 }

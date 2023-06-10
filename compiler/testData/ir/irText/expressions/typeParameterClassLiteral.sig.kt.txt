@@ -26,7 +26,7 @@ class Host {
   // CHECK:
   //   Mangled name: Host@0:0{0§<kotlin.Any>}classRefGenericMemberExtVal
   //   Public signature: /Host.classRefGenericMemberExtVal|-8932160824632385145[0]
-  val <reified TV : Any> TV.classRefGenericMemberExtVal: KClass<TV>
+  konst <reified TV : Any> TV.classRefGenericMemberExtVal: KClass<TV>
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-classRefGenericMemberExtVal>@0:0(){0§<kotlin.Any>}kotlin.reflect.KClass<0:0>
     //   Public signature: /Host.classRefGenericMemberExtVal.<get-classRefGenericMemberExtVal>|-5755261364292961598[0]
@@ -56,7 +56,7 @@ inline fun <reified T : Any> classRefFun(): KClass<T>
 // CHECK:
 //   Mangled name: @0:0{0§<kotlin.Any>}classRefExtVal
 //   Public signature: /classRefExtVal|-7311932072197705388[0]
-val <reified T : Any> T.classRefExtVal: KClass<T>
+konst <reified T : Any> T.classRefExtVal: KClass<T>
   // CHECK JVM_IR:
   //   Mangled name: #<get-classRefExtVal>@0:0(){0§<kotlin.Any>}kotlin.reflect.KClass<0:0>
   //   Public signature: /classRefExtVal.<get-classRefExtVal>|6348231485331432921[0]

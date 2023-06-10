@@ -10,41 +10,41 @@ import kotlin.test.assertEquals
 import kotlin.reflect.full.findAnnotations
 
 @JvmRepeatable(ArrayOfInt.ContainerOfInt::class)
-annotation class ArrayOfInt(val ints: IntArray = []) {
-    annotation class ContainerOfInt(val value: Array<ArrayOfInt>)
+annotation class ArrayOfInt(konst ints: IntArray = []) {
+    annotation class ContainerOfInt(konst konstue: Array<ArrayOfInt>)
 }
 
 @JvmRepeatable(ArrayOfString.ContainerOfString::class)
-annotation class ArrayOfString(val strings: Array<String> = []) {
-    annotation class ContainerOfString(val value: Array<ArrayOfString>)
+annotation class ArrayOfString(konst strings: Array<String> = []) {
+    annotation class ContainerOfString(konst konstue: Array<ArrayOfString>)
 }
 
 @JvmRepeatable(ArrayOfEnum.ContainerOfEnum::class)
-annotation class ArrayOfEnum(val enums: Array<DeprecationLevel> = []) {
-    annotation class ContainerOfEnum(val value: Array<ArrayOfEnum>)
+annotation class ArrayOfEnum(konst enums: Array<DeprecationLevel> = []) {
+    annotation class ContainerOfEnum(konst konstue: Array<ArrayOfEnum>)
 }
 
 @JvmRepeatable(ArrayOfAnnotation.ContainerOfAnnotation::class)
-annotation class ArrayOfAnnotation(val annotations: Array<ArrayOfString> = []) {
-    annotation class ContainerOfAnnotation(val value: Array<ArrayOfAnnotation>)
+annotation class ArrayOfAnnotation(konst annotations: Array<ArrayOfString> = []) {
+    annotation class ContainerOfAnnotation(konst konstue: Array<ArrayOfAnnotation>)
 }
 
 class C {
     @ArrayOfInt([1])
     @ArrayOfInt([2])
-    val arrayOfInt = ""
+    konst arrayOfInt = ""
 
     @ArrayOfString(["a"])
     @ArrayOfString(["b"])
-    val arrayOfString = ""
+    konst arrayOfString = ""
 
     @ArrayOfEnum([DeprecationLevel.WARNING])
     @ArrayOfEnum([DeprecationLevel.ERROR])
-    val arrayOfEnum = ""
+    konst arrayOfEnum = ""
 
     @ArrayOfAnnotation([ArrayOfString(arrayOf("a"))])
     @ArrayOfAnnotation([ArrayOfString(arrayOf("b"))])
-    val arrayOfAnnotation = ""
+    konst arrayOfAnnotation = ""
 }
 
 fun box(): String {

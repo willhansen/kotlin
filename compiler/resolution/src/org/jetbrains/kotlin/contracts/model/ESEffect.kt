@@ -38,7 +38,7 @@ abstract class SimpleEffect : ESEffect()
  *
  * Has the same semantics as [org.jetbrains.kotlin.contracts.description.ConditionalEffectDeclaration]
  */
-class ConditionalEffect(val condition: ESExpression, val simpleEffect: SimpleEffect) : ESEffect() {
+class ConditionalEffect(konst condition: ESExpression, konst simpleEffect: SimpleEffect) : ESEffect() {
     // Conservatively, always return null, indicating absence of information
     override fun isImplies(other: ESEffect): Boolean? = null
 }

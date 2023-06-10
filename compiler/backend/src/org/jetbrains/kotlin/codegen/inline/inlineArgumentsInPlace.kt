@@ -15,22 +15,22 @@ import org.jetbrains.org.objectweb.asm.tree.*
 
 fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
     // Usual inline functions are inlined in the following way:
-    //      <evaluate argument #1>
+    //      <ekonstuate argument #1>
     //      <store argument to an argument variable V1>
     //      ...
-    //      <evaluate argument #N>
+    //      <ekonstuate argument #N>
     //      <store argument to an argument variable VN>
     //      <inline function method body with parameter variables Pi remapped to argument variables Vi>
     // If an argument #k is already stored in a local variable W, this variable W is reused.
     // When inlining arguments in-place, we instead replace corresponding variable load instructions in the inline function method body
-    // with bytecode for evaluating a given argument.
-    // We can do so if such transformation keeps the evaluation order intact, possibly disregarding class initialization.
+    // with bytecode for ekonstuating a given argument.
+    // We can do so if such transformation keeps the ekonstuation order intact, possibly disregarding class initialization.
 
-    val tcbStartLabels = methodNode.tryCatchBlocks.mapTo(HashSet()) { it.start }
+    konst tcbStartLabels = methodNode.tryCatchBlocks.mapTo(HashSet()) { it.start }
 
-    val methodParameterTypes = Type.getArgumentTypes(methodNode.desc)
+    konst methodParameterTypes = Type.getArgumentTypes(methodNode.desc)
 
-    val jvmArgumentTypes = ArrayList<Type>(methodParameterTypes.size + 1)
+    konst jvmArgumentTypes = ArrayList<Type>(methodParameterTypes.size + 1)
     if (methodNode.access and Opcodes.ACC_STATIC == 0) {
         // Here we don't care much about the exact 'this' type,
         // it's only important to remember that variable slot #0 holds an object reference.
@@ -38,27 +38,27 @@ fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
     }
     jvmArgumentTypes.addAll(methodParameterTypes)
 
-    val argumentVarEnd = jvmArgumentTypes.sumOf { it.size }
+    konst argumentVarEnd = jvmArgumentTypes.sumOf { it.size }
     var expectedArgumentVar = 0
     var lastArgIndex = 0
 
     var insn = methodNode.instructions.first
 
-    // During arguments evaluation, make sure that all arguments are loaded in expected order
+    // During arguments ekonstuation, make sure that all arguments are loaded in expected order
     // and there are no unexpected side effects in-between.
     while (insn != null && expectedArgumentVar < argumentVarEnd) {
-        // Entering a try-catch block before all arguments are loaded breaks evaluation order.
+        // Entering a try-catch block before all arguments are loaded breaks ekonstuation order.
         if (insn in tcbStartLabels)
             return false
 
-        // Some instructions break evaluation order.
-        if (insn.isProhibitedDuringArgumentsEvaluation())
+        // Some instructions break ekonstuation order.
+        if (insn.isProhibitedDuringArgumentsEkonstuation())
             return false
 
         // Allow a limited list of 'GETSTATIC <owner> <name> <desc>' instructions.
         if (insn.opcode == Opcodes.GETSTATIC) {
-            val fieldInsn = insn as FieldInsnNode
-            val fieldSignature = FieldSignature(fieldInsn.owner, fieldInsn.name, fieldInsn.desc)
+            konst fieldInsn = insn as FieldInsnNode
+            konst fieldSignature = FieldSignature(fieldInsn.owner, fieldInsn.name, fieldInsn.desc)
             if (fieldSignature !in whitelistedStaticFields)
                 return false
         }
@@ -78,8 +78,8 @@ fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
                 continue
             }
 
-            val varInsn = insn as VarInsnNode
-            val varIndex = (varInsn).`var`
+            konst varInsn = insn as VarInsnNode
+            konst varIndex = (varInsn).`var`
             if (varIndex == expectedArgumentVar) {
                 // Expected argument variable loaded.
                 expectedArgumentVar += jvmArgumentTypes[lastArgIndex].size
@@ -91,10 +91,10 @@ fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
                 } while (insn != null && insn.opcode == varInsn.opcode && (insn as VarInsnNode).`var` == varIndex)
                 continue
             } else if (varIndex < argumentVarEnd) {
-                // Loaded an argument variable, but not an expected one => broken evaluation order
+                // Loaded an argument variable, but not an expected one => broken ekonstuation order
                 return false
             } else {
-                // It's OK to load any non-argument variable during argument evaluation.
+                // It's OK to load any non-argument variable during argument ekonstuation.
                 insn = insn.next
                 continue
             }
@@ -108,7 +108,7 @@ fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
     if (expectedArgumentVar < argumentVarEnd)
         return false
 
-    // After arguments evaluation make sure that argument variables are no longer accessed
+    // After arguments ekonstuation make sure that argument variables are no longer accessed
     // (we are not going to store anything to those variables anyway).
     while (insn != null) {
         if (insn.opcode in Opcodes.ILOAD..Opcodes.ALOAD || insn.opcode in Opcodes.ISTORE..Opcodes.ASTORE) {
@@ -126,23 +126,23 @@ fun canInlineArgumentsInPlace(methodNode: MethodNode): Boolean {
 }
 
 internal data class FieldSignature(
-    val owner: String,
-    val name: String,
-    val desc: String
+    konst owner: String,
+    konst name: String,
+    konst desc: String
 )
 
-private val whitelistedStaticFields: Set<FieldSignature> =
+private konst whitelistedStaticFields: Set<FieldSignature> =
     hashSetOf(
         FieldSignature("kotlin/Result", "Companion", "Lkotlin/Result\$Companion;"),
         FieldSignature("kotlin/_Assertions", "ENABLED", "Z")
     )
 
-private fun AbstractInsnNode.isProhibitedDuringArgumentsEvaluation() =
-    opcode in opcodeProhibitedDuringArgumentsEvaluation.indices &&
-            opcodeProhibitedDuringArgumentsEvaluation[opcode]
+private fun AbstractInsnNode.isProhibitedDuringArgumentsEkonstuation() =
+    opcode in opcodeProhibitedDuringArgumentsEkonstuation.indices &&
+            opcodeProhibitedDuringArgumentsEkonstuation[opcode]
 
-private val opcodeProhibitedDuringArgumentsEvaluation = BooleanArray(256).also { a ->
-    // Any kind of jump during arguments evaluation is a hazard.
+private konst opcodeProhibitedDuringArgumentsEkonstuation = BooleanArray(256).also { a ->
+    // Any kind of jump during arguments ekonstuation is a hazard.
     // This includes all conditional jump instructions, switch instructions, return and throw instructions.
     // Very conservative, but enough for practical cases.
     for (i in Opcodes.IFEQ..Opcodes.RETURN) a[i] = true
@@ -182,10 +182,10 @@ private val opcodeProhibitedDuringArgumentsEvaluation = BooleanArray(256).also {
 }
 
 
-private const val MARKER_INPLACE_CALL_START = "<INPLACE-CALL-START>"
-private const val MARKER_INPLACE_ARGUMENT_START = "<INPLACE-ARGUMENT-START>"
-private const val MARKER_INPLACE_ARGUMENT_END = "<INPLACE-ARGUMENT-END>"
-private const val MARKER_INPLACE_CALL_END = "<INPLACE-CALL-END>"
+private const konst MARKER_INPLACE_CALL_START = "<INPLACE-CALL-START>"
+private const konst MARKER_INPLACE_ARGUMENT_START = "<INPLACE-ARGUMENT-START>"
+private const konst MARKER_INPLACE_ARGUMENT_END = "<INPLACE-ARGUMENT-END>"
+private const konst MARKER_INPLACE_CALL_END = "<INPLACE-CALL-END>"
 
 
 private fun InstructionAdapter.addMarker(name: String) {

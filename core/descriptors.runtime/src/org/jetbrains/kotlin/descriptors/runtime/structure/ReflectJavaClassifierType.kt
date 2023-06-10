@@ -25,10 +25,10 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.lang.reflect.TypeVariable
 
-class ReflectJavaClassifierType(public override val reflectType: Type) : ReflectJavaType(), JavaClassifierType {
-    override val classifier: JavaClassifier = run {
-        val type = reflectType
-        val classifier: JavaClassifier = when (type) {
+class ReflectJavaClassifierType(public override konst reflectType: Type) : ReflectJavaType(), JavaClassifierType {
+    override konst classifier: JavaClassifier = run {
+        konst type = reflectType
+        konst classifier: JavaClassifier = when (type) {
             is Class<*> -> ReflectJavaClass(type)
             is TypeVariable<*> -> ReflectJavaTypeParameter(type)
             is ParameterizedType -> ReflectJavaClass(type.rawType as Class<*>)
@@ -37,19 +37,19 @@ class ReflectJavaClassifierType(public override val reflectType: Type) : Reflect
         classifier
     }
 
-    override val classifierQualifiedName: String
+    override konst classifierQualifiedName: String
         get() = throw UnsupportedOperationException("Type not found: $reflectType")
 
-    override val presentableText: String
+    override konst presentableText: String
         get() = reflectType.toString()
 
-    override val isRaw: Boolean
+    override konst isRaw: Boolean
         get() = with(reflectType) { this is Class<*> && getTypeParameters().isNotEmpty() }
 
-    override val typeArguments: List<JavaType>
+    override konst typeArguments: List<JavaType>
         get() = reflectType.parameterizedTypeArguments.map(Factory::create)
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() {
             return emptyList() // TODO
         }
@@ -58,6 +58,6 @@ class ReflectJavaClassifierType(public override val reflectType: Type) : Reflect
         return null // TODO
     }
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 }

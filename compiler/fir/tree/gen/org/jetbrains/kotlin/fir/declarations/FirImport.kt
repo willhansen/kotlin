@@ -17,11 +17,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 interface FirImport : FirElement {
-    override val source: KtSourceElement?
-    val importedFqName: FqName?
-    val isAllUnder: Boolean
-    val aliasName: Name?
-    val aliasSource: KtSourceElement?
+    override konst source: KtSourceElement?
+    konst importedFqName: FqName?
+    konst isAllUnder: Boolean
+    konst aliasName: Name?
+    konst aliasSource: KtSourceElement?
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitImport(this, data)
 

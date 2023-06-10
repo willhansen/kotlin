@@ -26,7 +26,7 @@ sink:
 =====================
 == foo ==
 fun foo(dir: Direction): Int {
-    val res: Int
+    konst res: Int
     when (dir) {
         Direction.NORTH -> res = 1
         Direction.SOUTH -> res = 2
@@ -41,8 +41,8 @@ L0:
     v(dir: Direction)                                                                                                                                                          INIT: in: {} out: {}
     magic[FAKE_INITIALIZER](dir: Direction) -> <v0>                                                                                                                            INIT: in: {} out: {}
     w(dir|<v0>)                                                                                                                                                                INIT: in: {} out: {}                USE: in: {} out: {}
-  2 mark({ val res: Int when (dir) { Direction.NORTH -> res = 1 Direction.SOUTH -> res = 2 Direction.WEST -> res = 3 Direction.EAST -> res = 4 } return res })                 INIT: in: {} out: {}
-    v(val res: Int)                                                                                                                                                            INIT: in: {} out: {res=D}
+  2 mark({ konst res: Int when (dir) { Direction.NORTH -> res = 1 Direction.SOUTH -> res = 2 Direction.WEST -> res = 3 Direction.EAST -> res = 4 } return res })                 INIT: in: {} out: {}
+    v(konst res: Int)                                                                                                                                                            INIT: in: {} out: {res=D}
     mark(when (dir) { Direction.NORTH -> res = 1 Direction.SOUTH -> res = 2 Direction.WEST -> res = 3 Direction.EAST -> res = 4 })                                             INIT: in: {res=D} out: {res=D}
     r(dir) -> <v1>
     mark(Direction.NORTH -> res = 1)

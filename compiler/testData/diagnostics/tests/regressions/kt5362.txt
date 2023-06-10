@@ -26,7 +26,7 @@ public final class Manager {
 
     public final class Task : java.lang.Runnable {
         public constructor Task(/*0*/ callback: Manager.() -> kotlin.Unit)
-        public final val callback: Manager.() -> kotlin.Unit
+        public final konst callback: Manager.() -> kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ fun run(): kotlin.Unit

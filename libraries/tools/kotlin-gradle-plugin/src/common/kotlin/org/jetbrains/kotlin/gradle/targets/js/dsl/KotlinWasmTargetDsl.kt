@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.gradle.targets.js.binaryen.BinaryenExec
 import org.jetbrains.kotlin.gradle.targets.js.d8.D8Exec
 
 interface KotlinWasmSubTargetContainerDsl : KotlinTarget {
-    val d8: KotlinWasmD8Dsl
+    konst d8: KotlinWasmD8Dsl
 
-    val isD8Configured: Boolean
+    konst isD8Configured: Boolean
 
     fun whenD8Configured(body: KotlinWasmD8Dsl.() -> Unit)
 

@@ -14,6 +14,6 @@ inline fun Z.foo(x: Int = 42, y: Int = x) {
 }
 
 @Test fun runTest() {
-    val z = Z()
+    konst z = Z()
     z.foo()
 }

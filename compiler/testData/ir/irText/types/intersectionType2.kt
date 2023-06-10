@@ -7,10 +7,10 @@ open class C : Foo, A<C>
 fun <T> run(fn: () -> T) = fn()
 
 fun foo() = run {
-    val mm = B()
-    val nn = C()
+    konst mm = B()
+    konst nn = C()
 
-    val c = if (true) mm else nn
+    konst c = if (true) mm else nn
 
     c
 }

@@ -17,56 +17,56 @@ import org.jetbrains.kotlin.ir.util.defaultType
 import kotlin.reflect.*
 
 internal class KClassProxy(
-    override val state: KClassState, override val callInterceptor: CallInterceptor
+    override konst state: KClassState, override konst callInterceptor: CallInterceptor
 ) : ReflectionProxy, KClass<Proxy> {
-    override val simpleName: String?
+    override konst simpleName: String?
         get() = state.classReference.name.takeIf { !it.isSpecial }?.asString()
-    override val qualifiedName: String?
+    override konst qualifiedName: String?
         get() = if (!state.classReference.name.isSpecial) state.classReference.internalName() else null
 
     @Suppress("UNCHECKED_CAST")
-    override val constructors: Collection<KFunction<Proxy>>
+    override konst constructors: Collection<KFunction<Proxy>>
         get() = state.getConstructors(callInterceptor) as Collection<KFunction<Proxy>>
-    override val members: Collection<KCallable<*>>
+    override konst members: Collection<KCallable<*>>
         get() = state.getMembers(callInterceptor)
-    override val nestedClasses: Collection<KClass<*>>
+    override konst nestedClasses: Collection<KClass<*>>
         get() = TODO("Not yet implemented")
-    override val objectInstance: Proxy?
+    override konst objectInstance: Proxy?
         get() = TODO("Not yet implemented")
-    override val typeParameters: List<KTypeParameter>
+    override konst typeParameters: List<KTypeParameter>
         get() = state.getTypeParameters(callInterceptor)
-    override val supertypes: List<KType>
+    override konst supertypes: List<KType>
         get() = state.getSupertypes(callInterceptor)
-    override val sealedSubclasses: List<KClass<out Proxy>>
+    override konst sealedSubclasses: List<KClass<out Proxy>>
         get() = TODO("Not yet implemented")
-    override val annotations: List<Annotation>
+    override konst annotations: List<Annotation>
         get() = TODO("Not yet implemented")
 
-    override val visibility: KVisibility?
+    override konst visibility: KVisibility?
         get() = state.classReference.visibility.toKVisibility()
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = state.classReference.modality == Modality.FINAL
-    override val isOpen: Boolean
+    override konst isOpen: Boolean
         get() = state.classReference.modality == Modality.OPEN
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = state.classReference.modality == Modality.ABSTRACT
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = state.classReference.modality == Modality.SEALED
-    override val isData: Boolean
+    override konst isData: Boolean
         get() = state.classReference.isData
-    override val isInner: Boolean
+    override konst isInner: Boolean
         get() = state.classReference.isInner
-    override val isCompanion: Boolean
+    override konst isCompanion: Boolean
         get() = state.classReference.isCompanion
-    override val isFun: Boolean
+    override konst isFun: Boolean
         get() = state.classReference.isFun
-    override val isValue: Boolean
+    override konst isValue: Boolean
         get() = state.classReference.isValue
 
-    override fun isInstance(value: Any?): Boolean {
-        verify(value is State) { "Cannot interpret `isInstance` method for $value" }
+    override fun isInstance(konstue: Any?): Boolean {
+        verify(konstue is State) { "Cannot interpret `isInstance` method for $konstue" }
         // TODO fix problems with typealias and java classes subtype check
-        return (value as State).isSubtypeOf(state.classReference.defaultType)
+        return (konstue as State).isSubtypeOf(state.classReference.defaultType)
     }
 
     override fun equals(other: Any?): Boolean {

@@ -8,9 +8,9 @@ fun test(a: Any) = when (a::class) {
 }
 
 fun box(): String {
-    val s = ""
-    val i = 0
-    val b = false
+    konst s = ""
+    konst i = 0
+    konst b = false
 
     if (test(s) != "String") return "Fail 1"
     if (test(i) != "Int") return "Fail 2"

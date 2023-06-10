@@ -24,5 +24,5 @@ public interface KDeclarationContainer {
     /**
      * All functions and properties accessible in this container.
      */
-    public val members: Collection<KCallable<*>>
+    public konst members: Collection<KCallable<*>>
 }

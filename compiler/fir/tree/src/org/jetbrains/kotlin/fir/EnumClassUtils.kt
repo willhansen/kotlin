@@ -40,7 +40,7 @@ fun FirRegularClassBuilder.generateValuesFunction(
     makeExpect: Boolean = false,
     origin: FirDeclarationOrigin = FirDeclarationOrigin.Source
 ) {
-    val sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
+    konst sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
     declarations += buildSimpleFunction {
         source = sourceElement
         this.origin = origin
@@ -77,7 +77,7 @@ fun FirRegularClassBuilder.generateValueOfFunction(
     makeExpect: Boolean = false,
     origin: FirDeclarationOrigin = FirDeclarationOrigin.Source
 ) {
-    val sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
+    konst sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
     declarations += buildSimpleFunction {
         source = sourceElement
         this.origin = origin
@@ -97,7 +97,7 @@ fun FirRegularClassBuilder.generateValueOfFunction(
             isExpect = makeExpect
         }
         symbol = FirNamedFunctionSymbol(CallableId(packageFqName, classFqName, ENUM_VALUE_OF))
-        valueParameters += buildValueParameter vp@{
+        konstueParameters += buildValueParameter vp@{
             source = sourceElement
             containingFunctionSymbol = this@buildSimpleFunction.symbol
             this.origin = origin
@@ -133,7 +133,7 @@ fun FirRegularClassBuilder.generateEntriesGetter(
     makeExpect: Boolean = false,
     origin: FirDeclarationOrigin = FirDeclarationOrigin.Source
 ) {
-    val sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
+    konst sourceElement = source?.fakeElement(KtFakeSourceElementKind.EnumGeneratedDeclaration)
     declarations += buildProperty {
         source = sourceElement
         isVar = false
@@ -172,7 +172,7 @@ fun FirRegularClassBuilder.generateEntriesGetter(
 }
 
 private fun createStatus(parentStatus: FirDeclarationStatus): FirDeclarationStatusImpl {
-    val parentEffectiveVisibility = (parentStatus as? FirResolvedDeclarationStatusImpl)?.effectiveVisibility
+    konst parentEffectiveVisibility = (parentStatus as? FirResolvedDeclarationStatusImpl)?.effectiveVisibility
     return if (parentEffectiveVisibility != null) {
         FirResolvedDeclarationStatusImpl(Visibilities.Public, Modality.FINAL, parentEffectiveVisibility)
     } else {

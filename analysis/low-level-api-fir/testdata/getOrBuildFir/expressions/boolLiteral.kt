@@ -1,1 +1,1 @@
-val x = <expr>true</expr>
+konst x = <expr>true</expr>

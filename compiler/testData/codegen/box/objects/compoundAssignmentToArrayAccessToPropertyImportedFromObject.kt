@@ -3,7 +3,7 @@
 import Host.x
 
 object Host {
-    val x = intArrayOf(0)
+    konst x = intArrayOf(0)
 }
 
 fun box(): String {

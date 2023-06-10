@@ -1,4 +1,4 @@
 // WITH_STDLIB
 
-val list: List<String>? = null
-val empty = list.orEmpty()
+konst list: List<String>? = null
+konst empty = list.orEmpty()

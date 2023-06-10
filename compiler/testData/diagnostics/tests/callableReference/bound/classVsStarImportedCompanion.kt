@@ -8,7 +8,7 @@ import kotlin.reflect.KClass
 
 class Companion
 
-val f: KClass<a.Companion> = Companion::class
+konst f: KClass<a.Companion> = Companion::class
 
 // FILE: 2.kt
 

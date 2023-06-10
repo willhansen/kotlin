@@ -1,12 +1,12 @@
 // EXPECTED_REACHABLE_NODES: 1284
 package foo
 
-val k = { "K" }
+konst k = { "K" }
 
 fun test(): String {
-    val o = { "O" }
+    konst o = { "O" }
 
-    val funLit = { o() + k() }
+    konst funLit = { o() + k() }
     return funLit()
 }
 

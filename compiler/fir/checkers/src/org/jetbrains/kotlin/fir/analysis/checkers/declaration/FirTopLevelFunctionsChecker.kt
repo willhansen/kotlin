@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.fir.declarations.utils.isExpect
 import org.jetbrains.kotlin.fir.declarations.utils.isExternal
 import org.jetbrains.kotlin.lexer.KtTokens
 
-val FirSession.platformDiagnosticSuppressor: FirPlatformDiagnosticSuppressor? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.platformDiagnosticSuppressor: FirPlatformDiagnosticSuppressor? by FirSession.nullableSessionComponentAccessor()
 
 // See old FE's [DeclarationsChecker]
 object FirTopLevelFunctionsChecker : FirSimpleFunctionChecker() {
@@ -27,7 +27,7 @@ object FirTopLevelFunctionsChecker : FirSimpleFunctionChecker() {
         // Only report on top level callable declarations
         if (context.containingDeclarations.size > 1) return
 
-        val source = declaration.source ?: return
+        konst source = declaration.source ?: return
         if (source.kind is KtFakeSourceElementKind) return
         // If multiple (potentially conflicting) modality modifiers are specified, not all modifiers are recorded at `status`.
         // So, our source of truth should be the full modifier list retrieved from the source.

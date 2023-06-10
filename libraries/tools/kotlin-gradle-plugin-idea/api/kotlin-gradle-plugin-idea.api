@@ -89,8 +89,8 @@ public final class org/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependenc
 	public static final field Friend Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
 	public static final field Refines Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
 	public static final field Regular Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentDependency$Type;
 }
 
 public final class org/jetbrains/kotlin/gradle/idea/kpm/IdeaKpmFragmentKt {
@@ -286,8 +286,8 @@ public final class org/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializ
 public final class org/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity : java/lang/Enum {
 	public static final field ERROR Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
 	public static final field WARNING Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinSerializationLogger$Severity;
 }
 
 public final class org/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinStringExtrasSerializer : org/jetbrains/kotlin/gradle/idea/serialize/IdeaKotlinExtrasSerializer {
@@ -478,8 +478,8 @@ public final class org/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependen
 	public static final field Friend Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
 	public static final field Regular Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
 	public static final field serialVersionUID J
-	public static fun valueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
-	public static fun values ()[Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
+	public static fun konstueOf (Ljava/lang/String;)Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
+	public static fun konstues ()[Lorg/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinSourceDependency$Type;
 }
 
 public final class org/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinUnresolvedBinaryDependency : org/jetbrains/kotlin/gradle/idea/tcs/IdeaKotlinBinaryDependency {

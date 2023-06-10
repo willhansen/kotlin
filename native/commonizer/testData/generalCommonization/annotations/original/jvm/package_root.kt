@@ -1,36 +1,36 @@
 import kotlin.annotation.AnnotationTarget.*
 
 @Target(ANNOTATION_CLASS)
-annotation class CommonAnnotationForAnnotationClassesOnly(val text: String)
+annotation class CommonAnnotationForAnnotationClassesOnly(konst text: String)
 
 @Target(PROPERTY, PROPERTY_GETTER, PROPERTY_SETTER, FIELD, VALUE_PARAMETER, TYPE_PARAMETER, FUNCTION, CLASS, CONSTRUCTOR, TYPEALIAS, TYPE)
 @JvmAnnotationForAnnotationClassesOnly("annotation-class")
 @CommonAnnotationForAnnotationClassesOnly("annotation-class")
-annotation class CommonAnnotation(val text: String)
+annotation class CommonAnnotation(konst text: String)
 
 @Target(ANNOTATION_CLASS)
-annotation class JvmAnnotationForAnnotationClassesOnly(val text: String)
+annotation class JvmAnnotationForAnnotationClassesOnly(konst text: String)
 
 @Target(PROPERTY, PROPERTY_GETTER, PROPERTY_SETTER, FIELD, VALUE_PARAMETER, TYPE_PARAMETER, FUNCTION, CLASS, CONSTRUCTOR, TYPEALIAS, TYPE)
 @JvmAnnotationForAnnotationClassesOnly("annotation-class")
 @CommonAnnotationForAnnotationClassesOnly("annotation-class")
-annotation class JvmAnnotation(val text: String)
+annotation class JvmAnnotation(konst text: String)
 
 @JvmAnnotation("property")
 @CommonAnnotation("property")
 var propertyWithoutBackingField
     @JvmAnnotation("getter") @CommonAnnotation("getter") get() = 3.14
-    @JvmAnnotation("setter") @CommonAnnotation("setter") set(@JvmAnnotation("parameter") @CommonAnnotation("parameter") value) = Unit
+    @JvmAnnotation("setter") @CommonAnnotation("setter") set(@JvmAnnotation("parameter") @CommonAnnotation("parameter") konstue) = Unit
 
 @field:JvmAnnotation("field")
 @field:CommonAnnotation("field")
-val propertyWithBackingField = 3.14
+konst propertyWithBackingField = 3.14
 
 @delegate:JvmAnnotation("field")
 @delegate:CommonAnnotation("field")
-val propertyWithDelegateField: Int by lazy { 42 }
+konst propertyWithDelegateField: Int by lazy { 42 }
 
-val <
+konst <
         @JvmAnnotation("type-parameter")
         @CommonAnnotation("type-parameter")
         T : CharSequence>
@@ -57,11 +57,11 @@ fun <
 
 @JvmAnnotation("class")
 @CommonAnnotation("class")
-class AnnotatedClass @JvmAnnotation("constructor") @CommonAnnotation("constructor") constructor(val value: String)
+class AnnotatedClass @JvmAnnotation("constructor") @CommonAnnotation("constructor") constructor(konst konstue: String)
 
 @JvmAnnotation("jvm-only-class")
 @CommonAnnotation("jvm-only-class")
-class JvmOnlyAnnotatedClass @JvmAnnotation("jvm-only-constructor") @CommonAnnotation("jvm-only-constructor") constructor(val value: String)
+class JvmOnlyAnnotatedClass @JvmAnnotation("jvm-only-constructor") @CommonAnnotation("jvm-only-constructor") constructor(konst konstue: String)
 
 @JvmAnnotation("lifted-up-type-alias")
 @CommonAnnotation("lifted-up-type-alias")

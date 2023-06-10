@@ -12,8 +12,8 @@ import kotlin.test.assertFailsWith
 class NumberHexFormatTest {
 
     companion object {
-        private const val longHex3a: String = "000000000000003a" // 16 hex digits
-        private const val longHex3A: String = "000000000000003A" // 16 hex digits
+        private const konst longHex3a: String = "000000000000003a" // 16 hex digits
+        private const konst longHex3A: String = "000000000000003A" // 16 hex digits
     }
 
     private fun testFormatAndParse(number: Long, string: String, format: HexFormat) {
@@ -49,7 +49,7 @@ class NumberHexFormatTest {
 
     @Test
     fun ignoreBytesFormat() {
-        val format = HexFormat {
+        konst format = HexFormat {
             bytes {
                 bytesPerLine = 10
                 bytesPerGroup = 4
@@ -100,15 +100,15 @@ class NumberHexFormatTest {
 
     @Test
     fun removeLeadingZeros() {
-        val format = HexFormat { number.removeLeadingZeros = true }
+        konst format = HexFormat { number.removeLeadingZeros = true }
         testFormatAndParse(58, "3a", format)
         testFormatAndParse(0, "0", format)
     }
 
     @Test
     fun parseLongFromSubstring() {
-        val url = "https://magnuschatt.medium.com/why-you-should-totally-switch-to-kotlin-c7bbde9e10d5"
-        val articleId = url.substringAfterLast('-').hexToLong()
+        konst url = "https://magnuschatt.medium.com/why-you-should-totally-switch-to-kotlin-c7bbde9e10d5"
+        konst articleId = url.substringAfterLast('-').hexToLong()
         assertEquals(0xc7bbde9e10d5, articleId)
     }
 
@@ -154,7 +154,7 @@ class NumberHexFormatTest {
         assertEquals(58, "0000003A".hexToInt())
         assertEquals(58, "3A".hexToInt())
 
-        val format = HexFormat {
+        konst format = HexFormat {
             upperCase = true
             number {
                 prefix = "0X"
@@ -195,7 +195,7 @@ class NumberHexFormatTest {
         assertFailsWith<NumberFormatException> { "00000000000000003a".hexToULong() } // length = 17
     }
 
-    // Invalid HexFormat configuration
+    // Inkonstid HexFormat configuration
 
     @Test
     fun prefixWithNewLine() {

@@ -16,7 +16,7 @@ private fun sample(): Reader = StringReader("Hello\nWorld");
 
 class ReadWriteTest {
     @Test fun testAppendText() {
-        val file = File.createTempFile("temp", System.nanoTime().toString())
+        konst file = File.createTempFile("temp", System.nanoTime().toString())
         file.writeText("Hello\n")
         file.appendText("World\n")
         file.appendText("Again")
@@ -27,7 +27,7 @@ class ReadWriteTest {
     }
 
     @Test fun reader() {
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
 
         /* TODO would be nicer maybe to write this as
             reader.lines.forEach { ... }
@@ -73,8 +73,8 @@ class ReadWriteTest {
     }
 
     @Test fun file() {
-        val file = File.createTempFile("temp", System.nanoTime().toString())
-        val writer = file.outputStream().writer().buffered()
+        konst file = File.createTempFile("temp", System.nanoTime().toString())
+        konst writer = file.outputStream().writer().buffered()
 
         writer.write("Hello")
         writer.newLine()
@@ -86,7 +86,7 @@ class ReadWriteTest {
             assertTrue(size >= 11 && size <= 12, size.toString())
             assertTrue(arr.contains('W'.code.toByte()))
         }
-        val list = ArrayList<String>()
+        konst list = ArrayList<String>()
         file.forEachLine(Charsets.UTF_8, {
             list.add(it)
         })
@@ -98,7 +98,7 @@ class ReadWriteTest {
             assertEquals(arrayListOf("Hello", "World"), it.toList())
         }
 
-        val text = file.inputStream().reader().readText()
+        konst text = file.inputStream().reader().readText()
         assertTrue(text.contains("Hello"))
         assertTrue(text.contains("World"))
 
@@ -125,10 +125,10 @@ class ReadWriteTest {
     }
 
     @Test fun testURL() {
-        val url = URL("http://kotlinlang.org")
-        val text = url.readText()
+        konst url = URL("http://kotlinlang.org")
+        konst text = url.readText()
         assertFalse(text.isEmpty())
-        val text2 = url.readText(charset("UTF8"))
+        konst text2 = url.readText(charset("UTF8"))
         assertFalse(text2.isEmpty())
     }
 }
@@ -138,17 +138,17 @@ class LineIteratorTest {
     @Test fun useLines() {
         // TODO we should maybe zap the useLines approach as it encourages
         // use of iterators which don't close the underlying stream
-        val list1 = sample().useLines { it.toList() }
-        val list2 = sample().useLines<ArrayList<String>>{ it.toCollection(arrayListOf()) }
+        konst list1 = sample().useLines { it.toList() }
+        konst list2 = sample().useLines<ArrayList<String>>{ it.toCollection(arrayListOf()) }
 
         assertEquals(listOf("Hello", "World"), list1)
         assertEquals(listOf("Hello", "World"), list2)
     }
 
     @Test fun manualClose() {
-        val reader = sample().buffered()
+        konst reader = sample().buffered()
         try {
-            val list = reader.lineSequence().toList()
+            konst list = reader.lineSequence().toList()
             assertEquals(arrayListOf("Hello", "World"), list)
         } finally {
             reader.close()

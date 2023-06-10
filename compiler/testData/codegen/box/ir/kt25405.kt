@@ -6,12 +6,12 @@ var result = "fail"
 
 class Table<T> {
 
-    inner class TableColumn(val name: String) {
+    inner class TableColumn(konst name: String) {
 
     }
 
     fun column(name: String, init: TableColumn.() -> Unit) {
-        val column = TableColumn(name).init()
+        konst column = TableColumn(name).init()
     }
 }
 

@@ -60,7 +60,7 @@ public interface SimpleEffect : Effect {
 }
 
 /**
- * Describes a situation when a function returns normally with a given return value.
+ * Describes a situation when a function returns normally with a given return konstue.
  *
  * @see ContractBuilder.returns
  */
@@ -70,7 +70,7 @@ public interface SimpleEffect : Effect {
 public interface Returns : SimpleEffect
 
 /**
- * Describes a situation when a function returns normally with any non-null return value.
+ * Describes a situation when a function returns normally with any non-null return konstue.
  *
  * @see ContractBuilder.returnsNotNull
  */

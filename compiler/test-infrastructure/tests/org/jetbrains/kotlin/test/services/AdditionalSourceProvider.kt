@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.model.TestModule
 import java.io.File
 import java.nio.file.Paths
 
-abstract class AdditionalSourceProvider(val testServices: TestServices) : ServicesAndDirectivesContainer {
+abstract class AdditionalSourceProvider(konst testServices: TestServices) : ServicesAndDirectivesContainer {
     /**
      * Note that you can not use [testServices.moduleStructure] here because it's not initialized yet
      */

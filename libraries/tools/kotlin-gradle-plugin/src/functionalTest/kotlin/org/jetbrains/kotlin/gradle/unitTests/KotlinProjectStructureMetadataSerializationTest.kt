@@ -18,7 +18,7 @@ import kotlin.test.assertTrue
 
 class KotlinProjectStructureMetadataSerializationTest {
 
-    private val sampleMetadata = KotlinProjectStructureMetadata(
+    private konst sampleMetadata = KotlinProjectStructureMetadata(
         sourceSetNamesByVariantName = mapOf(
             "variant1" to setOf("commonMain", "sourceSetA", "sourceSetB"),
             "variant2" to setOf("commonMain", "sourceSetC")
@@ -44,22 +44,22 @@ class KotlinProjectStructureMetadataSerializationTest {
 
     @Test
     fun `serialize and deserialize - json`() {
-        val json = sampleMetadata.toJson()
-        val deserialized = parseKotlinSourceSetMetadataFromJson(json)
+        konst json = sampleMetadata.toJson()
+        konst deserialized = parseKotlinSourceSetMetadataFromJson(json)
         assertEquals(sampleMetadata, deserialized)
     }
 
     @Test
     fun `serialize and deserialize - xml`() {
-        val xml = sampleMetadata.toXmlDocument()
-        val deserialized = parseKotlinSourceSetMetadataFromXml(xml)
+        konst xml = sampleMetadata.toXmlDocument()
+        konst deserialized = parseKotlinSourceSetMetadataFromXml(xml)
         assertEquals(sampleMetadata, deserialized)
     }
 
     @Test
     fun `deserialize 0_3_1 format version built from coroutines`() {
-        val json = File("src/functionalTest/resources/coroutines-kotlin-project-structure-metadata.0_3_1.json").absoluteFile.readText()
-        val deserialized = assertNotNull(parseKotlinSourceSetMetadataFromJson(json))
+        konst json = File("src/functionalTest/resources/coroutines-kotlin-project-structure-metadata.0_3_1.json").absoluteFile.readText()
+        konst deserialized = assertNotNull(parseKotlinSourceSetMetadataFromJson(json))
         assertEquals(KotlinProjectStructureMetadata.FORMAT_VERSION_0_3_1, deserialized.formatVersion)
         assertTrue(deserialized.isPublishedAsRoot)
         assertEquals(setOf("commonMain", "concurrentMain"), deserialized.sourceSetsDependsOnRelation["nativeMain"])

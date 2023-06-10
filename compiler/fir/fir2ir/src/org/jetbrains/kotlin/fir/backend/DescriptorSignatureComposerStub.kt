@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.ir.util.KotlinMangler
 /**
  * A dummy signature composer that returns `null` for all declaration descriptors.
  */
-class DescriptorSignatureComposerStub(override val mangler: KotlinMangler.DescriptorMangler) : IdSignatureComposer {
+class DescriptorSignatureComposerStub(override konst mangler: KotlinMangler.DescriptorMangler) : IdSignatureComposer {
     override fun composeSignature(descriptor: DeclarationDescriptor): IdSignature? {
         return null
     }

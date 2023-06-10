@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.contracts.model.*
 import org.jetbrains.kotlin.contracts.model.structure.*
 
-class InfoCollector(private val observedEffect: ESEffect, private val builtIns: KotlinBuiltIns) : ESExpressionVisitor<MutableContextInfo> {
+class InfoCollector(private konst observedEffect: ESEffect, private konst builtIns: KotlinBuiltIns) : ESExpressionVisitor<MutableContextInfo> {
     private var isInverted: Boolean = false
 
     fun collectFromSchema(schema: List<ESEffect>): MutableContextInfo =
@@ -44,7 +44,7 @@ class InfoCollector(private val observedEffect: ESEffect, private val builtIns: 
     }
 
     override fun visitIs(isOperator: ESIs): MutableContextInfo = with(isOperator) {
-        val isType = type.toKotlinType(builtIns)
+        konst isType = type.toKotlinType(builtIns)
         if (functor.isNegated != isInverted) MutableContextInfo.EMPTY.notSubtype(left, isType) else MutableContextInfo.EMPTY.subtype(
             left,
             isType
@@ -56,8 +56,8 @@ class InfoCollector(private val observedEffect: ESEffect, private val builtIns: 
     }
 
     override fun visitAnd(and: ESAnd): MutableContextInfo {
-        val leftInfo = and.left.accept(this)
-        val rightInfo = and.right.accept(this)
+        konst leftInfo = and.left.accept(this)
+        konst rightInfo = and.right.accept(this)
 
         return if (isInverted) leftInfo.or(rightInfo) else leftInfo.and(rightInfo)
     }
@@ -65,8 +65,8 @@ class InfoCollector(private val observedEffect: ESEffect, private val builtIns: 
     override fun visitNot(not: ESNot): MutableContextInfo = inverted { not.arg.accept(this) }
 
     override fun visitOr(or: ESOr): MutableContextInfo {
-        val leftInfo = or.left.accept(this)
-        val rightInfo = or.right.accept(this)
+        konst leftInfo = or.left.accept(this)
+        konst rightInfo = or.right.accept(this)
         return if (isInverted) leftInfo.and(rightInfo) else leftInfo.or(rightInfo)
     }
 
@@ -84,7 +84,7 @@ class InfoCollector(private val observedEffect: ESEffect, private val builtIns: 
 
     private fun <R> inverted(block: () -> R): R {
         isInverted = isInverted.not()
-        val result = block()
+        konst result = block()
         isInverted = isInverted.not()
         return result
     }

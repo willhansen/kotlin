@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.getAllSuperClassifiers
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.typeUtil.*
 
-private val javaLangCloneable = FqNameUnsafe("java.lang.Cloneable")
+private konst javaLangCloneable = FqNameUnsafe("java.lang.Cloneable")
 
 object ValueClassDeclarationChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
@@ -29,26 +29,26 @@ object ValueClassDeclarationChecker : DeclarationChecker {
         if (descriptor !is ClassDescriptor || !descriptor.isInline && !descriptor.isValue) return
         if (descriptor.kind != ClassKind.CLASS) return
 
-        val trace = context.trace
+        konst trace = context.trace
 
-        val valueKeyword = declaration.modifierList?.getModifier(KtTokens.VALUE_KEYWORD)
+        konst konstueKeyword = declaration.modifierList?.getModifier(KtTokens.VALUE_KEYWORD)
 
-        // The check cannot be done in ModifierCheckerCore, since `value` keyword is enabled by one of two features, not by both of
+        // The check cannot be done in ModifierCheckerCore, since `konstue` keyword is enabled by one of two features, not by both of
         // them simultaneously
-        if (valueKeyword != null) {
+        if (konstueKeyword != null) {
             if (!context.languageVersionSettings.supportsFeature(LanguageFeature.JvmInlineValueClasses) &&
                 !context.languageVersionSettings.supportsFeature(LanguageFeature.InlineClasses)
             ) {
                 trace.report(
                     Errors.UNSUPPORTED_FEATURE.on(
-                        valueKeyword, LanguageFeature.JvmInlineValueClasses to context.languageVersionSettings
+                        konstueKeyword, LanguageFeature.JvmInlineValueClasses to context.languageVersionSettings
                     )
                 )
                 return
             }
         }
 
-        val inlineOrValueKeyword = declaration.modifierList?.getModifier(KtTokens.INLINE_KEYWORD) ?: valueKeyword
+        konst inlineOrValueKeyword = declaration.modifierList?.getModifier(KtTokens.INLINE_KEYWORD) ?: konstueKeyword
         require(inlineOrValueKeyword != null) { "Declaration of inline class must have 'inline' keyword" }
 
         if (descriptor.isInner || DescriptorUtils.isLocal(descriptor)) {
@@ -57,48 +57,48 @@ object ValueClassDeclarationChecker : DeclarationChecker {
         }
 
         if (declaration.contextReceivers.isNotEmpty()) {
-            val contextReceiverList = declaration.getContextReceiverList()
+            konst contextReceiverList = declaration.getContextReceiverList()
             requireNotNull(contextReceiverList) { "Declaration cannot have context receivers with no context receiver list" }
             trace.report(Errors.VALUE_CLASS_CANNOT_HAVE_CONTEXT_RECEIVERS.on(contextReceiverList))
         }
 
-        val modalityModifier = declaration.modalityModifier()
+        konst modalityModifier = declaration.modalityModifier()
         if (modalityModifier != null && descriptor.modality != Modality.FINAL) {
             trace.report(Errors.VALUE_CLASS_NOT_FINAL.on(modalityModifier))
             return
         }
 
-        val primaryConstructor = declaration.primaryConstructor
+        konst primaryConstructor = declaration.primaryConstructor
         if (primaryConstructor == null) {
             trace.report(Errors.ABSENCE_OF_PRIMARY_CONSTRUCTOR_FOR_VALUE_CLASS.on(inlineOrValueKeyword))
             return
         }
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.ValueClasses)) {
-            if (primaryConstructor.valueParameters.isEmpty()) {
-                (primaryConstructor.valueParameterList ?: declaration).let {
+            if (primaryConstructor.konstueParameters.isEmpty()) {
+                (primaryConstructor.konstueParameterList ?: declaration).let {
                     trace.report(Errors.VALUE_CLASS_EMPTY_CONSTRUCTOR.on(it))
                     return
                 }
             }
-        } else if (primaryConstructor.valueParameters.size != 1) {
-            (primaryConstructor.valueParameterList ?: declaration).let {
+        } else if (primaryConstructor.konstueParameters.size != 1) {
+            (primaryConstructor.konstueParameterList ?: declaration).let {
                 trace.report(Errors.INLINE_CLASS_CONSTRUCTOR_WRONG_PARAMETERS_SIZE.on(it))
                 return
             }
         }
 
         var baseParametersOk = true
-        val baseParameterTypes = (descriptor as? ClassDescriptor)?.defaultType?.substitutedUnderlyingTypes() ?: emptyList()
+        konst baseParameterTypes = (descriptor as? ClassDescriptor)?.defaultType?.substitutedUnderlyingTypes() ?: emptyList()
 
-        for ((baseParameter, baseParameterType) in primaryConstructor.valueParameters zip baseParameterTypes) {
+        for ((baseParameter, baseParameterType) in primaryConstructor.konstueParameters zip baseParameterTypes) {
             if (!isParameterAcceptableForInlineClass(baseParameter)) {
                 trace.report(Errors.VALUE_CLASS_CONSTRUCTOR_NOT_FINAL_READ_ONLY_PARAMETER.on(baseParameter))
                 baseParametersOk = false
                 continue
             }
 
-            val baseParameterTypeReference = baseParameter.typeReference
+            konst baseParameterTypeReference = baseParameter.typeReference
             if (baseParameterType != null && baseParameterTypeReference != null) {
                 if (!context.languageVersionSettings.supportsFeature(LanguageFeature.GenericInlineClassParameter) &&
                     (baseParameterType.isTypeParameter() || baseParameterType.isGenericArrayOfTypeParameter())
@@ -136,10 +136,10 @@ object ValueClassDeclarationChecker : DeclarationChecker {
         }
 
         for (supertypeEntry in declaration.superTypeListEntries) {
-            val typeReference = supertypeEntry.typeReference ?: continue
-            val type = trace[BindingContext.TYPE, typeReference] ?: continue
+            konst typeReference = supertypeEntry.typeReference ?: continue
+            konst type = trace[BindingContext.TYPE, typeReference] ?: continue
             if (supertypeEntry is KtDelegatedSuperTypeEntry) {
-                val resolvedCall = supertypeEntry.delegateExpression.getResolvedCall(trace.bindingContext) ?: continue
+                konst resolvedCall = supertypeEntry.delegateExpression.getResolvedCall(trace.bindingContext) ?: continue
                 if (!context.languageVersionSettings.supportsFeature(LanguageFeature.InlineClassImplementationByDelegation) ||
                     resolvedCall.resultingDescriptor !is ValueParameterDescriptor ||
                     resolvedCall.resultingDescriptor.containingDeclaration != trace.bindingContext[BindingContext.DECLARATION_TO_DESCRIPTOR, primaryConstructor]
@@ -148,7 +148,7 @@ object ValueClassDeclarationChecker : DeclarationChecker {
                     return
                 }
             } else {
-                val typeDescriptor = type.constructor.declarationDescriptor ?: continue
+                konst typeDescriptor = type.constructor.declarationDescriptor ?: continue
                 if (!DescriptorUtils.isInterface(typeDescriptor)) {
                     trace.report(Errors.VALUE_CLASS_CANNOT_EXTEND_CLASSES.on(typeReference))
                     return
@@ -172,7 +172,7 @@ object ValueClassDeclarationChecker : DeclarationChecker {
         fun KtClass.namedFunctions() = declarations.filterIsInstance<KtNamedFunction>()
 
         if (context.languageVersionSettings.supportsFeature(LanguageFeature.CustomEqualsInValueClasses)) {
-            val typedEquals = declaration.namedFunctions().firstOrNull { isTypedEquals(it) }
+            konst typedEquals = declaration.namedFunctions().firstOrNull { isTypedEquals(it) }
 
             declaration.namedFunctions().singleOrNull { isUntypedEquals(it) }?.apply {
                 if (typedEquals == null) {
@@ -191,7 +191,7 @@ object ValueClassDeclarationChecker : DeclarationChecker {
         isUnit() || isNothing()
 
     private fun isParameterAcceptableForInlineClass(parameter: KtParameter): Boolean {
-        val isOpen = parameter.modalityModifier()?.node?.elementType == KtTokens.OPEN_KEYWORD
+        konst isOpen = parameter.modalityModifier()?.node?.elementType == KtTokens.OPEN_KEYWORD
         return parameter.hasValOrVar() && !parameter.isMutable && !parameter.isVarArg && !isOpen
     }
 }
@@ -228,43 +228,43 @@ class InnerClassInsideValueClass : DeclarationChecker {
 class ReservedMembersAndConstructsForValueClass : DeclarationChecker {
 
     companion object {
-        private val boxAndUnboxNames = setOf("box", "unbox")
-        private val equalsAndHashCodeNames = setOf("equals", "hashCode")
+        private konst boxAndUnboxNames = setOf("box", "unbox")
+        private konst equalsAndHashCodeNames = setOf("equals", "hashCode")
     }
 
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val containingDeclaration = descriptor.containingDeclaration ?: return
+        konst containingDeclaration = descriptor.containingDeclaration ?: return
         if (!containingDeclaration.isValueClass()) return
 
         if (descriptor !is FunctionDescriptor) return
 
         when (descriptor) {
             is SimpleFunctionDescriptor -> {
-                val ktFunction = declaration as? KtFunction ?: return
-                val functionName = descriptor.name.asString()
+                konst ktFunction = declaration as? KtFunction ?: return
+                konst functionName = descriptor.name.asString()
                 if (functionName in boxAndUnboxNames
                     || (functionName in equalsAndHashCodeNames
                             && !context.languageVersionSettings.supportsFeature(LanguageFeature.CustomEqualsInValueClasses))
                 ) {
-                    val nameIdentifier = ktFunction.nameIdentifier ?: return
+                    konst nameIdentifier = ktFunction.nameIdentifier ?: return
                     context.trace.report(Errors.RESERVED_MEMBER_INSIDE_VALUE_CLASS.on(nameIdentifier, functionName))
                 } else if (descriptor.isTypedEqualsInValueClass()) {
                     if (descriptor.typeParameters.isNotEmpty()) {
                         context.trace.report(Errors.TYPE_PARAMETERS_NOT_ALLOWED.on(declaration))
                     }
-                    val parameterType = descriptor.valueParameters.first()?.type
+                    konst parameterType = descriptor.konstueParameters.first()?.type
                     if (parameterType != null && parameterType.arguments.any { !it.isStarProjection }) {
-                        context.trace.report(Errors.TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS.on(declaration.valueParameters[0].typeReference!!))
+                        context.trace.report(Errors.TYPE_ARGUMENT_ON_TYPED_VALUE_CLASS_EQUALS.on(declaration.konstueParameters[0].typeReference!!))
                     }
                 }
             }
 
             is ConstructorDescriptor -> {
                 if (!context.languageVersionSettings.supportsFeature(LanguageFeature.ValueClassesSecondaryConstructorWithBody)) {
-                    val secondaryConstructor = declaration as? KtSecondaryConstructor ?: return
-                    val bodyExpression = secondaryConstructor.bodyExpression
+                    konst secondaryConstructor = declaration as? KtSecondaryConstructor ?: return
+                    konst bodyExpression = secondaryConstructor.bodyExpression
                     if (secondaryConstructor.hasBlockBody() && bodyExpression is KtBlockExpression) {
-                        val lBrace = bodyExpression.lBrace ?: return
+                        konst lBrace = bodyExpression.lBrace ?: return
                         context.trace.report(
                             Errors.UNSUPPORTED_FEATURE.on(
                                 lBrace,

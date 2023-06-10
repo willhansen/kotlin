@@ -28,18 +28,18 @@ internal abstract class AggregateReporter {
 }
 
 internal object DisabledNativeTargetsReporter : AggregateReporter() {
-    private const val EXTRA_PROPERTY_NAME = "org.jetbrains.kotlin.native.disabledTargets"
+    private const konst EXTRA_PROPERTY_NAME = "org.jetbrains.kotlin.native.disabledTargets"
 
-    internal const val WARNING_PREFIX = "Some Kotlin/Native targets cannot be built on this "
+    internal const konst WARNING_PREFIX = "Some Kotlin/Native targets cannot be built on this "
 
-    internal const val DISABLE_WARNING_PROPERTY_NAME = "kotlin.native.ignoreDisabledTargets"
+    internal const konst DISABLE_WARNING_PROPERTY_NAME = "kotlin.native.ignoreDisabledTargets"
 
     fun reportDisabledTarget(project: Project, target: KotlinNativeTarget, supportedHosts: Collection<KonanTarget>) {
-        val disabledTargetsList = getOrRegisterDisabledTargets(project)
+        konst disabledTargetsList = getOrRegisterDisabledTargets(project)
         disabledTargetsList.add(DisabledTarget(project, target, supportedHosts))
     }
 
-    private data class DisabledTarget(val project: Project, val target: KotlinNativeTarget, val supportedHosts: Collection<KonanTarget>)
+    private data class DisabledTarget(konst project: Project, konst target: KotlinNativeTarget, konst supportedHosts: Collection<KonanTarget>)
 
     private fun getOrRegisterDisabledTargets(project: Project) =
         getOrRegisterData<DisabledTarget>(project, EXTRA_PROPERTY_NAME)
@@ -49,10 +49,10 @@ internal object DisabledNativeTargetsReporter : AggregateReporter() {
             return
         }
 
-        val disabledTargetsList = getOrRegisterDisabledTargets(project)
+        konst disabledTargetsList = getOrRegisterDisabledTargets(project)
 
         @Suppress("UselessCallOnCollection") // filterIsInstance helps against potential class loaders conflict or misconfiguration.
-        val disabledTargetGroups = disabledTargetsList
+        konst disabledTargetGroups = disabledTargetsList
             .filterIsInstance<DisabledTarget>()
             .groupBy { it.project }
             .mapValues { (_, disabledTargetsInProject) -> disabledTargetsInProject.groupBy { it.supportedHosts } }
@@ -69,7 +69,7 @@ internal object DisabledNativeTargetsReporter : AggregateReporter() {
                     append("        * target" + "s".takeIf { disabledTargets.size > 1 }.orEmpty() + " ")
                     append(disabledTargets.joinToString { "'${it.target.name}'" })
 
-                    val supportedHostsString = when (supportedHosts.size) {
+                    konst supportedHostsString = when (supportedHosts.size) {
                         1 -> "a ${supportedHosts.single()} host"
                         else -> "one of the hosts: ${supportedHosts.joinToString(", ")}"
                     }

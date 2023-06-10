@@ -40,10 +40,10 @@ import org.jetbrains.kotlin.types.checker.KotlinTypeRefiner
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class LazyJavaClassDescriptor(
-    val outerContext: LazyJavaResolverContext,
+    konst outerContext: LazyJavaResolverContext,
     containingDeclaration: DeclarationDescriptor,
-    val jClass: JavaClass,
-    private val additionalSupertypeClassDescriptor: ClassDescriptor? = null
+    konst jClass: JavaClass,
+    private konst additionalSupertypeClassDescriptor: ClassDescriptor? = null
 ) : ClassDescriptorBase(
     outerContext.storageManager, containingDeclaration, jClass.name,
     outerContext.components.sourceElementFactory.source(jClass),
@@ -52,10 +52,10 @@ class LazyJavaClassDescriptor(
 
     companion object {
         @JvmStatic
-        private val PUBLIC_METHOD_NAMES_IN_OBJECT = setOf("equals", "hashCode", "getClass", "wait", "notify", "notifyAll", "toString")
+        private konst PUBLIC_METHOD_NAMES_IN_OBJECT = setOf("equals", "hashCode", "getClass", "wait", "notify", "notifyAll", "toString")
     }
 
-    private val c: LazyJavaResolverContext = outerContext.childForClassOrPackage(this, jClass)
+    private konst c: LazyJavaResolverContext = outerContext.childForClassOrPackage(this, jClass)
 
     init {
         c.components.javaResolverCache.recordClass(jClass, this)
@@ -65,18 +65,18 @@ class LazyJavaClassDescriptor(
         }
     }
 
-    val moduleAnnotations by lazy {
+    konst moduleAnnotations by lazy {
         classId?.let { outerContext.components.javaModuleResolver.getAnnotationsForModuleOwnerOfClass(it) }
     }
 
-    private val kind = when {
+    private konst kind = when {
         jClass.isAnnotationType -> ClassKind.ANNOTATION_CLASS
         jClass.isInterface -> ClassKind.INTERFACE
         jClass.isEnum -> ClassKind.ENUM_CLASS
         else -> ClassKind.CLASS
     }
 
-    private val modality =
+    private konst modality =
         if (jClass.isAnnotationType || jClass.isEnum) Modality.FINAL
         else Modality.convertFromFlags(
             sealed = jClass.isSealed,
@@ -84,8 +84,8 @@ class LazyJavaClassDescriptor(
             open = !jClass.isFinal
         )
 
-    private val visibility = jClass.visibility
-    private val isInner = jClass.outerClass != null && !jClass.isStatic
+    private konst visibility = jClass.visibility
+    private konst isInner = jClass.outerClass != null && !jClass.isStatic
 
     override fun getKind() = kind
     override fun getModality() = modality
@@ -115,13 +115,13 @@ class LazyJavaClassDescriptor(
     override fun isFun() = false
     override fun isValue() = false
 
-    private val typeConstructor = LazyJavaClassTypeConstructor()
+    private konst typeConstructor = LazyJavaClassTypeConstructor()
     override fun getTypeConstructor(): TypeConstructor = typeConstructor
 
-    private val unsubstitutedMemberScope =
+    private konst unsubstitutedMemberScope =
         LazyJavaClassMemberScope(c, this, jClass, skipRefinement = additionalSupertypeClassDescriptor != null)
 
-    private val scopeHolder =
+    private konst scopeHolder =
         ScopesHolderForClass.create(this, c.storageManager, c.components.kotlinTypeChecker.kotlinTypeRefiner) {
             LazyJavaClassMemberScope(
                 c, this, jClass,
@@ -132,10 +132,10 @@ class LazyJavaClassDescriptor(
 
     override fun getUnsubstitutedMemberScope(kotlinTypeRefiner: KotlinTypeRefiner) = scopeHolder.getScope(kotlinTypeRefiner)
 
-    private val innerClassesScope = InnerClassesScopeWrapper(unsubstitutedMemberScope)
+    private konst innerClassesScope = InnerClassesScopeWrapper(unsubstitutedMemberScope)
     override fun getUnsubstitutedInnerClassesScope(): MemberScope = innerClassesScope
 
-    private val staticScope = LazyJavaStaticClassScope(c, jClass, this)
+    private konst staticScope = LazyJavaStaticClassScope(c, jClass, this)
     override fun getStaticScope(): MemberScope = staticScope
 
     override fun getUnsubstitutedPrimaryConstructor(): ClassConstructorDescriptor? = null
@@ -145,9 +145,9 @@ class LazyJavaClassDescriptor(
     override fun getUnsubstitutedMemberScope() = super.getUnsubstitutedMemberScope() as LazyJavaClassMemberScope
     override fun getConstructors() = unsubstitutedMemberScope.constructors()
 
-    override val annotations = c.resolveAnnotations(jClass)
+    override konst annotations = c.resolveAnnotations(jClass)
 
-    private val declaredParameters = c.storageManager.createLazyValue {
+    private konst declaredParameters = c.storageManager.createLazyValue {
         jClass.typeParameters.map { p ->
             c.typeParameterResolver.resolveTypeParameter(p)
                 ?: throw AssertionError("Parameter $p surely belongs to class $jClass, so it must be resolved")
@@ -196,7 +196,7 @@ class LazyJavaClassDescriptor(
         getUnsubstitutedMemberScope().wasContentRequested() || staticScope.wasContentRequested()
 
     override fun getSealedSubclasses(): Collection<ClassDescriptor> = if (modality == Modality.SEALED) {
-        val attributes = TypeUsage.COMMON.toAttributes()
+        konst attributes = TypeUsage.COMMON.toAttributes()
         jClass.permittedTypes.mapNotNull {
             c.typeResolver.transformJavaType(it, attributes).constructor.declarationDescriptor as? ClassDescriptor
         }.sortedBy { it.fqNameSafe.asString() }
@@ -209,22 +209,22 @@ class LazyJavaClassDescriptor(
     override fun toString() = "Lazy Java class ${this.fqNameUnsafe}"
 
     private inner class LazyJavaClassTypeConstructor : AbstractClassTypeConstructor(c.storageManager) {
-        private val parameters = c.storageManager.createLazyValue {
+        private konst parameters = c.storageManager.createLazyValue {
             this@LazyJavaClassDescriptor.computeConstructorTypeParameters()
         }
 
         override fun getParameters(): List<TypeParameterDescriptor> = parameters()
 
         override fun computeSupertypes(): Collection<KotlinType> {
-            val javaTypes = jClass.supertypes
-            val result = ArrayList<KotlinType>(javaTypes.size)
-            val incomplete = ArrayList<JavaType>(0)
+            konst javaTypes = jClass.supertypes
+            konst result = ArrayList<KotlinType>(javaTypes.size)
+            konst incomplete = ArrayList<JavaType>(0)
 
-            val purelyImplementedSupertype: KotlinType? = getPurelyImplementedSupertype()
+            konst purelyImplementedSupertype: KotlinType? = getPurelyImplementedSupertype()
 
             for (javaType in javaTypes) {
-                val kotlinType = c.typeResolver.transformJavaType(javaType, TypeUsage.SUPERTYPE.toAttributes())
-                val enhancedKotlinType = c.components.signatureEnhancement.enhanceSuperType(kotlinType, c)
+                konst kotlinType = c.typeResolver.transformJavaType(javaType, TypeUsage.SUPERTYPE.toAttributes())
+                konst enhancedKotlinType = c.components.signatureEnhancement.enhanceSuperType(kotlinType, c)
 
                 if (enhancedKotlinType.constructor.declarationDescriptor is NotFoundClasses.MockClassDescriptor) {
                     incomplete.add(javaType)
@@ -260,28 +260,28 @@ class LazyJavaClassDescriptor(
         }
 
         private fun getPurelyImplementedSupertype(): KotlinType? {
-            val annotatedPurelyImplementedFqName = getPurelyImplementsFqNameFromAnnotation()?.takeIf { fqName ->
+            konst annotatedPurelyImplementedFqName = getPurelyImplementsFqNameFromAnnotation()?.takeIf { fqName ->
                 !fqName.isRoot && fqName.startsWith(StandardNames.BUILT_INS_PACKAGE_NAME)
             }
 
-            val purelyImplementedFqName =
+            konst purelyImplementedFqName =
                 annotatedPurelyImplementedFqName
                     ?: FakePureImplementationsProvider.getPurelyImplementedInterface(fqNameSafe)
                     ?: return null
 
-            val classDescriptor = c.module.resolveTopLevelClass(purelyImplementedFqName, NoLookupLocation.FROM_JAVA_LOADER) ?: return null
+            konst classDescriptor = c.module.resolveTopLevelClass(purelyImplementedFqName, NoLookupLocation.FROM_JAVA_LOADER) ?: return null
 
-            val supertypeParameterCount = classDescriptor.typeConstructor.parameters.size
-            val typeParameters = getTypeConstructor().parameters
-            val typeParameterCount = typeParameters.size
+            konst supertypeParameterCount = classDescriptor.typeConstructor.parameters.size
+            konst typeParameters = getTypeConstructor().parameters
+            konst typeParameterCount = typeParameters.size
 
-            val parametersAsTypeProjections = when {
+            konst parametersAsTypeProjections = when {
                 typeParameterCount == supertypeParameterCount ->
                     typeParameters.map { parameter ->
                         TypeProjectionImpl(Variance.INVARIANT, parameter.defaultType)
                     }
                 typeParameterCount == 1 && supertypeParameterCount > 1 && annotatedPurelyImplementedFqName == null -> {
-                    val parameter = TypeProjectionImpl(Variance.INVARIANT, typeParameters.single().defaultType)
+                    konst parameter = TypeProjectionImpl(Variance.INVARIANT, typeParameters.single().defaultType)
                     (1..supertypeParameterCount).map { parameter } // TODO: List(supertypeParameterCount) { parameter }
                 }
                 else -> return null
@@ -291,17 +291,17 @@ class LazyJavaClassDescriptor(
         }
 
         private fun getPurelyImplementsFqNameFromAnnotation(): FqName? {
-            val annotation =
+            konst annotation =
                 this@LazyJavaClassDescriptor.annotations.findAnnotation(JvmAnnotationNames.PURELY_IMPLEMENTS_ANNOTATION)
                     ?: return null
 
-            val fqNameString = (annotation.allValueArguments.values.singleOrNull() as? StringValue)?.value ?: return null
+            konst fqNameString = (annotation.allValueArguments.konstues.singleOrNull() as? StringValue)?.konstue ?: return null
             if (!isValidJavaFqName(fqNameString)) return null
 
             return FqName(fqNameString)
         }
 
-        override val supertypeLoopChecker: SupertypeLoopChecker
+        override konst supertypeLoopChecker: SupertypeLoopChecker
             get() = c.components.supertypeLoopChecker
 
         override fun isDenotable(): Boolean = true

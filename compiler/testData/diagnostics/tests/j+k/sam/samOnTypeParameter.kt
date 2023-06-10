@@ -2,17 +2,17 @@
 // FILE: FormFieldValidatorPresenterTest.java
 public class FormFieldValidatorPresenterTest<V extends String> {
 
-    public void setValidationListenerTest(ValidationListenerTest validationListener) {
+    public void setValidationListenerTest(ValidationListenerTest konstidationListener) {
     }
 
     public interface ValidationListenerTest {
-        void onValidityChanged(boolean valid);
+        void onValidityChanged(boolean konstid);
     }
 }
 // FILE: main.kt
 fun <P : FormFieldValidatorPresenterTest<String>> setValidationListener(
         presenter: P,
-        validationListener: (Boolean) -> Unit
+        konstidationListener: (Boolean) -> Unit
 ) {
-    presenter.setValidationListenerTest(validationListener) // Error: Type mismatch: inferred type is (Boolean) -> Unit but FormFieldValidatorPresenterTest.ValidationListenerTest! was expected
+    presenter.setValidationListenerTest(konstidationListener) // Error: Type mismatch: inferred type is (Boolean) -> Unit but FormFieldValidatorPresenterTest.ValidationListenerTest! was expected
 }

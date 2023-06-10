@@ -4,46 +4,46 @@ package a
 interface A
 interface B : A
 
-private fun validFun() {}
-private val validVal = 1
+private fun konstidFun() {}
+private konst konstidVal = 1
 
-<!CONFLICTING_OVERLOADS!>private fun invalidFun0()<!> {}
-private val <!REDECLARATION!>invalidProp0<!> = 1
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun0()<!> {}
+private konst <!REDECLARATION!>inkonstidProp0<!> = 1
 
-// NB invalidFun0 and invalidProp0 are conflicting overloads, since the following is an ambiguity:
-fun useInvalidFun0() = <!OVERLOAD_RESOLUTION_AMBIGUITY!>invalidFun0<!>()
-fun useInvalidProp0() = <!OVERLOAD_RESOLUTION_AMBIGUITY!>invalidProp0<!>
+// NB inkonstidFun0 and inkonstidProp0 are conflicting overloads, since the following is an ambiguity:
+fun useInkonstidFun0() = <!OVERLOAD_RESOLUTION_AMBIGUITY!>inkonstidFun0<!>()
+fun useInkonstidProp0() = <!OVERLOAD_RESOLUTION_AMBIGUITY!>inkonstidProp0<!>
 
-<!CONFLICTING_OVERLOADS!>private fun invalidFun1()<!> {}
-<!CONFLICTING_OVERLOADS!>private fun invalidFun1()<!> {}
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun1()<!> {}
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun1()<!> {}
 
-<!CONFLICTING_OVERLOADS!>private fun invalidFun2()<!> {}
-<!CONFLICTING_OVERLOADS!>public fun invalidFun2()<!> {}
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun2()<!> {}
+<!CONFLICTING_OVERLOADS!>public fun inkonstidFun2()<!> {}
 
-<!CONFLICTING_OVERLOADS!>public fun invalidFun3()<!> {}
+<!CONFLICTING_OVERLOADS!>public fun inkonstidFun3()<!> {}
 
-<!CONFLICTING_OVERLOADS!>private fun invalidFun4()<!> {}
-<!CONFLICTING_OVERLOADS!>public fun invalidFun4()<!> {}
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun4()<!> {}
+<!CONFLICTING_OVERLOADS!>public fun inkonstidFun4()<!> {}
 
-public fun validFun2(a: A) = a
-public fun validFun2(b: B) = b
+public fun konstidFun2(a: A) = a
+public fun konstidFun2(b: B) = b
 
 // FILE: b.kt
 package a
 
-private fun validFun() {}
-private val validVal = 1
+private fun konstidFun() {}
+private konst konstidVal = 1
 
-<!CONFLICTING_OVERLOADS!>private fun invalidFun0()<!> {}
+<!CONFLICTING_OVERLOADS!>private fun inkonstidFun0()<!> {}
 
-private val <!REDECLARATION!>invalidProp0<!> = 1
+private konst <!REDECLARATION!>inkonstidProp0<!> = 1
 
-<!CONFLICTING_OVERLOADS!>internal fun invalidFun3()<!> {}
-<!CONFLICTING_OVERLOADS!>internal fun invalidFun4()<!> {}
+<!CONFLICTING_OVERLOADS!>internal fun inkonstidFun3()<!> {}
+<!CONFLICTING_OVERLOADS!>internal fun inkonstidFun4()<!> {}
 
 // FILE: c.kt
 package a
 
-<!CONFLICTING_OVERLOADS!>public fun invalidFun0()<!> {}
+<!CONFLICTING_OVERLOADS!>public fun inkonstidFun0()<!> {}
 
-public val <!REDECLARATION!>invalidProp0<!> = 1
+public konst <!REDECLARATION!>inkonstidProp0<!> = 1

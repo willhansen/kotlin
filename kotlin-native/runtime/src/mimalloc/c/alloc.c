@@ -176,7 +176,7 @@ static bool mi_list_contains(const mi_page_t* page, const mi_block_t* list, cons
 }
 
 static mi_decl_noinline bool mi_check_is_double_freex(const mi_page_t* page, const mi_block_t* block) {
-  // The decoded value is in the same page (or NULL).
+  // The decoded konstue is in the same page (or NULL).
   // Walk the free lists to verify positively if it is already freed
   if (mi_list_contains(page, page->free, block) ||
       mi_list_contains(page, page->local_free, block) ||
@@ -193,7 +193,7 @@ static inline bool mi_check_is_double_free(const mi_page_t* page, const mi_block
   if (((uintptr_t)n & (MI_INTPTR_SIZE-1))==0 &&  // quick check: aligned pointer?
       (n==NULL || mi_is_in_same_page(block, n))) // quick check: in same page or NULL?
   {
-    // Suspicous: decoded value a in block is in the same page (or NULL) -- maybe a double free?
+    // Suspicous: decoded konstue a in block is in the same page (or NULL) -- maybe a double free?
     // (continue in separate function to improve code generation)
     return mi_check_is_double_freex(page, block);
   }
@@ -340,7 +340,7 @@ static void mi_stat_huge_free(const mi_page_t* page) {
 // multi-threaded free
 static mi_decl_noinline void _mi_free_block_mt(mi_page_t* page, mi_block_t* block)
 {
-  // The padding check may access the non-thread-owned page for the key values.
+  // The padding check may access the non-thread-owned page for the key konstues.
   // that is safe as these are constant and the page won't be freed (as the block is not freed yet).
   mi_check_padding(page, block);
   mi_padding_shrink(page, block, sizeof(mi_block_t)); // for small size, ensure we can fit the delayed thread pointers without triggering overflow detection
@@ -378,7 +378,7 @@ static mi_decl_noinline void _mi_free_block_mt(mi_page_t* page, mi_block_t* bloc
     mi_heap_t* const heap = (mi_heap_t*)(mi_atomic_load_acquire(&page->xheap)); //mi_page_heap(page);
     mi_assert_internal(heap != NULL);
     if (heap != NULL) {
-      // add to the delayed free list of this heap. (do this atomically as the lock only protects heap memory validity)
+      // add to the delayed free list of this heap. (do this atomically as the lock only protects heap memory konstidity)
       mi_block_t* dfree = mi_atomic_load_ptr_relaxed(mi_block_t, &heap->thread_delayed_free);
       do {
         mi_block_set_nextx(heap,block,dfree, heap->keys);
@@ -440,13 +440,13 @@ static void mi_decl_noinline mi_free_generic(const mi_segment_t* segment, bool l
 
 // Get the segment data belonging to a pointer
 // This is just a single `and` in assembly but does further checks in debug mode
-// (and secure mode) if this was a valid pointer.
+// (and secure mode) if this was a konstid pointer.
 static inline mi_segment_t* mi_checked_ptr_segment(const void* p, const char* msg)
 {
   UNUSED(msg);
 #if (MI_DEBUG>0)
   if (mi_unlikely(((uintptr_t)p & (MI_INTPTR_SIZE - 1)) != 0)) {
-    _mi_error_message(EINVAL, "%s: invalid (unaligned) pointer: %p\n", msg, p);
+    _mi_error_message(EINVAL, "%s: inkonstid (unaligned) pointer: %p\n", msg, p);
     return NULL;
   }
 #endif
@@ -456,16 +456,16 @@ static inline mi_segment_t* mi_checked_ptr_segment(const void* p, const char* ms
 
 #if (MI_DEBUG>0)
   if (mi_unlikely(!mi_is_in_heap_region(p))) {
-    _mi_warning_message("%s: pointer might not point to a valid heap region: %p\n"
-      "(this may still be a valid very large allocation (over 64MiB))\n", msg, p);
+    _mi_warning_message("%s: pointer might not point to a konstid heap region: %p\n"
+      "(this may still be a konstid very large allocation (over 64MiB))\n", msg, p);
     if (mi_likely(_mi_ptr_cookie(segment) == segment->cookie)) {
-      _mi_warning_message("(yes, the previous pointer %p was valid after all)\n", p);
+      _mi_warning_message("(yes, the previous pointer %p was konstid after all)\n", p);
     }
   }
 #endif
 #if (MI_DEBUG>0 || MI_SECURE>=4)
   if (mi_unlikely(_mi_ptr_cookie(segment) != segment->cookie)) {
-    _mi_error_message(EINVAL, "%s: pointer does not point to a valid heap space: %p\n", p);
+    _mi_error_message(EINVAL, "%s: pointer does not point to a konstid heap space: %p\n", p);
   }
 #endif
   return segment;

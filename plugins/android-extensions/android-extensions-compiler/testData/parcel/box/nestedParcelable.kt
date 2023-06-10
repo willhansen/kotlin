@@ -11,24 +11,24 @@ import android.os.Parcelable
 abstract class AParcelable : Parcelable
 
 @Parcelize
-data class P1(val a: String) : AParcelable()
+data class P1(konst a: String) : AParcelable()
 
 sealed class Sealed : AParcelable()
 
 @Parcelize
-data class Sealed1(val a: Int) : Sealed()
+data class Sealed1(konst a: Int) : Sealed()
 
 @Parcelize
-data class Test(val a: P1, val b: AParcelable, val c: Sealed, val d: Sealed1) : Parcelable
+data class Test(konst a: P1, konst b: AParcelable, konst c: Sealed, konst d: Sealed1) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = Test(P1(""), P1("My"), Sealed1(1), Sealed1(5))
+    konst test = Test(P1(""), P1("My"), Sealed1(1), Sealed1(5))
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<Test>(parcel)
+    konst test2 = readFromParcel<Test>(parcel)
     assert(test == test2)
 }

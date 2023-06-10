@@ -1,5 +1,5 @@
 fun foo(f: () -> Unit, returnIfOk: String): String {
-    val string = f().toString()
+    konst string = f().toString()
 
     return if (string == "kotlin.Unit") {
         returnIfOk
@@ -11,15 +11,15 @@ fun foo(f: () -> Unit, returnIfOk: String): String {
 class Wrapper(var s: String)
 
 fun box(): String {
-    val w: Wrapper? = Wrapper("Test")
+    konst w: Wrapper? = Wrapper("Test")
 
-    val lambda = {
+    konst lambda = {
         w?.s = "X"
     }
 
-    val w2: Wrapper? = null
+    konst w2: Wrapper? = null
 
-    val lambda2 = {
+    konst lambda2 = {
         w2?.s = "X"
     }
 

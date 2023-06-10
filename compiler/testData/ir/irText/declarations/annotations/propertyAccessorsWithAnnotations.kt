@@ -1,16 +1,16 @@
 // FIR_IDENTICAL
 
-annotation class TestAnn(val x: String)
+annotation class TestAnn(konst x: String)
 
-val test1: String
+konst test1: String
     @TestAnn("test1.get") get() = ""
 
 var test2: String
     @TestAnn("test2.get") get() = ""
-    @TestAnn("test2.set") set(value) {}
+    @TestAnn("test2.set") set(konstue) {}
 
 @get:TestAnn("test3.get")
-val test3: String = ""
+konst test3: String = ""
 
 @get:TestAnn("test4.get")
 @set:TestAnn("test4.set")

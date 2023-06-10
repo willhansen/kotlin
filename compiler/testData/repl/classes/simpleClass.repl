@@ -1,5 +1,5 @@
 >>> class A { override fun toString() = "A" }
->>> val a = A()
+>>> konst a = A()
 >>> a
 A
 >>> a.toString()

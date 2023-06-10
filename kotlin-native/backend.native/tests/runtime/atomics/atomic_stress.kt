@@ -15,8 +15,8 @@ import kotlin.concurrent.AtomicReference
 import kotlin.native.internal.NativePtr
 
 fun testAtomicIntStress(workers: Array<Worker>) {
-    val atomic = AtomicInt(10)
-    val futures = Array(workers.size, { workerIndex ->
+    konst atomic = AtomicInt(10)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { atomic }) {
             atomic -> atomic.addAndGet(1000)
         }
@@ -24,12 +24,12 @@ fun testAtomicIntStress(workers: Array<Worker>) {
     futures.forEach {
         it.result
     }
-    assertEquals(10 + 1000 * workers.size, atomic.value)
+    assertEquals(10 + 1000 * workers.size, atomic.konstue)
 }
 
 fun testAtomicLongStress(workers: Array<Worker>) {
-    val atomic = AtomicLong(10L)
-    val futures = Array(workers.size, { workerIndex ->
+    konst atomic = AtomicLong(10L)
+    konst futures = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { atomic }) {
             atomic -> atomic.addAndGet(9999999999)
         }
@@ -37,55 +37,55 @@ fun testAtomicLongStress(workers: Array<Worker>) {
     futures.forEach {
         it.result
     }
-    assertEquals(10L + 9999999999 * workers.size, atomic.value)
+    assertEquals(10L + 9999999999 * workers.size, atomic.konstue)
 }
 
 private class LockFreeStack<T> {
-    private val top = AtomicReference<Node<T>?>(null)
+    private konst top = AtomicReference<Node<T>?>(null)
 
-    private class Node<T>(val value: T, val next: Node<T>?)
+    private class Node<T>(konst konstue: T, konst next: Node<T>?)
 
-    fun isEmpty(): Boolean = top.value == null
+    fun isEmpty(): Boolean = top.konstue == null
 
-    fun push(value: T) {
+    fun push(konstue: T) {
         while(true) {
-            val cur = top.value
-            val upd = Node(value, cur)
+            konst cur = top.konstue
+            konst upd = Node(konstue, cur)
             if (top.compareAndSet(cur, upd)) return
         }
     }
 
     fun pop(): T? {
         while(true) {
-            val cur = top.value
+            konst cur = top.konstue
             if (cur == null) return null
-            if (top.compareAndSet(cur, cur.next)) return cur.value
+            if (top.compareAndSet(cur, cur.next)) return cur.konstue
         }
     }
 }
 
 fun testAtomicReferenceStress(workers: Array<Worker>) {
-    val stack = LockFreeStack<Int>()
-    val writers = Array(workers.size, { workerIndex ->
+    konst stack = LockFreeStack<Int>()
+    konst writers = Array(workers.size, { workerIndex ->
         workers[workerIndex].execute(TransferMode.SAFE, { stack to workerIndex}) {
             (stack, workerIndex) -> stack.push(workerIndex)
         }
     })
     writers.forEach { it.result }
 
-    val seen = mutableSetOf<Int>()
+    konst seen = mutableSetOf<Int>()
     while(!stack.isEmpty()) {
-        val value = stack.pop()
-        assertNotNull(value)
-        seen.add(value)
+        konst konstue = stack.pop()
+        assertNotNull(konstue)
+        seen.add(konstue)
     }
     assertEquals(workers.size, seen.size)
 }
 
 @Test
 fun runStressTest() {
-    val COUNT = 20
-    val workers = Array(COUNT, { _ -> Worker.start()})
+    konst COUNT = 20
+    konst workers = Array(COUNT, { _ -> Worker.start()})
     testAtomicIntStress(workers)
     testAtomicLongStress(workers)
     testAtomicReferenceStress(workers)

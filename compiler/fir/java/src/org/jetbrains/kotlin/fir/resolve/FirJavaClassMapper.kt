@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.fir.scopes.FirPlatformClassMapper
 import org.jetbrains.kotlin.name.ClassId
 
 @NoMutableState
-class FirJavaClassMapper(private val session: FirSession) : FirPlatformClassMapper() {
+class FirJavaClassMapper(private konst session: FirSession) : FirPlatformClassMapper() {
     override fun getCorrespondingPlatformClass(declaration: FirClassLikeDeclaration): FirRegularClass? {
-        val javaClassId = getCorrespondingPlatformClass(declaration.symbol.classId)
+        konst javaClassId = getCorrespondingPlatformClass(declaration.symbol.classId)
         return javaClassId?.let { session.symbolProvider.getClassLikeSymbolByClassId(it)?.fir } as? FirRegularClass
     }
 

@@ -6,7 +6,7 @@ buildscript {
 
 apply(plugin = "maven-publish")
 
-val archives by configurations
+konst archives by configurations
 
 configure<PublishingExtension> {
     publications {

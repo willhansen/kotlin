@@ -9,7 +9,7 @@ package org.jetbrains.kotlin.metadata.deserialization
 //
 // For example, if we find a bug in serialization/deserialization and would like to fix it _remaining compatible_ with two latest versions
 // of Kotlin, we can use methods of this class to fix deserialization of the "future" binaries, and later (in the next major version)
-// fix the bug in serialization when the binary version advances to the value supported in the first bug fix.
+// fix the bug in serialization when the binary version advances to the konstue supported in the first bug fix.
 
 /**
  * Before metadata version 1.4, version requirements for nested classes were deserialized incorrectly: the version requirement table was

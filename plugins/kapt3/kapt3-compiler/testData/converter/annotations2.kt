@@ -3,7 +3,7 @@ package test
 
 @Anno("anno-class")
 annotation class Anno @Anno("anno-constructor") constructor(
-        @Anno("anno-value") val value: String
+        @Anno("anno-konstue") konst konstue: String
 )
 
 @Anno("clazz")
@@ -15,18 +15,18 @@ abstract class Test @Anno("test-constructor") protected constructor(@param:Anno(
     @Anno("abstract-method")
     abstract fun abstractMethod(): String
 
-    @Anno("abstract-val")
-    abstract val abstractVal: String
+    @Anno("abstract-konst")
+    abstract konst abstractVal: String
 }
 
 @Anno("top-level-fun")
 fun @receiver:Anno("top-level-fun-receiver") String.topLevelFun() {}
 
-@Anno("top-level-val")
-val @receiver:Anno("top-level-val-receiver") Int.topLevelVal: String
+@Anno("top-level-konst")
+konst @receiver:Anno("top-level-konst-receiver") Int.topLevelVal: String
     get() = ""
 
 @Anno("enum")
-enum class Enum @Anno("enum-constructor") constructor(@Anno("x") val x: Int) {
+enum class Enum @Anno("enum-constructor") constructor(@Anno("x") konst x: Int) {
     @Anno("white") WHITE(1), @Anno("black") BLACK(2)
 }

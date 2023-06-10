@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // WITH_REFLECT
 
-data class Foo(val id: String) {
+data class Foo(konst id: String) {
     fun getId() = -42 // Fail
 }
 

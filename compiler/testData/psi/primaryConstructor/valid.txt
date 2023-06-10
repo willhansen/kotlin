@@ -1,4 +1,4 @@
-KtFile: valid.kt
+KtFile: konstid.kt
   PACKAGE_DIRECTIVE
     <empty list>
   IMPORT_LIST
@@ -64,7 +64,7 @@ KtFile: valid.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiElement(COLON)(':')

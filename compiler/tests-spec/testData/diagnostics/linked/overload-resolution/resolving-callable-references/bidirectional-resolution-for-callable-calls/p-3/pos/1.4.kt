@@ -65,9 +65,9 @@ class Case3() : I {
         operator fun invoke(x: ()->String, z: String = ""): Any { print(4); return "" } // (4)
     }
 
-    val x = ""
+    konst x = ""
     fun x() = "" as CharSequence
-    val y : CharSequence= ""
+    konst y : CharSequence= ""
     fun y() = ""
 
     fun case() {

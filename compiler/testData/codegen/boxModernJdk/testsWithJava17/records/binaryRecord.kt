@@ -12,7 +12,7 @@ public final class SomeWrapper {
 import SomeWrapper.SomeRecord
 
 fun testBinary(s: String): String {
-    val record = SomeRecord(s, "K")
+    konst record = SomeRecord(s, "K")
     return record.a + record.b
 }
 

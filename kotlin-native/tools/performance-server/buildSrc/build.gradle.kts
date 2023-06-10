@@ -6,9 +6,9 @@ buildscript {
     java.util.Properties().also {
         it.load(java.io.FileReader(project.file("../../../../gradle.properties")))
     }.forEach { k, v->
-        val key = k as String
-        val value = project.findProperty(key) ?: v
-        extra[key] = value
+        konst key = k as String
+        konst konstue = project.findProperty(key) ?: v
+        extra[key] = konstue
     }
 
 
@@ -40,7 +40,7 @@ java {
     }
 }
 
-tasks.validatePlugins.configure {
+tasks.konstidatePlugins.configure {
     enabled = false
 }
 
@@ -63,11 +63,11 @@ dependencies {
     api("org.jetbrains.kotlin:kotlin-native-utils:${project.bootstrapKotlinVersion}")
     api("org.jetbrains.kotlin:kotlin-util-klib:${project.bootstrapKotlinVersion}")
     compileOnly(gradleApi())
-    val kotlinVersion = project.bootstrapKotlinVersion
-    val ktorVersion = "1.2.1"
-    val slackApiVersion = "1.2.0"
-    val shadowVersion = "7.1.2"
-    val metadataVersion = "0.0.1-dev-10"
+    konst kotlinVersion = project.bootstrapKotlinVersion
+    konst ktorVersion = "1.2.1"
+    konst slackApiVersion = "1.2.0"
+    konst shadowVersion = "7.1.2"
+    konst metadataVersion = "0.0.1-dev-10"
 
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")

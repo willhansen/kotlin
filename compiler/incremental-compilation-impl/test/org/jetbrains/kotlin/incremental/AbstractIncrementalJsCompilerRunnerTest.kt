@@ -26,13 +26,13 @@ import java.io.File
 
 abstract class AbstractIncrementalJsCompilerRunnerTest : AbstractIncrementalCompilerRunnerTestBase<K2JSCompilerArguments>() {
     override fun make(cacheDir: File, outDir: File, sourceRoots: Iterable<File>, args: K2JSCompilerArguments): TestCompilationResult {
-        val reporter = TestICReporter()
-        val messageCollector = TestMessageCollector()
+        konst reporter = TestICReporter()
+        konst messageCollector = TestMessageCollector()
         makeJsIncrementally(cacheDir, sourceRoots, args, buildHistoryFile(cacheDir), messageCollector, reporter, scopeExpansionMode)
         return TestCompilationResult(reporter, messageCollector)
     }
 
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = super.buildLogFinder.copy(
             isJsEnabled = true,
             isScopeExpansionEnabled = scopeExpansionMode != CompileScopeExpansionMode.NEVER
@@ -46,5 +46,5 @@ abstract class AbstractIncrementalJsCompilerRunnerTest : AbstractIncrementalComp
             forceDeprecatedLegacyCompilerUsage = true
         }
 
-    protected open val scopeExpansionMode = CompileScopeExpansionMode.NEVER
+    protected open konst scopeExpansionMode = CompileScopeExpansionMode.NEVER
 }

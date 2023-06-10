@@ -21,7 +21,7 @@ import kotlin.script.experimental.jvm.defaultJvmScriptingHostConfiguration
 class ScriptCompilerTest : TestCase() {
 
     fun testCompilationWithRefinementError() {
-        val res = compile("nonsense".toScriptSource()) {
+        konst res = compile("nonsense".toScriptSource()) {
             refineConfiguration {
                 beforeCompiling {
                     ResultWithDiagnostics.Failure("err13".asErrorDiagnostics())
@@ -35,69 +35,69 @@ class ScriptCompilerTest : TestCase() {
     }
 
     fun testSimpleVarAccess() {
-        val res = compileToClass(
+        konst res = compileToClass(
             """
-                val x = 2
-                val y = x
+                konst x = 2
+                konst y = x
             """.trimIndent().toScriptSource()
         )
 
-        val kclass = res.valueOrThrow()
-        val scriptInstance = kclass.createInstance()
+        konst kclass = res.konstueOrThrow()
+        konst scriptInstance = kclass.createInstance()
         assertNotNull(scriptInstance)
     }
 
     fun testLambdaWithProperty() {
-        val versionProperties = java.util.Properties()
+        konst versionProperties = java.util.Properties()
         "".reader().use { propInput ->
             versionProperties.load(propInput)
         }
-        val res = compileToClass(
+        konst res = compileToClass(
             """
-                val versionProperties = java.util.Properties()
+                konst versionProperties = java.util.Properties()
                 "".reader().use { propInput ->
-                    val x = 1
+                    konst x = 1
                     x.toString()
                     versionProperties.load(propInput)
                 }
             """.trimIndent().toScriptSource()
         )
 
-        val kclass = res.valueOrThrow()
-        val scriptInstance = kclass.createInstance()
+        konst kclass = res.konstueOrThrow()
+        konst scriptInstance = kclass.createInstance()
         assertNotNull(scriptInstance)
     }
 
     fun testTypeAliases() {
-        val res = compileToClass(
+        konst res = compileToClass(
             """
                 class Clazz
                 typealias Tazz = List<Clazz>
-                val x: Tazz = listOf()
+                konst x: Tazz = listOf()
                 x
             """.trimIndent().toScriptSource()
         )
 
-        val kclass = res.valueOrThrow()
-        val nestedClasses = kclass.nestedClasses.toList()
+        konst kclass = res.konstueOrThrow()
+        konst nestedClasses = kclass.nestedClasses.toList()
 
         assertEquals(1, nestedClasses.size)
         assertEquals("Clazz", nestedClasses[0].simpleName)
     }
 
     fun testDestructingDeclarations() {
-        val res = compileToClass(
+        konst res = compileToClass(
             """
-                val c = 3
-                val (a, b) = 1 to 2
-                val (_, d, _) = listOf('1', '2', '3')
+                konst c = 3
+                konst (a, b) = 1 to 2
+                konst (_, d, _) = listOf('1', '2', '3')
             """.trimIndent().toScriptSource()
         )
 
-        val kClass = res.valueOrThrow()
-        val scriptInstance = kClass.createInstance()
-        val members = kClass.declaredMembers
-        val namesToMembers = members.associateBy { it.name }
+        konst kClass = res.konstueOrThrow()
+        konst scriptInstance = kClass.createInstance()
+        konst members = kClass.declaredMembers
+        konst namesToMembers = members.associateBy { it.name }
 
         fun prop(name: String) = namesToMembers[name]!! as KProperty<*>
         fun propValue(name: String) = prop(name).call(scriptInstance)
@@ -114,23 +114,23 @@ class ScriptCompilerTest : TestCase() {
         script: SourceCode,
         cfgBody: ScriptCompilationConfiguration.Builder.() -> Unit
     ): ResultWithDiagnostics<CompiledScript> {
-        val compilationConfiguration = ScriptCompilationConfiguration {
+        konst compilationConfiguration = ScriptCompilationConfiguration {
             cfgBody()
             getBaseCompilerArgumentsFromProperty()?.let {
                 compilerOptions.append(it)
             }
         }
-        val compiler = ScriptJvmCompilerIsolated(defaultJvmScriptingHostConfiguration)
+        konst compiler = ScriptJvmCompilerIsolated(defaultJvmScriptingHostConfiguration)
         return compiler.compile(script, compilationConfiguration)
     }
 
     fun compileToClass(
         script: SourceCode,
-        evaluationConfiguration: ScriptEvaluationConfiguration = ScriptEvaluationConfiguration(),
+        ekonstuationConfiguration: ScriptEkonstuationConfiguration = ScriptEkonstuationConfiguration(),
         cfgBody: ScriptCompilationConfiguration.Builder.() -> Unit = {},
     ): ResultWithDiagnostics<KClass<*>> {
-        val result = compile(script, cfgBody)
+        konst result = compile(script, cfgBody)
         if (result is ResultWithDiagnostics.Failure) return result
-        return runBlocking { result.valueOrThrow().getClass(evaluationConfiguration) }
+        return runBlocking { result.konstueOrThrow().getClass(ekonstuationConfiguration) }
     }
 }

@@ -105,7 +105,7 @@ public class IntrinsicMethods {
         }
 
         IntrinsicMethod hashCode = new HashCode();
-        for (PrimitiveType type : PrimitiveType.values()) {
+        for (PrimitiveType type : PrimitiveType.konstues()) {
             FqName typeFqName = type.getTypeFqName();
             Type wrapperType = AsmUtil.asmTypeByFqNameWithoutInnerClasses(JvmPrimitiveType.get(type).getWrapperFqName());
             declareIntrinsicFunction(typeFqName, "equals", 1, new EqualsThrowingNpeForNullReceiver(wrapperType));
@@ -148,7 +148,7 @@ public class IntrinsicMethods {
         intrinsicsMap.registerIntrinsic(BUILT_INS_PACKAGE_FQ_NAME, StandardNames.FqNames.string, "plus", 1, STRING_PLUS);
         intrinsicsMap.registerIntrinsic(BUILT_INS_PACKAGE_FQ_NAME, null, "arrayOfNulls", 1, new NewArray());
 
-        for (PrimitiveType type : PrimitiveType.values()) {
+        for (PrimitiveType type : PrimitiveType.konstues()) {
             declareIntrinsicFunction(type.getTypeFqName(), "compareTo", 1, new CompareTo());
             declareIntrinsicFunction(COLLECTIONS_PACKAGE_FQ_NAME.child(Name.identifier(type.getTypeName().asString() + "Iterator")), "next", 0, ITERATOR_NEXT);
         }
@@ -185,7 +185,7 @@ public class IntrinsicMethods {
     }
 
     private void declareArrayMethods() {
-        for (JvmPrimitiveType jvmPrimitiveType : JvmPrimitiveType.values()) {
+        for (JvmPrimitiveType jvmPrimitiveType : JvmPrimitiveType.konstues()) {
             declareArrayMethods(jvmPrimitiveType.getPrimitiveType().getArrayTypeFqName());
         }
         declareArrayMethods(FqNames.array.toSafe());
@@ -202,7 +202,7 @@ public class IntrinsicMethods {
 
     private void declareBinaryOp(@NotNull String methodName, int opcode) {
         BinaryOp op = new BinaryOp(opcode);
-        for (PrimitiveType type : PrimitiveType.values()) {
+        for (PrimitiveType type : PrimitiveType.konstues()) {
             declareIntrinsicFunction(type.getTypeFqName(), methodName, 1, op);
         }
     }

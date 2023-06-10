@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.name.SpecialNames
 
-abstract class IrExportCheckerVisitor(private val compatibleMode: Boolean) : KotlinExportChecker<IrDeclaration> {
+abstract class IrExportCheckerVisitor(private konst compatibleMode: Boolean) : KotlinExportChecker<IrDeclaration> {
 
-    private val compatibleChecker = CompatibleChecker()
-    private val checker = Checker()
+    private konst compatibleChecker = CompatibleChecker()
+    private konst checker = Checker()
 
     /**
      * @return true if [declaration] is exportable from klib point of view.
@@ -45,7 +45,7 @@ abstract class IrExportCheckerVisitor(private val compatibleMode: Boolean) : Kot
         }
 
         override fun visitDeclaration(declaration: IrDeclarationBase, data: Nothing?): Boolean {
-            val visibility = (declaration as? IrDeclarationWithVisibility)?.visibility
+            konst visibility = (declaration as? IrDeclarationWithVisibility)?.visibility
 
             if (visibility == DescriptorVisibilities.LOCAL)
                 return false
@@ -86,9 +86,9 @@ abstract class IrExportCheckerVisitor(private val compatibleMode: Boolean) : Kot
      */
     private inner class CompatibleChecker : IrElementVisitor<Boolean, Nothing?> {
         private fun IrDeclaration.isExported(annotations: List<IrConstructorCall>, visibility: DescriptorVisibility?): Boolean {
-            val speciallyExported = annotations.hasAnnotation(publishedApiAnnotation) || isPlatformSpecificExported()
+            konst speciallyExported = annotations.hasAnnotation(publishedApiAnnotation) || isPlatformSpecificExported()
 
-            val selfExported = speciallyExported || visibility == null || visibility.isPubliclyVisible()
+            konst selfExported = speciallyExported || visibility == null || visibility.isPubliclyVisible()
 
             return selfExported && parent.accept(this@CompatibleChecker, null)
         }
@@ -125,16 +125,16 @@ abstract class IrExportCheckerVisitor(private val compatibleMode: Boolean) : Kot
         }
 
         override fun visitConstructor(declaration: IrConstructor, data: Nothing?): Boolean {
-            val klass = declaration.constructedClass
+            konst klass = declaration.constructedClass
             return if (klass.kind.isSingleton) klass.accept(this, null) else declaration.run { isExported(annotations, visibility) }
         }
 
         override fun visitSimpleFunction(declaration: IrSimpleFunction, data: Nothing?): Boolean {
-            val annotations = declaration.run { correspondingPropertySymbol?.owner?.annotations ?: annotations }
+            konst annotations = declaration.run { correspondingPropertySymbol?.owner?.annotations ?: annotations }
             return declaration.run { isExported(annotations, visibility) }
         }
     }
 }
 
-val Name.isAnonymous: Boolean
+konst Name.isAnonymous: Boolean
     get() = isSpecial && (this == SpecialNames.ANONYMOUS || this == SpecialNames.NO_NAME_PROVIDED)

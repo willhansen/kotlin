@@ -12,10 +12,10 @@ suspend fun suspendHere(): String = suspendCoroutineUninterceptedOrReturn { x ->
 fun builder(c: suspend () -> Unit) {
     var wasResumeCalled = false
     c.startCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
-        override fun resumeWith(value: Result<Unit>) {
-            if (value.isSuccess) {
+        override fun resumeWith(konstue: Result<Unit>) {
+            if (konstue.isSuccess) {
                 wasResumeCalled = true
             }
         }

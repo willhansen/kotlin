@@ -1,6 +1,6 @@
 // !LANGUAGE: +InlineClasses
 
-inline class Foo(val x: Int) {
+inline class Foo(konst x: Int) {
     fun empty() {}
     fun param(y: String) {}
     fun Any.extension() {}

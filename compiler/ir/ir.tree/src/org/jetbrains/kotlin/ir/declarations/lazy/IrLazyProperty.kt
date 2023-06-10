@@ -19,12 +19,12 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedPropertyDescriptor
 
 class IrLazyProperty(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrPropertySymbol,
+    override konst symbol: IrPropertySymbol,
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val descriptor: PropertyDescriptor,
+    override konst descriptor: PropertyDescriptor,
     override var name: Name,
     override var visibility: DescriptorVisibility,
     override var modality: Modality,
@@ -35,8 +35,8 @@ class IrLazyProperty(
     override var isExternal: Boolean,
     override var isExpect: Boolean,
     override var isFakeOverride: Boolean,
-    override val stubGenerator: DeclarationStubGenerator,
-    override val typeTranslator: TypeTranslator,
+    override konst stubGenerator: DeclarationStubGenerator,
+    override konst typeTranslator: TypeTranslator,
 ) : IrProperty(), IrLazyDeclarationBase {
     init {
         symbol.bind(this)
@@ -46,7 +46,7 @@ class IrLazyProperty(
 
     override var annotations: List<IrConstructorCall> by createLazyAnnotations()
 
-    private val hasBackingField: Boolean =
+    private konst hasBackingField: Boolean =
         descriptor.compileTimeInitializer != null || descriptor.getter == null ||
                 stubGenerator.extensions.isPropertyWithPlatformField(descriptor)
 
@@ -78,7 +78,7 @@ class IrLazyProperty(
         }
     }
 
-    override val containerSource: DeserializedContainerSource?
+    override konst containerSource: DeserializedContainerSource?
         get() = (descriptor as? DeserializedPropertyDescriptor)?.containerSource
 
     override var metadata: MetadataSource?

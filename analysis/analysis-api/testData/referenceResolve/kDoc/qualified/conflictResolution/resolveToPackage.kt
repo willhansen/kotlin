@@ -1,5 +1,5 @@
 // FILE: main.kt
-val p = 10
+konst p = 10
 
 /**
  * [p<caret>p].bar]

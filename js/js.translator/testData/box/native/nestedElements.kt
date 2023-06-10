@@ -52,18 +52,18 @@ fun box(): String {
 
 external object MyObject {
     object Object {
-        val a: String = definedExternally
+        konst a: String = definedExternally
         var b: String = definedExternally
         fun test(): Int = definedExternally
 
         @JsName("AnotherClass")
         class Class(a: String) {
-            val a: String
+            konst a: String
             var b: String = definedExternally
             fun test(): Int = definedExternally
 
             companion object {
-                val a: String = definedExternally
+                konst a: String = definedExternally
                 var b: String = definedExternally
                 fun test(): Int = definedExternally
             }
@@ -71,24 +71,24 @@ external object MyObject {
     }
 
     class Class(a: String) {
-        val a: String
+        konst a: String
         var b: String = definedExternally
         fun test(): Int = definedExternally
 
         companion object {
-            val a: String = definedExternally
+            konst a: String = definedExternally
             var b: String = definedExternally
             fun test(): Int = definedExternally
         }
     }
 
     interface Trait {
-        val a: String
+        konst a: String
         var b: String
         fun test(): Int
     }
 
-    val a: Trait = definedExternally
+    konst a: Trait = definedExternally
     var b: String = definedExternally
     fun test(): Int = definedExternally
 }
@@ -96,32 +96,32 @@ external object MyObject {
 @JsName("SomeClass")
 external class Class {
     object Object {
-        val a: String = definedExternally
+        konst a: String = definedExternally
         var b: String = definedExternally
         fun test(): Int = definedExternally
     }
 
     class Class(a: String) {
-        val a: String
+        konst a: String
         var b: String = definedExternally
         fun test(): Int = definedExternally
 
         companion object {
-            val a: String = definedExternally
+            konst a: String = definedExternally
             var b: String = definedExternally
             fun test(): Int = definedExternally
         }
     }
 
     interface Trait {
-        val a: String
+        konst a: String
         var b: String
         fun test(): Int
     }
 
     companion object {
         @JsName("aaa")
-        val a: Trait = definedExternally
+        konst a: Trait = definedExternally
         var b: String = definedExternally
         fun test(): Int = definedExternally
     }

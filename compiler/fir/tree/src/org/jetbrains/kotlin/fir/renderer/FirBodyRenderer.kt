@@ -15,9 +15,9 @@ class FirBodyRenderer {
 
     internal lateinit var components: FirRendererComponents
 
-    private val annotationRenderer get() = components.annotationRenderer
-    private val visitor get() = components.visitor
-    private val printer get() = components.printer
+    private konst annotationRenderer get() = components.annotationRenderer
+    private konst visitor get() = components.visitor
+    private konst printer get() = components.printer
 
     fun render(function: FirFunction) {
         renderBody(function.body)

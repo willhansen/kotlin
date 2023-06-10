@@ -47,15 +47,15 @@ public class WhenByEnumsMapping {
         this.isPublicAbi = isPublicAbi;
     }
 
-    public int getIndexByEntry(@NotNull EnumValue value) {
-        Integer result = map.get(value);
-        assert result != null : "entry " + value + " has no mapping";
+    public int getIndexByEntry(@NotNull EnumValue konstue) {
+        Integer result = map.get(konstue);
+        assert result != null : "entry " + konstue + " has no mapping";
         return result;
     }
 
-    public void putFirstTime(@NotNull EnumValue value, int index) {
-        if (!map.containsKey(value)) {
-            map.put(value, index);
+    public void putFirstTime(@NotNull EnumValue konstue, int index) {
+        if (!map.containsKey(konstue)) {
+            map.put(konstue, index);
         }
     }
 

@@ -1,6 +1,6 @@
 package
 
-public val z: T
+public konst z: T
 
 public open class C {
     public constructor C()

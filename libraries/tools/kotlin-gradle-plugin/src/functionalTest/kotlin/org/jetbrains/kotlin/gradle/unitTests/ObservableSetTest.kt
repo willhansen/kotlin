@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 class ObservableSetTest {
 
     class TestListener : (Int) -> Unit {
-        val invocations = mutableListOf<Int>()
+        konst invocations = mutableListOf<Int>()
         override fun invoke(p1: Int) {
             invocations.add(p1)
         }
@@ -22,9 +22,9 @@ class ObservableSetTest {
 
     @Test
     fun `test - forAll`() {
-        val set = MutableObservableSetImpl(1)
-        val testListener1 = TestListener()
-        val testListener2 = TestListener()
+        konst set = MutableObservableSetImpl(1)
+        konst testListener1 = TestListener()
+        konst testListener2 = TestListener()
 
         set.forAll(testListener1)
         assertEquals(listOf(1), testListener1.invocations)
@@ -41,9 +41,9 @@ class ObservableSetTest {
 
     @Test
     fun `test - whenObjectAdded`() {
-        val set = MutableObservableSetImpl(1)
-        val testListener1 = TestListener()
-        val testListener2 = TestListener()
+        konst set = MutableObservableSetImpl(1)
+        konst testListener1 = TestListener()
+        konst testListener2 = TestListener()
 
         set.whenObjectAdded(testListener1)
         assertEquals(emptyList(), testListener1.invocations)

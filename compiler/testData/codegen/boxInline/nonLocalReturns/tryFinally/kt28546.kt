@@ -4,20 +4,20 @@
 package test
 
 inline fun takeWhileSize(initialSize: Int , block: (String) -> Int) {
-    val current = "PARAM"
+    konst current = "PARAM"
 
     try {
         if (1 >= initialSize) {
             try {
                 block(current)
             } finally {
-                val i = "INNER FINALLY"
+                konst i = "INNER FINALLY"
             }
         } else {
-            val e = "ELSE"
+            konst e = "ELSE"
         }
     } finally {
-        val o =  "OUTER FINALLY"
+        konst o =  "OUTER FINALLY"
     }
 }
 

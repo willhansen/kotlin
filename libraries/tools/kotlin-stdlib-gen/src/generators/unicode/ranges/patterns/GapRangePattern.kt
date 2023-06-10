@@ -20,13 +20,13 @@ import generators.unicode.toHexIntLiteral
  */
 internal class GapRangePattern private constructor(
     charCode: Int,
-    private val categoryId: String,
-    private val unassignedCategoryId: String,
-    private val makeCategory: (start: Int, end: Int, gaps: List<Gap>) -> Int
+    private konst categoryId: String,
+    private konst unassignedCategoryId: String,
+    private konst makeCategory: (start: Int, end: Int, gaps: List<Gap>) -> Int
 ) : RangePattern {
-    private val start: Int = charCode
+    private konst start: Int = charCode
     private var end: Int = charCode
-    private val gaps = mutableListOf<Gap>()
+    private konst gaps = mutableListOf<Gap>()
 
     init {
         require(categoryId == "OL")
@@ -50,9 +50,9 @@ internal class GapRangePattern private constructor(
             return true
         }
 
-        val newGap = Gap(start = end + 1, length = charCode - end - 1)
-        val charsBeforeNewGap = newGap.start - if (gaps.isEmpty()) start else gaps.last().let { it.start + it.length }
-        val bits = (gaps.size + 1) * (CHARS_BITS + GAP_BITS)
+        konst newGap = Gap(start = end + 1, length = charCode - end - 1)
+        konst charsBeforeNewGap = newGap.start - if (gaps.isEmpty()) start else gaps.last().let { it.start + it.length }
+        konst bits = (gaps.size + 1) * (CHARS_BITS + GAP_BITS)
 
         if (isValid(charsBeforeNewGap, newGap.length) && bits <= TOTAL_BITS) {
             gaps.add(newGap)
@@ -104,11 +104,11 @@ internal class GapRangePattern private constructor(
     }
 
     companion object {
-        internal const val CHARS_BITS = 7
-        internal const val GAP_BITS = 7
-        private const val TOTAL_BITS = 29
+        internal const konst CHARS_BITS = 7
+        internal const konst GAP_BITS = 7
+        private const konst TOTAL_BITS = 29
 
-        internal data class Gap(val start: Int, val length: Int)
+        internal data class Gap(konst start: Int, konst length: Int)
 
         fun from(
             range: RangePattern,
@@ -117,14 +117,14 @@ internal class GapRangePattern private constructor(
             unassignedCategoryId: String,
             makeCategory: (start: Int, end: Int, gaps: List<Gap>) -> Int
         ): RangePattern? {
-            val start = range.rangeStart()
-            val startCategoryId = range.categoryIdOf(start)
+            konst start = range.rangeStart()
+            konst startCategoryId = range.categoryIdOf(start)
 
             check(startCategoryId != unassignedCategoryId)
 
             if (startCategoryId != categoryId || categoryId != "OL") return null
 
-            val gapRange = GapRangePattern(start, startCategoryId, unassignedCategoryId, makeCategory)
+            konst gapRange = GapRangePattern(start, startCategoryId, unassignedCategoryId, makeCategory)
             if (gapRange.append(start + 1, range.rangeEnd(), range::categoryIdOf, charCode, categoryId)) {
                 return gapRange
             }

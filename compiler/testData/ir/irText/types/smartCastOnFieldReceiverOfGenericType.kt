@@ -3,15 +3,15 @@
 fun testSetField(a: Any, b: Any) {
     a as JCell<String>
     b as String
-    a.value = b
+    a.konstue = b
 }
 
 fun testGetField(a: Any): String {
     a as JCell<String>
-    return a.value
+    return a.konstue
 }
 
 // FILE: JCell.java
 public class JCell<T> {
-    public T value;
+    public T konstue;
 }

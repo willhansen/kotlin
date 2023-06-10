@@ -7,8 +7,8 @@ package org.jetbrains.kotlin.diagnostics
 
 import org.jetbrains.kotlin.diagnostics.rendering.DiagnosticParameterRenderer
 
-class KtDiagnosticFactoryToRendererMap(val name: String) {
-    private val renderersMap: MutableMap<AbstractKtDiagnosticFactory, KtDiagnosticRenderer> = mutableMapOf()
+class KtDiagnosticFactoryToRendererMap(konst name: String) {
+    private konst renderersMap: MutableMap<AbstractKtDiagnosticFactory, KtDiagnosticRenderer> = mutableMapOf()
 
     operator fun get(factory: AbstractKtDiagnosticFactory): KtDiagnosticRenderer? = renderersMap[factory]
 
@@ -116,7 +116,7 @@ class KtDiagnosticFactoryToRendererMap(val name: String) {
         return buildString {
             append(errorMessage)
             append(". This will become an error")
-            val sinceVersion = deprecatingFeature.sinceVersion
+            konst sinceVersion = deprecatingFeature.sinceVersion
             if (sinceVersion != null) {
                 append(" in Kotlin ")
                 append(sinceVersion.versionString)

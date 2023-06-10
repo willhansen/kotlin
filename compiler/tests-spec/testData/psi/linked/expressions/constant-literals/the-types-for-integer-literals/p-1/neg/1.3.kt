@@ -7,9 +7,9 @@
  * DESCRIPTION: Various integer literals with underscores after a long literal mark.
  */
 
-val value = 1000l___
-val value = 90L_
-val value = 0xFL_
-val value = 0X0Al_
-val value = 0b1L_
-val value = 0B101001L_
+konst konstue = 1000l___
+konst konstue = 90L_
+konst konstue = 0xFL_
+konst konstue = 0X0Al_
+konst konstue = 0b1L_
+konst konstue = 0B101001L_

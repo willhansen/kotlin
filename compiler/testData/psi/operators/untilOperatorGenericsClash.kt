@@ -1,5 +1,5 @@
 fun main() {
-    val x: ..<Int> = 1
-    val x = ..<Int>::class
-    val x = `..`<Int>::class
+    konst x: ..<Int> = 1
+    konst x = ..<Int>::class
+    konst x = `..`<Int>::class
 }

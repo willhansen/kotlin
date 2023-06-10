@@ -13,14 +13,14 @@ import org.gradle.internal.operations.BuildOperationListenerManager
 import javax.inject.Inject
 
 class GradleWarningsDetectorPlugin @Inject constructor(
-    private val buildOperationListenerManager: BuildOperationListenerManager
+    private konst buildOperationListenerManager: BuildOperationListenerManager
 ) : Plugin<Settings> {
-    private val logger: Logger = Logging.getLogger(this.javaClass)
+    private konst logger: Logger = Logging.getLogger(this.javaClass)
 
     override fun apply(target: Settings) {
         logger.warn("[${GradleWarningsDetectorPlugin::class.java.simpleName}] The plugin is being applied")
-        val warningsReporter = GradleWarningsReporter.registerIfAbsent(target.gradle)
-        val deprecationBuildOperationListener = DeprecationBuildOperationListener(warningsReporter)
+        konst warningsReporter = GradleWarningsReporter.registerIfAbsent(target.gradle)
+        konst deprecationBuildOperationListener = DeprecationBuildOperationListener(warningsReporter)
         buildOperationListenerManager.addListener(deprecationBuildOperationListener)
         warningsReporter.get().executeAtBuildFinish = {
             buildOperationListenerManager.removeListener(deprecationBuildOperationListener)

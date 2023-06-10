@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.konan.target.Family
  * Constructs an Apple framework without a binary.
  */
 internal class FrameworkBuilder(
-        private val config: KonanConfig,
-        private val infoPListBuilder: InfoPListBuilder,
-        private val moduleMapBuilder: ModuleMapBuilder,
-        private val objCHeaderWriter: ObjCHeaderWriter,
-        private val mainPackageGuesser: MainPackageGuesser,
+        private konst config: KonanConfig,
+        private konst infoPListBuilder: InfoPListBuilder,
+        private konst moduleMapBuilder: ModuleMapBuilder,
+        private konst objCHeaderWriter: ObjCHeaderWriter,
+        private konst mainPackageGuesser: MainPackageGuesser,
 ) {
     fun build(
             moduleDescriptor: ModuleDescriptor,
@@ -27,8 +27,8 @@ internal class FrameworkBuilder(
             headerLines: List<String>,
             moduleDependencies: Set<String>,
     ) {
-        val target = config.target
-        val frameworkContents = when (target.family) {
+        konst target = config.target
+        konst frameworkContents = when (target.family) {
             Family.IOS,
             Family.WATCHOS,
             Family.TVOS -> frameworkDirectory
@@ -37,19 +37,19 @@ internal class FrameworkBuilder(
             else -> error(target)
         }
 
-        val headers = frameworkContents.child("Headers")
+        konst headers = frameworkContents.child("Headers")
 
         headers.mkdirs()
         objCHeaderWriter.write("$frameworkName.h", headerLines, headers)
 
-        val modules = frameworkContents.child("Modules")
+        konst modules = frameworkContents.child("Modules")
         modules.mkdirs()
 
-        val moduleMap = moduleMapBuilder.build(frameworkName, moduleDependencies)
+        konst moduleMap = moduleMapBuilder.build(frameworkName, moduleDependencies)
 
         modules.child("module.modulemap").writeBytes(moduleMap.toByteArray())
 
-        val directory = when (target.family) {
+        konst directory = when (target.family) {
             Family.IOS,
             Family.WATCHOS,
             Family.TVOS -> frameworkContents
@@ -58,8 +58,8 @@ internal class FrameworkBuilder(
             else -> error(target)
         }
 
-        val infoPlistFile = directory.child("Info.plist")
-        val infoPlistContents = infoPListBuilder.build(frameworkName, mainPackageGuesser, moduleDescriptor)
+        konst infoPlistFile = directory.child("Info.plist")
+        konst infoPlistContents = infoPListBuilder.build(frameworkName, mainPackageGuesser, moduleDescriptor)
         infoPlistFile.writeBytes(infoPlistContents.toByteArray())
         if (target.family == Family.OSX) {
             frameworkDirectory.child("Versions/Current").createAsSymlink("A")

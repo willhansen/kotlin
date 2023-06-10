@@ -20,6 +20,6 @@ import org.jetbrains.kotlin.descriptors.SourceElement
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtPureElement
 
-class KotlinSourceElement(override val psi: KtElement) : PsiSourceElement
+class KotlinSourceElement(override konst psi: KtElement) : PsiSourceElement
 
 fun KtPureElement?.toSourceElement(): SourceElement = if (this == null) SourceElement.NO_SOURCE else KotlinSourceElement(psiOrParent)

@@ -62,8 +62,8 @@ public abstract class DeclarationDescriptorNonRootImpl
     }
 
     @Override
-    public void validate() {
-        containingDeclaration.validate();
+    public void konstidate() {
+        containingDeclaration.konstidate();
     }
 
 }

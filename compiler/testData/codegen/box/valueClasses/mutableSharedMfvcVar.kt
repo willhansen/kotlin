@@ -5,7 +5,7 @@
 // FIR_IDENTICAL
 
 @JvmInline
-value class DPoint(val x: Double, val y: Double)
+konstue class DPoint(konst x: Double, konst y: Double)
 
 fun box(): String {
     var point = DPoint(1.0, 2.0)

@@ -10,5 +10,5 @@ object Host {
 
 typealias NA = Nested
 
-val test1: (Int) -> CA = ::CA
-val test2: (Int) -> NA = ::NA
+konst test1: (Int) -> CA = ::CA
+konst test2: (Int) -> NA = ::NA

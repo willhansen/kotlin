@@ -9,8 +9,8 @@ class C : Base(), I {
 }
 
 fun box(): String {
-    val x: I = C()
-    val r = x.foo() + ";" + x.foo(42)
+    konst x: I = C()
+    konst r = x.foo() + ";" + x.foo(42)
     if (r != "C:23;C:42") return "fail: $r"
 
     return "OK"

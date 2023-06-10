@@ -35,18 +35,18 @@ object CirTreeSerializer {
 
 @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 private class CirTreeSerializationVisitor(
-    private val statsCollector: StatsCollector?,
-    private val moduleConsumer: (KlibModuleMetadata) -> Unit
+    private konst statsCollector: StatsCollector?,
+    private konst moduleConsumer: (KlibModuleMetadata) -> Unit
 ) : CirNodeVisitor<CirTreeSerializationContext, Any?> {
-    private val classConsumer = ClassConsumer()
+    private konst classConsumer = ClassConsumer()
 
     override fun visitRootNode(
         node: CirRootNode,
         rootContext: CirTreeSerializationContext
     ) {
         node.modules.forEach { (moduleName, moduleNode) ->
-            val moduleContext = rootContext.moduleContext(moduleName)
-            val module: KlibModuleMetadata = moduleNode.accept(this, moduleContext)?.cast() ?: return@forEach
+            konst moduleContext = rootContext.moduleContext(moduleName)
+            konst module: KlibModuleMetadata = moduleNode.accept(this, moduleContext)?.cast() ?: return@forEach
             statsCollector?.logModule(moduleContext)
             moduleConsumer(module)
         }
@@ -58,11 +58,11 @@ private class CirTreeSerializationVisitor(
         node: CirModuleNode,
         moduleContext: CirTreeSerializationContext
     ): KlibModuleMetadata? {
-        val cirModule = moduleContext.get<CirModule>(node) ?: return null
+        konst cirModule = moduleContext.get<CirModule>(node) ?: return null
 
-        val fragments: MutableCollection<KmModuleFragment> = mutableListOf()
+        konst fragments: MutableCollection<KmModuleFragment> = mutableListOf()
         node.packages.mapNotNullTo(fragments) { (packageName, packageNode) ->
-            val packageContext = moduleContext.packageContext(packageName)
+            konst packageContext = moduleContext.packageContext(packageName)
             packageNode.accept(this, packageContext)?.cast()
         }
 
@@ -75,20 +75,20 @@ private class CirTreeSerializationVisitor(
         node: CirPackageNode,
         packageContext: CirTreeSerializationContext
     ): KmModuleFragment? {
-        val cirPackage = packageContext.get<CirPackage>(node) ?: return null
+        konst cirPackage = packageContext.get<CirPackage>(node) ?: return null
 
         try {
             node.classes.forEach { (className, classNode) ->
-                val classContext = packageContext.classifierContext(className)
-                val clazz: KmClass = classNode.accept(this, classContext)?.cast() ?: return@forEach
+                konst classContext = packageContext.classifierContext(className)
+                konst clazz: KmClass = classNode.accept(this, classContext)?.cast() ?: return@forEach
                 classConsumer.consume(clazz)
                 statsCollector?.logClass(clazz, classContext)
             }
 
-            val topLevelTypeAliases = mutableListOf<KmTypeAlias>()
+            konst topLevelTypeAliases = mutableListOf<KmTypeAlias>()
             node.typeAliases.forEach { (typeAliasName, typeAliasNode) ->
-                val typeAliasContext = packageContext.classifierContext(typeAliasName)
-                when (val classifier = typeAliasNode.accept(this, typeAliasContext)) {
+                konst typeAliasContext = packageContext.classifierContext(typeAliasName)
+                when (konst classifier = typeAliasNode.accept(this, typeAliasContext)) {
                     null -> Unit
                     is KmClass -> {
                         classConsumer.consume(classifier)
@@ -104,16 +104,16 @@ private class CirTreeSerializationVisitor(
 
             linkSealedClassesWithSubclasses(cirPackage.packageName, classConsumer)
 
-            val topLevelFunctions: Collection<KmFunction> = node.functions.mapNotNull { (functionKey, functionNode) ->
-                val functionContext = packageContext.callableMemberContext(functionKey.name)
-                val function: KmFunction = functionNode.accept(this, functionContext)?.cast() ?: return@mapNotNull null
+            konst topLevelFunctions: Collection<KmFunction> = node.functions.mapNotNull { (functionKey, functionNode) ->
+                konst functionContext = packageContext.callableMemberContext(functionKey.name)
+                konst function: KmFunction = functionNode.accept(this, functionContext)?.cast() ?: return@mapNotNull null
                 statsCollector?.logFunction(function, functionContext, functionKey)
                 function
             }
 
-            val topLevelProperties: Collection<KmProperty> = node.properties.mapNotNull { (propertyKey, propertyNode) ->
-                val propertyContext = packageContext.callableMemberContext(propertyKey.name)
-                val property: KmProperty = propertyNode.accept(this, propertyContext)?.cast() ?: return@mapNotNull null
+            konst topLevelProperties: Collection<KmProperty> = node.properties.mapNotNull { (propertyKey, propertyNode) ->
+                konst propertyContext = packageContext.callableMemberContext(propertyKey.name)
+                konst property: KmProperty = propertyNode.accept(this, propertyContext)?.cast() ?: return@mapNotNull null
                 statsCollector?.logProperty(propertyContext, propertyKey, propertyNode)
                 property
             }
@@ -143,36 +143,36 @@ private class CirTreeSerializationVisitor(
         node: CirClassNode,
         classContext: CirTreeSerializationContext
     ): KmClass? {
-        val cirClass = classContext.get<CirClass>(node) ?: return null
+        konst cirClass = classContext.get<CirClass>(node) ?: return null
 
-        val classTypeParametersCount = cirClass.typeParameters.size
-        val fullClassName = classContext.currentPath.toString()
+        konst classTypeParametersCount = cirClass.typeParameters.size
+        konst fullClassName = classContext.currentPath.toString()
 
-        val directNestedClasses: Collection<KmClass> = node.classes.mapNotNull { (nestedClassName, nestedClassNode) ->
-            val nestedClassContext = classContext.classifierContext(nestedClassName, classTypeParametersCount)
-            val nestedClass: KmClass = nestedClassNode.accept(this, nestedClassContext)?.cast() ?: return@mapNotNull null
+        konst directNestedClasses: Collection<KmClass> = node.classes.mapNotNull { (nestedClassName, nestedClassNode) ->
+            konst nestedClassContext = classContext.classifierContext(nestedClassName, classTypeParametersCount)
+            konst nestedClass: KmClass = nestedClassNode.accept(this, nestedClassContext)?.cast() ?: return@mapNotNull null
             classConsumer.consume(nestedClass)
             statsCollector?.logClass(nestedClass, nestedClassContext)
             nestedClass
         }
 
-        val nestedConstructors: Collection<KmConstructor> = node.constructors.mapNotNull { (constructorKey, constructorNode) ->
-            val constructorContext = classContext.callableMemberContext(DEFAULT_CONSTRUCTOR_NAME, classTypeParametersCount)
-            val constructor: KmConstructor = constructorNode.accept(this, constructorContext)?.cast() ?: return@mapNotNull null
+        konst nestedConstructors: Collection<KmConstructor> = node.constructors.mapNotNull { (constructorKey, constructorNode) ->
+            konst constructorContext = classContext.callableMemberContext(DEFAULT_CONSTRUCTOR_NAME, classTypeParametersCount)
+            konst constructor: KmConstructor = constructorNode.accept(this, constructorContext)?.cast() ?: return@mapNotNull null
             statsCollector?.logClassConstructor(constructor, constructorContext, constructorKey)
             constructor
         }
 
-        val nestedFunctions: Collection<KmFunction> = node.functions.mapNotNull { (functionKey, functionNode) ->
-            val functionContext = classContext.callableMemberContext(functionKey.name, classTypeParametersCount)
-            val function: KmFunction = functionNode.accept(this, functionContext)?.cast() ?: return@mapNotNull null
+        konst nestedFunctions: Collection<KmFunction> = node.functions.mapNotNull { (functionKey, functionNode) ->
+            konst functionContext = classContext.callableMemberContext(functionKey.name, classTypeParametersCount)
+            konst function: KmFunction = functionNode.accept(this, functionContext)?.cast() ?: return@mapNotNull null
             statsCollector?.logFunction(function, functionContext, functionKey)
             function
         }
 
-        val nestedProperties: Collection<KmProperty> = node.properties.mapNotNull { (propertyKey, propertyNode) ->
-            val propertyContext = classContext.callableMemberContext(propertyKey.name, classTypeParametersCount)
-            val property: KmProperty = propertyNode.accept(this, propertyContext)?.cast() ?: return@mapNotNull null
+        konst nestedProperties: Collection<KmProperty> = node.properties.mapNotNull { (propertyKey, propertyNode) ->
+            konst propertyContext = classContext.callableMemberContext(propertyKey.name, classTypeParametersCount)
+            konst property: KmProperty = propertyNode.accept(this, propertyContext)?.cast() ?: return@mapNotNull null
             statsCollector?.logProperty(propertyContext, propertyKey, propertyNode)
             property
         }
@@ -198,12 +198,12 @@ private class CirTreeSerializationVisitor(
         node: CirTypeAliasNode,
         typeAliasContext: CirTreeSerializationContext
     ): Any? {
-        val cirClassifier = typeAliasContext.get<CirClassifier>(node) ?: return null
+        konst cirClassifier = typeAliasContext.get<CirClassifier>(node) ?: return null
 
         return when (cirClassifier) {
             is CirTypeAlias -> cirClassifier.serializeTypeAlias(typeAliasContext)
             is CirClass -> {
-                val fullClassName = typeAliasContext.currentPath.toString()
+                konst fullClassName = typeAliasContext.currentPath.toString()
                 cirClassifier.serializeClass(typeAliasContext, fullClassName, emptyList(), emptyList(), emptyList(), emptyList())
             }
         }
@@ -220,7 +220,7 @@ private class CirTreeSerializationVisitor(
             clazz: KmClass,
             classContext: CirTreeSerializationContext
         ) = logDeclaration(classContext.targetIndex) {
-            val declarationType = when {
+            konst declarationType = when {
                 Flag.Class.IS_ENUM_CLASS(clazz.flags) -> DeclarationType.ENUM_CLASS
                 Flag.Class.IS_ENUM_ENTRY(clazz.flags) -> DeclarationType.ENUM_ENTRY
                 Flag.Class.IS_INTERFACE(clazz.flags) -> when {
@@ -248,7 +248,7 @@ private class CirTreeSerializationVisitor(
             propertyKey: PropertyApproximationKey,
             propertyNode: CirPropertyNode
         ) = logDeclaration(propertyContext.targetIndex) {
-            val declarationType = when {
+            konst declarationType = when {
                 (propertyContext.currentPath as Path.CallableMember).memberId.isNestedEntity -> DeclarationType.NESTED_VAL
                 propertyNode.targetDeclarations.firstNonNull().isConst -> DeclarationType.TOP_LEVEL_CONST_VAL
                 else -> DeclarationType.TOP_LEVEL_VAL
@@ -268,7 +268,7 @@ private class CirTreeSerializationVisitor(
             functionContext: CirTreeSerializationContext,
             functionKey: FunctionApproximationKey
         ) = logDeclaration(functionContext.targetIndex) {
-            val declarationType = when {
+            konst declarationType = when {
                 (functionContext.currentPath as Path.CallableMember).memberId.isNestedEntity -> DeclarationType.NESTED_FUN
                 else -> DeclarationType.TOP_LEVEL_FUN
             }
@@ -276,8 +276,8 @@ private class CirTreeSerializationVisitor(
             StatsKey(
                 id = functionContext.currentPath.toString(),
                 extensionReceiver = functionKey.extensionReceiverParameterType?.toString(),
-                parameterNames = function.valueParameters.map { it.name },
-                parameterTypes = functionKey.valueParametersTypes.map { it.toString() },
+                parameterNames = function.konstueParameters.map { it.name },
+                parameterTypes = functionKey.konstueParametersTypes.map { it.toString() },
                 declarationType = declarationType
             )
         }
@@ -290,8 +290,8 @@ private class CirTreeSerializationVisitor(
             StatsKey(
                 id = constructorContext.currentPath.toString(),
                 extensionReceiver = null,
-                parameterNames = constructor.valueParameters.map { it.name },
-                parameterTypes = constructorKey.valueParametersTypes.map { it.toString() },
+                parameterNames = constructor.konstueParameters.map { it.name },
+                parameterTypes = constructorKey.konstueParametersTypes.map { it.toString() },
                 declarationType = DeclarationType.CLASS_CONSTRUCTOR
             )
         }
@@ -299,10 +299,10 @@ private class CirTreeSerializationVisitor(
 }
 
 internal data class CirTreeSerializationContext(
-    val targetIndex: Int,
-    val isCommon: Boolean,
-    val typeParameterIndexOffset: Int,
-    val currentPath: Path
+    konst targetIndex: Int,
+    konst isCommon: Boolean,
+    konst typeParameterIndexOffset: Int,
+    konst currentPath: Path
 ) {
     sealed class Path {
         object Empty : Path() {
@@ -310,25 +310,25 @@ internal data class CirTreeSerializationContext(
         }
 
         @Suppress("MemberVisibilityCanBePrivate")
-        class Module(val moduleName: CirName) : Path() {
+        class Module(konst moduleName: CirName) : Path() {
             override fun toString() = moduleName.toStrippedString()
         }
 
-        class Package(val packageName: CirPackageName) : Path() {
+        class Package(konst packageName: CirPackageName) : Path() {
             fun nestedClassifier(classifierName: CirName) = Classifier(CirEntityId.create(packageName, classifierName))
             fun nestedCallableMember(memberName: CirName) = CallableMember(CirEntityId.create(packageName, memberName))
 
             override fun toString() = packageName.toString()
         }
 
-        class Classifier(val classifierId: CirEntityId) : Path() {
+        class Classifier(konst classifierId: CirEntityId) : Path() {
             fun nestedClassifier(classifierName: CirName) = Classifier(classifierId.createNestedEntityId(classifierName))
             fun nestedCallableMember(memberName: CirName) = CallableMember(classifierId.createNestedEntityId(memberName))
 
             override fun toString() = classifierId.toString()
         }
 
-        class CallableMember(val memberId: CirEntityId) : Path() {
+        class CallableMember(konst memberId: CirEntityId) : Path() {
             override fun toString() = memberId.toString()
         }
     }
@@ -359,7 +359,7 @@ internal data class CirTreeSerializationContext(
         classifierName: CirName,
         outerClassTypeParametersCount: Int = 0
     ): CirTreeSerializationContext {
-        val newPath = when (currentPath) {
+        konst newPath = when (currentPath) {
             is Path.Package -> {
                 check(outerClassTypeParametersCount == 0)
                 currentPath.nestedClassifier(classifierName)
@@ -383,7 +383,7 @@ internal data class CirTreeSerializationContext(
         memberName: CirName,
         ownerClassTypeParametersCount: Int = 0
     ): CirTreeSerializationContext {
-        val newPath = when (currentPath) {
+        konst newPath = when (currentPath) {
             is Path.Package -> {
                 check(ownerClassTypeParametersCount == 0)
                 currentPath.nestedCallableMember(memberName)
@@ -427,11 +427,11 @@ internal data class CirTreeSerializationContext(
 }
 
 internal class ClassConsumer {
-    private val _allClasses = mutableListOf<KmClass>()
-    private val _sealedClasses = mutableListOf<KmClass>()
+    private konst _allClasses = mutableListOf<KmClass>()
+    private konst _sealedClasses = mutableListOf<KmClass>()
 
-    val allClasses: Collection<KmClass> get() = _allClasses
-    val sealedClasses: Collection<KmClass> get() = _sealedClasses
+    konst allClasses: Collection<KmClass> get() = _allClasses
+    konst sealedClasses: Collection<KmClass> get() = _sealedClasses
 
     fun consume(clazz: KmClass) {
         _allClasses += clazz

@@ -27,18 +27,18 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirResolvedQualifierImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var typeRef: FirTypeRef,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
     override var packageFqName: FqName,
     override var relativeClassFqName: FqName?,
-    override val symbol: FirClassLikeSymbol<*>?,
+    override konst symbol: FirClassLikeSymbol<*>?,
     override var isNullableLHSForCallableReference: Boolean,
-    override val isFullyQualified: Boolean,
+    override konst isFullyQualified: Boolean,
     override var nonFatalDiagnostics: MutableOrEmptyList<ConeDiagnostic>,
     override var typeArguments: MutableOrEmptyList<FirTypeProjection>,
 ) : FirResolvedQualifier() {
-    override val classId: ClassId? get() = relativeClassFqName?.let {
+    override konst classId: ClassId? get() = relativeClassFqName?.let {
     ClassId(packageFqName, it, false)
 }
     override var resolvedToCompanionObject: Boolean = (symbol?.fir as? FirRegularClass)?.companionObjectSymbol != null

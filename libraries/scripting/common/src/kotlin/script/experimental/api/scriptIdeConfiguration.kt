@@ -24,10 +24,10 @@ enum class ScriptAcceptedLocation {
     Everywhere;  // All places in the project
 }
 
-val ScriptCompilationConfigurationKeys.ide
+konst ScriptCompilationConfigurationKeys.ide
     get() = IdeScriptCompilationConfigurationBuilder()
 
-val IdeScriptCompilationConfigurationKeys.dependenciesSources by PropertiesCollection.key<List<ScriptDependency>>()
+konst IdeScriptCompilationConfigurationKeys.dependenciesSources by PropertiesCollection.key<List<ScriptDependency>>()
 
-val IdeScriptCompilationConfigurationKeys.acceptedLocations
+konst IdeScriptCompilationConfigurationKeys.acceptedLocations
         by PropertiesCollection.key(listOf(ScriptAcceptedLocation.Everywhere))

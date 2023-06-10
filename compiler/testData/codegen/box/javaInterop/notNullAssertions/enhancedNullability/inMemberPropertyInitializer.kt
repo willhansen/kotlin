@@ -14,7 +14,7 @@ fun box(): String {
 
 // FILE: test.kt
 class C {
-    val withAssertion = J().nullString()
+    konst withAssertion = J().nullString()
 }
 
 // FILE: J.java

@@ -9,16 +9,16 @@ import android.os.Parcelable
 class A : Parcelable
 
 @Parcelize
-class B(val firstName: String, val secondName: String) : Parcelable
+class B(konst firstName: String, konst secondName: String) : Parcelable
 
 @Parcelize
-class C(val firstName: String, <!PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR!>secondName<!>: String) : Parcelable
+class C(konst firstName: String, <!PARCELABLE_CONSTRUCTOR_PARAMETER_SHOULD_BE_VAL_OR_VAR!>secondName<!>: String) : Parcelable
 
 @Parcelize
-class D(val firstName: String, vararg val secondName: String) : Parcelable
+class D(konst firstName: String, vararg konst secondName: String) : Parcelable
 
 @Parcelize
-class E(val firstName: String, val secondName: String) : Parcelable {
+class E(konst firstName: String, konst secondName: String) : Parcelable {
     constructor() : this("", "")
 }
 

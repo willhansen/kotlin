@@ -2,19 +2,19 @@
 
 fun <E> emptyList(): List<E> = TODO()
 
-data class IntervalTree(
-    val left: IntervalTree?,
-    val right: IntervalTree?,
-    val intervals: List<Interval>,
-    val median: Float
+data class InterkonstTree(
+    konst left: InterkonstTree?,
+    konst right: InterkonstTree?,
+    konst interkonsts: List<Interkonst>,
+    konst median: Float
 )
 
-class Interval
+class Interkonst
 
-fun buildTree(segments: List<Interval>): IntervalTree? = TODO()
-fun acquireIntervals(): List<Interval> = TODO()
+fun buildTree(segments: List<Interkonst>): InterkonstTree? = TODO()
+fun acquireInterkonsts(): List<Interkonst> = TODO()
 
 fun main() {
-    buildTree(acquireIntervals())
+    buildTree(acquireInterkonsts())
         ?: <!NEW_INFERENCE_NO_INFORMATION_FOR_PARAMETER!>emptyList<!>()
 }

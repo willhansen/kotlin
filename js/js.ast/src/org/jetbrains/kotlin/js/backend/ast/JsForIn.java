@@ -67,7 +67,7 @@ public class JsForIn extends SourceInfoAwareJsNode implements JsLoop {
     @Override
     public void acceptChildren(JsVisitor visitor) {
         if (iterExpression != null) {
-            visitor.acceptLvalue(iterExpression);
+            visitor.acceptLkonstue(iterExpression);
         }
         visitor.accept(objectExpression);
         visitor.accept(body);
@@ -77,7 +77,7 @@ public class JsForIn extends SourceInfoAwareJsNode implements JsLoop {
     public void traverse(JsVisitorWithContext v, JsContext ctx) {
         if (v.visit(this, ctx)) {
             if (iterExpression != null) {
-                iterExpression = v.acceptLvalue(iterExpression);
+                iterExpression = v.acceptLkonstue(iterExpression);
             }
             objectExpression = v.accept(objectExpression);
             body = v.acceptStatement(body);

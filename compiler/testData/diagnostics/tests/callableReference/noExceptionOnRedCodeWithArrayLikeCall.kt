@@ -1,6 +1,6 @@
 
 class DTO {
-    val q: Int = 0
+    konst q: Int = 0
     operator fun get(prop: <!UNRESOLVED_REFERENCE!>KProperty1<!><*, Int>): Int = 0
 }
 

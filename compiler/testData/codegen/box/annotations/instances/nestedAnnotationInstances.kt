@@ -4,11 +4,11 @@
 // WITH_STDLIB
 // !LANGUAGE: +InstantiationOfAnnotationClasses
 
-annotation class NestedAnnotation(val value: String)
-annotation class OuterAnnotation(val nested: NestedAnnotation)
-class Outer(val nested: NestedAnnotation, val outer: OuterAnnotation)
+annotation class NestedAnnotation(konst konstue: String)
+annotation class OuterAnnotation(konst nested: NestedAnnotation)
+class Outer(konst nested: NestedAnnotation, konst outer: OuterAnnotation)
 
 fun box(): String {
-    val anno = Outer(NestedAnnotation("O"), OuterAnnotation(NestedAnnotation("K")))
-    return anno.nested.value + anno.outer.nested.value
+    konst anno = Outer(NestedAnnotation("O"), OuterAnnotation(NestedAnnotation("K")))
+    return anno.nested.konstue + anno.outer.nested.konstue
 }

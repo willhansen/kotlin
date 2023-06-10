@@ -9,21 +9,21 @@ import org.jetbrains.kotlin.fir.declarations.FirValueParameter
 import org.jetbrains.kotlin.fir.expressions.FirExpression
 
 sealed class ResolvedCallArgument {
-    abstract val arguments: List<FirExpression>
+    abstract konst arguments: List<FirExpression>
 
     object DefaultArgument : ResolvedCallArgument() {
-        override val arguments: List<FirExpression>
+        override konst arguments: List<FirExpression>
             get() = emptyList()
 
     }
 
-    class SimpleArgument(val callArgument: FirExpression) : ResolvedCallArgument() {
-        override val arguments: List<FirExpression>
+    class SimpleArgument(konst callArgument: FirExpression) : ResolvedCallArgument() {
+        override konst arguments: List<FirExpression>
             get() = listOf(callArgument)
 
     }
 
-    class VarargArgument(override val arguments: List<FirExpression>) : ResolvedCallArgument()
+    class VarargArgument(override konst arguments: List<FirExpression>) : ResolvedCallArgument()
 }
 
 typealias CallableReferenceMappedArguments = Map<FirValueParameter, ResolvedCallArgument>

@@ -21,7 +21,7 @@ import p1.*
 import p2.*
 
 fun test1(): Int {
-    val r = foo(42)
+    konst r = foo(42)
     return r
 }
 
@@ -30,6 +30,6 @@ import p1.foo  // TODO: consider reporting API_NOT_AVAILABLE here
 import p2.*
 
 fun test2(): Int {
-    val r = foo(42)
+    konst r = foo(42)
     return r
 }

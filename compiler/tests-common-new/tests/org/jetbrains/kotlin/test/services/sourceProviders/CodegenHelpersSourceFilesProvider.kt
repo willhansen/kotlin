@@ -16,20 +16,20 @@ import java.io.File
 
 class CodegenHelpersSourceFilesProvider(testServices: TestServices) : AdditionalSourceProvider(testServices) {
     companion object {
-        private const val HELPERS_PATH = "./compiler/testData/codegen/helpers"
-        private const val CLASSIC_BACKEND_PATH = "$HELPERS_PATH/CodegenTestHelpersOldBackend.kt"
-        private const val IR_BACKEND_PATH = "$HELPERS_PATH/CodegenTestHelpersIR.kt"
+        private const konst HELPERS_PATH = "./compiler/testData/codegen/helpers"
+        private const konst CLASSIC_BACKEND_PATH = "$HELPERS_PATH/CodegenTestHelpersOldBackend.kt"
+        private const konst IR_BACKEND_PATH = "$HELPERS_PATH/CodegenTestHelpersIR.kt"
     }
 
-    override val directiveContainers: List<DirectivesContainer> =
+    override konst directiveContainers: List<DirectivesContainer> =
         listOf(CodegenTestDirectives)
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun produceAdditionalFiles(globalDirectives: RegisteredDirectives, module: TestModule): List<TestFile> {
         if (CodegenTestDirectives.WITH_HELPERS !in module.directives) return emptyList()
         return buildList {
-            val targetBackend = module.targetBackend ?: return@buildList
-            val helpersPath = if (targetBackend.isIR) {
+            konst targetBackend = module.targetBackend ?: return@buildList
+            konst helpersPath = if (targetBackend.isIR) {
                 IR_BACKEND_PATH
             } else {
                 CLASSIC_BACKEND_PATH

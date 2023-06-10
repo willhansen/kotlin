@@ -2,27 +2,27 @@ package
 
 public final class MyHashMap : java.util.HashMap<kotlin.String, kotlin.String> {
     public constructor MyHashMap()
-    public open override /*1*/ /*fake_override*/ val entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>>
+    public open override /*1*/ /*fake_override*/ konst entries: kotlin.collections.MutableSet<kotlin.collections.MutableMap.MutableEntry<kotlin.String, kotlin.String>>
     invisible_fake final override /*1*/ /*fake_override*/ var entrySet: kotlin.collections.(Mutable)Set<kotlin.collections.(Mutable)Map.(Mutable)Entry<kotlin.String!, kotlin.String!>!>!
     invisible_fake final override /*1*/ /*fake_override*/ var hashSeed: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var keySet: kotlin.collections.(Mutable)Set<kotlin.String!>!
-    public open override /*1*/ /*fake_override*/ val keys: kotlin.collections.MutableSet<kotlin.String>
-    invisible_fake final override /*1*/ /*fake_override*/ val loadFactor: kotlin.Float
+    public open override /*1*/ /*fake_override*/ konst keys: kotlin.collections.MutableSet<kotlin.String>
+    invisible_fake final override /*1*/ /*fake_override*/ konst loadFactor: kotlin.Float
     invisible_fake final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var size: kotlin.Int
-    public open override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public open override /*1*/ /*fake_override*/ konst size: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var table: kotlin.Array<(out) java.util.HashMap.Entry<kotlin.String!, kotlin.String!>!>!
     invisible_fake final override /*1*/ /*fake_override*/ var threshold: kotlin.Int
-    invisible_fake final override /*1*/ /*fake_override*/ var values: kotlin.collections.(Mutable)Collection<kotlin.String!>!
-    public open override /*1*/ /*fake_override*/ val values: kotlin.collections.MutableCollection<kotlin.String>
-    invisible_fake open override /*1*/ /*fake_override*/ fun addEntry(/*0*/ hash: kotlin.Int, /*1*/ key: kotlin.String!, /*2*/ value: kotlin.String!, /*3*/ bucketIndex: kotlin.Int): kotlin.Unit
+    invisible_fake final override /*1*/ /*fake_override*/ var konstues: kotlin.collections.(Mutable)Collection<kotlin.String!>!
+    public open override /*1*/ /*fake_override*/ konst konstues: kotlin.collections.MutableCollection<kotlin.String>
+    invisible_fake open override /*1*/ /*fake_override*/ fun addEntry(/*0*/ hash: kotlin.Int, /*1*/ key: kotlin.String!, /*2*/ konstue: kotlin.String!, /*3*/ bucketIndex: kotlin.Int): kotlin.Unit
     invisible_fake open override /*1*/ /*fake_override*/ fun capacity(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun clear(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun clone(): kotlin.Any
     public open override /*1*/ /*fake_override*/ fun containsKey(/*0*/ key: kotlin.String): kotlin.Boolean
     invisible_fake open override /*1*/ /*fake_override*/ fun containsNullValue(): kotlin.Boolean
-    public open override /*1*/ /*fake_override*/ fun containsValue(/*0*/ value: kotlin.String): kotlin.Boolean
-    invisible_fake open override /*1*/ /*fake_override*/ fun createEntry(/*0*/ hash: kotlin.Int, /*1*/ key: kotlin.String!, /*2*/ value: kotlin.String!, /*3*/ bucketIndex: kotlin.Int): kotlin.Unit
+    public open override /*1*/ /*fake_override*/ fun containsValue(/*0*/ konstue: kotlin.String): kotlin.Boolean
+    invisible_fake open override /*1*/ /*fake_override*/ fun createEntry(/*0*/ hash: kotlin.Int, /*1*/ key: kotlin.String!, /*2*/ konstue: kotlin.String!, /*3*/ bucketIndex: kotlin.Int): kotlin.Unit
     invisible_fake open override /*1*/ /*fake_override*/ fun entrySet0(): kotlin.collections.(Mutable)Set<kotlin.collections.(Mutable)Map.(Mutable)Entry<kotlin.String!, kotlin.String!>!>!
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun get(/*0*/ key: kotlin.String): kotlin.String?
@@ -39,11 +39,11 @@ public final class MyHashMap : java.util.HashMap<kotlin.String, kotlin.String> {
     invisible_fake open override /*1*/ /*fake_override*/ fun newEntryIterator(): kotlin.collections.(Mutable)Iterator<kotlin.collections.(Mutable)Map.(Mutable)Entry<kotlin.String!, kotlin.String!>!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun newKeyIterator(): kotlin.collections.(Mutable)Iterator<kotlin.String!>!
     invisible_fake open override /*1*/ /*fake_override*/ fun newValueIterator(): kotlin.collections.(Mutable)Iterator<kotlin.String!>!
-    public open override /*1*/ /*fake_override*/ fun put(/*0*/ key: kotlin.String, /*1*/ value: kotlin.String): kotlin.String?
+    public open override /*1*/ /*fake_override*/ fun put(/*0*/ key: kotlin.String, /*1*/ konstue: kotlin.String): kotlin.String?
     public open override /*1*/ /*fake_override*/ fun putAll(/*0*/ from: kotlin.collections.Map<out kotlin.String, kotlin.String>): kotlin.Unit
     invisible_fake open override /*1*/ /*fake_override*/ fun putAllForCreate(/*0*/ m: (kotlin.collections.MutableMap<out kotlin.String!, out kotlin.String!>..kotlin.collections.Map<out kotlin.String!, kotlin.String!>?)): kotlin.Unit
-    invisible_fake open override /*1*/ /*fake_override*/ fun putForCreate(/*0*/ key: kotlin.String!, /*1*/ value: kotlin.String!): kotlin.Unit
-    invisible_fake open override /*1*/ /*fake_override*/ fun putForNullKey(/*0*/ value: kotlin.String!): kotlin.String!
+    invisible_fake open override /*1*/ /*fake_override*/ fun putForCreate(/*0*/ key: kotlin.String!, /*1*/ konstue: kotlin.String!): kotlin.Unit
+    invisible_fake open override /*1*/ /*fake_override*/ fun putForNullKey(/*0*/ konstue: kotlin.String!): kotlin.String!
     invisible_fake open override /*1*/ /*fake_override*/ fun readObject(/*0*/ s: java.io.ObjectInputStream!): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun remove(/*0*/ key: kotlin.String): kotlin.String?
     invisible_fake final override /*1*/ /*fake_override*/ fun removeEntryForKey(/*0*/ key: kotlin.Any!): java.util.HashMap.Entry<kotlin.String!, kotlin.String!>!

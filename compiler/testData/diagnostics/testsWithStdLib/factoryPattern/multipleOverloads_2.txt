@@ -1,6 +1,6 @@
 package
 
-public fun takeDouble(/*0*/ value: kotlin.Double): kotlin.Unit
+public fun takeDouble(/*0*/ konstue: kotlin.Double): kotlin.Unit
 public fun test(): kotlin.Unit
 @kotlin.OverloadResolutionByLambdaReturnType public fun </*0*/ T, /*1*/ R : kotlin.Comparable<R>> kotlin.collections.Iterable<T>.myMaxOf(/*0*/ selector: (T) -> R): R
 @kotlin.OverloadResolutionByLambdaReturnType public fun </*0*/ T> kotlin.collections.Iterable<T>.myMaxOf(/*0*/ selector: (T) -> kotlin.Double): kotlin.Double

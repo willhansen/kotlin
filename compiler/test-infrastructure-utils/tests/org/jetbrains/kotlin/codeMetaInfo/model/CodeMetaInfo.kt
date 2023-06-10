@@ -8,15 +8,15 @@ package org.jetbrains.kotlin.codeMetaInfo.model
 import org.jetbrains.kotlin.codeMetaInfo.renderConfigurations.AbstractCodeMetaInfoRenderConfiguration
 
 interface CodeMetaInfo {
-    val start: Int
-    val end: Int
-    val tag: String
-    val renderConfiguration: AbstractCodeMetaInfoRenderConfiguration
-    val attributes: MutableList<String>
+    konst start: Int
+    konst end: Int
+    konst tag: String
+    konst renderConfiguration: AbstractCodeMetaInfoRenderConfiguration
+    konst attributes: MutableList<String>
 
-    val tagPrefix: String get() = "<!"
-    val tagPostfix: String get() = "!>"
-    val closingTag: String get() = "<!>"
+    konst tagPrefix: String get() = "<!"
+    konst tagPostfix: String get() = "!>"
+    konst closingTag: String get() = "<!>"
 
     fun asString(): String
 }

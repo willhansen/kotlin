@@ -2,8 +2,8 @@ fun test(j: J) {
   j.getFoo() /*~> Unit */
   j.setFoo(x = 1)
   { // BLOCK
-    val <receiver>: J = j
-    val <unary>: Int = <receiver>.getFoo()
+    konst <receiver>: J = j
+    konst <unary>: Int = <receiver>.getFoo()
     <receiver>.setFoo(x = <unary>.inc())
     <unary>
   } /*~> Unit */

@@ -1,15 +1,15 @@
 fun main() {
-    val a : Int? = null;
+    konst a : Int? = null;
     var v = 1
-    val b : String = <!TYPE_MISMATCH!>v<!>;
-    val f : String = <!TYPE_MISMATCH!>a<!>!!;
-    val g : String = <!TYPE_MISMATCH!>v++<!>;
-    val g1 : String = <!TYPE_MISMATCH!>++v<!>;
-    val h : String = <!TYPE_MISMATCH!>v--<!>;
-    val h1 : String = <!TYPE_MISMATCH!>--v<!>;
-    val i : String = <!TYPE_MISMATCH!>!true<!>;
-    val j : String = <!REDUNDANT_LABEL_WARNING!>foo@<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>true<!>;
-    val k : String = <!REDUNDANT_LABEL_WARNING!>foo@<!> <!REDUNDANT_LABEL_WARNING!>bar@<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>true<!>;
-    val l : String = <!TYPE_MISMATCH!>-1<!>;
-    val m : String = <!TYPE_MISMATCH!>+1<!>;
+    konst b : String = <!TYPE_MISMATCH!>v<!>;
+    konst f : String = <!TYPE_MISMATCH!>a<!>!!;
+    konst g : String = <!TYPE_MISMATCH!>v++<!>;
+    konst g1 : String = <!TYPE_MISMATCH!>++v<!>;
+    konst h : String = <!TYPE_MISMATCH!>v--<!>;
+    konst h1 : String = <!TYPE_MISMATCH!>--v<!>;
+    konst i : String = <!TYPE_MISMATCH!>!true<!>;
+    konst j : String = <!REDUNDANT_LABEL_WARNING!>foo@<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>true<!>;
+    konst k : String = <!REDUNDANT_LABEL_WARNING!>foo@<!> <!REDUNDANT_LABEL_WARNING!>bar@<!> <!CONSTANT_EXPECTED_TYPE_MISMATCH!>true<!>;
+    konst l : String = <!TYPE_MISMATCH!>-1<!>;
+    konst m : String = <!TYPE_MISMATCH!>+1<!>;
 }

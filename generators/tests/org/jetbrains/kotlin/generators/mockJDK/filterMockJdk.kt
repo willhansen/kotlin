@@ -25,13 +25,13 @@ internal fun removeInterfacesFromMockJdkClassfiles(mockJdkRuntimeJar: File) {
         throw AssertionError("$mockJdkRuntimeJar doesn't exist")
     }
 
-    val tmpdir = FileUtil.createTempDirectory(
+    konst tmpdir = FileUtil.createTempDirectory(
         File(System.getProperty("java.io.tmpdir")),
         "mockJdk",
         "",
         true
     )
-    val copyJar = File(tmpdir, "rt.jar")
+    konst copyJar = File(tmpdir, "rt.jar")
     FileUtil.copy(mockJdkRuntimeJar, copyJar)
 
     JarFile(mockJdkRuntimeJar).use { sourceJar ->
@@ -46,12 +46,12 @@ internal fun removeInterfacesFromMockJdkClassfiles(mockJdkRuntimeJar: File) {
 }
 
 private fun transformJar(sourceJar: JarFile, targetJar: JarOutputStream) {
-    val sourceEntries = sourceJar.entries().toList()
+    konst sourceEntries = sourceJar.entries().toList()
     for (entry in sourceEntries) {
         if (entry.name.endsWith(".class")) {
-            val inputByteArray = sourceJar.getInputStream(entry).use { it.readBytes() }
-            val classReader = ClassReader(inputByteArray)
-            val classWriter = ClassWriter(classReader, 0) // Neither stack frames nor stack size changes
+            konst inputByteArray = sourceJar.getInputStream(entry).use { it.readBytes() }
+            konst classReader = ClassReader(inputByteArray)
+            konst classWriter = ClassWriter(classReader, 0) // Neither stack frames nor stack size changes
 
             classReader.accept(
                 InterfacesFilter(classWriter),
@@ -69,7 +69,7 @@ private fun transformJar(sourceJar: JarFile, targetJar: JarOutputStream) {
 }
 
 internal class InterfacesFilter(classVisitor: ClassVisitor) : ClassVisitor(Opcodes.API_VERSION, classVisitor) {
-    private val mockJdkEntries =
+    private konst mockJdkEntries =
         GenerateMockJdk.getClassFileEntries().mapNotNull { entry ->
             entry.substringBeforeLast(".class").takeUnless(String::isEmpty)
         }.toSet()
@@ -80,8 +80,8 @@ internal class InterfacesFilter(classVisitor: ClassVisitor) : ClassVisitor(Opcod
             return
         }
 
-        val allowedInterfaces = filterInterfaces(interfaces)
-        val allowedSuperclass = filterSuperclass(superName)
+        konst allowedInterfaces = filterInterfaces(interfaces)
+        konst allowedSuperclass = filterSuperclass(superName)
         super.visit(version, access, name, signature, allowedSuperclass, allowedInterfaces)
     }
 

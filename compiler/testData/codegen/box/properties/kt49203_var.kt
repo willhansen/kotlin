@@ -1,8 +1,8 @@
 class X {
-    var value = ""
+    var konstue = ""
 
     operator fun plusAssign(data: String) {
-        value += data
+        konstue += data
     }
 }
 
@@ -14,7 +14,7 @@ abstract class A {
 class B : A()
 
 fun box(): String {
-    val a = B()
+    konst a = B()
     a.x += "OK"
-    return a.x.value
+    return a.x.konstue
 }

@@ -9,7 +9,7 @@
 
 fun <T> test1() = null as T
 fun <T> test2(): T {
-   val a : Any? = null
+   konst a : Any? = null
    return a as T
 }
 

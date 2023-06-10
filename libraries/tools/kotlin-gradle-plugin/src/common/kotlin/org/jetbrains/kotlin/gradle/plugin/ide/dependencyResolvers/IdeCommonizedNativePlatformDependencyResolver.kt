@@ -20,10 +20,10 @@ internal object IdeCommonizedNativePlatformDependencyResolver :
     IdeDependencyResolver, IdeDependencyResolver.WithBuildDependencies {
 
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
-        val project = sourceSet.project
-        val commonizerTarget = sourceSet.commonizerTarget.getOrThrow() as? SharedCommonizerTarget ?: return emptySet()
-        val commonizerTask = project.commonizeNativeDistributionTask?.get() ?: return emptySet()
-        val outputDirectory = resolveCommonizedDirectory(commonizerTask.rootOutputDirectory, commonizerTarget)
+        konst project = sourceSet.project
+        konst commonizerTarget = sourceSet.commonizerTarget.getOrThrow() as? SharedCommonizerTarget ?: return emptySet()
+        konst commonizerTask = project.commonizeNativeDistributionTask?.get() ?: return emptySet()
+        konst outputDirectory = resolveCommonizedDirectory(commonizerTask.rootOutputDirectory, commonizerTarget)
 
         return outputDirectory.listFiles().orEmpty()
             .filter { it.isDirectory || it.extension == KLIB_FILE_EXTENSION }

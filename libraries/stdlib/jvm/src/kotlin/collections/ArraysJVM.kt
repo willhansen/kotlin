@@ -34,7 +34,7 @@ public inline fun ByteArray.toString(charset: Charset): String = String(this, ch
 @Suppress("UNCHECKED_CAST")
 public actual inline fun <reified T> Collection<T>.toTypedArray(): Array<T> {
     @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN")
-    val thisCollection = this as java.util.Collection<T>
+    konst thisCollection = this as java.util.Collection<T>
     return thisCollection.toArray(arrayOfNulls<T>(0)) as Array<T>
 }
 
@@ -54,7 +54,7 @@ internal fun copyOfRangeToIndexCheck(toIndex: Int, size: Int) {
 @PublishedApi
 @kotlin.jvm.JvmName("contentDeepHashCode")
 internal fun <T> Array<out T>?.contentDeepHashCodeImpl(): Int =
-// returns valid result for unsigned arrays by accident:
+// returns konstid result for unsigned arrays by accident:
 // hash code of an inline class, which an unsigned array is,
 // is calculated structurally as in a data class
     java.util.Arrays.deepHashCode(this)

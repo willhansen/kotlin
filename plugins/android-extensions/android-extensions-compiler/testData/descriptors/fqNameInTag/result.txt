@@ -17,12 +17,12 @@ kotlinx.android.synthetic.main
 
 kotlinx.android.synthetic.main.test
 
-    public val android.app.Activity.MyKeyboardView: android.inputmethodservice.KeyboardView!
-    public val android.app.Dialog.MyKeyboardView: android.inputmethodservice.KeyboardView!
-    public val android.app.Fragment.MyKeyboardView: android.inputmethodservice.KeyboardView!
-    public val kotlinx.android.extensions.LayoutContainer.MyKeyboardView: android.inputmethodservice.KeyboardView!
+    public konst android.app.Activity.MyKeyboardView: android.inputmethodservice.KeyboardView!
+    public konst android.app.Dialog.MyKeyboardView: android.inputmethodservice.KeyboardView!
+    public konst android.app.Fragment.MyKeyboardView: android.inputmethodservice.KeyboardView!
+    public konst kotlinx.android.extensions.LayoutContainer.MyKeyboardView: android.inputmethodservice.KeyboardView!
 
 
 kotlinx.android.synthetic.main.test.view
 
-    public val android.view.View.MyKeyboardView: android.inputmethodservice.KeyboardView!
+    public konst android.view.View.MyKeyboardView: android.inputmethodservice.KeyboardView!

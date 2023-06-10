@@ -8,7 +8,7 @@ class SessionAccessor<T> {
         return null as T
     }
 
-    operator fun setValue(o : Nothing?, desc: KProperty<*>, value: T) {
+    operator fun setValue(o : Nothing?, desc: KProperty<*>, konstue: T) {
 
     }
 }

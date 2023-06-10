@@ -36,9 +36,9 @@ import kotlin.contracts.contract
 
 // ----------- Walking children/siblings/parents -------------------------------------------------------------------------------------------
 
-val PsiElement.allChildren: PsiChildRange
+konst PsiElement.allChildren: PsiChildRange
     get() {
-        val first = firstChild
+        konst first = firstChild
         return if (first != null) PsiChildRange(first, lastChild) else PsiChildRange.EMPTY
     }
 
@@ -53,7 +53,7 @@ fun PsiElement.siblings(forward: Boolean = true, withItself: Boolean = true): Se
 
                 override fun hasNext(): Boolean = next != null
                 override fun next(): PsiElement {
-                    val result = next ?: throw NoSuchElementException()
+                    konst result = next ?: throw NoSuchElementException()
                     next = if (forward) result.nextSibling else result.prevSibling
                     return result
                 }
@@ -62,20 +62,20 @@ fun PsiElement.siblings(forward: Boolean = true, withItself: Boolean = true): Se
     }
 }
 
-val PsiElement.parentsWithSelf: Sequence<PsiElement>
+konst PsiElement.parentsWithSelf: Sequence<PsiElement>
     get() = generateSequence(this) { if (it is PsiFile) null else it.parent }
 
-val PsiElement.parents: Sequence<PsiElement>
+konst PsiElement.parents: Sequence<PsiElement>
     get() = parentsWithSelf.drop(1)
 
 fun PsiElement.prevLeaf(skipEmptyElements: Boolean = false): PsiElement? = PsiTreeUtil.prevLeaf(this, skipEmptyElements)
 
 fun PsiElement.nextLeaf(skipEmptyElements: Boolean = false): PsiElement? = PsiTreeUtil.nextLeaf(this, skipEmptyElements)
 
-val PsiElement.prevLeafs: Sequence<PsiElement>
+konst PsiElement.prevLeafs: Sequence<PsiElement>
     get() = generateSequence({ prevLeaf() }, { it.prevLeaf() })
 
-val PsiElement.nextLeafs: Sequence<PsiElement>
+konst PsiElement.nextLeafs: Sequence<PsiElement>
     get() = generateSequence({ nextLeaf() }, { it.nextLeaf() })
 
 fun PsiElement.prevLeaf(filter: (PsiElement) -> Boolean): PsiElement? {
@@ -202,7 +202,7 @@ inline fun <reified T : PsiElement> PsiElement.getParentOfTypeAndBranches(
 }
 
 tailrec fun PsiElement.getOutermostParentContainedIn(container: PsiElement): PsiElement? {
-    val parent = parent
+    konst parent = parent
     return if (parent == container) this else parent?.getOutermostParentContainedIn(container)
 }
 
@@ -277,7 +277,7 @@ inline fun <reified T : PsiElement> PsiElement.findDescendantOfType(
 }
 
 fun PsiElement.checkDecompiledText() {
-    val file = containingFile
+    konst file = containingFile
     if (file is KtFile && file.isCompiled) {
         error("Attempt to load decompiled text, please use stubs instead. Decompile process might be slow and should be avoided")
     }
@@ -307,22 +307,22 @@ inline fun <reified T : PsiElement, C : MutableCollection<T>> PsiElement.collect
 
 // ----------- Working with offsets, ranges and texts ----------------------------------------------------------------------------------------------
 
-val PsiElement.startOffset: Int
+konst PsiElement.startOffset: Int
     get() = textRange.startOffset
 
-val PsiElement.endOffset: Int
+konst PsiElement.endOffset: Int
     get() = textRange.endOffset
 
-val KtPureElement.pureStartOffset: Int
+konst KtPureElement.pureStartOffset: Int
     get() = psiOrParent.textRangeWithoutComments.startOffset
 
-val KtPureElement.pureEndOffset: Int
+konst KtPureElement.pureEndOffset: Int
     get() = psiOrParent.textRangeWithoutComments.endOffset
 
-val PsiElement.startOffsetSkippingComments: Int
+konst PsiElement.startOffsetSkippingComments: Int
     get() {
         if (!startsWithComment()) return startOffset // fastpath
-        val firstNonCommentChild = generateSequence(firstChild) { it.nextSibling }
+        konst firstNonCommentChild = generateSequence(firstChild) { it.nextSibling }
             .firstOrNull { it !is PsiWhiteSpace && it !is PsiComment }
         return firstNonCommentChild?.startOffset ?: startOffset
     }
@@ -339,7 +339,7 @@ fun PsiElement.getStartOffsetIn(ancestor: PsiElement): Int {
 
 fun TextRange.containsInside(offset: Int): Boolean = startOffset < offset && offset < endOffset
 
-val PsiChildRange.textRange: TextRange?
+konst PsiChildRange.textRange: TextRange?
     get() {
         if (isEmpty) return null
         return TextRange(first!!.startOffset, last!!.endOffset)
@@ -352,15 +352,15 @@ fun PsiChildRange.getText(): String {
 
 fun PsiFile.elementsInRange(range: TextRange): List<PsiElement> {
     var offset = range.startOffset
-    val result = ArrayList<PsiElement>()
+    konst result = ArrayList<PsiElement>()
     while (offset < range.endOffset) {
-        val currentRange = TextRange(offset, range.endOffset)
-        val leaf = findFirstLeafWhollyInRange(this, currentRange) ?: break
+        konst currentRange = TextRange(offset, range.endOffset)
+        konst leaf = findFirstLeafWhollyInRange(this, currentRange) ?: break
 
-        val element = leaf
+        konst element = leaf
             .parentsWithSelf
             .first {
-                val parent = it.parent
+                konst parent = it.parent
                 it is PsiFile || parent.textRange !in currentRange
             }
         result.add(element)
@@ -381,7 +381,7 @@ private fun findFirstLeafWhollyInRange(file: PsiFile, range: TextRange): PsiElem
     return if (elementRange.endOffset <= range.endOffset) element else null
 }
 
-val PsiElement.textRangeWithoutComments: TextRange
+konst PsiElement.textRangeWithoutComments: TextRange
     get() = if (!startsWithComment()) textRange else TextRange(startOffsetSkippingComments, endOffset)
 
 fun PsiElement.startsWithComment(): Boolean = firstChild is PsiComment
@@ -398,7 +398,7 @@ fun replaceFileAnnotationList(file: KtFile, annotationList: KtFileAnnotationList
         return file.fileAnnotationList!!.replace(annotationList) as KtFileAnnotationList
     }
 
-    val beforeAnchor: PsiElement? = when {
+    konst beforeAnchor: PsiElement? = when {
         file.packageDirective?.packageKeyword != null -> file.packageDirective!!
         file.importList != null -> file.importList!!
         file.declarations.firstOrNull() != null -> file.declarations.first()
@@ -470,11 +470,11 @@ fun ASTNode.closestPsiElement(): PsiElement? {
 
 fun LazyParseablePsiElement.getContainingKtFile(): KtFile {
 
-    val file = this.containingFile
+    konst file = this.containingFile
 
     if (file is KtFile) return file
 
-    val fileString = if (file != null && file.isValid) file.text else ""
+    konst fileString = if (file != null && file.isValid) file.text else ""
     throw IllegalStateException("KtElement not inside KtFile: $file with text \"$fileString\" for element $this of type ${this::class.java} node = ${this.node}")
 }
 

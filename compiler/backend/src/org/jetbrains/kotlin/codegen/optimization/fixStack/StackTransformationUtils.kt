@@ -32,33 +32,33 @@ private fun <V : Value> Frame<V>.peekWordsTo(dest: MutableList<V>, size: Int, of
     var offset = offset0
     var totalSize = 0
     while (totalSize < size) {
-        val value = peek(offset++) ?: return -1
-        dest.add(value)
-        totalSize += value.size
+        konst konstue = peek(offset++) ?: return -1
+        dest.add(konstue)
+        totalSize += konstue.size
     }
     if (totalSize > size) return -1
     return offset
 }
 
 fun <V : Value> Frame<V>.peekWords(size: Int): List<V>? {
-    val result = ArrayList<V>(size)
+    konst result = ArrayList<V>(size)
     return if (peekWordsTo(result, size) < 0) null else result
 }
 
 fun <V : Value> Frame<V>.peekWords(size1: Int, size2: Int): List<V>? {
-    val result = ArrayList<V>(size1 + size2)
-    val offset = peekWordsTo(result, size1)
+    konst result = ArrayList<V>(size1 + size2)
+    konst offset = peekWordsTo(result, size1)
     if (offset < 0) return null
     if (peekWordsTo(result, size2, offset) < 0) return null
     return result
 }
 
 class SavedStackDescriptor(
-    val savedValues: List<FixStackValue>,
-    val firstLocalVarIndex: Int
+    konst savedValues: List<FixStackValue>,
+    konst firstLocalVarIndex: Int
 ) {
-    private val savedValuesSize = savedValues.fold(0) { size, value -> size + value.size }
-    val firstUnusedLocalVarIndex = firstLocalVarIndex + savedValuesSize
+    private konst savedValuesSize = savedValues.fold(0) { size, konstue -> size + konstue.size }
+    konst firstUnusedLocalVarIndex = firstLocalVarIndex + savedValuesSize
 
     override fun toString(): String =
         "@$firstLocalVarIndex: [$savedValues]"
@@ -101,17 +101,17 @@ fun restoreStackWithReturnValue(
 
 fun generateLoadInstructions(methodNode: MethodNode, location: AbstractInsnNode, savedStackDescriptor: SavedStackDescriptor) {
     var localVarIndex = savedStackDescriptor.firstLocalVarIndex
-    for (value in savedStackDescriptor.savedValues) {
-        methodNode.instructions.insertBefore(location, VarInsnNode(value.loadOpcode, localVarIndex))
-        localVarIndex += value.size
+    for (konstue in savedStackDescriptor.savedValues) {
+        methodNode.instructions.insertBefore(location, VarInsnNode(konstue.loadOpcode, localVarIndex))
+        localVarIndex += konstue.size
     }
 }
 
 fun generateStoreInstructions(methodNode: MethodNode, location: AbstractInsnNode, savedStackDescriptor: SavedStackDescriptor) {
     var localVarIndex = savedStackDescriptor.firstUnusedLocalVarIndex
-    for (value in savedStackDescriptor.savedValues.asReversed()) {
-        localVarIndex -= value.size
-        methodNode.instructions.insertBefore(location, VarInsnNode(value.storeOpcode, localVarIndex))
+    for (konstue in savedStackDescriptor.savedValues.asReversed()) {
+        localVarIndex -= konstue.size
+        methodNode.instructions.insertBefore(location, VarInsnNode(konstue.storeOpcode, localVarIndex))
     }
 }
 
@@ -120,7 +120,7 @@ fun getPopInstruction(top: BasicValue) =
         when (top.size) {
             1 -> Opcodes.POP
             2 -> Opcodes.POP2
-            else -> throw AssertionError("Unexpected value type size")
+            else -> throw AssertionError("Unexpected konstue type size")
         }
     )
 
@@ -133,7 +133,7 @@ fun removeAlwaysFalseIfeq(methodNode: MethodNode, node: AbstractInsnNode) {
 
 fun replaceAlwaysTrueIfeqWithGoto(methodNode: MethodNode, node: AbstractInsnNode) {
     with(methodNode.instructions) {
-        val next = node.next as JumpInsnNode
+        konst next = node.next as JumpInsnNode
         insertBefore(node, JumpInsnNode(Opcodes.GOTO, next.label))
         remove(node)
         remove(next)

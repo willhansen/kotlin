@@ -6,7 +6,7 @@ package h {
     public fun </*0*/ R> elemAndList(/*0*/ r: R, /*1*/ t: kotlin.collections.List<R>): R
     public fun </*0*/ T> id(/*0*/ t: T): T
     public fun </*0*/ T> id1(/*0*/ t: T): T
-    public fun </*0*/ T> list(/*0*/ value: T): java.util.ArrayList<T>
+    public fun </*0*/ T> list(/*0*/ konstue: T): java.util.ArrayList<T>
     public fun </*0*/ S> newList(): java.util.ArrayList<S>
     public fun test1(): kotlin.Unit
 }

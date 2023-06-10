@@ -19,9 +19,9 @@ import kotlin.io.path.notExists
 
 object CompilerExecutor {
     fun compileLibrary(sourcesPath: Path, options: List<String>, compilationErrorExpected: Boolean): Path {
-        val library = sourcesPath / "library.jar"
-        val sourceFiles = sourcesPath.toFile().walkBottomUp()
-        val commands = buildList {
+        konst library = sourcesPath / "library.jar"
+        konst sourceFiles = sourcesPath.toFile().walkBottomUp()
+        konst commands = buildList {
             sourceFiles.mapTo(this) { it.absolutePath }
             addAll(options)
             add("-d")
@@ -62,8 +62,8 @@ object CompilerExecutor {
     }
 
     object Directives : SimpleDirectivesContainer() {
-        val COMPILER_ARGUMENTS by stringDirective("List of additional compiler arguments")
-        val COMPILATION_ERRORS by directive("Is compilation errors expected in the file")
+        konst COMPILER_ARGUMENTS by stringDirective("List of additional compiler arguments")
+        konst COMPILATION_ERRORS by directive("Is compilation errors expected in the file")
     }
 }
 

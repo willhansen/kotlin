@@ -10,10 +10,10 @@ package org.jetbrains.kotlin.metadata.serialization
 import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.protobuf.GeneratedMessageLite
 
-private class TableElementWrapper<Element : GeneratedMessageLite.Builder<*, Element>>(val builder: Element) {
+private class TableElementWrapper<Element : GeneratedMessageLite.Builder<*, Element>>(konst builder: Element) {
     // If you'll try to optimize it using structured equals/hashCode, pay attention to extensions present in proto messages
-    private val bytes: ByteArray = builder.build().toByteArray()
-    private val hashCode: Int = bytes.contentHashCode()
+    private konst bytes: ByteArray = builder.build().toByteArray()
+    private konst hashCode: Int = bytes.contentHashCode()
 
     override fun hashCode() = hashCode
 
@@ -25,7 +25,7 @@ abstract class MutableTable<Element, Table, TableBuilder>
               Table : GeneratedMessageLite,
               TableBuilder : GeneratedMessageLite.Builder<Table, TableBuilder> {
 
-    private val interner = Interner<TableElementWrapper<Element>>()
+    private konst interner = Interner<TableElementWrapper<Element>>()
 
     protected abstract fun createTableBuilder(): TableBuilder
 

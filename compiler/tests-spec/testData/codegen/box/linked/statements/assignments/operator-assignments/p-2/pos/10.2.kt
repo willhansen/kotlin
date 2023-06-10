@@ -16,9 +16,9 @@
 class B(var a: Int) {
     var div = false
 
-    operator fun div(value: Int): B {
+    operator fun div(konstue: Int): B {
         div = true
-        a= a / value
+        a= a / konstue
         return this
     }
 

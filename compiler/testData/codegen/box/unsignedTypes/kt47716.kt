@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val r =
+    konst r =
         try {
             ULong
         } finally {

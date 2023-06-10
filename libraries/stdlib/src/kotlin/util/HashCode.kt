@@ -9,7 +9,7 @@ import kotlin.internal.InlineOnly
 
 
 /**
- * Returns a hash code value for the object or zero if the object is `null`.
+ * Returns a hash code konstue for the object or zero if the object is `null`.
  *
  * @see Any.hashCode
  */

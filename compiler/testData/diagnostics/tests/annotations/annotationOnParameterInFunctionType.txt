@@ -1,7 +1,7 @@
 package
 
-public val inVal: (x: kotlin.Int) -> kotlin.Unit
-public val onType: (@TypeAnn A).(a: @TypeAnn A, @TypeAnn A) -> @TypeAnn A?
+public konst inVal: (x: kotlin.Int) -> kotlin.Unit
+public konst onType: (@TypeAnn A).(a: @TypeAnn A, @TypeAnn A) -> @TypeAnn A?
 public fun badArgs(/*0*/ a: (@TypeAnnWithArg kotlin.Int) -> kotlin.Unit): kotlin.Unit
 public fun badArgsInTypeAlias(/*0*/ a: BadArgsInTypeAlias /* = (@TypeAnnWithArg kotlin.Int) -> kotlin.Unit */): kotlin.Unit
 public fun badArgsInTypeAliasInstance(/*0*/ a: T<@TypeAnnWithArg(arg = 123) kotlin.Int> /* = (@TypeAnnWithArg(arg = 123) kotlin.Int) -> kotlin.Unit */): kotlin.Unit
@@ -13,7 +13,7 @@ public fun @TypeAnn A.extFun(/*0*/ @Ann a: @TypeAnn A): @TypeAnn A?
 
 public final class A : (@Ann kotlin.Int) -> kotlin.Unit {
     public constructor A()
-    public final val prop: (x: kotlin.Int) -> kotlin.Unit
+    public final konst prop: (x: kotlin.Int) -> kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ fun invoke(/*0*/ p1: kotlin.Int): kotlin.Unit
@@ -36,7 +36,7 @@ public final annotation class Ann : kotlin.Annotation {
 
 @kotlin.annotation.Target(allowedTargets = {AnnotationTarget.TYPE}) public final annotation class TypeAnnWithArg : kotlin.Annotation {
     public constructor TypeAnnWithArg(/*0*/ arg: kotlin.String)
-    public final val arg: kotlin.String
+    public final konst arg: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

@@ -12,8 +12,8 @@ fun box(): String = OK.okRef.get()
 @file:[JvmName("MultifileClass") JvmMultifileClass]
 package a
 
-private const val ok = "OK"
+private const konst ok = "OK"
 
 object OK {
-    val okRef = ::ok
+    konst okRef = ::ok
 }

@@ -5,17 +5,17 @@ class A
 annotation class x
 
 fun @x A.foo(a: @x Int) {
-    val v: @x Int = 1
+    konst v: @x Int = 1
 }
 
 fun <T> @x List<@x T>.foo(l: List<@x T>): @x List<@x T> = throw Exception()
 
 fun <T, U: T> List<@x T>.firstTyped(): U = throw Exception()
 
-val <T> @x List<@x T>.f: Int get() = 42
+konst <T> @x List<@x T>.f: Int get() = 42
 
 @Target(AnnotationTarget.TYPE)
-annotation class TypeAnnWithArg(val arg: String)
+annotation class TypeAnnWithArg(konst arg: String)
 
 fun badArgs(a: List<@TypeAnnWithArg(<!NO_VALUE_FOR_PARAMETER!><!NAMED_PARAMETER_NOT_FOUND!>unresolved<!> = "")<!> Int>) {}
 fun badArgsWithProjection(a: Array<out @TypeAnnWithArg(<!NO_VALUE_FOR_PARAMETER!><!NAMED_PARAMETER_NOT_FOUND!>unresolved<!> = "")<!> Int>) {}

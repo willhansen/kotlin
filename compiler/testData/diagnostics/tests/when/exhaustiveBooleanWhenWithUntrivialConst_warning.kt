@@ -13,7 +13,7 @@ fun test_1(b: Boolean): String = when (b) {
     (<!NON_TRIVIAL_BOOLEAN_CONSTANT!>"" != ""<!>) -> "false"
 }
 
-const val TRUE = true
+const konst TRUE = true
 
 // Already not working
 fun test_2(b: Boolean): String = <!NO_ELSE_IN_WHEN!>when<!>(b) {
@@ -21,8 +21,8 @@ fun test_2(b: Boolean): String = <!NO_ELSE_IN_WHEN!>when<!>(b) {
     false -> "false"
 }
 
-const val s1 = "s1"
-const val s2 = "s2"
+const konst s1 = "s1"
+const konst s2 = "s2"
 
 // Already not working
 fun test_3(b: Boolean): String = <!NO_ELSE_IN_WHEN!>when<!>(b) {

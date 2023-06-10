@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.resolve.lazy.ResolveSessionUtils
 import org.jetbrains.kotlin.resolve.scopes.DescriptorKindFilter
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
-class CliKotlinAsJavaSupport(project: Project, private val traceHolder: CliTraceHolder) : KotlinAsJavaSupportBase<KtFile>(project) {
+class CliKotlinAsJavaSupport(project: Project, private konst traceHolder: CliTraceHolder) : KotlinAsJavaSupportBase<KtFile>(project) {
     override fun findFilesForFacadeByPackage(
         packageFqName: FqName,
         searchScope: GlobalSearchScope
@@ -52,7 +52,7 @@ class CliKotlinAsJavaSupport(project: Project, private val traceHolder: CliTrace
         return LightClassGenerationSupport.getInstance(files.first().project).createUltraLightClassForFacade(facadeFqName, files)
     }
 
-    override val KtFile.contentSearchScope: GlobalSearchScope get() = GlobalSearchScope.allScope(project)
+    override konst KtFile.contentSearchScope: GlobalSearchScope get() = GlobalSearchScope.allScope(project)
     override fun facadeIsApplicable(module: KtFile, file: KtFile): Boolean = !module.isCompiled
 
     override fun findFilesForFacade(facadeFqName: FqName, searchScope: GlobalSearchScope): List<KtFile> {
@@ -70,8 +70,8 @@ class CliKotlinAsJavaSupport(project: Project, private val traceHolder: CliTrace
     override fun findClassOrObjectDeclarationsInPackage(
         packageFqName: FqName, searchScope: GlobalSearchScope
     ): Collection<KtClassOrObject> {
-        val files = findFilesForPackage(packageFqName, searchScope)
-        val result = SmartList<KtClassOrObject>()
+        konst files = findFilesForPackage(packageFqName, searchScope)
+        konst result = SmartList<KtClassOrObject>()
         for (file in files) {
             for (declaration in file.declarations) {
                 if (declaration is KtClassOrObject) {
@@ -86,7 +86,7 @@ class CliKotlinAsJavaSupport(project: Project, private val traceHolder: CliTrace
     override fun packageExists(fqName: FqName, scope: GlobalSearchScope): Boolean = !traceHolder.module.getPackage(fqName).isEmpty()
 
     override fun getSubPackages(fqn: FqName, scope: GlobalSearchScope): Collection<FqName> {
-        val packageView = traceHolder.module.getPackage(fqn)
+        konst packageView = traceHolder.module.getPackage(fqn)
         return packageView.memberScope.getContributedDescriptors(
             DescriptorKindFilter.PACKAGES,
             MemberScope.ALL_NAME_FILTER
@@ -99,7 +99,7 @@ class CliKotlinAsJavaSupport(project: Project, private val traceHolder: CliTrace
 
     override fun findClassOrObjectDeclarations(fqName: FqName, searchScope: GlobalSearchScope): Collection<KtClassOrObject> {
         return ResolveSessionUtils.getClassDescriptorsByFqName(traceHolder.module, fqName).mapNotNull {
-            val element = DescriptorToSourceUtils.getSourceFromDescriptor(it)
+            konst element = DescriptorToSourceUtils.getSourceFromDescriptor(it)
             if (element is KtClassOrObject && PsiSearchScopeUtil.isInScope(searchScope, element)) {
                 element
             } else null

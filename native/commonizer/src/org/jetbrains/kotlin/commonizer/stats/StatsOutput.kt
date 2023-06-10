@@ -27,12 +27,12 @@ class FileStatsOutput(directory: File, baseName: String) : StatsOutput {
         directory.mkdirs()
     }
 
-    private val writer: PrintWriter = directory.resolve("${baseName}_stats.csv").printWriter()
+    private konst writer: PrintWriter = directory.resolve("${baseName}_stats.csv").printWriter()
     private var width: Int = 0
 
     override fun writeHeader(header: StatsOutput.StatsHeader) {
         check(width == 0)
-        val headerItems = header.toList()
+        konst headerItems = header.toList()
         require(headerItems.isNotEmpty())
 
         width = headerItems.size
@@ -41,7 +41,7 @@ class FileStatsOutput(directory: File, baseName: String) : StatsOutput {
 
     override fun writeRow(row: StatsOutput.StatsRow) {
         check(width > 0)
-        val rowItems = row.toList()
+        konst rowItems = row.toList()
         require(rowItems.size == width)
 
         rowItems.joinTo(writer, separator = "|", postfix = "\n")

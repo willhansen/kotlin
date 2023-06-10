@@ -460,7 +460,7 @@ KtFile: ControlStructures.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -498,7 +498,7 @@ KtFile: ControlStructures.kt
         PsiWhiteSpace(' ')
         PsiElement(LPAR)('(')
         VALUE_PARAMETER
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('x')
           PsiWhiteSpace(' ')

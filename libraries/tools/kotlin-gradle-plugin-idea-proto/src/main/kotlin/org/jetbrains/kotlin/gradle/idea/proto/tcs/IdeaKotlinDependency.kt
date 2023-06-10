@@ -6,7 +6,7 @@
 
 package org.jetbrains.kotlin.gradle.idea.proto.tcs
 
-import com.google.protobuf.InvalidProtocolBufferException
+import com.google.protobuf.InkonstidProtocolBufferException
 import org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto
 import org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.IdeaKotlinDependencyProto.DependencyCase
 import org.jetbrains.kotlin.gradle.idea.proto.generated.tcs.ideaKotlinDependencyProto
@@ -44,10 +44,10 @@ fun IdeaKotlinDependency.toByteArray(context: IdeaKotlinSerializationContext): B
 
 fun IdeaKotlinSerializationContext.IdeaKotlinDependency(data: ByteArray): IdeaKotlinDependency? {
     return try {
-        val proto = IdeaKotlinDependencyProto.parseFrom(data)
+        konst proto = IdeaKotlinDependencyProto.parseFrom(data)
         IdeaKotlinDependency(proto)
 
-    } catch (e: InvalidProtocolBufferException) {
+    } catch (e: InkonstidProtocolBufferException) {
         logger.error("Failed to deserialize ${IdeaKotlinDependency::class.java.simpleName}", e)
         null
     }

@@ -39,18 +39,18 @@ internal fun unexpectedArgument(argument: KotlinCallArgument): Nothing =
     error("Unexpected argument type: $argument, ${argument.javaClass.canonicalName}.")
 
 // if expression is not stable and has smart casts, then we create this type
-internal val ReceiverValueWithSmartCastInfo.unstableType: UnwrappedType?
+internal konst ReceiverValueWithSmartCastInfo.unstableType: UnwrappedType?
     get() {
         if (isStable || !hasTypesFromSmartCasts())
             return if (isStable) null else receiverValue.type.unwrap()
 
-        val intersectionType = intersectWrappedTypes(allOriginalTypes)
+        konst intersectionType = intersectWrappedTypes(allOriginalTypes)
 
         return prepareArgumentTypeRegardingCaptureTypes(intersectionType) ?: intersectionType
     }
 
 // with all smart casts if stable
-val ReceiverValueWithSmartCastInfo.stableType: UnwrappedType
+konst ReceiverValueWithSmartCastInfo.stableType: UnwrappedType
     get() {
         if (!isStable || !hasTypesFromSmartCasts())
             return receiverValue.type.unwrap()
@@ -69,7 +69,7 @@ val ReceiverValueWithSmartCastInfo.stableType: UnwrappedType
          *
          * Such redundant type with captured argument may further lead to contradiction in constraint system or less exact solution.
          */
-        val intersectionType = intersectWrappedTypes(allOriginalTypes)
+        konst intersectionType = intersectWrappedTypes(allOriginalTypes)
 
         // Intersection type of Nothing with any flexible types will be Nothing!.
         // This is a bit incorrect as cast to Nothing? or Nothing can result only in Nothing? or Nothing,
@@ -92,12 +92,12 @@ internal fun KotlinCallArgument.getExpectedType(parameter: ParameterDescriptor, 
         (parameter as? ValueParameterDescriptor)?.varargElementType?.unwrap() ?: parameter.type.unwrap()
     }
 
-val ValueParameterDescriptor.isVararg: Boolean get() = varargElementType != null
-val ParameterDescriptor.isVararg: Boolean get() = (this as? ValueParameterDescriptor)?.isVararg ?: false
+konst ValueParameterDescriptor.isVararg: Boolean get() = varargElementType != null
+konst ParameterDescriptor.isVararg: Boolean get() = (this as? ValueParameterDescriptor)?.isVararg ?: false
 
 /**
- * @return `true` iff the parameter has a default value, i.e. declares it, inherits it by overriding a parameter which has a default value,
- * or is a parameter of an 'actual' declaration, such that the corresponding 'expect' parameter has a default value.
+ * @return `true` iff the parameter has a default konstue, i.e. declares it, inherits it by overriding a parameter which has a default konstue,
+ * or is a parameter of an 'actual' declaration, such that the corresponding 'expect' parameter has a default konstue.
  */
 fun ValueParameterDescriptor.hasDefaultValue(): Boolean {
     return DFS.ifAny(
@@ -108,10 +108,10 @@ fun ValueParameterDescriptor.hasDefaultValue(): Boolean {
 }
 
 private fun ValueParameterDescriptor.checkExpectedParameter(checker: (ValueParameterDescriptor) -> Boolean): Boolean {
-    val function = containingDeclaration
+    konst function = containingDeclaration
     if (function is FunctionDescriptor && function.isActual) {
-        val expected = function.findCompatibleExpectsForActual().firstOrNull()
-        return expected is FunctionDescriptor && checker(expected.valueParameters[index])
+        konst expected = function.findCompatibleExpectsForActual().firstOrNull()
+        return expected is FunctionDescriptor && checker(expected.konstueParameters[index])
     }
     return false
 }
@@ -130,15 +130,15 @@ private fun ValueParameterDescriptor.checkExpectedParameter(checker: (ValueParam
  * For parameter `p` of method `foo`:
  * `isActualParameterWithAnyExpectedDefault` returns `true` for both actual A and B
  * `isActualParameterWithCorrespondingExpectedDefault` returns `true` for actual A, but `false` for actual B because expect B declaration
- *     doesn't have a default value
+ *     doesn't have a default konstue
  */
-val ValueParameterDescriptor.isActualParameterWithAnyExpectedDefault: Boolean
+konst ValueParameterDescriptor.isActualParameterWithAnyExpectedDefault: Boolean
     get() = checkExpectedParameter { it.hasDefaultValue() }
 
 /**
  * @see isActualParameterWithAnyExpectedDefault
  */
-val ValueParameterDescriptor.isActualParameterWithCorrespondingExpectedDefault: Boolean
+konst ValueParameterDescriptor.isActualParameterWithCorrespondingExpectedDefault: Boolean
     get() = checkExpectedParameter { it.declaresDefaultValue() }
 
 private fun KotlinCallArgument.isArrayAssignedAsNamedArgumentInAnnotation(
@@ -147,7 +147,7 @@ private fun KotlinCallArgument.isArrayAssignedAsNamedArgumentInAnnotation(
 ): Boolean {
     if (!languageVersionSettings.supportsFeature(LanguageFeature.AssigningArraysToVarargsInNamedFormInAnnotations)) return false
 
-    val isAllowedAssigningSingleElementsToVarargsInNamedForm =
+    konst isAllowedAssigningSingleElementsToVarargsInNamedForm =
         !languageVersionSettings.supportsFeature(LanguageFeature.ProhibitAssigningSingleElementsToVarargsInNamedForm)
 
     if (isAllowedAssigningSingleElementsToVarargsInNamedForm && !isArrayOrArrayLiteral()) return false
@@ -161,7 +161,7 @@ private fun KotlinCallArgument.isArrayAssignedAsNamedArgumentInFunction(
 ): Boolean {
     if (!languageVersionSettings.supportsFeature(LanguageFeature.AllowAssigningArrayElementsToVarargsInNamedFormForFunctions)) return false
 
-    val isAllowedAssigningSingleElementsToVarargsInNamedForm =
+    konst isAllowedAssigningSingleElementsToVarargsInNamedForm =
         !languageVersionSettings.supportsFeature(LanguageFeature.ProhibitAssigningSingleElementsToVarargsInNamedForm)
 
     if (isAllowedAssigningSingleElementsToVarargsInNamedForm && !isArrayOrArrayLiteral()) return false
@@ -173,6 +173,6 @@ fun KotlinCallArgument.isArrayOrArrayLiteral(): Boolean {
     if (this is CollectionLiteralKotlinCallArgument) return true
     if (this !is SimpleKotlinCallArgument) return false
 
-    val type = this.receiver.receiverValue.type
+    konst type = this.receiver.receiverValue.type
     return KotlinBuiltIns.isArrayOrPrimitiveArray(type)
 }

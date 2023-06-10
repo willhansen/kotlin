@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.analysis.api.lifetime.KtLifetimeToken
 import org.jetbrains.kotlin.analysis.api.types.KtType
 
 internal class KtFe10SubtypingComponent(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSubtypingComponent(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun isEqualTo(first: KtType, second: KtType): Boolean {
@@ -27,7 +27,7 @@ internal class KtFe10SubtypingComponent(
     override fun isSubTypeOf(subType: KtType, superType: KtType): Boolean {
         require(subType is KtFe10Type)
         require(superType is KtFe10Type)
-        val typeChecker = analysisContext.resolveSession.kotlinTypeCheckerOfOwnerModule
+        konst typeChecker = analysisContext.resolveSession.kotlinTypeCheckerOfOwnerModule
         return typeChecker.isSubtypeOf(subType.fe10Type, superType.fe10Type)
     }
 }

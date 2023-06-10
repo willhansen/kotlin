@@ -3,19 +3,19 @@
 import kotlin.reflect.KProperty
 
 class Example {
-    val valProp: String by Delegate()
-    val varProp: String by Delegate()
+    konst konstProp: String by Delegate()
+    konst varProp: String by Delegate()
 
     fun foo() {
-        val <!UNUSED_VARIABLE!>valVariable<!> by Delegate()
-        val <!UNUSED_VARIABLE!>varVariable<!> by Delegate()
+        konst <!UNUSED_VARIABLE!>konstVariable<!> by Delegate()
+        konst <!UNUSED_VARIABLE!>varVariable<!> by Delegate()
     }
 }
 
 class Delegate {
     operator fun getValue(thisRef: Any?, property: KProperty<*>): String = "delegation"
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
         // setValue
     }
 }

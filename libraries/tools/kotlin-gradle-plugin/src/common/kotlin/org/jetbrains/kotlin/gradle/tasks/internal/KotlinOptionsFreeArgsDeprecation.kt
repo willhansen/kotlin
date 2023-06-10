@@ -12,7 +12,7 @@ internal fun AbstractKotlinCompile<*>.nagUserFreeArgsModifiedOnExecution(
 ) {
     if (!suppressKotlinOptionsFreeArgsModificationWarning.get()) {
         // Trying to approximately filter out KGP and non-related Gradle/Java/Groovy classes from stacktrace
-        val modificationStacktrace = Thread.currentThread().stackTrace
+        konst modificationStacktrace = Thread.currentThread().stackTrace
             .asSequence()
             .filter {
                 !it.className.startsWith("org.jetbrains.kotlin.gradle") &&

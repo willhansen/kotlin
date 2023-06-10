@@ -4,8 +4,8 @@ plugins {
     application
 }
 
-val runtimeOnly by configurations
-val compileOnly by configurations
+konst runtimeOnly by configurations
+konst compileOnly by configurations
 runtimeOnly.extendsFrom(compileOnly)
 
 dependencies {

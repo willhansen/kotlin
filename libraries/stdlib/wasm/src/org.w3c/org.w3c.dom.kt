@@ -25,7 +25,7 @@ import org.w3c.workers.*
 import org.w3c.xhr.*
 
 public external abstract class HTMLAllCollection : JsAny {
-    open val length: Int
+    open konst length: Int
     fun item(nameOrIndex: String = definedExternally): UnionElementOrHTMLCollection?
     fun namedItem(name: String): UnionElementOrHTMLCollection?
 }
@@ -49,7 +49,7 @@ public external abstract class HTMLFormControlsCollection : HTMLCollection, JsAn
  * Exposes the JavaScript [RadioNodeList](https://developer.mozilla.org/en/docs/Web/API/RadioNodeList) to Kotlin
  */
 public external abstract class RadioNodeList : NodeList, UnionElementOrRadioNodeList, JsAny {
-    open var value: String
+    open var konstue: String
 }
 
 /**
@@ -75,45 +75,45 @@ public external abstract class HTMLElement : Element, GlobalEventHandlers, Docum
     open var lang: String
     open var translate: Boolean
     open var dir: String
-    open val dataset: DOMStringMap
+    open konst dataset: DOMStringMap
     open var hidden: Boolean
     open var tabIndex: Int
     open var accessKey: String
-    open val accessKeyLabel: String
+    open konst accessKeyLabel: String
     open var draggable: Boolean
-    open val dropzone: DOMTokenList
+    open konst dropzone: DOMTokenList
     open var contextMenu: HTMLMenuElement?
     open var spellcheck: Boolean
     open var innerText: String
-    open val offsetParent: Element?
-    open val offsetTop: Int
-    open val offsetLeft: Int
-    open val offsetWidth: Int
-    open val offsetHeight: Int
+    open konst offsetParent: Element?
+    open konst offsetTop: Int
+    open konst offsetLeft: Int
+    open konst offsetWidth: Int
+    open konst offsetHeight: Int
     fun click()
     fun focus()
     fun blur()
     fun forceSpellCheck()
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -122,24 +122,24 @@ public external abstract class HTMLElement : Element, GlobalEventHandlers, Docum
  */
 public external abstract class HTMLUnknownElement : HTMLElement, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -154,9 +154,9 @@ internal fun getMethodImplForDOMStringMap(obj: DOMStringMap, name: String): Stri
 public operator fun DOMStringMap.get(name: String): String? = getMethodImplForDOMStringMap(this, name)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForDOMStringMap(obj: DOMStringMap, name: String, value: String) { js("obj[name] = value;") }
+internal fun setMethodImplForDOMStringMap(obj: DOMStringMap, name: String, konstue: String) { js("obj[name] = konstue;") }
 
-public operator fun DOMStringMap.set(name: String, value: String) = setMethodImplForDOMStringMap(this, name, value)
+public operator fun DOMStringMap.set(name: String, konstue: String) = setMethodImplForDOMStringMap(this, name, konstue)
 
 /**
  * Exposes the JavaScript [HTMLHtmlElement](https://developer.mozilla.org/en/docs/Web/API/HTMLHtmlElement) to Kotlin
@@ -165,24 +165,24 @@ public external abstract class HTMLHtmlElement : HTMLElement, JsAny {
     open var version: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -191,24 +191,24 @@ public external abstract class HTMLHtmlElement : HTMLElement, JsAny {
  */
 public external abstract class HTMLHeadElement : HTMLElement, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -219,24 +219,24 @@ public external abstract class HTMLTitleElement : HTMLElement, JsAny {
     open var text: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -248,24 +248,24 @@ public external abstract class HTMLBaseElement : HTMLElement, JsAny {
     open var target: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -277,12 +277,12 @@ public external abstract class HTMLLinkElement : HTMLElement, LinkStyle, JsAny {
     open var crossOrigin: String?
     open var rel: String
     open var `as`: RequestDestination
-    open val relList: DOMTokenList
+    open konst relList: DOMTokenList
     open var media: String
     open var nonce: String
     open var hreflang: String
     open var type: String
-    open val sizes: DOMTokenList
+    open konst sizes: DOMTokenList
     open var referrerPolicy: String
     open var charset: String
     open var rev: String
@@ -291,24 +291,24 @@ public external abstract class HTMLLinkElement : HTMLElement, LinkStyle, JsAny {
     open var workerType: WorkerType
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -322,24 +322,24 @@ public external abstract class HTMLMetaElement : HTMLElement, JsAny {
     open var scheme: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -352,24 +352,24 @@ public external abstract class HTMLStyleElement : HTMLElement, LinkStyle, JsAny 
     open var type: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -385,24 +385,24 @@ public external abstract class HTMLBodyElement : HTMLElement, WindowEventHandler
     open var background: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -413,24 +413,24 @@ public external abstract class HTMLHeadingElement : HTMLElement, JsAny {
     open var align: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -441,24 +441,24 @@ public external abstract class HTMLParagraphElement : HTMLElement, JsAny {
     open var align: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -473,24 +473,24 @@ public external abstract class HTMLHRElement : HTMLElement, JsAny {
     open var width: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -501,24 +501,24 @@ public external abstract class HTMLPreElement : HTMLElement, JsAny {
     open var width: Int
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -529,24 +529,24 @@ public external abstract class HTMLQuoteElement : HTMLElement, JsAny {
     open var cite: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -560,24 +560,24 @@ public external abstract class HTMLOListElement : HTMLElement, JsAny {
     open var compact: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -589,24 +589,24 @@ public external abstract class HTMLUListElement : HTMLElement, JsAny {
     open var type: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -614,28 +614,28 @@ public external abstract class HTMLUListElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLLIElement](https://developer.mozilla.org/en/docs/Web/API/HTMLLIElement) to Kotlin
  */
 public external abstract class HTMLLIElement : HTMLElement, JsAny {
-    open var value: Int
+    open var konstue: Int
     open var type: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -646,24 +646,24 @@ public external abstract class HTMLDListElement : HTMLElement, JsAny {
     open var compact: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -674,24 +674,24 @@ public external abstract class HTMLDivElement : HTMLElement, JsAny {
     open var align: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -703,7 +703,7 @@ public external abstract class HTMLAnchorElement : HTMLElement, HTMLHyperlinkEle
     open var download: String
     open var ping: String
     open var rel: String
-    open val relList: DOMTokenList
+    open konst relList: DOMTokenList
     open var hreflang: String
     open var type: String
     open var text: String
@@ -715,24 +715,24 @@ public external abstract class HTMLAnchorElement : HTMLElement, HTMLHyperlinkEle
     open var shape: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -740,27 +740,27 @@ public external abstract class HTMLAnchorElement : HTMLElement, HTMLHyperlinkEle
  * Exposes the JavaScript [HTMLDataElement](https://developer.mozilla.org/en/docs/Web/API/HTMLDataElement) to Kotlin
  */
 public external abstract class HTMLDataElement : HTMLElement, JsAny {
-    open var value: String
+    open var konstue: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -771,24 +771,24 @@ public external abstract class HTMLTimeElement : HTMLElement, JsAny {
     open var dateTime: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -797,24 +797,24 @@ public external abstract class HTMLTimeElement : HTMLElement, JsAny {
  */
 public external abstract class HTMLSpanElement : HTMLElement, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -825,24 +825,24 @@ public external abstract class HTMLBRElement : HTMLElement, JsAny {
     open var clear: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -851,7 +851,7 @@ public external abstract class HTMLBRElement : HTMLElement, JsAny {
  */
 public external interface HTMLHyperlinkElementUtils : JsAny {
     var href: String
-    val origin: String
+    konst origin: String
     var protocol: String
     var username: String
     var password: String
@@ -871,24 +871,24 @@ public external abstract class HTMLModElement : HTMLElement, JsAny {
     open var dateTime: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -897,24 +897,24 @@ public external abstract class HTMLModElement : HTMLElement, JsAny {
  */
 public external abstract class HTMLPictureElement : HTMLElement, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -929,24 +929,24 @@ public external abstract class HTMLSourceElement : HTMLElement, JsAny {
     open var media: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -963,10 +963,10 @@ public external abstract class HTMLImageElement : HTMLElement, HTMLOrSVGImageEle
     open var isMap: Boolean
     open var width: Int
     open var height: Int
-    open val naturalWidth: Int
-    open val naturalHeight: Int
-    open val complete: Boolean
-    open val currentSrc: String
+    open konst naturalWidth: Int
+    open konst naturalHeight: Int
+    open konst complete: Boolean
+    open konst currentSrc: String
     open var referrerPolicy: String
     open var name: String
     open var lowsrc: String
@@ -975,28 +975,28 @@ public external abstract class HTMLImageElement : HTMLElement, HTMLOrSVGImageEle
     open var vspace: Int
     open var longDesc: String
     open var border: String
-    open val x: Int
-    open val y: Int
+    open konst x: Int
+    open konst y: Int
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1007,14 +1007,14 @@ public external abstract class HTMLIFrameElement : HTMLElement, JsAny {
     open var src: String
     open var srcdoc: String
     open var name: String
-    open val sandbox: DOMTokenList
+    open konst sandbox: DOMTokenList
     open var allowFullscreen: Boolean
     open var allowUserMedia: Boolean
     open var width: String
     open var height: String
     open var referrerPolicy: String
-    open val contentDocument: Document?
-    open val contentWindow: Window?
+    open konst contentDocument: Document?
+    open konst contentWindow: Window?
     open var align: String
     open var scrolling: String
     open var frameBorder: String
@@ -1024,24 +1024,24 @@ public external abstract class HTMLIFrameElement : HTMLElement, JsAny {
     fun getSVGDocument(): Document?
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1058,24 +1058,24 @@ public external abstract class HTMLEmbedElement : HTMLElement, JsAny {
     fun getSVGDocument(): Document?
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1088,14 +1088,14 @@ public external abstract class HTMLObjectElement : HTMLElement, JsAny {
     open var typeMustMatch: Boolean
     open var name: String
     open var useMap: String
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var width: String
     open var height: String
-    open val contentDocument: Document?
-    open val contentWindow: Window?
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
+    open konst contentDocument: Document?
+    open konst contentWindow: Window?
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
     open var align: String
     open var archive: String
     open var code: String
@@ -1112,24 +1112,24 @@ public external abstract class HTMLObjectElement : HTMLElement, JsAny {
     fun setCustomValidity(error: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1138,29 +1138,29 @@ public external abstract class HTMLObjectElement : HTMLElement, JsAny {
  */
 public external abstract class HTMLParamElement : HTMLElement, JsAny {
     open var name: String
-    open var value: String
+    open var konstue: String
     open var type: String
-    open var valueType: String
+    open var konstueType: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1170,39 +1170,39 @@ public external abstract class HTMLParamElement : HTMLElement, JsAny {
 public external abstract class HTMLVideoElement : HTMLMediaElement, CanvasImageSource, TexImageSource, JsAny {
     open var width: Int
     open var height: Int
-    open val videoWidth: Int
-    open val videoHeight: Int
+    open konst videoWidth: Int
+    open konst videoHeight: Int
     open var poster: String
     open var playsInline: Boolean
 
     companion object {
-        val NETWORK_EMPTY: Short
-        val NETWORK_IDLE: Short
-        val NETWORK_LOADING: Short
-        val NETWORK_NO_SOURCE: Short
-        val HAVE_NOTHING: Short
-        val HAVE_METADATA: Short
-        val HAVE_CURRENT_DATA: Short
-        val HAVE_FUTURE_DATA: Short
-        val HAVE_ENOUGH_DATA: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst NETWORK_EMPTY: Short
+        konst NETWORK_IDLE: Short
+        konst NETWORK_LOADING: Short
+        konst NETWORK_NO_SOURCE: Short
+        konst HAVE_NOTHING: Short
+        konst HAVE_METADATA: Short
+        konst HAVE_CURRENT_DATA: Short
+        konst HAVE_FUTURE_DATA: Short
+        konst HAVE_ENOUGH_DATA: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1211,33 +1211,33 @@ public external abstract class HTMLVideoElement : HTMLMediaElement, CanvasImageS
  */
 public external abstract class HTMLAudioElement : HTMLMediaElement, JsAny {
     companion object {
-        val NETWORK_EMPTY: Short
-        val NETWORK_IDLE: Short
-        val NETWORK_LOADING: Short
-        val NETWORK_NO_SOURCE: Short
-        val HAVE_NOTHING: Short
-        val HAVE_METADATA: Short
-        val HAVE_CURRENT_DATA: Short
-        val HAVE_FUTURE_DATA: Short
-        val HAVE_ENOUGH_DATA: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst NETWORK_EMPTY: Short
+        konst NETWORK_IDLE: Short
+        konst NETWORK_LOADING: Short
+        konst NETWORK_NO_SOURCE: Short
+        konst HAVE_NOTHING: Short
+        konst HAVE_METADATA: Short
+        konst HAVE_CURRENT_DATA: Short
+        konst HAVE_FUTURE_DATA: Short
+        konst HAVE_ENOUGH_DATA: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1250,32 +1250,32 @@ public external abstract class HTMLTrackElement : HTMLElement, JsAny {
     open var srclang: String
     open var label: String
     open var default: Boolean
-    open val readyState: Short
-    open val track: TextTrack
+    open konst readyState: Short
+    open konst track: TextTrack
 
     companion object {
-        val NONE: Short
-        val LOADING: Short
-        val LOADED: Short
-        val ERROR: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst NONE: Short
+        konst LOADING: Short
+        konst LOADED: Short
+        konst ERROR: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1283,34 +1283,34 @@ public external abstract class HTMLTrackElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLMediaElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMediaElement) to Kotlin
  */
 public external abstract class HTMLMediaElement : HTMLElement, JsAny {
-    open val error: MediaError?
+    open konst error: MediaError?
     open var src: String
     open var srcObject: MediaProvider?
-    open val currentSrc: String
+    open konst currentSrc: String
     open var crossOrigin: String?
-    open val networkState: Short
+    open konst networkState: Short
     open var preload: String
-    open val buffered: TimeRanges
-    open val readyState: Short
-    open val seeking: Boolean
+    open konst buffered: TimeRanges
+    open konst readyState: Short
+    open konst seeking: Boolean
     open var currentTime: Double
-    open val duration: Double
-    open val paused: Boolean
+    open konst duration: Double
+    open konst paused: Boolean
     open var defaultPlaybackRate: Double
     open var playbackRate: Double
-    open val played: TimeRanges
-    open val seekable: TimeRanges
-    open val ended: Boolean
+    open konst played: TimeRanges
+    open konst seekable: TimeRanges
+    open konst ended: Boolean
     open var autoplay: Boolean
     open var loop: Boolean
     open var controls: Boolean
     open var volume: Double
     open var muted: Boolean
     open var defaultMuted: Boolean
-    open val audioTracks: AudioTrackList
-    open val videoTracks: VideoTrackList
-    open val textTracks: TextTrackList
-    open val mediaKeys: MediaKeys?
+    open konst audioTracks: AudioTrackList
+    open konst videoTracks: VideoTrackList
+    open konst textTracks: TextTrackList
+    open konst mediaKeys: MediaKeys?
     open var onencrypted: ((Event) -> JsAny?)?
     open var onwaitingforkey: ((Event) -> JsAny?)?
     fun load()
@@ -1323,33 +1323,33 @@ public external abstract class HTMLMediaElement : HTMLElement, JsAny {
     fun setMediaKeys(mediaKeys: MediaKeys?): Promise<Nothing?>
 
     companion object {
-        val NETWORK_EMPTY: Short
-        val NETWORK_IDLE: Short
-        val NETWORK_LOADING: Short
-        val NETWORK_NO_SOURCE: Short
-        val HAVE_NOTHING: Short
-        val HAVE_METADATA: Short
-        val HAVE_CURRENT_DATA: Short
-        val HAVE_FUTURE_DATA: Short
-        val HAVE_ENOUGH_DATA: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst NETWORK_EMPTY: Short
+        konst NETWORK_IDLE: Short
+        konst NETWORK_LOADING: Short
+        konst NETWORK_NO_SOURCE: Short
+        konst HAVE_NOTHING: Short
+        konst HAVE_METADATA: Short
+        konst HAVE_CURRENT_DATA: Short
+        konst HAVE_FUTURE_DATA: Short
+        konst HAVE_ENOUGH_DATA: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1357,13 +1357,13 @@ public external abstract class HTMLMediaElement : HTMLElement, JsAny {
  * Exposes the JavaScript [MediaError](https://developer.mozilla.org/en/docs/Web/API/MediaError) to Kotlin
  */
 public external abstract class MediaError : JsAny {
-    open val code: Short
+    open konst code: Short
 
     companion object {
-        val MEDIA_ERR_ABORTED: Short
-        val MEDIA_ERR_NETWORK: Short
-        val MEDIA_ERR_DECODE: Short
-        val MEDIA_ERR_SRC_NOT_SUPPORTED: Short
+        konst MEDIA_ERR_ABORTED: Short
+        konst MEDIA_ERR_NETWORK: Short
+        konst MEDIA_ERR_DECODE: Short
+        konst MEDIA_ERR_SRC_NOT_SUPPORTED: Short
     }
 }
 
@@ -1371,7 +1371,7 @@ public external abstract class MediaError : JsAny {
  * Exposes the JavaScript [AudioTrackList](https://developer.mozilla.org/en/docs/Web/API/AudioTrackList) to Kotlin
  */
 public external abstract class AudioTrackList : EventTarget, JsAny {
-    open val length: Int
+    open konst length: Int
     open var onchange: ((Event) -> JsAny?)?
     open var onaddtrack: ((TrackEvent) -> JsAny?)?
     open var onremovetrack: ((TrackEvent) -> JsAny?)?
@@ -1387,20 +1387,20 @@ public operator fun AudioTrackList.get(index: Int): AudioTrack? = getMethodImplF
  * Exposes the JavaScript [AudioTrack](https://developer.mozilla.org/en/docs/Web/API/AudioTrack) to Kotlin
  */
 public external abstract class AudioTrack : UnionAudioTrackOrTextTrackOrVideoTrack, JsAny {
-    open val id: String
-    open val kind: String
-    open val label: String
-    open val language: String
+    open konst id: String
+    open konst kind: String
+    open konst label: String
+    open konst language: String
     open var enabled: Boolean
-    open val sourceBuffer: SourceBuffer?
+    open konst sourceBuffer: SourceBuffer?
 }
 
 /**
  * Exposes the JavaScript [VideoTrackList](https://developer.mozilla.org/en/docs/Web/API/VideoTrackList) to Kotlin
  */
 public external abstract class VideoTrackList : EventTarget, JsAny {
-    open val length: Int
-    open val selectedIndex: Int
+    open konst length: Int
+    open konst selectedIndex: Int
     open var onchange: ((Event) -> JsAny?)?
     open var onaddtrack: ((TrackEvent) -> JsAny?)?
     open var onremovetrack: ((TrackEvent) -> JsAny?)?
@@ -1416,16 +1416,16 @@ public operator fun VideoTrackList.get(index: Int): VideoTrack? = getMethodImplF
  * Exposes the JavaScript [VideoTrack](https://developer.mozilla.org/en/docs/Web/API/VideoTrack) to Kotlin
  */
 public external abstract class VideoTrack : UnionAudioTrackOrTextTrackOrVideoTrack, JsAny {
-    open val id: String
-    open val kind: String
-    open val label: String
-    open val language: String
+    open konst id: String
+    open konst kind: String
+    open konst label: String
+    open konst language: String
     open var selected: Boolean
-    open val sourceBuffer: SourceBuffer?
+    open konst sourceBuffer: SourceBuffer?
 }
 
 public external abstract class TextTrackList : EventTarget, JsAny {
-    open val length: Int
+    open konst length: Int
     open var onchange: ((Event) -> JsAny?)?
     open var onaddtrack: ((TrackEvent) -> JsAny?)?
     open var onremovetrack: ((TrackEvent) -> JsAny?)?
@@ -1441,22 +1441,22 @@ public operator fun TextTrackList.get(index: Int): TextTrack? = getMethodImplFor
  * Exposes the JavaScript [TextTrack](https://developer.mozilla.org/en/docs/Web/API/TextTrack) to Kotlin
  */
 public external abstract class TextTrack : EventTarget, UnionAudioTrackOrTextTrackOrVideoTrack, JsAny {
-    open val kind: TextTrackKind
-    open val label: String
-    open val language: String
-    open val id: String
-    open val inBandMetadataTrackDispatchType: String
+    open konst kind: TextTrackKind
+    open konst label: String
+    open konst language: String
+    open konst id: String
+    open konst inBandMetadataTrackDispatchType: String
     open var mode: TextTrackMode
-    open val cues: TextTrackCueList?
-    open val activeCues: TextTrackCueList?
+    open konst cues: TextTrackCueList?
+    open konst activeCues: TextTrackCueList?
     open var oncuechange: ((Event) -> JsAny?)?
-    open val sourceBuffer: SourceBuffer?
+    open konst sourceBuffer: SourceBuffer?
     fun addCue(cue: TextTrackCue)
     fun removeCue(cue: TextTrackCue)
 }
 
 public external abstract class TextTrackCueList : JsAny {
-    open val length: Int
+    open konst length: Int
     fun getCueById(id: String): TextTrackCue?
 }
 
@@ -1469,7 +1469,7 @@ public operator fun TextTrackCueList.get(index: Int): TextTrackCue? = getMethodI
  * Exposes the JavaScript [TextTrackCue](https://developer.mozilla.org/en/docs/Web/API/TextTrackCue) to Kotlin
  */
 public external abstract class TextTrackCue : EventTarget, JsAny {
-    open val track: TextTrack?
+    open konst track: TextTrack?
     open var id: String
     open var startTime: Double
     open var endTime: Double
@@ -1482,7 +1482,7 @@ public external abstract class TextTrackCue : EventTarget, JsAny {
  * Exposes the JavaScript [TimeRanges](https://developer.mozilla.org/en/docs/Web/API/TimeRanges) to Kotlin
  */
 public external abstract class TimeRanges : JsAny {
-    open val length: Int
+    open konst length: Int
     fun start(index: Int): Double
     fun end(index: Int): Double
 }
@@ -1491,20 +1491,20 @@ public external abstract class TimeRanges : JsAny {
  * Exposes the JavaScript [TrackEvent](https://developer.mozilla.org/en/docs/Web/API/TrackEvent) to Kotlin
  */
 public external open class TrackEvent(type: String, eventInitDict: TrackEventInit = definedExternally) : Event, JsAny {
-    open val track: UnionAudioTrackOrTextTrackOrVideoTrack?
+    open konst track: UnionAudioTrackOrTextTrackOrVideoTrack?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface TrackEventInit : EventInit, JsAny {
     var track: UnionAudioTrackOrTextTrackOrVideoTrack? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -1515,27 +1515,27 @@ public fun TrackEventInit(track: UnionAudioTrackOrTextTrackOrVideoTrack? = null,
  */
 public external abstract class HTMLMapElement : HTMLElement, JsAny {
     open var name: String
-    open val areas: HTMLCollection
+    open konst areas: HTMLCollection
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1550,29 +1550,29 @@ public external abstract class HTMLAreaElement : HTMLElement, HTMLHyperlinkEleme
     open var download: String
     open var ping: String
     open var rel: String
-    open val relList: DOMTokenList
+    open konst relList: DOMTokenList
     open var referrerPolicy: String
     open var noHref: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1583,8 +1583,8 @@ public external abstract class HTMLTableElement : HTMLElement, JsAny {
     open var caption: HTMLTableCaptionElement?
     open var tHead: HTMLTableSectionElement?
     open var tFoot: HTMLTableSectionElement?
-    open val tBodies: HTMLCollection
-    open val rows: HTMLCollection
+    open konst tBodies: HTMLCollection
+    open konst rows: HTMLCollection
     open var align: String
     open var border: String
     open var frame: String
@@ -1605,24 +1605,24 @@ public external abstract class HTMLTableElement : HTMLElement, JsAny {
     fun deleteRow(index: Int)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1633,24 +1633,24 @@ public external abstract class HTMLTableCaptionElement : HTMLElement, JsAny {
     open var align: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1666,24 +1666,24 @@ public external abstract class HTMLTableColElement : HTMLElement, JsAny {
     open var width: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1691,7 +1691,7 @@ public external abstract class HTMLTableColElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLTableSectionElement](https://developer.mozilla.org/en/docs/Web/API/HTMLTableSectionElement) to Kotlin
  */
 public external abstract class HTMLTableSectionElement : HTMLElement, JsAny {
-    open val rows: HTMLCollection
+    open konst rows: HTMLCollection
     open var align: String
     open var ch: String
     open var chOff: String
@@ -1700,24 +1700,24 @@ public external abstract class HTMLTableSectionElement : HTMLElement, JsAny {
     fun deleteRow(index: Int)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1725,9 +1725,9 @@ public external abstract class HTMLTableSectionElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLTableRowElement](https://developer.mozilla.org/en/docs/Web/API/HTMLTableRowElement) to Kotlin
  */
 public external abstract class HTMLTableRowElement : HTMLElement, JsAny {
-    open val rowIndex: Int
-    open val sectionRowIndex: Int
-    open val cells: HTMLCollection
+    open konst rowIndex: Int
+    open konst sectionRowIndex: Int
+    open konst cells: HTMLCollection
     open var align: String
     open var ch: String
     open var chOff: String
@@ -1737,24 +1737,24 @@ public external abstract class HTMLTableRowElement : HTMLElement, JsAny {
     fun deleteCell(index: Int)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1765,7 +1765,7 @@ public external abstract class HTMLTableCellElement : HTMLElement, JsAny {
     open var colSpan: Int
     open var rowSpan: Int
     open var headers: String
-    open val cellIndex: Int
+    open konst cellIndex: Int
     open var scope: String
     open var abbr: String
     open var align: String
@@ -1779,24 +1779,24 @@ public external abstract class HTMLTableCellElement : HTMLElement, JsAny {
     open var bgColor: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1813,32 +1813,32 @@ public external abstract class HTMLFormElement : HTMLElement, JsAny {
     open var name: String
     open var noValidate: Boolean
     open var target: String
-    open val elements: HTMLFormControlsCollection
-    open val length: Int
+    open konst elements: HTMLFormControlsCollection
+    open konst length: Int
     fun submit()
     fun reset()
     fun checkValidity(): Boolean
     fun reportValidity(): Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1856,29 +1856,29 @@ public operator fun HTMLFormElement.get(name: String): UnionElementOrRadioNodeLi
  * Exposes the JavaScript [HTMLLabelElement](https://developer.mozilla.org/en/docs/Web/API/HTMLLabelElement) to Kotlin
  */
 public external abstract class HTMLLabelElement : HTMLElement, JsAny {
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var htmlFor: String
-    open val control: HTMLElement?
+    open konst control: HTMLElement?
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1894,8 +1894,8 @@ public external abstract class HTMLInputElement : HTMLElement, JsAny {
     open var checked: Boolean
     open var dirName: String
     open var disabled: Boolean
-    open val form: HTMLFormElement?
-    open val files: FileList?
+    open konst form: HTMLFormElement?
+    open konst files: FileList?
     open var formAction: String
     open var formEnctype: String
     open var formMethod: String
@@ -1904,7 +1904,7 @@ public external abstract class HTMLInputElement : HTMLElement, JsAny {
     open var height: Int
     open var indeterminate: Boolean
     open var inputMode: String
-    open val list: HTMLElement?
+    open konst list: HTMLElement?
     open var max: String
     open var maxLength: Int
     open var min: String
@@ -1920,14 +1920,14 @@ public external abstract class HTMLInputElement : HTMLElement, JsAny {
     open var step: String
     open var type: String
     open var defaultValue: String
-    open var value: String
-    open var valueAsDate: JsAny?
-    open var valueAsNumber: Double
+    open var konstue: String
+    open var konstueAsDate: JsAny?
+    open var konstueAsNumber: Double
     open var width: Int
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     open var selectionStart: Int?
     open var selectionEnd: Int?
     open var selectionDirection: String?
@@ -1944,24 +1944,24 @@ public external abstract class HTMLInputElement : HTMLElement, JsAny {
     fun setSelectionRange(start: Int, end: Int, direction: String = definedExternally)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -1971,7 +1971,7 @@ public external abstract class HTMLInputElement : HTMLElement, JsAny {
 public external abstract class HTMLButtonElement : HTMLElement, JsAny {
     open var autofocus: Boolean
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var formAction: String
     open var formEnctype: String
     open var formMethod: String
@@ -1979,35 +1979,35 @@ public external abstract class HTMLButtonElement : HTMLElement, JsAny {
     open var formTarget: String
     open var name: String
     open var type: String
-    open var value: String
+    open var konstue: String
     open var menu: HTMLMenuElement?
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     fun checkValidity(): Boolean
     fun reportValidity(): Boolean
     fun setCustomValidity(error: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2018,21 +2018,21 @@ public external abstract class HTMLSelectElement : HTMLElement, ItemArrayLike<El
     open var autocomplete: String
     open var autofocus: Boolean
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var multiple: Boolean
     open var name: String
     open var required: Boolean
     open var size: Int
-    open val type: String
-    open val options: HTMLOptionsCollection
+    open konst type: String
+    open konst options: HTMLOptionsCollection
     override var length: Int
-    open val selectedOptions: HTMLCollection
+    open konst selectedOptions: HTMLCollection
     open var selectedIndex: Int
-    open var value: String
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open var konstue: String
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     fun namedItem(name: String): HTMLOptionElement?
     fun add(element: UnionHTMLOptGroupElementOrHTMLOptionElement, before: JsAny? = definedExternally)
     fun remove(index: Int)
@@ -2042,24 +2042,24 @@ public external abstract class HTMLSelectElement : HTMLElement, ItemArrayLike<El
     override fun item(index: Int): Element?
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2077,27 +2077,27 @@ public operator fun HTMLSelectElement.set(index: Int, option: HTMLOptionElement?
  * Exposes the JavaScript [HTMLDataListElement](https://developer.mozilla.org/en/docs/Web/API/HTMLDataListElement) to Kotlin
  */
 public external abstract class HTMLDataListElement : HTMLElement, JsAny {
-    open val options: HTMLCollection
+    open konst options: HTMLCollection
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2109,24 +2109,24 @@ public external abstract class HTMLOptGroupElement : HTMLElement, UnionHTMLOptGr
     open var label: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2135,33 +2135,33 @@ public external abstract class HTMLOptGroupElement : HTMLElement, UnionHTMLOptGr
  */
 public external abstract class HTMLOptionElement : HTMLElement, UnionHTMLOptGroupElementOrHTMLOptionElement, JsAny {
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var label: String
     open var defaultSelected: Boolean
     open var selected: Boolean
-    open var value: String
+    open var konstue: String
     open var text: String
-    open val index: Int
+    open konst index: Int
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2174,7 +2174,7 @@ public external abstract class HTMLTextAreaElement : HTMLElement, JsAny {
     open var cols: Int
     open var dirName: String
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var inputMode: String
     open var maxLength: Int
     open var minLength: Int
@@ -2184,14 +2184,14 @@ public external abstract class HTMLTextAreaElement : HTMLElement, JsAny {
     open var required: Boolean
     open var rows: Int
     open var wrap: String
-    open val type: String
+    open konst type: String
     open var defaultValue: String
-    open var value: String
-    open val textLength: Int
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open var konstue: String
+    open konst textLength: Int
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     open var selectionStart: Int?
     open var selectionEnd: Int?
     open var selectionDirection: String?
@@ -2204,24 +2204,24 @@ public external abstract class HTMLTextAreaElement : HTMLElement, JsAny {
     fun setSelectionRange(start: Int, end: Int, direction: String = definedExternally)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2232,37 +2232,37 @@ public external abstract class HTMLKeygenElement : HTMLElement, JsAny {
     open var autofocus: Boolean
     open var challenge: String
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var keytype: String
     open var name: String
-    open val type: String
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open konst type: String
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     fun checkValidity(): Boolean
     fun reportValidity(): Boolean
     fun setCustomValidity(error: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2270,39 +2270,39 @@ public external abstract class HTMLKeygenElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLOutputElement](https://developer.mozilla.org/en/docs/Web/API/HTMLOutputElement) to Kotlin
  */
 public external abstract class HTMLOutputElement : HTMLElement, JsAny {
-    open val htmlFor: DOMTokenList
-    open val form: HTMLFormElement?
+    open konst htmlFor: DOMTokenList
+    open konst form: HTMLFormElement?
     open var name: String
-    open val type: String
+    open konst type: String
     open var defaultValue: String
-    open var value: String
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
-    open val labels: NodeList
+    open var konstue: String
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
+    open konst labels: NodeList
     fun checkValidity(): Boolean
     fun reportValidity(): Boolean
     fun setCustomValidity(error: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2310,30 +2310,30 @@ public external abstract class HTMLOutputElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLProgressElement](https://developer.mozilla.org/en/docs/Web/API/HTMLProgressElement) to Kotlin
  */
 public external abstract class HTMLProgressElement : HTMLElement, JsAny {
-    open var value: Double
+    open var konstue: Double
     open var max: Double
-    open val position: Double
-    open val labels: NodeList
+    open konst position: Double
+    open konst labels: NodeList
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2341,33 +2341,33 @@ public external abstract class HTMLProgressElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLMeterElement](https://developer.mozilla.org/en/docs/Web/API/HTMLMeterElement) to Kotlin
  */
 public external abstract class HTMLMeterElement : HTMLElement, JsAny {
-    open var value: Double
+    open var konstue: Double
     open var min: Double
     open var max: Double
     open var low: Double
     open var high: Double
     open var optimum: Double
-    open val labels: NodeList
+    open konst labels: NodeList
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2376,36 +2376,36 @@ public external abstract class HTMLMeterElement : HTMLElement, JsAny {
  */
 public external abstract class HTMLFieldSetElement : HTMLElement, JsAny {
     open var disabled: Boolean
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var name: String
-    open val type: String
-    open val elements: HTMLCollection
-    open val willValidate: Boolean
-    open val validity: ValidityState
-    open val validationMessage: String
+    open konst type: String
+    open konst elements: HTMLCollection
+    open konst willValidate: Boolean
+    open konst konstidity: ValidityState
+    open konst konstidationMessage: String
     fun checkValidity(): Boolean
     fun reportValidity(): Boolean
     fun setCustomValidity(error: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2413,28 +2413,28 @@ public external abstract class HTMLFieldSetElement : HTMLElement, JsAny {
  * Exposes the JavaScript [HTMLLegendElement](https://developer.mozilla.org/en/docs/Web/API/HTMLLegendElement) to Kotlin
  */
 public external abstract class HTMLLegendElement : HTMLElement, JsAny {
-    open val form: HTMLFormElement?
+    open konst form: HTMLFormElement?
     open var align: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2442,17 +2442,17 @@ public external abstract class HTMLLegendElement : HTMLElement, JsAny {
  * Exposes the JavaScript [ValidityState](https://developer.mozilla.org/en/docs/Web/API/ValidityState) to Kotlin
  */
 public external abstract class ValidityState : JsAny {
-    open val valueMissing: Boolean
-    open val typeMismatch: Boolean
-    open val patternMismatch: Boolean
-    open val tooLong: Boolean
-    open val tooShort: Boolean
-    open val rangeUnderflow: Boolean
-    open val rangeOverflow: Boolean
-    open val stepMismatch: Boolean
-    open val badInput: Boolean
-    open val customError: Boolean
-    open val valid: Boolean
+    open konst konstueMissing: Boolean
+    open konst typeMismatch: Boolean
+    open konst patternMismatch: Boolean
+    open konst tooLong: Boolean
+    open konst tooShort: Boolean
+    open konst rangeUnderflow: Boolean
+    open konst rangeOverflow: Boolean
+    open konst stepMismatch: Boolean
+    open konst badInput: Boolean
+    open konst customError: Boolean
+    open konst konstid: Boolean
 }
 
 /**
@@ -2462,24 +2462,24 @@ public external abstract class HTMLDetailsElement : HTMLElement, JsAny {
     open var open: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2489,24 +2489,24 @@ public external abstract class HTMLMenuElement : HTMLElement, JsAny {
     open var compact: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2520,42 +2520,42 @@ public external abstract class HTMLMenuItemElement : HTMLElement, JsAny {
     open var default: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 public external open class RelatedEvent(type: String, eventInitDict: RelatedEventInit = definedExternally) : Event, JsAny {
-    open val relatedTarget: EventTarget?
+    open konst relatedTarget: EventTarget?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface RelatedEventInit : EventInit, JsAny {
     var relatedTarget: EventTarget? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -2572,24 +2572,24 @@ public external abstract class HTMLDialogElement : HTMLElement, JsAny {
     fun close(returnValue: String = definedExternally)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2609,24 +2609,24 @@ public external abstract class HTMLScriptElement : HTMLElement, HTMLOrSVGScriptE
     open var htmlFor: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2634,27 +2634,27 @@ public external abstract class HTMLScriptElement : HTMLElement, HTMLOrSVGScriptE
  * Exposes the JavaScript [HTMLTemplateElement](https://developer.mozilla.org/en/docs/Web/API/HTMLTemplateElement) to Kotlin
  */
 public external abstract class HTMLTemplateElement : HTMLElement, JsAny {
-    open val content: DocumentFragment
+    open konst content: DocumentFragment
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -2666,31 +2666,31 @@ public external abstract class HTMLSlotElement : HTMLElement, JsAny {
     fun assignedNodes(options: AssignedNodesOptions = definedExternally): JsArray<Node>
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 public external interface AssignedNodesOptions : JsAny {
     var flatten: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -2707,31 +2707,31 @@ public external abstract class HTMLCanvasElement : HTMLElement, CanvasImageSourc
     fun toBlob(_callback: (Blob?) -> Unit, type: String = definedExternally, quality: JsAny? = definedExternally)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 public external interface CanvasRenderingContext2DSettings : JsAny {
     var alpha: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -2741,7 +2741,7 @@ public fun CanvasRenderingContext2DSettings(alpha: Boolean? = true): CanvasRende
  * Exposes the JavaScript [CanvasRenderingContext2D](https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D) to Kotlin
  */
 public external abstract class CanvasRenderingContext2D : CanvasState, CanvasTransform, CanvasCompositing, CanvasImageSmoothing, CanvasFillStrokeStyles, CanvasShadowStyles, CanvasFilters, CanvasRect, CanvasDrawPath, CanvasUserInterface, CanvasText, CanvasDrawImage, CanvasHitRegion, CanvasImageData, CanvasPathDrawingStyles, CanvasTextDrawingStyles, CanvasPath, RenderingContext, JsAny {
-    open val canvas: HTMLCanvasElement
+    open konst canvas: HTMLCanvasElement
 }
 
 public external interface CanvasState : JsAny {
@@ -2891,45 +2891,45 @@ public external abstract class CanvasPattern : JsAny {
  * Exposes the JavaScript [TextMetrics](https://developer.mozilla.org/en/docs/Web/API/TextMetrics) to Kotlin
  */
 public external abstract class TextMetrics : JsAny {
-    open val width: Double
-    open val actualBoundingBoxLeft: Double
-    open val actualBoundingBoxRight: Double
-    open val fontBoundingBoxAscent: Double
-    open val fontBoundingBoxDescent: Double
-    open val actualBoundingBoxAscent: Double
-    open val actualBoundingBoxDescent: Double
-    open val emHeightAscent: Double
-    open val emHeightDescent: Double
-    open val hangingBaseline: Double
-    open val alphabeticBaseline: Double
-    open val ideographicBaseline: Double
+    open konst width: Double
+    open konst actualBoundingBoxLeft: Double
+    open konst actualBoundingBoxRight: Double
+    open konst fontBoundingBoxAscent: Double
+    open konst fontBoundingBoxDescent: Double
+    open konst actualBoundingBoxAscent: Double
+    open konst actualBoundingBoxDescent: Double
+    open konst emHeightAscent: Double
+    open konst emHeightDescent: Double
+    open konst hangingBaseline: Double
+    open konst alphabeticBaseline: Double
+    open konst ideographicBaseline: Double
 }
 
 public external interface HitRegionOptions : JsAny {
     var path: Path2D? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var fillRule: CanvasFillRule? /* = CanvasFillRule.NONZERO */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var id: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var parentID: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var cursor: String? /* = "inherit" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var control: Element? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var label: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var role: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -2941,9 +2941,9 @@ public fun HitRegionOptions(path: Path2D? = null, fillRule: CanvasFillRule? = Ca
 public external open class ImageData : ImageBitmapSource, TexImageSource, JsAny {
     constructor(sw: Int, sh: Int)
     constructor(data: Uint8ClampedArray, sw: Int, sh: Int = definedExternally)
-    open val width: Int
-    open val height: Int
-    open val data: Uint8ClampedArray
+    open konst width: Int
+    open konst height: Int
+    open konst data: Uint8ClampedArray
 }
 
 /**
@@ -2970,14 +2970,14 @@ public external open class Path2D() : CanvasPath, JsAny {
  * Exposes the JavaScript [ImageBitmapRenderingContext](https://developer.mozilla.org/en/docs/Web/API/ImageBitmapRenderingContext) to Kotlin
  */
 public external abstract class ImageBitmapRenderingContext : JsAny {
-    open val canvas: HTMLCanvasElement
+    open konst canvas: HTMLCanvasElement
     fun transferFromImageBitmap(bitmap: ImageBitmap?)
 }
 
 public external interface ImageBitmapRenderingContextSettings : JsAny {
     var alpha: Boolean? /* = true */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -2995,7 +2995,7 @@ public external abstract class CustomElementRegistry : JsAny {
 public external interface ElementDefinitionOptions : JsAny {
     var extends: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3003,7 +3003,7 @@ public fun ElementDefinitionOptions(extends: String? = undefined): ElementDefini
 
 public external interface ElementContentEditable : JsAny {
     var contentEditable: String
-    val isContentEditable: Boolean
+    konst isContentEditable: Boolean
 }
 
 /**
@@ -3012,9 +3012,9 @@ public external interface ElementContentEditable : JsAny {
 public external abstract class DataTransfer : JsAny {
     open var dropEffect: String
     open var effectAllowed: String
-    open val items: DataTransferItemList
-    open val types: JsArray<out JsString>
-    open val files: FileList
+    open konst items: DataTransferItemList
+    open konst types: JsArray<out JsString>
+    open konst files: FileList
     fun setDragImage(image: Element, x: Int, y: Int)
     fun getData(format: String): String
     fun setData(format: String, data: String)
@@ -3025,7 +3025,7 @@ public external abstract class DataTransfer : JsAny {
  * Exposes the JavaScript [DataTransferItemList](https://developer.mozilla.org/en/docs/Web/API/DataTransferItemList) to Kotlin
  */
 public external abstract class DataTransferItemList : JsAny {
-    open val length: Int
+    open konst length: Int
     fun add(data: String, type: String): DataTransferItem?
     fun add(data: File): DataTransferItem?
     fun remove(index: Int)
@@ -3041,8 +3041,8 @@ public operator fun DataTransferItemList.get(index: Int): DataTransferItem? = ge
  * Exposes the JavaScript [DataTransferItem](https://developer.mozilla.org/en/docs/Web/API/DataTransferItem) to Kotlin
  */
 public external abstract class DataTransferItem : JsAny {
-    open val kind: String
-    open val type: String
+    open konst kind: String
+    open konst type: String
     fun getAsString(_callback: ((String) -> Unit)?)
     fun getAsFile(): File?
 }
@@ -3051,20 +3051,20 @@ public external abstract class DataTransferItem : JsAny {
  * Exposes the JavaScript [DragEvent](https://developer.mozilla.org/en/docs/Web/API/DragEvent) to Kotlin
  */
 public external open class DragEvent(type: String, eventInitDict: DragEventInit = definedExternally) : MouseEvent, JsAny {
-    open val dataTransfer: DataTransfer?
+    open konst dataTransfer: DataTransfer?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface DragEventInit : MouseEventInit, JsAny {
     var dataTransfer: DataTransfer? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3074,42 +3074,42 @@ public fun DragEventInit(dataTransfer: DataTransfer? = null, screenX: Int? = 0, 
  * Exposes the JavaScript [Window](https://developer.mozilla.org/en/docs/Web/API/Window) to Kotlin
  */
 public external abstract class Window : EventTarget, GlobalEventHandlers, WindowEventHandlers, WindowOrWorkerGlobalScope, WindowSessionStorage, WindowLocalStorage, GlobalPerformance, UnionMessagePortOrWindowProxy, JsAny {
-    open val window: Window
-    open val self: Window
-    open val document: Document
+    open konst window: Window
+    open konst self: Window
+    open konst document: Document
     open var name: String
-    open val location: Location
-    open val history: History
-    open val customElements: CustomElementRegistry
-    open val locationbar: BarProp
-    open val menubar: BarProp
-    open val personalbar: BarProp
-    open val scrollbars: BarProp
-    open val statusbar: BarProp
-    open val toolbar: BarProp
+    open konst location: Location
+    open konst history: History
+    open konst customElements: CustomElementRegistry
+    open konst locationbar: BarProp
+    open konst menubar: BarProp
+    open konst personalbar: BarProp
+    open konst scrollbars: BarProp
+    open konst statusbar: BarProp
+    open konst toolbar: BarProp
     open var status: String
-    open val closed: Boolean
-    open val frames: Window
-    open val length: Int
-    open val top: Window
+    open konst closed: Boolean
+    open konst frames: Window
+    open konst length: Int
+    open konst top: Window
     open var opener: JsAny?
-    open val parent: Window
-    open val frameElement: Element?
-    open val navigator: Navigator
-    open val applicationCache: ApplicationCache
-    open val external: External
-    open val screen: Screen
-    open val innerWidth: Int
-    open val innerHeight: Int
-    open val scrollX: Double
-    open val pageXOffset: Double
-    open val scrollY: Double
-    open val pageYOffset: Double
-    open val screenX: Int
-    open val screenY: Int
-    open val outerWidth: Int
-    open val outerHeight: Int
-    open val devicePixelRatio: Double
+    open konst parent: Window
+    open konst frameElement: Element?
+    open konst navigator: Navigator
+    open konst applicationCache: ApplicationCache
+    open konst external: External
+    open konst screen: Screen
+    open konst innerWidth: Int
+    open konst innerHeight: Int
+    open konst scrollX: Double
+    open konst pageXOffset: Double
+    open konst scrollY: Double
+    open konst pageYOffset: Double
+    open konst screenX: Int
+    open konst screenY: Int
+    open konst outerWidth: Int
+    open konst outerHeight: Int
+    open konst devicePixelRatio: Double
     fun close()
     fun stop()
     fun focus()
@@ -3145,16 +3145,16 @@ internal fun getMethodImplForWindow(obj: Window, name: String): JsAny? { js("ret
 public operator fun Window.get(name: String): JsAny? = getMethodImplForWindow(this, name)
 
 public external abstract class BarProp : JsAny {
-    open val visible: Boolean
+    open konst visible: Boolean
 }
 
 /**
  * Exposes the JavaScript [History](https://developer.mozilla.org/en/docs/Web/API/History) to Kotlin
  */
 public external abstract class History : JsAny {
-    open val length: Int
+    open konst length: Int
     open var scrollRestoration: ScrollRestoration
-    open val state: JsAny?
+    open konst state: JsAny?
     fun go(delta: Int = definedExternally)
     fun back()
     fun forward()
@@ -3167,7 +3167,7 @@ public external abstract class History : JsAny {
  */
 public external abstract class Location : JsAny {
     open var href: String
-    open val origin: String
+    open konst origin: String
     open var protocol: String
     open var host: String
     open var hostname: String
@@ -3175,7 +3175,7 @@ public external abstract class Location : JsAny {
     open var pathname: String
     open var search: String
     open var hash: String
-    open val ancestorOrigins: JsArray<out JsString>
+    open konst ancestorOrigins: JsArray<out JsString>
     fun assign(url: String)
     fun replace(url: String)
     fun reload()
@@ -3185,20 +3185,20 @@ public external abstract class Location : JsAny {
  * Exposes the JavaScript [PopStateEvent](https://developer.mozilla.org/en/docs/Web/API/PopStateEvent) to Kotlin
  */
 public external open class PopStateEvent(type: String, eventInitDict: PopStateEventInit = definedExternally) : Event, JsAny {
-    open val state: JsAny?
+    open konst state: JsAny?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface PopStateEventInit : EventInit, JsAny {
     var state: JsAny? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3208,24 +3208,24 @@ public fun PopStateEventInit(state: JsAny? = null, bubbles: Boolean? = false, ca
  * Exposes the JavaScript [HashChangeEvent](https://developer.mozilla.org/en/docs/Web/API/HashChangeEvent) to Kotlin
  */
 public external open class HashChangeEvent(type: String, eventInitDict: HashChangeEventInit = definedExternally) : Event, JsAny {
-    open val oldURL: String
-    open val newURL: String
+    open konst oldURL: String
+    open konst newURL: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface HashChangeEventInit : EventInit, JsAny {
     var oldURL: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var newURL: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3235,20 +3235,20 @@ public fun HashChangeEventInit(oldURL: String? = "", newURL: String? = "", bubbl
  * Exposes the JavaScript [PageTransitionEvent](https://developer.mozilla.org/en/docs/Web/API/PageTransitionEvent) to Kotlin
  */
 public external open class PageTransitionEvent(type: String, eventInitDict: PageTransitionEventInit = definedExternally) : Event, JsAny {
-    open val persisted: Boolean
+    open konst persisted: Boolean
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface PageTransitionEventInit : EventInit, JsAny {
     var persisted: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3261,15 +3261,15 @@ public external open class BeforeUnloadEvent : Event, JsAny {
     var returnValue: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external abstract class ApplicationCache : EventTarget, JsAny {
-    open val status: Short
+    open konst status: Short
     open var onchecking: ((Event) -> JsAny?)?
     open var onerror: ((Event) -> JsAny?)?
     open var onnoupdate: ((Event) -> JsAny?)?
@@ -3283,12 +3283,12 @@ public external abstract class ApplicationCache : EventTarget, JsAny {
     fun swapCache()
 
     companion object {
-        val UNCACHED: Short
-        val IDLE: Short
-        val CHECKING: Short
-        val DOWNLOADING: Short
-        val UPDATEREADY: Short
-        val OBSOLETE: Short
+        konst UNCACHED: Short
+        konst IDLE: Short
+        konst CHECKING: Short
+        konst DOWNLOADING: Short
+        konst UPDATEREADY: Short
+        konst OBSOLETE: Short
     }
 }
 
@@ -3296,43 +3296,43 @@ public external abstract class ApplicationCache : EventTarget, JsAny {
  * Exposes the JavaScript [NavigatorOnLine](https://developer.mozilla.org/en/docs/Web/API/NavigatorOnLine) to Kotlin
  */
 public external interface NavigatorOnLine : JsAny {
-    val onLine: Boolean
+    konst onLine: Boolean
 }
 
 /**
  * Exposes the JavaScript [ErrorEvent](https://developer.mozilla.org/en/docs/Web/API/ErrorEvent) to Kotlin
  */
 public external open class ErrorEvent(type: String, eventInitDict: ErrorEventInit = definedExternally) : Event, JsAny {
-    open val message: String
-    open val filename: String
-    open val lineno: Int
-    open val colno: Int
-    open val error: JsAny?
+    open konst message: String
+    open konst filename: String
+    open konst lineno: Int
+    open konst colno: Int
+    open konst error: JsAny?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface ErrorEventInit : EventInit, JsAny {
     var message: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var filename: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lineno: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var colno: Int? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var error: JsAny? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3342,14 +3342,14 @@ public fun ErrorEventInit(message: String? = "", filename: String? = "", lineno:
  * Exposes the JavaScript [PromiseRejectionEvent](https://developer.mozilla.org/en/docs/Web/API/PromiseRejectionEvent) to Kotlin
  */
 public external open class PromiseRejectionEvent(type: String, eventInitDict: PromiseRejectionEventInit) : Event, JsAny {
-    open val promise: Promise<JsAny?>
-    open val reason: JsAny?
+    open konst promise: Promise<JsAny?>
+    open konst reason: JsAny?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -3357,7 +3357,7 @@ public external interface PromiseRejectionEventInit : EventInit, JsAny {
     var promise: Promise<JsAny?>?
     var reason: JsAny?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3369,217 +3369,217 @@ public fun PromiseRejectionEventInit(promise: Promise<JsAny?>?, reason: JsAny? =
 public external interface GlobalEventHandlers : JsAny {
     var onabort: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onblur: ((FocusEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncancel: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncanplay: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncanplaythrough: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onchange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onclick: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onclose: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncontextmenu: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncuechange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondblclick: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondrag: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragend: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragenter: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragexit: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragleave: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragover: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondragstart: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondrop: ((DragEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ondurationchange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onemptied: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onended: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onfocus: ((FocusEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oninput: ((InputEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
-    var oninvalid: ((Event) -> JsAny?)?
+        set(konstue) = definedExternally
+    var oninkonstid: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onkeydown: ((KeyboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onkeypress: ((KeyboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onkeyup: ((KeyboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onload: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onloadeddata: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onloadedmetadata: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onloadend: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onloadstart: ((ProgressEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmousedown: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmouseenter: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmouseleave: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmousemove: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmouseout: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmouseover: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmouseup: ((MouseEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onwheel: ((WheelEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpause: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onplay: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onplaying: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onprogress: ((ProgressEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onratechange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onreset: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onresize: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onscroll: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onseeked: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onseeking: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onselect: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onshow: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onstalled: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onsubmit: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onsuspend: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ontimeupdate: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ontoggle: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onvolumechange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onwaiting: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ongotpointercapture: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onlostpointercapture: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerdown: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointermove: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerup: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointercancel: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerover: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerout: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerenter: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpointerleave: ((PointerEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 /**
@@ -3588,75 +3588,75 @@ public external interface GlobalEventHandlers : JsAny {
 public external interface WindowEventHandlers : JsAny {
     var onafterprint: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onbeforeprint: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onbeforeunload: ((BeforeUnloadEvent) -> String?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onhashchange: ((HashChangeEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onlanguagechange: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onmessage: ((MessageEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onoffline: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ononline: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpagehide: ((PageTransitionEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpageshow: ((PageTransitionEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpopstate: ((PopStateEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onrejectionhandled: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onstorage: ((StorageEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onunhandledrejection: ((PromiseRejectionEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onunload: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 public external interface DocumentAndElementEventHandlers : JsAny {
     var oncopy: ((ClipboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oncut: ((ClipboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var onpaste: ((ClipboardEvent) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 /**
  * Exposes the JavaScript [WindowOrWorkerGlobalScope](https://developer.mozilla.org/en/docs/Web/API/WindowOrWorkerGlobalScope) to Kotlin
  */
 public external interface WindowOrWorkerGlobalScope : JsAny {
-    val origin: String
-    val caches: CacheStorage
+    konst origin: String
+    konst caches: CacheStorage
     fun btoa(data: String): String
     fun atob(data: String): String
     fun setTimeout(handler: JsAny?, timeout: Int = definedExternally, vararg arguments: JsAny?): Int
     fun clearTimeout(handle: Int = definedExternally)
-    fun setInterval(handler: JsAny?, timeout: Int = definedExternally, vararg arguments: JsAny?): Int
-    fun clearInterval(handle: Int = definedExternally)
+    fun setInterkonst(handler: JsAny?, timeout: Int = definedExternally, vararg arguments: JsAny?): Int
+    fun clearInterkonst(handle: Int = definedExternally)
     fun createImageBitmap(image: ImageBitmapSource, options: ImageBitmapOptions = definedExternally): Promise<ImageBitmap>
     fun createImageBitmap(image: ImageBitmapSource, sx: Int, sy: Int, sw: Int, sh: Int, options: ImageBitmapOptions = definedExternally): Promise<ImageBitmap>
     fun fetch(input: JsAny?, init: RequestInit = definedExternally): Promise<Response>
@@ -3666,10 +3666,10 @@ public external interface WindowOrWorkerGlobalScope : JsAny {
  * Exposes the JavaScript [Navigator](https://developer.mozilla.org/en/docs/Web/API/Navigator) to Kotlin
  */
 public external abstract class Navigator : NavigatorID, NavigatorLanguage, NavigatorOnLine, NavigatorContentUtils, NavigatorCookies, NavigatorPlugins, NavigatorConcurrentHardware, JsAny {
-    open val clipboard: Clipboard
-    open val mediaDevices: MediaDevices
-    open val maxTouchPoints: Int
-    open val serviceWorker: ServiceWorkerContainer
+    open konst clipboard: Clipboard
+    open konst mediaDevices: MediaDevices
+    open konst maxTouchPoints: Int
+    open konst serviceWorker: ServiceWorkerContainer
     fun requestMediaKeySystemAccess(keySystem: String, supportedConfigurations: JsArray<MediaKeySystemConfiguration>): Promise<MediaKeySystemAccess>
     fun getUserMedia(constraints: MediaStreamConstraints, successCallback: (MediaStream) -> Unit, errorCallback: (JsAny) -> Unit)
     fun vibrate(pattern: JsAny?): Boolean
@@ -3679,16 +3679,16 @@ public external abstract class Navigator : NavigatorID, NavigatorLanguage, Navig
  * Exposes the JavaScript [NavigatorID](https://developer.mozilla.org/en/docs/Web/API/NavigatorID) to Kotlin
  */
 public external interface NavigatorID : JsAny {
-    val appCodeName: String
-    val appName: String
-    val appVersion: String
-    val platform: String
-    val product: String
-    val productSub: String
-    val userAgent: String
-    val vendor: String
-    val vendorSub: String
-    val oscpu: String
+    konst appCodeName: String
+    konst appName: String
+    konst appVersion: String
+    konst platform: String
+    konst product: String
+    konst productSub: String
+    konst userAgent: String
+    konst vendor: String
+    konst vendorSub: String
+    konst oscpu: String
     fun taintEnabled(): Boolean
 }
 
@@ -3696,8 +3696,8 @@ public external interface NavigatorID : JsAny {
  * Exposes the JavaScript [NavigatorLanguage](https://developer.mozilla.org/en/docs/Web/API/NavigatorLanguage) to Kotlin
  */
 public external interface NavigatorLanguage : JsAny {
-    val language: String
-    val languages: JsArray<out JsString>
+    konst language: String
+    konst languages: JsArray<out JsString>
 }
 
 public external interface NavigatorContentUtils : JsAny {
@@ -3710,15 +3710,15 @@ public external interface NavigatorContentUtils : JsAny {
 }
 
 public external interface NavigatorCookies : JsAny {
-    val cookieEnabled: Boolean
+    konst cookieEnabled: Boolean
 }
 
 /**
  * Exposes the JavaScript [NavigatorPlugins](https://developer.mozilla.org/en/docs/Web/API/NavigatorPlugins) to Kotlin
  */
 public external interface NavigatorPlugins : JsAny {
-    val plugins: PluginArray
-    val mimeTypes: MimeTypeArray
+    konst plugins: PluginArray
+    konst mimeTypes: MimeTypeArray
     fun javaEnabled(): Boolean
 }
 
@@ -3763,9 +3763,9 @@ public operator fun MimeTypeArray.get(name: String): MimeType? = getMethodImplFo
  * Exposes the JavaScript [Plugin](https://developer.mozilla.org/en/docs/Web/API/Plugin) to Kotlin
  */
 public external abstract class Plugin : ItemArrayLike<MimeType>, JsAny {
-    open val name: String
-    open val description: String
-    open val filename: String
+    open konst name: String
+    open konst description: String
+    open konst filename: String
     override fun item(index: Int): MimeType?
     fun namedItem(name: String): MimeType?
 }
@@ -3784,40 +3784,40 @@ public operator fun Plugin.get(name: String): MimeType? = getMethodImplForPlugin
  * Exposes the JavaScript [MimeType](https://developer.mozilla.org/en/docs/Web/API/MimeType) to Kotlin
  */
 public external abstract class MimeType : JsAny {
-    open val type: String
-    open val description: String
-    open val suffixes: String
-    open val enabledPlugin: Plugin
+    open konst type: String
+    open konst description: String
+    open konst suffixes: String
+    open konst enabledPlugin: Plugin
 }
 
 /**
  * Exposes the JavaScript [ImageBitmap](https://developer.mozilla.org/en/docs/Web/API/ImageBitmap) to Kotlin
  */
 public external abstract class ImageBitmap : CanvasImageSource, TexImageSource, JsAny {
-    open val width: Int
-    open val height: Int
+    open konst width: Int
+    open konst height: Int
     fun close()
 }
 
 public external interface ImageBitmapOptions : JsAny {
     var imageOrientation: ImageOrientation? /* = ImageOrientation.NONE */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var premultiplyAlpha: PremultiplyAlpha? /* = PremultiplyAlpha.DEFAULT */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var colorSpaceConversion: ColorSpaceConversion? /* = ColorSpaceConversion.DEFAULT */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var resizeWidth: Int?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var resizeHeight: Int?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var resizeQuality: ResizeQuality? /* = ResizeQuality.LOW */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3827,37 +3827,37 @@ public fun ImageBitmapOptions(imageOrientation: ImageOrientation? = ImageOrienta
  * Exposes the JavaScript [MessageEvent](https://developer.mozilla.org/en/docs/Web/API/MessageEvent) to Kotlin
  */
 public external open class MessageEvent(type: String, eventInitDict: MessageEventInit = definedExternally) : Event, JsAny {
-    open val data: JsAny?
-    open val origin: String
-    open val lastEventId: String
-    open val source: UnionMessagePortOrWindowProxy?
-    open val ports: JsArray<out MessagePort>
+    open konst data: JsAny?
+    open konst origin: String
+    open konst lastEventId: String
+    open konst source: UnionMessagePortOrWindowProxy?
+    open konst ports: JsArray<out MessagePort>
     fun initMessageEvent(type: String, bubbles: Boolean, cancelable: Boolean, data: JsAny?, origin: String, lastEventId: String, source: UnionMessagePortOrWindowProxy?, ports: JsArray<MessagePort>)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface MessageEventInit : EventInit, JsAny {
     var data: JsAny? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var origin: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var lastEventId: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var source: UnionMessagePortOrWindowProxy? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var ports: JsArray<MessagePort>? /* = arrayOf() */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3867,25 +3867,25 @@ public fun MessageEventInit(data: JsAny? = null, origin: String? = "", lastEvent
  * Exposes the JavaScript [EventSource](https://developer.mozilla.org/en/docs/Web/API/EventSource) to Kotlin
  */
 public external open class EventSource(url: String, eventSourceInitDict: EventSourceInit = definedExternally) : EventTarget, JsAny {
-    open val url: String
-    open val withCredentials: Boolean
-    open val readyState: Short
+    open konst url: String
+    open konst withCredentials: Boolean
+    open konst readyState: Short
     var onopen: ((Event) -> JsAny?)?
     var onmessage: ((MessageEvent) -> JsAny?)?
     var onerror: ((Event) -> JsAny?)?
     fun close()
 
     companion object {
-        val CONNECTING: Short
-        val OPEN: Short
-        val CLOSED: Short
+        konst CONNECTING: Short
+        konst OPEN: Short
+        konst CLOSED: Short
     }
 }
 
 public external interface EventSourceInit : JsAny {
     var withCredentials: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3895,14 +3895,14 @@ public fun EventSourceInit(withCredentials: Boolean? = false): EventSourceInit {
  * Exposes the JavaScript [WebSocket](https://developer.mozilla.org/en/docs/Web/API/WebSocket) to Kotlin
  */
 public external open class WebSocket(url: String, protocols: JsAny? = definedExternally) : EventTarget, JsAny {
-    open val url: String
-    open val readyState: Short
-    open val bufferedAmount: JsNumber
+    open konst url: String
+    open konst readyState: Short
+    open konst bufferedAmount: JsNumber
     var onopen: ((Event) -> JsAny?)?
     var onerror: ((Event) -> JsAny?)?
     var onclose: ((Event) -> JsAny?)?
-    open val extensions: String
-    open val protocol: String
+    open konst extensions: String
+    open konst protocol: String
     var onmessage: ((MessageEvent) -> JsAny?)?
     var binaryType: BinaryType
     fun close(code: Short = definedExternally, reason: String = definedExternally)
@@ -3912,10 +3912,10 @@ public external open class WebSocket(url: String, protocols: JsAny? = definedExt
     fun send(data: ArrayBufferView)
 
     companion object {
-        val CONNECTING: Short
-        val OPEN: Short
-        val CLOSING: Short
-        val CLOSED: Short
+        konst CONNECTING: Short
+        konst OPEN: Short
+        konst CLOSING: Short
+        konst CLOSED: Short
     }
 }
 
@@ -3923,28 +3923,28 @@ public external open class WebSocket(url: String, protocols: JsAny? = definedExt
  * Exposes the JavaScript [CloseEvent](https://developer.mozilla.org/en/docs/Web/API/CloseEvent) to Kotlin
  */
 public external open class CloseEvent(type: String, eventInitDict: CloseEventInit = definedExternally) : Event, JsAny {
-    open val wasClean: Boolean
-    open val code: Short
-    open val reason: String
+    open konst wasClean: Boolean
+    open konst code: Short
+    open konst reason: String
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface CloseEventInit : EventInit, JsAny {
     var wasClean: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var code: Short? /* = 0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var reason: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -3954,8 +3954,8 @@ public fun CloseEventInit(wasClean: Boolean? = false, code: Short? = 0, reason: 
  * Exposes the JavaScript [MessageChannel](https://developer.mozilla.org/en/docs/Web/API/MessageChannel) to Kotlin
  */
 public external open class MessageChannel : JsAny {
-    open val port1: MessagePort
-    open val port2: MessagePort
+    open konst port1: MessagePort
+    open konst port2: MessagePort
 }
 
 /**
@@ -3972,7 +3972,7 @@ public external abstract class MessagePort : EventTarget, UnionMessagePortOrWind
  * Exposes the JavaScript [BroadcastChannel](https://developer.mozilla.org/en/docs/Web/API/BroadcastChannel) to Kotlin
  */
 public external open class BroadcastChannel(name: String) : EventTarget, JsAny {
-    open val name: String
+    open konst name: String
     var onmessage: ((MessageEvent) -> JsAny?)?
     fun postMessage(message: JsAny?)
     fun close()
@@ -3982,9 +3982,9 @@ public external open class BroadcastChannel(name: String) : EventTarget, JsAny {
  * Exposes the JavaScript [WorkerGlobalScope](https://developer.mozilla.org/en/docs/Web/API/WorkerGlobalScope) to Kotlin
  */
 public external abstract class WorkerGlobalScope : EventTarget, WindowOrWorkerGlobalScope, GlobalPerformance, JsAny {
-    open val self: WorkerGlobalScope
-    open val location: WorkerLocation
-    open val navigator: WorkerNavigator
+    open konst self: WorkerGlobalScope
+    open konst location: WorkerLocation
+    open konst navigator: WorkerNavigator
     open var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
     open var onlanguagechange: ((Event) -> JsAny?)?
     open var onoffline: ((Event) -> JsAny?)?
@@ -4007,8 +4007,8 @@ public external abstract class DedicatedWorkerGlobalScope : WorkerGlobalScope, J
  * Exposes the JavaScript [SharedWorkerGlobalScope](https://developer.mozilla.org/en/docs/Web/API/SharedWorkerGlobalScope) to Kotlin
  */
 public external abstract class SharedWorkerGlobalScope : WorkerGlobalScope, JsAny {
-    open val name: String
-    open val applicationCache: ApplicationCache
+    open konst name: String
+    open konst applicationCache: ApplicationCache
     open var onconnect: ((Event) -> JsAny?)?
     fun close()
 }
@@ -4019,7 +4019,7 @@ public external abstract class SharedWorkerGlobalScope : WorkerGlobalScope, JsAn
 public external interface AbstractWorker : JsAny {
     var onerror: ((Event) -> JsAny?)?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 /**
@@ -4035,10 +4035,10 @@ public external open class Worker(scriptURL: String, options: WorkerOptions = de
 public external interface WorkerOptions : JsAny {
     var type: WorkerType? /* = WorkerType.CLASSIC */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var credentials: RequestCredentials? /* = RequestCredentials.OMIT */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4048,7 +4048,7 @@ public fun WorkerOptions(type: WorkerType? = WorkerType.CLASSIC, credentials: Re
  * Exposes the JavaScript [SharedWorker](https://developer.mozilla.org/en/docs/Web/API/SharedWorker) to Kotlin
  */
 public external open class SharedWorker(scriptURL: String, name: String = definedExternally, options: WorkerOptions = definedExternally) : EventTarget, AbstractWorker, JsAny {
-    open val port: MessagePort
+    open konst port: MessagePort
     override var onerror: ((Event) -> JsAny?)?
 }
 
@@ -4056,41 +4056,41 @@ public external open class SharedWorker(scriptURL: String, name: String = define
  * Exposes the JavaScript [NavigatorConcurrentHardware](https://developer.mozilla.org/en/docs/Web/API/NavigatorConcurrentHardware) to Kotlin
  */
 public external interface NavigatorConcurrentHardware : JsAny {
-    val hardwareConcurrency: JsNumber
+    konst hardwareConcurrency: JsNumber
 }
 
 /**
  * Exposes the JavaScript [WorkerNavigator](https://developer.mozilla.org/en/docs/Web/API/WorkerNavigator) to Kotlin
  */
 public external abstract class WorkerNavigator : NavigatorID, NavigatorLanguage, NavigatorOnLine, NavigatorConcurrentHardware, JsAny {
-    open val serviceWorker: ServiceWorkerContainer
+    open konst serviceWorker: ServiceWorkerContainer
 }
 
 /**
  * Exposes the JavaScript [WorkerLocation](https://developer.mozilla.org/en/docs/Web/API/WorkerLocation) to Kotlin
  */
 public external abstract class WorkerLocation : JsAny {
-    open val href: String
-    open val origin: String
-    open val protocol: String
-    open val host: String
-    open val hostname: String
-    open val port: String
-    open val pathname: String
-    open val search: String
-    open val hash: String
+    open konst href: String
+    open konst origin: String
+    open konst protocol: String
+    open konst host: String
+    open konst hostname: String
+    open konst port: String
+    open konst pathname: String
+    open konst search: String
+    open konst hash: String
 }
 
 /**
  * Exposes the JavaScript [Storage](https://developer.mozilla.org/en/docs/Web/API/Storage) to Kotlin
  */
 public external abstract class Storage : JsAny {
-    open val length: Int
+    open konst length: Int
     fun key(index: Int): String?
     fun removeItem(key: String)
     fun clear()
     fun getItem(key: String): String?
-    fun setItem(key: String, value: String)
+    fun setItem(key: String, konstue: String)
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4099,58 +4099,58 @@ internal fun getMethodImplForStorage(obj: Storage, key: String): String? { js("r
 public operator fun Storage.get(key: String): String? = getMethodImplForStorage(this, key)
 
 @Suppress("UNUSED_PARAMETER")
-internal fun setMethodImplForStorage(obj: Storage, key: String, value: String) { js("obj[key] = value;") }
+internal fun setMethodImplForStorage(obj: Storage, key: String, konstue: String) { js("obj[key] = konstue;") }
 
-public operator fun Storage.set(key: String, value: String) = setMethodImplForStorage(this, key, value)
+public operator fun Storage.set(key: String, konstue: String) = setMethodImplForStorage(this, key, konstue)
 
 /**
  * Exposes the JavaScript [WindowSessionStorage](https://developer.mozilla.org/en/docs/Web/API/WindowSessionStorage) to Kotlin
  */
 public external interface WindowSessionStorage : JsAny {
-    val sessionStorage: Storage
+    konst sessionStorage: Storage
 }
 
 /**
  * Exposes the JavaScript [WindowLocalStorage](https://developer.mozilla.org/en/docs/Web/API/WindowLocalStorage) to Kotlin
  */
 public external interface WindowLocalStorage : JsAny {
-    val localStorage: Storage
+    konst localStorage: Storage
 }
 
 /**
  * Exposes the JavaScript [StorageEvent](https://developer.mozilla.org/en/docs/Web/API/StorageEvent) to Kotlin
  */
 public external open class StorageEvent(type: String, eventInitDict: StorageEventInit = definedExternally) : Event, JsAny {
-    open val key: String?
-    open val oldValue: String?
-    open val newValue: String?
-    open val url: String
-    open val storageArea: Storage?
+    open konst key: String?
+    open konst oldValue: String?
+    open konst newValue: String?
+    open konst url: String
+    open konst storageArea: Storage?
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface StorageEventInit : EventInit, JsAny {
     var key: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var oldValue: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var newValue: String? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var url: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var storageArea: Storage? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4170,24 +4170,24 @@ public external abstract class HTMLAppletElement : HTMLElement, JsAny {
     open var width: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4213,24 +4213,24 @@ public external abstract class HTMLMarqueeElement : HTMLElement, JsAny {
     fun stop()
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4242,24 +4242,24 @@ public external abstract class HTMLFrameSetElement : HTMLElement, WindowEventHan
     open var rows: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4270,30 +4270,30 @@ public external abstract class HTMLFrameElement : HTMLElement, JsAny {
     open var frameBorder: String
     open var longDesc: String
     open var noResize: Boolean
-    open val contentDocument: Document?
-    open val contentWindow: Window?
+    open konst contentDocument: Document?
+    open konst contentWindow: Window?
     open var marginHeight: String
     open var marginWidth: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4301,24 +4301,24 @@ public external abstract class HTMLDirectoryElement : HTMLElement, JsAny {
     open var compact: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4331,24 +4331,24 @@ public external abstract class HTMLFontElement : HTMLElement, JsAny {
     open var size: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4360,13 +4360,13 @@ public external interface External : JsAny {
 public external interface EventInit : JsAny {
     var bubbles: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var cancelable: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var composed: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4376,21 +4376,21 @@ public fun EventInit(bubbles: Boolean? = false, cancelable: Boolean? = false, co
  * Exposes the JavaScript [CustomEvent](https://developer.mozilla.org/en/docs/Web/API/CustomEvent) to Kotlin
  */
 public external open class CustomEvent(type: String, eventInitDict: CustomEventInit = definedExternally) : Event, JsAny {
-    open val detail: JsAny?
+    open konst detail: JsAny?
     fun initCustomEvent(type: String, bubbles: Boolean, cancelable: Boolean, detail: JsAny?)
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface CustomEventInit : EventInit, JsAny {
     var detail: JsAny? /* = null */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4399,7 +4399,7 @@ public fun CustomEventInit(detail: JsAny? = null, bubbles: Boolean? = false, can
 public external interface EventListenerOptions : JsAny {
     var capture: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4408,10 +4408,10 @@ public fun EventListenerOptions(capture: Boolean? = false): EventListenerOptions
 public external interface AddEventListenerOptions : EventListenerOptions, JsAny {
     var passive: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var once: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4425,7 +4425,7 @@ public external interface NonElementParentNode : JsAny {
  * Exposes the JavaScript [DocumentOrShadowRoot](https://developer.mozilla.org/en/docs/Web/API/DocumentOrShadowRoot) to Kotlin
  */
 public external interface DocumentOrShadowRoot : JsAny {
-    val fullscreenElement: Element?
+    konst fullscreenElement: Element?
         get() = definedExternally
 }
 
@@ -4433,12 +4433,12 @@ public external interface DocumentOrShadowRoot : JsAny {
  * Exposes the JavaScript [ParentNode](https://developer.mozilla.org/en/docs/Web/API/ParentNode) to Kotlin
  */
 public external interface ParentNode : JsAny {
-    val children: HTMLCollection
-    val firstElementChild: Element?
+    konst children: HTMLCollection
+    konst firstElementChild: Element?
         get() = definedExternally
-    val lastElementChild: Element?
+    konst lastElementChild: Element?
         get() = definedExternally
-    val childElementCount: Int
+    konst childElementCount: Int
     fun prepend(vararg nodes: JsAny?)
     fun append(vararg nodes: JsAny?)
     fun querySelector(selectors: String): Element?
@@ -4449,9 +4449,9 @@ public external interface ParentNode : JsAny {
  * Exposes the JavaScript [NonDocumentTypeChildNode](https://developer.mozilla.org/en/docs/Web/API/NonDocumentTypeChildNode) to Kotlin
  */
 public external interface NonDocumentTypeChildNode : JsAny {
-    val previousElementSibling: Element?
+    konst previousElementSibling: Element?
         get() = definedExternally
-    val nextElementSibling: Element?
+    konst nextElementSibling: Element?
         get() = definedExternally
 }
 
@@ -4469,7 +4469,7 @@ public external interface ChildNode : JsAny {
  * Exposes the JavaScript [Slotable](https://developer.mozilla.org/en/docs/Web/API/Slotable) to Kotlin
  */
 public external interface Slotable : JsAny {
-    val assignedSlot: HTMLSlotElement?
+    konst assignedSlot: HTMLSlotElement?
         get() = definedExternally
 }
 
@@ -4518,25 +4518,25 @@ public external open class MutationObserver(callback: (JsArray<MutationRecord>, 
 public external interface MutationObserverInit : JsAny {
     var childList: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var attributes: Boolean?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var characterData: Boolean?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var subtree: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var attributeOldValue: Boolean?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var characterDataOldValue: Boolean?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var attributeFilter: JsArray<JsString>?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4546,33 +4546,33 @@ public fun MutationObserverInit(childList: Boolean? = false, attributes: Boolean
  * Exposes the JavaScript [MutationRecord](https://developer.mozilla.org/en/docs/Web/API/MutationRecord) to Kotlin
  */
 public external abstract class MutationRecord : JsAny {
-    open val type: String
-    open val target: Node
-    open val addedNodes: NodeList
-    open val removedNodes: NodeList
-    open val previousSibling: Node?
-    open val nextSibling: Node?
-    open val attributeName: String?
-    open val attributeNamespace: String?
-    open val oldValue: String?
+    open konst type: String
+    open konst target: Node
+    open konst addedNodes: NodeList
+    open konst removedNodes: NodeList
+    open konst previousSibling: Node?
+    open konst nextSibling: Node?
+    open konst attributeName: String?
+    open konst attributeNamespace: String?
+    open konst oldValue: String?
 }
 
 /**
  * Exposes the JavaScript [Node](https://developer.mozilla.org/en/docs/Web/API/Node) to Kotlin
  */
 public external abstract class Node : EventTarget, JsAny {
-    open val nodeType: Short
-    open val nodeName: String
-    open val baseURI: String
-    open val isConnected: Boolean
-    open val ownerDocument: Document?
-    open val parentNode: Node?
-    open val parentElement: Element?
-    open val childNodes: NodeList
-    open val firstChild: Node?
-    open val lastChild: Node?
-    open val previousSibling: Node?
-    open val nextSibling: Node?
+    open konst nodeType: Short
+    open konst nodeName: String
+    open konst baseURI: String
+    open konst isConnected: Boolean
+    open konst ownerDocument: Document?
+    open konst parentNode: Node?
+    open konst parentElement: Element?
+    open konst childNodes: NodeList
+    open konst firstChild: Node?
+    open konst lastChild: Node?
+    open konst previousSibling: Node?
+    open konst nextSibling: Node?
     open var nodeValue: String?
     open var textContent: String?
     fun getRootNode(options: GetRootNodeOptions = definedExternally): Node
@@ -4592,31 +4592,31 @@ public external abstract class Node : EventTarget, JsAny {
     fun removeChild(child: Node): Node
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 public external interface GetRootNodeOptions : JsAny {
     var composed: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4626,36 +4626,36 @@ public fun GetRootNodeOptions(composed: Boolean? = false): GetRootNodeOptions { 
  * Exposes the JavaScript [Document](https://developer.mozilla.org/en/docs/Web/API/Document) to Kotlin
  */
 public external open class Document : Node, GlobalEventHandlers, DocumentAndElementEventHandlers, NonElementParentNode, DocumentOrShadowRoot, ParentNode, GeometryUtils, JsAny {
-    open val implementation: DOMImplementation
-    open val URL: String
-    open val documentURI: String
-    open val origin: String
-    open val compatMode: String
-    open val characterSet: String
-    open val charset: String
-    open val inputEncoding: String
-    open val contentType: String
-    open val doctype: DocumentType?
-    open val documentElement: Element?
-    open val location: Location?
+    open konst implementation: DOMImplementation
+    open konst URL: String
+    open konst documentURI: String
+    open konst origin: String
+    open konst compatMode: String
+    open konst characterSet: String
+    open konst charset: String
+    open konst inputEncoding: String
+    open konst contentType: String
+    open konst doctype: DocumentType?
+    open konst documentElement: Element?
+    open konst location: Location?
     var domain: String
-    open val referrer: String
+    open konst referrer: String
     var cookie: String
-    open val lastModified: String
-    open val readyState: DocumentReadyState
+    open konst lastModified: String
+    open konst readyState: DocumentReadyState
     var title: String
     var dir: String
     var body: HTMLElement?
-    open val head: HTMLHeadElement?
-    open val images: HTMLCollection
-    open val embeds: HTMLCollection
-    open val plugins: HTMLCollection
-    open val links: HTMLCollection
-    open val forms: HTMLCollection
-    open val scripts: HTMLCollection
-    open val currentScript: HTMLOrSVGScriptElement?
-    open val defaultView: Window?
-    open val activeElement: Element?
+    open konst head: HTMLHeadElement?
+    open konst images: HTMLCollection
+    open konst embeds: HTMLCollection
+    open konst plugins: HTMLCollection
+    open konst links: HTMLCollection
+    open konst forms: HTMLCollection
+    open konst scripts: HTMLCollection
+    open konst currentScript: HTMLOrSVGScriptElement?
+    open konst defaultView: Window?
+    open konst activeElement: Element?
     var designMode: String
     var onreadystatechange: ((Event) -> JsAny?)?
     var fgColor: String
@@ -4663,14 +4663,14 @@ public external open class Document : Node, GlobalEventHandlers, DocumentAndElem
     var vlinkColor: String
     var alinkColor: String
     var bgColor: String
-    open val anchors: HTMLCollection
-    open val applets: HTMLCollection
-    open val all: HTMLAllCollection
-    open val scrollingElement: Element?
-    open val styleSheets: StyleSheetList
-    open val rootElement: SVGSVGElement?
-    open val fullscreenEnabled: Boolean
-    open val fullscreen: Boolean
+    open konst anchors: HTMLCollection
+    open konst applets: HTMLCollection
+    open konst all: HTMLAllCollection
+    open konst scrollingElement: Element?
+    open konst styleSheets: StyleSheetList
+    open konst rootElement: SVGSVGElement?
+    open konst fullscreenEnabled: Boolean
+    open konst fullscreen: Boolean
     var onfullscreenchange: ((Event) -> JsAny?)?
     var onfullscreenerror: ((Event) -> JsAny?)?
     override var onabort: ((Event) -> JsAny?)?
@@ -4698,7 +4698,7 @@ public external open class Document : Node, GlobalEventHandlers, DocumentAndElem
     override var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
     override var onfocus: ((FocusEvent) -> JsAny?)?
     override var oninput: ((InputEvent) -> JsAny?)?
-    override var oninvalid: ((Event) -> JsAny?)?
+    override var oninkonstid: ((Event) -> JsAny?)?
     override var onkeydown: ((KeyboardEvent) -> JsAny?)?
     override var onkeypress: ((KeyboardEvent) -> JsAny?)?
     override var onkeyup: ((KeyboardEvent) -> JsAny?)?
@@ -4747,11 +4747,11 @@ public external open class Document : Node, GlobalEventHandlers, DocumentAndElem
     override var oncopy: ((ClipboardEvent) -> JsAny?)?
     override var oncut: ((ClipboardEvent) -> JsAny?)?
     override var onpaste: ((ClipboardEvent) -> JsAny?)?
-    override val fullscreenElement: Element?
-    override val children: HTMLCollection
-    override val firstElementChild: Element?
-    override val lastElementChild: Element?
-    override val childElementCount: Int
+    override konst fullscreenElement: Element?
+    override konst children: HTMLCollection
+    override konst firstElementChild: Element?
+    override konst lastElementChild: Element?
+    override konst childElementCount: Int
     fun getElementsByTagName(qualifiedName: String): HTMLCollection
     fun getElementsByTagNameNS(namespace: String?, localName: String): HTMLCollection
     fun getElementsByClassName(classNames: String): HTMLCollection
@@ -4779,7 +4779,7 @@ public external open class Document : Node, GlobalEventHandlers, DocumentAndElem
     fun write(vararg text: String)
     fun writeln(vararg text: String)
     fun hasFocus(): Boolean
-    fun execCommand(commandId: String, showUI: Boolean = definedExternally, value: String = definedExternally): Boolean
+    fun execCommand(commandId: String, showUI: Boolean = definedExternally, konstue: String = definedExternally): Boolean
     fun queryCommandEnabled(commandId: String): Boolean
     fun queryCommandIndeterm(commandId: String): Boolean
     fun queryCommandState(commandId: String): Boolean
@@ -4805,24 +4805,24 @@ public external open class Document : Node, GlobalEventHandlers, DocumentAndElem
     override fun convertPointFromNode(point: DOMPointInit, from: JsAny?, options: ConvertCoordinateOptions /* = definedExternally */): DOMPoint
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4836,31 +4836,31 @@ public operator fun Document.get(name: String): JsAny? = getMethodImplForDocumen
  */
 public external open class XMLDocument : Document, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 public external interface ElementCreationOptions : JsAny {
     var `is`: String?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -4880,29 +4880,29 @@ public external abstract class DOMImplementation : JsAny {
  * Exposes the JavaScript [DocumentType](https://developer.mozilla.org/en/docs/Web/API/DocumentType) to Kotlin
  */
 public external abstract class DocumentType : Node, ChildNode, JsAny {
-    open val name: String
-    open val publicId: String
-    open val systemId: String
+    open konst name: String
+    open konst publicId: String
+    open konst systemId: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4910,10 +4910,10 @@ public external abstract class DocumentType : Node, ChildNode, JsAny {
  * Exposes the JavaScript [DocumentFragment](https://developer.mozilla.org/en/docs/Web/API/DocumentFragment) to Kotlin
  */
 public external open class DocumentFragment : Node, NonElementParentNode, ParentNode, JsAny {
-    override val children: HTMLCollection
-    override val firstElementChild: Element?
-    override val lastElementChild: Element?
-    override val childElementCount: Int
+    override konst children: HTMLCollection
+    override konst firstElementChild: Element?
+    override konst lastElementChild: Element?
+    override konst childElementCount: Int
     override fun getElementById(elementId: String): Element?
     override fun prepend(vararg nodes: JsAny?)
     override fun append(vararg nodes: JsAny?)
@@ -4921,24 +4921,24 @@ public external open class DocumentFragment : Node, NonElementParentNode, Parent
     override fun querySelectorAll(selectors: String): NodeList
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4946,29 +4946,29 @@ public external open class DocumentFragment : Node, NonElementParentNode, Parent
  * Exposes the JavaScript [ShadowRoot](https://developer.mozilla.org/en/docs/Web/API/ShadowRoot) to Kotlin
  */
 public external open class ShadowRoot : DocumentFragment, DocumentOrShadowRoot, JsAny {
-    open val mode: ShadowRootMode
-    open val host: Element
-    override val fullscreenElement: Element?
+    open konst mode: ShadowRootMode
+    open konst host: Element
+    override konst fullscreenElement: Element?
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -4976,32 +4976,32 @@ public external open class ShadowRoot : DocumentFragment, DocumentOrShadowRoot, 
  * Exposes the JavaScript [Element](https://developer.mozilla.org/en/docs/Web/API/Element) to Kotlin
  */
 public external abstract class Element : Node, ParentNode, NonDocumentTypeChildNode, ChildNode, Slotable, GeometryUtils, UnionElementOrHTMLCollection, UnionElementOrRadioNodeList, UnionElementOrMouseEvent, UnionElementOrProcessingInstruction, JsAny {
-    open val namespaceURI: String?
-    open val prefix: String?
-    open val localName: String
-    open val tagName: String
+    open konst namespaceURI: String?
+    open konst prefix: String?
+    open konst localName: String
+    open konst tagName: String
     open var id: String
     open var className: String
-    open val classList: DOMTokenList
+    open konst classList: DOMTokenList
     open var slot: String
-    open val attributes: NamedNodeMap
-    open val shadowRoot: ShadowRoot?
+    open konst attributes: NamedNodeMap
+    open konst shadowRoot: ShadowRoot?
     open var scrollTop: Double
     open var scrollLeft: Double
-    open val scrollWidth: Int
-    open val scrollHeight: Int
-    open val clientTop: Int
-    open val clientLeft: Int
-    open val clientWidth: Int
-    open val clientHeight: Int
+    open konst scrollWidth: Int
+    open konst scrollHeight: Int
+    open konst clientTop: Int
+    open konst clientLeft: Int
+    open konst clientWidth: Int
+    open konst clientHeight: Int
     open var innerHTML: String
     open var outerHTML: String
     fun hasAttributes(): Boolean
     fun getAttributeNames(): JsArray<JsString>
     fun getAttribute(qualifiedName: String): String?
     fun getAttributeNS(namespace: String?, localName: String): String?
-    fun setAttribute(qualifiedName: String, value: String)
-    fun setAttributeNS(namespace: String?, qualifiedName: String, value: String)
+    fun setAttribute(qualifiedName: String, konstue: String)
+    fun setAttributeNS(namespace: String?, qualifiedName: String, konstue: String)
     fun removeAttribute(qualifiedName: String)
     fun removeAttributeNS(namespace: String?, localName: String)
     fun hasAttribute(qualifiedName: String): Boolean
@@ -5037,24 +5037,24 @@ public external abstract class Element : Node, ParentNode, NonDocumentTypeChildN
     fun requestFullscreen(): Promise<Nothing?>
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5092,33 +5092,33 @@ public operator fun NamedNodeMap.get(qualifiedName: String): Attr? = getMethodIm
  * Exposes the JavaScript [Attr](https://developer.mozilla.org/en/docs/Web/API/Attr) to Kotlin
  */
 public external abstract class Attr : Node, JsAny {
-    open val namespaceURI: String?
-    open val prefix: String?
-    open val localName: String
-    open val name: String
-    open var value: String
-    open val ownerElement: Element?
-    open val specified: Boolean
+    open konst namespaceURI: String?
+    open konst prefix: String?
+    open konst localName: String
+    open konst name: String
+    open var konstue: String
+    open konst ownerElement: Element?
+    open konst specified: Boolean
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5127,7 +5127,7 @@ public external abstract class Attr : Node, JsAny {
  */
 public external abstract class CharacterData : Node, NonDocumentTypeChildNode, ChildNode, JsAny {
     open var data: String
-    open val length: Int
+    open konst length: Int
     fun substringData(offset: Int, count: Int): String
     fun appendData(data: String)
     fun insertData(offset: Int, data: String)
@@ -5135,24 +5135,24 @@ public external abstract class CharacterData : Node, NonDocumentTypeChildNode, C
     fun replaceData(offset: Int, count: Int, data: String)
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5160,10 +5160,10 @@ public external abstract class CharacterData : Node, NonDocumentTypeChildNode, C
  * Exposes the JavaScript [Text](https://developer.mozilla.org/en/docs/Web/API/Text) to Kotlin
  */
 public external open class Text(data: String = definedExternally) : CharacterData, Slotable, GeometryUtils, JsAny {
-    open val wholeText: String
-    override val assignedSlot: HTMLSlotElement?
-    override val previousElementSibling: Element?
-    override val nextElementSibling: Element?
+    open konst wholeText: String
+    override konst assignedSlot: HTMLSlotElement?
+    override konst previousElementSibling: Element?
+    override konst nextElementSibling: Element?
     fun splitText(offset: Int): Text
     override fun getBoxQuads(options: BoxQuadOptions /* = definedExternally */): JsArray<DOMQuad>
     override fun convertQuadFromNode(quad: JsAny?, from: JsAny?, options: ConvertCoordinateOptions /* = definedExternally */): DOMQuad
@@ -5175,24 +5175,24 @@ public external open class Text(data: String = definedExternally) : CharacterDat
     override fun remove()
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5201,24 +5201,24 @@ public external open class Text(data: String = definedExternally) : CharacterDat
  */
 public external open class CDATASection : Text, JsAny {
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5226,27 +5226,27 @@ public external open class CDATASection : Text, JsAny {
  * Exposes the JavaScript [ProcessingInstruction](https://developer.mozilla.org/en/docs/Web/API/ProcessingInstruction) to Kotlin
  */
 public external abstract class ProcessingInstruction : CharacterData, LinkStyle, UnionElementOrProcessingInstruction, JsAny {
-    open val target: String
+    open konst target: String
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5254,32 +5254,32 @@ public external abstract class ProcessingInstruction : CharacterData, LinkStyle,
  * Exposes the JavaScript [Comment](https://developer.mozilla.org/en/docs/Web/API/Comment) to Kotlin
  */
 public external open class Comment(data: String = definedExternally) : CharacterData, JsAny {
-    override val previousElementSibling: Element?
-    override val nextElementSibling: Element?
+    override konst previousElementSibling: Element?
+    override konst nextElementSibling: Element?
     override fun before(vararg nodes: JsAny?)
     override fun after(vararg nodes: JsAny?)
     override fun replaceWith(vararg nodes: JsAny?)
     override fun remove()
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5287,12 +5287,12 @@ public external open class Comment(data: String = definedExternally) : Character
  * Exposes the JavaScript [Range](https://developer.mozilla.org/en/docs/Web/API/Range) to Kotlin
  */
 public external open class Range : JsAny {
-    open val startContainer: Node
-    open val startOffset: Int
-    open val endContainer: Node
-    open val endOffset: Int
-    open val collapsed: Boolean
-    open val commonAncestorContainer: Node
+    open konst startContainer: Node
+    open konst startOffset: Int
+    open konst endContainer: Node
+    open konst endOffset: Int
+    open konst collapsed: Boolean
+    open konst commonAncestorContainer: Node
     fun setStart(node: Node, offset: Int)
     fun setEnd(node: Node, offset: Int)
     fun setStartBefore(node: Node)
@@ -5318,10 +5318,10 @@ public external open class Range : JsAny {
     fun createContextualFragment(fragment: String): DocumentFragment
 
     companion object {
-        val START_TO_START: Short
-        val START_TO_END: Short
-        val END_TO_END: Short
-        val END_TO_START: Short
+        konst START_TO_START: Short
+        konst START_TO_END: Short
+        konst END_TO_END: Short
+        konst END_TO_START: Short
     }
 }
 
@@ -5329,11 +5329,11 @@ public external open class Range : JsAny {
  * Exposes the JavaScript [NodeIterator](https://developer.mozilla.org/en/docs/Web/API/NodeIterator) to Kotlin
  */
 public external abstract class NodeIterator : JsAny {
-    open val root: Node
-    open val referenceNode: Node
-    open val pointerBeforeReferenceNode: Boolean
-    open val whatToShow: Int
-    open val filter: NodeFilter?
+    open konst root: Node
+    open konst referenceNode: Node
+    open konst pointerBeforeReferenceNode: Boolean
+    open konst whatToShow: Int
+    open konst filter: NodeFilter?
     fun nextNode(): Node?
     fun previousNode(): Node?
     fun detach()
@@ -5343,9 +5343,9 @@ public external abstract class NodeIterator : JsAny {
  * Exposes the JavaScript [TreeWalker](https://developer.mozilla.org/en/docs/Web/API/TreeWalker) to Kotlin
  */
 public external abstract class TreeWalker : JsAny {
-    open val root: Node
-    open val whatToShow: Int
-    open val filter: NodeFilter?
+    open konst root: Node
+    open konst whatToShow: Int
+    open konst filter: NodeFilter?
     open var currentNode: Node
     fun parentNode(): Node?
     fun firstChild(): Node?
@@ -5364,22 +5364,22 @@ public external interface NodeFilter : JsAny {
     fun acceptNode(node: Node): Short
 
     companion object {
-        val FILTER_ACCEPT: Short
-        val FILTER_REJECT: Short
-        val FILTER_SKIP: Short
-        val SHOW_ALL: Int
-        val SHOW_ELEMENT: Int
-        val SHOW_ATTRIBUTE: Int
-        val SHOW_TEXT: Int
-        val SHOW_CDATA_SECTION: Int
-        val SHOW_ENTITY_REFERENCE: Int
-        val SHOW_ENTITY: Int
-        val SHOW_PROCESSING_INSTRUCTION: Int
-        val SHOW_COMMENT: Int
-        val SHOW_DOCUMENT: Int
-        val SHOW_DOCUMENT_TYPE: Int
-        val SHOW_DOCUMENT_FRAGMENT: Int
-        val SHOW_NOTATION: Int
+        konst FILTER_ACCEPT: Short
+        konst FILTER_REJECT: Short
+        konst FILTER_SKIP: Short
+        konst SHOW_ALL: Int
+        konst SHOW_ELEMENT: Int
+        konst SHOW_ATTRIBUTE: Int
+        konst SHOW_TEXT: Int
+        konst SHOW_CDATA_SECTION: Int
+        konst SHOW_ENTITY_REFERENCE: Int
+        konst SHOW_ENTITY: Int
+        konst SHOW_PROCESSING_INSTRUCTION: Int
+        konst SHOW_COMMENT: Int
+        konst SHOW_DOCUMENT: Int
+        konst SHOW_DOCUMENT_TYPE: Int
+        konst SHOW_DOCUMENT_FRAGMENT: Int
+        konst SHOW_NOTATION: Int
     }
 }
 
@@ -5387,7 +5387,7 @@ public external interface NodeFilter : JsAny {
  * Exposes the JavaScript [DOMTokenList](https://developer.mozilla.org/en/docs/Web/API/DOMTokenList) to Kotlin
  */
 public external abstract class DOMTokenList : ItemArrayLike<JsString>, JsAny {
-    open var value: String
+    open var konstue: String
     fun contains(token: String): Boolean
     fun add(vararg tokens: String)
     fun remove(vararg tokens: String)
@@ -5406,10 +5406,10 @@ public operator fun DOMTokenList.get(index: Int): String? = getMethodImplForDOMT
  * Exposes the JavaScript [DOMPointReadOnly](https://developer.mozilla.org/en/docs/Web/API/DOMPointReadOnly) to Kotlin
  */
 public external open class DOMPointReadOnly(x: Double, y: Double, z: Double, w: Double) : JsAny {
-    open val x: Double
-    open val y: Double
-    open val z: Double
-    open val w: Double
+    open konst x: Double
+    open konst y: Double
+    open konst z: Double
+    open konst w: Double
     fun matrixTransform(matrix: DOMMatrixReadOnly): DOMPoint
 }
 
@@ -5431,16 +5431,16 @@ public external open class DOMPoint : DOMPointReadOnly, JsAny {
 public external interface DOMPointInit : JsAny {
     var x: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var y: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var z: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var w: Double? /* = 1.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5460,29 +5460,29 @@ public external open class DOMRect(x: Double = definedExternally, y: Double = de
  * Exposes the JavaScript [DOMRectReadOnly](https://developer.mozilla.org/en/docs/Web/API/DOMRectReadOnly) to Kotlin
  */
 public external open class DOMRectReadOnly(x: Double, y: Double, width: Double, height: Double) : JsAny {
-    open val x: Double
-    open val y: Double
-    open val width: Double
-    open val height: Double
-    open val top: Double
-    open val right: Double
-    open val bottom: Double
-    open val left: Double
+    open konst x: Double
+    open konst y: Double
+    open konst width: Double
+    open konst height: Double
+    open konst top: Double
+    open konst right: Double
+    open konst bottom: Double
+    open konst left: Double
 }
 
 public external interface DOMRectInit : JsAny {
     var x: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var y: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var width: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var height: Double? /* = 0.0 */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5503,41 +5503,41 @@ public operator fun DOMRectList.get(index: Int): DOMRect? = getMethodImplForDOMR
 public external open class DOMQuad : JsAny {
     constructor(p1: DOMPointInit = definedExternally, p2: DOMPointInit = definedExternally, p3: DOMPointInit = definedExternally, p4: DOMPointInit = definedExternally)
     constructor(rect: DOMRectInit)
-    open val p1: DOMPoint
-    open val p2: DOMPoint
-    open val p3: DOMPoint
-    open val p4: DOMPoint
-    open val bounds: DOMRectReadOnly
+    open konst p1: DOMPoint
+    open konst p2: DOMPoint
+    open konst p3: DOMPoint
+    open konst p4: DOMPoint
+    open konst bounds: DOMRectReadOnly
 }
 
 /**
  * Exposes the JavaScript [DOMMatrixReadOnly](https://developer.mozilla.org/en/docs/Web/API/DOMMatrixReadOnly) to Kotlin
  */
 public external open class DOMMatrixReadOnly(numberSequence: JsArray<JsNumber>) : JsAny {
-    open val a: Double
-    open val b: Double
-    open val c: Double
-    open val d: Double
-    open val e: Double
-    open val f: Double
-    open val m11: Double
-    open val m12: Double
-    open val m13: Double
-    open val m14: Double
-    open val m21: Double
-    open val m22: Double
-    open val m23: Double
-    open val m24: Double
-    open val m31: Double
-    open val m32: Double
-    open val m33: Double
-    open val m34: Double
-    open val m41: Double
-    open val m42: Double
-    open val m43: Double
-    open val m44: Double
-    open val is2D: Boolean
-    open val isIdentity: Boolean
+    open konst a: Double
+    open konst b: Double
+    open konst c: Double
+    open konst d: Double
+    open konst e: Double
+    open konst f: Double
+    open konst m11: Double
+    open konst m12: Double
+    open konst m13: Double
+    open konst m14: Double
+    open konst m21: Double
+    open konst m22: Double
+    open konst m23: Double
+    open konst m24: Double
+    open konst m31: Double
+    open konst m32: Double
+    open konst m33: Double
+    open konst m34: Double
+    open konst m41: Double
+    open konst m42: Double
+    open konst m43: Double
+    open konst m44: Double
+    open konst is2D: Boolean
+    open konst isIdentity: Boolean
     fun translate(tx: Double, ty: Double, tz: Double = definedExternally): DOMMatrix
     fun scale(scale: Double, originX: Double = definedExternally, originY: Double = definedExternally): DOMMatrix
     fun scale3d(scale: Double, originX: Double = definedExternally, originY: Double = definedExternally, originZ: Double = definedExternally): DOMMatrix
@@ -5605,7 +5605,7 @@ public external open class DOMMatrix() : DOMMatrixReadOnly, JsAny {
 public external interface ScrollOptions : JsAny {
     var behavior: ScrollBehavior? /* = ScrollBehavior.AUTO */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5617,10 +5617,10 @@ public fun ScrollOptions(behavior: ScrollBehavior? = ScrollBehavior.AUTO): Scrol
 public external interface ScrollToOptions : ScrollOptions, JsAny {
     var left: Double?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var top: Double?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5630,8 +5630,8 @@ public fun ScrollToOptions(left: Double? = undefined, top: Double? = undefined, 
  * Exposes the JavaScript [MediaQueryList](https://developer.mozilla.org/en/docs/Web/API/MediaQueryList) to Kotlin
  */
 public external abstract class MediaQueryList : EventTarget, JsAny {
-    open val media: String
-    open val matches: Boolean
+    open konst media: String
+    open konst matches: Boolean
     open var onchange: ((Event) -> JsAny?)?
     fun addListener(listener: EventListener?)
     fun addListener(listener: ((Event) -> Unit)?)
@@ -5643,24 +5643,24 @@ public external abstract class MediaQueryList : EventTarget, JsAny {
  * Exposes the JavaScript [MediaQueryListEvent](https://developer.mozilla.org/en/docs/Web/API/MediaQueryListEvent) to Kotlin
  */
 public external open class MediaQueryListEvent(type: String, eventInitDict: MediaQueryListEventInit = definedExternally) : Event, JsAny {
-    open val media: String
-    open val matches: Boolean
+    open konst media: String
+    open konst matches: Boolean
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
 public external interface MediaQueryListEventInit : EventInit, JsAny {
     var media: String? /* = "" */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var matches: Boolean? /* = false */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5670,30 +5670,30 @@ public fun MediaQueryListEventInit(media: String? = "", matches: Boolean? = fals
  * Exposes the JavaScript [Screen](https://developer.mozilla.org/en/docs/Web/API/Screen) to Kotlin
  */
 public external abstract class Screen : JsAny {
-    open val availWidth: Int
-    open val availHeight: Int
-    open val width: Int
-    open val height: Int
-    open val colorDepth: Int
-    open val pixelDepth: Int
+    open konst availWidth: Int
+    open konst availHeight: Int
+    open konst width: Int
+    open konst height: Int
+    open konst colorDepth: Int
+    open konst pixelDepth: Int
 }
 
 /**
  * Exposes the JavaScript [CaretPosition](https://developer.mozilla.org/en/docs/Web/API/CaretPosition) to Kotlin
  */
 public external abstract class CaretPosition : JsAny {
-    open val offsetNode: Node
-    open val offset: Int
+    open konst offsetNode: Node
+    open konst offset: Int
     fun getClientRect(): DOMRect?
 }
 
 public external interface ScrollIntoViewOptions : ScrollOptions, JsAny {
     var block: ScrollLogicalPosition? /* = ScrollLogicalPosition.CENTER */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var inline: ScrollLogicalPosition? /* = ScrollLogicalPosition.CENTER */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5702,10 +5702,10 @@ public fun ScrollIntoViewOptions(block: ScrollLogicalPosition? = ScrollLogicalPo
 public external interface BoxQuadOptions : JsAny {
     var box: CSSBoxType? /* = CSSBoxType.BORDER */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var relativeTo: JsAny?
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5714,10 +5714,10 @@ public fun BoxQuadOptions(box: CSSBoxType? = CSSBoxType.BORDER, relativeTo: JsAn
 public external interface ConvertCoordinateOptions : JsAny {
     var fromBox: CSSBoxType? /* = CSSBoxType.BORDER */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
     var toBox: CSSBoxType? /* = CSSBoxType.BORDER */
         get() = definedExternally
-        set(value) = definedExternally
+        set(konstue) = definedExternally
 }
 
 @Suppress("UNUSED_PARAMETER")
@@ -5737,15 +5737,15 @@ public external interface GeometryUtils : JsAny {
  * Exposes the JavaScript [Touch](https://developer.mozilla.org/en/docs/Web/API/Touch) to Kotlin
  */
 public external abstract class Touch : JsAny {
-    open val identifier: Int
-    open val target: EventTarget
-    open val screenX: Int
-    open val screenY: Int
-    open val clientX: Int
-    open val clientY: Int
-    open val pageX: Int
-    open val pageY: Int
-    open val region: String?
+    open konst identifier: Int
+    open konst target: EventTarget
+    open konst screenX: Int
+    open konst screenY: Int
+    open konst clientX: Int
+    open konst clientY: Int
+    open konst pageX: Int
+    open konst pageY: Int
+    open konst region: String?
 }
 
 public external abstract class TouchList : ItemArrayLike<Touch>, JsAny {
@@ -5758,19 +5758,19 @@ internal fun getMethodImplForTouchList(obj: TouchList, index: Int): Touch? { js(
 public operator fun TouchList.get(index: Int): Touch? = getMethodImplForTouchList(this, index)
 
 public external open class TouchEvent : UIEvent, JsAny {
-    open val touches: TouchList
-    open val targetTouches: TouchList
-    open val changedTouches: TouchList
-    open val altKey: Boolean
-    open val metaKey: Boolean
-    open val ctrlKey: Boolean
-    open val shiftKey: Boolean
+    open konst touches: TouchList
+    open konst targetTouches: TouchList
+    open konst changedTouches: TouchList
+    open konst altKey: Boolean
+    open konst metaKey: Boolean
+    open konst ctrlKey: Boolean
+    open konst shiftKey: Boolean
 
     companion object {
-        val NONE: Short
-        val CAPTURING_PHASE: Short
-        val AT_TARGET: Short
-        val BUBBLING_PHASE: Short
+        konst NONE: Short
+        konst CAPTURING_PHASE: Short
+        konst AT_TARGET: Short
+        konst BUBBLING_PHASE: Short
     }
 }
 
@@ -5803,7 +5803,7 @@ public external open class Image(width: Int = definedExternally, height: Int = d
     override var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
     override var onfocus: ((FocusEvent) -> JsAny?)?
     override var oninput: ((InputEvent) -> JsAny?)?
-    override var oninvalid: ((Event) -> JsAny?)?
+    override var oninkonstid: ((Event) -> JsAny?)?
     override var onkeydown: ((KeyboardEvent) -> JsAny?)?
     override var onkeypress: ((KeyboardEvent) -> JsAny?)?
     override var onkeyup: ((KeyboardEvent) -> JsAny?)?
@@ -5853,15 +5853,15 @@ public external open class Image(width: Int = definedExternally, height: Int = d
     override var oncut: ((ClipboardEvent) -> JsAny?)?
     override var onpaste: ((ClipboardEvent) -> JsAny?)?
     override var contentEditable: String
-    override val isContentEditable: Boolean
-    override val style: CSSStyleDeclaration
-    override val children: HTMLCollection
-    override val firstElementChild: Element?
-    override val lastElementChild: Element?
-    override val childElementCount: Int
-    override val previousElementSibling: Element?
-    override val nextElementSibling: Element?
-    override val assignedSlot: HTMLSlotElement?
+    override konst isContentEditable: Boolean
+    override konst style: CSSStyleDeclaration
+    override konst children: HTMLCollection
+    override konst firstElementChild: Element?
+    override konst lastElementChild: Element?
+    override konst childElementCount: Int
+    override konst previousElementSibling: Element?
+    override konst nextElementSibling: Element?
+    override konst assignedSlot: HTMLSlotElement?
     override fun prepend(vararg nodes: JsAny?)
     override fun append(vararg nodes: JsAny?)
     override fun querySelector(selectors: String): Element?
@@ -5876,24 +5876,24 @@ public external open class Image(width: Int = definedExternally, height: Int = d
     override fun convertPointFromNode(point: DOMPointInit, from: JsAny?, options: ConvertCoordinateOptions /* = definedExternally */): DOMPoint
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -5923,7 +5923,7 @@ public external open class Audio(src: String = definedExternally) : HTMLAudioEle
     override var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
     override var onfocus: ((FocusEvent) -> JsAny?)?
     override var oninput: ((InputEvent) -> JsAny?)?
-    override var oninvalid: ((Event) -> JsAny?)?
+    override var oninkonstid: ((Event) -> JsAny?)?
     override var onkeydown: ((KeyboardEvent) -> JsAny?)?
     override var onkeypress: ((KeyboardEvent) -> JsAny?)?
     override var onkeyup: ((KeyboardEvent) -> JsAny?)?
@@ -5973,15 +5973,15 @@ public external open class Audio(src: String = definedExternally) : HTMLAudioEle
     override var oncut: ((ClipboardEvent) -> JsAny?)?
     override var onpaste: ((ClipboardEvent) -> JsAny?)?
     override var contentEditable: String
-    override val isContentEditable: Boolean
-    override val style: CSSStyleDeclaration
-    override val children: HTMLCollection
-    override val firstElementChild: Element?
-    override val lastElementChild: Element?
-    override val childElementCount: Int
-    override val previousElementSibling: Element?
-    override val nextElementSibling: Element?
-    override val assignedSlot: HTMLSlotElement?
+    override konst isContentEditable: Boolean
+    override konst style: CSSStyleDeclaration
+    override konst children: HTMLCollection
+    override konst firstElementChild: Element?
+    override konst lastElementChild: Element?
+    override konst childElementCount: Int
+    override konst previousElementSibling: Element?
+    override konst nextElementSibling: Element?
+    override konst assignedSlot: HTMLSlotElement?
     override fun prepend(vararg nodes: JsAny?)
     override fun append(vararg nodes: JsAny?)
     override fun querySelector(selectors: String): Element?
@@ -5996,40 +5996,40 @@ public external open class Audio(src: String = definedExternally) : HTMLAudioEle
     override fun convertPointFromNode(point: DOMPointInit, from: JsAny?, options: ConvertCoordinateOptions /* = definedExternally */): DOMPoint
 
     companion object {
-        val NETWORK_EMPTY: Short
-        val NETWORK_IDLE: Short
-        val NETWORK_LOADING: Short
-        val NETWORK_NO_SOURCE: Short
-        val HAVE_NOTHING: Short
-        val HAVE_METADATA: Short
-        val HAVE_CURRENT_DATA: Short
-        val HAVE_FUTURE_DATA: Short
-        val HAVE_ENOUGH_DATA: Short
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst NETWORK_EMPTY: Short
+        konst NETWORK_IDLE: Short
+        konst NETWORK_LOADING: Short
+        konst NETWORK_NO_SOURCE: Short
+        konst HAVE_NOTHING: Short
+        konst HAVE_METADATA: Short
+        konst HAVE_CURRENT_DATA: Short
+        konst HAVE_FUTURE_DATA: Short
+        konst HAVE_ENOUGH_DATA: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
 /**
  * Exposes the JavaScript [Option](https://developer.mozilla.org/en/docs/Web/API/Option) to Kotlin
  */
-public external open class Option(text: String = definedExternally, value: String = definedExternally, defaultSelected: Boolean = definedExternally, selected: Boolean = definedExternally) : HTMLOptionElement, JsAny {
+public external open class Option(text: String = definedExternally, konstue: String = definedExternally, defaultSelected: Boolean = definedExternally, selected: Boolean = definedExternally) : HTMLOptionElement, JsAny {
     override var onabort: ((Event) -> JsAny?)?
     override var onblur: ((FocusEvent) -> JsAny?)?
     override var oncancel: ((Event) -> JsAny?)?
@@ -6055,7 +6055,7 @@ public external open class Option(text: String = definedExternally, value: Strin
     override var onerror: ((JsAny?, String, Int, Int, JsAny?) -> JsAny?)?
     override var onfocus: ((FocusEvent) -> JsAny?)?
     override var oninput: ((InputEvent) -> JsAny?)?
-    override var oninvalid: ((Event) -> JsAny?)?
+    override var oninkonstid: ((Event) -> JsAny?)?
     override var onkeydown: ((KeyboardEvent) -> JsAny?)?
     override var onkeypress: ((KeyboardEvent) -> JsAny?)?
     override var onkeyup: ((KeyboardEvent) -> JsAny?)?
@@ -6105,15 +6105,15 @@ public external open class Option(text: String = definedExternally, value: Strin
     override var oncut: ((ClipboardEvent) -> JsAny?)?
     override var onpaste: ((ClipboardEvent) -> JsAny?)?
     override var contentEditable: String
-    override val isContentEditable: Boolean
-    override val style: CSSStyleDeclaration
-    override val children: HTMLCollection
-    override val firstElementChild: Element?
-    override val lastElementChild: Element?
-    override val childElementCount: Int
-    override val previousElementSibling: Element?
-    override val nextElementSibling: Element?
-    override val assignedSlot: HTMLSlotElement?
+    override konst isContentEditable: Boolean
+    override konst style: CSSStyleDeclaration
+    override konst children: HTMLCollection
+    override konst firstElementChild: Element?
+    override konst lastElementChild: Element?
+    override konst childElementCount: Int
+    override konst previousElementSibling: Element?
+    override konst nextElementSibling: Element?
+    override konst assignedSlot: HTMLSlotElement?
     override fun prepend(vararg nodes: JsAny?)
     override fun append(vararg nodes: JsAny?)
     override fun querySelector(selectors: String): Element?
@@ -6128,24 +6128,24 @@ public external open class Option(text: String = definedExternally, value: Strin
     override fun convertPointFromNode(point: DOMPointInit, from: JsAny?, options: ConvertCoordinateOptions /* = definedExternally */): DOMPoint
 
     companion object {
-        val ELEMENT_NODE: Short
-        val ATTRIBUTE_NODE: Short
-        val TEXT_NODE: Short
-        val CDATA_SECTION_NODE: Short
-        val ENTITY_REFERENCE_NODE: Short
-        val ENTITY_NODE: Short
-        val PROCESSING_INSTRUCTION_NODE: Short
-        val COMMENT_NODE: Short
-        val DOCUMENT_NODE: Short
-        val DOCUMENT_TYPE_NODE: Short
-        val DOCUMENT_FRAGMENT_NODE: Short
-        val NOTATION_NODE: Short
-        val DOCUMENT_POSITION_DISCONNECTED: Short
-        val DOCUMENT_POSITION_PRECEDING: Short
-        val DOCUMENT_POSITION_FOLLOWING: Short
-        val DOCUMENT_POSITION_CONTAINS: Short
-        val DOCUMENT_POSITION_CONTAINED_BY: Short
-        val DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
+        konst ELEMENT_NODE: Short
+        konst ATTRIBUTE_NODE: Short
+        konst TEXT_NODE: Short
+        konst CDATA_SECTION_NODE: Short
+        konst ENTITY_REFERENCE_NODE: Short
+        konst ENTITY_NODE: Short
+        konst PROCESSING_INSTRUCTION_NODE: Short
+        konst COMMENT_NODE: Short
+        konst DOCUMENT_NODE: Short
+        konst DOCUMENT_TYPE_NODE: Short
+        konst DOCUMENT_FRAGMENT_NODE: Short
+        konst NOTATION_NODE: Short
+        konst DOCUMENT_POSITION_DISCONNECTED: Short
+        konst DOCUMENT_POSITION_PRECEDING: Short
+        konst DOCUMENT_POSITION_FOLLOWING: Short
+        konst DOCUMENT_POSITION_CONTAINS: Short
+        konst DOCUMENT_POSITION_CONTAINED_BY: Short
+        konst DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC: Short
     }
 }
 
@@ -6180,11 +6180,11 @@ public external interface DocumentReadyState : JsAny {
     companion object
 }
 
-public inline val DocumentReadyState.Companion.LOADING: DocumentReadyState get() = "loading".toJsString().unsafeCast<DocumentReadyState>()
+public inline konst DocumentReadyState.Companion.LOADING: DocumentReadyState get() = "loading".toJsString().unsafeCast<DocumentReadyState>()
 
-public inline val DocumentReadyState.Companion.INTERACTIVE: DocumentReadyState get() = "interactive".toJsString().unsafeCast<DocumentReadyState>()
+public inline konst DocumentReadyState.Companion.INTERACTIVE: DocumentReadyState get() = "interactive".toJsString().unsafeCast<DocumentReadyState>()
 
-public inline val DocumentReadyState.Companion.COMPLETE: DocumentReadyState get() = "complete".toJsString().unsafeCast<DocumentReadyState>()
+public inline konst DocumentReadyState.Companion.COMPLETE: DocumentReadyState get() = "complete".toJsString().unsafeCast<DocumentReadyState>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6193,11 +6193,11 @@ public external interface CanPlayTypeResult : JsAny {
     companion object
 }
 
-public inline val CanPlayTypeResult.Companion.EMPTY: CanPlayTypeResult get() = "".toJsString().unsafeCast<CanPlayTypeResult>()
+public inline konst CanPlayTypeResult.Companion.EMPTY: CanPlayTypeResult get() = "".toJsString().unsafeCast<CanPlayTypeResult>()
 
-public inline val CanPlayTypeResult.Companion.MAYBE: CanPlayTypeResult get() = "maybe".toJsString().unsafeCast<CanPlayTypeResult>()
+public inline konst CanPlayTypeResult.Companion.MAYBE: CanPlayTypeResult get() = "maybe".toJsString().unsafeCast<CanPlayTypeResult>()
 
-public inline val CanPlayTypeResult.Companion.PROBABLY: CanPlayTypeResult get() = "probably".toJsString().unsafeCast<CanPlayTypeResult>()
+public inline konst CanPlayTypeResult.Companion.PROBABLY: CanPlayTypeResult get() = "probably".toJsString().unsafeCast<CanPlayTypeResult>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6206,11 +6206,11 @@ public external interface TextTrackMode : JsAny {
     companion object
 }
 
-public inline val TextTrackMode.Companion.DISABLED: TextTrackMode get() = "disabled".toJsString().unsafeCast<TextTrackMode>()
+public inline konst TextTrackMode.Companion.DISABLED: TextTrackMode get() = "disabled".toJsString().unsafeCast<TextTrackMode>()
 
-public inline val TextTrackMode.Companion.HIDDEN: TextTrackMode get() = "hidden".toJsString().unsafeCast<TextTrackMode>()
+public inline konst TextTrackMode.Companion.HIDDEN: TextTrackMode get() = "hidden".toJsString().unsafeCast<TextTrackMode>()
 
-public inline val TextTrackMode.Companion.SHOWING: TextTrackMode get() = "showing".toJsString().unsafeCast<TextTrackMode>()
+public inline konst TextTrackMode.Companion.SHOWING: TextTrackMode get() = "showing".toJsString().unsafeCast<TextTrackMode>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6219,15 +6219,15 @@ public external interface TextTrackKind : JsAny {
     companion object
 }
 
-public inline val TextTrackKind.Companion.SUBTITLES: TextTrackKind get() = "subtitles".toJsString().unsafeCast<TextTrackKind>()
+public inline konst TextTrackKind.Companion.SUBTITLES: TextTrackKind get() = "subtitles".toJsString().unsafeCast<TextTrackKind>()
 
-public inline val TextTrackKind.Companion.CAPTIONS: TextTrackKind get() = "captions".toJsString().unsafeCast<TextTrackKind>()
+public inline konst TextTrackKind.Companion.CAPTIONS: TextTrackKind get() = "captions".toJsString().unsafeCast<TextTrackKind>()
 
-public inline val TextTrackKind.Companion.DESCRIPTIONS: TextTrackKind get() = "descriptions".toJsString().unsafeCast<TextTrackKind>()
+public inline konst TextTrackKind.Companion.DESCRIPTIONS: TextTrackKind get() = "descriptions".toJsString().unsafeCast<TextTrackKind>()
 
-public inline val TextTrackKind.Companion.CHAPTERS: TextTrackKind get() = "chapters".toJsString().unsafeCast<TextTrackKind>()
+public inline konst TextTrackKind.Companion.CHAPTERS: TextTrackKind get() = "chapters".toJsString().unsafeCast<TextTrackKind>()
 
-public inline val TextTrackKind.Companion.METADATA: TextTrackKind get() = "metadata".toJsString().unsafeCast<TextTrackKind>()
+public inline konst TextTrackKind.Companion.METADATA: TextTrackKind get() = "metadata".toJsString().unsafeCast<TextTrackKind>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6236,13 +6236,13 @@ public external interface SelectionMode : JsAny {
     companion object
 }
 
-public inline val SelectionMode.Companion.SELECT: SelectionMode get() = "select".toJsString().unsafeCast<SelectionMode>()
+public inline konst SelectionMode.Companion.SELECT: SelectionMode get() = "select".toJsString().unsafeCast<SelectionMode>()
 
-public inline val SelectionMode.Companion.START: SelectionMode get() = "start".toJsString().unsafeCast<SelectionMode>()
+public inline konst SelectionMode.Companion.START: SelectionMode get() = "start".toJsString().unsafeCast<SelectionMode>()
 
-public inline val SelectionMode.Companion.END: SelectionMode get() = "end".toJsString().unsafeCast<SelectionMode>()
+public inline konst SelectionMode.Companion.END: SelectionMode get() = "end".toJsString().unsafeCast<SelectionMode>()
 
-public inline val SelectionMode.Companion.PRESERVE: SelectionMode get() = "preserve".toJsString().unsafeCast<SelectionMode>()
+public inline konst SelectionMode.Companion.PRESERVE: SelectionMode get() = "preserve".toJsString().unsafeCast<SelectionMode>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6251,9 +6251,9 @@ public external interface CanvasFillRule : JsAny {
     companion object
 }
 
-public inline val CanvasFillRule.Companion.NONZERO: CanvasFillRule get() = "nonzero".toJsString().unsafeCast<CanvasFillRule>()
+public inline konst CanvasFillRule.Companion.NONZERO: CanvasFillRule get() = "nonzero".toJsString().unsafeCast<CanvasFillRule>()
 
-public inline val CanvasFillRule.Companion.EVENODD: CanvasFillRule get() = "evenodd".toJsString().unsafeCast<CanvasFillRule>()
+public inline konst CanvasFillRule.Companion.EVENODD: CanvasFillRule get() = "evenodd".toJsString().unsafeCast<CanvasFillRule>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6262,11 +6262,11 @@ public external interface ImageSmoothingQuality : JsAny {
     companion object
 }
 
-public inline val ImageSmoothingQuality.Companion.LOW: ImageSmoothingQuality get() = "low".toJsString().unsafeCast<ImageSmoothingQuality>()
+public inline konst ImageSmoothingQuality.Companion.LOW: ImageSmoothingQuality get() = "low".toJsString().unsafeCast<ImageSmoothingQuality>()
 
-public inline val ImageSmoothingQuality.Companion.MEDIUM: ImageSmoothingQuality get() = "medium".toJsString().unsafeCast<ImageSmoothingQuality>()
+public inline konst ImageSmoothingQuality.Companion.MEDIUM: ImageSmoothingQuality get() = "medium".toJsString().unsafeCast<ImageSmoothingQuality>()
 
-public inline val ImageSmoothingQuality.Companion.HIGH: ImageSmoothingQuality get() = "high".toJsString().unsafeCast<ImageSmoothingQuality>()
+public inline konst ImageSmoothingQuality.Companion.HIGH: ImageSmoothingQuality get() = "high".toJsString().unsafeCast<ImageSmoothingQuality>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6275,11 +6275,11 @@ public external interface CanvasLineCap : JsAny {
     companion object
 }
 
-public inline val CanvasLineCap.Companion.BUTT: CanvasLineCap get() = "butt".toJsString().unsafeCast<CanvasLineCap>()
+public inline konst CanvasLineCap.Companion.BUTT: CanvasLineCap get() = "butt".toJsString().unsafeCast<CanvasLineCap>()
 
-public inline val CanvasLineCap.Companion.ROUND: CanvasLineCap get() = "round".toJsString().unsafeCast<CanvasLineCap>()
+public inline konst CanvasLineCap.Companion.ROUND: CanvasLineCap get() = "round".toJsString().unsafeCast<CanvasLineCap>()
 
-public inline val CanvasLineCap.Companion.SQUARE: CanvasLineCap get() = "square".toJsString().unsafeCast<CanvasLineCap>()
+public inline konst CanvasLineCap.Companion.SQUARE: CanvasLineCap get() = "square".toJsString().unsafeCast<CanvasLineCap>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6288,11 +6288,11 @@ public external interface CanvasLineJoin : JsAny {
     companion object
 }
 
-public inline val CanvasLineJoin.Companion.ROUND: CanvasLineJoin get() = "round".toJsString().unsafeCast<CanvasLineJoin>()
+public inline konst CanvasLineJoin.Companion.ROUND: CanvasLineJoin get() = "round".toJsString().unsafeCast<CanvasLineJoin>()
 
-public inline val CanvasLineJoin.Companion.BEVEL: CanvasLineJoin get() = "bevel".toJsString().unsafeCast<CanvasLineJoin>()
+public inline konst CanvasLineJoin.Companion.BEVEL: CanvasLineJoin get() = "bevel".toJsString().unsafeCast<CanvasLineJoin>()
 
-public inline val CanvasLineJoin.Companion.MITER: CanvasLineJoin get() = "miter".toJsString().unsafeCast<CanvasLineJoin>()
+public inline konst CanvasLineJoin.Companion.MITER: CanvasLineJoin get() = "miter".toJsString().unsafeCast<CanvasLineJoin>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6301,15 +6301,15 @@ public external interface CanvasTextAlign : JsAny {
     companion object
 }
 
-public inline val CanvasTextAlign.Companion.START: CanvasTextAlign get() = "start".toJsString().unsafeCast<CanvasTextAlign>()
+public inline konst CanvasTextAlign.Companion.START: CanvasTextAlign get() = "start".toJsString().unsafeCast<CanvasTextAlign>()
 
-public inline val CanvasTextAlign.Companion.END: CanvasTextAlign get() = "end".toJsString().unsafeCast<CanvasTextAlign>()
+public inline konst CanvasTextAlign.Companion.END: CanvasTextAlign get() = "end".toJsString().unsafeCast<CanvasTextAlign>()
 
-public inline val CanvasTextAlign.Companion.LEFT: CanvasTextAlign get() = "left".toJsString().unsafeCast<CanvasTextAlign>()
+public inline konst CanvasTextAlign.Companion.LEFT: CanvasTextAlign get() = "left".toJsString().unsafeCast<CanvasTextAlign>()
 
-public inline val CanvasTextAlign.Companion.RIGHT: CanvasTextAlign get() = "right".toJsString().unsafeCast<CanvasTextAlign>()
+public inline konst CanvasTextAlign.Companion.RIGHT: CanvasTextAlign get() = "right".toJsString().unsafeCast<CanvasTextAlign>()
 
-public inline val CanvasTextAlign.Companion.CENTER: CanvasTextAlign get() = "center".toJsString().unsafeCast<CanvasTextAlign>()
+public inline konst CanvasTextAlign.Companion.CENTER: CanvasTextAlign get() = "center".toJsString().unsafeCast<CanvasTextAlign>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6318,17 +6318,17 @@ public external interface CanvasTextBaseline : JsAny {
     companion object
 }
 
-public inline val CanvasTextBaseline.Companion.TOP: CanvasTextBaseline get() = "top".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.TOP: CanvasTextBaseline get() = "top".toJsString().unsafeCast<CanvasTextBaseline>()
 
-public inline val CanvasTextBaseline.Companion.HANGING: CanvasTextBaseline get() = "hanging".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.HANGING: CanvasTextBaseline get() = "hanging".toJsString().unsafeCast<CanvasTextBaseline>()
 
-public inline val CanvasTextBaseline.Companion.MIDDLE: CanvasTextBaseline get() = "middle".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.MIDDLE: CanvasTextBaseline get() = "middle".toJsString().unsafeCast<CanvasTextBaseline>()
 
-public inline val CanvasTextBaseline.Companion.ALPHABETIC: CanvasTextBaseline get() = "alphabetic".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.ALPHABETIC: CanvasTextBaseline get() = "alphabetic".toJsString().unsafeCast<CanvasTextBaseline>()
 
-public inline val CanvasTextBaseline.Companion.IDEOGRAPHIC: CanvasTextBaseline get() = "ideographic".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.IDEOGRAPHIC: CanvasTextBaseline get() = "ideographic".toJsString().unsafeCast<CanvasTextBaseline>()
 
-public inline val CanvasTextBaseline.Companion.BOTTOM: CanvasTextBaseline get() = "bottom".toJsString().unsafeCast<CanvasTextBaseline>()
+public inline konst CanvasTextBaseline.Companion.BOTTOM: CanvasTextBaseline get() = "bottom".toJsString().unsafeCast<CanvasTextBaseline>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6337,11 +6337,11 @@ public external interface CanvasDirection : JsAny {
     companion object
 }
 
-public inline val CanvasDirection.Companion.LTR: CanvasDirection get() = "ltr".toJsString().unsafeCast<CanvasDirection>()
+public inline konst CanvasDirection.Companion.LTR: CanvasDirection get() = "ltr".toJsString().unsafeCast<CanvasDirection>()
 
-public inline val CanvasDirection.Companion.RTL: CanvasDirection get() = "rtl".toJsString().unsafeCast<CanvasDirection>()
+public inline konst CanvasDirection.Companion.RTL: CanvasDirection get() = "rtl".toJsString().unsafeCast<CanvasDirection>()
 
-public inline val CanvasDirection.Companion.INHERIT: CanvasDirection get() = "inherit".toJsString().unsafeCast<CanvasDirection>()
+public inline konst CanvasDirection.Companion.INHERIT: CanvasDirection get() = "inherit".toJsString().unsafeCast<CanvasDirection>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6350,9 +6350,9 @@ public external interface ScrollRestoration : JsAny {
     companion object
 }
 
-public inline val ScrollRestoration.Companion.AUTO: ScrollRestoration get() = "auto".toJsString().unsafeCast<ScrollRestoration>()
+public inline konst ScrollRestoration.Companion.AUTO: ScrollRestoration get() = "auto".toJsString().unsafeCast<ScrollRestoration>()
 
-public inline val ScrollRestoration.Companion.MANUAL: ScrollRestoration get() = "manual".toJsString().unsafeCast<ScrollRestoration>()
+public inline konst ScrollRestoration.Companion.MANUAL: ScrollRestoration get() = "manual".toJsString().unsafeCast<ScrollRestoration>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6361,9 +6361,9 @@ public external interface ImageOrientation : JsAny {
     companion object
 }
 
-public inline val ImageOrientation.Companion.NONE: ImageOrientation get() = "none".toJsString().unsafeCast<ImageOrientation>()
+public inline konst ImageOrientation.Companion.NONE: ImageOrientation get() = "none".toJsString().unsafeCast<ImageOrientation>()
 
-public inline val ImageOrientation.Companion.FLIPY: ImageOrientation get() = "flipY".toJsString().unsafeCast<ImageOrientation>()
+public inline konst ImageOrientation.Companion.FLIPY: ImageOrientation get() = "flipY".toJsString().unsafeCast<ImageOrientation>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6372,11 +6372,11 @@ public external interface PremultiplyAlpha : JsAny {
     companion object
 }
 
-public inline val PremultiplyAlpha.Companion.NONE: PremultiplyAlpha get() = "none".toJsString().unsafeCast<PremultiplyAlpha>()
+public inline konst PremultiplyAlpha.Companion.NONE: PremultiplyAlpha get() = "none".toJsString().unsafeCast<PremultiplyAlpha>()
 
-public inline val PremultiplyAlpha.Companion.PREMULTIPLY: PremultiplyAlpha get() = "premultiply".toJsString().unsafeCast<PremultiplyAlpha>()
+public inline konst PremultiplyAlpha.Companion.PREMULTIPLY: PremultiplyAlpha get() = "premultiply".toJsString().unsafeCast<PremultiplyAlpha>()
 
-public inline val PremultiplyAlpha.Companion.DEFAULT: PremultiplyAlpha get() = "default".toJsString().unsafeCast<PremultiplyAlpha>()
+public inline konst PremultiplyAlpha.Companion.DEFAULT: PremultiplyAlpha get() = "default".toJsString().unsafeCast<PremultiplyAlpha>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6385,9 +6385,9 @@ public external interface ColorSpaceConversion : JsAny {
     companion object
 }
 
-public inline val ColorSpaceConversion.Companion.NONE: ColorSpaceConversion get() = "none".toJsString().unsafeCast<ColorSpaceConversion>()
+public inline konst ColorSpaceConversion.Companion.NONE: ColorSpaceConversion get() = "none".toJsString().unsafeCast<ColorSpaceConversion>()
 
-public inline val ColorSpaceConversion.Companion.DEFAULT: ColorSpaceConversion get() = "default".toJsString().unsafeCast<ColorSpaceConversion>()
+public inline konst ColorSpaceConversion.Companion.DEFAULT: ColorSpaceConversion get() = "default".toJsString().unsafeCast<ColorSpaceConversion>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6396,13 +6396,13 @@ public external interface ResizeQuality : JsAny {
     companion object
 }
 
-public inline val ResizeQuality.Companion.PIXELATED: ResizeQuality get() = "pixelated".toJsString().unsafeCast<ResizeQuality>()
+public inline konst ResizeQuality.Companion.PIXELATED: ResizeQuality get() = "pixelated".toJsString().unsafeCast<ResizeQuality>()
 
-public inline val ResizeQuality.Companion.LOW: ResizeQuality get() = "low".toJsString().unsafeCast<ResizeQuality>()
+public inline konst ResizeQuality.Companion.LOW: ResizeQuality get() = "low".toJsString().unsafeCast<ResizeQuality>()
 
-public inline val ResizeQuality.Companion.MEDIUM: ResizeQuality get() = "medium".toJsString().unsafeCast<ResizeQuality>()
+public inline konst ResizeQuality.Companion.MEDIUM: ResizeQuality get() = "medium".toJsString().unsafeCast<ResizeQuality>()
 
-public inline val ResizeQuality.Companion.HIGH: ResizeQuality get() = "high".toJsString().unsafeCast<ResizeQuality>()
+public inline konst ResizeQuality.Companion.HIGH: ResizeQuality get() = "high".toJsString().unsafeCast<ResizeQuality>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6411,9 +6411,9 @@ public external interface BinaryType : JsAny {
     companion object
 }
 
-public inline val BinaryType.Companion.BLOB: BinaryType get() = "blob".toJsString().unsafeCast<BinaryType>()
+public inline konst BinaryType.Companion.BLOB: BinaryType get() = "blob".toJsString().unsafeCast<BinaryType>()
 
-public inline val BinaryType.Companion.ARRAYBUFFER: BinaryType get() = "arraybuffer".toJsString().unsafeCast<BinaryType>()
+public inline konst BinaryType.Companion.ARRAYBUFFER: BinaryType get() = "arraybuffer".toJsString().unsafeCast<BinaryType>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6422,9 +6422,9 @@ public external interface WorkerType : JsAny {
     companion object
 }
 
-public inline val WorkerType.Companion.CLASSIC: WorkerType get() = "classic".toJsString().unsafeCast<WorkerType>()
+public inline konst WorkerType.Companion.CLASSIC: WorkerType get() = "classic".toJsString().unsafeCast<WorkerType>()
 
-public inline val WorkerType.Companion.MODULE: WorkerType get() = "module".toJsString().unsafeCast<WorkerType>()
+public inline konst WorkerType.Companion.MODULE: WorkerType get() = "module".toJsString().unsafeCast<WorkerType>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6433,9 +6433,9 @@ public external interface ShadowRootMode : JsAny {
     companion object
 }
 
-public inline val ShadowRootMode.Companion.OPEN: ShadowRootMode get() = "open".toJsString().unsafeCast<ShadowRootMode>()
+public inline konst ShadowRootMode.Companion.OPEN: ShadowRootMode get() = "open".toJsString().unsafeCast<ShadowRootMode>()
 
-public inline val ShadowRootMode.Companion.CLOSED: ShadowRootMode get() = "closed".toJsString().unsafeCast<ShadowRootMode>()
+public inline konst ShadowRootMode.Companion.CLOSED: ShadowRootMode get() = "closed".toJsString().unsafeCast<ShadowRootMode>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6444,11 +6444,11 @@ public external interface ScrollBehavior : JsAny {
     companion object
 }
 
-public inline val ScrollBehavior.Companion.AUTO: ScrollBehavior get() = "auto".toJsString().unsafeCast<ScrollBehavior>()
+public inline konst ScrollBehavior.Companion.AUTO: ScrollBehavior get() = "auto".toJsString().unsafeCast<ScrollBehavior>()
 
-public inline val ScrollBehavior.Companion.INSTANT: ScrollBehavior get() = "instant".toJsString().unsafeCast<ScrollBehavior>()
+public inline konst ScrollBehavior.Companion.INSTANT: ScrollBehavior get() = "instant".toJsString().unsafeCast<ScrollBehavior>()
 
-public inline val ScrollBehavior.Companion.SMOOTH: ScrollBehavior get() = "smooth".toJsString().unsafeCast<ScrollBehavior>()
+public inline konst ScrollBehavior.Companion.SMOOTH: ScrollBehavior get() = "smooth".toJsString().unsafeCast<ScrollBehavior>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6457,13 +6457,13 @@ public external interface ScrollLogicalPosition : JsAny {
     companion object
 }
 
-public inline val ScrollLogicalPosition.Companion.START: ScrollLogicalPosition get() = "start".toJsString().unsafeCast<ScrollLogicalPosition>()
+public inline konst ScrollLogicalPosition.Companion.START: ScrollLogicalPosition get() = "start".toJsString().unsafeCast<ScrollLogicalPosition>()
 
-public inline val ScrollLogicalPosition.Companion.CENTER: ScrollLogicalPosition get() = "center".toJsString().unsafeCast<ScrollLogicalPosition>()
+public inline konst ScrollLogicalPosition.Companion.CENTER: ScrollLogicalPosition get() = "center".toJsString().unsafeCast<ScrollLogicalPosition>()
 
-public inline val ScrollLogicalPosition.Companion.END: ScrollLogicalPosition get() = "end".toJsString().unsafeCast<ScrollLogicalPosition>()
+public inline konst ScrollLogicalPosition.Companion.END: ScrollLogicalPosition get() = "end".toJsString().unsafeCast<ScrollLogicalPosition>()
 
-public inline val ScrollLogicalPosition.Companion.NEAREST: ScrollLogicalPosition get() = "nearest".toJsString().unsafeCast<ScrollLogicalPosition>()
+public inline konst ScrollLogicalPosition.Companion.NEAREST: ScrollLogicalPosition get() = "nearest".toJsString().unsafeCast<ScrollLogicalPosition>()
 
 /* please, don't implement this interface! */
 @JsName("null")
@@ -6472,10 +6472,10 @@ public external interface CSSBoxType : JsAny {
     companion object
 }
 
-public inline val CSSBoxType.Companion.MARGIN: CSSBoxType get() = "margin".toJsString().unsafeCast<CSSBoxType>()
+public inline konst CSSBoxType.Companion.MARGIN: CSSBoxType get() = "margin".toJsString().unsafeCast<CSSBoxType>()
 
-public inline val CSSBoxType.Companion.BORDER: CSSBoxType get() = "border".toJsString().unsafeCast<CSSBoxType>()
+public inline konst CSSBoxType.Companion.BORDER: CSSBoxType get() = "border".toJsString().unsafeCast<CSSBoxType>()
 
-public inline val CSSBoxType.Companion.PADDING: CSSBoxType get() = "padding".toJsString().unsafeCast<CSSBoxType>()
+public inline konst CSSBoxType.Companion.PADDING: CSSBoxType get() = "padding".toJsString().unsafeCast<CSSBoxType>()
 
-public inline val CSSBoxType.Companion.CONTENT: CSSBoxType get() = "content".toJsString().unsafeCast<CSSBoxType>()
+public inline konst CSSBoxType.Companion.CONTENT: CSSBoxType get() = "content".toJsString().unsafeCast<CSSBoxType>()

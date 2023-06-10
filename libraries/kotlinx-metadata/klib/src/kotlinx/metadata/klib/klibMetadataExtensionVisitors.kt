@@ -17,11 +17,11 @@ abstract class KlibFunctionExtensionVisitor : KmFunctionExtensionVisitor {
 
     abstract fun visitFile(file: KlibSourceFile)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibFunctionExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibFunctionExtensionVisitor::class)
     }
 }
 
@@ -35,11 +35,11 @@ abstract class KlibClassExtensionVisitor : KmClassExtensionVisitor {
 
     abstract fun visitEnumEntry(entry: KlibEnumEntry)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibClassExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibClassExtensionVisitor::class)
     }
 }
 
@@ -47,11 +47,11 @@ abstract class KlibTypeExtensionVisitor : KmTypeExtensionVisitor {
 
     abstract fun visitAnnotation(annotation: KmAnnotation)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibTypeExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibTypeExtensionVisitor::class)
     }
 }
 
@@ -67,13 +67,13 @@ abstract class KlibPropertyExtensionVisitor : KmPropertyExtensionVisitor {
 
     abstract fun visitUniqId(uniqId: UniqId)
 
-    abstract fun visitCompileTimeValue(value: KmAnnotationArgument)
+    abstract fun visitCompileTimeValue(konstue: KmAnnotationArgument)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibPropertyExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibPropertyExtensionVisitor::class)
     }
 }
 
@@ -83,11 +83,11 @@ abstract class KlibConstructorExtensionVisitor : KmConstructorExtensionVisitor {
 
     abstract fun visitUniqId(uniqId: UniqId)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibConstructorExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibConstructorExtensionVisitor::class)
     }
 }
 
@@ -97,11 +97,11 @@ abstract class KlibTypeParameterExtensionVisitor : KmTypeParameterExtensionVisit
 
     abstract fun visitUniqId(uniqId: UniqId)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibTypeParameterExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibTypeParameterExtensionVisitor::class)
     }
 }
 
@@ -109,11 +109,11 @@ abstract class KlibPackageExtensionVisitor : KmPackageExtensionVisitor {
 
     abstract fun visitFqName(name: String)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibPackageExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibPackageExtensionVisitor::class)
     }
 }
 
@@ -125,11 +125,11 @@ abstract class KlibModuleFragmentExtensionVisitor : KmModuleFragmentExtensionVis
 
     abstract fun visitClassName(className: ClassName)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibModuleFragmentExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibModuleFragmentExtensionVisitor::class)
     }
 }
 
@@ -137,11 +137,11 @@ abstract class KlibTypeAliasExtensionVisitor : KmTypeAliasExtensionVisitor {
 
     abstract fun visitUniqId(uniqId: UniqId)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibTypeAliasExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibTypeAliasExtensionVisitor::class)
     }
 }
 
@@ -149,10 +149,10 @@ abstract class KlibValueParameterExtensionVisitor : KmValueParameterExtensionVis
 
     abstract fun visitAnnotation(annotation: KmAnnotation)
 
-    override val type: KmExtensionType
+    override konst type: KmExtensionType
         get() = TYPE
 
     companion object {
-        val TYPE = KmExtensionType(KlibValueParameterExtensionVisitor::class)
+        konst TYPE = KmExtensionType(KlibValueParameterExtensionVisitor::class)
     }
 }

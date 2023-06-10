@@ -9,7 +9,7 @@ fun test(s: CharSequence): Int {
 }
 
 fun box(): String {
-    val test = test("abcd")
+    konst test = test("abcd")
     if (test != 1234) return "Fail: $test"
 
     return "OK"

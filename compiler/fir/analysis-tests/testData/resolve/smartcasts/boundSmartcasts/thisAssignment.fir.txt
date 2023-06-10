@@ -6,7 +6,7 @@ FILE: thisAssignment.kt
     public final fun R|kotlin/Any|.test(): R|kotlin/Unit| {
         when () {
             (this@R|/test| is R|A|) ->  {
-                lval a: R|kotlin/Any| = this@R|/test|
+                lkonst a: R|kotlin/Any| = this@R|/test|
                 R|<local>/a|.R|/A.foo|()
             }
         }

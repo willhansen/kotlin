@@ -21,13 +21,13 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class DeferredMethodVisitor(
-    val intermediate: MethodNode,
-    private val resultNode: () -> MethodVisitor
+    konst intermediate: MethodNode,
+    private konst resultNode: () -> MethodVisitor
 ) : MethodVisitor(Opcodes.API_VERSION, intermediate) {
 
     override fun visitEnd() {
         super.visitEnd()
-        val resultVisitor = resultNode()
+        konst resultVisitor = resultNode()
         intermediate.accept(resultVisitor)
     }
 }

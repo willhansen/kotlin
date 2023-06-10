@@ -20,29 +20,29 @@ object KtAssert {
 
     @JvmStatic
     @OptIn(ExperimentalContracts::class)
-    fun assertNotNull(message: String, value: Any?) {
+    fun assertNotNull(message: String, konstue: Any?) {
         contract {
-            returns() implies (value != null)
+            returns() implies (konstue != null)
         }
-        if (value == null) {
+        if (konstue == null) {
             fail(message)
         }
     }
 
     @JvmStatic
     @OptIn(ExperimentalContracts::class)
-    fun assertNull(message: String, value: Any?) {
+    fun assertNull(message: String, konstue: Any?) {
         contract {
-            returns() implies (value == null)
+            returns() implies (konstue == null)
         }
-        if (value != null) {
+        if (konstue != null) {
             fail(message)
         }
     }
 
     @JvmStatic
-    fun assertTrue(message: String, value: Boolean) {
-        if (!value) {
+    fun assertTrue(message: String, konstue: Boolean) {
+        if (!konstue) {
             fail(message)
         }
     }

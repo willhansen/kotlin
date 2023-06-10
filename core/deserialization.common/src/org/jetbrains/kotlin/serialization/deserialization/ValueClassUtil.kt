@@ -22,22 +22,22 @@ fun <T : SimpleTypeMarker> ProtoBuf.Class.loadValueClassRepresentation(
     typeOfPublicProperty: (Name) -> T?,
 ): ValueClassRepresentation<T>? {
     if (multiFieldValueClassUnderlyingNameCount > 0) {
-        val names = multiFieldValueClassUnderlyingNameList.map { nameResolver.getName(it) }
-        val typeIdCount = multiFieldValueClassUnderlyingTypeIdCount
-        val typeCount = multiFieldValueClassUnderlyingTypeCount
-        val types = when (typeIdCount to typeCount) {
+        konst names = multiFieldValueClassUnderlyingNameList.map { nameResolver.getName(it) }
+        konst typeIdCount = multiFieldValueClassUnderlyingTypeIdCount
+        konst typeCount = multiFieldValueClassUnderlyingTypeCount
+        konst types = when (typeIdCount to typeCount) {
             names.size to 0 -> multiFieldValueClassUnderlyingTypeIdList.map { typeTable[it] }
             0 to names.size -> multiFieldValueClassUnderlyingTypeList
-            else -> error("class ${nameResolver.getName(fqName)} has illegal multi-field value class representation")
+            else -> error("class ${nameResolver.getName(fqName)} has illegal multi-field konstue class representation")
         }.map(typeDeserializer)
         return MultiFieldValueClassRepresentation(names zip types)
     }
 
     if (hasInlineClassUnderlyingPropertyName()) {
-        val propertyName = nameResolver.getName(inlineClassUnderlyingPropertyName)
-        val propertyType = inlineClassUnderlyingType(typeTable)?.let(typeDeserializer)
+        konst propertyName = nameResolver.getName(inlineClassUnderlyingPropertyName)
+        konst propertyType = inlineClassUnderlyingType(typeTable)?.let(typeDeserializer)
             ?: typeOfPublicProperty(propertyName)
-            ?: error("cannot determine underlying type for value class ${nameResolver.getName(fqName)} with property $propertyName")
+            ?: error("cannot determine underlying type for konstue class ${nameResolver.getName(fqName)} with property $propertyName")
         return InlineClassRepresentation(propertyName, propertyType)
     }
 

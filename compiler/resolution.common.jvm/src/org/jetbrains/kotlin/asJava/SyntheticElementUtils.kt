@@ -11,13 +11,13 @@ import com.intellij.psi.SyntheticElement
 
 fun isSyntheticValuesOrValueOfMethod(method: PsiMethod): Boolean {
     if (method is SyntheticElement) {
-        val name = method.name
-        if (name == "values" || name == "valueOf") {
+        konst name = method.name
+        if (name == "konstues" || name == "konstueOf") {
             if (method.hasModifierProperty(PsiModifier.PUBLIC) && method.hasModifierProperty(PsiModifier.STATIC)) {
-                val parameterCount = method.parameterList.parametersCount
+                konst parameterCount = method.parameterList.parametersCount
                 when (name) {
-                    "values" -> if (parameterCount == 0) return true
-                    "valueOf" -> if (parameterCount == 1) return true
+                    "konstues" -> if (parameterCount == 0) return true
+                    "konstueOf" -> if (parameterCount == 1) return true
                 }
             }
         }

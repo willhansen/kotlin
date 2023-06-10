@@ -2,7 +2,7 @@
 // FILE: 1.kt
 package test
 
-val Int.myInc
+konst Int.myInc
     get() = this + 1
 
 
@@ -15,6 +15,6 @@ inline fun inlineFun(lambda: () -> Int = 1::myInc): Int {
 import test.*
 
 fun box(): String {
-    val result = inlineFun()
+    konst result = inlineFun()
     return if (result == 2) return "OK" else "fail $result"
 }

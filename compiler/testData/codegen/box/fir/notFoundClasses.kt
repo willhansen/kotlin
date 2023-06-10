@@ -15,7 +15,7 @@ public class B {
 // MODULE: main(lib2)
 // FILE: main.kt
 
-val a = B.getListOfA()
+konst a = B.getListOfA()
 
 fun box(): String {
     B.foo(emptyList())

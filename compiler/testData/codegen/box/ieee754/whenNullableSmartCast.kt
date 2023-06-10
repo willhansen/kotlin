@@ -1,7 +1,7 @@
 fun box(): String {
-    val nullValue: Any? = null
-    val nullDouble: Double? = null
-    val minusZero: Any = -0.0
+    konst nullValue: Any? = null
+    konst nullDouble: Double? = null
+    konst minusZero: Any = -0.0
     if (nullValue is Double?) {
         when (nullValue) {
             -0.0 -> {

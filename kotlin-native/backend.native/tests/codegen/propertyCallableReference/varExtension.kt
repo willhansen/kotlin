@@ -13,17 +13,17 @@ class A(y: Int) {
 
 var A.z: Int
     get() = this.x
-    set(value: Int) {
-        this.x = value
+    set(konstue: Int) {
+        this.x = konstue
     }
 
 @Test fun runTest() {
-    val p1 = A::z
-    val a = A(42)
+    konst p1 = A::z
+    konst a = A(42)
     p1.set(a, 117)
     println(a.x)
     println(p1.get(a))
-    val p2 = a::z
+    konst p2 = a::z
     p2.set(42)
     println(a.x)
     println(p2.get())

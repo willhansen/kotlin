@@ -53,7 +53,7 @@ public class StandaloneAnalysisAPISessionBuilder(
         setupIdeaStandaloneExecution()
     }
 
-    private val kotlinCoreProjectEnvironment: KotlinCoreProjectEnvironment =
+    private konst kotlinCoreProjectEnvironment: KotlinCoreProjectEnvironment =
         StandaloneProjectFactory.createProjectEnvironment(
             projectDisposable,
             applicationDisposable,
@@ -64,9 +64,9 @@ public class StandaloneAnalysisAPISessionBuilder(
         FirStandaloneServiceRegistrar.registerApplicationServices(kotlinCoreProjectEnvironment.environment.application)
     }
 
-    public val application: Application = kotlinCoreProjectEnvironment.environment.application
+    public konst application: Application = kotlinCoreProjectEnvironment.environment.application
 
-    public val project: Project = kotlinCoreProjectEnvironment.project
+    public konst project: Project = kotlinCoreProjectEnvironment.project
 
     private lateinit var projectStructureProvider: ProjectStructureProvider
 
@@ -81,7 +81,7 @@ public class StandaloneAnalysisAPISessionBuilder(
     public fun buildKtModuleProviderByCompilerConfiguration(
         compilerConfiguration: CompilerConfiguration,
     ) {
-        val project = kotlinCoreProjectEnvironment.project
+        konst project = kotlinCoreProjectEnvironment.project
         projectStructureProvider = buildKtModuleProviderByCompilerConfiguration(
             compilerConfiguration,
             project,
@@ -110,7 +110,7 @@ public class StandaloneAnalysisAPISessionBuilder(
         ktFiles: List<KtFile>,
         packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
     ) {
-        val project = kotlinCoreProjectEnvironment.project
+        konst project = kotlinCoreProjectEnvironment.project
         project.apply {
             FirStandaloneServiceRegistrar.registerProjectServices(project)
             FirStandaloneServiceRegistrar.registerProjectExtensionPoints(project)
@@ -150,7 +150,7 @@ public class StandaloneAnalysisAPISessionBuilder(
     }
 
     private fun registerPsiDeclarationFromBinaryModuleProvider() {
-        val ktModuleProviderImpl = projectStructureProvider as KtModuleProviderImpl
+        konst ktModuleProviderImpl = projectStructureProvider as KtModuleProviderImpl
         kotlinCoreProjectEnvironment.project.apply {
             registerService(
                 KotlinPsiDeclarationProviderFactory::class.java,
@@ -178,19 +178,19 @@ public class StandaloneAnalysisAPISessionBuilder(
     public fun build(
         withPsiDeclarationFromBinaryModuleProvider: Boolean = false,
     ): StandaloneAnalysisAPISession {
-        val ktModuleProviderImpl = projectStructureProvider as KtModuleProviderImpl
-        val modules = ktModuleProviderImpl.mainModules
-        val allSourceFiles = ktModuleProviderImpl.allSourceFiles()
+        konst ktModuleProviderImpl = projectStructureProvider as KtModuleProviderImpl
+        konst modules = ktModuleProviderImpl.mainModules
+        konst allSourceFiles = ktModuleProviderImpl.allSourceFiles()
         StandaloneProjectFactory.registerServicesForProjectEnvironment(
             kotlinCoreProjectEnvironment,
             projectStructureProvider,
             modules,
             allSourceFiles,
         )
-        val project = kotlinCoreProjectEnvironment.project
-        val ktFiles = allSourceFiles.filterIsInstance<KtFile>()
-        val libraryRoots = StandaloneProjectFactory.getAllBinaryRoots(modules, kotlinCoreProjectEnvironment)
-        val createPackagePartProvider =
+        konst project = kotlinCoreProjectEnvironment.project
+        konst ktFiles = allSourceFiles.filterIsInstance<KtFile>()
+        konst libraryRoots = StandaloneProjectFactory.getAllBinaryRoots(modules, kotlinCoreProjectEnvironment)
+        konst createPackagePartProvider =
             StandaloneProjectFactory.createPackagePartsProvider(
                 project,
                 libraryRoots,

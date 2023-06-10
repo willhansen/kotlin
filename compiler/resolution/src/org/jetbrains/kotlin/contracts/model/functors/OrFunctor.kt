@@ -36,25 +36,25 @@ class OrFunctor : AbstractBinaryFunctor() {
          with Returns(1) (note that they still *return* as guaranteed by AbstractSequentialBinaryFunctor).
          We will just ignore such clauses in order to make smartcasting robust while typing */
 
-        val leftTrue = left.filter { it.simpleEffect.isReturns { value.isTrue } }
-        val leftFalse = left.filter { it.simpleEffect.isReturns { value.isFalse } }
-        val rightTrue = right.filter { it.simpleEffect.isReturns { value.isTrue } }
-        val rightFalse = right.filter { it.simpleEffect.isReturns { value.isFalse } }
+        konst leftTrue = left.filter { it.simpleEffect.isReturns { konstue.isTrue } }
+        konst leftFalse = left.filter { it.simpleEffect.isReturns { konstue.isFalse } }
+        konst rightTrue = right.filter { it.simpleEffect.isReturns { konstue.isTrue } }
+        konst rightFalse = right.filter { it.simpleEffect.isReturns { konstue.isFalse } }
 
-        val whenLeftReturnsTrue = foldConditionsWithOr(leftTrue)
-        val whenRightReturnsTrue = foldConditionsWithOr(rightTrue)
-        val whenLeftReturnsFalse = foldConditionsWithOr(leftFalse)
-        val whenRightReturnsFalse = foldConditionsWithOr(rightFalse)
+        konst whenLeftReturnsTrue = foldConditionsWithOr(leftTrue)
+        konst whenRightReturnsTrue = foldConditionsWithOr(rightTrue)
+        konst whenLeftReturnsFalse = foldConditionsWithOr(leftFalse)
+        konst whenRightReturnsFalse = foldConditionsWithOr(rightFalse)
 
         // When whole Or-functor returns true, all we know is that one of arguments was true.
         // So, to make a correct clause we have to know *both* 'Returns(true)'-conditions
-        val conditionWhenTrue = applyIfBothNotNull(whenLeftReturnsTrue, whenRightReturnsTrue) { l, r -> ESOr(l, r) }
+        konst conditionWhenTrue = applyIfBothNotNull(whenLeftReturnsTrue, whenRightReturnsTrue) { l, r -> ESOr(l, r) }
 
         // Even if one of 'Returns(false)' is missing, we still can argue that other condition
         // *must* be false when whole OR-functor returns false
-        val conditionWhenFalse = applyWithDefault(whenLeftReturnsFalse, whenRightReturnsFalse) { l, r -> ESAnd(l, r) }
+        konst conditionWhenFalse = applyWithDefault(whenLeftReturnsFalse, whenRightReturnsFalse) { l, r -> ESAnd(l, r) }
 
-        val result = mutableListOf<ConditionalEffect>()
+        konst result = mutableListOf<ConditionalEffect>()
 
         if (conditionWhenTrue != null) {
             result.add(ConditionalEffect(conditionWhenTrue, ESReturns(ESConstants.trueValue)))

@@ -1,6 +1,6 @@
 package test
 
 object Object {
-    val x = 0
-    val y = x
+    konst x = 0
+    konst y = x
 }

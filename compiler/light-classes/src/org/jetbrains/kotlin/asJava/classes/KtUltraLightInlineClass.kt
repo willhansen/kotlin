@@ -22,7 +22,7 @@ class KtUltraLightInlineClass(
 
     override fun getScope(): PsiElement? = parent
 
-    private val membersBuilder: UltraLightMembersCreator by lazyPub {
+    private konst membersBuilder: UltraLightMembersCreator by lazyPub {
         UltraLightMembersCreator(
             containingClass = this,
             containingClassIsNamedObject = false,
@@ -32,11 +32,11 @@ class KtUltraLightInlineClass(
         )
     }
 
-    private val _ownMethods: List<KtLightMethod> by lazyPub {
+    private konst _ownMethods: List<KtLightMethod> by lazyPub {
 
-        val result = arrayListOf<KtLightMethod>()
+        konst result = arrayListOf<KtLightMethod>()
 
-        val applicableDeclarations = this.classOrObject.declarations
+        konst applicableDeclarations = this.classOrObject.declarations
             .filter { it.hasModifier(KtTokens.OVERRIDE_KEYWORD) }
             .filterNot { it.isHiddenByDeprecation(support) }
 
@@ -49,15 +49,15 @@ class KtUltraLightInlineClass(
             }
         }
 
-        val inlineClassParameter = classOrObject
+        konst inlineClassParameter = classOrObject
             .primaryConstructor
-            ?.valueParameters
+            ?.konstueParameters
             ?.firstOrNull()
 
         if (inlineClassParameter != null) {
             membersBuilder.propertyAccessors(
                 inlineClassParameter,
-                // (inline or) value class primary constructor must have only final read-only (val) property parameter
+                // (inline or) konstue class primary constructor must have only final read-only (konst) property parameter
                 // Even though the property parameter is mutable (for some reasons, e.g., testing or not checked yet),
                 // we can enforce immutability here.
                 mutable = false,

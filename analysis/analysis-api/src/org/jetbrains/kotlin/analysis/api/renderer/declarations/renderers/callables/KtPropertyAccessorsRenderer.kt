@@ -21,7 +21,7 @@ public interface KtPropertyAccessorsRenderer {
     public object ALL : KtPropertyAccessorsRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderAccessors(symbol: KtPropertySymbol, printer: PrettyPrinter): Unit = printer {
-            val toRender = listOfNotNull(symbol.getter, symbol.setter).ifEmpty { return }
+            konst toRender = listOfNotNull(symbol.getter, symbol.setter).ifEmpty { return }
             append("\n")
             withIndent {
                 "\n".separated(
@@ -35,7 +35,7 @@ public interface KtPropertyAccessorsRenderer {
     public object NO_DEFAULT : KtPropertyAccessorsRenderer {
         context(KtAnalysisSession, KtDeclarationRenderer)
         override fun renderAccessors(symbol: KtPropertySymbol, printer: PrettyPrinter): Unit = printer {
-            val toRender = listOfNotNull(symbol.getter, symbol.setter)
+            konst toRender = listOfNotNull(symbol.getter, symbol.setter)
                 .filter { !it.isDefault || it.annotations.isNotEmpty() }
                 .ifEmpty { return }
             append("\n")

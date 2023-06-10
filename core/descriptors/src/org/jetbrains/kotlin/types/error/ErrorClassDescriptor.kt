@@ -21,14 +21,14 @@ class ErrorClassDescriptor(name: Name) : ClassDescriptorImpl(
     ErrorUtils.errorModule, name, Modality.OPEN, ClassKind.CLASS, emptyList(), SourceElement.NO_SOURCE, false, LockBasedStorageManager.NO_LOCKS
 ) {
     init {
-        val errorConstructor = ClassConstructorDescriptorImpl.create(this, Annotations.EMPTY, true, SourceElement.NO_SOURCE)
+        konst errorConstructor = ClassConstructorDescriptorImpl.create(this, Annotations.EMPTY, true, SourceElement.NO_SOURCE)
             .apply {
                 initialize(
                     emptyList(),
                     DescriptorVisibilities.INTERNAL
                 )
             }
-        val memberScope = ErrorUtils.createErrorScope(ErrorScopeKind.SCOPE_FOR_ERROR_CLASS, errorConstructor.name.toString(), "")
+        konst memberScope = ErrorUtils.createErrorScope(ErrorScopeKind.SCOPE_FOR_ERROR_CLASS, errorConstructor.name.toString(), "")
         errorConstructor.returnType = ErrorType(
             ErrorUtils.createErrorTypeConstructor(ErrorTypeKind.ERROR_CLASS),
             memberScope,

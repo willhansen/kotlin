@@ -22,9 +22,9 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  */
 abstract class IrEnumEntry : IrDeclarationBase(), IrDeclarationWithName {
     @ObsoleteDescriptorBasedAPI
-    abstract override val descriptor: ClassDescriptor
+    abstract override konst descriptor: ClassDescriptor
 
-    abstract override val symbol: IrEnumEntrySymbol
+    abstract override konst symbol: IrEnumEntrySymbol
 
     abstract var initializerExpression: IrExpressionBody?
 

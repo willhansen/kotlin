@@ -20,8 +20,8 @@ actual fun writeToFile(fileName: String, text: String) {
 actual fun Double.format(decimalNumber: Int): String =
         this.asDynamic().toFixed(decimalNumber)
 
-actual fun assert(value: Boolean, lazyMessage: () -> Any) {
-    if (!value) error(lazyMessage)
+actual fun assert(konstue: Boolean, lazyMessage: () -> Any) {
+    if (!konstue) error(lazyMessage)
 }
 
 actual fun sendGetRequest(url: String, user: String?, password: String?, followLocation: Boolean) : String {

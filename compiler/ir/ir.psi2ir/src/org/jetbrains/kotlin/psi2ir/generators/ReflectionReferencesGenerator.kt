@@ -51,9 +51,9 @@ import org.jetbrains.kotlin.types.expressions.DoubleColonLHS
 internal class ReflectionReferencesGenerator(statementGenerator: StatementGenerator) : StatementGeneratorExtension(statementGenerator) {
 
     fun generateClassLiteral(ktClassLiteral: KtClassLiteralExpression): IrExpression {
-        val ktArgument = ktClassLiteral.receiverExpression!!
-        val lhs = getOrFail(BindingContext.DOUBLE_COLON_LHS, ktArgument)
-        val resultType = getTypeInferredByFrontendOrFail(ktClassLiteral).toIrType()
+        konst ktArgument = ktClassLiteral.receiverExpression!!
+        konst lhs = getOrFail(BindingContext.DOUBLE_COLON_LHS, ktArgument)
+        konst resultType = getTypeInferredByFrontendOrFail(ktClassLiteral).toIrType()
 
         return if (lhs is DoubleColonLHS.Expression && !lhs.isObjectQualifier) {
             IrGetClassImpl(
@@ -61,8 +61,8 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                 ktArgument.genExpr()
             )
         } else {
-            val typeConstructorDeclaration = lhs.type.constructor.declarationDescriptor
-            val typeClass = typeConstructorDeclaration
+            konst typeConstructorDeclaration = lhs.type.constructor.declarationDescriptor
+            konst typeClass = typeConstructorDeclaration
                 ?: throw AssertionError("Unexpected type constructor for ${lhs.type}: $typeConstructorDeclaration")
             IrClassReferenceImpl(
                 ktClassLiteral.startOffsetSkippingComments, ktClassLiteral.endOffset, resultType,
@@ -72,13 +72,13 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     }
 
     fun generateCallableReference(ktCallableReference: KtCallableReferenceExpression): IrExpression {
-        val resolvedCall = getResolvedCall(ktCallableReference.callableReference)!!
-        val resolvedDescriptor = resolvedCall.resultingDescriptor
-        val callableReferenceType =
+        konst resolvedCall = getResolvedCall(ktCallableReference.callableReference)!!
+        konst resolvedDescriptor = resolvedCall.resultingDescriptor
+        konst callableReferenceType =
             context.typeTranslator.approximateFunctionReferenceType(
                 getTypeInferredByFrontendOrFail(ktCallableReference)
             )
-        val callBuilder = unwrapCallableDescriptorAndTypeArguments(resolvedCall)
+        konst callBuilder = unwrapCallableDescriptorAndTypeArguments(resolvedCall)
 
         return when {
             resolvedDescriptor is FunctionInterfaceConstructorDescriptor ||
@@ -114,7 +114,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         resolvedCall: ResolvedCall<out CallableDescriptor>,
         resolvedDescriptor: CallableDescriptor,
         callableReferenceType: KotlinType
-    ) = resolvedCall.valueArguments.isNotEmpty() ||
+    ) = resolvedCall.konstueArguments.isNotEmpty() ||
             requiresCoercionToUnit(resolvedDescriptor, callableReferenceType) ||
             requiresSuspendConversion(resolvedDescriptor, callableReferenceType)
 
@@ -128,19 +128,19 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         //          <FUN_INTERFACE_TYPE>(function!!)
         //      ::<ADAPTER_FUN>
         //  }
-        val startOffset = ktCallableReference.startOffsetSkippingComments
-        val endOffset = ktCallableReference.endOffset
+        konst startOffset = ktCallableReference.startOffsetSkippingComments
+        konst endOffset = ktCallableReference.endOffset
 
-        val irReferenceType = callableReferenceType.toIrType()
+        konst irReferenceType = callableReferenceType.toIrType()
 
-        val irAdapterFun = createFunInterfaceConstructorAdapter(startOffset, endOffset, descriptor)
+        konst irAdapterFun = createFunInterfaceConstructorAdapter(startOffset, endOffset, descriptor)
 
-        val irAdapterRef = IrFunctionReferenceImpl(
+        konst irAdapterRef = IrFunctionReferenceImpl(
             startOffset, endOffset,
             type = irReferenceType,
             symbol = irAdapterFun.symbol,
             typeArgumentsCount = irAdapterFun.typeParameters.size,
-            valueArgumentsCount = irAdapterFun.valueParameters.size,
+            konstueArgumentsCount = irAdapterFun.konstueParameters.size,
             reflectionTarget = irAdapterFun.symbol,
             origin = IrStatementOrigin.FUN_INTERFACE_CONSTRUCTOR_REFERENCE
         )
@@ -157,14 +157,14 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     }
 
     private fun createFunInterfaceConstructorAdapter(startOffset: Int, endOffset: Int, descriptor: CallableDescriptor): IrSimpleFunction {
-        val samType = descriptor.returnType
+        konst samType = descriptor.returnType
             ?: throw AssertionError("Unresolved return type: $descriptor")
-        val samClassDescriptor = samType.constructor.declarationDescriptor as? ClassDescriptor
+        konst samClassDescriptor = samType.constructor.declarationDescriptor as? ClassDescriptor
             ?: throw AssertionError("Class type expected: $samType")
-        val irSamType = samType.toIrType()
+        konst irSamType = samType.toIrType()
 
-        val functionParameter = descriptor.valueParameters.singleOrNull()
-            ?: throw AssertionError("Single value parameter expected: $descriptor")
+        konst functionParameter = descriptor.konstueParameters.singleOrNull()
+            ?: throw AssertionError("Single konstue parameter expected: $descriptor")
 
         return context.irFactory.createFunction(
             startOffset, endOffset,
@@ -182,20 +182,20 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                 irAdapterFun.dispatchReceiverParameter = null
                 irAdapterFun.extensionReceiverParameter = null
 
-                val fnType = functionParameter.type
+                konst fnType = functionParameter.type
 
-                val irFnParameter = createAdapterParameter(startOffset, endOffset, functionParameter.name, 0, fnType)
-                val irFnType = irFnParameter.type
+                konst irFnParameter = createAdapterParameter(startOffset, endOffset, functionParameter.name, 0, fnType)
+                konst irFnType = irFnParameter.type
 
-                val checkNotNull = context.irBuiltIns.checkNotNullSymbol.descriptor
-                val checkNotNullSubstituted =
+                konst checkNotNull = context.irBuiltIns.checkNotNullSymbol.descriptor
+                konst checkNotNullSubstituted =
                     checkNotNull.substitute(
                         TypeSubstitutor.create(
                             mapOf(checkNotNull.typeParameters[0].typeConstructor to TypeProjectionImpl(fnType))
                         )
                     ) ?: throw AssertionError("Substitution failed for $checkNotNull: T=$fnType")
 
-                irAdapterFun.valueParameters = listOf(irFnParameter)
+                irAdapterFun.konstueParameters = listOf(irFnParameter)
                 irAdapterFun.body =
                     IrBlockBodyBuilder(
                         context,
@@ -221,7 +221,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     }
 
     private fun requiresCoercionToUnit(descriptor: CallableDescriptor, callableReferenceType: KotlinType): Boolean {
-        val ktExpectedReturnType = callableReferenceType.arguments.last().type
+        konst ktExpectedReturnType = callableReferenceType.arguments.last().type
         return KotlinBuiltIns.isUnit(ktExpectedReturnType) && !KotlinBuiltIns.isUnit(descriptor.returnType!!)
     }
 
@@ -235,24 +235,24 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         callBuilder: CallBuilder,
         callableReferenceType: KotlinType
     ): IrExpression {
-        val adapteeDescriptor = callBuilder.descriptor
+        konst adapteeDescriptor = callBuilder.descriptor
         if (adapteeDescriptor !is FunctionDescriptor) {
             throw AssertionError("Function descriptor expected in adapted callable reference: $adapteeDescriptor")
         }
 
-        val startOffset = ktCallableReference.startOffsetSkippingComments
-        val endOffset = ktCallableReference.endOffset
+        konst startOffset = ktCallableReference.startOffsetSkippingComments
+        konst endOffset = ktCallableReference.endOffset
 
-        val adapteeSymbol = context.symbolTable.referenceFunction(adapteeDescriptor.original)
+        konst adapteeSymbol = context.symbolTable.referenceFunction(adapteeDescriptor.original)
 
-        val ktFunctionalType = getTypeInferredByFrontendOrFail(ktCallableReference)
-        val irFunctionalType = ktFunctionalType.maybeKFunctionTypeToFunctionType().toIrType()
+        konst ktFunctionalType = getTypeInferredByFrontendOrFail(ktCallableReference)
+        konst irFunctionalType = ktFunctionalType.maybeKFunctionTypeToFunctionType().toIrType()
 
-        val ktFunctionalTypeArguments = ktFunctionalType.arguments
-        val ktExpectedReturnType = ktFunctionalTypeArguments.last().type
-        val ktExpectedParameterTypes = ktFunctionalTypeArguments.take(ktFunctionalTypeArguments.size - 1).map { it.type }
+        konst ktFunctionalTypeArguments = ktFunctionalType.arguments
+        konst ktExpectedReturnType = ktFunctionalTypeArguments.last().type
+        konst ktExpectedParameterTypes = ktFunctionalTypeArguments.take(ktFunctionalTypeArguments.size - 1).map { it.type }
 
-        val irAdapterFun =
+        konst irAdapterFun =
             createAdapterFun(
                 startOffset,
                 endOffset,
@@ -262,7 +262,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                 callBuilder,
                 callableReferenceType
             )
-        val irCall = createAdapteeCall(startOffset, endOffset, adapteeSymbol, callBuilder, irAdapterFun)
+        konst irCall = createAdapteeCall(startOffset, endOffset, adapteeSymbol, callBuilder, irAdapterFun)
 
         irAdapterFun.body = context.irFactory.createBlockBody(startOffset, endOffset).apply {
             if (KotlinBuiltIns.isUnit(ktExpectedReturnType))
@@ -271,7 +271,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                 statements.add(IrReturnImpl(startOffset, endOffset, context.irBuiltIns.nothingType, irAdapterFun.symbol, irCall))
         }
 
-        val resolvedCall = callBuilder.original
+        konst resolvedCall = callBuilder.original
         return statementGenerator.generateCallReceiver(
             ktCallableReference,
             resolvedCall.resultingDescriptor, resolvedCall.dispatchReceiver,
@@ -279,15 +279,15 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
             resolvedCall.contextReceivers,
             isSafe = false
         ).call { dispatchReceiverValue, extensionReceiverValue, _ ->
-            val irDispatchReceiver = dispatchReceiverValue?.loadIfExists()
-            val irExtensionReceiver = extensionReceiverValue?.loadIfExists()
+            konst irDispatchReceiver = dispatchReceiverValue?.loadIfExists()
+            konst irExtensionReceiver = extensionReceiverValue?.loadIfExists()
             check(irDispatchReceiver == null || irExtensionReceiver == null) {
                 "Bound callable reference cannot have both receivers: $adapteeDescriptor"
             }
-            val receiver = irDispatchReceiver ?: irExtensionReceiver
-            val irAdapterRef = IrFunctionReferenceImpl(
+            konst receiver = irDispatchReceiver ?: irExtensionReceiver
+            konst irAdapterRef = IrFunctionReferenceImpl(
                 startOffset, endOffset, irFunctionalType, irAdapterFun.symbol, irAdapterFun.typeParameters.size,
-                irAdapterFun.valueParameters.size, adapteeSymbol, IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
+                irAdapterFun.konstueParameters.size, adapteeSymbol, IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
             )
             IrBlockImpl(startOffset, endOffset, irFunctionalType, IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE).apply {
                 statements.add(irAdapterFun)
@@ -303,24 +303,24 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         callBuilder: CallBuilder,
         irAdapterFun: IrSimpleFunction
     ): IrExpression {
-        val resolvedCall = callBuilder.original
-        val resolvedDescriptor = resolvedCall.resultingDescriptor
+        konst resolvedCall = callBuilder.original
+        konst resolvedDescriptor = resolvedCall.resultingDescriptor
 
-        val irType = resolvedDescriptor.returnType!!.toIrType()
+        konst irType = resolvedDescriptor.returnType!!.toIrType()
 
-        val irCall = when (adapteeSymbol) {
+        konst irCall = when (adapteeSymbol) {
             is IrConstructorSymbol ->
                 IrConstructorCallImpl.fromSymbolDescriptor(startOffset, endOffset, irType, adapteeSymbol)
             is IrSimpleFunctionSymbol ->
                 IrCallImpl.fromSymbolDescriptor(startOffset, endOffset, irType, adapteeSymbol)
         }
 
-        val hasBoundDispatchReceiver = resolvedCall.dispatchReceiver != null && resolvedCall.dispatchReceiver !is TransientReceiver
-        val hasBoundExtensionReceiver = resolvedCall.extensionReceiver != null && resolvedCall.extensionReceiver !is TransientReceiver
-        val isImportedFromObject = callBuilder.original.resultingDescriptor is ImportedFromObjectCallableDescriptor<*>
+        konst hasBoundDispatchReceiver = resolvedCall.dispatchReceiver != null && resolvedCall.dispatchReceiver !is TransientReceiver
+        konst hasBoundExtensionReceiver = resolvedCall.extensionReceiver != null && resolvedCall.extensionReceiver !is TransientReceiver
+        konst isImportedFromObject = callBuilder.original.resultingDescriptor is ImportedFromObjectCallableDescriptor<*>
         if (hasBoundDispatchReceiver || hasBoundExtensionReceiver || isImportedFromObject) {
             // In case of a bound reference, the receiver (which can only be one) is passed in the extension receiver parameter.
-            val receiverValue = IrGetValueImpl(
+            konst receiverValue = IrGetValueImpl(
                 startOffset, endOffset, irAdapterFun.extensionReceiverParameter!!.symbol, IrStatementOrigin.ADAPTED_FUNCTION_REFERENCE
             )
             when {
@@ -347,25 +347,25 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         irAdapterFun: IrSimpleFunction,
         resolvedCall: ResolvedCall<*>
     ) {
-        val adaptedArguments = resolvedCall.valueArguments
+        konst adaptedArguments = resolvedCall.konstueArguments
         var shift = 0
         if (resolvedCall.dispatchReceiver is TransientReceiver) {
             // Unbound callable reference 'A::foo', receiver is passed as a first parameter
-            val irAdaptedReceiverParameter = irAdapterFun.valueParameters[0]
+            konst irAdaptedReceiverParameter = irAdapterFun.konstueParameters[0]
             irAdapteeCall.dispatchReceiver =
                 IrGetValueImpl(startOffset, endOffset, irAdaptedReceiverParameter.type, irAdaptedReceiverParameter.symbol)
         } else if (resolvedCall.extensionReceiver is TransientReceiver) {
-            val irAdaptedReceiverParameter = irAdapterFun.valueParameters[0]
+            konst irAdaptedReceiverParameter = irAdapterFun.konstueParameters[0]
             irAdapteeCall.extensionReceiver =
                 IrGetValueImpl(startOffset, endOffset, irAdaptedReceiverParameter.type, irAdaptedReceiverParameter.symbol)
             shift = 1
         }
 
-        for ((valueParameter, valueArgument) in adaptedArguments) {
-            val substitutedValueParameter = resolvedCall.resultingDescriptor.valueParameters[valueParameter.index]
+        for ((konstueParameter, konstueArgument) in adaptedArguments) {
+            konst substitutedValueParameter = resolvedCall.resultingDescriptor.konstueParameters[konstueParameter.index]
             irAdapteeCall.putValueArgument(
-                valueParameter.index,
-                adaptResolvedValueArgument(startOffset, endOffset, valueArgument, irAdapterFun, substitutedValueParameter, shift)
+                konstueParameter.index,
+                adaptResolvedValueArgument(startOffset, endOffset, konstueArgument, irAdapterFun, substitutedValueParameter, shift)
             )
         }
     }
@@ -375,7 +375,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         endOffset: Int,
         resolvedValueArgument: ResolvedValueArgument,
         irAdapterFun: IrSimpleFunction,
-        valueParameter: ValueParameterDescriptor,
+        konstueParameter: ValueParameterDescriptor,
         shift: Int
     ): IrExpression? {
         return when (resolvedValueArgument) {
@@ -387,15 +387,15 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                 else
                     IrVarargImpl(
                         startOffset, endOffset,
-                        valueParameter.type.toIrType(), valueParameter.varargElementType!!.toIrType(),
+                        konstueParameter.type.toIrType(), konstueParameter.varargElementType!!.toIrType(),
                         resolvedValueArgument.arguments.map {
                             adaptValueArgument(startOffset, endOffset, it, irAdapterFun, shift)
                         }
                     )
             is ExpressionValueArgument -> {
-                val valueArgument = resolvedValueArgument.valueArgument!!
+                konst konstueArgument = resolvedValueArgument.konstueArgument!!
 
-                adaptValueArgument(startOffset, endOffset, valueArgument, irAdapterFun, shift) as IrExpression
+                adaptValueArgument(startOffset, endOffset, konstueArgument, irAdapterFun, shift) as IrExpression
             }
             else ->
                 throw AssertionError("Unexpected ResolvedValueArgument: $resolvedValueArgument")
@@ -405,24 +405,24 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     private fun adaptValueArgument(
         startOffset: Int,
         endOffset: Int,
-        valueArgument: ValueArgument,
+        konstueArgument: ValueArgument,
         irAdapterFun: IrSimpleFunction,
         shift: Int
     ): IrVarargElement =
-        when (valueArgument) {
+        when (konstueArgument) {
             is FakeImplicitSpreadValueArgumentForCallableReference ->
                 IrSpreadElementImpl(
                     startOffset, endOffset,
-                    adaptValueArgument(startOffset, endOffset, valueArgument.expression, irAdapterFun, shift) as IrExpression
+                    adaptValueArgument(startOffset, endOffset, konstueArgument.expression, irAdapterFun, shift) as IrExpression
                 )
 
             is FakePositionalValueArgumentForCallableReference -> {
-                val irAdapterParameter = irAdapterFun.valueParameters[valueArgument.index + shift]
+                konst irAdapterParameter = irAdapterFun.konstueParameters[konstueArgument.index + shift]
                 IrGetValueImpl(startOffset, endOffset, irAdapterParameter.type, irAdapterParameter.symbol)
             }
 
             else ->
-                throw AssertionError("Unexpected ValueArgument: $valueArgument")
+                throw AssertionError("Unexpected ValueArgument: $konstueArgument")
         }
 
     private fun createAdapterFun(
@@ -434,7 +434,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         callBuilder: CallBuilder,
         callableReferenceType: KotlinType
     ): IrSimpleFunction {
-        val hasSuspendConversion = !adapteeDescriptor.isSuspend &&
+        konst hasSuspendConversion = !adapteeDescriptor.isSuspend &&
                 callableReferenceType.isKSuspendFunctionType
 
         return context.irFactory.createFunction(
@@ -459,7 +459,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
 
                 irAdapterFun.dispatchReceiverParameter = null
 
-                val boundReceiverType = callBuilder.original.getBoundReceiverType()
+                konst boundReceiverType = callBuilder.original.getBoundReceiverType()
                 if (boundReceiverType != null) {
                     irAdapterFun.extensionReceiverParameter =
                         createAdapterParameter(startOffset, endOffset, Name.identifier("receiver"), -1, boundReceiverType)
@@ -467,7 +467,7 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
                     irAdapterFun.extensionReceiverParameter = null
                 }
 
-                irAdapterFun.valueParameters += ktExpectedParameterTypes.mapIndexed { index, ktExpectedParameterType ->
+                irAdapterFun.konstueParameters += ktExpectedParameterTypes.mapIndexed { index, ktExpectedParameterType ->
                     createAdapterParameter(startOffset, endOffset, Name.identifier("p$index"), index, ktExpectedParameterType)
                 }
             }
@@ -475,13 +475,13 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     }
 
     private fun ResolvedCall<*>.getBoundReceiverType(): KotlinType? {
-        val descriptor = resultingDescriptor
+        konst descriptor = resultingDescriptor
         if (descriptor is ImportedFromObjectCallableDescriptor<*>) {
             return descriptor.containingObject.defaultType
         }
 
-        val dispatchReceiver = dispatchReceiver.takeUnless { it is TransientReceiver }
-        val extensionReceiver = extensionReceiver.takeUnless { it is TransientReceiver }
+        konst dispatchReceiver = dispatchReceiver.takeUnless { it is TransientReceiver }
+        konst extensionReceiver = extensionReceiver.takeUnless { it is TransientReceiver }
         return when {
             dispatchReceiver == null -> extensionReceiver?.type
             extensionReceiver == null -> dispatchReceiver.type
@@ -507,15 +507,15 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         typeArguments: Map<TypeParameterDescriptor, KotlinType>?,
         origin: IrStatementOrigin? = null
     ): IrCallableReference<*> {
-        val startOffset = ktElement.startOffsetSkippingComments
-        val endOffset = ktElement.endOffset
+        konst startOffset = ktElement.startOffsetSkippingComments
+        konst endOffset = ktElement.endOffset
         return when (callableDescriptor) {
             is FunctionDescriptor -> {
-                val symbol = context.symbolTable.referenceFunction(callableDescriptor.original)
+                konst symbol = context.symbolTable.referenceFunction(callableDescriptor.original)
                 generateFunctionReference(startOffset, endOffset, type, symbol, callableDescriptor, typeArguments, origin)
             }
             is PropertyDescriptor -> {
-                val mutable = ReflectionTypes.isNumberedKMutablePropertyType(type)
+                konst mutable = ReflectionTypes.isNumberedKMutablePropertyType(type)
                 generatePropertyReference(startOffset, endOffset, type, callableDescriptor, typeArguments, origin, mutable)
             }
             else ->
@@ -531,12 +531,12 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         irDelegateSymbol: IrVariableSymbol,
         origin: IrStatementOrigin?
     ): IrLocalDelegatedPropertyReference {
-        val getterDescriptor =
+        konst getterDescriptor =
             variableDescriptor.getter ?: throw AssertionError("Local delegated property should have a getter: $variableDescriptor")
-        val setterDescriptor = variableDescriptor.setter
+        konst setterDescriptor = variableDescriptor.setter
 
-        val getterSymbol = context.symbolTable.referenceSimpleFunction(getterDescriptor)
-        val setterSymbol = setterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it) }
+        konst getterSymbol = context.symbolTable.referenceSimpleFunction(getterDescriptor)
+        konst setterSymbol = setterDescriptor?.let { context.symbolTable.referenceSimpleFunction(it) }
 
         return IrLocalDelegatedPropertyReferenceImpl(
             startOffset, endOffset, type.toIrType(),
@@ -549,25 +549,25 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
     }
 
     private class DelegatedPropertySymbols(
-        val propertySymbol: IrPropertySymbol,
-        val getterSymbol: IrSimpleFunctionSymbol?,
-        val setterSymbol: IrSimpleFunctionSymbol?
+        konst propertySymbol: IrPropertySymbol,
+        konst getterSymbol: IrSimpleFunctionSymbol?,
+        konst setterSymbol: IrSimpleFunctionSymbol?
     )
 
     private fun resolvePropertySymbol(descriptor: PropertyDescriptor, mutable: Boolean): DelegatedPropertySymbols {
-        val symbol = context.symbolTable.referenceProperty(descriptor)
-        val syntheticJavaProperty = context.extensions.unwrapSyntheticJavaProperty(descriptor)
+        konst symbol = context.symbolTable.referenceProperty(descriptor)
+        konst syntheticJavaProperty = context.extensions.unwrapSyntheticJavaProperty(descriptor)
         if (syntheticJavaProperty != null) {
-            val (getMethod, setMethod) = syntheticJavaProperty
+            konst (getMethod, setMethod) = syntheticJavaProperty
             // This is the special case of synthetic java properties when requested property doesn't even exist but IR design
             // requires its symbol to be bound so let do that
             // see `irText/declarations/provideDelegate/javaDelegate.kt` and KT-45297
-            val getterSymbol = context.symbolTable.referenceSimpleFunction(getMethod)
-            val setterSymbol = if (mutable) setMethod?.let {
+            konst getterSymbol = context.symbolTable.referenceSimpleFunction(getMethod)
+            konst setterSymbol = if (mutable) setMethod?.let {
                 context.symbolTable.referenceSimpleFunction(it)
             } else null
             if (!symbol.isBound) {
-                val offset = UNDEFINED_OFFSET
+                konst offset = UNDEFINED_OFFSET
                 context.symbolTable.declareProperty(offset, offset, IrDeclarationOrigin.SYNTHETIC_JAVA_PROPERTY_DELEGATE, descriptor) {
                     context.irFactory.createProperty(
                         offset,
@@ -591,8 +591,8 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
             }
             return DelegatedPropertySymbols(symbol, getterSymbol, setterSymbol)
         } else {
-            val getterSymbol = descriptor.getter?.let { context.symbolTable.referenceSimpleFunction(it) }
-            val setterSymbol = if (mutable) descriptor.setter?.let { context.symbolTable.referenceSimpleFunction(it) } else null
+            konst getterSymbol = descriptor.getter?.let { context.symbolTable.referenceSimpleFunction(it) }
+            konst setterSymbol = if (mutable) descriptor.setter?.let { context.symbolTable.referenceSimpleFunction(it) } else null
             return DelegatedPropertySymbols(symbol, getterSymbol, setterSymbol)
         }
     }
@@ -606,8 +606,8 @@ internal class ReflectionReferencesGenerator(statementGenerator: StatementGenera
         origin: IrStatementOrigin?,
         mutable: Boolean
     ): IrPropertyReference {
-        val originalProperty = propertyDescriptor.original
-        val symbols = resolvePropertySymbol(originalProperty, mutable)
+        konst originalProperty = propertyDescriptor.original
+        konst symbols = resolvePropertySymbol(originalProperty, mutable)
 
         return IrPropertyReferenceImpl(
             startOffset, endOffset, type.toIrType(),

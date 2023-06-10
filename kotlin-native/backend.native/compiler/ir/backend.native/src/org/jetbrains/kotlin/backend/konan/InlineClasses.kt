@@ -81,7 +81,7 @@ fun IrClass.isUsedAsBoxClass(): Boolean = IrTypeInlineClassesSupport.isUsedAsBox
  * Most "underlying" user-visible non-reference type.
  * It is visible as inlined to compiler for simplicity.
  */
-enum class KonanPrimitiveType(val classId: ClassId, val binaryType: BinaryType.Primitive) {
+enum class KonanPrimitiveType(konst classId: ClassId, konst binaryType: BinaryType.Primitive) {
     BOOLEAN(PrimitiveType.BOOLEAN, PrimitiveBinaryType.BOOLEAN),
     CHAR(PrimitiveType.CHAR, PrimitiveBinaryType.SHORT),
     BYTE(PrimitiveType.BYTE, PrimitiveBinaryType.BYTE),
@@ -101,10 +101,10 @@ enum class KonanPrimitiveType(val classId: ClassId, val binaryType: BinaryType.P
     constructor(classId: ClassId, primitiveBinaryType: PrimitiveBinaryType)
             : this(classId, BinaryType.Primitive(primitiveBinaryType))
 
-    val fqName: FqNameUnsafe get() = this.classId.asSingleFqName().toUnsafe()
+    konst fqName: FqNameUnsafe get() = this.classId.asSingleFqName().toUnsafe()
 
     companion object {
-        val byFqNameParts = KonanPrimitiveType.values().groupingBy {
+        konst byFqNameParts = KonanPrimitiveType.konstues().groupingBy {
             assert(!it.classId.isNestedClass)
             it.classId.packageFqName
         }.fold({ _, _ -> mutableMapOf<Name, KonanPrimitiveType>() },
@@ -146,7 +146,7 @@ internal abstract class InlineClassesSupport<Class : Any, Type : Any> {
                 getName(clazz) == InteropFqNames.cPointer.shortName() && getPackageFqName(clazz) == InteropFqNames.cPointer.parent().toSafe())
 
     private fun getInlinedClass(erased: Class, isNullable: Boolean): Class? {
-        val inlinedClass = getInlinedClass(erased) ?: return null
+        konst inlinedClass = getInlinedClass(erased) ?: return null
         return if (!isNullable || representationIsNonNullReferenceOrPointer(inlinedClass)) {
             inlinedClass
         } else {
@@ -155,14 +155,14 @@ internal abstract class InlineClassesSupport<Class : Any, Type : Any> {
     }
 
     tailrec fun representationIsNonNullReferenceOrPointer(clazz: Class): Boolean {
-        val konanPrimitiveType = getKonanPrimitiveType(clazz)
+        konst konanPrimitiveType = getKonanPrimitiveType(clazz)
         if (konanPrimitiveType != null) {
             return konanPrimitiveType == KonanPrimitiveType.NON_NULL_NATIVE_PTR
         }
 
-        val inlinedClass = getInlinedClass(clazz) ?: return true
+        konst inlinedClass = getInlinedClass(clazz) ?: return true
 
-        val underlyingType = getInlinedClassUnderlyingType(inlinedClass)
+        konst underlyingType = getInlinedClassUnderlyingType(inlinedClass)
         return if (isNullable(underlyingType)) {
             false
         } else {
@@ -187,12 +187,12 @@ internal abstract class InlineClassesSupport<Class : Any, Type : Any> {
         var currentType: Type = type
 
         while (true) {
-            val inlinedClass = getInlinedClass(currentType)
+            konst inlinedClass = getInlinedClass(currentType)
             if (inlinedClass == null) {
                 return ifReference(currentType)
             }
 
-            val nullable = isNullable(currentType)
+            konst nullable = isNullable(currentType)
 
            getKonanPrimitiveType(inlinedClass)?.let { primitiveType ->
                 return ifPrimitive(primitiveType, nullable)
@@ -200,7 +200,7 @@ internal abstract class InlineClassesSupport<Class : Any, Type : Any> {
 
             eachInlinedClass(inlinedClass, nullable)
 
-            val underlyingType = getInlinedClassUnderlyingType(inlinedClass)
+            konst underlyingType = getInlinedClassUnderlyingType(inlinedClass)
             currentType = if (nullable) makeNullable(underlyingType) else underlyingType
         }
     }
@@ -216,14 +216,14 @@ internal abstract class InlineClassesSupport<Class : Any, Type : Any> {
 
     // TODO: optimize.
     fun computeBinaryType(type: Type): BinaryType<Class> {
-        val erased = erase(type)
-        val inlinedClass = getInlinedClass(erased, isNullable(type)) ?: return createReferenceBinaryType(type)
+        konst erased = erase(type)
+        konst inlinedClass = getInlinedClass(erased, isNullable(type)) ?: return createReferenceBinaryType(type)
 
         getKonanPrimitiveType(inlinedClass)?.let {
             return it.binaryType
         }
 
-        val underlyingBinaryType = computeBinaryType(getInlinedClassUnderlyingType(inlinedClass))
+        konst underlyingBinaryType = computeBinaryType(getInlinedClassUnderlyingType(inlinedClass))
         return if (isNullable(type) && underlyingBinaryType is BinaryType.Reference) {
             BinaryType.Reference(underlyingBinaryType.types, true)
         } else {
@@ -240,7 +240,7 @@ internal object KotlinTypeInlineClassesSupport : InlineClassesSupport<ClassDescr
     override fun isNullable(type: KotlinType): Boolean = type.isNullable()
     override fun makeNullable(type: KotlinType): KotlinType = type.makeNullable()
     override tailrec fun erase(type: KotlinType): ClassDescriptor {
-        val descriptor = type.constructor.declarationDescriptor
+        konst descriptor = type.constructor.declarationDescriptor
         return if (descriptor is ClassDescriptor) {
             descriptor
         } else {
@@ -249,7 +249,7 @@ internal object KotlinTypeInlineClassesSupport : InlineClassesSupport<ClassDescr
     }
 
     override fun computeFullErasure(type: KotlinType): Sequence<ClassDescriptor> {
-        val classifier = type.constructor.declarationDescriptor
+        konst classifier = type.constructor.declarationDescriptor
         return if (classifier is ClassDescriptor) sequenceOf(classifier)
         else type.constructor.supertypes.asSequence().flatMap { computeFullErasure(it) }
     }
@@ -260,7 +260,7 @@ internal object KotlinTypeInlineClassesSupport : InlineClassesSupport<ClassDescr
             .firstOrNull { it.fqNameUnsafe == InteropFqNames.nativePointed } as ClassDescriptor?
 
     override fun getInlinedClassUnderlyingType(clazz: ClassDescriptor): KotlinType =
-            clazz.unsubstitutedPrimaryConstructor!!.valueParameters.single().type
+            clazz.unsubstitutedPrimaryConstructor!!.konstueParameters.single().type
 
     override fun getPackageFqName(clazz: ClassDescriptor) =
             clazz.findPackage().fqName
@@ -278,7 +278,7 @@ internal object IrTypeInlineClassesSupport : InlineClassesSupport<IrClass, IrTyp
     override fun makeNullable(type: IrType): IrType = type.makeNullable()
 
     override tailrec fun erase(type: IrType): IrClass {
-        val classifier = type.classifierOrFail
+        konst classifier = type.classifierOrFail
         return when (classifier) {
             is IrClassSymbol -> classifier.owner
             is IrTypeParameterSymbol -> erase(classifier.owner.superTypes.first())
@@ -286,7 +286,7 @@ internal object IrTypeInlineClassesSupport : InlineClassesSupport<IrClass, IrTyp
         }
     }
 
-    override fun computeFullErasure(type: IrType): Sequence<IrClass> = when (val classifier = type.classifierOrFail) {
+    override fun computeFullErasure(type: IrType): Sequence<IrClass> = when (konst classifier = type.classifierOrFail) {
         is IrClassSymbol -> sequenceOf(classifier.owner)
         is IrTypeParameterSymbol -> classifier.owner.superTypes.asSequence().flatMap { computeFullErasure(it) }
         is IrScriptSymbol -> classifier.unexpectedSymbolKind<IrClassifierSymbol>()
@@ -302,7 +302,7 @@ internal object IrTypeInlineClassesSupport : InlineClassesSupport<IrClass, IrTyp
     }
 
     override fun getInlinedClassUnderlyingType(clazz: IrClass): IrType =
-            clazz.constructors.firstOrNull { it.isPrimary }?.valueParameters?.single()?.type
+            clazz.constructors.firstOrNull { it.isPrimary }?.konstueParameters?.single()?.type
                     ?: clazz.declarations.filterIsInstance<IrProperty>().atMostOne { it.backingField?.takeUnless { it.isStatic } != null }?.backingField?.type
                     ?: clazz.inlineClassRepresentation!!.underlyingType
 

@@ -39,7 +39,7 @@ package com.google.gwt.dev.js.rhino;
 /**
  * The class of exceptions thrown by the JavaScript engine.
  */
-public class EvaluatorException extends RuntimeException {
+public class EkonstuatorException extends RuntimeException {
 
     /**
      * Create an exception with the specified detail message.
@@ -49,7 +49,7 @@ public class EvaluatorException extends RuntimeException {
      *
      * @param detail a message with detail about the exception
      */
-    public EvaluatorException(String detail) {
+    public EkonstuatorException(String detail) {
         super(detail);
     }
 

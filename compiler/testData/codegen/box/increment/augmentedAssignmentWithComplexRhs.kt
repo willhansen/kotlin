@@ -5,7 +5,7 @@ var log = ""
 var result = 20
 var doubleResult = 40.0
 
-fun <T> id(value: T) = value
+fun <T> id(konstue: T) = konstue
 
 fun box(): String {
     result += if (id("true") == "true") {

@@ -9,4 +9,4 @@ fun Int.f() {
 }
 
 <!UNSUPPORTED_FEATURE!>context(String)<!>
-val p: String get() = this<!UNRESOLVED_REFERENCE!>@String<!>
+konst p: String get() = this<!UNRESOLVED_REFERENCE!>@String<!>

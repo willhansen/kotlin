@@ -2,7 +2,7 @@
 
 inline fun <R> inlineFunOnlyLocal(crossinline p: () -> R) {
     <!NOT_YET_SUPPORTED_IN_INLINE!>fun<!> a() {
-        val z = p()
+        konst z = p()
     }
     a()
 }

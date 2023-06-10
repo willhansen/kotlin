@@ -5,11 +5,11 @@ fun main() {
     for ((a: Int, b) in b) {}
     for ((a, b: Int) in b) {}
 
-    for (val (a) in b) {}
-    for (val (a, b) in b) {}
-    for (val (a: Int, b: Int) in b) {}
-    for (val (a: Int, b) in b) {}
-    for (val (a, b: Int) in b) {}
+    for (konst (a) in b) {}
+    for (konst (a, b) in b) {}
+    for (konst (a: Int, b: Int) in b) {}
+    for (konst (a: Int, b) in b) {}
+    for (konst (a, b: Int) in b) {}
 
     for (var (a) in b) {}
     for (var (a, b) in b) {}

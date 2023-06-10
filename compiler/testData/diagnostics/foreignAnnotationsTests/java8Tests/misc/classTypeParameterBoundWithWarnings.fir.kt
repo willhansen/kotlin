@@ -14,12 +14,12 @@ public class ClassTypeParameterBoundWithWarnings <T extends @NotNull String> {
 
 // FILE: main.kt
 fun main(x: ClassTypeParameterBoundWithWarnings<<!UPPER_BOUND_VIOLATED!>String?<!>>, y: ClassTypeParameterBoundWithWarnings<String>, a: String?, b: String) {
-    val x2 = ClassTypeParameterBoundWithWarnings<<!UPPER_BOUND_VIOLATED!>String?<!>>()
-    val y2 = ClassTypeParameterBoundWithWarnings<String>()
+    konst x2 = ClassTypeParameterBoundWithWarnings<<!UPPER_BOUND_VIOLATED!>String?<!>>()
+    konst y2 = ClassTypeParameterBoundWithWarnings<String>()
 
-    val x3 = ClassTypeParameterBoundWithWarnings(<!ARGUMENT_TYPE_MISMATCH!>a<!>)
-    val y3 = ClassTypeParameterBoundWithWarnings(b)
+    konst x3 = ClassTypeParameterBoundWithWarnings(<!ARGUMENT_TYPE_MISMATCH!>a<!>)
+    konst y3 = ClassTypeParameterBoundWithWarnings(b)
 
-    val x4: ClassTypeParameterBoundWithWarnings<<!UPPER_BOUND_VIOLATED!>String?<!>> = <!TYPE_MISMATCH!>ClassTypeParameterBoundWithWarnings()<!>
-    val y4: ClassTypeParameterBoundWithWarnings<String> = ClassTypeParameterBoundWithWarnings()
+    konst x4: ClassTypeParameterBoundWithWarnings<<!UPPER_BOUND_VIOLATED!>String?<!>> = <!TYPE_MISMATCH!>ClassTypeParameterBoundWithWarnings()<!>
+    konst y4: ClassTypeParameterBoundWithWarnings<String> = ClassTypeParameterBoundWithWarnings()
 }

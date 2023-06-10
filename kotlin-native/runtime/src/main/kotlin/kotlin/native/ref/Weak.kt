@@ -44,7 +44,7 @@ public class WeakReference<T : Any> {
     /**
      * Returns either reference to an object or null, if it was collected.
      */
-    public val value: T?
+    public konst konstue: T?
         get() = this.get()
 }
 

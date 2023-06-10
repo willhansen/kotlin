@@ -13,7 +13,7 @@ data class IncrementalCompilationContext(
     // assuming that providers here do not intersect with the one being built from precompiled binaries
     // (maybe easiest way to achieve is to delete libraries
     // TODO: consider passing something more abstract instead of precompiler component, in order to avoid file ops here
-    val previousFirSessionsSymbolProviders: Collection<FirSymbolProvider>,
-    val precompiledBinariesPackagePartProvider: PackagePartProvider?,
-    val precompiledBinariesFileScope: AbstractProjectFileSearchScope?
+    konst previousFirSessionsSymbolProviders: Collection<FirSymbolProvider>,
+    konst precompiledBinariesPackagePartProvider: PackagePartProvider?,
+    konst precompiledBinariesFileScope: AbstractProjectFileSearchScope?
 )

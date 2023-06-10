@@ -35,7 +35,7 @@ package libPackageCase2
 import testsCase2.*
 
 fun <T> listOf(vararg elements: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
-val listOf: A
+konst listOf: A
     get() = A()
 
 // FILE: TestCase3.kt
@@ -58,5 +58,5 @@ import testsCase3.*
 
 private fun <T> listOf(vararg elements: T = TODO(), body: () -> T = { TODO() }): List<T> = TODO()
 
-val listOf: A
+konst listOf: A
     get() = A()

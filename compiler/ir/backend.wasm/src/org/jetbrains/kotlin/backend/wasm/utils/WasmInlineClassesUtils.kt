@@ -14,13 +14,13 @@ import org.jetbrains.kotlin.ir.types.IrSimpleType
 import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.ir.types.isNullable
 
-class WasmInlineClassesUtils(private val wasmSymbols: WasmSymbols) : JsCommonInlineClassesUtils {
+class WasmInlineClassesUtils(private konst wasmSymbols: WasmSymbols) : JsCommonInlineClassesUtils {
 
     override fun getInlinedClass(type: IrType): IrClass? {
         if (type is IrSimpleType) {
             // TODO: Make inlining less strict
             if (type.isNullable()) return null
-            val erased = erase(type) ?: return null
+            konst erased = erase(type) ?: return null
             if (isClassInlineLike(erased)) {
                 return erased
             }
@@ -34,9 +34,9 @@ class WasmInlineClassesUtils(private val wasmSymbols: WasmSymbols) : JsCommonInl
         return super.isClassInlineLike(klass) || klass.hasWasmAutoboxedAnnotation()
     }
 
-    override val boxIntrinsic: IrSimpleFunctionSymbol
+    override konst boxIntrinsic: IrSimpleFunctionSymbol
         get() = wasmSymbols.boxIntrinsic
 
-    override val unboxIntrinsic: IrSimpleFunctionSymbol
+    override konst unboxIntrinsic: IrSimpleFunctionSymbol
         get() = wasmSymbols.unboxIntrinsic
 }

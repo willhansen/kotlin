@@ -13,7 +13,7 @@ import java.util.*
  * Base implementation of an actions executor that executes them once.
  */
 internal abstract class SingleAction {
-    private val performedActions = WeakHashMap<Project, MutableSet<String>>()
+    private konst performedActions = WeakHashMap<Project, MutableSet<String>>()
 
     /**
      * Calculates a part of a key that is used to determine whether an action from [run] was already executed
@@ -21,12 +21,12 @@ internal abstract class SingleAction {
     protected abstract fun selectKey(project: Project): Project
 
     /**
-     * Runs an [action] once per key value which is being calculated as a combination of a [selectKey] value and an [actionId]
+     * Runs an [action] once per key konstue which is being calculated as a combination of a [selectKey] konstue and an [actionId]
      *
      * Warning: if KGP is loaded multiple times by different classloaders, actions with the same [actionId] may be executed more than once
      */
     fun run(project: Project, actionId: String, action: () -> Unit) {
-        val performedActions = performedActions.computeIfAbsent(selectKey(project)) { mutableSetOf() }
+        konst performedActions = performedActions.computeIfAbsent(selectKey(project)) { mutableSetOf() }
         if (performedActions.add(actionId)) {
             action()
         }
@@ -57,7 +57,7 @@ internal object SingleActionPerProject : SingleAction() {
  * Warning: if KGP is loaded multiple times by different classloaders, warnings with the same id may be shown more than once
  */
 internal object SingleWarningPerBuild {
-    private const val ACTION_ID_SHOW_WARNING = "show-warning:"
+    private const konst ACTION_ID_SHOW_WARNING = "show-warning:"
 
     /**
      * Prints a warning with [warningText] using logger of [project]
@@ -83,7 +83,7 @@ internal object SingleWarningPerBuild {
      * Warning: if KGP is loaded multiple times by different classloaders, warnings with the same id may be shown more than once
      */
     fun deprecation(project: Project, type: String, target: String, replacement: String? = null) {
-        val replacementMessage = replacement?.let { " Please, use '$replacement' instead." } ?: ""
+        konst replacementMessage = replacement?.let { " Please, use '$replacement' instead." } ?: ""
         show(project, "Warning: $type '$target' is deprecated and will be removed in next major releases.$replacementMessage\n")
     }
 }

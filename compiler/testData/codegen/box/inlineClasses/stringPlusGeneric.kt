@@ -2,10 +2,10 @@
 // WORKS_WHEN_VALUE_CLASS
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
-fun <T> foo(a: IC<String>): T = a.value as T
+fun <T> foo(a: IC<String>): T = a.konstue as T
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IC<T: String>(val value: T)
+konstue class IC<T: String>(konst konstue: T)
 
 fun box(): String {
     return foo<String>(IC("O")) + "K"

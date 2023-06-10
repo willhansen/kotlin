@@ -19,42 +19,42 @@ import org.jetbrains.kotlin.types.model.TypeSubstitutorMarker
 import java.util.ArrayList
 
 sealed class ResolutionCandidate : Candidate, KotlinDiagnosticsHolder {
-    abstract val resolvedCall: MutableResolvedCallAtom
-    abstract val callComponents: KotlinCallComponents
-    abstract val variableCandidateIfInvoke: ResolutionCandidate?
-    abstract val scopeTower: ImplicitScopeTower
-    abstract val knownTypeParametersResultingSubstitutor: TypeSubstitutor?
-    abstract val resolutionCallbacks: KotlinResolutionCallbacks
+    abstract konst resolvedCall: MutableResolvedCallAtom
+    abstract konst callComponents: KotlinCallComponents
+    abstract konst variableCandidateIfInvoke: ResolutionCandidate?
+    abstract konst scopeTower: ImplicitScopeTower
+    abstract konst knownTypeParametersResultingSubstitutor: TypeSubstitutor?
+    abstract konst resolutionCallbacks: KotlinResolutionCallbacks
 
-    override val isSuccessful: Boolean
+    override konst isSuccessful: Boolean
         get() {
             processParts(stopOnFirstError = true)
             // Note: candidate with K1_RESOLVED_WITH_ERROR is exceptionally treated as successful
             return resultingApplicabilities.minOrNull()!!.isSuccessOrSuccessWithError && !getSystem().hasContradiction
         }
 
-    private val CandidateApplicability.isSuccessOrSuccessWithError: Boolean
+    private konst CandidateApplicability.isSuccessOrSuccessWithError: Boolean
         get() = this >= CandidateApplicability.RESOLVED_LOW_PRIORITY
 
-    override val resultingApplicability: CandidateApplicability
+    override konst resultingApplicability: CandidateApplicability
         get() {
             processParts(stopOnFirstError = false)
             return resultingApplicabilities.minOrNull() ?: CandidateApplicability.RESOLVED
         }
 
-    open val resolutionSequence: List<ResolutionPart> get() = resolvedCall.atom.callKind.resolutionSequence
+    open konst resolutionSequence: List<ResolutionPart> get() = resolvedCall.atom.callKind.resolutionSequence
 
-    protected abstract val baseSystem: ConstraintStorage?
-    protected val mutableDiagnostics: ArrayList<KotlinCallDiagnostic> = arrayListOf()
+    protected abstract konst baseSystem: ConstraintStorage?
+    protected konst mutableDiagnostics: ArrayList<KotlinCallDiagnostic> = arrayListOf()
 
-    val descriptor: CallableDescriptor get() = resolvedCall.candidateDescriptor
-    val diagnostics: List<KotlinCallDiagnostic> = mutableDiagnostics
-    val resultingApplicabilities: Array<CandidateApplicability>
+    konst descriptor: CallableDescriptor get() = resolvedCall.candidateDescriptor
+    konst diagnostics: List<KotlinCallDiagnostic> = mutableDiagnostics
+    konst resultingApplicabilities: Array<CandidateApplicability>
         get() = arrayOf(currentApplicability, getResultApplicability(getSystem().errors), variableApplicability)
 
-    private val variableApplicability
+    private konst variableApplicability
         get() = variableCandidateIfInvoke?.resultingApplicability ?: CandidateApplicability.RESOLVED
-    private val stepCount get() = resolutionSequence.sumOf { it.run { workCount() } }
+    private konst stepCount get() = resolutionSequence.sumOf { it.run { workCount() } }
 
     private var step = 0
     private var newSystem: NewConstraintSystemImpl? = null
@@ -77,9 +77,9 @@ sealed class ResolutionCandidate : Candidate, KotlinDiagnosticsHolder {
     }
 
     override fun toString(): String {
-        val descriptor = DescriptorRenderer.COMPACT.render(resolvedCall.candidateDescriptor)
-        val okOrFail = if (resultingApplicabilities.minOrNull()?.isSuccess != false) "OK" else "FAIL"
-        val step = "$step/$stepCount"
+        konst descriptor = DescriptorRenderer.COMPACT.render(resolvedCall.candidateDescriptor)
+        konst okOrFail = if (resultingApplicabilities.minOrNull()?.isSuccess != false) "OK" else "FAIL"
+        konst step = "$step/$stepCount"
         return "$okOrFail($step): $descriptor"
     }
 
@@ -103,7 +103,7 @@ sealed class ResolutionCandidate : Candidate, KotlinDiagnosticsHolder {
         var partIndex = 0
         var workStep = step
         while (workStep > 0) {
-            val workCount = resolutionSequence[partIndex].run { workCount() }
+            konst workCount = resolutionSequence[partIndex].run { workCount() }
             if (workStep >= workCount) {
                 partIndex++
                 workStep -= workCount

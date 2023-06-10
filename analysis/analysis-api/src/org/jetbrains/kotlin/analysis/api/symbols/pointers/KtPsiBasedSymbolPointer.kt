@@ -14,14 +14,14 @@ import org.jetbrains.kotlin.psi.psiUtil.createSmartPointer
 import kotlin.reflect.KClass
 
 public class KtPsiBasedSymbolPointer<S : KtSymbol> private constructor(
-    private val psiPointer: SmartPsiElementPointer<out KtElement>,
-    private val expectedClass: KClass<S>,
+    private konst psiPointer: SmartPsiElementPointer<out KtElement>,
+    private konst expectedClass: KClass<S>,
 ) : KtSymbolPointer<S>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): S? {
-        val psi = psiPointer.element ?: return null
+        konst psi = psiPointer.element ?: return null
 
-        val symbol: KtSymbol = with(analysisSession) {
+        konst symbol: KtSymbol = with(analysisSession) {
             if (!psi.canBeAnalysed()) return null
             when (psi) {
                 is KtDeclaration -> psi.getSymbol()
@@ -56,7 +56,7 @@ public class KtPsiBasedSymbolPointer<S : KtSymbol> private constructor(
 
             if (symbol.origin != KtSymbolOrigin.SOURCE) return null
 
-            val psi = when (val psi = symbol.psi) {
+            konst psi = when (konst psi = symbol.psi) {
                 is KtDeclaration -> psi
                 is KtFile -> psi
                 is KtObjectLiteralExpression -> psi.objectDeclaration
@@ -93,7 +93,7 @@ public class KtPsiBasedSymbolPointer<S : KtSymbol> private constructor(
             }
         }
 
-        private val disablePsiPointerFlag: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
+        private konst disablePsiPointerFlag: ThreadLocal<Boolean> = ThreadLocal.withInitial { false }
 
         @Volatile
         private var disablePsiPointer: Boolean = false

@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.storage.getValue
 
 class JvmBuiltInClassDescriptorFactory(
     storageManager: StorageManager,
-    private val moduleDescriptor: ModuleDescriptor,
-    private val computeContainingDeclaration: (ModuleDescriptor) -> DeclarationDescriptor = { module ->
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst computeContainingDeclaration: (ModuleDescriptor) -> DeclarationDescriptor = { module ->
         module.getPackage(KOTLIN_FQ_NAME).fragments.filterIsInstance<BuiltInsPackageFragment>().first()
     }
 ) : ClassDescriptorFactory {
-    private val cloneable by storageManager.createLazyValue {
+    private konst cloneable by storageManager.createLazyValue {
         ClassDescriptorImpl(
             computeContainingDeclaration(moduleDescriptor),
             CLONEABLE_NAME, Modality.ABSTRACT, ClassKind.INTERFACE, listOf(moduleDescriptor.builtIns.anyType),
@@ -49,8 +49,8 @@ class JvmBuiltInClassDescriptorFactory(
         }
 
     companion object {
-        private val KOTLIN_FQ_NAME = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
-        private val CLONEABLE_NAME = StandardNames.FqNames.cloneable.shortName()
-        val CLONEABLE_CLASS_ID = ClassId.topLevel(StandardNames.FqNames.cloneable.toSafe())
+        private konst KOTLIN_FQ_NAME = StandardNames.BUILT_INS_PACKAGE_FQ_NAME
+        private konst CLONEABLE_NAME = StandardNames.FqNames.cloneable.shortName()
+        konst CLONEABLE_CLASS_ID = ClassId.topLevel(StandardNames.FqNames.cloneable.toSafe())
     }
 }

@@ -48,12 +48,12 @@ import org.jetbrains.org.objectweb.asm.TypeReference
 import java.lang.annotation.RetentionPolicy
 
 abstract class AnnotationCodegen(
-    private val classCodegen: ClassCodegen,
-    private val skipNullabilityAnnotations: Boolean = false
+    private konst classCodegen: ClassCodegen,
+    private konst skipNullabilityAnnotations: Boolean = false
 ) {
-    private val context = classCodegen.context
-    private val typeMapper = classCodegen.typeMapper
-    private val methodSignatureMapper = classCodegen.methodSignatureMapper
+    private konst context = classCodegen.context
+    private konst typeMapper = classCodegen.typeMapper
+    private konst methodSignatureMapper = classCodegen.methodSignatureMapper
 
     /**
      * @param returnType can be null if not applicable (e.g. [annotated] is a class)
@@ -65,12 +65,12 @@ abstract class AnnotationCodegen(
     ) {
         if (annotated == null) return
 
-        val annotationDescriptorsAlreadyPresent = mutableSetOf<String>()
+        konst annotationDescriptorsAlreadyPresent = mutableSetOf<String>()
 
-        val annotations = annotated.annotations
+        konst annotations = annotated.annotations
 
         for (annotation in annotations) {
-            val applicableTargets = annotation.applicableTargetSet()
+            konst applicableTargets = annotation.applicableTargetSet()
             if (annotated is IrSimpleFunction &&
                 annotated.origin === IrDeclarationOrigin.LOCAL_FUNCTION_FOR_LAMBDA &&
                 KotlinTarget.FUNCTION !in applicableTargets &&
@@ -123,7 +123,7 @@ abstract class AnnotationCodegen(
     ) {
         if (isInvisibleForNullabilityAnalysis(declaration)) return
         if (declaration is IrValueParameter) {
-            val parent = declaration.parent as IrDeclaration
+            konst parent = declaration.parent as IrDeclaration
             if (isInvisibleForNullabilityAnalysis(parent)) return
             if (isMovedReceiverParameterOfStaticValueClassReplacement(declaration, parent)) return
         }
@@ -135,7 +135,7 @@ abstract class AnnotationCodegen(
             return
         }
 
-        val type = when (declaration) {
+        konst type = when (declaration) {
             is IrFunction -> declaration.returnType
             is IrValueDeclaration -> declaration.type
             is IrField ->
@@ -159,7 +159,7 @@ abstract class AnnotationCodegen(
         // A flexible type whose lower bound in not-null and upper bound is nullable, should not be annotated
         if (type.isWithFlexibleNullability()) return
 
-        val annotationClass = if (type.isNullable()) Nullable::class.java else NotNull::class.java
+        konst annotationClass = if (type.isNullable()) Nullable::class.java else NotNull::class.java
 
         generateAnnotationIfNotPresent(annotationDescriptorsAlreadyPresent, annotationClass)
     }
@@ -169,21 +169,21 @@ abstract class AnnotationCodegen(
                 parameter.origin == IrDeclarationOrigin.MOVED_DISPATCH_RECEIVER
 
     private fun generateAnnotationIfNotPresent(annotationDescriptorsAlreadyPresent: MutableSet<String>, annotationClass: Class<*>) {
-        val descriptor = Type.getType(annotationClass).descriptor
+        konst descriptor = Type.getType(annotationClass).descriptor
         if (!annotationDescriptorsAlreadyPresent.contains(descriptor)) {
             visitAnnotation(descriptor, false).visitEnd()
         }
     }
 
-    fun generateAnnotationDefaultValue(value: IrExpression) {
-        val visitor = visitAnnotation("", false)  // Parameters are unimportant
-        genCompileTimeValue(null, value, visitor)
+    fun generateAnnotationDefaultValue(konstue: IrExpression) {
+        konst visitor = visitAnnotation("", false)  // Parameters are unimportant
+        genCompileTimeValue(null, konstue, visitor)
         visitor.visitEnd()
     }
 
     private fun genAnnotation(annotation: IrConstructorCall, path: TypePath?, isTypeAnnotation: Boolean): String? {
-        val annotationClass = annotation.annotationClass
-        val retentionPolicy = getRetentionPolicy(annotationClass)
+        konst annotationClass = annotation.annotationClass
+        konst retentionPolicy = getRetentionPolicy(annotationClass)
         if (retentionPolicy == RetentionPolicy.SOURCE && !context.state.classBuilderMode.generateSourceRetentionAnnotations) return null
 
         // FlexibleNullability is an internal annotation, used only inside the compiler
@@ -196,8 +196,8 @@ abstract class AnnotationCodegen(
 
         classCodegen.addInnerClassInfo(annotationClass)
 
-        val asmTypeDescriptor = typeMapper.mapType(annotation.type).descriptor
-        val annotationVisitor =
+        konst asmTypeDescriptor = typeMapper.mapType(annotation.type).descriptor
+        konst annotationVisitor =
             if (!isTypeAnnotation) visitAnnotation(asmTypeDescriptor, retentionPolicy == RetentionPolicy.RUNTIME) else
                 visitTypeAnnotation(asmTypeDescriptor, path, retentionPolicy == RetentionPolicy.RUNTIME)
 
@@ -208,27 +208,27 @@ abstract class AnnotationCodegen(
     }
 
     private fun genAnnotationArguments(annotation: IrConstructorCall, annotationVisitor: AnnotationVisitor) {
-        val annotationClass = annotation.annotationClass
-        for (param in annotation.symbol.owner.valueParameters) {
-            val value = annotation.getValueArgument(param.index)
-            if (value != null)
-                genCompileTimeValue(getAnnotationArgumentJvmName(annotationClass, param.name), value, annotationVisitor)
+        konst annotationClass = annotation.annotationClass
+        for (param in annotation.symbol.owner.konstueParameters) {
+            konst konstue = annotation.getValueArgument(param.index)
+            if (konstue != null)
+                genCompileTimeValue(getAnnotationArgumentJvmName(annotationClass, param.name), konstue, annotationVisitor)
             else if (param.defaultValue != null)
-                continue // Default value will be supplied by JVM at runtime.
+                continue // Default konstue will be supplied by JVM at runtime.
             else if (context.state.classBuilderMode.generateBodies) //skip error for KAPT
-                error("No value for annotation parameter $param")
+                error("No konstue for annotation parameter $param")
         }
     }
 
     private fun getAnnotationArgumentJvmName(annotationClass: IrClass?, parameterName: Name): String {
         if (annotationClass == null) return parameterName.asString()
 
-        val propertyOrGetter = annotationClass.declarations.singleOrNull {
+        konst propertyOrGetter = annotationClass.declarations.singleOrNull {
             // IrSimpleFunction if lowered, IrProperty with a getter if imported
             (it is IrSimpleFunction && it.correspondingPropertySymbol?.owner?.name == parameterName) ||
                     (it is IrProperty && it.name == parameterName)
         } ?: return parameterName.asString()
-        val getter = propertyOrGetter as? IrSimpleFunction
+        konst getter = propertyOrGetter as? IrSimpleFunction
             ?: (propertyOrGetter as IrProperty).getter
             ?: error("No getter for annotation property: ${propertyOrGetter.render()}")
         return methodSignatureMapper.mapFunctionName(getter)
@@ -236,48 +236,48 @@ abstract class AnnotationCodegen(
 
     private fun genCompileTimeValue(
         name: String?,
-        value: IrExpression,
+        konstue: IrExpression,
         annotationVisitor: AnnotationVisitor
     ) {
-        when (value) {
-            is IrConst<*> -> annotationVisitor.visit(name, value.value)
+        when (konstue) {
+            is IrConst<*> -> annotationVisitor.visit(name, konstue.konstue)
             is IrConstructorCall -> {
-                val callee = value.symbol.owner
+                konst callee = konstue.symbol.owner
                 when {
                     callee.parentAsClass.isAnnotationClass -> {
-                        val annotationClassType = callee.returnType
-                        val internalAnnName = typeMapper.mapType(annotationClassType).descriptor
-                        val visitor = annotationVisitor.visitAnnotation(name, internalAnnName)
+                        konst annotationClassType = callee.returnType
+                        konst internalAnnName = typeMapper.mapType(annotationClassType).descriptor
+                        konst visitor = annotationVisitor.visitAnnotation(name, internalAnnName)
                         annotationClassType.classOrNull?.owner?.let(classCodegen::addInnerClassInfo)
-                        genAnnotationArguments(value, visitor)
+                        genAnnotationArguments(konstue, visitor)
                         visitor.visitEnd()
                     }
-                    else -> error("Not supported as annotation! ${ir2string(value)}")
+                    else -> error("Not supported as annotation! ${ir2string(konstue)}")
                 }
             }
             is IrGetEnumValue -> {
-                val enumEntry = value.symbol.owner
-                val enumClass = enumEntry.parentAsClass
+                konst enumEntry = konstue.symbol.owner
+                konst enumClass = enumEntry.parentAsClass
                 classCodegen.addInnerClassInfo(enumClass)
                 annotationVisitor.visitEnum(name, typeMapper.mapClass(enumClass).descriptor, enumEntry.name.asString())
             }
             is IrVararg -> { // array constructor
-                val visitor = annotationVisitor.visitArray(name)
-                for (element in value.elements) {
+                konst visitor = annotationVisitor.visitArray(name)
+                for (element in konstue.elements) {
                     genCompileTimeValue(null, element as IrExpression, visitor)
                 }
                 visitor.visitEnd()
             }
             is IrClassReference -> {
-                val classType = value.classType
+                konst classType = konstue.classType
                 classType.classOrNull?.owner?.let(classCodegen::addInnerClassInfo)
-                val mappedType =
+                konst mappedType =
                     if (classType.isInlineClassType()) typeMapper.mapClass(classType.erasedUpperBound)
                     else typeMapper.mapType(classType)
                 annotationVisitor.visit(name, mappedType)
             }
-            is IrErrorExpression -> error("Don't know how to compile annotation value ${ir2string(value)}")
-            else -> error("Unsupported compile-time value ${ir2string(value)}")
+            is IrErrorExpression -> error("Don't know how to compile annotation konstue ${ir2string(konstue)}")
+            else -> error("Unsupported compile-time konstue ${ir2string(konstue)}")
         }
     }
 
@@ -296,7 +296,7 @@ abstract class AnnotationCodegen(
                     override fun visitAnnotation(descr: String, visible: Boolean): AnnotationVisitor {
 
                         return visitor(
-                            TypeReference.newTypeParameterReference(referenceType, index).value,
+                            TypeReference.newTypeParameterReference(referenceType, index).konstue,
                             null,
                             descr,
                             visible
@@ -314,8 +314,8 @@ abstract class AnnotationCodegen(
                 if (context.state.configuration.getBoolean(JVMConfigurationKeys.EMIT_JVM_TYPE_ANNOTATIONS)) {
                     var superInterfaceIndex = 1
                     typeParameter.superTypes.forEach { superType ->
-                        val isClassOrTypeParameter = !superType.isInterface() && !superType.isAnnotation()
-                        val superIndex = if (isClassOrTypeParameter) 0 else superInterfaceIndex++
+                        konst isClassOrTypeParameter = !superType.isInterface() && !superType.isAnnotation()
+                        konst superIndex = if (isClassOrTypeParameter) 0 else superInterfaceIndex++
                         object : AnnotationCodegen(classCodegen, true) {
                             override fun visitAnnotation(descr: String, visible: Boolean): AnnotationVisitor {
                                 throw RuntimeException(
@@ -326,7 +326,7 @@ abstract class AnnotationCodegen(
 
                             override fun visitTypeAnnotation(descr: String, path: TypePath?, visible: Boolean): AnnotationVisitor {
                                 return visitor(
-                                    TypeReference.newTypeParameterBoundReference(boundType, index, superIndex).value,
+                                    TypeReference.newTypeParameterBoundReference(boundType, index, superIndex).konstue,
                                     path,
                                     descr,
                                     visible
@@ -350,13 +350,13 @@ abstract class AnnotationCodegen(
                     false
             }
 
-        private val annotationRetentionMap = mapOf(
+        private konst annotationRetentionMap = mapOf(
             KotlinRetention.SOURCE to RetentionPolicy.SOURCE,
             KotlinRetention.BINARY to RetentionPolicy.CLASS,
             KotlinRetention.RUNTIME to RetentionPolicy.RUNTIME
         )
 
-        internal val internalAnnotations = setOf(
+        internal konst internalAnnotations = setOf(
             JvmSymbols.FLEXIBLE_NULLABILITY_ANNOTATION_FQ_NAME,
             JvmSymbols.FLEXIBLE_MUTABILITY_ANNOTATION_FQ_NAME,
             JvmAnnotationNames.ENHANCED_NULLABILITY_ANNOTATION,
@@ -364,20 +364,20 @@ abstract class AnnotationCodegen(
         )
 
         private fun getRetentionPolicy(irClass: IrClass): RetentionPolicy {
-            val retention = irClass.getAnnotationRetention()
+            konst retention = irClass.getAnnotationRetention()
             if (retention != null) {
                 @Suppress("MapGetWithNotNullAssertionOperator")
                 return annotationRetentionMap[retention]!!
             }
             irClass.getAnnotation(FqName(java.lang.annotation.Retention::class.java.name))?.let { retentionAnnotation ->
-                val value = retentionAnnotation.getValueArgument(0)
-                if (value is IrDeclarationReference) {
-                    val symbol = value.symbol
+                konst konstue = retentionAnnotation.getValueArgument(0)
+                if (konstue is IrDeclarationReference) {
+                    konst symbol = konstue.symbol
                     if (symbol is IrEnumEntrySymbol) {
-                        val entry = symbol.owner
-                        val enumClassFqName = entry.parentAsClass.fqNameWhenAvailable
+                        konst entry = symbol.owner
+                        konst enumClassFqName = entry.parentAsClass.fqNameWhenAvailable
                         if (RetentionPolicy::class.java.name == enumClassFqName?.asString()) {
-                            return RetentionPolicy.valueOf(entry.name.asString())
+                            return RetentionPolicy.konstueOf(entry.name.asString())
                         }
                     }
                 }
@@ -390,7 +390,7 @@ abstract class AnnotationCodegen(
         fun IrConstructorCall.applicableTargetSet() =
             annotationClass.applicableTargetSet() ?: KotlinTarget.DEFAULT_TARGET_SET
 
-        val IrConstructorCall.annotationClass get() = symbol.owner.parentAsClass
+        konst IrConstructorCall.annotationClass get() = symbol.owner.parentAsClass
     }
 
     internal fun generateTypeAnnotations(
@@ -402,7 +402,7 @@ abstract class AnnotationCodegen(
         ) {
             return
         }
-        val infos: Iterable<TypePathInfo<IrConstructorCall>> =
+        konst infos: Iterable<TypePathInfo<IrConstructorCall>> =
             IrTypeAnnotationCollector(classCodegen.typeMapper.typeSystem).collectTypeAnnotations(type)
         for (info in infos) {
             for (annotation in info.annotations) {
@@ -424,7 +424,7 @@ abstract class AnnotationCodegen(
             }
         }
 
-        private val IrClass.isCompiledToJvm8OrHigher: Boolean
+        private konst IrClass.isCompiledToJvm8OrHigher: Boolean
             get() =
                 (origin == IrDeclarationOrigin.IR_EXTERNAL_DECLARATION_STUB || origin == IrDeclarationOrigin.IR_EXTERNAL_JAVA_DECLARATION_STUB) &&
                         isCompiledToJvm8OrHigher(source)
@@ -438,17 +438,17 @@ private fun isBareTypeParameterWithNullableUpperBound(type: IrType): Boolean {
 
 // Copied and modified from AnnotationChecker.kt
 
-private val TARGET_ALLOWED_TARGETS = Name.identifier("allowedTargets")
+private konst TARGET_ALLOWED_TARGETS = Name.identifier("allowedTargets")
 
 private fun IrClass.applicableTargetSet(): Set<KotlinTarget>? {
-    val targetEntry = getAnnotation(StandardNames.FqNames.target) ?: return null
+    konst targetEntry = getAnnotation(StandardNames.FqNames.target) ?: return null
     return loadAnnotationTargets(targetEntry)
 }
 
 private fun loadAnnotationTargets(targetEntry: IrConstructorCall): Set<KotlinTarget>? {
-    val valueArgument = targetEntry.getValueArgument(TARGET_ALLOWED_TARGETS)
+    konst konstueArgument = targetEntry.getValueArgument(TARGET_ALLOWED_TARGETS)
             as? IrVararg ?: return null
-    return valueArgument.elements.filterIsInstance<IrGetEnumValue>().mapNotNull {
-        KotlinTarget.valueOrNull(it.symbol.owner.name.asString())
+    return konstueArgument.elements.filterIsInstance<IrGetEnumValue>().mapNotNull {
+        KotlinTarget.konstueOrNull(it.symbol.owner.name.asString())
     }.toSet()
 }

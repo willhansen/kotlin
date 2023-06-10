@@ -21,17 +21,17 @@ public fun funWithReturns(/*0*/ cond: kotlin.Boolean): kotlin.Unit
 public fun funWithReturnsAndInvertCondition(/*0*/ cond: kotlin.Boolean): kotlin.Unit
     Returns(WILDCARD) -> !cond
 
-public fun funWithReturnsAndInvertTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Unit
-    Returns(WILDCARD) -> value_1 !is String
+public fun funWithReturnsAndInvertTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Unit
+    Returns(WILDCARD) -> konstue_1 !is String
 
-public fun funWithReturnsAndNotNullCheck(/*0*/ value_1: kotlin.Any?): kotlin.Unit
-    Returns(WILDCARD) -> value_1 != null
+public fun funWithReturnsAndNotNullCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Unit
+    Returns(WILDCARD) -> konstue_1 != null
 
-public fun funWithReturnsAndNullCheck(/*0*/ value_1: kotlin.Any?): kotlin.Unit
-    Returns(WILDCARD) -> value_1 == null
+public fun funWithReturnsAndNullCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Unit
+    Returns(WILDCARD) -> konstue_1 == null
 
-public fun funWithReturnsAndTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Unit
-    Returns(WILDCARD) -> value_1 is String
+public fun funWithReturnsAndTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Unit
+    Returns(WILDCARD) -> konstue_1 is String
 
 public fun funWithReturnsFalse(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
     Returns(FALSE) -> cond
@@ -39,17 +39,17 @@ public fun funWithReturnsFalse(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
 public fun funWithReturnsFalseAndInvertCondition(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
     Returns(FALSE) -> !cond
 
-public fun funWithReturnsFalseAndInvertTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(FALSE) -> value_1 !is String
+public fun funWithReturnsFalseAndInvertTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(FALSE) -> konstue_1 !is String
 
-public fun funWithReturnsFalseAndNotNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean
-    Returns(FALSE) -> value_1 != null
+public fun funWithReturnsFalseAndNotNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean
+    Returns(FALSE) -> konstue_1 != null
 
-public fun funWithReturnsFalseAndNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean
-    Returns(FALSE) -> value_1 == null
+public fun funWithReturnsFalseAndNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean
+    Returns(FALSE) -> konstue_1 == null
 
-public fun funWithReturnsFalseAndTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(FALSE) -> value_1 is String
+public fun funWithReturnsFalseAndTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(FALSE) -> konstue_1 is String
 
 public fun funWithReturnsNotNull(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
     Returns(NOT_NULL) -> cond
@@ -57,17 +57,17 @@ public fun funWithReturnsNotNull(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
 public fun funWithReturnsNotNullAndInvertCondition(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
     Returns(NOT_NULL) -> !cond
 
-public fun funWithReturnsNotNullAndInvertTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
-    Returns(NOT_NULL) -> value_1 !is String
+public fun funWithReturnsNotNullAndInvertTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean?
+    Returns(NOT_NULL) -> konstue_1 !is String
 
-public fun funWithReturnsNotNullAndNotNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean?
-    Returns(NOT_NULL) -> value_1 != null
+public fun funWithReturnsNotNullAndNotNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean?
+    Returns(NOT_NULL) -> konstue_1 != null
 
-public fun funWithReturnsNotNullAndNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean?
-    Returns(NOT_NULL) -> value_1 == null
+public fun funWithReturnsNotNullAndNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean?
+    Returns(NOT_NULL) -> konstue_1 == null
 
-public fun funWithReturnsNotNullAndTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
-    Returns(NOT_NULL) -> value_1 is String
+public fun funWithReturnsNotNullAndTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean?
+    Returns(NOT_NULL) -> konstue_1 is String
 
 public fun funWithReturnsNull(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
     Returns(NULL) -> cond
@@ -75,17 +75,17 @@ public fun funWithReturnsNull(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
 public fun funWithReturnsNullAndInvertCondition(/*0*/ cond: kotlin.Boolean): kotlin.Boolean?
     Returns(NULL) -> !cond
 
-public fun funWithReturnsNullAndInvertTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
-    Returns(NULL) -> value_1 !is String
+public fun funWithReturnsNullAndInvertTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean?
+    Returns(NULL) -> konstue_1 !is String
 
-public fun funWithReturnsNullAndNotNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean?
-    Returns(NULL) -> value_1 != null
+public fun funWithReturnsNullAndNotNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean?
+    Returns(NULL) -> konstue_1 != null
 
-public fun funWithReturnsNullAndNullCheck(/*0*/ value_1: kotlin.Number?): kotlin.Boolean?
-    Returns(NULL) -> value_1 == null
+public fun funWithReturnsNullAndNullCheck(/*0*/ konstue_1: kotlin.Number?): kotlin.Boolean?
+    Returns(NULL) -> konstue_1 == null
 
-public fun funWithReturnsNullAndTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean?
-    Returns(NULL) -> value_1 is String
+public fun funWithReturnsNullAndTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean?
+    Returns(NULL) -> konstue_1 is String
 
 public fun funWithReturnsTrue(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
     Returns(TRUE) -> cond
@@ -93,25 +93,25 @@ public fun funWithReturnsTrue(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
 public fun funWithReturnsTrueAndInvertCondition(/*0*/ cond: kotlin.Boolean): kotlin.Boolean
     Returns(TRUE) -> !cond
 
-public fun funWithReturnsTrueAndInvertTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(TRUE) -> value_1 !is String
+public fun funWithReturnsTrueAndInvertTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(TRUE) -> konstue_1 !is String
 
-public fun funWithReturnsTrueAndNotNullCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(TRUE) -> value_1 != null
+public fun funWithReturnsTrueAndNotNullCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(TRUE) -> konstue_1 != null
 
-public fun funWithReturnsTrueAndNullCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(TRUE) -> value_1 == null
+public fun funWithReturnsTrueAndNullCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(TRUE) -> konstue_1 == null
 
-public fun funWithReturnsTrueAndTypeCheck(/*0*/ value_1: kotlin.Any?): kotlin.Boolean
-    Returns(TRUE) -> value_1 is String
+public fun funWithReturnsTrueAndTypeCheck(/*0*/ konstue_1: kotlin.Any?): kotlin.Boolean
+    Returns(TRUE) -> konstue_1 is String
 
 public inline fun funWithUnknownCallsInPlace(/*0*/ block: () -> kotlin.Unit): kotlin.Unit
     CallsInPlace(block, UNKNOWN)
 
 public final class case_1 {
     public constructor case_1()
-    public final val prop_1: kotlin.Int? = 10
-    public final fun case_1(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Number?): kotlin.Unit
+    public final konst prop_1: kotlin.Int? = 10
+    public final fun case_1(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Number?): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -119,8 +119,8 @@ public final class case_1 {
 
 public final class case_2 {
     public constructor case_2()
-    public final val prop_1: kotlin.Int? = 10
-    public final fun case_2(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Number?): kotlin.Unit
+    public final konst prop_1: kotlin.Int? = 10
+    public final fun case_2(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Number?): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -128,8 +128,8 @@ public final class case_2 {
 
 public final class case_3 {
     public constructor case_3()
-    public final val prop_1: kotlin.Int? = 10
-    public final fun case_3(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Number?): kotlin.Unit
+    public final konst prop_1: kotlin.Int? = 10
+    public final fun case_3(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Number?): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -137,18 +137,18 @@ public final class case_3 {
 
 public final class case_4 {
     public constructor case_4()
-    public final val prop_1: kotlin.Int? = 10
-    public final fun case_4(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Number?): kotlin.Unit
+    public final konst prop_1: kotlin.Int? = 10
+    public final fun case_4(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Number?): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
 package contracts {
-    public fun case_3(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Any?, /*2*/ value_3: kotlin.Any?, /*3*/ value_4: kotlin.Any?): kotlin.Unit
-        Returns(WILDCARD) -> value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+    public fun case_3(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Any?, /*2*/ konstue_3: kotlin.Any?, /*3*/ konstue_4: kotlin.Any?): kotlin.Unit
+        Returns(WILDCARD) -> konstue_1 is Float? && konstue_1 != null && konstue_2 != null && konstue_3 != null && konstue_4 != null
 
-    public fun case_4(/*0*/ value_1: kotlin.Any?, /*1*/ value_2: kotlin.Any?, /*2*/ value_3: kotlin.Any?, /*3*/ value_4: kotlin.Any?): kotlin.Boolean
-        Returns(TRUE) -> value_1 is Float? && value_1 != null && value_2 != null && value_3 != null && value_4 != null
+    public fun case_4(/*0*/ konstue_1: kotlin.Any?, /*1*/ konstue_2: kotlin.Any?, /*2*/ konstue_3: kotlin.Any?, /*3*/ konstue_4: kotlin.Any?): kotlin.Boolean
+        Returns(TRUE) -> konstue_1 is Float? && konstue_1 != null && konstue_2 != null && konstue_3 != null && konstue_4 != null
 
 }

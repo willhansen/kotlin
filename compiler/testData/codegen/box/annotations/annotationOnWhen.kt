@@ -6,7 +6,7 @@ enum class SomeEnum {
 
 @Suppress("SOMETHING")
 fun box():String {
-    val someVal = SomeEnum.A
+    konst someVal = SomeEnum.A
     @Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
     when (someVal) {
         SomeEnum.A -> {}

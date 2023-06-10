@@ -3,8 +3,8 @@
 
 // FILE: dependency.kt
 
-inline class InlinedInt(val internal: Int)
-inline class InlinedString(val internal: String)
+inline class InlinedInt(konst internal: Int)
+inline class InlinedString(konst internal: String)
 
 inline fun <T> foo(callback: () -> T): T {
     return callback()
@@ -29,7 +29,7 @@ fun test(i: InlinedInt, s: InlinedString) {
 }
 
 // @TestKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 INVOKESTATIC InlinedInt\$Erased.box
 // 0 INVOKEVIRTUAL InlinedInt.unbox
 // 0 INVOKESTATIC InlinedString\$Erased.box

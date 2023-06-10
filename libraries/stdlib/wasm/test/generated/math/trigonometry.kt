@@ -16,7 +16,7 @@ import kotlin.test.*
 
 
 class TrigonometryTest {
-    private val arguments = arrayOf(
+    private konst arguments = arrayOf(
         0xfff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x7fefffffffffffffUL, 
         0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x0UL,     0x3da5fd7fe1796495UL, 
         0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -35,7 +35,7 @@ class TrigonometryTest {
     
     @Test
     fun testSin() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x1UL,     0x3f7452fc98b34e97UL, 
             0x7ff8000000000000UL,     0x3fedcf338109c34bUL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -57,7 +57,7 @@ class TrigonometryTest {
     
     @Test
     fun testCos() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x3ff0000000000000UL,     0xbfefffe62ecfab75UL, 
             0x7ff8000000000000UL,     0x3fd745ba83a7adcaUL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
             0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
@@ -79,7 +79,7 @@ class TrigonometryTest {
     
     @Test
     fun testTan() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x1UL,     0xbf74530cfe729484UL, 
             0x7ff8000000000000UL,     0x40047e879c4b7f73UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -101,7 +101,7 @@ class TrigonometryTest {
     
     @Test
     fun testAsin() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x1UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -123,7 +123,7 @@ class TrigonometryTest {
     
     @Test
     fun testAtan() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xbff921fb54442d18UL,     0x3ff921fb54442d18UL,     0x1UL,     0x3ff921fb54442d18UL, 
             0x7ff8000000000000UL,     0x3ff921fb54442d18UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -145,7 +145,7 @@ class TrigonometryTest {
     
     @Test
     fun testAtan2() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xc002d97c7f3321d2UL,     0xbfe921fb54442d18UL,     0xbff921fb54442d18UL,     0xbff921fb54442d18UL, 
             0x7ff8000000000000UL,     0xbff921fb54442d18UL,     0xbff921fb54442d18UL,     0xbff921fb54442d18UL, 
             0xbff921fb54442d18UL,     0xbff921fb54442d18UL,     0xbff921fb54442d18UL,     0xbff921fb54442d18UL, 
@@ -731,7 +731,7 @@ class TrigonometryTest {
     
     @Test
     fun testSinh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x7ff0000000000000UL, 
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -753,7 +753,7 @@ class TrigonometryTest {
     
     @Test
     fun testCosh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x7ff0000000000000UL, 
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
             0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
@@ -775,7 +775,7 @@ class TrigonometryTest {
     
     @Test
     fun testTanh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xbff0000000000000UL,     0x3ff0000000000000UL,     0x1UL,     0x3ff0000000000000UL, 
             0x7ff8000000000000UL,     0x3ff0000000000000UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -797,7 +797,7 @@ class TrigonometryTest {
     
     @Test
     fun testAsinh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xfff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x408633ce8fb9f87dUL, 
             0x7ff8000000000000UL,     0x407d8ef0e521dbc8UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -819,7 +819,7 @@ class TrigonometryTest {
     
     @Test
     fun testAcosh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x7ff8000000000000UL,     0x408633ce8fb9f87dUL, 
             0x7ff8000000000000UL,     0x407d8ef0e521dbc8UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -841,7 +841,7 @@ class TrigonometryTest {
     
     @Test
     fun testAtanh() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x1UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x0UL,     0x3da5fd7fe1796495UL, 
             0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 

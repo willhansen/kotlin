@@ -22,11 +22,11 @@ internal fun setMetadataFor(
         """)
     }
 
-    val metadata = metadataConstructor(name, associatedObjectKey, associatedObjects, suspendArity ?: js("[]"))
+    konst metadata = metadataConstructor(name, associatedObjectKey, associatedObjects, suspendArity ?: js("[]"))
     ctor.`$metadata$` = metadata
 
     if (interfaces != null) {
-        val receiver = if (metadata.iid != null) ctor else ctor.prototype
+        konst receiver = if (metadata.iid != null) ctor else ctor.prototype
         receiver.`$imask$` = implement(interfaces)
     }
 }
@@ -67,7 +67,7 @@ private fun createMetadata(
     suspendArity: Array<Int>?,
     iid: Int?
 ): Metadata {
-    val undef = VOID
+    konst undef = VOID
     return js("""({
     kind: kind,
     simpleName: name,
@@ -80,14 +80,14 @@ private fun createMetadata(
 }
 
 internal external interface Metadata {
-    val kind: String
+    konst kind: String
     // This field gives fast access to the prototype of metadata owner (Object.getPrototypeOf())
     // Can be pre-initialized or lazy initialized and then should be immutable
-    val simpleName: String?
-    val associatedObjectKey: Number?
-    val associatedObjects: dynamic
-    val suspendArity: Array<Int>?
-    val iid: Int?
+    konst simpleName: String?
+    konst associatedObjectKey: Number?
+    konst associatedObjects: dynamic
+    konst suspendArity: Array<Int>?
+    konst iid: Int?
 
     var `$kClass$`: dynamic
 
@@ -98,13 +98,13 @@ internal external interface Ctor {
     var `$imask$`: BitMask?
     var `$metadata$`: Metadata
     var constructor: Ctor?
-    val prototype: dynamic
+    konst prototype: dynamic
 }
 
 private fun hasProp(proto: dynamic, propName: String): Boolean = proto.hasOwnProperty(propName)
 
 internal fun calculateErrorInfo(proto: dynamic): Int {
-    val metadata: Metadata? = proto.constructor?.`$metadata$`
+    konst metadata: Metadata? = proto.constructor?.`$metadata$`
 
     metadata?.errorInfo?.let { return it } // cached
 
@@ -113,7 +113,7 @@ internal fun calculateErrorInfo(proto: dynamic): Int {
     if (hasProp(proto, "cause")) result = result or 0x2
 
     if (result != 0x3) { //
-        val parentProto = getPrototypeOf(proto)
+        konst parentProto = getPrototypeOf(proto)
         if (parentProto != js("Error").prototype) {
             result = result or calculateErrorInfo(parentProto)
         }
@@ -136,7 +136,7 @@ private fun searchForMetadata(obj: dynamic): Metadata? {
     var currentObject = getPrototypeOf(obj)
 
     while (metadata == null && currentObject != null) {
-        val currentConstructor = currentObject.constructor
+        konst currentConstructor = currentObject.constructor
         metadata = currentConstructor.`$metadata$`
         currentObject = getPrototypeOf(currentObject)
     }
@@ -145,7 +145,7 @@ private fun searchForMetadata(obj: dynamic): Metadata? {
 }
 
 private fun isInterfaceImpl(obj: dynamic, iface: Int): Boolean {
-    val mask: BitMask = obj.`$imask$`.unsafeCast<BitMask?>() ?: return false
+    konst mask: BitMask = obj.`$imask$`.unsafeCast<BitMask?>() ?: return false
     return mask.isBitSet(iface)
 }
 
@@ -177,7 +177,7 @@ internal fun isSuspendFunction(obj: dynamic, arity: Int): Boolean {
 }
 
 internal fun isObject(obj: dynamic): Boolean {
-    val objTypeOf = jsTypeOf(obj)
+    konst objTypeOf = jsTypeOf(obj)
 
     return when (objTypeOf) {
         "string" -> true
@@ -244,7 +244,7 @@ internal fun jsIsType(obj: dynamic, jsClass: dynamic): Boolean {
     }
 
     if (klassMetadata.kind === "interface") {
-        val iid =  klassMetadata.iid.unsafeCast<Int?>() ?: return false
+        konst iid =  klassMetadata.iid.unsafeCast<Int?>() ?: return false
         return isInterfaceImpl(obj, iid)
     }
 
@@ -254,20 +254,20 @@ internal fun jsIsType(obj: dynamic, jsClass: dynamic): Boolean {
 internal fun isNumber(a: dynamic) = jsTypeOf(a) == "number" || a is Long
 
 @OptIn(JsIntrinsic::class)
-internal fun isComparable(value: dynamic): Boolean {
-    var type = jsTypeOf(value)
+internal fun isComparable(konstue: dynamic): Boolean {
+    var type = jsTypeOf(konstue)
 
     return type == "string" ||
             type == "boolean" ||
-            isNumber(value) ||
-            isInterface(value, jsClassIntrinsic<Comparable<*>>())
+            isNumber(konstue) ||
+            isInterface(konstue, jsClassIntrinsic<Comparable<*>>())
 }
 
 @OptIn(JsIntrinsic::class)
-internal fun isCharSequence(value: dynamic): Boolean =
-    jsTypeOf(value) == "string" || isInterface(value, jsClassIntrinsic<CharSequence>())
+internal fun isCharSequence(konstue: dynamic): Boolean =
+    jsTypeOf(konstue) == "string" || isInterface(konstue, jsClassIntrinsic<CharSequence>())
 
 
 @OptIn(JsIntrinsic::class)
-internal fun isExternalObject(value: dynamic, ktExternalObject: dynamic) =
-    jsEqeqeq(value, ktExternalObject) || (jsTypeOf(ktExternalObject) == "function" && jsInstanceOf(value, ktExternalObject))
+internal fun isExternalObject(konstue: dynamic, ktExternalObject: dynamic) =
+    jsEqeqeq(konstue, ktExternalObject) || (jsTypeOf(ktExternalObject) == "function" && jsInstanceOf(konstue, ktExternalObject))

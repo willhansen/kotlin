@@ -22,9 +22,9 @@ public class ConstructorExample<A, B> {
 // FILE: test.kt
 
 fun box(): String {
-    val generated: ConstructorExample<Long, Boolean> = ConstructorExample.of(12, 42L, true)
+    konst generated: ConstructorExample<Long, Boolean> = ConstructorExample.of(12, 42L, true)
     assertEquals(generated.name, 42L)
-    val generatedReq: ConstructorExample<String, Boolean> = ConstructorExample.of("234")
+    konst generatedReq: ConstructorExample<String, Boolean> = ConstructorExample.of("234")
     assertEquals(generatedReq.name, "234")
     return "OK"
 }

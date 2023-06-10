@@ -20,12 +20,12 @@ external class ChartistPlugins {
 external object Chartist {
     class Svg(form: String, parameters: dynamic, chartArea: String)
 
-    val plugins: ChartistPlugins
-    val Interpolation: dynamic
+    konst plugins: ChartistPlugins
+    konst Interpolation: dynamic
     fun Line(query: String, data: dynamic, options: dynamic): dynamic
 }
 
-data class Commit(val revision: String, val developer: String)
+data class Commit(konst revision: String, konst developer: String)
 
 fun sendGetRequest(url: String) = window.fetch(url, RequestInit("GET")).then { response ->
     if (!response.ok)
@@ -36,12 +36,12 @@ fun sendGetRequest(url: String) = window.fetch(url, RequestInit("GET")).then { r
 }.then { text -> text }
 
 // Get data for chart in needed format.
-fun getChartData(labels: List<String>, valuesList: Collection<List<*>>,
+fun getChartData(labels: List<String>, konstuesList: Collection<List<*>>,
                  classNames: Array<String>? = null): dynamic {
-    val chartData: dynamic = object {}
+    konst chartData: dynamic = object {}
     chartData["labels"] = labels.toTypedArray()
-    chartData["series"] = valuesList.mapIndexed { index, it ->
-        val series: dynamic = object {}
+    chartData["series"] = konstuesList.mapIndexed { index, it ->
+        konst series: dynamic = object {}
         series["data"] = it.toTypedArray()
         classNames?.let { series["className"] = classNames[index] }
         series
@@ -51,42 +51,42 @@ fun getChartData(labels: List<String>, valuesList: Collection<List<*>>,
 
 // Create object with options of chart.
 fun getChartOptions(samples: Array<String>, yTitle: String, classNames: Array<String>? = null): dynamic {
-    val chartOptions: dynamic = object {}
+    konst chartOptions: dynamic = object {}
     chartOptions["fullWidth"] = true
     chartOptions["low"] = 0
-    val paddingObject: dynamic = object {}
+    konst paddingObject: dynamic = object {}
     paddingObject["right"] = 40
     chartOptions["chartPadding"] = paddingObject
-    val axisXObject: dynamic = object {}
+    konst axisXObject: dynamic = object {}
     axisXObject["offset"] = 40
-    axisXObject["labelInterpolationFnc"] = { value, index, labels ->
-        val labelsCount = 20
-        val skipNumber = ceil((labels.length as Int).toDouble() / labelsCount).toInt()
+    axisXObject["labelInterpolationFnc"] = { konstue, index, labels ->
+        konst labelsCount = 20
+        konst skipNumber = ceil((labels.length as Int).toDouble() / labelsCount).toInt()
         if (skipNumber > 1) {
-            if (index % skipNumber == 0) value else null
+            if (index % skipNumber == 0) konstue else null
         } else {
-            value
+            konstue
         }
     }
     chartOptions["axisX"] = axisXObject
-    val axisYObject: dynamic = object {}
+    konst axisYObject: dynamic = object {}
     axisYObject["offset"] = 90
     chartOptions["axisY"] = axisYObject
-    val legendObject: dynamic = object {}
+    konst legendObject: dynamic = object {}
     legendObject["legendNames"] = samples
     classNames?.let { legendObject["classNames"] = classNames.sliceArray(0 until samples.size) }
-    val titleObject: dynamic = object {}
-    val axisYTitle: dynamic = object {}
+    konst titleObject: dynamic = object {}
+    konst axisYTitle: dynamic = object {}
     axisYTitle["axisTitle"] = yTitle
     axisYTitle["axisClass"] = "ct-axis-title"
-    val titleOffset: dynamic = {}
+    konst titleOffset: dynamic = {}
     titleOffset["x"] = 15
     titleOffset["y"] = 15
     axisYTitle["offset"] = titleOffset
     axisYTitle["textAnchor"] = "middle"
     axisYTitle["flipTitle"] = true
     titleObject["axisY"] = axisYTitle
-    val interpolationObject: dynamic = {}
+    konst interpolationObject: dynamic = {}
     interpolationObject["fillHoles"] = true
     chartOptions["lineSmooth"] = Chartist.Interpolation.simple(interpolationObject)
     chartOptions["plugins"] = arrayOf(Chartist.plugins.legend(legendObject), Chartist.plugins.ctAxisTitle(titleObject))
@@ -103,26 +103,26 @@ fun customizeChart(chart: dynamic, chartContainer: String, jquerySelector: dynam
     chart.on("draw", { data ->
         var element = data.element
         if (data.type == "point") {
-            val pointSize = 12
+            konst pointSize = 12
             builds.get(data.index)?.let { currentBuild ->
                 // Higlight builds with failures.
                 if (currentBuild.failuresNumber > 0) {
-                    val svgParameters: dynamic = object {}
+                    konst svgParameters: dynamic = object {}
                     svgParameters["d"] = arrayOf("M", data.x, data.y - pointSize,
                             "L", data.x - pointSize, data.y + pointSize / 2,
                             "L", data.x + pointSize, data.y + pointSize / 2, "z").joinToString(" ")
                     svgParameters["style"] = "fill:rgb(255,0,0);stroke-width:0"
-                    val triangle = Chartist.Svg("path", svgParameters, chartContainer)
+                    konst triangle = Chartist.Svg("path", svgParameters, chartContainer)
                     element = data.element.replace(triangle)
                 } else if (currentBuild.buildNumber == parameters["build"]) {
                     // Higlight choosen build.
-                    val svgParameters: dynamic = object {}
+                    konst svgParameters: dynamic = object {}
                     svgParameters["x"] = data.x - pointSize / 2
                     svgParameters["y"] = data.y - pointSize / 2
                     svgParameters["height"] = pointSize
                     svgParameters["width"] = pointSize
                     svgParameters["style"] = "fill:rgb(0,0,255);stroke-width:0"
-                    val rectangle = Chartist.Svg("rect", svgParameters, "ct-point")
+                    konst rectangle = Chartist.Svg("rect", svgParameters, "ct-point")
                     element = data.element.replace(rectangle)
                 }
                 // Add tooltips.
@@ -132,14 +132,14 @@ fun customizeChart(chart: dynamic, chartContainer: String, jquerySelector: dynam
                     previousBuild = builds.get(data.index - shift)
                     shift++
                 }
-                val linkToDetailedInfo = "${window.location.origin}/compare?report=" +
+                konst linkToDetailedInfo = "${window.location.origin}/compare?report=" +
                         "${currentBuild.buildNumber}:${parameters["target"]}" +
                         "${previousBuild?.let {
                             "&compareTo=${previousBuild.buildNumber}:${parameters["target"]}"
                         } ?: ""}"
-                val information = buildString {
+                konst information = buildString {
                     append("<a href=\"$linkToDetailedInfo\">${currentBuild.buildNumber}</a><br>")
-                    append("Value: ${data.value.y.toFixed(4)}<br>")
+                    append("Value: ${data.konstue.y.toFixed(4)}<br>")
                     if (currentBuild.failuresNumber > 0) {
                         append("failures: ${currentBuild.failuresNumber}<br>")
                     }
@@ -147,14 +147,14 @@ fun customizeChart(chart: dynamic, chartContainer: String, jquerySelector: dynam
                     append("date: ${currentBuild.date}<br>")
                     append("time: ${currentBuild.formattedStartTime}-${currentBuild.formattedFinishTime}<br>")
                     append("Commits:<br>")
-                    val commitsList = (JsonTreeParser.parse("{${currentBuild.commits}}") as JsonObject).getArray("commits").map {
+                    konst commitsList = (JsonTreeParser.parse("{${currentBuild.commits}}") as JsonObject).getArray("commits").map {
                         it as JsonObject
                         Commit(
                                 it.getPrimitive("revision").content,
                                 it.getPrimitive("developer").content
                         )
                     }
-                    val commits = if (commitsList.size > 3) commitsList.slice(0..2) else commitsList
+                    konst commits = if (commitsList.size > 3) commitsList.slice(0..2) else commitsList
                     commits.forEach {
                         append("${it.revision.substring(0, 7)} by ${it.developer}<br>")
                     }
@@ -171,8 +171,8 @@ fun customizeChart(chart: dynamic, chartContainer: String, jquerySelector: dynam
         }
     })
     chart.on("created", {
-        val currentChart = jquerySelector
-        val chartParameters: dynamic = object {}
+        konst currentChart = jquerySelector
+        konst chartParameters: dynamic = object {}
         chartParameters["selector"] = "[data-chart-tooltip=\"$chartContainer\"]"
         chartParameters["container"] = "#$chartContainer"
         chartParameters["html"] = true
@@ -191,18 +191,18 @@ fun getDatesComponents() = "${beforeDate?.let {"&before=${encodeURIComponent(it)
         "${afterDate?.let {"&after=${encodeURIComponent(it)}"} ?: ""}"
 
 fun main() {
-    val serverUrl = window.location.origin // use "http://localhost:3000" for local debug.
-    val zoomRatio = 2
+    konst serverUrl = window.location.origin // use "http://localhost:3000" for local debug.
+    konst zoomRatio = 2
 
     // Get parameters from request.
-    val url = window.location.href
-    val parametersPart = url.substringAfter("?").split('&')
-    val parameters = mutableMapOf("target" to "Linux", "type" to "dev", "build" to "", "branch" to "master")
+    konst url = window.location.href
+    konst parametersPart = url.substringAfter("?").split('&')
+    konst parameters = mutableMapOf("target" to "Linux", "type" to "dev", "build" to "", "branch" to "master")
     parametersPart.forEach {
-        val parsedParameter = it.split("=", limit = 2)
+        konst parsedParameter = it.split("=", limit = 2)
         if (parsedParameter.size == 2) {
-            val (key, value) = parsedParameter
-            parameters[key] = value
+            konst (key, konstue) = parsedParameter
+            parameters[key] = konstue
         }
     }
 
@@ -211,40 +211,40 @@ fun main() {
     afterDate = parameters["after"]?.let { decodeURIComponent(it) }
 
     // Get branches.
-    val branchesUrl = "$serverUrl/branches"
+    konst branchesUrl = "$serverUrl/branches"
     sendGetRequest(branchesUrl).then { response ->
-        val branches: Array<String> = JSON.parse(response)
+        konst branches: Array<String> = JSON.parse(response)
         // Add release branches to selector.
         branches.filter { it != "master" }.forEach {
             if ("^v?(\\d|\\.)+(-M\\d)?(-fixes)?$".toRegex().matches(it)) {
                 @Suppress("UNUSED_VARIABLE") // it's used within js block
-                val option = Option(it, it)
+                konst option = Option(it, it)
                 js("$('#inputGroupBranch')").append(js("$(option)"))
             }
         }
-        document.querySelector("#inputGroupBranch [value=\"${parameters["branch"]}\"]")?.setAttribute("selected", "true")
+        document.querySelector("#inputGroupBranch [konstue=\"${parameters["branch"]}\"]")?.setAttribute("selected", "true")
     }
 
 
     // Fill autocomplete list with build numbers.
-    val buildsNumbersUrl = "$serverUrl/buildsNumbers/${parameters["target"]}"
+    konst buildsNumbersUrl = "$serverUrl/buildsNumbers/${parameters["target"]}"
     sendGetRequest(buildsNumbersUrl).then { response ->
-        val buildsNumbers: Array<String> = JSON.parse(response)
-        val autocompleteParameters: dynamic = object {}
+        konst buildsNumbers: Array<String> = JSON.parse(response)
+        konst autocompleteParameters: dynamic = object {}
         autocompleteParameters["lookup"] = buildsNumbers
         autocompleteParameters["onSelect"] = { suggestion ->
-            if (suggestion.value != parameters["build"]) {
-                val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}" +
-                        "${if ((suggestion.value as String).isEmpty()) "" else "&build=${suggestion.value}"}&count=$buildsNumberToShow" +
+            if (suggestion.konstue != parameters["build"]) {
+                konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}" +
+                        "${if ((suggestion.konstue as String).isEmpty()) "" else "&build=${suggestion.konstue}"}&count=$buildsNumberToShow" +
                         getDatesComponents()
                 window.location.href = newLink
             }
         }
         js("$( \"#highligted_build\" )").autocomplete(autocompleteParameters)
-        js("$('#highligted_build')").change({ value ->
-            val newValue = js("$(this).val()").toString()
+        js("$('#highligted_build')").change({ konstue ->
+            konst newValue = js("$(this).konst()").toString()
             if (newValue.isEmpty() || newValue in buildsNumbers) {
-                val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}" +
+                konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}" +
                         "${if (newValue.isEmpty()) "" else "&build=$newValue"}&count=$buildsNumberToShow" +
                         getDatesComponents()
                 window.location.href = newLink
@@ -252,39 +252,39 @@ fun main() {
         })
     }
 
-    // Change inputs values connected with parameters and add events listeners.
-    document.querySelector("#inputGroupTarget [value=\"${parameters["target"]}\"]")?.setAttribute("selected", "true")
-    document.querySelector("#inputGroupBuildType [value=\"${parameters["type"]}\"]")?.setAttribute("selected", "true")
-    (document.getElementById("highligted_build") as HTMLInputElement).value = parameters["build"]!!
+    // Change inputs konstues connected with parameters and add events listeners.
+    document.querySelector("#inputGroupTarget [konstue=\"${parameters["target"]}\"]")?.setAttribute("selected", "true")
+    document.querySelector("#inputGroupBuildType [konstue=\"${parameters["type"]}\"]")?.setAttribute("selected", "true")
+    (document.getElementById("highligted_build") as HTMLInputElement).konstue = parameters["build"]!!
 
     // Add onChange events for fields.
     // Don't use AJAX to have opportunity to share results with simple links.
     js("$('#inputGroupTarget')").change({
-        val newValue = js("$(this).val()")
+        konst newValue = js("$(this).konst()")
         if (newValue != parameters["target"]) {
-            val newLink = "http://${window.location.host}/?target=$newValue&type=${parameters["type"]}&branch=${parameters["branch"]}" +
+            konst newLink = "http://${window.location.host}/?target=$newValue&type=${parameters["type"]}&branch=${parameters["branch"]}" +
                     "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow"
             window.location.href = newLink
         }
     })
     js("$('#inputGroupBuildType')").change({
-        val newValue = js("$(this).val()")
+        konst newValue = js("$(this).konst()")
         if (newValue != parameters["type"]) {
-            val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=$newValue&branch=${parameters["branch"]}" +
+            konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=$newValue&branch=${parameters["branch"]}" +
                     "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow"
             window.location.href = newLink
         }
     })
     js("$('#inputGroupBranch')").change({
-        val newValue = js("$(this).val()")
+        konst newValue = js("$(this).konst()")
         if (newValue != parameters["branch"]) {
-            val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=$newValue" +
+            konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=$newValue" +
                     "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow"
             window.location.href = newLink
         }
     })
 
-    val platformSpecificBenchs = when (parameters["target"]) {
+    konst platformSpecificBenchs = when (parameters["target"]) {
         "Mac_OS_X" -> ",FrameworkBenchmarksAnalyzer,SpaceFramework_iosX64"
         "Mac_OS_X_Arm64" -> ",FrameworkBenchmarksAnalyzer"
         "Linux" -> ",kotlinx.coroutines"
@@ -297,7 +297,7 @@ fun main() {
     var codeSizeData = listOf<String>() to listOf<List<Double?>>()
     var bundleSizeData = listOf<String>() to listOf<List<Int?>>()
 
-    val sizeClassNames = arrayOf("ct-series-e", "ct-series-f", "ct-series-g")
+    konst sizeClassNames = arrayOf("ct-series-e", "ct-series-f", "ct-series-g")
 
     // Draw charts.
     var execChart: dynamic = null
@@ -306,14 +306,14 @@ fun main() {
     var codeSizeChart: dynamic = null
     var bundleSizeChart: dynamic = null
 
-    val descriptionUrl = "$serverUrl/buildsDesc/${parameters["target"]}?type=${parameters["type"]}" +
+    konst descriptionUrl = "$serverUrl/buildsDesc/${parameters["target"]}?type=${parameters["type"]}" +
             "${if (parameters["branch"] != "all") "&branch=${parameters["branch"]}" else ""}&count=$buildsNumberToShow" +
             getDatesComponents()
 
-    val metricUrl = "$serverUrl/metricValue/${parameters["target"]}/"
+    konst metricUrl = "$serverUrl/metricValue/${parameters["target"]}/"
 
-    val unstableBenchmarksPromise = sendGetRequest("$serverUrl/unstable").then { unstableList ->
-        val data = JsonTreeParser.parse(unstableList)
+    konst unstableBenchmarksPromise = sendGetRequest("$serverUrl/unstable").then { unstableList ->
+        konst data = JsonTreeParser.parse(unstableList)
         if (data !is JsonArray) {
             error("Response is expected to be an array.")
         }
@@ -323,8 +323,8 @@ fun main() {
     }
 
     // Get builds description.
-    val buildsInfoPromise = sendGetRequest(descriptionUrl).then { buildsInfo ->
-        val data = JsonTreeParser.parse(buildsInfo)
+    konst buildsInfoPromise = sendGetRequest(descriptionUrl).then { buildsInfo ->
+        konst data = JsonTreeParser.parse(buildsInfo)
         if (data !is JsonArray) {
             error("Response is expected to be an array.")
         }
@@ -335,7 +335,7 @@ fun main() {
 
     unstableBenchmarksPromise.then { unstableBenchmarks ->
         // Collect information for charts library.
-        val valuesToShow = mapOf(
+        konst konstuesToShow = mapOf(
             "EXECUTION_TIME" to listOf(
                 mapOf(
                     "normalize" to "true"
@@ -383,28 +383,28 @@ fun main() {
                 )
             )
         )
-        // Send requests to get all needed metric values.
-        valuesToShow.map { (metric, listOfSettings) ->
-            val resultValues = listOfSettings.map { settings ->
-                val getParameters = with(StringBuilder()) {
+        // Send requests to get all needed metric konstues.
+        konstuesToShow.map { (metric, listOfSettings) ->
+            konst resultValues = listOfSettings.map { settings ->
+                konst getParameters = with(StringBuilder()) {
                     if (settings.isNotEmpty()) {
                         append("?")
                     }
                     var prefix = ""
-                    settings.forEach { (key, value) ->
-                        if (value.isNotEmpty()) {
-                            append("$prefix$key=$value")
+                    settings.forEach { (key, konstue) ->
+                        if (konstue.isNotEmpty()) {
+                            append("$prefix$key=$konstue")
                             prefix = "&"
                         }
                     }
                     toString()
                 }
-                val branchParameter = if (parameters["branch"] != "all")
+                konst branchParameter = if (parameters["branch"] != "all")
                     (if (getParameters.isEmpty()) "?" else "&") + "branch=${parameters["branch"]}"
                 else ""
 
-                val requestedMetric = if (metric.startsWith("EXECUTION_TIME")) "EXECUTION_TIME" else metric
-                val queryUrl = "$metricUrl$requestedMetric$getParameters$branchParameter${
+                konst requestedMetric = if (metric.startsWith("EXECUTION_TIME")) "EXECUTION_TIME" else metric
+                konst queryUrl = "$metricUrl$requestedMetric$getParameters$branchParameter${
                     if (parameters["type"] != "all")
                         (if (getParameters.isEmpty() && branchParameter.isEmpty()) "?" else "&") + "type=${parameters["type"]}"
                     else ""
@@ -412,29 +412,29 @@ fun main() {
                 sendGetRequest(queryUrl)
             }.toTypedArray()
 
-            // Get metrics values for charts.
+            // Get metrics konstues for charts.
             Promise.all(resultValues).then { responses ->
-                val valuesList = responses.map { response ->
-                    val results = (JsonTreeParser.parse(response) as JsonArray).map {
+                konst konstuesList = responses.map { response ->
+                    konst results = (JsonTreeParser.parse(response) as JsonArray).map {
                         (it as JsonObject).getPrimitive("first").content to
                                 it.getArray("second").map { (it as JsonPrimitive).doubleOrNull }
                     }
 
-                    val labels = results.map { it.first }
-                    val values = results[0].second.size.let { (0..it - 1).map { i -> results.map { it.second[i] } } }
-                    labels to values
+                    konst labels = results.map { it.first }
+                    konst konstues = results[0].second.size.let { (0..it - 1).map { i -> results.map { it.second[i] } } }
+                    labels to konstues
                 }
-                val labels = valuesList[0].first
+                konst labels = konstuesList[0].first
 
-                val values = valuesList.map { it.second }.reduce { acc, valuesPart -> acc + valuesPart }
+                konst konstues = konstuesList.map { it.second }.reduce { acc, konstuesPart -> acc + konstuesPart }
 
                 when (metric) {
                     // Update chart with gotten data.
                     "COMPILE_TIME" -> {
-                        compileData = labels to values.map { it.map { it?.let { it / 1000 } } }
+                        compileData = labels to konstues.map { it.map { it?.let { it / 1000 } } }
                         compileChart = Chartist.Line("#compile_chart",
                                 getChartData(labels, compileData.second),
-                                getChartOptions(valuesToShow["COMPILE_TIME"]!![0]["samples"]!!.split(',').toTypedArray(),
+                                getChartOptions(konstuesToShow["COMPILE_TIME"]!![0]["samples"]!!.split(',').toTypedArray(),
                                         "Time, milliseconds"))
                         buildsInfoPromise.then { builds ->
                             customizeChart(compileChart, "compile_chart", js("$(\"#compile_chart\")"), builds, parameters)
@@ -442,7 +442,7 @@ fun main() {
                         }
                     }
                     "EXECUTION_TIME" -> {
-                        execData = labels to values
+                        execData = labels to konstues
                         execChart = Chartist.Line("#exec_chart",
                                 getChartData(labels, execData.second),
                                 getChartOptions(arrayOf("Geometric Mean (All)", "Geometric mean (Stable)", "Geometric mean (New MM)"),
@@ -453,7 +453,7 @@ fun main() {
                         }
                     }
                     "EXECUTION_TIME_DEBUG" -> {
-                        execDebugData = labels to values
+                        execDebugData = labels to konstues
                         execChartDebug = Chartist.Line("#exec_debug_chart",
                                 getChartData(labels, execDebugData.second),
                                 getChartOptions(arrayOf("Geometric Mean (All)"), "Normalized time"))
@@ -463,7 +463,7 @@ fun main() {
                         }
                     }
                     "CODE_SIZE" -> {
-                        codeSizeData = labels to values
+                        codeSizeData = labels to konstues
                         codeSizeChart = Chartist.Line("#codesize_chart",
                                 getChartData(labels, codeSizeData.second),
                                 getChartOptions(arrayOf("Geometric Mean") + platformSpecificBenchs.split(',')
@@ -476,7 +476,7 @@ fun main() {
                         }
                     }
                     "BUNDLE_SIZE" -> {
-                        bundleSizeData = labels to values.map { it.map { it?.let { it.toInt() / 1024 / 1024 } } }
+                        bundleSizeData = labels to konstues.map { it.map { it?.let { it.toInt() / 1024 / 1024 } } }
                         bundleSizeChart = Chartist.Line("#bundlesize_chart",
                                 getChartData(labels,
                                         bundleSizeData.second, sizeClassNames),
@@ -494,7 +494,7 @@ fun main() {
     }
 
     // Update all charts with using same data.
-    val updateAllCharts: () -> Unit = {
+    konst updateAllCharts: () -> Unit = {
         execChart.update(getChartData(execData.first, execData.second))
         execChartDebug.update(getChartData(execDebugData.first, execDebugData.second))
         compileChart.update(getChartData(compileData.first, compileData.second))
@@ -510,7 +510,7 @@ fun main() {
                 buildsNumberToShow
             }
 
-        val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
+        konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
                 "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow" +
                 getDatesComponents()
         window.location.href = newLink
@@ -519,7 +519,7 @@ fun main() {
 
     js("$('#minusBtn')").click({
         buildsNumberToShow = buildsNumberToShow * zoomRatio
-        val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
+        konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
                 "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow" +
                 getDatesComponents()
         window.location.href = newLink
@@ -530,7 +530,7 @@ fun main() {
         buildsInfoPromise.then { builds ->
             beforeDate = builds.firstOrNull()?.startTime
             afterDate = null
-            val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
+            konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
                     "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow" +
                     "${beforeDate?.let {"&before=${encodeURIComponent(it)}"} ?: ""}"
             window.location.href = newLink
@@ -541,7 +541,7 @@ fun main() {
         buildsInfoPromise.then { builds ->
             beforeDate = null
             afterDate = builds.lastOrNull()?.startTime
-            val newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
+            konst newLink = "http://${window.location.host}/?target=${parameters["target"]}&type=${parameters["type"]}&branch=${parameters["branch"]}" +
                     "${if (parameters["build"]!!.isEmpty()) "" else "&build=${parameters["build"]}"}&count=$buildsNumberToShow" +
                     "${afterDate?.let {"&after=${encodeURIComponent(it)}"} ?: ""}"
             window.location.href = newLink
@@ -551,7 +551,7 @@ fun main() {
     // Auto reload.
     parameters["refresh"]?.let {
         // Set event.
-        window.setInterval({
+        window.setInterkonst({
             window.location.reload()
         }, it.toInt() * 1000)
     }

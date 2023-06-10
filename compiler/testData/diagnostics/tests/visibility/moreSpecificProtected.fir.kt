@@ -28,7 +28,7 @@ open class A {
 }
 
 open class B : A() {
-    public val fromB: Any = Any()
+    public konst fromB: Any = Any()
 
     override fun foo(a1: Base, a2: Derived): M2Sub = TODO()
 
@@ -40,7 +40,7 @@ open class B : A() {
         // We may call M3 and it's the most specific by its parameters
         b.foo(d, d) checkType { _<M3>() }
         // We can't call M3 (and M3Sub) as it's protected overriden in C, so it's invisible because
-        // we only allow to call protected members on dispatch receiver values that are subtypes of a dispatch receiver parameter
+        // we only allow to call protected members on dispatch receiver konstues that are subtypes of a dispatch receiver parameter
         // So, the next visible and specific member is M2Sub
         c.foo(d, d) checkType { _<M2Sub>() }
 
@@ -81,14 +81,14 @@ open class B : A() {
                 b.foo(d, d) checkType { <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>_<!><M2Sub>() }
                 // In K2, M3Sub is invisible, but we have candidate M3 from original receiver and we choose it
                 // Unlike the case of `c.foo` when we choose M2Sub because we don't have more special M3 there in the scope of C
-                // (in the meaning of overload comparison by the value parameter types)
+                // (in the meaning of overload comparison by the konstue parameter types)
                 b.foo(d, d) checkType { _<M3>() }
 
                 // In K1, it works just as `c.foo`
                 b.baz(d, d) checkType { <!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>_<!><M6>() }
                 // In K2, M5SubSub is invisible, but we have candidate M5Sub from original receiver and we choose it
                 // Unlike the case of `c.baz` when we choose M6 because we don't have more special M5Sub there in the scope of C
-                // (in the meaning of overload comparison by the value parameter types)
+                // (in the meaning of overload comparison by the konstue parameter types)
                 b.baz(d, d) checkType { _<M5Sub>() }
             }
         }
@@ -96,7 +96,7 @@ open class B : A() {
 }
 
 class C : B() {
-    public val fromC: Any = Any()
+    public konst fromC: Any = Any()
 
     override fun foo(a1: Derived, a2: Derived): M3Sub = TODO()
 

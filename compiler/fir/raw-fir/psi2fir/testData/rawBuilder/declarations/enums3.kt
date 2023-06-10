@@ -1,6 +1,6 @@
 class C {
     init {
-        enum class Planet(val m: Double, internal val r: Double) {
+        enum class Planet(konst m: Double, internal konst r: Double) {
             MERCURY(1.0, 2.0) {
                 override fun sayHello() {
                     println("Hello!!!")
@@ -17,12 +17,12 @@ class C {
                 }
             };
 
-            val g: Double = G * m / (r * r)
+            konst g: Double = G * m / (r * r)
 
             abstract fun sayHello()
 
             companion object {
-                const val G = 6.67e-11
+                const konst G = 6.67e-11
             }
         }
     }

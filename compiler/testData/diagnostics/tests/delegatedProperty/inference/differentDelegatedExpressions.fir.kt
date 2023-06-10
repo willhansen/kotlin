@@ -28,8 +28,8 @@ class MyProperty<R, T> {
         return null <!UNCHECKED_CAST!>as T<!>
     }
 
-    operator fun setValue(thisRef: R, desc: KProperty<*>, value: T) {
-        println("set $thisRef ${desc.name} $value")
+    operator fun setValue(thisRef: R, desc: KProperty<*>, konstue: T) {
+        println("set $thisRef ${desc.name} $konstue")
     }
 }
 

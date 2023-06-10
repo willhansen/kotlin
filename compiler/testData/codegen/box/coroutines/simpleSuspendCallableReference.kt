@@ -39,7 +39,7 @@ fun box(): String {
         result = O(::id) + K(::id)
         result += run("O"::idExt) + runInline("K"::idExt)
 
-        val a = A()
+        konst a = A()
         result += O(a::id) + K(a::id)
 
         result += ok("O")

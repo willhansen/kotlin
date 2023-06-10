@@ -17,11 +17,11 @@ public actual fun <T, K> Grouping<T, K>.eachCount(): Map<K, Int> =
 
 /*
 /**
- * Groups elements from the [Grouping] source by key and sums values provided by the [valueSelector] function for elements in each group.
+ * Groups elements from the [Grouping] source by key and sums konstues provided by the [konstueSelector] function for elements in each group.
  *
  * @return a [Map] associating the key of each group with the count of element in the group.
  */
 @SinceKotlin("1.1")
-public inline fun <T, K> Grouping<T, K>.eachSumOf(valueSelector: (T) -> Int): Map<K, Int> =
-        fold(0) { acc, e -> acc + valueSelector(e) }
+public inline fun <T, K> Grouping<T, K>.eachSumOf(konstueSelector: (T) -> Int): Map<K, Int> =
+        fold(0) { acc, e -> acc + konstueSelector(e) }
 */

@@ -6,15 +6,15 @@
 package org.jetbrains.kotlin.gradle.plugin.statistics.old
 
 internal interface Pre232IdeaKotlinBuildStatsMXBean {
-    fun reportBoolean(name: String, value: Boolean, subprojectName: String?, weight: Long?): Boolean
+    fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?, weight: Long?): Boolean
 
-    fun reportNumber(name: String, value: Long, subprojectName: String?, weight: Long?): Boolean
+    fun reportNumber(name: String, konstue: Long, subprojectName: String?, weight: Long?): Boolean
 
-    fun reportString(name: String, value: String, subprojectName: String?, weight: Long?): Boolean
+    fun reportString(name: String, konstue: String, subprojectName: String?, weight: Long?): Boolean
 
-    fun reportBoolean(name: String, value: Boolean, subprojectName: String?): Boolean
+    fun reportBoolean(name: String, konstue: Boolean, subprojectName: String?): Boolean
 
-    fun reportNumber(name: String, value: Long, subprojectName: String?): Boolean
+    fun reportNumber(name: String, konstue: Long, subprojectName: String?): Boolean
 
-    fun reportString(name: String, value: String, subprojectName: String?): Boolean
+    fun reportString(name: String, konstue: String, subprojectName: String?): Boolean
 }

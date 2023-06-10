@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.types.Variance
 
 object IrFactoryImpl : AbstractIrFactoryImpl() {
-    override val stageController: StageController = StageController()
+    override konst stageController: StageController = StageController()
 }
 
 abstract class AbstractIrFactoryImpl : IrFactory {

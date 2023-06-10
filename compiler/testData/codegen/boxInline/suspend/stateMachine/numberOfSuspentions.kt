@@ -5,7 +5,7 @@
 // FILE: inlined.kt
 
 suspend inline fun crossinlineMe(crossinline c: suspend () -> Unit) {
-    val l: suspend () -> Unit = { c() }
+    konst l: suspend () -> Unit = { c() }
     l()
 }
 

@@ -1,10 +1,10 @@
 // WITH_STDLIB
 // FILE: kt24258.kt
 
-val lazyNullString: String by lazy { J.nullString() }
+konst lazyNullString: String by lazy { J.nullString() }
 
 fun testLazyNullString() {
-    val s: String = lazyNullString
+    konst s: String = lazyNullString
 }
 
 // FILE: J.java

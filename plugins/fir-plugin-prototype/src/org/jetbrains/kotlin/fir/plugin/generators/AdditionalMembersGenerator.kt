@@ -26,26 +26,26 @@ import org.jetbrains.kotlin.name.SpecialNames
  */
 class AdditionalMembersGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val MATERIALIZE_NAME = Name.identifier("materialize")
-        private val NESTED_NAME = Name.identifier("Nested")
+        private konst MATERIALIZE_NAME = Name.identifier("materialize")
+        private konst NESTED_NAME = Name.identifier("Nested")
 
-        private val PREDICATE = LookupPredicate.create { annotated("NestedClassAndMaterializeMember".fqn()) }
+        private konst PREDICATE = LookupPredicate.create { annotated("NestedClassAndMaterializeMember".fqn()) }
     }
 
-    private val predicateBasedProvider = session.predicateBasedProvider
-    private val matchedClasses by lazy {
+    private konst predicateBasedProvider = session.predicateBasedProvider
+    private konst matchedClasses by lazy {
         predicateBasedProvider.getSymbolsByPredicate(PREDICATE).filterIsInstance<FirRegularClassSymbol>()
     }
 
-    private val nestedClassIds by lazy {
+    private konst nestedClassIds by lazy {
         matchedClasses.map { it.classId.createNestedClassId(NESTED_NAME) }
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
         if (callableId.callableName != MATERIALIZE_NAME) return emptyList()
         if (context == null) return emptyList()
-        val matchedClassSymbol = matchedClasses.firstOrNull { it == context.owner } ?: return emptyList()
-        val function = createMemberFunction(context.owner, Key, callableId.callableName, matchedClassSymbol.constructStarProjectedType())
+        konst matchedClassSymbol = matchedClasses.firstOrNull { it == context.owner } ?: return emptyList()
+        konst function = createMemberFunction(context.owner, Key, callableId.callableName, matchedClassSymbol.constructStarProjectedType())
         return listOf(function.symbol)
     }
 
@@ -59,7 +59,7 @@ class AdditionalMembersGenerator(session: FirSession) : FirDeclarationGeneration
     }
 
     override fun generateConstructors(context: MemberGenerationContext): List<FirConstructorSymbol> {
-        val createConstructor = createConstructor(context.owner, Key, generateDelegatedNoArgConstructorCall = true)
+        konst createConstructor = createConstructor(context.owner, Key, generateDelegatedNoArgConstructorCall = true)
         return listOf(createConstructor.symbol)
     }
 

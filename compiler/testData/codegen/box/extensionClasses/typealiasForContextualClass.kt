@@ -3,12 +3,12 @@
 // FIR status: context receivers aren't yet supported
 
 class A {
-    val ok = "OK"
+    konst ok = "OK"
 }
 
 context(A)
 class B {
-    val result = ok
+    konst result = ok
 }
 
 typealias C = B

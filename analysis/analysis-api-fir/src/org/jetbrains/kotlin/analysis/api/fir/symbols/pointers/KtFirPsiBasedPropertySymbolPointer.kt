@@ -14,11 +14,11 @@ import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtPsiBasedSymbolPointe
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 
 class KtFirPsiBasedPropertySymbolPointer(
-    private val variableSymbolPointer: KtPsiBasedSymbolPointer<KtVariableLikeSymbol>,
+    private konst variableSymbolPointer: KtPsiBasedSymbolPointer<KtVariableLikeSymbol>,
 ) : KtSymbolPointer<KtKotlinPropertySymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtKotlinPropertySymbol? =
-        when (val variable = with(analysisSession) { variableSymbolPointer.restoreSymbol() }) {
+        when (konst variable = with(analysisSession) { variableSymbolPointer.restoreSymbol() }) {
             is KtKotlinPropertySymbol -> variable
             is KtValueParameterSymbol -> variable.generatedPrimaryConstructorProperty
             else -> null

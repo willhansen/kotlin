@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.plugin.ide.IdeDependencyTransformer
 
 internal object IdePlatformStdlibCommonDependencyFilter : IdeDependencyTransformer {
-    private const val stdlibCoordinatesGroup = "org.jetbrains.kotlin"
-    private val stdlibCoordinatesModules = setOf("kotlin-stdlib-common", "kotlin-test-common", "kotlin-test-annotations-common")
+    private const konst stdlibCoordinatesGroup = "org.jetbrains.kotlin"
+    private konst stdlibCoordinatesModules = setOf("kotlin-stdlib-common", "kotlin-test-common", "kotlin-test-annotations-common")
 
     override fun transform(sourceSet: KotlinSourceSet, dependencies: Set<IdeaKotlinDependency>): Set<IdeaKotlinDependency> {
         return dependencies.filterNotTo(mutableSetOf()) { dependency ->

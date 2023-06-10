@@ -1,9 +1,9 @@
-open class T(var value: Int) {}
+open class T(var konstue: Int) {}
 
 fun plusAssign(): T {
 
     operator fun T.plusAssign(s: Int) {
-        value += s
+        konstue += s
     }
 
     var t  = T(1)
@@ -13,7 +13,7 @@ fun plusAssign(): T {
 }
 
 fun box(): String {
-    val result = plusAssign().value
+    konst result = plusAssign().konstue
     if (result != 2) return "fail 1: $result"
 
     return "OK"

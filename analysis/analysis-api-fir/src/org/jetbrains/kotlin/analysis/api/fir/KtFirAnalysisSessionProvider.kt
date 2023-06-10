@@ -28,7 +28,7 @@ import kotlin.reflect.KClass
 
 @OptIn(KtAnalysisApiInternals::class)
 class KtFirAnalysisSessionProvider(project: Project) : KtAnalysisSessionProvider(project) {
-    private val cache: ConcurrentMap<Pair<KtModule, KClass<out KtLifetimeToken>>, CachedValue<KtAnalysisSession>> =
+    private konst cache: ConcurrentMap<Pair<KtModule, KClass<out KtLifetimeToken>>, CachedValue<KtAnalysisSession>> =
         CollectionFactory.createConcurrentWeakValueMap()
 
     init {
@@ -36,29 +36,29 @@ class KtFirAnalysisSessionProvider(project: Project) : KtAnalysisSessionProvider
     }
 
     override fun getAnalysisSession(useSiteKtElement: KtElement, factory: KtLifetimeTokenFactory): KtAnalysisSession {
-        val module = ProjectStructureProvider.getModule(project, useSiteKtElement, contextualModule = null)
+        konst module = ProjectStructureProvider.getModule(project, useSiteKtElement, contextualModule = null)
         return getAnalysisSessionByUseSiteKtModule(module, factory)
     }
 
     override fun getAnalysisSessionByUseSiteKtModule(useSiteKtModule: KtModule, factory: KtLifetimeTokenFactory): KtAnalysisSession {
-        val key = Pair(useSiteKtModule, factory.identifier)
+        konst key = Pair(useSiteKtModule, factory.identifier)
         return cache.computeIfAbsent(key) {
             CachedValuesManager.getManager(project).createCachedValue {
-                val firResolveSession = useSiteKtModule.getFirResolveSession(project)
-                val validityToken = factory.create(project)
+                konst firResolveSession = useSiteKtModule.getFirResolveSession(project)
+                konst konstidityToken = factory.create(project)
 
                 CachedValueProvider.Result(
-                    KtFirAnalysisSession.createAnalysisSessionByFirResolveSession(firResolveSession, validityToken),
+                    KtFirAnalysisSession.createAnalysisSessionByFirResolveSession(firResolveSession, konstidityToken),
                     firResolveSession.useSiteFirSession.modificationTracker,
                     ProjectRootModificationTracker.getInstance(project),
                     project.createProjectWideOutOfBlockModificationTracker()
                 )
             }
-        }.value
+        }.konstue
     }
 
     override fun clearCaches() {
-        for (cachedValue in cache.values) {
+        for (cachedValue in cache.konstues) {
             check(cachedValue is CachedValueBase<*>) {
                 "Unsupported 'CachedValue' of type ${cachedValue.javaClass}'"
             }

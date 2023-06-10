@@ -38,7 +38,7 @@ operator fun GradleKpmConfigurationRelationSetup.plus(other: GradleKpmConfigurat
     return CompositeKpmConfigurationRelationSetup(listOf(this, other))
 }
 
-internal class CompositeKpmConfigurationRelationSetup(val children: List<GradleKpmConfigurationRelationSetup>) :
+internal class CompositeKpmConfigurationRelationSetup(konst children: List<GradleKpmConfigurationRelationSetup>) :
     GradleKpmConfigurationRelationSetup {
 
     override fun setupExtendsFromRelations(configuration: Configuration, context: GradleKpmFragmentConfigureContext) {
@@ -47,7 +47,7 @@ internal class CompositeKpmConfigurationRelationSetup(val children: List<GradleK
 }
 
 class GradleKpmFragmentConfigureRelationContext internal constructor(
-    val configuration: Configuration,
+    konst configuration: Configuration,
     context: GradleKpmFragmentConfigureContext
 ) : GradleKpmFragmentConfigureContext by context {
     fun extendsFrom(configuration: Configuration) = this.configuration.extendsFrom(configuration)
@@ -58,7 +58,7 @@ fun GradleKpmConfigurationRelationSetup(
     setExtendsFrom: GradleKpmFragmentConfigureRelationContext.() -> Unit
 ): GradleKpmConfigurationRelationSetup = object : GradleKpmConfigurationRelationSetup {
     override fun setupExtendsFromRelations(configuration: Configuration, context: GradleKpmFragmentConfigureContext) {
-        val relationContext = GradleKpmFragmentConfigureRelationContext(configuration, context)
+        konst relationContext = GradleKpmFragmentConfigureRelationContext(configuration, context)
         relationContext.setExtendsFrom()
     }
 }

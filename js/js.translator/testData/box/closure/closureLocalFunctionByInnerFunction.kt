@@ -12,7 +12,7 @@ fun box(): String {
 
     if (simple("OK") != "OK") return "failed on simple recursion"
 
-    val ok = "OK"
+    konst ok = "OK"
     fun withClosure(s: String? = null): String {
         if (s != null) return s
 

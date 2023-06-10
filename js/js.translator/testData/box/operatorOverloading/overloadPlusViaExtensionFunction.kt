@@ -4,7 +4,7 @@ package foo
 
 
 operator fun <T> ArrayList<T>.plus(other: Collection<T>): List<T> {
-    val c = ArrayList<T>()
+    konst c = ArrayList<T>()
     c.addAll(this)
     c.addAll(other)
     return c
@@ -13,9 +13,9 @@ operator fun <T> ArrayList<T>.plus(other: Collection<T>): List<T> {
 fun box(): String {
     var v1 = ArrayList<String>()
     v1.add("foo")
-    val v2 = ArrayList<String>()
+    konst v2 = ArrayList<String>()
     v2.add("bar")
-    val v = v1 + v2
+    konst v = v1 + v2
 
     if (v.size != 2) return "fail1: ${v.size}"
     if (v[0] != "foo") return "fail2: ${v[0]}"

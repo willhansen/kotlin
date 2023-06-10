@@ -26,14 +26,14 @@ import org.jetbrains.kotlin.library.ToolingSingleFileKlibResolveStrategy
 import org.jetbrains.kotlin.library.resolveSingleFileKlib
 
 internal object IdeNativeStdlibDependencyResolver : IdeDependencyResolver {
-    private val logger: Logger = Logging.getLogger(IdeNativePlatformDependencyResolver::class.java)
+    private konst logger: Logger = Logging.getLogger(IdeNativePlatformDependencyResolver::class.java)
 
     override fun resolve(sourceSet: KotlinSourceSet): Set<IdeaKotlinDependency> {
-        val konanDistribution = KonanDistribution(sourceSet.project.konanHome)
-        val stdlibFile = KonanDistribution(sourceSet.project.konanHome).stdlib
+        konst konanDistribution = KonanDistribution(sourceSet.project.konanHome)
+        konst stdlibFile = KonanDistribution(sourceSet.project.konanHome).stdlib
 
-        val klibExtra = try {
-            val kotlinLibrary = resolveSingleFileKlib(
+        konst klibExtra = try {
+            konst kotlinLibrary = resolveSingleFileKlib(
                 libraryFile = File(stdlibFile.absolutePath),
                 strategy = ToolingSingleFileKlibResolveStrategy
             )

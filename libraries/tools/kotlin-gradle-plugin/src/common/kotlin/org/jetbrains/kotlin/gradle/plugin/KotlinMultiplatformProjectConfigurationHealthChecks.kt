@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.gradle.utils.runProjectConfigurationHealthCheck
 private class KotlinMultiplatformProjectConfigurationException(message: String) : Exception(message)
 
 internal fun Project.runMissingKotlinTargetsProjectConfigurationHealthCheck() = project.runProjectConfigurationHealthCheck {
-    val isNoTargetsInitialized = (project.kotlinExtension as KotlinMultiplatformExtension)
+    konst isNoTargetsInitialized = (project.kotlinExtension as KotlinMultiplatformExtension)
         .targets
         .none { it !is KotlinMetadataTarget }
 
@@ -45,7 +45,7 @@ internal fun Project.runMissingAndroidTargetProjectConfigurationHealthCheck(
         return@check
     }
 
-    val androidPluginId = findAppliedAndroidPluginIdOrNull() ?: return@check
+    konst androidPluginId = findAppliedAndroidPluginIdOrNull() ?: return@check
 
     if (findAndroidTarget() != null) return@check
 
@@ -74,18 +74,18 @@ internal fun Project.runDisabledCInteropCommonizationOnHmppProjectConfigurationH
 ) {
     if (kotlinPropertiesProvider.ignoreDisabledCInteropCommonization) return
     if (isAllowCommonizer() && !kotlinPropertiesProvider.enableCInteropCommonization) {
-        val multiplatformExtension = multiplatformExtensionOrNull ?: return
+        konst multiplatformExtension = multiplatformExtensionOrNull ?: return
 
-        val sharedCompilationsWithInterops = multiplatformExtension.targets.flatMap { it.compilations }
+        konst sharedCompilationsWithInterops = multiplatformExtension.targets.flatMap { it.compilations }
             .filterIsInstance<KotlinSharedNativeCompilation>()
             .mapNotNull { compilation ->
-                val cinteropDependent = future { CInteropCommonizerDependent.from(compilation) }.getOrThrow() ?: return@mapNotNull null
+                konst cinteropDependent = future { CInteropCommonizerDependent.from(compilation) }.getOrThrow() ?: return@mapNotNull null
                 compilation to cinteropDependent
             }
             .toMap()
 
-        val affectedCompilations = sharedCompilationsWithInterops.keys
-        val affectedCInterops = sharedCompilationsWithInterops.values.flatMap { it.interops }.toSet()
+        konst affectedCompilations = sharedCompilationsWithInterops.keys
+        konst affectedCInterops = sharedCompilationsWithInterops.konstues.flatMap { it.interops }.toSet()
 
 
         /* CInterop commonizer would not affect the project: No compilation that would actually benefit */

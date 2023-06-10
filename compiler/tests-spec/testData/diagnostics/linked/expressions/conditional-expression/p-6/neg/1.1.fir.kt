@@ -24,7 +24,7 @@ import checkSubtype
  * ISSUES: KT-35517
  */
 fun case1() {
-    val a: Any = true
+    konst a: Any = true
     if (<!CONDITION_TYPE_MISMATCH!>a<!>) { "true" } else "false"
     checkSubtype<Boolean>(<!ARGUMENT_TYPE_MISMATCH!>a<!>)
 }
@@ -35,7 +35,7 @@ fun case1() {
  * ISSUES: KT-35517
  */
 fun case2() {
-    val a = JavaContainer.aO
+    konst a = JavaContainer.aO
     if (<!CONDITION_TYPE_MISMATCH!>a<!>) { "true" } else "false"
     checkSubtype<Boolean>(<!ARGUMENT_TYPE_MISMATCH!>a<!>)
 }
@@ -51,9 +51,9 @@ public class JavaClassCase3{
 // FILE: KotlinClassCase3.kt
 // TESTCASE NUMBER: 3
 fun case3() {
-    val x = JavaClassCase3.id(null) // Nothing!
+    konst x = JavaClassCase3.id(null) // Nothing!
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Nothing..kotlin.Nothing?!")!>x<!>
-    val a = if (x) {
+    konst a = if (x) {
         "NOK"
     } else "NOK"
 }

@@ -19,16 +19,16 @@ import org.jetbrains.kotlin.lombok.utils.trimToNull
 import org.jetbrains.kotlin.name.Name
 
 fun FirAnnotation.getAccessLevel(field: Name = LombokConfigNames.VALUE): AccessLevel {
-    val value = getArgumentAsString(field) ?: return AccessLevel.PUBLIC
-    return AccessLevel.valueOf(value)
+    konst konstue = getArgumentAsString(field) ?: return AccessLevel.PUBLIC
+    return AccessLevel.konstueOf(konstue)
 }
 
 private fun FirAnnotation.getArgumentAsString(field: Name): String? {
-    val argument = findArgumentByName(field) ?: return null
+    konst argument = findArgumentByName(field) ?: return null
     return when (argument) {
-        is FirConstExpression<*> -> argument.value as? String
+        is FirConstExpression<*> -> argument.konstue as? String
         is FirQualifiedAccessExpression -> {
-            val symbol = argument.toResolvedCallableSymbol()
+            konst symbol = argument.toResolvedCallableSymbol()
             if (symbol is FirEnumEntrySymbol) {
                 symbol.callableId.callableName.identifier
             } else {
@@ -46,25 +46,25 @@ fun getVisibility(annotation: FirAnnotation, field: Name = LombokConfigNames.VAL
 fun FirAnnotation.getNonBlankStringArgument(name: Name): String? = getStringArgument(name)?.trimToNull()
 
 object LombokConfigNames {
-    val VALUE = Name.identifier("value")
-    val FLUENT = Name.identifier("fluent")
-    val CHAIN = Name.identifier("chain")
-    val PREFIX = Name.identifier("prefix")
-    val ACCESS = Name.identifier("access")
-    val STATIC_NAME = Name.identifier("staticName")
-    val STATIC_CONSTRUCTOR = Name.identifier("staticConstructor")
+    konst VALUE = Name.identifier("konstue")
+    konst FLUENT = Name.identifier("fluent")
+    konst CHAIN = Name.identifier("chain")
+    konst PREFIX = Name.identifier("prefix")
+    konst ACCESS = Name.identifier("access")
+    konst STATIC_NAME = Name.identifier("staticName")
+    konst STATIC_CONSTRUCTOR = Name.identifier("staticConstructor")
 
-    val BUILDER_CLASS_NAME = Name.identifier("builderClassName")
-    val BUILD_METHOD_NAME = Name.identifier("buildMethodName")
-    val BUILDER_METHOD_NAME = Name.identifier("builderMethodName")
-    val TO_BUILDER = Name.identifier("toBuilder")
-    val SETTER_PREFIX = Name.identifier("setterPrefix")
-    val IGNORE_NULL_COLLECTIONS = Name.identifier("ignoreNullCollections")
+    konst BUILDER_CLASS_NAME = Name.identifier("builderClassName")
+    konst BUILD_METHOD_NAME = Name.identifier("buildMethodName")
+    konst BUILDER_METHOD_NAME = Name.identifier("builderMethodName")
+    konst TO_BUILDER = Name.identifier("toBuilder")
+    konst SETTER_PREFIX = Name.identifier("setterPrefix")
+    konst IGNORE_NULL_COLLECTIONS = Name.identifier("ignoreNullCollections")
 
 
-    const val FLUENT_CONFIG = "lombok.accessors.fluent"
-    const val CHAIN_CONFIG = "lombok.accessors.chain"
-    const val PREFIX_CONFIG = "lombok.accessors.prefix"
-    const val NO_IS_PREFIX_CONFIG = "lombok.getter.noIsPrefix"
-    const val BUILDER_CLASS_NAME_CONFIG = "lombok.builder.className"
+    const konst FLUENT_CONFIG = "lombok.accessors.fluent"
+    const konst CHAIN_CONFIG = "lombok.accessors.chain"
+    const konst PREFIX_CONFIG = "lombok.accessors.prefix"
+    const konst NO_IS_PREFIX_CONFIG = "lombok.getter.noIsPrefix"
+    const konst BUILDER_CLASS_NAME_CONFIG = "lombok.builder.className"
 }

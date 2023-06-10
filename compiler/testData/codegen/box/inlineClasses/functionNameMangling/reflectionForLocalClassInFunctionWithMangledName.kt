@@ -6,22 +6,22 @@
 import kotlin.test.*
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S(val string: String)
+konstue class S(konst string: String)
 
 fun test(s: S) {
     class Local
 
-    val localKClass = Local::class
-    val localJClass = localKClass.java
+    konst localKClass = Local::class
+    konst localJClass = localKClass.java
 
-    val kName = localKClass.simpleName
+    konst kName = localKClass.simpleName
     // See https://youtrack.jetbrains.com/issue/KT-29413
     // assertEquals("Local", kName)
     if (kName != "Local" && kName != "test\$Local") throw AssertionError("Fail KClass: $kName")
 
     assertTrue { localJClass.isLocalClass }
 
-    val jName = localJClass.simpleName
+    konst jName = localJClass.simpleName
     if (jName != "Local" && jName != "test\$Local") throw AssertionError("Fail java.lang.Class: $jName")
 }
 

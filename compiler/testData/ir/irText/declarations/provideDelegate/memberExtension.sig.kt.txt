@@ -5,7 +5,7 @@ object Host {
   // CHECK:
   //   Mangled name: Host@kotlin.String{}plusK
   //   Public signature: /Host.plusK|-5135341778615178066[0]
-  val String.plusK: String /* by */
+  konst String.plusK: String /* by */
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-plusK>@kotlin.String(){}kotlin.String
     //   Public signature: /Host.plusK.<get-plusK>|3745691594714867630[0]
@@ -17,7 +17,7 @@ object Host {
   // CHECK:
   //   Mangled name: Host{}ok
   //   Public signature: /Host.ok|3084714860561867417[0]
-  val ok: String
+  konst ok: String
     // CHECK JVM_IR:
     //   Mangled name: Host#<get-ok>(){}kotlin.String
     //   Public signature: /Host.ok.<get-ok>|-4000622060828023401[0]
@@ -33,7 +33,7 @@ object Host {
     // CHECK:
     //   Mangled name: Host.StringDelegate{}s
     //   Public signature: /Host.StringDelegate.s|7217541905509134881[0]
-    val s: String
+    konst s: String
       // CHECK JVM_IR:
       //   Mangled name: Host.StringDelegate#<get-s>(){}kotlin.String
       //   Public signature: /Host.StringDelegate.s.<get-s>|4142379646177092803[0]

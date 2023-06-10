@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.fir.builder.toMutableOrEmpty
  */
 
 internal class FirWhenSubjectExpressionImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val whenRef: FirExpressionRef<FirWhenExpression>,
+    override konst whenRef: FirExpressionRef<FirWhenExpression>,
 ) : FirWhenSubjectExpression() {
-    override val typeRef: FirTypeRef get() = whenRef.value.subject!!.typeRef
+    override konst typeRef: FirTypeRef get() = whenRef.konstue.subject!!.typeRef
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {
         annotations.forEach { it.accept(visitor, data) }

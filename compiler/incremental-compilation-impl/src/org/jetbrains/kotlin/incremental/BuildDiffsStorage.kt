@@ -25,13 +25,13 @@ import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
-data class BuildDifference(val ts: Long, val isIncremental: Boolean, val dirtyData: DirtyData)
+data class BuildDifference(konst ts: Long, konst isIncremental: Boolean, konst dirtyData: DirtyData)
 
 // todo: storage format can be optimized by compressing fq-names
-data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
+data class BuildDiffsStorage(konst buildDiffs: List<BuildDifference>) {
     companion object {
         fun readFromFile(file: File, reporter: ICReporter?): BuildDiffsStorage? {
-            val diffs = readDiffsFromFile(file, reporter)
+            konst diffs = readDiffsFromFile(file, reporter)
             return diffs?.let { BuildDiffsStorage(it) }
         }
 
@@ -44,14 +44,14 @@ data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
 
             try {
                 ObjectInputStream(file.inputStream().buffered()).use { input ->
-                    val version = input.readInt()
+                    konst version = input.readInt()
                     if (version != CURRENT_VERSION) {
                         reportFail("incompatible version $version, actual version is $CURRENT_VERSION")
                         return null
                     }
 
-                    val size = input.readInt()
-                    val result = ArrayList<BuildDifference>(size)
+                    konst size = input.readInt()
+                    konst result = ArrayList<BuildDifference>(size)
                     repeat(size) {
                         result.add(input.readBuildDifference())
                     }
@@ -72,7 +72,7 @@ data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
                     ObjectOutputStream(file.outputStream().buffered()).use { output ->
                         output.writeInt(CURRENT_VERSION)
 
-                        val diffsToWrite = storage.buildDiffs.sortedBy { it.ts }.takeLast(MAX_DIFFS_ENTRIES)
+                        konst diffsToWrite = storage.buildDiffs.sortedBy { it.ts }.takeLast(MAX_DIFFS_ENTRIES)
                         output.writeInt(diffsToWrite.size)
                         for (diff in diffsToWrite) {
                             output.writeBuildDifference(diff)
@@ -85,9 +85,9 @@ data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
         }
 
         private fun ObjectInputStream.readBuildDifference(): BuildDifference {
-            val ts = readLong()
-            val isIncremental = readBoolean()
-            val dirtyData = readDirtyData()
+            konst ts = readLong()
+            konst isIncremental = readBoolean()
+            konst dirtyData = readDirtyData()
             return BuildDifference(ts, isIncremental, dirtyData)
         }
 
@@ -98,28 +98,28 @@ data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
         }
 
         private fun ObjectInputStream.readDirtyData(): DirtyData {
-            val lookupSymbols = readLookups()
-            val dirtyClassesFqNames = readFqNames()
+            konst lookupSymbols = readLookups()
+            konst dirtyClassesFqNames = readFqNames()
 
             return DirtyData(lookupSymbols, dirtyClassesFqNames)
         }
 
         fun ObjectInputStream.readFqNames(): ArrayList<FqName> {
-            val dirtyClassesSize = readInt()
-            val dirtyClassesFqNames = ArrayList<FqName>(dirtyClassesSize)
+            konst dirtyClassesSize = readInt()
+            konst dirtyClassesFqNames = ArrayList<FqName>(dirtyClassesSize)
             repeat(dirtyClassesSize) {
-                val fqNameString = readUTF()
+                konst fqNameString = readUTF()
                 dirtyClassesFqNames.add(FqName(fqNameString))
             }
             return dirtyClassesFqNames
         }
 
         fun ObjectInputStream.readLookups(): ArrayList<LookupSymbol> {
-            val lookupSymbolSize = readInt()
-            val lookupSymbols = ArrayList<LookupSymbol>(lookupSymbolSize)
+            konst lookupSymbolSize = readInt()
+            konst lookupSymbols = ArrayList<LookupSymbol>(lookupSymbolSize)
             repeat(lookupSymbolSize) {
-                val name = readUTF()
-                val scope = readUTF()
+                konst name = readUTF()
+                konst scope = readUTF()
                 lookupSymbols.add(LookupSymbol(name = name, scope = scope))
             }
             return lookupSymbols
@@ -145,7 +145,7 @@ data class BuildDiffsStorage(val buildDiffs: List<BuildDifference>) {
             }
         }
 
-        internal const val MAX_DIFFS_ENTRIES: Int = 10
+        internal const konst MAX_DIFFS_ENTRIES: Int = 10
 
         @set:TestOnly
         var CURRENT_VERSION: Int = 0

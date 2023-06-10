@@ -3,19 +3,19 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineLong(val value: Long)
-inline val Number.toInlineLong get() = InlineLong(this.toLong())
+konstue class InlineLong(konst konstue: Long)
+inline konst Number.toInlineLong get() = InlineLong(this.toLong())
 
 fun box(): String {
-    val value = 0
+    konst konstue = 0
 
-    val withoutSubject = when (value.toInlineLong) {
+    konst withoutSubject = when (konstue.toInlineLong) {
         0.toInlineLong -> true
         else -> false
     }
     if (!withoutSubject) return "Fail: without subject"
 
-    val withSubject = when (val subject = value.toInlineLong) {
+    konst withSubject = when (konst subject = konstue.toInlineLong) {
         0.toInlineLong -> true
         else -> false
     }

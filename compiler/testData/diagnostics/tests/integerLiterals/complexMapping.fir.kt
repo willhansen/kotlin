@@ -23,9 +23,9 @@ private abstract class Ranges<C : Comparable<C>> {
     abstract fun <M : Comparable<M>> map(transform: (C) -> M): Ranges<M>
 }
 
-private val INF: Nothing? = null
+private konst INF: Nothing? = null
 
-private val foo = listOf(
+private konst foo = listOf(
     range(0 to 1) to range(INF to ""),
     range(2 to 3) to range(INF to "", "" to INF),
     range(4 to 5) to range("" to INF),

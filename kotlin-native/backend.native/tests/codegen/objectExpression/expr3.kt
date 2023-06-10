@@ -15,7 +15,7 @@ import kotlin.test.*
     for (i in 0 .. 1) {
         print(x)
         cnt++
-        val y = object {
+        konst y = object {
             override fun toString() = cnt.toString()
         }
         x = y

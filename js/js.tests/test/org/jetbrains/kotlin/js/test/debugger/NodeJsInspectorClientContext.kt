@@ -15,12 +15,12 @@ interface NodeJsInspectorClientContext {
     /**
      * The [`Debugger` domain](https://chromedevtools.github.io/devtools-protocol/tot/Debugger/) of Chrome DevTools protocol.
      */
-    val debugger: Debugger
+    konst debugger: Debugger
 
     /**
      * The [`Runtime` domain](https://chromedevtools.github.io/devtools-protocol/tot/Runtime/) of Chrome DevTools protocol.
      */
-    val runtime: Runtime
+    konst runtime: Runtime
 
     @Deprecated("Only for debugging purposes", level = DeprecationLevel.WARNING)
     suspend fun sendPlainTextMessage(methodName: String, paramsJson: String): String
@@ -32,14 +32,14 @@ interface NodeJsInspectorClientContext {
 }
 
 /**
- * On each incoming message checks whether [test] returns `null`, and returns only when [test] returns non-`null` value.
+ * On each incoming message checks whether [test] returns `null`, and returns only when [test] returns non-`null` konstue.
  */
 suspend inline fun <T> NodeJsInspectorClientContext.waitForValueToBecomeNonNull(crossinline test: () -> T?): T {
-    var value: T? = null
+    var konstue: T? = null
     waitForConditionToBecomeTrue {
         test()?.also {
-            value = it
+            konstue = it
         } != null
     }
-    return value!!
+    return konstue!!
 }

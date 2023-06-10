@@ -1,5 +1,5 @@
 class A(
-        val a: String = object {
+        konst a: String = object {
             override fun toString(): String = "OK"
         }.toString()
 )

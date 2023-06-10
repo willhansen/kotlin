@@ -22,11 +22,11 @@ import org.jetbrains.kotlin.ir.util.defaultType
 
 /** Represents a progression type in the Kotlin stdlib. */
 sealed class ProgressionType(
-    val elementClass: IrClass,
-    val stepClass: IrClass,
-    val minValueAsLong: Long,
-    val maxValueAsLong: Long,
-    val getProgressionLastElementFunction: IrSimpleFunctionSymbol?
+    konst elementClass: IrClass,
+    konst stepClass: IrClass,
+    konst minValueAsLong: Long,
+    konst maxValueAsLong: Long,
+    konst getProgressionLastElementFunction: IrSimpleFunctionSymbol?
 ) {
     abstract fun DeclarationIrBuilder.zeroStepExpression(): IrExpression
 
@@ -110,14 +110,14 @@ internal abstract class UnsignedProgressionType(
     minValueAsLong: Long,
     maxValueAsLong: Long,
     getProgressionLastElementFunction: IrSimpleFunctionSymbol?,
-    val unsignedType: IrType,
-    private val unsignedConversionFunction: IrSimpleFunctionSymbol
+    konst unsignedType: IrType,
+    private konst unsignedConversionFunction: IrSimpleFunctionSymbol
 ) : ProgressionType(elementClass, stepClass, minValueAsLong, maxValueAsLong, getProgressionLastElementFunction) {
 
-    private val unsafeCoerceIntrinsic = symbols.unsafeCoerceIntrinsic
+    private konst unsafeCoerceIntrinsic = symbols.unsafeCoerceIntrinsic
 
     fun IrExpression.asUnsigned(): IrExpression {
-        val fromType = type
+        konst fromType = type
         if (type == unsignedType) return this
 
         return if (unsafeCoerceIntrinsic != null) {
@@ -126,7 +126,7 @@ internal abstract class UnsignedProgressionType(
                 unsignedType,
                 unsafeCoerceIntrinsic,
                 typeArgumentsCount = 2,
-                valueArgumentsCount = 1
+                konstueArgumentsCount = 1
             ).apply {
                 putTypeArgument(0, fromType)
                 putTypeArgument(1, unsignedType)
@@ -138,7 +138,7 @@ internal abstract class UnsignedProgressionType(
                 startOffset, endOffset, unsignedConversionFunction.owner.returnType,
                 unsignedConversionFunction,
                 typeArgumentsCount = 0,
-                valueArgumentsCount = 0
+                konstueArgumentsCount = 0
             ).apply {
                 extensionReceiver = this@asUnsigned
             }
@@ -146,7 +146,7 @@ internal abstract class UnsignedProgressionType(
     }
 
     fun IrExpression.asSigned(): IrExpression {
-        val toType = elementClass.defaultType
+        konst toType = elementClass.defaultType
         if (type == toType) return this
 
         return if (unsafeCoerceIntrinsic != null) {
@@ -154,7 +154,7 @@ internal abstract class UnsignedProgressionType(
                 startOffset, endOffset, toType,
                 unsafeCoerceIntrinsic,
                 typeArgumentsCount = 2,
-                valueArgumentsCount = 1
+                konstueArgumentsCount = 1
             ).apply {
                 putTypeArgument(0, unsignedType)
                 putTypeArgument(1, toType)

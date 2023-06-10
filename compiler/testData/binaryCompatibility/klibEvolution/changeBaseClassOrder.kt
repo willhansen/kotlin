@@ -2,19 +2,19 @@
 // FILE: base.kt
 
 open class X {
-    open val bar: String 
+    open konst bar: String 
         get() = "base class open"
-    val zon: String 
+    konst zon: String 
         get() = "base class"
 }
 
 interface Y {
-    val qux: String 
+    konst qux: String 
         get() = "base interface Y"
 }
 
 interface Z {
-    val sep: String 
+    konst sep: String 
         get() = "base interface Z"
 }
 
@@ -23,11 +23,11 @@ interface Z {
 // VERSION: 1
 
 class W : Y, Z, X() {
-    override val bar: String
+    override konst bar: String
         get() = "from base class"
-    override val qux: String
+    override konst qux: String
         get() = "from interface Y"
-    override val sep: String
+    override konst sep: String
         get() = "from interface Z"
 }
 
@@ -35,11 +35,11 @@ class W : Y, Z, X() {
 // VERSION: 2
 
 class W : X(), Z, Y {
-    override val bar: String
+    override konst bar: String
         get() = "from base class"
-    override val qux: String
+    override konst qux: String
         get() = "from interface Y"
-    override val sep: String
+    override konst sep: String
         get() = "from interface Z"
 }
 
@@ -47,7 +47,7 @@ class W : X(), Z, Y {
 // FILE: mainLib.kt
 
 fun lib(): String {
-    val w = W()
+    konst w = W()
     return when {
         w.bar != "from base class" -> "fail 1"
         w.zon != "base class" -> "fail 2"

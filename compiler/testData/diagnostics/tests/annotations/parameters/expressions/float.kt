@@ -3,9 +3,9 @@ package test
 
 
 annotation class Ann(
-        val d1: Float,
-        val d2: Float,
-        val d3: Double
+        konst d1: Float,
+        konst d2: Float,
+        konst d3: Double
 )
 
 @Ann(1.toFloat() + 1.toFloat(), 1.toFloat() + 1, 1.toFloat() + 1.0) class MyClass

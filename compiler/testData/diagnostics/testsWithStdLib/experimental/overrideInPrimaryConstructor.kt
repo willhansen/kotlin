@@ -6,10 +6,10 @@ annotation class E
 
 abstract class Foo {
     @E
-    abstract val bar: String
+    abstract konst bar: String
 }
 
 class SubFoo(
     @OptIn(E::class)
-    override val bar: String,
+    override konst bar: String,
 ) : Foo()

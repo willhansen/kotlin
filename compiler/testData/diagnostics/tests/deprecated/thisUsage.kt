@@ -3,6 +3,6 @@
 
 @Deprecated("Use A instead") open class MyClass {
     fun foo() {
-        val test = this
+        konst test = this
     }
 }

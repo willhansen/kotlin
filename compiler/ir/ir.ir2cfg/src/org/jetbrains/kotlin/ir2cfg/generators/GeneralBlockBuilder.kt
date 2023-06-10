@@ -20,15 +20,15 @@ import org.jetbrains.kotlin.ir.IrStatement
 import org.jetbrains.kotlin.ir2cfg.builders.BasicBlockBuilder
 import org.jetbrains.kotlin.ir2cfg.builders.BlockConnectorBuilder
 
-class GeneralBlockBuilder(override val incoming: BlockConnectorBuilder?) : BasicBlockBuilder {
+class GeneralBlockBuilder(override konst incoming: BlockConnectorBuilder?) : BasicBlockBuilder {
 
-    private val elements = mutableListOf<IrStatement>()
+    private konst elements = mutableListOf<IrStatement>()
 
     override fun add(element: IrStatement) {
         elements.add(element)
     }
 
-    override val last: IrStatement?
+    override konst last: IrStatement?
         get() = elements.lastOrNull()
 
     override fun build() = BasicBlockImpl(elements.toList())

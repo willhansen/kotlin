@@ -1,3 +1,3 @@
 fun foo() {
-    val result: Int = a<caret>v ?: 1
+    konst result: Int = a<caret>v ?: 1
 }

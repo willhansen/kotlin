@@ -7,6 +7,6 @@ class Delegate {
 }
 
 fun box(): String {
-    val OK: String by Delegate()
+    konst OK: String by Delegate()
     return OK
 }

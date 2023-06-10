@@ -7,7 +7,7 @@ enum class A {
 
     fun foo(){}
 
-    val x = 10
+    konst x = 10
 
     fun bar() = 10
 }

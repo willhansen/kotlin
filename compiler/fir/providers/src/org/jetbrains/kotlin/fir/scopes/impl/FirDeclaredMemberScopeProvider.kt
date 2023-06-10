@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.utils.addToStdlib.runIf
 
 @ThreadSafeMutableState
-class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessionComponent {
-    private val declaredMemberCache: FirCache<FirClass, FirContainingNamesAwareScope, DeclaredMemberScopeContext> =
+class FirDeclaredMemberScopeProvider(konst useSiteSession: FirSession) : FirSessionComponent {
+    private konst declaredMemberCache: FirCache<FirClass, FirContainingNamesAwareScope, DeclaredMemberScopeContext> =
         useSiteSession.firCachesFactory.createCache { klass, context ->
             createDeclaredMemberScope(
                 klass = klass,
@@ -35,7 +35,7 @@ class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessio
             )
         }
 
-    private val nestedClassifierCache: FirCache<FirClass, FirNestedClassifierScope?, Nothing?> =
+    private konst nestedClassifierCache: FirCache<FirClass, FirNestedClassifierScope?, Nothing?> =
         useSiteSession.firCachesFactory.createCache { klass, _ -> createNestedClassifierScope(klass) }
 
     fun declaredMemberScope(
@@ -60,9 +60,9 @@ class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessio
     }
 
     private data class DeclaredMemberScopeContext(
-        val useLazyNestedClassifierScope: Boolean,
-        val existingNames: List<Name>?,
-        val symbolProvider: FirSymbolProvider?,
+        konst useLazyNestedClassifierScope: Boolean,
+        konst existingNames: List<Name>?,
+        konst symbolProvider: FirSymbolProvider?,
     )
 
     private fun createDeclaredMemberScope(
@@ -71,7 +71,7 @@ class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessio
         existingNames: List<Name>?,
         symbolProvider: FirSymbolProvider?,
     ): FirContainingNamesAwareScope {
-        val origin = klass.origin
+        konst origin = klass.origin
         return when {
             origin.generated -> {
                 FirGeneratedClassDeclaredMemberScope.create(
@@ -82,14 +82,14 @@ class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessio
                 ) ?: FirTypeScope.Empty
             }
             else -> {
-                val baseScope = FirClassDeclaredMemberScopeImpl(
+                konst baseScope = FirClassDeclaredMemberScopeImpl(
                     useSiteSession,
                     klass,
                     useLazyNestedClassifierScope,
                     existingNames,
                     symbolProvider
                 )
-                val generatedScope = runIf(origin.fromSource || origin.generated) {
+                konst generatedScope = runIf(origin.fromSource || origin.generated) {
                     FirGeneratedClassDeclaredMemberScope.create(
                         useSiteSession,
                         klass.symbol,
@@ -111,12 +111,12 @@ class FirDeclaredMemberScopeProvider(val useSiteSession: FirSession) : FirSessio
     }
 
     private fun createNestedClassifierScope(klass: FirClass): FirNestedClassifierScope? {
-        val origin = klass.origin
+        konst origin = klass.origin
         return if (origin.generated) {
             FirGeneratedClassNestedClassifierScope.create(useSiteSession, klass.symbol, regularNestedClassifierScope = null)
         } else {
-            val baseScope = FirNestedClassifierScopeImpl(klass, useSiteSession)
-            val generatedScope = runIf(origin.fromSource) {
+            konst baseScope = FirNestedClassifierScopeImpl(klass, useSiteSession)
+            konst generatedScope = runIf(origin.fromSource) {
                 FirGeneratedClassNestedClassifierScope.create(useSiteSession, klass.symbol, regularNestedClassifierScope = baseScope)
             }
             if (generatedScope != null) {
@@ -176,4 +176,4 @@ fun lazyNestedClassifierScope(
     return FirLazyNestedClassifierScope(classId, existingNames, symbolProvider)
 }
 
-val FirSession.declaredMemberScopeProvider: FirDeclaredMemberScopeProvider by FirSession.sessionComponentAccessor()
+konst FirSession.declaredMemberScopeProvider: FirDeclaredMemberScopeProvider by FirSession.sessionComponentAccessor()

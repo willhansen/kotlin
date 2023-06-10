@@ -45,23 +45,23 @@ fun generateSignature(descriptor: DeclarationDescriptor): String? {
                 return generateSignature(descriptor.constructedClass)
             }
 
-            val parent = generateSignature(descriptor.containingDeclaration) ?: return null
+            konst parent = generateSignature(descriptor.containingDeclaration) ?: return null
             if (descriptor !is VariableAccessorDescriptor && descriptor !is ConstructorDescriptor && descriptor.name.isSpecial) {
                 return null
             }
 
             // Make distinction between functions with zero parameters and properties
-            val separator = if (descriptor is FunctionDescriptor) "#" else "!"
+            konst separator = if (descriptor is FunctionDescriptor) "#" else "!"
 
             parent + separator + escape(descriptor.name.asString()) + "|" + encodeSignature(descriptor)
         }
         is PackageFragmentDescriptor -> {
-            val module = descriptor.module.name.asString()
-            val parts = sequenceOf(module) + descriptor.fqName.pathSegments().map { it.identifier }
+            konst module = descriptor.module.name.asString()
+            konst parts = sequenceOf(module) + descriptor.fqName.pathSegments().map { it.identifier }
             parts.joinToString(".") { escape(it) }
         }
         is ClassDescriptor -> {
-            val parent = generateSignature(descriptor.containingDeclaration) ?: return null
+            konst parent = generateSignature(descriptor.containingDeclaration) ?: return null
             if (descriptor.name.isSpecial) return null
             parent + "$" + escape(descriptor.name.asString())
         }
@@ -70,9 +70,9 @@ fun generateSignature(descriptor: DeclarationDescriptor): String? {
 }
 
 private fun escape(s: String): String {
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     for (c in s) {
-        val escapedChar = when (c) {
+        konst escapedChar = when (c) {
             '\\', '"', '.', '$', '#', '!', '<', '>', '|', '+', '-', ':', '*', '?' -> "\\$c"
             else -> c.toString()
         }

@@ -15,18 +15,18 @@ import org.jetbrains.kotlin.load.kotlin.PackagePartProvider
 
 public class StandaloneAnalysisAPISession internal constructor(
     kotlinCoreProjectEnvironment: KotlinCoreProjectEnvironment,
-    public val createPackagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
+    public konst createPackagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
 ) {
     // TODO: better to limit exposure? Current usages are: addExtension, jarFileSystem
-    public val coreApplicationEnvironment: CoreApplicationEnvironment = kotlinCoreProjectEnvironment.environment
+    public konst coreApplicationEnvironment: CoreApplicationEnvironment = kotlinCoreProjectEnvironment.environment
 
-    public val application: Application = kotlinCoreProjectEnvironment.environment.application
+    public konst application: Application = kotlinCoreProjectEnvironment.environment.application
 
-    public val project: Project = kotlinCoreProjectEnvironment.project
+    public konst project: Project = kotlinCoreProjectEnvironment.project
 
     @Deprecated(
         "Use session builder's service registration.",
         ReplaceWith("project")
     )
-    public val mockProject: MockProject = kotlinCoreProjectEnvironment.project
+    public konst mockProject: MockProject = kotlinCoreProjectEnvironment.project
 }

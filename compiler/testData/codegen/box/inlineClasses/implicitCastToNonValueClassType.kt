@@ -3,7 +3,7 @@
 
 fun box(): String {
     try {
-        val a:ULong = 1u
+        konst a:ULong = 1u
         a as Int
         func(a)
     } catch (e: ClassCastException) {

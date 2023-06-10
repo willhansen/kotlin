@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val i = test()
+    konst i = test()
     return if (i != 0)
         "Failed: $i"
     else

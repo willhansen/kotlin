@@ -20,7 +20,7 @@ public annotation class nativeSetter
 public annotation class nativeInvoke
 
 @Target(CLASS, FUNCTION, PROPERTY)
-internal annotation class library(public val name: String = "")
+internal annotation class library(public konst name: String = "")
 
 @Target(CLASS)
 internal annotation class marker
@@ -41,7 +41,7 @@ internal annotation class marker
  * Example:
  *
  * ``` kotlin
- * class Person(val name: String) {
+ * class Person(konst name: String) {
  *     fun hello() {
  *         println("Hello $name!")
  *     }
@@ -54,12 +54,12 @@ internal annotation class marker
  * ```
  *
  * @property name the name which compiler uses both for declaration itself and for all references to the declaration.
- *           It's required to denote a valid JavaScript identifier.
+ *           It's required to denote a konstid JavaScript identifier.
  *
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(CLASS, FUNCTION, PROPERTY, CONSTRUCTOR, PROPERTY_GETTER, PROPERTY_SETTER)
-public actual annotation class JsName(actual val name: String)
+public actual annotation class JsName(actual konst name: String)
 
 /**
  * Denotes an `external` declaration that must be imported from native JavaScript library.
@@ -91,7 +91,7 @@ public actual annotation class JsName(actual val name: String)
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(CLASS, PROPERTY, FUNCTION, FILE)
-public annotation class JsModule(val import: String)
+public annotation class JsModule(konst import: String)
 
 /**
  * Denotes an `external` declaration that can be used without module system.
@@ -147,15 +147,15 @@ public annotation class JsNonModule
  * external fun bar(): String
  * ```
  *
- * @property value the qualifier to add to the declarations in the generated code.
- *           It must be a sequence of valid JavaScript identifiers separated by the `.` character.
- *           Examples of valid qualifiers are: `foo`, `bar.Baz`, `_.$0.f`.
+ * @property konstue the qualifier to add to the declarations in the generated code.
+ *           It must be a sequence of konstid JavaScript identifiers separated by the `.` character.
+ *           Examples of konstid qualifiers are: `foo`, `bar.Baz`, `_.$0.f`.
  *
  * @see JsModule
  */
 @Retention(AnnotationRetention.BINARY)
 @Target(AnnotationTarget.FILE)
-public annotation class JsQualifier(val value: String)
+public annotation class JsQualifier(konst konstue: String)
 
 /**
  * Exports top-level declaration on JS platform.
@@ -269,16 +269,16 @@ public annotation class JsExternalInheritorsOnly
  * fun extractUuid(@JsExternalArgument x: dynamic) = x.uuid as String
  *
  * external interface User {
- *     val uuid: String
+ *     konst uuid: String
  * }
  *
  * interface Owner {
- *     val uuid: String
+ *     konst uuid: String
  * }
  *
  * fun checkUser(user: User, owner: Owner): Boolean {
- *     val userUuid = extractUuid(user) // OK
- *     val ownerUuid = extractUuid(owner) // Compilation error! Possible bug
+ *     konst userUuid = extractUuid(user) // OK
+ *     konst ownerUuid = extractUuid(owner) // Compilation error! Possible bug
  *     return userUuid == ownerUuid
  * }
  * ```

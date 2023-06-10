@@ -7,9 +7,9 @@ public inline fun </*0*/ T, /*1*/ R> kotlin.collections.Iterable<T>.myFlatMap(/*
 @kotlin.OverloadResolutionByLambdaReturnType @kotlin.jvm.JvmName(name = "myFlatMapSequence") public inline fun </*0*/ T, /*1*/ R> kotlin.collections.Iterable<T>.myFlatMap(/*0*/ transform: (T) -> kotlin.sequences.Sequence<R>): kotlin.collections.List<R>
 
 public interface DeclarationDescriptor {
-    public abstract val name: Name
-    public abstract val nextCandidates: kotlin.collections.List<DeclarationDescriptor>?
-    public abstract val nextCandidatesSeq: kotlin.sequences.Sequence<DeclarationDescriptor>?
+    public abstract konst name: Name
+    public abstract konst nextCandidates: kotlin.collections.List<DeclarationDescriptor>?
+    public abstract konst nextCandidatesSeq: kotlin.sequences.Sequence<DeclarationDescriptor>?
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

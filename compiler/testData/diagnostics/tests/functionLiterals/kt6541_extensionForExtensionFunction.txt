@@ -1,6 +1,6 @@
 package
 
-public val t2: Z
+public konst t2: Z
 public fun (Foo.() -> kotlin.Unit).invoke(/*0*/ b: Foo.() -> kotlin.Unit): kotlin.Unit
 
 public interface Foo {

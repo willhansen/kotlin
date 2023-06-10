@@ -6,16 +6,16 @@ FILE fqName:<root> fileName:/badBreakContinue.kt
   FUN name:test2 visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY
       WHILE label=L1 origin=WHILE_LOOP
-        condition: CONST Boolean type=kotlin.Boolean value=true
+        condition: CONST Boolean type=kotlin.Boolean konstue=true
         body: BLOCK type=kotlin.Unit origin=null
           ERROR_EXPR 'Loop not found for break expression: break@ERROR' type=kotlin.Nothing
           ERROR_EXPR 'Loop not found for continue expression: continue@ERROR' type=kotlin.Nothing
   FUN name:test3 visibility:public modality:FINAL <> () returnType:kotlin.Unit
     BLOCK_BODY
       WHILE label=L1 origin=WHILE_LOOP
-        condition: CONST Boolean type=kotlin.Boolean value=true
+        condition: CONST Boolean type=kotlin.Boolean konstue=true
         body: BLOCK type=kotlin.Unit origin=null
-          VAR name:lambda type:kotlin.Function0<kotlin.Nothing> [val]
+          VAR name:lambda type:kotlin.Function0<kotlin.Nothing> [konst]
             FUN_EXPR type=kotlin.Function0<kotlin.Nothing> origin=LAMBDA
               FUN LOCAL_FUNCTION_FOR_LAMBDA name:<anonymous> visibility:local modality:FINAL <> () returnType:kotlin.Nothing
                 BLOCK_BODY

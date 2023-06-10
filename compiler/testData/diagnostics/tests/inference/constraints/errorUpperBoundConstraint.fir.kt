@@ -5,7 +5,7 @@ public interface Sam<K> {
     Sam.Result<K> compute();
 
     public static class Result<V> {
-        public static <V> Sam.Result<V> create(V value) {}
+        public static <V> Sam.Result<V> create(V konstue) {}
     }
 }
 

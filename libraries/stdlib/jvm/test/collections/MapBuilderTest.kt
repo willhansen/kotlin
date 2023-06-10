@@ -16,17 +16,17 @@ class MapBuilderTest {
 
     @Test
     fun capacityOverflow() {
-        val builderSize = 15
-        val giantMapSize = Int.MAX_VALUE - builderSize + 1
+        konst builderSize = 15
+        konst giantMapSize = Int.MAX_VALUE - builderSize + 1
 
-        val giantMap = object : AbstractMap<Int, String>() {
-            override val entries: Set<Map.Entry<Int, String>> = object : AbstractSet<Map.Entry<Int, String>>() {
-                override val size: Int get() = giantMapSize
+        konst giantMap = object : AbstractMap<Int, String>() {
+            override konst entries: Set<Map.Entry<Int, String>> = object : AbstractSet<Map.Entry<Int, String>>() {
+                override konst size: Int get() = giantMapSize
                 override fun iterator(): Iterator<Map.Entry<Int, String>> {
                     return indexSequence().map {
                         object : Map.Entry<Int, String> {
-                            override val key: Int get() = it
-                            override val value: String get() = "value"
+                            override konst key: Int get() = it
+                            override konst konstue: String get() = "konstue"
                         }
                     }.take(size).iterator()
                 }
@@ -34,7 +34,7 @@ class MapBuilderTest {
         }
 
         buildMap {
-            repeat(builderSize) { put(-it, "value") }
+            repeat(builderSize) { put(-it, "konstue") }
 
             assertFails { putAll(giantMap) }
             assertEquals(builderSize, size)
@@ -44,8 +44,8 @@ class MapBuilderTest {
     // KT-53310
     @Test
     fun reclaimStorage() {
-        val builder = MapBuilder<Int, Int>()
-        val initialCapacity = builder.capacity
+        konst builder = MapBuilder<Int, Int>()
+        konst initialCapacity = builder.capacity
         repeat(20) {
             builder[it] = it
             builder.remove(it)

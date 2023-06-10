@@ -18,8 +18,8 @@ private fun Kotlin_ObjCExport_createContinuationArgumentImpl(
         exceptionTypes: NativePtr
 ): Continuation<Any?> = createContinuationArgumentFromCallback(EmptyCompletion) { result ->
     result.fold(
-            onSuccess = { value ->
-                runCompletionSuccess(completionHolder, value)
+            onSuccess = { konstue ->
+                runCompletionSuccess(completionHolder, konstue)
             },
             onFailure = { exception ->
                 runCompletionFailure(completionHolder, exception, exceptionTypes)
@@ -28,12 +28,12 @@ private fun Kotlin_ObjCExport_createContinuationArgumentImpl(
 }
 
 private object EmptyCompletion : Continuation<Any?> {
-    override val context: CoroutineContext
+    override konst context: CoroutineContext
         get() = EmptyCoroutineContext
 
     @OptIn(ExperimentalNativeApi::class)
     override fun resumeWith(result: Result<Any?>) {
-        val exception = result.exceptionOrNull() ?: return
+        konst exception = result.exceptionOrNull() ?: return
         processUnhandledException(exception)
         terminateWithUnhandledException(exception)
         // Terminate even if unhandled exception hook has finished successfully, because
@@ -44,8 +44,8 @@ private object EmptyCompletion : Continuation<Any?> {
 
 @PublishedApi
 @ExportForCppRuntime("Kotlin_ObjCExport_resumeContinuationSuccess") // Also makes it a data flow root.
-internal fun resumeContinuation(continuation: Continuation<Any?>, value: Any?) {
-    continuation.resume(value)
+internal fun resumeContinuation(continuation: Continuation<Any?>, konstue: Any?) {
+    continuation.resume(konstue)
 }
 
 @PublishedApi

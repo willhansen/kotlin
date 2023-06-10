@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-const val M = Int.MIN_VALUE
+const konst M = Int.MIN_VALUE
 
 fun box(): String {
     var count = 0

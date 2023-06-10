@@ -15,12 +15,12 @@ fun test() {
     TODO() as AbstractClass
     TODO() as Interface
 
-    val a = TODO() as Any
-    val b = TODO() as Any?
-    val c = TODO() as OpenClass
-    val d = TODO() as FinalClass
-    val e = TODO() as AbstractClass
-    val f = TODO() as Interface
+    konst a = TODO() as Any
+    konst b = TODO() as Any?
+    konst c = TODO() as OpenClass
+    konst d = TODO() as FinalClass
+    konst e = TODO() as AbstractClass
+    konst f = TODO() as Interface
 }
 
 fun a() = TODO() as Any

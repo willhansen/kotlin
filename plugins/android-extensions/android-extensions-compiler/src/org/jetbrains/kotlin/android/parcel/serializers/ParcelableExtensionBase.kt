@@ -20,15 +20,15 @@ import java.io.FileDescriptor
 interface ParcelableExtensionBase {
 
     companion object {
-        val FILE_DESCRIPTOR_FQNAME = FqName(FileDescriptor::class.java.canonicalName)
+        konst FILE_DESCRIPTOR_FQNAME = FqName(FileDescriptor::class.java.canonicalName)
 
-        val CREATOR_NAME = Name.identifier("CREATOR")
+        konst CREATOR_NAME = Name.identifier("CREATOR")
 
-        val ALLOWED_CLASS_KINDS = listOf(ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS)
+        konst ALLOWED_CLASS_KINDS = listOf(ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS)
     }
 
     fun ClassDescriptor.hasCreatorField(): Boolean {
-        val companionObject = companionObjectDescriptor ?: return false
+        konst companionObject = companionObjectDescriptor ?: return false
 
         if (companionObject.name == CREATOR_NAME) {
             return true
@@ -39,7 +39,7 @@ interface ParcelableExtensionBase {
             .isNotEmpty()
     }
 
-    val ClassDescriptor.isParcelableClassDescriptor get() = kind in ALLOWED_CLASS_KINDS && isParcelize
+    konst ClassDescriptor.isParcelableClassDescriptor get() = kind in ALLOWED_CLASS_KINDS && isParcelize
 
     fun ClassDescriptor.hasSyntheticDescribeContents() = hasParcelizeSyntheticMethod(DESCRIBE_CONTENTS)
 
@@ -52,9 +52,9 @@ interface ParcelableExtensionBase {
     }
 
     private fun ClassDescriptor.hasParcelizeSyntheticMethod(componentKind: ParcelableSyntheticComponent.ComponentKind): Boolean {
-        val methodName = Name.identifier(componentKind.methodName)
+        konst methodName = Name.identifier(componentKind.methodName)
 
-        val writeToParcelMethods = unsubstitutedMemberScope
+        konst writeToParcelMethods = unsubstitutedMemberScope
             .getContributedFunctions(methodName, NoLookupLocation.FROM_BACKEND)
             .filter { it is ParcelableSyntheticComponent && it.componentKind == componentKind }
 

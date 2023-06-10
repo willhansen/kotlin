@@ -22,6 +22,6 @@ interface Foo {
 }
 
 fun foobar(f: Boolean, foo: Foo): Boolean {
-    val z = if (f) Okt57791 else foo.getCkt57791()
+    konst z = if (f) Okt57791 else foo.getCkt57791()
     return z.baz() == 42
 }

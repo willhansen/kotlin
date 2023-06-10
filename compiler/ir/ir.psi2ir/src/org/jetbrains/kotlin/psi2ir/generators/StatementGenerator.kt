@@ -45,23 +45,23 @@ import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall
 import org.jetbrains.kotlin.resolve.calls.model.VariableAsFunctionResolvedCall
 import org.jetbrains.kotlin.resolve.calls.tasks.isDynamic
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator
 import org.jetbrains.kotlin.resolve.scopes.receivers.ContextClassReceiver
 import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingUtils
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
 internal class StatementGenerator(
-    val bodyGenerator: BodyGenerator,
-    override val scope: Scope
+    konst bodyGenerator: BodyGenerator,
+    override konst scope: Scope
 ) : KtVisitor<IrStatement, Nothing?>(),
     GeneratorWithScope {
 
-    override val context: GeneratorContext get() = bodyGenerator.context
+    override konst context: GeneratorContext get() = bodyGenerator.context
 
-    val scopeOwner: DeclarationDescriptor get() = bodyGenerator.scopeOwner
+    konst scopeOwner: DeclarationDescriptor get() = bodyGenerator.scopeOwner
 
-    private val typeTranslator = context.typeTranslator
+    private konst typeTranslator = context.typeTranslator
 
     fun KotlinType.toIrType() = typeTranslator.translateType(this)
 
@@ -80,7 +80,7 @@ internal class StatementGenerator(
         ktStatements.mapTo(to.statements) { generateStatement(it) }
 
     fun generateExpression(ktElement: KtElement): IrExpression =
-        when (val irStatement = generateStatement(ktElement)) {
+        when (konst irStatement = generateStatement(ktElement)) {
             is IrExpression ->
                 irStatement
             is IrDeclaration ->
@@ -104,7 +104,7 @@ internal class StatementGenerator(
         )
 
     override fun visitProperty(property: KtProperty, data: Nothing?): IrStatement {
-        val variableDescriptor = getOrFail(BindingContext.VARIABLE, property)
+        konst variableDescriptor = getOrFail(BindingContext.VARIABLE, property)
 
         property.delegate?.let { ktDelegate ->
             return generateLocalDelegatedProperty(
@@ -113,7 +113,7 @@ internal class StatementGenerator(
             )
         }
 
-        val sourceElement =
+        konst sourceElement =
             if (context.extensions.debugInfoOnlyOnVariablesInDestructuringDeclarations) {
                 property.nameIdentifier ?: property
             } else {
@@ -137,21 +137,21 @@ internal class StatementGenerator(
             .generateLocalDelegatedProperty(ktProperty, ktDelegate, variableDescriptor, scopeOwnerSymbol)
 
     override fun visitDestructuringDeclaration(multiDeclaration: KtDestructuringDeclaration, data: Nothing?): IrStatement {
-        val (blockStartOffset, blockEndOffset) = if (context.extensions.debugInfoOnlyOnVariablesInDestructuringDeclarations) {
+        konst (blockStartOffset, blockEndOffset) = if (context.extensions.debugInfoOnlyOnVariablesInDestructuringDeclarations) {
             SYNTHETIC_OFFSET to SYNTHETIC_OFFSET
         } else {
             multiDeclaration.startOffsetSkippingComments to multiDeclaration.endOffset
         }
-        val irBlock = IrCompositeImpl(
+        konst irBlock = IrCompositeImpl(
             blockStartOffset, blockEndOffset,
             context.irBuiltIns.unitType, IrStatementOrigin.DESTRUCTURING_DECLARATION
         )
-        val ktInitializer = multiDeclaration.initializer!!
-        val irInitializer = generateExpression(ktInitializer)
+        konst ktInitializer = multiDeclaration.initializer!!
+        konst irInitializer = generateExpression(ktInitializer)
 
-        val containerVariable = scope.declareTemporaryVariableInBlock(irInitializer, irBlock, nameHint = "container")
+        konst containerVariable = scope.declareTemporaryVariableInBlock(irInitializer, irBlock, nameHint = "container")
 
-        val firstContainerValue = VariableLValue(context, containerVariable)
+        konst firstContainerValue = VariableLValue(context, containerVariable)
         declareComponentVariablesInBlock(
             multiDeclaration,
             irBlock,
@@ -172,42 +172,42 @@ internal class StatementGenerator(
         firstContainerValue: IntermediateValue,
         restContainerValue: IntermediateValue
     ) {
-        val callGenerator = CallGenerator(this)
+        konst callGenerator = CallGenerator(this)
 
-        // TODO: Every access to the container value causes a null check even though subsequent checks after the first can be assumed to pass.
+        // TODO: Every access to the container konstue causes a null check even though subsequent checks after the first can be assumed to pass.
         var containerValue = firstContainerValue
         for ((index, ktEntry) in multiDeclaration.entries.withIndex()) {
-            val componentVariable = getOrFail(BindingContext.VARIABLE, ktEntry)
+            konst componentVariable = getOrFail(BindingContext.VARIABLE, ktEntry)
 
-            // componentN for '_' SHOULD NOT be evaluated
+            // componentN for '_' SHOULD NOT be ekonstuated
             if (componentVariable.name.isSpecial) continue
 
-            val componentResolvedCall = getOrFail(BindingContext.COMPONENT_RESOLVED_CALL, ktEntry)
-            val componentSubstitutedCall = pregenerateCall(componentResolvedCall)
+            konst componentResolvedCall = getOrFail(BindingContext.COMPONENT_RESOLVED_CALL, ktEntry)
+            konst componentSubstitutedCall = pregenerateCall(componentResolvedCall)
 
             componentSubstitutedCall.setExplicitReceiverValue(containerValue)
 
             containerValue = restContainerValue
 
-            val (componentCallStartOffset, componentCallEndOffset) =
+            konst (componentCallStartOffset, componentCallEndOffset) =
                 if (context.extensions.debugInfoOnlyOnVariablesInDestructuringDeclarations) {
                     SYNTHETIC_OFFSET to SYNTHETIC_OFFSET
                 } else {
                     ktEntry.startOffsetSkippingComments to ktEntry.endOffset
                 }
-            val irComponentCall = callGenerator.generateCall(
+            konst irComponentCall = callGenerator.generateCall(
                 componentCallStartOffset, componentCallEndOffset,
                 componentSubstitutedCall,
                 IrStatementOrigin.COMPONENT_N.withIndex(index + 1)
             )
 
-            val componentVarOffsetSource: PsiElement =
+            konst componentVarOffsetSource: PsiElement =
                 if (context.extensions.debugInfoOnlyOnVariablesInDestructuringDeclarations) {
                     ktEntry.nameIdentifier ?: ktEntry
                 } else {
                     ktEntry
                 }
-            val irComponentVar = context.symbolTable.declareVariable(
+            konst irComponentVar = context.symbolTable.declareVariable(
                 componentVarOffsetSource.startOffsetSkippingComments, componentVarOffsetSource.endOffset,
                 IrDeclarationOrigin.DEFINED,
                 componentVariable, componentVariable.type.toIrType(), irComponentCall
@@ -217,11 +217,11 @@ internal class StatementGenerator(
     }
 
     override fun visitBlockExpression(expression: KtBlockExpression, data: Nothing?): IrStatement {
-        val isBlockBody = expression.parent is KtDeclarationWithBody && expression.parent !is KtFunctionLiteral
+        konst isBlockBody = expression.parent is KtDeclarationWithBody && expression.parent !is KtFunctionLiteral
         if (isBlockBody) throw AssertionError("Use IrBlockBody and corresponding body generator to generate blocks as function bodies")
 
-        val returnType = getExpressionTypeWithCoercionToUnitOrFail(expression)
-        val irBlock = IrBlockImpl(expression.startOffsetSkippingComments, expression.endOffset, returnType.toIrType())
+        konst returnType = getExpressionTypeWithCoercionToUnitOrFail(expression)
+        konst irBlock = IrBlockImpl(expression.startOffsetSkippingComments, expression.endOffset, returnType.toIrType())
 
         expression.statements.forEach {
             irBlock.statements.add(generateStatement(it))
@@ -231,8 +231,8 @@ internal class StatementGenerator(
     }
 
     override fun visitReturnExpression(expression: KtReturnExpression, data: Nothing?): IrStatement {
-        val returnTarget = getReturnExpressionTarget(expression)
-        val irReturnedExpression = expression.returnedExpression?.let { generateExpression(it) }
+        konst returnTarget = getReturnExpressionTarget(expression)
+        konst irReturnedExpression = expression.returnedExpression?.let { generateExpression(it) }
             ?: IrGetObjectValueImpl(
                 expression.startOffsetSkippingComments, expression.endOffset, context.irBuiltIns.unitType,
                 context.irBuiltIns.unitClass
@@ -250,11 +250,11 @@ internal class StatementGenerator(
         if (!ExpressionTypingUtils.isFunctionLiteral(scopeOwner) && !ExpressionTypingUtils.isFunctionExpression(scopeOwner)) {
             scopeOwnerAsCallable()
         } else {
-            val label = expression.getTargetLabel()
+            konst label = expression.getTargetLabel()
             when {
                 label != null -> {
-                    val labelTarget = getOrFail(BindingContext.LABEL_TARGET, label)
-                    val labelTargetDescriptor = getOrFail(BindingContext.DECLARATION_TO_DESCRIPTOR, labelTarget)
+                    konst labelTarget = getOrFail(BindingContext.LABEL_TARGET, label)
+                    konst labelTargetDescriptor = getOrFail(BindingContext.DECLARATION_TO_DESCRIPTOR, labelTarget)
                     labelTargetDescriptor as CallableDescriptor
                 }
                 ExpressionTypingUtils.isFunctionLiteral(scopeOwner) -> {
@@ -278,8 +278,8 @@ internal class StatementGenerator(
     override fun visitConstantExpression(expression: KtConstantExpression, data: Nothing?): IrExpression =
         generateConstantExpression(
             expression,
-            ConstantExpressionEvaluator.getConstant(expression, context.bindingContext)
-                ?: error("KtConstantExpression was not evaluated: ${expression.text}")
+            ConstantExpressionEkonstuator.getConstant(expression, context.bindingContext)
+                ?: error("KtConstantExpression was not ekonstuated: ${expression.text}")
         )
 
     fun generateConstantExpression(expression: KtExpression, constant: CompileTimeConstant<*>): IrExpression =
@@ -290,17 +290,17 @@ internal class StatementGenerator(
         )
 
     override fun visitStringTemplateExpression(expression: KtStringTemplateExpression, data: Nothing?): IrStatement {
-        val startOffset = expression.startOffsetSkippingComments
-        val endOffset = expression.endOffset
+        konst startOffset = expression.startOffsetSkippingComments
+        konst endOffset = expression.endOffset
 
-        val resultType = getTypeInferredByFrontendOrFail(expression).toIrType()
-        val entries = expression.entries.map { generateExpression(it) }.postprocessStringTemplateEntries()
+        konst resultType = getTypeInferredByFrontendOrFail(expression).toIrType()
+        konst entries = expression.entries.map { generateExpression(it) }.postprocessStringTemplateEntries()
 
         return when (entries.size) {
             0 -> IrConstImpl.string(startOffset, endOffset, resultType, "")
 
             1 -> {
-                val first = entries.first()
+                konst first = entries.first()
                 if (first is IrConst<*> && first.kind == IrConstKind.String)
                     first
                 else
@@ -313,9 +313,9 @@ internal class StatementGenerator(
 
     private fun List<IrExpression>.postprocessStringTemplateEntries(): List<IrExpression> =
         ArrayList<IrExpression>(this.size).also { result ->
-            val stringType = context.irBuiltIns.stringType
+            konst stringType = context.irBuiltIns.stringType
 
-            val constString = StringBuilder()
+            konst constString = StringBuilder()
             var constStringStartOffset = 0
             var constStringEndOffset = 0
 
@@ -324,7 +324,7 @@ internal class StatementGenerator(
                     if (constString.isEmpty()) {
                         constStringStartOffset = entry.startOffset
                     }
-                    constString.append(IrConstKind.String.valueOf(entry))
+                    constString.append(IrConstKind.String.konstueOf(entry))
                     constStringEndOffset = entry.endOffset
                 } else {
                     if (constString.isNotEmpty()) {
@@ -354,20 +354,20 @@ internal class StatementGenerator(
         generateExpression(entry.expression!!)
 
     override fun visitSimpleNameExpression(expression: KtSimpleNameExpression, data: Nothing?): IrExpression {
-        val resolvedCall = getResolvedCall(expression)
+        konst resolvedCall = getResolvedCall(expression)
 
         if (resolvedCall != null) {
             if (resolvedCall is VariableAsFunctionResolvedCall) {
-                val variableCall = pregenerateCall(resolvedCall.variableCall)
+                konst variableCall = pregenerateCall(resolvedCall.variableCall)
                 return CallGenerator(this).generateCall(expression, variableCall, IrStatementOrigin.VARIABLE_AS_FUNCTION)
             }
 
-            val descriptor = resolvedCall.resultingDescriptor
+            konst descriptor = resolvedCall.resultingDescriptor
 
             return generateExpressionForReferencedDescriptor(descriptor, expression, resolvedCall)
         }
 
-        val referenceTarget = get(BindingContext.REFERENCE_TARGET, expression)
+        konst referenceTarget = get(BindingContext.REFERENCE_TARGET, expression)
         if (referenceTarget != null) {
             return generateExpressionForReferencedDescriptor(referenceTarget, expression, null)
         }
@@ -387,15 +387,15 @@ internal class StatementGenerator(
         )
 
     override fun visitCallExpression(expression: KtCallExpression, data: Nothing?): IrStatement {
-        val resolvedCall = getResolvedCall(expression) ?: return ErrorExpressionGenerator(this).generateErrorCall(expression)
+        konst resolvedCall = getResolvedCall(expression) ?: return ErrorExpressionGenerator(this).generateErrorCall(expression)
 
         if (resolvedCall is VariableAsFunctionResolvedCall) {
-            val functionCall = pregenerateCall(resolvedCall.functionCall)
+            konst functionCall = pregenerateCall(resolvedCall.functionCall)
             return CallGenerator(this).generateCall(expression, functionCall, IrStatementOrigin.INVOKE)
         }
 
-        val calleeExpression = expression.calleeExpression
-        val origin =
+        konst calleeExpression = expression.calleeExpression
+        konst origin =
             if (resolvedCall.resultingDescriptor.name == OperatorNameConventions.INVOKE &&
                 calleeExpression !is KtSimpleNameExpression && calleeExpression !is KtQualifiedExpression
             )
@@ -412,7 +412,7 @@ internal class StatementGenerator(
     }
 
     override fun visitArrayAccessExpression(expression: KtArrayAccessExpression, data: Nothing?): IrStatement {
-        val indexedGetCall = getOrFail(BindingContext.INDEXED_LVALUE_GET, expression)
+        konst indexedGetCall = getOrFail(BindingContext.INDEXED_LVALUE_GET, expression)
 
         return if (indexedGetCall.resultingDescriptor.isDynamic())
             OperatorExpressionGenerator(this).generateDynamicArrayAccess(expression)
@@ -440,8 +440,8 @@ internal class StatementGenerator(
     }
 
     fun generateThisReceiver(startOffset: Int, endOffset: Int, kotlinType: KotlinType, classDescriptor: ClassDescriptor): IrExpression {
-        val thisAsReceiverParameter = classDescriptor.thisAsReceiverParameter
-        val thisType = kotlinType.toIrType()
+        konst thisAsReceiverParameter = classDescriptor.thisAsReceiverParameter
+        konst thisType = kotlinType.toIrType()
 
         return if (DescriptorUtils.isObject(classDescriptor) && !isThisForClassPhysicallyAvailable(classDescriptor)) {
             IrGetObjectValueImpl(
@@ -459,23 +459,23 @@ internal class StatementGenerator(
     }
 
     override fun visitThisExpression(expression: KtThisExpression, data: Nothing?): IrExpression {
-        val referenceTarget = getOrFail(BindingContext.REFERENCE_TARGET, expression.instanceReference) { "No reference target for this" }
-        val receiverParameter =
+        konst referenceTarget = getOrFail(BindingContext.REFERENCE_TARGET, expression.instanceReference) { "No reference target for this" }
+        konst receiverParameter =
             getOrFail<KtReferenceExpression, ReceiverParameterDescriptor>(
                 BindingContext.THIS_REFERENCE_TARGET, expression.instanceReference
             ) { "No reference target for this" }
-        val startOffset = expression.startOffsetSkippingComments
-        val endOffset = expression.endOffset
+        konst startOffset = expression.startOffsetSkippingComments
+        konst endOffset = expression.endOffset
         return when (referenceTarget) {
             is ClassDescriptor ->
-                when (receiverParameter.value) {
-                    is ContextClassReceiver -> loadContextReceiver(receiverParameter.value as ContextClassReceiver, startOffset, endOffset)
+                when (receiverParameter.konstue) {
+                    is ContextClassReceiver -> loadContextReceiver(receiverParameter.konstue as ContextClassReceiver, startOffset, endOffset)
                     else -> generateThisReceiver(
                         startOffset, endOffset, referenceTarget.thisAsReceiverParameter.type, referenceTarget
                     )
                 }
             is CallableDescriptor -> {
-                val receiverType = receiverParameter.type.toIrType()
+                konst receiverType = receiverParameter.type.toIrType()
                 IrGetValueImpl(
                     startOffset, endOffset,
                     receiverType,
@@ -553,9 +553,9 @@ internal class StatementGenerator(
         ReflectionReferencesGenerator(this).generateCallableReference(expression)
 }
 
-internal abstract class StatementGeneratorExtension(val statementGenerator: StatementGenerator) : GeneratorWithScope {
-    override val scope: Scope get() = statementGenerator.scope
-    override val context: GeneratorContext get() = statementGenerator.context
+internal abstract class StatementGeneratorExtension(konst statementGenerator: StatementGenerator) : GeneratorWithScope {
+    override konst scope: Scope get() = statementGenerator.scope
+    override konst context: GeneratorContext get() = statementGenerator.context
 
     fun KtExpression.genExpr() = statementGenerator.generateExpression(this)
     fun KtExpression.genStmt() = statementGenerator.generateStatement(this)

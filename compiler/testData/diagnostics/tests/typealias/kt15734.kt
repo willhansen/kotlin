@@ -9,12 +9,12 @@ typealias TNString = TString?
 
 typealias TNAString = @Ann TString?
 
-val test1: TNString = TODO()
-val test2: TNAString = TODO()
-val test3: List<TNString> = TODO()
-val test4: List<TNAString> = TODO()
-val test5: List<TNString<!REDUNDANT_NULLABLE!>?<!>> = TODO()
-val test6: () -> List<TNString> = TODO()
+konst test1: TNString = TODO()
+konst test2: TNAString = TODO()
+konst test3: List<TNString> = TODO()
+konst test4: List<TNAString> = TODO()
+konst test5: List<TNString<!REDUNDANT_NULLABLE!>?<!>> = TODO()
+konst test6: () -> List<TNString> = TODO()
 
 fun test(x: TNString) {
     x<!UNSAFE_CALL!>.<!>hashCode()

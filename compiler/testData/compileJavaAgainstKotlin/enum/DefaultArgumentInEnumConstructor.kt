@@ -1,5 +1,5 @@
 package test
 
-enum class K(private val default: String = "default") {
+enum class K(private konst default: String = "default") {
     ENTRY()
 }

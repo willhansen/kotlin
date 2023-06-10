@@ -31,8 +31,8 @@ class VariableInitControlFlowInfo(map: ImmutableMap<VariableDescriptor, Variable
     // merge = input of MergeInstruction
     // returns true if definite initialization in when happens here
     override fun checkDefiniteInitializationInWhen(merge: VariableInitReadOnlyControlFlowInfo): Boolean {
-        for ((key, value) in iterator()) {
-            if (value.initState == InitState.INITIALIZED_EXHAUSTIVELY &&
+        for ((key, konstue) in iterator()) {
+            if (konstue.initState == InitState.INITIALIZED_EXHAUSTIVELY &&
                 merge.getOrNull(key)?.initState == InitState.INITIALIZED
             ) {
                 return true
@@ -49,7 +49,7 @@ class UsageVariableControlFlowInfo(map: ImmutableMap<VariableDescriptor, Variabl
         UsageVariableControlFlowInfo(newMap)
 }
 
-enum class InitState(private val s: String) {
+enum class InitState(private konst s: String) {
     // Definitely initialized
     INITIALIZED("I"),
     // Fake initializer in else branch of "exhaustive when without else", see MagicKind.EXHAUSTIVE_WHEN_ELSE
@@ -71,7 +71,7 @@ enum class InitState(private val s: String) {
     override fun toString() = s
 }
 
-class VariableControlFlowState private constructor(val initState: InitState, val isDeclared: Boolean) {
+class VariableControlFlowState private constructor(konst initState: InitState, konst isDeclared: Boolean) {
 
     fun definitelyInitialized(): Boolean = initState == InitState.INITIALIZED
 
@@ -84,14 +84,14 @@ class VariableControlFlowState private constructor(val initState: InitState, val
 
     companion object {
 
-        private val VS_IT = VariableControlFlowState(InitState.INITIALIZED, true)
-        private val VS_IF = VariableControlFlowState(InitState.INITIALIZED, false)
-        private val VS_ET = VariableControlFlowState(InitState.INITIALIZED_EXHAUSTIVELY, true)
-        private val VS_EF = VariableControlFlowState(InitState.INITIALIZED_EXHAUSTIVELY, false)
-        private val VS_UT = VariableControlFlowState(InitState.UNKNOWN, true)
-        private val VS_UF = VariableControlFlowState(InitState.UNKNOWN, false)
-        private val VS_NT = VariableControlFlowState(InitState.NOT_INITIALIZED, true)
-        private val VS_NF = VariableControlFlowState(InitState.NOT_INITIALIZED, false)
+        private konst VS_IT = VariableControlFlowState(InitState.INITIALIZED, true)
+        private konst VS_IF = VariableControlFlowState(InitState.INITIALIZED, false)
+        private konst VS_ET = VariableControlFlowState(InitState.INITIALIZED_EXHAUSTIVELY, true)
+        private konst VS_EF = VariableControlFlowState(InitState.INITIALIZED_EXHAUSTIVELY, false)
+        private konst VS_UT = VariableControlFlowState(InitState.UNKNOWN, true)
+        private konst VS_UF = VariableControlFlowState(InitState.UNKNOWN, false)
+        private konst VS_NT = VariableControlFlowState(InitState.NOT_INITIALIZED, true)
+        private konst VS_NF = VariableControlFlowState(InitState.NOT_INITIALIZED, false)
 
         fun create(initState: InitState, isDeclared: Boolean): VariableControlFlowState =
             when (initState) {
@@ -112,7 +112,7 @@ class VariableControlFlowState private constructor(val initState: InitState, val
     }
 }
 
-enum class VariableUseState(private val priority: Int) {
+enum class VariableUseState(private konst priority: Int) {
     READ(3),
     WRITTEN_AFTER_READ(2),
     ONLY_WRITTEN_NEVER_READ(1),

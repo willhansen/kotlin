@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: Int
+konst test1: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test1>(){}kotlin.Int
   //   Public signature: /test1.<get-test1>|3978508226793108919[0]
@@ -13,7 +13,7 @@ val test1: Int
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: Int
+konst test2: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test2>(){}kotlin.Int
   //   Public signature: /test2.<get-test2>|-8779933517717592707[0]
@@ -25,7 +25,7 @@ val test2: Int
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: Int
+konst test3: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test3>(){}kotlin.Int
   //   Public signature: /test3.<get-test3>|6145294165644146033[0]
@@ -37,7 +37,7 @@ val test3: Int
 // CHECK:
 //   Mangled name: {}test4
 //   Public signature: /test4|-9115637610245762085[0]
-val test4: Int
+konst test4: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-test4>(){}kotlin.Int
   //   Public signature: /test4.<get-test4>|-8911174941514444072[0]
@@ -53,7 +53,7 @@ object A {
   // CHECK:
   //   Mangled name: A{}bar
   //   Public signature: /A.bar|-7864284097863469857[0]
-  val bar: Int
+  konst bar: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-bar>(){}kotlin.Int
     //   Public signature: /A.bar.<get-bar>|-7403724005139201014[0]
@@ -86,7 +86,7 @@ object A {
   // CHECK:
   //   Mangled name: A@kotlin.Int{}barExt
   //   Public signature: /A.barExt|-1171921628503212517[0]
-  val Int.barExt: Int
+  konst Int.barExt: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-barExt>@kotlin.Int(){}kotlin.Int
     //   Public signature: /A.barExt.<get-barExt>|-1782416356061265847[0]

@@ -26,11 +26,11 @@ import org.jetbrains.kotlin.util.InfixChecks
 
 class InfixModifierChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
-        val functionDescriptor = descriptor as? FunctionDescriptor ?: return
+        konst functionDescriptor = descriptor as? FunctionDescriptor ?: return
         if (!functionDescriptor.isInfix) return
-        val modifier = declaration.modifierList?.getModifier(KtTokens.INFIX_KEYWORD) ?: return
+        konst modifier = declaration.modifierList?.getModifier(KtTokens.INFIX_KEYWORD) ?: return
 
-        val checkResult = InfixChecks.check(functionDescriptor)
+        konst checkResult = InfixChecks.check(functionDescriptor)
         if (checkResult !is CheckResult.IllegalSignature) return
 
         context.trace.report(Errors.INAPPLICABLE_INFIX_MODIFIER.on(modifier, checkResult.error))

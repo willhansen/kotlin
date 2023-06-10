@@ -26,9 +26,9 @@ public final class CustomDelegate {
 
 @Field public final class SomeClass {
     public constructor SomeClass()
-    @delegate:Field @delegate:Prop protected final val delegatedProperty: kotlin.String
-    public final val propertyWithCustomGetter: kotlin.Int
-    protected final val simpleProperty: kotlin.String = "text"
+    @delegate:Field @delegate:Prop protected final konst delegatedProperty: kotlin.String
+    public final konst propertyWithCustomGetter: kotlin.Int
+    protected final konst simpleProperty: kotlin.String = "text"
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -36,8 +36,8 @@ public final class CustomDelegate {
 
 public final class WithPrimaryConstructor {
     public constructor WithPrimaryConstructor(/*0*/ a: kotlin.String, /*1*/ @Field @Prop b: kotlin.String)
-    public final val a: kotlin.String
-    public final val b: kotlin.String
+    public final konst a: kotlin.String
+    public final konst b: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

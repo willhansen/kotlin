@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.name.FqName
 import java.lang.reflect.AnnotatedElement
 
 interface ReflectJavaAnnotationOwner : JavaAnnotationOwner {
-    val element: AnnotatedElement?
+    konst element: AnnotatedElement?
 
-    override val annotations: List<ReflectJavaAnnotation>
+    override konst annotations: List<ReflectJavaAnnotation>
         get() = element?.declaredAnnotations?.getAnnotations() ?: emptyList()
 
     override fun findAnnotation(fqName: FqName) =
         element?.declaredAnnotations?.findAnnotation(fqName)
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = false
 }
 

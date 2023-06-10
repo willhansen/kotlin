@@ -4,7 +4,7 @@
 package test
 
 class X {
-    val result: String
+    konst result: String
         inline get() = "OK"
 
     fun x(): String {

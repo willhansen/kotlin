@@ -1,6 +1,6 @@
 fun test(): String {
     var exception: Throwable? = null
-    val f = {
+    konst f = {
         exception = IllegalStateException("OK")
     }
     f()

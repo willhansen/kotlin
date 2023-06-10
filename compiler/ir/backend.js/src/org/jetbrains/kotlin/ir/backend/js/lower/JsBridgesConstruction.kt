@@ -22,16 +22,16 @@ import org.jetbrains.kotlin.ir.util.isEffectivelyExternal
 
 class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<JsIrBackendContext>(context) {
 
-    private val calculator = JsIrArithBuilder(context)
+    private konst calculator = JsIrArithBuilder(context)
 
-    private val jsArguments = context.intrinsics.jsArguments
-    private val jsArrayGet = context.intrinsics.jsArrayGet
-    private val jsArrayLength = context.intrinsics.jsArrayLength
-    private val jsArrayLike2Array = context.intrinsics.jsArrayLike2Array
-    private val jsSliceArrayLikeFromIndex = context.intrinsics.jsSliceArrayLikeFromIndex
-    private val jsSliceArrayLikeFromIndexToIndex = context.intrinsics.jsSliceArrayLikeFromIndexToIndex
-    private val primitiveArrays = context.intrinsics.primitiveArrays
-    private val primitiveToLiteralConstructor = context.intrinsics.primitiveToLiteralConstructor
+    private konst jsArguments = context.intrinsics.jsArguments
+    private konst jsArrayGet = context.intrinsics.jsArrayGet
+    private konst jsArrayLength = context.intrinsics.jsArrayLength
+    private konst jsArrayLike2Array = context.intrinsics.jsArrayLike2Array
+    private konst jsSliceArrayLikeFromIndex = context.intrinsics.jsSliceArrayLikeFromIndex
+    private konst jsSliceArrayLikeFromIndexToIndex = context.intrinsics.jsSliceArrayLikeFromIndexToIndex
+    private konst primitiveArrays = context.intrinsics.primitiveArrays
+    private konst primitiveToLiteralConstructor = context.intrinsics.primitiveToLiteralConstructor
 
     override fun getFunctionSignature(function: IrSimpleFunction) =
         jsFunctionSignature(
@@ -55,7 +55,7 @@ class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<J
         if (!bridge.isEffectivelyExternal())
             return super.extractValueParameters(blockBodyBuilder, irFunction, bridge)
 
-        val varargIndex = bridge.varargParameterIndex()
+        konst varargIndex = bridge.varargParameterIndex()
 
         if (varargIndex == -1)
             return super.extractValueParameters(blockBodyBuilder, irFunction, bridge)
@@ -63,14 +63,14 @@ class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<J
         return blockBodyBuilder.run {
 
             // The number of parameters after the vararg
-            val numberOfTrailingParameters = bridge.valueParameters.size - (varargIndex + 1)
+            konst numberOfTrailingParameters = bridge.konstueParameters.size - (varargIndex + 1)
 
-            val getTotalNumberOfArguments = irCall(jsArrayLength).apply {
+            konst getTotalNumberOfArguments = irCall(jsArrayLength).apply {
                 putValueArgument(0, irCall(jsArguments))
                 type = context.irBuiltIns.intType
             }
 
-            val firstTrailingParameterIndexVar = lazy(LazyThreadSafetyMode.NONE) {
+            konst firstTrailingParameterIndexVar = lazy(LazyThreadSafetyMode.NONE) {
                 irTemporary(
                     if (numberOfTrailingParameters == 0)
                         getTotalNumberOfArguments
@@ -83,16 +83,16 @@ class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<J
                 )
             }
 
-            val varargArrayVar = emitCopyVarargToArray(
+            konst varargArrayVar = emitCopyVarargToArray(
                 bridge,
                 varargIndex,
                 numberOfTrailingParameters,
                 firstTrailingParameterIndexVar
             )
 
-            val trailingParametersVars = createVarsForTrailingParameters(bridge, numberOfTrailingParameters, firstTrailingParameterIndexVar)
+            konst trailingParametersVars = createVarsForTrailingParameters(bridge, numberOfTrailingParameters, firstTrailingParameterIndexVar)
 
-            irFunction.valueParameters + varargArrayVar + trailingParametersVars
+            irFunction.konstueParameters + varargArrayVar + trailingParametersVars
         }
     }
 
@@ -100,11 +100,11 @@ class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<J
         bridge: IrSimpleFunction,
         numberOfTrailingParameters: Int,
         firstTrailingParameterIndexVar: Lazy<IrVariable>
-    ) = bridge.valueParameters.takeLast(numberOfTrailingParameters).mapIndexed { index, trailingParameter ->
-        val parameterIndex = if (index == 0)
-            irGet(firstTrailingParameterIndexVar.value)
+    ) = bridge.konstueParameters.takeLast(numberOfTrailingParameters).mapIndexed { index, trailingParameter ->
+        konst parameterIndex = if (index == 0)
+            irGet(firstTrailingParameterIndexVar.konstue)
         else
-            calculator.add(irGet(firstTrailingParameterIndexVar.value), irInt(index))
+            calculator.add(irGet(firstTrailingParameterIndexVar.konstue), irInt(index))
         createTmpVariable(
             irCall(jsArrayGet).apply {
                 putValueArgument(0, irCall(jsArguments))
@@ -121,25 +121,25 @@ class JsBridgesConstruction(context: JsIrBackendContext) : BridgesConstruction<J
         numberOfTrailingParameters: Int,
         firstTrailingParameterIndexVar: Lazy<IrVariable>
     ): IrVariable {
-        val varargElement = bridge.valueParameters[varargIndex]
-        val sliceIntrinsicArgs = mutableListOf<IrExpression>(irCall(jsArguments))
+        konst varargElement = bridge.konstueParameters[varargIndex]
+        konst sliceIntrinsicArgs = mutableListOf<IrExpression>(irCall(jsArguments))
         var sliceIntrinsic = jsArrayLike2Array
         if (varargIndex != 0 || numberOfTrailingParameters > 0) {
             sliceIntrinsicArgs.add(irInt(varargIndex))
             sliceIntrinsic = jsSliceArrayLikeFromIndex
         }
         if (numberOfTrailingParameters > 0) {
-            sliceIntrinsicArgs.add(irGet(firstTrailingParameterIndexVar.value))
+            sliceIntrinsicArgs.add(irGet(firstTrailingParameterIndexVar.konstue))
             sliceIntrinsic = jsSliceArrayLikeFromIndexToIndex
         }
 
-        val varargCopiedAsArray = irCall(sliceIntrinsic).apply {
+        konst varargCopiedAsArray = irCall(sliceIntrinsic).apply {
             putTypeArgument(0, varargElement.varargElementType!!)
             sliceIntrinsicArgs.forEachIndexed(this::putValueArgument)
         }.let { arrayExpr ->
-            val arrayInfo =
+            konst arrayInfo =
                 InlineClassArrayInfo(this@JsBridgesConstruction.context, varargElement.varargElementType!!, varargElement.type)
-            val primitiveType = primitiveArrays[arrayInfo.primitiveArrayType.classifierOrNull]
+            konst primitiveType = primitiveArrays[arrayInfo.primitiveArrayType.classifierOrNull]
             if (primitiveType != null) {
                 arrayInfo.boxArrayIfNeeded(
                     irCall(primitiveToLiteralConstructor.getValue(primitiveType)).apply {

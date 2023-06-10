@@ -7,18 +7,18 @@ import org.jetbrains.kotlin.utils.Printer
 
 class DeclarationPrinter(
         out: Appendable,
-        private val headerRenderer: DeclarationHeaderRenderer,
-        private val signatureRenderer: IdSignatureRenderer
+        private konst headerRenderer: DeclarationHeaderRenderer,
+        private konst signatureRenderer: IdSignatureRenderer
 ) {
-    private val printer = Printer(out, 1, "    ")
+    private konst printer = Printer(out, 1, "    ")
 
-    private val DeclarationDescriptorWithVisibility.isPublicOrProtected: Boolean
+    private konst DeclarationDescriptorWithVisibility.isPublicOrProtected: Boolean
         get() = visibility == DescriptorVisibilities.PUBLIC || visibility == DescriptorVisibilities.PROTECTED
 
-    private val CallableMemberDescriptor.isFakeOverride: Boolean
+    private konst CallableMemberDescriptor.isFakeOverride: Boolean
         get() = kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE
 
-    private val DeclarationDescriptor.shouldBePrinted: Boolean
+    private konst DeclarationDescriptor.shouldBePrinted: Boolean
         get() = this is ClassifierDescriptorWithTypeParameters && isPublicOrProtected
                 || this is CallableMemberDescriptor && isPublicOrProtected && !isFakeOverride
 
@@ -47,7 +47,7 @@ class DeclarationPrinter(
         }
 
         override fun visitPackageFragmentDescriptor(descriptor: PackageFragmentDescriptor, data: Unit) {
-            val children = descriptor.getMemberScope().getContributedDescriptors()
+            konst children = descriptor.getMemberScope().getContributedDescriptors()
                 .filter { it.shouldBePrinted }
                 .sortedBy { it.name }
             if (children.isNotEmpty()) {
@@ -58,11 +58,11 @@ class DeclarationPrinter(
         }
 
         override fun visitClassDescriptor(descriptor: ClassDescriptor, data: Unit) {
-            val header = headerRenderer.render(descriptor)
-            val signature = signatureRenderer.render(descriptor)
+            konst header = headerRenderer.render(descriptor)
+            konst signature = signatureRenderer.render(descriptor)
 
-            val children = descriptor.unsubstitutedMemberScope.getContributedDescriptors().filter { it.shouldBePrinted }
-            val constructors = descriptor.constructors.filter { !it.isPrimary && it.shouldBePrinted }
+            konst children = descriptor.unsubstitutedMemberScope.getContributedDescriptors().filter { it.shouldBePrinted }
+            konst constructors = descriptor.constructors.filter { !it.isPrimary && it.shouldBePrinted }
             if (children.isNotEmpty() || constructors.isNotEmpty()) {
                 printer.printWithBody(header, signature) {
                     constructors.forEach { it.accept(this, data) }

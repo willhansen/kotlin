@@ -6,11 +6,11 @@ annotation class Ann
 annotation class AnnRepeat
 
 class Foo(
-    <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!> private val y0: Int,
-    <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!> private vararg val y1: String
+    <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!> private konst y0: Int,
+    <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!> private vararg konst y1: String
 ) {
     <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-    private val x1 = ""
+    private konst x1 = ""
 
     <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@set:Ann<!>
     private var x2 = ""
@@ -22,13 +22,13 @@ class Foo(
     private var x4 = ""
 
     @get:Ann
-    internal val x5 = ""
+    internal konst x5 = ""
 
     @get:Ann
-    protected val x6 = ""
+    protected konst x6 = ""
 
     <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-    private val x7: String = ""
+    private konst x7: String = ""
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@AnnRepeat<!> get
 
     @get:Ann
@@ -44,13 +44,13 @@ class Foo(
 }
 
 private class EffetivelyPrivate private constructor(
-    @get:Ann val x0: Int,
-    @get:Ann protected val x1: Int,
-    @get:Ann internal val x2: Int
+    @get:Ann konst x0: Int,
+    @get:Ann protected konst x1: Int,
+    @get:Ann internal konst x2: Int
 ) {
     private class Nested {
         @get:Ann
-        val fofo = 0
+        konst fofo = 0
     }
 }
 
@@ -65,35 +65,35 @@ class Statics {
     companion object {
         @JvmField
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-        val x0 = ""
+        konst x0 = ""
 
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-        const val x1 = ""
+        const konst x1 = ""
 
         @JvmStatic
         @get:Ann
-        val x2 = ""
+        konst x2 = ""
 
         @JvmStatic
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-        private val x3 = ""
+        private konst x3 = ""
 
         @JvmStatic
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@get:Ann<!>
-        private val x4 = ""
+        private konst x4 = ""
     }
 }
 
-private class Other(@param:Ann private val param: Int) {
+private class Other(@param:Ann private konst param: Int) {
     @property:Ann
     @field:Ann
-    private val other = ""
+    private konst other = ""
 
     private fun @receiver:Ann Int.receiver() {}
 
     @delegate:Ann
     @get:Ann
-    private val delegate by CustomDelegate()
+    private konst delegate by CustomDelegate()
 }
 
 class CustomDelegate {
@@ -109,6 +109,6 @@ class WithSource {
     @setparam:SourceAnn
     private var x0 = ""
 
-    private val x1 = ""
+    private konst x1 = ""
         @SourceAnn get
 }

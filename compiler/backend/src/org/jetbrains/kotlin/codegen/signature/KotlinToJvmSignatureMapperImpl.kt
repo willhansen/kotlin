@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.resolve.jvm.jvmSignature.KotlinToJvmSignatureMapper
 
 class KotlinToJvmSignatureMapperImpl : KotlinToJvmSignatureMapper {
     // We use empty BindingContext, because it is only used by KotlinTypeMapper for purposes irrelevant to the needs of this class
-    private val typeMapper = KotlinTypeMapper(
+    private konst typeMapper = KotlinTypeMapper(
         BindingContext.EMPTY, ClassBuilderMode.LIGHT_CLASSES,
         JvmProtoBufUtil.DEFAULT_MODULE_NAME,
         KotlinTypeMapper.LANGUAGE_VERSION_SETTINGS_DEFAULT,// TODO use proper LanguageVersionSettings

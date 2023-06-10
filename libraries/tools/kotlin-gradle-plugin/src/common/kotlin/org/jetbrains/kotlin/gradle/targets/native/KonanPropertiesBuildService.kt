@@ -24,26 +24,26 @@ import java.util.*
 
 internal interface UsesKonanPropertiesBuildService : Task {
     @get:Internal
-    val konanPropertiesService: Property<KonanPropertiesBuildService>
+    konst konanPropertiesService: Property<KonanPropertiesBuildService>
 }
 
 abstract class KonanPropertiesBuildService : BuildService<KonanPropertiesBuildService.Parameters> {
 
     internal interface Parameters : BuildServiceParameters {
-        val konanHome: Property<String>
+        konst konanHome: Property<String>
     }
 
-    private val properties: Properties by lazy {
+    private konst properties: Properties by lazy {
         Distribution(parameters.konanHome.get()).properties
     }
 
-    private val cacheableTargets: List<KonanTarget> by lazy {
+    private konst cacheableTargets: List<KonanTarget> by lazy {
         properties
             .resolvablePropertyList("cacheableTargets", HostManager.hostName)
             .map { KonanTarget.predefinedTargets.getValue(it) }
     }
 
-    private val targetsWithOptInStaticCaches: List<KonanTarget> by lazy {
+    private konst targetsWithOptInStaticCaches: List<KonanTarget> by lazy {
         properties
             .resolvablePropertyList("optInCacheableTargets", HostManager.hostName)
             .map { KonanTarget.predefinedTargets.getValue(it) }
@@ -62,7 +62,7 @@ abstract class KonanPropertiesBuildService : BuildService<KonanPropertiesBuildSe
     internal fun additionalCacheFlags(target: KonanTarget): List<String> =
         properties.resolvablePropertyList("additionalCacheFlags", target.visibleName)
 
-    internal val compilerVersion: String? by lazy {
+    internal konst compilerVersion: String? by lazy {
         properties["compilerVersion"]?.toString()
     }
 
@@ -78,9 +78,9 @@ abstract class KonanPropertiesBuildService : BuildService<KonanPropertiesBuildSe
                 }
             }
 
-        private val serviceName: String
+        private konst serviceName: String
             get() {
-                val clazz = KonanPropertiesBuildService::class.java
+                konst clazz = KonanPropertiesBuildService::class.java
                 return "${clazz}_${clazz.classLoader.hashCode()}"
             }
     }

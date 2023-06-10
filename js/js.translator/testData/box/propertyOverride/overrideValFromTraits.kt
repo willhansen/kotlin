@@ -2,7 +2,7 @@
 package foo
 
 interface A {
-    val bal: Int
+    konst bal: Int
         get() {
             return 5
         }
@@ -10,8 +10,8 @@ interface A {
         get() {
             return realBar
         }
-        set(value: Int) {
-            realBar = value
+        set(konstue: Int) {
+            realBar = konstue
         }
 
     var realBar: Int
@@ -19,7 +19,7 @@ interface A {
 
 
 interface B {
-    val bal: Int
+    konst bal: Int
         get() {
             return 42
         }
@@ -27,21 +27,21 @@ interface B {
         get() {
             return realBar + 1000
         }
-        set(value: Int) {
-            realBar = value + 1000
+        set(konstue: Int) {
+            realBar = konstue + 1000
         }
 
     var realBar: Int
 }
 
 class C : A, B {
-    override val bal: Int = 1
+    override konst bal: Int = 1
     override var bar: Int = 2
         get() {
             return field + 20
         }
-        set(value: Int) {
-            field = value + 20
+        set(konstue: Int) {
+            field = konstue + 20
         }
     override var realBar: Int = 3
 
@@ -61,17 +61,17 @@ class C : A, B {
         return super<B>.bar
     }
 
-    fun setBarA(value: Int) {
-        super<A>.bar = value
+    fun setBarA(konstue: Int) {
+        super<A>.bar = konstue
     }
 
-    fun setBarB(value: Int) {
-        super<B>.bar = value
+    fun setBarB(konstue: Int) {
+        super<B>.bar = konstue
     }
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     if (c.bal != 1) return "c.bal != 1, it: ${c.bal}"
     if (c.bar != 22) return "c.bar != 22, it: ${c.bar}"

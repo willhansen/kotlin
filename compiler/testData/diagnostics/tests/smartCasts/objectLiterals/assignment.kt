@@ -4,10 +4,10 @@ abstract class Runnable {
 }
 
 fun foo(): Int {
-    val c: Int? = null
+    konst c: Int? = null
     if (c is Int) {
         var k: Runnable
-        val d: Int = <!DEBUG_INFO_SMARTCAST!>c<!>
+        konst d: Int = <!DEBUG_INFO_SMARTCAST!>c<!>
         k = object: Runnable() {
             override fun run() = Unit
         }

@@ -80,5 +80,5 @@ fun Call.getValueArgumentForExpression(expression: KtExpression): ValueArgument?
     message = "Use org.jetbrains.kotlin.resolve.calls.util.getValueArgumentForExpression instead.",
     plugins = "Android in IDEA"
 )
-fun <D : CallableDescriptor> ResolvedCall<D>.getParameterForArgument(valueArgument: ValueArgument?): ValueParameterDescriptor? =
-    getParameterForArgument(valueArgument)
+fun <D : CallableDescriptor> ResolvedCall<D>.getParameterForArgument(konstueArgument: ValueArgument?): ValueParameterDescriptor? =
+    getParameterForArgument(konstueArgument)

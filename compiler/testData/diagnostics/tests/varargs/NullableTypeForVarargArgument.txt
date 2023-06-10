@@ -1,6 +1,6 @@
 package
 
-public val args: kotlin.Array<kotlin.String>? = null
+public konst args: kotlin.Array<kotlin.String>? = null
 public fun bar(/*0*/ x: kotlin.Int, /*1*/ vararg s: kotlin.String /*kotlin.Array<out kotlin.String>*/): kotlin.Unit
 public fun baz(/*0*/ s: kotlin.String): kotlin.Unit
 public fun f(): kotlin.Unit

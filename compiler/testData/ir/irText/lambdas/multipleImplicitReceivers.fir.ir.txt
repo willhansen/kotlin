@@ -39,9 +39,9 @@ FILE fqName:<root> fileName:/multipleImplicitReceivers.kt
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
   CLASS INTERFACE name:IFoo modality:ABSTRACT visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.IFoo
-    PROPERTY name:foo visibility:public modality:OPEN [val]
+    PROPERTY name:foo visibility:public modality:OPEN [konst]
       FUN name:<get-foo> visibility:public modality:OPEN <> ($this:<root>.IFoo, $receiver:<root>.A) returnType:<root>.B
-        correspondingProperty: PROPERTY name:foo visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:foo visibility:public modality:OPEN [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.IFoo
         $receiver: VALUE_PARAMETER name:<this> type:<root>.A
         BLOCK_BODY
@@ -67,7 +67,7 @@ FILE fqName:<root> fileName:/multipleImplicitReceivers.kt
       $receiver: VALUE_PARAMETER name:<this> type:<root>.B
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun invoke (): kotlin.Int declared in <root>.IInvoke'
-          CONST Int type=kotlin.Int value=42
+          CONST Int type=kotlin.Int konstue=42
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

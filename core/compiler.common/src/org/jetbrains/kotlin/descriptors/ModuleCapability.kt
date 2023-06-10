@@ -5,6 +5,6 @@
 
 package org.jetbrains.kotlin.descriptors
 
-class ModuleCapability<T>(val name: String) {
+class ModuleCapability<T>(konst name: String) {
     override fun toString() = name
 }

@@ -8,8 +8,8 @@ class A {
 
     inline var z: Test
         get() = result
-        set(value) {
-            result = value
+        set(konstue) {
+            result = konstue
         }
 }
 
@@ -25,7 +25,7 @@ operator fun Test.inc(): Test {
 import test.*
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.z = Test(1)
     a.z += 1
     if (a.result.result != 2) return "fail 1: ${a.result.result}"

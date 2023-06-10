@@ -19,18 +19,18 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 import org.jetbrains.kotlin.types.typeUtil.isBoolean
 
-data class LombokValueParameter(val name: Name, val type: KotlinType)
+data class LombokValueParameter(konst name: Name, konst type: KotlinType)
 
 fun ClassDescriptor.createFunction(
     name: Name,
-    valueParameters: List<LombokValueParameter>,
+    konstueParameters: List<LombokValueParameter>,
     returnType: KotlinType?,
     typeParameters: List<TypeParameterDescriptor> = emptyList(),
     modality: Modality? = Modality.OPEN,
     visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC,
     receiver: ReceiverParameterDescriptor? = this.thisAsReceiverParameter
 ): SimpleFunctionDescriptor {
-    val methodDescriptor = SimpleFunctionDescriptorImpl.create(
+    konst methodDescriptor = SimpleFunctionDescriptorImpl.create(
         this,
         Annotations.EMPTY,
         name,
@@ -38,7 +38,7 @@ fun ClassDescriptor.createFunction(
         this.source
     )
 
-    val paramDescriptors = valueParameters.mapIndexed { idx, param -> methodDescriptor.makeValueParameter(param, idx) }
+    konst paramDescriptors = konstueParameters.mapIndexed { idx, param -> methodDescriptor.makeValueParameter(param, idx) }
 
     methodDescriptor.initialize(
         null,
@@ -54,16 +54,16 @@ fun ClassDescriptor.createFunction(
 }
 
 fun ClassDescriptor.createJavaConstructor(
-    valueParameters: List<LombokValueParameter>,
+    konstueParameters: List<LombokValueParameter>,
     visibility: DescriptorVisibility = DescriptorVisibilities.PUBLIC
 ): ClassConstructorDescriptor {
-    val constructor = JavaClassConstructorDescriptor.create(
+    konst constructor = JavaClassConstructorDescriptor.create(
         this,
         Annotations.EMPTY,
         false,
         this.source
     )
-    val paramDescriptors = valueParameters.mapIndexed { idx, param -> constructor.makeValueParameter(param, idx) }
+    konst paramDescriptors = konstueParameters.mapIndexed { idx, param -> constructor.makeValueParameter(param, idx) }
     constructor.initialize(
         null,
         constructor.calculateDispatchReceiverParameter(),
@@ -94,7 +94,7 @@ private fun CallableDescriptor.makeValueParameter(param: LombokValueParameter, i
 }
 
 fun ClassDescriptor.getJavaFields(): List<PropertyDescriptor> {
-    val variableNames = getJavaClass()?.fields?.map { it.name } ?: emptyList()
+    konst variableNames = getJavaClass()?.fields?.map { it.name } ?: emptyList()
     return variableNames
         .mapNotNull { this.unsubstitutedMemberScope.getContributedVariables(it, NoLookupLocation.FROM_SYNTHETIC_SCOPE).singleOrNull() }
         .filter { it.isJavaField }

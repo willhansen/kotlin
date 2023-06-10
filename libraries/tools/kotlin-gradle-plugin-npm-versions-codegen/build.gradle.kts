@@ -9,7 +9,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.0.0")
 }
 
-val generateNpmVersions by generator(
+konst generateNpmVersions by generator(
     "org.jetbrains.kotlin.generators.gradle.targets.js.MainKt",
     sourceSets["main"]
 ) {

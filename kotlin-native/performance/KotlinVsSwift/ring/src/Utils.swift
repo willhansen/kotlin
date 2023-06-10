@@ -9,9 +9,9 @@ class Blackhole {
     @inline(never)
     static var flag: Bool = false
     @inline(never)
-    static func consume<T: Any>(_ value: T) {
+    static func consume<T: Any>(_ konstue: T) {
         if (flag) {
-            print(value)
+            print(konstue)
         }
     }
 }

@@ -3,13 +3,13 @@ class Klass
 fun foo() {
     // Even though no intrinsic is used,
     // redundant boxing/unboxing optimizes out wrapping/unrapping java.lang.Class instances
-    val c0 = (Klass::class).java // LDC LKlass;.class
+    konst c0 = (Klass::class).java // LDC LKlass;.class
 
-    val c1 = Klass::class.java // LDC LKlass;.class
+    konst c1 = Klass::class.java // LDC LKlass;.class
 
-    val c2 = Int::class.java // GETSTATIC java/lang/Integer.TYPE
+    konst c2 = Int::class.java // GETSTATIC java/lang/Integer.TYPE
 
-    val c3 = Integer::class.java // LDC Ljava/lang/Integer;.class
+    konst c3 = Integer::class.java // LDC Ljava/lang/Integer;.class
 }
 
 // 2 LDC LKlass;.class

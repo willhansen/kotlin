@@ -5,7 +5,7 @@ enum class En {
 
 fun box(): String {
 
-  val u: Unit = when(En.A) {
+  konst u: Unit = when(En.A) {
     En.A -> {}
     En.B -> {}
   }

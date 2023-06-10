@@ -32,20 +32,20 @@ class CInteropTaskTest : MultiplatformExtensionTest() {
             }
         }
 
-        val linuxX64 = kotlin.linuxX64().apply {
+        konst linuxX64 = kotlin.linuxX64().apply {
             compilations.getByName("main").cinterops.create("dummy") {
                 it.setDummyValues(prefix = "default")
             }
         }
 
         // Get task to make sure it is configured
-        val cinteropTask = project.tasks.getByName("cinteropDummyLinuxX64") as CInteropProcess
+        konst cinteropTask = project.tasks.getByName("cinteropDummyLinuxX64") as CInteropProcess
 
         // Change cinterop properties
-        val cinterop = linuxX64.compilations.getByName("main").cinterops.getByName("dummy")
+        konst cinterop = linuxX64.compilations.getByName("main").cinterops.getByName("dummy")
         cinterop.setDummyValues("updated")
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertEquals("updated-dependencyFile", cinteropTask.libraries.files.single().name)
         assertEquals("updated-defFile", cinteropTask.defFile.name)

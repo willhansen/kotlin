@@ -17,10 +17,10 @@
 package org.jetbrains.kotlin.psi2ir
 
 class Psi2IrConfiguration(
-    val ignoreErrors: Boolean = false,
-    val partialLinkageEnabled: Boolean = false,
-    val skipBodies: Boolean = false,
+    konst ignoreErrors: Boolean = false,
+    konst partialLinkageEnabled: Boolean = false,
+    konst skipBodies: Boolean = false,
 ) {
-    val generateBodies: Boolean
+    konst generateBodies: Boolean
         get() = !skipBodies
 }

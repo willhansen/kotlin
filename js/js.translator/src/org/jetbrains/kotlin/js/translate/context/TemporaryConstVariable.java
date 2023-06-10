@@ -28,7 +28,7 @@ public final class TemporaryConstVariable extends TemporaryVariable{
     }
 
     @NotNull
-    public JsExpression value() {
+    public JsExpression konstue() {
         if (initialized) {
             return reference();
         }

@@ -14,7 +14,7 @@ abstract class KtExpressionImpl(node: ASTNode) : KtElementImpl(node), KtExpressi
     override fun <R, D> accept(visitor: KtVisitor<R, D>, data: D) = visitor.visitExpression(this, data)
 
     protected fun findExpressionUnder(type: IElementType): KtExpression? {
-        val containerNode = findChildByType<KtContainerNode>(type) ?: return null
+        konst containerNode = findChildByType<KtContainerNode>(type) ?: return null
         return containerNode.findChildByClass<KtExpression>(KtExpression::class.java)
     }
 
@@ -29,20 +29,20 @@ abstract class KtExpressionImpl(node: ASTNode) : KtElementImpl(node), KtExpressi
             reformat: Boolean = true,
             rawReplaceHandler: (PsiElement) -> PsiElement
         ): PsiElement {
-            val parent = expression.parent
+            konst parent = expression.parent
 
             if (newElement is KtExpression) {
                 when (parent) {
                     is KtExpression, is KtValueArgument -> {
                         if (KtPsiUtil.areParenthesesNecessary(newElement, expression, parent as KtElement)) {
-                            val factory = KtPsiFactory(expression.project)
+                            konst factory = KtPsiFactory(expression.project)
                             return rawReplaceHandler(factory.createExpressionByPattern("($0)", newElement, reformat = reformat))
                         }
                     }
                     is KtSimpleNameStringTemplateEntry -> {
                         if (newElement !is KtSimpleNameExpression && !newElement.isThisWithoutLabel()) {
-                            val factory = KtPsiFactory(expression.project)
-                            val newEntry = parent.replace(factory.createBlockStringTemplateEntry(newElement)) as KtBlockStringTemplateEntry
+                            konst factory = KtPsiFactory(expression.project)
+                            konst newEntry = parent.replace(factory.createBlockStringTemplateEntry(newElement)) as KtBlockStringTemplateEntry
                             return newEntry.expression!!
                         }
                     }

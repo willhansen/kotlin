@@ -26,8 +26,8 @@ abstract class AbstractEnhancedSignaturesResolvedCallsTest : AbstractResolvedCal
     override fun createEnvironment(): KotlinCoreEnvironment = createEnvironmentWithJdk(ConfigurationKind.ALL, TestJdkKind.FULL_JDK)
 
     override fun renderOutput(originalText: String, text: String, resolvedCallsAt: List<Pair<Int, ResolvedCall<*>?>>): String {
-        val lines = text.lines()
-        val lineOffsets = run {
+        konst lines = text.lines()
+        konst lineOffsets = run {
             var offset = 0
             lines.map { offset.apply { offset += it.length + 1 /* new-line delimiter */ } }
         }
@@ -36,13 +36,13 @@ abstract class AbstractEnhancedSignaturesResolvedCallsTest : AbstractResolvedCal
                     if (result < 0) result.inv() - 1 else result }
 
 
-        val callsByLine = resolvedCallsAt.groupBy ({ (caret) -> lineIndexAt(caret) }, { (_, resolvedCall) -> resolvedCall })
+        konst callsByLine = resolvedCallsAt.groupBy ({ (caret) -> lineIndexAt(caret) }, { (_, resolvedCall) -> resolvedCall })
 
         return buildString {
             lines.forEachIndexed { lineIndex, line ->
                 appendLine(line)
                 callsByLine[lineIndex]?.let { calls ->
-                    val indent = line.takeWhile(Char::isWhitespace) + "    "
+                    konst indent = line.takeWhile(Char::isWhitespace) + "    "
                     calls.forEach { resolvedCall ->
                         appendLine("$indent// ${resolvedCall?.status}")
                         appendLine("$indent// ORIGINAL:    ${resolvedCall?.run { resultingDescriptor!!.original.getText() }}")

@@ -1,8 +1,8 @@
-sealed class Foo(val value: String)
+sealed class Foo(konst konstue: String)
 
 class Bar : Foo("OK")
 
-sealed class WithPrivateConstructor private constructor(val x: Int) {
+sealed class WithPrivateConstructor private constructor(konst x: Int) {
     private constructor() : this(42)
 }
 

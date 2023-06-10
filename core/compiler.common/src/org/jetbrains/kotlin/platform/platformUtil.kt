@@ -26,7 +26,7 @@ fun TargetPlatform?.has(klass: KClass<*>): Boolean = this != null && subplatform
  * New clients are encouraged to use [presentableDescription] description instead, as it
  * also provides better description for multiplatforms.
  */
-val TargetPlatform.oldFashionedDescription: String
+konst TargetPlatform.oldFashionedDescription: String
     // this method mistakenly detects "common native" platform as "Common (experimental)"
     // though this does not seem to have any significant effect
     get() = this.singleOrNull()?.oldFashionedDescription ?: "Common (experimental) "
@@ -38,5 +38,5 @@ val TargetPlatform.oldFashionedDescription: String
  * e.g.
  *      'JVM (1.8)/JS/Native (ios_x64)'
  */
-val TargetPlatform.presentableDescription: String
+konst TargetPlatform.presentableDescription: String
     get() = componentPlatforms.joinToString(separator = "/")

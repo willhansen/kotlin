@@ -25,14 +25,14 @@ fun builder(c: suspend Controller.() -> Unit) {
     c.startCoroutine(Controller(), EmptyContinuation)
 }
 
-class A(val first: String, val second: String) {
+class A(konst first: String, konst second: String) {
     override fun toString() = "$first$second"
 }
-class B(val first: String, val second: String, val third: String) {
+class B(konst first: String, konst second: String, konst third: String) {
     override fun toString() = "$first$second$third"
 }
 
-class C(val first: Long, val second: Double, val third: String) {
+class C(konst first: Long, konst second: Double, konst third: String) {
     override fun toString() = "$first#$second#$third"
 }
 
@@ -76,7 +76,7 @@ fun box(): String {
             return@builder
         }
 
-        val condition = local.toString() == "#OK"
+        konst condition = local.toString() == "#OK"
 
         local = B(
                 if (!condition) "1" else suspendWithArgument("#"),

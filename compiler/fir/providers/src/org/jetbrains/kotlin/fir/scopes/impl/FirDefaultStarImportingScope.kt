@@ -29,9 +29,9 @@ class FirDefaultStarImportingScope(
     excludedImportNames
 ) {
     // TODO: put languageVersionSettings into FirSession?
-    override val starImports = run {
-        val analyzerServices = session.moduleData.analyzerServices
-        val allDefaultImports = priority.getAllDefaultImports(analyzerServices, LanguageVersionSettingsImpl.DEFAULT)
+    override konst starImports = run {
+        konst analyzerServices = session.moduleData.analyzerServices
+        konst allDefaultImports = priority.getAllDefaultImports(analyzerServices, LanguageVersionSettingsImpl.DEFAULT)
         allDefaultImports
             ?.filter { it.isAllUnder }
             ?.map {

@@ -1,12 +1,12 @@
 package
 
 package a {
-    public val foo: kotlin.Int = 2
+    public konst foo: kotlin.Int = 2
     public fun bar(): kotlin.Unit
 
     public final class B {
         public constructor B()
-        public final val foo: kotlin.Int = 2
+        public final konst foo: kotlin.Int = 2
         public final fun bar(): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

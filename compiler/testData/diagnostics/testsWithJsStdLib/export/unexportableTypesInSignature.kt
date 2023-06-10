@@ -14,25 +14,25 @@ fun foo(<!NON_EXPORTABLE_TYPE("parameter; C")!>x: C<!>) {
 fun bar()<!> = C()
 
 <!NON_EXPORTABLE_TYPE("property; C")!>@JsExport
-val x: C<!> = C()
+konst x: C<!> = C()
 
 <!NON_EXPORTABLE_TYPE("property; C")!>@JsExport
 var x2: C<!>
     get() = C()
-    set(value) { }
+    set(konstue) { }
 
 @JsExport
 class A(
-    <!NON_EXPORTABLE_TYPE("parameter; C")!>val x: C<!>,
+    <!NON_EXPORTABLE_TYPE("parameter; C")!>konst x: C<!>,
     <!NON_EXPORTABLE_TYPE("parameter; C")!>y: C<!>
 ) {
     <!NON_EXPORTABLE_TYPE("return; C")!>fun foo(<!NON_EXPORTABLE_TYPE("parameter; C")!>x: C<!>)<!> = x
 
-    <!NON_EXPORTABLE_TYPE("property; C")!>val x2: C<!> = C()
+    <!NON_EXPORTABLE_TYPE("property; C")!>konst x2: C<!> = C()
 
     <!NON_EXPORTABLE_TYPE("property; C")!>var x3: C<!>
         get() = C()
-        set(value) { }
+        set(konstue) { }
 }
 
 @JsExport

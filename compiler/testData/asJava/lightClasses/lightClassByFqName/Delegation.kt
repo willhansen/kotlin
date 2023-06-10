@@ -1,7 +1,7 @@
 // p.B
 package p
 
-class B(private val f: I) : I by f {
+class B(private konst f: I) : I by f {
 }
 
 interface I {

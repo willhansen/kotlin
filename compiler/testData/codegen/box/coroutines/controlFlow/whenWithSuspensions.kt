@@ -25,9 +25,9 @@ suspend fun foo(a: Int) {
 
 fun builder(callback: suspend () -> Unit) {
     callback.startCoroutine(object : Continuation<Unit> {
-        override val context: CoroutineContext = EmptyCoroutineContext
-        override fun resumeWith(value: Result<Unit>) {
-            val exception = value.exceptionOrNull() ?: return
+        override konst context: CoroutineContext = EmptyCoroutineContext
+        override fun resumeWith(konstue: Result<Unit>) {
+            konst exception = konstue.exceptionOrNull() ?: return
             id("FAIL WITH EXCEPTION: ${exception.message}")
         }
     })

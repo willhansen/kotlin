@@ -6,11 +6,11 @@ plugins {
 
 kotlin {
     // Determine host preset.
-    val hostOs = System.getProperty("os.name")
-    val isMingwX64 = hostOs.startsWith("Windows")
+    konst hostOs = System.getProperty("os.name")
+    konst isMingwX64 = hostOs.startsWith("Windows")
 
     // Create a target for the host platform.
-    val hostTarget = when {
+    konst hostTarget = when {
         hostOs == "Mac OS X" -> macosX64("coverage")
         hostOs == "Linux" -> linuxX64("coverage")
         isMingwX64 -> mingwX64("coverage")
@@ -27,8 +27,8 @@ kotlin {
     }
 
     sourceSets {
-        val coverageMain by getting
-        val coverageTest by getting
+        konst coverageMain by getting
+        konst coverageTest by getting
     }
 }
 
@@ -38,7 +38,7 @@ tasks.create("createCoverageReport") {
     description = "Create coverage report"
 
     doLast {
-        val testDebugBinary = kotlin.targets["coverage"].let { it as KotlinNativeTarget }.binaries.getTest("DEBUG").outputFile
+        konst testDebugBinary = kotlin.targets["coverage"].let { it as KotlinNativeTarget }.binaries.getTest("DEBUG").outputFile
         exec {
             commandLine("llvm-profdata", "merge", "$testDebugBinary.profraw", "-o", "$testDebugBinary.profdata")
         }

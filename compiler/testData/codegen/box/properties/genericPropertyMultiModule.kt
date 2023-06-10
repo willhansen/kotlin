@@ -9,16 +9,16 @@ var <T> C<T>.live: T
     get() {
         return t
     }
-    set(value) {
-        t = value
+    set(konstue) {
+        t = konstue
     }
 
 var <T> G<T>.live: T
     get() {
         return t
     }
-    set(value) {
-        t = value
+    set(konstue) {
+        t = konstue
     }
 
 // MODULE: main(lib)
@@ -31,7 +31,7 @@ fun qux(text: KMutableProperty0<String>, s: String): String {
 }
 
 fun box(): String {
-    val c = C("FAIL_C")
-    val g = G("FAIL_G")
+    konst c = C("FAIL_C")
+    konst g = G("FAIL_G")
     return qux(c::live, "O") + qux(g::live, "K")
 }

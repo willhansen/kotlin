@@ -6,6 +6,6 @@ fun callArrayOf(): Array<String> {
 
 @Serializable
 class ErrorResponse(
-    val code: Int,
-    val message: String,
+    konst code: Int,
+    konst message: String,
 )

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.jps.targets.KotlinModuleBuildTarget
  * @see [jps-plugin/testData/incremental/cacheVersionChanged/README.md]
  */
 abstract class AbstractDataContainerVersionChangedTest : AbstractIncrementalCacheVersionChangedTest() {
-    override val buildLogFinder: BuildLogFinder
+    override konst buildLogFinder: BuildLogFinder
         get() = BuildLogFinder(isDataContainerBuildLogEnabled = true)
 
     override fun getVersionManagersToTest(target: KotlinModuleBuildTarget<*>) =

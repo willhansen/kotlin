@@ -3,10 +3,10 @@
 package fromKlib
 
 class C {
-    val inClass = "O"
+    konst inClass = "O"
 }
 
-val toplevel get() = "K"
+konst toplevel get() = "K"
 
 fun referByDescriptor(s: String) = s.length
 

@@ -1,27 +1,27 @@
 fun <S : Any> foo1(x: Array<out S?>, y: Array<in S?>) {
-    val xo = outANullable(x)
-    val yo = inANullable(y)
+    konst xo = outANullable(x)
+    konst yo = inANullable(y)
 
     var f: Array<S> = xo
     f = yo
 }
 
 fun <S : Any> foo2(x: Array<out S>, y: Array<in S>) {
-    val xo = outA(x)
-    val yo = inA(y)
+    konst xo = outA(x)
+    konst yo = inA(y)
 
     var f: Array<S> = xo
     f = yo
 }
 
 class A1<S : Any>(x: Array<out S?>, y: Array<in S?>) {
-    val xo = outANullable(x)
-    val yo = inANullable(y)
+    konst xo = outANullable(x)
+    konst yo = inANullable(y)
 }
 
 class A2<S : Any>(x: Array<out S>, y: Array<in S>) {
-    val xo = outA(x)
-    val yo = inA(y)
+    konst xo = outA(x)
+    konst yo = inA(y)
 }
 
 fun <X : Any> outANullable(x: Array<out X?>): Array<X> = TODO()

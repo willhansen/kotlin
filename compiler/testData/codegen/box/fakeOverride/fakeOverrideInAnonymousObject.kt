@@ -1,6 +1,6 @@
 // TARGET_BACKEND: JVM_IR
 interface JPanel {
-    val result: String
+    konst result: String
 }
 
 open class ActivePanel : JPanel {
@@ -12,7 +12,7 @@ open class ActivePanel : JPanel {
 }
 
 class Test {
-    val panel: JPanel
+    konst panel: JPanel
 
     init {
         panel = object : ActivePanel() {}

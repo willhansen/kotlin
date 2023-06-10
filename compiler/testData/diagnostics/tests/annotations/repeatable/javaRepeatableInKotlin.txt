@@ -7,7 +7,7 @@ package
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@Rep /* = java.lang.annotation.Repeatable */(value = RepeatableAnnotationContainer::class) public final annotation class RepeatableAnnotation : kotlin.Annotation {
+@Rep /* = java.lang.annotation.Repeatable */(konstue = RepeatableAnnotationContainer::class) public final annotation class RepeatableAnnotation : kotlin.Annotation {
     public constructor RepeatableAnnotation()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

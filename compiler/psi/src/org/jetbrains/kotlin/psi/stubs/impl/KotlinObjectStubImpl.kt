@@ -28,14 +28,14 @@ import org.jetbrains.kotlin.name.ClassId
 
 class KotlinObjectStubImpl(
     parent: StubElement<out PsiElement>?,
-    private val name: StringRef?,
-    private val fqName: FqName?,
-    private val classId: ClassId?,
-    private val superNames: Array<StringRef>,
-    private val isTopLevel: Boolean,
-    private val isDefault: Boolean,
-    private val isLocal: Boolean,
-    private val isObjectLiteral: Boolean,
+    private konst name: StringRef?,
+    private konst fqName: FqName?,
+    private konst classId: ClassId?,
+    private konst superNames: Array<StringRef>,
+    private konst isTopLevel: Boolean,
+    private konst isDefault: Boolean,
+    private konst isLocal: Boolean,
+    private konst isObjectLiteral: Boolean,
 ) : KotlinStubBaseImpl<KtObjectDeclaration>(parent, KtStubElementTypes.OBJECT_DECLARATION), KotlinObjectStub {
     override fun getFqName() = fqName
     override fun getName() = StringRef.toString(name)

@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.compilerConfigurationProvider
 
 class ActualizerOnlyFacade(
-    val testServices: TestServices,
+    konst testServices: TestServices,
 ) : AbstractTestFacade<IrBackendInput, IrBackendInput>() {
     override fun transform(module: TestModule, inputArtifact: IrBackendInput): IrBackendInput {
         if (module.useIrActualizer()) {
@@ -31,8 +31,8 @@ class ActualizerOnlyFacade(
         return frontendKind == FrontendKinds.FIR && languageVersionSettings.supportsFeature(LanguageFeature.MultiPlatformProjects)
     }
 
-    override val inputKind: TestArtifactKind<IrBackendInput> = BackendKinds.IrBackend
-    override val outputKind: TestArtifactKind<IrBackendInput> = BackendKinds.IrBackend
+    override konst inputKind: TestArtifactKind<IrBackendInput> = BackendKinds.IrBackend
+    override konst outputKind: TestArtifactKind<IrBackendInput> = BackendKinds.IrBackend
 
     override fun shouldRunAnalysis(module: TestModule): Boolean = true
 }

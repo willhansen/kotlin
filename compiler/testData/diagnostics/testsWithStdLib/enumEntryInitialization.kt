@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-enum class JvmTarget(val description: String) {
+enum class JvmTarget(konst description: String) {
     JVM_1_6("1.6"),
     JVM_1_8("1.8"),
     JVM_9("9"),
@@ -12,7 +12,7 @@ enum class JvmTarget(val description: String) {
     ;
 
     // Should not report UNINITIALIZED_ENUM_ENTRY
-    val bytecodeVersion: String by lazy {
+    konst bytecodeVersion: String by lazy {
         when (this) {
             JVM_1_6 -> "Opcodes.V1_6"
             JVM_1_8 -> "Opcodes.V1_8"

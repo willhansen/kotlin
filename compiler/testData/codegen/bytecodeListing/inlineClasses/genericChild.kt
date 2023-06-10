@@ -1,4 +1,4 @@
-inline class X(val x: Any?)
+inline class X(konst x: Any?)
 
 interface IFoo<out T : X?> {
     fun foo(): T

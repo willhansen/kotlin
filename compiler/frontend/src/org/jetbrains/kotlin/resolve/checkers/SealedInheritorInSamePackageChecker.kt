@@ -19,13 +19,13 @@ object SealedInheritorInSamePackageChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.AllowSealedInheritorsInDifferentFilesOfSamePackage)) return
         if (descriptor !is ClassDescriptor || declaration !is KtClassOrObject) return
-        val classPackage = descriptor.containingPackage() ?: return // local class, SEALED_SUPERTYPE already reported
+        konst classPackage = descriptor.containingPackage() ?: return // local class, SEALED_SUPERTYPE already reported
         for (superTypeListEntry in declaration.superTypeListEntries) {
-            val typeReference = superTypeListEntry.typeReference ?: continue
-            val superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
-            val superClass = superType.constructor.declarationDescriptor ?: continue
+            konst typeReference = superTypeListEntry.typeReference ?: continue
+            konst superType = typeReference.getAbbreviatedTypeOrType(context.trace.bindingContext)?.unwrap() ?: continue
+            konst superClass = superType.constructor.declarationDescriptor ?: continue
             if (!superClass.isSealed()) continue
-            val superClassPackage = superClass.containingPackage() ?: continue
+            konst superClassPackage = superClass.containingPackage() ?: continue
             if (classPackage != superClassPackage) {
                 context.trace.report(Errors.SEALED_INHERITOR_IN_DIFFERENT_PACKAGE.on(typeReference, classPackage, superClassPackage))
             }

@@ -4,7 +4,7 @@
 // Validation test.
 // Check that type variable is fixed to Data<Nothing> as it's used in input types for lambda
 
-class Data<T>(val x: T) {
+class Data<T>(konst x: T) {
     fun dataMethod() {}
 }
 

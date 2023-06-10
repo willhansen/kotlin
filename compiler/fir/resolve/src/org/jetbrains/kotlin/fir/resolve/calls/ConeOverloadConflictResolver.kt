@@ -60,14 +60,14 @@ class ConeOverloadConflictResolver(
         discriminateGenerics: Boolean,
     ): Set<Candidate> {
         if (candidates.size == 1) return candidates
-        val fixedCandidates =
+        konst fixedCandidates =
             if (candidates.first().callInfo.candidateForCommonInvokeReceiver != null)
                 chooseCandidatesWithMostSpecificInvokeReceiver(candidates)
             else
                 candidates
 
         // The same logic as at
-        val noOverrides = filterOverrides(fixedCandidates)
+        konst noOverrides = filterOverrides(fixedCandidates)
 
         return chooseMaximallySpecificCandidates(
             noOverrides,
@@ -87,15 +87,15 @@ class ConeOverloadConflictResolver(
     ): Set<Candidate> {
         if (candidateSet.size <= 1) return candidateSet
 
-        val result = mutableSetOf<Candidate>()
+        konst result = mutableSetOf<Candidate>()
 
         // Assuming `overrides` is a partial order, this loop leaves minimal elements of `candidateSet` in `result`.
         // Namely, it leaves in `result` only candidates, for any pair of them (x, y): !x.overrides(y) && !y.overrides(x)
         // And for any pair original candidates (x, y) if x.overrides(y) && !y.overrides(x) then `x` belongs `result`
         outerLoop@ for (me in candidateSet) {
-            val iterator = result.iterator()
+            konst iterator = result.iterator()
             while (iterator.hasNext()) {
-                val other = iterator.next()
+                konst other = iterator.next()
                 if (me.overrides(other)) {
                     iterator.remove()
                 } else if (other.overrides(me)) {
@@ -113,13 +113,13 @@ class ConeOverloadConflictResolver(
     private fun Candidate.overrides(other: Candidate): Boolean {
         if (symbol !is FirCallableSymbol || other.symbol !is FirCallableSymbol) return false
 
-        val otherOriginal = other.symbol.unwrapSubstitutionOverrides()
+        konst otherOriginal = other.symbol.unwrapSubstitutionOverrides()
         if (symbol.unwrapSubstitutionOverrides<FirCallableSymbol<*>>() == otherOriginal) return true
 
-        val scope = originScope as? FirTypeScope ?: return false
+        konst scope = originScope as? FirTypeScope ?: return false
 
         @Suppress("UNCHECKED_CAST")
-        val overriddenProducer = when (symbol) {
+        konst overriddenProducer = when (symbol) {
             is FirNamedFunctionSymbol -> FirTypeScope::processOverriddenFunctions as ProcessAllOverridden<FirCallableSymbol<*>>
             is FirPropertySymbol -> FirTypeScope::processOverriddenProperties as ProcessAllOverridden<FirCallableSymbol<*>>
             else -> return false
@@ -129,12 +129,12 @@ class ConeOverloadConflictResolver(
     }
 
     private fun chooseCandidatesWithMostSpecificInvokeReceiver(candidates: Set<Candidate>): Set<Candidate> {
-        val propertyReceiverCandidates = candidates.mapTo(mutableSetOf()) {
+        konst propertyReceiverCandidates = candidates.mapTo(mutableSetOf()) {
             it.callInfo.candidateForCommonInvokeReceiver
                 ?: error("If one candidate within a group is property+invoke, other should be the same, but $it found")
         }
 
-        val bestInvokeReceiver =
+        konst bestInvokeReceiver =
             chooseMaximallySpecificCandidates(propertyReceiverCandidates, discriminateGenerics = false, discriminateAbstracts = false)
                 .singleOrNull() ?: return candidates
 
@@ -157,7 +157,7 @@ class ConeOverloadConflictResolver(
         }
 
         if (discriminateSAMs) {
-            val filtered = candidates.filterTo(mutableSetOf()) { !it.usesSAM }
+            konst filtered = candidates.filterTo(mutableSetOf()) { !it.usesSAM }
             when (filtered.size) {
                 1 -> return filtered
                 0, candidates.size -> {
@@ -173,7 +173,7 @@ class ConeOverloadConflictResolver(
         }
 
         if (discriminateSuspendConversions) {
-            val filtered = candidates.filterTo(mutableSetOf()) { !it.usesFunctionConversion }
+            konst filtered = candidates.filterTo(mutableSetOf()) { !it.usesFunctionConversion }
             when (filtered.size) {
                 1 -> return filtered
                 0, candidates.size -> {
@@ -190,7 +190,7 @@ class ConeOverloadConflictResolver(
         }
 
         if (discriminateAbstracts) {
-            val filtered = candidates.filterTo(mutableSetOf()) { (it.symbol.fir as? FirMemberDeclaration)?.modality != Modality.ABSTRACT }
+            konst filtered = candidates.filterTo(mutableSetOf()) { (it.symbol.fir as? FirMemberDeclaration)?.modality != Modality.ABSTRACT }
             when (filtered.size) {
                 1 -> return filtered
                 0, candidates.size -> {
@@ -234,7 +234,7 @@ class ConeOverloadConflictResolver(
             // See more details at KT-51460, KT-55722, KT-56310 and relevant tests
             //    testData/diagnostics/tests/visibility/moreSpecificProtectedSimple.kt
             //    testData/diagnostics/tests/smartCasts/kt51460.kt
-            val filtered = candidates.filterTo(mutableSetOf()) { !it.isFromOriginalTypeInPresenceOfSmartCast }
+            konst filtered = candidates.filterTo(mutableSetOf()) { !it.isFromOriginalTypeInPresenceOfSmartCast }
             when (filtered.size) {
                 1 -> return filtered
                 0, candidates.size -> {
@@ -250,7 +250,7 @@ class ConeOverloadConflictResolver(
             }
         }
 
-        val filtered = candidates.filterTo(mutableSetOf()) { it.usesSAM }
+        konst filtered = candidates.filterTo(mutableSetOf()) { it.usesSAM }
         if (filtered.isNotEmpty()) {
             findMaximallySpecificCall(candidates, discriminateGenerics = false, useOriginalSamTypes = true)?.let { return setOf(it) }
         }
@@ -265,11 +265,11 @@ class ConeOverloadConflictResolver(
     ): Candidate? {
         if (candidates.size <= 1) return candidates.singleOrNull()
 
-        val candidateSignatures = candidates.map { candidateCall ->
+        konst candidateSignatures = candidates.map { candidateCall ->
             createFlatSignature(candidateCall)
         }
 
-        val bestCandidatesByParameterTypes = candidateSignatures.filter { signature ->
+        konst bestCandidatesByParameterTypes = candidateSignatures.filter { signature ->
             candidateSignatures.all { other ->
                 signature === other || isNotLessSpecificCallWithArgumentMapping(signature, other, discriminateGenerics, useOriginalSamTypes)
             }
@@ -308,8 +308,8 @@ class ConeOverloadConflictResolver(
         call1: FlatSignature<Candidate>,
         call2: FlatSignature<Candidate>
     ): Boolean {
-        val hasVarargs1 = call1.hasVarargs
-        val hasVarargs2 = call2.hasVarargs
+        konst hasVarargs1 = call1.hasVarargs
+        konst hasVarargs2 = call2.hasVarargs
         if (hasVarargs1 && !hasVarargs2) return false
         if (!hasVarargs1 && hasVarargs2) return true
 
@@ -321,17 +321,17 @@ class ConeOverloadConflictResolver(
     }
 }
 
-class ConeSimpleConstraintSystemImpl(val system: NewConstraintSystemImpl, val session: FirSession) : SimpleConstraintSystem {
+class ConeSimpleConstraintSystemImpl(konst system: NewConstraintSystemImpl, konst session: FirSession) : SimpleConstraintSystem {
     override fun registerTypeVariables(typeParameters: Collection<TypeParameterMarker>): TypeSubstitutorMarker = with(context) {
-        val csBuilder = system.getBuilder()
-        val substitutionMap = typeParameters.associateBy({ (it as ConeTypeParameterLookupTag).typeParameterSymbol }) {
+        konst csBuilder = system.getBuilder()
+        konst substitutionMap = typeParameters.associateBy({ (it as ConeTypeParameterLookupTag).typeParameterSymbol }) {
             require(it is ConeTypeParameterLookupTag)
-            val variable = ConeTypeParameterBasedTypeVariable(it.typeParameterSymbol)
+            konst variable = ConeTypeParameterBasedTypeVariable(it.typeParameterSymbol)
             csBuilder.registerVariable(variable)
 
             variable.defaultType
         }
-        val substitutor = substitutorByMap(substitutionMap, session)
+        konst substitutor = substitutorByMap(substitutionMap, session)
         for (typeParameter in typeParameters) {
             require(typeParameter is ConeTypeParameterLookupTag)
             for (upperBound in typeParameter.symbol.resolvedBounds) {
@@ -351,10 +351,10 @@ class ConeSimpleConstraintSystemImpl(val system: NewConstraintSystemImpl, val se
 
     override fun hasContradiction(): Boolean = system.hasContradiction
 
-    override val captureFromArgument: Boolean
+    override konst captureFromArgument: Boolean
         get() = true
 
-    override val context: TypeSystemInferenceExtensionContext
+    override konst context: TypeSystemInferenceExtensionContext
         get() = system
 
 }

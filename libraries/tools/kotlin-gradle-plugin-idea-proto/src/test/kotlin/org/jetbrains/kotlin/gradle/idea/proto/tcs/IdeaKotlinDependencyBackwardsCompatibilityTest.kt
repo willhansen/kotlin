@@ -23,10 +23,10 @@ class IdeaKotlinDependencyBackwardsCompatibilityTest {
 
     @Test
     fun `test - simple unresolved binary dependency`() {
-        val dependency = TestIdeaKotlinInstances.simpleUnresolvedBinaryDependency
-        val binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
-        val deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
-        val deserializedCopied = deserialized.copy<IdeaKotlinUnresolvedBinaryDependency>()
+        konst dependency = TestIdeaKotlinInstances.simpleUnresolvedBinaryDependency
+        konst binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
+        konst deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
+        konst deserializedCopied = deserialized.copy<IdeaKotlinUnresolvedBinaryDependency>()
 
         assertEquals(dependency.cause, deserializedCopied.cause)
         assertEquals(dependency.coordinates, deserializedCopied.coordinates)
@@ -35,10 +35,10 @@ class IdeaKotlinDependencyBackwardsCompatibilityTest {
 
     @Test
     fun `test - simple resolved binary dependency`() {
-        val dependency = TestIdeaKotlinInstances.simpleResolvedBinaryDependency
-        val binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
-        val deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
-        val deserializedCopied = deserialized.copy<IdeaKotlinResolvedBinaryDependency>()
+        konst dependency = TestIdeaKotlinInstances.simpleResolvedBinaryDependency
+        konst binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
+        konst deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
+        konst deserializedCopied = deserialized.copy<IdeaKotlinResolvedBinaryDependency>()
 
         assertEquals(dependency.coordinates, deserializedCopied.coordinates)
         assertEquals(dependency.binaryType, deserializedCopied.binaryType)
@@ -48,10 +48,10 @@ class IdeaKotlinDependencyBackwardsCompatibilityTest {
 
     @Test
     fun `test - simple source dependency`() {
-        val dependency = TestIdeaKotlinInstances.simpleSourceDependency
-        val binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
-        val deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
-        val deserializedCopied = deserialized.copy<IdeaKotlinSourceDependency>()
+        konst dependency = TestIdeaKotlinInstances.simpleSourceDependency
+        konst binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
+        konst deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
+        konst deserializedCopied = deserialized.copy<IdeaKotlinSourceDependency>()
 
         assertEquals(dependency.type, deserializedCopied.type)
         assertEquals(dependency.coordinates, deserializedCopied.coordinates)
@@ -60,10 +60,10 @@ class IdeaKotlinDependencyBackwardsCompatibilityTest {
 
     @Test
     fun `test - simple project artifact dependency`() {
-        val dependency = TestIdeaKotlinInstances.simpleProjectArtifactDependency
-        val binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
-        val deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
-        val deserializedCopied = deserialized.copy<IdeaKotlinProjectArtifactDependency>()
+        konst dependency = TestIdeaKotlinInstances.simpleProjectArtifactDependency
+        konst binary = TestIdeaKotlinDependencySerializer().serialize(dependency)
+        konst deserialized = deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(binary)
+        konst deserializedCopied = deserialized.copy<IdeaKotlinProjectArtifactDependency>()
 
         assertEquals(dependency.type, deserializedCopied.type)
         assertEquals(dependency.coordinates, deserializedCopied.coordinates)
@@ -72,10 +72,10 @@ class IdeaKotlinDependencyBackwardsCompatibilityTest {
 }
 
 private fun deserializeIdeaKotlinDependencyWithBackwardsCompatibleClasses(project: ByteArray): Any {
-    val classLoader = classLoaderForBackwardsCompatibleClasses()
-    val serializer = TestIdeaKotlinDependencySerializer(classLoader)
+    konst classLoader = classLoaderForBackwardsCompatibleClasses()
+    konst serializer = TestIdeaKotlinDependencySerializer(classLoader)
 
-    val deserialized = assertNotNull(
+    konst deserialized = assertNotNull(
         serializer.deserialize(project),
         "Failed to deserialize dependency: ${serializer.reports}"
     )

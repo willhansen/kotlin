@@ -15,8 +15,8 @@ internal class BooleanOptionType(
     }
 
     companion object {
-        internal val TRUE_TOKENS = setOf("1", "on", "yes", "true")
-        internal val FALSE_TOKENS = setOf("0", "off", "no", "false")
+        internal konst TRUE_TOKENS = setOf("1", "on", "yes", "true")
+        internal konst FALSE_TOKENS = setOf("0", "off", "no", "false")
     }
 }
 
@@ -25,7 +25,7 @@ internal fun parseBoolean(rawValue: String, onError: (reason: String) -> Nothing
         when (it) {
             in BooleanOptionType.TRUE_TOKENS -> true
             in BooleanOptionType.FALSE_TOKENS -> false
-            else -> onError("Invalid boolean value: $it")
+            else -> onError("Inkonstid boolean konstue: $it")
         }
     }
 }

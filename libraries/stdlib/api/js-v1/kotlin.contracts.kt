@@ -27,7 +27,7 @@ public interface ContractBuilder {
     public abstract fun returns(): kotlin.contracts.Returns
 
     @kotlin.internal.ContractsDsl
-    public abstract fun returns(value: kotlin.Any?): kotlin.contracts.Returns
+    public abstract fun returns(konstue: kotlin.Any?): kotlin.contracts.Returns
 
     @kotlin.internal.ContractsDsl
     public abstract fun returnsNotNull(): kotlin.contracts.ReturnsNotNull
@@ -39,7 +39,7 @@ public interface ContractBuilder {
 public interface Effect {
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.BINARY)
+@kotlin.annotation.Retention(konstue = AnnotationRetention.BINARY)
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.RequiresOptIn
 @kotlin.annotation.MustBeDocumented

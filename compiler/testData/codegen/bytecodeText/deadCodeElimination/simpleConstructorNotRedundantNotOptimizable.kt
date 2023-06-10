@@ -1,7 +1,7 @@
 class A
 fun box(u: Int) {
-    val x: A? = A()
-    val y: A?
+    konst x: A? = A()
+    konst y: A?
     if (u == 0) {
         y = x
     }

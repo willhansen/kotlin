@@ -22,7 +22,7 @@ import java.io.Serializable
 @DefaultImplementation(LookupTracker.DO_NOTHING::class)
 interface LookupTracker {
     // used in tests for more accurate checks
-    val requiresPosition: Boolean
+    konst requiresPosition: Boolean
 
     fun record(
         filePath: String,
@@ -35,7 +35,7 @@ interface LookupTracker {
     fun clear()
 
     object DO_NOTHING : LookupTracker {
-        override val requiresPosition: Boolean
+        override konst requiresPosition: Boolean
             get() = false
 
         override fun record(filePath: String, position: Position, scopeFqName: String, scopeKind: ScopeKind, name: String) {
@@ -52,9 +52,9 @@ enum class ScopeKind {
 }
 
 data class LookupInfo(
-    val filePath: String,
-    val position: Position,
-    val scopeFqName: String,
-    val scopeKind: ScopeKind,
-    val name: String
+    konst filePath: String,
+    konst position: Position,
+    konst scopeFqName: String,
+    konst scopeKind: ScopeKind,
+    konst name: String
 ) : Serializable

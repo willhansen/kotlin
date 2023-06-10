@@ -1,11 +1,11 @@
 // FILE: test.kt
 class A {
-    inline val s: Int
+    inline konst s: Int
         get() = 1
 }
 
 fun box() {
-    val a = A()
+    konst a = A()
     var y = a.s
     y++
 }

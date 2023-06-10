@@ -22,7 +22,7 @@ suspend fun suspendHereIntercepted(): String = suspendCoroutineUninterceptedOrRe
 
 fun builder(testNum: Int, expectedResult: Result<String>, c: suspend () -> String) {
     c.startCoroutineUninterceptedOrReturn(object : Continuation<String> {
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = ContinuationDispatcher()
 
         override fun resumeWith(result: Result<String>) {
@@ -42,13 +42,13 @@ class ContinuationDispatcher : AbstractCoroutineContextElement(ContinuationInter
 }
 
 private class DispatchedContinuation<T>(
-    val continuation: Continuation<T>
+    konst continuation: Continuation<T>
 ): Continuation<T> {
     init {
         interceptions++
     }
 
-    override val context: CoroutineContext = continuation.context
+    override konst context: CoroutineContext = continuation.context
 
     override fun resumeWith(result: Result<T>) {
         continuation.resumeWith(result)
@@ -56,7 +56,7 @@ private class DispatchedContinuation<T>(
 }
 
 fun box(): String {
-    val success = Result.success("OK")
+    konst success = Result.success("OK")
 
     builder(0, success) { suspendHere() }
     if (invocations != 1) return "fail 00: $invocations"

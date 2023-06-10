@@ -8,7 +8,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 @interface JavaAnn {
-    Class<?> value();
+    Class<?> konstue();
 }
 
 // FILE: MyJavaClass.java
@@ -22,7 +22,7 @@ class MyJavaClass {}
 // FILE: 1.kt
 
 fun box(): String {
-    val ann = MyJavaClass::class.java.getAnnotation(JavaAnn::class.java)
+    konst ann = MyJavaClass::class.java.getAnnotation(JavaAnn::class.java)
     if (ann == null) return "fail: cannot find JavaAnn on MyClass"
-    return ann.value.java.simpleName!!
+    return ann.konstue.java.simpleName!!
 }

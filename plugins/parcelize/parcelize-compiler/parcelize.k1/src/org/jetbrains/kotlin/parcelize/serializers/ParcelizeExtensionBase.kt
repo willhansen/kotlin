@@ -20,12 +20,12 @@ import java.io.FileDescriptor
 
 interface ParcelizeExtensionBase {
     companion object {
-        val FILE_DESCRIPTOR_FQNAME = FqName(FileDescriptor::class.java.canonicalName)
-        val ALLOWED_CLASS_KINDS = listOf(ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS)
+        konst FILE_DESCRIPTOR_FQNAME = FqName(FileDescriptor::class.java.canonicalName)
+        konst ALLOWED_CLASS_KINDS = listOf(ClassKind.CLASS, ClassKind.OBJECT, ClassKind.ENUM_CLASS)
     }
 
     fun ClassDescriptor.hasCreatorField(): Boolean {
-        val companionObject = companionObjectDescriptor ?: return false
+        konst companionObject = companionObjectDescriptor ?: return false
 
         if (companionObject.name == CREATOR_NAME) {
             return true
@@ -36,7 +36,7 @@ interface ParcelizeExtensionBase {
             .isNotEmpty()
     }
 
-    val ClassDescriptor.isParcelizeClassDescriptor get() = kind in ALLOWED_CLASS_KINDS && isParcelize
+    konst ClassDescriptor.isParcelizeClassDescriptor get() = kind in ALLOWED_CLASS_KINDS && isParcelize
 
     fun ClassDescriptor.hasSyntheticDescribeContents() = hasParcelizeSyntheticMethod(DESCRIBE_CONTENTS)
 
@@ -49,9 +49,9 @@ interface ParcelizeExtensionBase {
     }
 
     private fun ClassDescriptor.hasParcelizeSyntheticMethod(componentKind: ParcelizeSyntheticComponent.ComponentKind): Boolean {
-        val methodName = Name.identifier(componentKind.methodName)
+        konst methodName = Name.identifier(componentKind.methodName)
 
-        val writeToParcelMethods = unsubstitutedMemberScope
+        konst writeToParcelMethods = unsubstitutedMemberScope
             .getContributedFunctions(methodName, NoLookupLocation.FROM_BACKEND)
             .filter { it is ParcelizeSyntheticComponent && it.componentKind == componentKind }
 

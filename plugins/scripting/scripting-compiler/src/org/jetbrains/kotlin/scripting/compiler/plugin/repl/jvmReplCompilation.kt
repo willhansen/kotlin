@@ -19,13 +19,13 @@ class JvmReplCompilerStageHistory<CompilationT : JvmReplCompilerState.Compilatio
     BasicReplStageHistory<ScriptDescriptor>(state.lock)
 
 class JvmReplCompilerState<CompilationT : JvmReplCompilerState.Compilation>(
-    val createCompilation: (ScriptCompilationConfiguration) -> CompilationT,
-    override val lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
+    konst createCompilation: (ScriptCompilationConfiguration) -> CompilationT,
+    override konst lock: ReentrantReadWriteLock = ReentrantReadWriteLock()
 ) : IReplStageState<ScriptDescriptor> {
 
-    override val history = JvmReplCompilerStageHistory(this)
+    override konst history = JvmReplCompilerStageHistory(this)
 
-    override val currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
+    override konst currentGeneration: Int get() = (history as BasicReplStageHistory<*>).currentGeneration.get()
     override fun getNextLineNo(): Int = history.currentLineNumber.getAndIncrement()
 
     override fun dispose() {
@@ -49,12 +49,12 @@ class JvmReplCompilerState<CompilationT : JvmReplCompilerState.Compilation>(
         _compilation!!
     }
 
-    internal val compilation: CompilationT
+    internal konst compilation: CompilationT
         get() = _compilation ?: throw IllegalStateException("Compilation state is either not initializad or already destroyed")
 
     private var _compilation: CompilationT? = null
 
-    val isCompilationInitialized get() = _compilation != null
+    konst isCompilationInitialized get() = _compilation != null
 
     private fun initializeCompilation(scriptCompilationConfiguration: ScriptCompilationConfiguration) {
         if (_compilation != null) throw IllegalStateException("Compilation state is already initialized")
@@ -62,8 +62,8 @@ class JvmReplCompilerState<CompilationT : JvmReplCompilerState.Compilation>(
     }
 
     interface Compilation {
-        val disposable: Disposable?
-        val baseScriptCompilationConfiguration: ScriptCompilationConfiguration
-        val environment: KotlinCoreEnvironment
+        konst disposable: Disposable?
+        konst baseScriptCompilationConfiguration: ScriptCompilationConfiguration
+        konst environment: KotlinCoreEnvironment
     }
 }

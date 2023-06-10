@@ -25,12 +25,12 @@ import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.internal.reflect.Instantiator
 import kotlin.reflect.KClass
 
-open class KonanArtifactContainer(val project: ProjectInternal) : DefaultPolymorphicDomainObjectContainer<KonanBuildingConfig<*>>(
+open class KonanArtifactContainer(konst project: ProjectInternal) : DefaultPolymorphicDomainObjectContainer<KonanBuildingConfig<*>>(
     KonanBuildingConfig::class.java,
     project.services.get(Instantiator::class.java),
     CollectionCallbackActionDecorator.NOOP
 ) {
-    private inner class KonanBuildingConfigFactory<T: KonanBuildingConfig<*>>(val configClass: KClass<T>)
+    private inner class KonanBuildingConfigFactory<T: KonanBuildingConfig<*>>(konst configClass: KClass<T>)
         : NamedDomainObjectFactory<T> {
 
         var targets: Iterable<String> = emptyList()
@@ -39,10 +39,10 @@ open class KonanArtifactContainer(val project: ProjectInternal) : DefaultPolymor
                 instantiator.newInstance(configClass.java, name, project, targets)
     }
 
-    private val factories = mutableMapOf<KClass<out KonanBuildingConfig<*>>, KonanBuildingConfigFactory<*>>()
+    private konst factories = mutableMapOf<KClass<out KonanBuildingConfig<*>>, KonanBuildingConfigFactory<*>>()
 
     private fun <T: KonanBuildingConfig<*>> createFactory(configClass: KClass<T>) {
-        val factory = KonanBuildingConfigFactory(configClass)
+        konst factory = KonanBuildingConfigFactory(configClass)
         super.registerFactory(configClass.java, factory)
         factories.put(configClass, factory)
     }
@@ -57,8 +57,8 @@ open class KonanArtifactContainer(val project: ProjectInternal) : DefaultPolymor
     }
 
     private fun determineTargets(configClass: KClass<out KonanBuildingConfig<*>>, args: Map<String, Any?>) {
-        val targetsArg = args["targets"]
-        val targets = when {
+        konst targetsArg = args["targets"]
+        konst targets = when {
             targetsArg == null -> project.konanExtension.targets
             targetsArg is Iterable<*> -> targetsArg.map { it.toString() }
             else -> listOf(targetsArg.toString())

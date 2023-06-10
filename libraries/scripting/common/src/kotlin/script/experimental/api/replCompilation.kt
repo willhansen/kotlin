@@ -22,7 +22,7 @@ interface ReplCompiler<CompiledSnippetT : CompiledSnippet> {
     /**
      * Reference to the last compile result
      */
-    val lastCompiledSnippet: LinkedSnippet<CompiledSnippetT>?
+    konst lastCompiledSnippet: LinkedSnippet<CompiledSnippetT>?
 
     /**
      * Compiles snippet chain and returns compilation result for the *last* snippet in the chain.

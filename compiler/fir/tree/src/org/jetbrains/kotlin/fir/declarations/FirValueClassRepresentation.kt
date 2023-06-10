@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.fir.types.ConeSimpleKotlinType
 
 private object FirValueClassRepresentationKey : FirDeclarationDataKey()
 
-var FirRegularClass.valueClassRepresentation: ValueClassRepresentation<ConeSimpleKotlinType>?
+var FirRegularClass.konstueClassRepresentation: ValueClassRepresentation<ConeSimpleKotlinType>?
         by FirDeclarationDataRegistry.data(FirValueClassRepresentationKey)
 
-val FirRegularClass.inlineClassRepresentation: InlineClassRepresentation<ConeSimpleKotlinType>?
-    get() = valueClassRepresentation as? InlineClassRepresentation<ConeSimpleKotlinType>
+konst FirRegularClass.inlineClassRepresentation: InlineClassRepresentation<ConeSimpleKotlinType>?
+    get() = konstueClassRepresentation as? InlineClassRepresentation<ConeSimpleKotlinType>
 
-val FirRegularClass.multiFieldValueClassRepresentation: MultiFieldValueClassRepresentation<ConeSimpleKotlinType>?
-    get() = valueClassRepresentation as? MultiFieldValueClassRepresentation<ConeSimpleKotlinType>
+konst FirRegularClass.multiFieldValueClassRepresentation: MultiFieldValueClassRepresentation<ConeSimpleKotlinType>?
+    get() = konstueClassRepresentation as? MultiFieldValueClassRepresentation<ConeSimpleKotlinType>
 
 

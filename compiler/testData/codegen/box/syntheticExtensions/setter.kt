@@ -18,7 +18,7 @@ class JavaClass {
 // FILE: 1.kt
 
 fun box(): String {
-    val javaClass = JavaClass()
+    konst javaClass = JavaClass()
     javaClass.x = "OK"
     return javaClass.x
 }

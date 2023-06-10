@@ -14,13 +14,13 @@ package org.jetbrains.kotlin.metadata.jvm.deserialization
 // the new compiler skip writing the signatures it now thinks are trivial, and the old compiler would recreate them incorrectly.
 object ClassMapperLite {
     // Simply "kotlin", but to avoid being renamed by namespace relocation (e.g., Shadow.relocate gradle plugin)
-    private val kotlin = listOf('k', 'o', 't', 'l', 'i', 'n').joinToString(separator = "")
+    private konst kotlin = listOf('k', 'o', 't', 'l', 'i', 'n').joinToString(separator = "")
     // Kotlin ClassId -> JVM desc
     // e.g. "kotlin.IntArray" -> "[I"
     //      "kotlin.String.Companion" -> "Lkotlin/jvm/internal/StringCompanionObject"
     //      "kotlin/collections/Map.Entry" -> "Ljava/util/Map$Entry"
-    private val map: Map<String, String> = mutableMapOf<String, String>().apply {
-        val primitives = listOf(
+    private konst map: Map<String, String> = mutableMapOf<String, String>().apply {
+        konst primitives = listOf(
             "Boolean", "Z",
             "Char", "C",
             "Byte", "B",

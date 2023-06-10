@@ -29,8 +29,8 @@ package kotlin.math.fdlibm
 
 import kotlin.wasm.internal.wasm_f64_sqrt as sqrt
 
-private const val one = 1.0
-private const val ln2 = 6.93147180559945286227e-01  /* 0x3FE62E42, 0xFEFA39EF */
+private const konst one = 1.0
+private const konst ln2 = 6.93147180559945286227e-01  /* 0x3FE62E42, 0xFEFA39EF */
 
 internal fun __ieee754_acosh(x: Double): Double {
     var t: Double

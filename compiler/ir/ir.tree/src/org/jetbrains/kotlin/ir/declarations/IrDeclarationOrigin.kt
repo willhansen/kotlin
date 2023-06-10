@@ -90,17 +90,17 @@ interface IrDeclarationOrigin {
     /**
      * [pluginKey] may be null if declaration with this origin was deserialized from klib
      */
-    class GeneratedByPlugin private constructor(val pluginId: String, val pluginKey: GeneratedDeclarationKey?) : IrDeclarationOrigin {
+    class GeneratedByPlugin private constructor(konst pluginId: String, konst pluginKey: GeneratedDeclarationKey?) : IrDeclarationOrigin {
         constructor(pluginKey: GeneratedDeclarationKey) : this(pluginKey::class.qualifiedName!!, pluginKey)
 
         companion object {
             fun fromSerializedString(name: String): GeneratedByPlugin? {
-                val pluginId = name.removeSurrounding("GENERATED[", "]").takeIf { it != name } ?: return null
+                konst pluginId = name.removeSurrounding("GENERATED[", "]").takeIf { it != name } ?: return null
                 return GeneratedByPlugin(pluginId, pluginKey = null)
             }
         }
 
-        override val name: String
+        override konst name: String
             get() = "GENERATED[${pluginId}]"
 
         override fun toString(): String {
@@ -118,13 +118,13 @@ interface IrDeclarationOrigin {
         }
     }
 
-    val name: String
-    val isSynthetic: Boolean get() = false
+    konst name: String
+    konst isSynthetic: Boolean get() = false
 }
 
 abstract class IrDeclarationOriginImpl(
-    override val name: String,
-    override val isSynthetic: Boolean = false
+    override konst name: String,
+    override konst isSynthetic: Boolean = false
 ) : IrDeclarationOrigin {
     override fun toString(): String = name
 

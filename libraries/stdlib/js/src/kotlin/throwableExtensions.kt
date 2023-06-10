@@ -32,7 +32,7 @@ public actual fun Throwable.printStackTrace() {
 @SinceKotlin("1.4")
 public actual fun Throwable.addSuppressed(exception: Throwable) {
     if (this !== exception) {
-        val suppressed = this.asDynamic()._suppressed.unsafeCast<MutableList<Throwable>?>()
+        konst suppressed = this.asDynamic()._suppressed.unsafeCast<MutableList<Throwable>?>()
         if (suppressed == null) {
             this.asDynamic()._suppressed = mutableListOf(exception)
         } else {
@@ -45,15 +45,15 @@ public actual fun Throwable.addSuppressed(exception: Throwable) {
  * Returns a list of all exceptions that were suppressed in order to deliver this exception.
  */
 @SinceKotlin("1.4")
-public actual val Throwable.suppressedExceptions: List<Throwable>
+public actual konst Throwable.suppressedExceptions: List<Throwable>
     get() {
         return this.asDynamic()._suppressed?.unsafeCast<List<Throwable>>() ?: emptyList()
     }
 
 
 private class ExceptionTraceBuilder {
-    private val target = StringBuilder()
-    private val visited = arrayOf<Throwable>()
+    private konst target = StringBuilder()
+    private konst visited = arrayOf<Throwable>()
     private var topStack: String = ""
     private var topStackStart: Int = 0
 
@@ -76,7 +76,7 @@ private class ExceptionTraceBuilder {
 
     private fun Throwable.dumpSelfTrace(indent: String, qualifier: String): Boolean {
         target.append(indent).append(qualifier)
-        val shortInfo = this.toString()
+        konst shortInfo = this.toString()
         if (hasSeen(this)) {
             target.append("[CIRCULAR REFERENCE, SEE ABOVE: ").append(shortInfo).append("]\n")
             return false
@@ -85,7 +85,7 @@ private class ExceptionTraceBuilder {
 
         var stack = this.asDynamic().stack as String?
         if (stack != null) {
-            val stackStart = stack.indexOf(shortInfo).let { if (it < 0) 0 else it + shortInfo.length }
+            konst stackStart = stack.indexOf(shortInfo).let { if (it < 0) 0 else it + shortInfo.length }
             if (stackStart == 0) target.append(shortInfo).append("\n")
             if (topStack.isEmpty()) {
                 topStack = stack
@@ -95,7 +95,7 @@ private class ExceptionTraceBuilder {
             }
             if (indent.isNotEmpty()) {
                 // indent stack, but avoid indenting exception message lines
-                val messageLines = if (stackStart == 0) 0 else 1 + shortInfo.count { c -> c == '\n' }
+                konst messageLines = if (stackStart == 0) 0 else 1 + shortInfo.count { c -> c == '\n' }
                 stack.lineSequence().forEachIndexed { index: Int, line: String ->
                     if (index >= messageLines) target.append(indent)
                     target.append(line).append("\n")
@@ -107,9 +107,9 @@ private class ExceptionTraceBuilder {
             target.append(shortInfo).append("\n")
         }
 
-        val suppressed = suppressedExceptions
+        konst suppressed = suppressedExceptions
         if (suppressed.isNotEmpty()) {
-            val suppressedIndent = indent + "    "
+            konst suppressedIndent = indent + "    "
             for (s in suppressed) {
                 s.dumpFullTrace(suppressedIndent, "Suppressed: ")
             }
@@ -122,7 +122,7 @@ private class ExceptionTraceBuilder {
         var lastBreak: Int = 0
         var preLastBreak: Int = 0
         for (pos in 0 until minOf(topStack.length - topStackStart, stack.length - stackStart)) {
-            val c = stack[stack.lastIndex - pos]
+            konst c = stack[stack.lastIndex - pos]
             if (c != topStack[topStack.lastIndex - pos]) break
             if (c == '\n') {
                 commonFrames += 1

@@ -4,6 +4,6 @@ class A<T> {
 }
 
 fun main() {
-    val a = A<Any>()
+    konst a = A<Any>()
     <!INVISIBLE_SETTER!>a.x<!> = 1
 }

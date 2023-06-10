@@ -39,10 +39,10 @@ var baz = 1
 
 fun Any.ext() {}
 
-val Any.extValFun: () -> Unit get() = null!!
-val Any.extVal: () -> Unit get() = null!!
+konst Any.extValFun: () -> Unit get() = null!!
+konst Any.extVal: () -> Unit get() = null!!
 
-val Any.extExtVal: Any.() -> Unit get() = null!!
+konst Any.extExtVal: Any.() -> Unit get() = null!!
 
 operator fun Any.invoke() {}
 
@@ -51,11 +51,11 @@ operator fun Any.plus(a: Any) {}
 class C {
 
     operator fun String.invoke() {}
-    val foo: String.() -> Unit = null!!
+    konst foo: String.() -> Unit = null!!
 
-    val s: String = ""
+    konst s: String = ""
 
-    val withInvoke = WithInvoke()
+    konst withInvoke = WithInvoke()
 
     fun <!DYNAMIC_RECEIVER_NOT_ALLOWED!>dynamic<!>.test() {
         s()

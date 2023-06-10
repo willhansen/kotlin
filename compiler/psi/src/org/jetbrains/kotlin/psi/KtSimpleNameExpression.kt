@@ -55,12 +55,12 @@ abstract class KtSimpleNameExpressionImpl(node: ASTNode) : KtExpressionImpl(node
         }
 
         fun getReferencedNameAsNameImpl(expresssion: KtSimpleNameExpression): Name {
-            val name = expresssion.getReferencedName()
+            konst name = expresssion.getReferencedName()
             return Name.identifier(name)
         }
 
         fun getReferencedNameImpl(expression: KtSimpleNameExpression): String {
-            val text = expression.getReferencedNameElement().node!!.text
+            konst text = expression.getReferencedNameElement().node!!.text
             return KtPsiUtil.unquoteIdentifierOrFieldReference(text)
         }
     }

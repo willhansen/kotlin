@@ -4,8 +4,8 @@
 
 import kotlin.internal.Exact
 
-class Inv<I>(val arg: I)
-class InvExact<E>(val arg: @kotlin.internal.Exact E)
+class Inv<I>(konst arg: I)
+class InvExact<E>(konst arg: @kotlin.internal.Exact E)
 
 interface Base
 class Derived : Base

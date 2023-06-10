@@ -4,14 +4,14 @@ annotation class MyDsl
 
 @MyDsl
 interface Foo<T> {
-    val x: Int
+    konst x: Int
 }
 
-val Foo<*>.bad: Int get() = x
+konst Foo<*>.bad: Int get() = x
 
 fun Foo<*>.badFun(): Int = x
 
-val Foo<Int>.good: Int get() = x
+konst Foo<Int>.good: Int get() = x
 
 fun test(foo: Foo<*>) {
     foo.apply {

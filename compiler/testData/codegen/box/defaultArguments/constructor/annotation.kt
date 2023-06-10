@@ -1,4 +1,4 @@
-annotation class A(val a: Int = 0)
+annotation class A(konst a: Int = 0)
 
 @A fun test1() = 1
 @A(2) fun test2() = 1

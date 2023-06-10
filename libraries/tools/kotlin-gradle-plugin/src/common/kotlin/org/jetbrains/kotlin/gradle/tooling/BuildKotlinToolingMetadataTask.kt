@@ -41,13 +41,13 @@ internal fun Project.registerBuildKotlinToolingMetadataTask() {
     else buildKotlinToolingMetadataTask
 }
 
-internal val Project.buildKotlinToolingMetadataForMainKpmModuleTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKpmModule>?
+internal konst Project.buildKotlinToolingMetadataForMainKpmModuleTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKpmModule>?
     get() {
-        val mainModule = pm20Extension.modules.getByName(GradleKpmModule.MAIN_MODULE_NAME)
+        konst mainModule = pm20Extension.modules.getByName(GradleKpmModule.MAIN_MODULE_NAME)
         return mainModule.buildKotlinToolingMetadataTask
     }
 
-private val Project.buildKotlinToolingMetadataForAllKpmModulesTask
+private konst Project.buildKotlinToolingMetadataForAllKpmModulesTask
     get() = locateOrRegisterTask<Task>(BuildKotlinToolingMetadataTask.defaultTaskName) { task ->
         task.group = "build"
         task.description = "Build metadata json file containing information about the used Kotlin tooling"
@@ -57,20 +57,20 @@ private val Project.buildKotlinToolingMetadataForAllKpmModulesTask
  * The default task managed by the Kotlin Gradle plugin or `null` if the task is disabled.
  * @see [PropertiesProvider.enableKotlinToolingMetadataArtifact]
  */
-internal val Project.buildKotlinToolingMetadataTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKotlinExtension>?
+internal konst Project.buildKotlinToolingMetadataTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKotlinExtension>?
     get() {
         if (!kotlinPropertiesProvider.enableKotlinToolingMetadataArtifact) return null
-        val taskName = BuildKotlinToolingMetadataTask.defaultTaskName
+        konst taskName = BuildKotlinToolingMetadataTask.defaultTaskName
         return locateOrRegisterTask(taskName) { task ->
             task.group = "build"
             task.description = "Build metadata json file containing information about the used Kotlin tooling"
         }
     }
 
-internal val GradleKpmModule.buildKotlinToolingMetadataTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKpmModule>?
+internal konst GradleKpmModule.buildKotlinToolingMetadataTask: TaskProvider<BuildKotlinToolingMetadataTask.FromKpmModule>?
     get() {
         if (!project.kotlinPropertiesProvider.enableKotlinToolingMetadataArtifact) return null
-        val taskName = BuildKotlinToolingMetadataTask.taskNameForKotlinModule(name)
+        konst taskName = BuildKotlinToolingMetadataTask.taskNameForKotlinModule(name)
 
         return project.locateOrRegisterTask(
             name = taskName,
@@ -88,11 +88,11 @@ abstract class BuildKotlinToolingMetadataTask : DefaultTask() {
     abstract class FromKpmModule
     @Inject constructor(
         @get:Internal
-        val module: GradleKpmModule,
-        private val projectLayout: ProjectLayout
+        konst module: GradleKpmModule,
+        private konst projectLayout: ProjectLayout
     ) : BuildKotlinToolingMetadataTask() {
 
-        override val outputDirectory: File
+        override konst outputDirectory: File
             get() = projectLayout
                 .buildDirectory
                 .get()
@@ -105,10 +105,10 @@ abstract class BuildKotlinToolingMetadataTask : DefaultTask() {
 
     abstract class FromKotlinExtension
     @Inject constructor(
-        private val projectLayout: ProjectLayout
+        private konst projectLayout: ProjectLayout
     ) : BuildKotlinToolingMetadataTask() {
 
-        override val outputDirectory: File get() = projectLayout.buildDirectory.get().asFile.resolve("kotlinToolingMetadata")
+        override konst outputDirectory: File get() = projectLayout.buildDirectory.get().asFile.resolve("kotlinToolingMetadata")
 
         override fun buildKotlinToolingMetadata() = project.kotlinExtension.getKotlinToolingMetadata()
     }
@@ -119,7 +119,7 @@ abstract class BuildKotlinToolingMetadataTask : DefaultTask() {
          * If enabled, the Kotlin Gradle plugin will automatically register and manage a task with that name.
          * @see PropertiesProvider.enableKotlinToolingMetadataArtifact
          */
-        const val defaultTaskName: String = "buildKotlinToolingMetadata"
+        const konst defaultTaskName: String = "buildKotlinToolingMetadata"
 
         /**
          * The name of the default [FromKpmModule] task of the given [GradleKpmModule]'s name
@@ -128,16 +128,16 @@ abstract class BuildKotlinToolingMetadataTask : DefaultTask() {
     }
 
     @get:OutputDirectory
-    abstract val outputDirectory: File
+    abstract konst outputDirectory: File
 
     @get:Internal /* Covered by 'outputDirectory' */
-    val outputFile: File get() = outputDirectory.resolve("kotlin-tooling-metadata.json")
+    konst outputFile: File get() = outputDirectory.resolve("kotlin-tooling-metadata.json")
 
     @get:Internal
-    internal val kotlinToolingMetadata by lazy { buildKotlinToolingMetadata() }
+    internal konst kotlinToolingMetadata by lazy { buildKotlinToolingMetadata() }
 
     @get:Input
-    internal val kotlinToolingMetadataJson
+    internal konst kotlinToolingMetadataJson
         get() = kotlinToolingMetadata.toJsonString()
 
     protected abstract fun buildKotlinToolingMetadata(): KotlinToolingMetadata
@@ -238,7 +238,7 @@ private fun KotlinProjectExtension.buildProjectSettings(): KotlinToolingMetadata
 }
 
 private fun KotlinProjectExtension.buildProjectTargets(): List<KotlinToolingMetadata.ProjectTargetMetadata> {
-    val targets = when (this) {
+    konst targets = when (this) {
         is KotlinMultiplatformExtension -> this.targets.toSet()
         is KotlinSingleTargetExtension<*> -> setOf(this.target)
         else -> emptySet()
@@ -280,7 +280,7 @@ private fun buildJvmExtrasOrNull(target: KotlinTarget): KotlinToolingMetadata.Pr
 
 private fun buildAndroidExtrasOrNull(target: KotlinTarget): KotlinToolingMetadata.ProjectTargetMetadata.AndroidExtras? {
     if (target !is KotlinAndroidTarget) return null
-    val androidExtension = target.project.extensions.findByType(BaseExtension::class.java)
+    konst androidExtension = target.project.extensions.findByType(BaseExtension::class.java)
     return KotlinToolingMetadata.ProjectTargetMetadata.AndroidExtras(
         sourceCompatibility = androidExtension?.compileOptions?.sourceCompatibility.toString(),
         targetCompatibility = androidExtension?.compileOptions?.targetCompatibility.toString()

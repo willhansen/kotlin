@@ -1,11 +1,11 @@
-data class NameAndSafeValue(val name: String, val value: Int)
+data class NameAndSafeValue(konst name: String, konst konstue: Int)
 
 fun getEnv() = listOf<NameAndSafeValue>()
 
-private val environment: List<NameAndSafeValue> by lazy {
+private konst environment: List<NameAndSafeValue> by lazy {
     buildList {
-        getEnv().forEach { (name, value) ->
-            this += NameAndSafeValue(name, value)
+        getEnv().forEach { (name, konstue) ->
+            this += NameAndSafeValue(name, konstue)
         }
         sortBy { it.name }
     }

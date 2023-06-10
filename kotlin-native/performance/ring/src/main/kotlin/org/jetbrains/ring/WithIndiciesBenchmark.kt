@@ -20,11 +20,11 @@ import org.jetbrains.benchmarksLauncher.Blackhole
 
 open class WithIndiciesBenchmark {
     private var _data: ArrayList<Value>? = null
-    val data: ArrayList<Value>
+    konst data: ArrayList<Value>
         get() = _data!!
 
     init {
-        val list = ArrayList<Value>(BENCHMARK_SIZE)
+        konst list = ArrayList<Value>(BENCHMARK_SIZE)
         for (n in classValues(BENCHMARK_SIZE))
             list.add(n)
         _data = list
@@ -32,10 +32,10 @@ open class WithIndiciesBenchmark {
 
     //Benchmark
     fun withIndicies() {
-        for ((index, value) in data.withIndex()) {
-            if (filterLoad(value)) {
+        for ((index, konstue) in data.withIndex()) {
+            if (filterLoad(konstue)) {
                 Blackhole.consume(index)
-                Blackhole.consume(value)
+                Blackhole.consume(konstue)
             }
         }
     }
@@ -43,10 +43,10 @@ open class WithIndiciesBenchmark {
     //Benchmark
     fun withIndiciesManual() {
         var index = 0
-        for (value in data) {
-            if (filterLoad(value)) {
+        for (konstue in data) {
+            if (filterLoad(konstue)) {
                 Blackhole.consume(index)
-                Blackhole.consume(value)
+                Blackhole.consume(konstue)
             }
             index++
         }

@@ -17,7 +17,7 @@ var custom: Int = 0
     set(myName: Int) {}
 
 fun checkPropertySetterParam(property: KMutableProperty<*>, name: String?) {
-    val parameter = property.setter.parameters.single()
+    konst parameter = property.setter.parameters.single()
     assertEquals(0, parameter.index)
     assertEquals(name, parameter.name)
 }

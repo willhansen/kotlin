@@ -9,19 +9,19 @@
 package a
 
 @OptionalExpectation
-expect annotation class A(val x: Int)
+expect annotation class A(konst x: Int)
 
 @OptionalExpectation
-expect annotation class B(val s: String) {
+expect annotation class B(konst s: String) {
     @OptionalExpectation
-    annotation class C(val a: Boolean)
+    annotation class C(konst a: Boolean)
 }
 
 // FILE: actual.kt
 
 package a
 
-actual annotation class A(actual val x: Int)
+actual annotation class A(actual konst x: Int)
 
 // MODULE: main(library)
 // FILE: main.kt

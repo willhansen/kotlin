@@ -41,7 +41,7 @@ class ClassicFrontend2IrConverter(
     FrontendKinds.ClassicFrontend,
     BackendKinds.IrBackend
 ) {
-    override val additionalServices: List<ServiceRegistrationData>
+    override konst additionalServices: List<ServiceRegistrationData>
         get() = listOf(service(::JsLibraryProvider))
 
     override fun transform(module: TestModule, inputArtifact: ClassicFrontendOutputArtifact): IrBackendInput {
@@ -53,13 +53,13 @@ class ClassicFrontend2IrConverter(
     }
 
     private fun transformToJvmIr(module: TestModule, inputArtifact: ClassicFrontendOutputArtifact): IrBackendInput {
-        val (psiFiles, analysisResult, project, _) = inputArtifact
+        konst (psiFiles, analysisResult, project, _) = inputArtifact
 
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
 
-        val phaseConfig = configuration.get(CLIConfigurationKeys.PHASE_CONFIG)
-        val codegenFactory = JvmIrCodegenFactory(configuration, phaseConfig)
-        val state = GenerationState.Builder(
+        konst phaseConfig = configuration.get(CLIConfigurationKeys.PHASE_CONFIG)
+        konst codegenFactory = JvmIrCodegenFactory(configuration, phaseConfig)
+        konst state = GenerationState.Builder(
             project, ClassBuilderFactories.TEST, analysisResult.moduleDescriptor, analysisResult.bindingContext,
             configuration
         ).isIrBackend(true)
@@ -67,8 +67,8 @@ class ClassicFrontend2IrConverter(
             .diagnosticReporter(DiagnosticReporterFactory.createReporter())
             .build()
 
-        val conversionResult =
-            codegenFactory.convertToIr(CodegenFactory.IrConversionInput.fromGenerationStateAndFiles(state, psiFiles.values))
+        konst conversionResult =
+            codegenFactory.convertToIr(CodegenFactory.IrConversionInput.fromGenerationStateAndFiles(state, psiFiles.konstues))
         return IrBackendInput.JvmIrBackendInput(
             state,
             codegenFactory,
@@ -82,16 +82,16 @@ class ClassicFrontend2IrConverter(
     }
 
     private fun transformToJsIr(module: TestModule, inputArtifact: ClassicFrontendOutputArtifact): IrBackendInput {
-        val (psiFiles, analysisResult, project, _) = inputArtifact
+        konst (psiFiles, analysisResult, project, _) = inputArtifact
 
-        val configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
-        val verifySignatures = JsEnvironmentConfigurationDirectives.SKIP_MANGLE_VERIFICATION !in module.directives
+        konst configuration = testServices.compilerConfigurationProvider.getCompilerConfiguration(module)
+        konst verifySignatures = JsEnvironmentConfigurationDirectives.SKIP_MANGLE_VERIFICATION !in module.directives
 
-        val sourceFiles = psiFiles.values.toList()
-        val icData = configuration.incrementalDataProvider?.getSerializedData(sourceFiles) ?: emptyList()
-        val expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
+        konst sourceFiles = psiFiles.konstues.toList()
+        konst icData = configuration.incrementalDataProvider?.getSerializedData(sourceFiles) ?: emptyList()
+        konst expectDescriptorToSymbol = mutableMapOf<DeclarationDescriptor, IrSymbol>()
 
-        val (moduleFragment, pluginContext) = generateIrForKlibSerialization(
+        konst (moduleFragment, pluginContext) = generateIrForKlibSerialization(
             project,
             sourceFiles,
             configuration,
@@ -105,9 +105,9 @@ class ClassicFrontend2IrConverter(
             testServices.jsLibraryProvider.getDescriptorByCompiledLibrary(it)
         }
 
-        val errorPolicy = configuration.get(JSConfigurationKeys.ERROR_TOLERANCE_POLICY) ?: ErrorTolerancePolicy.DEFAULT
-        val hasErrors = TopDownAnalyzerFacadeForJSIR.checkForErrors(sourceFiles, analysisResult.bindingContext, errorPolicy)
-        val metadataSerializer = KlibMetadataIncrementalSerializer(configuration, project, hasErrors)
+        konst errorPolicy = configuration.get(JSConfigurationKeys.ERROR_TOLERANCE_POLICY) ?: ErrorTolerancePolicy.DEFAULT
+        konst hasErrors = TopDownAnalyzerFacadeForJSIR.checkForErrors(sourceFiles, analysisResult.bindingContext, errorPolicy)
+        konst metadataSerializer = KlibMetadataIncrementalSerializer(configuration, project, hasErrors)
 
         return IrBackendInput.JsIrBackendInput(
             moduleFragment,

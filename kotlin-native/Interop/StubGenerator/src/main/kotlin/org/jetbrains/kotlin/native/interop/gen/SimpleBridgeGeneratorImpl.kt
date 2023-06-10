@@ -21,20 +21,20 @@ import org.jetbrains.kotlin.native.interop.indexer.CompilationWithPCH
 import org.jetbrains.kotlin.native.interop.indexer.Language
 import org.jetbrains.kotlin.native.interop.indexer.mapFragmentIsCompilable
 
-internal val INVALID_CLANG_IDENTIFIER_REGEX = "[^a-zA-Z1-9_]".toRegex()
+internal konst INVALID_CLANG_IDENTIFIER_REGEX = "[^a-zA-Z1-9_]".toRegex()
 
 class SimpleBridgeGeneratorImpl(
-        private val platform: KotlinPlatform,
-        private val pkgName: String,
-        private val jvmFileClassName: String,
-        private val libraryForCStubs: CompilationWithPCH,
-        override val topLevelNativeScope: NativeScope,
-        private val topLevelKotlinScope: KotlinScope
+        private konst platform: KotlinPlatform,
+        private konst pkgName: String,
+        private konst jvmFileClassName: String,
+        private konst libraryForCStubs: CompilationWithPCH,
+        override konst topLevelNativeScope: NativeScope,
+        private konst topLevelKotlinScope: KotlinScope
 ) : SimpleBridgeGenerator {
 
     private var nextUniqueId = 0
 
-    private val BridgedType.nativeType: String get() = when (platform) {
+    private konst BridgedType.nativeType: String get() = when (platform) {
         KotlinPlatform.JVM -> when (this) {
             BridgedType.BYTE -> "jbyte"
             BridgedType.SHORT -> "jshort"
@@ -69,7 +69,7 @@ class SimpleBridgeGeneratorImpl(
         }
     }
 
-    private inner class NativeBridge(val kotlinLines: List<String>, val nativeLines: List<String>)
+    private inner class NativeBridge(konst kotlinLines: List<String>, konst nativeLines: List<String>)
 
     override fun kotlinToNative(
             nativeBacked: NativeBacked,
@@ -79,17 +79,17 @@ class SimpleBridgeGeneratorImpl(
             block: NativeCodeBuilder.(nativeValues: List<NativeExpression>) -> NativeExpression
     ): KotlinExpression {
 
-        val kotlinLines = mutableListOf<String>()
-        val nativeLines = mutableListOf<String>()
+        konst kotlinLines = mutableListOf<String>()
+        konst nativeLines = mutableListOf<String>()
 
-        val kotlinFunctionName = "kniBridge${nextUniqueId++}"
-        val kotlinParameters = kotlinValues.withIndex().joinToString {
-            "p${it.index}: ${it.value.type.kotlinType.render(topLevelKotlinScope)}"
+        konst kotlinFunctionName = "kniBridge${nextUniqueId++}"
+        konst kotlinParameters = kotlinValues.withIndex().joinToString {
+            "p${it.index}: ${it.konstue.type.kotlinType.render(topLevelKotlinScope)}"
         }
 
-        val callExpr = "$kotlinFunctionName(${kotlinValues.joinToString { it.value }})"
+        konst callExpr = "$kotlinFunctionName(${kotlinValues.joinToString { it.konstue }})"
 
-        val cFunctionParameters = when (platform) {
+        konst cFunctionParameters = when (platform) {
             KotlinPlatform.JVM -> mutableListOf(
                     "jniEnv" to "JNIEnv*",
                     "jclss" to "jclass"
@@ -98,15 +98,15 @@ class SimpleBridgeGeneratorImpl(
         }
 
         kotlinValues.withIndex().mapTo(cFunctionParameters) {
-            "p${it.index}" to it.value.type.nativeType
+            "p${it.index}" to it.konstue.type.nativeType
         }
 
-        val joinedCParameters = cFunctionParameters.joinToString { (name, type) -> "$type $name" }
-        val cReturnType = returnType.nativeType
+        konst joinedCParameters = cFunctionParameters.joinToString { (name, type) -> "$type $name" }
+        konst cReturnType = returnType.nativeType
 
-        val cFunctionHeader = when (platform) {
+        konst cFunctionHeader = when (platform) {
             KotlinPlatform.JVM -> {
-                val funcFullName = buildString {
+                konst funcFullName = buildString {
                     if (pkgName.isNotEmpty()) {
                         append(pkgName)
                         append('.')
@@ -116,12 +116,12 @@ class SimpleBridgeGeneratorImpl(
                     append(kotlinFunctionName)
                 }
 
-                val functionName = "Java_" + funcFullName.replace("_", "_1").replace('.', '_').replace("$", "_00024")
+                konst functionName = "Java_" + funcFullName.replace("_", "_1").replace('.', '_').replace("$", "_00024")
                 "JNIEXPORT $cReturnType JNICALL $functionName ($joinedCParameters)"
             }
             KotlinPlatform.NATIVE -> {
-                val externCPrefix = if (libraryForCStubs.language == Language.CPP) "extern \"C\" " else ""
-                val functionName = pkgName.replace(INVALID_CLANG_IDENTIFIER_REGEX, "_") + "_$kotlinFunctionName"
+                konst externCPrefix = if (libraryForCStubs.language == Language.CPP) "extern \"C\" " else ""
+                konst functionName = pkgName.replace(INVALID_CLANG_IDENTIFIER_REGEX, "_") + "_$kotlinFunctionName"
                 if (independent) kotlinLines.add("@" + topLevelKotlinScope.reference(KotlinTypes.independent))
                 kotlinLines.add("@SymbolName(${functionName.quoteAsKotlinLiteral()})")
                 "$externCPrefix$cReturnType $functionName ($joinedCParameters)"
@@ -130,7 +130,7 @@ class SimpleBridgeGeneratorImpl(
         nativeLines.add(cFunctionHeader + " {")
 
         buildNativeCodeLines(topLevelNativeScope) {
-            val cExpr = block(cFunctionParameters.takeLast(kotlinValues.size).map { (name, _) -> name })
+            konst cExpr = block(cFunctionParameters.takeLast(kotlinValues.size).map { (name, _) -> name })
             if (returnType != BridgedType.VOID) {
                 out("return ($cReturnType)$cExpr;")
             }
@@ -147,10 +147,10 @@ class SimpleBridgeGeneratorImpl(
         }
 
         nativeLines.add("}")
-        val kotlinReturnType = returnType.kotlinType.render(topLevelKotlinScope)
+        konst kotlinReturnType = returnType.kotlinType.render(topLevelKotlinScope)
         kotlinLines.add("private external fun $kotlinFunctionName($kotlinParameters): $kotlinReturnType")
 
-        val nativeBridge = NativeBridge(kotlinLines, nativeLines)
+        konst nativeBridge = NativeBridge(kotlinLines, nativeLines)
         nativeBridges.add(nativeBacked to nativeBridge)
 
         return callExpr
@@ -165,29 +165,29 @@ class SimpleBridgeGeneratorImpl(
 
         if (platform != KotlinPlatform.NATIVE) TODO()
 
-        val kotlinLines = mutableListOf<String>()
-        val nativeLines = mutableListOf<String>()
+        konst kotlinLines = mutableListOf<String>()
+        konst nativeLines = mutableListOf<String>()
 
-        val kotlinFunctionName = "kniBridge${nextUniqueId++}"
-        val kotlinParameters = nativeValues.withIndex().map {
-            "p${it.index}" to it.value.type.kotlinType
+        konst kotlinFunctionName = "kniBridge${nextUniqueId++}"
+        konst kotlinParameters = nativeValues.withIndex().map {
+            "p${it.index}" to it.konstue.type.kotlinType
         }
-        val joinedKotlinParameters = kotlinParameters.joinToString {
+        konst joinedKotlinParameters = kotlinParameters.joinToString {
             "${it.first}: ${it.second.render(topLevelKotlinScope)}"
         }
 
-        val cFunctionParameters = nativeValues.withIndex().map {
-            "p${it.index}" to it.value.type.nativeType
+        konst cFunctionParameters = nativeValues.withIndex().map {
+            "p${it.index}" to it.konstue.type.nativeType
         }
-        val joinedCParameters = cFunctionParameters.joinToString { (name, type) -> "$type $name" }
-        val cReturnType = returnType.nativeType
+        konst joinedCParameters = cFunctionParameters.joinToString { (name, type) -> "$type $name" }
+        konst cReturnType = returnType.nativeType
 
-        val symbolName = pkgName.replace(INVALID_CLANG_IDENTIFIER_REGEX, "_") + "_$kotlinFunctionName"
+        konst symbolName = pkgName.replace(INVALID_CLANG_IDENTIFIER_REGEX, "_") + "_$kotlinFunctionName"
         kotlinLines.add("@kotlin.native.internal.ExportForCppRuntime(${symbolName.quoteAsKotlinLiteral()})")
-        val cFunctionHeader = "$cReturnType $symbolName($joinedCParameters)"
+        konst cFunctionHeader = "$cReturnType $symbolName($joinedCParameters)"
 
         nativeLines.add("$cFunctionHeader;")
-        val kotlinReturnType = returnType.kotlinType.render(topLevelKotlinScope)
+        konst kotlinReturnType = returnType.kotlinType.render(topLevelKotlinScope)
         kotlinLines.add("private fun $kotlinFunctionName($joinedKotlinParameters): $kotlinReturnType {")
 
         buildKotlinCodeLines(topLevelKotlinScope) {
@@ -207,20 +207,20 @@ class SimpleBridgeGeneratorImpl(
 
         insertNativeBridge(nativeBacked, kotlinLines, nativeLines)
 
-        return "$symbolName(${nativeValues.joinToString { it.value }})"
+        return "$symbolName(${nativeValues.joinToString { it.konstue }})"
 
     }
 
     override fun insertNativeBridge(nativeBacked: NativeBacked, kotlinLines: List<String>, nativeLines: List<String>) {
-        val nativeBridge = NativeBridge(kotlinLines, nativeLines)
+        konst nativeBridge = NativeBridge(kotlinLines, nativeLines)
         nativeBridges.add(nativeBacked to nativeBridge)
     }
 
-    private val nativeBridges = mutableListOf<Pair<NativeBacked, NativeBridge>>()
+    private konst nativeBridges = mutableListOf<Pair<NativeBacked, NativeBridge>>()
 
     override fun prepare(): NativeBridges {
-        val includedBridges = mutableListOf<NativeBridge>()
-        val excludedClients = mutableSetOf<NativeBacked>()
+        konst includedBridges = mutableListOf<NativeBridge>()
+        konst excludedClients = mutableSetOf<NativeBacked>()
 
         nativeBridges.map { it.second.nativeLines }
                 .mapFragmentIsCompilable(libraryForCStubs)
@@ -241,10 +241,10 @@ class SimpleBridgeGeneratorImpl(
         // TODO: exclude unused bridges.
         return object : NativeBridges {
 
-            override val kotlinLines: Sequence<String>
+            override konst kotlinLines: Sequence<String>
                 get() = includedBridges.asSequence().flatMap { it.kotlinLines.asSequence() }
 
-            override val nativeLines: Sequence<String>
+            override konst nativeLines: Sequence<String>
                 get() = includedBridges.asSequence().flatMap { it.nativeLines.asSequence() }
 
             override fun isSupported(nativeBacked: NativeBacked): Boolean =

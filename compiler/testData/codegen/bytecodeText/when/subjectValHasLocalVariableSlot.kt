@@ -1,7 +1,7 @@
 // !LANGUAGE: +VariableDeclarationInWhenSubject
 
 fun test(a: Any) =
-    when (val subject = a) {
+    when (konst subject = a) {
         is Int -> "Int $subject"
         is String -> "String ${subject.length}"
         else -> "other"

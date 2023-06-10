@@ -2,10 +2,10 @@ import kotlin.reflect.KProperty
 
 var log = ""
 
-class UserDataProperty<in R>(val key: String) {
+class UserDataProperty<in R>(konst key: String) {
     operator fun getValue(thisRef: R, desc: KProperty<*>) = thisRef.toString() + key
 
-    operator fun setValue(thisRef: R, desc: KProperty<*>, value: String?) { log += "set"}
+    operator fun setValue(thisRef: R, desc: KProperty<*>, konstue: String?) { log += "set"}
 }
 
 

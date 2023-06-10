@@ -8,7 +8,7 @@ class Derived : Base() {
     init {
         javaProtectedField = "OK"
     }
-    val anonObject = object {
+    konst anonObject = object {
         override fun toString(): String =
             javaProtectedField
     }

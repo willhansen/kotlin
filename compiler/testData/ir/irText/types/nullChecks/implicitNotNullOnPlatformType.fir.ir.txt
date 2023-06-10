@@ -8,11 +8,11 @@ FILE fqName:<root> fileName:/implicitNotNullOnPlatformType.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:MySet modality:FINAL visibility:public superTypes:[kotlin.collections.Set<kotlin.String>]'
-    PROPERTY name:size visibility:public modality:OPEN [val]
+    PROPERTY name:size visibility:public modality:OPEN [konst]
       overridden:
         public abstract size: kotlin.Int
       FUN name:<get-size> visibility:public modality:OPEN <> ($this:<root>.MySet) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:size visibility:public modality:OPEN [val]
+        correspondingProperty: PROPERTY name:size visibility:public modality:OPEN [konst]
         overridden:
           public abstract fun <get-size> (): kotlin.Int declared in kotlin.collections.Set
         $this: VALUE_PARAMETER name:<this> type:<root>.MySet
@@ -81,4 +81,4 @@ FILE fqName:<root> fileName:/implicitNotNullOnPlatformType.kt
       TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
         CALL 'public open fun contains (element: kotlin.String): kotlin.Boolean declared in <root>.MySet' type=kotlin.Boolean origin=null
           $this: GET_VAR 'm: <root>.MySet declared in <root>.testContains' type=<root>.MySet origin=null
-          element: CONST String type=kotlin.String value="abc"
+          element: CONST String type=kotlin.String konstue="abc"

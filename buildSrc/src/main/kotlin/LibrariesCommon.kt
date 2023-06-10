@@ -34,12 +34,12 @@ fun Project.configureJava9Compilation(
         configureTaskToolchain(JdkMajorVersion.JDK_9_0)
 
         // module-info.java should be in java9 source set by convention
-        val java9SourceSet = sourceSets["java9"].java
+        konst java9SourceSet = sourceSets["java9"].java
         destinationDirectory.set(java9SourceSet.destinationDirectory.asFile.get().resolve("META-INF/versions/9"))
         options.sourcepath = files(java9SourceSet.srcDirs)
-        val compileClasspath = configurations["java9CompileClasspath"]
-        val moduleFiles = objects.fileCollection().from(moduleOutputs)
-        val modulePath = compileClasspath.filter { it !in moduleFiles.files }
+        konst compileClasspath = configurations["java9CompileClasspath"]
+        konst moduleFiles = objects.fileCollection().from(moduleOutputs)
+        konst modulePath = compileClasspath.filter { it !in moduleFiles.files }
         classpath = objects.fileCollection().from()
         options.compilerArgumentProviders.add(
             Java9AdditionalArgumentsProvider(
@@ -52,9 +52,9 @@ fun Project.configureJava9Compilation(
 }
 
 private class Java9AdditionalArgumentsProvider(
-    private val moduleName: String,
-    private val moduleFiles: FileCollection,
-    private val modulePath: FileCollection
+    private konst moduleName: String,
+    private konst moduleFiles: FileCollection,
+    private konst modulePath: FileCollection
 ) : CommandLineArgumentProvider {
     override fun asArguments(): Iterable<String> = listOf(
         "--module-path", modulePath.asPath,

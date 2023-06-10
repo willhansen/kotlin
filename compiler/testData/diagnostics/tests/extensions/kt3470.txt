@@ -1,6 +1,6 @@
 package
 
-public val a: kotlin.String
+public konst a: kotlin.String
 
 public final class A {
     public constructor A()

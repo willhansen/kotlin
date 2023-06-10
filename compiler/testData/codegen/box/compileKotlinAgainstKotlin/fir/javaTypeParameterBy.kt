@@ -16,7 +16,7 @@ class A(j: JavaInterface) : JavaInterface by j
 // FILE: main.kt
 
 fun box(): String {
-    val t = object : JavaInterface {
+    konst t = object : JavaInterface {
         override fun <K : Comparable<K>> foo(): K = "OK" as K
     }
 

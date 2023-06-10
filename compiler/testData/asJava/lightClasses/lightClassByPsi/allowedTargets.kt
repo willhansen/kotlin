@@ -24,11 +24,11 @@ annotation class AnotherUniversalAnnotation
 
 
 class MyClass(
-    @PropertyAnnotation @FieldAnnotation @ParameterAnnotation @UniversalAnnotation @AnotherUniversalAnnotation val x1: Int,
-    @PropertyOrFieldAnnotation val x2: Int,
-    @PropertyOrParameterAnnotation val x3: Int,
-    @ParameterOrFieldAnnotation val x4: Int,
-    @property:UniversalAnnotation @field:AnotherUniversalAnnotation val x5: Int,
-    @field:UniversalAnnotation @param:AnotherUniversalAnnotation val x6: Int,
-    @param:UniversalAnnotation @property:AnotherUniversalAnnotation val x7: Int
+    @PropertyAnnotation @FieldAnnotation @ParameterAnnotation @UniversalAnnotation @AnotherUniversalAnnotation konst x1: Int,
+    @PropertyOrFieldAnnotation konst x2: Int,
+    @PropertyOrParameterAnnotation konst x3: Int,
+    @ParameterOrFieldAnnotation konst x4: Int,
+    @property:UniversalAnnotation @field:AnotherUniversalAnnotation konst x5: Int,
+    @field:UniversalAnnotation @param:AnotherUniversalAnnotation konst x6: Int,
+    @param:UniversalAnnotation @property:AnotherUniversalAnnotation konst x7: Int
 )

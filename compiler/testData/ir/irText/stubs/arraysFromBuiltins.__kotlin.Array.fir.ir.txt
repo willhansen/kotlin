@@ -6,17 +6,17 @@ CLASS IR_EXTERNAL_DECLARATION_STUB CLASS name:Array modality:FINAL visibility:pu
   FUN BUILTIN_CLASS_METHOD name:get visibility:public modality:FINAL <> ($this:kotlin.Array, index:kotlin.Int) returnType:T of kotlin.Array [operator]
     $this: VALUE_PARAMETER name:$this type:kotlin.Array
     VALUE_PARAMETER BUILTIN_CLASS_METHOD name:index index:0 type:kotlin.Int
-  FUN BUILTIN_CLASS_METHOD name:set visibility:public modality:FINAL <> ($this:kotlin.Array, index:kotlin.Int, value:T of kotlin.Array) returnType:kotlin.Unit [operator]
+  FUN BUILTIN_CLASS_METHOD name:set visibility:public modality:FINAL <> ($this:kotlin.Array, index:kotlin.Int, konstue:T of kotlin.Array) returnType:kotlin.Unit [operator]
     $this: VALUE_PARAMETER name:$this type:kotlin.Array
     VALUE_PARAMETER BUILTIN_CLASS_METHOD name:index index:0 type:kotlin.Int
-    VALUE_PARAMETER BUILTIN_CLASS_METHOD name:value index:1 type:T of kotlin.Array
-  PROPERTY name:size visibility:public modality:FINAL [val]
+    VALUE_PARAMETER BUILTIN_CLASS_METHOD name:konstue index:1 type:T of kotlin.Array
+  PROPERTY name:size visibility:public modality:FINAL [konst]
     FUN name:<get-size> visibility:public modality:FINAL <> ($this:kotlin.Array) returnType:kotlin.Int
-      correspondingProperty: PROPERTY name:size visibility:public modality:FINAL [val]
+      correspondingProperty: PROPERTY name:size visibility:public modality:FINAL [konst]
       $this: VALUE_PARAMETER name:$this type:kotlin.Array
   FUN BUILTIN_CLASS_METHOD name:iterator visibility:public modality:FINAL <> ($this:kotlin.Array) returnType:kotlin.collections.Iterator<T of kotlin.Array> [operator]
     annotations:
-      IntrinsicConstEvaluation
+      IntrinsicConstEkonstuation
     $this: VALUE_PARAMETER name:$this type:kotlin.Array
   FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
     overridden:

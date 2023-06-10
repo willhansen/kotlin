@@ -13,7 +13,7 @@ public class B {
 }
 
 // FILE: 1.kt
-class C(val foo: C)
+class C(konst foo: C)
 
 fun test(a: A, b: B, c: C) {
     with(a) {

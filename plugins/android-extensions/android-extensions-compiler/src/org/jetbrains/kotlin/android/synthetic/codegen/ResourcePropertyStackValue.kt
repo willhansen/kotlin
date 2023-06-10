@@ -22,35 +22,35 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class ResourcePropertyStackValue(
-        val receiver: StackValue,
-        private val typeMapper: KotlinTypeMapper,
-        val resource: PropertyDescriptor,
-        val container: ClassDescriptor,
-        private val containerOptions: ContainerOptionsProxy,
-        private val androidPackage: String,
-        private val globalCacheImpl: CacheImplementation
+        konst receiver: StackValue,
+        private konst typeMapper: KotlinTypeMapper,
+        konst resource: PropertyDescriptor,
+        konst container: ClassDescriptor,
+        private konst containerOptions: ContainerOptionsProxy,
+        private konst androidPackage: String,
+        private konst globalCacheImpl: CacheImplementation
 ) : StackValue(typeMapper.mapType(resource.returnType!!)) {
-    private val containerType get() = containerOptions.containerType
+    private konst containerType get() = containerOptions.containerType
 
     init {
         assert(containerOptions.containerType != AndroidContainerType.UNKNOWN)
     }
 
     override fun putSelector(type: Type, kotlinType: KotlinType?, v: InstructionAdapter) {
-        val returnTypeString = typeMapper.mapType(resource.type.lowerIfFlexible()).className
+        konst returnTypeString = typeMapper.mapType(resource.type.lowerIfFlexible()).className
         if (AndroidConst.FRAGMENT_FQNAME == returnTypeString || AndroidConst.SUPPORT_FRAGMENT_FQNAME == returnTypeString || AndroidConst.ANDROIDX_SUPPORT_FRAGMENT_FQNAME == returnTypeString) {
             return putSelectorForFragment(v)
         }
 
-        val syntheticProperty = resource as AndroidSyntheticProperty
+        konst syntheticProperty = resource as AndroidSyntheticProperty
 
         if ((containerOptions.cache ?: globalCacheImpl).hasCache && shouldCacheResource(resource)) {
-            val declarationDescriptorKotlinType = container.defaultType
-            val declarationDescriptorType = typeMapper.mapType(declarationDescriptorKotlinType)
+            konst declarationDescriptorKotlinType = container.defaultType
+            konst declarationDescriptorType = typeMapper.mapType(declarationDescriptorKotlinType)
             receiver.put(declarationDescriptorType, declarationDescriptorKotlinType, v)
 
-            val resourceId = syntheticProperty.resource.id
-            val packageName = resourceId.packageName ?: androidPackage
+            konst resourceId = syntheticProperty.resource.id
+            konst packageName = resourceId.packageName ?: androidPackage
             v.getstatic(packageName.replace(".", "/") + "/R\$id", resourceId.name, "I")
 
             v.invokevirtual(declarationDescriptorType.internalName, CACHED_FIND_VIEW_BY_ID_METHOD_NAME, "(I)Landroid/view/View;", false)
@@ -74,7 +74,7 @@ class ResourcePropertyStackValue(
                     getResourceId(v)
                     v.invokevirtual("android/view/View", "findViewById", "(I)Landroid/view/View;", false)
                 }
-                else -> throw IllegalStateException("Invalid Android class type: $containerType") // Should never occur
+                else -> throw IllegalStateException("Inkonstid Android class type: $containerType") // Should never occur
             }
         }
 
@@ -110,7 +110,7 @@ class ResourcePropertyStackValue(
                 getResourceId(v)
                 v.invokevirtual("androidx/fragment/app/FragmentManager", "findFragmentById", "(I)Landroidx/fragment/app/Fragment;", false)
             }
-            else -> throw IllegalStateException("Invalid Android class type: $containerType") // Should never occur
+            else -> throw IllegalStateException("Inkonstid Android class type: $containerType") // Should never occur
         }
 
         v.checkcast(this.type)

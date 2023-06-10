@@ -1,11 +1,11 @@
 // FIR_IDENTICAL
 
 interface Aaa<T> {
-  fun zzz(value: T): Unit
+  fun zzz(konstue: T): Unit
 }
 
 class Bbb<T>() : Aaa<T> {
-    override fun zzz(value: T) { }
+    override fun zzz(konstue: T) { }
 }
 
 fun foo() {

@@ -4,7 +4,7 @@
 
 interface X {
     fun foo(): String
-    val bar: String
+    konst bar: String
     fun qux(): String
 }
 
@@ -17,7 +17,7 @@ interface Z {
 
 interface X {
     fun foo(): String = "default method"
-    val bar: String get() = "default property"
+    konst bar: String get() = "default property"
     fun qux(): String = "ubdated default method"
 }
 
@@ -30,12 +30,12 @@ interface Z {
 
 class Y: X, Z {
     override fun foo(): String = "overridden method"
-    override val bar: String get() = "overridden property"
+    override konst bar: String get() = "overridden property"
     override fun qux(): String = "overridden multiple versions"
 }
 
-val y = Y()
-val t = object : Z {}
+konst y = Y()
+konst t = object : Z {}
 
 fun lib(): String = when {
     y.foo() != "overridden method" -> "fail 1"

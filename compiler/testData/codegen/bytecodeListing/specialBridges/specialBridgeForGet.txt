@@ -27,7 +27,7 @@ public abstract class AMap1 {
     public method replace(p0: java.lang.Object, p1: java.lang.Object, p2: java.lang.Object): boolean
     public method replaceAll(p0: java.util.function.BiFunction): void
     public bridge final method size(): int
-    public bridge final method values(): java.util.Collection
+    public bridge final method konstues(): java.util.Collection
 }
 
 @kotlin.Metadata
@@ -47,7 +47,7 @@ public abstract class AMap2 {
 @kotlin.Metadata
 public final class C {
     // source: 'specialBridgeForGet.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.String
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.String
     public method <init>(@org.jetbrains.annotations.NotNull p0: java.lang.String): void
     public final @org.jetbrains.annotations.NotNull method getValue(): java.lang.String
 }

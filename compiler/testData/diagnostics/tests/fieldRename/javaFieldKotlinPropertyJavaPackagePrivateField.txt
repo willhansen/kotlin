@@ -4,7 +4,7 @@ public fun box(): kotlin.String
 
 public open class C : base.B {
     public constructor C()
-    invisible_fake final override /*1*/ /*fake_override*/ val f: kotlin.String
+    invisible_fake final override /*1*/ /*fake_override*/ konst f: kotlin.String
     invisible_fake final override /*1*/ /*fake_override*/ var f: kotlin.String!
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -23,7 +23,7 @@ package base {
 
     public open class B : base.A {
         public constructor B()
-        private final val f: kotlin.String = "FAIL"
+        private final konst f: kotlin.String = "FAIL"
         public/*package*/ final override /*1*/ /*fake_override*/ var f: kotlin.String!
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

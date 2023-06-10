@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.Variance
 
 class FirTypeParameterSymbol : FirClassifierSymbol<FirTypeParameter>(), TypeParameterSymbolMarker {
-    val name: Name
+    konst name: Name
         get() = fir.name
 
-    private val lookupTag = ConeTypeParameterLookupTag(this)
+    private konst lookupTag = ConeTypeParameterLookupTag(this)
 
     override fun toLookupTag(): ConeTypeParameterLookupTag = lookupTag
 
@@ -28,20 +28,20 @@ class FirTypeParameterSymbol : FirClassifierSymbol<FirTypeParameter>(), TypePara
         else -> "${this::class.simpleName} <unbound>"
     }
 
-    val resolvedBounds: List<FirResolvedTypeRef>
+    konst resolvedBounds: List<FirResolvedTypeRef>
         get() {
             lazyResolveToPhase(FirResolvePhase.TYPES)
             @Suppress("UNCHECKED_CAST")
             return fir.bounds as List<FirResolvedTypeRef>
         }
 
-    val variance: Variance
+    konst variance: Variance
         get() = fir.variance
 
-    val isReified: Boolean
+    konst isReified: Boolean
         get() = fir.isReified
 
-    val containingDeclarationSymbol: FirBasedSymbol<*>
+    konst containingDeclarationSymbol: FirBasedSymbol<*>
         get() = fir.containingDeclarationSymbol
 }
 

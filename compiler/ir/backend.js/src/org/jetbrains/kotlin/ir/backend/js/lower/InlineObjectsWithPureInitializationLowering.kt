@@ -18,17 +18,17 @@ import org.jetbrains.kotlin.ir.types.classOrNull
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 
-class InlineObjectsWithPureInitializationLowering(val context: JsCommonBackendContext) : BodyLoweringPass {
-    private val IrClass.instanceField by context.mapping.objectToInstanceField
-    private val IrClass.hasPureInitialization by context.mapping.objectsWithPureInitialization
+class InlineObjectsWithPureInitializationLowering(konst context: JsCommonBackendContext) : BodyLoweringPass {
+    private konst IrClass.instanceField by context.mapping.objectToInstanceField
+    private konst IrClass.hasPureInitialization by context.mapping.objectsWithPureInitialization
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         irBody.transformChildrenVoid(object : IrElementTransformerVoid() {
             override fun visitCall(expression: IrCall): IrExpression {
                 if (!expression.symbol.owner.isObjectInstanceGetter()) return super.visitCall(expression)
-                val objectToCreate = expression.symbol.owner.returnType.classOrNull?.owner ?: error("Expect return type of an object getter is an object type")
+                konst objectToCreate = expression.symbol.owner.returnType.classOrNull?.owner ?: error("Expect return type of an object getter is an object type")
                 if (objectToCreate.hasPureInitialization != true) return super.visitCall(expression)
-                val instanceFieldForObject = objectToCreate.instanceField ?: error("An instance field for an object should exist")
+                konst instanceFieldForObject = objectToCreate.instanceField ?: error("An instance field for an object should exist")
                 return JsIrBuilder.buildGetField(
                     instanceFieldForObject.symbol,
                     startOffset = expression.startOffset,

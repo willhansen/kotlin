@@ -9,7 +9,7 @@ fun log(string: String) {
 }
 
 fun pullLog(): String {
-    val string = LOG
+    konst string = LOG
     LOG = ""
     return string
 }

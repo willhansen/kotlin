@@ -31,20 +31,20 @@ abstract class KotlinNativeFatFrameworkConfigImpl @Inject constructor(artifactNa
 
     override var embedBitcode: BitcodeEmbeddingMode? = null
 
-    override fun validate() {
-        super.validate()
-        val kind = NativeOutputKind.FRAMEWORK
+    override fun konstidate() {
+        super.konstidate()
+        konst kind = NativeOutputKind.FRAMEWORK
         check(targets.isNotEmpty()) {
             "Native artifact '$artifactName' wasn't configured because it requires at least one target"
         }
-        val wrongTarget = targets.firstOrNull { !kind.availableFor(it) }
+        konst wrongTarget = targets.firstOrNull { !kind.availableFor(it) }
         check(wrongTarget == null) {
             "Native artifact '$artifactName' wasn't configured because ${kind.description} is not available for ${wrongTarget!!.visibleName}"
         }
     }
 
     override fun createArtifact(extensions: ExtensionAware): KotlinNativeFatFrameworkImpl {
-        validate()
+        konstidate()
         return KotlinNativeFatFrameworkImpl(
             artifactName = artifactName,
             modules = modules,
@@ -62,32 +62,32 @@ abstract class KotlinNativeFatFrameworkConfigImpl @Inject constructor(artifactNa
 }
 
 class KotlinNativeFatFrameworkImpl(
-    override val artifactName: String,
-    override val modules: Set<Any>,
-    override val modes: Set<NativeBuildType>,
-    override val isStatic: Boolean,
-    override val linkerOptions: List<String>,
-    override val kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
-    override val toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
-    override val binaryOptions: Map<String, String>,
-    override val targets: Set<KonanTarget>,
-    override val embedBitcode: BitcodeEmbeddingMode?,
+    override konst artifactName: String,
+    override konst modules: Set<Any>,
+    override konst modes: Set<NativeBuildType>,
+    override konst isStatic: Boolean,
+    override konst linkerOptions: List<String>,
+    override konst kotlinOptionsFn: KotlinCommonToolOptions.() -> Unit,
+    override konst toolOptionsConfigure: KotlinCommonCompilerToolOptions.() -> Unit,
+    override konst binaryOptions: Map<String, String>,
+    override konst targets: Set<KonanTarget>,
+    override konst embedBitcode: BitcodeEmbeddingMode?,
     extensions: ExtensionAware
 ) : KotlinNativeFatFramework, ExtensionAware by extensions {
     override fun getName() = lowerCamelCaseName(artifactName, "FatFramework")
-    override val taskName = lowerCamelCaseName("assemble", name)
-    override val outDir
+    override konst taskName = lowerCamelCaseName("assemble", name)
+    override konst outDir
         get() = "out/fatframework"
 
     override fun registerAssembleTask(project: Project) {
-        val parentTask = project.registerTask<Task>(taskName) {
+        konst parentTask = project.registerTask<Task>(taskName) {
             it.group = "build"
             it.description = "Assemble all types of registered '$artifactName' FatFramework"
         }
         project.tasks.named(LifecycleBasePlugin.ASSEMBLE_TASK_NAME).dependsOn(parentTask)
 
         modes.forEach { buildType ->
-            val fatTask = project.registerTask<FatFrameworkTask>(
+            konst fatTask = project.registerTask<FatFrameworkTask>(
                 lowerCamelCaseName("assemble", artifactName, buildType.visibleName, "FatFramework")
             ) {
                 it.baseName = artifactName
@@ -95,11 +95,11 @@ class KotlinNativeFatFrameworkImpl(
             }
             parentTask.dependsOn(fatTask)
 
-            val nameSuffix = "ForFat"
-            val frameworkDescriptors: List<FrameworkDescriptor> = targets.map { target ->
-                val librariesConfigurationName = project.registerLibsDependencies(target, artifactName + nameSuffix, modules)
-                val exportConfigurationName = project.registerExportDependencies(target, artifactName + nameSuffix, modules)
-                val targetTask = registerLinkFrameworkTask(
+            konst nameSuffix = "ForFat"
+            konst frameworkDescriptors: List<FrameworkDescriptor> = targets.map { target ->
+                konst librariesConfigurationName = project.registerLibsDependencies(target, artifactName + nameSuffix, modules)
+                konst exportConfigurationName = project.registerExportDependencies(target, artifactName + nameSuffix, modules)
+                konst targetTask = registerLinkFrameworkTask(
                     project = project,
                     name = artifactName,
                     target = target,
@@ -111,7 +111,7 @@ class KotlinNativeFatFrameworkImpl(
                     taskNameSuffix = nameSuffix
                 )
                 fatTask.dependsOn(targetTask)
-                val frameworkFileProvider = targetTask.flatMap { it.outputFile }
+                konst frameworkFileProvider = targetTask.flatMap { it.outputFile }
                 FrameworkDescriptor(frameworkFileProvider.get(), isStatic, target)
             }
             fatTask.configure { it.fromFrameworkDescriptors(frameworkDescriptors) }

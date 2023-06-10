@@ -4,7 +4,7 @@
 
 abstract class X {
     abstract fun foo(): String
-    abstract val bar: String
+    abstract konst bar: String
     
     fun qux() = "nothing"
 }
@@ -14,7 +14,7 @@ abstract class X {
 
 abstract class X {
     open fun foo(): String = "now with a body"
-    open val bar: String get() = "now with a body"
+    open konst bar: String get() = "now with a body"
     fun qux() = foo() + bar
 }
 
@@ -23,11 +23,11 @@ abstract class X {
 
 class Y: X() {
     override fun foo() = "derived body"
-    override val bar get() = "derived body"
+    override konst bar get() = "derived body"
 }
 
 fun lib(): String {
-    val y = Y()
+    konst y = Y()
     return when {
         y.foo() != "derived body" -> "fail 1"
         y.bar != "derived body" -> "fail 2"

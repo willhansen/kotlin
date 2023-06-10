@@ -2,7 +2,7 @@
 object Outer {
     private var x
         get() = object : CharSequence {
-            override val length: Int
+            override konst length: Int
                 get() = 0
 
             override fun get(index: Int): Char {

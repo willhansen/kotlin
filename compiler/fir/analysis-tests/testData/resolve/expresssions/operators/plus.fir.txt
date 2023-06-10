@@ -10,9 +10,9 @@ FILE: plus.kt
 
     }
     public final fun test_1(): R|kotlin/Unit| {
-        lval f1: R|Foo| = R|/Foo.Foo|()
-        lval f2: R|Foo| = R|/Foo.Foo|()
-        lval f3: R|Foo| = R|<local>/f1|.R|/Foo.plus|(R|<local>/f2|)
+        lkonst f1: R|Foo| = R|/Foo.Foo|()
+        lkonst f2: R|Foo| = R|/Foo.Foo|()
+        lkonst f3: R|Foo| = R|<local>/f1|.R|/Foo.plus|(R|<local>/f2|)
     }
     public final fun test_2(): R|kotlin/Unit| {
         lvar f: R|Foo| = R|/Foo.Foo|()

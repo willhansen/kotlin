@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.stringConcatenation]
  */
 abstract class IrStringConcatenation : IrExpression() {
-    abstract val arguments: MutableList<IrExpression>
+    abstract konst arguments: MutableList<IrExpression>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitStringConcatenation(this, data)

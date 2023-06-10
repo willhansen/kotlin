@@ -4,8 +4,8 @@
 // http://kotlinlang.org/docs/reference/java-interop.html#handling-signature-clashes-with-platformname
 // https://youtrack.jetbrains.com/issue/KT-5524
 
-val strs = listOf("abc", "def")
-val ints = listOf(1, 2, 3)
+konst strs = listOf("abc", "def")
+konst ints = listOf(1, 2, 3)
 
 class C {
     // Instance methods
@@ -62,55 +62,55 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     // Instance methods: 
     // method signatures with erased types SHOULD NOT clash
 
-    val test1 = c.instMethod(strs)
+    konst test1 = c.instMethod(strs)
     if (test1 != "instMethodStr") return "Fail: c.instMethod(strs)==$test1"
 
-    val test2 = c.instMethod(ints)
+    konst test2 = c.instMethod(ints)
     if (test2 != "instMethodInt") return "Fail: c.instMethod(ints)==$test2"
 
     // Properties: 
     // property accessors SHOULD NOT clash with class methods  
 
-    val test3 = c.rwProperty
+    konst test3 = c.rwProperty
     if (test3 != 123) return "Fail: c.rwProperty==$test3"
 
-    val test3a = c.getRwProperty()
+    konst test3a = c.getRwProperty()
     if (test3a != 111) return "Fail: c.getRwProperty()==$test3a"
 
     c.setRwProperty(444)
-    val test3b = c.rwProperty
+    konst test3b = c.rwProperty
     if (test3b != 123) return "Fail: c.rwProperty==$test3b after c.setRwProperty(1234)"
-    val test3c = c.getRwProperty()
+    konst test3c = c.getRwProperty()
     if (test3c != 444) return "Fail: c.getRwProperty()==$test3c after c.setRwProperty(1234)"
 
     // Extension methods:
     // method signatures with erased types SHOULD NOT clash
 
-    val test4 = with(c) { C.Inner().extMethodWithGenericParam(strs) }
+    konst test4 = with(c) { C.Inner().extMethodWithGenericParam(strs) }
     if (test4 != "extMethodWithGenericParamStr") return "Fail: with(c) { C.Inner().extMethodWithGenericParam(strs) }==$test4"
 
-    val test5 = with(c) { C.Inner().extMethodWithGenericParam(ints) }
+    konst test5 = with(c) { C.Inner().extMethodWithGenericParam(ints) }
     if (test5 != "extMethodWithGenericParamInt") return "Fail: with(c) { C.Inner().extMethodWithGenericParam(ints) }==$test5"
 
-    val test6 = with(c) { strs.extMethodWithGenericReceiver() }
+    konst test6 = with(c) { strs.extMethodWithGenericReceiver() }
     if (test6 != "extMethodWithGenericReceiverStr") return "Fail: with(c) { strs.extMethodWithGenericReceiver() }==$test6"
 
-    val test7 = with(c) { ints.extMethodWithGenericReceiver() }
+    konst test7 = with(c) { ints.extMethodWithGenericReceiver() }
     if (test7 != "extMethodWithGenericReceiverInt") return "Fail: with(c) { ints.extMethodWithGenericReceiver() }==$test7"
 
     // Extension method SHOULD NOT clash with instance method with the same Java signature.
 
-    val str = "abc"
+    konst str = "abc"
 
-    val test8 = with(c) { ambigMethod(str) }
+    konst test8 = with(c) { ambigMethod(str) }
     if (test8 != "ambigMethod1") return "Fail: with(c) { ambigMethod(str) }==$test8"
 
-    val test9 = with(c) { str.ambigMethod() }
+    konst test9 = with(c) { str.ambigMethod() }
     if (test9 != "ambigMethod2") return "Fail: with(c) { str.ambigMethod() }==$test9"
 
     // Everything is fine.

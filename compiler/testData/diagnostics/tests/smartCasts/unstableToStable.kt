@@ -2,7 +2,7 @@
 class Foo(var x: Int?) {
     init {
         if (x != null) {
-            val y = x
+            konst y = x
             // Error: x is not stable, Type(y) = Int?
             <!SMARTCAST_IMPOSSIBLE!>x<!>.hashCode()
             y<!UNSAFE_CALL!>.<!>hashCode()

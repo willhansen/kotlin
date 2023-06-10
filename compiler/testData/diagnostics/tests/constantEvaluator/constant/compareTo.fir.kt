@@ -1,20 +1,20 @@
 // !LANGUAGE: -ProhibitSimplificationOfNonTrivialConstBooleanExpressions
 package test
 
-// val prop1: false
-val prop1 = 1 > 2
+// konst prop1: false
+konst prop1 = 1 > 2
 
-// val prop2: true
-val prop2 = 1 < 2
+// konst prop2: true
+konst prop2 = 1 < 2
 
-// val prop3: true
-val prop3 = 1 <= 2
+// konst prop3: true
+konst prop3 = 1 <= 2
 
-// val prop4: false
-val prop4 = 1 >= 2
+// konst prop4: false
+konst prop4 = 1 >= 2
 
-// val prop5: -1
-val prop5 = 1.compareTo(2)
+// konst prop5: -1
+konst prop5 = 1.compareTo(2)
 
-// val prop6: false
-val prop6 = 1.compareTo(2) > 0
+// konst prop6: false
+konst prop6 = 1.compareTo(2) > 0

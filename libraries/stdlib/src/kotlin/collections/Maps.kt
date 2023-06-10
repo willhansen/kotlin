@@ -12,21 +12,21 @@ package kotlin.collections
 import kotlin.contracts.*
 
 private object EmptyMap : Map<Any?, Nothing>, Serializable {
-    private const val serialVersionUID: Long = 8246714829545688274
+    private const konst serialVersionUID: Long = 8246714829545688274
 
     override fun equals(other: Any?): Boolean = other is Map<*, *> && other.isEmpty()
     override fun hashCode(): Int = 0
     override fun toString(): String = "{}"
 
-    override val size: Int get() = 0
+    override konst size: Int get() = 0
     override fun isEmpty(): Boolean = true
 
     override fun containsKey(key: Any?): Boolean = false
-    override fun containsValue(value: Nothing): Boolean = false
+    override fun containsValue(konstue: Nothing): Boolean = false
     override fun get(key: Any?): Nothing? = null
-    override val entries: Set<Map.Entry<Any?, Nothing>> get() = EmptySet
-    override val keys: Set<Any?> get() = EmptySet
-    override val values: Collection<Nothing> get() = EmptyList
+    override konst entries: Set<Map.Entry<Any?, Nothing>> get() = EmptySet
+    override konst keys: Set<Any?> get() = EmptySet
+    override konst konstues: Collection<Nothing> get() = EmptyList
 
     private fun readResolve(): Any = EmptyMap
 }
@@ -41,9 +41,9 @@ public fun <K, V> emptyMap(): Map<K, V> = @Suppress("UNCHECKED_CAST") (EmptyMap 
 
 /**
  * Returns a new read-only map with the specified contents, given as a list of pairs
- * where the first value is the key and the second is the value.
+ * where the first konstue is the key and the second is the konstue.
  *
- * If multiple pairs have the same key, the resulting map will contain the value from the last of those pairs.
+ * If multiple pairs have the same key, the resulting map will contain the konstue from the last of those pairs.
  *
  * Entries of the map are iterated in the order they were specified.
  *
@@ -56,7 +56,7 @@ public fun <K, V> mapOf(vararg pairs: Pair<K, V>): Map<K, V> =
 
 /**
  * Returns a new read-only map, mapping only the specified key to the
- * specified value.
+ * specified konstue.
  *
  * The returned map is serializable (JVM).
  *
@@ -86,9 +86,9 @@ public inline fun <K, V> mutableMapOf(): MutableMap<K, V> = LinkedHashMap()
 
 /**
  * Returns a new [MutableMap] with the specified contents, given as a list of pairs
- * where the first component is the key and the second is the value.
+ * where the first component is the key and the second is the konstue.
  *
- * If multiple pairs have the same key, the resulting map will contain the value from the last of those pairs.
+ * If multiple pairs have the same key, the resulting map will contain the konstue from the last of those pairs.
  *
  * Entries of the map are iterated in the order they were specified.
  *
@@ -109,7 +109,7 @@ public inline fun <K, V> hashMapOf(): HashMap<K, V> = HashMap<K, V>()
 
 /**
  * Returns a new [HashMap] with the specified contents, given as a list of pairs
- * where the first component is the key and the second is the value.
+ * where the first component is the key and the second is the konstue.
  *
  * @sample samples.collections.Maps.Instantiation.hashMapFromPairs
  */
@@ -124,9 +124,9 @@ public inline fun <K, V> linkedMapOf(): LinkedHashMap<K, V> = LinkedHashMap<K, V
 
 /**
  * Returns a new [LinkedHashMap] with the specified contents, given as a list of pairs
- * where the first component is the key and the second is the value.
+ * where the first component is the key and the second is the konstue.
  *
- * If multiple pairs have the same key, the resulting map will contain the value from the last of those pairs.
+ * If multiple pairs have the same key, the resulting map will contain the konstue from the last of those pairs.
  *
  * Entries of the map are iterated in the order they were specified.
  *
@@ -136,9 +136,9 @@ public fun <K, V> linkedMapOf(vararg pairs: Pair<K, V>): LinkedHashMap<K, V> = p
 
 /**
  * Builds a new read-only [Map] by populating a [MutableMap] using the given [builderAction]
- * and returning a read-only map with the same key-value pairs.
+ * and returning a read-only map with the same key-konstue pairs.
  *
- * The map passed as a receiver to the [builderAction] is valid only inside that function.
+ * The map passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * Entries of the map are iterated in the order they were added by the [builderAction].
@@ -163,9 +163,9 @@ internal expect inline fun <K, V> buildMapInternal(builderAction: MutableMap<K, 
 
 /**
  * Builds a new read-only [Map] by populating a [MutableMap] using the given [builderAction]
- * and returning a read-only map with the same key-value pairs.
+ * and returning a read-only map with the same key-konstue pairs.
  *
- * The map passed as a receiver to the [builderAction] is valid only inside that function.
+ * The map passed as a receiver to the [builderAction] is konstid only inside that function.
  * Using it outside of the function produces an unspecified behavior.
  *
  * [capacity] is used to hint the expected number of pairs added in the [builderAction].
@@ -249,18 +249,18 @@ public inline fun <M, R> M.ifEmpty(defaultValue: () -> R): R where M : Map<*, *>
 public inline operator fun <@kotlin.internal.OnlyInputTypes K, V> Map<out K, V>.contains(key: K): Boolean = containsKey(key)
 
 /**
- * Returns the value corresponding to the given [key], or `null` if such a key is not present in the map.
+ * Returns the konstue corresponding to the given [key], or `null` if such a key is not present in the map.
  */
 @kotlin.internal.InlineOnly
 public inline operator fun <@kotlin.internal.OnlyInputTypes K, V> Map<out K, V>.get(key: K): V? =
     @Suppress("UNCHECKED_CAST") (this as Map<K, V>).get(key)
 
 /**
- * Allows to use the index operator for storing values in a mutable map.
+ * Allows to use the index operator for storing konstues in a mutable map.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun <K, V> MutableMap<K, V>.set(key: K, value: V): Unit {
-    put(key, value)
+public inline operator fun <K, V> MutableMap<K, V>.set(key: K, konstue: V): Unit {
+    put(key, konstue)
 }
 
 /**
@@ -273,21 +273,21 @@ public inline fun <@kotlin.internal.OnlyInputTypes K> Map<out K, *>.containsKey(
     @Suppress("UNCHECKED_CAST") (this as Map<K, *>).containsKey(key)
 
 /**
- * Returns `true` if the map maps one or more keys to the specified [value].
+ * Returns `true` if the map maps one or more keys to the specified [konstue].
  *
- * Allows to overcome type-safety restriction of `containsValue` that requires to pass a value of type `V`.
+ * Allows to overcome type-safety restriction of `containsValue` that requires to pass a konstue of type `V`.
  *
  * @sample samples.collections.Maps.Usage.containsValue
  */
 @Suppress("EXTENSION_SHADOWED_BY_MEMBER") // false warning, extension takes precedence in some cases
 @kotlin.internal.InlineOnly
-public inline fun <K, @kotlin.internal.OnlyInputTypes V> Map<K, V>.containsValue(value: V): Boolean = this.containsValue(value)
+public inline fun <K, @kotlin.internal.OnlyInputTypes V> Map<K, V>.containsValue(konstue: V): Boolean = this.containsValue(konstue)
 
 
 /**
- * Removes the specified key and its corresponding value from this map.
+ * Removes the specified key and its corresponding konstue from this map.
  *
- * @return the previous value associated with the key, or `null` if the key was not present in the map.
+ * @return the previous konstue associated with the key, or `null` if the key was not present in the map.
 
  * Allows to overcome type-safety restriction of `remove` that requires to pass a key of type `K`.
  */
@@ -300,8 +300,8 @@ public inline fun <@kotlin.internal.OnlyInputTypes K, V> MutableMap<out K, V>.re
  *
  * This method allows to use destructuring declarations when working with maps, for example:
  * ```
- * for ((key, value) in map) {
- *     // do something with the key and the value
+ * for ((key, konstue) in map) {
+ *     // do something with the key and the konstue
  * }
  * ```
  */
@@ -309,26 +309,26 @@ public inline fun <@kotlin.internal.OnlyInputTypes K, V> MutableMap<out K, V>.re
 public inline operator fun <K, V> Map.Entry<K, V>.component1(): K = key
 
 /**
- * Returns the value component of the map entry.
+ * Returns the konstue component of the map entry.
  *
  * This method allows to use destructuring declarations when working with maps, for example:
  * ```
- * for ((key, value) in map) {
- *     // do something with the key and the value
+ * for ((key, konstue) in map) {
+ *     // do something with the key and the konstue
  * }
  * ```
  */
 @kotlin.internal.InlineOnly
-public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = value
+public inline operator fun <K, V> Map.Entry<K, V>.component2(): V = konstue
 
 /**
- * Converts entry to [Pair] with key being first component and value being second.
+ * Converts entry to [Pair] with key being first component and konstue being second.
  */
 @kotlin.internal.InlineOnly
-public inline fun <K, V> Map.Entry<K, V>.toPair(): Pair<K, V> = Pair(key, value)
+public inline fun <K, V> Map.Entry<K, V>.toPair(): Pair<K, V> = Pair(key, konstue)
 
 /**
- * Returns the value for the given [key] if the value is present and not `null`.
+ * Returns the konstue for the given [key] if the konstue is present and not `null`.
  * Otherwise, returns the result of the [defaultValue] function.
  *
  * @sample samples.collections.Maps.Usage.getOrElse
@@ -338,29 +338,29 @@ public inline fun <K, V> Map<K, V>.getOrElse(key: K, defaultValue: () -> V): V =
 
 
 internal inline fun <K, V> Map<K, V>.getOrElseNullable(key: K, defaultValue: () -> V): V {
-    val value = get(key)
-    if (value == null && !containsKey(key)) {
+    konst konstue = get(key)
+    if (konstue == null && !containsKey(key)) {
         return defaultValue()
     } else {
         @Suppress("UNCHECKED_CAST")
-        return value as V
+        return konstue as V
     }
 }
 
 /**
- * Returns the value for the given [key] or throws an exception if there is no such key in the map.
+ * Returns the konstue for the given [key] or throws an exception if there is no such key in the map.
  *
  * If the map was created by [withDefault], resorts to its `defaultValue` provider function
  * instead of throwing an exception.
  *
- * @throws NoSuchElementException when the map doesn't contain a value for the specified key and
- * no implicit default value was provided for that map.
+ * @throws NoSuchElementException when the map doesn't contain a konstue for the specified key and
+ * no implicit default konstue was provided for that map.
  */
 @SinceKotlin("1.1")
 public fun <K, V> Map<K, V>.getValue(key: K): V = getOrImplicitDefault(key)
 
 /**
- * Returns the value for the given [key] if the value is present and not `null`.
+ * Returns the konstue for the given [key] if the konstue is present and not `null`.
  * Otherwise, calls the [defaultValue] function,
  * puts its result into the map under the given key and returns the call result.
  *
@@ -369,13 +369,13 @@ public fun <K, V> Map<K, V>.getValue(key: K): V = getOrImplicitDefault(key)
  * @sample samples.collections.Maps.Usage.getOrPut
  */
 public inline fun <K, V> MutableMap<K, V>.getOrPut(key: K, defaultValue: () -> V): V {
-    val value = get(key)
-    return if (value == null) {
-        val answer = defaultValue()
+    konst konstue = get(key)
+    return if (konstue == null) {
+        konst answer = defaultValue()
         put(key, answer)
         answer
     } else {
-        value
+        konstue
     }
 }
 
@@ -396,7 +396,7 @@ public inline operator fun <K, V> Map<out K, V>.iterator(): Iterator<Map.Entry<K
 public inline operator fun <K, V> MutableMap<K, V>.iterator(): MutableIterator<MutableMap.MutableEntry<K, V>> = entries.iterator()
 
 /**
- * Populates the given [destination] map with entries having the keys of this map and the values obtained
+ * Populates the given [destination] map with entries having the keys of this map and the konstues obtained
  * by applying the [transform] function to each entry in this [Map].
  */
 public inline fun <K, V, R, M : MutableMap<in K, in R>> Map<out K, V>.mapValuesTo(destination: M, transform: (Map.Entry<K, V>) -> R): M {
@@ -405,44 +405,44 @@ public inline fun <K, V, R, M : MutableMap<in K, in R>> Map<out K, V>.mapValuesT
 
 /**
  * Populates the given [destination] map with entries having the keys obtained
- * by applying the [transform] function to each entry in this [Map] and the values of this map.
+ * by applying the [transform] function to each entry in this [Map] and the konstues of this map.
  *
- * In case if any two entries are mapped to the equal keys, the value of the latter one will overwrite
- * the value associated with the former one.
+ * In case if any two entries are mapped to the equal keys, the konstue of the latter one will overwrite
+ * the konstue associated with the former one.
  */
 public inline fun <K, V, R, M : MutableMap<in R, in V>> Map<out K, V>.mapKeysTo(destination: M, transform: (Map.Entry<K, V>) -> R): M {
-    return entries.associateByTo(destination, transform, { it.value })
+    return entries.associateByTo(destination, transform, { it.konstue })
 }
 
 /**
- * Puts all the given [pairs] into this [MutableMap] with the first component in the pair being the key and the second the value.
+ * Puts all the given [pairs] into this [MutableMap] with the first component in the pair being the key and the second the konstue.
  */
 public fun <K, V> MutableMap<in K, in V>.putAll(pairs: Array<out Pair<K, V>>): Unit {
-    for ((key, value) in pairs) {
-        put(key, value)
+    for ((key, konstue) in pairs) {
+        put(key, konstue)
     }
 }
 
 /**
- * Puts all the elements of the given collection into this [MutableMap] with the first component in the pair being the key and the second the value.
+ * Puts all the elements of the given collection into this [MutableMap] with the first component in the pair being the key and the second the konstue.
  */
 public fun <K, V> MutableMap<in K, in V>.putAll(pairs: Iterable<Pair<K, V>>): Unit {
-    for ((key, value) in pairs) {
-        put(key, value)
+    for ((key, konstue) in pairs) {
+        put(key, konstue)
     }
 }
 
 /**
- * Puts all the elements of the given sequence into this [MutableMap] with the first component in the pair being the key and the second the value.
+ * Puts all the elements of the given sequence into this [MutableMap] with the first component in the pair being the key and the second the konstue.
  */
 public fun <K, V> MutableMap<in K, in V>.putAll(pairs: Sequence<Pair<K, V>>): Unit {
-    for ((key, value) in pairs) {
-        put(key, value)
+    for ((key, konstue) in pairs) {
+        put(key, konstue)
     }
 }
 
 /**
- * Returns a new map with entries having the keys of this map and the values obtained by applying the [transform]
+ * Returns a new map with entries having the keys of this map and the konstues obtained by applying the [transform]
  * function to each entry in this [Map].
  *
  * The returned map preserves the entry iteration order of the original map.
@@ -455,10 +455,10 @@ public inline fun <K, V, R> Map<out K, V>.mapValues(transform: (Map.Entry<K, V>)
 
 /**
  * Returns a new Map with entries having the keys obtained by applying the [transform] function to each entry in this
- * [Map] and the values of this map.
+ * [Map] and the konstues of this map.
  *
- * In case if any two entries are mapped to the equal keys, the value of the latter one will overwrite
- * the value associated with the former one.
+ * In case if any two entries are mapped to the equal keys, the konstue of the latter one will overwrite
+ * the konstue associated with the former one.
  *
  * The returned map preserves the entry iteration order of the original map.
  *
@@ -469,32 +469,32 @@ public inline fun <K, V, R> Map<out K, V>.mapKeys(transform: (Map.Entry<K, V>) -
 }
 
 /**
- * Returns a map containing all key-value pairs with keys matching the given [predicate].
+ * Returns a map containing all key-konstue pairs with keys matching the given [predicate].
  *
  * The returned map preserves the entry iteration order of the original map.
  * @sample samples.collections.Maps.Filtering.filterKeys
  */
 public inline fun <K, V> Map<out K, V>.filterKeys(predicate: (K) -> Boolean): Map<K, V> {
-    val result = LinkedHashMap<K, V>()
+    konst result = LinkedHashMap<K, V>()
     for (entry in this) {
         if (predicate(entry.key)) {
-            result.put(entry.key, entry.value)
+            result.put(entry.key, entry.konstue)
         }
     }
     return result
 }
 
 /**
- * Returns a map containing all key-value pairs with values matching the given [predicate].
+ * Returns a map containing all key-konstue pairs with konstues matching the given [predicate].
  *
  * The returned map preserves the entry iteration order of the original map.
  *  @sample samples.collections.Maps.Filtering.filterValues
  */
 public inline fun <K, V> Map<out K, V>.filterValues(predicate: (V) -> Boolean): Map<K, V> {
-    val result = LinkedHashMap<K, V>()
+    konst result = LinkedHashMap<K, V>()
     for (entry in this) {
-        if (predicate(entry.value)) {
-            result.put(entry.key, entry.value)
+        if (predicate(entry.konstue)) {
+            result.put(entry.key, entry.konstue)
         }
     }
     return result
@@ -510,14 +510,14 @@ public inline fun <K, V> Map<out K, V>.filterValues(predicate: (V) -> Boolean): 
 public inline fun <K, V, M : MutableMap<in K, in V>> Map<out K, V>.filterTo(destination: M, predicate: (Map.Entry<K, V>) -> Boolean): M {
     for (element in this) {
         if (predicate(element)) {
-            destination.put(element.key, element.value)
+            destination.put(element.key, element.konstue)
         }
     }
     return destination
 }
 
 /**
- * Returns a new map containing all key-value pairs matching the given [predicate].
+ * Returns a new map containing all key-konstue pairs matching the given [predicate].
  *
  * The returned map preserves the entry iteration order of the original map.
  * @sample samples.collections.Maps.Filtering.filter
@@ -535,14 +535,14 @@ public inline fun <K, V> Map<out K, V>.filter(predicate: (Map.Entry<K, V>) -> Bo
 public inline fun <K, V, M : MutableMap<in K, in V>> Map<out K, V>.filterNotTo(destination: M, predicate: (Map.Entry<K, V>) -> Boolean): M {
     for (element in this) {
         if (!predicate(element)) {
-            destination.put(element.key, element.value)
+            destination.put(element.key, element.konstue)
         }
     }
     return destination
 }
 
 /**
- * Returns a new map containing all key-value pairs not matching the given [predicate].
+ * Returns a new map containing all key-konstue pairs not matching the given [predicate].
  *
  * The returned map preserves the entry iteration order of the original map.
  * @sample samples.collections.Maps.Filtering.filterNot
@@ -552,7 +552,7 @@ public inline fun <K, V> Map<out K, V>.filterNot(predicate: (Map.Entry<K, V>) ->
 }
 
 /**
- * Returns a new map containing all key-value pairs from the given collection of pairs.
+ * Returns a new map containing all key-konstue pairs from the given collection of pairs.
  *
  * The returned map preserves the entry iteration order of the original collection.
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -569,13 +569,13 @@ public fun <K, V> Iterable<Pair<K, V>>.toMap(): Map<K, V> {
 }
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs from the given collection of pairs.
+ * Populates and returns the [destination] mutable map with key-konstue pairs from the given collection of pairs.
  */
 public fun <K, V, M : MutableMap<in K, in V>> Iterable<Pair<K, V>>.toMap(destination: M): M =
     destination.apply { putAll(this@toMap) }
 
 /**
- * Returns a new map containing all key-value pairs from the given array of pairs.
+ * Returns a new map containing all key-konstue pairs from the given array of pairs.
  *
  * The returned map preserves the entry iteration order of the original array.
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -587,13 +587,13 @@ public fun <K, V> Array<out Pair<K, V>>.toMap(): Map<K, V> = when (size) {
 }
 
 /**
- *  Populates and returns the [destination] mutable map with key-value pairs from the given array of pairs.
+ *  Populates and returns the [destination] mutable map with key-konstue pairs from the given array of pairs.
  */
 public fun <K, V, M : MutableMap<in K, in V>> Array<out Pair<K, V>>.toMap(destination: M): M =
     destination.apply { putAll(this@toMap) }
 
 /**
- * Returns a new map containing all key-value pairs from the given sequence of pairs.
+ * Returns a new map containing all key-konstue pairs from the given sequence of pairs.
  *
  * The returned map preserves the entry iteration order of the original sequence.
  * If any of two pairs would have the same key the last one gets added to the map.
@@ -601,13 +601,13 @@ public fun <K, V, M : MutableMap<in K, in V>> Array<out Pair<K, V>>.toMap(destin
 public fun <K, V> Sequence<Pair<K, V>>.toMap(): Map<K, V> = toMap(LinkedHashMap<K, V>()).optimizeReadOnlyMap()
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs from the given sequence of pairs.
+ * Populates and returns the [destination] mutable map with key-konstue pairs from the given sequence of pairs.
  */
 public fun <K, V, M : MutableMap<in K, in V>> Sequence<Pair<K, V>>.toMap(destination: M): M =
     destination.apply { putAll(this@toMap) }
 
 /**
- * Returns a new read-only map containing all key-value pairs from the original map.
+ * Returns a new read-only map containing all key-konstue pairs from the original map.
  *
  * The returned map preserves the entry iteration order of the original map.
  */
@@ -619,7 +619,7 @@ public fun <K, V> Map<out K, V>.toMap(): Map<K, V> = when (size) {
 }
 
 /**
- * Returns a new mutable map containing all key-value pairs from the original map.
+ * Returns a new mutable map containing all key-konstue pairs from the original map.
  *
  * The returned map preserves the entry iteration order of the original map.
  */
@@ -627,14 +627,14 @@ public fun <K, V> Map<out K, V>.toMap(): Map<K, V> = when (size) {
 public fun <K, V> Map<out K, V>.toMutableMap(): MutableMap<K, V> = LinkedHashMap(this)
 
 /**
- * Populates and returns the [destination] mutable map with key-value pairs from the given map.
+ * Populates and returns the [destination] mutable map with key-konstue pairs from the given map.
  */
 @SinceKotlin("1.1")
 public fun <K, V, M : MutableMap<in K, in V>> Map<out K, V>.toMap(destination: M): M =
     destination.apply { putAll(this@toMap) }
 
 /**
- * Creates a new read-only map by replacing or adding an entry to this map from a given key-value [pair].
+ * Creates a new read-only map by replacing or adding an entry to this map from a given key-konstue [pair].
  *
  * The returned map preserves the entry iteration order of the original map.
  * The [pair] is iterated in the end if it has a unique key.
@@ -643,7 +643,7 @@ public operator fun <K, V> Map<out K, V>.plus(pair: Pair<K, V>): Map<K, V> =
     if (this.isEmpty()) mapOf(pair) else LinkedHashMap(this).apply { put(pair.first, pair.second) }
 
 /**
- * Creates a new read-only map by replacing or adding entries to this map from a given collection of key-value [pairs].
+ * Creates a new read-only map by replacing or adding entries to this map from a given collection of key-konstue [pairs].
  *
  * The returned map preserves the entry iteration order of the original map.
  * Those [pairs] with unique keys are iterated in the end in the order of [pairs] collection.
@@ -652,7 +652,7 @@ public operator fun <K, V> Map<out K, V>.plus(pairs: Iterable<Pair<K, V>>): Map<
     if (this.isEmpty()) pairs.toMap() else LinkedHashMap(this).apply { putAll(pairs) }
 
 /**
- * Creates a new read-only map by replacing or adding entries to this map from a given array of key-value [pairs].
+ * Creates a new read-only map by replacing or adding entries to this map from a given array of key-konstue [pairs].
  *
  * The returned map preserves the entry iteration order of the original map.
  * Those [pairs] with unique keys are iterated in the end in the order of [pairs] array.
@@ -661,7 +661,7 @@ public operator fun <K, V> Map<out K, V>.plus(pairs: Array<out Pair<K, V>>): Map
     if (this.isEmpty()) pairs.toMap() else LinkedHashMap(this).apply { putAll(pairs) }
 
 /**
- * Creates a new read-only map by replacing or adding entries to this map from a given sequence of key-value [pairs].
+ * Creates a new read-only map by replacing or adding entries to this map from a given sequence of key-konstue [pairs].
  *
  * The returned map preserves the entry iteration order of the original map.
  * Those [pairs] with unique keys are iterated in the end in the order of [pairs] sequence.

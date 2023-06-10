@@ -187,7 +187,7 @@ public class JsConfig {
 
             List<KotlinJavascriptMetadata> metadataList = KotlinJavascriptMetadataUtils.loadMetadata(path);
             if (metadataList.isEmpty()) {
-                report.warning("'" + path + "' is not a valid Kotlin Javascript library");
+                report.warning("'" + path + "' is not a konstid Kotlin Javascript library");
                 continue;
             }
 

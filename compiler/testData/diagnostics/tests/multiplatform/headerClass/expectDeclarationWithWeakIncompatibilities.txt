@@ -1,7 +1,7 @@
 // -- Module: <m1-common> --
 package
 
-public expect val s: kotlin.String
+public expect konst s: kotlin.String
 public expect fun foo2(): kotlin.Int
 
 public final expect class Foo1 {

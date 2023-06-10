@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.storage.LockBasedStorageManager
 
 class GeneratorContext private constructor(
-    val configuration: Psi2IrConfiguration,
-    val moduleDescriptor: ModuleDescriptor,
-    val bindingContext: BindingContext,
-    val languageVersionSettings: LanguageVersionSettings,
-    val symbolTable: SymbolTable,
-    val extensions: GeneratorExtensions,
-    val typeTranslator: TypeTranslator,
-    override val irBuiltIns: IrBuiltIns,
-    internal val callToSubstitutedDescriptorMap: MutableMap<IrDeclarationReference, CallableDescriptor>,
+    konst configuration: Psi2IrConfiguration,
+    konst moduleDescriptor: ModuleDescriptor,
+    konst bindingContext: BindingContext,
+    konst languageVersionSettings: LanguageVersionSettings,
+    konst symbolTable: SymbolTable,
+    konst extensions: GeneratorExtensions,
+    konst typeTranslator: TypeTranslator,
+    override konst irBuiltIns: IrBuiltIns,
+    internal konst callToSubstitutedDescriptorMap: MutableMap<IrDeclarationReference, CallableDescriptor>,
     internal var fragmentContext: FragmentContext?,
 ) : IrGeneratorContext {
 
@@ -58,18 +58,18 @@ class GeneratorContext private constructor(
         fragmentContext,
     )
 
-    val constantValueGenerator = typeTranslator.constantValueGenerator
+    konst constantValueGenerator = typeTranslator.constantValueGenerator
 
     fun IrDeclarationReference.commitSubstituted(descriptor: CallableDescriptor) {
         callToSubstitutedDescriptorMap[this] = descriptor
     }
 
     // TODO: inject a correct StorageManager instance, or store NotFoundClasses inside ModuleDescriptor
-    val reflectionTypes = ReflectionTypes(moduleDescriptor, NotFoundClasses(LockBasedStorageManager.NO_LOCKS, moduleDescriptor))
+    konst reflectionTypes = ReflectionTypes(moduleDescriptor, NotFoundClasses(LockBasedStorageManager.NO_LOCKS, moduleDescriptor))
 
-    internal val additionalDescriptorStorage: DescriptorStorageForContextReceivers = DescriptorStorageForContextReceivers()
+    internal konst additionalDescriptorStorage: DescriptorStorageForContextReceivers = DescriptorStorageForContextReceivers()
 
-    val samTypeApproximator = SamTypeApproximator(moduleDescriptor.builtIns, languageVersionSettings)
+    konst samTypeApproximator = SamTypeApproximator(moduleDescriptor.builtIns, languageVersionSettings)
 
     fun createFileScopeContext(ktFile: KtFile): GeneratorContext {
         return GeneratorContext(

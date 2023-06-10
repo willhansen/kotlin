@@ -9,21 +9,21 @@ class Container {
     interface Delegate<R> {
         operator fun getValue(thisRef: Any?, property: KProperty<*>): R = null!!
 
-        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: R) {
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: R) {
         }
     }
 
     abstract class Base {
-        val a: String by delegate()
+        konst a: String by delegate()
         var mutable: String? by delegate()
-        open val b: String by delegate()
-        open val c: String = ""
-        abstract val d: String
+        open konst b: String by delegate()
+        open konst c: String = ""
+        abstract konst d: String
     }
 
     class Derived : Base() {
-        override val b: String by delegate()
-        override val c: String by delegate()
-        override val d: String by delegate()
+        override konst b: String by delegate()
+        override konst c: String by delegate()
+        override konst d: String by delegate()
     }
 }

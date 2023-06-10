@@ -19,7 +19,7 @@ public interface KtRendererModalityModifierProvider {
     public fun onlyIf(
         condition: context(KtAnalysisSession) (symbol: KtSymbolWithModality) -> Boolean
     ): KtRendererModalityModifierProvider {
-        val self = this
+        konst self = this
         return object : KtRendererModalityModifierProvider {
             context(KtAnalysisSession)
             override fun getModalityModifier(symbol: KtSymbolWithModality): KtModifierKeywordToken? =

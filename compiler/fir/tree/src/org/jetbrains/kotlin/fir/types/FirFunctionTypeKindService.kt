@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 
 abstract class FirFunctionTypeKindService : FirSessionComponent {
-    protected abstract val extractor: FunctionTypeKindExtractor
+    protected abstract konst extractor: FunctionTypeKindExtractor
 
     fun getKindByClassNamePrefix(packageFqName: FqName, className: String): FunctionTypeKind? {
         return extractor.getFunctionalClassKindWithArity(packageFqName, className)?.kind
@@ -41,4 +41,4 @@ abstract class FirFunctionTypeKindService : FirSessionComponent {
     abstract fun extractSingleExtensionKindForDeserializedConeType(classId: ClassId, annotations: List<FirAnnotation>): FunctionTypeKind?
 }
 
-val FirSession.functionTypeService: FirFunctionTypeKindService by FirSession.sessionComponentAccessor()
+konst FirSession.functionTypeService: FirFunctionTypeKindService by FirSession.sessionComponentAccessor()

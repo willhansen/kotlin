@@ -11,7 +11,7 @@ package pod1 {
 }
 
 package pod1 {
-    const val __GNUC_VA_LIST: Int = 1
+    const konst __GNUC_VA_LIST: Int = 1
     typealias __builtin_va_list = __va_list
     typealias __gnuc_va_list = __builtin_va_list
     typealias va_list = __builtin_va_list

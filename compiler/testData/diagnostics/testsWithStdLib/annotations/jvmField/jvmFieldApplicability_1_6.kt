@@ -3,7 +3,7 @@
 
 <!WRONG_ANNOTATION_TARGET!>@kotlin.jvm.JvmField<!>
 fun foo() {
-    <!WRONG_ANNOTATION_TARGET!>@kotlin.jvm.JvmField<!> val x = "A"
+    <!WRONG_ANNOTATION_TARGET!>@kotlin.jvm.JvmField<!> konst x = "A"
 }
 
 annotation class DemoAnnotation
@@ -17,18 +17,18 @@ abstract class C : I{
     <!WRONG_ANNOTATION_TARGET!>@kotlin.jvm.JvmField<!> private fun foo(s: String = "OK") {
     }
 
-    <!INAPPLICABLE_JVM_FIELD, WRONG_ANNOTATION_TARGET!>@JvmField<!> val a: String by lazy { "A" }
+    <!INAPPLICABLE_JVM_FIELD, WRONG_ANNOTATION_TARGET!>@JvmField<!> konst a: String by lazy { "A" }
 
-    <!INAPPLICABLE_JVM_FIELD!>@JvmField<!> open val b: Int = 3
+    <!INAPPLICABLE_JVM_FIELD!>@JvmField<!> open konst b: Int = 3
 
-    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> abstract val c: Int
+    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> abstract konst c: Int
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    val customGetter: String = ""
+    konst customGetter: String = ""
         get() = field
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    val explicitDefaultGetter: String = ""
+    konst explicitDefaultGetter: String = ""
         get
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
@@ -36,7 +36,7 @@ abstract class C : I{
         set
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    val explicitDefaultAnnotatedGetter: String = ""
+    konst explicitDefaultAnnotatedGetter: String = ""
         <!ANNOTATION_TARGETS_NON_EXISTENT_ACCESSOR!>@DemoAnnotation<!> get
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
@@ -50,19 +50,19 @@ abstract class C : I{
         }
 
     <!WRONG_ANNOTATION_TARGET!>@JvmField<!>
-    val noBackingField: String
+    konst noBackingField: String
         get() = "a"
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    final override val ai = 3
+    final override konst ai = 3
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    private val private = 3
+    private konst private = 3
 }
 
 interface I {
-    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> val ai: Int
-    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> val bi: Int
+    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> konst ai: Int
+    <!WRONG_ANNOTATION_TARGET!>@JvmField<!> konst bi: Int
         get() = 5
 }
 
@@ -71,11 +71,11 @@ class G {
     lateinit var lateInit: String
 
     <!INAPPLICABLE_JVM_FIELD!>@delegate:JvmField<!>
-    val s: String by lazy { "s" }
+    konst s: String by lazy { "s" }
 }
 
 <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-const val Const = 4
+const konst Const = 4
 
 @JvmField
 var i = 5
@@ -89,8 +89,8 @@ class H {
 
 interface K {
 
-    val i: Int
-    val j: Int
+    konst i: Int
+    konst j: Int
 
     companion object {
         <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
@@ -102,21 +102,21 @@ interface K {
 
 class KK : K {
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    override val i: Int = 0
+    override konst i: Int = 0
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    override final val j: Int = 0
+    override final konst j: Int = 0
 }
 
 open class KKK : K {
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    override val i: Int = 0
+    override konst i: Int = 0
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    override final val j: Int = 0
+    override final konst j: Int = 0
 }
 
 class JK(
-    override val i: Int,
-    <!INAPPLICABLE_JVM_FIELD!>@JvmField<!> override val j: Int,
+    override konst i: Int,
+    <!INAPPLICABLE_JVM_FIELD!>@JvmField<!> override konst j: Int,
 ) : K
 
 annotation class L {
@@ -128,21 +128,21 @@ annotation class L {
 
 object O {
     @JvmField
-    val c = 3
+    konst c = 3
 }
 
 <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-private val private = 3
+private konst private = 3
 
-inline class Foo(val x: Int)
+inline class Foo(konst x: Int)
 
 object IObject {
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    val c: Foo = Foo(42)
+    konst c: Foo = Foo(42)
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    val u = 42u
+    konst u = 42u
 
     <!INAPPLICABLE_JVM_FIELD!>@JvmField<!>
-    private val r: Result<Int> = TODO()
+    private konst r: Result<Int> = TODO()
 }

@@ -19,14 +19,14 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.NpmProject
 import java.io.File
 
 internal data class KotlinWebpackRunner(
-    val npmProject: NpmProject,
-    val logger: Logger,
-    val configFile: File,
-    val execHandleFactory: ExecHandleFactory,
-    val tool: String,
-    val args: List<String>,
-    val nodeArgs: List<String>,
-    val config: KotlinWebpackConfig
+    konst npmProject: NpmProject,
+    konst logger: Logger,
+    konst configFile: File,
+    konst execHandleFactory: ExecHandleFactory,
+    konst tool: String,
+    konst args: List<String>,
+    konst nodeArgs: List<String>,
+    konst config: KotlinWebpackConfig
 ) {
     fun execute(services: ServiceRegistry) = services.execWithErrorLogger("webpack") { execAction, progressLogger ->
         configureExec(
@@ -36,12 +36,12 @@ internal data class KotlinWebpackRunner(
     }
 
     fun start(): ExecHandle {
-        val execFactory = execHandleFactory.newExec()
+        konst execFactory = execHandleFactory.newExec()
         configureExec(
             execFactory,
             null
         )
-        val exec = execFactory.build()
+        konst exec = execFactory.build()
         exec.start()
         return exec
     }
@@ -66,14 +66,14 @@ internal data class KotlinWebpackRunner(
             "${this}: Entry file not existed \"${config.entry}\""
         }
 
-        val standardClient = configureClient(LogType.LOG, progressLogger)
+        konst standardClient = configureClient(LogType.LOG, progressLogger)
         execFactory.standardOutput = TCServiceMessageOutputStreamHandler(
             client = standardClient,
             onException = { },
             logger = standardClient.log
         )
 
-        val errorClient = configureClient(LogType.ERROR, progressLogger)
+        konst errorClient = configureClient(LogType.ERROR, progressLogger)
         execFactory.errorOutput = TCServiceMessageOutputStreamHandler(
             client = errorClient,
             onException = { },
@@ -82,7 +82,7 @@ internal data class KotlinWebpackRunner(
 
         config.save(configFile)
 
-        val args = mutableListOf<String>().also {
+        konst args = mutableListOf<String>().also {
             it.addAll(this.args)
         }
 

@@ -22,13 +22,13 @@ import kotlin.reflect.KClass
 import kotlin.script.dependencies.ScriptDependenciesResolver
 import kotlin.script.experimental.dependencies.DependenciesResolver.NoDependencies
 
-const val DEFAULT_SCRIPT_FILE_PATTERN = ".*\\.kts"
+const konst DEFAULT_SCRIPT_FILE_PATTERN = ".*\\.kts"
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ScriptTemplateDefinition(val resolver: KClass<out ScriptDependenciesResolver> = NoDependencies::class,
-                                          val scriptFilePattern: String = DEFAULT_SCRIPT_FILE_PATTERN)
+annotation class ScriptTemplateDefinition(konst resolver: KClass<out ScriptDependenciesResolver> = NoDependencies::class,
+                                          konst scriptFilePattern: String = DEFAULT_SCRIPT_FILE_PATTERN)
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AcceptedAnnotations(vararg val supportedAnnotationClasses: KClass<out Annotation>)
+annotation class AcceptedAnnotations(vararg konst supportedAnnotationClasses: KClass<out Annotation>)

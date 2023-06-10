@@ -6,7 +6,7 @@ interface EntityBase<out ID> {
     suspend fun id(): ID
 }
 
-inline class EntityId(val value: String)
+inline class EntityId(konst konstue: String)
 
 interface Entity : EntityBase<EntityId>
 
@@ -17,7 +17,7 @@ class EntityStub : Entity {
 }
 
 suspend fun test(): EntityId {
-    val entity: Entity = EntityStub()
+    konst entity: Entity = EntityStub()
     return entity.id()
 }
 
@@ -29,7 +29,7 @@ fun builder(c: suspend () -> Unit) {
 
 fun box(): String {
     builder {
-        test().value
+        test().konstue
     }
     return res
 }

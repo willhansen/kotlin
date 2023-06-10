@@ -1,7 +1,7 @@
 FILE: main.kt
     public abstract interface A : R|kotlin/Any| {
     }
-    public final val R|A|.foo: R|kotlin/Int|
+    public final konst R|A|.foo: R|kotlin/Int|
         public get(): R|kotlin/Int| {
             ^ Int(1)
         }

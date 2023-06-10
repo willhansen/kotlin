@@ -10,7 +10,7 @@ package a {
 
     public final class Y</*0*/ TItem> {
         public constructor Y</*0*/ TItem>(/*0*/ itemToString: (TItem) -> kotlin.String)
-        public final val itemToString: (TItem) -> kotlin.String
+        public final konst itemToString: (TItem) -> kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

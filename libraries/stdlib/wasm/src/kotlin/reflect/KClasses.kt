@@ -5,5 +5,5 @@
 
 package kotlin.reflect
 
-internal actual val KClass<*>.qualifiedOrSimpleName: String?
+internal actual konst KClass<*>.qualifiedOrSimpleName: String?
     get() = simpleName

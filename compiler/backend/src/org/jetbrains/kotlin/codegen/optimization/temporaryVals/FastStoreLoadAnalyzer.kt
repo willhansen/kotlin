@@ -46,17 +46,17 @@ interface StoreLoadValue
 
 interface StoreLoadInterpreter<V : StoreLoadValue> {
     fun uninitialized(): V
-    fun valueParameter(type: Type): V
+    fun konstueParameter(type: Type): V
     fun store(insn: VarInsnNode): V
-    fun load(insn: VarInsnNode, value: V)
-    fun iinc(insn: IincInsnNode, value: V): V
+    fun load(insn: VarInsnNode, konstue: V)
+    fun iinc(insn: IincInsnNode, konstue: V): V
     fun merge(a: V, b: V): V
 }
 
 
 @Suppress("UNCHECKED_CAST")
-class StoreLoadFrame<V : StoreLoadValue>(val maxLocals: Int) {
-    private val locals = arrayOfNulls<StoreLoadValue>(maxLocals)
+class StoreLoadFrame<V : StoreLoadValue>(konst maxLocals: Int) {
+    private konst locals = arrayOfNulls<StoreLoadValue>(maxLocals)
 
     operator fun get(index: Int): V =
         locals[index] as V
@@ -73,15 +73,15 @@ class StoreLoadFrame<V : StoreLoadValue>(val maxLocals: Int) {
     fun execute(insn: AbstractInsnNode, interpreter: StoreLoadInterpreter<V>) {
         when (insn.opcode) {
             in Opcodes.ISTORE..Opcodes.ASTORE -> {
-                val varInsn = insn as VarInsnNode
+                konst varInsn = insn as VarInsnNode
                 locals[varInsn.`var`] = interpreter.store(varInsn)
             }
             in Opcodes.ILOAD..Opcodes.ALOAD -> {
-                val varInsn = insn as VarInsnNode
+                konst varInsn = insn as VarInsnNode
                 interpreter.load(varInsn, this[varInsn.`var`])
             }
             Opcodes.IINC -> {
-                val iincInsn = insn as IincInsnNode
+                konst iincInsn = insn as IincInsnNode
                 interpreter.iinc(iincInsn, this[iincInsn.`var`])
             }
         }
@@ -90,8 +90,8 @@ class StoreLoadFrame<V : StoreLoadValue>(val maxLocals: Int) {
     fun merge(other: StoreLoadFrame<V>, interpreter: StoreLoadInterpreter<V>): Boolean {
         var changes = false
         for (i in locals.indices) {
-            val oldValue = this[i]
-            val newValue = interpreter.merge(oldValue, other[i])
+            konst oldValue = this[i]
+            konst newValue = interpreter.merge(oldValue, other[i])
             if (newValue != oldValue) {
                 changes = true
                 this[i] = newValue
@@ -103,20 +103,20 @@ class StoreLoadFrame<V : StoreLoadValue>(val maxLocals: Int) {
 
 @Suppress("DuplicatedCode")
 class FastStoreLoadAnalyzer<V : StoreLoadValue>(
-    private val owner: String,
-    private val method: MethodNode,
-    private val interpreter: StoreLoadInterpreter<V>
+    private konst owner: String,
+    private konst method: MethodNode,
+    private konst interpreter: StoreLoadInterpreter<V>
 ) {
-    private val insnsArray = method.instructions.toArray()
-    private val nInsns = method.instructions.size()
+    private konst insnsArray = method.instructions.toArray()
+    private konst nInsns = method.instructions.size()
 
-    private val isMergeNode = BooleanArray(nInsns)
+    private konst isMergeNode = BooleanArray(nInsns)
 
-    private val frames: Array<StoreLoadFrame<V>?> = arrayOfNulls(nInsns)
+    private konst frames: Array<StoreLoadFrame<V>?> = arrayOfNulls(nInsns)
 
-    private val handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
-    private val queued = BooleanArray(nInsns)
-    private val queue = IntArray(nInsns)
+    private konst handlers: Array<MutableList<TryCatchBlockNode>?> = arrayOfNulls(nInsns)
+    private konst queued = BooleanArray(nInsns)
+    private konst queue = IntArray(nInsns)
     private var top = 0
 
     fun analyze(): Array<StoreLoadFrame<V>?> {
@@ -126,20 +126,20 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
         computeExceptionHandlersForEachInsn(method)
         initMergeNodes()
 
-        val current = newFrame(method.maxLocals)
-        val handler = newFrame(method.maxLocals)
+        konst current = newFrame(method.maxLocals)
+        konst handler = newFrame(method.maxLocals)
         initLocals(current)
         mergeControlFlowEdge(0, current)
 
         while (top > 0) {
-            val insn = queue[--top]
-            val f = frames[insn]!!
+            konst insn = queue[--top]
+            konst f = frames[insn]!!
             queued[insn] = false
 
-            val insnNode = method.instructions[insn]
+            konst insnNode = method.instructions[insn]
             try {
-                val insnOpcode = insnNode.opcode
-                val insnType = insnNode.type
+                konst insnOpcode = insnNode.opcode
+                konst insnType = insnNode.type
 
                 if (insnType == AbstractInsnNode.LABEL || insnType == AbstractInsnNode.LINE || insnType == AbstractInsnNode.FRAME) {
                     mergeControlFlowEdge(insn + 1, f)
@@ -160,7 +160,7 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
                 }
 
                 handlers[insn]?.forEach { tcb ->
-                    val jump = tcb.handler.indexOf()
+                    konst jump = tcb.handler.indexOf()
                     handler.init(f)
                     mergeControlFlowEdge(jump, handler)
                 }
@@ -209,8 +209,8 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
 
     private fun computeExceptionHandlersForEachInsn(m: MethodNode) {
         for (tcb in m.tryCatchBlocks) {
-            val begin = tcb.start.indexOf()
-            val end = tcb.end.indexOf()
+            konst begin = tcb.start.indexOf()
+            konst end = tcb.end.indexOf()
             for (j in begin until end) {
                 if (!insnsArray[j].isMeaningful) continue
                 var insnHandlers: MutableList<TryCatchBlockNode>? = handlers[j]
@@ -227,18 +227,18 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
         for (insn in insnsArray) {
             when (insn.type) {
                 AbstractInsnNode.JUMP_INSN -> {
-                    val jumpInsn = insn as JumpInsnNode
+                    konst jumpInsn = insn as JumpInsnNode
                     isMergeNode[jumpInsn.label.indexOf()] = true
                 }
                 AbstractInsnNode.LOOKUPSWITCH_INSN -> {
-                    val switchInsn = insn as LookupSwitchInsnNode
+                    konst switchInsn = insn as LookupSwitchInsnNode
                     isMergeNode[switchInsn.dflt.indexOf()] = true
                     for (label in switchInsn.labels) {
                         isMergeNode[label.indexOf()] = true
                     }
                 }
                 AbstractInsnNode.TABLESWITCH_INSN -> {
-                    val switchInsn = insn as TableSwitchInsnNode
+                    konst switchInsn = insn as TableSwitchInsnNode
                     isMergeNode[switchInsn.dflt.indexOf()] = true
                     for (label in switchInsn.labels) {
                         isMergeNode[label.indexOf()] = true
@@ -252,14 +252,14 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
     }
 
     internal fun initLocals(current: StoreLoadFrame<V>) {
-        val args = Type.getArgumentTypes(method.desc)
+        konst args = Type.getArgumentTypes(method.desc)
         var local = 0
         if ((method.access and Opcodes.ACC_STATIC) == 0) {
-            val ctype = Type.getObjectType(owner)
-            current[local++] = interpreter.valueParameter(ctype)
+            konst ctype = Type.getObjectType(owner)
+            current[local++] = interpreter.konstueParameter(ctype)
         }
         for (arg in args) {
-            current[local++] = interpreter.valueParameter(arg)
+            current[local++] = interpreter.konstueParameter(arg)
             if (arg.size == 2) {
                 current[local++] = interpreter.uninitialized()
             }
@@ -270,8 +270,8 @@ class FastStoreLoadAnalyzer<V : StoreLoadValue>(
     }
 
     private fun mergeControlFlowEdge(dest: Int, frame: StoreLoadFrame<V>) {
-        val oldFrame = frames[dest]
-        val changes = when {
+        konst oldFrame = frames[dest]
+        konst changes = when {
             oldFrame == null -> {
                 frames[dest] = newFrame(frame.maxLocals).init(frame)
                 true

@@ -1,5 +1,5 @@
 FILE: arrayAccess.kt
-    public? final? val p: <implicit> = LAZY_EXPRESSION
+    public? final? konst p: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>
     public? final? fun foo(): <implicit> { LAZY_BLOCK }
     public? final? class Wrapper : R|kotlin/Any| {
@@ -7,7 +7,7 @@ FILE: arrayAccess.kt
             LAZY_super<R|kotlin/Any|>
         }
 
-        public? final? val v: IntArray = R|<local>/v|
+        public? final? konst v: IntArray = R|<local>/v|
             public? get(): IntArray
 
     }

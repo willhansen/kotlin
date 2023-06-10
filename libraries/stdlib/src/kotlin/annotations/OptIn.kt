@@ -53,7 +53,7 @@ import kotlin.reflect.KClass
  * and their respective call sites:
  * ```
  * fun outerFun() {
- *     val s = foo()
+ *     konst s = foo()
  *     bar()
  *     null.baz()
  * }
@@ -96,8 +96,8 @@ import kotlin.reflect.KClass
 @Retention(BINARY)
 @SinceKotlin("1.3")
 public annotation class RequiresOptIn(
-    val message: String = "",
-    val level: Level = Level.ERROR
+    konst message: String = "",
+    konst level: Level = Level.ERROR
 ) {
     /**
      * Severity of the diagnostic that should be reported on usages which did not explicitly opted into
@@ -131,7 +131,7 @@ public annotation class RequiresOptIn(
 @Retention(SOURCE)
 @SinceKotlin("1.3")
 public annotation class OptIn(
-    vararg val markerClass: KClass<out Annotation>
+    vararg konst markerClass: KClass<out Annotation>
 )
 
 /**
@@ -176,5 +176,5 @@ public annotation class ExperimentalSubclassOptIn
 @SinceKotlin("1.8")
 @ExperimentalSubclassOptIn
 public annotation class SubclassOptInRequired(
-    val markerClass: KClass<out Annotation>
+    konst markerClass: KClass<out Annotation>
 )

@@ -1,8 +1,8 @@
 
 // WITH_STDLIB
 fun box(): String {
-    val a = intArrayOf(1, 2)
-    val b = arrayOf("OK")
+    konst a = intArrayOf(1, 2)
+    konst b = arrayOf("OK")
     if ((a::component2).let { it() } != 2) {
         return "fail"
     }

@@ -8,7 +8,7 @@ class P {
 }
 
 fun box() : String {
-    val p = P()
+    konst p = P()
     p.foo()
     return if (p.x == 4) "OK" else "fail"
 }

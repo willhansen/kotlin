@@ -3,14 +3,14 @@
 package test
 
 inline fun test(s: () -> Unit) {
-    val z = 1;
+    konst z = 1;
     s()
-    val x = 1;
+    konst x = 1;
 }
 
 inline fun test2(s: () -> String): String {
-    val z = 1;
-    val res = s()
+    konst z = 1;
+    konst res = s()
     return res
 }
 
@@ -18,13 +18,13 @@ inline fun test2(s: () -> String): String {
 
 import test.*
 
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 fun box(): String {
     var result = "fail"
 
     test {
-        eval {
+        ekonst {
             result = test2 {
                 "OK"
             }

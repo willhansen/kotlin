@@ -52,7 +52,7 @@ private func testObjCNameObject() throws {
 }
 
 private func testObjCNameEnum() throws {
-    let enumValues = ObjCNameSwiftEnum.values()
+    let enumValues = ObjCNameSwiftEnum.konstues()
     try assertEquals(actual: enumValues.size, expected: 3)
     try assertSame(actual: enumValues.get(index: 0) as AnyObject, expected: ObjCNameSwiftEnum.swiftOne)
     try assertSame(actual: enumValues.get(index: 1) as AnyObject, expected: ObjCNameSwiftEnum.companion)

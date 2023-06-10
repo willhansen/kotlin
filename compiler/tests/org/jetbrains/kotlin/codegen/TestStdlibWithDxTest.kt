@@ -34,11 +34,11 @@ class TestStdlibWithDxTest {
     }
 
     private fun doTest(file: File) {
-        val files = mutableListOf<Pair<ByteArray, String>>();
+        konst files = mutableListOf<Pair<ByteArray, String>>();
         ZipInputStream(FileInputStream(file)).use { zip ->
             for (entry in generateSequence { zip.nextEntry }) {
                 if (entry.name.endsWith(".class") && !entry.name.startsWith("META-INF/")) {
-                    val bytes = zip.readBytes()
+                    konst bytes = zip.readBytes()
                     files.add(Pair(bytes, entry.name))
                 }
             }

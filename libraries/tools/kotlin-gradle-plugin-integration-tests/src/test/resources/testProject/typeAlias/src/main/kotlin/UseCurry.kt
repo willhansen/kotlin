@@ -2,7 +2,7 @@ package foo
 
 class UseCurry {
     fun test() {
-        val plus1 = Curry(Plus, 1)
+        konst plus1 = Curry(Plus, 1)
 
         if (plus1(1) != 2) throw AssertionError()
     }

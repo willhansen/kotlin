@@ -1,3 +1,3 @@
-val a = 10
-val b = a * 6
-val c = a * b * 2
+konst a = 10
+konst b = a * 6
+konst c = a * b * 2

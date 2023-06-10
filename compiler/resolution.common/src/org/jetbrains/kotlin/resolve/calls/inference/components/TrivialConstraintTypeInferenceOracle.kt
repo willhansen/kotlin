@@ -25,7 +25,7 @@ class TrivialConstraintTypeInferenceOracle private constructor(context: TypeSyst
     }
 
     // This function controls the choice between sub and super result type
-    // Even that Nothing(?) is the most specific type for subtype, it doesn't bring valuable information to the user,
+    // Even that Nothing(?) is the most specific type for subtype, it doesn't bring konstuable information to the user,
     // therefore it is discriminated in favor of supertype
     fun isSuitableResultedType(
         resultType: KotlinTypeMarker

@@ -3,7 +3,7 @@
 // FULL_JDK
 class MainClass {
     abstract class Base1() {
-        abstract val a: CharSequence
+        abstract konst a: CharSequence
         abstract var b: CharSequence
         abstract fun foo(): CharSequence
     }
@@ -12,7 +12,7 @@ class MainClass {
         abstract fun boo(x: Int = 10)
     }
 
-    abstract class Base3(override val a: CharSequence) : Base1() {}
+    abstract class Base3(override konst a: CharSequence) : Base1() {}
 }
 
 /*
@@ -23,7 +23,7 @@ class Case1 {
 
     abstract inner class ImplBase2() : MainClass.Base2() {
         override var b: CharSequence = ""
-        override val a: CharSequence = ""
+        override konst a: CharSequence = ""
         override fun boo(x: Int) {}
     }
 
@@ -40,10 +40,10 @@ class Case1 {
 * NOTE:absctract class member is not implemented in anonymos class
 */
 class Case2() {
-    abstract inner class Impl(override val a: CharSequence) : MainClass.Base3(a) {}
+    abstract inner class Impl(override konst a: CharSequence) : MainClass.Base3(a) {}
 
     fun boo() {
-        val impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Impl("a") {
+        konst impl = <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>object<!> : Impl("a") {
             override fun foo(): CharSequence = "foo"
         }
     }
@@ -53,25 +53,25 @@ class Case2() {
 * TESTCASE NUMBER: 3
 * NOTE: check abstract member cannot be accessed directly
 */
-class Case3(override val <!REDECLARATION!>boo<!>: String) : BaseCase3() {
-    override val zoo: String = super.<!ABSTRACT_SUPER_CALL!>foo<!>()
-    override val <!REDECLARATION!>boo<!>: String = super.<!ABSTRACT_SUPER_CALL!>boo<!>
-    override val value: String = super.<!ABSTRACT_SUPER_CALL!>zoo<!>
-    val hoo: String = super.<!ABSTRACT_SUPER_CALL!>zoo<!>
+class Case3(override konst <!REDECLARATION!>boo<!>: String) : BaseCase3() {
+    override konst zoo: String = super.<!ABSTRACT_SUPER_CALL!>foo<!>()
+    override konst <!REDECLARATION!>boo<!>: String = super.<!ABSTRACT_SUPER_CALL!>boo<!>
+    override konst konstue: String = super.<!ABSTRACT_SUPER_CALL!>zoo<!>
+    konst hoo: String = super.<!ABSTRACT_SUPER_CALL!>zoo<!>
 
     override fun foo(): String {
         super.<!ABSTRACT_SUPER_CALL!>foo<!>()
         super.<!ABSTRACT_SUPER_CALL!>boo<!>
-        super.value
+        super.konstue
         return ""
     }
 }
 
 abstract class BaseCase3{
     abstract fun foo(): String
-    open val value: String get() = "value"
-    abstract val boo: String
-    abstract val zoo: String
+    open konst konstue: String get() = "konstue"
+    abstract konst boo: String
+    abstract konst zoo: String
 }
 
 /*
@@ -89,7 +89,7 @@ interface InterfaceCase4 {
     }
 }
 
-abstract class BaseCase4(val a: String) : InterfaceCase4 {}
+abstract class BaseCase4(konst a: String) : InterfaceCase4 {}
 
 /*
 * TESTCASE NUMBER: 5
@@ -98,7 +98,7 @@ abstract class BaseCase4(val a: String) : InterfaceCase4 {}
 
 <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>class Case5<!>(a: String) : BaseCase5(a) {}
 
-abstract class BaseCase5(val a: String) : java.util.Deque<String> {}
+abstract class BaseCase5(konst a: String) : java.util.Deque<String> {}
 
 /*
 * TESTCASE NUMBER: 6
@@ -107,4 +107,4 @@ abstract class BaseCase5(val a: String) : java.util.Deque<String> {}
 
 <!ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED!>class Case6<!>(a: String) : BaseCase6(a) {}
 
-abstract class BaseCase6(val a: String) : java.util.AbstractCollection<String>() {}
+abstract class BaseCase6(konst a: String) : java.util.AbstractCollection<String>() {}

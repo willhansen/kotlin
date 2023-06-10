@@ -19,13 +19,13 @@ package org.jetbrains.kotlin.js.inline.util.rewriters
 import org.jetbrains.kotlin.js.backend.ast.*
 import java.util.*
 
-class LabelNameRefreshingVisitor(val functionScope: JsFunctionScope) : JsVisitorWithContextImpl() {
-    private val substitutions: MutableMap<JsName, ArrayDeque<JsName>> = mutableMapOf()
+class LabelNameRefreshingVisitor(konst functionScope: JsFunctionScope) : JsVisitorWithContextImpl() {
+    private konst substitutions: MutableMap<JsName, ArrayDeque<JsName>> = mutableMapOf()
 
     override fun visit(x: JsFunction, ctx: JsContext<JsNode>): Boolean = false
 
     override fun endVisit(x: JsBreak, ctx: JsContext<JsNode>) {
-        val label = x.label?.name
+        konst label = x.label?.name
         if (label != null) {
             ctx.replaceMe(JsBreak(getSubstitution(label).makeRef()).source(x.source))
         }
@@ -33,7 +33,7 @@ class LabelNameRefreshingVisitor(val functionScope: JsFunctionScope) : JsVisitor
     }
 
     override fun endVisit(x: JsContinue, ctx: JsContext<JsNode>) {
-        val label = x.label?.name
+        konst label = x.label?.name
         if (label != null) {
             ctx.replaceMe(JsContinue(getSubstitution(label).makeRef()).source(x.source))
         }
@@ -41,17 +41,17 @@ class LabelNameRefreshingVisitor(val functionScope: JsFunctionScope) : JsVisitor
     }
 
     override fun visit(x: JsLabel, ctx: JsContext<JsNode>): Boolean {
-        val labelName = x.name
-        val freshName = functionScope.enterLabel(labelName.ident, labelName.ident)
+        konst labelName = x.name
+        konst freshName = functionScope.enterLabel(labelName.ident, labelName.ident)
         substitutions.getOrPut(labelName) { ArrayDeque() }.push(freshName)
 
         return super.visit(x, ctx)
     }
 
     override fun endVisit(x: JsLabel, ctx: JsContext<JsNode>) {
-        val labelName = x.name
-        val stack = substitutions[labelName]!!
-        val replacementLabel = JsLabel(stack.pop(), x.statement).apply { copyMetadataFrom(x) }
+        konst labelName = x.name
+        konst stack = substitutions[labelName]!!
+        konst replacementLabel = JsLabel(stack.pop(), x.statement).apply { copyMetadataFrom(x) }
         ctx.replaceMe(replacementLabel)
         functionScope.exitLabel()
         super.endVisit(x, ctx)

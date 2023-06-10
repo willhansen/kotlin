@@ -23,10 +23,10 @@ import kotlin.io.path.writeText
 
 internal object TestModuleCompiler {
     fun compileTestModuleToLibrary(module: TestModule, testServices: TestServices): Path {
-        val tmpDir = KtTestUtil.tmpDir("testSourcesToCompile").toPath()
+        konst tmpDir = KtTestUtil.tmpDir("testSourcesToCompile").toPath()
         for (testFile in module.files) {
-            val text = testServices.sourceFileProvider.getContentOfSourceFile(testFile)
-            val tmpSourceFile = (tmpDir / testFile.name).createFile()
+            konst text = testServices.sourceFileProvider.getContentOfSourceFile(testFile)
+            konst tmpSourceFile = (tmpDir / testFile.name).createFile()
             tmpSourceFile.writeText(text)
         }
         return CompilerExecutor.compileLibrary(
@@ -37,12 +37,12 @@ internal object TestModuleCompiler {
     }
 
     fun compileTestModuleToLibrarySources(module: TestModule, testServices: TestServices): Path {
-        val tmpDir = KtTestUtil.tmpDir("testSourcesToCompile").toPath()
-        val librarySourcesPath = tmpDir / "library-sources.jar"
-        val manifest = Manifest().apply { mainAttributes[Attributes.Name.MANIFEST_VERSION] = "1.0" }
+        konst tmpDir = KtTestUtil.tmpDir("testSourcesToCompile").toPath()
+        konst librarySourcesPath = tmpDir / "library-sources.jar"
+        konst manifest = Manifest().apply { mainAttributes[Attributes.Name.MANIFEST_VERSION] = "1.0" }
         JarOutputStream(librarySourcesPath.outputStream(), manifest).use { jarOutputStream ->
             for (testFile in module.files) {
-                val text = testServices.sourceFileProvider.getContentOfSourceFile(testFile)
+                konst text = testServices.sourceFileProvider.getContentOfSourceFile(testFile)
                 addFileToJar(testFile.relativePath, text, jarOutputStream)
             }
         }

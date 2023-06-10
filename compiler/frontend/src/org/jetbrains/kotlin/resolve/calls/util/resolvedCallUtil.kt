@@ -33,13 +33,13 @@ import org.jetbrains.kotlin.types.typeUtil.contains
 // it returns true if call has no dispatch receiver (e.g. resulting descriptor is top-level function or local variable)
 // or call receiver is effectively `this` instance (explicitly or implicitly) of resulting descriptor
 // class A(other: A) {
-//   val x
-//   val y = other.x // return false for `other.x` as it's receiver is not `this`
+//   konst x
+//   konst y = other.x // return false for `other.x` as it's receiver is not `this`
 // }
 fun ResolvedCall<*>.hasThisOrNoDispatchReceiver(
     context: BindingContext
 ): Boolean {
-    val dispatchReceiverValue = dispatchReceiver
+    konst dispatchReceiverValue = dispatchReceiver
     if (resultingDescriptor.dispatchReceiverParameter == null || dispatchReceiverValue == null) return true
 
     var dispatchReceiverDescriptor: DeclarationDescriptor? = null
@@ -50,7 +50,7 @@ fun ResolvedCall<*>.hasThisOrNoDispatchReceiver(
             dispatchReceiverDescriptor = dispatchReceiverValue.classQualifier.descriptor
         }
         is ExpressionReceiver -> {
-            val expression = KtPsiUtil.deparenthesize(dispatchReceiverValue.expression)
+            konst expression = KtPsiUtil.deparenthesize(dispatchReceiverValue.expression)
             if (expression is KtThisExpression) {
                 // this.foo() -- explicit receiver
                 dispatchReceiverDescriptor = context.get(BindingContext.REFERENCE_TARGET, expression.instanceReference)
@@ -82,7 +82,7 @@ fun ResolvedCall<*>.getImplicitReceivers(): Collection<ReceiverValue> =
 
 private fun ResolvedCall<*>.hasSafeNullableReceiver(context: CallResolutionContext<*>): Boolean {
     if (!call.isSafeCall()) return false
-    val receiverValue = getExplicitReceiverValue()?.let { context.dataFlowValueFactory.createDataFlowValue(it, context) }
+    konst receiverValue = getExplicitReceiverValue()?.let { context.dataFlowValueFactory.createDataFlowValue(it, context) }
         ?: return false
     return context.dataFlowInfo.getStableNullability(receiverValue).canBeNull()
 }
@@ -96,9 +96,9 @@ fun ResolvedCall<*>.getDispatchReceiverWithSmartCast(): ReceiverValue? =
     getReceiverValueWithSmartCast(dispatchReceiver, smartCastDispatchReceiverType)
 
 fun KtCallElement.getArgumentByParameterIndex(index: Int, context: BindingContext): List<ValueArgument> {
-    val resolvedCall = getResolvedCall(context) ?: return emptyList()
-    val parameterToProcess = resolvedCall.resultingDescriptor.valueParameters.getOrNull(index) ?: return emptyList()
-    return resolvedCall.valueArguments[parameterToProcess]?.arguments ?: emptyList()
+    konst resolvedCall = getResolvedCall(context) ?: return emptyList()
+    konst parameterToProcess = resolvedCall.resultingDescriptor.konstueParameters.getOrNull(index) ?: return emptyList()
+    return resolvedCall.konstueArguments[parameterToProcess]?.arguments ?: emptyList()
 }
 
 fun CallableDescriptor.isNotSimpleCall(): Boolean =
@@ -117,7 +117,7 @@ fun ResolvedCall<*>.isNewNotCompleted(): Boolean = if (this is NewAbstractResolv
 fun ResolvedCall<*>.hasInferredReturnType(): Boolean {
     if (isNewNotCompleted()) return false
 
-    val returnType = this.resultingDescriptor.returnType ?: return false
+    konst returnType = this.resultingDescriptor.returnType ?: return false
     return !returnType.contains { ErrorUtils.isUninferredTypeVariable(it) }
 }
 

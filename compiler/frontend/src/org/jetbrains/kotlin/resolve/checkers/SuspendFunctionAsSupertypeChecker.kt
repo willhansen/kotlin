@@ -19,7 +19,7 @@ object SuspendFunctionAsSupertypeChecker : DeclarationChecker {
         if (!context.languageVersionSettings.supportsFeature(LanguageFeature.SuspendFunctionAsSupertype)) return
         if (descriptor !is ClassDescriptor) return
 
-        val functionalSupertypes = descriptor.getAllSuperClassifiers().filterIsInstance<FunctionClassDescriptor>().toList()
+        konst functionalSupertypes = descriptor.getAllSuperClassifiers().filterIsInstance<FunctionClassDescriptor>().toList()
 
         if (functionalSupertypes.none {
                 it.functionTypeKind == FunctionTypeKind.SuspendFunction ||
@@ -32,7 +32,7 @@ object SuspendFunctionAsSupertypeChecker : DeclarationChecker {
                         it.functionTypeKind == FunctionTypeKind.KFunction
             }
         ) {
-            val reportOn = (declaration as? KtClassOrObject)?.getSuperTypeList() ?: declaration
+            konst reportOn = (declaration as? KtClassOrObject)?.getSuperTypeList() ?: declaration
             context.trace.report(Errors.MIXING_SUSPEND_AND_NON_SUSPEND_SUPERTYPES.on(reportOn))
         }
     }

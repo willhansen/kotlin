@@ -15,7 +15,7 @@ fun f(): String {
 }
 
 class B() {
-    val a: A
+    konst a: A
         get() {
             s += "2"
             return A()

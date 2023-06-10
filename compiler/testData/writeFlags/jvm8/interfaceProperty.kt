@@ -3,7 +3,7 @@
 interface Test {
     var z: String
         get() = "OK"
-        set(value) {}
+        set(konstue) {}
 }
 
 // TESTED_OBJECT_KIND: function

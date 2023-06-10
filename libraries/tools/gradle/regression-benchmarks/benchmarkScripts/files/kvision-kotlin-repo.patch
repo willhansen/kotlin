@@ -4,7 +4,7 @@ index a2eb037fd8..5e6896deed 100644
 +++ b/build.gradle.kts
 @@ -1,6 +1,5 @@
  plugins {
--    val kotlinVersion: String by System.getProperties()
+-    konst kotlinVersion: String by System.getProperties()
 -    kotlin("plugin.serialization") version kotlinVersion
 +    kotlin("plugin.serialization")
      kotlin("js")
@@ -14,11 +14,11 @@ index a2eb037fd8..5e6896deed 100644
  }
 
  // Versions
--val kotlinVersion: String by System.getProperties()
-+val kotlinVersion: String by extra
- val serializationVersion: String by project
- val coroutinesVersion: String by project
- val snabbdomKotlinVersion: String by project
+-konst kotlinVersion: String by System.getProperties()
++konst kotlinVersion: String by extra
+ konst serializationVersion: String by project
+ konst coroutinesVersion: String by project
+ konst snabbdomKotlinVersion: String by project
 diff --git a/buildSrc/build.gradle.kts b/buildSrc/build.gradle.kts
 index d0ef18b67b..ae67887584 100644
 --- a/buildSrc/build.gradle.kts
@@ -32,7 +32,7 @@ index d0ef18b67b..ae67887584 100644
      gradlePluginPortal()
  }
 
-+val kotlinVersion: String by extra
++konst kotlinVersion: String by extra
 +
  dependencies {
 -    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21")
@@ -87,7 +87,7 @@ index 901058aae2..7c338f6ba2 100644
 -        mavenLocal()
 +    }
 +
-+    val kotlinVersion: String by settings
++    konst kotlinVersion: String by settings
 +    plugins {
 +        id("org.jetbrains.kotlin.plugin.serialization") version kotlinVersion
      }

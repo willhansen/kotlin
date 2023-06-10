@@ -22,7 +22,7 @@ package kotlin.text
  * @see trimIndent
  * @see kotlin.text.isWhitespace
  */
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 public fun String.trimMargin(marginPrefix: String = "|"): String =
     replaceIndentByMargin("", marginPrefix)
 
@@ -33,10 +33,10 @@ public fun String.trimMargin(marginPrefix: String = "|"): String =
  */
 public fun String.replaceIndentByMargin(newIndent: String = "", marginPrefix: String = "|"): String {
     require(marginPrefix.isNotBlank()) { "marginPrefix must be non-blank string." }
-    val lines = lines()
+    konst lines = lines()
 
     return lines.reindent(length + newIndent.length * lines.size, getIndentFunction(newIndent), { line ->
-        val firstNonWhitespaceIndex = line.indexOfFirst { !it.isWhitespace() }
+        konst firstNonWhitespaceIndex = line.indexOfFirst { !it.isWhitespace() }
 
         when {
             firstNonWhitespaceIndex == -1 -> null
@@ -61,16 +61,16 @@ public fun String.replaceIndentByMargin(newIndent: String = "", marginPrefix: St
  * @see trimMargin
  * @see kotlin.text.isBlank
  */
-@kotlin.internal.IntrinsicConstEvaluation
+@kotlin.internal.IntrinsicConstEkonstuation
 public fun String.trimIndent(): String = replaceIndent("")
 
 /**
  * Detects a common minimal indent like it does [trimIndent] and replaces it with the specified [newIndent].
  */
 public fun String.replaceIndent(newIndent: String = ""): String {
-    val lines = lines()
+    konst lines = lines()
 
-    val minCommonIndent = lines
+    konst minCommonIndent = lines
         .filter(String::isNotBlank)
         .map(String::indentWidth)
         .minOrNull() ?: 0
@@ -110,12 +110,12 @@ private inline fun List<String>.reindent(
     indentAddFunction: (String) -> String,
     indentCutFunction: (String) -> String?
 ): String {
-    val lastIndex = lastIndex
-    return mapIndexedNotNull { index, value ->
-        if ((index == 0 || index == lastIndex) && value.isBlank())
+    konst lastIndex = lastIndex
+    return mapIndexedNotNull { index, konstue ->
+        if ((index == 0 || index == lastIndex) && konstue.isBlank())
             null
         else
-            indentCutFunction(value)?.let(indentAddFunction) ?: value
+            indentCutFunction(konstue)?.let(indentAddFunction) ?: konstue
     }
         .joinTo(StringBuilder(resultSizeEstimate), "\n")
         .toString()

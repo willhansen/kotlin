@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirCastOperatorsChecker : FirTypeOperatorCallChecker() {
     override fun check(expression: FirTypeOperatorCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val session = context.session
-        val firstArgument = expression.argumentList.arguments[0]
-        val actualType = (firstArgument.unwrapSmartcastExpression().typeRef.coneType).fullyExpandedType(session)
-        val conversionTypeRef = expression.conversionTypeRef
-        val targetType = conversionTypeRef.coneType.fullyExpandedType(session)
+        konst session = context.session
+        konst firstArgument = expression.argumentList.arguments[0]
+        konst actualType = (firstArgument.unwrapSmartcastExpression().typeRef.coneType).fullyExpandedType(session)
+        konst conversionTypeRef = expression.conversionTypeRef
+        konst targetType = conversionTypeRef.coneType.fullyExpandedType(session)
 
-        val isSafeAs = expression.operation == FirOperation.SAFE_AS
+        konst isSafeAs = expression.operation == FirOperation.SAFE_AS
         if (expression.operation == FirOperation.AS || isSafeAs) {
-            val castType = checkCasting(actualType, targetType, isSafeAs, context)
+            konst castType = checkCasting(actualType, targetType, isSafeAs, context)
             if (castType == CastingType.Impossible) {
                 if (context.languageVersionSettings.supportsFeature(LanguageFeature.EnableDfaWarningsInK2)) {
                     reporter.reportOn(expression.source, FirErrors.CAST_NEVER_SUCCEEDS, context)

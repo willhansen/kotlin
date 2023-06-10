@@ -18,13 +18,13 @@ FILE: multipleBounds.kt
 
     }
     public abstract interface G<X> : R|kotlin/Any| {
-        public abstract val <X : R|Jet87/A|, R|Jet87/B|> boo: R|kotlin/Double|
+        public abstract konst <X : R|Jet87/A|, R|Jet87/B|> boo: R|kotlin/Double|
             public get(): R|kotlin/Double|
 
-        public abstract val <A : R|Jet87/B|> bal: R|kotlin/Double|
+        public abstract konst <A : R|Jet87/B|> bal: R|kotlin/Double|
             public get(): R|kotlin/Double|
 
-        public abstract val <Y : R|Jet87/B|> bas: R|kotlin/Double|
+        public abstract konst <Y : R|Jet87/B|> bas: R|kotlin/Double|
             public get(): R|kotlin/Double|
 
     }
@@ -101,11 +101,11 @@ FILE: multipleBounds.kt
         R|<local>/t|.R|Jet87/A.foo|()
         R|<local>/t|.R|Jet87/B.bar|()
     }
-    public final val t1: R|kotlin/Unit| = R|Jet87/test2<Inapplicable(INAPPLICABLE): Jet87/test2>#|<R|Jet87/A|>(R|Jet87/A.A|())
+    public final konst t1: R|kotlin/Unit| = R|Jet87/test2<Inapplicable(INAPPLICABLE): Jet87/test2>#|<R|Jet87/A|>(R|Jet87/A.A|())
         public get(): R|kotlin/Unit|
-    public final val t2: R|kotlin/Unit| = R|Jet87/test2<Inapplicable(INAPPLICABLE): Jet87/test2>#|<R|Jet87/B|>(R|Jet87/C.C|())
+    public final konst t2: R|kotlin/Unit| = R|Jet87/test2<Inapplicable(INAPPLICABLE): Jet87/test2>#|<R|Jet87/B|>(R|Jet87/C.C|())
         public get(): R|kotlin/Unit|
-    public final val t3: R|kotlin/Unit| = R|Jet87/test2|<R|Jet87/C|>(R|Jet87/C.C|())
+    public final konst t3: R|kotlin/Unit| = R|Jet87/test2|<R|Jet87/C|>(R|Jet87/C.C|())
         public get(): R|kotlin/Unit|
-    public final val <T, B : R|T|> x: R|kotlin/Int| = Int(0)
+    public final konst <T, B : R|T|> x: R|kotlin/Int| = Int(0)
         public get(): R|kotlin/Int|

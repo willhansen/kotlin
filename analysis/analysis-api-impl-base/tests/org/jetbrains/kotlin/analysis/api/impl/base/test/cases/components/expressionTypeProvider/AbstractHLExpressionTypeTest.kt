@@ -20,22 +20,22 @@ import org.jetbrains.kotlin.types.Variance
 
 abstract class AbstractHLExpressionTypeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val selected = testServices.expressionMarkerProvider.getSelectedElementOfTypeByDirective(ktFile, module).let {
+        konst selected = testServices.expressionMarkerProvider.getSelectedElementOfTypeByDirective(ktFile, module).let {
             if (it is KtBlockExpression && it.statements.size == 1 && it.textRange == it.statements.single().textRange) {
                 it.statements.single()
             } else {
                 it
             }
         }
-        val expression = when (selected) {
+        konst expression = when (selected) {
             is KtExpression -> selected
             is KtValueArgument -> selected.getArgumentExpression()
             else -> null
         } ?: error("expect an expression but got ${selected.text}, ${selected::class.java}")
-        val type = executeOnPooledThreadInReadAction {
+        konst type = executeOnPooledThreadInReadAction {
             analyseForTest(expression) { expression.getKtType()?.render(renderer, position = Variance.INVARIANT) }
         }
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("expression: ${expression.text}")
             appendLine("type: $type")
         }
@@ -43,6 +43,6 @@ abstract class AbstractHLExpressionTypeTest : AbstractAnalysisApiSingleFileTest(
     }
 
     companion object {
-        private val renderer = KtTypeRendererForDebug.WITH_QUALIFIED_NAMES
+        private konst renderer = KtTypeRendererForDebug.WITH_QUALIFIED_NAMES
     }
 }

@@ -25,10 +25,10 @@ object CirDeserializers {
     }
 
     private fun annotation(source: KmAnnotation, typeResolver: CirTypeResolver): CirAnnotation {
-        val classId = CirEntityId.create(source.className)
-        val clazz: CirProvided.RegularClass = typeResolver.resolveClassifier(classId)
+        konst classId = CirEntityId.create(source.className)
+        konst clazz: CirProvided.RegularClass = typeResolver.resolveClassifier(classId)
 
-        val type = CirClassType.createInterned(
+        konst type = CirClassType.createInterned(
             classId = classId,
             outerType = null, // annotation class can't be inner class
             arguments = clazz.typeParameters.compactMap { typeParameter ->
@@ -43,15 +43,15 @@ object CirDeserializers {
             isMarkedNullable = false
         )
 
-        val allValueArguments: Map<String, KmAnnotationArgument> = source.arguments
+        konst allValueArguments: Map<String, KmAnnotationArgument> = source.arguments
         if (allValueArguments.isEmpty())
             return CirAnnotation.createInterned(type = type, constantValueArguments = emptyMap(), annotationValueArguments = emptyMap())
 
-        val constantValueArguments: MutableMap<CirName, CirConstantValue> = THashMap(allValueArguments.size)
-        val annotationValueArguments: MutableMap<CirName, CirAnnotation> = THashMap(allValueArguments.size)
+        konst constantValueArguments: MutableMap<CirName, CirConstantValue> = THashMap(allValueArguments.size)
+        konst annotationValueArguments: MutableMap<CirName, CirAnnotation> = THashMap(allValueArguments.size)
 
         allValueArguments.forEach { (name, constantValue) ->
-            val cirName = CirName.create(name)
+            konst cirName = CirName.create(name)
             if (constantValue is KmAnnotationArgument.AnnotationValue)
                 annotationValueArguments[cirName] = annotation(source = constantValue.annotation, typeResolver)
             else
@@ -69,7 +69,7 @@ object CirDeserializers {
         )
     }
 
-    private val ALWAYS_HAS_ANNOTATIONS: Flags = flagsOf(Flag.Common.HAS_ANNOTATIONS)
+    private konst ALWAYS_HAS_ANNOTATIONS: Flags = flagsOf(Flag.Common.HAS_ANNOTATIONS)
 
     private fun typeParameter(source: KmTypeParameter, typeResolver: CirTypeResolver): CirTypeParameter = CirTypeParameter(
         annotations = annotations(ALWAYS_HAS_ANNOTATIONS, typeResolver, source::annotations),
@@ -88,7 +88,7 @@ object CirDeserializers {
     )
 
     fun property(name: CirName, source: KmProperty, containingClass: CirContainingClass?, typeResolver: CirTypeResolver): CirProperty {
-        val compileTimeInitializer = if (Flag.Property.HAS_CONSTANT(source.flags)) {
+        konst compileTimeInitializer = if (Flag.Property.HAS_CONSTANT(source.flags)) {
             constantValue(
                 constantValue = source.compileTimeValue,
                 owner = source,
@@ -121,10 +121,10 @@ object CirDeserializers {
         if (!Flag.Property.HAS_GETTER(source.flags))
             return null
 
-        val getterFlags = source.getterFlags
+        konst getterFlags = source.getterFlags
 
-        val isDefault = !Flag.PropertyAccessor.IS_NOT_DEFAULT(getterFlags)
-        val annotations = annotations(getterFlags, typeResolver, source::getterAnnotations)
+        konst isDefault = !Flag.PropertyAccessor.IS_NOT_DEFAULT(getterFlags)
+        konst annotations = annotations(getterFlags, typeResolver, source::getterAnnotations)
 
         if (isDefault && annotations.isEmpty())
             return CirPropertyGetter.DEFAULT_NO_ANNOTATIONS
@@ -140,7 +140,7 @@ object CirDeserializers {
         if (!Flag.Property.HAS_SETTER(source.flags))
             return null
 
-        val setterFlags = source.setterFlags
+        konst setterFlags = source.setterFlags
 
         return CirPropertySetter.createInterned(
             annotations = annotations(setterFlags, typeResolver, source::setterAnnotations),
@@ -171,7 +171,7 @@ object CirDeserializers {
             visibility = visibility(source.flags),
             modality = modality(source.flags),
             containingClass = containingClass,
-            valueParameters = source.valueParameters.compactMap { valueParameter(it, typeResolver) },
+            konstueParameters = source.konstueParameters.compactMap { konstueParameter(it, typeResolver) },
             hasStableParameterNames = !Flag.Function.HAS_NON_STABLE_PARAMETER_NAMES(source.flags),
             extensionReceiver = source.receiverParameterType?.let { extensionReceiver(it, typeResolver) },
             returnType = type(source.returnType, typeResolver),
@@ -186,7 +186,7 @@ object CirDeserializers {
         isSuspend = Flag.Function.IS_SUSPEND(source.flags),
     )
 
-    private fun valueParameter(source: KmValueParameter, typeResolver: CirTypeResolver): CirValueParameter =
+    private fun konstueParameter(source: KmValueParameter, typeResolver: CirTypeResolver): CirValueParameter =
         CirValueParameter.createInterned(
             annotations = annotations(source.flags, typeResolver, source::annotations),
             name = CirName.create(source.name),
@@ -213,22 +213,22 @@ object CirDeserializers {
     ): CirConstantValue = when (constantValue) {
         null -> CirConstantValue.NullValue
 
-        is KmAnnotationArgument.StringValue -> CirConstantValue.StringValue(constantValue.value)
-        is KmAnnotationArgument.CharValue -> CirConstantValue.CharValue(constantValue.value)
+        is KmAnnotationArgument.StringValue -> CirConstantValue.StringValue(constantValue.konstue)
+        is KmAnnotationArgument.CharValue -> CirConstantValue.CharValue(constantValue.konstue)
 
-        is KmAnnotationArgument.ByteValue -> CirConstantValue.ByteValue(constantValue.value)
-        is KmAnnotationArgument.ShortValue -> CirConstantValue.ShortValue(constantValue.value)
-        is KmAnnotationArgument.IntValue -> CirConstantValue.IntValue(constantValue.value)
-        is KmAnnotationArgument.LongValue -> CirConstantValue.LongValue(constantValue.value)
+        is KmAnnotationArgument.ByteValue -> CirConstantValue.ByteValue(constantValue.konstue)
+        is KmAnnotationArgument.ShortValue -> CirConstantValue.ShortValue(constantValue.konstue)
+        is KmAnnotationArgument.IntValue -> CirConstantValue.IntValue(constantValue.konstue)
+        is KmAnnotationArgument.LongValue -> CirConstantValue.LongValue(constantValue.konstue)
 
-        is KmAnnotationArgument.UByteValue -> CirConstantValue.UByteValue(constantValue.value)
-        is KmAnnotationArgument.UShortValue -> CirConstantValue.UShortValue(constantValue.value)
-        is KmAnnotationArgument.UIntValue -> CirConstantValue.UIntValue(constantValue.value)
-        is KmAnnotationArgument.ULongValue -> CirConstantValue.ULongValue(constantValue.value)
+        is KmAnnotationArgument.UByteValue -> CirConstantValue.UByteValue(constantValue.konstue)
+        is KmAnnotationArgument.UShortValue -> CirConstantValue.UShortValue(constantValue.konstue)
+        is KmAnnotationArgument.UIntValue -> CirConstantValue.UIntValue(constantValue.konstue)
+        is KmAnnotationArgument.ULongValue -> CirConstantValue.ULongValue(constantValue.konstue)
 
-        is KmAnnotationArgument.FloatValue -> CirConstantValue.FloatValue(constantValue.value)
-        is KmAnnotationArgument.DoubleValue -> CirConstantValue.DoubleValue(constantValue.value)
-        is KmAnnotationArgument.BooleanValue -> CirConstantValue.BooleanValue(constantValue.value)
+        is KmAnnotationArgument.FloatValue -> CirConstantValue.FloatValue(constantValue.konstue)
+        is KmAnnotationArgument.DoubleValue -> CirConstantValue.DoubleValue(constantValue.konstue)
+        is KmAnnotationArgument.BooleanValue -> CirConstantValue.BooleanValue(constantValue.konstue)
 
         is KmAnnotationArgument.EnumValue -> CirConstantValue.EnumValue(
             CirEntityId.create(constantValue.enumClassName),
@@ -310,14 +310,14 @@ object CirDeserializers {
             typeParameters = emptyList(), // TODO: nowhere to read constructor type parameters from
             visibility = visibility(source.flags),
             containingClass = containingClass,
-            valueParameters = source.valueParameters.compactMap { valueParameter(it, typeResolver) },
+            konstueParameters = source.konstueParameters.compactMap { konstueParameter(it, typeResolver) },
             hasStableParameterNames = !Flag.Constructor.HAS_NON_STABLE_PARAMETER_NAMES(source.flags),
             isPrimary = !Flag.Constructor.IS_SECONDARY(source.flags)
         )
 
     fun typeAlias(name: CirName, source: KmTypeAlias, typeResolver: CirTypeResolver): CirTypeAlias {
-        val underlyingType = type(source.underlyingType, typeResolver) as CirClassOrTypeAliasType
-        val expandedType = underlyingType.unabbreviate()
+        konst underlyingType = type(source.underlyingType, typeResolver) as CirClassOrTypeAliasType
+        konst expandedType = underlyingType.unabbreviate()
 
         return CirTypeAlias.create(
             annotations = annotations(source.flags, typeResolver, source::annotations),
@@ -331,20 +331,20 @@ object CirDeserializers {
 
     private fun type(source: KmType, typeResolver: CirTypeResolver): CirType {
         @Suppress("NAME_SHADOWING")
-        val source = source.abbreviatedType ?: source
-        val isMarkedNullable = Flag.Type.IS_NULLABLE(source.flags)
+        konst source = source.abbreviatedType ?: source
+        konst isMarkedNullable = Flag.Type.IS_NULLABLE(source.flags)
 
-        return when (val classifier = source.classifier) {
+        return when (konst classifier = source.classifier) {
             is KmClassifier.Class -> {
-                val classId = CirEntityId.create(classifier.name)
+                konst classId = CirEntityId.create(classifier.name)
 
-                val outerType = source.outerType?.let { outerType ->
-                    val outerClassType = type(outerType, typeResolver)
+                konst outerType = source.outerType?.let { outerType ->
+                    konst outerClassType = type(outerType, typeResolver)
                     check(outerClassType is CirClassType) { "Outer type of $classId is not a class: $outerClassType" }
                     outerClassType
                 }
 
-                val clazz: CirProvided.Class = typeResolver.resolveClassifier(classId)
+                konst clazz: CirProvided.Class = typeResolver.resolveClassifier(classId)
 
                 CirClassType.createInterned(
                     classId = (clazz as? CirProvided.ExportedForwardDeclarationClass)?.syntheticClassId ?: classId,
@@ -354,11 +354,11 @@ object CirDeserializers {
                 )
             }
             is KmClassifier.TypeAlias -> {
-                val typeAliasId = CirEntityId.create(classifier.name)
+                konst typeAliasId = CirEntityId.create(classifier.name)
 
-                val arguments = arguments(source.arguments, typeResolver)
+                konst arguments = arguments(source.arguments, typeResolver)
 
-                val underlyingType = CirTypeAliasExpander.expand(
+                konst underlyingType = CirTypeAliasExpander.expand(
                     CirTypeAliasExpansion.create(typeAliasId, arguments, isMarkedNullable, typeResolver)
                 )
 
@@ -389,8 +389,8 @@ object CirDeserializers {
     @Suppress("NOTHING_TO_INLINE")
     private inline fun arguments(arguments: List<KmTypeProjection>, typeResolver: CirTypeResolver): List<CirTypeProjection> {
         return arguments.compactMap { argument ->
-            val variance = argument.variance ?: return@compactMap CirStarTypeProjection
-            val argumentType = argument.type ?: return@compactMap CirStarTypeProjection
+            konst variance = argument.variance ?: return@compactMap CirStarTypeProjection
+            konst argumentType = argument.type ?: return@compactMap CirStarTypeProjection
 
             CirRegularTypeProjection(
                 projectionKind = variance(variance),

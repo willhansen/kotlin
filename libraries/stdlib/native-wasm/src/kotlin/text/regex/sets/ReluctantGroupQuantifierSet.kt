@@ -38,7 +38,7 @@ internal class ReluctantGroupQuantifierSet(
 
         fun matchNext(): Int {
             matchResult.enterCounters[groupQuantifierIndex] = 0
-            val result = next.matches(startIndex, testString, matchResult)
+            konst result = next.matches(startIndex, testString, matchResult)
             matchResult.enterCounters[groupQuantifierIndex] = enterCount
             return result
         }
@@ -49,7 +49,7 @@ internal class ReluctantGroupQuantifierSet(
 
         // Fast case: '*' or {0, } - no need to count occurrences.
         if (min == 0 && max == Quantifier.INF) {
-            val res = next.matches(startIndex, testString, matchResult)
+            konst res = next.matches(startIndex, testString, matchResult)
             return if (res < 0) {
                 innerSet.matches(startIndex, testString, matchResult)
             } else {
@@ -63,7 +63,7 @@ internal class ReluctantGroupQuantifierSet(
         }
 
         return if (enterCount >= min) {
-            val nextIndex = matchNext()
+            konst nextIndex = matchNext()
             if (nextIndex < 0) {
                 matchResult.enterCounters[groupQuantifierIndex] = ++enterCount
                 innerSet.matches(startIndex, testString, matchResult)

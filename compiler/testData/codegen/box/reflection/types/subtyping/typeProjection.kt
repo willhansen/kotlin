@@ -17,10 +17,10 @@ fun inNumber(): G<in Number> = null!!
 fun star(): G<*> = null!!
 
 fun box(): String {
-    val n = ::number.returnType
-    val o = ::outNumber.returnType
-    val i = ::inNumber.returnType
-    val st = ::star.returnType
+    konst n = ::number.returnType
+    konst o = ::outNumber.returnType
+    konst i = ::inNumber.returnType
+    konst st = ::star.returnType
 
     // G<Number> <: G<out Number>
     assertTrue(n.isSubtypeOf(o))

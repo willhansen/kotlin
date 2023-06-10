@@ -11,29 +11,29 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 object MultiplyingIntSerializer : KSerializer<Int> {
-    override val descriptor: SerialDescriptor
+    override konst descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("MultiplyingInt", PrimitiveKind.INT)
 
     override fun deserialize(decoder: Decoder): Int {
         return decoder.decodeInt() / 2
     }
 
-    override fun serialize(encoder: Encoder, value: Int) {
-        encoder.encodeInt(value * 2)
+    override fun serialize(encoder: Encoder, konstue: Int) {
+        encoder.encodeInt(konstue * 2)
     }
 }
 
-data class Cont(val i: Int)
+data class Cont(konst i: Int)
 
 object ContSerializer: KSerializer<Cont> {
     override fun deserialize(decoder: Decoder): Cont {
         return Cont(decoder.decodeInt())
     }
 
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("ContSerializer", PrimitiveKind.INT)
+    override konst descriptor: SerialDescriptor = PrimitiveSerialDescriptor("ContSerializer", PrimitiveKind.INT)
 
-    override fun serialize(encoder: Encoder, value: Cont) {
-        encoder.encodeInt(value.i)
+    override fun serialize(encoder: Encoder, konstue: Cont) {
+        encoder.encodeInt(konstue.i)
     }
 }
 
@@ -50,23 +50,23 @@ import kotlinx.serialization.modules.*
 
 @Serializable
 class Holder(
-    val i: Int,
-    val c: Cont
+    konst i: Int,
+    konst c: Cont
 )
 
 fun testOnFile(): String {
-    val j = Json {
+    konst j = Json {
         serializersModule = SerializersModule {
             contextual(ContSerializer)
         }
     }
-    val h = Holder(3, Cont(4))
-    val str = j.encodeToString(
+    konst h = Holder(3, Cont(4))
+    konst str = j.encodeToString(
         Holder.serializer(),
         h
     )
     if ("""{"i":6,"c":4}""" != str) return str
-    val decoded = j.decodeFromString(Holder.serializer(), str)
+    konst decoded = j.decodeFromString(Holder.serializer(), str)
     if (decoded.i != h.i) return "i: ${decoded.i}"
     if (decoded.c.i != h.c.i) return "c.i: ${decoded.c.i}"
     return "OK"

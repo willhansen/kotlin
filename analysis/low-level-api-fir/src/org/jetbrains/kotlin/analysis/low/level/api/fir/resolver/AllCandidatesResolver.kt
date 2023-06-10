@@ -31,33 +31,33 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
 
-class AllCandidatesResolver(private val firSession: FirSession) {
-    private val scopeSession = ScopeSession()
+class AllCandidatesResolver(private konst firSession: FirSession) {
+    private konst scopeSession = ScopeSession()
 
     // This transformer is not intended for actual transformations and created here only to simplify access to resolve components
-    private val stubBodyResolveTransformer = FirBodyResolveTransformer(
+    private konst stubBodyResolveTransformer = FirBodyResolveTransformer(
         session = firSession,
         phase = FirResolvePhase.BODY_RESOLVE,
         implicitTypeOnly = false,
         scopeSession = scopeSession,
     )
 
-    private val bodyResolveComponents = object : StubBodyResolveTransformerComponents(
+    private konst bodyResolveComponents = object : StubBodyResolveTransformerComponents(
         firSession,
         scopeSession,
         stubBodyResolveTransformer,
         stubBodyResolveTransformer.context,
     ) {
-        val collector = AllCandidatesCollector(this, resolutionStageRunner)
-        val towerResolver = FirTowerResolver(this, resolutionStageRunner, collector)
-        override val callResolver = FirCallResolver(this, towerResolver)
+        konst collector = AllCandidatesCollector(this, resolutionStageRunner)
+        konst towerResolver = FirTowerResolver(this, resolutionStageRunner, collector)
+        override konst callResolver = FirCallResolver(this, towerResolver)
 
         init {
             callResolver.initTransformer(FirExpressionsResolveTransformer(stubBodyResolveTransformer))
         }
     }
 
-    private val resolutionContext = ResolutionContext(firSession, bodyResolveComponents, bodyResolveComponents.transformer.context)
+    private konst resolutionContext = ResolutionContext(firSession, bodyResolveComponents, bodyResolveComponents.transformer.context)
 
     fun getAllCandidates(
         firResolveSession: LLFirResolveSession,
@@ -67,7 +67,7 @@ class AllCandidatesResolver(private val firSession: FirSession) {
     ): List<OverloadCandidate> {
         initializeBodyResolveContext(firResolveSession, element)
 
-        val firFile = element.containingKtFile.getOrBuildFirFile(firResolveSession)
+        konst firFile = element.containingKtFile.getOrBuildFirFile(firResolveSession)
         return bodyResolveComponents.context.withFile(firFile, bodyResolveComponents) {
             bodyResolveComponents.callResolver
                 .collectAllCandidates(qualifiedAccess, calleeName, bodyResolveComponents.context.containers, resolutionContext)
@@ -83,8 +83,8 @@ class AllCandidatesResolver(private val firSession: FirSession) {
     ): List<OverloadCandidate> {
         initializeBodyResolveContext(firResolveSession, element)
 
-        val firFile = element.containingKtFile.getOrBuildFirFile(firResolveSession)
-        val constructedType = delegatedConstructorCall.constructedTypeRef.coneType as ConeClassLikeType
+        konst firFile = element.containingKtFile.getOrBuildFirFile(firResolveSession)
+        konst constructedType = delegatedConstructorCall.constructedTypeRef.coneType as ConeClassLikeType
         return bodyResolveComponents.context.withFile(firFile, bodyResolveComponents) {
             bodyResolveComponents.callResolver
                 .resolveDelegatingConstructorCall(delegatedConstructorCall, constructedType, derivedClassLookupTag)
@@ -97,9 +97,9 @@ class AllCandidatesResolver(private val firSession: FirSession) {
     @OptIn(PrivateForInline::class, SymbolInternals::class)
     private fun initializeBodyResolveContext(firResolveSession: LLFirResolveSession, element: KtElement) {
         // Set up needed context to get all candidates.
-        val towerContext = firResolveSession.getTowerContextProvider(element.containingKtFile).getClosestAvailableParentContext(element)
+        konst towerContext = firResolveSession.getTowerContextProvider(element.containingKtFile).getClosestAvailableParentContext(element)
         towerContext?.let { bodyResolveComponents.context.replaceTowerDataContext(it) }
-        val containingDeclarations =
+        konst containingDeclarations =
             element.parentsOfType<KtDeclaration>().map { it.resolveToFirSymbol(firResolveSession).fir }.toList().asReversed()
         bodyResolveComponents.context.containers.addAll(containingDeclarations)
     }
@@ -120,9 +120,9 @@ class AllCandidatesResolver(private val firSession: FirSession) {
      * resulting candidate is *not* marked as inapplicable and needs to be post-processed.
      */
     private fun OverloadCandidate.preserveCalleeInapplicability() {
-        val callSite = candidate.callInfo.callSite
-        val calleeReference = callSite.calleeReference as? FirDiagnosticHolder ?: return
-        val diagnostic = calleeReference.diagnostic as? ConeInapplicableCandidateError ?: return
+        konst callSite = candidate.callInfo.callSite
+        konst calleeReference = callSite.calleeReference as? FirDiagnosticHolder ?: return
+        konst diagnostic = calleeReference.diagnostic as? ConeInapplicableCandidateError ?: return
         if (diagnostic.applicability != CandidateApplicability.INAPPLICABLE) return
 
         candidate.addDiagnostic(InapplicableCandidate)

@@ -34,24 +34,24 @@ abstract class AbstractForInProgressionLoopGenerator(
 ) : AbstractForInProgressionOrRangeLoopGenerator(codegen, forExpression) {
 
     protected var incrementVar: Int = -1
-    protected val asmLoopRangeType: Type = codegen.asmType(rangeKotlinType)
-    private val rangeElementKotlinType = getRangeOrProgressionElementType(rangeKotlinType)
+    protected konst asmLoopRangeType: Type = codegen.asmType(rangeKotlinType)
+    private konst rangeElementKotlinType = getRangeOrProgressionElementType(rangeKotlinType)
         ?: throw AssertionError("Unexpected loop range type: $rangeKotlinType")
-    private val incrementKotlinType: KotlinType
-    protected val incrementType: Type
+    private konst incrementKotlinType: KotlinType
+    protected konst incrementType: Type
 
     init {
-        val incrementProp = rangeKotlinType.memberScope.getContributedVariables(Name.identifier("step"), NoLookupLocation.FROM_BACKEND)
+        konst incrementProp = rangeKotlinType.memberScope.getContributedVariables(Name.identifier("step"), NoLookupLocation.FROM_BACKEND)
         assert(incrementProp.size == 1) { rangeKotlinType.toString() + " " + incrementProp.size }
         incrementKotlinType = incrementProp.single().type
         incrementType = codegen.asmType(incrementKotlinType)
     }
 
-    private val incrementComparisonGenerator =
+    private konst incrementComparisonGenerator =
         getComparisonGeneratorForKotlinType(incrementKotlinType) as? SignedIntegerComparisonGenerator
             ?: throw AssertionError("Unexpected increment type: $incrementKotlinType")
 
-    private val elementComparisonGenerator = getComparisonGeneratorForKotlinType(rangeElementKotlinType)
+    private konst elementComparisonGenerator = getComparisonGeneratorForKotlinType(rangeElementKotlinType)
 
     override fun beforeLoop() {
         super.beforeLoop()
@@ -68,8 +68,8 @@ abstract class AbstractForInProgressionLoopGenerator(
         v.load(endVar, asmElementType)
         v.load(incrementVar, incrementType)
 
-        val negativeIncrement = Label()
-        val afterIf = Label()
+        konst negativeIncrement = Label()
+        konst afterIf = Label()
 
         incrementComparisonGenerator.jumpIfLessThanZero(v, negativeIncrement)
         elementComparisonGenerator.jumpIfGreater(v, loopExit)
@@ -84,7 +84,7 @@ abstract class AbstractForInProgressionLoopGenerator(
     override fun checkPostConditionAndIncrement(loopExit: Label) {
         checkPostCondition(loopExit)
 
-        val loopParameter = loopParameter()
+        konst loopParameter = loopParameter()
         loopParameter.put(asmElementType, elementType, v)
         v.load(incrementVar, asmElementType)
         v.add(asmElementType)

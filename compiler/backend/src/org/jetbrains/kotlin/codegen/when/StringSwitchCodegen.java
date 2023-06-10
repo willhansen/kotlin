@@ -99,7 +99,7 @@ public class StringSwitchCodegen extends SwitchCodegen {
 
                 codegen.markLineNumber(entry.entry, false);
                 v.load(tempVarIndex, subjectType);
-                v.aconst(entry.value);
+                v.aconst(entry.konstue);
                 v.invokevirtual(
                         subjectType.getInternalName(),
                         "equals",
@@ -123,12 +123,12 @@ public class StringSwitchCodegen extends SwitchCodegen {
     }
 
     private static class Entry {
-        private final String value;
+        private final String konstue;
         private final Label label;
         private final KtWhenEntry entry;
 
-        private Entry(String value, Label label, KtWhenEntry entry) {
-            this.value = value;
+        private Entry(String konstue, Label label, KtWhenEntry entry) {
+            this.konstue = konstue;
             this.label = label;
             this.entry = entry;
         }

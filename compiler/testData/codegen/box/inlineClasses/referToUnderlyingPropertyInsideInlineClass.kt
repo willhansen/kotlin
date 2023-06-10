@@ -3,17 +3,17 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class UInt(val value: Int) {
-    operator fun plus(other: UInt) = UInt(value + other.value)
-    fun otherValue(other: UInt) = other.value
+konstue class UInt(konst konstue: Int) {
+    operator fun plus(other: UInt) = UInt(konstue + other.konstue)
+    fun otherValue(other: UInt) = other.konstue
 }
 
 fun box(): String {
-    val a = UInt(10)
-    val b = UInt(20)
+    konst a = UInt(10)
+    konst b = UInt(20)
     if (a.otherValue(b) != 20) return "fail 1"
 
-    if ((a + b).value != 30) return "fail 2"
+    if ((a + b).konstue != 30) return "fail 2"
 
     return "OK"
 }

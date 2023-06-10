@@ -23,12 +23,12 @@ import org.jetbrains.kotlin.resolve.scopes.LexicalScope
 fun PsiElement.getResolutionScope(bindingContext: BindingContext): LexicalScope? {
     for (parent in parentsWithSelf) {
         if (parent is KtElement) {
-            val scope = bindingContext[BindingContext.LEXICAL_SCOPE, parent]
+            konst scope = bindingContext[BindingContext.LEXICAL_SCOPE, parent]
             if (scope != null) return scope
         }
 
         if (parent is KtClassBody) {
-            val classDescriptor = bindingContext[BindingContext.CLASS, parent.getParent()] as? ClassDescriptorWithResolutionScopes
+            konst classDescriptor = bindingContext[BindingContext.CLASS, parent.getParent()] as? ClassDescriptorWithResolutionScopes
             if (classDescriptor != null) {
                 return classDescriptor.scopeForMemberDeclarationResolution
             }

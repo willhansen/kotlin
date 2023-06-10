@@ -1,6 +1,6 @@
-annotation class Ann(val x: Int)
+annotation class Ann(konst x: Int)
 
-data class A(val x: Int, val y: Int)
+data class A(konst x: Int, konst y: Int)
 
 fun bar(): Array<A> = null!!
 

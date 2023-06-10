@@ -2,9 +2,9 @@ package com.example;
 
 public class SimpleClass {
 
-    public String publicField = "publicField's value";
+    public String publicField = "publicField's konstue";
 
-    private String privateField = "privateField's value";
+    private String privateField = "privateField's konstue";
 
     public String publicMethod() {
         return "publicMethod's body";

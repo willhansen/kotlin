@@ -27,28 +27,28 @@ abstract class BaseKaptHandler(testServices: TestServices) : AbstractKaptHandler
         kaptContext: KaptContextForStubGeneration,
         generateNonExistentClass: Boolean
     ): List<JCTree.JCCompilationUnit> {
-        val javaFiles = testServices.sourceFileProvider.getRealJavaFiles(module)
-        val converter = ClassFileToSourceStubConverter(kaptContext, generateNonExistentClass)
+        konst javaFiles = testServices.sourceFileProvider.getRealJavaFiles(module)
+        konst converter = ClassFileToSourceStubConverter(kaptContext, generateNonExistentClass)
 
-        val kaptStubs = converter.convert()
-        val convertedFiles = kaptStubs.mapIndexed { index, stub ->
-            val sourceFile = createTempJavaFile("stub$index.java", stub.file.prettyPrint(kaptContext.context))
+        konst kaptStubs = converter.convert()
+        konst convertedFiles = kaptStubs.mapIndexed { index, stub ->
+            konst sourceFile = createTempJavaFile("stub$index.java", stub.file.prettyPrint(kaptContext.context))
             stub.writeMetadataIfNeeded(forSource = sourceFile)
             sourceFile
         }
 
-        val allJavaFiles = javaFiles + convertedFiles
+        konst allJavaFiles = javaFiles + convertedFiles
 
         // A workaround needed for Javac to parse files correctly even if errors were already reported
         // If nerrors > 0, "parseFiles()" returns the empty list
-        val oldErrorCount = kaptContext.compiler.log.nerrors
+        konst oldErrorCount = kaptContext.compiler.log.nerrors
         kaptContext.compiler.log.nerrors = 0
 
         try {
-            val parsedJavaFiles = kaptContext.parseJavaFiles(allJavaFiles)
+            konst parsedJavaFiles = kaptContext.parseJavaFiles(allJavaFiles)
 
             for (tree in parsedJavaFiles) {
-                val actualFile = File(tree.sourceFile.toUri())
+                konst actualFile = File(tree.sourceFile.toUri())
 
                 // By default, JavaFileObject.getName() returns the absolute path to the file.
                 // In our test, such a path will be temporary, so the comparison against it will lead to flaky tests.

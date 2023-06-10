@@ -17,17 +17,17 @@ import org.jetbrains.kotlin.ir.types.IrType
 import org.jetbrains.kotlin.name.Name
 
 class IrFieldImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var origin: IrDeclarationOrigin,
-    override val symbol: IrFieldSymbol,
+    override konst symbol: IrFieldSymbol,
     override var name: Name,
     override var type: IrType,
     override var visibility: DescriptorVisibility,
     override var isFinal: Boolean,
     override var isExternal: Boolean,
     override var isStatic: Boolean,
-    override val factory: IrFactory = IrFactoryImpl,
+    override konst factory: IrFactory = IrFactoryImpl,
 ) : IrField() {
     init {
         symbol.bind(this)
@@ -37,7 +37,7 @@ class IrFieldImpl(
     override var annotations: List<IrConstructorCall> = emptyList()
 
     @ObsoleteDescriptorBasedAPI
-    override val descriptor: PropertyDescriptor
+    override konst descriptor: PropertyDescriptor
         get() = symbol.descriptor
 
     override var initializer: IrExpressionBody? = null

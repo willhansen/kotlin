@@ -1,8 +1,8 @@
 fun box(): String {
     var encl1 = "fail";
     test {
-        val lam1 = {
-            val lam2 = { encl1 = "OK" }
+        konst lam1 = {
+            konst lam2 = { encl1 = "OK" }
             lam2()
         }
         lam1()
@@ -35,7 +35,7 @@ inline fun test(crossinline s: () -> Unit) {
 //  public final static INNERCLASS Kt10259_3Kt$test$1 null null
 // in Kt10259_3Kt.
 // Although Oracle JVM doesn't check for consistency of InnerClasses attributes,
-// this behavior is equivalent to javac and seems to be correct.
+// this behavior is equikonstent to javac and seems to be correct.
 
 // JVM_IR_TEMPLATES
 // 17 INNERCLASS

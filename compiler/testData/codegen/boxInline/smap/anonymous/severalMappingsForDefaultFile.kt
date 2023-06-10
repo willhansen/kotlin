@@ -4,7 +4,7 @@ package test
 
 
 inline fun annotatedWith2(crossinline predicate: () -> Boolean)
-    { val lambda = { any { predicate() } }; lambda() }
+    { konst lambda = { any { predicate() } }; lambda() }
 
 
 inline fun annotatedWith(crossinline predicate: () -> Boolean) =

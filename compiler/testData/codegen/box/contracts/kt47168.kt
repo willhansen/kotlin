@@ -10,6 +10,6 @@ inline fun foo(x: () -> String, y: () -> String): String {
 }
 
 fun box(): String {
-    val y = { "K" }
+    konst y = { "K" }
     return foo({ "O" }, y)
 }

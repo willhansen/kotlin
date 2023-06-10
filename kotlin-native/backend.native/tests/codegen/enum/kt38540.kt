@@ -8,9 +8,9 @@ package codegen.enum.kt38540
 import kotlin.test.*
 
 public enum class Node(
-        public val external: Boolean,
-        public val dependsOn: Set<Node>,
-        public val required: Boolean
+        public konst external: Boolean,
+        public konst dependsOn: Set<Node>,
+        public konst required: Boolean
 ) {
     A(
             external = false,

@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.platform
 
 abstract class JsPlatform : SimplePlatform("JS") {
-    override val oldFashionedDescription: String
+    override konst oldFashionedDescription: String
         get() = "JavaScript "
 }
 

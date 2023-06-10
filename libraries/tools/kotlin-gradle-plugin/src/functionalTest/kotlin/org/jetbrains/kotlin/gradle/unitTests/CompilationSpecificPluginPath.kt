@@ -24,7 +24,7 @@ internal class CompilationSpecificPluginPath {
         // Given plugin but with legacy-native-specific artifact
         class NativeSpecificPlugin : FakeSubPlugin("common", "native", { true })
 
-        val project = buildProject {
+        konst project = buildProject {
             extensions.getByType(ExtraPropertiesExtension::class.java).set("kotlin.mpp.enableGranularSourceSetsMetadata", "true")
             project.plugins.apply("kotlin-multiplatform")
 
@@ -37,11 +37,11 @@ internal class CompilationSpecificPluginPath {
                 jvm()
 
                 sourceSets.apply {
-                    val commonMain = getByName("commonMain")
-                    val nativeMain = create("nativeMain")
-                    val linuxX64 = getByName("linuxX64Main")
-                    val mingwX64 = getByName("mingwX64Main")
-                    val jvm = getByName("jvmMain")
+                    konst commonMain = getByName("commonMain")
+                    konst nativeMain = create("nativeMain")
+                    konst linuxX64 = getByName("linuxX64Main")
+                    konst mingwX64 = getByName("mingwX64Main")
+                    konst jvm = getByName("jvmMain")
 
                     // Make nativeMain be common source set for linuxX64 and mingwX64
                     nativeMain.dependsOn(commonMain)
@@ -51,7 +51,7 @@ internal class CompilationSpecificPluginPath {
                 }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         // Then expect common artifact to be used for all compilations, including nativeMain metadata
         assertEquals(setOf("common"), project.compileTaskSubplugins("compileNativeMainKotlinMetadata"))
@@ -63,9 +63,9 @@ internal class CompilationSpecificPluginPath {
 
     @Test
     fun `each compilation should have its own plugin classpath`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
-                val jvmAttribute = Attribute.of(String::class.java)
+                konst jvmAttribute = Attribute.of(String::class.java)
                 jvm("jvm1") { attributes { attribute(jvmAttribute, "jvm1") } }
                 jvm("jvm2") { attributes { attribute(jvmAttribute, "jvm2") } }
                 js("js") { browser() }
@@ -87,7 +87,7 @@ internal class CompilationSpecificPluginPath {
         class JsOnly : FakeSubPlugin("jsOnly", null, { target.platformType == KotlinPlatformType.js })
 
         // When apply them to a Kotlin MPP Project
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             plugins.apply(JvmOnly::class.java)
             plugins.apply(JsOnly::class.java)
 
@@ -98,15 +98,15 @@ internal class CompilationSpecificPluginPath {
                 }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         // Then each plugin classpath should have its own dependency
         assertEquals(listOf("jvmOnly"), project.subplugins("desktop"))
         assertEquals(listOf("jsOnly"), project.subplugins("web"))
 
         // And each compilation task should have its own plugin classpath
-        val compileDesktop = project.tasks.getByName("compileKotlinDesktop") as KotlinCompile
-        val expectedConfig = project.configurations.getByName(pluginClassPathConfiguration("desktop", "main"))
+        konst compileDesktop = project.tasks.getByName("compileKotlinDesktop") as KotlinCompile
+        konst expectedConfig = project.configurations.getByName(pluginClassPathConfiguration("desktop", "main"))
         assertEquals(expectedConfig, compileDesktop.pluginClasspath.from.single())
     }
 
@@ -119,7 +119,7 @@ internal class CompilationSpecificPluginPath {
         class RegularPluginWithoutNativeArtifact : FakeSubPlugin("common2", null, { true })
 
         // When applying these plugins
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             plugins.apply(NativeSpecificPlugin::class.java)
             plugins.apply(RegularPluginWithoutNativeArtifact::class.java)
 
@@ -128,7 +128,7 @@ internal class CompilationSpecificPluginPath {
                 linuxX64()
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         // Expect jvm and native targets have both common artifacts and no legacy native artifacts
         assertEquals(listOf("common1", "common2"), project.subplugins("jvm"))
@@ -144,7 +144,7 @@ internal class CompilationSpecificPluginPath {
         class RegularPluginWithoutNativeArtifact : FakeSubPlugin("common2", null, { true })
 
         // When applying these plugins
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             plugins.apply(NativeSpecificPlugin::class.java)
             plugins.apply(RegularPluginWithoutNativeArtifact::class.java)
 
@@ -159,11 +159,11 @@ internal class CompilationSpecificPluginPath {
                 jvm()
 
                 sourceSets.apply {
-                    val commonMain = getByName("commonMain")
-                    val nativeMain = create("nativeMain")
-                    val linuxX64 = getByName("linuxX64Main")
-                    val mingwX64 = getByName("mingwX64Main")
-                    val jvm = getByName("jvmMain")
+                    konst commonMain = getByName("commonMain")
+                    konst nativeMain = create("nativeMain")
+                    konst linuxX64 = getByName("linuxX64Main")
+                    konst mingwX64 = getByName("mingwX64Main")
+                    konst jvm = getByName("jvmMain")
 
                     // Make nativeMain be common source set for linuxX64 and mingwX64
                     nativeMain.dependsOn(commonMain)
@@ -173,7 +173,7 @@ internal class CompilationSpecificPluginPath {
                 }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
 
         // Then expect native artifact to be used for nativeMain metadata compilation
         assertEquals(setOf("native"), project.compileTaskSubplugins("compileNativeMainKotlinMetadata"))
@@ -192,14 +192,14 @@ internal class CompilationSpecificPluginPath {
 
     @Test
     fun `native plugin configuration should not be transitive`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 linuxX64()
             }
         }
 
-        val nativeConfig = project
+        konst nativeConfig = project
             .configurations
             .getByName(pluginClassPathConfiguration("linuxX64", "main"))
 
@@ -209,7 +209,7 @@ internal class CompilationSpecificPluginPath {
     @Test
     fun `it should be possible to add common plugin classpath to all compilations except native`() {
         // Given MPP project
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 js { browser() }
@@ -219,7 +219,7 @@ internal class CompilationSpecificPluginPath {
 
         // When adding a shared plugin to common Plugin Classpath
         project.dependencies.add(PLUGIN_CLASSPATH_CONFIGURATION_NAME, "test:shared")
-        project.evaluate()
+        project.ekonstuate()
 
         // Then ALL compilations should have shared plugin EXCEPT native
         assertTrue("shared" in project.subplugins("jvm"))
@@ -232,7 +232,7 @@ internal class CompilationSpecificPluginPath {
     @Test
     fun `native compilations should have its own shared plugin classpath`() {
         // Given MPP project
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm()
                 linuxX64("linux")
@@ -242,7 +242,7 @@ internal class CompilationSpecificPluginPath {
 
         // When adding a shared plugin to native Plugin Classpath
         project.dependencies.add(NATIVE_COMPILER_PLUGIN_CLASSPATH_CONFIGURATION_NAME, "test:shared")
-        project.evaluate()
+        project.ekonstuate()
 
         // Then ALL native compilations should have shared plugin
         assertTrue("shared" in project.subplugins("linux"))
@@ -255,9 +255,9 @@ internal class CompilationSpecificPluginPath {
     }
 
     private abstract class FakeSubPlugin(
-        val id: String,
-        val idLegacyNative: String? = null,
-        val isApplicablePredicate: KotlinCompilation<*>.() -> Boolean
+        konst id: String,
+        konst idLegacyNative: String? = null,
+        konst isApplicablePredicate: KotlinCompilation<*>.() -> Boolean
     ) : KotlinCompilerPluginSupportPlugin {
         override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = kotlinCompilation.isApplicablePredicate()
 

@@ -8,15 +8,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 open class Base(
-    val c: Int = 1,
-    val b: String = "hello",
-    val a: List<String> = listOf("a")
+    konst c: Int = 1,
+    konst b: String = "hello",
+    konst a: List<String> = listOf("a")
 )
 
 @Serializable
 abstract class AbstractBase(
-    val x: Int = 1,
-    val y: Int = 2
+    konst x: Int = 1,
+    konst y: Int = 2
 ) {
-    abstract val nonSerializableProp: String
+    abstract konst nonSerializableProp: String
 }

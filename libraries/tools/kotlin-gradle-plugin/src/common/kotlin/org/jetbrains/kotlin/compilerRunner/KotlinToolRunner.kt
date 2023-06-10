@@ -22,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 // Note: this class is public because it is used in the K/N build infrastructure.
 abstract class KotlinToolRunner(
-    private val executionContext: GradleExecutionContext
+    private konst executionContext: GradleExecutionContext
 ) {
     @Deprecated(
         "Using Project object is not compatible with Gradle Configuration Cache",
@@ -35,9 +35,9 @@ abstract class KotlinToolRunner(
      * Context Services that are required for [KotlinToolRunner] during Gradle Task Execution Phase
      */
     class GradleExecutionContext(
-        val filesProvider: (Any) -> ConfigurableFileCollection,
-        val javaexec: ((JavaExecSpec) -> Unit) -> ExecResult,
-        val logger: Logger,
+        konst filesProvider: (Any) -> ConfigurableFileCollection,
+        konst javaexec: ((JavaExecSpec) -> Unit) -> ExecResult,
+        konst logger: Logger,
     ) {
         companion object {
             /**
@@ -70,49 +70,49 @@ abstract class KotlinToolRunner(
     }
 
     // name that will be used in logs
-    abstract val displayName: String
+    abstract konst displayName: String
 
-    abstract val mainClass: String
-    open val daemonEntryPoint: String get() = "main"
+    abstract konst mainClass: String
+    open konst daemonEntryPoint: String get() = "main"
 
-    open val execEnvironment: Map<String, String> = emptyMap()
-    open val execEnvironmentBlacklist: Set<String> = emptySet()
+    open konst execEnvironment: Map<String, String> = emptyMap()
+    open konst execEnvironmentBlacklist: Set<String> = emptySet()
 
-    open val execSystemProperties: Map<String, String> = emptyMap()
-    open val execSystemPropertiesBlacklist: Set<String> = setOf(
+    open konst execSystemProperties: Map<String, String> = emptyMap()
+    open konst execSystemPropertiesBlacklist: Set<String> = setOf(
         "java.endorsed.dirs",       // Fix for KT-25887
         "user.dir",                 // Don't propagate the working dir of the current Gradle process
         "java.system.class.loader"  // Don't use custom class loaders
     )
 
-    abstract val classpath: Set<File>
+    abstract konst classpath: Set<File>
     open fun checkClasspath(): Unit = check(classpath.isNotEmpty()) { "Classpath of the tool is empty: $displayName" }
 
-    abstract val isolatedClassLoaderCacheKey: Any
-    protected open val isolatedClassLoaders: ConcurrentHashMap<Any, URLClassLoader> get() = isolatedClassLoadersMap
+    abstract konst isolatedClassLoaderCacheKey: Any
+    protected open konst isolatedClassLoaders: ConcurrentHashMap<Any, URLClassLoader> get() = isolatedClassLoadersMap
 
     private fun getIsolatedClassLoader(): URLClassLoader = isolatedClassLoaders.computeIfAbsent(isolatedClassLoaderCacheKey) {
-        val arrayOfURLs = classpath.map { File(it.absolutePath).toURI().toURL() }.toTypedArray()
+        konst arrayOfURLs = classpath.map { File(it.absolutePath).toURI().toURL() }.toTypedArray()
         URLClassLoader(arrayOfURLs, null).apply {
             setDefaultAssertionStatus(enableAssertions)
         }
     }
 
-    open val defaultMaxHeapSize: String get() = "3G"
-    open val enableAssertions: Boolean get() = true
-    open val disableC2: Boolean get() = true
+    open konst defaultMaxHeapSize: String get() = "3G"
+    open konst enableAssertions: Boolean get() = true
+    open konst disableC2: Boolean get() = true
 
-    abstract val mustRunViaExec: Boolean
+    abstract konst mustRunViaExec: Boolean
     open fun transformArgs(args: List<String>): List<String> = args
 
     // for the purpose if there is a way to specify JVM args, for instance, straight in project configs
     open fun getCustomJvmArgs(): List<String> = emptyList()
 
-    private val jvmArgs: List<String> by lazy {
+    private konst jvmArgs: List<String> by lazy {
         mutableListOf<String>().apply {
             if (enableAssertions) add("-ea")
 
-            val customJvmArgs = getCustomJvmArgs()
+            konst customJvmArgs = getCustomJvmArgs()
             if (customJvmArgs.none { it.startsWith("-Xmx") }) add("-Xmx$defaultMaxHeapSize")
 
             // Disable C2 compiler for HotSpot VM to improve compilation speed.
@@ -133,9 +133,9 @@ abstract class KotlinToolRunner(
     }
 
     private fun runViaExec(args: List<String>) {
-        val transformedArgs = transformArgs(args)
-        val classpath = executionContext.filesProvider(classpath)
-        val systemProperties = System.getProperties()
+        konst transformedArgs = transformArgs(args)
+        konst classpath = executionContext.filesProvider(classpath)
+        konst systemProperties = System.getProperties()
             /* Capture 'System.getProperties()' current state to avoid potential 'ConcurrentModificationException' */
             .snapshot()
             .asSequence()
@@ -169,8 +169,8 @@ abstract class KotlinToolRunner(
     }
 
     private fun runInProcess(args: List<String>) {
-        val transformedArgs = transformArgs(args)
-        val isolatedClassLoader = getIsolatedClassLoader()
+        konst transformedArgs = transformArgs(args)
+        konst isolatedClassLoader = getIsolatedClassLoader()
 
         executionContext.logger.info(
             """|Run in-process tool "$displayName"
@@ -182,8 +182,8 @@ abstract class KotlinToolRunner(
         )
 
         try {
-            val mainClass = isolatedClassLoader.loadClass(mainClass)
-            val entryPoint = mainClass.methods
+            konst mainClass = isolatedClassLoader.loadClass(mainClass)
+            konst entryPoint = mainClass.methods
                 .singleOrNull { it.name == daemonEntryPoint } ?: error("Couldn't find daemon entry point '$daemonEntryPoint'")
 
             entryPoint.invoke(null, transformedArgs.toTypedArray())
@@ -196,15 +196,15 @@ abstract class KotlinToolRunner(
         private fun String.escapeQuotes() = replace("\"", "\\\"")
 
         private fun Sequence<Pair<String, String>>.escapeQuotesForWindows() =
-            if (HostManager.hostIsMingw) map { (key, value) -> key.escapeQuotes() to value.escapeQuotes() } else this
+            if (HostManager.hostIsMingw) map { (key, konstue) -> key.escapeQuotes() to konstue.escapeQuotes() } else this
 
-        private val isolatedClassLoadersMap = ConcurrentHashMap<Any, URLClassLoader>()
+        private konst isolatedClassLoadersMap = ConcurrentHashMap<Any, URLClassLoader>()
 
         private fun Map<String, String>.toPrettyString(): String = buildString {
             append('[')
             if (this@toPrettyString.isNotEmpty()) append('\n')
-            this@toPrettyString.entries.forEach { (key, value) ->
-                append('\t').append(key).append(" = ").append(value.toPrettyString()).append('\n')
+            this@toPrettyString.entries.forEach { (key, konstue) ->
+                append('\t').append(key).append(" = ").append(konstue.toPrettyString()).append('\n')
             }
             append(']')
         }

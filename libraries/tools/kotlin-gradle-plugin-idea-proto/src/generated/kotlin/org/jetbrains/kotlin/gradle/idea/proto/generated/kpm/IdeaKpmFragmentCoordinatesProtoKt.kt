@@ -10,7 +10,7 @@ object IdeaKpmFragmentCoordinatesProtoKt {
   @kotlin.OptIn(com.google.protobuf.kotlin.OnlyForUseByGeneratedProtoCode::class)
   @com.google.protobuf.kotlin.ProtoDslMarker
   class Dsl private constructor(
-    private val _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.Builder
+    private konst _builder: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.Builder
   ) {
     companion object {
       @kotlin.jvm.JvmSynthetic
@@ -29,8 +29,8 @@ object IdeaKpmFragmentCoordinatesProtoKt {
       @JvmName("getModule")
       get() = _builder.getModule()
       @JvmName("setModule")
-      set(value) {
-        _builder.setModule(value)
+      set(konstue) {
+        _builder.setModule(konstue)
       }
     /**
      * <code>optional .org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto module = 1;</code>
@@ -45,7 +45,7 @@ object IdeaKpmFragmentCoordinatesProtoKt {
     fun hasModule(): kotlin.Boolean {
       return _builder.hasModule()
     }
-    val IdeaKpmFragmentCoordinatesProtoKt.Dsl.moduleOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
+    konst IdeaKpmFragmentCoordinatesProtoKt.Dsl.moduleOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
       get() = _builder.moduleOrNull
 
     /**
@@ -55,8 +55,8 @@ object IdeaKpmFragmentCoordinatesProtoKt {
       @JvmName("getFragmentName")
       get() = _builder.getFragmentName()
       @JvmName("setFragmentName")
-      set(value) {
-        _builder.setFragmentName(value)
+      set(konstue) {
+        _builder.setFragmentName(konstue)
       }
     /**
      * <code>optional string fragment_name = 2;</code>
@@ -77,6 +77,6 @@ object IdeaKpmFragmentCoordinatesProtoKt {
 inline fun org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto.copy(block: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProtoKt.Dsl.() -> kotlin.Unit): org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProto =
   org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProtoKt.Dsl._create(this.toBuilder()).apply { block() }._build()
 
-val org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProtoOrBuilder.moduleOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
+konst org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmFragmentCoordinatesProtoOrBuilder.moduleOrNull: org.jetbrains.kotlin.gradle.idea.proto.generated.kpm.IdeaKpmModuleCoordinatesProto?
   get() = if (hasModule()) getModule() else null
 

@@ -8,10 +8,10 @@ inline fun le(a: Any, b: Any) = lex(a as Comparable<Any>, b)
 inline fun ge(a: Any, b: Any) = gex(a as Comparable<Any>, b)
 inline fun gt(a: Any, b: Any) = gtx(a as Comparable<Any>, b)
 
-val PLUS0F = 0.0F
-val MINUS0F = -0.0F
-val PLUS0D = 0.0
-val MINUS0D = -0.0
+konst PLUS0F = 0.0F
+konst MINUS0F = -0.0F
+konst PLUS0D = 0.0
+konst MINUS0D = -0.0
 
 fun box(): String {
     return when {

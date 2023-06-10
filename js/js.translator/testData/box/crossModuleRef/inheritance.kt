@@ -20,7 +20,7 @@ class B : A() {
 }
 
 fun box(): String {
-    val result = B().bar()
+    konst result = B().bar()
     if (result != 24) return "fail: $result"
     return "OK"
 }

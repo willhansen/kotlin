@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.kapt3.base.stubs
 
-data class KotlinPosition(val path: String, val isRelativePath: Boolean, val pos: Int)
+data class KotlinPosition(konst path: String, konst isRelativePath: Boolean, konst pos: Int)

@@ -32,18 +32,18 @@ import kotlin.reflect.full.memberProperties
  * See [README.md] for more details.
  */
 data class ModulesTxt(
-    val muted: Boolean,
-    val file: File,
-    val fileName: String,
-    val modules: List<Module>,
-    val dependencies: List<Dependency>
+    konst muted: Boolean,
+    konst file: File,
+    konst fileName: String,
+    konst modules: List<Module>,
+    konst dependencies: List<Dependency>
 ) {
     override fun toString() = fileName
 
-    data class Module(val name: String) {
+    data class Module(konst name: String) {
         var index: Int = -1
 
-        val indexedName
+        konst indexedName
             get() = "${index.toString().padStart(2, '0')}_$name"
 
         /**
@@ -51,18 +51,18 @@ data class ModulesTxt(
          */
         var kotlinFacetSettings: KotlinFacetSettings? = null
 
-        val dependencies = mutableListOf<Dependency>()
-        val usages = mutableListOf<Dependency>()
+        konst dependencies = mutableListOf<Dependency>()
+        konst usages = mutableListOf<Dependency>()
 
-        val isCommonModule
+        konst isCommonModule
             get() =
                 kotlinFacetSettings?.targetPlatform.isCommon() ||
                         kotlinFacetSettings?.kind == SOURCE_SET_HOLDER
 
-        val isJvmModule
+        konst isJvmModule
             get() = kotlinFacetSettings?.targetPlatform.isJvm()
 
-        val expectedBy
+        konst expectedBy
             get() = dependencies.filter {
                 it.kind == EXPECTED_BY ||
                         it.kind == INCLUDE
@@ -80,7 +80,7 @@ data class ModulesTxt(
         lateinit var jpsModule: JpsModule
 
         companion object {
-            val flags: Map<String, KMutableProperty1<Module, Boolean>> = Module::class.memberProperties
+            konst flags: Map<String, KMutableProperty1<Module, Boolean>> = Module::class.memberProperties
                 .filter { it.findAnnotation<Flag>() != null }
                 .filterIsInstance<KMutableProperty1<Module, Boolean>>()
                 .associateBy { it.name }
@@ -90,13 +90,13 @@ data class ModulesTxt(
     annotation class Flag
 
     data class Dependency(
-        val from: Module,
-        val to: Module,
-        val scope: JpsJavaDependencyScope,
-        val kind: Kind,
-        val exported: Boolean
+        konst from: Module,
+        konst to: Module,
+        konst scope: JpsJavaDependencyScope,
+        konst kind: Kind,
+        konst exported: Boolean
     ) {
-        val effectivelyExported
+        konst effectivelyExported
             get() = kind == EXPECTED_BY || exported
 
         init {
@@ -115,8 +115,8 @@ data class ModulesTxt(
 class ModulesTxtBuilder {
     var muted = false
 
-    val modules = mutableMapOf<String, ModuleRef>()
-    private val dependencies = mutableListOf<DependencyBuilder>()
+    konst modules = mutableMapOf<String, ModuleRef>()
+    private konst dependencies = mutableListOf<DependencyBuilder>()
 
     /**
      * Reference to module which can be defined later
@@ -128,9 +128,9 @@ class ModulesTxtBuilder {
         override fun toString() = actual.name
 
         fun build(index: Int): ModulesTxt.Module {
-            val result = actual
+            konst result = actual
             result.index = index
-            val kotlinFacetSettings = result.kotlinFacetSettings
+            konst kotlinFacetSettings = result.kotlinFacetSettings
             if (kotlinFacetSettings != null) {
                 kotlinFacetSettings.implementedModuleNames =
                         result.dependencies.asSequence()
@@ -152,11 +152,11 @@ class ModulesTxtBuilder {
      * Temporary object for resolving references to modules.
      */
     data class DependencyBuilder(
-        val from: ModuleRef,
-        val to: ModuleRef,
-        val scope: JpsJavaDependencyScope,
-        val kind: ModulesTxt.Dependency.Kind,
-        val exported: Boolean
+        konst from: ModuleRef,
+        konst to: ModuleRef,
+        konst scope: JpsJavaDependencyScope,
+        konst kind: ModulesTxt.Dependency.Kind,
+        konst exported: Boolean
     ) {
         fun build(): ModulesTxt.Dependency {
             when (kind) {
@@ -179,8 +179,8 @@ class ModulesTxtBuilder {
             }
 
             // dependencies need to be build first: module.build() requires it
-            val dependencies = dependencies.map { it.build() }
-            val modules = modules.values.mapIndexed { index, moduleRef -> moduleRef.build(index) }
+            konst dependencies = dependencies.map { it.build() }
+            konst modules = modules.konstues.mapIndexed { index, moduleRef -> moduleRef.build(index) }
 
             return ModulesTxt(muted, file, fileTitle, modules, dependencies)
         } catch (t: Throwable) {
@@ -199,12 +199,12 @@ class ModulesTxtBuilder {
                 muted = true
             }
             line.contains("->") -> {
-                val (from, rest) = line.split("->", limit = 2)
+                konst (from, rest) = line.split("->", limit = 2)
                 if (rest.isBlank()) {
                     // `name -> ` - module
                     newModule(ValueWithFlags(from))
                 } else {
-                    val (to, flags) = parseValueWithFlags(rest.trim())
+                    konst (to, flags) = parseValueWithFlags(rest.trim())
                     newDependency(from.trim(), to.trim(), flags) // `from -> to [flag1, flag2, ...]` - dependency
                 }
             }
@@ -213,14 +213,14 @@ class ModulesTxtBuilder {
     }
 
     /**
-     * `value [flag1, flag2, ...]`
+     * `konstue [flag1, flag2, ...]`
      */
     private fun parseValueWithFlags(str: String): ValueWithFlags {
-        val parts = str.split("[", limit = 2)
+        konst parts = str.split("[", limit = 2)
         return if (parts.size > 1) {
-            val (value, flags) = parts
+            konst (konstue, flags) = parts
             ValueWithFlags(
-                value = value.trim(),
+                konstue = konstue.trim(),
                 flags = flags.trim()
                     .removeSuffix("]")
                     .split(",")
@@ -231,16 +231,16 @@ class ModulesTxtBuilder {
         } else ValueWithFlags(str)
     }
 
-    data class ValueWithFlags(val value: String, val flags: Set<String> = setOf())
+    data class ValueWithFlags(konst konstue: String, konst flags: Set<String> = setOf())
 
     private fun moduleRef(name: String) =
         modules.getOrPut(name) { ModuleRef(name) }
 
     private fun newModule(def: ValueWithFlags): ModulesTxt.Module {
-        val name = def.value.trim()
+        konst name = def.konstue.trim()
 
-        val module = ModulesTxt.Module(name)
-        val settings = KotlinFacetSettings()
+        konst module = ModulesTxt.Module(name)
+        konst settings = KotlinFacetSettings()
         module.kotlinFacetSettings = settings
 
         settings.useProjectSettings = false
@@ -248,7 +248,7 @@ class ModulesTxtBuilder {
             it.additionalArguments = "-version -Xmulti-platform"
         }
 
-        val moduleRef = moduleRef(name)
+        konst moduleRef = moduleRef(name)
         check(!moduleRef.defined) { "Module `$name` already defined" }
         moduleRef.defined = true
         moduleRef.actual = module
@@ -269,7 +269,7 @@ class ModulesTxtBuilder {
                 "native" -> settings.compilerArguments =
                     K2NativeCompilerArguments().also { settings.targetPlatform = NativePlatforms.unspecifiedNativePlatform }
                 else -> {
-                    val flagProperty = ModulesTxt.Module.flags[flag]
+                    konst flagProperty = ModulesTxt.Module.flags[flag]
                     if (flagProperty != null) flagProperty.set(module, true)
                     else error("Unknown module flag `$flag`")
                 }

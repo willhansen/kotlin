@@ -7,13 +7,13 @@ package org.jetbrains.kotlin.analysis.utils.collections
 
 import java.util.concurrent.ConcurrentMap
 
-public class ConcurrentMapBasedCache<K, V>(public val map: ConcurrentMap<K, Any>) {
+public class ConcurrentMapBasedCache<K, V>(public konst map: ConcurrentMap<K, Any>) {
     public inline fun getOrPut(
         key: K,
         crossinline compute: (K) -> V?
     ): V {
-        val value = map.getOrPut(key) { compute(key) ?: NullValue }
-        return value.nullValueToNull()
+        konst konstue = map.getOrPut(key) { compute(key) ?: NullValue }
+        return konstue.nullValueToNull()
     }
 }
 

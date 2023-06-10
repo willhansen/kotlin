@@ -1,5 +1,5 @@
 fun box(): String {
-  val r = 1.toLong()..2
+  konst r = 1.toLong()..2
   var s = ""
   for (l in r) {
     s += l

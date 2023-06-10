@@ -28,16 +28,16 @@ class FileSnapshotMap(
     icContext: IncrementalCompilationContext,
 ) : BasicStringMap<FileSnapshot>(storageFile, PathStringDescriptor, FileSnapshotExternalizer, icContext) {
 
-    override fun dumpValue(value: FileSnapshot): String =
-        value.toString()
+    override fun dumpValue(konstue: FileSnapshot): String =
+        konstue.toString()
 
     @Synchronized
     fun compareAndUpdate(newFiles: Iterable<File>): ChangedFiles.Known {
-        val snapshotProvider = SimpleFileSnapshotProviderImpl()
-        val newOrModified = ArrayList<File>()
-        val removed = ArrayList<File>()
+        konst snapshotProvider = SimpleFileSnapshotProviderImpl()
+        konst newOrModified = ArrayList<File>()
+        konst removed = ArrayList<File>()
 
-        val newPaths = newFiles.mapTo(HashSet(), transform = pathConverter::toPath)
+        konst newPaths = newFiles.mapTo(HashSet(), transform = pathConverter::toPath)
         for (oldPath in storage.keys) {
             if (oldPath !in newPaths) {
                 storage.remove(oldPath)
@@ -46,9 +46,9 @@ class FileSnapshotMap(
         }
 
         for (path in newPaths) {
-            val file = pathConverter.toFile(path)
-            val oldSnapshot = storage[path]
-            val newSnapshot = snapshotProvider[file]
+            konst file = pathConverter.toFile(path)
+            konst oldSnapshot = storage[path]
+            konst newSnapshot = snapshotProvider[file]
 
             if (oldSnapshot == null || oldSnapshot != newSnapshot) {
                 newOrModified.add(file)

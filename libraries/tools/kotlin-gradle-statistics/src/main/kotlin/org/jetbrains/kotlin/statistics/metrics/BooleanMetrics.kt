@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.statistics.metrics.BooleanAnonymizationPolicy.*
 import org.jetbrains.kotlin.statistics.metrics.BooleanOverridePolicy.*
 
 
-enum class BooleanMetrics(val type: BooleanOverridePolicy, val anonymization: BooleanAnonymizationPolicy, val perProject: Boolean = false) {
+enum class BooleanMetrics(konst type: BooleanOverridePolicy, konst anonymization: BooleanAnonymizationPolicy, konst perProject: Boolean = false) {
 
     // whether the build is executed from IDE or from console
     EXECUTED_FROM_IDEA(OVERRIDE, SAFE),
@@ -71,6 +71,6 @@ enum class BooleanMetrics(val type: BooleanOverridePolicy, val anonymization: Bo
     KOTLIN_COMPILATION_FAILED(OR, SAFE);
 
     companion object {
-        const val VERSION = 1
+        const konst VERSION = 1
     }
 }

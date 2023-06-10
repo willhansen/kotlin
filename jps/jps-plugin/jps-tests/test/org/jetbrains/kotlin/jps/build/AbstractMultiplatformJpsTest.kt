@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.jps.build.dependeciestxt.MppJpsIncTestsGenerator
 import java.io.File
 
 abstract class AbstractMultiplatformJpsTestWithGeneratedContent : AbstractIncrementalJpsTest() {
-    override val modulesTxtFile: File
+    override konst modulesTxtFile: File
         get() = File(testDataDir.parent, "dependencies.txt").also {
             check(it.exists()) {
                 "`dependencies.txt` should be in parent dir. " +
@@ -18,20 +18,20 @@ abstract class AbstractMultiplatformJpsTestWithGeneratedContent : AbstractIncrem
             }
         }
 
-    override val testDataSrc: File
+    override konst testDataSrc: File
         get() = File(workDir, "generatedTestDataSources")
 
     override fun generateModuleSources(modulesTxt: ModulesTxt) {
         testDataSrc.mkdirs()
 
-        val testCaseName = testDataDir.name
+        konst testCaseName = testDataDir.name
 
-        val generator = MppJpsIncTestsGenerator(modulesTxt) { testDataSrc }
-        val testCase = generator.testCases.find { it.name == testCaseName }
+        konst generator = MppJpsIncTestsGenerator(modulesTxt) { testDataSrc }
+        konst testCase = generator.testCases.find { it.name == testCaseName }
             ?: error("Test case `$testCaseName` is not configured in ${modulesTxt.fileName}")
         testCase.generate()
     }
 
-    override val ModulesTxt.Module.sourceFilePrefix: String
+    override konst ModulesTxt.Module.sourceFilePrefix: String
         get() = "${indexedName}_"
 }

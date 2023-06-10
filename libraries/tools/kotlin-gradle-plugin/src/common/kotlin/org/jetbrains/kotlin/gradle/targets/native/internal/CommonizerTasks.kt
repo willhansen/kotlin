@@ -19,24 +19,24 @@ import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.gradle.plugin.ide.Idea222Api
 import org.jetbrains.kotlin.gradle.plugin.ide.ideaImportDependsOn
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.tasks.dependsOn
 import org.jetbrains.kotlin.gradle.tasks.locateOrRegisterTask
 import java.io.File
 import javax.inject.Inject
 
-internal val Project.isCInteropCommonizationEnabled: Boolean get() = PropertiesProvider(this).enableCInteropCommonization
+internal konst Project.isCInteropCommonizationEnabled: Boolean get() = PropertiesProvider(this).enableCInteropCommonization
 
-internal val Project.isIntransitiveMetadataConfigurationEnabled: Boolean
+internal konst Project.isIntransitiveMetadataConfigurationEnabled: Boolean
     get() = PropertiesProvider(this).enableIntransitiveMetadataConfiguration
 
-internal val Project.isOptimisticNumberCommonizationEnabled: Boolean
+internal konst Project.isOptimisticNumberCommonizationEnabled: Boolean
     get() = PropertiesProvider(this).mppEnableOptimisticNumberCommonization
 
-internal val Project.isPlatformIntegerCommonizationEnabled: Boolean
+internal konst Project.isPlatformIntegerCommonizationEnabled: Boolean
     get() = PropertiesProvider(this).mppEnablePlatformIntegerCommonization
 
-internal val Project.commonizeTask: TaskProvider<Task>
+internal konst Project.commonizeTask: TaskProvider<Task>
     get() = locateOrRegisterTask(
         "commonize",
         invokeWhenRegistered = {
@@ -57,7 +57,7 @@ internal val Project.commonizeTask: TaskProvider<Task>
  * Keeping this task/task name for IDE compatibility which is invoking 'runCommonizer' during sync
  */
 @Deprecated("Use 'commonizeTask' instead. Keeping the task for IDE compatibility", replaceWith = ReplaceWith("commonizeTask"))
-internal val Project.runCommonizerTask: TaskProvider<Task>
+internal konst Project.runCommonizerTask: TaskProvider<Task>
     get() = locateOrRegisterTask(
         "runCommonizer",
         configureTask = {
@@ -66,15 +66,15 @@ internal val Project.runCommonizerTask: TaskProvider<Task>
         }
     )
 
-internal val Project.commonizeCInteropTask: TaskProvider<CInteropCommonizerTask>?
+internal konst Project.commonizeCInteropTask: TaskProvider<CInteropCommonizerTask>?
     get() {
         if (isCInteropCommonizationEnabled) {
             return locateOrRegisterTask(
                 "commonizeCInterop",
                 invokeWhenRegistered = {
-                    val task = this
+                    konst task = this
                     commonizeTask.dependsOn(this)
-                    whenEvaluated {
+                    whenEkonstuated {
                         commonizeNativeDistributionTask?.let(task::dependsOn)
                     }
                 },
@@ -91,9 +91,9 @@ internal val Project.commonizeCInteropTask: TaskProvider<CInteropCommonizerTask>
         return null
     }
 
-internal val Project.copyCommonizeCInteropForIdeTask: TaskProvider<CopyCommonizeCInteropForIdeTask>?
+internal konst Project.copyCommonizeCInteropForIdeTask: TaskProvider<CopyCommonizeCInteropForIdeTask>?
     get() {
-        val commonizeCInteropTask = commonizeCInteropTask
+        konst commonizeCInteropTask = commonizeCInteropTask
         if (commonizeCInteropTask != null) {
             return locateOrRegisterTask(
                 "copyCommonizeCInteropForIde",
@@ -116,7 +116,7 @@ internal val Project.copyCommonizeCInteropForIdeTask: TaskProvider<CopyCommonize
         return null
     }
 
-internal val Project.commonizeNativeDistributionTask: TaskProvider<NativeDistributionCommonizerTask>?
+internal konst Project.commonizeNativeDistributionTask: TaskProvider<NativeDistributionCommonizerTask>?
     get() {
         if (!isAllowCommonizer()) return null
         return rootProject.locateOrRegisterTask(
@@ -146,9 +146,9 @@ internal val Project.commonizeNativeDistributionTask: TaskProvider<NativeDistrib
         )
     }
 
-internal val Project.cleanNativeDistributionCommonizerTask: TaskProvider<CleanNativeDistributionCommonizerTask>?
+internal konst Project.cleanNativeDistributionCommonizerTask: TaskProvider<CleanNativeDistributionCommonizerTask>?
     get() {
-        val commonizeNativeDistributionTask = commonizeNativeDistributionTask ?: return null
+        konst commonizeNativeDistributionTask = commonizeNativeDistributionTask ?: return null
         return rootProject.locateOrRegisterTask(
             "cleanNativeDistributionCommonization",
             configureTask = {
@@ -162,15 +162,15 @@ internal val Project.cleanNativeDistributionCommonizerTask: TaskProvider<CleanNa
 
 internal abstract class CleanNativeDistributionCommonizerTask : DefaultTask() {
     @get:Inject
-    abstract val fileSystemOperations: FileSystemOperations
+    abstract konst fileSystemOperations: FileSystemOperations
 
     @get:OutputDirectory
-    abstract val commonizerDirectory: Property<File>
+    abstract konst commonizerDirectory: Property<File>
 
     @TaskAction
     fun action() {
         NativeDistributionCommonizerLock(commonizerDirectory.get()).withLock { lockFile ->
-            val files = commonizerDirectory.get().listFiles().orEmpty().toSet() - lockFile
+            konst files = commonizerDirectory.get().listFiles().orEmpty().toSet() - lockFile
             fileSystemOperations.delete {
                 it.delete(files)
             }

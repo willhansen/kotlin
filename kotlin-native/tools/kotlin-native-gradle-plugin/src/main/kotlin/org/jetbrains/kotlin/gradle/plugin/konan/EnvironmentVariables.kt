@@ -42,32 +42,32 @@ import java.util.*
  */
 
 internal interface EnvironmentVariables {
-    val configurationBuildDir: File?
-    val debuggingSymbols: Boolean
-    val enableOptimizations: Boolean
+    konst configurationBuildDir: File?
+    konst debuggingSymbols: Boolean
+    konst enableOptimizations: Boolean
 }
 
 internal class EnvironmentVariablesUnused: EnvironmentVariables {
-    override val configurationBuildDir: File?
+    override konst configurationBuildDir: File?
         get() = null
 
-    override val debuggingSymbols: Boolean
+    override konst debuggingSymbols: Boolean
         get() = false
 
-    override val enableOptimizations: Boolean
+    override konst enableOptimizations: Boolean
         get() = false
 }
 
-internal class EnvironmentVariablesImpl(val project: Project):  EnvironmentVariables {
-    override val configurationBuildDir: File?
+internal class EnvironmentVariablesImpl(konst project: Project):  EnvironmentVariables {
+    override konst configurationBuildDir: File?
         get() = System.getenv("CONFIGURATION_BUILD_DIR")?.let {
             project.file(it)
         }
 
-    override val debuggingSymbols: Boolean
+    override konst debuggingSymbols: Boolean
         get() = System.getenv("DEBUGGING_SYMBOLS")?.uppercase() == "YES"
 
-    override val enableOptimizations: Boolean
+    override konst enableOptimizations: Boolean
         get() = System.getenv("KONAN_ENABLE_OPTIMIZATIONS")?.uppercase() == "YES"
 }
 
@@ -76,24 +76,24 @@ internal class EnvironmentVariablesImpl(val project: Project):  EnvironmentVaria
  * variables in Java 9. Until Gradle API for environment variables is provided
  * we use project properties instead of them. TODO: Return to using env vars when the issue is fixed.
  */
-internal class EnvironmentVariablesFromProperties(val project: Project): EnvironmentVariables {
-    override val configurationBuildDir: File?
+internal class EnvironmentVariablesFromProperties(konst project: Project): EnvironmentVariables {
+    override konst configurationBuildDir: File?
         get() = project.findProperty(ProjectProperty.KONAN_CONFIGURATION_BUILD_DIR)?.let {
             project.file(it)
         }
 
-    override val debuggingSymbols: Boolean
+    override konst debuggingSymbols: Boolean
         get() = project.findProperty(ProjectProperty.KONAN_DEBUGGING_SYMBOLS)?.toString()?.uppercase(Locale.getDefault()).let {
             it == "YES" || it == "TRUE"
         }
 
-    override val enableOptimizations: Boolean
+    override konst enableOptimizations: Boolean
         get() = project.findProperty(ProjectProperty.KONAN_OPTIMIZATIONS_ENABLE)?.toString()?.uppercase(Locale.getDefault()).let {
             it == "YES" || it == "TRUE"
         }
 }
 
-internal val Project.useEnvironmentVariables: Boolean
+internal konst Project.useEnvironmentVariables: Boolean
     get() = findProperty(ProjectProperty.KONAN_USE_ENVIRONMENT_VARIABLES)?.toString()?.toBoolean() ?: false
 
 /*
@@ -106,5 +106,5 @@ internal val Project.useEnvironmentVariables: Boolean
      EnvironmentVariablesUnused()
  }
 */
-internal val Project.environmentVariables: EnvironmentVariables
+internal konst Project.environmentVariables: EnvironmentVariables
     get() = EnvironmentVariablesFromProperties(project)

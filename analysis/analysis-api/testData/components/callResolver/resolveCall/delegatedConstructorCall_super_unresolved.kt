@@ -1,5 +1,5 @@
 class Base(
-    val p1: Int
+    konst p1: Int
 )
 
 class Sub(

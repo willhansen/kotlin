@@ -3,7 +3,7 @@
 // CHECK:
 //   Mangled name: {}bar
 //   Public signature: /bar|-7864284097863469857[0]
-val bar: Int
+konst bar: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-bar>(){}kotlin.Int
   //   Public signature: /bar.<get-bar>|-7403724005139201014[0]

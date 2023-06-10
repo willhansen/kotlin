@@ -13,12 +13,12 @@ class Z1 : A<Int>, B by Z()
 class Z2 : B by Z(), A<Int>
 
 fun box(): String {
-    val z1 = Z1()
-    val z2 = Z2()
-    val z1a: A<Int> = z1
-    val z1b: B = z1
-    val z2a: A<Int> = z2
-    val z2b: B = z2
+    konst z1 = Z1()
+    konst z2 = Z2()
+    konst z1a: A<Int> = z1
+    konst z1b: B = z1
+    konst z2a: A<Int> = z2
+    konst z2b: B = z2
 
     return when {
         z1.foo( 0)  != "B" -> "Fail #1"

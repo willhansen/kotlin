@@ -1,10 +1,10 @@
 
 abstract class Foo {
-    abstract val bar: Bar?
+    abstract konst bar: Bar?
 }
 
 abstract class Bar {
-    abstract val buz: Buz?
+    abstract konst buz: Buz?
 }
 
 class Buz

@@ -184,7 +184,7 @@ abstract class AML : MutableList<Int> {
   // CHECK:
   //   Mangled name: AML{}size
   //   Public signature: /AML.size|-6253659984320132064[0]
-  abstract /* fake */ override val size: Int
+  abstract /* fake */ override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: AML#<get-size>(){}kotlin.Int
     //   Public signature: /AML.size.<get-size>|-3941649985161900780[0]
@@ -211,7 +211,7 @@ interface X {
   // CHECK:
   //   Mangled name: X{}xs
   //   Public signature: /X.xs|1063330853857063704[0]
-  abstract val xs: MutableList<Any>
+  abstract konst xs: MutableList<Any>
     // CHECK JVM_IR:
     //   Mangled name: X#<get-xs>(){}kotlin.collections.MutableList<kotlin.Any>
     //   Public signature: /X.xs.<get-xs>|4835834621360897253[0]

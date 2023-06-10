@@ -2,10 +2,10 @@ interface Callback {
     fun invoke(): String
 }
 
-open class Base(val fn: Callback)
+open class Base(konst fn: Callback)
 
 fun box(): String {
-    val ok = "OK"
+    konst ok = "OK"
 
     class Local : Base(
             object : Callback {

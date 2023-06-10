@@ -10,7 +10,7 @@ enum class ImplementationStatus {
     /** This symbol is not implemented and should be implemented if the class is not abstract. */
     NOT_IMPLEMENTED,
 
-    /** This symbol is a var property but only has a val property as implementation */
+    /** This symbol is a var property but only has a konst property as implementation */
     VAR_IMPLEMENTED_BY_VAL,
 
     /** The symbol is inheriting multiple non-abstract symbols and hence must be explicitly implemented. */
@@ -31,7 +31,7 @@ enum class ImplementationStatus {
      */
     CANNOT_BE_IMPLEMENTED;
 
-    val shouldBeImplemented: Boolean get() = this == NOT_IMPLEMENTED || this == AMBIGUOUSLY_INHERITED
-    val isOverridable: Boolean get() = this != ALREADY_IMPLEMENTED && this != CANNOT_BE_IMPLEMENTED
+    konst shouldBeImplemented: Boolean get() = this == NOT_IMPLEMENTED || this == AMBIGUOUSLY_INHERITED
+    konst isOverridable: Boolean get() = this != ALREADY_IMPLEMENTED && this != CANNOT_BE_IMPLEMENTED
 }
 

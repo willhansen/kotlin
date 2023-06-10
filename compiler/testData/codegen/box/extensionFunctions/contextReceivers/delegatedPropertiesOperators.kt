@@ -16,9 +16,9 @@ class Delegate {
     }
 
     context(Int)
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, konstue: String) {
         operationScore += this@Int
-        delegateValue = value
+        delegateValue = konstue
     }
 }
 
@@ -28,8 +28,8 @@ class Result {
 }
 
 fun box(): String {
-    val result = with(1) { Result() }
+    konst result = with(1) { Result() }
     result.s = "OK"
-    val returnValue = result.s
+    konst returnValue = result.s
     return if (operationScore == 2) returnValue else "fail"
 }

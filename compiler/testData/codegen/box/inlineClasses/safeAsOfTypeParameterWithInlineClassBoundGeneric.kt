@@ -6,7 +6,7 @@
 interface X
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val value: T) : X
+konstue class Z<T: Int>(konst konstue: T) : X
 
 fun <T> test(t: T) where T : X, T : Z<Int> = t as? Int
 

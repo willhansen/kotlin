@@ -15,9 +15,9 @@ import org.jetbrains.kotlin.descriptors.Visibility
 
 internal interface KtFe10DescMemberSymbol<T : MemberDescriptor> :
     KtFe10DescSymbol<T>, KtSymbolWithVisibility, KtSymbolWithModality, KtSymbolWithKind {
-    override val modality: Modality
+    override konst modality: Modality
         get() = withValidityAssertion { descriptor.ktModality }
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = withValidityAssertion { descriptor.ktVisibility }
 }

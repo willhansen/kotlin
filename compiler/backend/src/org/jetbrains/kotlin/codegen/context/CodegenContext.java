@@ -337,7 +337,7 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
 
     @NotNull
     public ClosureContext intoCoroutineClosure(
-            // copy of lambda descriptor that has an additional value parameter Continuation<T>
+            // copy of lambda descriptor that has an additional konstue parameter Continuation<T>
             @NotNull FunctionDescriptor jvmViewOfSuspendLambda,
             // original coroutine lambda descriptor
             @NotNull FunctionDescriptor originalSuspendLambdaDescriptor,
@@ -547,7 +547,7 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
                 return StackValue.changeReceiverForFieldAndSharedVar(capturedVariable.getInnerValue(), result);
             }
 
-            for (LocalLookup.LocalLookupCase aCase : LocalLookup.LocalLookupCase.values()) {
+            for (LocalLookup.LocalLookupCase aCase : LocalLookup.LocalLookupCase.konstues()) {
                 if (aCase.isCase(d)) {
                     Type classType = state.getTypeMapper().mapType(getThisDescriptor());
                     StackValue.StackValueWithSimpleReceiver innerValue = aCase.innerValue(d, enclosingLocalLookup, state, closure, classType);
@@ -582,7 +582,7 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
     @NotNull
     @ReadOnly
     public Collection<? extends AccessorForCallableDescriptor<?>> getAccessors() {
-        return accessors == null ? Collections.<AccessorForCallableDescriptor<CallableMemberDescriptor>>emptySet() : accessors.values();
+        return accessors == null ? Collections.<AccessorForCallableDescriptor<CallableMemberDescriptor>>emptySet() : accessors.konstues();
     }
 
     @SuppressWarnings("unchecked")
@@ -726,8 +726,8 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
         return childContexts == null ? null : childContexts.get(child);
     }
 
-    private static boolean isStaticField(@NotNull StackValue value) {
-        return value instanceof StackValue.Field && ((StackValue.Field) value).isStaticPut;
+    private static boolean isStaticField(@NotNull StackValue konstue) {
+        return konstue instanceof StackValue.Field && ((StackValue.Field) konstue).isStaticPut;
     }
 
     public boolean isInlineMethodContext() {
@@ -760,7 +760,7 @@ public abstract class CodegenContext<T extends DeclarationDescriptor> {
 
     @NotNull
     public Collection<AccessorForCompanionObjectInstanceFieldDescriptor> getRequiredAccessorsForCompanionObjects() {
-        return accessorsForCompanionObjects.values();
+        return accessorsForCompanionObjects.konstues();
     }
 
 }

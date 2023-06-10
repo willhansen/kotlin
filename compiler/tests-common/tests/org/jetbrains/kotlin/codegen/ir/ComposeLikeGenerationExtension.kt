@@ -62,7 +62,7 @@ class ComposeLikeExtensionRegistrar : ComponentRegistrar {
 }
 
 class ComposeLikeGenerationExtension : IrGenerationExtension {
-    private val rewrittenFunctions = mutableSetOf<IrFunction>()
+    private konst rewrittenFunctions = mutableSetOf<IrFunction>()
 
     override fun generate(moduleFragment: IrModuleFragment, pluginContext: IrPluginContext) {
         moduleFragment.transformChildrenVoid(ComposeLikeDefaultArgumentRewriter(pluginContext, rewrittenFunctions))
@@ -70,10 +70,10 @@ class ComposeLikeGenerationExtension : IrGenerationExtension {
     }
 }
 
-class ComposeLikeDefaultMethodCallRewriter(private val context: IrPluginContext, private val rewrittenFunctions: Set<IrFunction>) :
+class ComposeLikeDefaultMethodCallRewriter(private konst context: IrPluginContext, private konst rewrittenFunctions: Set<IrFunction>) :
     IrElementTransformerVoid() {
     override fun visitCall(expression: IrCall): IrExpression {
-        val function = expression.symbol.owner
+        konst function = expression.symbol.owner
         return if (rewrittenFunctions.contains(function)) {
             IrCallImpl(
                 expression.startOffset,
@@ -81,15 +81,15 @@ class ComposeLikeDefaultMethodCallRewriter(private val context: IrPluginContext,
                 expression.type,
                 expression.symbol,
                 function.typeParameters.size,
-                function.valueParameters.size,
+                function.konstueParameters.size,
                 expression.origin,
                 expression.superQualifierSymbol
             ).also {
                 it.dispatchReceiver = expression.dispatchReceiver?.transform(this, null)
                 it.extensionReceiver = expression.extensionReceiver?.transform(this, null)
                 var bitmap = 0
-                for (i in function.valueParameters.indices) {
-                    if (i < expression.valueArgumentsCount) {
+                for (i in function.konstueParameters.indices) {
+                    if (i < expression.konstueArgumentsCount) {
                         if (expression.getValueArgument(i) != null) {
                             it.putValueArgument(i, expression.getValueArgument(i))
                         } else {
@@ -99,7 +99,7 @@ class ComposeLikeDefaultMethodCallRewriter(private val context: IrPluginContext,
                                 IrConstImpl.defaultValueForType(
                                     UNDEFINED_OFFSET,
                                     UNDEFINED_OFFSET,
-                                    function.valueParameters[i].type
+                                    function.konstueParameters[i].type
                                 ).let { defaultValue ->
                                     IrCompositeImpl(
                                         defaultValue.startOffset,
@@ -114,7 +114,7 @@ class ComposeLikeDefaultMethodCallRewriter(private val context: IrPluginContext,
                     }
                 }
                 it.putValueArgument(
-                    function.valueParameters.size - 1,
+                    function.konstueParameters.size - 1,
                     IrConstImpl.int(UNDEFINED_OFFSET, UNDEFINED_OFFSET, context.irBuiltIns.intType, bitmap)
                 )
             }
@@ -125,10 +125,10 @@ class ComposeLikeDefaultMethodCallRewriter(private val context: IrPluginContext,
 }
 
 class ComposeLikeDefaultArgumentRewriter(
-    private val context: IrPluginContext,
-    private val rewrittenFunctions: MutableSet<IrFunction>
+    private konst context: IrPluginContext,
+    private konst rewrittenFunctions: MutableSet<IrFunction>
 ) : IrElementTransformerVoid() {
-    private val parameterMapping = mutableMapOf<IrValueParameter, IrValueParameter>()
+    private konst parameterMapping = mutableMapOf<IrValueParameter, IrValueParameter>()
 
     override fun visitGetValue(expression: IrGetValue): IrExpression {
         parameterMapping[expression.symbol.owner]?.let {
@@ -143,14 +143,14 @@ class ComposeLikeDefaultArgumentRewriter(
     }
 
     override fun visitFunction(declaration: IrFunction): IrStatement {
-        val hasDefaultArguments = declaration.valueParameters.any { it.defaultValue != null }
+        konst hasDefaultArguments = declaration.konstueParameters.any { it.defaultValue != null }
         if (!hasDefaultArguments) return super.visitFunction(declaration)
         rewrittenFunctions.add(declaration)
-        val newParameters = mutableListOf<IrValueParameter>()
-        declaration.valueParameters.forEach { param ->
+        konst newParameters = mutableListOf<IrValueParameter>()
+        declaration.konstueParameters.forEach { param ->
             newParameters.add(
                 if (param.defaultValue != null) {
-                    val result = IrValueParameterImpl(
+                    konst result = IrValueParameterImpl(
                         param.startOffset,
                         param.endOffset,
                         param.origin,
@@ -172,18 +172,18 @@ class ComposeLikeDefaultArgumentRewriter(
                 } else param
             )
         }
-        declaration.valueParameters = newParameters
-        val defaultParam = declaration.addValueParameter(
+        declaration.konstueParameters = newParameters
+        konst defaultParam = declaration.addValueParameter(
             "\$default",
             context.irBuiltIns.intType,
             IrDeclarationOrigin.MASK_FOR_DEFAULT_FUNCTION
         )
         declaration.transformChildrenVoid()
-        val body = declaration.body!!
-        val defaultSelection = mutableListOf<IrStatement>()
-        declaration.valueParameters.forEach {
+        konst body = declaration.body!!
+        konst defaultSelection = mutableListOf<IrStatement>()
+        declaration.konstueParameters.forEach {
             if (it.hasDefaultValue()) {
-                val index = defaultSelection.size
+                konst index = defaultSelection.size
                 defaultSelection.add(
                     irIf(
                         condition = irGetBit(defaultParam, index),
@@ -206,7 +206,7 @@ class ComposeLikeDefaultArgumentRewriter(
     }
 
     private fun defaultParameterType(param: IrValueParameter): IrType {
-        val type = param.type
+        konst type = param.type
         return when {
             type.isPrimitiveType() -> type
             type.isInlineClassType() -> type
@@ -227,13 +227,13 @@ class ComposeLikeDefaultArgumentRewriter(
         }
     }
 
-    private fun irSet(variable: IrValueDeclaration, value: IrExpression): IrExpression {
+    private fun irSet(variable: IrValueDeclaration, konstue: IrExpression): IrExpression {
         return IrSetValueImpl(
             UNDEFINED_OFFSET,
             UNDEFINED_OFFSET,
             context.irBuiltIns.unitType,
             variable.symbol,
-            value = value,
+            konstue = konstue,
             origin = null
         )
     }
@@ -243,10 +243,10 @@ class ComposeLikeDefaultArgumentRewriter(
     }
 
     private fun irGetBit(param: IrValueParameter, index: Int): IrExpression {
-        // value and (1 shl index) != 0
+        // konstue and (1 shl index) != 0
         return irNotEqual(
             irAnd(
-                // a value of 1 in default means it was NOT provided
+                // a konstue of 1 in default means it was NOT provided
                 irGet(param),
                 irConst(0b1 shl index)
             ),
@@ -254,12 +254,12 @@ class ComposeLikeDefaultArgumentRewriter(
         )
     }
 
-    private fun irConst(value: Int): IrConst<Int> = IrConstImpl(
+    private fun irConst(konstue: Int): IrConst<Int> = IrConstImpl(
         UNDEFINED_OFFSET,
         UNDEFINED_OFFSET,
         context.irBuiltIns.intType,
         IrConstKind.Int,
-        value
+        konstue
     )
 
     private fun irGet(type: IrType, symbol: IrValueSymbol): IrExpression {
@@ -301,7 +301,7 @@ class ComposeLikeDefaultArgumentRewriter(
             symbol.owner.returnType,
             symbol as IrSimpleFunctionSymbol,
             symbol.owner.typeParameters.size,
-            symbol.owner.valueParameters.size,
+            symbol.owner.konstueParameters.size,
             origin
         ).also {
             if (dispatchReceiver != null) it.dispatchReceiver = dispatchReceiver
@@ -312,10 +312,10 @@ class ComposeLikeDefaultArgumentRewriter(
         }
     }
 
-    private fun irNot(value: IrExpression): IrExpression {
+    private fun irNot(konstue: IrExpression): IrExpression {
         return irCall(
             context.irBuiltIns.booleanNotSymbol,
-            dispatchReceiver = value
+            dispatchReceiver = konstue
         )
     }
 

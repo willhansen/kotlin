@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 @Anno(ABC::class)
 class ErrorInAnnotation
 
-class ErrorInConstructorParameter(val a: String, val b: ABC, val c: List<ABC>)
+class ErrorInConstructorParameter(konst a: String, konst b: ABC, konst c: List<ABC>)
 
 class ErrorInSupertype : ABC
 class ErrorInSupertype2 : ABC<String>()
@@ -25,7 +25,7 @@ class ErrorInDeclarations {
     fun f4(): ABC? = null
 }
 
-annotation class Anno(val a: KClass<Any>)
+annotation class Anno(konst a: KClass<Any>)
 
 // EXPECTED_ERROR: (kotlin:11:1) cannot find symbol
 // EXPECTED_ERROR: (kotlin:6:1) cannot find symbol

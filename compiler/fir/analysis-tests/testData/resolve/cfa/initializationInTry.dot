@@ -44,7 +44,7 @@ digraph initializationInTry_kt {
         subgraph cluster_5 {
             color=blue
             12 [label="Enter block"];
-            13 [label="Variable declaration: lval x: R|kotlin/String?|"];
+            13 [label="Variable declaration: lkonst x: R|kotlin/String?|"];
             subgraph cluster_6 {
                 color=blue
                 14 [label="Try expression enter"];
@@ -56,7 +56,7 @@ digraph initializationInTry_kt {
                         16 [label="Enter block"];
                         17 [label="Function call: R|/getNullableString|()" style="filled" fillcolor=yellow];
                         18 [label="Check not null: R|/getNullableString|()!!" style="filled" fillcolor=yellow];
-                        19 [label="Variable declaration: lval y: R|kotlin/String|"];
+                        19 [label="Variable declaration: lkonst y: R|kotlin/String|"];
                         20 [label="Function call: R|/getNullableString|()" style="filled" fillcolor=yellow];
                         21 [label="Assignment: R|<local>/x|"];
                         22 [label="Exit block"];
@@ -115,7 +115,7 @@ digraph initializationInTry_kt {
         subgraph cluster_12 {
             color=blue
             35 [label="Enter block"];
-            36 [label="Variable declaration: lval x: R|kotlin/String?|"];
+            36 [label="Variable declaration: lkonst x: R|kotlin/String?|"];
             subgraph cluster_13 {
                 color=blue
                 37 [label="Try expression enter"];
@@ -126,7 +126,7 @@ digraph initializationInTry_kt {
                         color=blue
                         39 [label="Enter block"];
                         40 [label="Function call: R|/getNullableString|()" style="filled" fillcolor=yellow];
-                        41 [label="Variable declaration: lval y: R|kotlin/String?|"];
+                        41 [label="Variable declaration: lkonst y: R|kotlin/String?|"];
                         42 [label="Function call: R|/getNullableString|()" style="filled" fillcolor=yellow];
                         43 [label="Assignment: R|<local>/x|"];
                         44 [label="Exit block"];

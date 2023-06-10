@@ -21,4 +21,4 @@ import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContextDeleg
 /**
  * We should use delegate context for DI in old frontend. For the FIR we don't have context delegate, so we should use parent class.
  */
-class JvmTypeSpecificityComparatorDelegate(override val context: TypeSystemInferenceExtensionContextDelegate) : JvmTypeSpecificityComparator(context)
+class JvmTypeSpecificityComparatorDelegate(override konst context: TypeSystemInferenceExtensionContextDelegate) : JvmTypeSpecificityComparator(context)

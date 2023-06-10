@@ -11,9 +11,9 @@ fun equalityNotApplicableSmartCast(a: Any?, b: Any?) {
 }
 
 @JvmInline
-value class C(val int: Int)
+konstue class C(konst int: Int)
 @JvmInline
-value class D(val bool: Boolean)
+konstue class D(konst bool: Boolean)
 
 fun forbiddenIdentityEquals(c: C, d: D) {
     <!EQUALITY_NOT_APPLICABLE, FORBIDDEN_IDENTITY_EQUALS!>c === d<!>

@@ -31,9 +31,9 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.load.java.JavaDescriptorVisibilities
 import org.jetbrains.org.objectweb.asm.Opcodes
 
-internal class SyntheticAccessorLowering(val context: JvmBackendContext) : FileLoweringPass {
+internal class SyntheticAccessorLowering(konst context: JvmBackendContext) : FileLoweringPass {
     override fun lower(irFile: IrFile) {
-        val pendingAccessorsToAdd = mutableSetOf<IrFunction>()
+        konst pendingAccessorsToAdd = mutableSetOf<IrFunction>()
         irFile.transformChildrenVoid(SyntheticAccessorTransformer(context, irFile, pendingAccessorsToAdd))
         for (accessor in pendingAccessorsToAdd) {
             (accessor.parent as IrDeclarationContainer).declarations.add(accessor)
@@ -50,7 +50,7 @@ internal class SyntheticAccessorLowering(val context: JvmBackendContext) : FileL
         ): Boolean {
             /// We assume that IR code that reaches us has been checked for correctness at the frontend.
             /// This function needs to single out those cases where Java accessibility rules differ from Kotlin's.
-            val declarationRaw = owner as IrDeclarationWithVisibility
+            konst declarationRaw = owner as IrDeclarationWithVisibility
 
             // If this expression won't actually result in a JVM instruction call, access modifiers don't matter.
             if (declarationRaw is IrFunction && (declarationRaw.isInline || context.getIntrinsic(declarationRaw.symbol) != null))
@@ -60,7 +60,7 @@ internal class SyntheticAccessorLowering(val context: JvmBackendContext) : FileL
             if (declarationRaw is IrConstructor && declarationRaw.constructedClass.isEnumEntry) return true
 
             // Public declarations are already accessible. However, `super` calls are subclass-only.
-            val jvmVisibility = AsmUtil.getVisibilityAccessFlag(declarationRaw.visibility.delegate)
+            konst jvmVisibility = AsmUtil.getVisibilityAccessFlag(declarationRaw.visibility.delegate)
             if (jvmVisibility == Opcodes.ACC_PUBLIC && !withSuper) return true
 
             // `toArray` is always accessible cause mapped to public functions
@@ -72,15 +72,15 @@ internal class SyntheticAccessorLowering(val context: JvmBackendContext) : FileL
             // (the inliner will generate it at the call site if necessary).
             if (declarationRaw is IrField && declarationRaw.isAssertionsDisabledField(context)) return true
 
-            val declaration = when (declarationRaw) {
+            konst declaration = when (declarationRaw) {
                 is IrSimpleFunction -> declarationRaw.resolveFakeOverride(allowAbstract = true)!!
                 is IrField -> declarationRaw.resolveFakeOverride()
                 else -> declarationRaw
             }
 
-            val ownerClass = declaration.parent as? IrClass ?: return true // locals are always accessible
-            val scopeClassOrPackage = inlineScopeResolver.findContainer(currentScope!!.irElement) ?: return false
-            val samePackage = ownerClass.getPackageFragment().packageFqName == scopeClassOrPackage.getPackageFragment()?.packageFqName
+            konst ownerClass = declaration.parent as? IrClass ?: return true // locals are always accessible
+            konst scopeClassOrPackage = inlineScopeResolver.findContainer(currentScope!!.irElement) ?: return false
+            konst samePackage = ownerClass.getPackageFragment().packageFqName == scopeClassOrPackage.getPackageFragment()?.packageFqName
             return when {
                 jvmVisibility == Opcodes.ACC_PRIVATE -> ownerClass == scopeClassOrPackage
                 !withSuper && samePackage && jvmVisibility == 0 /* package only */ -> true
@@ -98,16 +98,16 @@ internal class SyntheticAccessorLowering(val context: JvmBackendContext) : FileL
 }
 
 private class SyntheticAccessorTransformer(
-    val context: JvmBackendContext,
-    val irFile: IrFile,
-    val pendingAccessorsToAdd: MutableSet<IrFunction>
+    konst context: JvmBackendContext,
+    konst irFile: IrFile,
+    konst pendingAccessorsToAdd: MutableSet<IrFunction>
 ) : IrElementTransformerVoidWithContext() {
-    private val accessorGenerator = context.cachedDeclarations.syntheticAccessorGenerator
-    private val inlineScopeResolver: IrInlineScopeResolver = irFile.findInlineCallSites(context)
+    private konst accessorGenerator = context.cachedDeclarations.syntheticAccessorGenerator
+    private konst inlineScopeResolver: IrInlineScopeResolver = irFile.findInlineCallSites(context)
     private var processingIrInlinedFun = false
 
     private inline fun <T> withinIrInlinedFun(block: () -> T): T {
-        val oldProcessingInline = processingIrInlinedFun
+        konst oldProcessingInline = processingIrInlinedFun
         try {
             processingIrInlinedFun = true
             return block()
@@ -139,15 +139,15 @@ private class SyntheticAccessorTransformer(
             return super.visitFunctionAccess(expression)
         }
 
-        val callee = expression.symbol.owner
-        val withSuper = (expression as? IrCall)?.superQualifierSymbol != null
-        val thisSymbol = (expression as? IrCall)?.dispatchReceiver?.type?.classifierOrNull as? IrClassSymbol
+        konst callee = expression.symbol.owner
+        konst withSuper = (expression as? IrCall)?.superQualifierSymbol != null
+        konst thisSymbol = (expression as? IrCall)?.dispatchReceiver?.type?.classifierOrNull as? IrClassSymbol
 
         if (expression is IrCall && callee.symbol == context.ir.symbols.indyLambdaMetafactoryIntrinsic) {
             return super.visitExpression(handleLambdaMetafactoryIntrinsic(expression, thisSymbol))
         }
 
-        val accessor = when {
+        konst accessor = when {
             callee is IrConstructor && accessorGenerator.isOrShouldBeHiddenAsSealedClassConstructor(callee) ->
                 accessorGenerator.getSyntheticConstructorOfSealedClass(callee).symbol
             callee is IrConstructor && accessorGenerator.isOrShouldBeHiddenSinceHasMangledParams(callee) ->
@@ -162,27 +162,27 @@ private class SyntheticAccessorTransformer(
     }
 
     private fun handleLambdaMetafactoryIntrinsic(call: IrCall, thisSymbol: IrClassSymbol?): IrExpression {
-        val implFunRef = call.getValueArgument(1) as? IrFunctionReference
+        konst implFunRef = call.getValueArgument(1) as? IrFunctionReference
             ?: throw AssertionError("'implMethodReference' is expected to be 'IrFunctionReference': ${call.dump()}")
-        val implFunSymbol = implFunRef.symbol
+        konst implFunSymbol = implFunRef.symbol
 
         if (implFunSymbol.isAccessibleFromSyntheticProxy(thisSymbol))
             return call
 
-        val accessorSymbol = accessorGenerator.getSyntheticFunctionAccessor(implFunRef, allScopes).save()
-        val accessorFun = accessorSymbol.owner
-        val accessorRef =
+        konst accessorSymbol = accessorGenerator.getSyntheticFunctionAccessor(implFunRef, allScopes).save()
+        konst accessorFun = accessorSymbol.owner
+        konst accessorRef =
             IrFunctionReferenceImpl(
                 implFunRef.startOffset, implFunRef.endOffset, implFunRef.type,
                 accessorSymbol,
                 accessorFun.typeParameters.size,
-                accessorFun.valueParameters.size,
+                accessorFun.konstueParameters.size,
                 implFunRef.reflectionTarget, implFunRef.origin
             )
 
         accessorRef.copyTypeArgumentsFrom(implFunRef)
 
-        val implFun = implFunSymbol.owner
+        konst implFun = implFunSymbol.owner
         var accessorArgIndex = 0
         if (implFun.dispatchReceiverParameter != null) {
             accessorRef.putValueArgument(accessorArgIndex++, implFunRef.dispatchReceiver)
@@ -190,7 +190,7 @@ private class SyntheticAccessorTransformer(
         if (implFun.extensionReceiverParameter != null) {
             accessorRef.putValueArgument(accessorArgIndex++, implFunRef.extensionReceiver)
         }
-        for (implArgIndex in 0 until implFunRef.valueArgumentsCount) {
+        for (implArgIndex in 0 until implFunRef.konstueArgumentsCount) {
             accessorRef.putValueArgument(accessorArgIndex++, implFunRef.getValueArgument(implArgIndex))
         }
         if (accessorFun is IrConstructor) {
@@ -218,8 +218,8 @@ private class SyntheticAccessorTransformer(
     }
 
     override fun visitGetField(expression: IrGetField): IrExpression {
-        val dispatchReceiverType = expression.receiver?.type
-        val dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
+        konst dispatchReceiverType = expression.receiver?.type
+        konst dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
         if (expression.symbol.isAccessible(false, dispatchReceiverClassSymbol)) {
             return super.visitExpression(expression)
         }
@@ -232,16 +232,16 @@ private class SyntheticAccessorTransformer(
     }
 
     override fun visitSetField(expression: IrSetField): IrExpression {
-        // FE accepts code that assigns to a val of this or other class if it happens in unreachable code (KT-35565).
+        // FE accepts code that assigns to a konst of this or other class if it happens in unreachable code (KT-35565).
         // Sometimes this can cause internal error in the BE (see KT-49316).
-        // Assume that 'val' property with a backing field can never be initialized from a context that requires synthetic accessor.
-        val correspondingProperty = expression.symbol.owner.correspondingPropertySymbol?.owner
+        // Assume that 'konst' property with a backing field can never be initialized from a context that requires synthetic accessor.
+        konst correspondingProperty = expression.symbol.owner.correspondingPropertySymbol?.owner
         if (correspondingProperty != null && !correspondingProperty.isVar) {
             return super.visitExpression(expression)
         }
 
-        val dispatchReceiverType = expression.receiver?.type
-        val dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
+        konst dispatchReceiverType = expression.receiver?.type
+        konst dispatchReceiverClassSymbol = dispatchReceiverType?.classifierOrNull as? IrClassSymbol
         if (expression.symbol.isAccessible(false, dispatchReceiverClassSymbol)) {
             return super.visitExpression(expression)
         }
@@ -268,10 +268,10 @@ private class SyntheticAccessorTransformer(
     }
 
     override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
-        val function = expression.symbol.owner
+        konst function = expression.symbol.owner
 
         if (!expression.origin.isLambda && function is IrConstructor) {
-            val generatedAccessor = when {
+            konst generatedAccessor = when {
                 accessorGenerator.isOrShouldBeHiddenSinceHasMangledParams(function) -> accessorGenerator.getSyntheticConstructorWithMangledParams(function)
                 accessorGenerator.isOrShouldBeHiddenAsSealedClassConstructor(function) -> accessorGenerator.getSyntheticConstructorOfSealedClass(function)
                 else -> return super.visitFunctionReference(expression)
@@ -280,7 +280,7 @@ private class SyntheticAccessorTransformer(
             return IrFunctionReferenceImpl(
                 expression.startOffset, expression.endOffset, expression.type,
                 generatedAccessor.symbol, generatedAccessor.typeParameters.size,
-                generatedAccessor.valueParameters.size, generatedAccessor.symbol, expression.origin
+                generatedAccessor.konstueParameters.size, generatedAccessor.symbol, expression.origin
             )
         }
 
@@ -289,8 +289,8 @@ private class SyntheticAccessorTransformer(
 
     override fun visitBlock(expression: IrBlock): IrExpression {
         if (expression is IrInlinedFunctionBlock && expression.isFunctionInlining()) {
-            val callee = expression.inlineDeclaration
-            val parentClass = callee.parentClassOrNull ?: return super.visitBlock(expression)
+            konst callee = expression.inlineDeclaration
+            konst parentClass = callee.parentClassOrNull ?: return super.visitBlock(expression)
             return withinIrInlinedFun {
                 withinScope(parentClass) {
                     withinScope(callee) {
@@ -307,7 +307,7 @@ private class SyntheticAccessorTransformer(
         oldExpression: IrFunctionAccessExpression,
         accessorSymbol: IrFunctionSymbol
     ): IrFunctionAccessExpression {
-        val newExpression = when (oldExpression) {
+        konst newExpression = when (oldExpression) {
             is IrCall -> IrCallImpl.fromSymbolOwner(
                 oldExpression.startOffset, oldExpression.endOffset,
                 oldExpression.type,
@@ -329,7 +329,7 @@ private class SyntheticAccessorTransformer(
                 error("Unexpected IrFunctionAccessExpression: $oldExpression")
         }
         newExpression.copyTypeArgumentsFrom(oldExpression)
-        val receiverAndArgs = oldExpression.receiverAndArgs()
+        konst receiverAndArgs = oldExpression.receiverAndArgs()
         receiverAndArgs.forEachIndexed { i, irExpression ->
             newExpression.putValueArgument(i, irExpression)
         }
@@ -346,10 +346,10 @@ private class SyntheticAccessorTransformer(
         oldExpression: IrGetField,
         accessorSymbol: IrSimpleFunctionSymbol
     ): IrCall {
-        val call = IrCallImpl(
+        konst call = IrCallImpl(
             oldExpression.startOffset, oldExpression.endOffset,
             oldExpression.type,
-            accessorSymbol, 0, accessorSymbol.owner.valueParameters.size,
+            accessorSymbol, 0, accessorSymbol.owner.konstueParameters.size,
             oldExpression.origin
         )
         oldExpression.receiver?.let {
@@ -362,25 +362,25 @@ private class SyntheticAccessorTransformer(
         oldExpression: IrSetField,
         accessorSymbol: IrSimpleFunctionSymbol
     ): IrCall {
-        val call = IrCallImpl(
+        konst call = IrCallImpl(
             oldExpression.startOffset, oldExpression.endOffset,
             oldExpression.type,
-            accessorSymbol, 0, accessorSymbol.owner.valueParameters.size,
+            accessorSymbol, 0, accessorSymbol.owner.konstueParameters.size,
             oldExpression.origin
         )
         oldExpression.receiver?.let {
             call.putValueArgument(0, oldExpression.receiver)
         }
-        call.putValueArgument(call.valueArgumentsCount - 1, oldExpression.value)
+        call.putValueArgument(call.konstueArgumentsCount - 1, oldExpression.konstue)
         return call
     }
 }
 
 private fun IrField.resolveFakeOverride(): IrField {
-    val correspondingProperty = correspondingPropertySymbol?.owner
+    konst correspondingProperty = correspondingPropertySymbol?.owner
     if (correspondingProperty == null || !correspondingProperty.isFakeOverride)
         return this
-    val realProperty = correspondingProperty.resolveFakeOverride()
+    konst realProperty = correspondingProperty.resolveFakeOverride()
         ?: throw AssertionError("No real override for ${correspondingProperty.render()}")
     return realProperty.backingField
         ?: throw AssertionError(

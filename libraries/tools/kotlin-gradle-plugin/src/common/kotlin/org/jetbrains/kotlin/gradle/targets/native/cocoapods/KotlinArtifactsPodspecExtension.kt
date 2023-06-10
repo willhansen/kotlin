@@ -11,20 +11,20 @@ import org.jetbrains.kotlin.gradle.plugin.findExtension
 
 abstract class KotlinArtifactsPodspecExtension {
 
-    private val attrs = mutableMapOf<String, String>()
-    private val statements = mutableListOf<String>()
+    private konst attrs = mutableMapOf<String, String>()
+    private konst statements = mutableListOf<String>()
 
-    internal val attributes: Map<String, String>
+    internal konst attributes: Map<String, String>
         get() = attrs
 
-    internal val rawStatements: List<String>
+    internal konst rawStatements: List<String>
         get() = statements
 
     /**
      * Appends an attribute to the generated podspec
      */
-    fun attribute(key: String, value: String) {
-        attrs[key] = value
+    fun attribute(key: String, konstue: String) {
+        attrs[key] = konstue
     }
 
     /**
@@ -35,5 +35,5 @@ abstract class KotlinArtifactsPodspecExtension {
     }
 }
 
-internal val ExtensionAware.kotlinArtifactsPodspecExtension: KotlinArtifactsPodspecExtension?
+internal konst ExtensionAware.kotlinArtifactsPodspecExtension: KotlinArtifactsPodspecExtension?
     get() = findExtension(KotlinCocoapodsPlugin.ARTIFACTS_PODSPEC_EXTENSION_NAME)

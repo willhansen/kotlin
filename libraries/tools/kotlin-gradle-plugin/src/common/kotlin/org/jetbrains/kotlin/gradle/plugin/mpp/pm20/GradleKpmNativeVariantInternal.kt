@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
 abstract class GradleKpmNativeVariantInternal(
     containingModule: GradleKpmModule,
     fragmentName: String,
-    val konanTarget: KonanTarget,
+    konst konanTarget: KonanTarget,
     dependencyConfigurations: GradleKpmFragmentDependencyConfigurations,
     compileDependencyConfiguration: Configuration,
     apiElementsConfiguration: Configuration,
-    final override val hostSpecificMetadataElementsConfiguration: Configuration?
+    final override konst hostSpecificMetadataElementsConfiguration: Configuration?
 ) : GradleKpmNativeVariant,
     GradleKpmVariantInternal(
         containingModule = containingModule,
@@ -33,24 +33,24 @@ abstract class GradleKpmNativeVariantInternal(
     @Deprecated("Please declare explicit dependency on kotlinx-cli. This option is scheduled to be removed in 1.9.0")
     override var enableEndorsedLibraries: Boolean = false
 
-    override val gradleVariantNames: Set<String>
+    override konst gradleVariantNames: Set<String>
         get() = listOf(apiElementsConfiguration.name).flatMap { listOf(it, publishedConfigurationName(it)) }.toSet()
 
-    val cinterops by lazy {
+    konst cinterops by lazy {
         project.container(
             DefaultCInteropSettings::class.java, GradleKpmDefaultCInteropSettingsFactory(compilationData)
         )
     }
 
-    override val compilationData by lazy { GradleKpmNativeVariantCompilationData(this) }
+    override konst compilationData by lazy { GradleKpmNativeVariantCompilationData(this) }
 }
 
 interface GradleKpmNativeCompilationData<T : KotlinCommonOptions> : GradleKpmCompilationData<T> {
-    val konanTarget: KonanTarget
+    konst konanTarget: KonanTarget
 
     @Deprecated(
         "Please declare explicit dependency on kotlinx-cli. This option has no longer effect since 1.9.0",
         level = DeprecationLevel.ERROR
     )
-    val enableEndorsedLibs: Boolean
+    konst enableEndorsedLibs: Boolean
 }

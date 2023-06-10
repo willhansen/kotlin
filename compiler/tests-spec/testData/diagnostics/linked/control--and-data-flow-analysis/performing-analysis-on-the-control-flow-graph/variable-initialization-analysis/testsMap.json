@@ -21,7 +21,7 @@
         {
           "specVersion": "0.1-152",
           "casesNumber": 0,
-          "description": "Exhaustive val over conditional init",
+          "description": "Exhaustive konst over conditional init",
           "path": "compiler/testData/diagnostics/tests/when/ExhaustiveValOverConditionalInit.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -79,7 +79,7 @@
         {
           "specVersion": "0.1-152",
           "casesNumber": 0,
-          "description": "Exhaustive val over conditional init",
+          "description": "Exhaustive konst over conditional init",
           "path": "compiler/testData/diagnostics/tests/when/ExhaustiveValOverConditionalInit.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -179,7 +179,7 @@
         {
           "specVersion": "0.1-152",
           "casesNumber": 0,
-          "description": "Exhaustive val over conditional init",
+          "description": "Exhaustive konst over conditional init",
           "path": "compiler/testData/diagnostics/tests/when/ExhaustiveValOverConditionalInit.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"
@@ -221,7 +221,7 @@
         {
           "specVersion": "0.1-152",
           "casesNumber": 0,
-          "description": "Exhaustive val over conditional init",
+          "description": "Exhaustive konst over conditional init",
           "path": "compiler/testData/diagnostics/tests/when/ExhaustiveValOverConditionalInit.kt",
           "unexpectedBehaviour": false,
           "linkType": "primary"

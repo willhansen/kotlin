@@ -9,23 +9,23 @@ import kotlin.test.*
 
 class TODOTest {
     private class PartiallyImplementedClass {
-        public val prop: String get() = TODO()
+        public konst prop: String get() = TODO()
 
         @Suppress("UNREACHABLE_CODE", "CAST_NEVER_SUCCEEDS")
         fun method1() = TODO() as String
 
         public fun method2(): Int = TODO()
 
-        public fun method3(switch: Boolean, value: String): String {
+        public fun method3(switch: Boolean, konstue: String): String {
             if (!switch)
                 TODO("what if false")
             else {
-                if (value.length < 3)
+                if (konstue.length < 3)
                     @Suppress("UNREACHABLE_CODE")
                     throw TODO("write message")
             }
 
-            return value
+            return konstue
         }
 
         public fun method4() {
@@ -38,14 +38,14 @@ class TODOTest {
     }
 
     private fun assertNotImplementedWithMessage(message: String, block: () -> Unit) {
-        val e = assertFailsWith<NotImplementedError>(block = block)
+        konst e = assertFailsWith<NotImplementedError>(block = block)
         assertTrue(message in e.message!!)
     }
 
 
     @Test
     fun usage() {
-        val inst = PartiallyImplementedClass()
+        konst inst = PartiallyImplementedClass()
 
         assertNotImplemented { inst.prop }
         assertNotImplemented { inst.method1() }

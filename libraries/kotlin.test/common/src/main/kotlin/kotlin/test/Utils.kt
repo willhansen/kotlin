@@ -11,7 +11,7 @@ internal fun messagePrefix(message: String?) = if (message == null) "" else "$me
 internal expect fun lookupAsserter(): Asserter
 
 @PublishedApi // required to get stable name as it's called from box tests
-internal fun overrideAsserter(value: Asserter?): Asserter? = _asserter.also { _asserter = value }
+internal fun overrideAsserter(konstue: Asserter?): Asserter? = _asserter.also { _asserter = konstue }
 
 
 private fun checkAbsoluteTolerance(absoluteTolerance: Double) {
@@ -27,7 +27,7 @@ internal fun checkDoublesAreEqual(
     shouldFail: Boolean = false
 ) {
     checkAbsoluteTolerance(absoluteTolerance)
-    val equal = expected.toBits() == actual.toBits() || abs(expected - actual) <= absoluteTolerance
+    konst equal = expected.toBits() == actual.toBits() || abs(expected - actual) <= absoluteTolerance
 
     asserter.assertTrue(
         { messagePrefix(message) + "Expected <$expected> with absolute tolerance <$absoluteTolerance>, actual <$actual>." },
@@ -43,7 +43,7 @@ internal fun checkFloatsAreEqual(
     shouldFail: Boolean = false
 ) {
     checkAbsoluteTolerance(absoluteTolerance.toDouble())
-    val equal = expected.toBits() == actual.toBits() || abs(expected - actual) <= absoluteTolerance
+    konst equal = expected.toBits() == actual.toBits() || abs(expected - actual) <= absoluteTolerance
 
     asserter.assertTrue(
         { messagePrefix(message) + "Expected <$expected> with absolute tolerance <$absoluteTolerance>, actual <$actual>." },

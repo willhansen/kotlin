@@ -1,9 +1,9 @@
 package
 
 public external var a: kotlin.Int
-public external val b: kotlin.Int
-public external val c: kotlin.Int
-public external val d: kotlin.Int = 23
+public external konst b: kotlin.Int
+public external konst c: kotlin.Int
+public external konst d: kotlin.Int = 23
 public external fun bar(): kotlin.Unit
 public external fun baz(): kotlin.Int
 public external fun f(/*0*/ x: kotlin.Int, /*1*/ y: kotlin.String = ...): kotlin.Unit

@@ -14,4 +14,4 @@ abstract class PlatformSupertypeUpdater : FirSessionComponent {
     abstract fun updateSupertypesIfNeeded(firClass: FirClass, scopeSession: ScopeSession)
 }
 
-val FirSession.platformSupertypeUpdater: PlatformSupertypeUpdater? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.platformSupertypeUpdater: PlatformSupertypeUpdater? by FirSession.nullableSessionComponentAccessor()

@@ -1,4 +1,4 @@
-fun <T> eval(f: () -> T) = f()
+fun <T> ekonst(f: () -> T) = f()
 
 class A {
     private var foo = 1
@@ -13,11 +13,11 @@ class A {
     fun `access$setFoo`(a: A, d: Int) {}
 
     fun test() {
-        eval {
+        ekonst {
             foo = 2
             foo
         }
-        eval {
+        ekonst {
             setFoo(2)
             getFoo()
         }

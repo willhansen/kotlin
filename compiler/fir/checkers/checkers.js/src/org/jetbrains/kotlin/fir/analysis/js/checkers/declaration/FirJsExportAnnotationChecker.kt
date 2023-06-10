@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.name.JsStandardClassIds
 
 object FirJsExportAnnotationChecker : FirBasicDeclarationChecker() {
     override fun check(declaration: FirDeclaration, context: CheckerContext, reporter: DiagnosticReporter) {
-        val jsExport = declaration.getAnnotationByClassId(JsStandardClassIds.Annotations.JsExport, context.session) ?: return
+        konst jsExport = declaration.getAnnotationByClassId(JsStandardClassIds.Annotations.JsExport, context.session) ?: return
 
         if (declaration !is FirFile && !context.isTopLevel) {
             reporter.reportOn(jsExport.source, FirJsErrors.NESTED_JS_EXPORT, context)

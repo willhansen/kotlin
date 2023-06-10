@@ -16,6 +16,6 @@ import p.*
 
 fun test(j: J) {
     j.takeList(j.list())
-    val l = j.list()
+    konst l = j.list()
     j.takeList(l)
 }

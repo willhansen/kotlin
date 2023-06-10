@@ -25,25 +25,25 @@ import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 import java.io.File
 
 internal abstract class TestCompilation<A : TestCompilationArtifact> {
-    abstract val result: TestCompilationResult<out A>
+    abstract konst result: TestCompilationResult<out A>
 }
 
 internal abstract class BasicCompilation<A : TestCompilationArtifact>(
-    protected val targets: KotlinNativeTargets,
-    protected val home: KotlinNativeHome,
-    private val classLoader: KotlinNativeClassLoader,
-    private val optimizationMode: OptimizationMode,
-    private val compilerOutputInterceptor: CompilerOutputInterceptor,
-    protected val freeCompilerArgs: TestCompilerArgs,
-    protected val dependencies: CategorizedDependencies,
-    protected val expectedArtifact: A
+    protected konst targets: KotlinNativeTargets,
+    protected konst home: KotlinNativeHome,
+    private konst classLoader: KotlinNativeClassLoader,
+    private konst optimizationMode: OptimizationMode,
+    private konst compilerOutputInterceptor: CompilerOutputInterceptor,
+    protected konst freeCompilerArgs: TestCompilerArgs,
+    protected konst dependencies: CategorizedDependencies,
+    protected konst expectedArtifact: A
 ) : TestCompilation<A>() {
-    protected abstract val sourceModules: Collection<TestModule>
-    protected abstract val binaryOptions: Map<String, String>
+    protected abstract konst sourceModules: Collection<TestModule>
+    protected abstract konst binaryOptions: Map<String, String>
 
     // Runs the compiler and memorizes the result on property access.
-    final override val result: TestCompilationResult<out A> by lazy {
-        val failures = dependencies.failures
+    final override konst result: TestCompilationResult<out A> by lazy {
+        konst failures = dependencies.failures
         if (failures.isNotEmpty())
             TestCompilationResult.DependencyFailures(causes = failures)
         else
@@ -57,7 +57,7 @@ internal abstract class BasicCompilation<A : TestCompilationArtifact>(
             "-enable-assertions",
             "-Xverify-ir=error"
         )
-        addFlattened(binaryOptions.entries) { (name, value) -> listOf("-Xbinary=$name=$value") }
+        addFlattened(binaryOptions.entries) { (name, konstue) -> listOf("-Xbinary=$name=$konstue") }
     }
 
     protected abstract fun applySpecificArgs(argsBuilder: ArgsBuilder)
@@ -74,7 +74,7 @@ internal abstract class BasicCompilation<A : TestCompilationArtifact>(
     protected open fun postCompileCheck() = Unit
 
     private fun doCompile(): TestCompilationResult.ImmediateResult<out A> {
-        val compilerArgs = buildArgs {
+        konst compilerArgs = buildArgs {
             applyCommonArgs()
             applySpecificArgs(this)
             applyDependencies(this)
@@ -82,10 +82,10 @@ internal abstract class BasicCompilation<A : TestCompilationArtifact>(
             applySources()
         }
 
-        val loggedCompilerParameters = LoggedData.CompilerParameters(home, compilerArgs, sourceModules)
+        konst loggedCompilerParameters = LoggedData.CompilerParameters(home, compilerArgs, sourceModules)
 
-        val (loggedCompilerCall: LoggedData, result: TestCompilationResult.ImmediateResult<out A>) = try {
-            val compilerToolCallResult = when (compilerOutputInterceptor) {
+        konst (loggedCompilerCall: LoggedData, result: TestCompilationResult.ImmediateResult<out A>) = try {
+            konst compilerToolCallResult = when (compilerOutputInterceptor) {
                 CompilerOutputInterceptor.DEFAULT -> callCompiler(
                     compilerArgs = compilerArgs,
                     kotlinNativeClassLoader = classLoader.classLoader
@@ -96,20 +96,20 @@ internal abstract class BasicCompilation<A : TestCompilationArtifact>(
                 )
             }
 
-            val (exitCode, compilerOutput, compilerOutputHasErrors, duration) = compilerToolCallResult
+            konst (exitCode, compilerOutput, compilerOutputHasErrors, duration) = compilerToolCallResult
 
-            val loggedCompilationToolCall =
+            konst loggedCompilationToolCall =
                 LoggedData.CompilationToolCall("COMPILER", loggedCompilerParameters, exitCode, compilerOutput, compilerOutputHasErrors, duration)
 
-            val result = if (exitCode != ExitCode.OK || compilerOutputHasErrors)
+            konst result = if (exitCode != ExitCode.OK || compilerOutputHasErrors)
                 TestCompilationResult.CompilationToolFailure(loggedCompilationToolCall)
             else
                 TestCompilationResult.Success(expectedArtifact, loggedCompilationToolCall)
 
             loggedCompilationToolCall to result
         } catch (unexpectedThrowable: Throwable) {
-            val loggedFailure = LoggedData.CompilationToolCallUnexpectedFailure(loggedCompilerParameters, unexpectedThrowable)
-            val result = TestCompilationResult.UnexpectedFailure(loggedFailure)
+            konst loggedFailure = LoggedData.CompilationToolCallUnexpectedFailure(loggedCompilerParameters, unexpectedThrowable)
+            konst result = TestCompilationResult.UnexpectedFailure(loggedFailure)
 
             loggedFailure to result
         }
@@ -128,13 +128,13 @@ internal abstract class SourceBasedCompilation<A : TestCompilationArtifact>(
     classLoader: KotlinNativeClassLoader,
     optimizationMode: OptimizationMode,
     compilerOutputInterceptor: CompilerOutputInterceptor,
-    private val threadStateChecker: ThreadStateChecker,
-    private val sanitizer: Sanitizer,
-    private val gcType: GCType,
-    private val gcScheduler: GCScheduler,
-    private val pipelineType: PipelineType,
+    private konst threadStateChecker: ThreadStateChecker,
+    private konst sanitizer: Sanitizer,
+    private konst gcType: GCType,
+    private konst gcScheduler: GCScheduler,
+    private konst pipelineType: PipelineType,
     freeCompilerArgs: TestCompilerArgs,
-    override val sourceModules: Collection<TestModule>,
+    override konst sourceModules: Collection<TestModule>,
     dependencies: CategorizedDependencies,
     expectedArtifact: A
 ) : BasicCompilation<A>(
@@ -199,7 +199,7 @@ internal class LibraryCompilation(
     dependencies = CategorizedDependencies(dependencies),
     expectedArtifact = expectedArtifact
 ) {
-    override val binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.defaultForTesting
+    override konst binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.defaultForTesting
 
     override fun applySpecificArgs(argsBuilder: ArgsBuilder) = with(argsBuilder) {
         add(
@@ -232,7 +232,7 @@ internal class ObjCFrameworkCompilation(
     dependencies = CategorizedDependencies(dependencies),
     expectedArtifact = expectedArtifact
 ) {
-    override val binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.defaultForTesting
+    override konst binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.defaultForTesting
 
     override fun applySpecificArgs(argsBuilder: ArgsBuilder) = with(argsBuilder) {
         add(
@@ -244,7 +244,7 @@ internal class ObjCFrameworkCompilation(
 }
 
 internal class GivenLibraryCompilation(givenArtifact: KLIB) : TestCompilation<KLIB>() {
-    override val result = TestCompilationResult.Success(givenArtifact, LoggedData.NoopCompilerCall(givenArtifact.klibFile))
+    override konst result = TestCompilationResult.Success(givenArtifact, LoggedData.NoopCompilerCall(givenArtifact.klibFile))
 }
 
 internal class CInteropCompilation(
@@ -255,11 +255,11 @@ internal class CInteropCompilation(
     expectedArtifact: KLIB
 ) : TestCompilation<KLIB>() {
 
-    override val result: TestCompilationResult<out KLIB> by lazy {
-        val extraArgsArray = freeCompilerArgs.compilerArgs.toTypedArray()
-        val loggedCInteropParameters = LoggedData.CInteropParameters(extraArgs = extraArgsArray, defFile = defFile)
-        val (loggedCall: LoggedData, immediateResult: TestCompilationResult.ImmediateResult<out KLIB>) = try {
-            val (exitCode, cinteropOutput, cinteropOutputHasErrors, duration) = invokeCInterop(
+    override konst result: TestCompilationResult<out KLIB> by lazy {
+        konst extraArgsArray = freeCompilerArgs.compilerArgs.toTypedArray()
+        konst loggedCInteropParameters = LoggedData.CInteropParameters(extraArgs = extraArgsArray, defFile = defFile)
+        konst (loggedCall: LoggedData, immediateResult: TestCompilationResult.ImmediateResult<out KLIB>) = try {
+            konst (exitCode, cinteropOutput, cinteropOutputHasErrors, duration) = invokeCInterop(
                 classLoader.classLoader,
                 targets,
                 defFile,
@@ -267,7 +267,7 @@ internal class CInteropCompilation(
                 extraArgsArray
             )
 
-            val loggedInteropCall = LoggedData.CompilationToolCall(
+            konst loggedInteropCall = LoggedData.CompilationToolCall(
                 toolName = "CINTEROP",
                 parameters = loggedCInteropParameters,
                 exitCode = exitCode,
@@ -275,15 +275,15 @@ internal class CInteropCompilation(
                 toolOutputHasErrors = cinteropOutputHasErrors,
                 duration = duration
             )
-            val res = if (exitCode != ExitCode.OK || cinteropOutputHasErrors)
+            konst res = if (exitCode != ExitCode.OK || cinteropOutputHasErrors)
                 TestCompilationResult.CompilationToolFailure(loggedInteropCall)
             else
                 TestCompilationResult.Success(expectedArtifact, loggedInteropCall)
 
             loggedInteropCall to res
         } catch (unexpectedThrowable: Throwable) {
-            val loggedFailure = LoggedData.CompilationToolCallUnexpectedFailure(loggedCInteropParameters, unexpectedThrowable)
-            val res = TestCompilationResult.UnexpectedFailure(loggedFailure)
+            konst loggedFailure = LoggedData.CompilationToolCallUnexpectedFailure(loggedCInteropParameters, unexpectedThrowable)
+            konst res = TestCompilationResult.UnexpectedFailure(loggedFailure)
 
             loggedFailure to res
         }
@@ -297,7 +297,7 @@ internal class ExecutableCompilation(
     settings: Settings,
     freeCompilerArgs: TestCompilerArgs,
     sourceModules: Collection<TestModule>,
-    private val extras: Extras,
+    private konst extras: Extras,
     dependencies: Iterable<TestCompilationDependency<*>>,
     expectedArtifact: Executable
 ) : SourceBasedCompilation<Executable>(
@@ -316,10 +316,10 @@ internal class ExecutableCompilation(
     dependencies = CategorizedDependencies(dependencies),
     expectedArtifact = expectedArtifact
 ) {
-    private val cacheMode: CacheMode = settings.get()
-    override val binaryOptions = BinaryOptions.RuntimeAssertionsMode.chooseFor(cacheMode)
+    private konst cacheMode: CacheMode = settings.get()
+    override konst binaryOptions = BinaryOptions.RuntimeAssertionsMode.chooseFor(cacheMode)
 
-    private val partialLinkageConfig: UsedPartialLinkageConfig = settings.get()
+    private konst partialLinkageConfig: UsedPartialLinkageConfig = settings.get()
 
     override fun applySpecificArgs(argsBuilder: ArgsBuilder): Unit = with(argsBuilder) {
         add(
@@ -329,7 +329,7 @@ internal class ExecutableCompilation(
         when (extras) {
             is NoTestRunnerExtras -> add("-entry", extras.entryPoint)
             is WithTestRunnerExtras -> {
-                val testDumpFile: File? = if (sourceModules.isEmpty()
+                konst testDumpFile: File? = if (sourceModules.isEmpty()
                     && dependencies.includedLibraries.isNotEmpty()
                     && cacheMode.useStaticCacheForUserLibraries
                 ) {
@@ -361,7 +361,7 @@ internal class ExecutableCompilation(
 
     companion object {
         internal fun ArgsBuilder.applyTestRunnerSpecificArgs(extras: WithTestRunnerExtras, testDumpFile: File?) {
-            val testRunnerArg = when (extras.runnerType) {
+            konst testRunnerArg = when (extras.runnerType) {
                 TestRunnerType.DEFAULT -> "-generate-test-runner"
                 TestRunnerType.WORKER -> "-generate-worker-test-runner"
                 TestRunnerType.NO_EXIT -> "-generate-no-exit-test-runner"
@@ -391,8 +391,8 @@ internal class ExecutableCompilation(
 internal class StaticCacheCompilation(
     settings: Settings,
     freeCompilerArgs: TestCompilerArgs,
-    private val options: Options,
-    private val pipelineType: PipelineType,
+    private konst options: Options,
+    private konst pipelineType: PipelineType,
     dependencies: Iterable<TestCompilationDependency<*>>,
     expectedArtifact: KLIBStaticCache
 ) : BasicCompilation<KLIBStaticCache>(
@@ -407,20 +407,20 @@ internal class StaticCacheCompilation(
 ) {
     sealed interface Options {
         object Regular : Options
-        class ForIncludedLibraryWithTests(val expectedExecutableArtifact: Executable, val extras: WithTestRunnerExtras) : Options
+        class ForIncludedLibraryWithTests(konst expectedExecutableArtifact: Executable, konst extras: WithTestRunnerExtras) : Options
     }
 
-    override val sourceModules get() = emptyList<TestModule>()
-    override val binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.forUseWithCache
+    override konst sourceModules get() = emptyList<TestModule>()
+    override konst binaryOptions get() = BinaryOptions.RuntimeAssertionsMode.forUseWithCache
 
-    private val cacheRootDir: File = run {
-        val cacheMode = settings.get<CacheMode>()
+    private konst cacheRootDir: File = run {
+        konst cacheMode = settings.get<CacheMode>()
         cacheMode.staticCacheForDistributionLibrariesRootDir ?: fail { "No cache root directory found for cache mode $cacheMode" }
     }
 
-    private val makePerFileCache: Boolean = settings.get<CacheMode>().makePerFileCaches
+    private konst makePerFileCache: Boolean = settings.get<CacheMode>().makePerFileCaches
 
-    private val partialLinkageConfig: UsedPartialLinkageConfig = settings.get()
+    private konst partialLinkageConfig: UsedPartialLinkageConfig = settings.get()
 
     override fun applySpecificArgs(argsBuilder: ArgsBuilder): Unit = with(argsBuilder) {
         add("-produce", "static_cache")
@@ -461,9 +461,9 @@ internal class StaticCacheCompilation(
 }
 
 internal class CategorizedDependencies(uncategorizedDependencies: Iterable<TestCompilationDependency<*>>) {
-    val failures: Set<TestCompilationResult.Failure> by lazy {
+    konst failures: Set<TestCompilationResult.Failure> by lazy {
         uncategorizedDependencies.flatMapToSet { dependency ->
-            when (val result = (dependency as? TestCompilation<*>)?.result) {
+            when (konst result = (dependency as? TestCompilation<*>)?.result) {
                 is TestCompilationResult.Failure -> listOf(result)
                 is TestCompilationResult.DependencyFailures -> result.causes
                 is TestCompilationResult.Success -> emptyList()
@@ -472,14 +472,14 @@ internal class CategorizedDependencies(uncategorizedDependencies: Iterable<TestC
         }
     }
 
-    val libraries: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, Library>() }
-    val friends: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, FriendLibrary>() }
-    val includedLibraries: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, IncludedLibrary>() }
+    konst libraries: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, Library>() }
+    konst friends: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, FriendLibrary>() }
+    konst includedLibraries: List<KLIB> by lazy { uncategorizedDependencies.collectArtifacts<KLIB, IncludedLibrary>() }
 
-    val cachedLibraries: List<KLIBStaticCache> by lazy { uncategorizedDependencies.collectArtifacts<KLIBStaticCache, LibraryStaticCache>() }
+    konst cachedLibraries: List<KLIBStaticCache> by lazy { uncategorizedDependencies.collectArtifacts<KLIBStaticCache, LibraryStaticCache>() }
 
-    val libraryToCache: KLIB by lazy {
-        val libraries: List<KLIB> = buildList {
+    konst libraryToCache: KLIB by lazy {
+        konst libraries: List<KLIB> = buildList {
             this += libraries
             this += includedLibraries
             if (isEmpty()) this += friends // Friends should be ignored if they come with the main library.
@@ -488,7 +488,7 @@ internal class CategorizedDependencies(uncategorizedDependencies: Iterable<TestC
             ?: fail { "Only one library is expected as input for ${StaticCacheCompilation::class.java}, found: $libraries" }
     }
 
-    val uniqueCacheDirs: Set<File> by lazy {
+    konst uniqueCacheDirs: Set<File> by lazy {
         cachedLibraries.mapToSet { (libraryCacheDir, _) -> libraryCacheDir } // Avoid repeating the same directory more than once.
     }
 
@@ -500,8 +500,8 @@ internal class CategorizedDependencies(uncategorizedDependencies: Iterable<TestC
 private object BinaryOptions {
     object RuntimeAssertionsMode {
         // Here the 'default' is in the sense the default for testing, not the default for the compiler.
-        val defaultForTesting: Map<String, String> = mapOf("runtimeAssertionsMode" to "panic")
-        val forUseWithCache: Map<String, String> = mapOf("runtimeAssertionsMode" to "ignore")
+        konst defaultForTesting: Map<String, String> = mapOf("runtimeAssertionsMode" to "panic")
+        konst forUseWithCache: Map<String, String> = mapOf("runtimeAssertionsMode" to "ignore")
 
         fun chooseFor(cacheMode: CacheMode) = if (cacheMode.useStaticCacheForDistributionLibraries) forUseWithCache else defaultForTesting
     }

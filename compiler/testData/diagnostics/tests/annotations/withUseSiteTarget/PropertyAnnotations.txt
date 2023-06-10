@@ -24,10 +24,10 @@ public final annotation class Second : kotlin.Annotation {
 
 @Ann public final class SomeClass {
     public constructor SomeClass(/*0*/ s: kotlin.String)
-    @Ann protected final val p1: kotlin.String = ""
-    @Ann @Second protected final val p2: kotlin.String = ""
+    @Ann protected final konst p1: kotlin.String = ""
+    @Ann @Second protected final konst p2: kotlin.String = ""
     @Ann protected final var p3: kotlin.String
-    @Ann protected final val p4: kotlin.String
+    @Ann protected final konst p4: kotlin.String
     @Ann public final var propertyWithCustomSetter: kotlin.Int
     public final fun anotherFun(): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean

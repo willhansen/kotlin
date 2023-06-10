@@ -11,7 +11,7 @@ import com.intellij.psi.search.GlobalSearchScope
 public abstract class KtModuleScopeProvider {
     /**
      * Get a scope of binaries on which current source module depends.
-     * Should be equivalent to
+     * Should be equikonstent to
      *
      * ```
      * GlobalSearchScope.union(
@@ -28,7 +28,7 @@ public abstract class KtModuleScopeProvider {
 
 public class KtModuleScopeProviderImpl : KtModuleScopeProvider() {
     override fun getModuleLibrariesScope(sourceModule: KtSourceModule): GlobalSearchScope {
-        val scopes = sourceModule.allDirectDependenciesOfType<KtBinaryModule>()
+        konst scopes = sourceModule.allDirectDependenciesOfType<KtBinaryModule>()
             .map { it.contentScope }
             .toList()
         if (scopes.isEmpty()) return GlobalSearchScope.EMPTY_SCOPE
@@ -36,5 +36,5 @@ public class KtModuleScopeProviderImpl : KtModuleScopeProvider() {
     }
 }
 
-public val Project.moduleScopeProvider: KtModuleScopeProvider
+public konst Project.moduleScopeProvider: KtModuleScopeProvider
     get() = this.getService(KtModuleScopeProvider::class.java)

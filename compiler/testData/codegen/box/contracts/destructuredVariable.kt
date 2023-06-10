@@ -12,8 +12,8 @@ fun runOnce(action: () -> Unit) {
 }
 
 fun ok(): String {
-    val res: String
-    val (o, _) = "OK" to "FAIL"
+    konst res: String
+    konst (o, _) = "OK" to "FAIL"
     runOnce {
         res = o
     }

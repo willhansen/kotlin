@@ -17,7 +17,7 @@ object ConeTypeIntersector {
             1 -> return types.single()
         }
 
-        val inputTypes = mutableListOf<ConeKotlinType>().apply {
+        konst inputTypes = mutableListOf<ConeKotlinType>().apply {
             for (inputType in types) {
                 if (inputType is ConeIntersectionType) {
                     addAll(inputType.intersectedTypes)
@@ -30,18 +30,18 @@ object ConeTypeIntersector {
         // Note: we aren't sure how to intersect raw & dynamic types properly (see KT-55762)
         if (inputTypes.any { it is ConeFlexibleType } && inputTypes.none { it.isRaw() || it is ConeDynamicType }) {
             // (A..B) & C = (A & C)..(B & C)
-            val lowerBound = intersectTypes(context, inputTypes.map { it.lowerBoundIfFlexible() })
-            val upperBound = intersectTypes(context, inputTypes.map { it.upperBoundIfFlexible() })
+            konst lowerBound = intersectTypes(context, inputTypes.map { it.lowerBoundIfFlexible() })
+            konst upperBound = intersectTypes(context, inputTypes.map { it.upperBoundIfFlexible() })
             // Special case - if C is `Nothing?`, then the result is `Nothing!`; but if it is non-null,
             // then this code is unreachable, so it's more useful to do resolution/diagnostics
             // under the assumption that it is purely nullable.
             return if (lowerBound.isNothing) upperBound else coneFlexibleOrSimpleType(context, lowerBound, upperBound)
         }
 
-        val isResultNotNullable = with(context) {
+        konst isResultNotNullable = with(context) {
             inputTypes.any { !it.isNullableType() }
         }
-        val inputTypesMadeNotNullIfNeeded = inputTypes.mapTo(LinkedHashSet()) {
+        konst inputTypesMadeNotNullIfNeeded = inputTypes.mapTo(LinkedHashSet()) {
             if (isResultNotNullable) it.makeConeTypeDefinitelyNotNullOrNotNull(context) else it
         }
         if (inputTypesMadeNotNullIfNeeded.size == 1) return inputTypesMadeNotNullIfNeeded.single()
@@ -57,7 +57,7 @@ object ConeTypeIntersector {
          * We want to drop A from that set, because it's useless for type checking. But in case if
          *   A came from inference and B came from smartcast we want to save both types in intersection
          */
-        val resultList = inputTypesMadeNotNullIfNeeded.toMutableList()
+        konst resultList = inputTypesMadeNotNullIfNeeded.toMutableList()
         resultList.removeIfNonSingleErrorOrInRelation { candidate, other -> other.isStrictSubtypeOf(context, candidate) }
         assert(resultList.isNotEmpty()) { "no types left after removing strict supertypes: ${inputTypes.joinToString()}" }
 
@@ -71,9 +71,9 @@ object ConeTypeIntersector {
     private fun MutableCollection<ConeKotlinType>.removeIfNonSingleErrorOrInRelation(
         predicate: (candidate: ConeKotlinType, other: ConeKotlinType) -> Boolean
     ) {
-        val iterator = iterator()
+        konst iterator = iterator()
         while (iterator.hasNext()) {
-            val candidate = iterator.next()
+            konst candidate = iterator.next()
             if (candidate is ConeErrorType && size > 1 ||
                 any { other -> other !== candidate && predicate(candidate, other) }
             ) {

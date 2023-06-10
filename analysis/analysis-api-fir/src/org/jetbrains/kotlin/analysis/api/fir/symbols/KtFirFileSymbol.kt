@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.psi
 import org.jetbrains.kotlin.fir.symbols.impl.FirFileSymbol
 
 internal class KtFirFileSymbol(
-    override val firSymbol: FirFileSymbol,
-    override val analysisSession: KtFirAnalysisSession,
+    override konst firSymbol: FirFileSymbol,
+    override konst analysisSession: KtFirAnalysisSession,
 ) : KtFileSymbol(), KtSymbolWithDeclarations, KtFirSymbol<FirFileSymbol> {
-    override val psi: PsiElement? = withValidityAssertion { firSymbol.fir.psi }
+    override konst psi: PsiElement? = withValidityAssertion { firSymbol.fir.psi }
 
     context(KtAnalysisSession)
     override fun createPointer(): KtSymbolPointer<KtFileSymbol> = withValidityAssertion {
@@ -30,7 +30,7 @@ internal class KtFirFileSymbol(
         TODO("Creating pointers for files from library is not supported yet")
     }
 
-    override val annotationsList by cached {
+    override konst annotationsList by cached {
         KtFirAnnotationListForDeclaration.create(
             firSymbol,
             analysisSession.useSiteSession,

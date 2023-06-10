@@ -16,7 +16,7 @@ import kotlin.reflect.KClass
  * This extension can be used to provide information about declarations, which should be written in Kotlin metadata (i.e. be part of a module's ABI),
  *   but for some reason can not (or should not) be generated with [FirDeclarationGenerationExtension]
  *
- * Example: assume your plugin generates some constructor in [IrGenerationExtension] which have value parameters matching
+ * Example: assume your plugin generates some constructor in [IrGenerationExtension] which have konstue parameters matching
  *   all properties of a class, and this constructor is used only as an implementation detail (so the only actor who accesses it
  *   is a plugin itself). The constructor should be accessible from another module, so it should be present in the metadata. But you
  *   can not generate this constructor in [FirDeclarationGenerationExtension], because it depends on types of properties,
@@ -25,8 +25,8 @@ import kotlin.reflect.KClass
  *
  *   // MODULE: a
  *   open class Base {
- *       val x: Int = 1
- *       val y = "hello"
+ *       konst x: Int = 1
+ *       konst y = "hello"
  *
  *       constructor()
  *
@@ -36,7 +36,7 @@ import kotlin.reflect.KClass
  *
  *   // MODULE: b(a)
  *   class Derived : Base {
- *       val z = 1.0
+ *       konst z = 1.0
  *
  *       constructor() : super()
  *
@@ -54,13 +54,13 @@ import kotlin.reflect.KClass
  */
 abstract class FirDeclarationsForMetadataProviderExtension(session: FirSession) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("SyntheticDeclarationsForMetadataGenerationExtension")
+        konst NAME = FirExtensionPointName("SyntheticDeclarationsForMetadataGenerationExtension")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirDeclarationsForMetadataProviderExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirDeclarationsForMetadataProviderExtension::class
 
     /**
      * It's allowed to provide only functions, properties and type aliases
@@ -72,4 +72,4 @@ abstract class FirDeclarationsForMetadataProviderExtension(session: FirSession) 
     fun interface Factory : FirExtension.Factory<FirDeclarationsForMetadataProviderExtension>
 }
 
-val FirExtensionService.declarationForMetadataProviders: List<FirDeclarationsForMetadataProviderExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.declarationForMetadataProviders: List<FirDeclarationsForMetadataProviderExtension> by FirExtensionService.registeredExtensions()

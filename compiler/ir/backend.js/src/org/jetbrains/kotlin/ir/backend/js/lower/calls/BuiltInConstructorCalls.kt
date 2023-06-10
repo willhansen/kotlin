@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 import org.jetbrains.kotlin.ir.util.irConstructorCall
 
 
-class BuiltInConstructorCalls(val context: JsIrBackendContext) : CallsTransformer {
-    val intrinsics = context.intrinsics
+class BuiltInConstructorCalls(konst context: JsIrBackendContext) : CallsTransformer {
+    konst intrinsics = context.intrinsics
 
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean): IrExpression =
         if (call is IrConstructorCall) {

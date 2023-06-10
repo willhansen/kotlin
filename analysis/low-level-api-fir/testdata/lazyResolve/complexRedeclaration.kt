@@ -18,11 +18,11 @@ sealed class P {
         class M : P()
     }
 
-    val p: P = object : P() {
+    konst p: P = object : P() {
 
     }
 
-    val r = object : P() {
+    konst r = object : P() {
 
     }
 }
@@ -35,7 +35,7 @@ object B {
 
 fun test() {
     class L : P()
-    val a = object : P() {
+    konst a = object : P() {
 
     }
 }

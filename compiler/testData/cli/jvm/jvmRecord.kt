@@ -1,2 +1,2 @@
 @JvmRecord
-data class MyRec(val name: String)
+data class MyRec(konst name: String)

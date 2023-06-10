@@ -21,11 +21,11 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 abstract class AbstractTransformerForGenerator(
-    protected val context: IrPluginContext,
-    private val visitBodies: Boolean
+    protected konst context: IrPluginContext,
+    private konst visitBodies: Boolean
 ) : IrElementVisitorVoid {
-    protected val irFactory = context.irFactory
-    protected val irBuiltIns = context.irBuiltIns
+    protected konst irFactory = context.irFactory
+    protected konst irBuiltIns = context.irBuiltIns
 
     abstract fun interestedIn(key: GeneratedDeclarationKey?): Boolean
     abstract fun generateBodyForFunction(function: IrSimpleFunction, key: GeneratedDeclarationKey?): IrBody?
@@ -45,7 +45,7 @@ abstract class AbstractTransformerForGenerator(
     }
 
     final override fun visitSimpleFunction(declaration: IrSimpleFunction) {
-        val origin = declaration.origin
+        konst origin = declaration.origin
         if (origin !is GeneratedByPlugin || !interestedIn(origin.pluginKey)) {
             if (visitBodies) {
                 visitElement(declaration)
@@ -57,7 +57,7 @@ abstract class AbstractTransformerForGenerator(
     }
 
     final override fun visitConstructor(declaration: IrConstructor) {
-        val origin = declaration.origin
+        konst origin = declaration.origin
         if (origin !is GeneratedByPlugin || !interestedIn(origin.pluginKey) || declaration.body != null) {
             if (visitBodies) {
                 visitElement(declaration)
@@ -70,36 +70,36 @@ abstract class AbstractTransformerForGenerator(
     // ------------------------ utilities ------------------------
 
     protected fun generateDefaultBodyForMaterializeFunction(function: IrSimpleFunction): IrBody? {
-        val constructedType = function.returnType as? IrSimpleType ?: return null
-        val constructedClassSymbol = constructedType.classifier
-        val constructedClass = constructedClassSymbol.owner as? IrClass ?: return null
-        val constructor = constructedClass.primaryConstructor ?: return null
-        val constructorCall = IrConstructorCallImpl(
+        konst constructedType = function.returnType as? IrSimpleType ?: return null
+        konst constructedClassSymbol = constructedType.classifier
+        konst constructedClass = constructedClassSymbol.owner as? IrClass ?: return null
+        konst constructor = constructedClass.primaryConstructor ?: return null
+        konst constructorCall = IrConstructorCallImpl(
             -1,
             -1,
             constructedType,
             constructor.symbol,
             typeArgumentsCount = 0,
             constructorTypeArgumentsCount = 0,
-            valueArgumentsCount = 0
+            konstueArgumentsCount = 0
         )
-        val returnStatement = IrReturnImpl(-1, -1, irBuiltIns.nothingType, function.symbol, constructorCall)
+        konst returnStatement = IrReturnImpl(-1, -1, irBuiltIns.nothingType, function.symbol, constructorCall)
         return irFactory.createBlockBody(-1, -1, listOf(returnStatement))
     }
 
     protected fun generateBodyForDefaultConstructor(declaration: IrConstructor): IrBody? {
-        val type = declaration.returnType as? IrSimpleType ?: return null
+        konst type = declaration.returnType as? IrSimpleType ?: return null
 
-        val delegatingAnyCall = IrDelegatingConstructorCallImpl(
+        konst delegatingAnyCall = IrDelegatingConstructorCallImpl(
             -1,
             -1,
             irBuiltIns.anyType,
             irBuiltIns.anyClass.owner.primaryConstructor?.symbol ?: return null,
             typeArgumentsCount = 0,
-            valueArgumentsCount = 0
+            konstueArgumentsCount = 0
         )
 
-        val initializerCall = IrInstanceInitializerCallImpl(
+        konst initializerCall = IrInstanceInitializerCallImpl(
             -1,
             -1,
             (declaration.parent as? IrClass)?.symbol ?: return null,

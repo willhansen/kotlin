@@ -24,7 +24,7 @@ public expect annotation class ThreadLocal()
  * Note: this annotation has effect only in Kotlin/Native with legacy memory manager.
  *
  * Marks a top level property with a backing field as immutable.
- * It is possible to share the value of such property between multiple threads, but it becomes deeply frozen,
+ * It is possible to share the konstue of such property between multiple threads, but it becomes deeply frozen,
  * so no changes can be made to its state or the state of objects it refers to.
  *
  * The annotation has effect only in Kotlin/Native platform.

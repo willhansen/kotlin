@@ -24,38 +24,38 @@ import org.jetbrains.kotlin.types.typeUtil.isNothing
 
 object JvmSyntheticAssignmentChecker : AssignmentChecker {
 
-    private val TYPE_MISMATCH_ERRORS = setOf(Errors.TYPE_MISMATCH, Errors.CONSTANT_EXPECTED_TYPE_MISMATCH, Errors.NULL_FOR_NONNULL_TYPE)
+    private konst TYPE_MISMATCH_ERRORS = setOf(Errors.TYPE_MISMATCH, Errors.CONSTANT_EXPECTED_TYPE_MISMATCH, Errors.NULL_FOR_NONNULL_TYPE)
 
     override fun check(assignmentExpression: KtBinaryExpression, context: CallCheckerContext) {
-        val left = assignmentExpression.left ?: return
-        val resolvedCall = left.getResolvedCall(context.trace.bindingContext) ?: return
-        val resultingDescriptor = resolvedCall.resultingDescriptor
+        konst left = assignmentExpression.left ?: return
+        konst resolvedCall = left.getResolvedCall(context.trace.bindingContext) ?: return
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
         if (!resultingDescriptor.isSynthesized) return
         if (resultingDescriptor !is SyntheticJavaPropertyDescriptor) return
-        val receiverType = resolvedCall.extensionReceiver?.type ?: return
-        val unsubstitutedReceiverType = resolvedCall.candidateDescriptor.extensionReceiverParameter?.type ?: return
+        konst receiverType = resolvedCall.extensionReceiver?.type ?: return
+        konst unsubstitutedReceiverType = resolvedCall.candidateDescriptor.extensionReceiverParameter?.type ?: return
         if (receiverType.constructor !== unsubstitutedReceiverType.constructor) return
-        val propertyType = resolvedCall.candidateDescriptor.returnType ?: return
+        konst propertyType = resolvedCall.candidateDescriptor.returnType ?: return
 
-        val substitutionParameters = mutableListOf<TypeParameterDescriptor>()
-        val substitutionArguments = mutableListOf<TypeProjection>()
+        konst substitutionParameters = mutableListOf<TypeParameterDescriptor>()
+        konst substitutionArguments = mutableListOf<TypeProjection>()
         for ((unsubstitutedArgument, substitutedArgument) in unsubstitutedReceiverType.arguments.zip(receiverType.arguments)) {
-            val typeParameter = unsubstitutedArgument.type.constructor.declarationDescriptor as? TypeParameterDescriptor ?: continue
+            konst typeParameter = unsubstitutedArgument.type.constructor.declarationDescriptor as? TypeParameterDescriptor ?: continue
             substitutionParameters += typeParameter
             substitutionArguments += substitutedArgument
         }
-        val substitutor = TypeSubstitutor.create(
+        konst substitutor = TypeSubstitutor.create(
             IndexedParametersSubstitution(
                 substitutionParameters.toTypedArray(), substitutionArguments.toTypedArray(), approximateContravariantCapturedTypes = true
             )
         )
-        val substitutedPropertyType = substitutor.substitute(propertyType.unwrap(), Variance.IN_VARIANCE) ?: return
+        konst substitutedPropertyType = substitutor.substitute(propertyType.unwrap(), Variance.IN_VARIANCE) ?: return
         if (substitutedPropertyType.isNothing()) {
             context.trace.report(ErrorsJvm.SYNTHETIC_SETTER_PROJECTED_OUT.on(left, resultingDescriptor))
             return
         }
-        val rValue = assignmentExpression.right ?: return
-        val rValueType = rValue.getType(context.trace.bindingContext) ?: return
+        konst rValue = assignmentExpression.right ?: return
+        konst rValueType = rValue.getType(context.trace.bindingContext) ?: return
         if (isAssignmentCorrectWithDataFlowInfo(substitutedPropertyType, rValue, rValueType, context)) return
         if (context.trace.bindingContext.diagnostics.forElement(rValue).none { it.factory in TYPE_MISMATCH_ERRORS }) {
             context.trace.report(Errors.TYPE_MISMATCH_WARNING.on(rValue, substitutedPropertyType, rValueType))

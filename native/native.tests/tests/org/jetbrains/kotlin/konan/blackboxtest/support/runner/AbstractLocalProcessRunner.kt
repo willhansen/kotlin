@@ -20,29 +20,29 @@ import java.io.OutputStream
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.time.*
 
-internal abstract class AbstractLocalProcessRunner<R>(protected val checks: TestRunChecks) : AbstractRunner<R>() {
-    protected abstract val visibleProcessName: String
-    protected abstract val executable: TestExecutable
-    protected abstract val programArgs: List<String>
-    protected abstract val outputFilter: TestOutputFilter
+internal abstract class AbstractLocalProcessRunner<R>(protected konst checks: TestRunChecks) : AbstractRunner<R>() {
+    protected abstract konst visibleProcessName: String
+    protected abstract konst executable: TestExecutable
+    protected abstract konst programArgs: List<String>
+    protected abstract konst outputFilter: TestOutputFilter
 
     protected open fun customizeProcess(process: Process) = Unit
 
     @OptIn(ExperimentalTime::class)
     final override fun buildRun() = AbstractRun {
         runBlocking(Dispatchers.IO) {
-            val unfilteredOutput = UnfilteredProcessOutput()
-            val unfilteredOutputReader: Job
+            konst unfilteredOutput = UnfilteredProcessOutput()
+            konst unfilteredOutputReader: Job
 
-            val executionTimeout: Duration = checks.executionTimeoutCheck.timeout
+            konst executionTimeout: Duration = checks.executionTimeoutCheck.timeout
 
-            val process: Process
-            val hasFinishedOnTime: Boolean
+            konst process: Process
+            konst hasFinishedOnTime: Boolean
 
             // Don't ignore IO errors that happen just after the process is started.
-            val ignoreIOErrorsInProcessOutput = AtomicBoolean(false)
+            konst ignoreIOErrorsInProcessOutput = AtomicBoolean(false)
 
-            val duration = measureTime {
+            konst duration = measureTime {
                 process = ProcessBuilder(programArgs).directory(executable.executableFile.parentFile).start()
                 customizeProcess(process)
 
@@ -59,12 +59,12 @@ internal abstract class AbstractLocalProcessRunner<R>(protected val checks: Test
                 )
             }
 
-            val exitCode: Int? = if (hasFinishedOnTime) {
+            konst exitCode: Int? = if (hasFinishedOnTime) {
                 unfilteredOutputReader.join() // Wait until all output streams are drained.
                 process.exitValue()
             } else {
                 try { // It could happen just by an accident that the process has exited by itself.
-                    val exitCode = process.exitValue() // Fetch exit code.
+                    konst exitCode = process.exitValue() // Fetch exit code.
                     unfilteredOutputReader.join() // Wait until all streams are drained.
                     exitCode
                 } catch (_: IllegalThreadStateException) { // Still not destroyed.
@@ -90,8 +90,8 @@ internal abstract class AbstractLocalProcessRunner<R>(protected val checks: Test
 
 internal abstract class LocalResultHandler<R>(
     runResult: RunResult,
-    private val visibleProcessName: String,
-    private val checks: TestRunChecks
+    private konst visibleProcessName: String,
+    private konst checks: TestRunChecks
 ) : AbstractResultHandler<R>(runResult) {
     override fun handle(): R {
         checks.forEach { check ->
@@ -104,7 +104,7 @@ internal abstract class LocalResultHandler<R>(
                 }
                 is ExitCode -> {
                     // Don't check exit code if it is unknown.
-                    val knownExitCode: Int = runResult.exitCode ?: return@forEach
+                    konst knownExitCode: Int = runResult.exitCode ?: return@forEach
                     when (check) {
                         is ExitCode.Expected -> verifyExpectation(knownExitCode == check.expectedExitCode) {
                             "$visibleProcessName exit code is $knownExitCode while ${check.expectedExitCode} was expected."
@@ -115,8 +115,8 @@ internal abstract class LocalResultHandler<R>(
                     }
                 }
                 is TestRunCheck.OutputDataFile -> {
-                    val expectedOutput = check.file.readText()
-                    val actualFilteredOutput = runResult.processOutput.stdOut.filteredOutput + runResult.processOutput.stdErr
+                    konst expectedOutput = check.file.readText()
+                    konst actualFilteredOutput = runResult.processOutput.stdOut.filteredOutput + runResult.processOutput.stdErr
 
                     // Don't use verifyExpectation(expected, actual) to avoid exposing potentially large test output in exception message
                     // and blowing up test logs.
@@ -127,12 +127,12 @@ internal abstract class LocalResultHandler<R>(
                 is TestRunCheck.OutputMatcher -> {
                     try {
                         verifyExpectation(check.match(runResult.processOutput.stdOut.filteredOutput)) {
-                            "Tested process output has not passed validation."
+                            "Tested process output has not passed konstidation."
                         }
                     } catch (t: Throwable) {
                         if (t is Exception || t is AssertionError) {
                             fail<Nothing>(
-                                getLoggedRun().withErrorMessage("Tested process output has not passed validation: " + t.message),
+                                getLoggedRun().withErrorMessage("Tested process output has not passed konstidation: " + t.message),
                                 t
                             )
                         } else {
@@ -150,8 +150,8 @@ internal abstract class LocalResultHandler<R>(
 }
 
 private class UnfilteredProcessOutput {
-    private val stdOut = ByteArrayOutputStream()
-    private val stdErr = ByteArrayOutputStream()
+    private konst stdOut = ByteArrayOutputStream()
+    private konst stdErr = ByteArrayOutputStream()
 
     fun toProcessOutput(outputFilter: TestOutputFilter): ProcessOutput = ProcessOutput(
         stdOut = outputFilter.filter(stdOut.toString(Charsets.UTF_8)),

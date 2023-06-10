@@ -1,6 +1,6 @@
 var <T> T.varProp: T
     get() = this
-    set(value: T) {}
+    set(konstue: T) {}
 
 class A {
     var int: Int = 0

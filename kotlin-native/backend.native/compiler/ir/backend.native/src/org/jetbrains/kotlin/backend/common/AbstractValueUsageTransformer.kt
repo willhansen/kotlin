@@ -34,8 +34,8 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * TODO: consider making this visitor non-recursive to make it more general.
  */
 internal abstract class AbstractValueUsageTransformer(
-        val symbols: KonanSymbols,
-        val irBuiltIns: IrBuiltIns
+        konst symbols: KonanSymbols,
+        konst irBuiltIns: IrBuiltIns
 ): IrElementTransformerVoid() {
 
     protected open fun IrExpression.useAs(type: IrType): IrExpression = this
@@ -45,7 +45,7 @@ internal abstract class AbstractValueUsageTransformer(
     protected open fun IrExpression.useInTypeOperator(operator: IrTypeOperator, typeOperand: IrType): IrExpression =
             this
 
-    protected open fun IrExpression.useAsValue(value: IrValueDeclaration): IrExpression = this.useAs(value.type)
+    protected open fun IrExpression.useAsValue(konstue: IrValueDeclaration): IrExpression = this.useAs(konstue.type)
 
     protected open fun IrExpression.useAsArgument(parameter: IrValueParameter): IrExpression =
             this.useAsValue(parameter)
@@ -64,8 +64,8 @@ internal abstract class AbstractValueUsageTransformer(
     private fun IrExpression.useForVariable(variable: IrVariable): IrExpression =
             this.useAsValue(variable)
 
-    private fun IrExpression.useForValue(value: IrValueDeclaration) =
-            this.useAsValue(value)
+    private fun IrExpression.useForValue(konstue: IrValueDeclaration) =
+            this.useAsValue(konstue)
 
     private fun IrExpression.useForField(field: IrField): IrExpression =
             this.useAs(field.type)
@@ -98,9 +98,9 @@ internal abstract class AbstractValueUsageTransformer(
         with(expression) {
             dispatchReceiver = dispatchReceiver?.useAsDispatchReceiver(expression)
             extensionReceiver = extensionReceiver?.useAsExtensionReceiver(expression)
-            for (index in symbol.owner.valueParameters.indices) {
-                val argument = getValueArgument(index) ?: continue
-                val parameter = symbol.owner.valueParameters[index]
+            for (index in symbol.owner.konstueParameters.indices) {
+                konst argument = getValueArgument(index) ?: continue
+                konst parameter = symbol.owner.konstueParameters[index]
                 putValueArgument(index, argument.useAsValueArgument(expression, parameter))
             }
         }
@@ -127,7 +127,7 @@ internal abstract class AbstractValueUsageTransformer(
             return expression
         }
 
-        val lastIndex = expression.statements.lastIndex
+        konst lastIndex = expression.statements.lastIndex
         expression.statements.forEachIndexed { i, irStatement ->
             if (irStatement is IrExpression) {
                 expression.statements[i] =
@@ -144,7 +144,7 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitReturn(expression: IrReturn): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useAsReturnValue(expression.returnTargetSymbol)
+        expression.konstue = expression.konstue.useAsReturnValue(expression.returnTargetSymbol)
 
         return expression
     }
@@ -152,7 +152,7 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitSetValue(expression: IrSetValue): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useForValue(expression.symbol.owner)
+        expression.konstue = expression.konstue.useForValue(expression.symbol.owner)
 
         return expression
     }
@@ -160,7 +160,7 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitSetField(expression: IrSetField): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useForField(expression.symbol.owner)
+        expression.konstue = expression.konstue.useForField(expression.symbol.owner)
 
         return expression
     }
@@ -207,7 +207,7 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitThrow(expression: IrThrow): IrExpression {
         expression.transformChildrenVoid(this)
 
-        expression.value = expression.value.useAs(symbols.throwable.owner.defaultType)
+        expression.konstue = expression.konstue.useAs(symbols.throwable.owner.defaultType)
 
         return expression
     }
@@ -252,8 +252,8 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitFunction(declaration: IrFunction): IrStatement {
         declaration.transformChildrenVoid(this)
 
-        declaration.valueParameters.forEach { parameter ->
-            val defaultValue = parameter.defaultValue
+        declaration.konstueParameters.forEach { parameter ->
+            konst defaultValue = parameter.defaultValue
             if (defaultValue is IrExpressionBody) {
                 defaultValue.expression = defaultValue.expression.useAsArgument(parameter)
             }
@@ -271,7 +271,7 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitConstantArray(expression: IrConstantArray): IrConstantValue {
         expression.transformChildrenVoid(this)
 
-        val elementType = if (expression.type.isBoxedArray)
+        konst elementType = if (expression.type.isBoxedArray)
             irBuiltIns.anyNType
         else
             irBuiltIns.primitiveArrayElementTypes[expression.type.getClass()?.symbol]
@@ -286,8 +286,8 @@ internal abstract class AbstractValueUsageTransformer(
     override fun visitConstantObject(expression: IrConstantObject): IrConstantValue {
         expression.transformChildrenVoid(this)
 
-        expression.valueArguments.forEachIndexed { index, arg ->
-            expression.valueArguments[index] = arg.useAsArgument(expression.constructor.owner.valueParameters[index]) as IrConstantValue
+        expression.konstueArguments.forEachIndexed { index, arg ->
+            expression.konstueArguments[index] = arg.useAsArgument(expression.constructor.owner.konstueParameters[index]) as IrConstantValue
         }
         return expression
     }

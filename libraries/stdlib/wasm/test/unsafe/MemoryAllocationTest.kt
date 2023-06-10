@@ -8,13 +8,13 @@ private fun jsConcatStrings(a: String, b: String): String =
 
 @OptIn(UnsafeWasmMemoryApi::class)
 class MemoryAllocationTest {
-    val pageSize = 65_536
+    konst pageSize = 65_536
 
     @Test
     fun testWasmMemorySizeGrow() {
-        val s1 = wasmMemorySize()
-        val grow_res = wasmMemoryGrow(10)
-        val s2 = wasmMemorySize()
+        konst s1 = wasmMemorySize()
+        konst grow_res = wasmMemoryGrow(10)
+        konst s2 = wasmMemorySize()
         assertNotEquals(grow_res, -1)
         assertEquals(grow_res, s1)
         assertEquals(s2 - s1, 10)
@@ -22,15 +22,15 @@ class MemoryAllocationTest {
 
     @Test
     fun testScopedAllocator() {
-        val sizes = listOf<Int>(1, 1, 2, 3, 8, 10, 305, 12_747, 31_999)
-        val allocations = mutableListOf<Pointer>()
+        konst sizes = listOf<Int>(1, 1, 2, 3, 8, 10, 305, 12_747, 31_999)
+        konst allocations = mutableListOf<Pointer>()
         withScopedMemoryAllocator { a ->
             for (size in sizes) {
                 allocations += a.allocate(size)
             }
         }
 
-        val allocations2 = mutableListOf<Pointer>()
+        konst allocations2 = mutableListOf<Pointer>()
         withScopedMemoryAllocator { a ->
             for (size in sizes) {
                 allocations2 += a.allocate(size)
@@ -53,10 +53,10 @@ class MemoryAllocationTest {
         // Allocations do not intersect
         for (i1 in 0..<sizes.size) {
             for (i2 in (i1 + 1)..<sizes.size) {
-                val a1 = allocations[i1].address
-                val a2 = allocations[i2].address
-                val size1 = sizes[i1].toUInt()
-                val size2 = sizes[i2].toUInt()
+                konst a1 = allocations[i1].address
+                konst a2 = allocations[i2].address
+                konst size1 = sizes[i1].toUInt()
+                konst size2 = sizes[i2].toUInt()
                 assertTrue(a1 !in a2..<a2 + size2)
                 assertTrue(a1 + size1 - 1u !in a2..<a2 + size2)
             }
@@ -66,7 +66,7 @@ class MemoryAllocationTest {
     @Test
     fun testScopedAllocatorGrowsMemory() {
         // Allocations past current memory size should grow memory
-        val memSizes = mutableListOf<Int>(wasmMemorySize())
+        konst memSizes = mutableListOf<Int>(wasmMemorySize())
         withScopedMemoryAllocator { a ->
             var allocatedAddress = a.allocate(pageSize)
             var allocationSize = pageSize
@@ -88,7 +88,7 @@ class MemoryAllocationTest {
 
     @Test
     fun nestedAllocators() {
-        val sizes = listOf<Int>(1, 1, 2, 3, 8, 10, 305, 12_747, 31_999)
+        konst sizes = listOf<Int>(1, 1, 2, 3, 8, 10, 305, 12_747, 31_999)
         var allocations1: List<Pointer>
         var allocations1_1: List<Pointer>
         var allocations1_2: List<Pointer>
@@ -123,8 +123,8 @@ class MemoryAllocationTest {
         assertEquals(allocations1_1, allocations1_2)
 
         // Impl detaiol: allocator in child scope allocates new memory
-        val max1: UInt = allocations1.maxOf { it.address }
-        val min1_1: UInt = allocations1_1.minOf { it.address }
+        konst max1: UInt = allocations1.maxOf { it.address }
+        konst min1_1: UInt = allocations1_1.minOf { it.address }
         assertTrue(max1 < min1_1)
     }
 

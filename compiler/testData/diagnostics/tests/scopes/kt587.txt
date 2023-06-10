@@ -20,7 +20,7 @@ public final class Main {
 
             public companion object Companion {
                 private constructor Companion()
-                public final val N: Main.Companion.States
+                public final konst N: Main.Companion.States
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

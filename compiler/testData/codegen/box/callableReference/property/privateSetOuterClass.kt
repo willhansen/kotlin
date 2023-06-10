@@ -1,19 +1,19 @@
 class A {
-    var value: String = "fail1"
+    var konstue: String = "fail1"
         private set
 
     inner class B {
-        fun foo(): kotlin.reflect.KMutableProperty0<String> = this@A::value
+        fun foo(): kotlin.reflect.KMutableProperty0<String> = this@A::konstue
     }
 }
 
 class C {
-    var value: String = "fail2"
+    var konstue: String = "fail2"
         private set
 
     fun bar(): kotlin.reflect.KMutableProperty0<String> {
         class D {
-            fun foo(): kotlin.reflect.KMutableProperty0<String> = this@C::value
+            fun foo(): kotlin.reflect.KMutableProperty0<String> = this@C::konstue
         }
 
         return D().foo()
@@ -21,11 +21,11 @@ class C {
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     a.B().foo().set("O")
 
-    val c = C()
+    konst c = C()
     c.bar().set("K")
 
-    return a.value + c.value
+    return a.konstue + c.konstue
 }

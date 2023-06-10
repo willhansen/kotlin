@@ -15,7 +15,7 @@ fun main(args: Array<String>) {
     require(args.size == 1) {
         "An expected anount of processors should be specified as program argument"
     }
-    val x: Int = Platform.getAvailableProcessors()
+    konst x: Int = Platform.getAvailableProcessors()
     println("Got available processors: $x")
     assertTrue(x > 0)
     if (!(Platform.osFamily == OsFamily.LINUX && (Platform.cpuArchitecture == CpuArchitecture.ARM32 ||

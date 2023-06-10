@@ -7,7 +7,7 @@ import lib.*
 import app.*
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
     Service(foo::bar).test()
     return foo.p
 }
@@ -17,7 +17,7 @@ package app
 
 import java.util.function.Consumer
 
-class Service(private val consumer: Consumer<String>) {
+class Service(private konst consumer: Consumer<String>) {
     fun test() {
         consumer.accept("OK")
     }

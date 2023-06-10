@@ -11,13 +11,13 @@ function box(): string {
     const res2 = JS_TESTS.a.b.f(c1, c2, c3);
     const res3 = JS_TESTS.f(c1, c2, c3);
 
-    if (res1 !== "foo.bar.baz.f(C1(value=1), C2(value=2), C3(value=3))")
+    if (res1 !== "foo.bar.baz.f(C1(konstue=1), C2(konstue=2), C3(konstue=3))")
         return "Fail 1: " + res1;
 
-    if (res2 !== "a.b.f(C1(value=1), C2(value=2), C3(value=3))")
+    if (res2 !== "a.b.f(C1(konstue=1), C2(konstue=2), C3(konstue=3))")
         return "Fail 2: " + res2;
 
-    if (res3 !== "f(C1(value=1), C2(value=2), C3(value=3))")
+    if (res3 !== "f(C1(konstue=1), C2(konstue=2), C3(konstue=3))")
         return "Fail 3: " + res3;
 
     return "OK";

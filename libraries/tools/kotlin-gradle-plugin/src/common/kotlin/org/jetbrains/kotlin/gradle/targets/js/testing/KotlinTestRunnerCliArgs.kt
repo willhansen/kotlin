@@ -6,10 +6,10 @@
 package org.jetbrains.kotlin.gradle.targets.js.testing
 
 data class KotlinTestRunnerCliArgs(
-    val moduleNames: List<String> = listOf(),
-    val include: Collection<String> = listOf(),
-    val exclude: Collection<String> = listOf(),
-    val ignoredTestSuites: IgnoredTestSuitesReporting = IgnoredTestSuitesReporting.reportAllInnerTestsAsIgnored
+    konst moduleNames: List<String> = listOf(),
+    konst include: Collection<String> = listOf(),
+    konst exclude: Collection<String> = listOf(),
+    konst ignoredTestSuites: IgnoredTestSuitesReporting = IgnoredTestSuitesReporting.reportAllInnerTestsAsIgnored
 ) {
     fun toList(): List<String> = mutableListOf<String>().also { args ->
         if (include.isNotEmpty()) {

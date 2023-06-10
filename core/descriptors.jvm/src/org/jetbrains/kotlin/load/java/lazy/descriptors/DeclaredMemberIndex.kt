@@ -42,16 +42,16 @@ interface DeclaredMemberIndex {
 }
 
 open class ClassDeclaredMemberIndex(
-    val jClass: JavaClass,
-    private val memberFilter: (JavaMember) -> Boolean
+    konst jClass: JavaClass,
+    private konst memberFilter: (JavaMember) -> Boolean
 ) : DeclaredMemberIndex {
-    private val methodFilter = { m: JavaMethod ->
+    private konst methodFilter = { m: JavaMethod ->
         memberFilter(m) && !m.isObjectMethodInInterface()
     }
 
-    private val methods = jClass.methods.asSequence().filter(methodFilter).groupBy { m -> m.name }
-    private val fields = jClass.fields.asSequence().filter(memberFilter).associateBy { m -> m.name }
-    private val components = jClass.recordComponents.filter(memberFilter).associateBy { it.name }
+    private konst methods = jClass.methods.asSequence().filter(methodFilter).groupBy { m -> m.name }
+    private konst fields = jClass.fields.asSequence().filter(memberFilter).associateBy { m -> m.name }
+    private konst components = jClass.recordComponents.filter(memberFilter).associateBy { it.name }
 
     override fun findMethodsByName(name: Name): Collection<JavaMethod> = methods[name] ?: listOf()
     override fun getMethodNames(): Set<Name> = jClass.methods.asSequence().filter(methodFilter).mapTo(mutableSetOf(), JavaMethod::name)

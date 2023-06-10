@@ -7,6 +7,6 @@ public interface ArrayOfEnumInParam {
 
     @Target({ElementType.FIELD, ElementType.CONSTRUCTOR})
     public @interface targetAnnotation {
-        String value();
+        String konstue();
     }
 }

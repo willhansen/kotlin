@@ -10,7 +10,7 @@
 // FILE: capturedSamArgument.kt
 fun box(): String {
     var lambda = { "OK" }
-    val sam = Sam(lambda)
+    konst sam = Sam(lambda)
     lambda = { "Failed" }
     return sam.get()
 }

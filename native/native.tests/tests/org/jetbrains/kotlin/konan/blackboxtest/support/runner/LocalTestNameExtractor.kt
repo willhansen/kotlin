@@ -12,12 +12,12 @@ import org.jetbrains.kotlin.konan.blackboxtest.support.util.TestOutputFilter
 import org.jetbrains.kotlin.test.services.JUnit5Assertions.fail
 
 internal class LocalTestNameExtractor(
-    override val executable: TestExecutable,
+    override konst executable: TestExecutable,
     checks: TestRunChecks
 ) : AbstractLocalProcessRunner<Collection<TestName>>(checks) {
-    override val visibleProcessName get() = "Test name extractor"
-    override val programArgs = listOf(executable.executableFile.path, "--ktest_list_tests")
-    override val outputFilter get() = TestOutputFilter.NO_FILTERING
+    override konst visibleProcessName get() = "Test name extractor"
+    override konst programArgs = listOf(executable.executableFile.path, "--ktest_list_tests")
+    override konst outputFilter get() = TestOutputFilter.NO_FILTERING
 
     override fun getLoggedParameters() = LoggedData.TestRunParameters(
         compilationToolCall = executable.loggedCompilationToolCall,
@@ -39,7 +39,7 @@ internal class TestNameResultHandler(
     runResult: RunResult,
     visibleProcessName: String,
     checks: TestRunChecks,
-    private val loggedParameters: LoggedData.TestRunParameters
+    private konst loggedParameters: LoggedData.TestRunParameters
 ) : LocalResultHandler<Collection<TestName>>(runResult, visibleProcessName, checks) {
     override fun getLoggedRun() = LoggedData.TestRun(loggedParameters, runResult)
     override fun doHandle() = GTestListing.parse(runResult.processOutput.stdOut.filteredOutput)

@@ -23,13 +23,13 @@ class ProcessorLoaderTest {
     @TempDir
     var _rootTempDirectory: File? = null
 
-    val rootTempDirectory: File
+    konst rootTempDirectory: File
         get() = _rootTempDirectory!!
 
     @Test
     fun testProcessorClasspath() {
-        val kaptOptions = with(KaptOptions.Builder()) {
-            val jar = rootTempDirectory.newFile("empty.jar").also {
+        konst kaptOptions = with(KaptOptions.Builder()) {
+            konst jar = rootTempDirectory.newFile("empty.jar").also {
                 ZipOutputStream(it.outputStream()).use {
                     it.putNextEntry(ZipEntry("fake_entry"))
                     it.closeEntry()
@@ -41,14 +41,14 @@ class ProcessorLoaderTest {
             stubsOutputDir = rootTempDirectory.newStubsFolder()
             build()
         }
-        val loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
+        konst loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
         assertTrue(loadedProcessors.processors.isEmpty())
     }
 
     @Test
     fun testProcessorUpperCaseExtensionClasspath() {
-        val kaptOptions = with(KaptOptions.Builder()) {
-            val jar = rootTempDirectory.newFile("empty.JAR").also {
+        konst kaptOptions = with(KaptOptions.Builder()) {
+            konst jar = rootTempDirectory.newFile("empty.JAR").also {
                 ZipOutputStream(it.outputStream()).use {
                     it.putNextEntry(ZipEntry("fake_entry"))
                     it.closeEntry()
@@ -60,32 +60,32 @@ class ProcessorLoaderTest {
             stubsOutputDir = rootTempDirectory.newStubsFolder()
             build()
         }
-        val loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
+        konst loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
         assertTrue(loadedProcessors.processors.isEmpty())
     }
 
     @Test
     fun testEmptyClasspath() {
-        val kaptOptions = with(KaptOptions.Builder()) {
+        konst kaptOptions = with(KaptOptions.Builder()) {
             sourcesOutputDir = rootTempDirectory.newSourcesFolder()
             classesOutputDir = rootTempDirectory.newClassesFolder()
             stubsOutputDir = rootTempDirectory.newStubsFolder()
             build()
         }
-        val loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
+        konst loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
         assertTrue(loadedProcessors.processors.isEmpty())
     }
 
     @Test
     fun testClasspathWithNonJars() {
-        val kaptOptions = with(KaptOptions.Builder()) {
+        konst kaptOptions = with(KaptOptions.Builder()) {
             processingClasspath.add(rootTempDirectory.newFile("do-not-load.gz"))
             sourcesOutputDir = rootTempDirectory.newSourcesFolder()
             classesOutputDir = rootTempDirectory.newClassesFolder()
             stubsOutputDir = rootTempDirectory.newStubsFolder()
             build()
         }
-        val loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
+        konst loadedProcessors = ProcessorLoader(kaptOptions, WriterBackedKaptLogger(false)).loadProcessors()
         assertTrue(loadedProcessors.processors.isEmpty())
     }
 }

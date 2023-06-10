@@ -11,13 +11,13 @@ FILE: typeOfAnnotationMember.kt
         }
 
         public final static enum entry Bar: R|Enum|
-        public final static fun values(): R|kotlin/Array<Enum>| {
+        public final static fun konstues(): R|kotlin/Array<Enum>| {
         }
 
-        public final static fun valueOf(value: R|kotlin/String|): R|Enum| {
+        public final static fun konstueOf(konstue: R|kotlin/String|): R|Enum| {
         }
 
-        public final static val entries: R|kotlin/enums/EnumEntries<Enum>|
+        public final static konst entries: R|kotlin/enums/EnumEntries<Enum>|
             public get(): R|kotlin/enums/EnumEntries<Enum>|
 
     }
@@ -26,22 +26,22 @@ FILE: typeOfAnnotationMember.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val p1: R|kotlin/Array<kotlin/Int>| = R|<local>/p1|
+        public final konst p1: R|kotlin/Array<kotlin/Int>| = R|<local>/p1|
             public get(): R|kotlin/Array<kotlin/Int>|
 
-        public final val p2: R|kotlin/Array<kotlin/Int?>| = R|<local>/p2|
+        public final konst p2: R|kotlin/Array<kotlin/Int?>| = R|<local>/p2|
             public get(): R|kotlin/Array<kotlin/Int?>|
 
-        public final val p3: R|kotlin/Array<kotlin/IntArray>| = R|<local>/p3|
+        public final konst p3: R|kotlin/Array<kotlin/IntArray>| = R|<local>/p3|
             public get(): R|kotlin/Array<kotlin/IntArray>|
 
-        public final val p4: R|kotlin/Array<Foo>| = R|<local>/p4|
+        public final konst p4: R|kotlin/Array<Foo>| = R|<local>/p4|
             public get(): R|kotlin/Array<Foo>|
 
-        public final val p5: R|Foo| = R|<local>/p5|
+        public final konst p5: R|Foo| = R|<local>/p5|
             public get(): R|Foo|
 
-        public final val p6: R|kotlin/Array<out java/lang/Class<*>>| = R|<local>/p6|
+        public final konst p6: R|kotlin/Array<out java/lang/Class<*>>| = R|<local>/p6|
             public get(): R|kotlin/Array<out java/lang/Class<*>>|
 
     }
@@ -50,22 +50,22 @@ FILE: typeOfAnnotationMember.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val p1: R|kotlin/Int?| = R|<local>/p1|
+        public final konst p1: R|kotlin/Int?| = R|<local>/p1|
             public get(): R|kotlin/Int?|
 
-        public final val p2: R|kotlin/String?| = R|<local>/p2|
+        public final konst p2: R|kotlin/String?| = R|<local>/p2|
             public get(): R|kotlin/String?|
 
-        public final val p3: R|kotlin/IntArray?| = R|<local>/p3|
+        public final konst p3: R|kotlin/IntArray?| = R|<local>/p3|
             public get(): R|kotlin/IntArray?|
 
-        public final val p4: R|kotlin/Array<kotlin/Int>?| = R|<local>/p4|
+        public final konst p4: R|kotlin/Array<kotlin/Int>?| = R|<local>/p4|
             public get(): R|kotlin/Array<kotlin/Int>?|
 
-        public final val p5: R|Ann1?| = R|<local>/p5|
+        public final konst p5: R|Ann1?| = R|<local>/p5|
             public get(): R|Ann1?|
 
-        public final val p6: R|Enum?| = R|<local>/p6|
+        public final konst p6: R|Enum?| = R|<local>/p6|
             public get(): R|Enum?|
 
     }

@@ -18,7 +18,7 @@ namespace kotlin::std_support {
 //       not extend over to interop.
 template <typename T>
 struct allocator {
-    using value_type = T;
+    using konstue_type = T;
     using size_type = std::size_t;
     using difference_type = std::ptrdiff_t;
     using propagate_on_container_move_assignment = std::true_type;

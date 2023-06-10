@@ -15,13 +15,13 @@ import kotlin.test.assertTrue
 class StubIrToMetadataTests {
 
     companion object {
-        val intStubType = ClassifierStubType(Classifier.topLevel("kotlin", "Int"))
-        val intType = IntegerType(4, true, "int")
+        konst intStubType = ClassifierStubType(Classifier.topLevel("kotlin", "Int"))
+        konst intType = IntegerType(4, true, "int")
     }
 
     private fun createTrivialFunction(name: String): FunctionStub {
-        val cDeclaration = FunctionDecl(name, emptyList(), intType, "", false, false)
-        val origin = StubOrigin.Function(cDeclaration)
+        konst cDeclaration = FunctionDecl(name, emptyList(), intType, "", false, false)
+        konst origin = StubOrigin.Function(cDeclaration)
         return FunctionStub(
                 name = cDeclaration.name,
                 returnType = intStubType,
@@ -34,12 +34,12 @@ class StubIrToMetadataTests {
         )
     }
 
-    private fun createTrivialIntegerConstantProperty(name: String, value: Long): PropertyStub {
-        val origin = StubOrigin.Constant(IntegerConstantDef(name, intType, value))
+    private fun createTrivialIntegerConstantProperty(name: String, konstue: Long): PropertyStub {
+        konst origin = StubOrigin.Constant(IntegerConstantDef(name, intType, konstue))
         return PropertyStub(
                 name = name,
                 type = intStubType,
-                kind = PropertyStub.Kind.Constant(IntegralConstantStub(value, intType.size, true)),
+                kind = PropertyStub.Kind.Constant(IntegralConstantStub(konstue, intType.size, true)),
                 origin = origin
         )
     }
@@ -48,13 +48,13 @@ class StubIrToMetadataTests {
             fqName: String,
             namesToBeDeclared: List<String>
     ): BridgeBuilderResult {
-        val nativeBridges = object : NativeBridges {
+        konst nativeBridges = object : NativeBridges {
             override fun isSupported(nativeBacked: NativeBacked): Boolean = true
-            override val kotlinLines: Sequence<String> = emptySequence()
-            override val nativeLines: Sequence<String> = emptySequence()
+            override konst kotlinLines: Sequence<String> = emptySequence()
+            override konst nativeLines: Sequence<String> = emptySequence()
         }
-        val kotlinFile = object : KotlinFile(fqName, namesToBeDeclared) {
-            override val mappingBridgeGenerator: MappingBridgeGenerator
+        konst kotlinFile = object : KotlinFile(fqName, namesToBeDeclared) {
+            override konst mappingBridgeGenerator: MappingBridgeGenerator
                 get() = error("Not needed for tests.")
         }
         return BridgeBuilderResult(
@@ -71,26 +71,26 @@ class StubIrToMetadataTests {
             functions: List<FunctionStub> = emptyList(),
             properties: List<PropertyStub> = emptyList()
     ): KmModuleFragment {
-        val stubContainer = SimpleStubContainer(functions = functions, properties = properties)
-        val bridgeBuilderResult = createFakeBridgeBuilderResult(fqName, stubContainer.computeNamesToBeDeclared(fqName))
+        konst stubContainer = SimpleStubContainer(functions = functions, properties = properties)
+        konst bridgeBuilderResult = createFakeBridgeBuilderResult(fqName, stubContainer.computeNamesToBeDeclared(fqName))
         return ModuleMetadataEmitter(fqName, stubContainer, bridgeBuilderResult).emit()
     }
 
     @Test
     fun `single simple function`() {
-        val packageName = "single_function"
-        val function = createTrivialFunction("hello")
-        val metadata = createMetadata(packageName, functions = listOf(function))
+        konst packageName = "single_function"
+        konst function = createTrivialFunction("hello")
+        konst metadata = createMetadata(packageName, functions = listOf(function))
         with (metadata) {
             assertEquals(packageName, packageName)
             assertTrue(classes.isEmpty())
             assertNotNull(pkg)
             assertTrue(pkg!!.functions.size == 1)
 
-            val kmFunction = pkg!!.functions[0]
+            konst kmFunction = pkg!!.functions[0]
             assertEquals(kmFunction.name, function.name)
-            assertEquals(0, kmFunction.valueParameters.size)
-            val returnTypeClassifier = kmFunction.returnType.classifier
+            assertEquals(0, kmFunction.konstueParameters.size)
+            konst returnTypeClassifier = kmFunction.returnType.classifier
             assertTrue(returnTypeClassifier is KmClassifier.Class)
             assertEquals("kotlin/Int", returnTypeClassifier.name)
         }
@@ -98,19 +98,19 @@ class StubIrToMetadataTests {
 
     @Test
     fun `single constant`() {
-        val property = createTrivialIntegerConstantProperty("meaning", 42)
-        val metadata = createMetadata("single_property", properties = listOf(property))
+        konst property = createTrivialIntegerConstantProperty("meaning", 42)
+        konst metadata = createMetadata("single_property", properties = listOf(property))
         with (metadata) {
             assertNotNull(pkg)
             assertTrue(pkg!!.properties.size == 1)
 
-            val kmProperty = pkg!!.properties[0]
+            konst kmProperty = pkg!!.properties[0]
             assertEquals(kmProperty.name, property.name)
 
-            val compileTimeValue = kmProperty.compileTimeValue
+            konst compileTimeValue = kmProperty.compileTimeValue
             assertNotNull(compileTimeValue)
             assertTrue(compileTimeValue is KmAnnotationArgument.IntValue)
-            assertEquals(42, compileTimeValue.value)
+            assertEquals(42, compileTimeValue.konstue)
         }
     }
 }

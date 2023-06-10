@@ -16,10 +16,10 @@ import org.jetbrains.kotlin.name.Name
 
 internal class KtFirStarImportingScope(
     firScope: FirAbstractStarImportingScope,
-    private val analysisSession: KtFirAnalysisSession,
+    private konst analysisSession: KtFirAnalysisSession,
 ) : KtFirBasedScope<FirAbstractStarImportingScope>(firScope, analysisSession.firSymbolBuilder) {
 
-    private val imports: List<StarImport> by cached {
+    private konst imports: List<StarImport> by cached {
         firScope.starImports.map { import ->
             StarImport(
                 import.packageFqName,
@@ -37,7 +37,7 @@ internal class KtFirStarImportingScope(
             if (import.relativeClassName == null) { // top level callable
                 DeclarationsInPackageProvider.getTopLevelCallableNamesInPackageProvider(import.packageFqName, analysisSession)
             } else { //member
-                val classId = import.resolvedClassId ?: error("Class id should not be null as relativeClassName is not null")
+                konst classId = import.resolvedClassId ?: error("Class id should not be null as relativeClassName is not null")
                 firScope.getStaticsScope(classId)?.getCallableNames().orEmpty()
             }
         }
@@ -52,7 +52,7 @@ internal class KtFirStarImportingScope(
             if (import.relativeClassName == null) {
                 DeclarationsInPackageProvider.getTopLevelClassifierNamesInPackageProvider(import.packageFqName, analysisSession)
             } else {
-                val classId = import.resolvedClassId ?: error("Class id should not be null as relativeClassName is not null")
+                konst classId = import.resolvedClassId ?: error("Class id should not be null as relativeClassName is not null")
                 firScope.getStaticsScope(classId)?.getClassifierNames().orEmpty()
             }
         }

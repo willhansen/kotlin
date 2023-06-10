@@ -16,7 +16,7 @@ fun builder(c: suspend Controller.() -> Unit) {
 }
 
 fun box(): String {
-    val a = arrayOfNulls<String>(2) as Array<String>
+    konst a = arrayOfNulls<String>(2) as Array<String>
     a[0] = "O"
     a[1] = "K"
     var result = ""

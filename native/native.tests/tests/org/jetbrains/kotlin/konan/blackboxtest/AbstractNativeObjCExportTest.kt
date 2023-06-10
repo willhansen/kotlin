@@ -21,24 +21,24 @@ import java.io.File
 
 @Tag("objcexport")
 abstract class AbstractNativeObjCExportTest : AbstractNativeSimpleTest() {
-    private val targets: KotlinNativeTargets get() = testRunSettings.get<KotlinNativeTargets>()
-    private val testCompilationFactory = TestCompilationFactory()
+    private konst targets: KotlinNativeTargets get() = testRunSettings.get<KotlinNativeTargets>()
+    private konst testCompilationFactory = TestCompilationFactory()
 
     protected fun runTest(@TestDataFile testDir: String) {
         Assumptions.assumeTrue(targets.testTarget.family.isAppleFamily)
-        val testPathFull = getAbsoluteFile(testDir)
-        val ktSources = testPathFull.list()!!
+        konst testPathFull = getAbsoluteFile(testDir)
+        konst ktSources = testPathFull.list()!!
             .filter { it.endsWith(".kt") }
             .map { testPathFull.resolve(it) }
         ktSources.forEach { muteTestIfNecessary(it) }
 
-        val testCase: TestCase = generateObjCFrameworkTestCase(testPathFull, ktSources)
-        val objCFramework: ObjCFramework = testCase.toObjCFramework().assertSuccess().resultingArtifact
+        konst testCase: TestCase = generateObjCFrameworkTestCase(testPathFull, ktSources)
+        konst objCFramework: ObjCFramework = testCase.toObjCFramework().assertSuccess().resultingArtifact
 
-        val mainHeaderContents = objCFramework.mainHeader.readText()
-        val regexFilter = testPathFull.resolve("${testPathFull.name}.filter.txt").readText()
-        val actualFilteredOutput = filterContentsOutput(mainHeaderContents, regexFilter)
-        val expectedFilteredOutput = testPathFull.resolve("${testPathFull.name}.gold.txt").readText()
+        konst mainHeaderContents = objCFramework.mainHeader.readText()
+        konst regexFilter = testPathFull.resolve("${testPathFull.name}.filter.txt").readText()
+        konst actualFilteredOutput = filterContentsOutput(mainHeaderContents, regexFilter)
+        konst expectedFilteredOutput = testPathFull.resolve("${testPathFull.name}.gold.txt").readText()
 
         // Compare to goldfile, ignoring lines order. This is needed to be stable against possible declaration order fluctuations.
         // TODO Investigate why ObjCExport declarations order may vary
@@ -58,8 +58,8 @@ abstract class AbstractNativeObjCExportTest : AbstractNativeSimpleTest() {
     }
 
     private fun generateObjCFrameworkTestCase(testPathFull: File, sources: List<File>): TestCase {
-        val moduleName: String = testPathFull.name
-        val module = TestModule.Exclusive(DEFAULT_MODULE_NAME, emptySet(), emptySet(), emptySet())
+        konst moduleName: String = testPathFull.name
+        konst module = TestModule.Exclusive(DEFAULT_MODULE_NAME, emptySet(), emptySet(), emptySet())
         sources.forEach { module.files += TestFile.createCommitted(it, module) }
 
         return TestCase(

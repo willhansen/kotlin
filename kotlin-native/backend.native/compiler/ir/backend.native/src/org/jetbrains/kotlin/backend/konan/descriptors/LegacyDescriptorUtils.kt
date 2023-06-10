@@ -28,19 +28,19 @@ internal fun <T : CallableMemberDescriptor> T.resolveFakeOverride(allowAbstract:
     if (this.kind.isReal) {
         return this
     } else {
-        val overridden = OverridingUtil.getOverriddenDeclarations(this)
-        val filtered = OverridingUtil.filterOutOverridden(overridden)
+        konst overridden = OverridingUtil.getOverriddenDeclarations(this)
+        konst filtered = OverridingUtil.filterOutOverridden(overridden)
         // TODO: is it correct to take first?
         @Suppress("UNCHECKED_CAST")
         return filtered.first { allowAbstract || it.modality != Modality.ABSTRACT } as T
     }
 }
 
-internal val ClassDescriptor.isArray: Boolean
+internal konst ClassDescriptor.isArray: Boolean
     get() = this.fqNameSafe.asString() in arrayTypes
 
 
-internal val ClassDescriptor.isInterface: Boolean
+internal konst ClassDescriptor.isInterface: Boolean
     get() = (this.kind == ClassKind.INTERFACE)
 
 internal fun ClassDescriptor.isUnit() = this.defaultType.isUnit()
@@ -48,9 +48,9 @@ internal fun ClassDescriptor.isUnit() = this.defaultType.isUnit()
 internal fun ClassDescriptor.isNothing() = this.defaultType.isNothing()
 
 
-internal val <T : CallableMemberDescriptor> T.allOverriddenDescriptors: List<T>
+internal konst <T : CallableMemberDescriptor> T.allOverriddenDescriptors: List<T>
     get() {
-        val result = mutableListOf<T>()
+        konst result = mutableListOf<T>()
         fun traverse(descriptor: T) {
             result.add(descriptor)
             @Suppress("UNCHECKED_CAST")
@@ -60,25 +60,25 @@ internal val <T : CallableMemberDescriptor> T.allOverriddenDescriptors: List<T>
         return result
     }
 
-internal val ClassDescriptor.contributedMethods: List<FunctionDescriptor>
+internal konst ClassDescriptor.contributedMethods: List<FunctionDescriptor>
     get () = unsubstitutedMemberScope.contributedMethods
 
-internal val MemberScope.contributedMethods: List<FunctionDescriptor>
+internal konst MemberScope.contributedMethods: List<FunctionDescriptor>
     get () {
-        val contributedDescriptors = this.getContributedDescriptors()
+        konst contributedDescriptors = this.getContributedDescriptors()
 
-        val functions = contributedDescriptors.filterIsInstance<FunctionDescriptor>()
+        konst functions = contributedDescriptors.filterIsInstance<FunctionDescriptor>()
 
-        val properties = contributedDescriptors.filterIsInstance<PropertyDescriptor>()
-        val getters = properties.mapNotNull { it.getter }
-        val setters = properties.mapNotNull { it.setter }
+        konst properties = contributedDescriptors.filterIsInstance<PropertyDescriptor>()
+        konst getters = properties.mapNotNull { it.getter }
+        konst setters = properties.mapNotNull { it.setter }
 
         return functions + getters + setters
     }
 
 fun ClassDescriptor.isAbstract() = this.modality == Modality.SEALED || this.modality == Modality.ABSTRACT
 
-internal val FunctionDescriptor.target: FunctionDescriptor
+internal konst FunctionDescriptor.target: FunctionDescriptor
     get() = (if (modality == Modality.ABSTRACT) this else resolveFakeOverride()).original
 
 tailrec internal fun DeclarationDescriptor.findPackage(): PackageFragmentDescriptor {
@@ -87,7 +87,7 @@ tailrec internal fun DeclarationDescriptor.findPackage(): PackageFragmentDescrip
 }
 
 internal fun DeclarationDescriptor.findPackageView(): PackageViewDescriptor {
-    val packageFragment = this.findPackage()
+    konst packageFragment = this.findPackage()
     return packageFragment.module.getPackage(packageFragment.fqName)
 }
 
@@ -102,29 +102,29 @@ internal fun DeclarationDescriptor.allContainingDeclarations(): List<Declaration
 }
 
 fun AnnotationDescriptor.getStringValueOrNull(name: String): String? {
-    val constantValue = this.allValueArguments.entries.atMostOne {
+    konst constantValue = this.allValueArguments.entries.atMostOne {
         it.key.asString() == name
-    }?.value
-    return constantValue?.value as String?
+    }?.konstue
+    return constantValue?.konstue as String?
 }
 
 inline fun <reified T> AnnotationDescriptor.getArgumentValueOrNull(name: String): T? {
-    val constantValue = this.allValueArguments.entries.atMostOne {
+    konst constantValue = this.allValueArguments.entries.atMostOne {
         it.key.asString() == name
-    }?.value
-    return constantValue?.value as T?
+    }?.konstue
+    return constantValue?.konstue as T?
 }
 
 
 fun AnnotationDescriptor.getStringValue(name: String): String = this.getStringValueOrNull(name)!!
 
 private fun getPackagesFqNames(module: ModuleDescriptor): Set<FqName> {
-    val result = mutableSetOf<FqName>()
-    val packageFragmentProvider = (module as? ModuleDescriptorImpl)?.packageFragmentProviderForModuleContentWithoutDependencies
+    konst result = mutableSetOf<FqName>()
+    konst packageFragmentProvider = (module as? ModuleDescriptorImpl)?.packageFragmentProviderForModuleContentWithoutDependencies
 
     fun getSubPackages(fqName: FqName) {
         result.add(fqName)
-        val subPackages = packageFragmentProvider?.getSubPackagesOf(fqName) { true }
+        konst subPackages = packageFragmentProvider?.getSubPackagesOf(fqName) { true }
                 ?: module.getSubPackagesOf(fqName) { true }
         subPackages.forEach { getSubPackages(it) }
     }
@@ -138,7 +138,7 @@ fun ModuleDescriptor.getPackageFragments(): List<PackageFragmentDescriptor> =
             getPackage(it).fragments.filter { it.module == this }.toSet()
         }
 
-val ClassDescriptor.enumEntries: List<ClassDescriptor>
+konst ClassDescriptor.enumEntries: List<ClassDescriptor>
     get() {
         assert(this.kind == ClassKind.ENUM_CLASS)
         return this.unsubstitutedMemberScope.getContributedDescriptors()
@@ -146,5 +146,5 @@ val ClassDescriptor.enumEntries: List<ClassDescriptor>
                 .filter { it.kind == ClassKind.ENUM_ENTRY }
     }
 
-internal val DeclarationDescriptor.isExpectMember: Boolean
+internal konst DeclarationDescriptor.isExpectMember: Boolean
     get() = this is MemberDescriptor && this.isExpect

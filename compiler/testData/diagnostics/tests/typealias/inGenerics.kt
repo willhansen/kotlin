@@ -1,13 +1,13 @@
 // FIR_IDENTICAL
 typealias MyString = String
 
-class Container<T>(val x: T)
+class Container<T>(konst x: T)
 
 typealias MyStringContainer = Container<MyString?>
 
-val ms: MyString = "MyString"
+konst ms: MyString = "MyString"
 
-val msn: MyString? = null
+konst msn: MyString? = null
 
-val msc: MyStringContainer = Container(ms)
-val msc1 = MyStringContainer(null)
+konst msc: MyStringContainer = Container(ms)
+konst msc1 = MyStringContainer(null)

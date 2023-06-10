@@ -4,17 +4,17 @@
  */
 
 sealed class Tag {
-    abstract fun value(): Any
+    abstract fun konstue(): Any
 }
 
 sealed class TagBoolean : Tag() {
-    abstract override fun value(): Boolean
+    abstract override fun konstue(): Boolean
 
     object True : TagBoolean() {
-        override fun value() = true
+        override fun konstue() = true
     }
 
     object False : TagBoolean() {
-        override fun value() = false
+        override fun konstue() = false
     }
 }

@@ -17,24 +17,24 @@ kotlinx.android.synthetic.main
 
 kotlinx.android.synthetic.main.test
 
-    public val android.app.Activity.fragmentTag: android.app.Fragment!
-    public val android.app.Fragment.fragmentTag: android.app.Fragment!
-    public val android.app.Activity.`fun`: android.widget.TextView!
-    public val android.app.Dialog.`fun`: android.widget.TextView!
-    public val android.app.Fragment.`fun`: android.widget.TextView!
-    public val kotlinx.android.extensions.LayoutContainer.`fun`: android.widget.TextView!
-    public val android.app.Activity.includeTag: android.view.View!
-    public val android.app.Dialog.includeTag: android.view.View!
-    public val android.app.Fragment.includeTag: android.view.View!
-    public val kotlinx.android.extensions.LayoutContainer.includeTag: android.view.View!
-    public val android.app.Activity.set: android.widget.Button!
-    public val android.app.Dialog.set: android.widget.Button!
-    public val android.app.Fragment.set: android.widget.Button!
-    public val kotlinx.android.extensions.LayoutContainer.set: android.widget.Button!
+    public konst android.app.Activity.fragmentTag: android.app.Fragment!
+    public konst android.app.Fragment.fragmentTag: android.app.Fragment!
+    public konst android.app.Activity.`fun`: android.widget.TextView!
+    public konst android.app.Dialog.`fun`: android.widget.TextView!
+    public konst android.app.Fragment.`fun`: android.widget.TextView!
+    public konst kotlinx.android.extensions.LayoutContainer.`fun`: android.widget.TextView!
+    public konst android.app.Activity.includeTag: android.view.View!
+    public konst android.app.Dialog.includeTag: android.view.View!
+    public konst android.app.Fragment.includeTag: android.view.View!
+    public konst kotlinx.android.extensions.LayoutContainer.includeTag: android.view.View!
+    public konst android.app.Activity.set: android.widget.Button!
+    public konst android.app.Dialog.set: android.widget.Button!
+    public konst android.app.Fragment.set: android.widget.Button!
+    public konst kotlinx.android.extensions.LayoutContainer.set: android.widget.Button!
 
 
 kotlinx.android.synthetic.main.test.view
 
-    public val android.view.View.`fun`: android.widget.TextView!
-    public val android.view.View.includeTag: android.view.View!
-    public val android.view.View.set: android.widget.Button!
+    public konst android.view.View.`fun`: android.widget.TextView!
+    public konst android.view.View.includeTag: android.view.View!
+    public konst android.view.View.set: android.widget.Button!

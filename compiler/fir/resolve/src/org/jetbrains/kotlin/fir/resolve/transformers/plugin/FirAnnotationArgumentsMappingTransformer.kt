@@ -36,20 +36,20 @@ open class FirAnnotationArgumentsMappingTransformer(
     outerBodyResolveContext = outerBodyResolveContext,
     returnTypeCalculator = returnTypeCalculator,
 ) {
-    final override val expressionsTransformer: FirExpressionsResolveTransformer =
+    final override konst expressionsTransformer: FirExpressionsResolveTransformer =
         FirExpressionTransformerForAnnotationArgumentsMapping(this)
 
-    private val declarationsResolveTransformerForAnnotationArgumentsMapping =
+    private konst declarationsResolveTransformerForAnnotationArgumentsMapping =
         FirDeclarationsResolveTransformerForAnnotationArgumentsMapping(this)
 
-    private val usualDeclarationTransformer = FirDeclarationsResolveTransformer(this)
+    private konst usualDeclarationTransformer = FirDeclarationsResolveTransformer(this)
 
     @PrivateForInline
     var isInsideAnnotationArgument = false
 
     @OptIn(PrivateForInline::class)
     inline fun <R> insideAnnotationArgument(action: () -> R): R {
-        val oldValue = this.isInsideAnnotationArgument
+        konst oldValue = this.isInsideAnnotationArgument
         isInsideAnnotationArgument = true
         try {
             return action()
@@ -59,7 +59,7 @@ open class FirAnnotationArgumentsMappingTransformer(
     }
 
     @OptIn(PrivateForInline::class)
-    final override val declarationsTransformer: FirDeclarationsResolveTransformer
+    final override konst declarationsTransformer: FirDeclarationsResolveTransformer
         get() {
             return if (isInsideAnnotationArgument) usualDeclarationTransformer
             else declarationsResolveTransformerForAnnotationArgumentsMapping
@@ -67,7 +67,7 @@ open class FirAnnotationArgumentsMappingTransformer(
 }
 
 private class FirExpressionTransformerForAnnotationArgumentsMapping(
-    private val annotationArgumentsMappingTransformer: FirAnnotationArgumentsMappingTransformer,
+    private konst annotationArgumentsMappingTransformer: FirAnnotationArgumentsMappingTransformer,
 ) : FirExpressionsResolveTransformer(annotationArgumentsMappingTransformer) {
 
     override fun transformAnnotationCall(annotationCall: FirAnnotationCall, data: ResolutionMode): FirStatement {
@@ -133,7 +133,7 @@ private class FirDeclarationsResolveTransformerForAnnotationArgumentsMapping(
     }
 
     override fun transformConstructor(constructor: FirConstructor, data: ResolutionMode): FirConstructor {
-        val containingClass = context.containerIfAny as? FirRegularClass
+        konst containingClass = context.containerIfAny as? FirRegularClass
         doTransformTypeParameters(constructor)
 
         context.withConstructor(constructor) {
@@ -150,14 +150,14 @@ private class FirDeclarationsResolveTransformerForAnnotationArgumentsMapping(
         return constructor
     }
 
-    override fun transformValueParameter(valueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
-        context.withValueParameter(valueParameter, session) {
-            valueParameter
+    override fun transformValueParameter(konstueParameter: FirValueParameter, data: ResolutionMode): FirStatement {
+        context.withValueParameter(konstueParameter, session) {
+            konstueParameter
                 .transformAnnotations(transformer, data)
                 .transformReturnTypeRef(transformer, data)
         }
 
-        return valueParameter
+        return konstueParameter
     }
 
     override fun transformProperty(property: FirProperty, data: ResolutionMode): FirProperty {

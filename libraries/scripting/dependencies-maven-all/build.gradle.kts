@@ -5,9 +5,9 @@ import org.gradle.kotlin.dsl.support.serviceOf
 
 description = "Shaded Maven dependencies resolver"
 
-val jarBaseName = property("archivesBaseName") as String
+konst jarBaseName = property("archivesBaseName") as String
 
-val embedded by configurations
+konst embedded by configurations
 
 embedded.apply {
     exclude("org.slf4j", "slf4j-api")
@@ -42,7 +42,7 @@ noDefaultJar()
 sourcesJar()
 javadocJar()
 
-val mavenPackagesToRelocate = listOf(
+konst mavenPackagesToRelocate = listOf(
     "org.eclipse",
     "org.codehaus",
     "org.jsoup",
@@ -52,7 +52,7 @@ val mavenPackagesToRelocate = listOf(
     "org.sonatype"
 )
 
-val relocatedJar by task<ShadowJar> {
+konst relocatedJar by task<ShadowJar> {
     configurations = listOf(embedded)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     destinationDirectory.set(File(buildDir, "libs"))
@@ -67,25 +67,25 @@ val relocatedJar by task<ShadowJar> {
     }
 }
 
-val normalizeComponentsXmlEndings by tasks.registering {
+konst normalizeComponentsXmlEndings by tasks.registering {
     dependsOn(relocatedJar)
-    val outputDirectory = buildDir.resolve(name)
-    val outputFile = outputDirectory.resolve(ComponentsXmlResourceTransformer.COMPONENTS_XML_PATH)
-    val relocatedJarFile = project.provider { relocatedJar.get().singleOutputFile() }
-    val archiveOperations = serviceOf<ArchiveOperations>()
+    konst outputDirectory = buildDir.resolve(name)
+    konst outputFile = outputDirectory.resolve(ComponentsXmlResourceTransformer.COMPONENTS_XML_PATH)
+    konst relocatedJarFile = project.provider { relocatedJar.get().singleOutputFile() }
+    konst archiveOperations = serviceOf<ArchiveOperations>()
     outputs.file(outputFile)
 
     doFirst {
-        val componentsXml = archiveOperations.zipTree(relocatedJarFile.get()).matching {
+        konst componentsXml = archiveOperations.zipTree(relocatedJarFile.get()).matching {
             include { it.path == ComponentsXmlResourceTransformer.COMPONENTS_XML_PATH }
         }.single().readText()
-        val processedComponentsXml = componentsXml.replace("\r\n", "\n")
+        konst processedComponentsXml = componentsXml.replace("\r\n", "\n")
         outputDirectory.mkdirs()
         outputFile.writeText(processedComponentsXml)
     }
 }
 
-val normalizedJar by task<Jar> {
+konst normalizedJar by task<Jar> {
     dependsOn(relocatedJar)
     dependsOn(normalizeComponentsXmlEndings)
 
@@ -104,7 +104,7 @@ val normalizedJar by task<Jar> {
     }
 }
 
-val proguard by task<CacheableProguardTask> {
+konst proguard by task<CacheableProguardTask> {
     dependsOn(normalizedJar)
     configuration("dependencies-maven.pro")
 
@@ -137,8 +137,8 @@ val proguard by task<CacheableProguardTask> {
     )
 }
 
-val resultJar by task<Jar> {
-    val pack = if (kotlinBuildProperties.proguard) proguard else normalizedJar
+konst resultJar by task<Jar> {
+    konst pack = if (kotlinBuildProperties.proguard) proguard else normalizedJar
     dependsOn(pack)
     setupPublicJar(jarBaseName)
     from {

@@ -23,7 +23,7 @@ we use a cryptographically secure generator (chacha20).
 /* ----------------------------------------------------------------------------
 Chacha20 implementation as the original algorithm with a 64-bit nonce
 and counter: https://en.wikipedia.org/wiki/Salsa20
-The input matrix has sixteen 32-bit values:
+The input matrix has sixteen 32-bit konstues:
 Position  0 to  3: constant key
 Position  4 to 11: the key
 Position 12 to 13: the counter.
@@ -97,7 +97,7 @@ static inline uint32_t read32(const uint8_t* p, size_t idx32) {
 static void chacha_init(mi_random_ctx_t* ctx, const uint8_t key[32], uint64_t nonce)
 {
   // since we only use chacha for randomness (and not encryption) we
-  // do not _need_ to read 32-bit values as little endian but we do anyways
+  // do not _need_ to read 32-bit konstues as little endian but we do anyways
   // just for being compatible :-)
   memset(ctx, 0, sizeof(*ctx));
   for (size_t i = 0; i < 4; i++) {

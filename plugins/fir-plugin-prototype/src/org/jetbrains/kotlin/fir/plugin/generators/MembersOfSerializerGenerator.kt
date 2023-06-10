@@ -28,34 +28,34 @@ import org.jetbrains.kotlin.name.Name
  */
 class MembersOfSerializerGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val SERIALIZABLE_PREDICATE = LookupPredicate.create { annotated("MySerializable".fqn()) }
-        private val CORE_SERIALIZER_PREDICATE = LookupPredicate.create { annotated("CoreSerializer".fqn()) }
+        private konst SERIALIZABLE_PREDICATE = LookupPredicate.create { annotated("MySerializable".fqn()) }
+        private konst CORE_SERIALIZER_PREDICATE = LookupPredicate.create { annotated("CoreSerializer".fqn()) }
 
-        private val X_NAME = Name.identifier("x")
+        private konst X_NAME = Name.identifier("x")
     }
 
-    private val predicateBasedProvider = session.predicateBasedProvider
-    private val matchedSerializableClasses by lazy {
+    private konst predicateBasedProvider = session.predicateBasedProvider
+    private konst matchedSerializableClasses by lazy {
         predicateBasedProvider.getSymbolsByPredicate(SERIALIZABLE_PREDICATE).filterIsInstance<FirRegularClassSymbol>()
     }
-    private val serializableClassIds by lazy {
+    private konst serializableClassIds by lazy {
         matchedSerializableClasses.map { it.classId }
     }
 
-    private val matchedCoreSerializerClasses by lazy {
+    private konst matchedCoreSerializerClasses by lazy {
         predicateBasedProvider.getSymbolsByPredicate(CORE_SERIALIZER_PREDICATE).filterIsInstance<FirRegularClassSymbol>()
     }
 
-    private val serializeMethodNames by lazy {
+    private konst serializeMethodNames by lazy {
         serializableClassIds.associateBy { Name.identifier("serialize${it.shortClassName.identifier}") }
     }
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
-        val owner = context?.owner ?: return emptyList()
-        val argumentClassId = serializeMethodNames[callableId.callableName] ?: return emptyList()
+        konst owner = context?.owner ?: return emptyList()
+        konst argumentClassId = serializeMethodNames[callableId.callableName] ?: return emptyList()
 
-        val function = createMemberFunction(owner, Key, callableId.callableName, session.builtinTypes.unitType.type) {
-            valueParameter(X_NAME, argumentClassId.createConeType(session))
+        konst function = createMemberFunction(owner, Key, callableId.callableName, session.builtinTypes.unitType.type) {
+            konstueParameter(X_NAME, argumentClassId.createConeType(session))
         }.apply {
             replaceBody(buildBlock {}.apply { replaceTypeRef(session.builtinTypes.unitType) })
         }

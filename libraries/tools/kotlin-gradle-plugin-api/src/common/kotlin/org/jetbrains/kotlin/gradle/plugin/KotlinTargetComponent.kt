@@ -9,15 +9,15 @@ import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.component.SoftwareComponent
 
 interface KotlinTargetComponent : SoftwareComponent {
-    val target: KotlinTarget
-    val publishable: Boolean
-    val publishableOnCurrentHost: Boolean
-    val defaultArtifactId: String
+    konst target: KotlinTarget
+    konst publishable: Boolean
+    konst publishableOnCurrentHost: Boolean
+    konst defaultArtifactId: String
 
     @Deprecated(
         message = "Sources artifacts are now published as separate variant " +
                 "use target.sourcesElementsConfigurationName to obtain necessary information",
         replaceWith = ReplaceWith("target.sourcesElementsConfigurationName")
     )
-    val sourcesArtifacts: Set<PublishArtifact>
+    konst sourcesArtifacts: Set<PublishArtifact>
 }

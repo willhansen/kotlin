@@ -34,21 +34,21 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class OptimizationMethodVisitor(
     delegate: MethodVisitor,
-    private val mandatoryTransformationsOnly: Boolean,
-    private val generationState: GenerationState,
+    private konst mandatoryTransformationsOnly: Boolean,
+    private konst generationState: GenerationState,
     access: Int,
     name: String,
     desc: String,
     signature: String?,
     exceptions: Array<out String>?
 ) : TransformationMethodVisitor(delegate, access, name, desc, signature, exceptions) {
-    val normalizationMethodTransformer = CompositeMethodTransformer(
+    konst normalizationMethodTransformer = CompositeMethodTransformer(
         InplaceArgumentsMethodTransformer(),
         FixStackWithLabelNormalizationMethodTransformer(),
         MethodVerifier("AFTER mandatory stack transformations", generationState)
     )
 
-    val optimizationTransformer = CompositeMethodTransformer(
+    konst optimizationTransformer = CompositeMethodTransformer(
         CapturedVarsOptimizationMethodTransformer(),
         RedundantNullCheckMethodTransformer(generationState),
         RedundantCheckCastEliminationMethodTransformer(),
@@ -79,8 +79,8 @@ class OptimizationMethodVisitor(
     }
 
     companion object {
-        const val MEMORY_LIMIT_BY_METHOD_MB = 50
-        private const val TRY_CATCH_BLOCKS_SOFT_LIMIT = 16
+        const konst MEMORY_LIMIT_BY_METHOD_MB = 50
+        private const konst TRY_CATCH_BLOCKS_SOFT_LIMIT = 16
 
         fun canBeOptimized(node: MethodNode): Boolean {
             if (node.tryCatchBlocks.size > TRY_CATCH_BLOCKS_SOFT_LIMIT) {
@@ -91,7 +91,7 @@ class OptimizationMethodVisitor(
         }
 
         fun canBeOptimizedUsingSourceInterpreter(node: MethodNode): Boolean {
-            val methodSize = node.instructions.first.countInsnsWithFramesUntil(null)
+            konst methodSize = node.instructions.first.countInsnsWithFramesUntil(null)
             if (node.tryCatchBlocks.size > TRY_CATCH_BLOCKS_SOFT_LIMIT) {
                 if (getTotalFramesWeight(getTotalTcbSize(node) * methodSize, node) > MEMORY_LIMIT_BY_METHOD_MB)
                     return false

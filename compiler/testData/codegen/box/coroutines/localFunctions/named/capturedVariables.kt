@@ -5,8 +5,8 @@ import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
 suspend fun callLocal(): String {
-    val a = "O"
-    val b = "K"
+    konst a = "O"
+    konst b = "K"
     suspend fun local() = suspendCoroutineUninterceptedOrReturn<String> {
         it.resume(a + b)
         COROUTINE_SUSPENDED

@@ -53,14 +53,14 @@ internal fun hashCode(obj: dynamic): Int {
     }
 }
 
-private const val POW_2_32 = 4294967296.0
-private const val OBJECT_HASH_CODE_PROPERTY_NAME = "kotlinHashCodeValue$"
+private const konst POW_2_32 = 4294967296.0
+private const konst OBJECT_HASH_CODE_PROPERTY_NAME = "kotlinHashCodeValue$"
 
 internal fun getObjectHashCode(obj: dynamic): Int {
     if (!jsIn(OBJECT_HASH_CODE_PROPERTY_NAME, obj)) {
         var hash = jsBitwiseOr(js("Math").random() * POW_2_32, 0) // Make 32-bit singed integer.
         var descriptor = js("new Object()")
-        descriptor.value = hash
+        descriptor.konstue = hash
         descriptor.enumerable = false
         js("Object").defineProperty(obj, OBJECT_HASH_CODE_PROPERTY_NAME, descriptor)
     }
@@ -69,9 +69,9 @@ internal fun getObjectHashCode(obj: dynamic): Int {
 
 internal fun getStringHashCode(str: String): Int {
     var hash = 0
-    val length: Int = str.length  // TODO: Implement WString.length
+    konst length: Int = str.length  // TODO: Implement WString.length
     for (i in 0..length-1) {
-        val code: Int = str.asDynamic().charCodeAt(i)
+        konst code: Int = str.asDynamic().charCodeAt(i)
         hash = hash * 31 + code
     }
     return hash
@@ -88,7 +88,7 @@ internal fun captureStack(instance: Throwable, constructorFunction: Any) {
 }
 
 internal fun newThrowable(message: String?, cause: Throwable?): Throwable {
-    val throwable = js("new Error()")
+    konst throwable = js("new Error()")
     throwable.message = if (isUndefined(message)) {
         if (isUndefined(cause)) message else cause?.toString() ?: VOID
     } else message ?: VOID
@@ -103,7 +103,7 @@ internal fun extendThrowable(this_: dynamic, message: String?, cause: Throwable?
 }
 
 internal fun setPropertiesToThrowableInstance(this_: dynamic, message: String?, cause: Throwable?) {
-    val errorInfo = calculateErrorInfo(JsObject.getPrototypeOf(this_))
+    konst errorInfo = calculateErrorInfo(JsObject.getPrototypeOf(this_))
     if ((errorInfo and 0x1) == 0) {
         @Suppress("IfThenToElvis")
         this_.message = if (message == null) {
@@ -136,7 +136,7 @@ internal fun errorCode(description: String): Nothing {
 }
 
 @Suppress("SENSELESS_COMPARISON")
-internal fun isUndefined(value: dynamic): Boolean = value === VOID
+internal fun isUndefined(konstue: dynamic): Boolean = konstue === VOID
 
 internal fun <T, R> boxIntrinsic(@Suppress("UNUSED_PARAMETER") x: T): R = error("Should be lowered")
 internal fun <T, R> unboxIntrinsic(@Suppress("UNUSED_PARAMETER") x: T): R = error("Should be lowered")
@@ -151,7 +151,7 @@ internal fun <T> objectCreate(proto: T?) =
 
 @Suppress("UNUSED_PARAMETER")
 internal fun createThis(ctor: Ctor, box: dynamic): dynamic {
-    val self = js("Object.create(ctor.prototype)")
+    konst self = js("Object.create(ctor.prototype)")
     boxApply(self, box)
     return self
 }
@@ -169,10 +169,10 @@ internal fun <reified T : Any> createExternalThis(
     parameters: Array<Any?>,
     box: dynamic
 ): T {
-    val selfCtor = if (box === VOID) {
+    konst selfCtor = if (box === VOID) {
         ctor
     } else {
-        val newCtor: dynamic = jsNewAnonymousClass(ctor)
+        konst newCtor: dynamic = jsNewAnonymousClass(ctor)
         js("Object.assign(newCtor.prototype, box)")
         newCtor.constructor = ctor
         newCtor

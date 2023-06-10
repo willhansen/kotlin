@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.fir.resolve.dfa
 import org.jetbrains.kotlin.fir.types.ConeKotlinType
 
 sealed class Statement {
-    abstract val variable: DataFlowVariable
+    abstract konst variable: DataFlowVariable
 }
 
 /*
@@ -18,20 +18,20 @@ sealed class Statement {
  * d == True
  * d == False
  */
-data class OperationStatement(override val variable: DataFlowVariable, val operation: Operation) : Statement() {
+data class OperationStatement(override konst variable: DataFlowVariable, konst operation: Operation) : Statement() {
     override fun toString(): String {
         return "$variable $operation"
     }
 }
 
 sealed class TypeStatement : Statement() {
-    abstract override val variable: RealVariable
-    abstract val exactType: Set<ConeKotlinType>
+    abstract override konst variable: RealVariable
+    abstract konst exactType: Set<ConeKotlinType>
 
-    val isEmpty: Boolean
+    konst isEmpty: Boolean
         get() = exactType.isEmpty()
 
-    val isNotEmpty: Boolean
+    konst isNotEmpty: Boolean
         get() = !isEmpty
 
     override fun toString(): String {
@@ -40,8 +40,8 @@ sealed class TypeStatement : Statement() {
 }
 
 class Implication(
-    val condition: OperationStatement,
-    val effect: Statement
+    konst condition: OperationStatement,
+    konst effect: Statement
 ) {
     override fun toString(): String {
         return "$condition -> $effect"
@@ -51,7 +51,7 @@ class Implication(
 enum class Operation {
     EqTrue, EqFalse, EqNull, NotEqNull;
 
-    fun valueIfKnown(given: Operation): Boolean? = when (this) {
+    fun konstueIfKnown(given: Operation): Boolean? = when (this) {
         EqTrue, EqFalse -> if (given == NotEqNull) null else given == this
         EqNull -> given == EqNull
         NotEqNull -> given != EqNull

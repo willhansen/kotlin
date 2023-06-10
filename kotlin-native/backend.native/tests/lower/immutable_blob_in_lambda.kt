@@ -9,6 +9,6 @@ import kotlin.test.*
 
 @Test
 fun runTest() = run {
-    val golden = immutableBlobOf(123)
+    konst golden = immutableBlobOf(123)
     println(golden[0])
 }

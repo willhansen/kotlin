@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.cfg.pseudocode.instructions
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 
-class BlockScope(private val parentScope: BlockScope?, val block: KtElement) {
-    val depth: Int = (parentScope?.depth ?: 0) + 1
+class BlockScope(private konst parentScope: BlockScope?, konst block: KtElement) {
+    konst depth: Int = (parentScope?.depth ?: 0) + 1
 
-    val blockScopeForContainingDeclaration: BlockScope? by lazy {
+    konst blockScopeForContainingDeclaration: BlockScope? by lazy {
         var scope: BlockScope? = this
         while (scope != null) {
             if (scope.block is KtDeclaration) {

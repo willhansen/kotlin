@@ -9,20 +9,20 @@
 package foo
 
 @JsExport
-val exportedVal = 10
+konst exportedVal = 10
 
 @JsExport
 fun exportedFun() = 10
 
 @JsExport
 class ExportedClass {
-    val value = 10
+    konst konstue = 10
 }
 
 @JsExport
 external interface ExportedInternalInterface
 
-val _val = 10
+konst _konst = 10
 
 fun _fun() = 10
 
@@ -39,10 +39,10 @@ fun zzz(x: Int = 10) {}
 
 package foo
 
-val fileLevelExportedVal = 10
+konst fileLevelExportedVal = 10
 fun fileLevelExportedFun() = 10
 class FileLevelExportedClass {
-    val value = 10
+    konst konstue = 10
 }
 external interface FileLevelExportedExternalInterface
 

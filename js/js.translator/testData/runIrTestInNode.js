@@ -47,7 +47,7 @@ files.forEach(function (path) {
 
 var allFiles = [].concat(runtimeFiles, files);
 
-// Evaluate files and run box function
+// Ekonstuate files and run box function
 
 var sandbox = {};
 vm.createContext(sandbox);

@@ -5,14 +5,14 @@ package lib
 
 internal fun foo() = 1
 
-internal val bar = 2
+internal konst bar = 2
 
 internal class A {
     internal fun baz(a: Int): Int {
         return a * 10
     }
 
-    internal val foo = 3
+    internal konst foo = 3
 
     internal inner class B {
         internal fun foo() = 4
@@ -29,7 +29,7 @@ import lib.*
 fun box(): String {
     if (foo() != 1) return "fail 1: ${foo()}"
     if (bar != 2) return "fail 2: ${bar}"
-    val a = A()
+    konst a = A()
     if (a.baz(10) != 100) return "fail 3: ${a.baz(10)}"
     if (a.foo != 3) return "fail 4: ${a.foo}"
     if (a.B().foo() != 4) return "fail 5: ${a.B().foo()}"

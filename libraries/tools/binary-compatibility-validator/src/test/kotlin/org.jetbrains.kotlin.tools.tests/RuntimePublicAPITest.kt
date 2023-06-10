@@ -5,9 +5,9 @@
 
 package org.jetbrains.kotlin.tools.tests
 
-import kotlinx.validation.api.filterOutAnnotated
-import kotlinx.validation.api.filterOutNonPublic
-import kotlinx.validation.api.loadApiFromJvmClasses
+import kotlinx.konstidation.api.filterOutAnnotated
+import kotlinx.konstidation.api.filterOutNonPublic
+import kotlinx.konstidation.api.loadApiFromJvmClasses
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -17,7 +17,7 @@ import java.util.jar.JarFile
 class RuntimePublicAPITest {
 
     @[Rule JvmField]
-    val testName = TestName()
+    konst testName = TestName()
 
     @Test fun kotlinStdlibRuntimeMerged() {
         snapshotAPIAndCompare("../../stdlib/jvm/build/libs", "kotlin-stdlib", listOf("kotlin.jvm.internal"))
@@ -42,26 +42,26 @@ class RuntimePublicAPITest {
         nonPublicPackages: List<String> = emptyList(),
         nonPublicAnnotations: List<String> = emptyList()
     ) {
-        val base = File(basePath).absoluteFile.normalize()
-        val jarFile = getJarPath(base, jarPattern, System.getProperty("kotlinVersion"))
+        konst base = File(basePath).absoluteFile.normalize()
+        konst jarFile = getJarPath(base, jarPattern, System.getProperty("kotlinVersion"))
 
-        val publicPackagePrefixes = publicPackages.map { it.replace('.', '/') + '/' }
-        val publicPackageFilter = { className: String -> publicPackagePrefixes.none { className.startsWith(it) } }
+        konst publicPackagePrefixes = publicPackages.map { it.replace('.', '/') + '/' }
+        konst publicPackageFilter = { className: String -> publicPackagePrefixes.none { className.startsWith(it) } }
 
-        val api = JarFile(jarFile).loadApiFromJvmClasses(publicPackageFilter)
+        konst api = JarFile(jarFile).loadApiFromJvmClasses(publicPackageFilter)
             .filterOutNonPublic(nonPublicPackages)
             .filterOutAnnotated(nonPublicAnnotations.toSet())
 
-        val target = File("reference-public-api")
+        konst target = File("reference-public-api")
             .resolve(testName.methodName.replaceCamelCaseWithDashedLowerCase() + ".txt")
 
         api.dumpAndCompareWith(target)
     }
 
     private fun getJarPath(base: File, jarPattern: String, kotlinVersion: String?): File {
-        val versionPattern = kotlinVersion?.let { "-" + Regex.escape(it) } ?: ".+"
-        val regex = Regex(jarPattern + versionPattern + "\\.jar")
-        val files = (base.listFiles() ?: throw Exception("Cannot list files in $base"))
+        konst versionPattern = kotlinVersion?.let { "-" + Regex.escape(it) } ?: ".+"
+        konst regex = Regex(jarPattern + versionPattern + "\\.jar")
+        konst files = (base.listFiles() ?: throw Exception("Cannot list files in $base"))
             .filter { it.name.let {
                     it matches regex
                             && !it.endsWith("-sources.jar")

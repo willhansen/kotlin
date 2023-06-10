@@ -9,7 +9,7 @@
 
 <!NO_TAIL_CALLS_FOUND!>tailrec<!> fun foo2() {
     <!NON_TAIL_RECURSIVE_CALL!>foo2<!>()
-    val i = 1
+    konst i = 1
 }
 
 <!NO_TAIL_CALLS_FOUND!>tailrec<!> fun foo3() {
@@ -70,7 +70,7 @@ tailrec fun foo7_return() {
 <!NO_TAIL_CALLS_FOUND!>tailrec<!> fun foo10() {
     <!NON_TAIL_RECURSIVE_CALL!>foo10<!>()
     class Bar {
-        val i = 1
+        konst i = 1
     }
 }
 

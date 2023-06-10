@@ -5,7 +5,7 @@ class Wrapper {
 
   }
 
-  private val dummy: <no name provided>
+  private konst dummy: <no name provided>
     field = { // BLOCK
       local class <no name provided> : Bar {
         constructor() /* primary */ {
@@ -20,7 +20,7 @@ class Wrapper {
     }
     private get
 
-  private val bar: <no name provided>
+  private konst bar: <no name provided>
     field = { // BLOCK
       local class <no name provided> : Bar {
         constructor() /* primary */ {
@@ -29,12 +29,12 @@ class Wrapper {
 
         }
 
-        override val foo: String
+        override konst foo: String
           override get(): String {
             return <this>.#$$delegate_0.<get-foo>()
           }
 
-        private /* final field */ val $$delegate_0: <no name provided> = <this>.<get-dummy>()
+        private /* final field */ konst $$delegate_0: <no name provided> = <this>.<get-dummy>()
 
       }
 
@@ -45,7 +45,7 @@ class Wrapper {
 }
 
 interface Bar {
-  val foo: String
+  konst foo: String
     get(): String {
       return ""
     }

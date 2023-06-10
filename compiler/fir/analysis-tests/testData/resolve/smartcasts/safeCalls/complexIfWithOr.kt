@@ -1,6 +1,6 @@
 interface State
 interface Complex {
-    val superClass: Complex?
+    konst superClass: Complex?
 }
 
 interface ExceptionState : State

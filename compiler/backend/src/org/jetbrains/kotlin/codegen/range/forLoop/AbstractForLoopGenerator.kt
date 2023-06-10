@@ -29,26 +29,26 @@ import org.jetbrains.org.objectweb.asm.Label
 import org.jetbrains.org.objectweb.asm.Type
 
 abstract class AbstractForLoopGenerator(
-    protected val codegen: ExpressionCodegen,
-    final override val forExpression: KtForExpression
+    protected konst codegen: ExpressionCodegen,
+    final override konst forExpression: KtForExpression
 ) : ForLoopGenerator {
-    protected val bindingContext = codegen.bindingContext
-    protected val v = codegen.v!!
+    protected konst bindingContext = codegen.bindingContext
+    protected konst v = codegen.v!!
 
-    private val loopParameterStartLabel = Label()
-    private val bodyEnd = Label()
-    private val leaveVariableTasks = arrayListOf<Runnable>()
+    private konst loopParameterStartLabel = Label()
+    private konst bodyEnd = Label()
+    private konst leaveVariableTasks = arrayListOf<Runnable>()
 
-    protected val elementType: KotlinType = bindingContext.getElementType(forExpression)
-    protected val asmElementType: Type = codegen.asmType(elementType)
+    protected konst elementType: KotlinType = bindingContext.getElementType(forExpression)
+    protected konst asmElementType: Type = codegen.asmType(elementType)
 
     protected var loopParameterVar: Int = -1
     protected lateinit var loopParameterType: Type
     protected lateinit var loopParameterKotlinType: KotlinType
 
     override fun beforeLoop() {
-        val loopParameter = forExpression.loopParameter ?: return
-        val multiParameter = loopParameter.destructuringDeclaration
+        konst loopParameter = forExpression.loopParameter ?: return
+        konst multiParameter = loopParameter.destructuringDeclaration
         if (multiParameter != null) {
             // E tmp<e> = tmp<iterator>.next()
             loopParameterType = asmElementType
@@ -56,7 +56,7 @@ abstract class AbstractForLoopGenerator(
             loopParameterVar = createLoopTempVariable(asmElementType)
         } else {
             // E e = tmp<iterator>.next()
-            val parameterDescriptor = bindingContext.get(BindingContext.VALUE_PARAMETER, loopParameter)
+            konst parameterDescriptor = bindingContext.get(BindingContext.VALUE_PARAMETER, loopParameter)
             loopParameterKotlinType = parameterDescriptor!!.type
             loopParameterType = codegen.asmType(loopParameterKotlinType)
             loopParameterVar = codegen.myFrameMap.enter(parameterDescriptor, loopParameterType)
@@ -76,20 +76,20 @@ abstract class AbstractForLoopGenerator(
         assignToLoopParameter()
         v.mark(loopParameterStartLabel)
 
-        val destructuringDeclaration = forExpression.destructuringDeclaration
+        konst destructuringDeclaration = forExpression.destructuringDeclaration
         if (destructuringDeclaration != null) {
             generateDestructuringDeclaration(destructuringDeclaration)
         }
     }
 
     private fun generateDestructuringDeclaration(destructuringDeclaration: KtDestructuringDeclaration) {
-        val destructuringStartLabel = Label()
+        konst destructuringStartLabel = Label()
 
-        val componentDescriptors = destructuringDeclaration.entries.map { declaration -> codegen.getVariableDescriptorNotNull(declaration) }
+        konst componentDescriptors = destructuringDeclaration.entries.map { declaration -> codegen.getVariableDescriptorNotNull(declaration) }
 
         for (componentDescriptor in componentDescriptors.filterOutDescriptorsWithSpecialNames()) {
-            val componentAsmType = codegen.asmType(componentDescriptor.returnType!!)
-            val componentVarIndex = codegen.myFrameMap.enter(componentDescriptor, componentAsmType)
+            konst componentAsmType = codegen.asmType(componentDescriptor.returnType!!)
+            konst componentVarIndex = codegen.myFrameMap.enter(componentDescriptor, componentAsmType)
             scheduleLeaveVariable(Runnable {
                 codegen.myFrameMap.leave(componentDescriptor)
                 v.visitLocalVariable(
@@ -107,10 +107,10 @@ abstract class AbstractForLoopGenerator(
             StackValue.local(loopParameterVar, asmElementType)
         )
 
-        // Start the scope for the destructuring variables only after a values
+        // Start the scope for the destructuring variables only after a konstues
         // has been written to their locals slot. Otherwise, we can generate
         // type-incorrect locals information because the local could have previously
-        // been used for a value of incompatible type.
+        // been used for a konstue of incompatible type.
         v.visitLabel(destructuringStartLabel)
     }
 
@@ -127,7 +127,7 @@ abstract class AbstractForLoopGenerator(
     }
 
     protected fun createLoopTempVariable(type: Type): Int {
-        val varIndex = codegen.myFrameMap.enterTemp(type)
+        konst varIndex = codegen.myFrameMap.enterTemp(type)
         scheduleLeaveVariable(Runnable { codegen.myFrameMap.leaveTemp(type) })
         return varIndex
     }

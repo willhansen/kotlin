@@ -2,50 +2,50 @@ package test
 
 class A() {
     fun foo() {
-        val a = 1
+        konst a = 1
 
-        // val prop5: 1
-        val prop5 = a
+        // konst prop5: 1
+        konst prop5 = a
 
-        // val prop6: 2
-        val prop6 = a + 1
+        // konst prop6: 2
+        konst prop6 = a + 1
 
         fun local() {
-            // val prop1: 1
-            val prop1 = a
+            // konst prop1: 1
+            konst prop1 = a
 
-            // val prop2: 2
-            val prop2 = a + 1
+            // konst prop2: 2
+            konst prop2 = a + 1
         }
 
-        val b = {
-            // val prop3: 1
-            val prop3 = a
+        konst b = {
+            // konst prop3: 1
+            konst prop3 = a
 
-            // val prop4: 2
-            val prop4 = a + 1
+            // konst prop4: 2
+            konst prop4 = a + 1
         }
 
-        val c = object: Foo {
+        konst c = object: Foo {
             override fun f() {
-                // val prop9: 1
-                val prop9 = a
+                // konst prop9: 1
+                konst prop9 = a
 
-                // val prop10: 2
-                val prop10 = a + 1
+                // konst prop10: 2
+                konst prop10 = a + 1
             }
         }
     }
 }
 
 fun foo() {
-    val a = 1
+    konst a = 1
 
-    // val prop7: 1
-    val prop7 = a
+    // konst prop7: 1
+    konst prop7 = a
 
-    // val prop8: 2
-    val prop8 = a + 1
+    // konst prop8: 2
+    konst prop8 = a + 1
 }
 
 interface Foo {

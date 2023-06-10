@@ -32,9 +32,9 @@ import org.jetbrains.kotlin.resolve.BindingContext
 object InlineParameterChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (declaration is KtFunction) {
-            val inline = declaration.hasModifier(KtTokens.INLINE_KEYWORD)
-            for (parameter in declaration.valueParameters) {
-                val parameterDescriptor = context.trace.get(BindingContext.VALUE_PARAMETER, parameter)
+            konst inline = declaration.hasModifier(KtTokens.INLINE_KEYWORD)
+            for (parameter in declaration.konstueParameters) {
+                konst parameterDescriptor = context.trace.get(BindingContext.VALUE_PARAMETER, parameter)
                 if (!inline || (parameterDescriptor != null && !parameterDescriptor.type.isBuiltinFunctionalType)) {
                     parameter.reportIncorrectInline(KtTokens.NOINLINE_KEYWORD, context.trace)
                     parameter.reportIncorrectInline(KtTokens.CROSSINLINE_KEYWORD, context.trace)
@@ -44,7 +44,7 @@ object InlineParameterChecker : DeclarationChecker {
                     parameterDescriptor?.type?.isSuspendFunctionType == true
                 ) {
                     if (declaration.hasModifier(KtTokens.SUSPEND_KEYWORD)) {
-                        val modifier = parameter.typeReference?.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD)
+                        konst modifier = parameter.typeReference?.modifierList?.getModifier(KtTokens.SUSPEND_KEYWORD)
                         if (modifier != null) {
                             context.trace.report(Errors.REDUNDANT_INLINE_SUSPEND_FUNCTION_TYPE.on(modifier))
                         }
@@ -57,7 +57,7 @@ object InlineParameterChecker : DeclarationChecker {
     }
 
     private fun KtParameter.reportIncorrectInline(modifierToken: KtModifierKeywordToken, diagnosticHolder: DiagnosticSink) {
-        val modifier = modifierList?.getModifier(modifierToken)
+        konst modifier = modifierList?.getModifier(modifierToken)
         modifier?.let {
             diagnosticHolder.report(Errors.ILLEGAL_INLINE_PARAMETER_MODIFIER.on(modifier, modifierToken))
         }

@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.builtins.StandardNames
 import org.jetbrains.kotlin.builtins.UnsignedTypes
 import org.jetbrains.kotlin.descriptors.*
 import org.jetbrains.kotlin.descriptors.synthetic.SyntheticMemberDescriptor
-import org.jetbrains.kotlin.resolve.DescriptorEquivalenceForOverrides
+import org.jetbrains.kotlin.resolve.DescriptorEquikonstenceForOverrides
 import org.jetbrains.kotlin.resolve.OverridingUtil
 import org.jetbrains.kotlin.resolve.calls.context.CheckArgumentTypesMode
 import org.jetbrains.kotlin.resolve.descriptorUtil.getKotlinTypeRefiner
@@ -39,23 +39,23 @@ import org.jetbrains.kotlin.util.CancellationChecker
 import java.util.*
 
 open class OverloadingConflictResolver<C : Any>(
-    private val builtIns: KotlinBuiltIns,
-    private val module: ModuleDescriptor,
-    private val specificityComparator: TypeSpecificityComparator,
-    private val platformOverloadsSpecificityComparator: PlatformOverloadsSpecificityComparator,
-    private val cancellationChecker: CancellationChecker,
-    private val getResultingDescriptor: (C) -> CallableDescriptor,
-    private val createEmptyConstraintSystem: () -> SimpleConstraintSystem,
-    private val createFlatSignature: (C) -> FlatSignature<C>,
-    private val getVariableCandidates: (C) -> C?, // for variable WithInvoke
-    private val isFromSources: (CallableDescriptor) -> Boolean,
-    private val hasSAMConversion: ((C) -> Boolean)?,
-    private val kotlinTypeRefiner: KotlinTypeRefiner,
+    private konst builtIns: KotlinBuiltIns,
+    private konst module: ModuleDescriptor,
+    private konst specificityComparator: TypeSpecificityComparator,
+    private konst platformOverloadsSpecificityComparator: PlatformOverloadsSpecificityComparator,
+    private konst cancellationChecker: CancellationChecker,
+    private konst getResultingDescriptor: (C) -> CallableDescriptor,
+    private konst createEmptyConstraintSystem: () -> SimpleConstraintSystem,
+    private konst createFlatSignature: (C) -> FlatSignature<C>,
+    private konst getVariableCandidates: (C) -> C?, // for variable WithInvoke
+    private konst isFromSources: (CallableDescriptor) -> Boolean,
+    private konst hasSAMConversion: ((C) -> Boolean)?,
+    private konst kotlinTypeRefiner: KotlinTypeRefiner,
 ) {
 
-    private val isTypeRefinementEnabled by lazy { module.isTypeRefinementEnabled() }
+    private konst isTypeRefinementEnabled by lazy { module.isTypeRefinementEnabled() }
 
-    private val resolvedCallHashingStrategy = object : TObjectHashingStrategy<C> {
+    private konst resolvedCallHashingStrategy = object : TObjectHashingStrategy<C> {
         override fun equals(call1: C?, call2: C?): Boolean =
             if (call1 != null && call2 != null)
                 call1.resultingDescriptor == call2.resultingDescriptor
@@ -66,7 +66,7 @@ open class OverloadingConflictResolver<C : Any>(
             call?.resultingDescriptor?.hashCode() ?: 0
     }
 
-    private val C.resultingDescriptor: CallableDescriptor get() = getResultingDescriptor(this)
+    private konst C.resultingDescriptor: CallableDescriptor get() = getResultingDescriptor(this)
 
     // if result contains only one element -- it is maximally specific; otherwise we have ambiguity
     fun chooseMaximallySpecificCandidates(
@@ -76,27 +76,27 @@ open class OverloadingConflictResolver<C : Any>(
     ): Set<C> {
         candidates.setIfOneOrEmpty()?.let { return it }
 
-        val fixedCandidates = if (getVariableCandidates(candidates.first()) != null) {
+        konst fixedCandidates = if (getVariableCandidates(candidates.first()) != null) {
             findMaximallySpecificVariableAsFunctionCalls(candidates) ?: return LinkedHashSet(candidates)
         } else {
             candidates
         }
 
-        val noEquivalentCalls = filterOutEquivalentCalls(fixedCandidates)
-        val noOverrides = OverridingUtil.filterOverrides(
-            noEquivalentCalls,
+        konst noEquikonstentCalls = filterOutEquikonstentCalls(fixedCandidates)
+        konst noOverrides = OverridingUtil.filterOverrides(
+            noEquikonstentCalls,
             isTypeRefinementEnabled,
             cancellationChecker::check
         ) { a, b ->
-            val aDescriptor = a.resultingDescriptor
-            val bDescriptor = b.resultingDescriptor
+            konst aDescriptor = a.resultingDescriptor
+            konst bDescriptor = b.resultingDescriptor
             // Here we'd like to handle situation when we have two synthetic descriptors as in syntheticSAMExtensions.kt
 
             // Without this, we'll pick all synthetic descriptors as they don't have overridden descriptors and
             // then report ambiguity, which isn't very convenient
             if (aDescriptor is SyntheticMemberDescriptor<*> && bDescriptor is SyntheticMemberDescriptor<*>) {
-                val aBaseDescriptor = aDescriptor.baseDescriptorForSynthetic
-                val bBaseDescriptor = bDescriptor.baseDescriptorForSynthetic
+                konst aBaseDescriptor = aDescriptor.baseDescriptorForSynthetic
+                konst bBaseDescriptor = bDescriptor.baseDescriptorForSynthetic
                 if (aBaseDescriptor is CallableMemberDescriptor && bBaseDescriptor is CallableMemberDescriptor) {
                     return@filterOverrides Pair(aBaseDescriptor, bBaseDescriptor)
                 }
@@ -107,13 +107,13 @@ open class OverloadingConflictResolver<C : Any>(
             return noOverrides
         }
 
-        val maximallySpecific = findMaximallySpecific(noOverrides, checkArgumentsMode, false)
+        konst maximallySpecific = findMaximallySpecific(noOverrides, checkArgumentsMode, false)
         if (maximallySpecific != null) {
             return setOf(maximallySpecific)
         }
 
         if (discriminateGenerics) {
-            val maximallySpecificGenericsDiscriminated = findMaximallySpecific(noOverrides, checkArgumentsMode, true)
+            konst maximallySpecificGenericsDiscriminated = findMaximallySpecific(noOverrides, checkArgumentsMode, true)
             if (maximallySpecificGenericsDiscriminated != null) {
                 return setOf(maximallySpecificGenericsDiscriminated)
             }
@@ -125,19 +125,19 @@ open class OverloadingConflictResolver<C : Any>(
     // Sometimes we should compare "copies" from sources and from binary files.
     // But we cannot compare return types for such copies, because it may lead us to recursive problem (see KT-11995).
     // Because of this we compare them without return type and choose descriptor from source if we found duplicate.
-    fun filterOutEquivalentCalls(candidates: Collection<C>): Set<C> {
+    fun filterOutEquikonstentCalls(candidates: Collection<C>): Set<C> {
         candidates.setIfOneOrEmpty()?.let { return it }
 
-        val fromSourcesGoesFirst = candidates.sortedBy { if (isFromSources(it.resultingDescriptor)) 0 else 1 }
+        konst fromSourcesGoesFirst = candidates.sortedBy { if (isFromSources(it.resultingDescriptor)) 0 else 1 }
 
-        val result = LinkedHashSet<C>()
+        konst result = LinkedHashSet<C>()
         outerLoop@ for (meD in fromSourcesGoesFirst) {
             cancellationChecker.check()
             for (otherD in result) {
-                val me = meD.resultingDescriptor.originalIfTypeRefinementEnabled
-                val other = otherD.resultingDescriptor.originalIfTypeRefinementEnabled
-                val ignoreReturnType = isFromSources(me) != isFromSources(other)
-                if (DescriptorEquivalenceForOverrides.areCallableDescriptorsEquivalent(
+                konst me = meD.resultingDescriptor.originalIfTypeRefinementEnabled
+                konst other = otherD.resultingDescriptor.originalIfTypeRefinementEnabled
+                konst ignoreReturnType = isFromSources(me) != isFromSources(other)
+                if (DescriptorEquikonstenceForOverrides.areCallableDescriptorsEquikonstent(
                         me,
                         other,
                         allowCopiesFromTheSameDeclaration = isTypeRefinementEnabled,
@@ -154,7 +154,7 @@ open class OverloadingConflictResolver<C : Any>(
         return result
     }
 
-    private val CallableDescriptor.originalIfTypeRefinementEnabled get() = if (isTypeRefinementEnabled) original else this
+    private konst CallableDescriptor.originalIfTypeRefinementEnabled get() = if (isTypeRefinementEnabled) original else this
 
     private fun Collection<C>.setIfOneOrEmpty() = when (size) {
         0 -> emptySet()
@@ -206,31 +206,31 @@ open class OverloadingConflictResolver<C : Any>(
 
     // null means ambiguity between variables
     private fun findMaximallySpecificVariableAsFunctionCalls(candidates: Collection<C>): Set<C>? {
-        val variableCalls = candidates.mapTo(newResolvedCallSet(candidates.size)) {
+        konst variableCalls = candidates.mapTo(newResolvedCallSet(candidates.size)) {
             getVariableCandidates(it) ?: throw AssertionError("Regular call among variable-as-function calls: $it")
         }
 
-        val maxSpecificVariableCalls = chooseMaximallySpecificCandidates(
+        konst maxSpecificVariableCalls = chooseMaximallySpecificCandidates(
             variableCalls, CheckArgumentTypesMode.CHECK_VALUE_ARGUMENTS,
             discriminateGenerics = false
         )
 
-        val maxSpecificVariableCall = maxSpecificVariableCalls.singleOrNull() ?: return null
+        konst maxSpecificVariableCall = maxSpecificVariableCalls.singleOrNull() ?: return null
         return candidates.filterTo(newResolvedCallSet(2)) {
             getVariableCandidates(it)!!.resultingDescriptor == maxSpecificVariableCall.resultingDescriptor
         }
     }
 
     private fun findMaximallySpecificCall(candidates: Set<C>, discriminateGenerics: Boolean, useOriginalSamTypes: Boolean = false): C? {
-        val filteredCandidates = uniquifyCandidatesSet(candidates)
+        konst filteredCandidates = uniquifyCandidatesSet(candidates)
 
         if (filteredCandidates.size <= 1) return filteredCandidates.singleOrNull()
 
-        val conflictingCandidates = filteredCandidates.map { candidateCall ->
+        konst conflictingCandidates = filteredCandidates.map { candidateCall ->
             createFlatSignature(candidateCall)
         }
 
-        val bestCandidatesByParameterTypes = conflictingCandidates.filter { candidate ->
+        konst bestCandidatesByParameterTypes = conflictingCandidates.filter { candidate ->
             cancellationChecker.check()
             isMostSpecific(candidate, conflictingCandidates) { call1, call2 ->
                 isNotLessSpecificCallWithArgumentMapping(call1, call2, discriminateGenerics, useOriginalSamTypes)
@@ -298,8 +298,8 @@ open class OverloadingConflictResolver<C : Any>(
         useOriginalSamTypes: Boolean
     ): Boolean {
         if (discriminateGenerics) {
-            val isGeneric1 = call1.isGeneric
-            val isGeneric2 = call2.isGeneric
+            konst isGeneric1 = call1.isGeneric
+            konst isGeneric2 = call2.isGeneric
             // generic loses to non-generic
             if (isGeneric1 && !isGeneric2) return false
             if (!isGeneric1 && isGeneric2) return true
@@ -322,22 +322,22 @@ open class OverloadingConflictResolver<C : Any>(
         )
     }
 
-    private val SpecificityComparisonWithNumerics = object : SpecificityComparisonCallbacks {
+    private konst SpecificityComparisonWithNumerics = object : SpecificityComparisonCallbacks {
         override fun isNonSubtypeNotLessSpecific(specific: KotlinTypeMarker, general: KotlinTypeMarker): Boolean {
             requireOrDescribe(specific is KotlinType, specific)
             requireOrDescribe(general is KotlinType, general)
 
-            val _double = builtIns.doubleType
-            val _float = builtIns.floatType
+            konst _double = builtIns.doubleType
+            konst _float = builtIns.floatType
 
-            val isSpecificUnsigned = UnsignedTypes.isUnsignedType(specific)
-            val isGeneralUnsigned = UnsignedTypes.isUnsignedType(general)
+            konst isSpecificUnsigned = UnsignedTypes.isUnsignedType(specific)
+            konst isGeneralUnsigned = UnsignedTypes.isUnsignedType(general)
             return when {
                 isSpecificUnsigned && isGeneralUnsigned -> {
-                    val uLong = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uLong)?.defaultType ?: return false
-                    val uInt = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uInt)?.defaultType ?: return false
-                    val uByte = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uByte)?.defaultType ?: return false
-                    val uShort = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uShort)?.defaultType ?: return false
+                    konst uLong = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uLong)?.defaultType ?: return false
+                    konst uInt = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uInt)?.defaultType ?: return false
+                    konst uByte = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uByte)?.defaultType ?: return false
+                    konst uShort = module.findClassAcrossModuleDependencies(StandardNames.FqNames.uShort)?.defaultType ?: return false
 
                     isNonSubtypeNotLessSpecific(specific, general, _double, _float, uLong, uInt, uByte, uShort)
                 }
@@ -345,10 +345,10 @@ open class OverloadingConflictResolver<C : Any>(
                 !isSpecificUnsigned && isGeneralUnsigned -> true
 
                 else -> {
-                    val _long = builtIns.longType
-                    val _int = builtIns.intType
-                    val _byte = builtIns.byteType
-                    val _short = builtIns.shortType
+                    konst _long = builtIns.longType
+                    konst _int = builtIns.intType
+                    konst _byte = builtIns.byteType
+                    konst _short = builtIns.shortType
 
                     isNonSubtypeNotLessSpecific(specific, general, _double, _float, _long, _int, _byte, _short)
                 }
@@ -386,8 +386,8 @@ open class OverloadingConflictResolver<C : Any>(
         call1: FlatSignature<C>,
         call2: FlatSignature<C>
     ): Boolean {
-        val hasVarargs1 = call1.hasVarargs
-        val hasVarargs2 = call2.hasVarargs
+        konst hasVarargs1 = call1.hasVarargs
+        konst hasVarargs2 = call2.hasVarargs
         if (hasVarargs1 && !hasVarargs2) return false
         if (!hasVarargs1 && hasVarargs2) return true
 
@@ -408,8 +408,8 @@ open class OverloadingConflictResolver<C : Any>(
      * `null` if undecided.
      */
     private fun tryCompareDescriptorsFromScripts(d1: CallableDescriptor, d2: CallableDescriptor): Boolean? {
-        val containingDeclaration1 = d1.containingDeclaration
-        val containingDeclaration2 = d2.containingDeclaration
+        konst containingDeclaration1 = d1.containingDeclaration
+        konst containingDeclaration2 = d2.containingDeclaration
 
         if (containingDeclaration1 is ScriptDescriptor && containingDeclaration2 is ScriptDescriptor) {
             when {
@@ -426,11 +426,11 @@ open class OverloadingConflictResolver<C : Any>(
      * `null` if undecided.
      */
     private fun isNotLessSpecificCallableReferenceDescriptor(f: CallableDescriptor, g: CallableDescriptor): Boolean {
-        if (f.valueParameters.size != g.valueParameters.size) return false
+        if (f.konstueParameters.size != g.konstueParameters.size) return false
         if (f.varargParameterPosition() != g.varargParameterPosition()) return false
 
-        val fSignature = FlatSignature.createFromCallableDescriptor(f)
-        val gSignature = FlatSignature.createFromCallableDescriptor(g)
+        konst fSignature = FlatSignature.createFromCallableDescriptor(f)
+        konst gSignature = FlatSignature.createFromCallableDescriptor(g)
         if (!createEmptyConstraintSystem().isSignatureNotLessSpecific(
                 fSignature,
                 gSignature,

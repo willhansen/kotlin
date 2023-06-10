@@ -9,22 +9,22 @@ class OkDelegate {
     operator fun getValue(receiver: Any?, property: Any?): String = "OK"
 }
 
-suspend fun <T> suspendWithValue(value: T): T = suspendCoroutineUninterceptedOrReturn { c ->
-    c.resume(value)
+suspend fun <T> suspendWithValue(konstue: T): T = suspendCoroutineUninterceptedOrReturn { c ->
+    c.resume(konstue)
     COROUTINE_SUSPENDED
 }
 
 fun launch(c: suspend () -> String): String {
     var result: String = "fail: result not assigned"
-    c.startCoroutine(handleResultContinuation { value ->
-        result = value
+    c.startCoroutine(handleResultContinuation { konstue ->
+        result = konstue
     })
     return result
 }
 
 fun box(): String {
     return launch {
-        val ok by OkDelegate()
+        konst ok by OkDelegate()
         ok
     }
 }

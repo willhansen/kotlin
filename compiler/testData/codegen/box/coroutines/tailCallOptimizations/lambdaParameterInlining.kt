@@ -8,19 +8,19 @@ import helpers.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-fun assert(value: () -> Boolean) {}
+fun assert(konstue: () -> Boolean) {}
 
-class ChannelSegment<E>(val id: Long)
+class ChannelSegment<E>(konst id: Long)
 
 suspend fun suspendHere() = suspendCoroutineUninterceptedOrReturn<Unit> { x ->
     TailCallOptimizationChecker.saveStackTrace(x)
     COROUTINE_SUSPENDED
 }
 
-private const val RESULT_SUSPEND_NO_WAITER = 3
+private const konst RESULT_SUSPEND_NO_WAITER = 3
 
 open class BufferedChannel<E> {
-    private val sendSegment = ChannelSegment<E>(0)
+    private konst sendSegment = ChannelSegment<E>(0)
 
     suspend fun send(element: E): Unit =
         sendImpl(
@@ -42,8 +42,8 @@ open class BufferedChannel<E> {
     ): R {
         var segment = sendSegment
         while (true) {
-            val closed = false
-            val id = 0L
+            konst closed = false
+            konst id = 0L
             if (segment.id != id) {
                 assert { segment.id < id }
                 // Find the required segment.

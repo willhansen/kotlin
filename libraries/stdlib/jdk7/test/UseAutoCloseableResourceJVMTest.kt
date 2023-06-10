@@ -18,8 +18,8 @@ class UseAutoCloseableResourceJVMTest {
     }
 
     @Test fun platformResourceOpFails() {
-        val resource = platformNull<Resource>()
-        val e = assertFails {
+        konst resource = platformNull<Resource>()
+        konst e = assertFails {
             resource.use { requireNotNull(it) }
         }
         assertTrue(e is IllegalArgumentException)

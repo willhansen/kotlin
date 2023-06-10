@@ -8,7 +8,7 @@ class B
 
 var B.foo: Boolean
     get() = true
-    set(value) {}
+    set(konstue) {}
 
 private fun A.bar(b: B) {
     b.foo = true

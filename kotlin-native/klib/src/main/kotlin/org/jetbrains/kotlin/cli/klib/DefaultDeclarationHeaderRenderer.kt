@@ -17,12 +17,12 @@ object DefaultDeclarationHeaderRenderer : DeclarationHeaderRenderer {
     }
 
     private fun render(descriptor: PackageFragmentDescriptor): String {
-        val packageName = descriptor.fqName.let { if (it.isRoot) "<root>" else it.asString() }
+        konst packageName = descriptor.fqName.let { if (it.isRoot) "<root>" else it.asString() }
         return "package $packageName"
     }
 
     private fun render(descriptor: ClassifierDescriptorWithTypeParameters): String {
-        val renderer = when (descriptor.modality) {
+        konst renderer = when (descriptor.modality) {
             // Don't render 'final' modality
             Modality.FINAL -> Renderers.WITHOUT_MODALITY
             else -> Renderers.DEFAULT
@@ -31,8 +31,8 @@ object DefaultDeclarationHeaderRenderer : DeclarationHeaderRenderer {
     }
 
     private fun render(descriptor: CallableMemberDescriptor): String {
-        val containingDeclaration = descriptor.containingDeclaration
-        val renderer = when {
+        konst containingDeclaration = descriptor.containingDeclaration
+        konst renderer = when {
             // Don't render modality for non-override final methods and interface methods.
             containingDeclaration is ClassDescriptor && containingDeclaration.kind == ClassKind.INTERFACE ||
                     descriptor.modality == Modality.FINAL && descriptor.overriddenDescriptors.isEmpty() -> Renderers.WITHOUT_MODALITY
@@ -59,7 +59,7 @@ object DefaultDeclarationHeaderRenderer : DeclarationHeaderRenderer {
     }
 
     private object Renderers {
-        val DEFAULT = DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.withOptions {
+        konst DEFAULT = DescriptorRenderer.COMPACT_WITH_SHORT_TYPES.withOptions {
             modifiers = DescriptorRendererModifier.ALL
             overrideRenderingPolicy = OverrideRenderingPolicy.RENDER_OVERRIDE
             annotationArgumentsRenderingPolicy = AnnotationArgumentsRenderingPolicy.UNLESS_EMPTY
@@ -75,7 +75,7 @@ object DefaultDeclarationHeaderRenderer : DeclarationHeaderRenderer {
             secondaryConstructorsAsPrimary = false
         }
 
-        val WITHOUT_MODALITY = DEFAULT.withOptions {
+        konst WITHOUT_MODALITY = DEFAULT.withOptions {
             modifiers -= DescriptorRendererModifier.MODALITY
         }
     }

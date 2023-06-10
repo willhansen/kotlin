@@ -20,25 +20,25 @@ interface IdSignatureClashTracker {
     fun commit(declaration: IrDeclaration, signature: IdSignature)
 
     companion object {
-        val DEFAULT_TRACKER = object : IdSignatureClashTracker {
+        konst DEFAULT_TRACKER = object : IdSignatureClashTracker {
             override fun commit(declaration: IrDeclaration, signature: IdSignature) {}
         }
     }
 }
 
 abstract class GlobalDeclarationTable(
-    private val mangler: KotlinMangler.IrMangler,
-    private val clashTracker: IdSignatureClashTracker
+    private konst mangler: KotlinMangler.IrMangler,
+    private konst clashTracker: IdSignatureClashTracker
 ) {
-    val publicIdSignatureComputer = PublicIdSignatureComputer(mangler)
+    konst publicIdSignatureComputer = PublicIdSignatureComputer(mangler)
 
-    protected val table = hashMapOf<IrDeclaration, IdSignature>()
+    protected konst table = hashMapOf<IrDeclaration, IdSignature>()
 
     constructor(mangler: KotlinMangler.IrMangler) : this(mangler, IdSignatureClashTracker.DEFAULT_TRACKER)
 
     protected fun loadKnownBuiltins(builtIns: IrBuiltIns) {
         builtIns.knownBuiltins.forEach {
-            val symbol = (it as IrSymbolOwner).symbol
+            konst symbol = (it as IrSymbolOwner).symbol
             table[it] = symbol.signature!!.also { id -> clashTracker.commit(it, id) }
         }
     }
@@ -53,10 +53,10 @@ abstract class GlobalDeclarationTable(
 }
 
 open class DeclarationTable(globalTable: GlobalDeclarationTable) {
-    protected val table = hashMapOf<IrDeclaration, IdSignature>()
-    protected open val globalDeclarationTable: GlobalDeclarationTable = globalTable
+    protected konst table = hashMapOf<IrDeclaration, IdSignature>()
+    protected open konst globalDeclarationTable: GlobalDeclarationTable = globalTable
     // TODO: we need to disentangle signature construction with declaration tables.
-    open val signaturer: IdSignatureSerializer = IdSignatureSerializer(globalTable.publicIdSignatureComputer, this)
+    open konst signaturer: IdSignatureSerializer = IdSignatureSerializer(globalTable.publicIdSignatureComputer, this)
 
     fun inFile(file: IrFile?, block: () -> Unit) {
         signaturer.inFile(file?.symbol, block)
@@ -99,5 +99,5 @@ open class DeclarationTable(globalTable: GlobalDeclarationTable) {
 }
 
 // This is what we pre-populate tables with
-val IrBuiltIns.knownBuiltins: List<IrDeclaration>
+konst IrBuiltIns.knownBuiltins: List<IrDeclaration>
     get() = operatorsPackageFragment.declarations

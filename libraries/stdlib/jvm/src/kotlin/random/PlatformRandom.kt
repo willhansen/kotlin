@@ -33,7 +33,7 @@ internal actual fun doubleFromParts(hi26: Int, low27: Int): Double =
 
 
 internal abstract class AbstractPlatformRandom : Random() {
-    abstract val impl: java.util.Random
+    abstract konst impl: java.util.Random
 
     override fun nextBits(bitCount: Int): Int =
         impl.nextInt().takeUpperBits(bitCount)
@@ -48,21 +48,21 @@ internal abstract class AbstractPlatformRandom : Random() {
 }
 
 internal class FallbackThreadLocalRandom : AbstractPlatformRandom() {
-    private val implStorage = object : ThreadLocal<java.util.Random>() {
+    private konst implStorage = object : ThreadLocal<java.util.Random>() {
         override fun initialValue(): java.util.Random = java.util.Random()
     }
 
-    override val impl: java.util.Random
+    override konst impl: java.util.Random
         get() = implStorage.get()
 }
 
-private class PlatformRandom(override val impl: java.util.Random) : AbstractPlatformRandom(), Serializable {
+private class PlatformRandom(override konst impl: java.util.Random) : AbstractPlatformRandom(), Serializable {
     private companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
     }
 }
 
-private class KotlinRandom(val impl: Random) : java.util.Random() {
+private class KotlinRandom(konst impl: Random) : java.util.Random() {
     override fun next(bits: Int): Int = impl.nextBits(bits)
     override fun nextInt(): Int = impl.nextInt()
     override fun nextInt(bound: Int): Int = impl.nextInt(bound)
@@ -79,7 +79,7 @@ private class KotlinRandom(val impl: Random) : java.util.Random() {
 
     override fun setSeed(seed: Long) {
         if (!seedInitialized) {
-            // ignore seed value from constructor
+            // ignore seed konstue from constructor
             seedInitialized = true
         } else {
             throw UnsupportedOperationException("Setting seed is not supported.")
@@ -87,6 +87,6 @@ private class KotlinRandom(val impl: Random) : java.util.Random() {
     }
 
     private companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
     }
 }

@@ -6,7 +6,7 @@ interface C {
   // CHECK:
   //   Mangled name: C{}test1
   //   Public signature: /C.test1|6005685442305498193[0]
-  abstract val test1: Int
+  abstract konst test1: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test1>(){}kotlin.Int
     //   Public signature: /C.test1.<get-test1>|3978508226793108919[0]
@@ -18,7 +18,7 @@ interface C {
   // CHECK:
   //   Mangled name: C{}test2
   //   Public signature: /C.test2|2517758057000911509[0]
-  val test2: Int
+  konst test2: Int
     // CHECK JVM_IR:
     //   Mangled name: C#<get-test2>(){}kotlin.Int
     //   Public signature: /C.test2.<get-test2>|-8779933517717592707[0]
@@ -57,7 +57,7 @@ interface C {
     // CHECK:
     //   Mangled name: C#<set-test4>(kotlin.Int){}
     //   Public signature: /C.test4.<set-test4>|8105340104867729538[0]
-    set(value: Int): Unit
+    set(konstue: Int): Unit
 
 }
 

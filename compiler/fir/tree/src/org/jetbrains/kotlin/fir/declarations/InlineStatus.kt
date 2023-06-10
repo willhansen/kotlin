@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.fir.declarations
 
-enum class InlineStatus(val returnAllowed: Boolean) {
+enum class InlineStatus(konst returnAllowed: Boolean) {
     Inline(returnAllowed = true), // lambda will be inlined
     NoInline(returnAllowed = false), // lambda won't be inlined (is part of not inline function call or marked with `noinline` modifier)
     CrossInline(returnAllowed = false), // lambda will be inlined but marked with `crossinline` modifier

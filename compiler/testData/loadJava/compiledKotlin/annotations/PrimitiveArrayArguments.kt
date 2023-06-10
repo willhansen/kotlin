@@ -1,14 +1,14 @@
 package test
 
 annotation class Anno(
-        val bytes: ByteArray,
-        val shorts: ShortArray,
-        val ints: IntArray,
-        val longs: LongArray,
-        val chars: CharArray,
-        val floats: FloatArray,
-        val doubles: DoubleArray,
-        val booleans: BooleanArray
+        konst bytes: ByteArray,
+        konst shorts: ShortArray,
+        konst ints: IntArray,
+        konst longs: LongArray,
+        konst chars: CharArray,
+        konst floats: FloatArray,
+        konst doubles: DoubleArray,
+        konst booleans: BooleanArray
 )
 
 @Anno(

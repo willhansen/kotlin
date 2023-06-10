@@ -46,8 +46,8 @@ import org.gradle.kotlin.dsl.getByType
 // TODO: Consider splitting out interface and the default implementation. Plugins will inherit from the interface via delegation to the implementation.
 // TODO: Consider implementing everything from `NamedDomainObjectContainer` but keyed on a target instead of a name.
 open class TargetDomainObjectContainer<T : Any> constructor(
-        private val providerFactory: ProviderFactory,
-        private val platformManager: PlatformManager,
+        private konst providerFactory: ProviderFactory,
+        private konst platformManager: PlatformManager,
 ) {
     constructor(project: Project) : this(project.providers, project.extensions.getByType<PlatformManager>())
 
@@ -56,7 +56,7 @@ open class TargetDomainObjectContainer<T : Any> constructor(
      */
     lateinit var factory: (TargetWithSanitizer) -> T
 
-    private val targets: MutableMap<TargetWithSanitizer, T> = mutableMapOf()
+    private konst targets: MutableMap<TargetWithSanitizer, T> = mutableMapOf()
 
     /**
      * Create or update configuration [T] for [target] and apply [action] to it.
@@ -66,7 +66,7 @@ open class TargetDomainObjectContainer<T : Any> constructor(
      * @return resulting configuration
      */
     fun target(target: TargetWithSanitizer, action: Action<in T>): T {
-        val element = targets.getOrPut(target) { factory(target) }
+        konst element = targets.getOrPut(target) { factory(target) }
         action.execute(element)
         return element
     }
@@ -97,8 +97,8 @@ open class TargetDomainObjectContainer<T : Any> constructor(
      *
      * @return [Provider] with list of all created configurations
      */
-    val allTargets: Provider<List<T>> = providerFactory.provider {
-        targets.values.toList()
+    konst allTargets: Provider<List<T>> = providerFactory.provider {
+        targets.konstues.toList()
     }
 
     /**
@@ -117,6 +117,6 @@ open class TargetDomainObjectContainer<T : Any> constructor(
      * @return resulting configuration
      * @throws UnknownDomainObjectException if configuration for [host target][HostManager.host] does not exist
      */
-    val hostTarget: T
+    konst hostTarget: T
         get() = target(HostManager.host.withSanitizer())
 }

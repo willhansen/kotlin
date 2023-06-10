@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 internal object MissingNativeStdlibChecker : KotlinGradleProjectChecker {
     override suspend fun KotlinGradleProjectCheckerContext.runChecks(collector: KotlinToolingDiagnosticsCollector) {
-        val targets = multiplatformExtension?.awaitTargets() ?: return
+        konst targets = multiplatformExtension?.awaitTargets() ?: return
         if (targets.isEmpty() || // misconfigured project
             targets.none { it is KotlinNativeTarget } || // no K/N targets
             project.hasProperty("kotlin.native.nostdlib") || // suppressed

@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.resolve.calls.tower.CandidateApplicability
 import org.jetbrains.kotlin.resolve.calls.tower.isSuccess
 
 class Candidate(
-    override val symbol: FirBasedSymbol<*>,
+    override konst symbol: FirBasedSymbol<*>,
     // Here we may have an ExpressionReceiverValue
     // - in case a use-site receiver is explicit
     // - in some cases with static entities, no matter is a use-site receiver explicit or not
@@ -33,26 +33,26 @@ class Candidate(
     override var dispatchReceiverValue: ReceiverValue?,
     // In most cases, it contains zero or single element
     // More than one, only in case of context receiver group
-    val givenExtensionReceiverOptions: List<ReceiverValue>,
-    override val explicitReceiverKind: ExplicitReceiverKind,
-    private val constraintSystemFactory: InferenceComponents.ConstraintSystemFactory,
-    private val baseSystem: ConstraintStorage,
-    override val callInfo: CallInfo,
-    val originScope: FirScope?,
-    val isFromCompanionObjectTypeScope: Boolean = false,
+    konst givenExtensionReceiverOptions: List<ReceiverValue>,
+    override konst explicitReceiverKind: ExplicitReceiverKind,
+    private konst constraintSystemFactory: InferenceComponents.ConstraintSystemFactory,
+    private konst baseSystem: ConstraintStorage,
+    override konst callInfo: CallInfo,
+    konst originScope: FirScope?,
+    konst isFromCompanionObjectTypeScope: Boolean = false,
     // It's only true if we're in the member scope of smart cast receiver and this particular candidate came from original type
-    val isFromOriginalTypeInPresenceOfSmartCast: Boolean = false,
+    konst isFromOriginalTypeInPresenceOfSmartCast: Boolean = false,
 ) : AbstractCandidate() {
 
     var systemInitialized: Boolean = false
-    val system: NewConstraintSystemImpl by lazy(LazyThreadSafetyMode.NONE) {
-        val system = constraintSystemFactory.createConstraintSystem()
+    konst system: NewConstraintSystemImpl by lazy(LazyThreadSafetyMode.NONE) {
+        konst system = constraintSystemFactory.createConstraintSystem()
         system.addOtherSystem(baseSystem)
         systemInitialized = true
         system
     }
 
-    override val errors: List<ConstraintSystemError>
+    override konst errors: List<ConstraintSystemError>
         get() = system.errors
 
     lateinit var substitutor: ConeSubstitutor
@@ -62,11 +62,11 @@ class Candidate(
     var usesSAM: Boolean = false
 
     internal var callableReferenceAdaptation: CallableReferenceAdaptation? = null
-        set(value) {
-            field = value
-            usesFunctionConversion = value?.suspendConversionStrategy is CallableReferenceConversionStrategy.CustomConversion
-            if (value != null) {
-                numDefaults = value.defaults
+        set(konstue) {
+            field = konstue
+            usesFunctionConversion = konstue?.suspendConversionStrategy is CallableReferenceConversionStrategy.CustomConversion
+            if (konstue != null) {
+                numDefaults = konstue.defaults
             }
         }
 
@@ -75,7 +75,7 @@ class Candidate(
     var argumentMapping: LinkedHashMap<FirExpression, FirValueParameter>? = null
     var numDefaults: Int = 0
     lateinit var typeArgumentMapping: TypeArgumentMapping
-    val postponedAtoms = mutableListOf<PostponedResolvedAtom>()
+    konst postponedAtoms = mutableListOf<PostponedResolvedAtom>()
 
     var currentApplicability = CandidateApplicability.RESOLVED
         private set
@@ -84,11 +84,11 @@ class Candidate(
 
     var contextReceiverArguments: List<FirExpression>? = null
 
-    override val applicability: CandidateApplicability
+    override konst applicability: CandidateApplicability
         get() = currentApplicability
 
-    private val _diagnostics: MutableList<ResolutionDiagnostic> = mutableListOf()
-    override val diagnostics: List<ResolutionDiagnostic>
+    private konst _diagnostics: MutableList<ResolutionDiagnostic> = mutableListOf()
+    override konst diagnostics: List<ResolutionDiagnostic>
         get() = _diagnostics
 
     fun addDiagnostic(diagnostic: ResolutionDiagnostic) {
@@ -98,7 +98,7 @@ class Candidate(
         }
     }
 
-    val isSuccessful: Boolean
+    konst isSuccessful: Boolean
         get() = currentApplicability.isSuccess && (!systemInitialized || !system.hasContradiction)
 
     var passedStages: Int = 0
@@ -130,11 +130,11 @@ class Candidate(
     }
 
     override fun toString(): String {
-        val okOrFail = if (applicability.isSuccess) "OK" else "FAIL"
-        val step = "$passedStages/${callInfo.callKind.resolutionSequence.size}"
+        konst okOrFail = if (applicability.isSuccess) "OK" else "FAIL"
+        konst step = "$passedStages/${callInfo.callKind.resolutionSequence.size}"
         return "$okOrFail($step): $symbol"
     }
 }
 
-val Candidate.fullyAnalyzed: Boolean
+konst Candidate.fullyAnalyzed: Boolean
     get() = passedStages == callInfo.callKind.resolutionSequence.size

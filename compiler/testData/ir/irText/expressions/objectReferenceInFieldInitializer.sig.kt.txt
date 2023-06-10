@@ -5,7 +5,7 @@ object A {
   // CHECK:
   //   Mangled name: A{}a
   //   Public signature: /A.a|-1200697420457237799[0]
-  private val a: String
+  private konst a: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-a>(){}kotlin.String
     //   Public signature: /A.a.<get-a>|-6318309956076983327[0]
@@ -17,7 +17,7 @@ object A {
   // CHECK:
   //   Mangled name: A{}b
   //   Public signature: /A.b|772347207915745207[0]
-  private val b: String
+  private konst b: String
     // CHECK JVM_IR:
     //   Mangled name: A#<get-b>(){}kotlin.String
     //   Public signature: /A.b.<get-b>|5457451065030643294[0]
@@ -29,7 +29,7 @@ object A {
   // CHECK:
   //   Mangled name: A{}c
   //   Public signature: /A.c|-4416962153448040627[0]
-  private val c: Int
+  private konst c: Int
     // CHECK JVM_IR:
     //   Mangled name: A#<get-c>(){}kotlin.Int
     //   Public signature: /A.c.<get-c>|-2440337234483931882[0]

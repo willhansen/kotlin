@@ -5,20 +5,20 @@
 // LANGUAGE: +ValueClasses, +ValueClassesSecondaryConstructorWithBody
 
 @JvmInline
-value class A<T : Any>(val x: List<T>)
+konstue class A<T : Any>(konst x: List<T>)
 
 @JvmInline
-value class B(val x: UInt) {
+konstue class B(konst x: UInt) {
     constructor(x: String) : this(x.toUInt()) {
         supply(x)
     }
 }
 
 @JvmInline
-value class C(val x: Int, val y: B, val z: String)
+konstue class C(konst x: Int, konst y: B, konst z: String)
 
 @JvmInline
-value class D(val x: C) {
+konstue class D(konst x: C) {
     constructor(x: Int, y: UInt, z: Int) : this(C(x, B(y), z.toString())) {
         supply(y)
     }
@@ -35,18 +35,18 @@ inline fun inlined(x: Int, y: UInt, z: Int): D {
 fun notInlined(x: Int, y: UInt, z: Int) = D(C(x, B(y), z.toString()))
 
 @JvmInline
-value class E(val x: D) {
+konstue class E(konst x: D) {
     var withNonTrivialSetters: D
         get() = TODO()
         set(_) = TODO()
 }
 
 interface Base3 {
-    val z: E
+    konst z: E
 }
 
 @JvmInline
-value class R<T : Any>(val x: Int, val y: UInt, override val z: E, val t: A<T>) : Base1, Base3
+konstue class R<T : Any>(konst x: Int, konst y: UInt, override konst z: E, konst t: A<T>) : Base1, Base3
 
 fun <T : List<Int>> f(r: R<T>) {
     supply(r)
@@ -74,7 +74,7 @@ fun <T : List<Int>> h(r: R<T>) {
     require(B("3") == B(3U))
     C(2, B(3U), "")
     D(C(2, B(3U), ""))
-    val x = D(C(2, B(3U), ""))
+    konst x = D(C(2, B(3U), ""))
     var y = D(C(4, B(5U), "1"))
     supply(y)
     y = D(C(6, B(7U), "2"))
@@ -92,9 +92,9 @@ fun h1() {
 }
 
 interface Base1 {
-    val fakeOverrideMFVC: R<List<Int>>
+    konst fakeOverrideMFVC: R<List<Int>>
         get() = TODO()
-    val fakeOverrideRegular: Int
+    konst fakeOverrideRegular: Int
         get() = TODO()
 }
 
@@ -129,14 +129,14 @@ class NotInlined(override var l: R<List<Int>>, var y: Int) : Base1, Base2, Base4
             field == field
             return field
         }
-        set(value) {
+        set(konstue) {
             supply("3")
-            field = value
+            field = konstue
             field = field
             supply("4")
         }
 
-    val withNonTrivialGettersWithBF: R<List<Int>> = l
+    konst withNonTrivialGettersWithBF: R<List<Int>> = l
         get() {
             supply("1")
             field
@@ -160,7 +160,7 @@ fun reuseBoxed(list: MutableList<R<List<Int>>>) {
     list.add(list.last())
 }
 
-val lines = mutableListOf<String>()
+konst lines = mutableListOf<String>()
 
 fun supply(x: Any) {
     lines.add(x.toString())
@@ -190,9 +190,9 @@ fun box(): String {
     supply("#2")
     require(notInlined(1, 2U, 3) == D(C(1, B(2U), "3")))
     supply("#3")
-    val e = E(D(3, 4U, 5))
+    konst e = E(D(3, 4U, 5))
     supply("#4")
-    val r = R(1, 2U, e, A(listOf(listOf(6))))
+    konst r = R(1, 2U, e, A(listOf(listOf(6))))
     supply("#5")
     f(r)
     supply("#6")
@@ -202,7 +202,7 @@ fun box(): String {
     supply("#8")
     h1()
     supply("#9")
-    val ni = NotInlined(r, 7)
+    konst ni = NotInlined(r, 7)
     supply("#10")
     ni.withNonTrivialGettersWithBF
     supply("#11")
@@ -226,8 +226,8 @@ fun box(): String {
     supply(late2)
     supply("#18")
 
-    val log = lines.joinToString("\n")
-    val expectedLog =
+    konst log = lines.joinToString("\n")
+    konst expectedLog =
         """
         #1
         1

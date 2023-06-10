@@ -1,21 +1,21 @@
 annotation class Ann
 
 @field:Ann
-val x: Int = 1
+konst x: Int = 1
 
 @property:Ann
-val y: Int = 2
+konst y: Int = 2
 
 @Ann
-val z: Int = 3
+konst z: Int = 3
 
-class Some(@field:Ann val x: Int, @property: Ann val y: Int, @param:Ann val z: Int, val w: Int) {
+class Some(@field:Ann konst x: Int, @property: Ann konst y: Int, @param:Ann konst z: Int, konst w: Int) {
     @field:Ann
-    val a: Int = 1
+    konst a: Int = 1
 
     @property:Ann
-    val b: Int = 2
+    konst b: Int = 2
 
     @Ann
-    val c: Int = 3
+    konst c: Int = 3
 }

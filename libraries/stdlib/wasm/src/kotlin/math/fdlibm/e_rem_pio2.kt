@@ -22,7 +22,7 @@ package kotlin.math.fdlibm
 /*
  * Table of constants for 2/pi, 396 Hex digits (476 decimal) of 2/pi 
  */
-private val two_over_pi = intArrayOf(
+private konst two_over_pi = intArrayOf(
     0xA2F983, 0x6E4E44, 0x1529FC, 0x2757D1, 0xF534DD, 0xC0DB62,
     0x95993C, 0x439041, 0xFE5163, 0xABDEBB, 0xC561B7, 0x246E3A,
     0x424DD2, 0xE00649, 0x2EEA09, 0xD1921C, 0xFE1DEB, 0x1CB129,
@@ -36,7 +36,7 @@ private val two_over_pi = intArrayOf(
     0x4D7327, 0x310606, 0x1556CA, 0x73A8C9, 0x60E27B, 0xC08C6B,
 )
 
-private val npio2_hw = intArrayOf(
+private konst npio2_hw = intArrayOf(
     0x3FF921FB, 0x400921FB, 0x4012D97C, 0x401921FB, 0x401F6A7A, 0x4022D97C,
     0x4025FDBB, 0x402921FB, 0x402C463A, 0x402F6A7A, 0x4031475C, 0x4032D97C,
     0x40346B9C, 0x4035FDBB, 0x40378FDB, 0x403921FB, 0x403AB41B, 0x403C463A,
@@ -56,16 +56,16 @@ private val npio2_hw = intArrayOf(
  */
 
 
-private const val zero = 0.00000000000000000000e+00 /* 0x00000000, 0x00000000 */
-private const val half = 5.00000000000000000000e-01 /* 0x3FE00000, 0x00000000 */
-private const val two24 = 1.67772160000000000000e+07 /* 0x41700000, 0x00000000 */
-private const val invpio2 = 6.36619772367581382433e-01 /* 0x3FE45F30, 0x6DC9C883 */
-private const val pio2_1 = 1.57079632673412561417e+00 /* 0x3FF921FB, 0x54400000 */
-private const val pio2_1t = 6.07710050650619224932e-11 /* 0x3DD0B461, 0x1A626331 */
-private const val pio2_2 = 6.07710050630396597660e-11 /* 0x3DD0B461, 0x1A600000 */
-private const val pio2_2t = 2.02226624879595063154e-21 /* 0x3BA3198A, 0x2E037073 */
-private const val pio2_3 = 2.02226624871116645580e-21 /* 0x3BA3198A, 0x2E000000 */
-private const val pio2_3t = 8.47842766036889956997e-32 /* 0x397B839A, 0x252049C1 */
+private const konst zero = 0.00000000000000000000e+00 /* 0x00000000, 0x00000000 */
+private const konst half = 5.00000000000000000000e-01 /* 0x3FE00000, 0x00000000 */
+private const konst two24 = 1.67772160000000000000e+07 /* 0x41700000, 0x00000000 */
+private const konst invpio2 = 6.36619772367581382433e-01 /* 0x3FE45F30, 0x6DC9C883 */
+private const konst pio2_1 = 1.57079632673412561417e+00 /* 0x3FF921FB, 0x54400000 */
+private const konst pio2_1t = 6.07710050650619224932e-11 /* 0x3DD0B461, 0x1A626331 */
+private const konst pio2_2 = 6.07710050630396597660e-11 /* 0x3DD0B461, 0x1A600000 */
+private const konst pio2_2t = 2.02226624879595063154e-21 /* 0x3BA3198A, 0x2E037073 */
+private const konst pio2_3 = 2.02226624871116645580e-21 /* 0x3BA3198A, 0x2E000000 */
+private const konst pio2_3t = 8.47842766036889956997e-32 /* 0x397B839A, 0x252049C1 */
 
 internal fun __ieee754_rem_pio2(x: Double, y: DoubleArray): Int {
     var z: Double = 0.0
@@ -73,7 +73,7 @@ internal fun __ieee754_rem_pio2(x: Double, y: DoubleArray): Int {
     var t: Double
     var r: Double
     var fn: Double
-    val tx: DoubleArray = DoubleArray(3)
+    konst tx: DoubleArray = DoubleArray(3)
     var e0: Int
     var i: Int
     var j: Int

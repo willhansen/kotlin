@@ -1,7 +1,7 @@
-abstract class Base(val fn: () -> String)
+abstract class Base(konst fn: () -> String)
 
 class Outer {
-    val ok = "OK"
+    konst ok = "OK"
 
     inner class Inner : Base(::ok)
 }

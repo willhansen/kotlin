@@ -63,13 +63,13 @@ interface KotlinTargetConfigurator<KotlinTargetType : KotlinTarget> {
 }
 
 abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>(
-    internal val createTestCompilation: Boolean
+    internal konst createTestCompilation: Boolean
 ) : KotlinTargetConfigurator<KotlinTargetType> {
 
-    protected open val runtimeIncludesCompilationOutputs = true
+    protected open konst runtimeIncludesCompilationOutputs = true
 
     protected open fun setupCompilationDependencyFiles(compilation: KotlinCompilation<KotlinCommonOptions>) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
         compilation.compileDependencyFiles = project.configurations.maybeCreate(compilation.compileDependencyConfigurationName)
         if (compilation is KotlinCompilationToRunnableFiles) {
@@ -78,8 +78,8 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
     }
 
     override fun configureCompilations(target: KotlinTargetType) {
-        val project = target.project
-        val main = target.compilations.create(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst project = target.project
+        konst main = target.compilations.create(KotlinCompilation.MAIN_COMPILATION_NAME)
 
         target.compilations.all {
             setupCompilationDependencyFiles(it)
@@ -104,7 +104,7 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
     }
 
     override fun configureCompilationDefaults(target: KotlinTargetType) {
-        val project = target.project
+        konst project = target.project
 
         target.compilations.all { compilation ->
             compilation.internal.processResourcesTaskName?.let { processResourcesTaskName ->
@@ -122,10 +122,10 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
         processResourcesTaskName: String,
         resourceSet: FileCollection
     ) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
-        val resourcesDestinationDir = project.file(compilation.output.resourcesDir)
-        val resourcesTask = project.locateOrRegisterTask<ProcessResources>(processResourcesTaskName) { resourcesTask ->
+        konst resourcesDestinationDir = project.file(compilation.output.resourcesDir)
+        konst resourcesTask = project.locateOrRegisterTask<ProcessResources>(processResourcesTaskName) { resourcesTask ->
             resourcesTask.description = "Processes $resourceSet."
             resourcesTask.from(resourceSet)
             resourcesTask.into(resourcesDestinationDir)
@@ -135,7 +135,7 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
     }
 
     protected fun createLifecycleTask(compilation: KotlinCompilation<*>) {
-        val project = compilation.target.project
+        konst project = compilation.target.project
 
         project.registerTask<DefaultTask>(compilation.compileAllTaskName) {
             it.group = LifecycleBasePlugin.BUILD_GROUP
@@ -155,16 +155,16 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
     }
 
     override fun defineConfigurationsForTarget(target: KotlinTargetType) {
-        val project = target.project
+        konst project = target.project
 
-        val configurations = project.configurations
+        konst configurations = project.configurations
 
-        val mainCompilation = target.compilations.maybeCreate(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst mainCompilation = target.compilations.maybeCreate(KotlinCompilation.MAIN_COMPILATION_NAME)
 
-        val compileConfiguration = mainCompilation.internal.configurations.deprecatedCompileConfiguration
-        val implementationConfiguration = configurations.maybeCreate(mainCompilation.implementationConfigurationName)
+        konst compileConfiguration = mainCompilation.internal.configurations.deprecatedCompileConfiguration
+        konst implementationConfiguration = configurations.maybeCreate(mainCompilation.implementationConfigurationName)
 
-        val runtimeOnlyConfiguration = when (mainCompilation) {
+        konst runtimeOnlyConfiguration = when (mainCompilation) {
             is KotlinCompilationToRunnableFiles<*> -> configurations.maybeCreate(mainCompilation.runtimeOnlyConfigurationName)
             else -> null
         }
@@ -178,7 +178,7 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
             attributes.attribute(Category.CATEGORY_ATTRIBUTE, project.categoryByName(Category.LIBRARY))
             extendsFrom(configurations.maybeCreate(mainCompilation.apiConfigurationName))
             if (mainCompilation is KotlinCompilationToRunnableFiles) {
-                val runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
+                konst runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
                 runtimeConfiguration?.let { extendsFrom(it) }
             }
             usesPlatformOf(target)
@@ -192,7 +192,7 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
                 isCanBeResolved = false
                 attributes.attribute(USAGE_ATTRIBUTE, KotlinUsages.producerRuntimeUsage(target))
                 attributes.attribute(Category.CATEGORY_ATTRIBUTE, project.categoryByName(Category.LIBRARY))
-                val runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
+                konst runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
                 extendsFrom(implementationConfiguration)
                 if (runtimeOnlyConfiguration != null)
                     extendsFrom(runtimeOnlyConfiguration)
@@ -207,14 +207,14 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
             isCanBeResolved = false
             isCanBeConsumed = true
             configureSourcesPublicationAttributes(target)
-            project.whenEvaluated { isCanBeConsumed = target.internal.isSourcesPublishable }
+            project.whenEkonstuated { isCanBeConsumed = target.internal.isSourcesPublishable }
         }
 
         if (createTestCompilation) {
-            val testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
-            val compileTestsConfiguration = testCompilation.internal.configurations.deprecatedCompileConfiguration
-            val testImplementationConfiguration = configurations.maybeCreate(testCompilation.implementationConfigurationName)
-            val testRuntimeOnlyConfiguration = when (testCompilation) {
+            konst testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
+            konst compileTestsConfiguration = testCompilation.internal.configurations.deprecatedCompileConfiguration
+            konst testImplementationConfiguration = configurations.maybeCreate(testCompilation.implementationConfigurationName)
+            konst testRuntimeOnlyConfiguration = when (testCompilation) {
                 is KotlinCompilationToRunnableFiles<*> -> configurations.maybeCreate(testCompilation.runtimeOnlyConfigurationName)
                 else -> null
             }
@@ -224,8 +224,8 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
             testRuntimeOnlyConfiguration?.extendsFrom(runtimeOnlyConfiguration)
 
             if (mainCompilation is KotlinCompilationToRunnableFiles && testCompilation is KotlinCompilationToRunnableFiles) {
-                val runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
-                val testRuntimeConfiguration = testCompilation.internal.configurations.deprecatedRuntimeConfiguration
+                konst runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
+                konst testRuntimeConfiguration = testCompilation.internal.configurations.deprecatedRuntimeConfiguration
                 runtimeConfiguration?.let { testRuntimeConfiguration?.extendsFrom(it) }
             }
         }
@@ -233,10 +233,10 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
 
     @Deprecated("Remove when IR compiler to klib will not need transitive implementation dependencies")
     protected fun implementationToApiElements(target: KotlinTargetType) {
-        val configurations = target.project.configurations
+        konst configurations = target.project.configurations
 
         // The configuration and the main compilation are created by the base class.
-        val mainCompilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst mainCompilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
         configurations.getByName(target.apiElementsConfigurationName).apply {
             //  K/N and K/JS IR compiler doesn't divide libraries into implementation and api ones. So we need to add implementation
             // dependencies into the outgoing configuration.
@@ -245,13 +245,13 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
     }
 
     override fun configureBuild(target: KotlinTargetType) {
-        val project = target.project
+        konst project = target.project
 
-        val buildNeeded = project.tasks.named(JavaBasePlugin.BUILD_NEEDED_TASK_NAME)
-        val buildDependent = project.tasks.named(JavaBasePlugin.BUILD_DEPENDENTS_TASK_NAME)
+        konst buildNeeded = project.tasks.named(JavaBasePlugin.BUILD_NEEDED_TASK_NAME)
+        konst buildDependent = project.tasks.named(JavaBasePlugin.BUILD_DEPENDENTS_TASK_NAME)
 
         if (createTestCompilation) {
-            val testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
+            konst testCompilation = target.compilations.getByName(KotlinCompilation.TEST_COMPILATION_NAME)
             if (testCompilation is KotlinCompilationToRunnableFiles) {
                 addDependsOnTaskInOtherProjects(project, buildNeeded, true, testCompilation.runtimeDependencyConfigurationName)
                 addDependsOnTaskInOtherProjects(project, buildDependent, false, testCompilation.runtimeDependencyConfigurationName)
@@ -265,27 +265,27 @@ abstract class AbstractKotlinTargetConfigurator<KotlinTargetType : KotlinTarget>
         useDependedOn: Boolean,
         configurationName: String
     ) {
-        val configuration = project.configurations.getByName(configurationName)
+        konst configuration = project.configurations.getByName(configurationName)
         taskProvider.configure { task ->
             task.dependsOn(configuration.getTaskDependencyFromProjectDependency(useDependedOn, taskProvider.name))
         }
     }
 
     companion object {
-        const val testTaskNameSuffix = "test"
-        const val runTaskNameSuffix = "run"
+        const konst testTaskNameSuffix = "test"
+        const konst runTaskNameSuffix = "run"
     }
 }
 
-internal val KotlinTarget.testTaskName: String
+internal konst KotlinTarget.testTaskName: String
     get() = lowerCamelCaseName(targetName, AbstractKotlinTargetConfigurator.testTaskNameSuffix)
 
 abstract class KotlinOnlyTargetConfigurator<KotlinCompilationType : KotlinCompilation<*>, KotlinTargetType : KotlinOnlyTarget<KotlinCompilationType>>(
     createTestCompilation: Boolean
 ) : AbstractKotlinTargetConfigurator<KotlinTargetType>(createTestCompilation) {
-    open val archiveType: String = ArtifactTypeDefinition.JAR_TYPE
+    open konst archiveType: String = ArtifactTypeDefinition.JAR_TYPE
 
-    open val archiveTaskType: Class<out Zip>
+    open konst archiveTaskType: Class<out Zip>
         get() = Jar::class.java
 
     internal abstract fun buildCompilationProcessor(compilation: KotlinCompilationType): KotlinCompilationProcessor<*>
@@ -316,11 +316,11 @@ abstract class KotlinOnlyTargetConfigurator<KotlinCompilationType : KotlinCompil
     }
 
     override fun configureArchivesAndComponent(target: KotlinTargetType) {
-        val project = target.project
+        konst project = target.project
 
-        val mainCompilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+        konst mainCompilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
 
-        val task = createArchiveTasks(target)
+        konst task = createArchiveTasks(target)
 
         target.disambiguationClassifier?.let { classifier ->
             task.configure { taskInstance ->
@@ -330,18 +330,18 @@ abstract class KotlinOnlyTargetConfigurator<KotlinCompilationType : KotlinCompil
 
         // Workaround: adding the artifact during configuration seems to interfere with the Java plugin, which results into missing
         // task dependency 'assemble -> jar' if the Java plugin is applied after this steps
-        project.afterEvaluate {
+        project.afterEkonstuate {
             project.artifacts.add(Dependency.ARCHIVES_CONFIGURATION, task) { jarArtifact ->
                 jarArtifact.builtBy(task)
                 jarArtifact.type = archiveType
 
-                val apiElementsConfiguration = project.configurations.getByName(target.apiElementsConfigurationName)
+                konst apiElementsConfiguration = project.configurations.getByName(target.apiElementsConfigurationName)
                 // If the target adds its own artifact to this configuration until this happens, don't add another one:
                 addJarIfNoArtifactsPresent(project, apiElementsConfiguration, jarArtifact)
 
                 if (mainCompilation is KotlinCompilationToRunnableFiles<*>) {
-                    val runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
-                    val runtimeElementsConfiguration = project.configurations.getByName(target.runtimeElementsConfigurationName)
+                    konst runtimeConfiguration = mainCompilation.internal.configurations.deprecatedRuntimeConfiguration
+                    konst runtimeElementsConfiguration = project.configurations.getByName(target.runtimeElementsConfigurationName)
                     runtimeConfiguration?.let { addJarIfNoArtifactsPresent(project, runtimeConfiguration, jarArtifact) }
                     addJarIfNoArtifactsPresent(project, runtimeElementsConfiguration, jarArtifact)
                 }
@@ -351,7 +351,7 @@ abstract class KotlinOnlyTargetConfigurator<KotlinCompilationType : KotlinCompil
 
     private fun addJarIfNoArtifactsPresent(project: Project, configuration: Configuration, jarArtifact: PublishArtifact) {
         if (configuration.artifacts.isEmpty()) {
-            val publications = configuration.outgoing
+            konst publications = configuration.outgoing
 
             // Configure an implicit variant
             publications.artifacts.add(jarArtifact)
@@ -368,7 +368,7 @@ internal interface KotlinTargetWithTestsConfigurator<R : KotlinTargetTestRun<*>,
         configureTest(target)
     }
 
-    val testRunClass: Class<R>
+    konst testRunClass: Class<R>
 
     fun createTestRun(name: String, target: T): R
 
@@ -378,10 +378,10 @@ internal interface KotlinTargetWithTestsConfigurator<R : KotlinTargetTestRun<*>,
     }
 
     private fun initializeTestRuns(target: T) {
-        val project = target.project
+        konst project = target.project
 
-        val testRunsPropertyName = KotlinTargetWithTests<*, *>::testRuns.name
-        val mutableProperty =
+        konst testRunsPropertyName = KotlinTargetWithTests<*, *>::testRuns.name
+        konst mutableProperty =
             target::class.memberProperties
                 .find { it.name == testRunsPropertyName } as? KMutableProperty1<*, *>
                 ?: error(
@@ -389,7 +389,7 @@ internal interface KotlinTargetWithTestsConfigurator<R : KotlinTargetTestRun<*>,
                             "override the $testRunsPropertyName property with a var."
                 )
 
-        val testRunsContainer = project.container(testRunClass) { testRunName -> createTestRun(testRunName, target) }
+        konst testRunsContainer = project.container(testRunClass) { testRunName -> createTestRun(testRunName, target) }
 
         @Suppress("UNCHECKED_CAST")
         (mutableProperty as KMutableProperty1<KotlinTargetWithTests<*, R>, NamedDomainObjectContainer<R>>)
@@ -428,7 +428,7 @@ fun Configuration.usesPlatformOf(target: KotlinTarget): Configuration {
         else -> setJavaTargetEnvironmentAttributeIfSupported(target.project, "non-jvm")
     }
 
-    val publishJsCompilerAttribute = PropertiesProvider(target.project).publishJsCompilerAttribute
+    konst publishJsCompilerAttribute = PropertiesProvider(target.project).publishJsCompilerAttribute
 
     if (publishJsCompilerAttribute && target is KotlinJsTarget) {
         attributes.attribute(KotlinJsCompilerAttribute.jsCompilerAttribute, KotlinJsCompilerAttribute.legacy)
@@ -445,17 +445,17 @@ fun Configuration.usesPlatformOf(target: KotlinTarget): Configuration {
     return this
 }
 
-private fun Configuration.setJavaTargetEnvironmentAttributeIfSupported(project: Project, value: String) {
+private fun Configuration.setJavaTargetEnvironmentAttributeIfSupported(project: Project, konstue: String) {
     if (isGradleVersionAtLeast(7, 0)) {
         @Suppress("UNCHECKED_CAST")
-        val attributeClass = Class.forName("org.gradle.api.attributes.java.TargetJvmEnvironment") as Class<out Named>
+        konst attributeClass = Class.forName("org.gradle.api.attributes.java.TargetJvmEnvironment") as Class<out Named>
 
         @Suppress("UNCHECKED_CAST")
-        val attributeKey = attributeClass.getField("TARGET_JVM_ENVIRONMENT_ATTRIBUTE").get(null) as Attribute<Named>
+        konst attributeKey = attributeClass.getField("TARGET_JVM_ENVIRONMENT_ATTRIBUTE").get(null) as Attribute<Named>
 
-        val attributeValue = project.objects.named(attributeClass, value)
+        konst attributeValue = project.objects.named(attributeClass, konstue)
         attributes.attribute(attributeKey, attributeValue)
     }
 }
 
-internal val Project.commonKotlinPluginClasspath get() = configurations.getByName(PLUGIN_CLASSPATH_CONFIGURATION_NAME)
+internal konst Project.commonKotlinPluginClasspath get() = configurations.getByName(PLUGIN_CLASSPATH_CONFIGURATION_NAME)

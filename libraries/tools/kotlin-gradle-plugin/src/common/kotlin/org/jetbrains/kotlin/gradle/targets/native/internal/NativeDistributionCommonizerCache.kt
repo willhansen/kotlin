@@ -15,10 +15,10 @@ import java.io.ObjectInputStream
 import java.io.Serializable
 
 class NativeDistributionCommonizerCache(
-    private val outputDirectory: File,
-    private val konanHome: File,
-    private val logger: Logger,
-    private val isCachingEnabled: Boolean
+    private konst outputDirectory: File,
+    private konst konanHome: File,
+    private konst logger: Logger,
+    private konst isCachingEnabled: Boolean
 ) : Serializable {
     fun isUpToDate(
         outputTargets: Set<SharedCommonizerTarget>
@@ -33,7 +33,7 @@ class NativeDistributionCommonizerCache(
         outputTargets: Set<SharedCommonizerTarget>,
         writeCacheAction: (todoTargets: Set<SharedCommonizerTarget>) -> Unit
     ) = lock.withLock {
-        val todoOutputTargets = todoTargets(outputTargets)
+        konst todoOutputTargets = todoTargets(outputTargets)
         if (todoOutputTargets.isEmpty()) return@withLock
 
         writeCacheAction(todoOutputTargets)
@@ -56,12 +56,12 @@ class NativeDistributionCommonizerCache(
             else outputTargets
         }
 
-        val cachedOutputTargets = outputTargets
+        konst cachedOutputTargets = outputTargets
             .filter { outputTarget -> isCached(resolveCommonizedDirectory(outputDirectory, outputTarget)) }
             .onEach { outputTarget -> logInfo("Cache hit: $outputTarget already commonized") }
             .toSet()
 
-        val todoOutputTargets = outputTargets - cachedOutputTargets
+        konst todoOutputTargets = outputTargets - cachedOutputTargets
 
         if (todoOutputTargets.isEmpty() || isMissingPlatformLibraries(todoOutputTargets)) {
             logInfo("All available targets are commonized already - Nothing to do")
@@ -87,7 +87,7 @@ class NativeDistributionCommonizerCache(
     }
 
     private fun isCached(directory: File): Boolean {
-        val successMarkerFile = directory.resolve(".success")
+        konst successMarkerFile = directory.resolve(".success")
         return successMarkerFile.isFile
     }
 

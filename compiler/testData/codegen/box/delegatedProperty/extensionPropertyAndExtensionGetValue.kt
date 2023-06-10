@@ -1,13 +1,13 @@
-class A(val o: String)
+class A(konst o: String)
 
 interface I {
-    val k: String
+    konst k: String
 }
 
 inline operator fun A.getValue(thisRef: I, property: Any): String = o + thisRef.k
 
-class B(override val k: String) : I
+class B(override konst k: String) : I
 
-val B.prop by A("O")
+konst B.prop by A("O")
 
 fun box() = B("K").prop

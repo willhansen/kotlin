@@ -16,13 +16,13 @@ import kotlin.test.*
 class FatFrameworksTest {
     @Test
     fun `two apple frameworks get bundled to a fat framework`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 iosX64 { binaries.framework("foo", listOf(DEBUG)) }
                 iosArm64 { binaries.framework("foo", listOf(DEBUG)) }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
         project.assertConfigurationExists("fooDebugFrameworkIosX64")
         project.assertConfigurationExists("fooDebugFrameworkIosArm64")
         project.assertConfigurationExists("fooDebugFrameworkIosFat")
@@ -30,12 +30,12 @@ class FatFrameworksTest {
 
     @Test
     fun `single binary framework doesn't produce a fat framework`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 iosX64 { binaries.framework("foo", listOf(DEBUG)) }
             }
         }
-        project.evaluate()
+        project.ekonstuate()
         project.assertConfigurationExists("fooDebugFrameworkIosX64")
         project.assertConfigurationDoesntExist("fooDebugFrameworkIosFat")
     }
@@ -80,7 +80,7 @@ class FatFrameworksTest {
 
     @Test
     fun `fat framework contains framework name attribute`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 iosX64 {
                     binaries.framework("foo", listOf(DEBUG)) { baseName = "f1" }
@@ -93,9 +93,9 @@ class FatFrameworksTest {
                 }
             }
         }
-        project.evaluate()
-        val barFat = project.assertConfigurationExists("barDebugFrameworkIosFat")
-        val fooFat = project.assertConfigurationExists("fooDebugFrameworkIosFat")
+        project.ekonstuate()
+        konst barFat = project.assertConfigurationExists("barDebugFrameworkIosFat")
+        konst fooFat = project.assertConfigurationExists("fooDebugFrameworkIosFat")
         assertEquals("f1", fooFat.attributes.getAttribute(KotlinNativeTarget.kotlinNativeFrameworkNameAttribute))
         assertEquals("f2", barFat.attributes.getAttribute(KotlinNativeTarget.kotlinNativeFrameworkNameAttribute))
     }
@@ -104,18 +104,18 @@ class FatFrameworksTest {
         vararg allExpectedFatFrameworks: String,
         configureTargets: KotlinMultiplatformExtension.() -> Unit,
     ) {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 configureTargets()
             }
         }
-        project.evaluate()
-        val allFatFrameworks = project.configurations.names.filter { it.endsWith("Fat") }.toSet()
+        project.ekonstuate()
+        konst allFatFrameworks = project.configurations.names.filter { it.endsWith("Fat") }.toSet()
         assertEquals(allExpectedFatFrameworks.toSet(), allFatFrameworks)
     }
 
     private fun Project.assertConfigurationDoesntExist(name: String) {
-        val configuration = project.configurations.findByName(name)
+        konst configuration = project.configurations.findByName(name)
         if (configuration != null) fail("'$name' configuration was not expected")
     }
 

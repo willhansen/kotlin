@@ -137,76 +137,76 @@ fun <T : Number?> T.case_11_2(): Boolean? {
 import contracts.*
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Any?) {
-    value_1.case_1()
-    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_1(konstue_1: Any?) {
+    konstue_1.case_1()
+    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Number) {
-    value_1.case_2()
-    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>inv<!>())
+fun case_2(konstue_1: Number) {
+    konstue_1.case_2()
+    <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>inv<!>())
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: String?, value_2: String?) {
-    value_1.case_3_1()
-    println(value_1<!UNSAFE_CALL!>.<!>length)
-    value_2.case_3_2()
-    println(value_2)
+fun case_3(konstue_1: String?, konstue_2: String?) {
+    konstue_1.case_3_1()
+    println(konstue_1<!UNSAFE_CALL!>.<!>length)
+    konstue_2.case_3_2()
+    println(konstue_2)
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: String?, value_2: String?) {
-    value_1.case_4_1()
-    println(value_1<!UNSAFE_CALL!>.<!>length)
-    value_2.case_4_2()
-    println(value_2)
+fun case_4(konstue_1: String?, konstue_2: String?) {
+    konstue_1.case_4_1()
+    println(konstue_1<!UNSAFE_CALL!>.<!>length)
+    konstue_2.case_4_2()
+    println(konstue_2)
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(value_1: Any?) {
-    if (value_1.case_5_1()) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (!value_1.case_5_2()) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value_1.case_5_3() != null) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
-    if (value_1.case_5_4() == null) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>length<!>)
+fun case_5(konstue_1: Any?) {
+    if (konstue_1.case_5_1()) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (!konstue_1.case_5_2()) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (konstue_1.case_5_3() != null) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
+    if (konstue_1.case_5_4() == null) <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>length<!>)
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Number) {
-    when { value_1.case_6_1() -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
-    when { !value_1.case_6_2() -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
-    when { value_1.case_6_3() != null -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
-    when { value_1.case_6_4() != null -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(value_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
+fun case_6(konstue_1: Number) {
+    when { konstue_1.case_6_1() -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
+    when { !konstue_1.case_6_2() -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
+    when { konstue_1.case_6_3() != null -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
+    when { konstue_1.case_6_4() != null -> <!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(konstue_1.<!UNRESOLVED_REFERENCE!>inv<!>()) }
 }
 
 // TESTCASE NUMBER: 7
-fun case_7(value_1: String?, value_2: String?) {
-    if (value_1.case_7_1()) println(value_1<!UNSAFE_CALL!>.<!>length)
-    if (value_2.case_7_2()) println(value_2)
-    if (!(value_2.case_7_3() == null)) println(value_2)
-    if (value_2.case_7_3() == null) println(value_2)
+fun case_7(konstue_1: String?, konstue_2: String?) {
+    if (konstue_1.case_7_1()) println(konstue_1<!UNSAFE_CALL!>.<!>length)
+    if (konstue_2.case_7_2()) println(konstue_2)
+    if (!(konstue_2.case_7_3() == null)) println(konstue_2)
+    if (konstue_2.case_7_3() == null) println(konstue_2)
 }
 
 // TESTCASE NUMBER: 8
-fun case_8(value_1: String?, value_2: String?) {
-    when { value_1.case_8_1() -> println(value_1<!UNSAFE_CALL!>.<!>length) }
-    when { value_2.case_8_2() -> println(value_2) }
-    when { !(value_2.case_8_3() == null) -> println(value_2) }
-    when { value_2.case_8_3() == null -> println(value_2) }
+fun case_8(konstue_1: String?, konstue_2: String?) {
+    when { konstue_1.case_8_1() -> println(konstue_1<!UNSAFE_CALL!>.<!>length) }
+    when { konstue_2.case_8_2() -> println(konstue_2) }
+    when { !(konstue_2.case_8_3() == null) -> println(konstue_2) }
+    when { konstue_2.case_8_3() == null -> println(konstue_2) }
 }
 
 // TESTCASE NUMBER: 9
-fun case_9(value_1: Number?) {
-    if (value_1?.case_9() == null) println(value_1<!UNSAFE_CALL!>.<!>toByte())
+fun case_9(konstue_1: Number?) {
+    if (konstue_1?.case_9() == null) println(konstue_1<!UNSAFE_CALL!>.<!>toByte())
 }
 
 // TESTCASE NUMBER: 10
-fun case_10(value_1: Number?) {
-    if (value_1?.case_10() == null) {
-        println(value_1<!UNSAFE_CALL!>.<!>toByte())
+fun case_10(konstue_1: Number?) {
+    if (konstue_1?.case_10() == null) {
+        println(konstue_1<!UNSAFE_CALL!>.<!>toByte())
     } else {
-        println(value_1.toByte())
+        println(konstue_1.toByte())
     }
 }
 
@@ -214,15 +214,15 @@ fun case_10(value_1: Number?) {
  * TESTCASE NUMBER: 11
  * ISSUES: KT-26382
  */
-fun case_11(value_1: Number?, value_2: Number?) {
-    if (value_1?.case_11_1() == null) {
-        println(value_1<!UNSAFE_CALL!>.<!>toByte())
+fun case_11(konstue_1: Number?, konstue_2: Number?) {
+    if (konstue_1?.case_11_1() == null) {
+        println(konstue_1<!UNSAFE_CALL!>.<!>toByte())
     } else {
-        println(value_1.toByte())
+        println(konstue_1.toByte())
     }
-    if (value_2?.case_11_2() != null) {
-        println(value_2.toByte())
+    if (konstue_2?.case_11_2() != null) {
+        println(konstue_2.toByte())
     } else {
-        println(value_2<!UNSAFE_CALL!>.<!>toByte())
+        println(konstue_2<!UNSAFE_CALL!>.<!>toByte())
     }
 }

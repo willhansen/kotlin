@@ -28,7 +28,7 @@ import javax.inject.Inject
 import javax.xml.parsers.DocumentBuilderFactory
 
 // Use apply plugin: 'kotlin-android-extensions' to enable Android Extensions in an Android project.
-class AndroidExtensionsSubpluginIndicator @Inject internal constructor(private val registry: ToolingModelBuilderRegistry) :
+class AndroidExtensionsSubpluginIndicator @Inject internal constructor(private konst registry: ToolingModelBuilderRegistry) :
     Plugin<Project> {
     override fun apply(project: Project) {
         project.extensions.create("androidExtensions", AndroidExtensionsExtension::class.java)
@@ -45,7 +45,7 @@ class AndroidExtensionsSubpluginIndicator @Inject internal constructor(private v
     }
 
     private fun addAndroidExtensionsRuntime(project: Project) {
-        val kotlinPluginVersion = project.getKotlinPluginVersion()
+        konst kotlinPluginVersion = project.getKotlinPluginVersion()
         project.configurations.matching { it.name == "implementation" }.all { configuration ->
             configuration.dependencies.add(
                 project.dependencies.create(
@@ -61,7 +61,7 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         if (kotlinCompilation !is KotlinJvmAndroidCompilation)
             return false
 
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
         if (project.extensions.findByName("android") !is BaseExtension)
             return false
@@ -76,10 +76,10 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         kotlinCompilation: KotlinCompilation<*>
     ): Provider<List<SubpluginOption>> {
         kotlinCompilation as KotlinJvmAndroidCompilation
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
-        val androidExtension = project.extensions.getByName("android") as BaseExtension
-        val androidExtensionsExtension = project.extensions.getByType(AndroidExtensionsExtension::class.java)
+        konst androidExtension = project.extensions.getByName("android") as BaseExtension
+        konst androidExtensionsExtension = project.extensions.getByType(AndroidExtensionsExtension::class.java)
 
         if (androidExtensionsExtension.isExperimental) {
             return applyExperimental(
@@ -88,15 +88,15 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
             )
         }
 
-        val sourceSets = androidExtension.sourceSets
+        konst sourceSets = androidExtension.sourceSets
 
-        val pluginOptions = arrayListOf<SubpluginOption>()
+        konst pluginOptions = arrayListOf<SubpluginOption>()
         pluginOptions += SubpluginOption("features",
                                          AndroidExtensionsFeature.parseFeatures(androidExtensionsExtension.features).joinToString(",") { it.featureName })
 
-        val mainSourceSet = sourceSets.getByName("main")
-        val manifestFile = mainSourceSet.manifest.srcFile
-        val applicationPackage = getApplicationPackage(androidExtension, manifestFile) ?: run {
+        konst mainSourceSet = sourceSets.getByName("main")
+        konst manifestFile = mainSourceSet.manifest.srcFile
+        konst applicationPackage = getApplicationPackage(androidExtension, manifestFile) ?: run {
             project.logger.warn(
                 "Application package name is not present in the manifest file (${manifestFile.absolutePath})"
             )
@@ -105,7 +105,7 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         pluginOptions += SubpluginOption("package", applicationPackage)
 
         fun addVariant(sourceSet: AndroidSourceSet) {
-            val optionValue = lazy {
+            konst optionValue = lazy {
                 sourceSet.name + ';' + sourceSet.res.srcDirs.joinToString(";") { it.absolutePath }
             }
             pluginOptions += CompositeSubpluginOption(
@@ -133,7 +133,7 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         return project.provider { wrapPluginOptions(pluginOptions, "configuration") }
     }
 
-    private val List<ConfigurableFileTree>.layoutDirectories
+    private konst List<ConfigurableFileTree>.layoutDirectories
         get() = map { tree ->
             tree.matching {
                 it.include("**/layout/**")
@@ -148,7 +148,7 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         project: Project,
         variantData: Any?
     ): Provider<List<SubpluginOption>> {
-        val pluginOptions = arrayListOf<SubpluginOption>()
+        konst pluginOptions = arrayListOf<SubpluginOption>()
         pluginOptions += SubpluginOption(
             "features",
             AndroidExtensionsFeature.parseFeatures(androidExtensionsExtension.features).joinToString(",") { it.featureName }
@@ -160,11 +160,11 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
             androidExtensionsExtension.defaultCacheImplementation.optionName
         )
 
-        val mainSourceSet = androidExtension.sourceSets.getByName("main")
+        konst mainSourceSet = androidExtension.sourceSets.getByName("main")
         pluginOptions += SubpluginOption("package", getApplicationPackage(androidExtension, project, mainSourceSet))
 
         fun addVariant(name: String, resDirectories: List<ConfigurableFileTree>) {
-            val optionValue = lazy {
+            konst optionValue = lazy {
                 buildString {
                     append(name)
                     append(';')
@@ -188,8 +188,8 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         }
 
         fun addSourceSetAsVariant(name: String) {
-            val sourceSet = androidExtension.sourceSets.findByName(name) ?: return
-            val srcDirs = sourceSet.res.getSourceDirectoryTrees()
+            konst sourceSet = androidExtension.sourceSets.findByName(name) ?: return
+            konst srcDirs = sourceSet.res.getSourceDirectoryTrees()
             if (srcDirs.isNotEmpty()) {
                 addVariant(sourceSet.name, srcDirs)
             }
@@ -219,11 +219,11 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         else -> null
     }
 
-    private data class VariantComponentNames(val variantName: String, val flavorName: String, val buildTypeName: String)
+    private data class VariantComponentNames(konst variantName: String, konst flavorName: String, konst buildTypeName: String)
 
     private fun getApplicationPackage(androidExtension: BaseExtension, project: Project, mainSourceSet: AndroidSourceSet): String {
-        val manifestFile = mainSourceSet.manifest.srcFile
-        val applicationPackage = getApplicationPackage(androidExtension, manifestFile)
+        konst manifestFile = mainSourceSet.manifest.srcFile
+        konst applicationPackage = getApplicationPackage(androidExtension, manifestFile)
 
         if (applicationPackage == null) {
             project.logger.warn(
@@ -238,7 +238,7 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
     }
 
     private fun getApplicationPackage(androidExtension: BaseExtension, manifestFile: File): String? {
-        // Starting AGP 7 the package can be set via the DSL namespace value:
+        // Starting AGP 7 the package can be set via the DSL namespace konstue:
         //
         // android {
         //   namespace "com.example"
@@ -254,8 +254,8 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         // Therefore, we try to get the package from there first. Since we support AGP versions
         // prior to AGP 7, we need to reflectively find and call it.
         try {
-            val method = androidExtension.javaClass.getDeclaredMethod("getNamespace")
-            val result = method.invoke(androidExtension)
+            konst method = androidExtension.javaClass.getDeclaredMethod("getNamespace")
+            konst result = method.invoke(androidExtension)
             if (result is String && result.isNotEmpty()) {
                 return result
             }
@@ -278,8 +278,8 @@ class AndroidSubplugin : KotlinCompilerPluginSupportPlugin {
         JetBrainsSubpluginArtifact(artifactId = "kotlin-android-extensions")
 
     private fun File.parseXml(): Document {
-        val factory = DocumentBuilderFactory.newInstance()
-        val builder = factory.newDocumentBuilder()
+        konst factory = DocumentBuilderFactory.newInstance()
+        konst builder = factory.newDocumentBuilder()
         return builder.parse(this)
     }
 }

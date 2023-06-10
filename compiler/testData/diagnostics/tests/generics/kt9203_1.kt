@@ -13,7 +13,7 @@ interface Stream<T> {
 fun stream(): Stream<String> = null!!
 
 fun main() {
-    val stream: Stream<String> = stream()
-    val xs = stream.collect(toList())
+    konst stream: Stream<String> = stream()
+    konst xs = stream.collect(toList())
     xs.foo()
 }

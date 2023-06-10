@@ -31,14 +31,14 @@ object KtDiagnosticClassRenderer : AbstractDiagnosticsDataClassRenderer() {
         printTypeWithShortNames(diagnostic.original.psiType)
         print(">")
         inBracketsWithIndent {
-            println("override val diagnosticClass get() = ${diagnostic.className}::class")
+            println("override konst diagnosticClass get() = ${diagnostic.className}::class")
             printDiagnosticParameters(diagnostic, diagnosticList)
         }
     }
 
     private fun SmartPrinter.printDiagnosticParameters(diagnostic: HLDiagnostic, diagnosticList: HLDiagnosticList) {
         diagnostic.parameters.forEach { parameter ->
-            print("val ${parameter.name}: ")
+            print("konst ${parameter.name}: ")
             printTypeWithShortNames(parameter.type) { type ->
                 diagnosticList.containsClashingBySimpleNameType(type)
             }
@@ -50,7 +50,7 @@ object KtDiagnosticClassRenderer : AbstractDiagnosticsDataClassRenderer() {
         diagnosticParameter.type.collectClassNamesTo(this)
     }
 
-    override val defaultImports = listOf(
+    override konst defaultImports = listOf(
         "org.jetbrains.kotlin.analysis.api.diagnostics.KtDiagnosticWithPsi",
         "com.intellij.psi.PsiElement",
     )

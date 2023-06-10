@@ -21,7 +21,7 @@ public class JsReservedIdentifiers {
                 "NaN", "Infinity", "undefined",
 
                 // 15.1.2 Function Properties of the Global Object
-                "eval", "parseInt", "parseFloat", "isNan", "isFinite",
+                "ekonst", "parseInt", "parseFloat", "isNan", "isFinite",
 
                 // 15.1.3 URI Handling Function Properties
                 "decodeURI", "decodeURIComponent",
@@ -30,7 +30,7 @@ public class JsReservedIdentifiers {
 
                 // 15.1.4 Constructor Properties of the Global Object
                 "Object", "Function", "Array", "String", "Boolean", "Number", "Date",
-                "RegExp", "Error", "EvalError", "RangeError", "ReferenceError",
+                "RegExp", "Error", "EkonstError", "RangeError", "ReferenceError",
                 "SyntaxError", "TypeError", "URIError",
 
                 // 15.1.5 Other Properties of the Global Object
@@ -57,7 +57,7 @@ public class JsReservedIdentifiers {
 
                 // Window methods (https://developer.mozilla.org/en/DOM/window)
                 "alert", "addEventListener", "atob", "back", "blur", "btoa",
-                "captureEvents", "clearInterval", "clearTimeout", "close", "confirm",
+                "captureEvents", "clearInterkonst", "clearTimeout", "close", "confirm",
                 "disableExternalCapture", "dispatchEvent", "dump",
                 "enableExternalCapture", "escape", "find", "focus", "forward",
                 "GeckoActiveXObject", "getAttention", "getAttentionWithCycleCount",
@@ -65,7 +65,7 @@ public class JsReservedIdentifiers {
                 "moveBy", "moveTo", "open", "openDialog", "postMessage", "print",
                 "prompt", "QueryInterface", "releaseEvents", "removeEventListener",
                 "resizeBy", "resizeTo", "restore", "routeEvent", "scroll", "scrollBy",
-                "scrollByLines", "scrollByPages", "scrollTo", "setInterval",
+                "scrollByLines", "scrollByPages", "scrollTo", "setInterkonst",
                 "setResizeable", "setTimeout", "showModalDialog", "sizeToContent",
                 "stop", "uuescape", "updateCommands", "XPCNativeWrapper",
                 "XPCSafeJSOjbectWrapper",
@@ -87,7 +87,7 @@ public class JsReservedIdentifiers {
                 "ongesturestart", "ongesturechange", "ongestureend",
 
                 // extra window methods
-                "uneval",
+                "unekonst",
 
                 // keywords https://developer.mozilla.org/en/New_in_JavaScript_1.7,
                 // https://developer.mozilla.org/en/New_in_JavaScript_1.8.1
@@ -111,7 +111,7 @@ public class JsReservedIdentifiers {
                 "ActiveXObject", "VBArray", "Components",
 
                 // Functions commonly defined on Object
-                "toString", "getClass", "constructor", "prototype", "valueOf",
+                "toString", "getClass", "constructor", "prototype", "konstueOf",
 
                 // Client-side JavaScript identifiers, which are needed for linkers
                 // that don't ensure GWT's window != $wnd, document != $doc, etc.

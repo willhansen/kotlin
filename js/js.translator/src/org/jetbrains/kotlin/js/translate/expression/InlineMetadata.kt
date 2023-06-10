@@ -24,17 +24,17 @@ import org.jetbrains.kotlin.js.inline.util.FunctionWithWrapper
 import org.jetbrains.kotlin.js.translate.context.Namer
 import org.jetbrains.kotlin.js.translate.context.TranslationContext
 
-private val METADATA_PROPERTIES_COUNT = 2
+private konst METADATA_PROPERTIES_COUNT = 2
 
-class InlineMetadata(val tag: JsStringLiteral, val function: FunctionWithWrapper) {
+class InlineMetadata(konst tag: JsStringLiteral, konst function: FunctionWithWrapper) {
     companion object {
         @JvmStatic
         fun compose(function: JsFunction, descriptor: CallableDescriptor, context: TranslationContext): InlineMetadata {
-            val tag = JsStringLiteral(Namer.getFunctionTag(descriptor, context.config, context.bindingContext()))
-            val inliningContext = context.inlineFunctionContext!!
-            val block = JsBlock(inliningContext.importBlock.statements + inliningContext.prototypeBlock.statements +
+            konst tag = JsStringLiteral(Namer.getFunctionTag(descriptor, context.config, context.bindingContext()))
+            konst inliningContext = context.inlineFunctionContext!!
+            konst block = JsBlock(inliningContext.importBlock.statements + inliningContext.prototypeBlock.statements +
                                 inliningContext.declarationsBlock.statements + JsReturn(function))
-            context.reportInlineFunctionTag(tag.value);
+            context.reportInlineFunctionTag(tag.konstue);
             return InlineMetadata(tag, FunctionWithWrapper(function, block))
         }
 
@@ -46,17 +46,17 @@ class InlineMetadata(val tag: JsStringLiteral, val function: FunctionWithWrapper
                 }
 
         private fun decomposeCreateFunctionCall(call: JsInvocation): InlineMetadata? {
-            val qualifier = call.qualifier as? JsNameRef ?: return null
+            konst qualifier = call.qualifier as? JsNameRef ?: return null
             if (qualifier.ident != Namer.DEFINE_INLINE_FUNCTION &&
                 qualifier.name?.specialFunction != SpecialFunction.DEFINE_INLINE_FUNCTION) {
                 return null
             }
 
-            val arguments = call.arguments
+            konst arguments = call.arguments
             if (arguments.size != METADATA_PROPERTIES_COUNT) return null
 
-            val tag = arguments[0] as? JsStringLiteral ?: return null
-            val function = tryExtractFunction(arguments[1]) ?: return null
+            konst tag = arguments[0] as? JsStringLiteral ?: return null
+            konst function = tryExtractFunction(arguments[1]) ?: return null
 
             return InlineMetadata(tag, function)
         }
@@ -66,26 +66,26 @@ class InlineMetadata(val tag: JsStringLiteral, val function: FunctionWithWrapper
             if (callExpression is JsFunction) return FunctionWithWrapper(callExpression, null)
             if (callExpression !is JsInvocation) return null
 
-            val qualifier = callExpression.qualifier as? JsNameRef ?: return null
+            konst qualifier = callExpression.qualifier as? JsNameRef ?: return null
             if (qualifier.name?.specialFunction != SpecialFunction.WRAP_FUNCTION) return null
             if (callExpression.arguments.size != 1) return null
 
-            val argument = callExpression.arguments[0] as? JsFunction ?: return null
+            konst argument = callExpression.arguments[0] as? JsFunction ?: return null
             return decomposeWrapper(argument)
         }
 
         @JvmStatic
         fun decomposeWrapper(wrapperFunction: JsFunction): FunctionWithWrapper? {
-            val returnExpr = wrapperFunction.body.statements.lastOrNull() as? JsReturn ?: return null
-            val function = returnExpr.expression as? JsFunction ?: return null
+            konst returnExpr = wrapperFunction.body.statements.lastOrNull() as? JsReturn ?: return null
+            konst function = returnExpr.expression as? JsFunction ?: return null
 
             return FunctionWithWrapper(function, wrapperFunction.body)
         }
 
         @JvmStatic
         fun wrapFunction(context: TranslationContext, function: FunctionWithWrapper, sourceInfo: Any?): JsExpression {
-            val wrapperBody = function.wrapperBody ?: JsBlock(JsReturn(function.function))
-            val wrapper = JsFunction(function.function.scope, wrapperBody, "")
+            konst wrapperBody = function.wrapperBody ?: JsBlock(JsReturn(function.function))
+            konst wrapper = JsFunction(function.function.scope, wrapperBody, "")
             function.wrapperBody?.statements?.forEach {
                 if (it is JsExpressionStatement) {
                     it.expression.source = sourceInfo

@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirInitializerTypeMismatchChecker : FirPropertyChecker() {
     override fun check(declaration: FirProperty, context: CheckerContext, reporter: DiagnosticReporter) {
-        val initializer = declaration.initializer ?: return
-        val source = declaration.source ?: return
+        konst initializer = declaration.initializer ?: return
+        konst source = declaration.source ?: return
         if (source.elementType == KtNodeTypes.DESTRUCTURING_DECLARATION) return
         if (initializer is FirComponentCall) return
         if (declaration.returnTypeRef.source?.kind != KtRealSourceElementKind) return
-        val propertyType = declaration.returnTypeRef.coneType
+        konst propertyType = declaration.returnTypeRef.coneType
 
         checkTypeMismatch(propertyType, null, initializer, context, source, reporter, true)
     }

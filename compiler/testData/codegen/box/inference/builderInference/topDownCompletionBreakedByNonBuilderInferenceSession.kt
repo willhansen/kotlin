@@ -24,7 +24,7 @@ class A4<A3_BT1, A3_BT2, A3_BT3> {
 
 fun foo1(x: A1<String>) {
     x.builder1<String> {
-        val x by lazy {
+        konst x by lazy {
             builder2<String> {
                 builder3 {
                     resolver("")
@@ -37,7 +37,7 @@ fun foo1(x: A1<String>) {
 fun foo2(x: A1<String>) {
     x.builder1<String> {
         builder2<String> {
-            val x by lazy {
+            konst x by lazy {
                 builder3 {
                     resolver("")
                 }

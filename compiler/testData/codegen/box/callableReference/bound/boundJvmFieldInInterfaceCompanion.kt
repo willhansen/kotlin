@@ -2,18 +2,18 @@
 // TARGET_BACKEND: JVM
 // WITH_STDLIB
 
-class Bar(val value: String)
+class Bar(konst konstue: String)
 
 interface  Foo {
 
     companion object {
         @JvmField
-        val z = Bar("OK")
+        konst z = Bar("OK")
     }
 }
 
 
 fun box(): String {
-    val field = Foo.Companion::z
-    return field.get().value
+    konst field = Foo.Companion::z
+    return field.get().konstue
 }

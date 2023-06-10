@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 class FileBasedPackageMemberDeclarationProvider(
     storageManager: StorageManager,
-    private val fqName: FqName,
-    private val factory: FileBasedDeclarationProviderFactory,
-    private val packageFiles: Collection<KtFile>
+    private konst fqName: FqName,
+    private konst factory: FileBasedDeclarationProviderFactory,
+    private konst packageFiles: Collection<KtFile>
 ) : AbstractPsiBasedDeclarationProvider(storageManager), PackageMemberDeclarationProvider {
 
-    private val allDeclaredSubPackages = storageManager.createLazyValue<Collection<FqName>> {
+    private konst allDeclaredSubPackages = storageManager.createLazyValue<Collection<FqName>> {
         factory.getAllDeclaredSubPackagesOf(fqName)
     }
 
     override fun doCreateIndex(index: AbstractPsiBasedDeclarationProvider.Index) {
         for (file in packageFiles) {
             for (declaration in file.declarations) {
-                assert(fqName == file.packageFqName) { "Files declaration utils contains file with invalid package" }
+                assert(fqName == file.packageFqName) { "Files declaration utils contains file with inkonstid package" }
                 index.putToIndex(declaration)
             }
         }

@@ -29,9 +29,9 @@ class WhileConditionFoldingTest : BasicOptimizerTest("while-condition-folding") 
 
     @Test fun doWhileWithContinue() = box()
 
-    @Test fun whileEvaluationOrder() = box()
+    @Test fun whileEkonstuationOrder() = box()
 
-    @Test fun doWhileEvaluationOrder() = box()
+    @Test fun doWhileEkonstuationOrder() = box()
 
     @Test fun inNestedLoop() = box()
 

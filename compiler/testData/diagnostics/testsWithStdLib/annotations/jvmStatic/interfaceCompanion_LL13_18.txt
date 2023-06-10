@@ -9,14 +9,14 @@ public interface B {
         private constructor Companion()
         @kotlin.jvm.JvmStatic public final var foo: kotlin.Int
         @kotlin.jvm.JvmStatic public final var foo1: kotlin.Int
-        @kotlin.jvm.JvmStatic public final val foo10: kotlin.Int
-        @get:kotlin.jvm.JvmStatic public final val foo11: kotlin.Int
+        @kotlin.jvm.JvmStatic public final konst foo10: kotlin.Int
+        @get:kotlin.jvm.JvmStatic public final konst foo11: kotlin.Int
         @kotlin.jvm.JvmStatic public final var foo2: kotlin.Int
         @kotlin.jvm.JvmStatic private final var foo3: kotlin.Int
         @kotlin.jvm.JvmStatic protected final var foo4: kotlin.Int
         @kotlin.jvm.JvmStatic protected final var foo5: kotlin.Int
-        @kotlin.jvm.JvmStatic public final val foo6: kotlin.Int = 1
-        @get:kotlin.jvm.JvmStatic public final val foo7: kotlin.Int = 1
+        @kotlin.jvm.JvmStatic public final konst foo6: kotlin.Int = 1
+        @get:kotlin.jvm.JvmStatic public final konst foo7: kotlin.Int = 1
         @set:kotlin.jvm.JvmStatic private final var foo8: kotlin.Int
         @set:kotlin.jvm.JvmStatic public final var foo9: kotlin.Int
         @kotlin.jvm.JvmStatic public final fun a1(): kotlin.Unit

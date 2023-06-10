@@ -24,7 +24,7 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 fun CallableDescriptor.getContainingKotlinJvmBinaryClass(): KotlinJvmBinaryClass? {
     if (this !is DeserializedCallableMemberDescriptor) return null
 
-    return when (val container = containingDeclaration) {
+    return when (konst container = containingDeclaration) {
         is DeserializedClassDescriptor -> (container.source as? KotlinJvmBinarySourceElement)?.binaryClass
         is LazyJavaPackageFragment -> (container.source as? KotlinJvmBinaryPackageSourceElement)?.getRepresentativeBinaryClass()
         else -> null

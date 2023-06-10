@@ -13,7 +13,7 @@ class ConstructorArgumentsOrderTest {
 
     @Test
     fun testScriptWithProvidedProperties() {
-        val res = evalString<ScriptWithProvidedProperties>("""println(providedString)""") {
+        konst res = ekonstString<ScriptWithProvidedProperties>("""println(providedString)""") {
             providedProperties("providedString" to "Hello Provided!")
         }
 
@@ -25,7 +25,7 @@ class ConstructorArgumentsOrderTest {
 
     @Test
     fun testScriptWithImplicitReceiver() {
-        val res = evalString<ScriptWithImplicitReceiver>("""println(receiverString)""") {
+        konst res = ekonstString<ScriptWithImplicitReceiver>("""println(receiverString)""") {
             implicitReceivers(ImplicitReceiverClass("Hello Receiver!"))
         }
 
@@ -37,7 +37,7 @@ class ConstructorArgumentsOrderTest {
 
     @Test
     fun testScriptWithBoth() {
-        val res = evalString<ScriptWithBoth>("""println(providedString + receiverString)""") {
+        konst res = ekonstString<ScriptWithBoth>("""println(providedString + receiverString)""") {
             providedProperties("providedString" to "Hello")
             implicitReceivers(ImplicitReceiverClass(" Both!"))
         }
@@ -50,5 +50,5 @@ class ConstructorArgumentsOrderTest {
 
 }
 
-internal fun ResultWithDiagnostics<EvaluationResult>.render() =
+internal fun ResultWithDiagnostics<EkonstuationResult>.render() =
     reports.joinToString("\n  ") { it.message + if (it.exception == null) "" else ": ${it.exception!!.printStackTrace()}" }

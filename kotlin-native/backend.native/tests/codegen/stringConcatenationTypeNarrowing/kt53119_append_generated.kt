@@ -53,7 +53,7 @@ fun maybeAnyString(maybeAny1: Any?, string: String): String {
     return "$maybeAny1,$string"
 }
 
-data class Foo(val bar: Int)
+data class Foo(konst bar: Int)
 
 // CHECK-LABEL: define %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_append_generated#maybeAnyFoo
 // CHECK: %struct.ObjHeader* @"kfun:codegen.stringConcatenationTypeNarrowing.kt53119_append_generated.Foo#toString(){}kotlin.String"
@@ -91,7 +91,7 @@ fun maybeAnyMaybeFoo(maybeAny: Any?, foo: Foo?): String {
 }
 @Test
 fun runTest() {
-    val foo = Foo(42)
+    konst foo = Foo(42)
     println(maybeAnyMaybeAny(foo, foo))
     println(maybeAnyMaybeAny(null, null))
     println(maybeAnyMaybeString(foo, "bar"))

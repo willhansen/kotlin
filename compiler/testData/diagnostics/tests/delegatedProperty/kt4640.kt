@@ -9,4 +9,4 @@ class ValueWrapper()
     fun setValue(v: Int) { backingValue = v }
 }
 
-val foo by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>ValueWrapper()<!>
+konst foo by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>ValueWrapper()<!>

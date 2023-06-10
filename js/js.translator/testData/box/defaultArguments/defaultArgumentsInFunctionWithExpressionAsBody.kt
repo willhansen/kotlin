@@ -6,7 +6,7 @@ inline fun <T> id(x: T) = x
 
 fun test(arg: Int = 10) = id(arg)
 
-fun foo(value: String = "K") = "O" + try { value } catch(e: Exception) { "..." }
+fun foo(konstue: String = "K") = "O" + try { konstue } catch(e: Exception) { "..." }
 
 fun box(): String {
 

@@ -7,7 +7,7 @@ FILE: delegatingConstructorCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/String| = R|<local>/x|
+        public final konst x: R|kotlin/String| = R|<local>/x|
             public get(): R|kotlin/String|
 
     }
@@ -22,7 +22,7 @@ FILE: delegatingConstructorCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Int| = R|<local>/x|
+        public final konst x: R|kotlin/Int| = R|<local>/x|
             public get(): R|kotlin/Int|
 
     }
@@ -71,7 +71,7 @@ FILE: delegatingConstructorCall.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val x: R|kotlin/Byte| = R|<local>/x|
+        public final konst x: R|kotlin/Byte| = R|<local>/x|
             public get(): R|kotlin/Byte|
 
     }

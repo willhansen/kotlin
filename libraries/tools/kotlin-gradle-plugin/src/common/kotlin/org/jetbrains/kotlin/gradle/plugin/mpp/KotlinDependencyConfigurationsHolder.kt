@@ -13,20 +13,20 @@ import org.jetbrains.kotlin.gradle.utils.*
 import javax.inject.Inject
 
 internal abstract class KotlinDependencyConfigurationsHolder @Inject constructor(
-    val project: Project,
-    private val configurationNamesPrefix: String?,
+    konst project: Project,
+    private konst configurationNamesPrefix: String?,
 ) : HasKotlinDependencies {
 
-    override val apiConfigurationName: String
+    override konst apiConfigurationName: String
         get() = lowerCamelCaseName(configurationNamesPrefix, API)
 
-    override val implementationConfigurationName: String
+    override konst implementationConfigurationName: String
         get() = lowerCamelCaseName(configurationNamesPrefix, IMPLEMENTATION)
 
-    override val compileOnlyConfigurationName: String
+    override konst compileOnlyConfigurationName: String
         get() = lowerCamelCaseName(configurationNamesPrefix, COMPILE_ONLY)
 
-    override val runtimeOnlyConfigurationName: String
+    override konst runtimeOnlyConfigurationName: String
         get() = lowerCamelCaseName(configurationNamesPrefix, RUNTIME_ONLY)
 
     override fun dependencies(configure: KotlinDependencyHandler.() -> Unit): Unit =

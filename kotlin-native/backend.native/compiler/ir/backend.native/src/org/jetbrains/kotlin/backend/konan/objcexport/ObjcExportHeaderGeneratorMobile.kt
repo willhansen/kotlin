@@ -12,7 +12,7 @@ class ObjcExportHeaderGeneratorMobile internal constructor(
         namer: ObjCExportNamer,
         problemCollector: ObjCExportProblemCollector,
         objcGenerics: Boolean,
-        private val restrictToLocalModules: Boolean
+        private konst restrictToLocalModules: Boolean
 ) : ObjCExportHeaderGenerator(moduleDescriptors, mapper, namer, objcGenerics, problemCollector) {
 
     companion object {
@@ -24,9 +24,9 @@ class ObjcExportHeaderGeneratorMobile internal constructor(
                 deprecationResolver: DeprecationResolver? = null,
                 local: Boolean = false,
                 restrictToLocalModules: Boolean = false): ObjCExportHeaderGenerator {
-            val mapper = ObjCExportMapper(deprecationResolver, local, configuration.unitSuspendFunctionExport)
-            val namerConfiguration = createNamerConfiguration(configuration)
-            val namer = ObjCExportNamerImpl(namerConfiguration, builtIns, mapper, local)
+            konst mapper = ObjCExportMapper(deprecationResolver, local, configuration.unitSuspendFunctionExport)
+            konst namerConfiguration = createNamerConfiguration(configuration)
+            konst namer = ObjCExportNamerImpl(namerConfiguration, builtIns, mapper, local)
 
             return ObjcExportHeaderGeneratorMobile(
                 moduleDescriptors,

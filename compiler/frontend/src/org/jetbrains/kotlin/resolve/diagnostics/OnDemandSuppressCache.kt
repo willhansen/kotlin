@@ -14,24 +14,24 @@ import org.jetbrains.kotlin.psi.KtFile
 import org.jetbrains.kotlin.psi.KtTreeVisitorVoid
 import org.jetbrains.kotlin.resolve.BindingContext
 
-class OnDemandSuppressCache(private val context: BindingContext) : KotlinSuppressCache() {
-    private val processedRoots = mutableSetOf<KtFile>()
+class OnDemandSuppressCache(private konst context: BindingContext) : KotlinSuppressCache() {
+    private konst processedRoots = mutableSetOf<KtFile>()
 
-    private val storage = mutableMapOf<PsiElement, List<AnnotationDescriptor>>()
+    private konst storage = mutableMapOf<PsiElement, List<AnnotationDescriptor>>()
 
     @Synchronized
     private fun ensureRootProcessed(rootElement: PsiElement) {
         require(rootElement is KtFile)
         if (!processedRoots.contains(rootElement)) {
-            val visitor = PrecomputingVisitor(storage, BindingContextSuppressCache(context))
+            konst visitor = PrecomputingVisitor(storage, BindingContextSuppressCache(context))
             rootElement.accept(visitor, null)
             processedRoots.add(rootElement)
         }
     }
 
     private class PrecomputingVisitor(
-        val storage: MutableMap<PsiElement, List<AnnotationDescriptor>>,
-        val computer: KotlinSuppressCache,
+        konst storage: MutableMap<PsiElement, List<AnnotationDescriptor>>,
+        konst computer: KotlinSuppressCache,
     ) : KtTreeVisitorVoid() {
         override fun visitKtElement(element: KtElement) {
             super.visitKtElement(element)
@@ -46,7 +46,7 @@ class OnDemandSuppressCache(private val context: BindingContext) : KotlinSuppres
         }
 
         private fun computeAnnotations(element: KtAnnotated) {
-            val suppressions = computer.getSuppressionAnnotations(element).filter { it.fqName == StandardNames.FqNames.suppress }
+            konst suppressions = computer.getSuppressionAnnotations(element).filter { it.fqName == StandardNames.FqNames.suppress }
             if (suppressions.isNotEmpty()) {
                 storage[element] = suppressions
             }

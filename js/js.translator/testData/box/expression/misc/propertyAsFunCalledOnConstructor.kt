@@ -2,7 +2,7 @@
 package foo
 
 class A() {
-    val p = { "OK" }
+    konst p = { "OK" }
 }
 
 

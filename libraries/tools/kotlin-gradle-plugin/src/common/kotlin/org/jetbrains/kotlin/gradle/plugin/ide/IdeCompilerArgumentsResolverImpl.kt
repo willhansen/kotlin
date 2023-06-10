@@ -21,7 +21,7 @@ internal class IdeCompilerArgumentsResolverImpl : IdeCompilerArgumentsResolver {
     }
 
     private fun resolveCompilerArguments(producer: KotlinCompilerArgumentsProducer): List<String> {
-        val compilerArguments = producer.createCompilerArguments(
+        konst compilerArguments = producer.createCompilerArguments(
             CreateCompilerArgumentsContext(
                 isLenient = true,
                 includeArgumentTypes = setOf(

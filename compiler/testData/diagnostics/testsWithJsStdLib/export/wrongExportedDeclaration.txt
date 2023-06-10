@@ -1,13 +1,13 @@
 package
 
 package foo {
-    @kotlin.js.JsExport public val kotlin.String.extensionProperty: kotlin.Int
+    @kotlin.js.JsExport public konst kotlin.String.extensionProperty: kotlin.Int
     @kotlin.js.JsExport public inline fun </*0*/ reified T> inlineReifiedFun(/*0*/ x: kotlin.Any): kotlin.Boolean
     @kotlin.js.JsExport public suspend fun suspendFun(): kotlin.Unit
 
-    @kotlin.js.JsExport public final value class A {
+    @kotlin.js.JsExport public final konstue class A {
         public constructor A(/*0*/ a: kotlin.Int)
-        public final val a: kotlin.Int
+        public final konst a: kotlin.Int
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
@@ -22,23 +22,23 @@ package foo {
 
     @kotlin.js.JsExport public final inline class B {
         public constructor B(/*0*/ b: kotlin.Int)
-        public final val b: kotlin.Int
+        public final konst b: kotlin.Int
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
     }
 
-    @kotlin.js.JsExport public final inline value class C {
+    @kotlin.js.JsExport public final inline konstue class C {
         public constructor C(/*0*/ c: kotlin.Int)
-        public final val c: kotlin.Int
+        public final konst c: kotlin.Int
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String
     }
 
-    @kotlin.js.JsExport public final inline value class D {
+    @kotlin.js.JsExport public final inline konstue class D {
         public constructor D(/*0*/ d: kotlin.Int)
-        public final val d: kotlin.Int
+        public final konst d: kotlin.Int
         public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

@@ -35,7 +35,7 @@ public final class Test$Creator : java/lang/Object, android/os/Parcelable$Creato
 public final class Test : java/lang/Object, android/os/Parcelable {
     public final static android.os.Parcelable$Creator CREATOR
 
-    private final Value value
+    private final Value konstue
 
     static void <clinit>() {
           NEW (Test$Creator)
@@ -46,7 +46,7 @@ public final class Test : java/lang/Object, android/os/Parcelable {
           RETURN
     }
 
-    public void <init>(Value value)
+    public void <init>(Value konstue)
 
     public int describeContents() {
         LABEL (L0)
@@ -64,7 +64,7 @@ public final class Test : java/lang/Object, android/os/Parcelable {
           INVOKESTATIC (kotlin/jvm/internal/Intrinsics, checkNotNullParameter, (Ljava/lang/Object;Ljava/lang/String;)V)
           ALOAD (1)
           ALOAD (0)
-          GETFIELD (Test, value, LValue;)
+          GETFIELD (Test, konstue, LValue;)
           INVOKEVIRTUAL (android/os/Parcel, writeValue, (Ljava/lang/Object;)V)
           RETURN
         LABEL (L1)

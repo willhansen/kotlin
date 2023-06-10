@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.project.model.LanguageSettings
 
 class NativeCompilerOptions(project: Project) : HasCompilerOptions<KotlinNativeCompilerOptions> {
 
-    override val options: KotlinNativeCompilerOptions = project.objects
+    override konst options: KotlinNativeCompilerOptions = project.objects
         .newInstance(KotlinNativeCompilerOptionsDefault::class.java)
         .configureExperimentalTryK2(project)
 

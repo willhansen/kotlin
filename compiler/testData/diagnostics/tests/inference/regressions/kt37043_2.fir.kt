@@ -11,14 +11,14 @@ fun nullableNumbersNullableArray(): Array<Number?>? = TODO()
 fun notNullableNumbersNullableArray(): Array<Number>? = TODO()
 
 fun main() {
-    val number1 = first(elvis(notNullableNumbers(), materializeArray()))
-    val number2 = first(elvis(notNullableNumbersNullableArray(), materializeArray()))
-    val number3 = first(notNullableNumbers() ?: materializeArray())
-    val number4 = first(notNullableNumbersNullableArray() ?: materializeArray())
-    val nullableNumber1 = first(elvis(nullableNumbers(), materializeArray()))
-    val nullableNumber2 = first(elvis(nullableNumbersNullableArray(), materializeArray()))
-    val nullableNumber3 = first(nullableNumbers() ?: materializeArray())
-    val nullableNumber4 = first(nullableNumbersNullableArray() ?: materializeArray())
+    konst number1 = first(elvis(notNullableNumbers(), materializeArray()))
+    konst number2 = first(elvis(notNullableNumbersNullableArray(), materializeArray()))
+    konst number3 = first(notNullableNumbers() ?: materializeArray())
+    konst number4 = first(notNullableNumbersNullableArray() ?: materializeArray())
+    konst nullableNumber1 = first(elvis(nullableNumbers(), materializeArray()))
+    konst nullableNumber2 = first(elvis(nullableNumbersNullableArray(), materializeArray()))
+    konst nullableNumber3 = first(nullableNumbers() ?: materializeArray())
+    konst nullableNumber4 = first(nullableNumbersNullableArray() ?: materializeArray())
 
     number1
     number2

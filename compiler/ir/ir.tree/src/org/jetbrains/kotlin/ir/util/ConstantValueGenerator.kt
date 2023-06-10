@@ -27,10 +27,10 @@ import org.jetbrains.kotlin.types.typeUtil.builtIns
 import org.jetbrains.kotlin.utils.memoryOptimizedMapNotNull
 
 abstract class ConstantValueGenerator(
-    private val moduleDescriptor: ModuleDescriptor,
-    private val symbolTable: ReferenceSymbolTable,
-    private val typeTranslator: TypeTranslator,
-    private val allowErrorTypeInAnnotations: Boolean,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst symbolTable: ReferenceSymbolTable,
+    private konst typeTranslator: TypeTranslator,
+    private konst allowErrorTypeInAnnotations: Boolean,
 ) {
     protected abstract fun extractAnnotationOffsets(annotationDescriptor: AnnotationDescriptor): Pair<Int, Int>
 
@@ -47,16 +47,16 @@ abstract class ConstantValueGenerator(
         generateConstantOrAnnotationValueAsExpression(startOffset, endOffset, constantValue, null, null)!!
 
     /**
-     * @return null if the constant value is an unresolved annotation or an unresolved class literal
+     * @return null if the constant konstue is an unresolved annotation or an unresolved class literal
      */
     fun generateAnnotationValueAsExpression(
         startOffset: Int,
         endOffset: Int,
         constantValue: ConstantValue<*>,
-        valueParameter: ValueParameterDescriptor,
+        konstueParameter: ValueParameterDescriptor,
     ): IrExpression? =
         generateConstantOrAnnotationValueAsExpression(
-            startOffset, endOffset, constantValue, valueParameter.type, valueParameter.varargElementType
+            startOffset, endOffset, constantValue, konstueParameter.type, konstueParameter.varargElementType
         )
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
@@ -67,39 +67,39 @@ abstract class ConstantValueGenerator(
         expectedType: KotlinType?,
         expectedArrayElementType: KotlinType?
     ): IrExpression? {
-        val constantValueType = constantValue.getType(moduleDescriptor)
-        val constantKtType = expectedType ?: constantValueType
-        val constantType = constantKtType.toIrType()
+        konst constantValueType = constantValue.getType(moduleDescriptor)
+        konst constantKtType = expectedType ?: constantValueType
+        konst constantType = constantKtType.toIrType()
 
         return when (constantValue) {
-            is StringValue -> IrConstImpl.string(startOffset, endOffset, constantType, constantValue.value)
-            is IntValue -> IrConstImpl.int(startOffset, endOffset, constantType, constantValue.value)
-            is UIntValue -> IrConstImpl.int(startOffset, endOffset, constantType, constantValue.value)
+            is StringValue -> IrConstImpl.string(startOffset, endOffset, constantType, constantValue.konstue)
+            is IntValue -> IrConstImpl.int(startOffset, endOffset, constantType, constantValue.konstue)
+            is UIntValue -> IrConstImpl.int(startOffset, endOffset, constantType, constantValue.konstue)
             is NullValue -> IrConstImpl.constNull(startOffset, endOffset, constantType)
-            is BooleanValue -> IrConstImpl.boolean(startOffset, endOffset, constantType, constantValue.value)
-            is LongValue -> IrConstImpl.long(startOffset, endOffset, constantType, constantValue.value)
-            is ULongValue -> IrConstImpl.long(startOffset, endOffset, constantType, constantValue.value)
-            is DoubleValue -> IrConstImpl.double(startOffset, endOffset, constantType, constantValue.value)
-            is FloatValue -> IrConstImpl.float(startOffset, endOffset, constantType, constantValue.value)
-            is CharValue -> IrConstImpl.char(startOffset, endOffset, constantType, constantValue.value)
-            is ByteValue -> IrConstImpl.byte(startOffset, endOffset, constantType, constantValue.value)
-            is UByteValue -> IrConstImpl.byte(startOffset, endOffset, constantType, constantValue.value)
-            is ShortValue -> IrConstImpl.short(startOffset, endOffset, constantType, constantValue.value)
-            is UShortValue -> IrConstImpl.short(startOffset, endOffset, constantType, constantValue.value)
+            is BooleanValue -> IrConstImpl.boolean(startOffset, endOffset, constantType, constantValue.konstue)
+            is LongValue -> IrConstImpl.long(startOffset, endOffset, constantType, constantValue.konstue)
+            is ULongValue -> IrConstImpl.long(startOffset, endOffset, constantType, constantValue.konstue)
+            is DoubleValue -> IrConstImpl.double(startOffset, endOffset, constantType, constantValue.konstue)
+            is FloatValue -> IrConstImpl.float(startOffset, endOffset, constantType, constantValue.konstue)
+            is CharValue -> IrConstImpl.char(startOffset, endOffset, constantType, constantValue.konstue)
+            is ByteValue -> IrConstImpl.byte(startOffset, endOffset, constantType, constantValue.konstue)
+            is UByteValue -> IrConstImpl.byte(startOffset, endOffset, constantType, constantValue.konstue)
+            is ShortValue -> IrConstImpl.short(startOffset, endOffset, constantType, constantValue.konstue)
+            is UShortValue -> IrConstImpl.short(startOffset, endOffset, constantType, constantValue.konstue)
 
             is ArrayValue -> {
                 //  TODO: in `spreadOperatorInAnnotationArguments`, `@A(*arrayOf("a"), *arrayOf("b"))` is incorrectly
                 //    translated into `A(xs = [['a'], ['b']])` instead of `A(xs = ['a', 'b'])`. Not using `expectedType`
                 //    here masks that.
-                val arrayElementType = expectedArrayElementType ?: constantValueType.getArrayElementType()
+                konst arrayElementType = expectedArrayElementType ?: constantValueType.getArrayElementType()
                 IrVarargImpl(
                     startOffset, endOffset,
                     constantType,
                     arrayElementType.toIrType(),
-                    constantValue.value.memoryOptimizedMapNotNull {
+                    constantValue.konstue.memoryOptimizedMapNotNull {
                         // For annotation arguments, the type of every subexpression can be inferred from the type of the parameter;
                         // for arbitrary constants, we should always take the type inferred by the frontend.
-                        val newExpectedType = arrayElementType.takeIf { expectedType != null }
+                        konst newExpectedType = arrayElementType.takeIf { expectedType != null }
                         generateConstantOrAnnotationValueAsExpression(startOffset, endOffset, it, newExpectedType, null)
                     }
                 )
@@ -107,9 +107,9 @@ abstract class ConstantValueGenerator(
 
             is EnumValue -> {
                 //  TODO: in `annotationWithKotlinProperty`, `@Foo(KotlinClass.FOO_INT)` is parsed as if `KotlinClass.FOO_INT`
-                //    is an EnumValue when it's a read of a `const val` with an Int type. Not using `expectedType` somewhat masks
+                //    is an EnumValue when it's a read of a `const konst` with an Int type. Not using `expectedType` somewhat masks
                 //    that - we silently fail to translate the argument because `enumEntryDescriptor` is an error class.
-                val enumEntryDescriptor = constantValueType.memberScope.getContributedClassifier(
+                konst enumEntryDescriptor = constantValueType.memberScope.getContributedClassifier(
                     constantValue.enumEntryName,
                     NoLookupLocation.FROM_BACKEND
                 )
@@ -138,15 +138,15 @@ abstract class ConstantValueGenerator(
                 }
             }
 
-            is AnnotationValue -> generateAnnotationConstructorCall(constantValue.value, constantKtType)
+            is AnnotationValue -> generateAnnotationConstructorCall(constantValue.konstue, constantKtType)
 
             is KClassValue -> {
-                val classifierKtType = constantValue.getArgumentType(moduleDescriptor)
+                konst classifierKtType = constantValue.getArgumentType(moduleDescriptor)
                 if (classifierKtType.isError) {
                     // The classifier type contains error class descriptor. Probably the classifier is gone in newer version of the library.
                     null
                 } else {
-                    val classifierDescriptor = classifierKtType.constructor.declarationDescriptor
+                    konst classifierDescriptor = classifierKtType.constructor.declarationDescriptor
                         ?: throw AssertionError("Unexpected KClassValue: $classifierKtType")
 
                     IrClassReferenceImpl(
@@ -160,14 +160,14 @@ abstract class ConstantValueGenerator(
 
             is ErrorValue -> null
 
-            else -> TODO("Unexpected constant value: ${constantValue.javaClass.simpleName} $constantValue")
+            else -> TODO("Unexpected constant konstue: ${constantValue.javaClass.simpleName} $constantValue")
         }
     }
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
     fun generateAnnotationConstructorCall(annotationDescriptor: AnnotationDescriptor, realType: KotlinType? = null): IrConstructorCall? {
-        val annotationType = realType ?: annotationDescriptor.type
-        val annotationClassDescriptor = annotationType.constructor.declarationDescriptor as? ClassDescriptor ?: return null
+        konst annotationType = realType ?: annotationDescriptor.type
+        konst annotationClassDescriptor = annotationType.constructor.declarationDescriptor as? ClassDescriptor ?: return null
 
         when (annotationClassDescriptor) {
             is NotFoundClasses.MockClassDescriptor -> return null
@@ -175,54 +175,54 @@ abstract class ConstantValueGenerator(
             else -> if (!DescriptorUtils.isAnnotationClass(annotationClassDescriptor)) return null
         }
 
-        val primaryConstructorDescriptor = annotationClassDescriptor.unsubstitutedPrimaryConstructor
+        konst primaryConstructorDescriptor = annotationClassDescriptor.unsubstitutedPrimaryConstructor
             ?: annotationClassDescriptor.constructors.singleOrNull()
             ?: throw AssertionError("No constructor for annotation class $annotationClassDescriptor")
-        val primaryConstructorSymbol = symbolTable.referenceConstructor(primaryConstructorDescriptor)
+        konst primaryConstructorSymbol = symbolTable.referenceConstructor(primaryConstructorDescriptor)
 
-        val (startOffset, endOffset) = extractAnnotationOffsets(annotationDescriptor)
+        konst (startOffset, endOffset) = extractAnnotationOffsets(annotationDescriptor)
 
-        val irCall = IrConstructorCallImpl(
+        konst irCall = IrConstructorCallImpl(
             startOffset, endOffset,
             annotationType.toIrType(),
             primaryConstructorSymbol,
-            valueArgumentsCount = primaryConstructorDescriptor.valueParameters.size,
+            konstueArgumentsCount = primaryConstructorDescriptor.konstueParameters.size,
             typeArgumentsCount = annotationClassDescriptor.declaredTypeParameters.size,
             constructorTypeArgumentsCount = 0,
             source = annotationDescriptor.source
         )
 
-        val substitutor = TypeConstructorSubstitution.create(annotationType).buildSubstitutor()
-        val substitutedConstructor = primaryConstructorDescriptor.substitute(substitutor) ?: error("Cannot substitute constructor")
+        konst substitutor = TypeConstructorSubstitution.create(annotationType).buildSubstitutor()
+        konst substitutedConstructor = primaryConstructorDescriptor.substitute(substitutor) ?: error("Cannot substitute constructor")
 
-        val typeArguments = annotationType.arguments
+        konst typeArguments = annotationType.arguments
         assert(typeArguments.size == annotationClassDescriptor.declaredTypeParameters.size)
 
         for (i in typeArguments.indices) {
-            val typeArgument = typeArguments[i]
+            konst typeArgument = typeArguments[i]
             irCall.putTypeArgument(i, typeArgument.type.toIrType())
         }
 
-        for (valueParameter in substitutedConstructor.valueParameters) {
-            val argumentIndex = valueParameter.index
-            val argumentValue = annotationDescriptor.allValueArguments[valueParameter.name] ?: continue
-            val adjustedValue = adjustAnnotationArgumentValue(argumentValue, valueParameter)
-            val (parameterStartOffset, parameterEndOffset) = extractAnnotationParameterOffsets(annotationDescriptor, valueParameter.name)
-            val irArgument = generateAnnotationValueAsExpression(parameterStartOffset, parameterEndOffset, adjustedValue, valueParameter)
+        for (konstueParameter in substitutedConstructor.konstueParameters) {
+            konst argumentIndex = konstueParameter.index
+            konst argumentValue = annotationDescriptor.allValueArguments[konstueParameter.name] ?: continue
+            konst adjustedValue = adjustAnnotationArgumentValue(argumentValue, konstueParameter)
+            konst (parameterStartOffset, parameterEndOffset) = extractAnnotationParameterOffsets(annotationDescriptor, konstueParameter.name)
+            konst irArgument = generateAnnotationValueAsExpression(parameterStartOffset, parameterEndOffset, adjustedValue, konstueParameter)
             irCall.putValueArgument(argumentIndex, irArgument)
         }
 
         return irCall
     }
 
-    private fun adjustAnnotationArgumentValue(value: ConstantValue<*>, parameter: ValueParameterDescriptor): ConstantValue<*> {
-        // In Java source code, annotation argument for an array-typed parameter can be a single value instead of an array.
+    private fun adjustAnnotationArgumentValue(konstue: ConstantValue<*>, parameter: ValueParameterDescriptor): ConstantValue<*> {
+        // In Java source code, annotation argument for an array-typed parameter can be a single konstue instead of an array.
         // In that case, wrap it into an array manually. Ideally, this should be fixed in the code which loads Java annotation arguments,
         // but it would require resolving the annotation class on each request of an annotation argument.
-        if (KotlinBuiltIns.isArrayOrPrimitiveArray(parameter.type) && value !is ArrayValue) {
-            return ArrayValue(listOf(value)) { parameter.type }
+        if (KotlinBuiltIns.isArrayOrPrimitiveArray(parameter.type) && konstue !is ArrayValue) {
+            return ArrayValue(listOf(konstue)) { parameter.type }
         }
-        return value
+        return konstue
     }
 
     private fun KotlinType.getArrayElementType() = builtIns.getArrayElementType(this)

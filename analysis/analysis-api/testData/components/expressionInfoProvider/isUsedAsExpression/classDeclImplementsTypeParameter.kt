@@ -2,9 +2,9 @@ interface I<T> {
     fun i(t: T): Int
 }
 
-class C<T>(val x: Int): I<<expr>T</expr>> {
+class C<T>(konst x: Int): I<<expr>T</expr>> {
     companion object {
-        val K: Int = 58
+        konst K: Int = 58
     }
 
     fun test(): Int {

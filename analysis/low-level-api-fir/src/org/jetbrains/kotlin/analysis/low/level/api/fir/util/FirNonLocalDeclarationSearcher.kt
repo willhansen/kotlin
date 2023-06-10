@@ -50,16 +50,16 @@ object FirElementFinder {
             withEntry("ClassId.packageName", classId.packageFqName) { it.asString() }
         }
 
-        val classIdPathSegment = classId.relativeClassName.pathSegments()
-        val path = ArrayList<FirRegularClass>(classIdPathSegment.size)
+        konst classIdPathSegment = classId.relativeClassName.pathSegments()
+        konst path = ArrayList<FirRegularClass>(classIdPathSegment.size)
         var result: FirClassLikeDeclaration? = null
 
         fun find(declarations: Iterable<FirDeclaration>, classIdPathIndex: Int): Boolean {
-            val currentClassSegment = classIdPathSegment[classIdPathIndex]
+            konst currentClassSegment = classIdPathSegment[classIdPathIndex]
 
             for (subDeclaration in declarations) {
                 if (subDeclaration is FirScript) {
-                    val scriptDeclarations = subDeclaration.statements.asSequence().filterIsInstance<FirDeclaration>()
+                    konst scriptDeclarations = subDeclaration.statements.asSequence().filterIsInstance<FirDeclaration>()
                     if (find(scriptDeclarations.asIterable(), classIdPathIndex)) {
                         return true
                     }
@@ -128,14 +128,14 @@ object FirElementFinder {
             @OptIn(ResolveStateAccess::class)
             override fun visitRegularClass(regularClass: FirRegularClass) {
                 // Checking the rest super types that weren't resolved on the first OUTER_CLASS_ARGUMENTS_REQUIRED check in FirTypeResolver
-                val oldResolveState = regularClass.resolveState
-                val oldList = regularClass.superTypeRefs.toList()
+                konst oldResolveState = regularClass.resolveState
+                konst oldList = regularClass.superTypeRefs.toList()
 
                 try {
                     super.visitRegularClass(regularClass)
                 } catch (e: ConcurrentModificationException) {
-                    val newResolveState = regularClass.resolveState
-                    val newList = regularClass.superTypeRefs.toList()
+                    konst newResolveState = regularClass.resolveState
+                    konst newList = regularClass.superTypeRefs.toList()
 
                     throw IllegalStateException(
                         """

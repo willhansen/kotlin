@@ -22,5 +22,5 @@ public interface BuildActionExecuter<T> extends ConfigurableLauncher<BuildAction
 // FILE: main.kt
 
 fun <T> test(executor: BuildActionExecuter<T>, modelType: Class<T>, env: Map<String, String>) {
-    val model = executor.setEnvironmentVariables(env)
+    konst model = executor.setEnvironmentVariables(env)
 }

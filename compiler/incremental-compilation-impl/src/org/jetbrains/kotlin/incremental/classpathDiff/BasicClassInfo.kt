@@ -19,18 +19,18 @@ import org.jetbrains.org.objectweb.asm.Opcodes
 
 /** Basic information about a class (e.g., [classId], [kotlinClassHeader] and [supertypes]). */
 class BasicClassInfo(
-    val classId: ClassId,
-    val kotlinClassHeader: KotlinClassHeader?, // null if this is not a Kotlin class
-    val supertypes: List<JvmClassName>,
+    konst classId: ClassId,
+    konst kotlinClassHeader: KotlinClassHeader?, // null if this is not a Kotlin class
+    konst supertypes: List<JvmClassName>,
 
-    private val accessFlags: Int,
-    val isAnonymous: Boolean
+    private konst accessFlags: Int,
+    konst isAnonymous: Boolean
 ) {
-    val isKotlinClass = kotlinClassHeader != null
-    val isPrivate = flagEnabled(accessFlags, Opcodes.ACC_PRIVATE)
-    val isLocal = classId.isLocal
+    konst isKotlinClass = kotlinClassHeader != null
+    konst isPrivate = flagEnabled(accessFlags, Opcodes.ACC_PRIVATE)
+    konst isLocal = classId.isLocal
 
-    val isSynthetic = if (isKotlinClass) {
+    konst isSynthetic = if (isKotlinClass) {
         // Note that this property is `true` if one of the two checks below is `true`.
         // For example, `kotlin/Metadata.DefaultImpls` is synthetic according to its [KotlinClassHeader.Kind], but not synthetic according
         // to its [accessFlags]. (It's unclear if there is an opposite example.)
@@ -44,15 +44,15 @@ class BasicClassInfo(
     companion object {
 
         fun compute(classContents: ByteArray): BasicClassInfo {
-            val kotlinClassHeaderClassVisitor = KotlinClassHeaderClassVisitor()
-            val innerClassesClassVisitor = InnerClassesClassVisitor(kotlinClassHeaderClassVisitor)
-            val basicClassInfoVisitor = BasicClassInfoClassVisitor(innerClassesClassVisitor)
+            konst kotlinClassHeaderClassVisitor = KotlinClassHeaderClassVisitor()
+            konst innerClassesClassVisitor = InnerClassesClassVisitor(kotlinClassHeaderClassVisitor)
+            konst basicClassInfoVisitor = BasicClassInfoClassVisitor(innerClassesClassVisitor)
 
             // parsingOptions = (SKIP_CODE, SKIP_DEBUG) as method bodies and debug info are not important
             ClassReader(classContents).accept(basicClassInfoVisitor, SKIP_CODE or SKIP_DEBUG)
 
-            val className = basicClassInfoVisitor.getClassName()
-            val innerClassesInfo = innerClassesClassVisitor.getInnerClassesInfo()
+            konst className = basicClassInfoVisitor.getClassName()
+            konst innerClassesInfo = innerClassesClassVisitor.getInnerClassesInfo()
 
             return BasicClassInfo(
                 classId = resolveNameByInternalName(className, innerClassesInfo),
@@ -68,7 +68,7 @@ class BasicClassInfo(
 private class BasicClassInfoClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.API_VERSION, cv) {
     private var className: String? = null
     private var classAccess: Int? = null
-    private val supertypeNames = mutableListOf<String>()
+    private konst supertypeNames = mutableListOf<String>()
 
     override fun visit(version: Int, access: Int, name: String, signature: String?, superName: String?, interfaces: Array<String>?) {
         className = name
@@ -85,7 +85,7 @@ private class BasicClassInfoClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcode
 
 private class InnerClassesClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.API_VERSION, cv) {
 
-    private val innerClassesInfo = InnerClassesInfo()
+    private konst innerClassesInfo = InnerClassesInfo()
 
     override fun visitInnerClass(name: String, outerName: String?, innerName: String?, access: Int) {
         innerClassesInfo.add(name, outerName, innerName)
@@ -97,7 +97,7 @@ private class InnerClassesClassVisitor(cv: ClassVisitor) : ClassVisitor(Opcodes.
 
 private class KotlinClassHeaderClassVisitor : ClassVisitor(Opcodes.API_VERSION) {
 
-    private val kotlinClassHeaderAnnotationVisitor = ReadKotlinClassHeaderAnnotationVisitor()
+    private konst kotlinClassHeaderAnnotationVisitor = ReadKotlinClassHeaderAnnotationVisitor()
 
     override fun visitAnnotation(descriptor: String, visible: Boolean): AnnotationVisitor? {
         return convertAnnotationVisitor(

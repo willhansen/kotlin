@@ -2,7 +2,7 @@ plugins {
 	id("org.jetbrains.kotlin.multiplatform")
 }
 
-val testFrameworkAttribute = Attribute.of("com.example.testFramework", String::class.java)
+konst testFrameworkAttribute = Attribute.of("com.example.testFramework", String::class.java)
 
 kotlin {
 	configure(listOf(jvm("junit"), jvm("testng"))) {

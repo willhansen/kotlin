@@ -26,7 +26,7 @@ internal sealed class RuntimeLinkageStrategy {
      * Link runtime "as is", without any optimizations. Doable for "release" because LTO
      * in this mode is quite aggressive.
      */
-    class Raw(private val runtimeNativeLibraries: List<LLVMModuleRef>) : RuntimeLinkageStrategy() {
+    class Raw(private konst runtimeNativeLibraries: List<LLVMModuleRef>) : RuntimeLinkageStrategy() {
 
         override fun run(): List<LLVMModuleRef> =
                 runtimeNativeLibraries
@@ -36,22 +36,22 @@ internal sealed class RuntimeLinkageStrategy {
      * Links all runtime modules into a single one and optimizes it.
      */
     class LinkAndOptimize(
-            private val generationState: NativeGenerationState,
-            private val runtimeNativeLibraries: List<LLVMModuleRef>
+            private konst generationState: NativeGenerationState,
+            private konst runtimeNativeLibraries: List<LLVMModuleRef>
     ) : RuntimeLinkageStrategy() {
 
         override fun run(): List<LLVMModuleRef> {
             if (runtimeNativeLibraries.isEmpty()) {
                 return emptyList()
             }
-            val runtimeModule = LLVMModuleCreateWithNameInContext("runtime", generationState.llvmContext)!!
+            konst runtimeModule = LLVMModuleCreateWithNameInContext("runtime", generationState.llvmContext)!!
             runtimeNativeLibraries.forEach {
-                val failed = llvmLinkModules2(generationState, runtimeModule, it)
+                konst failed = llvmLinkModules2(generationState, runtimeModule, it)
                 if (failed != 0) {
                     throw Error("Failed to link ${it.getName()}")
                 }
             }
-            val config = createLTOPipelineConfigForRuntime(generationState)
+            konst config = createLTOPipelineConfigForRuntime(generationState)
 
             // TODO: reconsider pipeline here. Module optimizations instead of LTO can make a lot of sense, but require testing
             MandatoryOptimizationPipeline(config, generationState).use {
@@ -70,8 +70,8 @@ internal sealed class RuntimeLinkageStrategy {
          * Choose runtime linkage strategy based on current compiler configuration and [BinaryOptions.linkRuntime].
          */
         internal fun pick(generationState: NativeGenerationState, runtimeLlvmModules: List<LLVMModuleRef>): RuntimeLinkageStrategy {
-            val config = generationState.config
-            val binaryOption = config.configuration.get(BinaryOptions.linkRuntime)
+            konst config = generationState.config
+            konst binaryOption = config.configuration.get(BinaryOptions.linkRuntime)
             return when {
                 binaryOption == RuntimeLinkageStrategyBinaryOption.Raw -> Raw(runtimeLlvmModules)
                 binaryOption == RuntimeLinkageStrategyBinaryOption.Optimize -> LinkAndOptimize(generationState, runtimeLlvmModules)

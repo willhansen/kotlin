@@ -9,7 +9,7 @@ package kotlin.random
 /**
  * Gets the next random [UInt] from the random number generator.
  *
- * Generates a [UInt] random value uniformly distributed between [UInt.MIN_VALUE] and [UInt.MAX_VALUE] (inclusive).
+ * Generates a [UInt] random konstue uniformly distributed between [UInt.MIN_VALUE] and [UInt.MAX_VALUE] (inclusive).
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -18,7 +18,7 @@ public fun Random.nextUInt(): UInt = nextInt().toUInt()
 /**
  * Gets the next random [UInt] from the random number generator less than the specified [until] bound.
  *
- * Generates a [UInt] random value uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
+ * Generates a [UInt] random konstue uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
  *
  * @throws IllegalArgumentException if [until] is zero.
  */
@@ -29,7 +29,7 @@ public fun Random.nextUInt(until: UInt): UInt = nextUInt(0u, until)
 /**
  * Gets the next random [UInt] from the random number generator in the specified range.
  *
- * Generates a [UInt] random value uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
+ * Generates a [UInt] random konstue uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
  *
  * @throws IllegalArgumentException if [from] is greater than or equal to [until].
  */
@@ -38,17 +38,17 @@ public fun Random.nextUInt(until: UInt): UInt = nextUInt(0u, until)
 public fun Random.nextUInt(from: UInt, until: UInt): UInt {
     checkUIntRangeBounds(from, until)
 
-    val signedFrom = from.toInt() xor Int.MIN_VALUE
-    val signedUntil = until.toInt() xor Int.MIN_VALUE
+    konst signedFrom = from.toInt() xor Int.MIN_VALUE
+    konst signedUntil = until.toInt() xor Int.MIN_VALUE
 
-    val signedResult = nextInt(signedFrom, signedUntil) xor Int.MIN_VALUE
+    konst signedResult = nextInt(signedFrom, signedUntil) xor Int.MIN_VALUE
     return signedResult.toUInt()
 }
 
 /**
  * Gets the next random [UInt] from the random number generator in the specified [range].
  *
- * Generates a [UInt] random value uniformly distributed in the specified [range]:
+ * Generates a [UInt] random konstue uniformly distributed in the specified [range]:
  * from `range.start` inclusive to `range.endInclusive` inclusive.
  *
  * @throws IllegalArgumentException if [range] is empty.
@@ -65,7 +65,7 @@ public fun Random.nextUInt(range: UIntRange): UInt = when {
 /**
  * Gets the next random [ULong] from the random number generator.
  *
- * Generates a [ULong] random value uniformly distributed between [ULong.MIN_VALUE] and [ULong.MAX_VALUE] (inclusive).
+ * Generates a [ULong] random konstue uniformly distributed between [ULong.MIN_VALUE] and [ULong.MAX_VALUE] (inclusive).
  */
 @SinceKotlin("1.5")
 @WasExperimental(ExperimentalUnsignedTypes::class)
@@ -74,7 +74,7 @@ public fun Random.nextULong(): ULong = nextLong().toULong()
 /**
  * Gets the next random [ULong] from the random number generator less than the specified [until] bound.
  *
- * Generates a [ULong] random value uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
+ * Generates a [ULong] random konstue uniformly distributed between `0` (inclusive) and the specified [until] bound (exclusive).
  *
  * @throws IllegalArgumentException if [until] is zero.
  */
@@ -85,7 +85,7 @@ public fun Random.nextULong(until: ULong): ULong = nextULong(0uL, until)
 /**
  * Gets the next random [ULong] from the random number generator in the specified range.
  *
- * Generates a [ULong] random value uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
+ * Generates a [ULong] random konstue uniformly distributed between the specified [from] (inclusive) and [until] (exclusive) bounds.
  *
  * @throws IllegalArgumentException if [from] is greater than or equal to [until].
  */
@@ -94,17 +94,17 @@ public fun Random.nextULong(until: ULong): ULong = nextULong(0uL, until)
 public fun Random.nextULong(from: ULong, until: ULong): ULong {
     checkULongRangeBounds(from, until)
 
-    val signedFrom = from.toLong() xor Long.MIN_VALUE
-    val signedUntil = until.toLong() xor Long.MIN_VALUE
+    konst signedFrom = from.toLong() xor Long.MIN_VALUE
+    konst signedUntil = until.toLong() xor Long.MIN_VALUE
 
-    val signedResult = nextLong(signedFrom, signedUntil) xor Long.MIN_VALUE
+    konst signedResult = nextLong(signedFrom, signedUntil) xor Long.MIN_VALUE
     return signedResult.toULong()
 }
 
 /**
  * Gets the next random [ULong] from the random number generator in the specified [range].
  *
- * Generates a [ULong] random value uniformly distributed in the specified [range]:
+ * Generates a [ULong] random konstue uniformly distributed in the specified [range]:
  * from `range.start` inclusive to `range.endInclusive` inclusive.
  *
  * @throws IllegalArgumentException if [range] is empty.

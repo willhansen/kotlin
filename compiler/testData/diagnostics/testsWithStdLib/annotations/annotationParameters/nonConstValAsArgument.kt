@@ -1,24 +1,24 @@
 import kotlin.reflect.KClass
 
 annotation class Ann(
-        val a: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(readOnly)<!>,
-        val b: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(withGetter)<!>,
-        val c: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(func())<!>,
-        val d: IntArray = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>intArrayOf(ONE, twoWithGetter)<!>,
-        val e: IntArray = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>intArrayOf(ONE + twoWithGetter)<!>,
-        val f: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(mutable)<!>,
-        val g: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(mutableWithGetter)<!>,
-        val h: Array<KClass<*>> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(WithLateinit.kClass)<!>
+        konst a: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(readOnly)<!>,
+        konst b: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(withGetter)<!>,
+        konst c: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(func())<!>,
+        konst d: IntArray = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>intArrayOf(ONE, twoWithGetter)<!>,
+        konst e: IntArray = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>intArrayOf(ONE + twoWithGetter)<!>,
+        konst f: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(mutable)<!>,
+        konst g: Array<String> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(mutableWithGetter)<!>,
+        konst h: Array<KClass<*>> = <!ANNOTATION_PARAMETER_DEFAULT_VALUE_MUST_BE_CONSTANT!>arrayOf(WithLateinit.kClass)<!>
 )
 
-const val ONE = 1
+const konst ONE = 1
 
-val twoWithGetter
+konst twoWithGetter
     get() = 2
 
-val readOnly = ""
+konst readOnly = ""
 
-val withGetter
+konst withGetter
     get() = ""
 
 fun func() = ""

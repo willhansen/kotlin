@@ -4,7 +4,7 @@ fun testAssignment() {
 }
 
 fun testVariableDeclaration() {
-    <!UNREACHABLE_CODE!>val <!UNUSED_VARIABLE!>a<!> =<!> todo()
+    <!UNREACHABLE_CODE!>konst <!UNUSED_VARIABLE!>a<!> =<!> todo()
 }
 
 fun testPlusAssign() {

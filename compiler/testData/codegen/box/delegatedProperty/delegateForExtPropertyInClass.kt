@@ -6,7 +6,7 @@ class Delegate {
 }
 
 class F {
-    val A.prop: Int by Delegate()
+    konst A.prop: Int by Delegate()
 
     class A {
     }

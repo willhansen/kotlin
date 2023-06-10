@@ -308,7 +308,7 @@ public class DescriptorResolver {
     public ValueParameterDescriptorImpl resolveValueParameterDescriptor(
             @NotNull LexicalScope scope,
             @NotNull FunctionDescriptor owner,
-            @NotNull KtParameter valueParameter,
+            @NotNull KtParameter konstueParameter,
             int index,
             @NotNull KotlinType type,
             @NotNull BindingTrace trace,
@@ -317,19 +317,19 @@ public class DescriptorResolver {
     ) {
         KotlinType varargElementType = null;
         KotlinType variableType = type;
-        if (valueParameter.hasModifier(VARARG_KEYWORD)) {
+        if (konstueParameter.hasModifier(VARARG_KEYWORD)) {
             varargElementType = type;
             variableType = getVarargParameterType(type);
         }
 
-        Annotations valueParameterAnnotations = resolveValueParameterAnnotations(scope, valueParameter, trace, additionalAnnotations);
+        Annotations konstueParameterAnnotations = resolveValueParameterAnnotations(scope, konstueParameter, trace, additionalAnnotations);
 
-        KtDestructuringDeclaration destructuringDeclaration = valueParameter.getDestructuringDeclaration();
+        KtDestructuringDeclaration destructuringDeclaration = konstueParameter.getDestructuringDeclaration();
 
         Function0<List<VariableDescriptor>> destructuringVariables;
         if (destructuringDeclaration != null) {
             if (!languageVersionSettings.supportsFeature(LanguageFeature.DestructuringLambdaParameters)) {
-                trace.report(Errors.UNSUPPORTED_FEATURE.on(valueParameter,
+                trace.report(Errors.UNSUPPORTED_FEATURE.on(konstueParameter,
                                                            TuplesKt.to(LanguageFeature.DestructuringLambdaParameters, languageVersionSettings)));
             }
 
@@ -361,35 +361,35 @@ public class DescriptorResolver {
         Name parameterName;
 
         if (destructuringDeclaration == null) {
-            // NB: val/var for parameter is only allowed in primary constructors where single underscore names are still prohibited.
-            // The problem with val/var is that when lazy resolve try to find their descriptor, it searches through the member scope
+            // NB: konst/var for parameter is only allowed in primary constructors where single underscore names are still prohibited.
+            // The problem with konst/var is that when lazy resolve try to find their descriptor, it searches through the member scope
             // of containing class where, it can not find a descriptor with special name.
-            // Thus, to preserve behavior, we don't use a special name for val/var.
-            parameterName = !valueParameter.hasValOrVar() && UnderscoreUtilKt.isSingleUnderscore(valueParameter)
+            // Thus, to preserve behavior, we don't use a special name for konst/var.
+            parameterName = !konstueParameter.hasValOrVar() && UnderscoreUtilKt.isSingleUnderscore(konstueParameter)
                             ? Name.special("<anonymous parameter " + index + ">")
-                            : KtPsiUtil.safeName(valueParameter.getName());
+                            : KtPsiUtil.safeName(konstueParameter.getName());
         }
         else {
             parameterName = Name.special("<name for destructuring parameter " + index + ">");
         }
 
-        ValueParameterDescriptorImpl valueParameterDescriptor = ValueParameterDescriptorImpl.createWithDestructuringDeclarations(
+        ValueParameterDescriptorImpl konstueParameterDescriptor = ValueParameterDescriptorImpl.createWithDestructuringDeclarations(
                 owner,
                 null,
                 index,
-                valueParameterAnnotations,
+                konstueParameterAnnotations,
                 parameterName,
                 variableType,
-                valueParameter.hasDefaultValue(),
-                valueParameter.hasModifier(CROSSINLINE_KEYWORD),
-                valueParameter.hasModifier(NOINLINE_KEYWORD),
+                konstueParameter.hasDefaultValue(),
+                konstueParameter.hasModifier(CROSSINLINE_KEYWORD),
+                konstueParameter.hasModifier(NOINLINE_KEYWORD),
                 varargElementType,
-                KotlinSourceElementKt.toSourceElement(valueParameter),
+                KotlinSourceElementKt.toSourceElement(konstueParameter),
                 destructuringVariables
         );
 
-        trace.record(BindingContext.VALUE_PARAMETER, valueParameter, valueParameterDescriptor);
-        return valueParameterDescriptor;
+        trace.record(BindingContext.VALUE_PARAMETER, konstueParameter, konstueParameterDescriptor);
+        return konstueParameterDescriptor;
     }
 
     @NotNull
@@ -1162,7 +1162,7 @@ public class DescriptorResolver {
 
             if (parameter != null) {
 
-                // This check is redundant: the parser does not allow a default value, but we'll keep it just in case
+                // This check is redundant: the parser does not allow a default konstue, but we'll keep it just in case
                 if (parameter.hasDefaultValue()) {
                     trace.report(SETTER_PARAMETER_WITH_DEFAULT_VALUE.on(parameter.getDefaultValue()));
                 }
@@ -1180,10 +1180,10 @@ public class DescriptorResolver {
                     }
                 }
 
-                ValueParameterDescriptorImpl valueParameterDescriptor = resolveValueParameterDescriptor(
+                ValueParameterDescriptorImpl konstueParameterDescriptor = resolveValueParameterDescriptor(
                         scopeWithTypeParameters, setterDescriptor, parameter, 0, type, trace, parameterTargetedAnnotations, inferenceSession
                 );
-                setterDescriptor.initialize(valueParameterDescriptor);
+                setterDescriptor.initialize(konstueParameterDescriptor);
             }
             else {
                 setterDescriptor.initializeDefault();
@@ -1278,7 +1278,7 @@ public class DescriptorResolver {
             return explicitReturnType;
         }
 
-        // If a property has no type specified in the PSI but the getter does (or has an initializer e.g. "val x get() = ..."),
+        // If a property has no type specified in the PSI but the getter does (or has an initializer e.g. "konst x get() = ..."),
         // infer the correct type for the getter but leave the error type for the property.
         // This is useful for an IDE quick fix which would add the type to the property
         KtProperty property = getter.getProperty();
@@ -1316,7 +1316,7 @@ public class DescriptorResolver {
 
     public PropertyDescriptor resolvePrimaryConstructorParameterToAProperty(
             @NotNull ClassDescriptor classDescriptor,
-            @NotNull ValueParameterDescriptor valueParameter,
+            @NotNull ValueParameterDescriptor konstueParameter,
             @NotNull LexicalScope scope,
             @NotNull KtParameter parameter,
             BindingTrace trace
@@ -1385,7 +1385,7 @@ public class DescriptorResolver {
         getter.initialize(propertyDescriptor.getType());
 
         trace.record(BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, parameter, propertyDescriptor);
-        trace.record(BindingContext.VALUE_PARAMETER_AS_PROPERTY, valueParameter, propertyDescriptor);
+        trace.record(BindingContext.VALUE_PARAMETER_AS_PROPERTY, konstueParameter, propertyDescriptor);
         return propertyDescriptor;
     }
 

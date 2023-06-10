@@ -4,7 +4,7 @@ package foo
 
 fun box(): String {
 
-    val success = (when(1) {
+    konst success = (when(1) {
         2 -> 3
         1 -> 1
         else -> 5

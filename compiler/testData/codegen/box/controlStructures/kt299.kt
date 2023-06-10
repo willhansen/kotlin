@@ -1,7 +1,7 @@
 class MyRange1() : ClosedRange<Int> {
-    override val start: Int
+    override konst start: Int
         get() = 0
-    override val endInclusive: Int
+    override konst endInclusive: Int
         get() = 0
     override fun contains(item: Int) = true
 }

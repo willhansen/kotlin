@@ -6,6 +6,6 @@ class StringBase : Base<String>()
 class Client<T, X: Base<T>>(x: X)
 
 fun test() {
-    val c = Client(StringBase()) // Type inference fails here for T.
-    val i : Int = <!TYPE_MISMATCH!>c<!>
+    konst c = Client(StringBase()) // Type inference fails here for T.
+    konst i : Int = <!TYPE_MISMATCH!>c<!>
 }

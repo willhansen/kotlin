@@ -9,20 +9,20 @@ import kotlin.reflect.KFunction
 import kotlin.reflect.KType
 
 internal class KFunctionDescription(
-        val flags: Int,
-        val arity: Int,
-        val fqName: String,
-        val name: String,
-        val returnType: KType
+        konst flags: Int,
+        konst arity: Int,
+        konst fqName: String,
+        konst name: String,
+        konst returnType: KType
 )
 
-internal abstract class KFunctionImpl<out R>(val description: KFunctionDescription): KFunction<R> {
-    final override val returnType get() = description.returnType
-    val flags get() = description.flags
-    val arity get() = description.arity
-    val fqName get() = description.fqName
-    val receiver get() = computeReceiver()
-    final override val name get() = description.name
+internal abstract class KFunctionImpl<out R>(konst description: KFunctionDescription): KFunction<R> {
+    final override konst returnType get() = description.returnType
+    konst flags get() = description.flags
+    konst arity get() = description.arity
+    konst fqName get() = description.fqName
+    konst receiver get() = computeReceiver()
+    final override konst name get() = description.name
 
     open fun computeReceiver(): Any? = null
 
@@ -32,14 +32,14 @@ internal abstract class KFunctionImpl<out R>(val description: KFunctionDescripti
                 && arity == other.arity && flags == other.flags
     }
 
-    private fun evalutePolynom(x: Int, vararg coeffs: Int): Int {
+    private fun ekonstutePolynom(x: Int, vararg coeffs: Int): Int {
         var res = 0
         for (coeff in coeffs)
             res = res * x + coeff
         return res
     }
 
-    override fun hashCode() = evalutePolynom(31, fqName.hashCode(), receiver.hashCode(), arity, flags)
+    override fun hashCode() = ekonstutePolynom(31, fqName.hashCode(), receiver.hashCode(), arity, flags)
 
     override fun toString(): String {
         return "${if (name == "<init>") "constructor" else "function " + name}"

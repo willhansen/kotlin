@@ -4,8 +4,8 @@ buildscript {
     // workaround for KGP build metrics reports: https://github.com/gradle/gradle/issues/20001
     project.extensions.extraProperties["kotlin.build.report.output"] = null
 
-    val versionPropertiesFile = project.rootProject.projectDir.parentFile.resolve("gradle/versions.properties")
-    val versionProperties = java.util.Properties()
+    konst versionPropertiesFile = project.rootProject.projectDir.parentFile.resolve("gradle/versions.properties")
+    konst versionProperties = java.util.Properties()
     versionPropertiesFile.inputStream().use { propInput ->
         versionProperties.load(propInput)
     }
@@ -47,7 +47,7 @@ gradlePlugin {
 }
 
 fun Project.getBooleanProperty(name: String): Boolean? = this.findProperty(name)?.let {
-    val v = it.toString()
+    konst v = it.toString()
     if (v.isBlank()) true
     else v.toBoolean()
 }
@@ -56,8 +56,8 @@ rootProject.apply {
     from(rootProject.file("../gradle/versions.gradle.kts"))
 }
 
-val isTeamcityBuild = kotlinBuildProperties.isTeamcityBuild
-val intellijSeparateSdks by extra(project.getBooleanProperty("intellijSeparateSdks") ?: false)
+konst isTeamcityBuild = kotlinBuildProperties.isTeamcityBuild
+konst intellijSeparateSdks by extra(project.getBooleanProperty("intellijSeparateSdks") ?: false)
 
 extra["intellijReleaseType"] = when {
     extra["versions.intellijSdk"]?.toString()?.contains("-EAP-") == true -> "snapshots"
@@ -86,7 +86,7 @@ java {
     }
 }
 
-tasks.validatePlugins.configure {
+tasks.konstidatePlugins.configure {
     enabled = false
 }
 

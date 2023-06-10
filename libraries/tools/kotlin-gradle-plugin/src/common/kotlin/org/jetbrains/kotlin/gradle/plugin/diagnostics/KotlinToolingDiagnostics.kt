@@ -35,7 +35,7 @@ object KotlinToolingDiagnostics {
     object NativeStdlibIsMissingDiagnostic : ToolingDiagnosticFactory(WARNING) {
         operator fun invoke(changedKotlinNativeHomeProperty: String?) = build(
             "The Kotlin/Native distribution used in this build does not provide the standard library." +
-                    " Make sure that the '$changedKotlinNativeHomeProperty' property points to a valid Kotlin/Native distribution."
+                    " Make sure that the '$changedKotlinNativeHomeProperty' property points to a konstid Kotlin/Native distribution."
                         .onlyIf(changedKotlinNativeHomeProperty != null)
         )
     }
@@ -62,15 +62,15 @@ object KotlinToolingDiagnostics {
     object UnusedSourceSetsWarning : ToolingDiagnosticFactory(WARNING) {
         operator fun invoke(sourceSetNames: Collection<String>): ToolingDiagnostic {
 
-            val cause = if (sourceSetNames.size == 1) {
+            konst cause = if (sourceSetNames.size == 1) {
                 "The Kotlin source set ${sourceSetNames.single()} was configured but not added to any Kotlin compilation.\n"
             } else {
-                val sourceSetNames = sourceSetNames.joinToString("\n") { " * $it" }
+                konst sourceSetNames = sourceSetNames.joinToString("\n") { " * $it" }
                 "The following Kotlin source sets were configured but not added to any Kotlin compilation:\n" +
                         sourceSetNames
             }
 
-            val details =
+            konst details =
                 """
                 |You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
                 |See https://kotl.in/connecting-source-sets

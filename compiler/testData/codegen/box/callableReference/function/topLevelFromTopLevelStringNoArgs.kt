@@ -1,7 +1,7 @@
 fun foo() = "OK"
 
 fun box(): String {
-    val x = ::foo
+    konst x = ::foo
 
     var r = x()
     if (r != "OK") return r

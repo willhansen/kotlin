@@ -26,7 +26,7 @@ abstract class AbstractLightAnalysisModeTest : CodegenTestCase() {
             override fun getClassBuilderMode() = ClassBuilderMode.getLightAnalysisForTests()
         }
 
-        private val ignoreDirectives = listOf(
+        private konst ignoreDirectives = listOf(
             "// IGNORE_LIGHT_ANALYSIS",
             "// MODULE:",
             "// TARGET_FRONTEND: FIR",
@@ -36,7 +36,7 @@ abstract class AbstractLightAnalysisModeTest : CodegenTestCase() {
         // current ignore+unmute logic doesn't support the situation when LA successds but codegen fails
         // so this is a very dirty hack to support it for one particular case - signedToUnsignedConversions.kt
         // We assume that these tests will soo be irrelevant and therefore the hack will die too
-        private val failDirective = "FAIL_IN_LIGHT_ANALYSIS"
+        private konst failDirective = "FAIL_IN_LIGHT_ANALYSIS"
     }
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
@@ -48,10 +48,10 @@ abstract class AbstractLightAnalysisModeTest : CodegenTestCase() {
         }
         if (isIgnored) return
 
-        val fullTxt = compileWithFullAnalysis(files)
+        konst fullTxt = compileWithFullAnalysis(files)
             .replace("final enum class", "enum class")
 
-        val liteTxt = compileWithLightAnalysis(wholeFile, files)
+        konst liteTxt = compileWithLightAnalysis(wholeFile, files)
             .replace("@synthetic.kotlin.jvm.GeneratedByJvmOverloads ", "")
 
         assertEquals(fullTxt, liteTxt)
@@ -62,19 +62,19 @@ abstract class AbstractLightAnalysisModeTest : CodegenTestCase() {
     }
 
     private fun compileWithLightAnalysis(wholeFile: File, files: List<TestFile>): String {
-        val boxTestsDir = File("compiler/testData/codegen/box")
-        val relativePath = wholeFile.toRelativeString(boxTestsDir)
+        konst boxTestsDir = File("compiler/testData/codegen/box")
+        konst relativePath = wholeFile.toRelativeString(boxTestsDir)
         // Fail if this test is not under codegen/box
         assert(!relativePath.startsWith(".."))
 
-        val configuration = createConfiguration(
+        konst configuration = createConfiguration(
             configurationKind, getTestJdkKind(files), backend, listOf(getAnnotationsJar()), listOfNotNull(writeJavaFiles(files)), files
         )
-        val environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
+        konst environment = KotlinCoreEnvironment.createForTests(testRootDisposable, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
         AnalysisHandlerExtension.registerExtension(environment.project, PartialAnalysisHandlerExtension())
 
-        val testFiles = loadMultiFiles(files, environment.project)
-        val classFileFactory = GenerationUtils.compileFiles(testFiles.psiFiles, environment, TEST_LIGHT_ANALYSIS).factory
+        konst testFiles = loadMultiFiles(files, environment.project)
+        konst classFileFactory = GenerationUtils.compileFiles(testFiles.psiFiles, environment, TEST_LIGHT_ANALYSIS).factory
 
         return BytecodeListingTextCollectingVisitor.getText(classFileFactory, ListAnalysisFilter())
     }
@@ -87,16 +87,16 @@ abstract class AbstractLightAnalysisModeTest : CodegenTestCase() {
     private class ListAnalysisFilter : BytecodeListingTextCollectingVisitor.Filter {
         @Suppress("UNCHECKED_CAST")
         override fun shouldWriteClass(node: ClassNode): Boolean {
-            val metadata = node.visibleAnnotations.singleOrNull { it.desc == "Lkotlin/Metadata;" }
+            konst metadata = node.visibleAnnotations.singleOrNull { it.desc == "Lkotlin/Metadata;" }
                 ?: error("No kotlin.Metadata generated for class ${node.name}")
-            val args = metadata.values.chunked(2).associate { (x, y) -> x to y }
-            val kind = args["k"] as Int
+            konst args = metadata.konstues.chunked(2).associate { (x, y) -> x to y }
+            konst kind = args["k"] as Int
             return when (Kind.getById(kind)) {
                 Kind.UNKNOWN -> error(node.name)
                 Kind.CLASS -> {
-                    val d1 = (args["d1"] as List<String>).toTypedArray()
-                    val d2 = (args["d2"] as List<String>).toTypedArray()
-                    val (_, proto) = JvmProtoBufUtil.readClassDataFrom(d1, d2)
+                    konst d1 = (args["d1"] as List<String>).toTypedArray()
+                    konst d2 = (args["d2"] as List<String>).toTypedArray()
+                    konst (_, proto) = JvmProtoBufUtil.readClassDataFrom(d1, d2)
                     Flags.VISIBILITY.get(proto.flags) != ProtoBuf.Visibility.LOCAL
                 }
                 Kind.FILE_FACADE, Kind.MULTIFILE_CLASS, Kind.MULTIFILE_CLASS_PART -> true

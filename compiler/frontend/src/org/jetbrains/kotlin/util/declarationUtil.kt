@@ -26,23 +26,23 @@ fun KtElement.containingNonLocalDeclaration(): KtDeclaration? {
     return container
 }
 
-val KtDeclaration.isOrdinaryClass
+konst KtDeclaration.isOrdinaryClass
     get() = this is KtClass &&
             !this.hasModifier(KtTokens.INLINE_KEYWORD) &&
             !this.isAnnotation() &&
             !this.isInterface()
 
-val KtDeclaration.isAnnotated get() = this.annotationEntries.isNotEmpty()
+konst KtDeclaration.isAnnotated get() = this.annotationEntries.isNotEmpty()
 
 /**
  * Given a fake override, returns an overridden non-abstract function from an interface which is the actual implementation of this function
  * that should be called when the given fake override is called.
  */
 fun findImplementationFromInterface(descriptor: CallableMemberDescriptor): CallableMemberDescriptor? {
-    val overridden = OverridingUtil.getOverriddenDeclarations(descriptor)
-    val filtered = OverridingUtil.filterOutOverridden(overridden)
+    konst overridden = OverridingUtil.getOverriddenDeclarations(descriptor)
+    konst filtered = OverridingUtil.filterOutOverridden(overridden)
 
-    val result = filtered.firstOrNull { it.modality != Modality.ABSTRACT } ?: return null
+    konst result = filtered.firstOrNull { it.modality != Modality.ABSTRACT } ?: return null
 
     if (DescriptorUtils.isClassOrEnumClass(result.containingDeclaration)) return null
 
@@ -59,8 +59,8 @@ fun findInterfaceImplementation(descriptor: CallableMemberDescriptor, returnImpl
     if (descriptor.kind.isReal) return null
     if (isOrOverridesSynthesized(descriptor)) return null
 
-    val implementation = findImplementationFromInterface(descriptor) ?: return null
-    val immediateConcreteSuper = firstSuperMethodFromKotlin(descriptor, implementation) ?: return null
+    konst implementation = findImplementationFromInterface(descriptor) ?: return null
+    konst immediateConcreteSuper = firstSuperMethodFromKotlin(descriptor, implementation) ?: return null
 
     if (!DescriptorUtils.isInterface(immediateConcreteSuper.containingDeclaration)) {
         // If this implementation is already generated into the superclass, we need not generate it again, it'll be inherited
@@ -95,7 +95,7 @@ fun getNonPrivateTraitMembersForDelegation(
     descriptor: ClassDescriptor,
     returnImplNotDelegate: Boolean = false,
 ): Map<CallableMemberDescriptor, CallableMemberDescriptor> {
-    val result = linkedMapOf<CallableMemberDescriptor, CallableMemberDescriptor>()
+    konst result = linkedMapOf<CallableMemberDescriptor, CallableMemberDescriptor>()
     for (declaration in DescriptorUtils.getAllDescriptors(descriptor.defaultType.memberScope)) {
         if (declaration !is CallableMemberDescriptor) continue
         result[declaration] = getNonPrivateTraitMembersForDelegation(declaration, returnImplNotDelegate) ?: continue
@@ -107,7 +107,7 @@ fun getNonPrivateTraitMembersForDelegation(
     descriptor: CallableMemberDescriptor,
     returnImplNotDelegate: Boolean = false,
 ): CallableMemberDescriptor? {
-    val traitMember = findInterfaceImplementation(descriptor, returnImplNotDelegate)
+    konst traitMember = findInterfaceImplementation(descriptor, returnImplNotDelegate)
     if (traitMember == null ||
         DescriptorVisibilities.isPrivate(traitMember.visibility) ||
         traitMember.visibility == DescriptorVisibilities.INVISIBLE_FAKE

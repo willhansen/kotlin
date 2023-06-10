@@ -30,24 +30,24 @@ import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 open class DeepCopySymbolRemapper(
-    private val descriptorsRemapper: DescriptorsRemapper = NullDescriptorsRemapper
+    private konst descriptorsRemapper: DescriptorsRemapper = NullDescriptorsRemapper
 ) : IrElementVisitorVoid, SymbolRemapper {
 
-    protected val classes = hashMapOf<IrClassSymbol, IrClassSymbol>()
-    protected val scripts = hashMapOf<IrScriptSymbol, IrScriptSymbol>()
-    protected val constructors = hashMapOf<IrConstructorSymbol, IrConstructorSymbol>()
-    protected val enumEntries = hashMapOf<IrEnumEntrySymbol, IrEnumEntrySymbol>()
-    protected val externalPackageFragments = hashMapOf<IrExternalPackageFragmentSymbol, IrExternalPackageFragmentSymbol>()
-    protected val fields = hashMapOf<IrFieldSymbol, IrFieldSymbol>()
-    protected val files = hashMapOf<IrFileSymbol, IrFileSymbol>()
-    protected val functions = hashMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
-    protected val properties = hashMapOf<IrPropertySymbol, IrPropertySymbol>()
-    protected val returnableBlocks = hashMapOf<IrReturnableBlockSymbol, IrReturnableBlockSymbol>()
-    protected val typeParameters = hashMapOf<IrTypeParameterSymbol, IrTypeParameterSymbol>()
-    protected val valueParameters = hashMapOf<IrValueParameterSymbol, IrValueParameterSymbol>()
-    protected val variables = hashMapOf<IrVariableSymbol, IrVariableSymbol>()
-    protected val localDelegatedProperties = hashMapOf<IrLocalDelegatedPropertySymbol, IrLocalDelegatedPropertySymbol>()
-    protected val typeAliases = hashMapOf<IrTypeAliasSymbol, IrTypeAliasSymbol>()
+    protected konst classes = hashMapOf<IrClassSymbol, IrClassSymbol>()
+    protected konst scripts = hashMapOf<IrScriptSymbol, IrScriptSymbol>()
+    protected konst constructors = hashMapOf<IrConstructorSymbol, IrConstructorSymbol>()
+    protected konst enumEntries = hashMapOf<IrEnumEntrySymbol, IrEnumEntrySymbol>()
+    protected konst externalPackageFragments = hashMapOf<IrExternalPackageFragmentSymbol, IrExternalPackageFragmentSymbol>()
+    protected konst fields = hashMapOf<IrFieldSymbol, IrFieldSymbol>()
+    protected konst files = hashMapOf<IrFileSymbol, IrFileSymbol>()
+    protected konst functions = hashMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
+    protected konst properties = hashMapOf<IrPropertySymbol, IrPropertySymbol>()
+    protected konst returnableBlocks = hashMapOf<IrReturnableBlockSymbol, IrReturnableBlockSymbol>()
+    protected konst typeParameters = hashMapOf<IrTypeParameterSymbol, IrTypeParameterSymbol>()
+    protected konst konstueParameters = hashMapOf<IrValueParameterSymbol, IrValueParameterSymbol>()
+    protected konst variables = hashMapOf<IrVariableSymbol, IrVariableSymbol>()
+    protected konst localDelegatedProperties = hashMapOf<IrLocalDelegatedPropertySymbol, IrLocalDelegatedPropertySymbol>()
+    protected konst typeAliases = hashMapOf<IrTypeAliasSymbol, IrTypeAliasSymbol>()
 
     override fun visitElement(element: IrElement) {
         element.acceptChildrenVoid(this)
@@ -59,7 +59,7 @@ open class DeepCopySymbolRemapper(
 
     protected inline fun <D : DeclarationDescriptor, B : IrSymbolOwner, reified S : IrBindableSymbol<D, B>>
             remapSymbol(map: MutableMap<S, S>, owner: B, createNewSymbol: (S) -> S) {
-        val symbol = owner.symbol as S
+        konst symbol = owner.symbol as S
         map[symbol] = createNewSymbol(symbol)
     }
 
@@ -134,7 +134,7 @@ open class DeepCopySymbolRemapper(
     }
 
     override fun visitValueParameter(declaration: IrValueParameter) {
-        remapSymbol(valueParameters, declaration) {
+        remapSymbol(konstueParameters, declaration) {
             IrValueParameterSymbolImpl(descriptorsRemapper.remapDeclaredValueParameter(it.descriptor))
         }
         declaration.acceptChildrenVoid(this)
@@ -191,7 +191,7 @@ open class DeepCopySymbolRemapper(
 
     override fun getDeclaredVariable(symbol: IrVariableSymbol): IrVariableSymbol = variables.getDeclared(symbol)
     override fun getDeclaredTypeParameter(symbol: IrTypeParameterSymbol): IrTypeParameterSymbol = typeParameters.getDeclared(symbol)
-    override fun getDeclaredValueParameter(symbol: IrValueParameterSymbol): IrValueParameterSymbol = valueParameters.getDeclared(symbol)
+    override fun getDeclaredValueParameter(symbol: IrValueParameterSymbol): IrValueParameterSymbol = konstueParameters.getDeclared(symbol)
     override fun getDeclaredLocalDelegatedProperty(symbol: IrLocalDelegatedPropertySymbol): IrLocalDelegatedPropertySymbol =
         localDelegatedProperties.getDeclared(symbol)
 
@@ -211,7 +211,7 @@ open class DeepCopySymbolRemapper(
     override fun getReferencedProperty(symbol: IrPropertySymbol): IrPropertySymbol = properties.getReferenced(symbol)
     override fun getReferencedValue(symbol: IrValueSymbol): IrValueSymbol =
         when (symbol) {
-            is IrValueParameterSymbol -> valueParameters.getReferenced(symbol)
+            is IrValueParameterSymbol -> konstueParameters.getReferenced(symbol)
             is IrVariableSymbol -> variables.getReferenced(symbol)
         }
 

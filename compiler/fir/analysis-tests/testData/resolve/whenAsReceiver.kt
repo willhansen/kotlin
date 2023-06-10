@@ -3,7 +3,7 @@ fun <T, R> T.also(block: () -> R): R {
 }
 
 fun foo(b: Boolean, a: Int) {
-    val x = when (b) {
+    konst x = when (b) {
         true -> a
         else -> null
     }?.also {

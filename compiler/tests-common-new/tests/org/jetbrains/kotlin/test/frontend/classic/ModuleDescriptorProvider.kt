@@ -13,9 +13,9 @@ import org.jetbrains.kotlin.test.services.assertions
 import org.jetbrains.kotlin.test.model.TestModule
 
 class ModuleDescriptorProvider(
-    private val testServices: TestServices
+    private konst testServices: TestServices
 ) : TestService {
-    private val moduleDescriptorByModule = mutableMapOf<TestModule, ModuleDescriptor>()
+    private konst moduleDescriptorByModule = mutableMapOf<TestModule, ModuleDescriptor>()
 
     fun getModuleDescriptor(testModule: TestModule): ModuleDescriptor {
         return moduleDescriptorByModule[testModule] ?: testServices.assertions.fail {
@@ -28,4 +28,4 @@ class ModuleDescriptorProvider(
     }
 }
 
-val TestServices.moduleDescriptorProvider: ModuleDescriptorProvider by TestServices.testServiceAccessor()
+konst TestServices.moduleDescriptorProvider: ModuleDescriptorProvider by TestServices.testServiceAccessor()

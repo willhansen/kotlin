@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.testing.native
 
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
@@ -21,16 +21,16 @@ import javax.inject.Inject
 @Suppress("UnstableApiUsage")
 open class RuntimeTestingPlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val extension = extensions.create(GOOGLE_TEST_EXTENSION_NAME, GoogleTestExtension::class.java, target)
-        val downloadTask = registerDownloadTask(extension)
+        konst extension = extensions.create(GOOGLE_TEST_EXTENSION_NAME, GoogleTestExtension::class.java, target)
+        konst downloadTask = registerDownloadTask(extension)
 
-        val googleTestRoot = project.provider { extension.sourceDirectory }
+        konst googleTestRoot = project.provider { extension.sourceDirectory }
 
         createBitcodeTasks(googleTestRoot, listOf(downloadTask))
     }
 
     private fun Project.registerDownloadTask(extension: GoogleTestExtension): TaskProvider<GitDownloadTask> {
-        val task = tasks.register(
+        konst task = tasks.register(
                 "downloadGoogleTest",
                 GitDownloadTask::class.java,
                 provider { URL(extension.repository) },
@@ -51,7 +51,7 @@ open class RuntimeTestingPlugin : Plugin<Project> {
             dependencies: Iterable<TaskProvider<*>>
     ) {
         pluginManager.withPlugin("compile-to-bitcode") {
-            val bitcodeExtension = project.extensions.getByType<CompileToBitcodeExtension>()
+            konst bitcodeExtension = project.extensions.getByType<CompileToBitcodeExtension>()
 
             bitcodeExtension.allTargets {
                 module("googletest") {
@@ -91,7 +91,7 @@ open class RuntimeTestingPlugin : Plugin<Project> {
     }
 
     companion object {
-        internal const val GOOGLE_TEST_EXTENSION_NAME = "googletest"
+        internal const konst GOOGLE_TEST_EXTENSION_NAME = "googletest"
     }
 
 }
@@ -99,7 +99,7 @@ open class RuntimeTestingPlugin : Plugin<Project> {
 /**
  * A project extension to configure from where we get the GoogleTest framework.
  */
-open class GoogleTestExtension @Inject constructor(private val project: Project) {
+open class GoogleTestExtension @Inject constructor(private konst project: Project) {
 
     /**
      * A repository to fetch GoogleTest from.
@@ -113,11 +113,11 @@ open class GoogleTestExtension @Inject constructor(private val project: Project)
      */
     var revision: String
         get() = _revision
-                ?: throw InvalidUserDataException(
-                        "No value provided for property '${RuntimeTestingPlugin.GOOGLE_TEST_EXTENSION_NAME}.revision'. " +
+                ?: throw InkonstidUserDataException(
+                        "No konstue provided for property '${RuntimeTestingPlugin.GOOGLE_TEST_EXTENSION_NAME}.revision'. " +
                         "Please specify it in the buildscript."
                 )
-        set(value) { _revision = value }
+        set(konstue) { _revision = konstue }
 
     /**
      * Fetch the [revision] even if the [fetchDirectory] already contains it. Overwrite all changes manually made in the output directory.
@@ -149,14 +149,14 @@ open class GoogleTestExtension @Inject constructor(private val project: Project)
      * A getter for directory that contains the GTest sources.
      * Returns a local source directory if it's specified (see [useLocalSources]) or [fetchDirectory] otherwise.
      */
-    val sourceDirectory: File
+    konst sourceDirectory: File
         get() = localSourceRoot ?: fetchDirectory
 
     /**
      * A file collection with header directories for GoogleTest and GoogleMock.
      * Useful to configure compilation against GTest.
      */
-    val headersDirs: FileCollection = project.files(
+    konst headersDirs: FileCollection = project.files(
             project.provider { sourceDirectory.resolve("googletest/include") },
             project.provider { sourceDirectory.resolve("googlemock/include") }
     )

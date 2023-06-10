@@ -7,12 +7,12 @@ enum class MyEnum {
 }
 
 fun foo() {
-    val values = MyEnum.values()
+    konst konstues = MyEnum.konstues()
 
-    for (value in values) {
-        value.bar()
+    for (konstue in konstues) {
+        konstue.bar()
     }
 
-    val first = MyEnum.valueOf("FIRST")
-    val last = MyEnum.valueOf("LAST")
+    konst first = MyEnum.konstueOf("FIRST")
+    konst last = MyEnum.konstueOf("LAST")
 }

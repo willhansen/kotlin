@@ -7,30 +7,30 @@ enum class Weapon {
     SCISSORS
 }
 
-val byteConst: dynamic = 10.toByte()
-val shortConst: dynamic = 20.toShort()
-val intConst: dynamic = 30
-val longConst: dynamic = 40.toLong()
-val charConst: dynamic = 'A'
-val stringConst: dynamic = "abcd"
-val booleanConst: dynamic = true
-val floatConst: dynamic = 2.0f
-val doubleConst: dynamic = 3.0
-val enumConst: dynamic = Weapon.ROCK
-val arrayConst: dynamic = byteArrayOf(1,2)
-val dynamicConst: dynamic = 100
+konst byteConst: dynamic = 10.toByte()
+konst shortConst: dynamic = 20.toShort()
+konst intConst: dynamic = 30
+konst longConst: dynamic = 40.toLong()
+konst charConst: dynamic = 'A'
+konst stringConst: dynamic = "abcd"
+konst booleanConst: dynamic = true
+konst floatConst: dynamic = 2.0f
+konst doubleConst: dynamic = 3.0
+konst enumConst: dynamic = Weapon.ROCK
+konst arrayConst: dynamic = byteArrayOf(1,2)
+konst dynamicConst: dynamic = 100
 
 class Class {
-    val byteConst: dynamic = 10.toByte()
-    val shortConst: dynamic = 20.toShort()
-    val intConst: dynamic = 30
-    val longConst: dynamic = 40.toLong()
-    val charConst: dynamic = 'A'
-    val stringConst: dynamic = "abcd"
-    val booleanConst: dynamic = true
-    val floatConst: dynamic = 2.0f
-    val doubleConst: dynamic = 3.0
-    val enumConst: dynamic = Weapon.ROCK
-    val arrayConst: dynamic = byteArrayOf(1,2)
-    val dynamicConst: dynamic = 100
+    konst byteConst: dynamic = 10.toByte()
+    konst shortConst: dynamic = 20.toShort()
+    konst intConst: dynamic = 30
+    konst longConst: dynamic = 40.toLong()
+    konst charConst: dynamic = 'A'
+    konst stringConst: dynamic = "abcd"
+    konst booleanConst: dynamic = true
+    konst floatConst: dynamic = 2.0f
+    konst doubleConst: dynamic = 3.0
+    konst enumConst: dynamic = Weapon.ROCK
+    konst arrayConst: dynamic = byteArrayOf(1,2)
+    konst dynamicConst: dynamic = 100
 }

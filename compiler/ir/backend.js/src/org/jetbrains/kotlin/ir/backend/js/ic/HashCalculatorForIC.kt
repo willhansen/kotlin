@@ -31,13 +31,13 @@ internal fun Hash128Bits.toProtoStream(out: CodedOutputStream) {
 }
 
 internal fun readHash128BitsFromProtoStream(input: CodedInputStream): Hash128Bits {
-    val lowBytes = input.readFixed64().toULong()
-    val highBytes = input.readFixed64().toULong()
+    konst lowBytes = input.readFixed64().toULong()
+    konst highBytes = input.readFixed64().toULong()
     return Hash128Bits(lowBytes, highBytes)
 }
 
 @JvmInline
-value class ICHash(val hash: Hash128Bits = Hash128Bits()) {
+konstue class ICHash(konst hash: Hash128Bits = Hash128Bits()) {
     fun toProtoStream(out: CodedOutputStream) = hash.toProtoStream(out)
 
     companion object {
@@ -46,7 +46,7 @@ value class ICHash(val hash: Hash128Bits = Hash128Bits()) {
 }
 
 private class HashCalculatorForIC {
-    private val md5Digest = MessageDigest.getInstance("MD5")
+    private konst md5Digest = MessageDigest.getInstance("MD5")
 
     fun update(data: ByteArray) = md5Digest.update(data)
 
@@ -78,8 +78,8 @@ private class HashCalculatorForIC {
 
         (symbol.owner as? IrClass)?.takeIf { it.isInterface }?.let { irInterface ->
             // Adding or removing a method or property with a default implementation to an interface
-            // should invalidate all children: we must regenerate JS code for them
-            val openDeclarationSymbols = buildList {
+            // should inkonstidate all children: we must regenerate JS code for them
+            konst openDeclarationSymbols = buildList {
                 for (decl in irInterface.declarations) {
                     if (decl is IrOverridableMember && decl.modality == Modality.OPEN) {
                         add(decl.symbol)
@@ -101,7 +101,7 @@ private class HashCalculatorForIC {
             }
         }
         (symbol.owner as? IrFunction)?.let { irFunction ->
-            updateForEach(irFunction.valueParameters) { functionParam ->
+            updateForEach(irFunction.konstueParameters) { functionParam ->
                 // symbol rendering doesn't print default params information
                 // it is important to understand if default params were added or removed
                 update(functionParam.defaultValue?.let { 1 } ?: 0)
@@ -120,21 +120,21 @@ private class HashCalculatorForIC {
         collection.forEach { f(it) }
     }
 
-    fun <T> updateConfigKeys(config: CompilerConfiguration, keys: List<CompilerConfigurationKey<out T>>, valueUpdater: (T) -> Unit) {
+    fun <T> updateConfigKeys(config: CompilerConfiguration, keys: List<CompilerConfigurationKey<out T>>, konstueUpdater: (T) -> Unit) {
         updateForEach(keys) { key ->
             update(key.toString())
-            val value = config.get(key)
-            if (value == null) {
+            konst konstue = config.get(key)
+            if (konstue == null) {
                 md5Digest.update(0)
             } else {
                 md5Digest.update(1)
-                valueUpdater(value)
+                konstueUpdater(konstue)
             }
         }
     }
 
     fun finalizeAndGetHash(): ICHash {
-        val hashBytes = md5Digest.digest()
+        konst hashBytes = md5Digest.digest()
         md5Digest.reset()
         return hashBytes.buffer.asLongBuffer().let { longBuffer ->
             ICHash(Hash128Bits(longBuffer[0].toULong(), longBuffer[1].toULong()))
@@ -143,12 +143,12 @@ private class HashCalculatorForIC {
 }
 
 internal class ICHasher {
-    private val hashCalculator = HashCalculatorForIC()
+    private konst hashCalculator = HashCalculatorForIC()
 
     fun calculateConfigHash(config: CompilerConfiguration): ICHash {
         hashCalculator.update(KotlinCompilerVersion.VERSION)
 
-        val booleanKeys = listOf(
+        konst booleanKeys = listOf(
             JSConfigurationKeys.SOURCE_MAP,
             JSConfigurationKeys.META_INFO,
             JSConfigurationKeys.DEVELOPER_MODE,
@@ -159,27 +159,27 @@ internal class ICHasher {
             JSConfigurationKeys.GENERATE_STRICT_IMPLICIT_EXPORT,
             JSConfigurationKeys.OPTIMIZE_GENERATED_JS,
         )
-        hashCalculator.updateConfigKeys(config, booleanKeys) { value: Boolean ->
-            hashCalculator.update(if (value) 1 else 0)
+        hashCalculator.updateConfigKeys(config, booleanKeys) { konstue: Boolean ->
+            hashCalculator.update(if (konstue) 1 else 0)
         }
 
-        val enumKeys = listOf(
+        konst enumKeys = listOf(
             JSConfigurationKeys.SOURCE_MAP_EMBED_SOURCES,
             JSConfigurationKeys.SOURCEMAP_NAMES_POLICY,
             JSConfigurationKeys.MODULE_KIND,
             JSConfigurationKeys.ERROR_TOLERANCE_POLICY
         )
-        hashCalculator.updateConfigKeys(config, enumKeys) { value: Enum<*> ->
-            hashCalculator.update(value.ordinal)
+        hashCalculator.updateConfigKeys(config, enumKeys) { konstue: Enum<*> ->
+            hashCalculator.update(konstue.ordinal)
         }
 
-        hashCalculator.updateConfigKeys(config, listOf(JSConfigurationKeys.SOURCE_MAP_PREFIX)) { value: String ->
-            hashCalculator.update(value)
+        hashCalculator.updateConfigKeys(config, listOf(JSConfigurationKeys.SOURCE_MAP_PREFIX)) { konstue: String ->
+            hashCalculator.update(konstue)
         }
 
-        hashCalculator.updateConfigKeys(config, listOf(PartialLinkageConfig.KEY)) { value: PartialLinkageConfig ->
-            hashCalculator.update(value.mode.ordinal)
-            hashCalculator.update(value.logLevel.ordinal)
+        hashCalculator.updateConfigKeys(config, listOf(PartialLinkageConfig.KEY)) { konstue: PartialLinkageConfig ->
+            hashCalculator.update(konstue.mode.ordinal)
+            hashCalculator.update(konstue.logLevel.ordinal)
         }
 
         hashCalculator.update(config.languageVersionSettings.toString())
@@ -222,7 +222,7 @@ internal fun CrossModuleReferences.crossModuleReferencesHashForIC() = HashCalcul
     }
 
     updateForEach(imports.keys.sorted()) { tag ->
-        val import = imports[tag]!!
+        konst import = imports[tag]!!
         update(tag)
         update(import.exportedAs)
 

@@ -18,13 +18,13 @@ import javax.lang.model.element.TypeElement
 
 class KaptIntegrationEnvironmentConfigurator(
     testServices: TestServices,
-    private val processorOptions: Map<String, String>,
-    private val supportedAnnotations: List<String>,
-    private val process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit
+    private konst processorOptions: Map<String, String>,
+    private konst supportedAnnotations: List<String>,
+    private konst process: (Set<TypeElement>, RoundEnvironment, ProcessingEnvironment, Kapt3ExtensionForTests) -> Unit
 ) : EnvironmentConfigurator(testServices) {
     override fun legacyRegisterCompilerExtensions(project: Project, module: TestModule, configuration: CompilerConfiguration) {
-        val kaptOptions = testServices.kaptOptionsProvider[module]
-        val kapt3Extension = testServices.kapt3ExtensionProvider.createExtension(
+        konst kaptOptions = testServices.kaptOptionsProvider[module]
+        konst kapt3Extension = testServices.kapt3ExtensionProvider.createExtension(
             module,
             kaptOptions,
             processorOptions,

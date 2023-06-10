@@ -19,21 +19,21 @@ import org.jetbrains.kotlin.test.utils.firTestDataFile
 import java.io.File
 
 open class FirTestDataConsistencyHandler(testServices: TestServices) : AfterAnalysisChecker(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(FirDiagnosticsDirectives)
 
     override fun check(failedAssertions: List<WrappedException>) {
-        val moduleStructure = testServices.moduleStructure
-        val testData = moduleStructure.originalTestDataFiles.first()
+        konst moduleStructure = testServices.moduleStructure
+        konst testData = moduleStructure.originalTestDataFiles.first()
         if (testData.extension == "kts") return
         if (FirDiagnosticsDirectives.FIR_IDENTICAL in moduleStructure.allDirectives) return
-        val firTestData = testData.firTestDataFile
+        konst firTestData = testData.firTestDataFile
         if (!firTestData.exists()) {
             runFirTestAndGeneratedTestData(testData, firTestData)
             return
         }
-        val firPreprocessedTextData = firTestData.preprocessSource()
-        val originalPreprocessedTextData = testData.preprocessSource()
+        konst firPreprocessedTextData = firTestData.preprocessSource()
+        konst originalPreprocessedTextData = testData.preprocessSource()
         testServices.assertions.assertEquals(firPreprocessedTextData, originalPreprocessedTextData) {
             "Original and FIR test data aren't identical. " +
                     "Please, add changes from ${testData.name} to ${firTestData.name}"
@@ -41,7 +41,7 @@ open class FirTestDataConsistencyHandler(testServices: TestServices) : AfterAnal
     }
 
     private fun File.preprocessSource(): String {
-        val content = testServices.sourceFileProvider.getContentOfSourceFile(
+        konst content = testServices.sourceFileProvider.getContentOfSourceFile(
             TestFile(path, readText().trim(), this, 0, isAdditional = false, RegisteredDirectives.Empty)
         )
         // Note: convertLineSeparators() does not work on Windows properly (\r\n are left intact for some reason)
@@ -53,7 +53,7 @@ open class FirTestDataConsistencyHandler(testServices: TestServices) : AfterAnal
 
     private fun runFirTestAndGeneratedTestData(testData: File, firTestData: File) {
         firTestData.writeText(testData.preprocessSource())
-        val test = correspondingFirTest()
+        konst test = correspondingFirTest()
         test.initTestInfo(testServices.testInfo.copy(className = "${testServices.testInfo.className}_fir_anonymous"))
         test.runTest(firTestData.absolutePath)
     }

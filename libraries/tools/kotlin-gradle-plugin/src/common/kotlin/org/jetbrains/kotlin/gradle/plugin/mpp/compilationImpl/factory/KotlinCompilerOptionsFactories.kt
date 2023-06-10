@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.gradle.utils.klibModuleName
 
 internal object KotlinMultiplatformCommonCompilerOptionsFactory : KotlinCompilationImplFactory.KotlinCompilerOptionsFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options {
-        val compilerOptions = object : HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> {
-            override val options: KotlinMultiplatformCommonCompilerOptions = target.project.objects
+        konst compilerOptions = object : HasCompilerOptions<KotlinMultiplatformCommonCompilerOptions> {
+            override konst options: KotlinMultiplatformCommonCompilerOptions = target.project.objects
                 .newInstance(KotlinMultiplatformCommonCompilerOptionsDefault::class.java)
                 .configureExperimentalTryK2(target.project)
         }
 
-        val kotlinOptions = object : KotlinCommonOptions {
-            override val options: KotlinCommonCompilerOptions
+        konst kotlinOptions = object : KotlinCommonOptions {
+            override konst options: KotlinCommonCompilerOptions
                 get() = compilerOptions.options
         }
 
@@ -34,7 +34,7 @@ internal object KotlinMultiplatformCommonCompilerOptionsFactory : KotlinCompilat
 internal object KotlinNativeCompilerOptionsFactory : KotlinCompilationImplFactory.KotlinCompilerOptionsFactory {
 
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options {
-        val compilerOptions = NativeCompilerOptions(target.project)
+        konst compilerOptions = NativeCompilerOptions(target.project)
         compilerOptions.options.moduleName.convention(
             target.project.klibModuleName(
                 moduleNameForCompilation(
@@ -44,8 +44,8 @@ internal object KotlinNativeCompilerOptionsFactory : KotlinCompilationImplFactor
             )
         )
 
-        val kotlinOptions = object : KotlinCommonOptions {
-            override val options get() = compilerOptions.options
+        konst kotlinOptions = object : KotlinCommonOptions {
+            override konst options get() = compilerOptions.options
         }
 
         return KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options(compilerOptions, kotlinOptions)
@@ -55,14 +55,14 @@ internal object KotlinNativeCompilerOptionsFactory : KotlinCompilationImplFactor
 
 internal object KotlinJsCompilerOptionsFactory : KotlinCompilationImplFactory.KotlinCompilerOptionsFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options {
-        val compilerOptions = object : HasCompilerOptions<KotlinJsCompilerOptions> {
-            override val options: KotlinJsCompilerOptions = target.project.objects
+        konst compilerOptions = object : HasCompilerOptions<KotlinJsCompilerOptions> {
+            override konst options: KotlinJsCompilerOptions = target.project.objects
                 .newInstance(KotlinJsCompilerOptionsDefault::class.java)
                 .configureExperimentalTryK2(target.project)
         }
 
-        val kotlinOptions = object : KotlinJsOptions {
-            override val options: KotlinJsCompilerOptions
+        konst kotlinOptions = object : KotlinJsOptions {
+            override konst options: KotlinJsCompilerOptions
                 get() = compilerOptions.options
         }
 
@@ -72,14 +72,14 @@ internal object KotlinJsCompilerOptionsFactory : KotlinCompilationImplFactory.Ko
 
 internal object KotlinJvmCompilerOptionsFactory : KotlinCompilationImplFactory.KotlinCompilerOptionsFactory {
     override fun create(target: KotlinTarget, compilationName: String): KotlinCompilationImplFactory.KotlinCompilerOptionsFactory.Options {
-        val compilerOptions = object : HasCompilerOptions<KotlinJvmCompilerOptions> {
-            override val options: KotlinJvmCompilerOptions = target.project.objects
+        konst compilerOptions = object : HasCompilerOptions<KotlinJvmCompilerOptions> {
+            override konst options: KotlinJvmCompilerOptions = target.project.objects
                 .newInstance(KotlinJvmCompilerOptionsDefault::class.java)
                 .configureExperimentalTryK2(target.project)
         }
 
-        val kotlinOptions = object : KotlinJvmOptions {
-            override val options: KotlinJvmCompilerOptions
+        konst kotlinOptions = object : KotlinJvmOptions {
+            override konst options: KotlinJvmCompilerOptions
                 get() = compilerOptions.options
         }
 

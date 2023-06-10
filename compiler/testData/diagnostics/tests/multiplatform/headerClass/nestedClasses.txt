@@ -23,7 +23,7 @@ public final expect class OuterClass {
     }
 
     public final expect inner class InnerClass {
-        public expect final val p: kotlin.String
+        public expect final konst p: kotlin.String
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final expect fun f(/*0*/ x: kotlin.Int): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -41,9 +41,9 @@ public final expect class OuterClass {
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
             public final expect class Another {
-                public expect final val a: kotlin.Int
-                public expect final val c: kotlin.Int = 1
-                public expect final val p: kotlin.Int
+                public expect final konst a: kotlin.Int
+                public expect final konst c: kotlin.Int = 1
+                public expect final konst p: kotlin.Int
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public final expect fun f(/*0*/ s: kotlin.String): kotlin.Unit
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -105,7 +105,7 @@ public final actual class OuterClass {
 
     public final actual inner class InnerClass {
         public constructor InnerClass()
-        public actual final val p: kotlin.String = ""
+        public actual final konst p: kotlin.String = ""
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public final actual fun f(/*0*/ x: kotlin.Int): kotlin.Unit
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -126,9 +126,9 @@ public final actual class OuterClass {
 
             public final actual class Another {
                 public constructor Another()
-                public actual final val a: kotlin.Int = 3
-                public actual final val c: kotlin.Int = 2
-                public actual final val p: kotlin.Int = 42
+                public actual final konst a: kotlin.Int = 3
+                public actual final konst c: kotlin.Int = 2
+                public actual final konst p: kotlin.Int = 42
                 public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
                 public final actual fun f(/*0*/ s: kotlin.String): kotlin.Unit
                 public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

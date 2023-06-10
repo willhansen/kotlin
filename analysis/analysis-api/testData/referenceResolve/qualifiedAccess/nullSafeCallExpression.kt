@@ -1,5 +1,5 @@
-class A(val aa: A?)
+class A(konst aa: A?)
 
 fun f(a: A) {
-    val x = a?.a<caret>a
+    konst x = a?.a<caret>a
 }

@@ -7,7 +7,7 @@
 
 var result = "Fail"
 
-val p = object : Runnable {
+konst p = object : Runnable {
     override fun run() {
         fun <T : Any> T.id() = this
 

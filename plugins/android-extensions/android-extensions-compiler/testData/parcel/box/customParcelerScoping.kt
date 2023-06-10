@@ -26,17 +26,17 @@ object Parceler2 : Parceler<Int> {
 
 @Parcelize
 @TypeParceler<Int, Parceler1>
-data class Ints(val a: Int, @TypeParceler<Int, Parceler2> val b: Int, val c: @WriteWith<Parceler2> Int) : Parcelable
+data class Ints(konst a: Int, @TypeParceler<Int, Parceler2> konst b: Int, konst c: @WriteWith<Parceler2> Int) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val test = Ints(1, 1, 1)
+    konst test = Ints(1, 1, 1)
     test.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val test2 = readFromParcel<Ints>(parcel)
+    konst test2 = readFromParcel<Ints>(parcel)
 
     assert(test2.a == -test.a)
     assert(test2.b == -test.b)

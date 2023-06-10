@@ -1,4 +1,4 @@
-val foo: Pair<List<Int?>, Pair<List<Int?>?, List<Int>?>> = null!!
+konst foo: Pair<List<Int?>, Pair<List<Int?>?, List<Int>?>> = null!!
 /*
 psi: Pair<List<Int?>, Pair<List<Int?>?, List<Int>?>>
 type: Pair<List<Int?>, Pair<List<Int?>?, List<Int>?>>

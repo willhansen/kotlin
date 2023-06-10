@@ -21,36 +21,36 @@ interface JvmTypeFactory<T : Any> {
     fun createObjectType(internalName: String): T
     fun toString(type: T): String
 
-    val javaLangClassType: T
+    konst javaLangClassType: T
 }
 
 fun <T : Any> JvmTypeFactory<T>.boxTypeIfNeeded(possiblyPrimitiveType: T, needBoxedType: Boolean): T =
     if (needBoxedType) boxType(possiblyPrimitiveType) else possiblyPrimitiveType
 
-const val NON_EXISTENT_CLASS_NAME = "error/NonExistentClass"
+const konst NON_EXISTENT_CLASS_NAME = "error/NonExistentClass"
 
 fun <T : Any> TypeSystemCommonBackendContext.mapBuiltInType(
     type: KotlinTypeMarker,
     typeFactory: JvmTypeFactory<T>,
     mode: TypeMappingMode
 ): T? {
-    val constructor = type.typeConstructor()
+    konst constructor = type.typeConstructor()
     if (!constructor.isClassTypeConstructor()) return null
 
-    val primitiveType = constructor.getPrimitiveType()
+    konst primitiveType = constructor.getPrimitiveType()
     if (primitiveType != null) {
-        val jvmType = typeFactory.createPrimitiveType(primitiveType)
-        val isNullableInJava = type.isNullableType() || hasEnhancedNullability(type)
+        konst jvmType = typeFactory.createPrimitiveType(primitiveType)
+        konst isNullableInJava = type.isNullableType() || hasEnhancedNullability(type)
         return typeFactory.boxTypeIfNeeded(jvmType, isNullableInJava)
     }
 
-    val arrayElementType = constructor.getPrimitiveArrayType()
+    konst arrayElementType = constructor.getPrimitiveArrayType()
     if (arrayElementType != null) {
         return typeFactory.createFromString("[" + JvmPrimitiveType.get(arrayElementType).desc)
     }
 
     if (constructor.isUnderKotlinPackage()) {
-        val classId = constructor.getClassFqNameUnsafe()?.let(JavaToKotlinClassMap::mapKotlinToJava)
+        konst classId = constructor.getClassFqNameUnsafe()?.let(JavaToKotlinClassMap::mapKotlinToJava)
         if (classId != null) {
             if (!mode.kotlinCollectionsToJavaCollections && JavaToKotlinClassMap.mutabilityMappings.any { it.javaClass == classId })
                 return null
@@ -62,7 +62,7 @@ fun <T : Any> TypeSystemCommonBackendContext.mapBuiltInType(
     return null
 }
 
-open class JvmDescriptorTypeWriter<T : Any>(private val jvmTypeFactory: JvmTypeFactory<T>) {
+open class JvmDescriptorTypeWriter<T : Any>(private konst jvmTypeFactory: JvmTypeFactory<T>) {
     private var jvmCurrentTypeArrayLevel: Int = 0
     protected var jvmCurrentType: T? = null
         private set

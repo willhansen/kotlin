@@ -703,7 +703,7 @@ tenToTheEHighPrecision (U_64 * result, IDATA length, int e)
 IDATA
 timesTenToTheEHighPrecision (U_64 * result, IDATA length, int e)
 {
-  /* assumes result can hold value */
+  /* assumes result can hold konstue */
   U_64 overflow;
   int exp10 = e;
 
@@ -850,7 +850,7 @@ floatExponent (KFloat z)
   return k;
 }
 
-/* Allow a 64-bit value in arg2 */
+/* Allow a 64-bit konstue in arg2 */
 U_64
 simpleMultiplyHighPrecision64 (U_64 * arg1, IDATA length, U_64 arg2)
 {

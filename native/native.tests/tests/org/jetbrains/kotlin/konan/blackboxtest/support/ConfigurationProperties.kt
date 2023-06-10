@@ -15,7 +15,7 @@ internal enum class ProcessLevelProperty(shortName: String) {
     COMPILER_CLASSPATH("compilerClasspath"),
     TEAMCITY("teamcity");
 
-    private val propertyName = fullPropertyName(shortName)
+    private konst propertyName = fullPropertyName(shortName)
 
     fun readValue(): String = System.getProperty(propertyName) ?: fail { "Unspecified $propertyName system property" }
 }
@@ -23,16 +23,16 @@ internal enum class ProcessLevelProperty(shortName: String) {
 /*************** Class-level system properties ***************/
 
 @Target(AnnotationTarget.CLASS)
-internal annotation class EnforcedProperty(val property: ClassLevelProperty, val propertyValue: String)
+internal annotation class EnforcedProperty(konst property: ClassLevelProperty, konst propertyValue: String)
 
 @Target(AnnotationTarget.CLASS)
 internal annotation class EnforcedHostTarget
 
 @Target(AnnotationTarget.CLASS)
-internal annotation class AcceptablePropertyValues(val property: ClassLevelProperty, val acceptableValues: Array<String>)
+internal annotation class AcceptablePropertyValues(konst property: ClassLevelProperty, konst acceptableValues: Array<String>)
 
 internal class EnforcedProperties(testClass: Class<*>) {
-    private val enforcedAnnotations: Map<ClassLevelProperty, String> = buildMap {
+    private konst enforcedAnnotations: Map<ClassLevelProperty, String> = buildMap {
         testClass.annotations.forEach { annotation ->
             when (annotation) {
                 is EnforcedProperty -> this[annotation.property] = annotation.propertyValue
@@ -43,14 +43,14 @@ internal class EnforcedProperties(testClass: Class<*>) {
 
     operator fun get(propertyType: ClassLevelProperty): String? = enforcedAnnotations[propertyType]
 
-    private val acceptableAnnotations: Map<ClassLevelProperty, Array<String>> = testClass.annotations
+    private konst acceptableAnnotations: Map<ClassLevelProperty, Array<String>> = testClass.annotations
         .filterIsInstance<AcceptablePropertyValues>()
         .associate {
             it.property to it.acceptableValues
         }
 
-    fun isAcceptableValue(propertyType: ClassLevelProperty, value: String?): Boolean =
-        acceptableAnnotations[propertyType]?.contains(value) ?: true
+    fun isAcceptableValue(propertyType: ClassLevelProperty, konstue: String?): Boolean =
+        acceptableAnnotations[propertyType]?.contains(konstue) ?: true
 }
 
 internal enum class ClassLevelProperty(shortName: String) {
@@ -70,13 +70,13 @@ internal enum class ClassLevelProperty(shortName: String) {
 
     ;
 
-    internal val propertyName = fullPropertyName(shortName)
+    internal konst propertyName = fullPropertyName(shortName)
 
     fun <T> readValue(enforcedProperties: EnforcedProperties, transform: (String) -> T?, default: T): T {
-        val propertyValue = enforcedProperties[this] ?: System.getProperty(propertyName)
-        val acceptable = enforcedProperties.isAcceptableValue(this, propertyValue)
+        konst propertyValue = enforcedProperties[this] ?: System.getProperty(propertyName)
+        konst acceptable = enforcedProperties.isAcceptableValue(this, propertyValue)
         return if (propertyValue != null && acceptable) {
-            transform(propertyValue) ?: fail { "Invalid value for $propertyName system property: $propertyValue" }
+            transform(propertyValue) ?: fail { "Inkonstid konstue for $propertyName system property: $propertyValue" }
         } else
             default
     }
@@ -84,17 +84,17 @@ internal enum class ClassLevelProperty(shortName: String) {
 
 internal inline fun <reified E : Enum<E>> ClassLevelProperty.readValue(
     enforcedProperties: EnforcedProperties,
-    values: Array<out E>,
+    konstues: Array<out E>,
     default: E
 ): E {
-    val optionName = enforcedProperties[this] ?: System.getProperty(propertyName)
-    val acceptable = enforcedProperties.isAcceptableValue(this, optionName)
+    konst optionName = enforcedProperties[this] ?: System.getProperty(propertyName)
+    konst acceptable = enforcedProperties.isAcceptableValue(this, optionName)
     return if (optionName != null && acceptable) {
-        values.firstOrNull { it.name == optionName } ?: fail {
+        konstues.firstOrNull { it.name == optionName } ?: fail {
             buildString {
                 appendLine("Unknown ${E::class.java.simpleName} name $optionName.")
                 appendLine("One of the following ${E::class.java.simpleName} should be passed through $propertyName system property:")
-                values.forEach { value -> appendLine("- ${value.name}: $value") }
+                konstues.forEach { konstue -> appendLine("- ${konstue.name}: $konstue") }
             }
         }
     } else

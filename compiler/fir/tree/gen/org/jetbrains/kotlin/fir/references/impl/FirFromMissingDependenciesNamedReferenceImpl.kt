@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirFromMissingDependenciesNamedReferenceImpl(
-    override val source: KtSourceElement?,
-    override val name: Name,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
 ) : FirFromMissingDependenciesNamedReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

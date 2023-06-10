@@ -21,7 +21,7 @@ package org.jetbrains.kotlin.script.util
 import org.jetbrains.kotlin.script.util.resolvers.DirectResolver
 import org.jetbrains.kotlin.script.util.resolvers.FlatLibDirectoryResolver
 import org.jetbrains.kotlin.script.util.resolvers.Resolver
-import org.jetbrains.kotlin.scripting.resolve.InvalidScriptResolverAnnotation
+import org.jetbrains.kotlin.scripting.resolve.InkonstidScriptResolverAnnotation
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import java.io.File
 import java.util.concurrent.Future
@@ -32,14 +32,14 @@ import kotlin.script.dependencies.asFuture
 import kotlin.script.templates.AcceptedAnnotations
 
 @Deprecated("Use new resolving classes from kotlin-scripting-dependencies and kotlin-scripting-dependencies-maven")
-open class KotlinAnnotatedScriptDependenciesResolver(val baseClassPath: List<File>, resolvers: Iterable<Resolver>)
+open class KotlinAnnotatedScriptDependenciesResolver(konst baseClassPath: List<File>, resolvers: Iterable<Resolver>)
     : ScriptDependenciesResolver
 {
-    private val resolvers: MutableList<Resolver> = resolvers.toMutableList()
+    private konst resolvers: MutableList<Resolver> = resolvers.toMutableList()
 
     inner class ResolvedDependencies(previousDependencies: KotlinScriptExternalDependencies?, depsFromAnnotations: List<File> ) : KotlinScriptExternalDependencies {
-        override val classpath = if (resolvers.isEmpty()) baseClassPath  else baseClassPath + depsFromAnnotations
-        override val imports = if (previousDependencies != null) emptyList() else listOf(DependsOn::class.java.`package`.name + ".*")
+        override konst classpath = if (resolvers.isEmpty()) baseClassPath  else baseClassPath + depsFromAnnotations
+        override konst imports = if (previousDependencies != null) emptyList() else listOf(DependsOn::class.java.`package`.name + ".*")
     }
 
     @AcceptedAnnotations(DependsOn::class, Repository::class)
@@ -48,7 +48,7 @@ open class KotlinAnnotatedScriptDependenciesResolver(val baseClassPath: List<Fil
                          report: (ScriptDependenciesResolver.ReportSeverity, String, ScriptContents.Position?) -> Unit,
                          previousDependencies: KotlinScriptExternalDependencies?
     ): Future<KotlinScriptExternalDependencies?> {
-        val depsFromAnnotations: List<File> = resolveFromAnnotations(script)
+        konst depsFromAnnotations: List<File> = resolveFromAnnotations(script)
         return (if (previousDependencies != null && depsFromAnnotations.isEmpty()) previousDependencies
                 else ResolvedDependencies(previousDependencies, depsFromAnnotations)
                ).asFuture()
@@ -58,7 +58,7 @@ open class KotlinAnnotatedScriptDependenciesResolver(val baseClassPath: List<Fil
         script.annotations.forEach { annotation ->
             when (annotation) {
                 is Repository -> {
-                    val isFlat: Boolean = resolvers.firstIsInstanceOrNull<FlatLibDirectoryResolver>()?.tryAddRepo(annotation)
+                    konst isFlat: Boolean = resolvers.firstIsInstanceOrNull<FlatLibDirectoryResolver>()?.tryAddRepo(annotation)
                         ?: (FlatLibDirectoryResolver.tryCreate(annotation)?.also { resolvers.add(it) } != null)
                     if (!isFlat) {
                         resolvers.find { it !is FlatLibDirectoryResolver && it.tryAddRepo(annotation) }
@@ -66,7 +66,7 @@ open class KotlinAnnotatedScriptDependenciesResolver(val baseClassPath: List<Fil
                     }
                 }
                 is DependsOn -> {}
-                is InvalidScriptResolverAnnotation -> throw Exception("Invalid annotation ${annotation.name}", annotation.error)
+                is InkonstidScriptResolverAnnotation -> throw Exception("Inkonstid annotation ${annotation.name}", annotation.error)
                 else -> throw Exception("Unknown annotation ${annotation.javaClass}")
             }
         }

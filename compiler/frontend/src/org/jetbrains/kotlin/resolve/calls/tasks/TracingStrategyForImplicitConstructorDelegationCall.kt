@@ -36,18 +36,18 @@ import org.jetbrains.kotlin.types.KotlinType
 
 
 class TracingStrategyForImplicitConstructorDelegationCall(
-    val delegationCall: KtConstructorDelegationCall, call: Call
+    konst delegationCall: KtConstructorDelegationCall, call: Call
 ) : AbstractTracingStrategy(delegationCall.calleeExpression!!, call) {
 
-    val calleeExpression = delegationCall.calleeExpression
+    konst calleeExpression = delegationCall.calleeExpression
 
     override fun bindCall(trace: BindingTrace, call: Call) {
         trace.record(CALL, call.calleeExpression, call)
     }
 
     override fun <D : CallableDescriptor> bindReference(trace: BindingTrace, resolvedCall: ResolvedCall<D>) {
-        val descriptor = resolvedCall.candidateDescriptor
-        val storedReference = trace.get(REFERENCE_TARGET, calleeExpression)
+        konst descriptor = resolvedCall.candidateDescriptor
+        konst storedReference = trace.get(REFERENCE_TARGET, calleeExpression)
         if (storedReference == null || !ErrorUtils.isError(descriptor)) {
             trace.record(REFERENCE_TARGET, calleeExpression, descriptor)
         }
@@ -65,7 +65,7 @@ class TracingStrategyForImplicitConstructorDelegationCall(
         trace.report(UNRESOLVED_REFERENCE_WRONG_RECEIVER.on(reference, candidates))
     }
 
-    override fun noValueForParameter(trace: BindingTrace, valueParameter: ValueParameterDescriptor) {
+    override fun noValueForParameter(trace: BindingTrace, konstueParameter: ValueParameterDescriptor) {
         reportError(trace)
     }
 
@@ -82,7 +82,7 @@ class TracingStrategyForImplicitConstructorDelegationCall(
     }
 
     private fun reportError(trace: BindingTrace) {
-        val reportOn = delegationCall.reportOnElement()
+        konst reportOn = delegationCall.reportOnElement()
         if (!trace.bindingContext.diagnostics.forElement(reportOn).any { it.factory == Errors.EXPLICIT_DELEGATION_CALL_REQUIRED }) {
             trace.report(Errors.EXPLICIT_DELEGATION_CALL_REQUIRED.on(reportOn))
         }

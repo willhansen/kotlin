@@ -20,26 +20,26 @@ import org.jetbrains.kotlin.utils.addToStdlib.runIf
 import java.util.regex.Pattern
 
 interface AbstractCliOption {
-    val optionName: String
-    val valueDescription: String
-    val description: String
-    val required: Boolean
-    val allowMultipleOccurrences: Boolean
+    konst optionName: String
+    konst konstueDescription: String
+    konst description: String
+    konst required: Boolean
+    konst allowMultipleOccurrences: Boolean
 }
 
 class CliOption(
-    override val optionName: String,
-    override val valueDescription: String,
-    override val description: String,
-    override val required: Boolean = true,
-    override val allowMultipleOccurrences: Boolean = false
+    override konst optionName: String,
+    override konst konstueDescription: String,
+    override konst description: String,
+    override konst required: Boolean = true,
+    override konst allowMultipleOccurrences: Boolean = false
 ) : AbstractCliOption
 
 open class CliOptionProcessingException(message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
 class PluginCliOptionProcessingException(
-    val pluginId: String,
-    val options: Collection<AbstractCliOption>,
+    konst pluginId: String,
+    konst options: Collection<AbstractCliOption>,
     message: String,
     cause: Throwable? = null
 ) : CliOptionProcessingException(message, cause)
@@ -47,20 +47,20 @@ class PluginCliOptionProcessingException(
 class PluginProcessingException(message: String, cause: Throwable? = null) : RuntimeException(message, cause)
 
 fun cliPluginUsageString(pluginId: String, options: Collection<AbstractCliOption>): String {
-    val LEFT_INDENT = 2
-    val MAX_OPTION_WIDTH = 26
+    konst LEFT_INDENT = 2
+    konst MAX_OPTION_WIDTH = 26
 
-    val renderedOptions = options.map {
-        val name = "${it.optionName} ${it.valueDescription}"
-        val margin = if (name.length > MAX_OPTION_WIDTH) {
+    konst renderedOptions = options.map {
+        konst name = "${it.optionName} ${it.konstueDescription}"
+        konst margin = if (name.length > MAX_OPTION_WIDTH) {
             "\n" + " ".repeat(MAX_OPTION_WIDTH + LEFT_INDENT + 1)
         } else " ".repeat(1 + MAX_OPTION_WIDTH - name.length)
 
-        val modifiers = listOfNotNull(
+        konst modifiers = listOfNotNull(
             runIf(it.required) { "required" },
             runIf(it.allowMultipleOccurrences) { "multiple" }
         )
-        val modifiersEnclosed = if (modifiers.isEmpty()) "" else " (${modifiers.joinToString()})"
+        konst modifiersEnclosed = if (modifiers.isEmpty()) "" else " (${modifiers.joinToString()})"
 
         " ".repeat(LEFT_INDENT) + name + margin + it.description + modifiersEnclosed
     }
@@ -68,16 +68,16 @@ fun cliPluginUsageString(pluginId: String, options: Collection<AbstractCliOption
 }
 
 data class CliOptionValue(
-    val pluginId: String,
-    val optionName: String,
-    val value: String
+    konst pluginId: String,
+    konst optionName: String,
+    konst konstue: String
 ) {
-    override fun toString() = "$pluginId:$optionName=$value"
+    override fun toString() = "$pluginId:$optionName=$konstue"
 }
 
 fun parseLegacyPluginOption(argumentValue: String): CliOptionValue? {
-    val pattern = Pattern.compile("""^plugin:([^:]*):([^=]*)=(.*)$""")
-    val matcher = pattern.matcher(argumentValue)
+    konst pattern = Pattern.compile("""^plugin:([^:]*):([^=]*)=(.*)$""")
+    konst matcher = pattern.matcher(argumentValue)
     if (matcher.matches()) {
         return CliOptionValue(matcher.group(1), matcher.group(2), matcher.group(3))
     }
@@ -86,8 +86,8 @@ fun parseLegacyPluginOption(argumentValue: String): CliOptionValue? {
 }
 
 fun parseModernPluginOption(argumentValue: String): CliOptionValue? {
-    val pattern = Pattern.compile("""^([^=]*)=(.*)$""")
-    val matcher = pattern.matcher(argumentValue)
+    konst pattern = Pattern.compile("""^([^=]*)=(.*)$""")
+    konst matcher = pattern.matcher(argumentValue)
     if (matcher.matches()) {
         return CliOptionValue("<NO_ID>", matcher.group(1), matcher.group(2))
     }
@@ -95,6 +95,6 @@ fun parseModernPluginOption(argumentValue: String): CliOptionValue? {
     return null
 }
 
-fun getPluginOptionString(pluginId: String, key: String, value: String): String {
-    return "plugin:$pluginId:$key=$value"
+fun getPluginOptionString(pluginId: String, key: String, konstue: String): String {
+    return "plugin:$pluginId:$key=$konstue"
 }

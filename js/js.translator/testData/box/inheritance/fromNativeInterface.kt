@@ -2,7 +2,7 @@
 package foo
 
 external interface A {
-    val bar: Int? get() = definedExternally
+    konst bar: Int? get() = definedExternally
     fun foo(): String
 }
 
@@ -11,7 +11,7 @@ class C : A {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
 
     return "OK"
 }

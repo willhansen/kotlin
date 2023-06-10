@@ -28,23 +28,23 @@ tailrec fun FirExpression.unwrapAnonymousFunctionExpression(): FirAnonymousFunct
 }
 
 fun FirFunctionCall.replaceLambdaArgumentInvocationKinds(session: FirSession) {
-    val calleeReference = calleeReference as? FirNamedReferenceWithCandidate ?: return
-    val argumentMapping = calleeReference.candidate.argumentMapping ?: return
-    val function = calleeReference.candidateSymbol.fir as? FirSimpleFunction ?: return
-    val isInline = function.isInline
+    konst calleeReference = calleeReference as? FirNamedReferenceWithCandidate ?: return
+    konst argumentMapping = calleeReference.candidate.argumentMapping ?: return
+    konst function = calleeReference.candidateSymbol.fir as? FirSimpleFunction ?: return
+    konst isInline = function.isInline
 
-    val byParameter = mutableMapOf<FirValueParameter, EventOccurrencesRange>()
+    konst byParameter = mutableMapOf<FirValueParameter, EventOccurrencesRange>()
     function.contractDescription.effects?.forEach { fir ->
-        val effect = fir.effect as? ConeCallsEffectDeclaration ?: return@forEach
+        konst effect = fir.effect as? ConeCallsEffectDeclaration ?: return@forEach
         // TODO: Support callsInPlace contracts on receivers
-        val valueParameter = function.valueParameters.getOrNull(effect.valueParameterReference.parameterIndex) ?: return@forEach
-        byParameter[valueParameter] = effect.kind
+        konst konstueParameter = function.konstueParameters.getOrNull(effect.konstueParameterReference.parameterIndex) ?: return@forEach
+        byParameter[konstueParameter] = effect.kind
     }
     if (byParameter.isEmpty() && !isInline) return
 
     for ((argument, parameter) in argumentMapping) {
-        val lambda = argument.unwrapAnonymousFunctionExpression() ?: continue
-        val kind = byParameter[parameter] ?: EventOccurrencesRange.UNKNOWN.takeIf {
+        konst lambda = argument.unwrapAnonymousFunctionExpression() ?: continue
+        konst kind = byParameter[parameter] ?: EventOccurrencesRange.UNKNOWN.takeIf {
             // Inline functional parameters have to be called in-place; that's the only permitted operation on them.
             isInline && !parameter.isNoinline && !parameter.isCrossinline &&
                     parameter.returnTypeRef.coneType.isNonReflectFunctionType(session)

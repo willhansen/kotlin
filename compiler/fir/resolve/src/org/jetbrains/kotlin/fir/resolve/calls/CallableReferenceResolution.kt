@@ -39,19 +39,19 @@ import org.jetbrains.kotlin.utils.addToStdlib.shouldNotBeCalled
 
 internal object CheckCallableReferenceExpectedType : CheckerStage() {
     override suspend fun check(candidate: Candidate, callInfo: CallInfo, sink: CheckerSink, context: ResolutionContext) {
-        val outerCsBuilder = callInfo.outerCSBuilder ?: return
-        val expectedType = callInfo.expectedType
+        konst outerCsBuilder = callInfo.outerCSBuilder ?: return
+        konst expectedType = callInfo.expectedType
         if (candidate.symbol !is FirCallableSymbol<*>) return
 
-        val resultingReceiverType = when (callInfo.lhs) {
+        konst resultingReceiverType = when (callInfo.lhs) {
             is DoubleColonLHS.Type -> callInfo.lhs.type.takeIf { callInfo.explicitReceiver !is FirResolvedQualifier }
             else -> null
         }
 
-        val fir: FirCallableDeclaration = candidate.symbol.fir
+        konst fir: FirCallableDeclaration = candidate.symbol.fir
 
-        val (rawResultingType, callableReferenceAdaptation) = buildReflectionType(fir, resultingReceiverType, candidate, context)
-        val resultingType = candidate.substitutor.substituteOrSelf(rawResultingType)
+        konst (rawResultingType, callableReferenceAdaptation) = buildReflectionType(fir, resultingReceiverType, candidate, context)
+        konst resultingType = candidate.substitutor.substituteOrSelf(rawResultingType)
 
         if (callableReferenceAdaptation.needCompatibilityResolveForCallableReference()) {
             if (!context.session.languageVersionSettings.supportsFeature(LanguageFeature.DisableCompatibilityModeForNewInference)) {
@@ -65,7 +65,7 @@ internal object CheckCallableReferenceExpectedType : CheckerStage() {
             addOtherSystem(candidate.system.currentStorage())
 
             // Callable references are either arguments to a call or are wrapped in a synthetic call for resolution.
-            val position = ConeArgumentConstraintPosition(callInfo.callSite)
+            konst position = ConeArgumentConstraintPosition(callInfo.callSite)
 
             if (expectedType != null && !resultingType.contains {
                     it is ConeTypeVariableType && it.lookupTag !in outerCsBuilder.currentStorage().allTypeVariables
@@ -97,11 +97,11 @@ private fun buildReflectionType(
     candidate: Candidate,
     context: ResolutionContext
 ): Pair<ConeKotlinType, CallableReferenceAdaptation?> {
-    val returnTypeRef = context.bodyResolveComponents.returnTypeCalculator.tryCalculateReturnType(fir)
+    konst returnTypeRef = context.bodyResolveComponents.returnTypeCalculator.tryCalculateReturnType(fir)
     return when (fir) {
         is FirFunction -> {
-            val unboundReferenceTarget = if (receiverType != null) 1 else 0
-            val callableReferenceAdaptation =
+            konst unboundReferenceTarget = if (receiverType != null) 1 else 0
+            konst callableReferenceAdaptation =
                 context.bodyResolveComponents.getCallableReferenceAdaptation(
                     context.session,
                     fir,
@@ -109,12 +109,12 @@ private fun buildReflectionType(
                     unboundReferenceTarget
                 )
 
-            val parameters = mutableListOf<ConeKotlinType>()
+            konst parameters = mutableListOf<ConeKotlinType>()
             if (fir.receiverParameter == null && receiverType != null) {
                 parameters += receiverType
             }
 
-            val returnType = callableReferenceAdaptation?.let {
+            konst returnType = callableReferenceAdaptation?.let {
                 parameters += it.argumentTypes
                 if (it.coercionStrategy == CoercionStrategy.COERCION_TO_UNIT) {
                     context.session.builtinTypes.unitType.type
@@ -122,11 +122,11 @@ private fun buildReflectionType(
                     returnTypeRef.coneType
                 }
             } ?: returnTypeRef.coneType.also {
-                fir.valueParameters.mapTo(parameters) { it.returnTypeRef.coneType }
+                fir.konstueParameters.mapTo(parameters) { it.returnTypeRef.coneType }
             }
 
 
-            val baseFunctionTypeKind = callableReferenceAdaptation?.suspendConversionStrategy?.kind
+            konst baseFunctionTypeKind = callableReferenceAdaptation?.suspendConversionStrategy?.kind
                 ?: fir.specialFunctionTypeKind(context.session)
                 ?: FunctionTypeKind.Function
 
@@ -144,11 +144,11 @@ private fun buildReflectionType(
 }
 
 internal class CallableReferenceAdaptation(
-    val argumentTypes: Array<ConeKotlinType>,
-    val coercionStrategy: CoercionStrategy,
-    val defaults: Int,
-    val mappedArguments: CallableReferenceMappedArguments,
-    val suspendConversionStrategy: CallableReferenceConversionStrategy
+    konst argumentTypes: Array<ConeKotlinType>,
+    konst coercionStrategy: CoercionStrategy,
+    konst defaults: Int,
+    konst mappedArguments: CallableReferenceMappedArguments,
+    konst suspendConversionStrategy: CallableReferenceConversionStrategy
 )
 
 private fun CallableReferenceAdaptation?.needCompatibilityResolveForCallableReference(): Boolean {
@@ -157,7 +157,7 @@ private fun CallableReferenceAdaptation?.needCompatibilityResolveForCallableRefe
     return defaults != 0 ||
             suspendConversionStrategy != CallableReferenceConversionStrategy.NoConversion ||
             coercionStrategy != CoercionStrategy.NO_COERCION ||
-            mappedArguments.values.any { it is ResolvedCallArgument.VarargArgument }
+            mappedArguments.konstues.any { it is ResolvedCallArgument.VarargArgument }
 }
 
 private fun BodyResolveComponents.getCallableReferenceAdaptation(
@@ -171,19 +171,19 @@ private fun BodyResolveComponents.getCallableReferenceAdaptation(
     // Do not adapt references against KCallable type as it's impossible to map defaults/vararg to absent parameters of KCallable
     if (expectedType.isKCallableType()) return null
 
-    val (inputTypes, returnExpectedType) = extractInputOutputTypesFromCallableReferenceExpectedType(expectedType, session) ?: return null
-    val expectedArgumentsCount = inputTypes.size - unboundReceiverCount
+    konst (inputTypes, returnExpectedType) = extractInputOutputTypesFromCallableReferenceExpectedType(expectedType, session) ?: return null
+    konst expectedArgumentsCount = inputTypes.size - unboundReceiverCount
     if (expectedArgumentsCount < 0) return null
 
-    val fakeArguments = createFakeArgumentsForReference(function, expectedArgumentsCount, inputTypes, unboundReceiverCount)
-    val originScope = function.dispatchReceiverType?.scope(
+    konst fakeArguments = createFakeArgumentsForReference(function, expectedArgumentsCount, inputTypes, unboundReceiverCount)
+    konst originScope = function.dispatchReceiverType?.scope(
         useSiteSession = session,
         scopeSession = scopeSession,
         fakeOverrideTypeCalculator = FakeOverrideTypeCalculator.DoNothing,
         requiredMembersPhase = FirResolvePhase.STATUS,
     )
 
-    val argumentMapping = mapArguments(fakeArguments, function, originScope = originScope, callSiteIsOperatorCall = false)
+    konst argumentMapping = mapArguments(fakeArguments, function, originScope = originScope, callSiteIsOperatorCall = false)
     if (argumentMapping.diagnostics.any { !it.applicability.isSuccess }) return null
 
     /**
@@ -192,18 +192,18 @@ private fun BodyResolveComponents.getCallableReferenceAdaptation(
      */
     var defaults = 0
     var varargMappingState = VarargMappingState.UNMAPPED
-    val mappedArguments = linkedMapOf<FirValueParameter, ResolvedCallArgument>()
-    val mappedVarargElements = linkedMapOf<FirValueParameter, MutableList<FirExpression>>()
-    val mappedArgumentTypes = arrayOfNulls<ConeKotlinType?>(fakeArguments.size)
+    konst mappedArguments = linkedMapOf<FirValueParameter, ResolvedCallArgument>()
+    konst mappedVarargElements = linkedMapOf<FirValueParameter, MutableList<FirExpression>>()
+    konst mappedArgumentTypes = arrayOfNulls<ConeKotlinType?>(fakeArguments.size)
 
-    for ((valueParameter, resolvedArgument) in argumentMapping.parameterToCallArgumentMap) {
+    for ((konstueParameter, resolvedArgument) in argumentMapping.parameterToCallArgumentMap) {
         for (fakeArgument in resolvedArgument.arguments) {
-            val index = fakeArgument.index
-            val substitutedParameter = function.valueParameters.getOrNull(function.indexOf(valueParameter)) ?: continue
+            konst index = fakeArgument.index
+            konst substitutedParameter = function.konstueParameters.getOrNull(function.indexOf(konstueParameter)) ?: continue
 
-            val mappedArgument: ConeKotlinType?
+            konst mappedArgument: ConeKotlinType?
             if (substitutedParameter.isVararg) {
-                val (varargType, newVarargMappingState) = varargParameterTypeByExpectedParameter(
+                konst (varargType, newVarargMappingState) = varargParameterTypeByExpectedParameter(
                     inputTypes[index + unboundReceiverCount],
                     substitutedParameter,
                     varargMappingState
@@ -213,55 +213,55 @@ private fun BodyResolveComponents.getCallableReferenceAdaptation(
 
                 when (newVarargMappingState) {
                     VarargMappingState.MAPPED_WITH_ARRAY -> {
-                        // If we've already mapped an argument to this value parameter, it'll always be a type mismatch.
-                        mappedArguments[valueParameter] = ResolvedCallArgument.SimpleArgument(fakeArgument)
+                        // If we've already mapped an argument to this konstue parameter, it'll always be a type mismatch.
+                        mappedArguments[konstueParameter] = ResolvedCallArgument.SimpleArgument(fakeArgument)
                     }
                     VarargMappingState.MAPPED_WITH_PLAIN_ARGS -> {
-                        mappedVarargElements.getOrPut(valueParameter) { ArrayList() }.add(fakeArgument)
+                        mappedVarargElements.getOrPut(konstueParameter) { ArrayList() }.add(fakeArgument)
                     }
                     VarargMappingState.UNMAPPED -> {
                     }
                 }
             } else {
                 mappedArgument = substitutedParameter.returnTypeRef.coneType
-                mappedArguments[valueParameter] = resolvedArgument
+                mappedArguments[konstueParameter] = resolvedArgument
             }
 
             mappedArgumentTypes[index] = mappedArgument
         }
         if (resolvedArgument == ResolvedCallArgument.DefaultArgument) {
             defaults++
-            mappedArguments[valueParameter] = resolvedArgument
+            mappedArguments[konstueParameter] = resolvedArgument
         }
     }
     if (mappedArgumentTypes.any { it == null }) return null
 
-    for ((valueParameter, varargElements) in mappedVarargElements) {
-        mappedArguments[valueParameter] = ResolvedCallArgument.VarargArgument(varargElements)
+    for ((konstueParameter, varargElements) in mappedVarargElements) {
+        mappedArguments[konstueParameter] = ResolvedCallArgument.VarargArgument(varargElements)
     }
 
     var isThereVararg = mappedVarargElements.isNotEmpty()
-    for (valueParameter in function.valueParameters) {
-        if (valueParameter.isVararg && valueParameter !in mappedArguments) {
-            mappedArguments[valueParameter] = ResolvedCallArgument.VarargArgument(emptyList())
+    for (konstueParameter in function.konstueParameters) {
+        if (konstueParameter.isVararg && konstueParameter !in mappedArguments) {
+            mappedArguments[konstueParameter] = ResolvedCallArgument.VarargArgument(emptyList())
             isThereVararg = true
         }
     }
 
-    val coercionStrategy = if (returnExpectedType.isUnitOrFlexibleUnit && !function.returnTypeRef.isUnit)
+    konst coercionStrategy = if (returnExpectedType.isUnitOrFlexibleUnit && !function.returnTypeRef.isUnit)
         CoercionStrategy.COERCION_TO_UNIT
     else
         CoercionStrategy.NO_COERCION
 
-    val adaptedArguments = if (expectedType.isBaseTypeForNumberedReferenceTypes)
+    konst adaptedArguments = if (expectedType.isBaseTypeForNumberedReferenceTypes)
         emptyMap()
     else
         mappedArguments
 
-    val expectedTypeFunctionKind = expectedType.functionTypeKind(session)?.takeUnless { it.isBasicFunctionOrKFunction }
-    val functionKind = function.specialFunctionTypeKind(session)
+    konst expectedTypeFunctionKind = expectedType.functionTypeKind(session)?.takeUnless { it.isBasicFunctionOrKFunction }
+    konst functionKind = function.specialFunctionTypeKind(session)
 
-    val conversionStrategy = if (expectedTypeFunctionKind != null && functionKind == null) {
+    konst conversionStrategy = if (expectedTypeFunctionKind != null && functionKind == null) {
         CallableReferenceConversionStrategy.CustomConversion(expectedTypeFunctionKind)
     } else {
         CallableReferenceConversionStrategy.NoConversion
@@ -288,14 +288,14 @@ private fun BodyResolveComponents.getCallableReferenceAdaptation(
 
 
 sealed class CallableReferenceConversionStrategy {
-    abstract val kind: FunctionTypeKind?
+    abstract konst kind: FunctionTypeKind?
 
     object NoConversion : CallableReferenceConversionStrategy() {
-        override val kind: FunctionTypeKind?
+        override konst kind: FunctionTypeKind?
             get() = null
     }
 
-    class CustomConversion(override val kind: FunctionTypeKind) : CallableReferenceConversionStrategy()
+    class CustomConversion(override konst kind: FunctionTypeKind) : CallableReferenceConversionStrategy()
 }
 
 private fun varargParameterTypeByExpectedParameter(
@@ -303,7 +303,7 @@ private fun varargParameterTypeByExpectedParameter(
     substitutedParameter: FirValueParameter,
     varargMappingState: VarargMappingState,
 ): Pair<ConeKotlinType?, VarargMappingState> {
-    val elementType = substitutedParameter.returnTypeRef.coneType.arrayElementType()
+    konst elementType = substitutedParameter.returnTypeRef.coneType.arrayElementType()
         ?: error("Vararg parameter $substitutedParameter does not have vararg type")
 
     return when (varargMappingState) {
@@ -330,19 +330,19 @@ private enum class VarargMappingState {
     UNMAPPED, MAPPED_WITH_PLAIN_ARGS, MAPPED_WITH_ARRAY
 }
 
-private fun FirFunction.indexOf(valueParameter: FirValueParameter): Int = valueParameters.indexOf(valueParameter)
+private fun FirFunction.indexOf(konstueParameter: FirValueParameter): Int = konstueParameters.indexOf(konstueParameter)
 
-val ConeKotlinType.isUnitOrFlexibleUnit: Boolean
+konst ConeKotlinType.isUnitOrFlexibleUnit: Boolean
     get() {
-        val type = this.lowerBoundIfFlexible()
+        konst type = this.lowerBoundIfFlexible()
         if (type.isNullable) return false
-        val classId = type.classId ?: return false
+        konst classId = type.classId ?: return false
         return classId == StandardClassIds.Unit
     }
 
-private val ConeKotlinType.isBaseTypeForNumberedReferenceTypes: Boolean
+private konst ConeKotlinType.isBaseTypeForNumberedReferenceTypes: Boolean
     get() {
-        val classId = lowerBoundIfFlexible().classId ?: return false
+        konst classId = lowerBoundIfFlexible().classId ?: return false
         return when (classId) {
             StandardClassIds.KProperty,
             StandardClassIds.KMutableProperty,
@@ -351,7 +351,7 @@ private val ConeKotlinType.isBaseTypeForNumberedReferenceTypes: Boolean
         }
     }
 
-private val FirExpression.index: Int
+private konst FirExpression.index: Int
     get() = when (this) {
         is FirNamedArgumentExpression -> expression.index
         is FirFakeArgumentForCallableReference -> index
@@ -368,18 +368,18 @@ private fun createFakeArgumentsForReference(
     var varargComponentType: ConeKotlinType? = null
     var vararg = false
     return (0 until expectedArgumentCount).map { index ->
-        val inputType = inputTypes.getOrNull(index + unboundReceiverCount)
+        konst inputType = inputTypes.getOrNull(index + unboundReceiverCount)
         if (vararg && varargComponentType != inputType) {
             afterVararg = true
         }
 
-        val valueParameter = function.valueParameters.getOrNull(index)
-        val name = if (afterVararg && valueParameter?.defaultValue != null)
-            valueParameter.name
+        konst konstueParameter = function.konstueParameters.getOrNull(index)
+        konst name = if (afterVararg && konstueParameter?.defaultValue != null)
+            konstueParameter.name
         else
             null
 
-        if (valueParameter?.isVararg == true) {
+        if (konstueParameter?.isVararg == true) {
             varargComponentType = inputType
             vararg = true
         }
@@ -396,15 +396,15 @@ private fun createFakeArgumentsForReference(
 }
 
 class FirFakeArgumentForCallableReference(
-    val index: Int
+    konst index: Int
 ) : FirExpression() {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = null
 
-    override val typeRef: FirTypeRef
+    override konst typeRef: FirTypeRef
         get() = shouldNotBeCalled()
 
-    override val annotations: List<FirAnnotation>
+    override konst annotations: List<FirAnnotation>
         get() = shouldNotBeCalled()
 
     override fun replaceTypeRef(newTypeRef: FirTypeRef) {
@@ -438,7 +438,7 @@ private fun createKPropertyType(
     returnTypeRef: FirResolvedTypeRef,
     candidate: Candidate,
 ): ConeKotlinType {
-    val propertyType = returnTypeRef.type
+    konst propertyType = returnTypeRef.type
     return org.jetbrains.kotlin.fir.resolve.createKPropertyType(
         receiverType,
         propertyType,
@@ -449,7 +449,7 @@ private fun createKPropertyType(
 private fun FirVariable.canBeMutableReference(candidate: Candidate): Boolean {
     if (!isVar) return false
     if (this is FirField) return true
-    val original = this.unwrapFakeOverridesOrDelegated()
+    konst original = this.unwrapFakeOverridesOrDelegated()
     return original.source?.kind == KtFakeSourceElementKind.PropertyFromParameter ||
             (original.setter is FirMemberDeclaration &&
                     candidate.callInfo.session.visibilityChecker.isVisible(original.setter!!, candidate))

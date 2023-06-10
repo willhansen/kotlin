@@ -12,12 +12,12 @@ fun main() {
 fun test1() {
     ensureGetsCollectedFrozenAndNotFrozen { LazyCapturesThis() }
     ensureGetsCollectedFrozenAndNotFrozen {
-        val l = LazyCapturesThis()
+        konst l = LazyCapturesThis()
         l.bar
         l
     }
     ensureGetsCollected {
-        val l = LazyCapturesThis().freeze()
+        konst l = LazyCapturesThis().freeze()
         l.bar
         l
     }
@@ -25,18 +25,18 @@ fun test1() {
 
 class LazyCapturesThis {
     fun foo() = 42
-    val bar by lazy { foo() }
+    konst bar by lazy { foo() }
 }
 
 fun test2() {
     ensureGetsCollectedFrozenAndNotFrozen { Throwable() }
     ensureGetsCollectedFrozenAndNotFrozen {
-        val throwable = Throwable()
+        konst throwable = Throwable()
         throwable.getStackTrace()
         throwable
     }
     ensureGetsCollected {
-        val throwable = Throwable().freeze()
+        konst throwable = Throwable().freeze()
         throwable.getStackTrace()
         throwable
     }
@@ -48,7 +48,7 @@ fun ensureGetsCollectedFrozenAndNotFrozen(create: () -> Any) {
 }
 
 fun ensureGetsCollected(create: () -> Any) {
-    val ref = makeWeakRef(create)
+    konst ref = makeWeakRef(create)
     kotlin.native.runtime.GC.collect()
     assertNull(ref.get())
 }

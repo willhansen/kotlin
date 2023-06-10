@@ -2,13 +2,13 @@
 // FILE: E.java
 public enum E {
     OK(), A();
-    public static void values(boolean b) {}
+    public static void konstues(boolean b) {}
 }
 
 // FILE: test.kt
 
 fun f(e: E) = when (e) {
-    E.A -> E.values()[0].toString()
+    E.A -> E.konstues()[0].toString()
     else -> "?"
 }
 

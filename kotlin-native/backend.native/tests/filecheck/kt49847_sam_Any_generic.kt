@@ -14,7 +14,7 @@ fun baz(x: Any): Int = x.hashCode()
 // CHECK-NOT: Int-unbox
 // CHECK: ret void
 fun main() {
-    val foo: Foo<Int> = Foo(::baz)
+    konst foo: Foo<Int> = Foo(::baz)
     if( foo.bar(42) == 42 )
         println("passed")
 }

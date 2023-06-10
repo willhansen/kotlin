@@ -23,78 +23,78 @@ import org.jetbrains.kotlin.gradle.utils.toSetOrEmpty
 import org.jetbrains.kotlin.project.model.LanguageSettings
 
 internal sealed class KotlinCompilationInfo {
-    abstract val origin: Any
-    abstract val project: Project
-    abstract val platformType: KotlinPlatformType
-    abstract val targetDisambiguationClassifier: String?
-    abstract val compilationName: String
-    abstract val moduleName: String
-    abstract val compilerOptions: HasCompilerOptions<*>
-    abstract val compileKotlinTaskName: String
-    abstract val compileAllTaskName: String
-    abstract val languageSettings: LanguageSettings
-    abstract val friendPaths: FileCollection
-    abstract val refinesPaths: FileCollection
-    abstract val isMain: Boolean
-    abstract val classesDirs: ConfigurableFileCollection
-    abstract val compileDependencyFiles: FileCollection
-    abstract val sources: List<SourceDirectorySet>
-    abstract val displayName: String
+    abstract konst origin: Any
+    abstract konst project: Project
+    abstract konst platformType: KotlinPlatformType
+    abstract konst targetDisambiguationClassifier: String?
+    abstract konst compilationName: String
+    abstract konst moduleName: String
+    abstract konst compilerOptions: HasCompilerOptions<*>
+    abstract konst compileKotlinTaskName: String
+    abstract konst compileAllTaskName: String
+    abstract konst languageSettings: LanguageSettings
+    abstract konst friendPaths: FileCollection
+    abstract konst refinesPaths: FileCollection
+    abstract konst isMain: Boolean
+    abstract konst classesDirs: ConfigurableFileCollection
+    abstract konst compileDependencyFiles: FileCollection
+    abstract konst sources: List<SourceDirectorySet>
+    abstract konst displayName: String
 
-    class TCS(val compilation: KotlinCompilation<*>) : KotlinCompilationInfo() {
+    class TCS(konst compilation: KotlinCompilation<*>) : KotlinCompilationInfo() {
 
-        override val origin: KotlinCompilation<*> = compilation
+        override konst origin: KotlinCompilation<*> = compilation
 
-        override val project: Project
+        override konst project: Project
             get() = origin.project
 
-        override val platformType: KotlinPlatformType
+        override konst platformType: KotlinPlatformType
             get() = origin.platformType
 
-        override val targetDisambiguationClassifier: String?
+        override konst targetDisambiguationClassifier: String?
             get() = origin.target.disambiguationClassifier
 
-        override val compilationName: String
+        override konst compilationName: String
             get() = origin.compilationName
 
-        override val moduleName: String
+        override konst moduleName: String
             get() = origin.moduleNameForCompilation().get()
 
-        override val compilerOptions: HasCompilerOptions<*>
+        override konst compilerOptions: HasCompilerOptions<*>
             get() = origin.compilerOptions
 
-        override val compileKotlinTaskName: String
+        override konst compileKotlinTaskName: String
             get() = origin.compileKotlinTaskName
 
-        override val compileAllTaskName: String
+        override konst compileAllTaskName: String
             get() = origin.compileAllTaskName
 
-        override val languageSettings: LanguageSettings
+        override konst languageSettings: LanguageSettings
             get() = origin.defaultSourceSet.languageSettings
 
-        override val friendPaths: FileCollection
+        override konst friendPaths: FileCollection
             get() = project.filesProvider { origin.internal.friendPaths }
 
-        override val refinesPaths: FileCollection
+        override konst refinesPaths: FileCollection
             get() = project.filesProvider files@{
-                val metadataTarget = origin.target as? KotlinMetadataTarget ?: return@files emptyList<Any>()
+                konst metadataTarget = origin.target as? KotlinMetadataTarget ?: return@files emptyList<Any>()
                 origin.kotlinSourceSets.dependsOnClosure
                     .mapNotNull { sourceSet -> metadataTarget.compilations.findByName(sourceSet.name)?.output?.classesDirs }
             }
 
-        override val isMain: Boolean
+        override konst isMain: Boolean
             get() = origin.isMain()
 
-        override val classesDirs: ConfigurableFileCollection
+        override konst classesDirs: ConfigurableFileCollection
             get() = origin.output.classesDirs
 
-        override val compileDependencyFiles: FileCollection
+        override konst compileDependencyFiles: FileCollection
             get() = project.filesProvider { origin.compileDependencyFiles }
 
-        override val sources: List<SourceDirectorySet>
+        override konst sources: List<SourceDirectorySet>
             get() = origin.allKotlinSourceSets.map { it.kotlin }
 
-        override val displayName: String
+        override konst displayName: String
             get() = "compilation '${compilation.name}' in target '${compilation.target.name}'"
 
         override fun toString(): String {
@@ -102,64 +102,64 @@ internal sealed class KotlinCompilationInfo {
         }
     }
 
-    class KPM(val compilationData: GradleKpmCompilationData<*>) : KotlinCompilationInfo() {
+    class KPM(konst compilationData: GradleKpmCompilationData<*>) : KotlinCompilationInfo() {
 
-        override val origin: GradleKpmCompilationData<*> = compilationData
+        override konst origin: GradleKpmCompilationData<*> = compilationData
 
-        override val project: Project
+        override konst project: Project
             get() = origin.project
 
-        override val platformType: KotlinPlatformType
+        override konst platformType: KotlinPlatformType
             get() = origin.platformType
 
-        override val targetDisambiguationClassifier: String?
+        override konst targetDisambiguationClassifier: String?
             get() = origin.compilationClassifier
 
-        override val compilationName: String
+        override konst compilationName: String
             get() = origin.compilationPurpose
 
-        override val moduleName: String
+        override konst moduleName: String
             get() = origin.moduleName
 
-        override val compilerOptions: HasCompilerOptions<*>
+        override konst compilerOptions: HasCompilerOptions<*>
             get() = origin.compilerOptions
 
-        override val compileKotlinTaskName: String
+        override konst compileKotlinTaskName: String
             get() = origin.compileKotlinTaskName
 
-        override val compileAllTaskName: String
+        override konst compileAllTaskName: String
             get() = origin.compileAllTaskName
 
-        override val languageSettings: LanguageSettings
+        override konst languageSettings: LanguageSettings
             get() = origin.languageSettings
 
-        override val friendPaths: FileCollection
+        override konst friendPaths: FileCollection
             get() = project.filesProvider { origin.friendPaths }
 
-        override val refinesPaths: FileCollection
+        override konst refinesPaths: FileCollection
             get() = project.filesProvider files@{
-                val compilationData = origin as? GradleKpmAbstractFragmentMetadataCompilationData<*> ?: return@files emptyList<Any>()
-                val fragment = compilationData.fragment
+                konst compilationData = origin as? GradleKpmAbstractFragmentMetadataCompilationData<*> ?: return@files emptyList<Any>()
+                konst fragment = compilationData.fragment
 
                 fragment.refinesClosure.minus(fragment).map {
-                    val compilation = compilationData.metadataCompilationRegistry.getForFragmentOrNull(it) ?: return@map project.files()
+                    konst compilation = compilationData.metadataCompilationRegistry.getForFragmentOrNull(it) ?: return@map project.files()
                     compilation.output.classesDirs
                 }
             }
 
-        override val isMain: Boolean
+        override konst isMain: Boolean
             get() = origin.compilationPurpose == GradleKpmModule.MAIN_MODULE_NAME
 
-        override val classesDirs: ConfigurableFileCollection
+        override konst classesDirs: ConfigurableFileCollection
             get() = origin.output.classesDirs
 
-        override val compileDependencyFiles: FileCollection
+        override konst compileDependencyFiles: FileCollection
             get() = project.filesProvider { origin.compileDependencyFiles }
 
-        override val sources: List<SourceDirectorySet>
-            get() = origin.kotlinSourceDirectoriesByFragmentName.values.toList()
+        override konst sources: List<SourceDirectorySet>
+            get() = origin.kotlinSourceDirectoriesByFragmentName.konstues.toList()
 
-        override val displayName: String
+        override konst displayName: String
             get() = origin.toString()
 
         override fun toString(): String {
@@ -172,16 +172,16 @@ internal fun KotlinCompilationInfo(compilation: KotlinCompilation<*>): KotlinCom
     return KotlinCompilationInfo.TCS(compilation)
 }
 
-internal val KotlinCompilationInfo.tcsOrNull: KotlinCompilationInfo.TCS?
+internal konst KotlinCompilationInfo.tcsOrNull: KotlinCompilationInfo.TCS?
     get() = when (this) {
         is KotlinCompilationInfo.KPM -> null
         is KotlinCompilationInfo.TCS -> this
     }
 
-internal val KotlinCompilationInfo.tcs: KotlinCompilationInfo.TCS
+internal konst KotlinCompilationInfo.tcs: KotlinCompilationInfo.TCS
     get() = this as KotlinCompilationInfo.TCS
 
-internal val KotlinCompilationInfo.kpmOrNull: KotlinCompilationInfo.KPM?
+internal konst KotlinCompilationInfo.kpmOrNull: KotlinCompilationInfo.KPM?
     get() = when (this) {
         is KotlinCompilationInfo.KPM -> this
         is KotlinCompilationInfo.TCS -> null

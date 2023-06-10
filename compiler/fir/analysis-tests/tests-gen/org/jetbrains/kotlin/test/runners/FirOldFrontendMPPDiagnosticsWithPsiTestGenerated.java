@@ -801,9 +801,9 @@ public class FirOldFrontendMPPDiagnosticsWithPsiTestGenerated extends AbstractFi
         }
 
         @Test
-        @TestMetadata("valueParameterModifiers.kt")
+        @TestMetadata("konstueParameterModifiers.kt")
         public void testValueParameterModifiers() throws Exception {
-            runTest("compiler/testData/diagnostics/tests/multiplatform/topLevelFun/valueParameterModifiers.kt");
+            runTest("compiler/testData/diagnostics/tests/multiplatform/topLevelFun/konstueParameterModifiers.kt");
         }
     }
 

@@ -3,9 +3,9 @@ package
 public fun foo(): kotlin.Unit
 
 public final class IntWrapper {
-    public constructor IntWrapper(/*0*/ @SomeOptInMarker @OtherOptInMarker value: kotlin.Int)
-    @get:SomeOptInMarker @get:OtherOptInMarker public final val isEven: kotlin.Boolean
-    public final val value: kotlin.Int
+    public constructor IntWrapper(/*0*/ @SomeOptInMarker @OtherOptInMarker konstue: kotlin.Int)
+    @get:SomeOptInMarker @get:OtherOptInMarker public final konst isEven: kotlin.Boolean
+    public final konst konstue: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

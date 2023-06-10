@@ -4,14 +4,14 @@
 
 fun foo() = B.bar()
 
-val life = 42
+konst life = 42
 
 interface A {
     fun bar(): Int
 }
 
-val B = object : A {
+konst B = object : A {
     override fun bar() = life
 }
 
-val rv = foo()
+konst rv = foo()

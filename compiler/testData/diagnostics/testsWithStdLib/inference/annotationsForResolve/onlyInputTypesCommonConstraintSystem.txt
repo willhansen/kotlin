@@ -34,7 +34,7 @@ public final class InB</*0*/ in C : Bound> {
 
 public final class Inv</*0*/ I> {
     public constructor Inv</*0*/ I>(/*0*/ v: I)
-    public final val v: I
+    public final konst v: I
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -42,7 +42,7 @@ public final class Inv</*0*/ I> {
 
 public final class InvB</*0*/ I : Bound> {
     public constructor InvB</*0*/ I : Bound>(/*0*/ v: I)
-    public final val v: I
+    public final konst v: I
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -50,7 +50,7 @@ public final class InvB</*0*/ I : Bound> {
 
 public final class Out</*0*/ out O> {
     public constructor Out</*0*/ out O>(/*0*/ v: O)
-    public final val v: O
+    public final konst v: O
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -58,7 +58,7 @@ public final class Out</*0*/ out O> {
 
 public final class OutB</*0*/ out O : Bound> {
     public constructor OutB</*0*/ out O : Bound>(/*0*/ v: O)
-    public final val v: O
+    public final konst v: O
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

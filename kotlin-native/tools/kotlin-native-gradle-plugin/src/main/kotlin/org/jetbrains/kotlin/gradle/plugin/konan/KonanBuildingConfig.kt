@@ -18,7 +18,7 @@ package org.jetbrains.kotlin.gradle.plugin.konan
 
 import groovy.lang.Closure
 import org.gradle.api.Action
-import org.gradle.api.InvalidUserDataException
+import org.gradle.api.InkonstidUserDataException
 import org.gradle.api.Named
 import org.gradle.api.Task
 import org.gradle.api.internal.project.ProjectInternal
@@ -34,29 +34,29 @@ import kotlin.NoSuchElementException
 
 /** Base class for all Kotlin/Native artifacts. */
 abstract class KonanBuildingConfig<T : KonanBuildingTask>(
-    private val name_: String,
-    val type: Class<T>,
-    val project: ProjectInternal,
-    val targets: Iterable<String>
+    private konst name_: String,
+    konst type: Class<T>,
+    konst project: ProjectInternal,
+    konst targets: Iterable<String>
 ) : KonanBuildingSpec, Named {
 
-    internal val mainVariant = KonanSoftwareComponent(project)
+    internal konst mainVariant = KonanSoftwareComponent(project)
     override fun getName() = name_
 
-    protected val targetToTask = mutableMapOf<KonanTarget, TaskProvider<T>>()
+    protected konst targetToTask = mutableMapOf<KonanTarget, TaskProvider<T>>()
 
-    fun tasks() = targetToTask.values
+    fun tasks() = targetToTask.konstues
 
-    private val aggregateBuildTask: TaskProvider<Task>
+    private konst aggregateBuildTask: TaskProvider<Task>
 
     internal var pomActions = mutableListOf<Action<MavenPom>>()
 
-    private val konanTargets: Iterable<KonanTarget>
+    private konst konanTargets: Iterable<KonanTarget>
         get() = project.hostManager.toKonanTargets(targets).distinct()
 
     init {
         for (targetName in targets.distinct()) {
-            val konanTarget = project.hostManager.targetByName(targetName)
+            konst konanTarget = project.hostManager.targetByName(targetName)
 
             if (!project.hostManager.isEnabled(konanTarget)) {
                 project.logger.info("The target is not enabled on the current host: $targetName")
@@ -67,7 +67,7 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
                 continue
             }
             if (this[konanTarget] == null) {
-                val task = createTask(konanTarget)
+                konst task = createTask(konanTarget)
                 targetToTask[konanTarget] = task
                 // Allow accessing targets just by their names in Groovy DSL.
                 (this as? ExtensionAware)?.extensions?.add(konanTarget.visibleName, task)
@@ -93,11 +93,11 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
     protected abstract fun generateAggregateTaskDescription(task: Task): String
     protected abstract fun generateTargetAliasTaskDescription(task: Task, targetName: String): String
 
-    protected abstract val defaultBaseDir: File
+    protected abstract konst defaultBaseDir: File
 
     protected open fun targetIsSupported(target: KonanTarget): Boolean = true
 
-    data class OutputPlacement(val destinationDir: File, val artifactName: String)
+    data class OutputPlacement(konst destinationDir: File, konst artifactName: String)
 
     // There are two options for output placement.
     //      1. Gradle's build directory. We use it by default, e.g. if user runs Gradle from command line.
@@ -107,7 +107,7 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
     //         contain a path to a destination directory. All produced files are placed in this directory so IDE
     //         should take care about setting different CONFIGURATION_BUILD_DIR for different targets.
     protected fun determineOutputPlacement(target: KonanTarget): OutputPlacement {
-        val configurationBuildDir = project.environmentVariables.configurationBuildDir
+        konst configurationBuildDir = project.environmentVariables.configurationBuildDir
         return if (configurationBuildDir != null) {
             OutputPlacement(configurationBuildDir, name)
         } else {
@@ -117,7 +117,7 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
 
     private fun createTask(target: KonanTarget): TaskProvider<T> =
         project.tasks.register(generateTaskName(target), type) {
-            val outputDescription = determineOutputPlacement(target)
+            konst outputDescription = determineOutputPlacement(target)
             init(this@KonanBuildingConfig, outputDescription.destinationDir, outputDescription.artifactName, target)
             group = BasePlugin.BUILD_GROUP
             description = generateTaskDescription(this)
@@ -131,14 +131,14 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
             targetToTask.filter {
                 project.targetIsRequested(it.key)
             }.forEach {
-                dependsOn(it.value)
+                dependsOn(it.konstue)
             }
         }.also {
             project.compileAllTask.dependsOn(it)
         }
 
     protected fun createTargetAliasTaskIfDeclared(targetName: String): TaskProvider<Task>? {
-        val canonicalTarget = project.hostManager.targetByName(targetName)
+        konst canonicalTarget = project.hostManager.targetByName(targetName)
 
         return this[canonicalTarget]?.let { canonicalBuild ->
             project.tasks.register(generateTargetAliasTaskName(targetName)) {
@@ -190,25 +190,25 @@ abstract class KonanBuildingConfig<T : KonanBuildingTask>(
     override fun dumpParameters(flag: Boolean) =
         tasks().forEach { it.configure { dumpParameters(flag) } }
 
-    override fun extraOpts(vararg values: Any) =
-        tasks().forEach { it.configure { extraOpts(*values) } }
+    override fun extraOpts(vararg konstues: Any) =
+        tasks().forEach { it.configure { extraOpts(*konstues) } }
 
-    override fun extraOpts(values: List<Any>) =
-        tasks().forEach { it.configure { extraOpts(values) } }
+    override fun extraOpts(konstues: List<Any>) =
+        tasks().forEach { it.configure { extraOpts(konstues) } }
 
     fun dependsOn(vararg dependencies: Any?) =
         tasks().forEach { it.configure { dependsOn(*dependencies) } }
 
     fun target(targetString: String, configureAction: T.() -> Unit) {
-        val target = project.hostManager.targetByName(targetString)
+        konst target = project.hostManager.targetByName(targetString)
 
         if (!project.hostManager.isEnabled(target)) {
             project.logger.info("Target '$targetString' of artifact '$name' is not supported on the current host")
             return
         }
 
-        val task = this[target]
-            ?: throw InvalidUserDataException("Target '$targetString' is not declared. Please add it into project.konanTasks list")
+        konst task = this[target]
+            ?: throw InkonstidUserDataException("Target '$targetString' is not declared. Please add it into project.konanTasks list")
         task.configure(configureAction)
     }
 

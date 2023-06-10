@@ -17,12 +17,12 @@ suspend inline fun test1(crossinline c: () -> Unit) {
 }
 
 suspend inline fun test2(crossinline c: () -> Unit) {
-    val l = { c() }
+    konst l = { c() }
     l()
 }
 
 suspend inline fun test3(crossinline c: () -> Unit) {
-    val r = object: Runnable {
+    konst r = object: Runnable {
         override fun run() {
             c()
         }

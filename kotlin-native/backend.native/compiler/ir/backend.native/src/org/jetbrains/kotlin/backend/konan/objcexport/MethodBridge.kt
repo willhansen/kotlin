@@ -16,11 +16,11 @@ internal sealed class TypeBridge
 internal object ReferenceBridge : TypeBridge()
 
 internal data class BlockPointerBridge(
-        val numberOfParameters: Int,
-        val returnsVoid: Boolean
+        konst numberOfParameters: Int,
+        konst returnsVoid: Boolean
 ) : TypeBridge()
 
-internal data class ValueTypeBridge(val objCValueType: ObjCValueType) : TypeBridge()
+internal data class ValueTypeBridge(konst objCValueType: ObjCValueType) : TypeBridge()
 
 internal sealed class MethodBridgeParameter
 
@@ -33,21 +33,21 @@ internal sealed class MethodBridgeReceiver : MethodBridgeParameter() {
 internal object MethodBridgeSelector : MethodBridgeParameter()
 
 internal sealed class MethodBridgeValueParameter : MethodBridgeParameter() {
-    data class Mapped(val bridge: TypeBridge) : MethodBridgeValueParameter()
+    data class Mapped(konst bridge: TypeBridge) : MethodBridgeValueParameter()
     object ErrorOutParameter : MethodBridgeValueParameter()
-    data class SuspendCompletion(val useUnitCompletion: Boolean) : MethodBridgeValueParameter()
+    data class SuspendCompletion(konst useUnitCompletion: Boolean) : MethodBridgeValueParameter()
 }
 
 internal data class MethodBridge(
-        val returnBridge: ReturnValue,
-        val receiver: MethodBridgeReceiver,
-        val valueParameters: List<MethodBridgeValueParameter>
+        konst returnBridge: ReturnValue,
+        konst receiver: MethodBridgeReceiver,
+        konst konstueParameters: List<MethodBridgeValueParameter>
 ) {
 
     sealed class ReturnValue {
         object Void : ReturnValue()
         object HashCode : ReturnValue()
-        data class Mapped(val bridge: TypeBridge) : ReturnValue()
+        data class Mapped(konst bridge: TypeBridge) : ReturnValue()
         sealed class Instance : ReturnValue() {
             object InitResult : Instance()
             object FactoryResult : Instance()
@@ -55,32 +55,32 @@ internal data class MethodBridge(
 
         sealed class WithError : ReturnValue() {
             object Success : WithError()
-            data class ZeroForError(val successBridge: ReturnValue, val successMayBeZero: Boolean) : WithError()
+            data class ZeroForError(konst successBridge: ReturnValue, konst successMayBeZero: Boolean) : WithError()
         }
 
         object Suspend : ReturnValue()
     }
 
-    val paramBridges: List<MethodBridgeParameter> =
-            listOf(receiver) + MethodBridgeSelector + valueParameters
+    konst paramBridges: List<MethodBridgeParameter> =
+            listOf(receiver) + MethodBridgeSelector + konstueParameters
 
     // TODO: it is not exactly true in potential future cases.
-    val isInstance: Boolean get() = when (receiver) {
+    konst isInstance: Boolean get() = when (receiver) {
         MethodBridgeReceiver.Static,
         MethodBridgeReceiver.Factory -> false
 
         MethodBridgeReceiver.Instance -> true
     }
 
-    val returnsError: Boolean
+    konst returnsError: Boolean
         get() = returnBridge is ReturnValue.WithError
 }
 
-internal fun MethodBridge.valueParametersAssociated(
+internal fun MethodBridge.konstueParametersAssociated(
         descriptor: FunctionDescriptor
 ): List<Pair<MethodBridgeValueParameter, ParameterDescriptor?>> {
-    val kotlinParameters = descriptor.allParameters.iterator()
-    val skipFirstKotlinParameter = when (this.receiver) {
+    konst kotlinParameters = descriptor.allParameters.iterator()
+    konst skipFirstKotlinParameter = when (this.receiver) {
         MethodBridgeReceiver.Static -> false
         MethodBridgeReceiver.Factory, MethodBridgeReceiver.Instance -> true
     }
@@ -88,7 +88,7 @@ internal fun MethodBridge.valueParametersAssociated(
         kotlinParameters.next()
     }
 
-    return this.valueParameters.map {
+    return this.konstueParameters.map {
         when (it) {
             is MethodBridgeValueParameter.Mapped -> it to kotlinParameters.next()
 
@@ -101,7 +101,7 @@ internal fun MethodBridge.valueParametersAssociated(
 internal fun MethodBridge.parametersAssociated(
         irFunction: IrFunction
 ): List<Pair<MethodBridgeParameter, IrValueParameter?>> {
-    val kotlinParameters = irFunction.allParameters.iterator()
+    konst kotlinParameters = irFunction.allParameters.iterator()
 
     return this.paramBridges.map {
         when (it) {

@@ -15,9 +15,9 @@ private fun test() = "K"
 
 fun box(): String {
 
-    val clazz = Class.forName("test.TestKt")
+    konst clazz = Class.forName("test.TestKt")
     assertEquals(2, clazz.declaredMethods.size, "Facade should have only box method")
-    val methods = clazz.declaredMethods.map { it.name }
+    konst methods = clazz.declaredMethods.map { it.name }
     assertTrue(methods.contains("box"), "Facade should have box method")
     assertTrue(methods.contains("getProp"), "Facade should have box method")
 

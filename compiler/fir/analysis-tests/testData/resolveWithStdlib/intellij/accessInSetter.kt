@@ -1,11 +1,11 @@
 class DrawableGrid(var isEnabled: Boolean)
 
 class My {
-    private val drawableGrid = createDrawableGrid()
+    private konst drawableGrid = createDrawableGrid()
 
     private var useAll = false
-        set(value) {
-            drawableGrid.isEnabled = !value
+        set(konstue) {
+            drawableGrid.isEnabled = !konstue
         }
 
     private fun createDrawableGrid() = DrawableGrid(false).apply {
@@ -14,12 +14,12 @@ class My {
 }
 
 class Your {
-    private val drawableGrid = createDrawableGrid()
+    private konst drawableGrid = createDrawableGrid()
 
     private var useAll
         get() = false
-        set(value) {
-            drawableGrid.isEnabled = !value
+        set(konstue) {
+            drawableGrid.isEnabled = !konstue
         }
 
     private fun createDrawableGrid() = DrawableGrid(false).apply {

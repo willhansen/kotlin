@@ -1,8 +1,8 @@
 // TARGET_BACKEND: JS_IR
 
-val d1: dynamic = 1
+konst d1: dynamic = 1
 
-val p: Int = 1
+konst p: Int = 1
 
 var d2: dynamic = p
 
@@ -13,11 +13,11 @@ fun test1(s: String) {
 }
 
 fun test2(a: Any) {
-    val d: dynamic = a
+    konst d: dynamic = a
 }
 
 fun test3(a: Any?) {
-    val d: dynamic = a
+    konst d: dynamic = a
 }
 
 fun test4(a: Any, s: String, na: Any?) {

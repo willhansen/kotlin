@@ -25,14 +25,14 @@ import org.jetbrains.kotlin.test.utils.withSuffixAndExtension
 import java.io.File
 
 class BytecodeListingHandler(testServices: TestServices) : JvmBinaryArtifactHandler(testServices) {
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(CodegenTestDirectives)
 
-    private val multiModuleInfoDumper = MultiModuleInfoDumper()
+    private konst multiModuleInfoDumper = MultiModuleInfoDumper()
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Jvm) {
         if (CHECK_BYTECODE_LISTING !in module.directives) return
-        val dump = BytecodeListingTextCollectingVisitor.getText(
+        konst dump = BytecodeListingTextCollectingVisitor.getText(
             info.classFileFactory,
             BytecodeListingTextCollectingVisitor.Filter.ForCodegenTests,
             withSignatures = WITH_SIGNATURES in module.directives,
@@ -45,21 +45,21 @@ class BytecodeListingHandler(testServices: TestServices) : JvmBinaryArtifactHand
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {
         if (multiModuleInfoDumper.isEmpty()) return
 
-        val sourceFile = testServices.moduleStructure.originalTestDataFiles.first()
-        val defaultTxtFile = sourceFile.withExtension(".txt")
-        val irTxtFile = sourceFile.withExtension(".ir.txt")
-        val firTxtFile = sourceFile.withExtension(".fir.txt")
+        konst sourceFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst defaultTxtFile = sourceFile.withExtension(".txt")
+        konst irTxtFile = sourceFile.withExtension(".ir.txt")
+        konst firTxtFile = sourceFile.withExtension(".fir.txt")
 
-        val isFir = testServices.defaultsProvider.defaultFrontend == FrontendKinds.FIR
-        val isIr = testServices.defaultsProvider.defaultTargetBackend?.isIR == true
+        konst isFir = testServices.defaultsProvider.defaultFrontend == FrontendKinds.FIR
+        konst isIr = testServices.defaultsProvider.defaultTargetBackend?.isIR == true
 
-        val actualFile = when {
+        konst actualFile = when {
             isFir -> firTxtFile.takeIf { it.exists() } ?: irTxtFile.takeIf { it.exists() } ?: defaultTxtFile
             isIr -> irTxtFile.takeIf { it.exists() } ?: defaultTxtFile
             else -> defaultTxtFile
         }
 
-        val goldenFile = when {
+        konst goldenFile = when {
             isFir -> irTxtFile.takeIf { it.exists() } ?: defaultTxtFile
             else -> defaultTxtFile
         }

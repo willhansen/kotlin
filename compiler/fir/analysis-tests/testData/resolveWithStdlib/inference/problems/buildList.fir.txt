@@ -4,7 +4,7 @@ FILE: buildList.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val tag: R|kotlin/String| = R|<local>/tag|
+        public final konst tag: R|kotlin/String| = R|<local>/tag|
             public get(): R|kotlin/String|
 
     }

@@ -7,9 +7,9 @@ public record JRecord(int x, CharSequence y) {}
 
 <!UNSUPPORTED_FEATURE!>@JvmRecord<!>
 class MyRec(
-    val x: String,
-    val y: Int,
-    vararg val z: Double,
+    konst x: String,
+    konst y: Int,
+    vararg konst z: Double,
 )
 
 fun foo(jr: JRecord) {

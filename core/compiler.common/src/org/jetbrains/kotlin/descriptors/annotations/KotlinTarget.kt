@@ -10,14 +10,14 @@ import java.util.*
 
 // NOTE: this enum must have the same entries with kotlin.annotation.AnnotationTarget,
 // and may also have some additional entries
-enum class KotlinTarget(val description: String, val isDefault: Boolean = true) {
+enum class KotlinTarget(konst description: String, konst isDefault: Boolean = true) {
     CLASS("class"),                            // includes CLASS_ONLY, OBJECT, COMPANION_OBJECT, OBJECT_LITERAL, INTERFACE, *_CLASS but not ENUM_ENTRY
     ANNOTATION_CLASS("annotation class"),
     TYPE_PARAMETER("type parameter", false),
     PROPERTY("property"),                      // includes *_PROPERTY (with and without backing field), PROPERTY_PARAMETER, ENUM_ENTRY
     FIELD("field"),                            // includes MEMBER_PROPERTY_WITH_FIELD, TOP_LEVEL_PROPERTY_WITH_FIELD, PROPERTY_PARAMETER, ENUM_ENTRY
     LOCAL_VARIABLE("local variable"),
-    VALUE_PARAMETER("value parameter"),
+    VALUE_PARAMETER("konstue parameter"),
     CONSTRUCTOR("constructor"),
     FUNCTION("function"),                      // includes *_FUNCTION and FUNCTION_LITERAL
     PROPERTY_GETTER("getter"),
@@ -68,31 +68,31 @@ enum class KotlinTarget(val description: String, val isDefault: Boolean = true) 
 
     companion object {
 
-        private val map = HashMap<String, KotlinTarget>()
+        private konst map = HashMap<String, KotlinTarget>()
 
         init {
-            for (target in values()) {
+            for (target in konstues()) {
                 map[target.name] = target
             }
         }
 
-        fun valueOrNull(name: String): KotlinTarget? = map[name]
+        fun konstueOrNull(name: String): KotlinTarget? = map[name]
 
-        val DEFAULT_TARGET_SET: Set<KotlinTarget> = values().filter { it.isDefault }.toSet()
-        val ALL_TARGET_SET: Set<KotlinTarget> = values().toSet()
+        konst DEFAULT_TARGET_SET: Set<KotlinTarget> = konstues().filter { it.isDefault }.toSet()
+        konst ALL_TARGET_SET: Set<KotlinTarget> = konstues().toSet()
 
-        val ANNOTATION_CLASS_LIST = listOf(ANNOTATION_CLASS, CLASS)
-        val LOCAL_CLASS_LIST = listOf(LOCAL_CLASS, CLASS)
-        val CLASS_LIST = listOf(CLASS_ONLY, CLASS)
-        val COMPANION_OBJECT_LIST = listOf(COMPANION_OBJECT, OBJECT, CLASS)
-        val OBJECT_LIST = listOf(STANDALONE_OBJECT, OBJECT, CLASS)
-        val INTERFACE_LIST = listOf(INTERFACE, CLASS)
-        val ENUM_LIST = listOf(ENUM_CLASS, CLASS)
-        val ENUM_ENTRY_LIST = listOf(ENUM_ENTRY, PROPERTY, FIELD)
-        val PROPERTY_SETTER_LIST = listOf(PROPERTY_SETTER)
-        val PROPERTY_GETTER_LIST = listOf(PROPERTY_GETTER)
-        val FUNCTION_LIST = listOf(FUNCTION)
-        val FILE_LIST = listOf(FILE)
+        konst ANNOTATION_CLASS_LIST = listOf(ANNOTATION_CLASS, CLASS)
+        konst LOCAL_CLASS_LIST = listOf(LOCAL_CLASS, CLASS)
+        konst CLASS_LIST = listOf(CLASS_ONLY, CLASS)
+        konst COMPANION_OBJECT_LIST = listOf(COMPANION_OBJECT, OBJECT, CLASS)
+        konst OBJECT_LIST = listOf(STANDALONE_OBJECT, OBJECT, CLASS)
+        konst INTERFACE_LIST = listOf(INTERFACE, CLASS)
+        konst ENUM_LIST = listOf(ENUM_CLASS, CLASS)
+        konst ENUM_ENTRY_LIST = listOf(ENUM_ENTRY, PROPERTY, FIELD)
+        konst PROPERTY_SETTER_LIST = listOf(PROPERTY_SETTER)
+        konst PROPERTY_GETTER_LIST = listOf(PROPERTY_GETTER)
+        konst FUNCTION_LIST = listOf(FUNCTION)
+        konst FILE_LIST = listOf(FILE)
 
         fun classActualTargets(
             kind: ClassKind,
@@ -124,7 +124,7 @@ enum class KotlinTarget(val description: String, val isDefault: Boolean = true) 
             ClassKind.ENUM_ENTRY -> ENUM_ENTRY_LIST
         }
 
-        val USE_SITE_MAPPING: Map<AnnotationUseSiteTarget, KotlinTarget> = mapOf(
+        konst USE_SITE_MAPPING: Map<AnnotationUseSiteTarget, KotlinTarget> = mapOf(
             AnnotationUseSiteTarget.CONSTRUCTOR_PARAMETER to VALUE_PARAMETER,
             AnnotationUseSiteTarget.FIELD to FIELD,
             AnnotationUseSiteTarget.PROPERTY to PROPERTY,

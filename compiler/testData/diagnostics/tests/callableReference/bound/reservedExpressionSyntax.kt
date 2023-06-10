@@ -14,8 +14,8 @@ class b<T1, T2> {
 fun Int.foo() {}
 
 class Test {
-    val <T> List<T>.a: Int get() = size
-    val <T> List<T>.b: Int? get() = size
+    konst <T> List<T>.a: Int get() = size
+    konst <T> List<T>.b: Int? get() = size
 
     fun <T> List<T>.testCallable1(): () -> Unit = a::foo
     fun <T> List<T>.testCallable1a(): () -> Unit = <!RESERVED_SYNTAX_IN_CALLABLE_REFERENCE_LHS!>a<T><!>::foo

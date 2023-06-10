@@ -18,11 +18,11 @@ class ConfigurationsTest : TestCase() {
 
     @Test
     fun testHostConfigWithDefaultsFrom() {
-        val c0 = ScriptingHostConfiguration()
-        val c1 = ScriptingHostConfiguration {
+        konst c0 = ScriptingHostConfiguration()
+        konst c1 = ScriptingHostConfiguration {
             p1(1)
         }
-        val c2 = ScriptingHostConfiguration {
+        konst c2 = ScriptingHostConfiguration {
             p1(2)
             p2("yes")
             p4("local")
@@ -32,8 +32,8 @@ class ConfigurationsTest : TestCase() {
         assertEquals(c1, c0.withDefaultsFrom(c1))
         assertEquals(c1, c1.withDefaultsFrom(c1))
 
-        val c1c2 = c1.withDefaultsFrom(c2)
-        val c2c1 = c2.withDefaultsFrom(c1)
+        konst c1c2 = c1.withDefaultsFrom(c2)
+        konst c2c1 = c2.withDefaultsFrom(c1)
 
         assertEquals(1, c1c2[ScriptingHostConfiguration.p1])
         assertEquals("yes", c1c2[ScriptingHostConfiguration.p2])
@@ -44,14 +44,14 @@ class ConfigurationsTest : TestCase() {
     }
 }
 
-private val ScriptingHostConfigurationKeys.p1 by PropertiesCollection.key(-1)
-private val ScriptingHostConfigurationKeys.p2 by PropertiesCollection.key("-")
+private konst ScriptingHostConfigurationKeys.p1 by PropertiesCollection.key(-1)
+private konst ScriptingHostConfigurationKeys.p2 by PropertiesCollection.key("-")
 
-private val ScriptCompilationConfigurationKeys.p3 by PropertiesCollection.key<String>()
+private konst ScriptCompilationConfigurationKeys.p3 by PropertiesCollection.key<String>()
 
-private val delegatedConfig = ScriptCompilationConfiguration {
+private konst delegatedConfig = ScriptCompilationConfiguration {
     p3("from delegated")
 }
 
-private val ScriptingHostConfigurationKeys.p4 by PropertiesCollection.keyCopy(ScriptCompilationConfiguration.p3, { delegatedConfig })
+private konst ScriptingHostConfigurationKeys.p4 by PropertiesCollection.keyCopy(ScriptCompilationConfiguration.p3, { delegatedConfig })
 

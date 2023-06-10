@@ -19,10 +19,10 @@ import kotlin.reflect.jvm.*
 import kotlin.test.assertEquals
 
 fun box(): String {
-    val j = J(0, "")
+    konst j = J(0, "")
 
-    val jf = j::finalField
-    val jm = j::mutableField
+    konst jf = j::finalField
+    konst jm = j::mutableField
 
     assertEquals(0, jf.getter())
     assertEquals(0, jf.getter.call())

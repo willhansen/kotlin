@@ -27,19 +27,19 @@ object FirConstPropertyChecker : FirPropertyChecker() {
         if (!declaration.isConst) return
 
         if (declaration.isVar) {
-            val constModifier = declaration.getModifier(KtTokens.CONST_KEYWORD)
+            konst constModifier = declaration.getModifier(KtTokens.CONST_KEYWORD)
             constModifier?.let {
                 reporter.reportOn(it.source, FirErrors.WRONG_MODIFIER_TARGET, it.token, "vars", context)
             }
         }
 
-        val classKind = (context.containingDeclarations.lastOrNull() as? FirRegularClass)?.classKind
+        konst classKind = (context.containingDeclarations.lastOrNull() as? FirRegularClass)?.classKind
         if (classKind != ClassKind.OBJECT && context.containingDeclarations.size > 1) {
             reporter.reportOn(declaration.source, FirErrors.CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT, context)
             return
         }
 
-        val source = declaration.getter?.source
+        konst source = declaration.getter?.source
         if (source != null && source.kind !is KtFakeSourceElementKind) {
             reporter.reportOn(source, FirErrors.CONST_VAL_WITH_GETTER, context)
             return
@@ -50,13 +50,13 @@ object FirConstPropertyChecker : FirPropertyChecker() {
             return
         }
 
-        val initializer = declaration.initializer
+        konst initializer = declaration.initializer
         if (initializer == null) {
             reporter.reportOn(declaration.source, FirErrors.CONST_VAL_WITHOUT_INITIALIZER, context)
             return
         }
 
-        val type = declaration.returnTypeRef.coneType.fullyExpandedType(context.session)
+        konst type = declaration.returnTypeRef.coneType.fullyExpandedType(context.session)
         if ((type !is ConeErrorType) && !type.canBeUsedForConstVal()) {
             reporter.reportOn(declaration.source, FirErrors.TYPE_CANT_BE_USED_FOR_CONST_VAL, declaration.returnTypeRef.coneType, context)
             return

@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JsSourceMapEmbedMode(val mode: String) {
+enum class JsSourceMapEmbedMode(konst mode: String) {
     SOURCE_MAP_SOURCE_CONTENT_INLINING("inlining"),
     SOURCE_MAP_SOURCE_CONTENT_NEVER("never"),
     SOURCE_MAP_SOURCE_CONTENT_ALWAYS("always"),
@@ -13,7 +13,7 @@ enum class JsSourceMapEmbedMode(val mode: String) {
 
     companion object {
         fun fromMode(mode: String): JsSourceMapEmbedMode =
-            JsSourceMapEmbedMode.values().firstOrNull { it.mode == mode }
+            JsSourceMapEmbedMode.konstues().firstOrNull { it.mode == mode }
                 ?: throw IllegalArgumentException("Unknown JS source map embed mode: $mode")
     }
 }

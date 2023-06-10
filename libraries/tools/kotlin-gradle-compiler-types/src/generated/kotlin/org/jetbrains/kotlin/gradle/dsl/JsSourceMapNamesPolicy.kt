@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.gradle.dsl
 
-enum class JsSourceMapNamesPolicy(val policy: String) {
+enum class JsSourceMapNamesPolicy(konst policy: String) {
     SOURCE_MAP_NAMES_POLICY_FQ_NAMES("fully-qualified-names"),
     SOURCE_MAP_NAMES_POLICY_SIMPLE_NAMES("simple-names"),
     SOURCE_MAP_NAMES_POLICY_NO("no"),
@@ -13,7 +13,7 @@ enum class JsSourceMapNamesPolicy(val policy: String) {
 
     companion object {
         fun fromPolicy(policy: String): JsSourceMapNamesPolicy =
-            JsSourceMapNamesPolicy.values().firstOrNull { it.policy == policy }
+            JsSourceMapNamesPolicy.konstues().firstOrNull { it.policy == policy }
                 ?: throw IllegalArgumentException("Unknown JS source map names policy: $policy")
     }
 }

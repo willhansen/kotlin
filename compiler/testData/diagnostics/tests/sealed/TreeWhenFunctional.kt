@@ -1,7 +1,7 @@
 sealed class Tree {
     object Empty: Tree()
-    class Leaf(val x: Int): Tree()
-    class Node(val left: Tree, val right: Tree): Tree()
+    class Leaf(konst x: Int): Tree()
+    class Node(konst left: Tree, konst right: Tree): Tree()
 
     fun max(): Int = when(this) {
         is Empty -> -1

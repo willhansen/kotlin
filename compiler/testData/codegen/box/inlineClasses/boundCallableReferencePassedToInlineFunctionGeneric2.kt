@@ -4,22 +4,22 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcInt<T: Int>(val i: T) {
+konstue class IcInt<T: Int>(konst i: T) {
     fun simple(): String = i.toString()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcLong<T: Long>(val l: T) {
+konstue class IcLong<T: Long>(konst l: T) {
     fun simple(): String = l.toString()
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcAny<T: Any>(val a: T?) {
+konstue class IcAny<T: Any>(konst a: T?) {
     fun simple(): String = a?.toString() ?: "null"
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class IcOverIc<T: IcLong<Long>>(val o: T) {
+konstue class IcOverIc<T: IcLong<Long>>(konst o: T) {
     fun simple(): String = o.toString()
 }
 
@@ -30,18 +30,18 @@ fun testBoxed(i: IcInt<Int>?, l: IcLong<Long>?, a: IcAny<Int>?, o: IcOverIc<IcLo
     foo(i!!::simple) + foo(l!!::simple) + foo(a!!::simple) + foo(o!!::simple)
 
 fun testLocalVars(): String {
-    val i = IcInt(0)
-    val l = IcLong(1L)
-    val a = IcAny(2)
-    val o = IcOverIc(IcLong(3))
+    konst i = IcInt(0)
+    konst l = IcLong(1L)
+    konst a = IcAny(2)
+    konst o = IcOverIc(IcLong(3))
 
     return foo(i::simple) + foo(l::simple) + foo(a::simple) + foo(o::simple)
 }
 
-val ip = IcInt(1)
-val lp = IcLong(2L)
-val ap = IcAny(3)
-val op = IcOverIc(IcLong(4))
+konst ip = IcInt(1)
+konst lp = IcLong(2L)
+konst ap = IcAny(3)
+konst op = IcOverIc(IcLong(4))
 
 fun testGlobalProperties(): String =
     foo(ip::simple) + foo(lp::simple) + foo(ap::simple) + foo(op::simple)
@@ -56,10 +56,10 @@ fun testCapturedVars(): String {
 inline fun foo(init: () -> String): String = init()
 
 fun box(): String {
-    val i = IcInt(3)
-    val l = IcLong(4)
-    val a = IcAny(5)
-    val o = IcOverIc(IcLong(6))
+    konst i = IcInt(3)
+    konst l = IcLong(4)
+    konst a = IcAny(5)
+    konst o = IcOverIc(IcLong(6))
 
     if (testUnboxed(i, l, a, o) != "345IcLong(l=6)") return "Fail 1 ${testUnboxed(i, l, a, o)}"
     if (testBoxed(i, l, a, o) != "345IcLong(l=6)") return "Fail 2"

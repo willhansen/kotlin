@@ -18,7 +18,7 @@ fun expectUoe(block: () -> Any) {
 }
 
 fun box(): String {
-    val list = MyListIterator<String>() as java.util.ListIterator<String>
+    konst list = MyListIterator<String>() as java.util.ListIterator<String>
 
     expectUoe { list.set("") }
     expectUoe { list.add("") }

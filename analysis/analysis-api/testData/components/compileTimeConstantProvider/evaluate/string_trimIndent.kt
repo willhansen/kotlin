@@ -1,5 +1,5 @@
 // WITH_STDLIB
 
-const val CODE = <expr>"""
-   const val CODE = "const val CODE = ..." 
+const konst CODE = <expr>"""
+   const konst CODE = "const konst CODE = ..." 
 """.trimIndent()</expr>

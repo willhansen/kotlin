@@ -33,19 +33,19 @@ interface ErrorReportingContext {
 }
 
 interface CommonBackendContext : BackendContext, LoggingContext, ErrorReportingContext {
-    override val ir: Ir<CommonBackendContext>
+    override konst ir: Ir<CommonBackendContext>
 
-    val configuration: CompilerConfiguration
-    val scriptMode: Boolean
+    konst configuration: CompilerConfiguration
+    konst scriptMode: Boolean
 
     fun throwUninitializedPropertyAccessException(builder: IrBuilderWithScope, name: String): IrExpression {
-        val throwErrorFunction = ir.symbols.throwUninitializedPropertyAccessException.owner
+        konst throwErrorFunction = ir.symbols.throwUninitializedPropertyAccessException.owner
         return builder.irCall(throwErrorFunction).apply {
             putValueArgument(0, builder.irString(name))
         }
     }
 
-    val mapping: Mapping
+    konst mapping: Mapping
 
     // Adjust internal structures after a deep copy of some declarations.
     fun handleDeepCopy(
@@ -58,19 +58,19 @@ interface CommonBackendContext : BackendContext, LoggingContext, ErrorReportingC
         return false
     }
 
-    val preferJavaLikeCounterLoop: Boolean
+    konst preferJavaLikeCounterLoop: Boolean
         get() = false
 
-    val doWhileCounterLoopOrigin: IrStatementOrigin?
+    konst doWhileCounterLoopOrigin: IrStatementOrigin?
         get() = null
 
-    val inductionVariableOrigin: IrDeclarationOrigin
+    konst inductionVariableOrigin: IrDeclarationOrigin
         get() = IrDeclarationOrigin.IR_TEMPORARY_VARIABLE
 
-    val optimizeLoopsOverUnsignedArrays: Boolean
+    konst optimizeLoopsOverUnsignedArrays: Boolean
         get() = false
 
-    val optimizeNullChecksUsingKotlinNullability: Boolean
+    konst optimizeNullChecksUsingKotlinNullability: Boolean
         get() = true
 
     fun remapMultiFieldValueClassStructure(
@@ -81,15 +81,15 @@ interface CommonBackendContext : BackendContext, LoggingContext, ErrorReportingC
     /**
      * See [InlineClassesUtils].
      */
-    val inlineClassesUtils: InlineClassesUtils
+    konst inlineClassesUtils: InlineClassesUtils
         get() = DefaultInlineClassesUtils
 
-    val partialLinkageSupport: PartialLinkageSupportForLowerings
+    konst partialLinkageSupport: PartialLinkageSupportForLowerings
         get() = PartialLinkageSupportForLowerings.DISABLED
 }
 
 /**
- * Provides means for determining if a class should be treated as an inline/value class.
+ * Provides means for determining if a class should be treated as an inline/konstue class.
  *
  * In certain cases (for compatibility reasons) we don't want to mark a class as `inline`, but still want to treat it as one.
  *
@@ -106,7 +106,7 @@ interface InlineClassesUtils {
      * for some reason it can be called for classes which are not inline, e.g. `kotlin.Double`.
      */
     fun getInlineClassUnderlyingType(irClass: IrClass): IrType =
-        irClass.declarations.firstIsInstanceOrNull<IrConstructor>()?.takeIf { it.isPrimary }?.valueParameters?.get(0)?.type
+        irClass.declarations.firstIsInstanceOrNull<IrConstructor>()?.takeIf { it.isPrimary }?.konstueParameters?.get(0)?.type
             ?: error("Class has no primary constructor: ${irClass.fqNameWhenAvailable}")
 }
 

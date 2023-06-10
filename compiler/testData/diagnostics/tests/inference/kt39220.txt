@@ -1,7 +1,7 @@
 package
 
-public val kotlin.Int.x1: kotlin.String
-public val kotlin.String.x1: kotlin.String
+public konst kotlin.Int.x1: kotlin.String
+public konst kotlin.String.x1: kotlin.String
 public fun </*0*/ K> bar1(/*0*/ f: kotlin.reflect.KFunction2<K, kotlin.String, kotlin.String>): kotlin.Unit
 public fun </*0*/ K> bar10(/*0*/ f: kotlin.reflect.KProperty1<K, kotlin.String>): kotlin.Unit
 public fun </*0*/ K> bar2(/*0*/ f: kotlin.reflect.KFunction2<out K, kotlin.String, kotlin.String>): kotlin.Unit
@@ -17,11 +17,11 @@ public fun resolve(/*0*/ var2: kotlin.Number, /*1*/ var1: kotlin.Int): kotlin.St
 public fun resolve(/*0*/ var2: kotlin.Number, /*1*/ var1: kotlin.String): kotlin.String
 
 public interface Foo {
-    public open val kotlin.Int.x1: kotlin.String
-    public open val kotlin.String.x1: kotlin.String
+    public open konst kotlin.Int.x1: kotlin.String
+    public open konst kotlin.String.x1: kotlin.String
     public open var kotlin.Int.x2: kotlin.String
     public open var kotlin.String.x2: kotlin.String
-    public open val kotlin.Int.x3: kotlin.String
+    public open konst kotlin.Int.x3: kotlin.String
     public open var kotlin.String.x3: kotlin.String
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

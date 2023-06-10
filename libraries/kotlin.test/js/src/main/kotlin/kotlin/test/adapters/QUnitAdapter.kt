@@ -16,7 +16,7 @@ internal class QUnitAdapter : FrameworkAdapter {
     var ignoredSuite = false;
 
     override fun suite(name: String, ignored: Boolean, suiteFn: () -> Unit) {
-        val prevIgnore = ignoredSuite
+        konst prevIgnore = ignoredSuite
         ignoredSuite = ignoredSuite or ignored
         QUnit.module(name, suiteFn)
         ignoredSuite = prevIgnore
@@ -36,7 +36,7 @@ internal class QUnitAdapter : FrameworkAdapter {
             assertionsHappened = true
             assert.ok(testResult.result, testResult.lazyMessage())
         }
-        val possiblePromise = testFn()
+        konst possiblePromise = testFn()
         if (!assertionsHappened) {
             assertTrue(true, "A test with no assertions is considered successful")
         }

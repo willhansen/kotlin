@@ -12,14 +12,14 @@ import org.jetbrains.kotlin.descriptors.annotations.KotlinTarget
 import org.jetbrains.kotlin.descriptors.annotations.KotlinTarget.*
 
 object AnnotationTargetLists {
-    val T_CLASSIFIER = targetList(CLASS)
-    val T_TYPEALIAS = targetList(TYPEALIAS)
+    konst T_CLASSIFIER = targetList(CLASS)
+    konst T_TYPEALIAS = targetList(TYPEALIAS)
 
-    val T_LOCAL_VARIABLE = targetList(LOCAL_VARIABLE) {
+    konst T_LOCAL_VARIABLE = targetList(LOCAL_VARIABLE) {
         onlyWithUseSiteTarget(PROPERTY_SETTER, VALUE_PARAMETER)
     }
 
-    val T_DESTRUCTURING_DECLARATION = targetList(DESTRUCTURING_DECLARATION)
+    konst T_DESTRUCTURING_DECLARATION = targetList(DESTRUCTURING_DECLARATION)
 
     private fun TargetListBuilder.propertyTargets(backingField: Boolean, delegate: Boolean) {
         if (backingField) extraTargets(FIELD)
@@ -52,64 +52,64 @@ object AnnotationTargetLists {
             propertyTargets(backingField, delegate)
         }
 
-    val T_PROPERTY_GETTER = targetList(PROPERTY_GETTER)
-    val T_PROPERTY_SETTER = targetList(PROPERTY_SETTER)
-    val T_BACKING_FIELD = targetList(BACKING_FIELD) {
+    konst T_PROPERTY_GETTER = targetList(PROPERTY_GETTER)
+    konst T_PROPERTY_SETTER = targetList(PROPERTY_SETTER)
+    konst T_BACKING_FIELD = targetList(BACKING_FIELD) {
         extraTargets(FIELD)
     }
 
-    val T_VALUE_PARAMETER_WITHOUT_VAL = targetList(VALUE_PARAMETER)
+    konst T_VALUE_PARAMETER_WITHOUT_VAL = targetList(VALUE_PARAMETER)
 
-    val T_VALUE_PARAMETER_WITH_VAL = targetList(VALUE_PARAMETER, PROPERTY, MEMBER_PROPERTY) {
+    konst T_VALUE_PARAMETER_WITH_VAL = targetList(VALUE_PARAMETER, PROPERTY, MEMBER_PROPERTY) {
         extraTargets(FIELD)
         onlyWithUseSiteTarget(PROPERTY_GETTER, PROPERTY_SETTER)
     }
 
-    val T_FILE = targetList(FILE)
+    konst T_FILE = targetList(FILE)
 
-    val T_CONSTRUCTOR = targetList(CONSTRUCTOR)
+    konst T_CONSTRUCTOR = targetList(CONSTRUCTOR)
 
-    val T_LOCAL_FUNCTION = targetList(LOCAL_FUNCTION, FUNCTION) {
+    konst T_LOCAL_FUNCTION = targetList(LOCAL_FUNCTION, FUNCTION) {
         onlyWithUseSiteTarget(VALUE_PARAMETER)
     }
 
-    val T_MEMBER_FUNCTION = targetList(MEMBER_FUNCTION, FUNCTION) {
+    konst T_MEMBER_FUNCTION = targetList(MEMBER_FUNCTION, FUNCTION) {
         onlyWithUseSiteTarget(VALUE_PARAMETER)
     }
 
-    val T_TOP_LEVEL_FUNCTION = targetList(TOP_LEVEL_FUNCTION, FUNCTION) {
+    konst T_TOP_LEVEL_FUNCTION = targetList(TOP_LEVEL_FUNCTION, FUNCTION) {
         onlyWithUseSiteTarget(VALUE_PARAMETER)
     }
 
-    val T_EXPRESSION = targetList(EXPRESSION)
+    konst T_EXPRESSION = targetList(EXPRESSION)
 
-    val T_FUNCTION_LITERAL = targetList(LAMBDA_EXPRESSION, FUNCTION, EXPRESSION)
+    konst T_FUNCTION_LITERAL = targetList(LAMBDA_EXPRESSION, FUNCTION, EXPRESSION)
 
-    val T_FUNCTION_EXPRESSION = targetList(ANONYMOUS_FUNCTION, FUNCTION, EXPRESSION)
+    konst T_FUNCTION_EXPRESSION = targetList(ANONYMOUS_FUNCTION, FUNCTION, EXPRESSION)
 
-    val T_OBJECT_LITERAL = targetList(OBJECT_LITERAL, CLASS, EXPRESSION)
+    konst T_OBJECT_LITERAL = targetList(OBJECT_LITERAL, CLASS, EXPRESSION)
 
-    val T_TYPE_REFERENCE = targetList(TYPE) {
+    konst T_TYPE_REFERENCE = targetList(TYPE) {
         onlyWithUseSiteTarget(VALUE_PARAMETER)
     }
 
-    val T_TYPE_PARAMETER = targetList(TYPE_PARAMETER)
+    konst T_TYPE_PARAMETER = targetList(TYPE_PARAMETER)
 
-    val T_STAR_PROJECTION = targetList(STAR_PROJECTION)
-    val T_TYPE_PROJECTION = targetList(TYPE_PROJECTION)
+    konst T_STAR_PROJECTION = targetList(STAR_PROJECTION)
+    konst T_TYPE_PROJECTION = targetList(TYPE_PROJECTION)
 
-    val T_INITIALIZER = targetList(INITIALIZER)
+    konst T_INITIALIZER = targetList(INITIALIZER)
 
 
     private fun targetList(vararg target: KotlinTarget, otherTargets: TargetListBuilder.() -> Unit = {}): AnnotationTargetList {
-        val builder = TargetListBuilder(*target)
+        konst builder = TargetListBuilder(*target)
         builder.otherTargets()
         return builder.build()
     }
 
-    val EMPTY = targetList()
+    konst EMPTY = targetList()
 
-    private class TargetListBuilder(vararg val defaultTargets: KotlinTarget) {
+    private class TargetListBuilder(vararg konst defaultTargets: KotlinTarget) {
         private var canBeSubstituted: List<KotlinTarget> = listOf()
         private var onlyWithUseSiteTarget: List<KotlinTarget> = listOf()
 
@@ -126,19 +126,19 @@ object AnnotationTargetLists {
 }
 
 class AnnotationTargetList(
-    val defaultTargets: List<KotlinTarget>,
-    val canBeSubstituted: List<KotlinTarget> = emptyList(),
-    val onlyWithUseSiteTarget: List<KotlinTarget> = emptyList()
+    konst defaultTargets: List<KotlinTarget>,
+    konst canBeSubstituted: List<KotlinTarget> = emptyList(),
+    konst onlyWithUseSiteTarget: List<KotlinTarget> = emptyList()
 )
 
 object UseSiteTargetsList {
-    val T_CONSTRUCTOR_PARAMETER = listOf(
+    konst T_CONSTRUCTOR_PARAMETER = listOf(
         AnnotationUseSiteTarget.CONSTRUCTOR_PARAMETER,
         AnnotationUseSiteTarget.PROPERTY,
         AnnotationUseSiteTarget.FIELD
     )
 
-    val T_PROPERTY = listOf(
+    konst T_PROPERTY = listOf(
         AnnotationUseSiteTarget.PROPERTY,
         AnnotationUseSiteTarget.FIELD
     )

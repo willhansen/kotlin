@@ -1,6 +1,6 @@
 // FILE: KotlinFile.kt
 fun foo(javaClass: JavaClass<Int>): Int {
-    val inner = javaClass.createInner<String>()
+    konst inner = javaClass.createInner<String>()
     return <!RETURN_TYPE_MISMATCH!>inner.doSomething(<!ARGUMENT_TYPE_MISMATCH!>1<!>, "") { }<!>
 }
 

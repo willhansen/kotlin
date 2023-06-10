@@ -3,6 +3,6 @@
 // LANGUAGE: -JvmInlineValueClasses, +GenericInlineClassParameter
 // IGNORE_BACKED: JVM
 
-inline class ICAny<T: Any>(val value: T?)
+inline class ICAny<T: Any>(konst konstue: T?)
 
-fun box(): String = ICAny("OK").value.toString()
+fun box(): String = ICAny("OK").konstue.toString()

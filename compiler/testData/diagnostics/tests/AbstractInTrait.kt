@@ -3,10 +3,10 @@ package abstract
 
 interface MyTrait {
     //properties
-    val a: Int
-    val a1: Int = <!PROPERTY_INITIALIZER_IN_INTERFACE!>1<!>
-    abstract val a2: Int
-    abstract val a3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>1<!>
+    konst a: Int
+    konst a1: Int = <!PROPERTY_INITIALIZER_IN_INTERFACE!>1<!>
+    abstract konst a2: Int
+    abstract konst a3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>1<!>
 
     var b: Int                                                                                              <!PRIVATE_SETTER_FOR_ABSTRACT_PROPERTY!>private<!> set
     var b1: Int = <!PROPERTY_INITIALIZER_IN_INTERFACE!>0<!>;                                                <!PRIVATE_SETTER_FOR_OPEN_PROPERTY!>private<!> set
@@ -18,10 +18,10 @@ interface MyTrait {
     abstract var c2: Int                     <!ABSTRACT_PROPERTY_WITH_SETTER!>set(v: Int) { field = v }<!>
     abstract var c3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_SETTER!>set(v: Int) { field = v }<!>
 
-    val e: Int                                                  get() = a
-    val e1: Int = <!PROPERTY_INITIALIZER_IN_INTERFACE!>0<!>;                             get() = a
-    abstract val e2: Int                     <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
-    abstract val e3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
+    konst e: Int                                                  get() = a
+    konst e1: Int = <!PROPERTY_INITIALIZER_IN_INTERFACE!>0<!>;                             get() = a
+    abstract konst e2: Int                     <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
+    abstract konst e3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
 
     //methods
     fun f()

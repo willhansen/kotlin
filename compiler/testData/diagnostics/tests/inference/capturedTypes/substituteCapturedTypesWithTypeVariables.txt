@@ -1,6 +1,6 @@
 package
 
-public fun </*0*/ T> getFoo(/*0*/ value: T): Foo<out Foo<T>>
+public fun </*0*/ T> getFoo(/*0*/ konstue: T): Foo<out Foo<T>>
 public fun main(/*0*/ x: kotlin.Int): kotlin.Unit
 public fun </*0*/ R> takeLambda(/*0*/ block: () -> R): kotlin.Unit
 

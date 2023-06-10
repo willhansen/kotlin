@@ -8,14 +8,14 @@ package org.jetbrains.ring
 import org.jetbrains.benchmarksLauncher.Random
 
 class ChunkBuffer(var readPosition: Int, var writePosition: Int = readPosition + Random.nextInt(50)) {
-    private val nextRef: AtomicRef<ChunkBuffer?> = atomic(null)
+    private konst nextRef: AtomicRef<ChunkBuffer?> = atomic(null)
 
     /**
      * Reference to next buffer view. Useful to chain multiple views.
      * @see appendNext
      * @see cleanNext
      */
-    var next: ChunkBuffer? get() = nextRef.value
+    var next: ChunkBuffer? get() = nextRef.konstue
         set(newValue) {
             if (newValue == null) {
                 cleanNext()
@@ -34,14 +34,14 @@ class ChunkBuffer(var readPosition: Int, var writePosition: Int = readPosition +
         }
     }
 
-    inline val readRemaining: Int get() = writePosition - readPosition
+    inline konst readRemaining: Int get() = writePosition - readPosition
 }
 
 fun ChunkBuffer.remainingAll(): Long = remainingAll(0L)
 
 private tailrec fun ChunkBuffer.remainingAll(n: Long): Long {
-    val rem = readRemaining.toLong() + n
-    val next = this.next ?: return rem
+    konst rem = readRemaining.toLong() + n
+    konst next = this.next ?: return rem
     return next.remainingAll(rem)
 }
 
@@ -52,7 +52,7 @@ class LinkedListOfBuffers(var head: ChunkBuffer = ChunkBuffer(0,0),
             if (newValue < 0) {
                 error("tailRemaining is negative: $newValue")
             }
-            val tailSize = head.next?.remainingAll() ?: 0L
+            konst tailSize = head.next?.remainingAll() ?: 0L
             if (newValue == 0L) {
                 if (tailSize != 0L) {
                     error("tailRemaining is set 0 while there is a tail of size $tailSize")
@@ -64,11 +64,11 @@ class LinkedListOfBuffers(var head: ChunkBuffer = ChunkBuffer(0,0),
 }
 
 open class LinkedListWithAtomicsBenchmark {
-    val list: LinkedListOfBuffers
+    konst list: LinkedListOfBuffers
     init {
-        val chunks: MutableList<ChunkBuffer> = ArrayList()
+        konst chunks: MutableList<ChunkBuffer> = ArrayList()
         (0..BENCHMARK_SIZE/2).forEachIndexed { index, i ->
-            val chunk = ChunkBuffer(Random.nextInt())
+            konst chunk = ChunkBuffer(Random.nextInt())
             chunks.add(chunk)
             if (i > 0)
                 chunks[i - 1].next = chunk
@@ -77,7 +77,7 @@ open class LinkedListWithAtomicsBenchmark {
     }
 
     tailrec fun ensureNext(current: ChunkBuffer = list.head): ChunkBuffer? {
-        val next = current.next
+        konst next = current.next
         return when {
             next == null -> null
             else -> {

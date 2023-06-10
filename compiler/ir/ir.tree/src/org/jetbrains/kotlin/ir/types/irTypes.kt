@@ -32,7 +32,7 @@ private fun IrType.withNullability(newNullability: Boolean): IrType =
     }
 
 private fun IrSimpleType.withNullability(newNullability: Boolean): IrSimpleType {
-    val requiredNullability = if (newNullability) SimpleTypeNullability.MARKED_NULLABLE else SimpleTypeNullability.DEFINITELY_NOT_NULL
+    konst requiredNullability = if (newNullability) SimpleTypeNullability.MARKED_NULLABLE else SimpleTypeNullability.DEFINITELY_NOT_NULL
     return if (nullability == requiredNullability)
         this
     else
@@ -86,30 +86,30 @@ fun IrType.removeAnnotations(): IrType =
             this
     }
 
-val IrType.classifierOrFail: IrClassifierSymbol
+konst IrType.classifierOrFail: IrClassifierSymbol
     get() = classifierOrNull ?: error("Can't get classifier of ${render()}")
 
-val IrType.classifierOrNull: IrClassifierSymbol?
+konst IrType.classifierOrNull: IrClassifierSymbol?
     get() = when (this) {
         is IrSimpleType -> classifier
         else -> null
     }
 
-val IrType.classOrNull: IrClassSymbol?
+konst IrType.classOrNull: IrClassSymbol?
     get() =
-        when (val classifier = classifierOrNull) {
+        when (konst classifier = classifierOrNull) {
             is IrClassSymbol -> classifier
             is IrScriptSymbol -> classifier.owner.targetClass
             else -> null
         }
 
-val IrType.classOrFail: IrClassSymbol
+konst IrType.classOrFail: IrClassSymbol
     get() = classOrNull ?: error("Expect type to be a class type")
 
-val IrType.classFqName: FqName?
+konst IrType.classFqName: FqName?
     get() = classOrNull?.owner?.fqNameWhenAvailable
 
-val IrTypeArgument.typeOrNull: IrType? get() = (this as? IrTypeProjection)?.type
+konst IrTypeArgument.typeOrNull: IrType? get() = (this as? IrTypeProjection)?.type
 
 fun IrType.makeNotNull() = withNullability(false)
 
@@ -153,7 +153,7 @@ private fun makeKotlinType(
     arguments: List<IrTypeArgument>,
     hasQuestionMark: Boolean
 ): SimpleType {
-    val kotlinTypeArguments = arguments.memoryOptimizedMapIndexed { index, it ->
+    konst kotlinTypeArguments = arguments.memoryOptimizedMapIndexed { index, it ->
         when (it) {
             is IrTypeProjection -> TypeProjectionImpl(it.variance, it.type.toKotlinType())
             is IrStarProjection -> StarProjectionImpl((classifier.descriptor as ClassDescriptor).typeConstructor.parameters[index])
@@ -162,14 +162,14 @@ private fun makeKotlinType(
     return classifier.descriptor.defaultType.replace(newArguments = kotlinTypeArguments).makeNullableAsSpecified(hasQuestionMark)
 }
 
-val IrClassifierSymbol.defaultType: IrType
+konst IrClassifierSymbol.defaultType: IrType
     get() = when (this) {
         is IrClassSymbol -> owner.defaultType
         is IrTypeParameterSymbol -> owner.defaultType
         is IrScriptSymbol -> unexpectedSymbolKind<IrClassifierSymbol>()
     }
 
-val IrTypeParameter.defaultType: IrType
+konst IrTypeParameter.defaultType: IrType
     get() = IrSimpleTypeImpl(
         symbol,
         SimpleTypeNullability.NOT_SPECIFIED,
@@ -177,7 +177,7 @@ val IrTypeParameter.defaultType: IrType
         annotations = emptyList()
     )
 
-val IrClassSymbol.starProjectedType: IrSimpleType
+konst IrClassSymbol.starProjectedType: IrSimpleType
     get() = IrSimpleTypeImpl(
         this,
         SimpleTypeNullability.NOT_SPECIFIED,
@@ -185,10 +185,10 @@ val IrClassSymbol.starProjectedType: IrSimpleType
         annotations = emptyList()
     )
 
-val IrClass.typeConstructorParameters: Sequence<IrTypeParameter>
+konst IrClass.typeConstructorParameters: Sequence<IrTypeParameter>
     get() =
         generateSequence(this as IrTypeParametersContainer) { current ->
-            val parent = current.parent as? IrTypeParametersContainer
+            konst parent = current.parent as? IrTypeParametersContainer
             when {
                 parent is IrSimpleFunction && parent.isPropertyAccessor -> {
                     // KT-42151

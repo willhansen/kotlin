@@ -14,7 +14,7 @@ interface Copyable<out T, out U : Builder<T>> {
 
 fun <T : Copyable<T, U>, U : Builder<T>> T.copy(fn: U.() -> Unit): T = throw Exception()
 
-open class Foo(val x: Int, val y: Int) : Copyable<Foo, Foo.FooBuilder> {
+open class Foo(konst x: Int, konst y: Int) : Copyable<Foo, Foo.FooBuilder> {
     override fun builder(): FooBuilder = FooBuilder(x, y)
 
     open class FooBuilder(var x: Int, var y: Int): Builder<Foo> {
@@ -23,7 +23,7 @@ open class Foo(val x: Int, val y: Int) : Copyable<Foo, Foo.FooBuilder> {
 }
 
 fun test() {
-    val foo1 = Foo(x = 1, y = 2)
-    val foo2 = foo1.copy { y = 3 } // this doesn't work
+    konst foo1 = Foo(x = 1, y = 2)
+    konst foo2 = foo1.copy { y = 3 } // this doesn't work
     foo2 checkType { _<Foo>() }
 }

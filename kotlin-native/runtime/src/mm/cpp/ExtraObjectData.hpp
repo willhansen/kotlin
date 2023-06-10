@@ -21,7 +21,7 @@ namespace mm {
 // Optional data that's lazily allocated only for objects that need it.
 class ExtraObjectData : private Pinned {
 public:
-    // flags are stored as single atomic uint32, values are bit numbers in that uint32
+    // flags are stored as single atomic uint32, konstues are bit numbers in that uint32
     enum Flags : uint32_t {
         FLAGS_FROZEN = 0,
         FLAGS_NEVER_FROZEN = 1,
@@ -52,8 +52,8 @@ public:
     bool HasAssociatedObject() noexcept;
     void ReleaseAssociatedObject() noexcept;
 
-    bool getFlag(Flags value) noexcept { return (flags_.load() & (1u << static_cast<uint32_t>(value))) != 0; }
-    void setFlag(Flags value) noexcept { flags_.fetch_or(1u << static_cast<uint32_t>(value)); }
+    bool getFlag(Flags konstue) noexcept { return (flags_.load() & (1u << static_cast<uint32_t>(konstue))) != 0; }
+    void setFlag(Flags konstue) noexcept { flags_.fetch_or(1u << static_cast<uint32_t>(konstue)); }
 
     bool HasRegularWeakReferenceImpl() noexcept { return hasPointerBits(weakReferenceOrBaseObject_.load(), WEAK_REF_TAG); }
     void ClearRegularWeakReferenceImpl() noexcept; // TODO: Only exists for the sake of GetBaseObject. Refactor to remove the need for it.
@@ -66,7 +66,7 @@ public:
         if (weakReferenceOrBaseObject_.compare_exchange_strong(object, setPointerBits(weakRef, WEAK_REF_TAG))) {
             return weakRef;
         } else {
-            return clearPointerBits(object, WEAK_REF_TAG); // on fail current value of weakRef is stored to object
+            return clearPointerBits(object, WEAK_REF_TAG); // on fail current konstue of weakRef is stored to object
         }
     }
     ObjHeader* GetBaseObject() noexcept {

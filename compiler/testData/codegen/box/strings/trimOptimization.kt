@@ -12,7 +12,7 @@ fun trimIndentConstant(): String {
 }
 
 // CHECK_CONTAINS_NO_CALLS: trimIndentInterpolatedUsingConstant
-private const val HAS_INDENT = """Hello,
+private const konst HAS_INDENT = """Hello,
         World"""
 fun trimIndentInterpolatedUsingConstant(): String {
     return """
@@ -23,9 +23,9 @@ fun trimIndentInterpolatedUsingConstant(): String {
 }
 
 // CHECK_CONTAINS_NO_CALLS: trimIndentReliesOnNestedStringBuilderFlatteningAndConstantConcatenation
-private const val SPACES = "    "
-private const val HELLO = "Hello"
-private const val WORLD = "World"
+private const konst SPACES = "    "
+private const konst HELLO = "Hello"
+private const konst WORLD = "World"
 fun trimIndentReliesOnNestedStringBuilderFlatteningAndConstantConcatenation(): String {
     return ("" + '\n' + SPACES + "${SPACES}Hey" + """
         ${HELLO + HELLO},
@@ -55,7 +55,7 @@ fun trimMarginConstant(): String {
 }
 
 // CHECK_CONTAINS_NO_CALLS: trimMarginInterpolatedUsingConstant
-private const val HAS_MARGIN = """Hello,
+private const konst HAS_MARGIN = """Hello,
         |World"""
 fun trimMarginInterpolatedUsingConstant(): String {
     return """
@@ -82,7 +82,7 @@ fun trimMarginConstantCustomPrefix(): String {
 }
 
 // CHECK_CONTAINS_NO_CALLS: trimMarginConstantCustomPrefixInterpolatedUsingConstant
-private const val OCTOTHORPE = '#'
+private const konst OCTOTHORPE = '#'
 fun trimMarginConstantCustomPrefixInterpolatedUsingConstant(): String {
     return """
         #@#Hello,

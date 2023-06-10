@@ -2,21 +2,21 @@ package test
 
 public final annotation class Anno : kotlin.Annotation {
     /*primary*/ public constructor Anno(/*0*/ bytes: kotlin.ByteArray, /*1*/ shorts: kotlin.ShortArray, /*2*/ ints: kotlin.IntArray, /*3*/ longs: kotlin.LongArray, /*4*/ chars: kotlin.CharArray, /*5*/ floats: kotlin.FloatArray, /*6*/ doubles: kotlin.DoubleArray, /*7*/ booleans: kotlin.BooleanArray)
-    public final val booleans: kotlin.BooleanArray
+    public final konst booleans: kotlin.BooleanArray
         public final fun `<get-booleans>`(): kotlin.BooleanArray
-    public final val bytes: kotlin.ByteArray
+    public final konst bytes: kotlin.ByteArray
         public final fun `<get-bytes>`(): kotlin.ByteArray
-    public final val chars: kotlin.CharArray
+    public final konst chars: kotlin.CharArray
         public final fun `<get-chars>`(): kotlin.CharArray
-    public final val doubles: kotlin.DoubleArray
+    public final konst doubles: kotlin.DoubleArray
         public final fun `<get-doubles>`(): kotlin.DoubleArray
-    public final val floats: kotlin.FloatArray
+    public final konst floats: kotlin.FloatArray
         public final fun `<get-floats>`(): kotlin.FloatArray
-    public final val ints: kotlin.IntArray
+    public final konst ints: kotlin.IntArray
         public final fun `<get-ints>`(): kotlin.IntArray
-    public final val longs: kotlin.LongArray
+    public final konst longs: kotlin.LongArray
         public final fun `<get-longs>`(): kotlin.LongArray
-    public final val shorts: kotlin.ShortArray
+    public final konst shorts: kotlin.ShortArray
         public final fun `<get-shorts>`(): kotlin.ShortArray
 }
 

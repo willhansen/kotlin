@@ -1,6 +1,6 @@
 // FILE: 1.kt
-class Outer(val a: String) {
-    inner class Inner(val b: String) {
+class Outer(konst a: String) {
+    inner class Inner(konst b: String) {
         inline fun bar() = b
     }
     inline fun foo(i: Inner) = a + i.bar()
@@ -8,8 +8,8 @@ class Outer(val a: String) {
 // FILE: 2.kt
 
 fun box(): String {
-    val outer = Outer("O")
-    val inner = outer.Inner("K")
+    konst outer = Outer("O")
+    konst inner = outer.Inner("K")
 
     return outer.foo(inner)
 }

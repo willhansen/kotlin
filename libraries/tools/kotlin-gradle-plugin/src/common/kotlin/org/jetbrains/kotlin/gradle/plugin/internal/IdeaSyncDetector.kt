@@ -13,7 +13,7 @@ import org.gradle.api.provider.ValueSourceParameters
 import org.jetbrains.kotlin.gradle.plugin.VariantImplementationFactories
 import java.io.Serializable
 
-internal abstract class IdeaPropertiesEvaluator {
+internal abstract class IdeaPropertiesEkonstuator {
     protected abstract fun readSystemPropertyValue(key: String): String?
 
     internal fun isInIdeaSync(): Boolean {
@@ -23,19 +23,19 @@ internal abstract class IdeaPropertiesEvaluator {
         // before 2019.1 there is "idea.active" that was true only on sync,
         // but since 2019.1 "idea.active" present in task execution too.
         // So let's check Idea version
-        val majorIdeaVersion = readSystemPropertyValue("idea.version")
+        konst majorIdeaVersion = readSystemPropertyValue("idea.version")
             ?.split(".")
             ?.getOrNull(0)
-        val isBeforeIdea2019 = majorIdeaVersion == null || majorIdeaVersion.toInt() < 2019
+        konst isBeforeIdea2019 = majorIdeaVersion == null || majorIdeaVersion.toInt() < 2019
 
         return isBeforeIdea2019 && readSystemPropertyValue("idea.active")?.toBoolean() == true
     }
 }
 
 internal interface IdeaSyncDetector {
-    val isInIdeaSync: Boolean
+    konst isInIdeaSync: Boolean
 
-    fun createIdeaPropertiesEvaluator(): IdeaPropertiesEvaluator
+    fun createIdeaPropertiesEkonstuator(): IdeaPropertiesEkonstuator
 
     interface IdeaSyncDetectorVariantFactory : VariantImplementationFactories.VariantImplementationFactory {
         fun getInstance(project: Project): IdeaSyncDetector
@@ -48,24 +48,24 @@ internal class DefaultIdeaSyncDetectorVariantFactory : IdeaSyncDetector.IdeaSync
 
 internal abstract class IdeaPropertiesValueSource : ValueSource<Boolean, IdeaPropertiesValueSource.Parameters> {
     interface Parameters : ValueSourceParameters {
-        val propertiesEvaluator: Property<IdeaPropertiesEvaluator>
+        konst propertiesEkonstuator: Property<IdeaPropertiesEkonstuator>
     }
 
     override fun obtain(): Boolean {
-        return parameters.propertiesEvaluator.get().isInIdeaSync()
+        return parameters.propertiesEkonstuator.get().isInIdeaSync()
     }
 }
 
 internal class DefaultIdeaSyncDetector(
     providerFactory: ProviderFactory
 ) : IdeaSyncDetector {
-    override val isInIdeaSync: Boolean = providerFactory.of(IdeaPropertiesValueSource::class.java) {
-        it.parameters.propertiesEvaluator.set(createIdeaPropertiesEvaluator())
+    override konst isInIdeaSync: Boolean = providerFactory.of(IdeaPropertiesValueSource::class.java) {
+        it.parameters.propertiesEkonstuator.set(createIdeaPropertiesEkonstuator())
     }.get()
 
-    override fun createIdeaPropertiesEvaluator(): IdeaPropertiesEvaluator = object : IdeaPropertiesEvaluator(), Serializable {
+    override fun createIdeaPropertiesEkonstuator(): IdeaPropertiesEkonstuator = object : IdeaPropertiesEkonstuator(), Serializable {
         // since Gradle 7.5 we shouldn't declare system property read
-        // and also now we can read system properties inside ValueSource without configuration cache invalidation
+        // and also now we can read system properties inside ValueSource without configuration cache inkonstidation
         override fun readSystemPropertyValue(key: String) = System.getProperty(key)
     }
 }

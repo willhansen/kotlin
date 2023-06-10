@@ -9,26 +9,26 @@
 package foo
 
 @JsExport
-val value = 10
+konst konstue = 10
 
 @JsExport
 var variable = 10
 
 @JsExport
-class C(val x: Int) {
+class C(konst x: Int) {
     fun doubleX() = x * 2
 }
 
 @JsExport
 object O {
-    val value = 10
+    konst konstue = 10
 }
 
 @JsExport
 object Parent {
-    val value = 10
+    konst konstue = 10
     class Nested {
-        val value = 10
+        konst konstue = 10
     }
 }
 

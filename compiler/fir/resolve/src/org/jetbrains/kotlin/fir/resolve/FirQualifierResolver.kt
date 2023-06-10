@@ -16,4 +16,4 @@ abstract class FirQualifierResolver : FirSessionComponent {
     abstract fun resolveSymbol(parts: List<FirQualifierPart>): FirClassifierSymbol<*>?
 }
 
-val FirSession.qualifierResolver: FirQualifierResolver by FirSession.sessionComponentAccessor()
+konst FirSession.qualifierResolver: FirQualifierResolver by FirSession.sessionComponentAccessor()

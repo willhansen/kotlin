@@ -8,19 +8,19 @@ package a.b
 
 import kotlin.experimental.ExperimentalTypeInference
 
-class BatchInfo1(val batchSize: Int)
-class BatchInfo2<T>(val data: T)
+class BatchInfo1(konst batchSize: Int)
+class BatchInfo2<T>(konst data: T)
 
 object Obj
 
 fun test1() {
-    val a: Sequence<String> = sequence {
-        val x = BatchInfo1::class
-        val y = a.b.BatchInfo1::class
-        val z = Obj::class
+    konst a: Sequence<String> = sequence {
+        konst x = BatchInfo1::class
+        konst y = a.b.BatchInfo1::class
+        konst z = Obj::class
 
-        val x1 = BatchInfo1::batchSize
-        val y1 = a.b.BatchInfo1::class
+        konst x1 = BatchInfo1::batchSize
+        konst y1 = a.b.BatchInfo1::class
     }
 }
 
@@ -30,10 +30,10 @@ interface Scope<T> {
 
 fun <S> generate(g: Scope<S>.() -> Unit): S = TODO()
 
-val test2 = generate {
+konst test2 = generate {
     { yield("foo") }::class
 }
 
-val test3 = generate {
+konst test3 = generate {
     ({ yield("foo") })::class
 }

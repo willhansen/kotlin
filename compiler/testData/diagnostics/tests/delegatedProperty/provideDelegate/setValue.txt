@@ -7,7 +7,7 @@ public var test4: kotlin.String
 public var test5: kotlin.String
 public operator fun Delegate<*>.getValue(/*0*/ receiver: kotlin.Any?, /*1*/ p: kotlin.Any): kotlin.String
 public operator fun </*0*/ T> kotlin.String.provideDelegate(/*0*/ receiver: kotlin.Any?, /*1*/ p: kotlin.Any): Delegate<T>
-public operator fun </*0*/ T> Delegate<T>.setValue(/*0*/ receiver: kotlin.Any?, /*1*/ p: kotlin.Any, /*2*/ value: T): kotlin.Unit
+public operator fun </*0*/ T> Delegate<T>.setValue(/*0*/ receiver: kotlin.Any?, /*1*/ p: kotlin.Any, /*2*/ konstue: T): kotlin.Unit
 
 public final class Delegate</*0*/ T> {
     public constructor Delegate</*0*/ T>()

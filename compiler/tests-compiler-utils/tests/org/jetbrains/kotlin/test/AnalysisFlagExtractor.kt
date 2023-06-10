@@ -11,10 +11,10 @@ import java.lang.reflect.Field
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-private val BOOLEAN_FLAG_PATTERN = Pattern.compile("([+-])(([a-zA-Z_0-9]*)\\.)?([a-zA-Z_0-9]*)")
+private konst BOOLEAN_FLAG_PATTERN = Pattern.compile("([+-])(([a-zA-Z_0-9]*)\\.)?([a-zA-Z_0-9]*)")
 
 @OptIn(ExperimentalStdlibApi::class)
-private val patterns = buildList {
+private konst patterns = buildList {
     createPattern(
         "ASSERTIONS_MODE",
         JVMConfigurationKeys.ASSERTIONS_MODE,
@@ -47,30 +47,30 @@ private val patterns = buildList {
 }
 
 private sealed class PatternWithExtractor<E : Any> {
-    abstract val configurationKey: CompilerConfigurationKey<E>
-    abstract val pattern: Pattern
+    abstract konst configurationKey: CompilerConfigurationKey<E>
+    abstract konst pattern: Pattern
 
     abstract fun extract(matcher: Matcher): E
 }
 
 private class ValuePatternWithExtractor<E : Any>(
-    val directive: String,
-    override val configurationKey: CompilerConfigurationKey<E>,
-    val extractor: (String) -> E?
+    konst directive: String,
+    override konst configurationKey: CompilerConfigurationKey<E>,
+    konst extractor: (String) -> E?
 ) : PatternWithExtractor<E>() {
-    override val pattern: Pattern = Pattern.compile("$directive=([a-zA-Z_0-9-]*)")
+    override konst pattern: Pattern = Pattern.compile("$directive=([a-zA-Z_0-9-]*)")
 
     override fun extract(matcher: Matcher): E {
-        val stringValue = matcher.group(1)
-        return extractor(stringValue) ?: error("Wrong $directive value: $stringValue")
+        konst stringValue = matcher.group(1)
+        return extractor(stringValue) ?: error("Wrong $directive konstue: $stringValue")
     }
 }
 
 private class BooleanPatternWithExtractor(
-    val directive: String,
-    override val configurationKey: CompilerConfigurationKey<Boolean>
+    konst directive: String,
+    override konst configurationKey: CompilerConfigurationKey<Boolean>
 ) : PatternWithExtractor<Boolean>() {
-    override val pattern: Pattern = Pattern.compile(directive)
+    override konst pattern: Pattern = Pattern.compile(directive)
 
     override fun extract(matcher: Matcher): Boolean {
         return true
@@ -92,26 +92,26 @@ private fun MutableList<PatternWithExtractor<*>>.createPattern(
     return BooleanPatternWithExtractor(directive, configurationKey).also { this += it }
 }
 
-private val FLAG_CLASSES: List<Class<*>> = listOf(
+private konst FLAG_CLASSES: List<Class<*>> = listOf(
     CLIConfigurationKeys::class.java,
     JVMConfigurationKeys::class.java
 )
 
-private val FLAG_NAMESPACE_TO_CLASS: Map<String, Class<*>> = mapOf(
+private konst FLAG_NAMESPACE_TO_CLASS: Map<String, Class<*>> = mapOf(
     "CLI" to CLIConfigurationKeys::class.java,
     "JVM" to JVMConfigurationKeys::class.java
 )
 
 fun parseAnalysisFlags(rawFlags: List<String>): Map<CompilerConfigurationKey<*>, Any> {
-    val result = mutableMapOf<CompilerConfigurationKey<*>, Any>()
+    konst result = mutableMapOf<CompilerConfigurationKey<*>, Any>()
 
     @Suppress("unused")
     for (flag in rawFlags) {
         var m = BOOLEAN_FLAG_PATTERN.matcher(flag)
         if (m.matches()) {
-            val flagEnabled = "-" != m.group(1)
-            val flagNamespace = m.group(3)
-            val flagName = m.group(4)
+            konst flagEnabled = "-" != m.group(1)
+            konst flagNamespace = m.group(3)
+            konst flagName = m.group(4)
             tryApplyBooleanFlag(result, flag, flagEnabled, flagNamespace, flagName)
             continue
         }
@@ -134,7 +134,7 @@ private fun tryApplyBooleanFlag(
     flagNamespace: String?,
     flagName: String
 ) {
-    val configurationKeysClass: Class<*>?
+    konst configurationKeysClass: Class<*>?
     var configurationKeyField: Field? = null
     if (flagNamespace == null) {
         for (flagClass in FLAG_CLASSES) {
@@ -156,7 +156,7 @@ private fun tryApplyBooleanFlag(
     assert(configurationKeyField != null) { "Expected [+|-][namespace.]configurationKey, got: $flag" }
     try {
         @Suppress("UNCHECKED_CAST")
-        val configurationKey = configurationKeyField!![null] as CompilerConfigurationKey<Boolean>
+        konst configurationKey = configurationKeyField!![null] as CompilerConfigurationKey<Boolean>
         destination[configurationKey] = flagEnabled
     } catch (e: java.lang.Exception) {
         assert(false) { "Expected [+|-][namespace.]configurationKey, got: $flag" }

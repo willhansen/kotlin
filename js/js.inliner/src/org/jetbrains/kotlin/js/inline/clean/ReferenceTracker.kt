@@ -21,20 +21,20 @@ import org.jetbrains.kotlin.js.inline.util.IdentitySet
 import java.util.*
 
 internal class ReferenceTracker<in Reference, RemoveCandidate : JsNode> {
-    private val reachable = IdentityHashMap<Reference, Boolean>()
-    private val removableCandidates = IdentityHashMap<Reference, RemoveCandidate>()
-    private val referenceFromTo = IdentityHashMap<Reference, MutableSet<Reference>>()
-    private val visited = IdentitySet<Reference>()
+    private konst reachable = IdentityHashMap<Reference, Boolean>()
+    private konst removableCandidates = IdentityHashMap<Reference, RemoveCandidate>()
+    private konst referenceFromTo = IdentityHashMap<Reference, MutableSet<Reference>>()
+    private konst visited = IdentitySet<Reference>()
 
-    val removable: List<RemoveCandidate>
+    konst removable: List<RemoveCandidate>
         get() {
             return reachable
-                        .filter { !it.value }
+                        .filter { !it.konstue }
                         .map { removableCandidates[it.key]!! }
         }
 
-    fun addCandidateForRemoval(reference: Reference, candidate: RemoveCandidate) {
-        assert(!isReferenceToRemovableCandidate(reference)) { "Candidate for removal cannot be reassigned: $candidate" }
+    fun addCandidateForRemokonst(reference: Reference, candidate: RemoveCandidate) {
+        assert(!isReferenceToRemovableCandidate(reference)) { "Candidate for remokonst cannot be reassigned: $candidate" }
 
         removableCandidates.put(reference, candidate)
         reachable.put(reference, false)

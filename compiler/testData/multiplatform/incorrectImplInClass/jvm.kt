@@ -3,8 +3,8 @@ actual class Foo actual constructor() {
 
     actual fun nonPlatformFun() {}
 
-    actual val nonPlatformVal = ""
+    actual konst nonPlatformVal = ""
 
     private fun nonImplFun() {}
-    private val nonImplVal = ""
+    private konst nonImplVal = ""
 }

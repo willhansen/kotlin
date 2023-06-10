@@ -10,7 +10,7 @@ fun foo(x: Int): Int {
             3
     }
 
-    val t = when {
+    konst t = when {
         x == 21 ->
             1
         x == 42 ->
@@ -29,7 +29,7 @@ fun box() {
 }
 
 // JVM_IR backend optimized the when to a switch in the java bytecode.
-// Therefore, the stepping for JVM_IR does not step through the evaluation
+// Therefore, the stepping for JVM_IR does not step through the ekonstuation
 // of each of the conditions, but goes directly to the right body.
 // JVM_IR stepping behavior here is the same as for `whenMultiLineSubject.kt`.
 

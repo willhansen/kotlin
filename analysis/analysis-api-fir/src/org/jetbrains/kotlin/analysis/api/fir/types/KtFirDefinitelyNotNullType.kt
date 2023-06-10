@@ -17,12 +17,12 @@ import org.jetbrains.kotlin.fir.types.ConeDefinitelyNotNullType
 import org.jetbrains.kotlin.fir.types.renderForDebugging
 
 internal class KtFirDefinitelyNotNullType(
-    override val coneType: ConeDefinitelyNotNullType,
-    private val builder: KtSymbolByFirBuilder,
+    override konst coneType: ConeDefinitelyNotNullType,
+    private konst builder: KtSymbolByFirBuilder,
 ) : KtDefinitelyNotNullType(), KtFirType {
-    override val token: KtLifetimeToken get() = builder.token
-    override val original: KtType = withValidityAssertion { builder.typeBuilder.buildKtType(this.coneType.original) }
-    override val annotationsList: KtAnnotationsList by cached {
+    override konst token: KtLifetimeToken get() = builder.token
+    override konst original: KtType = withValidityAssertion { builder.typeBuilder.buildKtType(this.coneType.original) }
+    override konst annotationsList: KtAnnotationsList by cached {
         KtFirAnnotationListForType.create(coneType, builder.rootSession, token)
     }
 

@@ -24,13 +24,13 @@ abstract class AbstractFirIdenticalChecker(testServices: TestServices) : AfterAn
         override fun getFirFileToCompare(testDataFile: File): File = testDataFile.firTestDataFile
     }
 
-    protected val helper = SpecificHelper()
+    protected konst helper = SpecificHelper()
 
     protected abstract fun checkTestDataFile(testDataFile: File)
 
     final override fun check(failedAssertions: List<WrappedException>) {
         if (failedAssertions.isNotEmpty()) return
-        val testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
+        konst testDataFile = testServices.moduleStructure.originalTestDataFiles.first()
         checkTestDataFile(testDataFile)
     }
 
@@ -46,7 +46,7 @@ abstract class AbstractFirIdenticalChecker(testServices: TestServices) : AfterAn
         customContent: String,
         message: () -> String,
     ) {
-        val processedBaseContent = testServices.sourceFileProvider.getContentOfSourceFile(
+        konst processedBaseContent = testServices.sourceFileProvider.getContentOfSourceFile(
             TestFile(
                 baseFile.path,
                 baseContent,
@@ -56,7 +56,7 @@ abstract class AbstractFirIdenticalChecker(testServices: TestServices) : AfterAn
                 RegisteredDirectives.Empty,
             )
         )
-        val processedLlContent = testServices.sourceFileProvider.getContentOfSourceFile(
+        konst processedLlContent = testServices.sourceFileProvider.getContentOfSourceFile(
             TestFile(
                 customFile.path,
                 customContent,

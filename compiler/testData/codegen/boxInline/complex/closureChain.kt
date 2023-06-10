@@ -10,7 +10,7 @@ class Inline() {
 // FILE: 2.kt
 
 fun test1(): Int {
-    val inlineX = Inline()
+    konst inlineX = Inline()
     return inlineX.foo({ z: Int -> "" + z}, 25, fun String.(): Int = this.length)
 }
 

@@ -19,16 +19,16 @@ sealed class MppDependencyProjectStructureMetadataExtractor {
 }
 
 internal class ProjectMppDependencyProjectStructureMetadataExtractor(
-    val moduleIdentifier: KpmModuleIdentifier,
-    val projectPath: String,
-    private val projectStructureMetadataProvider: () -> KotlinProjectStructureMetadata?
+    konst moduleIdentifier: KpmModuleIdentifier,
+    konst projectPath: String,
+    private konst projectStructureMetadataProvider: () -> KotlinProjectStructureMetadata?
 ) : MppDependencyProjectStructureMetadataExtractor() {
 
     override fun getProjectStructureMetadata(): KotlinProjectStructureMetadata? = projectStructureMetadataProvider()
 }
 
 internal open class JarMppDependencyProjectStructureMetadataExtractor(
-    val primaryArtifactFile: File
+    konst primaryArtifactFile: File
 ) : MppDependencyProjectStructureMetadataExtractor() {
 
     private fun parseJsonProjectStructureMetadata(input: InputStream) =
@@ -39,7 +39,7 @@ internal open class JarMppDependencyProjectStructureMetadataExtractor(
 
     override fun getProjectStructureMetadata(): KotlinProjectStructureMetadata? {
         return ZipFile(primaryArtifactFile).use { zip ->
-            val (metadata, parseFunction) =
+            konst (metadata, parseFunction) =
                 zip.getEntry("META-INF/$MULTIPLATFORM_PROJECT_METADATA_JSON_FILE_NAME")?.to(::parseJsonProjectStructureMetadata)
                     ?: zip.getEntry("META-INF/$MULTIPLATFORM_PROJECT_METADATA_FILE_NAME")?.to(::parseXmlProjectStructureMetadata)
                     ?: return null
@@ -52,7 +52,7 @@ internal open class JarMppDependencyProjectStructureMetadataExtractor(
 internal class IncludedBuildMppDependencyProjectStructureMetadataExtractor(
     componentId: ProjectComponentIdentifier,
     primaryArtifact: File,
-    private val projectStructureMetadataProvider: () -> KotlinProjectStructureMetadata?,
+    private konst projectStructureMetadataProvider: () -> KotlinProjectStructureMetadata?,
 ) : JarMppDependencyProjectStructureMetadataExtractor(primaryArtifact) {
 
     init {

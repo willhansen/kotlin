@@ -1,16 +1,16 @@
 package test
 
-val A.a: String
+konst A.a: String
   get() {
       class B {
-          val b : String
+          konst b : String
               get() = this@a.s
       }
       return B().b
   }
 
 class A {
-    val s : String = "OK"
+    konst s : String = "OK"
 }
 
 fun box() : String {

@@ -3,10 +3,10 @@
 // FILE: Box.java
 
 public class Box<T> {
-    private final T value;
+    private final T konstue;
 
-    public Box(T value) {
-        this.value = value;
+    public Box(T konstue) {
+        this.konstue = konstue;
     }
 
     public static <T> Box<T> create(T defaultValue) {
@@ -14,7 +14,7 @@ public class Box<T> {
     }
 
     public T getValue() {
-        return value;
+        return konstue;
     }
 }
 
@@ -22,6 +22,6 @@ public class Box<T> {
 // See KT-10313: ClassCastException with Generics
 
 fun box(): String {
-    val sub = Box<Long>(-1)
-    return if (sub.value == -1L) "OK" else "fail"
+    konst sub = Box<Long>(-1)
+    return if (sub.konstue == -1L) "OK" else "fail"
 }

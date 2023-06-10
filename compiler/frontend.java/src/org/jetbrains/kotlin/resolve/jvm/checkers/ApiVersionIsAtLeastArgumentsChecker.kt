@@ -33,14 +33,14 @@ object ApiVersionIsAtLeastArgumentsChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (!isApiVersionIsAtLeast(resolvedCall.resultingDescriptor)) return
 
-        val bindingContext = context.trace.bindingContext
-        val shouldInlineConstVals = context.languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)
+        konst bindingContext = context.trace.bindingContext
+        konst shouldInlineConstVals = context.languageVersionSettings.supportsFeature(LanguageFeature.InlineConstVals)
 
-        for ((_, resolvedValueArgument) in resolvedCall.valueArguments) {
-            for (valueArgument in resolvedValueArgument.arguments) {
-                val ktExpression =  KtPsiUtil.deparenthesize(valueArgument.getArgumentExpression() ?: continue) ?: continue
+        for ((_, resolvedValueArgument) in resolvedCall.konstueArguments) {
+            for (konstueArgument in resolvedValueArgument.arguments) {
+                konst ktExpression =  KtPsiUtil.deparenthesize(konstueArgument.getArgumentExpression() ?: continue) ?: continue
 
-                val constant = getCompileTimeConstant(ktExpression, bindingContext, false, shouldInlineConstVals)
+                konst constant = getCompileTimeConstant(ktExpression, bindingContext, false, shouldInlineConstVals)
                 if (constant == null) {
                     context.trace.report(ErrorsJvm.API_VERSION_IS_AT_LEAST_ARGUMENT_SHOULD_BE_CONSTANT.on(ktExpression))
                 }
@@ -49,16 +49,16 @@ object ApiVersionIsAtLeastArgumentsChecker : CallChecker {
     }
 
     private fun isApiVersionIsAtLeast(descriptor: CallableDescriptor): Boolean {
-        val functionDescriptor = descriptor as? FunctionDescriptor ?: return false
+        konst functionDescriptor = descriptor as? FunctionDescriptor ?: return false
 
         if (functionDescriptor.name.asString() != "apiVersionIsAtLeast") return false
 
-        val returnType = functionDescriptor.returnType ?: return false
+        konst returnType = functionDescriptor.returnType ?: return false
         if (!KotlinBuiltIns.isBoolean(returnType)) return false
 
-        if (!functionDescriptor.valueParameters.all { KotlinBuiltIns.isInt(it.type) }) return false
+        if (!functionDescriptor.konstueParameters.all { KotlinBuiltIns.isInt(it.type) }) return false
 
-        val containingPackage = functionDescriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
+        konst containingPackage = functionDescriptor.containingDeclaration as? PackageFragmentDescriptor ?: return false
         return containingPackage.fqName.asString() == "kotlin.internal"
     }
 }

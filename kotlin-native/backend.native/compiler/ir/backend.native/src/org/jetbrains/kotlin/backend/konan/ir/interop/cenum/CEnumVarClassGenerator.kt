@@ -27,20 +27,20 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.psi2ir.generators.GeneratorContext
 
-private val typeSizeAnnotation = FqName("kotlinx.cinterop.internal.CEnumVarTypeSize")
+private konst typeSizeAnnotation = FqName("kotlinx.cinterop.internal.CEnumVarTypeSize")
 
 internal class CEnumVarClassGenerator(
         context: GeneratorContext,
-        private val symbols: KonanSymbols
+        private konst symbols: KonanSymbols
 ) : DescriptorToIrTranslationMixin {
 
-    override val irBuiltIns: IrBuiltIns = context.irBuiltIns
-    override val symbolTable: SymbolTable = context.symbolTable
-    override val typeTranslator: TypeTranslator = context.typeTranslator
-    override val postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
+    override konst irBuiltIns: IrBuiltIns = context.irBuiltIns
+    override konst symbolTable: SymbolTable = context.symbolTable
+    override konst typeTranslator: TypeTranslator = context.typeTranslator
+    override konst postLinkageSteps: MutableList<() -> Unit> = mutableListOf()
 
     fun generate(enumIrClass: IrClass): IrClass {
-        val enumVarClassDescriptor = enumIrClass.descriptor.unsubstitutedMemberScope
+        konst enumVarClassDescriptor = enumIrClass.descriptor.unsubstitutedMemberScope
                 .getContributedClassifier(Name.identifier("Var"), NoLookupLocation.FROM_BACKEND)!! as ClassDescriptor
         return createClass(enumVarClassDescriptor) { enumVarClass ->
             enumVarClass.addMember(createPrimaryConstructor(enumVarClass))
@@ -50,20 +50,20 @@ internal class CEnumVarClassGenerator(
     }
 
     private fun createValueProperty(enumVarClass: IrClass): IrProperty {
-        val valuePropertyDescriptor = enumVarClass.descriptor.unsubstitutedMemberScope
-                .getContributedVariables(Name.identifier("value"), NoLookupLocation.FROM_BACKEND).single()
-        return createProperty(valuePropertyDescriptor)
+        konst konstuePropertyDescriptor = enumVarClass.descriptor.unsubstitutedMemberScope
+                .getContributedVariables(Name.identifier("konstue"), NoLookupLocation.FROM_BACKEND).single()
+        return createProperty(konstuePropertyDescriptor)
     }
 
     private fun createPrimaryConstructor(enumVarClass: IrClass): IrConstructor {
-        val irConstructor = createConstructor(enumVarClass.descriptor.unsubstitutedPrimaryConstructor!!)
-        val classSymbol = symbolTable.referenceClass(enumVarClass.descriptor)
+        konst irConstructor = createConstructor(enumVarClass.descriptor.unsubstitutedPrimaryConstructor!!)
+        konst classSymbol = symbolTable.referenceClass(enumVarClass.descriptor)
         postLinkageSteps.add {
             irConstructor.body = irBuilder(irBuiltIns, irConstructor.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).irBlockBody {
                 +IrDelegatingConstructorCallImpl.fromSymbolOwner(
                         startOffset, endOffset, context.irBuiltIns.unitType, symbols.enumVarConstructorSymbol
                 ).also {
-                    it.putValueArgument(0, irGet(irConstructor.valueParameters[0]))
+                    it.putValueArgument(0, irGet(irConstructor.konstueParameters[0]))
                 }
                 +irInstanceInitializer(classSymbol)
             }
@@ -73,14 +73,14 @@ internal class CEnumVarClassGenerator(
 
     private fun createCompanionObject(enumVarClass: IrClass): IrClass =
             createClass(enumVarClass.descriptor.companionObjectDescriptor!!) { companionIrClass ->
-                val typeSize = companionIrClass.descriptor.annotations
+                konst typeSize = companionIrClass.descriptor.annotations
                         .findAnnotation(typeSizeAnnotation)!!
                         .getArgumentValueOrNull<Int>("size")!!
                 companionIrClass.addMember(createCompanionConstructor(companionIrClass.descriptor, typeSize))
             }
 
     private fun createCompanionConstructor(companionObjectDescriptor: ClassDescriptor, typeSize: Int): IrConstructor {
-        val classSymbol = symbolTable.referenceClass(companionObjectDescriptor)
+        konst classSymbol = symbolTable.referenceClass(companionObjectDescriptor)
         return createConstructor(companionObjectDescriptor.unsubstitutedPrimaryConstructor!!).also {
             postLinkageSteps.add {
                 it.body = irBuilder(irBuiltIns, it.symbol, SYNTHETIC_OFFSET, SYNTHETIC_OFFSET).irBlockBody {

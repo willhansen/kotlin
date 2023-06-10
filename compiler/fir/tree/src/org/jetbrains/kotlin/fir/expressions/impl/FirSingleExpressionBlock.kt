@@ -23,10 +23,10 @@ import org.jetbrains.kotlin.fir.visitors.transformSingle
 class FirSingleExpressionBlock(
     var statement: FirStatement
 ) : FirBlock() {
-    override val source: KtSourceElement?
+    override konst source: KtSourceElement?
         get() = statement.source?.fakeElement(KtFakeSourceElementKind.SingleExpressionBlock)
     override var annotations: MutableOrEmptyList<FirAnnotation> = MutableOrEmptyList.empty()
-    override val statements: List<FirStatement> get() = listOf(statement)
+    override konst statements: List<FirStatement> get() = listOf(statement)
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {

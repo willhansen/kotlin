@@ -43,20 +43,20 @@ abstract class KotlinNativeLink
 @Inject
 constructor(
     @Internal
-    val binary: NativeBinary,
-    private val objectFactory: ObjectFactory,
-    private val execOperations: ExecOperations
+    konst binary: NativeBinary,
+    private konst objectFactory: ObjectFactory,
+    private konst execOperations: ExecOperations
 ) : AbstractKotlinCompileTool<K2NativeCompilerArguments>(objectFactory),
     UsesKonanPropertiesBuildService,
     KotlinToolTask<KotlinCommonCompilerToolOptions> {
     @Deprecated("Visibility will be lifted to private in the future releases")
     @get:Internal
-    val compilation: KotlinNativeCompilation
+    konst compilation: KotlinNativeCompilation
         get() = binary.compilation
 
-    private val runnerSettings = KotlinNativeCompilerRunner.Settings.fromProject(project)
+    private konst runnerSettings = KotlinNativeCompilerRunner.Settings.fromProject(project)
 
-    final override val toolOptions: KotlinCommonCompilerToolOptions = objectFactory
+    final override konst toolOptions: KotlinCommonCompilerToolOptions = objectFactory
         .newInstance<KotlinCommonCompilerToolOptionsDefault>()
 
     init {
@@ -72,10 +72,10 @@ constructor(
         disallowSourceChanges()
     }
 
-    override val destinationDirectory: DirectoryProperty = binary.outputDirectoryProperty
+    override konst destinationDirectory: DirectoryProperty = binary.outputDirectoryProperty
 
     @get:Classpath
-    override val libraries: ConfigurableFileCollection = objectFactory.fileCollection().from(
+    override konst libraries: ConfigurableFileCollection = objectFactory.fileCollection().from(
         {
             // Avoid resolving these dependencies during task graph construction when we can't build the target:
             @Suppress("DEPRECATION")
@@ -85,33 +85,33 @@ constructor(
     )
 
     @get:Input
-    val outputKind: CompilerOutputKind get() = binary.outputKind.compilerOutputKind
+    konst outputKind: CompilerOutputKind get() = binary.outputKind.compilerOutputKind
 
     @get:Input
-    val optimized: Boolean get() = binary.optimized
+    konst optimized: Boolean get() = binary.optimized
 
     @get:Input
-    val debuggable: Boolean get() = binary.debuggable
+    konst debuggable: Boolean get() = binary.debuggable
 
     @get:Input
-    val baseName: String get() = binary.baseName
+    konst baseName: String get() = binary.baseName
 
     @Suppress("DEPRECATION")
-    private val konanTarget = compilation.konanTarget
+    private konst konanTarget = compilation.konanTarget
 
     @Suppress("DEPRECATION")
     @Deprecated("Use toolOptions to configure the task")
     @get:Internal
-    val languageSettings: LanguageSettings = compilation.defaultSourceSet.languageSettings
+    konst languageSettings: LanguageSettings = compilation.defaultSourceSet.languageSettings
 
     @Suppress("unused")
     @get:Input
-    protected val konanCacheKind: Provider<NativeCacheKind> = objectFactory.providerWithLazyConvention {
+    protected konst konanCacheKind: Provider<NativeCacheKind> = objectFactory.providerWithLazyConvention {
         project.getKonanCacheKind(konanTarget)
     }
 
     @get:Input
-    internal val useEmbeddableCompilerJar: Boolean = project.nativeUseEmbeddableCompilerJar
+    internal konst useEmbeddableCompilerJar: Boolean = project.nativeUseEmbeddableCompilerJar
 
     @Suppress("unused", "UNCHECKED_CAST")
     @Deprecated(
@@ -119,11 +119,11 @@ constructor(
         replaceWith = ReplaceWith("toolOptions.freeCompilerArgs.get()")
     )
     @get:Internal
-    val additionalCompilerOptions: Provider<Collection<String>> = toolOptions.freeCompilerArgs as Provider<Collection<String>>
+    konst additionalCompilerOptions: Provider<Collection<String>> = toolOptions.freeCompilerArgs as Provider<Collection<String>>
 
     @get:Internal
-    val kotlinOptions: KotlinCommonToolOptions = object : KotlinCommonToolOptions {
-        override val options: KotlinCommonCompilerToolOptions
+    konst kotlinOptions: KotlinCommonToolOptions = object : KotlinCommonToolOptions {
+        override konst options: KotlinCommonCompilerToolOptions
             get() = toolOptions
     }
 
@@ -140,64 +140,64 @@ constructor(
     // Binary-specific options.
     @get:Input
     @get:Optional
-    val entryPoint: String? get() = (binary as? Executable)?.entryPoint
+    konst entryPoint: String? get() = (binary as? Executable)?.entryPoint
 
     @get:Input
-    val linkerOpts: List<String> get() = binary.linkerOpts
+    konst linkerOpts: List<String> get() = binary.linkerOpts
 
     @get:Input
-    val binaryOptions: Map<String, String> by lazy { PropertiesProvider(project).nativeBinaryOptions + binary.binaryOptions }
+    konst binaryOptions: Map<String, String> by lazy { PropertiesProvider(project).nativeBinaryOptions + binary.binaryOptions }
 
     @get:Input
-    val processTests: Boolean get() = binary is TestExecutable
+    konst processTests: Boolean get() = binary is TestExecutable
 
     @get:Classpath
-    val exportLibraries: FileCollection get() = exportLibrariesResolvedConfiguration?.files ?: objectFactory.fileCollection()
+    konst exportLibraries: FileCollection get() = exportLibrariesResolvedConfiguration?.files ?: objectFactory.fileCollection()
 
-    private val exportLibrariesResolvedConfiguration = if (binary is AbstractNativeLibrary) {
+    private konst exportLibrariesResolvedConfiguration = if (binary is AbstractNativeLibrary) {
         LazyResolvedConfiguration(project.configurations.getByName(binary.exportConfigurationName))
     } else {
         null
     }
 
     @get:Input
-    val isStaticFramework: Boolean
+    konst isStaticFramework: Boolean
         get() = binary.let { it is Framework && it.isStatic }
 
     @Suppress("DEPRECATION")
     @get:Input
-    val target: String = compilation.konanTarget.name
+    konst target: String = compilation.konanTarget.name
 
     @Deprecated("Use 'embedBitcodeMode' provider instead.", ReplaceWith("embedBitcodeMode.get()"))
     @get:Internal
-    val embedBitcode: BitcodeEmbeddingMode
+    konst embedBitcode: BitcodeEmbeddingMode
         get() = embedBitcodeMode.get()
 
     @get:Input
-    val embedBitcodeMode: Provider<BitcodeEmbeddingMode> =
+    konst embedBitcodeMode: Provider<BitcodeEmbeddingMode> =
         (binary as? Framework)?.embedBitcodeMode ?: project.provider { BitcodeEmbeddingMode.DISABLE }
 
     @get:Internal
-    val apiFiles = project.files(project.configurations.getByName(compilation.apiConfigurationName)).filterKlibsPassedToCompiler()
+    konst apiFiles = project.files(project.configurations.getByName(compilation.apiConfigurationName)).filterKlibsPassedToCompiler()
 
-    private val externalDependenciesArgs by lazy { ExternalDependenciesBuilder(project, compilation).buildCompilerArgs() }
+    private konst externalDependenciesArgs by lazy { ExternalDependenciesBuilder(project, compilation).buildCompilerArgs() }
 
-    private val cacheBuilderSettings by lazy {
+    private konst cacheBuilderSettings by lazy {
         CacheBuilder.Settings.createWithProject(project, binary, konanTarget, toolOptions, externalDependenciesArgs)
     }
 
-    private class CacheSettings(val orchestration: NativeCacheOrchestration, val kind: NativeCacheKind,
-                                val icEnabled: Boolean, val threads: Int,
-                                val gradleUserHomeDir: File, val gradleBuildDir: File)
+    private class CacheSettings(konst orchestration: NativeCacheOrchestration, konst kind: NativeCacheKind,
+                                konst icEnabled: Boolean, konst threads: Int,
+                                konst gradleUserHomeDir: File, konst gradleBuildDir: File)
 
-    private val cacheSettings by lazy {
+    private konst cacheSettings by lazy {
         CacheSettings(project.getKonanCacheOrchestration(), project.getKonanCacheKind(konanTarget),
                       project.isKonanIncrementalCompilationEnabled(), project.getKonanParallelThreads(),
                       project.gradle.gradleUserHomeDir, project.buildDir)
     }
 
     override fun createCompilerArguments(context: CreateCompilerArgumentsContext) = context.create<K2NativeCompilerArguments> {
-        val compilerPlugins = listOfNotNull(
+        konst compilerPlugins = listOfNotNull(
             compilerPluginClasspath?.let { CompilerPluginData(it, compilerPluginOptions) },
             kotlinPluginData?.orNull?.let { CompilerPluginData(it.classpath, it.options) }
         )
@@ -222,7 +222,7 @@ constructor(
             }
 
             args.singleLinkerArguments = linkerOpts.toTypedArray()
-            args.binaryOptions = binaryOptions.map { (key, value) -> "$key=$value" }.toTypedArray()
+            args.binaryOptions = binaryOptions.map { (key, konstue) -> "$key=$konstue" }.toTypedArray()
             args.staticFramework = isStaticFramework
 
             KotlinCommonCompilerToolOptionsHelper.fillCompilerArguments(toolOptions, args)
@@ -244,23 +244,23 @@ constructor(
         }
     }
 
-    private fun validatedExportedLibraries() {
+    private fun konstidatedExportedLibraries() {
         if (exportLibrariesResolvedConfiguration == null) return
 
-        val failed = mutableSetOf<ResolvedDependencyResult>()
+        konst failed = mutableSetOf<ResolvedDependencyResult>()
         exportLibrariesResolvedConfiguration
             .allDependencies
             .filterIsInstance<ResolvedDependencyResult>()
             .forEach {
-                val dependencyFiles = exportLibrariesResolvedConfiguration.getArtifacts(it).map { it.file }.filterKlibsPassedToCompiler()
+                konst dependencyFiles = exportLibrariesResolvedConfiguration.getArtifacts(it).map { it.file }.filterKlibsPassedToCompiler()
                 if (!apiFiles.files.containsAll(dependencyFiles)) {
                     failed.add(it)
                 }
             }
 
         check(failed.isEmpty()) {
-            val failedDependenciesList = failed.joinToString(separator = "\n") {
-                val componentId = it.selected.id
+            konst failedDependenciesList = failed.joinToString(separator = "\n") {
+                konst componentId = it.selected.id
                 when (componentId) {
                     is ModuleComponentIdentifier -> "|Files: ${exportLibrariesResolvedConfiguration.getArtifacts(it).map { it.file }}"
                     is ProjectComponentIdentifier -> "|Project ${componentId.projectPath}"
@@ -280,19 +280,19 @@ constructor(
 
     @Suppress("DEPRECATION")
     @get:Classpath
-    protected val friendModule: FileCollection = objectFactory.fileCollection().from({ compilation.friendPaths })
+    protected konst friendModule: FileCollection = objectFactory.fileCollection().from({ compilation.friendPaths })
 
     @Suppress("DEPRECATION")
-    private val resolvedConfiguration = LazyResolvedConfiguration(
+    private konst resolvedConfiguration = LazyResolvedConfiguration(
         project.configurations.getByName(compilation.compileDependencyConfigurationName)
     )
 
     @get:Internal
-    open val outputFile: Provider<File>
+    open konst outputFile: Provider<File>
         get() = destinationDirectory.flatMap {
-            val prefix = outputKind.prefix(konanTarget)
-            val suffix = outputKind.suffix(konanTarget)
-            val filename = "$prefix${baseName}$suffix".let {
+            konst prefix = outputKind.prefix(konanTarget)
+            konst suffix = outputKind.suffix(konanTarget)
+            konst filename = "$prefix${baseName}$suffix".let {
                 when {
                     outputKind == CompilerOutputKind.FRAMEWORK ->
                         it.asValidFrameworkName()
@@ -312,11 +312,11 @@ constructor(
         level = DeprecationLevel.ERROR
     )
     @get:Input
-    val enableEndorsedLibs: Boolean
+    konst enableEndorsedLibs: Boolean
         get() = false
 
     @Internal
-    val compilerPluginOptions = CompilerPluginOptions()
+    konst compilerPluginOptions = CompilerPluginOptions()
 
     @Optional
     @Classpath
@@ -331,13 +331,13 @@ constructor(
 
     @TaskAction
     fun compile() {
-        validatedExportedLibraries()
+        konstidatedExportedLibraries()
 
-        val output = outputFile.get()
+        konst output = outputFile.get()
         output.parentFile.mkdirs()
 
-        val executionContext = KotlinToolRunner.GradleExecutionContext.fromTaskContext(objectFactory, execOperations, logger)
-        val additionalOptions = mutableListOf<String>().apply {
+        konst executionContext = KotlinToolRunner.GradleExecutionContext.fromTaskContext(objectFactory, execOperations, logger)
+        konst additionalOptions = mutableListOf<String>().apply {
             addAll(externalDependenciesArgs)
             when (cacheSettings.orchestration) {
                 NativeCacheOrchestration.Compiler -> {
@@ -348,7 +348,7 @@ constructor(
                         add("-Xauto-cache-from=${cacheSettings.gradleUserHomeDir}")
                         add("-Xbackend-threads=${cacheSettings.threads}")
                         if (cacheSettings.icEnabled) {
-                            val icCacheDir = cacheSettings.gradleBuildDir.resolve("kotlin-native-ic-cache")
+                            konst icCacheDir = cacheSettings.gradleBuildDir.resolve("kotlin-native-ic-cache")
                             icCacheDir.mkdirs()
                             add("-Xenable-incremental-compilation")
                             add("-Xic-cache-dir=$icCacheDir")
@@ -360,7 +360,7 @@ constructor(
                         executionContext.logger.warn(
                             "K/N incremental compilation only works in conjunction with kotlin.native.cacheOrchestration=compiler")
                     }
-                    val cacheBuilder = CacheBuilder(
+                    konst cacheBuilder = CacheBuilder(
                         executionContext = executionContext,
                         settings = cacheBuilderSettings,
                         konanPropertiesService = konanPropertiesService.get()
@@ -370,8 +370,8 @@ constructor(
             }
         }
 
-        val arguments = createCompilerArguments()
-        val buildArguments = ArgumentUtils.convertArgumentsToStringList(arguments) + additionalOptions
+        konst arguments = createCompilerArguments()
+        konst buildArguments = ArgumentUtils.convertArgumentsToStringList(arguments) + additionalOptions
 
         KotlinNativeCompilerRunner(
             settings = runnerSettings,

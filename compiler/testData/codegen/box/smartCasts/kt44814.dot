@@ -175,14 +175,14 @@ digraph kt44814_kt {
         subgraph cluster_20 {
             color=blue
             53 [label="Enter function <init> [2]" style="filled" fillcolor=red];
-            54 [label="Enter default value of _children [2]"];
+            54 [label="Enter default konstue of _children [2]"];
             subgraph cluster_21 {
                 color=blue
-                55 [label="Enter default value of _children [3]" style="filled" fillcolor=red];
+                55 [label="Enter default konstue of _children [3]" style="filled" fillcolor=red];
                 56 [label="Function call: R|kotlin/collections/emptyList|<R|LighterASTNode?|>() [3]" style="filled" fillcolor=yellow];
-                57 [label="Exit default value of _children [3]" style="filled" fillcolor=red];
+                57 [label="Exit default konstue of _children [3]" style="filled" fillcolor=red];
             }
-            58 [label="Exit default value of _children [2]"];
+            58 [label="Exit default konstue of _children [2]"];
             59 [label="Delegated constructor call: super<R|kotlin/Any|>() [2]" style="filled" fillcolor=yellow];
             60 [label="Exit function <init> [2]" style="filled" fillcolor=red];
         }
@@ -467,10 +467,10 @@ digraph kt44814_kt {
             145 [label="Function call: R|/LighterASTNode.LighterASTNode|(...) [3]" style="filled" fillcolor=yellow];
             146 [label="Function call: R|/FlyweightCapableTreeStructure.FlyweightCapableTreeStructure|() [3]" style="filled" fillcolor=yellow];
             147 [label="Function call: R|/FirLightSourceElement.FirLightSourceElement|(...) [3]" style="filled" fillcolor=yellow];
-            148 [label="Variable declaration: lval sourceElement: R|FirSourceElement?| [3]"];
+            148 [label="Variable declaration: lkonst sourceElement: R|FirSourceElement?| [3]"];
             149 [label="Access variable R|<local>/sourceElement| [3]"];
             150 [label="Function call: (this@R|/FirModifierList.Companion|, R|<local>/sourceElement|).R|/FirModifierList.Companion.getModifierList|() [3]" style="filled" fillcolor=yellow];
-            151 [label="Variable declaration: lval result: R|FirModifierList?| [3]"];
+            151 [label="Variable declaration: lkonst result: R|FirModifierList?| [3]"];
             subgraph cluster_52 {
                 color=blue
                 152 [label="Enter when [3]"];
@@ -584,7 +584,7 @@ digraph kt44814_kt {
                     214 [label="Stub [3]" style="filled" fillcolor=gray];
                     215 [label="Lhs of ?: is not null [3]"];
                     216 [label="Exit ?: [3]"];
-                    217 [label="Variable declaration: lval modifierListNode: R|LighterASTNode| [3]"];
+                    217 [label="Variable declaration: lkonst modifierListNode: R|LighterASTNode| [3]"];
                     218 [label="Access variable R|<local>/modifierListNode| [3]"];
                     219 [label="Access variable R|/FirLightSourceElement.treeStructure| [3]"];
                     220 [label="Function call: R|/FirModifierList.FirLightModifierList.FirLightModifierList|(...) [3]" style="filled" fillcolor=yellow];
@@ -642,7 +642,7 @@ digraph kt44814_kt {
         ) }
     }
     ($subj$ is R|FirLightSourceElement|) ->  {
-        lval modifierListNode: R|LighterASTNode| = this@R|/FirModifierList.Companion.getModifierList|.R|/FirLightSourceElement.lighterASTNode|.R|/LighterASTNode.getChildren|(this@R|/FirModifierList.Companion.getModifierList|.R|/FirLightSourceElement.treeStructure|).R|kotlin/collections/find|<R|LighterASTNode?|>(<L> = find@fun <anonymous>(it: R|LighterASTNode?|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
+        lkonst modifierListNode: R|LighterASTNode| = this@R|/FirModifierList.Companion.getModifierList|.R|/FirLightSourceElement.lighterASTNode|.R|/LighterASTNode.getChildren|(this@R|/FirModifierList.Companion.getModifierList|.R|/FirLightSourceElement.treeStructure|).R|kotlin/collections/find|<R|LighterASTNode?|>(<L> = find@fun <anonymous>(it: R|LighterASTNode?|): R|kotlin/Boolean| <inline=Inline, kind=UNKNOWN>  {
             ^ ==(R|<local>/it|?.{ $subj$.R|/LighterASTNode.tokenType| }, Q|TokenType|.R|/TokenType.Companion.MODIFIER_LIST|)
         }
         ) ?: ^getModifierList Null(null)

@@ -1,4 +1,4 @@
-val foo: ((String) -> String) = run {
+konst foo: ((String) -> String) = run {
     { it }
 }
 

@@ -25,18 +25,18 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.capitalizeAsciiOnly
 import kotlin.reflect.KProperty
 
-class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: NotFoundClasses) {
-    private val kotlinReflectScope: MemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
+class ReflectionTypes(module: ModuleDescriptor, private konst notFoundClasses: NotFoundClasses) {
+    private konst kotlinReflectScope: MemberScope by lazy(LazyThreadSafetyMode.PUBLICATION) {
         module.getPackage(KOTLIN_REFLECT_FQ_NAME).memberScope
     }
 
     private fun find(className: String, numberOfTypeParameters: Int): ClassDescriptor {
-        val name = Name.identifier(className)
+        konst name = Name.identifier(className)
         return kotlinReflectScope.getContributedClassifier(name, NoLookupLocation.FROM_REFLECTION) as? ClassDescriptor
                 ?: notFoundClasses.getClass(ClassId(KOTLIN_REFLECT_FQ_NAME, name), listOf(numberOfTypeParameters))
     }
 
-    private class ClassLookup(val numberOfTypeParameters: Int) {
+    private class ClassLookup(konst numberOfTypeParameters: Int) {
         operator fun getValue(types: ReflectionTypes, property: KProperty<*>): ClassDescriptor {
             return types.find(property.name.capitalizeAsciiOnly(), numberOfTypeParameters)
         }
@@ -45,14 +45,14 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
     fun getKFunction(n: Int): ClassDescriptor = find("$K_FUNCTION_PREFIX$n", n + 1)
     fun getKSuspendFunction(n: Int): ClassDescriptor = find("$K_SUSPEND_FUNCTION_PREFIX$n", n + 1)
 
-    val kClass: ClassDescriptor by ClassLookup(1)
-    val kProperty: ClassDescriptor by ClassLookup(1)
-    val kProperty0: ClassDescriptor by ClassLookup(1)
-    val kProperty1: ClassDescriptor by ClassLookup(2)
-    val kProperty2: ClassDescriptor by ClassLookup(3)
-    val kMutableProperty0: ClassDescriptor by ClassLookup(1)
-    val kMutableProperty1: ClassDescriptor by ClassLookup(2)
-    val kMutableProperty2: ClassDescriptor by ClassLookup(3)
+    konst kClass: ClassDescriptor by ClassLookup(1)
+    konst kProperty: ClassDescriptor by ClassLookup(1)
+    konst kProperty0: ClassDescriptor by ClassLookup(1)
+    konst kProperty1: ClassDescriptor by ClassLookup(2)
+    konst kProperty2: ClassDescriptor by ClassLookup(3)
+    konst kMutableProperty0: ClassDescriptor by ClassLookup(1)
+    konst kMutableProperty1: ClassDescriptor by ClassLookup(2)
+    konst kMutableProperty2: ClassDescriptor by ClassLookup(3)
 
     fun getKClassType(annotations: Annotations, type: KotlinType, variance: Variance): KotlinType =
             KotlinTypeFactory.simpleNotNullType(annotations.toDefaultAttributes(), kClass, listOf(TypeProjectionImpl(variance, type)))
@@ -67,15 +67,15 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
         builtIns: KotlinBuiltIns,
         isSuspend: Boolean
     ): SimpleType {
-        val arguments =
+        konst arguments =
             getFunctionTypeArgumentProjections(receiverType, contextReceiverTypes, parameterTypes, parameterNames, returnType, builtIns)
-        val classDescriptor =
+        konst classDescriptor =
             if (isSuspend) getKSuspendFunction(arguments.size - 1 /* return type */) else getKFunction(arguments.size - 1 /* return type */)
         return KotlinTypeFactory.simpleNotNullType(annotations.toDefaultAttributes(), classDescriptor, arguments)
     }
 
     fun getKPropertyType(annotations: Annotations, receiverTypes: List<KotlinType>, returnType: KotlinType, mutable: Boolean): SimpleType {
-        val classDescriptor = when (receiverTypes.size) {
+        konst classDescriptor = when (receiverTypes.size) {
             0 -> when {
                 mutable -> kMutableProperty0
                 else -> kProperty0
@@ -91,18 +91,18 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
             else -> throw AssertionError("More than 2 receivers is not allowed")
         }
 
-        val arguments = (receiverTypes + returnType).map(::TypeProjectionImpl)
+        konst arguments = (receiverTypes + returnType).map(::TypeProjectionImpl)
         return KotlinTypeFactory.simpleNotNullType(annotations.toDefaultAttributes(), classDescriptor, arguments)
     }
 
     companion object {
         fun isReflectionClass(descriptor: ClassDescriptor): Boolean {
-            val containingPackage = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java)
+            konst containingPackage = DescriptorUtils.getParentOfType(descriptor, PackageFragmentDescriptor::class.java)
             return containingPackage != null && containingPackage.fqName == KOTLIN_REFLECT_FQ_NAME
         }
 
         fun isKClassType(type: KotlinType): Boolean {
-            val descriptor = type.unwrap().constructor.declarationDescriptor ?: return false
+            konst descriptor = type.unwrap().constructor.declarationDescriptor ?: return false
             return descriptor.classId == StandardClassIds.KClass
         }
 
@@ -128,23 +128,23 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
             hasFqName(type.constructor, StandardNames.FqNames.kMutablePropertyFqName)
 
         fun isNumberedKMutablePropertyType(type: KotlinType): Boolean {
-            val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
             return hasFqName(descriptor, StandardNames.FqNames.kMutableProperty0) ||
                    hasFqName(descriptor, StandardNames.FqNames.kMutableProperty1) ||
                    hasFqName(descriptor, StandardNames.FqNames.kMutableProperty2)
         }
 
         fun isNumberedTypeWithOneOrMoreNumber(type: KotlinType): Boolean {
-            val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
-            val fqName = DescriptorUtils.getFqName(descriptor)
+            konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst fqName = DescriptorUtils.getFqName(descriptor)
             if (fqName.isRoot) return false
 
             if (fqName.parent().toSafe() != KOTLIN_REFLECT_FQ_NAME) return false
-            val shortName = descriptor.name.asString()
+            konst shortName = descriptor.name.asString()
 
             for (prefix in PREFIXES) {
                 if (shortName.startsWith(prefix)) {
-                    val number = shortName.removePrefix(prefix)
+                    konst number = shortName.removePrefix(prefix)
                     return number.isNotEmpty() && number != "0"
                 }
             }
@@ -155,7 +155,7 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
             hasFqName(type.constructor, StandardNames.FqNames.kPropertyFqName)
 
         fun isNumberedKPropertyType(type: KotlinType): Boolean {
-            val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
             return hasFqName(descriptor, StandardNames.FqNames.kProperty0) ||
                    hasFqName(descriptor, StandardNames.FqNames.kProperty1) ||
                    hasFqName(descriptor, StandardNames.FqNames.kProperty2)
@@ -166,22 +166,22 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
         }
 
         fun isNumberedKFunction(type: KotlinType): Boolean {
-            val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
-            val shortName = descriptor.name.asString()
+            konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst shortName = descriptor.name.asString()
 
             return (shortName.length > K_FUNCTION_PREFIX.length && shortName.startsWith(K_FUNCTION_PREFIX)) &&
                     DescriptorUtils.getFqName(descriptor).parent().toSafe() == KOTLIN_REFLECT_FQ_NAME
         }
 
         fun isNumberedKSuspendFunction(type: KotlinType): Boolean {
-            val descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
-            val shortName = descriptor.name.asString()
+            konst descriptor = type.constructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst shortName = descriptor.name.asString()
             return shortName.length > K_SUSPEND_FUNCTION_PREFIX.length && shortName.startsWith(K_SUSPEND_FUNCTION_PREFIX) &&
                     DescriptorUtils.getFqName(descriptor).parent().toSafe() == KOTLIN_REFLECT_FQ_NAME
         }
 
         private fun hasFqName(typeConstructor: TypeConstructor, fqName: FqNameUnsafe): Boolean {
-            val descriptor = typeConstructor.declarationDescriptor
+            konst descriptor = typeConstructor.declarationDescriptor
             return descriptor is ClassDescriptor && hasFqName(descriptor, fqName)
         }
 
@@ -190,21 +190,21 @@ class ReflectionTypes(module: ModuleDescriptor, private val notFoundClasses: Not
         }
 
         fun createKPropertyStarType(module: ModuleDescriptor): KotlinType? {
-            val kPropertyClass = module.findClassAcrossModuleDependencies(StandardNames.FqNames.kProperty) ?: return null
+            konst kPropertyClass = module.findClassAcrossModuleDependencies(StandardNames.FqNames.kProperty) ?: return null
             return KotlinTypeFactory.simpleNotNullType(TypeAttributes.Empty, kPropertyClass,
                                                        listOf(StarProjectionImpl(kPropertyClass.typeConstructor.parameters.single())))
         }
 
         fun isPossibleExpectedCallableType(typeConstructor: TypeConstructor): Boolean {
-            val descriptor = typeConstructor.declarationDescriptor as? ClassDescriptor ?: return false
+            konst descriptor = typeConstructor.declarationDescriptor as? ClassDescriptor ?: return false
             if (KotlinBuiltIns.isAny(descriptor)) return true
 
-            val shortName = descriptor.name.asString()
+            konst shortName = descriptor.name.asString()
 
-            val fqName = DescriptorUtils.getFqName(descriptor)
+            konst fqName = DescriptorUtils.getFqName(descriptor)
             if (fqName.isRoot) return false
 
-            val packageName = fqName.parent().toSafe()
+            konst packageName = fqName.parent().toSafe()
             if (packageName == KOTLIN_REFLECT_FQ_NAME) {
                 return shortName.startsWith("KFunction") // KFunctionN, KFunction
                        || shortName.startsWith("KSuspendFunction") // KSuspendFunctionN

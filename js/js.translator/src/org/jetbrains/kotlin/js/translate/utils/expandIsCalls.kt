@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.js.translate.utils.JsAstUtils.*
 import java.util.*
 
 fun expandIsCalls(fragments: Iterable<JsProgramFragment>) {
-    val visitor = TypeCheckRewritingVisitor()
+    konst visitor = TypeCheckRewritingVisitor()
     for (fragment in fragments) {
         visitor.accept(fragment.declarationBlock)
         visitor.accept(fragment.initializerBlock)
@@ -34,8 +34,8 @@ fun expandIsCalls(fragments: Iterable<JsProgramFragment>) {
 
 private class TypeCheckRewritingVisitor : JsVisitorWithContextImpl() {
 
-    private val scopes = Stack<JsScope>()
-    private val localVars = Stack<MutableSet<JsName>>().apply { push(mutableSetOf()) }
+    private konst scopes = Stack<JsScope>()
+    private konst localVars = Stack<MutableSet<JsName>>().apply { push(mutableSetOf()) }
 
     override fun visit(x: JsFunction, ctx: JsContext<*>): Boolean {
         scopes.push(x.scope)
@@ -56,12 +56,12 @@ private class TypeCheckRewritingVisitor : JsVisitorWithContextImpl() {
 
     override fun visit(x: JsInvocation, ctx: JsContext<JsNode>): Boolean {
         // callee(calleeArgument)(argument)
-        val callee = x.qualifier as? JsInvocation
-        val calleeArguments = callee?.arguments
-        val argument = x.arguments.firstOrNull()
+        konst callee = x.qualifier as? JsInvocation
+        konst calleeArguments = callee?.arguments
+        konst argument = x.arguments.firstOrNull()
 
         if (callee != null && argument != null && calleeArguments != null) {
-            val replacement = getReplacement(callee, calleeArguments, argument)
+            konst replacement = getReplacement(callee, calleeArguments, argument)
 
             if (replacement != null) {
                 ctx.replaceMe(accept(replacement).source(x.source))
@@ -73,7 +73,7 @@ private class TypeCheckRewritingVisitor : JsVisitorWithContextImpl() {
     }
 
     private fun getReplacement(callee: JsInvocation, calleeArguments: List<JsExpression>, argument: JsExpression): JsExpression? {
-        val typeCheck = callee.typeCheck
+        konst typeCheck = callee.typeCheck
         return when (typeCheck) {
             TypeCheck.TYPEOF -> {
                 // `Kotlin.isTypeOf(calleeArgument)(argument)` -> `typeOf argument === calleeArgument`
@@ -109,15 +109,15 @@ private class TypeCheckRewritingVisitor : JsVisitorWithContextImpl() {
             return JsInvocation(calleeArgument, argument)
         }
 
-        val (nullCheckTarget, nextCheckTarget) = expandArgumentForTwoInvocations(argument)
-        val isNull = TranslationUtils.isNullCheck(nullCheckTarget)
+        konst (nullCheckTarget, nextCheckTarget) = expandArgumentForTwoInvocations(argument)
+        konst isNull = TranslationUtils.isNullCheck(nullCheckTarget)
         return or(isNull, JsInvocation(calleeArgument, nextCheckTarget))
     }
 
     private fun getReplacementForAndPredicate(argument: JsExpression, p1: JsExpression, p2: JsExpression): JsExpression {
-        val (arg1, arg2) = expandArgumentForTwoInvocations(argument)
-        val first = accept(JsInvocation(p1, arg1) as JsExpression)
-        val second = accept(JsInvocation(p2, arg2) as JsExpression)
+        konst (arg1, arg2) = expandArgumentForTwoInvocations(argument)
+        konst first = accept(JsInvocation(p1, arg1) as JsExpression)
+        konst second = accept(JsInvocation(p2, arg2) as JsExpression)
         return JsAstUtils.and(first, second)
     }
 
@@ -134,22 +134,22 @@ private class TypeCheckRewritingVisitor : JsVisitorWithContextImpl() {
     }
 
     private fun generateAlias(argument: JsExpression): Pair<JsExpression, JsExpression> {
-        val tmp = JsScope.declareTemporary()
-        val statementContext = lastStatementLevelContext
+        konst tmp = JsScope.declareTemporary()
+        konst statementContext = lastStatementLevelContext
         statementContext.addPrevious(newVar(tmp, null))
         return Pair(assignment(tmp.makeRef(), argument), tmp.makeRef())
     }
 
-    private val JsExpression.needsAlias: Boolean
+    private konst JsExpression.needsAlias: Boolean
         get() = when (this) {
             is JsLiteral.JsValueLiteral -> false
             else -> !isLocalVar
         }
 
-    private val JsExpression.isLocalVar: Boolean
+    private konst JsExpression.isLocalVar: Boolean
         get() = localVars.isNotEmpty() && this is JsNameRef && name.let { it != null && it in localVars.peek() }
 
-    private val JsExpression.isAssignmentToLocalVar: Boolean
+    private konst JsExpression.isAssignmentToLocalVar: Boolean
         get() = localVars.isNotEmpty() &&
                 JsAstUtils.decomposeAssignmentToVariable(this).let { it != null && it.first in localVars.peek() }
 }

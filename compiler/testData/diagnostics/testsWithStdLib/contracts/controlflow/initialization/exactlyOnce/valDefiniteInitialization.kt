@@ -12,7 +12,7 @@ fun <T> myRun(block: () -> T): T {
 }
 
 fun initialization() {
-    val x: Int
+    konst x: Int
     myRun {
         x = 42
         42
@@ -21,18 +21,18 @@ fun initialization() {
 }
 
 fun shadowing() {
-    val x = 42
+    konst x = 42
     myRun {
-        val <!NAME_SHADOWING!>x<!> = 43
+        konst <!NAME_SHADOWING!>x<!> = 43
         x.inc()
     }
     x.inc()
 }
 
 fun nestedDefiniteAssignment() {
-    val x: Int
+    konst x: Int
     myRun {
-        val y = "Hello"
+        konst y = "Hello"
         myRun {
             x = 42
         }
@@ -42,11 +42,11 @@ fun nestedDefiniteAssignment() {
 }
 
 fun deeplyNestedDefiniteAssignment() {
-    val x: Int
+    konst x: Int
     myRun {
-        val y: String
+        konst y: String
         myRun {
-            val z: String
+            konst z: String
             myRun {
                 z = "Hello"
                 y = "World"
@@ -60,7 +60,7 @@ fun deeplyNestedDefiniteAssignment() {
 }
 
 fun branchingFlow(a: Any?) {
-    val x: Int
+    konst x: Int
 
     if (a is String) {
         myRun { x = 42 }
@@ -73,8 +73,8 @@ fun branchingFlow(a: Any?) {
 }
 
 fun returningValue() {
-    val x: Int
-    val hello = myRun { x = 42; "hello" }
+    konst x: Int
+    konst hello = myRun { x = 42; "hello" }
     x.inc()
     hello.length
 }
@@ -82,8 +82,8 @@ fun returningValue() {
 fun unknownRun(block: () -> Unit) = block()
 
 class DefiniteInitializationInInitSection {
-    val x: Int
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val y: Int<!>
+    konst x: Int
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst y: Int<!>
 
     init {
         myRun { <!CAPTURED_VAL_INITIALIZATION!>x<!> = 42 }
@@ -93,7 +93,7 @@ class DefiniteInitializationInInitSection {
 
 class DefiniteInitializationAfterThrow {
     fun test() {
-        val a: Int
+        konst a: Int
         myRun {
             if (bar()) throw RuntimeException()
             a = 42

@@ -25,16 +25,16 @@ import org.jetbrains.kotlin.storage.StorageManager
 
 abstract class DeserializedPackageFragment(
     fqName: FqName,
-    protected val storageManager: StorageManager,
+    protected konst storageManager: StorageManager,
     module: ModuleDescriptor
 ) : PackageFragmentDescriptorImpl(module, fqName) {
 
     abstract fun initialize(components: DeserializationComponents)
 
-    abstract val classDataFinder: ClassDataFinder
+    abstract konst classDataFinder: ClassDataFinder
 
     open fun hasTopLevelClass(name: Name): Boolean {
-        val scope = getMemberScope()
+        konst scope = getMemberScope()
         return scope is DeserializedMemberScope && name in scope.classNames
     }
 }

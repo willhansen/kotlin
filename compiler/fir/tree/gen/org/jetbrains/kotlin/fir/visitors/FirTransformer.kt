@@ -263,8 +263,8 @@ abstract class FirTransformer<in D> : FirVisitor<FirElement, D>() {
         return transformElement(variable, data)
     }
 
-    open fun transformValueParameter(valueParameter: FirValueParameter, data: D): FirStatement {
-        return transformElement(valueParameter, data)
+    open fun transformValueParameter(konstueParameter: FirValueParameter, data: D): FirStatement {
+        return transformElement(konstueParameter, data)
     }
 
     open fun transformReceiverParameter(receiverParameter: FirReceiverParameter, data: D): FirReceiverParameter {
@@ -871,8 +871,8 @@ abstract class FirTransformer<in D> : FirVisitor<FirElement, D>() {
         return transformVariable(variable, data)
     }
 
-    final override fun visitValueParameter(valueParameter: FirValueParameter, data: D): FirStatement {
-        return transformValueParameter(valueParameter, data)
+    final override fun visitValueParameter(konstueParameter: FirValueParameter, data: D): FirStatement {
+        return transformValueParameter(konstueParameter, data)
     }
 
     final override fun visitReceiverParameter(receiverParameter: FirReceiverParameter, data: D): FirReceiverParameter {

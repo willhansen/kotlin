@@ -22,7 +22,7 @@ import org.jetbrains.kotlin.storage.StorageManager
 import java.io.InputStream
 
 class BuiltInsLoaderImpl : BuiltInsLoader {
-    private val resourceLoader = BuiltInsResourceLoader()
+    private konst resourceLoader = BuiltInsResourceLoader()
 
     override fun createPackageFragmentProvider(
         storageManager: StorageManager,
@@ -54,16 +54,16 @@ class BuiltInsLoaderImpl : BuiltInsLoader {
         isFallback: Boolean,
         loadResource: (String) -> InputStream?
     ): PackageFragmentProvider {
-        val packageFragments = packageFqNames.map { fqName ->
-            val resourcePath = BuiltInSerializerProtocol.getBuiltInsFilePath(fqName)
-            val inputStream = loadResource(resourcePath) ?: throw IllegalStateException("Resource not found in classpath: $resourcePath")
+        konst packageFragments = packageFqNames.map { fqName ->
+            konst resourcePath = BuiltInSerializerProtocol.getBuiltInsFilePath(fqName)
+            konst inputStream = loadResource(resourcePath) ?: throw IllegalStateException("Resource not found in classpath: $resourcePath")
             BuiltInsPackageFragmentImpl.create(fqName, storageManager, module, inputStream, isFallback)
         }
-        val provider = PackageFragmentProviderImpl(packageFragments)
+        konst provider = PackageFragmentProviderImpl(packageFragments)
 
-        val notFoundClasses = NotFoundClasses(storageManager, module)
+        konst notFoundClasses = NotFoundClasses(storageManager, module)
 
-        val components = DeserializationComponents(
+        konst components = DeserializationComponents(
             storageManager,
             module,
             DeserializationConfiguration.Default,

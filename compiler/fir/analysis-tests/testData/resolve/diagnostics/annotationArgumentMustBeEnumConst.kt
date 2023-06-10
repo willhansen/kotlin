@@ -2,9 +2,9 @@ enum class TestEnum {
     Foo
 }
 
-annotation class Ann(vararg val a: TestEnum)
+annotation class Ann(vararg konst a: TestEnum)
 
-val foo = TestEnum.Foo
+konst foo = TestEnum.Foo
 var bar = TestEnum.Foo
 
 @Ann(<!ANNOTATION_ARGUMENT_MUST_BE_ENUM_CONST!>foo<!>, <!ANNOTATION_ARGUMENT_MUST_BE_ENUM_CONST!>bar<!>)

@@ -49,9 +49,9 @@ public class ReplInterpreterTestGenerated extends AbstractReplInterpreterTest {
         runTest("compiler/testData/repl/empty.repl");
     }
 
-    @TestMetadata("evaluationErrors.repl")
-    public void testEvaluationErrors() throws Exception {
-        runTest("compiler/testData/repl/evaluationErrors.repl");
+    @TestMetadata("ekonstuationErrors.repl")
+    public void testEkonstuationErrors() throws Exception {
+        runTest("compiler/testData/repl/ekonstuationErrors.repl");
     }
 
     @TestMetadata("exceptionInValueToString.repl")

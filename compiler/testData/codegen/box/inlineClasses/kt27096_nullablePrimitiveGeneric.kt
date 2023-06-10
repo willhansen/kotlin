@@ -4,13 +4,13 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z1<T: Int?>(val x: T)
+konstue class Z1<T: Int?>(konst x: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z2<T: Z1<Int?>>(val z: T)
+konstue class Z2<T: Z1<Int?>>(konst z: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class ZN<T: Z1<Int?>?>(val z: T)
+konstue class ZN<T: Z1<Int?>?>(konst z: T)
 
 fun wrap1(n: Int): Z1<Int?>? = if (n < 0) null else Z1(n)
 fun wrap2(n: Int): Z2<Z1<Int?>>? = if (n < 0) null else Z2(Z1(n))

@@ -26,7 +26,7 @@ internal object LLFirGeneratedCompanionObjectLazyResolver : LLFirLazyResolver(Fi
         scopeSession: ScopeSession,
         towerDataContextCollector: FirTowerDataContextCollector?,
     ) {
-        val resolver = LLFirCompanionGenerationTargetResolver(target, lockProvider, session)
+        konst resolver = LLFirCompanionGenerationTargetResolver(target, lockProvider, session)
         resolver.resolveDesignation()
     }
 
@@ -44,7 +44,7 @@ private class LLFirCompanionGenerationTargetResolver(
     lockProvider: LLFirLockProvider,
     session: FirSession,
 ) : LLFirTargetResolver(target, lockProvider, FirResolvePhase.COMPANION_GENERATION) {
-    private val transformer: FirCompanionGenerationTransformer = FirCompanionGenerationTransformer(session)
+    private konst transformer: FirCompanionGenerationTransformer = FirCompanionGenerationTransformer(session)
 
     override fun withFile(firFile: FirFile, action: () -> Unit) {
         action()

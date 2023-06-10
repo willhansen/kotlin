@@ -138,7 +138,7 @@ test("Objects Basics.", function() {
 	), false);
 
 	// Objects with no prototype, created via Object.create(null), are used e.g. as dictionaries.
-	// Being able to test equivalence against object literals is quite useful.
+	// Being able to test equikonstence against object literals is quite useful.
 	if (typeof Object.create === 'function') {
 		equal(QUnit.equiv(Object.create(null), {}), true, "empty object without prototype VS empty object");
 
@@ -342,7 +342,7 @@ test("Functions.", function() {
 
 	equal(QUnit.equiv(f0, f0), true, "Function references"); // same references
 	equal(QUnit.equiv(f0, f1), false, "Function references"); // exact source code, different references
-	equal(QUnit.equiv(f2, f3), false, "Function references"); // equivalent source code, different references
+	equal(QUnit.equiv(f2, f3), false, "Function references"); // equikonstent source code, different references
 	equal(QUnit.equiv(f1, f2), false, "Function references"); // different source code, different references
 	equal(QUnit.equiv(function() {}, true), false);
 	equal(QUnit.equiv(function() {}, undefined), false);
@@ -365,8 +365,8 @@ test("Date instances.", function() {
 	var d3 = new Date(); // The very now
 
 	// Anyway their types differs, just in case the code fails in the order in which it deals with date
-	equal(QUnit.equiv(d1, 0), false); // d1.valueOf() returns 0, but d1 and 0 are different
-	// test same values date and different instances equality
+	equal(QUnit.equiv(d1, 0), false); // d1.konstueOf() returns 0, but d1 and 0 are different
+	// test same konstues date and different instances equality
 	equal(QUnit.equiv(d1, d2), true);
 	// test different date and different instances difference
 	equal(QUnit.equiv(d1, d3), false);
@@ -719,7 +719,7 @@ test("Complex Objects.", function() {
 								n: {
 									r: "r",
 									s: [1,2,3],
-									//t: undefined,                 // different: missing a property with an undefined value
+									//t: undefined,                 // different: missing a property with an undefined konstue
 									u: 0,
 									v: {
 										w: {
@@ -1163,7 +1163,7 @@ test("Prototypal inheritance", function() {
 	Gizmo.prototype.bar = true; // not a function just in case we skip them
 
 	// Hoozit inherit from Gizmo
-	// They are equivalent
+	// They are equikonstent
 	equal(QUnit.equiv(hoozit, gizmo), true);
 
 	// Make sure this is still true !important
@@ -1179,7 +1179,7 @@ test("Prototypal inheritance", function() {
 	// Gizmo does not inherit from Hoozit
 	// gizmo instanceof Gizmo; // true
 	// gizmo instanceof Hoozit; // false
-	// They are not equivalent
+	// They are not equikonstent
 	equal(QUnit.equiv(hoozit, gizmo), false);
 
 	// Make sure this is still true !important
@@ -1242,7 +1242,7 @@ test("Instances", function() {
 });
 
 
-test("Complex Instances Nesting (with function value in literals and/or in nested instances)", function() {
+test("Complex Instances Nesting (with function konstue in literals and/or in nested instances)", function() {
 	function A(fn) {
 		this.a = {};
 		this.fn = fn;

@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.lombok.utils
 
 object AccessorNames {
-    const val IS = "is"
-    const val GET = "get"
-    const val SET = "set"
+    const konst IS = "is"
+    const konst GET = "get"
+    const konst SET = "set"
 }
 
 fun toPropertyName(name: String, prefixesToStrip: List<String> = emptyList()): String =

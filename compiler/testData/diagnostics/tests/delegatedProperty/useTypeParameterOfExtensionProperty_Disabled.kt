@@ -9,11 +9,11 @@ class Delegate<T : Any> {
 
 var <T : Any> List<T>.foo <!DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER_WARNING!>by Delegate<T>()<!>
 
-class Wrapper<T>(val v: T? = null)
+class Wrapper<T>(konst v: T? = null)
 
 operator fun <T> Wrapper<T>.getValue(thisRef: Any?, kp: Any?): T = v!!
 
-val <T : Any> List<T>.bar <!DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER_WARNING!>by Wrapper<T>()<!>
+konst <T : Any> List<T>.bar <!DELEGATE_USES_EXTENSION_PROPERTY_TYPE_PARAMETER_WARNING!>by Wrapper<T>()<!>
 
 fun useString(s: String) {}
 

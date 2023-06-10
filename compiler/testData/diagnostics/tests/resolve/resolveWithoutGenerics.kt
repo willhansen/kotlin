@@ -3,7 +3,7 @@
 package c
 
 class A {
-    val testVal : A = A()
+    konst testVal : A = A()
 }
 
 //inappropriate but participating in resolve functions

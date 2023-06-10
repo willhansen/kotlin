@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.generators.gradle.targets.js
 
-val npmPackages = listOf(
+konst npmPackages = listOf(
     NpmPackage("webpack"),
     NpmPackage("webpack-cli"),
     NpmPackage("webpack-dev-server"),
@@ -32,7 +32,7 @@ val npmPackages = listOf(
 )
 
 data class NpmPackage(
-    val name: String,
-    val version: String? = null,
-    val displayName: String = name
+    konst name: String,
+    konst version: String? = null,
+    konst displayName: String = name
 )

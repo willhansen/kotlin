@@ -14,7 +14,7 @@ external open class B : A {
 class C : B()
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     return "OK"
 }
 

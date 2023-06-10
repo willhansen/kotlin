@@ -8,8 +8,8 @@ package codegen.lambda.lambda11
 import kotlin.test.*
 
 @Test fun runTest() {
-    val first = "first"
-    val second = "second"
+    konst first = "first"
+    konst second = "second"
 
     run {
         println(first)

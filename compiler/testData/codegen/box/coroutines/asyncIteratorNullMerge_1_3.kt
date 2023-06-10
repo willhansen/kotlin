@@ -7,7 +7,7 @@ import kotlin.coroutines.intrinsics.*
 import kotlin.experimental.ExperimentalTypeInference
 
 interface AsyncGenerator<in T> {
-    suspend fun yield(value: T)
+    suspend fun yield(konstue: T)
 }
 
 interface AsyncSequence<out T> {
@@ -22,7 +22,7 @@ interface AsyncIterator<out T> {
 @OptIn(ExperimentalTypeInference::class)
 fun <T> asyncGenerate(block: suspend AsyncGenerator<T>.() -> Unit): AsyncSequence<T> = object : AsyncSequence<T> {
     override fun iterator(): AsyncIterator<T> {
-        val iterator = AsyncGeneratorIterator<T>()
+        konst iterator = AsyncGeneratorIterator<T>()
         iterator.nextStep = block.createCoroutine(receiver = iterator, completion = iterator)
         return iterator
     }
@@ -38,7 +38,7 @@ class AsyncGeneratorIterator<T>: AsyncIterator<T>, AsyncGenerator<T>, Continuati
     var computesNext = false
     var computeContinuation: Continuation<*>? = null
 
-    override val context = EmptyCoroutineContext
+    override konst context = EmptyCoroutineContext
 
     suspend fun computeHasNext(): Boolean = suspendCoroutineUninterceptedOrReturn { c ->
         computesNext = false
@@ -86,15 +86,15 @@ class AsyncGeneratorIterator<T>: AsyncIterator<T>, AsyncGenerator<T>, Continuati
     }
 
     // Completion continuation implementation
-    override fun resumeWith(value: Result<Unit>) {
+    override fun resumeWith(konstue: Result<Unit>) {
         done()
-        resumeIterator(value.exceptionOrNull())
+        resumeIterator(konstue.exceptionOrNull())
     }
 
     // Generator implementation
-    override suspend fun yield(value: T): Unit = suspendCoroutineUninterceptedOrReturn { c ->
+    override suspend fun yield(konstue: T): Unit = suspendCoroutineUninterceptedOrReturn { c ->
         computedNext = true
-        nextValue = value
+        nextValue = konstue
         nextStep = c
         resumeIterator(null)
         COROUTINE_SUSPENDED
@@ -109,7 +109,7 @@ fun cst(a: Any?): String? = a as String?
 fun any(a: Any?): Any? = a
 
 fun box(): String {
-    val seq = asyncGenerate {
+    konst seq = asyncGenerate {
         yield("O")
         yield("K")
     }
@@ -122,8 +122,8 @@ fun box(): String {
         for (i in seq) {
             res += i
             prev = any(res)
-            // merge of NULL_VALUE and j/l/Object should result in common j/l/Object value
-            // but it was NULL_VALUE and we do not spill null values, we just put
+            // merge of NULL_VALUE and j/l/Object should result in common j/l/Object konstue
+            // but it was NULL_VALUE and we do not spill null konstues, we just put
             // ACONST_NULL after suspension point instead
         }
 

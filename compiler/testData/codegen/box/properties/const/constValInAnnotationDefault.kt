@@ -2,13 +2,13 @@
 
 // WITH_STDLIB
 
-const val z = "OK"
+const konst z = "OK"
 
-annotation class A(val value: String = z)
+annotation class A(konst konstue: String = z)
 
 @A
 class Test
 
 fun box(): String {
-    return Test::class.java.getAnnotation(A::class.java).value
+    return Test::class.java.getAnnotation(A::class.java).konstue
 }

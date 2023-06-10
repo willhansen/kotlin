@@ -10,5 +10,5 @@ import org.jetbrains.kotlin.load.java.structure.MapBasedJavaAnnotationOwner
 import javax.lang.model.element.PackageElement
 
 interface SymbolBasedPackage : JavaPackage, MapBasedJavaAnnotationOwner {
-    val element: PackageElement
+    konst element: PackageElement
 }

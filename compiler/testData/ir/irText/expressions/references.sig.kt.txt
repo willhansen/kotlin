@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}ok
 //   Public signature: /ok|3084714860561867417[0]
-val ok: String
+konst ok: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-ok>(){}kotlin.String
   //   Public signature: /ok.<get-ok>|-4000622060828023401[0]
@@ -13,7 +13,7 @@ val ok: String
 // CHECK:
 //   Mangled name: {}ok2
 //   Public signature: /ok2|8310337683510143427[0]
-val ok2: String
+konst ok2: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-ok2>(){}kotlin.String
   //   Public signature: /ok2.<get-ok2>|-1465577528977290579[0]
@@ -65,7 +65,7 @@ fun String.test5(): String
 // CHECK:
 //   Mangled name: {}ok3
 //   Public signature: /ok3|5885848835307275738[0]
-val ok3: String
+konst ok3: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-ok3>(){}kotlin.String
   //   Public signature: /ok3.<get-ok3>|-2021208757621779282[0]
@@ -77,7 +77,7 @@ val ok3: String
 // CHECK:
 //   Mangled name: @kotlin.String{}okext
 //   Public signature: /okext|-7546376167507800782[0]
-val String.okext: String
+konst String.okext: String
   // CHECK JVM_IR:
   //   Mangled name: #<get-okext>@kotlin.String(){}kotlin.String
   //   Public signature: /okext.<get-okext>|-4397362169527603922[0]

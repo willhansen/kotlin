@@ -299,7 +299,7 @@ public abstract class AnnotationCodegen {
             }
         }
         AnnotationVisitor visitor = visitAnnotation(descriptor, true);
-        AnnotationVisitor arrayVisitor = visitor.visitArray("value");
+        AnnotationVisitor arrayVisitor = visitor.visitArray("konstue");
         for (ElementType javaTarget : javaTargets) {
             arrayVisitor.visitEnum(null, Type.getType(ElementType.class).getDescriptor(), javaTarget.name());
         }
@@ -312,7 +312,7 @@ public abstract class AnnotationCodegen {
         String descriptor = Type.getType(Retention.class).getDescriptor();
         if (!annotationDescriptorsAlreadyPresent.add(descriptor)) return;
         AnnotationVisitor visitor = visitAnnotation(descriptor, true);
-        visitor.visitEnum("value", Type.getType(RetentionPolicy.class).getDescriptor(), policy.name());
+        visitor.visitEnum("konstue", Type.getType(RetentionPolicy.class).getDescriptor(), policy.name());
         visitor.visitEnd();
     }
 
@@ -340,9 +340,9 @@ public abstract class AnnotationCodegen {
         return !type.isMarkedNullable() && classifier instanceof TypeParameterDescriptor && TypeUtils.hasNullableSuperType(type);
     }
 
-    public void generateAnnotationDefaultValue(@NotNull ConstantValue<?> value, @NotNull KotlinType expectedType) {
+    public void generateAnnotationDefaultValue(@NotNull ConstantValue<?> konstue, @NotNull KotlinType expectedType) {
         AnnotationVisitor visitor = visitAnnotation(null, false);  // Parameters are unimportant
-        genCompileTimeValue(null, value, visitor);
+        genCompileTimeValue(null, konstue, visitor);
         visitor.visitEnd();
     }
 
@@ -398,60 +398,60 @@ public abstract class AnnotationCodegen {
 
     private void genCompileTimeValue(
             @Nullable String name,
-            @NotNull ConstantValue<?> value,
+            @NotNull ConstantValue<?> konstue,
             @NotNull AnnotationVisitor annotationVisitor
     ) {
         AnnotationArgumentVisitor<Void, Void> argumentVisitor = new AnnotationArgumentVisitor<Void, Void>() {
             @Override
-            public Void visitLongValue(@NotNull LongValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitLongValue(@NotNull LongValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitIntValue(IntValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitIntValue(IntValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitShortValue(ShortValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitShortValue(ShortValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitByteValue(ByteValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitByteValue(ByteValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitDoubleValue(DoubleValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitDoubleValue(DoubleValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitFloatValue(FloatValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitFloatValue(FloatValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitBooleanValue(BooleanValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitBooleanValue(BooleanValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitCharValue(CharValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitCharValue(CharValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitStringValue(StringValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitStringValue(StringValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitEnumValue(EnumValue value, Void data) {
-                ClassId enumClassId = value.getEnumClassId();
+            public Void visitEnumValue(EnumValue konstue, Void data) {
+                ClassId enumClassId = konstue.getEnumClassId();
                 String enumClassInternalName = AsmUtil.asmTypeByClassId(enumClassId).getDescriptor();
-                String enumEntryName = value.getEnumEntryName().asString();
+                String enumEntryName = konstue.getEnumEntryName().asString();
                 ClassDescriptor descriptor = FindClassInModuleKt.findClassAcrossModuleDependencies(state.getModule(), enumClassId);
                 if (descriptor != null) {
                     innerClassConsumer.addInnerClassInfoFromAnnotation(descriptor);
@@ -461,9 +461,9 @@ public abstract class AnnotationCodegen {
             }
 
             @Override
-            public Void visitArrayValue(ArrayValue value, Void data) {
+            public Void visitArrayValue(ArrayValue konstue, Void data) {
                 AnnotationVisitor visitor = annotationVisitor.visitArray(name);
-                for (ConstantValue<?> argument : value.getValue()) {
+                for (ConstantValue<?> argument : konstue.getValue()) {
                     genCompileTimeValue(null, argument, visitor);
                 }
                 visitor.visitEnd();
@@ -471,18 +471,18 @@ public abstract class AnnotationCodegen {
             }
 
             @Override
-            public Void visitAnnotationValue(AnnotationValue value, Void data) {
-                KotlinType classType = value.getValue().getType();
+            public Void visitAnnotationValue(AnnotationValue konstue, Void data) {
+                KotlinType classType = konstue.getValue().getType();
                 innerClassConsumer.addInnerClassInfoFromAnnotation(DescriptorUtils.getClassDescriptorForType(classType));
                 AnnotationVisitor visitor = annotationVisitor.visitAnnotation(name, typeMapper.mapType(classType).getDescriptor());
-                genAnnotationArguments(value.getValue(), visitor);
+                genAnnotationArguments(konstue.getValue(), visitor);
                 visitor.visitEnd();
                 return null;
             }
 
             @Override
-            public Void visitKClassValue(KClassValue value, Void data) {
-                KotlinType classType = value.getArgumentType(module);
+            public Void visitKClassValue(KClassValue konstue, Void data) {
+                KotlinType classType = konstue.getArgumentType(module);
                 innerClassConsumer.addInnerClassInfoFromAnnotation(DescriptorUtils.getClassDescriptorForType(classType));
                 if (InlineClassesUtilsKt.isInlineClassType(classType)) {
                     classType = TypeUtils.makeNullable(classType);
@@ -492,51 +492,51 @@ public abstract class AnnotationCodegen {
             }
 
             @Override
-            public Void visitUByteValue(UByteValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitUByteValue(UByteValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitUShortValue(UShortValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitUShortValue(UShortValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitUIntValue(UIntValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitUIntValue(UIntValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
             @Override
-            public Void visitULongValue(ULongValue value, Void data) {
-                return visitSimpleValue(value);
+            public Void visitULongValue(ULongValue konstue, Void data) {
+                return visitSimpleValue(konstue);
             }
 
-            private Void visitSimpleValue(ConstantValue<?> value) {
-                annotationVisitor.visit(name, value.getValue());
+            private Void visitSimpleValue(ConstantValue<?> konstue) {
+                annotationVisitor.visit(name, konstue.getValue());
                 return null;
             }
 
             @Override
-            public Void visitErrorValue(ErrorValue value, Void data) {
-                return visitUnsupportedValue(value);
+            public Void visitErrorValue(ErrorValue konstue, Void data) {
+                return visitUnsupportedValue(konstue);
             }
 
             @Override
-            public Void visitNullValue(NullValue value, Void data) {
-                return visitUnsupportedValue(value);
+            public Void visitNullValue(NullValue konstue, Void data) {
+                return visitUnsupportedValue(konstue);
             }
 
-            private Void visitUnsupportedValue(ConstantValue<?> value) {
+            private Void visitUnsupportedValue(ConstantValue<?> konstue) {
                 ClassBuilderMode mode = typeMapper.getClassBuilderMode();
                 if (mode.generateBodies) {
-                    throw new IllegalStateException("Don't know how to compile annotation value " + value);
+                    throw new IllegalStateException("Don't know how to compile annotation konstue " + konstue);
                 } else {
                     return null;
                 }
             }
         };
 
-        value.accept(argumentVisitor, null);
+        konstue.accept(argumentVisitor, null);
     }
 
     private static final Map<KotlinRetention, RetentionPolicy> annotationRetentionMap = new EnumMap<>(KotlinRetention.class);
@@ -551,17 +551,17 @@ public abstract class AnnotationCodegen {
     private static Set<ElementType> getJavaTargetList(ClassDescriptor descriptor) {
         AnnotationDescriptor targetAnnotation = descriptor.getAnnotations().findAnnotation(new FqName(Target.class.getName()));
         if (targetAnnotation != null) {
-            Collection<ConstantValue<?>> valueArguments = targetAnnotation.getAllValueArguments().values();
-            if (!valueArguments.isEmpty()) {
-                ConstantValue<?> compileTimeConstant = valueArguments.iterator().next();
+            Collection<ConstantValue<?>> konstueArguments = targetAnnotation.getAllValueArguments().konstues();
+            if (!konstueArguments.isEmpty()) {
+                ConstantValue<?> compileTimeConstant = konstueArguments.iterator().next();
                 if (compileTimeConstant instanceof ArrayValue) {
-                    List<? extends ConstantValue<?>> values = ((ArrayValue) compileTimeConstant).getValue();
+                    List<? extends ConstantValue<?>> konstues = ((ArrayValue) compileTimeConstant).getValue();
                     Set<ElementType> result = EnumSet.noneOf(ElementType.class);
-                    for (ConstantValue<?> value : values) {
-                        if (value instanceof EnumValue) {
-                            FqName enumClassFqName = ((EnumValue) value).getEnumClassId().asSingleFqName();
+                    for (ConstantValue<?> konstue : konstues) {
+                        if (konstue instanceof EnumValue) {
+                            FqName enumClassFqName = ((EnumValue) konstue).getEnumClassId().asSingleFqName();
                             if (ElementType.class.getName().equals(enumClassFqName.asString())) {
-                                result.add(ElementType.valueOf(((EnumValue) value).getEnumEntryName().asString()));
+                                result.add(ElementType.konstueOf(((EnumValue) konstue).getEnumEntryName().asString()));
                             }
                         }
                     }
@@ -580,11 +580,11 @@ public abstract class AnnotationCodegen {
         }
         AnnotationDescriptor retentionAnnotation = descriptor.getAnnotations().findAnnotation(new FqName(Retention.class.getName()));
         if (retentionAnnotation != null) {
-            ConstantValue<?> value = CollectionsKt.firstOrNull(retentionAnnotation.getAllValueArguments().values());
-            if (value instanceof EnumValue) {
-                FqName enumClassFqName = ((EnumValue) value).getEnumClassId().asSingleFqName();
+            ConstantValue<?> konstue = CollectionsKt.firstOrNull(retentionAnnotation.getAllValueArguments().konstues());
+            if (konstue instanceof EnumValue) {
+                FqName enumClassFqName = ((EnumValue) konstue).getEnumClassId().asSingleFqName();
                 if (RetentionPolicy.class.getName().equals(enumClassFqName.asString())) {
-                    return RetentionPolicy.valueOf(((EnumValue) value).getEnumEntryName().asString());
+                    return RetentionPolicy.konstueOf(((EnumValue) konstue).getEnumEntryName().asString());
                 }
             }
         }

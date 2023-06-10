@@ -1,37 +1,37 @@
 // EXPECTED_REACHABLE_NODES: 1303
 
 open class A {
-    open val x: Int
+    open konst x: Int
         @JsName("getX_") get() = 23
 
     open var y: Int = 0
         @JsName("getY_") get() = field + 10
-        @JsName("setY_") set(value) {
-            field = value
+        @JsName("setY_") set(konstue) {
+            field = konstue
         }
 }
 
 interface C {
-    @get:JsName("getZ_") val z: Int
+    @get:JsName("getZ_") konst z: Int
 }
 
 class B : A(), C {
-    override val x: Int
+    override konst x: Int
         get() = 42
 
     override var y: Int
         get() = super.y + 5
-        set(value) {
-            super.y = value + 2
+        set(konstue) {
+            super.y = konstue + 2
         }
 
-    override val z = 55
+    override konst z = 55
 }
 
 fun getPackage() = js("main")
 
 fun box(): String {
-    val a = B()
+    konst a = B()
 
     assertEquals(42, a.x)
     assertEquals(15, a.y)
@@ -39,7 +39,7 @@ fun box(): String {
     assertEquals(30, a.y)
     assertEquals(55, a.z)
 
-    val d: dynamic = B()
+    konst d: dynamic = B()
 
     assertEquals(42, d.getX_())
     assertEquals(15, d.getY_())

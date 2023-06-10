@@ -17,7 +17,7 @@ fun test2() {
 
 fun test3() {
     L1@ while (true) {
-        val lambda = {
+        konst lambda = {
             break@L1
             continue@L1
         }

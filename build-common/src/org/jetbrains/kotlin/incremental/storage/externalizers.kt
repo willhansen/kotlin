@@ -49,45 +49,45 @@ interface AppendableDataExternalizer<T> : DataExternalizer<T> {
 }
 
 class LookupSymbolKeyDescriptor(
-    /** If `true`, original values are saved; if `false`, only hashes are saved. */
-    private val storeFullFqNames: Boolean = false
+    /** If `true`, original konstues are saved; if `false`, only hashes are saved. */
+    private konst storeFullFqNames: Boolean = false
 ) : KeyDescriptor<LookupSymbolKey> {
 
     override fun read(input: DataInput): LookupSymbolKey {
-        // Note: The value of the storeFullFqNames variable below may or may not be the same as LookupSymbolKeyDescriptor.storeFullFqNames.
-        // Byte value `0` means storeFullFqNames == true, see `save` function below.
-        val storeFullFqNames = when (val byteValue = input.readByte().toInt()) {
+        // Note: The konstue of the storeFullFqNames variable below may or may not be the same as LookupSymbolKeyDescriptor.storeFullFqNames.
+        // Byte konstue `0` means storeFullFqNames == true, see `save` function below.
+        konst storeFullFqNames = when (konst byteValue = input.readByte().toInt()) {
             0 -> true
             1 -> false
-            else -> error("Unexpected byte value for storeFullFqNames: $byteValue")
+            else -> error("Unexpected byte konstue for storeFullFqNames: $byteValue")
         }
         return if (storeFullFqNames) {
-            val name = input.readUTF()
-            val scope = input.readUTF()
+            konst name = input.readUTF()
+            konst scope = input.readUTF()
             LookupSymbolKey(name.hashCode(), scope.hashCode(), name, scope)
         } else {
-            val nameHash = input.readInt()
-            val scopeHash = input.readInt()
+            konst nameHash = input.readInt()
+            konst scopeHash = input.readInt()
             LookupSymbolKey(nameHash, scopeHash, "", "")
         }
     }
 
-    override fun save(output: DataOutput, value: LookupSymbolKey) {
-        // Write a Byte value `0` to represent storeFullFqNames == true for historical reasons (if we switch this value to `1` or write a
+    override fun save(output: DataOutput, konstue: LookupSymbolKey) {
+        // Write a Byte konstue `0` to represent storeFullFqNames == true for historical reasons (if we switch this konstue to `1` or write a
         // Boolean instead, it might impact some tests).
         output.writeByte(if (storeFullFqNames) 0 else 1)
         if (storeFullFqNames) {
-            output.writeUTF(value.name)
-            output.writeUTF(value.scope)
+            output.writeUTF(konstue.name)
+            output.writeUTF(konstue.scope)
         } else {
-            output.writeInt(value.nameHash)
-            output.writeInt(value.scopeHash)
+            output.writeInt(konstue.nameHash)
+            output.writeInt(konstue.scopeHash)
         }
     }
 
-    override fun getHashCode(value: LookupSymbolKey): Int = value.hashCode()
+    override fun getHashCode(konstue: LookupSymbolKey): Int = konstue.hashCode()
 
-    override fun isEqual(val1: LookupSymbolKey, val2: LookupSymbolKey): Boolean = val1 == val2
+    override fun isEqual(konst1: LookupSymbolKey, konst2: LookupSymbolKey): Boolean = konst1 == konst2
 }
 
 object FqNameExternalizer : DataExternalizer<FqName> {
@@ -130,24 +130,24 @@ object JvmClassNameExternalizer : DataExternalizer<JvmClassName> {
 }
 
 object ProtoMapValueExternalizer : DataExternalizer<ProtoMapValue> {
-    override fun save(output: DataOutput, value: ProtoMapValue) {
-        output.writeBoolean(value.isPackageFacade)
-        output.writeInt(value.bytes.size)
-        output.write(value.bytes)
-        output.writeInt(value.strings.size)
+    override fun save(output: DataOutput, konstue: ProtoMapValue) {
+        output.writeBoolean(konstue.isPackageFacade)
+        output.writeInt(konstue.bytes.size)
+        output.write(konstue.bytes)
+        output.writeInt(konstue.strings.size)
 
-        for (string in value.strings) {
+        for (string in konstue.strings) {
             output.writeUTF(string)
         }
     }
 
     override fun read(input: DataInput): ProtoMapValue {
-        val isPackageFacade = input.readBoolean()
-        val bytesLength = input.readInt()
-        val bytes = ByteArray(bytesLength)
+        konst isPackageFacade = input.readBoolean()
+        konst bytesLength = input.readInt()
+        konst bytes = ByteArray(bytesLength)
         input.readFully(bytes, 0, bytesLength)
-        val stringsLength = input.readInt()
-        val strings = Array<String>(stringsLength) { input.readUTF() }
+        konst stringsLength = input.readInt()
+        konst strings = Array<String>(stringsLength) { input.readUTF() }
         return ProtoMapValue(isPackageFacade, bytes, strings)
     }
 }
@@ -156,39 +156,39 @@ abstract class StringMapExternalizer<T> : DataExternalizer<Map<String, T>> {
     override fun save(output: DataOutput, map: Map<String, T>?) {
         output.writeInt(map!!.size)
 
-        for ((key, value) in map.entries) {
+        for ((key, konstue) in map.entries) {
             output.writeString(key)
-            writeValue(output, value)
+            writeValue(output, konstue)
         }
     }
 
     override fun read(input: DataInput): Map<String, T>? {
-        val size = input.readInt()
-        val map = HashMap<String, T>(size)
+        konst size = input.readInt()
+        konst map = HashMap<String, T>(size)
 
         repeat(size) {
-            val name = input.readString()
+            konst name = input.readString()
             map[name] = readValue(input)
         }
 
         return map
     }
 
-    protected abstract fun writeValue(output: DataOutput, value: T)
+    protected abstract fun writeValue(output: DataOutput, konstue: T)
     protected abstract fun readValue(input: DataInput): T
 }
 
 object StringToLongMapExternalizer : StringMapExternalizer<Long>() {
     override fun readValue(input: DataInput): Long = input.readLong()
 
-    override fun writeValue(output: DataOutput, value: Long) {
-        output.writeLong(value)
+    override fun writeValue(output: DataOutput, konstue: Long) {
+        output.writeLong(konstue)
     }
 }
 
-fun <T> DataExternalizer<T>.saveToFile(file: File, value: T) {
+fun <T> DataExternalizer<T>.saveToFile(file: File, konstue: T) {
     return DataOutputStream(FileOutputStream(file).buffered()).use {
-        save(it, value)
+        save(it, konstue)
     }
 }
 
@@ -198,10 +198,10 @@ fun <T> DataExternalizer<T>.loadFromFile(file: File): T {
     }
 }
 
-fun <T> DataExternalizer<T>.toByteArray(value: T): ByteArray {
-    val byteArrayOutputStream = ByteArrayOutputStream()
+fun <T> DataExternalizer<T>.toByteArray(konstue: T): ByteArray {
+    konst byteArrayOutputStream = ByteArrayOutputStream()
     DataOutputStream(byteArrayOutputStream.buffered()).use {
-        save(it, value)
+        save(it, konstue)
     }
     return byteArrayOutputStream.toByteArray()
 }
@@ -213,27 +213,27 @@ fun <T> DataExternalizer<T>.fromByteArray(byteArray: ByteArray): T {
 }
 
 object IntExternalizer : DataExternalizer<Int> {
-    override fun save(output: DataOutput, value: Int) = output.writeInt(value)
+    override fun save(output: DataOutput, konstue: Int) = output.writeInt(konstue)
     override fun read(input: DataInput): Int = input.readInt()
 }
 
 object LongExternalizer : DataExternalizer<Long> {
-    override fun save(output: DataOutput, value: Long) = output.writeLong(value)
+    override fun save(output: DataOutput, konstue: Long) = output.writeLong(konstue)
     override fun read(input: DataInput): Long = input.readLong()
 }
 
 object FloatExternalizer : DataExternalizer<Float> {
-    override fun save(output: DataOutput, value: Float) = output.writeFloat(value)
+    override fun save(output: DataOutput, konstue: Float) = output.writeFloat(konstue)
     override fun read(input: DataInput): Float = input.readFloat()
 }
 
 object DoubleExternalizer : DataExternalizer<Double> {
-    override fun save(output: DataOutput, value: Double) = output.writeDouble(value)
+    override fun save(output: DataOutput, konstue: Double) = output.writeDouble(konstue)
     override fun read(input: DataInput): Double = input.readDouble()
 }
 
 object StringExternalizer : DataExternalizer<String> {
-    override fun save(output: DataOutput, value: String) = IOUtil.writeString(value, output)
+    override fun save(output: DataOutput, konstue: String) = IOUtil.writeString(konstue, output)
     override fun read(input: DataInput): String = IOUtil.readString(input)
 }
 
@@ -242,20 +242,20 @@ object PathStringDescriptor : EnumeratorStringDescriptor() {
         return if (StringUtil.isEmpty(path)) 0 else FileUtil.toCanonicalPath(path).hashCode()
     }
 
-    override fun isEqual(val1: String, val2: String?): Boolean {
-        if (val1 == val2) return true
-        if (val2 == null) return false
+    override fun isEqual(konst1: String, konst2: String?): Boolean {
+        if (konst1 == konst2) return true
+        if (konst2 == null) return false
 
-        val path1 = FileUtil.toCanonicalPath(val1)
-        val path2 = FileUtil.toCanonicalPath(val2)
+        konst path1 = FileUtil.toCanonicalPath(konst1)
+        konst path2 = FileUtil.toCanonicalPath(konst2)
         return path1 == path2
     }
 }
 
 /** [DataExternalizer] that delegates to another [DataExternalizer] depending on the type of the object to externalize. */
 class DelegateDataExternalizer<T>(
-    val types: List<Class<out T>>,
-    val typesExternalizers: List<DataExternalizer<out T>>
+    konst types: List<Class<out T>>,
+    konst typesExternalizers: List<DataExternalizer<out T>>
 ) : DataExternalizer<T> {
 
     init {
@@ -264,8 +264,8 @@ class DelegateDataExternalizer<T>(
     }
 
     override fun save(output: DataOutput, objectToExternalize: T) {
-        val type = types.single { it.isAssignableFrom(objectToExternalize!!::class.java) }
-        val typeIndex = types.indexOf(type)
+        konst type = types.single { it.isAssignableFrom(objectToExternalize!!::class.java) }
+        konst typeIndex = types.indexOf(type)
 
         output.writeByte(typeIndex)
         @Suppress("UNCHECKED_CAST")
@@ -273,7 +273,7 @@ class DelegateDataExternalizer<T>(
     }
 
     override fun read(input: DataInput): T {
-        val typeIndex = input.readByte().toInt()
+        konst typeIndex = input.readByte().toInt()
         return typesExternalizers[typeIndex].read(input)
     }
 }
@@ -290,12 +290,12 @@ class DelegateDataExternalizer<T>(
  * slightly.
  */
 open class CollectionExternalizer<T>(
-    private val elementExternalizer: DataExternalizer<T>,
-    private val newCollection: () -> MutableCollection<T>
+    private konst elementExternalizer: DataExternalizer<T>,
+    private konst newCollection: () -> MutableCollection<T>
 ) : AppendableDataExternalizer<Collection<T>> {
     override fun read(input: DataInput): Collection<T> {
-        val result = newCollection()
-        val stream = input as DataInputStream
+        konst result = newCollection()
+        konst stream = input as DataInputStream
 
         while (stream.available() > 0) {
             result.add(elementExternalizer.read(stream))
@@ -304,8 +304,8 @@ open class CollectionExternalizer<T>(
         return result
     }
 
-    override fun save(output: DataOutput, value: Collection<T>) {
-        value.forEach { elementExternalizer.save(output, it) }
+    override fun save(output: DataOutput, konstue: Collection<T>) {
+        konstue.forEach { elementExternalizer.save(output, it) }
     }
 
     override fun createNil() = newCollection()
@@ -323,22 +323,22 @@ object StringCollectionExternalizer : CollectionExternalizer<String>(EnumeratorS
 
 object IntCollectionExternalizer : CollectionExternalizer<Int>(IntExternalizer, { HashSet() })
 
-fun DataOutput.writeString(value: String) = StringExternalizer.save(this, value)
+fun DataOutput.writeString(konstue: String) = StringExternalizer.save(this, konstue)
 
 fun DataInput.readString(): String = StringExternalizer.read(this)
 
-class NullableValueExternalizer<T>(private val valueExternalizer: DataExternalizer<T>) : DataExternalizer<T> {
+class NullableValueExternalizer<T>(private konst konstueExternalizer: DataExternalizer<T>) : DataExternalizer<T> {
 
-    override fun save(output: DataOutput, value: T?) {
-        output.writeBoolean(value != null)
-        value?.let {
-            valueExternalizer.save(output, it)
+    override fun save(output: DataOutput, konstue: T?) {
+        output.writeBoolean(konstue != null)
+        konstue?.let {
+            konstueExternalizer.save(output, it)
         }
     }
 
     override fun read(input: DataInput): T? {
         return if (input.readBoolean()) {
-            valueExternalizer.read(input)
+            konstueExternalizer.read(input)
         } else null
     }
 }
@@ -351,7 +351,7 @@ object ByteArrayExternalizer : DataExternalizer<ByteArray> {
     }
 
     override fun read(input: DataInput): ByteArray {
-        val size = input.readInt()
+        konst size = input.readInt()
         return ByteArray(size).also {
             input.readFully(it, 0, size)
         }
@@ -359,8 +359,8 @@ object ByteArrayExternalizer : DataExternalizer<ByteArray> {
 }
 
 abstract class GenericCollectionExternalizer<T, C : Collection<T>>(
-    private val elementExternalizer: DataExternalizer<T>,
-    private val newCollection: (size: Int) -> MutableCollection<T>
+    private konst elementExternalizer: DataExternalizer<T>,
+    private konst newCollection: (size: Int) -> MutableCollection<T>
 ) : DataExternalizer<C> {
 
     override fun save(output: DataOutput, collection: C) {
@@ -371,13 +371,13 @@ abstract class GenericCollectionExternalizer<T, C : Collection<T>>(
     }
 
     override fun read(input: DataInput): C {
-        val size = input.readInt()
-        val collection = newCollection(size)
+        konst size = input.readInt()
+        konst collection = newCollection(size)
         repeat(size) {
             collection.add(elementExternalizer.read(input))
         }
         // We want `collection` to be both a mutable collection (so we can add elements to it as done above) and a type that can be safely
-        // converted to type `C` (to be used as the returned value of this method). However, there is no type-safe way to express that, so
+        // converted to type `C` (to be used as the returned konstue of this method). However, there is no type-safe way to express that, so
         // we have to use this unsafe cast.
         @Suppress("UNCHECKED_CAST")
         return collection as C
@@ -391,26 +391,26 @@ class SetExternalizer<T>(elementExternalizer: DataExternalizer<T>) :
     GenericCollectionExternalizer<T, Set<T>>(elementExternalizer, { size -> LinkedHashSet(size) })
 
 open class MapExternalizer<K, V, M : Map<K, V>>(
-    private val keyExternalizer: DataExternalizer<K>,
-    private val valueExternalizer: DataExternalizer<V>,
-    private val newMap: (size: Int) -> MutableMap<K, V> = { size -> LinkedHashMap(size) }
+    private konst keyExternalizer: DataExternalizer<K>,
+    private konst konstueExternalizer: DataExternalizer<V>,
+    private konst newMap: (size: Int) -> MutableMap<K, V> = { size -> LinkedHashMap(size) }
 ) : DataExternalizer<M> {
 
     override fun save(output: DataOutput, map: M) {
         output.writeInt(map.size)
-        for ((key, value) in map) {
+        for ((key, konstue) in map) {
             keyExternalizer.save(output, key)
-            valueExternalizer.save(output, value)
+            konstueExternalizer.save(output, konstue)
         }
     }
 
     override fun read(input: DataInput): M {
-        val size = input.readInt()
-        val map = newMap(size)
+        konst size = input.readInt()
+        konst map = newMap(size)
         repeat(size) {
-            val key = keyExternalizer.read(input)
-            val value = valueExternalizer.read(input)
-            map[key] = value
+            konst key = keyExternalizer.read(input)
+            konst konstue = konstueExternalizer.read(input)
+            map[key] = konstue
         }
         @Suppress("UNCHECKED_CAST")
         return map as M
@@ -419,8 +419,8 @@ open class MapExternalizer<K, V, M : Map<K, V>>(
 
 class LinkedHashMapExternalizer<K, V>(
     keyExternalizer: DataExternalizer<K>,
-    valueExternalizer: DataExternalizer<V>
-) : MapExternalizer<K, V, LinkedHashMap<K, V>>(keyExternalizer, valueExternalizer, { size -> LinkedHashMap(size) })
+    konstueExternalizer: DataExternalizer<V>
+) : MapExternalizer<K, V, LinkedHashMap<K, V>>(keyExternalizer, konstueExternalizer, { size -> LinkedHashMap(size) })
 
 object JvmMethodSignatureExternalizer : DataExternalizer<JvmMemberSignature.Method> {
 

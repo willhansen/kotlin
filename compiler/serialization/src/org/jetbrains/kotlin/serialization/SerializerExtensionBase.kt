@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.resolve.constants.NullValue
 import org.jetbrains.kotlin.resolve.descriptorUtil.nonSourceAnnotations
 import org.jetbrains.kotlin.types.KotlinType
 
-abstract class KotlinSerializerExtensionBase(private val protocol: SerializerExtensionProtocol) : SerializerExtension() {
-    override val stringTable = StringTableImpl()
+abstract class KotlinSerializerExtensionBase(private konst protocol: SerializerExtensionProtocol) : SerializerExtension() {
+    override konst stringTable = StringTableImpl()
 
     override fun serializeClass(
         descriptor: ClassDescriptor,
@@ -99,9 +99,9 @@ abstract class KotlinSerializerExtensionBase(private val protocol: SerializerExt
                 proto.addExtensionOrNull(extension, annotationSerializer.serializeAnnotation(annotation))
             }
         }
-        val constantInitializer = descriptor.compileTimeInitializer ?: return
+        konst constantInitializer = descriptor.compileTimeInitializer ?: return
         if (constantInitializer !is NullValue) {
-            proto.setExtension(protocol.compileTimeValue, annotationSerializer.valueProto(constantInitializer).build())
+            proto.setExtension(protocol.compileTimeValue, annotationSerializer.konstueProto(constantInitializer).build())
         }
     }
 
@@ -141,10 +141,10 @@ abstract class KotlinSerializerExtensionBase(private val protocol: SerializerExt
         Type
     > GeneratedMessageLite.ExtendableBuilder<MessageType, BuilderType>.addExtensionOrNull(
         extension: GeneratedMessageLite.GeneratedExtension<MessageType, List<Type>>,
-        value: Type?
+        konstue: Type?
     ) {
-        if (value != null) {
-            addExtension(extension, value)
+        if (konstue != null) {
+            addExtension(extension, konstue)
         }
     }
 }

@@ -1,8 +1,8 @@
 package
 
-public inline fun </*0*/ T : kotlin.Any> OverloadTest.overload(/*0*/ value: T?, /*1*/ function: OverloadTest.(T) -> kotlin.Unit): kotlin.Unit
-public fun OverloadTest.overloadBoolean(/*0*/ value: kotlin.Boolean?): kotlin.Unit
-public fun OverloadTest.overloadBoolean2(/*0*/ value: kotlin.Boolean?): kotlin.Unit
+public inline fun </*0*/ T : kotlin.Any> OverloadTest.overload(/*0*/ konstue: T?, /*1*/ function: OverloadTest.(T) -> kotlin.Unit): kotlin.Unit
+public fun OverloadTest.overloadBoolean(/*0*/ konstue: kotlin.Boolean?): kotlin.Unit
+public fun OverloadTest.overloadBoolean2(/*0*/ konstue: kotlin.Boolean?): kotlin.Unit
 
 public object Literal {
     private constructor Literal()

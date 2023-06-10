@@ -3,14 +3,14 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Int>(val x: T)
+konstue class Z<T: Int>(konst x: T)
 
 class C(var z: Z<Int>)
 
 fun box(): String {
-    val x = C(Z(42))
+    konst x = C(Z(42))
 
-    val ref = x::z
+    konst ref = x::z
 
     if (ref.get().x != 42) throw AssertionError()
 

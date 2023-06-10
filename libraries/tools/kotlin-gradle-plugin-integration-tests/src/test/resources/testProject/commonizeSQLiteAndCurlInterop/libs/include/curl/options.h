@@ -27,9 +27,9 @@ extern "C" {
 #endif
 
 typedef enum {
-  CURLOT_LONG,    /* long (a range of values) */
+  CURLOT_LONG,    /* long (a range of konstues) */
   CURLOT_VALUES,  /*      (a defined set or bitmask) */
-  CURLOT_OFF_T,   /* curl_off_t (a range of values) */
+  CURLOT_OFF_T,   /* curl_off_t (a range of konstues) */
   CURLOT_OBJECT,  /* pointer (void *) */
   CURLOT_STRING,  /*         (char * to zero terminated buffer) */
   CURLOT_SLIST,   /*         (struct curl_slist *) */

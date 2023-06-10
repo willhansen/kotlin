@@ -5,7 +5,7 @@ data class Tag<out RenderingT : Any?> {
   // CHECK:
   //   Mangled name: Tag{}action
   //   Public signature: /Tag.action|4099104176676099950[0]
-  val action: Function1<RenderingT, Unit>
+  konst action: Function1<RenderingT, Unit>
     // CHECK JVM_IR:
     //   Mangled name: Tag#<get-action>(){}kotlin.Function1<1:0,kotlin.Unit>
     //   Public signature: /Tag.action.<get-action>|8009562688035104366[0]

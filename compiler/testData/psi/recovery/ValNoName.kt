@@ -1,21 +1,21 @@
 // VAL
 class A(
-        val
-        val x: Int,
-        val
-        private val z: Int,
-        val
+        konst
+        konst x: Int,
+        konst
+        private konst z: Int,
+        konst
 )
 
-val
+konst
 fun foo() {}
 
 class B {
-    val
+    konst
     fun foo() {}
 
     fun bar() {
-        val
+        konst
         fun foo() {}
     }
 }
@@ -23,9 +23,9 @@ class B {
 // VAR
 class C(
         var
-        val x: Int,
+        konst x: Int,
         var
-        private val z: Int,
+        private konst z: Int,
         var
 )
 

@@ -12,15 +12,15 @@ package testPackCase1
 
 fun case1() {
     var b = B()
-    val a: String = b.p
+    konst a: String = b.p
 }
 
 class B() {
-    val p: String by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>Delegate()<!> // DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE expected
+    konst p: String by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>Delegate()<!> // DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE expected
 }
 
 class Delegate {
-    val getValue = G()
+    konst getValue = G()
 }
 
 class G {
@@ -36,7 +36,7 @@ class G {
 package testPackCase2
 fun case2() {
     var b = B()
-    val a: String = b.p
+    konst a: String = b.p
     b.p = ""
 }
 
@@ -45,8 +45,8 @@ class B() {
 }
 
 class Delegate {
-    val getValue = G()
-    val setValue = S()
+    konst getValue = G()
+    konst setValue = S()
 }
 
 class G {
@@ -89,13 +89,13 @@ class Unary<B>() {
 }
 
 class B() {
-    val plus = Arifm()
-    val minus = Arifm()
-    val compareTo = Comp()
-    val contains = Contains()
-    val get = Getter()
-    val set = Setter()
-    val unaryPlus = Unary<B>()
+    konst plus = Arifm()
+    konst minus = Arifm()
+    konst compareTo = Comp()
+    konst contains = Contains()
+    konst get = Getter()
+    konst set = Setter()
+    konst unaryPlus = Unary<B>()
 }
 
 fun case3() {
@@ -120,8 +120,8 @@ class Assign() {
     operator fun invoke(i: Int) {}
 }
 
-class B(val minusAssign: Assign = Assign()) {
-    val plusAssign = Assign()
+class B(konst minusAssign: Assign = Assign()) {
+    konst plusAssign = Assign()
 }
 
 fun case3() {
@@ -146,7 +146,7 @@ class Case5() {
         c + 1 //OPERATOR_MODIFIER_REQUIRED for class plus, resolved to (1)
     }
 
-    inner class  plus constructor(val i:Int){
+    inner class  plus constructor(konst i:Int){
         operator fun invoke(i:Int) {}  //(1)
     }
 }
@@ -163,13 +163,13 @@ package testPackCase6
 class B(var a: Int = 0) {
 
     inner  class E(){
-        val plus :E =TODO()
+        konst plus :E =TODO()
 
         fun foo(b: B){
             this <!PROPERTY_AS_OPERATOR!>+<!> 1
         }
 
-        operator fun invoke(value: Int) = B()
+        operator fun invoke(konstue: Int) = B()
     }
 }
 
@@ -183,17 +183,17 @@ class B(var a: Int = 0) {
 package testPackCase7
 
 fun case7 () {
-    val iterable: Iterable = Iterable(Inv('s'))
+    konst iterable: Iterable = Iterable(Inv('s'))
     for (i in iterable) {
         println(i)
     }
 }
 
-class Iterable(val iterator: Inv) {
+class Iterable(konst iterator: Inv) {
     //  operator fun iterator() : CharIterator = TODO()
 }
 
-class Inv(val c: Char) {
+class Inv(konst c: Char) {
     operator fun invoke(): CharIterator = object : CharIterator() {
         private var index = 0
 
@@ -216,7 +216,7 @@ class Inv(val c: Char) {
 package testPackCase8
 
 fun case8 () {
-    val iterable: Iterable = Iterable()
+    konst iterable: Iterable = Iterable()
     for (i in iterable) {
         println(i)
     }
@@ -225,10 +225,10 @@ fun case8 () {
 class Iterable() {
     //  operator fun iterator() : CharIterator = TODO()
 }
-val Iterable.iterator: Inv
+konst Iterable.iterator: Inv
     get() = Inv('c')
 
-class Inv(val c: Char) {
+class Inv(konst c: Char) {
     operator fun invoke(): CharIterator = object : CharIterator() {
         private var index = 0
 

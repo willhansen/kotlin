@@ -20,11 +20,11 @@ import org.jetbrains.kotlin.cfg.pseudocode.Pseudocode
 import org.jetbrains.kotlin.cfg.pseudocode.instructions.Instruction
 
 interface Label {
-    val pseudocode: Pseudocode
+    konst pseudocode: Pseudocode
 
-    val name: String
+    konst name: String
 
-    val targetInstructionIndex: Int
+    konst targetInstructionIndex: Int
 
     fun resolveToInstruction(): Instruction
 }

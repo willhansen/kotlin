@@ -1,7 +1,7 @@
 package
 
 package test {
-    public val some: test.SomeObject
+    public konst some: test.SomeObject
 
     @[Error type: Unresolved type for BadAnnotation] /* annotation class not found */ public object SomeObject {
         private constructor SomeObject()

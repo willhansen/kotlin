@@ -24,22 +24,22 @@ import java.lang.UnsupportedOperationException
  * Describes any "this" receiver inside a class
  */
 interface ThisClassReceiver : ReceiverValue {
-    val classDescriptor: ClassDescriptor
+    konst classDescriptor: ClassDescriptor
 }
 
 /**
  * Same but implicit only
  */
 open class ImplicitClassReceiver(
-    final override val classDescriptor: ClassDescriptor,
+    final override konst classDescriptor: ClassDescriptor,
     original: ImplicitClassReceiver? = null
 ) : ThisClassReceiver, ImplicitReceiver {
 
-    private val original = original ?: this
+    private konst original = original ?: this
 
     override fun getType() = classDescriptor.defaultType
 
-    override val declarationDescriptor = classDescriptor
+    override konst declarationDescriptor = classDescriptor
 
     override fun equals(other: Any?) = classDescriptor == (other as? ImplicitClassReceiver)?.classDescriptor
 

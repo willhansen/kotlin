@@ -17,29 +17,29 @@ internal class KtCompilerPluginDiagnostic0Impl(
 internal class KtCompilerPluginDiagnostic1Impl(
     firDiagnostic: KtPsiDiagnosticWithParameters1<*>,
     token: KtLifetimeToken,
-    override val parameter1: Any?
+    override konst parameter1: Any?
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtCompilerPluginDiagnostic1
 
 internal class KtCompilerPluginDiagnostic2Impl(
     firDiagnostic: KtPsiDiagnosticWithParameters2<*, *>,
     token: KtLifetimeToken,
-    override val parameter1: Any?,
-    override val parameter2: Any?
+    override konst parameter1: Any?,
+    override konst parameter2: Any?
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtCompilerPluginDiagnostic2
 
 internal class KtCompilerPluginDiagnostic3Impl(
     firDiagnostic: KtPsiDiagnosticWithParameters3<*, *, *>,
     token: KtLifetimeToken,
-    override val parameter1: Any?,
-    override val parameter2: Any?,
-    override val parameter3: Any?
+    override konst parameter1: Any?,
+    override konst parameter2: Any?,
+    override konst parameter3: Any?
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtCompilerPluginDiagnostic3
 
 internal class KtCompilerPluginDiagnostic4Impl(
     firDiagnostic: KtPsiDiagnosticWithParameters4<*, *, *, *>,
     token: KtLifetimeToken,
-    override val parameter1: Any?,
-    override val parameter2: Any?,
-    override val parameter3: Any?,
-    override val parameter4: Any?
+    override konst parameter1: Any?,
+    override konst parameter2: Any?,
+    override konst parameter3: Any?,
+    override konst parameter4: Any?
 ) : KtAbstractFirDiagnostic<PsiElement>(firDiagnostic, token), KtCompilerPluginDiagnostic4

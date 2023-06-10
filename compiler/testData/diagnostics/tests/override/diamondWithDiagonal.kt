@@ -3,16 +3,16 @@
 // ISSUE: KT-57092
 
 interface InterfaceWithDefault {
-    val hostKind: Int get() = 24
+    konst hostKind: Int get() = 24
 }
 
 interface SubInterfaceWithoutDefault : InterfaceWithDefault {
     // SubInterfaceWithoutDefault.hostKind subsumes InterfaceWithDefault.hostKind, therefore no error.
-    override val hostKind: Int
+    override konst hostKind: Int
 }
 
 open class ClassWithDefault : InterfaceWithDefault {
-    override val hostKind: Int get() = 42
+    override konst hostKind: Int get() = 42
 }
 
 class InheritsAll :

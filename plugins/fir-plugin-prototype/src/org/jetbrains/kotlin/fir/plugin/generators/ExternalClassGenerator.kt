@@ -28,11 +28,11 @@ import org.jetbrains.kotlin.name.*
  */
 class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExtension(session) {
     companion object {
-        private val FOO_PACKAGE = FqName.topLevel(Name.identifier("foo"))
-        private val GENERATED_CLASS_ID = ClassId(FOO_PACKAGE, Name.identifier("AllOpenGenerated"))
-        private val MATERIALIZE_NAME = Name.identifier("materialize")
+        private konst FOO_PACKAGE = FqName.topLevel(Name.identifier("foo"))
+        private konst GENERATED_CLASS_ID = ClassId(FOO_PACKAGE, Name.identifier("AllOpenGenerated"))
+        private konst MATERIALIZE_NAME = Name.identifier("materialize")
 
-        private val PREDICATE = LookupPredicate.create { annotated("ExternalClassWithNested".fqn()) }
+        private konst PREDICATE = LookupPredicate.create { annotated("ExternalClassWithNested".fqn()) }
     }
 
     object Key : GeneratedDeclarationKey() {
@@ -41,11 +41,11 @@ class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExte
         }
     }
 
-    private val predicateBasedProvider = session.predicateBasedProvider
-    private val matchedClasses by lazy {
+    private konst predicateBasedProvider = session.predicateBasedProvider
+    private konst matchedClasses by lazy {
         predicateBasedProvider.getSymbolsByPredicate(PREDICATE).filterIsInstance<FirRegularClassSymbol>()
     }
-    private val classIdsForMatchedClasses: Map<ClassId, FirRegularClassSymbol> by lazy {
+    private konst classIdsForMatchedClasses: Map<ClassId, FirRegularClassSymbol> by lazy {
         matchedClasses.associateBy {
             GENERATED_CLASS_ID.createNestedClassId(Name.identifier("Nested${it.classId.shortClassName}"))
         }
@@ -62,7 +62,7 @@ class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExte
         name: Name,
         context: NestedClassGenerationContext
     ): FirClassLikeSymbol<*>? {
-        return when (val origin = owner.origin) {
+        return when (konst origin = owner.origin) {
             is FirDeclarationOrigin.Plugin -> when (origin.key) {
                 Key -> generateNestedClass(owner.classId.createNestedClassId(name), owner)
                 else -> null
@@ -72,14 +72,14 @@ class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExte
     }
 
     override fun generateConstructors(context: MemberGenerationContext): List<FirConstructorSymbol> {
-        val classId = context.owner.classId
+        konst classId = context.owner.classId
         if (classId != GENERATED_CLASS_ID && classId !in classIdsForMatchedClasses) return emptyList()
         return listOf(createConstructor(context.owner, Key).symbol)
     }
 
     private fun generateNestedClass(classId: ClassId, owner: FirClassSymbol<*>): FirClassLikeSymbol<*>? {
         if (owner.classId != GENERATED_CLASS_ID) return null
-        val matchedClass = classIdsForMatchedClasses[classId] ?: return null
+        konst matchedClass = classIdsForMatchedClasses[classId] ?: return null
 
         return createNestedClass(owner, classId.shortClassName, Key).also {
             it.matchedClass = matchedClass.classId
@@ -88,11 +88,11 @@ class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExte
 
     override fun generateFunctions(callableId: CallableId, context: MemberGenerationContext?): List<FirNamedFunctionSymbol> {
         if (callableId.classId !in classIdsForMatchedClasses || callableId.callableName != MATERIALIZE_NAME) return emptyList()
-        val owner = context?.owner
+        konst owner = context?.owner
         require(owner is FirRegularClassSymbol)
-        val matchedClassId = owner.matchedClass ?: return emptyList()
-        val matchedClassSymbol = session.symbolProvider.getRegularClassSymbolByClassId(matchedClassId) ?: return emptyList()
-        val function = createMemberFunction(owner, Key, callableId.callableName, matchedClassSymbol.constructStarProjectedType())
+        konst matchedClassId = owner.matchedClass ?: return emptyList()
+        konst matchedClassSymbol = session.symbolProvider.getRegularClassSymbolByClassId(matchedClassId) ?: return emptyList()
+        konst function = createMemberFunction(owner, Key, callableId.callableName, matchedClassSymbol.constructStarProjectedType())
         return listOf(function.symbol)
     }
 
@@ -128,5 +128,5 @@ class ExternalClassGenerator(session: FirSession) : FirDeclarationGenerationExte
 private object MatchedClassAttributeKey : FirDeclarationDataKey()
 
 private var FirRegularClass.matchedClass: ClassId? by FirDeclarationDataRegistry.data(MatchedClassAttributeKey)
-private val FirRegularClassSymbol.matchedClass: ClassId? by FirDeclarationDataRegistry.symbolAccessor(MatchedClassAttributeKey)
+private konst FirRegularClassSymbol.matchedClass: ClassId? by FirDeclarationDataRegistry.symbolAccessor(MatchedClassAttributeKey)
 

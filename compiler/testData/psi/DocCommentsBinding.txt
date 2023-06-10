@@ -28,12 +28,12 @@ KtFile: DocCommentsBinding.kt
             PsiWhiteSpace('\n         ')
             KDOC_SECTION
               PsiElement(KDOC_LEADING_ASTERISK)('*')
-              PsiElement(KDOC_TEXT)(' Doc comment for val-parameter')
+              PsiElement(KDOC_TEXT)(' Doc comment for konst-parameter')
             PsiWhiteSpace('\n         ')
             PsiElement(KDOC_END)('*/')
           PsiWhiteSpace('\n        ')
           PsiComment(BLOCK_COMMENT)('/*var*/')
-          PsiElement(val)('val')
+          PsiElement(konst)('konst')
           PsiWhiteSpace(' ')
           PsiElement(IDENTIFIER)('p')
           PsiElement(COLON)(':')
@@ -153,7 +153,7 @@ KtFile: DocCommentsBinding.kt
           PsiElement(LPAR)('(')
           VALUE_PARAMETER_LIST
             VALUE_PARAMETER
-              PsiElement(IDENTIFIER)('value')
+              PsiElement(IDENTIFIER)('konstue')
           PsiElement(RPAR)(')')
           PsiWhiteSpace(' ')
           BLOCK

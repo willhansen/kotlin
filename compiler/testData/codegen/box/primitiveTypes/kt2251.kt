@@ -7,7 +7,7 @@ fun box() : String {
 
     var x = 20.toByte()
     var y = 20.toByte()
-    val foo = {
+    konst foo = {
         x++
         ++x
     }
@@ -17,7 +17,7 @@ fun box() : String {
 
     var xs = 20.toShort()
     var ys = 20.toShort()
-    val foos = {
+    konst foos = {
         xs++
         ++xs
     }
@@ -27,7 +27,7 @@ fun box() : String {
  
     var xc = 20.toChar()
     var yc = 20.toChar()
-    val fooc = {
+    konst fooc = {
         xc++
         ++xc
     }

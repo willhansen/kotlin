@@ -1,6 +1,6 @@
 FILE: anonymousInAnonymous.kt
     public final fun foo(): R|kotlin/Unit| {
-        lval base: R|<anonymous>| = object : R|kotlin/Any| {
+        lkonst base: R|<anonymous>| = object : R|kotlin/Any| {
             private constructor(): R|<anonymous>| {
                 super<R|kotlin/Any|>()
             }
@@ -19,7 +19,7 @@ FILE: anonymousInAnonymous.kt
 
             }
 
-            public final val foobar: R|kotlin/String| = String()
+            public final konst foobar: R|kotlin/String| = String()
                 public get(): R|kotlin/String|
 
         }

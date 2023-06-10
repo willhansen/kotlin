@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 interface Test {
-    val test: String
+    konst test: String
         get() = "OK"
 
     var test2: String

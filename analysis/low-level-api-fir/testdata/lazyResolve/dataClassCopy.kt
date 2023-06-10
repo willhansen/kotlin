@@ -2,4 +2,4 @@
 // MEMBER_NAME_FILTER: copy
 package one
 
-data class Data<caret>Class(val i: Int, val b: Boolean)
+data class Data<caret>Class(konst i: Int, konst b: Boolean)

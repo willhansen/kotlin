@@ -8,13 +8,13 @@ package org.jetbrains.kotlin.util
 import java.lang.ref.WeakReference
 
 class WeakPair<K, V>(first: K, second: V) {
-    private val firstReference: WeakReference<K> = WeakReference(first)
-    private val secondReference: WeakReference<V> = WeakReference(second)
+    private konst firstReference: WeakReference<K> = WeakReference(first)
+    private konst secondReference: WeakReference<V> = WeakReference(second)
 
-    val first: K?
+    konst first: K?
         get() = firstReference.get()
 
-    val second: V?
+    konst second: V?
         get() = secondReference.get()
 }
 

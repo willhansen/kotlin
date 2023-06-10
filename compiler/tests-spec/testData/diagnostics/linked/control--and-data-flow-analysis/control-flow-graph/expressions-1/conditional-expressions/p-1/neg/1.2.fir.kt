@@ -13,9 +13,9 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
-    val c = true
-    val a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) {
+    konst b = true
+    konst c = true
+    konst a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) {
         "first true"
     } else if (c) {
         "else if true"
@@ -26,6 +26,6 @@ fun case1() {
 
 fun case2() {
     var b = true
-    val c = true
-    val a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) 1 else if (c) 2 else ;
+    konst c = true
+    konst a = <!INVALID_IF_AS_EXPRESSION!>if<!> (b) 1 else if (c) 2 else ;
 }

@@ -7,6 +7,6 @@ fun f1() = lazy {
 }
 
 fun box(): String {
-    val r = f1().value
+    konst r = f1().konstue
     return r.getOrNull() ?: "fail: $r"
 }

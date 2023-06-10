@@ -7,7 +7,7 @@ package kotlin.native.concurrent
 
 // Only for compatibility with shared K/N stdlib code
 
-internal val Any?.isFrozen
+internal konst Any?.isFrozen
     inline get() = false
 
 @Suppress("NOTHING_TO_INLINE")

@@ -17,7 +17,7 @@ import org.jetbrains.kotlin.fir.declarations.resolvePhase
 
 internal fun FirElementWithResolveState.checkPhase(requiredResolvePhase: FirResolvePhase) {
     @OptIn(ResolveStateAccess::class)
-    val declarationResolveState = resolveState
+    konst declarationResolveState = resolveState
     checkWithAttachmentBuilder(
         declarationResolveState.resolvePhase >= requiredResolvePhase,
         { "At least $requiredResolvePhase expected but $declarationResolveState found for ${this::class.simpleName}" },
@@ -38,7 +38,7 @@ internal fun FirDesignation.checkDesignationPhaseForClasses(firResolvePhase: Fir
     checkPathPhase(firResolvePhase)
     if (target is FirClassLikeDeclaration) {
         @OptIn(ResolveStateAccess::class)
-        val resolveState = target.resolveState
+        konst resolveState = target.resolveState
         check(resolveState.resolvePhase >= firResolvePhase) {
             "Expected $firResolvePhase but found $resolveState"
         }

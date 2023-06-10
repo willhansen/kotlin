@@ -8,4 +8,4 @@ open class C {
 
 class <!CANNOT_INFER_VISIBILITY!>D<!> : C(), T
 
-val obj: C = <!CANNOT_INFER_VISIBILITY!>object<!> : C(), T {}
+konst obj: C = <!CANNOT_INFER_VISIBILITY!>object<!> : C(), T {}

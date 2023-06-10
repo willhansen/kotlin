@@ -13,7 +13,7 @@ external fun ee(): E
 
 fun foo(): String {
 
-    val e = ee()
+    konst e = ee()
 
     var result =  ""
 

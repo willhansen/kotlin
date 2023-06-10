@@ -29,9 +29,9 @@ object ContractSyntaxV2PropertyChecker : FirPropertyChecker() {
 }
 
 private fun checkFeatureIsEnabled(declaration: FirContractDescriptionOwner, context: CheckerContext, reporter: DiagnosticReporter) {
-    val source = declaration.contractDescription.source ?: return
+    konst source = declaration.contractDescription.source ?: return
     if (source.elementType != KtNodeTypes.CONTRACT_EFFECT_LIST) return
-    val languageVersionSettings = context.languageVersionSettings
+    konst languageVersionSettings = context.languageVersionSettings
     if (!languageVersionSettings.supportsFeature(LanguageFeature.ContractSyntaxV2)) {
         reporter.reportOn(source, FirErrors.UNSUPPORTED_FEATURE, LanguageFeature.ContractSyntaxV2 to languageVersionSettings, context)
     }

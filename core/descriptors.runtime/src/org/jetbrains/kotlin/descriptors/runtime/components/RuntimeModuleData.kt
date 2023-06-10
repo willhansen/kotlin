@@ -21,15 +21,15 @@ import org.jetbrains.kotlin.load.kotlin.DeserializationComponentsForJava.Compani
 import org.jetbrains.kotlin.serialization.deserialization.DeserializationComponents
 
 class RuntimeModuleData private constructor(
-    val deserialization: DeserializationComponents,
-    val packagePartScopeCache: PackagePartScopeCache
+    konst deserialization: DeserializationComponents,
+    konst packagePartScopeCache: PackagePartScopeCache
 ) {
-    val module: ModuleDescriptor get() = deserialization.moduleDescriptor
+    konst module: ModuleDescriptor get() = deserialization.moduleDescriptor
 
     companion object {
         fun create(classLoader: ClassLoader): RuntimeModuleData {
-            val kotlinClassFinder = ReflectKotlinClassFinder(classLoader)
-            val moduleData = createModuleData(
+            konst kotlinClassFinder = ReflectKotlinClassFinder(classLoader)
+            konst moduleData = createModuleData(
                 kotlinClassFinder = kotlinClassFinder,
                 // .kotlin_builtins files should be found by the same class loader that loaded stdlib classes
                 jvmBuiltInsKotlinClassFinder = ReflectKotlinClassFinder(Unit::class.java.classLoader),

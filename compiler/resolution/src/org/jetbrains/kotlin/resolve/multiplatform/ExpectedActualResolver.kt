@@ -19,7 +19,7 @@ object ExpectedActualResolver {
         platformModule: ModuleDescriptor,
         moduleVisibilityFilter: ModuleFilter = allModulesProvidingActualsFor(expected.module, platformModule),
     ): Map<ExpectActualCompatibility<MemberDescriptor>, List<MemberDescriptor>>? {
-        val context = ClassicExpectActualMatchingContext(platformModule)
+        konst context = ClassicExpectActualMatchingContext(platformModule)
         return when (expected) {
             is CallableMemberDescriptor -> {
                 expected.findNamesakesFromModule(context, platformModule, moduleVisibilityFilter).filter { actual ->
@@ -58,15 +58,15 @@ object ExpectedActualResolver {
         actual: MemberDescriptor,
         moduleFilter: (ModuleDescriptor) -> Boolean = allModulesProvidingExpectsFor(actual.module)
     ): Map<ExpectActualCompatibility<MemberDescriptor>, List<MemberDescriptor>>? {
-        val context = ClassicExpectActualMatchingContext(actual.module)
+        konst context = ClassicExpectActualMatchingContext(actual.module)
         return when (actual) {
             is CallableMemberDescriptor -> {
-                val container = actual.containingDeclaration
-                val candidates = when (container) {
+                konst container = actual.containingDeclaration
+                konst candidates = when (container) {
                     is ClassifierDescriptorWithTypeParameters -> {
                         // TODO: replace with 'singleOrNull' as soon as multi-module diagnostic tests are refactored
-                        val expectedClass =
-                            findExpectedForActual(container, moduleFilter)?.values?.firstOrNull()?.firstOrNull() as? ClassDescriptor
+                        konst expectedClass =
+                            findExpectedForActual(container, moduleFilter)?.konstues?.firstOrNull()?.firstOrNull() as? ClassDescriptor
                         with(context) {
                             expectedClass?.getMembersForExpectClass(actual.name)?.filterIsInstance<CallableMemberDescriptor>().orEmpty()
                         }
@@ -81,7 +81,7 @@ object ExpectedActualResolver {
                     // TODO: optimize by caching this per actual-expected class pair, do not create a new substitutor for each actual member
                     var expectedClass: ClassDescriptor? = null
                     var actualClass: ClassDescriptor? = null
-                    val substitutor =
+                    konst substitutor =
                         when (container) {
                             is ClassDescriptor -> {
                                 actualClass = container
@@ -127,12 +127,12 @@ object ExpectedActualResolver {
         module: ModuleDescriptor,
         moduleFilter: (ModuleDescriptor) -> Boolean
     ): Collection<CallableMemberDescriptor> {
-        val scopes = when (val containingDeclaration = containingDeclaration) {
+        konst scopes = when (konst containingDeclaration = containingDeclaration) {
             is PackageFragmentDescriptor -> {
                 listOf(module.getPackage(containingDeclaration.fqName).memberScope)
             }
             is ClassDescriptor -> {
-                val classes = context.findClassifiersFromModule(containingDeclaration.classId, module, moduleFilter)
+                konst classes = context.findClassifiersFromModule(containingDeclaration.classId, module, moduleFilter)
                     .mapNotNull { if (it is TypeAliasDescriptor) it.classDescriptor else it }
                     .filterIsInstance<ClassDescriptor>()
                 if (this is ConstructorDescriptor) return classes.flatMap { it.constructors }
@@ -171,9 +171,9 @@ fun MemberDescriptor.findCompatibleActualsForExpected(
 fun MemberDescriptor.findAnyActualsForExpected(
     platformModule: ModuleDescriptor, moduleFilter: ModuleFilter = allModulesProvidingActualsFor(module, platformModule)
 ): List<MemberDescriptor> {
-    val actualsGroupedByCompatibility = ExpectedActualResolver.findActualForExpected(this, platformModule, moduleFilter)
+    konst actualsGroupedByCompatibility = ExpectedActualResolver.findActualForExpected(this, platformModule, moduleFilter)
     return actualsGroupedByCompatibility?.get(Compatible)
-        ?: actualsGroupedByCompatibility?.values?.flatten()
+        ?: actualsGroupedByCompatibility?.konstues?.flatten()
         ?: emptyList()
 }
 
@@ -193,6 +193,6 @@ fun DeclarationDescriptor.findActuals(inModule: ModuleDescriptor): List<MemberDe
 }
 
 // TODO: Klibs still need to better handle source in deserialized descriptors.
-val DeclarationDescriptorWithSource.couldHaveASource: Boolean
+konst DeclarationDescriptorWithSource.couldHaveASource: Boolean
     get() = this.source.containingFile != SourceFile.NO_SOURCE_FILE ||
             this is DeserializedDescriptor

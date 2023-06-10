@@ -8,17 +8,17 @@
  * PRIMARY LINKS: expressions, elvis-operator-expression -> paragraph 1 -> sentence 1
  * expressions, elvis-operator-expression -> paragraph 2 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: Check Elvis evaluation
+ * DESCRIPTION: Check Elvis ekonstuation
  */
 
 
 fun box(): String {
-    val x: Boolean? = null ?: getNull(null) ?: A().b ?: getTrue() ?: false
-    val s = null == getNull(null) ?: !getNullableTrue()!! || getFalse() ?: false
+    konst x: Boolean? = null ?: getNull(null) ?: A().b ?: getTrue() ?: false
+    konst s = null == getNull(null) ?: !getNullableTrue()!! || getFalse() ?: false
 
-    val k = ((getNull(null)?: getNull(null) ) ?: getNull(true)) ?: getFalse()
+    konst k = ((getNull(null)?: getNull(null) ) ?: getNull(true)) ?: getFalse()
     try {
-        val y = null ?: throw ExcA()
+        konst y = null ?: throw ExcA()
     } catch (e: ExcA) {
 
         if ((x == true && !s && k!!)) return "OK"
@@ -30,7 +30,7 @@ fun getTrue() = true
 
 fun getNull(b: Boolean?): Boolean? = b
 
-class A(val b: Boolean? = null)
+class A(konst b: Boolean? = null)
 
 class ExcA() : Exception()
 

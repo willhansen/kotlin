@@ -29,8 +29,8 @@ inline fun <reified T> reifiedAsFailsWithCCE(x: Any, operation: String) {
 }
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
     reifiedAsSucceeds<Function0<*>>(f0, "f0 as Function0<*>")
     reifiedAsFailsWithCCE<Function1<*, *>>(f0, "f0 as Function1<*, *>")

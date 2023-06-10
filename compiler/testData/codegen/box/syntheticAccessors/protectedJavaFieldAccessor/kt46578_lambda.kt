@@ -8,7 +8,7 @@ class Derived : Base() {
     init {
         jpf = "OK"
     }
-    val lambda = { jpf }
+    konst lambda = { jpf }
 }
 
 fun box(): String {

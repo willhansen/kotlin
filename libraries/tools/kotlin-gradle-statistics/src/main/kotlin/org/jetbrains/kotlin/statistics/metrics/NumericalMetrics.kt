@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.statistics.metrics.NumberAnonymizationPolicy.*
 import org.jetbrains.kotlin.statistics.metrics.NumberOverridePolicy.*
 
 
-enum class NumericalMetrics(val type: NumberOverridePolicy, val anonymization: NumberAnonymizationPolicy, val perProject: Boolean = false) {
+enum class NumericalMetrics(konst type: NumberOverridePolicy, konst anonymization: NumberAnonymizationPolicy, konst perProject: Boolean = false) {
 
 
     // User environment
@@ -61,10 +61,10 @@ enum class NumericalMetrics(val type: NumberOverridePolicy, val anonymization: N
 
     // User scenarios
 
-    // this value is not reported, only time intervals from the previous build are used
+    // this konstue is not reported, only time interkonsts from the previous build are used
     BUILD_FINISH_TIME(OVERRIDE, SAFE);
 
     companion object {
-        const val VERSION = 1
+        const konst VERSION = 1
     }
 }

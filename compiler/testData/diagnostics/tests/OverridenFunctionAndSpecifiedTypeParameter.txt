@@ -6,7 +6,7 @@ public interface Aaa</*0*/ T> {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
-    public abstract fun zzz(/*0*/ value: T): kotlin.Unit
+    public abstract fun zzz(/*0*/ konstue: T): kotlin.Unit
 }
 
 public final class Bbb</*0*/ T> : Aaa<T> {
@@ -14,5 +14,5 @@ public final class Bbb</*0*/ T> : Aaa<T> {
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
-    public open override /*1*/ fun zzz(/*0*/ value: T): kotlin.Unit
+    public open override /*1*/ fun zzz(/*0*/ konstue: T): kotlin.Unit
 }

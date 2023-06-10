@@ -1,11 +1,11 @@
 import kotlin.reflect.KClass
 
 @Repeatable
-annotation class Ann(val a: Array<KClass<*>>)
+annotation class Ann(konst a: Array<KClass<*>>)
 
 class Foo
 
-val foo = Foo::class
+konst foo = Foo::class
 fun bar() = Foo::class
 
 @Ann(

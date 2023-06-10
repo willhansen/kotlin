@@ -23,17 +23,17 @@ import org.jetbrains.kotlin.load.java.structure.JavaModifierListOwner
 import org.jetbrains.kotlin.load.java.structure.MapBasedJavaAnnotationOwner
 import org.jetbrains.org.objectweb.asm.Opcodes
 
-internal const val ASM_API_VERSION_FOR_CLASS_READING = Opcodes.API_VERSION
+internal const konst ASM_API_VERSION_FOR_CLASS_READING = Opcodes.API_VERSION
 
 internal interface BinaryJavaModifierListOwner : JavaModifierListOwner, MapBasedJavaAnnotationOwner {
-    val access: Int
+    konst access: Int
 
     fun isSet(flag: Int) = access.isSet(flag)
 
-    override val isAbstract get() = isSet(Opcodes.ACC_ABSTRACT)
-    override val isStatic get() = isSet(Opcodes.ACC_STATIC)
-    override val isFinal get() = isSet(Opcodes.ACC_FINAL)
-    override val visibility: Visibility
+    override konst isAbstract get() = isSet(Opcodes.ACC_ABSTRACT)
+    override konst isStatic get() = isSet(Opcodes.ACC_STATIC)
+    override konst isFinal get() = isSet(Opcodes.ACC_FINAL)
+    override konst visibility: Visibility
         get() = when {
             isSet(Opcodes.ACC_PRIVATE) -> Visibilities.Private
             isSet(Opcodes.ACC_PROTECTED) ->
@@ -42,7 +42,7 @@ internal interface BinaryJavaModifierListOwner : JavaModifierListOwner, MapBased
             else -> JavaVisibilities.PackageVisibility
         }
 
-    override val isDeprecatedInJavaDoc get() = isSet(Opcodes.ACC_DEPRECATED)
+    override konst isDeprecatedInJavaDoc get() = isSet(Opcodes.ACC_DEPRECATED)
 }
 
 internal fun Int.isSet(flag: Int) = this and flag != 0

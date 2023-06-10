@@ -8,23 +8,23 @@ package serialization.deserialized_listof0
 import kotlin.test.*
 
 fun test_arrayList() {
-    val l = listOf(1, 2, 3)
-    val m = listOf<Int>()
-    val n = l + m
+    konst l = listOf(1, 2, 3)
+    konst m = listOf<Int>()
+    konst n = l + m
     println(n)
 }
 
 fun <T> test_arrayList2(x: T, y: T, z: T) {
-    val l = listOf<T>(x, y, z)
-    val m = listOf<T>()
-    val n = m + l
+    konst l = listOf<T>(x, y, z)
+    konst m = listOf<T>()
+    konst n = m + l
     println(l)
 }
 
 fun test_arrayList3() {
-    val l = listOf<String>()
-    val m = listOf<String>("a", "b", "c")
-    val n = l + m
+    konst l = listOf<String>()
+    konst m = listOf<String>("a", "b", "c")
+    konst n = l + m
     println(n)
 }
 

@@ -4,7 +4,7 @@ FILE: selfReferentialAnnotation.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val e: R|kotlin/Int| = R|<local>/e|
+        public final konst e: R|kotlin/Int| = R|<local>/e|
             public get(): R|kotlin/Int|
 
     }
@@ -13,10 +13,10 @@ FILE: selfReferentialAnnotation.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val a: R|kotlin/String| = R|<local>/a|
+        public final konst a: R|kotlin/String| = R|<local>/a|
             public get(): R|kotlin/String|
 
-        public final val b: R|MyRequiresOptIn.MyLevel| = R|<local>/b|
+        public final konst b: R|MyRequiresOptIn.MyLevel| = R|<local>/b|
             public get(): R|MyRequiresOptIn.MyLevel|
 
         public final enum class MyLevel : R|kotlin/Enum<MyRequiresOptIn.MyLevel>| {
@@ -26,13 +26,13 @@ FILE: selfReferentialAnnotation.kt
 
             public final static enum entry WARNING: R|MyRequiresOptIn.MyLevel|
             public final static enum entry ERROR: R|MyRequiresOptIn.MyLevel|
-            public final static fun values(): R|kotlin/Array<MyRequiresOptIn.MyLevel>| {
+            public final static fun konstues(): R|kotlin/Array<MyRequiresOptIn.MyLevel>| {
             }
 
-            public final static fun valueOf(value: R|kotlin/String|): R|MyRequiresOptIn.MyLevel| {
+            public final static fun konstueOf(konstue: R|kotlin/String|): R|MyRequiresOptIn.MyLevel| {
             }
 
-            public final static val entries: R|kotlin/enums/EnumEntries<MyRequiresOptIn.MyLevel>|
+            public final static konst entries: R|kotlin/enums/EnumEntries<MyRequiresOptIn.MyLevel>|
                 public get(): R|kotlin/enums/EnumEntries<MyRequiresOptIn.MyLevel>|
 
         }

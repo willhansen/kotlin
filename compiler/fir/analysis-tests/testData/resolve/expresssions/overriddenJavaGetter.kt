@@ -13,7 +13,7 @@ class Derived : Base() {
 }
 
 fun test() {
-    val d = Derived()
-    val res1 = d.something // Should be Ok
-    val res2 = d.getSomething() // Should be Ok
+    konst d = Derived()
+    konst res1 = d.something // Should be Ok
+    konst res2 = d.getSomething() // Should be Ok
 }

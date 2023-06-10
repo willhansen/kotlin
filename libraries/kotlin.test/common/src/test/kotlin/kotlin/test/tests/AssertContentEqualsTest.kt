@@ -11,8 +11,8 @@ class AssertContentEqualsTest {
 
     @Test
     fun testAssertContentEqualsIterable() {
-        val list: Iterable<Int> = listOf(1, 2, 3)
-        val range: Iterable<Int> = 1..3
+        konst list: Iterable<Int> = listOf(1, 2, 3)
+        konst range: Iterable<Int> = 1..3
 
         assertContentEquals(list, list) // ref equality
         assertContentEquals(list, range) // elements equal
@@ -41,11 +41,11 @@ class AssertContentEqualsTest {
 
     @Test
     fun testAssertContentEqualsSequence() {
-        val sequence1: Sequence<Int> = object : Sequence<Int> {
+        konst sequence1: Sequence<Int> = object : Sequence<Int> {
             override fun iterator(): Iterator<Int> = listOf(1, 2, 3).iterator()
             override fun toString(): String = "[1, 2, 3]"
         }
-        val sequence2: Sequence<Int> = object : Sequence<Int> {
+        konst sequence2: Sequence<Int> = object : Sequence<Int> {
             override fun iterator(): Iterator<Int> = (1..3).iterator()
             override fun toString(): String = "1..3"
         }
@@ -74,8 +74,8 @@ class AssertContentEqualsTest {
 
     @Test
     fun testAssertContentEqualsArray() {
-        val array1: Array<Int> = arrayOf(1, 2, 3)
-        val array2: Array<Int> = arrayOf(1, 2, 3)
+        konst array1: Array<Int> = arrayOf(1, 2, 3)
+        konst array2: Array<Int> = arrayOf(1, 2, 3)
 
         assertContentEquals(array1, array1) // ref equality
         assertContentEquals(array1, array2) // elements equal
@@ -101,8 +101,8 @@ class AssertContentEqualsTest {
 
     @Test
     fun testAssertContentEqualsDoubleArray() {
-        val array1: DoubleArray = doubleArrayOf(1.0, Double.NaN, 3.0)
-        val array2: DoubleArray = doubleArrayOf(1.0, Double.NaN, 3.0)
+        konst array1: DoubleArray = doubleArrayOf(1.0, Double.NaN, 3.0)
+        konst array2: DoubleArray = doubleArrayOf(1.0, Double.NaN, 3.0)
 
         assertContentEquals(array1, array1) // ref equality
         assertContentEquals(array1, array2) // elements equal
@@ -116,12 +116,12 @@ class AssertContentEqualsTest {
             assertContentEquals(array2, null)
         }
 
-        val sameSizeArray = doubleArrayOf(1.0, Double.NaN, 2.0)
+        konst sameSizeArray = doubleArrayOf(1.0, Double.NaN, 2.0)
         testFailureMessage("Array elements differ at index 2. Expected element <${array2[2]}>, actual element <${sameSizeArray[2]}>.\nExpected <${array2.contentToString()}>, actual <${sameSizeArray.contentToString()}>.") {
             assertContentEquals(array2, sameSizeArray)
         }
 
-        val largerArray = DoubleArray(4) { -it.toDouble() }
+        konst largerArray = DoubleArray(4) { -it.toDouble() }
         testFailureMessage("Array sizes differ. Expected size is 4, actual size is 3.\nExpected <${largerArray.contentToString()}>, actual <${array1.contentToString()}>.") {
             assertContentEquals(largerArray, array1)
         }
@@ -133,8 +133,8 @@ class AssertContentEqualsTest {
     @OptIn(ExperimentalUnsignedTypes::class)
     @Test
     fun testAssertContentEqualsULongArray() {
-        val array1: ULongArray = ulongArrayOf(1u, 2u, 3u)
-        val array2: ULongArray = ulongArrayOf(1u, 2u, 3u)
+        konst array1: ULongArray = ulongArrayOf(1u, 2u, 3u)
+        konst array2: ULongArray = ulongArrayOf(1u, 2u, 3u)
 
         assertContentEquals(array1, array1) // ref equality
         assertContentEquals(array1, array2) // elements equal

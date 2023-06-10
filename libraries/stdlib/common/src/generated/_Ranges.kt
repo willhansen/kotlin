@@ -319,620 +319,620 @@ public inline operator fun CharRange.contains(element: Char?): Boolean {
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("intRangeContains")
-public operator fun ClosedRange<Int>.contains(value: Byte): Boolean {
-    return contains(value.toInt())
+public operator fun ClosedRange<Int>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toInt())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("longRangeContains")
-public operator fun ClosedRange<Long>.contains(value: Byte): Boolean {
-    return contains(value.toLong())
+public operator fun ClosedRange<Long>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toLong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("shortRangeContains")
-public operator fun ClosedRange<Short>.contains(value: Byte): Boolean {
-    return contains(value.toShort())
+public operator fun ClosedRange<Short>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toShort())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("doubleRangeContains")
-public operator fun ClosedRange<Double>.contains(value: Byte): Boolean {
-    return contains(value.toDouble())
+public operator fun ClosedRange<Double>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toDouble())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("floatRangeContains")
-public operator fun ClosedRange<Float>.contains(value: Byte): Boolean {
-    return contains(value.toFloat())
+public operator fun ClosedRange<Float>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toFloat())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("intRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Int>.contains(value: Byte): Boolean {
-    return contains(value.toInt())
+public operator fun OpenEndRange<Int>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toInt())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("longRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Long>.contains(value: Byte): Boolean {
-    return contains(value.toLong())
+public operator fun OpenEndRange<Long>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toLong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("shortRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Short>.contains(value: Byte): Boolean {
-    return contains(value.toShort())
+public operator fun OpenEndRange<Short>.contains(konstue: Byte): Boolean {
+    return contains(konstue.toShort())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun IntRange.contains(value: Byte): Boolean {
-    return (this as ClosedRange<Int>).contains(value)
+public inline operator fun IntRange.contains(konstue: Byte): Boolean {
+    return (this as ClosedRange<Int>).contains(konstue)
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun LongRange.contains(value: Byte): Boolean {
-    return (this as ClosedRange<Long>).contains(value)
+public inline operator fun LongRange.contains(konstue: Byte): Boolean {
+    return (this as ClosedRange<Long>).contains(konstue)
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("intRangeContains")
-public operator fun ClosedRange<Int>.contains(value: Double): Boolean {
-    return value.toIntExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Int>.contains(konstue: Double): Boolean {
+    return konstue.toIntExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("longRangeContains")
-public operator fun ClosedRange<Long>.contains(value: Double): Boolean {
-    return value.toLongExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Long>.contains(konstue: Double): Boolean {
+    return konstue.toLongExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("byteRangeContains")
-public operator fun ClosedRange<Byte>.contains(value: Double): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Byte>.contains(konstue: Double): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("shortRangeContains")
-public operator fun ClosedRange<Short>.contains(value: Double): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Short>.contains(konstue: Double): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("floatRangeContains")
-public operator fun ClosedRange<Float>.contains(value: Double): Boolean {
-    return contains(value.toFloat())
+public operator fun ClosedRange<Float>.contains(konstue: Double): Boolean {
+    return contains(konstue.toFloat())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("intRangeContains")
-public operator fun ClosedRange<Int>.contains(value: Float): Boolean {
-    return value.toIntExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Int>.contains(konstue: Float): Boolean {
+    return konstue.toIntExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("longRangeContains")
-public operator fun ClosedRange<Long>.contains(value: Float): Boolean {
-    return value.toLongExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Long>.contains(konstue: Float): Boolean {
+    return konstue.toLongExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("byteRangeContains")
-public operator fun ClosedRange<Byte>.contains(value: Float): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Byte>.contains(konstue: Float): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("shortRangeContains")
-public operator fun ClosedRange<Short>.contains(value: Float): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Short>.contains(konstue: Float): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("doubleRangeContains")
-public operator fun ClosedRange<Double>.contains(value: Float): Boolean {
-    return contains(value.toDouble())
+public operator fun ClosedRange<Double>.contains(konstue: Float): Boolean {
+    return contains(konstue.toDouble())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("doubleRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Double>.contains(value: Float): Boolean {
-    return contains(value.toDouble())
+public operator fun OpenEndRange<Double>.contains(konstue: Float): Boolean {
+    return contains(konstue.toDouble())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("longRangeContains")
-public operator fun ClosedRange<Long>.contains(value: Int): Boolean {
-    return contains(value.toLong())
+public operator fun ClosedRange<Long>.contains(konstue: Int): Boolean {
+    return contains(konstue.toLong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("byteRangeContains")
-public operator fun ClosedRange<Byte>.contains(value: Int): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Byte>.contains(konstue: Int): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("shortRangeContains")
-public operator fun ClosedRange<Short>.contains(value: Int): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Short>.contains(konstue: Int): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("doubleRangeContains")
-public operator fun ClosedRange<Double>.contains(value: Int): Boolean {
-    return contains(value.toDouble())
+public operator fun ClosedRange<Double>.contains(konstue: Int): Boolean {
+    return contains(konstue.toDouble())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
- */
-@Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
-@DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
-@kotlin.jvm.JvmName("floatRangeContains")
-public operator fun ClosedRange<Float>.contains(value: Int): Boolean {
-    return contains(value.toFloat())
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("longRangeContains")
-@SinceKotlin("1.9")
-@WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Long>.contains(value: Int): Boolean {
-    return contains(value.toLong())
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("byteRangeContains")
-@SinceKotlin("1.9")
-@WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Byte>.contains(value: Int): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("shortRangeContains")
-@SinceKotlin("1.9")
-@WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Short>.contains(value: Int): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.internal.InlineOnly
-public inline operator fun LongRange.contains(value: Int): Boolean {
-    return (this as ClosedRange<Long>).contains(value)
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("intRangeContains")
-public operator fun ClosedRange<Int>.contains(value: Long): Boolean {
-    return value.toIntExactOrNull().let { if (it != null) contains(it) else false }
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("byteRangeContains")
-public operator fun ClosedRange<Byte>.contains(value: Long): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("shortRangeContains")
-public operator fun ClosedRange<Short>.contains(value: Long): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
- */
-@Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
-@DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
-@kotlin.jvm.JvmName("doubleRangeContains")
-public operator fun ClosedRange<Double>.contains(value: Long): Boolean {
-    return contains(value.toDouble())
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("floatRangeContains")
-public operator fun ClosedRange<Float>.contains(value: Long): Boolean {
-    return contains(value.toFloat())
+public operator fun ClosedRange<Float>.contains(konstue: Int): Boolean {
+    return contains(konstue.toFloat())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
-@kotlin.jvm.JvmName("intRangeContains")
+@kotlin.jvm.JvmName("longRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Int>.contains(value: Long): Boolean {
-    return value.toIntExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun OpenEndRange<Long>.contains(konstue: Int): Boolean {
+    return contains(konstue.toLong())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("byteRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Byte>.contains(value: Long): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun OpenEndRange<Byte>.contains(konstue: Int): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("shortRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Short>.contains(value: Long): Boolean {
-    return value.toShortExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun OpenEndRange<Short>.contains(konstue: Int): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun IntRange.contains(value: Long): Boolean {
-    return (this as ClosedRange<Int>).contains(value)
+public inline operator fun LongRange.contains(konstue: Int): Boolean {
+    return (this as ClosedRange<Long>).contains(konstue)
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("intRangeContains")
-public operator fun ClosedRange<Int>.contains(value: Short): Boolean {
-    return contains(value.toInt())
+public operator fun ClosedRange<Int>.contains(konstue: Long): Boolean {
+    return konstue.toIntExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("longRangeContains")
-public operator fun ClosedRange<Long>.contains(value: Short): Boolean {
-    return contains(value.toLong())
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("byteRangeContains")
-public operator fun ClosedRange<Byte>.contains(value: Short): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun ClosedRange<Byte>.contains(konstue: Long): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("shortRangeContains")
+public operator fun ClosedRange<Short>.contains(konstue: Long): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("doubleRangeContains")
-public operator fun ClosedRange<Double>.contains(value: Short): Boolean {
-    return contains(value.toDouble())
+public operator fun ClosedRange<Double>.contains(konstue: Long): Boolean {
+    return contains(konstue.toDouble())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
 @kotlin.jvm.JvmName("floatRangeContains")
-public operator fun ClosedRange<Float>.contains(value: Short): Boolean {
-    return contains(value.toFloat())
+public operator fun ClosedRange<Float>.contains(konstue: Long): Boolean {
+    return contains(konstue.toFloat())
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("intRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Int>.contains(value: Short): Boolean {
-    return contains(value.toInt())
+public operator fun OpenEndRange<Int>.contains(konstue: Long): Boolean {
+    return konstue.toIntExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
- */
-@kotlin.jvm.JvmName("longRangeContains")
-@SinceKotlin("1.9")
-@WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Long>.contains(value: Short): Boolean {
-    return contains(value.toLong())
-}
-
-/**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.jvm.JvmName("byteRangeContains")
 @SinceKotlin("1.9")
 @WasExperimental(ExperimentalStdlibApi::class)
-public operator fun OpenEndRange<Byte>.contains(value: Short): Boolean {
-    return value.toByteExactOrNull().let { if (it != null) contains(it) else false }
+public operator fun OpenEndRange<Byte>.contains(konstue: Long): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("shortRangeContains")
+@SinceKotlin("1.9")
+@WasExperimental(ExperimentalStdlibApi::class)
+public operator fun OpenEndRange<Short>.contains(konstue: Long): Boolean {
+    return konstue.toShortExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun IntRange.contains(value: Short): Boolean {
-    return (this as ClosedRange<Int>).contains(value)
+public inline operator fun IntRange.contains(konstue: Long): Boolean {
+    return (this as ClosedRange<Int>).contains(konstue)
 }
 
 /**
- * Checks if the specified [value] belongs to this range.
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("intRangeContains")
+public operator fun ClosedRange<Int>.contains(konstue: Short): Boolean {
+    return contains(konstue.toInt())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("longRangeContains")
+public operator fun ClosedRange<Long>.contains(konstue: Short): Boolean {
+    return contains(konstue.toLong())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("byteRangeContains")
+public operator fun ClosedRange<Byte>.contains(konstue: Short): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
+@DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
+@kotlin.jvm.JvmName("doubleRangeContains")
+public operator fun ClosedRange<Double>.contains(konstue: Short): Boolean {
+    return contains(konstue.toDouble())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@Deprecated("This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
+@DeprecatedSinceKotlin(warningSince = "1.3", errorSince = "1.4", hiddenSince = "1.5")
+@kotlin.jvm.JvmName("floatRangeContains")
+public operator fun ClosedRange<Float>.contains(konstue: Short): Boolean {
+    return contains(konstue.toFloat())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("intRangeContains")
+@SinceKotlin("1.9")
+@WasExperimental(ExperimentalStdlibApi::class)
+public operator fun OpenEndRange<Int>.contains(konstue: Short): Boolean {
+    return contains(konstue.toInt())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("longRangeContains")
+@SinceKotlin("1.9")
+@WasExperimental(ExperimentalStdlibApi::class)
+public operator fun OpenEndRange<Long>.contains(konstue: Short): Boolean {
+    return contains(konstue.toLong())
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.jvm.JvmName("byteRangeContains")
+@SinceKotlin("1.9")
+@WasExperimental(ExperimentalStdlibApi::class)
+public operator fun OpenEndRange<Byte>.contains(konstue: Short): Boolean {
+    return konstue.toByteExactOrNull().let { if (it != null) contains(it) else false }
+}
+
+/**
+ * Checks if the specified [konstue] belongs to this range.
  */
 @kotlin.internal.InlineOnly
-public inline operator fun LongRange.contains(value: Short): Boolean {
-    return (this as ClosedRange<Long>).contains(value)
+public inline operator fun IntRange.contains(konstue: Short): Boolean {
+    return (this as ClosedRange<Int>).contains(konstue)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Checks if the specified [konstue] belongs to this range.
+ */
+@kotlin.internal.InlineOnly
+public inline operator fun LongRange.contains(konstue: Short): Boolean {
+    return (this as ClosedRange<Long>).contains(konstue)
+}
+
+/**
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Int.downTo(to: Byte): IntProgression {
     return IntProgression.fromClosedRange(this, to.toInt(), -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Long.downTo(to: Byte): LongProgression {
     return LongProgression.fromClosedRange(this, to.toLong(), -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Byte.downTo(to: Byte): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to.toInt(), -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Short.downTo(to: Byte): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to.toInt(), -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Char.downTo(to: Char): CharProgression {
     return CharProgression.fromClosedRange(this, to, -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Int.downTo(to: Int): IntProgression {
     return IntProgression.fromClosedRange(this, to, -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Long.downTo(to: Int): LongProgression {
     return LongProgression.fromClosedRange(this, to.toLong(), -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Byte.downTo(to: Int): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to, -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Short.downTo(to: Int): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to, -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Int.downTo(to: Long): LongProgression {
     return LongProgression.fromClosedRange(this.toLong(), to, -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Long.downTo(to: Long): LongProgression {
     return LongProgression.fromClosedRange(this, to, -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Byte.downTo(to: Long): LongProgression {
     return LongProgression.fromClosedRange(this.toLong(), to, -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Short.downTo(to: Long): LongProgression {
     return LongProgression.fromClosedRange(this.toLong(), to, -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Int.downTo(to: Short): IntProgression {
     return IntProgression.fromClosedRange(this, to.toInt(), -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Long.downTo(to: Short): LongProgression {
     return LongProgression.fromClosedRange(this, to.toLong(), -1L)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Byte.downTo(to: Short): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to.toInt(), -1)
 }
 
 /**
- * Returns a progression from this value down to the specified [to] value with the step -1.
+ * Returns a progression from this konstue down to the specified [to] konstue with the step -1.
  * 
- * The [to] value should be less than or equal to `this` value.
- * If the [to] value is greater than `this` value the returned progression is empty.
+ * The [to] konstue should be less than or equal to `this` konstue.
+ * If the [to] konstue is greater than `this` konstue the returned progression is empty.
  */
 public infix fun Short.downTo(to: Short): IntProgression {
     return IntProgression.fromClosedRange(this.toInt(), to.toInt(), -1)
@@ -1040,45 +1040,45 @@ internal fun Float.toShortExactOrNull(): Short? {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Int.until(to: Byte): IntRange {
     return this .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Long.until(to: Byte): LongRange {
     return this .. (to.toLong() - 1).toLong()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Byte.until(to: Byte): IntRange {
     return this.toInt() .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Short.until(to: Byte): IntRange {
     return this.toInt() .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Char.until(to: Char): CharRange {
     if (to <= '\u0000') return CharRange.EMPTY
@@ -1086,9 +1086,9 @@ public infix fun Char.until(to: Char): CharRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Int.until(to: Int): IntRange {
     if (to <= Int.MIN_VALUE) return IntRange.EMPTY
@@ -1096,18 +1096,18 @@ public infix fun Int.until(to: Int): IntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Long.until(to: Int): LongRange {
     return this .. (to.toLong() - 1).toLong()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Byte.until(to: Int): IntRange {
     if (to <= Int.MIN_VALUE) return IntRange.EMPTY
@@ -1115,9 +1115,9 @@ public infix fun Byte.until(to: Int): IntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Short.until(to: Int): IntRange {
     if (to <= Int.MIN_VALUE) return IntRange.EMPTY
@@ -1125,9 +1125,9 @@ public infix fun Short.until(to: Int): IntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Int.until(to: Long): LongRange {
     if (to <= Long.MIN_VALUE) return LongRange.EMPTY
@@ -1135,9 +1135,9 @@ public infix fun Int.until(to: Long): LongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Long.until(to: Long): LongRange {
     if (to <= Long.MIN_VALUE) return LongRange.EMPTY
@@ -1145,9 +1145,9 @@ public infix fun Long.until(to: Long): LongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Byte.until(to: Long): LongRange {
     if (to <= Long.MIN_VALUE) return LongRange.EMPTY
@@ -1155,9 +1155,9 @@ public infix fun Byte.until(to: Long): LongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Short.until(to: Long): LongRange {
     if (to <= Long.MIN_VALUE) return LongRange.EMPTY
@@ -1165,45 +1165,45 @@ public infix fun Short.until(to: Long): LongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Int.until(to: Short): IntRange {
     return this .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Long.until(to: Short): LongRange {
     return this .. (to.toLong() - 1).toLong()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Byte.until(to: Short): IntRange {
     return this.toInt() .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  * 
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun Short.until(to: Short): IntRange {
     return this.toInt() .. (to.toInt() - 1).toInt()
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeastComparable
  */
@@ -1212,9 +1212,9 @@ public fun <T : Comparable<T>> T.coerceAtLeast(minimumValue: T): T {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1223,9 +1223,9 @@ public fun Byte.coerceAtLeast(minimumValue: Byte): Byte {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1234,9 +1234,9 @@ public fun Short.coerceAtLeast(minimumValue: Short): Short {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1245,9 +1245,9 @@ public fun Int.coerceAtLeast(minimumValue: Int): Int {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1256,9 +1256,9 @@ public fun Long.coerceAtLeast(minimumValue: Long): Long {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1267,9 +1267,9 @@ public fun Float.coerceAtLeast(minimumValue: Float): Float {
 }
 
 /**
- * Ensures that this value is not less than the specified [minimumValue].
+ * Ensures that this konstue is not less than the specified [minimumValue].
  * 
- * @return this value if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
+ * @return this konstue if it's greater than or equal to the [minimumValue] or the [minimumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtLeast
  */
@@ -1278,9 +1278,9 @@ public fun Double.coerceAtLeast(minimumValue: Double): Double {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMostComparable
  */
@@ -1289,9 +1289,9 @@ public fun <T : Comparable<T>> T.coerceAtMost(maximumValue: T): T {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1300,9 +1300,9 @@ public fun Byte.coerceAtMost(maximumValue: Byte): Byte {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1311,9 +1311,9 @@ public fun Short.coerceAtMost(maximumValue: Short): Short {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1322,9 +1322,9 @@ public fun Int.coerceAtMost(maximumValue: Int): Int {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1333,9 +1333,9 @@ public fun Long.coerceAtMost(maximumValue: Long): Long {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1344,9 +1344,9 @@ public fun Float.coerceAtMost(maximumValue: Float): Float {
 }
 
 /**
- * Ensures that this value is not greater than the specified [maximumValue].
+ * Ensures that this konstue is not greater than the specified [maximumValue].
  * 
- * @return this value if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
+ * @return this konstue if it's less than or equal to the [maximumValue] or the [maximumValue] otherwise.
  * 
  * @sample samples.comparisons.ComparableOps.coerceAtMost
  */
@@ -1355,15 +1355,15 @@ public fun Double.coerceAtMost(maximumValue: Double): Double {
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceInComparable
  */
 public fun <T : Comparable<T>> T.coerceIn(minimumValue: T?, maximumValue: T?): T {
     if (minimumValue !== null && maximumValue !== null) {
-        if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+        if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
         if (this < minimumValue) return minimumValue
         if (this > maximumValue) return maximumValue
     }
@@ -1375,99 +1375,99 @@ public fun <T : Comparable<T>> T.coerceIn(minimumValue: T?, maximumValue: T?): T
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Byte.coerceIn(minimumValue: Byte, maximumValue: Byte): Byte {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Short.coerceIn(minimumValue: Short, maximumValue: Short): Short {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Int.coerceIn(minimumValue: Int, maximumValue: Int): Int {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Long.coerceIn(minimumValue: Long, maximumValue: Long): Long {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Float.coerceIn(minimumValue: Float, maximumValue: Float): Float {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified range [minimumValue]..[maximumValue].
+ * Ensures that this konstue lies in the specified range [minimumValue]..[maximumValue].
  * 
- * @return this value if it's in the range, or [minimumValue] if this value is less than [minimumValue], or [maximumValue] if this value is greater than [maximumValue].
+ * @return this konstue if it's in the range, or [minimumValue] if this konstue is less than [minimumValue], or [maximumValue] if this konstue is greater than [maximumValue].
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
 public fun Double.coerceIn(minimumValue: Double, maximumValue: Double): Double {
-    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce value to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
+    if (minimumValue > maximumValue) throw IllegalArgumentException("Cannot coerce konstue to an empty range: maximum $maximumValue is less than minimum $minimumValue.")
     if (this < minimumValue) return minimumValue
     if (this > maximumValue) return maximumValue
     return this
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceInFloatingPointRange
  */
 @SinceKotlin("1.1")
 public fun <T : Comparable<T>> T.coerceIn(range: ClosedFloatingPointRange<T>): T {
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         // this < start equiv to this <= start && !(this >= start)
         range.lessThanOrEquals(this, range.start) && !range.lessThanOrEquals(range.start, this) -> range.start
@@ -1478,9 +1478,9 @@ public fun <T : Comparable<T>> T.coerceIn(range: ClosedFloatingPointRange<T>): T
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceInComparable
  */
@@ -1488,7 +1488,7 @@ public fun <T : Comparable<T>> T.coerceIn(range: ClosedRange<T>): T {
     if (range is ClosedFloatingPointRange) {
         return this.coerceIn<T>(range)
     }
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         this < range.start -> range.start
         this > range.endInclusive -> range.endInclusive
@@ -1497,9 +1497,9 @@ public fun <T : Comparable<T>> T.coerceIn(range: ClosedRange<T>): T {
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
@@ -1507,7 +1507,7 @@ public fun Int.coerceIn(range: ClosedRange<Int>): Int {
     if (range is ClosedFloatingPointRange) {
         return this.coerceIn<Int>(range)
     }
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         this < range.start -> range.start
         this > range.endInclusive -> range.endInclusive
@@ -1516,9 +1516,9 @@ public fun Int.coerceIn(range: ClosedRange<Int>): Int {
 }
 
 /**
- * Ensures that this value lies in the specified [range].
+ * Ensures that this konstue lies in the specified [range].
  * 
- * @return this value if it's in the [range], or `range.start` if this value is less than `range.start`, or `range.endInclusive` if this value is greater than `range.endInclusive`.
+ * @return this konstue if it's in the [range], or `range.start` if this konstue is less than `range.start`, or `range.endInclusive` if this konstue is greater than `range.endInclusive`.
  * 
  * @sample samples.comparisons.ComparableOps.coerceIn
  */
@@ -1526,7 +1526,7 @@ public fun Long.coerceIn(range: ClosedRange<Long>): Long {
     if (range is ClosedFloatingPointRange) {
         return this.coerceIn<Long>(range)
     }
-    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce value to an empty range: $range.")
+    if (range.isEmpty()) throw IllegalArgumentException("Cannot coerce konstue to an empty range: $range.")
     return when {
         this < range.start -> range.start
         this > range.endInclusive -> range.endInclusive

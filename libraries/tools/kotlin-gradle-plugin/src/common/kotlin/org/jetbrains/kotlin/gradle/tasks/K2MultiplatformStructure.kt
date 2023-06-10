@@ -20,32 +20,32 @@ abstract class K2MultiplatformStructure {
     @InternalKotlinGradlePluginApi
     data class RefinesEdge(
         @Input
-        val fromFragmentName: String,
+        konst fromFragmentName: String,
         @Input
-        val toFragmentName: String,
+        konst toFragmentName: String,
     )
 
     @InternalKotlinGradlePluginApi
     data class Fragment(
         @Input
-        val fragmentName: String,
+        konst fragmentName: String,
 
         @get:InputFiles
         @get:IgnoreEmptyDirectories
         @get:Incremental
         @get:NormalizeLineEndings
         @get:PathSensitive(PathSensitivity.RELATIVE)
-        val sources: FileCollection,
+        konst sources: FileCollection,
     )
 
     @get:Nested
-    abstract val refinesEdges: SetProperty<RefinesEdge>
+    abstract konst refinesEdges: SetProperty<RefinesEdge>
 
     @get:Nested
-    abstract val fragments: ListProperty<Fragment>
+    abstract konst fragments: ListProperty<Fragment>
 }
 
-internal val K2MultiplatformStructure.fragmentsCompilerArgs: Array<String>
+internal konst K2MultiplatformStructure.fragmentsCompilerArgs: Array<String>
     get() = fragments.get().map { it.fragmentName }.toSet().toTypedArray()
 
 internal fun K2MultiplatformStructure.fragmentSourcesCompilerArgs(sourceFileFilter: PatternFilterable? = null): Array<String> =
@@ -55,7 +55,7 @@ internal fun K2MultiplatformStructure.fragmentSourcesCompilerArgs(sourceFileFilt
             .files.map { sourceFile -> "${sourceSet.fragmentName}:${sourceFile.absolutePath}" }
     }.toTypedArray()
 
-internal val K2MultiplatformStructure.fragmentRefinesCompilerArgs: Array<String>
+internal konst K2MultiplatformStructure.fragmentRefinesCompilerArgs: Array<String>
     get() = refinesEdges.get().map { edge ->
         "${edge.fromFragmentName}:${edge.toFragmentName}"
     }.toTypedArray()

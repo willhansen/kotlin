@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.gradle.plugin.sources.android.type
 
 internal object KotlinAndroidSourceSetInfoConfigurator : KotlinAndroidSourceSetConfigurator {
     override fun configureWithVariant(target: KotlinAndroidTarget, kotlinSourceSet: KotlinSourceSet, variant: BaseVariant) {
-        val info = kotlinSourceSet.androidSourceSetInfo.asMutable()
+        konst info = kotlinSourceSet.androidSourceSetInfo.asMutable()
         info.androidVariantType = variant.type
         info.androidVariantNames.add(variant.name)
     }

@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class NoArgGradleSubplugin
 @Inject internal constructor(
-    private val registry: ToolingModelBuilderRegistry
+    private konst registry: ToolingModelBuilderRegistry
 ) : KotlinCompilerPluginSupportPlugin {
 
     companion object {
@@ -33,11 +33,11 @@ class NoArgGradleSubplugin
             return project.extensions.getByType(NoArgExtension::class.java)
         }
 
-        private const val NOARG_ARTIFACT_NAME = "kotlin-noarg-compiler-plugin-embeddable"
+        private const konst NOARG_ARTIFACT_NAME = "kotlin-noarg-compiler-plugin-embeddable"
 
-        private const val ANNOTATION_ARG_NAME = "annotation"
-        private const val PRESET_ARG_NAME = "preset"
-        private const val INVOKE_INITIALIZERS_ARG_NAME = "invokeInitializers"
+        private const konst ANNOTATION_ARG_NAME = "annotation"
+        private const konst PRESET_ARG_NAME = "preset"
+        private const konst INVOKE_INITIALIZERS_ARG_NAME = "invokeInitializers"
     }
 
     override fun apply(target: Project) {
@@ -50,11 +50,11 @@ class NoArgGradleSubplugin
     override fun applyToCompilation(
         kotlinCompilation: KotlinCompilation<*>
     ): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
         return project.provider {
-            val noArgExtension = project.extensions.getByType(NoArgExtension::class.java)
-            val options = mutableListOf<SubpluginOption>()
+            konst noArgExtension = project.extensions.getByType(NoArgExtension::class.java)
+            konst options = mutableListOf<SubpluginOption>()
 
             for (anno in noArgExtension.myAnnotations) {
                 options += SubpluginOption(ANNOTATION_ARG_NAME, anno)

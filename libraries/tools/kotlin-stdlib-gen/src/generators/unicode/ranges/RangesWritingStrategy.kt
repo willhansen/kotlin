@@ -11,9 +11,9 @@ import templates.Platform
 import java.io.FileWriter
 
 internal sealed class RangesWritingStrategy {
-    abstract val indentation: String
-    abstract val rangesAnnotation: String
-    abstract val rangesVisibilityModifier: String
+    abstract konst indentation: String
+    abstract konst rangesAnnotation: String
+    abstract konst rangesVisibilityModifier: String
     abstract fun beforeWritingRanges(writer: FileWriter)
     abstract fun afterWritingRanges(writer: FileWriter)
     abstract fun rangeRef(name: String): String
@@ -28,10 +28,10 @@ internal sealed class RangesWritingStrategy {
     }
 }
 
-internal class NativeRangesWritingStrategy(private val useNativeRangesAnnotation: Boolean) : RangesWritingStrategy() {
-    override val indentation: String get() = ""
-    override val rangesAnnotation: String get() = if (useNativeRangesAnnotation) "@SharedImmutable\n" else ""
-    override val rangesVisibilityModifier: String get() = "private"
+internal class NativeRangesWritingStrategy(private konst useNativeRangesAnnotation: Boolean) : RangesWritingStrategy() {
+    override konst indentation: String get() = ""
+    override konst rangesAnnotation: String get() = if (useNativeRangesAnnotation) "@SharedImmutable\n" else ""
+    override konst rangesVisibilityModifier: String get() = "private"
     override fun beforeWritingRanges(writer: FileWriter) {}
     override fun afterWritingRanges(writer: FileWriter) {}
     override fun rangeRef(name: String): String = name
@@ -39,11 +39,11 @@ internal class NativeRangesWritingStrategy(private val useNativeRangesAnnotation
 
 // see KT-42461, KT-40482
 internal class JsRangesWritingStrategy(
-    private val wrapperName: String
+    private konst wrapperName: String
 ) : RangesWritingStrategy() {
-    override val indentation: String get() = " ".repeat(4)
-    override val rangesAnnotation: String get() = ""
-    override val rangesVisibilityModifier: String get() = "internal"
+    override konst indentation: String get() = " ".repeat(4)
+    override konst rangesAnnotation: String get() = ""
+    override konst rangesVisibilityModifier: String get() = "internal"
 
     override fun beforeWritingRanges(writer: FileWriter) {
         writer.appendLine("private object $wrapperName {")

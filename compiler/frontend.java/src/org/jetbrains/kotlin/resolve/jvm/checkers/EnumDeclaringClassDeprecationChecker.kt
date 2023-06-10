@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ExtensionReceiver
 
 object EnumDeclaringClassDeprecationChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
         if (resultingDescriptor !is PropertyDescriptor || resultingDescriptor.kind != CallableMemberDescriptor.Kind.SYNTHESIZED) return
-        val extensionReceiver = resultingDescriptor.extensionReceiverParameter?.value as? ExtensionReceiver ?: return
+        konst extensionReceiver = resultingDescriptor.extensionReceiverParameter?.konstue as? ExtensionReceiver ?: return
         if (resultingDescriptor.name.asString() != "declaringClass") return
-        val extensionReceiverConstructor = extensionReceiver.type.constructor
+        konst extensionReceiverConstructor = extensionReceiver.type.constructor
         if (extensionReceiverConstructor.declarationDescriptor.classId != StandardClassIds.Enum &&
             extensionReceiverConstructor.supertypes.none { it.constructor.declarationDescriptor.classId == StandardClassIds.Enum }
         ) return

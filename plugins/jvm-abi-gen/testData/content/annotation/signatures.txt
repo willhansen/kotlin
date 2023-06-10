@@ -1,40 +1,40 @@
-@kotlin.annotation.Retention(value=SOURCE)
-@java.lang.annotation.Retention(value=SOURCE)
+@kotlin.annotation.Retention(konstue=SOURCE)
+@java.lang.annotation.Retention(konstue=SOURCE)
 @kotlin.Metadata
 annotation class test/A1 {
     // source: 'annotations.kt'
     public abstract method x(): int
 }
-@kotlin.annotation.Retention(value=BINARY)
-@java.lang.annotation.Retention(value=CLASS)
+@kotlin.annotation.Retention(konstue=BINARY)
+@java.lang.annotation.Retention(konstue=CLASS)
 @kotlin.Metadata
 annotation class test/A2 {
     // source: 'annotations.kt'
     public abstract method x(): int
 }
-@kotlin.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Retention(value=RUNTIME)
+@kotlin.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 annotation class test/A3 {
     // source: 'annotations.kt'
     public abstract method x(): int
 }
-@kotlin.annotation.Retention(value=SOURCE)
-@java.lang.annotation.Retention(value=SOURCE)
+@kotlin.annotation.Retention(konstue=SOURCE)
+@java.lang.annotation.Retention(konstue=SOURCE)
 @kotlin.Metadata
 public annotation class test/B1 {
     // source: 'annotations.kt'
     public abstract method x(): int
 }
-@kotlin.annotation.Retention(value=BINARY)
-@java.lang.annotation.Retention(value=CLASS)
+@kotlin.annotation.Retention(konstue=BINARY)
+@java.lang.annotation.Retention(konstue=CLASS)
 @kotlin.Metadata
 public annotation class test/B2 {
     // source: 'annotations.kt'
     public abstract method x(): int
 }
-@kotlin.annotation.Retention(value=RUNTIME)
-@java.lang.annotation.Retention(value=RUNTIME)
+@kotlin.annotation.Retention(konstue=RUNTIME)
+@java.lang.annotation.Retention(konstue=RUNTIME)
 @kotlin.Metadata
 public annotation class test/B3 {
     // source: 'annotations.kt'

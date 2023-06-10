@@ -7,12 +7,12 @@ FILE fqName:<root> fileName:/inlineClassSyntheticMethods.kt
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:C modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:t visibility:public modality:FINAL [val]
+    PROPERTY name:t visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:t type:T of <root>.C visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 't: T of <root>.C declared in <root>.C.<init>' type=T of <root>.C origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-t> visibility:public modality:FINAL <> ($this:<root>.C<T of <root>.C>) returnType:T of <root>.C
-        correspondingProperty: PROPERTY name:t visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:t visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.C<T of <root>.C>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-t> (): T of <root>.C declared in <root>.C'
@@ -36,20 +36,20 @@ FILE fqName:<root> fileName:/inlineClassSyntheticMethods.kt
       overridden:
         public open fun toString (): kotlin.String declared in kotlin.Any
       $this: VALUE_PARAMETER name:<this> type:kotlin.Any
-  CLASS CLASS name:IC modality:FINAL visibility:public [value] superTypes:[kotlin.Any]
+  CLASS CLASS name:IC modality:FINAL visibility:public [konstue] superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.IC<TT of <root>.IC>
     TYPE_PARAMETER name:TT index:0 variance: superTypes:[kotlin.Any?] reified:false
     CONSTRUCTOR visibility:public <> (c:<root>.C<TT of <root>.IC>) returnType:<root>.IC<TT of <root>.IC> [primary]
       VALUE_PARAMETER name:c index:0 type:<root>.C<TT of <root>.IC>
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
-        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:IC modality:FINAL visibility:public [value] superTypes:[kotlin.Any]'
-    PROPERTY name:c visibility:public modality:FINAL [val]
+        INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:IC modality:FINAL visibility:public [konstue] superTypes:[kotlin.Any]'
+    PROPERTY name:c visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:c type:<root>.C<TT of <root>.IC> visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'c: <root>.C<TT of <root>.IC> declared in <root>.IC.<init>' type=<root>.C<TT of <root>.IC> origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-c> visibility:public modality:FINAL <> ($this:<root>.IC<TT of <root>.IC>) returnType:<root>.C<TT of <root>.IC>
-        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:c visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.IC<TT of <root>.IC>
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-c> (): <root>.C<TT of <root>.IC> declared in <root>.IC'
@@ -69,11 +69,11 @@ FILE fqName:<root> fileName:/inlineClassSyntheticMethods.kt
       BLOCK_BODY
         RETURN type=kotlin.Nothing from='public open fun toString (): kotlin.String declared in <root>.IC'
           STRING_CONCATENATION type=kotlin.String
-            CONST String type=kotlin.String value="IC("
-            CONST String type=kotlin.String value="c="
+            CONST String type=kotlin.String konstue="IC("
+            CONST String type=kotlin.String konstue="c="
             GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:<root>.C<TT of <root>.IC> visibility:private [final]' type=<root>.C<TT of <root>.IC> origin=null
               receiver: GET_VAR '<this>: <root>.IC<TT of <root>.IC> declared in <root>.IC.toString' type=<root>.IC<TT of <root>.IC> origin=null
-            CONST String type=kotlin.String value=")"
+            CONST String type=kotlin.String konstue=")"
     FUN GENERATED_SINGLE_FIELD_VALUE_CLASS_MEMBER name:hashCode visibility:public modality:OPEN <> ($this:<root>.IC<TT of <root>.IC>) returnType:kotlin.Int
       overridden:
         public open fun hashCode (): kotlin.Int declared in kotlin.Any
@@ -94,8 +94,8 @@ FILE fqName:<root> fileName:/inlineClassSyntheticMethods.kt
             if: TYPE_OP type=kotlin.Boolean origin=NOT_INSTANCEOF typeOperand=<root>.IC<TT of <root>.IC>
               GET_VAR 'other: kotlin.Any? declared in <root>.IC.equals' type=kotlin.Any? origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.IC'
-              CONST Boolean type=kotlin.Boolean value=false
-        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.IC<TT of <root>.IC> [val]
+              CONST Boolean type=kotlin.Boolean konstue=false
+        VAR IR_TEMPORARY_VARIABLE name:tmp_0 type:<root>.IC<TT of <root>.IC> [konst]
           TYPE_OP type=<root>.IC<TT of <root>.IC> origin=CAST typeOperand=<root>.IC<TT of <root>.IC>
             GET_VAR 'other: kotlin.Any? declared in <root>.IC.equals' type=kotlin.Any? origin=null
         WHEN type=kotlin.Unit origin=null
@@ -105,27 +105,27 @@ FILE fqName:<root> fileName:/inlineClassSyntheticMethods.kt
                 arg0: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:<root>.C<TT of <root>.IC> visibility:private [final]' type=<root>.C<TT of <root>.IC> origin=null
                   receiver: GET_VAR '<this>: <root>.IC<TT of <root>.IC> declared in <root>.IC.equals' type=<root>.IC<TT of <root>.IC> origin=null
                 arg1: GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:c type:<root>.C<TT of <root>.IC> visibility:private [final]' type=<root>.C<TT of <root>.IC> origin=null
-                  receiver: GET_VAR 'val tmp_0: <root>.IC<TT of <root>.IC> declared in <root>.IC.equals' type=<root>.IC<TT of <root>.IC> origin=null
+                  receiver: GET_VAR 'konst tmp_0: <root>.IC<TT of <root>.IC> declared in <root>.IC.equals' type=<root>.IC<TT of <root>.IC> origin=null
             then: RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.IC'
-              CONST Boolean type=kotlin.Boolean value=false
+              CONST Boolean type=kotlin.Boolean konstue=false
         RETURN type=kotlin.Nothing from='public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in <root>.IC'
-          CONST Boolean type=kotlin.Boolean value=true
+          CONST Boolean type=kotlin.Boolean konstue=true
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
-      VAR name:ic type:<root>.IC<kotlin.Int> [val]
+      VAR name:ic type:<root>.IC<kotlin.Int> [konst]
         CONSTRUCTOR_CALL 'public constructor <init> (c: <root>.C<TT of <root>.IC>) declared in <root>.IC' type=<root>.IC<kotlin.Int> origin=null
           <class: TT>: kotlin.Int
           c: CONSTRUCTOR_CALL 'public constructor <init> (t: T of <root>.C) declared in <root>.C' type=<root>.C<kotlin.Int> origin=null
             <class: T>: kotlin.Int
-            t: CONST Int type=kotlin.Int value=42
+            t: CONST Int type=kotlin.Int konstue=42
       WHEN type=kotlin.Unit origin=IF
         BRANCH
           if: CALL 'public final fun not (): kotlin.Boolean declared in kotlin.Boolean' type=kotlin.Boolean origin=EXCLEQ
             $this: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EXCLEQ
               arg0: CALL 'public final fun foo (): kotlin.Int declared in <root>.IC' type=kotlin.Int origin=null
-                $this: GET_VAR 'val ic: <root>.IC<kotlin.Int> declared in <root>.box' type=<root>.IC<kotlin.Int> origin=null
-              arg1: CONST Int type=kotlin.Int value=42
+                $this: GET_VAR 'konst ic: <root>.IC<kotlin.Int> declared in <root>.box' type=<root>.IC<kotlin.Int> origin=null
+              arg1: CONST Int type=kotlin.Int konstue=42
           then: RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-            CONST String type=kotlin.String value="FAIL"
+            CONST String type=kotlin.String konstue="FAIL"
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
-        CONST String type=kotlin.String value="OK"
+        CONST String type=kotlin.String konstue="OK"

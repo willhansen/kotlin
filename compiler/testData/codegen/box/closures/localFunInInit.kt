@@ -1,7 +1,7 @@
 class A {
-    val result: String
+    konst result: String
     init {
-        val flag = "OK"
+        konst flag = "OK"
         fun getFlag(): String = flag
         result = { getFlag() }.let { it() }
     }

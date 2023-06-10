@@ -8,9 +8,9 @@ import kotlinx.serialization.json.*
 object FooBar
 
 fun box(): String {
-    val encoded = Json.encodeToString(FooBar.serializer(), FooBar)
+    konst encoded = Json.encodeToString(FooBar.serializer(), FooBar)
     if (encoded != "{}") return encoded
-    val decoded = Json.decodeFromString(FooBar.serializer(), encoded)
+    konst decoded = Json.decodeFromString(FooBar.serializer(), encoded)
     if (decoded !== FooBar) return "Incorrect object instance"
     return "OK"
 }

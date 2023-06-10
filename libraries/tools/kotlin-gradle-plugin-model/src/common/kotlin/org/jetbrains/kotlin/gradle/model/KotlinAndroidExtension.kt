@@ -17,26 +17,26 @@ interface KotlinAndroidExtension {
      *
      * @return the version of this model.
      */
-    val modelVersion: Long
+    konst modelVersion: Long
 
     /**
      * Returns the module (Gradle project) name.
      *
      * @return the module name.
      */
-    val name: String
+    konst name: String
 
     /**
      * Indicate the use of experimental features.
      *
      * @return if experimental features are used.
      */
-    val isExperimental: Boolean
+    konst isExperimental: Boolean
 
     /**
      * Return the default cache implementation.
      *
      * @return the default cache implementation.
      */
-    val defaultCacheImplementation: String?
+    konst defaultCacheImplementation: String?
 }

@@ -6,7 +6,7 @@ fun bar(derived: Derived) = derived
 fun trans(n: Int, f: (Int) -> Boolean) = if (f(n)) n else null
 
 fun foo() {
-    val base: Base = Derived()
+    konst base: Base = Derived()
     if (base is Derived) {
         fun can(n: Int) = n > 0
         trans(42, ::can)

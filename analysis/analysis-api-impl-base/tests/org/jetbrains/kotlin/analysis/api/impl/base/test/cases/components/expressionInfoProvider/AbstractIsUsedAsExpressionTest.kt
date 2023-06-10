@@ -15,14 +15,14 @@ import org.jetbrains.kotlin.test.services.assertions
 abstract class AbstractIsUsedAsExpressionTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
 
-        val expression = testServices.expressionMarkerProvider.getSelectedElementOfType<KtExpression>(ktFile).let {
+        konst expression = testServices.expressionMarkerProvider.getSelectedElementOfType<KtExpression>(ktFile).let {
             if (it is KtBlockExpression && it.statements.size == 1 && it.textRange == it.statements.single().textRange) {
                 it.statements.single()
             } else {
                 it
             }
         }
-        val actual = StringBuilder();
+        konst actual = StringBuilder();
 
         analyseForTest(expression) {
             actual.appendLine("expression: $expression")

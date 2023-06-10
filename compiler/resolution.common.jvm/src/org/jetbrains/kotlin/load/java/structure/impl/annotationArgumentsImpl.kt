@@ -25,7 +25,7 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 sealed class JavaAnnotationArgumentImpl(
-    override val name: Name?
+    override konst name: Name?
 ) : JavaAnnotationArgument {
     companion object Factory {
         fun create(
@@ -37,13 +37,13 @@ sealed class JavaAnnotationArgumentImpl(
                 return JavaClassObjectAnnotationArgumentImpl(sourceFactory.createPsiSource(argument), name)
             }
 
-            val value = JavaPsiFacade.getInstance(argument.project).constantEvaluationHelper.computeConstantExpression(argument)
-            if (value is Enum<*>) {
+            konst konstue = JavaPsiFacade.getInstance(argument.project).constantEkonstuationHelper.computeConstantExpression(argument)
+            if (konstue is Enum<*>) {
                 return JavaEnumValueAnnotationArgumentImpl(sourceFactory.createPsiSource(argument as PsiReferenceExpression), name)
             }
 
-            if (value != null || argument is PsiLiteralExpression) {
-                return JavaLiteralAnnotationArgumentImpl(name, value)
+            if (konstue != null || argument is PsiLiteralExpression) {
+                return JavaLiteralAnnotationArgumentImpl(name, konstue)
             }
 
             return when (argument) {
@@ -57,49 +57,49 @@ sealed class JavaAnnotationArgumentImpl(
 }
 
 class JavaLiteralAnnotationArgumentImpl(
-    override val name: Name?,
-    override val value: Any?
+    override konst name: Name?,
+    override konst konstue: Any?
 ) : JavaLiteralAnnotationArgument
 
 class JavaArrayAnnotationArgumentImpl(
-    private val psiValueSource: JavaElementPsiSource<PsiArrayInitializerMemberValue>,
+    private konst psiValueSource: JavaElementPsiSource<PsiArrayInitializerMemberValue>,
     name: Name?,
 ) : JavaAnnotationArgumentImpl(name), JavaArrayAnnotationArgument {
     override fun getElements() = psiValueSource.psi.initializers.map { create(it, null, psiValueSource.factory) }
 }
 
 class JavaEnumValueAnnotationArgumentImpl(
-    private val psiReferenceSource: JavaElementPsiSource<PsiReferenceExpression>,
+    private konst psiReferenceSource: JavaElementPsiSource<PsiReferenceExpression>,
     name: Name?
 ) : JavaAnnotationArgumentImpl(name), JavaEnumValueAnnotationArgument {
-    override val enumClassId: ClassId?
+    override konst enumClassId: ClassId?
         get() {
-            val element = psiReferenceSource.psi.resolve()
+            konst element = psiReferenceSource.psi.resolve()
             if (element is PsiEnumConstant) {
                 return JavaFieldImpl(psiReferenceSource.factory.createPsiSource(element)).containingClass.classId
             }
 
-            val fqName = ( psiReferenceSource.psi.qualifier as? PsiReferenceExpression)?.qualifiedName ?: return null
+            konst fqName = ( psiReferenceSource.psi.qualifier as? PsiReferenceExpression)?.qualifiedName ?: return null
             // TODO: find a way to construct a correct name (with nested classes) for unresolved enums
             return ClassId.topLevel(FqName(fqName))
         }
 
-    override val entryName: Name?
+    override konst entryName: Name?
         get() = psiReferenceSource.psi.referenceName?.let(Name::identifier)
 }
 
 class JavaClassObjectAnnotationArgumentImpl(
-    private val psiExpressionSource: JavaElementPsiSource<PsiClassObjectAccessExpression>,
+    private konst psiExpressionSource: JavaElementPsiSource<PsiClassObjectAccessExpression>,
     name: Name?
 ) : JavaAnnotationArgumentImpl(name), JavaClassObjectAnnotationArgument {
     override fun getReferencedType(): JavaTypeImpl<*> {
-        val operand = psiExpressionSource.psi.operand
+        konst operand = psiExpressionSource.psi.operand
         return JavaTypeImpl.create(operand.type, psiExpressionSource.factory.createTypeSource(operand.type))
     }
 }
 
 class JavaAnnotationAsAnnotationArgumentImpl(
-    private val psiAnnotationSource: JavaElementPsiSource<PsiAnnotation>,
+    private konst psiAnnotationSource: JavaElementPsiSource<PsiAnnotation>,
     name: Name?,
 ) : JavaAnnotationArgumentImpl(name), JavaAnnotationAsAnnotationArgument {
     override fun getAnnotation() = JavaAnnotationImpl(psiAnnotationSource)

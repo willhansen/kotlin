@@ -8,7 +8,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = java.util.Comparator<kotlin.Int!>
         symbol = java/util/Comparator(function: kotlin.Function2<T!, T!, kotlin.Int>): java.util.Comparator<T>
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = function
             receiverType = null

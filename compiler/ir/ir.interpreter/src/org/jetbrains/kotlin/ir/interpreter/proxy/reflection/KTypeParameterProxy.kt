@@ -11,19 +11,19 @@ import org.jetbrains.kotlin.types.Variance
 import kotlin.reflect.*
 
 internal class KTypeParameterProxy(
-    override val state: KTypeParameterState, override val callInterceptor: CallInterceptor
+    override konst state: KTypeParameterState, override konst callInterceptor: CallInterceptor
 ) : ReflectionProxy, KTypeParameter {
-    override val name: String
+    override konst name: String
         get() = state.irTypeParameter.name.asString()
-    override val upperBounds: List<KType>
+    override konst upperBounds: List<KType>
         get() = state.getUpperBounds(callInterceptor)
-    override val variance: KVariance
+    override konst variance: KVariance
         get() = when (state.irTypeParameter.variance) {
             Variance.INVARIANT -> KVariance.INVARIANT
             Variance.IN_VARIANCE -> KVariance.IN
             Variance.OUT_VARIANCE -> KVariance.OUT
         }
-    override val isReified: Boolean
+    override konst isReified: Boolean
         get() = state.irTypeParameter.isReified
 
     override fun equals(other: Any?): Boolean {

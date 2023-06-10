@@ -3,7 +3,7 @@
 
 package aaa
 
-class A(val a: Int = 1)
+class A(konst a: Int = 1)
 
 // MODULE: main(lib)
 // FILE: B.kt

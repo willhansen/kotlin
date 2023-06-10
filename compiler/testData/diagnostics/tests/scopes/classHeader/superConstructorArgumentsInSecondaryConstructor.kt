@@ -28,7 +28,7 @@ class A : S {
 
     class Nested {
         companion object {
-            const val CONST = 2
+            const konst CONST = 2
         }
     }
 
@@ -36,15 +36,15 @@ class A : S {
 
     interface Interface {
         companion object {
-            const val CONST = 3
+            const konst CONST = 3
         }
     }
 
-    val a = 1
+    konst a = 1
     fun b() = 2
 
     companion object {
-        const val CONST = 1
+        const konst CONST = 1
         fun foo(): Nested = null!!
     }
 }

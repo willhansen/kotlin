@@ -16,11 +16,11 @@ fun foo(x: () -> Unit, y: () -> Unit, z: () -> Unit) {
     if (true) {
         bar(<!LEAKED_IN_PLACE_LAMBDA!>x<!>)
     } else {
-        val yCopy = <!LEAKED_IN_PLACE_LAMBDA!>y<!>
+        konst yCopy = <!LEAKED_IN_PLACE_LAMBDA!>y<!>
         yCopy()
     }
 
-    val zCopy: () -> Unit
+    konst zCopy: () -> Unit
     zCopy = <!LEAKED_IN_PLACE_LAMBDA!>z<!>
     zCopy()
 }

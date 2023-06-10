@@ -7,7 +7,7 @@ fun objectInit() {
     y = ""
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // ok
     <!DEBUG_INFO_SMARTCAST!>y<!>.length // ok
-    val o = object {
+    konst o = object {
         init { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // ?
         init { x = null }
         init { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // bad
@@ -23,7 +23,7 @@ fun objectMethod() {
     var x: String?
     x = ""
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // ok
-    val o = object {
+    konst o = object {
         init { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // sort of bad
         fun foo() = <!SMARTCAST_IMPOSSIBLE!>x<!>.length // bad
         fun bar() { x = null }
@@ -43,7 +43,7 @@ fun classInit() {
     y = ""
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // ok
     <!DEBUG_INFO_SMARTCAST!>y<!>.length // ok
-    val ctor = run {
+    konst ctor = run {
         class C {
             init { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // ?
             init { x = null }
@@ -73,7 +73,7 @@ fun classMethod() {
     y = ""
     <!DEBUG_INFO_SMARTCAST!>x<!>.length // ok
     <!DEBUG_INFO_SMARTCAST!>y<!>.length // ok
-    val ctor = run {
+    konst ctor = run {
         class C {
             init { <!SMARTCAST_IMPOSSIBLE!>x<!>.length } // sort of bad
             init { <!SMARTCAST_IMPOSSIBLE!>y<!>.length } // bad

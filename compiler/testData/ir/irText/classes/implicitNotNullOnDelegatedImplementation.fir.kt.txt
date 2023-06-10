@@ -58,7 +58,7 @@ class TestJFoo : IFoo {
     return <this>.#$$delegate_0.foo() /*!! String */
   }
 
-  private /* final field */ val $$delegate_0: JFoo = JFoo()
+  private /* final field */ konst $$delegate_0: JFoo = JFoo()
 
 }
 
@@ -73,7 +73,7 @@ class TestK1 : IFoo {
     return <this>.#$$delegate_0.foo() /*!! String */
   }
 
-  private /* final field */ val $$delegate_0: K1 = K1()
+  private /* final field */ konst $$delegate_0: K1 = K1()
 
 }
 
@@ -88,7 +88,7 @@ class TestK2 : IFoo {
     return <this>.#$$delegate_0.foo()
   }
 
-  private /* final field */ val $$delegate_0: K2 = K2()
+  private /* final field */ konst $$delegate_0: K2 = K2()
 
 }
 
@@ -103,7 +103,7 @@ class TestK3 : IFoo {
     return <this>.#$$delegate_0.foo()
   }
 
-  private /* final field */ val $$delegate_0: K3 = K3()
+  private /* final field */ konst $$delegate_0: K3 = K3()
 
 }
 
@@ -118,7 +118,7 @@ class TestK4 : IFoo {
     return <this>.#$$delegate_0.foo() /*!! String */
   }
 
-  private /* final field */ val $$delegate_0: K4 = K4()
+  private /* final field */ konst $$delegate_0: K4 = K4()
 
 }
 

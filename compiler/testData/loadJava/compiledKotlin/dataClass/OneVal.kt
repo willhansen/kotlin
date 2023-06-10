@@ -1,3 +1,3 @@
 package test
 
-data class DataClass(val x: String)
+data class DataClass(konst x: String)

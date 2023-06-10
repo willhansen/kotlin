@@ -17,8 +17,8 @@ class Test {
     fun doTest(k1: KClass<*>, k2: KClass<*>) {
         assertNotEquals(k1, k2)
 
-        val type1 = k1.invokeGetType()
-        val type2 = k2.invokeGetType()
+        konst type1 = k1.invokeGetType()
+        konst type2 = k2.invokeGetType()
         assertNotEquals((type1.arguments[0].type)?.classifier, (type2.arguments[0].type)?.classifier)
         assertNotEquals(type1, type2)
     }

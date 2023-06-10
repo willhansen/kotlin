@@ -6,19 +6,19 @@
 package kotlin.js
 
 /**
- * Reinterprets this value as a value of the [dynamic type](/docs/reference/dynamic-type.html).
+ * Reinterprets this konstue as a konstue of the [dynamic type](/docs/reference/dynamic-type.html).
  */
 @kotlin.internal.InlineOnly
 public inline fun Any?.asDynamic(): dynamic = this
 
 /**
- * Reinterprets this value as a value of the specified type [T] without any actual type checking.
+ * Reinterprets this konstue as a konstue of the specified type [T] without any actual type checking.
  */
 @kotlin.internal.InlineOnly
 public inline fun <T> Any?.unsafeCast(): @kotlin.internal.NoInfer T = this.asDynamic()
 
 /**
- * Reinterprets this `dynamic` value as a value of the specified type [T] without any actual type checking.
+ * Reinterprets this `dynamic` konstue as a konstue of the specified type [T] without any actual type checking.
  */
 @kotlin.internal.DynamicExtension
 @JsName("unsafeCastDynamic")
@@ -33,7 +33,7 @@ public inline fun <T> dynamic.unsafeCast(): @kotlin.internal.NoInfer T = this
  */
 @kotlin.internal.DynamicExtension
 public operator fun dynamic.iterator(): Iterator<dynamic> {
-    val r: Any? = this
+    konst r: Any? = this
 
     return when {
         this["iterator"] != null ->

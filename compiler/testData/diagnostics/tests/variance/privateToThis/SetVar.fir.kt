@@ -2,7 +2,7 @@ fun <T> getT(): T = null!!
 
 class Test<in I, out O> {
     private var i: I = getT()
-    private val j: I
+    private konst j: I
 
     init {
         j = getT()

@@ -13,5 +13,5 @@ open class KotlinLightTypeParameterBuilder(
     name: String,
     owner: PsiTypeParameterListOwner,
     index: Int,
-    override val origin: KtTypeParameter
+    override konst origin: KtTypeParameter
 ) : LightTypeParameterBuilder(name, owner, index), PsiElementWithOrigin<KtTypeParameter>

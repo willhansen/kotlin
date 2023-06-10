@@ -22,15 +22,15 @@ import org.jetbrains.kotlin.metadata.deserialization.Flags as F
 interface ReadContextExtension
 
 class ReadContext(
-    val strings: NameResolver,
-    val types: TypeTable,
-    @get:IgnoreInApiDump internal val versionRequirements: VersionRequirementTable,
-    private val parent: ReadContext? = null,
-    val contextExtensions: List<ReadContextExtension> = emptyList()
+    konst strings: NameResolver,
+    konst types: TypeTable,
+    @get:IgnoreInApiDump internal konst versionRequirements: VersionRequirementTable,
+    private konst parent: ReadContext? = null,
+    konst contextExtensions: List<ReadContextExtension> = emptyList()
 ) {
-    private val typeParameterNameToId = mutableMapOf<Int, Int>()
+    private konst typeParameterNameToId = mutableMapOf<Int, Int>()
 
-    internal val extensions = MetadataExtensions.INSTANCES
+    internal konst extensions = MetadataExtensions.INSTANCES
 
     operator fun get(index: Int): String =
         strings.getString(index)
@@ -55,7 +55,7 @@ fun ProtoBuf.Class.accept(
     strings: NameResolver,
     contextExtensions: List<ReadContextExtension> = emptyList()
 ) {
-    val c = ReadContext(
+    konst c = ReadContext(
         strings,
         TypeTable(typeTable),
         VersionRequirementTable.create(versionRequirementTable),
@@ -120,7 +120,7 @@ fun ProtoBuf.Class.accept(
 }
 
 private fun ProtoBuf.Class.loadInlineClassUnderlyingType(c: ReadContext): ProtoBuf.Type? {
-    val type = inlineClassUnderlyingType(c.types)
+    konst type = inlineClassUnderlyingType(c.types)
     if (type != null) return type
 
     if (!hasInlineClassUnderlyingPropertyName()) return null
@@ -136,7 +136,7 @@ fun ProtoBuf.Package.accept(
     strings: NameResolver,
     contextExtensions: List<ReadContextExtension> = emptyList()
 ) {
-    val c = ReadContext(
+    konst c = ReadContext(
         strings,
         TypeTable(typeTable),
         VersionRequirementTable.create(versionRequirementTable),
@@ -157,7 +157,7 @@ fun ProtoBuf.PackageFragment.accept(
     strings: NameResolver,
     contextExtensions: List<ReadContextExtension> = emptyList()
 ) {
-    val c = ReadContext(
+    konst c = ReadContext(
         strings,
         TypeTable(ProtoBuf.TypeTable.newBuilder().build()),
         VersionRequirementTable.EMPTY,
@@ -199,7 +199,7 @@ private fun KmDeclarationContainerVisitor.visitDeclarations(
 }
 
 fun ProtoBuf.Function.accept(v: KmLambdaVisitor, strings: NameResolver) {
-    val c = ReadContext(strings, TypeTable(typeTable), VersionRequirementTable.EMPTY)
+    konst c = ReadContext(strings, TypeTable(typeTable), VersionRequirementTable.EMPTY)
 
     v.visitFunction(flags, c[name])?.let { accept(it, c) }
 
@@ -207,7 +207,7 @@ fun ProtoBuf.Function.accept(v: KmLambdaVisitor, strings: NameResolver) {
 }
 
 private fun ProtoBuf.Constructor.accept(v: KmConstructorVisitor, c: ReadContext) {
-    for (parameter in valueParameterList) {
+    for (parameter in konstueParameterList) {
         v.visitValueParameter(parameter.flags, c[parameter.name])?.let { parameter.accept(it, c) }
     }
 
@@ -224,7 +224,7 @@ private fun ProtoBuf.Constructor.accept(v: KmConstructorVisitor, c: ReadContext)
 
 @OptIn(ExperimentalContextReceivers::class)
 private fun ProtoBuf.Function.accept(v: KmFunctionVisitor, outer: ReadContext) {
-    val c = outer.withTypeParameters(typeParameterList)
+    konst c = outer.withTypeParameters(typeParameterList)
 
     for (typeParameter in typeParameterList) {
         typeParameter.accept(v::visitTypeParameter, c)
@@ -238,7 +238,7 @@ private fun ProtoBuf.Function.accept(v: KmFunctionVisitor, outer: ReadContext) {
         v.visitContextReceiverType(contextReceiverType.typeFlags)?.let { contextReceiverType.accept(it, c) }
     }
 
-    for (parameter in valueParameterList) {
+    for (parameter in konstueParameterList) {
         v.visitValueParameter(parameter.flags, c[parameter.name])?.let { parameter.accept(it, c) }
     }
 
@@ -263,7 +263,7 @@ private fun ProtoBuf.Function.accept(v: KmFunctionVisitor, outer: ReadContext) {
 
 @OptIn(ExperimentalContextReceivers::class)
 fun ProtoBuf.Property.accept(v: KmPropertyVisitor, outer: ReadContext) {
-    val c = outer.withTypeParameters(typeParameterList)
+    konst c = outer.withTypeParameters(typeParameterList)
 
     for (typeParameter in typeParameterList) {
         typeParameter.accept(v::visitTypeParameter, c)
@@ -278,7 +278,7 @@ fun ProtoBuf.Property.accept(v: KmPropertyVisitor, outer: ReadContext) {
     }
 
     if (hasSetterValueParameter()) {
-        val parameter = setterValueParameter
+        konst parameter = setterValueParameter
         v.visitSetterParameter(parameter.flags, c[parameter.name])?.let { parameter.accept(it, c) }
     }
 
@@ -298,7 +298,7 @@ fun ProtoBuf.Property.accept(v: KmPropertyVisitor, outer: ReadContext) {
 }
 
 private fun ProtoBuf.TypeAlias.accept(v: KmTypeAliasVisitor, outer: ReadContext) {
-    val c = outer.withTypeParameters(typeParameterList)
+    konst c = outer.withTypeParameters(typeParameterList)
 
     for (typeParameter in typeParameterList) {
         typeParameter.accept(v::visitTypeParameter, c)
@@ -347,7 +347,7 @@ private inline fun ProtoBuf.TypeParameter.accept(
     visit: (flags: Flags, name: String, id: Int, variance: KmVariance) -> KmTypeParameterVisitor?,
     c: ReadContext
 ) {
-    val variance = when (requireNotNull(variance)) {
+    konst variance = when (requireNotNull(variance)) {
         ProtoBuf.TypeParameter.Variance.IN -> KmVariance.IN
         ProtoBuf.TypeParameter.Variance.OUT -> KmVariance.OUT
         ProtoBuf.TypeParameter.Variance.INV -> KmVariance.INVARIANT
@@ -374,7 +374,7 @@ private fun ProtoBuf.Type.accept(v: KmTypeVisitor, c: ReadContext) {
         hasTypeAliasName() -> v.visitTypeAlias(c.className(typeAliasName))
         hasTypeParameter() -> v.visitTypeParameter(typeParameter)
         hasTypeParameterName() -> {
-            val id = c.getTypeParameterId(typeParameterName)
+            konst id = c.getTypeParameterId(typeParameterName)
                 ?: throw InconsistentKotlinMetadataException("No type parameter id for ${c[typeParameterName]}")
             v.visitTypeParameter(id)
         }
@@ -384,7 +384,7 @@ private fun ProtoBuf.Type.accept(v: KmTypeVisitor, c: ReadContext) {
     }
 
     for (argument in argumentList) {
-        val variance = when (requireNotNull(argument.projection)) {
+        konst variance = when (requireNotNull(argument.projection)) {
             ProtoBuf.Type.Argument.Projection.IN -> KmVariance.IN
             ProtoBuf.Type.Argument.Projection.OUT -> KmVariance.OUT
             ProtoBuf.Type.Argument.Projection.INV -> KmVariance.INVARIANT
@@ -392,7 +392,7 @@ private fun ProtoBuf.Type.accept(v: KmTypeVisitor, c: ReadContext) {
         }
 
         if (variance != null) {
-            val argumentType = argument.type(c.types)
+            konst argumentType = argument.type(c.types)
                 ?: throw InconsistentKotlinMetadataException("No type argument for non-STAR projection in Type")
             v.visitArgument(argumentType.typeFlags, variance)?.let { argumentType.accept(it, c) }
         } else {
@@ -423,16 +423,16 @@ private fun ProtoBuf.Type.accept(v: KmTypeVisitor, c: ReadContext) {
 }
 
 private fun acceptVersionRequirementVisitor(id: Int, v: KmVersionRequirementVisitor, c: ReadContext) {
-    val message = VersionRequirement.create(id, c.strings, c.versionRequirements)
+    konst message = VersionRequirement.create(id, c.strings, c.versionRequirements)
         ?: throw InconsistentKotlinMetadataException("No VersionRequirement with the given id in the table")
 
-    val kind = when (message.kind) {
+    konst kind = when (message.kind) {
         ProtoBuf.VersionRequirement.VersionKind.LANGUAGE_VERSION -> KmVersionRequirementVersionKind.LANGUAGE_VERSION
         ProtoBuf.VersionRequirement.VersionKind.COMPILER_VERSION -> KmVersionRequirementVersionKind.COMPILER_VERSION
         ProtoBuf.VersionRequirement.VersionKind.API_VERSION -> KmVersionRequirementVersionKind.API_VERSION
     }
 
-    val level = when (message.level) {
+    konst level = when (message.level) {
         DeprecationLevel.WARNING -> KmVersionRequirementLevel.WARNING
         DeprecationLevel.ERROR -> KmVersionRequirementLevel.ERROR
         DeprecationLevel.HIDDEN -> KmVersionRequirementLevel.HIDDEN
@@ -440,7 +440,7 @@ private fun acceptVersionRequirementVisitor(id: Int, v: KmVersionRequirementVisi
 
     v.visit(kind, level, message.errorCode, message.message)
 
-    val (major, minor, patch) = message.version
+    konst (major, minor, patch) = message.version
     v.visitVersion(major, minor, patch)
 
     v.visitEnd()
@@ -451,13 +451,13 @@ private fun ProtoBuf.Contract.accept(v: KmContractVisitor, c: ReadContext) {
     for (effect in effectList) {
         if (!effect.hasEffectType()) continue
 
-        val effectType = when (requireNotNull(effect.effectType)) {
+        konst effectType = when (requireNotNull(effect.effectType)) {
             ProtoBuf.Effect.EffectType.RETURNS_CONSTANT -> KmEffectType.RETURNS_CONSTANT
             ProtoBuf.Effect.EffectType.CALLS -> KmEffectType.CALLS
             ProtoBuf.Effect.EffectType.RETURNS_NOT_NULL -> KmEffectType.RETURNS_NOT_NULL
         }
 
-        val effectKind = if (!effect.hasKind()) null else when (requireNotNull(effect.kind)) {
+        konst effectKind = if (!effect.hasKind()) null else when (requireNotNull(effect.kind)) {
             ProtoBuf.Effect.InvocationKind.AT_MOST_ONCE -> KmEffectInvocationKind.AT_MOST_ONCE
             ProtoBuf.Effect.InvocationKind.EXACTLY_ONCE -> KmEffectInvocationKind.EXACTLY_ONCE
             ProtoBuf.Effect.InvocationKind.AT_LEAST_ONCE -> KmEffectInvocationKind.AT_LEAST_ONCE
@@ -486,7 +486,7 @@ private fun ProtoBuf.Effect.accept(v: KmEffectVisitor, c: ReadContext) {
 private fun ProtoBuf.Expression.accept(v: KmEffectExpressionVisitor, c: ReadContext) {
     v.visit(
         flags,
-        if (hasValueParameterReference()) valueParameterReference else null
+        if (hasValueParameterReference()) konstueParameterReference else null
     )
 
     if (hasConstantValue()) {
@@ -514,11 +514,11 @@ private fun ProtoBuf.Expression.accept(v: KmEffectExpressionVisitor, c: ReadCont
     v.visitEnd()
 }
 
-private val ProtoBuf.Type.typeFlags: Flags
+private konst ProtoBuf.Type.typeFlags: Flags
     get() = (if (nullable) 1 shl 0 else 0) +
             (flags shl 1)
 
-private val ProtoBuf.TypeParameter.typeParameterFlags: Flags
+private konst ProtoBuf.TypeParameter.typeParameterFlags: Flags
     get() = if (reified) 1 else 0
 
 fun ProtoBuf.Property.getPropertyGetterFlags(): Flags =

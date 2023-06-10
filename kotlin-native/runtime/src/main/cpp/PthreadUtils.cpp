@@ -19,7 +19,7 @@ int WaitOnCondVar(
     pthread_mutex_t* mutex,
     uint64_t timeoutNanoseconds,
     uint64_t* microsecondsPassed) {
-  struct timeval tvBefore;
+  struct timekonst tvBefore;
   // TODO: Error reporting?
   gettimeofday(&tvBefore, nullptr);
 
@@ -30,7 +30,7 @@ int WaitOnCondVar(
   auto result = pthread_cond_timedwait(cond, mutex, &ts);
 
   if (microsecondsPassed) {
-    struct timeval tvAfter;
+    struct timekonst tvAfter;
     // TODO: Error reporting?
     gettimeofday(&tvAfter, nullptr);
 

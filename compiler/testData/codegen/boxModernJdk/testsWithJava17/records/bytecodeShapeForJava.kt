@@ -11,12 +11,12 @@ public class JavaClass {
 // FILE: main.kt
 
 @JvmRecord
-data class MyRec<R>(val x: String, val y: R)
+data class MyRec<R>(konst x: String, konst y: R)
 
 fun box(): String {
-    val recordComponents = MyRec::class.java.recordComponents
-    val x = recordComponents[0]
-    val y = recordComponents[1]
+    konst recordComponents = MyRec::class.java.recordComponents
+    konst x = recordComponents[0]
+    konst y = recordComponents[1]
 
     if (x.name != "x") return "fail 1: ${x.name}"
     if (x.type != String::class.java) return "fail 2: ${x.type}"

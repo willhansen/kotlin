@@ -12,18 +12,18 @@ import java.io.File
 
 internal open class CopyCommonizeCInteropForIdeTask : AbstractCInteropCommonizerTask() {
 
-    private val commonizeCInteropTask: TaskProvider<CInteropCommonizerTask>
+    private konst commonizeCInteropTask: TaskProvider<CInteropCommonizerTask>
         get() = project.commonizeCInteropTask ?: throw IllegalStateException("Missing commonizeCInteropTask")
 
     @get:IgnoreEmptyDirectories
     @get:InputFiles
     @get:NormalizeLineEndings
     @get:PathSensitive(PathSensitivity.ABSOLUTE)
-    val cInteropCommonizerTaskOutputDirectories: Provider<Set<File>> =
+    konst cInteropCommonizerTaskOutputDirectories: Provider<Set<File>> =
         commonizeCInteropTask.map { it.allOutputDirectories }
 
     @get:OutputDirectory
-    override val outputDirectory: File = project.rootDir.resolve(".gradle/kotlin/commonizer")
+    override konst outputDirectory: File = project.rootDir.resolve(".gradle/kotlin/commonizer")
         .resolve(project.path.removePrefix(":").replace(":", "/"))
 
     override suspend fun findInteropsGroup(dependent: CInteropCommonizerDependent): CInteropCommonizerGroup? {
@@ -34,9 +34,9 @@ internal open class CopyCommonizeCInteropForIdeTask : AbstractCInteropCommonizer
     protected fun copy() {
         outputDirectory.mkdirs()
         for (group in commonizeCInteropTask.get().allInteropGroups.getOrThrow()) {
-            val source = commonizeCInteropTask.get().outputDirectory(group)
+            konst source = commonizeCInteropTask.get().outputDirectory(group)
             if (!source.exists()) continue
-            val target = outputDirectory(group)
+            konst target = outputDirectory(group)
             if (target.exists()) target.deleteRecursively()
             source.copyRecursively(target, true)
         }

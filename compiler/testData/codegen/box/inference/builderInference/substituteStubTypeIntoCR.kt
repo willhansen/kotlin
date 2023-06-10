@@ -5,7 +5,7 @@ import helpers.*
 import kotlin.coroutines.*
 
 suspend fun foo() {
-    val x = sequence {
+    konst x = sequence {
         yield(1)
         ::`yield`
     }

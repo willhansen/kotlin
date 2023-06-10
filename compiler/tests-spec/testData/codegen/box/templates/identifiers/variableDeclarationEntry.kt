@@ -1,9 +1,9 @@
 <!DIRECTIVES("WITH_STDLIB")!>
 
-val <!ELEMENT(1)!> = {`false`: Boolean -> !`false` }
+konst <!ELEMENT(1)!> = {`false`: Boolean -> !`false` }
 
-fun f1(value: Pair<String, String>): Boolean {
-    val (<!ELEMENT(2)!>, <!ELEMENT(3)!>) = value
+fun f1(konstue: Pair<String, String>): Boolean {
+    konst (<!ELEMENT(2)!>, <!ELEMENT(3)!>) = konstue
 
     if (<!ELEMENT(2)!> != "1") return false
     if (<!ELEMENT(3)!> != "2") return false
@@ -19,7 +19,7 @@ fun box(): String? {
 
     if (!<!ELEMENT(1)!>(false)) return null
 
-    val <!ELEMENT(5)!> = { <!ELEMENT(6)!>: Boolean, <!ELEMENT(7)!>: Int -> true }
+    konst <!ELEMENT(5)!> = { <!ELEMENT(6)!>: Boolean, <!ELEMENT(7)!>: Int -> true }
     var <!ELEMENT(8)!>: Boolean
 
     <!ELEMENT(8)!> = false

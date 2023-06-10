@@ -84,7 +84,7 @@ sink:
 =====================
 == innerTryCatchFinally ==
 fun innerTryCatchFinally() {
-    val x: Int
+    konst x: Int
 
     myRun {
         try {
@@ -103,8 +103,8 @@ fun innerTryCatchFinally() {
 ---------------------
 L0:
   1 <START>
-  2 mark({ val x: Int myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } } x.inc() })
-    v(val x: Int)
+  2 mark({ konst x: Int myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } } x.inc() })
+    v(konst x: Int)
     mark({ try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } })
     r({ try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } }) -> <v0>
     mark(myRun { try { x = someComputation() report(x) } catch (e: java.lang.Exception) { x = 42 report(x) } finally { x = 0 } })

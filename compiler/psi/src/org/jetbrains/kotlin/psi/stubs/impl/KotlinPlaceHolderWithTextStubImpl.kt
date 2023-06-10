@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.psi.stubs.KotlinPlaceHolderWithTextStub
 class KotlinPlaceHolderWithTextStubImpl<T : KtElementImplStub<out StubElement<*>>>(
     parent: StubElement<*>,
     elementType: IStubElementType<*, *>,
-    private val text: String
+    private konst text: String
 ) : KotlinStubBaseImpl<T>(parent, elementType), KotlinPlaceHolderWithTextStub<T> {
     override fun text(): String = text
 }

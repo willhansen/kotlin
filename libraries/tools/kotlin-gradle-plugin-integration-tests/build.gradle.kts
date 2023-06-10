@@ -16,7 +16,7 @@ kotlin.sourceSets.all {
     languageSettings.optIn("org.jetbrains.kotlin.gradle.InternalKotlinGradlePluginApi")
 }
 
-val kotlinGradlePluginTest = project(":kotlin-gradle-plugin").sourceSets.named("test").map { it.output }
+konst kotlinGradlePluginTest = project(":kotlin-gradle-plugin").sourceSets.named("test").map { it.output }
 
 dependencies {
     testImplementation(project(":kotlin-gradle-plugin")) {
@@ -104,9 +104,9 @@ dependencies {
 }
 
 // Aapt2 from Android Gradle Plugin 3.2 and below does not handle long paths on Windows.
-val shortenTempRootName = project.providers.systemProperty("os.name").forUseAtConfigurationTime().get().contains("Windows")
+konst shortenTempRootName = project.providers.systemProperty("os.name").forUseAtConfigurationTime().get().contains("Windows")
 
-val splitGradleIntegrationTestTasks =
+konst splitGradleIntegrationTestTasks =
     project.providers.gradleProperty("gradle.integration.tests.split.tasks").forUseAtConfigurationTime().orNull?.toBoolean()
         ?: project.kotlinBuildProperties.isTeamcityBuild
 
@@ -114,7 +114,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
     kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.io.path.ExperimentalPathApi"
 }
 
-val cleanTestKitCacheTask = tasks.register<Delete>("cleanTestKitCache") {
+konst cleanTestKitCacheTask = tasks.register<Delete>("cleanTestKitCache") {
     group = "Build"
     description = "Deletes temporary Gradle TestKit cache"
 
@@ -131,7 +131,7 @@ fun Test.includeNative(include: Boolean) = includeTestsWithPattern(include) {
 
 fun Test.includeTestsWithPattern(include: Boolean, patterns: (MutableSet<String>).() -> Unit) {
     if (splitGradleIntegrationTestTasks) {
-        val filter = if (include)
+        konst filter = if (include)
             filter.includePatterns
         else
             filter.excludePatterns
@@ -140,7 +140,7 @@ fun Test.includeTestsWithPattern(include: Boolean, patterns: (MutableSet<String>
 }
 
 fun Test.advanceGradleVersion() {
-    val gradleVersionForTests = "7.6"
+    konst gradleVersionForTests = "7.6"
     systemProperty("kotlin.gradle.version.for.tests", gradleVersionForTests)
 }
 
@@ -221,12 +221,12 @@ if (splitGradleIntegrationTestTasks) {
     }
 }
 
-val KGP_TEST_TASKS_GROUP = "Kotlin Gradle Plugin Verification"
-val memoryPerGradleTestWorkerMb = 6000
-val maxParallelTestForks =
+konst KGP_TEST_TASKS_GROUP = "Kotlin Gradle Plugin Verification"
+konst memoryPerGradleTestWorkerMb = 6000
+konst maxParallelTestForks =
     (totalMaxMemoryForTestsMb / memoryPerGradleTestWorkerMb).coerceIn(1, Runtime.getRuntime().availableProcessors())
 
-val allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
+konst allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Runs all tests for Kotlin Gradle plugins except daemon ones"
 
@@ -238,7 +238,7 @@ val allParallelTestsTask = tasks.register<Test>("kgpAllParallelTests") {
     }
 }
 
-val jvmTestsTask = tasks.register<Test>("kgpJvmTests") {
+konst jvmTestsTask = tasks.register<Test>("kgpJvmTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/JVM part of Gradle plugin"
     maxParallelForks = maxParallelTestForks
@@ -249,7 +249,7 @@ val jvmTestsTask = tasks.register<Test>("kgpJvmTests") {
     }
 }
 
-val jsTestsTask = tasks.register<Test>("kgpJsTests") {
+konst jsTestsTask = tasks.register<Test>("kgpJsTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/JS part of Gradle plugin"
     maxParallelForks = maxParallelTestForks
@@ -260,7 +260,7 @@ val jsTestsTask = tasks.register<Test>("kgpJsTests") {
     }
 }
 
-val nativeTestsTask = tasks.register<Test>("kgpNativeTests") {
+konst nativeTestsTask = tasks.register<Test>("kgpNativeTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for Kotlin/Native part of Gradle plugin"
     maxParallelForks = maxParallelTestForks
@@ -272,7 +272,7 @@ val nativeTestsTask = tasks.register<Test>("kgpNativeTests") {
 }
 
 // Daemon tests could run only sequentially as they could not be shared between parallel test builds
-val daemonsTestsTask = tasks.register<Test>("kgpDaemonTests") {
+konst daemonsTestsTask = tasks.register<Test>("kgpDaemonTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run only Gradle and Kotlin daemon tests for Kotlin Gradle Plugin"
     maxParallelForks = 1
@@ -284,7 +284,7 @@ val daemonsTestsTask = tasks.register<Test>("kgpDaemonTests") {
     }
 }
 
-val otherPluginsTestTask = tasks.register<Test>("kgpOtherTests") {
+konst otherPluginsTestTask = tasks.register<Test>("kgpOtherTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run tests for all support plugins, such as kapt, allopen, etc"
     maxParallelForks = maxParallelTestForks
@@ -295,7 +295,7 @@ val otherPluginsTestTask = tasks.register<Test>("kgpOtherTests") {
     }
 }
 
-val mppTestsTask = tasks.register<Test>("kgpMppTests") {
+konst mppTestsTask = tasks.register<Test>("kgpMppTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run Multiplatform Kotlin Gradle plugin tests"
     maxParallelForks = maxParallelTestForks
@@ -306,7 +306,7 @@ val mppTestsTask = tasks.register<Test>("kgpMppTests") {
     }
 }
 
-val androidTestsTask = tasks.register<Test>("kgpAndroidTests") {
+konst androidTestsTask = tasks.register<Test>("kgpAndroidTests") {
     group = KGP_TEST_TASKS_GROUP
     description = "Run Android Kotlin Gradle plugin tests"
     maxParallelForks = maxParallelTestForks
@@ -329,10 +329,10 @@ tasks.named<Task>("check") {
 }
 
 tasks.withType<Test> {
-    val noTestProperty = project.providers.gradleProperty("noTest")
+    konst noTestProperty = project.providers.gradleProperty("noTest")
     onlyIf { !noTestProperty.isPresent }
 
-    dependsOn(":kotlin-gradle-plugin:validatePlugins")
+    dependsOn(":kotlin-gradle-plugin:konstidatePlugins")
     dependsOnKotlinGradlePluginInstall()
     dependsOn(":gradle:android-test-fixes:install")
     dependsOn(":gradle:gradle-warnings-detector:install")
@@ -343,18 +343,18 @@ tasks.withType<Test> {
     systemProperty("kotlinVersion", rootProject.extra["kotlinVersion"] as String)
     systemProperty("runnerGradleVersion", gradle.gradleVersion)
 
-    val installCocoapods = project.findProperty("installCocoapods") as String?
+    konst installCocoapods = project.findProperty("installCocoapods") as String?
     if (installCocoapods != null) {
         systemProperty("installCocoapods", installCocoapods)
     }
 
-    val jdk8Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_1_8)
-    val jdk9Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_9_0)
-    val jdk10Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_10_0)
-    val jdk11Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_11_0)
-    val jdk16Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_16_0)
-    val jdk17Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_17_0)
-    val mavenLocalRepo = project.providers.systemProperty("maven.repo.local").forUseAtConfigurationTime().orNull
+    konst jdk8Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_1_8)
+    konst jdk9Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_9_0)
+    konst jdk10Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_10_0)
+    konst jdk11Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_11_0)
+    konst jdk16Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_16_0)
+    konst jdk17Provider = project.getToolchainJdkHomeFor(JdkMajorVersion.JDK_17_0)
+    konst mavenLocalRepo = project.providers.systemProperty("maven.repo.local").forUseAtConfigurationTime().orNull
 
     // Query required JDKs paths only on execution phase to avoid triggering auto-download on project configuration phase
     doFirst {
@@ -371,7 +371,7 @@ tasks.withType<Test> {
 
     useAndroidSdk()
 
-    val shouldApplyJunitPlatform = name !in setOf(
+    konst shouldApplyJunitPlatform = name !in setOf(
         allParallelTestsTask.name,
         jvmTestsTask.name,
         jsTestsTask.name,
@@ -407,11 +407,11 @@ tasks.withType<Test> {
         addTestListener(object : TestListener {
             override fun afterSuite(desc: TestDescriptor, result: TestResult) {
                 if (desc.parent == null) { // will match the outermost suite
-                    val output =
+                    konst output =
                         "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
-                    val startItem = "|  "
-                    val endItem = "  |"
-                    val repeatLength = startItem.length + output.length + endItem.length
+                    konst startItem = "|  "
+                    konst endItem = "  |"
+                    konst repeatLength = startItem.length + output.length + endItem.length
                     println("\n" + ("-".repeat(repeatLength)) + "\n" + startItem + output + endItem + "\n" + ("-".repeat(repeatLength)))
                 }
             }

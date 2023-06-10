@@ -1,6 +1,6 @@
 @Repeatable
 @Target( AnnotationTarget.TYPE_PARAMETER)
-annotation class TypeParameterAnn(val name: String)
+annotation class TypeParameterAnn(konst name: String)
 
 interface Generic<Z>
 

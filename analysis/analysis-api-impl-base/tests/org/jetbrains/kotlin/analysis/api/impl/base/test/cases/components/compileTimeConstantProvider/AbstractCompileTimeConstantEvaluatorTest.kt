@@ -5,7 +5,7 @@
 
 package org.jetbrains.kotlin.analysis.api.impl.base.test.cases.components.compileTimeConstantProvider
 
-import org.jetbrains.kotlin.analysis.api.components.KtConstantEvaluationMode
+import org.jetbrains.kotlin.analysis.api.components.KtConstantEkonstuationMode
 import org.jetbrains.kotlin.analysis.test.framework.base.AbstractAnalysisApiSingleFileTest
 import org.jetbrains.kotlin.analysis.test.framework.services.expressionMarkerProvider
 import org.jetbrains.kotlin.analysis.test.framework.utils.executeOnPooledThreadInReadAction
@@ -16,25 +16,25 @@ import org.jetbrains.kotlin.test.model.TestModule
 import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
-abstract class AbstractCompileTimeConstantEvaluatorTest : AbstractAnalysisApiSingleFileTest() {
+abstract class AbstractCompileTimeConstantEkonstuatorTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val element = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
-        val expression = when (element) {
+        konst element = testServices.expressionMarkerProvider.getSelectedElement(ktFile)
+        konst expression = when (element) {
             is KtExpression -> element
             is KtValueArgument -> element.getArgumentExpression()
             else -> null
         } ?: testServices.assertions.fail { "Unsupported expression: $element" }
-        val constantValue = executeOnPooledThreadInReadAction {
+        konst constantValue = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
-                expression.evaluate(KtConstantEvaluationMode.CONSTANT_EXPRESSION_EVALUATION)
+                expression.ekonstuate(KtConstantEkonstuationMode.CONSTANT_EXPRESSION_EVALUATION)
             }
         }
-        val constantLikeValue = executeOnPooledThreadInReadAction {
+        konst constantLikeValue = executeOnPooledThreadInReadAction {
             analyseForTest(expression) {
-                expression.evaluate(KtConstantEvaluationMode.CONSTANT_LIKE_EXPRESSION_EVALUATION)
+                expression.ekonstuate(KtConstantEkonstuationMode.CONSTANT_LIKE_EXPRESSION_EVALUATION)
             }
         }
-        val actual = buildString {
+        konst actual = buildString {
             appendLine("expression: ${expression.text}")
             appendLine()
             appendLine("CONSTANT_EXPRESSION_EVALUATION")

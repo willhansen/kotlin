@@ -9,28 +9,28 @@ import org.jetbrains.kotlin.metadata.deserialization.BinaryVersion
 
 interface DeserializationConfiguration {
 
-    val binaryVersion: BinaryVersion?
+    konst binaryVersion: BinaryVersion?
         get() = null
 
-    val skipMetadataVersionCheck: Boolean
+    konst skipMetadataVersionCheck: Boolean
         get() = false
 
-    val skipPrereleaseCheck: Boolean
+    konst skipPrereleaseCheck: Boolean
         get() = false
 
-    val reportErrorsOnPreReleaseDependencies: Boolean
+    konst reportErrorsOnPreReleaseDependencies: Boolean
         get() = false
 
-    val allowUnstableDependencies: Boolean
+    konst allowUnstableDependencies: Boolean
         get() = false
 
-    val typeAliasesAllowed: Boolean
+    konst typeAliasesAllowed: Boolean
         get() = true
 
-    val isJvmPackageNameSupported: Boolean
+    konst isJvmPackageNameSupported: Boolean
         get() = true
 
-    val readDeserializedContracts: Boolean
+    konst readDeserializedContracts: Boolean
         get() = false
 
     /**
@@ -39,7 +39,7 @@ interface DeserializationConfiguration {
      *
      * It is required to avoid PSI-Stub mismatch errors like in KT-41346.
      */
-    val preserveDeclarationsOrdering: Boolean
+    konst preserveDeclarationsOrdering: Boolean
         get() = false
 
     object Default : DeserializationConfiguration

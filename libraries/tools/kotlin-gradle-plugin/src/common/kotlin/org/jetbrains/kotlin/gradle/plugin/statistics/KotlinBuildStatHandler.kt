@@ -23,7 +23,7 @@ import kotlin.system.measureTimeMillis
 
 class KotlinBuildStatHandler {
     companion object {
-        const val DOKKA_PLUGIN = "org.jetbrains.dokka"
+        const konst DOKKA_PLUGIN = "org.jetbrains.dokka"
 
         @JvmStatic
         internal fun getLogger() = Logging.getLogger(KotlinBuildStatHandler::class.java)
@@ -51,7 +51,7 @@ class KotlinBuildStatHandler {
         beanName: ObjectName,
     ) {
         runSafe("${KotlinBuildStatHandler::class.java}.buildFinished") {
-            val mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
+            konst mbs: MBeanServer = ManagementFactory.getPlatformMBeanServer()
             if (mbs.isRegistered(beanName)) {
                 mbs.unregisterMBean(beanName)
             }
@@ -86,8 +86,8 @@ class KotlinBuildStatHandler {
         sessionLogger: BuildSessionLogger,
         isProjectIsolationEnabled: Boolean,
     ): MetricContainer {
-        val gradle = project.gradle
-        val configurationTimeMetrics = MetricContainer()
+        konst gradle = project.gradle
+        konst configurationTimeMetrics = MetricContainer()
         configurationTimeMetrics.put(StringMetrics.PROJECT_PATH, gradle.rootProject.projectDir.absolutePath)
         configurationTimeMetrics.put(StringMetrics.GRADLE_VERSION, gradle.gradleVersion)
 
@@ -96,21 +96,21 @@ class KotlinBuildStatHandler {
         }
 
         gradle.taskGraph.whenReady { taskExecutionGraph ->
-            val executedTaskNames = taskExecutionGraph.allTasks.map { it.name }.distinct()
+            konst executedTaskNames = taskExecutionGraph.allTasks.map { it.name }.distinct()
             configurationTimeMetrics.put(BooleanMetrics.MAVEN_PUBLISH_EXECUTED, executedTaskNames.contains("install"))
         }// constants are saved in IDEA plugin and could not be accessed directly
         fun buildSrcExists(project: Project) = File(project.projectDir, "buildSrc").exists()
         configurationTimeMetrics.put(BooleanMetrics.BUILD_SRC_EXISTS, buildSrcExists(gradle.rootProject))
 
-        val statisticOverhead = measureTimeMillis {
+        konst statisticOverhead = measureTimeMillis {
             gradle.allprojects { project ->
                 project.plugins.findPlugin(DOKKA_PLUGIN)?.also {
                     configurationTimeMetrics.put(BooleanMetrics.ENABLED_DOKKA, true)
                 }
                 for (configuration in project.configurations) {
                     try {
-                        val configurationName = configuration.name
-                        val dependencies = configuration.dependencies
+                        konst configurationName = configuration.name
+                        konst dependencies = configuration.dependencies
 
                         when (configurationName) {
                             "KoverEngineConfig" -> {
@@ -146,7 +146,7 @@ class KotlinBuildStatHandler {
                         // log?
                     }
                 }
-                val taskNames = project.tasks.names
+                konst taskNames = project.tasks.names
 
                 configurationTimeMetrics.put(NumericalMetrics.NUMBER_OF_SUBPROJECTS, 1)
                 configurationTimeMetrics.put(
@@ -223,30 +223,30 @@ class KotlinBuildStatHandler {
     internal fun report(
         sessionLogger: BuildSessionLogger,
         metric: BooleanMetrics,
-        value: Boolean,
+        konstue: Boolean,
         subprojectName: String?,
         weight: Long? = null,
     ) = runSafe("report metric ${metric.name}") {
-        sessionLogger.report(metric, value, subprojectName, weight)
+        sessionLogger.report(metric, konstue, subprojectName, weight)
     } ?: false
 
     internal fun report(
         sessionLogger: BuildSessionLogger,
         metric: NumericalMetrics,
-        value: Long,
+        konstue: Long,
         subprojectName: String?,
         weight: Long? = null,
     ) = runSafe("report metric ${metric.name}") {
-        sessionLogger.report(metric, value, subprojectName, weight)
+        sessionLogger.report(metric, konstue, subprojectName, weight)
     } ?: false
 
     internal fun report(
         sessionLogger: BuildSessionLogger,
         metric: StringMetrics,
-        value: String,
+        konstue: String,
         subprojectName: String?,
         weight: Long? = null,
     ) = runSafe("report metric ${metric.name}") {
-        sessionLogger.report(metric, value, subprojectName, weight)
+        sessionLogger.report(metric, konstue, subprojectName, weight)
     } ?: false
 }

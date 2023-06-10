@@ -16,8 +16,8 @@ class FilePathNormalizationTest : KotlinIntegrationTestBase() {
     // (It could be tested in the same process by changing the user.dir manually, but that could change behavior
     // of other tests run in parallel.)
     fun test() {
-        val descendantRelativeTo = File::descendantRelativeTo.name
-        val program = ProgramWithDependencyOnCompiler(
+        konst descendantRelativeTo = File::descendantRelativeTo.name
+        konst program = ProgramWithDependencyOnCompiler(
             tmpdir, """
             import org.jetbrains.kotlin.utils.fileUtils.$descendantRelativeTo
             import java.io.File
@@ -32,8 +32,8 @@ class FilePathNormalizationTest : KotlinIntegrationTestBase() {
 
         fun doTest(cwd: File, filePath: String, expectedWithForwardSlash: String) {
             // We use "/" below for simplicity, but the actual paths in compiler messages use the system separator.
-            val expected = expectedWithForwardSlash.replace("/", File.separator)
-            val actual = program.run(cwd, filePath)
+            konst expected = expectedWithForwardSlash.replace("/", File.separator)
+            konst actual = program.run(cwd, filePath)
             assertEquals("cwd: $cwd\nfilePath: $filePath\n", expected, actual)
         }
 
@@ -45,7 +45,7 @@ class FilePathNormalizationTest : KotlinIntegrationTestBase() {
         doTest(tmpdir, tmpdir.path + "/a", "a")
         doTest(tmpdir, tmpdir.path + "/./a", "a")
 
-        val root = File("/")
+        konst root = File("/")
         doTest(root, "test", "test")
 
         doTest(root, tmpdir.path + "/a", (tmpdir.path + "/a").removePrefix(root.absolutePath))
@@ -57,7 +57,7 @@ class FilePathNormalizationTest : KotlinIntegrationTestBase() {
 
         // Check symbolic links, but skip file systems which don't support them (e.g. Windows).
         fun doSymbolicLinkTest(cwd: File, source: File, target: File, expected: String) {
-            val link = try {
+            konst link = try {
                 source.toPath().createSymbolicLinkPointingTo(target.toPath()).toFile()
             } catch (e: Throwable) {
                 null

@@ -11,18 +11,18 @@ class ClassWithCallback {
 
     fun checkFields(): String {
         for (field in someCallback!!.javaClass.declaredFields) {
-            val value = field.get(someCallback!!)
-            if (value is ShouldNOTBeCaptured) throw AssertionError("Leaked value")
+            konst konstue = field.get(someCallback!!)
+            if (konstue is ShouldNOTBeCaptured) throw AssertionError("Leaked konstue")
         }
         return "OK"
     }
 }
 
 fun box(): String {
-    val toCapture = ShouldBeCaptured()
-    val notToCapture = ShouldNOTBeCaptured()
+    konst toCapture = ShouldBeCaptured()
+    konst notToCapture = ShouldNOTBeCaptured()
 
-    val classWithCallback = ClassWithCallback()
+    konst classWithCallback = ClassWithCallback()
     classWithCallback.apply {
         someCallback = { toCapture }
         notToCapture

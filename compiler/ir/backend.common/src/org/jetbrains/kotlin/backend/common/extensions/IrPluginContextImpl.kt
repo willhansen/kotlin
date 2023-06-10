@@ -28,46 +28,46 @@ import org.jetbrains.kotlin.resolve.BindingContext
 import org.jetbrains.kotlin.resolve.scopes.MemberScope
 
 open class IrPluginContextImpl constructor(
-    private val module: ModuleDescriptor,
+    private konst module: ModuleDescriptor,
     @Deprecated("", level = DeprecationLevel.ERROR)
     @OptIn(ObsoleteDescriptorBasedAPI::class, FirIncompatiblePluginAPI::class)
-    override val bindingContext: BindingContext,
-    override val languageVersionSettings: LanguageVersionSettings,
-    private val st: ReferenceSymbolTable,
+    override konst bindingContext: BindingContext,
+    override konst languageVersionSettings: LanguageVersionSettings,
+    private konst st: ReferenceSymbolTable,
     @OptIn(ObsoleteDescriptorBasedAPI::class, FirIncompatiblePluginAPI::class)
-    override val typeTranslator: TypeTranslator,
-    override val irBuiltIns: IrBuiltIns,
-    val linker: IrDeserializer,
-    private val diagnosticReporter: IrMessageLogger,
-    override val symbols: BuiltinSymbolsBase = BuiltinSymbolsBase(irBuiltIns, st)
+    override konst typeTranslator: TypeTranslator,
+    override konst irBuiltIns: IrBuiltIns,
+    konst linker: IrDeserializer,
+    private konst diagnosticReporter: IrMessageLogger,
+    override konst symbols: BuiltinSymbolsBase = BuiltinSymbolsBase(irBuiltIns, st)
 ) : IrPluginContext {
 
-    override val afterK2: Boolean = false
+    override konst afterK2: Boolean = false
 
-    override val platform: TargetPlatform? = module.platform
+    override konst platform: TargetPlatform? = module.platform
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val moduleDescriptor: ModuleDescriptor = module
+    override konst moduleDescriptor: ModuleDescriptor = module
 
-    override val symbolTable: ReferenceSymbolTable = st
+    override konst symbolTable: ReferenceSymbolTable = st
 
     private fun resolveMemberScope(fqName: FqName): MemberScope? {
-        val pkg = module.getPackage(fqName)
+        konst pkg = module.getPackage(fqName)
 
         if (fqName.isRoot || pkg.fragments.isNotEmpty()) return pkg.memberScope
 
-        val parentMemberScope = resolveMemberScope(fqName.parent()) ?: return null
+        konst parentMemberScope = resolveMemberScope(fqName.parent()) ?: return null
 
-        val classDescriptor =
+        konst classDescriptor =
             parentMemberScope.getContributedClassifier(fqName.shortName(), NoLookupLocation.FROM_BACKEND) as? ClassDescriptor ?: return null
 
         return classDescriptor.unsubstitutedMemberScope
     }
 
     private fun <S : IrSymbol> resolveSymbol(fqName: FqName, referencer: (MemberScope) -> S?): S? {
-        val memberScope = resolveMemberScope(fqName) ?: return null
+        konst memberScope = resolveMemberScope(fqName) ?: return null
 
-        val symbol = referencer(memberScope) ?: return null
+        konst symbol = referencer(memberScope) ?: return null
         if (symbol.isBound) return symbol
 
         linker.getDeclaration(symbol)
@@ -89,9 +89,9 @@ open class IrPluginContextImpl constructor(
     }
 
     private fun <S : IrSymbol> resolveSymbolCollection(fqName: FqName, referencer: (MemberScope) -> Collection<S>): Collection<S> {
-        val memberScope = resolveMemberScope(fqName) ?: return emptyList()
+        konst memberScope = resolveMemberScope(fqName) ?: return emptyList()
 
-        val symbols = referencer(memberScope)
+        konst symbols = referencer(memberScope)
 
         symbols.forEach { if (!it.isBound) linker.getDeclaration(it) }
 
@@ -104,7 +104,7 @@ open class IrPluginContextImpl constructor(
     override fun referenceClass(fqName: FqName): IrClassSymbol? {
         assert(!fqName.isRoot)
         return resolveSymbol(fqName.parent()) { scope ->
-            val classDescriptor = scope.getContributedClassifier(fqName.shortName(), NoLookupLocation.FROM_BACKEND) as? ClassDescriptor?
+            konst classDescriptor = scope.getContributedClassifier(fqName.shortName(), NoLookupLocation.FROM_BACKEND) as? ClassDescriptor?
             classDescriptor?.let {
                 st.referenceClass(it)
             }
@@ -115,7 +115,7 @@ open class IrPluginContextImpl constructor(
     override fun referenceTypeAlias(fqName: FqName): IrTypeAliasSymbol? {
         assert(!fqName.isRoot)
         return resolveSymbol(fqName.parent()) { scope ->
-            val aliasDescriptor = scope.getContributedClassifier(fqName.shortName(), NoLookupLocation.FROM_BACKEND) as? TypeAliasDescriptor?
+            konst aliasDescriptor = scope.getContributedClassifier(fqName.shortName(), NoLookupLocation.FROM_BACKEND) as? TypeAliasDescriptor?
             aliasDescriptor?.let {
                 st.referenceTypeAlias(it)
             }
@@ -125,7 +125,7 @@ open class IrPluginContextImpl constructor(
     @OptIn(FirIncompatiblePluginAPI::class)
     override fun referenceConstructors(classFqn: FqName): Collection<IrConstructorSymbol> {
         @Suppress("DEPRECATION")
-        val classSymbol = referenceClass(classFqn) ?: error("Cannot find class $classFqn")
+        konst classSymbol = referenceClass(classFqn) ?: error("Cannot find class $classFqn")
         return classSymbol.owner.declarations.filterIsInstance<IrConstructor>().map { it.symbol }
     }
 
@@ -133,7 +133,7 @@ open class IrPluginContextImpl constructor(
     override fun referenceFunctions(fqName: FqName): Collection<IrSimpleFunctionSymbol> {
         assert(!fqName.isRoot)
         return resolveSymbolCollection(fqName.parent()) { scope ->
-            val descriptors = scope.getContributedFunctions(fqName.shortName(), NoLookupLocation.FROM_BACKEND)
+            konst descriptors = scope.getContributedFunctions(fqName.shortName(), NoLookupLocation.FROM_BACKEND)
             descriptors.map { st.referenceSimpleFunction(it) }
         }
     }
@@ -142,7 +142,7 @@ open class IrPluginContextImpl constructor(
     override fun referenceProperties(fqName: FqName): Collection<IrPropertySymbol> {
         assert(!fqName.isRoot)
         return resolveSymbolCollection(fqName.parent()) { scope ->
-            val descriptors = scope.getContributedVariables(fqName.shortName(), NoLookupLocation.FROM_BACKEND)
+            konst descriptors = scope.getContributedVariables(fqName.shortName(), NoLookupLocation.FROM_BACKEND)
             descriptors.map { st.referenceProperty(it) }
         }
     }
@@ -172,7 +172,7 @@ open class IrPluginContextImpl constructor(
         kind: IrDeserializer.TopLevelSymbolKind,
         moduleDescriptor: ModuleDescriptor
     ): IrSymbol? {
-        val symbol = linker.resolveBySignatureInModule(signature, kind, moduleDescriptor.name)
+        konst symbol = linker.resolveBySignatureInModule(signature, kind, moduleDescriptor.name)
         linker.postProcess(inOrAfterLinkageStep = false)
         return symbol
     }

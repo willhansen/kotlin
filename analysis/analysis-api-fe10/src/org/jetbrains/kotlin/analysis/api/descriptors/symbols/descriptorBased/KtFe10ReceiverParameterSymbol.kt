@@ -22,16 +22,16 @@ import org.jetbrains.kotlin.analysis.api.types.KtType
 import org.jetbrains.kotlin.descriptors.ReceiverParameterDescriptor
 
 class KtFe10ReceiverParameterSymbol(
-    private val _descriptor: ReceiverParameterDescriptor,
-    override val analysisContext: Fe10AnalysisContext
+    private konst _descriptor: ReceiverParameterDescriptor,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtReceiverParameterSymbol(), KtFe10DescSymbol<ReceiverParameterDescriptor> {
 
-    override val type: KtType
+    override konst type: KtType
         get() = withValidityAssertion { _descriptor.returnType?.toKtType(analysisContext) ?: error("expect return type for $_descriptor") }
-    override val descriptor: ReceiverParameterDescriptor
+    override konst descriptor: ReceiverParameterDescriptor
         get() = withValidityAssertion { _descriptor }
 
-    override val owningCallableSymbol: KtCallableSymbol
+    override konst owningCallableSymbol: KtCallableSymbol
         get() = withValidityAssertion { _descriptor.containingDeclaration.toKtSymbol(analysisContext) as KtCallableSymbol }
 
     context(KtAnalysisSession)

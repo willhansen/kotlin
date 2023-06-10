@@ -10,7 +10,7 @@ fun <T : Number?> T.case_1() {
 }
 
 // TESTCASE NUMBER: 2
-fun <T : Number, K : <!FINAL_UPPER_BOUND!>String<!>> T?.case_2(value_1: K?) {
-    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returns() implies (this@case_2 is T && value_1 is K)<!> }
-    if (!(this@case_2 is T && value_1 is K)) throw Exception()
+fun <T : Number, K : <!FINAL_UPPER_BOUND!>String<!>> T?.case_2(konstue_1: K?) {
+    contract { <!ERROR_IN_CONTRACT_DESCRIPTION!>returns() implies (this@case_2 is T && konstue_1 is K)<!> }
+    if (!(this@case_2 is T && konstue_1 is K)) throw Exception()
 }

@@ -49,10 +49,10 @@ internal class K2MetadataKlibSerializer(
     }
 
     override fun serialize(analysisResult: CommonAnalysisResult, destDir: File) {
-        val project = environment.project
-        val module = analysisResult.moduleDescriptor
+        konst project = environment.project
+        konst module = analysisResult.moduleDescriptor
 
-        val serializedMetadata = KlibMetadataMonolithicSerializer(
+        konst serializedMetadata = KlibMetadataMonolithicSerializer(
             configuration.languageVersionSettings,
             metadataVersion,
             project,
@@ -66,66 +66,66 @@ internal class K2MetadataKlibSerializer(
 }
 
 private class KlibMetadataDependencyContainer(
-    private val configuration: CompilerConfiguration,
-    private val storageManager: StorageManager
+    private konst configuration: CompilerConfiguration,
+    private konst storageManager: StorageManager
 ) : CommonDependenciesContainer {
 
-    private val kotlinLibraries = run {
-        val classpathFiles =
+    private konst kotlinLibraries = run {
+        konst classpathFiles =
             configuration.getList(CLIConfigurationKeys.CONTENT_ROOTS).filterIsInstance<JvmClasspathRoot>().map(JvmContentRoot::file)
 
-        val klibFiles = classpathFiles
+        konst klibFiles = classpathFiles
             .filter { it.extension == "klib" || it.isDirectory }
 
         // TODO: need to move K2Metadata to SearchPathResolver.
         klibFiles.map { resolveSingleFileKlib(org.jetbrains.kotlin.konan.file.File(it.absolutePath)) }
     }
 
-    private val friendPaths = configuration.get(K2MetadataConfigurationKeys.FRIEND_PATHS).orEmpty().toSet()
-    private val refinesPaths = configuration.get(K2MetadataConfigurationKeys.REFINES_PATHS).orEmpty().toSet()
+    private konst friendPaths = configuration.get(K2MetadataConfigurationKeys.FRIEND_PATHS).orEmpty().toSet()
+    private konst refinesPaths = configuration.get(K2MetadataConfigurationKeys.REFINES_PATHS).orEmpty().toSet()
 
-    private val builtIns
+    private konst builtIns
         get() = DefaultBuiltIns.Instance
 
     private class KlibModuleInfo(
-        override val name: Name,
-        val kotlinLibrary: KotlinLibrary,
-        private val dependOnModules: List<ModuleInfo>
+        override konst name: Name,
+        konst kotlinLibrary: KotlinLibrary,
+        private konst dependOnModules: List<ModuleInfo>
     ) : ModuleInfo {
         override fun dependencies(): List<ModuleInfo> = dependOnModules
 
         override fun dependencyOnBuiltIns(): ModuleInfo.DependencyOnBuiltIns = ModuleInfo.DependencyOnBuiltIns.LAST
 
-        override val platform: TargetPlatform
+        override konst platform: TargetPlatform
             get() = CommonPlatforms.defaultCommonPlatform
 
-        override val analyzerServices: PlatformDependentAnalyzerServices
+        override konst analyzerServices: PlatformDependentAnalyzerServices
             get() = CommonPlatformAnalyzerServices
     }
 
-    private val mutableDependenciesForAllModuleDescriptors = mutableListOf<ModuleDescriptorImpl>().apply {
+    private konst mutableDependenciesForAllModuleDescriptors = mutableListOf<ModuleDescriptorImpl>().apply {
         add(builtIns.builtInsModule)
     }
 
-    private val mutableDependenciesForAllModules = mutableListOf<ModuleInfo>()
+    private konst mutableDependenciesForAllModules = mutableListOf<ModuleInfo>()
 
-    private val moduleDescriptorsForKotlinLibraries: Map<KotlinLibrary, ModuleDescriptorImpl> =
+    private konst moduleDescriptorsForKotlinLibraries: Map<KotlinLibrary, ModuleDescriptorImpl> =
         kotlinLibraries.keysToMap { library ->
-            val moduleHeader = parseModuleHeader(library.moduleHeaderData)
-            val moduleName = Name.special(moduleHeader.moduleName)
-            val moduleOrigin = DeserializedKlibModuleOrigin(library)
+            konst moduleHeader = parseModuleHeader(library.moduleHeaderData)
+            konst moduleName = Name.special(moduleHeader.moduleName)
+            konst moduleOrigin = DeserializedKlibModuleOrigin(library)
             MetadataFactories.DefaultDescriptorFactory.createDescriptor(
                 moduleName, storageManager, builtIns, moduleOrigin
             )
         }.also { result ->
-            val resultValues = result.values
+            konst resultValues = result.konstues
             resultValues.forEach { module ->
                 module.setDependencies(mutableDependenciesForAllModuleDescriptors)
             }
             mutableDependenciesForAllModuleDescriptors.addAll(resultValues)
         }
 
-    private val moduleInfosImpl: List<KlibModuleInfo> = mutableListOf<KlibModuleInfo>().apply {
+    private konst moduleInfosImpl: List<KlibModuleInfo> = mutableListOf<KlibModuleInfo>().apply {
         addAll(
             moduleDescriptorsForKotlinLibraries.map { (kotlinLibrary, moduleDescriptor) ->
                 KlibModuleInfo(moduleDescriptor.name, kotlinLibrary, mutableDependenciesForAllModules)
@@ -134,13 +134,13 @@ private class KlibMetadataDependencyContainer(
         mutableDependenciesForAllModules.addAll(this@apply)
     }
 
-    override val moduleInfos: List<ModuleInfo> get() = moduleInfosImpl
+    override konst moduleInfos: List<ModuleInfo> get() = moduleInfosImpl
 
-    override val friendModuleInfos: List<ModuleInfo> = moduleInfosImpl.filter {
+    override konst friendModuleInfos: List<ModuleInfo> = moduleInfosImpl.filter {
         it.kotlinLibrary.libraryFile.absolutePath in friendPaths
     }
 
-    override val refinesModuleInfos: List<ModuleInfo> = moduleInfosImpl.filter {
+    override konst refinesModuleInfos: List<ModuleInfo> = moduleInfosImpl.filter {
         it.kotlinLibrary.libraryFile.absolutePath in refinesPaths
     }
 
@@ -173,7 +173,7 @@ private class KlibMetadataDependencyContainer(
         return packageFragmentProviderForKotlinLibrary(moduleInfo.kotlinLibrary)
     }
 
-    private val klibMetadataModuleDescriptorFactory by lazy {
+    private konst klibMetadataModuleDescriptorFactory by lazy {
         KlibMetadataModuleDescriptorFactoryImpl(
             MetadataFactories.DefaultDescriptorFactory,
             MetadataFactories.DefaultPackageFragmentsFactory,
@@ -185,10 +185,10 @@ private class KlibMetadataDependencyContainer(
     private fun packageFragmentProviderForKotlinLibrary(
         library: KotlinLibrary
     ): PackageFragmentProvider {
-        val languageVersionSettings = configuration.languageVersionSettings
+        konst languageVersionSettings = configuration.languageVersionSettings
 
-        val libraryModuleDescriptor = moduleDescriptorsForKotlinLibraries.getValue(library)
-        val packageFragmentNames = parseModuleHeader(library.moduleHeaderData).packageFragmentNameList
+        konst libraryModuleDescriptor = moduleDescriptorsForKotlinLibraries.getValue(library)
+        konst packageFragmentNames = parseModuleHeader(library.moduleHeaderData).packageFragmentNameList
 
         return klibMetadataModuleDescriptorFactory.createPackageFragmentProvider(
             library,
@@ -206,7 +206,7 @@ private class KlibMetadataDependencyContainer(
 
 }
 
-private val MetadataFactories =
+private konst MetadataFactories =
     KlibMetadataFactories(
         { DefaultBuiltIns.Instance },
         NullFlexibleTypeDeserializer,

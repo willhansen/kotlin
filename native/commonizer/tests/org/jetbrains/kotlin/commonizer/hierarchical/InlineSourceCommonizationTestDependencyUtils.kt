@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.commonizer.utils.InlineSourceBuilder
 import org.jetbrains.kotlin.commonizer.withAllLeaves
 
 internal fun AbstractInlineSourcesCommonizationTest.ParametersBuilder.registerFakeStdlibIntegersDependency(vararg outputTarget: String) {
-    val allTargets = outputTarget.map { parseCommonizerTarget(it) }.withAllLeaves()
+    konst allTargets = outputTarget.map { parseCommonizerTarget(it) }.withAllLeaves()
     registerDependency(*allTargets.toTypedArray()) {
         unsignedIntegers()
         unsingedVarIntegers()
@@ -70,7 +70,7 @@ internal fun InlineSourceBuilder.ModuleBuilder.unsafeNumberAnnotationSource() {
             package kotlinx.cinterop
             @Target(AnnotationTarget.TYPEALIAS, AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY)
             @Retention(AnnotationRetention.BINARY)
-            annotation class UnsafeNumber(val actualPlatformTypes: Array<String>)
+            annotation class UnsafeNumber(konst actualPlatformTypes: Array<String>)
         """.trimIndent(),
         "UnsafeNumberAnnotation.kt"
     )

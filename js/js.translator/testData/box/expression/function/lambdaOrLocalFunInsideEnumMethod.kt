@@ -6,7 +6,7 @@ enum class Foo {
 
     fun test(): () -> String {
         fun local() = 29
-        val lambda = { "OK" + local() }
+        konst lambda = { "OK" + local() }
 
         assertEquals(29, local())
         assertEquals("OK29", lambda())

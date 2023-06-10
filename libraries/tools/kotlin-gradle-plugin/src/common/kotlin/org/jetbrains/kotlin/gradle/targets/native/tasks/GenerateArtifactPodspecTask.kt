@@ -26,7 +26,7 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
 
     init {
         this.onlyIf {
-            val shouldRun = attributes.get().isNotEmpty() || rawStatements.get().isNotEmpty()
+            konst shouldRun = attributes.get().isNotEmpty() || rawStatements.get().isNotEmpty()
             if (!shouldRun) {
                 logger.info("Skipping task '$path' because there are no podspec attributes defined")
             }
@@ -35,29 +35,29 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
     }
 
     @get:Input
-    abstract val specName: Property<String>
+    abstract konst specName: Property<String>
 
     @get:Input
-    abstract val specVersion: Property<String?>
+    abstract konst specVersion: Property<String?>
 
     @get:OutputDirectory
-    abstract val destinationDir: DirectoryProperty
+    abstract konst destinationDir: DirectoryProperty
 
     @get:Input
-    abstract val attributes: MapProperty<String, String>
+    abstract konst attributes: MapProperty<String, String>
 
     @get:Input
-    abstract val rawStatements: ListProperty<String>
+    abstract konst rawStatements: ListProperty<String>
 
     @get:Nested
-    abstract val dependencies: ListProperty<CocoapodsDependency>
+    abstract konst dependencies: ListProperty<CocoapodsDependency>
 
     @get:Input
-    abstract val artifactType: Property<ArtifactType>
+    abstract konst artifactType: Property<ArtifactType>
 
     @get:OutputFile
     @Suppress("LeakingThis") // should be inherited only by gradle machinery
-    val outputFile: Provider<RegularFile> = specName.flatMap { specName ->
+    konst outputFile: Provider<RegularFile> = specName.flatMap { specName ->
         destinationDir.file("$specName.podspec")
     }
 
@@ -82,14 +82,14 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
             appendLine()
         }
 
-        for ((key, value) in attributes) {
+        for ((key, konstue) in attributes) {
             append("    spec.")
             append(key)
 
             repeat(podspecValueIndent - key.length) { append(' ') }
             append(" = ")
 
-            append(value.wrapInSingleQuotesIfNeeded())
+            append(konstue.wrapInSingleQuotesIfNeeded())
 
             appendLine()
         }
@@ -105,7 +105,7 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
             append("    spec.dependency ")
             append(dependency.name.wrapInSingleQuotes())
 
-            val version = dependency.version
+            konst version = dependency.version
             if (version != null) {
                 append(", ")
                 append(version.wrapInSingleQuotes())
@@ -125,7 +125,7 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
     }
 
     private fun buildAdditionalAttrs(): Map<String, String> {
-        val artifactTypeValue: ArtifactType = artifactType.get()
+        konst artifactTypeValue: ArtifactType = artifactType.get()
 
         return mutableMapOf<String, String>().apply {
             if (!attributes.get().containsKey(specNameKey)) {
@@ -137,26 +137,26 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
             }
 
             if (vendoredKeys.none { attributes.get().containsKey(it) }) {
-                val key = when (artifactTypeValue) {
+                konst key = when (artifactTypeValue) {
                     StaticLibrary, DynamicLibrary -> vendoredLibrary
                     Framework, FatFramework, XCFramework -> vendoredFrameworks
                 }
 
-                val prefix = when (artifactTypeValue) {
+                konst prefix = when (artifactTypeValue) {
                     StaticLibrary, DynamicLibrary -> "lib"
                     else -> ""
                 }
 
-                val suffix = when (artifactTypeValue) {
+                konst suffix = when (artifactTypeValue) {
                     StaticLibrary -> "a"
                     DynamicLibrary -> "dylib"
                     Framework, FatFramework -> "framework"
                     XCFramework -> "xcframework"
                 }
 
-                val value = "$prefix${specName.get()}.$suffix"
+                konst konstue = "$prefix${specName.get()}.$suffix"
 
-                put(key, value)
+                put(key, konstue)
             }
         }
     }
@@ -178,13 +178,13 @@ abstract class GenerateArtifactPodspecTask : DefaultTask() {
     private fun String.wrapInSingleQuotes() = "'" + replace("'", "\\'") + "'"
 
     companion object {
-        private const val specNameKey = "name"
-        private const val specVersionKey = "version"
-        private const val vendoredLibrary = "vendored_library"
-        private const val vendoredLibraries = "vendored_libraries"
-        private const val vendoredFrameworks = "vendored_frameworks"
-        private const val podspecValueIndent = 24
+        private const konst specNameKey = "name"
+        private const konst specVersionKey = "version"
+        private const konst vendoredLibrary = "vendored_library"
+        private const konst vendoredLibraries = "vendored_libraries"
+        private const konst vendoredFrameworks = "vendored_frameworks"
+        private const konst podspecValueIndent = 24
 
-        private val vendoredKeys = listOf(vendoredLibrary, vendoredLibraries, vendoredFrameworks)
+        private konst vendoredKeys = listOf(vendoredLibrary, vendoredLibraries, vendoredFrameworks)
     }
 }

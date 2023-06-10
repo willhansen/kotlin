@@ -8,7 +8,7 @@ public final class ArrayKt {
 @kotlin.Metadata
 public final class ICIntArray {
     // source: 'array.kt'
-    private final @org.jetbrains.annotations.NotNull field value: java.lang.Integer[]
+    private final @org.jetbrains.annotations.NotNull field konstue: java.lang.Integer[]
     private synthetic method <init>(p0: java.lang.Integer[]): void
     public synthetic final static method box-impl(p0: java.lang.Integer[]): ICIntArray
     public static @org.jetbrains.annotations.NotNull method constructor-impl(@org.jetbrains.annotations.NotNull p0: java.lang.Integer[]): java.lang.Integer[]

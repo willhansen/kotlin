@@ -6,8 +6,8 @@ open class BaseClass
 class DerivedClass : BaseClass()
 
 fun test() {
-    val derivedToStringMap: Map<DerivedClass, String> = mapOf()
-    val mapper: (BaseClass) -> String? = derivedToStringMap::get
+    konst derivedToStringMap: Map<DerivedClass, String> = mapOf()
+    konst mapper: (BaseClass) -> String? = derivedToStringMap::get
 
     foo(mapper)
     foo(derivedToStringMap::get)

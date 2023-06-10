@@ -1,4 +1,4 @@
 package test
 
-// val prop1: null
-val prop1 = "".get(0)
+// konst prop1: null
+konst prop1 = "".get(0)

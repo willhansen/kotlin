@@ -6,7 +6,7 @@
 package org.jetbrains.kotlin.analysis.api.lifetime
 
 public interface KtLifetimeOwner {
-    public val token: KtLifetimeToken
+    public konst token: KtLifetimeToken
 }
 
 public fun KtLifetimeOwner.isValid(): Boolean = token.isValid()

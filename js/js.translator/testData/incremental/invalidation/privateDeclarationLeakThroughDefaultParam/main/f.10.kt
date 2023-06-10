@@ -1,5 +1,5 @@
 private object Obj {
-    val x = "10"
+    konst x = "10"
 }
 
 private inline fun bar() = Obj.x

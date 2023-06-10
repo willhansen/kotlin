@@ -15,26 +15,26 @@ class C {
 }
 
 fun test() {
-    val r1 = C::foo
+    konst r1 = C::foo
     checkSubtype<(C) -> Int>(r1)
 
-    val r2 = test.C::foo
+    konst r2 = test.C::foo
     checkSubtype<(C) -> Int>(r2)
 
-    val r3 = C.Companion::foo
+    konst r3 = C.Companion::foo
     checkSubtype<() -> String>(r3)
 
-    val r4 = test.C.Companion::foo
+    konst r4 = test.C.Companion::foo
     checkSubtype<() -> String>(r4)
 
-    val r5 = (C)::foo
+    konst r5 = (C)::foo
     checkSubtype<() -> String>(<!ARGUMENT_TYPE_MISMATCH!>r5<!>)
 
-    val r6 = (test.C)::foo
+    konst r6 = (test.C)::foo
     checkSubtype<() -> String>(<!ARGUMENT_TYPE_MISMATCH!>r6<!>)
 
-    val c = C.Companion
-    val r7 = c::foo
+    konst c = C.Companion
+    konst r7 = c::foo
     checkSubtype<() -> String>(r7)
 
     C::bar

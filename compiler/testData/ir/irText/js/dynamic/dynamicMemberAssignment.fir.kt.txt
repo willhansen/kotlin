@@ -4,7 +4,7 @@ fun testMemberAssignment(d: dynamic) {
 
 fun testSafeMemberAssignment(d: dynamic) {
   { // BLOCK
-    val tmp0_safe_receiver: dynamic = d
+    konst tmp0_safe_receiver: dynamic = d
     when {
       EQEQ(arg0 = tmp0_safe_receiver, arg1 = null) -> null
       else -> tmp0_safe_receiver.m = 1

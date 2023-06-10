@@ -24,20 +24,20 @@ import org.jetbrains.kotlin.types.TypeProjection
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 
 fun ClassifierDescriptorWithTypeParameters.computeConstructorTypeParameters(): List<TypeParameterDescriptor> {
-    val declaredParameters = declaredTypeParameters
+    konst declaredParameters = declaredTypeParameters
 
     if (!isInner && containingDeclaration !is CallableDescriptor) return declaredParameters
 
-    val parametersFromContainingFunctions =
+    konst parametersFromContainingFunctions =
         parents.takeWhile { it is CallableDescriptor }
             .filter { it !is ConstructorDescriptor }
             .flatMap { (it as CallableDescriptor).typeParameters.asSequence() }
             .toList()
 
-    val containingClassTypeConstructorParameters = parents.firstIsInstanceOrNull<ClassDescriptor>()?.typeConstructor?.parameters.orEmpty()
+    konst containingClassTypeConstructorParameters = parents.firstIsInstanceOrNull<ClassDescriptor>()?.typeConstructor?.parameters.orEmpty()
     if (parametersFromContainingFunctions.isEmpty() && containingClassTypeConstructorParameters.isEmpty()) return declaredTypeParameters
 
-    val additional =
+    konst additional =
         (parametersFromContainingFunctions + containingClassTypeConstructorParameters)
             .map { it.capturedCopyForInnerDeclaration(this, declaredParameters.size) }
 
@@ -50,9 +50,9 @@ private fun TypeParameterDescriptor.capturedCopyForInnerDeclaration(
 ) = CapturedTypeParameterDescriptor(this, declarationDescriptor, declaredTypeParametersCount)
 
 private class CapturedTypeParameterDescriptor(
-    private val originalDescriptor: TypeParameterDescriptor,
-    private val declarationDescriptor: DeclarationDescriptor,
-    private val declaredTypeParametersCount: Int
+    private konst originalDescriptor: TypeParameterDescriptor,
+    private konst declarationDescriptor: DeclarationDescriptor,
+    private konst declaredTypeParametersCount: Int
 ) : TypeParameterDescriptor by originalDescriptor {
     override fun isCapturedFromOuterDeclaration() = true
     override fun getOriginal() = originalDescriptor.original
@@ -62,11 +62,11 @@ private class CapturedTypeParameterDescriptor(
 }
 
 class PossiblyInnerType(
-    val classifierDescriptor: ClassifierDescriptorWithTypeParameters,
-    val arguments: List<TypeProjection>,
-    val outerType: PossiblyInnerType?
+    konst classifierDescriptor: ClassifierDescriptorWithTypeParameters,
+    konst arguments: List<TypeProjection>,
+    konst outerType: PossiblyInnerType?
 ) {
-    val classDescriptor: ClassDescriptor
+    konst classDescriptor: ClassDescriptor
         get() = classifierDescriptor as ClassDescriptor
 
     fun segments(): List<PossiblyInnerType> = outerType?.segments().orEmpty() + this
@@ -82,7 +82,7 @@ private fun KotlinType.buildPossiblyInnerType(
 ): PossiblyInnerType? {
     if (classifierDescriptor == null || ErrorUtils.isError(classifierDescriptor)) return null
 
-    val toIndex = classifierDescriptor.declaredTypeParameters.size + index
+    konst toIndex = classifierDescriptor.declaredTypeParameters.size + index
     if (!classifierDescriptor.isInner) {
         assert(toIndex == arguments.size || DescriptorUtils.isLocal(classifierDescriptor)) {
             "${arguments.size - toIndex} trailing arguments were found in $this type"
@@ -91,7 +91,7 @@ private fun KotlinType.buildPossiblyInnerType(
         return PossiblyInnerType(classifierDescriptor, arguments.subList(index, arguments.size), null)
     }
 
-    val argumentsSubList = arguments.subList(index, toIndex)
+    konst argumentsSubList = arguments.subList(index, toIndex)
     return PossiblyInnerType(
         classifierDescriptor, argumentsSubList,
         buildPossiblyInnerType(classifierDescriptor.containingDeclaration as? ClassifierDescriptorWithTypeParameters, toIndex)

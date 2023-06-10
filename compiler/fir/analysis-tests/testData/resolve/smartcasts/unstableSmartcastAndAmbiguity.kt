@@ -1,15 +1,15 @@
 abstract class XdSwimlaneSettings {
-    abstract val settingsLogic: String
+    abstract konst settingsLogic: String
 }
 
 class XdIssueBasedSwimlaneSettings : XdSwimlaneSettings() {
-    override val settingsLogic: String
+    override konst settingsLogic: String
         get() = "hello"
 }
 
 class XdAgile(var swimlaneSettings: XdSwimlaneSettings?)
 
 fun test(x: XdAgile) {
-    val y = x.swimlaneSettings as XdIssueBasedSwimlaneSettings
+    konst y = x.swimlaneSettings as XdIssueBasedSwimlaneSettings
     x.swimlaneSettings!!.settingsLogic
 }

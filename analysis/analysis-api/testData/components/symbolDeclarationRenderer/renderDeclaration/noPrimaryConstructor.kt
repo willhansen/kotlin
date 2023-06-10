@@ -1,5 +1,5 @@
 class NoPrimary {
-    val x: String
+    konst x: String
 
     constructor(x: String) {
         this.x = x

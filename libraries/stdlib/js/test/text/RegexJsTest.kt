@@ -13,7 +13,7 @@ class RegexJsTest {
         // js capturing group name can contain Unicode letters, $, _, and digits (0-9), but may not start with a digit.
         // jvm capturing group name can contain a-z, A-Z, and 0-9, but may not start with a digit.
         // make sure reference to capturing group name in K/JS Regex.replace(input, replacement) obeys K/JVM rules
-        val input = "123-456"
+        konst input = "123-456"
         Regex("(?<first_part>\\d+)-(?<second_part>\\d+)").let { regex ->
             assertEquals("123/456", regex.replace(input, "$1/$2"))
             assertEquals("123/456", regex.replaceFirst(input, "$1/$2"))

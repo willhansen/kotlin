@@ -18,10 +18,10 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedPropertyDescriptor
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedSimpleFunctionDescriptor
 
-internal val DeclarationDescriptor.isExpectMember: Boolean
+internal konst DeclarationDescriptor.isExpectMember: Boolean
     get() = this is MemberDescriptor && this.isExpect
 
-internal val DeclarationDescriptor.isSerializableExpectClass: Boolean
+internal konst DeclarationDescriptor.isSerializableExpectClass: Boolean
     get() = this is ClassDescriptor && OptionalAnnotationUtil.shouldGenerateExpectClass(this)
 
 tailrec fun DeclarationDescriptor.findPackage(): PackageFragmentDescriptor {
@@ -30,17 +30,17 @@ tailrec fun DeclarationDescriptor.findPackage(): PackageFragmentDescriptor {
 }
 
 // This is Native specific. Try to eliminate.
-val ModuleDescriptor.isForwardDeclarationModule get() =
+konst ModuleDescriptor.isForwardDeclarationModule get() =
     name == Name.special("<forward declarations>")
 
 private fun sourceByIndex(descriptor: CallableMemberDescriptor, index: Int): SourceFile {
-    val fragment = descriptor.findPackage() as KlibMetadataDeserializedPackageFragment
-    val fileName = fragment.proto.strings.stringList[index]
+    konst fragment = descriptor.findPackage() as KlibMetadataDeserializedPackageFragment
+    konst fileName = fragment.proto.strings.stringList[index]
     return DeserializedSourceFile(fileName, descriptor.module.kotlinLibrary)
 }
 
 fun CallableMemberDescriptor.findSourceFile(): SourceFile {
-    val source = this.source.containingFile
+    konst source = this.source.containingFile
     if (source != SourceFile.NO_SOURCE_FILE)
         return source
     return when {

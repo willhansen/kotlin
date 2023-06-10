@@ -16,14 +16,14 @@ fun createTextForCoroutineHelpers(checkStateMachine: Boolean, checkTailCallOptim
             |}
         """.trimMargin()
 
-    val handleExceptionContinuationBody =
+    konst handleExceptionContinuationBody =
         """
             |override fun resumeWith(result: Result<Any?>) {
             |   result.exceptionOrNull()?.let(x)
             |}
         """.trimMargin()
 
-    val checkStateMachineString = """
+    konst checkStateMachineString = """
     class StateMachineCheckerClass {
         private var counter = 0
         var finished = false
@@ -53,13 +53,13 @@ fun createTextForCoroutineHelpers(checkStateMachine: Boolean, checkTailCallOptim
             if (checkFinished && !finished) error("Wrong state-machine generated: it is not finished yet")
         }
     }
-    val StateMachineChecker = StateMachineCheckerClass()
+    konst StateMachineChecker = StateMachineCheckerClass()
     object CheckStateMachineContinuation: Continuation<Unit> {
-        override val context: CoroutineContext
+        override konst context: CoroutineContext
             get() = EmptyCoroutineContext
 
-        override fun resumeWith(value: Result<Unit>) {
-            value.getOrThrow()
+        override fun resumeWith(konstue: Result<Unit>) {
+            konstue.getOrThrow()
             StateMachineChecker.proceed = {
                 StateMachineChecker.finished = true
             }
@@ -68,10 +68,10 @@ fun createTextForCoroutineHelpers(checkStateMachine: Boolean, checkTailCallOptim
     """.trimIndent()
 
     // TODO: Find a way to check for tail-call optimization on JS and Native
-    val checkTailCallOptimizationString =
+    konst checkTailCallOptimizationString =
         """
         class TailCallOptimizationCheckerClass {
-            private val stackTrace = arrayListOf<StackTraceElement?>()
+            private konst stackTrace = arrayListOf<StackTraceElement?>()
 
             suspend fun saveStackTrace() = suspendCoroutineUninterceptedOrReturn<Unit> {
                 saveStackTrace(it)
@@ -98,7 +98,7 @@ fun createTextForCoroutineHelpers(checkStateMachine: Boolean, checkTailCallOptim
             }
         }
 
-        val TailCallOptimizationChecker = TailCallOptimizationCheckerClass()
+        konst TailCallOptimizationChecker = TailCallOptimizationCheckerClass()
         """.trimIndent()
 
     return """
@@ -108,22 +108,22 @@ fun createTextForCoroutineHelpers(checkStateMachine: Boolean, checkTailCallOptim
             |${if (checkTailCallOptimization) "import kotlin.coroutines.jvm.internal.*" else ""}
             |
             |fun <T> handleResultContinuation(x: (T) -> Unit): Continuation<T> = object: Continuation<T> {
-            |    override val context = EmptyCoroutineContext
+            |    override konst context = EmptyCoroutineContext
             |    ${continuationBody("T") { "x($it)" }}
             |}
             |
             |fun handleExceptionContinuation(x: (Throwable) -> Unit): Continuation<Any?> = object: Continuation<Any?> {
-            |    override val context = EmptyCoroutineContext
+            |    override konst context = EmptyCoroutineContext
             |    $handleExceptionContinuationBody
             |}
             |
-            |open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+            |open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
             |    companion object : EmptyContinuation()
             |    ${continuationBody("Any?") { it }}
             |}
             |
             |class ResultContinuation : Continuation<Any?> {
-            |    override val context = EmptyCoroutineContext
+            |    override konst context = EmptyCoroutineContext
             |    ${continuationBody("Any?") { "this.result = $it" }}
             |
             |    var result: Any? = null

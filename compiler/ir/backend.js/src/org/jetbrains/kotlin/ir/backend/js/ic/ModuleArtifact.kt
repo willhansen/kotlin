@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.ir.backend.js.transformers.irToJs.safeModuleName
 import org.jetbrains.kotlin.ir.backend.js.utils.serialization.deserializeJsIrProgramFragment
 import java.io.File
 
-class SrcFileArtifact(val srcFilePath: String, private val fragment: JsIrProgramFragment?, private val astArtifact: File? = null) {
+class SrcFileArtifact(konst srcFilePath: String, private konst fragment: JsIrProgramFragment?, private konst astArtifact: File? = null) {
     fun loadJsIrFragment(): JsIrProgramFragment? {
         if (fragment != null) {
             return fragment
@@ -26,16 +26,16 @@ class SrcFileArtifact(val srcFilePath: String, private val fragment: JsIrProgram
 
 class ModuleArtifact(
     moduleName: String,
-    val fileArtifacts: List<SrcFileArtifact>,
-    val artifactsDir: File? = null,
-    val forceRebuildJs: Boolean = false,
+    konst fileArtifacts: List<SrcFileArtifact>,
+    konst artifactsDir: File? = null,
+    konst forceRebuildJs: Boolean = false,
     externalModuleName: String? = null
 ) {
-    val moduleSafeName = moduleName.safeModuleName
-    val moduleExternalName = externalModuleName ?: moduleSafeName
+    konst moduleSafeName = moduleName.safeModuleName
+    konst moduleExternalName = externalModuleName ?: moduleSafeName
 
     fun loadJsIrModule(): JsIrModule {
-        val fragments = fileArtifacts.sortedBy { it.srcFilePath }.mapNotNull { it.loadJsIrFragment() }
+        konst fragments = fileArtifacts.sortedBy { it.srcFilePath }.mapNotNull { it.loadJsIrFragment() }
         return JsIrModule(moduleSafeName, moduleExternalName, fragments)
     }
 }

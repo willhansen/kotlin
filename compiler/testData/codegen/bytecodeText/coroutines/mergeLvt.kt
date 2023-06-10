@@ -1,18 +1,18 @@
 import kotlin.coroutines.intrinsics.*
 
-class AtomicInt(val value: Int)
+class AtomicInt(konst konstue: Int)
 
 fun atomic(i: Int) = AtomicInt(i)
 
 class MyBlockingAdapter() {
-    private val state = atomic(0)
-    private val a = 77
+    private konst state = atomic(0)
+    private konst a = 77
     suspend fun foo() {
-        val a = suspendBar()
+        konst a = suspendBar()
     }
     private inline fun AtomicInt.extensionFun() {
         if (a == 77) throw IllegalStateException("AAAAAAAAAAAA")
-        value
+        konstue
     }
     private suspend inline fun suspendBar() {
         state.extensionFun()

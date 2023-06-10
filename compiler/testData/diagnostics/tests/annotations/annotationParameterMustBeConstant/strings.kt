@@ -1,16 +1,16 @@
 // FIR_IDENTICAL
 // !DIAGNOSTICS: -UNUSED_VARIABLE
-annotation class Ann(vararg val i: String)
+annotation class Ann(vararg konst i: String)
 
-const val topLevel = "topLevel"
+const konst topLevel = "topLevel"
 
 fun foo() {
-    val a1 = "a"
-    val a2 = "b"
-    val a3 = a1 + a2
+    konst a1 = "a"
+    konst a2 = "b"
+    konst a3 = a1 + a2
 
-    val a4 = 1
-    val a5 = 1.0
+    konst a4 = 1
+    konst a5 = 1.0
 
     @Ann(
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>a1<!>,
@@ -25,5 +25,5 @@ fun foo() {
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"a" + a2<!>,
             "a" + topLevel,
             <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>"a" + a4<!>
-    ) val b = 1
+    ) konst b = 1
 }

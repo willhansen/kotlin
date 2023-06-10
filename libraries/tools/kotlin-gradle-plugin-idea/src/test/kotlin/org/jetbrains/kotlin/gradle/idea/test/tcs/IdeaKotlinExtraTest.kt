@@ -19,7 +19,7 @@ import kotlin.test.Test
 import kotlin.test.fail
 
 @RunWith(Parameterized::class)
-class IdeaKotlinExtraTest(private val node: KClass<*>, private val clazzName: String) {
+class IdeaKotlinExtraTest(private konst node: KClass<*>, private konst clazzName: String) {
 
     @Test
     fun `test - node is data class`() {
@@ -45,11 +45,11 @@ class IdeaKotlinExtraTest(private val node: KClass<*>, private val clazzName: St
 
     @Test
     fun `test - node has companion with key`() {
-        val companion = node.companionObject ?: fail("Missing companion on $clazzName")
-        val keyProperty = companion.memberProperties.find { it.name == "key" } ?: fail("Missing .key on $clazzName.${companion.simpleName}")
-        val keyType = keyProperty.returnType
+        konst companion = node.companionObject ?: fail("Missing companion on $clazzName")
+        konst keyProperty = companion.memberProperties.find { it.name == "key" } ?: fail("Missing .key on $clazzName.${companion.simpleName}")
+        konst keyType = keyProperty.returnType
 
-        val isCorrectType = when {
+        konst isCorrectType = when {
             keyType.classifier != Extras.Key::class -> false
             keyType.arguments.singleOrNull()?.type?.classifier != node -> false
             else -> true

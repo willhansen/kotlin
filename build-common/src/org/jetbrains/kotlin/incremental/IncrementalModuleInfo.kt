@@ -9,29 +9,29 @@ import java.io.File
 import java.io.Serializable
 
 data class IncrementalModuleEntry(
-    private val projectPath: String,
-    val name: String,
-    val buildDir: File,
-    val buildHistoryFile: File,
-    val abiSnapshot: File
+    private konst projectPath: String,
+    konst name: String,
+    konst buildDir: File,
+    konst buildHistoryFile: File,
+    konst abiSnapshot: File
 ) : Serializable {
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 
 class IncrementalModuleInfo(
-    val projectRoot: File,
-    val rootProjectBuildDir: File,
-    val dirToModule: Map<File, IncrementalModuleEntry>,
-    val nameToModules: Map<String, Set<IncrementalModuleEntry>>,
-    val jarToClassListFile: Map<File, File>,
+    konst projectRoot: File,
+    konst rootProjectBuildDir: File,
+    konst dirToModule: Map<File, IncrementalModuleEntry>,
+    konst nameToModules: Map<String, Set<IncrementalModuleEntry>>,
+    konst jarToClassListFile: Map<File, File>,
     // only for js and mpp
-    val jarToModule: Map<File, IncrementalModuleEntry>,
+    konst jarToModule: Map<File, IncrementalModuleEntry>,
     //for JVM only
-    val jarToAbiSnapshot: Map<File, File>
+    konst jarToAbiSnapshot: Map<File, File>
 ) : Serializable {
     companion object {
-        private const val serialVersionUID = 1L
+        private const konst serialVersionUID = 1L
     }
 }

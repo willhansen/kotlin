@@ -28,7 +28,7 @@ private fun convertToFloatingPoint() {
 }
 
 private fun convertWithWhitespaces() {
-    val s = "\u0009 \u000A 2.71 \u000D"
+    konst s = "\u0009 \u000A 2.71 \u000D"
     assertEquals(expected = 2.71F, actual = s.toFloat(),
             message = "String should be cleared of LF, CR, TAB and converted to Float")
     assertEquals(expected = 2.71, actual = s.toDouble(),

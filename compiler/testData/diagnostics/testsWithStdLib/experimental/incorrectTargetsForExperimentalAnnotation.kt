@@ -50,10 +50,10 @@ var some: Int
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@E4<!>
     get() = 42
     @E5
-    set(value) {}
+    set(konstue) {}
 
 <!OPT_IN_MARKER_ON_WRONG_TARGET!>@get:E4<!>
-val another: Int = 42
+konst another: Int = 42
 
 class My {
     @E6
@@ -61,9 +61,9 @@ class My {
 }
 
 interface Base {
-    val bar: Int
+    konst bar: Int
 
-    val baz: Int
+    konst baz: Int
 
     @E6
     fun foo()
@@ -73,7 +73,7 @@ interface Base {
 
 class Derived : Base {
     @E6
-    override val bar: Int = 42
+    override konst bar: Int = 42
 
     @set:E6 <!OPT_IN_MARKER_ON_WRONG_TARGET!>@setparam:E6<!>
     override var baz: Int = 13
@@ -84,35 +84,35 @@ class Derived : Base {
     override fun <!OPT_IN_MARKER_ON_WRONG_TARGET!>@receiver:E6<!> String.withReceiver() {}
 }
 
-class Wrapper(@property:E6 val foo: Int)
+class Wrapper(@property:E6 konst foo: Int)
 
 @E6
 interface BaseMarked {
-    val bar: Int
+    konst bar: Int
 }
 
 @E6
 class Outer {
     interface Nested {
-        val baz: Int
+        konst baz: Int
     }
 }
 
 @OptIn(E6::class)
 class DerivedOptIn : BaseMarked, Outer.Nested {
     @E6
-    override val bar: Int = 42 // Ok
+    override konst bar: Int = 42 // Ok
 
     @E6
-    override val baz: Int = 24 // Ok
+    override konst baz: Int = 24 // Ok
 }
 
-abstract class Another(<!OPT_IN_MARKER_ON_WRONG_TARGET!>@param:E6<!> val x: String) : Base {
+abstract class Another(<!OPT_IN_MARKER_ON_WRONG_TARGET!>@param:E6<!> konst x: String) : Base {
     <!OPT_IN_MARKER_ON_WRONG_TARGET!>@delegate:E6<!>
-    override val bar: Int by lazy { 42 }
+    override konst bar: Int by lazy { 42 }
 
     fun baz(<!OPT_IN_MARKER_ON_WRONG_TARGET!>@E6<!> param: Int) {
-        <!OPT_IN_MARKER_ON_WRONG_TARGET!>@E6<!> val x = param
+        <!OPT_IN_MARKER_ON_WRONG_TARGET!>@E6<!> konst x = param
     }
 }
 
@@ -138,7 +138,7 @@ class X2 : C2 {
     override fun f() {}
 }
 
-open class Y(val b: B): B by b
+open class Y(konst b: B): B by b
 
 class Z(b: B) : Y(b) {
     @E6

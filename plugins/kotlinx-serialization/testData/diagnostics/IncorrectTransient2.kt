@@ -9,13 +9,13 @@ import java.io.Serializable as JavaSerializable
 import kotlin.jvm.Transient as JavaTransient
 
 @Serializable
-class Data(val x: Int, @Transient val y: String = "a")
+class Data(konst x: Int, @Transient konst y: String = "a")
 
 @Serializable
-class Data2(val x: Int, @Transient val y: String = "a") : JavaSerializable
+class Data2(konst x: Int, @Transient konst y: String = "a") : JavaSerializable
 
 @Serializable
-class Data3(val x: Int, @Transient @JavaTransient val y: String = "a") : JavaSerializable
+class Data3(konst x: Int, @Transient @JavaTransient konst y: String = "a") : JavaSerializable
 
 @Serializable
-class Data4(val x: Int, <!INCORRECT_TRANSIENT!>@JavaTransient<!> val y: String)
+class Data4(konst x: Int, <!INCORRECT_TRANSIENT!>@JavaTransient<!> konst y: String)

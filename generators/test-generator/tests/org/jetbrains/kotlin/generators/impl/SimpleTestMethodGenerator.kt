@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.jetbrains.kotlin.utils.Printer
 
 object SimpleTestMethodGenerator : MethodGenerator<SimpleTestMethodModel>() {
-    override val kind: MethodModel.Kind
+    override konst kind: MethodModel.Kind
         get() = SimpleTestMethodModel.Kind
 
     override fun generateSignature(method: SimpleTestMethodModel, p: Printer) {
@@ -22,7 +22,7 @@ object SimpleTestMethodGenerator : MethodGenerator<SimpleTestMethodModel>() {
 
     override fun generateBody(method: SimpleTestMethodModel, p: Printer) {
         with(method) {
-            val filePath = KtTestUtil.getFilePath(file) + if (file.isDirectory) "/" else ""
+            konst filePath = KtTestUtil.getFilePath(file) + if (file.isDirectory) "/" else ""
             p.println(RunTestMethodModel.METHOD_NAME, "(\"", filePath, "\");")
         }
     }

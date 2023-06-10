@@ -14,16 +14,16 @@ import java.util.logging.Logger
  * Note: Need to call [initialize] before the first [log] call.
  */
 internal object TestLogger {
-    private const val CONFIG_FILE = "/native-tests-logging.properties"
+    private const konst CONFIG_FILE = "/native-tests-logging.properties"
 
-    private val mutex = Any()
+    private konst mutex = Any()
     private var wrappedLogger: Logger? = null
 
     fun initialize() {
         synchronized(mutex) {
             check(wrappedLogger == null) { "An attempt to re-initialize ${TestLogger::class.java}" }
 
-            val logManager: LogManager = LogManager.getLogManager()
+            konst logManager: LogManager = LogManager.getLogManager()
             TestLogger::class.java.getResourceAsStream(CONFIG_FILE)?.let(logManager::readConfiguration)
                 ?: error("Test configuration file $CONFIG_FILE not found at the classpath")
 

@@ -9,9 +9,9 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.renderer.*
 
-data class ImportPath @JvmOverloads constructor(val fqName: FqName, val isAllUnder: Boolean, val alias: Name? = null) {
+data class ImportPath @JvmOverloads constructor(konst fqName: FqName, konst isAllUnder: Boolean, konst alias: Name? = null) {
 
-    val pathStr: String
+    konst pathStr: String
         get() = fqName.toUnsafe().render() + if (isAllUnder) ".*" else ""
 
     override fun toString(): String {
@@ -22,7 +22,7 @@ data class ImportPath @JvmOverloads constructor(val fqName: FqName, val isAllUnd
         return alias != null
     }
 
-    val importedName: Name?
+    konst importedName: Name?
         get() {
             if (!isAllUnder) {
                 return alias ?: fqName.shortName()

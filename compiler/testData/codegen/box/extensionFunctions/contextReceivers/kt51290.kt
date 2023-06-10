@@ -21,11 +21,11 @@ fun startBusinessOperation() {
 class CompositeContext(c1: LoggingContext, c2: SaveRepository<Language>): LoggingContext by c1, SaveRepository<Language> by c2
 
 fun box(): String {
-    val loggingCtx = object : LoggingContext {
+    konst loggingCtx = object : LoggingContext {
         override fun log(level: Int, message: String) {}
     }
 
-    val saveCtx = object : SaveRepository<Language> {
+    konst saveCtx = object : SaveRepository<Language> {
         context(LoggingContext)
         override fun save(content: Language) {
             log(message = "Saving $content", level = 123)

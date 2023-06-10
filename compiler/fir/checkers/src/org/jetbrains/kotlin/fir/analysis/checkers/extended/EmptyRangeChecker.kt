@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.fir.expressions.FirFunctionCall
 object EmptyRangeChecker : FirFunctionCallChecker() {
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.source?.kind is KtFakeSourceElementKind) return
-        val left = expression.rangeLeft ?: return
-        val right = expression.rangeRight ?: return
+        konst left = expression.rangeLeft ?: return
+        konst right = expression.rangeRight ?: return
 
-        val needReport = when (expression.calleeReference.name.asString()) {
+        konst needReport = when (expression.calleeReference.name.asString()) {
             "rangeTo" -> {
                 left > right
             }
@@ -38,14 +38,14 @@ object EmptyRangeChecker : FirFunctionCallChecker() {
         }
     }
 
-    private val FirFunctionCall.rangeLeft: Long?
+    private konst FirFunctionCall.rangeLeft: Long?
         get() {
-            return (explicitReceiver as? FirConstExpression<*>)?.value as? Long
+            return (explicitReceiver as? FirConstExpression<*>)?.konstue as? Long
         }
 
-    private val FirFunctionCall.rangeRight: Long?
+    private konst FirFunctionCall.rangeRight: Long?
         get() {
-            val arg = argumentList.arguments.getOrNull(0) as? FirConstExpression<*>
-            return arg?.value as? Long
+            konst arg = argumentList.arguments.getOrNull(0) as? FirConstExpression<*>
+            return arg?.konstue as? Long
         }
 }

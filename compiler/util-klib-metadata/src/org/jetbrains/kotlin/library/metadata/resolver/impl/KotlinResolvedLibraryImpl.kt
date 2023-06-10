@@ -4,12 +4,12 @@ import org.jetbrains.kotlin.library.KotlinLibrary
 import org.jetbrains.kotlin.library.metadata.parseModuleHeader
 import org.jetbrains.kotlin.library.metadata.resolver.KotlinResolvedLibrary
 
-class KotlinResolvedLibraryImpl(override val library: KotlinLibrary): KotlinResolvedLibrary {
+class KotlinResolvedLibraryImpl(override konst library: KotlinLibrary): KotlinResolvedLibrary {
 
-    private val _resolvedDependencies = mutableListOf<KotlinResolvedLibrary>()
-    private val _emptyPackages by lazy { parseModuleHeader(library.moduleHeaderData).emptyPackageList }
+    private konst _resolvedDependencies = mutableListOf<KotlinResolvedLibrary>()
+    private konst _emptyPackages by lazy { parseModuleHeader(library.moduleHeaderData).emptyPackageList }
 
-    override val resolvedDependencies: List<KotlinResolvedLibrary>
+    override konst resolvedDependencies: List<KotlinResolvedLibrary>
         get() = _resolvedDependencies
 
     internal fun addDependency(resolvedLibrary: KotlinResolvedLibrary) = _resolvedDependencies.add(resolvedLibrary)
@@ -17,7 +17,7 @@ class KotlinResolvedLibraryImpl(override val library: KotlinLibrary): KotlinReso
     override var isNeededForLink: Boolean = false
         private set
 
-    override val isDefault: Boolean
+    override konst isDefault: Boolean
         get() = library.isDefault
 
     override fun markNeededForLink(

@@ -27,6 +27,6 @@ fun foo() {
     x.add(<!TYPE_MISMATCH!>bar()<!>)
     x.add("")
 
-    val b1: Collection<String?> = x
-    val b2: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
+    konst b1: Collection<String?> = x
+    konst b2: MutableCollection<String?> = <!TYPE_MISMATCH!>x<!>
 }

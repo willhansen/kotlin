@@ -29,17 +29,17 @@ fun case_1(x: Inv<Int>?) {
 // TESTCASE NUMBER: 2
 fun case_2(a: Inv<Inv<Inv<Inv<Inv<Inv<Int?>?>?>?>?>?>?) {
     if (a != null) {
-        val b = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?> & Inv<Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>a<!>.get()
+        konst b = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?> & Inv<Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>a<!>.get()
         if (b != null) {
-            val c = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?> & Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>b<!>.get()
+            konst c = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?> & Inv<Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>b<!>.get()
             if (c != null) {
-                val d = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?> & Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>c<!>.get()
+                konst d = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?> & Inv<Inv<Inv<Inv<kotlin.Int?>?>?>?>?"), DEBUG_INFO_SMARTCAST!>c<!>.get()
                 if (d != null) {
-                    val e = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<kotlin.Int?>?>?> & Inv<Inv<Inv<kotlin.Int?>?>?>?"), DEBUG_INFO_SMARTCAST!>d<!>.get()
+                    konst e = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<Inv<kotlin.Int?>?>?> & Inv<Inv<Inv<kotlin.Int?>?>?>?"), DEBUG_INFO_SMARTCAST!>d<!>.get()
                     if (e != null) {
-                        val f = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<kotlin.Int?>?> & Inv<Inv<kotlin.Int?>?>?"), DEBUG_INFO_SMARTCAST!>e<!>.get()
+                        konst f = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<Inv<kotlin.Int?>?> & Inv<Inv<kotlin.Int?>?>?"), DEBUG_INFO_SMARTCAST!>e<!>.get()
                         if (f != null) {
-                            val g = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.Int?> & Inv<kotlin.Int?>?"), DEBUG_INFO_SMARTCAST!>f<!>.get()
+                            konst g = <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.Int?> & Inv<kotlin.Int?>?"), DEBUG_INFO_SMARTCAST!>f<!>.get()
                             if (g != null) {
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?")!>g<!>
                                 <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Int & kotlin.Int?"), DEBUG_INFO_SMARTCAST!>g<!>.equals(null)
@@ -63,7 +63,7 @@ fun case_2(a: Inv<Inv<Inv<Inv<Inv<Inv<Int?>?>?>?>?>?>?) {
 // TESTCASE NUMBER: 3
 fun case_3(a: Inv<Int>?) {
     if (a != null) {
-        val b = a
+        konst b = a
         if (<!SENSELESS_COMPARISON!>a == null<!>) {
             <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.Int> & Inv<kotlin.Int>?")!>b<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.Int> & Inv<kotlin.Int>?"), DEBUG_INFO_SMARTCAST!>b<!>.equals(null)
@@ -112,7 +112,7 @@ fun case_5() {
 
 // TESTCASE NUMBER: 6
 fun case_6() {
-    val x: Inv<Int>? = null
+    konst x: Inv<Int>? = null
 
     if (x != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("Inv<kotlin.Int> & Inv<kotlin.Int>?")!>x<!>

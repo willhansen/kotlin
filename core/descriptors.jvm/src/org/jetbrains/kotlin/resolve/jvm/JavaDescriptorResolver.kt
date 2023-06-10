@@ -24,17 +24,17 @@ import org.jetbrains.kotlin.load.java.structure.JavaClass
 import org.jetbrains.kotlin.load.java.structure.LightClassOriginKind
 
 class JavaDescriptorResolver(
-    val packageFragmentProvider: LazyJavaPackageFragmentProvider,
-    private val javaResolverCache: JavaResolverCache
+    konst packageFragmentProvider: LazyJavaPackageFragmentProvider,
+    private konst javaResolverCache: JavaResolverCache
 ) {
     fun resolveClass(javaClass: JavaClass): ClassDescriptor? {
-        val fqName = javaClass.fqName
+        konst fqName = javaClass.fqName
         if (fqName != null && javaClass.lightClassOriginKind == LightClassOriginKind.SOURCE) {
             return javaResolverCache.getClassResolvedFromSource(fqName)
         }
 
         javaClass.outerClass?.let { outerClass ->
-            val outerClassScope = resolveClass(outerClass)?.unsubstitutedInnerClassesScope
+            konst outerClassScope = resolveClass(outerClass)?.unsubstitutedInnerClassesScope
             return outerClassScope?.getContributedClassifier(javaClass.name, NoLookupLocation.FROM_JAVA_LOADER) as? ClassDescriptor
         }
 

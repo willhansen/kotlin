@@ -21,12 +21,12 @@ class FirAnnotationArgumentsResolveProcessor(
     session: FirSession,
     scopeSession: ScopeSession
 ) : FirTransformerBasedResolveProcessor(session, scopeSession, FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS) {
-    override val transformer: FirTransformer<Any?> = FirAnnotationArgumentsResolveTransformerAdapter(session, scopeSession)
+    override konst transformer: FirTransformer<Any?> = FirAnnotationArgumentsResolveTransformerAdapter(session, scopeSession)
 }
 
 @AdapterForResolveProcessor
 class FirAnnotationArgumentsResolveTransformerAdapter(session: FirSession, scopeSession: ScopeSession) : FirTransformer<Any?>() {
-    private val transformer = FirAnnotationArgumentsResolveTransformer(session, scopeSession, FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS)
+    private konst transformer = FirAnnotationArgumentsResolveTransformer(session, scopeSession, FirResolvePhase.ARGUMENTS_OF_ANNOTATIONS)
 
     override fun <E : FirElement> transformElement(element: E, data: Any?): E {
         return element

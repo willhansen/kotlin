@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.fir.FirFileAnnotationsContainer
 
 class FirFileAnnotationsContainerRenderer {
     internal lateinit var components: FirRendererComponents
-    private val printer get() = components.printer
+    private konst printer get() = components.printer
 
     fun render(fileAnnotationsContainer: FirFileAnnotationsContainer) {
         components.annotationRenderer?.render(fileAnnotationsContainer)

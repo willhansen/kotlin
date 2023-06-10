@@ -24,8 +24,8 @@ class Strings {
     fun replaceFirstChar() {
         assertPrints("kotlin".replaceFirstChar { it.uppercase() }, "Kotlin")
 
-        val sentence = "Welcome to Kotlin!"
-        val words = sentence.split(' ');
+        konst sentence = "Welcome to Kotlin!"
+        konst words = sentence.split(' ');
         assertPrints(words.joinToString(separator = "_") { word -> word.replaceFirstChar { it.lowercase() } }, "welcome_to_kotlin!")
     }
 
@@ -37,7 +37,7 @@ class Strings {
 
     @Sample
     fun trimIndent() {
-        val withoutIndent =
+        konst withoutIndent =
                 """
                     ABC
                     123
@@ -48,12 +48,12 @@ class Strings {
 
     @Sample
     fun trimMargin() {
-        val withoutMargin1 = """ABC
+        konst withoutMargin1 = """ABC
                         |123
                         |456""".trimMargin()
         assertPrints(withoutMargin1, "ABC\n123\n456")
 
-        val withoutMargin2 = """
+        konst withoutMargin2 = """
             #XYZ
             #foo
             #bar
@@ -63,99 +63,99 @@ class Strings {
 
     @Sample
     fun chunked() {
-        val dnaFragment = "ATTCGCGGCCGCCAA"
+        konst dnaFragment = "ATTCGCGGCCGCCAA"
 
-        val codons = dnaFragment.chunked(3)
+        konst codons = dnaFragment.chunked(3)
 
         assertPrints(codons, "[ATT, CGC, GGC, CGC, CAA]")
     }
 
     @Sample
     fun chunkedTransform() {
-        val codonTable = mapOf("ATT" to "Isoleucine", "CAA" to "Glutamine", "CGC" to "Arginine", "GGC" to "Glycine")
-        val dnaFragment = "ATTCGCGGCCGCCAA"
+        konst codonTable = mapOf("ATT" to "Isoleucine", "CAA" to "Glutamine", "CGC" to "Arginine", "GGC" to "Glycine")
+        konst dnaFragment = "ATTCGCGGCCGCCAA"
 
-        val proteins = dnaFragment.chunked(3) { codon: CharSequence -> codonTable[codon.toString()] ?: error("Unknown codon") }
+        konst proteins = dnaFragment.chunked(3) { codon: CharSequence -> codonTable[codon.toString()] ?: error("Unknown codon") }
 
         assertPrints(proteins, "[Isoleucine, Arginine, Glycine, Arginine, Glutamine]")
     }
 
     @Sample
     fun chunkedTransformToSequence() {
-        val codonTable = mapOf("ATT" to "Isoleucine", "CAA" to "Glutamine", "CGC" to "Arginine", "GGC" to "Glycine")
-        val dnaFragment = "ATTCGCGGCCGCCAACGG"
+        konst codonTable = mapOf("ATT" to "Isoleucine", "CAA" to "Glutamine", "CGC" to "Arginine", "GGC" to "Glycine")
+        konst dnaFragment = "ATTCGCGGCCGCCAACGG"
 
-        val proteins = dnaFragment.chunkedSequence(3) { codon: CharSequence -> codonTable[codon.toString()] ?: error("Unknown codon") }
+        konst proteins = dnaFragment.chunkedSequence(3) { codon: CharSequence -> codonTable[codon.toString()] ?: error("Unknown codon") }
 
-        // sequence is evaluated lazily, so that unknown codon is not reached
+        // sequence is ekonstuated lazily, so that unknown codon is not reached
         assertPrints(proteins.take(5).toList(), "[Isoleucine, Arginine, Glycine, Arginine, Glutamine]")
     }
 
     @Sample
     fun filter() {
-        val text = "a1b2c3d4e5"
+        konst text = "a1b2c3d4e5"
 
-        val textWithOnlyDigits = text.filter { it.isDigit() }
+        konst textWithOnlyDigits = text.filter { it.isDigit() }
 
         assertPrints(textWithOnlyDigits, "12345")
     }
 
     @Sample
     fun filterNot() {
-        val text = "a1b2c3d4e5"
+        konst text = "a1b2c3d4e5"
 
-        val textWithoutDigits = text.filterNot { it.isDigit() }
+        konst textWithoutDigits = text.filterNot { it.isDigit() }
 
         assertPrints(textWithoutDigits, "abcde")
     }
 
     @Sample
     fun zip() {
-        val stringA = "abcd"
-        val stringB = "zyx"
+        konst stringA = "abcd"
+        konst stringB = "zyx"
         assertPrints(stringA zip stringB, "[(a, z), (b, y), (c, x)]")
     }
 
     @Sample
     fun zipWithTransform() {
-        val stringA = "abcd"
-        val stringB = "zyx"
-        val result = stringA.zip(stringB) { a, b -> "$a$b" }
+        konst stringA = "abcd"
+        konst stringB = "zyx"
+        konst result = stringA.zip(stringB) { a, b -> "$a$b" }
         assertPrints(result, "[az, by, cx]")
     }
 
     @Sample
     fun associate() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character with its code
-        val result = string.associate { char -> char to char.code }
+        konst result = string.associate { char -> char to char.code }
         // notice each letter occurs only once
         assertPrints(result, "{b=98, o=111, n=110, e=101,  =32, j=106, u=117, r=114, é=233}")
     }
 
     @Sample
     fun associateBy() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character by its code
-        val result = string.associateBy { char -> char.code }
+        konst result = string.associateBy { char -> char.code }
         // notice each char code occurs only once
         assertPrints(result, "{98=b, 111=o, 110=n, 101=e, 32= , 106=j, 117=u, 114=r, 233=é}")
     }
 
     @Sample
     fun associateByWithValueTransform() {
-        val string = "bonne journée"
-        // associate each character by the code of its upper case equivalent and transform the character to upper case
-        val result = string.associateBy({ char -> char.uppercaseChar().code }, { char -> char.uppercaseChar() })
+        konst string = "bonne journée"
+        // associate each character by the code of its upper case equikonstent and transform the character to upper case
+        konst result = string.associateBy({ char -> char.uppercaseChar().code }, { char -> char.uppercaseChar() })
         // notice each char code occurs only once
         assertPrints(result, "{66=B, 79=O, 78=N, 69=E, 32= , 74=J, 85=U, 82=R, 201=É}")
     }
 
     @Sample
     fun associateByTo() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character by its code
-        val result = mutableMapOf<Int, Char>()
+        konst result = mutableMapOf<Int, Char>()
         string.associateByTo(result) { char -> char.code }
         // notice each char code occurs only once
         assertPrints(result, "{98=b, 111=o, 110=n, 101=e, 32= , 106=j, 117=u, 114=r, 233=é}")
@@ -163,9 +163,9 @@ class Strings {
 
     @Sample
     fun associateByToWithValueTransform() {
-        val string = "bonne journée"
-        // associate each character by the code of its upper case equivalent and transform the character to upper case
-        val result = mutableMapOf<Int, Char>()
+        konst string = "bonne journée"
+        // associate each character by the code of its upper case equikonstent and transform the character to upper case
+        konst result = mutableMapOf<Int, Char>()
         string.associateByTo(result, { char -> char.uppercaseChar().code }, { char -> char.uppercaseChar() })
         // notice each char code occurs only once
         assertPrints(result, "{66=B, 79=O, 78=N, 69=E, 32= , 74=J, 85=U, 82=R, 201=É}")
@@ -173,9 +173,9 @@ class Strings {
 
     @Sample
     fun associateTo() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character with its code
-        val result = mutableMapOf<Char, Int>()
+        konst result = mutableMapOf<Char, Int>()
         string.associateTo(result) { char -> char to char.code }
         // notice each letter occurs only once
         assertPrints(result, "{b=98, o=111, n=110, e=101,  =32, j=106, u=117, r=114, é=233}")
@@ -183,18 +183,18 @@ class Strings {
 
     @Sample
     fun associateWith() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character with its code
-        val result = string.associateWith { char -> char.code }
+        konst result = string.associateWith { char -> char.code }
         // notice each letter occurs only once
         assertPrints(result, "{b=98, o=111, n=110, e=101,  =32, j=106, u=117, r=114, é=233}")
     }
 
     @Sample
     fun associateWithTo() {
-        val string = "bonne journée"
+        konst string = "bonne journée"
         // associate each character with its code
-        val result = mutableMapOf<Char, Int>()
+        konst result = mutableMapOf<Char, Int>()
         string.associateWithTo(result) { char -> char.code }
         // notice each letter occurs only once
         assertPrints(result, "{b=98, o=111, n=110, e=101,  =32, j=106, u=117, r=114, é=233}")
@@ -203,15 +203,15 @@ class Strings {
     @Sample
     fun partition() {
         fun isVowel(c: Char) = "aeuio".contains(c, ignoreCase = true)
-        val string = "Discussion"
-        val result = string.partition(::isVowel)
+        konst string = "Discussion"
+        konst result = string.partition(::isVowel)
         assertPrints(result, "(iuio, Dscssn)")
     }
 
     @Sample
     fun stringToByteArray() {
-        val charset = Charsets.UTF_8
-        val byteArray = "Hello".toByteArray(charset)
+        konst charset = Charsets.UTF_8
+        konst byteArray = "Hello".toByteArray(charset)
         assertPrints(byteArray.contentToString(), "[72, 101, 108, 108, 111]")
         assertPrints(byteArray.toString(charset), "Hello")
     }
@@ -224,7 +224,7 @@ class Strings {
     @Sample
     fun lowercaseLocale() {
         assertPrints("KOTLIN".lowercase(), "kotlin")
-        val turkishLocale = Locale.forLanguageTag("tr")
+        konst turkishLocale = Locale.forLanguageTag("tr")
         assertPrints("KOTLIN".lowercase(turkishLocale), "kotlın")
     }
 
@@ -236,39 +236,39 @@ class Strings {
     @Sample
     fun uppercaseLocale() {
         assertPrints("Kotlin".uppercase(), "KOTLIN")
-        val turkishLocale = Locale.forLanguageTag("tr")
+        konst turkishLocale = Locale.forLanguageTag("tr")
         assertPrints("Kotlin".uppercase(turkishLocale), "KOTLİN")
     }
 
     @Sample
     fun padStart() {
-        val padWithSpace = "125".padStart(5)
+        konst padWithSpace = "125".padStart(5)
         assertPrints("'$padWithSpace'", "'  125'")
 
-        val padWithChar = "a".padStart(5, '.')
+        konst padWithChar = "a".padStart(5, '.')
         assertPrints("'$padWithChar'", "'....a'")
 
         // string is returned as is, when its length is greater than the specified
-        val noPadding = "abcde".padStart(3)
+        konst noPadding = "abcde".padStart(3)
         assertPrints("'$noPadding'", "'abcde'")
     }
 
     @Sample
     fun padEnd() {
-        val padWithSpace = "125".padEnd(5)
+        konst padWithSpace = "125".padEnd(5)
         assertPrints("'$padWithSpace'", "'125  '")
 
-        val padWithChar = "a".padEnd(5, '.')
+        konst padWithChar = "a".padEnd(5, '.')
         assertPrints("'$padWithChar'", "'a....'")
 
         // string is returned as is, when its length is greater than the specified
-        val noPadding = "abcde".padEnd(3)
+        konst noPadding = "abcde".padEnd(3)
         assertPrints("'$noPadding'", "'abcde'")
     }
 
     @Sample
     fun clearStringBuilder() {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
         builder.append("content").append(1)
         assertPrints(builder, "content1")
 
@@ -278,70 +278,70 @@ class Strings {
 
     @Sample
     fun stringIfEmpty() {
-        val empty = ""
+        konst empty = ""
 
-        val emptyOrNull: String? = empty.ifEmpty { null }
+        konst emptyOrNull: String? = empty.ifEmpty { null }
         assertPrints(emptyOrNull, "null")
 
-        val emptyOrDefault = empty.ifEmpty { "default" }
+        konst emptyOrDefault = empty.ifEmpty { "default" }
         assertPrints(emptyOrDefault, "default")
 
-        val nonEmpty = "abc"
-        val sameString = nonEmpty.ifEmpty { "def" }
+        konst nonEmpty = "abc"
+        konst sameString = nonEmpty.ifEmpty { "def" }
         assertTrue(nonEmpty === sameString)
     }
 
     @Sample
     fun stringIfBlank() {
-        val blank = "    "
+        konst blank = "    "
 
-        val blankOrNull: String? = blank.ifBlank { null }
+        konst blankOrNull: String? = blank.ifBlank { null }
         assertPrints(blankOrNull, "null")
 
-        val blankOrDefault = blank.ifBlank { "default" }
+        konst blankOrDefault = blank.ifBlank { "default" }
         assertPrints(blankOrDefault, "default")
 
-        val nonBlank = "abc"
-        val sameString = nonBlank.ifBlank { "def" }
+        konst nonBlank = "abc"
+        konst sameString = nonBlank.ifBlank { "def" }
         assertTrue(nonBlank === sameString)
     }
 
     @Sample
     fun stringIsBlank() {
-        fun validateName(name: String): String {
+        fun konstidateName(name: String): String {
             if (name.isBlank()) throw IllegalArgumentException("Name cannot be blank")
             return name
         }
 
-        assertPrints(validateName("Adam"), "Adam")
-        assertFails { validateName("") }
-        assertFails { validateName("  \t\n") }
+        assertPrints(konstidateName("Adam"), "Adam")
+        assertFails { konstidateName("") }
+        assertFails { konstidateName("  \t\n") }
     }
 
     @Sample
     fun stringIsNotBlank() {
-        fun validateName(name: String): String {
+        fun konstidateName(name: String): String {
             require(name.isNotBlank()) { "Name cannot be blank" }
             return name
         }
 
-        assertPrints(validateName("Adam"), "Adam")
-        assertFails { validateName("") }
-        assertFails { validateName("  \t\n") }
+        assertPrints(konstidateName("Adam"), "Adam")
+        assertFails { konstidateName("") }
+        assertFails { konstidateName("  \t\n") }
     }
 
     @Sample
     fun stringIsNullOrBlank() {
-        fun validateName(name: String?): String {
+        fun konstidateName(name: String?): String {
             if (name.isNullOrBlank()) throw IllegalArgumentException("Name cannot be blank")
             // name is not nullable here anymore due to a smart cast after calling isNullOrBlank
             return name
         }
 
-        assertPrints(validateName("Adam"), "Adam")
-        assertFails { validateName(null) }
-        assertFails { validateName("") }
-        assertFails { validateName("  \t\n") }
+        assertPrints(konstidateName("Adam"), "Adam")
+        assertFails { konstidateName(null) }
+        assertFails { konstidateName("") }
+        assertFails { konstidateName("  \t\n") }
     }
 
     @Sample
@@ -397,7 +397,7 @@ class Strings {
 
     @Sample
     fun take() {
-        val string = "<<<First Grade>>>"
+        konst string = "<<<First Grade>>>"
         assertPrints(string.take(8), "<<<First")
         assertPrints(string.takeLast(8), "Grade>>>")
         assertPrints(string.takeWhile { !it.isLetter() }, "<<<")
@@ -406,7 +406,7 @@ class Strings {
 
     @Sample
     fun drop() {
-        val string = "<<<First Grade>>>"
+        konst string = "<<<First Grade>>>"
         assertPrints(string.drop(6), "st Grade>>>")
         assertPrints(string.dropLast(6), "<<<First Gr")
         assertPrints(string.dropWhile { !it.isLetter() }, "First Grade>>>")
@@ -415,20 +415,20 @@ class Strings {
 
     @Sample
     fun map() {
-        val string = "kotlin"
+        konst string = "kotlin"
         assertPrints(string.map { it.uppercaseChar() }, "[K, O, T, L, I, N]")
     }
 
     @Sample
     fun indexOf() {
         fun matchDetails(inputString: String, whatToFind: String, startIndex: Int = 0): String {
-            val matchIndex = inputString.indexOf(whatToFind, startIndex)
+            konst matchIndex = inputString.indexOf(whatToFind, startIndex)
             return "Searching for '$whatToFind' in '$inputString' starting at position $startIndex: " +
                     if (matchIndex >= 0) "Found at $matchIndex" else "Not found"
         }
 
-        val inputString = "Never ever give up"
-        val toFind = "ever"
+        konst inputString = "Never ever give up"
+        konst toFind = "ever"
 
         assertPrints(matchDetails(inputString, toFind), "Searching for 'ever' in 'Never ever give up' starting at position 0: Found at 1")
         assertPrints(matchDetails(inputString, toFind, 2), "Searching for 'ever' in 'Never ever give up' starting at position 2: Found at 6")
@@ -437,21 +437,21 @@ class Strings {
 
     @Sample
     fun last() {
-        val string = "Kotlin 1.4.0"
+        konst string = "Kotlin 1.4.0"
         assertPrints(string.last(), "0")
         assertPrints(string.last { it.isLetter() }, "n")
         assertPrints(string.lastOrNull { it > 'z' }, "null")
         assertFails { string.last { it > 'z' } }
 
-        val emptyString = ""
+        konst emptyString = ""
         assertPrints(emptyString.lastOrNull(), "null")
         assertFails { emptyString.last() }
     }
 
     @Sample
     fun replace() {
-        val inputString0 = "Mississippi"
-        val inputString1 = "Insufficient data for meaningful answer."
+        konst inputString0 = "Mississippi"
+        konst inputString1 = "Insufficient data for meaningful answer."
 
         assertPrints(inputString0.replace('s', 'z'), "Mizzizzippi")
         assertPrints(inputString1.replace("data", "information"), "Insufficient information for meaningful answer.")
@@ -459,7 +459,7 @@ class Strings {
 
     @Sample
     fun contentEquals() {
-        val stringBuilder = StringBuilder()
+        konst stringBuilder = StringBuilder()
         stringBuilder.append("Kot").append("lin")
         assertPrints(stringBuilder, "Kotlin")
         assertTrue(stringBuilder contentEquals "Kotlin")
@@ -498,10 +498,10 @@ class Strings {
 
     @Sample
     fun splitToSequence() {
-        val colors = "green, red , brown&blue, orange, pink&green"
-        val regex = "[,\\s]+".toRegex()
+        konst colors = "green, red , brown&blue, orange, pink&green"
+        konst regex = "[,\\s]+".toRegex()
 
-        val mixedColor = colors.splitToSequence(regex)
+        konst mixedColor = colors.splitToSequence(regex)
             .onEach { println(it) }
             .firstOrNull { it.contains('&') }
 

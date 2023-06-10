@@ -3,7 +3,7 @@ var doubleCompareToInvocations = 0
 
 private operator fun Long?.compareTo(other: Long?): Int {
     longCompareToInvocations++
-    val diff = (this ?: 0L) - (other ?: 0L)
+    konst diff = (this ?: 0L) - (other ?: 0L)
     return when {
         diff < 0L -> -1
         diff > 0L -> 1
@@ -13,7 +13,7 @@ private operator fun Long?.compareTo(other: Long?): Int {
 
 private operator fun Double?.compareTo(other: Double?): Int {
     doubleCompareToInvocations++
-    val diff = (this ?: 0.0) - (other ?: 0.0)
+    konst diff = (this ?: 0.0) - (other ?: 0.0)
     return when {
         diff < 0.0 -> -1
         diff > 0.0 -> 1
@@ -22,8 +22,8 @@ private operator fun Double?.compareTo(other: Double?): Int {
 }
 
 fun checkLong(): String? {
-    val a: Long? = null
-    val b: Long? = 42L
+    konst a: Long? = null
+    konst b: Long? = 42L
 
     if (a > b) return "Fail Long >"
     if (a >= b) return "Fail Long >="
@@ -36,8 +36,8 @@ fun checkLong(): String? {
 }
 
 fun checkDouble(): String? {
-    val a: Double? = null
-    val b: Double? = 3.14
+    konst a: Double? = null
+    konst b: Double? = 3.14
 
     if (a > b) return "Fail Double >"
     if (a >= b) return "Fail Double >="

@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-annotation class Ann(vararg val i: Int)
+annotation class Ann(vararg konst i: Int)
 
 @Ann(
         <!ANNOTATION_ARGUMENT_MUST_BE_CONST!>i1<!>,
@@ -12,8 +12,8 @@ annotation class Ann(vararg val i: Int)
 class Test
 
 var i1 = 1  // var
-const val i2 = 1  // val
-val i3 = i1 // val with var in initializer
-const val i4 = i2 // val with val in initializer
+const konst i2 = 1  // konst
+konst i3 = i1 // konst with var in initializer
+const konst i4 = i2 // konst with konst in initializer
 var i5 = i1 // var with var in initializer
-var i6 = i2 // var with val in initializer
+var i6 = i2 // var with konst in initializer

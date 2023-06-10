@@ -3,7 +3,7 @@
 // WITH_STDLIB
 
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Ann(vararg val p: Int)
+annotation class Ann(vararg konst p: Int)
 
 @Ann() class MyClass1
 @Ann(1) class MyClass2
@@ -34,7 +34,7 @@ fun box(): String {
 }
 
 fun test(klass: Class<*>, expected: String) {
-    val ann = klass.getAnnotation(Ann::class.java)
+    konst ann = klass.getAnnotation(Ann::class.java)
     if (ann == null) throw AssertionError("fail: cannot find Ann on ${klass}")
 
     var result = ""

@@ -1,20 +1,20 @@
 // JVM_TARGET: 11
 class A
 
-inline class IC(val x: String)
+inline class IC(konst x: String)
 
 inline fun test(s: (String) -> Unit) {
     s("456")
 }
 
 fun box(a: String, b: String?, x: IC?) {
-    val p = 3147483648u
-    val s = a + "1" + "2" + 3 + 4L + b + 5.0 + 6F + '7' + A() + true + false + 3147483647u + p + x
+    konst p = 3147483648u
+    konst s = a + "1" + "2" + 3 + 4L + b + 5.0 + 6F + '7' + A() + true + false + 3147483647u + p + x
 
     a.plus(b)
     b?.plus(a)
-    val ref1 = a::plus
-    val ref2 = b::plus
+    konst ref1 = a::plus
+    konst ref2 = b::plus
 
     test("123"::plus)
 }

@@ -27,9 +27,9 @@ public sealed interface Cleaner
  * Example of usage:
  * ```
  * class ResourceWrapper {
- *     private val resource = Resource()
+ *     private konst resource = Resource()
  *
- *     private val cleaner = createCleaner(resource) { it.dispose() }
+ *     private konst cleaner = createCleaner(resource) { it.dispose() }
  * }
  * ```
  *
@@ -44,8 +44,8 @@ public sealed interface Cleaner
  * For example, the code below has a leak:
  * ```
  * class LeakingResourceWrapper {
- *     private val resource = Resource()
- *     private val cleaner = createCleaner(this) { it.resource.dispose() }
+ *     private konst resource = Resource()
+ *     private konst cleaner = createCleaner(this) { it.resource.dispose() }
  * }
  * ```
  * In this case cleaner's argument (`LeakingResourceWrapper`) can't be deallocated
@@ -55,10 +55,10 @@ public sealed interface Cleaner
  * in this case, which can't be handled gracefully. The cleanup action
  * is not executed then, and cleaner and its argument might leak
  * (depending on the implementation).
- * The same problem occures when [cleanupAction] captures a value that refers (directly or indirectly) the cleaner:
+ * The same problem occures when [cleanupAction] captures a konstue that refers (directly or indirectly) the cleaner:
  * ```
  * class LeakingResourceWrapper {
- *     private val cleaner = createCleaner(...) {
+ *     private konst cleaner = createCleaner(...) {
  *         doSomething()
  *         ...
  *     }
@@ -97,13 +97,13 @@ internal fun <T> createCleanerImpl(resource: T, cleanupAction: (T) -> Unit): Cle
     if (!resource.isShareable())
         throw IllegalArgumentException("$resource must be shareable")
 
-    val clean = {
+    konst clean = {
         // TODO: Maybe if this fails with exception, it should be (optionally) reported.
         cleanupAction(resource)
     }.freeze()
 
     // Make sure there's an extra reference to clean, so it's definitely alive when CleanerImpl is destroyed.
-    val cleanPtr = createStablePointer(clean)
+    konst cleanPtr = createStablePointer(clean)
 
     // Make sure cleaner worker is initialized.
     getCleanerWorker()
@@ -117,7 +117,7 @@ internal fun <T> createCleanerImpl(resource: T, cleanupAction: (T) -> Unit): Cle
 @ExportTypeInfo("theCleanerImplTypeInfo")
 @HasFinalizer
 private class CleanerImpl(
-        private val cleanPtr: NativePtr,
+        private konst cleanPtr: NativePtr,
 ): Cleaner, kotlin.native.internal.Cleaner {}
 
 

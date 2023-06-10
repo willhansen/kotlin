@@ -32,7 +32,7 @@ class BContainer {
 package foo
 
 fun test(base: Container.Base) {
-    val x = when (base) {
+    konst x = when (base) {
         is A -> 1
         is BContainer.B -> 2
         is BContainer.C -> 3

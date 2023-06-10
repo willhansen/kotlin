@@ -10,7 +10,7 @@ class correct(x: Int) {
   constructor()
 
   @base
-  val x: Int
+  konst x: Int
 }
 
 @base
@@ -23,5 +23,5 @@ enum class My {
 fun foo(@base y: @base Int): Int
 
 @base
-val z: Int
+konst z: Int
 

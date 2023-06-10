@@ -17,7 +17,7 @@ sourceSets {
 }
 
 tasks {
-    val compileKotlin by existing(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
+    konst compileKotlin by existing(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class) {
         kotlinOptions {
             freeCompilerArgs += "-opt-in=org.jetbrains.kotlin.ir.ObsoleteDescriptorBasedAPI"
         }

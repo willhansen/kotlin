@@ -4,9 +4,9 @@
 fun f(g: context(A, B) Int.(Int) -> Int) {}
 
 class A {
-    val valueA: Int = 10
+    konst konstueA: Int = 10
 }
 
 class B {
-    val valueB: Int = 11
+    konst konstueB: Int = 11
 }

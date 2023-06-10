@@ -1,11 +1,11 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
 fun box(): String {
-    val a: dynamic = js("{ \"--invalid--property@\": 42 }")
-    assertEquals(42, a.`--invalid--property@`)
+    konst a: dynamic = js("{ \"--inkonstid--property@\": 42 }")
+    assertEquals(42, a.`--inkonstid--property@`)
 
     return "OK"
 }

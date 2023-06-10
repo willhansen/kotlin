@@ -2,18 +2,18 @@ FILE: propertiesAndInitBlocks.kt
     public final inline fun run(block: R|() -> kotlin/Unit|): R|kotlin/Unit| {
         R|<local>/block|.R|SubstitutionOverride<kotlin/Function0.invoke: R|kotlin/Unit|>|()
     }
-    public final val x1: R|kotlin/Int| = Int(1)
+    public final konst x1: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int|
     public final var x2: R|kotlin/Int| = Int(1)
         public get(): R|kotlin/Int| {
             ^ Int(1)
         }
-        public set(value: R|kotlin/Int|): R|kotlin/Unit| {
+        public set(konstue: R|kotlin/Int|): R|kotlin/Unit| {
             F|/x2| = Int(1)
         }
-    public final val x3: R|kotlin/Unit| = R|/run|(<L> = run@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=UNKNOWN>  {
+    public final konst x3: R|kotlin/Unit| = R|/run|(<L> = run@fun <anonymous>(): R|kotlin/Unit| <inline=Inline, kind=UNKNOWN>  {
         local final fun foo(): R|kotlin/Unit| {
-            lval c: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
+            lkonst c: R|kotlin/Int| = Int(1).R|kotlin/Int.plus|(Int(1))
             throw R|java/lang/Exception.Exception|()
         }
 
@@ -45,7 +45,7 @@ FILE: propertiesAndInitBlocks.kt
             }
 
         }
-    public final val x4: R|kotlin/Int| = try {
+    public final konst x4: R|kotlin/Int| = try {
         Int(1)
     }
     catch (e: R|kotlin/Exception|) {

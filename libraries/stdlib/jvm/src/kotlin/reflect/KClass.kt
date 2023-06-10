@@ -18,82 +18,82 @@ public actual interface KClass<T : Any> : KDeclarationContainer, KAnnotatedEleme
      * The simple name of the class as it was declared in the source code,
      * or `null` if the class has no name (if, for example, it is a class of an anonymous object).
      */
-    public actual val simpleName: String?
+    public actual konst simpleName: String?
 
     /**
      * The fully qualified dot-separated name of the class,
      * or `null` if the class is local or a class of an anonymous object.
      */
-    public actual val qualifiedName: String?
+    public actual konst qualifiedName: String?
 
     /**
      * All functions and properties accessible in this class, including those declared in this class
      * and all of its superclasses. Does not include constructors.
      */
-    override val members: Collection<KCallable<*>>
+    override konst members: Collection<KCallable<*>>
 
     /**
      * All constructors declared in this class.
      */
-    public val constructors: Collection<KFunction<T>>
+    public konst constructors: Collection<KFunction<T>>
 
     /**
      * All classes declared inside this class. This includes both inner and static nested classes.
      */
-    public val nestedClasses: Collection<KClass<*>>
+    public konst nestedClasses: Collection<KClass<*>>
 
     /**
      * The instance of the object declaration, or `null` if this class is not an object declaration.
      */
-    public val objectInstance: T?
+    public konst objectInstance: T?
 
     /**
-     * Returns `true` if [value] is an instance of this class on a given platform.
+     * Returns `true` if [konstue] is an instance of this class on a given platform.
      */
     @SinceKotlin("1.1")
-    public actual fun isInstance(value: Any?): Boolean
+    public actual fun isInstance(konstue: Any?): Boolean
 
     /**
      * The list of type parameters of this class. This list does *not* include type parameters of outer classes.
      */
     @SinceKotlin("1.1")
-    public val typeParameters: List<KTypeParameter>
+    public konst typeParameters: List<KTypeParameter>
 
     /**
      * The list of immediate supertypes of this class, in the order they are listed in the source code.
      */
     @SinceKotlin("1.1")
-    public val supertypes: List<KType>
+    public konst supertypes: List<KType>
 
     /**
      * The list of the immediate subclasses if this class is a sealed class, or an empty list otherwise.
      */
     @SinceKotlin("1.3")
-    public val sealedSubclasses: List<KClass<out T>>
+    public konst sealedSubclasses: List<KClass<out T>>
 
     /**
      * Visibility of this class, or `null` if its visibility cannot be represented in Kotlin.
      */
     @SinceKotlin("1.1")
-    public val visibility: KVisibility?
+    public konst visibility: KVisibility?
 
     /**
      * `true` if this class is `final`.
      */
     @SinceKotlin("1.1")
-    public val isFinal: Boolean
+    public konst isFinal: Boolean
 
     /**
      * `true` if this class is `open`.
      */
     @SinceKotlin("1.1")
-    public val isOpen: Boolean
+    public konst isOpen: Boolean
 
     /**
      * `true` if this class is `abstract`.
      */
     @SinceKotlin("1.1")
-    public val isAbstract: Boolean
+    public konst isAbstract: Boolean
 
     /**
      * `true` if this class is `sealed`.
@@ -101,7 +101,7 @@ public actual interface KClass<T : Any> : KDeclarationContainer, KAnnotatedEleme
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isSealed: Boolean
+    public konst isSealed: Boolean
 
     /**
      * `true` if this class or object has the `data` keyword.
@@ -110,7 +110,7 @@ public actual interface KClass<T : Any> : KDeclarationContainer, KAnnotatedEleme
      * in the Kotlin language documentation.
      */
     @SinceKotlin("1.1")
-    public val isData: Boolean
+    public konst isData: Boolean
 
     /**
      * `true` if this class is an inner class.
@@ -118,7 +118,7 @@ public actual interface KClass<T : Any> : KDeclarationContainer, KAnnotatedEleme
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isInner: Boolean
+    public konst isInner: Boolean
 
     /**
      * `true` if this class is a companion object.
@@ -126,19 +126,19 @@ public actual interface KClass<T : Any> : KDeclarationContainer, KAnnotatedEleme
      * for more information.
      */
     @SinceKotlin("1.1")
-    public val isCompanion: Boolean
+    public konst isCompanion: Boolean
 
     /**
      * `true` if this class is a Kotlin functional interface.
      */
     @SinceKotlin("1.4")
-    public val isFun: Boolean
+    public konst isFun: Boolean
 
     /**
-     * `true` if this class is a value class.
+     * `true` if this class is a konstue class.
      */
     @SinceKotlin("1.5")
-    public val isValue: Boolean
+    public konst isValue: Boolean
 
     /**
      * Returns `true` if this [KClass] instance represents the same Kotlin class as the class represented by [other].

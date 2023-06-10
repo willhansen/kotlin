@@ -10,9 +10,9 @@ import kotlin.test.*
 // TODO: consider moving to common stdlib tests.
 class KT42428Test {
 
-    private val listOfLetterIndexPairs = ('a'..'z').withIndex().map { (i, c) -> "$c" to i }
+    private konst listOfLetterIndexPairs = ('a'..'z').withIndex().map { (i, c) -> "$c" to i }
 
-    private val mapOfLetterToIndex = listOfLetterIndexPairs.toMap()
+    private konst mapOfLetterToIndex = listOfLetterIndexPairs.toMap()
 
     @Test fun testListOfPairsToMapEntriesContainsMapEntry() {
         testMapEntriesContainsMapEntry(listOfLetterIndexPairs.toMap(), "h", 7)
@@ -31,15 +31,15 @@ class KT42428Test {
     }
 
     // Based on https://youtrack.jetbrains.com/issue/KT-42428.
-    private fun testMapEntriesContainsMapEntry(map: Map<String, Int>, key: String, value: Int) {
-        data class SimpleEntry<out K, out V>(override val key: K, override val value: V) : Map.Entry<K, V> {
+    private fun testMapEntriesContainsMapEntry(map: Map<String, Int>, key: String, konstue: Int) {
+        data class SimpleEntry<out K, out V>(override konst key: K, override konst konstue: V) : Map.Entry<K, V> {
 
             override fun equals(other: Any?): Boolean =
-                    other is Map.Entry<*, *> && key == other.key && value == other.value
+                    other is Map.Entry<*, *> && key == other.key && konstue == other.konstue
 
-            override fun hashCode(): Int = key.hashCode() xor value.hashCode()
+            override fun hashCode(): Int = key.hashCode() xor konstue.hashCode()
 
-            override fun toString(): String = "$key=$value"
+            override fun toString(): String = "$key=$konstue"
         }
 
 
@@ -48,9 +48,9 @@ class KT42428Test {
         // This one requires special efforts to make it work this way.
         // map.entries can in fact be `MutableSet<MutableMap.MutableEntry>`,
         // which [contains] method takes [MutableEntry], so the compiler may generate special bridge
-        // returning false for values that aren't [MutableEntry] (including [SimpleEntry]).
-        assertTrue(map.entries.contains(SimpleEntry(key, value)))
+        // returning false for konstues that aren't [MutableEntry] (including [SimpleEntry]).
+        assertTrue(map.entries.contains(SimpleEntry(key, konstue)))
 
-        assertTrue(map.entries.toSet().contains(SimpleEntry(key, value)))
+        assertTrue(map.entries.toSet().contains(SimpleEntry(key, konstue)))
     }
 }

@@ -18,7 +18,7 @@ annotation class Ann
  */
 open class TypeToken<T>
 
-val case_1 = object : TypeToken<@Ann(<!TOO_MANY_ARGUMENTS, UNRESOLVED_REFERENCE!>unresolved_reference<!>) String>() {}
+konst case_1 = object : TypeToken<@Ann(<!TOO_MANY_ARGUMENTS, UNRESOLVED_REFERENCE!>unresolved_reference<!>) String>() {}
 
 /*
  * TESTCASE NUMBER: 2
@@ -26,4 +26,4 @@ val case_1 = object : TypeToken<@Ann(<!TOO_MANY_ARGUMENTS, UNRESOLVED_REFERENCE!
  */
 interface A
 
-val case_2 = object: @Ann(<!TOO_MANY_ARGUMENTS, UNRESOLVED_REFERENCE!>unresolved_reference<!>) A {}
+konst case_2 = object: @Ann(<!TOO_MANY_ARGUMENTS, UNRESOLVED_REFERENCE!>unresolved_reference<!>) A {}

@@ -1,6 +1,6 @@
 // !LANGUAGE: +ProperIeee754Comparisons
 
-val minus: Any = -0.0
+konst minus: Any = -0.0
 
 fun box(): String {
     if (minus is Comparable<*> && minus is Double) {

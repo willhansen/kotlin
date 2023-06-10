@@ -21,7 +21,7 @@ public final class Delegate<T#0 /* T */> : kotlin/Any {
   public final operator fun getValue(thisRef: kotlin/Any?, property: kotlin/reflect/KProperty<*>): T#0
 
   // signature: setValue(Ljava/lang/Object;Lkotlin/reflect/KProperty;Ljava/lang/Object;)V
-  public final operator fun setValue(thisRef: kotlin/Any?, property: kotlin/reflect/KProperty<*>, value: T#0): kotlin/Unit
+  public final operator fun setValue(thisRef: kotlin/Any?, property: kotlin/reflect/KProperty<*>, konstue: T#0): kotlin/Unit
 
   // module name: test-module
 }

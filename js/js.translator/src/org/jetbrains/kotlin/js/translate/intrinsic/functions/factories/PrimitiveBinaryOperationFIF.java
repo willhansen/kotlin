@@ -68,8 +68,8 @@ public enum PrimitiveBinaryOperationFIF implements FunctionIntrinsicFactory {
 
         private boolean isSafeConstant(@NotNull JsExpression expression) {
             if (!(expression instanceof JsIntLiteral)) return false;
-            int value = ((JsIntLiteral) expression).value;
-            return Math.abs(value) < SAFE_THRESHOLD;
+            int konstue = ((JsIntLiteral) expression).konstue;
+            return Math.abs(konstue) < SAFE_THRESHOLD;
         }
     };
 

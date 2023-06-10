@@ -15,7 +15,7 @@ FILE fqName:<root> fileName:/stringPlus.kt
         CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
           $this: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
             $this: GET_VAR 'a: kotlin.String declared in <root>.test2' type=kotlin.String origin=null
-            other: CONST String type=kotlin.String value="+"
+            other: CONST String type=kotlin.String konstue="+"
           other: GET_VAR 'b: kotlin.Int declared in <root>.test2' type=kotlin.Int origin=null
   FUN name:test3 visibility:public modality:FINAL <> (a:kotlin.String, b:kotlin.Int) returnType:kotlin.String
     VALUE_PARAMETER name:a index:0 type:kotlin.String
@@ -26,8 +26,8 @@ FILE fqName:<root> fileName:/stringPlus.kt
           $this: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
             $this: CALL 'public final fun plus (other: kotlin.Any?): kotlin.String declared in kotlin.String' type=kotlin.String origin=PLUS
               $this: GET_VAR 'a: kotlin.String declared in <root>.test3' type=kotlin.String origin=null
-              other: CONST String type=kotlin.String value="+"
+              other: CONST String type=kotlin.String konstue="+"
             other: CALL 'public final fun plus (other: kotlin.Int): kotlin.Int declared in kotlin.Int' type=kotlin.Int origin=PLUS
               $this: GET_VAR 'b: kotlin.Int declared in <root>.test3' type=kotlin.Int origin=null
-              other: CONST Int type=kotlin.Int value=1
+              other: CONST Int type=kotlin.Int konstue=1
           other: GET_VAR 'a: kotlin.String declared in <root>.test3' type=kotlin.String origin=null

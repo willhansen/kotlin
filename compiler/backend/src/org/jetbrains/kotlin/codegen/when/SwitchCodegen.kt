@@ -25,52 +25,52 @@ import kotlin.collections.ArrayList
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class SwitchCodegen(
     @JvmField
-    protected val expression: KtWhenExpression,
-    protected val isStatement: Boolean,
-    private val isExhaustive: Boolean,
+    protected konst expression: KtWhenExpression,
+    protected konst isStatement: Boolean,
+    private konst isExhaustive: Boolean,
     @JvmField
-    protected val codegen: ExpressionCodegen,
+    protected konst codegen: ExpressionCodegen,
     subjectType: Type?
 ) {
-    protected val bindingContext: BindingContext = codegen.bindingContext
+    protected konst bindingContext: BindingContext = codegen.bindingContext
 
-    protected val subjectVariable = expression.subjectVariable
-    protected val subjectExpression = expression.subjectExpression ?: throw AssertionError("No subject expression: ${expression.text}")
+    protected konst subjectVariable = expression.subjectVariable
+    protected konst subjectExpression = expression.subjectExpression ?: throw AssertionError("No subject expression: ${expression.text}")
 
-    protected val subjectKotlinType = WhenChecker.whenSubjectTypeWithoutSmartCasts(expression, bindingContext)
+    protected konst subjectKotlinType = WhenChecker.whenSubjectTypeWithoutSmartCasts(expression, bindingContext)
         ?: throw AssertionError("No subject type: $expression")
 
     @JvmField
-    protected val subjectType = subjectType ?: codegen.asmType(subjectKotlinType)
+    protected konst subjectType = subjectType ?: codegen.asmType(subjectKotlinType)
 
     protected var subjectLocal = -1
 
-    protected val resultKotlinType: KotlinType? = if (!isStatement) codegen.kotlinType(expression) else null
+    protected konst resultKotlinType: KotlinType? = if (!isStatement) codegen.kotlinType(expression) else null
 
-    protected val resultType: Type = if (isStatement) Type.VOID_TYPE else codegen.expressionType(expression)
-
-    @JvmField
-    protected val v: InstructionAdapter = codegen.v
+    protected konst resultType: Type = if (isStatement) Type.VOID_TYPE else codegen.expressionType(expression)
 
     @JvmField
-    protected val transitionsTable: NavigableMap<Int, Label> = TreeMap()
+    protected konst v: InstructionAdapter = codegen.v
 
-    private val entryLabels: MutableList<Label> = ArrayList()
+    @JvmField
+    protected konst transitionsTable: NavigableMap<Int, Label> = TreeMap()
+
+    private konst entryLabels: MutableList<Label> = ArrayList()
     private var elseLabel = Label()
     private var endLabel = Label()
     protected lateinit var defaultLabel: Label
 
-    private val switchCodegenProvider = SwitchCodegenProvider(codegen)
+    private konst switchCodegenProvider = SwitchCodegenProvider(codegen)
 
     /**
      * Generates bytecode for entire when expression
      */
     open fun generate() {
-        val frameMapAtStart = codegen.frameMap.mark()
+        konst frameMapAtStart = codegen.frameMap.mark()
 
         prepareConfiguration()
 
-        val hasElse = expression.elseExpression != null
+        konst hasElse = expression.elseExpression != null
 
         // if there is no else-entry and it's statement then default --- endLabel
         defaultLabel = if (hasElse || !isStatement || isExhaustive) elseLabel else endLabel
@@ -78,7 +78,7 @@ abstract class SwitchCodegen(
         generateSubjectValue()
         generateSubjectValueToIndex()
 
-        val beginLabel = Label()
+        konst beginLabel = Label()
         v.mark(beginLabel)
 
         generateSwitchInstructionByTransitionsTable()
@@ -110,7 +110,7 @@ abstract class SwitchCodegen(
      */
     private fun prepareConfiguration() {
         for (entry in expression.entries) {
-            val entryLabel = Label()
+            konst entryLabel = Label()
 
             for (constant in switchCodegenProvider.getConstantsFromEntry(entry)) {
                 if (constant is NullValue || constant == null) continue
@@ -127,21 +127,21 @@ abstract class SwitchCodegen(
 
     protected abstract fun processConstant(constant: ConstantValue<*>, entryLabel: Label, entry: KtWhenEntry)
 
-    protected fun putTransitionOnce(value: Int, entryLabel: Label) {
-        if (!transitionsTable.containsKey(value)) {
-            transitionsTable[value] = entryLabel
+    protected fun putTransitionOnce(konstue: Int, entryLabel: Label) {
+        if (!transitionsTable.containsKey(konstue)) {
+            transitionsTable[konstue] = entryLabel
         }
     }
 
     private var subjectVariableDescriptor: VariableDescriptor? = null
 
     /**
-     * Generates subject value on top of the stack.
+     * Generates subject konstue on top of the stack.
      * If the subject is a variable, it's stored and loaded.
      */
     private fun generateSubjectValue() {
         if (subjectVariable != null) {
-            val mySubjectVariable = bindingContext[BindingContext.VARIABLE, subjectVariable]
+            konst mySubjectVariable = bindingContext[BindingContext.VARIABLE, subjectVariable]
                 ?: throw AssertionError("Unresolved subject variable: $expression")
             subjectLocal = codegen.frameMap.enter(mySubjectVariable, subjectType)
             codegen.visitProperty(subjectVariable, null)
@@ -154,16 +154,16 @@ abstract class SwitchCodegen(
     }
 
     /**
-     * Given a subject value on stack (after [generateSubjectValue]),
-     * produces int value to be used in switch.
+     * Given a subject konstue on stack (after [generateSubjectValue]),
+     * produces int konstue to be used in switch.
      */
     protected abstract fun generateSubjectValueToIndex()
 
     protected fun generateNullCheckIfNeeded() {
         if (TypeUtils.isNullableType(subjectKotlinType)) {
-            val nullEntryIndex = findNullEntryIndex(expression)
-            val nullLabel = if (nullEntryIndex == -1) defaultLabel else entryLabels[nullEntryIndex]
-            val notNullLabel = Label()
+            konst nullEntryIndex = findNullEntryIndex(expression)
+            konst nullLabel = if (nullEntryIndex == -1) defaultLabel else entryLabels[nullEntryIndex]
+            konst notNullLabel = Label()
 
             with(v) {
                 dup()
@@ -181,20 +181,20 @@ abstract class SwitchCodegen(
         }?.index ?: -1
 
     private fun generateSwitchInstructionByTransitionsTable() {
-        val keys = transitionsTable.keys.toIntArray()
+        konst keys = transitionsTable.keys.toIntArray()
 
-        val labelsNumber = keys.size
-        val maxValue = keys.last()
-        val minValue = keys.first()
-        val rangeLength = maxValue.toLong() - minValue.toLong() + 1L
+        konst labelsNumber = keys.size
+        konst maxValue = keys.last()
+        konst minValue = keys.first()
+        konst rangeLength = maxValue.toLong() - minValue.toLong() + 1L
 
         if (preferLookupOverSwitch(labelsNumber, rangeLength)) {
-            val labels = transitionsTable.values.toTypedArray()
+            konst labels = transitionsTable.konstues.toTypedArray()
             v.lookupswitch(defaultLabel, keys, labels)
             return
         }
 
-        val sparseLabels = Array(rangeLength.toInt()) { index ->
+        konst sparseLabels = Array(rangeLength.toInt()) { index ->
             transitionsTable[index + minValue] ?: defaultLabel
         }
 
@@ -203,11 +203,11 @@ abstract class SwitchCodegen(
 
     protected open fun generateEntries() {
         // resolving entries' entryLabels and generating entries' code
-        val entryLabelsIterator = entryLabels.iterator()
+        konst entryLabelsIterator = entryLabels.iterator()
         for (entry in expression.entries) {
             v.visitLabel(entryLabelsIterator.next())
 
-            val mark = codegen.myFrameMap.mark()
+            konst mark = codegen.myFrameMap.mark()
             codegen.gen(entry.expression, resultType, resultKotlinType)
             mark.dropTo()
 

@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractFileScopeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(ktFile) {
-                val symbol = ktFile.getFileSymbol()
-                val scope = symbol.getFileScope()
+                konst symbol = ktFile.getFileSymbol()
+                konst scope = symbol.getFileScope()
                 with(DebugSymbolRenderer(renderExtra = true)) {
-                    val renderedSymbol = render(symbol)
-                    val callableNames = scope.getPossibleCallableNames()
-                    val renderedCallables = scope.getCallableSymbols().map { render(it) }
-                    val classifierNames = scope.getPossibleClassifierNames()
-                    val renderedClassifiers = scope.getClassifierSymbols().map { render(it) }
+                    konst renderedSymbol = render(symbol)
+                    konst callableNames = scope.getPossibleCallableNames()
+                    konst renderedCallables = scope.getCallableSymbols().map { render(it) }
+                    konst classifierNames = scope.getPossibleClassifierNames()
+                    konst renderedClassifiers = scope.getClassifierSymbols().map { render(it) }
 
                     "FILE SYMBOL:\n" + renderedSymbol + "\n" +
                             "\nCALLABLE NAMES:\n" + callableNames.joinToString(prefix = "[", postfix = "]\n", separator = ", ") +

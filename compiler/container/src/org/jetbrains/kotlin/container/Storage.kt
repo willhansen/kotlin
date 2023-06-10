@@ -33,15 +33,15 @@ enum class ComponentStorageState {
     Disposed
 }
 
-internal class InvalidCardinalityException(message: String) : Exception(message)
+internal class InkonstidCardinalityException(message: String) : Exception(message)
 
-class ComponentStorage(private val myId: String, parent: ComponentStorage?) : ValueResolver {
+class ComponentStorage(private konst myId: String, parent: ComponentStorage?) : ValueResolver {
     var state = ComponentStorageState.Initial
 
-    private val descriptors = LinkedHashSet<ComponentDescriptor>()
-    private val dependencies = MultiMap.createLinkedSet<ComponentDescriptor, Type>()
-    private val clashResolvers = ArrayList<PlatformExtensionsClashResolver<*>>()
-    private val registry = ComponentRegistry()
+    private konst descriptors = LinkedHashSet<ComponentDescriptor>()
+    private konst dependencies = MultiMap.createLinkedSet<ComponentDescriptor, Type>()
+    private konst clashResolvers = ArrayList<PlatformExtensionsClashResolver<*>>()
+    private konst registry = ComponentRegistry()
 
     init {
         parent?.let {
@@ -58,17 +58,17 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
         if (state == ComponentStorageState.Initial)
             throw ContainerConsistencyException("Container was not composed before resolving")
 
-        val entry = registry.tryGetEntry(request)
+        konst entry = registry.tryGetEntry(request)
         if (entry.isNotEmpty()) {
             registerDependency(request, context)
 
             if (entry.size == 1) return entry.single()
 
-            val nonDefault = entry.filterNot { it.isDefaultComponent() }
+            konst nonDefault = entry.filterNot { it.isDefaultComponent() }
             if (nonDefault.isEmpty()) return entry.first()
 
             return nonDefault.singleOrNull()
-                ?: throw InvalidCardinalityException(
+                ?: throw InkonstidCardinalityException(
                     "$containerId: Request $request cannot be satisfied because there is more than one type registered\n" +
                             "Clashed registrations: ${entry.joinToString()}"
                 )
@@ -78,7 +78,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
 
     private fun registerDependency(request: Type, context: ValueResolveContext) {
         if (context is ComponentResolveContext) {
-            val descriptor = context.requestingDescriptor
+            konst descriptor = context.requestingDescriptor
             if (descriptor is ComponentDescriptor) {
                 dependencies.putValue(descriptor, request)
             }
@@ -86,7 +86,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
     }
 
     fun dump(printer: PrintStream): Unit = with(printer) {
-        val heading = containerId
+        konst heading = containerId
         println(heading)
         println("=".repeat(heading.length))
         println()
@@ -94,11 +94,11 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
             println(descriptor)
             dependencies[descriptor].forEach {
                 print("   -> ")
-                val typeName = it.toString()
+                konst typeName = it.toString()
                 print(typeName.substringBefore(" ")) // interface, class
                 print(" ")
                 print(typeName.substringAfterLast(".")) // name
-                val resolve = registry.tryGetEntry(it)
+                konst resolve = registry.tryGetEntry(it)
                 print(" as ")
                 print(resolve)
                 println()
@@ -107,7 +107,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
         }
     }
 
-    val containerId
+    konst containerId
         get() = "Container: $myId"
 
     fun resolveMultiple(request: Type, context: ValueResolveContext): Iterable<ValueDescriptor> {
@@ -145,7 +145,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
 
         registry.addAll(descriptors)
 
-        val implicits = inspectDependenciesAndRegisterAdhoc(context, descriptors)
+        konst implicits = inspectDependenciesAndRegisterAdhoc(context, descriptors)
 
         registry.resolveClashesIfAny(context.container, clashResolvers)
         injectProperties(context, descriptors + implicits)
@@ -163,8 +163,8 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
         context: ComponentResolveContext,
         descriptors: Collection<ComponentDescriptor>
     ): LinkedHashSet<ComponentDescriptor> {
-        val adhoc = LinkedHashSet<ComponentDescriptor>()
-        val visitedTypes = HashSet<Type>()
+        konst adhoc = LinkedHashSet<ComponentDescriptor>()
+        konst visitedTypes = HashSet<Type>()
         for (descriptor in descriptors) {
             collectAdhocComponents(context, descriptor, visitedTypes, adhoc)
         }
@@ -176,20 +176,20 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
         context: ComponentResolveContext, descriptor: ComponentDescriptor,
         visitedTypes: HashSet<Type>, adhocDescriptors: LinkedHashSet<ComponentDescriptor>
     ) {
-        val dependencies = descriptor.getDependencies(context)
+        konst dependencies = descriptor.getDependencies(context)
         for (type in dependencies) {
             if (!visitedTypes.add(type))
                 continue
 
-            val entry = registry.tryGetEntry(type)
+            konst entry = registry.tryGetEntry(type)
             if (entry.isEmpty()) {
-                val rawType: Class<*>? = when (type) {
+                konst rawType: Class<*>? = when (type) {
                     is Class<*> -> type
                     is ParameterizedType -> type.rawType as? Class<*>
                     else -> null
                 }
 
-                val implicitDependency = rawType?.let { getImplicitlyDefinedDependency(context, it) } ?: continue
+                konst implicitDependency = rawType?.let { getImplicitlyDefinedDependency(context, it) } ?: continue
 
                 adhocDescriptors.add(implicitDependency)
                 collectAdhocComponents(context, implicitDependency, visitedTypes, adhocDescriptors)
@@ -202,7 +202,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
             return ImplicitSingletonTypeComponentDescriptor(context.container, rawType)
         }
 
-        val defaultImplementation = rawType.getInfo().defaultImplementation
+        konst defaultImplementation = rawType.getInfo().defaultImplementation
         if (defaultImplementation != null && defaultImplementation.getInfo().constructorInfo != null) {
             return DefaultSingletonTypeComponentDescriptor(context.container, defaultImplementation)
         }
@@ -215,10 +215,10 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
     }
 
     private fun injectProperties(instance: Any, context: ValueResolveContext) {
-        val classInfo = instance::class.java.getInfo()
+        konst classInfo = instance::class.java.getInfo()
 
         classInfo.setterInfos.forEach { (method) ->
-            val methodBinding = method.bindToMethod(containerId, context)
+            konst methodBinding = method.bindToMethod(containerId, context)
             methodBinding.invoke(instance)
         }
     }
@@ -226,12 +226,12 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
     fun dispose() {
         if (state != ComponentStorageState.Initialized) {
             if (state == ComponentStorageState.Initial)
-                return // it is valid to dispose container which was not initialized
+                return // it is konstid to dispose container which was not initialized
             throw ContainerConsistencyException("Component container cannot be disposed in the $state state.")
         }
 
         state = ComponentStorageState.Disposing
-        val disposeList = getDescriptorsInDisposeOrder()
+        konst disposeList = getDescriptorsInDisposeOrder()
         for (descriptor in disposeList)
             disposeDescriptor(descriptor)
         state = ComponentStorageState.Disposed
@@ -239,7 +239,7 @@ class ComponentStorage(private val myId: String, parent: ComponentStorage?) : Va
 
     private fun getDescriptorsInDisposeOrder(): List<ComponentDescriptor> {
         return topologicalSort(descriptors) {
-            val dependent = ArrayList<ComponentDescriptor>()
+            konst dependent = ArrayList<ComponentDescriptor>()
             for (interfaceType in dependencies[it]) {
                 for (dependency in registry.tryGetEntry(interfaceType)) {
                     dependent.add(dependency)

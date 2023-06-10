@@ -5,28 +5,28 @@ package foo
 
 @JsModule("foo1")
 external class A(x: Int) {
-    val x: Int
+    konst x: Int
 }
 
 @JsModule("foo2")
 external fun func(): String
 
 @JsModule("foo3")
-external val globalVal: String
+external konst globalVal: String
 
 // FILE: b.kt
 package bar
 
 @JsModule("bar1")
 external class A(x: Int) {
-    val x: Int
+    konst x: Int
 }
 
 @JsModule("bar2")
 external fun func(): String
 
 @JsModule("bar3")
-external val globalVal: String
+external konst globalVal: String
 
 // FILE: main.kt
 import foo.A
@@ -37,13 +37,13 @@ import foo.globalVal as globalVal1
 import bar.globalVal as globalVal2
 
 fun box(): String {
-    val a = A(37)
-    val b = B(73)
+    konst a = A(37)
+    konst b = B(73)
     assertEquals(37, a.x)
     assertEquals(73, b.x)
 
-    val func1 = func1()
-    val func2 = func2()
+    konst func1 = func1()
+    konst func2 = func2()
     assertEquals(38, func1)
     assertEquals(83, func2)
 

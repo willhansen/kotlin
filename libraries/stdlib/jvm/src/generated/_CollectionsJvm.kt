@@ -134,7 +134,7 @@ public fun <T> Iterable<T>.minWith(comparator: Comparator<in T>): T? {
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)
@@ -150,7 +150,7 @@ public inline fun <T> Iterable<T>.sumOf(selector: (T) -> java.math.BigDecimal): 
 }
 
 /**
- * Returns the sum of all values produced by [selector] function applied to each element in the collection.
+ * Returns the sum of all konstues produced by [selector] function applied to each element in the collection.
  */
 @SinceKotlin("1.4")
 @OptIn(kotlin.experimental.ExperimentalTypeInference::class)

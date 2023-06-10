@@ -301,7 +301,7 @@ backtrace_pcinfo (struct backtrace_state *state, uintptr_t pc,
   return state->fileline_fn (state, pc, callback, error_callback, data);
 }
 
-/* Given a PC, find the symbol for it, and its value.  */
+/* Given a PC, find the symbol for it, and its konstue.  */
 
 int
 backtrace_syminfo (struct backtrace_state *state, uintptr_t pc,
@@ -325,7 +325,7 @@ backtrace_syminfo (struct backtrace_state *state, uintptr_t pc,
 void
 backtrace_syminfo_to_full_callback (void *data, uintptr_t pc,
 				    const char *symname,
-				    uintptr_t symval ATTRIBUTE_UNUSED,
+				    uintptr_t symkonst ATTRIBUTE_UNUSED,
 				    uintptr_t symsize ATTRIBUTE_UNUSED)
 {
   struct backtrace_call_full *bdata = (struct backtrace_call_full *) data;

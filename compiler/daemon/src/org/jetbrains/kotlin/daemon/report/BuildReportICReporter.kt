@@ -18,12 +18,12 @@ import java.io.File
 // todo: sync BuildReportICReporterAsync
 @VisibleForTesting
 class BuildReportICReporter(
-    private val compilationResults: CompilationResults,
+    private konst compilationResults: CompilationResults,
     rootDir: File,
-    private val isVerbose: Boolean = false
+    private konst isVerbose: Boolean = false
 ) : ICReporterBase(rootDir), RemoteICReporter {
-    private val icLogLines = arrayListOf<String>()
-    private val recompilationReason = HashMap<File, String>()
+    private konst icLogLines = arrayListOf<String>()
+    private konst recompilationReason = HashMap<File, String>()
 
     override fun report(message: () -> String, severity: ReportSeverity) {
         if (severity == DEBUG && !isVerbose) return
@@ -36,7 +36,7 @@ class BuildReportICReporter(
 
         icLogLines.add("Compile iteration:")
         for (file in sourceFiles) {
-            val reason = recompilationReason[file]?.let { " <- $it" } ?: ""
+            konst reason = recompilationReason[file]?.let { " <- $it" } ?: ""
             icLogLines.add("  ${file.relativeOrAbsolute()}$reason")
         }
         recompilationReason.clear()

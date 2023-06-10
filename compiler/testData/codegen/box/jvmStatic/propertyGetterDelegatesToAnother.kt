@@ -2,10 +2,10 @@
 // TARGET_BACKEND: JVM
 object ObjectThisTest {
 
-    val testValue: String
+    konst testValue: String
         @JvmStatic get() = this.testValue2
 
-    val testValue2: String
+    konst testValue2: String
         get() = "OK"
 }
 

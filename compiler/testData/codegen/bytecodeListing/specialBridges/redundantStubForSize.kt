@@ -1,5 +1,5 @@
 open class A1 {
-    open val size: Int = 56
+    open konst size: Int = 56
 }
 
 class A2 : A1(), Collection<String> {

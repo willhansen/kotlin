@@ -1,5 +1,5 @@
 expression: { a: Int ->
-    val b = 1
+    konst b = 1
     a + b
 }
 expected type: KtFunctionalType:

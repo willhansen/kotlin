@@ -3,6 +3,6 @@ class C<T, out S> {
 }
 
 interface Test {
-  val x: C<out CharSequence, *>.D<in List<*>, *>
+  konst x: C<out CharSequence, *>.D<in List<*>, *>
 }
 

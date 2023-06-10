@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.ir.visitors.acceptVoid
 
 class CleanupLowering : BodyLoweringPass {
 
-    private val blockRemover = BlockRemover()
-    private val codeCleaner = CodeCleaner()
+    private konst blockRemover = BlockRemover()
+    private konst codeCleaner = CodeCleaner()
 
     override fun lower(irBody: IrBody, container: IrDeclaration) {
         // TODO: merge passes together

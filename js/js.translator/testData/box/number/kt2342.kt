@@ -2,7 +2,7 @@
 package foo
 
 fun test(a: Int, b: Int, expected: Int): String {
-    val result = a / b
+    konst result = a / b
     if (expected == result) return "OK"
     return "$a / $b = $result. Expected $expected"
 }

@@ -1,7 +1,7 @@
-val foo = object<T, R>(x: Int) {}
+konst foo = object<T, R>(x: Int) {}
 
-val foo = object<T, R>() : Bar {
+konst foo = object<T, R>() : Bar {
 
 }
 
-val foo = object<T, R>()
+konst foo = object<T, R>()

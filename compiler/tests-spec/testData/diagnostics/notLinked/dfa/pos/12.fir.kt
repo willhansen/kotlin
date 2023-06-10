@@ -203,7 +203,7 @@ fun <T> T?.case_6() {
 
 // TESTCASE NUMBER: 7
 fun <T> T.case_7() {
-    val x = this
+    konst x = this
     if (x is Interface1?) {
         if (x != null) {
             <!DEBUG_INFO_EXPRESSION_TYPE("T & Interface1 & T!!")!>x<!>
@@ -886,7 +886,7 @@ fun <T: InterfaceWithTypeParameter1<in T>?> T.case_17() {
  * ISSUES: KT-28785
  */
 fun <T: InterfaceWithTypeParameter1<in T>?> T.case_18() {
-    val y = this
+    konst y = this
 
     if (y != null) {
         <!DEBUG_INFO_EXPRESSION_TYPE("T & T!!")!>y<!>

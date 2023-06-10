@@ -79,18 +79,18 @@ public class TextOutputImpl implements TextOutput {
     }
 
     @Override
-    public void print(double value) {
+    public void print(double konstue) {
         maybeIndent();
         int oldLength = out.length();
-        out.append(value);
+        out.append(konstue);
         movePosition(out.length() - oldLength);
     }
 
     @Override
-    public void print(int value) {
+    public void print(int konstue) {
         maybeIndent();
         int oldLength = out.length();
-        out.append(value);
+        out.append(konstue);
         movePosition(out.length() - oldLength);
     }
 

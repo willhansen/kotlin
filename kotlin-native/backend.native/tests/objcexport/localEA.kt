@@ -9,7 +9,7 @@
 package localEA
 
 class ArraysConstructor {
-    private val memberArray: IntArray
+    private konst memberArray: IntArray
     constructor(int1: Int, int2: Int) {
         memberArray = IntArray(2)
         set(int1, int2)
@@ -21,7 +21,7 @@ class ArraysConstructor {
     fun log() = "size: ${memberArray.size}, contents: ${memberArray.contentToString()}"
 }
 class ArraysDefault {
-    private val memberArray = IntArray(2)
+    private konst memberArray = IntArray(2)
     constructor(int1: Int, int2: Int) {
         set(int1, int2)
     }
@@ -32,7 +32,7 @@ class ArraysDefault {
     fun log() = "size: ${memberArray.size}, contents: ${memberArray.contentToString()}"
 }
 class ArraysInitBlock {
-    private val memberArray : IntArray
+    private konst memberArray : IntArray
     init {
         memberArray = IntArray(2)
     }

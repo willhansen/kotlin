@@ -38,26 +38,26 @@ object MinMaxTestGenerator {
     }
 
     private fun generate(family: Family, primitive: PrimitiveType? = null) {
-        val containerClass = when(family) {
+        konst containerClass = when(family) {
             Iterables, Sequences, CharSequences -> family.toString().dropLast(1)
             ArraysOfObjects -> "Array"
             ArraysOfPrimitives, ArraysOfUnsigned -> "${primitive!!}Array"
             else -> error(family)
         }
 
-        val isGeneric = family in listOf(Iterables, Sequences, ArraysOfObjects)
+        konst isGeneric = family in listOf(Iterables, Sequences, ArraysOfObjects)
 
-        val elementType = when {
+        konst elementType = when {
             isGeneric -> "T"
             family == CharSequences -> "Char"
             else -> primitive!!.toString()
         }
-        val defaultElements = elements(elementType)
+        konst defaultElements = elements(elementType)
 
-        val containerType = containerClass + "<T>".ifOrEmpty(isGeneric)
+        konst containerType = containerClass + "<T>".ifOrEmpty(isGeneric)
 
         fun emptyContainer(elementType: String): String {
-            val type = if (elementType == "T") "Int" else elementType
+            konst type = if (elementType == "T") "Int" else elementType
             return when (family) {
                 CharSequences -> "StringBuilder()"
                 Iterables -> "listOf<$type>()"
@@ -71,8 +71,8 @@ object MinMaxTestGenerator {
 
         fun containerOf(elements: List<String>, shuffle: Boolean = false): String {
             require(elements.isNotEmpty())
-            val args = elements.joinToString()
-            val shuffled = when (family) {
+            konst args = elements.joinToString()
+            konst shuffled = when (family) {
                 ArraysOfObjects, ArraysOfPrimitives, ArraysOfUnsigned, CharSequences -> ".apply { shuffle() }"
                 else -> ".shuffled()"
             }
@@ -83,8 +83,8 @@ object MinMaxTestGenerator {
             }
         }
 
-        val className = "MinMax${containerClass}Test"
-        val file = File("libraries/stdlib/test/generated/minmax/$className.kt")
+        konst className = "MinMax${containerClass}Test"
+        konst file = File("libraries/stdlib/test/generated/minmax/$className.kt")
         file.bufferedWriter().use { writer ->
 
             writer.appendLine(COPYRIGHT_NOTICE)
@@ -111,13 +111,13 @@ object MinMaxTestGenerator {
     fun minMax() {""")
 
             for (size in 1..3) {
-                val elements = defaultElements.take(size)
+                konst elements = defaultElements.take(size)
                 writer.appendLine("        expectMinMax(${elements.first()}, ${elements.last()}, ${containerOf(elements)})")
             }
 
             if (isGeneric) {
                 for (type in listOf(PrimitiveType.Int, PrimitiveType.Long, PrimitiveType.UInt, PrimitiveType.Char)) {
-                    val elements = elements(type.toString())
+                    konst elements = elements(type.toString())
                     writer.appendLine("        expectMinMax(${elements.first()}, ${elements.last()}, ${containerOf(elements)})")
                 }
             }
@@ -128,7 +128,7 @@ object MinMaxTestGenerator {
 
     @Test
     fun minMaxEmpty() {
-        val empty = ${emptyContainer(elementType)}
+        konst empty = ${emptyContainer(elementType)}
         assertNull(empty.minOrNull())
         assertNull(empty.maxOrNull())
         assertFailsWith<NoSuchElementException> { empty.min() }
@@ -136,7 +136,7 @@ object MinMaxTestGenerator {
     }
 """)
             run {
-                val assertions = """
+                konst assertions = """
         assertIsNegativeZero(zeroes.min().toDouble())
         assertIsNegativeZero(zeroes.minOrNull()!!.toDouble())
         assertTrue(NaNs.min().isNaN())
@@ -151,8 +151,8 @@ object MinMaxTestGenerator {
                     writer.appendLine("""
     @Test
     fun minMaxDouble() {
-        val zeroes = ${containerOf(listOf("0.0", "-0.0"), shuffle = true)}
-        val NaNs = ${containerOf(listOf("0.0", "Double.NaN"), shuffle = true)}
+        konst zeroes = ${containerOf(listOf("0.0", "-0.0"), shuffle = true)}
+        konst NaNs = ${containerOf(listOf("0.0", "Double.NaN"), shuffle = true)}
 $assertions
     }
 """)
@@ -161,8 +161,8 @@ $assertions
                     writer.appendLine("""
     @Test
     fun minMaxFloat() {
-        val zeroes = ${containerOf(listOf("0.0F", "-0.0F"), shuffle = true)}
-        val NaNs = ${containerOf(listOf("0.0F", "Float.NaN"), shuffle = true)}
+        konst zeroes = ${containerOf(listOf("0.0F", "-0.0F"), shuffle = true)}
+        konst NaNs = ${containerOf(listOf("0.0F", "Float.NaN"), shuffle = true)}
 $assertions
     }
 """)
@@ -180,11 +180,11 @@ $assertions
     @Test
     fun minMaxWith() {""")
             for (size in 1..3) {
-                val elements = defaultElements.take(size)
+                konst elements = defaultElements.take(size)
                 writer.appendLine("        expectMinMaxWith(${elements.first()}, ${elements.last()}, ${containerOf(elements)}, naturalOrder())")
             }
             if (isGeneric) {
-                val elements = listOf("a", "B").map { "\"$it\"" }
+                konst elements = listOf("a", "B").map { "\"$it\"" }
                 writer.appendLine("        expectMinMaxWith(${elements.first()}, ${elements.last()}, ${containerOf(elements)}, String.CASE_INSENSITIVE_ORDER)")
             }
             writer.appendLine("""
@@ -192,7 +192,7 @@ $assertions
 
     @Test
     fun minMaxWithEmpty() {
-        val empty = ${emptyContainer(elementType)}
+        konst empty = ${emptyContainer(elementType)}
         assertNull(empty.minWithOrNull(naturalOrder()))
         assertNull(empty.maxWithOrNull(naturalOrder()))
         assertFailsWith<NoSuchElementException> { empty.minWith(naturalOrder()) }
@@ -210,11 +210,11 @@ $assertions
     @Test
     fun minMaxBy() {""")
             for (size in 1..3) {
-                val elements = defaultElements.take(size)
+                konst elements = defaultElements.take(size)
                 writer.appendLine("        expectMinMaxBy(${elements.first()}, ${elements.last()}, ${containerOf(elements)}, { it })")
             }
             if (isGeneric) {
-                val elements = listOf("abc", "De").map { "\"$it\"" }
+                konst elements = listOf("abc", "De").map { "\"$it\"" }
                 writer.appendLine("        expectMinMaxBy(${elements.last()}, ${elements.first()}, ${containerOf(elements)}, { it.length })")
             }
             writer.appendLine("""
@@ -222,7 +222,7 @@ $assertions
 
     @Test
     fun minMaxByEmpty() {
-        val empty = ${emptyContainer(elementType)}
+        konst empty = ${emptyContainer(elementType)}
         assertNull(empty.minByOrNull { it.toString() })
         assertNull(empty.maxByOrNull { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minBy { it.toString() } }
@@ -230,8 +230,8 @@ $assertions
     }
 
     @Test 
-    fun minBySelectorEvaluateOnce() {
-        val source = ${containerOf(defaultElements)}
+    fun minBySelectorEkonstuateOnce() {
+        konst source = ${containerOf(defaultElements)}
         var c = 0
         source.minBy { c++ }
         assertEquals(${defaultElements.size}, c)
@@ -241,8 +241,8 @@ $assertions
     }
 
     @Test 
-    fun maxBySelectorEvaluateOnce() {
-        val source = ${containerOf(defaultElements)}
+    fun maxBySelectorEkonstuateOnce() {
+        konst source = ${containerOf(defaultElements)}
         var c = 0
         source.maxBy { c++ }
         assertEquals(${defaultElements.size}, c)
@@ -262,7 +262,7 @@ $assertions
     @Test
     fun minMaxOf() {""")
             for (size in 1..3) {
-                val elements = defaultElements.take(size)
+                konst elements = defaultElements.take(size)
                 if (primitive?.isNumeric() == true) {
                     writer.appendLine("        expectMinMaxOf(-${elements.last()}, -${elements.first()}, ${containerOf(elements)}, { -it })")
                 } else if (primitive?.isUnsigned() == true) {
@@ -276,8 +276,8 @@ $assertions
     
     @Test
     fun minMaxOfDouble() {
-        val middle = ${defaultElements[1]}
-        val items = ${containerOf(defaultElements, shuffle = true)}
+        konst middle = ${defaultElements[1]}
+        konst items = ${containerOf(defaultElements, shuffle = true)}
         assertTrue(items.minOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toDouble().pow(0.5) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toDouble().pow(0.5) }.isNaN())
@@ -291,8 +291,8 @@ $assertions
     
     @Test
     fun minMaxOfFloat() {
-        val middle = ${defaultElements[1]}
-        val items = ${containerOf(defaultElements, shuffle = true)}
+        konst middle = ${defaultElements[1]}
+        konst items = ${containerOf(defaultElements, shuffle = true)}
         assertTrue(items.minOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
         assertTrue(items.minOfOrNull { it.compareTo(middle).toFloat().pow(0.5F) }!!.isNaN())
         assertTrue(items.maxOf { it.compareTo(middle).toFloat().pow(0.5F) }.isNaN())
@@ -306,7 +306,7 @@ $assertions
     
     @Test
     fun minMaxOfEmpty() {
-        val empty = ${emptyContainer(elementType)}""")
+        konst empty = ${emptyContainer(elementType)}""")
             for (selector in listOf("it.toString()", "0.0", "0.0F")) {
                 writer.appendLine("""
         assertNull(empty.minOfOrNull { $selector })
@@ -329,7 +329,7 @@ $assertions
     @Test
     fun minMaxOfWith() {""")
             for (size in 1..3) {
-                val elements = defaultElements.take(size)
+                konst elements = defaultElements.take(size)
                 if (primitive?.isNumeric() == true) {
                     writer.appendLine("        expectMinMaxOfWith(-${elements.first()}, -${elements.last()}, ${containerOf(elements)}, reverseOrder(), { -it })")
                 } else if (primitive?.isUnsigned() == true) {
@@ -343,7 +343,7 @@ $assertions
     
     @Test
     fun minMaxOfWithEmpty() {
-        val empty = ${emptyContainer(elementType)}
+        konst empty = ${emptyContainer(elementType)}
         assertNull(empty.minOfWithOrNull(naturalOrder()) { it.toString() })
         assertNull(empty.maxOfWithOrNull(naturalOrder()) { it.toString() })
         assertFailsWith<NoSuchElementException> { empty.minOfWith(naturalOrder()) { it.toString() } }

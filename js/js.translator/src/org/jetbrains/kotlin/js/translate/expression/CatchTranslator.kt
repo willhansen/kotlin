@@ -32,8 +32,8 @@ import org.jetbrains.kotlin.resolve.BindingContextUtils.getNotNull
 import org.jetbrains.kotlin.types.isDynamic
 
 class CatchTranslator(
-        val catches: List<KtCatchClause>,
-        val psi: PsiElement,
+        konst catches: List<KtCatchClause>,
+        konst psi: PsiElement,
         context: TranslationContext
 ) : AbstractTranslator(context) {
 
@@ -68,14 +68,14 @@ class CatchTranslator(
     fun translate(): JsCatch? {
         if (catches.isEmpty()) return null
 
-        val firstCatch = catches.first()
-        val catchParameter = firstCatch.catchParameter
-        val parameterDescriptor = BindingUtils.getDescriptorForElement(bindingContext(), catchParameter!!)
-        val parameterName = context().getNameForDescriptor(parameterDescriptor).ident
+        konst firstCatch = catches.first()
+        konst catchParameter = firstCatch.catchParameter
+        konst parameterDescriptor = BindingUtils.getDescriptorForElement(bindingContext(), catchParameter!!)
+        konst parameterName = context().getNameForDescriptor(parameterDescriptor).ident
 
-        val jsCatch = JsCatch(context().scope(), parameterName)
-        val parameterRef = jsCatch.parameter.name.makeRef()
-        val catchContext = context().innerContextWithAliased(parameterDescriptor, parameterRef)
+        konst jsCatch = JsCatch(context().scope(), parameterName)
+        konst parameterRef = jsCatch.parameter.name.makeRef()
+        konst catchContext = context().innerContextWithAliased(parameterDescriptor, parameterRef)
 
         jsCatch.body = JsBlock(translateCatches(catchContext, parameterRef, catches.iterator()))
 
@@ -93,40 +93,40 @@ class CatchTranslator(
 
         var nextContext = context
 
-        val catch = catches.next()
-        val param = catch.catchParameter!!
-        val parameterDescriptor = BindingUtils.getDescriptorForElement(bindingContext(), catch.catchParameter!!)
-        val parameterName = context().getNameForDescriptor(parameterDescriptor)
-        val paramType = param.typeReference!!
+        konst catch = catches.next()
+        konst param = catch.catchParameter!!
+        konst parameterDescriptor = BindingUtils.getDescriptorForElement(bindingContext(), catch.catchParameter!!)
+        konst parameterName = context().getNameForDescriptor(parameterDescriptor)
+        konst paramType = param.typeReference!!
 
-        val additionalStatements = mutableListOf<JsStatement>()
-        val parameterRef = if (parameterName.ident != initialCatchParameterRef.ident) {
-            val parameterAlias = JsScope.declareTemporaryName(parameterName.ident)
+        konst additionalStatements = mutableListOf<JsStatement>()
+        konst parameterRef = if (parameterName.ident != initialCatchParameterRef.ident) {
+            konst parameterAlias = JsScope.declareTemporaryName(parameterName.ident)
             additionalStatements += JsAstUtils.newVar(parameterAlias, initialCatchParameterRef)
-            val ref = JsAstUtils.pureFqn(parameterAlias, null)
+            konst ref = JsAstUtils.pureFqn(parameterAlias, null)
             ref
         }
         else {
             initialCatchParameterRef
         }
         nextContext = nextContext.innerContextWithAliased(parameterDescriptor, parameterRef)
-        val thenBlock = translateCatchBody(nextContext, catch)
+        konst thenBlock = translateCatchBody(nextContext, catch)
         thenBlock.statements.addAll(0, additionalStatements)
 
         if (paramType.isDynamic) return thenBlock
 
         // translateIsCheck won't ever return `null` if its second argument is `null`
-        val typeCheck = with (patternTranslator(nextContext)) {
+        konst typeCheck = with (patternTranslator(nextContext)) {
             translateIsCheck(initialCatchParameterRef, paramType)
         }!!
 
-        val elseBlock = translateCatches(context, initialCatchParameterRef, catches)
+        konst elseBlock = translateCatches(context, initialCatchParameterRef, catches)
         return JsIf(typeCheck.source(catch), thenBlock, elseBlock).apply { source = catch }
     }
 
     private fun translateCatchBody(context: TranslationContext, catchClause: KtCatchClause): JsBlock {
-        val catchBody = catchClause.catchBody
-        val jsCatchBody = if (catchBody != null) {
+        konst catchBody = catchClause.catchBody
+        konst jsCatchBody = if (catchBody != null) {
             translateAsStatementAndMergeInBlockIfNeeded(catchBody, context)
         }
         else {
@@ -136,6 +136,6 @@ class CatchTranslator(
         return convertToBlock(jsCatchBody)
     }
 
-    private val KtTypeReference.isDynamic: Boolean
+    private konst KtTypeReference.isDynamic: Boolean
         get() = getNotNull(bindingContext(), BindingContext.TYPE, this).isDynamic()
 }

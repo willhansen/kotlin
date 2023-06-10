@@ -5,45 +5,45 @@
 import kotlin.reflect.KClass
 
 expect annotation class Primitives(
-    val z: Boolean = true,
-    val c: Char = 'c',
-    val b: Byte = 42.toByte(),
-    val s: Short = (-1).toShort(),
-    val i: Int = -42,
-    val f: Float = 2.72f,
-    val j: Long = 123456789123456789L,
-    val d: Double = 3.14159265358979
+    konst z: Boolean = true,
+    konst c: Char = 'c',
+    konst b: Byte = 42.toByte(),
+    konst s: Short = (-1).toShort(),
+    konst i: Int = -42,
+    konst f: Float = 2.72f,
+    konst j: Long = 123456789123456789L,
+    konst d: Double = 3.14159265358979
 )
 
 expect annotation class PrimitiveArrays(
-    val z: BooleanArray = [true],
-    val c: CharArray = ['c'],
-    val b: ByteArray = [42.toByte()],
-    val s: ShortArray = [(-1).toShort()],
-    val i: IntArray = [-42],
-    val f: FloatArray = [2.72f],
-    val j: LongArray = [123456789123456789L],
-    val d: DoubleArray = [3.14159265358979]
+    konst z: BooleanArray = [true],
+    konst c: CharArray = ['c'],
+    konst b: ByteArray = [42.toByte()],
+    konst s: ShortArray = [(-1).toShort()],
+    konst i: IntArray = [-42],
+    konst f: FloatArray = [2.72f],
+    konst j: LongArray = [123456789123456789L],
+    konst d: DoubleArray = [3.14159265358979]
 )
 
 enum class En { A, B }
 
-annotation class Anno(val value: String = "Anno")
+annotation class Anno(konst konstue: String = "Anno")
 
 expect annotation class Classes(
-    val s: String = "OK",
-    val e: En = En.B,
+    konst s: String = "OK",
+    konst e: En = En.B,
     // TODO: this does not work at the moment because AnnotationDescriptor subclasses do not implement equals correctly
-    // val a: Anno = Anno(),
-    val k: KClass<*> = List::class
+    // konst a: Anno = Anno(),
+    konst k: KClass<*> = List::class
 )
 
 expect annotation class ClassArrays(
-    val s: Array<String> = ["OK"],
-    val e: Array<En> = [En.B],
-    // val a: Array<Anno> = [Anno()],
-    val k: Array<KClass<*>> = [List::class],
-    vararg val v: Int = [42]
+    konst s: Array<String> = ["OK"],
+    konst e: Array<En> = [En.B],
+    // konst a: Array<Anno> = [Anno()],
+    konst k: Array<KClass<*>> = [List::class],
+    vararg konst v: Int = [42]
 )
 
 // MODULE: m2-jvm()()(m1-common)
@@ -52,38 +52,38 @@ expect annotation class ClassArrays(
 import kotlin.reflect.KClass
 
 actual annotation class Primitives(
-    actual val z: Boolean = true,
-    actual val c: Char = 'c',
-    actual val b: Byte = 42.toByte(),
-    actual val s: Short = (-1).toShort(),
-    actual val i: Int = -42,
-    actual val f: Float = 2.72f,
-    actual val j: Long = 123456789123456789L,
-    actual val d: Double = 3.14159265358979
+    actual konst z: Boolean = true,
+    actual konst c: Char = 'c',
+    actual konst b: Byte = 42.toByte(),
+    actual konst s: Short = (-1).toShort(),
+    actual konst i: Int = -42,
+    actual konst f: Float = 2.72f,
+    actual konst j: Long = 123456789123456789L,
+    actual konst d: Double = 3.14159265358979
 )
 
 actual annotation class PrimitiveArrays(
-    actual val z: BooleanArray = [true],
-    actual val c: CharArray = ['c'],
-    actual val b: ByteArray = [42.toByte()],
-    actual val s: ShortArray = [(-1).toShort()],
-    actual val i: IntArray = [-42],
-    actual val f: FloatArray = [2.72f],
-    actual val j: LongArray = [123456789123456789L],
-    actual val d: DoubleArray = [3.14159265358979]
+    actual konst z: BooleanArray = [true],
+    actual konst c: CharArray = ['c'],
+    actual konst b: ByteArray = [42.toByte()],
+    actual konst s: ShortArray = [(-1).toShort()],
+    actual konst i: IntArray = [-42],
+    actual konst f: FloatArray = [2.72f],
+    actual konst j: LongArray = [123456789123456789L],
+    actual konst d: DoubleArray = [3.14159265358979]
 )
 
 actual annotation class Classes(
-    actual val s: String = "OK",
-    actual val e: En = En.B,
-    // actual val a: Anno = Anno(),
-    actual val k: KClass<*> = List::class
+    actual konst s: String = "OK",
+    actual konst e: En = En.B,
+    // actual konst a: Anno = Anno(),
+    actual konst k: KClass<*> = List::class
 )
 
 actual annotation class ClassArrays(
-    actual val s: Array<String> = ["OK"],
-    actual val e: Array<En> = [En.B],
-    // actual val a: Array<Anno> = [Anno()],
-    actual val k: Array<KClass<*>> = [List::class],
-    actual vararg val v: Int = [42]
+    actual konst s: Array<String> = ["OK"],
+    actual konst e: Array<En> = [En.B],
+    // actual konst a: Array<Anno> = [Anno()],
+    actual konst k: Array<KClass<*>> = [List::class],
+    actual vararg konst v: Int = [42]
 )

@@ -56,20 +56,20 @@ interface KotlinResolutionStatelessCallbacks {
 }
 
 data class ReturnArgumentsInfo(
-    val nonErrorArguments: List<KotlinCallArgument>,
-    val lastExpression: KotlinCallArgument?,
-    val lastExpressionCoercedToUnit: Boolean,
-    val returnArgumentsExist: Boolean
+    konst nonErrorArguments: List<KotlinCallArgument>,
+    konst lastExpression: KotlinCallArgument?,
+    konst lastExpressionCoercedToUnit: Boolean,
+    konst returnArgumentsExist: Boolean
 ) {
     companion object {
-        val empty = ReturnArgumentsInfo(emptyList(), null, lastExpressionCoercedToUnit = false, returnArgumentsExist = false)
+        konst empty = ReturnArgumentsInfo(emptyList(), null, lastExpressionCoercedToUnit = false, returnArgumentsExist = false)
     }
 }
 
 data class ReturnArgumentsAnalysisResult(
-    val returnArgumentsInfo: ReturnArgumentsInfo,
-    val inferenceSession: InferenceSession?,
-    val hasInapplicableCallForBuilderInference: Boolean = false
+    konst returnArgumentsInfo: ReturnArgumentsInfo,
+    konst inferenceSession: InferenceSession?,
+    konst hasInapplicableCallForBuilderInference: Boolean = false
 )
 
 // This components hold state (trace). Work with this carefully.
@@ -104,7 +104,7 @@ interface KotlinResolutionCallbacks {
 
     fun isCompileTimeConstant(resolvedAtom: ResolvedCallAtom, expectedType: UnwrappedType): Boolean
 
-    val inferenceSession: InferenceSession
+    konst inferenceSession: InferenceSession
 
     fun getExpectedTypeFromAsExpressionAndRecordItInTrace(resolvedAtom: ResolvedCallAtom): UnwrappedType?
 

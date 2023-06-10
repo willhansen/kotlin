@@ -9,20 +9,20 @@ interface Foo {
     suspend fun resolve2(var1: Int): String
     suspend fun resolve2(var1: String): String
 
-    val Int.x1 get() = ""
-    val String.x1 get() = ""
+    konst Int.x1 get() = ""
+    konst String.x1 get() = ""
 
     var Int.x2
         get() = ""
-        set(value) {}
+        set(konstue) {}
     var String.x2
         get() = ""
-        set(value) {}
+        set(konstue) {}
 
-    val Int.x3 get() = ""
+    konst Int.x3 get() = ""
     var String.x3
         get() = ""
-        set(value) {}
+        set(konstue) {}
 
     // CR on property with to receivers are forbidden
     fun <T: Foo> test() {
@@ -46,8 +46,8 @@ interface Foo {
     }
 }
 
-val Int.x1 get() = ""
-val String.x1 get() = ""
+konst Int.x1 get() = ""
+konst String.x1 get() = ""
 
 fun <K> bar1(f: KFunction2<K, String, String>) {}
 

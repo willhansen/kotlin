@@ -19,11 +19,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirResolvedCallableReference : FirResolvedNamedReference() {
-    abstract override val source: KtSourceElement?
-    abstract override val name: Name
-    abstract override val resolvedSymbol: FirBasedSymbol<*>
-    abstract val inferredTypeArguments: List<ConeKotlinType>
-    abstract val mappedArguments: CallableReferenceMappedArguments
+    abstract override konst source: KtSourceElement?
+    abstract override konst name: Name
+    abstract override konst resolvedSymbol: FirBasedSymbol<*>
+    abstract konst inferredTypeArguments: List<ConeKotlinType>
+    abstract konst mappedArguments: CallableReferenceMappedArguments
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitResolvedCallableReference(this, data)
 

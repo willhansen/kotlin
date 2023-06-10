@@ -3,11 +3,11 @@
 
 // KT-34273
 
-class Foo(val str: String)
+class Foo(konst str: String)
 
-private val foo1 = Foo("OK")
+private konst foo1 = Foo("OK")
 
-val foo2 = foo1
+konst foo2 = foo1
 
 // MODULE: main(lib)
 // FILE: main.kt

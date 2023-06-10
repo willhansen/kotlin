@@ -22,33 +22,33 @@ import org.jetbrains.kotlin.metadata.ProtoBuf
 import org.jetbrains.kotlin.name.Name
 
 class FirAnnotationSerializer(
-    private val session: FirSession,
-    internal val stringTable: FirElementAwareStringTable,
-    private val constValueProvider: ConstValueProvider?
+    private konst session: FirSession,
+    internal konst stringTable: FirElementAwareStringTable,
+    private konst constValueProvider: ConstValueProvider?
 ) {
     fun serializeAnnotation(annotation: FirAnnotation): ProtoBuf.Annotation {
         // TODO this logic can be significantly simplified if we will find the way to convert `IrAnnotation` to `AnnotationValue`
-        val annotationValue = annotation.toConstantValue<AnnotationValue>(session, constValueProvider)
+        konst annotationValue = annotation.toConstantValue<AnnotationValue>(session, constValueProvider)
             ?: error("Cannot serialize annotation ${annotation.render()}")
         return serializeAnnotation(annotationValue)
     }
 
     fun serializeAnnotation(annotation: AnnotationValue): ProtoBuf.Annotation {
-        return serializeAnnotation(annotation.coneTypeSafe<ConeClassLikeType>(), annotation.value.argumentsMapping)
+        return serializeAnnotation(annotation.coneTypeSafe<ConeClassLikeType>(), annotation.konstue.argumentsMapping)
     }
 
     private fun serializeAnnotation(coneType: ConeClassLikeType?, argumentsMapping: Map<Name, ConstantValue<*>>): ProtoBuf.Annotation {
         return ProtoBuf.Annotation.newBuilder().apply {
-            val lookupTag = coneType?.lookupTag
+            konst lookupTag = coneType?.lookupTag
                 ?: error { "Annotation without proper lookup tag: $coneType" }
 
             id = lookupTag.toSymbol(session)?.let { stringTable.getFqNameIndex(it.fir) }
                 ?: stringTable.getQualifiedClassNameIndex(lookupTag.classId)
 
             fun addArgument(argumentExpression: ConstantValue<*>, parameterName: Name) {
-                val argument = ProtoBuf.Annotation.Argument.newBuilder()
+                konst argument = ProtoBuf.Annotation.Argument.newBuilder()
                 argument.nameId = stringTable.getStringIndex(parameterName.asString())
-                argument.setValue(valueProto(argumentExpression))
+                argument.setValue(konstueProto(argumentExpression))
                 addArgument(argument)
             }
 
@@ -61,14 +61,14 @@ class FirAnnotationSerializer(
                 if (!session.languageVersionSettings.getFlag(AnalysisFlags.metadataCompilation)) {
                     error(
                         (argument as? ErrorValue.ErrorValueWithMessage)?.message
-                            ?: "Error value after conversion of expression of $name argument"
+                            ?: "Error konstue after conversion of expression of $name argument"
                     )
                 }
             }
         }.build()
     }
 
-    internal fun valueProto(constant: ConstantValue<*>): ProtoBuf.Annotation.Argument.Value.Builder =
+    internal fun konstueProto(constant: ConstantValue<*>): ProtoBuf.Annotation.Argument.Value.Builder =
         ProtoBuf.Annotation.Argument.Value.newBuilder().apply {
             constant.accept(
                 FirAnnotationArgumentVisitor,

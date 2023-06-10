@@ -21,9 +21,9 @@ object SuspendCoroutineUninterceptedOrReturnFIF: FunctionIntrinsicFactory {
     }
     object Intrinsic: FunctionIntrinsic() {
         override fun apply(callInfo: CallInfo, arguments: List<JsExpression>, context: TranslationContext): JsExpression {
-            val lambda = arguments.first()
-            val continuation = arguments.last()
-            val invocation = JsInvocation(lambda, continuation)
+            konst lambda = arguments.first()
+            konst continuation = arguments.last()
+            konst invocation = JsInvocation(lambda, continuation)
             invocation.isSuspend = true
             return invocation
         }

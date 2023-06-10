@@ -23,7 +23,7 @@ import org.jetbrains.kotlin.ir.types.isNullable
 import org.jetbrains.kotlin.ir.util.isSuspend
 import org.jetbrains.kotlin.ir.visitors.*
 
-open class SuspendableNodesCollector(private val suspendableNodes: MutableSet<IrElement>) : IrElementVisitorVoid {
+open class SuspendableNodesCollector(private konst suspendableNodes: MutableSet<IrElement>) : IrElementVisitorVoid {
 
     private var hasSuspendableChildren = false
 
@@ -35,7 +35,7 @@ open class SuspendableNodesCollector(private val suspendableNodes: MutableSet<Ir
     private fun isSuspendableNode(node: IrElement) = node in suspendableNodes
 
     override fun visitElement(element: IrElement) {
-        val current = hasSuspendableChildren
+        konst current = hasSuspendableChildren
         hasSuspendableChildren = false
         element.acceptChildrenVoid(this)
         if (hasSuspendableChildren) {
@@ -67,7 +67,7 @@ open class SuspendableNodesCollector(private val suspendableNodes: MutableSet<Ir
 }
 
 fun collectSuspendableNodes(function: IrBlock): MutableSet<IrElement> {
-    val suspendableNodes = mutableSetOf<IrElement>()
+    konst suspendableNodes = mutableSetOf<IrElement>()
     var size: Int
 
     do {
@@ -79,13 +79,13 @@ fun collectSuspendableNodes(function: IrBlock): MutableSet<IrElement> {
 }
 
 class LiveLocalsTransformer(
-    private val localMap: Map<IrValueSymbol, IrFieldSymbol>,
-    private val receiver: () -> IrExpression,
-    private val unitType: IrType
+    private konst localMap: Map<IrValueSymbol, IrFieldSymbol>,
+    private konst receiver: () -> IrExpression,
+    private konst unitType: IrType
 ) :
     IrElementTransformerVoid() {
     override fun visitGetValue(expression: IrGetValue): IrExpression {
-        val field = localMap[expression.symbol]
+        konst field = localMap[expression.symbol]
             ?: return if (expression.symbol.owner.isDispatchReceiver)
                 receiver()
             else
@@ -96,14 +96,14 @@ class LiveLocalsTransformer(
 
     override fun visitSetValue(expression: IrSetValue): IrExpression {
         expression.transformChildrenVoid(this)
-        val field = localMap[expression.symbol] ?: return expression
-        return expression.run { IrSetFieldImpl(startOffset, endOffset, field, receiver(), value, unitType, origin) }
+        konst field = localMap[expression.symbol] ?: return expression
+        return expression.run { IrSetFieldImpl(startOffset, endOffset, field, receiver(), konstue, unitType, origin) }
     }
 
     override fun visitVariable(declaration: IrVariable): IrStatement {
         declaration.transformChildrenVoid(this)
-        val field = localMap[declaration.symbol] ?: return declaration
-        val initializer = declaration.initializer
+        konst field = localMap[declaration.symbol] ?: return declaration
+        konst initializer = declaration.initializer
         return if (initializer != null) {
             declaration.run { IrSetFieldImpl(startOffset, endOffset, field, receiver(), initializer, unitType) }
         } else {

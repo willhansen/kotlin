@@ -17,48 +17,48 @@ package contracts
 import kotlin.contracts.*
 
 // TESTCASE NUMBER: 3
-fun <T> T?.case_3(value_1: Int?, value_2: Boolean): Boolean {
+fun <T> T?.case_3(konstue_1: Int?, konstue_2: Boolean): Boolean {
     contract {
-        returns(true) implies (value_1 != null)
-        returns(false) implies (value_1 == null && !value_2)
-        returns(null) implies (value_1 == null && value_2)
+        returns(true) implies (konstue_1 != null)
+        returns(false) implies (konstue_1 == null && !konstue_2)
+        returns(null) implies (konstue_1 == null && konstue_2)
     }
 
-    return value_1 == null
+    return konstue_1 == null
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: Number, block: (() -> Unit)?): Boolean? {
+fun case_4(konstue_1: Number, block: (() -> Unit)?): Boolean? {
     contract {
         returns(true) implies (block != null)
-        returns(false) implies (value_1 is Int)
+        returns(false) implies (konstue_1 is Int)
         returns(null) implies (block == null)
     }
 
-    return <!SENSELESS_COMPARISON!>value_1 == null<!>
+    return <!SENSELESS_COMPARISON!>konstue_1 == null<!>
 }
 
 // TESTCASE NUMBER: 5
-fun String?.case_5(value_1: Number?): Boolean? {
+fun String?.case_5(konstue_1: Number?): Boolean? {
     contract {
-        returns(true) implies (value_1 == null)
+        returns(true) implies (konstue_1 == null)
         returns(false) implies (this@case_5 == null)
-        returnsNotNull() implies (value_1 is Int)
+        returnsNotNull() implies (konstue_1 is Int)
     }
 
-    return value_1 == null
+    return konstue_1 == null
 }
 
 // TESTCASE NUMBER: 6
-fun <T> T?.case_6(value_1: Number, value_2: String?): Boolean? {
+fun <T> T?.case_6(konstue_1: Number, konstue_2: String?): Boolean? {
     contract {
         returns(true) implies (this@case_6 == null)
-        returns(false) implies (value_1 is Int)
+        returns(false) implies (konstue_1 is Int)
         returns(null) implies (this@case_6 is String)
-        returnsNotNull() implies (value_2 == null)
+        returnsNotNull() implies (konstue_2 == null)
     }
 
-    return <!SENSELESS_COMPARISON!>value_1 == null<!>
+    return <!SENSELESS_COMPARISON!>konstue_1 == null<!>
 }
 
 // FILE: main.kt
@@ -66,76 +66,76 @@ fun <T> T?.case_6(value_1: Number, value_2: String?): Boolean? {
 import contracts.*
 
 // TESTCASE NUMBER: 1
-fun case_1(value_1: Any?) {
-    funWithReturns(value_1 !is Number?)
-    println(value_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-    if (funWithReturnsTrue(value_1 !is Number)) {
-        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-        if (funWithReturnsNotNull(value_1 is Int) == null) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_1(konstue_1: Any?) {
+    funWithReturns(konstue_1 !is Number?)
+    println(konstue_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+    if (funWithReturnsTrue(konstue_1 !is Number)) {
+        println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+        if (funWithReturnsNotNull(konstue_1 is Int) == null) println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(value_1: Any?) {
-    if (!funWithReturnsFalse(value_1 !is Number?)) {
-        println(value_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-        funWithReturns(value_1 !is Number)
-        println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-        if (funWithReturnsNull(value_1 !is Int) == null) println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+fun case_2(konstue_1: Any?) {
+    if (!funWithReturnsFalse(konstue_1 !is Number?)) {
+        println(konstue_1?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+        funWithReturns(konstue_1 !is Number)
+        println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+        if (funWithReturnsNull(konstue_1 !is Int) == null) println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
     }
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(value_1: Int?, value_2: Any?) {
-    if (!value_1.case_3(value_1, value_2 is Number?)) {
-        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
-        println(<!DEBUG_INFO_CONSTANT!>value_1<!>)
-    } else if (value_1.case_3(value_1, value_2 is Number?)) {
-        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+fun case_3(konstue_1: Int?, konstue_2: Any?) {
+    if (!konstue_1.case_3(konstue_1, konstue_2 is Number?)) {
+        println(konstue_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+        println(<!DEBUG_INFO_CONSTANT!>konstue_1<!>)
+    } else if (konstue_1.case_3(konstue_1, konstue_2 is Number?)) {
+        println(konstue_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     } else {
-        println(value_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
+        println(konstue_2?.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>toByte<!>())
     }
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(value_1: Number, value_2: (() -> Unit)?) {
-    if (contracts.case_4(value_1, value_2) == true) {
-        value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
-    } else if (contracts.case_4(value_1, value_2) == false) {
-        println(value_2)
-    } else if (contracts.case_4(value_1, value_2) == null) {
-        <!UNSAFE_IMPLICIT_INVOKE_CALL!>value_2<!>()
+fun case_4(konstue_1: Number, konstue_2: (() -> Unit)?) {
+    if (contracts.case_4(konstue_1, konstue_2) == true) {
+        konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>()
+    } else if (contracts.case_4(konstue_1, konstue_2) == false) {
+        println(konstue_2)
+    } else if (contracts.case_4(konstue_1, konstue_2) == null) {
+        <!UNSAFE_IMPLICIT_INVOKE_CALL!>konstue_2<!>()
     }
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(value_1: Number?, value_2: String?) {
-    when (value_2.case_5(value_1)) {
+fun case_5(konstue_1: Number?, konstue_2: String?) {
+    when (konstue_2.case_5(konstue_1)) {
         true -> {
-            println(value_2<!UNSAFE_CALL!>.<!>length)
-            println(value_1<!UNSAFE_CALL!>.<!>toByte())
+            println(konstue_2<!UNSAFE_CALL!>.<!>length)
+            println(konstue_1<!UNSAFE_CALL!>.<!>toByte())
         }
         false -> {
-            println(value_2<!UNSAFE_CALL!>.<!>length)
-            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+            println(konstue_2<!UNSAFE_CALL!>.<!>length)
+            println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
         }
         else -> {}
     }
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Number, value_2: String?, value_3: Any?) {
-    when (value_3.case_6(value_1, value_2)) {
+fun case_6(konstue_1: Number, konstue_2: String?, konstue_3: Any?) {
+    when (konstue_3.case_6(konstue_1, konstue_2)) {
         true -> {
-            println(value_3.equals("")) // OK because `value_3` is `Nothing?` and `equals` resolves to `kotlin/text/equals`, which has `String?` as receiver type.
-            println(value_2<!UNSAFE_CALL!>.<!>length)
+            println(konstue_3.equals("")) // OK because `konstue_3` is `Nothing?` and `equals` resolves to `kotlin/text/equals`, which has `String?` as receiver type.
+            println(konstue_2<!UNSAFE_CALL!>.<!>length)
         }
         false -> {
-            println(value_3.<!UNRESOLVED_REFERENCE!>length<!>)
-            println(value_2<!UNSAFE_CALL!>.<!>length)
+            println(konstue_3.<!UNRESOLVED_REFERENCE!>length<!>)
+            println(konstue_2<!UNSAFE_CALL!>.<!>length)
         }
         null -> {
-            println(value_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
+            println(konstue_1.<!UNRESOLVED_REFERENCE_WRONG_RECEIVER!>inv<!>())
         }
     }
 }

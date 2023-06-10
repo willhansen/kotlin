@@ -30,8 +30,8 @@ abstract class EventOccurrencesRangeInfo<E : EventOccurrencesRangeInfo<E, K>, K 
         @Suppress("UNCHECKED_CAST")
         var result = this as E
         for (symbol in keys.union(other.keys)) {
-            val kind1 = this[symbol] ?: EventOccurrencesRange.ZERO
-            val kind2 = other[symbol] ?: EventOccurrencesRange.ZERO
+            konst kind1 = this[symbol] ?: EventOccurrencesRange.ZERO
+            konst kind2 = other[symbol] ?: EventOccurrencesRange.ZERO
             result = result.put(symbol, op.invoke(kind1, kind2))
         }
         return result
@@ -42,10 +42,10 @@ class PropertyInitializationInfo(
     map: PersistentMap<FirPropertySymbol, EventOccurrencesRange> = persistentMapOf()
 ) : EventOccurrencesRangeInfo<PropertyInitializationInfo, FirPropertySymbol>(map) {
     companion object {
-        val EMPTY = PropertyInitializationInfo()
+        konst EMPTY = PropertyInitializationInfo()
     }
 
-    override val constructor: (PersistentMap<FirPropertySymbol, EventOccurrencesRange>) -> PropertyInitializationInfo =
+    override konst constructor: (PersistentMap<FirPropertySymbol, EventOccurrencesRange>) -> PropertyInitializationInfo =
         ::PropertyInitializationInfo
 }
 

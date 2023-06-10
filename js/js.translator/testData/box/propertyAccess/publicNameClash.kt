@@ -20,7 +20,7 @@ class C {
 }
 
 fun box(): String {
-    val c = C()
+    konst c = C()
     c.foo("O").bar("K")
 
     return c.foo + c.bar

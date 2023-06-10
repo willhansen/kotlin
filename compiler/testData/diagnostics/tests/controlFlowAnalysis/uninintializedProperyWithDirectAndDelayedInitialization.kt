@@ -2,17 +2,17 @@
 // ISSUE: KT-56678
 
 class A {
-    val b = <!UNINITIALIZED_VARIABLE!>a<!>
-    val a = 1
-    val c = a
+    konst b = <!UNINITIALIZED_VARIABLE!>a<!>
+    konst a = 1
+    konst c = a
 }
 
 class B {
-    val b = <!UNINITIALIZED_VARIABLE!>a<!>
-    val a: Int
-    val c = <!UNINITIALIZED_VARIABLE!>a<!>
+    konst b = <!UNINITIALIZED_VARIABLE!>a<!>
+    konst a: Int
+    konst c = <!UNINITIALIZED_VARIABLE!>a<!>
     init {
         a = 1
     }
-    val d = a
+    konst d = a
 }

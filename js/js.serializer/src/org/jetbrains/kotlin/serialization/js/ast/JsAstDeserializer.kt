@@ -26,9 +26,9 @@ import java.io.FileInputStream
 import java.io.InputStream
 import java.io.InputStreamReader
 
-class JsAstDeserializer(program: JsProgram, private val sourceRoots: Iterable<File>) : JsAstDeserializerBase() {
+class JsAstDeserializer(program: JsProgram, private konst sourceRoots: Iterable<File>) : JsAstDeserializerBase() {
 
-    override val scope: JsRootScope = JsRootScope(program)
+    override konst scope: JsRootScope = JsRootScope(program)
 
     fun deserialize(input: InputStream): JsProgramFragment {
         return deserialize(Chunk.parseFrom(CodedInputStream.newInstance(input).apply { setRecursionLimit(4096) }))
@@ -48,7 +48,7 @@ class JsAstDeserializer(program: JsProgram, private val sourceRoots: Iterable<Fi
     }
 
     private fun deserialize(proto: Fragment): JsProgramFragment {
-        val fragment = JsProgramFragment(scope, proto.packageFqn)
+        konst fragment = JsProgramFragment(scope, proto.packageFqn)
 
         fragment.importedModules += proto.importedModuleList.map { importedModuleProto ->
             JsImportedModule(
@@ -78,7 +78,7 @@ class JsAstDeserializer(program: JsProgram, private val sourceRoots: Iterable<Fi
 
         fragment.classes += proto.classModelList.associate { clsProto -> deserialize(clsProto).let { it.name to it } }
 
-        val moduleExpressions = proto.moduleExpressionList.map { deserialize(it) }
+        konst moduleExpressions = proto.moduleExpressionList.map { deserialize(it) }
         fragment.inlineModuleMap += proto.inlineModuleList.associate { inlineModuleProto ->
             deserializeString(inlineModuleProto.signatureId) to moduleExpressions[inlineModuleProto.expressionId]
         }
@@ -105,7 +105,7 @@ class JsAstDeserializer(program: JsProgram, private val sourceRoots: Iterable<Fi
     }
 
     private fun deserialize(proto: ClassModel): JsClassModel {
-        val superName = if (proto.hasSuperNameId()) deserializeName(proto.superNameId) else null
+        konst superName = if (proto.hasSuperNameId()) deserializeName(proto.superNameId) else null
         return JsClassModel(deserializeName(proto.nameId), superName).apply {
             proto.interfaceNameIdList.mapTo(interfaces) { deserializeName(it) }
             if (proto.hasPostDeclarationBlock()) {
@@ -115,7 +115,7 @@ class JsAstDeserializer(program: JsProgram, private val sourceRoots: Iterable<Fi
     }
 
     override fun embedSources(deserializedLocation: JsLocation, file: String): JsLocationWithSource? {
-        val contentFile = sourceRoots
+        konst contentFile = sourceRoots
             .map { File(it, file) }
             .firstOrNull { it.exists() }
 

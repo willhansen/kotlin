@@ -8,18 +8,18 @@ package test
 import java.lang.reflect.Modifier
 import kotlin.test.*
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 class A {
-    @Anno("OK") val property: Int
+    @Anno("OK") konst property: Int
         get() = 42
 }
 
 interface T {
-    @Anno("OK") val property: Int
+    @Anno("OK") konst property: Int
 }
 
-@Anno("OK") val property: Int
+@Anno("OK") konst property: Int
     get() = 42
 
 fun check(clazz: Class<*>, expected: Boolean = true) {
@@ -31,8 +31,8 @@ fun check(clazz: Class<*>, expected: Boolean = true) {
             assertTrue(method.isSynthetic())
             assertTrue(Modifier.isStatic(method.modifiers))
             assertTrue(Modifier.isPublic(method.modifiers))
-            val str = method.declaredAnnotations.single().toString()
-            assertTrue("@test.Anno\\((value=)?\"?OK\"?\\)".toRegex().matches(str), str)
+            konst str = method.declaredAnnotations.single().toString()
+            assertTrue("@test.Anno\\((konstue=)?\"?OK\"?\\)".toRegex().matches(str), str)
             return
         }
     }

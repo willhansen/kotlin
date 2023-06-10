@@ -4,7 +4,7 @@ package h
 
 class Square() {
   var size : Double =
-  <!UNRESOLVED_REFERENCE!>set<!>(<!UNRESOLVED_REFERENCE!>value<!>) {
+  <!UNRESOLVED_REFERENCE!>set<!>(<!UNRESOLVED_REFERENCE!>konstue<!>) {
     <!SYNTAX!>$area<!> <!SYNTAX!>= size * size<!>
   }
 
@@ -13,7 +13,7 @@ class Square() {
 }
 
 fun main() {
-  val s = Square()
+  konst s = Square()
 
   s.size = 2.0
 }

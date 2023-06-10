@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.layout.*
 public class MyFragment : Fragment()
 
 fun MyFragment.b() {
-    val x = login
-    val y = this.login
+    konst x = login
+    konst y = this.login
 }
 
 // 1 public _\$_findCachedViewById

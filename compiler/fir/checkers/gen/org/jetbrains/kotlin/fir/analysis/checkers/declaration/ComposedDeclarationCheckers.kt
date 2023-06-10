@@ -15,70 +15,70 @@ import org.jetbrains.kotlin.fir.analysis.checkers.cfa.FirControlFlowChecker
  */
 
 class ComposedDeclarationCheckers : DeclarationCheckers() {
-    override val basicDeclarationCheckers: Set<FirBasicDeclarationChecker>
+    override konst basicDeclarationCheckers: Set<FirBasicDeclarationChecker>
         get() = _basicDeclarationCheckers
-    override val callableDeclarationCheckers: Set<FirCallableDeclarationChecker>
+    override konst callableDeclarationCheckers: Set<FirCallableDeclarationChecker>
         get() = _callableDeclarationCheckers
-    override val functionCheckers: Set<FirFunctionChecker>
+    override konst functionCheckers: Set<FirFunctionChecker>
         get() = _functionCheckers
-    override val simpleFunctionCheckers: Set<FirSimpleFunctionChecker>
+    override konst simpleFunctionCheckers: Set<FirSimpleFunctionChecker>
         get() = _simpleFunctionCheckers
-    override val propertyCheckers: Set<FirPropertyChecker>
+    override konst propertyCheckers: Set<FirPropertyChecker>
         get() = _propertyCheckers
-    override val classLikeCheckers: Set<FirClassLikeChecker>
+    override konst classLikeCheckers: Set<FirClassLikeChecker>
         get() = _classLikeCheckers
-    override val classCheckers: Set<FirClassChecker>
+    override konst classCheckers: Set<FirClassChecker>
         get() = _classCheckers
-    override val regularClassCheckers: Set<FirRegularClassChecker>
+    override konst regularClassCheckers: Set<FirRegularClassChecker>
         get() = _regularClassCheckers
-    override val constructorCheckers: Set<FirConstructorChecker>
+    override konst constructorCheckers: Set<FirConstructorChecker>
         get() = _constructorCheckers
-    override val fileCheckers: Set<FirFileChecker>
+    override konst fileCheckers: Set<FirFileChecker>
         get() = _fileCheckers
-    override val typeParameterCheckers: Set<FirTypeParameterChecker>
+    override konst typeParameterCheckers: Set<FirTypeParameterChecker>
         get() = _typeParameterCheckers
-    override val typeAliasCheckers: Set<FirTypeAliasChecker>
+    override konst typeAliasCheckers: Set<FirTypeAliasChecker>
         get() = _typeAliasCheckers
-    override val anonymousFunctionCheckers: Set<FirAnonymousFunctionChecker>
+    override konst anonymousFunctionCheckers: Set<FirAnonymousFunctionChecker>
         get() = _anonymousFunctionCheckers
-    override val propertyAccessorCheckers: Set<FirPropertyAccessorChecker>
+    override konst propertyAccessorCheckers: Set<FirPropertyAccessorChecker>
         get() = _propertyAccessorCheckers
-    override val backingFieldCheckers: Set<FirBackingFieldChecker>
+    override konst backingFieldCheckers: Set<FirBackingFieldChecker>
         get() = _backingFieldCheckers
-    override val valueParameterCheckers: Set<FirValueParameterChecker>
-        get() = _valueParameterCheckers
-    override val enumEntryCheckers: Set<FirEnumEntryChecker>
+    override konst konstueParameterCheckers: Set<FirValueParameterChecker>
+        get() = _konstueParameterCheckers
+    override konst enumEntryCheckers: Set<FirEnumEntryChecker>
         get() = _enumEntryCheckers
-    override val anonymousObjectCheckers: Set<FirAnonymousObjectChecker>
+    override konst anonymousObjectCheckers: Set<FirAnonymousObjectChecker>
         get() = _anonymousObjectCheckers
-    override val anonymousInitializerCheckers: Set<FirAnonymousInitializerChecker>
+    override konst anonymousInitializerCheckers: Set<FirAnonymousInitializerChecker>
         get() = _anonymousInitializerCheckers
-    override val controlFlowAnalyserCheckers: Set<FirControlFlowChecker>
+    override konst controlFlowAnalyserCheckers: Set<FirControlFlowChecker>
         get() = _controlFlowAnalyserCheckers
-    override val variableAssignmentCfaBasedCheckers: Set<AbstractFirPropertyInitializationChecker>
+    override konst variableAssignmentCfaBasedCheckers: Set<AbstractFirPropertyInitializationChecker>
         get() = _variableAssignmentCfaBasedCheckers
 
-    private val _basicDeclarationCheckers: MutableSet<FirBasicDeclarationChecker> = mutableSetOf()
-    private val _callableDeclarationCheckers: MutableSet<FirCallableDeclarationChecker> = mutableSetOf()
-    private val _functionCheckers: MutableSet<FirFunctionChecker> = mutableSetOf()
-    private val _simpleFunctionCheckers: MutableSet<FirSimpleFunctionChecker> = mutableSetOf()
-    private val _propertyCheckers: MutableSet<FirPropertyChecker> = mutableSetOf()
-    private val _classLikeCheckers: MutableSet<FirClassLikeChecker> = mutableSetOf()
-    private val _classCheckers: MutableSet<FirClassChecker> = mutableSetOf()
-    private val _regularClassCheckers: MutableSet<FirRegularClassChecker> = mutableSetOf()
-    private val _constructorCheckers: MutableSet<FirConstructorChecker> = mutableSetOf()
-    private val _fileCheckers: MutableSet<FirFileChecker> = mutableSetOf()
-    private val _typeParameterCheckers: MutableSet<FirTypeParameterChecker> = mutableSetOf()
-    private val _typeAliasCheckers: MutableSet<FirTypeAliasChecker> = mutableSetOf()
-    private val _anonymousFunctionCheckers: MutableSet<FirAnonymousFunctionChecker> = mutableSetOf()
-    private val _propertyAccessorCheckers: MutableSet<FirPropertyAccessorChecker> = mutableSetOf()
-    private val _backingFieldCheckers: MutableSet<FirBackingFieldChecker> = mutableSetOf()
-    private val _valueParameterCheckers: MutableSet<FirValueParameterChecker> = mutableSetOf()
-    private val _enumEntryCheckers: MutableSet<FirEnumEntryChecker> = mutableSetOf()
-    private val _anonymousObjectCheckers: MutableSet<FirAnonymousObjectChecker> = mutableSetOf()
-    private val _anonymousInitializerCheckers: MutableSet<FirAnonymousInitializerChecker> = mutableSetOf()
-    private val _controlFlowAnalyserCheckers: MutableSet<FirControlFlowChecker> = mutableSetOf()
-    private val _variableAssignmentCfaBasedCheckers: MutableSet<AbstractFirPropertyInitializationChecker> = mutableSetOf()
+    private konst _basicDeclarationCheckers: MutableSet<FirBasicDeclarationChecker> = mutableSetOf()
+    private konst _callableDeclarationCheckers: MutableSet<FirCallableDeclarationChecker> = mutableSetOf()
+    private konst _functionCheckers: MutableSet<FirFunctionChecker> = mutableSetOf()
+    private konst _simpleFunctionCheckers: MutableSet<FirSimpleFunctionChecker> = mutableSetOf()
+    private konst _propertyCheckers: MutableSet<FirPropertyChecker> = mutableSetOf()
+    private konst _classLikeCheckers: MutableSet<FirClassLikeChecker> = mutableSetOf()
+    private konst _classCheckers: MutableSet<FirClassChecker> = mutableSetOf()
+    private konst _regularClassCheckers: MutableSet<FirRegularClassChecker> = mutableSetOf()
+    private konst _constructorCheckers: MutableSet<FirConstructorChecker> = mutableSetOf()
+    private konst _fileCheckers: MutableSet<FirFileChecker> = mutableSetOf()
+    private konst _typeParameterCheckers: MutableSet<FirTypeParameterChecker> = mutableSetOf()
+    private konst _typeAliasCheckers: MutableSet<FirTypeAliasChecker> = mutableSetOf()
+    private konst _anonymousFunctionCheckers: MutableSet<FirAnonymousFunctionChecker> = mutableSetOf()
+    private konst _propertyAccessorCheckers: MutableSet<FirPropertyAccessorChecker> = mutableSetOf()
+    private konst _backingFieldCheckers: MutableSet<FirBackingFieldChecker> = mutableSetOf()
+    private konst _konstueParameterCheckers: MutableSet<FirValueParameterChecker> = mutableSetOf()
+    private konst _enumEntryCheckers: MutableSet<FirEnumEntryChecker> = mutableSetOf()
+    private konst _anonymousObjectCheckers: MutableSet<FirAnonymousObjectChecker> = mutableSetOf()
+    private konst _anonymousInitializerCheckers: MutableSet<FirAnonymousInitializerChecker> = mutableSetOf()
+    private konst _controlFlowAnalyserCheckers: MutableSet<FirControlFlowChecker> = mutableSetOf()
+    private konst _variableAssignmentCfaBasedCheckers: MutableSet<AbstractFirPropertyInitializationChecker> = mutableSetOf()
 
     @CheckersComponentInternal
     fun register(checkers: DeclarationCheckers) {
@@ -97,7 +97,7 @@ class ComposedDeclarationCheckers : DeclarationCheckers() {
         _anonymousFunctionCheckers += checkers.anonymousFunctionCheckers
         _propertyAccessorCheckers += checkers.propertyAccessorCheckers
         _backingFieldCheckers += checkers.backingFieldCheckers
-        _valueParameterCheckers += checkers.valueParameterCheckers
+        _konstueParameterCheckers += checkers.konstueParameterCheckers
         _enumEntryCheckers += checkers.enumEntryCheckers
         _anonymousObjectCheckers += checkers.anonymousObjectCheckers
         _anonymousInitializerCheckers += checkers.anonymousInitializerCheckers

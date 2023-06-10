@@ -4,11 +4,11 @@ class A
 
 fun test(a: A) {
 
-    val lambda = a.let {
+    konst lambda = a.let {
         { it }
     }
 
-    val alsoA = lambda()
+    konst alsoA = lambda()
     takeA(alsoA)
 }
 

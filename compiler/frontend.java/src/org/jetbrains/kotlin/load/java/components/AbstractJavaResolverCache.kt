@@ -24,9 +24,9 @@ import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.lazy.ResolveSession
 import org.jetbrains.kotlin.resolve.lazy.ResolveSessionUtils
 
-abstract class AbstractJavaResolverCache(private val resolveSession: ResolveSession) : JavaResolverCache {
+abstract class AbstractJavaResolverCache(private konst resolveSession: ResolveSession) : JavaResolverCache {
 
-    protected val trace: BindingTrace get() = resolveSession.trace
+    protected konst trace: BindingTrace get() = resolveSession.trace
 
     override fun getClassResolvedFromSource(fqName: FqName): ClassDescriptor? {
         return trace.get(BindingContext.FQNAME_TO_CLASS_DESCRIPTOR, fqName.toUnsafe())?.takeUnless { it.isExpect }
@@ -37,9 +37,9 @@ abstract class AbstractJavaResolverCache(private val resolveSession: ResolveSess
         var fqName = if (fullFqName.isRoot) fullFqName else fullFqName.parent()
 
         while (true) {
-            val packageDescriptor = resolveSession.getPackageFragment(fqName)
+            konst packageDescriptor = resolveSession.getPackageFragment(fqName)
             if (packageDescriptor != null) {
-                val result = ResolveSessionUtils.findClassByRelativePath(packageDescriptor.getMemberScope(), fullFqName.tail(fqName))
+                konst result = ResolveSessionUtils.findClassByRelativePath(packageDescriptor.getMemberScope(), fullFqName.tail(fqName))
                 if (result != null) return result
             }
 

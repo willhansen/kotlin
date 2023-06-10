@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractContainingDeclarationProviderByPsiTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val currentPath = mutableListOf<KtDeclaration>()
+        konst currentPath = mutableListOf<KtDeclaration>()
         analyseForTest(ktFile.declarations.first()) {
             ktFile.accept(object : KtVisitorVoid() {
                 override fun visitElement(element: PsiElement) {
@@ -24,12 +24,12 @@ abstract class AbstractContainingDeclarationProviderByPsiTest : AbstractAnalysis
                 }
 
                 override fun visitDeclaration(dcl: KtDeclaration) {
-                    val parentDeclaration = currentPath.lastOrNull()
-                    val currentDeclarationSymbol = dcl.getSymbol()
-                    val expectedParentDeclarationSymbol = parentDeclaration?.getSymbol()
-                    val actualParentDeclarationSymbol = currentDeclarationSymbol.getContainingSymbol()
+                    konst parentDeclaration = currentPath.lastOrNull()
+                    konst currentDeclarationSymbol = dcl.getSymbol()
+                    konst expectedParentDeclarationSymbol = parentDeclaration?.getSymbol()
+                    konst actualParentDeclarationSymbol = currentDeclarationSymbol.getContainingSymbol()
                     testServices.assertions.assertEquals(expectedParentDeclarationSymbol, actualParentDeclarationSymbol) {
-                        "Invalid parent declaration for $currentDeclarationSymbol, expected $expectedParentDeclarationSymbol but $actualParentDeclarationSymbol found"
+                        "Inkonstid parent declaration for $currentDeclarationSymbol, expected $expectedParentDeclarationSymbol but $actualParentDeclarationSymbol found"
                     }
 
                     currentPath.add(dcl)

@@ -35,37 +35,37 @@ import org.jetbrains.kotlin.utils.Printer
 import java.util.*
 
 class AndroidSyntheticPackageData(
-        val moduleData: AndroidModuleData,
-        val forView: Boolean,
-        val isDeprecated: Boolean,
-        val lazyResources: () -> List<AndroidResource>)
+        konst moduleData: AndroidModuleData,
+        konst forView: Boolean,
+        konst isDeprecated: Boolean,
+        konst lazyResources: () -> List<AndroidResource>)
 
 class AndroidSyntheticPackageFragmentDescriptor(
         module: ModuleDescriptor,
         fqName: FqName,
-        val packageData: AndroidSyntheticPackageData,
-        private val lazyContext: LazySyntheticElementResolveContext,
-        private val storageManager: StorageManager,
-        private val isExperimental: Boolean,
-        private val lookupTracker: LookupTracker,
-        private val layoutName: String
+        konst packageData: AndroidSyntheticPackageData,
+        private konst lazyContext: LazySyntheticElementResolveContext,
+        private konst storageManager: StorageManager,
+        private konst isExperimental: Boolean,
+        private konst lookupTracker: LookupTracker,
+        private konst layoutName: String
 ) : PackageFragmentDescriptorImpl(module, fqName) {
-    private val scope = AndroidExtensionPropertiesScope()
+    private konst scope = AndroidExtensionPropertiesScope()
     override fun getMemberScope(): MemberScope = scope
 
     private inner class AndroidExtensionPropertiesScope : MemberScopeImpl() {
-        private val properties = storageManager.createLazyValue {
-            val packageFragmentDescriptor = this@AndroidSyntheticPackageFragmentDescriptor
+        private konst properties = storageManager.createLazyValue {
+            konst packageFragmentDescriptor = this@AndroidSyntheticPackageFragmentDescriptor
 
-            val context = lazyContext()
-            val widgetReceivers = context.getWidgetReceivers(packageData.forView, isExperimental)
-            val fragmentTypes = context.fragmentTypes
+            konst context = lazyContext()
+            konst widgetReceivers = context.getWidgetReceivers(packageData.forView, isExperimental)
+            konst fragmentTypes = context.fragmentTypes
 
-            val properties = ArrayList<PropertyDescriptor>(0)
+            konst properties = ArrayList<PropertyDescriptor>(0)
             for (resource in packageData.lazyResources()) {
                 when (resource) {
                     is AndroidResource.Widget -> {
-                        val resolvedWidget = resource.resolve(module)
+                        konst resolvedWidget = resource.resolve(module)
                         if (resolvedWidget != null) {
                             for (receiver in widgetReceivers) {
                                 properties += genPropertyForWidget(packageFragmentDescriptor, receiver.type, resolvedWidget, context)

@@ -36,14 +36,14 @@ import java.text.StringCharacterIterator
  * So please, do not convert it to object
  */
 class BinaryClassSignatureParser {
-    private val canonicalNameInterner = createStringInterner()
+    private konst canonicalNameInterner = createStringInterner()
 
     fun parseTypeParametersDeclaration(signature: CharacterIterator, context: ClassifierResolutionContext): List<JavaTypeParameter> {
         if (signature.current() != '<') {
             return emptyList()
         }
 
-        val typeParameters = arrayListOf<JavaTypeParameter>()
+        konst typeParameters = arrayListOf<JavaTypeParameter>()
         signature.next()
         while (signature.current() != '>') {
             typeParameters.add(parseTypeParameter(signature, context))
@@ -53,7 +53,7 @@ class BinaryClassSignatureParser {
     }
 
     private fun parseTypeParameter(signature: CharacterIterator, context: ClassifierResolutionContext): JavaTypeParameter {
-        val name = StringBuilder()
+        konst name = StringBuilder()
         while (signature.current() != ':' && signature.current() != CharacterIterator.DONE) {
             name.append(signature.current())
             signature.next()
@@ -61,10 +61,10 @@ class BinaryClassSignatureParser {
         if (signature.current() == CharacterIterator.DONE) {
             throw ClsFormatException()
         }
-        val parameterName = name.toString()
+        konst parameterName = name.toString()
 
         // postpone list allocation till a second bound is seen; ignore sole Object bound
-        val bounds: MutableList<JavaClassifierType> = SmartList()
+        konst bounds: MutableList<JavaClassifierType> = SmartList()
         var hasImplicitObjectBound = false
         while (signature.current() == ':') {
             signature.next()
@@ -90,7 +90,7 @@ class BinaryClassSignatureParser {
     }
 
     private fun parseTypeVariableRefSignature(signature: CharacterIterator, context: ClassifierResolutionContext): JavaClassifierType {
-        val id = StringBuilder()
+        konst id = StringBuilder()
 
         signature.next()
         while (signature.current() != ';' && signature.current() != '>' && signature.current() != CharacterIterator.DONE) {
@@ -105,7 +105,7 @@ class BinaryClassSignatureParser {
             signature.next()
         }
 
-        val parameterName = canonicalNameInterner.intern(id.toString())
+        konst parameterName = canonicalNameInterner.intern(id.toString())
 
         return PlainJavaClassifierType({ context.resolveTypeParameter(parameterName) }, emptyList())
     }
@@ -114,15 +114,15 @@ class BinaryClassSignatureParser {
         signature: CharacterIterator,
         context: ClassifierResolutionContext
     ): JavaClassifierType {
-        val canonicalName = StringBuilder()
+        konst canonicalName = StringBuilder()
 
-        val argumentGroups = SmartList<List<JavaType>>()
+        konst argumentGroups = SmartList<List<JavaType>>()
 
         signature.next()
         while (signature.current() != ';' && signature.current() != CharacterIterator.DONE) {
-            val c = signature.current()
+            konst c = signature.current()
             if (c == '<') {
-                val group = mutableListOf<JavaType>()
+                konst group = mutableListOf<JavaType>()
                 signature.next()
                 do {
                     group.add(parseClassOrTypeVariableElement(signature, context))
@@ -140,7 +140,7 @@ class BinaryClassSignatureParser {
         }
         signature.next()
 
-        val internalName = canonicalNameInterner.intern(canonicalName.toString().replace('.', '$'))
+        konst internalName = canonicalNameInterner.intern(canonicalName.toString().replace('.', '$'))
         return PlainJavaClassifierType(
             { context.resolveByInternalName(internalName) },
             argumentGroups.reversed().flattenTo(arrayListOf()).compact()
@@ -148,12 +148,12 @@ class BinaryClassSignatureParser {
     }
 
     private fun parseClassOrTypeVariableElement(signature: CharacterIterator, context: ClassifierResolutionContext): JavaType {
-        val variance = parseVariance(signature)
+        konst variance = parseVariance(signature)
         if (variance == JavaSignatureVariance.STAR) {
             return PlainJavaWildcardType(bound = null, isExtends = true)
         }
 
-        val type = parseTypeString(signature, context)
+        konst type = parseTypeString(signature, context)
         if (variance == JavaSignatureVariance.NO_VARIANCE) return type
 
         return PlainJavaWildcardType(type, isExtends = variance == JavaSignatureVariance.PLUS)
@@ -166,7 +166,7 @@ class BinaryClassSignatureParser {
     private fun parseVariance(signature: CharacterIterator): JavaSignatureVariance {
         var advance = true
 
-        val variance = when (signature.current()) {
+        konst variance = when (signature.current()) {
             '+' -> JavaSignatureVariance.PLUS
             '-' -> JavaSignatureVariance.MINUS
             '*' -> JavaSignatureVariance.STAR
@@ -194,9 +194,9 @@ class BinaryClassSignatureParser {
     }
 
     fun parseTypeString(signature: CharacterIterator, context: ClassifierResolutionContext): JavaType {
-        val dimensions = parseDimensions(signature)
+        konst dimensions = parseDimensions(signature)
 
-        val type: JavaType = parseTypeWithoutVarianceAndArray(signature, context) ?: throw ClsFormatException()
+        konst type: JavaType = parseTypeWithoutVarianceAndArray(signature, context) ?: throw ClsFormatException()
         return (1..dimensions).fold(type) { result, _ -> PlainJavaArrayType(result) }
     }
 

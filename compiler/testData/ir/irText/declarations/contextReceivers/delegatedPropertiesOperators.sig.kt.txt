@@ -50,7 +50,7 @@ class Delegate {
   // CHECK:
   //   Mangled name: Delegate#setValue!kotlin.Int(kotlin.Any?;kotlin.reflect.KProperty<*>;kotlin.String){}
   //   Public signature: /Delegate.setValue|9105212648373628088[0]
-  operator fun setValue($context_receiver_0: Int, thisRef: Any?, property: KProperty<*>, value: String): Unit
+  operator fun setValue($context_receiver_0: Int, thisRef: Any?, property: KProperty<*>, konstue: String): Unit
 
 }
 
@@ -84,7 +84,7 @@ class Result {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         Result.contextReceiverField0
   //   Mangled name computed from Descriptor: Result{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: Int
+  private /* final field */ konst contextReceiverField0: Int
 
 }
 

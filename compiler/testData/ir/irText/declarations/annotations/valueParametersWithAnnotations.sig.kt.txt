@@ -5,7 +5,7 @@ open annotation class TestAnn : Annotation {
   // CHECK:
   //   Mangled name: TestAnn{}x
   //   Public signature: /TestAnn.x|-8060530855978347579[0]
-  val x: String
+  konst x: String
     // CHECK JVM_IR:
     //   Mangled name: TestAnn#<get-x>(){}kotlin.String
     //   Public signature: /TestAnn.x.<get-x>|316111172223894646[0]
@@ -28,7 +28,7 @@ class TestClassConstructor1 {
   // CHECK:
   //   Mangled name: TestClassConstructor1{}xx
   //   Public signature: /TestClassConstructor1.xx|5916295751157136767[0]
-  val xx: Int
+  konst xx: Int
     // CHECK JVM_IR:
     //   Mangled name: TestClassConstructor1#<get-xx>(){}kotlin.Int
     //   Public signature: /TestClassConstructor1.xx.<get-xx>|-7844073399004608724[0]

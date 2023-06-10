@@ -5,11 +5,11 @@
 
 package test
 
-inline class IC1(val x: String) {
-    inline val test get() = IC2(x)
+inline class IC1(konst x: String) {
+    inline konst test get() = IC2(x)
 }
 
-inline class IC2(val x: String)
+inline class IC2(konst x: String)
 
 
 // FILE: 2.kt

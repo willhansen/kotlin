@@ -26,16 +26,16 @@ import org.jetbrains.kotlin.jps.targets.KotlinModuleBuildTarget
  */
 abstract class AbstractIncrementalCacheVersionChangedTest : AbstractIncrementalJvmJpsTest(allowNoFilesWithSuffixInTestData = true) {
     override fun performAdditionalModifications(modifications: List<Modification>) {
-        val modifiedFiles = modifications.filterIsInstance<ModifyContent>().map { it.path }
-        val targets = projectDescriptor.allModuleTargets
-        val hasKotlin = HasKotlinMarker(projectDescriptor.dataManager)
+        konst modifiedFiles = modifications.filterIsInstance<ModifyContent>().map { it.path }
+        konst targets = projectDescriptor.allModuleTargets
+        konst hasKotlin = HasKotlinMarker(projectDescriptor.dataManager)
 
         if (modifiedFiles.any { it.endsWith("clear-has-kotlin") }) {
             targets.forEach { hasKotlin.clean(it) }
         }
 
         if (modifiedFiles.none { it.endsWith("do-not-change-cache-versions") }) {
-            val versions = targets.flatMap {
+            konst versions = targets.flatMap {
                 getVersionManagersToTest(kotlinCompileContext.targetsBinding[it]!!)
             }
 

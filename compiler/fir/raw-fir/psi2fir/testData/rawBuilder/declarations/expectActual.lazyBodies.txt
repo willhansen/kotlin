@@ -2,7 +2,7 @@ FILE: expectActual.kt
     public? final? expect class MyClass : R|kotlin/Any| {
     }
     public? final? expect fun foo(): String
-    public? final? expect val x: Int
+    public? final? expect konst x: Int
         public? get(): Int
     public? final? actual class MyClass : R|kotlin/Any| {
         public? constructor(): R|MyClass| {
@@ -11,5 +11,5 @@ FILE: expectActual.kt
 
     }
     public? final? actual fun foo(): <implicit> { LAZY_BLOCK }
-    public? final? actual val x: <implicit> = LAZY_EXPRESSION
+    public? final? actual konst x: <implicit> = LAZY_EXPRESSION
         public? get(): <implicit>

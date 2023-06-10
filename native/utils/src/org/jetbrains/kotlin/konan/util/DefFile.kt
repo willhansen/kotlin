@@ -22,121 +22,121 @@ import java.io.File
 import java.io.StringReader
 import java.util.*
 
-class DefFile(val file:File?, val config:DefFileConfig, val manifestAddendProperties:Properties, val defHeaderLines:List<String>) {
+class DefFile(konst file:File?, konst config:DefFileConfig, konst manifestAddendProperties:Properties, konst defHeaderLines:List<String>) {
     private constructor(file0:File?, triple: Triple<Properties, Properties, List<String>>): this(file0, DefFileConfig(triple.first), triple.second, triple.third)
     constructor(file:File?, substitutions: Map<String, String>) : this(file, parseDefFile(file, substitutions))
 
-    val name by lazy {
+    konst name by lazy {
         file?.nameWithoutExtension ?: ""
     }
-    class DefFileConfig(private val properties: Properties) {
-        val headers by lazy {
+    class DefFileConfig(private konst properties: Properties) {
+        konst headers by lazy {
             properties.getSpaceSeparated("headers")
         }
 
-        val modules by lazy {
+        konst modules by lazy {
             properties.getSpaceSeparated("modules")
         }
 
-        val language by lazy {
+        konst language by lazy {
             properties.getProperty("language")
         }
 
-        val compilerOpts by lazy {
+        konst compilerOpts by lazy {
             properties.getSpaceSeparated("compilerOpts")
         }
 
-        val excludeSystemLibs by lazy {
+        konst excludeSystemLibs by lazy {
             properties.getProperty("excludeSystemLibs")?.toBoolean() ?: false
         }
 
-        val excludeDependentModules by lazy {
+        konst excludeDependentModules by lazy {
             properties.getProperty("excludeDependentModules")?.toBoolean() ?: false
         }
 
-        val entryPoints by lazy {
+        konst entryPoints by lazy {
             properties.getSpaceSeparated("entryPoint")
         }
 
-        val linkerOpts by lazy {
+        konst linkerOpts by lazy {
             properties.getSpaceSeparated("linkerOpts")
         }
 
-        val linker by lazy {
+        konst linker by lazy {
             properties.getProperty("linker", "clang")
         }
 
-        val excludedFunctions by lazy {
+        konst excludedFunctions by lazy {
             properties.getSpaceSeparated("excludedFunctions")
         }
 
-        val excludedMacros by lazy {
+        konst excludedMacros by lazy {
             properties.getSpaceSeparated("excludedMacros")
         }
 
-        val staticLibraries by lazy {
+        konst staticLibraries by lazy {
             properties.getSpaceSeparated("staticLibraries")
         }
 
-        val libraryPaths by lazy {
+        konst libraryPaths by lazy {
             properties.getSpaceSeparated("libraryPaths")
         }
 
-        val packageName by lazy {
+        konst packageName by lazy {
             properties.getProperty("package")
         }
 
         /**
          * Header inclusion globs.
          */
-        val headerFilter by lazy {
+        konst headerFilter by lazy {
             properties.getSpaceSeparated("headerFilter")
         }
 
         /**
          * Header exclusion globs. Have higher priority than [headerFilter].
          */
-        val excludeFilter by lazy {
+        konst excludeFilter by lazy {
             properties.getSpaceSeparated("excludeFilter")
         }
 
-        val strictEnums by lazy {
+        konst strictEnums by lazy {
             properties.getSpaceSeparated("strictEnums")
         }
 
-        val nonStrictEnums by lazy {
+        konst nonStrictEnums by lazy {
             properties.getSpaceSeparated("nonStrictEnums")
         }
 
-        val noStringConversion by lazy {
+        konst noStringConversion by lazy {
             properties.getSpaceSeparated("noStringConversion")
         }
 
-        val depends by lazy {
+        konst depends by lazy {
             properties.getSpaceSeparated("depends")
         }
 
-        val exportForwardDeclarations by lazy {
+        konst exportForwardDeclarations by lazy {
             properties.getSpaceSeparated("exportForwardDeclarations")
         }
 
-        val disableDesignatedInitializerChecks by lazy {
+        konst disableDesignatedInitializerChecks by lazy {
             properties.getProperty("disableDesignatedInitializerChecks")?.toBoolean() ?: false
         }
 
-        val foreignExceptionMode by lazy {
+        konst foreignExceptionMode by lazy {
             properties.getProperty("foreignExceptionMode")
         }
 
-        val pluginName by lazy {
+        konst pluginName by lazy {
             properties.getProperty("plugin")
         }
 
-        val objcClassesIncludingCategories by lazy {
+        konst objcClassesIncludingCategories by lazy {
             properties.getSpaceSeparated("objcClassesIncludingCategories")
         }
 
-        val userSetupHint by lazy {
+        konst userSetupHint by lazy {
             properties.getProperty("userSetupHint")
         }
     }
@@ -146,19 +146,19 @@ private fun Properties.getSpaceSeparated(name: String): List<String> =
         this.getProperty(name)?.let { parseSpaceSeparatedArgs(it) } ?: emptyList()
 
 private fun parseDefFile(file: File?, substitutions: Map<String, String>): Triple<Properties, Properties, List<String>> {
-     val properties = Properties()
+     konst properties = Properties()
 
      if (file == null) {
          return Triple(properties, Properties(), emptyList())
      }
 
-     val lines = file.readLines()
+     konst lines = file.readLines()
 
-     val separator = "---"
-     val separatorIndex = lines.indexOf(separator)
+     konst separator = "---"
+     konst separatorIndex = lines.indexOf(separator)
 
-     val propertyLines: List<String>
-     val headerLines: List<String>
+     konst propertyLines: List<String>
+     konst headerLines: List<String>
 
      if (separatorIndex != -1) {
          propertyLines = lines.subList(0, separatorIndex)
@@ -169,21 +169,21 @@ private fun parseDefFile(file: File?, substitutions: Map<String, String>): Tripl
      }
 
      // \ isn't escaping character in quotes, so replace them with \\.
-     val joinedLines = propertyLines.joinToString(System.lineSeparator())
-     val escapedTokens = joinedLines.split('"')
-     val postprocessProperties = escapedTokens.mapIndexed { index, token ->
+     konst joinedLines = propertyLines.joinToString(System.lineSeparator())
+     konst escapedTokens = joinedLines.split('"')
+     konst postprocessProperties = escapedTokens.mapIndexed { index, token ->
          if (index % 2 != 0) {
              token.replace("""\\(?=.)""".toRegex(), Regex.escapeReplacement("""\\"""))
          } else {
              token
          }
      }.joinToString("\"")
-     val propertiesReader = StringReader(postprocessProperties)
+     konst propertiesReader = StringReader(postprocessProperties)
      properties.load(propertiesReader)
 
      // Pass unsubstituted copy of properties we have obtained from `.def`
      // to compiler `-manifest`.
-     val manifestAddendProperties = properties.duplicate()
+     konst manifestAddendProperties = properties.duplicate()
 
      substitute(properties, substitutions)
 

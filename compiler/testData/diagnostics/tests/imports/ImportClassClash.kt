@@ -7,7 +7,7 @@ class someFun() {}
 fun someFun(i: Int) {}
 
 class someVal() {}
-val Int.someVal: Int get() = 3
+konst Int.someVal: Int get() = 3
 
 class A
 

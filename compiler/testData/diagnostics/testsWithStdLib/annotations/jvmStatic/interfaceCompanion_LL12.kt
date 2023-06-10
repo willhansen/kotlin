@@ -41,9 +41,9 @@ interface B {
         protected var foo5<!> = 1
 
         <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic
-        val foo6<!> = 1
+        konst foo6<!> = 1
 
-        val foo7 = 1
+        konst foo7 = 1
             <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic get<!>
 
         private var foo8 = 1
@@ -53,9 +53,9 @@ interface B {
         <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic private set<!>
 
         <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic
-        val foo10: Int<!> external get
+        konst foo10: Int<!> external get
 
-        val foo11: Int <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic external get<!>
+        konst foo11: Int <!JVM_STATIC_NOT_IN_OBJECT_OR_CLASS_COMPANION!>@JvmStatic external get<!>
     }
 
 }

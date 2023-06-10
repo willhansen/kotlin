@@ -40,17 +40,17 @@ class EnumClassMembersGenerator(declarationGenerator: DeclarationGenerator) : De
     }
 
     private fun generateValues(irClass: IrClass) {
-        val valuesFunction = irClass.descriptor.staticScope.findFirstFunction(ENUM_VALUES.identifier) {
+        konst konstuesFunction = irClass.descriptor.staticScope.findFirstFunction(ENUM_VALUES.identifier) {
             it.dispatchReceiverParameter == null &&
                     it.extensionReceiverParameter == null &&
-                    it.valueParameters.size == 0
+                    it.konstueParameters.size == 0
         }
 
         irClass.addMember(
             context.symbolTable.declareSimpleFunctionWithOverrides(
                 SYNTHETIC_OFFSET, SYNTHETIC_OFFSET,
                 IrDeclarationOrigin.ENUM_CLASS_SPECIAL_MEMBER,
-                valuesFunction
+                konstuesFunction
             ).also { irFunction ->
                 FunctionGenerator(declarationGenerator).generateFunctionParameterDeclarationsAndReturnType(
                     irFunction, null, null, emptyList()
@@ -61,17 +61,17 @@ class EnumClassMembersGenerator(declarationGenerator: DeclarationGenerator) : De
     }
 
     private fun generateValueOf(irClass: IrClass) {
-        val valueOfFunction = irClass.descriptor.staticScope.findFirstFunction(ENUM_VALUE_OF.identifier) {
+        konst konstueOfFunction = irClass.descriptor.staticScope.findFirstFunction(ENUM_VALUE_OF.identifier) {
             it.dispatchReceiverParameter == null &&
                     it.extensionReceiverParameter == null &&
-                    it.valueParameters.size == 1
+                    it.konstueParameters.size == 1
         }
 
         irClass.addMember(
             context.symbolTable.declareSimpleFunctionWithOverrides(
                 SYNTHETIC_OFFSET, SYNTHETIC_OFFSET,
                 IrDeclarationOrigin.ENUM_CLASS_SPECIAL_MEMBER,
-                valueOfFunction
+                konstueOfFunction
             ).also { irFunction ->
                 FunctionGenerator(declarationGenerator).generateFunctionParameterDeclarationsAndReturnType(
                     irFunction, null, null, emptyList()
@@ -82,7 +82,7 @@ class EnumClassMembersGenerator(declarationGenerator: DeclarationGenerator) : De
     }
 
     private fun generateEntries(irClass: IrClass) {
-        val entriesProperty = irClass.descriptor.staticScope.findFirstVariable(ENUM_ENTRIES.identifier) {
+        konst entriesProperty = irClass.descriptor.staticScope.findFirstVariable(ENUM_ENTRIES.identifier) {
             it.dispatchReceiverParameter == null && it.extensionReceiverParameter == null
         } ?: return
 

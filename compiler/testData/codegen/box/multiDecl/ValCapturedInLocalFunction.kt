@@ -4,7 +4,7 @@ class A {
 }
 
 fun box() : String {
-    val (a, b) = A()
+    konst (a, b) = A()
 
     fun run(): Int {
         return a

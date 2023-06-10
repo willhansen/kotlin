@@ -4,10 +4,10 @@
 // WITH_STDLIB
 fun <T> T.id() = this
 
-const val byteVal: UByte = <!EVALUATED("1")!>1u<!>
-const val shortVal: UShort = <!EVALUATED("2")!>2u<!>
-const val intVal: UInt = <!EVALUATED("3")!>3u<!>
-const val longVal: ULong = <!EVALUATED("4")!>4uL<!>
+const konst byteVal: UByte = <!EVALUATED("1")!>1u<!>
+const konst shortVal: UShort = <!EVALUATED("2")!>2u<!>
+const konst intVal: UInt = <!EVALUATED("3")!>3u<!>
+const konst longVal: ULong = <!EVALUATED("4")!>4uL<!>
 
 // STOP_EVALUATION_CHECKS
 fun box(): String {

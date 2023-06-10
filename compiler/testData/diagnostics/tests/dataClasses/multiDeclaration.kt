@@ -1,10 +1,10 @@
 // FIR_IDENTICAL
 // !CHECK_TYPE
 
-data class A(val x: Int, val y: String)
+data class A(konst x: Int, konst y: String)
 
 fun foo(a: A) {
-    val (b, c) = a
+    konst (b, c) = a
     checkSubtype<Int>(b)
     checkSubtype<String>(c)
 }

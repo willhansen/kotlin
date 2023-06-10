@@ -5,7 +5,7 @@ class KotlinBox<T : Any?> {
   // CHECK:
   //   Mangled name: KotlinBox{}data
   //   Public signature: /KotlinBox.data|4273011692695536650[0]
-  val data: T?
+  konst data: T?
     // CHECK JVM_IR:
     //   Mangled name: KotlinBox#<get-data>(){}1:0?
     //   Public signature: /KotlinBox.data.<get-data>|-1848755759162008356[0]

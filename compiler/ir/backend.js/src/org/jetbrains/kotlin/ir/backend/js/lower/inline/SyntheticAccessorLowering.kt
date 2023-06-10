@@ -25,9 +25,9 @@ import org.jetbrains.kotlin.ir.util.withinScope
 import org.jetbrains.kotlin.ir.visitors.*
 import org.jetbrains.kotlin.name.Name
 
-class SyntheticAccessorLowering(private val context: CommonBackendContext) : BodyLoweringPass {
+class SyntheticAccessorLowering(private konst context: CommonBackendContext) : BodyLoweringPass {
 
-    private class CandidatesCollector(val candidates: MutableCollection<IrSimpleFunction>) : IrElementVisitorVoid {
+    private class CandidatesCollector(konst candidates: MutableCollection<IrSimpleFunction>) : IrElementVisitorVoid {
 
         private fun IrSimpleFunction.isTopLevelPrivate(): Boolean {
             if (visibility != DescriptorVisibilities.PRIVATE) return false
@@ -54,7 +54,7 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
 
             super.visitMemberAccess(expression)
 
-            val callee = expression.symbol.owner as? IrSimpleFunction
+            konst callee = expression.symbol.owner as? IrSimpleFunction
 
             if (callee != null) {
                 if (callee.isInline) return
@@ -72,22 +72,22 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
             return function.transform(copier, data = null) as IrSimpleFunction
         }
 
-        private val symbolRemapper = object : DeepCopySymbolRemapper() {
+        private konst symbolRemapper = object : DeepCopySymbolRemapper() {
             override fun visitSimpleFunction(declaration: IrSimpleFunction) {
                 remapSymbol(functions, declaration) {
                     IrSimpleFunctionSymbolImpl()
                 }
                 declaration.typeParameters.forEach { it.acceptVoid(this) }
                 declaration.extensionReceiverParameter?.acceptVoid(this)
-                declaration.valueParameters.forEach { it.acceptVoid(this) }
+                declaration.konstueParameters.forEach { it.acceptVoid(this) }
             }
         }
 
-        private val typeRemapper = SimpleTypeRemapper(symbolRemapper)
+        private konst typeRemapper = SimpleTypeRemapper(symbolRemapper)
 
-        private val copier = object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
+        private konst copier = object : DeepCopyIrTreeWithSymbols(symbolRemapper, typeRemapper) {
             override fun visitSimpleFunction(declaration: IrSimpleFunction): IrSimpleFunction {
-                val newName = Name.identifier("${declaration.name.asString()}\$accessor\$$fileHash")
+                konst newName = Name.identifier("${declaration.name.asString()}\$accessor\$$fileHash")
                 return declaration.factory.createFunction(
                     declaration.startOffset, declaration.endOffset,
                     mapDeclarationOrigin(declaration.origin),
@@ -119,8 +119,8 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
                         it.parent = this
                     }
                     returnType = typeRemapper.remapType(declaration.returnType)
-                    valueParameters = declaration.valueParameters.transform()
-                    valueParameters.forEach { it.parent = this }
+                    konstueParameters = declaration.konstueParameters.transform()
+                    konstueParameters.forEach { it.parent = this }
                     typeParameters.forEach { it.parent = this }
                 }
             }
@@ -128,16 +128,16 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
     }
 
     private fun IrSimpleFunction.createAccessor(fileHash: String): IrSimpleFunction {
-        val copier = FunctionCopier(fileHash)
-        val newFunction = copier.copy(this)
+        konst copier = FunctionCopier(fileHash)
+        konst newFunction = copier.copy(this)
 
-        val irCall = IrCallImpl(startOffset, endOffset, newFunction.returnType, symbol, typeParameters.size, valueParameters.size)
+        konst irCall = IrCallImpl(startOffset, endOffset, newFunction.returnType, symbol, typeParameters.size, konstueParameters.size)
 
         newFunction.typeParameters.forEachIndexed { i, tp ->
             irCall.putTypeArgument(i, tp.defaultType)
         }
 
-        newFunction.valueParameters.forEachIndexed { i, vp ->
+        newFunction.konstueParameters.forEachIndexed { i, vp ->
             irCall.putValueArgument(i, IrGetValueImpl(startOffset, endOffset, vp.type, vp.symbol))
         }
 
@@ -145,27 +145,27 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
             IrGetValueImpl(startOffset, endOffset, it.type, it.symbol)
         }
 
-        val irReturn = IrReturnImpl(startOffset, endOffset, context.irBuiltIns.nothingType, newFunction.symbol, irCall)
+        konst irReturn = IrReturnImpl(startOffset, endOffset, context.irBuiltIns.nothingType, newFunction.symbol, irCall)
 
         newFunction.body = context.irFactory.createBlockBody(startOffset, endOffset, listOf(irReturn))
 
         return newFunction
     }
 
-    class CallSiteTransformer(private val functionMap: Map<IrSimpleFunction, IrSimpleFunction>) : IrElementTransformerVoid() {
+    class CallSiteTransformer(private konst functionMap: Map<IrSimpleFunction, IrSimpleFunction>) : IrElementTransformerVoid() {
         override fun visitCall(expression: IrCall): IrExpression {
             expression.transformChildrenVoid()
 
-            val callee = expression.symbol.owner
+            konst callee = expression.symbol.owner
 
             functionMap[callee]?.let { newFunction ->
-                val newExpression = expression.run {
-                    IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, valueArgumentsCount, origin)
+                konst newExpression = expression.run {
+                    IrCallImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, konstueArgumentsCount, origin)
                 }
 
                 newExpression.copyTypeArgumentsFrom(expression)
                 newExpression.extensionReceiver = expression.extensionReceiver
-                for (i in 0 until expression.valueArgumentsCount) {
+                for (i in 0 until expression.konstueArgumentsCount) {
                     newExpression.putValueArgument(i, expression.getValueArgument(i))
                 }
 
@@ -178,17 +178,17 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
         override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
             expression.transformChildrenVoid()
 
-            val callee = expression.symbol.owner
+            konst callee = expression.symbol.owner
 
             functionMap[callee]?.let { newFunction ->
-                val newExpression = expression.run {
+                konst newExpression = expression.run {
                     // TODO: What has to be done with `reflectionTarget`?
-                    IrFunctionReferenceImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, valueArgumentsCount)
+                    IrFunctionReferenceImpl(startOffset, endOffset, type, newFunction.symbol, typeArgumentsCount, konstueArgumentsCount)
                 }
 
                 newExpression.copyTypeArgumentsFrom(expression)
                 newExpression.extensionReceiver = expression.extensionReceiver
-                for (i in 0 until expression.valueArgumentsCount) {
+                for (i in 0 until expression.konstueArgumentsCount) {
                     newExpression.putValueArgument(i, expression.getValueArgument(i))
                 }
 
@@ -202,14 +202,14 @@ class SyntheticAccessorLowering(private val context: CommonBackendContext) : Bod
     override fun lower(irBody: IrBody, container: IrDeclaration) {}
 
     override fun lower(irFile: IrFile) {
-        val candidates = mutableListOf<IrSimpleFunction>()
+        konst candidates = mutableListOf<IrSimpleFunction>()
         irFile.acceptChildrenVoid(CandidatesCollector(candidates))
 
         if (candidates.isEmpty()) return
 
-        val fileHash = irFile.fileEntry.name.hashCode().toUInt().toString(Character.MAX_RADIX)
-        val accessors = candidates.map { context.irFactory.stageController.restrictTo(it) { it.createAccessor(fileHash) } }
-        val candidatesMap = candidates.zip(accessors).toMap()
+        konst fileHash = irFile.fileEntry.name.hashCode().toUInt().toString(Character.MAX_RADIX)
+        konst accessors = candidates.map { context.irFactory.stageController.restrictTo(it) { it.createAccessor(fileHash) } }
+        konst candidatesMap = candidates.zip(accessors).toMap()
 
         irFile.transformChildrenVoid(CallSiteTransformer(candidatesMap))
 

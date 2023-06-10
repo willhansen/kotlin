@@ -1,14 +1,14 @@
 package
 
-public val seeAlsoDerivedFoo: kotlin.String
-public val seeAlsoFoo: kotlin.String
-public val testDerivedFoo: kotlin.String
-public val testFoo: kotlin.String
-public val testInner1: [Error type: Unresolved type for JT.Inner]
-public val testInner2: [Error type: Unresolved type for KT.Inner]
-public val testNested1: [Error type: Unresolved type for JT.Nested]
-public val testNested2: [Error type: Unresolved type for KT.Nested]
-public val testNested3: [Error type: Unresolved type for IT.Nested]
+public konst seeAlsoDerivedFoo: kotlin.String
+public konst seeAlsoFoo: kotlin.String
+public konst testDerivedFoo: kotlin.String
+public konst testFoo: kotlin.String
+public konst testInner1: [Error type: Unresolved type for JT.Inner]
+public konst testInner2: [Error type: Unresolved type for KT.Inner]
+public konst testNested1: [Error type: Unresolved type for JT.Nested]
+public konst testNested2: [Error type: Unresolved type for KT.Nested]
+public konst testNested3: [Error type: Unresolved type for IT.Nested]
 public fun testInnerAsTypeArgument1(/*0*/ x: kotlin.collections.List<[Error type: Unresolved type for JT.Inner]>): kotlin.Unit
 public fun testInnerAsTypeArgument2(/*0*/ x: kotlin.collections.List<[Error type: Unresolved type for KT.Inner]>): kotlin.Unit
 public fun testNestedAsTypeArgument1(/*0*/ x: kotlin.collections.List<[Error type: Unresolved type for JT.Nested]>): kotlin.Unit

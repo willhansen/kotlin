@@ -4,7 +4,7 @@ FILE: smartcastOnFunctionalType.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val provider: R|(() -> kotlin/String)?| = R|<local>/provider|
+        public final konst provider: R|(() -> kotlin/String)?| = R|<local>/provider|
             public get(): R|(() -> kotlin/String)?|
 
         public final fun foo(): R|kotlin/Unit| {
@@ -25,7 +25,7 @@ FILE: smartcastOnFunctionalType.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val nullableCheckBox: R|B?| = Null(null)
+        public final konst nullableCheckBox: R|B?| = Null(null)
             public get(): R|B?|
 
         public final fun fail(): R|kotlin/Unit| {

@@ -2,7 +2,7 @@ var global = 0
 
 fun sideEffect() = global++
 
-class A(val x: String) {
+class A(konst x: String) {
     constructor(y: Int = sideEffect(), z: (Int) -> Int = { it + sideEffect() }) : this("$y:${z(y)}") {}
 }
 

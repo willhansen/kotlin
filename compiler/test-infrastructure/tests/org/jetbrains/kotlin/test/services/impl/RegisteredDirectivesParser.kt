@@ -8,61 +8,61 @@ package org.jetbrains.kotlin.test.services.impl
 import org.jetbrains.kotlin.test.Assertions
 import org.jetbrains.kotlin.test.directives.model.*
 
-class RegisteredDirectivesParser(private val container: DirectivesContainer, private val assertions: Assertions) {
+class RegisteredDirectivesParser(private konst container: DirectivesContainer, private konst assertions: Assertions) {
     companion object {
-        private val DIRECTIVE_PATTERN = Regex("""^//\s*[!]?([A-Z0-9_]+)(:[ \t]*(.*))? *$""")
-        private val SPACES_PATTERN = Regex("""[,]?[ \t]+""")
-        private const val NAME_GROUP = 1
-        private const val VALUES_GROUP = 3
+        private konst DIRECTIVE_PATTERN = Regex("""^//\s*[!]?([A-Z0-9_]+)(:[ \t]*(.*))? *$""")
+        private konst SPACES_PATTERN = Regex("""[,]?[ \t]+""")
+        private const konst NAME_GROUP = 1
+        private const konst VALUES_GROUP = 3
 
         fun parseDirective(line: String): RawDirective? {
-            val result = DIRECTIVE_PATTERN.matchEntire(line)?.groupValues ?: return null
-            val name = result.getOrNull(NAME_GROUP) ?: return null
-            val rawValue = result.getOrNull(VALUES_GROUP)
-            val values = rawValue?.split(SPACES_PATTERN)?.filter { it.isNotBlank() }?.takeIf { it.isNotEmpty() }
-            return RawDirective(name, values, rawValue)
+            konst result = DIRECTIVE_PATTERN.matchEntire(line)?.groupValues ?: return null
+            konst name = result.getOrNull(NAME_GROUP) ?: return null
+            konst rawValue = result.getOrNull(VALUES_GROUP)
+            konst konstues = rawValue?.split(SPACES_PATTERN)?.filter { it.isNotBlank() }?.takeIf { it.isNotEmpty() }
+            return RawDirective(name, konstues, rawValue)
         }
     }
 
-    data class RawDirective(val name: String, val values: List<String>?, val rawValue: String?)
-    data class ParsedDirective(val directive: Directive, val values: List<*>)
+    data class RawDirective(konst name: String, konst konstues: List<String>?, konst rawValue: String?)
+    data class ParsedDirective(konst directive: Directive, konst konstues: List<*>)
 
-    private val simpleDirectives = mutableListOf<SimpleDirective>()
-    private val stringValueDirectives = mutableMapOf<StringDirective, MutableList<String>>()
-    private val valueDirectives = mutableMapOf<ValueDirective<*>, MutableList<Any>>()
+    private konst simpleDirectives = mutableListOf<SimpleDirective>()
+    private konst stringValueDirectives = mutableMapOf<StringDirective, MutableList<String>>()
+    private konst konstueDirectives = mutableMapOf<ValueDirective<*>, MutableList<Any>>()
 
     /**
      * returns true means that line contain directive
      */
     fun parse(line: String): Boolean {
-        val rawDirective = parseDirective(line) ?: return false
-        val parsedDirective = convertToRegisteredDirective(rawDirective) ?: return false
+        konst rawDirective = parseDirective(line) ?: return false
+        konst parsedDirective = convertToRegisteredDirective(rawDirective) ?: return false
         addParsedDirective(parsedDirective)
         return true
     }
 
     fun addParsedDirective(parsedDirective: ParsedDirective) {
-        val (directive, values) = parsedDirective
+        konst (directive, konstues) = parsedDirective
         when (directive) {
             is SimpleDirective -> simpleDirectives += directive
             is StringDirective -> {
-                val list = stringValueDirectives.getOrPut(directive, ::mutableListOf)
+                konst list = stringValueDirectives.getOrPut(directive, ::mutableListOf)
                 @Suppress("UNCHECKED_CAST")
-                list += values as List<String>
+                list += konstues as List<String>
             }
             is ValueDirective<*> -> {
-                val list = valueDirectives.getOrPut(directive, ::mutableListOf)
+                konst list = konstueDirectives.getOrPut(directive, ::mutableListOf)
                 @Suppress("UNCHECKED_CAST")
-                list.addAll(values as List<Any>)
+                list.addAll(konstues as List<Any>)
             }
         }
     }
 
     fun convertToRegisteredDirective(rawDirective: RawDirective): ParsedDirective? {
-        val (name, rawValues, rawValueString) = rawDirective
-        val directive = container[name] ?: return null
+        konst (name, rawValues, rawValueString) = rawDirective
+        konst directive = container[name] ?: return null
 
-        val values: List<*> = when (directive) {
+        konst konstues: List<*> = when (directive) {
             is SimpleDirective -> {
                 if (rawValues != null) {
                     assertions.fail {
@@ -82,13 +82,13 @@ class RegisteredDirectivesParser(private val container: DirectivesContainer, pri
             is ValueDirective<*> -> {
                 if (rawValues == null) {
                     assertions.fail {
-                        "Directive $directive must have at least one value"
+                        "Directive $directive must have at least one konstue"
                     }
                 }
-                rawValues.map { directive.extractValue(it) ?: assertions.fail { "$it is not valid value for $directive" } }
+                rawValues.map { directive.extractValue(it) ?: assertions.fail { "$it is not konstid konstue for $directive" } }
             }
         }
-        return ParsedDirective(directive, values)
+        return ParsedDirective(directive, konstues)
     }
 
     private fun <T : Any> ValueDirective<T>.extractValue(name: String): T? {
@@ -96,6 +96,6 @@ class RegisteredDirectivesParser(private val container: DirectivesContainer, pri
     }
 
     fun build(): RegisteredDirectives {
-        return RegisteredDirectivesImpl(simpleDirectives, stringValueDirectives, valueDirectives)
+        return RegisteredDirectivesImpl(simpleDirectives, stringValueDirectives, konstueDirectives)
     }
 }

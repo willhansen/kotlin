@@ -22,20 +22,20 @@ class WithIndiciesBenchmark {
     }
 
     func withIndicies() {
-        for (index, value) in data.lazy.enumerated() {
-            if (filterLoad(value)) {
+        for (index, konstue) in data.lazy.enumerated() {
+            if (filterLoad(konstue)) {
                 Blackhole.consume(index)
-                Blackhole.consume(value)
+                Blackhole.consume(konstue)
             }
         }
     }
 
     func withIndiciesManual() {
         var index = 0
-        for value in data {
-            if (filterLoad(value)) {
+        for konstue in data {
+            if (filterLoad(konstue)) {
                 Blackhole.consume(index)
-                Blackhole.consume(value)
+                Blackhole.consume(konstue)
             }
             index += 1
         }

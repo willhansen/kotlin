@@ -25,7 +25,7 @@ import javax.inject.Inject
 
 class SamWithReceiverGradleSubplugin
 @Inject internal constructor(
-    private val registry: ToolingModelBuilderRegistry
+    private konst registry: ToolingModelBuilderRegistry
 ) : KotlinCompilerPluginSupportPlugin {
 
     override fun apply(target: Project) {
@@ -34,10 +34,10 @@ class SamWithReceiverGradleSubplugin
     }
 
     companion object {
-        const val SAM_WITH_RECEIVER_ARTIFACT_NAME = "kotlin-sam-with-receiver-compiler-plugin-embeddable"
+        const konst SAM_WITH_RECEIVER_ARTIFACT_NAME = "kotlin-sam-with-receiver-compiler-plugin-embeddable"
 
-        private const val ANNOTATION_ARG_NAME = "annotation"
-        private const val PRESET_ARG_NAME = "preset"
+        private const konst ANNOTATION_ARG_NAME = "annotation"
+        private const konst PRESET_ARG_NAME = "preset"
     }
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
@@ -45,13 +45,13 @@ class SamWithReceiverGradleSubplugin
     override fun applyToCompilation(
         kotlinCompilation: KotlinCompilation<*>
     ): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
-        val samWithReceiverExtension =
+        konst samWithReceiverExtension =
             project.extensions.findByType(SamWithReceiverExtension::class.java) ?: return project.provider { emptyList<SubpluginOption>() }
 
         return project.provider {
-            val options = mutableListOf<SubpluginOption>()
+            konst options = mutableListOf<SubpluginOption>()
 
             for (anno in samWithReceiverExtension.myAnnotations) {
                 options += SubpluginOption(ANNOTATION_ARG_NAME, anno)

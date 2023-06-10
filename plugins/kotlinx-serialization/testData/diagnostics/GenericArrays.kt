@@ -5,10 +5,10 @@
 import kotlinx.serialization.*
 
 @Serializable
-class C(val values: IntArray) // OK
+class C(konst konstues: IntArray) // OK
 
 @Serializable
-class B(val values: Array<String>) // OK
+class B(konst konstues: Array<String>) // OK
 
 @Serializable
-class A<T>(val values: <!GENERIC_ARRAY_ELEMENT_NOT_SUPPORTED!>Array<T><!>)
+class A<T>(konst konstues: <!GENERIC_ARRAY_ELEMENT_NOT_SUPPORTED!>Array<T><!>)

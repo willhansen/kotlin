@@ -1,2 +1,2 @@
 Resolved to:
-0: (in C) val bb: kotlin.Int
+0: (in C) konst bb: kotlin.Int

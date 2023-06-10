@@ -4,7 +4,7 @@ class ~k~Klass {
 
 fun ~f~function() = ""
 
-val ~p~property = ""
+konst ~p~property = ""
 
 // FILE: anotherFromRootPackage.kt
 fun foo() {

@@ -14,7 +14,7 @@ FILE: setWithTrailingLambda.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val meta: R|MyMap<EditorData, kotlin/Any>| = R|<local>/meta|
+        public final konst meta: R|MyMap<EditorData, kotlin/Any>| = R|<local>/meta|
             public get(): R|MyMap<EditorData, kotlin/Any>|
 
         public final operator fun component1(): R|MyMap<EditorData, kotlin/Any>|

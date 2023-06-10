@@ -37,10 +37,10 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 import org.jetbrains.kotlin.types.TypeUtils
 
 class RepeatableAnnotationChecker(
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val jvmTarget: JvmTarget,
-    private val platformAnnotationFeaturesSupport: JvmPlatformAnnotationFeaturesSupport,
-    private val module: ModuleDescriptor,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst jvmTarget: JvmTarget,
+    private konst platformAnnotationFeaturesSupport: JvmPlatformAnnotationFeaturesSupport,
+    private konst module: ModuleDescriptor,
 ) : AdditionalAnnotationChecker {
     override fun checkEntries(
         entries: List<KtAnnotationEntry>,
@@ -51,9 +51,9 @@ class RepeatableAnnotationChecker(
     ) {
         if (entries.isEmpty()) return
 
-        val annotations = entries.mapNotNull { entry ->
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry)
-            val useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
+        konst annotations = entries.mapNotNull { entry ->
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry)
+            konst useSiteTarget = entry.useSiteTarget?.getAnnotationUseSiteTarget()
             if (descriptor != null) {
                 ResolvedAnnotation(entry, descriptor, useSiteTarget)
             } else null
@@ -62,10 +62,10 @@ class RepeatableAnnotationChecker(
         checkRepeatedEntries(annotations, trace)
 
         if (annotated is KtClassOrObject && annotated.hasModifier(KtTokens.ANNOTATION_KEYWORD)) {
-            val annotationClass = trace.get(BindingContext.CLASS, annotated)
+            konst annotationClass = trace.get(BindingContext.CLASS, annotated)
             if (annotationClass != null) {
-                val javaRepeatable = annotations.find { it.descriptor.fqName == JvmAnnotationNames.REPEATABLE_ANNOTATION }
-                val kotlinRepeatable = annotations.find { it.descriptor.fqName == StandardNames.FqNames.repeatable }
+                konst javaRepeatable = annotations.find { it.descriptor.fqName == JvmAnnotationNames.REPEATABLE_ANNOTATION }
+                konst kotlinRepeatable = annotations.find { it.descriptor.fqName == StandardNames.FqNames.repeatable }
                 when {
                     javaRepeatable != null -> checkJavaRepeatableAnnotationDeclaration(javaRepeatable, annotationClass, trace)
                     kotlinRepeatable != null -> checkKotlinRepeatableAnnotationDeclaration(kotlinRepeatable, annotationClass, trace)
@@ -88,9 +88,9 @@ class RepeatableAnnotationChecker(
         annotationClass: ClassDescriptor,
         trace: BindingTrace,
     ) {
-        val containerKClassValue = javaRepeatable.descriptor.allValueArguments[Name.identifier("value")]
+        konst containerKClassValue = javaRepeatable.descriptor.allValueArguments[Name.identifier("konstue")]
         if (containerKClassValue is KClassValue) {
-            val containerClass = TypeUtils.getClassDescriptor(containerKClassValue.getArgumentType(module))
+            konst containerClass = TypeUtils.getClassDescriptor(containerKClassValue.getArgumentType(module))
             if (containerClass != null) {
                 checkRepeatableAnnotationContainer(annotationClass, containerClass, trace, javaRepeatable.entry)
             }
@@ -102,7 +102,7 @@ class RepeatableAnnotationChecker(
         annotationClass: ClassDescriptor,
         trace: BindingTrace,
     ) {
-        val nestedClassNamedContainer =
+        konst nestedClassNamedContainer =
             annotationClass.unsubstitutedInnerClassesScope.getContributedClassifier(
                 Name.identifier(JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME),
                 NoLookupLocation.FOR_ALREADY_TRACKED
@@ -118,14 +118,14 @@ class RepeatableAnnotationChecker(
     }
 
     private fun checkRepeatedEntries(annotations: List<ResolvedAnnotation>, trace: BindingTrace) {
-        val entryTypesWithAnnotations = hashMapOf<FqName, MutableList<AnnotationUseSiteTarget?>>()
+        konst entryTypesWithAnnotations = hashMapOf<FqName, MutableList<AnnotationUseSiteTarget?>>()
 
         for ((entry, descriptor, useSiteTarget) in annotations) {
-            val fqName = descriptor.fqName ?: continue
-            val classDescriptor = descriptor.annotationClass ?: continue
+            konst fqName = descriptor.fqName ?: continue
+            konst classDescriptor = descriptor.annotationClass ?: continue
 
-            val existingTargetsForAnnotation = entryTypesWithAnnotations.getOrPut(fqName) { arrayListOf() }
-            val duplicateAnnotation = useSiteTarget in existingTargetsForAnnotation
+            konst existingTargetsForAnnotation = entryTypesWithAnnotations.getOrPut(fqName) { arrayListOf() }
+            konst duplicateAnnotation = useSiteTarget in existingTargetsForAnnotation
                     || (existingTargetsForAnnotation.any { (it == null) != (useSiteTarget == null) })
 
             if (duplicateAnnotation
@@ -135,7 +135,7 @@ class RepeatableAnnotationChecker(
                 if (languageVersionSettings.supportsFeature(LanguageFeature.RepeatableAnnotations)) {
                     // It's not allowed to have both a repeated annotation (applied more than once) and its container
                     // on the same element. See https://docs.oracle.com/javase/specs/jls/se16/html/jls-9.html#jls-9.7.5.
-                    val explicitContainer = resolveContainerAnnotation(classDescriptor)
+                    konst explicitContainer = resolveContainerAnnotation(classDescriptor)
                     if (explicitContainer != null && annotations.any { it.descriptor.fqName == explicitContainer }) {
                         trace.report(ErrorsJvm.REPEATED_ANNOTATION_WITH_CONTAINER.on(entry, fqName, explicitContainer))
                     }
@@ -164,17 +164,17 @@ class RepeatableAnnotationChecker(
         annotationClass: ClassDescriptor,
         reportOn: KtAnnotationEntry,
     ): Diagnostic? {
-        val containerCtor = containerClass.unsubstitutedPrimaryConstructor ?: return null
+        konst containerCtor = containerClass.unsubstitutedPrimaryConstructor ?: return null
 
-        val value = containerCtor.valueParameters.find { it.name.asString() == "value" }
-        if (value == null || !KotlinBuiltIns.isArray(value.type) ||
-            value.type.arguments.single().type.constructor.declarationDescriptor != annotationClass
+        konst konstue = containerCtor.konstueParameters.find { it.name.asString() == "konstue" }
+        if (konstue == null || !KotlinBuiltIns.isArray(konstue.type) ||
+            konstue.type.arguments.single().type.constructor.declarationDescriptor != annotationClass
         ) {
             return ErrorsJvm.REPEATABLE_CONTAINER_MUST_HAVE_VALUE_ARRAY
                 .on(languageVersionSettings, reportOn, containerClass.fqNameSafe, annotationClass.fqNameSafe)
         }
 
-        val otherNonDefault = containerCtor.valueParameters.find { it.name.asString() != "value" && !it.declaresDefaultValue() }
+        konst otherNonDefault = containerCtor.konstueParameters.find { it.name.asString() != "konstue" && !it.declaresDefaultValue() }
         if (otherNonDefault != null) {
             return ErrorsJvm.REPEATABLE_CONTAINER_HAS_NON_DEFAULT_PARAMETER
                 .on(languageVersionSettings, reportOn, containerClass.fqNameSafe, otherNonDefault)
@@ -188,8 +188,8 @@ class RepeatableAnnotationChecker(
         annotationClass: ClassDescriptor,
         reportOn: KtAnnotationEntry,
     ): Diagnostic? {
-        val annotationRetention = annotationClass.getAnnotationRetention() ?: KotlinRetention.RUNTIME
-        val containerRetention = containerClass.getAnnotationRetention() ?: KotlinRetention.RUNTIME
+        konst annotationRetention = annotationClass.getAnnotationRetention() ?: KotlinRetention.RUNTIME
+        konst containerRetention = containerClass.getAnnotationRetention() ?: KotlinRetention.RUNTIME
         if (containerRetention > annotationRetention) {
             return ErrorsJvm.REPEATABLE_CONTAINER_HAS_SHORTER_RETENTION
                 .on(
@@ -209,14 +209,14 @@ class RepeatableAnnotationChecker(
         annotationClass: ClassDescriptor,
         reportOn: KtAnnotationEntry,
     ): Diagnostic? {
-        val annotationTargets = AnnotationChecker.applicableTargetSet(annotationClass)
-        val containerTargets = AnnotationChecker.applicableTargetSet(containerClass)
+        konst annotationTargets = AnnotationChecker.applicableTargetSet(annotationClass)
+        konst containerTargets = AnnotationChecker.applicableTargetSet(containerClass)
 
         // See https://docs.oracle.com/javase/specs/jls/se16/html/jls-9.html#jls-9.6.3.
         // (TBH, the rules about TYPE/TYPE_USE and TYPE_PARAMETER/TYPE_USE don't seem to make a lot of sense, but it's JLS
         // so we better obey it for full interop with the Java language and reflection.)
         for (target in containerTargets) {
-            val ok = when (target) {
+            konst ok = when (target) {
                 in annotationTargets -> true
                 KotlinTarget.ANNOTATION_CLASS ->
                     KotlinTarget.CLASS in annotationTargets ||
@@ -240,19 +240,19 @@ class RepeatableAnnotationChecker(
         classDescriptor.isAnnotatedWithKotlinRepeatable() || platformAnnotationFeaturesSupport.isRepeatableAnnotationClass(classDescriptor)
 
     private data class ResolvedAnnotation(
-        val entry: KtAnnotationEntry,
-        val descriptor: AnnotationDescriptor,
-        val useSiteTarget: AnnotationUseSiteTarget?,
+        konst entry: KtAnnotationEntry,
+        konst descriptor: AnnotationDescriptor,
+        konst useSiteTarget: AnnotationUseSiteTarget?,
     )
 
     // For a repeatable annotation class, returns FQ name of the container annotation if it can be resolved in Kotlin.
     // This only exists when the annotation class (whether declared in Java or Kotlin) is annotated with java.lang.annotation.Repeatable,
     // in which case the container annotation is @j.l.a.Repeatable's only argument.
     private fun resolveContainerAnnotation(annotationClass: ClassDescriptor): FqName? {
-        val javaRepeatable = annotationClass.annotations.findAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION) ?: return null
-        val value = javaRepeatable.allValueArguments[Name.identifier("value")] as? KClassValue ?: return null
+        konst javaRepeatable = annotationClass.annotations.findAnnotation(JvmAnnotationNames.REPEATABLE_ANNOTATION) ?: return null
+        konst konstue = javaRepeatable.allValueArguments[Name.identifier("konstue")] as? KClassValue ?: return null
         // Local annotations are supported neither in Java nor in Kotlin.
-        val normalClass = value.value as? KClassValue.Value.NormalClass ?: return null
+        konst normalClass = konstue.konstue as? KClassValue.Value.NormalClass ?: return null
         return normalClass.classId.asSingleFqName()
     }
 }

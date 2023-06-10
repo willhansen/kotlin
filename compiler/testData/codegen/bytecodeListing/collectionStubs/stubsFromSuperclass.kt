@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 open class A<T> : Collection<T> {
-    override val size: Int
+    override konst size: Int
         get() = TODO("Not yet implemented")
 
     override fun contains(element: T): Boolean {

@@ -14,5 +14,5 @@ fun Foo(kind: String = "A"): Foo = when (kind) {
 }
 
 fun main() {
-    val foo = Foo()
+    konst foo = Foo()
 }

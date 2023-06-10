@@ -24,10 +24,10 @@ package org.jetbrains.ring
 
 open class AbstractMethodBenchmark {
 
-    private val arr: List<String> = zdf_win
-    private val sequence = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+    private konst arr: List<String> = zdf_win
+    private konst sequence = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 
-    private val sequenceMap = HashMap<Char, Int>()
+    private konst sequenceMap = HashMap<Char, Int>()
 
     init {
         var i = 0;
@@ -38,13 +38,13 @@ open class AbstractMethodBenchmark {
 
     //Benchmark
     fun sortStrings(): Set<String> {
-        val res = arr.subList(0, if (BENCHMARK_SIZE < arr.size) BENCHMARK_SIZE else arr.size).toSet()
+        konst res = arr.subList(0, if (BENCHMARK_SIZE < arr.size) BENCHMARK_SIZE else arr.size).toSet()
         return res
     }
 
     //Benchmark
     fun sortStringsWithComparator(): Set<String> {
-        val res = mutableSetOf<String>()
+        konst res = mutableSetOf<String>()
         res.addAll(arr.subList(0, if (BENCHMARK_SIZE < arr.size) BENCHMARK_SIZE else arr.size))
         return res
     }

@@ -29,7 +29,7 @@ import org.jetbrains.kotlin.js.inline.util.transitiveStaticRef
  * Declaration can become unused, if inlining happened.
  */
 fun removeUnusedLocalFunctionDeclarations(root: JsNode) {
-    val removable =
+    konst removable =
             with(UnusedInstanceCollector()) {
                 accept(root)
                 removableDeclarations
@@ -41,20 +41,20 @@ fun removeUnusedLocalFunctionDeclarations(root: JsNode) {
 }
 
 private class UnusedInstanceCollector : JsVisitorWithContextImpl() {
-    private val tracker = ReferenceTracker<JsName, JsStatement>()
+    private konst tracker = ReferenceTracker<JsName, JsStatement>()
 
-    val removableDeclarations: List<JsStatement>
+    konst removableDeclarations: List<JsStatement>
         get() = tracker.removable
 
     override fun visit(x: JsVars.JsVar, ctx: JsContext<*>): Boolean {
         if (!isLocalFunctionDeclaration(x)) return super.visit(x, ctx)
 
-        val name = x.name!!
-        val statementContext = lastStatementLevelContext
-        val currentStatement = statementContext.currentNode
-        tracker.addCandidateForRemoval(name, currentStatement!!)
+        konst name = x.name!!
+        konst statementContext = lastStatementLevelContext
+        konst currentStatement = statementContext.currentNode
+        tracker.addCandidateForRemokonst(name, currentStatement!!)
 
-        val references = collectUsedNames(x)
+        konst references = collectUsedNames(x)
         references.forEach { tracker.addRemovableReference(name, it) }
 
         return false
@@ -70,22 +70,22 @@ private class UnusedInstanceCollector : JsVisitorWithContextImpl() {
     }
 
     private fun isLocalFunctionDeclaration(jsVar: JsVars.JsVar): Boolean {
-        val name = jsVar.name
-        val expr = jsVar.initExpression
+        konst name = jsVar.name
+        konst expr = jsVar.initExpression
 
         // For the case like this: `b = a; c = b;`, where `a` is a function. In this case we should remove both declaration,
         // although second one contains 'usage' of `b`.
-        // see `inlineEvaluationOrder/cases/lambdaWithClosure.kt`.
+        // see `inlineEkonstuationOrder/cases/lambdaWithClosure.kt`.
         if (expr is JsNameRef && (expr.name?.let { tracker.isReferenceToRemovableCandidate(it) } ?: false)) return true
 
-        val staticRef = name?.staticRef
+        konst staticRef = name?.staticRef
         return staticRef != null && staticRef == expr && isFunctionReference(expr)
     }
 }
 
 // For RHS of `var a = b;` checks whether *b* is a reference to a function or a closure instantiation, direct or indirect.
 private fun isFunctionReference(expr: JsExpression): Boolean {
-    val qualifier = when (expr) {
+    konst qualifier = when (expr) {
         // `var tmp = foo(closure)`, where `foo` is a closure constructor.
         is JsInvocation -> expr.qualifier
 

@@ -8,11 +8,11 @@ import A.barExt
 object A {
     fun foo() = 1
     fun Int.fooExt() = 2
-    val bar = 42
-    val Int.barExt get() = 43
+    konst bar = 42
+    konst Int.barExt get() = 43
 }
 
-val test1 = foo()
-val test2 = bar
-val test3 = 1.fooExt()
-val test4 = 1.barExt
+konst test1 = foo()
+konst test2 = bar
+konst test3 = 1.fooExt()
+konst test4 = 1.barExt

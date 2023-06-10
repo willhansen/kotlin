@@ -7,11 +7,11 @@ interface B {
 
 fun test(param: String) {
 
-    val local_val = 4
-    val bar = fun B.(fun_param: Int) {
+    konst local_konst = 4
+    konst bar = fun B.(fun_param: Int) {
         param.length
         b_fun()
-        val inner_bar = local_val + fun_param
+        konst inner_bar = local_konst + fun_param
 
         <!UNRESOLVED_REFERENCE!>bar<!>
     }

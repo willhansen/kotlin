@@ -4,15 +4,15 @@ FILE: serializableWith.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(IntHolder), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
+        public open override konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(IntHolder), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
             public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
-        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|IntHolder|): R|kotlin/Unit| {
-            R|<local>/encoder|.R|kotlinx/serialization/encoding/Encoder.encodeString|(R|<local>/value|.R|/IntHolder.value|.R|kotlin/Int.toString|())
+        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|IntHolder|): R|kotlin/Unit| {
+            R|<local>/encoder|.R|kotlinx/serialization/encoding/Encoder.encodeString|(R|<local>/konstue|.R|/IntHolder.konstue|.R|kotlin/Int.toString|())
         }
 
         public open override fun deserialize(decoder: R|kotlinx/serialization/encoding/Decoder|): R|IntHolder| {
-            lval string: R|kotlin/String| = R|<local>/decoder|.R|kotlinx/serialization/encoding/Decoder.decodeString|()
+            lkonst string: R|kotlin/String| = R|<local>/decoder|.R|kotlinx/serialization/encoding/Decoder.decodeString|()
             ^deserialize R|/IntHolder.IntHolder|(R|<local>/string|.R|kotlin/text/toInt|())
         }
 
@@ -22,10 +22,10 @@ FILE: serializableWith.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(SerializableObject), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
+        public open override konst descriptor: R|kotlinx/serialization/descriptors/SerialDescriptor| = R|kotlinx/serialization/descriptors/PrimitiveSerialDescriptor|(String(SerializableObject), Q|kotlinx/serialization/descriptors/PrimitiveKind.STRING|)
             public get(): R|kotlinx/serialization/descriptors/SerialDescriptor|
 
-        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, value: R|SerializableObject|): R|kotlin/Unit| {
+        public open override fun serialize(encoder: R|kotlinx/serialization/encoding/Encoder|, konstue: R|SerializableObject|): R|kotlin/Unit| {
             R|<local>/encoder|.R|kotlinx/serialization/encoding/Encoder.encodeString|(String(obj))
         }
 
@@ -36,11 +36,11 @@ FILE: serializableWith.kt
 
     }
     @R|kotlinx/serialization/Serializable|(with = <getClass>(Q|IntHolderAsStringSerializer|)) public final class IntHolder : R|kotlin/Any| {
-        public constructor(value: R|kotlin/Int|): R|IntHolder| {
+        public constructor(konstue: R|kotlin/Int|): R|IntHolder| {
             super<R|kotlin/Any|>()
         }
 
-        public final val value: R|kotlin/Int| = R|<local>/value|
+        public final konst konstue: R|kotlin/Int| = R|<local>/konstue|
             public get(): R|kotlin/Int|
 
         public final companion object Companion : R|kotlin/Any| {
@@ -62,29 +62,29 @@ FILE: serializableWith.kt
 
     }
     public final fun box(): R|kotlin/String| {
-        lval holder: R|IntHolder| = R|/IntHolder.IntHolder|(Int(42))
-        lval encoded: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|IntHolder|>(Q|IntHolder|.R|/IntHolder.Companion.serializer|(), R|<local>/holder|)
+        lkonst holder: R|IntHolder| = R|/IntHolder.IntHolder|(Int(42))
+        lkonst encoded: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|IntHolder|>(Q|IntHolder|.R|/IntHolder.Companion.serializer|(), R|<local>/holder|)
         when () {
             !=(R|<local>/encoded|, String("42")) ->  {
                 ^box R|<local>/encoded|
             }
         }
 
-        lval decoded: R|IntHolder| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|IntHolder|>(Q|IntHolder|.R|/IntHolder.Companion.serializer|(), R|<local>/encoded|)
+        lkonst decoded: R|IntHolder| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|IntHolder|>(Q|IntHolder|.R|/IntHolder.Companion.serializer|(), R|<local>/encoded|)
         when () {
-            !=(R|<local>/decoded|.R|/IntHolder.value|, R|<local>/holder|.R|/IntHolder.value|) ->  {
-                ^box String(Incorrect value)
+            !=(R|<local>/decoded|.R|/IntHolder.konstue|, R|<local>/holder|.R|/IntHolder.konstue|) ->  {
+                ^box String(Incorrect konstue)
             }
         }
 
-        lval encodedObject: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|SerializableObject|>(Q|SerializableObject|.R|/SerializableObject.serializer|(), Q|SerializableObject|)
+        lkonst encodedObject: R|kotlin/String| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.encodeToString|<R|SerializableObject|>(Q|SerializableObject|.R|/SerializableObject.serializer|(), Q|SerializableObject|)
         when () {
             !=(R|<local>/encodedObject|, String("obj")) ->  {
                 ^box R|<local>/encodedObject|
             }
         }
 
-        lval decodedObject: R|SerializableObject| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|SerializableObject|>(Q|SerializableObject|.R|/SerializableObject.serializer|(), R|<local>/encodedObject|)
+        lkonst decodedObject: R|SerializableObject| = Q|kotlinx/serialization/json/Json|.R|kotlinx/serialization/json/Json.decodeFromString|<R|SerializableObject|>(Q|SerializableObject|.R|/SerializableObject.serializer|(), R|<local>/encodedObject|)
         when () {
             !=(R|<local>/decodedObject|, Q|SerializableObject|) ->  {
                 ^box String(Incorrect object instance)

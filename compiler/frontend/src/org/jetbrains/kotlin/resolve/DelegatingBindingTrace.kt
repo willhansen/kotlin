@@ -30,15 +30,15 @@ import org.jetbrains.kotlin.types.expressions.typeInfoFactory.createTypeInfo
 import org.jetbrains.kotlin.util.slicedMap.*
 
 open class DelegatingBindingTrace(
-    private val parentContext: BindingContext,
-    private val name: String,
+    private konst parentContext: BindingContext,
+    private konst name: String,
     withParentDiagnostics: Boolean = true,
-    private val filter: BindingTraceFilter = BindingTraceFilter.ACCEPT_ALL,
+    private konst filter: BindingTraceFilter = BindingTraceFilter.ACCEPT_ALL,
     allowSliceRewrite: Boolean = false,
     customSuppressCache: KotlinSuppressCache? = null,
 ) : BindingTrace {
 
-    protected val map = if (BindingTraceContext.TRACK_REWRITES && !allowSliceRewrite)
+    protected konst map = if (BindingTraceContext.TRACK_REWRITES && !allowSliceRewrite)
         TrackingSlicedMap(BindingTraceContext.TRACK_WITH_STACK_TRACES)
     else
         SlicedMapImpl(allowSliceRewrite)
@@ -68,9 +68,9 @@ open class DelegatingBindingTrace(
         }
     }
 
-    private val bindingContext = MyBindingContext()
+    private konst bindingContext = MyBindingContext()
 
-    protected val mutableDiagnostics: MutableDiagnosticsWithSuppression? =
+    protected konst mutableDiagnostics: MutableDiagnosticsWithSuppression? =
         if (filter.ignoreDiagnostics) null
         else MutableDiagnosticsWithSuppression(
             customSuppressCache ?: BindingContextSuppressCache(bindingContext),
@@ -92,8 +92,8 @@ open class DelegatingBindingTrace(
 
     override fun getBindingContext(): BindingContext = bindingContext
 
-    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, value: V) {
-        map.put(slice, key, value)
+    override fun <K, V> record(slice: WritableSlice<K, V>, key: K, konstue: V) {
+        map.put(slice, key, konstue)
     }
 
     override fun <K> record(slice: WritableSlice<K, Boolean>, key: K) {
@@ -104,16 +104,16 @@ open class DelegatingBindingTrace(
         selfGet(slice, key) ?: parentContext.get(slice, key)
 
     protected fun <K, V> selfGet(slice: ReadOnlySlice<K, V>, key: K): V? {
-        val value = map.get(slice, key)
+        konst konstue = map.get(slice, key)
         return if (slice is SetSlice<*>) {
-            assert(value != null)
-            if (value != SetSlice.DEFAULT) value else null
-        } else value
+            assert(konstue != null)
+            if (konstue != SetSlice.DEFAULT) konstue else null
+        } else konstue
     }
 
     override fun <K, V> getKeys(slice: WritableSlice<K, V>): Collection<K> {
-        val keys = map.getKeys(slice)
-        val fromParent = parentContext.getKeys(slice)
+        konst keys = map.getKeys(slice)
+        konst fromParent = parentContext.getKeys(slice)
         if (keys.isEmpty()) return fromParent
         if (fromParent.isEmpty()) return keys
 
@@ -121,7 +121,7 @@ open class DelegatingBindingTrace(
     }
 
     override fun getType(expression: KtExpression): KotlinType? {
-        val typeInfo = get(BindingContext.EXPRESSION_TYPE_INFO, expression)
+        konst typeInfo = get(BindingContext.EXPRESSION_TYPE_INFO, expression)
         return typeInfo?.type
     }
 
@@ -161,7 +161,7 @@ open class DelegatingBindingTrace(
     protected var diagnosticsCallback: DiagnosticSink.DiagnosticsCallback? = null
 
     override fun setCallbackIfNotSet(callback: DiagnosticSink.DiagnosticsCallback): Boolean {
-        val callbackIfNotSet = mutableDiagnostics?.setCallbackIfNotSet(callback) ?: false
+        konst callbackIfNotSet = mutableDiagnostics?.setCallbackIfNotSet(callback) ?: false
         if (callbackIfNotSet) {
             diagnosticsCallback = callback
         }

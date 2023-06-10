@@ -11,7 +11,7 @@ class Delegate {
 interface Foo {
 
     fun test(): String {
-        val O by Delegate()
+        konst O by Delegate()
         return O
     }
 }
@@ -19,7 +19,7 @@ interface Foo {
 interface Foo2: Foo {
 
     override fun test(): String {
-        val K by Delegate()
+        konst K by Delegate()
         return super.test() + K
     }
 }

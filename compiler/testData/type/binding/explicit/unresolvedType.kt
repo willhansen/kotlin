@@ -1,4 +1,4 @@
-val foo: List<adad<List<dd>>> = null!!
+konst foo: List<adad<List<dd>>> = null!!
 /*
 psi: List<adad<List<dd>>>
 type: List<[Error type: Unresolved type for adad<List<dd>>]<List<[Error type: Unresolved type for dd]>>>

@@ -10,13 +10,13 @@ object Z : B() {
 
 
 fun box(): String {
-    val o = object : B() {
+    konst o = object : B() {
         override fun foo(t: String) = "o"
     }
-    val zb: B = Z
-    val ob: B = o
-    val za: A<String> = Z
-    val oa: A<String> = o
+    konst zb: B = Z
+    konst ob: B = o
+    konst za: A<String> = Z
+    konst oa: A<String> = o
 
     return when {
         Z.foo("")  != "Z" -> "Fail #1"

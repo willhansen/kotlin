@@ -1,7 +1,7 @@
 // CHECK:
 //   Mangled name: {}test1
 //   Public signature: /test1|6005685442305498193[0]
-val test1: ErrorType
+konst test1: ErrorType
   // CHECK JVM_IR:
   //   Mangled name computed from Ir:         #<get-test1>(){}<ERROR CLASS>
   //   Mangled name computed from Descriptor: #<get-test1>(){}<Error class: unknown class>
@@ -11,7 +11,7 @@ val test1: ErrorType
 // CHECK:
 //   Mangled name: {}test2
 //   Public signature: /test2|2517758057000911509[0]
-val test2: ErrorType
+konst test2: ErrorType
   // CHECK JVM_IR:
   //   Mangled name computed from Ir:         #<get-test2>(){}<ERROR CLASS>
   //   Mangled name computed from Descriptor: #<get-test2>(){}<Error class: unknown class>
@@ -21,7 +21,7 @@ val test2: ErrorType
 // CHECK:
 //   Mangled name: {}test3
 //   Public signature: /test3|7677556066983021166[0]
-val test3: ErrorType
+konst test3: ErrorType
   // CHECK JVM_IR:
   //   Mangled name computed from Ir:         #<get-test3>(){}<ERROR CLASS>
   //   Mangled name computed from Descriptor: #<get-test3>(){}<Error class: unknown class>
@@ -31,7 +31,7 @@ val test3: ErrorType
 // CHECK:
 //   Mangled name: {}test4
 //   Public signature: /test4|-9115637610245762085[0]
-val test4: ErrorType
+konst test4: ErrorType
   // CHECK JVM_IR:
   //   Mangled name computed from Ir:         #<get-test4>(){}<ERROR CLASS>
   //   Mangled name computed from Descriptor: #<get-test4>(){}<Error class: unknown class>

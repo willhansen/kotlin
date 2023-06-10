@@ -15,7 +15,7 @@ FILE: simple.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val dummy: R|kotlin/Int| = Int(1)
+        public final konst dummy: R|kotlin/Int| = Int(1)
             public get(): R|kotlin/Int|
 
     }

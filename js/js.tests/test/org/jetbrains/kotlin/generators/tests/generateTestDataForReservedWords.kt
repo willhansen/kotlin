@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.renderer.KeywordStringsGenerated
 import java.io.File
 
-private val MODIFIER_KEYWORDS = KtTokens.MODIFIER_KEYWORDS_ARRAY.map { it.value }.toSet()
+private konst MODIFIER_KEYWORDS = KtTokens.MODIFIER_KEYWORDS_ARRAY.map { it.konstue }.toSet()
 
-private val commonCases: CaseBuilder.(String, String) -> Unit = { testByName, testByRef ->
-    case("val", "val $KEYWORD_MARKER: Int", " = 0", testByName)
+private konst commonCases: CaseBuilder.(String, String) -> Unit = { testByName, testByRef ->
+    case("konst", "konst $KEYWORD_MARKER: Int", " = 0", testByName)
     case("var", "var $KEYWORD_MARKER: Int", " = 0", testByName)
     case("fun", "fun $KEYWORD_MARKER()", " { $KEYWORD_MARKER() }", testByRef)
     case("funParam",
@@ -34,16 +34,16 @@ private val commonCases: CaseBuilder.(String, String) -> Unit = { testByName, te
     $testRenamedByName
 }""", "foo(\"123\")")
 
-    case("label", "val t: Int", " = 0", "testRenamed(\"$KEYWORD_MARKER\", { $KEYWORD_MARKER@ while (false) {} })")
+    case("label", "konst t: Int", " = 0", "testRenamed(\"$KEYWORD_MARKER\", { $KEYWORD_MARKER@ while (false) {} })")
 }
 
-private val commonCasesWithTestNotRenamed: CaseBuilder.() -> Unit = { commonCases(testNotRenamedByName, testNotRenamedByRef) }
+private konst commonCasesWithTestNotRenamed: CaseBuilder.() -> Unit = { commonCases(testNotRenamedByName, testNotRenamedByRef) }
 
 fun main() {
     generateTestDataForReservedWords()
 }
 
-private val TEST_DATA_DIR_FOR_RESERVED_WORDS = "js/js.translator/testData/box/reservedWords"
+private konst TEST_DATA_DIR_FOR_RESERVED_WORDS = "js/js.translator/testData/box/reservedWords"
 
 fun generateTestDataForReservedWords() {
     generate(TEST_DATA_DIR_FOR_RESERVED_WORDS) {
@@ -156,7 +156,7 @@ fun box(): String {
     return "OK"
 }"""
         ) {
-            case("val", "val $KEYWORD_MARKER", "", testNotRenamedByName)
+            case("konst", "konst $KEYWORD_MARKER", "", testNotRenamedByName)
             case("var", "var $KEYWORD_MARKER", "", testNotRenamedByName)
             case("param", KEYWORD_MARKER, "", testRenamedByName, ignore = true)
         }
@@ -224,22 +224,22 @@ fun box(): String {
 // DSL
 
 private class Case(
-        val name: String,
-        val testDeclaration: String,
-        val testDeclarationInit: String,
-        val testBlock: String,
-        val ignore: Boolean,
-        val additionalShouldBeEscaped: Set<String>
+        konst name: String,
+        konst testDeclaration: String,
+        konst testDeclarationInit: String,
+        konst testBlock: String,
+        konst ignore: Boolean,
+        konst additionalShouldBeEscaped: Set<String>
 )
 
 private class Suite(
-        val name: String,
-        val code: String,
-        val cases: List<Case>
+        konst name: String,
+        konst code: String,
+        konst cases: List<Case>
 )
 
 private class CaseBuilder {
-    val cases = arrayListOf<Case>()
+    konst cases = arrayListOf<Case>()
 
     fun case(name: String, testDeclaration: String, testDeclarationInit: String, testBlock: String,
              ignore: Boolean = false, additionalShouldBeEscaped: Set<String> = setOf()) {
@@ -248,10 +248,10 @@ private class CaseBuilder {
 }
 
 private class TestDataBuilder {
-    val suites = arrayListOf<Suite>()
+    konst suites = arrayListOf<Suite>()
 
     fun suite(name: String, code: String, f: CaseBuilder.() -> Unit) {
-        val builder = CaseBuilder()
+        konst builder = CaseBuilder()
         builder.f()
 
         suites.add(Suite(name, PREAMBLE + code, builder.cases))
@@ -261,19 +261,19 @@ private class TestDataBuilder {
 
         fun File.readLinesOrNull() = if (!exists()) null else readLines()
 
-        val testDataDir = File(testDataDirPath)
+        konst testDataDir = File(testDataDirPath)
 
-        val cases = suites.flatMap { suite -> suite.cases.map { case -> suite.name + " / " + case.name } }.sorted()
+        konst cases = suites.flatMap { suite -> suite.cases.map { case -> suite.name + " / " + case.name } }.sorted()
 
-        val shouldBeEscapedFile = File("$testDataDirPath/SHOULD_BE_ESCAPED.txt")
-        val shouldNotBeEscapedFile = File("$testDataDirPath/SHOULD_NOT_BE_ESCAPED.txt")
-        val casesFile = File("$testDataDirPath/CASES.txt")
+        konst shouldBeEscapedFile = File("$testDataDirPath/SHOULD_BE_ESCAPED.txt")
+        konst shouldNotBeEscapedFile = File("$testDataDirPath/SHOULD_NOT_BE_ESCAPED.txt")
+        konst casesFile = File("$testDataDirPath/CASES.txt")
 
-        val shouldBeEscapedFromFile = shouldBeEscapedFile.readLinesOrNull()?.drop(1)
-        val shouldNotBeEscapedFromFile = shouldNotBeEscapedFile.readLinesOrNull()?.drop(1)
-        val casesFromFile = casesFile.readLinesOrNull()?.drop(1)
+        konst shouldBeEscapedFromFile = shouldBeEscapedFile.readLinesOrNull()?.drop(1)
+        konst shouldNotBeEscapedFromFile = shouldNotBeEscapedFile.readLinesOrNull()?.drop(1)
+        konst casesFromFile = casesFile.readLinesOrNull()?.drop(1)
 
-        val isCreatingFromScratch = shouldBeEscapedFromFile != SHOULD_BE_ESCAPED || shouldNotBeEscapedFromFile != SHOULD_NOT_BE_ESCAPED || casesFromFile != cases
+        konst isCreatingFromScratch = shouldBeEscapedFromFile != SHOULD_BE_ESCAPED || shouldNotBeEscapedFromFile != SHOULD_NOT_BE_ESCAPED || casesFromFile != cases
 
         if (!testDataDir.exists() && !testDataDir.mkdirs()) {
             error("Unable to find or create test data directory: '$testDataDirPath'.")
@@ -298,11 +298,11 @@ private class TestDataBuilder {
                         continue
                     }
 
-                    val shouldBeEscaped = keyword in SHOULD_BE_ESCAPED || keyword in case.additionalShouldBeEscaped
+                    konst shouldBeEscaped = keyword in SHOULD_BE_ESCAPED || keyword in case.additionalShouldBeEscaped
 
-                    val keywordWithEscapeIfNeed = if (shouldBeEscaped) "`$keyword`" else keyword
+                    konst keywordWithEscapeIfNeed = if (shouldBeEscaped) "`$keyword`" else keyword
 
-                    val out = suite.code
+                    konst out = suite.code
                             .replace(DEFINITION_MARKER, case.testDeclaration + case.testDeclarationInit)
                             .replace(DECLARATION_MARKER, case.testDeclaration)
                             .replace(DECLARATION_INIT_MARKER, case.testDeclarationInit)
@@ -311,12 +311,12 @@ private class TestDataBuilder {
                             .replace(KEYWORD_MARKER, keywordWithEscapeIfNeed)
 
 
-                    val decapitalizedSuiteName = suite.name.replaceFirstChar(Char::lowercaseChar)
-                    val capitalizedCaseName = case.name.replaceFirstChar(Char::uppercaseChar)
-                    val capitalizedKeyword = keyword.replaceFirstChar(Char::uppercaseChar)
-                    val fileName = "$decapitalizedSuiteName$capitalizedCaseName$capitalizedKeyword.kt"
+                    konst decapitalizedSuiteName = suite.name.replaceFirstChar(Char::lowercaseChar)
+                    konst capitalizedCaseName = case.name.replaceFirstChar(Char::uppercaseChar)
+                    konst capitalizedKeyword = keyword.replaceFirstChar(Char::uppercaseChar)
+                    konst fileName = "$decapitalizedSuiteName$capitalizedCaseName$capitalizedKeyword.kt"
 
-                    val testDataFile = File(testDataDirPath + "/" + fileName)
+                    konst testDataFile = File(testDataDirPath + "/" + fileName)
 
                     if (testDataFile.exists()) {
                         if (isCreatingFromScratch) {
@@ -341,19 +341,19 @@ private class TestDataBuilder {
 }
 
 private fun generate(testDataDirPath: String, f: TestDataBuilder.() -> Unit) {
-    val builder = TestDataBuilder()
+    konst builder = TestDataBuilder()
     builder.f()
     builder.generate(testDataDirPath)
 }
 
-private val DEFINITION_MARKER = "DEFINITION"
-private val DECLARATION_MARKER = "DECLARATION"
-private val DECLARATION_INIT_MARKER = "DECLARATION_INIT"
-private val TEST_BLOCK_MARKER = "TEST_BLOCK"
-private val KEYWORD_MARKER = "KEYWORD"
+private konst DEFINITION_MARKER = "DEFINITION"
+private konst DECLARATION_MARKER = "DECLARATION"
+private konst DECLARATION_INIT_MARKER = "DECLARATION_INIT"
+private konst TEST_BLOCK_MARKER = "TEST_BLOCK"
+private konst KEYWORD_MARKER = "KEYWORD"
 
-private val PREAMBLE_MESSAGE = "NOTE THIS FILE IS AUTO-GENERATED by the generateTestDataForReservedWords.kt. DO NOT EDIT!"
-private val PREAMBLE = """package foo
+private konst PREAMBLE_MESSAGE = "NOTE THIS FILE IS AUTO-GENERATED by the generateTestDataForReservedWords.kt. DO NOT EDIT!"
+private konst PREAMBLE = """package foo
 
 // $PREAMBLE_MESSAGE
 """
@@ -361,24 +361,24 @@ private val PREAMBLE = """package foo
 private fun testRenamed(reference: String = KEYWORD_MARKER) = "testRenamed(\"$KEYWORD_MARKER\", { $reference })"
 private fun testNotRenamed(reference: String = KEYWORD_MARKER) = "testNotRenamed(\"$KEYWORD_MARKER\", { $reference })"
 
-private val testRenamedByName = testRenamed()
-private val testRenamedByRef = testRenamed("$KEYWORD_MARKER()")
+private konst testRenamedByName = testRenamed()
+private konst testRenamedByRef = testRenamed("$KEYWORD_MARKER()")
 
-private val testNotRenamedByName = testNotRenamed()
-private val testNotRenamedByRef = testNotRenamed("$KEYWORD_MARKER()")
+private konst testNotRenamedByName = testNotRenamed()
+private konst testNotRenamedByRef = testNotRenamed("$KEYWORD_MARKER()")
 
 // KEYWORDS
 
-private val SHOULD_BE_ESCAPED = JsDeclarationScope.RESERVED_WORDS.filter { it in KeywordStringsGenerated.KEYWORDS }.sorted()
-private val SHOULD_NOT_BE_ESCAPED = JsDeclarationScope.RESERVED_WORDS.filter { it !in SHOULD_BE_ESCAPED }.sorted()
+private konst SHOULD_BE_ESCAPED = JsDeclarationScope.RESERVED_WORDS.filter { it in KeywordStringsGenerated.KEYWORDS }.sorted()
+private konst SHOULD_NOT_BE_ESCAPED = JsDeclarationScope.RESERVED_WORDS.filter { it !in SHOULD_BE_ESCAPED }.sorted()
 
 // all keywords by portions
 
 // cyclic keyword streams
-private val s1 = SHOULD_BE_ESCAPED.cyclicSequence()
-private val s2 = SHOULD_NOT_BE_ESCAPED.cyclicSequence()
+private konst s1 = SHOULD_BE_ESCAPED.cyclicSequence()
+private konst s2 = SHOULD_NOT_BE_ESCAPED.cyclicSequence()
 
-private val PORTION_PART_SIZE = 2
+private konst PORTION_PART_SIZE = 2
 
 private fun nextKeywordPortion() = s1.take(PORTION_PART_SIZE).toList() + s2.take(PORTION_PART_SIZE).toList()
 
@@ -386,10 +386,10 @@ private fun nextKeywordPortion() = s1.take(PORTION_PART_SIZE).toList() + s2.take
 
 private fun <T> List<T>.cyclicSequence() = CyclicSequence(this)
 
-private class CyclicSequence<T>(val c: List<T>) : Sequence<T> {
+private class CyclicSequence<T>(konst c: List<T>) : Sequence<T> {
     var i = 0
 
-    val iterator = object : Iterator<T> {
+    konst iterator = object : Iterator<T> {
         override fun next(): T {
             i = if (i >= c.size) 0 else i
             return c[i++]

@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirQualifiedErrorAccessExpression : FirExpression(), FirDiagnosticHolder {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val diagnostic: ConeDiagnostic
-    abstract val selector: FirErrorExpression
-    abstract val receiver: FirExpression
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst diagnostic: ConeDiagnostic
+    abstract konst selector: FirErrorExpression
+    abstract konst receiver: FirExpression
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitQualifiedErrorAccessExpression(this, data)
 

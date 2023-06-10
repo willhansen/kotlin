@@ -16,7 +16,7 @@ internal fun buildFirUserTypeRef(
     session: FirSession,
     baseScopeProvider: FirScopeProvider
 ): FirUserTypeRef {
-    val builder = object : RawFirBuilder(session, baseScopeProvider) {
+    konst builder = object : RawFirBuilder(session, baseScopeProvider) {
         fun build(): FirUserTypeRef = Visitor().visitTypeReference(typeReference, null) as FirUserTypeRef
     }
     builder.context.packageFqName = typeReference.containingKtFile.packageFqName

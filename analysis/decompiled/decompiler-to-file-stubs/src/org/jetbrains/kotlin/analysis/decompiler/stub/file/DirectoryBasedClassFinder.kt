@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.name.FqName
 import java.io.InputStream
 
 class DirectoryBasedClassFinder(
-    val packageDirectory: VirtualFile,
-    val directoryPackageFqName: FqName
+    konst packageDirectory: VirtualFile,
+    konst directoryPackageFqName: FqName
 ) : KotlinClassFinder {
     override fun findKotlinClassOrContent(javaClass: JavaClass, jvmMetadataVersion: JvmMetadataVersion): KotlinClassFinder.Result? =
         findKotlinClassOrContent(javaClass.classId!!, jvmMetadataVersion)
@@ -26,8 +26,8 @@ class DirectoryBasedClassFinder(
         if (classId.packageFqName != directoryPackageFqName) {
             return null
         }
-        val targetName = classId.relativeClassName.pathSegments().joinToString("$", postfix = ".class")
-        val virtualFile = packageDirectory.findChild(targetName)
+        konst targetName = classId.relativeClassName.pathSegments().joinToString("$", postfix = ".class")
+        konst virtualFile = packageDirectory.findChild(targetName)
         if (virtualFile != null && isKotlinWithCompatibleAbiVersion(virtualFile, jvmMetadataVersion)) {
             return ClsKotlinBinaryClassCache.getInstance().getKotlinBinaryClass(virtualFile)?.let(::KotlinClass)
         }
@@ -51,10 +51,10 @@ class DirectoryBasedClassFinder(
  * Checks if this file is a compiled Kotlin class file ABI-compatible with the current plugin
  */
 private fun isKotlinWithCompatibleAbiVersion(file: VirtualFile, jvmMetadataVersion: JvmMetadataVersion): Boolean {
-    val clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
+    konst clsKotlinBinaryClassCache = ClsKotlinBinaryClassCache.getInstance()
     if (!clsKotlinBinaryClassCache.isKotlinJvmCompiledFile(file)) return false
 
-    val kotlinClass = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file)
+    konst kotlinClass = clsKotlinBinaryClassCache.getKotlinBinaryClassHeaderData(file)
     return kotlinClass != null && kotlinClass.metadataVersion.isCompatible(jvmMetadataVersion)
 }
 

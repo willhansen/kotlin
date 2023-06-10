@@ -1,6 +1,6 @@
 package
 
-public val </*0*/ T> T.bar1: kotlin.Nothing?
+public konst </*0*/ T> T.bar1: kotlin.Nothing?
 public var </*0*/ T4> T4?.bar2: kotlin.Nothing?
 public fun </*0*/ T> foo1(): kotlin.Unit
 public fun </*0*/ T> foo11(): kotlin.Unit

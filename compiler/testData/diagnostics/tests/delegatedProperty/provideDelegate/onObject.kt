@@ -7,4 +7,4 @@ object O {
     operator fun provideDelegate(x: Any?, y: Any?): C = C()
 }
 
-val x: String by O
+konst x: String by O

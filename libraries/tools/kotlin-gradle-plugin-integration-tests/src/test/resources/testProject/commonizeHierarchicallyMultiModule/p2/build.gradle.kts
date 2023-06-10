@@ -6,7 +6,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -28,21 +28,21 @@ kotlin {
     @Suppress("DEPRECATION_ERROR")
     mingwX86("windowsX86")
 
-    val commonMain by sourceSets.getting
-    val concurrentMain by sourceSets.creating
-    val jvmMain by sourceSets.getting
-    val jsMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val appleAndLinuxMain by sourceSets.creating
-    val linuxMain by sourceSets.creating
-    val linuxX64Main by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
-    val appleMain by sourceSets.creating
-    val macosMain by sourceSets.getting
-    val iosMain by sourceSets.getting
-    val windowsMain by sourceSets.creating
-    val windowsX64Main by sourceSets.getting
-    val windowsX86Main by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst concurrentMain by sourceSets.creating
+    konst jvmMain by sourceSets.getting
+    konst jsMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst appleAndLinuxMain by sourceSets.creating
+    konst linuxMain by sourceSets.creating
+    konst linuxX64Main by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
+    konst appleMain by sourceSets.creating
+    konst macosMain by sourceSets.getting
+    konst iosMain by sourceSets.getting
+    konst windowsMain by sourceSets.creating
+    konst windowsX64Main by sourceSets.getting
+    konst windowsX86Main by sourceSets.getting
 
     commonMain {
         -jsMain

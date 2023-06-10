@@ -4,6 +4,6 @@
 abstract class AbstractClass()
 
 fun main(args: Array<String>) {
-    val abstractClass = ::<!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>AbstractClass<!>
+    konst abstractClass = ::<!CREATING_AN_INSTANCE_OF_ABSTRACT_CLASS!>AbstractClass<!>
     abstractClass.invoke()
 }

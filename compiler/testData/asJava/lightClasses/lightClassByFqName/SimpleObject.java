@@ -3,14 +3,14 @@ public final class A /* pack.A*/ {
   private static java.lang.String v;
 
   @org.jetbrains.annotations.NotNull()
-  public static final java.lang.String cv = "A" /* initializer type: java.lang.String */ /* constant value A */;
+  public static final java.lang.String cv = "A" /* initializer type: java.lang.String */ /* constant konstue A */;
 
   @org.jetbrains.annotations.NotNull()
   public static final pack.A INSTANCE;
 
   private static final int c;
 
-  public static final int cc = 1 /* initializer type: int */ /* constant value 1 */;
+  public static final int cc = 1 /* initializer type: int */ /* constant konstue 1 */;
 
   @org.jetbrains.annotations.NotNull()
   public final java.lang.String getV();//  getV()

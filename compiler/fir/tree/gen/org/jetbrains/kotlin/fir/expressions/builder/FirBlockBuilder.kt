@@ -29,8 +29,8 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 class FirBlockBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
-    val statements: MutableList<FirStatement> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
+    konst statements: MutableList<FirStatement> = mutableListOf()
 
     override fun build(): FirBlock {
         return FirBlockImpl(

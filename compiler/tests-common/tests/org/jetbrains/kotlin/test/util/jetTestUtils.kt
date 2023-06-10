@@ -31,10 +31,10 @@ fun PsiFile.findElementsByCommentPrefix(prefix: String): Map<PsiElement, String>
     accept(
             object : KtTreeVisitorVoid() {
                 override fun visitComment(comment: PsiComment) {
-                    val commentText = comment.text
+                    konst commentText = comment.text
                     if (commentText.startsWith(prefix)) {
-                        val parent = comment.parent
-                        val elementToAdd = when (parent) {
+                        konst parent = comment.parent
+                        konst elementToAdd = when (parent) {
                             is KtDeclaration -> parent
                             is PsiMember -> parent
                             else -> PsiTreeUtil.skipSiblingsForward(

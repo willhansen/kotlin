@@ -11,12 +11,12 @@ package kotlin.text
 //
 
 @SharedImmutable
-private val casedStart = intArrayOf(
+private konst casedStart = intArrayOf(
     0x10400, 0x104b0, 0x104d8, 0x10c80, 0x10cc0, 0x118a0, 0x16e40, 0x1d400, 0x1d456, 0x1d49e, 0x1d4a2, 0x1d4a5, 0x1d4a9, 0x1d4ae, 0x1d4bb, 0x1d4bd, 0x1d4c5, 0x1d507, 0x1d50d, 0x1d516, 
     0x1d51e, 0x1d53b, 0x1d540, 0x1d546, 0x1d54a, 0x1d552, 0x1d6a8, 0x1d6c2, 0x1d6dc, 0x1d6fc, 0x1d716, 0x1d736, 0x1d750, 0x1d770, 0x1d78a, 0x1d7aa, 0x1d7c4, 0x1e900, 
 )
 @SharedImmutable
-private val casedEnd = intArrayOf(
+private konst casedEnd = intArrayOf(
     0x1044f, 0x104d3, 0x104fb, 0x10cb2, 0x10cf2, 0x118df, 0x16e7f, 0x1d454, 0x1d49c, 0x1d49f, 0x1d4a2, 0x1d4a6, 0x1d4ac, 0x1d4b9, 0x1d4bb, 0x1d4c3, 0x1d505, 0x1d50a, 0x1d514, 0x1d51c, 
     0x1d539, 0x1d53e, 0x1d544, 0x1d546, 0x1d550, 0x1d6a5, 0x1d6c0, 0x1d6da, 0x1d6fa, 0x1d714, 0x1d734, 0x1d74e, 0x1d76e, 0x1d788, 0x1d7a8, 0x1d7c2, 0x1d7cb, 0x1e943, 
 )
@@ -26,20 +26,20 @@ private val casedEnd = intArrayOf(
 internal fun Int.isCased(): Boolean {
     if (this <= Char.MAX_VALUE.code) {
         when (toChar().getCategoryValue()) {
-            CharCategory.UPPERCASE_LETTER.value,
-            CharCategory.LOWERCASE_LETTER.value,
-            CharCategory.TITLECASE_LETTER.value -> return true
+            CharCategory.UPPERCASE_LETTER.konstue,
+            CharCategory.LOWERCASE_LETTER.konstue,
+            CharCategory.TITLECASE_LETTER.konstue -> return true
         }
     }
     if (isOtherUppercase() || isOtherLowercase()) {
         return true
     }
-    val index = binarySearchRange(casedStart, this)
+    konst index = binarySearchRange(casedStart, this)
     return index >= 0 && this <= casedEnd[index]
 }
 
 @SharedImmutable
-private val caseIgnorableStart = intArrayOf(
+private konst caseIgnorableStart = intArrayOf(
     0x0027, 0x002e, 0x003a, 0x00b7, 0x0387, 0x055f, 0x05f4, 0x2018, 0x2019, 0x2024, 0x2027, 0xfe13, 0xfe52, 0xfe55, 0xff07, 0xff0e, 0xff1a, 0x101fd, 0x102e0, 0x10376, 
     0x10a01, 0x10a05, 0x10a0c, 0x10a38, 0x10a3f, 0x10ae5, 0x10d24, 0x10eab, 0x10f46, 0x11001, 0x11038, 0x1107f, 0x110b3, 0x110b9, 0x110bd, 0x110cd, 0x11100, 0x11127, 0x1112d, 0x11173, 
     0x11180, 0x111b6, 0x111c9, 0x111cf, 0x1122f, 0x11234, 0x11236, 0x1123e, 0x112df, 0x112e3, 0x11300, 0x1133b, 0x11340, 0x11366, 0x11370, 0x11438, 0x11442, 0x11446, 0x1145e, 0x114b3, 
@@ -50,7 +50,7 @@ private val caseIgnorableStart = intArrayOf(
     0xe0001, 0xe0020, 0xe0100, 
 )
 @SharedImmutable
-private val caseIgnorableEnd = intArrayOf(
+private konst caseIgnorableEnd = intArrayOf(
     0x0027, 0x002e, 0x003a, 0x00b7, 0x0387, 0x055f, 0x05f4, 0x2018, 0x2019, 0x2024, 0x2027, 0xfe13, 0xfe52, 0xfe55, 0xff07, 0xff0e, 0xff1a, 0x101fd, 0x102e0, 0x1037a, 
     0x10a03, 0x10a06, 0x10a0f, 0x10a3a, 0x10a3f, 0x10ae6, 0x10d27, 0x10eac, 0x10f50, 0x11001, 0x11046, 0x11081, 0x110b6, 0x110ba, 0x110bd, 0x110cd, 0x11102, 0x1112b, 0x11134, 0x11173, 
     0x11181, 0x111be, 0x111cc, 0x111cf, 0x11231, 0x11234, 0x11237, 0x1123e, 0x112df, 0x112ea, 0x11301, 0x1133c, 0x11340, 0x1136c, 0x11374, 0x1143f, 0x11444, 0x11446, 0x1145e, 0x114b8, 
@@ -66,22 +66,22 @@ private val caseIgnorableEnd = intArrayOf(
 internal fun Int.isCaseIgnorable(): Boolean {
     if (this <= Char.MAX_VALUE.code) {
         when (toChar().getCategoryValue()) {
-            CharCategory.NON_SPACING_MARK.value,
-            CharCategory.ENCLOSING_MARK.value,
-            CharCategory.FORMAT.value,
-            CharCategory.MODIFIER_LETTER.value,
-            CharCategory.MODIFIER_SYMBOL.value -> return true
+            CharCategory.NON_SPACING_MARK.konstue,
+            CharCategory.ENCLOSING_MARK.konstue,
+            CharCategory.FORMAT.konstue,
+            CharCategory.MODIFIER_LETTER.konstue,
+            CharCategory.MODIFIER_SYMBOL.konstue -> return true
         }
     }
-    val index = binarySearchRange(caseIgnorableStart, this)
+    konst index = binarySearchRange(caseIgnorableStart, this)
     return index >= 0 && this <= caseIgnorableEnd[index]
 }
 
 @OptIn(kotlin.experimental.ExperimentalNativeApi::class)
 private fun String.codePointBefore(index: Int): Int {
-    val low = this[index]
+    konst low = this[index]
     if (low.isLowSurrogate() && index - 1 >= 0) {
-        val high = this[index - 1]
+        konst high = this[index - 1]
         if (high.isHighSurrogate()) {
             return Char.toCodePoint(high, low)
         }
@@ -125,7 +125,7 @@ private fun String.isFinalSigmaAt(index: Int): Boolean {
 internal fun String.lowercaseImpl(): String {
     var unchangedIndex = 0
     while (unchangedIndex < this.length) {
-        val codePoint = codePointAt(unchangedIndex)
+        konst codePoint = codePointAt(unchangedIndex)
         if (codePoint.lowercaseCodePoint() != codePoint) { // '\u0130' and '\u03A3' have lowercase corresponding mapping in UnicodeData.txt, no need to check them separately
             break
         }
@@ -135,7 +135,7 @@ internal fun String.lowercaseImpl(): String {
         return this
     }
 
-    val sb = StringBuilder(this.length)
+    konst sb = StringBuilder(this.length)
     sb.appendRange(this, 0, unchangedIndex)
 
     var index = unchangedIndex
@@ -151,8 +151,8 @@ internal fun String.lowercaseImpl(): String {
             index++
             continue
         }
-        val codePoint = codePointAt(index)
-        val lowercaseCodePoint = codePoint.lowercaseCodePoint()
+        konst codePoint = codePointAt(index)
+        konst lowercaseCodePoint = codePoint.lowercaseCodePoint()
         sb.appendCodePoint(lowercaseCodePoint)
         index += codePoint.charCount()
     }

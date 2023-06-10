@@ -8,9 +8,9 @@ import Foundation
 class ElvisBenchmark {
     
     class Value {
-        var value: Int
-        init(_ value: Int) {
-            self.value = value
+        var konstue: Int
+        init(_ konstue: Int) {
+            self.konstue = konstue
         }
     }
     
@@ -28,7 +28,7 @@ class ElvisBenchmark {
     
     func testElvis() {
         for obj in array {
-            Blackhole.consume(obj?.value ?? 0)
+            Blackhole.consume(obj?.konstue ?? 0)
         }
     }
 }

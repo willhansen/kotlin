@@ -23,15 +23,15 @@ import org.jetbrains.kotlin.incremental.util.ExceptionLocation
 import org.jetbrains.kotlin.incremental.util.reportException
 import java.io.*
 
-data class BuildInfo(val startTS: Long, val dependencyToAbiSnapshot: Map<String, AbiSnapshot> = mapOf()) : Serializable {
+data class BuildInfo(konst startTS: Long, konst dependencyToAbiSnapshot: Map<String, AbiSnapshot> = mapOf()) : Serializable {
     companion object {
         private fun ObjectInputStream.readBuildInfo() : BuildInfo {
-            val ts = readLong()
-            val size = readInt()
-            val abiSnapshots = HashMap<String, AbiSnapshot>(size)
+            konst ts = readLong()
+            konst size = readInt()
+            konst abiSnapshots = HashMap<String, AbiSnapshot>(size)
             repeat(size) {
-                val identifier = readUTF()
-                val snapshot = readAbiSnapshot()
+                konst identifier = readUTF()
+                konst snapshot = readAbiSnapshot()
                 abiSnapshots.put(identifier, snapshot)
             }
             return BuildInfo(ts, abiSnapshots)

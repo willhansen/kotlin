@@ -12,7 +12,7 @@ fun <S> generate(g: suspend Controller<S>.() -> Unit): S = TODO()
 
 suspend fun Base.baseExtension() {}
 
-val test1 = generate {
+konst test1 = generate {
     yield("foo")
     baseExtension()
 }

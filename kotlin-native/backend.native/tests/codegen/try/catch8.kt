@@ -11,7 +11,7 @@ import kotlin.test.*
     try {
         throw Error("Error happens")
     } catch (e: Throwable) {
-        val message = e.message
+        konst message = e.message
         if (message != null) {
             println(message)
         }

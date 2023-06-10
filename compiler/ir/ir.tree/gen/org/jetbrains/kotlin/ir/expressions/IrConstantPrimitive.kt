@@ -17,16 +17,16 @@ import org.jetbrains.kotlin.ir.visitors.IrElementVisitor
  * Generated from: [org.jetbrains.kotlin.ir.generator.IrTree.constantPrimitive]
  */
 abstract class IrConstantPrimitive : IrConstantValue() {
-    abstract var value: IrConst<*>
+    abstract var konstue: IrConst<*>
 
     override fun <R, D> accept(visitor: IrElementVisitor<R, D>, data: D): R =
         visitor.visitConstantPrimitive(this, data)
 
     override fun <D> acceptChildren(visitor: IrElementVisitor<Unit, D>, data: D) {
-        value.accept(visitor, data)
+        konstue.accept(visitor, data)
     }
 
     override fun <D> transformChildren(transformer: IrElementTransformer<D>, data: D) {
-        value = value.transform(transformer, data) as IrConst<*>
+        konstue = konstue.transform(transformer, data) as IrConst<*>
     }
 }

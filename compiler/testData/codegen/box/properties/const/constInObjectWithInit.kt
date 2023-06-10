@@ -11,7 +11,7 @@ object TestObject {
     init {
         testObjectInit = true
     }
-    const val x = 42
+    const konst x = 42
 }
 
 fun getTestObject() = TestObject
@@ -21,7 +21,7 @@ class TestClassCompanion {
         init {
             testClassCompanionInit = true
         }
-        const val x = 42
+        const konst x = 42
     }
 }
 
@@ -32,7 +32,7 @@ class TestInterfaceCompanion {
         init {
             testInterfaceCompanionInit = true
         }
-        const val x = 42
+        const konst x = 42
     }
 }
 

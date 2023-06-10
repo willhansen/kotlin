@@ -9,7 +9,7 @@
  */
 
 // TESTCASE NUMBER: 1
-val value_1 = <!INT_LITERAL_OUT_OF_RANGE!>0b<!>
+konst konstue_1 = <!INT_LITERAL_OUT_OF_RANGE!>0b<!>
 
 // TESTCASE NUMBER: 2
-val value_2 = <!INT_LITERAL_OUT_OF_RANGE!>0B<!>
+konst konstue_2 = <!INT_LITERAL_OUT_OF_RANGE!>0B<!>

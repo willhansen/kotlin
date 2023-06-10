@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.psi.KtPsiFactory
 
 interface SimpleNameReferenceExtension {
     companion object {
-        val EP_NAME: ExtensionPointName<SimpleNameReferenceExtension> =
+        konst EP_NAME: ExtensionPointName<SimpleNameReferenceExtension> =
             ExtensionPointName.create("org.jetbrains.kotlin.simpleNameReferenceExtension")
     }
 

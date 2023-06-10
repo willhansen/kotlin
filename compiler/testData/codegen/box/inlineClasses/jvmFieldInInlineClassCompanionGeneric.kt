@@ -6,11 +6,11 @@
 // FILE: test.kt
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class R<T: Int>(private val r: T) {
+konstue class R<T: Int>(private konst r: T) {
 
     companion object {
         @JvmField
-        val ok = "OK"
+        konst ok = "OK"
     }
 }
 

@@ -2,15 +2,15 @@
 // !LANGUAGE: +ContextReceivers
 
 class A {
-    val a = 1
+    konst a = 1
 }
 
 class B {
-    val b = 2
+    konst b = 2
 }
 
 class C {
-    val c = 3
+    konst c = 3
 }
 
 context(A, B) fun C.f() {}

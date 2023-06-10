@@ -9,7 +9,7 @@ inline fun crossInlineBuildWrapper(crossinline block: () -> Unit) = object : Wra
 }
 
 class Container {
-    val wrapper = crossInlineBuildWrapper {
+    konst wrapper = crossInlineBuildWrapper {
         object { }
     }
 }

@@ -1,7 +1,7 @@
 package bar
 
 @Suppress("REDECLARATION")
-val foo: Int = 6
+konst foo: Int = 6
 
 operator fun Int.invoke() = this
 

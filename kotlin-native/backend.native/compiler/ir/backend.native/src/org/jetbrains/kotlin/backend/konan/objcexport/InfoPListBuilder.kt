@@ -21,24 +21,24 @@ import org.jetbrains.kotlin.name.Name
  * https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html
  */
 internal class InfoPListBuilder(
-        private val config: KonanConfig,
+        private konst config: KonanConfig,
 ) {
-    private val configuration = config.configuration
+    private konst configuration = config.configuration
 
     fun build(
             name: String,
             mainPackageGuesser: MainPackageGuesser,
             moduleDescriptor: ModuleDescriptor,
     ): String {
-        val bundleId = computeBundleID(name, mainPackageGuesser, moduleDescriptor)
+        konst bundleId = computeBundleID(name, mainPackageGuesser, moduleDescriptor)
 
-        val bundleShortVersionString = configuration[BinaryOptions.bundleShortVersionString] ?: "1.0"
-        val bundleVersion = configuration[BinaryOptions.bundleVersion] ?: "1"
-        val properties = config.platform.configurables as AppleConfigurables
-        val platform = properties.platformName()
-        val minimumOsVersion = properties.osVersionMin
+        konst bundleShortVersionString = configuration[BinaryOptions.bundleShortVersionString] ?: "1.0"
+        konst bundleVersion = configuration[BinaryOptions.bundleVersion] ?: "1"
+        konst properties = config.platform.configurables as AppleConfigurables
+        konst platform = properties.platformName()
+        konst minimumOsVersion = properties.osVersionMin
 
-        val contents = StringBuilder()
+        konst contents = StringBuilder()
         contents.append("""
             <?xml version="1.0" encoding="UTF-8"?>
             <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -65,8 +65,8 @@ internal class InfoPListBuilder(
 
         """.trimIndent())
 
-        fun addUiDeviceFamilies(vararg values: Int) {
-            val xmlValues = values.joinToString(separator = "\n") {
+        fun addUiDeviceFamilies(vararg konstues: Int) {
+            konst xmlValues = konstues.joinToString(separator = "\n") {
                 "        <integer>$it</integer>"
             }
             contents.append("""
@@ -79,7 +79,7 @@ internal class InfoPListBuilder(
 
                 """.trimMargin())
         }
-        val target = config.target
+        konst target = config.target
         // UIDeviceFamily mapping:
         // 1 - iPhone
         // 2 - iPad
@@ -128,24 +128,24 @@ internal class InfoPListBuilder(
             mainPackageGuesser: MainPackageGuesser,
             moduleDescriptor: ModuleDescriptor,
     ): String {
-        val deprecatedBundleIdOption = configuration[KonanConfigKeys.BUNDLE_ID]
-        val bundleIdOption = configuration[BinaryOptions.bundleId]
+        konst deprecatedBundleIdOption = configuration[KonanConfigKeys.BUNDLE_ID]
+        konst bundleIdOption = configuration[BinaryOptions.bundleId]
         if (deprecatedBundleIdOption != null && bundleIdOption != null && deprecatedBundleIdOption != bundleIdOption) {
             configuration.report(
                     CompilerMessageSeverity.ERROR,
-                    "Both the deprecated -Xbundle-id=<id> and the new -Xbinary=bundleId=<id> options supplied with different values: " +
+                    "Both the deprecated -Xbundle-id=<id> and the new -Xbinary=bundleId=<id> options supplied with different konstues: " +
                             "'$deprecatedBundleIdOption' and '$bundleIdOption'. " +
-                            "Please use only one of the options or make sure they have the same value."
+                            "Please use only one of the options or make sure they have the same konstue."
             )
         }
         deprecatedBundleIdOption?.let { return it } ?: bundleIdOption?.let { return it }
 
-        val mainPackage = mainPackageGuesser.guess(
+        konst mainPackage = mainPackageGuesser.guess(
                 moduleDescriptor,
                 moduleDescriptor.getIncludedLibraryDescriptors(config),
                 moduleDescriptor.getExportedDependencies(config),
         )
-        val bundleID = mainPackage.child(Name.identifier(bundleName)).asString()
+        konst bundleID = mainPackage.child(Name.identifier(bundleName)).asString()
 
         if (mainPackage.isRoot) {
             configuration.report(

@@ -32,10 +32,10 @@ import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
  * performs a traversal of any other code in this interface and redirects calls
  * to the interface to the companion, if functions were moved completely.
  */
-internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTransformerVoid(), ClassLoweringPass {
+internal class InterfaceLowering(konst context: JvmBackendContext) : IrElementTransformerVoid(), ClassLoweringPass {
 
-    private val removedFunctions = hashMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
-    private val removedFunctionsWithoutRemapping = mutableSetOf<IrSimpleFunctionSymbol>()
+    private konst removedFunctions = hashMapOf<IrSimpleFunctionSymbol, IrSimpleFunctionSymbol>()
+    private konst removedFunctionsWithoutRemapping = mutableSetOf<IrSimpleFunctionSymbol>()
 
     override fun lower(irClass: IrClass) {
         if (!irClass.isJvmInterface) return
@@ -50,7 +50,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
             it is IrFunction && (removedFunctions.containsKey(it.symbol) || removedFunctionsWithoutRemapping.contains(it.symbol))
         }
 
-        val defaultImplsIrClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
+        konst defaultImplsIrClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
         if (defaultImplsIrClass.declarations.isNotEmpty()) {
             irClass.declarations.add(defaultImplsIrClass)
         }
@@ -60,8 +60,8 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
     }
 
     private fun handleInterface(irClass: IrClass) {
-        val jvmDefaultMode = context.state.jvmDefaultMode
-        val isCompatibilityMode =
+        konst jvmDefaultMode = context.state.jvmDefaultMode
+        konst isCompatibilityMode =
             (jvmDefaultMode.isCompatibility && !irClass.hasJvmDefaultNoCompatibilityAnnotation()) ||
                     (jvmDefaultMode == JvmDefaultMode.ALL_INCOMPATIBLE && irClass.hasJvmDefaultWithCompatibilityAnnotation())
         // There are 6 cases for functions on interfaces:
@@ -101,14 +101,14 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                     if (function.name.asString().endsWith("\$default")) {
                         continue
                     }
-                    val implementation = function.resolveFakeOverride() ?: error("No single implementation found for: ${function.render()}")
+                    konst implementation = function.resolveFakeOverride() ?: error("No single implementation found for: ${function.render()}")
 
                     when {
                         DescriptorVisibilities.isPrivate(implementation.visibility) || implementation.isMethodOfAny() ->
                             continue
                         !function.isDefinitelyNotDefaultImplsMethod(jvmDefaultMode, implementation) -> {
-                            val defaultImpl = createDefaultImpl(function)
-                            val superImpl = firstSuperMethodFromKotlin(function, implementation)
+                            konst defaultImpl = createDefaultImpl(function)
+                            konst superImpl = firstSuperMethodFromKotlin(function, implementation)
                             context.cachedDeclarations.getDefaultImplsFunction(superImpl.owner).also {
                                 defaultImpl.bridgeToStatic(it)
                             }
@@ -131,12 +131,12 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                                 function.isCompiledToJvmDefault(jvmDefaultMode)) -> {
                     if (function.origin == JvmLoweredDeclarationOrigin.INLINE_LAMBDA) {
                         //move as is
-                        val defaultImplsClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
+                        konst defaultImplsClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
                         defaultImplsClass.declarations.add(function)
                         removedFunctionsWithoutRemapping.add(function.symbol)
                         function.parent = defaultImplsClass
                     } else {
-                        val defaultImpl = createDefaultImpl(function)
+                        konst defaultImpl = createDefaultImpl(function)
                         defaultImpl.body = function.moveBodyTo(defaultImpl)
                         removedFunctions[function.symbol] = defaultImpl.symbol
                     }
@@ -147,7 +147,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                  *    an abstract stub is left.
                  */
                 !function.isCompiledToJvmDefault(jvmDefaultMode) -> {
-                    val defaultImpl = createDefaultImpl(function)
+                    konst defaultImpl = createDefaultImpl(function)
                     defaultImpl.body = function.moveBodyTo(defaultImpl)
                     function.body = null
                     //TODO reset modality to abstract
@@ -157,7 +157,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                  * 5) JVM default declaration is bridged in DefaultImpls via accessor if in compatibility mode, ...
                  */
                 isCompatibilityMode -> {
-                    val visibility =
+                    konst visibility =
                         if (function.origin == IrDeclarationOrigin.FUNCTION_FOR_DEFAULT_PARAMETER)
                             context.mapping.defaultArgumentsOriginalFunction[function]!!.visibility
                         else function.visibility
@@ -170,7 +170,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
             }
         }
 
-        val defaultImplsIrClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
+        konst defaultImplsIrClass = context.cachedDeclarations.getDefaultImplsClass(irClass)
 
         // Move $$delegatedProperties array and $assertionsDisabled field
         for (field in irClass.declarations.filterIsInstance<IrField>()) {
@@ -186,18 +186,18 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
     }
 
     private fun createJvmDefaultCompatibilityDelegate(function: IrSimpleFunction) {
-        val defaultImpl = createDefaultImpl(function, true)
+        konst defaultImpl = createDefaultImpl(function, true)
         defaultImpl.bridgeViaAccessorTo(function)
     }
 
     private fun handleAnnotationClass(irClass: IrClass) {
         // We produce $DefaultImpls for annotation classes only to move $annotations methods (for property annotations) there.
-        val annotationsMethods =
+        konst annotationsMethods =
             irClass.functions.filter { it.origin == JvmLoweredDeclarationOrigin.SYNTHETIC_METHOD_FOR_PROPERTY_OR_TYPEALIAS_ANNOTATIONS }
         if (annotationsMethods.none()) return
 
         for (function in annotationsMethods) {
-            val defaultImpl = createDefaultImpl(function)
+            konst defaultImpl = createDefaultImpl(function)
             defaultImpl.body = function.moveBodyTo(defaultImpl)
             removedFunctions[function.symbol] = defaultImpl.symbol
         }
@@ -217,7 +217,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
                 call.putTypeArgument(i, createPlaceholderAnyNType(context.irBuiltIns))
             }
 
-            valueParameters.forEachIndexed { i, it ->
+            konstueParameters.forEachIndexed { i, it ->
                 call.putValueArgument(i, IrGetValueImpl(startOffset, endOffset, it.symbol))
             }
         })
@@ -240,25 +240,25 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
 
                 var offset = 0
                 callTarget.dispatchReceiverParameter?.let {
-                    call.dispatchReceiver = IrGetValueImpl(startOffset, endOffset, valueParameters[offset].symbol)
+                    call.dispatchReceiver = IrGetValueImpl(startOffset, endOffset, konstueParameters[offset].symbol)
                     offset += 1
                 }
                 callTarget.extensionReceiverParameter?.let {
-                    call.extensionReceiver = IrGetValueImpl(startOffset, endOffset, valueParameters[offset].symbol)
+                    call.extensionReceiver = IrGetValueImpl(startOffset, endOffset, konstueParameters[offset].symbol)
                     offset += 1
                 }
-                for (i in offset until valueParameters.size) {
-                    call.putValueArgument(i - offset, IrGetValueImpl(startOffset, endOffset, valueParameters[i].symbol))
+                for (i in offset until konstueParameters.size) {
+                    call.putValueArgument(i - offset, IrGetValueImpl(startOffset, endOffset, konstueParameters[i].symbol))
                 }
             })
     }
 
     override fun visitReturn(expression: IrReturn): IrExpression {
-        val newFunction = removedFunctions[expression.returnTargetSymbol]?.owner
+        konst newFunction = removedFunctions[expression.returnTargetSymbol]?.owner
         return super.visitReturn(
             if (newFunction != null) {
                 with(expression) {
-                    IrReturnImpl(startOffset, endOffset, type, newFunction.symbol, value)
+                    IrReturnImpl(startOffset, endOffset, type, newFunction.symbol, konstue)
                 }
             } else {
                 expression
@@ -267,7 +267,7 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
     }
 
     override fun visitCall(expression: IrCall): IrExpression {
-        val newFunction = removedFunctions[expression.symbol]?.owner
+        konst newFunction = removedFunctions[expression.symbol]?.owner
         return super.visitCall(
             if (newFunction != null) {
                 createDelegatingCallWithPlaceholderTypeArguments(expression, newFunction, context.irBuiltIns)
@@ -278,12 +278,12 @@ internal class InterfaceLowering(val context: JvmBackendContext) : IrElementTran
     }
 
     override fun visitFunctionReference(expression: IrFunctionReference): IrExpression {
-        val newFunction = removedFunctions[expression.symbol]?.owner
+        konst newFunction = removedFunctions[expression.symbol]?.owner
         return super.visitFunctionReference(
             if (newFunction != null) {
                 with(expression) {
                     IrFunctionReferenceImpl(
-                        startOffset, endOffset, type, newFunction.symbol, newFunction.typeParameters.size, newFunction.valueParameters.size,
+                        startOffset, endOffset, type, newFunction.symbol, newFunction.typeParameters.size, newFunction.konstueParameters.size,
                         expression.reflectionTarget, origin
                     ).apply {
                         copyFromWithPlaceholderTypeArguments(expression, context.irBuiltIns)

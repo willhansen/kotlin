@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.codegen
 
-data class SyntheticInnerClassInfo(val internalName: String, val flags: Int)
+data class SyntheticInnerClassInfo(konst internalName: String, konst flags: Int)

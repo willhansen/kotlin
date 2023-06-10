@@ -34,7 +34,7 @@ internal abstract class QuantifierSet(open var innerSet: AbstractSet, override v
     override fun hasConsumed(matchResult: MatchResultImpl): Boolean = true
 
     override fun processSecondPassInternal(): AbstractSet {
-        val innerSet = this.innerSet
+        konst innerSet = this.innerSet
         if (innerSet.secondPassVisited) {
             this.innerSet = innerSet.processSecondPass()
         }

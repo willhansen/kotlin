@@ -31,7 +31,7 @@ fun test(s: bar.Sub<String>) {
     s.<!INVISIBLE_SETTER!>name2<!> = ""
     s.<!INVISIBLE_REFERENCE!>doSomething<!>()
     s.doSomething2()
-    val s2: Super<String> = s
+    konst s2: Super<String> = s
     s2.name
     s2.name = ""
     s2.name2

@@ -1,16 +1,16 @@
-class A(~a~val a : Int) {
-    ~b~val b = `a`a
+class A(~a~konst a : Int) {
+    ~b~konst b = `a`a
     ~f~fun f() = `a`a
 }
 
 fun test() {
-    ~va~val a = A()
+    ~va~konst a = A()
     `va`a.`a`a`:kotlin::Int`
     a.`b`b`:kotlin::Int`
     a.`f`f()`:kotlin::Int`
 }
 
-class Foo(~bar~var bar : Int, ~barr~barr : Int, ~barrr~val barrr : Int) {
+class Foo(~bar~var bar : Int, ~barr~barr : Int, ~barrr~konst barrr : Int) {
   init {
     `bar`bar = 1
     `barr`barr = 1

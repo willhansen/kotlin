@@ -5,7 +5,7 @@
 package p1
 
 @SinceKotlin("1.1")
-class A(val v1: Unit)
+class A(konst v1: Unit)
 
 // MODULE: m2
 // FILE: b.kt
@@ -13,7 +13,7 @@ class A(val v1: Unit)
 package p2
 
 @SinceKotlin("1.1")
-class A(val v2: Unit)
+class A(konst v2: Unit)
 
 // MODULE: m3
 // FILE: c.kt
@@ -21,7 +21,7 @@ class A(val v2: Unit)
 package p3
 
 @SinceKotlin("1.1")
-class A(val v3: Unit)
+class A(konst v3: Unit)
 
 // MODULE: m4(m1, m2, m3)
 // FILE: oneExplicitImportOtherStars.kt

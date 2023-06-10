@@ -2,7 +2,7 @@
 // KT-2995 creating factory methods to simulate overloaded constructors don't work in JavaScript
 package foo
 
-class Foo(val name: String)
+class Foo(konst name: String)
 
 fun Foo(x: Int) = Foo("<$x>")
 

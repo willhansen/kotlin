@@ -15,18 +15,18 @@ import org.jetbrains.kotlin.name.Name
 import kotlin.reflect.KClass
 
 object ImplicitIntegerCoercionModuleCapability : FirModuleCapability() {
-    override val key: KClass<out FirModuleCapability> = ImplicitIntegerCoercionModuleCapability::class
+    override konst key: KClass<out FirModuleCapability> = ImplicitIntegerCoercionModuleCapability::class
 }
 
-private val implicitIntegerCoercionAnnotationClassId =
+private konst implicitIntegerCoercionAnnotationClassId =
     ClassId(StandardNames.KOTLIN_INTERNAL_FQ_NAME, Name.identifier("ImplicitIntegerCoercion"))
 
-val FirCallableSymbol<*>.isMarkedWithImplicitIntegerCoercion
+konst FirCallableSymbol<*>.isMarkedWithImplicitIntegerCoercion
     get() =
         fir.moduleData.capabilities.contains(ImplicitIntegerCoercionModuleCapability) ||
                 resolvedAnnotationClassIds.any { it == implicitIntegerCoercionAnnotationClassId }
 
-val FirCallableDeclaration.isMarkedWithImplicitIntegerCoercion
+konst FirCallableDeclaration.isMarkedWithImplicitIntegerCoercion
     get() =
         moduleData.capabilities.contains(ImplicitIntegerCoercionModuleCapability) ||
                 resolvedAnnotationClassIds(symbol).any { it == implicitIntegerCoercionAnnotationClassId }

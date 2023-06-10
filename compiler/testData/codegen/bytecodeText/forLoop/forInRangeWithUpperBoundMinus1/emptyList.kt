@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 
 fun test() {
-    val list = emptyList<Int>()
+    konst list = emptyList<Int>()
     var optimized = 0
     for (i in 0..list.size - 1) optimized += list[i]
 }

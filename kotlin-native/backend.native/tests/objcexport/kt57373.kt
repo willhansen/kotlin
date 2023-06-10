@@ -4,11 +4,11 @@
  */
 
 interface IKt57373 {
-    val bar: Int
+    konst bar: Int
 }
 
 class DKt57373(foo: IKt57373) : IKt57373 by foo
 
 class CKt57373 : IKt57373 {
-    override val bar: Int = 42
+    override konst bar: Int = 42
 }

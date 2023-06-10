@@ -1,8 +1,8 @@
 fun foo(x: Any, y: Any) {}
 
-val y = true
-val zByte = 1.toByte()
-val zShort = 1.toShort()
+konst y = true
+konst zByte = 1.toByte()
+konst zShort = 1.toShort()
 
 fun box(): String {
     var q = "Failed"

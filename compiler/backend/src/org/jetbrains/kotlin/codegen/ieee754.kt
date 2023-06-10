@@ -18,7 +18,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 import org.jetbrains.org.objectweb.asm.Type
 
-class TypeAndNullability(@JvmField val type: Type, @JvmField val isNullable: Boolean)
+class TypeAndNullability(@JvmField konst type: Type, @JvmField konst isNullable: Boolean)
 
 fun calcProperTypeForIeee754ArithmeticIfNeeded(
     expression: KtExpression,
@@ -27,9 +27,9 @@ fun calcProperTypeForIeee754ArithmeticIfNeeded(
     typeMapper: KotlinTypeMapper
 ): TypeAndNullability? {
     if (inferredPrimitiveType == null) return null
-    val ktType = expression.getKotlinTypeForComparison(bindingContext) ?: return null
-    val isNullable = TypeUtils.isNullableType(ktType)
-    val asmType = typeMapper.mapType(inferredPrimitiveType)
+    konst ktType = expression.getKotlinTypeForComparison(bindingContext) ?: return null
+    konst isNullable = TypeUtils.isNullableType(ktType)
+    konst asmType = typeMapper.mapType(inferredPrimitiveType)
     if (!AsmUtil.isPrimitive(asmType)) return null
     return TypeAndNullability(asmType, isNullable)
 }
@@ -40,7 +40,7 @@ fun legacyCalcTypeForIeee754ArithmeticIfNeeded(
     descriptor: DeclarationDescriptor,
     languageVersionSettings: LanguageVersionSettings
 ): TypeAndNullability? {
-    val ktType = expression.getKotlinTypeWithPossibleSmartCastToFP(
+    konst ktType = expression.getKotlinTypeWithPossibleSmartCastToFP(
         // NB. Using DataFlowValueFactoryImpl is a hack, but it is ok for 'legacy'
         bindingContext, descriptor, languageVersionSettings, DataFlowValueFactoryImpl(languageVersionSettings)
     )

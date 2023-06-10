@@ -11,7 +11,7 @@ interface A {
     fun foo(): String
 }
 
-enum class Zzz(val zzz: String, val x: Int) : A {
+enum class Zzz(konst zzz: String, konst x: Int) : A {
     Z1("z1", 1),
     Z2("z2", 2),
     Z3("z3", 3);
@@ -23,6 +23,6 @@ enum class Zzz(val zzz: String, val x: Int) : A {
 
 @Test fun runTest() {
     println(Zzz.Z3.foo())
-    val a: A = Zzz.Z3
+    konst a: A = Zzz.Z3
     println(a.foo())
 }

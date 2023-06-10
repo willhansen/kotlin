@@ -20,7 +20,7 @@ open class KotlinJvmTest : Test(), UsesVariantImplementationFactories {
     @Optional
     var targetName: String? = null
 
-    private val testReporter = project
+    private konst testReporter = project
         .variantImplementationFactoryProvider<MppTestReportHelper.MppTestReportHelperVariantFactory>()
         .map { it.getInstance() }
 
@@ -33,9 +33,9 @@ open class KotlinJvmTest : Test(), UsesVariantImplementationFactories {
         else super.createTestExecuter()
 
     class Executor(
-        private val delegate: TestExecuter<JvmTestExecutionSpec>,
-        private val targetName: String,
-        private val testReporter: MppTestReportHelper,
+        private konst delegate: TestExecuter<JvmTestExecutionSpec>,
+        private konst targetName: String,
+        private konst testReporter: MppTestReportHelper,
     ) : TestExecuter<JvmTestExecutionSpec> by delegate {
         override fun execute(testExecutionSpec: JvmTestExecutionSpec, testResultProcessor: TestResultProcessor) {
             delegate.execute(testExecutionSpec, testReporter.createDelegatingTestReportProcessor(testResultProcessor, targetName))

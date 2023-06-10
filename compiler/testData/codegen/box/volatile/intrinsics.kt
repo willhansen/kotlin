@@ -88,7 +88,7 @@ inline fun testFail(block: () -> Unit, onSuccess: () -> Nothing) {
 }
 
 fun <T> test(one: T, two: T, three: T, wrap: (T) -> Wrapper<T>) : String? {
-    val w = wrap(one)
+    konst w = wrap(one)
     if (!isExperimentalMM() && w is RefWrapper<*>) {
         testFail({ w.compareAndSwap(one, two) }) { return "FAIL 1" }
         testFail({ w.compareAndSet(one, two) }) { return "FAIL 2" }

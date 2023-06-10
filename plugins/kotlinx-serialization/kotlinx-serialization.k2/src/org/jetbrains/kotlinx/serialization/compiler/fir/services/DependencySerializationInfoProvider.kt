@@ -20,17 +20,17 @@ import org.jetbrains.kotlinx.serialization.compiler.resolve.SerialEntityNames.EN
 import org.jetbrains.kotlinx.serialization.compiler.resolve.SerializationPackages
 
 class DependencySerializationInfoProvider(session: FirSession) : FirExtensionSessionComponent(session) {
-    val useGeneratedEnumSerializer by session.firCachesFactory.createLazyValue {
-        val enumSerializerFactory = session.symbolProvider
+    konst useGeneratedEnumSerializer by session.firCachesFactory.createLazyValue {
+        konst enumSerializerFactory = session.symbolProvider
             .getTopLevelFunctionSymbols(SerializationPackages.internalPackageFqName, ENUM_SERIALIZER_FACTORY_FUNC_NAME)
 
-        val annotatedEnumSerializerFactory = session.symbolProvider
+        konst annotatedEnumSerializerFactory = session.symbolProvider
             .getTopLevelFunctionSymbols(SerializationPackages.internalPackageFqName, ANNOTATED_ENUM_SERIALIZER_FACTORY_FUNC_NAME)
 
         enumSerializerFactory.isEmpty() || annotatedEnumSerializerFactory.isEmpty()
     }
 
-    private val classesFromSerializationPackageCache: FirCache<Name, FirClassSymbol<*>, Nothing?> = session.firCachesFactory.createCache { name ->
+    private konst classesFromSerializationPackageCache: FirCache<Name, FirClassSymbol<*>, Nothing?> = session.firCachesFactory.createCache { name ->
             SerializationPackages.allPublicPackages.firstNotNullOfOrNull { packageName ->
                 session.symbolProvider.getClassLikeSymbolByClassId(ClassId(packageName, name)) as? FirClassSymbol<*>
             } ?: throw IllegalArgumentException("Can't locate cass ${name.identifier}")
@@ -40,7 +40,7 @@ class DependencySerializationInfoProvider(session: FirSession) : FirExtensionSes
         return classesFromSerializationPackageCache.getValue(name)
     }
 
-    private val classesFromInternalSerializationPackageCache: FirCache<Name, FirClassSymbol<*>, Nothing?> = session.firCachesFactory.createCache { name ->
+    private konst classesFromInternalSerializationPackageCache: FirCache<Name, FirClassSymbol<*>, Nothing?> = session.firCachesFactory.createCache { name ->
             session.symbolProvider
                 .getClassLikeSymbolByClassId(ClassId(SerializationPackages.internalPackageFqName, name)) as? FirClassSymbol<*>
                 ?: throw IllegalArgumentException("Can't locate cass ${name.identifier}")
@@ -51,5 +51,5 @@ class DependencySerializationInfoProvider(session: FirSession) : FirExtensionSes
     }
 }
 
-val FirSession.dependencySerializationInfoProvider: DependencySerializationInfoProvider by FirSession.sessionComponentAccessor()
+konst FirSession.dependencySerializationInfoProvider: DependencySerializationInfoProvider by FirSession.sessionComponentAccessor()
 

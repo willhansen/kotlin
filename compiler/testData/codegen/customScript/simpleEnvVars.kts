@@ -3,6 +3,6 @@
 
 // envVar: stringVar1=abracadabra
 
-val res = stringVar1.drop(4)
+konst res = stringVar1.drop(4)
 
 // expected: res=cadabra

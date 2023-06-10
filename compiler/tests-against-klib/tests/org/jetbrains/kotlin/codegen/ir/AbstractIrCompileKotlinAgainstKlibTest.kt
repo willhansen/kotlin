@@ -25,15 +25,15 @@ abstract class AbstractCompileKotlinAgainstKlibTest : AbstractBlackBoxCodegenTes
     lateinit var klibName: String
     lateinit var outputDir: File
 
-    override val backend = TargetBackend.JVM_IR
+    override konst backend = TargetBackend.JVM_IR
 
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
         outputDir = javaSourcesOutputDirectory
         klibName = Paths.get(outputDir.toString(), wholeFile.name.toString().replace(".kt", ".klib")).toString()
 
-        val classpath: MutableList<File> = ArrayList()
+        konst classpath: MutableList<File> = ArrayList()
         classpath.add(KtTestUtil.getAnnotationsJar())
-        val configuration = createConfiguration(
+        konst configuration = createConfiguration(
             configurationKind, getTestJdkKind(files), backend, classpath, listOf(outputDir), files
         )
         myEnvironment = createForTests(
@@ -60,10 +60,10 @@ abstract class AbstractCompileKotlinAgainstKlibTest : AbstractBlackBoxCodegenTes
 
     // We need real (as opposed to virtual) files in order to produce a Klib.
     private fun loadMultiFilesReal(files: List<TestFile>): List<String> {
-        val dir = outputDir
+        konst dir = outputDir
         return files.map { testFile ->
             assert(testFile.name.endsWith(".kt"))
-            val ktFile = File(Paths.get(dir.toString(), testFile.name).toString())
+            konst ktFile = File(Paths.get(dir.toString(), testFile.name).toString())
             ktFile.writeText(testFile.content)
             ktFile.toString()
         }
@@ -72,8 +72,8 @@ abstract class AbstractCompileKotlinAgainstKlibTest : AbstractBlackBoxCodegenTes
     // For now, while there is no common backend, we generate Klib using
     // the JS_IR compiler.
     private fun compileToKlib(files: List<TestFile>) {
-        val sourceFiles = loadMultiFilesReal(files)
-        val (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
+        konst sourceFiles = loadMultiFilesReal(files)
+        konst (output, exitCode) = AbstractCliTest.executeCompilerGrabOutput(
             K2JSCompiler(),
             listOf(
                 "-output", klibName,
@@ -87,6 +87,6 @@ abstract class AbstractCompileKotlinAgainstKlibTest : AbstractBlackBoxCodegenTes
     }
 
     companion object {
-        const val TIMEOUT_SECONDS = 10L
+        const konst TIMEOUT_SECONDS = 10L
     }
 }

@@ -9,8 +9,8 @@ class Baz
 inline operator fun Baz.invoke(f: () -> String) { f() }
 
 class Foo {
-    val bar = Bar()
-    val baz = Baz()
+    konst bar = Bar()
+    konst baz = Baz()
 }
 
 // CHECK_BREAKS_COUNT: function=testDispatch count=0 TARGET_BACKENDS=JS_IR
@@ -28,6 +28,6 @@ fun testExtension(foo: Foo): String {
 }
 
 fun box(): String {
-    val f = Foo()
+    konst f = Foo()
     return testDispatch(f) + testExtension(f)
 }

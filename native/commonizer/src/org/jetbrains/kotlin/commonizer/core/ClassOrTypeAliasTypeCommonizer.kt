@@ -17,10 +17,10 @@ import org.jetbrains.kotlin.utils.addToStdlib.ifTrue
 import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 
 internal class ClassOrTypeAliasTypeCommonizer(
-    private val typeCommonizer: TypeCommonizer,
-    private val classifiers: CirKnownClassifiers,
-    private val isOptimisticNumberTypeCommonizationEnabled: Boolean,
-    private val isPlatformIntegerCommonizationEnabled: Boolean,
+    private konst typeCommonizer: TypeCommonizer,
+    private konst classifiers: CirKnownClassifiers,
+    private konst isOptimisticNumberTypeCommonizationEnabled: Boolean,
+    private konst isPlatformIntegerCommonizationEnabled: Boolean,
 ) : NullableSingleInvocationCommonizer<CirClassOrTypeAliasType> {
 
     constructor(typeCommonizer: TypeCommonizer, classifiers: CirKnownClassifiers, settings: CommonizerSettings) : this(
@@ -29,19 +29,19 @@ internal class ClassOrTypeAliasTypeCommonizer(
         settings.getSetting(PlatformIntegerCommonizationEnabledKey),
     )
 
-    private val isMarkedNullableCommonizer = TypeNullabilityCommonizer(typeCommonizer.context)
-    private val platformIntegerCommonizer = PlatformIntegerCommonizer(typeCommonizer, classifiers)
-    private val typeDistanceMeasurement = TypeDistanceMeasurement(typeCommonizer.context)
+    private konst isMarkedNullableCommonizer = TypeNullabilityCommonizer(typeCommonizer.context)
+    private konst platformIntegerCommonizer = PlatformIntegerCommonizer(typeCommonizer, classifiers)
+    private konst typeDistanceMeasurement = TypeDistanceMeasurement(typeCommonizer.context)
 
-    override fun invoke(values: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
-        if (values.isEmpty()) return null
-        val expansions = values.map { it.expandedType() }
-        val isMarkedNullable = isMarkedNullableCommonizer.commonize(expansions.map { it.isMarkedNullable }) ?: return null
+    override fun invoke(konstues: List<CirClassOrTypeAliasType>): CirClassOrTypeAliasType? {
+        if (konstues.isEmpty()) return null
+        konst expansions = konstues.map { it.expandedType() }
+        konst isMarkedNullable = isMarkedNullableCommonizer.commonize(expansions.map { it.isMarkedNullable }) ?: return null
 
-        val substitutedTypes = substituteTypesIfNecessary(values)
+        konst substitutedTypes = substituteTypesIfNecessary(konstues)
 
         if (substitutedTypes == null) {
-            val integerCommonizationResultIfApplicable = isPlatformIntegerCommonizationEnabled.ifTrue {
+            konst integerCommonizationResultIfApplicable = isPlatformIntegerCommonizationEnabled.ifTrue {
                 platformIntegerCommonizer(expansions)?.makeNullableIfNecessary(isMarkedNullable)
             } ?: isOptimisticNumberTypeCommonizationEnabled.ifTrue {
                 OptimisticNumbersTypeCommonizer.commonize(expansions)?.makeNullableIfNecessary(isMarkedNullable)
@@ -50,12 +50,12 @@ internal class ClassOrTypeAliasTypeCommonizer(
             return integerCommonizationResultIfApplicable
         }
 
-        val classifierId = substitutedTypes.singleDistinctValueOrNull { it.classifierId } ?: return null
+        konst classifierId = substitutedTypes.singleDistinctValueOrNull { it.classifierId } ?: return null
 
-        val arguments = TypeArgumentListCommonizer(typeCommonizer).commonize(substitutedTypes.map { it.arguments }) ?: return null
+        konst arguments = TypeArgumentListCommonizer(typeCommonizer).commonize(substitutedTypes.map { it.arguments }) ?: return null
 
-        val outerTypes = substitutedTypes.safeCastValues<CirClassOrTypeAliasType, CirClassType>()?.map { it.outerType }
-        val outerType = when {
+        konst outerTypes = substitutedTypes.safeCastValues<CirClassOrTypeAliasType, CirClassType>()?.map { it.outerType }
+        konst outerType = when {
             outerTypes == null -> null
             outerTypes.all { it == null } -> null
             outerTypes.any { it == null } -> return null
@@ -77,7 +77,7 @@ internal class ClassOrTypeAliasTypeCommonizer(
         /*
         Classifier is coming from common dependencies and therefore the type can be used in common
          */
-        when (val dependencyClassifier = classifiers.commonDependencies.classifier(classifierId)) {
+        when (konst dependencyClassifier = classifiers.commonDependencies.classifier(classifierId)) {
             is CirProvided.Class -> return CirClassType.createInterned(
                 classId = classifierId,
                 outerType = outerType,
@@ -100,7 +100,7 @@ internal class ClassOrTypeAliasTypeCommonizer(
         /*
         Classifier is coming from 'sources' and is commonized and therefore the type can be used in common
          */
-        val commonizedClassifier = classifiers.commonizedNodes.classNode(classifierId)?.commonDeclaration?.invoke()
+        konst commonizedClassifier = classifiers.commonizedNodes.classNode(classifierId)?.commonDeclaration?.invoke()
             ?: classifiers.commonizedNodes.typeAliasNode(classifierId)?.commonDeclaration?.invoke()
 
         return when (commonizedClassifier) {
@@ -127,7 +127,7 @@ internal class ClassOrTypeAliasTypeCommonizer(
     private fun substituteTypesIfNecessary(types: List<CirClassOrTypeAliasType>): List<CirClassOrTypeAliasType>? {
         /* No substitution is necessary if all types use the same classifierId */
         if (types.singleDistinctValueOrNull { it.classifierId } != null) return types
-        val classifierId = selectSubstitutionClassifierId(types) ?: return null
+        konst classifierId = selectSubstitutionClassifierId(types) ?: return null
         return types.mapIndexed { targetIndex, type -> substituteIfNecessary(targetIndex, type, classifierId) ?: return null }
     }
 
@@ -142,14 +142,14 @@ internal class ClassOrTypeAliasTypeCommonizer(
             forwardSubstitute(sourceType, destinationClassifierId)?.let { return it }
         }
 
-        val resolvedClassifierFromDependencies = classifiers.commonDependencies.classifier(destinationClassifierId)
+        konst resolvedClassifierFromDependencies = classifiers.commonDependencies.classifier(destinationClassifierId)
             ?: classifiers.targetDependencies[targetIndex].classifier(destinationClassifierId) // necessary?
 
         if (resolvedClassifierFromDependencies != null && resolvedClassifierFromDependencies is CirProvided.TypeAlias) {
             return backwardsSubstitute(targetIndex, sourceType, destinationClassifierId, resolvedClassifierFromDependencies)
         }
 
-        val resolvedClassifier = classifiers.classifierIndices[targetIndex].findClassifier(destinationClassifierId)
+        konst resolvedClassifier = classifiers.classifierIndices[targetIndex].findClassifier(destinationClassifierId)
         if (resolvedClassifier != null && resolvedClassifier is CirTypeAlias) {
             return backwardsSubstitute(sourceType, destinationClassifierId, resolvedClassifier)
         }
@@ -198,7 +198,7 @@ internal class ClassOrTypeAliasTypeCommonizer(
          */
         if (sourceType.arguments.isNotEmpty()) return null
         if (destinationTypeAlias.typeParameters.isNotEmpty()) return null
-        val providedClassifiers = CirProvidedClassifiers.of(classifiers.commonDependencies, classifiers.targetDependencies[targetIndex])
+        konst providedClassifiers = CirProvidedClassifiers.of(classifiers.commonDependencies, classifiers.targetDependencies[targetIndex])
 
         return CirTypeAliasType.createInterned(
             destinationTypeAliasId,
@@ -218,19 +218,19 @@ internal class ClassOrTypeAliasTypeCommonizer(
      * - The input [types] do not have a single distinct set of associated ids
      */
     private fun selectSubstitutionClassifierId(types: List<CirClassOrTypeAliasType>): CirEntityId? {
-        val forwardSubstitutionAllowed = typeCommonizer.context.enableForwardTypeAliasSubstitution
-        val backwardsSubstitutionAllowed = typeCommonizer.context.enableBackwardsTypeAliasSubstitution
+        konst forwardSubstitutionAllowed = typeCommonizer.context.enableForwardTypeAliasSubstitution
+        konst backwardsSubstitutionAllowed = typeCommonizer.context.enableBackwardsTypeAliasSubstitution
 
         /* No substitution allowed in any direction */
         if (!forwardSubstitutionAllowed && !backwardsSubstitutionAllowed) {
             return null
         }
 
-        val associatedIds = types.singleDistinctValueOrNull {
+        konst associatedIds = types.singleDistinctValueOrNull {
             classifiers.associatedIdsResolver.resolveAssociatedIds(it.classifierId)
         } ?: return null
 
-        val typeSubstitutionCandidates = resolveTypeSubstitutionCandidates(associatedIds, types)
+        konst typeSubstitutionCandidates = resolveTypeSubstitutionCandidates(associatedIds, types)
             .onEach { typeSubstitutionCandidate ->
                 assert(typeSubstitutionCandidate.typeDistance.isZero.not()) { "Expected no zero typeDistance" }
                 assert(typeSubstitutionCandidate.typeDistance.isReachable) { "Expected substitution candidate to be reachable" }
@@ -243,7 +243,7 @@ internal class ClassOrTypeAliasTypeCommonizer(
         associatedIds: AssociatedClassifierIds, types: List<CirClassOrTypeAliasType>
     ): List<TypeSubstitutionCandidate> {
         return associatedIds.ids.mapNotNull mapCandidateId@{ candidateId ->
-            val typeDistances = types.mapIndexed { targetIndex, type ->
+            konst typeDistances = types.mapIndexed { targetIndex, type ->
                 typeDistanceMeasurement(classifiers, targetIndex, type, candidateId)
                     .takeIf { it.isReachable } ?: return@mapCandidateId null
             }
@@ -255,8 +255,8 @@ internal class ClassOrTypeAliasTypeCommonizer(
 }
 
 private class TypeSubstitutionCandidate(
-    val id: CirEntityId,
-    val typeDistance: CirTypeDistance
+    konst id: CirEntityId,
+    konst typeDistance: CirTypeDistance
 )
 
 private interface TypeDistanceMeasurement {

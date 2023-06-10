@@ -11,7 +11,7 @@ public class J {
 
 // FILE: k.kt
 fun test() {
-    val n = J.staticN
+    konst n = J.staticN
     foo(n)
     J.staticNN = n
     if (n != null) {
@@ -19,7 +19,7 @@ fun test() {
         J.staticNN = n
     }
 
-    val x: J? = null
+    konst x: J? = null
     J.staticNN = x
     if (x != null) {
         J.staticNN = x

@@ -1,5 +1,5 @@
 // !LANGUAGE: -ProhibitSimplificationOfNonTrivialConstBooleanExpressions
 package test
 
-// val prop4: true
-val prop4 = !1.equals(2)
+// konst prop4: true
+konst prop4 = !1.equals(2)

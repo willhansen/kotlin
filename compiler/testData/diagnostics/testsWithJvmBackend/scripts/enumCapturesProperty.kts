@@ -2,9 +2,9 @@
 // TARGET_BACKEND: JVM_IR
 
 // KT-30616
-val foo = "hello"
+konst foo = "hello"
 
-<!SCRIPT_CAPTURING_ENUM!>enum class Bar(val s: String = foo) {
+<!SCRIPT_CAPTURING_ENUM!>enum class Bar(konst s: String = foo) {
 
     Eleven("0")
 }<!>

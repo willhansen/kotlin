@@ -3,9 +3,9 @@
 // TODO: muted automatically, investigate should it be ran for JS or not
 // IGNORE_BACKEND: JS
 
-val NAN = Double.NaN
+konst NAN = Double.NaN
 
-data class A(val x: Double)
+data class A(konst x: Double)
 
 fun box(): String {
     if (A(+0.0) == A(-0.0)) return "Fail: +0.0 == -0.0"
@@ -14,7 +14,7 @@ fun box(): String {
     if (A(NAN) != A(NAN)) return "Fail: NaN != NaN"
     if (A(NAN).hashCode() != A(NAN).hashCode()) return "Fail: hash(NaN) != hash(NaN)"
 
-    val s = HashSet<A>()
+    konst s = HashSet<A>()
     for (times in 1..5) {
         s.add(A(3.14))
         s.add(A(+0.0))

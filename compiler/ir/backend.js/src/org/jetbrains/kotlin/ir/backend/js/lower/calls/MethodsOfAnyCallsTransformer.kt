@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.name.Name
 
 
 class MethodsOfAnyCallsTransformer(context: JsIrBackendContext) : CallsTransformer {
-    private val intrinsics = context.intrinsics
-    private val nameToTransformer: Map<Name, (IrFunctionAccessExpression) -> IrExpression>
+    private konst intrinsics = context.intrinsics
+    private konst nameToTransformer: Map<Name, (IrFunctionAccessExpression) -> IrExpression>
 
     init {
         nameToTransformer = hashMapOf()
@@ -53,7 +53,7 @@ class MethodsOfAnyCallsTransformer(context: JsIrBackendContext) : CallsTransform
 
 
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean): IrExpression {
-        val symbol = call.symbol
+        konst symbol = call.symbol
         nameToTransformer[symbol.owner.name]?.let {
             return it(call)
         }
@@ -62,15 +62,15 @@ class MethodsOfAnyCallsTransformer(context: JsIrBackendContext) : CallsTransform
     }
 
     private fun shouldReplaceToStringWithRuntimeCall(call: IrFunctionAccessExpression): Boolean {
-        val function = call.symbol.owner
-        if (function.valueParameters.isNotEmpty() && function.name.asString() != "toString" )
+        konst function = call.symbol.owner
+        if (function.konstueParameters.isNotEmpty() && function.name.asString() != "toString" )
             return false
 
         if (function.extensionReceiverParameter != null)
             return false
 
         if (call is IrCall) {
-            val superQualifierSymbol = call.superQualifierSymbol
+            konst superQualifierSymbol = call.superQualifierSymbol
             if (superQualifierSymbol != null &&
                 !superQualifierSymbol.owner.isInterface &&
                 superQualifierSymbol != intrinsics.anyClassSymbol) {
@@ -78,7 +78,7 @@ class MethodsOfAnyCallsTransformer(context: JsIrBackendContext) : CallsTransform
             }
         }
 
-        val receiverParameterType = function.dispatchReceiverParameter?.type ?: return false
+        konst receiverParameterType = function.dispatchReceiverParameter?.type ?: return false
 
         return receiverParameterType.run {
             isArray() || isAny() || this is IrDynamicType || isString()

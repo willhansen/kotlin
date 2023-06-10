@@ -1,13 +1,13 @@
 import base.*
 
 interface KotlinInterface : UExpression {
-    override fun evaluate(): Any? {
-        return super.evaluate()
+    override fun ekonstuate(): Any? {
+        return super.ekonstuate()
     }
 }
 
 class KotlinClass : UExpression {
-    override fun evaluate(): Any? {
-        return super.evaluate()
+    override fun ekonstuate(): Any? {
+        return super.ekonstuate()
     }
 }

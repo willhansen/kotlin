@@ -26,7 +26,7 @@ private fun captureOneDefaultBound(f: (String, String) -> String): Any = f
 private fun captureAllDefaultsBound(f: () -> String): Any = f
 
 fun box(): String {
-    val v0 = V()
+    konst v0 = V()
 
     checkEqual(captureNoDefaults(V::target), captureNoDefaults(V::target))
     checkEqual(captureNoDefaults(V::target), captureNoDefaultsFromOtherFile())
@@ -52,7 +52,7 @@ fun box(): String {
 
     checkNotEqual(captureNoDefaults(V::target), captureNoDefaultsBoundFromOtherFile(v0))
 
-    val v1 = V()
+    konst v1 = V()
     checkNotEqual(captureNoDefaultsBound(v0::target), captureNoDefaultsBound(v1::target))
     checkNotEqual(captureOneDefaultBound(v0::target), captureOneDefaultBound(v1::target))
     checkNotEqual(captureAllDefaultsBound(v0::target), captureAllDefaultsBound(v1::target))

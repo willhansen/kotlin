@@ -28,7 +28,7 @@ class Case1() {
     }
 }
 
-val x = 1
+konst x = 1
 fun x() = 1.0
 
 fun case1(case: Case1) {
@@ -42,10 +42,10 @@ class Case2() {
     fun foo(vararg x: ()->Short): String = TODO() // (1.1)
     fun foo(vararg x: ()->Byte): Unit = TODO() // (1.2)
 
-    val x : Short = 1
+    konst x : Short = 1
     fun x() = 1
 
-    val y = 1
+    konst y = 1
     fun y(): Short = 1
 
     fun case2(case: Case2) {
@@ -75,10 +75,10 @@ class Case3() {
     fun foo(vararg x: ()->Short): String = TODO() // (1.1)
     fun foo(x: ()->Byte): Unit = TODO() // (1.2)
 
-    val x : Short = 1
+    konst x : Short = 1
     fun x() = 1
 
-    val y = 1
+    konst y = 1
     fun y(): Short = 1
 
     fun case3(case: Case3) {
@@ -108,7 +108,7 @@ class Case4() {
     infix fun foo(x: ()->Int): String = TODO() // (1.1)
     infix fun foo(x: ()->Any): Unit = TODO() // (1.2)
 
-    val x = 1
+    konst x = 1
     fun x() = 1.0
 
     fun case() {

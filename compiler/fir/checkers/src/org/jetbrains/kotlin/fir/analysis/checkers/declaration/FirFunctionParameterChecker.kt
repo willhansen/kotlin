@@ -13,7 +13,7 @@ import org.jetbrains.kotlin.fir.FirElement
 import org.jetbrains.kotlin.fir.analysis.checkers.context.CheckerContext
 import org.jetbrains.kotlin.fir.analysis.checkers.isValueClass
 import org.jetbrains.kotlin.fir.analysis.checkers.leastUpperBound
-import org.jetbrains.kotlin.fir.analysis.checkers.valOrVarKeyword
+import org.jetbrains.kotlin.fir.analysis.checkers.konstOrVarKeyword
 import org.jetbrains.kotlin.fir.analysis.diagnostics.FirErrors
 import org.jetbrains.kotlin.fir.declarations.FirAnonymousFunction
 import org.jetbrains.kotlin.fir.declarations.FirConstructor
@@ -37,16 +37,16 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
 
     private fun checkParameterTypes(function: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         if (function is FirAnonymousFunction) return
-        for (valueParameter in function.valueParameters) {
-            val returnTypeRef = valueParameter.returnTypeRef
+        for (konstueParameter in function.konstueParameters) {
+            konst returnTypeRef = konstueParameter.returnTypeRef
             if (returnTypeRef !is FirErrorTypeRef) continue
             // type problems on real source are already reported by ConeDiagnostic.toFirDiagnostics
             if (returnTypeRef.source?.kind == KtRealSourceElementKind) continue
 
-            val diagnostic = returnTypeRef.diagnostic
+            konst diagnostic = returnTypeRef.diagnostic
             if (diagnostic is ConeSimpleDiagnostic && diagnostic.kind == DiagnosticKind.ValueParameterWithNoTypeAnnotation) {
                 reporter.reportOn(
-                    valueParameter.source, FirErrors.VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION,
+                    konstueParameter.source, FirErrors.VALUE_PARAMETER_WITH_NO_TYPE_ANNOTATION,
                     context
                 )
             }
@@ -54,7 +54,7 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
     }
 
     private fun checkVarargParameters(function: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        val varargParameters = function.valueParameters.filter { it.isVararg }
+        konst varargParameters = function.konstueParameters.filter { it.isVararg }
         if (varargParameters.size > 1) {
             for (parameter in varargParameters) {
                 reporter.reportOn(parameter.source, FirErrors.MULTIPLE_VARARG_PARAMETERS, context)
@@ -62,7 +62,7 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
         }
 
         for (varargParameter in varargParameters) {
-            val varargParameterType = varargParameter.returnTypeRef.coneType.arrayElementType() ?: continue
+            konst varargParameterType = varargParameter.returnTypeRef.coneType.arrayElementType() ?: continue
             // LUB is checked to ensure varargParameterType may
             // never be anything except `Nothing` or `Nothing?`
             // in case it is a complex type that quantifies
@@ -70,7 +70,7 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
             if (varargParameterType.leastUpperBound(context.session).isNothingOrNullableNothing ||
                 (varargParameterType.isValueClass(context.session) && !varargParameterType.isUnsignedTypeOrNullableUnsignedType)
             // Note: comparing with FE1.0, we skip checking if the type is not primitive because primitive types are not inline. That
-            // is any primitive values are already allowed by the inline check.
+            // is any primitive konstues are already allowed by the inline check.
             ) {
                 reporter.reportOn(
                     varargParameter.source, FirErrors.FORBIDDEN_VARARG_PARAMETER_TYPE,
@@ -82,19 +82,19 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
     }
 
     private fun checkUninitializedParameter(function: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
-        for ((index, parameter) in function.valueParameters.withIndex()) {
+        for ((index, parameter) in function.konstueParameters.withIndex()) {
             // Alas, CheckerContext.qualifiedAccesses stack is not available at this point.
-            // Thus, manually visit default value expression and report the diagnostic on qualified accesses of interest.
+            // Thus, manually visit default konstue expression and report the diagnostic on qualified accesses of interest.
             parameter.defaultValue?.accept(object : FirVisitorVoid() {
                 override fun visitElement(element: FirElement) {
                     element.acceptChildren(this)
                 }
 
                 override fun visitQualifiedAccessExpression(qualifiedAccessExpression: FirQualifiedAccessExpression) {
-                    val referredParameter = qualifiedAccessExpression.calleeReference.toResolvedValueParameterSymbol() ?: return
+                    konst referredParameter = qualifiedAccessExpression.calleeReference.toResolvedValueParameterSymbol() ?: return
 
                     @OptIn(SymbolInternals::class)
-                    val referredParameterIndex = function.valueParameters.indexOf(referredParameter.fir)
+                    konst referredParameterIndex = function.konstueParameters.indexOf(referredParameter.fir)
                     // Skip if the referred parameter is not declared in the same function.
                     if (referredParameterIndex < 0) return
 
@@ -112,14 +112,14 @@ object FirFunctionParameterChecker : FirFunctionChecker() {
 
     private fun checkValOrVarParameter(function: FirFunction, context: CheckerContext, reporter: DiagnosticReporter) {
         if (function is FirConstructor && function.isPrimary) {
-            // `val/var` is valid for primary constructors, but not for secondary constructors
+            // `konst/var` is konstid for primary constructors, but not for secondary constructors
             return
         }
 
-        for (valueParameter in function.valueParameters) {
-            val source = valueParameter.source
+        for (konstueParameter in function.konstueParameters) {
+            konst source = konstueParameter.source
             if (source?.kind is KtFakeSourceElementKind) continue
-            source.valOrVarKeyword?.let {
+            source.konstOrVarKeyword?.let {
                 if (function is FirConstructor) {
                     reporter.reportOn(source, FirErrors.VAL_OR_VAR_ON_SECONDARY_CONSTRUCTOR_PARAMETER, it, context)
                 } else {

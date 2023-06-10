@@ -30,7 +30,7 @@ public final class IrVarargElement extends
   private IrVarargElement(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -81,10 +81,10 @@ public final class IrVarargElement extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -102,7 +102,7 @@ public final class IrVarargElement extends
     public IrVarargElement parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrVarargElement(input, extensionRegistry);
     }
   };
@@ -120,12 +120,12 @@ public final class IrVarargElement extends
     EXPRESSION(1),
     SPREAD_ELEMENT(2),
     VARARGELEMENT_NOT_SET(0);
-    private int value = 0;
-    private VarargElementCase(int value) {
-      this.value = value;
+    private int konstue = 0;
+    private VarargElementCase(int konstue) {
+      this.konstue = konstue;
     }
-    public static VarargElementCase valueOf(int value) {
-      switch (value) {
+    public static VarargElementCase konstueOf(int konstue) {
+      switch (konstue) {
         case 1: return EXPRESSION;
         case 2: return SPREAD_ELEMENT;
         case 0: return VARARGELEMENT_NOT_SET;
@@ -134,13 +134,13 @@ public final class IrVarargElement extends
       }
     }
     public int getNumber() {
-      return this.value;
+      return this.konstue;
     }
   };
 
   public VarargElementCase
   getVarargElementCase() {
-    return VarargElementCase.valueOf(
+    return VarargElementCase.konstueOf(
         varargElementCase_);
   }
 
@@ -242,23 +242,23 @@ public final class IrVarargElement extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parseFrom(java.io.InputStream input)
@@ -401,7 +401,7 @@ public final class IrVarargElement extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrVarargElement) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -415,7 +415,7 @@ public final class IrVarargElement extends
     private java.lang.Object varargElement_;
     public VarargElementCase
         getVarargElementCase() {
-      return VarargElementCase.valueOf(
+      return VarargElementCase.konstueOf(
           varargElementCase_);
     }
 
@@ -445,11 +445,11 @@ public final class IrVarargElement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 1;</code>
      */
-    public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
-      if (value == null) {
+    public Builder setExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      varargElement_ = value;
+      varargElement_ = konstue;
 
       varargElementCase_ = 1;
       return this;
@@ -467,13 +467,13 @@ public final class IrVarargElement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression expression = 1;</code>
      */
-    public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value) {
+    public Builder mergeExpression(org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue) {
       if (varargElementCase_ == 1 &&
           varargElement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.getDefaultInstance()) {
         varargElement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression) varargElement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        varargElement_ = value;
+        varargElement_ = konstue;
       }
 
       varargElementCase_ = 1;
@@ -509,11 +509,11 @@ public final class IrVarargElement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement spread_element = 2;</code>
      */
-    public Builder setSpreadElement(org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement value) {
-      if (value == null) {
+    public Builder setSpreadElement(org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      varargElement_ = value;
+      varargElement_ = konstue;
 
       varargElementCase_ = 2;
       return this;
@@ -531,13 +531,13 @@ public final class IrVarargElement extends
     /**
      * <code>optional .org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement spread_element = 2;</code>
      */
-    public Builder mergeSpreadElement(org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement value) {
+    public Builder mergeSpreadElement(org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement konstue) {
       if (varargElementCase_ == 2 &&
           varargElement_ != org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement.getDefaultInstance()) {
         varargElement_ = org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement.newBuilder((org.jetbrains.kotlin.backend.common.serialization.proto.IrSpreadElement) varargElement_)
-            .mergeFrom(value).buildPartial();
+            .mergeFrom(konstue).buildPartial();
       } else {
-        varargElement_ = value;
+        varargElement_ = konstue;
       }
 
       varargElementCase_ = 2;

@@ -26,16 +26,16 @@ public interface IrErrorCallExpressionOrBuilder extends
   org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getReceiver();
 
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue_argument = 3;</code>
    */
   java.util.List<org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression> 
       getValueArgumentList();
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue_argument = 3;</code>
    */
   org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression getValueArgument(int index);
   /**
-   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression value_argument = 3;</code>
+   * <code>repeated .org.jetbrains.kotlin.backend.common.serialization.proto.IrExpression konstue_argument = 3;</code>
    */
   int getValueArgumentCount();
 }

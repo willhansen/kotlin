@@ -51,21 +51,21 @@ fun canBePropertyAccessor(identifier: String): Boolean {
 }
 
 interface SyntheticJavaPropertyDescriptor : PropertyDescriptor, SyntheticPropertyDescriptor {
-    override val getMethod: FunctionDescriptor
-    override val setMethod: FunctionDescriptor?
+    override konst getMethod: FunctionDescriptor
+    override konst setMethod: FunctionDescriptor?
 
     companion object {
         fun findByGetterOrSetter(getterOrSetter: FunctionDescriptor, syntheticScopes: SyntheticScopes): SyntheticJavaPropertyDescriptor? {
-            val name = getterOrSetter.name
+            konst name = getterOrSetter.name
             if (name.isSpecial) return null
-            val identifier = name.identifier
+            konst identifier = name.identifier
             if (!canBePropertyAccessor(identifier)) return null  // optimization
 
-            val classDescriptorOwner = getterOrSetter.containingDeclaration as? ClassDescriptor ?: return null
+            konst classDescriptorOwner = getterOrSetter.containingDeclaration as? ClassDescriptor ?: return null
 
-            val originalGetterOrSetter = getterOrSetter.original
+            konst originalGetterOrSetter = getterOrSetter.original
 
-            val names = propertyNamesByAccessorName(name)
+            konst names = propertyNamesByAccessorName(name)
 
             return names
                 .flatMap {
@@ -84,7 +84,7 @@ interface SyntheticJavaPropertyDescriptor : PropertyDescriptor, SyntheticPropert
         fun findByGetterOrSetter(getterOrSetter: FunctionDescriptor, syntheticScope: SyntheticScope) =
             findByGetterOrSetter(getterOrSetter,
                                  object : SyntheticScopes {
-                                     override val scopes: Collection<SyntheticScope> = listOf(syntheticScope)
+                                     override konst scopes: Collection<SyntheticScope> = listOf(syntheticScope)
                                  })
 
         fun propertyNameByGetMethodName(methodName: Name): Name? = org.jetbrains.kotlin.load.java.propertyNameByGetMethodName(methodName)
@@ -93,11 +93,11 @@ interface SyntheticJavaPropertyDescriptor : PropertyDescriptor, SyntheticPropert
 
 class JavaSyntheticPropertiesScope(
     storageManager: StorageManager,
-    private val lookupTracker: LookupTracker,
-    private val typeRefiner: KotlinTypeRefiner,
-    private val supportJavaRecords: Boolean,
+    private konst lookupTracker: LookupTracker,
+    private konst typeRefiner: KotlinTypeRefiner,
+    private konst supportJavaRecords: Boolean,
 ) : SyntheticScope.Default() {
-    private val syntheticPropertyInClass =
+    private konst syntheticPropertyInClass =
         storageManager.createMemoizedFunction<Pair<ClassDescriptor, Name>, SyntheticPropertyHolder> { pair ->
             syntheticPropertyInClassNotCached(pair.first, pair.second)
         }
@@ -107,7 +107,7 @@ class JavaSyntheticPropertiesScope(
         name: Name,
         location: LookupLocation
     ): PropertyDescriptor? {
-        val (descriptor, lookedNames) = syntheticPropertyInClass(Pair(classifier, name))
+        konst (descriptor, lookedNames) = syntheticPropertyInClass(Pair(classifier, name))
 
         if (location !is NoLookupLocation) {
             lookedNames.forEach { lookupTracker.record(location, classifier, it) }
@@ -117,12 +117,12 @@ class JavaSyntheticPropertiesScope(
     }
 
     private fun syntheticPropertyInClassNotCached(ownerClass: ClassDescriptor, name: Name): SyntheticPropertyHolder {
-        val forBean = syntheticPropertyHolderForBeanConvention(name, ownerClass)
+        konst forBean = syntheticPropertyHolderForBeanConvention(name, ownerClass)
         if (forBean.descriptor != null) return forBean
 
         if (!ownerClass.isRecord()) return forBean
 
-        val propertyForComponent = syntheticPropertyDescriptorForRecordComponent(name, ownerClass)
+        konst propertyForComponent = syntheticPropertyDescriptorForRecordComponent(name, ownerClass)
 
         return createSyntheticPropertyHolder(propertyForComponent, forBean.lookedNames, name)
     }
@@ -136,7 +136,7 @@ class JavaSyntheticPropertiesScope(
             return if (descriptor == null) SyntheticPropertyHolder.EMPTY else SyntheticPropertyHolder(descriptor, emptyList())
         }
 
-        val names = ArrayList<Name>(lookedNames.size + (additionalName?.let { 1 } ?: 0))
+        konst names = ArrayList<Name>(lookedNames.size + (additionalName?.let { 1 } ?: 0))
 
         names.addAll(lookedNames)
         names.addIfNotNull(additionalName)
@@ -148,25 +148,25 @@ class JavaSyntheticPropertiesScope(
         name: Name,
         ownerClass: ClassDescriptor
     ): SyntheticPropertyHolder {
-        val possibleGetMethodNames = possibleGetMethodNames(name)
+        konst possibleGetMethodNames = possibleGetMethodNames(name)
         if (possibleGetMethodNames.isEmpty()) return SyntheticPropertyHolder.EMPTY
 
-        val memberScope = ownerClass.getRefinedUnsubstitutedMemberScopeIfPossible(typeRefiner)
+        konst memberScope = ownerClass.getRefinedUnsubstitutedMemberScopeIfPossible(typeRefiner)
 
-        val getMethod = possibleGetMethodNames
+        konst getMethod = possibleGetMethodNames
             .flatMap { memberScope.getContributedFunctions(it, NoLookupLocation.FROM_SYNTHETIC_SCOPE) }
             .singleOrNull {
                 it.hasJavaOriginInHierarchy() && isGoodGetMethod(it)
             } ?: return createSyntheticPropertyHolder(null, possibleGetMethodNames)
 
 
-        val setMethodName = setMethodName(getMethod.name)
-        val setMethod = memberScope.getContributedFunctions(setMethodName, NoLookupLocation.FROM_SYNTHETIC_SCOPE)
+        konst setMethodName = setMethodName(getMethod.name)
+        konst setMethod = memberScope.getContributedFunctions(setMethodName, NoLookupLocation.FROM_SYNTHETIC_SCOPE)
             .singleOrNull { isGoodSetMethod(it, getMethod) }
 
-        val propertyType = getMethod.returnType!!
+        konst propertyType = getMethod.returnType!!
 
-        val descriptor = MyPropertyDescriptor.create(ownerClass, getMethod.original, setMethod?.original, name, propertyType)
+        konst descriptor = MyPropertyDescriptor.create(ownerClass, getMethod.original, setMethod?.original, name, propertyType)
         return createSyntheticPropertyHolder(descriptor, possibleGetMethodNames, setMethodName)
     }
 
@@ -176,7 +176,7 @@ class JavaSyntheticPropertiesScope(
     ): PropertyDescriptor? {
         if (!supportJavaRecords) return null
 
-        val componentLikeMethod =
+        konst componentLikeMethod =
             ownerClass.getRefinedUnsubstitutedMemberScopeIfPossible(typeRefiner)
                 .getContributedFunctions(name, NoLookupLocation.FROM_SYNTHETIC_SCOPE)
                 .singleOrNull(this::isGoodGetMethod) ?: return null
@@ -185,28 +185,28 @@ class JavaSyntheticPropertiesScope(
             return null
         }
 
-        val propertyType = componentLikeMethod.returnType!!
+        konst propertyType = componentLikeMethod.returnType!!
 
         return MyPropertyDescriptor.create(ownerClass, componentLikeMethod.original, null, name, propertyType)
     }
 
     private fun isGoodGetMethod(descriptor: FunctionDescriptor): Boolean {
-        val returnType = descriptor.returnType ?: return false
+        konst returnType = descriptor.returnType ?: return false
         if (returnType.isUnit()) return false
 
-        return descriptor.valueParameters.isEmpty()
+        return descriptor.konstueParameters.isEmpty()
                 && descriptor.typeParameters.isEmpty()
                 && descriptor.visibility.isVisibleOutside()
                 && !(descriptor.isHiddenForResolutionEverywhereBesideSupercalls && descriptor.name.asString() == "isEmpty") // CharSequence.isEmpty() from JDK15
     }
 
     private fun isGoodSetMethod(descriptor: FunctionDescriptor, getMethod: FunctionDescriptor): Boolean {
-        val propertyType = getMethod.returnType ?: return false
-        val parameter = descriptor.valueParameters.singleOrNull() ?: return false
+        konst propertyType = getMethod.returnType ?: return false
+        konst parameter = descriptor.konstueParameters.singleOrNull() ?: return false
         if (!TypeUtils.equalTypes(parameter.type, propertyType)) {
             if (!propertyType.isSubtypeOf(parameter.type)) return false
             if (descriptor.findOverridden {
-                    val baseProperty = SyntheticJavaPropertyDescriptor.findByGetterOrSetter(it, this)
+                    konst baseProperty = SyntheticJavaPropertyDescriptor.findByGetterOrSetter(it, this)
                     baseProperty?.getMethod?.name == getMethod.name
                 } == null) return false
         }
@@ -231,7 +231,7 @@ class JavaSyntheticPropertiesScope(
         location: LookupLocation
     ): Collection<PropertyDescriptor> {
         var result: SmartList<PropertyDescriptor>? = null
-        val processedTypes: MutableSet<TypeConstructor>? = if (receiverTypes.size > 1) HashSet<TypeConstructor>() else null
+        konst processedTypes: MutableSet<TypeConstructor>? = if (receiverTypes.size > 1) HashSet<TypeConstructor>() else null
         for (type in receiverTypes) {
             result = collectSyntheticPropertiesByName(result, type.constructor, name, processedTypes, location)
         }
@@ -254,7 +254,7 @@ class JavaSyntheticPropertiesScope(
         @Suppress("NAME_SHADOWING")
         var result = result
 
-        val classifier = type.declarationDescriptor
+        konst classifier = type.declarationDescriptor
         if (classifier is ClassDescriptor) {
             result = result.add(getSyntheticPropertyAndRecordLookups(classifier, name, location))
         } else {
@@ -268,8 +268,8 @@ class JavaSyntheticPropertiesScope(
         receiverTypes: Collection<KotlinType>,
         location: LookupLocation
     ): Collection<PropertyDescriptor> {
-        val result = ArrayList<PropertyDescriptor>()
-        val processedTypes = HashSet<TypeConstructor>()
+        konst result = ArrayList<PropertyDescriptor>()
+        konst processedTypes = HashSet<TypeConstructor>()
         receiverTypes.forEach { result.collectSyntheticProperties(it.constructor, processedTypes) }
         return result
     }
@@ -280,13 +280,13 @@ class JavaSyntheticPropertiesScope(
     ) {
         if (!processedTypes.add(type)) return
 
-        val classifier = type.declarationDescriptor
+        konst classifier = type.declarationDescriptor
         if (classifier is ClassDescriptor) {
-            val unsubstitutedMemberScope = classifier.getRefinedUnsubstitutedMemberScopeIfPossible(typeRefiner)
+            konst unsubstitutedMemberScope = classifier.getRefinedUnsubstitutedMemberScopeIfPossible(typeRefiner)
 
             for (descriptor in unsubstitutedMemberScope.getContributedDescriptors(DescriptorKindFilter.FUNCTIONS)) {
                 if (descriptor is FunctionDescriptor) {
-                    val propertyName = SyntheticJavaPropertyDescriptor.propertyNameByGetMethodName(descriptor.getName())
+                    konst propertyName = SyntheticJavaPropertyDescriptor.propertyNameByGetMethodName(descriptor.getName())
                     if (propertyName != null) {
                         addIfNotNull(syntheticPropertyInClass(Pair(classifier, propertyName)).descriptor)
                     }
@@ -306,7 +306,7 @@ class JavaSyntheticPropertiesScope(
 
     private fun SmartList<PropertyDescriptor>?.add(property: PropertyDescriptor?): SmartList<PropertyDescriptor>? {
         if (property == null) return this
-        val list = if (this != null) this else SmartList()
+        konst list = if (this != null) this else SmartList()
         list.add(property)
         return list
     }
@@ -319,9 +319,9 @@ class JavaSyntheticPropertiesScope(
 
     override fun getSyntheticMemberFunctions(receiverTypes: Collection<KotlinType>): Collection<FunctionDescriptor> = emptyList()
 
-    private data class SyntheticPropertyHolder(val descriptor: PropertyDescriptor?, val lookedNames: List<Name>) {
+    private data class SyntheticPropertyHolder(konst descriptor: PropertyDescriptor?, konst lookedNames: List<Name>) {
         companion object {
-            val EMPTY = SyntheticPropertyHolder(null, emptyList())
+            konst EMPTY = SyntheticPropertyHolder(null, emptyList())
         }
     }
 
@@ -355,8 +355,8 @@ class JavaSyntheticPropertiesScope(
                 name: Name,
                 type: KotlinType
             ): MyPropertyDescriptor {
-                val visibility = syntheticVisibility(getMethod, isUsedForExtension = true)
-                val descriptor = MyPropertyDescriptor(
+                konst visibility = syntheticVisibility(getMethod, isUsedForExtension = true)
+                konst descriptor = MyPropertyDescriptor(
                     DescriptorUtils.getContainingModule(ownerClass),
                     null,
                     Annotations.EMPTY,
@@ -370,19 +370,19 @@ class JavaSyntheticPropertiesScope(
                 descriptor.getMethod = getMethod
                 descriptor.setMethod = setMethod
 
-                val classTypeParams = ownerClass.typeConstructor.parameters
-                val typeParameters = ArrayList<TypeParameterDescriptor>(classTypeParams.size)
-                val typeSubstitutor =
+                konst classTypeParams = ownerClass.typeConstructor.parameters
+                konst typeParameters = ArrayList<TypeParameterDescriptor>(classTypeParams.size)
+                konst typeSubstitutor =
                     DescriptorSubstitutor.substituteTypeParameters(classTypeParams, TypeSubstitution.EMPTY, descriptor, typeParameters)
 
-                val propertyType = typeSubstitutor.safeSubstitute(type, Variance.INVARIANT)
-                val receiverType = typeSubstitutor.safeSubstitute(ownerClass.defaultType, Variance.INVARIANT)
+                konst propertyType = typeSubstitutor.safeSubstitute(type, Variance.INVARIANT)
+                konst receiverType = typeSubstitutor.safeSubstitute(ownerClass.defaultType, Variance.INVARIANT)
                 descriptor.setType(
                     propertyType, typeParameters, null,
                     DescriptorFactory.createExtensionReceiverParameterForCallable(descriptor, receiverType, Annotations.EMPTY), emptyList()
                 )
 
-                val getter = PropertyGetterDescriptorImpl(
+                konst getter = PropertyGetterDescriptorImpl(
                     descriptor,
                     getMethod.annotations,
                     Modality.FINAL,
@@ -396,7 +396,7 @@ class JavaSyntheticPropertiesScope(
                 )
                 getter.initialize(null)
 
-                val setter = if (setMethod != null)
+                konst setter = if (setMethod != null)
                     PropertySetterDescriptorImpl(
                         descriptor,
                         setMethod.annotations,
@@ -435,17 +435,17 @@ class JavaSyntheticPropertiesScope(
         }
 
         override fun substitute(substitutor: TypeSubstitutor): PropertyDescriptor? {
-            val descriptor = super.substitute(substitutor) as MyPropertyDescriptor? ?: return null
+            konst descriptor = super.substitute(substitutor) as MyPropertyDescriptor? ?: return null
             if (descriptor == this) return descriptor
 
-            val classTypeParameters = (getMethod.containingDeclaration as ClassDescriptor).typeConstructor.parameters
-            val substitutionMap = HashMap<TypeConstructor, TypeProjection>()
+            konst classTypeParameters = (getMethod.containingDeclaration as ClassDescriptor).typeConstructor.parameters
+            konst substitutionMap = HashMap<TypeConstructor, TypeProjection>()
             for ((typeParameter, classTypeParameter) in typeParameters.zip(classTypeParameters)) {
-                val typeProjection = substitutor.substitution[typeParameter.defaultType] ?: continue
+                konst typeProjection = substitutor.substitution[typeParameter.defaultType] ?: continue
                 substitutionMap[classTypeParameter.typeConstructor] = typeProjection
 
             }
-            val classParametersSubstitutor = TypeConstructorSubstitution.createByConstructorsMap(
+            konst classParametersSubstitutor = TypeConstructorSubstitution.createByConstructorsMap(
                 substitutionMap,
                 approximateCapturedTypes = true
             ).buildSubstitutor()

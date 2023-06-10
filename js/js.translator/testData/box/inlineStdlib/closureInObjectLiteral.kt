@@ -5,7 +5,7 @@ package foo
 
 import kotlin.comparisons.*
 
-val Int.abs: Int
+konst Int.abs: Int
     get() = if (this >= 0) this else -this
 
 fun test(xs: List<Int>): List<Int> =

@@ -11,8 +11,8 @@ interface B {
 fun getAny(): Any? = null
 
 fun test_0() {
-    val a = getAny()
-    val b = getAny()
+    konst a = getAny()
+    konst b = getAny()
     a as A
     a.foo()
     b as B
@@ -20,8 +20,8 @@ fun test_0() {
 }
 
 fun test_1() {
-    val a = getAny()
-    val b = getAny()
+    konst a = getAny()
+    konst b = getAny()
     if (a is A && b is B) {
         a.foo()
         b.foo()

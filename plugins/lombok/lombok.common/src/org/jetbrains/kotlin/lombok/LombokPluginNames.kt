@@ -6,6 +6,6 @@
 package org.jetbrains.kotlin.lombok
 
 object LombokPluginNames {
-    const val PLUGIN_ID = "org.jetbrains.kotlin.lombok"
-    const val CONFIG_OPTION_NAME = "config"
+    const konst PLUGIN_ID = "org.jetbrains.kotlin.lombok"
+    const konst CONFIG_OPTION_NAME = "config"
 }

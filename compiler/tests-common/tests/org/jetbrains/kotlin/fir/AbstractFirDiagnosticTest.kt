@@ -60,17 +60,17 @@ import java.io.File
 @OptIn(SymbolInternals::class)
 abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
     companion object {
-        const val DUMP_CFG_DIRECTIVE = "DUMP_CFG"
+        const konst DUMP_CFG_DIRECTIVE = "DUMP_CFG"
 
-        private val allowedKindsForDebugInfo = setOf(
+        private konst allowedKindsForDebugInfo = setOf(
             KtRealSourceElementKind,
             KtFakeSourceElementKind.DesugaredCompoundAssignment,
         )
 
-        val TestFile.withDumpCfgDirective: Boolean
+        konst TestFile.withDumpCfgDirective: Boolean
             get() = DUMP_CFG_DIRECTIVE in directives
 
-        val File.cfgDumpFile: File
+        konst File.cfgDumpFile: File
             get() = File(absolutePath.replace(".kt", ".dot"))
     }
 
@@ -82,7 +82,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
                 gc = false
             )
         }
-        val allFirFiles = firFilesPerSession.values.flatten()
+        konst allFirFiles = firFilesPerSession.konstues.flatten()
         checkDiagnostics(testDataFile, testFiles, allFirFiles)
         checkFir(testDataFile, allFirFiles)
         checkCfg(allFirFiles, testFiles, testDataFile)
@@ -102,10 +102,10 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
     }
 
     fun checkFir(testDataFile: File, firFiles: List<FirFile>) {
-        val renderer = FirRenderer()
+        konst renderer = FirRenderer()
         firFiles.forEach { renderer.renderElementAsString(it) }
-        val firFileDump = renderer.toString()
-        val expectedPath = testDataFile.absolutePath.replace(".kt", ".txt")
+        konst firFileDump = renderer.toString()
+        konst expectedPath = testDataFile.absolutePath.replace(".kt", ".txt")
         KotlinTestUtils.assertEqualsToFile(
             File(expectedPath),
             firFileDump
@@ -113,12 +113,12 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
     }
 
     protected open fun checkDiagnostics(file: File, testFiles: List<TestFile>, firFiles: List<FirFile>) {
-        val diagnostics = collectDiagnostics(firFiles)
-        val actualTextBuilder = StringBuilder()
+        konst diagnostics = collectDiagnostics(firFiles)
+        konst actualTextBuilder = StringBuilder()
         for (testFile in testFiles) {
-            val firFile = firFiles.firstOrNull { it.psi == testFile.ktFile }
+            konst firFile = firFiles.firstOrNull { it.psi == testFile.ktFile }
             if (firFile != null) {
-                val debugInfoDiagnostics: List<KtDiagnostic> =
+                konst debugInfoDiagnostics: List<KtDiagnostic> =
                     collectDebugInfoDiagnostics(firFile, testFile.diagnosedRangesToDiagnosticNames)
                 testFile.getActualText(
                     diagnostics.getValue(firFile) + debugInfoDiagnostics,
@@ -128,7 +128,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
                 actualTextBuilder.append(testFile.expectedText)
             }
         }
-        val actualText = actualTextBuilder.toString()
+        konst actualText = actualTextBuilder.toString()
         KotlinTestUtils.assertEqualsToFile(file, actualText)
     }
 
@@ -136,7 +136,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         firFile: FirFile,
         diagnosedRangesToDiagnosticNames: MutableMap<IntRange, MutableSet<String>>
     ): List<KtDiagnostic> {
-        val result = mutableListOf<KtDiagnostic>()
+        konst result = mutableListOf<KtDiagnostic>()
 
 
         object : FirDefaultVisitorVoid() {
@@ -153,7 +153,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
             }
 
             override fun visitFunctionCall(functionCall: FirFunctionCall) {
-                val reference = functionCall.calleeReference
+                konst reference = functionCall.calleeReference
                 result.addIfNotNull(createCallDiagnosticIfExpected(functionCall, reference, diagnosedRangesToDiagnosticNames))
                 result.addIfNotNull(createDerivedClassDiagnosticIfExpected(functionCall, reference, diagnosedRangesToDiagnosticNames))
 
@@ -161,7 +161,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
             }
 
             override fun visitDelegatedConstructorCall(delegatedConstructorCall: FirDelegatedConstructorCall) {
-                val reference = delegatedConstructorCall.calleeReference as FirNamedReference
+                konst reference = delegatedConstructorCall.calleeReference as FirNamedReference
                 result.addIfNotNull(
                     createDerivedClassDiagnosticIfExpected(delegatedConstructorCall, reference, diagnosedRangesToDiagnosticNames))
 
@@ -169,7 +169,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
             }
 
             override fun visitPropertyAccessExpression(propertyAccessExpression: FirPropertyAccessExpression) {
-                val reference = propertyAccessExpression.calleeReference as FirNamedReference
+                konst reference = propertyAccessExpression.calleeReference as FirNamedReference
                 result.addIfNotNull(
                     createDerivedClassDiagnosticIfExpected(propertyAccessExpression, reference, diagnosedRangesToDiagnosticNames))
             }
@@ -187,9 +187,9 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         }
 
     private fun FirTypeRef.renderAsString(originalTypeRef: FirTypeRef?): String {
-        val type = coneTypeSafe<ConeKotlinType>() ?: return "Type is unknown"
-        val rendered = type.renderForDebugInfo()
-        val originalTypeRendered = originalTypeRef?.coneTypeSafe<ConeKotlinType>()?.renderForDebugInfo() ?: return rendered
+        konst type = coneTypeSafe<ConeKotlinType>() ?: return "Type is unknown"
+        konst rendered = type.renderForDebugInfo()
+        konst originalTypeRendered = originalTypeRef?.coneTypeSafe<ConeKotlinType>()?.renderForDebugInfo() ?: return rendered
 
         return "$rendered & $originalTypeRendered"
     }
@@ -200,8 +200,8 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         diagnosedRangesToDiagnosticNames: MutableMap<IntRange, MutableSet<String>>
     ): KtDiagnostic? {
         return DebugInfoDiagnosticFactory1.CALL.createDebugInfoDiagnostic(element, diagnosedRangesToDiagnosticNames) {
-            val resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
-            val fqName = resolvedSymbol?.fqNameUnsafe()
+            konst resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
+            konst fqName = resolvedSymbol?.fqNameUnsafe()
             Renderers.renderCallInfo(fqName, getTypeOfCall(reference, resolvedSymbol))
         }
     }
@@ -212,8 +212,8 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         diagnosedRangesToDiagnosticNames: MutableMap<IntRange, MutableSet<String>>
     ): KtDiagnostic? {
         return DebugInfoDiagnosticFactory1.CALLABLE_OWNER.createDebugInfoDiagnostic(element, diagnosedRangesToDiagnosticNames) {
-            val resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
-            val callable = resolvedSymbol?.fir as? FirCallableDeclaration ?: return@createDebugInfoDiagnostic ""
+            konst resolvedSymbol = (reference as? FirResolvedNamedReference)?.resolvedSymbol
+            konst callable = resolvedSymbol?.fir as? FirCallableDeclaration ?: return@createDebugInfoDiagnostic ""
             DebugInfoDiagnosticFactory1.renderCallableOwner(
                 callable.symbol.callableId,
                 callable.containingClassLookupTag()?.classId,
@@ -227,8 +227,8 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         diagnosedRangesToDiagnosticNames: MutableMap<IntRange, MutableSet<String>>,
         argument: () -> String,
     ): KtDiagnosticWithParameters1<String>? {
-        val sourceElement = element.source ?: return null
-        val sourceKind = sourceElement.kind
+        konst sourceElement = element.source ?: return null
+        konst sourceKind = sourceElement.kind
         if (sourceKind !in allowedKindsForDebugInfo) {
             if (sourceKind !is KtFakeSourceElementKind.ImplicitReturn || sourceElement.elementType != KtNodeTypes.RETURN) {
                 return null
@@ -237,10 +237,10 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
         // Lambda argument is always (?) duplicated by function literal
         // Block expression is always (?) duplicated by single block expression
         if (sourceElement.elementType == KtNodeTypes.LAMBDA_ARGUMENT || sourceElement.elementType == KtNodeTypes.BLOCK) return null
-        val name = name
+        konst name = name
         if (diagnosedRangesToDiagnosticNames[sourceElement.startOffset..sourceElement.endOffset]?.contains(name) != true) return null
 
-        val argumentText = argument()
+        konst argumentText = argument()
         return when (sourceElement) {
             is KtPsiSourceElement -> KtPsiDiagnosticWithParameters1(
                 sourceElement,
@@ -277,7 +277,7 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
             return TypeOfCall.VARIABLE_THROUGH_INVOKE.nameToRender
         }
 
-        return when (val fir = resolvedSymbol.fir) {
+        return when (konst fir = resolvedSymbol.fir) {
             is FirProperty -> {
                 TypeOfCall.PROPERTY_GETTER.nameToRender
             }
@@ -294,12 +294,12 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
 
 
     protected fun collectDiagnostics(firFiles: List<FirFile>): Map<FirFile, List<KtDiagnostic>> {
-        val collectors = mutableMapOf<FirSession, AbstractDiagnosticCollector>()
-        val result = mutableMapOf<FirFile, List<KtDiagnostic>>()
+        konst collectors = mutableMapOf<FirSession, AbstractDiagnosticCollector>()
+        konst result = mutableMapOf<FirFile, List<KtDiagnostic>>()
         for (firFile in firFiles) {
-            val session = firFile.moduleData.session
-            val collector = collectors.computeIfAbsent(session) { createCollector(session) }
-            val reporter = DiagnosticReporterFactory.createPendingReporter()
+            konst session = firFile.moduleData.session
+            konst collector = collectors.computeIfAbsent(session) { createCollector(session) }
+            konst reporter = DiagnosticReporterFactory.createPendingReporter()
             collector.collectDiagnostics(firFile, reporter)
             result[firFile] = reporter.diagnostics
         }
@@ -314,11 +314,11 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
     }
 
     private fun checkCfgDump(testDataFile: File, firFiles: List<FirFile>) {
-        val builder = StringBuilder()
+        konst builder = StringBuilder()
 
         firFiles.first().accept(FirControlFlowGraphRenderVisitor(builder), null)
 
-        val dotCfgDump = builder.toString()
+        konst dotCfgDump = builder.toString()
         KotlinTestUtils.assertEqualsToFile(testDataFile.cfgDumpFile, dotCfgDump)
     }
 
@@ -327,9 +327,9 @@ abstract class AbstractKtDiagnosticsTest : AbstractFirBaseDiagnosticsTest() {
     }
 
     private fun checkCfgDumpNotExists(testDataFile: File) {
-        val cfgDumpFile = testDataFile.cfgDumpFile
+        konst cfgDumpFile = testDataFile.cfgDumpFile
         if (cfgDumpFile.exists()) {
-            val message = """
+            konst message = """
                 Directive `!$DUMP_CFG_DIRECTIVE` is missing, but file with cfg dump is present.
                 Please remove ${cfgDumpFile.path} or add `!$DUMP_CFG_DIRECTIVE` to test
             """.trimIndent()

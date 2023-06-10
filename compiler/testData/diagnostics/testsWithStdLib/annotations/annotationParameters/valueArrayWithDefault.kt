@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 // FILE: A.java
 public @interface A {
-    String[] value() default {"abc", "cde"};
+    String[] konstue() default {"abc", "cde"};
 }
 
 // FILE: b.kt

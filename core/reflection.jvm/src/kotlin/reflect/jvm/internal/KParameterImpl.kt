@@ -24,20 +24,20 @@ import kotlin.reflect.KType
 import kotlin.reflect.jvm.internal.calls.ValueClassAwareCaller
 
 internal class KParameterImpl(
-    val callable: KCallableImpl<*>,
-    override val index: Int,
-    override val kind: KParameter.Kind,
+    konst callable: KCallableImpl<*>,
+    override konst index: Int,
+    override konst kind: KParameter.Kind,
     computeDescriptor: () -> ParameterDescriptor
 ) : KParameter {
-    private val descriptor: ParameterDescriptor by ReflectProperties.lazySoft(computeDescriptor)
+    private konst descriptor: ParameterDescriptor by ReflectProperties.lazySoft(computeDescriptor)
 
-    override val annotations: List<Annotation> by ReflectProperties.lazySoft { descriptor.computeAnnotations() }
+    override konst annotations: List<Annotation> by ReflectProperties.lazySoft { descriptor.computeAnnotations() }
 
-    override val name: String?
+    override konst name: String?
         get() {
-            val valueParameter = descriptor as? ValueParameterDescriptor ?: return null
-            if (valueParameter.containingDeclaration.hasSynthesizedParameterNames()) return null
-            val name = valueParameter.name
+            konst konstueParameter = descriptor as? ValueParameterDescriptor ?: return null
+            if (konstueParameter.containingDeclaration.hasSynthesizedParameterNames()) return null
+            konst name = konstueParameter.name
             return if (name.isSpecial) null else name.asString()
         }
 
@@ -48,8 +48,8 @@ internal class KParameterImpl(
         else -> CompoundTypeImpl(types)
     }
 
-    private class CompoundTypeImpl(val types: Array<out Type>) : Type {
-        private val hashCode = types.contentHashCode()
+    private class CompoundTypeImpl(konst types: Array<out Type>) : Type {
+        private konst hashCode = types.contentHashCode()
         override fun getTypeName(): String {
             return types.joinToString(", ", "[", "]")
         }
@@ -62,9 +62,9 @@ internal class KParameterImpl(
         override fun toString(): String = typeName
     }
 
-    override val type: KType
+    override konst type: KType
         get() = KTypeImpl(descriptor.type) {
-            val descriptor = descriptor
+            konst descriptor = descriptor
 
             if (descriptor is ReceiverParameterDescriptor &&
                 callable.descriptor.instanceReceiverParameter == descriptor &&
@@ -76,10 +76,10 @@ internal class KParameterImpl(
                 (callable.descriptor.containingDeclaration as ClassDescriptor).toJavaClass()
                     ?: throw KotlinReflectionInternalError("Cannot determine receiver Java type of inherited declaration: $descriptor")
             } else {
-                when (val caller = callable.caller) {
+                when (konst caller = callable.caller) {
                     is ValueClassAwareCaller -> {
-                        val slice = caller.getRealSlicesOfParameters(index)
-                        val parameterTypes = caller.parameterTypes.slice(slice)
+                        konst slice = caller.getRealSlicesOfParameters(index)
+                        konst parameterTypes = caller.parameterTypes.slice(slice)
                         compoundType(*parameterTypes.toTypedArray())
                     }
                     is ValueClassAwareCaller.MultiFieldValueClassPrimaryConstructorCaller ->
@@ -89,10 +89,10 @@ internal class KParameterImpl(
             }
         }
 
-    override val isOptional: Boolean
+    override konst isOptional: Boolean
         get() = (descriptor as? ValueParameterDescriptor)?.declaresOrInheritsDefaultValue() ?: false
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = descriptor.let { it is ValueParameterDescriptor && it.varargElementType != null }
 
     override fun equals(other: Any?) =

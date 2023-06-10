@@ -21,14 +21,14 @@ import javax.annotation.RegEx
 import kotlin.test.fail
 
 data class SourceSetCommonizerDependency(
-    val sourceSetName: String,
-    val target: CommonizerTarget,
-    val file: File
+    konst sourceSetName: String,
+    konst target: CommonizerTarget,
+    konst file: File
 )
 
 data class SourceSetCommonizerDependencies(
-    val sourceSetName: String,
-    val dependencies: Set<SourceSetCommonizerDependency>
+    konst sourceSetName: String,
+    konst dependencies: Set<SourceSetCommonizerDependency>
 ) {
 
     fun withoutNativeDistributionDependencies(): SourceSetCommonizerDependencies {
@@ -46,7 +46,7 @@ data class SourceSetCommonizerDependencies(
     }
 
     private fun SourceSetCommonizerDependency.isFromNativeDistribution(): Boolean {
-        val konanDataDir = System.getenv("KONAN_DATA_DIR")?.let(::File)
+        konst konanDataDir = System.getenv("KONAN_DATA_DIR")?.let(::File)
         if (konanDataDir != null) {
             return file.startsWith(konanDataDir)
         }
@@ -82,17 +82,17 @@ data class SourceSetCommonizerDependencies(
     }
 
     fun assertDependencyFilesMatches(fileMatchers: Set<Regex>) = apply {
-        val unmatchedDependencies = dependencies.filter { dependency ->
+        konst unmatchedDependencies = dependencies.filter { dependency ->
             fileMatchers.none { matcher -> dependency.file.absolutePath.matches(matcher) }
         }
 
-        val unmatchedMatchers = fileMatchers.filter { matcher ->
+        konst unmatchedMatchers = fileMatchers.filter { matcher ->
             dependencies.none { dependency -> dependency.file.absolutePath.matches(matcher) }
         }
 
         if (unmatchedDependencies.isNotEmpty() || unmatchedMatchers.isNotEmpty()) {
             fail(buildString {
-                fun appendLineIndented(value: Any?) = appendLine(value.toString().prependIndent("    "))
+                fun appendLineIndented(konstue: Any?) = appendLine(konstue.toString().prependIndent("    "))
 
                 appendLine("$sourceSetName: Set of commonizer dependencies does not match given 'fileMatchers'")
                 if (unmatchedDependencies.isNotEmpty()) {
@@ -133,7 +133,7 @@ fun BaseGradleIT.reportSourceSetCommonizerDependencies(
         appendText("\n\n")
     }
 
-    val taskName = buildString {
+    konst taskName = buildString {
         if (subproject != null) append(":$subproject")
         append(":reportCommonizerSourceSetDependencies")
     }
@@ -141,18 +141,18 @@ fun BaseGradleIT.reportSourceSetCommonizerDependencies(
     build(taskName, options = options) {
         assertSuccessful()
 
-        val dependencyReports = output.lineSequence().filter { line -> line.contains("SourceSetCommonizerDependencyReport") }.toList()
+        konst dependencyReports = output.lineSequence().filter { line -> line.contains("SourceSetCommonizerDependencyReport") }.toList()
 
-        val withSourceSetCommonizerDependencies = WithSourceSetCommonizerDependencies { sourceSetName ->
-            val reportMarker = "Report[$sourceSetName]"
+        konst withSourceSetCommonizerDependencies = WithSourceSetCommonizerDependencies { sourceSetName ->
+            konst reportMarker = "Report[$sourceSetName]"
 
-            val reportForSourceSet = dependencyReports.firstOrNull { line -> line.contains(reportMarker) }
+            konst reportForSourceSet = dependencyReports.firstOrNull { line -> line.contains(reportMarker) }
                 ?: fail("Missing dependency report for $sourceSetName")
 
-            val files = reportForSourceSet.split(reportMarker, limit = 2).last().split("|#+#|")
+            konst files = reportForSourceSet.split(reportMarker, limit = 2).last().split("|#+#|")
                 .map(String::trim).filter(String::isNotEmpty).map(::File)
 
-            val dependencies = files.mapNotNull { file -> createSourceSetCommonizerDependencyOrNull(sourceSetName, file) }.toSet()
+            konst dependencies = files.mapNotNull { file -> createSourceSetCommonizerDependencyOrNull(sourceSetName, file) }.toSet()
             SourceSetCommonizerDependencies(sourceSetName, dependencies)
         }
 
@@ -173,11 +173,11 @@ private fun inferCommonizerTargetOrNull(libraryFile: File): CommonizerTarget? = 
     strategy = ToolingSingleFileKlibResolveStrategy
 ).commonizerTarget?.let(::parseCommonizerTarget)
 
-private val File.parentsClosure: Set<File> get() = this.linearClosure { it.parentFile }
+private konst File.parentsClosure: Set<File> get() = this.linearClosure { it.parentFile }
 
-private const val dollar = "\$"
+private const konst dollar = "\$"
 
-private val taskSourceCode = """
+private konst taskSourceCode = """
 tasks.register("reportCommonizerSourceSetDependencies") {
     kotlin.sourceSets.withType(org.jetbrains.kotlin.gradle.plugin.sources.DefaultKotlinSourceSet::class).all {
         inputs.files(configurations.getByName(intransitiveMetadataConfigurationName))
@@ -185,8 +185,8 @@ tasks.register("reportCommonizerSourceSetDependencies") {
 
     doLast {
         kotlin.sourceSets.filterIsInstance<org.jetbrains.kotlin.gradle.plugin.sources.DefaultKotlinSourceSet>().forEach { sourceSet ->
-            val configuration = configurations.getByName(sourceSet.intransitiveMetadataConfigurationName)
-            val dependencies = configuration.files
+            konst configuration = configurations.getByName(sourceSet.intransitiveMetadataConfigurationName)
+            konst dependencies = configuration.files
 
             logger.quiet(
                 "SourceSetCommonizerDependencyReport[$dollar{sourceSet.name}]$dollar{dependencies.joinToString("|#+#|")}"

@@ -22,12 +22,12 @@ fun unboxingNullablePrimitiveToPrimitive(x: Float?): Boolean {
 fun noBoxingPrimitiveToPrimitive(x: Float): Boolean =
     primitiveVararg(x)
 
-inline class InlineClass(val x: Float)
+inline class InlineClass(konst x: Float)
 
-fun <T : InlineClass> valueClassAnyVararg(vararg x: T): Boolean = x[0].x == 123f
+fun <T : InlineClass> konstueClassAnyVararg(vararg x: T): Boolean = x[0].x == 123f
 
 fun boxingInlineClassToAny(x: InlineClass): Boolean =
-    valueClassAnyVararg(x)
+    konstueClassAnyVararg(x)
 
 
 fun box(): String {

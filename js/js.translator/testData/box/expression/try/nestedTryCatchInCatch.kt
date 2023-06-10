@@ -1,8 +1,8 @@
 // EXPECTED_REACHABLE_NODES: 1374
 package foo
 
-class Ex1(val s: String) : Exception()
-class Ex2(val x: Ex1) : Exception()
+class Ex1(konst s: String) : Exception()
+class Ex2(konst x: Ex1) : Exception()
 
 fun box(): String {
 

@@ -24,8 +24,8 @@ import java.io.File
 class LombokComponentRegistrar : CompilerPluginRegistrar() {
     companion object {
         fun registerComponents(extensionStorage: ExtensionStorage, compilerConfiguration: CompilerConfiguration) = with(extensionStorage) {
-            val configFile = compilerConfiguration[CONFIG_FILE]
-            val config = LombokPluginConfig(configFile)
+            konst configFile = compilerConfiguration[CONFIG_FILE]
+            konst config = LombokPluginConfig(configFile)
             SyntheticJavaResolveExtension.registerExtension(LombokResolveExtension(config))
             FirExtensionRegistrarAdapter.registerExtension(FirLombokRegistrar(configFile))
         }
@@ -41,32 +41,32 @@ class LombokComponentRegistrar : CompilerPluginRegistrar() {
         registerComponents(this, configuration)
     }
 
-    override val supportsK2: Boolean
+    override konst supportsK2: Boolean
         get() = true
 }
 
 object LombokConfigurationKeys {
-    val CONFIG_FILE: CompilerConfigurationKey<File> = CompilerConfigurationKey.create("lombok config file location")
+    konst CONFIG_FILE: CompilerConfigurationKey<File> = CompilerConfigurationKey.create("lombok config file location")
 }
 
 class LombokCommandLineProcessor : CommandLineProcessor {
 
     companion object {
-        val CONFIG_FILE_OPTION = CliOption(
+        konst CONFIG_FILE_OPTION = CliOption(
             optionName = CONFIG_OPTION_NAME,
-            valueDescription = "<path>",
+            konstueDescription = "<path>",
             description = "Lombok configuration file location",
             required = false
         )
     }
 
-    override val pluginId: String = PLUGIN_ID
-    override val pluginOptions: Collection<AbstractCliOption> = listOf(CONFIG_FILE_OPTION)
+    override konst pluginId: String = PLUGIN_ID
+    override konst pluginOptions: Collection<AbstractCliOption> = listOf(CONFIG_FILE_OPTION)
 
-    override fun processOption(option: AbstractCliOption, value: String, configuration: CompilerConfiguration) {
+    override fun processOption(option: AbstractCliOption, konstue: String, configuration: CompilerConfiguration) {
         when (option) {
             CONFIG_FILE_OPTION -> {
-                val file = File(value)
+                konst file = File(konstue)
                 if (!file.exists()) {
                     throw IllegalArgumentException("Config file not found ${file.absolutePath}")
                 }

@@ -57,7 +57,7 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils;
 import org.jetbrains.kotlin.resolve.bindingContextUtil.BindingContextUtilsKt;
 import org.jetbrains.kotlin.resolve.calls.model.ResolvedCall;
 import org.jetbrains.kotlin.resolve.constants.CompileTimeConstant;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator;
 import org.jetbrains.kotlin.resolve.descriptorUtil.DescriptorUtilsKt;
 import org.jetbrains.kotlin.resolve.inline.InlineUtil;
 import org.jetbrains.kotlin.types.KotlinType;
@@ -98,8 +98,8 @@ public final class ExpressionVisitor extends TranslatorVisitor<JsNode> {
 
     @NotNull
     private static JsNode translateConstantExpression(@NotNull KtConstantExpression expression, @NotNull TranslationContext context) {
-        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEvaluator.getConstant(expression, context.bindingContext());
-        assert compileTimeValue != null : message(expression, "Expression is not compile time value: " + expression.getText() + " ");
+        CompileTimeConstant<?> compileTimeValue = ConstantExpressionEkonstuator.getConstant(expression, context.bindingContext());
+        assert compileTimeValue != null : message(expression, "Expression is not compile time konstue: " + expression.getText() + " ");
 
         JsNode result = Translation.translateConstant(compileTimeValue, expression, context);
         if (result == null) {
@@ -459,12 +459,12 @@ public final class ExpressionVisitor extends TranslatorVisitor<JsNode> {
     @Nullable
     private static JsStringLiteral resolveAsStringConstant(@NotNull KtExpression expression,
             @NotNull TranslationContext context) {
-        Object value = getCompileTimeValue(context.bindingContext(), expression);
-        if (value == null) {
+        Object konstue = getCompileTimeValue(context.bindingContext(), expression);
+        if (konstue == null) {
             return null;
         }
-        assert value instanceof String : "Compile time constant template should be a String constant.";
-        String constantString = (String) value;
+        assert konstue instanceof String : "Compile time constant template should be a String constant.";
+        String constantString = (String) konstue;
         return new JsStringLiteral(constantString);
     }
 
@@ -680,7 +680,7 @@ public final class ExpressionVisitor extends TranslatorVisitor<JsNode> {
         // Our ClassTranslator is capable of such thing, but case of object expression is a little special.
         // Consider the following:
         //
-        //   class A(val x: Int) {
+        //   class A(konst x: Int) {
         //      fun foo() { object : A(x) }
         //
         // By calling A(x) super constructor we capture `this` explicitly. However, we can't tell which `A::this` we are mentioning,

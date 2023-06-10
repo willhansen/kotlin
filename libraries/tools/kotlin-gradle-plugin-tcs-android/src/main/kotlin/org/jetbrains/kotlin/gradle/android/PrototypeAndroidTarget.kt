@@ -16,11 +16,11 @@ data class PrototypeAndroidDsl(
 
 class PrototypeAndroidTarget(
     delegate: Delegate,
-    val androidDsl: PrototypeAndroidDsl
+    konst androidDsl: PrototypeAndroidDsl
 ) : DecoratedExternalKotlinTarget(delegate) {
-    internal val kotlin = super.project.extensions.getByType<KotlinMultiplatformExtension>()
+    internal konst kotlin = super.project.extensions.getByType<KotlinMultiplatformExtension>()
 
     @Suppress("unchecked_cast")
-    override val compilations: NamedDomainObjectContainer<PrototypeAndroidCompilation>
+    override konst compilations: NamedDomainObjectContainer<PrototypeAndroidCompilation>
         get() = super.compilations as NamedDomainObjectContainer<PrototypeAndroidCompilation>
 }

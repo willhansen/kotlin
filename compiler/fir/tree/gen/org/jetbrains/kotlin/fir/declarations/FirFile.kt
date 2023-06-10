@@ -23,19 +23,19 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirFile : FirDeclaration() {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract val annotationsContainer: FirFileAnnotationsContainer
-    abstract val packageDirective: FirPackageDirective
-    abstract val imports: List<FirImport>
-    abstract val declarations: List<FirDeclaration>
-    abstract val name: String
-    abstract val sourceFile: KtSourceFile?
-    abstract val sourceFileLinesMapping: KtSourceFileLinesMapping?
-    abstract override val symbol: FirFileSymbol
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract konst annotationsContainer: FirFileAnnotationsContainer
+    abstract konst packageDirective: FirPackageDirective
+    abstract konst imports: List<FirImport>
+    abstract konst declarations: List<FirDeclaration>
+    abstract konst name: String
+    abstract konst sourceFile: KtSourceFile?
+    abstract konst sourceFileLinesMapping: KtSourceFileLinesMapping?
+    abstract override konst symbol: FirFileSymbol
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitFile(this, data)
 

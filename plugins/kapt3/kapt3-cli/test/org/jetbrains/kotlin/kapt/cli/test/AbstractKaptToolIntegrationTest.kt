@@ -31,18 +31,18 @@ abstract class AbstractKaptToolIntegrationTest {
     }
 
     fun runTest(filePath: String) {
-        val testDir = File(filePath)
-        val testFile = File(testDir, "build.txt")
+        konst testDir = File(filePath)
+        konst testFile = File(testDir, "build.txt")
         assert(testFile.isFile) { "build.txt doesn't exist" }
 
         testDir.listFiles()?.forEach { it.copyRecursively(File(tmpdir, it.name)) }
         doTestInTempDirectory(testFile, File(tmpdir, testFile.name))
     }
 
-    private class GotResult(val actual: String): RuntimeException()
+    private class GotResult(konst actual: String): RuntimeException()
 
     private fun doTestInTempDirectory(originalTestFile: File, testFile: File) {
-        val sections = Section.parse(testFile)
+        konst sections = Section.parse(testFile)
 
         for (section in sections) {
             try {
@@ -54,8 +54,8 @@ abstract class AbstractKaptToolIntegrationTest {
                     "javac" -> runJavac(section.args)
                     "java" -> runJava(section.args)
                     "output" -> {
-                        val output = File(tmpdir, "processOutput.txt").readText()
-                        val expected = section.content.trim()
+                        konst output = File(tmpdir, "processOutput.txt").readText()
+                        konst expected = section.content.trim()
                         JUnit5Assertions.assertTrue(output.contains(expected)) {
                             "Output\"$output\" doesn't contain the expected string \"$expected\""
                         }
@@ -64,7 +64,7 @@ abstract class AbstractKaptToolIntegrationTest {
                     else -> error("Unknown section name ${section.name}")
                 }
             } catch (e: GotResult) {
-                val actual = sections.replacingSection("after", e.actual).render()
+                konst actual = sections.replacingSection("after", e.actual).render()
                 JUnit5Assertions.assertEqualsToFile(originalTestFile, actual)
                 return
             } catch (e: Throwable) {
@@ -75,28 +75,28 @@ abstract class AbstractKaptToolIntegrationTest {
 
     private fun copyFile(testDir: File, args: List<String>) {
         assert(args.size == 2)
-        val source = File(testDir, args[0])
-        val target = File(tmpdir, args[1]).also { it.parentFile.mkdirs() }
+        konst source = File(testDir, args[0])
+        konst target = File(tmpdir, args[1]).also { it.parentFile.mkdirs() }
         source.copyRecursively(target)
     }
 
     private fun runKotlinDistBinary(name: String, args: List<String>) {
-        val executableName = if (SystemInfo.isWindows) name + ".bat" else name
-        val executablePath = File("dist/kotlinc/bin/" + executableName).absolutePath
+        konst executableName = if (SystemInfo.isWindows) name + ".bat" else name
+        konst executablePath = File("dist/kotlinc/bin/" + executableName).absolutePath
         runProcess(executablePath, args)
     }
 
     private fun runJavac(args: List<String>) {
-        val executableName = if (SystemInfo.isWindows) "javac.exe" else "javac"
-        val executablePath = File(getJdk8Home(), "bin/" + executableName).absolutePath
+        konst executableName = if (SystemInfo.isWindows) "javac.exe" else "javac"
+        konst executablePath = File(getJdk8Home(), "bin/" + executableName).absolutePath
         runProcess(executablePath, args)
     }
 
     private fun runJava(args: List<String>) {
-        val outputFile = File(tmpdir, "javaOutput.txt")
+        konst outputFile = File(tmpdir, "javaOutput.txt")
 
-        val executableName = if (SystemInfo.isWindows) "java.exe" else "java"
-        val executablePath = File(getJdk8Home(), "bin/" + executableName).absolutePath
+        konst executableName = if (SystemInfo.isWindows) "java.exe" else "java"
+        konst executablePath = File(getJdk8Home(), "bin/" + executableName).absolutePath
         runProcess(executablePath, args, outputFile)
 
         throw GotResult(outputFile.takeIf { it.isFile }?.readText() ?: "")
@@ -107,8 +107,8 @@ abstract class AbstractKaptToolIntegrationTest {
 
         outputFile.delete()
 
-        val transformedArgs = transformArguments(args).toTypedArray()
-        val process = ProcessBuilder(executablePath, *transformedArgs).directory(tmpdir)
+        konst transformedArgs = transformArguments(args).toTypedArray()
+        konst process = ProcessBuilder(executablePath, *transformedArgs).directory(tmpdir)
             .inheritIO()
             .redirectError(ProcessBuilder.Redirect.to(outputFile))
             .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
@@ -125,7 +125,7 @@ abstract class AbstractKaptToolIntegrationTest {
 
     private fun transformArguments(args: List<String>): List<String> {
         return args.map {
-            val arg = it.replace("%KOTLIN_STDLIB%", File("dist/kotlinc/lib/kotlin-stdlib.jar").absolutePath)
+            konst arg = it.replace("%KOTLIN_STDLIB%", File("dist/kotlinc/lib/kotlin-stdlib.jar").absolutePath)
             if (SystemInfo.isWindows && (arg.contains("=") || arg.contains(":"))) {
                 "\"" + arg + "\""
             } else {
@@ -135,16 +135,16 @@ abstract class AbstractKaptToolIntegrationTest {
     }
 
     private fun getJdk8Home(): File {
-        val homePath = System.getenv()["JDK_1_8"] ?: System.getenv()["JDK_18"] ?: error("Can't find JDK 1.8 home, please define JDK_1_8 variable")
+        konst homePath = System.getenv()["JDK_1_8"] ?: System.getenv()["JDK_18"] ?: error("Can't find JDK 1.8 home, please define JDK_1_8 variable")
         return File(homePath)
     }
 }
 
-private val Section.args get() = readArgumentsFromArgFile(preprocessPathSeparators(content))
+private konst Section.args get() = readArgumentsFromArgFile(preprocessPathSeparators(content))
 
 private fun preprocessPathSeparators(text: String): String = buildString {
     for (line in text.lineSequence()) {
-        val transformed = if (line.startsWith("-cp ")) line.replace(':', File.pathSeparatorChar) else line
+        konst transformed = if (line.startsWith("-cp ")) line.replace(':', File.pathSeparatorChar) else line
         appendLine(transformed)
     }
 }

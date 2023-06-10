@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 import java.util.*
 fun foo() {
-    val al = ArrayList<String>()
+    konst al = ArrayList<String>()
     al.size
     al.<!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>contains<!>(1)
     al.contains("")
@@ -9,7 +9,7 @@ fun foo() {
     al.remove("")
     al.removeAt(1)
 
-    val hs = HashSet<String>()
+    konst hs = HashSet<String>()
     hs.size
     hs.<!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>contains<!>(1)
     hs.contains("")
@@ -17,7 +17,7 @@ fun foo() {
     hs.remove("")
 
 
-    val hm = HashMap<String, Int>()
+    konst hm = HashMap<String, Int>()
     hm.size
     hm.<!TYPE_INFERENCE_ONLY_INPUT_TYPES_ERROR!>containsKey<!>(1)
     hm.containsKey("")

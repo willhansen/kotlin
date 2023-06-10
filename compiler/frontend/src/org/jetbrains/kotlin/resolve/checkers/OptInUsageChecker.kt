@@ -59,15 +59,15 @@ import org.jetbrains.kotlin.utils.SmartSet
 import org.jetbrains.kotlin.utils.addIfNotNull
 
 class OptInUsageChecker(project: Project) : CallChecker {
-    private val moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
+    private konst moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
 
     interface OptInDiagnosticReporter {
         fun report(trace: BindingTrace, element: PsiElement, fqName: FqName, message: String?)
     }
 
     class OptInFactoryBasedReporter(
-        val factory: DiagnosticFactory2<PsiElement, FqName, String>,
-        val defaultMessage: (FqName) -> String
+        konst factory: DiagnosticFactory2<PsiElement, FqName, String>,
+        konst defaultMessage: (FqName) -> String
     ) : OptInDiagnosticReporter {
         override fun report(trace: BindingTrace, element: PsiElement, fqName: FqName, message: String?) {
             trace.reportDiagnosticOnce(factory.on(element, fqName, message?.takeIf { it.isNotBlank() } ?: defaultMessage(fqName)))
@@ -75,20 +75,20 @@ class OptInUsageChecker(project: Project) : CallChecker {
     }
 
     data class OptInReporterMultiplexer(
-        val warning: OptInDiagnosticReporter,
-        val error: OptInDiagnosticReporter,
-        val futureError: OptInDiagnosticReporter
+        konst warning: OptInDiagnosticReporter,
+        konst error: OptInDiagnosticReporter,
+        konst futureError: OptInDiagnosticReporter
     )
 
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
-        val bindingContext = context.trace.bindingContext
-        val languageVersionSettings = context.languageVersionSettings
-        val optIns = resultingDescriptor.loadOptIns(moduleAnnotationsResolver, bindingContext, languageVersionSettings)
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
+        konst bindingContext = context.trace.bindingContext
+        konst languageVersionSettings = context.languageVersionSettings
+        konst optIns = resultingDescriptor.loadOptIns(moduleAnnotationsResolver, bindingContext, languageVersionSettings)
         if (resultingDescriptor is FunctionDescriptor &&
             resultingDescriptor.kind == CallableMemberDescriptor.Kind.SYNTHESIZED
         ) {
-            val propertyDescriptor = resultingDescriptor.findRelevantDataClassPropertyIfAny(context)
+            konst propertyDescriptor = resultingDescriptor.findRelevantDataClassPropertyIfAny(context)
             if (propertyDescriptor != null) {
                 reportNotAllowedOptIns(
                     optIns + propertyDescriptor.loadOptIns(
@@ -100,8 +100,8 @@ class OptInUsageChecker(project: Project) : CallChecker {
         }
         if (resultingDescriptor is SamConstructorDescriptor) {
             // KT-47708 special case (warning only)
-            val methodDescriptor = resultingDescriptor.getSingleAbstractMethod()
-            val samOptIns = methodDescriptor.loadOptIns(moduleAnnotationsResolver, bindingContext, languageVersionSettings)
+            konst methodDescriptor = resultingDescriptor.getSingleAbstractMethod()
+            konst samOptIns = methodDescriptor.loadOptIns(moduleAnnotationsResolver, bindingContext, languageVersionSettings)
                 .map { (fqName, _, message) ->
                     OptInDescription(fqName, OptInDescription.Severity.WARNING, message, subclassesOnly = false)
                 }
@@ -111,10 +111,10 @@ class OptInUsageChecker(project: Project) : CallChecker {
     }
 
     private fun FunctionDescriptor.findRelevantDataClassPropertyIfAny(context: CallCheckerContext): PropertyDescriptor? {
-        val index = name.asString().removePrefix("component").toIntOrNull()
-        val container = containingDeclaration
+        konst index = name.asString().removePrefix("component").toIntOrNull()
+        konst container = containingDeclaration
         if (container is ClassDescriptor && container.isData && index != null) {
-            val dataClassParameterDescriptor = container.unsubstitutedPrimaryConstructor?.valueParameters?.getOrNull(index - 1)
+            konst dataClassParameterDescriptor = container.unsubstitutedPrimaryConstructor?.konstueParameters?.getOrNull(index - 1)
             if (dataClassParameterDescriptor != null) {
                 return context.trace.bindingContext[BindingContext.VALUE_PARAMETER_AS_PROPERTY, dataClassParameterDescriptor]
             }
@@ -123,16 +123,16 @@ class OptInUsageChecker(project: Project) : CallChecker {
     }
 
     companion object {
-        private val LEVEL = Name.identifier("level")
-        private val MESSAGE = Name.identifier("message")
-        private val WARNING_LEVEL = Name.identifier("WARNING")
-        private val ERROR_LEVEL = Name.identifier("ERROR")
+        private konst LEVEL = Name.identifier("level")
+        private konst MESSAGE = Name.identifier("message")
+        private konst WARNING_LEVEL = Name.identifier("WARNING")
+        private konst ERROR_LEVEL = Name.identifier("ERROR")
 
         internal fun getDefaultDiagnosticMessage(prefix: String): (FqName) -> String = { fqName: FqName ->
             OptInNames.buildDefaultDiagnosticMessage(prefix, fqName.asString())
         }
 
-        private val USAGE_DIAGNOSTICS = OptInReporterMultiplexer(
+        private konst USAGE_DIAGNOSTICS = OptInReporterMultiplexer(
             warning = OptInFactoryBasedReporter(
                 Errors.OPT_IN_USAGE,
                 getDefaultDiagnosticMessage(OptInNames.buildMessagePrefix("should"))
@@ -164,7 +164,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
         ) {
             for ((annotationFqName, severity, message, subclassesOnly) in descriptions) {
                 if (!element.isOptInAllowed(annotationFqName, languageVersionSettings, trace.bindingContext, subclassesOnly)) {
-                    val diagnostic = when (severity) {
+                    konst diagnostic = when (severity) {
                         OptInDescription.Severity.WARNING -> diagnostics.warning
                         OptInDescription.Severity.ERROR -> diagnostics.error
                         OptInDescription.Severity.FUTURE_ERROR -> diagnostics.futureError
@@ -184,7 +184,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
             fromSupertype: Boolean = false,
         ): Set<OptInDescription> {
             if (!visited.add(this)) return emptySet()
-            val result = SmartSet.create<OptInDescription>()
+            konst result = SmartSet.create<OptInDescription>()
             if (this is CallableMemberDescriptor && kind == CallableMemberDescriptor.Kind.FAKE_OVERRIDE) {
                 for (overridden in overriddenDescriptors) {
                     result.addAll(
@@ -226,7 +226,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
                 )
             }
             if (this is FunctionDescriptor) {
-                valueParameters.forEach {
+                konstueParameters.forEach {
                     result.addAll(
                         it.type.loadOptIns(
                             moduleAnnotationsResolver, context, languageVersionSettings, visited,
@@ -241,13 +241,13 @@ class OptInUsageChecker(project: Project) : CallChecker {
             }
 
             if (annotations.any { it.fqName == WAS_EXPERIMENTAL_FQ_NAME }) {
-                val accessibility = checkSinceKotlinVersionAccessibility(languageVersionSettings)
+                konst accessibility = checkSinceKotlinVersionAccessibility(languageVersionSettings)
                 if (accessibility is SinceKotlinAccessibility.NotAccessibleButWasExperimental) {
                     result.addAll(accessibility.markerClasses.mapNotNull { it.loadOptInForMarkerAnnotation(useFutureError) })
                 }
             }
 
-            val container = containingDeclaration
+            konst container = containingDeclaration
             if (useMarkersFromContainer && container is ClassDescriptor && this !is ConstructorDescriptor) {
                 result.addAll(container.loadOptIns(moduleAnnotationsResolver, context, languageVersionSettings, visited, useFutureError))
             }
@@ -283,11 +283,11 @@ class OptInUsageChecker(project: Project) : CallChecker {
             useFutureError: Boolean = false,
             subclassesOnly: Boolean = false
         ): OptInDescription? {
-            val optInAnnotationDescriptor =
+            konst optInAnnotationDescriptor =
                 annotations.findAnnotation(REQUIRES_OPT_IN_FQ_NAME) ?: return null
 
-            val arguments = optInAnnotationDescriptor.allValueArguments
-            val severity = when ((arguments[LEVEL] as? EnumValue)?.enumEntryName) {
+            konst arguments = optInAnnotationDescriptor.allValueArguments
+            konst severity = when ((arguments[LEVEL] as? EnumValue)?.enumEntryName) {
                 WARNING_LEVEL -> OptInDescription.Severity.WARNING
                 ERROR_LEVEL -> if (useFutureError) OptInDescription.Severity.FUTURE_ERROR else OptInDescription.Severity.ERROR
                 else -> if (OptInDescription.DEFAULT_SEVERITY == OptInDescription.Severity.ERROR && useFutureError) {
@@ -297,18 +297,18 @@ class OptInUsageChecker(project: Project) : CallChecker {
                 }
             }
 
-            val message = (arguments[MESSAGE] as? StringValue)?.value
+            konst message = (arguments[MESSAGE] as? StringValue)?.konstue
 
             return OptInDescription(fqNameSafe, severity, message, subclassesOnly)
         }
 
         private fun AnnotationDescriptor.loadSubclassOptInRequired(context: BindingContext?): OptInDescription? {
             if (this.fqName != SUBCLASS_OPT_IN_REQUIRED_FQ_NAME) return null
-            val markerClass = allValueArguments[OPT_IN_ANNOTATION_CLASS]
+            konst markerClass = allValueArguments[OPT_IN_ANNOTATION_CLASS]
             if (markerClass !is KClassValue) return null
-            val value = markerClass.value
-            if (value !is KClassValue.Value.NormalClass) return null
-            val markerDescriptor = context?.get(BindingContext.FQNAME_TO_CLASS_DESCRIPTOR, value.classId.asSingleFqName().toUnsafe())
+            konst konstue = markerClass.konstue
+            if (konstue !is KClassValue.Value.NormalClass) return null
+            konst markerDescriptor = context?.get(BindingContext.FQNAME_TO_CLASS_DESCRIPTOR, konstue.classId.asSingleFqName().toUnsafe())
             return markerDescriptor?.loadOptInForMarkerAnnotation(subclassesOnly = true)
         }
 
@@ -335,7 +335,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
             subclassesOnly: Boolean
         ): Boolean {
             if (annotationFqName.asString() in languageVersionSettings.getFlag(AnalysisFlags.optIn)) return true
-            val isSubclass = subclassesOnly && getParentOfType<KtSuperTypeListEntry>(strict = true) != null
+            konst isSubclass = subclassesOnly && getParentOfType<KtSuperTypeListEntry>(strict = true) != null
             return anyParentMatches { element ->
                 element.isDeclarationAnnotatedWith(annotationFqName, bindingContext) ||
                         element.isElementAnnotatedWithOptIn(annotationFqName, bindingContext) ||
@@ -346,19 +346,19 @@ class OptInUsageChecker(project: Project) : CallChecker {
         private fun PsiElement.isDeclarationAnnotatedWith(annotationFqName: FqName, bindingContext: BindingContext): Boolean {
             if (this !is KtDeclaration) return false
 
-            val descriptor = bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, this)
+            konst descriptor = bindingContext.get(BindingContext.DECLARATION_TO_DESCRIPTOR, this)
             return descriptor != null && descriptor.annotations.hasAnnotation(annotationFqName)
         }
 
         private fun PsiElement.isElementAnnotatedWithOptIn(annotationFqName: FqName, bindingContext: BindingContext): Boolean {
             return this is KtAnnotated && annotationEntries.any { entry ->
-                val descriptor = bindingContext.get(BindingContext.ANNOTATION, entry)
+                konst descriptor = bindingContext.get(BindingContext.ANNOTATION, entry)
                 if (descriptor != null && descriptor.fqName == OPT_IN_FQ_NAME) {
-                    val annotationClasses = descriptor.allValueArguments[OPT_IN_ANNOTATION_CLASS]
-                    annotationClasses is ArrayValue && annotationClasses.value.any { annotationClass ->
-                        annotationClass is KClassValue && annotationClass.value.let { value ->
-                            value is KClassValue.Value.NormalClass &&
-                                    value.classId.asSingleFqName() == annotationFqName && value.arrayDimensions == 0
+                    konst annotationClasses = descriptor.allValueArguments[OPT_IN_ANNOTATION_CLASS]
+                    annotationClasses is ArrayValue && annotationClasses.konstue.any { annotationClass ->
+                        annotationClass is KClassValue && annotationClass.konstue.let { konstue ->
+                            konstue is KClassValue.Value.NormalClass &&
+                                    konstue.classId.asSingleFqName() == annotationFqName && konstue.arrayDimensions == 0
                         }
                     }
                 } else false
@@ -370,12 +370,12 @@ class OptInUsageChecker(project: Project) : CallChecker {
             bindingContext: BindingContext
         ): Boolean {
             return this is KtAnnotated && annotationEntries.any { entry ->
-                val descriptor = bindingContext.get(BindingContext.ANNOTATION, entry)
+                konst descriptor = bindingContext.get(BindingContext.ANNOTATION, entry)
                 if (descriptor != null && descriptor.fqName == SUBCLASS_OPT_IN_REQUIRED_FQ_NAME) {
-                    val annotationClass = descriptor.allValueArguments[OPT_IN_ANNOTATION_CLASS]
-                    annotationClass is KClassValue && annotationClass.value.let { value ->
-                        value is KClassValue.Value.NormalClass &&
-                                value.classId.asSingleFqName() == annotationFqName && value.arrayDimensions == 0
+                    konst annotationClass = descriptor.allValueArguments[OPT_IN_ANNOTATION_CLASS]
+                    annotationClass is KClassValue && annotationClass.konstue.let { konstue ->
+                        konstue is KClassValue.Value.NormalClass &&
+                                konstue.classId.asSingleFqName() == annotationFqName && konstue.arrayDimensions == 0
                     }
                 } else false
             }
@@ -398,15 +398,15 @@ class OptInUsageChecker(project: Project) : CallChecker {
             // Ideally, we should run full resolution (with all classifier usage checkers) on classifiers used in
             // "-opt-in" arguments. However, it's not easy to do this. This should be solved in the future with the support of
             // module annotations. For now, we only check deprecations because this is needed to correctly retire unneeded compiler arguments.
-            val deprecationResolver = DeprecationResolver(
+            konst deprecationResolver = DeprecationResolver(
                 LockBasedStorageManager("OptInUsageChecker"),
                 languageVersionSettings,
                 DeprecationSettings.Default
             )
 
-            // Returns true if fqName resolves to a valid opt-in requirement marker.
+            // Returns true if fqName resolves to a konstid opt-in requirement marker.
             fun checkAnnotation(fqName: String): Boolean {
-                val descriptor = module.resolveClassByFqName(FqName(fqName), NoLookupLocation.FOR_NON_TRACKED_SCOPE)
+                konst descriptor = module.resolveClassByFqName(FqName(fqName), NoLookupLocation.FOR_NON_TRACKED_SCOPE)
                 if (descriptor == null) {
                     reportWarning("Opt-in requirement marker $fqName is unresolved. Please make sure it's present in the module dependencies")
                     return false
@@ -418,7 +418,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
                 }
 
                 for (deprecation in deprecationResolver.getDeprecations(descriptor)) {
-                    val report = when (deprecation.deprecationLevel) {
+                    konst report = when (deprecation.deprecationLevel) {
                         DeprecationLevelValue.WARNING -> reportWarning
                         DeprecationLevelValue.ERROR, DeprecationLevelValue.HIDDEN -> reportError
                     }
@@ -436,24 +436,24 @@ class OptInUsageChecker(project: Project) : CallChecker {
     }
 
     class ClassifierUsage(project: Project) : ClassifierUsageChecker {
-        private val moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
+        private konst moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
 
         override fun check(targetDescriptor: ClassifierDescriptor, element: PsiElement, context: ClassifierUsageCheckerContext) {
-            val name = targetDescriptor.name
+            konst name = targetDescriptor.name
             if (name == REQUIRES_OPT_IN_FQ_NAME.shortName() || name == OPT_IN_FQ_NAME.shortName()) {
-                val fqName = targetDescriptor.fqNameSafe
+                konst fqName = targetDescriptor.fqNameSafe
                 if (fqName == REQUIRES_OPT_IN_FQ_NAME || fqName == OPT_IN_FQ_NAME) {
                     checkUsageOfKotlinRequiresOptInOrOptIn(element, context)
                     return
                 }
             }
 
-            val targetClass = when (targetDescriptor) {
+            konst targetClass = when (targetDescriptor) {
                 is ClassDescriptor -> targetDescriptor
                 is TypeAliasDescriptor -> targetDescriptor.classDescriptor
                 else -> null
             }
-            val bindingContext = context.trace.bindingContext
+            konst bindingContext = context.trace.bindingContext
             if (targetClass != null && targetClass.loadOptInForMarkerAnnotation() != null) {
                 if (!element.isUsageAsAnnotationOrImport() &&
                     !element.isUsageAsOptInArgument(bindingContext)
@@ -465,8 +465,8 @@ class OptInUsageChecker(project: Project) : CallChecker {
             }
 
             if (element.getParentOfType<KtImportDirective>(false) == null) {
-                val containingClass = element.getParentOfType<KtClassOrObject>(strict = true)
-                val descriptions = targetDescriptor.loadOptIns(
+                konst containingClass = element.getParentOfType<KtClassOrObject>(strict = true)
+                konst descriptions = targetDescriptor.loadOptIns(
                     moduleAnnotationsResolver,
                     bindingContext,
                     context.languageVersionSettings,
@@ -479,7 +479,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
         }
 
         private fun checkUsageOfKotlinRequiresOptInOrOptIn(element: PsiElement, context: CheckerContext) {
-            val optInFqNames = context.languageVersionSettings.getFlag(AnalysisFlags.optIn)
+            konst optInFqNames = context.languageVersionSettings.getFlag(AnalysisFlags.optIn)
             if (!context.languageVersionSettings.supportsFeature(LanguageFeature.OptInRelease) &&
                 REQUIRES_OPT_IN_FQ_NAME.asString() !in optInFqNames
             ) {
@@ -493,7 +493,7 @@ class OptInUsageChecker(project: Project) : CallChecker {
 
         private fun PsiElement.isUsageAsQualifier(): Boolean {
             if (this is KtSimpleNameExpression) {
-                val qualifier = getTopmostParentQualifiedExpressionForSelector() ?: this
+                konst qualifier = getTopmostParentQualifiedExpressionForSelector() ?: this
                 if ((qualifier.parent as? KtDotQualifiedExpression)?.receiverExpression == qualifier) {
                     return true
                 }
@@ -503,8 +503,8 @@ class OptInUsageChecker(project: Project) : CallChecker {
         }
 
         private fun PsiElement.isUsageAsOptInArgument(bindingContext: BindingContext): Boolean {
-            val qualifier = (this as? KtSimpleNameExpression)?.getTopmostParentQualifiedExpressionForSelector() ?: this
-            val parent = qualifier.parent
+            konst qualifier = (this as? KtSimpleNameExpression)?.getTopmostParentQualifiedExpressionForSelector() ?: this
+            konst parent = qualifier.parent
 
             return parent is KtClassLiteralExpression &&
                     parent.parent is KtValueArgument &&
@@ -519,26 +519,26 @@ class OptInUsageChecker(project: Project) : CallChecker {
     }
 
     class Overrides(project: Project) : DeclarationChecker {
-        private val moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
+        private konst moduleAnnotationsResolver = ModuleAnnotationsResolver.getInstance(project)
 
         override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
             if (descriptor !is CallableMemberDescriptor) return
 
-            val optInOverriddenDescriptorMap = descriptor.overriddenDescriptors.flatMap { overriddenMember ->
+            konst optInOverriddenDescriptorMap = descriptor.overriddenDescriptors.flatMap { overriddenMember ->
                 overriddenMember.loadOptIns(moduleAnnotationsResolver, context.trace.bindingContext, context.languageVersionSettings)
                     .map { description -> description to overriddenMember }
             }.toMap()
 
             for ((description, overriddenMember) in optInOverriddenDescriptorMap) {
                 if (!declaration.isOptInAllowed(description.annotationFqName, context, description.subclassesOnly)) {
-                    val reportOn = (declaration as? KtNamedDeclaration)?.nameIdentifier ?: declaration
+                    konst reportOn = (declaration as? KtNamedDeclaration)?.nameIdentifier ?: declaration
 
-                    val (diagnostic, defaultMessageVerb) = when (description.severity) {
+                    konst (diagnostic, defaultMessageVerb) = when (description.severity) {
                         OptInDescription.Severity.WARNING -> Errors.OPT_IN_OVERRIDE to "should"
                         OptInDescription.Severity.ERROR -> Errors.OPT_IN_OVERRIDE_ERROR to "must"
                         OptInDescription.Severity.FUTURE_ERROR -> Errors.OPT_IN_OVERRIDE_ERROR to "must"
                     }
-                    val message = OptInNames.buildOverrideMessage(
+                    konst message = OptInNames.buildOverrideMessage(
                         supertypeName = overriddenMember.containingDeclaration.name.asString(),
                         markerMessage = description.message,
                         verb = defaultMessageVerb,

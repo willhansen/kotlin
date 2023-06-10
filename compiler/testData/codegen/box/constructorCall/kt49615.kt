@@ -4,7 +4,7 @@
 fun builder(c: suspend () -> Unit): Int = 42
 
 @JvmInline
-value class IC(val s: String)
+konstue class IC(konst s: String)
 
 fun box(): String {
     builder {

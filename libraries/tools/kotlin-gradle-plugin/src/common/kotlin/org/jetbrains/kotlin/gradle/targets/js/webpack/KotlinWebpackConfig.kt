@@ -23,18 +23,18 @@ import java.io.StringWriter
 
 @Suppress("MemberVisibilityCanBePrivate")
 data class KotlinWebpackConfig(
-    val npmProjectDir: Provider<File>? = null,
+    konst npmProjectDir: Provider<File>? = null,
     var mode: Mode = Mode.DEVELOPMENT,
     var entry: File? = null,
     var output: KotlinWebpackOutput? = null,
     var outputPath: File? = null,
     var outputFileName: String? = entry?.name,
     var configDirectory: File? = null,
-    var reportEvaluatedConfigFile: File? = null,
+    var reportEkonstuatedConfigFile: File? = null,
     var devServer: DevServer? = null,
     var watchOptions: WatchOptions? = null,
     var experiments: MutableSet<String> = mutableSetOf(),
-    override val rules: KotlinWebpackRulesContainer,
+    override konst rules: KotlinWebpackRulesContainer,
     var devtool: String? = WebpackDevtool.EVAL_SOURCE_MAP,
     var showProgress: Boolean = false,
     var optimization: Optimization? = null,
@@ -45,13 +45,13 @@ data class KotlinWebpackConfig(
     var resolveFromModulesFirst: Boolean = false
 ) : WebpackRulesDsl {
 
-    val entryInput: String?
+    konst entryInput: String?
         get() = npmProjectDir?.get()?.let { npmProjectDir -> entry?.relativeOrAbsolute(npmProjectDir) }
 
-    val outputPathInput: String?
+    konst outputPathInput: String?
         get() = npmProjectDir?.get()?.let { npmProjectDir -> outputPath?.relativeOrAbsolute(npmProjectDir) }
 
-    val progressReporterPathFilterInput: String?
+    konst progressReporterPathFilterInput: String?
         get() = npmProjectDir?.get()?.let { npmProjectDir -> progressReporterPathFilter?.relativeOrAbsolute(npmProjectDir) }
 
     fun getRequiredDependencies(versions: NpmVersions) =
@@ -82,7 +82,7 @@ data class KotlinWebpackConfig(
             }
         }
 
-    enum class Mode(val code: String) {
+    enum class Mode(konst code: String) {
         DEVELOPMENT("development"),
         PRODUCTION("production")
     }
@@ -250,7 +250,7 @@ data class KotlinWebpackConfig(
         }
 
         if (output != null) {
-            val multiEntryOutput = "${outputFileName!!.removeSuffix(".js")}-[name].js"
+            konst multiEntryOutput = "${outputFileName!!.removeSuffix(".js")}-[name].js"
 
             //language=JavaScript 1.8
             appendLine(

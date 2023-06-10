@@ -16,15 +16,15 @@ class WobblyTF8Test {
     // Empty string decoding and encoding by Wobbly and UTF8.
     @Test
     fun emptyString() {
-        val emptyString = ""
+        konst emptyString = ""
 
-        val encodedWithUTF8: ByteArray = emptyString.encodeWithUTF8()
-        val encodedWithWobbly: ByteArray = emptyString.encodeWithWobbly()
+        konst encodedWithUTF8: ByteArray = emptyString.encodeWithUTF8()
+        konst encodedWithWobbly: ByteArray = emptyString.encodeWithWobbly()
         assertArrayEquals(encodedWithUTF8, encodedWithWobbly)
 
-        val decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
+        konst decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
         assertEquals(emptyString, decodedWithUTF8)
-        val decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
+        konst decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
         assertEquals(emptyString, decodedWithWobbly)
     }
 
@@ -32,19 +32,19 @@ class WobblyTF8Test {
     @Test
     fun wellFormedString() {
         repeat(10) {
-            val wellFormedString = generateWellFormedString(
+            konst wellFormedString = generateWellFormedString(
                 bmpCodePointsBeforeSurrogates = 10_000,
                 bmpCodePointsAfterSurrogates = 10_000,
                 supplementaryCodePoints = 80_000
             )
 
-            val encodedWithUTF8: ByteArray = wellFormedString.encodeWithUTF8()
-            val encodedWithWobbly: ByteArray = wellFormedString.encodeWithWobbly()
+            konst encodedWithUTF8: ByteArray = wellFormedString.encodeWithUTF8()
+            konst encodedWithWobbly: ByteArray = wellFormedString.encodeWithWobbly()
             assertArrayEquals(encodedWithUTF8, encodedWithWobbly)
 
-            val decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
+            konst decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
             assertEquals(wellFormedString, decodedWithUTF8)
-            val decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
+            konst decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
             assertEquals(wellFormedString, decodedWithWobbly)
         }
     }
@@ -53,18 +53,18 @@ class WobblyTF8Test {
     @Test
     fun illFormedStringEncodingByUTF8DecodingByWobbly() {
         repeat(10) {
-            val illFormedString = generateIllFormedString(
+            konst illFormedString = generateIllFormedString(
                 bmpCodePointsBeforeSurrogates = 10_000,
                 isolatedSurrogates = 10_000,
                 bmpCodePointsAfterSurrogates = 10_000,
                 supplementaryCodePoints = 80_000
             )
 
-            val encodedWithUTF8: ByteArray = illFormedString.encodeWithUTF8()
+            konst encodedWithUTF8: ByteArray = illFormedString.encodeWithUTF8()
 
-            val decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
+            konst decodedWithUTF8: String = encodedWithUTF8.decodeWithUTF8()
             assertNotEquals(illFormedString, decodedWithUTF8)
-            val decodedWithWobbly: String = encodedWithUTF8.decodeWithWobbly()
+            konst decodedWithWobbly: String = encodedWithUTF8.decodeWithWobbly()
             assertEquals(decodedWithUTF8, decodedWithWobbly)
         }
     }
@@ -73,18 +73,18 @@ class WobblyTF8Test {
     @Test
     fun illFormedStringEncodingByWobblyDecodingByWobbly() {
         repeat(10) {
-            val illFormedString = generateIllFormedString(
+            konst illFormedString = generateIllFormedString(
                 bmpCodePointsBeforeSurrogates = 10_000,
                 isolatedSurrogates = 10_000,
                 bmpCodePointsAfterSurrogates = 10_000,
                 supplementaryCodePoints = 80_000
             )
 
-            val encodedWithUTF8: ByteArray = illFormedString.encodeWithUTF8()
-            val encodedWithWobbly: ByteArray = illFormedString.encodeWithWobbly()
+            konst encodedWithUTF8: ByteArray = illFormedString.encodeWithUTF8()
+            konst encodedWithWobbly: ByteArray = illFormedString.encodeWithWobbly()
             assertFalse(encodedWithUTF8.contentEquals(encodedWithWobbly))
 
-            val decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
+            konst decodedWithWobbly: String = encodedWithWobbly.decodeWithWobbly()
             assertEquals(illFormedString, decodedWithWobbly)
         }
     }
@@ -92,14 +92,14 @@ class WobblyTF8Test {
     @Test
     fun decodingMalformedByteSequence() {
         fun ByteArray.assertDecodedSimilarly() {
-            val decodedWithUTF8 = decodeWithUTF8()
-            val decodedWithWobbly = decodeWithWobbly()
+            konst decodedWithUTF8 = decodeWithUTF8()
+            konst decodedWithWobbly = decodeWithWobbly()
             assertEquals(decodedWithUTF8, decodedWithWobbly)
         }
 
         repeat(10) {
-            val codePoint = CODE_POINTS_SUPPLEMENTARY.random()
-            val encodedWithUTF8: ByteArray = buildString { appendCodePoint(codePoint) }.encodeWithUTF8()
+            konst codePoint = CODE_POINTS_SUPPLEMENTARY.random()
+            konst encodedWithUTF8: ByteArray = buildString { appendCodePoint(codePoint) }.encodeWithUTF8()
 
             with(encodedWithUTF8.copyOf()) {
                 setBit(0, 3) // first byte starts with 1111_1000
@@ -152,17 +152,17 @@ class WobblyTF8Test {
         fun ByteArray.decodeWithWobbly(): String = WobblyTF8.decode(this)
         fun ByteArray.decodeWithUTF8(): String = toString(Charsets.UTF_8)
 
-        val CODE_POINTS_BEFORE_SURROGATES = MIN_CODE_POINT until MIN_SURROGATE.toInt()
-        val CODE_POINTS_SURROGATES = MIN_SURROGATE.toInt()..MAX_SURROGATE.toInt()
-        val CODE_POINTS_AFTER_SURROGATES = (MAX_SURROGATE.toInt() + 1) until MIN_SUPPLEMENTARY_CODE_POINT
-        val CODE_POINTS_SUPPLEMENTARY = MIN_SUPPLEMENTARY_CODE_POINT..MAX_CODE_POINT
+        konst CODE_POINTS_BEFORE_SURROGATES = MIN_CODE_POINT until MIN_SURROGATE.toInt()
+        konst CODE_POINTS_SURROGATES = MIN_SURROGATE.toInt()..MAX_SURROGATE.toInt()
+        konst CODE_POINTS_AFTER_SURROGATES = (MAX_SURROGATE.toInt() + 1) until MIN_SUPPLEMENTARY_CODE_POINT
+        konst CODE_POINTS_SUPPLEMENTARY = MIN_SUPPLEMENTARY_CODE_POINT..MAX_CODE_POINT
 
         fun generateWellFormedString(
             bmpCodePointsBeforeSurrogates: Int,
             bmpCodePointsAfterSurrogates: Int,
             supplementaryCodePoints: Int
         ): String {
-            val codePoints = ArrayList<Int>(bmpCodePointsBeforeSurrogates + bmpCodePointsAfterSurrogates)
+            konst codePoints = ArrayList<Int>(bmpCodePointsBeforeSurrogates + bmpCodePointsAfterSurrogates)
             repeat(bmpCodePointsBeforeSurrogates) { codePoints += CODE_POINTS_BEFORE_SURROGATES.random() }
             repeat(bmpCodePointsAfterSurrogates) { codePoints += CODE_POINTS_AFTER_SURROGATES.random() }
             repeat(supplementaryCodePoints) { codePoints += CODE_POINTS_SUPPLEMENTARY.random() }
@@ -176,7 +176,7 @@ class WobblyTF8Test {
             bmpCodePointsAfterSurrogates: Int,
             supplementaryCodePoints: Int
         ): String {
-            val codePoints = ArrayList<Int>(bmpCodePointsBeforeSurrogates + isolatedSurrogates + bmpCodePointsAfterSurrogates)
+            konst codePoints = ArrayList<Int>(bmpCodePointsBeforeSurrogates + isolatedSurrogates + bmpCodePointsAfterSurrogates)
             repeat(bmpCodePointsBeforeSurrogates) { codePoints += CODE_POINTS_BEFORE_SURROGATES.random() }
             repeat(isolatedSurrogates) { codePoints += CODE_POINTS_SURROGATES.random() }
             repeat(bmpCodePointsAfterSurrogates) { codePoints += CODE_POINTS_AFTER_SURROGATES.random() }

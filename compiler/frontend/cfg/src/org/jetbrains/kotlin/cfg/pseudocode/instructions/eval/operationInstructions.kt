@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jetbrains.kotlin.cfg.pseudocode.instructions.eval
+package org.jetbrains.kotlin.cfg.pseudocode.instructions.ekonst
 
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValue
 import org.jetbrains.kotlin.cfg.pseudocode.PseudoValueFactory
@@ -30,11 +30,11 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValue
 abstract class OperationInstruction protected constructor(
     element: KtElement,
     blockScope: BlockScope,
-    override val inputValues: List<PseudoValue>
+    override konst inputValues: List<PseudoValue>
 ) : InstructionWithNext(element, blockScope), InstructionWithValue {
     protected var resultValue: PseudoValue? = null
 
-    override val outputValue: PseudoValue?
+    override konst outputValue: PseudoValue?
         get() = resultValue
 
     protected fun renderInstruction(name: String, desc: String): String =
@@ -42,21 +42,21 @@ abstract class OperationInstruction protected constructor(
                 (if (inputValues.isNotEmpty()) "|${inputValues.joinToString(", ")})" else ")") +
                 (if (resultValue != null) " -> $resultValue" else "")
 
-    protected fun setResult(value: PseudoValue?): OperationInstruction {
-        this.resultValue = value
+    protected fun setResult(konstue: PseudoValue?): OperationInstruction {
+        this.resultValue = konstue
         return this
     }
 
-    protected fun setResult(factory: PseudoValueFactory?, valueElement: KtElement? = element): OperationInstruction =
-        setResult(factory?.newValue(valueElement, this))
+    protected fun setResult(factory: PseudoValueFactory?, konstueElement: KtElement? = element): OperationInstruction =
+        setResult(factory?.newValue(konstueElement, this))
 }
 
 class CallInstruction private constructor(
     element: KtElement,
     blockScope: BlockScope,
-    val resolvedCall: ResolvedCall<*>,
-    override val receiverValues: Map<PseudoValue, ReceiverValue>,
-    val arguments: Map<PseudoValue, ValueParameterDescriptor>
+    konst resolvedCall: ResolvedCall<*>,
+    override konst receiverValues: Map<PseudoValue, ReceiverValue>,
+    konst arguments: Map<PseudoValue, ValueParameterDescriptor>
 ) : OperationInstruction(element, blockScope, (receiverValues.keys as Collection<PseudoValue>) + arguments.keys), InstructionWithReceivers {
 
     constructor (
@@ -85,29 +85,29 @@ class CallInstruction private constructor(
 
 // Introduces black-box operation
 // Used to:
-//      consume input values (so that they aren't considered unused)
-//      denote value transformation which can't be expressed by other instructions (such as call or read)
-//      pass more than one value to instruction which formally requires only one (e.g. jump)
+//      consume input konstues (so that they aren't considered unused)
+//      denote konstue transformation which can't be expressed by other instructions (such as call or read)
+//      pass more than one konstue to instruction which formally requires only one (e.g. jump)
 class MagicInstruction(
     element: KtElement,
     blockScope: BlockScope,
     inputValues: List<PseudoValue>,
-    val kind: MagicKind
+    konst kind: MagicKind
 ) : OperationInstruction(element, blockScope, inputValues) {
     constructor (
         element: KtElement,
-        valueElement: KtElement?,
+        konstueElement: KtElement?,
         blockScope: BlockScope,
         inputValues: List<PseudoValue>,
         kind: MagicKind,
         factory: PseudoValueFactory
     ) : this(element, blockScope, inputValues, kind) {
-        setResult(factory, valueElement)
+        setResult(factory, konstueElement)
     }
 
-    val synthetic: Boolean get() = outputValue.element == null
+    konst synthetic: Boolean get() = outputValue.element == null
 
-    override val outputValue: PseudoValue
+    override konst outputValue: PseudoValue
         get() = resultValue!!
 
     override fun accept(visitor: InstructionVisitor) = visitor.visitMagic(this)
@@ -120,7 +120,7 @@ class MagicInstruction(
     override fun toString() = renderInstruction("magic[$kind]", render(element))
 }
 
-enum class MagicKind(val sideEffectFree: Boolean = false) {
+enum class MagicKind(konst sideEffectFree: Boolean = false) {
     // builtin operations
     STRING_TEMPLATE(true),
     AND(true),
@@ -143,7 +143,7 @@ enum class MagicKind(val sideEffectFree: Boolean = false) {
     EXHAUSTIVE_WHEN_ELSE()
 }
 
-// Merges values produced by alternative control-flow paths (such as 'if' branches)
+// Merges konstues produced by alternative control-flow paths (such as 'if' branches)
 class MergeInstruction private constructor(
     element: KtElement,
     blockScope: BlockScope,
@@ -158,7 +158,7 @@ class MergeInstruction private constructor(
         setResult(factory)
     }
 
-    override val outputValue: PseudoValue
+    override konst outputValue: PseudoValue
         get() = resultValue!!
 
     override fun accept(visitor: InstructionVisitor) = visitor.visitMerge(this)

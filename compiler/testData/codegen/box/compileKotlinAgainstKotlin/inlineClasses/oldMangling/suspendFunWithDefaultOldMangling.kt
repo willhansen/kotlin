@@ -9,10 +9,10 @@ package a
 
 var result = ""
 
-inline class P(val value: String)
+inline class P(konst konstue: String)
 
 suspend fun foo(p: P = P("OK")) {
-    result = p.value
+    result = p.konstue
 }
 
 // MODULE: main(lib)

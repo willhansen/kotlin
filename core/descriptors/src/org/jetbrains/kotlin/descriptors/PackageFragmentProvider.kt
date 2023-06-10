@@ -39,7 +39,7 @@ interface PackageFragmentProviderOptimized : PackageFragmentProvider {
 }
 
 fun PackageFragmentProvider.packageFragments(fqName: FqName): List<PackageFragmentDescriptor> {
-    val packageFragments = mutableListOf<PackageFragmentDescriptor>()
+    konst packageFragments = mutableListOf<PackageFragmentDescriptor>()
     collectPackageFragmentsOptimizedIfPossible(fqName, packageFragments)
     return packageFragments
 }

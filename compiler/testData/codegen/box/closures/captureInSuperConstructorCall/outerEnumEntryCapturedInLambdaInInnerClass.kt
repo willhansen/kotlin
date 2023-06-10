@@ -1,14 +1,14 @@
-abstract class Base(val fn: () -> Test)
+abstract class Base(konst fn: () -> Test)
 
-enum class Test(val ok: String) {
+enum class Test(konst ok: String) {
     TEST("OK") {
         inner class Inner : Base({ TEST })
 
-        override val base: Base
+        override konst base: Base
             get() = Inner()
     };
 
-    abstract val base: Base
+    abstract konst base: Base
 }
 
 fun box() = Test.TEST.base.fn().ok

@@ -7,10 +7,10 @@ package org.jetbrains.kotlin.generators.tests
 
 import org.jetbrains.kotlin.generators.generateTestGroupSuiteWithJUnit5
 import org.jetbrains.kotlin.generators.impl.generateTestGroupSuite
-import org.jetbrains.kotlin.incremental.AbstractJsIrES6InvalidationTest
-import org.jetbrains.kotlin.incremental.AbstractJsIrInvalidationWithPLTest
-import org.jetbrains.kotlin.incremental.AbstractJsIrInvalidationTest
-import org.jetbrains.kotlin.incremental.AbstractJsFirInvalidationTest
+import org.jetbrains.kotlin.incremental.AbstractJsIrES6InkonstidationTest
+import org.jetbrains.kotlin.incremental.AbstractJsIrInkonstidationWithPLTest
+import org.jetbrains.kotlin.incremental.AbstractJsIrInkonstidationTest
+import org.jetbrains.kotlin.incremental.AbstractJsFirInkonstidationTest
 import org.jetbrains.kotlin.js.test.*
 import org.jetbrains.kotlin.js.test.fir.*
 import org.jetbrains.kotlin.js.test.ir.*
@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.js.testOld.klib.AbstractFirJsKlibEvolutionTest
 fun main(args: Array<String>) {
     System.setProperty("java.awt.headless", "true")
 
-    val jvmOnlyBoxTests = listOf(
+    konst jvmOnlyBoxTests = listOf(
         "compileKotlinAgainstKotlin",
     )
 
-    val excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
+    konst excludedFirTestdataPattern = "^(.+)\\.fir\\.kts?\$"
 
     // TODO: repair these tests
     //generateTestDataForReservedWords()
@@ -72,20 +72,20 @@ fun main(args: Array<String>) {
         }
 
         testGroup("js/js.tests/tests-gen", "js/js.translator/testData") {
-            testClass<AbstractJsIrInvalidationTest> {
-                model("incremental/invalidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
+            testClass<AbstractJsIrInkonstidationTest> {
+                model("incremental/inkonstidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
             }
 
-            testClass<AbstractJsIrES6InvalidationTest> {
-                model("incremental/invalidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR_ES6, recursive = false)
+            testClass<AbstractJsIrES6InkonstidationTest> {
+                model("incremental/inkonstidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR_ES6, recursive = false)
             }
 
-            testClass<AbstractJsFirInvalidationTest> {
-                model("incremental/invalidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
+            testClass<AbstractJsFirInkonstidationTest> {
+                model("incremental/inkonstidation/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
             }
 
-            testClass<AbstractJsIrInvalidationWithPLTest> {
-                model("incremental/invalidationWithPL/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
+            testClass<AbstractJsIrInkonstidationWithPLTest> {
+                model("incremental/inkonstidationWithPL/", pattern = "^([^_](.+))$", targetBackend = TargetBackend.JS_IR, recursive = false)
             }
         }
 

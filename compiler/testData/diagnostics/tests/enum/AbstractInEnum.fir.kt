@@ -4,10 +4,10 @@ package abstract
 enum class MyEnum() {
     <!ABSTRACT_MEMBER_NOT_IMPLEMENTED_BY_ENUM_ENTRY!>INSTANCE<!>;
     //properties
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val a: Int<!>
-    val a1: Int = 1
-    abstract val a2: Int
-    abstract val a3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>1<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst a: Int<!>
+    konst a1: Int = 1
+    abstract konst a2: Int
+    abstract konst a3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>1<!>
 
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var b: Int<!>                private set
     var b1: Int = 0;                         private set
@@ -19,10 +19,10 @@ enum class MyEnum() {
     abstract var c2: Int                     <!ABSTRACT_PROPERTY_WITH_SETTER!>set(v: Int) { field = v }<!>
     abstract var c3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_SETTER!>set(v: Int) { field = v }<!>
 
-    val e: Int                               get() = a
-    val e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
-    abstract val e2: Int                     <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
-    abstract val e3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
+    konst e: Int                               get() = a
+    konst e1: Int = <!PROPERTY_INITIALIZER_NO_BACKING_FIELD!>0<!>;          get() = a
+    abstract konst e2: Int                     <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
+    abstract konst e3: Int = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>0<!>; <!ABSTRACT_PROPERTY_WITH_GETTER!>get() = a<!>
 
     //methods
     <!NON_ABSTRACT_FUNCTION_WITH_NO_BODY!>fun f()<!>

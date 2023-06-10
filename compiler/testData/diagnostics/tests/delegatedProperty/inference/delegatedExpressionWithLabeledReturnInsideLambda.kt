@@ -8,7 +8,7 @@ operator fun <T> Delegate<T>.getValue(thisRef: Any?, property: kotlin.reflect.KP
 fun <K> createDelegate(f: () -> K): Delegate<K> = TODO()
 
 fun test() {
-    val bar: () -> String by createDelegate {
+    konst bar: () -> String by createDelegate {
         return@createDelegate { "str" }
     }
 }

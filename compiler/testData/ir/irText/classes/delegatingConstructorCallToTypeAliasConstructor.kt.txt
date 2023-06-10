@@ -1,12 +1,12 @@
 open class Cell<T : Any?> {
-  constructor(value: T) /* primary */ {
+  constructor(konstue: T) /* primary */ {
     super/*Any*/()
     /* <init>() */
 
   }
 
-  val value: T
-    field = value
+  konst konstue: T
+    field = konstue
     get
 
 }
@@ -15,7 +15,7 @@ typealias CT<T : Any?> = Cell<T>
 typealias CStr = Cell<String>
 class C1 : Cell<String> {
   constructor() /* primary */ {
-    super/*Cell*/<String>(value = "O")
+    super/*Cell*/<String>(konstue = "O")
     /* <init>() */
 
   }
@@ -24,7 +24,7 @@ class C1 : Cell<String> {
 
 class C2 : Cell<String> {
   constructor() /* primary */ {
-    super/*Cell*/<String>(value = "K")
+    super/*Cell*/<String>(konstue = "K")
     /* <init>() */
 
   }

@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.fir.visitors.FirDefaultTransformer
 /**
  * A transformer that converts resolved arrayOf() call to [FirArrayOfCall].
  *
- * Note that arrayOf() calls only in [FirAnnotation] or the default value of annotation constructor are transformed.
+ * Note that arrayOf() calls only in [FirAnnotation] or the default konstue of annotation constructor are transformed.
  */
 class FirArrayOfCallTransformer : FirDefaultTransformer<Nothing?>() {
     private fun toArrayOfCall(functionCall: FirFunctionCall): FirArrayOfCall? {
@@ -54,16 +54,16 @@ class FirArrayOfCallTransformer : FirDefaultTransformer<Nothing?>() {
     }
 
     companion object {
-        val FirFunctionCall.isArrayOfCall: Boolean
+        konst FirFunctionCall.isArrayOfCall: Boolean
             get() {
-                val function: FirCallableDeclaration = getOriginalFunction() ?: return false
+                konst function: FirCallableDeclaration = getOriginalFunction() ?: return false
                 return function is FirSimpleFunction &&
                         function.returnTypeRef.isArrayType &&
                         isArrayOf(function, arguments) &&
                         function.receiverParameter == null
             }
 
-        private val arrayOfNames = hashSetOf("kotlin/arrayOf") +
+        private konst arrayOfNames = hashSetOf("kotlin/arrayOf") +
                 hashSetOf(
                     "boolean", "byte", "char", "double", "float", "int", "long", "short",
                     "ubyte", "uint", "ulong", "ushort"
@@ -71,15 +71,15 @@ class FirArrayOfCallTransformer : FirDefaultTransformer<Nothing?>() {
 
         private fun isArrayOf(function: FirSimpleFunction, arguments: List<FirExpression>): Boolean =
             when (function.symbol.callableId.toString()) {
-                "kotlin/emptyArray" -> function.valueParameters.isEmpty() && arguments.isEmpty()
-                in arrayOfNames -> function.valueParameters.size == 1 && function.valueParameters[0].isVararg && arguments.size <= 1
+                "kotlin/emptyArray" -> function.konstueParameters.isEmpty() && arguments.isEmpty()
+                in arrayOfNames -> function.konstueParameters.size == 1 && function.konstueParameters[0].isVararg && arguments.size <= 1
                 else -> false
             }
     }
 }
 
 private fun FirFunctionCall.getOriginalFunction(): FirCallableDeclaration? {
-    val symbol: FirBasedSymbol<*>? = when (val reference = calleeReference) {
+    konst symbol: FirBasedSymbol<*>? = when (konst reference = calleeReference) {
         is FirResolvedErrorReference -> null
         is FirResolvedNamedReference -> reference.resolvedSymbol
         is FirNamedReferenceWithCandidate -> reference.candidateSymbol

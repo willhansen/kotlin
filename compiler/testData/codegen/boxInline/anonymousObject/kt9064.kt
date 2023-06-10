@@ -3,16 +3,16 @@
 
 package test
 
-class Test(val _member: String) {
-    val _parameter: Z =  test {
+class Test(konst _member: String) {
+    konst _parameter: Z =  test {
         object : Z {
-            override val property = _member
+            override konst property = _member
         }
     }
 }
 
 interface Z {
-    val property: String
+    konst property: String
 }
 
 inline fun test(s: () -> Z): Z {
@@ -25,7 +25,7 @@ import test.*
 
 fun box(): String {
 
-    val test = Test("OK")
+    konst test = Test("OK")
 
     return test._parameter.property
 }

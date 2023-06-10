@@ -1,7 +1,7 @@
-val x get() = "O"
+konst x get() = "O"
 
 class A {
-    val y get() = "K"
+    konst y get() = "K"
 }
 
 fun box() = x + A().y

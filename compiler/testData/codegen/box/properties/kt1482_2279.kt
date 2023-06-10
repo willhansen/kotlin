@@ -6,7 +6,7 @@ abstract class ClassValAbstract {
     abstract var a: Int
 
     companion object {
-        val methods = ClassValAbstract::class.java.getMethods()!!
+        konst methods = ClassValAbstract::class.java.getMethods()!!
     }
 }
 

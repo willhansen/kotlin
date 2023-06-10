@@ -4,16 +4,16 @@ FILE fqName:<root> fileName:/main.kt
     CONSTRUCTOR visibility:public <> (keyBind:kotlin.Int) returnType:<root>.ModuleInfo [primary]
       VALUE_PARAMETER name:keyBind index:0 type:kotlin.Int
         EXPRESSION_BODY
-          CONST Int type=kotlin.Int value=1234
+          CONST Int type=kotlin.Int konstue=1234
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS ANNOTATION_CLASS name:ModuleInfo modality:OPEN visibility:public superTypes:[kotlin.Annotation]'
-    PROPERTY name:keyBind visibility:public modality:FINAL [val]
+    PROPERTY name:keyBind visibility:public modality:FINAL [konst]
       FIELD PROPERTY_BACKING_FIELD name:keyBind type:kotlin.Int visibility:private [final]
         EXPRESSION_BODY
           GET_VAR 'keyBind: kotlin.Int declared in <root>.ModuleInfo.<init>' type=kotlin.Int origin=INITIALIZE_PROPERTY_FROM_PARAMETER
       FUN DEFAULT_PROPERTY_ACCESSOR name:<get-keyBind> visibility:public modality:FINAL <> ($this:<root>.ModuleInfo) returnType:kotlin.Int
-        correspondingProperty: PROPERTY name:keyBind visibility:public modality:FINAL [val]
+        correspondingProperty: PROPERTY name:keyBind visibility:public modality:FINAL [konst]
         $this: VALUE_PARAMETER name:<this> type:<root>.ModuleInfo
         BLOCK_BODY
           RETURN type=kotlin.Nothing from='public final fun <get-keyBind> (): kotlin.Int declared in <root>.ModuleInfo'

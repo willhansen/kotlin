@@ -16,16 +16,16 @@ interface KJvmCompiledModule {
 }
 
 interface KJvmCompiledModuleInMemory : KJvmCompiledModule {
-    val compilerOutputFiles: Map<String, ByteArray>
+    konst compilerOutputFiles: Map<String, ByteArray>
 }
 
-class KJvmCompiledModuleFromClassPath(val classpath: Collection<File>) : KJvmCompiledModule {
+class KJvmCompiledModuleFromClassPath(konst classpath: Collection<File>) : KJvmCompiledModule {
 
     override fun createClassLoader(baseClassLoader: ClassLoader?): ClassLoader =
         URLClassLoader(classpath.map { it.toURI().toURL() }.toTypedArray(), baseClassLoader)
 }
 
-class KJvmCompiledModuleFromClassLoader(val moduleClassLoader: ClassLoader) : KJvmCompiledModule {
+class KJvmCompiledModuleFromClassLoader(konst moduleClassLoader: ClassLoader) : KJvmCompiledModule {
 
     override fun createClassLoader(baseClassLoader: ClassLoader?): ClassLoader =
         if (baseClassLoader == null) moduleClassLoader
@@ -57,7 +57,7 @@ internal class DualClassLoader(fallbackLoader: ClassLoader, parentLoader: ClassL
         }
     }
 
-    internal val fallbackClassLoader: Wrapper? =
+    internal konst fallbackClassLoader: Wrapper? =
         if (/* optimization */ parentLoader == null || singleClassLoader(fallbackLoader, parentLoader) != null) null
         else Wrapper(fallbackLoader)
 

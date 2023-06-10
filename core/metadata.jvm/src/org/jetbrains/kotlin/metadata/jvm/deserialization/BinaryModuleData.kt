@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.metadata.deserialization.NameResolver
  * @param nameResolver string table to resolve names referenced in classes in [optionalAnnotations].
  */
 class BinaryModuleData(
-    val annotations: List<String>,
-    val optionalAnnotations: List<ProtoBuf.Class>,
-    val nameResolver: NameResolver,
+    konst annotations: List<String>,
+    konst optionalAnnotations: List<ProtoBuf.Class>,
+    konst nameResolver: NameResolver,
 )

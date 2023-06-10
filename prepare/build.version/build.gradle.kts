@@ -2,14 +2,14 @@
 
 import java.io.File
 
-val buildVersionFilePath = "$buildDir/build.txt"
-val buildVersion by configurations.creating
-val buildNumber: String by rootProject.extra
-val kotlinVersion: String by rootProject.extra
+konst buildVersionFilePath = "$buildDir/build.txt"
+konst buildVersion by configurations.creating
+konst buildNumber: String by rootProject.extra
+konst kotlinVersion: String by rootProject.extra
 
-val writeBuildNumber by tasks.registering {
-    val versionFile = File(buildVersionFilePath)
-    val buildNumber = buildNumber
+konst writeBuildNumber by tasks.registering {
+    konst versionFile = File(buildVersionFilePath)
+    konst buildNumber = buildNumber
     inputs.property("version", buildNumber)
     outputs.file(versionFile)
     doLast {
@@ -24,37 +24,37 @@ artifacts.add(buildVersion.name, file(buildVersionFilePath)) {
 
 
 
-val writeStdlibVersion by tasks.registering {
-    val kotlinVersionLocal = kotlinVersion
-    val versionFile = rootDir.resolve("libraries/stdlib/src/kotlin/util/KotlinVersion.kt")
+konst writeStdlibVersion by tasks.registering {
+    konst kotlinVersionLocal = kotlinVersion
+    konst versionFile = rootDir.resolve("libraries/stdlib/src/kotlin/util/KotlinVersion.kt")
     inputs.property("version", kotlinVersionLocal)
     outputs.file(versionFile)
 
     fun Task.replaceVersion(versionFile: File, versionPattern: String, replacement: (MatchResult) -> String) {
         check(versionFile.isFile) { "Version file $versionFile is not found" }
-        val text = versionFile.readText()
-        val pattern = Regex(versionPattern)
-        val match = pattern.find(text) ?: error("Version pattern is missing in file $versionFile")
-        val group = match.groups[1]!!
-        val newValue = replacement(match)
-        if (newValue != group.value) {
-            logger.lifecycle("Writing new standard library version components: $newValue (was: ${group.value})")
+        konst text = versionFile.readText()
+        konst pattern = Regex(versionPattern)
+        konst match = pattern.find(text) ?: error("Version pattern is missing in file $versionFile")
+        konst group = match.groups[1]!!
+        konst newValue = replacement(match)
+        if (newValue != group.konstue) {
+            logger.lifecycle("Writing new standard library version components: $newValue (was: ${group.konstue})")
             versionFile.writeText(text.replaceRange(group.range, newValue))
         } else {
-            logger.info("Standard library version components: ${group.value}")
+            logger.info("Standard library version components: ${group.konstue}")
         }
     }
 
     doLast {
         replaceVersion(versionFile, """fun get\(\): KotlinVersion = KotlinVersion\((\d+, \d+, \d+)\)""") {
-            val (major, minor, _, optPatch) = Regex("""^(\d+)\.(\d+)(\.(\d+))?""").find(kotlinVersionLocal)?.destructured ?: error("Cannot parse current version $kotlinVersionLocal")
+            konst (major, minor, _, optPatch) = Regex("""^(\d+)\.(\d+)(\.(\d+))?""").find(kotlinVersionLocal)?.destructured ?: error("Cannot parse current version $kotlinVersionLocal")
             "$major, $minor, ${optPatch.takeIf { it.isNotEmpty() } ?: "0" }"
         }
     }
 }
 
-val writePluginVersion by tasks.registering // Remove this task after removing usages in the TeamCity build
+konst writePluginVersion by tasks.registering // Remove this task after removing usages in the TeamCity build
 
-val writeVersions by tasks.registering {
+konst writeVersions by tasks.registering {
     dependsOn(writeBuildNumber, writeStdlibVersion)
 }

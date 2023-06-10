@@ -27,11 +27,11 @@ import java.util.*
 
 object JvmOverloadFilter : OverloadFilter {
     override fun filterPackageMemberOverloads(overloads: Collection<DeclarationDescriptorNonRoot>): Collection<DeclarationDescriptorNonRoot> {
-        val result = ArrayList<DeclarationDescriptorNonRoot>()
+        konst result = ArrayList<DeclarationDescriptorNonRoot>()
 
-        val sourceClassesFQNs = HashSet<FqName>()
+        konst sourceClassesFQNs = HashSet<FqName>()
         for (overload in overloads) {
-            val file = DescriptorToSourceUtils.getContainingFile(overload) ?: continue
+            konst file = DescriptorToSourceUtils.getContainingFile(overload) ?: continue
             result.add(overload)
             sourceClassesFQNs.add(JvmFileClassUtil.getFileClassInfoNoResolve(file).fileClassFqName)
         }
@@ -40,7 +40,7 @@ object JvmOverloadFilter : OverloadFilter {
             if (overload is ConstructorDescriptor) continue
             if (overload !is DeserializedCallableMemberDescriptor) continue
 
-            val implClassFQN = JvmFileClassUtil.getPartFqNameForDeserialized(overload)
+            konst implClassFQN = JvmFileClassUtil.getPartFqNameForDeserialized(overload)
             if (implClassFQN !in sourceClassesFQNs) {
                 result.add(overload)
             }

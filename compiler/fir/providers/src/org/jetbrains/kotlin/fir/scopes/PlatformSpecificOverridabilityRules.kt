@@ -24,4 +24,4 @@ interface PlatformSpecificOverridabilityRules : FirSessionComponent {
     ): Boolean?
 }
 
-val FirSession.platformSpecificOverridabilityRules: PlatformSpecificOverridabilityRules? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.platformSpecificOverridabilityRules: PlatformSpecificOverridabilityRules? by FirSession.nullableSessionComponentAccessor()

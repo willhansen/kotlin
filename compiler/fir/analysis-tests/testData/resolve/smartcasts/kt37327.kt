@@ -4,7 +4,7 @@ interface Q
 
 sealed class A : Q
 
-class B(val x: Int) : A()
+class B(konst x: Int) : A()
 
 fun Q.foo() {
     if (this !is A) return

@@ -21,12 +21,12 @@ public class OurFuture<T> {
 // FILE: test.kt
 
 open class Either<out L> {
-    class Left<out L>(val a: L) : Either<L>()
+    class Left<out L>(konst a: L) : Either<L>()
 }
 
 fun f1(future: OurFuture<String>, e: Either.Left<String>) {
     future.compose<Either<String>> {
-        val x = when {
+        konst x = when {
             true -> OurFuture.createOurFuture(e)
             else -> throw Exception()
         }

@@ -24,36 +24,36 @@ import org.jetbrains.kotlin.serialization.deserialization.ProtoContainer
 import org.jetbrains.kotlin.serialization.deserialization.getClassId
 
 open class KotlinMetadataStubBuilder(
-    private val version: Int,
-    private val fileType: FileType,
-    private val serializerProtocol: () -> SerializerExtensionProtocol,
-    private val readFile: (VirtualFile, ByteArray) -> FileWithMetadata?
+    private konst version: Int,
+    private konst fileType: FileType,
+    private konst serializerProtocol: () -> SerializerExtensionProtocol,
+    private konst readFile: (VirtualFile, ByteArray) -> FileWithMetadata?
 ) : ClsStubBuilder() {
     override fun getStubVersion() = ClassFileStubBuilder.STUB_VERSION + version
 
     override fun buildFileStub(content: FileContent): PsiFileStub<*>? {
-        val virtualFile = content.file
+        konst virtualFile = content.file
         assert(virtualFile.extension == fileType.defaultExtension || virtualFile.fileType == fileType) { "Unexpected file type ${virtualFile.fileType.name}" }
-        val file = readFile(virtualFile, content.content) ?: return null
+        konst file = readFile(virtualFile, content.content) ?: return null
 
         when (file) {
             is FileWithMetadata.Incompatible -> {
                 return createIncompatibleAbiVersionFileStub()
             }
             is FileWithMetadata.Compatible -> {
-                val packageProto = file.proto.`package`
-                val packageFqName = file.packageFqName
-                val nameResolver = file.nameResolver
-                val protocol = serializerProtocol()
-                val components = ClsStubBuilderComponents(
+                konst packageProto = file.proto.`package`
+                konst packageFqName = file.packageFqName
+                konst nameResolver = file.nameResolver
+                konst protocol = serializerProtocol()
+                konst components = ClsStubBuilderComponents(
                     ProtoBasedClassDataFinder(file.proto, nameResolver, file.version),
                     AnnotationLoaderForStubBuilderImpl(protocol),
                     virtualFile,
                     protocol
                 )
-                val context = components.createContext(nameResolver, packageFqName, TypeTable(packageProto.typeTable))
+                konst context = components.createContext(nameResolver, packageFqName, TypeTable(packageProto.typeTable))
 
-                val fileStub = createFileStub(packageFqName, isScript = false)
+                konst fileStub = createFileStub(packageFqName, isScript = false)
                 createPackageDeclarationsStubs(
                     fileStub, context,
                     ProtoContainer.Package(packageFqName, context.nameResolver, context.typeTable, source = null),
@@ -70,19 +70,19 @@ open class KotlinMetadataStubBuilder(
     }
 
     sealed class FileWithMetadata {
-        class Incompatible(val version: BinaryVersion) : FileWithMetadata()
+        class Incompatible(konst version: BinaryVersion) : FileWithMetadata()
 
         open class Compatible(
-            val proto: ProtoBuf.PackageFragment,
-            val version: BinaryVersion,
+            konst proto: ProtoBuf.PackageFragment,
+            konst version: BinaryVersion,
             serializerProtocol: SerializerExtensionProtocol
         ) : FileWithMetadata() {
-            val nameResolver = NameResolverImpl(proto.strings, proto.qualifiedNames)
-            val packageFqName = FqName(nameResolver.getPackageFqName(proto.`package`.getExtension(serializerProtocol.packageFqName)))
+            konst nameResolver = NameResolverImpl(proto.strings, proto.qualifiedNames)
+            konst packageFqName = FqName(nameResolver.getPackageFqName(proto.`package`.getExtension(serializerProtocol.packageFqName)))
 
-            open val classesToDecompile: List<ProtoBuf.Class> =
+            open konst classesToDecompile: List<ProtoBuf.Class> =
                 proto.class_List.filter { proto ->
-                    val classId = nameResolver.getClassId(proto.fqName)
+                    konst classId = nameResolver.getClassId(proto.fqName)
                     !classId.isNestedClass && classId !in ClassDeserializer.BLACK_LIST
                 }
         }

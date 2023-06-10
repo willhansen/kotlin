@@ -59,27 +59,27 @@ fun generateIrForKlibSerialization(
     verifySignatures: Boolean = true,
     getDescriptorByLibrary: (KotlinLibrary) -> ModuleDescriptor,
 ): Pair<IrModuleFragment, IrPluginContext> {
-    val errorPolicy = configuration.get(JSConfigurationKeys.ERROR_TOLERANCE_POLICY) ?: ErrorTolerancePolicy.DEFAULT
-    val messageLogger = configuration.get(IrMessageLogger.IR_MESSAGE_LOGGER) ?: IrMessageLogger.None
-    val symbolTable = SymbolTable(IdSignatureDescriptor(JsManglerDesc), irFactory)
-    val psi2Ir = Psi2IrTranslator(
+    konst errorPolicy = configuration.get(JSConfigurationKeys.ERROR_TOLERANCE_POLICY) ?: ErrorTolerancePolicy.DEFAULT
+    konst messageLogger = configuration.get(IrMessageLogger.IR_MESSAGE_LOGGER) ?: IrMessageLogger.None
+    konst symbolTable = SymbolTable(IdSignatureDescriptor(JsManglerDesc), irFactory)
+    konst psi2Ir = Psi2IrTranslator(
         configuration.languageVersionSettings,
         Psi2IrConfiguration(errorPolicy.allowErrors, configuration.partialLinkageConfig.isEnabled),
         messageLogger::checkNoUnboundSymbols
     )
-    val psi2IrContext = psi2Ir.createGeneratorContext(analysisResult.moduleDescriptor, analysisResult.bindingContext, symbolTable)
-    val irBuiltIns = psi2IrContext.irBuiltIns
+    konst psi2IrContext = psi2Ir.createGeneratorContext(analysisResult.moduleDescriptor, analysisResult.bindingContext, symbolTable)
+    konst irBuiltIns = psi2IrContext.irBuiltIns
 
-    val feContext = psi2IrContext.run {
+    konst feContext = psi2IrContext.run {
         JsIrLinker.JsFePluginContext(moduleDescriptor, symbolTable, typeTranslator, irBuiltIns)
     }
-    val stubGenerator = DeclarationStubGeneratorImpl(
+    konst stubGenerator = DeclarationStubGeneratorImpl(
         psi2IrContext.moduleDescriptor,
         symbolTable,
         irBuiltIns,
         DescriptorByIdSignatureFinderImpl(psi2IrContext.moduleDescriptor, JsManglerDesc),
     )
-    val irLinker = JsIrLinker(
+    konst irLinker = JsIrLinker(
         psi2IrContext.moduleDescriptor,
         messageLogger,
         psi2IrContext.irBuiltIns,
@@ -97,7 +97,7 @@ fun generateIrForKlibSerialization(
 
     sortedDependencies.map { irLinker.deserializeOnlyHeaderModule(getDescriptorByLibrary(it), it) }
 
-    val (moduleFragment, pluginContext) = psi2IrContext.generateModuleFragmentWithPlugins(
+    konst (moduleFragment, pluginContext) = psi2IrContext.generateModuleFragmentWithPlugins(
         project,
         files,
         irLinker,
@@ -110,7 +110,7 @@ fun generateIrForKlibSerialization(
         moduleFragment.acceptVoid(ManglerChecker(JsManglerIr, Ir2DescriptorManglerAdapter(JsManglerDesc)))
     }
     if (configuration.getBoolean(JSConfigurationKeys.FAKE_OVERRIDE_VALIDATOR)) {
-        val fakeOverrideChecker = FakeOverrideChecker(JsManglerIr, JsManglerDesc)
+        konst fakeOverrideChecker = FakeOverrideChecker(JsManglerIr, JsManglerDesc)
         irLinker.modules.forEach { fakeOverrideChecker.check(it) }
     }
 

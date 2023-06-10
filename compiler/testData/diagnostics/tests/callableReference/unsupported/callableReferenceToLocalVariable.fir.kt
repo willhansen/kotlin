@@ -2,7 +2,7 @@
 
 
 fun a() {
-    val x = 10
+    konst x = 10
     <!INAPPLICABLE_CANDIDATE!>foo<!>(::<!UNSUPPORTED!>x<!>)
 }
 

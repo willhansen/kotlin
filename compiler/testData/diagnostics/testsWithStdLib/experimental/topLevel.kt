@@ -15,7 +15,7 @@ annotation class ExperimentalAPI
 fun function(): String = ""
 
 @ExperimentalAPI
-val property: String = ""
+konst property: String = ""
 
 @ExperimentalAPI
 typealias Typealias = String
@@ -30,7 +30,7 @@ import api.*
 fun useAll() {
     function()
     property
-    val s: Typealias = ""
+    konst s: Typealias = ""
 }
 
 @ExperimentalAPI
@@ -38,7 +38,7 @@ class Use {
     fun useAll() {
         function()
         property
-        val s: Typealias = ""
+        konst s: Typealias = ""
     }
 }
 
@@ -53,7 +53,7 @@ fun useAll() {
     {
         function()
         property
-        val s: Typealias = ""
+        konst s: Typealias = ""
     }()
 }
 
@@ -62,7 +62,7 @@ class Use {
     fun useAll() {
         function()
         property
-        val s: Typealias = ""
+        konst s: Typealias = ""
     }
 }
 
@@ -75,6 +75,6 @@ import api.*
 fun use() {
     <!OPT_IN_USAGE!>function<!>()
     <!OPT_IN_USAGE!>property<!>
-    val s: <!OPT_IN_USAGE!>Typealias<!> = ""
+    konst s: <!OPT_IN_USAGE!>Typealias<!> = ""
     <!OPT_IN_USAGE!>s<!>.hashCode()
 }

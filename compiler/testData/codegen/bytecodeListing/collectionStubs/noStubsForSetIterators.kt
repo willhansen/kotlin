@@ -2,9 +2,9 @@
 // particular *not* when specialized implementations are provided.
 
 class MySet<E> : Set<E> {
-    val elements: ArrayList<E> = ArrayList<E>()
+    konst elements: ArrayList<E> = ArrayList<E>()
 
-    override val size: Int get() = TODO()
+    override konst size: Int get() = TODO()
     override fun contains(element: E): Boolean = TODO()
     override fun containsAll(elements: Collection<E>): Boolean = TODO()
     override fun isEmpty(): Boolean = TODO()

@@ -15,24 +15,24 @@ annotation class A
 
 @Retention(AnnotationRetention.RUNTIME)
 annotation class Anno(
-    val s: String,
-    val i: Int,
-    val f: Double,
-    val u: UInt,
-    val e: E,
-    val a: A,
-    val k: KClass<*>,
-    val arr: Array<String>,
-    val intArr: IntArray,
-    val arrOfE: Array<E>,
-    val arrOfA: Array<A>
+    konst s: String,
+    konst i: Int,
+    konst f: Double,
+    konst u: UInt,
+    konst e: E,
+    konst a: A,
+    konst k: KClass<*>,
+    konst arr: Array<String>,
+    konst intArr: IntArray,
+    konst arrOfE: Array<E>,
+    konst arrOfA: Array<A>
 )
 
 @Anno("OK", 42, 2.718281828, 43u, E.E0, A(), A::class, emptyArray(), intArrayOf(1, 2), arrayOf(E.E0), arrayOf(A()))
 class TTT
 
 fun box(): String {
-    val anno = TTT::class.annotations.single() as Anno
+    konst anno = TTT::class.annotations.single() as Anno
     assertEquals(anno.s, "OK")
     assertEquals(anno.i, 42)
     assert(anno.f > 2.0 && anno.f < 3.0)

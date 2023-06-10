@@ -14,7 +14,7 @@ class CinteropIT : KGPBaseTest() {
     @GradleTest
     fun `rerun cinterop after a header changing`(gradleVersion: GradleVersion) {
         nativeProject("cinterop-kt-53191", gradleVersion = gradleVersion) {
-            val headerFile = projectPath.resolve("native_lib/nlib.h").toFile()
+            konst headerFile = projectPath.resolve("native_lib/nlib.h").toFile()
 
             build(":compileKotlinLinux") {
                 assertTasksExecuted(":cinteropNlibLinux")

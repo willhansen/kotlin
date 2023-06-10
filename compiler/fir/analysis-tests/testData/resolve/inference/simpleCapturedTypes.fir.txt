@@ -4,7 +4,7 @@ FILE: simpleCapturedTypes.kt
 
     }
     public abstract interface KC<T> : R|kotlin/Any| {
-        public abstract val x: R|T|
+        public abstract konst x: R|T|
             public get(): R|T|
 
     }
@@ -14,7 +14,7 @@ FILE: simpleCapturedTypes.kt
     public final fun <T> R|KC<T>|.idR(): R|KC<T>| {
         ^idR this@R|/idR|
     }
-    public final val <T> R|KC<T>|.idP: R|KC<T>|
+    public final konst <T> R|KC<T>|.idP: R|KC<T>|
         public get(): R|KC<T>| {
             ^ this@R|/idP|
         }
@@ -22,7 +22,7 @@ FILE: simpleCapturedTypes.kt
         R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|).R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
         R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>().R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
         R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>.R|SubstitutionOverride</KC.x: R|CapturedType(out Ann)|>|.R|/Ann.foo|()
-        lval x1: R|KC<out Ann>| = R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|)
-        lval x2: R|KC<out Ann>| = R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>()
-        lval x3: R|KC<out Ann>| = R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>
+        lkonst x1: R|KC<out Ann>| = R|/id|<R|CapturedType(out Ann)|>(R|<local>/kc|)
+        lkonst x2: R|KC<out Ann>| = R|<local>/kc|.R|/idR|<R|CapturedType(out Ann)|>()
+        lkonst x3: R|KC<out Ann>| = R|<local>/kc|.R|/idP|<R|CapturedType(out Ann)|>
     }

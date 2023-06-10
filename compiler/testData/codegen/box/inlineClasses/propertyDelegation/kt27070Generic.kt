@@ -6,19 +6,19 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 class Foo {
-    val a: Int = 42
-    val b by Delegate(0)
+    konst a: Int = 42
+    konst b by Delegate(0)
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Delegate<T: Int>(val ignored: T): ReadOnlyProperty<Foo, Int> {
+konstue class Delegate<T: Int>(konst ignored: T): ReadOnlyProperty<Foo, Int> {
     override fun getValue(thisRef: Foo, property: KProperty<*>): Int {
         return thisRef.a
     }
 }
 
 fun box(): String {
-    val x = Foo()
+    konst x = Foo()
     if (x.b != 42) throw AssertionError()
 
     return "OK"

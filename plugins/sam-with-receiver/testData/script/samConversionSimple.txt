@@ -15,7 +15,7 @@ public open class Exec {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 }
 
-@kotlin.annotation.Retention(value = AnnotationRetention.RUNTIME) public final annotation class SamWithReceiver1 : kotlin.Annotation {
+@kotlin.annotation.Retention(konstue = AnnotationRetention.RUNTIME) public final annotation class SamWithReceiver1 : kotlin.Annotation {
     public constructor SamWithReceiver1()
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -24,8 +24,8 @@ public open class Exec {
 
 public final class Test : kotlin.script.templates.standard.ScriptTemplateWithArgs {
     public constructor Test(/*0*/ args: kotlin.Array<kotlin.String>)
-    public final override /*1*/ /*fake_override*/ val args: kotlin.Array<kotlin.String>
-    public final val e: Exec
+    public final override /*1*/ /*fake_override*/ konst args: kotlin.Array<kotlin.String>
+    public final konst e: Exec
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -33,8 +33,8 @@ public final class Test : kotlin.script.templates.standard.ScriptTemplateWithArg
 
 public final class Test_with_error : kotlin.script.templates.standard.ScriptTemplateWithArgs {
     public constructor Test_with_error(/*0*/ args: kotlin.Array<kotlin.String>)
-    public final override /*1*/ /*fake_override*/ val args: kotlin.Array<kotlin.String>
-    public final val e: Exec
+    public final override /*1*/ /*fake_override*/ konst args: kotlin.Array<kotlin.String>
+    public final konst e: Exec
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

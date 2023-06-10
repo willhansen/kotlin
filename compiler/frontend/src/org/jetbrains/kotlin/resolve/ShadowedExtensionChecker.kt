@@ -29,12 +29,12 @@ import org.jetbrains.kotlin.resolve.descriptorUtil.varargParameterPosition
 import org.jetbrains.kotlin.types.isError
 import org.jetbrains.kotlin.util.OperatorNameConventions
 
-class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityComparator, val trace: DiagnosticSink) {
+class ShadowedExtensionChecker(konst typeSpecificityComparator: TypeSpecificityComparator, konst trace: DiagnosticSink) {
     fun checkDeclaration(declaration: KtDeclaration, descriptor: DeclarationDescriptor) {
         if (declaration.name == null) return
         if (descriptor !is CallableMemberDescriptor) return
         if (descriptor.hasHidesMembersAnnotation()) return
-        val extensionReceiverType = descriptor.extensionReceiverParameter?.type ?: return
+        konst extensionReceiverType = descriptor.extensionReceiverParameter?.type ?: return
         if (extensionReceiverType.isError) return
         if (extensionReceiverType.isMarkedNullable) return
 
@@ -47,9 +47,9 @@ class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityCom
     }
 
     private fun checkShadowedExtensionFunction(declaration: KtDeclaration, extensionFunction: FunctionDescriptor, trace: DiagnosticSink) {
-        val memberScope = extensionFunction.extensionReceiverParameter?.type?.memberScope ?: return
+        konst memberScope = extensionFunction.extensionReceiverParameter?.type?.memberScope ?: return
 
-        val contributedFunctions =
+        konst contributedFunctions =
             memberScope.getContributedFunctions(extensionFunction.name, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
         for (memberFunction in contributedFunctions) {
             if (memberFunction.isPublic() && isExtensionFunctionShadowedByMemberFunction(extensionFunction, memberFunction)) {
@@ -58,7 +58,7 @@ class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityCom
             }
         }
 
-        val nestedClass = memberScope.getContributedClassifier(extensionFunction.name, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
+        konst nestedClass = memberScope.getContributedClassifier(extensionFunction.name, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
         if (nestedClass is ClassDescriptor && nestedClass.isInner && nestedClass.isPublic()) {
             for (constructor in nestedClass.constructors) {
                 if (constructor.isPublic() && isExtensionFunctionShadowedByMemberFunction(extensionFunction, constructor)) {
@@ -68,12 +68,12 @@ class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityCom
             }
         }
 
-        val contributedVariables =
+        konst contributedVariables =
             memberScope.getContributedVariables(extensionFunction.name, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
         for (memberProperty in contributedVariables) {
             if (!memberProperty.isPublic()) continue
 
-            val invokeOperator = getInvokeOperatorShadowingExtensionFunction(extensionFunction, memberProperty)
+            konst invokeOperator = getInvokeOperatorShadowingExtensionFunction(extensionFunction, memberProperty)
             if (invokeOperator != null) {
                 trace.report(
                     Errors.EXTENSION_FUNCTION_SHADOWED_BY_MEMBER_PROPERTY_WITH_INVOKE.on(
@@ -97,13 +97,13 @@ class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityCom
         //      (3) extension signature should be not less specific than member signature.
         // (1) & (2) are required so that we can match signatures easily.
 
-        if (extension.valueParameters.size != member.valueParameters.size) return false
+        if (extension.konstueParameters.size != member.konstueParameters.size) return false
         if (extension.varargParameterPosition() != member.varargParameterPosition()) return false
         if (extension.isOperator && !member.isOperator) return false
         if (extension.isInfix && !member.isInfix) return false
 
-        val extensionSignature = FlatSignature.createForPossiblyShadowedExtension(extension)
-        val memberSignature = FlatSignature.createFromCallableDescriptor(member)
+        konst extensionSignature = FlatSignature.createForPossiblyShadowedExtension(extension)
+        konst memberSignature = FlatSignature.createFromCallableDescriptor(member)
         return isSignatureNotLessSpecific(extensionSignature, memberSignature)
     }
 
@@ -126,7 +126,7 @@ class ShadowedExtensionChecker(val typeSpecificityComparator: TypeSpecificityCom
         )
 
     private fun checkShadowedExtensionProperty(declaration: KtDeclaration, extensionProperty: PropertyDescriptor, trace: DiagnosticSink) {
-        val memberScope = extensionProperty.extensionReceiverParameter?.type?.memberScope ?: return
+        konst memberScope = extensionProperty.extensionReceiverParameter?.type?.memberScope ?: return
 
         memberScope.getContributedVariables(extensionProperty.name, NoLookupLocation.WHEN_CHECK_DECLARATION_CONFLICTS)
             .firstOrNull { it.isPublic() && !it.isExtension }

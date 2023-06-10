@@ -45,7 +45,7 @@ public class Slices {
         }
     };
 
-    // Rewrite is allowed for equal objects and for signed constant values that were converted to unsigned ones
+    // Rewrite is allowed for equal objects and for signed constant konstues that were converted to unsigned ones
     // This is needed to avoid making `CompileTimeConstant` mutable
     public static final RewritePolicy COMPILE_TIME_VALUE_REWRITE_POLICY = new RewritePolicy() {
         @Override
@@ -135,8 +135,8 @@ public class Slices {
             if (furtherLookupSlices != null) {
                 return new BasicWritableSlice<K, V>(rewritePolicy) {
                     @Override
-                    public V computeValue(SlicedMap map, K key, V value, boolean valueNotFound) {
-                        if (valueNotFound) {
+                    public V computeValue(SlicedMap map, K key, V konstue, boolean konstueNotFound) {
+                        if (konstueNotFound) {
                             for (ReadOnlySlice<K, V> slice : furtherLookupSlices) {
                                 V v = map.get(slice, key);
                                 if (v != null) {
@@ -145,7 +145,7 @@ public class Slices {
                             }
                             return null;
                         }
-                        return super.computeValue(map, key, value, false);
+                        return super.computeValue(map, key, konstue, false);
                     }
                 };
             }
@@ -157,8 +157,8 @@ public class Slices {
         // NOTE: Use BindingTraceContext.TRACK_REWRITES to debug this exception
         LOG.error("Rewrite at slice " + slice +
                   " key: " + key +
-                  " old value: " + oldValue + '@' + System.identityHashCode(oldValue) +
-                  " new value: " + newValue + '@' + System.identityHashCode(newValue) +
+                  " old konstue: " + oldValue + '@' + System.identityHashCode(oldValue) +
+                  " new konstue: " + newValue + '@' + System.identityHashCode(newValue) +
                   (key instanceof KtElement ? "\n" + PsiUtilsKt.getElementTextWithContext((KtElement) key) : ""));
     }
 }

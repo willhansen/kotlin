@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.analysis.api.symbols.KtSymbol
 import org.jetbrains.kotlin.analysis.api.symbols.pointers.KtSymbolPointer
 
 internal class KtFirBackingFieldSymbolPointer(
-    private val propertySymbolPointer: KtSymbolPointer<KtKotlinPropertySymbol>,
+    private konst propertySymbolPointer: KtSymbolPointer<KtKotlinPropertySymbol>,
 ) : KtSymbolPointer<KtBackingFieldSymbol>() {
     @Deprecated("Consider using org.jetbrains.kotlin.analysis.api.KtAnalysisSession.restoreSymbol")
     override fun restoreSymbol(analysisSession: KtAnalysisSession): KtBackingFieldSymbol? {
         require(analysisSession is KtFirAnalysisSession)
-        val propertySymbol = with(analysisSession) {
+        konst propertySymbol = with(analysisSession) {
             propertySymbolPointer.restoreSymbol()
         } ?: return null
 

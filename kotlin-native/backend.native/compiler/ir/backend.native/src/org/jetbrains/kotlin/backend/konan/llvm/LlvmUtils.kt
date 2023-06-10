@@ -9,39 +9,39 @@ import kotlinx.cinterop.*
 import llvm.*
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
 
-internal val LLVMValueRef.type: LLVMTypeRef
+internal konst LLVMValueRef.type: LLVMTypeRef
     get() = LLVMTypeOf(this)!!
 
 /**
- * Represents the value which can be emitted as bitcode const value
+ * Represents the konstue which can be emitted as bitcode const konstue
  */
 internal interface ConstValue {
-    val llvm: LLVMValueRef
+    konst llvm: LLVMValueRef
 }
 
-internal val ConstValue.llvmType: LLVMTypeRef
+internal konst ConstValue.llvmType: LLVMTypeRef
     get() = this.llvm.type
 
 internal interface ConstPointer : ConstValue {
     fun getElementPtr(llvm: CodegenLlvmHelpers, index: Int): ConstPointer = ConstGetElementPtr(llvm, this, index)
 }
 
-internal fun constPointer(value: LLVMValueRef) = object : ConstPointer {
+internal fun constPointer(konstue: LLVMValueRef) = object : ConstPointer {
     init {
-        assert(LLVMIsConstant(value) == 1)
+        assert(LLVMIsConstant(konstue) == 1)
     }
 
-    override val llvm = value
+    override konst llvm = konstue
 }
 
 private class ConstGetElementPtr(llvm: CodegenLlvmHelpers, pointer: ConstPointer, index: Int) : ConstPointer {
-    override val llvm = LLVMConstInBoundsGEP(pointer.llvm, cValuesOf(llvm.int32(0), llvm.int32(index)), 2)!!
+    override konst llvm = LLVMConstInBoundsGEP(pointer.llvm, cValuesOf(llvm.int32(0), llvm.int32(index)), 2)!!
     // TODO: squash multiple GEPs
 }
 
 internal fun ConstPointer.bitcast(toType: LLVMTypeRef) = constPointer(LLVMConstBitCast(this.llvm, toType)!!)
 
-internal class ConstArray(elementType: LLVMTypeRef?, val elements: List<ConstValue>) : ConstValue {
+internal class ConstArray(elementType: LLVMTypeRef?, konst elements: List<ConstValue>) : ConstValue {
     init {
         elements.forEach {
             assert(it.llvmType == elementType) {
@@ -49,15 +49,15 @@ internal class ConstArray(elementType: LLVMTypeRef?, val elements: List<ConstVal
             }
         }
     }
-    override val llvm = LLVMConstArray(elementType, elements.map { it.llvm }.toCValues(), elements.size)!!
+    override konst llvm = LLVMConstArray(elementType, elements.map { it.llvm }.toCValues(), elements.size)!!
 }
 
-internal open class Struct(val type: LLVMTypeRef?, val elements: List<ConstValue?>) : ConstValue {
+internal open class Struct(konst type: LLVMTypeRef?, konst elements: List<ConstValue?>) : ConstValue {
 
     constructor(type: LLVMTypeRef?, vararg elements: ConstValue?) : this(type, elements.toList())
 
-    override val llvm = LLVMConstNamedStruct(type, elements.mapIndexed { index, element ->
-        val expectedType = LLVMStructGetTypeAtIndex(type, index)
+    override konst llvm = LLVMConstNamedStruct(type, elements.mapIndexed { index, element ->
+        konst expectedType = LLVMStructGetTypeAtIndex(type, index)
         if (element == null) {
             LLVMConstNull(expectedType)!!
         } else {
@@ -75,43 +75,43 @@ internal open class Struct(val type: LLVMTypeRef?, val elements: List<ConstValue
     }
 }
 
-internal class Zero(val type: LLVMTypeRef) : ConstValue {
-    override val llvm = LLVMConstNull(type)!!
+internal class Zero(konst type: LLVMTypeRef) : ConstValue {
+    override konst llvm = LLVMConstNull(type)!!
 }
 
 internal class NullPointer(pointeeType: LLVMTypeRef): ConstPointer {
-    override val llvm = LLVMConstNull(pointerType(pointeeType))!!
+    override konst llvm = LLVMConstNull(pointerType(pointeeType))!!
 }
 
-internal fun constValue(value: LLVMValueRef) = object : ConstValue {
+internal fun constValue(konstue: LLVMValueRef) = object : ConstValue {
     init {
-        assert (LLVMIsConstant(value) == 1)
+        assert (LLVMIsConstant(konstue) == 1)
     }
 
-    override val llvm = value
+    override konst llvm = konstue
 }
 
-internal val RuntimeAware.kTypeInfo: LLVMTypeRef
+internal konst RuntimeAware.kTypeInfo: LLVMTypeRef
     get() = runtime.typeInfoType
-internal val RuntimeAware.kObjHeader: LLVMTypeRef
+internal konst RuntimeAware.kObjHeader: LLVMTypeRef
     get() = runtime.objHeaderType
-internal val RuntimeAware.kObjHeaderPtr: LLVMTypeRef
+internal konst RuntimeAware.kObjHeaderPtr: LLVMTypeRef
     get() = pointerType(kObjHeader)
-internal val RuntimeAware.kObjHeaderPtrPtr: LLVMTypeRef
+internal konst RuntimeAware.kObjHeaderPtrPtr: LLVMTypeRef
     get() = pointerType(kObjHeaderPtr)
-internal val RuntimeAware.kArrayHeader: LLVMTypeRef
+internal konst RuntimeAware.kArrayHeader: LLVMTypeRef
     get() = runtime.arrayHeaderType
-internal val RuntimeAware.kArrayHeaderPtr: LLVMTypeRef
+internal konst RuntimeAware.kArrayHeaderPtr: LLVMTypeRef
     get() = pointerType(kArrayHeader)
-internal val RuntimeAware.kTypeInfoPtr: LLVMTypeRef
+internal konst RuntimeAware.kTypeInfoPtr: LLVMTypeRef
     get() = pointerType(kTypeInfo)
-internal val RuntimeAware.kNullObjHeaderPtr: LLVMValueRef
+internal konst RuntimeAware.kNullObjHeaderPtr: LLVMValueRef
     get() = LLVMConstNull(kObjHeaderPtr)!!
-internal val RuntimeAware.kNullObjHeaderPtrPtr: LLVMValueRef
+internal konst RuntimeAware.kNullObjHeaderPtrPtr: LLVMValueRef
     get() = LLVMConstNull(kObjHeaderPtrPtr)!!
 
-// Nothing type has no values, but we do generate unreachable code and thus need some fake value:
-internal val RuntimeAware.kNothingFakeValue: LLVMValueRef
+// Nothing type has no konstues, but we do generate unreachable code and thus need some fake konstue:
+internal konst RuntimeAware.kNothingFakeValue: LLVMValueRef
     get() = LLVMGetUndef(kObjHeaderPtr)!!
 
 internal fun pointerType(pointeeType: LLVMTypeRef) = LLVMPointerType(pointeeType, 0)!!
@@ -121,13 +121,13 @@ internal fun ContextUtils.numParameters(functionType: LLVMTypeRef) : Int {
     return LLVMCountParamTypes(LLVMGetElementType(functionType))
 }
 
-fun extractConstUnsignedInt(value: LLVMValueRef): Long {
-    assert(LLVMIsConstant(value) != 0)
-    return LLVMConstIntGetZExtValue(value)
+fun extractConstUnsignedInt(konstue: LLVMValueRef): Long {
+    assert(LLVMIsConstant(konstue) != 0)
+    return LLVMConstIntGetZExtValue(konstue)
 }
 
-internal fun ContextUtils.isObjectRef(value: LLVMValueRef): Boolean {
-    return isObjectType(value.type)
+internal fun ContextUtils.isObjectRef(konstue: LLVMValueRef): Boolean {
+    return isObjectType(konstue.type)
 }
 
 internal fun RuntimeAware.isObjectType(type: LLVMTypeRef): Boolean {
@@ -142,9 +142,9 @@ internal fun CArrayPointer<ByteVar>.getBytes(size: Long) =
 
 internal fun LLVMValueRef.getAsCString() : String {
     memScoped {
-        val lengthPtr = alloc<size_tVar>()
-        val data = LLVMGetAsString(this@getAsCString, lengthPtr.ptr)!!
-        require(lengthPtr.value >= 1 && data[lengthPtr.value - 1] == 0.toByte()) { "Expected null-terminated string from llvm"}
+        konst lengthPtr = alloc<size_tVar>()
+        konst data = LLVMGetAsString(this@getAsCString, lengthPtr.ptr)!!
+        require(lengthPtr.konstue >= 1 && data[lengthPtr.konstue - 1] == 0.toByte()) { "Expected null-terminated string from llvm"}
         return data.toKString()
     }
 }
@@ -165,7 +165,7 @@ internal fun ContextUtils.addGlobal(name: String, type: LLVMTypeRef, isExported:
 }
 
 private fun ContextUtils.importGlobal(name: String, type: LLVMTypeRef): LLVMValueRef {
-    val found = LLVMGetNamedGlobal(llvm.module, name)
+    konst found = LLVMGetNamedGlobal(llvm.module, name)
     return if (found == null)
         addGlobal(name, type, isExported = false)
     else {
@@ -183,24 +183,24 @@ internal fun ContextUtils.importObjCGlobal(name: String, type: LLVMTypeRef) = im
 internal fun ContextUtils.importNativeRuntimeGlobal(name: String, type: LLVMTypeRef) =
         importGlobal(name, type).also { generationState.dependenciesTracker.addNativeRuntime() }
 
-private fun CodeGenerator.replaceExternalWeakOrCommonGlobal(name: String, value: ConstValue) {
+private fun CodeGenerator.replaceExternalWeakOrCommonGlobal(name: String, konstue: ConstValue) {
     if (generationState.llvmModuleSpecification.importsKotlinDeclarationsFromOtherSharedLibraries()) {
         // When some dynamic caches are used, we consider that stdlib is in the dynamic cache as well.
         // Runtime is linked into stdlib module only, so import runtime global from it.
-        val global = importGlobal(name, value.llvmType)
-        val initializerProto = LlvmFunctionSignature(LlvmRetType(llvm.voidType)).toProto(
+        konst global = importGlobal(name, konstue.llvmType)
+        konst initializerProto = LlvmFunctionSignature(LlvmRetType(llvm.voidType)).toProto(
                 name = "",
                 origin = null,
                 LLVMLinkage.LLVMPrivateLinkage
         )
-        val initializer = generateFunctionNoRuntime(this, initializerProto) {
-            store(value.llvm, global)
+        konst initializer = generateFunctionNoRuntime(this, initializerProto) {
+            store(konstue.llvm, global)
             ret(null)
         }
 
         llvm.otherStaticInitializers += initializer
     } else {
-        val global = staticData.placeGlobal(name, value, isExported = true)
+        konst global = staticData.placeGlobal(name, konstue, isExported = true)
 
         if (generationState.llvmModuleSpecification.importsKotlinDeclarationsFromOtherObjectFiles()) {
             // Note: actually this is required only if global's weak/common definition is in another object file,
@@ -215,33 +215,33 @@ private fun CodeGenerator.replaceExternalWeakOrCommonGlobal(name: String, value:
 
 internal fun CodeGenerator.replaceExternalWeakOrCommonGlobal(
         name: String,
-        value: ConstValue,
+        konstue: ConstValue,
         declaration: IrDeclaration
-) = replaceExternalWeakOrCommonGlobal(name, value).also { generationState.dependenciesTracker.add(declaration) }
+) = replaceExternalWeakOrCommonGlobal(name, konstue).also { generationState.dependenciesTracker.add(declaration) }
 
 internal fun CodeGenerator.replaceExternalWeakOrCommonGlobalFromNativeRuntime(
         name: String,
-        value: ConstValue
-) = replaceExternalWeakOrCommonGlobal(name, value).also { generationState.dependenciesTracker.addNativeRuntime() }
+        konstue: ConstValue
+) = replaceExternalWeakOrCommonGlobal(name, konstue).also { generationState.dependenciesTracker.addNativeRuntime() }
 
 internal abstract class AddressAccess {
     abstract fun getAddress(generationContext: FunctionGenerationContext?): LLVMValueRef
 }
 
-internal class GlobalAddressAccess(private val address: LLVMValueRef): AddressAccess() {
+internal class GlobalAddressAccess(private konst address: LLVMValueRef): AddressAccess() {
     override fun getAddress(generationContext: FunctionGenerationContext?): LLVMValueRef = address
 }
 
-internal class TLSAddressAccess(private val index: Int) : AddressAccess() {
+internal class TLSAddressAccess(private konst index: Int) : AddressAccess() {
     override fun getAddress(generationContext: FunctionGenerationContext?): LLVMValueRef {
-        val llvm = generationContext!!.llvm
+        konst llvm = generationContext!!.llvm
         return generationContext.call(llvm.lookupTLS, listOf(llvm.tlsKey, llvm.int32(index)))
     }
 }
 
 internal fun ContextUtils.addKotlinThreadLocal(name: String, type: LLVMTypeRef, alignment: Int): AddressAccess {
     return if (isObjectType(type)) {
-        val index = llvm.tlsCount++
+        konst index = llvm.tlsCount++
         require(llvm.runtime.pointerAlignment % alignment == 0)
         TLSAddressAccess(index)
     } else {
@@ -273,9 +273,9 @@ internal fun functionType(returnType: LLVMTypeRef, isVarArg: Boolean = false, pa
         functionType(returnType, isVarArg, *paramTypes.toTypedArray())
 
 
-fun llvm2string(value: LLVMValueRef?): String {
-  if (value == null) return "<null>"
-  return LLVMPrintValueToString(value)!!.toKString()
+fun llvm2string(konstue: LLVMValueRef?): String {
+  if (konstue == null) return "<null>"
+  return LLVMPrintValueToString(konstue)!!.toKString()
 }
 
 fun llvmtype2string(type: LLVMTypeRef?): String {
@@ -284,50 +284,50 @@ fun llvmtype2string(type: LLVMTypeRef?): String {
 }
 
 fun getStructElements(type: LLVMTypeRef): List<LLVMTypeRef> {
-    val count = LLVMCountStructElementTypes(type)
+    konst count = LLVMCountStructElementTypes(type)
     return (0 until count).map {
         LLVMStructGetTypeAtIndex(type, it)!!
     }
 }
 
 fun parseBitcodeFile(llvmContext: LLVMContextRef, path: String): LLVMModuleRef = memScoped {
-    val bufRef = alloc<LLVMMemoryBufferRefVar>()
-    val errorRef = allocPointerTo<ByteVar>()
+    konst bufRef = alloc<LLVMMemoryBufferRefVar>()
+    konst errorRef = allocPointerTo<ByteVar>()
 
-    val res = LLVMCreateMemoryBufferWithContentsOfFile(path, bufRef.ptr, errorRef.ptr)
+    konst res = LLVMCreateMemoryBufferWithContentsOfFile(path, bufRef.ptr, errorRef.ptr)
     if (res != 0) {
-        throw Error("Error parsing file $path : ${errorRef.value?.toKString()}")
+        throw Error("Error parsing file $path : ${errorRef.konstue?.toKString()}")
     }
 
-    val memoryBuffer = bufRef.value
+    konst memoryBuffer = bufRef.konstue
     try {
 
-        val moduleRef = alloc<LLVMModuleRefVar>()
-        val parseRes = LLVMParseBitcodeInContext2(llvmContext, memoryBuffer, moduleRef.ptr)
+        konst moduleRef = alloc<LLVMModuleRefVar>()
+        konst parseRes = LLVMParseBitcodeInContext2(llvmContext, memoryBuffer, moduleRef.ptr)
         if (parseRes != 0) {
             throw Error(parseRes.toString())
         }
 
-        moduleRef.value!!
+        moduleRef.konstue!!
     } finally {
         LLVMDisposeMemoryBuffer(memoryBuffer)
     }
 }
 
 fun isFunctionNoUnwind(function: LLVMValueRef): Boolean {
-    val attribute = LLVMGetEnumAttributeAtIndex(function, LLVMAttributeFunctionIndex, LlvmFunctionAttribute.NoUnwind.asAttributeKindId().value)
+    konst attribute = LLVMGetEnumAttributeAtIndex(function, LLVMAttributeFunctionIndex, LlvmFunctionAttribute.NoUnwind.asAttributeKindId().konstue)
     return attribute != null
 }
 
 internal fun getLlvmAttributeKindId(attributeName: String): LLVMAttributeKindId {
-    val attrKindId = LLVMGetEnumAttributeKindForName(attributeName, attributeName.length.signExtend())
+    konst attrKindId = LLVMGetEnumAttributeKindForName(attributeName, attributeName.length.signExtend())
     if (attrKindId == 0) {
         throw Error("Unable to find '$attributeName' attribute kind id")
     }
     return LLVMAttributeKindId(attrKindId)
 }
 
-data class LLVMAttributeKindId(val value: Int)
+data class LLVMAttributeKindId(konst konstue: Int)
 
 fun setFunctionNoUnwind(function: LLVMValueRef) {
     addLlvmFunctionEnumAttribute(function, LlvmFunctionAttribute.NoUnwind)
@@ -341,16 +341,16 @@ fun setFunctionNoInline(function: LLVMValueRef) {
     addLlvmFunctionEnumAttribute(function, LlvmFunctionAttribute.NoInline)
 }
 
-internal fun addLlvmFunctionEnumAttribute(function: LLVMValueRef, attrKindId: LLVMAttributeKindId, value: Long = 0) {
-    val attribute = createLlvmEnumAttribute(LLVMGetTypeContext(function.type)!!, attrKindId, value)
+internal fun addLlvmFunctionEnumAttribute(function: LLVMValueRef, attrKindId: LLVMAttributeKindId, konstue: Long = 0) {
+    konst attribute = createLlvmEnumAttribute(LLVMGetTypeContext(function.type)!!, attrKindId, konstue)
     addLlvmFunctionAttribute(function, attribute)
 }
 
-internal fun addLlvmFunctionEnumAttribute(function: LLVMValueRef, attr: LlvmAttribute, value: Long = 0) =
-        addLlvmFunctionEnumAttribute(function, attr.asAttributeKindId(), value)
+internal fun addLlvmFunctionEnumAttribute(function: LLVMValueRef, attr: LlvmAttribute, konstue: Long = 0) =
+        addLlvmFunctionEnumAttribute(function, attr.asAttributeKindId(), konstue)
 
-internal fun createLlvmEnumAttribute(llvmContext: LLVMContextRef, attrKindId: LLVMAttributeKindId, value: Long = 0) =
-        LLVMCreateEnumAttribute(llvmContext, attrKindId.value, value)!!
+internal fun createLlvmEnumAttribute(llvmContext: LLVMContextRef, attrKindId: LLVMAttributeKindId, konstue: Long = 0) =
+        LLVMCreateEnumAttribute(llvmContext, attrKindId.konstue, konstue)!!
 
 internal fun addLlvmFunctionAttribute(function: LLVMValueRef, attribute: LLVMAttributeRef) {
     LLVMAddAttributeAtIndex(function, LLVMAttributeFunctionIndex, attribute)
@@ -361,8 +361,8 @@ internal fun node(llvmContext: LLVMContextRef, vararg it: LLVMValueRef) = LLVMMD
 
 internal fun LLVMValueRef.setUnaligned() = apply { LLVMSetAlignment(this, 1) }
 
-internal fun getOperands(value: LLVMValueRef) =
-        (0 until LLVMGetNumOperands(value)).map { LLVMGetOperand(value, it)!! }
+internal fun getOperands(konstue: LLVMValueRef) =
+        (0 until LLVMGetNumOperands(konstue)).map { LLVMGetOperand(konstue, it)!! }
 
 internal fun getGlobalAliases(module: LLVMModuleRef) =
         generateSequence(LLVMGetFirstGlobalAlias(module), { LLVMGetNextGlobalAlias(it) })
@@ -393,6 +393,6 @@ fun LLVMTypeRef.isVectorElementType(): Boolean = when (llvm.LLVMGetTypeKind(this
 }
 
 fun LLVMModuleRef.getName(): String = memScoped {
-    val sizeVar = alloc<size_tVar>()
+    konst sizeVar = alloc<size_tVar>()
     LLVMGetModuleIdentifier(this@getName, sizeVar.ptr)!!.toKStringFromUtf8()
 }

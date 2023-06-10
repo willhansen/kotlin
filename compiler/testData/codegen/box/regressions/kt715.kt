@@ -7,9 +7,9 @@ import kotlin.*
 @Suppress("REIFIED_TYPE_PARAMETER_NO_INLINE")
 inline fun <reified T: Any> javaClass(): Class<T> = T::class.java
 
-val test = "lala".javaClass
+konst test = "lala".javaClass
 
-val test2 = javaClass<Iterator<Int>> ()
+konst test2 = javaClass<Iterator<Int>> ()
 
 fun box(): String {
     if(test.getCanonicalName() != "java.lang.String") return "fail"

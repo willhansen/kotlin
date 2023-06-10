@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.symbols.IrSymbol
 
 class ExternalDependenciesGenerator(
-    private val symbolTable: SymbolTable,
-    private val irProviders: List<IrProvider>
+    private konst symbolTable: SymbolTable,
+    private konst irProviders: List<IrProvider>
 ) {
     fun generateUnboundSymbolsAsDependencies() {
         // There should be at most one DeclarationStubGenerator (none in closed world?)
@@ -29,7 +29,7 @@ class ExternalDependenciesGenerator(
         // Deserializing a reference may lead to new unbound references, so we loop until none are left.
         var unbound = emptySet<IrSymbol>()
         do {
-            val prevUnbound = unbound
+            konst prevUnbound = unbound
             unbound = symbolTable.allUnbound
             for (symbol in unbound) {
                 // Symbol could get bound as a side effect of deserializing other symbols.

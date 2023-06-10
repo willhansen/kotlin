@@ -23,16 +23,16 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import java.io.File
 
-open class SubpluginOption(val key: String, private val lazyValue: Lazy<String>) {
-    constructor(key: String, value: String) : this(key, lazyOf(value))
+open class SubpluginOption(konst key: String, private konst lazyValue: Lazy<String>) {
+    constructor(key: String, konstue: String) : this(key, lazyOf(konstue))
 
-    val value: String get() = lazyValue.value
+    konst konstue: String get() = lazyValue.konstue
 }
 
 class FilesSubpluginOption(
     key: String,
-    val files: Iterable<File>,
-    val kind: FilesOptionKind = FilesOptionKind.INTERNAL,
+    konst files: Iterable<File>,
+    konst kind: FilesOptionKind = FilesOptionKind.INTERNAL,
     lazyValue: Lazy<String> = lazy { files.joinToString(File.pathSeparator) { it.normalize().absolutePath } }
 ) : SubpluginOption(key, lazyValue) {
 
@@ -40,16 +40,16 @@ class FilesSubpluginOption(
         key: String,
         files: List<File>,
         kind: FilesOptionKind = FilesOptionKind.INTERNAL,
-        value: String? = null
-    ) : this(key, files, kind, lazy { value ?: files.joinToString(File.pathSeparator) { it.normalize().absolutePath } })
+        konstue: String? = null
+    ) : this(key, files, kind, lazy { konstue ?: files.joinToString(File.pathSeparator) { it.normalize().absolutePath } })
 }
 
 class CompositeSubpluginOption(
     key: String,
     lazyValue: Lazy<String>,
-    val originalOptions: List<SubpluginOption>
+    konst originalOptions: List<SubpluginOption>
 ) : SubpluginOption(key, lazyValue) {
-    constructor(key: String, value: String, originalOptions: List<SubpluginOption>) : this(key, lazyOf(value), originalOptions)
+    constructor(key: String, konstue: String, originalOptions: List<SubpluginOption>) : this(key, lazyOf(konstue), originalOptions)
 }
 
 /** Defines how the files option should be handled with regard to Gradle model */
@@ -62,12 +62,12 @@ enum class FilesOptionKind {
 }
 
 /** Defines a subplugin option that should be excluded from Gradle input/output checks */
-open class InternalSubpluginOption(key: String, value: String) : SubpluginOption(key, value)
+open class InternalSubpluginOption(key: String, konstue: String) : SubpluginOption(key, konstue)
 
 /** Keeps one or more compiler options for one of more compiler plugins. */
 open class CompilerPluginConfig {
     @get:Internal
-    protected val optionsByPluginId = mutableMapOf<String, MutableList<SubpluginOption>>()
+    protected konst optionsByPluginId = mutableMapOf<String, MutableList<SubpluginOption>>()
 
     fun allOptions(): Map<String, List<SubpluginOption>> = optionsByPluginId
 
@@ -77,7 +77,7 @@ open class CompilerPluginConfig {
 
     @Input
     fun getAsTaskInputArgs(): Map<String, String> {
-        val result = mutableMapOf<String, String>()
+        konst result = mutableMapOf<String, String>()
         optionsByPluginId.forEach { (id, subpluginOptions) ->
             result += computeForSubpluginId(id, subpluginOptions)
         }
@@ -87,16 +87,16 @@ open class CompilerPluginConfig {
     private fun computeForSubpluginId(subpluginId: String, subpluginOptions: List<SubpluginOption>): Map<String, String> {
         // There might be several options with the same key. We group them together
         // and add an index to the Gradle input property name to resolve possible duplication:
-        val result = mutableMapOf<String, String>()
-        val pluginOptionsGrouped = subpluginOptions.groupBy { it.key }
+        konst result = mutableMapOf<String, String>()
+        konst pluginOptionsGrouped = subpluginOptions.groupBy { it.key }
         for ((optionKey, optionsGroup) in pluginOptionsGrouped) {
             optionsGroup.forEachIndexed { index, option ->
-                val indexSuffix = if (optionsGroup.size > 1) ".$index" else ""
+                konst indexSuffix = if (optionsGroup.size > 1) ".$index" else ""
                 when (option) {
                     is InternalSubpluginOption -> return@forEachIndexed
 
                     is CompositeSubpluginOption -> {
-                        val subpluginIdWithWrapperKey = "$subpluginId.$optionKey$indexSuffix"
+                        konst subpluginIdWithWrapperKey = "$subpluginId.$optionKey$indexSuffix"
                         result += computeForSubpluginId(subpluginIdWithWrapperKey, option.originalOptions)
                     }
 
@@ -105,7 +105,7 @@ open class CompilerPluginConfig {
                     }.run { /* exhaustive when */ }
 
                     else -> {
-                        result["$subpluginId." + option.key + indexSuffix] = option.value
+                        result["$subpluginId." + option.key + indexSuffix] = option.konstue
                     }
                 }
             }
@@ -118,7 +118,7 @@ open class CompilerPluginConfig {
  * Gradle plugin implementing support for a Kotlin compiler plugin.
  *
  * In order to be discovered, it should be applied to the project as an ordinary Gradle [Plugin] before the
- * Kotlin plugin inspects the project model in an afterEvaluate handler.
+ * Kotlin plugin inspects the project model in an afterEkonstuate handler.
  *
  * The default implementation of [apply]
  * doesn't do anything, but it can be overridden.
@@ -154,7 +154,7 @@ interface KotlinCompilerPluginSupportPlugin : Plugin<Project> {
     fun getPluginArtifactForNative(): SubpluginArtifact? = null
 }
 
-open class SubpluginArtifact(val groupId: String, val artifactId: String, val version: String? = null)
+open class SubpluginArtifact(konst groupId: String, konst artifactId: String, konst version: String? = null)
 
 class JetBrainsSubpluginArtifact(artifactId: String) : SubpluginArtifact(groupId = "org.jetbrains.kotlin", artifactId = artifactId)
 

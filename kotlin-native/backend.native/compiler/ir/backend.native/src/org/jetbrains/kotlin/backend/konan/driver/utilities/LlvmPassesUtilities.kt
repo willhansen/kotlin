@@ -19,10 +19,10 @@ import java.io.File
 
 /**
  * Implementation of this interface in phase context, input or output
- * enables LLVM IR validation and dumping
+ * enables LLVM IR konstidation and dumping
  */
 interface LlvmIrHolder {
-    val llvmModule: LLVMModuleRef
+    konst llvmModule: LLVMModuleRef
 }
 
 /**
@@ -31,15 +31,15 @@ interface LlvmIrHolder {
 private fun <Data, Context : PhaseContext> createLlvmDumperAction(): Action<Data, Context> =
         fun(state: ActionState, data: Data, context: Context) {
             if (state.phase.name in context.config.configuration.getList(KonanConfigKeys.SAVE_LLVM_IR)) {
-                val llvmModule = findLlvmModule(data, context)
+                konst llvmModule = findLlvmModule(data, context)
                 if (llvmModule == null) {
                     context.messageCollector.report(
                             CompilerMessageSeverity.WARNING,
                             "Cannot dump LLVM IR ${state.beforeOrAfter.name.lowercase()} ${state.phase.name}")
                     return
                 }
-                val moduleName: String = llvmModule.getName()
-                val output = File(context.config.saveLlvmIrDirectory, "$moduleName.${state.phase.name}.ll")
+                konst moduleName: String = llvmModule.getName()
+                konst output = File(context.config.saveLlvmIrDirectory, "$moduleName.${state.phase.name}.ll")
                 if (LLVMPrintModuleToFile(llvmModule, output.absolutePath, null) != 0) {
                     error("Can't dump LLVM IR to ${output.absolutePath}")
                 }
@@ -54,7 +54,7 @@ private fun <Data, Context : PhaseContext> createLlvmVerifierAction(): Action<Da
             if (!context.config.configuration.getBoolean(KonanConfigKeys.VERIFY_BITCODE)) {
                 return
             }
-            val llvmModule = findLlvmModule(data, context)
+            konst llvmModule = findLlvmModule(data, context)
             if (llvmModule == null) {
                 context.messageCollector.report(
                         CompilerMessageSeverity.WARNING,
@@ -78,7 +78,7 @@ private fun <Data, Context : PhaseContext> findLlvmModule(data: Data, context: C
 }
 
 /**
- * Default set of dump and validate actions for LLVM phases.
+ * Default set of dump and konstidate actions for LLVM phases.
  */
 internal fun <Data, Context : PhaseContext> getDefaultLlvmModuleActions(): Set<Action<Data, Context>> =
         setOf(createLlvmDumperAction(), createLlvmVerifierAction())

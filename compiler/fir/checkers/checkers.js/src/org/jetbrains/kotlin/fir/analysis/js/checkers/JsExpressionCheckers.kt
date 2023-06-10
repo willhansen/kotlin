@@ -10,23 +10,23 @@ import org.jetbrains.kotlin.fir.analysis.js.checkers.declaration.*
 import org.jetbrains.kotlin.fir.analysis.js.checkers.expression.*
 
 object JsExpressionCheckers : ExpressionCheckers() {
-    override val annotationCallCheckers: Set<FirAnnotationCallChecker>
+    override konst annotationCallCheckers: Set<FirAnnotationCallChecker>
         get() = setOf(
             FirJsQualifierChecker,
         )
 
-    override val basicExpressionCheckers: Set<FirBasicExpressionChecker>
+    override konst basicExpressionCheckers: Set<FirBasicExpressionChecker>
         get() = setOf(
             FirJsDefinedExternallyCallChecker,
             FirJsNativeRttiChecker,
         )
 
-    override val functionCallCheckers: Set<FirFunctionCallChecker>
+    override konst functionCallCheckers: Set<FirFunctionCallChecker>
         get() = setOf(
             FirJsDynamicCallChecker,
         )
 
-    override val callCheckers: Set<FirCallChecker>
+    override konst callCheckers: Set<FirCallChecker>
         get() = setOf(
             FirJsExternalArgumentCallChecker
         )

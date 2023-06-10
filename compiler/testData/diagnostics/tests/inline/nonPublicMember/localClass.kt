@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_EXPRESSION -UNUSED_PARAMETER -NOTHING_TO_INLINE
 
 public class Z {
-    private val privateProperty = 11;
+    private konst privateProperty = 11;
 
     public fun privateFun() {
 

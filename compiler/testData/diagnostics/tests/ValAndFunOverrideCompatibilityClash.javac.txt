@@ -2,7 +2,7 @@ package
 
 public open class Bar {
     public constructor Bar()
-    public final val v: kotlin.Int = 1
+    public final konst v: kotlin.Int = 1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -11,7 +11,7 @@ public open class Bar {
 
 public final class Barr : Bar {
     public constructor Barr()
-    public final override /*1*/ /*fake_override*/ val v: kotlin.Int
+    public final override /*1*/ /*fake_override*/ konst v: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -23,7 +23,7 @@ public final class Foo1 : java.util.ArrayList<kotlin.Int> {
     invisible_fake final override /*1*/ /*fake_override*/ var elementData: kotlin.Array<(out) kotlin.Any!>!
     protected/*protected and package*/ final override /*1*/ /*fake_override*/ var modCount: kotlin.Int
     invisible_fake final override /*1*/ /*fake_override*/ var size: kotlin.Int
-    public open override /*1*/ /*fake_override*/ val size: kotlin.Int
+    public open override /*1*/ /*fake_override*/ konst size: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ element: kotlin.Int): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun add(/*0*/ index: kotlin.Int, /*1*/ element: kotlin.Int): kotlin.Unit
     public open override /*1*/ /*fake_override*/ fun addAll(/*0*/ index: kotlin.Int, /*1*/ elements: kotlin.collections.Collection<kotlin.Int>): kotlin.Boolean

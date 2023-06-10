@@ -14,8 +14,8 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirLabel : FirPureAbstractElement(), FirElement {
-    abstract override val source: KtSourceElement?
-    abstract val name: String
+    abstract override konst source: KtSourceElement?
+    abstract konst name: String
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitLabel(this, data)
 

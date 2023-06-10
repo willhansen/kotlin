@@ -44,7 +44,7 @@ public enum class KtTypeMappingMode {
     RETURN_TYPE,
 
     /**
-     * Optimal mode to convert the type of value parameter if it's part of signature.
+     * Optimal mode to convert the type of konstue parameter if it's part of signature.
      */
     VALUE_PARAMETER,
 }

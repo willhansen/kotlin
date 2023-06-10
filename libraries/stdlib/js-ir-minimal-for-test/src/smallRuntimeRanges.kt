@@ -9,9 +9,9 @@ package kotlin.ranges
 
 // extracted from _URanges.kt to avoid bringing a lot of transitive dependencies
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  *
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun UByte.until(to: UByte): UIntRange {
     if (to <= UByte.MIN_VALUE) return UIntRange.EMPTY
@@ -19,9 +19,9 @@ public infix fun UByte.until(to: UByte): UIntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  *
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun UInt.until(to: UInt): UIntRange {
     if (to <= UInt.MIN_VALUE) return UIntRange.EMPTY
@@ -29,9 +29,9 @@ public infix fun UInt.until(to: UInt): UIntRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  *
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun ULong.until(to: ULong): ULongRange {
     if (to <= ULong.MIN_VALUE) return ULongRange.EMPTY
@@ -39,9 +39,9 @@ public infix fun ULong.until(to: ULong): ULongRange {
 }
 
 /**
- * Returns a range from this value up to but excluding the specified [to] value.
+ * Returns a range from this konstue up to but excluding the specified [to] konstue.
  *
- * If the [to] value is less than or equal to `this` value, then the returned range is empty.
+ * If the [to] konstue is less than or equal to `this` konstue, then the returned range is empty.
  */
 public infix fun UShort.until(to: UShort): UIntRange {
     if (to <= UShort.MIN_VALUE) return UIntRange.EMPTY

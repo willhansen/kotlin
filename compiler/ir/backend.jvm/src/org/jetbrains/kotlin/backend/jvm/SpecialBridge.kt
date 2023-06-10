@@ -18,33 +18,33 @@ import org.jetbrains.org.objectweb.asm.commons.Method
 //
 // Since special bridges may be exposed to Java as non-synthetic methods, we need correct generic signatures.
 // There are a total of seven generic special bridge methods (Map.getOrDefault, Map.get, MutableMap.remove with
-// only one argument, Map.keys, Map.values, Map.entries, and MutableList.removeAt). Of these seven there is only
+// only one argument, Map.keys, Map.konstues, Map.entries, and MutableList.removeAt). Of these seven there is only
 // one which the JVM backend currently handles correctly (MutableList.removeAt). For the rest, it's impossible
 // to reproduce the behavior of the JVM backend in this lowering.
 //
 // Finally, we sometimes need to use INVOKESPECIAL to invoke an existing special bridge implementation in a
 // superclass, which is what `superQualifierSymbol` is for.
 data class SpecialBridge(
-    val overridden: IrSimpleFunction,
-    val signature: Method,
+    konst overridden: IrSimpleFunction,
+    konst signature: Method,
     // We need to produce a generic signature if the underlying Java method contains type parameters.
     // E.g., the `java.util.Map<K, V>.keySet` method has a return type of `Set<K>`, and hence overrides
     // need to generate a generic signature.
-    val needsGenericSignature: Boolean = false,
+    konst needsGenericSignature: Boolean = false,
     // The result of substituting type parameters in the overridden Java method. This is different from
     // substituting into the overridden Kotlin method. For example, Map.getOrDefault has two arguments
     // with generic types in Kotlin, but only the second parameter is generic in Java.
     // May be null if the underlying Java method does not contain generic types.
-    val substitutedParameterTypes: List<IrType>? = null,
-    val substitutedReturnType: IrType? = null,
-    val methodInfo: SpecialMethodWithDefaultInfo? = null,
-    val superQualifierSymbol: IrClassSymbol? = null,
-    val isFinal: Boolean = true,
-    val isSynthetic: Boolean = false,
-    val isOverriding: Boolean = true,
+    konst substitutedParameterTypes: List<IrType>? = null,
+    konst substitutedReturnType: IrType? = null,
+    konst methodInfo: SpecialMethodWithDefaultInfo? = null,
+    konst superQualifierSymbol: IrClassSymbol? = null,
+    konst isFinal: Boolean = true,
+    konst isSynthetic: Boolean = false,
+    konst isOverriding: Boolean = true,
     // 'true' if we also should produce a synthetic bridge with unsubstituted signature.
     // NB this is passed down the hierarchy to the point where 'unsubstitutedSpecialBridge' is created,
     // see BridgeLoweringCache::computeSpecialBridge
-    val needsUnsubstitutedBridge: Boolean = false,
-    val unsubstitutedSpecialBridge: SpecialBridge? = null
+    konst needsUnsubstitutedBridge: Boolean = false,
+    konst unsubstitutedSpecialBridge: SpecialBridge? = null
 )

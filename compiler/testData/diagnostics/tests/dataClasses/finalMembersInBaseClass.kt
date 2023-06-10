@@ -6,7 +6,7 @@ abstract class Base {
     open override fun toString() = "OK"
 }
 
-data class Data1(val field: String) : Base()
+data class Data1(konst field: String) : Base()
 
 interface AbstractAnyMembers {
     abstract override fun equals(other: Any?): Boolean
@@ -14,4 +14,4 @@ interface AbstractAnyMembers {
     abstract override fun toString(): String
 }
 
-data class Data2(val field: String): Base(), AbstractAnyMembers
+data class Data2(konst field: String): Base(), AbstractAnyMembers

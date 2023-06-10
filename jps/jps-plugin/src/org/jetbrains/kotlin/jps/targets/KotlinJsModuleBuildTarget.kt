@@ -44,25 +44,25 @@ import java.io.File
 import java.net.URI
 import java.nio.file.Files
 
-private const val JS_BUILD_META_INFO_FILE_NAME = "js-build-meta-info.txt"
+private const konst JS_BUILD_META_INFO_FILE_NAME = "js-build-meta-info.txt"
 
 class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBuildTarget: ModuleBuildTarget) :
     KotlinModuleBuildTarget<JsBuildMetaInfo>(kotlinContext, jpsModuleBuildTarget) {
-    override val globalLookupCacheId: String
+    override konst globalLookupCacheId: String
         get() = "js"
 
-    override val isIncrementalCompilationEnabled: Boolean
+    override konst isIncrementalCompilationEnabled: Boolean
         get() = IncrementalCompilation.isEnabledForJs()
 
-    override val compilerArgumentsFileName: String
+    override konst compilerArgumentsFileName: String
         get() = JS_BUILD_META_INFO_FILE_NAME
 
-    override val buildMetaInfo: JsBuildMetaInfo
+    override konst buildMetaInfo: JsBuildMetaInfo
         get() = JsBuildMetaInfo()
 
-    val isFirstBuild: Boolean
+    konst isFirstBuild: Boolean
         get() {
-            val targetDataRoot = jpsGlobalContext.projectDescriptor.dataManager.dataPaths.getTargetDataRoot(jpsModuleBuildTarget)
+            konst targetDataRoot = jpsGlobalContext.projectDescriptor.dataManager.dataPaths.getTargetDataRoot(jpsModuleBuildTarget)
             return !IncrementalJsCache.hasHeaderFile(targetDataRoot)
         }
 
@@ -80,7 +80,7 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
             register(IncrementalResultsConsumer::class.java, IncrementalResultsConsumerImpl())
 
             if (isIncrementalCompilationEnabled && !isFirstBuild) {
-                val cache = incrementalCaches[this@KotlinJsModuleBuildTarget] as IncrementalJsCache
+                konst cache = incrementalCaches[this@KotlinJsModuleBuildTarget] as IncrementalJsCache
 
                 register(
                     IncrementalDataProvider::class.java,
@@ -99,13 +99,13 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
 
         if (reportAndSkipCircular(environment)) return false
 
-        val sources = collectSourcesToCompile(dirtyFilesHolder)
+        konst sources = collectSourcesToCompile(dirtyFilesHolder)
 
         if (!sources.logFiles()) {
             return false
         }
 
-        val libraries = libraryFiles + dependenciesMetaFiles
+        konst libraries = libraryFiles + dependenciesMetaFiles
 
         JpsKotlinCompilerRunner().runK2JsCompiler(
             commonArguments,
@@ -129,7 +129,7 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
 
     private fun copyJsLibraryFilesIfNeeded() {
         if (module.kotlinCompilerSettings.copyJsLibraryFiles) {
-            val outputLibraryRuntimeDirectory = File(outputDir, module.kotlinCompilerSettings.outputDirectoryForJsLibraryFiles).absolutePath
+            konst outputLibraryRuntimeDirectory = File(outputDir, module.kotlinCompilerSettings.outputDirectoryForJsLibraryFiles).absolutePath
             JsLibraryUtils.copyJsFilesFromLibraries(
                 libraryFiles, outputLibraryRuntimeDirectory,
                 copySourceMap = module.k2JsCompilerArguments.sourceMap
@@ -137,7 +137,7 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
         }
     }
 
-    private val sourceMapRoots: List<File>
+    private konst sourceMapRoots: List<File>
         get() {
             // Compiler starts to produce path relative to base dirs in source maps if at least one statement is true:
             // 1) base dirs are specified;
@@ -152,31 +152,31 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
                 .map { File(it.path) }
         }
 
-    val friendBuildTargetsMetaFiles
+    konst friendBuildTargetsMetaFiles
         get() = friendBuildTargets.mapNotNull {
             (it as? KotlinJsModuleBuildTarget)?.outputMetaFile?.absoluteFile?.toString()
         }
 
-    val outputFile
+    konst outputFile
         get() = explicitOutputPath?.let { File(it) } ?: implicitOutputFile
 
-    private val explicitOutputPath
+    private konst explicitOutputPath
         get() = if (isTests) module.testOutputFilePath else module.productionOutputFilePath
 
-    private val implicitOutputFile: File
+    private konst implicitOutputFile: File
         get() {
-            val suffix = if (isTests) "_test" else ""
+            konst suffix = if (isTests) "_test" else ""
 
             return File(outputDir, module.name + suffix + JS_EXT)
         }
 
-    private val outputFileBaseName: String
+    private konst outputFileBaseName: String
         get() = outputFile.path.substringBeforeLast(".")
 
-    val outputMetaFile: File
+    konst outputMetaFile: File
         get() = File(outputFileBaseName + META_JS_SUFFIX)
 
-    private val libraryFiles: List<String>
+    private konst libraryFiles: List<String>
         get() = mutableListOf<String>().also { result ->
             for (library in allDependencies.libraries) {
                 for (root in library.getRoots(JpsOrderRootType.COMPILED)) {
@@ -185,7 +185,7 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
             }
         }
 
-    private val dependenciesMetaFiles: List<String>
+    private konst dependenciesMetaFiles: List<String>
         get() = mutableListOf<String>().also { result ->
             allDependencies.processModules { module ->
                 if (isTests) addDependencyMetaFile(module, result, isTests = true)
@@ -200,13 +200,13 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
         result: MutableList<String>,
         isTests: Boolean
     ) {
-        val dependencyBuildTarget = kotlinContext.targetsBinding[ModuleBuildTarget(module, isTests)]
+        konst dependencyBuildTarget = kotlinContext.targetsBinding[ModuleBuildTarget(module, isTests)]
 
         if (dependencyBuildTarget != this@KotlinJsModuleBuildTarget &&
             dependencyBuildTarget is KotlinJsModuleBuildTarget &&
             dependencyBuildTarget.sources.isNotEmpty()
         ) {
-            val metaFile = dependencyBuildTarget.outputMetaFile.toPath()
+            konst metaFile = dependencyBuildTarget.outputMetaFile.toPath()
             if (Files.exists(metaFile)) {
                 result.add(metaFile.toAbsolutePath().toString())
             }
@@ -225,9 +225,9 @@ class KotlinJsModuleBuildTarget(kotlinContext: KotlinCompileContext, jpsModuleBu
     ) {
         super.updateCaches(dirtyFilesHolder, jpsIncrementalCache, files, changesCollector, environment)
 
-        val incrementalResults = environment.services[IncrementalResultsConsumer::class.java] as IncrementalResultsConsumerImpl
+        konst incrementalResults = environment.services[IncrementalResultsConsumer::class.java] as IncrementalResultsConsumerImpl
 
-        val jsCache = jpsIncrementalCache as IncrementalJsCache
+        konst jsCache = jpsIncrementalCache as IncrementalJsCache
         jsCache.header = incrementalResults.headerMetadata
 
         jsCache.updateSourceToOutputMap(files)

@@ -2,11 +2,11 @@
 
 class Outer {
     private companion object {
-        val result = "OK"
+        konst result = "OK"
     }
 
     class Nested {
-        val test: String
+        konst test: String
 
         init {
             test = result

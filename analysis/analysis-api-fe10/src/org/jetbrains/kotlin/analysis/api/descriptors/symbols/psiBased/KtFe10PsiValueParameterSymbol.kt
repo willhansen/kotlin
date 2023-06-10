@@ -31,43 +31,43 @@ import org.jetbrains.kotlin.psi.KtParameter
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiValueParameterSymbol(
-    override val psi: KtParameter,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtParameter,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtValueParameterSymbol(), KtFe10PsiSymbol<KtParameter, VariableDescriptor> {
-    override val descriptor: VariableDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: VariableDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.VALUE_PARAMETER, psi]
     }
 
-    override val generatedPrimaryConstructorProperty: KtKotlinPropertySymbol? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
-        val propertyDescriptor = bindingContext[BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, psi] ?: return@cached null
+    override konst generatedPrimaryConstructorProperty: KtKotlinPropertySymbol? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+        konst propertyDescriptor = bindingContext[BindingContext.PRIMARY_CONSTRUCTOR_PARAMETER, psi] ?: return@cached null
 
         KtFe10DescKotlinPropertySymbol(propertyDescriptor as PropertyDescriptorImpl, analysisContext)
     }
 
-    override val hasDefaultValue: Boolean
+    override konst hasDefaultValue: Boolean
         get() = withValidityAssertion { psi.hasDefaultValue() }
 
-    override val isVararg: Boolean
+    override konst isVararg: Boolean
         get() = withValidityAssertion { psi.isVarArg }
 
-    override val isCrossinline: Boolean
+    override konst isCrossinline: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.CROSSINLINE_KEYWORD) }
 
-    override val isNoinline: Boolean
+    override konst isNoinline: Boolean
         get() = withValidityAssertion { psi.hasModifier(KtTokens.NOINLINE_KEYWORD) }
 
-    override val isImplicitLambdaParameter: Boolean
+    override konst isImplicitLambdaParameter: Boolean
         get() = withValidityAssertion { false }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion {
-            val type = (descriptor as? ValueParameterDescriptor)?.varargElementType ?: descriptor?.type
+            konst type = (descriptor as? ValueParameterDescriptor)?.varargElementType ?: descriptor?.type
             return type?.toKtType(analysisContext) ?: createErrorType()
         }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { psi.nameAsSafeName }
 
     context(KtAnalysisSession)

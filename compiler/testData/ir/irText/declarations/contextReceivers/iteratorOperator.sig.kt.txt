@@ -71,7 +71,7 @@ data class CounterConfig {
   // CHECK:
   //   Mangled name: CounterConfig{}max
   //   Public signature: /CounterConfig.max|-4328207510034083913[0]
-  val max: Int
+  konst max: Int
     // CHECK JVM_IR:
     //   Mangled name: CounterConfig#<get-max>(){}kotlin.Int
     //   Public signature: /CounterConfig.max.<get-max>|3083068406880796820[0]
@@ -133,7 +133,7 @@ class CounterIterator : Iterator<Int> {
   // CHECK:
   //   Mangled name: CounterIterator{}counter
   //   Public signature: /CounterIterator.counter|3849500605769271673[0]
-  private val counter: Counter
+  private konst counter: Counter
     // CHECK JVM_IR:
     //   Mangled name: CounterIterator#<get-counter>(){}Counter
     //   Public signature: /CounterIterator.counter.<get-counter>|-1972897806384113317[0]
@@ -152,7 +152,7 @@ class CounterIterator : Iterator<Int> {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         CounterIterator.contextReceiverField0
   //   Mangled name computed from Descriptor: CounterIterator{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: CounterConfig
+  private /* final field */ konst contextReceiverField0: CounterConfig
 
   // CHECK JVM_IR:
   //   Mangled name: CounterIterator#hasNext(){}kotlin.Boolean

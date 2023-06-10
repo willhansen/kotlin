@@ -1,12 +1,12 @@
 package p
 
 class A {
-    val aProp = 10
+    konst aProp = 10
     fun call() {}
 }
 
 class B {
-    val bProp = 1
+    konst bProp = 1
 }
 
 fun foo(a: Int, b: Int): Int {

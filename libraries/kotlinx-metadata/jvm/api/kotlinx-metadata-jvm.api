@@ -571,8 +571,8 @@ public final class kotlinx/metadata/KmEffectInvocationKind : java/lang/Enum {
 	public static final field AT_MOST_ONCE Lkotlinx/metadata/KmEffectInvocationKind;
 	public static final field EXACTLY_ONCE Lkotlinx/metadata/KmEffectInvocationKind;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlinx/metadata/KmEffectInvocationKind;
-	public static fun values ()[Lkotlinx/metadata/KmEffectInvocationKind;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlinx/metadata/KmEffectInvocationKind;
+	public static fun konstues ()[Lkotlinx/metadata/KmEffectInvocationKind;
 }
 
 public final class kotlinx/metadata/KmEffectType : java/lang/Enum {
@@ -580,8 +580,8 @@ public final class kotlinx/metadata/KmEffectType : java/lang/Enum {
 	public static final field RETURNS_CONSTANT Lkotlinx/metadata/KmEffectType;
 	public static final field RETURNS_NOT_NULL Lkotlinx/metadata/KmEffectType;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlinx/metadata/KmEffectType;
-	public static fun values ()[Lkotlinx/metadata/KmEffectType;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlinx/metadata/KmEffectType;
+	public static fun konstues ()[Lkotlinx/metadata/KmEffectType;
 }
 
 public abstract class kotlinx/metadata/KmEffectVisitor {
@@ -924,8 +924,8 @@ public final class kotlinx/metadata/KmVariance : java/lang/Enum {
 	public static final field INVARIANT Lkotlinx/metadata/KmVariance;
 	public static final field OUT Lkotlinx/metadata/KmVariance;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVariance;
-	public static fun values ()[Lkotlinx/metadata/KmVariance;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVariance;
+	public static fun konstues ()[Lkotlinx/metadata/KmVariance;
 }
 
 public final class kotlinx/metadata/KmVersion {
@@ -968,8 +968,8 @@ public final class kotlinx/metadata/KmVersionRequirementLevel : java/lang/Enum {
 	public static final field HIDDEN Lkotlinx/metadata/KmVersionRequirementLevel;
 	public static final field WARNING Lkotlinx/metadata/KmVersionRequirementLevel;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVersionRequirementLevel;
-	public static fun values ()[Lkotlinx/metadata/KmVersionRequirementLevel;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVersionRequirementLevel;
+	public static fun konstues ()[Lkotlinx/metadata/KmVersionRequirementLevel;
 }
 
 public final class kotlinx/metadata/KmVersionRequirementVersionKind : java/lang/Enum {
@@ -977,8 +977,8 @@ public final class kotlinx/metadata/KmVersionRequirementVersionKind : java/lang/
 	public static final field COMPILER_VERSION Lkotlinx/metadata/KmVersionRequirementVersionKind;
 	public static final field LANGUAGE_VERSION Lkotlinx/metadata/KmVersionRequirementVersionKind;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVersionRequirementVersionKind;
-	public static fun values ()[Lkotlinx/metadata/KmVersionRequirementVersionKind;
+	public static fun konstueOf (Ljava/lang/String;)Lkotlinx/metadata/KmVersionRequirementVersionKind;
+	public static fun konstues ()[Lkotlinx/metadata/KmVersionRequirementVersionKind;
 }
 
 public abstract class kotlinx/metadata/KmVersionRequirementVisitor {

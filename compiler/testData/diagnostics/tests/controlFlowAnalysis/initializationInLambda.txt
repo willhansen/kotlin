@@ -1,6 +1,6 @@
 package
 
-public val z: kotlin.Int
+public konst z: kotlin.Int
 public fun bar(): kotlin.Unit
 public fun bar2(): kotlin.Unit
 public fun exec(/*0*/ f: () -> kotlin.Unit): kotlin.Unit
@@ -10,8 +10,8 @@ public fun ignoreIt(/*0*/ f: () -> kotlin.Unit): kotlin.Unit
 public final class My {
     public constructor My()
     public constructor My(/*0*/ cond: kotlin.Boolean)
-    public final val cond: kotlin.Boolean
-    public final val y: kotlin.Int
+    public final konst cond: kotlin.Boolean
+    public final konst y: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -19,7 +19,7 @@ public final class My {
 
 public final class Your {
     public constructor Your()
-    public final val y: kotlin.Int
+    public final konst y: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

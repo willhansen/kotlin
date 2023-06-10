@@ -18,7 +18,7 @@ open annotation class ImplicitIntegerCoercion : Annotation {
 //   Mangled name: {}NON_CONST
 //   Public signature: /NON_CONST|-4803566926491846345[0]
 @ImplicitIntegerCoercion
-val NON_CONST: Int
+konst NON_CONST: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-NON_CONST>(){}kotlin.Int
   //   Public signature: /NON_CONST.<get-NON_CONST>|991601838629936197[0]
@@ -66,7 +66,7 @@ fun test(): Unit
 //   Mangled name: {}BIGGER_THAN_UBYTE
 //   Public signature: /BIGGER_THAN_UBYTE|4216646662695832822[0]
 @ImplicitIntegerCoercion
-const val BIGGER_THAN_UBYTE: Int
+const konst BIGGER_THAN_UBYTE: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-BIGGER_THAN_UBYTE>(){}kotlin.Int
   //   Public signature: /BIGGER_THAN_UBYTE.<get-BIGGER_THAN_UBYTE>|-3586420332237318918[0]
@@ -79,7 +79,7 @@ const val BIGGER_THAN_UBYTE: Int
 //   Mangled name: {}EXPLICIT_INT
 //   Public signature: /EXPLICIT_INT|5543930282148953941[0]
 @ImplicitIntegerCoercion
-const val EXPLICIT_INT: Int
+const konst EXPLICIT_INT: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-EXPLICIT_INT>(){}kotlin.Int
   //   Public signature: /EXPLICIT_INT.<get-EXPLICIT_INT>|-1305181552966507212[0]
@@ -92,7 +92,7 @@ const val EXPLICIT_INT: Int
 //   Mangled name: {}IMPLICIT_INT
 //   Public signature: /IMPLICIT_INT|8774414386062212374[0]
 @ImplicitIntegerCoercion
-const val IMPLICIT_INT: Int
+const konst IMPLICIT_INT: Int
   // CHECK JVM_IR:
   //   Mangled name: #<get-IMPLICIT_INT>(){}kotlin.Int
   //   Public signature: /IMPLICIT_INT.<get-IMPLICIT_INT>|-1175271202914280523[0]
@@ -105,7 +105,7 @@ const val IMPLICIT_INT: Int
 //   Mangled name: {}LONG_CONST
 //   Public signature: /LONG_CONST|-5731655167745376835[0]
 @ImplicitIntegerCoercion
-const val LONG_CONST: Long
+const konst LONG_CONST: Long
   // CHECK JVM_IR:
   //   Mangled name: #<get-LONG_CONST>(){}kotlin.Long
   //   Public signature: /LONG_CONST.<get-LONG_CONST>|-7734005070309874987[0]
@@ -118,7 +118,7 @@ const val LONG_CONST: Long
 //   Mangled name: {}UINT_CONST
 //   Public signature: /UINT_CONST|6421919319877907708[0]
 @ImplicitIntegerCoercion
-const val UINT_CONST: UInt
+const konst UINT_CONST: UInt
   // CHECK JVM_IR:
   //   Mangled name: #<get-UINT_CONST>(){}kotlin.UInt
   //   Public signature: /UINT_CONST.<get-UINT_CONST>|-8736947558233336085[0]

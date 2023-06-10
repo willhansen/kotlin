@@ -55,21 +55,21 @@ internal fun PartialLinkageCase.renderLinkageError(): String = buildString {
             )
         }
 
-        is InvalidSamConversion -> expression(expression) {
-            invalidSamConversion(expression, abstractFunctionSymbols, abstractPropertySymbol)
+        is InkonstidSamConversion -> expression(expression) {
+            inkonstidSamConversion(expression, abstractFunctionSymbols, abstractPropertySymbol)
         }
 
         is SuspendableFunctionCallWithoutCoroutineContext -> expression(expression) {
             suspendableCallWithoutCoroutine()
         }
 
-        is IllegalNonLocalReturn -> illegalNonLocalReturn(expression, validReturnTargets)
+        is IllegalNonLocalReturn -> illegalNonLocalReturn(expression, konstidReturnTargets)
 
         is ExpressionHasInaccessibleDeclaration -> expression(expression) {
             inaccessibleDeclaration(referencedDeclarationSymbol, declaringModule, useSiteModule)
         }
 
-        is InvalidConstructorDelegation -> invalidConstructorDelegation(
+        is InkonstidConstructorDelegation -> inkonstidConstructorDelegation(
             constructorSymbol,
             superClassSymbol,
             unexpectedSuperClassConstructorSymbol
@@ -84,11 +84,11 @@ internal fun PartialLinkageCase.renderLinkageError(): String = buildString {
     }
 }
 
-private enum class DeclarationKind(val displayName: String) {
+private enum class DeclarationKind(konst displayName: String) {
     CLASS("class"),
     INNER_CLASS("inner class"),
     DATA_CLASS("data class"),
-    VALUE_CLASS("value class"),
+    VALUE_CLASS("konstue class"),
     INTERFACE("interface"),
     FUN_INTERFACE("fun interface"),
     ENUM_CLASS("enum class"),
@@ -99,7 +99,7 @@ private enum class DeclarationKind(val displayName: String) {
     ANONYMOUS_OBJECT("anonymous object"),
     COMPANION_OBJECT("companion object"),
     VARIABLE("variable"),
-    VALUE_PARAMETER("value parameter"),
+    VALUE_PARAMETER("konstue parameter"),
     FIELD("field"),
     FIELD_OF_PROPERTY("backing field of property"),
     PROPERTY("property"),
@@ -111,7 +111,7 @@ private enum class DeclarationKind(val displayName: String) {
     OTHER_DECLARATION("declaration");
 }
 
-private val IrSymbol.declarationKind: DeclarationKind
+private konst IrSymbol.declarationKind: DeclarationKind
     get() = when (this) {
         is IrClassSymbol -> when (owner.kind) {
             ClassKind.CLASS -> when {
@@ -142,23 +142,23 @@ private val IrSymbol.declarationKind: DeclarationKind
         else -> OTHER_DECLARATION
     }
 
-private enum class ExpressionKind(val prefix: String?, val postfix: String?) {
-    REFERENCE("Reference to", "can not be evaluated"),
+private enum class ExpressionKind(konst prefix: String?, konst postfix: String?) {
+    REFERENCE("Reference to", "can not be ekonstuated"),
     CALLING(null, "can not be called"),
     CALLING_INSTANCE_INITIALIZER("Instance initializer of", "can not be called"),
-    READING("Can not read value from", null),
-    WRITING("Can not write value to", null),
+    READING("Can not read konstue from", null),
+    WRITING("Can not write konstue to", null),
     GETTING_INSTANCE("Can not get instance of", null),
-    TYPE_OPERATOR("Type operator expression", "can not be evaluated"),
-    SAM_CONVERSION("Single abstract method (SAM) conversion expression", "can not be evaluated"),
-    ANONYMOUS_OBJECT_LITERAL("Anonymous object literal", "can not be evaluated"),
-    OTHER_EXPRESSION("Expression", "can not be evaluated")
+    TYPE_OPERATOR("Type operator expression", "can not be ekonstuated"),
+    SAM_CONVERSION("Single abstract method (SAM) conversion expression", "can not be ekonstuated"),
+    ANONYMOUS_OBJECT_LITERAL("Anonymous object literal", "can not be ekonstuated"),
+    OTHER_EXPRESSION("Expression", "can not be ekonstuated")
 }
 
-private data class Expression(val kind: ExpressionKind, val referencedDeclarationKind: DeclarationKind?)
+private data class Expression(konst kind: ExpressionKind, konst referencedDeclarationKind: DeclarationKind?)
 
 // More can be added for verbosity in the future.
-private val IrExpression.expression: Expression
+private konst IrExpression.expression: Expression
     get() = when (this) {
         is IrDeclarationReference -> when (this) {
             is IrFunctionReference -> Expression(REFERENCE, symbol.declarationKind)
@@ -198,7 +198,7 @@ private fun IrSymbol.guessName(): String? {
         // First, try to guess name by the signature. This is the most reliable way, especially when the declaration itself is missing
         // and the symbol owner is just an IR stub, which is always a direct child of the auxiliary package fragment.
         ?.let { signature ->
-            val nameSegmentsToPickUp = when {
+            konst nameSegmentsToPickUp = when {
                 signature is AccessorSignature -> 2 // property_name.accessor_name
                 this is IrConstructorSymbol -> if (owner.parent.isCompanionWithDefaultName()) 3 else 2 // class_name.<init> or class_name.Companion.<init>
                 this is IrEnumEntrySymbol -> 2 // enum_class_name.entry_name
@@ -213,7 +213,7 @@ private fun IrSymbol.guessName(): String? {
                 when (owner) {
                     is IrSimpleFunction -> listOfNotNull(owner.correspondingPropertySymbol?.owner?.name, owner.name)
                     is IrConstructor -> {
-                        val parent = owner.parentClassOrNull
+                        konst parent = owner.parentClassOrNull
                         when {
                             parent == null || parent.isAnonymousObject -> listOf(owner.name)
                             parent.isCompanionWithDefaultName() -> listOfNotNull(parent.parentClassOrNull?.name, parent.name, owner.name)
@@ -229,7 +229,7 @@ private fun IrSymbol.guessName(): String? {
 private fun Appendable.signature(symbol: IrSymbol): Appendable {
     var file: String? = null
 
-    val symbolRepresentation = symbol.signature?.render()
+    konst symbolRepresentation = symbol.signature?.render()
         ?: symbol.privateSignature?.let {
             // Try to extract symbol name from private signature if no public signature is available.
             // This could happen during visiting local IR entities declared inside function body.
@@ -237,7 +237,7 @@ private fun Appendable.signature(symbol: IrSymbol): Appendable {
                 is FileSignature -> null // Avoid printing FileSignature.
                 is CompositeSignature -> {
                     // Avoid printing full paths from FileSignature.
-                    val container = it.container
+                    konst container = it.container
                     if (container is FileSignature) {
                         file = PathUtil.getFileName(container.fileName).takeIf(String::isNotEmpty) ?: UNKNOWN_FILE
                         it.inner.render()
@@ -257,8 +257,8 @@ private fun Appendable.signature(symbol: IrSymbol): Appendable {
     return this
 }
 
-private const val UNKNOWN_SYMBOL = "<unknown symbol>"
-private const val UNKNOWN_FILE = "<unknown file>"
+private const konst UNKNOWN_SYMBOL = "<unknown symbol>"
+private const konst UNKNOWN_FILE = "<unknown file>"
 
 private fun Appendable.declarationName(symbol: IrSymbol): Appendable =
     append('\'').append(symbol.guessName() ?: UNKNOWN_NAME.asString()).append('\'')
@@ -267,7 +267,7 @@ private fun Appendable.declarationKind(symbol: IrSymbol, capitalized: Boolean): 
     appendCapitalized(symbol.declarationKind.displayName, capitalized)
 
 private fun Appendable.declarationKindName(symbol: IrSymbol, capitalized: Boolean): Appendable {
-    val declarationKind = symbol.declarationKind
+    konst declarationKind = symbol.declarationKind
     appendCapitalized(declarationKind.displayName, capitalized)
     when (declarationKind) {
         ANONYMOUS_OBJECT -> return this
@@ -304,17 +304,17 @@ private sealed interface CauseRendering {
     // or
     // <object> uses <root subject> via <direct subject>. <root subject> <reason>
     sealed interface UsedFromSomewhere : CauseRendering {
-        val objectText: String
-        val objectSymbol: IrSymbol?
+        konst objectText: String
+        konst objectSymbol: IrSymbol?
     }
 
     // <object> := <declaration>
-    class UsedFromDeclaration(override val objectText: String, override val objectSymbol: IrSymbol) : UsedFromSomewhere
+    class UsedFromDeclaration(override konst objectText: String, override konst objectSymbol: IrSymbol) : UsedFromSomewhere
 
     // <object> := <expression>
     object UsedFromExpression : UsedFromSomewhere {
-        override val objectText = "Expression"
-        override val objectSymbol = null
+        override konst objectText = "Expression"
+        override konst objectSymbol = null
     }
 }
 
@@ -323,7 +323,7 @@ private fun Appendable.unusableClassifier(
     rendering: CauseRendering,
     printIntermediateCause: Boolean
 ): Appendable {
-    val (rootCause: Unusable.CanBeRootCause, intermediateCause: Unusable.DueToOtherClassifier?) = when (cause) {
+    konst (rootCause: Unusable.CanBeRootCause, intermediateCause: Unusable.DueToOtherClassifier?) = when (cause) {
         is Unusable.CanBeRootCause -> cause to null
         is Unusable.DueToOtherClassifier -> cause.rootCause to cause
     }
@@ -346,13 +346,13 @@ private fun Appendable.unusableClassifier(
             }
         }
 
-        // Case: Invalid inheritance.
-        is Unusable.InvalidInheritance -> {
+        // Case: Inkonstid inheritance.
+        is Unusable.InkonstidInheritance -> {
             when (rootCause.superClassSymbols.size) {
-                // Subcase: Invalid super class.
+                // Subcase: Inkonstid super class.
                 1 -> {
                     fun Appendable.inheritsFromSuperClass(): Appendable {
-                        val superClassSymbol = rootCause.superClassSymbols.single()
+                        konst superClassSymbol = rootCause.superClassSymbols.single()
                         if (superClassSymbol.owner.modality == Modality.FINAL)
                             append(" inherits from final ")
                         else
@@ -377,7 +377,7 @@ private fun Appendable.unusableClassifier(
                 // Subcase: Inheritance from multiple classes (i.e. non-interfaces).
                 else -> {
                     fun Appendable.inheritsFromMultipleClasses(): Appendable {
-                        val renderedSuperClasses = ArrayList<String>(rootCause.superClassSymbols.size)
+                        konst renderedSuperClasses = ArrayList<String>(rootCause.superClassSymbols.size)
                         rootCause.superClassSymbols.mapTo(renderedSuperClasses) { buildString { declarationName(it) } }
                         renderedSuperClasses.sort()
 
@@ -433,17 +433,17 @@ private fun Appendable.declarationWithUnusableClassifier(
     cause: Unusable,
     forExpression: Boolean
 ): Appendable {
-    val functionDeclaration = declarationSymbol.owner as? IrFunction
-    val functionIsUnusableDueToContainingClass = (functionDeclaration?.parent as? IrClass)?.symbol == cause.symbol
+    konst functionDeclaration = declarationSymbol.owner as? IrFunction
+    konst functionIsUnusableDueToContainingClass = (functionDeclaration?.parent as? IrClass)?.symbol == cause.symbol
 
     // The user (object) of the unusable classifier. In case the current declaration is a function with its own parent class being
     // the dispatch receiver, the class is the "object".
-    val objectSymbol = if (functionIsUnusableDueToContainingClass) cause.symbol else declarationSymbol
+    konst objectSymbol = if (functionIsUnusableDueToContainingClass) cause.symbol else declarationSymbol
 
-    val objectDescription = buildString {
+    konst objectDescription = buildString {
         if (functionIsUnusableDueToContainingClass) {
             // Callable member is unusable due to unusable dispatch receiver.
-            val functionIsConstructor = functionDeclaration is IrConstructor
+            konst functionIsConstructor = functionDeclaration is IrConstructor
 
             if (forExpression) {
                 if (functionIsConstructor)
@@ -475,8 +475,8 @@ private fun StringBuilder.expressionWithUnusableClassifier(
     cause: Unusable
 ): Appendable = expression(expression) { expressionKind ->
     // Printing the intermediate cause may pollute certain types of error messages. Need to avoid it when possible.
-    val printIntermediateCause = when {
-        expression is IrGetSingletonValue -> when (val expressionSymbol = expression.symbol) {
+    konst printIntermediateCause = when {
+        expression is IrGetSingletonValue -> when (konst expressionSymbol = expression.symbol) {
             is IrEnumEntrySymbol -> (expressionSymbol.owner.parent as? IrClass)?.symbol != cause.symbol
             else -> expressionSymbol != cause.symbol
         }
@@ -490,10 +490,10 @@ private fun StringBuilder.expressionWithUnusableClassifier(
 }
 
 private fun StringBuilder.expression(expression: IrExpression, continuation: (ExpressionKind) -> Appendable): Appendable {
-    val (expressionKind, referencedDeclarationKind) = expression.expression
+    konst (expressionKind, referencedDeclarationKind) = expression.expression
 
     // Prefix may be null. But when it's not null, it is always capitalized.
-    val hasPrefix = expressionKind.prefix != null
+    konst hasPrefix = expressionKind.prefix != null
     if (hasPrefix) append(expressionKind.prefix)
 
     if (referencedDeclarationKind != null) {
@@ -534,12 +534,12 @@ private fun Appendable.memberAccessExpressionArgumentsMismatch(
 
     else ->
         append("The call site provides ").append(if (expressionValueArgumentCount > functionValueParameterCount) "more" else "less")
-            .append(" value arguments (").append(expressionValueArgumentCount.toString()).append(") than the ")
+            .append(" konstue arguments (").append(expressionValueArgumentCount.toString()).append(") than the ")
             .declarationKind(functionSymbol, capitalized = false).append(" requires (")
             .append(functionValueParameterCount.toString()).append(")")
 }
 
-private fun Appendable.invalidSamConversion(
+private fun Appendable.inkonstidSamConversion(
     expression: IrTypeOperatorCall,
     abstractFunctionSymbols: Set<IrSimpleFunctionSymbol>,
     abstractPropertySymbol: IrPropertySymbol?,
@@ -555,11 +555,11 @@ private fun Appendable.invalidSamConversion(
 private fun Appendable.suspendableCallWithoutCoroutine(): Appendable =
     append("Suspend function can be called only from a coroutine or another suspend function")
 
-private fun Appendable.illegalNonLocalReturn(expression: IrReturn, validReturnTargets: Set<IrReturnTargetSymbol>): Appendable =
+private fun Appendable.illegalNonLocalReturn(expression: IrReturn, konstidReturnTargets: Set<IrReturnTargetSymbol>): Appendable =
     append("Illegal non-local return: The return target is ")
         .declarationKindName(expression.returnTargetSymbol, capitalized = false)
         .append(" while only the following return targets are allowed: ")
-        .sortedDeclarationsKindName(validReturnTargets)
+        .sortedDeclarationsKindName(konstidReturnTargets)
 
 private fun Appendable.inaccessibleDeclaration(
     referencedDeclarationSymbol: IrSymbol,
@@ -568,7 +568,7 @@ private fun Appendable.inaccessibleDeclaration(
 ): Appendable = append("Private ").declarationKind(referencedDeclarationSymbol, capitalized = false)
     .append(" declared in ").module(declaringModule).append(" can not be accessed in ").module(useSiteModule)
 
-private fun Appendable.invalidConstructorDelegation(
+private fun Appendable.inkonstidConstructorDelegation(
     constructorSymbol: IrConstructorSymbol,
     superClassSymbol: IrClassSymbol,
     unexpectedSuperClassConstructorSymbol: IrConstructorSymbol
@@ -599,7 +599,7 @@ private fun Appendable.ambiguousNonOverriddenCallable(callable: IrOverridableDec
 
 private fun Appendable.appendCapitalized(text: String, capitalized: Boolean): Appendable {
     if (capitalized && text.isNotEmpty()) {
-        val firstChar = text[0]
+        konst firstChar = text[0]
         if (firstChar.isLowerCase())
             return append(firstChar.uppercaseChar()).append(text.substring(1))
     }

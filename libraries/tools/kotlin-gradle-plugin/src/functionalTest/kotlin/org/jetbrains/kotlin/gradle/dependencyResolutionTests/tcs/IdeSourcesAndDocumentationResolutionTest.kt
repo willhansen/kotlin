@@ -30,31 +30,31 @@ class IdeSourcesAndDocumentationResolutionTest {
 
     @Test
     fun `test - MVIKotlin`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableDependencyVerification(false)
             applyMultiplatformPlugin()
             repositories.mavenCentralCacheRedirector()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.jvm()
         kotlin.linuxX64()
         kotlin.linuxArm64()
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val commonTest = kotlin.sourceSets.getByName("commonTest")
-        val nativeMain = kotlin.sourceSets.getByName("nativeMain")
-        val nativeTest = kotlin.sourceSets.getByName("nativeTest")
-        val linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
-        val linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst commonTest = kotlin.sourceSets.getByName("commonTest")
+        konst nativeMain = kotlin.sourceSets.getByName("nativeMain")
+        konst nativeTest = kotlin.sourceSets.getByName("nativeTest")
+        konst linuxX64Main = kotlin.sourceSets.getByName("linuxX64Main")
+        konst linuxX64Test = kotlin.sourceSets.getByName("linuxX64Test")
 
         commonMain.dependencies {
             implementation("com.arkivanov.mvikotlin:mvikotlin:3.0.2")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         fun resolveDependencySources(sourceSet: KotlinSourceSet): List<IdeaKotlinResolvedBinaryDependency> =
             project.kotlinIdeMultiplatformImport.resolveDependencies(sourceSet)
@@ -63,13 +63,13 @@ class IdeSourcesAndDocumentationResolutionTest {
 
         /* Check commonMain&commonTest */
         run {
-            val expectedDependencies = listOf(
+            konst expectedDependencies = listOf(
                 binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin:3.0.2:commonMain"),
                 binaryCoordinates("com.arkivanov.essenty:lifecycle:0.4.2:commonMain"),
                 binaryCoordinates("com.arkivanov.essenty:instance-keeper:0.4.2:commonMain"),
             )
 
-            val resolvedDependencies = resolveDependencySources(commonMain)
+            konst resolvedDependencies = resolveDependencySources(commonMain)
             resolvedDependencies.assertMatches(expectedDependencies)
             resolveDependencySources(commonTest).assertMatches(resolvedDependencies)
             resolvedDependencies.assertSourcesFilesEndWith("-sources.jar")
@@ -77,7 +77,7 @@ class IdeSourcesAndDocumentationResolutionTest {
 
         /* Check nativeMain&nativeTest */
         run {
-            val expectedDependencies = listOf(
+            konst expectedDependencies = listOf(
                 binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin:3.0.2:commonMain"),
                 binaryCoordinates("com.arkivanov.mvikotlin:mvikotlin:3.0.2:jsNativeMain"),
                 binaryCoordinates("com.arkivanov.essenty:lifecycle:0.4.2:commonMain"),
@@ -86,7 +86,7 @@ class IdeSourcesAndDocumentationResolutionTest {
                 binaryCoordinates(Regex(".*stdlib-common:.*")) /* KT-56278 */
             )
 
-            val resolvedDependencies = resolveDependencySources(nativeMain)
+            konst resolvedDependencies = resolveDependencySources(nativeMain)
             resolvedDependencies.assertMatches(expectedDependencies)
             resolveDependencySources(nativeTest).assertMatches(resolvedDependencies)
             resolvedDependencies.assertSourcesFilesEndWith("-sources.jar", "-sources.zip")
@@ -94,7 +94,7 @@ class IdeSourcesAndDocumentationResolutionTest {
 
         /* Check linuxX64Main and linuxX64Test */
         run {
-            val expectedDependencies = listOf(
+            konst expectedDependencies = listOf(
 
                 /* Required dependencies */
                 listOf(
@@ -115,7 +115,7 @@ class IdeSourcesAndDocumentationResolutionTest {
                 )
             )
 
-            val resolvedDependencies = resolveDependencySources(linuxX64Main)
+            konst resolvedDependencies = resolveDependencySources(linuxX64Main)
             resolvedDependencies.assertMatches(expectedDependencies)
             resolveDependencySources(linuxX64Test).withSanitisedExtras().assertMatches(resolvedDependencies.withSanitisedExtras())
             resolvedDependencies.assertSourcesFilesEndWith("-sources.jar", "-sources.zip")
@@ -124,7 +124,7 @@ class IdeSourcesAndDocumentationResolutionTest {
 }
 
 private fun Iterable<IdeaKotlinResolvedBinaryDependency>.withSanitisedExtras() = onEach { dependency ->
-    val keysToKeep = setOf(sourcesClasspathKey, documentationClasspathKey)
+    konst keysToKeep = setOf(sourcesClasspathKey, documentationClasspathKey)
     (dependency.extras.keys - keysToKeep).forEach { keyToRemove ->
         dependency.extras.remove(keyToRemove)
     }

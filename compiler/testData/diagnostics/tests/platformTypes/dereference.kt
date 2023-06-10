@@ -21,11 +21,11 @@ fun test(j: J) {
     j.j().j()
     j.j()!!.j()
 
-    val ann = j.foo<String>()
+    konst ann = j.foo<String>()
     ann!!.length
     ann.length
 
-    val a = j.foo<J>()
+    konst a = j.foo<J>()
     a!!.j()
     a.j()
 }

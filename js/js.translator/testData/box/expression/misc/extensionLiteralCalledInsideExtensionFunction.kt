@@ -7,7 +7,7 @@ fun A.create(init: A.() -> Unit): A {
 }
 
 fun box(): String {
-    val a = A().create {
+    konst a = A().create {
         c = 1 + t
     }
     if (a.c != 4) return "fail: ${a.c}"
@@ -16,6 +16,6 @@ fun box(): String {
 }
 
 class A() {
-    val t = 3
+    konst t = 3
     var c = 2
 }

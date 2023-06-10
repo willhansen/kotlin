@@ -1,8 +1,8 @@
 fun main() {
-    val list = buildList {
+    konst list = buildList {
         add("one")
         add("two")
-        val secondParameter = get(1)
+        konst secondParameter = get(1)
         println(secondParameter)
     }
 }

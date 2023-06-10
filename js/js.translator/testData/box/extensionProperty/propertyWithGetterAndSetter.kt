@@ -11,10 +11,10 @@ var Test.b: Int
         a = c - 1
     }
 
-val Test.d: Int get() = 44
+konst Test.d: Int get() = 44
 
 fun box(): String {
-    val c = Test()
+    konst c = Test()
     if (c.a != 0) return "fail1: ${c.a}";
     if (c.b != 0) return "fail2: ${c.b}";
     c.a = 3;

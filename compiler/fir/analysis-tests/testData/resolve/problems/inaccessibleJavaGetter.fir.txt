@@ -1,9 +1,9 @@
 FILE: test.kt
     public abstract interface DescriptorWithAccessor : R|kotlin/Any| {
-        public abstract val setter: R|kotlin/String|
+        public abstract konst setter: R|kotlin/String|
             public get(): R|kotlin/String|
 
-        public abstract val isDelegated: R|kotlin/Boolean|
+        public abstract konst isDelegated: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean|
 
     }
@@ -12,21 +12,21 @@ FILE: test.kt
             super<R|kotlin/Any|>()
         }
 
-        public open override val setter: R|kotlin/String|
+        public open override konst setter: R|kotlin/String|
             public get(): R|kotlin/String| {
                 ^ String(K)
             }
 
-        public open override val isDelegated: R|kotlin/Boolean|
+        public open override konst isDelegated: R|kotlin/Boolean|
             public get(): R|kotlin/Boolean| {
                 ^ Boolean(false)
             }
 
     }
     public final fun test(): R|kotlin/Unit| {
-        lval descriptor: R|WrappedPropertyDescriptor| = R|/WrappedPropertyDescriptor.WrappedPropertyDescriptor|()
-        lval res1: R|kotlin/String| = R|<local>/descriptor|.R|/WrappedPropertyDescriptor.setter|
-        lval res2: <ERROR TYPE REF: Unresolved name: getSetter> = R|<local>/descriptor|.<Unresolved name: getSetter>#()
-        lval res3: R|kotlin/Boolean| = R|<local>/descriptor|.R|/WrappedPropertyDescriptor.isDelegated|
-        lval res4: <ERROR TYPE REF: Expression 'isDelegated' of type 'kotlin/Boolean' cannot be invoked as a function> = R|<local>/descriptor|.<Expression 'isDelegated' of type 'kotlin/Boolean' cannot be invoked as a function>#()
+        lkonst descriptor: R|WrappedPropertyDescriptor| = R|/WrappedPropertyDescriptor.WrappedPropertyDescriptor|()
+        lkonst res1: R|kotlin/String| = R|<local>/descriptor|.R|/WrappedPropertyDescriptor.setter|
+        lkonst res2: <ERROR TYPE REF: Unresolved name: getSetter> = R|<local>/descriptor|.<Unresolved name: getSetter>#()
+        lkonst res3: R|kotlin/Boolean| = R|<local>/descriptor|.R|/WrappedPropertyDescriptor.isDelegated|
+        lkonst res4: <ERROR TYPE REF: Expression 'isDelegated' of type 'kotlin/Boolean' cannot be invoked as a function> = R|<local>/descriptor|.<Expression 'isDelegated' of type 'kotlin/Boolean' cannot be invoked as a function>#()
     }

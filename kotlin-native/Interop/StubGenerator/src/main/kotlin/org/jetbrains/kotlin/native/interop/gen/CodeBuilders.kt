@@ -17,11 +17,11 @@
 package org.jetbrains.kotlin.native.interop.gen
 
 interface NativeScope {
-    val mappingBridgeGenerator: MappingBridgeGenerator
+    konst mappingBridgeGenerator: MappingBridgeGenerator
 }
 
-class NativeCodeBuilder(val scope: NativeScope) {
-    val lines = mutableListOf<String>()
+class NativeCodeBuilder(konst scope: NativeScope) {
+    konst lines = mutableListOf<String>()
 
     fun out(line: String): Unit {
         lines.add(line)
@@ -29,23 +29,23 @@ class NativeCodeBuilder(val scope: NativeScope) {
 }
 
 inline fun buildNativeCodeLines(scope: NativeScope, block: NativeCodeBuilder.() -> Unit): List<String> {
-    val builder = NativeCodeBuilder(scope)
+    konst builder = NativeCodeBuilder(scope)
     builder.block()
     return builder.lines
 }
 
-private class Block(val nesting: Int, val start: String, val end: String) {
-    val prologue = mutableListOf<String>()
-    val body = mutableListOf<String>()
-    val epilogue = mutableListOf<String>()
+private class Block(konst nesting: Int, konst start: String, konst end: String) {
+    konst prologue = mutableListOf<String>()
+    konst body = mutableListOf<String>()
+    konst epilogue = mutableListOf<String>()
 
     fun indent(line: String) = "    ".repeat(nesting) + line
     fun indentBraces(line: String) = "    ".repeat(nesting - 1) + line
 }
 
-class KotlinCodeBuilder(val scope: KotlinScope) {
+class KotlinCodeBuilder(konst scope: KotlinScope) {
 
-    private val blocks = mutableListOf<Block>()
+    private konst blocks = mutableListOf<Block>()
 
     init {
         pushBlock("", "")
@@ -74,13 +74,13 @@ class KotlinCodeBuilder(val scope: KotlinScope) {
     private fun currentBlock() = blocks.last()
 
     fun pushBlock(start: String, end: String = "}") {
-        val block = Block(blocks.size, start = start, end = end)
+        konst block = Block(blocks.size, start = start, end = end)
         blocks += block
     }
 
     private fun emitBlockAndNested(position: Int, lines: MutableList<String>) {
         if (position >= blocks.size) return
-        val block = blocks[position]
+        konst block = blocks[position]
         if (block.start.isNotEmpty()) lines += block.indentBraces(block.start)
         lines += block.prologue.map { block.indent(it) }
         lines += block.body.map { block.indent(it) }
@@ -90,14 +90,14 @@ class KotlinCodeBuilder(val scope: KotlinScope) {
     }
 
     fun build(): List<String> {
-        val lines = mutableListOf<String>()
+        konst lines = mutableListOf<String>()
         emitBlockAndNested(0, lines)
         return lines.toList()
     }
 }
 
 inline fun buildKotlinCodeLines(scope: KotlinScope, block: KotlinCodeBuilder.() -> Unit): List<String> {
-    val builder = KotlinCodeBuilder(scope)
+    konst builder = KotlinCodeBuilder(scope)
     builder.block()
     return builder.build()
 }

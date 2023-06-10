@@ -27,9 +27,9 @@ actual class Expected {
 
 
 fun box(): String {
-    val b = Expected.factoryMethod()
+    konst b = Expected.factoryMethod()
     if (b !is Expected) return "Incorrect factory method"
-    val desc = Expected.serializer().descriptor
+    konst desc = Expected.serializer().descriptor
     if (desc.toString() != "foo.Expected()") return "Incorrect descriptor $desc"
     return "OK"
 }

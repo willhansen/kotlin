@@ -1,8 +1,8 @@
 // !LANGUAGE: -PrivateInFileEffectiveVisibility
 package p
 
-private class C(val y: Int) {
-    val initChild = { ->
+private class C(konst y: Int) {
+    konst initChild = { ->
         object {
             override fun toString(): String {
                 return "child" + y
@@ -12,7 +12,7 @@ private class C(val y: Int) {
 }
 
 fun box(): String {
-    val c = C(3).initChild
-    val x = c().toString()
+    konst c = C(3).initChild
+    konst x = c().toString()
     return if (x == "child3") "OK" else x
 }

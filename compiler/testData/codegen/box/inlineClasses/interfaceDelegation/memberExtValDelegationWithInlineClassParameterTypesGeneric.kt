@@ -5,23 +5,23 @@
 import kotlin.test.assertEquals
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class S<T: String>(val x: T)
+konstue class S<T: String>(konst x: T)
 
 interface IFoo {
-    val S<String>.extVal: String
+    konst S<String>.extVal: String
 }
 
 interface GFoo<T> {
-    val T.extVal: String
+    konst T.extVal: String
 }
 
 object FooImpl : IFoo {
-    override val S<String>.extVal: String
+    override konst S<String>.extVal: String
         get() = x
 }
 
 object GFooImpl : GFoo<S<String>> {
-    override val S<String>.extVal: String
+    override konst S<String>.extVal: String
         get() = x
 }
 

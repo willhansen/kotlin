@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.scripting.compiler.plugin.repl.reader.ReplCommandRea
 import org.jetbrains.kotlin.scripting.compiler.plugin.repl.writer.ReplWriter
 
 interface ReplConfiguration {
-    val writer: ReplWriter
-    val exceptionReporter: ReplExceptionReporter
-    val commandReader: ReplCommandReader
-    val allowIncompleteLines: Boolean
+    konst writer: ReplWriter
+    konst exceptionReporter: ReplExceptionReporter
+    konst commandReader: ReplCommandReader
+    konst allowIncompleteLines: Boolean
 
-    val executionInterceptor: SnippetExecutionInterceptor
+    konst executionInterceptor: SnippetExecutionInterceptor
     fun createDiagnosticHolder(): DiagnosticMessageHolder
 }

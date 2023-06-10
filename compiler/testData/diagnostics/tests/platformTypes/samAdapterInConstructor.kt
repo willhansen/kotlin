@@ -11,5 +11,5 @@ public class A<E> {
 // FILE: main.kt
 
 fun foo() {
-    val result: A<String> = A<String> { x, y -> 1 }
+    konst result: A<String> = A<String> { x, y -> 1 }
 }

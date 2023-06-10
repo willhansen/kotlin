@@ -16,5 +16,5 @@ import b.X
 import a.X
 
 fun foo() {
-    val v: Int = X()
+    konst v: Int = X()
 }

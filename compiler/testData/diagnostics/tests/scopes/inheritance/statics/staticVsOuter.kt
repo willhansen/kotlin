@@ -15,6 +15,6 @@ fun foo() = ""
 
 class C: B() {
     init {
-        val a: Int = foo()
+        konst a: Int = foo()
     }
 }

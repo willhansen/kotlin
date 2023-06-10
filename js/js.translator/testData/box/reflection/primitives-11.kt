@@ -50,6 +50,6 @@ private fun check(nativeClass: dynamic, c: KClass<*>) {
     assertEquals(nativeClass, c.js, "Kotlin class does not correspond native class ${nativeClass.name}")
 }
 
-private fun check(nativeClass: dynamic, value: Any) {
-    check(nativeClass, value::class)
+private fun check(nativeClass: dynamic, konstue: Any) {
+    check(nativeClass, konstue::class)
 }

@@ -3,7 +3,7 @@ package foo
 
 fun lold() = true
 
-val p = { { lold() }() }
+konst p = { { lold() }() }
 
 fun box(): String {
     if (!p()) return "fail1"

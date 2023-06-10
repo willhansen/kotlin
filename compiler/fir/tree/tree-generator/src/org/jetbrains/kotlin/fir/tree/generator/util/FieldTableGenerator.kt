@@ -11,13 +11,13 @@ import org.jetbrains.kotlin.fir.tree.generator.model.Field
 import java.io.File
 
 fun printFieldUsageTable(builder: AbstractFirTreeBuilder) {
-    val elements = builder.elements.filter { it.allImplementations.isNotEmpty() }
-    val fields = elements.flatMapTo(mutableSetOf()) { it.allFields }
+    konst elements = builder.elements.filter { it.allImplementations.isNotEmpty() }
+    konst fields = elements.flatMapTo(mutableSetOf()) { it.allFields }
 
-    val mapping = mutableMapOf<Element, Set<Field>>()
-    val fieldsCount = mutableMapOf<Field, Int>()
+    konst mapping = mutableMapOf<Element, Set<Field>>()
+    konst fieldsCount = mutableMapOf<Field, Int>()
     for (element in elements) {
-        val containingFields = mutableSetOf<Field>()
+        konst containingFields = mutableSetOf<Field>()
         for (field in fields) {
             if (field in element.allFields) {
                 containingFields += field
@@ -27,15 +27,15 @@ fun printFieldUsageTable(builder: AbstractFirTreeBuilder) {
         mapping[element] = containingFields
     }
 
-    val sortedFields = fields.sortedByDescending { fieldsCount[it] }
+    konst sortedFields = fields.sortedByDescending { fieldsCount[it] }
     File("compiler/fir/tree/table.csv").printWriter().use { printer ->
         with(printer) {
-            val delim = ","
+            konst delim = ","
             print(delim)
             println(sortedFields.joinToString(delim) { "${it.name}:${fieldsCount.getValue(it)}" })
             for (element in elements) {
                 print(element.name + delim)
-                val containingFields = mapping.getValue(element)
+                konst containingFields = mapping.getValue(element)
                 println(sortedFields.joinToString(delim) { if (it in containingFields) "+" else "-" })
             }
         }

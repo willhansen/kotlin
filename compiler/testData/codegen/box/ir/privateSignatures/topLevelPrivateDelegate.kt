@@ -5,7 +5,7 @@
 
 package lib
 
-private val d by lazy { "O" }
+private konst d by lazy { "O" }
 
 fun o() = d
 
@@ -14,7 +14,7 @@ fun o() = d
 
 package lib
 
-private val d by lazy { "K" }
+private konst d by lazy { "K" }
 
 fun k() = d
 

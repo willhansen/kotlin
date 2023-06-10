@@ -1,10 +1,10 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-val a0: Int = <!INITIALIZER_TYPE_MISMATCH!>1uL<!>
-val a1: UInt = <!INITIALIZER_TYPE_MISMATCH!>1uL<!>
-val a3: ULong = 1uL
-val a4 = 1UL + 2UL
-val a5 = <!UNRESOLVED_REFERENCE!>-<!>1UL
+konst a0: Int = <!INITIALIZER_TYPE_MISMATCH!>1uL<!>
+konst a1: UInt = <!INITIALIZER_TYPE_MISMATCH!>1uL<!>
+konst a3: ULong = 1uL
+konst a4 = 1UL + 2UL
+konst a5 = <!UNRESOLVED_REFERENCE!>-<!>1UL
 
 fun takeULong(u: ULong) {}
 

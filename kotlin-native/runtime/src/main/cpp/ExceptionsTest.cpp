@@ -30,7 +30,7 @@ using ::kotlin::test_support::ScopedKotlin_runUnhandledExceptionHookMock;
 namespace {
 
 struct Payload {
-    int value = 0;
+    int konstue = 0;
 
     using Field = ObjHeader* Payload::*;
     static constexpr std::array<Field, 0> kFields{};
@@ -45,12 +45,12 @@ TEST(ExceptionTest, ProcessUnhandledException_WithHook) {
     kotlin::RunInNewThread([&typeHolder]() {
         Object exception(typeHolder.typeInfo());
         exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        exception->value = 42;
+        exception->konstue = 42;
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         EXPECT_CALL(*reportUnhandledExceptionMock, Call(_)).Times(0);
         EXPECT_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillOnce([](KRef exception) {
-            EXPECT_THAT(Object::FromObjHeader(exception)->value, 42);
+            EXPECT_THAT(Object::FromObjHeader(exception)->konstue, 42);
         });
         kotlin::ProcessUnhandledException(exception.header());
     });
@@ -61,14 +61,14 @@ TEST(ExceptionDeathTest, ProcessUnhandledException_NoHook) {
     kotlin::RunInNewThread([&typeHolder]() {
         Object exception(typeHolder.typeInfo());
         exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        exception->value = 42;
+        exception->konstue = 42;
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
         });
         ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
             // Kotlin_runUnhandledExceptionHookMock rethrows original exception when hook is unset.
             ThrowException(exception);
         });
@@ -81,17 +81,17 @@ TEST(ExceptionDeathTest, ProcessUnhandledException_WithFailingHook) {
     kotlin::RunInNewThread([&typeHolder]() {
         Object exception(typeHolder.typeInfo());
         exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        exception->value = 42;
+        exception->konstue = 42;
         Object hookException(typeHolder.typeInfo());
         hookException.header()->typeInfoOrMeta_ = setPointerBits(hookException.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        hookException->value = 13;
+        hookException->konstue = 13;
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
         });
         ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([&hookException](KRef exception) {
-            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
             ThrowException(hookException.header());
         });
         EXPECT_DEATH({ kotlin::ProcessUnhandledException(exception.header()); }, "Hook 42\nReporting 13\n");
@@ -103,17 +103,17 @@ TEST(ExceptionDeathTest, ProcessUnhandledException_WithTerminatingFailingHook) {
     kotlin::RunInNewThread([&typeHolder]() {
         Object exception(typeHolder.typeInfo());
         exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        exception->value = 42;
+        exception->konstue = 42;
         Object hookException(typeHolder.typeInfo());
         hookException.header()->typeInfoOrMeta_ = setPointerBits(hookException.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        hookException->value = 13;
+        hookException->konstue = 13;
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
         });
         ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([&hookException](KRef exception) {
-            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
             kotlin::TerminateWithUnhandledException(hookException.header());
         });
         EXPECT_DEATH({ kotlin::ProcessUnhandledException(exception.header()); }, "Hook 42\nReporting 13\n");
@@ -125,14 +125,14 @@ TEST(ExceptionDeathTest, TerminateWithUnhandledException) {
     kotlin::RunInNewThread([&typeHolder]() {
         Object exception(typeHolder.typeInfo());
         exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-        exception->value = 42;
+        exception->konstue = 42;
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
         });
         ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
         });
         EXPECT_DEATH({ kotlin::TerminateWithUnhandledException(exception.header()); }, "Reporting 42\n");
     });
@@ -142,14 +142,14 @@ TEST(ExceptionDeathTest, TerminateHandler_WithHook) {
     test_support::TypeInfoHolder typeHolder{test_support::TypeInfoHolder::ObjectBuilder<Payload>().setSuperType(theThrowableTypeInfo)};
     Object exception(typeHolder.typeInfo());
     exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-    exception->value = 42;
+    exception->konstue = 42;
     auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
     auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
     ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
     });
     ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([](KRef exception) {
-        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
     });
     EXPECT_DEATH(
             {
@@ -182,14 +182,14 @@ TEST(ExceptionDeathTest, TerminateHandler_NoHook) {
     test_support::TypeInfoHolder typeHolder{test_support::TypeInfoHolder::ObjectBuilder<Payload>().setSuperType(theThrowableTypeInfo)};
     Object exception(typeHolder.typeInfo());
     exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-    exception->value = 42;
+    exception->konstue = 42;
     auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
     auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
     ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
     });
     ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([](KRef exception) {
-        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
         // Kotlin_runUnhandledExceptionHookMock rethrows original exception when hook is unset.
         ThrowException(exception);
     });
@@ -224,17 +224,17 @@ TEST(ExceptionDeathTest, TerminateHandler_WithFailingHook) {
     test_support::TypeInfoHolder typeHolder{test_support::TypeInfoHolder::ObjectBuilder<Payload>().setSuperType(theThrowableTypeInfo)};
     Object exception(typeHolder.typeInfo());
     exception.header()->typeInfoOrMeta_ = setPointerBits(exception.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-    exception->value = 42;
+    exception->konstue = 42;
     Object hookException(typeHolder.typeInfo());
     hookException.header()->typeInfoOrMeta_ = setPointerBits(hookException.header()->typeInfoOrMeta_, OBJECT_TAG_PERMANENT_CONTAINER);
-    hookException->value = 13;
+    hookException->konstue = 13;
     auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
     auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
     ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
     });
     ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([&hookException](KRef exception) {
-        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+        konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
         ThrowException(hookException.header());
     });
     EXPECT_DEATH(
@@ -269,10 +269,10 @@ TEST(ExceptionDeathTest, TerminateHandler_IgnoreHooks) {
         auto reportUnhandledExceptionMock = ScopedReportUnhandledExceptionMock();
         auto Kotlin_runUnhandledExceptionHookMock = ScopedKotlin_runUnhandledExceptionHookMock();
         ON_CALL(*reportUnhandledExceptionMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Reporting %d\n", Object::FromObjHeader(exception)->konstue);
         });
         ON_CALL(*Kotlin_runUnhandledExceptionHookMock, Call(_)).WillByDefault([](KRef exception) {
-            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->value);
+            konan::consoleErrorf("Hook %d\n", Object::FromObjHeader(exception)->konstue);
             ThrowException(exception);
         });
         EXPECT_DEATH(
@@ -311,7 +311,7 @@ std_support::unique_ptr<test_support::ScopedMockFunction<void(KRef), /* Strict =
 
 // Google Test's death tests do not fail in case of a failed EXPECT_*/ASSERT_* check in a death statement.
 // To workaround it, manually check the conditions to be asserted, log all failed conditions and then
-// validate that there were no failure messages.
+// konstidate that there were no failure messages.
 void loggingAssert(bool condition, const char* message) noexcept {
     if (!condition) {
         std::cerr << "FAIL: " << message << std::endl;

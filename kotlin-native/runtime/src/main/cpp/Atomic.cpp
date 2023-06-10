@@ -24,7 +24,7 @@ namespace {
 
 struct AtomicReferenceLayout {
   ObjHeader header;
-  KRef value_;
+  KRef konstue_;
   KInt lock_;
   KInt cookie_;
 };
@@ -39,12 +39,12 @@ extern "C" {
 
 
 
-void Kotlin_AtomicReference_checkIfFrozen(KRef value) {
+void Kotlin_AtomicReference_checkIfFrozen(KRef konstue) {
     if (!kotlin::compiler::freezingEnabled()) {
         return;
     }
-    if (value != nullptr && !isPermanentOrFrozen(value)) {
-        ThrowInvalidMutabilityException(value);
+    if (konstue != nullptr && !isPermanentOrFrozen(konstue)) {
+        ThrowInkonstidMutabilityException(konstue);
     }
 }
 
@@ -54,7 +54,7 @@ OBJ_GETTER(Kotlin_AtomicReference_compareAndSwap, KRef thiz, KRef expectedValue,
     }
     // See Kotlin_AtomicReference_get() for explanations, why locking is needed.
     AtomicReferenceLayout* ref = asAtomicReference(thiz);
-    RETURN_RESULT_OF(SwapHeapRefLocked, &ref->value_, expectedValue, newValue,
+    RETURN_RESULT_OF(SwapHeapRefLocked, &ref->konstue_, expectedValue, newValue,
         &ref->lock_, &ref->cookie_);
 }
 
@@ -65,7 +65,7 @@ KBoolean Kotlin_AtomicReference_compareAndSet(KRef thiz, KRef expectedValue, KRe
     // See Kotlin_AtomicReference_get() for explanations, why locking is needed.
     AtomicReferenceLayout* ref = asAtomicReference(thiz);
     ObjHolder holder;
-    auto old = SwapHeapRefLocked(&ref->value_, expectedValue, newValue,
+    auto old = SwapHeapRefLocked(&ref->konstue_, expectedValue, newValue,
         &ref->lock_, &ref->cookie_, holder.slot());
     return old == expectedValue;
 }
@@ -75,16 +75,16 @@ void Kotlin_AtomicReference_set(KRef thiz, KRef newValue) {
         Kotlin_AtomicReference_checkIfFrozen(newValue);
     }
     AtomicReferenceLayout* ref = asAtomicReference(thiz);
-    SetHeapRefLocked(&ref->value_, newValue, &ref->lock_, &ref->cookie_);
+    SetHeapRefLocked(&ref->konstue_, newValue, &ref->lock_, &ref->cookie_);
 }
 
 OBJ_GETTER(Kotlin_AtomicReference_get, KRef thiz) {
-    // Here we must take a lock to prevent race when value, while taken here, is CASed and immediately
+    // Here we must take a lock to prevent race when konstue, while taken here, is CASed and immediately
     // destroyed by an another thread. AtomicReference no longer holds such an object, so if we got
-    // rescheduled unluckily, between the moment value is read from the field and RC is incremented,
+    // rescheduled unluckily, between the moment konstue is read from the field and RC is incremented,
     // object may go away.
     AtomicReferenceLayout* ref = asAtomicReference(thiz);
-    RETURN_RESULT_OF(ReadHeapRefLocked, &ref->value_, &ref->lock_, &ref->cookie_);
+    RETURN_RESULT_OF(ReadHeapRefLocked, &ref->konstue_, &ref->lock_, &ref->cookie_);
 }
 
 }  // extern "C"

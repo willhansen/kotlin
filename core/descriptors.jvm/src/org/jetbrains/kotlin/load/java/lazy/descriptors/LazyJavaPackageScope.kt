@@ -42,42 +42,42 @@ import java.util.*
 
 class LazyJavaPackageScope(
     c: LazyJavaResolverContext,
-    private val jPackage: JavaPackage,
-    override val ownerDescriptor: LazyJavaPackageFragment
+    private konst jPackage: JavaPackage,
+    override konst ownerDescriptor: LazyJavaPackageFragment
 ) : LazyJavaStaticScope(c) {
     // Null means that it's impossible to determine list of class names in package, i.e. in IDE where special finders exist
     // But for compiler though we can determine full list of class names by getting all class-file names in classpath and sources
-    private val knownClassNamesInPackage: NullableLazyValue<Set<String>> = c.storageManager.createNullableLazyValue {
+    private konst knownClassNamesInPackage: NullableLazyValue<Set<String>> = c.storageManager.createNullableLazyValue {
         c.components.finder.knownClassNamesInPackage(ownerDescriptor.fqName)
     }
 
-    private val jvmMetadataVersion: JvmMetadataVersion
+    private konst jvmMetadataVersion: JvmMetadataVersion
         get() = c.components.deserializedDescriptorResolver.components.configuration.jvmMetadataVersionOrDefault()
 
 
-    private val classes =
+    private konst classes =
         c.storageManager.createMemoizedFunctionWithNullableValues<FindClassRequest, ClassDescriptor> classByRequest@{ request ->
-            val requestClassId = ClassId(ownerDescriptor.fqName, request.name)
+            konst requestClassId = ClassId(ownerDescriptor.fqName, request.name)
 
-            val kotlinClassOrClassFileContent =
+            konst kotlinClassOrClassFileContent =
                 // These branches should be semantically equal, but the first one could be faster
                 if (request.javaClass != null)
                     c.components.kotlinClassFinder.findKotlinClassOrContent(request.javaClass, jvmMetadataVersion)
                 else
                     c.components.kotlinClassFinder.findKotlinClassOrContent(requestClassId, jvmMetadataVersion)
 
-            val kotlinBinaryClass = kotlinClassOrClassFileContent?.toKotlinJvmBinaryClass()
+            konst kotlinBinaryClass = kotlinClassOrClassFileContent?.toKotlinJvmBinaryClass()
 
-            val classId = kotlinBinaryClass?.classId
+            konst classId = kotlinBinaryClass?.classId
             // Nested/local classes can be found when running in CLI in case when request.name looks like 'Outer$Inner'
             // It happens because KotlinClassFinder searches through a file-based index that does not differ classes containing $-sign and nested ones
             if (classId != null && (classId.isNestedClass || classId.isLocal)) return@classByRequest null
 
-            when (val kotlinResult = resolveKotlinBinaryClass(kotlinBinaryClass)) {
+            when (konst kotlinResult = resolveKotlinBinaryClass(kotlinBinaryClass)) {
                 is KotlinClassLookupResult.Found -> kotlinResult.descriptor
                 is KotlinClassLookupResult.SyntheticClass -> null
                 is KotlinClassLookupResult.NotFound -> {
-                    val javaClass =
+                    konst javaClass =
                         request.javaClass ?: c.components.finder.findClass(
                             JavaClassFinder.Request(
                                 requestClassId,
@@ -95,7 +95,7 @@ class LazyJavaPackageScope(
                         )
                     }
 
-                    val actualFqName = javaClass?.fqName
+                    konst actualFqName = javaClass?.fqName
                     if (actualFqName == null || actualFqName.isRoot || actualFqName.parent() != ownerDescriptor.fqName)
                         null
                     else
@@ -106,7 +106,7 @@ class LazyJavaPackageScope(
         }
 
     private sealed class KotlinClassLookupResult {
-        class Found(val descriptor: ClassDescriptor) : KotlinClassLookupResult()
+        class Found(konst descriptor: ClassDescriptor) : KotlinClassLookupResult()
         object NotFound : KotlinClassLookupResult()
         object SyntheticClass : KotlinClassLookupResult()
     }
@@ -117,7 +117,7 @@ class LazyJavaPackageScope(
                 KotlinClassLookupResult.NotFound
             }
             kotlinClass.classHeader.kind == KotlinClassHeader.Kind.CLASS -> {
-                val descriptor = c.components.deserializedDescriptorResolver.resolveClass(kotlinClass)
+                konst descriptor = c.components.deserializedDescriptorResolver.resolveClass(kotlinClass)
                 if (descriptor != null) KotlinClassLookupResult.Found(descriptor) else KotlinClassLookupResult.NotFound
             }
             else -> {
@@ -127,7 +127,7 @@ class LazyJavaPackageScope(
         }
 
     // javaClass here is only for sake of optimizations
-    private class FindClassRequest(val name: Name, val javaClass: JavaClass?) {
+    private class FindClassRequest(konst name: Name, konst javaClass: JavaClass?) {
         override fun equals(other: Any?) = other is FindClassRequest && name == other.name
 
         override fun hashCode() = name.hashCode()
@@ -138,7 +138,7 @@ class LazyJavaPackageScope(
     private fun findClassifier(name: Name, javaClass: JavaClass?): ClassDescriptor? {
         if (!SpecialNames.isSafeIdentifier(name)) return null
 
-        val knownClassNamesInPackage = knownClassNamesInPackage()
+        konst knownClassNamesInPackage = knownClassNamesInPackage()
         if (javaClass == null && knownClassNamesInPackage != null && name.asString() !in knownClassNamesInPackage) {
             return null
         }
@@ -156,7 +156,7 @@ class LazyJavaPackageScope(
         // neither objects nor enum members can be in java package
         if (!kindFilter.acceptsKinds(DescriptorKindFilter.NON_SINGLETON_CLASSIFIERS_MASK)) return emptySet()
 
-        val knownClassNamesInPackage = knownClassNamesInPackage()
+        konst knownClassNamesInPackage = knownClassNamesInPackage()
         if (knownClassNamesInPackage != null) return knownClassNamesInPackage.mapTo(HashSet()) { Name.identifier(it) }
 
         return jPackage.getClasses(nameFilter ?: alwaysTrue()).mapNotNullTo(linkedSetOf()) { klass ->

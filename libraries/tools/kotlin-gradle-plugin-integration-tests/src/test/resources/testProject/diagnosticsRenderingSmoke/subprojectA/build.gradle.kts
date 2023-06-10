@@ -8,17 +8,17 @@ kotlin {
     linuxX64()
 
     sourceSets {
-        val myCustomSourceSet by creating
+        konst myCustomSourceSet by creating
 
         // check that usual diagnostics are not deduplicated even if they are exactly the same
-        val commonMain by getting {
+        konst commonMain by getting {
             dependsOn(myCustomSourceSet)
         }
     }
 }
 
-afterEvaluate {
+afterEkonstuate {
     // NB: HMPP-flags are reported by the custom code that needs to run directly after plugin application rather than in
-    // afterEvaluate, so this reporting will be missed
+    // afterEkonstuate, so this reporting will be missed
     setProperty("kotlin.native.enableDependencyPropagation", "false")
 }

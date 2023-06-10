@@ -12,14 +12,14 @@ import kotlin.time.*
 class DurationUnitJVMTest {
     @Test
     fun conversionFromTimeUnit() {
-        for (unit in DurationUnit.values()) {
-            val timeUnit = unit.toTimeUnit()
+        for (unit in DurationUnit.konstues()) {
+            konst timeUnit = unit.toTimeUnit()
             assertEquals(unit.name, timeUnit.name)
             assertEquals(unit, timeUnit.toDurationUnit())
         }
 
-        for (timeUnit in TimeUnit.values()) {
-            val unit = timeUnit.toDurationUnit()
+        for (timeUnit in TimeUnit.konstues()) {
+            konst unit = timeUnit.toDurationUnit()
             assertEquals(timeUnit.name, unit.name)
             assertEquals(timeUnit, unit.toTimeUnit())
         }

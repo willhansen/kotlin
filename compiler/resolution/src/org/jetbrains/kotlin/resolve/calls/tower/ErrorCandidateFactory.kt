@@ -25,8 +25,8 @@ import org.jetbrains.kotlin.resolve.scopes.receivers.ReceiverValueWithSmartCastI
 import org.jetbrains.kotlin.resolve.scopes.utils.findClassifier
 import org.jetbrains.kotlin.utils.SmartList
 
-enum class WrongResolutionToClassifier(val message: (Name) -> String) {
-    TYPE_PARAMETER_AS_VALUE({ "Type parameter $it cannot be used as value" }),
+enum class WrongResolutionToClassifier(konst message: (Name) -> String) {
+    TYPE_PARAMETER_AS_VALUE({ "Type parameter $it cannot be used as konstue" }),
     TYPE_PARAMETER_AS_FUNCTION({ "Type parameter $it cannot be called as function" }),
     INTERFACE_AS_VALUE({ "Interface $it does not have companion object" }),
     INTERFACE_AS_FUNCTION({ "Interface $it does not have constructors" }),
@@ -36,12 +36,12 @@ enum class WrongResolutionToClassifier(val message: (Name) -> String) {
     OBJECT_AS_FUNCTION({ "Function 'invoke()' is not found in object $it" })
 }
 
-sealed class ErrorCandidate<out D : DeclarationDescriptor>(val descriptor: D) {
+sealed class ErrorCandidate<out D : DeclarationDescriptor>(konst descriptor: D) {
     class Classifier(
         classifierDescriptor: ClassifierDescriptor,
-        val kind: WrongResolutionToClassifier
+        konst kind: WrongResolutionToClassifier
     ) : ErrorCandidate<ClassifierDescriptor>(classifierDescriptor) {
-        val errorMessage = kind.message(descriptor.name)
+        konst errorMessage = kind.message(descriptor.name)
     }
 }
 
@@ -50,7 +50,7 @@ fun collectErrorCandidatesForFunction(
     name: Name,
     explicitReceiver: DetailedReceiver?
 ): Collection<ErrorCandidate<*>> {
-    val context = ErrorCandidateContext(scopeTower, name, explicitReceiver)
+    konst context = ErrorCandidateContext(scopeTower, name, explicitReceiver)
     context.asClassifierCall(asFunction = true)
     return context.result
 }
@@ -60,17 +60,17 @@ fun collectErrorCandidatesForVariable(
     name: Name,
     explicitReceiver: DetailedReceiver?
 ): Collection<ErrorCandidate<*>> {
-    val context = ErrorCandidateContext(scopeTower, name, explicitReceiver)
+    konst context = ErrorCandidateContext(scopeTower, name, explicitReceiver)
     context.asClassifierCall(asFunction = false)
     return context.result
 }
 
 private class ErrorCandidateContext(
-    val scopeTower: ImplicitScopeTower,
-    val name: Name,
-    val explicitReceiver: DetailedReceiver?
+    konst scopeTower: ImplicitScopeTower,
+    konst name: Name,
+    konst explicitReceiver: DetailedReceiver?
 ) {
-    val result = SmartList<ErrorCandidate<*>>()
+    konst result = SmartList<ErrorCandidate<*>>()
 
     fun add(errorCandidate: ErrorCandidate<*>) {
         result.add(errorCandidate)
@@ -78,7 +78,7 @@ private class ErrorCandidateContext(
 }
 
 private fun ErrorCandidateContext.asClassifierCall(asFunction: Boolean) {
-    val classifier =
+    konst classifier =
         when (explicitReceiver) {
             is ReceiverValueWithSmartCastInfo -> {
                 explicitReceiver.receiverValue.type.memberScope.getContributedClassifier(name, scopeTower.location)
@@ -89,7 +89,7 @@ private fun ErrorCandidateContext.asClassifierCall(asFunction: Boolean) {
             else -> scopeTower.lexicalScope.findClassifier(name, scopeTower.location)
         } ?: return
 
-    val kind = getWrongResolutionToClassifier(classifier, asFunction) ?: return
+    konst kind = getWrongResolutionToClassifier(classifier, asFunction) ?: return
 
     add(ErrorCandidate.Classifier(classifier, kind))
 }

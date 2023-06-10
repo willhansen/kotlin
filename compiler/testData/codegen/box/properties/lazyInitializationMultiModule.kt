@@ -3,8 +3,8 @@
 // MODULE: lib1
 // FILE: lib.kt
 var log = ""
-val a = 1.also { log += "a" }
-val b = 2.also { log += "b" }
+konst a = 1.also { log += "a" }
+konst b = 2.also { log += "b" }
 
 // MODULE: main(lib1)
 // FILE: main.kt

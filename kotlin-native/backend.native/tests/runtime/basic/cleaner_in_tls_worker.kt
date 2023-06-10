@@ -15,14 +15,14 @@ import kotlin.native.runtime.GC
 @ThreadLocal
 var tlsCleaner: Cleaner? = null
 
-val value = AtomicInt(0)
+konst konstue = AtomicInt(0)
 
 fun main() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
     worker.execute(TransferMode.SAFE, {}) {
         tlsCleaner = createCleaner(42) {
-            value.value = it
+            konstue.konstue = it
         }
     }
 
@@ -31,5 +31,5 @@ fun main() {
     GC.collect()
     waitCleanerWorker()
 
-    assertEquals(42, value.value)
+    assertEquals(42, konstue.konstue)
 }

@@ -1,7 +1,7 @@
 package foo
 
 expect class PlatformClass {
-    val value: String
+    konst konstue: String
 }
 
 class CommonClass

@@ -5,9 +5,9 @@
 
 package org.jetbrains.kotlin.contracts.description
 
-open class KtIsInstancePredicate<Type, Diagnostic>(val arg: KtValueParameterReference<Type, Diagnostic>, val type: Type, val isNegated: Boolean) :
+open class KtIsInstancePredicate<Type, Diagnostic>(konst arg: KtValueParameterReference<Type, Diagnostic>, konst type: Type, konst isNegated: Boolean) :
     KtBooleanExpression<Type, Diagnostic> {
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = arg.erroneous
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =
@@ -21,18 +21,18 @@ class KtErroneousIsInstancePredicate<Type, Diagnostic>(
     arg: KtValueParameterReference<Type, Diagnostic>,
     type: Type,
     isNegated: Boolean,
-    val diagnostic: Diagnostic
+    konst diagnostic: Diagnostic
 ) : KtIsInstancePredicate<Type, Diagnostic>(arg, type, isNegated) {
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = true
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =
         contractDescriptionVisitor.visitErroneousIsInstancePredicate(this, data)
 }
 
-class KtIsNullPredicate<Type, Diagnostic>(val arg: KtValueParameterReference<Type, Diagnostic>, val isNegated: Boolean) :
+class KtIsNullPredicate<Type, Diagnostic>(konst arg: KtValueParameterReference<Type, Diagnostic>, konst isNegated: Boolean) :
     KtBooleanExpression<Type, Diagnostic> {
-    override val erroneous: Boolean
+    override konst erroneous: Boolean
         get() = arg.erroneous
 
     override fun <R, D> accept(contractDescriptionVisitor: KtContractDescriptionVisitor<R, D, Type, Diagnostic>, data: D): R =

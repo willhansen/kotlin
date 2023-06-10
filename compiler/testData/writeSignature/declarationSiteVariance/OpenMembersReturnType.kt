@@ -9,8 +9,8 @@ interface A {
     fun foo4(): In<String>
     fun foo5(): In<Any>
 
-    val prop1: OutPair<String, Int>
-    val prop2: OutPair<CharSequence, Int>
+    konst prop1: OutPair<String, Int>
+    konst prop2: OutPair<CharSequence, Int>
 }
 
 // method: A::foo1
@@ -38,7 +38,7 @@ abstract class B : A {
     override fun foo2(): OutPair<CharSequence, Int> = null!!
     override fun foo3(): OutPair<OutPair<String, Int>, Int> = null!!
 
-    override val prop2: OutPair<String, Int> = null!!
+    override konst prop2: OutPair<String, Int> = null!!
 }
 
 // method: B::foo2

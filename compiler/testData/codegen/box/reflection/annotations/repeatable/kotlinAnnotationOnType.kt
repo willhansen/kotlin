@@ -17,22 +17,22 @@ import kotlin.reflect.full.hasAnnotation
 fun check(element: KAnnotatedElement) {
     if (!element.hasAnnotation<A>()) throw AssertionError("Fail hasAnnotation $element")
 
-    val find = element.findAnnotation<A>()
-    if (find == null || find.value != "O") throw AssertionError("Fail findAnnotation $element: $find")
+    konst find = element.findAnnotation<A>()
+    if (find == null || find.konstue != "O") throw AssertionError("Fail findAnnotation $element: $find")
 
-    val all = element.annotations
-    val findAll = element.findAnnotations<A>()
+    konst all = element.annotations
+    konst findAll = element.findAnnotations<A>()
     if (all != findAll) throw AssertionError("Fail findAnnotations $element: $all != $findAll")
 
     if (all.any { it !is A })
         throw AssertionError("Fail 1 $element: $all")
-    if (all.fold("") { acc, it -> acc + (it as A).value } != "OK")
+    if (all.fold("") { acc, it -> acc + (it as A).konstue } != "OK")
         throw AssertionError("Fail 2 $element: $all")
 }
 
 @Repeatable
 @Target(CLASS, FUNCTION, PROPERTY, TYPE)
-annotation class A(val value: String)
+annotation class A(konst konstue: String)
 
 fun g(): @A("O") @A("K") @A("") Unit {}
 

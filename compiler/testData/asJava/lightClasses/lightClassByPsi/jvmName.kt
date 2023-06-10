@@ -9,10 +9,10 @@ class C {
     @set:JvmName("xyz2")
     var xyz: String
         get() = ""
-        set(value) {}
+        set(konstue) {}
 
     @get:JvmName("hasBigArity")
-    val hasBigArity: Boolean
+    konst hasBigArity: Boolean
         get() = true
 
     fun getRwProp(): Int = 123

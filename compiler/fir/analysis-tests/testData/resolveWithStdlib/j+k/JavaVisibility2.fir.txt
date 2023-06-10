@@ -6,13 +6,13 @@ FILE: k.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage<HIDDEN: j/JavaPackageLocal.javaPPackage is invisible>#|
+        public final konst p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage<HIDDEN: j/JavaPackageLocal.javaPPackage is invisible>#|
             public get(): R|kotlin/Int|
 
-        public final val p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic<HIDDEN: j/JavaProtected.javaPProtectedStatic is invisible>#|
+        public final konst p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic<HIDDEN: j/JavaProtected.javaPProtectedStatic is invisible>#|
             public get(): R|kotlin/Int|
 
-        public final val p3: R|kotlin/Int| = R|j/JavaProtected.JavaProtected|().R|j/JavaProtected.javaPProtectedPackage<HIDDEN: j/JavaProtected.javaPProtectedPackage is invisible>#|
+        public final konst p3: R|kotlin/Int| = R|j/JavaProtected.JavaProtected|().R|j/JavaProtected.javaPProtectedPackage<HIDDEN: j/JavaProtected.javaPProtectedPackage is invisible>#|
             public get(): R|kotlin/Int|
 
         public final fun test(): R|kotlin/Unit| {
@@ -26,13 +26,13 @@ FILE: k.kt
             super<R|j/JavaProtected|>()
         }
 
-        public final val p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage<HIDDEN: j/JavaPackageLocal.javaPPackage is invisible>#|
+        public final konst p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage<HIDDEN: j/JavaPackageLocal.javaPPackage is invisible>#|
             public get(): R|kotlin/Int|
 
-        public final val p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic|
+        public final konst p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic|
             public get(): R|kotlin/Int|
 
-        public final val p3: R|kotlin/Int| = this@R|k/B|.R|j/JavaProtected.javaPProtectedPackage|
+        public final konst p3: R|kotlin/Int| = this@R|k/B|.R|j/JavaProtected.javaPProtectedPackage|
             public get(): R|kotlin/Int|
 
         public final fun test(): R|kotlin/Unit| {
@@ -49,13 +49,13 @@ FILE: j.kt
             super<R|kotlin/Any|>()
         }
 
-        public final val p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage|
+        public final konst p1: R|kotlin/Int| = Q|j/JavaPackageLocal|.R|j/JavaPackageLocal.javaPPackage|
             public get(): R|kotlin/Int|
 
-        public final val p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic|
+        public final konst p2: R|kotlin/Int| = Q|j/JavaProtected|.R|j/JavaProtected.javaPProtectedStatic|
             public get(): R|kotlin/Int|
 
-        public final val p3: R|kotlin/Int| = R|j/JavaProtected.JavaProtected|().R|j/JavaProtected.javaPProtectedPackage|
+        public final konst p3: R|kotlin/Int| = R|j/JavaProtected.JavaProtected|().R|j/JavaProtected.javaPProtectedPackage|
             public get(): R|kotlin/Int|
 
         public final fun test(): R|kotlin/Unit| {

@@ -10,11 +10,11 @@ open class X {
 
 open class X {
     fun foo() = "non-open member function moved higher"
-    val bar = "non-open member property moved higher"
+    konst bar = "non-open member property moved higher"
     fun nux() = "non-open member function moved higher to cause conflict"
-    val zip = "non-open member property moved higher to cause conflict"
+    konst zip = "non-open member property moved higher to cause conflict"
     open fun ril() = "open member function moved higher"
-    open val det = "open member property moved higher"
+    open konst det = "open member property moved higher"
 }
 
 
@@ -24,11 +24,11 @@ open class X {
 
 open class Y: X() {
     fun foo() = "non-open member function"
-    val bar = "non-open member property"
+    konst bar = "non-open member property"
     fun nux() = "non-open member function"
-    val zip = "non-open member property"
+    konst zip = "non-open member property"
     open fun ril() = "open member function"
-    open val det = "open member property"
+    open konst det = "open member property"
 }
 
 // FILE: B.kt
@@ -44,18 +44,18 @@ open class Y: X() {
 
 class Z: X() {
     fun nux() = "non-open member function sudden conflict"
-    val zip = "non-open member property sudden conflict"
+    konst zip = "non-open member property sudden conflict"
 }
 
 class W: Y() {
     override fun ril() = "overridden open member function"
-    override val det = "overridden open member property"
+    override konst det = "overridden open member property"
 }
 
 fun lib(): String {
-    val y = Y()
-    val z = Z()
-    val w = W()
+    konst y = Y()
+    konst z = Z()
+    konst w = W()
     return when {
         y.foo() != "non-open member function moved higher" -> "fail 1"
         y.bar != "non-open member property moved higher" -> "fail 2"

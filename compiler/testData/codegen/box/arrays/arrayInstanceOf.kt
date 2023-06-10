@@ -2,9 +2,9 @@
 
 //test [], get and iterator calls
 fun test(createIntNotLong: Boolean): String {
-    val a = if (createIntNotLong) IntArray(5) else LongArray(5)
+    konst a = if (createIntNotLong) IntArray(5) else LongArray(5)
     if (a is IntArray) {
-        val x = a.iterator()
+        konst x = a.iterator()
         var i = 0
         while (x.hasNext()) {
             if (a[i] != x.next()) return "Fail $i"
@@ -12,7 +12,7 @@ fun test(createIntNotLong: Boolean): String {
         }
         return "O"
     } else if (a is LongArray) {
-        val x = a.iterator()
+        konst x = a.iterator()
         var i = 0
         while (x.hasNext()) {
             if (a.get(i) != x.next()) return "Fail $i"

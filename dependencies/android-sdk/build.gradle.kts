@@ -25,16 +25,16 @@ repositories {
     }
 }
 
-val androidSdk by configurations.creating
-val androidJar by configurations.creating
-val androidPlatform by configurations.creating
-val buildTools by configurations.creating
-val androidEmulator by configurations.creating
+konst androidSdk by configurations.creating
+konst androidJar by configurations.creating
+konst androidPlatform by configurations.creating
+konst buildTools by configurations.creating
+konst androidEmulator by configurations.creating
 
-val libsDestDir = File(buildDir, "androidSdk/platforms/android-26")
-val sdkDestDir = File(buildDir, "androidSdk")
+konst libsDestDir = File(buildDir, "androidSdk/platforms/android-26")
+konst sdkDestDir = File(buildDir, "androidSdk")
 
-val toolsOs = when {
+konst toolsOs = when {
     OperatingSystem.current().isWindows -> "windows"
     OperatingSystem.current().isMacOsX -> "macosx"
     OperatingSystem.current().isLinux -> "linux"
@@ -44,7 +44,7 @@ val toolsOs = when {
     }
 }
 
-val toolsOsDarwin = when {
+konst toolsOsDarwin = when {
     OperatingSystem.current().isWindows -> "windows"
     OperatingSystem.current().isMacOsX -> "darwin"
     OperatingSystem.current().isLinux -> "linux"
@@ -54,23 +54,23 @@ val toolsOsDarwin = when {
     }
 }
 
-val preparePlatform by task<DefaultTask> {
+konst preparePlatform by task<DefaultTask> {
     doLast {}
 }
 
-val prepareSdk by task<DefaultTask> {
+konst prepareSdk by task<DefaultTask> {
     doLast {}
     dependsOn(preparePlatform)
 }
 
-val prepareEmulator by task<DefaultTask> {
+konst prepareEmulator by task<DefaultTask> {
     doLast {}
     dependsOn(prepareSdk)
 }
 
 interface Injected {
-    @get:Inject val fs: FileSystemOperations
-    @get:Inject val archiveOperations: ArchiveOperations
+    @get:Inject konst fs: FileSystemOperations
+    @get:Inject konst archiveOperations: ArchiveOperations
 }
 
 fun unzipSdkTask(
@@ -79,22 +79,22 @@ fun unzipSdkTask(
     prepareTask: TaskProvider<DefaultTask> = prepareSdk,
     unzipFilter: CopySpec.() -> Unit = {}
 ): TaskProvider<Task> {
-    val id = "${sdkName}_$sdkVer"
-    val createdCfg = configurations.create(id)
-    val dependency = "google:$sdkName:$sdkVer${coordinatesSuffix.takeIf { it.isNotEmpty() }?.let { ":$it" } ?: ""}@$ext"
+    konst id = "${sdkName}_$sdkVer"
+    konst createdCfg = configurations.create(id)
+    konst dependency = "google:$sdkName:$sdkVer${coordinatesSuffix.takeIf { it.isNotEmpty() }?.let { ":$it" } ?: ""}@$ext"
     dependencies.add(createdCfg.name, dependency)
 
-    val sdkDestDir = sdkDestDir
-    val unzipTask = tasks.register("unzip_$id") {
-        val cfg = project.configurations.getByName(id)
+    konst sdkDestDir = sdkDestDir
+    konst unzipTask = tasks.register("unzip_$id") {
+        konst cfg = project.configurations.getByName(id)
         dependsOn(cfg)
         inputs.files(cfg)
-        val targetDir = project.file("$sdkDestDir/$destinationSubdir")
+        konst targetDir = project.file("$sdkDestDir/$destinationSubdir")
         outputs.dirs(targetDir)
-        val injected = project.objects.newInstance<Injected>()
-        val fs = injected.fs
-        val archiveOperations = injected.archiveOperations
-        val file = cfg.singleFile
+        konst injected = project.objects.newInstance<Injected>()
+        konst fs = injected.fs
+        konst archiveOperations = injected.archiveOperations
+        konst file = cfg.singleFile
         doFirst {
             fs.copy {
                 when (ext) {
@@ -138,7 +138,7 @@ if (!kotlinBuildProperties.isTeamcityBuild) {
     unzipSdkTask("x86", "19", "system-images/android-19/default", "r06", prepareTask = prepareEmulator)
 }
 
-val clean by task<Delete> {
+konst clean by task<Delete> {
     delete(buildDir)
 }
 

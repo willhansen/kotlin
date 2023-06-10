@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.js.resolve.diagnostics
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 import org.jetbrains.kotlin.descriptors.annotations.KotlinTarget
 import org.jetbrains.kotlin.name.JsStandardClassIds
-import org.jetbrains.kotlin.js.validateQualifier
+import org.jetbrains.kotlin.js.konstidateQualifier
 import org.jetbrains.kotlin.psi.KtAnnotated
 import org.jetbrains.kotlin.psi.KtAnnotationEntry
 import org.jetbrains.kotlin.resolve.AdditionalAnnotationChecker
@@ -34,13 +34,13 @@ object JsQualifierChecker : AdditionalAnnotationChecker {
         annotated: KtAnnotated?,
         languageVersionSettings: LanguageVersionSettings
     ) {
-        val bindingContext = trace.bindingContext
+        konst bindingContext = trace.bindingContext
         for (entry in entries) {
-            val annotation = bindingContext[BindingContext.ANNOTATION, entry] ?: continue
+            konst annotation = bindingContext[BindingContext.ANNOTATION, entry] ?: continue
             if (annotation.fqName != JsStandardClassIds.Annotations.JsQualifier.asSingleFqName()) continue
-            val argument = annotation.allValueArguments.values.singleOrNull()?.value as? String ?: continue
-            if (!validateQualifier(argument)) {
-                val argumentPsi = entry.valueArgumentList!!.arguments[0]
+            konst argument = annotation.allValueArguments.konstues.singleOrNull()?.konstue as? String ?: continue
+            if (!konstidateQualifier(argument)) {
+                konst argumentPsi = entry.konstueArgumentList!!.arguments[0]
                 trace.report(ErrorsJs.WRONG_JS_QUALIFIER.on(argumentPsi))
             }
         }

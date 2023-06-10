@@ -1,4 +1,4 @@
-class Foo(val a: String)
+class Foo(konst a: String)
 
 fun test(s: () -> String): String {
     return s()

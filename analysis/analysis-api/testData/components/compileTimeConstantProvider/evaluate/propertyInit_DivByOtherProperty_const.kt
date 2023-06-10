@@ -1,2 +1,2 @@
-const val d = 1
-val p = <expr>42 / d</expr>
+const konst d = 1
+konst p = <expr>42 / d</expr>

@@ -10,6 +10,6 @@ object Scope {
     fun <T> bar(f: (T) -> Unit): T = TODO()
 
     fun test() {
-        val s: String = bar(::foo)
+        konst s: String = bar(::foo)
     }
 }

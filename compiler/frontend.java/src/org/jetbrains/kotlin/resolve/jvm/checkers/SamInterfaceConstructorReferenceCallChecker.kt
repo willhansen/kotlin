@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.resolve.sam.SamConstructorDescriptor
 
 object SamInterfaceConstructorReferenceCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
-        val resultingDescriptor = resolvedCall.resultingDescriptor
+        konst resultingDescriptor = resolvedCall.resultingDescriptor
         if (resultingDescriptor !is SamConstructorDescriptor || !resolvedCall.call.isCallableReference()) return
 
         if (!resultingDescriptor.baseDescriptorForSynthetic.isFun) {

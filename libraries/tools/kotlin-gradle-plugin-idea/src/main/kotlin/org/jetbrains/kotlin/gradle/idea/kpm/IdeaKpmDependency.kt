@@ -18,13 +18,13 @@ import java.io.Serializable
 import java.util.*
 
 sealed interface IdeaKpmDependency : Serializable {
-    val coordinates: IdeaKpmDependencyCoordinates?
-    val extras: Extras
+    konst coordinates: IdeaKpmDependencyCoordinates?
+    konst extras: Extras
 
     companion object {
-        const val CLASSPATH_BINARY_TYPE = "org.jetbrains.binary.type.classpath"
-        const val SOURCES_BINARY_TYPE = "org.jetbrains.binary.type.sources"
-        const val DOCUMENTATION_BINARY_TYPE = "org.jetbrains.binary.type.documentation"
+        const konst CLASSPATH_BINARY_TYPE = "org.jetbrains.binary.type.classpath"
+        const konst SOURCES_BINARY_TYPE = "org.jetbrains.binary.type.sources"
+        const konst DOCUMENTATION_BINARY_TYPE = "org.jetbrains.binary.type.documentation"
     }
 }
 
@@ -34,36 +34,36 @@ sealed interface IdeaKpmFragmentDependency : IdeaKpmDependency {
 
         @InternalKotlinGradlePluginApi
         companion object {
-            private const val serialVersionUID = 0L
+            private const konst serialVersionUID = 0L
         }
     }
 
-    val type: Type
-    override val coordinates: IdeaKpmFragmentCoordinates
+    konst type: Type
+    override konst coordinates: IdeaKpmFragmentCoordinates
 }
 
 sealed interface IdeaKpmBinaryDependency : IdeaKpmDependency {
-    override val coordinates: IdeaKpmBinaryCoordinates?
+    override konst coordinates: IdeaKpmBinaryCoordinates?
 }
 
 sealed interface IdeaKpmUnresolvedBinaryDependency : IdeaKpmBinaryDependency {
-    val cause: String?
+    konst cause: String?
 }
 
 sealed interface IdeaKpmResolvedBinaryDependency : IdeaKpmBinaryDependency {
-    val binaryType: String
-    val binaryFile: File
+    konst binaryType: String
+    konst binaryFile: File
 }
 
-val IdeaKpmResolvedBinaryDependency.isSourcesType get() = binaryType == SOURCES_BINARY_TYPE
-val IdeaKpmResolvedBinaryDependency.isDocumentationType get() = binaryType == DOCUMENTATION_BINARY_TYPE
-val IdeaKpmResolvedBinaryDependency.isClasspathType get() = binaryType == CLASSPATH_BINARY_TYPE
+konst IdeaKpmResolvedBinaryDependency.isSourcesType get() = binaryType == SOURCES_BINARY_TYPE
+konst IdeaKpmResolvedBinaryDependency.isDocumentationType get() = binaryType == DOCUMENTATION_BINARY_TYPE
+konst IdeaKpmResolvedBinaryDependency.isClasspathType get() = binaryType == CLASSPATH_BINARY_TYPE
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmFragmentDependencyImpl(
-    override val type: IdeaKpmFragmentDependency.Type,
-    override val coordinates: IdeaKpmFragmentCoordinates,
-    override val extras: Extras = emptyExtras()
+    override konst type: IdeaKpmFragmentDependency.Type,
+    override konst coordinates: IdeaKpmFragmentCoordinates,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmFragmentDependency {
 
     override fun toString(): String {
@@ -73,16 +73,16 @@ data class IdeaKpmFragmentDependencyImpl(
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmResolvedBinaryDependencyImpl(
-    override val coordinates: IdeaKpmBinaryCoordinates?,
-    override val binaryType: String,
-    override val binaryFile: File,
-    override val extras: Extras = emptyExtras()
+    override konst coordinates: IdeaKpmBinaryCoordinates?,
+    override konst binaryType: String,
+    override konst binaryFile: File,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmResolvedBinaryDependency {
 
     override fun toString(): String {
@@ -91,19 +91,19 @@ data class IdeaKpmResolvedBinaryDependencyImpl(
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }
 
 @InternalKotlinGradlePluginApi
 data class IdeaKpmUnresolvedBinaryDependencyImpl(
-    override val cause: String?,
-    override val coordinates: IdeaKpmBinaryCoordinates?,
-    override val extras: Extras = emptyExtras()
+    override konst cause: String?,
+    override konst coordinates: IdeaKpmBinaryCoordinates?,
+    override konst extras: Extras = emptyExtras()
 ) : IdeaKpmUnresolvedBinaryDependency {
 
     @InternalKotlinGradlePluginApi
     companion object {
-        private const val serialVersionUID = 0L
+        private const konst serialVersionUID = 0L
     }
 }

@@ -7,8 +7,8 @@ var result = Test(1)
 
 inline var z: Test
     get() = result
-    set(value)  {
-        result = value
+    set(konstue)  {
+        result = konstue
     }
 
 operator fun Test.plus(p: Int): Test {

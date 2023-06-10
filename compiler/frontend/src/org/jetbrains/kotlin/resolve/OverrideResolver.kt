@@ -45,11 +45,11 @@ import org.jetbrains.kotlin.types.checker.NewKotlinTypeCheckerImpl
 import java.util.*
 
 class OverrideResolver(
-    private val trace: BindingTrace,
-    private val overridesBackwardCompatibilityHelper: OverridesBackwardCompatibilityHelper,
-    private val languageVersionSettings: LanguageVersionSettings,
-    private val kotlinTypeRefiner: KotlinTypeRefiner,
-    private val platformSpecificDiagnosticComponents: PlatformSpecificDiagnosticComponents
+    private konst trace: BindingTrace,
+    private konst overridesBackwardCompatibilityHelper: OverridesBackwardCompatibilityHelper,
+    private konst languageVersionSettings: LanguageVersionSettings,
+    private konst kotlinTypeRefiner: KotlinTypeRefiner,
+    private konst platformSpecificDiagnosticComponents: PlatformSpecificDiagnosticComponents
 ) {
 
     fun check(c: TopDownAnalysisContext) {
@@ -60,8 +60,8 @@ class OverrideResolver(
 
 
     private fun checkOverrides(c: TopDownAnalysisContext) {
-        for ((key, value) in c.declaredClasses) {
-            checkOverridesInAClass(value, key)
+        for ((key, konstue) in c.declaredClasses) {
+            checkOverridesInAClass(konstue, key)
         }
     }
 
@@ -71,7 +71,7 @@ class OverrideResolver(
             checkOverrideForMember(member)
         }
 
-        val inheritedMemberErrors = CollectErrorInformationForInheritedMembersStrategy(klass, classDescriptor)
+        konst inheritedMemberErrors = CollectErrorInformationForInheritedMembersStrategy(klass, classDescriptor)
 
         checkInheritedAndDelegatedSignatures(classDescriptor, inheritedMemberErrors, inheritedMemberErrors, kotlinTypeRefiner)
         inheritedMemberErrors.doReportErrors()
@@ -88,7 +88,7 @@ class OverrideResolver(
     }
 
     private class CollectMissingImplementationsStrategy : CheckInheritedSignaturesReportStrategy {
-        val shouldImplement = LinkedHashSet<CallableMemberDescriptor>()
+        konst shouldImplement = LinkedHashSet<CallableMemberDescriptor>()
 
         override fun abstractMemberNotImplemented(descriptor: CallableMemberDescriptor) {
             shouldImplement.add(descriptor)
@@ -132,7 +132,7 @@ class OverrideResolver(
                 this(delegateStrategy.klass, delegateStrategy.classDescriptor)
 
         override fun doReportErrors() {
-            val canHaveAbstractMembers = classCanHaveAbstractFakeOverride(classDescriptor)
+            konst canHaveAbstractMembers = classCanHaveAbstractFakeOverride(classDescriptor)
             if (abstractInBaseClassNoImpl.isNotEmpty() && !canHaveAbstractMembers) {
                 if (languageVersionSettings.supportsFeature(AbstractClassMemberNotImplementedWithIntermediateAbstractClass)) {
                     trace.report(ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED.on(klass, klass, abstractInBaseClassNoImpl.first()))
@@ -141,7 +141,7 @@ class OverrideResolver(
                 }
             }
             if (conflictingInterfaceMembers.isNotEmpty()) {
-                val interfaceMember = conflictingInterfaceMembers.first()
+                konst interfaceMember = conflictingInterfaceMembers.first()
                 if (languageVersionSettings.supportsFeature(AbstractClassMemberNotImplementedWithIntermediateAbstractClass)) {
                     trace.report(MANY_INTERFACES_MEMBER_NOT_IMPLEMENTED.on(klass, klass, interfaceMember))
                 } else {
@@ -152,18 +152,18 @@ class OverrideResolver(
     }
 
     private open inner class CollectErrorInformationForInheritedMembersStrategy(
-        val klass: KtClassOrObject,
-        val classDescriptor: ClassDescriptor
+        konst klass: KtClassOrObject,
+        konst classDescriptor: ClassDescriptor
     ) : CheckInheritedSignaturesReportStrategy, CheckOverrideReportStrategy {
 
-        private val abstractNoImpl = linkedSetOf<CallableMemberDescriptor>()
-        protected val abstractInBaseClassNoImpl = linkedSetOf<CallableMemberDescriptor>()
-        private val abstractInvisibleSuper = linkedSetOf<CallableMemberDescriptor>()
-        private val multipleImplementations = linkedSetOf<CallableMemberDescriptor>()
-        protected val conflictingInterfaceMembers = linkedSetOf<CallableMemberDescriptor>()
-        private val conflictingReturnTypes = linkedSetOf<CallableMemberDescriptor>()
+        private konst abstractNoImpl = linkedSetOf<CallableMemberDescriptor>()
+        protected konst abstractInBaseClassNoImpl = linkedSetOf<CallableMemberDescriptor>()
+        private konst abstractInvisibleSuper = linkedSetOf<CallableMemberDescriptor>()
+        private konst multipleImplementations = linkedSetOf<CallableMemberDescriptor>()
+        protected konst conflictingInterfaceMembers = linkedSetOf<CallableMemberDescriptor>()
+        private konst conflictingReturnTypes = linkedSetOf<CallableMemberDescriptor>()
 
-        private val onceErrorsReported = SmartHashSet<DiagnosticFactoryWithPsiElement<*, *>>()
+        private konst onceErrorsReported = SmartHashSet<DiagnosticFactoryWithPsiElement<*, *>>()
 
         fun toDeprecationStrategy() =
             CollectWarningInformationForInheritedMembersStrategy(this)
@@ -229,7 +229,7 @@ class OverrideResolver(
             overriding: CallableMemberDescriptor,
             overridden: CallableMemberDescriptor
         ) {
-            val (diagnosticFactory, relevantDiagnosticFromInheritance) = if (overridden is PropertyDescriptor)
+            konst (diagnosticFactory, relevantDiagnosticFromInheritance) = if (overridden is PropertyDescriptor)
                 PROPERTY_TYPE_MISMATCH_BY_DELEGATION to PROPERTY_TYPE_MISMATCH_ON_INHERITANCE
             else
                 RETURN_TYPE_MISMATCH_BY_DELEGATION to RETURN_TYPE_MISMATCH_ON_INHERITANCE
@@ -260,7 +260,7 @@ class OverrideResolver(
         }
 
         open fun doReportErrors() {
-            val canHaveAbstractMembers = classCanHaveAbstractFakeOverride(classDescriptor)
+            konst canHaveAbstractMembers = classCanHaveAbstractFakeOverride(classDescriptor)
             if (abstractInBaseClassNoImpl.isNotEmpty() && !canHaveAbstractMembers) {
                 trace.report(ABSTRACT_CLASS_MEMBER_NOT_IMPLEMENTED.on(klass, klass, abstractInBaseClassNoImpl.first()))
             } else if (abstractNoImpl.isNotEmpty() && !canHaveAbstractMembers) {
@@ -306,12 +306,12 @@ class OverrideResolver(
             return
         }
 
-        val member = DescriptorToSourceUtils.descriptorToDeclaration(declared) as KtNamedDeclaration?
+        konst member = DescriptorToSourceUtils.descriptorToDeclaration(declared) as KtNamedDeclaration?
             ?: throw IllegalStateException("declared descriptor is not resolved to declaration: $declared")
 
-        val modifierList = member.modifierList
-        val hasOverrideNode = modifierList != null && modifierList.hasModifier(KtTokens.OVERRIDE_KEYWORD)
-        val overriddenDescriptors = declared.overriddenDescriptors
+        konst modifierList = member.modifierList
+        konst hasOverrideNode = modifierList != null && modifierList.hasModifier(KtTokens.OVERRIDE_KEYWORD)
+        konst overriddenDescriptors = declared.overriddenDescriptors
 
         if (hasOverrideNode) {
             checkOverridesForMemberMarkedOverride(
@@ -368,13 +368,13 @@ class OverrideResolver(
                 }, languageVersionSettings
             )
         } else if (!overriddenDescriptors.isEmpty() && !overridesBackwardCompatibilityHelper.overrideCanBeOmitted(declared)) {
-            val overridden = overriddenDescriptors.first()
+            konst overridden = overriddenDescriptors.first()
             trace.report(VIRTUAL_MEMBER_HIDDEN.on(member, declared, overridden, overridden.containingDeclaration))
         }
     }
 
     private fun checkOverrideForComponentFunction(componentFunction: CallableMemberDescriptor) {
-        val dataModifier = findDataModifierForDataClass(componentFunction.containingDeclaration)
+        konst dataModifier = findDataModifierForDataClass(componentFunction.containingDeclaration)
 
         checkOverridesForMember(componentFunction, componentFunction.overriddenDescriptors, object : CheckOverrideReportStrategy {
             private var overrideConflict = false
@@ -400,16 +400,16 @@ class OverrideResolver(
     }
 
     private fun checkOverrideForCopyFunction(copyFunction: CallableMemberDescriptor) {
-        val overridden = copyFunction.overriddenDescriptors.firstOrNull()
+        konst overridden = copyFunction.overriddenDescriptors.firstOrNull()
         if (overridden != null) {
-            val baseClassifier = overridden.containingDeclaration
-            val dataModifier = findDataModifierForDataClass(copyFunction.containingDeclaration)
+            konst baseClassifier = overridden.containingDeclaration
+            konst dataModifier = findDataModifierForDataClass(copyFunction.containingDeclaration)
             trace.report(DATA_CLASS_OVERRIDE_DEFAULT_VALUES.on(languageVersionSettings, dataModifier, copyFunction, baseClassifier))
         }
     }
 
     private fun checkParameterOverridesForAllClasses(c: TopDownAnalysisContext) {
-        for (classDescriptor in c.declaredClasses.values) {
+        for (classDescriptor in c.declaredClasses.konstues) {
             for (member in DescriptorUtils.getAllDescriptors(classDescriptor.defaultType.memberScope)) {
                 if (member is CallableMemberDescriptor) {
                     checkOverridesForParameters(member)
@@ -419,10 +419,10 @@ class OverrideResolver(
     }
 
     private fun checkOverridesForParameters(declared: CallableMemberDescriptor) {
-        val isDeclaration = declared.kind == CallableMemberDescriptor.Kind.DECLARATION
+        konst isDeclaration = declared.kind == CallableMemberDescriptor.Kind.DECLARATION
         if (isDeclaration) {
             // No check if the function is not marked as 'override'
-            val declaration = DescriptorToSourceUtils.descriptorToDeclaration(declared) as KtModifierListOwner?
+            konst declaration = DescriptorToSourceUtils.descriptorToDeclaration(declared) as KtModifierListOwner?
             if (declaration != null && !declaration.hasModifier(KtTokens.OVERRIDE_KEYWORD)) {
                 return
             }
@@ -431,16 +431,16 @@ class OverrideResolver(
         // Let p1 be a parameter of the overriding function
         // Let p2 be a parameter of the function being overridden
         // Then
-        //  a) p1 is not allowed to have a default value declared
+        //  a) p1 is not allowed to have a default konstue declared
         //  b) p1 must have the same name as p2
-        for (parameterFromSubclass in declared.valueParameters) {
+        for (parameterFromSubclass in declared.konstueParameters) {
             var defaultsInSuper = 0
             for (parameterFromSuperclass in parameterFromSubclass.overriddenDescriptors) {
                 if (parameterFromSuperclass.declaresDefaultValue()) {
                     defaultsInSuper++
                 }
             }
-            val multipleDefaultsInSuper = defaultsInSuper > 1
+            konst multipleDefaultsInSuper = defaultsInSuper > 1
 
             if (isDeclaration) {
                 checkNameAndDefaultForDeclaredParameter(parameterFromSubclass, multipleDefaultsInSuper)
@@ -451,7 +451,7 @@ class OverrideResolver(
     }
 
     private fun checkNameAndDefaultForDeclaredParameter(descriptor: ValueParameterDescriptor, multipleDefaultsInSuper: Boolean) {
-        val parameter = DescriptorToSourceUtils.descriptorToDeclaration(descriptor) as? KtParameter
+        konst parameter = DescriptorToSourceUtils.descriptorToDeclaration(descriptor) as? KtParameter
             ?: error("Declaration not found for parameter: $descriptor")
 
         if (descriptor.declaresDefaultValue()) {
@@ -481,8 +481,8 @@ class OverrideResolver(
         descriptor: ValueParameterDescriptor,
         multipleDefaultsInSuper: Boolean
     ) {
-        val containingClass = containingFunction.containingDeclaration
-        val classElement = DescriptorToSourceUtils.descriptorToDeclaration(containingClass) as KtClassOrObject?
+        konst containingClass = containingFunction.containingDeclaration
+        konst classElement = DescriptorToSourceUtils.descriptorToDeclaration(containingClass) as KtClassOrObject?
             ?: error("Declaration not found for class: $containingClass")
 
         if (multipleDefaultsInSuper) {
@@ -503,11 +503,11 @@ class OverrideResolver(
     }
 
     private fun checkVisibility(c: TopDownAnalysisContext) {
-        for ((key, value) in c.members) {
-            checkVisibilityForMember(key, value)
-            if (key is KtProperty && value is PropertyDescriptor) {
-                val setter = key.setter
-                val setterDescriptor = value.setter
+        for ((key, konstue) in c.members) {
+            checkVisibilityForMember(key, konstue)
+            if (key is KtProperty && konstue is PropertyDescriptor) {
+                konst setter = key.setter
+                konst setterDescriptor = konstue.setter
                 if (setter != null && setterDescriptor != null) {
                     checkVisibilityForMember(setter, setterDescriptor)
                 }
@@ -516,9 +516,9 @@ class OverrideResolver(
     }
 
     private fun checkVisibilityForMember(declaration: KtDeclaration, memberDescriptor: CallableMemberDescriptor) {
-        val visibility = memberDescriptor.visibility
+        konst visibility = memberDescriptor.visibility
         for (descriptor in memberDescriptor.overriddenDescriptors) {
-            val compare = DescriptorVisibilities.compare(visibility, descriptor.visibility)
+            konst compare = DescriptorVisibilities.compare(visibility, descriptor.visibility)
             if (compare == null) {
                 trace.report(
                     CANNOT_CHANGE_ACCESS_PRIVILEGE.on(
@@ -556,7 +556,7 @@ class OverrideResolver(
 
         fun createCannotInferVisibilityReporter(trace: BindingTrace): Function1<CallableMemberDescriptor, Unit> {
             return fun(descriptor: CallableMemberDescriptor) {
-                val reportOn: DeclarationDescriptor = when {
+                konst reportOn: DeclarationDescriptor = when {
                     descriptor.kind == FAKE_OVERRIDE || descriptor.kind == DELEGATION ->
                         DescriptorUtils.getContainingClass(descriptor) ?: throw AssertionError("Class member expected: $descriptor")
                     descriptor is PropertyAccessorDescriptor && descriptor.isDefault ->
@@ -565,7 +565,7 @@ class OverrideResolver(
                         descriptor
                 }
 
-                val element = DescriptorToSourceUtils.descriptorToDeclaration(reportOn)
+                konst element = DescriptorToSourceUtils.descriptorToDeclaration(reportOn)
                 if (element is KtDeclaration) {
                     trace.report(CANNOT_INFER_VISIBILITY.on(element, descriptor))
                 }
@@ -574,7 +574,7 @@ class OverrideResolver(
         }
 
         fun getMissingImplementations(classDescriptor: ClassDescriptor): Set<CallableMemberDescriptor> {
-            val collector = CollectMissingImplementationsStrategy()
+            konst collector = CollectMissingImplementationsStrategy()
             // Note that it is fine to pass default refiner here. Reason:
             // 1. We bind overrides with proper refiners and [checkInheritedAndDelegatedSignatures] skips all properly-bound overrides,
             //    so we would consider only unbound overrides
@@ -601,7 +601,7 @@ class OverrideResolver(
         }
 
         private fun CallableMemberDescriptor.computeRelevantDirectlyOverridden(): Set<CallableMemberDescriptor> {
-            val directOverridden = overriddenDescriptors
+            konst directOverridden = overriddenDescriptors
 
             // directOverridden may be empty if user tries to delegate implementation of abstract class instead of interface
             if (directOverridden.isEmpty()) return emptySet()
@@ -609,10 +609,10 @@ class OverrideResolver(
             // collects map from the directly overridden descriptor to the set of declarations:
             // -- if directly overridden is not fake, the set consists of one element: this directly overridden
             // -- if it's fake, overridden declarations (non-fake) of this descriptor are collected
-            val overriddenDeclarationsByDirectParent = collectOverriddenDeclarations(directOverridden)
+            konst overriddenDeclarationsByDirectParent = collectOverriddenDeclarations(directOverridden)
 
-            val allOverriddenDeclarations = ContainerUtil.flatten(overriddenDeclarationsByDirectParent.values)
-            val allFilteredOverriddenDeclarations = OverridingUtil.filterOutOverridden(
+            konst allOverriddenDeclarations = ContainerUtil.flatten(overriddenDeclarationsByDirectParent.konstues)
+            konst allFilteredOverriddenDeclarations = OverridingUtil.filterOutOverridden(
                 Sets.newLinkedHashSet(allOverriddenDeclarations)
             )
 
@@ -625,10 +625,10 @@ class OverrideResolver(
             overrideReportStrategyForDelegates: CheckOverrideReportStrategy?,
             kotlinTypeRefiner: KotlinTypeRefiner
         ) {
-            val kind = descriptor.kind
+            konst kind = descriptor.kind
             if (kind != FAKE_OVERRIDE && kind != DELEGATION) return
 
-            val relevantDirectlyOverridden = descriptor.computeRelevantDirectlyOverridden()
+            konst relevantDirectlyOverridden = descriptor.computeRelevantDirectlyOverridden()
             if (relevantDirectlyOverridden.isEmpty()) return
 
             if (descriptor.visibility === DescriptorVisibilities.INVISIBLE_FAKE) {
@@ -646,7 +646,7 @@ class OverrideResolver(
                 checkMissingOverridesByJava8Restrictions(relevantDirectlyOverridden, reportingStrategy)
             }
 
-            val (concreteOverridden, abstractOverridden) = relevantDirectlyOverridden
+            konst (concreteOverridden, abstractOverridden) = relevantDirectlyOverridden
                 .filter { !isOrOverridesSynthesized(it) }
                 .partition { it.modality != Modality.ABSTRACT }
 
@@ -659,7 +659,7 @@ class OverrideResolver(
                     }
                 1 ->
                     if (kind != DELEGATION) {
-                        val implementation = concreteOverridden.first()
+                        konst implementation = concreteOverridden.first()
                         collectAbstractMethodsWithMoreSpecificReturnType(abstractOverridden, implementation, kotlinTypeRefiner).forEach {
                             reportingStrategy.abstractMemberWithMoreSpecificType(it, implementation)
                         }
@@ -679,7 +679,7 @@ class OverrideResolver(
             // the checks below are only relevant for non-abstract classes or objects
             if ((descriptor.containingDeclaration as? ClassDescriptor)?.modality === Modality.ABSTRACT) return
 
-            val abstractOverrides = overriddenDescriptors.filter { it.modality === Modality.ABSTRACT }
+            konst abstractOverrides = overriddenDescriptors.filter { it.modality === Modality.ABSTRACT }
 
             if (abstractOverrides.size != overriddenDescriptors.size) return // has non-abstract override
 
@@ -697,7 +697,7 @@ class OverrideResolver(
             // Java 8:
             // -- class should implement an abstract member of a super-class,
             //    even if relevant default implementation is provided in one of the super-interfaces;
-            // -- inheriting multiple override equivalent methods from an interface is a conflict
+            // -- inheriting multiple override equikonstent methods from an interface is a conflict
             //    regardless of 'default' vs 'abstract'.
 
             var overridesClassMember = false
@@ -706,7 +706,7 @@ class OverrideResolver(
             var overridesNonAbstractInBaseClass: CallableMemberDescriptor? = null
             var fakeOverrideInBaseClass: CallableMemberDescriptor? = null
             for (overridden in relevantDirectlyOverridden) {
-                val containingDeclaration = overridden.containingDeclaration as? ClassDescriptor ?: continue
+                konst containingDeclaration = overridden.containingDeclaration as? ClassDescriptor ?: continue
                 if (containingDeclaration.kind == ClassKind.CLASS) {
                     if (overridden.kind == FAKE_OVERRIDE && !containingDeclaration.isExpect) {
                         // Fake override in a class in fact can mean an interface member
@@ -738,7 +738,7 @@ class OverrideResolver(
                     reportingStrategy.conflictingInterfaceMemberNotImplemented(member)
                 }
             } else if (fakeOverrideInBaseClass != null) {
-                val newReportingStrategy = if (reportingStrategy is CollectErrorInformationForInheritedMembersStrategy) {
+                konst newReportingStrategy = if (reportingStrategy is CollectErrorInformationForInheritedMembersStrategy) {
                     reportingStrategy.toDeprecationStrategy()
                 } else reportingStrategy
                 checkMissingOverridesByJava8Restrictions(
@@ -797,9 +797,9 @@ class OverrideResolver(
         are overridden by some other function and corresponding directly overridden descriptor is not relevant.
         */
 
-            val iterator = overriddenByParent.entries.iterator()
+            konst iterator = overriddenByParent.entries.iterator()
             while (iterator.hasNext()) {
-                if (!isRelevant(iterator.next().value, overriddenByParent.values, allFilteredOverriddenDeclarations)) {
+                if (!isRelevant(iterator.next().konstue, overriddenByParent.konstues, allFilteredOverriddenDeclarations)) {
                     iterator.remove()
                 }
             }
@@ -822,10 +822,10 @@ class OverrideResolver(
         private fun collectOverriddenDeclarations(
             directOverriddenDescriptors: Collection<CallableMemberDescriptor>
         ): MutableMap<CallableMemberDescriptor, Set<CallableMemberDescriptor>> {
-            val overriddenDeclarationsByDirectParent = Maps.newLinkedHashMap<CallableMemberDescriptor, Set<CallableMemberDescriptor>>()
+            konst overriddenDeclarationsByDirectParent = Maps.newLinkedHashMap<CallableMemberDescriptor, Set<CallableMemberDescriptor>>()
             for (descriptor in directOverriddenDescriptors) {
-                val overriddenDeclarations = OverridingUtil.getOverriddenDeclarations(descriptor)
-                val filteredOverrides = OverridingUtil.filterOutOverridden(overriddenDeclarations)
+                konst overriddenDeclarations = OverridingUtil.getOverriddenDeclarations(descriptor)
+                konst filteredOverrides = OverridingUtil.filterOutOverridden(overriddenDeclarations)
                 overriddenDeclarationsByDirectParent[descriptor] = LinkedHashSet(filteredOverrides)
             }
             return overriddenDeclarationsByDirectParent
@@ -856,16 +856,16 @@ class OverrideResolver(
             reportError: CheckOverrideReportForDeclaredMemberStrategy,
             languageVersionSettings: LanguageVersionSettings
         ) {
-            val overriddenDescriptors = declared.overriddenDescriptors
+            konst overriddenDescriptors = declared.overriddenDescriptors
 
             checkOverridesForMember(declared, overriddenDescriptors, reportError, kotlinTypeRefiner)
 
             if (overriddenDescriptors.isEmpty()) {
-                val containingDeclaration = declared.containingDeclaration
-                val declaringClass = containingDeclaration as? ClassDescriptor
+                konst containingDeclaration = declared.containingDeclaration
+                konst declaringClass = containingDeclaration as? ClassDescriptor
                     ?: error("Overrides may only be resolved in a class, but $declared comes from $containingDeclaration")
 
-                val invisibleOverriddenDescriptor =
+                konst invisibleOverriddenDescriptor =
                     findInvisibleOverriddenDescriptor(
                         declared, declaringClass, kotlinTypeRefiner, languageVersionSettings
                     )
@@ -906,15 +906,15 @@ class OverrideResolver(
             subDescriptor: CallableDescriptor,
             kotlinTypeRefiner: KotlinTypeRefiner,
         ): Boolean {
-            val typeSubstitutor = prepareTypeSubstitutor(superDescriptor, subDescriptor) ?: return false
+            konst typeSubstitutor = prepareTypeSubstitutor(superDescriptor, subDescriptor) ?: return false
 
-            val superReturnType = superDescriptor.returnType!!
+            konst superReturnType = superDescriptor.returnType!!
 
-            val subReturnType = subDescriptor.returnType!!
+            konst subReturnType = subDescriptor.returnType!!
 
-            val substitutedSuperReturnType = typeSubstitutor.substitute(superReturnType, Variance.OUT_VARIANCE)!!
+            konst substitutedSuperReturnType = typeSubstitutor.substitute(superReturnType, Variance.OUT_VARIANCE)!!
 
-            val typeChecker = NewKotlinTypeCheckerImpl(kotlinTypeRefiner)
+            konst typeChecker = NewKotlinTypeCheckerImpl(kotlinTypeRefiner)
             return if (superDescriptor is PropertyDescriptor && superDescriptor.isVar)
                 typeChecker.equalTypes(subReturnType, substitutedSuperReturnType)
             else
@@ -925,11 +925,11 @@ class OverrideResolver(
             superDescriptor: CallableDescriptor,
             subDescriptor: CallableDescriptor
         ): TypeSubstitutor? {
-            val superTypeParameters = superDescriptor.typeParameters
-            val subTypeParameters = subDescriptor.typeParameters
+            konst superTypeParameters = superDescriptor.typeParameters
+            konst subTypeParameters = subDescriptor.typeParameters
             if (subTypeParameters.size != superTypeParameters.size) return null
 
-            val arguments = ArrayList<TypeProjection>(subTypeParameters.size)
+            konst arguments = ArrayList<TypeProjection>(subTypeParameters.size)
             for (i in superTypeParameters.indices) {
                 arguments.add(TypeProjectionImpl(subTypeParameters[i].defaultType))
             }
@@ -938,9 +938,9 @@ class OverrideResolver(
         }
 
         private fun findDataModifierForDataClass(dataClass: DeclarationDescriptor): PsiElement {
-            val classDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(dataClass) as KtClassOrObject?
+            konst classDeclaration = DescriptorToSourceUtils.getSourceFromDescriptor(dataClass) as KtClassOrObject?
             if (classDeclaration?.modifierList != null) {
-                val modifier = classDeclaration.modifierList!!.getModifier(KtTokens.DATA_KEYWORD)
+                konst modifier = classDeclaration.modifierList!!.getModifier(KtTokens.DATA_KEYWORD)
                 if (modifier != null) {
                     return modifier
                 }
@@ -957,7 +957,7 @@ class OverrideResolver(
         ): CallableMemberDescriptor? {
             @OptIn(TypeRefinement::class)
             for (supertype in kotlinTypeRefiner.refineSupertypes(declaringClass)) {
-                val all = linkedSetOf<CallableMemberDescriptor>()
+                konst all = linkedSetOf<CallableMemberDescriptor>()
                 all.addAll(supertype.memberScope.getContributedFunctions(declared.name, NoLookupLocation.WHEN_CHECK_OVERRIDES))
                 all.addAll(supertype.memberScope.getContributedVariables(declared.name, NoLookupLocation.WHEN_CHECK_OVERRIDES))
                 for (fromSuper in all) {

@@ -5,7 +5,7 @@ package example;
 
 public abstract class JavaSuper {
     protected @interface Foo {
-        String value() default "";
+        String konstue() default "";
     }
 }
 

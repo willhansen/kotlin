@@ -53,9 +53,9 @@ internal fun getJvmShortName(klass: IrClass): String =
         ?: SpecialNames.safeIdentifier(klass.name).identifier
 
 internal class PossiblyInnerIrType(
-    val classifier: IrClass,
-    val arguments: List<IrTypeArgument>,
-    private val outerType: PossiblyInnerIrType?
+    konst classifier: IrClass,
+    konst arguments: List<IrTypeArgument>,
+    private konst outerType: PossiblyInnerIrType?
 ) {
     fun segments(): List<PossiblyInnerIrType> = outerType?.segments().orEmpty() + this
 }
@@ -66,7 +66,7 @@ internal fun IrSimpleType.buildPossiblyInnerType(): PossiblyInnerIrType? =
 private fun IrSimpleType.buildPossiblyInnerType(classifier: IrClass?, index: Int): PossiblyInnerIrType? {
     if (classifier == null) return null
 
-    val toIndex = classifier.typeParameters.size + index
+    konst toIndex = classifier.typeParameters.size + index
     if (!classifier.isInner) {
         assert(toIndex == arguments.size || classifier.visibility == DescriptorVisibilities.LOCAL) {
             "${arguments.size - toIndex} trailing arguments were found in this type: ${render()}"
@@ -75,7 +75,7 @@ private fun IrSimpleType.buildPossiblyInnerType(classifier: IrClass?, index: Int
         return PossiblyInnerIrType(classifier, arguments.subList(index, arguments.size), null)
     }
 
-    val argumentsSubList = arguments.subList(index, toIndex)
+    konst argumentsSubList = arguments.subList(index, toIndex)
     return PossiblyInnerIrType(
         classifier, argumentsSubList,
         buildPossiblyInnerType(classifier.parentAsClass, toIndex)

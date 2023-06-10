@@ -39,19 +39,19 @@ public class DiagnosticFactory0<E extends Element> extends DiagnosticFactory<Dia
 class Fix(e: DerivedElement)
 
 fun create(d: Diagnostic<DerivedElement>) {
-    val element = d.element
+    konst element = d.element
     Fix(element)
 }
 
 fun <DE : DerivedElement> createGeneric(d: Diagnostic<DE>) {
-    val element = d.element
+    konst element = d.element
     Fix(element)
 }
 
-private val DERIVED_FACTORY = DiagnosticFactory0<DerivedElement>()
+private konst DERIVED_FACTORY = DiagnosticFactory0<DerivedElement>()
 
 fun createViaFactory(d: EmptyDiagnostic) {
-    val casted = DERIVED_FACTORY.cast(d)
-    val element = casted.element
+    konst casted = DERIVED_FACTORY.cast(d)
+    konst element = casted.element
     Fix(element)
 }

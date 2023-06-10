@@ -4,7 +4,7 @@ interface IFooStr {
 }
 
 interface IBar {
-  abstract val bar: Int
+  abstract konst bar: Int
     abstract get
 
 }
@@ -28,7 +28,7 @@ class Test1 : CFoo<String>, IFooStr, IBar {
 
   }
 
-  override val bar: Int
+  override konst bar: Int
     field = 42
     override get
 

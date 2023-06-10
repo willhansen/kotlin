@@ -4,8 +4,8 @@
 
 import kotlin.test.assertEquals
 
-abstract class S<T>(val klass: Class<T>) {
-    val result = klass.simpleName
+abstract class S<T>(konst klass: Class<T>) {
+    konst result = klass.simpleName
 }
 
 object OK : S<OK>(OK::class.java)

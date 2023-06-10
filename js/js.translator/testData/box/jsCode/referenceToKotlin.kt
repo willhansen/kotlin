@@ -10,13 +10,13 @@ fun test1(p: String): String {
 }
 
 fun test2(): String {
-    val p = "test2"
+    konst p = "test2"
     log += p("start2")
     return js("p")
 }
 
 fun test3(): String {
-    val p = "wrong3"
+    konst p = "wrong3"
     return js("var p = 'test3'; p")
 }
 
@@ -27,7 +27,7 @@ fun test4(): String {
 fun f() = js("p('test5')")
 
 fun test5(): String {
-    val p = "wrong5"
+    konst p = "wrong5"
     // The behavoiur of the classical backend is weird and buggy
     // From the user side, the local variable `p` is captured
     // but we have different behaviour because the renaming phase in classical backend
@@ -38,7 +38,7 @@ fun test5(): String {
 
 fun test6(): String {
     log += p("start6")
-    val p = "test6"
+    konst p = "test6"
     return js("""
         var x = p;
         var g = function(p) {
@@ -50,7 +50,7 @@ fun test6(): String {
 
 fun test7(): String {
     log += p("start7")
-    val p = "test7"
+    konst p = "test7"
     return js("""
         var g = function() {
             return p;
@@ -60,8 +60,8 @@ fun test7(): String {
 }
 
 fun test8(): String {
-    val p = "wrong8"
-    val list = listOf("t", "e", "s", "t", "8")
+    konst p = "wrong8"
+    konst list = listOf("t", "e", "s", "t", "8")
     var result = ""
     for (p in list) {
         result += js("p")
@@ -70,8 +70,8 @@ fun test8(): String {
 }
 
 fun test9(): String {
-    val p = "wrong9"
-    val list = listOf("t" to "e", "s" to "t", "9" to "!")
+    konst p = "wrong9"
+    konst list = listOf("t" to "e", "s" to "t", "9" to "!")
     var result = ""
     for ((p, q) in list) {
         result += js("p")
@@ -81,7 +81,7 @@ fun test9(): String {
 }
 
 fun test10(): String {
-    val list = listOf("O" to "K")
+    konst list = listOf("O" to "K")
     var result = ""
     for ((p, _) in list) {
         result += js("typeof p")

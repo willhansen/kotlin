@@ -11,19 +11,19 @@ import kotlin.concurrent.AtomicReference
 import kotlin.native.ref.WeakReference
 import kotlinx.cinterop.StableRef
 
-class Data(val x: Int)
+class Data(konst x: Int)
 
-val topInt = 1
-val topString = "string"
+konst topInt = 1
+konst topString = "string"
 var topStringVar = "string"
-val topSharedStringWithGetter: String
+konst topSharedStringWithGetter: String
         get() = "top"
-val topData = Data(42)
+konst topData = Data(42)
 @SharedImmutable
-val topSharedData = Data(43)
+konst topSharedData = Data(43)
 
 @Test fun runTest1() {
-    val worker = Worker.start()
+    konst worker = Worker.start()
 
     assertEquals(1, topInt)
     assertEquals("string", topString)
@@ -87,22 +87,22 @@ val topSharedData = Data(43)
     println("OK")
 }
 
-val atomicRef = AtomicReference<Any?>(Any().freeze())
+konst atomicRef = AtomicReference<Any?>(Any().freeze())
 @SharedImmutable
-val stableRef = StableRef.create(Any().freeze())
-val semaphore = AtomicInt(0)
+konst stableRef = StableRef.create(Any().freeze())
+konst semaphore = AtomicInt(0)
 
 @Test fun runTest2() {
-    semaphore.value = 0
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { null }) {
-        val value = atomicRef.value
+    semaphore.konstue = 0
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { null }) {
+        konst konstue = atomicRef.konstue
         semaphore.incrementAndGet()
-        while (semaphore.value != 2) {}
-        println(value.toString() != "")
+        while (semaphore.konstue != 2) {}
+        println(konstue.toString() != "")
     }
-    while (semaphore.value != 1) {}
-    atomicRef.value = null
+    while (semaphore.konstue != 1) {}
+    atomicRef.konstue = null
     kotlin.native.runtime.GC.collect()
     semaphore.incrementAndGet()
     future.result
@@ -110,15 +110,15 @@ val semaphore = AtomicInt(0)
 }
 
 @Test fun runTest3() {
-    semaphore.value = 0
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { null }) {
-        val value = stableRef.get()
+    semaphore.konstue = 0
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { null }) {
+        konst konstue = stableRef.get()
         semaphore.incrementAndGet()
-        while (semaphore.value != 2) {}
-        println(value.toString() != "")
+        while (semaphore.konstue != 2) {}
+        println(konstue.toString() != "")
     }
-    while (semaphore.value != 1) {}
+    while (semaphore.konstue != 1) {}
     stableRef.dispose()
     kotlin.native.runtime.GC.collect()
     semaphore.incrementAndGet()
@@ -130,19 +130,19 @@ fun <T: Any> ensureWeakIs(weak: WeakReference<T>, expected: T?) {
     assertEquals(expected, weak.get())
 }
 
-val stableHolder1 = StableRef.create(("hello" to "world").freeze())
+konst stableHolder1 = StableRef.create(("hello" to "world").freeze())
 
 @Test fun runTest4() {
-    val worker = Worker.start()
-    semaphore.value = 0
-    val future = worker.execute(TransferMode.SAFE, { WeakReference(stableHolder1.get()) }) {
+    konst worker = Worker.start()
+    semaphore.konstue = 0
+    konst future = worker.execute(TransferMode.SAFE, { WeakReference(stableHolder1.get()) }) {
         ensureWeakIs(it, "hello" to "world")
         semaphore.incrementAndGet()
-        while (semaphore.value != 2) {}
+        while (semaphore.konstue != 2) {}
         kotlin.native.runtime.GC.collect()
         ensureWeakIs(it, null)
     }
-    while (semaphore.value != 1) {}
+    while (semaphore.konstue != 1) {}
     stableHolder1.dispose()
     kotlin.native.runtime.GC.collect()
     semaphore.incrementAndGet()
@@ -150,19 +150,19 @@ val stableHolder1 = StableRef.create(("hello" to "world").freeze())
     worker.requestTermination().result
 }
 
-val stableHolder2 = StableRef.create(("hello" to "world").freeze())
+konst stableHolder2 = StableRef.create(("hello" to "world").freeze())
 
 @Test fun runTest5() {
-    val worker = Worker.start()
-    semaphore.value = 0
-    val future = worker.execute(TransferMode.SAFE, { WeakReference(stableHolder2.get()) }) {
-        val value = it.get()
+    konst worker = Worker.start()
+    semaphore.konstue = 0
+    konst future = worker.execute(TransferMode.SAFE, { WeakReference(stableHolder2.get()) }) {
+        konst konstue = it.get()
         semaphore.incrementAndGet()
-        while (semaphore.value != 2) {}
+        while (semaphore.konstue != 2) {}
         kotlin.native.runtime.GC.collect()
-        assertEquals("hello" to "world", value)
+        assertEquals("hello" to "world", konstue)
     }
-    while (semaphore.value != 1) {}
+    while (semaphore.konstue != 1) {}
     stableHolder2.dispose()
     kotlin.native.runtime.GC.collect()
     semaphore.incrementAndGet()
@@ -170,18 +170,18 @@ val stableHolder2 = StableRef.create(("hello" to "world").freeze())
     worker.requestTermination().result
 }
 
-val atomicRef2 = AtomicReference<Any?>(Any().freeze())
+konst atomicRef2 = AtomicReference<Any?>(Any().freeze())
 @Test fun runTest6() {
-    semaphore.value = 0
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, { null }) {
-        val value = atomicRef2.compareAndExchange(null, null)
+    semaphore.konstue = 0
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, { null }) {
+        konst konstue = atomicRef2.compareAndExchange(null, null)
         semaphore.incrementAndGet()
-        while (semaphore.value != 2) {}
-        assertEquals(true, value.toString() != "")
+        while (semaphore.konstue != 2) {}
+        assertEquals(true, konstue.toString() != "")
     }
-    while (semaphore.value != 1) {}
-    atomicRef2.value = null
+    while (semaphore.konstue != 1) {}
+    atomicRef2.konstue = null
     kotlin.native.runtime.GC.collect()
     semaphore.incrementAndGet()
     future.result

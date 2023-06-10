@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val x = Result.success(42)
+    konst x = Result.success(42)
     var y = 0
     when (x) {
         Result.success(42) -> {
@@ -11,7 +11,7 @@ fun box(): String {
             y -= 10
         }
     }
-    when (val z = Result.success(42)) {
+    when (konst z = Result.success(42)) {
         Result.success(42) -> {
             y++
         }

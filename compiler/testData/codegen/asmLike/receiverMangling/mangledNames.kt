@@ -11,9 +11,9 @@ private fun t(block: (Arr) -> Unit) {
 }
 
 private data class Arr(
-    val a1: Int = 0,
-    val a2: Int = 0,
-    val a3: Int = 0,
-    val a4: Int = 0,
-    val a5: Int = 0
+    konst a1: Int = 0,
+    konst a2: Int = 0,
+    konst a3: Int = 0,
+    konst a4: Int = 0,
+    konst a5: Int = 0
 )

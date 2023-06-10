@@ -6,12 +6,12 @@ class Result
 
 class Foo {
     fun test_0() {
-        val result = materialize<Result>()
+        konst result = materialize<Result>()
         saveResult(result)
     }
 
     fun test_1() {
-        val results = listOf<Result>()
+        konst results = listOf<Result>()
         saveResults(results)
     }
 
@@ -24,12 +24,12 @@ class Foo {
     }
 
     fun test_4() {
-        val result = getResult()
+        konst result = getResult()
         saveResult(result)
     }
 
     fun test_5() {
-        val result = Result()
+        konst result = Result()
         saveResult(result)
     }
 

@@ -2,11 +2,11 @@ interface Element {
     fun render(builder: StringBuilder, indent: String)
 }
 
-class TextElement(val text: String): Element {
+class TextElement(konst text: String): Element {
     override fun render(builder: StringBuilder, indent: String): Unit = fail
 }
 
-abstract class Tag(val name: String): Element {
+abstract class Tag(konst name: String): Element {
     protected fun initTag<T: Element>(tag: T, init: T.() -> Unit): T = fail
 
     override fun render(builder: StringBuilder, indent: String): Unit = fail
@@ -36,4 +36,4 @@ fun result() =
             }
         }
 
-val fail: Nothing get() = throw Exception()
+konst fail: Nothing get() = throw Exception()

@@ -1,5 +1,5 @@
 fun foo() {
-    val v: package
+    konst v: package
 }
 
 fun bar() {

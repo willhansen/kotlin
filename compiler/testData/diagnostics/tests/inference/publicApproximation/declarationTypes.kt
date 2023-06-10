@@ -8,20 +8,20 @@ object Second : Bound1, Bound2
 fun <S : Bound1> intersect(vararg elements: S): S = TODO()
 
 fun topLevelFunction() = intersect(First, Second)
-val Any.extensionProperty
+konst Any.extensionProperty
     get() = intersect(First, Second)
 
 fun Any.extensionFunction() = intersect(First, Second)
 
 class Cls {
-    val publicProperty = intersect(First, Second)
-    private val privateProperty = intersect(First, Second)
+    konst publicProperty = intersect(First, Second)
+    private konst privateProperty = intersect(First, Second)
 
     fun publicMemberFunction() = intersect(First, Second)
     private fun privateMemberFunction() = intersect(First, Second)
 
     fun testLocalDeclarations() {
-        val localVariable = intersect(First, Second)
+        konst localVariable = intersect(First, Second)
         fun localFunction() = intersect(First, Second)
         <!DEBUG_INFO_EXPRESSION_TYPE("{Bound1 & Bound2}")!>localVariable<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Bound1")!>privateProperty<!>
@@ -31,14 +31,14 @@ class Cls {
 }
 
 object Obj {
-    val publicProperty = intersect(First, Second)
-    private val privateProperty = intersect(First, Second)
+    konst publicProperty = intersect(First, Second)
+    private konst privateProperty = intersect(First, Second)
 
     fun publicMemberFunction() = intersect(First, Second)
     private fun privateMemberFunction() = intersect(First, Second)
 
     fun testLocalDeclarations() {
-        val localVariable = intersect(First, Second)
+        konst localVariable = intersect(First, Second)
         fun localFunction() = intersect(First, Second)
         <!DEBUG_INFO_EXPRESSION_TYPE("{Bound1 & Bound2}")!>localVariable<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("Bound1")!>localFunction()<!>

@@ -1,6 +1,6 @@
 public fun foo(x: String?, y: String?): Int {
     while (true) {
-        val z = x ?: if (y == null) break else <!DEBUG_INFO_SMARTCAST!>y<!>
+        konst z = x ?: if (y == null) break else <!DEBUG_INFO_SMARTCAST!>y<!>
         // z is not null in both branches
         z.length
         // y is nullable if x != null

@@ -1,5 +1,5 @@
 fun call {
-    val ktClass = KtClass()
+    konst ktClass = KtClass()
     ktClass.<expr>foo</expr> = 42
 }
 

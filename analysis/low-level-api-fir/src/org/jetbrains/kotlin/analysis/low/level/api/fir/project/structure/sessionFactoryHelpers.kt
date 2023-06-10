@@ -51,7 +51,7 @@ internal fun LLFirSession.registerIdeComponents(project: Project) {
 }
 
 private fun LLFirSession.createResolveExtensionTool(): LLFirResolveExtensionTool? {
-    val extensions = KtResolveExtensionProvider.provideExtensionsFor(ktModule)
+    konst extensions = KtResolveExtensionProvider.provideExtensionsFor(ktModule)
     if (extensions.isEmpty()) return null
     return LLFirNonEmptyResolveExtensionTool(this, extensions)
 }
@@ -65,9 +65,9 @@ internal inline fun createCompositeSymbolProvider(
 
 @SessionConfiguration
 internal fun FirSession.registerCompilerPluginExtensions(project: Project, module: KtSourceModule) {
-    val extensionProvider = project.getService<KtCompilerPluginsProvider>(KtCompilerPluginsProvider::class.java) ?: return
+    konst extensionProvider = project.getService<KtCompilerPluginsProvider>(KtCompilerPluginsProvider::class.java) ?: return
     FirSessionConfigurator(this).apply {
-        val registrars = FirExtensionRegistrarAdapter.getInstances(project) +
+        konst registrars = FirExtensionRegistrarAdapter.getInstances(project) +
                 extensionProvider.getRegisteredExtensions(module, FirExtensionRegistrarAdapter)
         for (extensionRegistrar in registrars) {
             registerExtensions((extensionRegistrar as FirExtensionRegistrar).configure())
@@ -81,8 +81,8 @@ internal fun LLFirSourcesSession.registerCompilerPluginServices(
     project: Project,
     module: KtSourceModule
 ) {
-    val projectWithDependenciesScope = contentScope.uniteWith(project.moduleScopeProvider.getModuleLibrariesScope(module))
-    val annotationsResolver = project.createAnnotationResolver(projectWithDependenciesScope)
+    konst projectWithDependenciesScope = contentScope.uniteWith(project.moduleScopeProvider.getModuleLibrariesScope(module))
+    konst annotationsResolver = project.createAnnotationResolver(projectWithDependenciesScope)
 
     // We need FirRegisteredPluginAnnotations and FirPredicateBasedProvider during extensions' registration process
     register(FirRegisteredPluginAnnotations::class, LLFirIdeRegisteredPluginAnnotations(this, annotationsResolver))

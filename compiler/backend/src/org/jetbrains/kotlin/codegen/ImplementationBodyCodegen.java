@@ -282,7 +282,7 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
         if (inlineClassRepresentation == null) return;
 
         Type ownerType = typeMapper.mapClass(descriptor);
-        Type valueType = typeMapper.mapType(inlineClassRepresentation.getUnderlyingType());
+        Type konstueType = typeMapper.mapType(inlineClassRepresentation.getUnderlyingType());
         SimpleFunctionDescriptor functionDescriptor = InlineClassDescriptorResolver.createUnboxFunctionDescriptor(this.descriptor);
 
         functionCodegen.generateMethod(
@@ -295,9 +295,9 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
                         iv.getfield(
                                 ownerType.getInternalName(),
                                 inlineClassRepresentation.getUnderlyingPropertyName().asString(),
-                                valueType.getDescriptor()
+                                konstueType.getDescriptor()
                         );
-                        iv.areturn(valueType);
+                        iv.areturn(konstueType);
                     }
                 }
         );
@@ -712,10 +712,10 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
 
             functionCodegen.generateDefaultIfNeeded(
                     context.intoFunction(function), function, OwnerKind.IMPLEMENTATION,
-                    (valueParameter, codegen) -> {
+                    (konstueParameter, codegen) -> {
                         assert ((ClassDescriptor) function.getContainingDeclaration()).isData()
                                 : "Function container must have [data] modifier: " + function;
-                        PropertyDescriptor property = bindingContext.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, valueParameter);
+                        PropertyDescriptor property = bindingContext.get(BindingContext.VALUE_PARAMETER_AS_PROPERTY, konstueParameter);
                         assert property != null : "Copy function doesn't correspond to any property: " + function;
                         return codegen.intermediateValueForProperty(property, false, null, StackValue.LOCAL_0);
                     },
@@ -741,10 +741,10 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
     private void generateEnumValuesMethod() {
         Type type = typeMapper.mapType(DescriptorUtilsKt.getBuiltIns(descriptor).getArrayType(INVARIANT, descriptor.getDefaultType()));
 
-        FunctionDescriptor valuesFunction =
+        FunctionDescriptor konstuesFunction =
                 CollectionsKt.single(descriptor.getStaticScope().getContributedFunctions(ENUM_VALUES, NoLookupLocation.FROM_BACKEND));
         MethodVisitor mv = v.newMethod(
-                JvmDeclarationOriginKt.OtherOriginFromPure(myClass, valuesFunction), ACC_PUBLIC | ACC_STATIC, ENUM_VALUES.asString(),
+                JvmDeclarationOriginKt.OtherOriginFromPure(myClass, konstuesFunction), ACC_PUBLIC | ACC_STATIC, ENUM_VALUES.asString(),
                 "()" + type.getDescriptor(), null, null
         );
         if (!state.getClassBuilderMode().generateBodies) return;
@@ -754,25 +754,25 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
         mv.visitMethodInsn(INVOKEVIRTUAL, type.getInternalName(), "clone", "()Ljava/lang/Object;", false);
         mv.visitTypeInsn(CHECKCAST, type.getInternalName());
         mv.visitInsn(ARETURN);
-        FunctionCodegen.endVisit(mv, "values()", myClass);
+        FunctionCodegen.endVisit(mv, "konstues()", myClass);
     }
 
     private void generateEnumValueOfMethod() {
-        FunctionDescriptor valueOfFunction =
+        FunctionDescriptor konstueOfFunction =
                 CollectionsKt.single(descriptor.getStaticScope().getContributedFunctions(ENUM_VALUE_OF, NoLookupLocation.FROM_BACKEND),
                                      DescriptorUtilsKt::isEnumValueOfMethod);
         MethodVisitor mv =
-                v.newMethod(JvmDeclarationOriginKt.OtherOriginFromPure(myClass, valueOfFunction), ACC_PUBLIC | ACC_STATIC, ENUM_VALUE_OF.asString(),
+                v.newMethod(JvmDeclarationOriginKt.OtherOriginFromPure(myClass, konstueOfFunction), ACC_PUBLIC | ACC_STATIC, ENUM_VALUE_OF.asString(),
                             "(Ljava/lang/String;)" + classAsmType.getDescriptor(), null, null);
         if (!state.getClassBuilderMode().generateBodies) return;
 
         mv.visitCode();
         mv.visitLdcInsn(classAsmType);
         mv.visitVarInsn(ALOAD, 0);
-        mv.visitMethodInsn(INVOKESTATIC, "java/lang/Enum", "valueOf", "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;", false);
+        mv.visitMethodInsn(INVOKESTATIC, "java/lang/Enum", "konstueOf", "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Enum;", false);
         mv.visitTypeInsn(CHECKCAST, classAsmType.getInternalName());
         mv.visitInsn(ARETURN);
-        FunctionCodegen.endVisit(mv, "valueOf()", myClass);
+        FunctionCodegen.endVisit(mv, "konstueOf()", myClass);
     }
 
     private void generateFieldForSingleton() {
@@ -935,7 +935,7 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
             AnnotationCodegen.forField(fv, this, state).genAnnotations(property, type, null, null, additionalVisibleAnnotations);
 
             //This field are always static and final so if it has constant initializer don't do anything in clinit,
-            //field would be initialized via default value in v.newField(...) - see JVM SPEC Ch.4
+            //field would be initialized via default konstue in v.newField(...) - see JVM SPEC Ch.4
             // TODO: test this code
             if (state.getClassBuilderMode().generateBodies && info.defaultValue == null) {
                 ExpressionCodegen codegen = createOrGetClInitCodegen();
@@ -1017,16 +1017,16 @@ public class ImplementationBodyCodegen extends ClassBodyCodegen {
                 lookupReceiver(call.getExtensionReceiver());
             }
 
-            private void lookupReceiver(@Nullable ReceiverValue value) {
-                if (value instanceof ImplicitReceiver) {
-                    if (value instanceof ExtensionReceiver) {
+            private void lookupReceiver(@Nullable ReceiverValue konstue) {
+                if (konstue instanceof ImplicitReceiver) {
+                    if (konstue instanceof ExtensionReceiver) {
                         ReceiverParameterDescriptor parameter =
-                                ((ExtensionReceiver) value).getDeclarationDescriptor().getExtensionReceiverParameter();
-                        assert parameter != null : "Extension receiver should exist: " + ((ExtensionReceiver) value).getDeclarationDescriptor();
+                                ((ExtensionReceiver) konstue).getDeclarationDescriptor().getExtensionReceiverParameter();
+                        assert parameter != null : "Extension receiver should exist: " + ((ExtensionReceiver) konstue).getDeclarationDescriptor();
                         lookupInContext(parameter);
                     }
                     else {
-                        lookupInContext(((ImplicitReceiver) value).getDeclarationDescriptor());
+                        lookupInContext(((ImplicitReceiver) konstue).getDeclarationDescriptor());
                     }
                 }
             }

@@ -19,10 +19,10 @@ package org.jetbrains.kotlin.native.interop.gen
 import org.jetbrains.kotlin.konan.file.File
 
 internal fun resolveLibraries(staticLibraries: List<String>, libraryPaths: List<String>): List<String> {
-    val result = mutableListOf<String>()
+    konst result = mutableListOf<String>()
     staticLibraries.forEach { library ->
         
-        val resolution = libraryPaths.map { "$it/$library" } 
+        konst resolution = libraryPaths.map { "$it/$library" } 
                 .find { File(it).exists }
 
         if (resolution != null) {

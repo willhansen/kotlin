@@ -27,15 +27,15 @@ import java.lang.reflect.Method
 import java.util.*
 
 class ReflectJavaClass(
-    private val klass: Class<*>
+    private konst klass: Class<*>
 ) : ReflectJavaElement(), ReflectJavaAnnotationOwner, ReflectJavaModifierListOwner, JavaClass {
-    override val element: Class<*> get() = klass
+    override konst element: Class<*> get() = klass
 
-    override val modifiers: Int get() = klass.modifiers
+    override konst modifiers: Int get() = klass.modifiers
 
-    override val isFromSource: Boolean get() = false
+    override konst isFromSource: Boolean get() = false
 
-    override val innerClassNames: List<Name>
+    override konst innerClassNames: List<Name>
         get() = klass.declaredClasses
             .asSequence()
             .filterNot {
@@ -52,19 +52,19 @@ class ReflectJavaClass(
             it.simpleName == name.asString()
         }?.let(::ReflectJavaClass)
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = klass.classId.asSingleFqName()
 
-    override val outerClass: ReflectJavaClass?
+    override konst outerClass: ReflectJavaClass?
         get() = klass.declaringClass?.let(::ReflectJavaClass)
 
-    override val supertypes: Collection<JavaClassifierType>
+    override konst supertypes: Collection<JavaClassifierType>
         get() {
             if (klass == Any::class.java) return emptyList()
             return listOf(klass.genericSuperclass ?: Any::class.java, *klass.genericInterfaces).map(::ReflectJavaClassifierType)
         }
 
-    override val methods: List<ReflectJavaMethod>
+    override konst methods: List<ReflectJavaMethod>
         get() = klass.declaredMethods
             .asSequence()
             .filter { method ->
@@ -79,20 +79,20 @@ class ReflectJavaClass(
 
     private fun isEnumValuesOrValueOf(method: Method): Boolean {
         return when (method.name) {
-            "values" -> method.parameterTypes.isEmpty()
-            "valueOf" -> Arrays.equals(method.parameterTypes, arrayOf(String::class.java))
+            "konstues" -> method.parameterTypes.isEmpty()
+            "konstueOf" -> Arrays.equals(method.parameterTypes, arrayOf(String::class.java))
             else -> false
         }
     }
 
-    override val fields: List<ReflectJavaField>
+    override konst fields: List<ReflectJavaField>
         get() = klass.declaredFields
             .asSequence()
             .filterNot(Member::isSynthetic)
             .map(::ReflectJavaField)
             .toList()
 
-    override val constructors: List<ReflectJavaConstructor>
+    override konst constructors: List<ReflectJavaConstructor>
         get() = klass.declaredConstructors
             .asSequence()
             .filterNot(Member::isSynthetic)
@@ -101,32 +101,32 @@ class ReflectJavaClass(
 
     override fun hasDefaultConstructor() = false // any default constructor is returned by constructors
 
-    override val lightClassOriginKind: LightClassOriginKind?
+    override konst lightClassOriginKind: LightClassOriginKind?
         get() = null
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(klass.simpleName)
 
-    override val typeParameters: List<ReflectJavaTypeParameter>
+    override konst typeParameters: List<ReflectJavaTypeParameter>
         get() = klass.typeParameters.map(::ReflectJavaTypeParameter)
 
-    override val isInterface: Boolean
+    override konst isInterface: Boolean
         get() = klass.isInterface
-    override val isAnnotationType: Boolean
+    override konst isAnnotationType: Boolean
         get() = klass.isAnnotation
-    override val isEnum: Boolean
+    override konst isEnum: Boolean
         get() = klass.isEnum
 
-    override val isRecord: Boolean
+    override konst isRecord: Boolean
         get() = Java16SealedRecordLoader.loadIsRecord(klass) ?: false
 
-    override val recordComponents: Collection<JavaRecordComponent>
+    override konst recordComponents: Collection<JavaRecordComponent>
         get() = (Java16SealedRecordLoader.loadGetRecordComponents(klass) ?: emptyArray()).map(::ReflectJavaRecordComponent)
 
-    override val isSealed: Boolean
+    override konst isSealed: Boolean
         get() = Java16SealedRecordLoader.loadIsSealed(klass) ?: false
 
-    override val permittedTypes: Collection<JavaClassifierType>
+    override konst permittedTypes: Collection<JavaClassifierType>
         get() = Java16SealedRecordLoader.loadGetPermittedSubclasses(klass)
             ?.map(::ReflectJavaClassifierType)
             ?: emptyList()
@@ -140,16 +140,16 @@ class ReflectJavaClass(
 
 private object Java16SealedRecordLoader {
     class Cache(
-        val isSealed: Method?,
-        val getPermittedSubclasses: Method?,
-        val isRecord: Method?,
-        val getRecordComponents: Method?
+        konst isSealed: Method?,
+        konst getPermittedSubclasses: Method?,
+        konst isRecord: Method?,
+        konst getRecordComponents: Method?
     )
 
     private var _cache: Cache? = null
 
     private fun buildCache(): Cache {
-        val clazz = Class::class.java
+        konst clazz = Class::class.java
 
         return try {
             Cache(
@@ -173,27 +173,27 @@ private object Java16SealedRecordLoader {
     }
 
     fun loadIsSealed(clazz: Class<*>): Boolean? {
-        val cache = initCache()
-        val isSealed = cache.isSealed ?: return null
+        konst cache = initCache()
+        konst isSealed = cache.isSealed ?: return null
         return isSealed.invoke(clazz) as Boolean
     }
 
     fun loadGetPermittedSubclasses(clazz: Class<*>): Array<Class<*>>? {
-        val cache = initCache()
-        val getPermittedSubclasses = cache.getPermittedSubclasses ?: return null
+        konst cache = initCache()
+        konst getPermittedSubclasses = cache.getPermittedSubclasses ?: return null
         @Suppress("UNCHECKED_CAST")
         return getPermittedSubclasses.invoke(clazz) as Array<Class<*>>
     }
 
     fun loadIsRecord(clazz: Class<*>): Boolean? {
-        val cache = initCache()
-        val isRecord = cache.isRecord ?: return null
+        konst cache = initCache()
+        konst isRecord = cache.isRecord ?: return null
         return isRecord.invoke(clazz) as Boolean
     }
 
     fun loadGetRecordComponents(clazz: Class<*>): Array<Any>? {
-        val cache = initCache()
-        val getRecordComponents = cache.getRecordComponents ?: return null
+        konst cache = initCache()
+        konst getRecordComponents = cache.getRecordComponents ?: return null
         @Suppress("UNCHECKED_CAST")
         return getRecordComponents.invoke(clazz) as Array<Any>?
     }

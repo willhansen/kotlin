@@ -15,7 +15,7 @@ abstract class KotlinNpmCachesSetup :
     DefaultTask(),
     UsesGradleNodeModulesCache {
     @get:Inject
-    open val fileHasher: FileHasher
+    open konst fileHasher: FileHasher
         get() = throw UnsupportedOperationException()
 
     @TaskAction
@@ -24,6 +24,6 @@ abstract class KotlinNpmCachesSetup :
     }
 
     companion object {
-        const val NAME = "kotlinNpmCachesSetup"
+        const konst NAME = "kotlinNpmCachesSetup"
     }
 }

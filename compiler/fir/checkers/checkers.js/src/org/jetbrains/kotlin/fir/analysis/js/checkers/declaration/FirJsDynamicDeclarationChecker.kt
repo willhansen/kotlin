@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.fir.types.coneType
 
 object FirJsDynamicDeclarationChecker : FirClassChecker() {
     override fun check(declaration: FirClass, context: CheckerContext, reporter: DiagnosticReporter) {
-        val delegatedFields = declaration.delegateFieldsMap ?: return
+        konst delegatedFields = declaration.delegateFieldsMap ?: return
 
         for ((_, delegate) in delegatedFields) {
             @OptIn(SymbolInternals::class)
             // Accessing fir here is ok, because it still
             // belongs to the current `declaration: FirClass`,
             // and it's a shape it couldn't have been accessed directly
-            val initializer = delegate.fir.initializer ?: continue
+            konst initializer = delegate.fir.initializer ?: continue
 
             if (initializer.typeRef.coneType is ConeDynamicType) {
                 reporter.reportOn(initializer.source, FirJsErrors.DELEGATION_BY_DYNAMIC, context)

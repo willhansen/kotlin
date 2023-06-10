@@ -63,14 +63,14 @@ public object KT32183 {
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
     public interface AGraphExecutionEntity {
-        public abstract val jobs: kotlin.sequences.Sequence<KT32183.AJobExecutionEntity>
+        public abstract konst jobs: kotlin.sequences.Sequence<KT32183.AJobExecutionEntity>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
     }
 
     public interface AJobExecutionEntity {
-        public abstract val meta: KT32183.ProjectJob.Process<*, *>
+        public abstract konst meta: KT32183.ProjectJob.Process<*, *>
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

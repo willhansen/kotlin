@@ -2,10 +2,10 @@
 package foo
 
 class X {
-    val a = Y.foo
+    konst a = Y.foo
 
     object Y {
-        val foo = 23
+        konst foo = 23
     }
 }
 

@@ -8,7 +8,7 @@ FILE: these.kt
 
         public? final? fun bar(): Int { LAZY_BLOCK }
 
-        public? final? val instance: Some
+        public? final? konst instance: Some
             public? get(): Some { LAZY_BLOCK }
 
         public? final? fun String.extension(): Int { LAZY_BLOCK }

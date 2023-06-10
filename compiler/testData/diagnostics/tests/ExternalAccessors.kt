@@ -8,7 +8,7 @@ class Foo {
 }
 
 class Bar {
-    val foo: Int // Ok
+    konst foo: Int // Ok
         external get
 
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var baz: Int<!>

@@ -4,16 +4,16 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 
 @Parcelize
-open class Open(val foo: String) : Parcelable
+open class Open(konst foo: String) : Parcelable
 
 @Parcelize
-class Final(val foo: String) : Parcelable
+class Final(konst foo: String) : Parcelable
 
 @Parcelize
-<!PARCELABLE_SHOULD_BE_INSTANTIABLE!>abstract<!> class Abstract(val foo: String) : Parcelable
+<!PARCELABLE_SHOULD_BE_INSTANTIABLE!>abstract<!> class Abstract(konst foo: String) : Parcelable
 
 @Parcelize
-sealed class Sealed(val foo: String) : Parcelable {
+sealed class Sealed(konst foo: String) : Parcelable {
     class X : Sealed("")
     sealed class Inner : Sealed("") {
         <!ABSTRACT_MEMBER_NOT_IMPLEMENTED!>class Y<!> : Inner()
@@ -22,7 +22,7 @@ sealed class Sealed(val foo: String) : Parcelable {
 
 class Outer {
     @Parcelize
-    <!PARCELABLE_CANT_BE_INNER_CLASS!>inner<!> class Inner(val foo: String) : Parcelable
+    <!PARCELABLE_CANT_BE_INNER_CLASS!>inner<!> class Inner(konst foo: String) : Parcelable
 }
 
 fun foo() {

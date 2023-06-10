@@ -15,7 +15,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -45,7 +45,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -82,7 +82,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -119,7 +119,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -156,7 +156,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('x')
         PsiWhiteSpace(' ')
@@ -215,7 +215,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
             PsiElement(RPAR)(')')
       PsiWhiteSpace('\n\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiElement(COLON)(':')
@@ -239,7 +239,7 @@ KtFile: UnderscoredTypeArgumentsOfType.kt
           PsiElement(INTEGER_LITERAL)('1')
       PsiWhiteSpace('\n    ')
       PROPERTY
-        PsiElement(val)('val')
+        PsiElement(konst)('konst')
         PsiWhiteSpace(' ')
         PsiElement(IDENTIFIER)('y')
         PsiElement(COLON)(':')

@@ -4,11 +4,11 @@
 package test
 
 open class TypeRef<T> {
-    val type = target()
+    konst type = target()
 
     private fun target(): String {
-        val thisClass = this.javaClass
-        val superClass = thisClass.genericSuperclass
+        konst thisClass = this.javaClass
+        konst superClass = thisClass.genericSuperclass
 
         return superClass.toString()
     }
@@ -17,8 +17,8 @@ open class TypeRef<T> {
 
 
 inline fun <reified T> typeWithMessage(message: String = "Hello"): String {
-    val type = object : TypeRef<T>() {}
-    val target = type.type
+    konst type = object : TypeRef<T>() {}
+    konst target = type.type
 
     return message + " " + target
 }
@@ -32,12 +32,12 @@ fun specifyOptionalArgument() = typeWithMessage<List<Int>>("Hello")
 fun useDefault() = typeWithMessage<List<Int>>()
 
 fun box(): String {
-    val specifyOptionalArgument = specifyOptionalArgument()
-    val useDefault = useDefault()
+    konst specifyOptionalArgument = specifyOptionalArgument()
+    konst useDefault = useDefault()
 
     if (useDefault != specifyOptionalArgument) return "fail: $useDefault != $specifyOptionalArgument"
 
-    val type = typeWithMessage<List<Int>>("")
+    konst type = typeWithMessage<List<Int>>("")
     if (type != " test.TypeRef<java.util.List<? extends java.lang.Integer>>") return "fail 2: $type"
 
     return "OK"

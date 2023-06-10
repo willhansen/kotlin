@@ -30,7 +30,7 @@ public final class IrDelegatingConstructorCall extends
   private IrDelegatingConstructorCall(
       org.jetbrains.kotlin.protobuf.CodedInputStream input,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     initFields();
     int mutable_bitField0_ = 0;
     org.jetbrains.kotlin.protobuf.ByteString.Output unknownFieldsOutput =
@@ -73,10 +73,10 @@ public final class IrDelegatingConstructorCall extends
           }
         }
       }
-    } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+    } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
       throw e.setUnfinishedMessage(this);
     } catch (java.io.IOException e) {
-      throw new org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException(
+      throw new org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException(
           e.getMessage()).setUnfinishedMessage(this);
     } finally {
       try {
@@ -94,7 +94,7 @@ public final class IrDelegatingConstructorCall extends
     public IrDelegatingConstructorCall parsePartialFrom(
         org.jetbrains.kotlin.protobuf.CodedInputStream input,
         org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+        throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
       return new IrDelegatingConstructorCall(input, extensionRegistry);
     }
   };
@@ -201,23 +201,23 @@ public final class IrDelegatingConstructorCall extends
 
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parseFrom(
       org.jetbrains.kotlin.protobuf.ByteString data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parseFrom(byte[] data)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parseFrom(
       byte[] data,
       org.jetbrains.kotlin.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException {
+      throws org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
   public static org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parseFrom(java.io.InputStream input)
@@ -356,7 +356,7 @@ public final class IrDelegatingConstructorCall extends
       org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (org.jetbrains.kotlin.protobuf.InvalidProtocolBufferException e) {
+      } catch (org.jetbrains.kotlin.protobuf.InkonstidProtocolBufferException e) {
         parsedMessage = (org.jetbrains.kotlin.backend.common.serialization.proto.IrDelegatingConstructorCall) e.getUnfinishedMessage();
         throw e;
       } finally {
@@ -384,9 +384,9 @@ public final class IrDelegatingConstructorCall extends
     /**
      * <code>required int64 symbol = 1;</code>
      */
-    public Builder setSymbol(long value) {
+    public Builder setSymbol(long konstue) {
       bitField0_ |= 0x00000001;
-      symbol_ = value;
+      symbol_ = konstue;
       
       return this;
     }
@@ -416,11 +416,11 @@ public final class IrDelegatingConstructorCall extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon member_access = 2;</code>
      */
-    public Builder setMemberAccess(org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon value) {
-      if (value == null) {
+    public Builder setMemberAccess(org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon konstue) {
+      if (konstue == null) {
         throw new NullPointerException();
       }
-      memberAccess_ = value;
+      memberAccess_ = konstue;
 
       bitField0_ |= 0x00000002;
       return this;
@@ -438,13 +438,13 @@ public final class IrDelegatingConstructorCall extends
     /**
      * <code>required .org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon member_access = 2;</code>
      */
-    public Builder mergeMemberAccess(org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon value) {
+    public Builder mergeMemberAccess(org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon konstue) {
       if (((bitField0_ & 0x00000002) == 0x00000002) &&
           memberAccess_ != org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon.getDefaultInstance()) {
         memberAccess_ =
-          org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon.newBuilder(memberAccess_).mergeFrom(value).buildPartial();
+          org.jetbrains.kotlin.backend.common.serialization.proto.MemberAccessCommon.newBuilder(memberAccess_).mergeFrom(konstue).buildPartial();
       } else {
-        memberAccess_ = value;
+        memberAccess_ = konstue;
       }
 
       bitField0_ |= 0x00000002;

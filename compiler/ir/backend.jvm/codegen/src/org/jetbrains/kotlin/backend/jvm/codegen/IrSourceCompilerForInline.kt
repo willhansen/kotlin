@@ -30,18 +30,18 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.org.objectweb.asm.tree.MethodNode
 
 class IrSourceCompilerForInline(
-    override val state: GenerationState,
-    override val callElement: IrFunctionAccessExpression,
-    private val callee: IrFunction,
-    internal val codegen: ExpressionCodegen,
-    private val data: BlockInfo
+    override konst state: GenerationState,
+    override konst callElement: IrFunctionAccessExpression,
+    private konst callee: IrFunction,
+    internal konst codegen: ExpressionCodegen,
+    private konst data: BlockInfo
 ) : SourceCompilerForInline {
-    override val callElementText: String
+    override konst callElementText: String
         get() = ir2string(callElement)
 
-    override val inlineCallSiteInfo: InlineCallSiteInfo
+    override konst inlineCallSiteInfo: InlineCallSiteInfo
         get() {
-            val rootFunction = codegen.enclosingFunctionForLocalObjects
+            konst rootFunction = codegen.enclosingFunctionForLocalObjects
             return InlineCallSiteInfo(
                 codegen.classCodegen.type.internalName,
                 if (rootFunction === codegen.irFunction)
@@ -54,7 +54,7 @@ class IrSourceCompilerForInline(
             )
         }
 
-    override val sourceMapper: SourceMapper
+    override konst sourceMapper: SourceMapper
         get() = codegen.smap
 
     override fun generateLambdaBody(lambdaInfo: ExpressionLambda, reifiedTypeParameters: ReifiedTypeParametersUsages): SMAPAndMethodNode {
@@ -72,12 +72,12 @@ class IrSourceCompilerForInline(
             return it
         }
         if (jvmSignature.asmMethod.name != callee.name.asString()) {
-            val ktFile = codegen.irFunction.fileParent.getKtFile()
+            konst ktFile = codegen.irFunction.fileParent.getKtFile()
             if ((ktFile != null && ktFile.doNotAnalyze == null) || ktFile == null) {
                 state.trackLookup(callee.parentAsClass.kotlinFqName, jvmSignature.asmMethod.name, object : LocationInfo {
-                    override val filePath = ktFile?.virtualFile?.path ?: codegen.irFunction.fileParent.fileEntry.name
+                    override konst filePath = ktFile?.virtualFile?.path ?: codegen.irFunction.fileParent.fileEntry.name
 
-                    override val position: Position
+                    override konst position: Position
                         get() =
                             if (ktFile == null) Position.NO_POSITION
                             else DiagnosticUtils.getLineAndColumnInPsiFile(
@@ -105,17 +105,17 @@ class IrSourceCompilerForInline(
     }
 
     @OptIn(ObsoleteDescriptorBasedAPI::class)
-    override val isCallInsideSameModuleAsCallee: Boolean
+    override konst isCallInsideSameModuleAsCallee: Boolean
         get() = callee.module == codegen.irFunction.module
 
-    override val isFinallyMarkerRequired: Boolean
+    override konst isFinallyMarkerRequired: Boolean
         get() = codegen.isFinallyMarkerRequired
 
     override fun isSuspendLambdaCapturedByOuterObjectOrLambda(name: String): Boolean =
         false // IR does not capture variables through outer this
 
     override fun getContextLabels(): Map<String, Label?> {
-        val result = mutableMapOf<String, Label?>(codegen.irFunction.name.asString() to null)
+        konst result = mutableMapOf<String, Label?>(codegen.irFunction.name.asString() to null)
         for (info in data.infos) {
             if (info !is LoopInfo)
                 continue

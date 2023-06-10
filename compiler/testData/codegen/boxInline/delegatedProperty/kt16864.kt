@@ -14,10 +14,10 @@ object Whatever {
 }
 
 fun box(): String {
-    val key by Whatever
+    konst key by Whatever
     return mrun {
         object {
-            val keys = key
+            konst keys = key
         }.keys
     }
 }

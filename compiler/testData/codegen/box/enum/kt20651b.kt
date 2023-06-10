@@ -4,8 +4,8 @@ interface Callback {
 }
 
 enum class Foo(
-        val x: String,
-        val callback: Callback
+        konst x: String,
+        konst callback: Callback
 ) {
     FOO(
             "OK",

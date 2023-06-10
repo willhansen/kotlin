@@ -51,22 +51,22 @@ public class PlainJava {
 
 
 // FILE: main.kt
-val jsr: AnnotatedWithJsr = AnnotatedWithJsr()
-val jsrNullable: AnnotatedWithJsr? = null
+konst jsr: AnnotatedWithJsr = AnnotatedWithJsr()
+konst jsrNullable: AnnotatedWithJsr? = null
 
-val jb: AnnotatedWithJB = AnnotatedWithJB()
-val jbNullable: AnnotatedWithJB? = null
+konst jb: AnnotatedWithJB = AnnotatedWithJB()
+konst jbNullable: AnnotatedWithJB? = null
 
-val platform: PlainJava = PlainJava()
-val platformNullable: PlainJava? = null
+konst platform: PlainJava = PlainJava()
+konst platformNullable: PlainJava? = null
 
 fun safeCalls() {
-    val a = jsr.string?.length
-    val b = jsrNullable?.string?.length
+    konst a = jsr.string?.length
+    konst b = jsrNullable?.string?.length
 
-    val c = jb.string<!UNNECESSARY_SAFE_CALL!>?.<!>length
-    val d = jbNullable?.string?.length
+    konst c = jb.string<!UNNECESSARY_SAFE_CALL!>?.<!>length
+    konst d = jbNullable?.string?.length
 
-    val e = platform.string?.length
-    val f = platformNullable?.string?.length
+    konst e = platform.string?.length
+    konst f = platformNullable?.string?.length
 }

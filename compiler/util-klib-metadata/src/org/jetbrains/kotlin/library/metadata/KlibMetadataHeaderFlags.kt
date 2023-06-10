@@ -6,9 +6,9 @@
 package org.jetbrains.kotlin.library.metadata
 
 /**
- * Possible values for [KlibMetadataProtoBuf.Header] flags field.
+ * Possible konstues for [KlibMetadataProtoBuf.Header] flags field.
  */
 object KlibMetadataHeaderFlags {
-    // Note: previously the value of this flag was 0x1.
-    const val PRE_RELEASE = 0x2
+    // Note: previously the konstue of this flag was 0x1.
+    const konst PRE_RELEASE = 0x2
 }

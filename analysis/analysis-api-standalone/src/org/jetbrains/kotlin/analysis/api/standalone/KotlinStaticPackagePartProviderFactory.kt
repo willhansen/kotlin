@@ -11,9 +11,9 @@ import org.jetbrains.kotlin.analysis.providers.PackagePartProviderFactory
 import org.jetbrains.kotlin.load.kotlin.PackagePartProvider
 
 internal class KotlinStaticPackagePartProviderFactory(
-    private val packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
+    private konst packagePartProvider: (GlobalSearchScope) -> PackagePartProvider,
 ) : PackagePartProviderFactory() {
-    private val cache = ContainerUtil.createConcurrentSoftMap<GlobalSearchScope, PackagePartProvider>()
+    private konst cache = ContainerUtil.createConcurrentSoftMap<GlobalSearchScope, PackagePartProvider>()
 
     override fun createPackagePartProvider(scope: GlobalSearchScope): PackagePartProvider {
         return cache.getOrPut(scope) {

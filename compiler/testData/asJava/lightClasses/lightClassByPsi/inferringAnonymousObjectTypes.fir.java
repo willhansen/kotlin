@@ -55,7 +55,7 @@ final class C /* C*/ {
 public abstract interface I /* I*/ {
 }
 
-public final class InvalidPublicSupertype /* InvalidPublicSupertype*/ {
+public final class InkonstidPublicSupertype /* InkonstidPublicSupertype*/ {
   @org.jetbrains.annotations.NotNull()
   private final java.lang.Runnable x;
 
@@ -65,7 +65,7 @@ public final class InvalidPublicSupertype /* InvalidPublicSupertype*/ {
   @org.jetbrains.annotations.NotNull()
   public final java.lang.Runnable getX();//  getX()
 
-  public  InvalidPublicSupertype();//  .ctor()
+  public  InkonstidPublicSupertype();//  .ctor()
 }
 
 public final class Prop /* Prop*/ {

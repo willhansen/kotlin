@@ -13,7 +13,7 @@ KtSuccessCallInfo:
         receiverType = null
         returnType = kotlin.String
         symbol = dependency/A.foo(<dispatch receiver>: dependency.A<T>): kotlin.String
-        valueParameters = []
+        konstueParameters = []
         callableIdIfNonLocal = dependency/A.foo
     typeArgumentsMapping = {}
     argumentMapping = {}

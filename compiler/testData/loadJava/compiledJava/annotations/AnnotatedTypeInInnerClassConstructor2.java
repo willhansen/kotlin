@@ -9,7 +9,7 @@ class AnnotatedParameterInInnerClassConstructor {
 
     @Target({ElementType.TYPE_USE, ElementType.PARAMETER})
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     class Inner {

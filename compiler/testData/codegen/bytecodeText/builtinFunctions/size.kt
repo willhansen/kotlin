@@ -1,25 +1,25 @@
 abstract class A1 : Collection<String> {
-    override val size: Int get() = 1
+    override konst size: Int get() = 1
 }
 
 abstract class A2 : Collection<String> {
-    abstract override val size: Int
+    abstract override konst size: Int
 }
 
 abstract class A3 : java.util.AbstractCollection<String>() {
-    override val size: Int get() = 1
+    override konst size: Int get() = 1
 }
 
 abstract class A4 : java.util.AbstractCollection<String>() {
-    abstract override val size: Int
+    abstract override konst size: Int
 }
 
 abstract class A5 : java.util.ArrayList<String>() {
-    override val size: Int get() = 1
+    override konst size: Int get() = 1
 }
 
 abstract class A6 : java.util.ArrayList<String>() {
-    abstract override val size: Int
+    abstract override konst size: Int
 }
 
 abstract class A7 : MutableList<String>

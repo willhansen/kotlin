@@ -48,18 +48,18 @@ class A @CompileTimeCalculation constructor(@CompileTimeCalculation var a: Int)
     return aObj.a
 }
 
-const val a = <!EVALUATED: `true`!>ifGreaterOrEqualToZero(10)<!>
-const val b = <!EVALUATED: `false`!>whenGreaterOrEqualToZero(-10)<!>
-const val constIf = <!EVALUATED: `True`!>if (a == true) "True" else "False"<!>
+const konst a = <!EVALUATED: `true`!>ifGreaterOrEqualToZero(10)<!>
+const konst b = <!EVALUATED: `false`!>whenGreaterOrEqualToZero(-10)<!>
+const konst constIf = <!EVALUATED: `True`!>if (a == true) "True" else "False"<!>
 
-const val multi1 = <!EVALUATED: `-2`!>whenMultiBranch(2)<!>
-const val multi2 = <!EVALUATED: `-4`!>whenMultiBranch(4)<!>
-const val multi3 = <!EVALUATED: `0`!>whenMultiBranch(10)<!>
+const konst multi1 = <!EVALUATED: `-2`!>whenMultiBranch(2)<!>
+const konst multi2 = <!EVALUATED: `-4`!>whenMultiBranch(4)<!>
+const konst multi3 = <!EVALUATED: `0`!>whenMultiBranch(10)<!>
 
-const val c1 = <!EVALUATED: `-1`!>whenWithoutReturn(A(1))<!>
-const val c2 = <!EVALUATED: `-3`!>whenWithoutReturn(A(3))<!>
-const val c3 = <!EVALUATED: `0`!>whenWithoutReturn(A(10))<!>
+const konst c1 = <!EVALUATED: `-1`!>whenWithoutReturn(A(1))<!>
+const konst c2 = <!EVALUATED: `-3`!>whenWithoutReturn(A(3))<!>
+const konst c3 = <!EVALUATED: `0`!>whenWithoutReturn(A(10))<!>
 
-const val d1 = <!EVALUATED: `-1`!>whenWithoutElse(A(1))<!>
-const val d2 = <!EVALUATED: `-4`!>whenWithoutElse(A(4))<!>
-const val d3 = <!EVALUATED: `10`!>whenWithoutElse(A(10))<!>
+const konst d1 = <!EVALUATED: `-1`!>whenWithoutElse(A(1))<!>
+const konst d2 = <!EVALUATED: `-4`!>whenWithoutElse(A(4))<!>
+const konst d3 = <!EVALUATED: `10`!>whenWithoutElse(A(10))<!>

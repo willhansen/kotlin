@@ -12,8 +12,8 @@ import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementSourceFac
 import org.jetbrains.kotlin.load.java.structure.impl.source.JavaElementTypeSource
 
 class JavaElementSourceWithSmartPointerFactory(project: Project) : JavaElementSourceFactory() {
-    private val smartTypePointerManager = SmartTypePointerManager.getInstance(project)
-    private val smartPsiPointerManager = SmartPointerManager.getInstance(project)
+    private konst smartTypePointerManager = SmartTypePointerManager.getInstance(project)
+    private konst smartPsiPointerManager = SmartPointerManager.getInstance(project)
 
     override fun <PSI : PsiElement> createPsiSource(psi: PSI): JavaElementPsiSource<PSI> {
         return JavaElementPsiSourceWithSmartPointer(smartPsiPointerManager.createSmartPsiElementPointer(psi), this)

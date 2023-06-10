@@ -1,47 +1,47 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
 @JsExport()
 class A {
-    val `#invalid@char value`: Int = 41
-    val __invalid_char_value: Int = 23
+    konst `#inkonstid@char konstue`: Int = 41
+    konst __inkonstid_char_konstue: Int = 23
 
-    var `--invalud char@var`: String = "A: before"
+    var `--inkonstud char@var`: String = "A: before"
 }
 
 class B {
-    val `#invalid@char value`: Int = 42
-    val __invalid_char_value: Int = 24
+    konst `#inkonstid@char konstue`: Int = 42
+    konst __inkonstid_char_konstue: Int = 24
 
-    var `--invalud char@var`: String = "B: before"
+    var `--inkonstud char@var`: String = "B: before"
 }
 
 fun box(): String {
-    val a = A()
-    val b = B()
+    konst a = A()
+    konst b = B()
 
-    assertEquals(23, a.__invalid_char_value)
-    assertEquals(24, b.__invalid_char_value)
+    assertEquals(23, a.__inkonstid_char_konstue)
+    assertEquals(24, b.__inkonstid_char_konstue)
 
-    assertEquals(41, a.`#invalid@char value`)
-    assertEquals(42, b.`#invalid@char value`)
+    assertEquals(41, a.`#inkonstid@char konstue`)
+    assertEquals(42, b.`#inkonstid@char konstue`)
 
-    assertEquals("A: before", a.`--invalud char@var`)
-    assertEquals("B: before", b.`--invalud char@var`)
+    assertEquals("A: before", a.`--inkonstud char@var`)
+    assertEquals("B: before", b.`--inkonstud char@var`)
 
-    a.`--invalud char@var` = "A: after"
-    b.`--invalud char@var` = "B: after"
+    a.`--inkonstud char@var` = "A: after"
+    b.`--inkonstud char@var` = "B: after"
 
-    assertEquals("A: after", a.`--invalud char@var`)
-    assertEquals("B: after", b.`--invalud char@var`)
+    assertEquals("A: after", a.`--inkonstud char@var`)
+    assertEquals("B: after", b.`--inkonstud char@var`)
 
-    assertEquals(41, js("a['#invalid@char value']"))
-    assertEquals(js("undefined"), js("b['#invalid@char value']"))
+    assertEquals(41, js("a['#inkonstid@char konstue']"))
+    assertEquals(js("undefined"), js("b['#inkonstid@char konstue']"))
 
-    assertEquals("A: after", js("a['--invalud char@var']"))
-    assertEquals(js("undefined"), js("b['--invalud char@var']"))
+    assertEquals("A: after", js("a['--inkonstud char@var']"))
+    assertEquals(js("undefined"), js("b['--inkonstud char@var']"))
 
     return "OK"
 }

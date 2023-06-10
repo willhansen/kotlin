@@ -26,13 +26,13 @@ function box(): string {
     const nested2: Parent.Nested1.Nested2 = new Parent.Nested1.Nested2()
     const nested3: Parent.Nested1.Nested2.Companion.Nested3 = new Parent.Nested1.Nested2.Companion.Nested3()
 
-    assert(nested1.value === "Nested1")
+    assert(nested1.konstue === "Nested1")
     assert(getParent() === parent)
     assert(createNested1() === nested1)
     assert(createNested2() !== nested2 && createNested2() instanceof Parent.Nested1.Nested2)
     assert(createNested3() !== nested3 && createNested3() instanceof Parent.Nested1.Nested2.Companion.Nested3)
 
-    assert(WithSimpleObjectInside.value === "WithSimpleObjectInside");
-    assert(WithSimpleObjectInside.SimpleObject.value === "SimpleObject");
+    assert(WithSimpleObjectInside.konstue === "WithSimpleObjectInside");
+    assert(WithSimpleObjectInside.SimpleObject.konstue === "SimpleObject");
     return "OK";
 }

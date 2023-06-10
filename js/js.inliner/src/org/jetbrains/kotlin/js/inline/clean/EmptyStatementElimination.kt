@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.js.backend.ast.*
 import org.jetbrains.kotlin.js.backend.ast.metadata.synthetic
 import org.jetbrains.kotlin.js.translate.utils.JsAstUtils
 
-internal class EmptyStatementElimination(private val root: JsStatement) {
+internal class EmptyStatementElimination(private konst root: JsStatement) {
     private var hasChanges = false
 
     fun apply(): Boolean {
@@ -41,8 +41,8 @@ internal class EmptyStatementElimination(private val root: JsStatement) {
             }
 
             override fun endVisit(x: JsIf, ctx: JsContext<JsNode>) {
-                val thenEmpty = isEmpty(x.thenStatement)
-                val elseEmpty = x.elseStatement?.let { isEmpty(it) } ?: true
+                konst thenEmpty = isEmpty(x.thenStatement)
+                konst elseEmpty = x.elseStatement?.let { isEmpty(it) } ?: true
                 when {
                     thenEmpty && elseEmpty -> {
                         hasChanges = true
@@ -64,7 +64,7 @@ internal class EmptyStatementElimination(private val root: JsStatement) {
             }
 
             override fun endVisit(x: JsTry, ctx: JsContext<JsNode>) {
-                val finallyBlock = x.finallyBlock
+                konst finallyBlock = x.finallyBlock
                 if (x.tryBlock.isEmpty) {
                     hasChanges = true
                     ctx.replaceMe(finallyBlock ?: JsEmpty)
@@ -79,7 +79,7 @@ internal class EmptyStatementElimination(private val root: JsStatement) {
                     || x.cases.all { it.statements.isEmpty() }
                 ) {
                     hasChanges = true
-                    val replacement = mutableListOf(JsAstUtils.asSyntheticStatement(x.expression))
+                    konst replacement = mutableListOf(JsAstUtils.asSyntheticStatement(x.expression))
                     x.cases.lastOrNull()?.apply { replacement.addAll(statements) }
                     ctx.replaceMe(JsBlock(replacement))
                 }

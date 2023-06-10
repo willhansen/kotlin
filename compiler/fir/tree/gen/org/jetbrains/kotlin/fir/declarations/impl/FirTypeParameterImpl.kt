@@ -32,17 +32,17 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirTypeParameterImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
-    override val name: Name,
-    override val symbol: FirTypeParameterSymbol,
-    override val containingDeclarationSymbol: FirBasedSymbol<*>,
-    override val variance: Variance,
-    override val isReified: Boolean,
-    override val bounds: MutableList<FirTypeRef>,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
+    override konst name: Name,
+    override konst symbol: FirTypeParameterSymbol,
+    override konst containingDeclarationSymbol: FirBasedSymbol<*>,
+    override konst variance: Variance,
+    override konst isReified: Boolean,
+    override konst bounds: MutableList<FirTypeRef>,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
 ) : FirTypeParameter() {
     init {

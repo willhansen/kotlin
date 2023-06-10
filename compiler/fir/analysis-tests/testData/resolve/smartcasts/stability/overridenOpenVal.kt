@@ -1,5 +1,5 @@
 // !DUMP_CFG
-open class A(open val x: Any)
+open class A(open konst x: Any)
 
 class B(x: Any) : A(x) {
     fun test_1() {

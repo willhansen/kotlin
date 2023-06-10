@@ -2,13 +2,13 @@ package Jet86
 
 class A {
   companion ~A~object {
-    ~A.x~val x = 1
+    ~A.x~konst x = 1
   }
 }
 
 ~B~class B() {
-  ~B.x~val x = 12
+  ~B.x~konst x = 12
 }
 
-val a = `A`A.`A.x`x
-val d = B().`B.x`x
+konst a = `A`A.`A.x`x
+konst d = B().`B.x`x

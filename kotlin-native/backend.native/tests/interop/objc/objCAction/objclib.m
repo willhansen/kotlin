@@ -2,7 +2,7 @@
 
 void performSelector0(id target, NSString* selectorName) {
     NSLog(@"performSelector0(%@, %@)", target, selectorName);
-    // Ignoring return value, because ObjCAction does not allow one.
+    // Ignoring return konstue, because ObjCAction does not allow one.
     [target performSelector:NSSelectorFromString(selectorName)];
 }
 
@@ -16,7 +16,7 @@ void performSelectorInNewThread0(id target, NSString* selectorName) {
 
 void performSelector1(id target, NSString* selectorName, id arg1) {
     NSLog(@"performSelector1(%@, %@, %@)", target, selectorName, arg1);
-    // Ignoring return value, because ObjCAction does not allow one.
+    // Ignoring return konstue, because ObjCAction does not allow one.
     [target performSelector:NSSelectorFromString(selectorName) withObject:arg1];
 }
 
@@ -29,7 +29,7 @@ void performSelectorInNewThread1(id target, NSString* selectorName, id arg1) {
 
 void performSelector2(id target, NSString* selectorName, id arg1, id arg2) {
     NSLog(@"performSelector2(%@, %@, %@, %@)", target, selectorName, arg1, arg2);
-    // Ignoring return value, because ObjCAction does not allow one.
+    // Ignoring return konstue, because ObjCAction does not allow one.
     [target performSelector:NSSelectorFromString(selectorName) withObject:arg1 withObject:arg2];
 }
 
@@ -41,7 +41,7 @@ void performSelectorInNewThread2(id target, NSString* selectorName, id arg1, id 
     [thread start];
 }
 
-void setProperty(id target, NSString* propertyName, id value) {
-    NSLog(@"setProperty(%@, %@, %@)", target, propertyName, value);
-    [target setValue:value forKey:propertyName];
+void setProperty(id target, NSString* propertyName, id konstue) {
+    NSLog(@"setProperty(%@, %@, %@)", target, propertyName, konstue);
+    [target setValue:konstue forKey:propertyName];
 }

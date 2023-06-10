@@ -22,12 +22,12 @@ operator fun A.divAssign(s: String) {
 operator fun A.remAssign(s: String) {
 }
 
-val p: A
+konst p: A
   field = A()
   get
 
 fun testVariable() {
-  val a: A = A()
+  konst a: A = A()
   a.plusAssign(s = "+=")
   a.minusAssign(s = "-=")
   a.timesAssign(s = "*=")

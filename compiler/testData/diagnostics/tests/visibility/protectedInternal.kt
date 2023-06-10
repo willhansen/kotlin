@@ -4,10 +4,10 @@ abstract class A
 internal class B : A()
 
 abstract class Base {
-    protected abstract val a: A
+    protected abstract konst a: A
 }
 
 internal class Derived : Base() {
-    override val a = B()
+    override konst a = B()
         get() = field
 }

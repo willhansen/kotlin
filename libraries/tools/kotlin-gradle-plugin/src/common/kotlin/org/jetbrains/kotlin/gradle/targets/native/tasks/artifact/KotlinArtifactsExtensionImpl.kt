@@ -14,63 +14,63 @@ import javax.inject.Inject
 
 abstract class KotlinArtifactsExtensionImpl @Inject constructor(project: Project) : KotlinArtifactsExtension {
 
-    override val artifactConfigs = project.objects.domainObjectSet(KotlinArtifactConfig::class.java)
-    override val artifacts = project.objects.namedDomainObjectSet(KotlinArtifact::class.java)
-    override val Native = project.objects.newInstance(KotlinNativeArtifactDSLImpl::class.java, project)
+    override konst artifactConfigs = project.objects.domainObjectSet(KotlinArtifactConfig::class.java)
+    override konst artifacts = project.objects.namedDomainObjectSet(KotlinArtifact::class.java)
+    override konst Native = project.objects.newInstance(KotlinNativeArtifactDSLImpl::class.java, project)
 
-    val RELEASE = NativeBuildType.RELEASE
-    val DEBUG = NativeBuildType.DEBUG
+    konst RELEASE = NativeBuildType.RELEASE
+    konst DEBUG = NativeBuildType.DEBUG
 
     class BitcodeEmbeddingModeDsl {
-        val DISABLE = BitcodeEmbeddingMode.DISABLE
-        val BITCODE = BitcodeEmbeddingMode.BITCODE
-        val MARKER = BitcodeEmbeddingMode.MARKER
+        konst DISABLE = BitcodeEmbeddingMode.DISABLE
+        konst BITCODE = BitcodeEmbeddingMode.BITCODE
+        konst MARKER = BitcodeEmbeddingMode.MARKER
     }
 
     @JvmField
-    val EmbedBitcodeMode = BitcodeEmbeddingModeDsl()
+    konst EmbedBitcodeMode = BitcodeEmbeddingModeDsl()
 
-    val androidX64 = KonanTarget.ANDROID_X64
-    val androidX86 = KonanTarget.ANDROID_X86
-    val androidArm32 = KonanTarget.ANDROID_ARM32
-    val androidArm64 = KonanTarget.ANDROID_ARM64
-    val iosArm64 = KonanTarget.IOS_ARM64
-    val iosX64 = KonanTarget.IOS_X64
-    val iosSimulatorArm64 = KonanTarget.IOS_SIMULATOR_ARM64
-    val watchosArm32 = KonanTarget.WATCHOS_ARM32
-    val watchosArm64 = KonanTarget.WATCHOS_ARM64
-    val watchosX64 = KonanTarget.WATCHOS_X64
-    val watchosSimulatorArm64 = KonanTarget.WATCHOS_SIMULATOR_ARM64
-    val watchosDeviceArm64 = KonanTarget.WATCHOS_DEVICE_ARM64
-    val tvosArm64 = KonanTarget.TVOS_ARM64
-    val tvosX64 = KonanTarget.TVOS_X64
-    val tvosSimulatorArm64 = KonanTarget.TVOS_SIMULATOR_ARM64
-    val linuxX64 = KonanTarget.LINUX_X64
-    val mingwX64 = KonanTarget.MINGW_X64
-    val macosX64 = KonanTarget.MACOS_X64
-    val macosArm64 = KonanTarget.MACOS_ARM64
-    val linuxArm64 = KonanTarget.LINUX_ARM64
+    konst androidX64 = KonanTarget.ANDROID_X64
+    konst androidX86 = KonanTarget.ANDROID_X86
+    konst androidArm32 = KonanTarget.ANDROID_ARM32
+    konst androidArm64 = KonanTarget.ANDROID_ARM64
+    konst iosArm64 = KonanTarget.IOS_ARM64
+    konst iosX64 = KonanTarget.IOS_X64
+    konst iosSimulatorArm64 = KonanTarget.IOS_SIMULATOR_ARM64
+    konst watchosArm32 = KonanTarget.WATCHOS_ARM32
+    konst watchosArm64 = KonanTarget.WATCHOS_ARM64
+    konst watchosX64 = KonanTarget.WATCHOS_X64
+    konst watchosSimulatorArm64 = KonanTarget.WATCHOS_SIMULATOR_ARM64
+    konst watchosDeviceArm64 = KonanTarget.WATCHOS_DEVICE_ARM64
+    konst tvosArm64 = KonanTarget.TVOS_ARM64
+    konst tvosX64 = KonanTarget.TVOS_X64
+    konst tvosSimulatorArm64 = KonanTarget.TVOS_SIMULATOR_ARM64
+    konst linuxX64 = KonanTarget.LINUX_X64
+    konst mingwX64 = KonanTarget.MINGW_X64
+    konst macosX64 = KonanTarget.MACOS_X64
+    konst macosArm64 = KonanTarget.MACOS_ARM64
+    konst linuxArm64 = KonanTarget.LINUX_ARM64
 
-
-    @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val iosArm32 = KonanTarget.IOS_ARM32
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val watchosX86 = KonanTarget.WATCHOS_X86
+    konst iosArm32 = KonanTarget.IOS_ARM32
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val mingwX86 = KonanTarget.MINGW_X86
+    konst watchosX86 = KonanTarget.WATCHOS_X86
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val linuxArm32Hfp = KonanTarget.LINUX_ARM32_HFP
+    konst mingwX86 = KonanTarget.MINGW_X86
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val linuxMips32 = KonanTarget.LINUX_MIPS32
+    konst linuxArm32Hfp = KonanTarget.LINUX_ARM32_HFP
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val linuxMipsel32 = KonanTarget.LINUX_MIPSEL32
+    konst linuxMips32 = KonanTarget.LINUX_MIPS32
 
     @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
-    val wasm32 = KonanTarget.WASM32
+    konst linuxMipsel32 = KonanTarget.LINUX_MIPSEL32
+
+    @Deprecated(DEPRECATED_TARGET_MESSAGE, level = DeprecationLevel.ERROR)
+    konst wasm32 = KonanTarget.WASM32
 
 }

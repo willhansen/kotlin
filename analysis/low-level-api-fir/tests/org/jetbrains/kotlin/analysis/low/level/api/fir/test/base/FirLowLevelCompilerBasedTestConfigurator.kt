@@ -24,15 +24,15 @@ import org.jetbrains.kotlin.analysis.test.framework.project.structure.TestModule
 import org.jetbrains.kotlin.analysis.test.framework.test.configurators.FrontendKind
 
 object FirLowLevelCompilerBasedTestConfigurator : AnalysisApiTestConfigurator() {
-    override val analyseInDependentSession: Boolean get() = false
-    override val frontendKind: FrontendKind get() = FrontendKind.Fir
+    override konst analyseInDependentSession: Boolean get() = false
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fir
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
         builder.apply {
         }
     }
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar> = listOf(
         AnalysisApiBaseTestServiceRegistrar,
         AnalysisApiDecompiledCodeTestServiceRegistrar,
         AnalysisApiFirTestServiceRegistrar,
@@ -43,8 +43,8 @@ object FirLowLevelCompilerBasedTestConfigurator : AnalysisApiTestConfigurator() 
         testServices: TestServices,
         project: Project
     ): KtModuleProjectStructure {
-        val mainModules = moduleStructure.modules.map { testModule ->
-            val files = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
+        konst mainModules = moduleStructure.modules.map { testModule ->
+            konst files = TestModuleStructureFactory.createSourcePsiFiles(testModule, testServices, project)
             KtModuleWithFiles(
                 KtSourceModuleByCompilerConfiguration(project, testModule, files, testServices),
                 files

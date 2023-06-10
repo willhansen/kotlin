@@ -27,7 +27,7 @@ data class ExecuteRequest(
         /**
          * Command line args.
          */
-        val args: MutableList<String> = mutableListOf(),
+        konst args: MutableList<String> = mutableListOf(),
         /**
          * Optional working directory. By default its the parent directory of [executableAbsolutePath].
          */
@@ -47,7 +47,7 @@ data class ExecuteRequest(
         /**
          * Additional environment variables.
          */
-        val environment: MutableMap<String, String> = mutableMapOf(),
+        konst environment: MutableMap<String, String> = mutableMapOf(),
         /**
          * Bound execution time of the process. By default it's [Duration.INFINITE] meaning it's unbounded.
          */
@@ -63,11 +63,11 @@ data class ExecuteResponse(
         /**
          * Process exit code if it exited by itself, or `null` if it was killed by a timeout.
          */
-        val exitCode: Int?,
+        konst exitCode: Int?,
         /**
          * Execution time of the process. Can be a bit bigger than [ExecuteRequest.timeout].
          */
-        val executionTime: Duration,
+        konst executionTime: Duration,
 ) {
     /**
      * Checks that [exitCode] is `0`.

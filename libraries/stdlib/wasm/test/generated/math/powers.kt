@@ -16,7 +16,7 @@ import kotlin.test.*
 
 
 class PowersTest {
-    private val arguments = arrayOf(
+    private konst arguments = arrayOf(
         0xfff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x7fefffffffffffffUL, 
         0x7ff8000000000000UL,     0x6a83b03385a2fc07UL,     0x0UL,     0x3da5fd7fe1796495UL, 
         0xbda5fd7fe1796495UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -31,7 +31,7 @@ class PowersTest {
     
     @Test
     fun testHypot() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL, 
             0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL, 
             0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL, 
@@ -330,7 +330,7 @@ class PowersTest {
     
     @Test
     fun testSqrt() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x1e60000000000000UL,     0x5fefffffffffffffUL, 
             0x7ff8000000000000UL,     0x553919ad633b2c6fUL,     0x0UL,     0x3eca86f0875fcf94UL, 
             0x7ff8000000000000UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -348,7 +348,7 @@ class PowersTest {
     
     @Test
     fun testExp() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x0UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x7ff0000000000000UL, 
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff000000000afecUL, 
             0x3feffffffffea028UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 
@@ -366,7 +366,7 @@ class PowersTest {
     
     @Test
     fun testExpm1() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0xbff0000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x7ff0000000000000UL, 
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x0UL,     0x3da5fd7fe179dd7aUL, 
             0xbda5fd7fe178ebb0UL,     0x0UL,     0x0UL,     0x0UL, 
@@ -384,7 +384,7 @@ class PowersTest {
     
     @Test
     fun testLog() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -683,7 +683,7 @@ class PowersTest {
     
     @Test
     fun testLn() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0xc0874385446d71c3UL,     0x40862e42fefa39efUL, 
             0x7ff8000000000000UL,     0x407d83d9c3a25eabUL,     0xfff0000000000000UL,     0xc0395414621954feUL, 
             0x7ff8000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL, 
@@ -697,14 +697,14 @@ class PowersTest {
     
     
         checkAnswers(::ln, arguments, answers, false)
-        val specialFunctionPointArguments = arrayOf(
+        konst specialFunctionPointArguments = arrayOf(
             0x4005bf0a8b145769UL,     0x4005bf0a8b14af5fUL,     0x4005bf0a8b13ff73UL,     0x3ff5bf0a8b145769UL, 
             0x4015bf0a8b145769UL,     0x3fe5bf0a8b145769UL,     0x4025bf0a8b145769UL,     0xc005bf0a8b145769UL, 
             0xc005bf0a8b13ff73UL,     0xc005bf0a8b14af5fUL,     0xbff5bf0a8b145769UL,     0xc015bf0a8b145769UL, 
             0xbfe5bf0a8b145769UL,     0xc025bf0a8b145769UL, 
         )
     
-        val specialFunctionPointResults = arrayOf(
+        konst specialFunctionPointResults = arrayOf(
             0x3ff0000000000000UL,     0x3ff00000000040b8UL,     0x3fefffffffff7e90UL,     0x3fd3a37a020b8c21UL, 
             0x3ffb17217f7d1cf7UL,     0xbfd8b90bfbe8e7beUL,     0x400317217f7d1cf7UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -716,7 +716,7 @@ class PowersTest {
     
     @Test
     fun testLog10() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0xc07434e6420f4374UL,     0x40734413509f79ffUL, 
             0x7ff8000000000000UL,     0x4069a2edb0d17ca0UL,     0xfff0000000000000UL,     0xc026000000000000UL, 
             0x7ff8000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL, 
@@ -730,14 +730,14 @@ class PowersTest {
     
     
         checkAnswers(::log10, arguments, answers, false)
-        val specialFunctionPointArguments = arrayOf(
+        konst specialFunctionPointArguments = arrayOf(
             0x4024000000000000UL,     0x40240000000015fdUL,     0x4023ffffffffea03UL,     0x4014000000000000UL, 
             0x4034000000000000UL,     0x4004000000000000UL,     0x4044000000000000UL,     0xc024000000000000UL, 
             0xc023ffffffffea03UL,     0xc0240000000015fdUL,     0xc014000000000000UL,     0xc034000000000000UL, 
             0xc004000000000000UL,     0xc044000000000000UL, 
         )
     
-        val specialFunctionPointResults = arrayOf(
+        konst specialFunctionPointResults = arrayOf(
             0x3ff0000000000000UL,     0x3ff00000000007a4UL,     0x3feffffffffff0b9UL,     0x3fe65df657b04301UL, 
             0x3ff4d104d427de80UL,     0x3fd977d95ec10c02UL,     0x3ff9a209a84fbcffUL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -749,7 +749,7 @@ class PowersTest {
     
     @Test
     fun testLog2() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0xc090c80000000000UL,     0x4090000000000000UL, 
             0x7ff8000000000000UL,     0x40854a64e56089faUL,     0xfff0000000000000UL,     0xc04245465683a05eUL, 
             0x7ff8000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL,     0xfff0000000000000UL, 
@@ -763,14 +763,14 @@ class PowersTest {
     
     
         checkAnswers(::log2, arguments, answers, false)
-        val specialFunctionPointArguments = arrayOf(
+        konst specialFunctionPointArguments = arrayOf(
             0x4000000000000000UL,     0x40000000000057f6UL,     0x3fffffffffff5014UL,     0x3ff0000000000000UL, 
             0x4010000000000000UL,     0x3fe0000000000000UL,     0x4020000000000000UL,     0xc000000000000000UL, 
             0xbfffffffffff5014UL,     0xc0000000000057f6UL,     0xbff0000000000000UL,     0xc010000000000000UL, 
             0xbfe0000000000000UL,     0xc020000000000000UL, 
         )
     
-        val specialFunctionPointResults = arrayOf(
+        konst specialFunctionPointResults = arrayOf(
             0x3ff0000000000000UL,     0x3ff0000000007ee7UL,     0x3fefffffffff0233UL,     0x0UL, 
             0x4000000000000000UL,     0xbff0000000000000UL,     0x4008000000000000UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -782,7 +782,7 @@ class PowersTest {
     
     @Test
     fun testLn1p() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x1UL,     0x40862e42fefa39efUL, 
             0x7ff8000000000000UL,     0x407d83d9c3a25eabUL,     0x0UL,     0x3da5fd7fe178ebb0UL, 
             0xbda5fd7fe179dd7aUL,     0x0UL,     0x0UL,     0x0UL, 
@@ -796,14 +796,14 @@ class PowersTest {
     
     
         checkAnswers(::ln1p, arguments, answers, true)
-        val specialFunctionPointArguments = arrayOf(
+        konst specialFunctionPointArguments = arrayOf(
             0x4005bf0a8b145769UL,     0x4005bf0a8b14af5fUL,     0x4005bf0a8b13ff73UL,     0x3ff5bf0a8b145769UL, 
             0x4015bf0a8b145769UL,     0x3fe5bf0a8b145769UL,     0x4025bf0a8b145769UL,     0xc005bf0a8b145769UL, 
             0xc005bf0a8b13ff73UL,     0xc005bf0a8b14af5fUL,     0xbff5bf0a8b145769UL,     0xc015bf0a8b145769UL, 
             0xbfe5bf0a8b145769UL,     0xc025bf0a8b145769UL, 
         )
     
-        val specialFunctionPointResults = arrayOf(
+        konst specialFunctionPointResults = arrayOf(
             0x3ff5031eafefb049UL,     0x3ff5031eafefdf99UL,     0x3ff5031eafef80f9UL,     0x3feb772c638242deUL, 
             0x3ffdcabb104c08abUL,     0x3fe097dd2c264e2aUL,     0x4003cb5212f5a2d3UL,     0x7ff8000000000000UL, 
             0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL,     0x7ff8000000000000UL, 
@@ -815,7 +815,7 @@ class PowersTest {
     
     @Test
     fun testPowWrapper() {
-        val answers = arrayOf(
+        konst answers = arrayOf(
             0x0UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL,     0x7ff0000000000000UL, 
             0x7ff8000000000000UL,     0x7ff0000000000000UL,     0x3ff0000000000000UL,     0x7ff0000000000000UL, 
             0x0UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL,     0x3ff0000000000000UL, 

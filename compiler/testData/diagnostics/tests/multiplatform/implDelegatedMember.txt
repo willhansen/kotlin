@@ -11,7 +11,7 @@ public open expect class Foo {
 // -- Module: <m2-jvm> --
 package
 
-public val bar: Bar
+public konst bar: Bar
 
 public interface Bar {
     public abstract fun bar(): kotlin.String

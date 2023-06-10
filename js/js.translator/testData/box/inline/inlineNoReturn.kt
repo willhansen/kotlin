@@ -3,17 +3,17 @@ package foo
 
 // CHECK_CONTAINS_NO_CALLS: factAbsNoInline1 except=imul;Unit_getInstance
 
-internal class State(value: Int) {
-    public var value: Int = value
+internal class State(konstue: Int) {
+    public var konstue: Int = konstue
 }
 
 internal inline fun multiply(state: State, factor: Int) {
-    state.value *= factor
+    state.konstue *= factor
 }
 
 internal inline fun abs(state: State) {
-    val value = state.value
-    if (value < 0) {
+    konst konstue = state.konstue
+    if (konstue < 0) {
         multiply(state, -1)
     }
 }
@@ -21,12 +21,12 @@ internal inline fun abs(state: State) {
 internal inline fun factAbs(state: State) {
     abs(state)
 
-    if (state.value == 0) {
-        state.value = 1
+    if (state.konstue == 0) {
+        state.konstue = 1
         return
     }
 
-    var n = state.value
+    var n = state.konstue
     while (n > 1) {
         n--
         multiply(state, n)
@@ -37,7 +37,7 @@ internal inline fun factAbs(state: State) {
 // CHECK_LABELS_COUNT: function=factAbsNoInline1 name=$l$block count=1 TARGET_BACKENDS=JS_IR
 internal fun factAbsNoInline1(state: State): Int {
     factAbs(state)
-    return state.value
+    return state.konstue
 }
 
 internal fun factAbsNoInline2(n: Int): Int {

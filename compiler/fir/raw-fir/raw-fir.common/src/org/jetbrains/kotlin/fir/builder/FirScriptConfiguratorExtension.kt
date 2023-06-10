@@ -17,17 +17,17 @@ abstract class FirScriptConfiguratorExtension(
     session: FirSession,
 ) : FirExtension(session) {
     companion object {
-        val NAME = FirExtensionPointName("ScriptConfigurator")
+        konst NAME = FirExtensionPointName("ScriptConfigurator")
     }
 
-    final override val name: FirExtensionPointName
+    final override konst name: FirExtensionPointName
         get() = NAME
 
-    final override val extensionType: KClass<out FirExtension> = FirScriptConfiguratorExtension::class
+    final override konst extensionType: KClass<out FirExtension> = FirScriptConfiguratorExtension::class
 
     fun interface Factory : FirExtension.Factory<FirScriptConfiguratorExtension>
 
     abstract fun FirScriptBuilder.configure(fileBuilder: FirFileBuilder)
 }
 
-val FirExtensionService.scriptConfigurators: List<FirScriptConfiguratorExtension> by FirExtensionService.registeredExtensions()
+konst FirExtensionService.scriptConfigurators: List<FirScriptConfiguratorExtension> by FirExtensionService.registeredExtensions()

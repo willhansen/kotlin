@@ -12,7 +12,7 @@ interface Checker {
 class ShouldBeDisabled : Checker {
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
         assert(l()) {
             throw RuntimeException("FAIL 1")
@@ -23,7 +23,7 @@ class ShouldBeDisabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
         assert(l()) {
             throw RuntimeException("FAIL 3")
@@ -36,7 +36,7 @@ class ShouldBeDisabled : Checker {
 class ShouldBeEnabled : Checker {
     override fun checkTrueWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; true }
+        konst l = { hit = true; true }
 
         assert(l()) {
             throw RuntimeException("FAIL 5")
@@ -47,7 +47,7 @@ class ShouldBeEnabled : Checker {
 
     override fun checkFalseWithMessage(): Boolean {
         var hit = false
-        val l = { hit = true; false }
+        konst l = { hit = true; false }
 
         assert(l()) {
             return hit
@@ -59,9 +59,9 @@ class ShouldBeEnabled : Checker {
 }
 
 fun setDesiredAssertionStatus(v: Boolean): Checker {
-    val loader = Checker::class.java.classLoader
+    konst loader = Checker::class.java.classLoader
     loader.setPackageAssertionStatus("nonLocalReturn", v)
-    val c = loader.loadClass(if (v) "nonLocalReturn.ShouldBeEnabled" else "nonLocalReturn.ShouldBeDisabled")
+    konst c = loader.loadClass(if (v) "nonLocalReturn.ShouldBeEnabled" else "nonLocalReturn.ShouldBeDisabled")
     return c.newInstance() as Checker
 }
 

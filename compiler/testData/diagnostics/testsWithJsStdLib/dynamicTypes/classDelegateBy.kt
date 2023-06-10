@@ -1,5 +1,5 @@
 // FIR_IDENTICAL
-val x: dynamic = 23
+konst x: dynamic = 23
 
 interface I {
     fun foo(): String

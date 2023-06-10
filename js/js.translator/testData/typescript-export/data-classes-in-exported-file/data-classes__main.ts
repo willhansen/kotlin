@@ -38,13 +38,13 @@ function box(): string {
     assert(new KT39423("Test", null).toString() === "KT39423(a=Test, b=null)")
     assert(new KT39423("Test", 42).toString() === "KT39423(a=Test, b=42)")
 
-    assert(new Test2("1", "2").value1 === "1")
-    assert(new Test2("1", "2").value2 === "2")
+    assert(new Test2("1", "2").konstue1 === "1")
+    assert(new Test2("1", "2").konstue2 === "2")
 
-    assert(new Test2("1", "2").copy("3").value1 === "3")
-    assert(new Test2("1", "2").copy("3").value2 === "2")
-    assert(new Test2("1", "2").copy(undefined, "3").value1 === "1")
-    assert(new Test2("1", "2").copy(undefined, "3").value2 === "3")
+    assert(new Test2("1", "2").copy("3").konstue1 === "3")
+    assert(new Test2("1", "2").copy("3").konstue2 === "2")
+    assert(new Test2("1", "2").copy(undefined, "3").konstue1 === "1")
+    assert(new Test2("1", "2").copy(undefined, "3").konstue2 === "3")
 
     assert(new Test2("1", "2").component1() === "1")
 

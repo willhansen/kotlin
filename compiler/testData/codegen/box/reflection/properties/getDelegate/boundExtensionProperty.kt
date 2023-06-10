@@ -8,7 +8,7 @@ import kotlin.test.*
 object Delegate {
     var storage = ""
     operator fun getValue(instance: Any?, property: KProperty<*>) = storage
-    operator fun setValue(instance: Any?, property: KProperty<*>, value: String) { storage = value }
+    operator fun setValue(instance: Any?, property: KProperty<*>, konstue: String) { storage = konstue }
 }
 
 class Foo
@@ -16,9 +16,9 @@ class Foo
 var Foo.result: String by Delegate
 
 fun box(): String {
-    val foo = Foo()
+    konst foo = Foo()
     foo.result = "Fail"
-    val d = (foo::result).apply { isAccessible = true }.getDelegate() as Delegate
+    konst d = (foo::result).apply { isAccessible = true }.getDelegate() as Delegate
     foo.result = "OK"
     assertEquals(d, (foo::result).apply { isAccessible = true }.getDelegate())
     assertEquals(d, (Foo()::result).apply { isAccessible = true }.getDelegate())

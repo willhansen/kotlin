@@ -9,7 +9,7 @@ import com.intellij.util.containers.HashSetInterner
 
 
 class Interner<T : Any> {
-    private val pool = HashSetInterner<T>()
+    private konst pool = HashSetInterner<T>()
 
-    fun intern(value: T): T = pool.intern(value)
+    fun intern(konstue: T): T = pool.intern(konstue)
 }

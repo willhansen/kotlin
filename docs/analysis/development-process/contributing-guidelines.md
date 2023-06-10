@@ -11,8 +11,8 @@ accepted.
 * Always write [Unit Tests](#always-write-unit-tests-for-your-code) for your changes.
 * Always perform **code formatting** and call **import optimizer** before committing your changes.
 * Do not use short names in declarations names
-    * Bad: `val dclSmbl: KtDeclarationSymbol`
-    * Good `val declarationSymbol: KtDeclarationSymbol`
+    * Bad: `konst dclSmbl: KtDeclarationSymbol`
+    * Good `konst declarationSymbol: KtDeclarationSymbol`
 * [Always add KDoc](#always-add-kdoc-to-any-public-declaration-inside-analysis-apianalysisanalysis-api-module) to any public declaration inside `analysis-api` module.
   * A good KDoc should include
     * What the declaration purpose and how it should be used?
@@ -31,7 +31,7 @@ This includes:
 
 * Public classes;
 * Public class members (functions/properties);
-* Class constructor parameters which are declared as public class members via `val`/`var`;
+* Class constructor parameters which are declared as public class members via `konst`/`var`;
 * Top-level functions/properties.
 
 Do not hesitate to make the KDoc as long and **detailed** as possible until the information you write will help others to use your API
@@ -50,7 +50,7 @@ public class KtAnnotationApplication(
     /**
      * ClassId of an annotation
      */
-    val classId: ClassId
+    konst classId: ClassId
 )
 ```
 
@@ -61,7 +61,7 @@ public class KtAnnotationApplication(
     /**
      * A fully qualified name of an annotation class which is being applied
      */
-    val classId: ClassId
+    konst classId: ClassId
 )
 ```
 
@@ -118,11 +118,11 @@ If you fixed a bug or added new functionality to an existing feature, consider a
 
 ```kotlin
 public class KtCall(
-    private val _symbol: KtSymbol,
-    private val _isInvokeCall: Boolean,
+    private konst _symbol: KtSymbol,
+    private konst _isInvokeCall: Boolean,
 ) : KtLifetimeTokenOwner {
-    public val symbol: KtSymbol get() = withValidityAssertion { _symbol }
-    public val isInvokeCall: Boolean get() = withValidityAssertion { _isInvokeCall }
+    public konst symbol: KtSymbol get() = withValidityAssertion { _symbol }
+    public konst isInvokeCall: Boolean get() = withValidityAssertion { _isInvokeCall }
 
     public fun isImplicitCall(): Boolean = withValidityAssertion {
         // IMPL
@@ -166,17 +166,17 @@ unclear semantics:
 Bad:
 
 ```kotlin
-internal fun render(value: KtAnnotationValue): String = buildString { renderConstantValue(value) }
+internal fun render(konstue: KtAnnotationValue): String = buildString { renderConstantValue(konstue) }
 
-private fun StringBuilder.renderConstantValue(value: KtAnnotationValue) {
-    when (value) {
-        is KtAnnotationApplicationValue -> renderAnnotationConstantValue(value)
+private fun StringBuilder.renderConstantValue(konstue: KtAnnotationValue) {
+    when (konstue) {
+        is KtAnnotationApplicationValue -> renderAnnotationConstantValue(konstue)
             ...
     }
 }
 
-private fun StringBuilder.renderConstantAnnotationValue(value: KtConstantAnnotationValue) {
-    append(value.constantValue.renderAsKotlinConstant())
+private fun StringBuilder.renderConstantAnnotationValue(konstue: KtConstantAnnotationValue) {
+    append(konstue.constantValue.renderAsKotlinConstant())
 }
 
 // A lot of other non-related utility functions in the same file
@@ -186,17 +186,17 @@ Good:
 
 ```kotlin
 internal object KtAnnotationRenderer {
-    fun render(value: KtAnnotationValue): String = buildString { renderConstantValue(value) }
+    fun render(konstue: KtAnnotationValue): String = buildString { renderConstantValue(konstue) }
 
-    private fun StringBuilder.renderConstantValue(value: KtAnnotationValue) {
-        when (value) {
-            is KtAnnotationApplicationValue -> renderAnnotationConstantValue(value)
+    private fun StringBuilder.renderConstantValue(konstue: KtAnnotationValue) {
+        when (konstue) {
+            is KtAnnotationApplicationValue -> renderAnnotationConstantValue(konstue)
                 ...
         }
     }
 
-    private fun StringBuilder.renderConstantAnnotationValue(value: KtConstantAnnotationValue) {
-        append(value.constantValue.renderAsKotlinConstant())
+    private fun StringBuilder.renderConstantAnnotationValue(konstue: KtConstantAnnotationValue) {
+        append(konstue.constantValue.renderAsKotlinConstant())
     }
 }
 ```

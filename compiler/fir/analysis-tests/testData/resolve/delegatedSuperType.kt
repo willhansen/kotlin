@@ -6,4 +6,4 @@ class B : A {
     override fun foo() {}
 }
 
-class C(val b: B) : A by b
+class C(konst b: B) : A by b

@@ -1,9 +1,9 @@
 open class B(x: Int)
-class A(val w: Char, u: Int = 2) : B(w.toInt() + u) {
-    val x: Int
+class A(konst w: Char, u: Int = 2) : B(w.toInt() + u) {
+    konst x: Int
     var y: Int
-    val z: Int
-    val v = -1
+    konst z: Int
+    konst v = -1
 
     constructor(): this('a') {
         y = 2

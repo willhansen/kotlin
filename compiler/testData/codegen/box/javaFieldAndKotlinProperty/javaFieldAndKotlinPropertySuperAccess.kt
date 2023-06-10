@@ -10,8 +10,8 @@ public class Jaba {
 
 // FILE: test.kt
 open class My : Jaba() {
-    private val a: String = "FAIL"
-    private val b: String = "FAIL"
+    private konst a: String = "FAIL"
+    private konst b: String = "FAIL"
 }
 
 class Some : My() {

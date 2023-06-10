@@ -9,15 +9,15 @@ public class A extends HashMap<Integer, Double> {
     }
 
     @Override
-    public Double put(Integer key, Double value) {
-        return super.put(key, value);
+    public Double put(Integer key, Double konstue) {
+        return super.put(key, konstue);
     }
 }
 
 // MODULE: main(lib)
 // FILE: main.kt
 fun box(): String {
-    val o = A()
+    konst o = A()
     o.put(1, 2.0)
 
     return "OK"

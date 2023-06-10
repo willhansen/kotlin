@@ -16,8 +16,8 @@ fun case_1() {
 
     if (a == null) return
 
-    val b = select(<!DEBUG_INFO_SMARTCAST!>a<!>)
-    val c = a
+    konst b = select(<!DEBUG_INFO_SMARTCAST!>a<!>)
+    konst c = a
 
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>b<!>
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any")!>b<!>.equals(10)
@@ -28,7 +28,7 @@ fun case_1() {
 // TESTCASE NUMBER: 2
 fun case_2(x: Any) {
     if (x is String) {
-        val y = x
+        konst y = x
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.String")!>x<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.String")!>y<!>
         <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.String"), DEBUG_INFO_SMARTCAST!>y<!>.length
@@ -69,7 +69,7 @@ fun case_5(x: Any?) {
     var y = x
     while (false || y != null) {
         if (y is Number) {
-            val z = select(<!DEBUG_INFO_SMARTCAST!>y<!>)
+            konst z = select(<!DEBUG_INFO_SMARTCAST!>y<!>)
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any?")!>x<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Any & kotlin.Any? & kotlin.Number")!>y<!>
             <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.Number")!>z<!>

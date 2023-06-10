@@ -18,11 +18,11 @@ import org.jetbrains.kotlin.serialization.deserialization.descriptors.Deserializ
 //required for LLFirDependenciesSymbolProvider#jvmClassName, to resolve ambiguities
 //todo check if moving builtins to stubs would solve the issue
 internal class JvmFromStubDecompilerSource(
-    override val className: JvmClassName,
-    override val facadeClassName: JvmClassName? = null,
-    override val incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
-    override val isPreReleaseInvisible: Boolean = false,
-    override val abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
+    override konst className: JvmClassName,
+    override konst facadeClassName: JvmClassName? = null,
+    override konst incompatibility: IncompatibleVersionErrorData<JvmMetadataVersion>? = null,
+    override konst isPreReleaseInvisible: Boolean = false,
+    override konst abiStability: DeserializedContainerAbiStability = DeserializedContainerAbiStability.STABLE,
 ) : DeserializedContainerSource, FacadeClassSource {
     constructor(packageName: FqName) :
             this(JvmClassName.byClassId(ClassId.topLevel(JvmClassName.byInternalName(packageName.asString()).fqNameForTopLevelClassMaybeWithDollars)))
@@ -31,6 +31,6 @@ internal class JvmFromStubDecompilerSource(
         return SourceFile.NO_SOURCE_FILE
     }
 
-    override val presentableString: String
+    override konst presentableString: String
         get() = className.internalName
 }

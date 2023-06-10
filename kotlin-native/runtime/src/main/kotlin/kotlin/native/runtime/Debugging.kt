@@ -26,7 +26,7 @@ public object Debugging {
      */
     public var forceCheckedShutdown: Boolean
         get() = Debugging_getForceCheckedShutdown()
-        set(value) = Debugging_setForceCheckedShutdown(value)
+        set(konstue) = Debugging_setForceCheckedShutdown(konstue)
 
     /**
      * Whether the current thread's state allows running Kotlin code.
@@ -35,7 +35,7 @@ public object Debugging {
      * If it returns `false`, it's a bug.
      */
     @InternalForKotlinNative
-    public val isThreadStateRunnable: Boolean
+    public konst isThreadStateRunnable: Boolean
         get() = Debugging_isThreadStateRunnable()
 }
 
@@ -44,7 +44,7 @@ public object Debugging {
 private external fun Debugging_getForceCheckedShutdown(): Boolean
 
 @GCUnsafeCall("Kotlin_Debugging_setForceCheckedShutdown")
-private external fun Debugging_setForceCheckedShutdown(value: Boolean): Unit
+private external fun Debugging_setForceCheckedShutdown(konstue: Boolean): Unit
 
 @GCUnsafeCall("Kotlin_Debugging_isThreadStateRunnable")
 private external fun Debugging_isThreadStateRunnable(): Boolean

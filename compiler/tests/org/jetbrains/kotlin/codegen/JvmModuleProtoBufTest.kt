@@ -36,10 +36,10 @@ class JvmModuleProtoBufTest : KtUsefulTestCase() {
         loadWith: LanguageVersion = LanguageVersion.LATEST_STABLE,
         extraOptions: List<String> = emptyList()
     ) {
-        val directory = KtTestUtil.getTestDataPathBase() + relativeDirectory
-        val tmpdir = KtTestUtil.tmpDir(this::class.simpleName)
+        konst directory = KtTestUtil.getTestDataPathBase() + relativeDirectory
+        konst tmpdir = KtTestUtil.tmpDir(this::class.simpleName)
 
-        val moduleName = "main"
+        konst moduleName = "main"
         CompilerTestUtil.executeCompilerAssertSuccessful(
             K2JVMCompiler(), listOf(
                 directory,
@@ -49,12 +49,12 @@ class JvmModuleProtoBufTest : KtUsefulTestCase() {
             ) + extraOptions
         )
 
-        val mapping = ModuleMapping.loadModuleMapping(
+        konst mapping = ModuleMapping.loadModuleMapping(
             File(tmpdir, "META-INF/$moduleName.${ModuleMapping.MAPPING_FILE_EXT}").readBytes(), "test",
             JvmCompilerDeserializationConfiguration(LanguageVersionSettingsImpl(loadWith, ApiVersion.createByLanguageVersion(loadWith))),
             ::error
         )
-        val result = buildString {
+        konst result = buildString {
             for (annotationClassId in mapping.moduleData.annotations) {
                 appendLine("@$annotationClassId")
             }
@@ -63,7 +63,7 @@ class JvmModuleProtoBufTest : KtUsefulTestCase() {
                 for (part in packageParts.parts) {
                     append("  ")
                     append(part)
-                    val facadeName = packageParts.getMultifileFacadeName(part)
+                    konst facadeName = packageParts.getMultifileFacadeName(part)
                     if (facadeName != null) {
                         append(" (")
                         append(facadeName)

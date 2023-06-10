@@ -1,11 +1,11 @@
 // TARGET_BACKEND: JVM
 // JVM_TARGET: 1.8
 interface KCallable {
-    val returnType: String
+    konst returnType: String
 }
 
 interface KCallableImpl : KCallable {
-    override val returnType: String
+    override konst returnType: String
         get() = "OK"
 }
 

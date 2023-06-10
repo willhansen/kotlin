@@ -1,7 +1,7 @@
 package
 
-public val x: kotlin.Unit
-public val y: kotlin.Unit
+public konst x: kotlin.Unit
+public konst y: kotlin.Unit
 public suspend fun foo(): kotlin.Unit
 public fun noSuspend(): kotlin.Unit
 

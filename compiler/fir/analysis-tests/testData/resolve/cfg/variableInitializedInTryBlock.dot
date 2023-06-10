@@ -9,7 +9,7 @@ digraph variableInitializedInTryBlock_kt {
         subgraph cluster_1 {
             color=blue
             1 [label="Enter block"];
-            2 [label="Variable declaration: lval b: R|kotlin/Boolean|"];
+            2 [label="Variable declaration: lkonst b: R|kotlin/Boolean|"];
             subgraph cluster_2 {
                 color=blue
                 3 [label="Try expression enter"];
@@ -26,7 +26,7 @@ digraph variableInitializedInTryBlock_kt {
                         10 [label="Stub" style="filled" fillcolor=gray];
                         11 [label="Lhs of ?: is not null"];
                         12 [label="Exit ?:"];
-                        13 [label="Variable declaration: lval s: R|kotlin/String|"];
+                        13 [label="Variable declaration: lkonst s: R|kotlin/String|"];
                         14 [label="Access variable R|<local>/s|"];
                         15 [label="Access variable R|kotlin/String.length|"];
                         16 [label="Const: Int(0)"];

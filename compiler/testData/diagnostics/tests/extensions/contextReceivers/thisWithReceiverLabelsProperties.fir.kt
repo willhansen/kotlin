@@ -1,8 +1,8 @@
 // !LANGUAGE: +ContextReceivers
 
-class A<T>(val a: T)
-class B(val b: Any)
-class C(val c: Any)
+class A<T>(konst a: T)
+class B(konst b: Any)
+class C(konst c: Any)
 
 <!MUST_BE_INITIALIZED!>context(A<String>, B) var <!REDECLARATION!>p<!>: Int<!>
     get() {
@@ -11,11 +11,11 @@ class C(val c: Any)
         <!NO_THIS!>this<!>
         return 1
     }
-    set(value) {
+    set(konstue) {
         this@A.a.length
         this@B.b
         <!NO_THIS!>this<!>
-        field = value
+        field = konstue
     }
 
 <!MUST_BE_INITIALIZED!>context(A<Int>, A<String>, B) var <!REDECLARATION!>p<!>: Int<!>
@@ -26,14 +26,14 @@ class C(val c: Any)
         <!NO_THIS!>this<!>
         return 1
     }
-    set(value) {
+    set(konstue) {
         this@A.a.length
         this@B.b
         <!NO_THIS!>this<!>
-        field = value
+        field = konstue
     }
 
-context(A<Int>, A<String>, B) val C.p: Int
+context(A<Int>, A<String>, B) konst C.p: Int
     get() {
         this@A.a.length
         this@B.b

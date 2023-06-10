@@ -7,28 +7,28 @@ package foo
 object EmptyObject {}
 
 object SomeObject {
-    val foo = 1
+    konst foo = 1
     var bar = "t"
     fun baz() {}
 }
 
-val emptyObjectExpr = object {}
+konst emptyObjectExpr = object {}
 
-val someObjectExpr = object {
-    val foo = 1
+konst someObjectExpr = object {
+    konst foo = 1
     var bar = "t"
     fun baz() {}
 }
 
-val o = js("Object")
+konst o = js("Object")
 
 fun keys(a: Any): List<String> {
-    val arr: Array<String> = o.keys(a)
+    konst arr: Array<String> = o.keys(a)
     return arr.toList()
 }
 
 fun getOwnPropertyNames(a: Any): List<String> {
-    val arr: Array<String> = o.getOwnPropertyNames(a)
+    konst arr: Array<String> = o.getOwnPropertyNames(a)
     return arr.toList()
 }
 

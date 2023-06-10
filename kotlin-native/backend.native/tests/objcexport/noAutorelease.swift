@@ -2,7 +2,7 @@ import Kt
 
 private class SwiftLivenessTracker {
     class SwiftWeakRef {
-        weak var value: AnyObject?
+        weak var konstue: AnyObject?
     }
 
     var weakRefs: [SwiftWeakRef] = []
@@ -11,7 +11,7 @@ private class SwiftLivenessTracker {
         try! assertTrue(obj != nil)
 
         let weakRef = SwiftWeakRef()
-        weakRef.value = obj
+        weakRef.konstue = obj
         weakRefs.append(weakRef)
 
         try! assertFalse(objectsAreDead())
@@ -23,7 +23,7 @@ private class SwiftLivenessTracker {
 
     func objectsAreDead() -> Bool {
         for weakRef in weakRefs {
-            if weakRef.value !== nil { return false }
+            if weakRef.konstue !== nil { return false }
         }
         return true
     }
@@ -138,7 +138,7 @@ private func testOnce(flags: TestFlags, block: (KotlinLivenessTracker, SwiftLive
             try assertFalse(swiftLivenessTracker.isEmpty())
         } else {
             // Note: some of the tests don't actually add objects to the swiftLivenessTracker,
-            // because e.g. Swift represents certain Obj-C classes as value types.
+            // because e.g. Swift represents certain Obj-C classes as konstue types.
             try assertTrue(swiftLivenessTracker.isEmpty())
         }
 

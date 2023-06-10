@@ -34,8 +34,8 @@ object FirVisibilityQualifierChecker : FirResolvedQualifierChecker() {
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val firFile = context.containingFile ?: return
-        val firClassLikeDeclaration = symbol.fir
+        konst firFile = context.containingFile ?: return
+        konst firClassLikeDeclaration = symbol.fir
 
         // Note: errors on implicit receiver are already reported in coneDiagnosticToFirDiagnostic
         // See e.g. diagnostics/tests/visibility/packagePrivateStaticViaInternal.fir.kt

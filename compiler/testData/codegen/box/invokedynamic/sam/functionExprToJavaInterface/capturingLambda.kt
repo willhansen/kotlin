@@ -9,8 +9,8 @@
 
 // FILE: capturingLambda.kt
 fun box(): String {
-    val co = 'O'
-    val lambda = { co.toString() + "K" }
+    konst co = 'O'
+    konst lambda = { co.toString() + "K" }
     return Sam(lambda).get()
 }
 

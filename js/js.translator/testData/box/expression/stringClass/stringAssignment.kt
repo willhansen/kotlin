@@ -3,7 +3,7 @@ package foo
 
 fun box(): String {
 
-    val a = "bar";
+    konst a = "bar";
     var b = "foo";
     b = a;
     return if (b == "bar") "OK" else "fail"

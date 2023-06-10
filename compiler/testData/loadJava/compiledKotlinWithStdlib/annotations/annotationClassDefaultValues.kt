@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM
 // NO_CHECK_SOURCE_VS_BINARY
-//^ While compiling source with K1, we do not store annotation default values, but we load them when reading compiled files both in K1 and K2
-// This test verifies exactly loading of default values
+//^ While compiling source with K1, we do not store annotation default konstues, but we load them when reading compiled files both in K1 and K2
+// This test verifies exactly loading of default konstues
 
 package test
 
@@ -10,23 +10,23 @@ enum class E { E0 }
 annotation class Empty
 
 annotation class A(
-    val i: Int = 42,
-    val s: String = "foo",
-    val kClass: KClass<*> = Int::class,
-    val kClassArray: Array<KClass<*>> = [A::class],
-    val e: E = E.E0,
-    val anno: Empty = Empty(),
-    val aS: Array<String> = arrayOf("a", "b"),
-    val aI: IntArray = intArrayOf(1, 2)
+    konst i: Int = 42,
+    konst s: String = "foo",
+    konst kClass: KClass<*> = Int::class,
+    konst kClassArray: Array<KClass<*>> = [A::class],
+    konst e: E = E.E0,
+    konst anno: Empty = Empty(),
+    konst aS: Array<String> = arrayOf("a", "b"),
+    konst aI: IntArray = intArrayOf(1, 2)
 )
 
 annotation class OtherArrays(
-    val doublesArray: DoubleArray = [1.5],
-    val enumArray: Array<kotlin.text.RegexOption> = [kotlin.text.RegexOption.IGNORE_CASE],
-    val annotationsArray: Array<JvmStatic> = [],
-    val namesArray: Array<JvmName> = [JvmName("foo")]
+    konst doublesArray: DoubleArray = [1.5],
+    konst enumArray: Array<kotlin.text.RegexOption> = [kotlin.text.RegexOption.IGNORE_CASE],
+    konst annotationsArray: Array<JvmStatic> = [],
+    konst namesArray: Array<JvmName> = [JvmName("foo")]
 )
 
 annotation class UnsignedValue(
-    val uint: UInt = 2147483657U // Int.MAX_VALUE + 10
+    konst uint: UInt = 2147483657U // Int.MAX_VALUE + 10
 )

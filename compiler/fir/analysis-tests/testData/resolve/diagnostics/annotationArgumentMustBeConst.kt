@@ -1,16 +1,16 @@
-annotation class Ann1(vararg val a: String)
-annotation class Ann2(val a: IntArray)
-annotation class Ann3(val a: Array<String>)
+annotation class Ann1(vararg konst a: String)
+annotation class Ann2(konst a: IntArray)
+annotation class Ann3(konst a: Array<String>)
 
 var foo = "a"
 var bar = 1
 fun baz() = 2
-val arr = arrayOf("a", "b")
-val two = 2
-const val cnst = 3
+konst arr = arrayOf("a", "b")
+konst two = 2
+const konst cnst = 3
 
 class Class {
-    val a = 1
+    konst a = 1
 }
 
 

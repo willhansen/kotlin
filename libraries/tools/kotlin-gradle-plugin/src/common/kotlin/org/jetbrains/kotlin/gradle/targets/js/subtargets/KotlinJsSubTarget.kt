@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation
 import org.jetbrains.kotlin.gradle.plugin.KotlinTargetWithTests
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJsCompilation
 import org.jetbrains.kotlin.gradle.plugin.mpp.isMain
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsPlatformTestRun
 import org.jetbrains.kotlin.gradle.targets.js.KotlinJsTarget
 import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsSubTargetDsl
@@ -29,22 +29,22 @@ import org.jetbrains.kotlin.gradle.testing.internal.kotlinTestRegistry
 import org.jetbrains.kotlin.gradle.utils.lowerCamelCaseName
 
 abstract class KotlinJsSubTarget(
-    val target: KotlinJsTarget,
-    private val disambiguationClassifier: String
+    konst target: KotlinJsTarget,
+    private konst disambiguationClassifier: String
 ) : KotlinJsSubTargetDsl {
-    val project get() = target.project
+    konst project get() = target.project
 
-    private val nodeJs = project.rootProject.kotlinNodeJsExtension
-    private val nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
+    private konst nodeJs = project.rootProject.kotlinNodeJsExtension
+    private konst nodeJsTaskProviders = project.rootProject.kotlinNodeJsExtension
 
-    abstract val testTaskDescription: String
+    abstract konst testTaskDescription: String
 
     final override lateinit var testRuns: NamedDomainObjectContainer<KotlinJsPlatformTestRun>
         private set
 
-    protected val taskGroupName = "Kotlin $disambiguationClassifier"
+    protected konst taskGroupName = "Kotlin $disambiguationClassifier"
 
-    private val produceExecutable: Unit by lazy {
+    private konst produceExecutable: Unit by lazy {
         configureMain()
     }
 
@@ -56,7 +56,7 @@ abstract class KotlinJsSubTarget(
         configureTests()
 
         target.compilations.all {
-            val npmProject = it.npmProject
+            konst npmProject = it.npmProject
             it.kotlinOptions {
                 outputFile = npmProject.dir.resolve(npmProject.main).canonicalPath
             }
@@ -93,16 +93,16 @@ abstract class KotlinJsSubTarget(
             )
         )
 
-        val testJs = project.registerTask<KotlinJsTest>(
+        konst testJs = project.registerTask<KotlinJsTest>(
             testRun.subtargetTestTaskName(),
             listOf(compilation)
         ) { testJs ->
-            val compileTask = compilation.compileTaskProvider
+            konst compileTask = compilation.compileTaskProvider
 
             testJs.group = LifecycleBasePlugin.VERIFICATION_GROUP
             testJs.description = testTaskDescription
 
-            val compileOutputFile = compileTask.flatMap { it.outputFileProperty }
+            konst compileOutputFile = compileTask.flatMap { it.outputFileProperty }
             testJs.inputFileProperty.fileProvider(compileOutputFile)
 
             testJs.dependsOn(
@@ -132,7 +132,7 @@ abstract class KotlinJsSubTarget(
             )
         }
 
-        project.whenEvaluated {
+        project.whenEkonstuated {
             testJs.configure {
                 if (it.testFramework == null) {
                     configureDefaultTestFramework(it)
@@ -168,6 +168,6 @@ abstract class KotlinJsSubTarget(
         }
 
     companion object {
-        const val RUN_TASK_NAME = "run"
+        const konst RUN_TASK_NAME = "run"
     }
 }

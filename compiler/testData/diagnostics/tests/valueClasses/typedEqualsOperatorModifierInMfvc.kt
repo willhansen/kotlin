@@ -5,7 +5,7 @@
 
 
 @JvmInline
-value class MFVC1(val x: Int, val y: Int) {
+konstue class MFVC1(konst x: Int, konst y: Int) {
     override fun equals(other: Any?) = true
 
     operator fun equals(other: MFVC1) = true
@@ -14,7 +14,7 @@ value class MFVC1(val x: Int, val y: Int) {
 }
 
 @JvmInline
-value class MFVC2(val x: Int, val y: Int) {
+konstue class MFVC2(konst x: Int, konst y: Int) {
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun equals(other: MFVC1) = true
 
     <!INAPPLICABLE_OPERATOR_MODIFIER!>operator<!> fun equals(other: MFVC2) {

@@ -4,9 +4,9 @@ fun <V: U, U> foo(v: V, u: U) = u
 fun <U, V: U> bar(v: V, u: U) = u
 
 fun test(a: Any, s: String) {
-    val b = foo(a, s)
+    konst b = foo(a, s)
     checkItIsExactlyAny(a, arrayListOf(b))
-    val c = bar(a, s)
+    konst c = bar(a, s)
     checkItIsExactlyAny(a, arrayListOf(c))
 }
 

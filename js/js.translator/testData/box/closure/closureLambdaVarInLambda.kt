@@ -7,7 +7,7 @@ fun box(): String {
     var foo = { 1 }
     var bar = 1
 
-    val t = { "${foo()} $bar" }
+    konst t = { "${foo()} $bar" }
     fun b() = "${foo()} $bar"
 
     foo = { 2 }

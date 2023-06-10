@@ -32,7 +32,7 @@ import helpers.*
 suspend fun calculate() = "OK"
 
 fun box() : String {
-    val controller = Controller()
+    konst controller = Controller()
     builder(controller) {
         test {
             res = calculate()

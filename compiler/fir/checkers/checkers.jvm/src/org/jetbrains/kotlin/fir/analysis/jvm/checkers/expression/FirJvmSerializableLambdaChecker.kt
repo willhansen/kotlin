@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.fir.resolve.fqName
 import org.jetbrains.kotlin.name.FqName
 
 object FirJvmSerializableLambdaChecker : FirAnnotationChecker() {
-    private val JVM_SERIALIZABLE_LAMBDA_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSerializableLambda")
+    private konst JVM_SERIALIZABLE_LAMBDA_ANNOTATION_FQ_NAME = FqName("kotlin.jvm.JvmSerializableLambda")
 
     override fun check(expression: FirAnnotation, context: CheckerContext, reporter: DiagnosticReporter) {
         if (expression.fqName(context.session) == JVM_SERIALIZABLE_LAMBDA_ANNOTATION_FQ_NAME) {
-            val declaration = context.containingDeclarations.last()
+            konst declaration = context.containingDeclarations.last()
             if (declaration !is FirAnonymousFunction) {
-                val actualTargets = getActualTargetList(declaration)
-                val targetDescription = actualTargets.defaultTargets.firstOrNull()?.description ?: "unidentified target"
+                konst actualTargets = getActualTargetList(declaration)
+                konst targetDescription = actualTargets.defaultTargets.firstOrNull()?.description ?: "unidentified target"
                 reporter.reportOn(
                     expression.source,
                     FirErrors.WRONG_ANNOTATION_TARGET,

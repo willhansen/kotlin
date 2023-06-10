@@ -1,4 +1,4 @@
-val test: Unit
+konst test: Unit
   field = try { // BLOCK
   }
   catch (e: Throwable){ // BLOCK

@@ -38,7 +38,7 @@ import kotlin.reflect.KProperty0
  */
 // TODO: extract to kotlinx-metadata-klib library?
 @Suppress("unused")
-class MetadataDeclarationsComparator private constructor(private val config: Config) {
+class MetadataDeclarationsComparator private constructor(private konst config: Config) {
 
     interface Config {
         /**
@@ -59,7 +59,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             override fun toString() = "Success"
         }
 
-        class Failure(val mismatches: Collection<Mismatch>) : Result() {
+        class Failure(konst mismatches: Collection<Mismatch>) : Result() {
             init {
                 check(mismatches.isNotEmpty())
             }
@@ -70,58 +70,58 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
 
     @Suppress("MemberVisibilityCanBePrivate")
     sealed interface PathElement {
-        val name: String
+        konst name: String
 
         object Root : PathElement {
-            override val name get() = "Root"
+            override konst name get() = "Root"
         }
 
-        class Module(val moduleA: KlibModuleMetadata, val moduleB: KlibModuleMetadata) : PathElement {
-            override val name get() = moduleA.name
+        class Module(konst moduleA: KlibModuleMetadata, konst moduleB: KlibModuleMetadata) : PathElement {
+            override konst name get() = moduleA.name
         }
 
-        class Package(packageFqName: String, val fragmentsA: List<KmModuleFragment>, val fragmentsB: List<KmModuleFragment>) : PathElement {
-            override val name = packageFqName.ifEmpty { "<root>" }
+        class Package(packageFqName: String, konst fragmentsA: List<KmModuleFragment>, konst fragmentsB: List<KmModuleFragment>) : PathElement {
+            override konst name = packageFqName.ifEmpty { "<root>" }
         }
 
-        class Class(val clazzA: KmClass, val clazzB: KmClass) : PathElement {
-            override val name get() = clazzA.name.split("/").last()
+        class Class(konst clazzA: KmClass, konst clazzB: KmClass) : PathElement {
+            override konst name get() = clazzA.name.split("/").last()
         }
 
-        class TypeAlias(val typeAliasA: KmTypeAlias, val typeAliasB: KmTypeAlias) : PathElement {
-            override val name get() = typeAliasA.name
+        class TypeAlias(konst typeAliasA: KmTypeAlias, konst typeAliasB: KmTypeAlias) : PathElement {
+            override konst name get() = typeAliasA.name
         }
 
-        class Property(val propertyA: KmProperty, val propertyB: KmProperty) : PathElement {
-            override val name get() = propertyA.name
+        class Property(konst propertyA: KmProperty, konst propertyB: KmProperty) : PathElement {
+            override konst name get() = propertyA.name
         }
 
-        class Function(val functionA: KmFunction, val functionB: KmFunction) : PathElement {
-            override val name get() = functionA.name
+        class Function(konst functionA: KmFunction, konst functionB: KmFunction) : PathElement {
+            override konst name get() = functionA.name
         }
 
-        class Constructor(val constructorA: KmConstructor, val constructorB: KmConstructor) : PathElement {
-            override val name get() = "constructor"
+        class Constructor(konst constructorA: KmConstructor, konst constructorB: KmConstructor) : PathElement {
+            override konst name get() = "constructor"
         }
 
-        class ValueParameter(val parameterA: KmValueParameter, val parameterB: KmValueParameter, val index: Int) : PathElement {
-            override val name get() = index.toString()
+        class ValueParameter(konst parameterA: KmValueParameter, konst parameterB: KmValueParameter, konst index: Int) : PathElement {
+            override konst name get() = index.toString()
         }
 
-        class TypeParameter(val parameterA: KmTypeParameter, val parameterB: KmTypeParameter, val index: Int) : PathElement {
-            override val name get() = index.toString()
+        class TypeParameter(konst parameterA: KmTypeParameter, konst parameterB: KmTypeParameter, konst index: Int) : PathElement {
+            override konst name get() = index.toString()
         }
 
-        class Type(val typeA: KmType, val typeB: KmType, val kind: TypeKind, val index: Int?) : PathElement {
-            override val name get() = if (index != null) "$kind $index" else kind.toString()
+        class Type(konst typeA: KmType, konst typeB: KmType, konst kind: TypeKind, konst index: Int?) : PathElement {
+            override konst name get() = if (index != null) "$kind $index" else kind.toString()
         }
 
-        class TypeArgument(val argumentA: KmTypeProjection, val argumentB: KmTypeProjection, val index: Int) : PathElement {
-            override val name get() = index.toString()
+        class TypeArgument(konst argumentA: KmTypeProjection, konst argumentB: KmTypeProjection, konst index: Int) : PathElement {
+            override konst name get() = index.toString()
         }
 
-        class EnumEntry(val entryA: KlibEnumEntry, val entryB: KlibEnumEntry) : PathElement {
-            override val name get() = entryA.name
+        class EnumEntry(konst entryA: KlibEnumEntry, konst entryB: KlibEnumEntry) : PathElement {
+            override konst name get() = entryA.name
         }
 
         companion object {
@@ -133,21 +133,21 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
                     entityA is KmFunction && entityB is KmFunction -> Function(entityA, entityB)
                     entityA is KmConstructor && entityB is KmConstructor -> Constructor(entityA, entityB)
                     entityA is KmValueParameter && entityB is KmValueParameter -> {
-                        // there is single value parameter for property setter that does not have index, use 0 as fallback value
-                        val index = entityKey?.toInt() ?: 0
+                        // there is single konstue parameter for property setter that does not have index, use 0 as fallback konstue
+                        konst index = entityKey?.toInt() ?: 0
                         ValueParameter(entityA, entityB, index)
                     }
                     entityA is KmTypeParameter && entityB is KmTypeParameter -> {
-                        val index = entityKey!!.toInt()
+                        konst index = entityKey!!.toInt()
                         TypeParameter(entityA, entityB, index)
                     }
                     entityA is KmType && entityB is KmType -> {
-                        val optionalIndex = entityKey?.toInt()
-                        val typeKind = entityKind as TypeKind
+                        konst optionalIndex = entityKey?.toInt()
+                        konst typeKind = entityKind as TypeKind
                         Type(entityA, entityB, typeKind, optionalIndex)
                     }
                     entityA is KmTypeProjection && entityB is KmTypeProjection -> {
-                        val index = entityKey!!.toInt()
+                        konst index = entityKey!!.toInt()
                         TypeArgument(entityA, entityB, index)
                     }
                     entityA is KlibEnumEntry && entityB is KlibEnumEntry -> EnumEntry(entityA, entityB)
@@ -191,107 +191,107 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         }
 
         companion object {
-            val ModuleName by EntityKindImpl
+            konst ModuleName by EntityKindImpl
 
-            val Classifier by EntityKindImpl
+            konst Classifier by EntityKindImpl
 
-            val Class by EntityKindImpl
-            val TypeAlias by EntityKindImpl
-            val Property by EntityKindImpl
-            val Function by EntityKindImpl
-            val Constructor by EntityKindImpl
+            konst Class by EntityKindImpl
+            konst TypeAlias by EntityKindImpl
+            konst Property by EntityKindImpl
+            konst Function by EntityKindImpl
+            konst Constructor by EntityKindImpl
 
-            val FunctionValueParameter by EntityKindImpl
-            val SetterValueParameter by EntityKindImpl
+            konst FunctionValueParameter by EntityKindImpl
+            konst SetterValueParameter by EntityKindImpl
 
-            val TypeParameter by EntityKindImpl
-            val TypeParameterId by EntityKindImpl
-            val TypeParameterName by EntityKindImpl
-            val TypeParameterVariance by EntityKindImpl
+            konst TypeParameter by EntityKindImpl
+            konst TypeParameterId by EntityKindImpl
+            konst TypeParameterName by EntityKindImpl
+            konst TypeParameterVariance by EntityKindImpl
 
-            val TypeArgument by EntityKindImpl
-            val TypeArgumentVariance by EntityKindImpl
+            konst TypeArgument by EntityKindImpl
+            konst TypeArgumentVariance by EntityKindImpl
 
-            val CompanionObject by EntityKindImpl
-            val NestedClass by EntityKindImpl
-            val SealedSubclass by EntityKindImpl
-            val EnumEntry by EntityKindImpl
-            val EnumEntryInKlib by EntityKindImpl
-            val EnumEntryInKlibOrdinal by EntityKindImpl
+            konst CompanionObject by EntityKindImpl
+            konst NestedClass by EntityKindImpl
+            konst SealedSubclass by EntityKindImpl
+            konst EnumEntry by EntityKindImpl
+            konst EnumEntryInKlib by EntityKindImpl
+            konst EnumEntryInKlibOrdinal by EntityKindImpl
 
-            val CompileTimeValue by EntityKindImpl
+            konst CompileTimeValue by EntityKindImpl
 
-            val Contract by EntityKindImpl
-            val Effect by EntityKindImpl
-            val EffectType by EntityKindImpl
-            val EffectInvocationKind by EntityKindImpl
-            val EffectConstructorArguments by EntityKindImpl
-            val EffectConclusion by EntityKindImpl
-            val EffectExpressionParameterIndex by EntityKindImpl
-            val EffectExpressionConstantValue by EntityKindImpl
-            val EffectExpressionIsInstanceType by EntityKindImpl
-            val EffectExpressionAndArguments by EntityKindImpl
-            val EffectExpressionOrArguments by EntityKindImpl
+            konst Contract by EntityKindImpl
+            konst Effect by EntityKindImpl
+            konst EffectType by EntityKindImpl
+            konst EffectInvocationKind by EntityKindImpl
+            konst EffectConstructorArguments by EntityKindImpl
+            konst EffectConclusion by EntityKindImpl
+            konst EffectExpressionParameterIndex by EntityKindImpl
+            konst EffectExpressionConstantValue by EntityKindImpl
+            konst EffectExpressionIsInstanceType by EntityKindImpl
+            konst EffectExpressionAndArguments by EntityKindImpl
+            konst EffectExpressionOrArguments by EntityKindImpl
 
-            val FlexibleTypeUpperBounds by EntityKindImpl
-            val TypeFlexibilityId by EntityKindImpl
+            konst FlexibleTypeUpperBounds by EntityKindImpl
+            konst TypeFlexibilityId by EntityKindImpl
         }
 
-        private class EntityKindImpl(val name: String) : EntityKind {
+        private class EntityKindImpl(konst name: String) : EntityKind {
             override fun toString() = name
 
             companion object {
-                private val cache = FactoryMap.create<String, EntityKind> { name -> EntityKindImpl(name) }
+                private konst cache = FactoryMap.create<String, EntityKind> { name -> EntityKindImpl(name) }
                 operator fun getValue(companion: EntityKind.Companion, property: KProperty<*>): EntityKind = cache.getValue(property.name)
             }
         }
     }
 
     sealed class Mismatch {
-        abstract val kind: EntityKind
-        abstract val name: String
-        abstract val path: List<PathElement>
+        abstract konst kind: EntityKind
+        abstract konst name: String
+        abstract konst path: List<PathElement>
 
         protected fun pathString() = path.joinToString("/") { it.name }
 
-        // an entity has different non-nullable values
+        // an entity has different non-nullable konstues
         data class DifferentValues(
-            override val kind: EntityKind,
-            override val name: String,
-            override val path: List<PathElement>,
-            val valueA: Any,
-            val valueB: Any
+            override konst kind: EntityKind,
+            override konst name: String,
+            override konst path: List<PathElement>,
+            konst konstueA: Any,
+            konst konstueB: Any
         ) : Mismatch() {
-            // TODO: fix Kotlin metadata rendering for values
+            // TODO: fix Kotlin metadata rendering for konstues
             override fun toString(): String {
-                val spacedName = if (name.isEmpty()) "" else "$name "
-                return "$kind ${spacedName}is different in (A): $valueA and (B): $valueB; path: ${pathString()}"
+                konst spacedName = if (name.isEmpty()) "" else "$name "
+                return "$kind ${spacedName}is different in (A): $konstueA and (B): $konstueB; path: ${pathString()}"
             }
         }
 
         // an entity is missing at one side and present at another side,
-        // or: an entity has nullable value at one side and non-nullable value at another side
+        // or: an entity has nullable konstue at one side and non-nullable konstue at another side
         data class MissingEntity(
-            override val kind: EntityKind,
-            override val name: String,
-            override val path: List<PathElement>,
-            val existentValue: Any,
-            val missingInA: Boolean
+            override konst kind: EntityKind,
+            override konst name: String,
+            override konst path: List<PathElement>,
+            konst existentValue: Any,
+            konst missingInA: Boolean
         ) : Mismatch() {
-            val missingInB: Boolean
+            konst missingInB: Boolean
                 get() = !missingInA
 
             override fun toString(): String {
-                val (missing, existing) = if (missingInA) "A" to "B" else "B" to "A"
+                konst (missing, existing) = if (missingInA) "A" to "B" else "B" to "A"
                 return "Missing $kind in ($missing): '$name'; in ($existing) it's: $existentValue; path: '${pathString()}'"
             }
         }
     }
 
-    private val mismatches = mutableListOf<Mismatch>()
+    private konst mismatches = mutableListOf<Mismatch>()
 
     private class Context(pathElement: PathElement, parent: Context? = null) {
-        val path: List<PathElement> = parent?.path.orEmpty() + pathElement
+        konst path: List<PathElement> = parent?.path.orEmpty() + pathElement
         fun next(pathElement: PathElement): Context = Context(pathElement, this)
     }
 
@@ -301,13 +301,13 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         metadataA: KlibModuleMetadata,
         metadataB: KlibModuleMetadata
     ): Result {
-        val rootContext = Context(PathElement.Root)
+        konst rootContext = Context(PathElement.Root)
 
         compareValues(rootContext, metadataA.name, metadataB.name, EntityKind.ModuleName)
         if (mismatches.isNotEmpty())
             return toResult()
 
-        val moduleContext = rootContext.next(PathElement.Module(metadataA, metadataB))
+        konst moduleContext = rootContext.next(PathElement.Module(metadataA, metadataB))
 
         compareAnnotationLists(moduleContext, metadataA.annotations, metadataB.annotations)
         compareModuleFragmentLists(moduleContext, metadataA.fragments, metadataB.fragments)
@@ -326,12 +326,12 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             entityListB = annotationListB,
             groupingKeySelector = { _, annotation -> annotation.className },
             groupedEntityListsComparator = { annotationClassName: ClassName, annotationsA: List<KmAnnotation>, annotationsB: List<KmAnnotation> ->
-                @Suppress("NAME_SHADOWING") val annotationsB: Deque<KmAnnotation> = LinkedList(annotationsB)
+                @Suppress("NAME_SHADOWING") konst annotationsB: Deque<KmAnnotation> = LinkedList(annotationsB)
 
                 // TODO: compare annotation arguments?
 
                 for (annotationA in annotationsA) {
-                    val removed = annotationsB.removeFirstOccurrence(annotationA)
+                    konst removed = annotationsB.removeFirstOccurrence(annotationA)
                     if (!removed)
                         mismatches += Mismatch.MissingEntity(annotationKind, annotationClassName, containerContext.path, annotationA, false)
                 }
@@ -353,22 +353,22 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             entityListB = fragmentListB,
             groupingKeySelector = { _, fragment -> fragment.fqName.orEmpty() },
             groupedEntityListsComparator = { packageFqName: String, fragmentsA: List<KmModuleFragment>, fragmentsB: List<KmModuleFragment> ->
-                val packageContext = moduleContext.next(PathElement.Package(packageFqName, fragmentsA, fragmentsB))
+                konst packageContext = moduleContext.next(PathElement.Package(packageFqName, fragmentsA, fragmentsB))
 
-                val classesA: List<KmClass> = fragmentsA.flatMap { it.classes }
-                val classesB: List<KmClass> = fragmentsB.flatMap { it.classes }
+                konst classesA: List<KmClass> = fragmentsA.flatMap { it.classes }
+                konst classesB: List<KmClass> = fragmentsB.flatMap { it.classes }
                 compareClassLists(packageContext, classesA, classesB)
 
-                val typeAliasesA: List<KmTypeAlias> = fragmentsA.flatMap { it.pkg?.typeAliases.orEmpty() }
-                val typeAliasesB: List<KmTypeAlias> = fragmentsB.flatMap { it.pkg?.typeAliases.orEmpty() }
+                konst typeAliasesA: List<KmTypeAlias> = fragmentsA.flatMap { it.pkg?.typeAliases.orEmpty() }
+                konst typeAliasesB: List<KmTypeAlias> = fragmentsB.flatMap { it.pkg?.typeAliases.orEmpty() }
                 compareTypeAliasLists(packageContext, typeAliasesA, typeAliasesB)
 
-                val propertiesA: List<KmProperty> = fragmentsA.flatMap { it.pkg?.properties.orEmpty() }
-                val propertiesB: List<KmProperty> = fragmentsB.flatMap { it.pkg?.properties.orEmpty() }
+                konst propertiesA: List<KmProperty> = fragmentsA.flatMap { it.pkg?.properties.orEmpty() }
+                konst propertiesB: List<KmProperty> = fragmentsB.flatMap { it.pkg?.properties.orEmpty() }
                 comparePropertyLists(packageContext, propertiesA, propertiesB)
 
-                val functionsA: List<KmFunction> = fragmentsA.flatMap { it.pkg?.functions.orEmpty() }
-                val functionsB: List<KmFunction> = fragmentsB.flatMap { it.pkg?.functions.orEmpty() }
+                konst functionsA: List<KmFunction> = fragmentsA.flatMap { it.pkg?.functions.orEmpty() }
+                konst functionsB: List<KmFunction> = fragmentsB.flatMap { it.pkg?.functions.orEmpty() }
                 compareFunctionLists(packageContext, functionsA, functionsB)
             }
         )
@@ -451,13 +451,13 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
 
     private fun compareValueParameterLists(
         containerContext: Context,
-        valueParameterListA: List<KmValueParameter>,
-        valueParameterListB: List<KmValueParameter>
+        konstueParameterListA: List<KmValueParameter>,
+        konstueParameterListB: List<KmValueParameter>
     ) {
         compareUniqueEntityLists(
             containerContext = containerContext,
-            entityListA = valueParameterListA,
-            entityListB = valueParameterListB,
+            entityListA = konstueParameterListA,
+            entityListB = konstueParameterListB,
             entityKind = EntityKind.FunctionValueParameter,
             groupingKeySelector = { index, _ -> index.toString() },
             entitiesComparator = ::compareValueParameters
@@ -641,7 +641,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             entitiesComparator = ::compareTypes
         )
 
-        compareValueParameterLists(functionContext, functionA.valueParameters, functionB.valueParameters)
+        compareValueParameterLists(functionContext, functionA.konstueParameters, functionB.konstueParameters)
 
         compareNullableEntities(
             containerContext = functionContext,
@@ -684,28 +684,28 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         compareFlags(constructorContext, constructorA.flags, constructorB.flags, CONSTRUCTOR_FLAGS)
         compareAnnotationLists(constructorContext, constructorA.annotations, constructorB.annotations)
 
-        compareValueParameterLists(constructorContext, constructorA.valueParameters, constructorB.valueParameters)
+        compareValueParameterLists(constructorContext, constructorA.konstueParameters, constructorB.konstueParameters)
     }
 
     private fun compareValueParameters(
-        valueParameterContext: Context,
-        valueParameterA: KmValueParameter,
-        valueParameterB: KmValueParameter
+        konstueParameterContext: Context,
+        konstueParameterA: KmValueParameter,
+        konstueParameterB: KmValueParameter
     ) {
-        compareFlags(valueParameterContext, valueParameterA.flags, valueParameterB.flags, VALUE_PARAMETER_FLAGS)
-        compareAnnotationLists(valueParameterContext, valueParameterA.annotations, valueParameterB.annotations)
+        compareFlags(konstueParameterContext, konstueParameterA.flags, konstueParameterB.flags, VALUE_PARAMETER_FLAGS)
+        compareAnnotationLists(konstueParameterContext, konstueParameterA.annotations, konstueParameterB.annotations)
 
         compareNullableEntities(
-            containerContext = valueParameterContext,
-            entityA = valueParameterA.type,
-            entityB = valueParameterB.type,
+            containerContext = konstueParameterContext,
+            entityA = konstueParameterA.type,
+            entityB = konstueParameterB.type,
             entityKind = TypeKind.VALUE_PARAMETER,
             entitiesComparator = ::compareTypes
         )
         compareNullableEntities(
-            containerContext = valueParameterContext,
-            entityA = valueParameterA.varargElementType,
-            entityB = valueParameterB.varargElementType,
+            containerContext = konstueParameterContext,
+            entityA = konstueParameterA.varargElementType,
+            entityB = konstueParameterB.varargElementType,
             entityKind = TypeKind.VALUE_PARAMETER_VARARG,
             entitiesComparator = ::compareTypes
         )
@@ -737,9 +737,9 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             )
             compareNullableValues(
                 containerContext = typeProjectionContext,
-                valueA = typeProjectionA.variance,
-                valueB = typeProjectionB.variance,
-                valueKind = EntityKind.TypeArgumentVariance
+                konstueA = typeProjectionA.variance,
+                konstueB = typeProjectionB.variance,
+                konstueKind = EntityKind.TypeArgumentVariance
             )
         }
 
@@ -773,9 +773,9 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             )
             compareNullableValues(
                 containerContext = typeUpperBoundContext,
-                valueA = upperBoundA.typeFlexibilityId,
-                valueB = upperBoundB.typeFlexibilityId,
-                valueKind = EntityKind.TypeFlexibilityId
+                konstueA = upperBoundA.typeFlexibilityId,
+                konstueB = upperBoundB.typeFlexibilityId,
+                konstueKind = EntityKind.TypeFlexibilityId
             )
         }
     }
@@ -804,15 +804,15 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         compareFlags(effectExpressionContext, effectExpressionA.flags, effectExpressionB.flags, EFFECT_EXPRESSION_FLAGS)
         compareNullableValues(
             containerContext = effectExpressionContext,
-            valueA = effectExpressionA.parameterIndex,
-            valueB = effectExpressionB.parameterIndex,
-            valueKind = EntityKind.EffectExpressionParameterIndex
+            konstueA = effectExpressionA.parameterIndex,
+            konstueB = effectExpressionB.parameterIndex,
+            konstueKind = EntityKind.EffectExpressionParameterIndex
         )
         compareNullableValues(
             containerContext = effectExpressionContext,
-            valueA = effectExpressionA.constantValue,
-            valueB = effectExpressionB.constantValue,
-            valueKind = EntityKind.EffectExpressionConstantValue
+            konstueA = effectExpressionA.constantValue,
+            konstueB = effectExpressionB.constantValue,
+            konstueKind = EntityKind.EffectExpressionConstantValue
         )
 
         compareNullableEntities(
@@ -839,48 +839,48 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
 
     private fun <E : Any> compareValues(
         containerContext: Context,
-        valueA: E,
-        valueB: E,
-        valueKind: EntityKind,
-        valueName: String? = null
+        konstueA: E,
+        konstueB: E,
+        konstueKind: EntityKind,
+        konstueName: String? = null
     ) {
-        if (valueA != valueB)
-            mismatches += Mismatch.DifferentValues(valueKind, valueName.orEmpty(), containerContext.path, valueA, valueB)
+        if (konstueA != konstueB)
+            mismatches += Mismatch.DifferentValues(konstueKind, konstueName.orEmpty(), containerContext.path, konstueA, konstueB)
     }
 
     private fun <E : Any> compareValueLists(
         containerContext: Context,
         listA: Collection<E>,
         listB: Collection<E>,
-        valueKind: EntityKind
+        konstueKind: EntityKind
     ) {
         if (listA.isEmpty() && listB.isEmpty())
             return
 
         for (missingInA in listB subtract listA) {
-            mismatches += Mismatch.MissingEntity(valueKind, missingInA.toString(), containerContext.path, missingInA, true)
+            mismatches += Mismatch.MissingEntity(konstueKind, missingInA.toString(), containerContext.path, missingInA, true)
         }
 
         for (missingInB in listA subtract listB) {
-            mismatches += Mismatch.MissingEntity(valueKind, missingInB.toString(), containerContext.path, missingInB, false)
+            mismatches += Mismatch.MissingEntity(konstueKind, missingInB.toString(), containerContext.path, missingInB, false)
         }
     }
 
     private fun <E : Any> compareNullableValues(
         containerContext: Context,
-        valueA: E?,
-        valueB: E?,
-        valueKind: EntityKind
+        konstueA: E?,
+        konstueB: E?,
+        konstueKind: EntityKind
     ) {
         when {
-            valueA == null && valueB != null -> {
-                mismatches += Mismatch.MissingEntity(valueKind, "", containerContext.path, valueB, true)
+            konstueA == null && konstueB != null -> {
+                mismatches += Mismatch.MissingEntity(konstueKind, "", containerContext.path, konstueB, true)
             }
-            valueA != null && valueB == null -> {
-                mismatches += Mismatch.MissingEntity(valueKind, "", containerContext.path, valueA, false)
+            konstueA != null && konstueB == null -> {
+                mismatches += Mismatch.MissingEntity(konstueKind, "", containerContext.path, konstueA, false)
             }
-            valueA != null && valueB != null -> {
-                compareValues(containerContext, valueA, valueB, valueKind)
+            konstueA != null && konstueB != null -> {
+                compareValues(containerContext, konstueA, konstueB, konstueKind)
             }
         }
     }
@@ -893,7 +893,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         entityKey: String? = null,
         entitiesComparator: (Context, E, E) -> Unit
     ) {
-        val entityContext = containerContext.next(PathElement.guess(entityA, entityB, entityKind, entityKey))
+        konst entityContext = containerContext.next(PathElement.guess(entityA, entityB, entityKind, entityKey))
         entitiesComparator(entityContext, entityA, entityB)
     }
 
@@ -949,22 +949,22 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         groupingKeySelector: (index: Int, E) -> String,
         groupedEntityListsComparator: (entityKey: String, List<E>, List<E>) -> Unit
     ) {
-        val filteredEntityListA: List<E> = entityListA.filter(config::shouldCheckDeclaration)
-        val filteredEntityListB: List<E> = entityListB.filter(config::shouldCheckDeclaration)
+        konst filteredEntityListA: List<E> = entityListA.filter(config::shouldCheckDeclaration)
+        konst filteredEntityListB: List<E> = entityListB.filter(config::shouldCheckDeclaration)
 
         if (filteredEntityListA.isEmpty() && filteredEntityListB.isEmpty())
             return
 
-        val groupedEntitiesA: Map<String, List<E>> =
+        konst groupedEntitiesA: Map<String, List<E>> =
             filteredEntityListA.groupByIndexed { index, entity -> groupingKeySelector(index, entity) }
-        val groupedEntitiesB: Map<String, List<E>> =
+        konst groupedEntitiesB: Map<String, List<E>> =
             filteredEntityListB.groupByIndexed { index, entity -> groupingKeySelector(index, entity) }
 
-        val entityKeys = groupedEntitiesA.keys union groupedEntitiesB.keys
+        konst entityKeys = groupedEntitiesA.keys union groupedEntitiesB.keys
 
         for (entityKey in entityKeys) {
-            val entitiesA: List<E> = groupedEntitiesA[entityKey].orEmpty()
-            val entitiesB: List<E> = groupedEntitiesB[entityKey].orEmpty()
+            konst entitiesA: List<E> = groupedEntitiesA[entityKey].orEmpty()
+            konst entitiesB: List<E> = groupedEntitiesB[entityKey].orEmpty()
 
             groupedEntityListsComparator(entityKey, entitiesA, entitiesB)
         }
@@ -978,10 +978,10 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
         flagKind: FlagKind = FlagKind.REGULAR
     ) {
         for (flag in flagsToCompare) {
-            val valueA = flag.get()(flagsA)
-            val valueB = flag.get()(flagsB)
+            konst konstueA = flag.get()(flagsA)
+            konst konstueB = flag.get()(flagsB)
 
-            compareValues(containerContext, valueA, valueB, flagKind, flag.name)
+            compareValues(containerContext, konstueA, konstueB, flagKind, flag.name)
         }
     }
 
@@ -992,7 +992,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             config: Config = Config.Default
         ): Result = MetadataDeclarationsComparator(config).compareModules(metadataA, metadataB)
 
-        private val VISIBILITY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst VISIBILITY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::IS_INTERNAL,
             Flag.Common::IS_PRIVATE,
             Flag.Common::IS_PROTECTED,
@@ -1001,14 +1001,14 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             Flag.Common::IS_LOCAL
         )
 
-        private val MODALITY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst MODALITY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::IS_FINAL,
             Flag.Common::IS_OPEN,
             Flag.Common::IS_ABSTRACT,
             Flag.Common::IS_SEALED
         )
 
-        private val CLASS_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst CLASS_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS,
             *MODALITY_FLAGS,
@@ -1028,19 +1028,19 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             Flag.Class::HAS_ENUM_ENTRIES,
         )
 
-        private val TYPE_ALIAS_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst TYPE_ALIAS_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS
         )
 
-        private val CONSTRUCTOR_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst CONSTRUCTOR_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS,
             Flag.Constructor::IS_SECONDARY,
             Flag.Constructor::HAS_NON_STABLE_PARAMETER_NAMES
         )
 
-        private val FUNCTION_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst FUNCTION_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS,
             *MODALITY_FLAGS,
@@ -1058,7 +1058,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             Flag.Function::HAS_NON_STABLE_PARAMETER_NAMES
         )
 
-        private val PROPERTY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst PROPERTY_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS,
             *MODALITY_FLAGS,
@@ -1077,7 +1077,7 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             Flag.Property::IS_EXPECT
         )
 
-        private val PROPERTY_ACCESSOR_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst PROPERTY_ACCESSOR_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             *VISIBILITY_FLAGS,
             *MODALITY_FLAGS,
@@ -1086,23 +1086,23 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
             Flag.PropertyAccessor::IS_INLINE
         )
 
-        private val TYPE_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst TYPE_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Type::IS_NULLABLE,
             Flag.Type::IS_SUSPEND
         )
 
-        private val TYPE_PARAMETER_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst TYPE_PARAMETER_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.TypeParameter::IS_REIFIED
         )
 
-        private val VALUE_PARAMETER_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst VALUE_PARAMETER_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.Common::HAS_ANNOTATIONS,
             Flag.ValueParameter::DECLARES_DEFAULT_VALUE,
             Flag.ValueParameter::IS_CROSSINLINE,
             Flag.ValueParameter::IS_NOINLINE
         )
 
-        private val EFFECT_EXPRESSION_FLAGS: Array<KProperty0<Flag>> = arrayOf(
+        private konst EFFECT_EXPRESSION_FLAGS: Array<KProperty0<Flag>> = arrayOf(
             Flag.EffectExpression::IS_NEGATED,
             Flag.EffectExpression::IS_NULL_CHECK_PREDICATE
         )
@@ -1118,18 +1118,18 @@ class MetadataDeclarationsComparator private constructor(private val config: Con
                 append('.')
                 typeParameters.joinTo(this, prefix = "<", postfix = ">", transform = KmTypeParameter::name)
                 append('.')
-                valueParameters.joinTo(this, prefix = "(", postfix = ")", transform = KmValueParameter::name)
+                konstueParameters.joinTo(this, prefix = "(", postfix = ")", transform = KmValueParameter::name)
             }
         }
 
         private fun KmConstructor.mangle(): String {
-            return valueParameters.joinToString(prefix = "(", postfix = ")", transform = KmValueParameter::name)
+            return konstueParameters.joinToString(prefix = "(", postfix = ")", transform = KmValueParameter::name)
         }
 
         private inline fun <T, K> Iterable<T>.groupByIndexed(keySelector: (Int, T) -> K): Map<K, List<T>> {
             return mutableMapOf<K, MutableList<T>>().apply {
                 this@groupByIndexed.forEachIndexed { index, element ->
-                    val key = keySelector(index, element)
+                    konst key = keySelector(index, element)
                     getOrPut(key) { mutableListOf() } += element
                 }
             }

@@ -1,6 +1,6 @@
 fun box(): String {
-  val map: MutableMap<Fun, String> = mutableMapOf<Fun, String>()
-  val fn: Fun = local fun <anonymous>(it: @FlexibleNullability String?): @FlexibleNullability String? {
+  konst map: MutableMap<Fun, String> = mutableMapOf<Fun, String>()
+  konst fn: Fun = local fun <anonymous>(it: @FlexibleNullability String?): @FlexibleNullability String? {
     return TODO()
   }
  /*-> Fun */

@@ -7,13 +7,13 @@ fun test() {
 //      Int?
 //      │   fun <T> nullableValue<Int>(): T?
 //      │   │
-    val n = nullableValue<Int>()
+    konst n = nullableValue<Int>()
 //      Double?
 //      │   fun <T> nullableValue<Double>(): T?
 //      │   │
-    val x = nullableValue<Double>()
+    konst x = nullableValue<Double>()
 //      String?
 //      │   fun <T> nullableValue<String>(): T?
 //      │   │
-    val s = nullableValue<String>()
+    konst s = nullableValue<String>()
 }

@@ -6,16 +6,16 @@
 import java.lang.reflect.Modifier
 
 @JvmInline
-value class IC1<T: Int> public constructor(val i: T)
+konstue class IC1<T: Int> public constructor(konst i: T)
 
 @JvmInline
-value class IC11<T: Int> internal constructor(val i: T)
+konstue class IC11<T: Int> internal constructor(konst i: T)
 
 @JvmInline
-value class IC2<T: Int> private constructor(val i: T)
+konstue class IC2<T: Int> private constructor(konst i: T)
 
 @JvmInline
-value class IC4<T: Int> protected constructor(val i: T)
+konstue class IC4<T: Int> protected constructor(konst i: T)
 
 fun box(): String {
     if (!Modifier.isPublic(IC1::class.java.declaredMethods.single { it.name == "constructor-impl" }.modifiers)) return "FAIL 1"

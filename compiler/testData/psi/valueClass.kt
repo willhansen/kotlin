@@ -1,35 +1,35 @@
-class value Foo
+class konstue Foo
 
-value private class Foo
+konstue private class Foo
 
-value @Bar class Foo
+konstue @Bar class Foo
 
-value interface Foo
+konstue interface Foo
 
-value abstract class Foo
+konstue abstract class Foo
 
-value object Foo
+konstue object Foo
 
-value fun foo(){}
+konstue fun foo(){}
 
-value class Foo
+konstue class Foo
 
-value class Foo {
-    val l = 1
+konstue class Foo {
+    konst l = 1
     fun invoke()
 }
 
-private value class Foo
+private konstue class Foo
 
-expect value class Foo
+expect konstue class Foo
 
-actual value class Foo
+actual konstue class Foo
 
-@Bar value class Foo
+@Bar konstue class Foo
 
 class TopLevel {
-    value class Foo
+    konstue class Foo
 }
 
-value
+konstue
 class Foo

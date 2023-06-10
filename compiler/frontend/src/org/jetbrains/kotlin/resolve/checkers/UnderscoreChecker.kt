@@ -35,7 +35,7 @@ object UnderscoreChecker : DeclarationChecker {
         allowSingleUnderscore: Boolean = false
     ) {
         if (identifier == null || identifier.text.isEmpty()) return
-        val isValidSingleUnderscore = allowSingleUnderscore && identifier.text == "_"
+        konst isValidSingleUnderscore = allowSingleUnderscore && identifier.text == "_"
         if (!isValidSingleUnderscore && identifier.text.all { it == '_' }) {
             diagnosticHolder.report(Errors.UNDERSCORE_IS_RESERVED.on(identifier))
         } else if (isValidSingleUnderscore && !languageVersionSettings.supportsFeature(LanguageFeature.SingleUnderscoreForParameterName)) {
@@ -61,7 +61,7 @@ object UnderscoreChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (declaration is KtProperty && descriptor !is VariableDescriptor) return
         if (declaration is KtCallableDeclaration) {
-            for (parameter in declaration.valueParameters) {
+            for (parameter in declaration.konstueParameters) {
                 checkNamed(
                     parameter, context.trace, context.languageVersionSettings,
                     allowSingleUnderscore = descriptor is FunctionExpressionDescriptor

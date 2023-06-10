@@ -1,5 +1,5 @@
 expression: """
-   const val CODE = "const val CODE = ..."
+   const konst CODE = "const konst CODE = ..."
 """.trimIndent()
 
 CONSTANT_EXPRESSION_EVALUATION

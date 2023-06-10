@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.lombok.gradle.model.builder.LombokModelBuilder
 import javax.inject.Inject
 
-class LombokSubplugin @Inject internal constructor(private val registry: ToolingModelBuilderRegistry) : KotlinCompilerPluginSupportPlugin {
+class LombokSubplugin @Inject internal constructor(private konst registry: ToolingModelBuilderRegistry) : KotlinCompilerPluginSupportPlugin {
 
     override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean =
         (kotlinCompilation.platformType == KotlinPlatformType.jvm || kotlinCompilation.platformType == KotlinPlatformType.androidJvm)
@@ -23,11 +23,11 @@ class LombokSubplugin @Inject internal constructor(private val registry: Tooling
     }
 
     override fun applyToCompilation(kotlinCompilation: KotlinCompilation<*>): Provider<List<SubpluginOption>> {
-        val project = kotlinCompilation.target.project
+        konst project = kotlinCompilation.target.project
 
         return project.provider {
-            val extension = project.extensions.getByType(LombokExtension::class.java)
-            val options = mutableListOf<SubpluginOption>()
+            konst extension = project.extensions.getByType(LombokExtension::class.java)
+            konst options = mutableListOf<SubpluginOption>()
 
             extension.configurationFile?.let { configFile ->
                 options += SubpluginOption("config", configFile.absolutePath)

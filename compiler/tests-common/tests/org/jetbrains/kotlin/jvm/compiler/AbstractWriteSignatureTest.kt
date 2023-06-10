@@ -16,7 +16,7 @@ import java.util.regex.MatchResult
 
 abstract class AbstractWriteSignatureTest : CodegenTestCase() {
     override fun doMultiFileTest(wholeFile: File, files: List<TestFile>) {
-        val isIgnored = InTextDirectivesUtils.isIgnoredTarget(backend, wholeFile)
+        konst isIgnored = InTextDirectivesUtils.isIgnoredTarget(backend, wholeFile)
         compile(files)
         try {
             parseExpectations(wholeFile).check()
@@ -29,13 +29,13 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
     }
 
     private class SignatureExpectation(
-        val header: String,
-        val name: String,
-        val expectedJvmSignature: String?,
+        konst header: String,
+        konst name: String,
+        konst expectedJvmSignature: String?,
         expectedGenericSignature: String
     ) {
-        private val expectedFormattedSignature = formatSignature(header, expectedJvmSignature, expectedGenericSignature)
-        private val jvmDescriptorToFormattedSignature = mutableMapOf<String, String>()
+        private konst expectedFormattedSignature = formatSignature(header, expectedJvmSignature, expectedGenericSignature)
+        private konst jvmDescriptorToFormattedSignature = mutableMapOf<String, String>()
 
         fun accept(name: String, actualJvmSignature: String, actualGenericSignature: String) {
             if (this.name == name) {
@@ -47,14 +47,14 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
         }
 
         fun check() {
-            val formattedActualSignature =
+            konst formattedActualSignature =
                 if (expectedJvmSignature == null) {
                     Assert.assertTrue(
                         "Expected single declaration, but ${jvmDescriptorToFormattedSignature.keys} found",
                         jvmDescriptorToFormattedSignature.size == 1
                     )
 
-                    jvmDescriptorToFormattedSignature.values.single()
+                    jvmDescriptorToFormattedSignature.konstues.single()
                 } else {
                     jvmDescriptorToFormattedSignature[expectedJvmSignature].sure {
                         "Expected $expectedJvmSignature but only ${jvmDescriptorToFormattedSignature.keys} found for $name"
@@ -66,28 +66,28 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
     }
 
     private inner class PackageExpectationsSuite {
-        private val classSuitesByClassName = LinkedHashMap<String, ClassExpectationsSuite>()
+        private konst classSuitesByClassName = LinkedHashMap<String, ClassExpectationsSuite>()
 
         fun getOrCreateClassSuite(className: String): ClassExpectationsSuite =
             classSuitesByClassName.getOrPut(className) { ClassExpectationsSuite(className) }
 
         fun check() {
             Assert.assertTrue(classSuitesByClassName.isNotEmpty())
-            classSuitesByClassName.values.forEach { it.check() }
+            classSuitesByClassName.konstues.forEach { it.check() }
         }
 
     }
 
-    private inner class ClassExpectationsSuite(val className: String) {
-        val classExpectations = ArrayList<SignatureExpectation>()
-        val methodExpectations = ArrayList<SignatureExpectation>()
-        val fieldExpectations = ArrayList<SignatureExpectation>()
+    private inner class ClassExpectationsSuite(konst className: String) {
+        konst classExpectations = ArrayList<SignatureExpectation>()
+        konst methodExpectations = ArrayList<SignatureExpectation>()
+        konst fieldExpectations = ArrayList<SignatureExpectation>()
 
         fun check() {
-            val checker = Checker()
-            val relativeClassFileName = "${className.replace('.', '/')}.class"
+            konst checker = Checker()
+            konst relativeClassFileName = "${className.replace('.', '/')}.class"
 
-            val outputFile = classFileFactory.currentOutput.single { it.relativePath == relativeClassFileName }
+            konst outputFile = classFileFactory.currentOutput.single { it.relativePath == relativeClassFileName }
             processClassFile(checker, outputFile.asByteArray())
 
             if (className.endsWith("Package")) {
@@ -101,7 +101,7 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
         private fun processPackageParts(checker: Checker, relativeClassFileName: String) {
             // Look for package parts in the same directory.
             // Package part file names for package SomePackage look like SomePackage$<hash>.class.
-            val partPrefix = relativeClassFileName.replace(".class", "\$")
+            konst partPrefix = relativeClassFileName.replace(".class", "\$")
             classFileFactory.currentOutput.filter {
                 it.relativePath.startsWith(partPrefix) && it.relativePath.endsWith(".class")
             }.forEach { packageFacadeFile ->
@@ -144,9 +144,9 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
                 return super.visitMethod(access, name, desc, signature, exceptions)
             }
 
-            override fun visitField(access: Int, name: String, desc: String, signature: String?, value: Any?): FieldVisitor? {
+            override fun visitField(access: Int, name: String, desc: String, signature: String?, konstue: Any?): FieldVisitor? {
                 fieldExpectations.forEach { it.accept(name, desc, signature ?: "null") }
-                return super.visitField(access, name, desc, signature, value)
+                return super.visitField(access, name, desc, signature, konstue)
             }
         }
 
@@ -164,32 +164,32 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
     }
 
     private fun parseExpectations(ktFile: File): PackageExpectationsSuite {
-        val expectations = PackageExpectationsSuite()
+        konst expectations = PackageExpectationsSuite()
 
-        val lines = ktFile.readLines()
+        konst lines = ktFile.readLines()
         var lineNo = 0
         while (lineNo < lines.size) {
-            val line = lines[lineNo]
-            val expectationMatch = expectationRegex.matchExact(line)
+            konst line = lines[lineNo]
+            konst expectationMatch = expectationRegex.matchExact(line)
 
             if (expectationMatch != null) {
-                val kind = expectationMatch.group(1)!!
-                val className = expectationMatch.group(2)!!
-                val memberName = expectationMatch.group(4)
+                konst kind = expectationMatch.group(1)!!
+                konst className = expectationMatch.group(2)!!
+                konst memberName = expectationMatch.group(4)
 
                 if (kind == "class" && memberName != null) {
                     throw AssertionError("$ktFile:${lineNo + 1}: use $className\$$memberName to denote inner class")
                 }
 
-                val jvmSignatureMatch = jvmSignatureRegex.matchExact(lines[lineNo + 1])
-                val genericSignatureMatch = genericSignatureRegex.matchExact(lines[lineNo + 1])
+                konst jvmSignatureMatch = jvmSignatureRegex.matchExact(lines[lineNo + 1])
+                konst genericSignatureMatch = genericSignatureRegex.matchExact(lines[lineNo + 1])
                     ?: genericSignatureRegex.matchExact(lines[lineNo + 2])
 
                 if (genericSignatureMatch != null) {
-                    val jvmSignature = jvmSignatureMatch?.group(1)
-                    val genericSignature = genericSignatureMatch.group(1)
+                    konst jvmSignature = jvmSignatureMatch?.group(1)
+                    konst genericSignature = genericSignatureMatch.group(1)
 
-                    val classSuite = expectations.getOrCreateClassSuite(className)
+                    konst classSuite = expectations.getOrCreateClassSuite(className)
 
                     when (kind) {
                         "class" -> classSuite.addClassExpectation(className, jvmSignature, genericSignature)
@@ -220,12 +220,12 @@ abstract class AbstractWriteSignatureTest : CodegenTestCase() {
             ).joinToString("\n") { "// $it" }
         }
 
-        val expectationRegex = Regex("^// (class|method|field): *([^:]+)(::(.+))? *(//.*)?")
-        val jvmSignatureRegex = Regex("^// jvm signature: *(.+) *(//.*)?")
-        val genericSignatureRegex = Regex("^// generic signature: *(.+) *(//.*)?")
+        konst expectationRegex = Regex("^// (class|method|field): *([^:]+)(::(.+))? *(//.*)?")
+        konst jvmSignatureRegex = Regex("^// jvm signature: *(.+) *(//.*)?")
+        konst genericSignatureRegex = Regex("^// generic signature: *(.+) *(//.*)?")
 
         fun Regex.matchExact(input: String): MatchResult? {
-            val matcher = this.toPattern().matcher(input)
+            konst matcher = this.toPattern().matcher(input)
             return if (matcher.matches()) {
                 matcher.toMatchResult()
             } else {

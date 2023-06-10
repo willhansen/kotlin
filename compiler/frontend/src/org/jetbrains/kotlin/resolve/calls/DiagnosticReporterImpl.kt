@@ -31,7 +31,7 @@ import java.util.*
 
 
 object CallDiagnosticToDiagnostic {
-    private val diagnosticMap: MutableMap<Class<out KotlinCallDiagnostic>, KotlinCallDiagnostic.(PsiElement) -> ParametrizedDiagnostic<*>> =
+    private konst diagnosticMap: MutableMap<Class<out KotlinCallDiagnostic>, KotlinCallDiagnostic.(PsiElement) -> ParametrizedDiagnostic<*>> =
         HashMap()
 
     private fun <E : PsiElement, C : KotlinCallDiagnostic> checkPut(
@@ -79,8 +79,8 @@ object CallDiagnosticToDiagnostic {
 
     // null means, that E is not subtype of required type for diagnostic factory
     fun <E : PsiElement> toDiagnostic(element: E, diagnostic: KotlinCallDiagnostic): ParametrizedDiagnostic<E>? {
-        val diagnosticClass = diagnostic.javaClass
-        val factory = diagnosticMap[diagnosticClass] ?: error("Illegal call diagnostic class: ${diagnosticClass.canonicalName}")
+        konst diagnosticClass = diagnostic.javaClass
+        konst factory = diagnosticMap[diagnosticClass] ?: error("Illegal call diagnostic class: ${diagnosticClass.canonicalName}")
 
         @Suppress("UNCHECKED_CAST")
         return factory(diagnostic, element) as ParametrizedDiagnostic<E>?
@@ -88,10 +88,10 @@ object CallDiagnosticToDiagnostic {
 
 }
 
-abstract class DiagnosticReporterImpl(private val bindingTrace: BindingTrace, private val call: Call) : DiagnosticReporter {
+abstract class DiagnosticReporterImpl(private konst bindingTrace: BindingTrace, private konst call: Call) : DiagnosticReporter {
 
     override fun onCallArgument(callArgument: KotlinCallArgument, diagnostic: KotlinCallDiagnostic) {
-        val d = CallDiagnosticToDiagnostic.toDiagnostic((callArgument as ValueArgument).asElement(), diagnostic)
+        konst d = CallDiagnosticToDiagnostic.toDiagnostic((callArgument as ValueArgument).asElement(), diagnostic)
         if (d != null) {
             bindingTrace.report(d)
         }
@@ -100,9 +100,9 @@ abstract class DiagnosticReporterImpl(private val bindingTrace: BindingTrace, pr
 }
 
 class TypeMismatchDiagnostic(
-    val callArgument: KotlinCallArgument,
-    val expectedType: KotlinType,
-    val actualType: KotlinType
+    konst callArgument: KotlinCallArgument,
+    konst expectedType: KotlinType,
+    konst actualType: KotlinType
 ) : KotlinCallDiagnostic(CandidateApplicability.INAPPLICABLE) {
     override fun report(reporter: DiagnosticReporter) = reporter.onCallArgument(callArgument, this)
 }

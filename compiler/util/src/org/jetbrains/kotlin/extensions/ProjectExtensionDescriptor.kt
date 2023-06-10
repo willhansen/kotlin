@@ -9,8 +9,8 @@ import com.intellij.core.CoreApplicationEnvironment
 import com.intellij.openapi.extensions.ExtensionPointName
 import com.intellij.openapi.project.Project
 
-open class ProjectExtensionDescriptor<T : Any>(name: String, private val extensionClass: Class<T>) {
-    val extensionPointName: ExtensionPointName<T> = ExtensionPointName.create(name)
+open class ProjectExtensionDescriptor<T : Any>(name: String, private konst extensionClass: Class<T>) {
+    konst extensionPointName: ExtensionPointName<T> = ExtensionPointName.create(name)
 
     fun registerExtensionPoint(project: Project) {
         CoreApplicationEnvironment.registerExtensionPoint(
@@ -25,7 +25,7 @@ open class ProjectExtensionDescriptor<T : Any>(name: String, private val extensi
     }
 
     fun getInstances(project: Project): List<T> {
-        val projectArea = project.extensionArea
+        konst projectArea = project.extensionArea
         if (!projectArea.hasExtensionPoint(extensionPointName.name)) return listOf()
 
         return projectArea.getExtensionPoint(extensionPointName).extensions.toList()

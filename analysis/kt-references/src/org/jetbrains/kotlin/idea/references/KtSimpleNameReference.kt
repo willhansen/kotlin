@@ -33,15 +33,15 @@ abstract class KtSimpleNameReference(expression: KtSimpleNameExpression) : KtSim
     }
 
     override fun getRangeInElement(): TextRange {
-        val element = element.getReferencedNameElement()
-        val startOffset = getElement().startOffset
+        konst element = element.getReferencedNameElement()
+        konst startOffset = getElement().startOffset
         return element.textRange.shiftRight(-startOffset)
     }
 
     override fun canRename(): Boolean {
         if (expression.getParentOfTypeAndBranch<KtWhenConditionInRange>(strict = true) { operationReference } != null) return false
 
-        val elementType = expression.getReferencedNameElementType()
+        konst elementType = expression.getReferencedNameElementType()
         if (elementType == KtTokens.PLUSPLUS || elementType == KtTokens.MINUSMINUS) return false
 
         return true
@@ -63,14 +63,14 @@ abstract class KtSimpleNameReference(expression: KtSimpleNameExpression) : KtSim
     ): PsiElement =
         getKtReferenceMutateService().bindToFqName(this, fqName, shorteningMode, targetElement)
 
-    override val resolvesByNames: Collection<Name>
+    override konst resolvesByNames: Collection<Name>
         get() {
-            val element = element
+            konst element = element
 
             if (element is KtOperationReferenceExpression) {
-                val tokenType = element.operationSignTokenType
+                konst tokenType = element.operationSignTokenType
                 if (tokenType != null) {
-                    val name = OperatorConventions.getNameForOperationSymbol(
+                    konst name = OperatorConventions.getNameForOperationSymbol(
                         tokenType, element.parent is KtUnaryExpression, element.parent is KtBinaryExpression
                     )
                         ?: (expression.parent as? KtBinaryExpression)?.let {
@@ -78,9 +78,9 @@ abstract class KtSimpleNameReference(expression: KtSimpleNameExpression) : KtSim
                         }
                         ?: return emptyList()
 
-                    val counterpart = OperatorConventions.ASSIGNMENT_OPERATION_COUNTERPARTS[tokenType]
+                    konst counterpart = OperatorConventions.ASSIGNMENT_OPERATION_COUNTERPARTS[tokenType]
                     return if (counterpart != null) {
-                        val counterpartName = OperatorConventions.getNameForOperationSymbol(counterpart, false, true)!!
+                        konst counterpartName = OperatorConventions.getNameForOperationSymbol(counterpart, false, true)!!
                         listOf(name, counterpartName)
                     } else {
                         listOf(name)
@@ -94,13 +94,13 @@ abstract class KtSimpleNameReference(expression: KtSimpleNameExpression) : KtSim
     abstract fun getImportAlias(): KtImportAlias?
 
     private fun isAssignmentResolved(project: Project, binaryExpression: KtBinaryExpression): Boolean {
-        val sourceModule = ProjectStructureProvider.getModule(project, binaryExpression, contextualModule = null)
+        konst sourceModule = ProjectStructureProvider.getModule(project, binaryExpression, contextualModule = null)
         if (sourceModule !is KtSourceModule) {
             return false
         }
 
-        val reference = binaryExpression.operationReference.reference ?: return false
-        val pluginPresenceService = project.getService(KtCompilerPluginsProvider::class.java)
+        konst reference = binaryExpression.operationReference.reference ?: return false
+        konst pluginPresenceService = project.getService(KtCompilerPluginsProvider::class.java)
             ?: error("KtAssignResolutionPresenceService is not available as a service")
         return pluginPresenceService.isPluginOfTypeRegistered(sourceModule, CompilerPluginType.ASSIGNMENT)
                 && (reference.resolve() as? KtNamedFunction)?.nameAsName == ASSIGN_METHOD

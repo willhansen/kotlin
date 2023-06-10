@@ -4,7 +4,7 @@
 
 fun box(): String {
     var obj = "0" as java.lang.Object
-    val result = synchronized (obj) {
+    konst result = synchronized (obj) {
         239L
     }
 

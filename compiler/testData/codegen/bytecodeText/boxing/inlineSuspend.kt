@@ -1,7 +1,7 @@
 inline suspend fun inlineMe() = 1000
 
-// inlineMe$$forInline : valueOf
+// inlineMe$$forInline : konstueOf
 // inlineMe : boxInt
 
-// 1 valueOf
+// 1 konstueOf
 // 1 boxInt

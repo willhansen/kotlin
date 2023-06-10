@@ -8,8 +8,8 @@
 
 // FILE: charArrayOf.kt
 fun box(): String {
-    val sam = Sam(::charArrayOf)
-    val arr = sam.get(charArrayOf('O', 'K'))
+    konst sam = Sam(::charArrayOf)
+    konst arr = sam.get(charArrayOf('O', 'K'))
     return "${arr[0]}${arr[1]}"
 }
 

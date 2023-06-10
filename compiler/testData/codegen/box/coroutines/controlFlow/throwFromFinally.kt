@@ -12,13 +12,13 @@ class Controller {
         if (++count != i) throw Exception("EXPECTED $i")
     }
 
-    fun <T> log(value: T) {
-        result += "$value"
+    fun <T> log(konstue: T) {
+        result += "$konstue"
     }
 }
 
 fun builder(c: suspend Controller.() -> Unit): String {
-    val controller = Controller()
+    konst controller = Controller()
     c.startCoroutine(controller, handleResultContinuation {
         controller.result += "return;"
     })
@@ -50,7 +50,7 @@ suspend fun Controller.test() {
 }
 
 fun box(): String {
-    val res = builder {
+    konst res = builder {
         try {
             log("try;")
             test()

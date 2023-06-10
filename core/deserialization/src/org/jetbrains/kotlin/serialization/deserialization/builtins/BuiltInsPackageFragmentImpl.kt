@@ -22,7 +22,7 @@ class BuiltInsPackageFragmentImpl private constructor(
     module: ModuleDescriptor,
     proto: ProtoBuf.PackageFragment,
     metadataVersion: BuiltInsBinaryVersion,
-    override val isFallback: Boolean
+    override konst isFallback: Boolean
 ) : BuiltInsPackageFragment, DeserializedPackageFragmentImpl(
     fqName, storageManager, module, proto, metadataVersion, containerSource = null
 ) {
@@ -34,7 +34,7 @@ class BuiltInsPackageFragmentImpl private constructor(
             inputStream: InputStream,
             isFallback: Boolean
         ): BuiltInsPackageFragmentImpl {
-            val (proto, version) = inputStream.readBuiltinsPackageFragment()
+            konst (proto, version) = inputStream.readBuiltinsPackageFragment()
 
             if (proto == null) {
                 // TODO: report a proper diagnostic

@@ -7,10 +7,10 @@ package runtime.basic.standard
 
 import kotlin.test.*
 
-class Foo(val bar: Int)
+class Foo(konst bar: Int)
 
 fun <T> assertEquals(actual: T, expected: T) {
-    if (actual != expected) throw AssertionError("Assertion failed. Expected value: $expected, actual value: $actual")
+    if (actual != expected) throw AssertionError("Assertion failed. Expected konstue: $expected, actual konstue: $actual")
 }
 
 @Test fun runTest() {
@@ -19,7 +19,7 @@ fun <T> assertEquals(actual: T, expected: T) {
         throw AssertionError("TODO() doesn't throw an exception")
     } catch(e: NotImplementedError) {}
 
-    val foo = Foo(42)
+    konst foo = Foo(42)
     assertEquals(run { 42 }, 42)
     assertEquals(foo.run { bar }, 42)
     assertEquals(with(foo) { bar }, 42)

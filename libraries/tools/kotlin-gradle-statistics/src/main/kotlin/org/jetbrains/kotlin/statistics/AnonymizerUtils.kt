@@ -15,19 +15,19 @@ internal interface ValueAnonymizer<T> {
 
 }
 
-internal val salt: String by lazy {
-    val env = System.getenv()
+internal konst salt: String by lazy {
+    konst env = System.getenv()
     "${env["HOSTNAME"]}${env["COMPUTERNAME"]}"
 }
 
 fun anonymizeComponentVersion(version: String): String {
-    val parts = version.toLowerCase().replace('-', '.')
+    konst parts = version.toLowerCase().replace('-', '.')
         .split(".")
         .plus(listOf("0", "0", "0")) // pad with zeros
         .take(4)
-    val mainVersion = parts.take(3).map { s -> s.toIntOrNull()?.toString() ?: "0" }
+    konst mainVersion = parts.take(3).map { s -> s.toIntOrNull()?.toString() ?: "0" }
 
-    val suffix = when {
+    konst suffix = when {
         parts[3].matches("(rc|m)\\d{0,1}".toRegex()) -> "-${parts[3]}"
         parts[3].matches("(snapshot|dev|beta)".toRegex()) -> "-${parts[3]}"
         else -> ""
@@ -36,8 +36,8 @@ fun anonymizeComponentVersion(version: String): String {
 }
 
 internal fun sha256(s: String): String {
-    val md = MessageDigest.getInstance("SHA-256")
-    val digest = md.digest(s.toByteArray())
+    konst md = MessageDigest.getInstance("SHA-256")
+    konst digest = md.digest(s.toByteArray())
     return digest.fold("", { str, it -> str + "%02x".format(it) })
 }
 

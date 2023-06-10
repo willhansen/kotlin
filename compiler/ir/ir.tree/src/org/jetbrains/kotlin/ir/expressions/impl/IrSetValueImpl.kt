@@ -23,11 +23,11 @@ import org.jetbrains.kotlin.ir.symbols.IrValueSymbol
 import org.jetbrains.kotlin.ir.types.IrType
 
 class IrSetValueImpl(
-    override val startOffset: Int,
-    override val endOffset: Int,
+    override konst startOffset: Int,
+    override konst endOffset: Int,
     override var type: IrType,
-    override val symbol: IrValueSymbol,
-    override var value: IrExpression,
+    override konst symbol: IrValueSymbol,
+    override var konstue: IrExpression,
     override var origin: IrStatementOrigin?
 ) : IrSetValue() {
     init {

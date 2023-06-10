@@ -9,24 +9,24 @@ import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.concurrent.getOrSet
 
-internal actual val durationAssertionsEnabled: Boolean = Duration::class.java.desiredAssertionStatus()
+internal actual konst durationAssertionsEnabled: Boolean = Duration::class.java.desiredAssertionStatus()
 
-private val precisionFormats = Array(4) { ThreadLocal<DecimalFormat>() }
+private konst precisionFormats = Array(4) { ThreadLocal<DecimalFormat>() }
 
 private fun createFormatForDecimals(decimals: Int) = DecimalFormat("0").apply {
     if (decimals > 0) minimumFractionDigits = decimals
     roundingMode = RoundingMode.HALF_UP
 }
 
-internal actual fun formatToExactDecimals(value: Double, decimals: Int): String {
-    val format = if (decimals < precisionFormats.size) {
+internal actual fun formatToExactDecimals(konstue: Double, decimals: Int): String {
+    konst format = if (decimals < precisionFormats.size) {
         precisionFormats[decimals].getOrSet { createFormatForDecimals(decimals) }
     } else
         createFormatForDecimals(decimals)
-    return format.format(value)
+    return format.format(konstue)
 }
 
-internal actual fun formatUpToDecimals(value: Double, decimals: Int): String =
+internal actual fun formatUpToDecimals(konstue: Double, decimals: Int): String =
     createFormatForDecimals(0)
         .apply { maximumFractionDigits = decimals }
-        .format(value)
+        .format(konstue)

@@ -29,17 +29,17 @@ class SimpleSymbolBasedPackage(
     javac: JavacWrapper
 ) : SymbolBasedElement<PackageElement>(element, javac), SymbolBasedPackage {
 
-    override val fqName: FqName
+    override konst fqName: FqName
         get() = FqName(element.qualifiedName.toString())
 
-    override val subPackages: Collection<JavaPackage>
+    override konst subPackages: Collection<JavaPackage>
         get() = javac.findSubPackages(fqName)
 
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = element.annotationMirrors.map { SymbolBasedAnnotation(it, javac) }
 
-    override val annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
+    override konst annotationsByFqName: Map<FqName?, JavaAnnotation> by buildLazyValueForMap()
 
     override fun getClasses(nameFilter: (Name) -> Boolean) =
         javac.findClassesFromPackage(fqName).filter { nameFilter(it.name) }

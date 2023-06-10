@@ -19,7 +19,7 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
 ) : AbstractKotlinCompileConfig<TASK>(compilation) {
 
     init {
-        val libraryFilterCachingService = LibraryFilterCachingService.registerIfAbsent(project)
+        konst libraryFilterCachingService = LibraryFilterCachingService.registerIfAbsent(project)
 
         configureTask { task ->
             task.incremental = propertiesProvider.incrementalJs ?: true
@@ -31,7 +31,7 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
             task.moduleName.set(providers.provider { compilation.moduleName })
 
             @Suppress("DEPRECATION")
-            task.outputFileProperty.value(
+            task.outputFileProperty.konstue(
                 task.destinationDirectory.flatMap { dir ->
                     if (task.compilerOptions.outputFile.orNull != null) {
                         task.compilerOptions.outputFile.map { File(it) }
@@ -47,10 +47,10 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
                 .convention(
                     project.objects.directoryProperty().fileProvider(
                         task.defaultDestinationDirectory.map {
-                            val freeArgs = task.enhancedFreeCompilerArgs.get()
+                            konst freeArgs = task.enhancedFreeCompilerArgs.get()
                             if (task.compilerOptions.outputFile.orNull != null) {
                                 if (freeArgs.contains(PRODUCE_UNZIPPED_KLIB)) {
-                                    val file = File(task.compilerOptions.outputFile.get())
+                                    konst file = File(task.compilerOptions.outputFile.get())
                                     if (file.extension == "") file else file.parentFile
                                 } else {
                                     File(task.compilerOptions.outputFile.get()).parentFile
@@ -62,7 +62,7 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
                     )
                 )
 
-            task.libraryFilterCacheService.value(libraryFilterCachingService).disallowChanges()
+            task.libraryFilterCacheService.konstue(libraryFilterCachingService).disallowChanges()
         }
     }
 
@@ -70,7 +70,7 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
         task: TASK,
         compilation: KotlinCompilationInfo
     ) {
-        task.enhancedFreeCompilerArgs.value(
+        task.enhancedFreeCompilerArgs.konstue(
             task.compilerOptions.freeCompilerArgs.map { freeArgs ->
                 freeArgs.toMutableList().apply {
                     commonJsAdditionalCompilerFlags(compilation)
@@ -94,7 +94,7 @@ internal open class BaseKotlin2JsCompileConfig<TASK : Kotlin2JsCompile>(
             contains(PRODUCE_ZIPPED_KLIB)
         ) {
             // Configure FQ module name to avoid cyclic dependencies in klib manifests (see KT-36721).
-            val baseName = if (compilation.isMain) {
+            konst baseName = if (compilation.isMain) {
                 project.name
             } else {
                 "${project.name}_${compilation.compilationName}"

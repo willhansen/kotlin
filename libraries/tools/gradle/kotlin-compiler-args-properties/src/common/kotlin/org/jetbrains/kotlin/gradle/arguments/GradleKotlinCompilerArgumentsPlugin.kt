@@ -20,12 +20,12 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import javax.inject.Inject
 
 class GradleKotlinCompilerArgumentsPlugin @Inject constructor(
-    private val providerFactory: ProviderFactory
+    private konst providerFactory: ProviderFactory
 ) : KotlinBasePlugin {
-    override val pluginVersion = "test"
+    override konst pluginVersion = "test"
 
     override fun apply(project: Project) {
-        val properties = KotlinTaskProperties(providerFactory)
+        konst properties = KotlinTaskProperties(providerFactory)
         project.configureKotlinVersions(properties)
     }
 
@@ -46,8 +46,8 @@ class GradleKotlinCompilerArgumentsPlugin @Inject constructor(
     }
 
     private fun Project.forceConfigureTask(properties: KotlinTaskProperties) {
-        // Wrapping into afterEvaluate to reduce amount of exception trying to modify value from the user-script
-        afterEvaluate {
+        // Wrapping into afterEkonstuate to reduce amount of exception trying to modify konstue from the user-script
+        afterEkonstuate {
             tasks.withType<KotlinCompilationTask<*>>().configureEach {
                 configureKotlinOptions(properties, it.compilerOptions, true)
             }
@@ -79,7 +79,7 @@ class GradleKotlinCompilerArgumentsPlugin @Inject constructor(
         source: Provider<T>,
         shouldSetValue: Boolean
     ): Property<T> = if (shouldSetValue) {
-        value(source)
+        konstue(source)
     } else {
         convention(source)
     }

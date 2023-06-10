@@ -16,10 +16,10 @@
 
 package org.jetbrains.kotlin.utils
 
-data class NumberWithRadix(val number: String, val radix: Int)
+data class NumberWithRadix(konst number: String, konst radix: Int)
 
-fun extractRadix(value: String): NumberWithRadix = when {
-    value.startsWith("0x") || value.startsWith("0X") -> NumberWithRadix(value.substring(2), 16)
-    value.startsWith("0b") || value.startsWith("0B") -> NumberWithRadix(value.substring(2), 2)
-    else -> NumberWithRadix(value, 10)
+fun extractRadix(konstue: String): NumberWithRadix = when {
+    konstue.startsWith("0x") || konstue.startsWith("0X") -> NumberWithRadix(konstue.substring(2), 16)
+    konstue.startsWith("0b") || konstue.startsWith("0B") -> NumberWithRadix(konstue.substring(2), 2)
+    else -> NumberWithRadix(konstue, 10)
 }

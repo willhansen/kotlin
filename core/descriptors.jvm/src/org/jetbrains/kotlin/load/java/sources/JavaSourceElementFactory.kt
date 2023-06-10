@@ -24,5 +24,5 @@ interface JavaSourceElementFactory {
 }
 
 interface JavaSourceElement : SourceElement {
-    val javaElement: JavaElement
+    konst javaElement: JavaElement
 }

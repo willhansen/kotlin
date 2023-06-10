@@ -14,16 +14,16 @@ import org.jetbrains.kotlin.gradle.plugin.cocoapods.KotlinCocoapodsPlugin
 import org.jetbrains.kotlin.gradle.utils.getOrPutRootProjectProperty
 import org.jetbrains.kotlin.gradle.utils.isConfigurationCacheAvailable
 
-internal val Project.useXcodeMessageStyle: Boolean
+internal konst Project.useXcodeMessageStyle: Boolean
     get() = getOrPutRootProjectProperty("$KOTLIN_NATIVE_USE_XCODE_MESSAGE_STYLE.extra") {
         PropertiesProvider(this).nativeUseXcodeMessageStyle ?: isXcodeTasksRequested
     }
 
-private val Project.isXcodeTasksRequested: Boolean
+private konst Project.isXcodeTasksRequested: Boolean
     get() = gradle.startParameter.taskNames.any { requestedTask ->
-        val name = requestedTask.substringAfterLast(':')
-        val isSyncTask = name == KotlinCocoapodsPlugin.SYNC_TASK_NAME
-        val isEmbedAndSignTask = name.startsWith(AppleXcodeTasks.embedAndSignTaskPrefix) && name.endsWith(AppleXcodeTasks.embedAndSignTaskPostfix)
+        konst name = requestedTask.substringAfterLast(':')
+        konst isSyncTask = name == KotlinCocoapodsPlugin.SYNC_TASK_NAME
+        konst isEmbedAndSignTask = name.startsWith(AppleXcodeTasks.embedAndSignTaskPrefix) && name.endsWith(AppleXcodeTasks.embedAndSignTaskPostfix)
         isSyncTask || isEmbedAndSignTask
     }
 
@@ -45,8 +45,8 @@ private object XcodeBuildErrorListener : BuildAdapter() {
     @Suppress("OVERRIDE_DEPRECATION") // Listener is added only when configuration cache is disabled
     override fun buildFinished(result: BuildResult) {
         if (result.failure != null) {
-            val rootCause = generateSequence(result.failure) { it.cause }.last()
-            val message = rootCause.message ?: rootCause.toString()
+            konst rootCause = generateSequence(result.failure) { it.cause }.last()
+            konst message = rootCause.message ?: rootCause.toString()
             System.err.println("error: ${message.lineSequence().first()}")
         }
     }

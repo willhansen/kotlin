@@ -10,21 +10,21 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
 internal sealed class Import {
-    abstract val packageFqName: FqName
-    abstract val relativeClassName: FqName?
-    abstract val resolvedClassId: ClassId?
+    abstract konst packageFqName: FqName
+    abstract konst relativeClassName: FqName?
+    abstract konst resolvedClassId: ClassId?
 }
 
 internal class NonStarImport(
-    override val packageFqName: FqName,
-    override val relativeClassName: FqName?,
-    override val resolvedClassId: ClassId?,
-    val callableName: Name?,
-    val aliasName: Name?,
+    override konst packageFqName: FqName,
+    override konst relativeClassName: FqName?,
+    override konst resolvedClassId: ClassId?,
+    konst callableName: Name?,
+    konst aliasName: Name?,
 ) : Import()
 
 internal class StarImport(
-    override val packageFqName: FqName,
-    override val relativeClassName: FqName?,
-    override val resolvedClassId: ClassId?,
+    override konst packageFqName: FqName,
+    override konst relativeClassName: FqName?,
+    override konst resolvedClassId: ClassId?,
 ) : Import()

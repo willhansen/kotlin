@@ -5,7 +5,7 @@ class Cell {
 }
 
 fun box(): String {
-    val c = Cell()
+    konst c = Cell()
     (c<!NO_SET_METHOD!>[0]<!>)++
     return "OK"
 }

@@ -34,15 +34,15 @@ abstract class KonanTest : DefaultTask(), KonanTestExecutable {
     @get:Input
     var disabled: Boolean
         get() = !enabled
-        set(value) {
-            enabled = !value
+        set(konstue) {
+            enabled = !konstue
         }
 
     /**
      * Test output directory. Used to store processed sources and binary artifacts.
      */
     @get:Internal
-    abstract val outputDirectory: String
+    abstract konst outputDirectory: String
 
     /**
      * Test logger to be used for the test built with TestRunner (`-tr` option).
@@ -60,7 +60,7 @@ abstract class KonanTest : DefaultTask(), KonanTestExecutable {
      * Test executable.
      */
     @get:Input
-    abstract override val executable: String
+    abstract override konst executable: String
 
     /**
      * Test source.
@@ -86,7 +86,7 @@ abstract class KonanTest : DefaultTask(), KonanTestExecutable {
     override var doBeforeRun: Action<in Task>? = null
 
     @get:Internal
-    override val buildTasks: List<Task>
+    override konst buildTasks: List<Task>
         get() = listOf(project.findKonanBuildTask(name, project.testTarget).get())
 
     @Suppress("UnstableApiUsage")
@@ -149,13 +149,13 @@ fun <T : KonanTestExecutable> Project.createTest(name: String, type: Class<T>, c
  * Runs tests with GTEST output and parses it to create statistics info
  */
 open class KonanGTest : KonanTest() {
-    override val outputDirectory = "${project.testOutputStdlib}/$name"
+    override konst outputDirectory = "${project.testOutputStdlib}/$name"
 
     // Use GTEST logger to parse test results later
     override var testLogger = Logger.GTEST
 
     @get:Internal
-    override val executable: String
+    override konst executable: String
         get() = "$outputDirectory/${project.testTarget.name}/$name.${project.testTarget.family.exeSuffix}"
 
     @Internal
@@ -207,11 +207,11 @@ open class KonanGTest : KonanTest() {
  * Note: this task should depend on task that builds a test binary.
  */
 open class KonanLocalTest : KonanTest() {
-    override val outputDirectory = project.testOutputLocal
+    override konst outputDirectory = project.testOutputLocal
 
     // local tests built into a single binary with the known name
     @get:Internal
-    override val executable: String
+    override konst executable: String
         get() = "$outputDirectory/${project.testTarget.name}/localTest.${project.testTarget.family.exeSuffix}"
 
     override var testLogger = Logger.SILENT
@@ -230,16 +230,16 @@ open class KonanLocalTest : KonanTest() {
     var expectedFail = false
 
     /**
-     * Used to validate output against the golden data.
+     * Used to konstidate output against the golden data.
      */
     @Input
     var useGoldenData: Boolean = false
 
     @get:InputFile
     @get:Optional
-    open val goldenDataFile: File?
+    open konst goldenDataFile: File?
         get() {
-            val goldenDataFile = computeGoldenDataFile()
+            konst goldenDataFile = computeGoldenDataFile()
             return if (useGoldenData) {
                 check(goldenDataFile.isFile) { "Task $name. Golden data file does not exist: $goldenDataFile" }
                 goldenDataFile
@@ -250,15 +250,15 @@ open class KonanLocalTest : KonanTest() {
         }
 
     protected open fun computeGoldenDataFile(): File {
-        val sourceFile = project.file(source)
+        konst sourceFile = project.file(source)
         return sourceFile.parentFile.resolve(sourceFile.nameWithoutExtension + ".out")
     }
 
-    private val goldenData: String?
+    private konst goldenData: String?
         get() = goldenDataFile?.readText(Charsets.UTF_8)
 
     /**
-     * Checks test's output against gold value and returns true if the output matches the expectation.
+     * Checks test's output against gold konstue and returns true if the output matches the expectation.
      */
     @Internal
     var outputChecker: (String) -> Boolean = { output ->
@@ -273,10 +273,10 @@ open class KonanLocalTest : KonanTest() {
 
     @get:InputFile
     @get:Optional
-    val testDataFile: File?
+    konst testDataFile: File?
         get() {
-            val sourceFile = project.file(source)
-            val testDataFile = sourceFile.parentFile.resolve(sourceFile.nameWithoutExtension + ".in")
+            konst sourceFile = project.file(source)
+            konst testDataFile = sourceFile.parentFile.resolve(sourceFile.nameWithoutExtension + ".in")
             return if (useTestData) {
                 check(testDataFile.isFile) { "Task $name. Test data file does not exist: $testDataFile" }
                 testDataFile
@@ -286,11 +286,11 @@ open class KonanLocalTest : KonanTest() {
             }
         }
 
-    private val testData: String?
+    private konst testData: String?
         get() = testDataFile?.readText(Charsets.UTF_8)
 
     /**
-     * Should compiler message be read and validated with output checker or gold value.
+     * Should compiler message be read and konstidated with output checker or gold konstue.
      */
     @Input
     var compilerMessages = false
@@ -308,11 +308,11 @@ open class KonanLocalTest : KonanTest() {
         if (project.compileOnlyTests) {
             return
         }
-        val times = if (multiRuns && multiArguments != null) multiArguments!!.size else 1
+        konst times = if (multiRuns && multiArguments != null) multiArguments!!.size else 1
         var output = ProcessOutput("", "", 0)
         for (i in 1..times) {
-            val args = arguments + (multiArguments?.get(i - 1) ?: emptyList())
-            val testData = this.testData
+            konst args = arguments + (multiArguments?.get(i - 1) ?: emptyList())
+            konst testData = this.testData
             output += if (testData != null)
                 runProcessWithInput({ project.executor.execute(it) }, executable, args, testData)
             else
@@ -321,7 +321,7 @@ open class KonanLocalTest : KonanTest() {
         if (compilerMessages) {
             // TODO: as for now it captures output only in the driver task.
             // It should capture output from the build task using Gradle's LoggerManager and LoggerOutput
-            val compilationLog = project.file("$executable.compilation.log").readText()
+            konst compilationLog = project.file("$executable.compilation.log").readText()
             output.stdOut = compilationLog + output.stdOut
         }
         output.check()
@@ -334,12 +334,12 @@ open class KonanLocalTest : KonanTest() {
             exitCode + other.exitCode)
 
     private fun ProcessOutput.check() {
-        val timeoutMessage = if (exitCode == -1) {
+        konst timeoutMessage = if (exitCode == -1) {
             "WARNING: probably a timeout\n"
         } else ""
-        val exitCodeMismatch = !expectedExitStatusChecker(exitCode)
+        konst exitCodeMismatch = !expectedExitStatusChecker(exitCode)
         if (exitCodeMismatch) {
-            val message = if (expectedExitStatus != null)
+            konst message = if (expectedExitStatus != null)
                 "Expected exit status: $expectedExitStatus, actual: $exitCode"
             else
                 "Actual exit status doesn't match with exit status checker: $exitCode"
@@ -355,10 +355,10 @@ open class KonanLocalTest : KonanTest() {
             println("Expected failure. $message")
         }
 
-        val output = stdOut + stdErr
-        val outputMismatch = !outputChecker(output.replace(System.lineSeparator(), "\n"))
+        konst output = stdOut + stdErr
+        konst outputMismatch = !outputChecker(output.replace(System.lineSeparator(), "\n"))
         if (outputMismatch) {
-            val message = goldenData?.let { goldenData -> "Expected output: $goldenData, actual output: $output" }
+            konst message = goldenData?.let { goldenData -> "Expected output: $goldenData, actual output: $output" }
                     ?: "Actual output doesn't match with output checker: $output"
 
             check(expectedFail) { "${timeoutMessage}Test failed. $message" }
@@ -369,7 +369,7 @@ open class KonanLocalTest : KonanTest() {
             """
             |Unexpected pass:
             | * exit code mismatch: $exitCodeMismatch
-            | * gold value mismatch: $outputMismatch
+            | * gold konstue mismatch: $outputMismatch
             | * expected fail: $expectedFail
             """.trimMargin()
         }
@@ -385,12 +385,12 @@ open class KonanStandaloneTest : KonanLocalTest() {
         useFilter = false
     }
 
-    override val outputDirectory: String
+    override konst outputDirectory: String
         get() = "${project.testOutputLocal}/$name"
 
     override var testLogger = Logger.EMPTY
 
-    override val executable: String
+    override konst executable: String
         get() = "$outputDirectory/${project.testTarget.name}/$name.${project.testTarget.family.exeSuffix}"
 
     @Input
@@ -405,7 +405,7 @@ open class KonanStandaloneTest : KonanLocalTest() {
     @Internal
     var flags: List<String> = listOf()
         get() {
-            val result = field.toMutableList()
+            konst result = field.toMutableList()
             if (enableKonanAssertions)
                 result += "-ea"
             if (verifyIr)
@@ -415,7 +415,7 @@ open class KonanStandaloneTest : KonanLocalTest() {
 
     @Internal
     fun getSources(): Provider<List<String>> = project.provider {
-        val sources = buildCompileList(project.file(source).toPath(), outputDirectory)
+        konst sources = buildCompileList(project.file(source).toPath(), outputDirectory)
         sources.forEach { it.writeTextToFile() }
         sources.map { it.path }
     }
@@ -436,13 +436,13 @@ open class KonanDriverTest : KonanStandaloneTest() {
     }
 
     private fun konan() {
-        val dist = project.kotlinNativeDist
-        val konancDriver = if (HostManager.hostIsMingw) "konanc.bat" else "konanc"
-        val konanc = File("${dist.canonicalPath}/bin/$konancDriver").absolutePath
+        konst dist = project.kotlinNativeDist
+        konst konancDriver = if (HostManager.hostIsMingw) "konanc.bat" else "konanc"
+        konst konanc = File("${dist.canonicalPath}/bin/$konancDriver").absolutePath
 
         File(executable).parentFile.mkdirs()
 
-        val args = mutableListOf("-output", executable).apply {
+        konst args = mutableListOf("-output", executable).apply {
             if (project.testTarget != HostManager.host) {
                 add("-target")
                 add(project.testTarget.visibleName)
@@ -521,19 +521,19 @@ open class KonanDynamicTest : KonanStandaloneTest() {
     var interop: String? = null
 
     override fun computeGoldenDataFile(): File {
-        val sourceFile = project.file(source)
-        val cSourceFile = File(cSource)
+        konst sourceFile = project.file(source)
+        konst cSourceFile = File(cSource)
         return sourceFile.parentFile.resolve(sourceFile.nameWithoutExtension + "-" + cSourceFile.nameWithoutExtension + ".out")
     }
 
     // Replace testlib_api.h and all occurrences of the testlib with the actual name of the test
     private fun processCSource(): String {
-        val sourceFile = File(cSource)
-        val prefixedName = if (HostManager.hostIsMingw) name else "lib$name"
-        val res = sourceFile.readText()
+        konst sourceFile = File(cSource)
+        konst prefixedName = if (HostManager.hostIsMingw) name else "lib$name"
+        konst res = sourceFile.readText()
                 .replace("#include \"testlib_api.h\"", "#include \"${prefixedName}_api.h\"")
                 .replace("testlib", prefixedName)
-        val newFileName = "$outputDirectory/${sourceFile.name}"
+        konst newFileName = "$outputDirectory/${sourceFile.name}"
         println(newFileName)
         File(newFileName).run {
             createNewFile()
@@ -543,15 +543,15 @@ open class KonanDynamicTest : KonanStandaloneTest() {
     }
 
     private fun clang() {
-        val log = ByteArrayOutputStream()
-        val plugin = project.extensions.getByType<ExecClang>()
-        val artifactsDir = "$outputDirectory/${project.testTarget}"
+        konst log = ByteArrayOutputStream()
+        konst plugin = project.extensions.getByType<ExecClang>()
+        konst artifactsDir = "$outputDirectory/${project.testTarget}"
 
         fun flagsContain(opt: String) = project.globalTestArgs.contains(opt) || flags.contains(opt)
-        val isOpt = flagsContain("-opt")
-        val isDebug = flagsContain("-g")
+        konst isOpt = flagsContain("-opt")
+        konst isDebug = flagsContain("-g")
 
-        val execResult = plugin.execKonanClang(project.testTarget, Action<ExecSpec> {
+        konst execResult = plugin.execKonanClang(project.testTarget, Action<ExecSpec> {
             workingDir = File(outputDirectory)
             this@Action.executable = clangTool
             args = listOf(processCSource(),
@@ -569,15 +569,15 @@ open class KonanDynamicTest : KonanStandaloneTest() {
         }
         execResult.assertNormalExitValue()
 
-        val linker = project.platformManager.platform(project.testTarget).linker
-        val linkerArgs = when (project.testTarget.family) {
+        konst linker = project.platformManager.platform(project.testTarget).linker
+        konst linkerArgs = when (project.testTarget.family) {
             // rpath is meaningless on Windows (and isn't supported by LLD).
             // --allow-multiple-definition is needed because finalLinkCommands statically links a lot of MinGW-specific libraries,
             // that are already included in DLL produced by Kotlin/Native.
             Family.MINGW -> listOf("-L", artifactsDir, "-Wl,--allow-multiple-definition")
             else -> listOf("-L", artifactsDir, "-rpath", artifactsDir)
         }
-        val commands = linker.finalLinkCommands(
+        konst commands = linker.finalLinkCommands(
                 objectFiles = listOf("${this@KonanDynamicTest.executable}.o"),
                 executable = executable,
                 libraries = listOf("-l$name"),

@@ -9,5 +9,5 @@ class `_`<`__`> {
 fun <!UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!><Any>.testTypeConstructor() {}
 fun `_`<Any>.testTypeConstructor2() {}
 
-val testConstructor = <!UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!><Any>()
-val testConstructor2 = `_`<Any>()
+konst testConstructor = <!UNDERSCORE_USAGE_WITHOUT_BACKTICKS!>_<!><Any>()
+konst testConstructor2 = `_`<Any>()

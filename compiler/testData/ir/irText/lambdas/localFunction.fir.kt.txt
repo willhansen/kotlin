@@ -2,7 +2,7 @@ fun outer() {
   var x: Int = 0
   local fun local() {
     { // BLOCK
-      val <unary>: Int = x
+      konst <unary>: Int = x
       x = <unary>.inc()
       <unary>
     } /*~> Unit */

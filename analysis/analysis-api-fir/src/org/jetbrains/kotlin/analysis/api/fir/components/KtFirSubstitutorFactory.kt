@@ -15,13 +15,13 @@ import org.jetbrains.kotlin.analysis.api.types.KtSubstitutor
 import org.jetbrains.kotlin.fir.resolve.substitution.ConeSubstitutorByMap
 
 internal class KtFirSubstitutorFactory(
-    override val analysisSession: KtFirAnalysisSession
+    override konst analysisSession: KtFirAnalysisSession
 ) : KtSubstitutorFactory(), KtFirAnalysisSessionComponent {
 
     override fun buildSubstitutor(builder: KtSubstitutorBuilder): KtSubstitutor {
         if (builder.mappings.isEmpty()) return KtSubstitutor.Empty(token)
 
-        val firSubstitution = buildMap {
+        konst firSubstitution = buildMap {
             builder.mappings.forEach { (ktTypeParameterSymbol, ktType) ->
                 check(ktTypeParameterSymbol is KtFirTypeParameterSymbol)
                 check(ktType is KtFirType)
@@ -29,7 +29,7 @@ internal class KtFirSubstitutorFactory(
             }
         }
 
-        val coneSubstitutor = ConeSubstitutorByMap(firSubstitution, analysisSession.useSiteSession)
+        konst coneSubstitutor = ConeSubstitutorByMap(firSubstitution, analysisSession.useSiteSession)
         return KtFirMapBackedSubstitutor(coneSubstitutor, analysisSession.firSymbolBuilder)
     }
 }

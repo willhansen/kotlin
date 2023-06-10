@@ -23,10 +23,10 @@ fun testPhrase(o: Any): String {
 }
 
 fun box(): String {
-    val b = CB()
-    val b2 = CB2()
-    val d = CD()
-    val e = object : E {
+    konst b = CB()
+    konst b2 = CB2()
+    konst d = CD()
+    konst e = object : E {
     }
 
     if (testPhrase(b) != "YYNNN") return "bad b, it: ${testPhrase(b)}"

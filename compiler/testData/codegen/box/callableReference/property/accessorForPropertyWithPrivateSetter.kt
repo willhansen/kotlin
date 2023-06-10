@@ -3,7 +3,7 @@
 import a.A
 
 class B {
-    fun getValue() = sequenceOf(A()).map(A::value).first()
+    fun getValue() = sequenceOf(A()).map(A::konstue).first()
 }
 
 fun box() = B().getValue()
@@ -12,6 +12,6 @@ fun box() = B().getValue()
 package a
 
 class A {
-    var value: String = "OK"
+    var konstue: String = "OK"
         private set
 }

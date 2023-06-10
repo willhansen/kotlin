@@ -11,8 +11,8 @@ fun <T : Collection<*>> sumIndices(c: T): Int {
 }
 
 fun box(): String {
-    val list = listOf(0, 0, 0, 0)
-    val sum = sumIndices(list)
+    konst list = listOf(0, 0, 0, 0)
+    konst sum = sumIndices(list)
     assertEquals(6, sum)
 
     return "OK"

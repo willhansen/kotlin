@@ -5,7 +5,7 @@ class C {
 }
 
 fun box(): String? {
-    val c: C? = C()
-    val arrayList = arrayOf(c?.calc(), "")
+    konst c: C? = C()
+    konst arrayList = arrayOf(c?.calc(), "")
     return arrayList[0]
 }

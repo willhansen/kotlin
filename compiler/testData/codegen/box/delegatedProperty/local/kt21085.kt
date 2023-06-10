@@ -1,12 +1,12 @@
-class Delegate(val value: String) {
-    operator fun getValue(thisRef: Any?, kProperty: Any?) = value
+class Delegate(konst konstue: String) {
+    operator fun getValue(thisRef: Any?, kProperty: Any?) = konstue
 }
 
 fun box(): String {
-    val x by Delegate("O")
+    konst x by Delegate("O")
 
-    class Local(val y: String) {
-        val fn = { x + y }
+    class Local(konst y: String) {
+        konst fn = { x + y }
     }
 
     return Local("K").fn()

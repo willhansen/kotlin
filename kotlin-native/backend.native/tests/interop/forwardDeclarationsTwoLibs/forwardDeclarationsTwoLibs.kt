@@ -54,17 +54,17 @@ fun main() {
     checkSubtype2<cForwardDeclarationsTwoLibs1.StructDefinedDefined, CStructVar>()
     checkSubtype2<cForwardDeclarationsTwoLibs2.StructDefinedDefined, CStructVar>()
 
-    val undeclaredDeclared: StructUndeclaredDeclared? = null
-    val undeclaredDefined: StructUndeclaredDefined? = null
-    val declaredUndeclared: StructDeclaredUndeclared? = null
-    val declaredDeclared: StructDeclaredDeclared? = null
-    val cnamesDeclaredDefined: cnames.structs.StructDeclaredDefined? = null
-    val declaredDefined: StructDeclaredDefined? = null
-    val definedUndeclared: StructDefinedUndeclared? = null
-    val cnamesDefinedDeclared: cnames.structs.StructDefinedDeclared? = null
-    val definedDeclared: StructDefinedDeclared? = null
-    val definedDefined1: cForwardDeclarationsTwoLibs1.StructDefinedDefined? = null
-    val definedDefined2: cForwardDeclarationsTwoLibs2.StructDefinedDefined? = null
+    konst undeclaredDeclared: StructUndeclaredDeclared? = null
+    konst undeclaredDefined: StructUndeclaredDefined? = null
+    konst declaredUndeclared: StructDeclaredUndeclared? = null
+    konst declaredDeclared: StructDeclaredDeclared? = null
+    konst cnamesDeclaredDefined: cnames.structs.StructDeclaredDefined? = null
+    konst declaredDefined: StructDeclaredDefined? = null
+    konst definedUndeclared: StructDefinedUndeclared? = null
+    konst cnamesDefinedDeclared: cnames.structs.StructDefinedDeclared? = null
+    konst definedDeclared: StructDefinedDeclared? = null
+    konst definedDefined1: cForwardDeclarationsTwoLibs1.StructDefinedDefined? = null
+    konst definedDefined2: cForwardDeclarationsTwoLibs2.StructDefinedDefined? = null
 
     assertEquals(1, checkDifferentTypes(undeclaredDeclared))
     assertEquals(2, checkDifferentTypes(undeclaredDefined))

@@ -30,8 +30,8 @@ abstract class KtConstructorElementType<T : KtConstructor<T>>(
     protected abstract fun isDelegatedCallToThis(constructor: T): Boolean
 
     override fun createStub(psi: T, parentStub: StubElement<*>): KotlinConstructorStub<T> {
-        val hasBody = psi.hasBody()
-        val isDelegatedCallToThis = isDelegatedCallToThis(psi)
+        konst hasBody = psi.hasBody()
+        konst isDelegatedCallToThis = isDelegatedCallToThis(psi)
         return newStub(parentStub, StringRef.fromString(psi.name), hasBody, isDelegatedCallToThis)
     }
 
@@ -44,9 +44,9 @@ abstract class KtConstructorElementType<T : KtConstructor<T>>(
 
     @Throws(IOException::class)
     override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>): KotlinConstructorStub<T> {
-        val name = dataStream.readName()
-        val hasBody = dataStream.readBoolean()
-        val isDelegatedCallToThis = dataStream.readBoolean()
+        konst name = dataStream.readName()
+        konst hasBody = dataStream.readBoolean()
+        konst isDelegatedCallToThis = dataStream.readBoolean()
         return newStub(parentStub, name, hasBody, isDelegatedCallToThis)
     }
 

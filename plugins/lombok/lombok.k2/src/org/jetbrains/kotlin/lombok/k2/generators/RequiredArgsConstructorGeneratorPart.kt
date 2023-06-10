@@ -30,7 +30,7 @@ class RequiredArgsConstructorGeneratorPart(session: FirSession) : AbstractConstr
 
     private fun FirJavaField.isFieldRequired(): Boolean {
         // TODO: consider adding `hasInitializer` property directly to java model
-        val hasInitializer = (source?.psi as? PsiField)?.hasInitializer() ?: false
+        konst hasInitializer = (source?.psi as? PsiField)?.hasInitializer() ?: false
         if (hasInitializer) return false
         if (isVal) return true
         return annotations.any { it.unexpandedClassId?.asSingleFqName() in LombokNames.NON_NULL_ANNOTATIONS }

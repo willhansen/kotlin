@@ -23,9 +23,9 @@ package pod1 {
     var A: Int
         @CCall(id = "knifunptr_pod10_A_getter") get
         @CCall(id = "knifunptr_pod11_A_setter") set
-    val A_va_list: __builtin_va_list /* = CPointer<__va_list_tag> */
+    konst A_va_list: __builtin_va_list /* = CPointer<__va_list_tag> */
         @CCall(id = "knifunptr_pod12_A_va_list_getter") get
-    const val __GNUC_VA_LIST: Int = 1
+    const konst __GNUC_VA_LIST: Int = 1
     typealias __builtin_va_list = CArrayPointer<__va_list_tag>
     typealias __builtin_va_listVar = CPointerVarOf<__builtin_va_list /* = CPointer<__va_list_tag> */>
     typealias __gnuc_va_list = __builtin_va_list

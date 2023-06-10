@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
  */
 @Suppress("DEPRECATION")
 class KotlinJsOptionsCompat(
-    private val task: () -> Kotlin2JsCompile,
-    override val options: KotlinJsCompilerOptions
+    private konst task: () -> Kotlin2JsCompile,
+    override konst options: KotlinJsCompilerOptions
 ) : KotlinJsOptions {
     override var freeCompilerArgs: List<String>
         get() {
-            val executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
+            konst executionTimeFreeCompilerArgs = task().executionTimeFreeCompilerArgs
             return if (!isTaskExecuting) {
                 options.freeCompilerArgs.get()
             } else if (executionTimeFreeCompilerArgs != null) {
@@ -30,13 +30,13 @@ class KotlinJsOptionsCompat(
             }
         }
 
-        set(value) = if (isTaskExecuting) {
-            task().nagUserFreeArgsModifiedOnExecution(value)
-            task().executionTimeFreeCompilerArgs = value
+        set(konstue) = if (isTaskExecuting) {
+            task().nagUserFreeArgsModifiedOnExecution(konstue)
+            task().executionTimeFreeCompilerArgs = konstue
         } else {
-            options.freeCompilerArgs.set(value)
+            options.freeCompilerArgs.set(konstue)
         }
 
-    private val isTaskExecuting: Boolean
+    private konst isTaskExecuting: Boolean
         get() = task().state.executing
 }

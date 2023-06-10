@@ -12,7 +12,7 @@ public class W {
 package main1
 import test.W
 
-val W: W = W()
+konst W: W = W()
 
 fun main() {
     W.foo()

@@ -4,20 +4,20 @@
 package kt456
 
 class A() {
-    val i: Int
+    konst i: Int
     get() : Int {  //no error
     <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 }
 
 //more tests
 class B() {
-    val i: Int
+    konst i: Int
     get() {  //no error
     <!NO_RETURN_IN_FUNCTION_WITH_BLOCK_BODY!>}<!>
 }
 
 class C() {
-    val i : Int
+    konst i : Int
     get() : Int {
         try {
             doSmth()

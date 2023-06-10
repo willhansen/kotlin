@@ -23,7 +23,7 @@ class MatchResultTest2 {
 
     @Test fun testErrorConditions2() {
         // Test match cursors in absence of a match
-        val regex = Regex("(foo[0-9])(bar[a-z])")
+        konst regex = Regex("(foo[0-9])(bar[a-z])")
         var result = regex.find("foo1barzfoo2baryfoozbar5")
 
         assertTrue(result != null)
@@ -103,10 +103,10 @@ class MatchResultTest2 {
  * Regression test for HARMONY-997
  */
     @Test fun testReplacementBackSlash() {
-        val str = "replace me"
-        val replacedString = "me"
-        val substitutionString = "\\"
-        val regex = Regex(replacedString)
+        konst str = "replace me"
+        konst replacedString = "me"
+        konst substitutionString = "\\"
+        konst regex = Regex(replacedString)
         try {
             regex.replace(str, substitutionString)
             fail("IllegalArgumentException should be thrown")

@@ -11,11 +11,11 @@ import org.jetbrains.kotlin.utils.DescriptionAware
 import java.util.*
 
 enum class LanguageFeature(
-    val sinceVersion: LanguageVersion?,
-    val sinceApiVersion: ApiVersion = ApiVersion.KOTLIN_1_0,
-    val hintUrl: String? = null,
-    internal val isEnabledWithWarning: Boolean = false,
-    val kind: Kind = OTHER // NB: default value OTHER doesn't force pre-releaseness (see KDoc)
+    konst sinceVersion: LanguageVersion?,
+    konst sinceApiVersion: ApiVersion = ApiVersion.KOTLIN_1_0,
+    konst hintUrl: String? = null,
+    internal konst isEnabledWithWarning: Boolean = false,
+    konst kind: Kind = OTHER // NB: default konstue OTHER doesn't force pre-releaseness (see KDoc)
 ) {
     // Note: names of these entries are also used in diagnostic tests and in user-visible messages (see presentableText below)
 
@@ -215,7 +215,7 @@ enum class LanguageFeature(
     ProhibitNonExhaustiveWhenOnAlgebraicTypes(KOTLIN_1_7, kind = BUG_FIX),
     UseBuilderInferenceWithoutAnnotation(KOTLIN_1_7),
     ProhibitSmartcastsOnPropertyFromAlienBaseClass(KOTLIN_1_7, kind = BUG_FIX),
-    ProhibitInvalidCharsInNativeIdentifiers(KOTLIN_1_7, kind = BUG_FIX),
+    ProhibitInkonstidCharsInNativeIdentifiers(KOTLIN_1_7, kind = BUG_FIX),
     DefinitelyNonNullableTypes(KOTLIN_1_7),
     ProhibitSimplificationOfNonTrivialConstBooleanExpressions(KOTLIN_1_7),
     SafeCallsAreAlwaysNullable(KOTLIN_1_7),
@@ -333,7 +333,7 @@ enum class LanguageFeature(
     ProhibitComparisonOfIncompatibleClasses(sinceVersion = null, kind = BUG_FIX),
     ExplicitBackingFields(sinceVersion = null, kind = UNSTABLE_FEATURE),
     FunctionalTypeWithExtensionAsSupertype(sinceVersion = null),
-    JsAllowInvalidCharsIdentifiersEscaping(sinceVersion = null, kind = UNSTABLE_FEATURE),
+    JsAllowInkonstidCharsIdentifiersEscaping(sinceVersion = null, kind = UNSTABLE_FEATURE),
     JsAllowValueClassesInExternals(sinceVersion = null, kind = OTHER),
     ContextReceivers(sinceVersion = null),
     ValueClasses(sinceVersion = null, kind = UNSTABLE_FEATURE),
@@ -346,7 +346,7 @@ enum class LanguageFeature(
     ContractSyntaxV2(sinceVersion = null, kind = UNSTABLE_FEATURE), // KT-56127
     ImplicitSignedToUnsignedIntegerConversion(sinceVersion = null), // KT-56583
     ForbidInferringTypeVariablesIntoEmptyIntersection(sinceVersion = null, kind = BUG_FIX), // KT-51221
-    IntrinsicConstEvaluation(sinceVersion = null, kind = UNSTABLE_FEATURE), // KT-49303
+    IntrinsicConstEkonstuation(sinceVersion = null, kind = UNSTABLE_FEATURE), // KT-49303
     DisableCheckingChangedProgressionsResolve(sinceVersion = null, kind = OTHER), // KT-49276
     ContextSensitiveEnumResolutionInWhen(sinceVersion = null, kind = UNSTABLE_FEATURE), // KT-52774
     ;
@@ -357,13 +357,13 @@ enum class LanguageFeature(
         }
     }
 
-    val presentableName: String
+    konst presentableName: String
         // E.g. "DestructuringLambdaParameters" -> ["Destructuring", "Lambda", "Parameters"] -> "destructuring lambda parameters"
         get() = name.split("(?<!^)(?=[A-Z])".toRegex()).joinToString(separator = " ", transform = String::lowercase)
 
-    val presentableText get() = if (hintUrl == null) presentableName else "$presentableName (See: $hintUrl)"
+    konst presentableText get() = if (hintUrl == null) presentableName else "$presentableName (See: $hintUrl)"
 
-    enum class State(override val description: String) : DescriptionAware {
+    enum class State(override konst description: String) : DescriptionAware {
         ENABLED("Enabled"),
         ENABLED_WITH_WARNING("Enabled with warning"),
         DISABLED("Disabled");
@@ -397,7 +397,7 @@ enum class LanguageFeature(
      *
      * NB: Currently, [enabledInProgressiveMode] makes sense only for features with [sinceVersion] > [LanguageVersion.LATEST_STABLE]
      */
-    enum class Kind(val enabledInProgressiveMode: Boolean, val forcesPreReleaseBinaries: Boolean) {
+    enum class Kind(konst enabledInProgressiveMode: Boolean, konst forcesPreReleaseBinaries: Boolean) {
         /**
          * Simple bug fix which just forbids some language constructions.
          * Rule of thumb: it turns "green code" into "red".
@@ -427,11 +427,11 @@ enum class LanguageFeature(
 
     companion object {
         @JvmStatic
-        fun fromString(str: String) = values().find { it.name == str }
+        fun fromString(str: String) = konstues().find { it.name == str }
     }
 }
 
-enum class LanguageVersion(val major: Int, val minor: Int) : DescriptionAware, LanguageOrApiVersion {
+enum class LanguageVersion(konst major: Int, konst minor: Int) : DescriptionAware, LanguageOrApiVersion {
     KOTLIN_1_0(1, 0),
     KOTLIN_1_1(1, 1),
     KOTLIN_1_2(1, 2),
@@ -447,25 +447,25 @@ enum class LanguageVersion(val major: Int, val minor: Int) : DescriptionAware, L
     KOTLIN_2_1(2, 1),
     ;
 
-    override val isStable: Boolean
+    override konst isStable: Boolean
         get() = this <= LATEST_STABLE
 
-    val usesK2: Boolean
+    konst usesK2: Boolean
         get() = this >= KOTLIN_2_0
 
-    override val isDeprecated: Boolean
+    override konst isDeprecated: Boolean
         get() = FIRST_SUPPORTED <= this && this < FIRST_NON_DEPRECATED
 
-    override val isUnsupported: Boolean
+    override konst isUnsupported: Boolean
         get() = this < FIRST_SUPPORTED
 
-    override val versionString: String = "$major.$minor"
+    override konst versionString: String = "$major.$minor"
 
     override fun toString() = versionString
 
     companion object {
         @JvmStatic
-        fun fromVersionString(str: String?) = values().find { it.versionString == str }
+        fun fromVersionString(str: String?) = konstues().find { it.versionString == str }
 
         @JvmStatic
         fun fromFullVersionString(str: String) =
@@ -477,29 +477,29 @@ enum class LanguageVersion(val major: Int, val minor: Int) : DescriptionAware, L
         // API:       UNSUPPORTED --> DEPRECATED ------> STABLE ---> EXPERIMENTAL
 
         @JvmField
-        val FIRST_API_SUPPORTED = KOTLIN_1_4
+        konst FIRST_API_SUPPORTED = KOTLIN_1_4
 
         @JvmField
-        val FIRST_SUPPORTED = KOTLIN_1_4
+        konst FIRST_SUPPORTED = KOTLIN_1_4
 
         @JvmField
-        val FIRST_NON_DEPRECATED = KOTLIN_1_6
+        konst FIRST_NON_DEPRECATED = KOTLIN_1_6
 
         @JvmField
-        val LATEST_STABLE = KOTLIN_1_9
+        konst LATEST_STABLE = KOTLIN_1_9
     }
 }
 
 interface LanguageOrApiVersion : DescriptionAware {
-    val versionString: String
+    konst versionString: String
 
-    val isStable: Boolean
+    konst isStable: Boolean
 
-    val isDeprecated: Boolean
+    konst isDeprecated: Boolean
 
-    val isUnsupported: Boolean
+    konst isUnsupported: Boolean
 
-    override val description: String
+    override konst description: String
         get() = when {
             !isStable -> "$versionString (experimental)"
             isDeprecated -> "$versionString (deprecated)"
@@ -526,24 +526,24 @@ interface LanguageVersionSettings {
 
     fun <T> getFlag(flag: AnalysisFlag<T>): T
 
-    val apiVersion: ApiVersion
+    konst apiVersion: ApiVersion
 
     // Please do not use this to enable/disable specific features/checks. Instead add a new LanguageFeature entry and call supportsFeature
-    val languageVersion: LanguageVersion
+    konst languageVersion: LanguageVersion
 
     companion object {
-        const val RESOURCE_NAME_TO_ALLOW_READING_FROM_ENVIRONMENT = "META-INF/allow-configuring-from-environment"
+        const konst RESOURCE_NAME_TO_ALLOW_READING_FROM_ENVIRONMENT = "META-INF/allow-configuring-from-environment"
     }
 }
 
 class LanguageVersionSettingsImpl @JvmOverloads constructor(
-    override val languageVersion: LanguageVersion,
-    override val apiVersion: ApiVersion,
+    override konst languageVersion: LanguageVersion,
+    override konst apiVersion: ApiVersion,
     analysisFlags: Map<AnalysisFlag<*>, Any?> = emptyMap(),
     specificFeatures: Map<LanguageFeature, LanguageFeature.State> = emptyMap()
 ) : LanguageVersionSettings {
-    private val analysisFlags: Map<AnalysisFlag<*>, *> = Collections.unmodifiableMap(analysisFlags)
-    private val specificFeatures: Map<LanguageFeature, LanguageFeature.State> = Collections.unmodifiableMap(specificFeatures)
+    private konst analysisFlags: Map<AnalysisFlag<*>, *> = Collections.unmodifiableMap(analysisFlags)
+    private konst specificFeatures: Map<LanguageFeature, LanguageFeature.State> = Collections.unmodifiableMap(specificFeatures)
 
     @Suppress("UNCHECKED_CAST")
     override fun <T> getFlag(flag: AnalysisFlag<T>): T = analysisFlags[flag] as T? ?: flag.defaultValue
@@ -551,7 +551,7 @@ class LanguageVersionSettingsImpl @JvmOverloads constructor(
     override fun getFeatureSupport(feature: LanguageFeature): LanguageFeature.State {
         specificFeatures[feature]?.let { return it }
 
-        val since = feature.sinceVersion
+        konst since = feature.sinceVersion
         if (since != null && languageVersion >= since && apiVersion >= feature.sinceApiVersion) {
             return if (feature.isEnabledWithWarning) LanguageFeature.State.ENABLED_WITH_WARNING else LanguageFeature.State.ENABLED
         }
@@ -562,15 +562,15 @@ class LanguageVersionSettingsImpl @JvmOverloads constructor(
     override fun toString() = buildString {
         append("Language = $languageVersion, API = $apiVersion")
         specificFeatures.entries.sortedBy { (feature, _) -> feature.ordinal }.forEach { (feature, state) ->
-            val char = when (state) {
+            konst char = when (state) {
                 LanguageFeature.State.ENABLED -> '+'
                 LanguageFeature.State.ENABLED_WITH_WARNING -> '~'
                 LanguageFeature.State.DISABLED -> '-'
             }
             append(" $char$feature")
         }
-        analysisFlags.entries.sortedBy { (flag, _) -> flag.toString() }.forEach { (flag, value) ->
-            append(" $flag:$value")
+        analysisFlags.entries.sortedBy { (flag, _) -> flag.toString() }.forEach { (flag, konstue) ->
+            append(" $flag:$konstue")
         }
     }
 
@@ -581,11 +581,11 @@ class LanguageVersionSettingsImpl @JvmOverloads constructor(
 
     companion object {
         @JvmField
-        val DEFAULT = LanguageVersionSettingsImpl(LanguageVersion.LATEST_STABLE, ApiVersion.LATEST_STABLE)
+        konst DEFAULT = LanguageVersionSettingsImpl(LanguageVersion.LATEST_STABLE, ApiVersion.LATEST_STABLE)
     }
 }
 
 fun LanguageFeature.forcesPreReleaseBinariesIfEnabled(): Boolean {
-    val isFeatureNotReleasedYet = sinceVersion?.isStable != true
+    konst isFeatureNotReleasedYet = sinceVersion?.isStable != true
     return isFeatureNotReleasedYet && kind.forcesPreReleaseBinaries
 }

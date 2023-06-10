@@ -12,7 +12,7 @@ class AuthenticationConfiguration(tokenExpiresIn: Long) {
 }
 
 fun box(): String {
-    val instance = AuthenticationConfiguration::class.java.newInstance()
+    konst instance = AuthenticationConfiguration::class.java.newInstance()
 
     if (instance.tokenExpiryDate != null) {
         return "Initializer invoked"

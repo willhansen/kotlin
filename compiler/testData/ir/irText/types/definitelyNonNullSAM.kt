@@ -16,17 +16,17 @@ fun <T> bar() {
 }
 
 interface I1<in T> {
-   val l: T.() -> Unit
+   konst l: T.() -> Unit
 }
 
 interface I2<in T> {
-    val sam: FIn<T>
+    konst sam: FIn<T>
 }
 
 abstract class AC<T> : I1<T>, I2<T> {
-    override val sam: FIn<T> = FIn(l)
+    override konst sam: FIn<T> = FIn(l)
 }
 
 abstract class AD<T> : AC<T & Any>() {
-    override val l: (T & Any).() -> Unit = { }
+    override konst l: (T & Any).() -> Unit = { }
 }

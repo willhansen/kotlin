@@ -5,4 +5,4 @@
 
 package org.jetbrains.kotlin.scripting
 
-const val KOTLIN_SCRIPTING_PLUGIN_ID = "kotlin.scripting"
+const konst KOTLIN_SCRIPTING_PLUGIN_ID = "kotlin.scripting"

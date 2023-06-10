@@ -1,19 +1,19 @@
 // FIR_IDENTICAL
 
-val ok = "OK"
-val ok2 = ok
-val ok3: String get() = "OK"
+konst ok = "OK"
+konst ok2 = ok
+konst ok3: String get() = "OK"
 
 fun test1() = ok
 
 fun test2(x: String) = x
 
 fun test3(): String {
-    val x = "OK"
+    konst x = "OK"
     return x
 }
 
 fun test4() = ok3
 
-val String.okext: String get() = "OK"
+konst String.okext: String get() = "OK"
 fun String.test5() = okext

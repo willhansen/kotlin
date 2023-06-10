@@ -33,9 +33,9 @@ import javax.xml.parsers.SAXParserFactory
 @WithMutedInDatabaseRunTest
 class KotlinVersionsTest : KtUsefulTestCase() {
     fun testVersionsAreConsistent() {
-        val versionPattern = "(\\d+)\\.(\\d+)(\\.(\\d+))?(?:-(\\p{Alpha}*\\p{Alnum}|[\\p{Alpha}-]*))?(?:-(\\d+))?".toRegex()
+        konst versionPattern = "(\\d+)\\.(\\d+)(\\.(\\d+))?(?:-(\\p{Alpha}*\\p{Alnum}|[\\p{Alpha}-]*))?(?:-(\\d+))?".toRegex()
 
-        data class Version(val major: Int, val minor: Int, val patch: Int?, val versionString: String, val source: String) {
+        data class Version(konst major: Int, konst minor: Int, konst patch: Int?, konst versionString: String, konst source: String) {
             fun isConsistentWith(other: Version): Boolean {
                 return major == other.major &&
                        minor == other.minor &&
@@ -44,15 +44,15 @@ class KotlinVersionsTest : KtUsefulTestCase() {
         }
 
         fun String.toVersionOrNull(source: String): Version? {
-            val result = versionPattern.matchEntire(this) ?: return null
-            val (major, minor, _, patch) = result.destructured
+            konst result = versionPattern.matchEntire(this) ?: return null
+            konst (major, minor, _, patch) = result.destructured
             return Version(major.toInt(), minor.toInt(), patch.takeUnless(String::isEmpty)?.toInt(), this, source)
         }
 
         fun String.toVersion(source: String): Version =
                 toVersionOrNull(source) ?: error("Version ($source) is in an unknown format: $this")
 
-        val versions = arrayListOf<Version>()
+        konst versions = arrayListOf<Version>()
 
         // This version is null in case of a local build when KotlinCompilerVersion.VERSION = "@snapshot@"
         versions.addIfNotNull(
@@ -86,15 +86,15 @@ class KotlinVersionsTest : KtUsefulTestCase() {
     }
 
     fun testMavenProjectVersionsAreEqual() {
-        data class Pom(val path: String, val version: String)
+        data class Pom(konst path: String, konst version: String)
 
-        val poms = arrayListOf<Pom>()
+        konst poms = arrayListOf<Pom>()
 
         FileUtil.processFilesRecursively(File("libraries")) { file ->
             if (file.name == "pom.xml" && file.toPath().none { it.fileName.toString() == "target" }) {
                 println(file.path)
                 if (loadValueFromPomXml(file.path, listOf("project", "parent", "artifactId")) == "kotlin-project") {
-                    val version = loadValueFromPomXml(file.path, listOf("project", "parent", "version"))
+                    konst version = loadValueFromPomXml(file.path, listOf("project", "parent", "version"))
                         ?: error("No version found in pom.xml at $file")
                     poms.add(Pom(file.path, version))
                 }
@@ -121,20 +121,20 @@ class KotlinVersionsTest : KtUsefulTestCase() {
         var result: String? = null
 
         SAXParserFactory.newInstance().newSAXParser().parse(File(filePath), object : DefaultHandler() {
-            val currentPath = mutableListOf<String>()
+            konst currentPath = mutableListOf<String>()
 
             override fun startElement(uri: String, localName: String, qName: String, attributes: Attributes) {
                 currentPath.add(qName)
             }
 
             override fun endElement(uri: String, localName: String, qName: String) {
-                assert(currentPath.lastOrNull() == qName) { "Invalid XML at $filePath: mismatched tag '$qName'" }
+                assert(currentPath.lastOrNull() == qName) { "Inkonstid XML at $filePath: mismatched tag '$qName'" }
                 currentPath.removeAt(currentPath.lastIndex)
             }
 
             override fun characters(ch: CharArray, start: Int, length: Int) {
                 if (currentPath == query) {
-                    assert(result == null) { "More than one value found for $query in $filePath" }
+                    assert(result == null) { "More than one konstue found for $query in $filePath" }
                     result = String(ch, start, length).trim()
                 }
             }

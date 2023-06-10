@@ -14,20 +14,20 @@ kotlin {
     js()
 
     sourceSets {
-        val commonMain by getting
+        konst commonMain by getting
 
-        val intermediate by creating {
+        konst intermediate by creating {
             dependsOn(commonMain)
             dependencies {
                 implementation("org.jetbrains.kotlin.tests:preHmppLibrary:0.1")
             }
         }
 
-        val jvmMain by getting {
+        konst jvmMain by getting {
             dependsOn(intermediate)
         }
 
-        val linuxX64Main by getting {
+        konst linuxX64Main by getting {
             dependsOn(intermediate)
         }
     }

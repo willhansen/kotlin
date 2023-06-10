@@ -10,12 +10,12 @@ repositories {
 }
 
 kotlin {
-    val xcf = XCFramework()
-    val otherXCFramework = XCFramework("other")
+    konst xcf = XCFramework()
+    konst otherXCFramework = XCFramework("other")
 
-    val iosX64 = iosX64()
-    val iosArm64 = iosArm64()
-    val iosSimulatorArm64 = iosSimulatorArm64()
+    konst iosX64 = iosX64()
+    konst iosArm64 = iosArm64()
+    konst iosSimulatorArm64 = iosSimulatorArm64()
 
     listOf(iosX64, iosArm64, iosSimulatorArm64).forEach { target ->
         target.binaries.framework {

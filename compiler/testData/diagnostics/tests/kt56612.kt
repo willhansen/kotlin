@@ -16,7 +16,7 @@ open class CallUsageNodeFlameGraphModel<Call : Any> : FlameGraphModel<CallTreeNo
 
 fun foo(model: FlameGraphModel<CallUsageNode>) {
     // K1: Ok
-    val afterCast = model as CallUsageNodeFlameGraphModel
+    konst afterCast = model as CallUsageNodeFlameGraphModel
 }
 
 internal typealias CallTreeNodeTypealias<K> = CallTreeNode<K>
@@ -25,5 +25,5 @@ open class CallUsageNodeFlameGraphModelWithTypealiasedSupertypeArgument<Call : A
 
 fun bar(model: FlameGraphModel<CallUsageNode>) {
     // K1: Ok
-    val afterCast = model as CallUsageNodeFlameGraphModelWithTypealiasedSupertypeArgument
+    konst afterCast = model as CallUsageNodeFlameGraphModelWithTypealiasedSupertypeArgument
 }

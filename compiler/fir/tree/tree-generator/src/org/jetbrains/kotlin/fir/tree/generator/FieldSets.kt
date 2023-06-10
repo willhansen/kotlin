@@ -16,14 +16,14 @@ import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.typeParameter
 import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.typeParameterRef
 import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.typeProjection
 import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.typeRef
-import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.valueParameter
+import org.jetbrains.kotlin.fir.tree.generator.FirTreeBuilder.konstueParameter
 import org.jetbrains.kotlin.fir.tree.generator.context.type
 import org.jetbrains.kotlin.fir.tree.generator.model.*
 
 object FieldSets {
-    val calleeReference by lazy { field("calleeReference", reference, withReplace = true) }
+    konst calleeReference by lazy { field("calleeReference", reference, withReplace = true) }
 
-    val receivers by lazy {
+    konst receivers by lazy {
         fieldSet(
             field("explicitReceiver", expression, nullable = true, withReplace = true).withTransform(),
             field("dispatchReceiver", expression, withReplace = true),
@@ -31,13 +31,13 @@ object FieldSets {
         )
     }
 
-    val typeArguments by lazy { fieldList("typeArguments", typeProjection, useMutableOrEmpty = true, withReplace = true) }
+    konst typeArguments by lazy { fieldList("typeArguments", typeProjection, useMutableOrEmpty = true, withReplace = true) }
 
-    val arguments by lazy { fieldList("arguments", expression) }
+    konst arguments by lazy { fieldList("arguments", expression) }
 
-    val declarations by lazy { fieldList(declaration.withArgs("E" to "*")) }
+    konst declarations by lazy { fieldList(declaration.withArgs("E" to "*")) }
 
-    val annotations by lazy {
+    konst annotations by lazy {
         fieldList(
             "annotations",
             annotation,
@@ -56,35 +56,35 @@ object FieldSets {
     fun body(nullable: Boolean = false, withReplace: Boolean = false) =
         field("body", block, nullable, withReplace = withReplace)
 
-    val returnTypeRef =field("returnTypeRef", typeRef)
+    konst returnTypeRef =field("returnTypeRef", typeRef)
 
-    val typeRefField = field(typeRef, withReplace = true)
+    konst typeRefField = field(typeRef, withReplace = true)
 
-    val valueParameters by lazy { fieldList(valueParameter) }
+    konst konstueParameters by lazy { fieldList(konstueParameter) }
 
-    val typeParameters by lazy { fieldList("typeParameters", typeParameter) }
+    konst typeParameters by lazy { fieldList("typeParameters", typeParameter) }
 
-    val typeParameterRefs by lazy { fieldList("typeParameters", typeParameterRef) }
+    konst typeParameterRefs by lazy { fieldList("typeParameters", typeParameterRef) }
 
-    val name by lazy { field(nameType) }
+    konst name by lazy { field(nameType) }
 
-    val initializer by lazy { field("initializer", expression, nullable = true) }
+    konst initializer by lazy { field("initializer", expression, nullable = true) }
 
     fun superTypeRefs(withReplace: Boolean = false) = fieldList("superTypeRefs", typeRef, withReplace)
 
-    val classKind by lazy { field(classKindType) }
+    konst classKind by lazy { field(classKindType) }
 
-    val status by lazy { field("status", declarationStatus, withReplace = true) }
+    konst status by lazy { field("status", declarationStatus, withReplace = true) }
 
-    val controlFlowGraphReferenceField by lazy { field("controlFlowGraphReference", controlFlowGraphReference, withReplace = true, nullable = true) }
+    konst controlFlowGraphReferenceField by lazy { field("controlFlowGraphReference", controlFlowGraphReference, withReplace = true, nullable = true) }
 
-    val visibility by lazy { field(visibilityType) }
+    konst visibility by lazy { field(visibilityType) }
 
-    val effectiveVisibility by lazy { field("effectiveVisibility", effectiveVisibilityType) }
+    konst effectiveVisibility by lazy { field("effectiveVisibility", effectiveVisibilityType) }
 
-    val modality by lazy { field(modalityType, nullable = true) }
+    konst modality by lazy { field(modalityType, nullable = true) }
 
-    val scopeProvider by lazy { field("scopeProvider", firScopeProviderType) }
+    konst scopeProvider by lazy { field("scopeProvider", firScopeProviderType) }
 
-    val smartcastStability by lazy { field(smartcastStabilityType) }
+    konst smartcastStability by lazy { field(smartcastStabilityType) }
 }

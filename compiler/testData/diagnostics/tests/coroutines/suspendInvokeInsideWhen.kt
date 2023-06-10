@@ -9,7 +9,7 @@ internal class Demo() {
 
 suspend fun demo(callback: suspend () -> Unit) = when {
     true -> {
-        val demo = Demo()
+        konst demo = Demo()
         demo("test") { callback() } // Before the fix: "Suspend function 'invoke' should be called only from a coroutine or another suspend function"
     }
     else -> TODO()

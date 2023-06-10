@@ -15,7 +15,7 @@
 // TODO: Generalize for uses outside this file.
 enum class ErrorPolicy {
   kIgnore,  // Ignore any errors. (i.e. unsafe mode)
-  kDefaultValue,  // Return the default value from the function when an error happens.
+  kDefaultValue,  // Return the default konstue from the function when an error happens.
   kThrow,  // Throw a Kotlin exception when an error happens. The exact exception is chosen by the callee.
   kTerminate,  // Terminate immediately when an error happens.
 };

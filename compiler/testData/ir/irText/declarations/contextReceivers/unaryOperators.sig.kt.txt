@@ -21,7 +21,7 @@ data class Result {
   // CHECK:
   //   Mangled name: Result{}i
   //   Public signature: /Result.i|5014384761142332495[0]
-  val i: Int
+  konst i: Int
     // CHECK JVM_IR:
     //   Mangled name: Result#<get-i>(){}kotlin.Int
     //   Public signature: /Result.i.<get-i>|-8784396159001927527[0]

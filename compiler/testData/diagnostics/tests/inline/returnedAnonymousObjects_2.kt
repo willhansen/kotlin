@@ -1,7 +1,7 @@
 // SKIP_TXT
 // ISSUE: KT-33917
 
-class Inv<T>(val value: T)
+class Inv<T>(konst konstue: T)
 
 private inline fun foo10(crossinline f: () -> Int) = object {
     fun bar(): Int = f()
@@ -65,17 +65,17 @@ fun test10(b: Boolean) {
 }
 
 fun test11(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo11.`<no name provided>`")!>foo11 { 1 }.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo11.`<no name provided>`")!>foo11 { 1 }.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo11.`<no name provided>`")!>foo11 { 2 }.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo11.`<no name provided>`")!>foo11 { 2 }.konstue<!>
     }
     x.bar()
 }
 
 fun test12(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo12.`<no name provided>`")!>foo12 { 1 }.value.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo12.`<no name provided>`")!>foo12 { 1 }.konstue.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo12.`<no name provided>`")!>foo12 { 2 }.value.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo12.`<no name provided>`")!>foo12 { 2 }.konstue.konstue<!>
     }
     x.bar()
 }
@@ -91,17 +91,17 @@ fun test20(b: Boolean) {
 }
 
 fun test21(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo21.`<no name provided>`")!>foo21 { 1 }.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo21.`<no name provided>`")!>foo21 { 1 }.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo21.`<no name provided>`")!>foo21 { 2 }.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo21.`<no name provided>`")!>foo21 { 2 }.konstue<!>
     }
     x.bar()
 }
 
 fun test22(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo22.`<no name provided>`")!>foo22 { 1 }.value.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo22.`<no name provided>`")!>foo22 { 1 }.konstue.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo22.`<no name provided>`")!>foo22 { 2 }.value.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo22.`<no name provided>`")!>foo22 { 2 }.konstue.konstue<!>
     }
     x.bar()
 }
@@ -117,17 +117,17 @@ fun test30(b: Boolean) {
 }
 
 fun test31(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo31.`<no name provided>`")!>foo31 { 1 }.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo31.`<no name provided>`")!>foo31 { 1 }.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo31.`<no name provided>`")!>foo31 { 2 }.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo31.`<no name provided>`")!>foo31 { 2 }.konstue<!>
     }
     x.bar()
 }
 
 fun test32(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo32.`<no name provided>`")!>foo32 { 1 }.value.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo32.`<no name provided>`")!>foo32 { 1 }.konstue.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo32.`<no name provided>`")!>foo32 { 2 }.value.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo32.`<no name provided>`")!>foo32 { 2 }.konstue.konstue<!>
     }
     x.bar()
 }
@@ -143,17 +143,17 @@ fun test40(b: Boolean) {
 }
 
 fun test41(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo41.`<no name provided>`")!>foo41 { 1 }.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo41.`<no name provided>`")!>foo41 { 1 }.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo41.`<no name provided>`")!>foo41 { 2 }.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo41.`<no name provided>`")!>foo41 { 2 }.konstue<!>
     }
     x.bar()
 }
 
 fun test42(b: Boolean) {
-    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo42.`<no name provided>`")!>foo42 { 1 }.value.value<!>
+    var x = <!DEBUG_INFO_EXPRESSION_TYPE("foo42.`<no name provided>`")!>foo42 { 1 }.konstue.konstue<!>
     if (b) {
-        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo42.`<no name provided>`")!>foo42 { 2 }.value.value<!>
+        x = <!DEBUG_INFO_EXPRESSION_TYPE("foo42.`<no name provided>`")!>foo42 { 2 }.konstue.konstue<!>
     }
     x.bar()
 }

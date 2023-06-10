@@ -33,10 +33,10 @@ import org.jetbrains.kotlin.fir.visitors.*
 class FirTryExpressionBuilder : FirAnnotationContainerBuilder, FirExpressionBuilder {
     override var source: KtSourceElement? = null
     override var typeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
     var calleeReference: FirReference = FirStubReference
     lateinit var tryBlock: FirBlock
-    val catches: MutableList<FirCatch> = mutableListOf()
+    konst catches: MutableList<FirCatch> = mutableListOf()
     var finallyBlock: FirBlock? = null
 
     override fun build(): FirTryExpression {

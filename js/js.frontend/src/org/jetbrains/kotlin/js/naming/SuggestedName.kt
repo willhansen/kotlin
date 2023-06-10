@@ -18,4 +18,4 @@ package org.jetbrains.kotlin.js.naming
 
 import org.jetbrains.kotlin.descriptors.DeclarationDescriptor
 
-class SuggestedName(val names: List<String>, val stable: Boolean, val descriptor: DeclarationDescriptor, val scope: DeclarationDescriptor)
+class SuggestedName(konst names: List<String>, konst stable: Boolean, konst descriptor: DeclarationDescriptor, konst scope: DeclarationDescriptor)

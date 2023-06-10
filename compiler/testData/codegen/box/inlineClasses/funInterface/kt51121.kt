@@ -9,11 +9,11 @@ fun interface F {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z(val value: String)
+konstue class Z(konst konstue: String)
 
 // FILE: 2.kt
 
-val f: F = F { value -> Z(value) }
+konst f: F = F { konstue -> Z(konstue) }
 
 fun box(): String =
-    f.foo("OK").value
+    f.foo("OK").konstue

@@ -4,7 +4,7 @@
 
 // FILE: inline.kt
 
-class MyDeferred<T>(val t: suspend () -> T) {
+class MyDeferred<T>(konst t: suspend () -> T) {
     suspend fun await() = t()
 }
 
@@ -17,7 +17,7 @@ inline fun <T, R> map(source: MyDeferred<T>, crossinline mapper: (T) -> R) =
 
 inline fun <T, R1, R2> map2(source: MyDeferred<T>, crossinline mapper1: (T) -> R1, crossinline mapper2: (R1) -> R2) =
     async {
-        val c = suspend {
+        konst c = suspend {
             mapper1(source.await())
         }
         mapper2(c())
@@ -25,8 +25,8 @@ inline fun <T, R1, R2> map2(source: MyDeferred<T>, crossinline mapper1: (T) -> R
 
 inline fun <T, R1, R2, R3> map3(source: MyDeferred<T>, crossinline mapper1: (T) -> R1, crossinline mapper2: (R1) -> R2, crossinline mapper3: (R2) -> R3) =
     async {
-        val c = suspend {
-            val c = suspend {
+        konst c = suspend {
+            konst c = suspend {
                 mapper1(source.await())
             }
             mapper2(c())
@@ -44,7 +44,7 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val source = MyDeferred { 1 }
+    konst source = MyDeferred { 1 }
     var result = -1
     builder {
         result = map(source) { it + 2 }.await()

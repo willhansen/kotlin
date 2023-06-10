@@ -21,14 +21,14 @@ class JsTranslationResultHandler(testServices: TestServices) : JsBinaryArtifactH
     override fun processAfterAllModules(someAssertionWasFailed: Boolean) {}
 
     override fun processModule(module: TestModule, info: BinaryArtifacts.Js) {
-        val result = (info.unwrap() as? BinaryArtifacts.Js.OldJsArtifact)?.translationResult
+        konst result = (info.unwrap() as? BinaryArtifacts.Js.OldJsArtifact)?.translationResult
             ?: throw IllegalArgumentException("JsTranslationResultHandler suppose to work only with old js backend")
 
         if (result !is TranslationResult.Success) {
-            val outputStream = ByteArrayOutputStream()
-            val collector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
+            konst outputStream = ByteArrayOutputStream()
+            konst collector = PrintingMessageCollector(PrintStream(outputStream), MessageRenderer.PLAIN_FULL_PATHS, true)
             AnalyzerWithCompilerReport.reportDiagnostics(result.diagnostics, collector, renderInternalDiagnosticName = false)
-            val messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
+            konst messages = outputStream.toByteArray().toString(Charset.forName("UTF-8"))
             throw AssertionError("The following errors occurred compiling test:\n$messages")
         }
     }

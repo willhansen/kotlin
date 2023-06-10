@@ -2,17 +2,17 @@
 enum class EnumWithOpenMembers {
     E1 {
         override fun foo() = 1
-        override val bar: String = "a"
+        override konst bar: String = "a"
     },
 
     E2 {
         <!OVERRIDING_FINAL_MEMBER!>override<!> fun f() = 3
-        <!OVERRIDING_FINAL_MEMBER!>override<!> val b = 4
+        <!OVERRIDING_FINAL_MEMBER!>override<!> konst b = 4
     };
 
     open fun foo() = 1
-    open val bar: String = ""
+    open konst bar: String = ""
 
     fun f() = 2
-    val b = 3
+    konst b = 3
 }

@@ -3,15 +3,15 @@
 import kotlin.test.*
 
 fun box(): String {
-    val intList = mutableListOf<Int>()
-    val intProgression = 7.toByte() downTo 1.toShort()
+    konst intList = mutableListOf<Int>()
+    konst intProgression = 7.toByte() downTo 1.toShort()
     for (i in intProgression step 2) {
         intList += i
     }
     assertEquals(listOf(7, 5, 3, 1), intList)
 
-    val longList = mutableListOf<Long>()
-    val longProgression = 7 downTo 1L
+    konst longList = mutableListOf<Long>()
+    konst longProgression = 7 downTo 1L
     for (i in longProgression step 2) {
         longList += i
     }

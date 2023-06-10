@@ -22,8 +22,8 @@ using namespace kotlin;
 // static
 mm::ExtraObjectData& mm::ExtraObjectData::Install(ObjHeader* object) noexcept {
     // TODO: Consider extracting initialization scheme with speculative load.
-    // `object->typeInfoOrMeta_` is assigned at most once. If we read some old value (i.e. not a meta object),
-    // we will fail at CAS below. If we read the new value, we will immediately return it.
+    // `object->typeInfoOrMeta_` is assigned at most once. If we read some old konstue (i.e. not a meta object),
+    // we will fail at CAS below. If we read the new konstue, we will immediately return it.
     TypeInfo* typeInfo = object->typeInfoOrMetaAcquire();
 
     if (auto* metaObject = ObjHeader::AsMetaObject(typeInfo)) {

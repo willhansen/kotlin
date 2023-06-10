@@ -12,8 +12,8 @@ class Timing {
 
     @Sample
     fun measureBlockTimeMillis() {
-        val numbers: List<Int>
-        val timeInMillis = measureTimeMillis {
+        konst numbers: List<Int>
+        konst timeInMillis = measureTimeMillis {
             numbers = buildList {
                 addAll(0..100)
                 shuffle()
@@ -29,8 +29,8 @@ class Timing {
     @Sample
     fun measureBlockNanoTime() {
         var sqrt = 0
-        val number = 1000
-        val timeInNanos = measureNanoTime {
+        konst number = 1000
+        konst timeInNanos = measureNanoTime {
             while (sqrt * sqrt < number) sqrt++
         }
         println("(The operation took $timeInNanos ns)")

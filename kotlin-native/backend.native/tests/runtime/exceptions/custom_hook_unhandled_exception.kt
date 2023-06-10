@@ -9,12 +9,12 @@ import kotlin.test.*
 import kotlin.native.concurrent.*
 
 fun main() {
-    val called = AtomicInt(0)
+    konst called = AtomicInt(0)
     setUnhandledExceptionHook({ _: Throwable ->
-        called.value = 1
+        called.konstue = 1
     }.freeze())
 
-    val exception = Error("some error")
+    konst exception = Error("some error")
     processUnhandledException(exception)
-    assertEquals(1, called.value)
+    assertEquals(1, called.konstue)
 }

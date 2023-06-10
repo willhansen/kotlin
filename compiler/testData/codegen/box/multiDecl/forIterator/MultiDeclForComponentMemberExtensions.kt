@@ -1,5 +1,5 @@
 // KJS_WITH_FULL_RUNTIME
-class C(val i: Int) {
+class C(konst i: Int) {
 }
 
 class M {
@@ -16,10 +16,10 @@ class M {
 }
 
 fun box(): String {
-  val l = ArrayList<C>()
+  konst l = ArrayList<C>()
   l.add(C(0))
   l.add(C(1))
   l.add(C(2))
-  val s = M().doTest(l)
+  konst s = M().doTest(l)
   return if (s == "1:2;2:3;3:4;") "OK" else "fail: $s"
 }

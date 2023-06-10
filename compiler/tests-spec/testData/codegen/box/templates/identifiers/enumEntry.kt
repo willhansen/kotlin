@@ -1,4 +1,4 @@
-enum class A(val x: Boolean) {
+enum class A(konst x: Boolean) {
     <!ELEMENT(1)!>(false),
     <!ELEMENT(2)!>(true);
 }

@@ -5,7 +5,7 @@ FILE: extensionReceiverInference.kt
         }
 
     }
-    public final val <X> R|X|.prop: R|kotlin/Int|
+    public final konst <X> R|X|.prop: R|kotlin/Int|
         public get(): R|kotlin/Int| {
             ^ Int(1)
         }

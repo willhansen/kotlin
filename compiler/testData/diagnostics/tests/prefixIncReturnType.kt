@@ -8,8 +8,8 @@ class ST : I()
 
 var topLevel: I
     get() = I()
-    set(value) {}
+    set(konstue) {}
 
 fun main() {
-    val x: ST = ++topLevel
+    konst x: ST = ++topLevel
 }

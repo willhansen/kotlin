@@ -10,15 +10,15 @@ import java.io.File
 import kotlin.reflect.KClass
 
 class CheckersConfigurator {
-    private val registeredAliases: MutableMap<KClass<*>, String> = LinkedHashMap()
-    private val additionalCheckers: MutableMap<String, String> = LinkedHashMap()
+    private konst registeredAliases: MutableMap<KClass<*>, String> = LinkedHashMap()
+    private konst additionalCheckers: MutableMap<String, String> = LinkedHashMap()
 
     inline fun <reified T : FirElement> alias(name: String) {
         alias(T::class, name)
     }
 
     fun alias(kClass: KClass<out FirElement>, name: String) {
-        val realName = name.takeIf { it.startsWith("Fir") } ?: "Fir$name"
+        konst realName = name.takeIf { it.startsWith("Fir") } ?: "Fir$name"
         registeredAliases[kClass] = realName
     }
 
@@ -37,6 +37,6 @@ fun generateCheckersComponents(
     abstractCheckerName: String,
     init: CheckersConfigurator.() -> Unit
 ) {
-    val configuration = CheckersConfigurator().apply(init).build()
+    konst configuration = CheckersConfigurator().apply(init).build()
     Generator(configuration, generationPath, packageName, abstractCheckerName).generate()
 }

@@ -4,18 +4,18 @@
 // CHECK_BYTECODE_LISTING
 
 interface AbstractPoint<T> {
-    val x: T
-    val y: T
+    konst x: T
+    konst y: T
 }
 
 @JvmInline
-value class MyDouble(val value: Double)
+konstue class MyDouble(konst konstue: Double)
 
-val Double.my
+konst Double.my
     get() = MyDouble(this)
 
 @JvmInline
-value class DPoint(override val x: MyDouble, override val y: MyDouble): AbstractPoint<MyDouble>
+konstue class DPoint(override konst x: MyDouble, override konst y: MyDouble): AbstractPoint<MyDouble>
 
 interface GenericMFVCHolder<T> {
     var p: T
@@ -32,42 +32,42 @@ interface ReifiedMFVCHolder {
     var p1: DPoint
 }
 
-data class DataClassException(val value: Any?): Exception()
+data class DataClassException(konst konstue: Any?): Exception()
 
 interface GenericMFVCHolderWithImpls<T> {
     var p: T
         get() = throw DataClassException(1)
-        set(value) = throw DataClassException(2 to value)
+        set(konstue) = throw DataClassException(2 to konstue)
 
     var p1: T
         get() = throw DataClassException(3)
-        set(value) = throw DataClassException(4 to value)
+        set(konstue) = throw DataClassException(4 to konstue)
 }
 
 interface GenericMFVCHolderWithMFVCUpperBoundWithImpls<T : DPoint> {
     var p: T
         get() = throw DataClassException(5)
-        set(value) = throw DataClassException(6 to value)
+        set(konstue) = throw DataClassException(6 to konstue)
 
     var p1: T
         get() = throw DataClassException(7)
-        set(value) = throw DataClassException(8 to value)
+        set(konstue) = throw DataClassException(8 to konstue)
 }
 
 interface ReifiedMFVCHolderWithImpls {
     var p: DPoint
         get() = throw DataClassException(9)
-        set(value) = throw DataClassException(10 to value)
+        set(konstue) = throw DataClassException(10 to konstue)
 
     var p1: DPoint
         get() = throw DataClassException(11)
-        set(value) = throw DataClassException(12 to value)
+        set(konstue) = throw DataClassException(12 to konstue)
 }
 
 class RealOverride(override var p: DPoint) : GenericMFVCHolder<DPoint>, ReifiedMFVCHolder, GenericMFVCHolderWithMFVCUpperBound<DPoint> {
     override var p1: DPoint
         get() = throw DataClassException(13)
-        set(value) = throw DataClassException(14 to value)
+        set(konstue) = throw DataClassException(14 to konstue)
 }
 
 class GenericFakeOverride : GenericMFVCHolderWithImpls<DPoint>
@@ -76,11 +76,11 @@ class GenericFakeOverrideWithMFVCUpperBound : GenericMFVCHolderWithMFVCUpperBoun
 
 
 @JvmInline
-value class GenericFakeOverrideMFVC(val field1: MyDouble, val field2: MyDouble) : GenericMFVCHolderWithImpls<DPoint>
+konstue class GenericFakeOverrideMFVC(konst field1: MyDouble, konst field2: MyDouble) : GenericMFVCHolderWithImpls<DPoint>
 @JvmInline
-value class ReifiedFakeOverrideMFVC(val field1: MyDouble, val field2: MyDouble) : ReifiedMFVCHolderWithImpls
+konstue class ReifiedFakeOverrideMFVC(konst field1: MyDouble, konst field2: MyDouble) : ReifiedMFVCHolderWithImpls
 @JvmInline
-value class GenericFakeOverrideMFVCWithMFVCUpperBound(val field1: MyDouble, val field2: MyDouble) : GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>
+konstue class GenericFakeOverrideMFVCWithMFVCUpperBound(konst field1: MyDouble, konst field2: MyDouble) : GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>
 
 
 interface SomePointInterface<T> {
@@ -100,64 +100,64 @@ interface SomePointInterfaceWithMFVCBound<T : DPoint> {
 }
 
 @JvmInline
-value class DPointWithInterface(val x: MyDouble, val y: MyDouble) : SomePointInterface<DPoint>, SomePointInterfaceWithMFVCBound<DPoint> {
+konstue class DPointWithInterface(konst x: MyDouble, konst y: MyDouble) : SomePointInterface<DPoint>, SomePointInterfaceWithMFVCBound<DPoint> {
     override var somethingGeneric: DPoint
         get() = throw DataClassException(15)
-        set(value) = throw DataClassException(16 to value)
+        set(konstue) = throw DataClassException(16 to konstue)
 
     override var somethingMFVC: DPoint
         get() = throw DataClassException(17)
-        set(value) = throw DataClassException(18 to value)
+        set(konstue) = throw DataClassException(18 to konstue)
 
     override var somethingRegular: Int
         get() = throw DataClassException(19)
-        set(value) = throw DataClassException(20 to value)
+        set(konstue) = throw DataClassException(20 to konstue)
 }
 
 
 interface AbstractSegment<T> {
-    val p1: T
-    val p2: T
+    konst p1: T
+    konst p2: T
 }
 
 @JvmInline
-value class DSegment(override val p1: DPoint, override val p2: DPoint): AbstractSegment<DPoint>
+konstue class DSegment(override konst p1: DPoint, override konst p2: DPoint): AbstractSegment<DPoint>
 
 fun <T> equal(expected: () -> T, actual: () -> T) {
-    val expectedResult = runCatching { expected() }
-    val actualResult = runCatching { actual() }
+    konst expectedResult = runCatching { expected() }
+    konst actualResult = runCatching { actual() }
     require(expectedResult == actualResult) { "Expected: $expectedResult\nActual: $actualResult" }
 }
 
 fun box(): String {
-    val dPoint = DPoint(1.0.my, 2.0.my)
+    konst dPoint = DPoint(1.0.my, 2.0.my)
 
-    val lam1: () -> DPoint = { throw DataClassException(1) }
-    val lam2: () -> Unit = { throw DataClassException(2 to dPoint) }
-    val lam3: () -> DPoint = { throw DataClassException(3) }
-    val lam4: () -> Unit = { throw DataClassException(4 to dPoint) }
-    val lam5: () -> DPoint = { throw DataClassException(5) }
-    val lam6: () -> Unit = { throw DataClassException(6 to dPoint) }
-    val lam7: () -> DPoint = { throw DataClassException(7) }
-    val lam8: () -> Unit = { throw DataClassException(8 to dPoint) }
-    val lam9: () -> DPoint = { throw DataClassException(9) }
-    val lam10: () -> Unit = { throw DataClassException(10 to dPoint) }
-    val lam11: () -> DPoint = { throw DataClassException(11) }
-    val lam12: () -> Unit = { throw DataClassException(12 to dPoint) }
-    val lam13: () -> DPoint = { throw DataClassException(13) }
-    val lam14: () -> Unit = { throw DataClassException(14 to dPoint) }
-    val lam15: () -> DPoint = { throw DataClassException(15) }
-    val lam16: () -> Unit = { throw DataClassException(16 to dPoint) }
-    val lam17: () -> DPoint = { throw DataClassException(17) }
-    val lam18: () -> Unit = { throw DataClassException(18 to dPoint) }
-    val lam19: () -> Int = { throw DataClassException(19) }
-    val lam20: () -> Unit = { throw DataClassException(20 to 1) }
-    val emptyLam = {}
-    val dPointLam = { dPoint }
-    val otherDPoint = DPoint(3.0.my, 4.0.my)
-    val otherDPointLam = { otherDPoint }
-    equal({ "DPoint(x=MyDouble(value=1.0), y=MyDouble(value=2.0))" }, { dPoint.toString() })
-    equal({ "DPoint(x=MyDouble(value=1.0), y=MyDouble(value=2.0))" }, { (dPoint as Any).toString() })
+    konst lam1: () -> DPoint = { throw DataClassException(1) }
+    konst lam2: () -> Unit = { throw DataClassException(2 to dPoint) }
+    konst lam3: () -> DPoint = { throw DataClassException(3) }
+    konst lam4: () -> Unit = { throw DataClassException(4 to dPoint) }
+    konst lam5: () -> DPoint = { throw DataClassException(5) }
+    konst lam6: () -> Unit = { throw DataClassException(6 to dPoint) }
+    konst lam7: () -> DPoint = { throw DataClassException(7) }
+    konst lam8: () -> Unit = { throw DataClassException(8 to dPoint) }
+    konst lam9: () -> DPoint = { throw DataClassException(9) }
+    konst lam10: () -> Unit = { throw DataClassException(10 to dPoint) }
+    konst lam11: () -> DPoint = { throw DataClassException(11) }
+    konst lam12: () -> Unit = { throw DataClassException(12 to dPoint) }
+    konst lam13: () -> DPoint = { throw DataClassException(13) }
+    konst lam14: () -> Unit = { throw DataClassException(14 to dPoint) }
+    konst lam15: () -> DPoint = { throw DataClassException(15) }
+    konst lam16: () -> Unit = { throw DataClassException(16 to dPoint) }
+    konst lam17: () -> DPoint = { throw DataClassException(17) }
+    konst lam18: () -> Unit = { throw DataClassException(18 to dPoint) }
+    konst lam19: () -> Int = { throw DataClassException(19) }
+    konst lam20: () -> Unit = { throw DataClassException(20 to 1) }
+    konst emptyLam = {}
+    konst dPointLam = { dPoint }
+    konst otherDPoint = DPoint(3.0.my, 4.0.my)
+    konst otherDPointLam = { otherDPoint }
+    equal({ "DPoint(x=MyDouble(konstue=1.0), y=MyDouble(konstue=2.0))" }, { dPoint.toString() })
+    equal({ "DPoint(x=MyDouble(konstue=1.0), y=MyDouble(konstue=2.0))" }, { (dPoint as Any).toString() })
 
     equal({ true }, { dPoint.equals(dPoint) })
     equal({ true }, { dPoint.equals(dPoint as Any) })
@@ -177,7 +177,7 @@ fun box(): String {
     equal({ 2.0.my }, { (dPoint as AbstractPoint<Double>).y })
 
 
-    val realOverride = RealOverride(dPoint)
+    konst realOverride = RealOverride(dPoint)
 
     equal(dPointLam, { realOverride.p })
     equal(dPointLam, { (realOverride as GenericMFVCHolder<DPoint>).p })
@@ -200,18 +200,18 @@ fun box(): String {
     equal(lam14, { (realOverride as GenericMFVCHolderWithMFVCUpperBound<DPoint>).p1 = dPoint })
 
 
-    val genericFakeOverride = GenericFakeOverride()
+    konst genericFakeOverride = GenericFakeOverride()
 
     equal(lam1, { genericFakeOverride.p })
     equal(lam1, { (genericFakeOverride as GenericMFVCHolderWithImpls<DPoint>).p })
     equal(lam3, { genericFakeOverride.p1 })
     equal(lam3, { (genericFakeOverride as GenericMFVCHolderWithImpls<DPoint>).p1 })
-    val reifiedFakeOverride = ReifiedFakeOverride()
+    konst reifiedFakeOverride = ReifiedFakeOverride()
     equal(lam9, { reifiedFakeOverride.p })
     equal(lam9, { (reifiedFakeOverride as ReifiedMFVCHolderWithImpls).p })
     equal(lam11, { reifiedFakeOverride.p1 })
     equal(lam11, { (reifiedFakeOverride as ReifiedMFVCHolderWithImpls).p1 })
-    val genericFakeOverrideWithMFVCUpperBound = GenericFakeOverrideWithMFVCUpperBound()
+    konst genericFakeOverrideWithMFVCUpperBound = GenericFakeOverrideWithMFVCUpperBound()
     equal(lam5, { genericFakeOverrideWithMFVCUpperBound.p })
     equal(lam5, { (genericFakeOverrideWithMFVCUpperBound as GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>).p })
     equal(lam7, { genericFakeOverrideWithMFVCUpperBound.p1 })
@@ -231,20 +231,20 @@ fun box(): String {
     equal(lam8, { (genericFakeOverrideWithMFVCUpperBound as GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>).p1 = dPoint })
 
 
-    val genericFakeOverrideMFVC = GenericFakeOverrideMFVC(1.0.my, 2.0.my)
+    konst genericFakeOverrideMFVC = GenericFakeOverrideMFVC(1.0.my, 2.0.my)
 
     equal(lam1, { genericFakeOverrideMFVC.p })
     equal(lam1, { (genericFakeOverrideMFVC as GenericMFVCHolderWithImpls<DPoint>).p })
     equal(lam3, { genericFakeOverrideMFVC.p1 })
     equal(lam3, { (genericFakeOverrideMFVC as GenericMFVCHolderWithImpls<DPoint>).p1 })
 
-    val reifiedFakeOverrideMFVC = ReifiedFakeOverrideMFVC(1.0.my, 2.0.my)
+    konst reifiedFakeOverrideMFVC = ReifiedFakeOverrideMFVC(1.0.my, 2.0.my)
     equal(lam9, { reifiedFakeOverrideMFVC.p })
     equal(lam9, { (reifiedFakeOverrideMFVC as ReifiedMFVCHolderWithImpls).p })
     equal(lam11, { reifiedFakeOverrideMFVC.p1 })
     equal(lam11, { (reifiedFakeOverrideMFVC as ReifiedMFVCHolderWithImpls).p1 })
 
-    val genericFakeOverrideMFVCWithMFVCUpperBound = GenericFakeOverrideMFVCWithMFVCUpperBound(1.0.my, 2.0.my)
+    konst genericFakeOverrideMFVCWithMFVCUpperBound = GenericFakeOverrideMFVCWithMFVCUpperBound(1.0.my, 2.0.my)
     equal(lam5, { genericFakeOverrideMFVCWithMFVCUpperBound.p })
     equal(lam5, { (genericFakeOverrideMFVCWithMFVCUpperBound as GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>).p })
     equal(lam7, { genericFakeOverrideMFVCWithMFVCUpperBound.p1 })
@@ -266,7 +266,7 @@ fun box(): String {
     equal(lam8, { (genericFakeOverrideMFVCWithMFVCUpperBound as GenericMFVCHolderWithMFVCUpperBoundWithImpls<DPoint>).p1 = dPoint })
 
 
-    val dPointWithInterface = DPointWithInterface(1.0.my, 2.0.my)
+    konst dPointWithInterface = DPointWithInterface(1.0.my, 2.0.my)
 
     equal(lam15, { dPointWithInterface.somethingGeneric })
     equal(lam15, { (dPointWithInterface as SomePointInterface<DPoint>).somethingGeneric })
@@ -291,7 +291,7 @@ fun box(): String {
     equal(lam18, { (dPointWithInterface as SomePointInterfaceWithMFVCBound<DPoint>).somethingMFVC = dPoint })
 
 
-    val dSegment = DSegment(dPoint, otherDPoint)
+    konst dSegment = DSegment(dPoint, otherDPoint)
 
     equal(dPointLam, { dSegment.p1 })
     equal(otherDPointLam, { dSegment.p2 })

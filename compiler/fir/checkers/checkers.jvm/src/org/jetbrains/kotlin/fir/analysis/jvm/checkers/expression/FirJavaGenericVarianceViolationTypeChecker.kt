@@ -48,21 +48,21 @@ import kotlin.math.min
 object FirJavaGenericVarianceViolationTypeChecker : FirFunctionCallChecker() {
 
     override fun check(expression: FirFunctionCall, context: CheckerContext, reporter: DiagnosticReporter) {
-        val calleeFunction = expression.calleeReference.toResolvedCallableSymbol() as? FirFunctionSymbol<*> ?: return
+        konst calleeFunction = expression.calleeReference.toResolvedCallableSymbol() as? FirFunctionSymbol<*> ?: return
         if (!calleeFunction.originalOrSelf().isJavaOrEnhancement) {
             return
         }
-        val argumentMapping = expression.resolvedArgumentMapping ?: return
-        val typeArgumentMap = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
+        konst argumentMapping = expression.resolvedArgumentMapping ?: return
+        konst typeArgumentMap = mutableMapOf<FirTypeParameterSymbol, ConeKotlinType>()
         for (i in 0 until min(expression.typeArguments.size, calleeFunction.typeParameterSymbols.size)) {
-            val type = (expression.typeArguments[i] as? FirTypeProjectionWithVariance)?.typeRef?.coneType
+            konst type = (expression.typeArguments[i] as? FirTypeProjectionWithVariance)?.typeRef?.coneType
             if (type != null) {
                 typeArgumentMap[calleeFunction.typeParameterSymbols[i]] = type
             }
         }
-        val typeParameterSubstitutor = substitutorByMap(typeArgumentMap, context.session)
+        konst typeParameterSubstitutor = substitutorByMap(typeArgumentMap, context.session)
         for ((arg, param) in argumentMapping) {
-            val expectedType = typeParameterSubstitutor.substituteOrSelf(param.returnTypeRef.coneType)
+            konst expectedType = typeParameterSubstitutor.substituteOrSelf(param.returnTypeRef.coneType)
 
             // optimization: if no arguments or flexibility, everything is OK
             if (expectedType !is ConeFlexibleType || expectedType.typeArguments.isEmpty()) continue
@@ -70,13 +70,13 @@ object FirJavaGenericVarianceViolationTypeChecker : FirFunctionCallChecker() {
             // Anything is acceptable for raw types
             if (expectedType is ConeRawType) continue
 
-            val argType = arg.typeRef.coneType
+            konst argType = arg.typeRef.coneType
 
-            val lowerBound = expectedType.lowerBound
-            val upperBound = expectedType.upperBound
-            val typeContext = context.session.typeContext
-            val lowerConstructor = lowerBound.typeConstructor(typeContext)
-            val upperConstructor = upperBound.typeConstructor(typeContext)
+            konst lowerBound = expectedType.lowerBound
+            konst upperBound = expectedType.upperBound
+            konst typeContext = context.session.typeContext
+            konst lowerConstructor = lowerBound.typeConstructor(typeContext)
+            konst upperConstructor = upperBound.typeConstructor(typeContext)
 
             // Use site variance projection is always the same for flexible types. So there is no need to check if declaration site is the
             // same.
@@ -106,10 +106,10 @@ object FirJavaGenericVarianceViolationTypeChecker : FirFunctionCallChecker() {
             // `MutableList<Captured<out String>>`. Obviously, a `MutableList<out String>` is not a subtype of `MutableList<Captured<out
             // String>>` because we have lost the identity of the captured type at this point: we no longer know that the captured type is
             // actually created because of type projection from `get`. Hence, to workaround this problem, we simply remove all the out
-            // projection and type capturing and compare the types after such erasure. This way, we won't incorrectly reject any valid code
-            // though we may accept some invalid code. But in presence of the unsound flexible types, we are allowing invalid code already.
-            val argTypeWithoutOutProjection = argType.removeOutProjection(isCovariant = true)
-            val lowerBoundWithoutCapturing = context.session.typeApproximator.approximateToSuperType(
+            // projection and type capturing and compare the types after such erasure. This way, we won't incorrectly reject any konstid code
+            // though we may accept some inkonstid code. But in presence of the unsound flexible types, we are allowing inkonstid code already.
+            konst argTypeWithoutOutProjection = argType.removeOutProjection(isCovariant = true)
+            konst lowerBoundWithoutCapturing = context.session.typeApproximator.approximateToSuperType(
                 lowerBound,
                 TypeApproximatorConfiguration.FinalApproximationAfterResolutionAndInference
             ) ?: lowerBound
@@ -193,7 +193,7 @@ object FirJavaGenericVarianceViolationTypeChecker : FirFunctionCallChecker() {
     ): Boolean {
         if (subTypeConstructor == superTypeConstructor) return true
         for (immediateSuperType in subTypeConstructor.supertypes()) {
-            val immediateSuperTypeConstructor = immediateSuperType.typeConstructor()
+            konst immediateSuperTypeConstructor = immediateSuperType.typeConstructor()
             if (superTypeConstructor == immediateSuperTypeConstructor) return true
             if (this@isTypeConstructorEqualOrSubClassOf.isTypeConstructorEqualOrSubClassOf(
                     immediateSuperTypeConstructor, superTypeConstructor

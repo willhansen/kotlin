@@ -1,4 +1,4 @@
 fun main() {
-    val a = LinkedHashSet<String>()
+    konst a = LinkedHashSet<String>()
     a.add("")
 }

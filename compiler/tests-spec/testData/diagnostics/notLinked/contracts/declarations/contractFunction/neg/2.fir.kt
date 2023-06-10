@@ -5,7 +5,7 @@ import kotlin.contracts.*
 
 // TESTCASE NUMBER: 1
 fun case_1() {
-    val fun_1 = fun(block: () -> Unit) {
+    konst fun_1 = fun(block: () -> Unit) {
         <!CONTRACT_NOT_ALLOWED!>contract<!> { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         return block()
     }
@@ -16,7 +16,7 @@ fun case_1() {
 
 // TESTCASE NUMBER: 2
 fun case_2() {
-    val lambda_1 = { block: () -> Unit ->
+    konst lambda_1 = { block: () -> Unit ->
         <!CONTRACT_NOT_ALLOWED!>contract<!> { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
         block()
     }

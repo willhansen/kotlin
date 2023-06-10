@@ -16,7 +16,7 @@ package kotlin.collections
  * The implementor is required to implement [entries] property, which should return read-only set of map entries.
  *
  * @param K the type of map keys. The map is invariant in its key type.
- * @param V the type of map values. The map is covariant in its value type.
+ * @param V the type of map konstues. The map is covariant in its konstue type.
  */
 @SinceKotlin("1.1")
 public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> {
@@ -25,16 +25,16 @@ public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> 
         return implFindEntry(key) != null
     }
 
-    override fun containsValue(value: @UnsafeVariance V): Boolean = entries.any { it.value == value }
+    override fun containsValue(konstue: @UnsafeVariance V): Boolean = entries.any { it.konstue == konstue }
 
     internal fun containsEntry(entry: Map.Entry<*, *>?): Boolean {
         // since entry comes from @UnsafeVariance parameters it can be virtually anything
         if (entry !is Map.Entry<*, *>) return false
-        val key = entry.key
-        val value = entry.value
-        val ourValue = get(key)
+        konst key = entry.key
+        konst konstue = entry.konstue
+        konst ourValue = get(key)
 
-        if (value != ourValue) {
+        if (konstue != ourValue) {
             return false
         }
 
@@ -60,18 +60,18 @@ public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> 
         return other.entries.all { containsEntry(it) }
     }
 
-    override operator fun get(key: K): V? = implFindEntry(key)?.value
+    override operator fun get(key: K): V? = implFindEntry(key)?.konstue
 
 
     /**
-     * Returns the hash code value for this map.
+     * Returns the hash code konstue for this map.
      *
      * It is the same as the hashCode of [entries] set.
      */
     override fun hashCode(): Int = entries.hashCode()
 
     override fun isEmpty(): Boolean = size == 0
-    override val size: Int get() = entries.size
+    override konst size: Int get() = entries.size
 
     /**
      * Returns a read-only [Set] of all keys in this map.
@@ -79,21 +79,21 @@ public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> 
      * Accessing this property first time creates a keys view from [entries].
      * All subsequent accesses just return the created instance.
      */
-    override val keys: Set<K>
+    override konst keys: Set<K>
         get() {
             if (_keys == null) {
                 _keys = object : AbstractSet<K>() {
                     override operator fun contains(element: K): Boolean = containsKey(element)
 
                     override operator fun iterator(): Iterator<K> {
-                        val entryIterator = entries.iterator()
+                        konst entryIterator = entries.iterator()
                         return object : Iterator<K> {
                             override fun hasNext(): Boolean = entryIterator.hasNext()
                             override fun next(): K = entryIterator.next().key
                         }
                     }
 
-                    override val size: Int get() = this@AbstractMap.size
+                    override konst size: Int get() = this@AbstractMap.size
                 }
             }
             return _keys!!
@@ -105,48 +105,48 @@ public abstract class AbstractMap<K, out V> protected constructor() : Map<K, V> 
 
     override fun toString(): String = entries.joinToString(", ", "{", "}") { toString(it) }
 
-    private fun toString(entry: Map.Entry<K, V>): String = toString(entry.key) + "=" + toString(entry.value)
+    private fun toString(entry: Map.Entry<K, V>): String = toString(entry.key) + "=" + toString(entry.konstue)
 
     private fun toString(o: Any?): String = if (o === this) "(this Map)" else o.toString()
 
     /**
-     * Returns a read-only [Collection] of all values in this map.
+     * Returns a read-only [Collection] of all konstues in this map.
      *
-     * Accessing this property first time creates a values view from [entries].
+     * Accessing this property first time creates a konstues view from [entries].
      * All subsequent accesses just return the created instance.
      */
-    override val values: Collection<V>
+    override konst konstues: Collection<V>
         get() {
-            if (_values == null) {
-                _values = object : AbstractCollection<V>() {
+            if (_konstues == null) {
+                _konstues = object : AbstractCollection<V>() {
                     override operator fun contains(element: @UnsafeVariance V): Boolean = containsValue(element)
 
                     override operator fun iterator(): Iterator<V> {
-                        val entryIterator = entries.iterator()
+                        konst entryIterator = entries.iterator()
                         return object : Iterator<V> {
                             override fun hasNext(): Boolean = entryIterator.hasNext()
-                            override fun next(): V = entryIterator.next().value
+                            override fun next(): V = entryIterator.next().konstue
                         }
                     }
 
-                    override val size: Int get() = this@AbstractMap.size
+                    override konst size: Int get() = this@AbstractMap.size
                 }
             }
-            return _values!!
+            return _konstues!!
         }
 
     @kotlin.concurrent.Volatile
-    private var _values: Collection<V>? = null
+    private var _konstues: Collection<V>? = null
 
     private fun implFindEntry(key: K): Map.Entry<K, V>? = entries.firstOrNull { it.key == key }
 
     internal companion object {
 
-        internal fun entryHashCode(e: Map.Entry<*, *>): Int = with(e) { (key?.hashCode() ?: 0) xor (value?.hashCode() ?: 0) }
-        internal fun entryToString(e: Map.Entry<*, *>): String = with(e) { "$key=$value" }
+        internal fun entryHashCode(e: Map.Entry<*, *>): Int = with(e) { (key?.hashCode() ?: 0) xor (konstue?.hashCode() ?: 0) }
+        internal fun entryToString(e: Map.Entry<*, *>): String = with(e) { "$key=$konstue" }
         internal fun entryEquals(e: Map.Entry<*, *>, other: Any?): Boolean {
             if (other !is Map.Entry<*, *>) return false
-            return e.key == other.key && e.value == other.value
+            return e.key == other.key && e.konstue == other.konstue
         }
     }
 }

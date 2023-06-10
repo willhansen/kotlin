@@ -11,30 +11,30 @@ plugins {
     `maven-publish`
 }
 
-val relocatedProtobuf by configurations.creating
-val relocatedProtobufSources by configurations.creating
+konst relocatedProtobuf by configurations.creating
+konst relocatedProtobufSources by configurations.creating
 
-val protobufVersion: String by rootProject.extra
-val outputJarPath = "$buildDir/libs/protobuf-lite-$protobufVersion.jar"
-val sourcesJarName = "protobuf-lite-$protobufVersion-sources.jar"
+konst protobufVersion: String by rootProject.extra
+konst outputJarPath = "$buildDir/libs/protobuf-lite-$protobufVersion.jar"
+konst sourcesJarName = "protobuf-lite-$protobufVersion-sources.jar"
 
 dependencies {
     relocatedProtobuf(project(":protobuf-relocated"))
 }
 
-val prepare by tasks.registering {
+konst prepare by tasks.registering {
     inputs.files(relocatedProtobuf) // this also adds a dependency
     outputs.file(outputJarPath)
     doFirst {
         File(outputJarPath).parentFile.mkdirs()
     }
     doLast {
-        val INCLUDE_START = "<include>**/"
-        val INCLUDE_END = ".java</include>"
-        val POM_PATH = "META-INF/maven/com.google.protobuf/protobuf-java/pom.xml"
+        konst INCLUDE_START = "<include>**/"
+        konst INCLUDE_END = ".java</include>"
+        konst POM_PATH = "META-INF/maven/com.google.protobuf/protobuf-java/pom.xml"
 
         fun loadAllFromJar(file: File): Map<String, Pair<JarEntry, ByteArray>> {
-            val result = hashMapOf<String, Pair<JarEntry, ByteArray>>()
+            konst result = hashMapOf<String, Pair<JarEntry, ByteArray>>()
             JarFile(file).use { jar ->
                 for (jarEntry in jar.entries()) {
                     result[jarEntry.name] = Pair(jarEntry, jar.getInputStream(jarEntry).readBytes())
@@ -43,20 +43,20 @@ val prepare by tasks.registering {
             return result
         }
 
-        val mainJar = relocatedProtobuf.resolvedConfiguration.resolvedArtifacts.single {
+        konst mainJar = relocatedProtobuf.resolvedConfiguration.resolvedArtifacts.single {
             it.name == "protobuf-relocated" && it.classifier == null
         }.file
 
-        val allFiles = loadAllFromJar(mainJar)
+        konst allFiles = loadAllFromJar(mainJar)
 
-        val keepClasses = arrayListOf<String>()
+        konst keepClasses = arrayListOf<String>()
 
-        val pomBytes = allFiles[POM_PATH]?.second ?: error("pom.xml is not found in protobuf jar at $POM_PATH")
-        val lines = String(pomBytes).lines()
+        konst pomBytes = allFiles[POM_PATH]?.second ?: error("pom.xml is not found in protobuf jar at $POM_PATH")
+        konst lines = String(pomBytes).lines()
 
         var liteProfileReached = false
         for (lineUntrimmed in lines) {
-            val line = lineUntrimmed.trim()
+            konst line = lineUntrimmed.trim()
 
             if (liteProfileReached && line == "</includes>") {
                 break
@@ -73,12 +73,12 @@ val prepare by tasks.registering {
 
         assert(liteProfileReached && keepClasses.isNotEmpty()) { "Wrong pom.xml or the format has changed, check its contents at $POM_PATH" }
 
-        val outputFile = File(outputJarPath).apply { delete() }
+        konst outputFile = File(outputJarPath).apply { delete() }
         ZipOutputStream(BufferedOutputStream(FileOutputStream(outputFile))).use { output ->
-            for ((name, value) in allFiles) {
-                val className = name.substringAfter("org/jetbrains/kotlin/protobuf/").substringBeforeLast(".class")
+            for ((name, konstue) in allFiles) {
+                konst className = name.substringAfter("org/jetbrains/kotlin/protobuf/").substringBeforeLast(".class")
                 if (keepClasses.any { className == it || className.startsWith(it + "$") }) {
-                    val (entry, bytes) = value
+                    konst (entry, bytes) = konstue
                     output.putNextEntry(entry)
                     output.write(bytes)
                     output.closeEntry()
@@ -88,7 +88,7 @@ val prepare by tasks.registering {
     }
 }
 
-val prepareSources = tasks.register<Copy>("prepareSources") {
+konst prepareSources = tasks.register<Copy>("prepareSources") {
     dependsOn(":protobuf-relocated:prepareSources")
     from(provider {
         relocatedProtobuf
@@ -101,7 +101,7 @@ val prepareSources = tasks.register<Copy>("prepareSources") {
     rename { sourcesJarName }
 }
 
-val mainArtifact = artifacts.add(
+konst mainArtifact = artifacts.add(
     "default",
     provider {
         prepare.get().outputs.files.singleFile
@@ -111,7 +111,7 @@ val mainArtifact = artifacts.add(
     classifier = ""
 }
 
-val sourcesArtifact = artifacts.add("default", File("$buildDir/libs/$sourcesJarName")) {
+konst sourcesArtifact = artifacts.add("default", File("$buildDir/libs/$sourcesJarName")) {
     builtBy(prepareSources)
     classifier = "sources"
 }

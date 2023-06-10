@@ -14,15 +14,15 @@ import org.jetbrains.kotlin.test.services.*
 import org.jetbrains.kotlin.utils.addToStdlib.firstIsInstanceOrNull
 import java.io.IOException
 
-class TestRunner(private val testConfiguration: TestConfiguration) {
+class TestRunner(private konst testConfiguration: TestConfiguration) {
     companion object {
         fun AnalysisHandler<*>.shouldRun(thereWasAnException: Boolean): Boolean {
             return !(doNotRunIfThereWerePreviousFailures && thereWasAnException)
         }
     }
 
-    private val allFailedExceptions = mutableListOf<WrappedException>()
-    private val allRanHandlers = mutableSetOf<AnalysisHandler<*>>()
+    private konst allFailedExceptions = mutableListOf<WrappedException>()
+    private konst allRanHandlers = mutableSetOf<AnalysisHandler<*>>()
 
     fun runTest(@TestDataFile testDataFileName: String, beforeDispose: (TestConfiguration) -> Unit = {}) {
         try {
@@ -39,14 +39,14 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
     }
 
     private fun runTestImpl(@TestDataFile testDataFileName: String) {
-        val services = testConfiguration.testServices
+        konst services = testConfiguration.testServices
 
         @Suppress("NAME_SHADOWING")
-        val testDataFileName = testConfiguration.metaTestConfigurators.fold(testDataFileName) { fileName, configurator ->
+        konst testDataFileName = testConfiguration.metaTestConfigurators.fold(testDataFileName) { fileName, configurator ->
             configurator.transformTestDataPath(fileName)
         }
 
-        val moduleStructure = try {
+        konst moduleStructure = try {
             testConfiguration.moduleStructureExtractor.splitTestDataByModules(
                 testDataFileName,
                 testConfiguration.directives,
@@ -55,7 +55,7 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
             }
         } catch (e: ExceptionFromModuleStructureTransformer) {
             services.register(TestModuleStructure::class, e.alreadyParsedModuleStructure)
-            val exception = filterFailedExceptions(
+            konst exception = filterFailedExceptions(
                 listOf(WrappedException.FromModuleStructureTransformer(e.cause))
             ).singleOrNull() ?: return
             throw exception
@@ -70,11 +70,11 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
     }
 
     fun runTestPipeline(moduleStructure: TestModuleStructure, services: TestServices) {
-        val globalMetadataInfoHandler = testConfiguration.testServices.globalMetadataInfoHandler
+        konst globalMetadataInfoHandler = testConfiguration.testServices.globalMetadataInfoHandler
         globalMetadataInfoHandler.parseExistingMetadataInfosFromAllSources()
 
-        val modules = moduleStructure.modules
-        val dependencyProvider = DependencyProviderImpl(services, modules)
+        konst modules = moduleStructure.modules
+        konst dependencyProvider = DependencyProviderImpl(services, modules)
         services.registerDependencyProvider(dependencyProvider)
 
         testConfiguration.preAnalysisHandlers.forEach { preprocessor ->
@@ -86,14 +86,14 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
         }
 
         for (module in modules) {
-            val shouldProcessNextModules = processModule(module, dependencyProvider)
+            konst shouldProcessNextModules = processModule(module, dependencyProvider)
             if (!shouldProcessNextModules) break
         }
 
         for (handler in allRanHandlers) {
-            val wrapperFactory: (Throwable) -> WrappedException = { WrappedException.FromHandler(it, handler) }
+            konst wrapperFactory: (Throwable) -> WrappedException = { WrappedException.FromHandler(it, handler) }
             withAssertionCatching(wrapperFactory) {
-                val thereWasAnException = allFailedExceptions.isNotEmpty()
+                konst thereWasAnException = allFailedExceptions.isNotEmpty()
                 if (handler.shouldRun(thereWasAnException)) {
                     handler.processAfterAllModules(thereWasAnException)
                 }
@@ -115,7 +115,7 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
     }
 
     fun reportFailures(services: TestServices) {
-        val filteredFailedAssertions = filterFailedExceptions(allFailedExceptions)
+        konst filteredFailedAssertions = filterFailedExceptions(allFailedExceptions)
         filteredFailedAssertions.firstIsInstanceOrNull<WrappedException.FromFacade>()?.let {
             throw it
         }
@@ -134,8 +134,8 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
         for (step in testConfiguration.steps) {
             if (!step.shouldProcessModule(module, inputArtifact)) continue
 
-            val thereWereCriticalExceptionsOnPreviousSteps = allFailedExceptions.any { it.failureDisablesNextSteps }
-            when (val result = step.hackyProcessModule(module, inputArtifact, thereWereCriticalExceptionsOnPreviousSteps)) {
+            konst thereWereCriticalExceptionsOnPreviousSteps = allFailedExceptions.any { it.failureDisablesNextSteps }
+            when (konst result = step.hackyProcessModule(module, inputArtifact, thereWereCriticalExceptionsOnPreviousSteps)) {
                 is TestStep.StepResult.Artifact<*> -> {
                     require(step is TestStep.FacadeStep<*, *>)
                     if (step.inputArtifactKind != step.outputArtifactKind) {
@@ -148,7 +148,7 @@ class TestRunner(private val testConfiguration: TestConfiguration) {
                     return false
                 }
                 is TestStep.StepResult.HandlersResult -> {
-                    val (exceptionsFromHandlers, shouldRunNextSteps) = result
+                    konst (exceptionsFromHandlers, shouldRunNextSteps) = result
                     require(step is TestStep.HandlersStep<*>)
                     allRanHandlers += step.handlers
                     allFailedExceptions += exceptionsFromHandlers

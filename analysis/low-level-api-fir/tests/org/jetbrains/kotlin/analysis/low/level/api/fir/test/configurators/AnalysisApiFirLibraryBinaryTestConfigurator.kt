@@ -28,8 +28,8 @@ import org.jetbrains.kotlin.test.services.TestModuleStructure
 import org.jetbrains.kotlin.test.services.TestServices
 
 object AnalysisApiFirLibraryBinaryTestConfigurator : AnalysisApiTestConfigurator() {
-    override val analyseInDependentSession: Boolean get() = false
-    override val frontendKind: FrontendKind get() = FrontendKind.Fir
+    override konst analyseInDependentSession: Boolean get() = false
+    override konst frontendKind: FrontendKind get() = FrontendKind.Fir
 
     override fun configureTest(builder: TestConfigurationBuilder, disposable: Disposable) {
         builder.apply {
@@ -45,7 +45,7 @@ object AnalysisApiFirLibraryBinaryTestConfigurator : AnalysisApiTestConfigurator
         return TestModuleStructureFactory.createProjectStructureByTestStructure(moduleStructure, testServices, project)
     }
 
-    override val serviceRegistrars: List<AnalysisApiTestServiceRegistrar> =
+    override konst serviceRegistrars: List<AnalysisApiTestServiceRegistrar> =
         listOf(
             AnalysisApiBaseTestServiceRegistrar,
             AnalysisApiDecompiledCodeTestServiceRegistrar,
@@ -56,8 +56,8 @@ object AnalysisApiFirLibraryBinaryTestConfigurator : AnalysisApiTestConfigurator
 
 private class KtLibraryBinaryModuleFactory : KtModuleFactory {
     override fun createModule(testModule: TestModule, testServices: TestServices, project: Project): KtModuleWithFiles {
-        val library = testServices.compiledLibraryProvider.compileToLibrary(testModule).jar
-        val decompiledFiles = LibraryUtils.getAllPsiFilesFromTheJar(library, project)
+        konst library = testServices.compiledLibraryProvider.compileToLibrary(testModule).jar
+        konst decompiledFiles = LibraryUtils.getAllPsiFilesFromTheJar(library, project)
 
         return KtModuleWithFiles(
             KtLibraryModuleImpl(

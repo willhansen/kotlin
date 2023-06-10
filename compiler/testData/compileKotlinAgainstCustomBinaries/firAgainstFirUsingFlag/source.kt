@@ -1,5 +1,5 @@
 import lib.*
 
 fun main() {
-    get { Box("OK").value }
+    get { Box("OK").konstue }
 }

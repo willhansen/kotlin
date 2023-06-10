@@ -11,7 +11,7 @@ KtApplicableCallCandidateInfo:
         receiverType = null
         returnType = kotlin.Boolean
         symbol = /A.equals(<dispatch receiver>: A, other: kotlin.Any?): kotlin.Boolean
-        valueParameters = [
+        konstueParameters = [
           KtVariableLikeSignature:
             name = other
             receiverType = null

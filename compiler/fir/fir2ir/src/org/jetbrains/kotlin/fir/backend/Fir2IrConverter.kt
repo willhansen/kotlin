@@ -31,7 +31,7 @@ import org.jetbrains.kotlin.ir.declarations.impl.IrModuleFragmentImpl
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreter
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterConfiguration
 import org.jetbrains.kotlin.ir.interpreter.IrInterpreterEnvironment
-import org.jetbrains.kotlin.ir.interpreter.checker.EvaluationMode
+import org.jetbrains.kotlin.ir.interpreter.checker.EkonstuationMode
 import org.jetbrains.kotlin.ir.interpreter.transformer.transformConst
 import org.jetbrains.kotlin.ir.util.KotlinMangler
 import org.jetbrains.kotlin.ir.util.NaiveSourceBasedFileEntryImpl
@@ -40,14 +40,14 @@ import org.jetbrains.kotlin.platform.isJs
 import org.jetbrains.kotlin.psi.KtFile
 
 class Fir2IrConverter(
-    private val moduleDescriptor: FirModuleDescriptor,
-    private val components: Fir2IrComponents
+    private konst moduleDescriptor: FirModuleDescriptor,
+    private konst components: Fir2IrComponents
 ) : Fir2IrComponents by components {
 
-    private val generatorExtensions = session.extensionService.declarationGenerators
+    private konst generatorExtensions = session.extensionService.declarationGenerators
 
     private var wereSourcesFakeOverridesBound = false
-    private val postponedDeclarationsForFakeOverridesBinding = mutableListOf<IrDeclaration>()
+    private konst postponedDeclarationsForFakeOverridesBinding = mutableListOf<IrDeclaration>()
 
     private fun runSourcesConversion(
         allFirFiles: List<FirFile>,
@@ -97,10 +97,10 @@ class Fir2IrConverter(
             }
         }
 
-        evaluateConstants(irModuleFragment, configuration)
+        ekonstuateConstants(irModuleFragment, configuration)
 
         if (irGenerationExtensions.isNotEmpty()) {
-            val pluginContext = Fir2IrPluginContext(components, irModuleFragment.descriptor)
+            konst pluginContext = Fir2IrPluginContext(components, irModuleFragment.descriptor)
             for (extension in irGenerationExtensions) {
                 extension.generate(irModuleFragment, pluginContext)
             }
@@ -119,13 +119,13 @@ class Fir2IrConverter(
     }
 
     fun processLocalClassAndNestedClassesOnTheFly(klass: FirClass, parent: IrDeclarationParent): IrClass {
-        val irClass = registerClassAndNestedClasses(klass, parent)
+        konst irClass = registerClassAndNestedClasses(klass, parent)
         processClassAndNestedClassHeaders(klass)
         return irClass
     }
 
     fun processLocalClassAndNestedClasses(klass: FirClass, parent: IrDeclarationParent): IrClass {
-        val irClass = registerClassAndNestedClasses(klass, parent)
+        konst irClass = registerClassAndNestedClasses(klass, parent)
         processClassAndNestedClassHeaders(klass)
         when (klass) {
             is FirRegularClass -> processRegularClassMembers(klass, irClass)
@@ -136,10 +136,10 @@ class Fir2IrConverter(
     }
 
     private fun registerFileAndClasses(file: FirFile, moduleFragment: IrModuleFragment) {
-        val fileEntry = when (file.origin) {
+        konst fileEntry = when (file.origin) {
             FirDeclarationOrigin.Source ->
                 file.psi?.let { PsiIrFileEntry(it as KtFile) }
-                    ?: when (val linesMapping = file.sourceFileLinesMapping) {
+                    ?: when (konst linesMapping = file.sourceFileLinesMapping) {
                         is KtSourceFileLinesMappingFromLineStartOffsets ->
                             NaiveSourceBasedFileEntryImpl(
                                 file.sourceFile?.path ?: file.sourceFile?.name ?: file.name,
@@ -153,7 +153,7 @@ class Fir2IrConverter(
             FirDeclarationOrigin.Synthetic -> NaiveSourceBasedFileEntryImpl(file.name)
             else -> error("Unsupported file origin: ${file.origin}")
         }
-        val irFile = IrFileImpl(
+        konst irFile = IrFileImpl(
             fileEntry,
             moduleDescriptor.getPackage(file.packageFqName).fragments.first(),
             moduleFragment
@@ -178,9 +178,9 @@ class Fir2IrConverter(
     }
 
     private fun processFileAndClassMembers(file: FirFile) {
-        val irFile = declarationStorage.getIrFile(file)
+        konst irFile = declarationStorage.getIrFile(file)
         for (declaration in file.declarations) {
-            val irDeclaration = processMemberDeclaration(declaration, null, irFile) ?: continue
+            konst irDeclaration = processMemberDeclaration(declaration, null, irFile) ?: continue
             irFile.declarations += irDeclaration
         }
     }
@@ -201,12 +201,12 @@ class Fir2IrConverter(
             )
         }
         for (declaration in syntheticPropertiesLast(anonymousObject.declarations)) {
-            val irDeclaration = processMemberDeclaration(declaration, anonymousObject, irClass) ?: continue
+            konst irDeclaration = processMemberDeclaration(declaration, anonymousObject, irClass) ?: continue
             irClass.declarations += irDeclaration
         }
         // Add delegated members *before* fake override generations.
         // Otherwise, fake overrides for delegated members, which are redundant, will be added.
-        val realDeclarations = delegatedMembers(irClass) + anonymousObject.declarations
+        konst realDeclarations = delegatedMembers(irClass) + anonymousObject.declarations
         with(fakeOverrideGenerator) {
             irClass.addFakeOverrides(anonymousObject, realDeclarations)
         }
@@ -218,14 +218,14 @@ class Fir2IrConverter(
         regularClass: FirRegularClass,
         irClass: IrClass = classifierStorage.getCachedIrClass(regularClass)!!
     ): IrClass {
-        val allDeclarations = mutableListOf<FirDeclaration>().apply {
+        konst allDeclarations = mutableListOf<FirDeclaration>().apply {
             addAll(regularClass.declarations)
             if (generatorExtensions.isNotEmpty()) {
                 addAll(regularClass.generatedMembers(session))
                 addAll(regularClass.generatedNestedClassifiers(session))
             }
         }
-        val irConstructor = (allDeclarations.firstOrNull { it is FirConstructor && it.isPrimary })?.let {
+        konst irConstructor = (allDeclarations.firstOrNull { it is FirConstructor && it.isPrimary })?.let {
             declarationStorage.getOrCreateIrConstructor(it as FirConstructor, irClass, isLocal = regularClass.isLocal)
         }
         if (irConstructor != null) {
@@ -233,7 +233,7 @@ class Fir2IrConverter(
         }
         // At least on enum entry creation we may need a default constructor, so ctors should be converted first
         for (declaration in syntheticPropertiesLast(allDeclarations)) {
-            val irDeclaration = processMemberDeclaration(declaration, regularClass, irClass) ?: continue
+            konst irDeclaration = processMemberDeclaration(declaration, regularClass, irClass) ?: continue
             irClass.declarations += irDeclaration
         }
         // Add delegated members *before* fake override generations.
@@ -243,7 +243,7 @@ class Fir2IrConverter(
         // Otherwise, redundant members, e.g., synthetic toString _and_ fake override toString, will be added.
         if (irConstructor != null && (irClass.isValue || irClass.isData)) {
             declarationStorage.enterScope(irConstructor)
-            val dataClassMembersGenerator = DataClassMembersGenerator(components)
+            konst dataClassMembersGenerator = DataClassMembersGenerator(components)
             if (irClass.isSingleFieldValueClass) {
                 allDeclarations += dataClassMembersGenerator.generateSingleFieldValueClassMembers(regularClass, irClass)
             }
@@ -263,7 +263,7 @@ class Fir2IrConverter(
     }
 
     private fun bindFakeOverridesInFile(file: FirFile) {
-        val irFile = declarationStorage.getIrFile(file)
+        konst irFile = declarationStorage.getIrFile(file)
         for (irDeclaration in irFile.declarations) {
             if (irDeclaration is IrClass) {
                 bindFakeOverridesInClass(irDeclaration)
@@ -299,7 +299,7 @@ class Fir2IrConverter(
     private fun registerClassAndNestedClasses(klass: FirClass, parent: IrDeclarationParent): IrClass {
         // Local classes might be referenced before they declared (see usages of Fir2IrClassifierStorage.createLocalIrClassOnTheFly)
         // So, we only need to set its parent properly
-        val irClass =
+        konst irClass =
             classifierStorage.getCachedIrClass(klass)?.apply {
                 this.parent = parent
             } ?: when (klass) {
@@ -350,7 +350,7 @@ class Fir2IrConverter(
         containingClass: FirClass?,
         parent: IrDeclarationParent
     ): IrDeclaration? {
-        val isLocal = containingClass != null &&
+        konst isLocal = containingClass != null &&
                 (containingClass !is FirRegularClass || containingClass.isLocal)
         return when (declaration) {
             is FirRegularClass -> {
@@ -418,20 +418,20 @@ class Fir2IrConverter(
     }
 
     companion object {
-        private fun evaluateConstants(irModuleFragment: IrModuleFragment, fir2IrConfiguration: Fir2IrConfiguration) {
-            val firModuleDescriptor = irModuleFragment.descriptor as? FirModuleDescriptor
-            val targetPlatform = firModuleDescriptor?.platform
-            val languageVersionSettings = firModuleDescriptor?.session?.languageVersionSettings
-            val intrinsicConstEvaluation = languageVersionSettings?.supportsFeature(LanguageFeature.IntrinsicConstEvaluation) == true
+        private fun ekonstuateConstants(irModuleFragment: IrModuleFragment, fir2IrConfiguration: Fir2IrConfiguration) {
+            konst firModuleDescriptor = irModuleFragment.descriptor as? FirModuleDescriptor
+            konst targetPlatform = firModuleDescriptor?.platform
+            konst languageVersionSettings = firModuleDescriptor?.session?.languageVersionSettings
+            konst intrinsicConstEkonstuation = languageVersionSettings?.supportsFeature(LanguageFeature.IntrinsicConstEkonstuation) == true
 
-            val configuration = IrInterpreterConfiguration(
+            konst configuration = IrInterpreterConfiguration(
                 platform = targetPlatform,
                 printOnlyExceptionMessage = true,
             )
-            val interpreter = IrInterpreter(IrInterpreterEnvironment(irModuleFragment.irBuiltins, configuration))
-            val mode = if (intrinsicConstEvaluation) EvaluationMode.ONLY_INTRINSIC_CONST else EvaluationMode.ONLY_BUILTINS
+            konst interpreter = IrInterpreter(IrInterpreterEnvironment(irModuleFragment.irBuiltins, configuration))
+            konst mode = if (intrinsicConstEkonstuation) EkonstuationMode.ONLY_INTRINSIC_CONST else EkonstuationMode.ONLY_BUILTINS
             irModuleFragment.files.forEach {
-                it.transformConst(interpreter, mode = mode, evaluatedConstTracker = fir2IrConfiguration.evaluatedConstTracker)
+                it.transformConst(interpreter, mode = mode, ekonstuatedConstTracker = fir2IrConfiguration.ekonstuatedConstTracker)
             }
         }
 
@@ -450,8 +450,8 @@ class Fir2IrConverter(
             commonMemberStorage: Fir2IrCommonMemberStorage,
             initializedIrBuiltIns: IrBuiltInsOverFir?
         ): Fir2IrResult {
-            val moduleDescriptor = FirModuleDescriptor(session, kotlinBuiltIns)
-            val components = Fir2IrComponentsStorage(
+            konst moduleDescriptor = FirModuleDescriptor(session, kotlinBuiltIns)
+            konst components = Fir2IrComponentsStorage(
                 session,
                 scopeSession,
                 commonMemberStorage.symbolTable,
@@ -460,7 +460,7 @@ class Fir2IrConverter(
                 fir2IrExtensions,
                 fir2IrConfiguration,
             )
-            val converter = Fir2IrConverter(moduleDescriptor, components)
+            konst converter = Fir2IrConverter(moduleDescriptor, components)
 
             components.converter = converter
             components.classifierStorage = Fir2IrClassifierStorage(components, commonMemberStorage)
@@ -468,13 +468,13 @@ class Fir2IrConverter(
             components.declarationStorage = Fir2IrDeclarationStorage(components, moduleDescriptor, commonMemberStorage)
             components.visibilityConverter = visibilityConverter
             components.typeConverter = Fir2IrTypeConverter(components)
-            val irBuiltIns = initializedIrBuiltIns ?: IrBuiltInsOverFir(
+            konst irBuiltIns = initializedIrBuiltIns ?: IrBuiltInsOverFir(
                 components, fir2IrConfiguration.languageVersionSettings, moduleDescriptor, irMangler,
                 fir2IrConfiguration.languageVersionSettings.getFlag(AnalysisFlags.builtInsFromSources) || kotlinBuiltIns !== DefaultBuiltIns.Instance
             )
             components.irBuiltIns = irBuiltIns
-            val conversionScope = Fir2IrConversionScope()
-            val fir2irVisitor = Fir2IrVisitor(components, conversionScope)
+            konst conversionScope = Fir2IrConversionScope()
+            konst fir2irVisitor = Fir2IrVisitor(components, conversionScope)
             components.builtIns = Fir2IrBuiltIns(components, specialSymbolProvider)
             components.annotationGenerator = AnnotationGenerator(components)
             components.fakeOverrideGenerator = FakeOverrideGenerator(components, conversionScope)
@@ -483,9 +483,9 @@ class Fir2IrConverter(
 
             fir2IrExtensions.registerDeclarations(commonMemberStorage.symbolTable)
 
-            val irModuleFragment = IrModuleFragmentImpl(moduleDescriptor, irBuiltIns)
+            konst irModuleFragment = IrModuleFragmentImpl(moduleDescriptor, irBuiltIns)
 
-            val allFirFiles = buildList {
+            konst allFirFiles = buildList {
                 addAll(firFiles)
                 addAll(session.createFilesWithGeneratedDeclarations())
             }

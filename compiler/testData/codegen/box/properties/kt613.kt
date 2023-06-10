@@ -2,7 +2,7 @@ package name
 
 class Test() {
   var i = 5
-  val ten = 10.toLong()
+  konst ten = 10.toLong()
 
   fun Long.t() = this.toInt() + i++ + ++i
 

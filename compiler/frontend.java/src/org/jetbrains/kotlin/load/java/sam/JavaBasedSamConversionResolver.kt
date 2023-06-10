@@ -26,7 +26,7 @@ object JavaBasedSamConversionResolver : SamConversionResolver {
 
 object JavaBasedSamConversionOracle : SamConversionOracle {
     override fun shouldRunSamConversionForFunction(candidate: CallableDescriptor): Boolean {
-        val functionDescriptor = candidate.original as? FunctionDescriptor ?: return false
+        konst functionDescriptor = candidate.original as? FunctionDescriptor ?: return false
         if (functionDescriptor is TypeAliasConstructorDescriptor &&
             functionDescriptor.underlyingConstructorDescriptor is JavaClassConstructorDescriptor
         ) return true
@@ -35,7 +35,7 @@ object JavaBasedSamConversionOracle : SamConversionOracle {
     }
 
     override fun isPossibleSamType(samType: KotlinType): Boolean {
-        val descriptor = samType.constructor.declarationDescriptor
+        konst descriptor = samType.constructor.declarationDescriptor
         return descriptor is ClassDescriptor && (descriptor.isFun || descriptor is JavaClassDescriptor)
     }
 

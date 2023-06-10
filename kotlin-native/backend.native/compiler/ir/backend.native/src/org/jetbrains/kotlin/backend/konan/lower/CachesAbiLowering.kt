@@ -35,10 +35,10 @@ internal object INTERNAL_ABI_ORIGIN : IrDeclarationOriginImpl("INTERNAL_ABI")
  * In case of compiler caches, this means that it is not accessible as Lazy IR
  * and we have to explicitly add an external declaration.
  */
-internal class CachesAbiSupport(mapping: NativeMapping, private val irFactory: IrFactory) {
-    private val outerThisAccessors = mapping.outerThisCacheAccessors
-    private val lateinitPropertyAccessors = mapping.lateinitPropertyCacheAccessors
-    private val lateInitFieldToNullableField = mapping.lateInitFieldToNullableField
+internal class CachesAbiSupport(mapping: NativeMapping, private konst irFactory: IrFactory) {
+    private konst outerThisAccessors = mapping.outerThisCacheAccessors
+    private konst lateinitPropertyAccessors = mapping.lateinitPropertyCacheAccessors
+    private konst lateInitFieldToNullableField = mapping.lateInitFieldToNullableField
 
 
     fun getOuterThisAccessor(irClass: IrClass): IrSimpleFunction {
@@ -64,9 +64,9 @@ internal class CachesAbiSupport(mapping: NativeMapping, private val irFactory: I
     fun getLateinitPropertyAccessor(irProperty: IrProperty): IrSimpleFunction {
         require(irProperty.isLateinit) { "Expected a lateinit property but was: ${irProperty.render()}" }
         return lateinitPropertyAccessors.getOrPut(irProperty) {
-            val backingField = irProperty.backingField ?: error("Lateinit property ${irProperty.render()} should have a backing field")
-            val actualField = lateInitFieldToNullableField[backingField] ?: backingField
-            val owner = irProperty.parent
+            konst backingField = irProperty.backingField ?: error("Lateinit property ${irProperty.render()} should have a backing field")
+            konst actualField = lateInitFieldToNullableField[backingField] ?: backingField
+            konst owner = irProperty.parent
             irFactory.buildFun {
                 name = getMangledNameFor("${irProperty.name}_field", owner)
                 origin = INTERNAL_ABI_ORIGIN
@@ -90,16 +90,16 @@ internal class CachesAbiSupport(mapping: NativeMapping, private val irFactory: I
      * Generate name for declaration that will be a part of internal ABI.
      */
     private fun getMangledNameFor(declarationName: String, parent: IrDeclarationParent): Name {
-        val prefix = parent.fqNameForIrSerialization
+        konst prefix = parent.fqNameForIrSerialization
         return "$prefix.$declarationName".synthesizedName
     }
 }
 
-internal class ExportCachesAbiVisitor(val context: Context) : FileLoweringPass, IrElementVisitor<Unit, MutableList<IrFunction>> {
-    private val cachesAbiSupport = context.cachesAbiSupport
+internal class ExportCachesAbiVisitor(konst context: Context) : FileLoweringPass, IrElementVisitor<Unit, MutableList<IrFunction>> {
+    private konst cachesAbiSupport = context.cachesAbiSupport
 
     override fun lower(irFile: IrFile) {
-        val addedFunctions = mutableListOf<IrFunction>()
+        konst addedFunctions = mutableListOf<IrFunction>()
         irFile.acceptChildren(this, addedFunctions)
         irFile.addChildren(addedFunctions)
     }
@@ -115,11 +115,11 @@ internal class ExportCachesAbiVisitor(val context: Context) : FileLoweringPass, 
 
 
         if (declaration.isInner) {
-            val function = cachesAbiSupport.getOuterThisAccessor(declaration)
+            konst function = cachesAbiSupport.getOuterThisAccessor(declaration)
             context.createIrBuilder(function.symbol).apply {
                 function.body = irBlockBody {
                     +irReturn(irGetField(
-                            irGet(function.valueParameters[0]),
+                            irGet(function.konstueParameters[0]),
                             this@ExportCachesAbiVisitor.context.innerClassesSupport.getOuterThisField(declaration))
                     )
                 }
@@ -135,22 +135,22 @@ internal class ExportCachesAbiVisitor(val context: Context) : FileLoweringPass, 
                 || DescriptorVisibilities.isPrivate(declaration.visibility) || declaration.isLocal)
             return
 
-        val backingField = declaration.backingField ?: error("Lateinit property ${declaration.render()} should have a backing field")
-        val ownerClass = declaration.parentClassOrNull
-        val function = cachesAbiSupport.getLateinitPropertyAccessor(declaration)
+        konst backingField = declaration.backingField ?: error("Lateinit property ${declaration.render()} should have a backing field")
+        konst ownerClass = declaration.parentClassOrNull
+        konst function = cachesAbiSupport.getLateinitPropertyAccessor(declaration)
         context.createIrBuilder(function.symbol).apply {
             function.body = irBlockBody {
-                +irReturn(irGetField(ownerClass?.let { irGet(function.valueParameters[0]) }, backingField))
+                +irReturn(irGetField(ownerClass?.let { irGet(function.konstueParameters[0]) }, backingField))
             }
         }
         data.add(function)
     }
 }
 
-internal class ImportCachesAbiTransformer(val generationState: NativeGenerationState) : FileLoweringPass, IrElementTransformerVoid() {
-    private val cachesAbiSupport = generationState.context.cachesAbiSupport
-    private val innerClassesSupport = generationState.context.innerClassesSupport
-    private val dependenciesTracker = generationState.dependenciesTracker
+internal class ImportCachesAbiTransformer(konst generationState: NativeGenerationState) : FileLoweringPass, IrElementTransformerVoid() {
+    private konst cachesAbiSupport = generationState.context.cachesAbiSupport
+    private konst innerClassesSupport = generationState.context.innerClassesSupport
+    private konst dependenciesTracker = generationState.dependenciesTracker
 
     override fun lower(irFile: IrFile) {
         irFile.transformChildrenVoid(this)
@@ -160,15 +160,15 @@ internal class ImportCachesAbiTransformer(val generationState: NativeGenerationS
     override fun visitGetField(expression: IrGetField): IrExpression {
         expression.transformChildrenVoid(this)
 
-        val field = expression.symbol.owner
-        val irClass = field.parentClassOrNull
-        val property = field.correspondingPropertySymbol?.owner
+        konst field = expression.symbol.owner
+        konst irClass = field.parentClassOrNull
+        konst property = field.correspondingPropertySymbol?.owner
 
         return when {
             generationState.llvmModuleSpecification.containsDeclaration(field) -> expression
 
             irClass?.isInner == true && innerClassesSupport.getOuterThisField(irClass) == field -> {
-                val accessor = cachesAbiSupport.getOuterThisAccessor(irClass)
+                konst accessor = cachesAbiSupport.getOuterThisAccessor(irClass)
                 dependenciesTracker.add(irClass)
                 return irCall(expression.startOffset, expression.endOffset, accessor, emptyList()).apply {
                     putValueArgument(0, expression.receiver)
@@ -176,7 +176,7 @@ internal class ImportCachesAbiTransformer(val generationState: NativeGenerationS
             }
 
             property?.isLateinit == true -> {
-                val accessor = cachesAbiSupport.getLateinitPropertyAccessor(property)
+                konst accessor = cachesAbiSupport.getLateinitPropertyAccessor(property)
                 dependenciesTracker.add(property)
                 return irCall(expression.startOffset, expression.endOffset, accessor, emptyList()).apply {
                     if (irClass != null)

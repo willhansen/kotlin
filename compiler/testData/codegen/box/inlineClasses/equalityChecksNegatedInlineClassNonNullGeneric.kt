@@ -4,9 +4,9 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Inner<T: String>(val w: T)
+konstue class Inner<T: String>(konst w: T)
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: Inner<String>>(val x: T)
+konstue class A<T: Inner<String>>(konst x: T)
 
 fun <T: Inner<String>> isNotNullVacuousLeft(s: A<T>) = s != null
 fun <T: Inner<String>> isNotNullVacuousRight(s: A<T>) = null != s

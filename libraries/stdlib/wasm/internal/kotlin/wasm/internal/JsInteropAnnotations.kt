@@ -10,4 +10,4 @@ package kotlin.wasm.internal
  * @param type is a result of JS `typeof` operator applied to this type.
  */
 @Target(AnnotationTarget.CLASS)
-internal annotation class JsPrimitive(val type: String)
+internal annotation class JsPrimitive(konst type: String)

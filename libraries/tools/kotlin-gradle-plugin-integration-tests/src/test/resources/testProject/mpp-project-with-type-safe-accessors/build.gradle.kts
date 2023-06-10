@@ -16,7 +16,7 @@ kotlin {
     }
 }
 
-afterEvaluate {
+afterEkonstuate {
     configurations
         .getByName("commonMainApi")
         .dependencies

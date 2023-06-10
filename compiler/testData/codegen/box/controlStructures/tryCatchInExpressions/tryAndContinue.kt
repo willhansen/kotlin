@@ -11,7 +11,7 @@ fun foo(): Int {
 }
 
 fun box(): String {
-    val test = foo()
+    konst test = foo()
     if (test != 0) return "Failed, test=$test"
 
     return "OK"

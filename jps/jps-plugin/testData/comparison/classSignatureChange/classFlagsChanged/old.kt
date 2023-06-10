@@ -8,9 +8,9 @@ class AnnotationFlagAdded
 annotation class AnnotationFlagRemoved
 annotation class AnnotationFlagUnchanged
 
-class DataFlagAdded(val x: Int)
-data class DataFlagRemoved(val x: Int)
-data class DataFlagUnchanged(val x: Int)
+class DataFlagAdded(konst x: Int)
+data class DataFlagRemoved(konst x: Int)
+data class DataFlagUnchanged(konst x: Int)
 
 class EnumFlagAdded
 enum class EnumFlagRemoved

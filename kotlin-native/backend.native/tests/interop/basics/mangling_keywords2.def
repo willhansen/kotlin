@@ -17,7 +17,7 @@ enum KotlinKeywordsEnum {
     true,
     try,
     typealias,
-    val,
+    konst,
     var,
     when,
 };
@@ -40,7 +40,7 @@ struct KotlinKeywordsStruct {
     int true;
     int try;
     int typealias;
-    int val;
+    int konst;
     int var;
     int when;
 };
@@ -64,7 +64,7 @@ struct KotlinKeywordsStruct createKotlinKeywordsStruct() {
         .true = 0,
         .try = 0,
         .typealias = 0,
-        .val = 0,
+        .konst = 0,
         .var = 0,
         .when = 0,
     };

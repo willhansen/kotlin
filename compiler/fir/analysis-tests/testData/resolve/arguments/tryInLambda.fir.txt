@@ -7,7 +7,7 @@ FILE: tryInLambda.kt
     public final fun test(): R|kotlin/Unit| {
         R|/myRun|<R|kotlin/Unit|>(<L> = myRun@fun <anonymous>(): R|kotlin/Unit| <inline=NoInline>  {
             try {
-                lval x: R|kotlin/Int| = Int(1)
+                lkonst x: R|kotlin/Int| = Int(1)
             }
             catch (e: R|kotlin/Exception|) {
                 R|/foo|()

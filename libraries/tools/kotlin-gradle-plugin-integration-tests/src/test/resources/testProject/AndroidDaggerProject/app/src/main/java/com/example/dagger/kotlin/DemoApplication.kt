@@ -5,7 +5,7 @@ class DemoApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        val component = initDaggerComponent()
+        konst component = initDaggerComponent()
         component.inject(this) // As of now, LocationManager should be injected into this.
         this.component = component
     }

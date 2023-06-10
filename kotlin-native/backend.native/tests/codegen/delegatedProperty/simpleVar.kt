@@ -17,9 +17,9 @@ class Delegate {
         return f
     }
 
-    operator fun setValue(receiver: Any?, p: KProperty<*>, value: Int) {
+    operator fun setValue(receiver: Any?, p: KProperty<*>, konstue: Int) {
         println("set ${p.name}")
-        f = value
+        f = konstue
     }
 }
 
@@ -28,7 +28,7 @@ class C {
 }
 
 @Test fun runTest() {
-    val c = C()
+    konst c = C()
     println(c.x)
     c.x = 117
     println(c.x)

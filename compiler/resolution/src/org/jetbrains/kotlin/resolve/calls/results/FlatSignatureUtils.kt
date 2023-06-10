@@ -27,9 +27,9 @@ fun <T> FlatSignature.Companion.createFromReflectionType(
     // This is correct as extension receiver can't have any defaults/varargs/coercions, so there is no need to use reflection type
     // Plus, currently, receiver for reflection type is taking from *candidate*, see buildReflectionType, this candidate can
     // have transient receiver which is not the same in its signature
-    val receiver = descriptor.extensionReceiverParameter?.type
-    val contextReceiversTypes = descriptor.contextReceiverParameters.mapNotNull { it.type }
-    val parameters = if (descriptor is VariableDescriptor) {
+    konst receiver = descriptor.extensionReceiverParameter?.type
+    konst contextReceiversTypes = descriptor.contextReceiverParameters.mapNotNull { it.type }
+    konst parameters = if (descriptor is VariableDescriptor) {
         emptyList()
     } else {
         reflectionType.getValueParameterTypesFromCallableReflectionType(
@@ -43,7 +43,7 @@ fun <T> FlatSignature.Companion.createFromReflectionType(
         contextReceiversTypes + listOfNotNull(receiver) + parameters,
         hasExtensionReceiver = receiver != null,
         contextReceiverCount = contextReceiversTypes.size,
-        hasVarargs = descriptor.valueParameters.any { it.varargElementType != null },
+        hasVarargs = descriptor.konstueParameters.any { it.varargElementType != null },
         numDefaults = numDefaults,
         isExpect = descriptor is MemberDescriptor && descriptor.isExpect,
         isSyntheticMember = descriptor is SyntheticMemberDescriptor<*>
@@ -58,16 +58,16 @@ fun <T> FlatSignature.Companion.create(
     numDefaults: Int,
     parameterTypes: List<TypeWithConversion?>,
 ): FlatSignature<T> {
-    val extensionReceiverType = descriptor.extensionReceiverParameter?.type
-    val contextReceiverTypes = descriptor.contextReceiverParameters.mapNotNull { TypeWithConversion(it.type) }
+    konst extensionReceiverType = descriptor.extensionReceiverParameter?.type
+    konst contextReceiverTypes = descriptor.contextReceiverParameters.mapNotNull { TypeWithConversion(it.type) }
 
     return FlatSignature(
         origin,
         descriptor.typeParameters,
-        valueParameterTypes = contextReceiverTypes + extensionReceiverType?.let { listOf(TypeWithConversion(it)) }.orEmpty() + parameterTypes,
+        konstueParameterTypes = contextReceiverTypes + extensionReceiverType?.let { listOf(TypeWithConversion(it)) }.orEmpty() + parameterTypes,
         hasExtensionReceiver = extensionReceiverType != null,
         contextReceiverCount = contextReceiverTypes.size,
-        hasVarargs = descriptor.valueParameters.any { it.varargElementType != null },
+        hasVarargs = descriptor.konstueParameters.any { it.varargElementType != null },
         numDefaults = numDefaults,
         isExpect = descriptor is MemberDescriptor && descriptor.isExpect,
         isSyntheticMember = descriptor is SyntheticMemberDescriptor<*>
@@ -80,16 +80,16 @@ fun <T> FlatSignature.Companion.create(
     numDefaults: Int,
     parameterTypes: List<KotlinType?>
 ): FlatSignature<T> {
-    val extensionReceiverType = descriptor.extensionReceiverParameter?.type
-    val contextReceiverTypes = descriptor.contextReceiverParameters.mapNotNull { it.type }
+    konst extensionReceiverType = descriptor.extensionReceiverParameter?.type
+    konst contextReceiverTypes = descriptor.contextReceiverParameters.mapNotNull { it.type }
 
     return FlatSignature(
         origin,
         descriptor.typeParameters,
-        valueParameterTypes = contextReceiverTypes + listOfNotNull(extensionReceiverType) + parameterTypes,
+        konstueParameterTypes = contextReceiverTypes + listOfNotNull(extensionReceiverType) + parameterTypes,
         hasExtensionReceiver = extensionReceiverType != null,
         contextReceiverCount = contextReceiverTypes.size,
-        hasVarargs = descriptor.valueParameters.any { it.varargElementType != null },
+        hasVarargs = descriptor.konstueParameters.any { it.varargElementType != null },
         numDefaults = numDefaults,
         isExpect = descriptor is MemberDescriptor && descriptor.isExpect,
         isSyntheticMember = descriptor is SyntheticMemberDescriptor<*>
@@ -100,12 +100,12 @@ fun <D : CallableDescriptor> FlatSignature.Companion.createFromCallableDescripto
     FlatSignature(
         descriptor,
         descriptor.typeParameters,
-        valueParameterTypes = descriptor.contextReceiverParameters.map { it.type }
+        konstueParameterTypes = descriptor.contextReceiverParameters.map { it.type }
                 + listOfNotNull(descriptor.extensionReceiverParameter?.type)
-                + descriptor.valueParameters.map { it.argumentValueType },
+                + descriptor.konstueParameters.map { it.argumentValueType },
         hasExtensionReceiver = descriptor.extensionReceiverParameter?.type != null,
         contextReceiverCount = descriptor.contextReceiverParameters.size,
-        hasVarargs = descriptor.valueParameters.any { it.varargElementType != null },
+        hasVarargs = descriptor.konstueParameters.any { it.varargElementType != null },
         numDefaults = 0,
         isExpect = descriptor is MemberDescriptor && descriptor.isExpect,
         isSyntheticMember = descriptor is SyntheticMemberDescriptor<*>
@@ -115,13 +115,13 @@ fun <D : CallableDescriptor> FlatSignature.Companion.createForPossiblyShadowedEx
     FlatSignature(
         descriptor,
         descriptor.typeParameters,
-        valueParameterTypes = descriptor.valueParameters.map { it.argumentValueType },
+        konstueParameterTypes = descriptor.konstueParameters.map { it.argumentValueType },
         hasExtensionReceiver = false,
         contextReceiverCount = 0,
-        hasVarargs = descriptor.valueParameters.any { it.varargElementType != null },
-        numDefaults = descriptor.valueParameters.count { it.hasDefaultValue() },
+        hasVarargs = descriptor.konstueParameters.any { it.varargElementType != null },
+        numDefaults = descriptor.konstueParameters.count { it.hasDefaultValue() },
         isExpect = descriptor is MemberDescriptor && descriptor.isExpect,
         isSyntheticMember = descriptor is SyntheticMemberDescriptor<*>
     )
 
-val ValueParameterDescriptor.argumentValueType get() = varargElementType ?: type
+konst ValueParameterDescriptor.argumentValueType get() = varargElementType ?: type

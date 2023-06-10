@@ -6,19 +6,19 @@ class A(block: String.() -> Int) : Base(block)
 class B(block: String.() -> Int) : Base(block)
 
 fun test_1() {
-    val c = select(::A, ::B)
+    konst c = select(::A, ::B)
     c { length }
     c { <!UNRESOLVED_REFERENCE!>it<!>.length }
 }
 
 fun test_2(cond: Boolean) {
-    val c = if (cond) ::A else ::B
+    konst c = if (cond) ::A else ::B
     c { length }
     c { <!UNRESOLVED_REFERENCE!>it<!>.length }
 }
 
 fun test_3(cond: Boolean) {
-    val c = when(cond) {
+    konst c = when(cond) {
         true -> ::A
         false -> ::B
     }

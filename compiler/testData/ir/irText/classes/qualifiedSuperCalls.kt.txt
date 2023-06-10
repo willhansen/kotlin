@@ -2,7 +2,7 @@ interface ILeft {
   fun foo() {
   }
 
-  val bar: Int
+  konst bar: Int
     get(): Int {
       return 1
     }
@@ -13,7 +13,7 @@ interface IRight {
   fun foo() {
   }
 
-  val bar: Int
+  konst bar: Int
     get(): Int {
       return 2
     }
@@ -32,7 +32,7 @@ class CBoth : ILeft, IRight {
     super<IRight>.foo()
   }
 
-  override val bar: Int
+  override konst bar: Int
     override get(): Int {
       return super<ILeft>.<get-bar>().plus(other = super<IRight>.<get-bar>())
     }

@@ -18,18 +18,18 @@ public class Base {
 // FILE: test.kt
 
 class Derived : Base() {
-    val a = "aa"
+    konst a = "aa"
 
-    val b get() = "bb"
+    konst b get() = "bb"
 
     lateinit var c: String
 
-    val d by lazy { "dd" }
+    konst d by lazy { "dd" }
 
     var e: String = "ee"
-        set(value) {
-            println(value)
-            field = value
+        set(konstue) {
+            println(konstue)
+            field = konstue
         }
 }
 

@@ -20,32 +20,32 @@ import org.jetbrains.kotlin.storage.LockBasedStorageManager
 import java.util.concurrent.ConcurrentHashMap
 
 abstract class MemoizedValueClassAbstractReplacements(
-    protected val irFactory: IrFactory,
-    protected val context: JvmBackendContext,
-    protected val storageManager: LockBasedStorageManager
+    protected konst irFactory: IrFactory,
+    protected konst context: JvmBackendContext,
+    protected konst storageManager: LockBasedStorageManager
 ) {
-    private val propertyMap = ConcurrentHashMap<IrPropertySymbol, IrProperty>()
+    private konst propertyMap = ConcurrentHashMap<IrPropertySymbol, IrProperty>()
 
     /**
      * Get a replacement for a function or a constructor.
      */
     fun getReplacementFunction(function: IrFunction) = getReplacementFunctionImpl(function)
 
-    protected abstract val getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction?
+    protected abstract konst getReplacementFunctionImpl: (IrFunction) -> IrSimpleFunction?
 
     protected fun IrFunction.isRemoveAtSpecialBuiltinStub() =
         origin == IrDeclarationOrigin.IR_BUILTINS_STUB &&
                 name.asString() == "remove" &&
-                valueParameters.size == 1 &&
-                valueParameters[0].type.isInt()
+                konstueParameters.size == 1 &&
+                konstueParameters[0].type.isInt()
 
     protected fun IrFunction.isValueClassMemberFakeOverriddenFromJvmDefaultInterfaceMethod(): Boolean {
         if (this !is IrSimpleFunction) return false
         if (!this.isFakeOverride) return false
-        val parentClass = parentClassOrNull ?: return false
+        konst parentClass = parentClassOrNull ?: return false
         require(parentClass.isValue)
 
-        val overridden = resolveFakeOverride() ?: return false
+        konst overridden = resolveFakeOverride() ?: return false
         if (!overridden.parentAsClass.isJvmInterface) return false
         if (overridden.modality == Modality.ABSTRACT) return false
 
@@ -82,10 +82,10 @@ abstract class MemoizedValueClassAbstractReplacements(
         copyAttributes(function as? IrAttributeContainer)
 
         if (function is IrSimpleFunction) {
-            val propertySymbol = function.correspondingPropertySymbol
+            konst propertySymbol = function.correspondingPropertySymbol
             if (propertySymbol != null) {
-                val oldProperty = propertySymbol.owner
-                val property = propertyMap.getOrPut(propertySymbol) {
+                konst oldProperty = propertySymbol.owner
+                konst property = propertyMap.getOrPut(propertySymbol) {
                     irFactory.buildProperty {
                         name = oldProperty.name
                         updateFrom(oldProperty)
@@ -96,10 +96,10 @@ abstract class MemoizedValueClassAbstractReplacements(
                         // In case this property is declared in an object in another file which is not yet lowered, its backing field will
                         // be made static later. We have to handle it here though, because this new property will be saved to the cache
                         // and reused when lowering the same call in all subsequent files, which would be incorrect if it was not lowered.
-                        val newBackingField = context.cachedDeclarations.getStaticBackingField(oldProperty) ?: oldProperty.backingField
+                        konst newBackingField = context.cachedDeclarations.getStaticBackingField(oldProperty) ?: oldProperty.backingField
                         if (newBackingField != null) {
                             context.multiFieldValueClassReplacements.getMfvcFieldNode(newBackingField)
-                            val fieldsToRemove = context.multiFieldValueClassReplacements.getFieldsToRemove(oldProperty.parentAsClass)
+                            konst fieldsToRemove = context.multiFieldValueClassReplacements.getFieldsToRemove(oldProperty.parentAsClass)
                             if (newBackingField !in fieldsToRemove) {
                                 backingField = newBackingField
                             }
@@ -120,7 +120,7 @@ abstract class MemoizedValueClassAbstractReplacements(
         body()
     }
 
-    private val replaceOverriddenSymbolsImpl: (IrSimpleFunction) -> List<IrSimpleFunctionSymbol> =
+    private konst replaceOverriddenSymbolsImpl: (IrSimpleFunction) -> List<IrSimpleFunctionSymbol> =
         storageManager.createMemoizedFunction { irSimpleFunction ->
             irSimpleFunction.overriddenSymbols.map {
                 computeOverrideReplacement(it.owner).symbol

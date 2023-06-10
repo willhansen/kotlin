@@ -1,10 +1,10 @@
-// Tests for KT-13597 (val assignment inside local object in constructor)
+// Tests for KT-13597 (konst assignment inside local object in constructor)
 
 class Test {
-    val a: String
+    konst a: String
 
     init {
-        val t = object {
+        konst t = object {
             fun some() {
                 // See KT-13597
                 <!VAL_REASSIGNMENT!>a<!> = "12"
@@ -18,7 +18,7 @@ class Test {
 
 class Test2 {
     init {
-        val t = object {
+        konst t = object {
             fun some() {
                 <!VAL_REASSIGNMENT!>a<!> = "12"
             }
@@ -28,15 +28,15 @@ class Test2 {
         t.some()
     }
 
-    val a: String
+    konst a: String
 }
 
-// Tests for KT-14381 (val assignment inside lambda in constructor)
+// Tests for KT-14381 (konst assignment inside lambda in constructor)
 
 fun <T> exec(f: () -> T): T = f()
 
 class Test4 {
-    val a: String
+    konst a: String
 
     init {
         exec {
@@ -51,12 +51,12 @@ class Test4 {
 
 class Test5 {
 
-    val y: Int
+    konst y: Int
 
-    val z: String
+    konst z: String
 
     init {
-        val x: String
+        konst x: String
         x = ""
         z = x
     }

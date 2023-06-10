@@ -1,15 +1,15 @@
 <!DIRECTIVES("HELPERS: REFLECT")!>
 
 open class A {
-    val x1 = true
+    konst x1 = true
 }
 
 final object <!ELEMENT(2)!> {
-    val x1 = false
+    konst x1 = false
 }
 
 object <!ELEMENT(1)!> : A() {
-    val x2 = false
+    konst x2 = false
 }
 
 fun box(): String? {

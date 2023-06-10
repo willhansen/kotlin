@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.config.LanguageFeature
 import org.jetbrains.kotlin.config.LanguageVersionSettings
 
 sealed class DiagnosticFactoryForDeprecation<E : PsiElement, D : Diagnostic, F : DiagnosticFactoryWithPsiElement<E, D>>(
-    val deprecatingFeature: LanguageFeature,
-    val warningFactory: F,
-    val errorFactory: F
+    konst deprecatingFeature: LanguageFeature,
+    konst warningFactory: F,
+    konst errorFactory: F
 ) {
     fun LanguageVersionSettings.chooseFactory(): F {
         return if (supportsFeature(deprecatingFeature)) errorFactory else warningFactory

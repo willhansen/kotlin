@@ -14,7 +14,7 @@ open class TestBase {
 class TestChild : TestBase()
 
 fun box(): String {
-    val property = TestChild::class.memberProperties.first { it.name == "id" } as KMutableProperty<*>
+    konst property = TestChild::class.memberProperties.first { it.name == "id" } as KMutableProperty<*>
     if (property.javaField == null)
         return "Fail: no field"
     if (property.javaGetter == null)

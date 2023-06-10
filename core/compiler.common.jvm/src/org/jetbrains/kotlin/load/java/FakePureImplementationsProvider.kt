@@ -13,7 +13,7 @@ object FakePureImplementationsProvider {
     fun getPurelyImplementedInterface(classFqName: ClassId): ClassId? = pureImplementationsClassIds[classFqName]
     fun getPurelyImplementedInterface(classFqName: FqName): FqName? = pureImplementationsFqNames[classFqName]
 
-    private val pureImplementationsClassIds = mutableMapOf<ClassId, ClassId>()
+    private konst pureImplementationsClassIds = mutableMapOf<ClassId, ClassId>()
     private infix fun ClassId.implementedWith(implementations: List<ClassId>) {
         implementations.associateWithTo(pureImplementationsClassIds) { this }
     }
@@ -29,8 +29,8 @@ object FakePureImplementationsProvider {
         ClassId.topLevel(FqName("java.util.function.BiFunction")) implementedWith fqNameListOf("java.util.function.BinaryOperator")
     }
 
-    private val pureImplementationsFqNames = pureImplementationsClassIds.map { (key, value) ->
-        key.asSingleFqName() to value.asSingleFqName()
+    private konst pureImplementationsFqNames = pureImplementationsClassIds.map { (key, konstue) ->
+        key.asSingleFqName() to konstue.asSingleFqName()
     }.toMap()
 
     private fun fqNameListOf(vararg names: String): List<ClassId> = names.map { ClassId.topLevel(FqName(it)) }

@@ -17,7 +17,7 @@ class C {
 }
 
 fun box(): String {
-    val (a, b) = A()
+    konst (a, b) = A()
     if (a != 1) return "a != 1, it: $a"
     if (b != "n") return "b != 'n', it: $b"
 
@@ -35,7 +35,7 @@ fun box(): String {
     if (b2 != 2) return "b2 != 2, it: $b2"
     if (b3 != 3) return "b3 != 3, it: $b3"
 
-    val (c) = C()
+    konst (c) = C()
     if (c != 42) return "c != 42, it: $c"
 
     return "OK"

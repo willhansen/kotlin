@@ -11,7 +11,7 @@ repositories {
 }
 
 kotlin {
-    val platformTarget = when {
+    konst platformTarget = when {
         HostManager.hostIsMac -> macosX64("platform")
         HostManager.hostIsMingw -> mingwX64("platform")
         HostManager.hostIsLinux -> linuxX64("platform")
@@ -22,13 +22,13 @@ kotlin {
         header(file("src/nativeInterop/cinterop/sampleInterop.h"))
     }
 
-    val platformTest by sourceSets.getting
-    val nativeTest = sourceSets.create("nativeTest")
+    konst platformTest by sourceSets.getting
+    konst nativeTest = sourceSets.create("nativeTest")
     platformTest.dependsOn(nativeTest)
 
     tasks.create("listNativeTestDependencies") {
         nativeTest as DefaultKotlinSourceSet
-        val nativeTestMetadataConfiguration = configurations[nativeTest.intransitiveMetadataConfigurationName]
+        konst nativeTestMetadataConfiguration = configurations[nativeTest.intransitiveMetadataConfigurationName]
         dependsOn(nativeTestMetadataConfiguration)
 
         doFirst {

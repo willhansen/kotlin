@@ -28,7 +28,7 @@ import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.KtDeclaration
 
 object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclaration, KtDeclaration>() {
-    private val codeFragmentTypes =
+    private konst codeFragmentTypes =
         setOf(KtNodeTypes.BLOCK_CODE_FRAGMENT, KtNodeTypes.EXPRESSION_CODE_FRAGMENT, KtNodeTypes.TYPE_CODE_FRAGMENT)
 
     override fun checkPsiOrLightTree(
@@ -42,12 +42,12 @@ object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclara
         ) {
             return
         }
-        val state = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
+        konst state = context.languageVersionSettings.getFlag(AnalysisFlags.explicitApiMode)
         if (state == ExplicitApiMode.DISABLED) return
         // Enum entries do not have visibilities
         if (element is FirEnumEntry) return
         if (!element.effectiveVisibility.publicApi && element.publishedApiEffectiveVisibility == null) return
-        val lastContainingDeclaration = context.containingDeclarations.lastOrNull()
+        konst lastContainingDeclaration = context.containingDeclarations.lastOrNull()
         if ((lastContainingDeclaration as? FirMemberDeclaration)?.effectiveVisibility?.publicApi == false) {
             return
         }
@@ -63,11 +63,11 @@ object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclara
         context: CheckerContext,
         reporter: DiagnosticReporter
     ) {
-        val visibilityModifier = source.getChild(KtNodeTypes.MODIFIER_LIST, depth = 1)?.getChild(KtTokens.VISIBILITY_MODIFIERS)
+        konst visibilityModifier = source.getChild(KtNodeTypes.MODIFIER_LIST, depth = 1)?.getChild(KtTokens.VISIBILITY_MODIFIERS)
         if (visibilityModifier != null) return
 
         if (explicitVisibilityIsNotRequired(declaration, context)) return
-        val factory = if (state == ExplicitApiMode.STRICT)
+        konst factory = if (state == ExplicitApiMode.STRICT)
             FirErrors.NO_EXPLICIT_VISIBILITY_IN_API_MODE
         else
             FirErrors.NO_EXPLICIT_VISIBILITY_IN_API_MODE_WARNING
@@ -94,7 +94,7 @@ object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclara
             is FirValueParameter, // 6
             is FirAnonymousFunction -> true // 7
             is FirCallableDeclaration -> {
-                val containingClass = context.containingDeclarations.lastOrNull() as? FirRegularClass
+                konst containingClass = context.containingDeclarations.lastOrNull() as? FirRegularClass
                 // 2, 5
                 if (declaration is FirProperty &&
                     containingClass != null &&
@@ -120,9 +120,9 @@ object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclara
         if (declaration !is FirCallableDeclaration) return
         if (!returnTypeCheckIsApplicable(source, context)) return
 
-        val shouldReport = returnTypeRequired(declaration, context)
+        konst shouldReport = returnTypeRequired(declaration, context)
         if (shouldReport) {
-            val factory =
+            konst factory =
                 if (state == ExplicitApiMode.STRICT)
                     FirErrors.NO_EXPLICIT_RETURN_TYPE_IN_API_MODE
                 else
@@ -135,7 +135,7 @@ object FirExplicitApiDeclarationChecker : FirDeclarationSyntaxChecker<FirDeclara
         // Note that by default getChild uses `depth = -1`, which would find all descendents.
         if (source.getChild(KtNodeTypes.TYPE_REFERENCE, depth = 1) != null) return false
         // Do not check if the containing file is not a physical file.
-        val containingFile = context.containingDeclarations.first()
+        konst containingFile = context.containingDeclarations.first()
         if (containingFile.source?.elementType in codeFragmentTypes) return false
 
         return when (source.elementType) {

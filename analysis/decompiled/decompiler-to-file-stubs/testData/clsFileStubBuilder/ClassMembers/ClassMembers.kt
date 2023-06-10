@@ -1,7 +1,7 @@
 package test
 
-abstract class ClassMembers(private val p: Int, public open var p2: String, p3: Int, p4: Int = 10, final val p5: String = "aaa") {
-    val foo = 3
+abstract class ClassMembers(private konst p: Int, public open var p2: String, p3: Int, p4: Int = 10, final konst p5: String = "aaa") {
+    konst foo = 3
     fun bar(): Int {
         return 3
     }
@@ -11,7 +11,7 @@ abstract class ClassMembers(private val p: Int, public open var p2: String, p3: 
 
     abstract fun abstractFun()
 
-    open val openVal = 3
+    open konst openVal = 3
 
     abstract var abstractVar: Int
 }

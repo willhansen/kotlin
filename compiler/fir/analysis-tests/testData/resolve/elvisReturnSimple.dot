@@ -54,7 +54,7 @@ digraph elvisReturnSimple_kt {
             29 [label="Stub" style="filled" fillcolor=gray];
             30 [label="Lhs of ?: is not null" style="filled" fillcolor=gray];
             31 [label="Exit ?:" style="filled" fillcolor=gray];
-            32 [label="Variable declaration: lval s1: R|kotlin/Nothing|" style="filled" fillcolor=gray];
+            32 [label="Variable declaration: lkonst s1: R|kotlin/Nothing|" style="filled" fillcolor=gray];
             33 [label="Exit block" style="filled" fillcolor=gray];
         }
         34 [label="Exit function stringReturnInLeftLen" style="filled" fillcolor=red];

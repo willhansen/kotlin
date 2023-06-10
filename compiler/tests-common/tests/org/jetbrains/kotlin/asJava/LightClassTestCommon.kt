@@ -13,14 +13,14 @@ import java.io.File
 import java.util.regex.Pattern
 
 object LightClassTestCommon {
-    private val SUBJECT_FQ_NAME_PATTERN = Pattern.compile("^//\\s*(.*)$", Pattern.MULTILINE)
-    const val NOT_GENERATED_DIRECTIVE = "// NOT_GENERATED"
+    private konst SUBJECT_FQ_NAME_PATTERN = Pattern.compile("^//\\s*(.*)$", Pattern.MULTILINE)
+    const konst NOT_GENERATED_DIRECTIVE = "// NOT_GENERATED"
 
     fun fqNameInTestDataFile(
         testDataFile: File,
     ): String {
-        val text = FileUtil.loadFile(testDataFile, true)
-        val matcher = SUBJECT_FQ_NAME_PATTERN.matcher(text)
+        konst text = FileUtil.loadFile(testDataFile, true)
+        konst matcher = SUBJECT_FQ_NAME_PATTERN.matcher(text)
         TestCase.assertTrue("No FqName specified. First line of the form '// f.q.Name' expected", matcher.find())
         return matcher.group(1)
     }
@@ -31,9 +31,9 @@ object LightClassTestCommon {
         normalizeText: (String) -> String,
         membersFilter: PsiClassRenderer.MembersFilter = PsiClassRenderer.MembersFilter.DEFAULT
     ): String {
-        val fqName = fqNameInTestDataFile(testDataFile)
+        konst fqName = fqNameInTestDataFile(testDataFile)
 
-        val lightClass = findLightClass(fqName)
+        konst lightClass = findLightClass(fqName)
 
         return actualText(fqName, lightClass, normalizeText, membersFilter)
     }

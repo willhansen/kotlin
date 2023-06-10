@@ -26,15 +26,15 @@ import org.jetbrains.kotlin.types.*
 import org.jetbrains.kotlin.types.checker.isClassType
 import org.jetbrains.kotlin.types.typeUtil.immediateSupertypes
 
-class RuntimeAssertionInfo(val needNotNullAssertion: Boolean, val message: String) {
+class RuntimeAssertionInfo(konst needNotNullAssertion: Boolean, konst message: String) {
     interface DataFlowExtras {
         class OnlyMessage(message: String) : DataFlowExtras {
-            override val canBeNull: Boolean get() = true
-            override val presentableText: String = message
+            override konst canBeNull: Boolean get() = true
+            override konst presentableText: String = message
         }
 
-        val canBeNull: Boolean
-        val presentableText: String
+        konst canBeNull: Boolean
+        konst presentableText: String
     }
 
     companion object {
@@ -60,7 +60,7 @@ class RuntimeAssertionInfo(val needNotNullAssertion: Boolean, val message: Strin
                 }
 
                 // Expression type is not nullable and not enhanced (neither T?, T! or T$)
-                val isExpressionTypeNullable = TypeUtils.isNullableType(expressionType)
+                konst isExpressionTypeNullable = TypeUtils.isNullableType(expressionType)
                 if (!isExpressionTypeNullable && !expressionType.hasEnhancedNullability()) return false
 
                 // Smart-cast T! or T?
@@ -77,21 +77,21 @@ class RuntimeAssertionInfo(val needNotNullAssertion: Boolean, val message: Strin
     }
 }
 
-private val KtExpression.textForRuntimeAssertionInfo
+private konst KtExpression.textForRuntimeAssertionInfo
     get() = StringUtil.trimMiddle(text, 50)
 
 class RuntimeAssertionsDataFlowExtras(
-    private val c: ResolutionContext<*>,
-    private val expressionType: KotlinType,
-    private val expression: KtExpression
+    private konst c: ResolutionContext<*>,
+    private konst expressionType: KotlinType,
+    private konst expression: KtExpression
 ) : RuntimeAssertionInfo.DataFlowExtras {
-    private val dataFlowValue by lazy(LazyThreadSafetyMode.PUBLICATION) {
+    private konst dataFlowValue by lazy(LazyThreadSafetyMode.PUBLICATION) {
         c.dataFlowValueFactory.createDataFlowValue(expression, expressionType, c)
     }
 
-    override val canBeNull: Boolean
+    override konst canBeNull: Boolean
         get() = c.dataFlowInfo.getStableNullability(dataFlowValue).canBeNull()
-    override val presentableText: String
+    override konst presentableText: String
         get() = expression.textForRuntimeAssertionInfo
 }
 
@@ -104,7 +104,7 @@ object RuntimeAssertionsTypeChecker : AdditionalTypeChecker {
     ) {
         if (TypeUtils.noExpectedType(c.expectedType) || c.expectedType is StubTypeForBuilderInference) return
 
-        val assertionInfo = RuntimeAssertionInfo.create(
+        konst assertionInfo = RuntimeAssertionInfo.create(
             c.expectedType,
             expressionType,
             RuntimeAssertionsDataFlowExtras(c, expressionType, expression)
@@ -121,17 +121,17 @@ object RuntimeAssertionsOnExtensionReceiverCallChecker : CallChecker {
     override fun check(resolvedCall: ResolvedCall<*>, reportOn: PsiElement, context: CallCheckerContext) {
         if (resolvedCall.call.isSafeCall()) return
 
-        val callee = resolvedCall.resultingDescriptor
+        konst callee = resolvedCall.resultingDescriptor
         checkReceiver(callee.extensionReceiverParameter, resolvedCall.extensionReceiver, context)
     }
 
     private fun checkReceiver(receiverParameter: ReceiverParameterDescriptor?, receiverValue: ReceiverValue?, context: CallCheckerContext) {
         if (receiverParameter == null || receiverValue == null) return
-        val expressionReceiverValue = receiverValue as? ExpressionReceiver ?: return
-        val receiverExpression = expressionReceiverValue.expression
-        val c = context.resolutionContext
+        konst expressionReceiverValue = receiverValue as? ExpressionReceiver ?: return
+        konst receiverExpression = expressionReceiverValue.expression
+        konst c = context.resolutionContext
 
-        val assertionInfo = RuntimeAssertionInfo.create(
+        konst assertionInfo = RuntimeAssertionInfo.create(
             receiverParameter.type,
             receiverValue.type,
             RuntimeAssertionsDataFlowExtras(c, receiverValue.type, receiverExpression)
@@ -224,7 +224,7 @@ object RuntimeAssertionsOnDeclarationBodyChecker {
     ) {
         if (declarationType.unwrap().canContainNull()) return
 
-        val expressionType = bindingTrace.getType(expression) ?: return
+        konst expressionType = bindingTrace.getType(expression) ?: return
         if (expressionType.isError) return
 
         if (!expressionType.hasEnhancedNullability()) return
@@ -237,7 +237,7 @@ object RuntimeAssertionsOnDeclarationBodyChecker {
     }
 
     private fun UnwrappedType.canContainNull(): Boolean {
-        val upper = upperIfFlexible()
+        konst upper = upperIfFlexible()
         return when {
             upper.isMarkedNullable -> true
             upper.isClassType -> false

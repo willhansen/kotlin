@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.konan.target.KonanTarget
  * @param configurables [Configurables] for target
  */
 class RosettaExecutor(
-    private val configurables: AppleConfigurables,
+    private konst configurables: AppleConfigurables,
 ) : Executor {
     companion object {
         /**
@@ -43,9 +43,9 @@ class RosettaExecutor(
         }
     }
 
-    private val hostExecutor: Executor = HostExecutor()
+    private konst hostExecutor: Executor = HostExecutor()
 
-    private val target by configurables::target
+    private konst target by configurables::target
 
     init {
         require(availableFor(configurables)) {

@@ -26,7 +26,7 @@ internal fun computePackageName(testDataBaseDir: File, testDataFile: File): Pack
         .resolve(testDataFile.nameWithoutExtension)
         .toPath()
         .map { pathSegment ->
-            val packageSegment = pathSegment.name
+            konst packageSegment = pathSegment.name
             if (packageSegment in KEYWORDS)
                 "_${packageSegment}_"
             else
@@ -54,11 +54,11 @@ internal fun Set<PackageName>.findCommonPackageName(): PackageName = when (size)
     else -> map { packageName -> packageName.segments }
         .reduce { commonSegments: List<String>, segments: List<String> ->
             buildList(min(commonSegments.size, segments.size)) {
-                val i = commonSegments.iterator()
-                val j = segments.iterator()
+                konst i = commonSegments.iterator()
+                konst j = segments.iterator()
 
                 while (i.hasNext() && j.hasNext()) {
-                    val segment = i.next()
+                    konst segment = i.next()
                     if (segment == j.next()) add(segment) else break
                 }
             }

@@ -21,40 +21,40 @@ import org.jetbrains.kotlin.cli.common.arguments.Freezable
 
 class CompilerSettings : Freezable() {
     var additionalArguments: String = DEFAULT_ADDITIONAL_ARGUMENTS
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
     var scriptTemplates: String = ""
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
     var scriptTemplatesClasspath: String = ""
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
     var copyJsLibraryFiles = true
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
     var outputDirectoryForJsLibraryFiles: String = DEFAULT_OUTPUT_DIRECTORY
-        set(value) {
+        set(konstue) {
             checkFrozen()
-            field = value
+            field = konstue
         }
 
     companion object {
-        val DEFAULT_ADDITIONAL_ARGUMENTS = ""
-        private val DEFAULT_OUTPUT_DIRECTORY = "lib"
+        konst DEFAULT_ADDITIONAL_ARGUMENTS = ""
+        private konst DEFAULT_OUTPUT_DIRECTORY = "lib"
     }
 
     override fun copyOf(): Freezable = copyCompilerSettings(this, CompilerSettings())
 }
 
-val CompilerSettings.additionalArgumentsAsList: List<String>
+konst CompilerSettings.additionalArgumentsAsList: List<String>
     get() = splitArgumentString(additionalArguments)
 
 fun splitArgumentString(arguments: String) = StringUtil.splitHonorQuotes(arguments, ' ').map {

@@ -33,9 +33,9 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 internal class KtFe10SymbolContainingDeclarationProvider(
-    override val analysisSession: KtFe10AnalysisSession
+    override konst analysisSession: KtFe10AnalysisSession
 ) : KtSymbolContainingDeclarationProvider(), Fe10KtAnalysisSessionComponent {
-    override val token: KtLifetimeToken
+    override konst token: KtLifetimeToken
         get() = analysisSession.token
 
     override fun getContainingDeclaration(symbol: KtSymbol): KtDeclarationSymbol? {
@@ -51,9 +51,9 @@ internal class KtFe10SymbolContainingDeclarationProvider(
 
     // TODO this is a dummy and incorrect implementation just to satisfy some tests
     override fun getContainingModule(symbol: KtSymbol): KtModule {
-        val descriptor = symbol.getDescriptor()
+        konst descriptor = symbol.getDescriptor()
 
-        val symbolPsi = descriptor?.let(DescriptorToSourceUtils::getContainingFile) ?: symbol.psi
+        konst symbolPsi = descriptor?.let(DescriptorToSourceUtils::getContainingFile) ?: symbol.psi
         if (symbolPsi != null) {
             return analysisSession.getModule(symbolPsi)
         }
@@ -70,21 +70,21 @@ internal class KtFe10SymbolContainingDeclarationProvider(
     }
 
     private fun getFakeContainingKtModule(descriptor: DescriptorWithContainerSource): KtModule {
-        val libraryPath = Paths.get((descriptor.containerSource as JvmPackagePartSource).knownJvmBinaryClass?.containingLibrary!!)
+        konst libraryPath = Paths.get((descriptor.containerSource as JvmPackagePartSource).knownJvmBinaryClass?.containingLibrary!!)
         return object : KtLibraryModule {
-            override val libraryName: String = libraryPath.fileName.toString().substringBeforeLast(".")
-            override val librarySources: KtLibrarySourceModule? = null
+            override konst libraryName: String = libraryPath.fileName.toString().substringBeforeLast(".")
+            override konst librarySources: KtLibrarySourceModule? = null
             override fun getBinaryRoots(): Collection<Path> = listOf(libraryPath)
-            override val directRegularDependencies: List<KtModule> = emptyList()
-            override val directDependsOnDependencies: List<KtModule> = emptyList()
-            override val transitiveDependsOnDependencies: List<KtModule> = emptyList()
-            override val directFriendDependencies: List<KtModule> = emptyList()
-            override val contentScope: GlobalSearchScope = ProjectScope.getLibrariesScope(project)
-            override val platform: TargetPlatform
+            override konst directRegularDependencies: List<KtModule> = emptyList()
+            override konst directDependsOnDependencies: List<KtModule> = emptyList()
+            override konst transitiveDependsOnDependencies: List<KtModule> = emptyList()
+            override konst directFriendDependencies: List<KtModule> = emptyList()
+            override konst contentScope: GlobalSearchScope = ProjectScope.getLibrariesScope(project)
+            override konst platform: TargetPlatform
                 get() = descriptor.platform!!
-            override val analyzerServices: PlatformDependentAnalyzerServices
+            override konst analyzerServices: PlatformDependentAnalyzerServices
                 get() = JvmPlatformAnalyzerServices
-            override val project: Project
+            override konst project: Project
                 get() = analysisSession.analysisContext.resolveSession.project
 
         }

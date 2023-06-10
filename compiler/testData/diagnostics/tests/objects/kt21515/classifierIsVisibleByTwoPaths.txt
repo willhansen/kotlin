@@ -17,9 +17,9 @@ public open class A {
 
 public final class B : A {
     public constructor B()
-    public final val a: A.FromA? = null
-    public final val b: kotlin.reflect.KFunction1<A.FromA, kotlin.Int>
-    public final val c: A.FromA
+    public final konst a: A.FromA? = null
+    public final konst b: kotlin.reflect.KFunction1<A.FromA, kotlin.Int>
+    public final konst c: A.FromA
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

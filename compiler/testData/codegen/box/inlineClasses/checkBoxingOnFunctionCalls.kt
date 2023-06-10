@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullPrimitive(val x: Int)
+konstue class InlineNotNullPrimitive(konst x: Int)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class InlineNotNullReference(val y: String)
+konstue class InlineNotNullReference(konst y: String)
 
 fun <T> testNotNullPrimitive(a: Any, b: T, c: InlineNotNullPrimitive, d: InlineNotNullPrimitive?) {}
 fun <T> testNotNullReference(a: Any, b: T, c: InlineNotNullReference, d: InlineNotNullReference?) {}
@@ -17,8 +17,8 @@ fun test(a: InlineNotNullPrimitive, b: InlineNotNullReference) {
 }
 
 fun box(): String {
-    val a = InlineNotNullPrimitive(10)
-    val b = InlineNotNullReference("some")
+    konst a = InlineNotNullPrimitive(10)
+    konst b = InlineNotNullReference("some")
 
     test(a, b)
 

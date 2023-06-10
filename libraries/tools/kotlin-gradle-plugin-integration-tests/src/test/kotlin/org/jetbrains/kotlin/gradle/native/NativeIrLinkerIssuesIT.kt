@@ -294,14 +294,14 @@ internal class NativeIrLinkerIssuesIT : KGPBaseTest() {
         prepareProject(directoryPrefix, projectName, localRepo, nativeCacheKind, gradleVersion) {
             buildAndFail("linkDebugExecutableNative", buildOptions = this.buildOptions.copy(logLevel = LogLevel.DEBUG)) {
 
-                val kotlinNativeCompilerVersion = findKotlinNativeCompilerVersion(output)
+                konst kotlinNativeCompilerVersion = findKotlinNativeCompilerVersion(output)
                 assertNotNull(kotlinNativeCompilerVersion)
 
-                val errorMessage = ERROR_LINE_REGEX.findAll(getOutputForTask(":linkDebugExecutableNative"))
+                konst errorMessage = ERROR_LINE_REGEX.findAll(getOutputForTask(":linkDebugExecutableNative"))
                     .map { matchResult -> matchResult.groupValues[1] }
                     .filterNot { it.startsWith("w:") || it.startsWith("v:") || it.startsWith("i:") }.map { line ->
                         line.replace(COMPRESSED_PLATFORM_LIBS_REGEX) { result ->
-                            val rangeWithPlatformLibrariesCount = result.groups[1]!!.range
+                            konst rangeWithPlatformLibrariesCount = result.groups[1]!!.range
                             buildString {
                                 append(line.substring(0, rangeWithPlatformLibrariesCount.first))
                                 append("NNN")
@@ -343,8 +343,8 @@ internal class NativeIrLinkerIssuesIT : KGPBaseTest() {
     }
 
     companion object {
-        private val ERROR_LINE_REGEX = "(?m)^.*\\[ERROR] \\[\\S+] (.*)$".toRegex()
-        private val COMPRESSED_PLATFORM_LIBS_REGEX =
+        private konst ERROR_LINE_REGEX = "(?m)^.*\\[ERROR] \\[\\S+] (.*)$".toRegex()
+        private konst COMPRESSED_PLATFORM_LIBS_REGEX =
             ".*${KONAN_PLATFORM_LIBS_NAME_PREFIX.replace(".", "\\.")}\\* \\((\\d+) libraries\\).*".toRegex()
 
         private fun findKotlinNativeCompilerVersion(output: String): String? = findParameterInOutput(

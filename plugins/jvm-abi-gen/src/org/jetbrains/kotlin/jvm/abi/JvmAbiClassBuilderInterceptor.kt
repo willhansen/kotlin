@@ -36,7 +36,7 @@ enum class AbiMethodInfo {
 
 sealed class AbiClassInfo {
     object Public : AbiClassInfo()
-    class Stripped(val methodInfo: Map<Method, AbiMethodInfo>) : AbiClassInfo()
+    class Stripped(konst methodInfo: Map<Method, AbiMethodInfo>) : AbiClassInfo()
 }
 
 /**
@@ -65,21 +65,21 @@ sealed class AbiClassInfo {
  * single inline method `f` which should be kept.
  */
 class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
-    val abiClassInfo: MutableMap<String, AbiClassInfo> = mutableMapOf()
+    konst abiClassInfo: MutableMap<String, AbiClassInfo> = mutableMapOf()
 
     override fun generateClass(generator: ClassGenerator, declaration: IrClass?): ClassGenerator =
         AbiInfoClassGenerator(generator, declaration)
 
     private inner class AbiInfoClassGenerator(
-        private val delegate: ClassGenerator,
+        private konst delegate: ClassGenerator,
         irClass: IrClass?,
     ) : ClassGenerator by delegate {
-        private val isPrivateClass = irClass != null && DescriptorVisibilities.isPrivate(irClass.visibility)
+        private konst isPrivateClass = irClass != null && DescriptorVisibilities.isPrivate(irClass.visibility)
         lateinit var internalName: String
         var localOrAnonymousClass = false
         var publicAbi = false
-        val methodInfos = mutableMapOf<Method, AbiMethodInfo>()
-        val maskedMethods = mutableSetOf<Method>() // Methods which should be stripped even if they are marked as KEEP
+        konst methodInfos = mutableMapOf<Method, AbiMethodInfo>()
+        konst maskedMethods = mutableSetOf<Method>() // Methods which should be stripped even if they are marked as KEEP
 
         override fun defineClass(
             version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>
@@ -137,16 +137,16 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
 
         // Parse the public ABI flag from the Kotlin metadata annotation
         override fun visitAnnotation(desc: String, visible: Boolean): AnnotationVisitor {
-            val delegate = delegate.visitAnnotation(desc, visible)
+            konst delegate = delegate.visitAnnotation(desc, visible)
             if (publicAbi || desc != JvmAnnotationNames.METADATA_DESC)
                 return delegate
 
             return object : AnnotationVisitor(Opcodes.API_VERSION, delegate) {
-                override fun visit(name: String?, value: Any?) {
-                    if ((name == JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME) && (value is Int)) {
-                        publicAbi = publicAbi || value and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG != 0
+                override fun visit(name: String?, konstue: Any?) {
+                    if ((name == JvmAnnotationNames.METADATA_EXTRA_INT_FIELD_NAME) && (konstue is Int)) {
+                        publicAbi = publicAbi || konstue and JvmAnnotationNames.METADATA_PUBLIC_ABI_FLAG != 0
                     }
-                    super.visit(name, value)
+                    super.visit(name, konstue)
                 }
             }
         }
@@ -167,7 +167,7 @@ class JvmAbiClassBuilderInterceptor : ClassGeneratorExtension {
             delegate.done(generateSmapCopyToAnnotation)
         }
 
-        private val isWhenMappingClass: Boolean
+        private konst isWhenMappingClass: Boolean
             get() = internalName.endsWith(WhenByEnumsMapping.MAPPINGS_CLASS_NAME_POSTFIX)
     }
 }

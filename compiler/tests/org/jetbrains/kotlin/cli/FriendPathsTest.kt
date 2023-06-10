@@ -43,7 +43,7 @@ class FriendPathsTest : TestCaseWithTmpdir() {
     }
 
     private fun doTestFriendPaths(libDest: File) {
-        val libSrc = File(getTestDataDirectory(), "lib.kt")
+        konst libSrc = File(getTestDataDirectory(), "lib.kt")
         CompilerTestUtil.executeCompilerAssertSuccessful(K2JVMCompiler(), listOf("-d", libDest.path, libSrc.path))
 
         CompilerTestUtil.executeCompilerAssertSuccessful(

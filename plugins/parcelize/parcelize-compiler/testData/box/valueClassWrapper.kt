@@ -11,27 +11,27 @@ import android.os.Parcelable
 
 @Parcelize
 @JvmInline
-value class ListWrapper(val list: List<String>) : Parcelable
+konstue class ListWrapper(konst list: List<String>) : Parcelable
 
 @Parcelize
-data class Wrapper(val listWrapper: ListWrapper) : Parcelable
+data class Wrapper(konst listWrapper: ListWrapper) : Parcelable
 
 @Parcelize
-data class NullableWrapper(val listWrapper: ListWrapper?) : Parcelable
+data class NullableWrapper(konst listWrapper: ListWrapper?) : Parcelable
 
 fun box() = parcelTest { parcel ->
-    val data = Wrapper(ListWrapper(listOf("O", "K")))
-    val none = NullableWrapper(null)
+    konst data = Wrapper(ListWrapper(listOf("O", "K")))
+    konst none = NullableWrapper(null)
     data.writeToParcel(parcel, 0)
     none.writeToParcel(parcel, 0)
 
-    val bytes = parcel.marshall()
+    konst bytes = parcel.marshall()
     parcel.unmarshall(bytes, 0, bytes.size)
     parcel.setDataPosition(0)
 
-    val data2 = parcelableCreator<Wrapper>().createFromParcel(parcel)
+    konst data2 = parcelableCreator<Wrapper>().createFromParcel(parcel)
     assert(data2 == data)
 
-    val none2 = parcelableCreator<NullableWrapper>().createFromParcel(parcel)
+    konst none2 = parcelableCreator<NullableWrapper>().createFromParcel(parcel)
     assert(none2 == none)
 }

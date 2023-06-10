@@ -12,11 +12,11 @@ external class Object {
 }
 
 fun box(): String {
-    val a = js("{}")
+    konst a = js("{}")
     if (!isOrdinaryObject(a)) return "fail: a is not an object"
     if (Object.keys(a).size != 0) return "fail: a should not have any properties"
 
-    val b = js("{ foo: 23, bar: 42 }")
+    konst b = js("{ foo: 23, bar: 42 }")
     if (!isOrdinaryObject(b)) return "fail: b is not an object"
     if (Object.keys(b).size != 2) return "fail: b should have two properties"
     if (b.foo != 23) return "fail: b.foo == ${b.foo}"

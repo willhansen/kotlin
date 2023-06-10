@@ -19,10 +19,10 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirDelegateFieldReferenceImpl(
-    override val source: KtSourceElement?,
-    override val resolvedSymbol: FirDelegateFieldSymbol,
+    override konst source: KtSourceElement?,
+    override konst resolvedSymbol: FirDelegateFieldSymbol,
 ) : FirDelegateFieldReference() {
-    override val name: Name get() = Name.identifier("\$delegate")
+    override konst name: Name get() = Name.identifier("\$delegate")
 
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

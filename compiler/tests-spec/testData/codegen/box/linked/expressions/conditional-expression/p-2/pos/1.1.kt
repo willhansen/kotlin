@@ -6,7 +6,7 @@
  * SPEC VERSION: 0.1-218
  * MAIN LINK: expressions, conditional-expression -> paragraph 2 -> sentence 1
  * NUMBER: 1
- * DESCRIPTION: branchless conditional expression, despite being of almost no practical use, is valid in Kotlin
+ * DESCRIPTION: branchless conditional expression, despite being of almost no practical use, is konstid in Kotlin
  */
 
 fun box(): String {
@@ -18,7 +18,7 @@ fun box(): String {
 
     if (true) else
     ;
-    val x = {
+    konst x = {
         if (true) else;
     }
 
@@ -30,7 +30,7 @@ fun box(): String {
 
     if (false) else
     ;
-    val x1 = {
+    konst x1 = {
         if (false) else;
     }
     return "OK"

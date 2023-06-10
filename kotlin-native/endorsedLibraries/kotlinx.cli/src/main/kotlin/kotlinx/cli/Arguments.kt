@@ -9,7 +9,7 @@ import kotlin.reflect.KProperty
 internal data class CLIEntityWrapper(var entity: CLIEntity<*>? = null)
 
 /**
- * Base interface for all possible types of entities with default and required values.
+ * Base interface for all possible types of entities with default and required konstues.
  * Provides limitations for API that is accessible for different options/arguments types.
  * Allows to save the reason why option/argument can(or can't) be omitted in command line.
  *
@@ -17,17 +17,17 @@ internal data class CLIEntityWrapper(var entity: CLIEntity<*>? = null)
  */
 interface DefaultRequiredType {
     /**
-     * Type of an entity with default value.
+     * Type of an entity with default konstue.
      */
     class Default : DefaultRequiredType
 
     /**
-     * Type of an entity which value should always be provided in command line.
+     * Type of an entity which konstue should always be provided in command line.
      */
     class Required : DefaultRequiredType
 
     /**
-     * Type of entity which is optional and has no default value.
+     * Type of entity which is optional and has no default konstue.
      */
     class None : DefaultRequiredType
 }
@@ -35,31 +35,31 @@ interface DefaultRequiredType {
 /**
  * The base class for a command line argument or an option.
  */
-abstract class CLIEntity<TResult> internal constructor(val delegate: ArgumentValueDelegate<TResult>,
-                                                       internal val owner: CLIEntityWrapper) {
+abstract class CLIEntity<TResult> internal constructor(konst delegate: ArgumentValueDelegate<TResult>,
+                                                       internal konst owner: CLIEntityWrapper) {
     /**
-     * The value of the option or argument parsed from command line.
+     * The konstue of the option or argument parsed from command line.
      *
-     * Accessing this property before it gets its value will result in an exception.
-     * You can use [valueOrigin] property to find out whether the property has been already set.
+     * Accessing this property before it gets its konstue will result in an exception.
+     * You can use [konstueOrigin] property to find out whether the property has been already set.
      *
-     * @see ArgumentValueDelegate.value
+     * @see ArgumentValueDelegate.konstue
      */
-    var value: TResult
-        get() = delegate.value
-        set(value) {
-            check((delegate as ParsingValue<*, *>).valueOrigin != ArgParser.ValueOrigin.UNDEFINED) {
-                "Resetting value of option/argument is only possible after parsing command line arguments." +
+    var konstue: TResult
+        get() = delegate.konstue
+        set(konstue) {
+            check((delegate as ParsingValue<*, *>).konstueOrigin != ArgParser.ValueOrigin.UNDEFINED) {
+                "Resetting konstue of option/argument is only possible after parsing command line arguments." +
                         " ArgParser.parse(...) method should be called before"
             }
-            delegate.value = value
+            delegate.konstue = konstue
         }
 
     /**
-     * The origin of the option/argument value.
+     * The origin of the option/argument konstue.
      */
-    val valueOrigin: ArgParser.ValueOrigin
-        get() = (delegate as ParsingValue<*, *>).valueOrigin
+    konst konstueOrigin: ArgParser.ValueOrigin
+        get() = (delegate as ParsingValue<*, *>).konstueOrigin
 
     private var delegateProvided = false
 
@@ -91,10 +91,10 @@ abstract class Argument<TResult> internal constructor(delegate: ArgumentValueDel
                                                       owner: CLIEntityWrapper): CLIEntity<TResult>(delegate, owner)
 
 /**
- * The base class of an argument with a single value.
+ * The base class of an argument with a single konstue.
  *
- * A non-optional argument or an optional argument with a default value is represented with the [SingleArgument] inheritor.
- * An optional argument having nullable value is represented with the [SingleNullableArgument] inheritor.
+ * A non-optional argument or an optional argument with a default konstue is represented with the [SingleArgument] inheritor.
+ * An optional argument having nullable konstue is represented with the [SingleNullableArgument] inheritor.
  */
 // TODO: investigate if we can collapse two inheritors into the single base class and specialize extensions by TResult upper bound
 abstract class AbstractSingleArgument<T: Any, TResult, DefaultRequired: DefaultRequiredType> internal constructor(
@@ -106,15 +106,15 @@ abstract class AbstractSingleArgument<T: Any, TResult, DefaultRequired: DefaultR
      */
     internal fun checkDescriptor(descriptor: ArgDescriptor<*, *>) {
         if (descriptor.number == null || descriptor.number > 1) {
-            failAssertion("Argument with single value can't be initialized with descriptor for multiple values.")
+            failAssertion("Argument with single konstue can't be initialized with descriptor for multiple konstues.")
         }
     }
 }
 
 /**
- * A non-optional argument or an optional argument with a default value.
+ * A non-optional argument or an optional argument with a default konstue.
  *
- * The [value] of such argument is non-null.
+ * The [konstue] of such argument is non-null.
  */
 class SingleArgument<T : Any, DefaultRequired: DefaultRequiredType> internal constructor(descriptor: ArgDescriptor<T, T>,
                                                    owner: CLIEntityWrapper):
@@ -125,7 +125,7 @@ class SingleArgument<T : Any, DefaultRequired: DefaultRequiredType> internal con
 }
 
 /**
- * An optional argument with nullable [value].
+ * An optional argument with nullable [konstue].
  */
 class SingleNullableArgument<T : Any> internal constructor(descriptor: ArgDescriptor<T, T>, owner: CLIEntityWrapper):
         AbstractSingleArgument<T, T?, DefaultRequiredType.None>(ArgumentSingleNullableValue(descriptor), owner) {
@@ -135,31 +135,31 @@ class SingleNullableArgument<T : Any> internal constructor(descriptor: ArgDescri
 }
 
 /**
- * An argument that allows several values to be provided in command line string.
+ * An argument that allows several konstues to be provided in command line string.
  *
- * The [value] property of such argument has type `List<T>`.
+ * The [konstue] property of such argument has type `List<T>`.
  */
 class MultipleArgument<T : Any, DefaultRequired: DefaultRequiredType> internal constructor(
     descriptor: ArgDescriptor<T, List<T>>, owner: CLIEntityWrapper):
         Argument<List<T>>(ArgumentMultipleValues(descriptor), owner) {
     init {
         if (descriptor.number != null && descriptor.number < 2) {
-            failAssertion("Argument with multiple values can't be initialized with descriptor for single one.")
+            failAssertion("Argument with multiple konstues can't be initialized with descriptor for single one.")
         }
     }
 }
 
 /**
- * Allows the argument to have several values specified in command line string.
+ * Allows the argument to have several konstues specified in command line string.
  *
- * @param number the exact number of values expected for this argument, but at least 2.
+ * @param number the exact number of konstues expected for this argument, but at least 2.
  *
- * @throws IllegalArgumentException if number of values expected for this argument less than 2.
+ * @throws IllegalArgumentException if number of konstues expected for this argument less than 2.
  */
 fun <T : Any, TResult, DefaultRequired: DefaultRequiredType>
         AbstractSingleArgument<T, TResult, DefaultRequired>.multiple(number: Int): MultipleArgument<T, DefaultRequired> {
-    require(number >= 2) { "multiple() modifier with value less than 2 is unavailable. It's already set to 1." }
-    val newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
+    require(number >= 2) { "multiple() modifier with konstue less than 2 is unavailable. It's already set to 1." }
+    konst newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
         MultipleArgument<T, DefaultRequired>(ArgDescriptor(type, fullName, number, description, listOfNotNull(defaultValue),
                 required, deprecatedWarning), owner)
     }
@@ -168,11 +168,11 @@ fun <T : Any, TResult, DefaultRequired: DefaultRequiredType>
 }
 
 /**
- * Allows the last argument to take all the trailing values in command line string.
+ * Allows the last argument to take all the trailing konstues in command line string.
  */
 fun <T : Any, TResult, DefaultRequired: DefaultRequiredType> AbstractSingleArgument<T, TResult, DefaultRequired>.vararg():
         MultipleArgument<T, DefaultRequired> {
-    val newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
+    konst newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
         MultipleArgument<T, DefaultRequired>(ArgDescriptor(type, fullName, null, description, listOfNotNull(defaultValue),
                 required, deprecatedWarning), owner)
     }
@@ -181,16 +181,16 @@ fun <T : Any, TResult, DefaultRequired: DefaultRequiredType> AbstractSingleArgum
 }
 
 /**
- * Specifies the default value for the argument, that will be used when no value is provided for the argument
+ * Specifies the default konstue for the argument, that will be used when no konstue is provided for the argument
  * in command line string.
  *
- * Argument becomes optional, because value for it is set even if it isn't provided in command line.
+ * Argument becomes optional, because konstue for it is set even if it isn't provided in command line.
  *
- * @param value the default value.
+ * @param konstue the default konstue.
  */
-fun <T: Any> SingleNullableArgument<T>.default(value: T): SingleArgument<T, DefaultRequiredType.Default> {
-    val newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
-        SingleArgument<T, DefaultRequiredType.Default>(ArgDescriptor(type, fullName, number, description, value,
+fun <T: Any> SingleNullableArgument<T>.default(konstue: T): SingleArgument<T, DefaultRequiredType.Default> {
+    konst newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
+        SingleArgument<T, DefaultRequiredType.Default>(ArgDescriptor(type, fullName, number, description, konstue,
             false, deprecatedWarning), owner)
     }
     owner.entity = newArgument
@@ -198,18 +198,18 @@ fun <T: Any> SingleNullableArgument<T>.default(value: T): SingleArgument<T, Defa
 }
 
 /**
- * Specifies the default value for the argument with multiple values, that will be used when no values are provided
+ * Specifies the default konstue for the argument with multiple konstues, that will be used when no konstues are provided
  * for the argument in command line string.
  *
- * Argument becomes optional, because value for it is set even if it isn't provided in command line.
+ * Argument becomes optional, because konstue for it is set even if it isn't provided in command line.
  *
- * @param value the default value, must be a non-empty collection.
+ * @param konstue the default konstue, must be a non-empty collection.
  */
-fun <T: Any> MultipleArgument<T, DefaultRequiredType.None>.default(value: Collection<T>):
+fun <T: Any> MultipleArgument<T, DefaultRequiredType.None>.default(konstue: Collection<T>):
         MultipleArgument<T, DefaultRequiredType.Default> {
-    require (value.isNotEmpty()) { "Default value for argument can't be empty collection." }
-    val newArgument = with((delegate.cast<ParsingValue<T, List<T>>>()).descriptor as ArgDescriptor) {
-        MultipleArgument<T, DefaultRequiredType.Default>(ArgDescriptor(type, fullName, number, description, value.toList(),
+    require (konstue.isNotEmpty()) { "Default konstue for argument can't be empty collection." }
+    konst newArgument = with((delegate.cast<ParsingValue<T, List<T>>>()).descriptor as ArgDescriptor) {
+        MultipleArgument<T, DefaultRequiredType.Default>(ArgDescriptor(type, fullName, number, description, konstue.toList(),
                 required, deprecatedWarning), owner)
     }
     owner.entity = newArgument
@@ -217,14 +217,14 @@ fun <T: Any> MultipleArgument<T, DefaultRequiredType.None>.default(value: Collec
 }
 
 /**
- * Allows the argument to have no value specified in command line string.
+ * Allows the argument to have no konstue specified in command line string.
  *
- * The value of the argument is `null` in case if no value was specified in command line string.
+ * The konstue of the argument is `null` in case if no konstue was specified in command line string.
  *
  * Note that only trailing arguments can be optional, i.e. no required arguments can follow optional ones.
  */
 fun <T: Any> SingleArgument<T, DefaultRequiredType.Required>.optional(): SingleNullableArgument<T> {
-    val newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
+    konst newArgument = with((delegate.cast<ParsingValue<T, T>>()).descriptor as ArgDescriptor) {
         SingleNullableArgument(ArgDescriptor(type, fullName, number, description, defaultValue,
                 false, deprecatedWarning), owner)
     }
@@ -233,14 +233,14 @@ fun <T: Any> SingleArgument<T, DefaultRequiredType.Required>.optional(): SingleN
 }
 
 /**
- * Allows the argument with multiple values to have no values specified in command line string.
+ * Allows the argument with multiple konstues to have no konstues specified in command line string.
  *
- * The value of the argument is an empty list in case if no value was specified in command line string.
+ * The konstue of the argument is an empty list in case if no konstue was specified in command line string.
  *
  * Note that only trailing arguments can be optional: no required arguments can follow the optional ones.
  */
 fun <T: Any> MultipleArgument<T, DefaultRequiredType.Required>.optional(): MultipleArgument<T, DefaultRequiredType.None> {
-    val newArgument = with((delegate.cast<ParsingValue<T, List<T>>>()).descriptor as ArgDescriptor) {
+    konst newArgument = with((delegate.cast<ParsingValue<T, List<T>>>()).descriptor as ArgDescriptor) {
         MultipleArgument<T, DefaultRequiredType.None>(ArgDescriptor(type, fullName, number, description,
                 defaultValue?.toList() ?: listOf(), false, deprecatedWarning), owner)
     }

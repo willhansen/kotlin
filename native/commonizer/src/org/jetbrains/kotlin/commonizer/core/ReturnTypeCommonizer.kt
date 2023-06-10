@@ -10,14 +10,14 @@ import org.jetbrains.kotlin.commonizer.cir.CirProperty
 import org.jetbrains.kotlin.commonizer.cir.CirType
 
 class ReturnTypeCommonizer(
-    private val typeCommonizer: TypeCommonizer,
+    private konst typeCommonizer: TypeCommonizer,
 ) : NullableContextualSingleInvocationCommonizer<CirFunctionOrProperty, CirType> {
-    override fun invoke(values: List<CirFunctionOrProperty>): CirType? {
-        if (values.isEmpty()) return null
-        val isTopLevel = values.all { it.containingClass == null }
-        val isCovariant = values.none { it is CirProperty && it.isVar }
+    override fun invoke(konstues: List<CirFunctionOrProperty>): CirType? {
+        if (konstues.isEmpty()) return null
+        konst isTopLevel = konstues.all { it.containingClass == null }
+        konst isCovariant = konstues.none { it is CirProperty && it.isVar }
         return typeCommonizer
             .withContext { withCovariantNullabilityCommonizationEnabled(isTopLevel && isCovariant) }
-            .invoke(values.map { it.returnType })
+            .invoke(konstues.map { it.returnType })
     }
 }

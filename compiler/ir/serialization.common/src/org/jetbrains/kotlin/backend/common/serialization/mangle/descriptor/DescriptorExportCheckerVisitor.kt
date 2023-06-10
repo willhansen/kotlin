@@ -19,7 +19,7 @@ abstract class DescriptorExportCheckerVisitor : DeclarationDescriptorVisitor<Boo
 
     private fun <D> D.isExported(): Boolean where D : DeclarationDescriptorNonRoot, D : DeclarationDescriptorWithVisibility {
         if (getContainingDeclaration() is PackageFragmentDescriptor) {
-            val visibility = visibility
+            konst visibility = visibility
             if (visibility.isPublicAPI || visibility === DescriptorVisibilities.INTERNAL) return true
             if (visibility === DescriptorVisibilities.LOCAL) return false
             return annotations.hasAnnotation(publishedApiAnnotation) || isPlatformSpecificExported()

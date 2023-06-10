@@ -12,7 +12,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class FragmentTest : AbstractSerializationTest<IdeaKpmFragment>() {
-    override fun serialize(value: IdeaKpmFragment) = value.toByteArray(this)
+    override fun serialize(konstue: IdeaKpmFragment) = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray) = IdeaKpmFragment(data)
 
     @Test
@@ -25,10 +25,10 @@ class FragmentTest : AbstractSerializationTest<IdeaKpmFragment>() {
         testDeserializedEquals(TestIdeaKpmInstances.fragmentWithExtras)
     }
 
-    private fun testDeserializedEquals(value: IdeaKpmFragmentImpl) {
-        val deserialized = IdeaKpmFragment(value.toByteArray(this))
-        val normalized = value.copy(
-            dependencies = value.dependencies.map {
+    private fun testDeserializedEquals(konstue: IdeaKpmFragmentImpl) {
+        konst deserialized = IdeaKpmFragment(konstue.toByteArray(this))
+        konst normalized = konstue.copy(
+            dependencies = konstue.dependencies.map {
                 if (it !is IdeaKpmResolvedBinaryDependency) return@map it
                 IdeaKpmResolvedBinaryDependencyImpl(
                     coordinates = it.coordinates,
@@ -37,10 +37,10 @@ class FragmentTest : AbstractSerializationTest<IdeaKpmFragment>() {
                     extras = it.extras
                 )
             },
-            languageSettings = (value.languageSettings as IdeaKpmLanguageSettingsImpl).copy(
-                compilerPluginClasspath = value.languageSettings.compilerPluginClasspath.map { it.absoluteFile }
+            languageSettings = (konstue.languageSettings as IdeaKpmLanguageSettingsImpl).copy(
+                compilerPluginClasspath = konstue.languageSettings.compilerPluginClasspath.map { it.absoluteFile }
             ),
-            contentRoots = value.contentRoots
+            contentRoots = konstue.contentRoots
                 .map { it as IdeaKpmContentRootImpl }
                 .map { it.copy(file = it.file.absoluteFile) }
         )

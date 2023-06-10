@@ -2,11 +2,11 @@
 // FILE: lib.kt
 
 interface I {
-    val bar: Int
+    konst bar: Int
 }
 
 class Impl : I {
-    override val bar: Int = 42
+    override konst bar: Int = 42
 }
 
 class D1(foo: I) : I by foo
@@ -17,7 +17,7 @@ class D1(foo: I) : I by foo
 class D2(foo: I) : I by foo
 
 fun box() : String {
-    val c = Impl()
+    konst c = Impl()
     if (D1(c).bar != 42) return "FAIL 1"
     if (D2(c).bar != 42) return "FAIL 2"
     return "OK"

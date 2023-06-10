@@ -31,24 +31,24 @@ interface DependenciesResolver : ScriptDependenciesResolver {
     }
 
     sealed class ResolveResult {
-        abstract val dependencies: ScriptDependencies?
-        abstract val reports: List<ScriptReport>
+        abstract konst dependencies: ScriptDependencies?
+        abstract konst reports: List<ScriptReport>
 
         data class Success(
-                override val dependencies: ScriptDependencies,
-                override val reports: List<ScriptReport> = listOf()
+                override konst dependencies: ScriptDependencies,
+                override konst reports: List<ScriptReport> = listOf()
         ) : ResolveResult()
 
-        data class Failure(override val reports: List<ScriptReport>) : ResolveResult() {
+        data class Failure(override konst reports: List<ScriptReport>) : ResolveResult() {
             constructor(vararg reports: ScriptReport) : this(reports.asList())
 
-            override val dependencies: ScriptDependencies? get() = null
+            override konst dependencies: ScriptDependencies? get() = null
         }
     }
 }
 
-data class ScriptReport(val message: String, val severity: Severity = Severity.ERROR, val position: Position? = null) {
-    data class Position(val startLine: Int, val startColumn: Int, val endLine: Int? = null, val endColumn: Int? = null)
+data class ScriptReport(konst message: String, konst severity: Severity = Severity.ERROR, konst position: Position? = null) {
+    data class Position(konst startLine: Int, konst startColumn: Int, konst endLine: Int? = null, konst endColumn: Int? = null)
     enum class Severity { FATAL, ERROR, WARNING, INFO, DEBUG }
 }
 

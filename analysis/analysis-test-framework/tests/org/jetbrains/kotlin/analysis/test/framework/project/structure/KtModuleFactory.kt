@@ -15,4 +15,4 @@ fun interface KtModuleFactory : TestService {
     fun createModule(testModule: TestModule, testServices: TestServices, project: Project): KtModuleWithFiles
 }
 
-val TestServices.ktModuleFactory: KtModuleFactory by TestServices.testServiceAccessor()
+konst TestServices.ktModuleFactory: KtModuleFactory by TestServices.testServiceAccessor()

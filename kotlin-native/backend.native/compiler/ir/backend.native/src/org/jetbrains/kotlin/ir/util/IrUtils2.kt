@@ -61,7 +61,7 @@ internal fun irBuilder(
 private var topLevelInitializersCounter = 0
 
 internal fun IrFile.addTopLevelInitializer(expression: IrExpression, context: KonanBackendContext, threadLocal: Boolean, eager: Boolean) {
-    val irField = IrFieldImpl(
+    konst irField = IrFieldImpl(
             expression.startOffset, expression.endOffset,
             IrDeclarationOrigin.DEFINED,
             IrFieldSymbolImpl(),
@@ -86,7 +86,7 @@ internal fun IrFile.addTopLevelInitializer(expression: IrExpression, context: Ko
 }
 
 fun IrModuleFragment.addFile(fileEntry: IrFileEntry, packageFqName: FqName): IrFile {
-    val packageFragmentDescriptor = object : PackageFragmentDescriptorImpl(this.descriptor, packageFqName) {
+    konst packageFragmentDescriptor = object : PackageFragmentDescriptorImpl(this.descriptor, packageFqName) {
         override fun getMemberScope(): MemberScope = MemberScope.Empty
     }
 
@@ -115,7 +115,7 @@ fun IrDeclarationContainer.addChild(declaration: IrDeclaration) {
 }
 
 tailrec fun IrDeclaration.getContainingFile(): IrFile? {
-    val parent = this.parent
+    konst parent = this.parent
 
     return when (parent) {
         is IrFile -> parent
@@ -125,14 +125,14 @@ tailrec fun IrDeclaration.getContainingFile(): IrFile? {
 }
 
 internal fun ErrorReportingContext.report(declaration: IrDeclaration, message: String, isError: Boolean) {
-    val irFile = declaration.getContainingFile()
+    konst irFile = declaration.getContainingFile()
     this.report(
             declaration,
             irFile,
             if (irFile != null) {
                 message
             } else {
-                val renderer = org.jetbrains.kotlin.renderer.DescriptorRenderer.COMPACT_WITH_SHORT_TYPES
+                konst renderer = org.jetbrains.kotlin.renderer.DescriptorRenderer.COMPACT_WITH_SHORT_TYPES
                 "$message\n${renderer.render(declaration.descriptor)}"
             },
             isError
@@ -141,25 +141,25 @@ internal fun ErrorReportingContext.report(declaration: IrDeclaration, message: S
 }
 
 fun IrFunctionAccessExpression.addArguments(args: Map<IrValueParameter, IrExpression>) {
-    val unhandledParameters = args.keys.toMutableSet()
+    konst unhandledParameters = args.keys.toMutableSet()
     fun getArg(parameter: IrValueParameter) = args[parameter]?.also { unhandledParameters -= parameter }
 
     symbol.owner.dispatchReceiverParameter?.let {
-        val arg = getArg(it)
+        konst arg = getArg(it)
         if (arg != null) {
             this.dispatchReceiver = arg
         }
     }
 
     symbol.owner.extensionReceiverParameter?.let {
-        val arg = getArg(it)
+        konst arg = getArg(it)
         if (arg != null) {
             this.extensionReceiver = arg
         }
     }
 
-    symbol.owner.valueParameters.forEach {
-        val arg = getArg(it)
+    symbol.owner.konstueParameters.forEach {
+        konst arg = getArg(it)
         if (arg != null) {
             this.putValueArgument(it.index, arg)
         }
@@ -169,13 +169,13 @@ fun IrFunctionAccessExpression.addArguments(args: Map<IrValueParameter, IrExpres
 fun IrType.substitute(map: Map<IrTypeParameterSymbol, IrType>): IrType {
     if (this !is IrSimpleType) return this
 
-    return when (val classifier = this.classifier) {
+    return when (konst classifier = this.classifier) {
         is IrTypeParameterSymbol ->
             map[classifier]?.mergeNullability(this) ?: this
         is IrClassSymbol -> if (this.arguments.isEmpty()) {
             this // Fast path.
         } else {
-            val newArguments = this.arguments.map {
+            konst newArguments = this.arguments.map {
                 when (it) {
                     is IrTypeProjection -> makeTypeProjection(it.type.substitute(map), it.variance)
                     is IrStarProjection -> it
@@ -189,7 +189,7 @@ fun IrType.substitute(map: Map<IrTypeParameterSymbol, IrType>): IrType {
 }
 
 private fun IrFunction.substitutedReturnType(typeArguments: List<IrType>): IrType {
-    val unsubstituted = this.returnType
+    konst unsubstituted = this.returnType
     if (typeArguments.isEmpty()) return unsubstituted // Fast path.
     if (this is IrConstructor) {
         // Workaround for missing type parameters in constructors. TODO: remove.
@@ -211,7 +211,7 @@ fun IrBuilderWithScope.irCall(irFunction: IrFunction, typeArguments: List<IrType
 internal fun irCall(startOffset: Int, endOffset: Int, irFunction: IrSimpleFunction, typeArguments: List<IrType>): IrCall =
         IrCallImpl.fromSymbolDescriptor(
                 startOffset, endOffset, irFunction.substitutedReturnType(typeArguments),
-                irFunction.symbol, typeArguments.size, irFunction.valueParameters.size
+                irFunction.symbol, typeArguments.size, irFunction.konstueParameters.size
         ).apply {
             typeArguments.forEachIndexed { index, irType ->
                 this.putTypeArgument(index, irType)
@@ -228,8 +228,8 @@ fun IrBuilderWithScope.irCallOp(
             putValueArgument(0, argument)
         }
 
-fun IrBuilderWithScope.irSetVar(variable: IrVariable, value: IrExpression) =
-        irSet(variable.symbol, value)
+fun IrBuilderWithScope.irSetVar(variable: IrVariable, konstue: IrExpression) =
+        irSet(variable.symbol, konstue)
 
 fun IrBuilderWithScope.irCatch(type: IrType) =
         IrCatchImpl(
@@ -251,11 +251,11 @@ fun IrBuilderWithScope.irCatch(type: IrType) =
 
 /**
  * Binds the arguments explicitly represented in the IR to the parameters of the accessed function.
- * The arguments are to be evaluated in the same order as they appear in the resulting list.
+ * The arguments are to be ekonstuated in the same order as they appear in the resulting list.
  */
 fun IrMemberAccessExpression<*>.getArgumentsWithIr(): List<Pair<IrValueParameter, IrExpression>> {
-    val res = mutableListOf<Pair<IrValueParameter, IrExpression>>()
-    val irFunction = when (this) {
+    konst res = mutableListOf<Pair<IrValueParameter, IrExpression>>()
+    konst irFunction = when (this) {
         is IrFunctionAccessExpression -> this.symbol.owner
         is IrFunctionReference -> this.symbol.owner
         else -> error(this)
@@ -269,8 +269,8 @@ fun IrMemberAccessExpression<*>.getArgumentsWithIr(): List<Pair<IrValueParameter
         res += (irFunction.extensionReceiverParameter!! to it)
     }
 
-    irFunction.valueParameters.forEachIndexed { index, it ->
-        val arg = getValueArgument(index)
+    irFunction.konstueParameters.forEachIndexed { index, it ->
+        konst arg = getValueArgument(index)
         if (arg != null) {
             res += (it to arg)
         }
@@ -280,12 +280,12 @@ fun IrMemberAccessExpression<*>.getArgumentsWithIr(): List<Pair<IrValueParameter
 }
 
 fun ReferenceSymbolTable.translateErased(type: KotlinType): IrSimpleType {
-    val descriptor = TypeUtils.getClassDescriptor(type)
+    konst descriptor = TypeUtils.getClassDescriptor(type)
     if (descriptor == null) return translateErased(type.immediateSupertypes().first())
-    val classSymbol = this.referenceClass(descriptor)
+    konst classSymbol = this.referenceClass(descriptor)
 
-    val nullable = type.isMarkedNullable
-    val arguments = type.arguments.map { IrStarProjectionImpl }
+    konst nullable = type.isMarkedNullable
+    konst arguments = type.arguments.map { IrStarProjectionImpl }
 
     return classSymbol.createType(nullable, arguments)
 }
@@ -296,8 +296,8 @@ fun CommonBackendContext.createArrayOfExpression(
         arrayElements: List<IrExpression>
 ): IrExpression {
 
-    val arrayType = ir.symbols.array.typeWith(arrayElementType)
-    val arg0 = IrVarargImpl(startOffset, endOffset, arrayType, arrayElementType, arrayElements)
+    konst arrayType = ir.symbols.array.typeWith(arrayElementType)
+    konst arg0 = IrVarargImpl(startOffset, endOffset, arrayType, arrayElementType, arrayElements)
 
     return irCall(startOffset, endOffset, ir.symbols.arrayOf.owner, listOf(arrayElementType)).apply {
         putValueArgument(0, arg0)
@@ -350,8 +350,8 @@ fun IrClass.defaultOrNullableType(hasQuestionMark: Boolean) =
 fun IrFunction.isRestrictedSuspendFunction(): Boolean =
         this.descriptor.extensionReceiverParameter?.type?.isRestrictsSuspensionReceiver() == true
 
-fun IrBuilderWithScope.irByte(value: Byte) =
-        IrConstImpl.byte(startOffset, endOffset, context.irBuiltIns.byteType, value)
+fun IrBuilderWithScope.irByte(konstue: Byte) =
+        IrConstImpl.byte(startOffset, endOffset, context.irBuiltIns.byteType, konstue)
 
-val IrField.hasNonConstInitializer: Boolean
+konst IrField.hasNonConstInitializer: Boolean
     get() = initializer?.expression.let { it != null && it !is IrConst<*> && it !is IrConstantValue }

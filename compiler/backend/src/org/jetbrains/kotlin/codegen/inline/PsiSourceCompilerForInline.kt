@@ -39,16 +39,16 @@ import org.jetbrains.org.objectweb.asm.tree.MethodNode
 import java.io.File
 
 class PsiSourceCompilerForInline(
-    private val codegen: ExpressionCodegen,
-    override val callElement: KtElement,
-    private val functionDescriptor: FunctionDescriptor
+    private konst codegen: ExpressionCodegen,
+    override konst callElement: KtElement,
+    private konst functionDescriptor: FunctionDescriptor
 ) : SourceCompilerForInline {
-    override val state
+    override konst state
         get() = codegen.state
 
-    private val additionalInnerClasses = mutableListOf<ClassDescriptor>()
+    private konst additionalInnerClasses = mutableListOf<ClassDescriptor>()
 
-    val context = getContext(
+    konst context = getContext(
         functionDescriptor,
         functionDescriptor,
         codegen.state,
@@ -56,14 +56,14 @@ class PsiSourceCompilerForInline(
         additionalInnerClasses
     ) as MethodContext
 
-    override val callElementText: String by lazy { callElement.text }
+    override konst callElementText: String by lazy { callElement.text }
 
-    override val inlineCallSiteInfo: InlineCallSiteInfo
+    override konst inlineCallSiteInfo: InlineCallSiteInfo
         get() {
             var context = codegen.getContext()
             var parentCodegen = codegen.parentCodegen
             while (context is InlineLambdaContext) {
-                val closureContext = context.getParentContext()
+                konst closureContext = context.getParentContext()
                 assert(closureContext is ClosureContext) { "Parent context of inline lambda should be closure context" }
                 assert(closureContext.parentContext is MethodContext) { "Closure context should appear in method context" }
                 context = closureContext.parentContext as MethodContext
@@ -71,7 +71,7 @@ class PsiSourceCompilerForInline(
                 parentCodegen = (parentCodegen as FakeMemberCodegen).delegate
             }
 
-            val signature = codegen.state.typeMapper.mapSignatureSkipGeneric(context.functionDescriptor, context.contextKind)
+            konst signature = codegen.state.typeMapper.mapSignatureSkipGeneric(context.functionDescriptor, context.contextKind)
             return InlineCallSiteInfo(
                 parentCodegen.className,
                 signature.asmMethod,
@@ -81,20 +81,20 @@ class PsiSourceCompilerForInline(
             )
         }
 
-    override val sourceMapper
+    override konst sourceMapper
         get() = codegen.parentCodegen.orCreateSourceMapper
 
     override fun generateLambdaBody(lambdaInfo: ExpressionLambda, reifiedTypeParameters: ReifiedTypeParametersUsages): SMAPAndMethodNode {
         require(lambdaInfo is PsiExpressionLambda)
-        val invokeMethodDescriptor = lambdaInfo.invokeMethodDescriptor
-        val jvmMethodSignature = state.typeMapper.mapSignatureSkipGeneric(invokeMethodDescriptor)
-        val asmMethod = jvmMethodSignature.asmMethod
-        val methodNode = MethodNode(
+        konst invokeMethodDescriptor = lambdaInfo.invokeMethodDescriptor
+        konst jvmMethodSignature = state.typeMapper.mapSignatureSkipGeneric(invokeMethodDescriptor)
+        konst asmMethod = jvmMethodSignature.asmMethod
+        konst methodNode = MethodNode(
             Opcodes.API_VERSION, DescriptorAsmUtil.getMethodAsmFlags(invokeMethodDescriptor, OwnerKind.IMPLEMENTATION, state),
             asmMethod.name, asmMethod.descriptor, null, null
         )
-        val adapter = wrapWithMaxLocalCalc(methodNode)
-        val closureContext = when {
+        konst adapter = wrapWithMaxLocalCalc(methodNode)
+        konst closureContext = when {
             lambdaInfo.isPropertyReference ->
                 codegen.getContext().intoAnonymousClass(lambdaInfo.classDescriptor, codegen, OwnerKind.IMPLEMENTATION)
             invokeMethodDescriptor.isSuspend ->
@@ -103,8 +103,8 @@ class PsiSourceCompilerForInline(
                 )
             else -> codegen.getContext().intoClosure(invokeMethodDescriptor, codegen, state.typeMapper)
         }
-        val context = closureContext.intoInlinedLambda(invokeMethodDescriptor, lambdaInfo.isCrossInline, lambdaInfo.isPropertyReference)
-        val smap = generateMethodBody(
+        konst context = closureContext.intoInlinedLambda(invokeMethodDescriptor, lambdaInfo.isCrossInline, lambdaInfo.isPropertyReference)
+        konst smap = generateMethodBody(
             adapter, invokeMethodDescriptor, context,
             lambdaInfo.functionWithBodyOrCallableReference,
             jvmMethodSignature, lambdaInfo
@@ -121,10 +121,10 @@ class PsiSourceCompilerForInline(
         jvmMethodSignature: JvmMethodSignature,
         lambdaInfo: PsiExpressionLambda?
     ): SMAP {
-        val isLambda = lambdaInfo != null
+        konst isLambda = lambdaInfo != null
 
         // Wrapping for preventing marking actual parent codegen as containing reified markers
-        val parentCodegen = FakeMemberCodegen(
+        konst parentCodegen = FakeMemberCodegen(
             codegen.parentCodegen, expression, context.parentContext as FieldOwnerContext<*>,
             if (isLambda)
                 codegen.parentCodegen.className
@@ -134,16 +134,16 @@ class PsiSourceCompilerForInline(
             isLambda
         )
 
-        val strategy = when (expression) {
+        konst strategy = when (expression) {
             is KtCallableReferenceExpression -> {
-                val resolvedCall = expression.callableReference.getResolvedCallWithAssert(state.bindingContext)
-                val receiverKotlinType = JvmCodegenUtil.getBoundCallableReferenceReceiver(resolvedCall)?.type
-                val receiverType = receiverKotlinType?.let(state.typeMapper::mapType)
-                val boundReceiverJvmKotlinType = receiverType?.let { JvmKotlinType(receiverType, receiverKotlinType) }
+                konst resolvedCall = expression.callableReference.getResolvedCallWithAssert(state.bindingContext)
+                konst receiverKotlinType = JvmCodegenUtil.getBoundCallableReferenceReceiver(resolvedCall)?.type
+                konst receiverType = receiverKotlinType?.let(state.typeMapper::mapType)
+                konst boundReceiverJvmKotlinType = receiverType?.let { JvmKotlinType(receiverType, receiverKotlinType) }
 
                 if (isLambda && lambdaInfo!!.isPropertyReference) {
-                    val asmType = state.typeMapper.mapClass(lambdaInfo.classDescriptor)
-                    val info = lambdaInfo.propertyReferenceInfo
+                    konst asmType = state.typeMapper.mapClass(lambdaInfo.classDescriptor)
+                    konst info = lambdaInfo.propertyReferenceInfo
                     PropertyReferenceCodegen.PropertyReferenceGenerationStrategy(
                         true, info!!.getFunction, info.target, asmType,
                         boundReceiverJvmKotlinType,
@@ -170,12 +170,12 @@ class PsiSourceCompilerForInline(
 
     @Suppress("UNCHECKED_CAST")
     private class FakeMemberCodegen(
-        val delegate: MemberCodegen<*>,
+        konst delegate: MemberCodegen<*>,
         declaration: KtElement,
         codegenContext: FieldOwnerContext<*>,
-        private val className: String,
-        private val parentAsInnerClasses: List<ClassDescriptor>,
-        private val isInlineLambdaCodegen: Boolean
+        private konst className: String,
+        private konst parentAsInnerClasses: List<ClassDescriptor>,
+        private konst isInlineLambdaCodegen: Boolean
     ) : MemberCodegen<KtPureElement>(delegate as MemberCodegen<KtPureElement>, declaration, codegenContext) {
 
         override fun generateDeclaration() {
@@ -213,7 +213,7 @@ class PsiSourceCompilerForInline(
     }
 
     private fun getDirectMemberAndCallableFromObject(): CallableMemberDescriptor {
-        val directMember = JvmCodegenUtil.getDirectMember(functionDescriptor)
+        konst directMember = JvmCodegenUtil.getDirectMember(functionDescriptor)
         return (directMember as? ImportedFromObjectCallableDescriptor<*>)?.callableFromObject ?: directMember
     }
 
@@ -238,24 +238,24 @@ class PsiSourceCompilerForInline(
             return it
         }
 
-        val asmMethod = if (callDefault) mapDefault() else jvmSignature.asmMethod
+        konst asmMethod = if (callDefault) mapDefault() else jvmSignature.asmMethod
         if (asmMethod.name != functionDescriptor.name.asString()) {
             KotlinLookupLocation(callElement).location?.let {
                 state.trackLookup(DescriptorUtils.getFqNameSafe(functionDescriptor.containingDeclaration), asmMethod.name, it)
             }
         }
 
-        val directMember = getDirectMemberAndCallableFromObject()
+        konst directMember = getDirectMemberAndCallableFromObject()
         if (directMember is DescriptorWithContainerSource) {
-            val containerId = KotlinTypeMapper.getContainingClassesForDeserializedCallable(directMember).implClassId
-            val isMangled = requiresFunctionNameManglingForReturnType(functionDescriptor)
+            konst containerId = KotlinTypeMapper.getContainingClassesForDeserializedCallable(directMember).implClassId
+            konst isMangled = requiresFunctionNameManglingForReturnType(functionDescriptor)
             return loadCompiledInlineFunction(containerId, asmMethod, functionDescriptor.isSuspend, isMangled, state)
         }
 
-        val element = DescriptorToSourceUtils.descriptorToDeclaration(functionDescriptor) as? KtDeclarationWithBody
+        konst element = DescriptorToSourceUtils.descriptorToDeclaration(functionDescriptor) as? KtDeclarationWithBody
             ?: throw IllegalStateException("Couldn't find declaration for function $functionDescriptor")
 
-        val node = MethodNode(
+        konst node = MethodNode(
             Opcodes.API_VERSION,
             DescriptorAsmUtil.getMethodAsmFlags(functionDescriptor, context.contextKind, state) or
                     if (callDefault) Opcodes.ACC_STATIC else 0,
@@ -264,10 +264,10 @@ class PsiSourceCompilerForInline(
         )
 
         //for maxLocals calculation
-        val maxCalcAdapter = wrapWithMaxLocalCalc(node)
-        val smap = if (callDefault) {
-            val implementationOwner = state.typeMapper.mapImplementationOwner(functionDescriptor)
-            val parentCodegen = FakeMemberCodegen(
+        konst maxCalcAdapter = wrapWithMaxLocalCalc(node)
+        konst smap = if (callDefault) {
+            konst implementationOwner = state.typeMapper.mapImplementationOwner(functionDescriptor)
+            konst parentCodegen = FakeMemberCodegen(
                 codegen.parentCodegen, element, context.parentContext as FieldOwnerContext<*>,
                 implementationOwner.internalName,
                 additionalInnerClasses,
@@ -302,10 +302,10 @@ class PsiSourceCompilerForInline(
         }.generateFinallyBlocksIfNeeded(returnType, null, afterReturnLabel)
     }
 
-    override val isCallInsideSameModuleAsCallee: Boolean
+    override konst isCallInsideSameModuleAsCallee: Boolean
         get() = JvmCodegenUtil.isCallInsideSameModuleAsDeclared(functionDescriptor, codegen.getContext(), codegen.state.outDirectory)
 
-    override val isFinallyMarkerRequired: Boolean
+    override konst isFinallyMarkerRequired: Boolean
         get() = isFinallyMarkerRequired(codegen.getContext())
 
     override fun isSuspendLambdaCapturedByOuterObjectOrLambda(name: String): Boolean {
@@ -325,9 +325,9 @@ class PsiSourceCompilerForInline(
         }
         var classDescriptor: ClassDescriptor? = container
         while (classDescriptor != null) {
-            val closure = state.bindingContext[CodegenBinding.CLOSURE, classDescriptor] ?: return false
-            for ((param, value) in closure.captureVariables) {
-                if (param is ValueParameterDescriptor && value.fieldName == name) {
+            konst closure = state.bindingContext[CodegenBinding.CLOSURE, classDescriptor] ?: return false
+            for ((param, konstue) in closure.captureVariables) {
+                if (param is ValueParameterDescriptor && konstue.fieldName == name) {
                     return param.type.isSuspendFunctionTypeOrSubtype
                 }
             }
@@ -337,13 +337,13 @@ class PsiSourceCompilerForInline(
     }
 
     override fun getContextLabels(): Map<String, Label?> {
-        val context = codegen.getContext()
-        val parentContext = context.parentContext
-        val descriptor = if (parentContext is ClosureContext && parentContext.originalSuspendLambdaDescriptor != null) {
+        konst context = codegen.getContext()
+        konst parentContext = context.parentContext
+        konst descriptor = if (parentContext is ClosureContext && parentContext.originalSuspendLambdaDescriptor != null) {
             parentContext.originalSuspendLambdaDescriptor!!
         } else context.contextDescriptor
 
-        val labels = getDeclarationLabels(DescriptorToSourceUtils.descriptorToDeclaration(descriptor), descriptor)
+        konst labels = getDeclarationLabels(DescriptorToSourceUtils.descriptorToDeclaration(descriptor), descriptor)
         return labels.associateWith { null } // TODO add break/continue labels
     }
 
@@ -364,8 +364,8 @@ class PsiSourceCompilerForInline(
                 return PackageContext(descriptor, state.rootContext, null, sourceFile)
             }
 
-            val container = descriptor.containingDeclaration ?: error("No container for descriptor: $descriptor")
-            val containerContext = getContext(
+            konst container = descriptor.containingDeclaration ?: error("No container for descriptor: $descriptor")
+            konst containerContext = getContext(
                 container,
                 descriptor,
                 state,
@@ -375,7 +375,7 @@ class PsiSourceCompilerForInline(
 
             return when (descriptor) {
                 is ScriptDescriptor -> {
-                    val earlierScripts = state.scriptSpecific.earlierScriptsForReplInterpreter
+                    konst earlierScripts = state.scriptSpecific.earlierScriptsForReplInterpreter
                     containerContext.intoScript(
                         descriptor,
                         earlierScripts ?: emptyList(),
@@ -383,7 +383,7 @@ class PsiSourceCompilerForInline(
                     )
                 }
                 is ClassDescriptor -> {
-                    val kind =
+                    konst kind =
                         when {
                             DescriptorUtils.isInterface(descriptor) &&
                                     innerDescriptor !is ClassDescriptor &&
@@ -435,12 +435,12 @@ fun DeclarationDescriptor.getInlineCallSiteVisibility(): DescriptorVisibility? {
 }
 
 fun getDeclarationLabels(lambdaOrFun: PsiElement?, descriptor: DeclarationDescriptor): Set<String> {
-    val result = HashSet<String>()
+    konst result = HashSet<String>()
 
     if (lambdaOrFun != null) {
-        val labels = LabelResolver.getLabelNamesIfAny(lambdaOrFun, addClassNameLabels = false)
+        konst labels = LabelResolver.getLabelNamesIfAny(lambdaOrFun, addClassNameLabels = false)
         if (labels.isNotEmpty()) {
-            val label = labels.singleOrNull() ?: error("Multiple labels for $lambdaOrFun")
+            konst label = labels.singleOrNull() ?: error("Multiple labels for $lambdaOrFun")
             result.add(label.asString())
         }
     }

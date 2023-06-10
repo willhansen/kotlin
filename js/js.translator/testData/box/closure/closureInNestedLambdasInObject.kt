@@ -4,7 +4,7 @@
 package foo
 
 object SomeObject {
-    val values = create()
+    konst konstues = create()
     fun create() = Array<Array<String>>(1) { y ->
         Array<String>(1) { x ->
             "(${x}, ${y})"
@@ -13,7 +13,7 @@ object SomeObject {
 }
 
 fun box(): String {
-    if (SomeObject.values[0][0] != "(0, 0)") return SomeObject.values[0][0]
+    if (SomeObject.konstues[0][0] != "(0, 0)") return SomeObject.konstues[0][0]
 
     return "OK"
 }

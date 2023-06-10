@@ -41,7 +41,7 @@ inline fun <T> withMessageCollectorAndDisposable(
     body: (ScriptDiagnosticsMessageCollector, Disposable) -> ResultWithDiagnostics<T>
 ): ResultWithDiagnostics<T> {
     var failed = false
-    val messageCollector = ScriptDiagnosticsMessageCollector(parentMessageCollector)
+    konst messageCollector = ScriptDiagnosticsMessageCollector(parentMessageCollector)
     return try {
         setIdeaIoUseFallback()
         body(messageCollector, disposable).also {
@@ -62,7 +62,7 @@ inline fun <T> withMessageCollector(
     parentMessageCollector: MessageCollector? = null,
     body: (ScriptDiagnosticsMessageCollector) -> ResultWithDiagnostics<T>
 ): ResultWithDiagnostics<T> {
-    val messageCollector = ScriptDiagnosticsMessageCollector(parentMessageCollector)
+    konst messageCollector = ScriptDiagnosticsMessageCollector(parentMessageCollector)
     return try {
         body(messageCollector)
     } catch (ex: Throwable) {
@@ -76,14 +76,14 @@ internal fun getScriptKtFile(
     project: Project,
     messageCollector: ScriptDiagnosticsMessageCollector
 ): ResultWithDiagnostics<KtFile> {
-    val psiFileFactory: PsiFileFactoryImpl = PsiFileFactory.getInstance(project) as PsiFileFactoryImpl
-    val scriptText = getMergedScriptText(script, scriptCompilationConfiguration)
-    val virtualFile = ScriptLightVirtualFile(
+    konst psiFileFactory: PsiFileFactoryImpl = PsiFileFactory.getInstance(project) as PsiFileFactoryImpl
+    konst scriptText = getMergedScriptText(script, scriptCompilationConfiguration)
+    konst virtualFile = ScriptLightVirtualFile(
         script.scriptFileName(script, scriptCompilationConfiguration),
         (script as? FileBasedScriptSource)?.file?.path, // TODO: should be absolute path here
         scriptText
     )
-    val ktFile = psiFileFactory.trySetupPsiForFile(virtualFile, KotlinLanguage.INSTANCE, true, false) as KtFile?
+    konst ktFile = psiFileFactory.trySetupPsiForFile(virtualFile, KotlinLanguage.INSTANCE, true, false) as KtFile?
     return when {
         ktFile == null -> failure(
             script,
@@ -106,8 +106,8 @@ internal fun makeCompiledScript(
     sourceDependencies: List<ScriptsCompilationDependencies.SourceDependencies>,
     getScriptConfiguration: (KtFile) -> ScriptCompilationConfiguration
 ): ResultWithDiagnostics<KJvmCompiledScript> {
-    val scriptDependenciesStack = ArrayDeque<KtScript>()
-    val ktScript = ktFile.declarations.firstIsInstanceOrNull<KtScript>()
+    konst scriptDependenciesStack = ArrayDeque<KtScript>()
+    konst ktScript = ktFile.declarations.firstIsInstanceOrNull<KtScript>()
         ?: throw IllegalStateException("Expecting script file: KtScript is not found in ${ktFile.name}")
 
     fun makeOtherScripts(script: KtScript): ResultWithDiagnostics<List<KJvmCompiledScript>> {
@@ -123,9 +123,9 @@ internal fun makeCompiledScript(
             )
         scriptDependenciesStack.push(script)
 
-        val containingKtFile = script.containingKtFile
-        val otherScripts =
-            sourceDependencies.find { it.scriptFile == containingKtFile }?.sourceDependencies?.valueOrThrow()
+        konst containingKtFile = script.containingKtFile
+        konst otherScripts =
+            sourceDependencies.find { it.scriptFile == containingKtFile }?.sourceDependencies?.konstueOrThrow()
                 ?.mapNotNullSuccess { sourceFile ->
                     sourceFile.declarations.firstIsInstanceOrNull<KtScript>()?.let { ktScript ->
                         makeOtherScripts(ktScript).onSuccess { otherScripts ->
@@ -145,9 +145,9 @@ internal fun makeCompiledScript(
         return otherScripts
     }
 
-    val module = makeCompiledModule(generationState)
+    konst module = makeCompiledModule(generationState)
 
-    val resultField = with(generationState.scriptSpecific) {
+    konst resultField = with(generationState.scriptSpecific) {
         if (resultFieldName == null) null
         else resultFieldName!! to KotlinType(DescriptorRenderer.FQ_NAMES_IN_TYPES.renderType(resultType!!))
     }

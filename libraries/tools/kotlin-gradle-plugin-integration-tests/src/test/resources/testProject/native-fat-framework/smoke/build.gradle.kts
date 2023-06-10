@@ -24,10 +24,10 @@ kotlin {
 
 }
 
-val frameworksToMerge = kotlin.targets
+konst frameworksToMerge = kotlin.targets
     .withType(KotlinNativeTarget::class.java)
     .map { it.binaries.getFramework("DEBUG") }
 
-val fat = tasks.create("fat", FatFrameworkTask::class.java) {
+konst fat = tasks.create("fat", FatFrameworkTask::class.java) {
     from(frameworksToMerge)
 }

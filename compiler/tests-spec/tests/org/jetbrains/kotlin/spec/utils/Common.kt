@@ -22,19 +22,19 @@ typealias TestCasesByNumbers = MutableMap<Int, SpecTestCase>
 typealias TestCasesByFiles = MutableMap<String, TestCasesByNumbers>
 typealias TestCasesByRanges = MutableMap<String, NavigableMap<Int, TestCasesByNumbers>>
 
-enum class TestType(val type: String) {
+enum class TestType(konst type: String) {
     POSITIVE("pos"),
     NEGATIVE("neg");
 
     companion object {
-        private val map = values().associateBy(TestType::type)
-        val joinedValues = values().joinToString("|").withSpaces()
+        private konst map = konstues().associateBy(TestType::type)
+        konst joinedValues = konstues().joinToString("|").withSpaces()
 
         fun fromValue(type: String) = map[type]
     }
 }
 
-enum class TestOrigin(private val testDataPath: String, private val testsPath: String? = null) {
+enum class TestOrigin(private konst testDataPath: String, private konst testsPath: String? = null) {
     IMPLEMENTATION(GeneralConfiguration.TESTDATA_PATH),
     SPEC(GeneralConfiguration.SPEC_TESTDATA_PATH, LINKED_TESTS_PATH);
 
@@ -45,41 +45,41 @@ enum class TestOrigin(private val testDataPath: String, private val testsPath: S
     }
 }
 
-enum class TestArea(val testDataPath: String) {
+enum class TestArea(konst testDataPath: String) {
     PSI("psi"),
     DIAGNOSTICS("diagnostics"),
     CODEGEN_BOX("codegen/box");
 
     companion object {
-        val joinedValues = values().joinToString("|").withSpaces()
+        konst joinedValues = konstues().joinToString("|").withSpaces()
     }
 }
 
 enum class SpecTestLinkedType(
-    val testDataPath: String,
-    val patterns: Lazy<BasePatterns>,
-    val infoElements: Lazy<Array<out SpecTestInfoElementType>>
+    konst testDataPath: String,
+    konst patterns: Lazy<BasePatterns>,
+    konst infoElements: Lazy<Array<out SpecTestInfoElementType>>
 ) {
     LINKED(
         "linked",
         lazy { LinkedSpecTestPatterns },
-        lazy { LinkedSpecTestFileInfoElementType.values() }
+        lazy { LinkedSpecTestFileInfoElementType.konstues() }
     ),
     NOT_LINKED(
         "notLinked",
         lazy { NotLinkedSpecTestPatterns },
-        lazy { NotLinkedSpecTestFileInfoElementType.values() }
+        lazy { NotLinkedSpecTestFileInfoElementType.konstues() }
     )
 }
 
 interface SpecTestInfoElementType {
-    val valuePattern: Pattern?
-    val required: Boolean
+    konst konstuePattern: Pattern?
+    konst required: Boolean
 }
 
 data class SpecTestInfoElementContent(
-    val content: String,
-    val additionalMatcher: Matcher? = null
+    konst content: String,
+    konst additionalMatcher: Matcher? = null
 )
 
 data class SpecTestCase(
@@ -87,12 +87,12 @@ data class SpecTestCase(
     var ranges: MutableList<IntRange>,
     var unexpectedBehavior: Boolean,
     var unspecifiedBehavior: Boolean,
-    val issues: MutableList<String>?,
-    val exception: TestsExceptionType?
+    konst issues: MutableList<String>?,
+    konst exception: TestsExceptionType?
 )
 
 data class SpecTestCasesSet(
-    val byFiles: TestCasesByFiles,
-    val byRanges: TestCasesByRanges,
-    val byNumbers: TestCasesByNumbers
+    konst byFiles: TestCasesByFiles,
+    konst byRanges: TestCasesByRanges,
+    konst byNumbers: TestCasesByNumbers
 )

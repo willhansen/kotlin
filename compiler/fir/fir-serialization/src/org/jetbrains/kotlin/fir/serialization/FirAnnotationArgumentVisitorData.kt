@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.fir.serialization
 import org.jetbrains.kotlin.metadata.ProtoBuf
 
 class FirAnnotationArgumentVisitorData(
-    val serializer: FirAnnotationSerializer,
-    val builder: ProtoBuf.Annotation.Argument.Value.Builder
+    konst serializer: FirAnnotationSerializer,
+    konst builder: ProtoBuf.Annotation.Argument.Value.Builder
 ) {
-    val stringTable: FirElementAwareStringTable get() = serializer.stringTable
+    konst stringTable: FirElementAwareStringTable get() = serializer.stringTable
 }

@@ -1,14 +1,14 @@
 // EXPECTED_REACHABLE_NODES: 1301
 package foo
 
-data class Holder<T>(val v: T)
+data class Holder<T>(konst v: T)
 
-data class Dat(val start: String, val end: String)
+data class Dat(konst start: String, konst end: String)
 
-class Obj(val start: String, val end: String)
+class Obj(konst start: String, konst end: String)
 
 fun box(): String {
-    val d = Dat("a", "b")
+    konst d = Dat("a", "b")
 
     assertEquals("Dat(start=a, end=b)", "${d}")
 

@@ -8,7 +8,7 @@
 fun box(): String {
     return object {
         fun foo(): String {
-            val f = {}
+            konst f = {}
             object : Runnable {
                 public override fun run() {
                     f()

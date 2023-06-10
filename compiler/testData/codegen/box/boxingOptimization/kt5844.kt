@@ -3,7 +3,7 @@
 import kotlin.test.assertEquals
 
 fun test1() {
-    val u = when (true) {
+    konst u = when (true) {
         true -> 42
         else -> 1.0
     }
@@ -12,7 +12,7 @@ fun test1() {
 }
 
 fun test2() {
-    val u = 1L.let {
+    konst u = 1L.let {
         when (it) {
             is Long -> if (it.toLong() == 2L) it.toLong() else it * 2L // CompilationException
             else -> it.toDouble()

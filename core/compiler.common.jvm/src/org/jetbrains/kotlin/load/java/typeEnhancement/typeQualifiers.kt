@@ -17,12 +17,12 @@ enum class MutabilityQualifier {
 }
 
 class JavaTypeQualifiers(
-    val nullability: NullabilityQualifier?,
-    val mutability: MutabilityQualifier?,
-    val definitelyNotNull: Boolean,
-    val isNullabilityQualifierForWarning: Boolean = false
+    konst nullability: NullabilityQualifier?,
+    konst mutability: MutabilityQualifier?,
+    konst definitelyNotNull: Boolean,
+    konst isNullabilityQualifierForWarning: Boolean = false
 ) {
     companion object {
-        val NONE = JavaTypeQualifiers(null, null, false)
+        konst NONE = JavaTypeQualifiers(null, null, false)
     }
 }

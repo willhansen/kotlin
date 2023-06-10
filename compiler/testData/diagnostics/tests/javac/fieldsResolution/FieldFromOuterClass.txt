@@ -27,16 +27,16 @@ package a {
                     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
                     // Static members
-                    public const final val CONST: kotlin.Int = 84
-                    public const final override /*1*/ /*fake_override*/ val I2: kotlin.Int = 42
+                    public const final konst CONST: kotlin.Int = 84
+                    public const final override /*1*/ /*fake_override*/ konst I2: kotlin.Int = 42
                 }
 
                 // Static members
-                public const final val I: kotlin.Int = 84
+                public const final konst I: kotlin.Int = 84
             }
 
             // Static members
-            public const final val I2: kotlin.Int = 42
+            public const final konst I2: kotlin.Int = 42
         }
 
         public open class Nested {
@@ -58,19 +58,19 @@ package a {
                     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
 
                     // Static members
-                    public const final val I5: kotlin.Int = 42
+                    public const final konst I5: kotlin.Int = 42
                 }
 
                 // Static members
-                public const final val I3: kotlin.Int = 42
-                public const final val I4: kotlin.Int = 42
+                public const final konst I3: kotlin.Int = 42
+                public const final konst I4: kotlin.Int = 42
             }
 
             // Static members
-            public const final val I2: kotlin.Int = 42
+            public const final konst I2: kotlin.Int = 42
         }
 
         // Static members
-        public const final val I: kotlin.Int = 42
+        public const final konst I: kotlin.Int = 42
     }
 }

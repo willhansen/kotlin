@@ -45,10 +45,10 @@ data class StringProperty(var v: String): Property<String> {
     }
 }
 
-data class Task(val input: StringProperty)
+data class Task(konst input: StringProperty)
 
 fun `should work with assignment for raw type`(): String {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.input = "OK"
 
     return if (task.input.get() != "OK") {
@@ -59,7 +59,7 @@ fun `should work with assignment for raw type`(): String {
 }
 
 fun `should work with assignment for wrapped type`(): String {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.input = StringProperty("OK")
 
     return if (task.input.get() != "OK") {
@@ -70,7 +70,7 @@ fun `should work with assignment for wrapped type`(): String {
 }
 
 fun `should work with assignment with apply for raw type`(): String {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.apply {
         input = "OK"
     }
@@ -83,7 +83,7 @@ fun `should work with assignment with apply for raw type`(): String {
 }
 
 fun `should work with assignment with apply for wrapped type`(): String {
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.apply {
         input = StringProperty("OK")
     }
@@ -97,7 +97,7 @@ fun `should work with assignment with apply for wrapped type`(): String {
 
 fun `should work with extension function`(): String {
     fun StringProperty.assign(v: Int) = this.assign("OK")
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.input = 42
 
     return if (task.input.get() != "OK") {
@@ -109,7 +109,7 @@ fun `should work with extension function`(): String {
 
 fun `should work with extension function for interface type`(): String {
     fun Property<String>.assign(v: Int) = this.set("OK")
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.input = 42
 
     return if (task.input.get() != "OK") {
@@ -127,8 +127,8 @@ fun `should work with generic extension function`(): String {
         }
         override fun get() = this.v
     }
-    data class IntTask(val input: IntProperty)
-    val task = IntTask(IntProperty(0))
+    data class IntTask(konst input: IntProperty)
+    konst task = IntTask(IntProperty(0))
     task.input = 42
 
     return if (task.input.get() != 42) {
@@ -140,7 +140,7 @@ fun `should work with generic extension function`(): String {
 
 fun `should work with callable receiver`(): String {
     fun StringProperty.assign(r: StringProperty.() -> Unit) = r.invoke(this)
-    val task = Task(StringProperty("Fail"))
+    konst task = Task(StringProperty("Fail"))
     task.input = { this.set("OK") }
 
     return if (task.input.get() != "OK") {

@@ -2,11 +2,11 @@ import kotlinx.atomicfu.*
 import kotlin.test.*
 
 class LoopTest {
-    val a = atomic(10)
-    val b = atomic(11)
-    val c = atomic(12)
-    val r = atomic<String>("aaa")
-    val intArr = AtomicIntArray(10)
+    konst a = atomic(10)
+    konst b = atomic(11)
+    konst c = atomic(12)
+    konst r = atomic<String>("aaa")
+    konst intArr = AtomicIntArray(10)
 
     private inline fun AtomicInt.extensionEmbeddedLoops(to: Int): Int =
         loop { cur1 ->
@@ -30,8 +30,8 @@ class LoopTest {
         }
 
     private inline fun AtomicRef<String>.extesntionEmbeddedRefUpdate(to: String): String =
-        loop { value ->
-            compareAndSet(value, to)
+        loop { konstue ->
+            compareAndSet(konstue, to)
             return updateAndGet { cur -> "${cur}AAA" }
         }
 
@@ -45,7 +45,7 @@ class LoopTest {
 }
 
 fun box(): String {
-    val testClass = LoopTest()
+    konst testClass = LoopTest()
     testClass.test()
     return "OK"
 }

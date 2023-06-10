@@ -1,10 +1,10 @@
 package test
 
-context(Int) val p get() = 42
+context(Int) konst p get() = 42
 
 context(Int)
 class A {
-    context(Int) val p get() = 42
+    context(Int) konst p get() = 42
 
     context(Int) fun m() {}
 }

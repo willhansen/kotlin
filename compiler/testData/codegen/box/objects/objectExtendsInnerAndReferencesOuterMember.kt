@@ -1,5 +1,5 @@
 class A {
-    val x: Any get() {
+    konst x: Any get() {
         return object : Inner() {
             override fun toString() = foo()
         }

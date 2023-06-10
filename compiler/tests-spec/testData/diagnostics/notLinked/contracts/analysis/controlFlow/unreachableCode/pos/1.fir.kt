@@ -89,11 +89,11 @@ fun case_6(args: Array<String>) {
 
 // TESTCASE NUMBER: 7
 fun case_7() {
-    val value_1 = funWithExactlyOnceCallsInPlace {
+    konst konstue_1 = funWithExactlyOnceCallsInPlace {
         throw Exception()
         println(1)
     }
-    println(value_1)
+    println(konstue_1)
 }
 
 

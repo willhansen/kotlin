@@ -10,18 +10,18 @@ package runtime.memory.weak0
 import kotlin.test.*
 import kotlin.native.ref.*
 
-data class Data(val s: String)
+data class Data(konst s: String)
 
 fun localWeak(): WeakReference<Data>  {
-    val x = Data("Hello")
-    val weak = WeakReference(x)
+    konst x = Data("Hello")
+    konst weak = WeakReference(x)
     println(weak.get())
     return weak
 }
 
 fun multiWeak(): Array<WeakReference<Data>>  {
-    val x = Data("Hello")
-    val weaks = Array(100, { WeakReference(x) } )
+    konst x = Data("Hello")
+    konst weaks = Array(100, { WeakReference(x) } )
     weaks.forEach {
         it -> if (it.get()?.s != "Hello") throw Error("bad reference")
     }
@@ -30,12 +30,12 @@ fun multiWeak(): Array<WeakReference<Data>>  {
 
 @OptIn(kotlin.native.runtime.NativeRuntimeApi::class)
 @Test fun runTest() {
-    val weak = localWeak()
+    konst weak = localWeak()
     kotlin.native.runtime.GC.collect()
-    val value = weak.get()
-    println(value?.toString())
+    konst konstue = weak.get()
+    println(konstue?.toString())
 
-    val weaks = multiWeak()
+    konst weaks = multiWeak()
 
     kotlin.native.runtime.GC.collect()
 

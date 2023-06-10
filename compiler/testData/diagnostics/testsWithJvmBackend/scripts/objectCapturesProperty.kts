@@ -3,7 +3,7 @@
 
 fun foo() = B.bar()
 
-val life = 42
+konst life = 42
 
 <!SCRIPT_CAPTURING_OBJECT!>object B<!> {
     fun bar() = life

@@ -3,20 +3,20 @@ interface SomeInterface {
 
 //      Boolean
 //      │
-    val bar: Boolean
+    konst bar: Boolean
 }
 
 class SomeClass : SomeInterface {
 //              Int   Int
 //              │     │
-    private val baz = 42
+    private konst baz = 42
 
     override fun foo(x: Int, y: String): String {
 //             SomeClass.foo.y: String
 //             │ fun (String).plus(Any?): String
 //             │ │ SomeClass.foo.x: Int
 //             │ │ │ fun (String).plus(Any?): String
-//             │ │ │ │ val (SomeClass).baz: Int
+//             │ │ │ │ konst (SomeClass).baz: Int
 //             │ │ │ │ │
         return y + x + baz
     }
@@ -29,7 +29,7 @@ class SomeClass : SomeInterface {
         get() = true
 //          Boolean
 //          │
-        set(value) {}
+        set(konstue) {}
 
 //               Double
 //               │

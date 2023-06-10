@@ -30,7 +30,7 @@ object FirTailrecFunctionChecker : FirSimpleFunctionChecker() {
         if (!(declaration.isEffectivelyFinal(context) || declaration.visibility == Visibilities.Private)) {
             reporter.reportOn(declaration.source, FirErrors.TAILREC_ON_VIRTUAL_MEMBER_ERROR, context)
         }
-        val graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
+        konst graph = declaration.controlFlowGraphReference?.controlFlowGraph ?: return
 
         // TODO: this is not how CFG works, tail calls inside try-catch should be detected by FIR tree traversal.
         var tryScopeCount = 0
@@ -65,17 +65,17 @@ object FirTailrecFunctionChecker : FirSimpleFunctionChecker() {
             }
 
             override fun visitFunctionCallNode(node: FunctionCallNode) {
-                val functionCall = node.fir
-                val resolvedSymbol = functionCall.calleeReference.toResolvedCallableSymbol() as? FirNamedFunctionSymbol ?: return
+                konst functionCall = node.fir
+                konst resolvedSymbol = functionCall.calleeReference.toResolvedCallableSymbol() as? FirNamedFunctionSymbol ?: return
                 if (resolvedSymbol != declaration.symbol) return
-                if (functionCall.arguments.size != resolvedSymbol.valueParameterSymbols.size && resolvedSymbol.isOverride) {
+                if (functionCall.arguments.size != resolvedSymbol.konstueParameterSymbols.size && resolvedSymbol.isOverride) {
                     // Overridden functions using default arguments at tail call are not included: KT-4285
                     reporter.reportOn(functionCall.source, FirErrors.NON_TAIL_RECURSIVE_CALL, context)
                     return
                 }
-                val dispatchReceiver = functionCall.dispatchReceiver
-                val dispatchReceiverOwner = declaration.dispatchReceiverType?.toSymbol(context.session) as? FirClassSymbol<*>
-                val sameReceiver = dispatchReceiver is FirNoReceiverExpression ||
+                konst dispatchReceiver = functionCall.dispatchReceiver
+                konst dispatchReceiverOwner = declaration.dispatchReceiverType?.toSymbol(context.session) as? FirClassSymbol<*>
+                konst sameReceiver = dispatchReceiver is FirNoReceiverExpression ||
                         (dispatchReceiver is FirThisReceiverExpression && dispatchReceiver.calleeReference.boundSymbol == dispatchReceiverOwner) ||
                         dispatchReceiverOwner?.classKind?.isSingleton == true
                 if (!sameReceiver) {
@@ -97,10 +97,10 @@ object FirTailrecFunctionChecker : FirSimpleFunctionChecker() {
 
     private fun CFGNode<*>.hasMoreFollowingInstructions(tailrecFunction: FirSimpleFunction): Boolean {
         for (next in followingNodes) {
-            val edge = edgeTo(next)
+            konst edge = edgeTo(next)
             if (!edge.kind.usedInCfa || edge.kind.isDead) continue
             if (edge.kind.isBack) return true
-            val hasMore = when (next) {
+            konst hasMore = when (next) {
                 // If exiting another function, then it means this call is inside a nested local function, in which case, it's not a tailrec call.
                 is FunctionExitNode -> return next.fir != tailrecFunction
                 is JumpNode, is BinaryAndExitNode, is BinaryOrExitNode, is WhenBranchResultExitNode, is WhenExitNode, is BlockExitNode ->

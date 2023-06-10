@@ -15,7 +15,7 @@ public inline fun <R> doCall(block: ()-> R, finallyBlock: ()-> Unit) {
 import test.*
 
 class Holder {
-    var value: String = ""
+    var konstue: String = ""
 }
 
 
@@ -23,7 +23,7 @@ fun test1(h: Holder): String {
     doCall ({
         return "OK_NONLOCAL"
     }, {
-        h.value = "OK_FINALLY"
+        h.konstue = "OK_FINALLY"
     })
 
     return "FAIL";
@@ -32,10 +32,10 @@ fun test1(h: Holder): String {
 
 fun test2(h: Holder): String {
     doCall ({
-      h.value += "OK_LOCAL"
+      h.konstue += "OK_LOCAL"
       "OK_LOCAL"
     }, {
-      h.value += ", OK_FINALLY"
+      h.konstue += ", OK_FINALLY"
       return "OK_FINALLY"
     })
 
@@ -44,10 +44,10 @@ fun test2(h: Holder): String {
 
 fun test3(h: Holder): String {
     doCall ({
-      h.value += "OK_NONLOCAL"
+      h.konstue += "OK_NONLOCAL"
       return "OK_NONLOCAL"
     }, {
-      h.value += ", OK_FINALLY"
+      h.konstue += ", OK_FINALLY"
       return "OK_FINALLY"
     })
 
@@ -57,16 +57,16 @@ fun test3(h: Holder): String {
 
 fun box(): String {
     var h = Holder()
-    val test1 = test1(h)
-    if (test1 != "OK_NONLOCAL" || h.value != "OK_FINALLY") return "test1: ${test1}, holder: ${h.value}"
+    konst test1 = test1(h)
+    if (test1 != "OK_NONLOCAL" || h.konstue != "OK_FINALLY") return "test1: ${test1}, holder: ${h.konstue}"
 
     h = Holder()
-    val test2 = test2(h)
-    if (test2 != "OK_FINALLY" || h.value != "OK_LOCAL, OK_FINALLY") return "test2: ${test2}, holder: ${h.value}"
+    konst test2 = test2(h)
+    if (test2 != "OK_FINALLY" || h.konstue != "OK_LOCAL, OK_FINALLY") return "test2: ${test2}, holder: ${h.konstue}"
 
     h = Holder()
-    val test3 = test3(h)
-    if (test3 != "OK_FINALLY" || h.value != "OK_NONLOCAL, OK_FINALLY") return "test3: ${test3}, holder: ${h.value}"
+    konst test3 = test3(h)
+    if (test3 != "OK_FINALLY" || h.konstue != "OK_NONLOCAL, OK_FINALLY") return "test3: ${test3}, holder: ${h.konstue}"
 
     return "OK"
 }

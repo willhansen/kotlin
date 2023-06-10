@@ -1,7 +1,7 @@
 // TARGET_BACKEND: JVM_IR
 // WITH_REFLECT
 
-annotation class A(vararg val strings: String)
+annotation class A(vararg konst strings: String)
 
 @A(*arrayOf(<!EVALUATED("foo")!>"foo"<!>, <!EVALUATED("bar")!>"bar"<!>), <!EVALUATED("baz")!>"baz"<!>)
 class B

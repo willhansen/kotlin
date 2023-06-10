@@ -31,17 +31,17 @@ import org.jetbrains.kotlin.test.services.sourceProviders.CoroutineHelpersSource
 import java.lang.Boolean.getBoolean
 
 abstract class AbstractJsBlackBoxCodegenTestBase<R : ResultingArtifact.FrontendOutput<R>, I : ResultingArtifact.BackendInput<I>, A : ResultingArtifact.Binary<A>>(
-    val targetFrontend: FrontendKind<R>,
+    konst targetFrontend: FrontendKind<R>,
     targetBackend: TargetBackend,
-    private val pathToTestDir: String,
-    private val testGroupOutputDirPrefix: String,
-    protected val skipMinification: Boolean = getBoolean("kotlin.js.skipMinificationTest"),
+    private konst pathToTestDir: String,
+    private konst testGroupOutputDirPrefix: String,
+    protected konst skipMinification: Boolean = getBoolean("kotlin.js.skipMinificationTest"),
 ) : AbstractKotlinCompilerWithTargetBackendTest(targetBackend) {
-    abstract val frontendFacade: Constructor<FrontendFacade<R>>
-    abstract val frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
-    abstract val backendFacade: Constructor<BackendFacade<I, A>>
-    abstract val afterBackendFacade: Constructor<AbstractTestFacade<A, BinaryArtifacts.Js>>?
-    abstract val recompileFacade: Constructor<AbstractTestFacade<BinaryArtifacts.Js, BinaryArtifacts.Js>>
+    abstract konst frontendFacade: Constructor<FrontendFacade<R>>
+    abstract konst frontendToBackendConverter: Constructor<Frontend2BackendConverter<R, I>>
+    abstract konst backendFacade: Constructor<BackendFacade<I, A>>
+    abstract konst afterBackendFacade: Constructor<AbstractTestFacade<A, BinaryArtifacts.Js>>?
+    abstract konst recompileFacade: Constructor<AbstractTestFacade<BinaryArtifacts.Js, BinaryArtifacts.Js>>
 
     override fun TestConfigurationBuilder.configuration() {
         commonConfigurationForJsBlackBoxCodegenTest()
@@ -58,7 +58,7 @@ abstract class AbstractJsBlackBoxCodegenTestBase<R : ResultingArtifact.FrontendO
     protected fun TestConfigurationBuilder.commonConfigurationForJsBlackBoxCodegenTest() {
         commonConfigurationForJsCodegenTest(targetFrontend, frontendFacade, frontendToBackendConverter, backendFacade)
 
-        val pathToRootOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
+        konst pathToRootOutputDir = System.getProperty("kotlin.js.test.root.out.dir") ?: error("'kotlin.js.test.root.out.dir' is not set")
         defaultDirectives {
             JsEnvironmentConfigurationDirectives.PATH_TO_ROOT_OUTPUT_DIR with pathToRootOutputDir
             JsEnvironmentConfigurationDirectives.PATH_TO_TEST_DIR with pathToTestDir

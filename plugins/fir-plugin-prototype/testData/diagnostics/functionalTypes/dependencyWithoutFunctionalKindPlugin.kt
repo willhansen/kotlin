@@ -15,7 +15,7 @@ fun test_1(
 }
 
 fun test_2() {
-    val block = produceComposableFunction()
+    konst block = produceComposableFunction()
     consumeRegularFunction(<!ARGUMENT_TYPE_MISMATCH!>block<!>) // should be error
     consumeSuspendFunction(<!ARGUMENT_TYPE_MISMATCH!>block<!>) // should be error
     consumeOurComposableFunction(block)
@@ -23,7 +23,7 @@ fun test_2() {
 }
 
 fun test_3() {
-    val block = produceBoxedComposableFunction().value
+    konst block = produceBoxedComposableFunction().konstue
     consumeRegularFunction(<!ARGUMENT_TYPE_MISMATCH!>block<!>) // should be error
     consumeSuspendFunction(<!ARGUMENT_TYPE_MISMATCH!>block<!>) // should be error
     consumeOurComposableFunction(block)

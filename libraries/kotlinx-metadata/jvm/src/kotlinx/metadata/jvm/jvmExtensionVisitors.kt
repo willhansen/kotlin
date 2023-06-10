@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.metadata.jvm.deserialization.JvmProtoBufUtil
  */
 @Deprecated(VISITOR_API_MESSAGE)
 abstract class JvmDeclarationContainerExtensionVisitor @JvmOverloads constructor(
-    protected open val delegate: JvmDeclarationContainerExtensionVisitor? = null
+    protected open konst delegate: JvmDeclarationContainerExtensionVisitor? = null
 ) : KmDeclarationContainerExtensionVisitor {
     /**
      * Visits the metadata of a local delegated property used somewhere inside this container (but not in a nested declaration container).
@@ -50,10 +50,10 @@ abstract class JvmDeclarationContainerExtensionVisitor @JvmOverloads constructor
 open class JvmClassExtensionVisitor @JvmOverloads constructor(
     delegate: JvmClassExtensionVisitor? = null
 ) : KmClassExtensionVisitor, JvmDeclarationContainerExtensionVisitor(delegate) {
-    override val delegate: JvmClassExtensionVisitor?
+    override konst delegate: JvmClassExtensionVisitor?
         get() = super.delegate as JvmClassExtensionVisitor?
 
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -85,7 +85,7 @@ open class JvmClassExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmClassExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmClassExtensionVisitor::class)
     }
 }
 
@@ -96,10 +96,10 @@ open class JvmClassExtensionVisitor @JvmOverloads constructor(
 open class JvmPackageExtensionVisitor @JvmOverloads constructor(
     delegate: JvmPackageExtensionVisitor? = null
 ) : KmPackageExtensionVisitor, JvmDeclarationContainerExtensionVisitor(delegate) {
-    override val delegate: JvmPackageExtensionVisitor?
+    override konst delegate: JvmPackageExtensionVisitor?
         get() = super.delegate as JvmPackageExtensionVisitor?
 
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -116,7 +116,7 @@ open class JvmPackageExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmPackageExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmPackageExtensionVisitor::class)
     }
 }
 
@@ -125,9 +125,9 @@ open class JvmPackageExtensionVisitor @JvmOverloads constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 open class JvmFunctionExtensionVisitor @JvmOverloads constructor(
-    private val delegate: JvmFunctionExtensionVisitor? = null
+    private konst delegate: JvmFunctionExtensionVisitor? = null
 ) : KmFunctionExtensionVisitor {
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -163,7 +163,7 @@ open class JvmFunctionExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmFunctionExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmFunctionExtensionVisitor::class)
     }
 }
 
@@ -172,9 +172,9 @@ open class JvmFunctionExtensionVisitor @JvmOverloads constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 open class JvmPropertyExtensionVisitor @JvmOverloads constructor(
-    private val delegate: JvmPropertyExtensionVisitor? = null
+    private konst delegate: JvmPropertyExtensionVisitor? = null
 ) : KmPropertyExtensionVisitor {
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -252,7 +252,7 @@ open class JvmPropertyExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmPropertyExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmPropertyExtensionVisitor::class)
     }
 }
 
@@ -261,9 +261,9 @@ open class JvmPropertyExtensionVisitor @JvmOverloads constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 open class JvmConstructorExtensionVisitor @JvmOverloads constructor(
-    private val delegate: JvmConstructorExtensionVisitor? = null
+    private konst delegate: JvmConstructorExtensionVisitor? = null
 ) : KmConstructorExtensionVisitor {
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -284,7 +284,7 @@ open class JvmConstructorExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmConstructorExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmConstructorExtensionVisitor::class)
     }
 }
 
@@ -293,9 +293,9 @@ open class JvmConstructorExtensionVisitor @JvmOverloads constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 open class JvmTypeParameterExtensionVisitor @JvmOverloads constructor(
-    private val delegate: JvmTypeParameterExtensionVisitor? = null
+    private konst delegate: JvmTypeParameterExtensionVisitor? = null
 ) : KmTypeParameterExtensionVisitor {
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -321,7 +321,7 @@ open class JvmTypeParameterExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmTypeParameterExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmTypeParameterExtensionVisitor::class)
     }
 }
 
@@ -330,9 +330,9 @@ open class JvmTypeParameterExtensionVisitor @JvmOverloads constructor(
  */
 @Deprecated(VISITOR_API_MESSAGE)
 open class JvmTypeExtensionVisitor @JvmOverloads constructor(
-    private val delegate: JvmTypeExtensionVisitor? = null
+    private konst delegate: JvmTypeExtensionVisitor? = null
 ) : KmTypeExtensionVisitor {
-    final override val type: KmExtensionType
+    final override konst type: KmExtensionType
         get() = TYPE
 
     /**
@@ -367,13 +367,13 @@ open class JvmTypeExtensionVisitor @JvmOverloads constructor(
          * @see KmExtensionType
          */
         @JvmField
-        val TYPE: KmExtensionType = KmExtensionType(JvmTypeExtensionVisitor::class)
+        konst TYPE: KmExtensionType = KmExtensionType(JvmTypeExtensionVisitor::class)
 
         /**
          * The type flexibility id, signifying that the visited type is a JVM platform type.
          *
          * @see KmTypeVisitor.visitFlexibleTypeUpperBound
          */
-        const val PLATFORM_TYPE_ID = JvmProtoBufUtil.PLATFORM_TYPE_ID // TODO: move out of deprecated visitor
+        const konst PLATFORM_TYPE_ID = JvmProtoBufUtil.PLATFORM_TYPE_ID // TODO: move out of deprecated visitor
     }
 }

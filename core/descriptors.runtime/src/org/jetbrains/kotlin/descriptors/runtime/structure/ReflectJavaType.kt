@@ -22,7 +22,7 @@ import java.lang.reflect.Type
 import java.lang.reflect.WildcardType
 
 abstract class ReflectJavaType : JavaType {
-    protected abstract val reflectType: Type
+    protected abstract konst reflectType: Type
 
     companion object Factory {
         fun create(type: Type): ReflectJavaType {

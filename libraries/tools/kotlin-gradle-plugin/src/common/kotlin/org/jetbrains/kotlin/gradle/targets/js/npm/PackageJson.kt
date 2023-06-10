@@ -11,21 +11,21 @@ import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.io.File
 import java.io.Serializable
 
-// Gson set nulls reflectively no matter on default values and non-null types
+// Gson set nulls reflectively no matter on default konstues and non-null types
 class PackageJson(
     var name: String,
     var version: String
 ) : Serializable {
-    internal val customFields = mutableMapOf<String, Any?>()
+    internal konst customFields = mutableMapOf<String, Any?>()
 
-    val empty: Boolean
+    konst empty: Boolean
         get() = main == null &&
                 private == null &&
                 workspaces == null &&
                 dependencies.isEmpty() &&
                 devDependencies.isEmpty()
 
-    val scopedName: ScopedName
+    konst scopedName: ScopedName
         get() = scopedName(name)
 
     var private: Boolean? = null
@@ -39,39 +39,39 @@ class PackageJson(
     var types: String? = null
 
     @Suppress("USELESS_ELVIS")
-    val devDependencies = mutableMapOf<String, String>()
+    konst devDependencies = mutableMapOf<String, String>()
         get() = field ?: mutableMapOf()
 
     @Suppress("USELESS_ELVIS")
-    val dependencies = mutableMapOf<String, String>()
+    konst dependencies = mutableMapOf<String, String>()
         get() = field ?: mutableMapOf()
 
     @Suppress("USELESS_ELVIS")
-    val peerDependencies = mutableMapOf<String, String>()
+    konst peerDependencies = mutableMapOf<String, String>()
         get() = field ?: mutableMapOf()
 
     @Suppress("USELESS_ELVIS")
-    val optionalDependencies = mutableMapOf<String, String>()
+    konst optionalDependencies = mutableMapOf<String, String>()
         get() = field ?: mutableMapOf()
 
     @Suppress("USELESS_ELVIS")
-    val bundledDependencies = mutableListOf<String>()
+    konst bundledDependencies = mutableListOf<String>()
         get() = field ?: mutableListOf()
 
     fun customField(pair: Pair<String, Any?>) {
         customFields[pair.first] = pair.second
     }
 
-    fun customField(key: String, value: Any?) {
-        customFields[key] = value
+    fun customField(key: String, konstue: Any?) {
+        customFields[key] = konstue
     }
 
-    fun customField(key: String, value: Number) {
-        customFields[key] = value
+    fun customField(key: String, konstue: Number) {
+        customFields[key] = konstue
     }
 
-    fun customField(key: String, value: Boolean) {
-        customFields[key] = value
+    fun customField(key: String, konstue: Boolean) {
+        customFields[key] = konstue
     }
 
     companion object {
@@ -84,12 +84,12 @@ class PackageJson(
             PackageJson(ScopedName(scope, name).toString(), version)
     }
 
-    data class ScopedName(val scope: String?, val name: String) {
+    data class ScopedName(konst scope: String?, konst name: String) {
         override fun toString() = if (scope == null) name else "@$scope/$name"
     }
 
     fun saveTo(packageJsonFile: File) {
-        val gson = GsonBuilder()
+        konst gson = GsonBuilder()
             .setPrettyPrinting()
             .disableHtmlEscaping()
             .serializeNulls()
@@ -97,8 +97,8 @@ class PackageJson(
             .create()
 
         packageJsonFile.ensureParentDirsCreated()
-        val jsonTree = gson.toJsonTree(this)
-        val previous = if (packageJsonFile.exists()) {
+        konst jsonTree = gson.toJsonTree(this)
+        konst previous = if (packageJsonFile.exists()) {
             packageJsonFile.reader().use {
                 JsonParser.parseReader(it)
             }
@@ -125,22 +125,22 @@ internal fun packageJson(
     packageJsonHandlers: List<PackageJson.() -> Unit>
 ): PackageJson {
 
-    val packageJson = PackageJson(
+    konst packageJson = PackageJson(
         name,
         fixSemver(version)
     )
 
     packageJson.main = main
 
-    val dependencies = mutableMapOf<String, String>()
+    konst dependencies = mutableMapOf<String, String>()
 
     npmDependencies.forEach {
-        val module = it.name
+        konst module = it.name
         dependencies[module] = chooseVersion(module, dependencies[module], it.version)
     }
 
     npmDependencies.forEach {
-        val dependency = dependencies.getValue(it.name)
+        konst dependency = dependencies.getValue(it.name)
         when (it.scope) {
             NpmDependency.Scope.NORMAL -> packageJson.dependencies[it.name] = dependency
             NpmDependency.Scope.DEV -> packageJson.devDependencies[it.name] = dependency
@@ -173,4 +173,4 @@ private fun chooseVersion(
         )
 }
 
-internal const val fakePackageJsonValue = "FAKE"
+internal const konst fakePackageJsonValue = "FAKE"

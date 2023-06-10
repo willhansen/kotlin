@@ -10,7 +10,7 @@ public class Exec {
 
 // FILE: test.kt
 fun test() {
-    val e = Exec()
+    konst e = Exec()
 
     e.exec { a -> System.out.println(a) }
     e.exec { System.out.<!OVERLOAD_RESOLUTION_AMBIGUITY!>println<!>(<!NO_THIS!>this<!>) }

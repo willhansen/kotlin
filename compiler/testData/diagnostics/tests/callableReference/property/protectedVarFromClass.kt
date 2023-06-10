@@ -16,8 +16,8 @@ open class A {
 }
 
 open class B : A() {
-    val x = C::a
-    val y = C()::a
+    konst x = C::a
+    konst y = C()::a
 }
 
 class C : B()

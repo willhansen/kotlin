@@ -2,7 +2,7 @@
 // !LANGUAGE: +InlineClasses, -JvmInlineValueClasses
 // !DIAGNOSTICS: +ENUM_CLASS_IN_EXTERNAL_DECLARATION_WARNING
 
-external inline class <!WRONG_EXTERNAL_DECLARATION!>C(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>val a: Int<!>)<!> {
+external inline class <!WRONG_EXTERNAL_DECLARATION!>C(<!EXTERNAL_CLASS_CONSTRUCTOR_PROPERTY_PARAMETER!>konst a: Int<!>)<!> {
     fun foo()
 }
 

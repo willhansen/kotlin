@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.*
 
 fun GradleKpmModule.createKotlinAndroidVariant(androidVariant: BaseVariant) {
-    val androidOutgoingArtifacts = GradleKpmConfigurationArtifactsSetup<GradleKpmJvmVariant> {
+    konst androidOutgoingArtifacts = GradleKpmConfigurationArtifactsSetup<GradleKpmJvmVariant> {
         variants.create("classes") { variant ->
             variant.attributes.attribute(AndroidArtifacts.ARTIFACT_TYPE, AndroidArtifacts.ArtifactType.CLASSES_JAR.type)
             variant.artifact(project.provider { fragment.compilationOutputs.classesDirs.singleFile }) {
@@ -37,12 +37,12 @@ fun GradleKpmModule.createKotlinAndroidVariant(androidVariant: BaseVariant) {
         }
     }
 
-    val androidElementsAttributes = GradleKpmConfigurationAttributesSetup<GradleKpmJvmVariant> {
+    konst androidElementsAttributes = GradleKpmConfigurationAttributesSetup<GradleKpmJvmVariant> {
         attribute(BuildTypeAttr.ATTRIBUTE, project.objects.named(androidVariant.buildType.name))
         attribute(TARGET_JVM_ENVIRONMENT_ATTRIBUTE, project.objects.named(TargetJvmEnvironment.ANDROID))
     }
 
-    val kotlinVariant = createExternalJvmVariant(
+    konst kotlinVariant = createExternalJvmVariant(
         "android${androidVariant.buildType.name.replaceFirstChar { it.uppercase() }}", GradleKpmJvmVariantConfig(
             /* Only swap out configuration that is used. Default setup shall still be applied */
             compileDependencies = (DefaultKotlinCompileDependenciesDefinition +
@@ -75,7 +75,7 @@ fun GradleKpmModule.createKotlinAndroidVariant(androidVariant: BaseVariant) {
     // TODO: Move this into configurator!
     kotlinVariant.refines(androidCommon)
 
-    val mainBytecodeKey = androidVariant.registerPreJavacGeneratedBytecode(
+    konst mainBytecodeKey = androidVariant.registerPreJavacGeneratedBytecode(
         kotlinVariant.compilationOutputs.classesDirs
     )
 
@@ -84,7 +84,7 @@ fun GradleKpmModule.createKotlinAndroidVariant(androidVariant: BaseVariant) {
         project.getAndroidRuntimeJars()
     )
 
-    val androidDsl = AndroidDsl()
+    konst androidDsl = AndroidDsl()
     androidDsl.androidManifest = project.file("AndroidManifest.xml")
     androidDsl.compileSdk = 23
     kotlinVariant.extras[androidDslKey] = androidDsl

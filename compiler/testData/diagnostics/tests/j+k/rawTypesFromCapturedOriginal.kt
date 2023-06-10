@@ -22,14 +22,14 @@ public interface StubBasedPsiElement<Stub extends StubElement> extends PsiElemen
 
 // FILE: test.kt
 
-private val STRING_TEMPLATE_EMPTY_ARRAY = emptyArray<KtStringTemplateExpression>()
+private konst STRING_TEMPLATE_EMPTY_ARRAY = emptyArray<KtStringTemplateExpression>()
 
 open class KtStringTemplateExpression : PsiElement
 
 fun StubBasedPsiElement<*>.foo(): KtStringTemplateExpression? {
     stub?.let {
         // K1: Array<KtStringTemplateExpression>, was K2: Array<PsiElement>
-        val expressions = it.getChildrenByType("", STRING_TEMPLATE_EMPTY_ARRAY)
+        konst expressions = it.getChildrenByType("", STRING_TEMPLATE_EMPTY_ARRAY)
         // Ok in K1, Should not be error in K2
         return expressions.firstOrNull()
     }

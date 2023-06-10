@@ -29,13 +29,13 @@ import java.nio.file.Path
 import java.nio.file.attribute.BasicFileAttributes
 
 internal class CoreJrtVirtualFile(
-    private val virtualFileSystem: CoreJrtFileSystem,
-    private val jdkHomePath: String,
-    private val path: Path,
-    private val parent: CoreJrtVirtualFile?,
+    private konst virtualFileSystem: CoreJrtFileSystem,
+    private konst jdkHomePath: String,
+    private konst path: Path,
+    private konst parent: CoreJrtVirtualFile?,
 ) : VirtualFile() {
     // TODO: catch IOException?
-    private val attributes: BasicFileAttributes get() = Files.readAttributes(path, BasicFileAttributes::class.java)
+    private konst attributes: BasicFileAttributes get() = Files.readAttributes(path, BasicFileAttributes::class.java)
 
     override fun getFileSystem(): VirtualFileSystem = virtualFileSystem
 
@@ -53,12 +53,12 @@ internal class CoreJrtVirtualFile(
 
     override fun getParent(): VirtualFile? = parent
 
-    private val myChildren by lazy { computeChildren() }
+    private konst myChildren by lazy { computeChildren() }
 
     override fun getChildren(): Array<out VirtualFile> = myChildren
 
     private fun computeChildren(): Array<out VirtualFile> {
-        val paths = try {
+        konst paths = try {
             Files.newDirectoryStream(path).use(Iterable<Path>::toList)
         } catch (e: IOException) {
             emptyList<Path>()

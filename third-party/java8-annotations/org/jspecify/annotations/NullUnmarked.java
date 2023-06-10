@@ -65,7 +65,7 @@ import java.lang.annotation.Target;
  * <p>Within null-unmarked code, a type usage with no nullness annotation has <b>unspecified
  * nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means that, while there is always
  * <i>some</i> correct way to annotate it for nullness, that information is missing: we <i>do not
- * know</i> whether it includes or excludes {@code null} as a value. In such a case, tools can vary
+ * know</i> whether it includes or excludes {@code null} as a konstue. In such a case, tools can vary
  * widely in how strict or lenient their enforcement is, or might make it configurable.
  *
  * <p>For more, please see this more <a

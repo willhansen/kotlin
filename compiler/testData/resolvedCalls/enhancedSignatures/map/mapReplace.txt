@@ -1,4 +1,4 @@
-fun valuesNotNull(map: MutableMap<Int, String>) {
+fun konstuesNotNull(map: MutableMap<Int, String>) {
     map.replace(1, "x")
         // SUCCESS
         // ORIGINAL:    fun replace(K, V): V? defined in kotlin.collections.MutableMap
@@ -14,7 +14,7 @@ fun valuesNotNull(map: MutableMap<Int, String>) {
         // SUBSTITUTED: fun replaceAll(BiFunction<in Int, in String, out String>): Unit defined in kotlin.collections.MutableMap
 }
 
-fun valuesNullable(map: MutableMap<Int, String?>) {
+fun konstuesNullable(map: MutableMap<Int, String?>) {
     map.replace(1, null)
         // SUCCESS
         // ORIGINAL:    fun replace(K, V): V? defined in kotlin.collections.MutableMap

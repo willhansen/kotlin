@@ -1,11 +1,11 @@
 // CHECK:
 //   Mangled name: IT
 //   Public signature: /IT|null[0]
-value class IT {
+konstue class IT {
   // CHECK:
   //   Mangled name: IT{}x
   //   Public signature: /IT.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     // CHECK JVM_IR:
     //   Mangled name: IT#<get-x>(){}kotlin.Int
     //   Public signature: /IT.x.<get-x>|4966956098150895696[0]
@@ -47,11 +47,11 @@ value class IT {
 // CHECK:
 //   Mangled name: InlineMutableSet
 //   Public signature: /InlineMutableSet|null[0]
-value class InlineMutableSet : MutableSet<IT> {
+konstue class InlineMutableSet : MutableSet<IT> {
   // CHECK:
   //   Mangled name: InlineMutableSet{}ms
   //   Public signature: /InlineMutableSet.ms|3456531059400385118[0]
-  private val ms: MutableSet<IT>
+  private konst ms: MutableSet<IT>
     // CHECK JVM_IR:
     //   Mangled name: InlineMutableSet#<get-ms>(){}kotlin.collections.MutableSet<IT>
     //   Public signature: /InlineMutableSet.ms.<get-ms>|1704733968327666901[0]
@@ -168,7 +168,7 @@ value class InlineMutableSet : MutableSet<IT> {
   // CHECK:
   //   Mangled name: InlineMutableSet{}size
   //   Public signature: /InlineMutableSet.size|-6253659984320132064[0]
-  override val size: Int
+  override konst size: Int
     // CHECK JVM_IR:
     //   Mangled name: InlineMutableSet#<get-size>(){}kotlin.Int
     //   Public signature: /InlineMutableSet.size.<get-size>|-3941649985161900780[0]

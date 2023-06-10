@@ -7,22 +7,22 @@ KtSuccessCallInfo:
       signature = KtFunctionLikeSignature:
         receiverType = null
         returnType = kotlin.String
-        symbol = test/dummyTest(value: test.Test): kotlin.String
-        valueParameters = [
+        symbol = test/dummyTest(konstue: test.Test): kotlin.String
+        konstueParameters = [
           KtVariableLikeSignature:
-            name = value
+            name = konstue
             receiverType = null
             returnType = test.Test
-            symbol = value: test.Test
+            symbol = konstue: test.Test
             callableIdIfNonLocal = null
         ]
         callableIdIfNonLocal = test/dummyTest
     typeArgumentsMapping = {}
     argumentMapping = {
       Test() -> (KtVariableLikeSignature:
-        name = value
+        name = konstue
         receiverType = null
         returnType = test.Test
-        symbol = value: test.Test
+        symbol = konstue: test.Test
         callableIdIfNonLocal = null)
     }

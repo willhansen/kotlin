@@ -14,10 +14,10 @@ import org.jetbrains.kotlin.test.services.configuration.JsEnvironmentConfigurato
 
 class JsPrefixPostfixHandler(testServices: TestServices) : JsBinaryArtifactHandler(testServices) {
     override fun processModule(module: TestModule, info: BinaryArtifacts.Js) {
-        val outputPrefixFile = JsEnvironmentConfigurator.getPrefixFile(module)
-        val outputPostfixFile = JsEnvironmentConfigurator.getPostfixFile(module)
+        konst outputPrefixFile = JsEnvironmentConfigurator.getPrefixFile(module)
+        konst outputPostfixFile = JsEnvironmentConfigurator.getPostfixFile(module)
 
-        val outputText = info.outputFile.readText()
+        konst outputText = info.outputFile.readText()
         outputPrefixFile?.let { testServices.assertions.assertTrue(outputText.startsWith(it.readText())) }
         outputPostfixFile?.let { testServices.assertions.assertTrue(outputText.endsWith(it.readText())) }
     }

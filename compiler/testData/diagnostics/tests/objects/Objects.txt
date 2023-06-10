@@ -1,14 +1,14 @@
 package
 
 package toplevelObjectDeclarations {
-    public val c: toplevelObjectDeclarations.Foo
-    public val x: kotlin.Int
-    public val y: toplevelObjectDeclarations.Foo
-    public val z: kotlin.Int
+    public konst c: toplevelObjectDeclarations.Foo
+    public konst x: kotlin.Int
+    public konst y: toplevelObjectDeclarations.Foo
+    public konst z: kotlin.Int
 
     public object A : toplevelObjectDeclarations.Foo {
         private constructor A()
-        public final val x: kotlin.Int = 2
+        public final konst x: kotlin.Int = 2
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun foo(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
@@ -18,7 +18,7 @@ package toplevelObjectDeclarations {
 
     public object B : toplevelObjectDeclarations.A {
         private constructor B()
-        public final override /*1*/ /*fake_override*/ val x: kotlin.Int
+        public final override /*1*/ /*fake_override*/ konst x: kotlin.Int
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun foo(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int

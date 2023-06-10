@@ -82,7 +82,7 @@ sink:
 =====================
 == smartcastAndInitialization ==
 fun smartcastAndInitialization(x: Any?) {
-    val y: Int
+    konst y: Int
 
     if (callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -100,8 +100,8 @@ L0:
     v(x: Any?)
     magic[FAKE_INITIALIZER](x: Any?) -> <v0>
     w(x|<v0>)
-  2 mark({ val y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })
-    v(val y: Int)
+  2 mark({ konst y: Int if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })
+    v(konst y: Int)
     mark(if (callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> })
     mark(x !is String)
     r(x) -> <v1>
@@ -158,7 +158,7 @@ sink:
 =====================
 == inPresenceOfLazy ==
 fun inPresenceOfLazy(x: Any?, unknownBoolean: Boolean) {
-    val y: Int
+    konst y: Int
 
     if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) {
         println(y)
@@ -179,8 +179,8 @@ L0:
     v(unknownBoolean: Boolean)
     magic[FAKE_INITIALIZER](unknownBoolean: Boolean) -> <v1>
     w(unknownBoolean|<v1>)
-  2 mark({ val y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })
-    v(val y: Int)
+  2 mark({ konst y: Int if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> } println(y) })
+    v(konst y: Int)
     mark(if (unknownBoolean && callsAndInverts(x !is String) { y = 42 }) { println(y) <!DEBUG_INFO_SMARTCAST!>x<!>.length } else { println(y) x.<!UNRESOLVED_REFERENCE!>length<!> })
     r(unknownBoolean) -> <v2>
     jf(L2|<v2>)                                                                                                                                                                                                   NEXT:[magic[AND](unknownBoolean && callsAndInverts(x !is String) { y = 42 }|<v2>, <v6>) -> <v7>, mark(x !is String)]

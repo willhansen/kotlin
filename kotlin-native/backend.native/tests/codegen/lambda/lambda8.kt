@@ -8,8 +8,8 @@ package codegen.lambda.lambda8
 import kotlin.test.*
 
 @Test fun runTest() {
-    val lambda1 = bar("first")
-    val lambda2 = bar("second")
+    konst lambda1 = bar("first")
+    konst lambda2 = bar("second")
 
     lambda1()
     lambda2()
@@ -27,7 +27,7 @@ fun bar(str: String): () -> Unit {
     }
 }
 
-class Integer(val value: Int) {
-    override fun toString() = value.toString()
-    operator fun plus(other: Int) = Integer(value + other)
+class Integer(konst konstue: Int) {
+    override fun toString() = konstue.toString()
+    operator fun plus(other: Int) = Integer(konstue + other)
 }

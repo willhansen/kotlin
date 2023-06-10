@@ -100,46 +100,46 @@ public actual fun DoubleArray.asList(): List<Double> = kotlin.UnsupportedOperati
 public actual fun BooleanArray.asList(): List<Boolean> = kotlin.UnsupportedOperationException("This is intrinsic")
 public actual fun CharArray.asList(): List<Char> = kotlin.UnsupportedOperationException("This is intrinsic")
 
-public val <T> Array<out T>.indices: IntRange
+public konst <T> Array<out T>.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val ByteArray.indices: IntRange
+public konst ByteArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val ShortArray.indices: IntRange
+public konst ShortArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val IntArray.indices: IntRange
+public konst IntArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val LongArray.indices: IntRange
+public konst LongArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val FloatArray.indices: IntRange
+public konst FloatArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val DoubleArray.indices: IntRange
+public konst DoubleArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val BooleanArray.indices: IntRange
+public konst BooleanArray.indices: IntRange
     get() = IntRange(0, lastIndex)
-public val CharArray.indices: IntRange
+public konst CharArray.indices: IntRange
     get() = IntRange(0, lastIndex)
 
 public inline fun <T> Array<out T>.isEmpty(): Boolean {
     return size == 0
 }
 
-public val <T> Array<out T>.lastIndex: Int
+public konst <T> Array<out T>.lastIndex: Int
     get() = size - 1
-public val ByteArray.lastIndex: Int
+public konst ByteArray.lastIndex: Int
     get() = size - 1
-public val ShortArray.lastIndex: Int
+public konst ShortArray.lastIndex: Int
     get() = size - 1
-public val IntArray.lastIndex: Int
+public konst IntArray.lastIndex: Int
     get() = size - 1
-public val LongArray.lastIndex: Int
+public konst LongArray.lastIndex: Int
     get() = size - 1
-public val FloatArray.lastIndex: Int
+public konst FloatArray.lastIndex: Int
     get() = size - 1
-public val DoubleArray.lastIndex: Int
+public konst DoubleArray.lastIndex: Int
     get() = size - 1
-public val BooleanArray.lastIndex: Int
+public konst BooleanArray.lastIndex: Int
     get() = size - 1
-public val CharArray.lastIndex: Int
+public konst CharArray.lastIndex: Int
     get() = size - 1
 
 public fun ByteArray.first(): Int {
@@ -181,7 +181,7 @@ public fun IntArray.toList(): List<Int> {
 
 public fun <T> Array<out T>.toMutableList(): MutableList<T> = kotlin.UnsupportedOperationException("This is intrinsic")
 public fun IntArray.toMutableList(): MutableList<Int> {
-    val list = ArrayList<Int>(size)
+    konst list = ArrayList<Int>(size)
     for (item in this) list.add(item)
     return list
 }

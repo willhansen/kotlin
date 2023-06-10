@@ -9,7 +9,7 @@ import helpers.*
 // Are suspend calls possible inside lambda matching to the parameter
 
 inline fun test1(crossinline runner: suspend () -> Unit)  {
-    val l : suspend () -> Unit = { runner() }
+    konst l : suspend () -> Unit = { runner() }
     builder { l() }
 }
 
@@ -18,7 +18,7 @@ interface SuspendRunnable {
 }
 
 inline fun test2(crossinline c: suspend () -> Unit) {
-    val sr = object: SuspendRunnable {
+    konst sr = object: SuspendRunnable {
         override suspend fun run() {
             c()
         }

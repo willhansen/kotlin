@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.resolve.sam.SamConversionOracle
 import org.jetbrains.kotlin.types.KotlinType
 
 class JvmSamConversionOracle(
-    private val languageVersionSettings: LanguageVersionSettings
+    private konst languageVersionSettings: LanguageVersionSettings
 ) : SamConversionOracle {
 
     override fun shouldRunSamConversionForFunction(candidate: CallableDescriptor): Boolean {

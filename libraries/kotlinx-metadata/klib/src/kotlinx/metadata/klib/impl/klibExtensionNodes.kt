@@ -12,39 +12,39 @@ import kotlinx.metadata.internal.common.KmModuleFragmentExtensionVisitor
 import kotlinx.metadata.internal.extensions.*
 import kotlinx.metadata.klib.*
 
-internal val KmFunction.klibExtensions: KlibFunctionExtension
+internal konst KmFunction.klibExtensions: KlibFunctionExtension
     get() = visitExtensions(KlibFunctionExtensionVisitor.TYPE) as KlibFunctionExtension
 
-internal val KmClass.klibExtensions: KlibClassExtension
+internal konst KmClass.klibExtensions: KlibClassExtension
     get() = visitExtensions(KlibClassExtensionVisitor.TYPE) as KlibClassExtension
 
-internal val KmType.klibExtensions: KlibTypeExtension
+internal konst KmType.klibExtensions: KlibTypeExtension
     get() = visitExtensions(KlibTypeExtensionVisitor.TYPE) as KlibTypeExtension
 
-internal val KmProperty.klibExtensions: KlibPropertyExtension
+internal konst KmProperty.klibExtensions: KlibPropertyExtension
     get() = visitExtensions(KlibPropertyExtensionVisitor.TYPE) as KlibPropertyExtension
 
-internal val KmConstructor.klibExtensions: KlibConstructorExtension
+internal konst KmConstructor.klibExtensions: KlibConstructorExtension
     get() = visitExtensions(KlibConstructorExtensionVisitor.TYPE) as KlibConstructorExtension
 
-internal val KmTypeParameter.klibExtensions: KlibTypeParameterExtension
+internal konst KmTypeParameter.klibExtensions: KlibTypeParameterExtension
     get() = visitExtensions(KlibTypeParameterExtensionVisitor.TYPE) as KlibTypeParameterExtension
 
-internal val KmPackage.klibExtensions: KlibPackageExtension
+internal konst KmPackage.klibExtensions: KlibPackageExtension
     get() = visitExtensions(KlibPackageExtensionVisitor.TYPE) as KlibPackageExtension
 
-internal val KmModuleFragment.klibExtensions: KlibModuleFragmentExtension
+internal konst KmModuleFragment.klibExtensions: KlibModuleFragmentExtension
     get() = visitExtensions(KlibModuleFragmentExtensionVisitor.TYPE) as KlibModuleFragmentExtension
 
-internal val KmTypeAlias.klibExtensions: KlibTypeAliasExtension
+internal konst KmTypeAlias.klibExtensions: KlibTypeAliasExtension
     get() = visitExtensions(KlibTypeAliasExtensionVisitor.TYPE) as KlibTypeAliasExtension
 
-internal val KmValueParameter.klibExtensions: KlibValueParameterExtension
+internal konst KmValueParameter.klibExtensions: KlibValueParameterExtension
     get() = visitExtensions(KlibValueParameterExtensionVisitor.TYPE) as KlibValueParameterExtension
 
 internal class KlibFunctionExtension : KlibFunctionExtensionVisitor(), KmFunctionExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
     var uniqId: UniqId? = null
     var file: KlibSourceFile? = null
 
@@ -70,8 +70,8 @@ internal class KlibFunctionExtension : KlibFunctionExtensionVisitor(), KmFunctio
 
 internal class KlibClassExtension : KlibClassExtensionVisitor(), KmClassExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
-    val enumEntries: MutableList<KlibEnumEntry> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst enumEntries: MutableList<KlibEnumEntry> = mutableListOf()
     var uniqId: UniqId? = null
     var file: KlibSourceFile? = null
 
@@ -102,7 +102,7 @@ internal class KlibClassExtension : KlibClassExtensionVisitor(), KmClassExtensio
 
 internal class KlibTypeExtension : KlibTypeExtensionVisitor(), KmTypeExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
 
     override fun visitAnnotation(annotation: KmAnnotation) {
         annotations += annotation
@@ -116,9 +116,9 @@ internal class KlibTypeExtension : KlibTypeExtensionVisitor(), KmTypeExtension {
 
 internal class KlibPropertyExtension : KlibPropertyExtensionVisitor(), KmPropertyExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
-    val getterAnnotations: MutableList<KmAnnotation> = mutableListOf()
-    val setterAnnotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst getterAnnotations: MutableList<KmAnnotation> = mutableListOf()
+    konst setterAnnotations: MutableList<KmAnnotation> = mutableListOf()
     var uniqId: UniqId? = null
     var file: Int? = null
     var compileTimeValue: KmAnnotationArgument? = null
@@ -143,8 +143,8 @@ internal class KlibPropertyExtension : KlibPropertyExtensionVisitor(), KmPropert
         this.uniqId = uniqId
     }
 
-    override fun visitCompileTimeValue(value: KmAnnotationArgument) {
-        this.compileTimeValue = value
+    override fun visitCompileTimeValue(konstue: KmAnnotationArgument) {
+        this.compileTimeValue = konstue
     }
 
     override fun accept(visitor: KmPropertyExtensionVisitor) {
@@ -160,7 +160,7 @@ internal class KlibPropertyExtension : KlibPropertyExtensionVisitor(), KmPropert
 
 internal class KlibConstructorExtension : KlibConstructorExtensionVisitor(), KmConstructorExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
     var uniqId: UniqId? = null
 
     override fun visitAnnotation(annotation: KmAnnotation) {
@@ -180,7 +180,7 @@ internal class KlibConstructorExtension : KlibConstructorExtensionVisitor(), KmC
 
 internal class KlibTypeParameterExtension : KlibTypeParameterExtensionVisitor(), KmTypeParameterExtension {
 
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
     var uniqId: UniqId? = null
 
     override fun visitAnnotation(annotation: KmAnnotation) {
@@ -214,9 +214,9 @@ internal class KlibPackageExtension : KlibPackageExtensionVisitor(), KmPackageEx
 
 internal class KlibModuleFragmentExtension : KlibModuleFragmentExtensionVisitor(), KmModuleFragmentExtension {
 
-    val moduleFragmentFiles: MutableList<KlibSourceFile> = ArrayList()
+    konst moduleFragmentFiles: MutableList<KlibSourceFile> = ArrayList()
     var fqName: String? = null
-    val className: MutableList<ClassName> = ArrayList()
+    konst className: MutableList<ClassName> = ArrayList()
 
     override fun visitFile(file: KlibSourceFile) {
         moduleFragmentFiles += file
@@ -252,7 +252,7 @@ internal class KlibTypeAliasExtension : KlibTypeAliasExtensionVisitor(), KmTypeA
 }
 
 internal class KlibValueParameterExtension : KlibValueParameterExtensionVisitor(), KmValueParameterExtension {
-    val annotations: MutableList<KmAnnotation> = mutableListOf()
+    konst annotations: MutableList<KmAnnotation> = mutableListOf()
 
     override fun visitAnnotation(annotation: KmAnnotation) {
         annotations += annotation

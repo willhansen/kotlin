@@ -12,8 +12,8 @@ import org.jetbrains.org.objectweb.asm.tree.VarInsnNode
 import java.util.*
 
 
-class VariableLivenessFrame(val maxLocals: Int) : VarFrame<VariableLivenessFrame> {
-    private val bitSet = BitSet(maxLocals)
+class VariableLivenessFrame(konst maxLocals: Int) : VarFrame<VariableLivenessFrame> {
+    private konst bitSet = BitSet(maxLocals)
     private var controlFlowMerge = false
 
     override fun mergeFrom(other: VariableLivenessFrame) {

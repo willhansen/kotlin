@@ -16,8 +16,8 @@ import java.io.Serializable;
  *     fun interface IFoo {
  *         fun foo()
  *     }
- *     val iFoo = IFoo { println("Hello!") }    // calling fun interface constructor
- *     val iFooCtor = ::IFoo                    // callable reference to fun interface constructor
+ *     konst iFoo = IFoo { println("Hello!") }    // calling fun interface constructor
+ *     konst iFooCtor = ::IFoo                    // callable reference to fun interface constructor
  * </pre>
  *
  * Doesn't support reflection yet.

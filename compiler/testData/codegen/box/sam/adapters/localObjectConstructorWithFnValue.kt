@@ -19,8 +19,8 @@ class JavaClass {
 
 fun box(): String {
     var v = "FAIL"
-    val f = {-> v = "OK"}
-    val x = object : JavaClass(f) {}
+    konst f = {-> v = "OK"}
+    konst x = object : JavaClass(f) {}
     x.run()
     return v
 }

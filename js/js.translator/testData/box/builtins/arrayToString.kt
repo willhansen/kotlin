@@ -1,7 +1,7 @@
 // EXPECTED_REACHABLE_NODES: 1277
 
 // This test's purpose is not preventing regressions, but rather making sure the array-to-string conversion is tested at all.
-// The `expected` values in asserts just reflect the current state of things. It doesn't mean things _must_ be this way.
+// The `expected` konstues in asserts just reflect the current state of things. It doesn't mean things _must_ be this way.
 // So feel free to update them if you're sure that the array-to-string conversion should behave differently.
 // See also: KT-14013
 
@@ -13,13 +13,13 @@ fun log(message: Any?) {
 }
 
 fun pullLog(): String {
-    val string = LOG
+    konst string = LOG
     LOG = ""
     return string
 }
 
 fun testKt14013() {
-    val a: Any? = arrayOf(null, 1)
+    konst a: Any? = arrayOf(null, 1)
     log(a)
     log(a.toString())
     log(a!!.toString())
@@ -52,7 +52,7 @@ fun anyValueToString(a: Any) {
 fun box(): String {
     testKt14013()
 
-    val a = arrayOf(1, 2, 3)
+    konst a = arrayOf(1, 2, 3)
     concreteArrayToString(a)
 
     if (testUtils.isLegacyBackend()) {

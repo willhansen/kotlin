@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.test.util.KtTestUtil
 import org.jetbrains.kotlin.toSourceLinesMapping
 import java.io.File
 
-abstract class SourceFilePreprocessor(val testServices: TestServices) {
+abstract class SourceFilePreprocessor(konst testServices: TestServices) {
     abstract fun process(file: TestFile, content: String): String
 }
 
@@ -29,27 +29,27 @@ abstract class ReversibleSourceFilePreprocessor(testServices: TestServices) : So
 }
 
 abstract class SourceFileProvider : TestService {
-    abstract val kotlinSourceDirectory: File
-    abstract val javaSourceDirectory: File
-    abstract val javaBinaryDirectory: File
-    abstract val additionalFilesDirectory: File
+    abstract konst kotlinSourceDirectory: File
+    abstract konst javaSourceDirectory: File
+    abstract konst javaBinaryDirectory: File
+    abstract konst additionalFilesDirectory: File
 
     abstract fun getContentOfSourceFile(testFile: TestFile): String
     abstract fun getRealFileForSourceFile(testFile: TestFile): File
     abstract fun getRealFileForBinaryFile(testFile: TestFile): File
-    abstract val preprocessors: List<SourceFilePreprocessor>
+    abstract konst preprocessors: List<SourceFilePreprocessor>
 }
 
-val TestServices.sourceFileProvider: SourceFileProvider by TestServices.testServiceAccessor()
+konst TestServices.sourceFileProvider: SourceFileProvider by TestServices.testServiceAccessor()
 
-class SourceFileProviderImpl(val testServices: TestServices, override val preprocessors: List<SourceFilePreprocessor>) : SourceFileProvider() {
-    override val kotlinSourceDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("kotlin-files") }
-    override val javaSourceDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("java-files") }
-    override val javaBinaryDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("java-binary-files") }
-    override val additionalFilesDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("additional-files") }
+class SourceFileProviderImpl(konst testServices: TestServices, override konst preprocessors: List<SourceFilePreprocessor>) : SourceFileProvider() {
+    override konst kotlinSourceDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("kotlin-files") }
+    override konst javaSourceDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("java-files") }
+    override konst javaBinaryDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("java-binary-files") }
+    override konst additionalFilesDirectory: File by lazy(LazyThreadSafetyMode.NONE) { testServices.getOrCreateTempDirectory("additional-files") }
 
-    private val contentOfFiles = mutableMapOf<TestFile, String>()
-    private val realFileMap = mutableMapOf<TestFile, File>()
+    private konst contentOfFiles = mutableMapOf<TestFile, String>()
+    private konst realFileMap = mutableMapOf<TestFile, File>()
 
     override fun getContentOfSourceFile(testFile: TestFile): String {
         return contentOfFiles.getOrPut(testFile) {
@@ -59,7 +59,7 @@ class SourceFileProviderImpl(val testServices: TestServices, override val prepro
 
     override fun getRealFileForSourceFile(testFile: TestFile): File {
         return realFileMap.getOrPut(testFile) {
-            val directory = when {
+            konst directory = when {
                 testFile.isKtFile -> kotlinSourceDirectory
                 testFile.isJavaFile -> javaSourceDirectory
                 else -> additionalFilesDirectory
@@ -73,7 +73,7 @@ class SourceFileProviderImpl(val testServices: TestServices, override val prepro
 
     override fun getRealFileForBinaryFile(testFile: TestFile): File {
         return realFileMap.getOrPut(testFile) {
-            val directory = when {
+            konst directory = when {
                 testFile.isJavaFile -> javaBinaryDirectory
                 else -> error("Unknown file type: ${testFile.name}")
             }
@@ -93,7 +93,7 @@ class SourceFileProviderImpl(val testServices: TestServices, override val prepro
 
 fun SourceFileProvider.getKtFileForSourceFile(testFile: TestFile, project: Project, findViaVfs: Boolean = false): KtFile {
     if (findViaVfs) {
-        val realFile = getRealFileForSourceFile(testFile)
+        konst realFile = getRealFileForSourceFile(testFile)
         StandardFileSystems.local().findFileByPath(realFile.path)
             ?.let { PsiManager.getInstance(project).findFile(it) as? KtFile }
             ?.let { return it }
@@ -116,10 +116,10 @@ fun SourceFileProvider.getLightTreeKtFileForSourceFile(
     testFile: TestFile,
     errorListener: (KtSourceFile) -> LightTreeParsingErrorListener?
 ): LightTreeFile {
-    val shortName = testFile.toLightTreeShortName()
-    val sourceFile = KtInMemoryTextSourceFile(shortName, "/$shortName", getContentOfSourceFile(testFile))
-    val linesMapping = sourceFile.text.toSourceLinesMapping()
-    val lightTree = LightTree2Fir.buildLightTree(sourceFile.text, errorListener(sourceFile))
+    konst shortName = testFile.toLightTreeShortName()
+    konst sourceFile = KtInMemoryTextSourceFile(shortName, "/$shortName", getContentOfSourceFile(testFile))
+    konst linesMapping = sourceFile.text.toSourceLinesMapping()
+    konst lightTree = LightTree2Fir.buildLightTree(sourceFile.text, errorListener(sourceFile))
     return LightTreeFile(lightTree, sourceFile, linesMapping)
 }
 
@@ -135,22 +135,22 @@ fun SourceFileProvider.getLightTreeFilesForSourceFiles(
     }.toMap()
 }
 
-val TestFile.isKtFile: Boolean
+konst TestFile.isKtFile: Boolean
     get() = name.endsWith(".kt") || name.endsWith(".kts")
 
-val TestFile.isKtsFile: Boolean
+konst TestFile.isKtsFile: Boolean
     get() = name.endsWith(".kts")
 
-val TestFile.isJavaFile: Boolean
+konst TestFile.isJavaFile: Boolean
     get() = name.endsWith(".java")
 
-val TestFile.isJsFile: Boolean
+konst TestFile.isJsFile: Boolean
     get() = name.endsWith(".js")
 
-val TestFile.isMjsFile: Boolean
+konst TestFile.isMjsFile: Boolean
     get() = name.endsWith(".mjs")
 
-val TestModule.javaFiles: List<TestFile>
+konst TestModule.javaFiles: List<TestFile>
     get() = files.filter { it.isJavaFile }
 
 fun SourceFileProvider.getRealJavaFiles(module: TestModule): List<File> {

@@ -15,12 +15,12 @@ enum class EBasic {
 
 enum class E0 {;
     companion object {
-        val entries = "OK"
+        konst entries = "OK"
     }
 }
 
 object Shadowing {
-    val entries = "OK"
+    konst entries = "OK"
 
     enum class E0 {
         E;
@@ -37,7 +37,7 @@ enum class E01 {;
     }
 }
 
-enum class E02(val entries: String) {
+enum class E02(konst entries: String) {
     E("OK");
     fun test() = entries // check whether this entries is referenced to ctor parameter
 }
@@ -54,13 +54,13 @@ enum class E03 {
 
 enum class E04 {
     E;
-    val entries = "OK"
+    konst entries = "OK"
     fun test() = entries
 }
 
 // This case doesn't work in KJS/IR: KT-58396
 interface I05 {
-    val entries: String
+    konst entries: String
         get() = "OK"
 }
 

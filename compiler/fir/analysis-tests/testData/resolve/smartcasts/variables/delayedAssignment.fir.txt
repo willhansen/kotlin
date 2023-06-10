@@ -9,7 +9,7 @@ FILE: delayedAssignment.kt
 
     }
     public final fun test(b: R|kotlin/Boolean|): R|kotlin/Unit| {
-        lval a: R|A?|
+        lkonst a: R|A?|
         when () {
             R|<local>/b| ->  {
                 R|<local>/a| = R|/A.A|()

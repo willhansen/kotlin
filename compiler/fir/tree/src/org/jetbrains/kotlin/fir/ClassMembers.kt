@@ -47,7 +47,7 @@ fun FirClassLikeSymbol<*>.getContainingClassLookupTag(): ConeClassLikeLookupTag?
     return if (classId.isLocal) {
         (fir as? FirRegularClass)?.containingClassForLocal()
     } else {
-        val ownerId = classId.outerClassId
+        konst ownerId = classId.outerClassId
         ownerId?.toLookupTag()
     }
 }
@@ -61,29 +61,29 @@ private object HasNoEnumEntriesKey : FirDeclarationDataKey()
 var FirClass.hasNoEnumEntriesAttr: Boolean? by FirDeclarationDataRegistry.data(HasNoEnumEntriesKey)
 
 // Must be true iff the class metadata contains the hasEnumEntries flag
-val FirClass.hasEnumEntries get() = hasNoEnumEntriesAttr != true
+konst FirClass.hasEnumEntries get() = hasNoEnumEntriesAttr != true
 
 private object IsNewPlaceForBodyGeneration : FirDeclarationDataKey()
 var FirRegularClass.isNewPlaceForBodyGeneration: Boolean? by FirDeclarationDataRegistry.data(IsNewPlaceForBodyGeneration)
 
-val FirCallableDeclaration.isIntersectionOverride: Boolean get() = origin == FirDeclarationOrigin.IntersectionOverride
-val FirCallableDeclaration.isSubstitutionOverride: Boolean get() = origin is FirDeclarationOrigin.SubstitutionOverride
-val FirCallableDeclaration.isSubstitutionOrIntersectionOverride: Boolean get() = isSubstitutionOverride || isIntersectionOverride
+konst FirCallableDeclaration.isIntersectionOverride: Boolean get() = origin == FirDeclarationOrigin.IntersectionOverride
+konst FirCallableDeclaration.isSubstitutionOverride: Boolean get() = origin is FirDeclarationOrigin.SubstitutionOverride
+konst FirCallableDeclaration.isSubstitutionOrIntersectionOverride: Boolean get() = isSubstitutionOverride || isIntersectionOverride
 
-val FirCallableSymbol<*>.isIntersectionOverride: Boolean get() = origin == FirDeclarationOrigin.IntersectionOverride
-val FirCallableSymbol<*>.isSubstitutionOverride: Boolean get() = origin is FirDeclarationOrigin.SubstitutionOverride
-val FirCallableSymbol<*>.isSubstitutionOrIntersectionOverride: Boolean get() = isSubstitutionOverride || isIntersectionOverride
+konst FirCallableSymbol<*>.isIntersectionOverride: Boolean get() = origin == FirDeclarationOrigin.IntersectionOverride
+konst FirCallableSymbol<*>.isSubstitutionOverride: Boolean get() = origin is FirDeclarationOrigin.SubstitutionOverride
+konst FirCallableSymbol<*>.isSubstitutionOrIntersectionOverride: Boolean get() = isSubstitutionOverride || isIntersectionOverride
 
-inline val <reified D : FirCallableDeclaration> D.originalForSubstitutionOverride: D?
+inline konst <reified D : FirCallableDeclaration> D.originalForSubstitutionOverride: D?
     get() = if (isSubstitutionOverride || isSynthetic) originalForSubstitutionOverrideAttr else null
 
-inline val <reified S : FirCallableSymbol<*>> S.originalForSubstitutionOverride: S?
+inline konst <reified S : FirCallableSymbol<*>> S.originalForSubstitutionOverride: S?
     get() = fir.originalForSubstitutionOverride?.symbol as S?
 
-inline val <reified D : FirCallableDeclaration> D.baseForIntersectionOverride: D?
+inline konst <reified D : FirCallableDeclaration> D.baseForIntersectionOverride: D?
     get() = if (isIntersectionOverride) originalForIntersectionOverrideAttr else null
 
-inline val <reified S : FirCallableSymbol<*>> S.baseForIntersectionOverride: S?
+inline konst <reified S : FirCallableSymbol<*>> S.baseForIntersectionOverride: S?
     get() = fir.baseForIntersectionOverride?.symbol as S?
 
 inline fun <reified D : FirCallableDeclaration> D.originalIfFakeOverride(): D? =
@@ -109,7 +109,7 @@ inline fun <reified D : FirCallableDeclaration> D.unwrapFakeOverrides(): D {
     var current = this
 
     do {
-        val next = current.originalIfFakeOverride() ?: return current
+        konst next = current.originalIfFakeOverride() ?: return current
         current = next
     } while (true)
 }
@@ -118,7 +118,7 @@ inline fun <reified D : FirCallableDeclaration> D.unwrapFakeOverridesOrDelegated
     var current = this
 
     do {
-        val next = current.originalIfFakeOverrideOrDelegated() ?: return current
+        konst next = current.originalIfFakeOverrideOrDelegated() ?: return current
         current = next
     } while (true)
 }
@@ -127,7 +127,7 @@ inline fun <reified D : FirCallableDeclaration> D.unwrapSubstitutionOverrides():
     var current = this
 
     do {
-        val next = current.originalForSubstitutionOverride ?: return current
+        konst next = current.originalForSubstitutionOverride ?: return current
         current = next
     } while (true)
 }
@@ -137,7 +137,7 @@ inline fun <reified D : FirCallableDeclaration> D.unwrapUseSiteSubstitutionOverr
 
     do {
         if (current.origin != FirDeclarationOrigin.SubstitutionOverride.CallSite) return current
-        val next = current.originalForSubstitutionOverride ?: return current
+        konst next = current.originalForSubstitutionOverride ?: return current
         current = next
     } while (true)
 }
@@ -181,14 +181,14 @@ var <D : FirAnonymousFunction>
 private object CorrespondingProperty : FirDeclarationDataKey()
 
 /**
- * The corresponding [FirProperty] if the current value parameter is a `val` or `var` declared inside the primary constructor.
+ * The corresponding [FirProperty] if the current konstue parameter is a `konst` or `var` declared inside the primary constructor.
  */
 var FirValueParameter.correspondingProperty: FirProperty? by FirDeclarationDataRegistry.data(CorrespondingProperty)
 
-val FirCallableDeclaration.propertyIfAccessor: FirCallableDeclaration
+konst FirCallableDeclaration.propertyIfAccessor: FirCallableDeclaration
     get() = (this as? FirPropertyAccessor)?.propertySymbol?.fir ?: this
 
-val FirCallableDeclaration.propertyIfBackingField: FirCallableDeclaration
+konst FirCallableDeclaration.propertyIfBackingField: FirCallableDeclaration
     get() = (this as? FirBackingField)?.propertySymbol?.fir ?: this
 
 private object IsJavaRecordKey : FirDeclarationDataKey()
@@ -204,13 +204,13 @@ var FirProperty.isCatchParameter: Boolean? by FirDeclarationDataRegistry.data(Is
 private object DelegatedWrapperDataKey : FirDeclarationDataKey()
 
 class DelegatedWrapperData<D : FirCallableDeclaration>(
-    val wrapped: D,
-    val containingClass: ConeClassLikeLookupTag,
-    val delegateField: FirField,
+    konst wrapped: D,
+    konst containingClass: ConeClassLikeLookupTag,
+    konst delegateField: FirField,
 )
 
 var <D : FirCallableDeclaration>
         D.delegatedWrapperData: DelegatedWrapperData<D>? by FirDeclarationDataRegistry.data(DelegatedWrapperDataKey)
 
-val <D : FirCallableDeclaration> FirCallableSymbol<out D>.delegatedWrapperData: DelegatedWrapperData<D>?
+konst <D : FirCallableDeclaration> FirCallableSymbol<out D>.delegatedWrapperData: DelegatedWrapperData<D>?
     get() = fir.delegatedWrapperData

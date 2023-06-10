@@ -7,10 +7,10 @@
 // Run Kotlin compiler benchmarks (https://github.com/Kotlin/kotlin-benchmarks)
 // with compiler built from your changes if you are not sure.
 
-val xs = listOf<Any>()
+konst xs = listOf<Any>()
 
 fun box(): String {
-    val s = StringBuilder()
+    konst s = StringBuilder()
     for ((index, x) in xs.withIndex()) {
         return "Loop over empty array should not be executed"
     }

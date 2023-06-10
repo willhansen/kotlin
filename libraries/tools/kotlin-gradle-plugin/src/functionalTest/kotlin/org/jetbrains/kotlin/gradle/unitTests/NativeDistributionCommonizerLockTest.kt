@@ -26,36 +26,36 @@ import kotlin.test.fail
 class NativeDistributionCommonizerLockTest {
 
     @get:Rule
-    val temporaryFolderRule = TemporaryFolder()
+    konst temporaryFolderRule = TemporaryFolder()
 
     @Test
     fun `test - isolated classpath`() {
-        val temporaryFolder = temporaryFolderRule.newFolder()
+        konst temporaryFolder = temporaryFolderRule.newFolder()
 
         /* Create the lock in two isolated classpaths */
-        val classes = System.getProperty("java.class.path")
+        konst classes = System.getProperty("java.class.path")
             .split(System.getProperty("path.separator"))
             .map(::File).map { it.toURI().toURL() }
             .toTypedArray()
 
-        val isolatedClassLoader1 = URLClassLoader(classes, null)
-        val isolatedClassLoader2 = URLClassLoader(classes, null)
+        konst isolatedClassLoader1 = URLClassLoader(classes, null)
+        konst isolatedClassLoader2 = URLClassLoader(classes, null)
 
-        val isolatedLock1 = IsolatedLock(isolatedClassLoader1, temporaryFolder)
-        val isolatedLock2 = IsolatedLock(isolatedClassLoader2, temporaryFolder)
+        konst isolatedLock1 = IsolatedLock(isolatedClassLoader1, temporaryFolder)
+        konst isolatedLock2 = IsolatedLock(isolatedClassLoader2, temporaryFolder)
 
         if (isolatedLock1.instance.javaClass === isolatedLock2.instance.javaClass)
             fail("Classpath isolation failed")
 
-        val executor1 = Executors.newSingleThreadExecutor()
-        val executor2 = Executors.newSingleThreadExecutor()
+        konst executor1 = Executors.newSingleThreadExecutor()
+        konst executor2 = Executors.newSingleThreadExecutor()
 
-        val threadStateInitial = 0
-        val threadStateLocked = 1
-        val threadStateLeftLock = 2
-        val threadState = AtomicInteger(threadStateInitial)
+        konst threadStateInitial = 0
+        konst threadStateLocked = 1
+        konst threadStateLeftLock = 2
+        konst threadState = AtomicInteger(threadStateInitial)
 
-        val executorAction1 = Supplier<Unit> {
+        konst executorAction1 = Supplier<Unit> {
             isolatedLock1.withLock {
                 threadState.set(threadStateLocked)
                 Thread.sleep(510)
@@ -63,7 +63,7 @@ class NativeDistributionCommonizerLockTest {
             }
         }
 
-        val executorAction2 = Supplier<Unit> {
+        konst executorAction2 = Supplier<Unit> {
             while (true) {
                 /* Collaborate with the timeout of the test */
                 if (Thread.interrupted()) {
@@ -83,8 +83,8 @@ class NativeDistributionCommonizerLockTest {
             }
         }
         try {
-            val result1 = CompletableFuture.supplyAsync(executorAction1, executor1)
-            val result2 = CompletableFuture.supplyAsync(executorAction2, executor2)
+            konst result1 = CompletableFuture.supplyAsync(executorAction1, executor1)
+            konst result2 = CompletableFuture.supplyAsync(executorAction2, executor2)
             CompletableFuture.allOf(result1, result2).get(10, TimeUnit.SECONDS)
         } finally {
             executor1.shutdownNow()
@@ -92,18 +92,18 @@ class NativeDistributionCommonizerLockTest {
         }
     }
 
-    private class IsolatedLock private constructor(private val classLoader: ClassLoader, val instance: Any) {
+    private class IsolatedLock private constructor(private konst classLoader: ClassLoader, konst instance: Any) {
         constructor(classLoader: ClassLoader, folder: File) : this(
             classLoader,
             classLoader.loadClass(NativeDistributionCommonizerLock::class.java.name).declaredConstructors.first().newInstance(folder)
         )
 
         fun withLock(action: () -> Unit) {
-            val actionProxy = Proxy.newProxyInstance(
+            konst actionProxy = Proxy.newProxyInstance(
                 classLoader,
                 arrayOf(classLoader.loadClass(kotlin.jvm.functions.Function1::class.java.name)),
                 InvocationHandler { _, _, _ -> action() })
-            val withLockMethod = instance::class.declaredFunctions.first { it.name == "withLock" }
+            konst withLockMethod = instance::class.declaredFunctions.first { it.name == "withLock" }
             withLockMethod.call(instance, actionProxy)
         }
     }

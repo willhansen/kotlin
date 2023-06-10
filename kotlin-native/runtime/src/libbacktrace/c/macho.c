@@ -256,7 +256,7 @@ struct macho_nlist
   uint8_t n_type;	/* Type flag */
   uint8_t n_sect;	/* Section number */
   uint16_t n_desc;	/* Stabs description field */
-  uint32_t n_value;	/* Value */
+  uint32_t n_konstue;	/* Value */
 };
 
 /* 64-bit symbol data.  */
@@ -267,7 +267,7 @@ struct macho_nlist_64
   uint8_t n_type;	/* Type flag */
   uint8_t n_sect;	/* Section number */
   uint16_t n_desc;	/* Stabs description field */
-  uint64_t n_value;	/* Value */
+  uint64_t n_konstue;	/* Value */
 };
 
 /* Value found in nlist n_type field.  */
@@ -517,9 +517,9 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
 {
   size_t symsize;
   struct backtrace_view sym_view;
-  int sym_view_valid;
+  int sym_view_konstid;
   struct backtrace_view str_view;
-  int str_view_valid;
+  int str_view_konstid;
   size_t ndefs;
   size_t symtaboff;
   unsigned int i;
@@ -528,8 +528,8 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
   unsigned int j;
   struct macho_syminfo_data *sdata;
 
-  sym_view_valid = 0;
-  str_view_valid = 0;
+  sym_view_konstid = 0;
+  str_view_konstid = 0;
   macho_symbol_size = 0;
   macho_symbols = NULL;
 
@@ -541,12 +541,12 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
   if (!backtrace_get_view (state, descriptor, symoff, nsyms * symsize,
 			   error_callback, data, &sym_view))
     goto fail;
-  sym_view_valid = 1;
+  sym_view_konstid = 1;
 
   if (!backtrace_get_view (state, descriptor, stroff, strsize,
 			   error_callback, data, &str_view))
     return 0;
-  str_view_valid = 1;
+  str_view_konstid = 1;
 
   ndefs = 0;
   symtaboff = 0;
@@ -585,11 +585,11 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
   for (i = 0; i < nsyms; ++i, symtaboff += symsize)
     {
       uint32_t strx;
-      uint64_t value;
+      uint64_t konstue;
       const char *name;
 
       strx = 0;
-      value = 0;
+      konstue = 0;
       if (is_64)
 	{
 	  struct macho_nlist_64 nlist;
@@ -600,7 +600,7 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
 	    continue;
 
 	  strx = nlist.n_strx;
-	  value = nlist.n_value;
+	  konstue = nlist.n_konstue;
 	}
       else
 	{
@@ -612,7 +612,7 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
 	    continue;
 
 	  strx = nlist.n_strx;
-	  value = nlist.n_value;
+	  konstue = nlist.n_konstue;
 	}
 
       if (strx >= strsize)
@@ -625,7 +625,7 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
       if (name[0] == '_')
 	++name;
       macho_symbols[j].name = name;
-      macho_symbols[j].address = value + base_address;
+      macho_symbols[j].address = konstue + base_address;
       ++j;
     }
 
@@ -638,8 +638,8 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
      can release the symbol table.  */
 
   backtrace_release_view (state, &sym_view, error_callback, data);
-  sym_view_valid = 0;
-  str_view_valid = 0;
+  sym_view_konstid = 0;
+  str_view_konstid = 0;
 
   /* Add a trailing sentinel symbol.  */
   macho_symbols[j].name = "";
@@ -693,14 +693,14 @@ macho_add_symtab (struct backtrace_state *state, int descriptor,
   if (macho_symbols != NULL)
     backtrace_free (state, macho_symbols, macho_symbol_size,
 		    error_callback, data);
-  if (sym_view_valid)
+  if (sym_view_konstid)
     backtrace_release_view (state, &sym_view, error_callback, data);
-  if (str_view_valid)
+  if (str_view_konstid)
     backtrace_release_view (state, &str_view, error_callback, data);
   return 0;
 }
 
-/* Return the symbol name and value for an ADDR.  */
+/* Return the symbol name and konstue for an ADDR.  */
 
 static void
 macho_syminfo (struct backtrace_state *state, uintptr_t addr,
@@ -763,13 +763,13 @@ macho_add_fat (struct backtrace_state *state, const char *filename,
 	       backtrace_error_callback error_callback, void *data,
 	       fileline *fileline_fn, int *found_sym)
 {
-  int arch_view_valid;
+  int arch_view_konstid;
   unsigned int cputype;
   size_t arch_size;
   struct backtrace_view arch_view;
   unsigned int i;
 
-  arch_view_valid = 0;
+  arch_view_konstid = 0;
 
 #if defined (__x86_64__)
   cputype = MACH_O_CPU_TYPE_X86_64;
@@ -847,7 +847,7 @@ macho_add_fat (struct backtrace_state *state, const char *filename,
   error_callback (data, "could not find executable in fat file", 0);
 
  fail:
-  if (arch_view_valid)
+  if (arch_view_konstid)
     backtrace_release_view (state, &arch_view, error_callback, data);
   if (descriptor != -1)
     backtrace_close (descriptor, error_callback, data);
@@ -1001,7 +1001,7 @@ macho_add (struct backtrace_state *state, const char *filename, int descriptor,
   off_t hdroffset;
   int is_64;
   struct backtrace_view cmds_view;
-  int cmds_view_valid;
+  int cmds_view_konstid;
   struct dwarf_sections dwarf_sections;
   int have_dwarf;
   unsigned char uuid[MACH_O_UUID_LEN];
@@ -1011,7 +1011,7 @@ macho_add (struct backtrace_state *state, const char *filename, int descriptor,
 
   *found_sym = 0;
 
-  cmds_view_valid = 0;
+  cmds_view_konstid = 0;
 
   /* The 32-bit and 64-bit file headers start out the same, so we can
      just always read the 32-bit version.  A fat header is shorter but
@@ -1085,7 +1085,7 @@ macho_add (struct backtrace_state *state, const char *filename, int descriptor,
   if (!backtrace_get_view (state, descriptor, hdroffset, header.sizeofcmds,
 			   error_callback, data, &cmds_view))
     goto fail;
-  cmds_view_valid = 1;
+  cmds_view_konstid = 1;
 
   memset (&dwarf_sections, 0, sizeof dwarf_sections);
   have_dwarf = 0;
@@ -1188,7 +1188,7 @@ macho_add (struct backtrace_state *state, const char *filename, int descriptor,
   descriptor = -1;
 
   backtrace_release_view (state, &cmds_view, error_callback, data);
-  cmds_view_valid = 0;
+  cmds_view_konstid = 0;
 
   if (match_uuid != NULL)
     {
@@ -1226,13 +1226,13 @@ macho_add (struct backtrace_state *state, const char *filename, int descriptor,
   return 1;
 
  fail:
-  if (cmds_view_valid)
+  if (cmds_view_konstid)
     backtrace_release_view (state, &cmds_view, error_callback, data);
   if (descriptor != -1)
     backtrace_close (descriptor, error_callback, data);
   return 0;
  skip:
-  if (cmds_view_valid)
+  if (cmds_view_konstid)
     backtrace_release_view (state, &cmds_view, error_callback, data);
   if (descriptor != -1)
     backtrace_close (descriptor, error_callback, data);

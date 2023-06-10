@@ -1,6 +1,6 @@
 open class IIterator<out T> {
   fun next() : T
-  val hasNext : Boolean
+  konst hasNext : Boolean
 
   fun toArray(buffer : MutableArray<in T>) : Int { // T is still an in-parameter
     return fillBuffer(buffer, 0, buffer.size)

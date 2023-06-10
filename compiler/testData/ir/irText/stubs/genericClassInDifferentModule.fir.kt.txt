@@ -8,7 +8,7 @@ abstract class Base<T : Any?> {
 
   }
 
-  val x: T
+  konst x: T
     field = x
     get
 
@@ -47,7 +47,7 @@ class Derived1<T : Any?> : Base<T> {
     override get(): T {
       return <this>.<get-x>()
     }
-    override set(value: T) {
+    override set(konstue: T) {
     }
 
 }

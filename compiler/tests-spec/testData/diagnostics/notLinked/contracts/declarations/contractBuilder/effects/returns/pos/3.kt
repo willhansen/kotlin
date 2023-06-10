@@ -18,13 +18,13 @@ fun Any?.case_1(): Boolean {
 }
 
 // TESTCASE NUMBER: 2
-fun <T> T?.case_2(value_1: Any?, value_2: Any?) {
-    contract { returns() implies (this@case_2 is String? || value_1 !is Int && value_2 !is Nothing?) }
-    if (!(this@case_2 is String? || value_1 !is Int && value_2 !is Nothing?)) throw Exception()
+fun <T> T?.case_2(konstue_1: Any?, konstue_2: Any?) {
+    contract { returns() implies (this@case_2 is String? || konstue_1 !is Int && konstue_2 !is Nothing?) }
+    if (!(this@case_2 is String? || konstue_1 !is Int && konstue_2 !is Nothing?)) throw Exception()
 }
 
 // TESTCASE NUMBER: 3
-inline fun <reified T : Number?> T.case_3(value_1: Any?) {
-    contract { returns() implies (value_1 == null || this@case_3 != null && this@case_3 is Int) }
-    if (!(value_1 == null || this@case_3 != null && this@case_3 is Int)) throw Exception()
+inline fun <reified T : Number?> T.case_3(konstue_1: Any?) {
+    contract { returns() implies (konstue_1 == null || this@case_3 != null && this@case_3 is Int) }
+    if (!(konstue_1 == null || this@case_3 != null && this@case_3 is Int)) throw Exception()
 }

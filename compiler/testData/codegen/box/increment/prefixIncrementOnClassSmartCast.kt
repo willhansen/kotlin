@@ -5,7 +5,7 @@ operator fun Derived.inc(): Derived { return Derived() }
 fun box() : String {
     var i : Base
     i = Derived()
-    val j = ++i
+    konst j = ++i
 
     return if (j is Derived && i is Derived) "OK" else "fail j = $j i = $i"
 }

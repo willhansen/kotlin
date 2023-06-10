@@ -16,18 +16,18 @@ import org.jetbrains.kotlin.gradle.util.*
 import org.junit.Test
 import kotlin.test.fail
 
-@Suppress("DEPRECATION") /* Configurations are scheduled for removal */
+@Suppress("DEPRECATION") /* Configurations are scheduled for remokonst */
 class KT55929MetadataConfigurationsTest {
 
     @Test
     fun `test - deprecated metadata configurations - contain dependencies from common source set`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(false)
             enableIntransitiveMetadataConfiguration(true)
             applyMultiplatformPlugin()
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
 
         kotlin.jvm()
         kotlin.linuxX64()
@@ -43,9 +43,9 @@ class KT55929MetadataConfigurationsTest {
             }
         }
 
-        val commonMain = kotlin.sourceSets.getByName("commonMain")
-        val jvmAndLinuxMain = kotlin.sourceSets.getByName("jvmAndLinuxMain")
-        val linuxMain = kotlin.sourceSets.getByName("linuxMain")
+        konst commonMain = kotlin.sourceSets.getByName("commonMain")
+        konst jvmAndLinuxMain = kotlin.sourceSets.getByName("jvmAndLinuxMain")
+        konst linuxMain = kotlin.sourceSets.getByName("linuxMain")
 
         commonMain.dependencies {
             api("org.sample:commonMainApi:1.0.0")
@@ -60,7 +60,7 @@ class KT55929MetadataConfigurationsTest {
             implementation("org.sample:linuxMain:1.0.0")
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
         /* Check linuxMain */
         listOf(
@@ -116,7 +116,7 @@ class KT55929MetadataConfigurationsTest {
 
     @Test
     fun `test - deprecated metadata configurations - do not list stdlib-common - for platform source sets`() {
-        val project = buildProject {
+        konst project = buildProject {
             enableDefaultStdlibDependency(true)
             enableIntransitiveMetadataConfiguration(true)
             applyMultiplatformPlugin()
@@ -126,7 +126,7 @@ class KT55929MetadataConfigurationsTest {
             }
         }
 
-        val kotlin = project.multiplatformExtension
+        konst kotlin = project.multiplatformExtension
         kotlin.targetHierarchy.default()
         kotlin.linuxX64()
         kotlin.linuxArm64()
@@ -135,12 +135,12 @@ class KT55929MetadataConfigurationsTest {
             implementation(kotlin("stdlib"))
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val stdlibCommonFound = project.configurations.getByName(
+        konst stdlibCommonFound = project.configurations.getByName(
             kotlin.sourceSets.getByName("linuxX64Main").implementationMetadataConfigurationName
         ).resolvedConfiguration.resolvedArtifacts.any { artifact ->
-            val id = artifact.id.componentIdentifier
+            konst id = artifact.id.componentIdentifier
             id is ModuleComponentIdentifier && id.module == "kotlin-stdlib-common"
         }
 

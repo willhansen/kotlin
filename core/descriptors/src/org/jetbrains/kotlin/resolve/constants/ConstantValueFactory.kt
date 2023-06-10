@@ -23,28 +23,28 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeUtils
 
 object ConstantValueFactory {
-    fun createArrayValue(value: List<ConstantValue<*>>, type: KotlinType): ArrayValue =
-        TypedArrayValue(value, type)
+    fun createArrayValue(konstue: List<ConstantValue<*>>, type: KotlinType): ArrayValue =
+        TypedArrayValue(konstue, type)
 
-    fun createConstantValue(value: Any?, module: ModuleDescriptor? = null): ConstantValue<*>? {
-        return when (value) {
-            is Byte -> ByteValue(value)
-            is Short -> ShortValue(value)
-            is Int -> IntValue(value)
-            is Long -> LongValue(value)
-            is Char -> CharValue(value)
-            is Float -> FloatValue(value)
-            is Double -> DoubleValue(value)
-            is Boolean -> BooleanValue(value)
-            is String -> StringValue(value)
-            is ByteArray -> createArrayValue(value.toList(), module, PrimitiveType.BYTE)
-            is ShortArray -> createArrayValue(value.toList(), module, PrimitiveType.SHORT)
-            is IntArray -> createArrayValue(value.toList(), module, PrimitiveType.INT)
-            is LongArray -> createArrayValue(value.toList(), module, PrimitiveType.LONG)
-            is CharArray -> createArrayValue(value.toList(), module, PrimitiveType.CHAR)
-            is FloatArray -> createArrayValue(value.toList(), module, PrimitiveType.FLOAT)
-            is DoubleArray -> createArrayValue(value.toList(), module, PrimitiveType.DOUBLE)
-            is BooleanArray -> createArrayValue(value.toList(), module, PrimitiveType.BOOLEAN)
+    fun createConstantValue(konstue: Any?, module: ModuleDescriptor? = null): ConstantValue<*>? {
+        return when (konstue) {
+            is Byte -> ByteValue(konstue)
+            is Short -> ShortValue(konstue)
+            is Int -> IntValue(konstue)
+            is Long -> LongValue(konstue)
+            is Char -> CharValue(konstue)
+            is Float -> FloatValue(konstue)
+            is Double -> DoubleValue(konstue)
+            is Boolean -> BooleanValue(konstue)
+            is String -> StringValue(konstue)
+            is ByteArray -> createArrayValue(konstue.toList(), module, PrimitiveType.BYTE)
+            is ShortArray -> createArrayValue(konstue.toList(), module, PrimitiveType.SHORT)
+            is IntArray -> createArrayValue(konstue.toList(), module, PrimitiveType.INT)
+            is LongArray -> createArrayValue(konstue.toList(), module, PrimitiveType.LONG)
+            is CharArray -> createArrayValue(konstue.toList(), module, PrimitiveType.CHAR)
+            is FloatArray -> createArrayValue(konstue.toList(), module, PrimitiveType.FLOAT)
+            is DoubleArray -> createArrayValue(konstue.toList(), module, PrimitiveType.DOUBLE)
+            is BooleanArray -> createArrayValue(konstue.toList(), module, PrimitiveType.BOOLEAN)
             null -> NullValue()
             else -> null
         }
@@ -52,16 +52,16 @@ object ConstantValueFactory {
 
     fun createUnsignedValue(constantValue: ConstantValue<*>): UnsignedValueConstant<*>? {
         return when (constantValue) {
-            is ByteValue -> UByteValue(constantValue.value)
-            is ShortValue -> UShortValue(constantValue.value)
-            is IntValue -> UIntValue(constantValue.value)
-            is LongValue -> ULongValue(constantValue.value)
+            is ByteValue -> UByteValue(constantValue.konstue)
+            is ShortValue -> UShortValue(constantValue.konstue)
+            is IntValue -> UIntValue(constantValue.konstue)
+            is LongValue -> ULongValue(constantValue.konstue)
             else -> null
         }
     }
 
-    private fun createArrayValue(value: List<*>, module: ModuleDescriptor?, componentType: PrimitiveType): ArrayValue {
-        val elements = value.toList().mapNotNull(this::createConstantValue)
+    private fun createArrayValue(konstue: List<*>, module: ModuleDescriptor?, componentType: PrimitiveType): ArrayValue {
+        konst elements = konstue.toList().mapNotNull(this::createConstantValue)
         return if (module != null)
             TypedArrayValue(elements, module.builtIns.getPrimitiveArrayKotlinType(componentType))
         else
@@ -71,26 +71,26 @@ object ConstantValueFactory {
     }
 
     fun createIntegerConstantValue(
-            value: Long,
+            konstue: Long,
             expectedType: KotlinType,
             isUnsigned: Boolean
     ): ConstantValue<*>? {
-        val notNullExpected = TypeUtils.makeNotNullable(expectedType)
+        konst notNullExpected = TypeUtils.makeNotNullable(expectedType)
         return if (isUnsigned) {
             when {
-                KotlinBuiltIns.isUByte(notNullExpected) && value == value.toByte().fromUByteToLong() -> UByteValue(value.toByte())
-                KotlinBuiltIns.isUShort(notNullExpected) && value == value.toShort().fromUShortToLong() -> UShortValue(value.toShort())
-                KotlinBuiltIns.isUInt(notNullExpected) && value == value.toInt().fromUIntToLong() -> UIntValue(value.toInt())
-                KotlinBuiltIns.isULong(notNullExpected) -> ULongValue(value)
+                KotlinBuiltIns.isUByte(notNullExpected) && konstue == konstue.toByte().fromUByteToLong() -> UByteValue(konstue.toByte())
+                KotlinBuiltIns.isUShort(notNullExpected) && konstue == konstue.toShort().fromUShortToLong() -> UShortValue(konstue.toShort())
+                KotlinBuiltIns.isUInt(notNullExpected) && konstue == konstue.toInt().fromUIntToLong() -> UIntValue(konstue.toInt())
+                KotlinBuiltIns.isULong(notNullExpected) -> ULongValue(konstue)
                 else -> null
             }
         } else {
             when {
-                KotlinBuiltIns.isLong(notNullExpected) -> LongValue(value)
-                KotlinBuiltIns.isInt(notNullExpected) && value == value.toInt().toLong() -> IntValue(value.toInt())
-                KotlinBuiltIns.isShort(notNullExpected) && value == value.toShort().toLong() -> ShortValue(value.toShort())
-                KotlinBuiltIns.isByte(notNullExpected) && value == value.toByte().toLong() -> ByteValue(value.toByte())
-                KotlinBuiltIns.isChar(notNullExpected) -> IntValue(value.toInt())
+                KotlinBuiltIns.isLong(notNullExpected) -> LongValue(konstue)
+                KotlinBuiltIns.isInt(notNullExpected) && konstue == konstue.toInt().toLong() -> IntValue(konstue.toInt())
+                KotlinBuiltIns.isShort(notNullExpected) && konstue == konstue.toShort().toLong() -> ShortValue(konstue.toShort())
+                KotlinBuiltIns.isByte(notNullExpected) && konstue == konstue.toByte().toLong() -> ByteValue(konstue.toByte())
+                KotlinBuiltIns.isChar(notNullExpected) -> IntValue(konstue.toInt())
                 else -> null
             }
         }

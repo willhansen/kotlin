@@ -16,12 +16,12 @@ import org.jetbrains.kotlin.types.error.ErrorUtils
 class StubTypeForBuilderInference(
     originalTypeVariable: NewTypeVariableConstructor,
     isMarkedNullable: Boolean,
-    override val constructor: TypeConstructor = createConstructor(originalTypeVariable)
+    override konst constructor: TypeConstructor = createConstructor(originalTypeVariable)
 ) : AbstractStubType(originalTypeVariable, isMarkedNullable), StubTypeMarker {
     override fun materialize(newNullability: Boolean): AbstractStubType =
         StubTypeForBuilderInference(originalTypeVariable, newNullability, constructor)
 
-    override val memberScope: MemberScope = originalTypeVariable.builtIns.anyType.memberScope
+    override konst memberScope: MemberScope = originalTypeVariable.builtIns.anyType.memberScope
 
     override fun toString(): String {
         // BI means builder inference
@@ -32,7 +32,7 @@ class StubTypeForBuilderInference(
 class StubTypeForTypeVariablesInSubtyping(
     originalTypeVariable: NewTypeVariableConstructor,
     isMarkedNullable: Boolean,
-    override val constructor: TypeConstructor = createConstructor(originalTypeVariable)
+    override konst constructor: TypeConstructor = createConstructor(originalTypeVariable)
 ) : AbstractStubType(originalTypeVariable, isMarkedNullable), StubTypeMarker {
     override fun materialize(newNullability: Boolean): AbstractStubType =
         StubTypeForTypeVariablesInSubtyping(originalTypeVariable, newNullability, constructor)
@@ -46,7 +46,7 @@ class StubTypeForTypeVariablesInSubtyping(
 class StubTypeForProvideDelegateReceiver(
     originalTypeVariable: NewTypeVariableConstructor,
     isMarkedNullable: Boolean,
-    override val constructor: TypeConstructor = createConstructor(originalTypeVariable)
+    override konst constructor: TypeConstructor = createConstructor(originalTypeVariable)
 ) : AbstractStubType(originalTypeVariable, isMarkedNullable) {
     override fun materialize(newNullability: Boolean): StubTypeForProvideDelegateReceiver =
         StubTypeForProvideDelegateReceiver(originalTypeVariable, newNullability, constructor)
@@ -56,13 +56,13 @@ class StubTypeForProvideDelegateReceiver(
     }
 }
 
-abstract class AbstractStubType(val originalTypeVariable: NewTypeVariableConstructor, override val isMarkedNullable: Boolean) : SimpleType() {
-    override val memberScope: MemberScope = ErrorUtils.createErrorScope(ErrorScopeKind.STUB_TYPE_SCOPE, originalTypeVariable.toString())
+abstract class AbstractStubType(konst originalTypeVariable: NewTypeVariableConstructor, override konst isMarkedNullable: Boolean) : SimpleType() {
+    override konst memberScope: MemberScope = ErrorUtils.createErrorScope(ErrorScopeKind.STUB_TYPE_SCOPE, originalTypeVariable.toString())
 
-    override val arguments: List<TypeProjection>
+    override konst arguments: List<TypeProjection>
         get() = emptyList()
 
-    override val attributes: TypeAttributes
+    override konst attributes: TypeAttributes
         get() = TypeAttributes.Empty
 
     override fun replaceAttributes(newAttributes: TypeAttributes): SimpleType = this

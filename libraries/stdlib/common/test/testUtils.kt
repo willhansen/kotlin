@@ -7,25 +7,25 @@ package test
 
 public expect fun assertTypeEquals(expected: Any?, actual: Any?)
 
-public expect val isFloat32RangeEnforced: Boolean
+public expect konst isFloat32RangeEnforced: Boolean
 
-public expect val supportsOctalLiteralInRegex: Boolean
+public expect konst supportsOctalLiteralInRegex: Boolean
 
-public expect val supportsEscapeAnyCharInRegex: Boolean
+public expect konst supportsEscapeAnyCharInRegex: Boolean
 
-public expect val regexSplitUnicodeCodePointHandling: Boolean
+public expect konst regexSplitUnicodeCodePointHandling: Boolean
 
 public enum class HandlingOption {
     MATCH_NOTHING, THROW, IGNORE_BACK_REFERENCE_EXPRESSION
 }
 
 public expect object BackReferenceHandling {
-    val captureLargestValidIndex: Boolean
+    konst captureLargestValidIndex: Boolean
 
-    val notYetDefinedGroup: HandlingOption
-    val notYetDefinedNamedGroup: HandlingOption
-    val enclosingGroup: HandlingOption
-    val nonExistentGroup: HandlingOption
-    val nonExistentNamedGroup: HandlingOption
-    val groupZero: HandlingOption
+    konst notYetDefinedGroup: HandlingOption
+    konst notYetDefinedNamedGroup: HandlingOption
+    konst enclosingGroup: HandlingOption
+    konst nonExistentGroup: HandlingOption
+    konst nonExistentNamedGroup: HandlingOption
+    konst groupZero: HandlingOption
 }

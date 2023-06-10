@@ -8,18 +8,18 @@ declare namespace JS_TESTS {
     namespace foo {
         class JsNameTest {
             private constructor();
-            get value(): number;
+            get konstue(): number;
             runTest(): string;
             acceptObject(impl: foo.Object): string;
             static get NotCompanion(): {
                 create(): foo.JsNameTest;
-                createChild(value: number): foo.JsNameTest.NestedJsName;
+                createChild(konstue: number): foo.JsNameTest.NestedJsName;
             };
         }
         namespace JsNameTest {
             class NestedJsName {
-                constructor(__value: number);
-                get value(): number;
+                constructor(__konstue: number);
+                get konstue(): number;
             }
         }
     }

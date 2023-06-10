@@ -11,7 +11,7 @@ import org.gradle.api.DefaultTask
 import org.jetbrains.kotlin.gradle.plugin.cocoapods.CocoapodsExtension.CocoapodsDependency
 import org.jetbrains.kotlin.konan.target.HostManager
 
-val CocoapodsDependency.schemeName: String
+konst CocoapodsDependency.schemeName: String
     get() = name.split("/")[0]
 
 open class CocoapodsTask : DefaultTask() {

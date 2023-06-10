@@ -1,7 +1,7 @@
 package bar
 
 @file:foo
-val prop
+konst prop
 
 @file:[bar baz]
 fun func() {}

@@ -4,9 +4,9 @@
 // !LANGUAGE: -StrictOnlyInputTypesChecks
 
 fun box(): String {
-    val set = setOf<Int>(1, 2, 3, 4, 5)
-    val x = 0 in set
-    val y = 1 in set
-    val z = null in set
+    konst set = setOf<Int>(1, 2, 3, 4, 5)
+    konst x = 0 in set
+    konst y = 1 in set
+    konst z = null in set
     return "OK"
 }

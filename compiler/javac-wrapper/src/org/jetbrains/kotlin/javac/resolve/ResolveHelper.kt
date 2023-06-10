@@ -26,8 +26,8 @@ import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 
-internal class ResolveHelper(private val javac: JavacWrapper,
-                             private val compilationUnit: CompilationUnitTree) {
+internal class ResolveHelper(private konst javac: JavacWrapper,
+                             private konst compilationUnit: CompilationUnitTree) {
 
     fun getJavaClassFromPathSegments(javaClass: JavaClass,
                                      pathSegments: List<String>) =
@@ -41,9 +41,9 @@ internal class ResolveHelper(private val javac: JavacWrapper,
     fun findImport(pathSegments: List<String>): JavaClass? {
         pathSegments.forEachIndexed { index, _ ->
             if (index == pathSegments.lastIndex) return null
-            val packageFqName = pathSegments.dropLast(index + 1).joinToString(separator = ".")
+            konst packageFqName = pathSegments.dropLast(index + 1).joinToString(separator = ".")
             findPackage(packageFqName)?.let { pack ->
-                val className = pathSegments.takeLast(index + 1)
+                konst className = pathSegments.takeLast(index + 1)
                 return findJavaOrKotlinClass(ClassId(pack, Name.identifier(className.first())))?.let { javaClass ->
                     getJavaClassFromPathSegments(javaClass, className)
                 }
@@ -73,7 +73,7 @@ internal class ResolveHelper(private val javac: JavacWrapper,
     }
 
     fun findPackage(packageName: String): FqName? {
-        val fqName = if (packageName.isNotBlank()) FqName(packageName) else FqName.ROOT
+        konst fqName = if (packageName.isNotBlank()) FqName(packageName) else FqName.ROOT
         javac.hasKotlinPackage(fqName)?.let { return it }
 
         return javac.findPackage(fqName)?.fqName
@@ -83,7 +83,7 @@ internal class ResolveHelper(private val javac: JavacWrapper,
         when (innerOrNestedClass.visibility) {
             DescriptorVisibilities.PRIVATE -> null
             JavaDescriptorVisibilities.PACKAGE_VISIBILITY -> {
-                val classId = (innerOrNestedClass as? JavaClassWithClassId)?.classId
+                konst classId = (innerOrNestedClass as? JavaClassWithClassId)?.classId
                 if (classId?.packageFqName?.asString() == (compilationUnit.packageName?.toString() ?: "")) innerOrNestedClass else null
             }
             else -> innerOrNestedClass

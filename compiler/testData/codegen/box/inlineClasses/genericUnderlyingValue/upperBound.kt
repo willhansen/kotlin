@@ -2,6 +2,6 @@
 // FIR_IDENTICAL
 // LANGUAGE: -JvmInlineValueClasses, +GenericInlineClassParameter
 
-inline class ICString<T: String>(val value: T)
+inline class ICString<T: String>(konst konstue: T)
 
-fun box(): String = ICString("OK").value
+fun box(): String = ICString("OK").konstue

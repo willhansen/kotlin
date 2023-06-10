@@ -3,7 +3,7 @@
 package foo
 
 class MyCharIterator : CharIterator() {
-    val data = arrayOf('O', 'K')
+    konst data = arrayOf('O', 'K')
     var i = 0
 
     override fun hasNext(): Boolean = i < data.size

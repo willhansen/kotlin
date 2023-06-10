@@ -27,34 +27,34 @@ import javax.lang.model.element.Element
 
 abstract class SymbolBasedMember<out T : Element>(
         element: T,
-        override val containingClass: JavaClass,
+        override konst containingClass: JavaClass,
         javac: JavacWrapper
 ) : SymbolBasedElement<T>(element, javac), JavaMember {
 
-    override val isFromSource: Boolean
+    override konst isFromSource: Boolean
         get() = true
 
-    override val annotations: Collection<JavaAnnotation>
+    override konst annotations: Collection<JavaAnnotation>
         get() = element.annotationMirrors.map { SymbolBasedAnnotation(it, javac) }
 
     override fun findAnnotation(fqName: FqName) = element.findAnnotation(fqName, javac)
 
-    override val visibility: Visibility
+    override konst visibility: Visibility
         get() = element.getVisibility()
 
-    override val name: Name
+    override konst name: Name
         get() = Name.identifier(element.simpleName.toString())
 
-    override val isDeprecatedInJavaDoc: Boolean
+    override konst isDeprecatedInJavaDoc: Boolean
         get() = javac.isDeprecated(element)
 
-    override val isAbstract: Boolean
+    override konst isAbstract: Boolean
         get() = element.isAbstract
 
-    override val isStatic: Boolean
+    override konst isStatic: Boolean
         get() = element.isStatic
 
-    override val isFinal: Boolean
+    override konst isFinal: Boolean
         get() = element.isFinal
 
 }

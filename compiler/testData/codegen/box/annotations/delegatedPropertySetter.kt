@@ -21,9 +21,9 @@ class Delegate {
 }
 
 fun box(): String {
-    val e = MyClass::class.java
+    konst e = MyClass::class.java
 
-    val e1 = e.getDeclaredMethod("setX", String::class.java).getAnnotations()
+    konst e1 = e.getDeclaredMethod("setX", String::class.java).getAnnotations()
     if (e1.size != 1) return "Fail E1 size: ${e1.toList()}"
     if (e1[0].annotationClass.java != First::class.java) return "Fail: ${e1.toList()}"
 

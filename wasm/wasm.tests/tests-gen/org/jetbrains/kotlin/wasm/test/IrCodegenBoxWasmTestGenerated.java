@@ -2221,9 +2221,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/callableReference/bound/primitiveReceiver.kt");
             }
 
-            @TestMetadata("receiverEvaluatedOnce.kt")
-            public void testReceiverEvaluatedOnce() throws Exception {
-                runTest("compiler/testData/codegen/box/callableReference/bound/receiverEvaluatedOnce.kt");
+            @TestMetadata("receiverEkonstuatedOnce.kt")
+            public void testReceiverEkonstuatedOnce() throws Exception {
+                runTest("compiler/testData/codegen/box/callableReference/bound/receiverEkonstuatedOnce.kt");
             }
 
             @TestMetadata("simpleFunction.kt")
@@ -2924,9 +2924,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/callableReference/property/privateSetterOutsideClass.kt");
             }
 
-            @TestMetadata("receiverEvaluatedOnce.kt")
-            public void testReceiverEvaluatedOnce() throws Exception {
-                runTest("compiler/testData/codegen/box/callableReference/property/receiverEvaluatedOnce.kt");
+            @TestMetadata("receiverEkonstuatedOnce.kt")
+            public void testReceiverEkonstuatedOnce() throws Exception {
+                runTest("compiler/testData/codegen/box/callableReference/property/receiverEkonstuatedOnce.kt");
             }
 
             @TestMetadata("simpleExtension.kt")
@@ -4958,9 +4958,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/contracts/nestedLambdaInNonInlineCallExactlyOnce.kt");
         }
 
-        @TestMetadata("valInWhen.kt")
+        @TestMetadata("konstInWhen.kt")
         public void testValInWhen() throws Exception {
-            runTest("compiler/testData/codegen/box/contracts/valInWhen.kt");
+            runTest("compiler/testData/codegen/box/contracts/konstInWhen.kt");
         }
     }
 
@@ -6757,9 +6757,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/coroutines/suspendInTheMiddleOfObjectConstruction.kt");
         }
 
-        @TestMetadata("suspendInTheMiddleOfObjectConstructionEvaluationOrder.kt")
-        public void testSuspendInTheMiddleOfObjectConstructionEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/box/coroutines/suspendInTheMiddleOfObjectConstructionEvaluationOrder.kt");
+        @TestMetadata("suspendInTheMiddleOfObjectConstructionEkonstuationOrder.kt")
+        public void testSuspendInTheMiddleOfObjectConstructionEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/box/coroutines/suspendInTheMiddleOfObjectConstructionEkonstuationOrder.kt");
         }
 
         @TestMetadata("suspendInTheMiddleOfObjectConstructionWithJumpOut.kt")
@@ -9031,9 +9031,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/dataClasses/copy/kt3033.kt");
             }
 
-            @TestMetadata("valInConstructorParams.kt")
+            @TestMetadata("konstInConstructorParams.kt")
             public void testValInConstructorParams() throws Exception {
-                runTest("compiler/testData/codegen/box/dataClasses/copy/valInConstructorParams.kt");
+                runTest("compiler/testData/codegen/box/dataClasses/copy/konstInConstructorParams.kt");
             }
 
             @TestMetadata("varInConstructorParams.kt")
@@ -9993,14 +9993,14 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/delegatedProperty/useReflectionOnKProperty.kt");
         }
 
-        @TestMetadata("valByMapDelegatedProperty.kt")
+        @TestMetadata("konstByMapDelegatedProperty.kt")
         public void testValByMapDelegatedProperty() throws Exception {
-            runTest("compiler/testData/codegen/box/delegatedProperty/valByMapDelegatedProperty.kt");
+            runTest("compiler/testData/codegen/box/delegatedProperty/konstByMapDelegatedProperty.kt");
         }
 
-        @TestMetadata("valInInnerClass.kt")
+        @TestMetadata("konstInInnerClass.kt")
         public void testValInInnerClass() throws Exception {
-            runTest("compiler/testData/codegen/box/delegatedProperty/valInInnerClass.kt");
+            runTest("compiler/testData/codegen/box/delegatedProperty/konstInInnerClass.kt");
         }
 
         @TestMetadata("varInInnerClass.kt")
@@ -10411,14 +10411,14 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/delegatedProperty/provideDelegate/differentReceivers.kt");
             }
 
-            @TestMetadata("evaluationOrder.kt")
-            public void testEvaluationOrder() throws Exception {
-                runTest("compiler/testData/codegen/box/delegatedProperty/provideDelegate/evaluationOrder.kt");
+            @TestMetadata("ekonstuationOrder.kt")
+            public void testEkonstuationOrder() throws Exception {
+                runTest("compiler/testData/codegen/box/delegatedProperty/provideDelegate/ekonstuationOrder.kt");
             }
 
-            @TestMetadata("evaluationOrderVar.kt")
-            public void testEvaluationOrderVar() throws Exception {
-                runTest("compiler/testData/codegen/box/delegatedProperty/provideDelegate/evaluationOrderVar.kt");
+            @TestMetadata("ekonstuationOrderVar.kt")
+            public void testEkonstuationOrderVar() throws Exception {
+                runTest("compiler/testData/codegen/box/delegatedProperty/provideDelegate/ekonstuationOrderVar.kt");
             }
 
             @TestMetadata("extensionDelegated.kt")
@@ -11554,9 +11554,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/enum/toString.kt");
         }
 
-        @TestMetadata("valueof.kt")
+        @TestMetadata("konstueof.kt")
         public void testValueof() throws Exception {
-            runTest("compiler/testData/codegen/box/enum/valueof.kt");
+            runTest("compiler/testData/codegen/box/enum/konstueof.kt");
         }
 
         @TestMetadata("whenInObject.kt")
@@ -11613,21 +11613,21 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         }
     }
 
-    @TestMetadata("compiler/testData/codegen/box/evaluate")
+    @TestMetadata("compiler/testData/codegen/box/ekonstuate")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
-    public static class Evaluate extends AbstractIrCodegenBoxWasmTest {
+    public static class Ekonstuate extends AbstractIrCodegenBoxWasmTest {
         private void runTest(String testDataFilePath) throws Exception {
             KotlinTestUtils.runTest0(this::doTest, TargetBackend.WASM, testDataFilePath);
         }
 
-        public void testAllFilesPresentInEvaluate() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/evaluate"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+        public void testAllFilesPresentInEkonstuate() throws Exception {
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ekonstuate"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
         }
 
         @TestMetadata("kt9443.kt")
         public void testKt9443() throws Exception {
-            runTest("compiler/testData/codegen/box/evaluate/kt9443.kt");
+            runTest("compiler/testData/codegen/box/ekonstuate/kt9443.kt");
         }
     }
 
@@ -12400,9 +12400,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/funInterface/primitiveConversions.kt");
         }
 
-        @TestMetadata("receiverEvaluatedOnce.kt")
-        public void testReceiverEvaluatedOnce() throws Exception {
-            runTest("compiler/testData/codegen/box/funInterface/receiverEvaluatedOnce.kt");
+        @TestMetadata("receiverEkonstuatedOnce.kt")
+        public void testReceiverEkonstuatedOnce() throws Exception {
+            runTest("compiler/testData/codegen/box/funInterface/receiverEkonstuatedOnce.kt");
         }
 
         @TestMetadata("samConstructorExplicitInvocation.kt")
@@ -13364,9 +13364,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/increment/classVarargGetSet.kt");
         }
 
-        @TestMetadata("classVarargGetSetEvaluationOrder.kt")
-        public void testClassVarargGetSetEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/box/increment/classVarargGetSetEvaluationOrder.kt");
+        @TestMetadata("classVarargGetSetEkonstuationOrder.kt")
+        public void testClassVarargGetSetEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/box/increment/classVarargGetSetEkonstuationOrder.kt");
         }
 
         @TestMetadata("classWithGetSet.kt")
@@ -14480,49 +14480,49 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/inlineClasses/equalsCallsLeftArgumentGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderInlineClass.kt")
-        public void testEqualsEvaluationOrderInlineClass() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderInlineClass.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderInlineClass.kt")
+        public void testEqualsEkonstuationOrderInlineClass() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderInlineClass.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderInlineClassGeneric.kt")
-        public void testEqualsEvaluationOrderInlineClassGeneric() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderInlineClassGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderInlineClassGeneric.kt")
+        public void testEqualsEkonstuationOrderInlineClassGeneric() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderInlineClassGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderNonNull.kt")
-        public void testEqualsEvaluationOrderNonNull() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderNonNull.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderNonNull.kt")
+        public void testEqualsEkonstuationOrderNonNull() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderNonNull.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderNonNullGeneric.kt")
-        public void testEqualsEvaluationOrderNonNullGeneric() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderNonNullGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderNonNullGeneric.kt")
+        public void testEqualsEkonstuationOrderNonNullGeneric() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderNonNullGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderNullable.kt")
-        public void testEqualsEvaluationOrderNullable() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderNullable.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderNullable.kt")
+        public void testEqualsEkonstuationOrderNullable() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderNullable.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderNullableGeneric.kt")
-        public void testEqualsEvaluationOrderNullableGeneric() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderNullableGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderNullableGeneric.kt")
+        public void testEqualsEkonstuationOrderNullableGeneric() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderNullableGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderNullableGeneric2.kt")
-        public void testEqualsEvaluationOrderNullableGeneric2() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderNullableGeneric2.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderNullableGeneric2.kt")
+        public void testEqualsEkonstuationOrderNullableGeneric2() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderNullableGeneric2.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderPrimitive.kt")
-        public void testEqualsEvaluationOrderPrimitive() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderPrimitive.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderPrimitive.kt")
+        public void testEqualsEkonstuationOrderPrimitive() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderPrimitive.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
-        @TestMetadata("equalsEvaluationOrderPrimitiveGeneric.kt")
-        public void testEqualsEvaluationOrderPrimitiveGeneric() throws Exception {
-            runTest("compiler/testData/codegen/box/inlineClasses/equalsEvaluationOrderPrimitiveGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
+        @TestMetadata("equalsEkonstuationOrderPrimitiveGeneric.kt")
+        public void testEqualsEkonstuationOrderPrimitiveGeneric() throws Exception {
+            runTest("compiler/testData/codegen/box/inlineClasses/equalsEkonstuationOrderPrimitiveGeneric.kt", TransformersFunctions.getRemoveOptionalJvmInlineAnnotation());
         }
 
         @TestMetadata("equalsOperatorWithGenericCall.kt")
@@ -20057,9 +20057,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/mixedNamedPosition/varargs.kt");
         }
 
-        @TestMetadata("varargsEvaluationOrder.kt")
-        public void testVarargsEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/box/mixedNamedPosition/varargsEvaluationOrder.kt");
+        @TestMetadata("varargsEkonstuationOrder.kt")
+        public void testVarargsEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/box/mixedNamedPosition/varargsEkonstuationOrder.kt");
         }
     }
 
@@ -22698,9 +22698,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/primitiveTypes/equalityWithObject"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
             }
 
-            @TestMetadata("boxedEqPrimitiveEvaluationOrder.kt")
-            public void testBoxedEqPrimitiveEvaluationOrder() throws Exception {
-                runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/boxedEqPrimitiveEvaluationOrder.kt");
+            @TestMetadata("boxedEqPrimitiveEkonstuationOrder.kt")
+            public void testBoxedEqPrimitiveEkonstuationOrder() throws Exception {
+                runTest("compiler/testData/codegen/box/primitiveTypes/equalityWithObject/boxedEqPrimitiveEkonstuationOrder.kt");
             }
 
             @TestMetadata("boxedLongEqualsLong.kt")
@@ -23840,49 +23840,49 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/ranges/contains/comparisonWithRangeBoundEliminated.kt");
             }
 
-            @TestMetadata("evaluationOrderForCollection.kt")
-            public void testEvaluationOrderForCollection() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForCollection.kt");
+            @TestMetadata("ekonstuationOrderForCollection.kt")
+            public void testEkonstuationOrderForCollection() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForCollection.kt");
             }
 
-            @TestMetadata("evaluationOrderForComparableRange.kt")
-            public void testEvaluationOrderForComparableRange() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForComparableRange.kt");
+            @TestMetadata("ekonstuationOrderForComparableRange.kt")
+            public void testEkonstuationOrderForComparableRange() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForComparableRange.kt");
             }
 
-            @TestMetadata("evaluationOrderForDownTo.kt")
-            public void testEvaluationOrderForDownTo() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForDownTo.kt");
+            @TestMetadata("ekonstuationOrderForDownTo.kt")
+            public void testEkonstuationOrderForDownTo() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForDownTo.kt");
             }
 
-            @TestMetadata("evaluationOrderForDownToReversed.kt")
-            public void testEvaluationOrderForDownToReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForDownToReversed.kt");
+            @TestMetadata("ekonstuationOrderForDownToReversed.kt")
+            public void testEkonstuationOrderForDownToReversed() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForDownToReversed.kt");
             }
 
-            @TestMetadata("evaluationOrderForNullableArgument.kt")
-            public void testEvaluationOrderForNullableArgument() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForNullableArgument.kt");
+            @TestMetadata("ekonstuationOrderForNullableArgument.kt")
+            public void testEkonstuationOrderForNullableArgument() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForNullableArgument.kt");
             }
 
-            @TestMetadata("evaluationOrderForRangeLiteral.kt")
-            public void testEvaluationOrderForRangeLiteral() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForRangeLiteral.kt");
+            @TestMetadata("ekonstuationOrderForRangeLiteral.kt")
+            public void testEkonstuationOrderForRangeLiteral() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForRangeLiteral.kt");
             }
 
-            @TestMetadata("evaluationOrderForRangeLiteralReversed.kt")
-            public void testEvaluationOrderForRangeLiteralReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForRangeLiteralReversed.kt");
+            @TestMetadata("ekonstuationOrderForRangeLiteralReversed.kt")
+            public void testEkonstuationOrderForRangeLiteralReversed() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForRangeLiteralReversed.kt");
             }
 
-            @TestMetadata("evaluationOrderForUntil.kt")
-            public void testEvaluationOrderForUntil() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForUntil.kt");
+            @TestMetadata("ekonstuationOrderForUntil.kt")
+            public void testEkonstuationOrderForUntil() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForUntil.kt");
             }
 
-            @TestMetadata("evaluationOrderForUntilReversed.kt")
-            public void testEvaluationOrderForUntilReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/contains/evaluationOrderForUntilReversed.kt");
+            @TestMetadata("ekonstuationOrderForUntilReversed.kt")
+            public void testEkonstuationOrderForUntilReversed() throws Exception {
+                runTest("compiler/testData/codegen/box/ranges/contains/ekonstuationOrderForUntilReversed.kt");
             }
 
             @TestMetadata("genericCharInRangeLiteral.kt")
@@ -24229,64 +24229,64 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             }
         }
 
-        @TestMetadata("compiler/testData/codegen/box/ranges/evaluationOrder")
+        @TestMetadata("compiler/testData/codegen/box/ranges/ekonstuationOrder")
         @TestDataPath("$PROJECT_ROOT")
         @RunWith(JUnit3RunnerWithInners.class)
-        public static class EvaluationOrder extends AbstractIrCodegenBoxWasmTest {
+        public static class EkonstuationOrder extends AbstractIrCodegenBoxWasmTest {
             private void runTest(String testDataFilePath) throws Exception {
                 KotlinTestUtils.runTest0(this::doTest, TargetBackend.WASM, testDataFilePath);
             }
 
-            public void testAllFilesPresentInEvaluationOrder() throws Exception {
-                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/evaluationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+            public void testAllFilesPresentInEkonstuationOrder() throws Exception {
+                KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/ekonstuationOrder"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
             }
 
             @TestMetadata("forInDownTo.kt")
             public void testForInDownTo() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInDownTo.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInDownTo.kt");
             }
 
             @TestMetadata("forInDownToReversed.kt")
             public void testForInDownToReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInDownToReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInDownToReversed.kt");
             }
 
             @TestMetadata("forInDownToReversedReversed.kt")
             public void testForInDownToReversedReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInDownToReversedReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInDownToReversedReversed.kt");
             }
 
             @TestMetadata("forInRangeLiteral.kt")
             public void testForInRangeLiteral() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInRangeLiteral.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInRangeLiteral.kt");
             }
 
             @TestMetadata("forInRangeLiteralReversed.kt")
             public void testForInRangeLiteralReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInRangeLiteralReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInRangeLiteralReversed.kt");
             }
 
             @TestMetadata("forInRangeLiteralReversedReversed.kt")
             public void testForInRangeLiteralReversedReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInRangeLiteralReversedReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInRangeLiteralReversedReversed.kt");
             }
 
             @TestMetadata("forInUntil.kt")
             public void testForInUntil() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInUntil.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInUntil.kt");
             }
 
             @TestMetadata("forInUntilReversed.kt")
             public void testForInUntilReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInUntilReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInUntilReversed.kt");
             }
 
             @TestMetadata("forInUntilReversedReversed.kt")
             public void testForInUntilReversedReversed() throws Exception {
-                runTest("compiler/testData/codegen/box/ranges/evaluationOrder/forInUntilReversedReversed.kt");
+                runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/forInUntilReversedReversed.kt");
             }
 
-            @TestMetadata("compiler/testData/codegen/box/ranges/evaluationOrder/stepped")
+            @TestMetadata("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped")
             @TestDataPath("$PROJECT_ROOT")
             @RunWith(JUnit3RunnerWithInners.class)
             public static class Stepped extends AbstractIrCodegenBoxWasmTest {
@@ -24295,10 +24295,10 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 }
 
                 public void testAllFilesPresentInStepped() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/evaluationOrder/stepped"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                 }
 
-                @TestMetadata("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo")
+                @TestMetadata("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo")
                 @TestDataPath("$PROJECT_ROOT")
                 @RunWith(JUnit3RunnerWithInners.class)
                 public static class ForInDownTo extends AbstractIrCodegenBoxWasmTest {
@@ -24307,51 +24307,51 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                     }
 
                     public void testAllFilesPresentInForInDownTo() throws Exception {
-                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                     }
 
                     @TestMetadata("forInDownToReversedStep.kt")
                     public void testForInDownToReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToReversedStep.kt");
                     }
 
                     @TestMetadata("forInDownToReversedStepReversed.kt")
                     public void testForInDownToReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInDownToReversedStepReversedStep.kt")
                     public void testForInDownToReversedStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToReversedStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToReversedStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInDownToStep.kt")
                     public void testForInDownToStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToStep.kt");
                     }
 
                     @TestMetadata("forInDownToStepReversed.kt")
                     public void testForInDownToStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToStepReversed.kt");
                     }
 
                     @TestMetadata("forInDownToStepReversedStep.kt")
                     public void testForInDownToStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInDownToStepReversedStepReversed.kt")
                     public void testForInDownToStepReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToStepReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToStepReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInDownToStepStep.kt")
                     public void testForInDownToStepStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInDownTo/forInDownToStepStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInDownTo/forInDownToStepStep.kt");
                     }
                 }
 
-                @TestMetadata("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral")
+                @TestMetadata("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral")
                 @TestDataPath("$PROJECT_ROOT")
                 @RunWith(JUnit3RunnerWithInners.class)
                 public static class ForInRangeLiteral extends AbstractIrCodegenBoxWasmTest {
@@ -24360,51 +24360,51 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                     }
 
                     public void testAllFilesPresentInForInRangeLiteral() throws Exception {
-                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                     }
 
                     @TestMetadata("forInRangeLiteralReversedStep.kt")
                     public void testForInRangeLiteralReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStep.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralReversedStepReversed.kt")
                     public void testForInRangeLiteralReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralReversedStepReversedStep.kt")
                     public void testForInRangeLiteralReversedStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralReversedStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralStep.kt")
                     public void testForInRangeLiteralStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralStep.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralStepReversed.kt")
                     public void testForInRangeLiteralStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversed.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralStepReversedStep.kt")
                     public void testForInRangeLiteralStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralStepReversedStepReversed.kt")
                     public void testForInRangeLiteralStepReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInRangeLiteralStepStep.kt")
                     public void testForInRangeLiteralStepStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInRangeLiteral/forInRangeLiteralStepStep.kt");
                     }
                 }
 
-                @TestMetadata("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil")
+                @TestMetadata("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil")
                 @TestDataPath("$PROJECT_ROOT")
                 @RunWith(JUnit3RunnerWithInners.class)
                 public static class ForInUntil extends AbstractIrCodegenBoxWasmTest {
@@ -24413,47 +24413,47 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                     }
 
                     public void testAllFilesPresentInForInUntil() throws Exception {
-                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                        KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                     }
 
                     @TestMetadata("forInUntilReversedStep.kt")
                     public void testForInUntilReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilReversedStep.kt");
                     }
 
                     @TestMetadata("forInUntilReversedStepReversed.kt")
                     public void testForInUntilReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInUntilReversedStepReversedStep.kt")
                     public void testForInUntilReversedStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilReversedStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilReversedStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInUntilStep.kt")
                     public void testForInUntilStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilStep.kt");
                     }
 
                     @TestMetadata("forInUntilStepReversed.kt")
                     public void testForInUntilStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilStepReversed.kt");
                     }
 
                     @TestMetadata("forInUntilStepReversedStep.kt")
                     public void testForInUntilStepReversedStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilStepReversedStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilStepReversedStep.kt");
                     }
 
                     @TestMetadata("forInUntilStepReversedStepReversed.kt")
                     public void testForInUntilStepReversedStepReversed() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilStepReversedStepReversed.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilStepReversedStepReversed.kt");
                     }
 
                     @TestMetadata("forInUntilStepStep.kt")
                     public void testForInUntilStepStep() throws Exception {
-                        runTest("compiler/testData/codegen/box/ranges/evaluationOrder/stepped/forInUntil/forInUntilStepStep.kt");
+                        runTest("compiler/testData/codegen/box/ranges/ekonstuationOrder/stepped/forInUntil/forInUntilStepStep.kt");
                     }
                 }
             }
@@ -28951,7 +28951,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 }
             }
 
-            @TestMetadata("compiler/testData/codegen/box/reflection/call/valueClasses")
+            @TestMetadata("compiler/testData/codegen/box/reflection/call/konstueClasses")
             @TestDataPath("$PROJECT_ROOT")
             @RunWith(JUnit3RunnerWithInners.class)
             public static class ValueClasses extends AbstractIrCodegenBoxWasmTest {
@@ -28960,7 +28960,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 }
 
                 public void testAllFilesPresentInValueClasses() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/reflection/call/valueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/reflection/call/konstueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                 }
             }
         }
@@ -29212,7 +29212,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 }
             }
 
-            @TestMetadata("compiler/testData/codegen/box/reflection/mapping/valueClasses")
+            @TestMetadata("compiler/testData/codegen/box/reflection/mapping/konstueClasses")
             @TestDataPath("$PROJECT_ROOT")
             @RunWith(JUnit3RunnerWithInners.class)
             public static class ValueClasses extends AbstractIrCodegenBoxWasmTest {
@@ -29221,7 +29221,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 }
 
                 public void testAllFilesPresentInValueClasses() throws Exception {
-                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/reflection/mapping/valueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+                    KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/reflection/mapping/konstueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
                 }
             }
         }
@@ -31334,9 +31334,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/specialBuiltins/throwableImplWithSecondaryConstructor.kt");
         }
 
-        @TestMetadata("valuesInsideEnum.kt")
+        @TestMetadata("konstuesInsideEnum.kt")
         public void testValuesInsideEnum() throws Exception {
-            runTest("compiler/testData/codegen/box/specialBuiltins/valuesInsideEnum.kt");
+            runTest("compiler/testData/codegen/box/specialBuiltins/konstuesInsideEnum.kt");
         }
     }
 
@@ -33018,7 +33018,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         }
     }
 
-    @TestMetadata("compiler/testData/codegen/box/valueClasses")
+    @TestMetadata("compiler/testData/codegen/box/konstueClasses")
     @TestDataPath("$PROJECT_ROOT")
     @RunWith(JUnit3RunnerWithInners.class)
     public static class ValueClasses extends AbstractIrCodegenBoxWasmTest {
@@ -33027,7 +33027,7 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
         }
 
         public void testAllFilesPresentInValueClasses() throws Exception {
-            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/valueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
+            KtTestUtil.assertAllTestsPresentByMetadataWithExcluded(this.getClass(), new File("compiler/testData/codegen/box/konstueClasses"), Pattern.compile("^([^_](.+))\\.kt$"), null, TargetBackend.WASM, true);
         }
     }
 
@@ -33053,9 +33053,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/vararg/doNotCopyImmediatelyCreatedArrays.kt");
         }
 
-        @TestMetadata("evaluationOrder.kt")
-        public void testEvaluationOrder() throws Exception {
-            runTest("compiler/testData/codegen/box/vararg/evaluationOrder.kt");
+        @TestMetadata("ekonstuationOrder.kt")
+        public void testEkonstuationOrder() throws Exception {
+            runTest("compiler/testData/codegen/box/vararg/ekonstuationOrder.kt");
         }
 
         @TestMetadata("kt10926.kt")
@@ -33404,14 +33404,14 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
             runTest("compiler/testData/codegen/box/when/typeDisjunction.kt");
         }
 
-        @TestMetadata("whenArgumentIsEvaluatedOnlyOnce.kt")
-        public void testWhenArgumentIsEvaluatedOnlyOnce() throws Exception {
-            runTest("compiler/testData/codegen/box/when/whenArgumentIsEvaluatedOnlyOnce.kt");
+        @TestMetadata("whenArgumentIsEkonstuatedOnlyOnce.kt")
+        public void testWhenArgumentIsEkonstuatedOnlyOnce() throws Exception {
+            runTest("compiler/testData/codegen/box/when/whenArgumentIsEkonstuatedOnlyOnce.kt");
         }
 
-        @TestMetadata("whenSafeCallSubjectEvaluatedOnce.kt")
-        public void testWhenSafeCallSubjectEvaluatedOnce() throws Exception {
-            runTest("compiler/testData/codegen/box/when/whenSafeCallSubjectEvaluatedOnce.kt");
+        @TestMetadata("whenSafeCallSubjectEkonstuatedOnce.kt")
+        public void testWhenSafeCallSubjectEkonstuatedOnce() throws Exception {
+            runTest("compiler/testData/codegen/box/when/whenSafeCallSubjectEkonstuatedOnce.kt");
         }
 
         @TestMetadata("compiler/testData/codegen/box/when/enumOptimization")
@@ -33672,9 +33672,9 @@ public class IrCodegenBoxWasmTestGenerated extends AbstractIrCodegenBoxWasmTest 
                 runTest("compiler/testData/codegen/box/when/whenSubjectVariable/sparseIntSwitchWithSubjectVariable.kt");
             }
 
-            @TestMetadata("subjectExpressionIsEvaluatedOnce.kt")
-            public void testSubjectExpressionIsEvaluatedOnce() throws Exception {
-                runTest("compiler/testData/codegen/box/when/whenSubjectVariable/subjectExpressionIsEvaluatedOnce.kt");
+            @TestMetadata("subjectExpressionIsEkonstuatedOnce.kt")
+            public void testSubjectExpressionIsEkonstuatedOnce() throws Exception {
+                runTest("compiler/testData/codegen/box/when/whenSubjectVariable/subjectExpressionIsEkonstuatedOnce.kt");
             }
 
             @TestMetadata("whenByEnum.kt")

@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.config.LanguageVersion
 /**
  * Language version to be used for K1 FP tests
  */
-internal val LANGUAGE_VERSION_K1: String = System.getProperty("fir.bench.language.version.k1", "1.8")
+internal konst LANGUAGE_VERSION_K1: String = System.getProperty("fir.bench.language.version.k1", "1.8")
 
 class FE1FullPipelineModularizedTest : AbstractFullPipelineModularizedTest() {
     override fun configureArguments(args: K2JVMCompilerArguments, moduleData: ModuleData) {

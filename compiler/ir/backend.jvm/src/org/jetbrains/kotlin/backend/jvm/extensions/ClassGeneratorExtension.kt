@@ -40,7 +40,7 @@ interface ClassGenerator {
     fun defineClass(version: Int, access: Int, name: String, signature: String?, superName: String, interfaces: Array<out String>)
 
     fun newField(
-        declaration: IrField?, access: Int, name: String, desc: String, signature: String?, value: Any?
+        declaration: IrField?, access: Int, name: String, desc: String, signature: String?, konstue: Any?
     ): FieldVisitor
 
     fun newMethod(

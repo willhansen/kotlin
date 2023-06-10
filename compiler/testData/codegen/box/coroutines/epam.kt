@@ -5,7 +5,7 @@
 import helpers.*
 import kotlin.coroutines.*
 
-class MyDeferred<T>(val t: suspend () -> T) {
+class MyDeferred<T>(konst t: suspend () -> T) {
     suspend fun await() = t()
 }
 
@@ -21,8 +21,8 @@ fun builder(c: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val first = MyDeferred { 1 }
-    val second = MyDeferred { 2 }
+    konst first = MyDeferred { 1 }
+    konst second = MyDeferred { 2 }
     var result = -1
     builder {
         result = zip(first, second) { firstValue: Int, secondValue: Int -> firstValue + secondValue }.await()

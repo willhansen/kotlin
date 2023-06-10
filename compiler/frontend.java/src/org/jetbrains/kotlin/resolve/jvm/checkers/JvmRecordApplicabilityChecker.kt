@@ -27,12 +27,12 @@ import org.jetbrains.kotlin.resolve.jvm.JAVA_LANG_RECORD_FQ_NAME
 import org.jetbrains.kotlin.resolve.jvm.annotations.isJvmRecord
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
-class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : DeclarationChecker {
+class JvmRecordApplicabilityChecker(private konst jvmTarget: JvmTarget) : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is ClassDescriptor || declaration !is KtClassOrObject) return
 
         for (supertypeEntry in declaration.superTypeListEntries) {
-            val supertype = context.trace[BindingContext.TYPE, supertypeEntry.typeReference]
+            konst supertype = context.trace[BindingContext.TYPE, supertypeEntry.typeReference]
             if (supertype?.constructor?.declarationDescriptor?.fqNameOrNull() == JAVA_LANG_RECORD_FQ_NAME) {
                 context.trace.report(ErrorsJvm.ILLEGAL_JAVA_LANG_RECORD_SUPERTYPE.on(supertypeEntry))
                 return
@@ -41,7 +41,7 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
 
         if (!descriptor.isJvmRecord()) return
 
-        val reportOn =
+        konst reportOn =
             declaration.annotationEntries.firstOrNull { it.shortName == JVM_RECORD_ANNOTATION_FQ_NAME.shortName() }
                 ?: declaration
 
@@ -68,7 +68,7 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
         }
 
         if (descriptor.kind == ClassKind.ENUM_CLASS) {
-            val modifierOrName =
+            konst modifierOrName =
                 declaration.modifierList?.getModifier(KtTokens.ENUM_KEYWORD)
                     ?: declaration.nameIdentifier
                     ?: declaration
@@ -78,7 +78,7 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
         }
 
         if (!descriptor.isFinalClass) {
-            val modifierOrName =
+            konst modifierOrName =
                 declaration.modifierList?.findOneOfModifiers(KtTokens.ABSTRACT_KEYWORD, KtTokens.OPEN_KEYWORD, KtTokens.SEALED_KEYWORD)
                     ?: declaration.nameIdentifier
                     ?: declaration
@@ -88,7 +88,7 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
         }
 
         if (descriptor.isInner) {
-            val modifierOrName =
+            konst modifierOrName =
                 declaration.modifierList?.getModifier(KtTokens.INNER_KEYWORD)
                     ?: declaration.nameIdentifier
                     ?: declaration
@@ -106,7 +106,7 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
         for (member in declaration.declarations) {
             if (member !is KtProperty) continue
 
-            val propertyDescriptor = context.trace[BindingContext.DECLARATION_TO_DESCRIPTOR, member] as? PropertyDescriptor ?: continue
+            konst propertyDescriptor = context.trace[BindingContext.DECLARATION_TO_DESCRIPTOR, member] as? PropertyDescriptor ?: continue
             if (context.trace.bindingContext[BindingContext.BACKING_FIELD_REQUIRED, propertyDescriptor] != true && member.delegate == null) continue
 
             context.trace.report(ErrorsJvm.FIELD_IN_JVM_RECORD.on(member))
@@ -121,10 +121,10 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
         }
 
         for (supertype in descriptor.typeConstructor.supertypes) {
-            val classDescriptor = supertype.constructor.declarationDescriptor as? ClassDescriptor ?: continue
+            konst classDescriptor = supertype.constructor.declarationDescriptor as? ClassDescriptor ?: continue
             if (classDescriptor.kind == ClassKind.INTERFACE || classDescriptor.fqNameSafe == JAVA_LANG_RECORD_FQ_NAME) continue
 
-            val reportSupertypeOn = declaration.nameIdentifier ?: declaration
+            konst reportSupertypeOn = declaration.nameIdentifier ?: declaration
             context.trace.report(ErrorsJvm.JVM_RECORD_EXTENDS_CLASS.on(reportSupertypeOn, supertype))
             return
         }
@@ -134,10 +134,10 @@ class JvmRecordApplicabilityChecker(private val jvmTarget: JvmTarget) : Declarat
             return
         }
 
-        val primaryConstructor = declaration.primaryConstructor
-        val parameters = primaryConstructor?.valueParameters ?: emptyList()
+        konst primaryConstructor = declaration.primaryConstructor
+        konst parameters = primaryConstructor?.konstueParameters ?: emptyList()
         if (parameters.isEmpty()) {
-            (primaryConstructor?.valueParameterList ?: declaration.nameIdentifier)?.let {
+            (primaryConstructor?.konstueParameterList ?: declaration.nameIdentifier)?.let {
                 context.trace.report(ErrorsJvm.JVM_RECORD_WITHOUT_PRIMARY_CONSTRUCTOR_PARAMETERS.on(it))
                 return
             }

@@ -72,7 +72,7 @@ import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForTypeAlia
 import org.jetbrains.kotlin.resolve.calls.util.UnderscoreUtilKt;
 import org.jetbrains.kotlin.resolve.checkers.PrimitiveNumericComparisonInfo;
 import org.jetbrains.kotlin.resolve.constants.*;
-import org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluatorKt;
+import org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuatorKt;
 import org.jetbrains.kotlin.resolve.descriptorUtil.DescriptorUtilsKt;
 import org.jetbrains.kotlin.resolve.inline.InlineUtil;
 import org.jetbrains.kotlin.resolve.jvm.AsmTypes;
@@ -144,8 +144,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     private final Stack<BlockStackElement> blockStackElements = new Stack<>();
 
     /*
-     * When we create a temporary variable to hold some value not to compute it many times
-     * we put it into this map to emit access to that variable instead of evaluating the whole expression
+     * When we create a temporary variable to hold some konstue not to compute it many times
+     * we put it into this map to emit access to that variable instead of ekonstuating the whole expression
      */
     public final Map<KtElement, StackValue> tempVariables = new HashMap<>();
 
@@ -409,19 +409,19 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     }
 
     public void gen(KtElement expr, Type type, KotlinType kotlinType) {
-        StackValue value = Type.VOID_TYPE.equals(type) ? genStatement(expr) : gen(expr);
-        putStackValue(expr, type, kotlinType, value);
+        StackValue konstue = Type.VOID_TYPE.equals(type) ? genStatement(expr) : gen(expr);
+        putStackValue(expr, type, kotlinType, konstue);
     }
 
-    private void putStackValue(@Nullable KtElement expr, @NotNull Type type, @Nullable KotlinType kotlinType, @NotNull StackValue value) {
+    private void putStackValue(@Nullable KtElement expr, @NotNull Type type, @Nullable KotlinType kotlinType, @NotNull StackValue konstue) {
         // for repl store the result of the last line into special field
-        if (value.type != Type.VOID_TYPE) {
+        if (konstue.type != Type.VOID_TYPE) {
             ScriptContext context = getScriptContext();
             if (context != null && expr == context.getLastStatement()) {
                 FieldInfo resultFieldInfo = context.getResultFieldInfo();
                 if (resultFieldInfo != null) {
                     StackValue.Field resultValue = StackValue.field(resultFieldInfo, StackValue.LOCAL_0);
-                    resultValue.store(value, v);
+                    resultValue.store(konstue, v);
                     state.getScriptSpecific().setResultType(resultFieldInfo.getFieldKotlinType());
                     state.getScriptSpecific().setResultFieldName(resultFieldInfo.getFieldName());
                     return;
@@ -429,7 +429,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             }
         }
 
-        value.put(type, kotlinType, v);
+        konstue.put(type, kotlinType, v);
     }
 
     @Nullable
@@ -442,13 +442,13 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     }
 
     private StackValue genLazy(KtElement expr, Type type) {
-        StackValue value = gen(expr);
-        return StackValue.coercion(value, type, null);
+        StackValue konstue = gen(expr);
+        return StackValue.coercion(konstue, type, null);
     }
 
     private StackValue genLazy(KtElement expr, Type type, KotlinType kotlinType) {
-        StackValue value = gen(expr);
-        return StackValue.coercion(value, type, kotlinType);
+        StackValue konstue = gen(expr);
+        return StackValue.coercion(konstue, type, kotlinType);
     }
 
     private StackValue genStatement(KtElement statement) {
@@ -704,9 +704,9 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         List<ResolvedValueArgument> resolvedValueArguments = resolvedCall.getValueArgumentsByIndex();
         if (resolvedValueArguments == null) return null;
         if (resolvedValueArguments.size() != 1) return null;
-        List<ValueArgument> valueArguments = resolvedValueArguments.get(0).getArguments();
-        if (valueArguments.size() != 1) return null;
-        return valueArguments.get(0).getArgumentExpression();
+        List<ValueArgument> konstueArguments = resolvedValueArguments.get(0).getArguments();
+        if (konstueArguments.size() != 1) return null;
+        return konstueArguments.get(0).getArgumentExpression();
     }
 
     private OwnerKind contextKind() {
@@ -871,7 +871,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             @NotNull BindingContext bindingContext,
             boolean shouldInlineConstVals) {
         ConstantValue<?> constant = getCompileTimeConstant(expression, bindingContext, false, shouldInlineConstVals);
-        if (constant == null || ConstantExpressionEvaluatorKt.isStandaloneOnlyConstant(constant)) {
+        if (constant == null || ConstantExpressionEkonstuatorKt.isStandaloneOnlyConstant(constant)) {
             return null;
         }
         return constant;
@@ -911,7 +911,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 return genToString(gen(expr), expressionType(expr), kotlinType(expr), typeMapper);
             }
             else {
-                return StackValue.constant(((StringTemplateEntry.Constant) entry).value, type);
+                return StackValue.constant(((StringTemplateEntry.Constant) entry).konstue, type);
             }
         }
         else {
@@ -931,12 +931,12 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 invokeAppend(generator, ((StringTemplateEntry.Expression) entry).expression);
             }
             else {
-                String value = ((StringTemplateEntry.Constant) entry).value;
-                if (value.length() == 1) {
-                    generator.putValueOrProcessConstant(StackValue.constant(value.charAt(0), Type.CHAR_TYPE, null));
+                String konstue = ((StringTemplateEntry.Constant) entry).konstue;
+                if (konstue.length() == 1) {
+                    generator.putValueOrProcessConstant(StackValue.constant(konstue.charAt(0), Type.CHAR_TYPE, null));
                 }
                 else {
-                    generator.addStringConstant(value);
+                    generator.addStringConstant(konstue);
                 }
             }
         }
@@ -944,10 +944,10 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     private static abstract class StringTemplateEntry {
         static class Constant extends StringTemplateEntry {
-            final String value;
+            final String konstue;
 
-            Constant(String value) {
-                this.value = value;
+            Constant(String konstue) {
+                this.konstue = konstue;
             }
         }
 
@@ -980,7 +980,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 ConstantValue<?> compileTimeConstant = getPrimitiveOrStringCompileTimeConstant(entryExpression);
 
                 if (compileTimeConstant != null && isConstantValueInlinableInStringTemplate(compileTimeConstant)) {
-                    constantValue.append(String.valueOf(compileTimeConstant.getValue()));
+                    constantValue.append(String.konstueOf(compileTimeConstant.getValue()));
                 }
                 else {
                     String accumulatedConstantValue = constantValue.toString();
@@ -1142,21 +1142,21 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                         .format("Incorrect number of mapped parameters vs arguments: %d < %d for %s",
                                 superMappedTypes.size(), params, classDescriptor);
 
-                List<ResolvedValueArgument> valueArguments = new ArrayList<>(params);
-                List<ValueParameterDescriptor> valueParameters = new ArrayList<>(params);
+                List<ResolvedValueArgument> konstueArguments = new ArrayList<>(params);
+                List<ValueParameterDescriptor> konstueParameters = new ArrayList<>(params);
                 List<Type> mappedTypes = new ArrayList<>(params);
                 for (ValueParameterDescriptor parameter : superCall.getValueArguments().keySet()) {
                     ResolvedValueArgument argument = superCall.getValueArguments().get(parameter);
                     if (!(argument instanceof DefaultValueArgument)) {
-                        valueArguments.add(argument);
-                        valueParameters.add(parameter);
+                        konstueArguments.add(argument);
+                        konstueParameters.add(parameter);
                         mappedTypes.add(superMappedTypes.get(parameter.getIndex()));
                     }
                 }
                 ArgumentGenerator argumentGenerator =
-                        new CallBasedArgumentGenerator(this, defaultCallGenerator, valueParameters, mappedTypes);
+                        new CallBasedArgumentGenerator(this, defaultCallGenerator, konstueParameters, mappedTypes);
 
-                argumentGenerator.generate(valueArguments, valueArguments, null);
+                argumentGenerator.generate(konstueArguments, konstueArguments, null);
             }
 
             Collection<ClassConstructorDescriptor> constructors = classDescriptor.getConstructors();
@@ -1211,14 +1211,14 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
         for (Map.Entry<DeclarationDescriptor, EnclosedValueDescriptor> entry : closure.getCaptureVariables().entrySet()) {
             DeclarationDescriptor declarationDescriptor = entry.getKey();
-            EnclosedValueDescriptor valueDescriptor = entry.getValue();
+            EnclosedValueDescriptor konstueDescriptor = entry.getValue();
 
             Type sharedVarType = typeMapper.getSharedVarType(declarationDescriptor);
             boolean asSharedVar = sharedVarType != null;
             if (sharedVarType == null) {
                 sharedVarType = typeMapper.mapType((VariableDescriptor) declarationDescriptor);
             }
-            StackValue capturedVar = lookupOuterValue(valueDescriptor, asSharedVar);
+            StackValue capturedVar = lookupOuterValue(konstueDescriptor, asSharedVar);
             callGenerator.putCapturedValueOnStack(capturedVar, sharedVarType, paramIndex++);
         }
 
@@ -1252,7 +1252,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 ValueParameterDescriptor continuationParameter = CollectionsKt.last(context.getFunctionDescriptor().getValueParameters());
                 StackValue continuationValue = findLocalOrCapturedValue(continuationParameter);
 
-                assert continuationValue != null : "Couldn't find a value for continuation parameter of " + context.getFunctionDescriptor();
+                assert continuationValue != null : "Couldn't find a konstue for continuation parameter of " + context.getFunctionDescriptor();
 
                 callGenerator.putCapturedValueOnStack(continuationValue, continuationValue.type, paramIndex);
             }
@@ -1286,7 +1286,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     @NotNull
     private StackValue lookupOuterValue(EnclosedValueDescriptor d, boolean asSharedVar) {
         DeclarationDescriptor descriptor = d.getDescriptor();
-        for (LocalLookup.LocalLookupCase aCase : LocalLookup.LocalLookupCase.values()) {
+        for (LocalLookup.LocalLookupCase aCase : LocalLookup.LocalLookupCase.konstues()) {
             if (aCase.isCase(descriptor)) {
                 StackValue outerValue = aCase.outerValue(d, this);
                 if (asSharedVar && outerValue instanceof StackValue.FieldForSharedVar) {
@@ -1296,7 +1296,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 return outerValue;
             }
         }
-        throw new IllegalStateException("Can't get outer value in " + this + " for " + d);
+        throw new IllegalStateException("Can't get outer konstue in " + this + " for " + d);
     }
 
     private StackValueWithLeaveTask generateBlock(
@@ -1331,7 +1331,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 v.mark(labelBeforeLastExpression);
             }
 
-            // Note that this statementResult value is potentially unused (in case of handleResult coroutine call)
+            // Note that this statementResult konstue is potentially unused (in case of handleResult coroutine call)
             // It's supposed here that no bytecode is emitted until 'put' call on relevant StackValue object
             StackValue statementResult = isExpression ? gen(possiblyLabeledStatement) : genStatement(possiblyLabeledStatement);
 
@@ -1351,12 +1351,12 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
         assert blockResult != null : "Block result should be initialized in the loop or the condition above";
 
-        return new StackValueWithLeaveTask(blockResult, value -> {
+        return new StackValueWithLeaveTask(blockResult, konstue -> {
             if (labelBlockEnd == null) {
                 v.mark(blockEnd);
             }
             for (Function<StackValue, Void> task : Lists.reverse(leaveTasks)) {
-                task.fun(value);
+                task.fun(konstue);
             }
             return Unit.INSTANCE;
         });
@@ -1429,7 +1429,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     private void putLocalVariableIntoFrameMap(@NotNull KtVariableDeclaration statement) {
         VariableDescriptor variableDescriptor = getVariableDescriptorNotNull(statement);
-        // Do not modify local variables table for variables like _ in val (_, y) = pair
+        // Do not modify local variables table for variables like _ in konst (_, y) = pair
         // They always will have special name
         if (variableDescriptor.getName().isSpecial()) return;
 
@@ -1477,7 +1477,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     ) {
         VariableDescriptor variableDescriptor = getVariableDescriptorNotNull(statement);
 
-        // Do not modify local variables table for variables like _ in val (_, y) = pair
+        // Do not modify local variables table for variables like _ in konst (_, y) = pair
         // They always will have special name
         if (variableDescriptor.getName().isSpecial()) return;
 
@@ -1741,9 +1741,9 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                     returnKotlinType = this.context.getFunctionDescriptor().getReturnType();
                 }
             }
-            StackValue valueToReturn = returnedExpression != null ? gen(returnedExpression) : StackValue.none();
+            StackValue konstueToReturn = returnedExpression != null ? gen(returnedExpression) : StackValue.none();
 
-            putStackValue(returnedExpression, returnType, returnKotlinType, valueToReturn);
+            putStackValue(returnedExpression, returnType, returnKotlinType, konstueToReturn);
 
             Label afterReturnLabel = new Label();
             generateFinallyBlocksIfNeeded(returnType, returnKotlinType, afterReturnLabel);
@@ -1938,8 +1938,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 KotlinType returnType = propertyDescriptor.getReturnType();
                 for (ExpressionCodegenExtension extension : codegenExtensions) {
                     if (returnType != null) {
-                        StackValue value = extension.applyProperty(receiver, resolvedCall, context);
-                        if (value != null) return value;
+                        StackValue konstue = extension.applyProperty(receiver, resolvedCall, context);
+                        if (konstue != null) return konstue;
                     }
                 }
             }
@@ -2132,15 +2132,15 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             return lookupCapturedValueInConstructorParameters(descriptor);
         }
 
-        StackValue value = context.lookupInContext(descriptor, StackValue.LOCAL_0, state, false);
-        if (isDelegatedLocalVariable(descriptor) && value != null) {
+        StackValue konstue = context.lookupInContext(descriptor, StackValue.LOCAL_0, state, false);
+        if (isDelegatedLocalVariable(descriptor) && konstue != null) {
             VariableDescriptor metadata = getDelegatedLocalVariableMetadata((VariableDescriptor) descriptor, bindingContext);
             StackValue metadataValue = context.lookupInContext(metadata, StackValue.LOCAL_0, state, false);
-            assert metadataValue != null : "Metadata stack value should be non-null for local delegated property: " + descriptor;
-            return delegatedVariableValue(value, metadataValue, (VariableDescriptorWithAccessors) descriptor, typeMapper);
+            assert metadataValue != null : "Metadata stack konstue should be non-null for local delegated property: " + descriptor;
+            return delegatedVariableValue(konstue, metadataValue, (VariableDescriptorWithAccessors) descriptor, typeMapper);
         }
 
-        return value;
+        return konstue;
     }
 
     @Nullable
@@ -2655,8 +2655,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
         fd = SamCodegenUtil.resolveSamAdapter(fd);
 
-        List<ResolvedValueArgument> valueArguments = resolvedCall.getValueArgumentsByIndex();
-        if (valueArguments != null && valueArguments.stream().anyMatch(it -> it instanceof DefaultValueArgument)) {
+        List<ResolvedValueArgument> konstueArguments = resolvedCall.getValueArgumentsByIndex();
+        if (konstueArguments != null && konstueArguments.stream().anyMatch(it -> it instanceof DefaultValueArgument)) {
             // When we invoke a function with some arguments mapped as defaults,
             // we later reroute this call to an overridden function in a base class that processes the default arguments.
             // If the base class is generic, this overridden function can have a different Kotlin signature
@@ -2723,13 +2723,13 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         callGenerator.processHiddenParameters();
         callGenerator.putHiddenParamsIntoLocals();
 
-        List<ResolvedValueArgument> valueArguments = resolvedCall.getValueArgumentsByIndex();
-        assert valueArguments != null : "Failed to arrange value arguments by index: " + resolvedCall.getResultingDescriptor();
+        List<ResolvedValueArgument> konstueArguments = resolvedCall.getValueArgumentsByIndex();
+        assert konstueArguments != null : "Failed to arrange konstue arguments by index: " + resolvedCall.getResultingDescriptor();
 
         DefaultCallArgs defaultArgs =
                 argumentGenerator.generate(
-                        valueArguments,
-                        new ArrayList<>(resolvedCall.getValueArguments().values()),
+                        konstueArguments,
+                        new ArrayList<>(resolvedCall.getValueArguments().konstues()),
                         resolvedCall.getResultingDescriptor()
                 );
 
@@ -3002,7 +3002,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             return stackValue;
         }
         else {
-            throw new UnsupportedOperationException("Unsupported receiver value: " + receiverValue);
+            throw new UnsupportedOperationException("Unsupported receiver konstue: " + receiverValue);
         }
     }
 
@@ -3129,7 +3129,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 String fieldName = scriptContext.getScriptFieldName(receiver);
                 return StackValue.field(classType, receiverKotlinType, currentScriptType, fieldName, false, result, receiver);
             }
-            // might be null inside the generated synthetic class during expression evaluation
+            // might be null inside the generated synthetic class during expression ekonstuation
             result = cur.getOuterExpression(result, true);
 
             if (inStartConstructorContext) {
@@ -3197,7 +3197,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             ClassDescriptor thisDescriptor = cur.getThisDescriptor();
 
             // We use equals on type constructors (instead of reference equality on classes) to support the case where default parameter
-            // values of actual functions loaded from the expected function refer to the expected class.
+            // konstues of actual functions loaded from the expected function refer to the expected class.
             if (!isSuper && thisDescriptor.getTypeConstructor().equals(thisOrOuterClass.getTypeConstructor())) {
                 return result;
             }
@@ -3267,11 +3267,11 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     }
 
     @NotNull
-    public StackValue genVarargs(@NotNull VarargValueArgument valueArgument, @NotNull KotlinType outType) {
+    public StackValue genVarargs(@NotNull VarargValueArgument konstueArgument, @NotNull KotlinType outType) {
         Type type = asmType(outType);
         assert type.getSort() == Type.ARRAY;
         Type elementType = correctElementType(type);
-        List<ValueArgument> arguments = valueArgument.getArguments();
+        List<ValueArgument> arguments = konstueArgument.getArguments();
         int size = arguments.size();
 
         // Named arguments in vararg are treated as having an implicit spread operator.
@@ -3331,8 +3331,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                             gen(argumentExpression, OBJECT_TYPE, argumentKotlinType);
 
                             if (argumentKotlinType != null && InlineClassesUtilsKt.isInlineClassType(argumentKotlinType)) {
-                                // we're going to pass value of inline class type to j/l/Object, which would result in boxing and then
-                                // will cause check cast error on toArray() call. To mitigate this problem, we unbox this value and pass
+                                // we're going to pass konstue of inline class type to j/l/Object, which would result in boxing and then
+                                // will cause check cast error on toArray() call. To mitigate this problem, we unbox this konstue and pass
                                 // primitive array to the method. Note that bytecode optimisations will remove box/unbox calls.
                                 StackValue.coerce(
                                         OBJECT_TYPE, argumentKotlinType,
@@ -3534,8 +3534,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         Type type = boxType(expressionType(expression));
         KotlinType kotlinType = kotlinType(expression);
 
-        StackValue value = generateSafeQualifiedExpression(expression, ifnull);
-        StackValue newReceiver = StackValue.coercion(value, type, kotlinType);
+        StackValue konstue = generateSafeQualifiedExpression(expression, ifnull);
+        StackValue newReceiver = StackValue.coercion(konstue, type, kotlinType);
         StackValue result;
 
         if (!isPrimitive(expressionType(expression.getReceiverExpression()))) {
@@ -4117,7 +4117,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     private boolean isIntZero(KtExpression expr, Type exprType) {
         ConstantValue<?> exprValue = getPrimitiveOrStringCompileTimeConstant(expr);
-        return isIntPrimitive(exprType) && exprValue != null && Integer.valueOf(0).equals(exprValue.getValue());
+        return isIntPrimitive(exprType) && exprValue != null && Integer.konstueOf(0).equals(exprValue.getValue());
     }
 
     private StackValue genCmpWithZero(KtExpression exp, IElementType opToken, @Nullable StackValue pregeneratedExpr) {
@@ -4144,7 +4144,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         if (kotlinType == null || TypeUtils.isNullableType(kotlinType) || !InlineClassesUtilsKt.isInlineClassType(kotlinType)) {
             return StackValue.compareWithNull(argument, (KtTokens.EQEQ == opToken || KtTokens.EQEQEQ == opToken) ? IFNONNULL : IFNULL);
         } else {
-            // If exp is an unboxed inline class value the comparison is vacuous
+            // If exp is an unboxed inline class konstue the comparison is vacuous
             return StackValue.operation(Type.BOOLEAN_TYPE, v -> {
                 argument.put(type, kotlinType, v);
                 AsmUtil.pop(v, type);
@@ -4166,14 +4166,14 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         Label ifNull = new Label();
 
         assert left != null : "left expression in elvis should be not null: " + expression.getText();
-        StackValue value = generateExpressionWithNullFallback(left, ifNull);
+        StackValue konstue = generateExpressionWithNullFallback(left, ifNull);
 
         if (isPrimitive(leftType)) {
-            return value;
+            return konstue;
         }
 
         return StackValue.operation(exprType, exprKotlinType, v -> {
-            value.put(value.type, value.kotlinType, v);
+            konstue.put(konstue.type, konstue.kotlinType, v);
             v.dup();
 
             v.ifnull(ifNull);
@@ -4298,17 +4298,17 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             @NotNull JvmKotlinType jvmKotlinType,
             boolean keepReturnValue
     ) {
-        StackValue value = gen(expression.getLeft());
+        StackValue konstue = gen(expression.getLeft());
         if (keepReturnValue) {
-            value = StackValue.complexWriteReadReceiver(value);
+            konstue = StackValue.complexWriteReadReceiver(konstue);
         }
-        value.put(jvmKotlinType.getType(), jvmKotlinType.getKotlinType(), v);
+        konstue.put(jvmKotlinType.getType(), jvmKotlinType.getKotlinType(), v);
         StackValue receiver = StackValue.onStack(jvmKotlinType.getType(), jvmKotlinType.getKotlinType());
 
         callable.invokeMethodWithArguments(resolvedCall, receiver, this).put(callable.getReturnType(), null, v);
 
         if (keepReturnValue) {
-            value.store(StackValue.onStack(callable.getReturnType(), returnKotlinType), v, true);
+            konstue.store(StackValue.onStack(callable.getReturnType(), returnKotlinType), v, true);
         }
     }
 
@@ -4345,14 +4345,14 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
             FlexibleTypesKt.isNullabilityFlexible(exprKotlinType)) {
             exprKotlinType = TypeUtils.makeNullable(exprKotlinType);
         }
-        StackValue value;
+        StackValue konstue;
         if (compileTimeConstant != null) {
-            value = StackValue.constant(compileTimeConstant.getValue(), exprType, exprKotlinType);
+            konstue = StackValue.constant(compileTimeConstant.getValue(), exprType, exprKotlinType);
         } else {
-            value = gen(expr);
+            konstue = gen(expr);
         }
 
-        genInvokeAppendMethod(generator, exprType, exprKotlinType, typeMapper, value);
+        genInvokeAppendMethod(generator, exprType, exprKotlinType, typeMapper, konstue);
     }
 
     @Nullable
@@ -4381,7 +4381,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         ResolvedCall<?> resolvedCall = CallUtilKt.getResolvedCallWithAssert(expression, bindingContext);
         CallableDescriptor op = resolvedCall.getResultingDescriptor();
 
-        assert op instanceof FunctionDescriptor || originalOperation == null : String.valueOf(op);
+        assert op instanceof FunctionDescriptor || originalOperation == null : String.konstueOf(op);
         String operationName = originalOperation == null ? "" : originalOperation.getName().asString();
         if (!(operationName.equals("inc") || operationName.equals("dec"))) {
             return invokeFunction(resolvedCall, receiver);
@@ -4389,8 +4389,8 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
         int increment = operationName.equals("inc") ? 1 : -1;
         Type type = expressionType(expression.getBaseExpression());
-        StackValue value = gen(expression.getBaseExpression());
-        return StackValue.preIncrement(type, value, increment, resolvedCall, this);
+        StackValue konstue = gen(expression.getBaseExpression());
+        return StackValue.preIncrement(type, konstue, increment, resolvedCall, this);
     }
 
     @Override
@@ -4454,9 +4454,9 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         }
 
         return StackValue.operation(asmBaseType, kotlinBaseType, v -> {
-            StackValue value = StackValue.complexWriteReadReceiver(gen(expression.getBaseExpression()));
+            StackValue konstue = StackValue.complexWriteReadReceiver(gen(expression.getBaseExpression()));
 
-            value.put(asmBaseType, kotlinBaseType, v);
+            konstue.put(asmBaseType, kotlinBaseType, v);
             AsmUtil.dup(v, asmBaseType);
 
             StackValue previousValue = StackValue.local(myFrameMap.enterTemp(asmBaseType), asmBaseType, kotlinBaseType);
@@ -4476,7 +4476,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
                 storeKotlinType = result.kotlinType;
             }
 
-            value.store(StackValue.onStack(storeType, storeKotlinType), v, true);
+            konstue.store(StackValue.onStack(storeType, storeKotlinType), v, true);
 
             previousValue.put(asmBaseType, kotlinBaseType, v);
 
@@ -4578,9 +4578,9 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     @NotNull
     private StackValue getVariableMetadataValue(@NotNull VariableDescriptorWithAccessors variableDescriptor) {
-        StackValue value = findLocalOrCapturedValue(getDelegatedLocalVariableMetadata(variableDescriptor, bindingContext));
-        assert value != null : "Can't find stack value for local delegated variable metadata: " + variableDescriptor;
-        return value;
+        StackValue konstue = findLocalOrCapturedValue(getDelegatedLocalVariableMetadata(variableDescriptor, bindingContext));
+        assert konstue != null : "Can't find stack konstue for local delegated variable metadata: " + variableDescriptor;
+        return konstue;
     }
 
     @NotNull
@@ -4653,7 +4653,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
     private void initializeLocalVariableWithFakeDefaultValue(@NotNull KtProperty variableDeclaration) {
         LocalVariableDescriptor variableDescriptor = (LocalVariableDescriptor) getVariableDescriptorNotNull(variableDeclaration);
 
-        // Boxed variables already have a value
+        // Boxed variables already have a konstue
         if (isBoxedLocalCapturedInClosure(bindingContext, variableDescriptor)) return;
 
         assert !variableDeclaration.hasDelegateExpressionOrInitializer() &&
@@ -4702,7 +4702,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         assert arguments.size() == 2 :
                 "Resolved call for '" +
                 OperatorNameConventions.PROVIDE_DELEGATE.asString() +
-                "' should have exactly 2 value parameters";
+                "' should have exactly 2 konstue parameters";
 
         tempVariables.put(arguments.get(0).asElement(), StackValue.constant(null, AsmTypes.OBJECT_TYPE));
         tempVariables.put(
@@ -4738,17 +4738,17 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         // We can use the $$delegatedProperties array as in non-inline functions and upon inlining, detect elements at what indices
         // of that array are used in the inline function body, load the corresponding initializing bytecode from <clinit> of the
         // container class (where the PropertyReferenceNImpl instance is created), copy and adapt it at the call site
-        StackValue value;
+        StackValue konstue;
         if (PropertyCodegen.isDelegatedPropertyWithOptimizedMetadata(variableDescriptor, bindingContext)) {
-            value = PropertyCodegen.getOptimizedDelegatedPropertyMetadataValue();
+            konstue = PropertyCodegen.getOptimizedDelegatedPropertyMetadataValue();
         } else if (context.getFunctionDescriptor().isInline()) {
             //noinspection ConstantConditions
-            value = generatePropertyReference(variable.getDelegate(), variableDescriptor, variableDescriptor, null);
+            konstue = generatePropertyReference(variable.getDelegate(), variableDescriptor, variableDescriptor, null);
         }
         else {
-            value = PropertyCodegen.getDelegatedPropertyMetadata(variableDescriptor, bindingContext);
+            konstue = PropertyCodegen.getDelegatedPropertyMetadata(variableDescriptor, bindingContext);
         }
-        value.put(K_PROPERTY_TYPE, null, v);
+        konstue.put(K_PROPERTY_TYPE, null, v);
         metadataVar.storeSelector(K_PROPERTY_TYPE, null, v);
     }
 
@@ -4926,17 +4926,17 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
         ResolvedCall<FunctionDescriptor> resolvedCall = isGetter ? resolvedGetCall : resolvedSetCall;
         assert resolvedCall != null : "couldn't find resolved call: " + expression.getText();
 
-        List<ResolvedValueArgument> valueArguments = resolvedCall.getValueArgumentsByIndex();
-        assert valueArguments != null : "Failed to arrange value arguments by index: " + operationDescriptor;
+        List<ResolvedValueArgument> konstueArguments = resolvedCall.getValueArgumentsByIndex();
+        assert konstueArguments != null : "Failed to arrange konstue arguments by index: " + operationDescriptor;
 
         if (!isGetter) {
-            assert valueArguments.size() >= 2 : "Setter call should have at least 2 arguments: " + operationDescriptor;
-            // Skip generation of the right hand side of an indexed assignment, which is the last value argument
-            valueArguments.remove(valueArguments.size() - 1);
+            assert konstueArguments.size() >= 2 : "Setter call should have at least 2 arguments: " + operationDescriptor;
+            // Skip generation of the right hand side of an indexed assignment, which is the last konstue argument
+            konstueArguments.remove(konstueArguments.size() - 1);
         }
 
         return new StackValue.CollectionElementReceiver(
-                callable, receiver, resolvedGetCall, resolvedSetCall, isGetter, this, valueArguments
+                callable, receiver, resolvedGetCall, resolvedSetCall, isGetter, this, konstueArguments
         );
     }
 
@@ -4970,7 +4970,7 @@ public class ExpressionCodegen extends KtVisitor<StackValue, StackValue> impleme
 
     public StackValue generateTryExpression(KtTryExpression expression, boolean isStatement) {
         /*
-The "returned" value of try expression with no finally is either the last expression in the try block or the last expression in the catch block
+The "returned" konstue of try expression with no finally is either the last expression in the try block or the last expression in the catch block
 (or blocks).
          */
 
@@ -5009,7 +5009,7 @@ The "returned" value of try expression with no finally is either the last expres
             v.mark(tryEnd);
 
             //do it before finally block generation
-            List<Label> tryBlockRegions = getCurrentCatchIntervals(element, tryStart, tryEnd);
+            List<Label> tryBlockRegions = getCurrentCatchInterkonsts(element, tryStart, tryEnd);
 
             Label end = new Label();
 
@@ -5069,7 +5069,7 @@ The "returned" value of try expression with no finally is either the last expres
 
                 //do it before finally block generation
                 //javac also generates entry in exception table for default catch clause too!!!! so defaultCatchEnd as end parameter
-                List<Label> defaultCatchRegions = getCurrentCatchIntervals(tryWithFinallyBlockStackElement, tryStart, defaultCatchEnd);
+                List<Label> defaultCatchRegions = getCurrentCatchInterkonsts(tryWithFinallyBlockStackElement, tryStart, defaultCatchEnd);
 
 
                 genFinallyBlockOrGoto(tryWithFinallyBlockStackElement, null, null, new ArrayList<>());
@@ -5111,7 +5111,7 @@ The "returned" value of try expression with no finally is either the last expres
     }
 
     @NotNull
-    private static List<Label> getCurrentCatchIntervals(
+    private static List<Label> getCurrentCatchInterkonsts(
             @Nullable TryBlockStackElement finallyBlockStackElement,
             @NotNull Label blockStart,
             @NotNull Label blockEnd
@@ -5134,21 +5134,21 @@ The "returned" value of try expression with no finally is either the last expres
         KotlinType rightKotlinType = bindingContext.get(TYPE, expression.getRight());
         assert rightKotlinType != null;
 
-        StackValue value = genQualified(receiver, left);
+        StackValue konstue = genQualified(receiver, left);
 
-        KotlinType leftKotlinType = value.kotlinType;
+        KotlinType leftKotlinType = konstue.kotlinType;
         Type boxedLeftType;
         if (leftKotlinType != null && InlineClassesUtilsKt.isInlineClassType(leftKotlinType)) {
             boxedLeftType = typeMapper.mapTypeAsDeclaration(leftKotlinType);
         } else {
-            boxedLeftType = boxType(value.type);
+            boxedLeftType = boxType(konstue.type);
         }
 
         Type boxedRightType = boxType(typeMapper.mapTypeAsDeclaration(rightKotlinType));
         return StackValue.operation(boxedRightType, rightKotlinType, v -> {
-            value.put(boxedLeftType, value.kotlinType, v);
+            konstue.put(boxedLeftType, konstue.kotlinType, v);
 
-            if (value.type == Type.VOID_TYPE) {
+            if (konstue.type == Type.VOID_TYPE) {
                 StackValue.putUnitInstance(v);
             }
 
@@ -5190,8 +5190,8 @@ The "returned" value of try expression with no finally is either the last expres
     private StackValue generateIsCheck(StackValue expressionToMatch, KtTypeReference typeReference, boolean negated) {
         KotlinType kotlinType = bindingContext.get(TYPE, typeReference);
         markStartLineNumber(typeReference);
-        StackValue value = generateIsCheck(expressionToMatch, kotlinType, false);
-        return negated ? StackValue.not(value) : value;
+        StackValue konstue = generateIsCheck(expressionToMatch, kotlinType, false);
+        return negated ? StackValue.not(konstue) : konstue;
     }
 
     private StackValue generateIsCheck(StackValue expressionToGen, KotlinType rhsKotlinType, boolean leaveExpressionOnStack) {

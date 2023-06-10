@@ -1,4 +1,4 @@
-val array = array<Any>(
+konst array = array<Any>(
     1u,
     0u,
     1_1u,

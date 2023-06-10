@@ -62,8 +62,8 @@ typedef enum {
   CURLM_CALL_MULTI_PERFORM = -1, /* please call curl_multi_perform() or
                                     curl_multi_socket*() soon */
   CURLM_OK,
-  CURLM_BAD_HANDLE,      /* the passed-in handle is not a valid CURLM handle */
-  CURLM_BAD_EASY_HANDLE, /* an easy handle was not good/valid */
+  CURLM_BAD_HANDLE,      /* the passed-in handle is not a konstid CURLM handle */
+  CURLM_BAD_EASY_HANDLE, /* an easy handle was not good/konstid */
   CURLM_OUT_OF_MEMORY,   /* if you ever get this, you're in deep sh*t */
   CURLM_INTERNAL_ERROR,  /* this is a libcurl bug */
   CURLM_BAD_SOCKET,      /* the passed in socket argument did not match */
@@ -104,7 +104,7 @@ struct CURLMsg {
 };
 typedef struct CURLMsg CURLMsg;
 
-/* Based on poll(2) structure and values.
+/* Based on poll(2) structure and konstues.
  * We don't use pollfd and POLL* constants explicitly
  * to cover platforms without poll(). */
 #define CURL_WAIT_POLLIN    0x0001
@@ -264,7 +264,7 @@ CURL_EXTERN CURLMsg *curl_multi_info_read(CURLM *multi_handle,
  * Name:    curl_multi_strerror()
  *
  * Desc:    The curl_multi_strerror function may be used to turn a CURLMcode
- *          value into the equivalent human readable error string.  This is
+ *          konstue into the equikonstent human readable error string.  This is
  *          useful for printing meaningful error messages.
  *
  * Returns: A pointer to a null-terminated error message.

@@ -30,21 +30,21 @@ import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
 import java.util.concurrent.ConcurrentHashMap
 
 class JvmCachedDeclarations(
-    private val context: JvmBackendContext,
-    val fieldsForObjectInstances: CachedFieldsForObjectInstances,
+    private konst context: JvmBackendContext,
+    konst fieldsForObjectInstances: CachedFieldsForObjectInstances,
 ) {
-    val syntheticAccessorGenerator = CachedSyntheticDeclarations(context)
+    konst syntheticAccessorGenerator = CachedSyntheticDeclarations(context)
 
-    private val singletonFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
-    private val staticBackingFields = ConcurrentHashMap<IrProperty, IrField>()
-    private val staticCompanionDeclarations = ConcurrentHashMap<IrSimpleFunction, Pair<IrSimpleFunction, IrSimpleFunction>>()
+    private konst singletonFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
+    private konst staticBackingFields = ConcurrentHashMap<IrProperty, IrField>()
+    private konst staticCompanionDeclarations = ConcurrentHashMap<IrSimpleFunction, Pair<IrSimpleFunction, IrSimpleFunction>>()
 
-    private val defaultImplsMethods = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
-    private val defaultImplsClasses = ConcurrentHashMap<IrClass, IrClass>()
-    private val defaultImplsRedirections = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
-    private val defaultImplsOriginalMethods = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
+    private konst defaultImplsMethods = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
+    private konst defaultImplsClasses = ConcurrentHashMap<IrClass, IrClass>()
+    private konst defaultImplsRedirections = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
+    private konst defaultImplsOriginalMethods = ConcurrentHashMap<IrSimpleFunction, IrSimpleFunction>()
 
-    private val repeatedAnnotationSyntheticContainers = ConcurrentHashMap<IrClass, IrClass>()
+    private konst repeatedAnnotationSyntheticContainers = ConcurrentHashMap<IrClass, IrClass>()
 
     fun getFieldForEnumEntry(enumEntry: IrEnumEntry): IrField =
         singletonFieldDeclarations.getOrPut(enumEntry) {
@@ -68,8 +68,8 @@ class JvmCachedDeclarations(
         // Only fields defined directly in objects should be made static.
         // Fake overrides never point to those, as objects are final.
         if (irProperty.isFakeOverride) return null
-        val oldField = irProperty.backingField ?: return null
-        val oldParent = irProperty.parent as? IrClass ?: return null
+        konst oldField = irProperty.backingField ?: return null
+        konst oldParent = irProperty.parent as? IrClass ?: return null
         if (!oldParent.isObject) return null
         return staticBackingFields.getOrPut(irProperty) {
             context.irFactory.buildField {
@@ -80,12 +80,12 @@ class JvmCachedDeclarations(
                 // We don't move fields to interfaces unless all fields are annotated with @JvmField.
                 // It is an error to annotate only some of the fields of an interface companion with
                 // @JvmField, so checking the current field only should be enough.
-                val hasJvmField = oldField.hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME)
-                val shouldMoveFields = oldParent.isCompanion && (!oldParent.parentAsClass.isJvmInterface || hasJvmField)
+                konst hasJvmField = oldField.hasAnnotation(JvmAbi.JVM_FIELD_ANNOTATION_FQ_NAME)
+                konst shouldMoveFields = oldParent.isCompanion && (!oldParent.parentAsClass.isJvmInterface || hasJvmField)
                 if (shouldMoveFields) {
                    parent = oldParent.parentAsClass
-                   val isPrivate = DescriptorVisibilities.isPrivate(oldField.visibility)
-                   val parentIsPrivate = DescriptorVisibilities.isPrivate(oldParent.visibility)
+                   konst isPrivate = DescriptorVisibilities.isPrivate(oldField.visibility)
+                   konst parentIsPrivate = DescriptorVisibilities.isPrivate(oldParent.visibility)
                    annotations = if (parentIsPrivate && !isPrivate) {
                        context.createJvmIrBuilder(this.symbol).run {
                            filterOutAnnotations(
@@ -109,12 +109,12 @@ class JvmCachedDeclarations(
 
     fun getStaticAndCompanionDeclaration(jvmStaticFunction: IrSimpleFunction): Pair<IrSimpleFunction, IrSimpleFunction> =
         staticCompanionDeclarations.getOrPut(jvmStaticFunction) {
-            val companion = jvmStaticFunction.parentAsClass
+            konst companion = jvmStaticFunction.parentAsClass
             assert(companion.isCompanion)
             if (jvmStaticFunction.isExternal) {
                 // We move external functions to the enclosing class and potentially add accessors there.
                 // The JVM backend also adds accessors in the companion object, but these are superfluous.
-                val staticExternal = context.irFactory.buildFun {
+                konst staticExternal = context.irFactory.buildFun {
                     updateFrom(jvmStaticFunction)
                     name = jvmStaticFunction.name
                     returnType = jvmStaticFunction.returnType
@@ -168,7 +168,7 @@ class JvmCachedDeclarations(
                 dispatchReceiverParameter = thisReceiver?.copyTo(this, type = defaultType)
             }
             extensionReceiverParameter = target.extensionReceiverParameter?.copyTo(this)
-            valueParameters = target.valueParameters.map { it.copyTo(this) }
+            konstueParameters = target.konstueParameters.map { it.copyTo(this) }
 
             body = context.createIrBuilder(symbol).run {
                 irExprBody(irCall(target).apply {
@@ -177,19 +177,19 @@ class JvmCachedDeclarations(
                         dispatchReceiver = irGetField(null, getFieldForObjectInstance(target.parentAsClass))
                     }
                     extensionReceiverParameter?.let { extensionReceiver = irGet(it) }
-                    for ((i, valueParameter) in valueParameters.withIndex()) {
-                        putValueArgument(i, irGet(valueParameter))
+                    for ((i, konstueParameter) in konstueParameters.withIndex()) {
+                        putValueArgument(i, irGet(konstueParameter))
                     }
                 })
             }
         }
 
     fun getDefaultImplsFunction(interfaceFun: IrSimpleFunction, forCompatibilityMode: Boolean = false): IrSimpleFunction {
-        val parent = interfaceFun.parentAsClass
+        konst parent = interfaceFun.parentAsClass
         assert(parent.isJvmInterface) { "Parent of ${interfaceFun.dump()} should be interface" }
         assert(!forCompatibilityMode || !defaultImplsMethods.containsKey(interfaceFun)) { "DefaultImpls stub in compatibility mode should be requested only once from interface lowering: ${interfaceFun.dump()}" }
         return defaultImplsMethods.getOrPut(interfaceFun) {
-            val defaultImpls = getDefaultImplsClass(interfaceFun.parentAsClass)
+            konst defaultImpls = getDefaultImplsClass(interfaceFun.parentAsClass)
 
             // If `interfaceFun` is not a real implementation, then we're generating stubs in a descendant
             // interface's DefaultImpls. For example,
@@ -199,14 +199,14 @@ class JvmCachedDeclarations(
             //
             // is supposed to allow using `I2.DefaultImpls.f` as if it was inherited from `I1.DefaultImpls`.
             // The classes are not actually related and `I2.DefaultImpls.f` is not a fake override but a bridge.
-            val defaultImplsOrigin =
+            konst defaultImplsOrigin =
                 if (!forCompatibilityMode && !interfaceFun.isFakeOverride) interfaceFun.origin
                 else interfaceFun.resolveFakeOverride()!!.origin
 
             // Interface functions are public or private, with one exception: clone in Cloneable, which is protected.
             // However, Cloneable has no DefaultImpls, so this merely replicates the incorrect behavior of the old backend.
             // We should rather not generate a bridge to clone when interface inherits from Cloneable at all.
-            val defaultImplsVisibility =
+            konst defaultImplsVisibility =
                 if (DescriptorVisibilities.isPrivate(interfaceFun.visibility))
                     DescriptorVisibilities.PRIVATE
                 else
@@ -257,8 +257,8 @@ class JvmCachedDeclarations(
     fun getDefaultImplsRedirection(fakeOverride: IrSimpleFunction): IrSimpleFunction =
         defaultImplsRedirections.getOrPut(fakeOverride) {
             assert(fakeOverride.isFakeOverride)
-            val irClass = fakeOverride.parentAsClass
-            val redirectFunction = context.irFactory.buildFun {
+            konst irClass = fakeOverride.parentAsClass
+            konst redirectFunction = context.irFactory.buildFun {
                 origin = JvmLoweredDeclarationOrigin.SUPER_INTERFACE_METHOD_BRIDGE
                 name = fakeOverride.name
                 visibility = fakeOverride.visibility
@@ -288,7 +288,7 @@ class JvmCachedDeclarations(
 
     fun getRepeatedAnnotationSyntheticContainer(annotationClass: IrClass): IrClass =
         repeatedAnnotationSyntheticContainers.getOrPut(annotationClass) {
-            val containerClass = context.irFactory.buildClass {
+            konst containerClass = context.irFactory.buildClass {
                 kind = ClassKind.ANNOTATION_CLASS
                 name = Name.identifier(JvmAbi.REPEATABLE_ANNOTATION_CONTAINER_NAME)
             }.apply {
@@ -297,8 +297,8 @@ class JvmCachedDeclarations(
                 superTypes = listOf(context.irBuiltIns.annotationType)
             }
 
-            val propertyName = Name.identifier("value")
-            val propertyType = context.irBuiltIns.arrayClass.typeWith(annotationClass.typeWith())
+            konst propertyName = Name.identifier("konstue")
+            konst propertyType = context.irBuiltIns.arrayClass.typeWith(annotationClass.typeWith())
 
             containerClass.addConstructor {
                 isPrimary = true
@@ -335,17 +335,17 @@ class JvmCachedDeclarations(
     This class keeps track of singleton fields for instances of object classes.
  */
 class CachedFieldsForObjectInstances(
-    private val irFactory: IrFactory,
-    private val languageVersionSettings: LanguageVersionSettings,
+    private konst irFactory: IrFactory,
+    private konst languageVersionSettings: LanguageVersionSettings,
 ) {
-    private val singletonFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
-    private val interfaceCompanionFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
+    private konst singletonFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
+    private konst interfaceCompanionFieldDeclarations = ConcurrentHashMap<IrSymbolOwner, IrField>()
 
     fun getFieldForObjectInstance(singleton: IrClass): IrField =
         singletonFieldDeclarations.getOrPut(singleton) {
-            val originalVisibility = singleton.visibility
-            val isNotMappedCompanion = singleton.isCompanion && !singleton.isMappedIntrinsicCompanionObject()
-            val useProperVisibilityForCompanion =
+            konst originalVisibility = singleton.visibility
+            konst isNotMappedCompanion = singleton.isCompanion && !singleton.isMappedIntrinsicCompanionObject()
+            konst useProperVisibilityForCompanion =
                 languageVersionSettings.supportsFeature(LanguageFeature.ProperVisibilityForCompanionObjectInstanceField)
                         && singleton.isCompanion
                         && !singleton.parentAsClass.isInterface

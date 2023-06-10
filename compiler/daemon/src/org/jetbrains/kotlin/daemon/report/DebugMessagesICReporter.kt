@@ -18,9 +18,9 @@ import java.io.File
 
 @VisibleForTesting
 class DebugMessagesICReporter(
-    private val servicesFacade: CompilerServicesFacadeBase,
+    private konst servicesFacade: CompilerServicesFacadeBase,
     rootDir: File,
-    private val reportSeverity: ICReporter.ReportSeverity
+    private konst reportSeverity: ICReporter.ReportSeverity
 ) : ICReporterBase(rootDir), RemoteICReporter {
 
     override fun report(message: () -> String, severity: ICReporter.ReportSeverity) {

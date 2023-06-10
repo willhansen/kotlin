@@ -8,7 +8,7 @@ class MyException : Exception()
 class Test
 @Throws(MyException::class)
 constructor(
-    private val p1: Int
+    private konst p1: Int
 ) : Base() {
     @Throws(MyException::class)
     fun readSomething() {
@@ -16,9 +16,9 @@ constructor(
     }
 
     @get:Throws(MyException::class)
-    val foo : String = "42"
+    konst foo : String = "42"
 
-    val boo : String = "42"
+    konst boo : String = "42"
         @Throws(MyException::class)
         get
 }

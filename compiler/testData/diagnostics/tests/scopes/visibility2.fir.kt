@@ -25,14 +25,14 @@ import a.makeA
 import a.<!INVISIBLE_REFERENCE!>PO<!>
 
 fun test() {
-    val y = makeA()
+    konst y = makeA()
     y.<!INVISIBLE_REFERENCE!>bar<!>()
     <!INVISIBLE_REFERENCE!>foo<!>()
 
-    val u : <!INVISIBLE_REFERENCE!>A<!> = <!INVISIBLE_REFERENCE!>A<!>()
-    val a : <!INVISIBLE_REFERENCE!>java.util.Arrays.ArrayList<Int><!>;
+    konst u : <!INVISIBLE_REFERENCE!>A<!> = <!INVISIBLE_REFERENCE!>A<!>()
+    konst a : <!INVISIBLE_REFERENCE!>java.util.Arrays.ArrayList<Int><!>;
 
-    val po = <!INVISIBLE_REFERENCE!>PO<!>
+    konst po = <!INVISIBLE_REFERENCE!>PO<!>
 }
 
 class B : <!EXPOSED_SUPER_CLASS, INVISIBLE_REFERENCE, INVISIBLE_REFERENCE!>A<!>() {}
@@ -40,7 +40,7 @@ class B : <!EXPOSED_SUPER_CLASS, INVISIBLE_REFERENCE, INVISIBLE_REFERENCE!>A<!>(
 class Q {
     class W {
         fun foo() {
-            val y = makeA() //assure that 'makeA' is visible
+            konst y = makeA() //assure that 'makeA' is visible
         }
     }
 }

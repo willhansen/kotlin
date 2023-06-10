@@ -2,19 +2,19 @@
 // !CHECK_TYPE
 // !DIAGNOSTICS: -UNUSED_PARAMETER
 
-annotation class ann(val name: String)
-const val ok = "OK"
+annotation class ann(konst name: String)
+const konst ok = "OK"
 
 class A
 
-val withoutName = fun () {}
-val extensionWithoutName = fun A.() {}
+konst withoutName = fun () {}
+konst extensionWithoutName = fun A.() {}
 
 fun withAnnotation() = @ann(ok) fun () {}
-val withReturn = fun (): Int { return 5}
-val withExpression = fun() = 5
-val funfun = fun() = fun() = 5
+konst withReturn = fun (): Int { return 5}
+konst withExpression = fun() = 5
+konst funfun = fun() = fun() = 5
 
-val parentesized = (fun () {})
-val parentesizedWithType = checkSubtype<() -> Unit>((fun () {}))
-val withType = checkSubtype<() -> Unit>((fun () {}))
+konst parentesized = (fun () {})
+konst parentesizedWithType = checkSubtype<() -> Unit>((fun () {}))
+konst withType = checkSubtype<() -> Unit>((fun () {}))

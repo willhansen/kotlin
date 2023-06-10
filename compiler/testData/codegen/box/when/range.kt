@@ -1,6 +1,6 @@
 // KJS_WITH_FULL_RUNTIME
 fun isDigit(a: Int) : String {
-    val aa = ArrayList<Int> ()
+    konst aa = ArrayList<Int> ()
     aa.add(239)
 
     return when(a) {
@@ -12,12 +12,12 @@ fun isDigit(a: Int) : String {
 }
 
 fun assertDigit(i: Int, expected: String): String {
-  val result = isDigit(i)
+  konst result = isDigit(i)
   return if (result == expected) "" else "fail: isDigit($i) = \"$result\""
 }
 
 fun box(): String {
-  val result =
+  konst result =
   assertDigit(239, "array list") +
   assertDigit(0, "digit") +
   assertDigit(9, "digit") +

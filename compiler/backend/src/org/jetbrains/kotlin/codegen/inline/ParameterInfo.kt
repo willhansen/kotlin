@@ -20,23 +20,23 @@ import org.jetbrains.kotlin.codegen.StackValue
 import org.jetbrains.org.objectweb.asm.Type
 
 open class ParameterInfo(
-    val type: Type,
-    val isSkipped: Boolean, //for skipped parameter: e.g. inlined lambda
-    val index: Int,
+    konst type: Type,
+    konst isSkipped: Boolean, //for skipped parameter: e.g. inlined lambda
+    konst index: Int,
     var remapValue: StackValue?, //in case when parameter could be extracted from outer context (e.g. from local var)
-    val declarationIndex: Int,
-    val typeOnStack: Type = type
+    konst declarationIndex: Int,
+    konst typeOnStack: Type = type
 ) {
     // Parameters of an anonymous object constructor are all represented as locals, but some of them
     // are also stored in fields.
-    var fieldEquivalent: CapturedParamInfo? = null
+    var fieldEquikonstent: CapturedParamInfo? = null
 
     var functionalArgument: FunctionalArgument? = null
 
-    val isSkippedOrRemapped: Boolean
+    konst isSkippedOrRemapped: Boolean
         get() = isSkipped || isRemapped
 
-    val isRemapped: Boolean
+    konst isRemapped: Boolean
         get() = remapValue != null
 
     constructor(type: Type, skipped: Boolean, index: Int, remapValue: Int, declarationIndex: Int) : this(

@@ -15,16 +15,16 @@ import org.jetbrains.kotlin.fir.types.ConeInferenceContext
 import org.jetbrains.kotlin.fir.types.typeContext
 
 class ResolutionContext(
-    val session: FirSession,
-    val bodyResolveComponents: BodyResolveComponents,
-    val bodyResolveContext: BodyResolveContext
+    konst session: FirSession,
+    konst bodyResolveComponents: BodyResolveComponents,
+    konst bodyResolveContext: BodyResolveContext
 ) {
-    val typeContext: ConeInferenceContext
+    konst typeContext: ConeInferenceContext
         get() = session.typeContext
 
-    val inferenceComponents: InferenceComponents
+    konst inferenceComponents: InferenceComponents
         get() = session.inferenceComponents
 
-    val returnTypeCalculator: ReturnTypeCalculator
+    konst returnTypeCalculator: ReturnTypeCalculator
         get() = bodyResolveComponents.returnTypeCalculator
 }

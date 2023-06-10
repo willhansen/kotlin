@@ -1,5 +1,5 @@
 class A : Map<String, String> {
-    override val size: Int get() = 56
+    override konst size: Int get() = 56
 
     override fun isEmpty(): Boolean {
         throw UnsupportedOperationException()
@@ -9,7 +9,7 @@ class A : Map<String, String> {
         throw UnsupportedOperationException()
     }
 
-    override fun containsValue(value: String): Boolean {
+    override fun containsValue(konstue: String): Boolean {
         throw UnsupportedOperationException()
     }
 
@@ -17,24 +17,24 @@ class A : Map<String, String> {
         throw UnsupportedOperationException()
     }
 
-    override val keys: Set<String> get() {
+    override konst keys: Set<String> get() {
         throw UnsupportedOperationException()
     }
 
-    override val values: Collection<String> get() {
+    override konst konstues: Collection<String> get() {
         throw UnsupportedOperationException()
     }
 
-    override val entries: Set<Map.Entry<String, String>> get() {
+    override konst entries: Set<Map.Entry<String, String>> get() {
         throw UnsupportedOperationException()
     }
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
     if (a.size != 56) return "fail 1: ${a.size}"
 
-    val x: Map<String, String> = a
+    konst x: Map<String, String> = a
     if (x.size != 56) return "fail 2: ${x.size}"
 
     return "OK"

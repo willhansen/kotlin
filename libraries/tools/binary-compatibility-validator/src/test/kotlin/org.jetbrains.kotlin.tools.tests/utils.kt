@@ -5,14 +5,14 @@
 
 package org.jetbrains.kotlin.tools.tests
 
-import kotlinx.validation.api.*
+import kotlinx.konstidation.api.*
 import java.io.File
 import java.util.LinkedList
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 import kotlin.test.fail
 
-private val OVERWRITE_EXPECTED_OUTPUT = System.getProperty("overwrite.output")?.toBoolean() ?: false // use -Doverwrite.output=true
+private konst OVERWRITE_EXPECTED_OUTPUT = System.getProperty("overwrite.output")?.toBoolean() ?: false // use -Doverwrite.output=true
 
 fun List<ClassBinarySignature>.dumpAndCompareWith(to: File) {
     if (!to.exists()) {
@@ -20,14 +20,14 @@ fun List<ClassBinarySignature>.dumpAndCompareWith(to: File) {
         to.bufferedWriter().use { dump(to = it) }
         fail("Expected data file did not exist. Generating: $to")
     } else {
-        val actual = dump(to = StringBuilder())
+        konst actual = dump(to = StringBuilder())
         assertEqualsToFile(to, actual)
     }
 }
 
 private fun assertEqualsToFile(expectedFile: File, actual: CharSequence) {
-    val actualText = actual.trimTrailingWhitespacesAndAddNewlineAtEOF()
-    val expectedText = expectedFile.readText().trimTrailingWhitespacesAndAddNewlineAtEOF()
+    konst actualText = actual.trimTrailingWhitespacesAndAddNewlineAtEOF()
+    konst expectedText = expectedFile.readText().trimTrailingWhitespacesAndAddNewlineAtEOF()
 
     if (expectedText != actualText) {
         if (OVERWRITE_EXPECTED_OUTPUT) {
@@ -47,11 +47,11 @@ private fun assertEqualsToFile(expectedFile: File, actual: CharSequence) {
 }
 
 fun assertEqualsWithFirstLineDiff(expectedText: String, actualText: String, message: String, diffLinesSurround: Int = 1) {
-    val actualLinesIterator = actualText.lineSequence().iterator()
-    val expectedLinesIterator = expectedText.lineSequence().iterator()
+    konst actualLinesIterator = actualText.lineSequence().iterator()
+    konst expectedLinesIterator = expectedText.lineSequence().iterator()
 
-    val actualBufferLines = LinkedList<String?>()
-    val expectedBufferLines = LinkedList<String?>()
+    konst actualBufferLines = LinkedList<String?>()
+    konst expectedBufferLines = LinkedList<String?>()
 
     var diffFound = false
     var diffLine = -1
@@ -60,10 +60,10 @@ fun assertEqualsWithFirstLineDiff(expectedText: String, actualText: String, mess
     while ((actualLinesIterator.hasNext() || expectedLinesIterator.hasNext()) && (!diffFound || line - diffLine < diffLinesSurround)) {
         line++
 
-        val actualLine: String? = if (actualLinesIterator.hasNext()) actualLinesIterator.next() else null
+        konst actualLine: String? = if (actualLinesIterator.hasNext()) actualLinesIterator.next() else null
         actualBufferLines.add(actualLine)
 
-        val expectedLine: String? = if (expectedLinesIterator.hasNext()) expectedLinesIterator.next() else null
+        konst expectedLine: String? = if (expectedLinesIterator.hasNext()) expectedLinesIterator.next() else null
         expectedBufferLines.add(expectedLine)
 
         if (actualBufferLines.size > diffLinesSurround * 2 + 1) {
@@ -78,9 +78,9 @@ fun assertEqualsWithFirstLineDiff(expectedText: String, actualText: String, mess
     }
 
     if (diffFound) {
-        val lineInfo = "↓↓↓ Line $diffLine, $diffLinesSurround lines around the first difference ↓↓↓"
-        val actualTextAroundDiff = actualBufferLines.filterNotNull().joinToString("\n", prefix = "$lineInfo\n")
-        val expectedTextAroundDiff = expectedBufferLines.filterNotNull().joinToString("\n", prefix = "$lineInfo\n")
+        konst lineInfo = "↓↓↓ Line $diffLine, $diffLinesSurround lines around the first difference ↓↓↓"
+        konst actualTextAroundDiff = actualBufferLines.filterNotNull().joinToString("\n", prefix = "$lineInfo\n")
+        konst expectedTextAroundDiff = expectedBufferLines.filterNotNull().joinToString("\n", prefix = "$lineInfo\n")
 
         assertNotEquals(expectedTextAroundDiff, actualTextAroundDiff, "Sanity check - chunks should be different")
 
@@ -98,5 +98,5 @@ private fun CharSequence.trimTrailingWhitespacesAndAddNewlineAtEOF(): String =
     }
 
 
-private val UPPER_CASE_CHARS = Regex("[A-Z]+")
-fun String.replaceCamelCaseWithDashedLowerCase() = replace(UPPER_CASE_CHARS) { "-" + it.value.lowercase() }
+private konst UPPER_CASE_CHARS = Regex("[A-Z]+")
+fun String.replaceCamelCaseWithDashedLowerCase() = replace(UPPER_CASE_CHARS) { "-" + it.konstue.lowercase() }

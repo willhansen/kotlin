@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.fir.symbols.impl.FirRegularClassSymbol
 import org.jetbrains.kotlin.load.java.JvmAnnotationNames
 import org.jetbrains.kotlin.analysis.utils.classIdIfNonLocal
 
-class LLFirFirClassByPsiClassProvider(private val session: LLFirSession) : FirSessionComponent {
+class LLFirFirClassByPsiClassProvider(private konst session: LLFirSession) : FirSessionComponent {
     fun getFirClass(psiClass: PsiClass): FirRegularClassSymbol? {
         require(psiClass !is PsiTypeParameter) {
             "${LLFirFirClassByPsiClassProvider::class.simpleName} can create only regular classes"
@@ -43,8 +43,8 @@ class LLFirFirClassByPsiClassProvider(private val session: LLFirSession) : FirSe
             return null // not yet supported
         }
 
-        val firClassSymbol = createFirClassFromFirProvider(psiClass)
-        val gotPsi = firClassSymbol.fir.psi
+        konst firClassSymbol = createFirClassFromFirProvider(psiClass)
+        konst gotPsi = firClassSymbol.fir.psi
         checkWithAttachmentBuilder(
             gotPsi == psiClass,
             { "resulted FirClass.psi != requested PsiClass" }
@@ -65,10 +65,10 @@ class LLFirFirClassByPsiClassProvider(private val session: LLFirSession) : FirSe
     }
 
     private fun createFirClassFromFirProvider(psiClass: PsiClass): FirRegularClassSymbol {
-        val classId = psiClass.classIdIfNonLocal
+        konst classId = psiClass.classIdIfNonLocal
             ?: error("No classId for non-local class")
-        val provider = session.nullableJavaSymbolProvider ?: session.symbolProvider
-        val symbol = provider.getClassLikeSymbolByClassId(classId)
+        konst provider = session.nullableJavaSymbolProvider ?: session.symbolProvider
+        konst symbol = provider.getClassLikeSymbolByClassId(classId)
             ?: buildErrorWithAttachment("No classifier found") {
                 withPsiEntry("psiClass", psiClass, session.ktModule)
                 withEntry("classId", classId) { it.asString() }
@@ -77,6 +77,6 @@ class LLFirFirClassByPsiClassProvider(private val session: LLFirSession) : FirSe
     }
 }
 
-internal val FirSession.nullableJavaSymbolProvider: JavaSymbolProvider? by FirSession.nullableSessionComponentAccessor()
+internal konst FirSession.nullableJavaSymbolProvider: JavaSymbolProvider? by FirSession.nullableSessionComponentAccessor()
 
-val LLFirSession.firClassByPsiClassProvider: LLFirFirClassByPsiClassProvider by FirSession.sessionComponentAccessor()
+konst LLFirSession.firClassByPsiClassProvider: LLFirFirClassByPsiClassProvider by FirSession.sessionComponentAccessor()

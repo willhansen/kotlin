@@ -8,8 +8,8 @@ package org.jetbrains.kotlin.konan.target
 import org.jetbrains.kotlin.konan.file.File
 
 internal object Android {
-    const val API = "21"
-    private val architectureMap = mapOf(
+    const konst API = "21"
+    private konst architectureMap = mapOf(
             KonanTarget.ANDROID_X86 to "x86",
             KonanTarget.ANDROID_X64 to "x86_64",
             KonanTarget.ANDROID_ARM32 to "arm",
@@ -21,22 +21,22 @@ internal object Android {
 }
 
 sealed class ClangArgs(
-        private val configurables: Configurables,
-        private val forJni: Boolean
+        private konst configurables: Configurables,
+        private konst forJni: Boolean
 ) {
 
-    private val absoluteTargetToolchain = configurables.absoluteTargetToolchain
-    private val absoluteTargetSysRoot = configurables.absoluteTargetSysRoot
-    private val absoluteLlvmHome = configurables.absoluteLlvmHome
-    private val target = configurables.target
-    private val targetTriple = configurables.targetTriple
+    private konst absoluteTargetToolchain = configurables.absoluteTargetToolchain
+    private konst absoluteTargetSysRoot = configurables.absoluteTargetSysRoot
+    private konst absoluteLlvmHome = configurables.absoluteLlvmHome
+    private konst target = configurables.target
+    private konst targetTriple = configurables.targetTriple
 
     // TODO: Should be dropped in favor of real MSVC target.
-    private val argsForWindowsJni = forJni && target == KonanTarget.MINGW_X64
+    private konst argsForWindowsJni = forJni && target == KonanTarget.MINGW_X64
 
-    private val clangArgsSpecificForKonanSources : List<String>
+    private konst clangArgsSpecificForKonanSources : List<String>
         get() {
-            val konanOptions = listOfNotNull(
+            konst konanOptions = listOfNotNull(
                     target.architecture.name.takeIf { target != KonanTarget.WATCHOS_ARM64 },
                     "ARM32".takeIf { target == KonanTarget.WATCHOS_ARM64 },
                     target.family.name.takeIf { target.family != Family.MINGW },
@@ -58,7 +58,7 @@ sealed class ClangArgs(
                     "TARGET_HAS_ADDRESS_DEPENDENCY".takeIf { target.hasAddressDependencyInMemoryModel() },
                     "SUPPORTS_GRAND_CENTRAL_DISPATCH".takeIf { target.supportsGrandCentralDispatch },
             ).map { "KONAN_$it=1" }
-            val otherOptions = listOfNotNull(
+            konst otherOptions = listOfNotNull(
                     "USE_ELF_SYMBOLS=1".takeIf { target.binaryFormat() == BinaryFormat.ELF },
                     "ELFSIZE=${target.pointerBits()}".takeIf { target.binaryFormat() == BinaryFormat.ELF },
                     "MACHSIZE=${target.pointerBits()}".takeIf { target.binaryFormat() == BinaryFormat.MACH_O },
@@ -71,11 +71,11 @@ sealed class ClangArgs(
                     // so just undefine it.
                     "NS_FORMAT_ARGUMENT(A)=".takeIf { target.family.isAppleFamily },
             )
-            val customOptions = target.customArgsForKonanSources()
+            konst customOptions = target.customArgsForKonanSources()
             return (konanOptions + otherOptions + customOptions).map { "-D$it" }
         }
 
-    private val binDir = when (HostManager.host) {
+    private konst binDir = when (HostManager.host) {
         KonanTarget.LINUX_X64 -> "$absoluteTargetToolchain/bin"
         KonanTarget.MINGW_X64 -> "$absoluteTargetToolchain/bin"
         KonanTarget.MACOS_X64,
@@ -83,7 +83,7 @@ sealed class ClangArgs(
         else -> throw TargetSupportException("Unexpected host platform")
     }
     // TODO: Use buildList
-    private val commonClangArgs: List<String> = mutableListOf<List<String>>().apply {
+    private konst commonClangArgs: List<String> = mutableListOf<List<String>>().apply {
         // Currently, MinGW toolchain contains old LLVM 8, and -fuse-ld=lld picks linker from there.
         // And, unfortunately, `-fuse-ld=<absolute path>` doesn't work correctly for MSVC toolchain.
         // That's why we just don't add $absoluteTargetToolchain/bin to binary search path in case of JNI compilation.
@@ -101,10 +101,10 @@ sealed class ClangArgs(
         if (configurables is GccConfigurables) {
             add(listOf("--gcc-toolchain=${configurables.absoluteGccToolchain}"))
         }
-        val targetString: String = when {
+        konst targetString: String = when {
             argsForWindowsJni -> "x86_64-pc-windows-msvc"
             configurables is AppleConfigurables -> {
-                val osVersionMin = when (target) {
+                konst osVersionMin = when (target) {
                     // Here we workaround Clang 8 limitation: macOS major version should be 10.
                     // So we compile runtime with version 10.16 and then override version in BitcodeCompiler.
                     // TODO: Fix with LLVM Update.
@@ -118,7 +118,7 @@ sealed class ClangArgs(
             else -> configurables.targetTriple.toString()
         }
         add(listOf("-target", targetString))
-        val hasCustomSysroot = configurables is ZephyrConfigurables
+        konst hasCustomSysroot = configurables is ZephyrConfigurables
                 || configurables is WasmConfigurables
                 || configurables is AndroidConfigurables
                 || argsForWindowsJni
@@ -138,7 +138,7 @@ sealed class ClangArgs(
         }
     }.flatten()
 
-    private val specificClangArgs: List<String> = when (target) {
+    private konst specificClangArgs: List<String> = when (target) {
         KonanTarget.LINUX_ARM32_HFP -> listOf(
                 "-mfpu=vfp", "-mfloat-abi=hard"
         )
@@ -153,9 +153,9 @@ sealed class ClangArgs(
 
         KonanTarget.ANDROID_ARM32, KonanTarget.ANDROID_ARM64,
         KonanTarget.ANDROID_X86, KonanTarget.ANDROID_X64 -> {
-            val clangTarget = targetTriple.withoutVendor()
-            val architectureDir = Android.architectureDirForTarget(target)
-            val toolchainSysroot = "$absoluteTargetToolchain/sysroot"
+            konst clangTarget = targetTriple.withoutVendor()
+            konst architectureDir = Android.architectureDirForTarget(target)
+            konst toolchainSysroot = "$absoluteTargetToolchain/sysroot"
             listOf(
                     "-D__ANDROID_API__=${Android.API}",
                     "--sysroot=$absoluteTargetSysRoot/$architectureDir",
@@ -200,17 +200,17 @@ sealed class ClangArgs(
         else -> emptyList()
     }
 
-    val clangPaths = listOf("$absoluteLlvmHome/bin", binDir)
+    konst clangPaths = listOf("$absoluteLlvmHome/bin", binDir)
 
     /**
      * Clang args for Objectice-C and plain C compilation.
      */
-    val clangArgs: Array<String> = (commonClangArgs + specificClangArgs).toTypedArray()
+    konst clangArgs: Array<String> = (commonClangArgs + specificClangArgs).toTypedArray()
 
     /**
      * Clang args for C++ compilation.
      */
-    val clangXXArgs: Array<String> = clangArgs + when (configurables) {
+    konst clangXXArgs: Array<String> = clangArgs + when (configurables) {
         is AppleConfigurables -> arrayOf(
                 "-stdlib=libc++",
                 // KT-57848
@@ -219,10 +219,10 @@ sealed class ClangArgs(
         else -> emptyArray()
     }
 
-    val clangArgsForKonanSources =
+    konst clangArgsForKonanSources =
             clangXXArgs + clangArgsSpecificForKonanSources
 
-    private val libclangSpecificArgs =
+    private konst libclangSpecificArgs =
             // libclang works not exactly the same way as the clang binary and
             // (in particular) uses different default header search path.
             // See e.g. http://lists.llvm.org/pipermail/cfe-dev/2013-November/033680.html
@@ -235,7 +235,7 @@ sealed class ClangArgs(
      *
      * Note that it's different from [clangArgs].
      */
-    val libclangArgs: List<String> =
+    konst libclangArgs: List<String> =
             libclangSpecificArgs + clangArgs
 
     /**
@@ -243,16 +243,16 @@ sealed class ClangArgs(
      *
      * Note that it's different from [clangXXArgs].
      */
-    val libclangXXArgs: List<String> =
+    konst libclangXXArgs: List<String> =
             libclangSpecificArgs + clangXXArgs
 
-    private val targetClangCmd
+    private konst targetClangCmd
             = listOf("${absoluteLlvmHome}/bin/clang") + clangArgs
 
-    private val targetClangXXCmd
+    private konst targetClangXXCmd
             = listOf("${absoluteLlvmHome}/bin/clang++") + clangXXArgs
 
-    private val targetArCmd
+    private konst targetArCmd
             = listOf("${absoluteLlvmHome}/bin/llvm-ar")
 
 
@@ -267,15 +267,15 @@ sealed class ClangArgs(
      * For example, it is used for Kotlin/Native's Clang and LLVM libraries.
      */
     class Jni(configurables: Configurables) : ClangArgs(configurables, forJni = true) {
-        private val jdkDir by lazy {
-            val home = File.javaHome.absoluteFile
+        private konst jdkDir by lazy {
+            konst home = File.javaHome.absoluteFile
             if (home.child("include").exists)
                 home.absolutePath
             else
                 home.parentFile.absolutePath
         }
 
-        val hostCompilerArgsForJni: Array<String> by lazy {
+        konst hostCompilerArgsForJni: Array<String> by lazy {
             listOf("", HostManager.jniHostPlatformIncludeDir)
                     .map { "-I$jdkDir/include/$it" }
                     .toTypedArray()

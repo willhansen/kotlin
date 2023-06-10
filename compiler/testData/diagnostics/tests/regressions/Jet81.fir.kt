@@ -2,27 +2,27 @@
 // JET-81 Assertion fails when processing self-referring anonymous objects
 
 class Test {
-  private val y = object {
-    val a = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM, UNINITIALIZED_VARIABLE!>y<!>;
+  private konst y = object {
+    konst a = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM, UNINITIALIZED_VARIABLE!>y<!>;
   }
 
-  val z = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>y.a<!>;
+  konst z = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>y.a<!>;
 
 }
 
 object A {
-  val x = A
+  konst x = A
 }
 
 class Test2 {
-  private val a = object {
+  private konst a = object {
     init {
       <!UNINITIALIZED_VARIABLE!>b<!> + 1
     }
-    val x = <!UNINITIALIZED_VARIABLE!>b<!>
-    val y = 1
+    konst x = <!UNINITIALIZED_VARIABLE!>b<!>
+    konst y = 1
   }
 
-  val b = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>a<!>.<!UNRESOLVED_REFERENCE!>x<!>
-  val c = a.y
+  konst b = <!TYPECHECKER_HAS_RUN_INTO_RECURSIVE_PROBLEM!>a<!>.<!UNRESOLVED_REFERENCE!>x<!>
+  konst c = a.y
 }

@@ -19,7 +19,7 @@ abstract class AbstractSymbolLightClassesStructureTest(
 ) : AbstractSymbolLightClassesStructureTestBase(configurator, testPrefix, stopIfCompilationErrorDirectivePresent) {
 
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val result = prettyPrint {
+        konst result = prettyPrint {
             for (ktFile in ktFiles) {
                 if (ktFiles.size > 1) {
                     appendLine("${ktFile.name}:")

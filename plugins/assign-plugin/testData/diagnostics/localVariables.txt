@@ -1,7 +1,7 @@
 package
 
-public fun `should not work with local val for different type`(): kotlin.Unit
-public fun `should not work with local val for same type`(): kotlin.Unit
+public fun `should not work with local konst for different type`(): kotlin.Unit
+public fun `should not work with local konst for same type`(): kotlin.Unit
 public fun `should not work with local var for different type`(): kotlin.Unit
 public fun `should not work with method parameters`(): kotlin.Unit
 public fun `should work with local var for same type`(): kotlin.Unit

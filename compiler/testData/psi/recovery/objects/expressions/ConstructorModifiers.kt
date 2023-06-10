@@ -1,9 +1,9 @@
-val foo = object private () {}
+konst foo = object private () {}
 
-val foo = object private () : Bar {
+konst foo = object private () : Bar {
 
 }
 
-val foo = object @[foo] private @[bar()] () {}
+konst foo = object @[foo] private @[bar()] () {}
 
-val foo = object private ()
+konst foo = object private ()

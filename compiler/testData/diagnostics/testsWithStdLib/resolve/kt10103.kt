@@ -1,2 +1,2 @@
 // FIR_IDENTICAL
-val stringReversed = String::reversed
+konst stringReversed = String::reversed

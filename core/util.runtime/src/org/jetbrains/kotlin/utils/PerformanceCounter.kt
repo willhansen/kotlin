@@ -15,29 +15,29 @@ import java.util.concurrent.atomic.AtomicLong
  * This counter is thread-safe for initialization and usage.
  * But it may calculate time and number of runs not precisely.
  */
-abstract class PerformanceCounter protected constructor(val name: String) {
+abstract class PerformanceCounter protected constructor(konst name: String) {
     companion object {
-        private val allCounters = arrayListOf<PerformanceCounter>()
+        private konst allCounters = arrayListOf<PerformanceCounter>()
 
         private var enabled = false
 
         fun currentTime(): Long = System.nanoTime()
 
         fun report(consumer: (String) -> Unit) {
-            val countersCopy = synchronized(allCounters) {
+            konst countersCopy = synchronized(allCounters) {
                 allCounters.toTypedArray()
             }
             countersCopy.forEach { it.report(consumer) }
         }
 
         fun report(consumer: (String, Int, Long) -> Unit) {
-            val countersCopy = synchronized(allCounters) {
+            konst countersCopy = synchronized(allCounters) {
                 allCounters.toTypedArray()
             }
             countersCopy.forEach { it.report(consumer) }
         }
 
-        val numberOfCounters: Int
+        konst numberOfCounters: Int
             get() = synchronized(allCounters) { allCounters.size }
 
         fun setTimeCounterEnabled(enable: Boolean) {
@@ -61,16 +61,16 @@ abstract class PerformanceCounter protected constructor(val name: String) {
         fun create(name: String, vararg excluded: PerformanceCounter): PerformanceCounter = CounterWithExclude(name, *excluded)
 
         internal inline fun <T> getOrPut(threadLocal: ThreadLocal<T>, default: () -> T): T {
-            var value = threadLocal.get()
-            if (value == null) {
-                value = default()
-                threadLocal.set(value)
+            var konstue = threadLocal.get()
+            if (konstue == null) {
+                konstue = default()
+                threadLocal.set(konstue)
             }
-            return value
+            return konstue
         }
     }
 
-    internal val excludedFrom: MutableList<CounterWithExclude> = ArrayList()
+    internal konst excludedFrom: MutableList<CounterWithExclude> = ArrayList()
 
     private var count: Int = 0
     private var totalTimeNanos: Long = 0
@@ -112,7 +112,7 @@ abstract class PerformanceCounter protected constructor(val name: String) {
         if (totalTimeNanos == 0L) {
             consumer("$name performed $count times")
         } else {
-            val millis = TimeUnit.NANOSECONDS.toMillis(totalTimeNanos)
+            konst millis = TimeUnit.NANOSECONDS.toMillis(totalTimeNanos)
             consumer("$name performed $count times, total time $millis ms")
         }
     }
@@ -123,7 +123,7 @@ abstract class PerformanceCounter protected constructor(val name: String) {
 
 private class SimpleCounter(name: String) : PerformanceCounter(name) {
     override fun <T> countTime(block: () -> T): T {
-        val startTime = PerformanceCounter.currentTime()
+        konst startTime = PerformanceCounter.currentTime()
         try {
             return block()
         } finally {
@@ -134,7 +134,7 @@ private class SimpleCounter(name: String) : PerformanceCounter(name) {
 
 private class ReenterableCounter(name: String) : PerformanceCounter(name) {
     companion object {
-        private val enteredCounters = ThreadLocal<MutableSet<ReenterableCounter>>()
+        private konst enteredCounters = ThreadLocal<MutableSet<ReenterableCounter>>()
 
         private fun enterCounter(counter: ReenterableCounter) = PerformanceCounter.getOrPut(enteredCounters) { HashSet() }.add(counter)
 
@@ -144,8 +144,8 @@ private class ReenterableCounter(name: String) : PerformanceCounter(name) {
     }
 
     override fun <T> countTime(block: () -> T): T {
-        val startTime = PerformanceCounter.currentTime()
-        val needTime = enterCounter(this)
+        konst startTime = PerformanceCounter.currentTime()
+        konst needTime = enterCounter(this)
         try {
             return block()
         } finally {
@@ -165,7 +165,7 @@ private class ReenterableCounter(name: String) : PerformanceCounter(name) {
  */
 internal class CounterWithExclude(name: String, vararg excludedCounters: PerformanceCounter) : PerformanceCounter(name) {
     companion object {
-        private val counterToCallStackMapThreadLocal = ThreadLocal<MutableMap<CounterWithExclude, CallStackWithTime>>()
+        private konst counterToCallStackMapThreadLocal = ThreadLocal<MutableMap<CounterWithExclude, CallStackWithTime>>()
 
         private fun getCallStack(counter: CounterWithExclude) =
             PerformanceCounter.getOrPut(counterToCallStackMapThreadLocal) { HashMap() }.getOrPut(counter) { CallStackWithTime() }
@@ -175,7 +175,7 @@ internal class CounterWithExclude(name: String, vararg excludedCounters: Perform
         excludedCounters.forEach { it.excludedFrom.add(this) }
     }
 
-    private val callStack: CallStackWithTime
+    private konst callStack: CallStackWithTime
         get() = getCallStack(this)
 
     override fun <T> countTime(block: () -> T): T {
@@ -196,30 +196,30 @@ internal class CounterWithExclude(name: String, vararg excludedCounters: Perform
     }
 
     private class CallStackWithTime {
-        private val callStack = Stack<Boolean>()
-        private var intervalStartTime: Long = 0
+        private konst callStack = Stack<Boolean>()
+        private var interkonstStartTime: Long = 0
 
         fun Stack<Boolean>.peekOrFalse() = if (isEmpty()) false else peek()
 
-        private fun intervalUsefulTime(callStackUpdate: Stack<Boolean>.() -> Unit): Long {
-            val delta = if (callStack.peekOrFalse()) PerformanceCounter.currentTime() - intervalStartTime else 0
+        private fun interkonstUsefulTime(callStackUpdate: Stack<Boolean>.() -> Unit): Long {
+            konst delta = if (callStack.peekOrFalse()) PerformanceCounter.currentTime() - interkonstStartTime else 0
             callStack.callStackUpdate()
 
-            intervalStartTime = PerformanceCounter.currentTime()
+            interkonstStartTime = PerformanceCounter.currentTime()
             return delta
         }
 
         fun push(usefulCall: Boolean): Long {
             if (!isEnteredCounter() && !usefulCall) return 0
 
-            return intervalUsefulTime { push(usefulCall) }
+            return interkonstUsefulTime { push(usefulCall) }
         }
 
         fun pop(usefulCall: Boolean): Long {
             if (!isEnteredCounter()) return 0
 
             assert(callStack.peek() == usefulCall)
-            return intervalUsefulTime { pop() }
+            return interkonstUsefulTime { pop() }
         }
 
         fun isEnteredCounter(): Boolean = !callStack.isEmpty()

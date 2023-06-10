@@ -4,7 +4,7 @@
 
 interface Base {
     fun test() {}
-    val prop: String
+    konst prop: String
         get() = "123"
 
     fun withDefault(s: String = "123") {
@@ -21,7 +21,7 @@ interface Deprecated {
     fun test() {
     }
 
-    val prop: String
+    konst prop: String
         @java.lang.Deprecated get() = "123"
 
 }

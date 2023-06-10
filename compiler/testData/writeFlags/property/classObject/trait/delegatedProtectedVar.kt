@@ -5,7 +5,7 @@ class TestDelegate() {
         return 10
     }
 
-    operator open fun setValue(thisRef: Any?, desc: KProperty<*>, svalue : Int) {
+    operator open fun setValue(thisRef: Any?, desc: KProperty<*>, skonstue : Int) {
 
     }
 }

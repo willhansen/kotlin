@@ -4,7 +4,7 @@
 // IGNORE_BACKEND: JS_IR, JS
 // IGNORE_BACKEND: JS_IR_ES6
 
-class A(val value: String)
+class A(konst konstue: String)
 
 class Fun : (A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A) -> String {
     override fun invoke(
@@ -14,12 +14,12 @@ class Fun : (A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A, A
         p30: A, p31: A, p32: A, p33: A, p34: A, p35: A, p36: A, p37: A, p38: A, p39: A,
         p40: A, p41: A, p42: A
     ): String {
-        return p21.value + p32.value
+        return p21.konstue + p32.konstue
     }
 }
 
 fun box(): String {
-    val a = A("")
-    val f = Fun()
+    konst a = A("")
+    konst f = Fun()
     return f(a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, a, A("O"), a, a, a, a, a, a, a, a, a, a, A("K"), a, a, a, a, a, a, a, a, a, a)
 }

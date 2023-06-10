@@ -12,7 +12,7 @@ class Controller<T> {
 
 fun <T, R> generate(g: suspend Controller<T>.() -> R): Pair<T, R> = TODO()
 
-val test1 = generate {
+konst test1 = generate {
     yield("")
     3
 }

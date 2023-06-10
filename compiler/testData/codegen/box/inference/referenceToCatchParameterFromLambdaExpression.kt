@@ -8,6 +8,6 @@ fun test(): () -> Throwable {
 }
 
 fun box(): String {
-    val exception = test()()
+    konst exception = test()()
     return if (exception is NotImplementedError) "OK" else "fail: $exception"
 }

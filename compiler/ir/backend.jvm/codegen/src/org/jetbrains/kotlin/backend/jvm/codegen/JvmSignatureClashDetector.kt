@@ -20,10 +20,10 @@ import org.jetbrains.kotlin.resolve.jvm.diagnostics.RawSignature
 import org.jetbrains.kotlin.utils.SmartSet
 
 class JvmSignatureClashDetector(
-    private val classCodegen: ClassCodegen
+    private konst classCodegen: ClassCodegen
 ) {
-    private val methodsBySignature = LinkedHashMap<RawSignature, MutableSet<IrFunction>>()
-    private val fieldsBySignature = LinkedHashMap<RawSignature, MutableSet<IrField>>()
+    private konst methodsBySignature = LinkedHashMap<RawSignature, MutableSet<IrFunction>>()
+    private konst fieldsBySignature = LinkedHashMap<RawSignature, MutableSet<IrField>>()
 
     fun trackField(irField: IrField, rawSignature: RawSignature) {
         fieldsBySignature.getOrPut(rawSignature) { SmartSet.create() }.add(irField)
@@ -44,12 +44,12 @@ class JvmSignatureClashDetector(
     }
 
     private fun mapRawSignature(irFunction: IrFunction): RawSignature {
-        val jvmSignature = classCodegen.methodSignatureMapper.mapFakeOverrideSignatureSkipGeneric(irFunction)
+        konst jvmSignature = classCodegen.methodSignatureMapper.mapFakeOverrideSignatureSkipGeneric(irFunction)
         return RawSignature(jvmSignature.asmMethod.name, jvmSignature.asmMethod.descriptor, MemberKind.METHOD)
     }
 
     private fun getOverriddenFunctions(irFunction: IrSimpleFunction): Set<IrFunction> {
-        val result = LinkedHashSet<IrFunction>()
+        konst result = LinkedHashSet<IrFunction>()
         collectOverridesOf(irFunction, result)
         return result
     }
@@ -78,11 +78,11 @@ class JvmSignatureClashDetector(
         for ((rawSignature, methods) in methodsBySignature) {
             if (methods.size <= 1) continue
 
-            val fakeOverridesCount = methods.count { it.isFakeOverride }
-            val specialOverridesCount = methods.count { it.isSpecialOverride() }
-            val realMethodsCount = methods.size - fakeOverridesCount - specialOverridesCount
+            konst fakeOverridesCount = methods.count { it.isFakeOverride }
+            konst specialOverridesCount = methods.count { it.isSpecialOverride() }
+            konst realMethodsCount = methods.size - fakeOverridesCount - specialOverridesCount
 
-            val conflictingJvmDeclarationsData = getConflictingJvmDeclarationsData(rawSignature, methods)
+            konst conflictingJvmDeclarationsData = getConflictingJvmDeclarationsData(rawSignature, methods)
 
             when {
                 realMethodsCount == 0 && (fakeOverridesCount > 1 || specialOverridesCount > 1) ->
@@ -122,10 +122,10 @@ class JvmSignatureClashDetector(
 
     private fun reportPredefinedMethodSignatureConflicts() {
         for (predefinedSignature in PREDEFINED_SIGNATURES) {
-            val knownMethods = methodsBySignature[predefinedSignature] ?: continue
-            val methods = knownMethods.filter { !it.isFakeOverride && !it.isSpecialOverride() }
+            konst knownMethods = methodsBySignature[predefinedSignature] ?: continue
+            konst methods = knownMethods.filter { !it.isFakeOverride && !it.isSpecialOverride() }
             if (methods.isEmpty()) continue
-            val conflictingJvmDeclarationsData = ConflictingJvmDeclarationsData(
+            konst conflictingJvmDeclarationsData = ConflictingJvmDeclarationsData(
                 classCodegen.type.internalName, null, predefinedSignature, null, methods.map(IrFunction::toIrBasedDescriptor),
             )
             reportJvmSignatureClash(JvmBackendErrors.ACCIDENTAL_OVERRIDE, methods, conflictingJvmDeclarationsData)
@@ -135,7 +135,7 @@ class JvmSignatureClashDetector(
     private fun reportFieldSignatureConflicts() {
         for ((rawSignature, fields) in fieldsBySignature) {
             if (fields.size <= 1) continue
-            val conflictingJvmDeclarationsData = getConflictingJvmDeclarationsData(rawSignature, fields)
+            konst conflictingJvmDeclarationsData = getConflictingJvmDeclarationsData(rawSignature, fields)
             reportJvmSignatureClash(JvmBackendErrors.CONFLICTING_JVM_DECLARATIONS, fields, conflictingJvmDeclarationsData)
         }
     }
@@ -161,7 +161,7 @@ class JvmSignatureClashDetector(
         )
 
     companion object {
-        val SPECIAL_BRIDGES_AND_OVERRIDES = setOf(
+        konst SPECIAL_BRIDGES_AND_OVERRIDES = setOf(
             IrDeclarationOrigin.BRIDGE,
             IrDeclarationOrigin.BRIDGE_SPECIAL,
             IrDeclarationOrigin.IR_BUILTINS_STUB,
@@ -170,7 +170,7 @@ class JvmSignatureClashDetector(
             ANNOTATION_IMPLEMENTATION
         )
 
-        val PREDEFINED_SIGNATURES = listOf(
+        konst PREDEFINED_SIGNATURES = listOf(
             RawSignature("getClass", "()Ljava/lang/Class;", MemberKind.METHOD),
             RawSignature("notify", "()V", MemberKind.METHOD),
             RawSignature("notifyAll", "()V", MemberKind.METHOD),

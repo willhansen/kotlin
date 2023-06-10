@@ -6,14 +6,14 @@
 package kotlin.collections.builders
 
 import java.io.Externalizable
-import java.io.InvalidObjectException
+import java.io.InkonstidObjectException
 import java.io.NotSerializableException
 
 internal class MapBuilder<K, V> private constructor(
     // keys in insert order
     private var keysArray: Array<K>,
-    // values in insert order, allocated only when actually used, always null in pure HashSet
-    private var valuesArray: Array<V>?,
+    // konstues in insert order, allocated only when actually used, always null in pure HashSet
+    private var konstuesArray: Array<V>?,
     // hash of a key by its index, -1 if a key at that index was removed
     private var presenceArray: IntArray,
     // (index + 1) of a key by its hash, 0 if there is no key with that hash, -1 if collision chain continues to the hash-1
@@ -29,7 +29,7 @@ internal class MapBuilder<K, V> private constructor(
         private set
 
     private var keysView: MapBuilderKeys<K>? = null
-    private var valuesView: MapBuilderValues<V>? = null
+    private var konstuesView: MapBuilderValues<V>? = null
     private var entriesView: MapBuilderEntries<K, V>? = null
 
     internal var isReadOnly: Boolean = false
@@ -62,24 +62,24 @@ internal class MapBuilder<K, V> private constructor(
 
     override fun isEmpty(): Boolean = size == 0
     override fun containsKey(key: K): Boolean = findKey(key) >= 0
-    override fun containsValue(value: V): Boolean = findValue(value) >= 0
+    override fun containsValue(konstue: V): Boolean = findValue(konstue) >= 0
 
     override operator fun get(key: K): V? {
-        val index = findKey(key)
+        konst index = findKey(key)
         if (index < 0) return null
-        return valuesArray!![index]
+        return konstuesArray!![index]
     }
 
-    override fun put(key: K, value: V): V? {
+    override fun put(key: K, konstue: V): V? {
         checkIsMutable()
-        val index = addKey(key)
-        val valuesArray = allocateValuesArray()
+        konst index = addKey(key)
+        konst konstuesArray = allocateValuesArray()
         if (index < 0) {
-            val oldValue = valuesArray[-index - 1]
-            valuesArray[-index - 1] = value
+            konst oldValue = konstuesArray[-index - 1]
+            konstuesArray[-index - 1] = konstue
             return oldValue
         } else {
-            valuesArray[index] = value
+            konstuesArray[index] = konstue
             return null
         }
     }
@@ -90,11 +90,11 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     override fun remove(key: K): V? {
-        val index = removeKey(key)  // mutability gets checked here
+        konst index = removeKey(key)  // mutability gets checked here
         if (index < 0) return null
-        val valuesArray = valuesArray!!
-        val oldValue = valuesArray[index]
-        valuesArray.resetAt(index)
+        konst konstuesArray = konstuesArray!!
+        konst oldValue = konstuesArray[index]
+        konstuesArray.resetAt(index)
         return oldValue
     }
 
@@ -102,40 +102,40 @@ internal class MapBuilder<K, V> private constructor(
         checkIsMutable()
         // O(length) implementation for hashArray cleanup
         for (i in 0..length - 1) {
-            val hash = presenceArray[i]
+            konst hash = presenceArray[i]
             if (hash >= 0) {
                 hashArray[hash] = 0
                 presenceArray[i] = TOMBSTONE
             }
         }
         keysArray.resetRange(0, length)
-        valuesArray?.resetRange(0, length)
+        konstuesArray?.resetRange(0, length)
         size = 0
         length = 0
     }
 
-    override val keys: MutableSet<K> get() {
-        val cur = keysView
+    override konst keys: MutableSet<K> get() {
+        konst cur = keysView
         return if (cur == null) {
-            val new = MapBuilderKeys(this)
+            konst new = MapBuilderKeys(this)
             keysView = new
             new
         } else cur
     }
 
-    override val values: MutableCollection<V> get() {
-        val cur = valuesView
+    override konst konstues: MutableCollection<V> get() {
+        konst cur = konstuesView
         return if (cur == null) {
-            val new = MapBuilderValues(this)
-            valuesView = new
+            konst new = MapBuilderValues(this)
+            konstuesView = new
             new
         } else cur
     }
 
-    override val entries: MutableSet<MutableMap.MutableEntry<K, V>> get() {
-        val cur = entriesView
+    override konst entries: MutableSet<MutableMap.MutableEntry<K, V>> get() {
+        konst cur = entriesView
         return if (cur == null) {
-            val new = MapBuilderEntries(this)
+            konst new = MapBuilderEntries(this)
             entriesView = new
             return new
         } else cur
@@ -149,7 +149,7 @@ internal class MapBuilder<K, V> private constructor(
 
     override fun hashCode(): Int {
         var result = 0
-        val it = entriesIterator()
+        konst it = entriesIterator()
         while (it.hasNext()) {
             result += it.nextHashCode()
         }
@@ -157,10 +157,10 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     override fun toString(): String {
-        val sb = StringBuilder(2 + size * 3)
+        konst sb = StringBuilder(2 + size * 3)
         sb.append("{")
         var i = 0
-        val it = entriesIterator()
+        konst it = entriesIterator()
         while (it.hasNext()) {
             if (i > 0) sb.append(", ")
             it.nextAppendString(sb)
@@ -173,8 +173,8 @@ internal class MapBuilder<K, V> private constructor(
     // ---------------------------- private ----------------------------
 
     // Declared internal for testing
-    internal val capacity: Int get() = keysArray.size
-    private val hashSize: Int get() = hashArray.size
+    internal konst capacity: Int get() = keysArray.size
+    private konst hashSize: Int get() = hashArray.size
 
     internal fun checkIsMutable() {
         if (isReadOnly) throw UnsupportedOperationException()
@@ -189,8 +189,8 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     private fun shouldCompact(extraCapacity: Int): Boolean {
-        val spareCapacity = this.capacity - length
-        val gaps = length - size
+        konst spareCapacity = this.capacity - length
+        konst gaps = length - size
         return spareCapacity < extraCapacity                // there is no room for extraCapacity entries
                 && gaps + spareCapacity >= extraCapacity    // removing gaps prevents capacity expansion
                 && gaps >= this.capacity / 4                // at least 25% of current capacity is occupied by gaps
@@ -199,20 +199,20 @@ internal class MapBuilder<K, V> private constructor(
     private fun ensureCapacity(minCapacity: Int) {
         if (minCapacity < 0) throw OutOfMemoryError()    // overflow
         if (minCapacity > this.capacity) {
-            val newSize = AbstractList.newCapacity(this.capacity, minCapacity)
+            konst newSize = AbstractList.newCapacity(this.capacity, minCapacity)
             keysArray = keysArray.copyOfUninitializedElements(newSize)
-            valuesArray = valuesArray?.copyOfUninitializedElements(newSize)
+            konstuesArray = konstuesArray?.copyOfUninitializedElements(newSize)
             presenceArray = presenceArray.copyOf(newSize)
-            val newHashSize = computeHashSize(newSize)
+            konst newHashSize = computeHashSize(newSize)
             if (newHashSize > hashSize) rehash(newHashSize)
         }
     }
 
     private fun allocateValuesArray(): Array<V> {
-        val curValuesArray = valuesArray
+        konst curValuesArray = konstuesArray
         if (curValuesArray != null) return curValuesArray
-        val newValuesArray = arrayOfUninitializedElements<V>(capacity)
-        valuesArray = newValuesArray
+        konst newValuesArray = arrayOfUninitializedElements<V>(capacity)
+        konstuesArray = newValuesArray
         return newValuesArray
     }
 
@@ -221,17 +221,17 @@ internal class MapBuilder<K, V> private constructor(
     private fun compact() {
         var i = 0
         var j = 0
-        val valuesArray = valuesArray
+        konst konstuesArray = konstuesArray
         while (i < length) {
             if (presenceArray[i] >= 0) {
                 keysArray[j] = keysArray[i]
-                if (valuesArray != null) valuesArray[j] = valuesArray[i]
+                if (konstuesArray != null) konstuesArray[j] = konstuesArray[i]
                 j++
             }
             i++
         }
         keysArray.resetRange(j, length)
-        valuesArray?.resetRange(j, length)
+        konstuesArray?.resetRange(j, length)
         length = j
         //check(length == size) { "Internal invariant violated during compact: length=$length != size=$size" }
     }
@@ -257,7 +257,7 @@ internal class MapBuilder<K, V> private constructor(
         var hash = hash(keysArray[i])
         var probesLeft = maxProbeDistance
         while (true) {
-            val index = hashArray[hash]
+            konst index = hashArray[hash]
             if (index == 0) {
                 hashArray[hash] = i + 1
                 presenceArray[i] = hash
@@ -272,7 +272,7 @@ internal class MapBuilder<K, V> private constructor(
         var hash = hash(key)
         var probesLeft = maxProbeDistance
         while (true) {
-            val index = hashArray[hash]
+            konst index = hashArray[hash]
             if (index == 0) return TOMBSTONE
             if (index > 0 && keysArray[index - 1] == key) return index - 1
             if (--probesLeft < 0) return TOMBSTONE
@@ -280,10 +280,10 @@ internal class MapBuilder<K, V> private constructor(
         }
     }
 
-    private fun findValue(value: V): Int {
+    private fun findValue(konstue: V): Int {
         var i = length
         while (--i >= 0) {
-            if (presenceArray[i] >= 0 && valuesArray!![i] == value)
+            if (presenceArray[i] >= 0 && konstuesArray!![i] == konstue)
                 return i
         }
         return TOMBSTONE
@@ -294,16 +294,16 @@ internal class MapBuilder<K, V> private constructor(
         retry@ while (true) {
             var hash = hash(key)
             // put is allowed to grow maxProbeDistance with some limits (resize hash on reaching limits)
-            val tentativeMaxProbeDistance = (maxProbeDistance * 2).coerceAtMost(hashSize / 2)
+            konst tentativeMaxProbeDistance = (maxProbeDistance * 2).coerceAtMost(hashSize / 2)
             var probeDistance = 0
             while (true) {
-                val index = hashArray[hash]
+                konst index = hashArray[hash]
                 if (index <= 0) { // claim or reuse hash slot
                     if (length >= capacity) {
                         ensureExtraCapacity(1)
                         continue@retry
                     }
-                    val putIndex = length++
+                    konst putIndex = length++
                     keysArray[putIndex] = key
                     presenceArray[putIndex] = hash
                     hashArray[hash] = putIndex + 1
@@ -325,7 +325,7 @@ internal class MapBuilder<K, V> private constructor(
 
     internal fun removeKey(key: K): Int {
         checkIsMutable()
-        val index = findKey(key)
+        konst index = findKey(key)
         if (index < 0) return TOMBSTONE
         removeKeyAt(index)
         return index
@@ -350,7 +350,7 @@ internal class MapBuilder<K, V> private constructor(
                 hashArray[hole] = 0
                 return
             }
-            val index = hashArray[hash]
+            konst index = hashArray[hash]
             if (index == 0) {
                 // end of chain -- can release the hole, bad case will not happen
                 hashArray[hole] = 0
@@ -366,7 +366,7 @@ internal class MapBuilder<K, V> private constructor(
                 hole = hash
                 probeDistance = 0
             } else {
-                val otherHash = hash(keysArray[index - 1])
+                konst otherHash = hash(keysArray[index - 1])
                 // Bad case:
                 //   - <--- [hash] ------ [hole] ------ [otherHash] ---> +
                 //             \------------/
@@ -389,17 +389,17 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     internal fun containsEntry(entry: Map.Entry<K, V>): Boolean {
-        val index = findKey(entry.key)
+        konst index = findKey(entry.key)
         if (index < 0) return false
-        return valuesArray!![index] == entry.value
+        return konstuesArray!![index] == entry.konstue
     }
 
     private fun contentEquals(other: Map<*, *>): Boolean = size == other.size && containsAllEntries(other.entries)
 
     internal fun containsAllEntries(m: Collection<*>): Boolean {
-        val it = m.iterator()
+        konst it = m.iterator()
         while (it.hasNext()) {
-            val entry = it.next()
+            konst entry = it.next()
             try {
                 @Suppress("UNCHECKED_CAST") // todo: get rid of unchecked cast here somehow
                 if (entry == null || !containsEntry(entry as Map.Entry<K, V>))
@@ -412,15 +412,15 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     private fun putEntry(entry: Map.Entry<K, V>): Boolean {
-        val index = addKey(entry.key)
-        val valuesArray = allocateValuesArray()
+        konst index = addKey(entry.key)
+        konst konstuesArray = allocateValuesArray()
         if (index >= 0) {
-            valuesArray[index] = entry.value
+            konstuesArray[index] = entry.konstue
             return true
         }
-        val oldValue = valuesArray[-index - 1]
-        if (entry.value != oldValue) {
-            valuesArray[-index - 1] = entry.value
+        konst oldValue = konstuesArray[-index - 1]
+        if (entry.konstue != oldValue) {
+            konstuesArray[-index - 1] = entry.konstue
             return true
         }
         return false
@@ -429,7 +429,7 @@ internal class MapBuilder<K, V> private constructor(
     private fun putAllEntries(from: Collection<Map.Entry<K, V>>): Boolean {
         if (from.isEmpty()) return false
         ensureExtraCapacity(from.size)
-        val it = from.iterator()
+        konst it = from.iterator()
         var updated = false
         while (it.hasNext()) {
             if (putEntry(it.next()))
@@ -440,32 +440,32 @@ internal class MapBuilder<K, V> private constructor(
 
     internal fun removeEntry(entry: Map.Entry<K, V>): Boolean {
         checkIsMutable()
-        val index = findKey(entry.key)
+        konst index = findKey(entry.key)
         if (index < 0) return false
-        if (valuesArray!![index] != entry.value) return false
+        if (konstuesArray!![index] != entry.konstue) return false
         removeKeyAt(index)
         return true
     }
 
     internal fun removeValue(element: V): Boolean {
         checkIsMutable()
-        val index = findValue(element)
+        konst index = findValue(element)
         if (index < 0) return false
         removeKeyAt(index)
         return true
     }
 
     internal fun keysIterator() = KeysItr(this)
-    internal fun valuesIterator() = ValuesItr(this)
+    internal fun konstuesIterator() = ValuesItr(this)
     internal fun entriesIterator() = EntriesItr(this)
 
     internal companion object {
-        private const val MAGIC = -1640531527 // 2654435769L.toInt(), golden ratio
-        private const val INITIAL_CAPACITY = 8
-        private const val INITIAL_MAX_PROBE_DISTANCE = 2
-        private const val TOMBSTONE = -1
+        private const konst MAGIC = -1640531527 // 2654435769L.toInt(), golden ratio
+        private const konst INITIAL_CAPACITY = 8
+        private const konst INITIAL_MAX_PROBE_DISTANCE = 2
+        private const konst TOMBSTONE = -1
 
-        internal val Empty = MapBuilder<Nothing, Nothing>(0).also { it.isReadOnly = true }
+        internal konst Empty = MapBuilder<Nothing, Nothing>(0).also { it.isReadOnly = true }
 
         private fun computeHashSize(capacity: Int): Int = (capacity.coerceAtLeast(1) * 3).takeHighestOneBit()
 
@@ -473,7 +473,7 @@ internal class MapBuilder<K, V> private constructor(
     }
 
     internal open class Itr<K, V>(
-        internal val map: MapBuilder<K, V>
+        internal konst map: MapBuilder<K, V>
     ) {
         internal var index = 0
         internal var lastIndex: Int = -1
@@ -501,7 +501,7 @@ internal class MapBuilder<K, V> private constructor(
         override fun next(): K {
             if (index >= map.length) throw NoSuchElementException()
             lastIndex = index++
-            val result = map.keysArray[lastIndex]
+            konst result = map.keysArray[lastIndex]
             initNext()
             return result
         }
@@ -512,7 +512,7 @@ internal class MapBuilder<K, V> private constructor(
         override fun next(): V {
             if (index >= map.length) throw NoSuchElementException()
             lastIndex = index++
-            val result = map.valuesArray!![lastIndex]
+            konst result = map.konstuesArray!![lastIndex]
             initNext()
             return result
         }
@@ -523,7 +523,7 @@ internal class MapBuilder<K, V> private constructor(
         override fun next(): EntryRef<K, V> {
             if (index >= map.length) throw NoSuchElementException()
             lastIndex = index++
-            val result = EntryRef(map, lastIndex)
+            konst result = EntryRef(map, lastIndex)
             initNext()
             return result
         }
@@ -531,7 +531,7 @@ internal class MapBuilder<K, V> private constructor(
         internal fun nextHashCode(): Int {
             if (index >= map.length) throw NoSuchElementException()
             lastIndex = index++
-            val result = map.keysArray[lastIndex].hashCode() xor map.valuesArray!![lastIndex].hashCode()
+            konst result = map.keysArray[lastIndex].hashCode() xor map.konstuesArray!![lastIndex].hashCode()
             initNext()
             return result
         }
@@ -539,49 +539,49 @@ internal class MapBuilder<K, V> private constructor(
         fun nextAppendString(sb: StringBuilder) {
             if (index >= map.length) throw NoSuchElementException()
             lastIndex = index++
-            val key = map.keysArray[lastIndex]
+            konst key = map.keysArray[lastIndex]
             if (key == map) sb.append("(this Map)") else sb.append(key)
             sb.append('=')
-            val value = map.valuesArray!![lastIndex]
-            if (value == map) sb.append("(this Map)") else sb.append(value)
+            konst konstue = map.konstuesArray!![lastIndex]
+            if (konstue == map) sb.append("(this Map)") else sb.append(konstue)
             initNext()
         }
     }
 
     internal class EntryRef<K, V>(
-        private val map: MapBuilder<K, V>,
-        private val index: Int
+        private konst map: MapBuilder<K, V>,
+        private konst index: Int
     ) : MutableMap.MutableEntry<K, V> {
-        override val key: K
+        override konst key: K
             get() = map.keysArray[index]
 
-        override val value: V
-            get() = map.valuesArray!![index]
+        override konst konstue: V
+            get() = map.konstuesArray!![index]
 
         override fun setValue(newValue: V): V {
             map.checkIsMutable()
-            val valuesArray = map.allocateValuesArray()
-            val oldValue = valuesArray[index]
-            valuesArray[index] = newValue
+            konst konstuesArray = map.allocateValuesArray()
+            konst oldValue = konstuesArray[index]
+            konstuesArray[index] = newValue
             return oldValue
         }
 
         override fun equals(other: Any?): Boolean =
             other is Map.Entry<*, *> &&
                     other.key == key &&
-                    other.value == value
+                    other.konstue == konstue
 
-        override fun hashCode(): Int = key.hashCode() xor value.hashCode()
+        override fun hashCode(): Int = key.hashCode() xor konstue.hashCode()
 
-        override fun toString(): String = "$key=$value"
+        override fun toString(): String = "$key=$konstue"
     }
 }
 
 internal class MapBuilderKeys<E> internal constructor(
-    private val backing: MapBuilder<E, *>
+    private konst backing: MapBuilder<E, *>
 ) : MutableSet<E>, AbstractMutableSet<E>() {
 
-    override val size: Int get() = backing.size
+    override konst size: Int get() = backing.size
     override fun isEmpty(): Boolean = backing.isEmpty()
     override fun contains(element: E): Boolean = backing.containsKey(element)
     override fun clear() = backing.clear()
@@ -602,16 +602,16 @@ internal class MapBuilderKeys<E> internal constructor(
 }
 
 internal class MapBuilderValues<V> internal constructor(
-    val backing: MapBuilder<*, V>
+    konst backing: MapBuilder<*, V>
 ) : MutableCollection<V>, AbstractMutableCollection<V>() {
 
-    override val size: Int get() = backing.size
+    override konst size: Int get() = backing.size
     override fun isEmpty(): Boolean = backing.isEmpty()
     override fun contains(element: V): Boolean = backing.containsValue(element)
     override fun add(element: V): Boolean = throw UnsupportedOperationException()
     override fun addAll(elements: Collection<V>): Boolean = throw UnsupportedOperationException()
     override fun clear() = backing.clear()
-    override fun iterator(): MutableIterator<V> = backing.valuesIterator()
+    override fun iterator(): MutableIterator<V> = backing.konstuesIterator()
     override fun remove(element: V): Boolean = backing.removeValue(element)
 
     override fun removeAll(elements: Collection<V>): Boolean {
@@ -632,10 +632,10 @@ internal abstract class AbstractMapBuilderEntrySet<E : Map.Entry<K, V>, K, V> : 
 }
 
 internal class MapBuilderEntries<K, V> internal constructor(
-    val backing: MapBuilder<K, V>
+    konst backing: MapBuilder<K, V>
 ) : AbstractMapBuilderEntrySet<MutableMap.MutableEntry<K, V>, K, V>() {
 
-    override val size: Int get() = backing.size
+    override konst size: Int get() = backing.size
     override fun isEmpty(): Boolean = backing.isEmpty()
     override fun containsEntry(element: Map.Entry<K, V>): Boolean = backing.containsEntry(element)
     override fun clear() = backing.clear()
@@ -667,22 +667,22 @@ private class SerializedMap(
         output.writeInt(map.size)
         for (entry in map) {
             output.writeObject(entry.key)
-            output.writeObject(entry.value)
+            output.writeObject(entry.konstue)
         }
     }
 
     override fun readExternal(input: java.io.ObjectInput) {
-        val flags = input.readByte().toInt()
+        konst flags = input.readByte().toInt()
         if (flags != 0) {
-            throw InvalidObjectException("Unsupported flags value: $flags")
+            throw InkonstidObjectException("Unsupported flags konstue: $flags")
         }
-        val size = input.readInt()
-        if (size < 0) throw InvalidObjectException("Illegal size value: $size.")
+        konst size = input.readInt()
+        if (size < 0) throw InkonstidObjectException("Illegal size konstue: $size.")
         map = buildMap<Any?, Any?>(size) {
             repeat(size) {
-                val key = input.readObject()
-                val value = input.readObject()
-                put(key, value)
+                konst key = input.readObject()
+                konst konstue = input.readObject()
+                put(key, konstue)
             }
         }
     }
@@ -690,6 +690,6 @@ private class SerializedMap(
     private fun readResolve(): Any = map
 
     companion object {
-        private const val serialVersionUID: Long = 0L
+        private const konst serialVersionUID: Long = 0L
     }
 }

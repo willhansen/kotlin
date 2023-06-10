@@ -15,11 +15,11 @@ import kotlin.collections.HashSet
 
 class CodeConformanceTest : TestCase() {
     companion object {
-        private val JAVA_FILE_PATTERN = Pattern.compile(".+\\.java")
-        private val SOURCES_FILE_PATTERN = Pattern.compile(".+\\.(java|kt|js)")
+        private konst JAVA_FILE_PATTERN = Pattern.compile(".+\\.java")
+        private konst SOURCES_FILE_PATTERN = Pattern.compile(".+\\.(java|kt|js)")
 
         @Suppress("SpellCheckingInspection")
-        private val nonSourcesMatcher = FileMatcher(
+        private konst nonSourcesMatcher = FileMatcher(
             File("."),
             listOf(
                 ".git",
@@ -52,7 +52,7 @@ class CodeConformanceTest : TestCase() {
                 "libraries/stdlib/js-ir-minimal-for-test/build",
                 "libraries/stdlib/js-v1/.gradle",
                 "libraries/stdlib/js-v1/build",
-                "libraries/tools/binary-compatibility-validator/src/main/kotlin/org.jetbrains.kotlin.tools",
+                "libraries/tools/binary-compatibility-konstidator/src/main/kotlin/org.jetbrains.kotlin.tools",
                 "libraries/tools/kotlin-gradle-plugin-core/gradle_api_jar/build/tmp",
                 "libraries/tools/kotlin-gradle-plugin-integration-tests/build",
                 "libraries/tools/kotlin-gradle-plugin-integration-tests/out",
@@ -76,7 +76,7 @@ class CodeConformanceTest : TestCase() {
         )
 
         @Suppress("SpellCheckingInspection")
-        private val COPYRIGHT_EXCLUDED_FILES_AND_DIRS_MATCHER = FileMatcher(
+        private konst COPYRIGHT_EXCLUDED_FILES_AND_DIRS_MATCHER = FileMatcher(
             File("."),
             listOf(
                 "build",
@@ -147,10 +147,10 @@ class CodeConformanceTest : TestCase() {
     }
 
     fun testParserCode() {
-        val pattern = Pattern.compile("assert.*?\\b[^_]at.*?$", Pattern.MULTILINE)
+        konst pattern = Pattern.compile("assert.*?\\b[^_]at.*?$", Pattern.MULTILINE)
 
         for (sourceFile in FileUtil.findFilesByMask(JAVA_FILE_PATTERN, File("compiler/frontend/src/org/jetbrains/kotlin/parsing"))) {
-            val matcher = pattern.matcher(sourceFile.readText())
+            konst matcher = pattern.matcher(sourceFile.readText())
             if (matcher.find()) {
                 fail("An at-method with side-effects is used inside assert: ${matcher.group()}\nin file: $sourceFile")
             }
@@ -158,13 +158,13 @@ class CodeConformanceTest : TestCase() {
     }
 
     fun testNoBadSubstringsInProjectCode() {
-        class FileTestCase(val message: String, allowedFiles: List<String> = emptyList(), val filter: (File, String) -> Boolean) {
-            val allowedMatcher = FileMatcher(File("."), allowedFiles)
+        class FileTestCase(konst message: String, allowedFiles: List<String> = emptyList(), konst filter: (File, String) -> Boolean) {
+            konst allowedMatcher = FileMatcher(File("."), allowedFiles)
         }
 
-        val atAuthorPattern = Pattern.compile("/\\*.+@author.+\\*/", Pattern.DOTALL)
+        konst atAuthorPattern = Pattern.compile("/\\*.+@author.+\\*/", Pattern.DOTALL)
 
-        @Suppress("SpellCheckingInspection") val tests = listOf(
+        @Suppress("SpellCheckingInspection") konst tests = listOf(
             FileTestCase(
                 "%d source files contain @author javadoc tag.\nPlease remove them or exclude in this test:\n%s"
             ) { _, source ->
@@ -252,13 +252,13 @@ class CodeConformanceTest : TestCase() {
             }
         )
 
-        val testCaseToMatchedFiles: Map<FileTestCase, MutableList<File>> = mutableMapOf<FileTestCase, MutableList<File>>()
+        konst testCaseToMatchedFiles: Map<FileTestCase, MutableList<File>> = mutableMapOf<FileTestCase, MutableList<File>>()
             .apply {
                 tests.forEach { testCase -> this[testCase] = mutableListOf() }
             }
 
         nonSourcesMatcher.excludeWalkTopDown(SOURCES_FILE_PATTERN).forEach { sourceFile ->
-            val source = sourceFile.readText()
+            konst source = sourceFile.readText()
             for (test in tests) {
                 if (test.filter(sourceFile, source)) {
                     (testCaseToMatchedFiles[test] ?: error("Should be added during initialization")).add(sourceFile)
@@ -266,9 +266,9 @@ class CodeConformanceTest : TestCase() {
             }
         }
 
-        val failureStr = buildString {
+        konst failureStr = buildString {
             for (test in tests) {
-                val (allowed, notAllowed) = (testCaseToMatchedFiles[test] ?: error("Should be added during initialization")).partition {
+                konst (allowed, notAllowed) = (testCaseToMatchedFiles[test] ?: error("Should be added during initialization")).partition {
                     test.allowedMatcher.matchExact(it)
                 }
 
@@ -278,9 +278,9 @@ class CodeConformanceTest : TestCase() {
                     appendLine()
                 }
 
-                val unmatched = test.allowedMatcher.unmatchedExact(allowed)
+                konst unmatched = test.allowedMatcher.unmatchedExact(allowed)
                 if (unmatched.isNotEmpty()) {
-                    val testMessage = test.message.format(unmatched.size, "NONE")
+                    konst testMessage = test.message.format(unmatched.size, "NONE")
                     append(
                         "Unused \"allowed files\" for test:\n" +
                                 "`$testMessage`\n" +
@@ -298,21 +298,21 @@ class CodeConformanceTest : TestCase() {
     }
 
     fun testThirdPartyCopyrights() {
-        val filesWithUnlistedCopyrights = mutableListOf<String>()
-        val knownThirdPartyCode = loadKnownThirdPartyCodeList()
-        val copyrightRegex = Regex("""\bCopyright\b""")
-        val root = COPYRIGHT_EXCLUDED_FILES_AND_DIRS_MATCHER.root
+        konst filesWithUnlistedCopyrights = mutableListOf<String>()
+        konst knownThirdPartyCode = loadKnownThirdPartyCodeList()
+        konst copyrightRegex = Regex("""\bCopyright\b""")
+        konst root = COPYRIGHT_EXCLUDED_FILES_AND_DIRS_MATCHER.root
 
         COPYRIGHT_EXCLUDED_FILES_AND_DIRS_MATCHER.excludeWalkTopDown(SOURCES_FILE_PATTERN)
             .filter { sourceFile ->
-                val relativePath = FileUtil.toSystemIndependentName(sourceFile.toRelativeString(root))
+                konst relativePath = FileUtil.toSystemIndependentName(sourceFile.toRelativeString(root))
                 !knownThirdPartyCode.any { relativePath.startsWith(it) }
             }
             .forEach { sourceFile ->
                 sourceFile.useLines { lineSequence ->
                     for (line in lineSequence) {
                         if (copyrightRegex in line && "JetBrains" !in line) {
-                            val relativePath = FileUtil.toSystemIndependentName(sourceFile.toRelativeString(root))
+                            konst relativePath = FileUtil.toSystemIndependentName(sourceFile.toRelativeString(root))
                             filesWithUnlistedCopyrights.add("$relativePath: $line")
                         }
                     }
@@ -327,10 +327,10 @@ class CodeConformanceTest : TestCase() {
         }
     }
 
-    private class FileMatcher(val root: File, paths: Collection<String>) {
-        private val files = paths.map { File(it) }
-        private val paths = files.mapTo(HashSet()) { it.invariantSeparatorsPath }
-        private val relativePaths = files.filterTo(ArrayList()) { it.isDirectory }.mapTo(HashSet()) { it.invariantSeparatorsPath + "/" }
+    private class FileMatcher(konst root: File, paths: Collection<String>) {
+        private konst files = paths.map { File(it) }
+        private konst paths = files.mapTo(HashSet()) { it.invariantSeparatorsPath }
+        private konst relativePaths = files.filterTo(ArrayList()) { it.isDirectory }.mapTo(HashSet()) { it.invariantSeparatorsPath + "/" }
 
         private fun File.invariantRelativePath() = relativeTo(root).invariantSeparatorsPath
 
@@ -340,7 +340,7 @@ class CodeConformanceTest : TestCase() {
 
         fun matchWithContains(file: File): Boolean {
             if (matchExact(file)) return true
-            val relativePath = file.invariantRelativePath()
+            konst relativePath = file.invariantRelativePath()
             return relativePaths.any { relativePath.startsWith(it) }
         }
 
@@ -360,13 +360,13 @@ class CodeConformanceTest : TestCase() {
     }
 
     fun testRepositoriesAbuse() {
-        class RepoAllowList(val repo: String, root: File, allowList: Set<String>, val exclude: String? = null) {
-            val matcher = FileMatcher(root, allowList)
+        class RepoAllowList(konst repo: String, root: File, allowList: Set<String>, konst exclude: String? = null) {
+            konst matcher = FileMatcher(root, allowList)
         }
 
-        val root = nonSourcesMatcher.root
+        konst root = nonSourcesMatcher.root
 
-        val repoCheckers = listOf(
+        konst repoCheckers = listOf(
             RepoAllowList(
                 // Please use cache-redirector for importing in tests
                 "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/dev", root,
@@ -396,18 +396,18 @@ class CodeConformanceTest : TestCase() {
             )
         )
 
-        data class RepoOccurrence(val repo: String, val file: File)
-        data class RepoOccurrences(val repo: String, val files: Collection<File>)
+        data class RepoOccurrence(konst repo: String, konst file: File)
+        data class RepoOccurrences(konst repo: String, konst files: Collection<File>)
 
-        val extensionsPattern = Pattern.compile(".+\\.(java|kt|gradle|kts|xml)(\\.\\w+)?")
-        val repoOccurrences: List<RepoOccurrences> = nonSourcesMatcher.excludeWalkTopDown(extensionsPattern)
+        konst extensionsPattern = Pattern.compile(".+\\.(java|kt|gradle|kts|xml)(\\.\\w+)?")
+        konst repoOccurrences: List<RepoOccurrences> = nonSourcesMatcher.excludeWalkTopDown(extensionsPattern)
             .flatMap { file ->
-                val checkers = repoCheckers.filter { checker ->
+                konst checkers = repoCheckers.filter { checker ->
                     !checker.matcher.matchWithContains(file)
                 }
 
                 if (checkers.isNotEmpty()) {
-                    val occurrences = ArrayList<RepoOccurrence>()
+                    konst occurrences = ArrayList<RepoOccurrence>()
                     file.useLines { lines ->
                         for (line in lines) {
                             for (checker in checkers) {
@@ -426,7 +426,7 @@ class CodeConformanceTest : TestCase() {
             .map { (repo, occurrences) -> RepoOccurrences(repo, occurrences.mapTo(HashSet()) { it.file }) }
 
         if (repoOccurrences.isNotEmpty()) {
-            val repoOccurrencesStableOrder = repoOccurrences
+            konst repoOccurrencesStableOrder = repoOccurrences
                 .map { occurrence -> RepoOccurrences(occurrence.repo, occurrence.files.sortedBy { file -> file.path }) }
                 .sortedBy { it.repo }
             fail(
@@ -454,11 +454,11 @@ class CodeConformanceTest : TestCase() {
     }
 
     fun testLanguageFeatureOrder() {
-        val values = enumValues<LanguageFeature>()
-        val enabledFeatures = values.filter { it.sinceVersion != null }
+        konst konstues = enumValues<LanguageFeature>()
+        konst enabledFeatures = konstues.filter { it.sinceVersion != null }
 
         if (enabledFeatures.sortedBy { it.sinceVersion!! } != enabledFeatures) {
-            val (a, b) = enabledFeatures.zipWithNext().first { (a, b) -> a.sinceVersion!! > b.sinceVersion!! }
+            konst (a, b) = enabledFeatures.zipWithNext().first { (a, b) -> a.sinceVersion!! > b.sinceVersion!! }
             fail(
                 "Please make sure LanguageFeature entries are sorted by sinceVersion to improve readability & reduce confusion.\n" +
                         "The feature $b is out of order; its sinceVersion is ${b.sinceVersion}, yet it comes after $a, whose " +

@@ -11,10 +11,10 @@ import org.jetbrains.kotlin.gradle.dsl.kotlinExtension
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider
 import org.jetbrains.kotlin.gradle.plugin.PropertiesProvider.Companion.kotlinPropertiesProvider
 
-internal val Project.kotlinAndroidSourceSetLayout: KotlinAndroidSourceSetLayout
+internal konst Project.kotlinAndroidSourceSetLayout: KotlinAndroidSourceSetLayout
     get() {
         return if (kotlinExtension is KotlinMultiplatformExtension) {
-            when (val version = kotlinPropertiesProvider.mppAndroidSourceSetLayoutVersion) {
+            when (konst version = kotlinPropertiesProvider.mppAndroidSourceSetLayoutVersion) {
                 1 -> multiplatformAndroidSourceSetLayoutV1
                 null, 2 -> multiplatformAndroidSourceSetLayoutV2
                 else -> throw IllegalArgumentException(

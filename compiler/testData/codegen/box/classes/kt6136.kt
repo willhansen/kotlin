@@ -1,20 +1,20 @@
 interface Id<T> {
-    val id: T
+    konst id: T
 }
 
 data class Actor (
-        override val id: Int,
-        val firstName: String,
-        val lastName: String
+        override konst id: Int,
+        konst firstName: String,
+        konst lastName: String
 ) : Id<Int>
 
 fun box(): String {
-    val a1 = Actor(1, "Jeff", "Bridges")
+    konst a1 = Actor(1, "Jeff", "Bridges")
 
-    val a1c = a1.copy()
+    konst a1c = a1.copy()
     if (a1c.id != a1.id) return "Failed: a1.copy().id==${a1c.id}"
 
-    val a2 = Actor(2, "Jeff", "Bridges")
+    konst a2 = Actor(2, "Jeff", "Bridges")
     if (a2 == a1) return "Failed: a2==a1"
 
     // Assume that our hashCode is good enough for this test :)

@@ -10,8 +10,8 @@
 fun fn0() {}
 fun fn1(x: Any) {}
 
-val lambda0 = {} as () -> Unit
-val lambda1 = { x: Any -> } as (Any) -> Unit
+konst lambda0 = {} as () -> Unit
+konst lambda1 = { x: Any -> } as (Any) -> Unit
 
 fun Any.extFun() {}
 
@@ -24,20 +24,20 @@ class A {
 }
 
 fun box(): String {
-    val f0 = ::fn0 as Any
-    val f1 = ::fn1 as Any
+    konst f0 = ::fn0 as Any
+    konst f1 = ::fn1 as Any
 
-    val ef = Any::extFun as Any
-    val epg = Any::extProp.getter
-    val eps = Any::extProp.setter
+    konst ef = Any::extFun as Any
+    konst epg = Any::extProp.getter
+    konst eps = Any::extProp.setter
 
-    val afoo = A::foo
+    konst afoo = A::foo
 
     fun local0() {}
     fun local1(x: Any) {}
 
-    val localFun0 = ::local0 as Any
-    val localFun1 = ::local1 as Any
+    konst localFun0 = ::local0 as Any
+    konst localFun1 = ::local1 as Any
     
     assert(f0 is Function0<*>) { "Failed: f0 is Function0<*>" }
     assert(f1 is Function1<*, *>) { "Failed: f1 is Function1<*, *>" }

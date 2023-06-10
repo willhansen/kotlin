@@ -1,17 +1,17 @@
 fun test() {
-    val a = inlineFunInt { 1 }
-    val b = simpleFunInt { 1 }
-    val c = inlineFunVoid { val aa = 1 }
-    val d = simpleFunVoid { val aa = 1 }
+    konst a = inlineFunInt { 1 }
+    konst b = simpleFunInt { 1 }
+    konst c = inlineFunVoid { konst aa = 1 }
+    konst d = simpleFunVoid { konst aa = 1 }
 }
 
 inline fun inlineFunInt(f: () -> Int): Int {
-    val a = 1
+    konst a = 1
     return f()
 }
 
 inline fun inlineFunVoid(f: () -> Unit): Unit {
-    val a = 1
+    konst a = 1
     return f() // return replaced with nop to stop here *after* calling f
 }
 

@@ -4,10 +4,10 @@ import kotlin.math.*
 
 fun almostEqual(a: Float, b: Float): Boolean = abs(a - b) < 0.0000001F
 
-val umax = UInt.MAX_VALUE
-val ulmax = ULong.MAX_VALUE
-val imax = Int.MAX_VALUE
-val lmax = Long.MAX_VALUE
+konst umax = UInt.MAX_VALUE
+konst ulmax = ULong.MAX_VALUE
+konst imax = Int.MAX_VALUE
+konst lmax = Long.MAX_VALUE
 
 fun box(): String {
     if (1F != 1.toFloat()) return "fail 1"

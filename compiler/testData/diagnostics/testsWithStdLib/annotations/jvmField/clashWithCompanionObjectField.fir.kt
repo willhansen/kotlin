@@ -1,8 +1,8 @@
 class A {
 
-    @JvmField val clash = 1;
+    @JvmField konst clash = 1;
 
     companion object {
-        val clash = 1;
+        konst clash = 1;
     }
 }

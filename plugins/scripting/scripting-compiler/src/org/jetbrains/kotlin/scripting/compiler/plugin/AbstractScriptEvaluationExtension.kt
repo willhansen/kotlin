@@ -9,7 +9,7 @@ import org.jetbrains.kotlin.cli.common.CLIConfigurationKeys
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.jetbrains.kotlin.cli.common.arguments.CommonCompilerArguments
 import org.jetbrains.kotlin.cli.common.arguments.K2JVMCompilerArguments
-import org.jetbrains.kotlin.cli.common.extensions.ScriptEvaluationExtension
+import org.jetbrains.kotlin.cli.common.extensions.ScriptEkonstuationExtension
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageLocation
 import org.jetbrains.kotlin.cli.common.messages.CompilerMessageSeverity
 import org.jetbrains.kotlin.cli.common.messages.MessageCollector
@@ -26,7 +26,7 @@ import kotlin.script.experimental.host.toScriptSource
 import kotlin.script.experimental.impl.internalScriptingRunSuspend
 import kotlin.script.experimental.jvm.util.renderError
 
-abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
+abstract class AbstractScriptEkonstuationExtension : ScriptEkonstuationExtension {
 
     abstract fun setupScriptConfiguration(configuration: CompilerConfiguration)
 
@@ -35,18 +35,18 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
         configuration: CompilerConfiguration
     ): KotlinCoreEnvironment
 
-    abstract fun createScriptEvaluator(): ScriptEvaluator
+    abstract fun createScriptEkonstuator(): ScriptEkonstuator
     abstract fun createScriptCompiler(environment: KotlinCoreEnvironment): ScriptCompilerProxy
 
-    protected abstract fun ScriptEvaluationConfiguration.Builder.platformEvaluationConfiguration()
+    protected abstract fun ScriptEkonstuationConfiguration.Builder.platformEkonstuationConfiguration()
 
-    override fun eval(
+    override fun ekonst(
         arguments: CommonCompilerArguments,
         configuration: CompilerConfiguration,
         projectEnvironment: KotlinCoreEnvironment.ProjectEnvironment
     ): ExitCode {
-        val messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
-        val scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(projectEnvironment.project)
+        konst messageCollector = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
+        konst scriptDefinitionProvider = ScriptDefinitionProvider.getInstance(projectEnvironment.project)
         if (scriptDefinitionProvider == null) {
             messageCollector.report(CompilerMessageSeverity.ERROR, "Unable to process the script, scripting plugin is not configured")
             return ExitCode.COMPILATION_ERROR
@@ -54,18 +54,18 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
 
         setupScriptConfiguration(configuration)
 
-        val defaultScriptExtension =
+        konst defaultScriptExtension =
             (arguments as? K2JVMCompilerArguments)?.defaultScriptExtension?.let { if (it.startsWith('.')) it else ".$it" }
 
-        val script = when {
+        konst script = when {
             arguments is K2JVMCompilerArguments && arguments.expression != null -> {
                 StringScriptSource(arguments.expression!!, "script${defaultScriptExtension ?: ".kts"}")
             }
             arguments.script -> {
-                val scriptFile = File(arguments.freeArgs.first()).normalize()
+                konst scriptFile = File(arguments.freeArgs.first()).normalize()
 
-                fun invalidScript(error: String): ExitCode {
-                    val extensionHint =
+                fun inkonstidScript(error: String): ExitCode {
+                    konst extensionHint =
                         if (configuration.get(ScriptingConfigurationKeys.SCRIPT_DEFINITIONS)
                                 ?.let { it.size == 1 && it.first().isDefault } == true
                         ) " (.kts)"
@@ -77,9 +77,9 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
                     return ExitCode.COMPILATION_ERROR
                 }
 
-                if (!scriptFile.exists()) return invalidScript("Script file not found: $scriptFile")
+                if (!scriptFile.exists()) return inkonstidScript("Script file not found: $scriptFile")
 
-                if (scriptFile.isDirectory) return invalidScript("Script argument points to a directory: $scriptFile")
+                if (scriptFile.isDirectory) return inkonstidScript("Script argument points to a directory: $scriptFile")
 
                 var script = scriptFile.toScriptSource().takeIf {
                     scriptDefinitionProvider.isScript(it)
@@ -91,7 +91,7 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
                         scriptDefinitionProvider.isScript(it)
                     }
                 }
-                script ?: return invalidScript("Unrecognized script type: ${scriptFile.name}")
+                script ?: return inkonstidScript("Unrecognized script type: ${scriptFile.name}")
             }
             else -> {
                 messageCollector.report(
@@ -102,42 +102,42 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
             }
         }
 
-        val environment = createEnvironment(projectEnvironment, configuration)
+        konst environment = createEnvironment(projectEnvironment, configuration)
 
         if (messageCollector.hasErrors()) return ExitCode.COMPILATION_ERROR
 
-        val definition = scriptDefinitionProvider.findDefinition(script) ?: scriptDefinitionProvider.getDefaultDefinition()
+        konst definition = scriptDefinitionProvider.findDefinition(script) ?: scriptDefinitionProvider.getDefaultDefinition()
 
-        val scriptCompilationConfiguration = definition.compilationConfiguration
+        konst scriptCompilationConfiguration = definition.compilationConfiguration
 
-        val scriptArgs =
+        konst scriptArgs =
             if (arguments.script) arguments.freeArgs.subList(1, arguments.freeArgs.size)
             else arguments.freeArgs
 
-        val evaluationConfiguration = definition.evaluationConfiguration.with {
+        konst ekonstuationConfiguration = definition.ekonstuationConfiguration.with {
             constructorArgs(scriptArgs.toTypedArray())
-            platformEvaluationConfiguration()
+            platformEkonstuationConfiguration()
 
         }
-        return doEval(script, scriptCompilationConfiguration, evaluationConfiguration, environment, messageCollector)
+        return doEkonst(script, scriptCompilationConfiguration, ekonstuationConfiguration, environment, messageCollector)
     }
 
-    private fun doEval(
+    private fun doEkonst(
         script: SourceCode,
         scriptCompilationConfiguration: ScriptCompilationConfiguration,
-        evaluationConfiguration: ScriptEvaluationConfiguration,
+        ekonstuationConfiguration: ScriptEkonstuationConfiguration,
         environment: KotlinCoreEnvironment,
         messageCollector: MessageCollector
     ): ExitCode {
-        val scriptCompiler = createScriptCompiler(environment)
+        konst scriptCompiler = createScriptCompiler(environment)
 
         @Suppress("DEPRECATION_ERROR")
         return internalScriptingRunSuspend {
-            val compiledScript = scriptCompiler.compile(script, scriptCompilationConfiguration).valueOr {
-                val lines = if (it.reports.isEmpty()) null else script.text.lines()
+            konst compiledScript = scriptCompiler.compile(script, scriptCompilationConfiguration).konstueOr {
+                konst lines = if (it.reports.isEmpty()) null else script.text.lines()
                 for (report in it.reports) {
-                    val location = report.location
-                    val sourcePath = report.sourcePath
+                    konst location = report.location
+                    konst sourcePath = report.sourcePath
                     messageCollector.report(
                         report.severity.toCompilerMessageSeverity(),
                         report.render(withSeverity = false, withLocation = location == null || sourcePath == null),
@@ -153,20 +153,20 @@ abstract class AbstractScriptEvaluationExtension : ScriptEvaluationExtension {
                 return@internalScriptingRunSuspend ExitCode.COMPILATION_ERROR
             }
 
-            val evalResult = createScriptEvaluator().invoke(compiledScript, evaluationConfiguration).valueOr {
+            konst ekonstResult = createScriptEkonstuator().invoke(compiledScript, ekonstuationConfiguration).konstueOr {
                 for (report in it.reports) {
                     messageCollector.report(report.severity.toCompilerMessageSeverity(), report.render(withSeverity = false))
                 }
                 return@internalScriptingRunSuspend ExitCode.INTERNAL_ERROR
             }
 
-            when (evalResult.returnValue) {
+            when (ekonstResult.returnValue) {
                 is ResultValue.Value -> {
-                    println((evalResult.returnValue as ResultValue.Value).value)
+                    println((ekonstResult.returnValue as ResultValue.Value).konstue)
                     ExitCode.OK
                 }
                 is ResultValue.Error -> {
-                    val errorValue = evalResult.returnValue as ResultValue.Error
+                    konst errorValue = ekonstResult.returnValue as ResultValue.Error
                     errorValue.renderError(System.err)
                     ExitCode.SCRIPT_EXECUTION_ERROR
                 }
@@ -186,11 +186,11 @@ fun ScriptDiagnostic.Severity.toCompilerMessageSeverity(): CompilerMessageSeveri
     }
 
 open class ExplicitlyNamedFileScriptSource(
-    override val name: String, file: File, preloadedText: String? = null
+    override konst name: String, file: File, preloadedText: String? = null
 ) : FileScriptSource(file, preloadedText), Serializable {
 
     companion object {
         @JvmStatic
-        private val serialVersionUID = 0L
+        private konst serialVersionUID = 0L
     }
 }

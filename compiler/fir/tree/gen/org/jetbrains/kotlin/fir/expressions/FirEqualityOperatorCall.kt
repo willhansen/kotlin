@@ -16,11 +16,11 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 abstract class FirEqualityOperatorCall : FirExpression(), FirCall {
-    abstract override val source: KtSourceElement?
-    abstract override val typeRef: FirTypeRef
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val argumentList: FirArgumentList
-    abstract val operation: FirOperation
+    abstract override konst source: KtSourceElement?
+    abstract override konst typeRef: FirTypeRef
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst argumentList: FirArgumentList
+    abstract konst operation: FirOperation
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitEqualityOperatorCall(this, data)
 

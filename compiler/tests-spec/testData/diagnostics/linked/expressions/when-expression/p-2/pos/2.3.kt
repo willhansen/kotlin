@@ -6,14 +6,14 @@
  * SPEC VERSION: 0.1-100
  * MAIN LINK: expressions, when-expression -> paragraph 2 -> sentence 2
  * NUMBER: 3
- * DESCRIPTION: 'When' without bound value and with Nothing in condition (subtype of Boolean).
+ * DESCRIPTION: 'When' without bound konstue and with Nothing in condition (subtype of Boolean).
  * DISCUSSION
  * ISSUES: KT-25948
  * HELPERS: typesProvider
  */
 
 // TESTCASE NUMBER: 1
-fun case_1(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
+fun case_1(<!UNUSED_PARAMETER!>konstue_1<!>: TypesProvider) {
     when {
         return -> <!UNREACHABLE_CODE!>return<!>
         <!UNREACHABLE_CODE!>return == return -> return<!>
@@ -24,7 +24,7 @@ fun case_1(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 2
-fun case_2(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
+fun case_2(<!UNUSED_PARAMETER!>konstue_1<!>: TypesProvider) {
     when {
         throw Exception() -> <!UNREACHABLE_CODE!>return<!>
         <!UNREACHABLE_CODE!>(throw Exception()) == (throw Exception()) -> return<!>
@@ -35,7 +35,7 @@ fun case_2(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 3
-fun case_3(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
+fun case_3(<!UNUSED_PARAMETER!>konstue_1<!>: TypesProvider) {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -50,7 +50,7 @@ fun case_3(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider) {
 }
 
 // TESTCASE NUMBER: 4
-fun case_4(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider): String {
+fun case_4(<!UNUSED_PARAMETER!>konstue_1<!>: TypesProvider): String {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -65,19 +65,19 @@ fun case_4(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider): String {
 }
 
 // TESTCASE NUMBER: 6
-fun case_6(value_1: Nothing, <!UNUSED_PARAMETER!>value_2<!>: TypesProvider): String {
+fun case_6(konstue_1: Nothing, <!UNUSED_PARAMETER!>konstue_2<!>: TypesProvider): String {
     when {
-        value_1 -> <!UNREACHABLE_CODE!>return ""<!>
-        <!UNREACHABLE_CODE!>value_2.getNothing() -> return ""<!>
+        konstue_1 -> <!UNREACHABLE_CODE!>return ""<!>
+        <!UNREACHABLE_CODE!>konstue_2.getNothing() -> return ""<!>
         <!UNREACHABLE_CODE!>getNothing() -> return ""<!>
-        <!UNREACHABLE_CODE!>value_1 && (getNothing() == value_2.getNothing()) -> return ""<!>
+        <!UNREACHABLE_CODE!>konstue_1 && (getNothing() == konstue_2.getNothing()) -> return ""<!>
     }
 
     <!UNREACHABLE_CODE!>return ""<!>
 }
 
 // TESTCASE NUMBER: 5
-fun case_5(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider, <!UNUSED_PARAMETER!>value_2<!>: Nothing) {
+fun case_5(<!UNUSED_PARAMETER!>konstue_1<!>: TypesProvider, <!UNUSED_PARAMETER!>konstue_2<!>: Nothing) {
     loop1@ while (true) {
         loop2@ while (true) {
             loop3@ while (true) {
@@ -87,9 +87,9 @@ fun case_5(<!UNUSED_PARAMETER!>value_1<!>: TypesProvider, <!UNUSED_PARAMETER!>va
                     <!UNREACHABLE_CODE!>continue@loop1 != 10L && (return return) == continue@loop1 -> return<!>
                     <!UNREACHABLE_CODE!>return continue@loop1 -> return<!>
                     <!UNREACHABLE_CODE!>(throw break@loop1) && break@loop3 -> return<!>
-                    <!UNREACHABLE_CODE!>(throw getNothing()) && value_1.getNothing() -> return<!>
-                    <!UNREACHABLE_CODE!>return return return value_2 -> return<!>
-                    <!UNREACHABLE_CODE!>getNothing() != 10L && (return return) == value_2 -> return<!>
+                    <!UNREACHABLE_CODE!>(throw getNothing()) && konstue_1.getNothing() -> return<!>
+                    <!UNREACHABLE_CODE!>return return return konstue_2 -> return<!>
+                    <!UNREACHABLE_CODE!>getNothing() != 10L && (return return) == konstue_2 -> return<!>
                 }
             }
         }

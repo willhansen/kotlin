@@ -5,7 +5,7 @@ operator fun KotlinSourceSet.invoke(builder: SourceSetHierarchyBuilder.() -> Uni
     return this
 }
 
-class SourceSetHierarchyBuilder(private val node: KotlinSourceSet) {
+class SourceSetHierarchyBuilder(private konst node: KotlinSourceSet) {
     operator fun KotlinSourceSet.unaryMinus() = this.dependsOn(node)
 }
 
@@ -32,31 +32,31 @@ kotlin {
     @Suppress("DEPRECATION_ERROR")
     mingwX86("windowsX86")
 
-    val commonMain by sourceSets.getting
-    val commonTest by sourceSets.getting
-    val jvmMain by sourceSets.getting
-    val nativeMain by sourceSets.creating
-    val nativeTest by sourceSets.creating
-    val appleAndLinuxMain by sourceSets.creating
-    val appleAndLinuxTest by sourceSets.creating
-    val linuxMain by sourceSets.creating
-    val linuxTest by sourceSets.creating
-    val linuxX64Main by sourceSets.getting
-    val linuxX64Test by sourceSets.getting
-    val linuxArm64Main by sourceSets.getting
-    val linuxArm64Test by sourceSets.getting
-    val appleMain by sourceSets.creating
-    val appleTest by sourceSets.creating
-    val macosMain by sourceSets.getting
-    val macosTest by sourceSets.getting
-    val iosMain by sourceSets.getting
-    val iosTest by sourceSets.getting
-    val windowsMain by sourceSets.creating
-    val windowsTest by sourceSets.creating
-    val windowsX64Main by sourceSets.getting
-    val windowsX64Test by sourceSets.getting
-    val windowsX86Main by sourceSets.getting
-    val windowsX86Test by sourceSets.getting
+    konst commonMain by sourceSets.getting
+    konst commonTest by sourceSets.getting
+    konst jvmMain by sourceSets.getting
+    konst nativeMain by sourceSets.creating
+    konst nativeTest by sourceSets.creating
+    konst appleAndLinuxMain by sourceSets.creating
+    konst appleAndLinuxTest by sourceSets.creating
+    konst linuxMain by sourceSets.creating
+    konst linuxTest by sourceSets.creating
+    konst linuxX64Main by sourceSets.getting
+    konst linuxX64Test by sourceSets.getting
+    konst linuxArm64Main by sourceSets.getting
+    konst linuxArm64Test by sourceSets.getting
+    konst appleMain by sourceSets.creating
+    konst appleTest by sourceSets.creating
+    konst macosMain by sourceSets.getting
+    konst macosTest by sourceSets.getting
+    konst iosMain by sourceSets.getting
+    konst iosTest by sourceSets.getting
+    konst windowsMain by sourceSets.creating
+    konst windowsTest by sourceSets.creating
+    konst windowsX64Main by sourceSets.getting
+    konst windowsX64Test by sourceSets.getting
+    konst windowsX86Main by sourceSets.getting
+    konst windowsX86Test by sourceSets.getting
 
     commonMain {
         -jvmMain

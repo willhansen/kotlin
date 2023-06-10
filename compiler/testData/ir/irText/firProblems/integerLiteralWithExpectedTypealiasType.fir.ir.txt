@@ -8,13 +8,13 @@ FILE fqName:<root> fileName:/integerLiteralWithExpectedTypealiasType.kt
           BRANCH
             if: CALL 'public final fun EQEQ (arg0: kotlin.Any?, arg1: kotlin.Any?): kotlin.Boolean declared in kotlin.internal.ir' type=kotlin.Boolean origin=EQEQ
               arg0: GET_VAR 'l: kotlin.Long declared in <root>.foo' type=kotlin.Long origin=null
-              arg1: CONST Long type=kotlin.Long value=0
-            then: CONST String type=kotlin.String value="OK"
+              arg1: CONST Long type=kotlin.Long konstue=0
+            then: CONST String type=kotlin.String konstue="OK"
           BRANCH
-            if: CONST Boolean type=kotlin.Boolean value=true
-            then: CONST String type=kotlin.String value="fail"
+            if: CONST Boolean type=kotlin.Boolean konstue=true
+            then: CONST String type=kotlin.String konstue="fail"
   FUN name:box visibility:public modality:FINAL <> () returnType:kotlin.String
     BLOCK_BODY
       RETURN type=kotlin.Nothing from='public final fun box (): kotlin.String declared in <root>'
         CALL 'public final fun foo (l: kotlin.Long): kotlin.String declared in <root>' type=kotlin.String origin=null
-          l: CONST Long type=kotlin.Long value=0
+          l: CONST Long type=kotlin.Long konstue=0

@@ -1,4 +1,4 @@
-val a = 0
+konst a = 0
 
 fun main() {
     // Generates IFNE and GOTO

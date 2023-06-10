@@ -33,10 +33,10 @@ import java.util.*
  */
 abstract class GivenFunctionsMemberScope(
         storageManager: StorageManager,
-        protected val containingClass: ClassDescriptor
+        protected konst containingClass: ClassDescriptor
 ) : MemberScopeImpl() {
-    private val allDescriptors by storageManager.createLazyValue {
-        val fromCurrent = computeDeclaredFunctions()
+    private konst allDescriptors by storageManager.createLazyValue {
+        konst fromCurrent = computeDeclaredFunctions()
         fromCurrent + createFakeOverrides(fromCurrent)
     }
 
@@ -56,8 +56,8 @@ abstract class GivenFunctionsMemberScope(
     }
 
     private fun createFakeOverrides(functionsFromCurrent: List<FunctionDescriptor>): List<DeclarationDescriptor> {
-        val result = ArrayList<DeclarationDescriptor>(3)
-        val allSuperDescriptors = containingClass.typeConstructor.supertypes
+        konst result = ArrayList<DeclarationDescriptor>(3)
+        konst allSuperDescriptors = containingClass.typeConstructor.supertypes
                 .flatMap { it.memberScope.getContributedDescriptors() }
                 .filterIsInstance<CallableMemberDescriptor>()
         for ((name, group) in allSuperDescriptors.groupBy { it.name }) {

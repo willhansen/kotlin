@@ -2,7 +2,7 @@
 // WITH_STDLIB
 
 fun test(xs: List<String>): Map<String, String> {
-    val result = linkedMapOf<String, String>()
+    konst result = linkedMapOf<String, String>()
     for (x in xs) {
         result[x] = x.zap("OK") ?: break
     }

@@ -4,7 +4,7 @@
 import kotlin.reflect.KProperty
 
 class A {
-    val c: Int by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>Delegate()<!>
+    konst c: Int by <!DELEGATE_SPECIAL_FUNCTION_NONE_APPLICABLE!>Delegate()<!>
 }
 
 class Delegate {

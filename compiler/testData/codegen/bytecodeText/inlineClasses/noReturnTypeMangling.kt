@@ -1,14 +1,14 @@
 // !LANGUAGE: +InlineClasses -MangleClassMembersReturningInlineClasses
 
-inline class S(val x: String)
+inline class S(konst x: String)
 
 class Test {
     fun getO() = S("O")
-    val k = S("K")
+    konst k = S("K")
 }
 
 fun box(): String {
-    val t = Test()
+    konst t = Test()
     return t.getO().x + t.k.x
 }
 

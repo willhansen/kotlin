@@ -36,19 +36,19 @@ abstract class AbstractAnalysisApiSignatureContractsTest : AbstractAnalysisApiSi
         testServices: TestServices
     ) {
         analyseForTest(callableDeclaration) {
-            val typesToCheckOn = buildList {
+            konst typesToCheckOn = buildList {
                 add(builtinTypes.INT)
                 add(buildClassType(StandardClassIds.List) { argument(builtinTypes.LONG) })
             }
 
-            val symbol = callableDeclaration.getSymbolOfType<KtCallableSymbol>()
-            val typeParameters = buildList {
+            konst symbol = callableDeclaration.getSymbolOfType<KtCallableSymbol>()
+            konst typeParameters = buildList {
                 addAll(symbol.typeParameters)
                 (symbol.getContainingSymbol() as? KtClassOrObjectSymbol)?.let { addAll(it.typeParameters) }
             }
-            val combinations = buildList { combinations(typesToCheckOn, persistentListOf(), typeParameters.size) }
+            konst combinations = buildList { combinations(typesToCheckOn, persistentListOf(), typeParameters.size) }
             check(combinations.size == typesToCheckOn.size.toDouble().pow(typeParameters.size).toInt())
-            val allSubstitutors = buildList {
+            konst allSubstitutors = buildList {
                 combinations.forEach { typesPermutation ->
                     add(buildSubstitutor { substitutions(typeParameters.zip(typesPermutation).toMap()) })
                 }
@@ -66,16 +66,16 @@ abstract class AbstractAnalysisApiSignatureContractsTest : AbstractAnalysisApiSi
         testServices: TestServices
     ) {
         run {
-            val substitutedViaSignature = symbol.asSignature().substitute(substitutor)
-            val directlySubstituted = symbol.substitute(substitutor)
+            konst substitutedViaSignature = symbol.asSignature().substitute(substitutor)
+            konst directlySubstituted = symbol.substitute(substitutor)
             testServices.assertions.assertEquals(directlySubstituted, substitutedViaSignature)
             testServices.assertions.assertEquals(symbol, directlySubstituted.symbol)
             testServices.assertions.assertEquals(symbol, substitutedViaSignature.symbol)
         }
         when (symbol) {
             is KtFunctionLikeSymbol -> {
-                val substitutedViaSignature: KtFunctionLikeSignature<KtFunctionLikeSymbol> = symbol.asSignature().substitute(substitutor)
-                val directlySubstituted: KtFunctionLikeSignature<KtFunctionLikeSymbol> = symbol.substitute(substitutor)
+                konst substitutedViaSignature: KtFunctionLikeSignature<KtFunctionLikeSymbol> = symbol.asSignature().substitute(substitutor)
+                konst directlySubstituted: KtFunctionLikeSignature<KtFunctionLikeSymbol> = symbol.substitute(substitutor)
 
                 testServices.assertions.assertEquals(directlySubstituted, substitutedViaSignature)
                 testServices.assertions.assertEquals(symbol, directlySubstituted.symbol)
@@ -84,8 +84,8 @@ abstract class AbstractAnalysisApiSignatureContractsTest : AbstractAnalysisApiSi
                 checkSubstitutionResult(symbol, directlySubstituted, substitutor, testServices)
             }
             is KtVariableLikeSymbol -> {
-                val substitutedViaSignature: KtVariableLikeSignature<KtVariableLikeSymbol> = symbol.asSignature().substitute(substitutor)
-                val directlySubstituted: KtVariableLikeSignature<KtVariableLikeSymbol> = symbol.substitute(substitutor)
+                konst substitutedViaSignature: KtVariableLikeSignature<KtVariableLikeSymbol> = symbol.asSignature().substitute(substitutor)
+                konst directlySubstituted: KtVariableLikeSignature<KtVariableLikeSymbol> = symbol.substitute(substitutor)
 
                 testServices.assertions.assertEquals(directlySubstituted, substitutedViaSignature)
                 testServices.assertions.assertEquals(symbol, directlySubstituted.symbol)
@@ -105,9 +105,9 @@ abstract class AbstractAnalysisApiSignatureContractsTest : AbstractAnalysisApiSi
         testServices.assertions.assertEquals(symbol.receiverType?.let(substitutor::substitute), signature.receiverType)
         testServices.assertions.assertEquals(symbol.returnType.let(substitutor::substitute), signature.returnType)
 
-        testServices.assertions.assertEquals(symbol.valueParameters.size, signature.valueParameters.size)
+        testServices.assertions.assertEquals(symbol.konstueParameters.size, signature.konstueParameters.size)
 
-        for ((unsubstituted, substituted) in symbol.valueParameters.zip(signature.valueParameters)) {
+        for ((unsubstituted, substituted) in symbol.konstueParameters.zip(signature.konstueParameters)) {
             testServices.assertions.assertEquals(substituted.returnType, unsubstituted.returnType.let(substitutor::substitute))
         }
     }

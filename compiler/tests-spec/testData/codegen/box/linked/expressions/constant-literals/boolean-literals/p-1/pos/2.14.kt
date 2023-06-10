@@ -12,32 +12,32 @@
 package org.jetbrains.`true`
 
 open class `false` {
-    val x1 = false
+    konst x1 = false
 }
 open class `true`<T> {
-    val x1 = true
+    konst x1 = true
 }
 
 typealias A<`false`> = `true`<`false`>
 
 class B<`true`, `false`> {
-    val x1: `true` = `true`<`false`>() as `true`
-    val x2: A<`false`> = `true`<`true`>() as A<`false`>
-    val x3: `false` = `false`() as `false`
+    konst x1: `true` = `true`<`false`>() as `true`
+    konst x2: A<`false`> = `true`<`true`>() as A<`false`>
+    konst x3: `false` = `false`() as `false`
 }
 
 fun <`true`: Number> f1(): Boolean {
-    val x1: `true` = 10 as `true`
+    konst x1: `true` = 10 as `true`
     return false
 }
 
 inline fun <reified `false`, reified `true` : Any> `false`.f2() = true
 
-val <`false`> `false`.x1: `true`<Int>
+konst <`false`> `false`.x1: `true`<Int>
     get() = `true`<Int>()
 
 fun box(): String? {
-    val b = B<`true`<`false`>, `false`>()
+    konst b = B<`true`<`false`>, `false`>()
 
     if (!null.x1.x1) return null
     if (!b.x1.x1 || !b.x2.x1 || b.x3.x1) return null

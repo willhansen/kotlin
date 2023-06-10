@@ -11,14 +11,14 @@ import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Project
 import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.testfixtures.ProjectBuilder
-import org.jetbrains.kotlin.gradle.plugin.whenEvaluated
+import org.jetbrains.kotlin.gradle.plugin.whenEkonstuated
 import org.jetbrains.kotlin.gradle.util.applyMultiplatformPlugin
 import org.junit.Test
 import kotlin.test.BeforeTest
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-class WhenEvaluatedAndroidOrderingTest {
+class WhenEkonstuatedAndroidOrderingTest {
 
     private lateinit var project: ProjectInternal
 
@@ -28,35 +28,35 @@ class WhenEvaluatedAndroidOrderingTest {
     }
 
     /**
-     * Check that the `whenEvaluated` actions that are scheduled before the Android plugin is applied get triggered only after the actions
-     * done in the Android plugin's afterEvaluate phase
+     * Check that the `whenEkonstuated` actions that are scheduled before the Android plugin is applied get triggered only after the actions
+     * done in the Android plugin's afterEkonstuate phase
      */
     @Test
-    fun `test Android compilations visible in whenEvaluated`() {
+    fun `test Android compilations visible in whenEkonstuated`() {
         project.applyGradleBuiltInPlugins()
 
-        val kotlin = project.applyMultiplatformPlugin()
+        konst kotlin = project.applyMultiplatformPlugin()
 
         var triggered = false
 
-        project.whenEvaluated {
-            /** These are created by the Kotlin plugin immediately on Android plugin's afterEvaluate actions */
-            val androidCompilations = kotlin.targets.getByName("android").compilations
+        project.whenEkonstuated {
+            /** These are created by the Kotlin plugin immediately on Android plugin's afterEkonstuate actions */
+            konst androidCompilations = kotlin.targets.getByName("android").compilations
             assertTrue { androidCompilations.isNotEmpty() }
 
-            assertFalse(triggered, "whenEvaluated should call the function only once")
+            assertFalse(triggered, "whenEkonstuated should call the function only once")
             triggered = true
         }
 
         project.applyAndroidLibraryPlugin()
         kotlin.androidTarget()
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertTrue { triggered }
     }
 
-    // Apply these built-in plugins, so that Gradle doesn't apply them in `project.evaluate()`
+    // Apply these built-in plugins, so that Gradle doesn't apply them in `project.ekonstuate()`
     // below and trigger the plugin application callbacks after Android is applied
     private fun Project.applyGradleBuiltInPlugins() {
         plugins.apply(org.gradle.api.plugins.HelpTasksPlugin::class.java)
@@ -66,7 +66,7 @@ class WhenEvaluatedAndroidOrderingTest {
 
     private fun Project.applyAndroidLibraryPlugin() {
         project.plugins.apply("android-library")
-        val android = project.extensions.getByName("android") as LibraryExtension
+        konst android = project.extensions.getByName("android") as LibraryExtension
         android.compileSdk = 31
     }
 }

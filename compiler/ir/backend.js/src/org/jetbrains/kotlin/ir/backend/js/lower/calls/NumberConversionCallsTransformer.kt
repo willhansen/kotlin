@@ -12,10 +12,10 @@ import org.jetbrains.kotlin.ir.expressions.IrExpression
 import org.jetbrains.kotlin.ir.expressions.IrFunctionAccessExpression
 
 class NumberConversionCallsTransformer(context: JsIrBackendContext) : CallsTransformer {
-    private val intrinsics = context.intrinsics
-    private val irBuiltIns = context.irBuiltIns
+    private konst intrinsics = context.intrinsics
+    private konst irBuiltIns = context.irBuiltIns
 
-    private val memberToTransformer = MemberToTransformer().apply {
+    private konst memberToTransformer = MemberToTransformer().apply {
         // Conversion rules are ported from NumberAndCharConversionFIF
         // TODO: Add Char and Number conversions
 
@@ -75,9 +75,9 @@ class NumberConversionCallsTransformer(context: JsIrBackendContext) : CallsTrans
     }
 
     override fun transformFunctionAccess(call: IrFunctionAccessExpression, doNotIntrinsify: Boolean): IrExpression {
-        val function = call.symbol.owner
+        konst function = call.symbol.owner
         function.dispatchReceiverParameter?.also {
-            val key = SimpleMemberKey(it.type, function.name)
+            konst key = SimpleMemberKey(it.type, function.name)
             memberToTransformer[key]?.also {
                 return it(call)
             }

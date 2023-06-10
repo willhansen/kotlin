@@ -13,7 +13,7 @@ fun test() {
    <!UNRESOLVED_REFERENCE!>unresolved<!> is A
    <!UNRESOLVED_REFERENCE!>unresolved<!> is A?
 
-   val x = foo()
+   konst x = foo()
    x as String
    <!USELESS_IS_CHECK!>x is String<!>
 }

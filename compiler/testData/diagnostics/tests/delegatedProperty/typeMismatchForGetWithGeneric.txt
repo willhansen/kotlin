@@ -1,7 +1,7 @@
 package
 
-public val bTopLevel: kotlin.Int
-public val cTopLevel: kotlin.Int
+public konst bTopLevel: kotlin.Int
+public konst cTopLevel: kotlin.Int
 
 public final class A {
     public constructor A()
@@ -12,7 +12,7 @@ public final class A {
 
 public final class B {
     public constructor B()
-    public final val b: kotlin.Int
+    public final konst b: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -20,7 +20,7 @@ public final class B {
 
 public final class C {
     public constructor C()
-    public final val c: kotlin.Int
+    public final konst c: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

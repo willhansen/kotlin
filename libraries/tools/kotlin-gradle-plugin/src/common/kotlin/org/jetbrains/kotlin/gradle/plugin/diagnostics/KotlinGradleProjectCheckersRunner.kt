@@ -12,21 +12,21 @@ import org.jetbrains.kotlin.gradle.plugin.extraProperties
 import org.jetbrains.kotlin.gradle.plugin.launch
 
 internal fun Project.launchKotlinGradleProjectCheckers() {
-    val checkers = kotlinGradleProjectCheckersOverride ?: KotlinGradleProjectChecker.ALL_CHECKERS
+    konst checkers = kotlinGradleProjectCheckersOverride ?: KotlinGradleProjectChecker.ALL_CHECKERS
 
-    val context = KotlinGradleProjectCheckerContext(
+    konst context = KotlinGradleProjectCheckerContext(
         project,
         project.kotlinPropertiesProvider,
         project.multiplatformExtensionOrNull
     )
-    val collector = project.kotlinToolingDiagnosticsCollector
+    konst collector = project.kotlinToolingDiagnosticsCollector
 
     for (checker in checkers) {
         with(checker) { launch { context.runChecks(collector) } }
     }
 }
 
-internal val Project.kotlinGradleProjectCheckersOverride: Collection<KotlinGradleProjectChecker>?
+internal konst Project.kotlinGradleProjectCheckersOverride: Collection<KotlinGradleProjectChecker>?
     get() {
         return if (extraProperties.has(KOTLIN_GRADLE_PROJECT_CHECKERS_OVERRIDE))
             @Suppress("unchecked_cast")
@@ -36,4 +36,4 @@ internal val Project.kotlinGradleProjectCheckersOverride: Collection<KotlinGradl
     }
 
 
-internal const val KOTLIN_GRADLE_PROJECT_CHECKERS_OVERRIDE = "kotlin.internal.override.checkers"
+internal const konst KOTLIN_GRADLE_PROJECT_CHECKERS_OVERRIDE = "kotlin.internal.override.checkers"

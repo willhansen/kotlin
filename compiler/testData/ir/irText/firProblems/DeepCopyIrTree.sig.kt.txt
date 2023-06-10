@@ -5,7 +5,7 @@ class DeepCopyIrTreeWithSymbols {
   // CHECK:
   //   Mangled name: DeepCopyIrTreeWithSymbols{}typeRemapper
   //   Public signature: /DeepCopyIrTreeWithSymbols.typeRemapper|4793044681928918608[0]
-  private val typeRemapper: TypeRemapper
+  private konst typeRemapper: TypeRemapper
     // CHECK JVM_IR:
     //   Mangled name: DeepCopyIrTreeWithSymbols#<get-typeRemapper>(){}TypeRemapper
     //   Public signature: /DeepCopyIrTreeWithSymbols.typeRemapper.<get-typeRemapper>|5098073462906324888[0]
@@ -63,7 +63,7 @@ interface IrTypeParameter : IrDeclaration {
   // CHECK:
   //   Mangled name: IrTypeParameter{}superTypes
   //   Public signature: /IrTypeParameter.superTypes|4746750561425700979[0]
-  abstract val superTypes: MutableList<IrType>
+  abstract konst superTypes: MutableList<IrType>
     // CHECK JVM_IR:
     //   Mangled name: IrTypeParameter#<get-superTypes>(){}kotlin.collections.MutableList<IrType>
     //   Public signature: /IrTypeParameter.superTypes.<get-superTypes>|-6696770425648193325[0]

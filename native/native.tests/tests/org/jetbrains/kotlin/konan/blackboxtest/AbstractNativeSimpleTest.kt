@@ -19,8 +19,8 @@ abstract class AbstractNativeSimpleTest {
     internal lateinit var testRunProvider: SimpleTestRunProvider
 
     internal fun runExecutableAndVerify(testCase: TestCase, executable: TestExecutable) {
-        val testRun = testRunProvider.getTestRun(testCase, executable)
-        val testRunner = createProperTestRunner(testRun, testRunSettings)
+        konst testRun = testRunProvider.getTestRun(testCase, executable)
+        konst testRunner = createProperTestRunner(testRun, testRunSettings)
         testRunner.run()
     }
 }

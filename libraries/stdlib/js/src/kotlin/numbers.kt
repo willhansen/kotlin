@@ -7,33 +7,33 @@ package kotlin
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 public actual fun Double.isNaN(): Boolean = this != this
 
 /**
  * Returns `true` if the specified number is a
- * Not-a-Number (NaN) value, `false` otherwise.
+ * Not-a-Number (NaN) konstue, `false` otherwise.
  */
 public actual fun Float.isNaN(): Boolean = this != this
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 public actual fun Double.isInfinite(): Boolean = this == Double.POSITIVE_INFINITY || this == Double.NEGATIVE_INFINITY
 
 /**
- * Returns `true` if this value is infinitely large in magnitude.
+ * Returns `true` if this konstue is infinitely large in magnitude.
  */
 public actual fun Float.isInfinite(): Boolean = this == Float.POSITIVE_INFINITY || this == Float.NEGATIVE_INFINITY
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 public actual fun Double.isFinite(): Boolean = !isInfinite() && !isNaN()
 
 /**
- * Returns `true` if the argument is a finite floating-point value; returns `false` otherwise (for `NaN` and infinity arguments).
+ * Returns `true` if the argument is a finite floating-point konstue; returns `false` otherwise (for `NaN` and infinity arguments).
  */
 public actual fun Float.isFinite(): Boolean = !isInfinite() && !isNaN()
 
@@ -136,7 +136,7 @@ public actual fun Long.countOneBits(): Int =
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Long.countLeadingZeroBits(): Int =
-    when (val high = this.high) {
+    when (konst high = this.high) {
         0 -> Int.SIZE_BITS + low.countLeadingZeroBits()
         else -> high.countLeadingZeroBits()
     }
@@ -147,7 +147,7 @@ public actual fun Long.countLeadingZeroBits(): Int =
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Long.countTrailingZeroBits(): Int =
-    when (val low = this.low) {
+    when (konst low = this.low) {
         0 -> Int.SIZE_BITS + high.countTrailingZeroBits()
         else -> low.countTrailingZeroBits()
     }
@@ -159,7 +159,7 @@ public actual fun Long.countTrailingZeroBits(): Int =
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Long.takeHighestOneBit(): Long =
-    when (val high = this.high) {
+    when (konst high = this.high) {
         0 -> Long(low.takeHighestOneBit(), 0)
         else -> Long(0, high.takeHighestOneBit())
     }
@@ -171,7 +171,7 @@ public actual fun Long.takeHighestOneBit(): Long =
 @SinceKotlin("1.4")
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Long.takeLowestOneBit(): Long =
-    when (val low = this.low) {
+    when (konst low = this.low) {
         0 -> Long(0, high.takeLowestOneBit())
         else -> Long(low.takeLowestOneBit(), 0)
     }
@@ -190,10 +190,10 @@ public actual fun Long.takeLowestOneBit(): Long =
 @WasExperimental(ExperimentalStdlibApi::class)
 public actual fun Long.rotateLeft(bitCount: Int): Long {
     if ((bitCount and 31) != 0) {
-        val low = this.low
-        val high = this.high
-        val newLow = low.shl(bitCount) or high.ushr(-bitCount)
-        val newHigh = high.shl(bitCount) or low.ushr(-bitCount)
+        konst low = this.low
+        konst high = this.high
+        konst newLow = low.shl(bitCount) or high.ushr(-bitCount)
+        konst newHigh = high.shl(bitCount) or low.ushr(-bitCount)
         return if ((bitCount and 32) == 0) Long(newLow, newHigh) else Long(newHigh, newLow)
     } else {
         return if ((bitCount and 32) == 0) this else Long(high, low)

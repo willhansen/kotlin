@@ -1,4 +1,4 @@
-class Cell<T>(val x: T)
+class Cell<T>(konst x: T)
 
 typealias StringCell = Cell<String>
 

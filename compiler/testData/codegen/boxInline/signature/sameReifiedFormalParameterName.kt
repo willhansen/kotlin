@@ -31,12 +31,12 @@ import java.util.*
 
 
 fun box(): String {
-    val result = Test().callInline()
-    val method = result.javaClass.getMethod("aTest", Any::class.java)
-    val genericReturnType = method.genericReturnType
+    konst result = Test().callInline()
+    konst method = result.javaClass.getMethod("aTest", Any::class.java)
+    konst genericReturnType = method.genericReturnType
     if (genericReturnType.toString() != "test.B<T>") return "fail 1: ${genericReturnType}"
 
-    val genericParameterTypes = method.genericParameterTypes
+    konst genericParameterTypes = method.genericParameterTypes
     if (genericParameterTypes.size != 1) return "fail 2: ${genericParameterTypes.size}"
     if (genericParameterTypes[0].toString() != "T") return "fail 3: ${genericParameterTypes[0]}"
 

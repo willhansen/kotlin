@@ -4,7 +4,7 @@ open class Foo {
     annotation class Anno
 
     @Anno
-    protected val prop = 42
+    protected konst prop = 42
 }
 
 // TESTED_OBJECT_KIND: function

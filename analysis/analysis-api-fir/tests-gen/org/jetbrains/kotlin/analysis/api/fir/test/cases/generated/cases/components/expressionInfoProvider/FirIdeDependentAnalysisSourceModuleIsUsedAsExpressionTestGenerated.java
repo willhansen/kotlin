@@ -503,15 +503,15 @@ public class FirIdeDependentAnalysisSourceModuleIsUsedAsExpressionTestGenerated 
     }
 
     @Test
-    @TestMetadata("collectionLiteralInvalidUnused.kt")
-    public void testCollectionLiteralInvalidUnused() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/collectionLiteralInvalidUnused.kt");
+    @TestMetadata("collectionLiteralInkonstidUnused.kt")
+    public void testCollectionLiteralInkonstidUnused() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/collectionLiteralInkonstidUnused.kt");
     }
 
     @Test
-    @TestMetadata("collectionLiteralInvalidUsed.kt")
-    public void testCollectionLiteralInvalidUsed() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/collectionLiteralInvalidUsed.kt");
+    @TestMetadata("collectionLiteralInkonstidUsed.kt")
+    public void testCollectionLiteralInkonstidUsed() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/collectionLiteralInkonstidUsed.kt");
     }
 
     @Test
@@ -869,9 +869,9 @@ public class FirIdeDependentAnalysisSourceModuleIsUsedAsExpressionTestGenerated 
     }
 
     @Test
-    @TestMetadata("forExprInvalid.kt")
-    public void testForExprInvalid() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/forExprInvalid.kt");
+    @TestMetadata("forExprInkonstid.kt")
+    public void testForExprInkonstid() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/forExprInkonstid.kt");
     }
 
     @Test
@@ -893,9 +893,9 @@ public class FirIdeDependentAnalysisSourceModuleIsUsedAsExpressionTestGenerated 
     }
 
     @Test
-    @TestMetadata("forLoopInvalid.kt")
-    public void testForLoopInvalid() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/forLoopInvalid.kt");
+    @TestMetadata("forLoopInkonstid.kt")
+    public void testForLoopInkonstid() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/forLoopInkonstid.kt");
     }
 
     @Test
@@ -1529,9 +1529,9 @@ public class FirIdeDependentAnalysisSourceModuleIsUsedAsExpressionTestGenerated 
     }
 
     @Test
-    @TestMetadata("return_value.kt")
-    public void testReturn_value() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/return_value.kt");
+    @TestMetadata("return_konstue.kt")
+    public void testReturn_konstue() throws Exception {
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/return_konstue.kt");
     }
 
     @Test
@@ -1871,9 +1871,9 @@ public class FirIdeDependentAnalysisSourceModuleIsUsedAsExpressionTestGenerated 
     }
 
     @Test
-    @TestMetadata("value_initializer.kt")
+    @TestMetadata("konstue_initializer.kt")
     public void testValue_initializer() throws Exception {
-        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/value_initializer.kt");
+        runTest("analysis/analysis-api/testData/components/expressionInfoProvider/isUsedAsExpression/konstue_initializer.kt");
     }
 
     @Test

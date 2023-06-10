@@ -2,7 +2,7 @@
 open class Base {
     open fun foo() {}
 
-    open val bar: String = ""
+    open konst bar: String = ""
 
     override fun hashCode() = super.hashCode()
 }
@@ -12,6 +12,6 @@ class Derived : Base() {
         super.foo()
     }
 
-    override val bar: String
+    override konst bar: String
         get() = super.bar
 }

@@ -3,7 +3,7 @@
 // LANGUAGE: +ValueClasses
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Foo<T>(val x: Any) {
+konstue class Foo<T>(konst x: Any) {
     fun bar() {}
 }
 
@@ -15,7 +15,7 @@ fun <T, K> transform(f: Foo<T>): Foo<K> {
 }
 
 fun box(): String {
-    val f = Foo<Int>(42)
-    val t = transform<Int, Number>(f)
+    konst f = Foo<Int>(42)
+    konst t = transform<Int, Number>(f)
     return if (t.x !is Number) "Fail" else "OK"
 }

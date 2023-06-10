@@ -24,8 +24,8 @@ import org.jetbrains.kotlin.metadata.deserialization.VersionRequirementTable
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.serialization.deserialization.descriptors.DeserializedClassDescriptor
 
-class ClassDeserializer(private val components: DeserializationComponents) {
-    private val classes: (ClassKey) -> ClassDescriptor? =
+class ClassDeserializer(private konst components: DeserializationComponents) {
+    private konst classes: (ClassKey) -> ClassDescriptor? =
         components.storageManager.createMemoizedFunctionWithNullableValues { key -> createClass(key) }
 
     // Additional ClassData parameter is needed to avoid calling ClassDataFinder#findClassData()
@@ -34,27 +34,27 @@ class ClassDeserializer(private val components: DeserializationComponents) {
         classes(ClassKey(classId, classData))
 
     private fun createClass(key: ClassKey): ClassDescriptor? {
-        val classId = key.classId
+        konst classId = key.classId
         for (factory in components.fictitiousClassDescriptorFactories) {
             factory.createClass(classId)?.let { return it }
         }
         if (classId in BLACK_LIST) return null
 
-        val (nameResolver, classProto, metadataVersion, sourceElement) = key.classData
+        konst (nameResolver, classProto, metadataVersion, sourceElement) = key.classData
             ?: components.classDataFinder.findClassData(classId)
             ?: return null
 
-        val outerClassId = classId.outerClassId
-        val outerContext = if (outerClassId != null) {
-            val outerClass = deserializeClass(outerClassId) as? DeserializedClassDescriptor ?: return null
+        konst outerClassId = classId.outerClassId
+        konst outerContext = if (outerClassId != null) {
+            konst outerClass = deserializeClass(outerClassId) as? DeserializedClassDescriptor ?: return null
 
             // Find the outer class first and check if he knows anything about the nested class we're looking for
             if (!outerClass.hasNestedClass(classId.shortClassName)) return null
 
             outerClass.c
         } else {
-            val fragments = components.packageFragmentProvider.packageFragments(classId.packageFqName)
-            val fragment = fragments.firstOrNull { it !is DeserializedPackageFragment || it.hasTopLevelClass(classId.shortClassName) }
+            konst fragments = components.packageFragmentProvider.packageFragments(classId.packageFqName)
+            konst fragment = fragments.firstOrNull { it !is DeserializedPackageFragment || it.hasTopLevelClass(classId.shortClassName) }
                 ?: return null
 
             components.createContext(
@@ -69,7 +69,7 @@ class ClassDeserializer(private val components: DeserializationComponents) {
         return DeserializedClassDescriptor(outerContext, classProto, nameResolver, metadataVersion, sourceElement)
     }
 
-    private class ClassKey(val classId: ClassId, val classData: ClassData?) {
+    private class ClassKey(konst classId: ClassId, konst classData: ClassData?) {
         // classData *intentionally* not used in equals() / hashCode()
         override fun equals(other: Any?) = other is ClassKey && classId == other.classId
 
@@ -83,7 +83,7 @@ class ClassDeserializer(private val components: DeserializationComponents) {
          * We ignore kotlin.Cloneable because since Kotlin 1.1, the descriptor for it is created via JvmBuiltInClassDescriptorFactory,
          * but the metadata is still serialized for kotlin-reflect 1.0 to work (see BuiltInsSerializer.kt).
          */
-        val BLACK_LIST = setOf(
+        konst BLACK_LIST = setOf(
             ClassId.topLevel(StandardNames.FqNames.cloneable.toSafe())
         )
     }

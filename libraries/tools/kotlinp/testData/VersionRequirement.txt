@@ -30,7 +30,7 @@ package {
   // field: property:Ljava/lang/String;
   // getter: getProperty()Ljava/lang/String;
   // synthetic method for annotations: getProperty$annotations()V
-  public final val property: kotlin/String /* = ... */
+  public final konst property: kotlin/String /* = ... */
     public final get
 
   // requires API version 1.1.0 (level=HIDDEN, errorCode=314)

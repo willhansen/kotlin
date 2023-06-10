@@ -9,7 +9,7 @@ import kotlin.time.TimeSource.Monotonic.ValueTimeMark
 
 @SinceKotlin("1.3")
 internal actual object MonotonicTimeSource : TimeSource.WithComparableMarks {
-    private val zero: Long = System.nanoTime()
+    private konst zero: Long = System.nanoTime()
     private fun read(): Long = System.nanoTime() - zero
     override fun toString(): String = "TimeSource(System.nanoTime())"
 

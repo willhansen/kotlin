@@ -34,9 +34,9 @@ import org.jetbrains.kotlin.types.Variance
 import org.jetbrains.kotlin.utils.KotlinExceptionWithAttachments
 
 class MainFunctionDetector {
-    private val languageVersionSettings: LanguageVersionSettings by lazy { getLanguageVersionSettings() }
-    private val getFunctionDescriptor: (KtNamedFunction) -> FunctionDescriptor?
-    private val getLanguageVersionSettings: () -> LanguageVersionSettings
+    private konst languageVersionSettings: LanguageVersionSettings by lazy { getLanguageVersionSettings() }
+    private konst getFunctionDescriptor: (KtNamedFunction) -> FunctionDescriptor?
+    private konst getLanguageVersionSettings: () -> LanguageVersionSettings
 
     /** Assumes that the function declaration is already resolved and the descriptor can be found in the `bindingContext`.  */
     constructor(bindingContext: BindingContext, languageVersionSettings: LanguageVersionSettings) {
@@ -71,7 +71,7 @@ class MainFunctionDetector {
             return false
         }
 
-        var parametersCount = function.valueParameters.size
+        var parametersCount = function.konstueParameters.size
         if (function.receiverTypeReference != null) parametersCount++
 
         if (!isParameterNumberSuitsForMain(parametersCount, function.isTopLevel, allowParameterless)) {
@@ -92,7 +92,7 @@ class MainFunctionDetector {
             return false
         }
 
-        val functionDescriptor = getFunctionDescriptor(function) ?: return false
+        konst functionDescriptor = getFunctionDescriptor(function) ?: return false
         return isMain(functionDescriptor, checkJvmStaticAnnotation, allowParameterless = allowParameterless)
     }
 
@@ -109,7 +109,7 @@ class MainFunctionDetector {
             return false
         }
 
-        val parameters = descriptor.valueParameters.mapTo(mutableListOf()) { it.type }
+        konst parameters = descriptor.konstueParameters.mapTo(mutableListOf()) { it.type }
         descriptor.extensionReceiverParameter?.type?.let { parameters += it }
 
         if (!isParameterNumberSuitsForMain(
@@ -124,13 +124,13 @@ class MainFunctionDetector {
         if (descriptor.typeParameters.isNotEmpty()) return false
 
         if (parameters.size == 1) {
-            val parameterType = parameters[0]
+            konst parameterType = parameters[0]
             if (!KotlinBuiltIns.isArray(parameterType)) return false
 
-            val typeArguments = parameterType.arguments
+            konst typeArguments = parameterType.arguments
             if (typeArguments.size != 1) return false
 
-            val typeArgument = typeArguments[0].type
+            konst typeArgument = typeArguments[0].type
             if (!KotlinBuiltIns.isString(typeArgument)) {
                 return false
             }
@@ -140,7 +140,7 @@ class MainFunctionDetector {
         } else {
             assert(parameters.size == 0) { "Parameter list is expected to be empty" }
             assert(DescriptorUtils.isTopLevelDeclaration(descriptor)) { "main without parameters works only for top-level" }
-            val containingFile = DescriptorToSourceUtils.getContainingFile(descriptor)
+            konst containingFile = DescriptorToSourceUtils.getContainingFile(descriptor)
             // We do not support parameterless entry points having JvmName("name") but different real names
             // See more at https://github.com/Kotlin/KEEP/blob/master/proposals/enhancing-main-convention.md#parameterless-main
             if (descriptor.name.asString() != "main") return false
@@ -155,7 +155,7 @@ class MainFunctionDetector {
 
         if (DescriptorUtils.isTopLevelDeclaration(descriptor)) return true
 
-        val containingDeclaration = descriptor.containingDeclaration
+        konst containingDeclaration = descriptor.containingDeclaration
         return containingDeclaration is ClassDescriptor
                 && containingDeclaration.kind.isSingleton
                 && (descriptor.hasJvmStaticAnnotation() || !checkJvmStaticAnnotation)
@@ -195,7 +195,7 @@ class MainFunctionDetector {
 
     companion object {
         private fun isMainReturnType(descriptor: FunctionDescriptor): Boolean {
-            val returnType = descriptor.returnType
+            konst returnType = descriptor.returnType
             return returnType != null && KotlinBuiltIns.isUnit(returnType)
         }
 
@@ -204,7 +204,7 @@ class MainFunctionDetector {
         }
 
         private fun hasAnnotationWithExactNumberOfArguments(function: KtNamedFunction, number: Int) =
-            function.annotationEntries.any { it.valueArguments.size == number }
+            function.annotationEntries.any { it.konstueArguments.size == number }
     }
 
     interface Factory {

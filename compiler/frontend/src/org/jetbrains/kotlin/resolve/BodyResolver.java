@@ -77,7 +77,7 @@ public class BodyResolver {
     @NotNull private final AnnotationResolver annotationResolver;
     @NotNull private final DelegatedPropertyResolver delegatedPropertyResolver;
     @NotNull private final AnalyzerExtensions analyzerExtensions;
-    @NotNull private final ValueParameterResolver valueParameterResolver;
+    @NotNull private final ValueParameterResolver konstueParameterResolver;
     @NotNull private final BodyResolveCache bodyResolveCache;
     @NotNull private final KotlinBuiltIns builtIns;
     @NotNull private final OverloadChecker overloadChecker;
@@ -94,7 +94,7 @@ public class BodyResolver {
             @NotNull ExpressionTypingServices expressionTypingServices,
             @NotNull AnalyzerExtensions analyzerExtensions,
             @NotNull BindingTrace trace,
-            @NotNull ValueParameterResolver valueParameterResolver,
+            @NotNull ValueParameterResolver konstueParameterResolver,
             @NotNull AnnotationChecker annotationChecker,
             @NotNull KotlinBuiltIns builtIns,
             @NotNull OverloadChecker overloadChecker,
@@ -112,7 +112,7 @@ public class BodyResolver {
         this.annotationChecker = annotationChecker;
         this.overloadChecker = overloadChecker;
         this.trace = new ObservableBindingTrace(trace);
-        this.valueParameterResolver = valueParameterResolver;
+        this.konstueParameterResolver = konstueParameterResolver;
         this.builtIns = builtIns;
         this.languageVersionSettings = languageVersionSettings;
     }
@@ -338,8 +338,8 @@ public class BodyResolver {
 
             @Override
             public void visitSuperTypeCallEntry(@NotNull KtSuperTypeCallEntry call) {
-                KtValueArgumentList valueArgumentList = call.getValueArgumentList();
-                PsiElement elementToMark = valueArgumentList == null ? call : valueArgumentList;
+                KtValueArgumentList konstueArgumentList = call.getValueArgumentList();
+                PsiElement elementToMark = konstueArgumentList == null ? call : konstueArgumentList;
                 if (descriptor.getKind() == ClassKind.INTERFACE) {
                     trace.report(SUPERTYPE_INITIALIZED_IN_INTERFACE.on(elementToMark));
                 }
@@ -516,7 +516,7 @@ public class BodyResolver {
         }
         else if (languageVersionSettings.supportsFeature(TopLevelSealedInheritance) && DescriptorUtils.isTopLevelDeclaration(descriptor)) {
             // TODO: improve diagnostic when top level sealed inheritance is disabled
-            for (KotlinType supertype : supertypes.values()) {
+            for (KotlinType supertype : supertypes.konstues()) {
                 ClassifierDescriptor classifierDescriptor = supertype.getConstructor().getDeclarationDescriptor();
                 if (DescriptorUtils.isSealedClass(classifierDescriptor) && DescriptorUtils.isTopLevelDeclaration(classifierDescriptor)) {
                     parentEnumOrSealed = Collections.singleton(classifierDescriptor.getTypeConstructor());
@@ -751,11 +751,11 @@ public class BodyResolver {
                 ExpressionTypingContext localContext = c.getLocalContext();
                 LexicalScope parameterScope = getPrimaryConstructorParametersScope(classDescriptor.getScopeForConstructorHeaderResolution(),
                                                                                    unsubstitutedPrimaryConstructor);
-                valueParameterResolver.resolveValueParameters(
+                konstueParameterResolver.resolveValueParameters(
                         klass.getPrimaryConstructorParameters(), unsubstitutedPrimaryConstructor.getValueParameters(),
                         parameterScope, c.getOuterDataFlowInfo(), trace, localContext != null ? localContext.inferenceSession : null
                 );
-                // Annotations on value parameter and constructor parameter could be splitted
+                // Annotations on konstue parameter and constructor parameter could be splitted
                 resolveConstructorPropertyDescriptors(klass);
             }
         }
@@ -789,8 +789,8 @@ public class BodyResolver {
         return new LexicalScopeImpl(originalScope, unsubstitutedPrimaryConstructor, false, null,
                                     Collections.emptyList(), LexicalScopeKind.DEFAULT_VALUE, LocalRedeclarationChecker.DO_NOTHING.INSTANCE,
                                     handler -> {
-                                        for (ValueParameterDescriptor valueParameter : unsubstitutedPrimaryConstructor.getValueParameters()) {
-                                            handler.addVariableDescriptor(valueParameter);
+                                        for (ValueParameterDescriptor konstueParameter : unsubstitutedPrimaryConstructor.getValueParameters()) {
+                                            handler.addVariableDescriptor(konstueParameter);
                                         }
                                         return Unit.INSTANCE;
                                     });
@@ -1014,12 +1014,12 @@ public class BodyResolver {
 
         PreliminaryDeclarationVisitor.Companion.createForDeclaration(function, trace, languageVersionSettings);
         LexicalScope innerScope = FunctionDescriptorUtil.getFunctionInnerScope(scope, functionDescriptor, trace, overloadChecker);
-        List<KtParameter> valueParameters = function.getValueParameters();
-        List<ValueParameterDescriptor> valueParameterDescriptors = functionDescriptor.getValueParameters();
+        List<KtParameter> konstueParameters = function.getValueParameters();
+        List<ValueParameterDescriptor> konstueParameterDescriptors = functionDescriptor.getValueParameters();
 
         LexicalScope headerScope = headerScopeFactory != null ? headerScopeFactory.invoke(innerScope) : innerScope;
-        valueParameterResolver.resolveValueParameters(
-                valueParameters, valueParameterDescriptors, headerScope, outerDataFlowInfo, trace,
+        konstueParameterResolver.resolveValueParameters(
+                konstueParameters, konstueParameterDescriptors, headerScope, outerDataFlowInfo, trace,
                 localContext != null ? localContext.inferenceSession : null
         );
 
@@ -1067,18 +1067,18 @@ public class BodyResolver {
             @NotNull LexicalScope declaringScope,
             @Nullable InferenceSession inferenceSession
     ) {
-        List<KtParameter> valueParameters = constructor.getValueParameters();
-        List<ValueParameterDescriptor> valueParameterDescriptors = constructorDescriptor.getValueParameters();
+        List<KtParameter> konstueParameters = constructor.getValueParameters();
+        List<ValueParameterDescriptor> konstueParameterDescriptors = constructorDescriptor.getValueParameters();
 
         LexicalScope scope = getPrimaryConstructorParametersScope(declaringScope, constructorDescriptor);
 
-        valueParameterResolver.resolveValueParameters(valueParameters, valueParameterDescriptors, scope, outerDataFlowInfo, trace, inferenceSession);
+        konstueParameterResolver.resolveValueParameters(konstueParameters, konstueParameterDescriptors, scope, outerDataFlowInfo, trace, inferenceSession);
     }
 
     public static void computeDeferredType(KotlinType type) {
         // handle type inference loop: function or property body contains a reference to itself
         // fun f() = { f() }
-        // val x = x
+        // konst x = x
         // type resolution must be started before body resolution
         if (type instanceof DeferredType) {
             DeferredType deferredType = (DeferredType) type;
@@ -1094,7 +1094,7 @@ public class BodyResolver {
             return;
         }
         Deque<DeferredType> queue = new ArrayDeque<>(deferredTypes.size() + 1);
-        trace.addHandler(DEFERRED_TYPE, (deferredTypeKeyDeferredTypeWritableSlice, key, value) -> queue.offerLast(key.getData()));
+        trace.addHandler(DEFERRED_TYPE, (deferredTypeKeyDeferredTypeWritableSlice, key, konstue) -> queue.offerLast(key.getData()));
         for (Box<DeferredType> deferredType : deferredTypes) {
             queue.offerLast(deferredType.getData());
         }

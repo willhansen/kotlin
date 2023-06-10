@@ -12,15 +12,15 @@ import org.jetbrains.kotlin.cli.jvm.compiler.KotlinCoreEnvironment
 import org.jetbrains.kotlin.config.CompilerConfiguration
 import org.jetbrains.kotlin.config.JVMConfigurationKeys
 import org.jetbrains.kotlin.scripting.compiler.plugin.impl.ScriptJvmCompilerFromEnvironment
-import kotlin.script.experimental.api.ScriptEvaluationConfiguration
-import kotlin.script.experimental.api.ScriptEvaluator
-import kotlin.script.experimental.jvm.BasicJvmScriptEvaluator
+import kotlin.script.experimental.api.ScriptEkonstuationConfiguration
+import kotlin.script.experimental.api.ScriptEkonstuator
+import kotlin.script.experimental.jvm.BasicJvmScriptEkonstuator
 import kotlin.script.experimental.jvm.baseClassLoader
 import kotlin.script.experimental.jvm.jvm
 
-class JvmCliScriptEvaluationExtension : AbstractScriptEvaluationExtension() {
+class JvmCliScriptEkonstuationExtension : AbstractScriptEkonstuationExtension() {
 
-    override fun ScriptEvaluationConfiguration.Builder.platformEvaluationConfiguration() {
+    override fun ScriptEkonstuationConfiguration.Builder.platformEkonstuationConfiguration() {
         jvm {
             baseClassLoader(getPlatformClassLoader())
         }
@@ -37,8 +37,8 @@ class JvmCliScriptEvaluationExtension : AbstractScriptEvaluationExtension() {
         return KotlinCoreEnvironment.createForProduction(projectEnvironment, configuration, EnvironmentConfigFiles.JVM_CONFIG_FILES)
     }
 
-    override fun createScriptEvaluator(): ScriptEvaluator {
-        return BasicJvmScriptEvaluator()
+    override fun createScriptEkonstuator(): ScriptEkonstuator {
+        return BasicJvmScriptEkonstuator()
     }
 
     override fun createScriptCompiler(environment: KotlinCoreEnvironment): ScriptCompilerProxy {

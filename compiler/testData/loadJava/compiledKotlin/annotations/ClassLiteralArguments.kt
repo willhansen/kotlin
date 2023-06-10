@@ -3,10 +3,10 @@ package test
 import kotlin.reflect.KClass
 
 annotation class Anno(
-    val klass: KClass<*>,
-    val klasses: Array<KClass<*>>,
-    val sarKlass: KClass<Array<String>>,
-    val d2arKlass: KClass<Array<DoubleArray>>
+    konst klass: KClass<*>,
+    konst klasses: Array<KClass<*>>,
+    konst sarKlass: KClass<Array<String>>,
+    konst d2arKlass: KClass<Array<DoubleArray>>
 )
 
 @Anno(

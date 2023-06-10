@@ -121,219 +121,219 @@ public inline operator fun kotlin.ranges.CharRange.contains(element: kotlin.Char
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "byteRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(value: kotlin.Double): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(konstue: kotlin.Double): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "byteRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(value: kotlin.Float): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Byte>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "doubleRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "doubleRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(value: kotlin.Float): kotlin.Boolean
-
-@kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
-@kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
-@kotlin.jvm.JvmName(name = "doubleRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "doubleRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "doubleRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(konstue: kotlin.Long): kotlin.Boolean
+
+@kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
+@kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
+@kotlin.jvm.JvmName(name = "doubleRangeContains")
+public operator fun kotlin.ranges.ClosedRange<kotlin.Double>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "floatRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "floatRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(value: kotlin.Double): kotlin.Boolean
-
-@kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
-@kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
-@kotlin.jvm.JvmName(name = "floatRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(konstue: kotlin.Double): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "floatRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "floatRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(konstue: kotlin.Long): kotlin.Boolean
+
+@kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
+@kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
+@kotlin.jvm.JvmName(name = "floatRangeContains")
+public operator fun kotlin.ranges.ClosedRange<kotlin.Float>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "intRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(value: kotlin.Double): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(konstue: kotlin.Double): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "intRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(value: kotlin.Float): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Int>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "longRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(value: kotlin.Double): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(konstue: kotlin.Double): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "longRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(value: kotlin.Float): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Long>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "shortRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(value: kotlin.Double): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(konstue: kotlin.Double): kotlin.Boolean
 
 @kotlin.Deprecated(message = "This `contains` operation mixing integer and floating point arguments has ambiguous semantics and is going to be removed.")
 @kotlin.DeprecatedSinceKotlin(errorSince = "1.4", hiddenSince = "1.5", warningSince = "1.3")
 @kotlin.jvm.JvmName(name = "shortRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(value: kotlin.Float): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
-public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.ClosedRange<kotlin.Short>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.IntRange.contains(value: kotlin.Byte): kotlin.Boolean
+public inline operator fun kotlin.ranges.IntRange.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
 public inline operator fun kotlin.ranges.IntRange.contains(element: kotlin.Int?): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.IntRange.contains(value: kotlin.Long): kotlin.Boolean
+public inline operator fun kotlin.ranges.IntRange.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.IntRange.contains(value: kotlin.Short): kotlin.Boolean
+public inline operator fun kotlin.ranges.IntRange.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.LongRange.contains(value: kotlin.Byte): kotlin.Boolean
+public inline operator fun kotlin.ranges.LongRange.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.LongRange.contains(value: kotlin.Int): kotlin.Boolean
+public inline operator fun kotlin.ranges.LongRange.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.3")
 @kotlin.internal.InlineOnly
 public inline operator fun kotlin.ranges.LongRange.contains(element: kotlin.Long?): kotlin.Boolean
 
 @kotlin.internal.InlineOnly
-public inline operator fun kotlin.ranges.LongRange.contains(value: kotlin.Short): kotlin.Boolean
+public inline operator fun kotlin.ranges.LongRange.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "byteRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Byte>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "doubleRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Double>.contains(value: kotlin.Float): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Double>.contains(konstue: kotlin.Float): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "intRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Int>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "longRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(value: kotlin.Short): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Long>.contains(konstue: kotlin.Short): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(value: kotlin.Byte): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(konstue: kotlin.Byte): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(value: kotlin.Int): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(konstue: kotlin.Int): kotlin.Boolean
 
 @kotlin.jvm.JvmName(name = "shortRangeContains")
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(value: kotlin.Long): kotlin.Boolean
+public operator fun kotlin.ranges.OpenEndRange<kotlin.Short>.contains(konstue: kotlin.Long): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.UIntRange.contains(value: kotlin.UByte): kotlin.Boolean
+public operator fun kotlin.ranges.UIntRange.contains(konstue: kotlin.UByte): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
@@ -342,19 +342,19 @@ public inline operator fun kotlin.ranges.UIntRange.contains(element: kotlin.UInt
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.UIntRange.contains(value: kotlin.ULong): kotlin.Boolean
+public operator fun kotlin.ranges.UIntRange.contains(konstue: kotlin.ULong): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.UIntRange.contains(value: kotlin.UShort): kotlin.Boolean
+public operator fun kotlin.ranges.UIntRange.contains(konstue: kotlin.UShort): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.ULongRange.contains(value: kotlin.UByte): kotlin.Boolean
+public operator fun kotlin.ranges.ULongRange.contains(konstue: kotlin.UByte): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.ULongRange.contains(value: kotlin.UInt): kotlin.Boolean
+public operator fun kotlin.ranges.ULongRange.contains(konstue: kotlin.UInt): kotlin.Boolean
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
@@ -363,7 +363,7 @@ public inline operator fun kotlin.ranges.ULongRange.contains(element: kotlin.ULo
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
-public operator fun kotlin.ranges.ULongRange.contains(value: kotlin.UShort): kotlin.Boolean
+public operator fun kotlin.ranges.ULongRange.contains(konstue: kotlin.UShort): kotlin.Boolean
 
 public infix fun kotlin.Byte.downTo(to: kotlin.Byte): kotlin.ranges.IntProgression
 
@@ -658,11 +658,11 @@ public infix fun kotlin.ULong.until(to: kotlin.ULong): kotlin.ranges.ULongRange
 public infix fun kotlin.UShort.until(to: kotlin.UShort): kotlin.ranges.UIntRange
 
 public open class CharProgression : kotlin.collections.Iterable<kotlin.Char> {
-    public final val first: kotlin.Char { get; }
+    public final konst first: kotlin.Char { get; }
 
-    public final val last: kotlin.Char { get; }
+    public final konst last: kotlin.Char { get; }
 
-    public final val step: kotlin.Int { get; }
+    public final konst step: kotlin.Int { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -682,16 +682,16 @@ public open class CharProgression : kotlin.collections.Iterable<kotlin.Char> {
 public final class CharRange : kotlin.ranges.CharProgression, kotlin.ranges.ClosedRange<kotlin.Char>, kotlin.ranges.OpenEndRange<kotlin.Char> {
     public constructor CharRange(start: kotlin.Char, endInclusive: kotlin.Char)
 
-    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the value with Char type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the konstue with Char type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @kotlin.SinceKotlin(version = "1.9")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public open override val endExclusive: kotlin.Char { get; }
+    public open override konst endExclusive: kotlin.Char { get; }
 
-    public open override val endInclusive: kotlin.Char { get; }
+    public open override konst endInclusive: kotlin.Char { get; }
 
-    public open override val start: kotlin.Char { get; }
+    public open override konst start: kotlin.Char { get; }
 
-    public open override operator fun contains(value: kotlin.Char): kotlin.Boolean
+    public open override operator fun contains(konstue: kotlin.Char): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -702,13 +702,13 @@ public final class CharRange : kotlin.ranges.CharProgression, kotlin.ranges.Clos
     public open override fun toString(): kotlin.String
 
     public companion object of CharRange {
-        public final val EMPTY: kotlin.ranges.CharRange { get; }
+        public final konst EMPTY: kotlin.ranges.CharRange { get; }
     }
 }
 
 @kotlin.SinceKotlin(version = "1.1")
 public interface ClosedFloatingPointRange<T : kotlin.Comparable<T>> : kotlin.ranges.ClosedRange<T> {
-    public open override operator fun contains(value: T): kotlin.Boolean
+    public open override operator fun contains(konstue: T): kotlin.Boolean
 
     public open override fun isEmpty(): kotlin.Boolean
 
@@ -716,21 +716,21 @@ public interface ClosedFloatingPointRange<T : kotlin.Comparable<T>> : kotlin.ran
 }
 
 public interface ClosedRange<T : kotlin.Comparable<T>> {
-    public abstract val endInclusive: T { get; }
+    public abstract konst endInclusive: T { get; }
 
-    public abstract val start: T { get; }
+    public abstract konst start: T { get; }
 
-    public open operator fun contains(value: T): kotlin.Boolean
+    public open operator fun contains(konstue: T): kotlin.Boolean
 
     public open fun isEmpty(): kotlin.Boolean
 }
 
 public open class IntProgression : kotlin.collections.Iterable<kotlin.Int> {
-    public final val first: kotlin.Int { get; }
+    public final konst first: kotlin.Int { get; }
 
-    public final val last: kotlin.Int { get; }
+    public final konst last: kotlin.Int { get; }
 
-    public final val step: kotlin.Int { get; }
+    public final konst step: kotlin.Int { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -750,16 +750,16 @@ public open class IntProgression : kotlin.collections.Iterable<kotlin.Int> {
 public final class IntRange : kotlin.ranges.IntProgression, kotlin.ranges.ClosedRange<kotlin.Int>, kotlin.ranges.OpenEndRange<kotlin.Int> {
     public constructor IntRange(start: kotlin.Int, endInclusive: kotlin.Int)
 
-    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the value with Int type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the konstue with Int type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @kotlin.SinceKotlin(version = "1.9")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public open override val endExclusive: kotlin.Int { get; }
+    public open override konst endExclusive: kotlin.Int { get; }
 
-    public open override val endInclusive: kotlin.Int { get; }
+    public open override konst endInclusive: kotlin.Int { get; }
 
-    public open override val start: kotlin.Int { get; }
+    public open override konst start: kotlin.Int { get; }
 
-    public open override operator fun contains(value: kotlin.Int): kotlin.Boolean
+    public open override operator fun contains(konstue: kotlin.Int): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -770,16 +770,16 @@ public final class IntRange : kotlin.ranges.IntProgression, kotlin.ranges.Closed
     public open override fun toString(): kotlin.String
 
     public companion object of IntRange {
-        public final val EMPTY: kotlin.ranges.IntRange { get; }
+        public final konst EMPTY: kotlin.ranges.IntRange { get; }
     }
 }
 
 public open class LongProgression : kotlin.collections.Iterable<kotlin.Long> {
-    public final val first: kotlin.Long { get; }
+    public final konst first: kotlin.Long { get; }
 
-    public final val last: kotlin.Long { get; }
+    public final konst last: kotlin.Long { get; }
 
-    public final val step: kotlin.Long { get; }
+    public final konst step: kotlin.Long { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -799,16 +799,16 @@ public open class LongProgression : kotlin.collections.Iterable<kotlin.Long> {
 public final class LongRange : kotlin.ranges.LongProgression, kotlin.ranges.ClosedRange<kotlin.Long>, kotlin.ranges.OpenEndRange<kotlin.Long> {
     public constructor LongRange(start: kotlin.Long, endInclusive: kotlin.Long)
 
-    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the value with Long type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the konstue with Long type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @kotlin.SinceKotlin(version = "1.9")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public open override val endExclusive: kotlin.Long { get; }
+    public open override konst endExclusive: kotlin.Long { get; }
 
-    public open override val endInclusive: kotlin.Long { get; }
+    public open override konst endInclusive: kotlin.Long { get; }
 
-    public open override val start: kotlin.Long { get; }
+    public open override konst start: kotlin.Long { get; }
 
-    public open override operator fun contains(value: kotlin.Long): kotlin.Boolean
+    public open override operator fun contains(konstue: kotlin.Long): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -819,18 +819,18 @@ public final class LongRange : kotlin.ranges.LongProgression, kotlin.ranges.Clos
     public open override fun toString(): kotlin.String
 
     public companion object of LongRange {
-        public final val EMPTY: kotlin.ranges.LongRange { get; }
+        public final konst EMPTY: kotlin.ranges.LongRange { get; }
     }
 }
 
 @kotlin.SinceKotlin(version = "1.9")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
 public interface OpenEndRange<T : kotlin.Comparable<T>> {
-    public abstract val endExclusive: T { get; }
+    public abstract konst endExclusive: T { get; }
 
-    public abstract val start: T { get; }
+    public abstract konst start: T { get; }
 
-    public open operator fun contains(value: T): kotlin.Boolean
+    public open operator fun contains(konstue: T): kotlin.Boolean
 
     public open fun isEmpty(): kotlin.Boolean
 }
@@ -838,11 +838,11 @@ public interface OpenEndRange<T : kotlin.Comparable<T>> {
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
 public open class UIntProgression : kotlin.collections.Iterable<kotlin.UInt> {
-    public final val first: kotlin.UInt { get; }
+    public final konst first: kotlin.UInt { get; }
 
-    public final val last: kotlin.UInt { get; }
+    public final konst last: kotlin.UInt { get; }
 
-    public final val step: kotlin.Int { get; }
+    public final konst step: kotlin.Int { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -864,16 +864,16 @@ public open class UIntProgression : kotlin.collections.Iterable<kotlin.UInt> {
 public final class UIntRange : kotlin.ranges.UIntProgression, kotlin.ranges.ClosedRange<kotlin.UInt>, kotlin.ranges.OpenEndRange<kotlin.UInt> {
     public constructor UIntRange(start: kotlin.UInt, endInclusive: kotlin.UInt)
 
-    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the value with UInt type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the konstue with UInt type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @kotlin.SinceKotlin(version = "1.9")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public open override val endExclusive: kotlin.UInt { get; }
+    public open override konst endExclusive: kotlin.UInt { get; }
 
-    public open override val endInclusive: kotlin.UInt { get; }
+    public open override konst endInclusive: kotlin.UInt { get; }
 
-    public open override val start: kotlin.UInt { get; }
+    public open override konst start: kotlin.UInt { get; }
 
-    public open override operator fun contains(value: kotlin.UInt): kotlin.Boolean
+    public open override operator fun contains(konstue: kotlin.UInt): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -884,18 +884,18 @@ public final class UIntRange : kotlin.ranges.UIntProgression, kotlin.ranges.Clos
     public open override fun toString(): kotlin.String
 
     public companion object of UIntRange {
-        public final val EMPTY: kotlin.ranges.UIntRange { get; }
+        public final konst EMPTY: kotlin.ranges.UIntRange { get; }
     }
 }
 
 @kotlin.SinceKotlin(version = "1.5")
 @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalUnsignedTypes::class})
 public open class ULongProgression : kotlin.collections.Iterable<kotlin.ULong> {
-    public final val first: kotlin.ULong { get; }
+    public final konst first: kotlin.ULong { get; }
 
-    public final val last: kotlin.ULong { get; }
+    public final konst last: kotlin.ULong { get; }
 
-    public final val step: kotlin.Long { get; }
+    public final konst step: kotlin.Long { get; }
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -917,16 +917,16 @@ public open class ULongProgression : kotlin.collections.Iterable<kotlin.ULong> {
 public final class ULongRange : kotlin.ranges.ULongProgression, kotlin.ranges.ClosedRange<kotlin.ULong>, kotlin.ranges.OpenEndRange<kotlin.ULong> {
     public constructor ULongRange(start: kotlin.ULong, endInclusive: kotlin.ULong)
 
-    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the value with ULong type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
+    @kotlin.Deprecated(message = "Can throw an exception when it's impossible to represent the konstue with ULong type, for example, when the range includes MAX_VALUE. It's recommended to use 'endInclusive' property that doesn't throw.")
     @kotlin.SinceKotlin(version = "1.9")
     @kotlin.WasExperimental(markerClass = {kotlin.ExperimentalStdlibApi::class})
-    public open override val endExclusive: kotlin.ULong { get; }
+    public open override konst endExclusive: kotlin.ULong { get; }
 
-    public open override val endInclusive: kotlin.ULong { get; }
+    public open override konst endInclusive: kotlin.ULong { get; }
 
-    public open override val start: kotlin.ULong { get; }
+    public open override konst start: kotlin.ULong { get; }
 
-    public open override operator fun contains(value: kotlin.ULong): kotlin.Boolean
+    public open override operator fun contains(konstue: kotlin.ULong): kotlin.Boolean
 
     public open override operator fun equals(other: kotlin.Any?): kotlin.Boolean
 
@@ -937,6 +937,6 @@ public final class ULongRange : kotlin.ranges.ULongProgression, kotlin.ranges.Cl
     public open override fun toString(): kotlin.String
 
     public companion object of ULongRange {
-        public final val EMPTY: kotlin.ranges.ULongRange { get; }
+        public final konst EMPTY: kotlin.ranges.ULongRange { get; }
     }
 }

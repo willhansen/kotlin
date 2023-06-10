@@ -1,4 +1,4 @@
-val projectsAllowedToUseFirFromSymbol = listOf(
+konst projectsAllowedToUseFirFromSymbol = listOf(
     "analysis-tests",
     "dump",
     "fir-deserialization",

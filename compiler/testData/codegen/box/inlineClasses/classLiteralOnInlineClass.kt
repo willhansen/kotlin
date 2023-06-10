@@ -8,16 +8,16 @@ package root
 import kotlin.reflect.KClass
 
 @JvmInline
-value class IcInt(val x: Int)
+konstue class IcInt(konst x: Int)
 
 @JvmInline
-value class IcLong(val l: Long)
+konstue class IcLong(konst l: Long)
 
 @JvmInline
-value class IcAny(val a: Any?)
+konstue class IcAny(konst a: Any?)
 
 @JvmInline
-value class IcOverIc(val o: IcLong)
+konstue class IcOverIc(konst o: IcLong)
 
 fun check(c: KClass<*>, s: String) {
     if (c.toString() != s) error("Fail, expected: $s, actual: $c")
@@ -33,10 +33,10 @@ inline fun <reified T> reifiedCheck(asString: String, simpleName: String) {
 }
 
 fun box(): String {
-    val i = IcInt(0)
-    val l = IcLong(0)
-    val a = IcAny("foo")
-    val o = IcOverIc(IcLong(0))
+    konst i = IcInt(0)
+    konst l = IcLong(0)
+    konst a = IcAny("foo")
+    konst o = IcOverIc(IcLong(0))
 
     check(i::class, "class root.IcInt")
     check(l::class, "class root.IcLong")
@@ -56,19 +56,19 @@ fun box(): String {
     reifiedCheck<IcOverIc>("class root.IcOverIc", "IcOverIc")
     reifiedCheck<UInt>("class kotlin.UInt", "UInt")
 
-    val arrI = arrayOf(i)
+    konst arrI = arrayOf(i)
     check(arrI[0]::class, "class root.IcInt")
 
-    val arrL = arrayOf(l)
+    konst arrL = arrayOf(l)
     check(arrL[0]::class, "class root.IcLong")
 
-    val arrA = arrayOf(a)
+    konst arrA = arrayOf(a)
     check(arrA[0]::class, "class root.IcAny")
 
-    val arrO = arrayOf(o)
+    konst arrO = arrayOf(o)
     check(arrO[0]::class, "class root.IcOverIc")
 
-    val arrU = arrayOf(1u)
+    konst arrU = arrayOf(1u)
     check(arrU[0]::class, "class kotlin.UInt")
 
     check(IcInt::class, "class root.IcInt")

@@ -16,23 +16,23 @@ import org.jetbrains.kotlin.ir.util.isSubclassOf
 import kotlin.math.min
 
 internal class ExceptionState private constructor(
-    override val irClass: IrClass, override val fields: Fields, stackTrace: List<String>
+    override konst irClass: IrClass, override konst fields: Fields, stackTrace: List<String>
 ) : Complex, StateWithClosure, Throwable() {
-    override val upValues: MutableMap<IrSymbol, Variable> = mutableMapOf()
+    override konst upValues: MutableMap<IrSymbol, Variable> = mutableMapOf()
     override var superWrapperClass: Wrapper? = null
     override var outerClass: Field? = null
 
-    override val message: String?
+    override konst message: String?
         get() = getField(messageProperty.symbol)?.asStringOrNull()
-    override val cause: ExceptionState?
+    override konst cause: ExceptionState?
         get() = getField(causeProperty.symbol) as? ExceptionState
 
     private lateinit var exceptionFqName: String
-    private val exceptionHierarchy = mutableListOf<String>()
-    private val messageProperty = irClass.getOriginalPropertyByName("message")
-    private val causeProperty = irClass.getOriginalPropertyByName("cause")
+    private konst exceptionHierarchy = mutableListOf<String>()
+    private konst messageProperty = irClass.getOriginalPropertyByName("message")
+    private konst causeProperty = irClass.getOriginalPropertyByName("cause")
 
-    private val stackTrace: List<String> = stackTrace.reversed()
+    private konst stackTrace: List<String> = stackTrace.reversed()
 
     init {
         if (!this::exceptionFqName.isInitialized) this.exceptionFqName = irClassFqName()
@@ -46,7 +46,7 @@ internal class ExceptionState private constructor(
 
     constructor(
         exception: Throwable, irClass: IrClass, stackTrace: List<String>, environment: IrInterpreterEnvironment
-    ) : this(irClass, evaluateFields(exception, irClass, environment), stackTrace + evaluateAdditionalStackTrace(exception, environment)) {
+    ) : this(irClass, ekonstuateFields(exception, irClass, environment), stackTrace + ekonstuateAdditionalStackTrace(exception, environment)) {
         setCause(null)  // TODO check this fact
         if (irClass.name.asString() != exception::class.java.simpleName) {
             // ir class wasn't found in classpath, a stub was passed => need to save java class hierarchy
@@ -58,7 +58,7 @@ internal class ExceptionState private constructor(
     }
 
     fun copyFieldsFrom(wrapper: Wrapper) {
-        (wrapper.value as? Throwable)?.let {
+        (wrapper.konstue as? Throwable)?.let {
             setMessage(it.message)
             setCause(it.cause as? ExceptionState)
         }
@@ -71,7 +71,7 @@ internal class ExceptionState private constructor(
 
     private fun recalculateCauseAndMessage() {
         if (message == null && cause != null) {
-            val causeMessage = cause!!.exceptionFqName + (cause!!.message?.let { ": $it" } ?: "")
+            konst causeMessage = cause!!.exceptionFqName + (cause!!.message?.let { ": $it" } ?: "")
             setMessage(causeMessage)
         }
     }
@@ -97,10 +97,10 @@ internal class ExceptionState private constructor(
 
     fun getFullDescription(): String {
         // TODO remainder of the stack trace with "..."
-        val message = message.let { if (it?.isNotEmpty() == true) ": $it" else "" }
-        val prefix = if (stackTrace.isNotEmpty()) "\n\t" else ""
-        val postfix = if (stackTrace.size > 10) "\n\t..." else ""
-        val causeMessage = cause?.getFullDescription()?.replaceFirst("Exception ", "\nCaused by: ") ?: ""
+        konst message = message.let { if (it?.isNotEmpty() == true) ": $it" else "" }
+        konst prefix = if (stackTrace.isNotEmpty()) "\n\t" else ""
+        konst postfix = if (stackTrace.size > 10) "\n\t..." else ""
+        konst causeMessage = cause?.getFullDescription()?.replaceFirst("Exception ", "\nCaused by: ") ?: ""
         return "Exception $exceptionFqName$message" +
                 stackTrace.subList(0, min(stackTrace.size, 10)).joinToString(separator = "\n\t", prefix = prefix, postfix = postfix) +
                 causeMessage
@@ -109,21 +109,21 @@ internal class ExceptionState private constructor(
     override fun toString(): String = message?.let { "$exceptionFqName: $it" } ?: exceptionFqName
 
     companion object {
-        private fun evaluateFields(exception: Throwable, irClass: IrClass, environment: IrInterpreterEnvironment): Fields {
-            val stackTrace = environment.callStack.getStackTrace()
-            val messageProperty = irClass.getOriginalPropertyByName("message")
-            val causeProperty = irClass.getOriginalPropertyByName("cause")
+        private fun ekonstuateFields(exception: Throwable, irClass: IrClass, environment: IrInterpreterEnvironment): Fields {
+            konst stackTrace = environment.callStack.getStackTrace()
+            konst messageProperty = irClass.getOriginalPropertyByName("message")
+            konst causeProperty = irClass.getOriginalPropertyByName("cause")
 
-            val messageVar = messageProperty.symbol to Primitive(exception.message, messageProperty.getter!!.returnType)
-            val causeVar = exception.cause?.let {
+            konst messageVar = messageProperty.symbol to Primitive(exception.message, messageProperty.getter!!.returnType)
+            konst causeVar = exception.cause?.let {
                 causeProperty.symbol to ExceptionState(it, irClass, stackTrace + it.stackTrace.reversed().map { "at $it" }, environment)
             }
             return causeVar?.let { mutableMapOf(messageVar, it) } ?: mutableMapOf(messageVar)
         }
 
-        private fun evaluateAdditionalStackTrace(e: Throwable, environment: IrInterpreterEnvironment): List<String> {
+        private fun ekonstuateAdditionalStackTrace(e: Throwable, environment: IrInterpreterEnvironment): List<String> {
             // TODO do we really need this?... It will point to JVM stdlib
-            val additionalStack = mutableListOf<String>()
+            konst additionalStack = mutableListOf<String>()
             if (e.stackTrace.any { it.className == "java.lang.invoke.MethodHandle" }) {
                 for ((index, stackTraceElement) in e.stackTrace.withIndex()) {
                     if (stackTraceElement.methodName == "invokeWithArguments") {
@@ -133,10 +133,10 @@ internal class ExceptionState private constructor(
                 }
 
                 var cause = e.cause
-                val lastNeededValue = e.stackTrace.first().let { it.className + "." + it.methodName }
+                konst lastNeededValue = e.stackTrace.first().let { it.className + "." + it.methodName }
                 while (cause != null) {
                     for ((causeStackIndex, causeStackTraceElement) in cause.stackTrace.withIndex()) {
-                        val currentStackTraceValue = causeStackTraceElement.let { it.className + "." + it.methodName }
+                        konst currentStackTraceValue = causeStackTraceElement.let { it.className + "." + it.methodName }
                         if (currentStackTraceValue == lastNeededValue) {
                             cause.stackTrace = cause.stackTrace.sliceArray(0 until causeStackIndex).reversedArray()
                             break

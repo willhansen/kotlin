@@ -1,13 +1,13 @@
 // WITH_STDLIB
 public class ClassWithProperties {
 
-    public val publicVal: Int = 1
+    public konst publicVal: Int = 1
     public var publicVar: Int = 1
-    internal val internalVal: Long = 1
+    internal konst internalVal: Long = 1
     internal var internalVar: Long = 1
-    protected val protectedVal: String = ""
+    protected konst protectedVal: String = ""
     protected var protectedVar: String = ""
-    private val privateVal: Any? = 1
+    private konst privateVal: Any? = 1
     private var privateVar: Any? = 1
 
 }
@@ -32,16 +32,16 @@ public class ClassWithLateinit {
 
 public class ClassWithFields {
 
-    @JvmField public val publicVal: Int = 1
+    @JvmField public konst publicVal: Int = 1
     @JvmField public var publicVar: Int = 1
-    @JvmField internal val internalVal: Long = 1
+    @JvmField internal konst internalVal: Long = 1
     @JvmField internal var internalVar: Long = 1
-    @JvmField protected val protectedVal: String = ""
+    @JvmField protected konst protectedVal: String = ""
     @JvmField protected var protectedVar: String = ""
 
 }
 
-public class ClassWithConstructors(val a: Any, b: Int) {
+public class ClassWithConstructors(konst a: Any, b: Int) {
     public constructor(a: String) : this(a, 1) {}
     internal constructor(a: Int) : this(a, 2) {}
     protected constructor(a: Any) : this(a, 0) {}
@@ -58,19 +58,19 @@ public class ClassWithFunctions {
 }
 
 public object ObjectWithProperties {
-    public val publicVal: Int = 1
+    public konst publicVal: Int = 1
     public var publicVar: Int = 1
-    internal val internalVal: Long = 1
+    internal konst internalVal: Long = 1
     internal var internalVar: Long = 1
-    private val privateVal: Any? = 1
+    private konst privateVal: Any? = 1
     private var privateVar: Any? = 1
 }
 
 public object ObjectWithFields {
 
-    @JvmField public val publicVal: Int = 1
+    @JvmField public konst publicVal: Int = 1
     @JvmField public var publicVar: Int = 1
-    @JvmField internal val internalVal: Long = 1
+    @JvmField internal konst internalVal: Long = 1
     @JvmField internal var internalVar: Long = 1
 
 }
@@ -86,8 +86,8 @@ public class ObjectWithFunctions {
 
 public object ObjectWithConst {
 
-    public const val publicConst: Int = 2
-    internal const val internalConst: Int = 3
-    private const val privateConst: Int = 4
+    public const konst publicConst: Int = 2
+    internal const konst internalConst: Int = 3
+    private const konst privateConst: Int = 4
 
 }

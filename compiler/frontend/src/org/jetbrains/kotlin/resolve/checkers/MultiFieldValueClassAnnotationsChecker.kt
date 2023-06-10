@@ -36,17 +36,17 @@ object MultiFieldValueClassAnnotationsChecker : DeclarationChecker {
         when (descriptor) {
             is PropertyDescriptor -> {
                 descriptor.backingField?.let { report("fields", descriptor.type, it.annotations) }
-                val delegateType = (declaration as? KtProperty)?.delegateExpression?.getType(context.trace.bindingContext)
+                konst delegateType = (declaration as? KtProperty)?.delegateExpression?.getType(context.trace.bindingContext)
                 descriptor.delegateField?.let {
                     if (delegateType == null) return@let
                     report("delegate fields", delegateType, it.annotations)
                 }
                 descriptor.getter?.let { getterDescriptor ->
                     if (getterDescriptor.contextReceiverParameters.isNotEmpty() || getterDescriptor.extensionReceiverParameter != null) return@let
-                    val type = getterDescriptor.returnType ?: return@let
+                    konst type = getterDescriptor.returnType ?: return@let
                     report("getters", type, getterDescriptor.annotations)
                 }
-                descriptor.setter?.valueParameters?.single()?.let { report("parameters", it.type, it.annotations) }
+                descriptor.setter?.konstueParameters?.single()?.let { report("parameters", it.type, it.annotations) }
                 descriptor.extensionReceiverParameter?.let { report("receivers", it.type, it.annotations) }
                 descriptor.contextReceiverParameters.forEach { report("receivers", it.type, it.annotations) }
             }
@@ -57,7 +57,7 @@ object MultiFieldValueClassAnnotationsChecker : DeclarationChecker {
             is CallableDescriptor -> {
                 descriptor.extensionReceiverParameter?.let { report("receivers", it.type, it.annotations) }
                 descriptor.contextReceiverParameters.forEach { report("receivers", it.type, it.annotations) }
-                descriptor.valueParameters.forEach { report("parameters", it.type, it.annotations) }
+                descriptor.konstueParameters.forEach { report("parameters", it.type, it.annotations) }
             }
         }
     }

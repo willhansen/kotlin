@@ -22,10 +22,10 @@ import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.transformChildrenVoid
 import org.jetbrains.kotlin.types.Variance
 
-internal class SamSuperTypesChecker(private val context: Context,
-                                    private val irFile: IrFile,
-                                    private val mode: Mode,
-                                    private val recurse: Boolean) {
+internal class SamSuperTypesChecker(private konst context: Context,
+                                    private konst irFile: IrFile,
+                                    private konst mode: Mode,
+                                    private konst recurse: Boolean) {
     enum class Mode {
         ERASE,
         THROW
@@ -45,7 +45,7 @@ internal class SamSuperTypesChecker(private val context: Context,
                             context.reportCompilationError(
                                     "Unexpected variance in super type argument: ${argument.variance} @$index", irFile, owner)
                         }
-                        val newArgumentType = if (recurse) {
+                        konst newArgumentType = if (recurse) {
                             argument.type.eraseProjections(owner)
                         } else {
                             // See the explanation at the SamSuperTypesChecker constructor call sites.

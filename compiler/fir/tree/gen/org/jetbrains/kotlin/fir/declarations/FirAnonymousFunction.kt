@@ -27,30 +27,30 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 abstract class FirAnonymousFunction : FirFunction(), FirTypeParametersOwner, FirContractDescriptionOwner {
-    abstract override val source: KtSourceElement?
-    abstract override val annotations: List<FirAnnotation>
-    abstract override val moduleData: FirModuleData
-    abstract override val origin: FirDeclarationOrigin
-    abstract override val attributes: FirDeclarationAttributes
-    abstract override val status: FirDeclarationStatus
-    abstract override val returnTypeRef: FirTypeRef
-    abstract override val receiverParameter: FirReceiverParameter?
-    abstract override val deprecationsProvider: DeprecationsProvider
-    abstract override val containerSource: DeserializedContainerSource?
-    abstract override val dispatchReceiverType: ConeSimpleKotlinType?
-    abstract override val contextReceivers: List<FirContextReceiver>
-    abstract override val controlFlowGraphReference: FirControlFlowGraphReference?
-    abstract override val valueParameters: List<FirValueParameter>
-    abstract override val body: FirBlock?
-    abstract override val contractDescription: FirContractDescription
-    abstract override val symbol: FirAnonymousFunctionSymbol
-    abstract val label: FirLabel?
-    abstract val invocationKind: EventOccurrencesRange?
-    abstract val inlineStatus: InlineStatus
-    abstract val isLambda: Boolean
-    abstract val hasExplicitParameterList: Boolean
-    abstract override val typeParameters: List<FirTypeParameter>
-    abstract val typeRef: FirTypeRef
+    abstract override konst source: KtSourceElement?
+    abstract override konst annotations: List<FirAnnotation>
+    abstract override konst moduleData: FirModuleData
+    abstract override konst origin: FirDeclarationOrigin
+    abstract override konst attributes: FirDeclarationAttributes
+    abstract override konst status: FirDeclarationStatus
+    abstract override konst returnTypeRef: FirTypeRef
+    abstract override konst receiverParameter: FirReceiverParameter?
+    abstract override konst deprecationsProvider: DeprecationsProvider
+    abstract override konst containerSource: DeserializedContainerSource?
+    abstract override konst dispatchReceiverType: ConeSimpleKotlinType?
+    abstract override konst contextReceivers: List<FirContextReceiver>
+    abstract override konst controlFlowGraphReference: FirControlFlowGraphReference?
+    abstract override konst konstueParameters: List<FirValueParameter>
+    abstract override konst body: FirBlock?
+    abstract override konst contractDescription: FirContractDescription
+    abstract override konst symbol: FirAnonymousFunctionSymbol
+    abstract konst label: FirLabel?
+    abstract konst invocationKind: EventOccurrencesRange?
+    abstract konst inlineStatus: InlineStatus
+    abstract konst isLambda: Boolean
+    abstract konst hasExplicitParameterList: Boolean
+    abstract override konst typeParameters: List<FirTypeParameter>
+    abstract konst typeRef: FirTypeRef
 
     override fun <R, D> accept(visitor: FirVisitor<R, D>, data: D): R = visitor.visitAnonymousFunction(this, data)
 

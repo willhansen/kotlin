@@ -22,7 +22,7 @@ import java.io.File
 
 class LombokAdditionalSourceFileProvider(testServices: TestServices) : AdditionalSourceProvider(testServices) {
     companion object {
-        const val COMMON_SOURCE_PATH = "plugins/lombok/testData/common.kt"
+        const konst COMMON_SOURCE_PATH = "plugins/lombok/testData/common.kt"
     }
 
     override fun produceAdditionalFiles(globalDirectives: RegisteredDirectives, module: TestModule): List<TestFile> {
@@ -32,14 +32,14 @@ class LombokAdditionalSourceFileProvider(testServices: TestServices) : Additiona
 
 class LombokEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
     companion object {
-        const val LOMBOK_CONFIG_NAME = "lombok.config"
-        private const val guavaPropertyName = "org.jetbrains.kotlin.test.guava-location"
+        const konst LOMBOK_CONFIG_NAME = "lombok.config"
+        private const konst guavaPropertyName = "org.jetbrains.kotlin.test.guava-location"
 
-        val GUAVA_JAR: File
+        konst GUAVA_JAR: File
             get() = EnvironmentBasedStandardLibrariesPathProvider.getFile(guavaPropertyName)
     }
 
-    override val directiveContainers: List<DirectivesContainer>
+    override konst directiveContainers: List<DirectivesContainer>
         get() = listOf(LombokDirectives)
 
     override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
@@ -48,7 +48,7 @@ class LombokEnvironmentConfigurator(testServices: TestServices) : EnvironmentCon
             configuration.addJvmClasspathRoot(GUAVA_JAR)
         }
 
-        val lombokConfig = findLombokConfig(module) ?: return
+        konst lombokConfig = findLombokConfig(module) ?: return
         lombokConfig.copyTo(testServices.sourceFileProvider.javaSourceDirectory.resolve(lombokConfig.name))
         configuration.put(LombokConfigurationKeys.CONFIG_FILE, lombokConfig)
     }
@@ -75,5 +75,5 @@ class LombokRuntimeClassPathProvider(testServices: TestServices) : RuntimeClassp
 }
 
 object LombokDirectives : SimpleDirectivesContainer() {
-    val WITH_GUAVA by directive("Add guava to classpath")
+    konst WITH_GUAVA by directive("Add guava to classpath")
 }

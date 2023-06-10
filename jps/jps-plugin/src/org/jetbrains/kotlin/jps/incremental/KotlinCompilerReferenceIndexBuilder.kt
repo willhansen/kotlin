@@ -19,7 +19,7 @@ import org.jetbrains.kotlin.config.SettingConstants
  * Based on [org.jetbrains.jps.backwardRefs.JavaBackwardReferenceIndexBuilder]
  */
 class KotlinCompilerReferenceIndexBuilder : ModuleLevelBuilder(BuilderCategory.CLASS_POST_PROCESSOR) {
-    private val compiledTargets = ContainerUtil.newConcurrentSet<ModuleBuildTarget>()
+    private konst compiledTargets = ContainerUtil.newConcurrentSet<ModuleBuildTarget>()
 
     override fun getPresentableName(): String = JpsBuildBundle.message("builder.name.backward.references.indexer")
 
@@ -35,9 +35,9 @@ class KotlinCompilerReferenceIndexBuilder : ModuleLevelBuilder(BuilderCategory.C
     }
 
     override fun buildFinished(context: CompileContext) {
-        val targetIndex = context.projectDescriptor.buildTargetIndex
+        konst targetIndex = context.projectDescriptor.buildTargetIndex
         for (module in context.projectDescriptor.project.modules) {
-            val allAreDummyOrCompiled = targetIndex.getModuleBasedTargets(module, BuildTargetRegistry.ModuleTargetSelector.ALL)
+            konst allAreDummyOrCompiled = targetIndex.getModuleBasedTargets(module, BuildTargetRegistry.ModuleTargetSelector.ALL)
                 .none { target -> target is ModuleBuildTarget && target !in compiledTargets && !targetIndex.isDummy(target) }
 
             if (allAreDummyOrCompiled) {
@@ -53,6 +53,6 @@ class KotlinCompilerReferenceIndexBuilder : ModuleLevelBuilder(BuilderCategory.C
     override fun getCompilableFileExtensions(): List<String> = emptyList()
 
     companion object {
-        private const val MESSAGE_TYPE = "processed module"
+        private const konst MESSAGE_TYPE = "processed module"
     }
 }

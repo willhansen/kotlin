@@ -12,7 +12,7 @@ interface A {
 
 //variable as member
 interface B {
-    val foo: Foo
+    konst foo: Foo
 }
 
 class C {
@@ -41,7 +41,7 @@ fun test(c: C, b: B) {
 //variable as extension,
 interface D {
 }
-val D.foo: Foo
+konst D.foo: Foo
     get() = Foo()
 
 class E {
@@ -70,7 +70,7 @@ fun test(e: E, d: D) {
 interface F
 
 interface G {
-    val F.foo: Foo
+    konst F.foo: Foo
     operator fun Foo.invoke()
 
     fun test(f: F) {
@@ -96,7 +96,7 @@ fun test(g: G, f: F) {
 interface X
 
 interface U {
-    val X.foo: Foo
+    konst X.foo: Foo
 }
 
 interface V {

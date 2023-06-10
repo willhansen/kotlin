@@ -8,7 +8,7 @@ import kotlin.native.concurrent.*
 
 @Test
 fun testExecuteAfterStartQuiet() {
-    val worker = Worker.start(errorReporting = false)
+    konst worker = Worker.start(errorReporting = false)
     worker.executeAfter(0L, {
         throw Error("testExecuteAfterStartQuiet error")
     }.freeze())
@@ -17,8 +17,8 @@ fun testExecuteAfterStartQuiet() {
 
 @Test
 fun testExecuteStart() {
-    val worker = Worker.start()
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start()
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         throw Error("testExecuteStart error")
     }
     assertFailsWith<Throwable> {
@@ -29,8 +29,8 @@ fun testExecuteStart() {
 
 @Test
 fun testExecuteStartQuiet() {
-    val worker = Worker.start(errorReporting = false)
-    val future = worker.execute(TransferMode.SAFE, {}) {
+    konst worker = Worker.start(errorReporting = false)
+    konst future = worker.execute(TransferMode.SAFE, {}) {
         throw Error("testExecuteStartQuiet error")
     }
     assertFailsWith<Throwable> {

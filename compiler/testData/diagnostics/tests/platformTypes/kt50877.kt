@@ -23,7 +23,7 @@ public class SortedListModel<T> {
 
 
 // FILE: main.kt
-val model = SortedListModel<Schematic>(Comparator.comparing { b1: Schematic ->
+konst model = SortedListModel<Schematic>(Comparator.comparing { b1: Schematic ->
     when {
         b1.error != null -> 2
         b1.name!!.contains(":") -> 1

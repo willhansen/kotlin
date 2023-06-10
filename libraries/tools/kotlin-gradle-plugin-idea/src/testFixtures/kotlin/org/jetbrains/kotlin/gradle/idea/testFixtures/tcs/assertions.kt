@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.gradle.idea.tcs.IdeaKotlinDependency
 import kotlin.test.fail
 
 fun Iterable<IdeaKotlinDependency>.assertMatches(vararg notation: Any?): Iterable<IdeaKotlinDependency> {
-    val thisList = toList()
-    val matchers = notation.flatMap { buildIdeaKotlinDependencyMatchers(it) }
+    konst thisList = toList()
+    konst matchers = notation.flatMap { buildIdeaKotlinDependencyMatchers(it) }
 
-    val unexpectedDependencies = thisList.filter { dependency -> matchers.none { matcher -> matcher.matches(dependency) } }
-    val missingDependencies = matchers.filter { matcher -> thisList.none { dependency -> matcher.matches(dependency) } }
+    konst unexpectedDependencies = thisList.filter { dependency -> matchers.none { matcher -> matcher.matches(dependency) } }
+    konst missingDependencies = matchers.filter { matcher -> thisList.none { dependency -> matcher.matches(dependency) } }
 
     if (unexpectedDependencies.isEmpty() && missingDependencies.isEmpty()) {
         return this

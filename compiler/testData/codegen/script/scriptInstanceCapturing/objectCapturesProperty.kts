@@ -5,10 +5,10 @@
 
 fun foo() = B.bar()
 
-val life = 42
+konst life = 42
 
 object B {
     fun bar() = life
 }
 
-val rv = foo()
+konst rv = foo()

@@ -214,7 +214,7 @@ mi_decl_nodiscard mi_decl_export void* mi_heap_realloc_aligned_at(mi_heap_t* hea
 
 // --------------------------------------------------------------------------------
 // Zero initialized re-allocation.
-// Only valid on memory that was originally allocated with zero initialization too.
+// Only konstid on memory that was originally allocated with zero initialization too.
 // e.g. `mi_calloc`, `mi_zalloc`, `mi_zalloc_aligned` etc.
 // see <https://github.com/microsoft/mimalloc/issues/63#issuecomment-508272992>
 // --------------------------------------------------------------------------------
@@ -329,8 +329,8 @@ mi_decl_export void mi_option_set_enabled(mi_option_t option, bool enable);
 mi_decl_export void mi_option_set_enabled_default(mi_option_t option, bool enable);
 
 mi_decl_nodiscard mi_decl_export long mi_option_get(mi_option_t option);
-mi_decl_export void mi_option_set(mi_option_t option, long value);
-mi_decl_export void mi_option_set_default(mi_option_t option, long value);
+mi_decl_export void mi_option_set(mi_option_t option, long konstue);
+mi_decl_export void mi_option_set_default(mi_option_t option, long konstue);
 
 
 // -------------------------------------------------------------------------------------------------------
@@ -346,8 +346,8 @@ mi_decl_nodiscard mi_decl_export size_t mi_malloc_usable_size(const void *p) mi_
 
 mi_decl_export int mi_posix_memalign(void** p, size_t alignment, size_t size)   mi_attr_noexcept;
 mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_memalign(size_t alignment, size_t size) mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(2) mi_attr_alloc_align(1);
-mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_valloc(size_t size)  mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(1);
-mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_pvalloc(size_t size) mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(1);
+mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_konstloc(size_t size)  mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(1);
+mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_pkonstloc(size_t size) mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(1);
 mi_decl_nodiscard mi_decl_export mi_decl_restrict void* mi_aligned_alloc(size_t alignment, size_t size) mi_attr_noexcept mi_attr_malloc mi_attr_alloc_size(2) mi_attr_alloc_align(1);
 
 mi_decl_nodiscard mi_decl_export void* mi_reallocarray(void* p, size_t count, size_t size) mi_attr_noexcept mi_attr_alloc_size2(2,3);
@@ -394,13 +394,13 @@ mi_decl_nodiscard mi_decl_export size_t mi_allocated_size(void) mi_attr_noexcept
 #endif
 
 template<class T> struct mi_stl_allocator {
-  typedef T                 value_type;
+  typedef T                 konstue_type;
   typedef std::size_t       size_type;
   typedef std::ptrdiff_t    difference_type;
-  typedef value_type&       reference;
-  typedef value_type const& const_reference;
-  typedef value_type*       pointer;
-  typedef value_type const* const_pointer;
+  typedef konstue_type&       reference;
+  typedef konstue_type const& const_reference;
+  typedef konstue_type*       pointer;
+  typedef konstue_type const* const_pointer;
   template <class U> struct rebind { typedef mi_stl_allocator<U> other; };
 
   mi_stl_allocator()                                             mi_attr_noexcept = default;
@@ -413,7 +413,7 @@ template<class T> struct mi_stl_allocator {
   mi_decl_nodiscard T* allocate(size_type count) { return static_cast<T*>(mi_new_n(count, sizeof(T))); }
   mi_decl_nodiscard T* allocate(size_type count, const void*) { return allocate(count); }
   #else
-  mi_decl_nodiscard pointer allocate(size_type count, const void* = 0) { return static_cast<pointer>(mi_new_n(count, sizeof(value_type))); }
+  mi_decl_nodiscard pointer allocate(size_type count, const void* = 0) { return static_cast<pointer>(mi_new_n(count, sizeof(konstue_type))); }
   #endif
 
   #if ((__cplusplus >= 201103L) || (_MSC_VER > 1900))  // C++11
@@ -424,11 +424,11 @@ template<class T> struct mi_stl_allocator {
   template <class U, class ...Args> void construct(U* p, Args&& ...args) { ::new(p) U(std::forward<Args>(args)...); }
   template <class U> void destroy(U* p) mi_attr_noexcept { p->~U(); }
   #else
-  void construct(pointer p, value_type const& val) { ::new(p) value_type(val); }
-  void destroy(pointer p) { p->~value_type(); }
+  void construct(pointer p, konstue_type const& konst) { ::new(p) konstue_type(konst); }
+  void destroy(pointer p) { p->~konstue_type(); }
   #endif
 
-  size_type     max_size() const mi_attr_noexcept { return (PTRDIFF_MAX/sizeof(value_type)); }
+  size_type     max_size() const mi_attr_noexcept { return (PTRDIFF_MAX/sizeof(konstue_type)); }
   pointer       address(reference x) const        { return &x; }
   const_pointer address(const_reference x) const  { return &x; }
 };

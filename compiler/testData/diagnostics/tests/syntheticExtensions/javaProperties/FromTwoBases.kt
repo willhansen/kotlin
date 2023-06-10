@@ -16,5 +16,5 @@ public interface A {
 // FILE: B.java
 public interface B {
     int getSomething();
-    void setSomething(int value);
+    void setSomething(int konstue);
 }

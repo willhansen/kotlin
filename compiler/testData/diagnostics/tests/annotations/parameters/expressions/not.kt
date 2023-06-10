@@ -3,9 +3,9 @@
 package test
 
 annotation class Ann(
-        val b1: Boolean,
-        val b2: Boolean,
-        val b3: Boolean
+        konst b1: Boolean,
+        konst b2: Boolean,
+        konst b3: Boolean
 )
 
 @Ann(!true, <!NO_VALUE_FOR_PARAMETER!>!false)<!> class MyClass

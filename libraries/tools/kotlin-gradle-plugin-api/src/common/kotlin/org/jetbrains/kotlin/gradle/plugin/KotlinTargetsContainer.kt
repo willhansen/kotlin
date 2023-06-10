@@ -10,13 +10,13 @@ import org.gradle.api.NamedDomainObjectContainer
 
 @KotlinTargetsDsl
 interface KotlinTargetsContainer {
-    val targets: NamedDomainObjectCollection<KotlinTarget>
+    konst targets: NamedDomainObjectCollection<KotlinTarget>
 }
 
 interface KotlinTargetsContainerWithPresets : KotlinTargetsContainer {
-    val presets: NamedDomainObjectCollection<KotlinTargetPreset<*>>
+    konst presets: NamedDomainObjectCollection<KotlinTargetPreset<*>>
 }
 
 interface KotlinSourceSetContainer {
-    val sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
+    konst sourceSets: NamedDomainObjectContainer<KotlinSourceSet>
 }

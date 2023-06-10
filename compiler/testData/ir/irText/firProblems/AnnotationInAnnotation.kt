@@ -8,12 +8,12 @@ public class Some {
 
 // FILE: AnnotationInAnnotation.kt
 
-annotation class Storage(val value: String)
+annotation class Storage(konst konstue: String)
 
-annotation class State(val name: String, val storages: Array<Storage>)
+annotation class State(konst name: String, konst storages: Array<Storage>)
 
 @State(
     name = "1",
-    storages = [Storage(value = Some.HELLO)]
+    storages = [Storage(konstue = Some.HELLO)]
 )
 class Test

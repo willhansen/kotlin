@@ -25,7 +25,7 @@ class ConcreteWithStatic : IStatic {
 fun box(): String {
     ConcreteWithStatic.doSth()
 
-    val companion: Any? = CompanionInitialization.getCompanion()
+    konst companion: Any? = CompanionInitialization.getCompanion()
     if (companion == null) return "fail 1"
     if (companion != ConcreteWithStatic) return "fail 2"
 

@@ -36,7 +36,7 @@ import org.jetbrains.org.objectweb.asm.tree.ClassNode
 class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration) : TreeMaker(context), Disposable {
     private var kaptContext = DisposableReference(kaptContext)
 
-    val nameTable: Name.Table = Names.instance(context).table
+    konst nameTable: Name.Table = Names.instance(context).table
 
     @Suppress("FunctionName")
     fun Type(type: Type): JCTree.JCExpression {
@@ -49,7 +49,7 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
 
     @Suppress("FunctionName")
     fun FqName(internalOrFqName: String): JCTree.JCExpression {
-        val path = getQualifiedName(internalOrFqName).convertSpecialFqName().split('.')
+        konst path = getQualifiedName(internalOrFqName).convertSpecialFqName().split('.')
         assert(path.isNotEmpty())
         return FqName(path)
     }
@@ -73,25 +73,25 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
     fun getSimpleName(clazz: ClassNode) = getQualifiedName(clazz.name).substringAfterLast('.')
 
     fun getQualifiedName(internalName: String): String {
-        val nameWithDots = internalName.replace('/', '.')
+        konst nameWithDots = internalName.replace('/', '.')
         // This is a top-level class
         if ('$' !in nameWithDots) return nameWithDots
 
-        val kaptContext = this.kaptContext.get()
+        konst kaptContext = this.kaptContext.get()
 
         // Maybe it's in our sources?
-        val classFromSources = kaptContext.compiledClasses.firstOrNull { it.name == internalName }
+        konst classFromSources = kaptContext.compiledClasses.firstOrNull { it.name == internalName }
         if (classFromSources != null) {
             // Get inner class node pointing to the outer class
-            val innerClassNode = classFromSources.innerClasses.firstOrNull { it.name == classFromSources.name }
+            konst innerClassNode = classFromSources.innerClasses.firstOrNull { it.name == classFromSources.name }
             return innerClassNode?.let { getQualifiedName(it.outerName) + "." + it.innerName } ?: nameWithDots
         }
 
         // Search in the classpath
-        val javaPsiFacade = JavaPsiFacade.getInstance(kaptContext.project)
-        val scope = GlobalSearchScope.allScope(javaPsiFacade.project)
+        konst javaPsiFacade = JavaPsiFacade.getInstance(kaptContext.project)
+        konst scope = GlobalSearchScope.allScope(javaPsiFacade.project)
 
-        val fqNameFromClassWithPreciseName = javaPsiFacade.findClass(nameWithDots, scope)?.qualifiedName
+        konst fqNameFromClassWithPreciseName = javaPsiFacade.findClass(nameWithDots, scope)?.qualifiedName
         if (fqNameFromClassWithPreciseName != null) {
             return fqNameFromClassWithPreciseName
         }
@@ -99,7 +99,7 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
         nameWithDots.iterateDollars { outerName, innerName ->
             if (innerName.isEmpty()) return@iterateDollars // We already checked an exact match
 
-            val outerClass = javaPsiFacade.findClass(outerName, scope) ?: return@iterateDollars
+            konst outerClass = javaPsiFacade.findClass(outerName, scope) ?: return@iterateDollars
             return tryToFindNestedClass(outerClass, innerName)?.qualifiedName ?: return@iterateDollars
         }
 
@@ -112,7 +112,7 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
         innerClassName.iterateDollars { name1, name2 ->
             if (name2.isEmpty()) return outerClass.findInnerClassByName(name1, false)
 
-            val nestedClass = outerClass.findInnerClassByName(name1, false)
+            konst nestedClass = outerClass.findInnerClassByName(name1, false)
             if (nestedClass != null) {
                 tryToFindNestedClass(nestedClass, name2)?.let { return it }
             }
@@ -125,12 +125,12 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
         var dollarIndex = this.indexOf('$', startIndex = 1)
 
         while (dollarIndex > 0) {
-            val previousSymbol = this[dollarIndex - 1]
-            val nextSymbol = this.getOrNull(dollarIndex + 1)
+            konst previousSymbol = this[dollarIndex - 1]
+            konst nextSymbol = this.getOrNull(dollarIndex + 1)
 
             if (previousSymbol != '.' && nextSymbol != '.') {
-                val outerName = this.take(dollarIndex)
-                val innerName = this.drop(dollarIndex + 1)
+                konst outerName = this.take(dollarIndex)
+                konst innerName = this.drop(dollarIndex + 1)
 
                 if (outerName.isNotEmpty() && innerName.isNotEmpty()) {
                     variantHandler(outerName, innerName)
@@ -151,7 +151,7 @@ class KaptTreeMaker(context: Context, kaptContext: KaptContextForStubGeneration)
     }
 
     private fun convertBuiltinType(type: Type): JCTree.JCExpression? {
-        val typeTag = when (type) {
+        konst typeTag = when (type) {
             BYTE_TYPE -> TypeTag.BYTE
             BOOLEAN_TYPE -> TypeTag.BOOLEAN
             CHAR_TYPE -> TypeTag.CHAR

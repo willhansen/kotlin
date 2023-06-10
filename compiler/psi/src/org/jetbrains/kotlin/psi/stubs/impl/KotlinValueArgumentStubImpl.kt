@@ -14,7 +14,7 @@ import org.jetbrains.kotlin.psi.stubs.elements.KtValueArgumentElementType
 class KotlinValueArgumentStubImpl<T : KtValueArgument>(
     parent: StubElement<out PsiElement>?,
     elementType: KtValueArgumentElementType<T>,
-    private val isSpread: Boolean
+    private konst isSpread: Boolean
 ) : KotlinPlaceHolderStubImpl<T>(parent, elementType), KotlinValueArgumentStub<T> {
     override fun isSpread(): Boolean = isSpread
 }

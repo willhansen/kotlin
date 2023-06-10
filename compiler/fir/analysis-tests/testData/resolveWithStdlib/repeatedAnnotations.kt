@@ -11,7 +11,7 @@ public class Some {
 
 @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
 public @interface SomeAnn {
-    int value();
+    int konstue();
 }
 
 

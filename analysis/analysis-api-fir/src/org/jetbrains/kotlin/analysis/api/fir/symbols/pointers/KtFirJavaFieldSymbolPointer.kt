@@ -18,14 +18,14 @@ import org.jetbrains.kotlin.name.Name
 
 internal class KtFirJavaFieldSymbolPointer(
     ownerPointer: KtSymbolPointer<KtSymbolWithMembers>,
-    private val fieldName: Name,
+    private konst fieldName: Name,
     isStatic: Boolean,
 ) : KtFirMemberSymbolPointer<KtJavaFieldSymbol>(ownerPointer, isStatic) {
     override fun KtFirAnalysisSession.chooseCandidateAndCreateSymbol(
         candidates: FirScope,
         firSession: FirSession,
     ): KtJavaFieldSymbol? {
-        val javaField = candidates.getProperties(fieldName).mapNotNull { it.fir as? FirJavaField }.singleOrNull() ?: return null
+        konst javaField = candidates.getProperties(fieldName).mapNotNull { it.fir as? FirJavaField }.singleOrNull() ?: return null
         return firSymbolBuilder.variableLikeBuilder.buildFieldSymbol(javaField.symbol)
     }
 

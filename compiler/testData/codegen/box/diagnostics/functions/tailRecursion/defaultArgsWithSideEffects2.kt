@@ -1,5 +1,5 @@
 // !LANGUAGE: +ProperComputationOrderOfTailrecDefaultParameters
-// Flag above doesn't matter cause 1 default value is passed explicitly in tail recursion call
+// Flag above doesn't matter cause 1 default konstue is passed explicitly in tail recursion call
 // DONT_RUN_GENERATED_CODE: JS
 
 var counter = 0

@@ -13,6 +13,6 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 interface KtUltraLightElementWithNullabilityAnnotation<out T : KtDeclaration, out D : PsiModifierListOwner> : KtLightDeclaration<T, D>,
     PsiModifierListOwner {
 
-    val qualifiedNameForNullabilityAnnotation: String?
-    val psiTypeForNullabilityAnnotation: PsiType?
+    konst qualifiedNameForNullabilityAnnotation: String?
+    konst psiTypeForNullabilityAnnotation: PsiType?
 }

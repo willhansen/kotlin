@@ -8,28 +8,28 @@ package org.jetbrains.kotlin.commonizer.core
 import org.jetbrains.kotlin.commonizer.cir.CirFunction
 
 class FunctionCommonizer(
-    private val typeCommonizer: TypeCommonizer,
-    private val functionOrPropertyBaseCommonizer: FunctionOrPropertyBaseCommonizer,
+    private konst typeCommonizer: TypeCommonizer,
+    private konst functionOrPropertyBaseCommonizer: FunctionOrPropertyBaseCommonizer,
 ) : NullableSingleInvocationCommonizer<CirFunction> {
-    override fun invoke(values: List<CirFunction>): CirFunction? {
-        if (values.isEmpty()) return null
-        val functionOrProperty = functionOrPropertyBaseCommonizer(values) ?: return null
-        val valueParametersResult = CallableValueParametersCommonizer(typeCommonizer).commonize(values) ?: return null
+    override fun invoke(konstues: List<CirFunction>): CirFunction? {
+        if (konstues.isEmpty()) return null
+        konst functionOrProperty = functionOrPropertyBaseCommonizer(konstues) ?: return null
+        konst konstueParametersResult = CallableValueParametersCommonizer(typeCommonizer).commonize(konstues) ?: return null
         return CirFunction(
-            annotations = AnnotationsCommonizer().commonize(values.map { it.annotations })
+            annotations = AnnotationsCommonizer().commonize(konstues.map { it.annotations })
                 ?.plus(functionOrProperty.additionalAnnotations)
                 ?: return null,
-            name = values.first().name,
+            name = konstues.first().name,
             typeParameters = functionOrProperty.typeParameters,
             visibility = functionOrProperty.visibility,
             modality = functionOrProperty.modality,
             containingClass = null, // does not matter
-            valueParameters = valueParametersResult.valueParameters,
-            hasStableParameterNames = valueParametersResult.hasStableParameterNames,
+            konstueParameters = konstueParametersResult.konstueParameters,
+            hasStableParameterNames = konstueParametersResult.hasStableParameterNames,
             extensionReceiver = functionOrProperty.extensionReceiver,
             returnType = functionOrProperty.returnType,
             kind = functionOrProperty.kind,
-            modifiers = FunctionModifiersCommonizer().commonize(values.map { it.modifiers }) ?: return null
+            modifiers = FunctionModifiersCommonizer().commonize(konstues.map { it.modifiers }) ?: return null
         )
     }
 }

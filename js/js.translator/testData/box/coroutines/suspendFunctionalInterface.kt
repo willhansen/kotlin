@@ -12,16 +12,16 @@ fun check(got: String, expected: String): String? {
 }
 
 fun box(): String {
-    val s0: suspend () -> Unit = {}
+    konst s0: suspend () -> Unit = {}
     check(handle(s0), "class SuspendFunction0")?.let { return it }
 
-    val s1: suspend (String) -> Unit = {}
+    konst s1: suspend (String) -> Unit = {}
     check(handle(s1), "class SuspendFunction1")?.let { return it }
 
-    val s7: suspend (Any, Any, Any, Any, Any, Any, Any) -> Unit = { _, _, _, _, _, _, _ -> }
+    konst s7: suspend (Any, Any, Any, Any, Any, Any, Any) -> Unit = { _, _, _, _, _, _, _ -> }
     check(handle(s7), "class SuspendFunction7")?.let { return it }
 
-    val s15: suspend (Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any) -> Unit
+    konst s15: suspend (Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any, Any) -> Unit
             = { _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ -> }
     check(handle(s15), "class SuspendFunction15")?.let { return it }
 

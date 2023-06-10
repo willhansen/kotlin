@@ -1,4 +1,4 @@
 /**
  * [a<caret>a]
  */
-class C(val aa: Int)
+class C(konst aa: Int)

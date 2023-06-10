@@ -1,7 +1,7 @@
 // FILE: test/CallableDescriptor.java
 // JVM_IR:
 // Here in 'original in emptySet<D>()' T = '@EnhancedNullability CallableDescriptor' is inferred for 'Iterable<T>.contains(T)'.
-// Using value of '@EnhancedNullability CallableDescriptor' type where '@EnhancedNullability CallableDescriptor' is expected
+// Using konstue of '@EnhancedNullability CallableDescriptor' type where '@EnhancedNullability CallableDescriptor' is expected
 // doesn't cause a null check.
 
 package test;

@@ -1,23 +1,23 @@
 class Class {
-    val prop_1 = 1
-    val prop_2 = 2
-    val prop_3 = 3
-    val prop_4: Float? = 3f
-    val prop_5: Float = 3f
-    val prop_6: String = "..."
-    val prop_7: Nothing? = null
-    val prop_8: Class? = null
+    konst prop_1 = 1
+    konst prop_2 = 2
+    konst prop_3 = 3
+    konst prop_4: Float? = 3f
+    konst prop_5: Float = 3f
+    konst prop_6: String = "..."
+    konst prop_7: Nothing? = null
+    konst prop_8: Class? = null
     var prop_9: Boolean = true
-    val prop_10: Number? = 3f
-    val prop_11: Int = 10
+    konst prop_10: Number? = 3f
+    konst prop_11: Int = 10
     var prop_12: String = ""
-    val prop_13: Any? = ""
-    val prop_14: Comparable<*>? = null
-    val prop_15: Iterable<*>? = null
+    konst prop_13: Any? = ""
+    konst prop_14: Comparable<*>? = null
+    konst prop_15: Iterable<*>? = null
 
     fun fun_1(): (Int) -> (Int) -> Int = {number: Int -> { number * 5 }}
-    fun fun_2(value_1: Int): Int = value_1 * 2
-    fun fun_3(value_1: Int): (Int) -> Int = fun(value_2: Int): Int = value_1 * value_2 * 2
+    fun fun_2(konstue_1: Int): Int = konstue_1 * 2
+    fun fun_3(konstue_1: Int): (Int) -> Int = fun(konstue_2: Int): Int = konstue_1 * konstue_2 * 2
     fun fun_4(): Class? = Class()
 
     operator fun get(i1: Int, i2: Int) = 10
@@ -36,8 +36,8 @@ class Class {
     fun getCharArray() = charArrayOf(1.toChar(), 2.toChar(), 3.toChar(), 4.toChar(), 5.toChar())
 
     class NestedClass {
-        val prop_4 = 4
-        val prop_5 = 5
+        konst prop_4 = 4
+        konst prop_5 = 5
     }
 }
 
@@ -50,8 +50,8 @@ open class ClassWithCustomEquals {
     override fun equals(other: Any?) = true
 }
 
-open class ClassWithCostructorParam(val x: Any)
-open class ClassWithCostructorTwoParams(val x: Any, val y: Any)
+open class ClassWithCostructorParam(konst x: Any)
+open class ClassWithCostructorTwoParams(konst x: Any, konst y: Any)
 
 class EmptyClass {}
 
@@ -87,11 +87,11 @@ class ClassLevel6: ClassLevel5() {
     fun test6() {}
 }
 
-class Inv<T>(val x: T = null as T) {
-    val prop_1: Inv<T>? = null
-    val prop_2: T? = null
-    val prop_3: T = null as T
-    val prop_4 = 10
+class Inv<T>(konst x: T = null as T) {
+    konst prop_1: Inv<T>? = null
+    konst prop_2: T? = null
+    konst prop_3: T = null as T
+    konst prop_4 = 10
 
     fun test() {}
     fun get() = x
@@ -104,9 +104,9 @@ class In<in T>() {
     fun <K : T> getWithUpperBoundT(x: T): K = x as K
 }
 
-class Out<out T>(val x: T = null as T) {
-    val prop_1: Inv<out T>? = null
-    val prop_2: T? = null
+class Out<out T>(konst x: T = null as T) {
+    konst prop_1: Inv<out T>? = null
+    konst prop_2: T? = null
 
     fun get() = x
 }
@@ -117,16 +117,16 @@ open class ClassWithTwoTypeParameters<K, L> {
 }
 
 open class ClassWithThreeTypeParameters<K, L, M>(
-    val x: K,
-    val y: L,
-    val z: M
+    konst x: K,
+    konst y: L,
+    konst z: M
 )
 
 open class ClassWithSixTypeParameters<K, in L, out M, O, in P, out R>(
-    val u: R,
-    val x: K,
-    val y: M,
-    val z: O
+    konst u: R,
+    konst x: K,
+    konst y: M,
+    konst z: O
 ) {
     fun test() = 10
 }

@@ -13,7 +13,7 @@ fun builder(block: suspend () -> Unit) {
 }
 
 fun box(): String {
-    val flow = foo {
+    konst flow = foo {
         bar()
         result += "O"
     }

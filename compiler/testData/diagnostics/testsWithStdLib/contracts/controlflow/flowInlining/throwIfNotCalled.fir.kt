@@ -14,7 +14,7 @@ inline fun myRun(block: () -> Unit) {
 inline fun <T> unknownRun(block: () -> T): T = block()
 
 fun throwIfNotCalled() {
-    val x: Int
+    konst x: Int
     myRun outer@ {
         unknownRun {
             myRun {
@@ -30,7 +30,7 @@ fun throwIfNotCalled() {
 }
 
 fun catchThrowIfNotCalled() {
-    val x: Int
+    konst x: Int
     try {
         myRun outer@ {
             unknownRun {

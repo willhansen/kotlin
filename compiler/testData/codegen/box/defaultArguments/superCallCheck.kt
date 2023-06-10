@@ -8,8 +8,8 @@ open class MyClass {
 }
 
 fun box():String {
-    val method = MyClass::class.java.getMethod("def\$default", MyClass::class.java, Int::class.java, Int::class.java, Any::class.java)
-    val result = method.invoke(null, MyClass(), -1, 1, null)
+    konst method = MyClass::class.java.getMethod("def\$default", MyClass::class.java, Int::class.java, Int::class.java, Any::class.java)
+    konst result = method.invoke(null, MyClass(), -1, 1, null)
 
     if (result != 0) return "fail 1: $result"
 
@@ -18,7 +18,7 @@ fun box():String {
         method.invoke(null, MyClass(), -1, 1, "fail")
     }
     catch(e: Exception) {
-        val cause = e.cause
+        konst cause = e.cause
         if (cause is UnsupportedOperationException && cause.message!!.startsWith("Super calls")) {
             failed = true
         }

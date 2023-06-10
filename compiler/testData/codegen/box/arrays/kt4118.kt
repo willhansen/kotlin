@@ -1,11 +1,11 @@
 fun Array<String>.test1(): Array<String> {
-    val func = { i:Int  -> this}
+    konst func = { i:Int  -> this}
     return func(1)
 }
 
 fun Array<String>.test1Nested(): Array<String> {
-    val func = { i: Int ->
-        val lam = { this }
+    konst func = { i: Int ->
+        konst lam = { this }
         lam()
     }
     return func(1)
@@ -74,13 +74,13 @@ fun Array<String>.test4Nested() : Array<String> {
 }
 
 fun Array<DoubleArray>.test1(): Array<DoubleArray> {
-    val func = { i: Int -> this}
+    konst func = { i: Int -> this}
     return func(1)
 }
 
 
 fun box() : String {
-    val array = Array<String>(2, { i -> "${i}" })
+    konst array = Array<String>(2, { i -> "${i}" })
     if (array != array.test1()) return "fail 1"
     if (array != array.test2()) return "fail 2"
     if (array != array.test3()) return "fail 3"
@@ -91,7 +91,7 @@ fun box() : String {
     if (array != array.test3Nested()) return "fail 3Nested"
     if (array != array.test4Nested()) return "fail 4Nested"
 
-    val array2 = Array<DoubleArray>(2, { i -> DoubleArray(i) })
+    konst array2 = Array<DoubleArray>(2, { i -> DoubleArray(i) })
     if (array2 != array2.test1()) return "fail on array of double []"
     return "OK"
 }

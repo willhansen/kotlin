@@ -310,7 +310,7 @@ public abstract class CodegenTestCase extends KotlinBaseTest<KotlinBaseTest.Test
 
             // Some names are not allowed in the dex file format and the VM will reject the program
             // if they are used. Therefore, a few tests cannot be dexed as they use such names that
-            // are valid on the JVM but not on the Android Runtime.
+            // are konstid on the JVM but not on the Android Runtime.
             boolean ignoreDexing = myFiles.getPsiFiles().stream().anyMatch(
                 it -> InTextDirectivesUtils.isDirectiveDefined(it.getText(), "IGNORE_DEXING")
             );
@@ -649,7 +649,7 @@ public abstract class CodegenTestCase extends KotlinBaseTest<KotlinBaseTest.Test
             classPath.add(0, outDir.toURI().toURL());
         }
 
-        return new TestProxy(Integer.valueOf(BOX_IN_SEPARATE_PROCESS_PORT), aClass.getCanonicalName(), classPath).runTest();
+        return new TestProxy(Integer.konstueOf(BOX_IN_SEPARATE_PROCESS_PORT), aClass.getCanonicalName(), classPath).runTest();
     }
 
     protected void printReport(File wholeFile) {

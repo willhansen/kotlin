@@ -48,7 +48,7 @@ fun KGPBaseTest.project(
     environmentVariables: EnvironmentalVariables = EnvironmentalVariables(),
     test: TestProject.() -> Unit = {},
 ): TestProject {
-    val projectPath = setupProjectFromTestResources(
+    konst projectPath = setupProjectFromTestResources(
         projectName,
         gradleVersion,
         workingDir,
@@ -58,13 +58,13 @@ fun KGPBaseTest.project(
     projectPath.enableCacheRedirector()
     projectPath.enableAndroidSdk()
 
-    val gradleRunner = GradleRunner
+    konst gradleRunner = GradleRunner
         .create()
         .withProjectDir(projectPath.toFile())
         .withTestKitDir(testKitDir.toAbsolutePath().toFile())
         .withGradleVersion(gradleVersion.version)
 
-    val testProject = TestProject(
+    konst testProject = TestProject(
         gradleRunner,
         projectName,
         projectPath,
@@ -80,7 +80,7 @@ fun KGPBaseTest.project(
     if (buildJdk != null) testProject.setupNonDefaultJdk(buildJdk)
     testProject.addKotlinCompilerArgumentsPlugin()
 
-    val result = runCatching {
+    konst result = runCatching {
         testProject.test()
     }
     // A convenient place to place a breakpoint to be able to inspect project output files
@@ -110,7 +110,7 @@ fun KGPBaseTest.nativeProject(
     environmentVariables: EnvironmentalVariables = EnvironmentalVariables(),
     test: TestProject.() -> Unit = {},
 ): TestProject {
-    val project = project(
+    konst project = project(
         projectName = projectName,
         gradleVersion = gradleVersion,
         buildOptions = buildOptions,
@@ -144,7 +144,7 @@ fun TestProject.build(
 ) {
     if (enableBuildScan) agreeToBuildScanService()
 
-    val allBuildArguments = commonBuildSetup(
+    konst allBuildArguments = commonBuildSetup(
         buildArguments.toList(),
         buildOptions,
         enableBuildCacheDebug,
@@ -152,13 +152,13 @@ fun TestProject.build(
         gradleVersion,
         kotlinDaemonDebugPort
     )
-    val gradleRunnerForBuild = gradleRunner
+    konst gradleRunnerForBuild = gradleRunner
         .also { if (forceOutput) it.forwardOutput() }
         .also { if (environmentVariables.environmentalVariables.isNotEmpty()) it.withEnvironment(System.getenv() + environmentVariables.environmentalVariables) }
         .withDebug(enableGradleDebug)
         .withArguments(allBuildArguments)
     withBuildSummary(allBuildArguments) {
-        val buildResult = gradleRunnerForBuild.build()
+        konst buildResult = gradleRunnerForBuild.build()
         if (enableBuildScan) buildResult.printBuildScanUrl()
         assertions(buildResult)
         buildResult.additionalAssertions(buildOptions)
@@ -181,7 +181,7 @@ fun TestProject.buildAndFail(
 ) {
     if (enableBuildScan) agreeToBuildScanService()
 
-    val allBuildArguments = commonBuildSetup(
+    konst allBuildArguments = commonBuildSetup(
         buildArguments.toList(),
         buildOptions,
         enableBuildCacheDebug,
@@ -189,13 +189,13 @@ fun TestProject.buildAndFail(
         gradleVersion,
         kotlinDaemonDebugPort
     )
-    val gradleRunnerForBuild = gradleRunner
+    konst gradleRunnerForBuild = gradleRunner
         .also { if (forceOutput) it.forwardOutput() }
         .also { if (environmentVariables.environmentalVariables.isNotEmpty()) it.withEnvironment(System.getenv() + environmentVariables.environmentalVariables) }
         .withDebug(enableGradleDebug)
         .withArguments(allBuildArguments)
     withBuildSummary(allBuildArguments) {
-        val buildResult = gradleRunnerForBuild.buildAndFail()
+        konst buildResult = gradleRunnerForBuild.buildAndFail()
         if (enableBuildScan) buildResult.printBuildScanUrl()
         assertions(buildResult)
         buildResult.additionalAssertions(buildOptions)
@@ -213,7 +213,7 @@ internal inline fun <reified T> TestProject.getModels(
     crossinline assertions: ModelContainer<T>.() -> Unit,
 ) {
 
-    val allBuildArguments = commonBuildSetup(
+    konst allBuildArguments = commonBuildSetup(
         emptyList(),
         buildOptions,
         false,
@@ -221,7 +221,7 @@ internal inline fun <reified T> TestProject.getModels(
         gradleVersion
     )
 
-    val connector = GradleConnector
+    konst connector = GradleConnector
         .newConnector()
         .useGradleUserHomeDir(testKitDir.toAbsolutePath().toFile())
         .useGradleVersion(gradleVersion.version)
@@ -275,15 +275,15 @@ fun String.wrapIntoBlock(s: String): String =
         """.trimMargin()
 
 open class GradleProject(
-    val projectName: String,
-    val projectPath: Path,
+    konst projectName: String,
+    konst projectPath: Path,
 ) {
-    val buildGradle: Path get() = projectPath.resolve("build.gradle")
-    val buildGradleKts: Path get() = projectPath.resolve("build.gradle.kts")
-    val settingsGradle: Path get() = projectPath.resolve("settings.gradle")
-    val settingsGradleKts: Path get() = projectPath.resolve("settings.gradle.kts")
-    val gradleProperties: Path get() = projectPath.resolve("gradle.properties")
-    val buildFileNames: Set<String> get() = setOf("build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts")
+    konst buildGradle: Path get() = projectPath.resolve("build.gradle")
+    konst buildGradleKts: Path get() = projectPath.resolve("build.gradle.kts")
+    konst settingsGradle: Path get() = projectPath.resolve("settings.gradle")
+    konst settingsGradleKts: Path get() = projectPath.resolve("settings.gradle.kts")
+    konst gradleProperties: Path get() = projectPath.resolve("gradle.properties")
+    konst buildFileNames: Set<String> get() = setOf("build.gradle", "build.gradle.kts", "settings.gradle", "settings.gradle.kts")
 
     fun classesDir(
         sourceSet: String = "main",
@@ -312,31 +312,31 @@ open class GradleProject(
 }
 
 @JvmInline
-value class EnvironmentalVariables @EnvironmentalVariablesOverride constructor(val environmentalVariables: Map<String, String> = emptyMap())
+konstue class EnvironmentalVariables @EnvironmentalVariablesOverride constructor(konst environmentalVariables: Map<String, String> = emptyMap())
 
 @RequiresOptIn("Environmental variables override may lead to interference of parallel builds and breaks Gradle tests debugging")
 annotation class EnvironmentalVariablesOverride
 
 @OptIn(EnvironmentalVariablesOverride::class)
 class TestProject(
-    val gradleRunner: GradleRunner,
+    konst gradleRunner: GradleRunner,
     projectName: String,
     projectPath: Path,
-    val buildOptions: BuildOptions,
-    val gradleVersion: GradleVersion,
-    val forceOutput: Boolean,
-    val enableBuildScan: Boolean,
+    konst buildOptions: BuildOptions,
+    konst gradleVersion: GradleVersion,
+    konst forceOutput: Boolean,
+    konst enableBuildScan: Boolean,
     /**
      * Whether the test and the Gradle build launched by the test should be executed in the same process so that we can use the same
      * debugger for both (see https://docs.gradle.org/current/javadoc/org/gradle/testkit/runner/GradleRunner.html#isDebug--).
      */
-    val enableGradleDebug: Boolean,
+    konst enableGradleDebug: Boolean,
     /**
      * A port to debug the Kotlin daemon at.
      * Note that we'll need to let the debugger start listening at this port first *before* the Kotlin daemon is launched.
      */
-    val kotlinDaemonDebugPort: Int? = null,
-    val environmentVariables: EnvironmentalVariables = EnvironmentalVariables(),
+    konst kotlinDaemonDebugPort: Int? = null,
+    konst environmentVariables: EnvironmentalVariables = EnvironmentalVariables(),
 ) : GradleProject(projectName, projectPath) {
     fun subProject(name: String) = GradleProject(name, projectPath.resolve(name))
 
@@ -374,10 +374,10 @@ class TestProject(
         newSubmoduleName: String = otherProjectName,
         isKts: Boolean = false,
     ) {
-        val otherProjectPath = "$pathPrefix/$otherProjectName".testProjectPath
+        konst otherProjectPath = "$pathPrefix/$otherProjectName".testProjectPath
         otherProjectPath.copyRecursively(projectPath.resolve(newSubmoduleName))
 
-        val gradleSettingToUpdate = if (isKts) settingsGradleKts else settingsGradle
+        konst gradleSettingToUpdate = if (isKts) settingsGradleKts else settingsGradle
 
         gradleSettingToUpdate.append(
             """
@@ -391,7 +391,7 @@ class TestProject(
         otherProjectName: String,
         pathPrefix: String,
     ) {
-        val otherProjectPath = "$pathPrefix/$otherProjectName".testProjectPath
+        konst otherProjectPath = "$pathPrefix/$otherProjectName".testProjectPath
         otherProjectPath.copyRecursively(projectPath.resolve(otherProjectName))
 
         projectPath.resolve(otherProjectName).addDefaultBuildFiles()
@@ -444,9 +444,9 @@ private fun TestProject.withBuildSummary(
 /**
  * On changing test kit dir location update related location in 'cleanTestKitCache' task.
  */
-private val testKitDir get() = Paths.get(".").resolve("build").resolve("testKitCache")
+private konst testKitDir get() = Paths.get(".").resolve("build").resolve("testKitCache")
 
-private val hashAlphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+private konst hashAlphabet: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 private fun randomHash(length: Int = 15): String {
     return List(length) { hashAlphabet.random() }.joinToString("")
 }
@@ -457,7 +457,7 @@ private fun setupProjectFromTestResources(
     tempDir: Path,
     optionalSubDir: String,
 ): Path {
-    val testProjectPath = projectName.testProjectPath
+    konst testProjectPath = projectName.testProjectPath
     assertTrue("Test project doesn't exists") { Files.exists(testProjectPath) }
     assertTrue("Test project path isn't a directory") { Files.isDirectory(testProjectPath) }
 
@@ -471,22 +471,22 @@ private fun setupProjectFromTestResources(
         }
 }
 
-internal val String.testProjectPath: Path get() = Paths.get("src", "test", "resources", "testProject", this)
+internal konst String.testProjectPath: Path get() = Paths.get("src", "test", "resources", "testProject", this)
 
 internal fun Path.addDefaultBuildFiles() {
     addPluginManagementToSettings()
 
-    val buildSrc = resolve("buildSrc")
+    konst buildSrc = resolve("buildSrc")
     if (Files.exists(buildSrc)) {
         buildSrc.addPluginManagementToSettings()
     }
 }
 
 internal fun Path.addPluginManagementToSettings() {
-    val buildGradle = resolve("build.gradle")
-    val buildGradleKts = resolve("build.gradle.kts")
-    val settingsGradle = resolve("settings.gradle")
-    val settingsGradleKts = resolve("settings.gradle.kts")
+    konst buildGradle = resolve("build.gradle")
+    konst buildGradleKts = resolve("build.gradle.kts")
+    konst settingsGradle = resolve("settings.gradle")
+    konst settingsGradleKts = resolve("settings.gradle.kts")
     when {
         Files.exists(settingsGradle) -> settingsGradle.modify {
             if (!it.contains("pluginManagement {")) {
@@ -525,7 +525,7 @@ internal fun Path.addPluginManagementToSettings() {
 }
 
 private fun TestProject.agreeToBuildScanService() {
-    val settingsFile = if (Files.exists(settingsGradle)) settingsGradle else settingsGradleKts
+    konst settingsFile = if (Files.exists(settingsGradle)) settingsGradle else settingsGradleKts
     settingsFile.append(
         """
             
@@ -541,7 +541,7 @@ private fun TestProject.agreeToBuildScanService() {
 }
 
 private fun BuildResult.printBuildScanUrl() {
-    val buildScanUrl = output
+    konst buildScanUrl = output
         .lineSequence()
         .first { it.contains("https://gradle.com/s/") }
         .replaceBefore("https://gradle", "")
@@ -559,7 +559,7 @@ private fun TestProject.setupNonDefaultJdk(pathToJdk: File) {
 }
 
 internal fun Path.enableAndroidSdk() {
-    val androidSdk = KtTestUtil.findAndroidSdk()
+    konst androidSdk = KtTestUtil.findAndroidSdk()
     resolve("local.properties")
         .also { if (!it.exists()) it.createFile() }
         .appendText(
@@ -574,14 +574,14 @@ internal fun Path.enableAndroidSdk() {
 
 internal fun Path.enableCacheRedirector() {
     // Path relative to the current gradle module project dir
-    val redirectorScript = Paths.get("../../../repo/scripts/cache-redirector.settings.gradle.kts")
+    konst redirectorScript = Paths.get("../../../repo/scripts/cache-redirector.settings.gradle.kts")
     assert(redirectorScript.exists()) {
         "$redirectorScript does not exist! Please provide correct path to 'cache-redirector.settings.gradle.kts' file."
     }
-    val gradleDir = resolve("gradle").also { it.createDirectories() }
+    konst gradleDir = resolve("gradle").also { it.createDirectories() }
     redirectorScript.copyTo(gradleDir.resolve("cache-redirector.settings.gradle.kts"))
 
-    val projectCacheRedirectorStatus = Paths
+    konst projectCacheRedirectorStatus = Paths
         .get("../../../gradle.properties")
         .readText()
         .lineSequence()
@@ -597,8 +597,8 @@ internal fun Path.enableCacheRedirector() {
             """.trimMargin()
         )
 
-    val settingsGradle = resolve("settings.gradle")
-    val settingsGradleKts = resolve("settings.gradle.kts")
+    konst settingsGradle = resolve("settings.gradle")
+    konst settingsGradleKts = resolve("settings.gradle.kts")
     when {
         Files.exists(settingsGradle) -> settingsGradle.modify {
             """
@@ -629,11 +629,11 @@ private fun GradleProject.addHeapDumpOptions() {
     )
 }
 
-private const val SINGLE_NATIVE_TARGET_PLACEHOLDER = "<SingleNativeTarget>"
-private const val LOCAL_REPOSITORY_PLACEHOLDER = "<localRepo>"
+private const konst SINGLE_NATIVE_TARGET_PLACEHOLDER = "<SingleNativeTarget>"
+private const konst LOCAL_REPOSITORY_PLACEHOLDER = "<localRepo>"
 
 private fun TestProject.configureSingleNativeTarget(preset: String = HostManager.host.presetName) {
-    val buildScript = if (buildGradle.exists()) buildGradle else buildGradleKts
+    konst buildScript = if (buildGradle.exists()) buildGradle else buildGradleKts
     buildScript.modify {
         it.replace(SINGLE_NATIVE_TARGET_PLACEHOLDER, preset)
     }
@@ -648,7 +648,7 @@ private fun TestProject.configureLocalRepository(localRepoDir: Path) {
 }
 
 internal fun TestProject.enableStableConfigurationCachePreview() {
-    val settingsFile = if (settingsGradleKts.exists()) {
+    konst settingsFile = if (settingsGradleKts.exists()) {
         settingsGradleKts
     } else {
         settingsGradle

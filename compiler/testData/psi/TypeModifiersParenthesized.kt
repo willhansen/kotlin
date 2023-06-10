@@ -16,35 +16,35 @@ fun <T> returnTypeParameterValueN(): (@A T)?
 fun returnArgument(): B<(@A C)>
 fun returnArgumentN(): B<(@A C)>?
 
-val lambdaType: (@A() (() -> C))
-val lambdaTypeN: (@A() (() -> C))?
+konst lambdaType: (@A() (() -> C))
+konst lambdaTypeN: (@A() (() -> C))?
 
-val lambdaParameter: ((@A C)) -> C
-val lambdaParameterN: ((@A C))? -> C
+konst lambdaParameter: ((@A C)) -> C
+konst lambdaParameterN: ((@A C))? -> C
 
-val lambdaReturnValue: () -> (@A C)
-val lambdaReturnValueN: () -> (@A C)?
+konst lambdaReturnValue: () -> (@A C)
+konst lambdaReturnValueN: () -> (@A C)?
 
-val lambdaReceiver: (@A C).() -> C
-val lambdaReceiverN: (@A C)?.() -> C
+konst lambdaReceiver: (@A C).() -> C
+konst lambdaReceiverN: (@A C)?.() -> C
 
-val suspendT: suspend T
-val suspendTN: suspend T?
+konst suspendT: suspend T
+konst suspendTN: suspend T?
 
-val suspendFun: suspend () -> Unit
-val suspendFunN: (suspend () -> Unit)?
+konst suspendFun: suspend () -> Unit
+konst suspendFunN: (suspend () -> Unit)?
 
-val suspendExtFun: suspend Any.() -> Unit
-val suspendExtFunN: (suspend Any.() -> Unit)?
+konst suspendExtFun: suspend Any.() -> Unit
+konst suspendExtFunN: (suspend Any.() -> Unit)?
 
-val suspendFunReturnValueN: suspend () -> Unit?
-val suspendFunNReturnValueN: (suspend () -> Unit?)?
+konst suspendFunReturnValueN: suspend () -> Unit?
+konst suspendFunNReturnValueN: (suspend () -> Unit?)?
 
-val suspendExtFunReceiverN: suspend Any?.() -> Unit
-val suspendExtFunNReceiverN: (suspend Any?.() -> Unit)?
+konst suspendExtFunReceiverN: suspend Any?.() -> Unit
+konst suspendExtFunNReceiverN: (suspend Any?.() -> Unit)?
 
-val suspendFunReturnValueN: suspend () -> Unit?
-val suspendFunNReturnValueN: (suspend () -> Unit?)?
+konst suspendFunReturnValueN: suspend () -> Unit?
+konst suspendFunNReturnValueN: (suspend () -> Unit?)?
 
-val suspendExtFunReceiverN: suspend Any?.() -> Unit
-val suspendExtFunNReceiverN: (suspend Any?.() -> Unit)?
+konst suspendExtFunReceiverN: suspend Any?.() -> Unit
+konst suspendExtFunNReceiverN: (suspend Any?.() -> Unit)?

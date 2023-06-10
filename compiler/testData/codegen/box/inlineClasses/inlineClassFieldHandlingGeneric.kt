@@ -6,12 +6,12 @@
 var result = "Fail"
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class A<T: String>(val value: T)
+konstue class A<T: String>(konst konstue: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class B<T: A<String>>(val a: T) {
+konstue class B<T: A<String>>(konst a: T) {
     init {
-        result = a.value
+        result = a.konstue
     }
 }
 

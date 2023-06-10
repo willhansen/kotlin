@@ -15,7 +15,7 @@ import org.jetbrains.kotlin.psi.KtFile
 import java.nio.file.Path
 
 internal inline fun <R> withExtendedTypeRenderer(testDataFile: Path, action: () -> R): R {
-    val extendedTypeRendererOld = PsiClassRenderer.extendedTypeRenderer
+    konst extendedTypeRendererOld = PsiClassRenderer.extendedTypeRenderer
     return try {
         PsiClassRenderer.extendedTypeRenderer = testDataFile.toString().endsWith("typeAnnotations.kt")
         action()
@@ -25,7 +25,7 @@ internal inline fun <R> withExtendedTypeRenderer(testDataFile: Path, action: () 
 }
 
 internal fun getLightClassesFromFile(ktFile: KtFile): List<PsiClass> {
-    val ktClasses = SyntaxTraverser.psiTraverser(ktFile).filter(KtClassOrObject::class.java).toList()
+    konst ktClasses = SyntaxTraverser.psiTraverser(ktFile).filter(KtClassOrObject::class.java).toList()
     return ktClasses.plus(ktFile).flatMap { ktElement ->
         if (ktElement is KtFile && ktElement.isScript()) {
             // Regular [KtElement.toLightElements] will attempt to find a facade class for [KtFile],

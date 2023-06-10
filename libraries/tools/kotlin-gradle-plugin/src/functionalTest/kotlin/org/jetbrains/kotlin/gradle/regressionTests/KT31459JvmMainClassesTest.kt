@@ -22,7 +22,7 @@ class KT31459JvmMainClassesTest {
 
     @Test
     fun `jvmMainClasses should depend on compileJava`() {
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
                 jvm {
                     withJava()
@@ -30,9 +30,9 @@ class KT31459JvmMainClassesTest {
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val task = project.tasks.getByName("jvmMainClasses")
+        konst task = project.tasks.getByName("jvmMainClasses")
 
         assertEquals(
             setOf("compileKotlinJvm", "compileJava", "jvmProcessResources"),
@@ -50,14 +50,14 @@ class KT31459JvmMainClassesTest {
          * Code taken from `kotlinx-atomicfu` gradle plugin
          */
         fun Project.addClassesTransformationTask(target: KotlinTarget) {
-            val compilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
-            val classesDirs = compilation.output.classesDirs
+            konst compilation = target.compilations.getByName(KotlinCompilation.MAIN_COMPILATION_NAME)
+            konst classesDirs = compilation.output.classesDirs
 
             // make copy of original classes directory
-            val originalClassesDirs: FileCollection =
+            konst originalClassesDirs: FileCollection =
                 project.files(classesDirs.from.toTypedArray())
-            val transformedClassesDir = project.buildDir.resolve("classes/atomicfu/${target.name}/${compilation.name}")
-            val transformTask = project.tasks.create("transformTask") {
+            konst transformedClassesDir = project.buildDir.resolve("classes/atomicfu/${target.name}/${compilation.name}")
+            konst transformTask = project.tasks.create("transformTask") {
                 it.dependsOn(compilation.compileAllTaskName)
                 it.inputs.files(originalClassesDirs)
                 it.outputs.files(transformedClassesDir)
@@ -67,25 +67,25 @@ class KT31459JvmMainClassesTest {
         }
 
         // Given MPP Project with JVM target
-        val project = buildProjectWithMPP {
+        konst project = buildProjectWithMPP {
             kotlin {
-                val target = jvm {}
+                konst target = jvm {}
 
                 // And classes transformation task applied
                 addClassesTransformationTask(target)
             }
         }
 
-        project.evaluate()
+        project.ekonstuate()
 
-        val jvmMainClasses = project.tasks.getByName("jvmMainClasses")
+        konst jvmMainClasses = project.tasks.getByName("jvmMainClasses")
         jvmMainClasses.assertNoCircularTaskDependencies()
     }
 
     /**
      * Returns names of all tasks that given task directly depends on
      */
-    private val Task.directDependencies: Set<String>
+    private konst Task.directDependencies: Set<String>
         get() = taskDependencies
             .getDependencies(null)
             .map { it.name }

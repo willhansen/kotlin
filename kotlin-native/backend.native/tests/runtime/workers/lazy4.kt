@@ -12,20 +12,20 @@ import kotlin.native.concurrent.*
 import kotlin.concurrent.*
 import kotlin.concurrent.AtomicInt
 
-const val WORKERS_COUNT = 20
+const konst WORKERS_COUNT = 20
 
-class IntHolder(val value:Int)
+class IntHolder(konst konstue:Int)
 
-class C(mode: LazyThreadSafetyMode, private val initializer: () -> IntHolder) {
-    val data by lazy(mode) { initializer() }
+class C(mode: LazyThreadSafetyMode, private konst initializer: () -> IntHolder) {
+    konst data by lazy(mode) { initializer() }
 }
 
 fun concurrentLazyAccess(freeze: Boolean, mode: LazyThreadSafetyMode) {
     // in old mm PUBLICATION is in fact SYNCHRONIZED, while SYNCHRONIZED is not supported
-    val argumentMode = if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) mode else LazyThreadSafetyMode.PUBLICATION
-    val initializerCallCount = AtomicInt(0)
+    konst argumentMode = if (Platform.memoryModel == MemoryModel.EXPERIMENTAL) mode else LazyThreadSafetyMode.PUBLICATION
+    konst initializerCallCount = AtomicInt(0)
 
-    val c = C(argumentMode) {
+    konst c = C(argumentMode) {
         initializerCallCount.incrementAndGet()
         IntHolder(42)
     }
@@ -33,23 +33,23 @@ fun concurrentLazyAccess(freeze: Boolean, mode: LazyThreadSafetyMode) {
         c.freeze()
     }
 
-    val workers = Array(WORKERS_COUNT, { Worker.start() })
-    val inited = AtomicInt(0)
-    val canStart = AtomicInt(0)
-    val futures = Array(workers.size) { i ->
+    konst workers = Array(WORKERS_COUNT, { Worker.start() })
+    konst inited = AtomicInt(0)
+    konst canStart = AtomicInt(0)
+    konst futures = Array(workers.size) { i ->
         workers[i].execute(TransferMode.SAFE, { Triple(inited, canStart, c) }) { (inited, canStart, c) ->
             inited.incrementAndGet()
-            while (canStart.value != 1) {}
+            while (canStart.konstue != 1) {}
             c.data
         }
     }
 
-    while (inited.value < workers.size) {}
-    canStart.value = 1
+    while (inited.konstue < workers.size) {}
+    canStart.konstue = 1
 
-    val results = futures.map { it.result }
+    konst results = futures.map { it.result }
     results.forEach {
-        assertEquals(42, it.value)
+        assertEquals(42, it.konstue)
         assertSame(results[0], it)
     }
     workers.forEach {
@@ -57,7 +57,7 @@ fun concurrentLazyAccess(freeze: Boolean, mode: LazyThreadSafetyMode) {
     }
 
     if (mode == LazyThreadSafetyMode.SYNCHRONIZED) {
-        assertEquals(1, initializerCallCount.value)
+        assertEquals(1, initializerCallCount.konstue)
     }
 }
 

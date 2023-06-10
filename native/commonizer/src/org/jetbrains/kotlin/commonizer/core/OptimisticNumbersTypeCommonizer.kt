@@ -11,16 +11,16 @@ import org.jetbrains.kotlin.commonizer.utils.*
 
 private typealias BitWidth = Int
 
-private class SubstitutableNumbers(private val numbers: Map<CirEntityId, BitWidth>) {
+private class SubstitutableNumbers(private konst numbers: Map<CirEntityId, BitWidth>) {
     operator fun contains(id: CirEntityId) = id in numbers
     fun choose(first: CirClassType, second: CirClassType): CirClassType? {
-        val firstBitWidth = numbers[first.classifierId] ?: return null
-        val secondBitWidth = numbers[second.classifierId] ?: return null
+        konst firstBitWidth = numbers[first.classifierId] ?: return null
+        konst secondBitWidth = numbers[second.classifierId] ?: return null
         return if (secondBitWidth < firstBitWidth) second else first
     }
 }
 
-private val signedIntegers = SubstitutableNumbers(
+private konst signedIntegers = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(KOTLIN_BYTE_ID) to 8,
         CirEntityId.create(KOTLIN_SHORT_ID) to 16,
@@ -29,7 +29,7 @@ private val signedIntegers = SubstitutableNumbers(
     )
 )
 
-private val unsignedIntegers = SubstitutableNumbers(
+private konst unsignedIntegers = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(KOTLIN_UBYTE_ID) to 8,
         CirEntityId.create(KOTLIN_USHORT_ID) to 16,
@@ -38,14 +38,14 @@ private val unsignedIntegers = SubstitutableNumbers(
     )
 )
 
-private val floatingPoints = SubstitutableNumbers(
+private konst floatingPoints = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(KOTLIN_FLOAT_ID) to 32,
         CirEntityId.create(KOTLIN_DOUBLE_ID) to 64,
     )
 )
 
-private val signedVarIntegers = SubstitutableNumbers(
+private konst signedVarIntegers = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(BYTE_VAR_OF_ID) to 8,
         CirEntityId.create(SHORT_VAR_OF_ID) to 16,
@@ -54,7 +54,7 @@ private val signedVarIntegers = SubstitutableNumbers(
     )
 )
 
-private val unsignedVarIntegers = SubstitutableNumbers(
+private konst unsignedVarIntegers = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(UBYTE_VAR_OF_ID) to 8,
         CirEntityId.create(USHORT_VAR_OF_ID) to 16,
@@ -63,7 +63,7 @@ private val unsignedVarIntegers = SubstitutableNumbers(
     )
 )
 
-private val floatingPointVars = SubstitutableNumbers(
+private konst floatingPointVars = SubstitutableNumbers(
     mapOf(
         CirEntityId.create(FLOAT_VAR_OF_ID) to 32,
         CirEntityId.create(DOUBLE_VAR_OF_ID) to 64,
@@ -72,7 +72,7 @@ private val floatingPointVars = SubstitutableNumbers(
 
 internal object OptimisticNumbersTypeCommonizer : AssociativeCommonizer<CirClassType> {
     override fun commonize(first: CirClassType, second: CirClassType): CirClassType? {
-        val result = signedIntegers.choose(first, second)
+        konst result = signedIntegers.choose(first, second)
             ?: unsignedIntegers.choose(first, second)
             ?: floatingPoints.choose(first, second)
             ?: signedVarIntegers.choose(first, second)

@@ -1,14 +1,14 @@
 // FIR_IDENTICAL
 class X {
-  <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val x : Int<!>
+  <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst x : Int<!>
 }
 
 open class Y() {
-  val x : Int = 2
+  konst x : Int = 2
 }
 
 class Y1 {
-  val x : Int get() = 1
+  konst x : Int get() = 1
 }
 
 class Z : Y() {

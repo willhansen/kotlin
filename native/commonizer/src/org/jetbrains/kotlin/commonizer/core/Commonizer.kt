@@ -6,12 +6,12 @@
 package org.jetbrains.kotlin.commonizer.core
 
 interface Commonizer<in T, out R> {
-    val result: R
+    konst result: R
     fun commonizeWith(next: T): Boolean
 }
 
-fun <T, R> Commonizer<T, R>.commonize(values: List<T>): R? {
-    values.forEach { value -> if (!commonizeWith(value)) return null }
+fun <T, R> Commonizer<T, R>.commonize(konstues: List<T>): R? {
+    konstues.forEach { konstue -> if (!commonizeWith(konstue)) return null }
     return result
 }
 
@@ -24,24 +24,24 @@ abstract class AbstractStandardCommonizer<T, R> : Commonizer<T, R> {
 
     private var state = State.EMPTY
 
-    protected val hasResult: Boolean
+    protected konst hasResult: Boolean
         get() = state == State.IN_PROGRESS
 
-    final override val result: R
+    final override konst result: R
         get() = when (state) {
             State.EMPTY -> failInEmptyState()
             State.ERROR -> failInErrorState()
             State.IN_PROGRESS -> commonizationResult()
         }
 
-    val resultOrNull: R?
+    konst resultOrNull: R?
         get() = when (state) {
             State.EMPTY, State.ERROR -> null
             State.IN_PROGRESS -> commonizationResult()
         }
 
     final override fun commonizeWith(next: T): Boolean {
-        val result = when (state) {
+        konst result = when (state) {
             State.ERROR -> return false
             State.EMPTY -> {
                 initialize(next)
@@ -67,10 +67,10 @@ fun Commonizer<*, *>.failInEmptyState(): Nothing = throw IllegalCommonizerStateE
 @Suppress("unused")
 fun Commonizer<*, *>.failInErrorState(): Nothing = throw IllegalCommonizerStateException("empty")
 
-inline fun <reified T : Any> Commonizer<*, *>.checkState(value: T?, error: Boolean): T = when {
-    value == null -> failInEmptyState()
+inline fun <reified T : Any> Commonizer<*, *>.checkState(konstue: T?, error: Boolean): T = when {
+    konstue == null -> failInEmptyState()
     error -> failInErrorState()
-    else -> value
+    else -> konstue
 }
 
 class IllegalCommonizerStateException(message: String) : IllegalStateException("Illegal commonizer state: $message")

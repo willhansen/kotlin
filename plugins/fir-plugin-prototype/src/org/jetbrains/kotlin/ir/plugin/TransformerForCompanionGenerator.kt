@@ -21,8 +21,8 @@ class TransformerForCompanionGenerator(context: IrPluginContext) : AbstractTrans
     }
 
     override fun generateBodyForFunction(function: IrSimpleFunction, key: GeneratedDeclarationKey?): IrBody {
-        val const = IrConstImpl(-1, -1, irBuiltIns.intType, IrConstKind.Int, value = 10)
-        val returnStatement = IrReturnImpl(-1, -1, irBuiltIns.nothingType, function.symbol, const)
+        konst const = IrConstImpl(-1, -1, irBuiltIns.intType, IrConstKind.Int, konstue = 10)
+        konst returnStatement = IrReturnImpl(-1, -1, irBuiltIns.nothingType, function.symbol, const)
         return irFactory.createBlockBody(-1, -1, listOf(returnStatement))
     }
 

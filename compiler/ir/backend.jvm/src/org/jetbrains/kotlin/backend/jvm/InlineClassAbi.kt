@@ -40,8 +40,8 @@ object InlineClassAbi {
      * Returns null if the type cannot be unboxed.
      */
     fun unboxType(type: IrType): IrType? {
-        val klass = type.classOrNull?.owner ?: return null
-        val representation = klass.inlineClassRepresentation ?: return null
+        konst klass = type.classOrNull?.owner ?: return null
+        konst representation = klass.inlineClassRepresentation ?: return null
 
         // TODO: Apply type substitutions
         var underlyingType = representation.underlyingType.unboxInlineClass()
@@ -71,12 +71,12 @@ object InlineClassAbi {
             return irFunction.name
         }
 
-        val suffix = hashSuffix(irFunction, mangleReturnTypes, useOldMangleRules)
+        konst suffix = hashSuffix(irFunction, mangleReturnTypes, useOldMangleRules)
         if (suffix == null && ((irFunction.parent as? IrClass)?.isValue != true || irFunction.origin == IrDeclarationOrigin.IR_BUILTINS_STUB)) {
             return irFunction.name
         }
 
-        val base = when {
+        konst base = when {
             irFunction.isGetter ->
                 JvmAbi.getterName(irFunction.propertyName.asString())
             irFunction.isSetter ->
@@ -103,21 +103,21 @@ object InlineClassAbi {
 
     fun hashSuffix(
         useOldMangleRules: Boolean,
-        valueParameters: List<IrType>,
+        konstueParameters: List<IrType>,
         returnType: IrType?,
         addContinuation: Boolean = false
     ): String? =
         collectFunctionSignatureForManglingSuffix(
             useOldMangleRules,
-            valueParameters.any { it.getRequiresMangling() },
+            konstueParameters.any { it.getRequiresMangling() },
             // The JVM backend computes mangled names after creating suspend function views, but before default argument
             // stub insertion. It would be nice if this part of the continuation lowering happened earlier in the pipeline.
             // TODO: Move suspend function view creation before JvmInlineClassLowering.
             if (addContinuation)
-                valueParameters.map { it.asInfoForMangling() } +
+                konstueParameters.map { it.asInfoForMangling() } +
                         InfoForMangling(FqNameUnsafe("kotlin.coroutines.Continuation"), isValue = false, isNullable = false)
             else
-                valueParameters.map { it.asInfoForMangling() },
+                konstueParameters.map { it.asInfoForMangling() },
             returnType?.asInfoForMangling()
         )?.let(::md5base64)
 
@@ -128,12 +128,12 @@ object InlineClassAbi {
             isNullable = isNullable()
         )
 
-    private val IrFunction.propertyName: Name
+    private konst IrFunction.propertyName: Name
         get() = (this as IrSimpleFunction).correspondingPropertySymbol!!.owner.name
 }
 
 fun IrType.getRequiresMangling(includeInline: Boolean = true, includeMFVC: Boolean = true): Boolean {
-    val irClass = erasedUpperBound
+    konst irClass = erasedUpperBound
     return irClass.fqNameWhenAvailable != StandardNames.RESULT_FQ_NAME && when {
         irClass.isSingleFieldValueClass -> includeInline
         irClass.isMultiFieldValueClass -> includeMFVC
@@ -141,8 +141,8 @@ fun IrType.getRequiresMangling(includeInline: Boolean = true, includeMFVC: Boole
     }
 }
 
-val IrFunction.fullValueParameterList: List<IrValueParameter>
-    get() = listOfNotNull(extensionReceiverParameter) + valueParameters
+konst IrFunction.fullValueParameterList: List<IrValueParameter>
+    get() = listOfNotNull(extensionReceiverParameter) + konstueParameters
 
 fun IrFunction.hasMangledParameters(includeInline: Boolean = true, includeMFVC: Boolean = true): Boolean =
     (dispatchReceiverParameter != null && when {
@@ -155,22 +155,22 @@ fun IrFunction.hasMangledParameters(includeInline: Boolean = true, includeMFVC: 
         else -> false
     })
 
-val IrFunction.hasMangledReturnType: Boolean
+konst IrFunction.hasMangledReturnType: Boolean
     get() = returnType.isInlineClassType() && parentClassOrNull?.isFileClass != true
 
-val IrClass.inlineClassFieldName: Name
+konst IrClass.inlineClassFieldName: Name
     get() = (inlineClassRepresentation ?: error("Not an inline class: ${render()}")).underlyingPropertyName
 
-val IrFunction.isInlineClassFieldGetter: Boolean
+konst IrFunction.isInlineClassFieldGetter: Boolean
     get() = (parent as? IrClass)?.isSingleFieldValueClass == true && this is IrSimpleFunction && extensionReceiverParameter == null &&
             contextReceiverParametersCount == 0 && !isStatic &&
             correspondingPropertySymbol?.let { it.owner.getter == this && it.owner.name == parentAsClass.inlineClassFieldName } == true
 
-val IrFunction.isMultiFieldValueClassFieldGetter: Boolean
+konst IrFunction.isMultiFieldValueClassFieldGetter: Boolean
     get() = (parent as? IrClass)?.isMultiFieldValueClass == true && this is IrSimpleFunction && extensionReceiverParameter == null &&
             contextReceiverParametersCount == 0 && !isStatic &&
             correspondingPropertySymbol?.let {
-                val multiFieldValueClassRepresentation = parentAsClass.multiFieldValueClassRepresentation
-                    ?: error("Multi-field value class must have multiFieldValueClassRepresentation: ${parentAsClass.render()}")
+                konst multiFieldValueClassRepresentation = parentAsClass.multiFieldValueClassRepresentation
+                    ?: error("Multi-field konstue class must have multiFieldValueClassRepresentation: ${parentAsClass.render()}")
                 it.owner.getter == this && multiFieldValueClassRepresentation.containsPropertyWithName(it.owner.name)
             } == true

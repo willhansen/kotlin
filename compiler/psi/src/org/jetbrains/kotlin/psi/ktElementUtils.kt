@@ -24,10 +24,10 @@ import org.jetbrains.kotlin.lexer.KtTokens
 internal fun KtElement.deleteSemicolon() {
     if (this is KtEnumEntry) return
 
-    val sibling = PsiTreeUtil.skipSiblingsForward(this, PsiWhiteSpace::class.java, PsiComment::class.java)
+    konst sibling = PsiTreeUtil.skipSiblingsForward(this, PsiWhiteSpace::class.java, PsiComment::class.java)
     if (sibling == null || sibling.node.elementType != KtTokens.SEMICOLON) return
 
-    val lastSiblingToDelete = PsiTreeUtil.skipSiblingsForward(sibling, PsiWhiteSpace::class.java)?.prevSibling ?: sibling
+    konst lastSiblingToDelete = PsiTreeUtil.skipSiblingsForward(sibling, PsiWhiteSpace::class.java)?.prevSibling ?: sibling
     parent.deleteChildRange(nextSibling, lastSiblingToDelete)
 }
 

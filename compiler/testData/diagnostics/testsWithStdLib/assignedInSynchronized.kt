@@ -1,7 +1,7 @@
 // FIR_IDENTICAL
 class A {
     fun test() {
-        val a: A
+        konst a: A
         synchronized(this) {
             if (bar()) throw RuntimeException()
             a = A()

@@ -16,7 +16,7 @@ import kotlin.test.*
 @OptIn(kotlin.ExperimentalStdlibApi::class)
 @EagerInitialization
 @ThreadLocal
-val x = foo()
+konst x = foo()
 
 private fun foo(): Int {
     z1 = true
@@ -24,10 +24,10 @@ private fun foo(): Int {
 }
 
 // Both will be initialized since [x]'s initializer calls a function from the file.
-val y1 = run { z2 = true; 117 }
+konst y1 = run { z2 = true; 117 }
 
 @ThreadLocal
-val y2 = run { z3 = true; 117 }
+konst y2 = run { z3 = true; 117 }
 
 // FILE: main.kt
 import kotlin.test.*

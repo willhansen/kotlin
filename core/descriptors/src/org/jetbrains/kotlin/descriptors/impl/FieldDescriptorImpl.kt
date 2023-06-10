@@ -12,5 +12,5 @@ import org.jetbrains.kotlin.descriptors.annotations.Annotations
 
 class FieldDescriptorImpl(
     annotations: Annotations,
-    override val correspondingProperty: PropertyDescriptor
+    override konst correspondingProperty: PropertyDescriptor
 ) : FieldDescriptor, AnnotatedImpl(annotations)

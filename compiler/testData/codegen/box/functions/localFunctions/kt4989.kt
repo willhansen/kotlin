@@ -1,8 +1,8 @@
-class It(val id: String)
+class It(konst id: String)
 
 fun box(): String {
-    val projectId = "projectId"
-    val it = It("it")
+    konst projectId = "projectId"
+    konst it = It("it")
 
 
     fun selectMetaRunnerId(): String {
@@ -12,7 +12,7 @@ fun box(): String {
 
         var i = 0
         while (true) {
-            val name = projectId + "_" + it.id + (if (counter == null) "" else "_$counter")
+            konst name = projectId + "_" + it.id + (if (counter == null) "" else "_$counter")
             if (!path(name)) {
                 return name
             }
@@ -22,7 +22,7 @@ fun box(): String {
             if (i > 2) return "Infinity loop: $counter"
         }
     }
-    val X = selectMetaRunnerId()
+    konst X = selectMetaRunnerId()
     if (X != projectId + "_" + it.id + "_2") return "fail: $X"
     return "OK"
 }

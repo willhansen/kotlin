@@ -1,6 +1,6 @@
 package test
 
 public class ClassWithConstVal() {
-    public val f: Int = { 1 }()
-    public val f2: Int = f
+    public konst f: Int = { 1 }()
+    public konst f2: Int = f
 }

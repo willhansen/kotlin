@@ -15,7 +15,7 @@ import kotlin.text.*
 class StringBuilderTest {
 
     @Test fun stringBuild() {
-        val s = buildString {
+        konst s = buildString {
             append("a")
             append(true)
         }
@@ -39,8 +39,8 @@ class StringBuilderTest {
     @Test
     @Suppress("DEPRECATION_ERROR")
     fun deprecatedAppend() {
-        val chars = charArrayOf('a', 'b', 'c', 'd')
-        val sb = StringBuilder()
+        konst chars = charArrayOf('a', 'b', 'c', 'd')
+        konst sb = StringBuilder()
         testOnlyOn(TestPlatform.Jvm) {
             sb.append(chars, 1, 2) // Should fail after KT-15220 gets fixed
             assertEquals("bc", sb.toString())
@@ -53,10 +53,10 @@ class StringBuilderTest {
     }
 
     @Test fun asCharSequence() {
-        val original = "Some test string"
-        val sb = StringBuilder(original)
-        val result = sb.toString()
-        val cs = sb as CharSequence
+        konst original = "Some test string"
+        konst sb = StringBuilder(original)
+        konst result = sb.toString()
+        konst cs = sb as CharSequence
 
         assertEquals(result.length, cs.length)
         assertEquals(result.length, sb.length)
@@ -90,16 +90,16 @@ class StringBuilderTest {
     }
 
     @Test fun clear() {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.append("test")
-        val s = sb.toString()
+        konst s = sb.toString()
         sb.clear()
         assertTrue(sb.isEmpty())
         assertEquals("test", s)
     }
 
     @Test fun get() {
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         sb.append("test")
         assertEquals('t', sb[0])
         assertEquals('e', sb[1])
@@ -130,10 +130,10 @@ class StringBuilderTest {
 
     @Test
     fun appendChar() {
-        val times = 100
-        val expected = "a".repeat(times)
+        konst times = 100
+        konst expected = "a".repeat(times)
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         repeat(times) { sb.append('a') }
         assertEquals(expected, sb.toString())
 
@@ -144,15 +144,15 @@ class StringBuilderTest {
 
     @Test
     fun appendInt() {
-        val times = 100
-        val expected = (0 until times).fold("") { res, idx -> res + idx }
+        konst times = 100
+        konst expected = (0 until times).fold("") { res, idx -> res + idx }
 
-        val sb = StringBuilder()
+        konst sb = StringBuilder()
         repeat(times) { sb.append(it) }
         assertEquals(expected, sb.toString())
 
-        val cornerCase = listOf(0, -1, Int.MIN_VALUE, Int.MAX_VALUE)
-        val expectedCornerCase = cornerCase.fold("") { res, e -> res + e }
+        konst cornerCase = listOf(0, -1, Int.MIN_VALUE, Int.MAX_VALUE)
+        konst expectedCornerCase = cornerCase.fold("") { res, e -> res + e }
         for (int in cornerCase) sb.append(int)
         assertEquals(expected + expectedCornerCase, sb.toString())
     }
@@ -167,8 +167,8 @@ class StringBuilderTest {
 
     @Test
     fun appendString() {
-        val times = 100
-        val expected = "foo".repeat(times)
+        konst times = 100
+        konst expected = "foo".repeat(times)
 
         StringBuilder().let { sb ->
             repeat(times) { sb.append("foo") }
@@ -181,7 +181,7 @@ class StringBuilderTest {
 
     @Test
     fun appendAny() {
-        val myAny = object {
+        konst myAny = object {
             override fun toString(): String = "It's My Any!"
         }
 
@@ -195,15 +195,15 @@ class StringBuilderTest {
     @Test
     fun appendCharArray() {
         StringBuilder().let { sb ->
-            val times = 100
-            val expected = "foo".repeat(times)
+            konst times = 100
+            konst expected = "foo".repeat(times)
 
             repeat(times) { sb.append(charArrayOf('f', 'o', 'o')) }
             assertEquals(expected, sb.toString())
         }
 
         StringBuilder().let { sb ->
-            val charArray = charArrayOf(
+            konst charArray = charArrayOf(
                 'm', 'y', ' ', 'a', 'p', 'p', 'e', 'n', 'd', ' ', 'c', 'h', 'a', 'r', ' ', 'a', 'r', 'r', 'a', 'y', ' ', 't', 'e', 's', 't'
             )
 
@@ -283,7 +283,7 @@ class StringBuilderTest {
 
     @Test
     fun overflow() = testExceptOn(TestPlatform.Js) {
-        class CharSeq(override val length: Int) : CharSequence {
+        class CharSeq(override konst length: Int) : CharSequence {
             override fun get(index: Int): Char =
                 throw IllegalStateException("Not expected to be called")
 
@@ -291,8 +291,8 @@ class StringBuilderTest {
                 throw IllegalStateException("Not expected to be called")
         }
 
-        val initialContent = "a".repeat(20)
-        val bigCharSeq = CharSeq(Int.MAX_VALUE - initialContent.length + 1)
+        konst initialContent = "a".repeat(20)
+        konst bigCharSeq = CharSeq(Int.MAX_VALUE - initialContent.length + 1)
         assertFailsWith<Error> { // OutOfMemoryError
             StringBuilder(initialContent).append(bigCharSeq)
         }
@@ -419,7 +419,7 @@ class StringBuilderTest {
 
     @Test
     fun insertAny() {
-        val myAny = object {
+        konst myAny = object {
             override fun toString(): String = "It's My Any!"
         }
 
@@ -522,7 +522,7 @@ class StringBuilderTest {
     @Test
     fun toCharArray() {
         StringBuilder("my toCharArray test").let { sb ->
-            val chars = CharArray(10) { '_' }
+            konst chars = CharArray(10) { '_' }
 
             sb.toCharArray(chars, 8, 0, 2)
             assertEquals("________my", chars.concatToString())
@@ -544,7 +544,7 @@ class StringBuilderTest {
 
     @Test
     fun appendLine() {
-        val stringBuilder = StringBuilder()
+        konst stringBuilder = StringBuilder()
         stringBuilder.appendLine('c')
         stringBuilder.appendLine("string")
         stringBuilder.appendLine(true)
@@ -556,7 +556,7 @@ class StringBuilderTest {
         stringBuilder.appendLine(null as String?)
         stringBuilder.appendLine(null as CharSequence?)
 
-        val expected =
+        konst expected =
             """
             c
             string

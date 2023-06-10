@@ -24,24 +24,24 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinUsageContext.MavenScope
 import org.jetbrains.kotlin.gradle.utils.getValue
 
 internal data class ModuleCoordinates(
-    val group: String?,
-    val name: String,
-    val version: String?
+    konst group: String?,
+    konst name: String,
+    konst version: String?
 )
 
 internal class PomDependenciesRewriter(
     project: Project,
 
     @field:Transient
-    private val component: KotlinTargetComponent
+    private konst component: KotlinTargetComponent
 ) {
 
     // Get the dependencies mapping according to the component's UsageContexts:
-    private val dependenciesMappingForEachUsageContext by project.provider {
+    private konst dependenciesMappingForEachUsageContext by project.provider {
         (component as SoftwareComponentInternal).usages.filterIsInstance<KotlinUsageContext>().mapNotNull { usage ->
             // When maven scope is not set, we can shortcut immediately here, since no dependencies from that usage context
             // will be present in maven pom, e.g. from sourcesElements
-            val mavenScope = usage.mavenScope ?: return@mapNotNull null
+            konst mavenScope = usage.mavenScope ?: return@mapNotNull null
             associateDependenciesWithActualModuleDependencies(usage.compilation, mavenScope)
                 // We are only interested in dependencies that are mapped to some other dependencies:
                 .filter { (from, to) -> Triple(from.group, from.name, from.version) != Triple(to.group, to.name, to.version) }
@@ -55,35 +55,35 @@ internal class PomDependenciesRewriter(
         if (component !is SoftwareComponentInternal)
             return
 
-        val dependenciesNode = (pomXml.asNode().get("dependencies") as NodeList).filterIsInstance<Node>().singleOrNull() ?: return
+        konst dependenciesNode = (pomXml.asNode().get("dependencies") as NodeList).filterIsInstance<Node>().singleOrNull() ?: return
 
-        val dependencyNodes = (dependenciesNode.get("dependency") as? NodeList).orEmpty().filterIsInstance<Node>()
+        konst dependencyNodes = (dependenciesNode.get("dependency") as? NodeList).orEmpty().filterIsInstance<Node>()
 
-        val dependencyByNode = mutableMapOf<Node, ModuleCoordinates>()
+        konst dependencyByNode = mutableMapOf<Node, ModuleCoordinates>()
 
         // Collect all the dependencies from the nodes:
-        val dependencies = dependencyNodes.map { dependencyNode ->
+        konst dependencies = dependencyNodes.map { dependencyNode ->
             fun Node.getSingleChildValueOrNull(childName: String): String? =
                 ((get(childName) as NodeList?)?.singleOrNull() as Node?)?.text()
 
-            val groupId = dependencyNode.getSingleChildValueOrNull("groupId")
-            val artifactId = dependencyNode.getSingleChildValueOrNull("artifactId")
+            konst groupId = dependencyNode.getSingleChildValueOrNull("groupId")
+            konst artifactId = dependencyNode.getSingleChildValueOrNull("artifactId")
                 ?: error("unexpected dependency in POM with no artifact ID: $dependenciesNode")
-            val version = dependencyNode.getSingleChildValueOrNull("version")
+            konst version = dependencyNode.getSingleChildValueOrNull("version")
             (ModuleCoordinates(groupId, artifactId, version)).also { dependencyByNode[dependencyNode] = it }
         }.toSet()
 
-        val resultDependenciesForEachUsageContext = dependencies.associate { key ->
-            val map = dependenciesMappingForEachUsageContext.find { key in it }
-            val value = map?.get(key) ?: key
-            key to value
+        konst resultDependenciesForEachUsageContext = dependencies.associate { key ->
+            konst map = dependenciesMappingForEachUsageContext.find { key in it }
+            konst konstue = map?.get(key) ?: key
+            key to konstue
         }
 
-        val includeOnlySpecifiedDependenciesSet = includeOnlySpecifiedDependencies?.get()
+        konst includeOnlySpecifiedDependenciesSet = includeOnlySpecifiedDependencies?.get()
 
         // Rewrite the dependency nodes according to the mapping:
         dependencyNodes.forEach { dependencyNode ->
-            val moduleDependency = dependencyByNode[dependencyNode]
+            konst moduleDependency = dependencyByNode[dependencyNode]
 
             if (moduleDependency != null) {
                 if (includeOnlySpecifiedDependenciesSet != null && moduleDependency !in includeOnlySpecifiedDependenciesSet) {
@@ -92,13 +92,13 @@ internal class PomDependenciesRewriter(
                 }
             }
 
-            val mapDependencyTo = resultDependenciesForEachUsageContext.get(moduleDependency)
+            konst mapDependencyTo = resultDependenciesForEachUsageContext.get(moduleDependency)
 
             if (mapDependencyTo != null) {
-                fun Node.setChildNodeByName(name: String, value: String?) {
-                    val childNode: Node? = (get(name) as NodeList?)?.firstOrNull() as Node?
-                    if (value != null) {
-                        (childNode ?: appendNode(name)).setValue(value)
+                fun Node.setChildNodeByName(name: String, konstue: String?) {
+                    konst childNode: Node? = (get(name) as NodeList?)?.firstOrNull() as Node?
+                    if (konstue != null) {
+                        (childNode ?: appendNode(name)).setValue(konstue)
                     } else {
                         childNode?.let { remove(it) }
                     }
@@ -116,13 +116,13 @@ private fun associateDependenciesWithActualModuleDependencies(
     compilation: KotlinCompilation<*>,
     mavenScope: MavenScope,
 ): Map<ModuleCoordinates, ModuleCoordinates> {
-    val project = compilation.target.project
+    konst project = compilation.target.project
 
-    val targetDependenciesConfiguration = project.configurations.getByName(
+    konst targetDependenciesConfiguration = project.configurations.getByName(
         when (compilation) {
             is KotlinJvmAndroidCompilation -> {
                 // TODO handle Android configuration names in a general way once we drop AGP < 3.0.0
-                val variantName = compilation.name
+                konst variantName = compilation.name
                 when (mavenScope) {
                     MavenScope.COMPILE -> variantName + "CompileClasspath"
                     MavenScope.RUNTIME -> variantName + "RuntimeClasspath"
@@ -135,7 +135,7 @@ private fun associateDependenciesWithActualModuleDependencies(
         }
     )
 
-    val resolvedDependencies: Map<Triple<String?, String, String?>, ResolvedDependency> by lazy {
+    konst resolvedDependencies: Map<Triple<String?, String, String?>, ResolvedDependency> by lazy {
         // don't resolve if no project dependencies on MPP projects are found
         targetDependenciesConfiguration.resolvedConfiguration.lenientConfiguration.allModuleDependencies.associateBy {
             Triple(it.moduleGroup, it.moduleName, it.moduleVersion)
@@ -145,23 +145,23 @@ private fun associateDependenciesWithActualModuleDependencies(
     return targetDependenciesConfiguration
         .allDependencies.withType(ModuleDependency::class.java)
         .associate { dependency ->
-            val coordinates = ModuleCoordinates(dependency.group, dependency.name, dependency.version)
-            val noMapping = coordinates to coordinates
+            konst coordinates = ModuleCoordinates(dependency.group, dependency.name, dependency.version)
+            konst noMapping = coordinates to coordinates
             when (dependency) {
                 is ProjectDependency -> {
-                    val dependencyProject = dependency.dependencyProject
-                    val dependencyProjectKotlinExtension = dependencyProject.multiplatformExtensionOrNull
+                    konst dependencyProject = dependency.dependencyProject
+                    konst dependencyProjectKotlinExtension = dependencyProject.multiplatformExtensionOrNull
                         ?: return@associate noMapping
 
                     // Non-default publication layouts are not supported for pom rewriting
                     if (!dependencyProject.kotlinPropertiesProvider.createDefaultMultiplatformPublications)
                         return@associate noMapping
 
-                    val resolved = resolvedDependencies[Triple(dependency.group!!, dependency.name, dependency.version!!)]
+                    konst resolved = resolvedDependencies[Triple(dependency.group!!, dependency.name, dependency.version!!)]
                         ?: return@associate noMapping
 
-                    val resolvedToConfiguration = resolved.configuration
-                    val dependencyTargetComponent: KotlinTargetComponent = run {
+                    konst resolvedToConfiguration = resolved.configuration
+                    konst dependencyTargetComponent: KotlinTargetComponent = run {
                         dependencyProjectKotlinExtension.targets.withType(AbstractKotlinTarget::class.java).forEach { target ->
                             target.kotlinComponents.forEach { component ->
                                 if (component.findUsageContext(resolvedToConfiguration) != null)
@@ -172,13 +172,13 @@ private fun associateDependenciesWithActualModuleDependencies(
                         return@associate noMapping
                     }
 
-                    val targetModulePublication = (dependencyTargetComponent as? KotlinTargetComponentWithPublication)?.publicationDelegate
-                    val rootModulePublication = dependencyProjectKotlinExtension.rootSoftwareComponent.publicationDelegate
+                    konst targetModulePublication = (dependencyTargetComponent as? KotlinTargetComponentWithPublication)?.publicationDelegate
+                    konst rootModulePublication = dependencyProjectKotlinExtension.rootSoftwareComponent.publicationDelegate
 
                     // During Gradle POM generation, a project dependency is already written as the root module's coordinates. In the
                     // dependencies mapping, map the root module to the target's module:
 
-                    val rootModule = ModuleCoordinates(
+                    konst rootModule = ModuleCoordinates(
                         rootModulePublication?.groupId ?: dependency.group,
                         rootModulePublication?.artifactId ?: dependencyProject.name,
                         rootModulePublication?.version ?: dependency.version
@@ -191,12 +191,12 @@ private fun associateDependenciesWithActualModuleDependencies(
                     )
                 }
                 else -> {
-                    val resolvedDependency = resolvedDependencies[Triple(dependency.group, dependency.name, dependency.version)]
+                    konst resolvedDependency = resolvedDependencies[Triple(dependency.group, dependency.name, dependency.version)]
                         ?: return@associate noMapping
 
                     if (resolvedDependency.moduleArtifacts.isEmpty() && resolvedDependency.children.size == 1) {
                         // This is a dependency on a module that resolved to another module; map the original dependency to the target module
-                        val targetModule = resolvedDependency.children.single()
+                        konst targetModule = resolvedDependency.children.single()
                         coordinates to ModuleCoordinates(
                             targetModule.moduleGroup,
                             targetModule.moduleName,
@@ -212,13 +212,13 @@ private fun associateDependenciesWithActualModuleDependencies(
 }
 
 private fun KotlinTargetComponent.findUsageContext(configurationName: String): UsageContext? {
-    val usageContexts = when (this) {
+    konst usageContexts = when (this) {
         is SoftwareComponentInternal -> usages
         else -> emptySet()
     }
     return usageContexts.find { usageContext ->
         if (usageContext !is KotlinUsageContext) return@find false
-        val compilation = usageContext.compilation
+        konst compilation = usageContext.compilation
         @Suppress("DEPRECATION")
         configurationName in compilation.relatedConfigurationNames ||
                 configurationName == compilation.target.apiElementsConfigurationName ||

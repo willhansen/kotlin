@@ -40,7 +40,7 @@ class FirErrorAnnotationCallBuilder : FirCallBuilder, FirAnnotationContainerBuil
     override var source: KtSourceElement? = null
     var useSiteTarget: AnnotationUseSiteTarget? = null
     var annotationTypeRef: FirTypeRef = FirImplicitTypeRefImplWithoutSource
-    val typeArguments: MutableList<FirTypeProjection> = mutableListOf()
+    konst typeArguments: MutableList<FirTypeProjection> = mutableListOf()
     override var argumentList: FirArgumentList = FirEmptyArgumentList
     lateinit var calleeReference: FirReference
     lateinit var diagnostic: ConeDiagnostic
@@ -68,7 +68,7 @@ class FirErrorAnnotationCallBuilder : FirCallBuilder, FirAnnotationContainerBuil
         }
 
     @Deprecated("Modification of 'annotations' has no impact for FirErrorAnnotationCallBuilder", level = DeprecationLevel.HIDDEN)
-    override val annotations: MutableList<FirAnnotation> = mutableListOf()
+    override konst annotations: MutableList<FirAnnotation> = mutableListOf()
 }
 
 @OptIn(ExperimentalContracts::class)

@@ -10,14 +10,14 @@ class Controller {
     var res = "FAIL 1"
 }
 
-val defaultController = Controller()
+konst defaultController = Controller()
 
 suspend inline fun test1(controller: Controller = defaultController, crossinline c: suspend Controller.() -> Unit) {
     controller.c()
 }
 
 suspend inline fun test2(controller: Controller = defaultController, crossinline c: suspend Controller.() -> Unit) {
-    val l : suspend () -> Unit = {
+    konst l : suspend () -> Unit = {
         controller.c()
     }
     l()
@@ -28,7 +28,7 @@ interface SuspendRunnable {
 }
 
 suspend inline fun test3(controller: Controller = defaultController, crossinline c: suspend Controller.() -> Unit) {
-    val sr = object: SuspendRunnable {
+    konst sr = object: SuspendRunnable {
         override suspend fun run() {
             controller.c()
         }
@@ -67,7 +67,7 @@ fun box() : String {
         }
     }
     if (defaultController.res != "OK") return defaultController.res
-    val controller = Controller()
+    konst controller = Controller()
     controller.res = "FAIL 4"
     builder {
         test1(controller) {

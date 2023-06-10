@@ -17,14 +17,14 @@ import org.jetbrains.kotlin.analysis.api.types.KtTypeNullability
 import org.jetbrains.kotlin.types.checker.NewCapturedType
 
 internal class KtFe10NewCapturedType(
-    override val fe10Type: NewCapturedType,
-    override val analysisContext: Fe10AnalysisContext
+    override konst fe10Type: NewCapturedType,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtCapturedType(), KtFe10Type {
     override fun asStringForDebugging(): String = withValidityAssertion { fe10Type.asStringForDebugging(analysisContext) }
 
-    override val nullability: KtTypeNullability
+    override konst nullability: KtTypeNullability
         get() = withValidityAssertion { fe10Type.ktNullability }
 
-    override val projection: KtTypeProjection
+    override konst projection: KtTypeProjection
         get() = withValidityAssertion { fe10Type.constructor.projection.toKtTypeProjection(analysisContext) }
 }

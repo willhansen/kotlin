@@ -6,5 +6,5 @@
 package foo
 
 interface KotlinInterface {
-    val values: Type
+    konst konstues: Type
 }

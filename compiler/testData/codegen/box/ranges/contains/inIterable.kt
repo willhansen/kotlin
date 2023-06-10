@@ -1,6 +1,6 @@
 // WITH_STDLIB
 
-val iterable: Iterable<Int> = listOf(1, 2, 3)
+konst iterable: Iterable<Int> = listOf(1, 2, 3)
 
 fun box(): String = when {
     0 in iterable -> "fail 1"

@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static org.jetbrains.kotlin.js.resolve.diagnostics.JsCallChecker.isJsCall;
-import static org.jetbrains.kotlin.resolve.constants.evaluate.ConstantExpressionEvaluator.getConstant;
+import static org.jetbrains.kotlin.resolve.constants.ekonstuate.ConstantExpressionEkonstuator.getConstant;
 
 public final class CallExpressionTranslator extends AbstractCallExpressionTranslator {
 

@@ -15,15 +15,15 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractReferenceShortenerForWholeFileTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val file = ktFiles.first()
+        konst file = ktFiles.first()
 
-        val shortening = executeOnPooledThreadInReadAction {
+        konst shortening = executeOnPooledThreadInReadAction {
             analyseForTest(file) {
                 collectPossibleReferenceShortenings(file)
             }
         }
 
-        val actual = buildString {
+        konst actual = buildString {
             renderShorteningResults(shortening)
         }
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)

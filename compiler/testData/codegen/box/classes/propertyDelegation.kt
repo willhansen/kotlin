@@ -1,6 +1,6 @@
 open class Base() {
-    val plain = 239
-    public val read : Int
+    konst plain = 239
+    public konst read : Int
       get() = 239
 
     public var readwrite : Int = 0

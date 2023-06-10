@@ -9,11 +9,11 @@ fun main(a: Boolean, b:Byte, c: Short, d: Int, e: Long, f: Float, g: Double, h: 
     h.toString()
 }
 
-/*Check that all "valueOf" are String ones and there is no boxing*/
-// 1 INVOKESTATIC java/lang/String.valueOf \(Z\)
-// 3 INVOKESTATIC java/lang/String.valueOf \(I\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(C\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(J\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(F\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(D\)
-// 8 valueOf
+/*Check that all "konstueOf" are String ones and there is no boxing*/
+// 1 INVOKESTATIC java/lang/String.konstueOf \(Z\)
+// 3 INVOKESTATIC java/lang/String.konstueOf \(I\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(C\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(J\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(F\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(D\)
+// 8 konstueOf

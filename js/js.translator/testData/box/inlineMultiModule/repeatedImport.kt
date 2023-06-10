@@ -20,10 +20,10 @@ fun test2() = baz("w")
 // FILE: main.kt
 // RECOMPILE
 fun box(): String {
-    val a = test1()
+    konst a = test1()
     if (a != "bar(foo(q))") return "fail1: $a"
 
-    val b = test2()
+    konst b = test2()
     if (b != "baz(foo(w))") return "fail2: $b"
 
     return "OK"

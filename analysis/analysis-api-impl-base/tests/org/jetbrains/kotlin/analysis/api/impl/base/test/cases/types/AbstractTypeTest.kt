@@ -16,8 +16,8 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractTypeTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val actual = analyseForTest(ktFile.declarations.first()) {
-            val type = getType(ktFile, module, testServices)
+        konst actual = analyseForTest(ktFile.declarations.first()) {
+            konst type = getType(ktFile, module, testServices)
             DebugSymbolRenderer(renderTypeByProperties = true).renderType(type)
         }
         testServices.assertions.assertEqualsToTestDataFileSibling(actual)

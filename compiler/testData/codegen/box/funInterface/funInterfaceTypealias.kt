@@ -3,7 +3,7 @@ fun interface KRunnable {
 }
 
 fun interface KConsumer<T> {
-    fun accept(value: T)
+    fun accept(konstue: T)
 }
 
 typealias KRunnableAlias = KRunnable

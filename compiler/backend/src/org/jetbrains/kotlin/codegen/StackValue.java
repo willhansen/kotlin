@@ -98,12 +98,12 @@ public abstract class StackValue {
     }
 
     /**
-     * This method is called to put the value on the top of the JVM stack if <code>depth</code> other values have been put on the
-     * JVM stack after this value was generated.
+     * This method is called to put the konstue on the top of the JVM stack if <code>depth</code> other konstues have been put on the
+     * JVM stack after this konstue was generated.
      *
-     * @param type  the type as which the value should be put
+     * @param type  the type as which the konstue should be put
      * @param v     the visitor used to genClassOrObject the instructions
-     * @param depth the number of new values put onto the stack
+     * @param depth the number of new konstues put onto the stack
      */
     public void moveToTopOfStack(@NotNull Type type, @Nullable KotlinType kotlinType, @NotNull InstructionAdapter v, int depth) {
         put(type, kotlinType, v);
@@ -145,24 +145,24 @@ public abstract class StackValue {
         }
     }
 
-    public void store(@NotNull StackValue value, @NotNull InstructionAdapter v) {
-        store(value, v, false);
+    public void store(@NotNull StackValue konstue, @NotNull InstructionAdapter v) {
+        store(konstue, v, false);
     }
 
     public boolean canHaveSideEffects() {
         return canHaveSideEffects;
     }
 
-    public void store(@NotNull StackValue value, @NotNull InstructionAdapter v, boolean skipReceiver) {
+    public void store(@NotNull StackValue konstue, @NotNull InstructionAdapter v, boolean skipReceiver) {
         if (!skipReceiver) {
             putReceiver(v, false);
         }
-        value.put(value.type, value.kotlinType, v);
-        storeSelector(value.type, value.kotlinType, v);
+        konstue.put(konstue.type, konstue.kotlinType, v);
+        storeSelector(konstue.type, konstue.kotlinType, v);
     }
 
     protected void storeSelector(@NotNull Type topOfStackType, @Nullable KotlinType kotlinType, @NotNull InstructionAdapter v) {
-        throw new UnsupportedOperationException("Cannot store to value " + this);
+        throw new UnsupportedOperationException("Cannot store to konstue " + this);
     }
 
     @NotNull
@@ -235,15 +235,15 @@ public abstract class StackValue {
     }
 
     @NotNull
-    public static StackValue integerConstant(int value, @NotNull Type type) {
+    public static StackValue integerConstant(int konstue, @NotNull Type type) {
         if (type == Type.LONG_TYPE) {
-            return constant(Long.valueOf(value), type);
+            return constant(Long.konstueOf(konstue), type);
         }
         else if (type == Type.BYTE_TYPE || type == Type.SHORT_TYPE || type == Type.INT_TYPE) {
-            return constant(Integer.valueOf(value), type);
+            return constant(Integer.konstueOf(konstue), type);
         }
         else if (type == Type.CHAR_TYPE) {
-            return constant(Character.valueOf((char) value), type);
+            return constant(Character.konstueOf((char) konstue), type);
         }
         else {
             throw new AssertionError("Unexpected integer type: " + type);
@@ -251,23 +251,23 @@ public abstract class StackValue {
     }
 
     @NotNull
-    public static StackValue constant(int value) {
-        return constant(value, Type.INT_TYPE);
+    public static StackValue constant(int konstue) {
+        return constant(konstue, Type.INT_TYPE);
     }
 
     @NotNull
-    public static StackValue constant(@Nullable Object value, @NotNull Type type) {
-        return constant(value, type, null);
+    public static StackValue constant(@Nullable Object konstue, @NotNull Type type) {
+        return constant(konstue, type, null);
     }
 
     @NotNull
-    public static StackValue constant(@Nullable Object value, @NotNull Type type, @Nullable KotlinType kotlinType) {
+    public static StackValue constant(@Nullable Object konstue, @NotNull Type type, @Nullable KotlinType kotlinType) {
         if (type == Type.BOOLEAN_TYPE) {
-            assert value instanceof Boolean : "Value for boolean constant should have boolean type: " + value;
-            return BranchedValue.Companion.booleanConstant((Boolean) value);
+            assert konstue instanceof Boolean : "Value for boolean constant should have boolean type: " + konstue;
+            return BranchedValue.Companion.booleanConstant((Boolean) konstue);
         }
         else {
-            return new Constant(value, type, kotlinType);
+            return new Constant(konstue, type, kotlinType);
         }
     }
 
@@ -283,21 +283,21 @@ public abstract class StackValue {
     private static StackValue createDefaultPrimitiveValue(@NotNull Type type) {
         assert Type.BOOLEAN <= type.getSort() && type.getSort() <= Type.DOUBLE :
                 "'createDefaultPrimitiveValue' method should be called only for primitive types, but " + type;
-        Object value = 0;
+        Object konstue = 0;
         if (type.getSort() == Type.BOOLEAN) {
-            value = Boolean.FALSE;
+            konstue = Boolean.FALSE;
         }
         else if (type.getSort() == Type.FLOAT) {
-            value = new Float(0.0);
+            konstue = new Float(0.0);
         }
         else if (type.getSort() == Type.DOUBLE) {
-            value = new Double(0.0);
+            konstue = new Double(0.0);
         }
         else if (type.getSort() == Type.LONG) {
-            value = new Long(0);
+            konstue = new Long(0);
         }
 
-        return constant(value, type);
+        return constant(konstue, type);
     }
 
     @NotNull
@@ -446,7 +446,7 @@ public abstract class StackValue {
         Type boxedType = AsmUtil.boxType(type);
         if (boxedType == type) return;
 
-        v.invokestatic(boxedType.getInternalName(), "valueOf", Type.getMethodDescriptor(boxedType, type), false);
+        v.invokestatic(boxedType.getInternalName(), "konstueOf", Type.getMethodDescriptor(boxedType, type), false);
         coerce(boxedType, toType,  v);
     }
 
@@ -526,9 +526,9 @@ public abstract class StackValue {
     private static void boxOrUnboxWithNullCheck(@NotNull InstructionAdapter v, @NotNull Consumer<InstructionAdapter> body) {
         Label lNull = new Label();
         Label lDone = new Label();
-        // NB The following piece of code looks sub-optimal (we have a 'null' value on stack and could just keep it there),
+        // NB The following piece of code looks sub-optimal (we have a 'null' konstue on stack and could just keep it there),
         // but it is required, because bytecode verifier doesn't take into account null checks,
-        // and sees null-checked value on the top of the stack as a value of the source type (e.g., Ljava/lang/String;),
+        // and sees null-checked konstue on the top of the stack as a konstue of the source type (e.g., Ljava/lang/String;),
         // which is not assignable to the expected type (destination type, e.g., LStr;).
         v.dup();
         v.ifnull(lNull);
@@ -612,7 +612,7 @@ public abstract class StackValue {
         *  - from type is inline class type: we should do box, because target type can be only "subtype" of inline class type (like Any)
         *  - target type is inline class type: we should do unbox, because from type can come from some 'is' check for object type
         *
-        *  "return true" means that types were coerced successfully and usual coercion shouldn't be evaluated
+        *  "return true" means that types were coerced successfully and usual coercion shouldn't be ekonstuated
         * */
 
         if (isFromTypeInlineClass && isToTypeInlineClass) {
@@ -771,22 +771,22 @@ public abstract class StackValue {
         );
     }
 
-    public static StackValue coercion(@NotNull StackValue value, @NotNull Type castType, @Nullable KotlinType castKotlinType) {
-        return coercionValueForArgumentOfInlineClassConstructor(value, castType, castKotlinType, null);
+    public static StackValue coercion(@NotNull StackValue konstue, @NotNull Type castType, @Nullable KotlinType castKotlinType) {
+        return coercionValueForArgumentOfInlineClassConstructor(konstue, castType, castKotlinType, null);
     }
 
     public static StackValue coercionValueForArgumentOfInlineClassConstructor(
-            @NotNull StackValue value,
+            @NotNull StackValue konstue,
             @NotNull Type castType,
             @Nullable KotlinType castKotlinType,
             @Nullable KotlinType underlyingKotlinType
     ) {
-        boolean kotlinTypesAreEqual = value.kotlinType == null && castKotlinType == null ||
-                                      value.kotlinType != null && castKotlinType != null && castKotlinType.equals(value.kotlinType);
-        if (value.type.equals(castType) && kotlinTypesAreEqual) {
-            return value;
+        boolean kotlinTypesAreEqual = konstue.kotlinType == null && castKotlinType == null ||
+                                      konstue.kotlinType != null && castKotlinType != null && castKotlinType.equals(konstue.kotlinType);
+        if (konstue.type.equals(castType) && kotlinTypesAreEqual) {
+            return konstue;
         }
-        return new CoercionValue(value, castType, castKotlinType, underlyingKotlinType);
+        return new CoercionValue(konstue, castType, castKotlinType, underlyingKotlinType);
     }
 
     @NotNull
@@ -892,9 +892,9 @@ public abstract class StackValue {
                         return putLocalSuspendFunctionOnStack(codegen, initial.getOriginal());
                     }
                 }
-                StackValue value = codegen.findLocalOrCapturedValue(descriptor.getOriginal());
-                assert value != null : "Local fun should be found in locals or in captured params: " + descriptor;
-                return value;
+                StackValue konstue = codegen.findLocalOrCapturedValue(descriptor.getOriginal());
+                assert konstue != null : "Local fun should be found in locals or in captured params: " + descriptor;
+                return konstue;
             }
             else if (!isExtension && DescriptorUtils.isObject(containingDeclaration)) {
                 // Object member could be imported by name, in which case it has no explicit dispatch receiver
@@ -913,10 +913,10 @@ public abstract class StackValue {
     ) {
         // There can be three types of suspend local function calls:
         // 1) normal call: we first define it as a closure and then call it
-        // 2) call using callable reference: in this case it is not local, but rather captured value
+        // 2) call using callable reference: in this case it is not local, but rather captured konstue
         // 3) recursive call: we are in the middle of defining it, but, thankfully, we can simply call `this.invoke` to
         // create new coroutine
-        // 4) Normal call, but the value is captured
+        // 4) Normal call, but the konstue is captured
 
         // First, check whether this is a normal call
         int index = codegen.lookupLocalIndex(callee);
@@ -949,7 +949,7 @@ public abstract class StackValue {
                 return onStack(calleeType);
             }
         }
-        // Otherwise, this is captured value
+        // Otherwise, this is captured konstue
         return codegen.findCapturedValue(callee);
     }
 
@@ -1007,8 +1007,8 @@ public abstract class StackValue {
         return new FunctionCallStackValue(type, kotlinType, lambda);
     }
 
-    public static boolean couldSkipReceiverOnStaticCall(StackValue value) {
-        return value instanceof Local || value instanceof Constant;
+    public static boolean couldSkipReceiverOnStaticCall(StackValue konstue) {
+        return konstue instanceof Local || konstue instanceof Constant;
     }
 
     private static class None extends StackValue {
@@ -1215,36 +1215,36 @@ public abstract class StackValue {
 
     public static class Constant extends StackValue {
         @Nullable
-        public final Object value;
+        public final Object konstue;
 
-        public Constant(@Nullable Object value, Type type, KotlinType kotlinType) {
+        public Constant(@Nullable Object konstue, Type type, KotlinType kotlinType) {
             super(type, kotlinType, false);
             assert !Type.BOOLEAN_TYPE.equals(type) : "Boolean constants should be created via 'StackValue.constant'";
-            this.value = value;
+            this.konstue = konstue;
         }
 
         @Override
         public void putSelector(@NotNull Type type, @Nullable KotlinType kotlinType, @NotNull InstructionAdapter v) {
-            if (value instanceof Integer || value instanceof Byte || value instanceof Short) {
-                v.iconst(((Number) value).intValue());
+            if (konstue instanceof Integer || konstue instanceof Byte || konstue instanceof Short) {
+                v.iconst(((Number) konstue).intValue());
             }
-            else if (value instanceof Character) {
-                v.iconst(((Character) value).charValue());
+            else if (konstue instanceof Character) {
+                v.iconst(((Character) konstue).charValue());
             }
-            else if (value instanceof Long) {
-                v.lconst((Long) value);
+            else if (konstue instanceof Long) {
+                v.lconst((Long) konstue);
             }
-            else if (value instanceof Float) {
-                v.fconst((Float) value);
+            else if (konstue instanceof Float) {
+                v.fconst((Float) konstue);
             }
-            else if (value instanceof Double) {
-                v.dconst((Double) value);
+            else if (konstue instanceof Double) {
+                v.dconst((Double) konstue);
             }
             else {
-                v.aconst(value);
+                v.aconst(konstue);
             }
 
-            if (value != null || AsmUtil.isPrimitive(type)) {
+            if (konstue != null || AsmUtil.isPrimitive(type)) {
                 coerceTo(type, kotlinType, v);
             }
         }
@@ -1300,7 +1300,7 @@ public abstract class StackValue {
         private final Callable callable;
         private final boolean isGetter;
         private final ExpressionCodegen codegen;
-        private final List<ResolvedValueArgument> valueArguments;
+        private final List<ResolvedValueArgument> konstueArguments;
         private final FrameMap frame;
         private final StackValue receiver;
         private final ResolvedCall<FunctionDescriptor> resolvedGetCall;
@@ -1316,7 +1316,7 @@ public abstract class StackValue {
                 ResolvedCall<FunctionDescriptor> resolvedSetCall,
                 boolean isGetter,
                 @NotNull ExpressionCodegen codegen,
-                List<ResolvedValueArgument> valueArguments
+                List<ResolvedValueArgument> konstueArguments
         ) {
             super(OBJECT_TYPE);
             this.callable = callable;
@@ -1325,7 +1325,7 @@ public abstract class StackValue {
             this.receiver = receiver;
             this.resolvedGetCall = resolvedGetCall;
             this.resolvedSetCall = resolvedSetCall;
-            this.valueArguments = valueArguments;
+            this.konstueArguments = konstueArguments;
             this.codegen = codegen;
             this.frame = codegen.myFrameMap;
         }
@@ -1338,7 +1338,7 @@ public abstract class StackValue {
             newReceiver.put(newReceiver.type, newReceiver.kotlinType, v);
             callGenerator.processHiddenParameters();
             callGenerator.putHiddenParamsIntoLocals();
-            defaultArgs = generator.generate(valueArguments, valueArguments, call.getResultingDescriptor());
+            defaultArgs = generator.generate(konstueArguments, konstueArguments, call.getResultingDescriptor());
         }
 
         private ArgumentGenerator createArgumentGenerator() {
@@ -1370,10 +1370,10 @@ public abstract class StackValue {
             FrameMap.Mark mark = frame.mark();
 
             // indexes
-            List<ValueParameterDescriptor> valueParameters = resolvedGetCall.getResultingDescriptor().getValueParameters();
+            List<ValueParameterDescriptor> konstueParameters = resolvedGetCall.getResultingDescriptor().getValueParameters();
             int firstParamIndex = -1;
-            for (int i = valueParameters.size() - 1; i >= 0; --i) {
-                Type type = codegen.typeMapper.mapType(valueParameters.get(i).getType());
+            for (int i = konstueParameters.size() - 1; i >= 0; --i) {
+                Type type = codegen.typeMapper.mapType(konstueParameters.get(i).getType());
                 firstParamIndex = frame.enterTemp(type);
                 v.store(firstParamIndex, type);
             }
@@ -1425,8 +1425,8 @@ public abstract class StackValue {
             }
 
             int index = firstParamIndex;
-            for (ValueParameterDescriptor valueParameter : valueParameters) {
-                Type type = codegen.typeMapper.mapType(valueParameter.getType());
+            for (ValueParameterDescriptor konstueParameter : konstueParameters) {
+                Type type = codegen.typeMapper.mapType(konstueParameter.getType());
                 v.load(index, type);
                 index -= type.getSize();
             }
@@ -1441,8 +1441,8 @@ public abstract class StackValue {
             }
 
             index = firstParamIndex;
-            for (ValueParameterDescriptor valueParameter : valueParameters) {
-                Type type = codegen.typeMapper.mapType(valueParameter.getType());
+            for (ValueParameterDescriptor konstueParameter : konstueParameters) {
+                Type type = codegen.typeMapper.mapType(konstueParameter.getType());
                 v.load(index, type);
                 index -= type.getSize();
             }
@@ -1509,18 +1509,18 @@ public abstract class StackValue {
             }
         }
 
-        public static boolean isStandardStack(@NotNull KotlinTypeMapper typeMapper, @Nullable ResolvedCall<?> call, int valueParamsSize) {
+        public static boolean isStandardStack(@NotNull KotlinTypeMapper typeMapper, @Nullable ResolvedCall<?> call, int konstueParamsSize) {
             if (call == null) {
                 return true;
             }
 
-            List<ValueParameterDescriptor> valueParameters = call.getResultingDescriptor().getValueParameters();
-            if (valueParameters.size() != valueParamsSize) {
+            List<ValueParameterDescriptor> konstueParameters = call.getResultingDescriptor().getValueParameters();
+            if (konstueParameters.size() != konstueParamsSize) {
                 return false;
             }
 
-            for (ValueParameterDescriptor valueParameter : valueParameters) {
-                if (typeMapper.mapType(valueParameter.getType()).getSize() != 1) {
+            for (ValueParameterDescriptor konstueParameter : konstueParameters) {
+                if (typeMapper.mapType(konstueParameter.getType()).getSize() != 1) {
                     return false;
                 }
             }
@@ -1568,7 +1568,7 @@ public abstract class StackValue {
 
                 //TODO: try to don't generate defaults at all in CollectionElementReceiver
 
-                List<ResolvedValueArgument> getterArguments = new ArrayList<>(collectionElementReceiver.valueArguments);
+                List<ResolvedValueArgument> getterArguments = new ArrayList<>(collectionElementReceiver.konstueArguments);
                 List<ResolvedValueArgument> getterDefaults = CollectionsKt.takeLastWhile(getterArguments,
                                                                                          argument -> argument instanceof DefaultValueArgument);
 
@@ -1581,8 +1581,8 @@ public abstract class StackValue {
                     rhsValue.store(StackValue.onStack(type), v);
 
                     List<Type> types = getter.getValueParameterTypes();
-                    for (int i = collectionElementReceiver.valueArguments.size() - 1; i >= 0; i--) {
-                        ResolvedValueArgument argument = collectionElementReceiver.valueArguments.get(i);
+                    for (int i = collectionElementReceiver.konstueArguments.size() - 1; i >= 0; i--) {
+                        ResolvedValueArgument argument = collectionElementReceiver.konstueArguments.get(i);
                         if (argument instanceof DefaultValueArgument) {
                             AsmUtil.pop(v, types.get(i));
                         }
@@ -1598,7 +1598,7 @@ public abstract class StackValue {
                                     resolvedSetCall.getResultingDescriptor().getValueParameters(), setter.getValueParameterTypes()
                             );
 
-                            int defaultIndex = CollectionsKt.getLastIndex(setterArguments) - 1/*rhs value*/ - setterDefaults.size();
+                            int defaultIndex = CollectionsKt.getLastIndex(setterArguments) - 1/*rhs konstue*/ - setterDefaults.size();
                             for (ResolvedValueArgument aDefault : setterDefaults) {
                                 defaultArgs.mark(++defaultIndex);
                                 setterArgumentGenerator.generateDefault(defaultIndex, (DefaultValueArgument) aDefault);
@@ -1821,12 +1821,12 @@ public abstract class StackValue {
             ConstantValue<?> constantValue = descriptor.getCompileTimeInitializer();
             if (constantValue == null) return false;
 
-            Object value = constantValue.getValue();
-            if (this.type == Type.FLOAT_TYPE && value instanceof Double) {
-                value = ((Double) value).floatValue();
+            Object konstue = constantValue.getValue();
+            if (this.type == Type.FLOAT_TYPE && konstue instanceof Double) {
+                konstue = ((Double) konstue).floatValue();
             }
 
-            StackValue.constant(value, this.type, this.kotlinType).putSelector(type, kotlinType, v);
+            StackValue.constant(konstue, this.type, this.kotlinType).putSelector(type, kotlinType, v);
 
             return true;
         }
@@ -2106,28 +2106,28 @@ public abstract class StackValue {
     private static class PrefixIncrement extends StackValue {
         private final ResolvedCall resolvedCall;
         private final ExpressionCodegen codegen;
-        private StackValue value;
+        private StackValue konstue;
 
         public PrefixIncrement(
                 @NotNull Type type,
-                @NotNull StackValue value,
+                @NotNull StackValue konstue,
                 ResolvedCall resolvedCall,
                 @NotNull ExpressionCodegen codegen
         ) {
-            super(type, value.kotlinType);
-            this.value = value;
+            super(type, konstue.kotlinType);
+            this.konstue = konstue;
             this.resolvedCall = resolvedCall;
             this.codegen = codegen;
         }
 
         @Override
         public void putSelector(@NotNull Type type, @Nullable KotlinType kotlinType, @NotNull InstructionAdapter v) {
-            value = StackValue.complexReceiver(value, true, false, true);
-            value.put(this.type, this.kotlinType, v);
+            konstue = StackValue.complexReceiver(konstue, true, false, true);
+            konstue.put(this.type, this.kotlinType, v);
 
-            value.store(codegen.invokeFunction(resolvedCall, StackValue.onStack(this.type, this.kotlinType)), v, true);
+            konstue.store(codegen.invokeFunction(resolvedCall, StackValue.onStack(this.type, this.kotlinType)), v, true);
 
-            value.put(this.type, this.kotlinType, v, true);
+            konstue.put(this.type, this.kotlinType, v, true);
             coerceTo(type, kotlinType, v);
         }
     }
@@ -2232,13 +2232,13 @@ public abstract class StackValue {
         private final StackValueWithSimpleReceiver originalValueWithReceiver;
         private final boolean[] isReadOperations;
 
-        public ComplexReceiver(StackValueWithSimpleReceiver value, boolean[] isReadOperations) {
-            super(value.type, value.receiver.canHaveSideEffects());
-            this.originalValueWithReceiver = value;
+        public ComplexReceiver(StackValueWithSimpleReceiver konstue, boolean[] isReadOperations) {
+            super(konstue.type, konstue.receiver.canHaveSideEffects());
+            this.originalValueWithReceiver = konstue;
             this.isReadOperations = isReadOperations;
-            if (value instanceof CollectionElement) {
-                if (value.receiver instanceof CollectionElementReceiver) {
-                    ((CollectionElementReceiver) value.receiver).isComplexOperationWithDup = true;
+            if (konstue instanceof CollectionElement) {
+                if (konstue.receiver instanceof CollectionElementReceiver) {
+                    ((CollectionElementReceiver) konstue.receiver).isComplexOperationWithDup = true;
                 }
             }
         }
@@ -2356,10 +2356,10 @@ public abstract class StackValue {
         private final StackValue receiver;
         @Nullable private final Label ifNull;
 
-        public SafeCall(@NotNull Type type, @Nullable KotlinType kotlinType, @NotNull StackValue value, @Nullable Label ifNull) {
+        public SafeCall(@NotNull Type type, @Nullable KotlinType kotlinType, @NotNull StackValue konstue, @Nullable Label ifNull) {
             super(type, kotlinType);
             this.type = type;
-            this.receiver = value;
+            this.receiver = konstue;
             this.ifNull = ifNull;
         }
 

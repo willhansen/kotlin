@@ -10,7 +10,7 @@ import kotlin.test.*
 import kotlin.coroutines.*
 import kotlin.coroutines.intrinsics.*
 
-open class EmptyContinuation(override val context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
+open class EmptyContinuation(override konst context: CoroutineContext = EmptyCoroutineContext) : Continuation<Any?> {
     companion object : EmptyContinuation()
     override fun resumeWith(result: Result<Any?>) { result.getOrThrow() }
 }
@@ -27,9 +27,9 @@ suspend fun s2(): Int = suspendCoroutineUninterceptedOrReturn { x ->
     COROUTINE_SUSPENDED
 }
 
-suspend fun s3(value: Int): Int = suspendCoroutineUninterceptedOrReturn { x ->
+suspend fun s3(konstue: Int): Int = suspendCoroutineUninterceptedOrReturn { x ->
     println("s3")
-    x.resume(value)
+    x.resume(konstue)
     COROUTINE_SUSPENDED
 }
 

@@ -1,7 +1,7 @@
 // FILE: main.kt
 
 fun main() {
-    val j: JavaClass =  JavaClass()
+    konst j: JavaClass =  JavaClass()
 }
 
 // FILE: JavaClass.java

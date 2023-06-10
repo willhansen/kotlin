@@ -16,9 +16,9 @@ import org.jetbrains.kotlin.js.backend.ast.JsFunction
 @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 class IrFunctionToJsTransformer : BaseIrElementToJsNodeTransformer<JsFunction, JsGenerationContext> {
     override fun visitSimpleFunction(declaration: IrSimpleFunction, context: JsGenerationContext): JsFunction {
-        val parentClass = declaration.parent as? IrClass
-        val isInterfaceDefaultImpl = parentClass?.isInterface ?: false
-        val funcName = if (declaration.dispatchReceiverParameter == null || isInterfaceDefaultImpl) {
+        konst parentClass = declaration.parent as? IrClass
+        konst isInterfaceDefaultImpl = parentClass?.isInterface ?: false
+        konst funcName = if (declaration.dispatchReceiverParameter == null || isInterfaceDefaultImpl) {
             if (declaration.parent is IrFunction) {
                 context.getNameForValueDeclaration(declaration)
             } else {
@@ -32,7 +32,7 @@ class IrFunctionToJsTransformer : BaseIrElementToJsNodeTransformer<JsFunction, J
 
     override fun visitConstructor(declaration: IrConstructor, context: JsGenerationContext): JsFunction {
         assert(declaration.isPrimary)
-        val funcName = context.getNameForConstructor(declaration)
+        konst funcName = context.getNameForConstructor(declaration)
         return translateFunction(declaration, funcName, context)
     }
 }

@@ -1,7 +1,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER, -UNUSED_EXPRESSION
 
-fun throwInTry_valueInCatch_smartcastAfterTryCatch() {
-    val s = try {
+fun throwInTry_konstueInCatch_smartcastAfterTryCatch() {
+    konst s = try {
         throw AssertionError()
     } catch(e: Throwable) {
         "OK"
@@ -9,8 +9,8 @@ fun throwInTry_valueInCatch_smartcastAfterTryCatch() {
     s.length
 }
 
-fun throwInTry_valueInFinally_noSmartcastAfterTryCatchFinally() {
-    val s = try {
+fun throwInTry_konstueInFinally_noSmartcastAfterTryCatchFinally() {
+    konst s = try {
         throw AssertionError()
     } catch(e: Throwable) {
     } finally {
@@ -19,8 +19,8 @@ fun throwInTry_valueInFinally_noSmartcastAfterTryCatchFinally() {
     s.<!UNRESOLVED_REFERENCE!>length<!>
 }
 
-fun throwInTry_valueInCatchAndFinally_smartcastAfterTryCatchFinally() {
-    val s = try {
+fun throwInTry_konstueInCatchAndFinally_smartcastAfterTryCatchFinally() {
+    konst s = try {
         throw AssertionError()
     } catch(e: Throwable) {
         "OK"

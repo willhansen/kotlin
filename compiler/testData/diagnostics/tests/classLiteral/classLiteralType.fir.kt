@@ -3,13 +3,13 @@ import kotlin.reflect.KClass
 class A
 class B
 
-val listOfString: List<String> = null!!
-val arrayOfString: Array<String> = null!!
+konst listOfString: List<String> = null!!
+konst arrayOfString: Array<String> = null!!
 
-val a1 : KClass<*> = A::class
-val a2 : KClass<A> = A::class
-val a3 : KClass<B> = <!INITIALIZER_TYPE_MISMATCH!>A::class<!>
-val a4 : B = <!INITIALIZER_TYPE_MISMATCH!>A::class<!>
+konst a1 : KClass<*> = A::class
+konst a2 : KClass<A> = A::class
+konst a3 : KClass<B> = <!INITIALIZER_TYPE_MISMATCH!>A::class<!>
+konst a4 : B = <!INITIALIZER_TYPE_MISMATCH!>A::class<!>
 
-val a5 : KClass<out List<String>> = listOfString::class
-val a6 : KClass<out Array<String>> = arrayOfString::class
+konst a5 : KClass<out List<String>> = listOfString::class
+konst a6 : KClass<out Array<String>> = arrayOfString::class

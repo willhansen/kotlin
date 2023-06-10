@@ -1,3 +1,3 @@
 package org.sample.two
 
-val qux = 1
+konst qux = 1

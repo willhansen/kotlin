@@ -5,7 +5,7 @@ open class Base {
 
   }
 
-  val x: Any
+  konst x: Any
     field = x
     get
 

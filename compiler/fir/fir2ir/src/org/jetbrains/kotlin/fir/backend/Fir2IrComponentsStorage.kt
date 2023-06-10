@@ -18,13 +18,13 @@ import org.jetbrains.kotlin.ir.linkage.IrProvider
 import org.jetbrains.kotlin.ir.util.SymbolTable
 
 class Fir2IrComponentsStorage(
-    override val session: FirSession,
-    override val scopeSession: ScopeSession,
-    override val symbolTable: SymbolTable,
-    override val irFactory: IrFactory,
-    override val signatureComposer: FirBasedSignatureComposer,
-    override val extensions: Fir2IrExtensions,
-    override val configuration: Fir2IrConfiguration,
+    override konst session: FirSession,
+    override konst scopeSession: ScopeSession,
+    override konst symbolTable: SymbolTable,
+    override konst irFactory: IrFactory,
+    override konst signatureComposer: FirBasedSignatureComposer,
+    override konst extensions: Fir2IrExtensions,
+    override konst configuration: Fir2IrConfiguration,
 ) : Fir2IrComponents {
 
     override lateinit var converter: Fir2IrConverter
@@ -44,6 +44,6 @@ class Fir2IrComponentsStorage(
     override lateinit var fakeOverrideGenerator: FakeOverrideGenerator
     override lateinit var delegatedMemberGenerator: DelegatedMemberGenerator
 
-    override val lock: IrLock
+    override konst lock: IrLock
         get() = symbolTable.lock
 }

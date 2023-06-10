@@ -13,12 +13,12 @@ public interface B : A {
 
 external class Function(args: String, body: String)
 
-val hasProp = Function("obj, prop", "return obj[prop] !== undefined") as ((Any, String) -> Boolean)
+konst hasProp = Function("obj, prop", "return obj[prop] !== undefined") as ((Any, String) -> Boolean)
 
 fun box(): String {
-    val a = object: A {
+    konst a = object: A {
     }
-    val b = object: B {
+    konst b = object: B {
     }
 
     if (!hasProp(a, "foo")) return "A hasn't foo"
@@ -29,10 +29,10 @@ fun box(): String {
 
     // Legacy scheme exports interfaces
     if (testUtils.isLegacyBackend()) {
-        val PREFIX = "_"
-        if (eval("$PREFIX.A") == null) return "$PREFIX.A not found"
-        if (eval("$PREFIX.B") == null) return "$PREFIX.B not found"
-        if (eval("$PREFIX.A === $PREFIX.B") as Boolean) return "A and B refer to the same object"
+        konst PREFIX = "_"
+        if (ekonst("$PREFIX.A") == null) return "$PREFIX.A not found"
+        if (ekonst("$PREFIX.B") == null) return "$PREFIX.B not found"
+        if (ekonst("$PREFIX.A === $PREFIX.B") as Boolean) return "A and B refer to the same object"
     }
 
     return "OK"

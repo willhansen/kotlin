@@ -32,7 +32,7 @@ object TestFirJsSessionFactory {
         languageVersionSettings: LanguageVersionSettings,
         registerExtraComponents: ((FirSession) -> Unit),
     ): FirSession {
-        val resolvedLibraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
+        konst resolvedLibraries = resolveLibraries(configuration, getAllJsDependenciesPaths(module, testServices))
 
         return FirJsSessionFactory.createLibrarySession(
             mainModuleName,

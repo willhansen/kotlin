@@ -20,13 +20,13 @@ public class J {
 import kotlin.test.assertEquals
 import kotlin.reflect.KAnnotatedElement
 
-annotation class Anno(val value: String)
+annotation class Anno(konst konstue: String)
 
 fun box(): String {
-    assertEquals("J", getSingleAnnoAnnotation(J::class).value)
-    assertEquals("foo", getSingleAnnoAnnotation(J::foo).value)
-    assertEquals("bar", getSingleAnnoAnnotation(J::bar).value)
-    assertEquals("constructor", getSingleAnnoAnnotation(::J).value)
+    assertEquals("J", getSingleAnnoAnnotation(J::class).konstue)
+    assertEquals("foo", getSingleAnnoAnnotation(J::foo).konstue)
+    assertEquals("bar", getSingleAnnoAnnotation(J::bar).konstue)
+    assertEquals("constructor", getSingleAnnoAnnotation(::J).konstue)
 
     return "OK"
 }

@@ -9,13 +9,13 @@ public class Test extends KotlinBase {
 // FILE: KotlinBase.kt
 
 open class KotlinBase {
-    val abcd = "abcd"
+    konst abcd = "abcd"
 }
 
 // FILE: KotlinProxy.kt
 
 interface KotlinProxy {
-    val zyxw get() = "zyxw"
+    konst zyxw get() = "zyxw"
 }
 
 // FILE: test.kt

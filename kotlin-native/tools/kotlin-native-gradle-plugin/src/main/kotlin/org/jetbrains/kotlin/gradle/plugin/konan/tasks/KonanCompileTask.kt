@@ -36,17 +36,17 @@ import java.io.File
 abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
 
     @get:Internal
-    override val toolRunner = KonanCliCompilerRunner(project, project.konanExtension.jvmArgs)
+    override konst toolRunner = KonanCliCompilerRunner(project, project.konanExtension.jvmArgs)
 
-    abstract val produce: CompilerOutputKind
+    abstract konst produce: CompilerOutputKind
         @Internal get
 
     // Output artifact --------------------------------------------------------
 
-    override val artifactSuffix: String
+    override konst artifactSuffix: String
         @Internal get() = produce.suffix(konanTarget)
 
-    override val artifactPrefix: String
+    override konst artifactPrefix: String
         @Internal get() = produce.prefix(konanTarget)
 
     // Multiplatform support --------------------------------------------------
@@ -55,27 +55,27 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
 
     @Internal var enableMultiplatform = false
 
-    private val commonSrcFiles_ = mutableSetOf<FileCollection>()
-    val commonSrcFiles: Collection<FileCollection>
+    private konst commonSrcFiles_ = mutableSetOf<FileCollection>()
+    konst commonSrcFiles: Collection<FileCollection>
         @Internal get() = if (enableMultiplatform) commonSrcFiles_ else emptyList()
 
     // Other compilation parameters -------------------------------------------
 
-    private val srcFiles_ = mutableSetOf<FileCollection>()
-    val srcFiles: Collection<FileCollection>
+    private konst srcFiles_ = mutableSetOf<FileCollection>()
+    konst srcFiles: Collection<FileCollection>
         @Internal get() = srcFiles_.takeIf { !it.isEmpty() } ?: listOf(project.konanDefaultSrcFiles)
 
-    val allSources: Collection<FileCollection>
+    konst allSources: Collection<FileCollection>
         @InputFiles get() = listOf(srcFiles, commonSrcFiles).flatten()
 
-    private val allSourceFiles: List<File>
+    private konst allSourceFiles: List<File>
         get() = allSources
                 .flatMap { it.files }
                 .filter { it.name.endsWith(".kt") }
 
-    @InputFiles val nativeLibraries = mutableSetOf<FileCollection>()
+    @InputFiles konst nativeLibraries = mutableSetOf<FileCollection>()
 
-    @Input val linkerOpts = mutableListOf<String>()
+    @Input konst linkerOpts = mutableListOf<String>()
 
     @Input var enableDebug = project.findProperty("enableDebug")?.toString()?.toBoolean()
             ?: project.environmentVariables.debuggingSymbols
@@ -90,9 +90,9 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
 
     @Console var measureTime       = false
 
-    val languageVersion : String?
+    konst languageVersion : String?
         @Optional @Input get() = project.konanExtension.languageVersion
-    val apiVersion      : String?
+    konst apiVersion      : String?
         @Optional @Input get() = project.konanExtension.apiVersion
 
     /**
@@ -102,7 +102,7 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
      * In two-stage compilation, sources are compiled into a klib first and then a final native binary is produced from this klib.
      */
     @get:Input
-    abstract val enableTwoStageCompilation: Boolean
+    abstract konst enableTwoStageCompilation: Boolean
 
     protected fun directoryToKt(dir: Any) = project.fileTree(dir).apply {
         include("**/*.kt")
@@ -123,19 +123,19 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
     // E.g. if the list contains the following elements: ["-l", "foo", "-r", "bar"],
     // call exclude("-r") returns the following list: ["-l", "foo"].
     private fun List<String>.excludeArguments(vararg args: String): List<String> {
-        val argsToExclude = args.toSet()
-        val xPrefixesToExclude = argsToExclude.filter { it.startsWith("-X") }.map { "$it=" }
-        val result = mutableListOf<String>()
+        konst argsToExclude = args.toSet()
+        konst xPrefixesToExclude = argsToExclude.filter { it.startsWith("-X") }.map { "$it=" }
+        konst result = mutableListOf<String>()
 
         var i = 0
         while (i < size) {
-            val key = this[i]
+            konst key = this[i]
             when {
                 key in argsToExclude -> {
                     // Skip the key and the following arg.
                     i++
                 }
-                // Support args passed as -X<arg>=<value>.
+                // Support args passed as -X<arg>=<konstue>.
                 xPrefixesToExclude.any { key.startsWith(it) } -> { /* Skip the key. */ }
                 else -> result += key
             }
@@ -301,9 +301,9 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
 
     // DSL. Other parameters.
 
-    override fun linkerOpts(values: List<String>) = linkerOpts(*values.toTypedArray())
-    override fun linkerOpts(vararg values: String) {
-        linkerOpts.addAll(values)
+    override fun linkerOpts(konstues: List<String>) = linkerOpts(*konstues.toTypedArray())
+    override fun linkerOpts(vararg konstues: String) {
+        linkerOpts.addAll(konstues)
     }
 
     override fun enableDebug(flag: Boolean) {
@@ -346,13 +346,13 @@ abstract class KonanCompileTask: KonanBuildingTask(), KonanCompileSpec {
         }
         if (enableTwoStageCompilation) {
             logger.info("Start two-stage compilation")
-            val intermediateDir = project.konanBuildRoot
+            konst intermediateDir = project.konanBuildRoot
                 .resolve("intermediate")
                 .targetSubdir(konanTarget)
                 .apply { mkdirs() }
-            val klibPrefix = CompilerOutputKind.LIBRARY.prefix(konanTarget)
-            val klibSuffix = CompilerOutputKind.LIBRARY.suffix(konanTarget)
-            val intermediateKlib = intermediateDir.resolve("$klibPrefix$artifactName$klibSuffix").absolutePath
+            konst klibPrefix = CompilerOutputKind.LIBRARY.prefix(konanTarget)
+            konst klibSuffix = CompilerOutputKind.LIBRARY.suffix(konanTarget)
+            konst intermediateKlib = intermediateDir.resolve("$klibPrefix$artifactName$klibSuffix").absolutePath
             logger.info("Start first stage")
             toolRunner.run(buildFirstStageArgs(intermediateKlib))
             logger.info("Start second stage")
@@ -369,7 +369,7 @@ abstract class KonanCompileNativeBinary: KonanCompileTask() {
 }
 
 open class KonanCompileProgramTask: KonanCompileNativeBinary() {
-    override val produce: CompilerOutputKind get() = CompilerOutputKind.PROGRAM
+    override konst produce: CompilerOutputKind get() = CompilerOutputKind.PROGRAM
 
     @Internal
     var runTask: TaskProvider<Exec>? = null
@@ -382,40 +382,40 @@ open class KonanCompileProgramTask: KonanCompileNativeBinary() {
 }
 
 open class KonanCompileDynamicTask: KonanCompileNativeBinary() {
-    override val produce: CompilerOutputKind get() = CompilerOutputKind.DYNAMIC
+    override konst produce: CompilerOutputKind get() = CompilerOutputKind.DYNAMIC
 
-    val headerFile: File
+    konst headerFile: File
         @OutputFile get() = destinationDir.resolve("$artifactPrefix${artifactName}_api.h")
 }
 
 open class KonanCompileFrameworkTask: KonanCompileNativeBinary() {
-    override val produce: CompilerOutputKind get() = CompilerOutputKind.FRAMEWORK
+    override konst produce: CompilerOutputKind get() = CompilerOutputKind.FRAMEWORK
 
-    override val artifact
+    override konst artifact
         @OutputDirectory get() = super.artifact
 }
 
 open class KonanCompileLibraryTask: KonanCompileTask() {
-    override val artifact: File
+    override konst artifact: File
         @Internal get() = destinationDir.resolve(artifactFullName)
 
-    val artifactFile: File?
+    konst artifactFile: File?
         @Optional @OutputFile get() = if (!noPack) artifact else null
 
-    val artifactDirectory: File?
+    konst artifactDirectory: File?
         @Optional @OutputDirectory get() = if (noPack) artifact else null
 
-    override val artifactSuffix: String
+    override konst artifactSuffix: String
         @Internal get() = if (!noPack) produce.suffix(konanTarget) else ""
 
     override fun buildCommonArgs() = super.buildCommonArgs().apply {
         addKey("-nopack", noPack)
     }
 
-    override val produce: CompilerOutputKind get() = CompilerOutputKind.LIBRARY
-    override val enableTwoStageCompilation: Boolean = false
+    override konst produce: CompilerOutputKind get() = CompilerOutputKind.LIBRARY
+    override konst enableTwoStageCompilation: Boolean = false
 }
 
 open class KonanCompileBitcodeTask: KonanCompileNativeBinary() {
-    override val produce: CompilerOutputKind get() = CompilerOutputKind.BITCODE
+    override konst produce: CompilerOutputKind get() = CompilerOutputKind.BITCODE
 }

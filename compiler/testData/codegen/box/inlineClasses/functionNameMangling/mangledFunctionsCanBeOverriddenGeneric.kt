@@ -3,10 +3,10 @@
 // LANGUAGE: +ValueClasses, +GenericInlineClassParameter
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Id<T: String>(val id: T)
+konstue class Id<T: String>(konst id: T)
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Name<T: String>(val name: T)
+konstue class Name<T: String>(konst name: T)
 
 interface IA {
     fun fromInterface(id: Id<String>)

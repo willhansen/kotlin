@@ -1,5 +1,5 @@
 fun y() {
     <expr>
-    val x: String = ""
+    konst x: String = ""
     </expr>
 }

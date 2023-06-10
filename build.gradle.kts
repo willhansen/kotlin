@@ -6,7 +6,7 @@ buildscript {
     // a workaround for kotlin compiler classpath in kotlin project: sometimes gradle substitutes
     // kotlin-stdlib external dependency with local project :kotlin-stdlib in kotlinCompilerClasspath configuration.
     // see also configureCompilerClasspath@
-    val bootstrapCompilerClasspath by configurations.creating
+    konst bootstrapCompilerClasspath by configurations.creating
 
     dependencies {
         bootstrapCompilerClasspath(kotlin("compiler-embeddable", bootstrapKotlinVersion))
@@ -14,8 +14,8 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:${kotlinBuildProperties.buildGradlePluginVersion}")
     }
 
-    val versionPropertiesFile = project.rootProject.projectDir.resolve("gradle/versions.properties")
-    val versionProperties = java.util.Properties()
+    konst versionPropertiesFile = project.rootProject.projectDir.resolve("gradle/versions.properties")
+    konst versionProperties = java.util.Properties()
     versionPropertiesFile.inputStream().use { propInput ->
         versionProperties.load(propInput)
     }
@@ -35,7 +35,7 @@ plugins {
     id("jps-compatible")
     id("org.jetbrains.gradle.plugin.idea-ext")
     id("org.gradle.crypto.checksum") version "1.4.0"
-    id("org.jetbrains.kotlinx.binary-compatibility-validator") version "0.13.1" apply false
+    id("org.jetbrains.kotlinx.binary-compatibility-konstidator") version "0.13.1" apply false
     signing
     id("org.jetbrains.kotlin.jvm") apply false
     id("org.jetbrains.kotlin.plugin.serialization") apply false
@@ -53,30 +53,30 @@ pill {
     )
 }
 
-val isTeamcityBuild = project.kotlinBuildProperties.isTeamcityBuild
+konst isTeamcityBuild = project.kotlinBuildProperties.isTeamcityBuild
 
-val defaultSnapshotVersion: String by extra
-val buildNumber by extra(findProperty("build.number")?.toString() ?: defaultSnapshotVersion)
-val kotlinVersion by extra(
+konst defaultSnapshotVersion: String by extra
+konst buildNumber by extra(findProperty("build.number")?.toString() ?: defaultSnapshotVersion)
+konst kotlinVersion by extra(
     findProperty("deployVersion")?.toString()?.let { deploySnapshotStr ->
         if (deploySnapshotStr != "default.snapshot") deploySnapshotStr else defaultSnapshotVersion
     } ?: buildNumber
 )
 
-val kotlinLanguageVersion: String by extra
+konst kotlinLanguageVersion: String by extra
 
 extra["kotlin_root"] = rootDir
 
-val jpsBootstrap by configurations.creating
+konst jpsBootstrap by configurations.creating
 
-val commonBuildDir = File(rootDir, "build")
-val distDir by extra("$rootDir/dist")
-val distKotlinHomeDir by extra("$distDir/kotlinc")
-val distLibDir = "$distKotlinHomeDir/lib"
-val commonLocalDataDir = "$rootDir/local"
-val ideaSandboxDir = "$commonLocalDataDir/ideaSandbox"
-val artifactsDir = "$distDir/artifacts"
-val ideaPluginDir = "$artifactsDir/ideaPlugin/Kotlin"
+konst commonBuildDir = File(rootDir, "build")
+konst distDir by extra("$rootDir/dist")
+konst distKotlinHomeDir by extra("$distDir/kotlinc")
+konst distLibDir = "$distKotlinHomeDir/lib"
+konst commonLocalDataDir = "$rootDir/local"
+konst ideaSandboxDir = "$commonLocalDataDir/ideaSandbox"
+konst artifactsDir = "$distDir/artifacts"
+konst ideaPluginDir = "$artifactsDir/ideaPlugin/Kotlin"
 
 // TODO: use "by extra()" syntax where possible
 extra["distLibDir"] = project.file(distLibDir)
@@ -104,7 +104,7 @@ if (!project.hasProperty("versions.kotlin-native")) {
     extra["versions.kotlin-native"] = "1.9.20-dev-2332"
 }
 
-val irCompilerModules = arrayOf(
+konst irCompilerModules = arrayOf(
     ":compiler:ir.tree",
     ":compiler:ir.serialization.common",
     ":compiler:ir.serialization.js",
@@ -114,7 +114,7 @@ val irCompilerModules = arrayOf(
     ":wasm:wasm.ir"
 ).also { extra["irCompilerModules"] = it }
 
-val commonCompilerModules = arrayOf(
+konst commonCompilerModules = arrayOf(
     ":compiler:psi",
     ":compiler:frontend.common-psi",
     ":analysis:light-classes-base",
@@ -146,7 +146,7 @@ val commonCompilerModules = arrayOf(
     ":compiler:build-tools:kotlin-build-statistics",
 ).also { extra["commonCompilerModules"] = it }
 
-val firCompilerCoreModules = arrayOf(
+konst firCompilerCoreModules = arrayOf(
     ":compiler:fir:cones",
     ":compiler:fir:providers",
     ":compiler:fir:semantics",
@@ -167,14 +167,14 @@ val firCompilerCoreModules = arrayOf(
     ":compiler:fir:fir2ir" // TODO should not be in core modules but FIR IDE uses Fir2IrSignatureComposer from this module
 ).also { extra["firCompilerCoreModules"] = it }
 
-val firAllCompilerModules = firCompilerCoreModules +
+konst firAllCompilerModules = firCompilerCoreModules +
     arrayOf(
         ":compiler:fir:raw-fir:light-tree2fir",
         ":compiler:fir:analysis-tests",
         ":compiler:fir:analysis-tests:legacy-fir-tests"
     )
 
-val fe10CompilerModules = arrayOf(
+konst fe10CompilerModules = arrayOf(
     ":compiler",
     ":core:descriptors.runtime",
     ":core:descriptors",
@@ -336,7 +336,7 @@ extra["compilerArtifactsForIde"] = listOfNotNull(
     ":kotlin-dom-api-compat"
 )
 
-val coreLibProjects by extra {
+konst coreLibProjects by extra {
     listOfNotNull(
         ":kotlin-stdlib",
         ":kotlin-stdlib-common",
@@ -355,7 +355,7 @@ val coreLibProjects by extra {
     )
 }
 
-val projectsWithEnabledContextReceivers by extra {
+konst projectsWithEnabledContextReceivers by extra {
     listOf(
         ":core:descriptors.jvm",
         ":compiler:resolution.common",
@@ -370,7 +370,7 @@ val projectsWithEnabledContextReceivers by extra {
     )
 }
 
-val projectsWithOptInToUnsafeCastFunctionsFromAddToStdLib by extra {
+konst projectsWithOptInToUnsafeCastFunctionsFromAddToStdLib by extra {
     listOf(
         ":analysis:analysis-api-fe10",
         ":analysis:analysis-api-fir",
@@ -388,7 +388,7 @@ val projectsWithOptInToUnsafeCastFunctionsFromAddToStdLib by extra {
     )
 }
 
-val gradlePluginProjects = listOf(
+konst gradlePluginProjects = listOf(
     ":kotlin-gradle-plugin",
     ":kotlin-gradle-plugin-api",
     ":kotlin-gradle-plugin-annotations",
@@ -404,12 +404,12 @@ val gradlePluginProjects = listOf(
     ":kotlin-assignment"
 )
 
-val ignoreTestFailures by extra(project.kotlinBuildProperties.ignoreTestFailures)
+konst ignoreTestFailures by extra(project.kotlinBuildProperties.ignoreTestFailures)
 
-val dependencyOnSnapshotReflectWhitelist = setOf(
+konst dependencyOnSnapshotReflectWhitelist = setOf(
     ":kotlin-compiler",
     ":kotlin-reflect",
-    ":tools:binary-compatibility-validator",
+    ":tools:binary-compatibility-konstidator",
     ":tools:kotlin-stdlib-gen",
 )
 
@@ -418,7 +418,7 @@ allprojects {
         pluginManager.apply("common-configuration")
     }
     configurations.all {
-        val configuration = this
+        konst configuration = this
         if (name != "compileClasspath") {
             return@all
         }
@@ -426,11 +426,11 @@ allprojects {
             if (requested.group != "org.jetbrains.kotlin") {
                 return@eachDependency
             }
-            val isReflect = requested.name == "kotlin-reflect" || requested.name == "kotlin-reflect-api"
+            konst isReflect = requested.name == "kotlin-reflect" || requested.name == "kotlin-reflect-api"
             // More strict check for "compilerModules". We can't apply this check for all modules because it would force to
             // exclude kotlin-reflect from transitive dependencies of kotlin-poet, ktor, com.android.tools.build:gradle, etc
             if (project.path in (rootProject.extra["compilerModules"] as Array<String>)) {
-                val expectedReflectVersion = commonDependencyVersion("org.jetbrains.kotlin", "kotlin-reflect")
+                konst expectedReflectVersion = commonDependencyVersion("org.jetbrains.kotlin", "kotlin-reflect")
                 if (isReflect) {
                     check(requested.version == expectedReflectVersion) {
                         """
@@ -463,7 +463,7 @@ allprojects {
             }
         }
     }
-    val mirrorRepo: String? = findProperty("maven.repository.mirror")?.toString()
+    konst mirrorRepo: String? = findProperty("maven.repository.mirror")?.toString()
 
     repositories {
         when (kotlinBuildProperties.getOrNull("attachedIntellijVersion")) {
@@ -550,10 +550,10 @@ if (extra.has("isDeployStagingRepoGenerationRequired") &&
 
 gradle.taskGraph.whenReady {
     fun Boolean.toOnOff(): String = if (this) "on" else "off"
-    val profile = if (isTeamcityBuild) "CI" else "Local"
+    konst profile = if (isTeamcityBuild) "CI" else "Local"
 
-    val proguardMessage = "proguard is ${kotlinBuildProperties.proguard.toOnOff()}"
-    val jarCompressionMessage = "jar compression is ${kotlinBuildProperties.jarCompression.toOnOff()}"
+    konst proguardMessage = "proguard is ${kotlinBuildProperties.proguard.toOnOff()}"
+    konst jarCompressionMessage = "jar compression is ${kotlinBuildProperties.jarCompression.toOnOff()}"
 
     logger.warn(
         "$profile build profile is active ($proguardMessage, $jarCompressionMessage). " +
@@ -568,17 +568,17 @@ gradle.taskGraph.whenReady {
     }
 }
 
-val dist = tasks.register("dist") {
+konst dist = tasks.register("dist") {
     dependsOn(":kotlin-compiler:dist")
 }
 
-val syncMutedTests = tasks.register("syncMutedTests") {
+konst syncMutedTests = tasks.register("syncMutedTests") {
     dependsOn(":compiler:tests-mutes:tc-integration:run")
 }
 
 tasks.register("createIdeaHomeForTests") {
-    val ideaBuildNumberFileForTests = ideaBuildNumberFileForTests()
-    val intellijSdkVersion = rootProject.extra["versions.intellijSdk"]
+    konst ideaBuildNumberFileForTests = ideaBuildNumberFileForTests()
+    konst intellijSdkVersion = rootProject.extra["versions.intellijSdk"]
     outputs.file(ideaBuildNumberFileForTests)
     doFirst {
         ideaBuildNumberFileForTests.parentFile.mkdirs()
@@ -612,7 +612,7 @@ tasks {
             ":kotlin-test:kotlin-test-js:kotlin-test-js-it".takeIf { !kotlinBuildProperties.isInJpsBuildIdeaSync },
             ":kotlin-test:kotlin-test-js-ir:kotlin-test-js-ir-it".takeIf { !kotlinBuildProperties.isInJpsBuildIdeaSync },
             ":kotlinx-metadata-jvm",
-            ":tools:binary-compatibility-validator",
+            ":tools:binary-compatibility-konstidator",
             //":kotlin-stdlib-wasm",
         )).forEach {
             dependsOn("$it:check")
@@ -837,7 +837,7 @@ tasks {
     named("checkBuild") {
         if (kotlinBuildProperties.isTeamcityBuild) {
             doFirst {
-                println("##teamcity[setParameter name='bootstrap.kotlin.version' value='$bootstrapKotlinVersion']")
+                println("##teamcity[setParameter name='bootstrap.kotlin.version' konstue='$bootstrapKotlinVersion']")
             }
         }
     }
@@ -863,7 +863,7 @@ tasks {
     }
 }
 
-val zipCompiler by tasks.registering(Zip::class) {
+konst zipCompiler by tasks.registering(Zip::class) {
     dependsOn(dist)
     destinationDirectory.set(file(distDir))
     archiveFileName.set("kotlin-compiler-$kotlinVersion.zip")
@@ -877,14 +877,14 @@ val zipCompiler by tasks.registering(Zip::class) {
 }
 
 fun Project.secureZipTask(zipTask: TaskProvider<Zip>): RegisteringDomainObjectDelegateProviderWithAction<out TaskContainer, Task> {
-    val checkSumTask = tasks.register("${zipTask.name}Checksum", Checksum::class) {
+    konst checkSumTask = tasks.register("${zipTask.name}Checksum", Checksum::class) {
         dependsOn(zipTask)
         inputFiles.setFrom(zipTask.map { it.outputs.files.singleFile })
         outputDirectory.fileProvider(zipTask.map { it.outputs.files.singleFile.parentFile })
         checksumAlgorithm.set(Checksum.Algorithm.SHA256)
     }
 
-    val signTask = tasks.register("${zipTask.name}Sign", Sign::class) {
+    konst signTask = tasks.register("${zipTask.name}Sign", Sign::class) {
         description = "Signs the archive produced by the '" + zipTask.name + "' task."
         sign(zipTask.get())
     }
@@ -899,7 +899,7 @@ signing {
     useGpgCmd()
 }
 
-val zipCompilerWithSignature by secureZipTask(zipCompiler)
+konst zipCompilerWithSignature by secureZipTask(zipCompiler)
 
 configure<IdeaModel> {
     module {
@@ -915,7 +915,7 @@ configure<IdeaModel> {
     }
 }
 
-val disableVerificationTasks = providers.gradleProperty("kotlin.build.disable.verification.tasks")
+konst disableVerificationTasks = providers.gradleProperty("kotlin.build.disable.verification.tasks")
     .orNull?.toBoolean() ?: false
 if (disableVerificationTasks) {
     logger.info("Verification tasks are disabled because `kotlin.build.disable.verification.tasks` is true")
@@ -939,8 +939,8 @@ plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin:
     }
 }
 
-afterEvaluate {
-    val cacheRedirectorEnabled = findProperty("cacheRedirectorEnabled")?.toString()?.toBoolean() == true
+afterEkonstuate {
+    konst cacheRedirectorEnabled = findProperty("cacheRedirectorEnabled")?.toString()?.toBoolean() == true
     if (cacheRedirectorEnabled) {
         rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlugin::class.java) {
             rootProject.the<org.jetbrains.kotlin.gradle.targets.js.yarn.YarnRootExtension>().downloadBaseUrl =
@@ -951,6 +951,6 @@ afterEvaluate {
     }
 }
 
-afterEvaluate {
+afterEkonstuate {
     checkExpectedGradlePropertyValues()
 }

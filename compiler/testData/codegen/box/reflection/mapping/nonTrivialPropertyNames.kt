@@ -8,19 +8,19 @@ import kotlin.reflect.jvm.kotlinProperty
 import kotlin.test.assertEquals
 
 class A {
-    val x = "outer"  // NB: backing field of this property has the name `x$1`, to avoid conflict with public field moved from companion.
-    val y = "outer"  // Same here, `y$1`.
+    konst x = "outer"  // NB: backing field of this property has the name `x$1`, to avoid conflict with public field moved from companion.
+    konst y = "outer"  // Same here, `y$1`.
 
     companion object {
         @JvmField
-        val x = "companion"
+        konst x = "companion"
 
-        const val y = "companion"
+        const konst y = "companion"
     }
 }
 
 fun test(f: KProperty<*>) {
-    val javaField = f.javaField
+    konst javaField = f.javaField
         ?: error("javaField == null for $f")
 
     assertEquals(f, javaField.kotlinProperty, "Incorrect kotlinProperty for $javaField")

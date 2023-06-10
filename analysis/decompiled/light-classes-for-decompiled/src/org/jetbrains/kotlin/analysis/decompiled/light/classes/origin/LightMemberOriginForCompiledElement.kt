@@ -17,15 +17,15 @@ import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.JvmDeclarationOriginKind
 
 interface LightMemberOriginForCompiledElement<T : PsiMember> : LightMemberOrigin {
-    val member: T
+    konst member: T
 
-    override val originKind: JvmDeclarationOriginKind
+    override konst originKind: JvmDeclarationOriginKind
         get() = JvmDeclarationOriginKind.OTHER
 
-    override fun isEquivalentTo(other: PsiElement?): Boolean {
+    override fun isEquikonstentTo(other: PsiElement?): Boolean {
         return when (other) {
-            is KtDeclaration -> originalElement?.isEquivalentTo(other) ?: false
-            is PsiMember -> member.isEquivalentTo(other)
+            is KtDeclaration -> originalElement?.isEquikonstentTo(other) ?: false
+            is PsiMember -> member.isEquikonstentTo(other)
             else -> false
         }
     }
@@ -33,40 +33,40 @@ interface LightMemberOriginForCompiledElement<T : PsiMember> : LightMemberOrigin
     override fun isValid(): Boolean = member.isValid
 }
 
-data class LightMemberOriginForCompiledField(val psiField: PsiField, val file: KtClsFile) : LightMemberOriginForCompiledElement<PsiField> {
-    override val member: PsiField
+data class LightMemberOriginForCompiledField(konst psiField: PsiField, konst file: KtClsFile) : LightMemberOriginForCompiledElement<PsiField> {
+    override konst member: PsiField
         get() = psiField
 
     override fun copy(): LightMemberOrigin {
         return LightMemberOriginForCompiledField(psiField.copy() as PsiField, file)
     }
 
-    override fun isEquivalentTo(other: LightMemberOrigin?): Boolean {
+    override fun isEquikonstentTo(other: LightMemberOrigin?): Boolean {
         if (other !is LightMemberOriginForCompiledField) return false
-        return psiField.isEquivalentTo(other.psiField)
+        return psiField.isEquikonstentTo(other.psiField)
     }
 
-    override val originalElement: KtDeclaration? by lazyPub {
+    override konst originalElement: KtDeclaration? by lazyPub {
         KotlinDeclarationInCompiledFileSearcher.getInstance().findDeclarationInCompiledFile(file, psiField)
     }
 }
 
-data class LightMemberOriginForCompiledMethod(val psiMethod: PsiMethod, val file: KtClsFile) :
+data class LightMemberOriginForCompiledMethod(konst psiMethod: PsiMethod, konst file: KtClsFile) :
     LightMemberOriginForCompiledElement<PsiMethod> {
 
-    override val member: PsiMethod
+    override konst member: PsiMethod
         get() = psiMethod
 
-    override fun isEquivalentTo(other: LightMemberOrigin?): Boolean {
+    override fun isEquikonstentTo(other: LightMemberOrigin?): Boolean {
         if (other !is LightMemberOriginForCompiledMethod) return false
-        return psiMethod.isEquivalentTo(other.psiMethod)
+        return psiMethod.isEquikonstentTo(other.psiMethod)
     }
 
     override fun copy(): LightMemberOrigin {
         return LightMemberOriginForCompiledMethod(psiMethod.copy() as PsiMethod, file)
     }
 
-    override val originalElement: KtDeclaration? by lazyPub {
+    override konst originalElement: KtDeclaration? by lazyPub {
         KotlinDeclarationInCompiledFileSearcher.getInstance().findDeclarationInCompiledFile(file, psiMethod)
     }
 }

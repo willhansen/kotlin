@@ -1,14 +1,14 @@
-data class A(val v: Any?)
+data class A(konst v: Any?)
 
-data class B<T>(val v: T)
+data class B<T>(konst v: T)
 
 fun box(): String {
-    val a1 = A(null)
-    val a2 = A("")
+    konst a1 = A(null)
+    konst a2 = A("")
     if (a1 == a2 || a2 == a1) return "Fail 1"
 
-    val b1 = B(null)
-    val b2 = B("")
+    konst b1 = B(null)
+    konst b2 = B("")
     if (b1 == b2 || b2 == b1) return "Fail 2"
 
     return "OK"

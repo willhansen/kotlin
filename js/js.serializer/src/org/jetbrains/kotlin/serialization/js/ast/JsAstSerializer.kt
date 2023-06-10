@@ -28,12 +28,12 @@ import java.io.OutputStream
 import java.util.*
 
 class JsAstSerializer(
-    private val jsAstValidator: ((JsProgramFragment, Set<JsName>) -> Unit)?,
-    private val pathResolver: (File) -> String
+    private konst jsAstValidator: ((JsProgramFragment, Set<JsName>) -> Unit)?,
+    private konst pathResolver: (File) -> String
 ) : JsAstSerializerBase() {
 
     fun serialize(fragment: JsProgramFragment, output: OutputStream) {
-        val namesBySignature = fragment.nameBindings.associateTo(mutableMapOf()) { it.key to it.name }
+        konst namesBySignature = fragment.nameBindings.associateTo(mutableMapOf()) { it.key to it.name }
         importedNames.clear()
         importedNames += fragment.imports.map { namesBySignature[it.key]!! }
         serialize(fragment).writeTo(output)
@@ -41,7 +41,7 @@ class JsAstSerializer(
 
     fun serialize(fragment: JsProgramFragment): Chunk {
         try {
-            val chunkBuilder = Chunk.newBuilder()
+            konst chunkBuilder = Chunk.newBuilder()
             chunkBuilder.fragment = serializeFragment(fragment)
             chunkBuilder.nameTable = nameTableBuilder.build()
             chunkBuilder.stringTable = stringTableBuilder.build()
@@ -55,12 +55,12 @@ class JsAstSerializer(
     }
 
     private fun serializeFragment(fragment: JsProgramFragment): Fragment {
-        val fragmentBuilder = Fragment.newBuilder()
+        konst fragmentBuilder = Fragment.newBuilder()
 
         fragmentBuilder.packageFqn = fragment.packageFqn
 
         for (importedModule in fragment.importedModules) {
-            val importedModuleBuilder = ImportedModule.newBuilder()
+            konst importedModuleBuilder = ImportedModule.newBuilder()
             importedModuleBuilder.externalNameId = serialize(importedModule.externalName)
             importedModuleBuilder.internalNameId = serialize(importedModule.internalName)
             importedModule.plainReference?.let { importedModuleBuilder.plainReference = serialize(it) }
@@ -68,7 +68,7 @@ class JsAstSerializer(
         }
 
         for ((signature, expression) in fragment.imports) {
-            val importBuilder = Import.newBuilder()
+            konst importBuilder = Import.newBuilder()
             importBuilder.signatureId = serialize(signature)
             importBuilder.expression = serialize(expression)
             fragmentBuilder.addImportEntry(importBuilder)
@@ -79,20 +79,20 @@ class JsAstSerializer(
         fragmentBuilder.exportBlock = serializeBlock(fragment.exportBlock)
 
         for (nameBinding in fragment.nameBindings) {
-            val nameBindingBuilder = NameBinding.newBuilder()
+            konst nameBindingBuilder = NameBinding.newBuilder()
             nameBindingBuilder.signatureId = serialize(nameBinding.key)
             nameBindingBuilder.nameId = serialize(nameBinding.name)
             fragmentBuilder.addNameBinding(nameBindingBuilder)
         }
 
-        fragment.classes.values.forEach { fragmentBuilder.addClassModel(serialize(it)) }
+        fragment.classes.konstues.forEach { fragmentBuilder.addClassModel(serialize(it)) }
 
-        val inlineModuleExprMap = mutableMapOf<JsExpression, Int>()
+        konst inlineModuleExprMap = mutableMapOf<JsExpression, Int>()
         for ((signature, expression) in fragment.inlineModuleMap) {
-            val inlineModuleBuilder = InlineModule.newBuilder()
+            konst inlineModuleBuilder = InlineModule.newBuilder()
             inlineModuleBuilder.signatureId = serialize(signature)
             inlineModuleBuilder.expressionId = inlineModuleExprMap.getOrPut(expression) {
-                val result = fragmentBuilder.moduleExpressionCount
+                konst result = fragmentBuilder.moduleExpressionCount
                 fragmentBuilder.addModuleExpression(serialize(expression))
                 result
             }
@@ -108,7 +108,7 @@ class JsAstSerializer(
         }
 
         fragment.inlinedLocalDeclarations.forEach { (tag, block) ->
-            val builder = InlinedLocalDeclarations.newBuilder().apply {
+            konst builder = InlinedLocalDeclarations.newBuilder().apply {
                 setTag(serialize(tag))
                 setBlock(serializeBlock(block))
             }
@@ -122,7 +122,7 @@ class JsAstSerializer(
     }
 
     private fun serialize(classModel: JsClassModel): ClassModel {
-        val builder = ClassModel.newBuilder()
+        konst builder = ClassModel.newBuilder()
         builder.nameId = serialize(classModel.name)
         classModel.superName?.let { builder.superNameId = serialize(it) }
         classModel.interfaces.forEach { builder.addInterfaceNameId(serialize(it)) }
@@ -133,7 +133,7 @@ class JsAstSerializer(
     }
 
     override fun extractLocation(node: JsNode): JsLocation? {
-        val source = node.source
+        konst source = node.source
         return when (source) {
             is JsLocationWithSource -> source.asSimpleLocation()
             is PsiElement -> if (!source.isFakePsiElement) extractLocation(source) else null
@@ -142,14 +142,14 @@ class JsAstSerializer(
     }
 
     private fun extractLocation(element: PsiElement): JsLocation {
-        val file = element.containingFile
-        val document = file.viewProvider.document!!
+        konst file = element.containingFile
+        konst document = file.viewProvider.document!!
 
-        val path = pathResolver(File(file.viewProvider.virtualFile.path))
+        konst path = pathResolver(File(file.viewProvider.virtualFile.path))
 
-        val startOffset = element.node.startOffset
-        val startLine = document.getLineNumber(startOffset)
-        val startChar = startOffset - document.getLineStartOffset(startLine)
+        konst startOffset = element.node.startOffset
+        konst startLine = document.getLineNumber(startOffset)
+        konst startChar = startOffset - document.getLineStartOffset(startLine)
 
         return JsLocation(path, startLine, startChar)
     }

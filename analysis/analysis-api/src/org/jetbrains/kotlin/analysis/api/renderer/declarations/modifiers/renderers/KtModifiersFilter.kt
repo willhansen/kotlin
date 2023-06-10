@@ -15,14 +15,14 @@ public interface KtRendererModifierFilter {
     public fun filter(modifier: KtModifierKeywordToken, symbol: KtDeclarationSymbol): Boolean
 
     public infix fun and(other: KtRendererModifierFilter): KtRendererModifierFilter {
-        val self = this
+        konst self = this
         return KtRendererModifierFilter { modifier, symbol ->
             self.filter(modifier, symbol) && other.filter(modifier, symbol)
         }
     }
 
     public infix fun or(other: KtRendererModifierFilter): KtRendererModifierFilter {
-        val self = this
+        konst self = this
         return KtRendererModifierFilter { modifier, symbol ->
             self.filter(modifier, symbol) || other.filter(modifier, symbol)
         }

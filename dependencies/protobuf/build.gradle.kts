@@ -6,8 +6,8 @@ How to Publish
 3. Execute `./gradlew -p dependencies/protobuf publish -PkotlinSpaceUsername=usr -PkotlinSpacePassword=token`
  */
 
-val protobufVersion by extra("2.6.1")
-val publishedVersion by extra("2.6.1-1")
+konst protobufVersion by extra("2.6.1")
+konst publishedVersion by extra("2.6.1-1")
 
 allprojects {
     group = "org.jetbrains.kotlin"

@@ -6,7 +6,7 @@ fun handle(run: Run) {
     //...
 }
 
-val x = {
+konst x = {
     "STRING"
 }
 

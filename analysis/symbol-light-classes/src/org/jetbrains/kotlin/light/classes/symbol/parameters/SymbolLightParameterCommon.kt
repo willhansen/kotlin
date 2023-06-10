@@ -21,10 +21,10 @@ import org.jetbrains.kotlin.light.classes.symbol.methods.SymbolLightMethodBase
 import org.jetbrains.kotlin.psi.KtParameter
 
 internal abstract class SymbolLightParameterCommon(
-    protected val parameterSymbolPointer: KtSymbolPointer<KtValueParameterSymbol>,
-    protected val parameterDeclaration: KtParameter?,
-    private val containingMethod: SymbolLightMethodBase,
-    override val kotlinOrigin: KtParameter?,
+    protected konst parameterSymbolPointer: KtSymbolPointer<KtValueParameterSymbol>,
+    protected konst parameterDeclaration: KtParameter?,
+    private konst containingMethod: SymbolLightMethodBase,
+    override konst kotlinOrigin: KtParameter?,
 ) : SymbolLightParameterBase(containingMethod) {
     internal constructor(
         ktAnalysisSession: KtAnalysisSession,
@@ -37,7 +37,7 @@ internal abstract class SymbolLightParameterCommon(
         kotlinOrigin = parameterSymbol.psiSafe(),
     )
 
-    private val _name: String by lazyPub {
+    private konst _name: String by lazyPub {
         parameterSymbolPointer.withSymbol(ktModule) {
             it.name.asString()
         }
@@ -59,12 +59,12 @@ internal abstract class SymbolLightParameterCommon(
     protected open fun nullabilityType(): NullabilityType {
         if (isDeclaredAsVararg()) return NullabilityType.NotNull
 
-        val nullabilityApplicable = !containingMethod.hasModifierProperty(PsiModifier.PRIVATE) &&
+        konst nullabilityApplicable = !containingMethod.hasModifierProperty(PsiModifier.PRIVATE) &&
                 !containingMethod.containingClass.isAnnotationType &&
-                // `enum` synthetic members (e.g., values or valueOf) are not applicable for nullability.
+                // `enum` synthetic members (e.g., konstues or konstueOf) are not applicable for nullability.
                 // In other words, `enum` non-synthetic members are applicable for nullability.
                 // Technically, we should retrieve the symbol for the containing method and see if its origin is not synthetic.
-                // But, only `enum#valueOf` has a value parameter we want to filter out, so this is cheap yet feasible.
+                // But, only `enum#konstueOf` has a konstue parameter we want to filter out, so this is cheap yet feasible.
                 (!containingMethod.containingClass.isEnum || containingMethod.name != StandardNames.ENUM_VALUE_OF.identifier)
 
         return if (nullabilityApplicable) {
@@ -76,11 +76,11 @@ internal abstract class SymbolLightParameterCommon(
 
     override fun getNameIdentifier(): PsiIdentifier = KtLightIdentifier(this, parameterDeclaration)
 
-    private val _type by lazyPub {
+    private konst _type by lazyPub {
         parameterSymbolPointer.withSymbol(ktModule) { parameterSymbol ->
-            val convertedType = run {
-                val ktType = parameterSymbol.returnType
-                val typeMappingMode = when {
+            konst convertedType = run {
+                konst ktType = parameterSymbol.returnType
+                konst typeMappingMode = when {
                     ktType.isSuspendFunctionType -> KtTypeMappingMode.DEFAULT
                     // TODO: extract type mapping mode from annotation?
                     // TODO: methods with declaration site wildcards?

@@ -16,9 +16,9 @@ operator fun <T> MutableList<T>.plusAssign(t : T) {
     add(t)
 }
 
-//KT-469 Allow val-reassignment when appropriate functions are defined
+//KT-469 Allow konst-reassignment when appropriate functions are defined
 fun foo() {
-    val m = MyNumber(2)
+    konst m = MyNumber(2)
     m -= MyNumber(3)           //should not be error here
 }
 

@@ -8,8 +8,8 @@ object Host {
 }
 
 fun box(): String {
-    val concat = Host::concat
-    val concatParams = concat.parameters
+    konst concat = Host::concat
+    konst concatParams = concat.parameters
     return concat.callBy(mapOf(
             concatParams[0] to "",
             concatParams[1] to "O",

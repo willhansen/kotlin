@@ -8,7 +8,7 @@ operator fun Any?.getValue(x: Any?, y: Any?): String {
     return "OK"
 }
 
-val s: String by 1
+konst s: String by 1
 
 fun box(): String {
     assertEquals(1, ::s.apply { isAccessible = true }.getDelegate())

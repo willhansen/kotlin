@@ -41,17 +41,17 @@ class CompilerClientIT {
 
     @JvmField
     @Rule
-    val workingDir = TemporaryFolder()
+    konst workingDir = TemporaryFolder()
 
-    private val compilerClasspath: List<File> by lazy {
+    private konst compilerClasspath: List<File> by lazy {
         filesFromProp("compilerClasspath", "kotlin-compiler.jar", "kotlin-daemon.jar")
     }
 
-    private val compilationClasspath: List<File> by lazy {
+    private konst compilationClasspath: List<File> by lazy {
         filesFromProp("compilationClasspath", "kotlin-stdlib.jar", "kotlin-script-runtime.jar")
     }
 
-    private val clientAliveFile by lazy {
+    private konst clientAliveFile by lazy {
         Files.createTempFile("client", ".alive").toFile().apply {
             deleteOnExit()
         }
@@ -63,22 +63,22 @@ class CompilerClientIT {
                 ?: throw FileNotFoundException("cannot find ($it)")
         }
 
-    private val compilerService: CompileService by lazy {
-        val compilerId = CompilerId.makeCompilerId(compilerClasspath)
-        val daemonOptions = DaemonOptions(runFilesPath = File(workingDir.root, "daemonRunPath").absolutePath, verbose = true, reportPerf = true)
-        val daemonJVMOptions = org.jetbrains.kotlin.daemon.common.DaemonJVMOptions()
-        val daemonReportMessages = arrayListOf<DaemonReportMessage>()
+    private konst compilerService: CompileService by lazy {
+        konst compilerId = CompilerId.makeCompilerId(compilerClasspath)
+        konst daemonOptions = DaemonOptions(runFilesPath = File(workingDir.root, "daemonRunPath").absolutePath, verbose = true, reportPerf = true)
+        konst daemonJVMOptions = org.jetbrains.kotlin.daemon.common.DaemonJVMOptions()
+        konst daemonReportMessages = arrayListOf<DaemonReportMessage>()
 
         KotlinCompilerClient.connectToCompileService(compilerId, clientAliveFile, daemonJVMOptions, daemonOptions,
                 DaemonReportingTargets(messages = daemonReportMessages), true)
                 ?: throw IllegalStateException("Unable to connect to compiler daemon:" + daemonReportMessages.joinToString("\n  ", prefix = "\n  ") { "${it.category.name} ${it.message}" })
     }
 
-    private val myMessageCollector = TestMessageCollector()
+    private konst myMessageCollector = TestMessageCollector()
 
     @Test
     fun testSimpleScript() {
-        val (out, code) = runCompiler(
+        konst (out, code) = runCompiler(
                 "-cp", compilationClasspath.joinToString(File.pathSeparator) { it.canonicalPath },
                 "-Xallow-any-scripts-in-source-roots",
                 File("testData/scripts/simpleHelloWorld.kts").canonicalPath)
@@ -89,7 +89,7 @@ class CompilerClientIT {
 
         var code = -1
         myMessageCollector.clear()
-        val out = captureOutAndErr {
+        konst out = captureOutAndErr {
             code = KotlinCompilerClient.compile(compilerService, CompileService.NO_SESSION, CompileService.TargetPlatform.JVM, args, myMessageCollector,
                     reportSeverity = ReportSeverity.DEBUG)
         }
@@ -98,9 +98,9 @@ class CompilerClientIT {
 }
 
 internal fun captureOutAndErr(body: () -> Unit): String {
-    val outStream = ByteArrayOutputStream()
-    val prevOut = System.out
-    val prevErr = System.err
+    konst outStream = ByteArrayOutputStream()
+    konst prevOut = System.out
+    konst prevErr = System.err
     System.setOut(PrintStream(outStream))
     System.setErr(PrintStream(outStream))
     try {
@@ -117,9 +117,9 @@ internal fun captureOutAndErr(body: () -> Unit): String {
 
 class TestMessageCollector : MessageCollector {
 
-    data class Message(val severity: CompilerMessageSeverity, val message: String, val location: CompilerMessageSourceLocation?)
+    data class Message(konst severity: CompilerMessageSeverity, konst message: String, konst location: CompilerMessageSourceLocation?)
 
-    val messages = arrayListOf<Message>()
+    konst messages = arrayListOf<Message>()
 
     override fun clear() {
         messages.clear()

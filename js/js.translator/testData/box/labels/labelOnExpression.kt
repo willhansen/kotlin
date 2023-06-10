@@ -9,12 +9,12 @@ package foo
 fun <R> myRun(f: () -> R) = f()
 
 fun test0() {
-    val a = aa@ 1
+    konst a = aa@ 1
 
     assertEquals(1, a)
     assertEquals(3, l1@ a + l2@ 2)
 
-    val b = bb@ if (true) t@ "then block" else e@ "else block"
+    konst b = bb@ if (true) t@ "then block" else e@ "else block"
 
     assertEquals("then block", b)
 }
@@ -33,7 +33,7 @@ fun test2() {
 
 // KT-7487
 public fun test3() {
-    val f = Foo()
+    konst f = Foo()
     f.iter label@ {
         return@label false
     }

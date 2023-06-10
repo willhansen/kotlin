@@ -9,10 +9,10 @@ fun test(a: Boolean, b: Byte, c: Char, s: Short, i: Int, l: Long, f: Float, d: D
     "$d"
 }
 
-// 1 INVOKESTATIC java/lang/String.valueOf \(Z\)
-// 3 INVOKESTATIC java/lang/String.valueOf \(I\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(C\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(J\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(F\)
-// 1 INVOKESTATIC java/lang/String.valueOf \(D\)
-// 8 valueOf
+// 1 INVOKESTATIC java/lang/String.konstueOf \(Z\)
+// 3 INVOKESTATIC java/lang/String.konstueOf \(I\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(C\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(J\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(F\)
+// 1 INVOKESTATIC java/lang/String.konstueOf \(D\)
+// 8 konstueOf

@@ -16,16 +16,16 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractIsSubclassOfTest : AbstractAnalysisApiBasedSingleModuleTest() {
     override fun doTestByFileStructure(ktFiles: List<KtFile>, module: TestModule, testServices: TestServices) {
-        val subClass = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFiles.first(), "sub")
-        val superClass = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFiles.first(), "super")
+        konst subClass = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFiles.first(), "sub")
+        konst superClass = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtClassOrObject>(ktFiles.first(), "super")
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             analyseForTest(subClass) {
-                val subClassSymbol = subClass.getClassOrObjectSymbol()!!
-                val superClassSymbol = superClass.getClassOrObjectSymbol()!!
+                konst subClassSymbol = subClass.getClassOrObjectSymbol()!!
+                konst superClassSymbol = superClass.getClassOrObjectSymbol()!!
 
-                val isSubClass = subClassSymbol.isSubClassOf(superClassSymbol)
-                val isDirectSubClass = subClassSymbol.isDirectSubClassOf(superClassSymbol)
+                konst isSubClass = subClassSymbol.isSubClassOf(superClassSymbol)
+                konst isDirectSubClass = subClassSymbol.isDirectSubClassOf(superClassSymbol)
 
                 buildString {
                     appendLine("IS_SUBCLASS: $isSubClass")

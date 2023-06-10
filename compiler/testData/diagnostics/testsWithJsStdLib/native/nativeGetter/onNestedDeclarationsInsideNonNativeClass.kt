@@ -36,14 +36,14 @@ class A {
             fun Int.get3(a: Int): String?<!> = "OK"
 
             <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-            val foo = 0
+            konst foo = 0
 
             <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
             object Obj1 {}
 
             companion object {
                 <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
-                val foo = 0
+                konst foo = 0
 
                 <!WRONG_ANNOTATION_TARGET!>@nativeGetter<!>
                 object Obj2 {}
@@ -93,7 +93,7 @@ class A {
             fun baz(<!NATIVE_INDEXER_CAN_NOT_HAVE_DEFAULT_ARGUMENTS!>a: Double = 0.0<!>): Int?<!> = 0
         }
 
-        val anonymous = object {
+        konst anonymous = object {
             <!NATIVE_ANNOTATIONS_ALLOWED_ONLY_ON_MEMBER_OR_EXTENSION_FUN, NATIVE_INDEXER_WRONG_PARAMETER_COUNT!>@nativeGetter
             fun get(): Any?<!> = null
 

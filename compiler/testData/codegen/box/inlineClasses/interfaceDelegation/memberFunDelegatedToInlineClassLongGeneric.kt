@@ -9,7 +9,7 @@ interface IFoo {
 }
 
 OPTIONAL_JVM_INLINE_ANNOTATION
-value class Z<T: Long>(val x: T) : IFoo {
+konstue class Z<T: Long>(konst x: T) : IFoo {
     override fun foo(s: String): String = x.toString() + s
 }
 

@@ -9,11 +9,11 @@ import org.jetbrains.kotlin.name.Name
 import org.jetbrains.kotlin.types.model.SimpleTypeMarker
 
 class InlineClassRepresentation<Type : SimpleTypeMarker> constructor(
-    val underlyingPropertyName: Name,
-    val underlyingType: Type,
+    konst underlyingPropertyName: Name,
+    konst underlyingType: Type,
 ) : ValueClassRepresentation<Type>() {
 
-    override val underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
+    override konst underlyingPropertyNamesToTypes: List<Pair<Name, Type>>
         get() = listOf(underlyingPropertyName to underlyingType)
 
     override fun containsPropertyWithName(name: Name): Boolean = underlyingPropertyName == name

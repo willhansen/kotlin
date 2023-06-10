@@ -3,6 +3,6 @@ interface A {
 
     fun testA2() = 3
 
-    val testA3: Int
+    konst testA3: Int
         get() = 1
 }

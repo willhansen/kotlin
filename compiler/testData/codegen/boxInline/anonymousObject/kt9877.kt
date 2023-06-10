@@ -17,15 +17,15 @@ inline fun inlineCall(p: () -> Unit) {
 import test.*
 
 fun box(): String {
-    val loci = listOf("a", "b", "c")
+    konst loci = listOf("a", "b", "c")
     var gene = "g1"
 
     inlineCall {
-        val value = 10.0
+        konst konstue = 10.0
         loci.forEach {
             var locusMap = 1.0
             {
-                locusMap = value
+                locusMap = konstue
                 gene = "OK"
             }.let { it() }
         }

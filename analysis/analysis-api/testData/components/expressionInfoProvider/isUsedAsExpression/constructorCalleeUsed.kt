@@ -1,5 +1,5 @@
-class C(val x: Int)
+class C(konst x: Int)
 
 fun test() {
-    val c = <expr>C</expr>(55)
+    konst c = <expr>C</expr>(55)
 }

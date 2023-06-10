@@ -39,20 +39,20 @@ fun interface Foo4WithBaseDefault : BaseWithDefault {
 fun interface GoodWithBase : BaseWithSAM
 
 <!FUN_INTERFACE_WRONG_COUNT_OF_ABSTRACT_MEMBERS!>fun<!> interface Foo5 {
-    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>val<!> prop: Int
+    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>konst<!> prop: Int
 }
 
 fun interface Foo6 {
     fun foo()
-    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>val<!> prop: Int
+    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>konst<!> prop: Int
 }
 
 fun interface Foo7 : BaseWithSAM {
-    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>val<!> prop: Int
+    <!FUN_INTERFACE_CANNOT_HAVE_ABSTRACT_PROPERTIES!>konst<!> prop: Int
 }
 
 fun interface GoodWithPropAndBase : BaseWithSAM {
-    val prop: Int get() = 42
+    konst prop: Int get() = 42
 }
 
 fun interface Foo8 {

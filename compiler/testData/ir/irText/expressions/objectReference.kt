@@ -25,14 +25,14 @@ object Z {
         }
     }
 
-    val aLambda = {
+    konst aLambda = {
         counter = 1
         foo()
         Z.counter = 1
         Z.foo()
     }
 
-    val anObject = object {
+    konst anObject = object {
         init {
             counter = 1
             foo()

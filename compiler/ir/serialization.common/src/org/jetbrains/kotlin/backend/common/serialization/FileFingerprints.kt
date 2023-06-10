@@ -11,57 +11,57 @@ import java.io.File
 import java.nio.ByteBuffer
 
 @JvmInline
-value class FingerprintHash(val hash: Hash128Bits) {
+konstue class FingerprintHash(konst hash: Hash128Bits) {
     override fun toString(): String {
         return "${hash.lowBytes.toString(Character.MAX_RADIX)}$HASH_SEPARATOR${hash.highBytes.toString(Character.MAX_RADIX)}"
     }
 
     fun toByteArray(): ByteArray {
-        val buffer = ByteBuffer.allocate(Long.SIZE_BYTES * 2)
+        konst buffer = ByteBuffer.allocate(Long.SIZE_BYTES * 2)
         buffer.putLong(hash.lowBytes.toLong())
         buffer.putLong(Long.SIZE_BYTES, hash.highBytes.toLong())
         return buffer.array()
     }
 
     companion object {
-        private const val HASH_SEPARATOR = "."
+        private const konst HASH_SEPARATOR = "."
 
         fun fromString(s: String): FingerprintHash? {
-            val hashes = s.split(HASH_SEPARATOR).mapNotNull { it.toULongOrNull(Character.MAX_RADIX) }
+            konst hashes = s.split(HASH_SEPARATOR).mapNotNull { it.toULongOrNull(Character.MAX_RADIX) }
             return hashes.takeIf { it.size == 2 }?.let { FingerprintHash(Hash128Bits(lowBytes = it[0], highBytes = it[1])) }
         }
 
         fun fromByteArray(bytes: ByteArray): FingerprintHash {
-            val buffer = ByteBuffer.wrap(bytes)
-            val lowBytes = buffer.getLong(0).toULong()
-            val highBytes = buffer.getLong(Long.SIZE_BYTES).toULong()
+            konst buffer = ByteBuffer.wrap(bytes)
+            konst lowBytes = buffer.getLong(0).toULong()
+            konst highBytes = buffer.getLong(Long.SIZE_BYTES).toULong()
             return FingerprintHash(Hash128Bits(lowBytes, highBytes))
         }
     }
 }
 
 @JvmInline
-value class SerializedIrFileFingerprint private constructor(val fileFingerprint: FingerprintHash) {
+konstue class SerializedIrFileFingerprint private constructor(konst fileFingerprint: FingerprintHash) {
     companion object {
         fun fromString(s: String): SerializedIrFileFingerprint? {
             return FingerprintHash.fromString(s)?.let { SerializedIrFileFingerprint(it) }
         }
 
         private fun calculateFileFingerprint(file: SerializedIrFile): FingerprintHash {
-            val fileDataHash = cityHash128(file.fileData)
-            val withTypesHash = cityHash128WithSeed(fileDataHash, file.types)
-            val withSignaturesHash = cityHash128WithSeed(withTypesHash, file.signatures)
-            val withStringsHash = cityHash128WithSeed(withSignaturesHash, file.strings)
-            val withBodiesHash = cityHash128WithSeed(withStringsHash, file.bodies)
+            konst fileDataHash = cityHash128(file.fileData)
+            konst withTypesHash = cityHash128WithSeed(fileDataHash, file.types)
+            konst withSignaturesHash = cityHash128WithSeed(withTypesHash, file.signatures)
+            konst withStringsHash = cityHash128WithSeed(withSignaturesHash, file.strings)
+            konst withBodiesHash = cityHash128WithSeed(withStringsHash, file.bodies)
             return FingerprintHash(cityHash128WithSeed(withBodiesHash, file.declarations))
         }
 
         private fun calculateFileFingerprint(lib: KotlinLibrary, fileIndex: Int): FingerprintHash {
-            val fileDataHash = cityHash128(lib.file(fileIndex))
-            val withTypesHash = cityHash128WithSeed(fileDataHash, lib.types(fileIndex))
-            val withSignaturesHash = cityHash128WithSeed(withTypesHash, lib.signatures(fileIndex))
-            val withStringsHash = cityHash128WithSeed(withSignaturesHash, lib.strings(fileIndex))
-            val withBodiesHash = cityHash128WithSeed(withStringsHash, lib.bodies(fileIndex))
+            konst fileDataHash = cityHash128(lib.file(fileIndex))
+            konst withTypesHash = cityHash128WithSeed(fileDataHash, lib.types(fileIndex))
+            konst withSignaturesHash = cityHash128WithSeed(withTypesHash, lib.signatures(fileIndex))
+            konst withStringsHash = cityHash128WithSeed(withSignaturesHash, lib.strings(fileIndex))
+            konst withBodiesHash = cityHash128WithSeed(withStringsHash, lib.bodies(fileIndex))
             return FingerprintHash(cityHash128WithSeed(withBodiesHash, lib.declarations(fileIndex)))
         }
     }
@@ -76,10 +76,10 @@ value class SerializedIrFileFingerprint private constructor(val fileFingerprint:
 }
 
 @JvmInline
-value class SerializedKlibFingerprint(val klibFingerprint: FingerprintHash) {
+konstue class SerializedKlibFingerprint(konst klibFingerprint: FingerprintHash) {
     companion object {
         private fun List<SerializedIrFileFingerprint>.calculateKlibFingerprint(): FingerprintHash {
-            val combinedHash = fold(Hash128Bits(size.toULong())) { acc, x ->
+            konst combinedHash = fold(Hash128Bits(size.toULong())) { acc, x ->
                 acc.combineWith(x.fileFingerprint.hash)
             }
             return FingerprintHash(combinedHash)
@@ -92,7 +92,7 @@ value class SerializedKlibFingerprint(val klibFingerprint: FingerprintHash) {
 
             if (isDirectory) {
                 listFiles()!!.sortedBy { it.name }.forEach { f ->
-                    val filePrefix = "$prefix${f.name}/"
+                    konst filePrefix = "$prefix${f.name}/"
                     combinedHash = f.calculateKlibHash(filePrefix, cityHash128WithSeed(combinedHash, filePrefix.toByteArray()))
                 }
             } else {

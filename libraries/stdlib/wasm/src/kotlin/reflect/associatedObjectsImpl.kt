@@ -12,10 +12,10 @@ internal var associatedObjects: Map<ULong, Any>? = null
 
 @PublishedApi
 internal fun findAssociatedObject(klass: KClass<*>, key: Int): Any? {
-    val klassId = (klass as? KClassImpl<*>)?.typeData?.typeId ?: return null
+    konst klassId = (klass as? KClassImpl<*>)?.typeData?.typeId ?: return null
 
-    val map = associatedObjects ?: run {
-        val newMap: MutableMap<ULong, Any> = mutableMapOf()
+    konst map = associatedObjects ?: run {
+        konst newMap: MutableMap<ULong, Any> = mutableMapOf()
         initAssociatedObjects(newMap)
         associatedObjects = newMap
         newMap

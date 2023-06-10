@@ -40,22 +40,22 @@ inline fun List<KotlinSourceRoot>.forAllFiles(
     reportLocation: CompilerMessageLocation? = null,
     body: (VirtualFile, Boolean, moduleName: String?) -> Unit
 ) {
-    val localFileSystem = VirtualFileManager.getInstance()
+    konst localFileSystem = VirtualFileManager.getInstance()
         .getFileSystem(StandardFileSystems.FILE_PROTOCOL)
 
-    val processedFiles = hashSetOf<VirtualFile>()
+    konst processedFiles = hashSetOf<VirtualFile>()
 
-    val virtualFileCreator = PreprocessedFileCreator(project)
+    konst virtualFileCreator = PreprocessedFileCreator(project)
 
     var pluginsConfigured = false
 
     for ((sourceRootPath, isCommon, hmppModuleName) in this) {
-        val sourceRoot = File(sourceRootPath)
-        val vFile = localFileSystem.findFileByPath(sourceRoot.normalize().path)
+        konst sourceRoot = File(sourceRootPath)
+        konst vFile = localFileSystem.findFileByPath(sourceRoot.normalize().path)
         if (vFile == null) {
-            val message = "Source file or directory not found: $sourceRootPath"
+            konst message = "Source file or directory not found: $sourceRootPath"
 
-            val buildFilePath = configuration.get(JVMConfigurationKeys.MODULE_XML_FILE)
+            konst buildFilePath = configuration.get(JVMConfigurationKeys.MODULE_XML_FILE)
             if (buildFilePath != null && Logger.isInitialized()) {
                 Logger.getInstance(KotlinCoreEnvironment::class.java)
                     .warn("$message\n\nbuild file path: $buildFilePath\ncontent:\n${buildFilePath.readText()}")
@@ -79,7 +79,7 @@ inline fun List<KotlinSourceRoot>.forAllFiles(
         for (file in sourceRoot.walkTopDown()) {
             if (!file.isFile) continue
 
-            val virtualFile = localFileSystem.findFileByPath(file.absoluteFile.normalize().path)?.let(virtualFileCreator::create)
+            konst virtualFile = localFileSystem.findFileByPath(file.absoluteFile.normalize().path)?.let(virtualFileCreator::create)
             if (virtualFile != null && processedFiles.add(virtualFile)) {
                 if (!pluginsConfigured) {
                     virtualFile.registerPluginsSuppliedExtensionsIfNeeded(project)
@@ -110,8 +110,8 @@ fun createSourceFilesFromSourceRoots(
     sourceRoots: List<KotlinSourceRoot>,
     reportLocation: CompilerMessageLocation? = null
 ): MutableList<KtFile> {
-    val psiManager = PsiManager.getInstance(project)
-    val result = mutableListOf<KtFile>()
+    konst psiManager = PsiManager.getInstance(project)
+    konst result = mutableListOf<KtFile>()
     sourceRoots.forAllFiles(configuration, project, reportLocation) { virtualFile, isCommon, moduleName ->
         psiManager.findFile(virtualFile)?.let {
             if (it is KtFile) {
@@ -126,7 +126,7 @@ fun createSourceFilesFromSourceRoots(
     return result
 }
 
-val KotlinCoreEnvironment.messageCollector: MessageCollector
+konst KotlinCoreEnvironment.messageCollector: MessageCollector
     get() = configuration.getNotNull(CLIConfigurationKeys.MESSAGE_COLLECTOR_KEY)
 
 fun CompilerConfiguration.applyModuleProperties(module: Module, buildFile: File?): CompilerConfiguration {

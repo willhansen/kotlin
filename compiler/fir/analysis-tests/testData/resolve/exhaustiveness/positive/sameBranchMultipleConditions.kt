@@ -3,8 +3,8 @@
 sealed interface A
 sealed interface B
 
-data class X(val something: String): A, B
-data class Y(val something: String): A, B
+data class X(konst something: String): A, B
+data class Y(konst something: String): A, B
 
 fun ok(a: A): B {
     return when (a) {

@@ -20,7 +20,7 @@ import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractRendererTest : AbstractAnalysisApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, module: TestModule, testServices: TestServices) {
-        val renderer = KtDeclarationRendererForSource.WITH_SHORT_NAMES.with {
+        konst renderer = KtDeclarationRendererForSource.WITH_SHORT_NAMES.with {
             classifierBodyRenderer = KtClassifierBodyRenderer.BODY_WITH_MEMBERS
             bodyMemberScopeSorter = object : KtRendererBodyMemberScopeSorter {
                 context(KtAnalysisSession)
@@ -32,11 +32,11 @@ abstract class AbstractRendererTest : AbstractAnalysisApiSingleFileTest() {
             }
         }
 
-        val actual = executeOnPooledThreadInReadAction {
+        konst actual = executeOnPooledThreadInReadAction {
             buildString {
                 ktFile.declarations.forEach { declaration ->
                     analyseForTest(declaration) {
-                        val symbol = declaration.getSymbol() as? KtDeclarationSymbol ?: return@analyseForTest
+                        konst symbol = declaration.getSymbol() as? KtDeclarationSymbol ?: return@analyseForTest
                         append(symbol.render(renderer))
                         appendLine()
                         appendLine()

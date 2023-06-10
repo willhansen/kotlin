@@ -4,14 +4,14 @@ plugins {
     kotlin("jvm")
 }
 
-val testCompilerClasspath by configurations.creating {
+konst testCompilerClasspath by configurations.creating {
     attributes {
         attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
         attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
     }
 }
 
-val testCompilationClasspath by configurations.creating
+konst testCompilationClasspath by configurations.creating
 
 dependencies {
     embedded(project(":compiler:cli-common")) { isTransitive = false }
@@ -40,8 +40,8 @@ sourceSets {
 projectTest {
     dependsOn(":kotlin-compiler:jar")
     systemProperty("kotlin.test.script.classpath", testSourceSet.output.classesDirs.joinToString(File.pathSeparator))
-    val testCompilerClasspathProvider = project.provider { testCompilerClasspath.asPath }
-    val testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
+    konst testCompilerClasspathProvider = project.provider { testCompilerClasspath.asPath }
+    konst testCompilationClasspathProvider = project.provider { testCompilationClasspath.asPath }
     doFirst {
         systemProperty("compilerClasspath", testCompilerClasspathProvider.get())
         systemProperty("compilationClasspath", testCompilationClasspathProvider.get())

@@ -26,8 +26,8 @@ import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 
 class HashCode : IntrinsicMethod() {
     override fun toCallable(method: CallableMethod): Callable {
-        val receiverType = method.dispatchReceiverType ?: method.extensionReceiverType ?: error("No receiver for callable: $method")
-        val useObjectHashCode = !AsmUtil.isPrimitive(receiverType)
+        konst receiverType = method.dispatchReceiverType ?: method.extensionReceiverType ?: error("No receiver for callable: $method")
+        konst useObjectHashCode = !AsmUtil.isPrimitive(receiverType)
         return object : IntrinsicCallable(
                 Type.INT_TYPE,
                 emptyList(),
@@ -43,7 +43,7 @@ class HashCode : IntrinsicMethod() {
     companion object {
         fun InstructionAdapter.invokeHashCode(type: Type) {
             if (AsmUtil.isPrimitive(type)) {
-                val boxedType = AsmUtil.boxType(type)
+                konst boxedType = AsmUtil.boxType(type)
                 visitMethodInsn(Opcodes.INVOKESTATIC, boxedType.internalName, "hashCode", Type.getMethodDescriptor(Type.INT_TYPE, type), false)
             }
             else {

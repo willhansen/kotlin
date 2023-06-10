@@ -9,5 +9,5 @@ class A {
 }
 
 class B {
-    val dummy: Int = 1
+    konst dummy: Int = 1
 }

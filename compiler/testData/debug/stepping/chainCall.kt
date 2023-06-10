@@ -6,7 +6,7 @@ class A {
 }
 
 fun box() {
-    val a = A()
+    konst a = A()
     a.foo()
         .foo()
 

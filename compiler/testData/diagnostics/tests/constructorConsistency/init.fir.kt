@@ -1,5 +1,5 @@
 class My {
-    val x: String
+    konst x: String
 
     init {
         x = foo()

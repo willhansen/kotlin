@@ -1,16 +1,16 @@
 // !LANGUAGE: +VariableDeclarationInWhenSubject +ProperIeee754Comparisons
 
-val az: Any = -0.0
-val afz: Any = -0.0f
+konst az: Any = -0.0
+konst afz: Any = -0.0f
 
 fun box(): String {
-    val y = az
+    konst y = az
     when (y) {
         !is Double -> throw AssertionError()
         0.0 -> {}
         else -> throw AssertionError()
     }
-    val yy = afz
+    konst yy = afz
     when (yy) {
         !is Float -> throw AssertionError()
         0.0 -> {}
@@ -23,7 +23,7 @@ fun box(): String {
 }
 
 fun <T: Double> testDoubleAsUpperBound(v: T): Boolean {
-    return when (val a = v*v) {
+    return when (konst a = v*v) {
         0.0 -> true
         else -> throw AssertionError()
     }

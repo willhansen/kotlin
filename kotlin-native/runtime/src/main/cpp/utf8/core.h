@@ -52,7 +52,7 @@ namespace internal
     const uint16_t LEAD_OFFSET         = LEAD_SURROGATE_MIN - (0x10000 >> 10);
     const uint32_t SURROGATE_OFFSET    = 0x10000u - (LEAD_SURROGATE_MIN << 10) - TRAIL_SURROGATE_MIN;
 
-    // Maximum valid value for a Unicode code point
+    // Maximum konstid konstue for a Unicode code point
     const uint32_t CODE_POINT_MAX      = 0x0010ffffu;
 
     template<typename octet_type>
@@ -96,7 +96,7 @@ namespace internal
     }
 
     template <typename u32>
-    inline bool is_code_point_valid(u32 cp)
+    inline bool is_code_point_konstid(u32 cp)
     {
         return (!utf8::internal::is_out_of_unicode_domain(cp) && !utf8::internal::is_surrogate(cp));
     }
@@ -240,9 +240,9 @@ namespace internal
     #undef UTF8_CPP_INCREASE_AND_RETURN_ON_ERROR
 
     template <typename octet_iterator>
-    utf_error validate_next(octet_iterator& it, const octet_iterator end, uint32_t& code_point)
+    utf_error konstidate_next(octet_iterator& it, const octet_iterator end, uint32_t& code_point)
     {
-        // Save the original value of it so we can go back in case of failure
+        // Save the original konstue of it so we can go back in case of failure
         // Of course, it does not make much sense with i.e. stream iterators
         octet_iterator original_it = it;
 
@@ -275,7 +275,7 @@ namespace internal
             code_point = cp;
             ++it;
         } else {
-            // Failure branch - restore the original value of the iterator
+            // Failure branch - restore the original konstue of the iterator
             it = original_it;
         }
 
@@ -283,9 +283,9 @@ namespace internal
     }
 
     template <typename octet_iterator>
-    inline utf_error validate_next(octet_iterator& it, octet_iterator end) {
+    inline utf_error konstidate_next(octet_iterator& it, octet_iterator end) {
         uint32_t ignored;
-        return utf8::internal::validate_next(it, end, ignored);
+        return utf8::internal::konstidate_next(it, end, ignored);
     }
 
 } // namespace internal
@@ -296,11 +296,11 @@ namespace internal
     const uint8_t bom[] = {0xef, 0xbb, 0xbf};
 
     template <typename octet_iterator>
-    octet_iterator find_invalid(octet_iterator start, octet_iterator end)
+    octet_iterator find_inkonstid(octet_iterator start, octet_iterator end)
     {
         octet_iterator result = start;
         while (result != end) {
-            utf8::internal::utf_error err_code = utf8::internal::validate_next(result, end);
+            utf8::internal::utf_error err_code = utf8::internal::konstidate_next(result, end);
             if (err_code != internal::UTF8_OK)
                 return result;
         }
@@ -308,9 +308,9 @@ namespace internal
     }
 
     template <typename octet_iterator>
-    inline bool is_valid(octet_iterator start, octet_iterator end)
+    inline bool is_konstid(octet_iterator start, octet_iterator end)
     {
-        return (utf8::find_invalid(start, end) == end);
+        return (utf8::find_inkonstid(start, end) == end);
     }
 
     template <typename octet_iterator>

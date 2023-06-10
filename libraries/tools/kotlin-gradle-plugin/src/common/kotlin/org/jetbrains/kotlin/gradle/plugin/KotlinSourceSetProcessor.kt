@@ -27,19 +27,19 @@ import org.jetbrains.kotlin.utils.addToStdlib.safeAs
 import java.util.concurrent.Callable
 
 internal abstract class KotlinSourceSetProcessor<T : AbstractKotlinCompile<*>>(
-    val tasksProvider: KotlinTasksProvider,
-    val taskDescription: String,
+    konst tasksProvider: KotlinTasksProvider,
+    konst taskDescription: String,
     kotlinCompilation: KotlinCompilationInfo
 ) : KotlinCompilationProcessor<T>(kotlinCompilation) {
     protected abstract fun doTargetSpecificProcessing()
-    protected val logger = Logging.getLogger(this.javaClass)!!
+    protected konst logger = Logging.getLogger(this.javaClass)!!
 
-    protected val sourceSetName: String = kotlinCompilation.compilationName
+    protected konst sourceSetName: String = kotlinCompilation.compilationName
 
-    override val kotlinTask: TaskProvider<out T> = prepareKotlinCompileTask()
+    override konst kotlinTask: TaskProvider<out T> = prepareKotlinCompileTask()
 
-    protected val javaSourceSet: SourceSet?
-        get() = when (val compilation = compilationInfo.safeAs<KotlinCompilationInfo.TCS>()?.origin) {
+    protected konst javaSourceSet: SourceSet?
+        get() = when (konst compilation = compilationInfo.safeAs<KotlinCompilationInfo.TCS>()?.origin) {
             is KotlinWithJavaCompilation<*, *> -> compilation.javaSourceSet
             is KotlinJvmCompilation -> if (compilation.target.withJavaEnabled) {
                 project.variantImplementationFactory<JavaSourceSetsAccessor.JavaSourceSetsAccessorVariantFactory>()
@@ -61,8 +61,8 @@ internal abstract class KotlinSourceSetProcessor<T : AbstractKotlinCompile<*>>(
             // Proper workaround is peeked from here:
             // https://github.com/gradle/gradle/blob/16cbc3a678771b08418d086eb67e9934c9282dfb/subprojects/plugins/src/main/java/org/gradle/api/plugins/internal/JvmPluginsHelper.java#L142-L148
             if (compilationInfo.tcsOrNull?.compilation is KotlinWithJavaCompilation<*, *>) {
-                val kotlinSourceDirectorySet = compilationInfo.tcs.compilation.defaultSourceSet.kotlin
-                kotlinSourceDirectorySet.destinationDirectory.value(defaultKotlinDestinationDir)
+                konst kotlinSourceDirectorySet = compilationInfo.tcs.compilation.defaultSourceSet.kotlin
+                kotlinSourceDirectorySet.destinationDirectory.konstue(defaultKotlinDestinationDir)
                 task.configure {
                     if (it is Kotlin2JsCompile) {
                         it.defaultDestinationDirectory.convention(kotlinSourceDirectorySet.destinationDirectory)
@@ -106,10 +106,10 @@ internal abstract class KotlinSourceSetProcessor<T : AbstractKotlinCompile<*>>(
     }
 
     private fun addKotlinDirectoriesToJavaSourceSet() {
-        val java = javaSourceSet ?: return
+        konst java = javaSourceSet ?: return
 
         // Try to avoid duplicate Java sources in allSource; run lazily to allow changing the directory set:
-        val kotlinSrcDirsToAdd = Callable {
+        konst kotlinSrcDirsToAdd = Callable {
             compilationInfo.sources.map { filterOutJavaSrcDirsIfPossible(it) }
         }
 
@@ -118,21 +118,21 @@ internal abstract class KotlinSourceSetProcessor<T : AbstractKotlinCompile<*>>(
     }
 
     private fun filterOutJavaSrcDirsIfPossible(sourceDirectories: SourceDirectorySet): FileCollection {
-        val java = javaSourceSet ?: return sourceDirectories
+        konst java = javaSourceSet ?: return sourceDirectories
 
         // Build a lazily-resolved file collection that filters out Java sources from sources of this sourceDirectorySet
         return sourceDirectories.sourceDirectories.minus(java.java.sourceDirectories)
     }
 
     private fun createAdditionalClassesTaskForIdeRunner() {
-        val kotlinCompilation = compilationInfo.tcsOrNull?.compilation ?: return
+        konst kotlinCompilation = compilationInfo.tcsOrNull?.compilation ?: return
 
         open class IDEClassesTask : DefaultTask()
         // Workaround: as per KT-26641, when there's a Kotlin compilation with a Java source set, we create another task
         // that has a name composed as '<IDE module name>Classes`, where the IDE module name is the default source set name:
-        val expectedClassesTaskName = "${kotlinCompilation.defaultSourceSetName}Classes"
+        konst expectedClassesTaskName = "${kotlinCompilation.defaultSourceSetName}Classes"
         project.tasks.run {
-            val shouldCreateTask = expectedClassesTaskName !in names
+            konst shouldCreateTask = expectedClassesTaskName !in names
             if (shouldCreateTask) {
                 project.registerTask(expectedClassesTaskName, IDEClassesTask::class.java) {
                     it.dependsOn(getByName(kotlinCompilation.compileAllTaskName))

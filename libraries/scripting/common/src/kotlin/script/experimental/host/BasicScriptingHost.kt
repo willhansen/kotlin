@@ -25,27 +25,27 @@ import kotlin.script.experimental.impl.internalScriptingRunSuspend
  * The base class for scripting host implementations
  */
 abstract class BasicScriptingHost(
-    val compiler: ScriptCompiler,
-    val evaluator: ScriptEvaluator
+    konst compiler: ScriptCompiler,
+    konst ekonstuator: ScriptEkonstuator
 ) {
     /**
-     * The overridable wrapper for executing evaluation in a desired coroutines context
+     * The overridable wrapper for executing ekonstuation in a desired coroutines context
      */
     open fun <T> runInCoroutineContext(block: suspend () -> T): T =
         @Suppress("DEPRECATION_ERROR")
         internalScriptingRunSuspend { block() }
 
     /**
-     * The default implementation of the evaluation function
+     * The default implementation of the ekonstuation function
      */
-    open fun eval(
+    open fun ekonst(
         script: SourceCode,
         compilationConfiguration: ScriptCompilationConfiguration,
-        evaluationConfiguration: ScriptEvaluationConfiguration?
-    ): ResultWithDiagnostics<EvaluationResult> =
+        ekonstuationConfiguration: ScriptEkonstuationConfiguration?
+    ): ResultWithDiagnostics<EkonstuationResult> =
         runInCoroutineContext {
             compiler(script, compilationConfiguration).onSuccess {
-                evaluator(it, evaluationConfiguration ?: ScriptEvaluationConfiguration.Default)
+                ekonstuator(it, ekonstuationConfiguration ?: ScriptEkonstuationConfiguration.Default)
             }
         }
 }

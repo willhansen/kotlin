@@ -21,7 +21,7 @@ import org.jetbrains.org.objectweb.asm.Type
 import org.jetbrains.org.objectweb.asm.commons.InstructionAdapter
 import org.jetbrains.kotlin.android.synthetic.codegen.AbstractAndroidExtensionsExpressionCodegenExtension.Companion.PROPERTY_NAME
 
-internal val CacheImplementation.hasCache: Boolean
+internal konst CacheImplementation.hasCache: Boolean
     get() = this != CacheImplementation.NO_CACHE
 
 interface CacheMechanism {
@@ -60,8 +60,8 @@ interface CacheMechanism {
 }
 
 internal class HashMapCacheMechanism(
-        val iv: InstructionAdapter,
-        val containerType: Type
+        konst iv: InstructionAdapter,
+        konst containerType: Type
 ) : CacheMechanism {
     override fun loadCache() {
         iv.load(0, containerType)
@@ -81,12 +81,12 @@ internal class HashMapCacheMechanism(
     }
 
     override fun getViewFromCache() {
-        iv.invokestatic("java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false)
+        iv.invokestatic("java/lang/Integer", "konstueOf", "(I)Ljava/lang/Integer;", false)
         iv.invokevirtual("java/util/HashMap", "get", "(Ljava/lang/Object;)Ljava/lang/Object;", false)
     }
 
     override fun putViewToCache(getView: () -> Unit) {
-        iv.invokestatic("java/lang/Integer", "valueOf", "(I)Ljava/lang/Integer;", false)
+        iv.invokestatic("java/lang/Integer", "konstueOf", "(I)Ljava/lang/Integer;", false)
         getView()
         iv.invokevirtual("java/util/HashMap", "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;", false)
         iv.pop()
@@ -94,8 +94,8 @@ internal class HashMapCacheMechanism(
 }
 
 internal class SparseArrayCacheMechanism(
-        val iv: InstructionAdapter,
-        val containerType: Type
+        konst iv: InstructionAdapter,
+        konst containerType: Type
 ) : CacheMechanism {
     override fun loadCache() {
         iv.load(0, containerType)

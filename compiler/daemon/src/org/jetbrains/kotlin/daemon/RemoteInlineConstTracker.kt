@@ -11,8 +11,8 @@ import org.jetbrains.kotlin.daemon.common.withMeasure
 import org.jetbrains.kotlin.incremental.components.InlineConstTracker
 
 class RemoteInlineConstTracker(
-    @Suppress("DEPRECATION") val facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
-    val profiler: Profiler = DummyProfiler()
+    @Suppress("DEPRECATION") konst facade: org.jetbrains.kotlin.daemon.common.CompilerCallbackServicesFacade,
+    konst profiler: Profiler = DummyProfiler()
 ): InlineConstTracker {
     override fun report(filePath: String, owner: String, name: String, constType: String) {
         profiler.withMeasure(this) {

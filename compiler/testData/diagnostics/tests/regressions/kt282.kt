@@ -11,7 +11,7 @@ operator fun Int?.contains(x : Int) : Boolean = false
 
 fun f(): Unit {
     var set : Set? = null
-    val i : Int? = null
+    konst i : Int? = null
     i <!UNSAFE_OPERATOR_CALL!>+<!> 1
     set + 1
     1 <!UNSAFE_OPERATOR_CALL!>in<!> set

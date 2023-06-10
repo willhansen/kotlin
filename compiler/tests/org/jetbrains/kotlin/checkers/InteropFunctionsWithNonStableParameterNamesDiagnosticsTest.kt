@@ -39,7 +39,7 @@ class InteropFunctionsWithNonStableParameterNamesDiagnosticsTest : AbstractDiagn
     override fun setUp() {
         super.setUp()
 
-        val tmpDir = KotlinTestUtils.tmpDirForTest(this)
+        konst tmpDir = KotlinTestUtils.tmpDirForTest(this)
         klibFile = prepareKlibWithNonStableParameterNames(tmpDir)
     }
 
@@ -82,19 +82,19 @@ class InteropFunctionsWithNonStableParameterNamesDiagnosticsTest : AbstractDiagn
     }
 
     private class CommonDependenciesContainerImpl(dependees: Collection<ModuleDescriptor>) : CommonDependenciesContainer {
-        private class ModuleInfoImpl(val module: ModuleDescriptor) : ModuleInfo {
-            override val name: Name get() = module.name
+        private class ModuleInfoImpl(konst module: ModuleDescriptor) : ModuleInfo {
+            override konst name: Name get() = module.name
 
             override fun dependencies(): List<ModuleInfo> = listOf(this)
             override fun dependencyOnBuiltIns(): ModuleInfo.DependencyOnBuiltIns = ModuleInfo.DependencyOnBuiltIns.LAST
 
-            override val platform: TargetPlatform get() = CommonPlatforms.defaultCommonPlatform
-            override val analyzerServices: PlatformDependentAnalyzerServices get() = CommonPlatformAnalyzerServices
+            override konst platform: TargetPlatform get() = CommonPlatforms.defaultCommonPlatform
+            override konst analyzerServices: PlatformDependentAnalyzerServices get() = CommonPlatformAnalyzerServices
         }
 
-        private val dependeeModuleInfos: List<ModuleInfoImpl> = dependees.map(::ModuleInfoImpl)
+        private konst dependeeModuleInfos: List<ModuleInfoImpl> = dependees.map(::ModuleInfoImpl)
 
-        override val moduleInfos: List<ModuleInfo> get() = dependeeModuleInfos
+        override konst moduleInfos: List<ModuleInfo> get() = dependeeModuleInfos
 
         override fun moduleDescriptorForModuleInfo(moduleInfo: ModuleInfo): ModuleDescriptor {
             // let's assume there is a few module infos at all
@@ -105,20 +105,20 @@ class InteropFunctionsWithNonStableParameterNamesDiagnosticsTest : AbstractDiagn
         override fun registerDependencyForAllModules(moduleInfo: ModuleInfo, descriptorForModule: ModuleDescriptorImpl) = Unit
         override fun packageFragmentProviderForModuleInfo(moduleInfo: ModuleInfo): PackageFragmentProvider? = null
 
-        override val friendModuleInfos: List<ModuleInfo> get() = emptyList()
-        override val refinesModuleInfos: List<ModuleInfo> get() = dependeeModuleInfos
+        override konst friendModuleInfos: List<ModuleInfo> get() = emptyList()
+        override konst refinesModuleInfos: List<ModuleInfo> get() = dependeeModuleInfos
     }
 
     companion object {
-        private const val TEST_DATA_DIR = "compiler/testData/diagnostics/nonStableParameterNames"
+        private const konst TEST_DATA_DIR = "compiler/testData/diagnostics/nonStableParameterNames"
 
         private fun prepareKlibWithNonStableParameterNames(tmpDir: File): File {
-            val libraryName = "library"
+            konst libraryName = "library"
 
-            val klibFile = tmpDir.resolve("$libraryName.klib")
+            konst klibFile = tmpDir.resolve("$libraryName.klib")
             KlibTestUtil.compileCommonSourcesToKlib(listOf(File(TEST_DATA_DIR, "library.kt")), libraryName, klibFile)
 
-            val module = KlibTestUtil.deserializeKlibToCommonModule(klibFile)
+            konst module = KlibTestUtil.deserializeKlibToCommonModule(klibFile)
             NonStableParameterNamesSerializationTest.collectCallablesForPatch(module).forEach { it.setHasStableParameterNames(false) }
 
             klibFile.delete()

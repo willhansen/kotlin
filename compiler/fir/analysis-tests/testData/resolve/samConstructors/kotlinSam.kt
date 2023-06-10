@@ -17,7 +17,7 @@ fun main() {
 
     foo(MyRunnable({ it > 1 }))
 
-    val x = { x: Int -> x > 1 }
+    konst x = { x: Int -> x > 1 }
 
     foo(MyRunnable(x))
 

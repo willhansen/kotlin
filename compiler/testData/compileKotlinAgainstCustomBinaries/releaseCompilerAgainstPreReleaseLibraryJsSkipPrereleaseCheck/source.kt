@@ -4,12 +4,12 @@ package usage
 import a.*
 
 fun baz(param: A) {
-    val constructor = A()
-    val methodCall = param.hashCode()
-    val supertype = object : A() {}
+    konst constructor = A()
+    konst methodCall = param.hashCode()
+    konst supertype = object : A() {}
 
-    val x = foo()
-    val y = bar
+    konst x = foo()
+    konst y = bar
     bar = 239
-    val z: TA = ""
+    konst z: TA = ""
 }

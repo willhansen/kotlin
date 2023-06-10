@@ -18,8 +18,8 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFile
 
 internal class KtFirDiagnosticProvider(
-    override val analysisSession: KtFirAnalysisSession,
-    override val token: KtLifetimeToken,
+    override konst analysisSession: KtFirAnalysisSession,
+    override konst token: KtLifetimeToken,
 ) : KtDiagnosticProvider(), KtFirAnalysisSessionComponent {
 
     override fun getDiagnosticsForElement(

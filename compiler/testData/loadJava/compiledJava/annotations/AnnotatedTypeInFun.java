@@ -9,7 +9,7 @@ class AnnotatedTypeInFun {
 
     @Target(ElementType.TYPE_USE)
     public @interface Anno {
-        String value();
+        String konstue();
     }
 
     void foo(@Anno("a") String a, @Anno("b") String b) {

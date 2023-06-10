@@ -17,5 +17,5 @@ import java.lang.annotation.ElementType.FIELD
 
 class Test {
     @JavaAnno(FIELD)
-    val f<caret>oo = ""
+    konst f<caret>oo = ""
 }

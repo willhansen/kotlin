@@ -20,18 +20,18 @@ repositories {
 
 enum class OsName { WINDOWS, MAC, LINUX, UNKNOWN }
 enum class OsArch { X86_32, X86_64, ARM64, UNKNOWN }
-data class OsType(val name: OsName, val arch: OsArch)
+data class OsType(konst name: OsName, konst arch: OsArch)
 
-val currentOsType = run {
-    val gradleOs = OperatingSystem.current()
-    val osName = when {
+konst currentOsType = run {
+    konst gradleOs = OperatingSystem.current()
+    konst osName = when {
         gradleOs.isMacOsX -> OsName.MAC
         gradleOs.isWindows -> OsName.WINDOWS
         gradleOs.isLinux -> OsName.LINUX
         else -> OsName.UNKNOWN
     }
 
-    val osArch = when (providers.systemProperty("sun.arch.data.model").forUseAtConfigurationTime().get()) {
+    konst osArch = when (providers.systemProperty("sun.arch.data.model").forUseAtConfigurationTime().get()) {
         "32" -> OsArch.X86_32
         "64" -> when (providers.systemProperty("os.arch").forUseAtConfigurationTime().get().toLowerCase()) {
             "aarch64" -> OsArch.ARM64
@@ -44,8 +44,8 @@ val currentOsType = run {
 }
 
 
-val jsShellVersion = "2023-05-12-09-49-14-mozilla-central"
-val jsShellSuffix = when (currentOsType) {
+konst jsShellVersion = "2023-05-12-09-49-14-mozilla-central"
+konst jsShellSuffix = when (currentOsType) {
     OsType(OsName.LINUX, OsArch.X86_32) -> "linux-i686"
     OsType(OsName.LINUX, OsArch.X86_64) -> "linux-x86_64"
     OsType(OsName.MAC, OsArch.X86_64),
@@ -55,7 +55,7 @@ val jsShellSuffix = when (currentOsType) {
     else -> error("unsupported os type $currentOsType")
 }
 
-val jsShell by configurations.creating {
+konst jsShell by configurations.creating {
     isCanBeResolved = true
     isCanBeConsumed = false
 }
@@ -69,7 +69,7 @@ dependencies {
     jsShell("org.mozilla:jsshell:$jsShellVersion:$jsShellSuffix@zip")
 }
 
-val generationRoot = projectDir.resolve("tests-gen")
+konst generationRoot = projectDir.resolve("tests-gen")
 
 useD8Plugin()
 optInToExperimentalCompilerApi()
@@ -90,42 +90,42 @@ fun Test.setupWasmStdlib() {
 }
 
 fun Test.setupGradlePropertiesForwarding() {
-    val rootLocalProperties = Properties().apply {
+    konst rootLocalProperties = Properties().apply {
         rootProject.file("local.properties").takeIf { it.isFile }?.inputStream()?.use {
             load(it)
         }
     }
 
-    val allProperties = properties + rootLocalProperties
+    konst allProperties = properties + rootLocalProperties
 
-    val prefixForPropertiesToForward = "fd."
-    for ((key, value) in allProperties) {
+    konst prefixForPropertiesToForward = "fd."
+    for ((key, konstue) in allProperties) {
         if (key is String && key.startsWith(prefixForPropertiesToForward)) {
-            systemProperty(key.substring(prefixForPropertiesToForward.length), value!!)
+            systemProperty(key.substring(prefixForPropertiesToForward.length), konstue!!)
         }
     }
 }
 
-val downloadedTools = File(buildDir, "tools")
+konst downloadedTools = File(buildDir, "tools")
 
-val unzipJsShell by task<Copy> {
+konst unzipJsShell by task<Copy> {
     dependsOn(jsShell)
     from {
         zipTree(jsShell.singleFile)
     }
-    val unpackedDir = File(downloadedTools, "jsshell-$jsShellSuffix-$jsShellVersion")
+    konst unpackedDir = File(downloadedTools, "jsshell-$jsShellSuffix-$jsShellVersion")
     into(unpackedDir)
 }
 
 fun Test.setupSpiderMonkey() {
     dependsOn(unzipJsShell)
-    val jsShellExecutablePath = File(unzipJsShell.get().destinationDir, "js").absolutePath
+    konst jsShellExecutablePath = File(unzipJsShell.get().destinationDir, "js").absolutePath
     systemProperty("javascript.engine.path.SpiderMonkey", jsShellExecutablePath)
 }
 
 testsJar {}
 
-val generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateWasmTestsKt") {
+konst generateTests by generator("org.jetbrains.kotlin.generators.tests.GenerateWasmTestsKt") {
     dependsOn(":compiler:generateTestData")
 }
 

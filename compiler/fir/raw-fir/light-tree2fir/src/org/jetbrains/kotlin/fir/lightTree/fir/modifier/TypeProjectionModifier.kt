@@ -7,6 +7,6 @@ package org.jetbrains.kotlin.fir.lightTree.fir.modifier
 
 import org.jetbrains.kotlin.KtSourceElement
 
-class TypeProjectionModifier(val source: KtSourceElement? = null, varianceModifiers: Long = ModifierFlag.NONE.value) :
+class TypeProjectionModifier(konst source: KtSourceElement? = null, varianceModifiers: Long = ModifierFlag.NONE.konstue) :
     Modifier(varianceModifiers) {
 }

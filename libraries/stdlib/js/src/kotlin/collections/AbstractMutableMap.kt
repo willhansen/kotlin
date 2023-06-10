@@ -16,27 +16,27 @@ package kotlin.collections
  * The implementor is required to implement [entries] property, which should return mutable set of map entries, and [put] function.
  *
  * @param K the type of map keys. The map is invariant in its key type.
- * @param V the type of map values. The map is invariant in its value type.
+ * @param V the type of map konstues. The map is invariant in its konstue type.
  */
 public actual abstract class AbstractMutableMap<K, V> protected actual constructor() : AbstractMap<K, V>(), MutableMap<K, V> {
 
     /**
      * A mutable [Map.Entry] shared by several [Map] implementations.
      */
-    internal open class SimpleEntry<K, V>(override val key: K, value: V) : MutableMap.MutableEntry<K, V> {
-        constructor(entry: Map.Entry<K, V>) : this(entry.key, entry.value)
+    internal open class SimpleEntry<K, V>(override konst key: K, konstue: V) : MutableMap.MutableEntry<K, V> {
+        constructor(entry: Map.Entry<K, V>) : this(entry.key, entry.konstue)
 
-        private var _value = value
+        private var _konstue = konstue
 
-        override val value: V get() = _value
+        override konst konstue: V get() = _konstue
 
         override fun setValue(newValue: V): V {
             // Should check if the map containing this entry is mutable.
             // However, to not increase entry memory footprint it might be worthwhile not to check it here and
             // force subclasses that implement `build()` (freezing) operation to implement their own `MutableEntry`.
 //            this@AbstractMutableMap.checkIsMutable()
-            val oldValue = this._value
-            this._value = newValue
+            konst oldValue = this._konstue
+            this._konstue = newValue
             return oldValue
         }
 
@@ -59,7 +59,7 @@ public actual abstract class AbstractMutableMap<K, V> protected actual construct
     }
 
     private var _keys: MutableSet<K>? = null
-    actual override val keys: MutableSet<K>
+    actual override konst keys: MutableSet<K>
         get() {
             if (_keys == null) {
                 _keys = object : AbstractMutableSet<K>() {
@@ -71,7 +71,7 @@ public actual abstract class AbstractMutableMap<K, V> protected actual construct
                     override operator fun contains(element: K): Boolean = containsKey(element)
 
                     override operator fun iterator(): MutableIterator<K> {
-                        val entryIterator = entries.iterator()
+                        konst entryIterator = entries.iterator()
                         return object : MutableIterator<K> {
                             override fun hasNext(): Boolean = entryIterator.hasNext()
                             override fun next(): K = entryIterator.next().key
@@ -88,7 +88,7 @@ public actual abstract class AbstractMutableMap<K, V> protected actual construct
                         return false
                     }
 
-                    override val size: Int get() = this@AbstractMutableMap.size
+                    override konst size: Int get() = this@AbstractMutableMap.size
 
                     override fun checkIsMutable(): Unit = this@AbstractMutableMap.checkIsMutable()
                 }
@@ -96,52 +96,52 @@ public actual abstract class AbstractMutableMap<K, V> protected actual construct
             return _keys!!
         }
 
-    actual abstract override fun put(key: K, value: V): V?
+    actual abstract override fun put(key: K, konstue: V): V?
 
     actual override fun putAll(from: Map<out K, V>) {
         checkIsMutable()
-        for ((key, value) in from) {
-            put(key, value)
+        for ((key, konstue) in from) {
+            put(key, konstue)
         }
     }
 
-    private var _values: MutableCollection<V>? = null
-    actual override val values: MutableCollection<V>
+    private var _konstues: MutableCollection<V>? = null
+    actual override konst konstues: MutableCollection<V>
         get() {
-            if (_values == null) {
-                _values = object : AbstractMutableCollection<V>() {
-                    override fun add(element: V): Boolean = throw UnsupportedOperationException("Add is not supported on values")
+            if (_konstues == null) {
+                _konstues = object : AbstractMutableCollection<V>() {
+                    override fun add(element: V): Boolean = throw UnsupportedOperationException("Add is not supported on konstues")
                     override fun clear() = this@AbstractMutableMap.clear()
 
                     override operator fun contains(element: V): Boolean = containsValue(element)
 
                     override operator fun iterator(): MutableIterator<V> {
-                        val entryIterator = entries.iterator()
+                        konst entryIterator = entries.iterator()
                         return object : MutableIterator<V> {
                             override fun hasNext(): Boolean = entryIterator.hasNext()
-                            override fun next(): V = entryIterator.next().value
+                            override fun next(): V = entryIterator.next().konstue
                             override fun remove() = entryIterator.remove()
                         }
                     }
 
-                    override val size: Int get() = this@AbstractMutableMap.size
+                    override konst size: Int get() = this@AbstractMutableMap.size
 
                     override fun checkIsMutable(): Unit = this@AbstractMutableMap.checkIsMutable()
                 }
             }
-            return _values!!
+            return _konstues!!
         }
 
     actual override fun remove(key: K): V? {
         checkIsMutable()
-        val iter = entries.iterator()
+        konst iter = entries.iterator()
         while (iter.hasNext()) {
-            val entry = iter.next()
-            val k = entry.key
+            konst entry = iter.next()
+            konst k = entry.key
             if (key == k) {
-                val value = entry.value
+                konst konstue = entry.konstue
                 iter.remove()
-                return value
+                return konstue
             }
         }
         return null

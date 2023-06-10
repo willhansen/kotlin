@@ -1,7 +1,7 @@
 // WITH_STDLIB
 
 fun box(): String {
-    val res = (1..3).map { it ->
+    konst res = (1..3).map { it ->
         if (it == 1)
             2
     };

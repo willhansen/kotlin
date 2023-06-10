@@ -14,7 +14,7 @@ fun foo(a: Any) {}
 import j.J
 
 fun test() {
-    val a = J.ok()
+    konst a = J.ok()
     foo(a)
     foo(a)
 }

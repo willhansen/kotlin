@@ -43,7 +43,7 @@ public abstract class AbstractDbElement<D extends AbstractDbElement<D>> {
 // FILE: AbstractRowAssert.java
 public abstract class AbstractRowAssert<D extends AbstractDbData<D>, A extends AbstractDbAssert<D, A, C, CV, R, RV>, C extends AbstractColumnAssert<D, A, C, CV, R, RV>, CV extends AbstractColumnValueAssert<D, A, C, CV, R, RV>, R extends AbstractRowAssert<D, A, C, CV, R, RV>, RV extends AbstractRowValueAssert<D, A, C, CV, R, RV>>
 extends AbstractSubAssert<D, A, R, RV, C, CV, R, RV> implements RowElement {
-    public RV value(String columnName) {
+    public RV konstue(String columnName) {
         return (RV) new RequestRowValueAssert();
     }
 }
@@ -115,7 +115,7 @@ import java.time.LocalDateTime
 fun test(x: RequestAssert) {
     x.hasNumberOfRows(1)
         .row()
-        .value("message_time").isEqualTo("")
+        .konstue("message_time").isEqualTo("")
 }
 
 fun box(): String {

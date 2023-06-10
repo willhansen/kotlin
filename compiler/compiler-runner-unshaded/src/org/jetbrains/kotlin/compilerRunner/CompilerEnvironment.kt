@@ -21,8 +21,8 @@ import org.jetbrains.kotlin.config.Services
 import org.jetbrains.kotlin.utils.KotlinPaths
 
 open class CompilerEnvironment(
-        val services: Services,
-        val messageCollector: MessageCollector,
-        open val outputItemsCollector: OutputItemsCollector
+        konst services: Services,
+        konst messageCollector: MessageCollector,
+        open konst outputItemsCollector: OutputItemsCollector
 )
 

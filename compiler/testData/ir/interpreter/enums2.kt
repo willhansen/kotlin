@@ -2,7 +2,7 @@
 enum class Empty
 
 @CompileTimeCalculation
-enum class Color(val rgb: Int) {
+enum class Color(konst rgb: Int) {
     BLACK() { override fun getColorAsString() = "0x000000" },
     RED(0xFF0000) { override fun getColorAsString() = "0xFF0000" },
     GREEN(0x00FF00) { override fun getColorAsString() = "0x00FF00" },
@@ -15,27 +15,27 @@ enum class Color(val rgb: Int) {
     fun getColorAsInt(): Int = rgb
 }
 
-const val a1 = <!EVALUATED: `0`!>Empty.values().size<!>
-const val a2 = <!EVALUATED: `0`!>enumValues<Empty>().size<!>
+const konst a1 = <!EVALUATED: `0`!>Empty.konstues().size<!>
+const konst a2 = <!EVALUATED: `0`!>enumValues<Empty>().size<!>
 
-const val b1 = <!EVALUATED: `BLACK`!>Color.BLACK.name<!>
-const val b2 = <!EVALUATED: `0x000000`!>Color.BLACK.getColorAsString()<!>
-const val b3 = <!EVALUATED: `0xFF0000`!>Color.RED.getColorAsString()<!>
+const konst b1 = <!EVALUATED: `BLACK`!>Color.BLACK.name<!>
+const konst b2 = <!EVALUATED: `0x000000`!>Color.BLACK.getColorAsString()<!>
+const konst b3 = <!EVALUATED: `0xFF0000`!>Color.RED.getColorAsString()<!>
 
-const val c1 = <!EVALUATED: `0`!>Color.BLACK.getColorAsInt()<!>
-const val c2 = <!EVALUATED: `16711680`!>Color.RED.getColorAsInt()<!>
+const konst c1 = <!EVALUATED: `0`!>Color.BLACK.getColorAsInt()<!>
+const konst c2 = <!EVALUATED: `16711680`!>Color.RED.getColorAsInt()<!>
 
 @CompileTimeCalculation
 enum class EnumWithoutPrimary {
     X(), Y(10);
 
-    val someProp: Int
+    konst someProp: Int
 
     constructor() : this(0) {}
-    constructor(value: Int) {
-        someProp = value
+    constructor(konstue: Int) {
+        someProp = konstue
     }
 }
 
-const val d1 = <!EVALUATED: `0`!>EnumWithoutPrimary.X.someProp<!>
-const val d2 = <!EVALUATED: `10`!>EnumWithoutPrimary.Y.someProp<!>
+const konst d1 = <!EVALUATED: `0`!>EnumWithoutPrimary.X.someProp<!>
+const konst d2 = <!EVALUATED: `10`!>EnumWithoutPrimary.Y.someProp<!>

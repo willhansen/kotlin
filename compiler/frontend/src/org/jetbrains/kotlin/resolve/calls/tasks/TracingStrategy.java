@@ -65,7 +65,7 @@ public interface TracingStrategy {
         public void noReceiverAllowed(@NotNull BindingTrace trace) {}
 
         @Override
-        public void noValueForParameter(@NotNull BindingTrace trace, @NotNull ValueParameterDescriptor valueParameter) {}
+        public void noValueForParameter(@NotNull BindingTrace trace, @NotNull ValueParameterDescriptor konstueParameter) {}
 
         @Override
         public void wrongNumberOfTypeArguments(@NotNull BindingTrace trace, int expectedTypeArgumentCount, @NotNull CallableDescriptor descriptor) {}
@@ -131,7 +131,7 @@ public interface TracingStrategy {
 
     void noReceiverAllowed(@NotNull BindingTrace trace);
 
-    void noValueForParameter(@NotNull BindingTrace trace, @NotNull ValueParameterDescriptor valueParameter);
+    void noValueForParameter(@NotNull BindingTrace trace, @NotNull ValueParameterDescriptor konstueParameter);
 
     void wrongNumberOfTypeArguments(
             @NotNull BindingTrace trace,

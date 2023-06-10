@@ -4,7 +4,7 @@ enum class Color {
     B
 }
 
-annotation class Annotation(val color : Color)
+annotation class Annotation(konst color : Color)
 
 <expr>@Annotation(Color.R)</expr>
 class C

@@ -27,24 +27,24 @@ import org.jetbrains.kotlin.psi.KtVariableDeclaration
 import org.jetbrains.kotlin.resolve.BindingContext
 
 internal class KtFe10PsiLocalVariableSymbol(
-    override val psi: KtVariableDeclaration,
-    override val analysisContext: Fe10AnalysisContext
+    override konst psi: KtVariableDeclaration,
+    override konst analysisContext: Fe10AnalysisContext
 ) : KtLocalVariableSymbol(), KtFe10PsiSymbol<KtVariableDeclaration, VariableDescriptor> {
-    override val descriptor: VariableDescriptor? by cached {
-        val bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
+    override konst descriptor: VariableDescriptor? by cached {
+        konst bindingContext = analysisContext.analyze(psi, AnalysisMode.PARTIAL)
         bindingContext[BindingContext.VARIABLE, psi]
     }
 
-    override val name: Name
+    override konst name: Name
         get() = withValidityAssertion { psi.nameAsSafeName }
 
-    override val returnType: KtType
+    override konst returnType: KtType
         get() = withValidityAssertion { descriptor?.type?.toKtType(analysisContext) ?: createErrorType() }
 
-    override val isVal: Boolean
+    override konst isVal: Boolean
         get() = withValidityAssertion { !psi.isVar }
 
-    override val symbolKind: KtSymbolKind
+    override konst symbolKind: KtSymbolKind
         get() = withValidityAssertion { KtSymbolKind.LOCAL }
 
     context(KtAnalysisSession)

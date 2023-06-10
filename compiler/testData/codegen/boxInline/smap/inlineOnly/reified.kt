@@ -10,7 +10,7 @@ inline fun <reified T : Any> className() =  T::class.java.simpleName
 import test.*
 
 fun box(): String {
-    val z = className<String>()
+    konst z = className<String>()
     if (z != "String") return "fail: $z"
 
     return "OK"

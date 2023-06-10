@@ -1,7 +1,7 @@
 class M<out V>
 class X
 
-val p: M<X> = throw Exception()
+konst p: M<X> = throw Exception()
 
 // method: PropertyGetterOutKt::getP
 // jvm signature:     ()LM;

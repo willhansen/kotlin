@@ -29,8 +29,8 @@ fun FirSmartCastExpression.smartcastScope(
     scopeSession: ScopeSession,
     requiredMembersPhase: FirResolvePhase? = null,
 ): FirTypeScope? {
-    val smartcastType = smartcastTypeWithoutNullableNothing?.coneType ?: smartcastType.coneType
-    val smartcastScope = smartcastType.scope(
+    konst smartcastType = smartcastTypeWithoutNullableNothing?.coneType ?: smartcastType.coneType
+    konst smartcastScope = smartcastType.scope(
         useSiteSession = useSiteSession,
         scopeSession = scopeSession,
         fakeOverrideTypeCalculator = FakeOverrideTypeCalculator.DoNothing,
@@ -41,7 +41,7 @@ fun FirSmartCastExpression.smartcastScope(
         return smartcastScope
     }
 
-    val originalScope = originalExpression.typeRef.coneType.scope(
+    konst originalScope = originalExpression.typeRef.coneType.scope(
         useSiteSession = useSiteSession,
         scopeSession = scopeSession,
         fakeOverrideTypeCalculator = FakeOverrideTypeCalculator.DoNothing,
@@ -68,7 +68,7 @@ fun ConeKotlinType.scope(
     fakeOverrideTypeCalculator: FakeOverrideTypeCalculator,
     requiredMembersPhase: FirResolvePhase?,
 ): FirTypeScope? {
-    val scope = scope(useSiteSession, scopeSession, requiredMembersPhase) ?: return null
+    konst scope = scope(useSiteSession, scopeSession, requiredMembersPhase) ?: return null
     if (fakeOverrideTypeCalculator == FakeOverrideTypeCalculator.DoNothing) return scope
     return FirScopeWithFakeOverrideTypeCalculator(scope, fakeOverrideTypeCalculator)
 }
@@ -81,9 +81,9 @@ private fun ConeKotlinType.scope(
     is ConeErrorType -> null
     is ConeClassLikeType -> classScope(useSiteSession, scopeSession, requiredMembersPhase, lookupTag)
     is ConeTypeParameterType -> {
-        val symbol = lookupTag.symbol
+        konst symbol = lookupTag.symbol
         scopeSession.getOrBuild(symbol, TYPE_PARAMETER_SCOPE_KEY) {
-            val intersectionType = ConeTypeIntersector.intersectTypes(
+            konst intersectionType = ConeTypeIntersector.intersectTypes(
                 useSiteSession.typeContext,
                 symbol.resolvedBounds.map { it.coneType }
             )
@@ -116,9 +116,9 @@ private fun ConeClassLikeType.classScope(
     requiredMembersPhase: FirResolvePhase?,
     memberOwnerLookupTag: ConeClassLikeLookupTag
 ): FirTypeScope? {
-    val fullyExpandedType = fullyExpandedType(useSiteSession)
-    val fir = fullyExpandedType.lookupTag.toSymbol(useSiteSession)?.fir as? FirClass ?: return null
-    val substitutor = when {
+    konst fullyExpandedType = fullyExpandedType(useSiteSession)
+    konst fir = fullyExpandedType.lookupTag.toSymbol(useSiteSession)?.fir as? FirClass ?: return null
+    konst substitutor = when {
         attributes.contains(CompilerConeAttributes.RawType) -> ConeRawScopeSubstitutor(useSiteSession)
         else -> substitutorByMap(
             createSubstitutionForScope(fir.typeParameters, fullyExpandedType, useSiteSession),
@@ -155,4 +155,4 @@ fun ClassId.defaultType(parameters: List<FirTypeParameterSymbol>): ConeClassLike
         isNullable = false,
     )
 
-val TYPE_PARAMETER_SCOPE_KEY = scopeSessionKey<FirTypeParameterSymbol, FirTypeScope>()
+konst TYPE_PARAMETER_SCOPE_KEY = scopeSessionKey<FirTypeParameterSymbol, FirTypeScope>()

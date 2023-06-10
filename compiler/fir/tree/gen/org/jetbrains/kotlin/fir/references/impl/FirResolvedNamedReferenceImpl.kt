@@ -19,9 +19,9 @@ import org.jetbrains.kotlin.fir.visitors.*
  */
 
 internal class FirResolvedNamedReferenceImpl(
-    override val source: KtSourceElement?,
-    override val name: Name,
-    override val resolvedSymbol: FirBasedSymbol<*>,
+    override konst source: KtSourceElement?,
+    override konst name: Name,
+    override konst resolvedSymbol: FirBasedSymbol<*>,
 ) : FirResolvedNamedReference() {
     override fun <R, D> acceptChildren(visitor: FirVisitor<R, D>, data: D) {}
 

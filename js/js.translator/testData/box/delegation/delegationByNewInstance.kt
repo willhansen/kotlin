@@ -5,7 +5,7 @@ interface Base {
     abstract fun foo(x: String): String
 }
 
-class BaseImpl(val s: String) : Base {
+class BaseImpl(konst s: String) : Base {
     override fun foo(x: String): String = "Base: ${s}:${x}"
 }
 

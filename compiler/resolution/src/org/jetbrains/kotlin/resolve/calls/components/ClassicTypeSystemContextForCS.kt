@@ -19,8 +19,8 @@ import org.jetbrains.kotlin.types.checker.*
 import org.jetbrains.kotlin.types.model.*
 
 class ClassicTypeSystemContextForCS(
-    override val builtIns: KotlinBuiltIns,
-    val kotlinTypeRefiner: KotlinTypeRefiner
+    override konst builtIns: KotlinBuiltIns,
+    konst kotlinTypeRefiner: KotlinTypeRefiner
 ) : TypeSystemInferenceExtensionContextDelegate,
     ClassicTypeSystemContext,
     BuiltInsProvider {
@@ -45,7 +45,7 @@ class ClassicTypeSystemContextForCS(
         require(constructorProjection is TypeProjectionBase, constructorProjection::errorMessage)
 
         @Suppress("UNCHECKED_CAST")
-        val newCapturedTypeConstructor = NewCapturedTypeConstructor(
+        konst newCapturedTypeConstructor = NewCapturedTypeConstructor(
             constructorProjection,
             constructorSupertypes as List<UnwrappedType>
         )
@@ -68,7 +68,7 @@ class ClassicTypeSystemContextForCS(
 
     override fun TypeSubstitutorMarker.safeSubstitute(type: KotlinTypeMarker): KotlinTypeMarker {
         require(type is KotlinType, type::errorMessage)
-        val unwrappedType = type.unwrap()
+        konst unwrappedType = type.unwrap()
         return when (this) {
             is NewTypeSubstitutor -> safeSubstitute(unwrappedType)
             is TypeSubstitutor -> safeSubstitute(unwrappedType, Variance.INVARIANT)

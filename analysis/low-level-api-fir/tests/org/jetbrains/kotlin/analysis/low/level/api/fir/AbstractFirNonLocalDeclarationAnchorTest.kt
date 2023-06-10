@@ -23,18 +23,18 @@ import org.jetbrains.kotlin.test.services.TestServices
 import org.jetbrains.kotlin.test.services.assertions
 
 abstract class AbstractFirNonLocalDeclarationAnchorTest : AbstractLowLevelApiSingleFileTest() {
-    override val configurator: AnalysisApiTestConfigurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator: AnalysisApiTestConfigurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val anchors = hashSetOf<KtDeclaration>()
+        konst anchors = hashSetOf<KtDeclaration>()
         ktFile.forEachDescendantOfType<PsiElement> {
             it.getNonLocalContainingOrThisDeclaration()?.let(anchors::add)
         }
 
-        val text = buildString {
+        konst text = buildString {
             ktFile.accept(object : PsiElementVisitor() {
                 override fun visitElement(element: PsiElement) {
-                    val isAnchor = element in anchors
+                    konst isAnchor = element in anchors
                     if (isAnchor) {
                         append("/* anchor --> */")
                     }

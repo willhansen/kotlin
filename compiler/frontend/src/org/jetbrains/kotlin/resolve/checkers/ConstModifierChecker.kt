@@ -29,9 +29,9 @@ object ConstModifierChecker : DeclarationChecker {
     override fun check(declaration: KtDeclaration, descriptor: DeclarationDescriptor, context: DeclarationCheckerContext) {
         if (descriptor !is VariableDescriptor || !declaration.hasModifier(KtTokens.CONST_KEYWORD)) return
 
-        val constModifierPsiElement = declaration.modifierList!!.getModifier(KtTokens.CONST_KEYWORD)!!
+        konst constModifierPsiElement = declaration.modifierList!!.getModifier(KtTokens.CONST_KEYWORD)!!
 
-        val diagnostic = checkCanBeConst(declaration, constModifierPsiElement, descriptor).diagnostic
+        konst diagnostic = checkCanBeConst(declaration, constModifierPsiElement, descriptor).diagnostic
         if (diagnostic != null) {
             context.trace.report(diagnostic)
         }
@@ -49,7 +49,7 @@ object ConstModifierChecker : DeclarationChecker {
             return Errors.WRONG_MODIFIER_TARGET.on(constModifierPsiElement, KtTokens.CONST_KEYWORD, "vars").nonApplicable()
         }
 
-        val containingDeclaration = descriptor.containingDeclaration
+        konst containingDeclaration = descriptor.containingDeclaration
         if (containingDeclaration is ClassDescriptor && containingDeclaration.kind != ClassKind.OBJECT) {
             return Errors.CONST_VAL_NOT_TOP_LEVEL_OR_OBJECT.on(constModifierPsiElement).nonApplicable()
         }
@@ -60,7 +60,7 @@ object ConstModifierChecker : DeclarationChecker {
             return Errors.CONST_VAL_WITH_DELEGATE.on(declaration.delegate!!).nonApplicable()
         }
 
-        val getter = declaration.getter
+        konst getter = declaration.getter
         if (!descriptor.getter!!.isDefault && getter != null) {
             return Errors.CONST_VAL_WITH_GETTER.on(getter).nonApplicable()
         }
@@ -84,7 +84,7 @@ object ConstModifierChecker : DeclarationChecker {
     }
 }
 
-sealed class ConstApplicability(val canBeConst: Boolean, val diagnostic: Diagnostic?) {
+sealed class ConstApplicability(konst canBeConst: Boolean, konst diagnostic: Diagnostic?) {
     object Applicable : ConstApplicability(true, null)
     class NonApplicable(diagnostic: Diagnostic? = null) : ConstApplicability(false, diagnostic)
 }

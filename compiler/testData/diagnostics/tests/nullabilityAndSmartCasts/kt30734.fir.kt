@@ -6,7 +6,7 @@ class Sample {
 }
 
 fun test(ls: Sample?) {
-    val filter: () -> Boolean = if (ls == null) {
+    konst filter: () -> Boolean = if (ls == null) {
         { false }
     } else {
         { ls.foo() } // OK in OI, error in NI

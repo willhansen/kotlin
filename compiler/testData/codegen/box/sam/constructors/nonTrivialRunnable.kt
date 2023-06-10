@@ -7,7 +7,7 @@ fun getFun(): () -> Unit {
 }
 
 fun box(): String {
-    val r = Runnable(getFun())
+    konst r = Runnable(getFun())
     r.run()
     return result
 }

@@ -4,6 +4,6 @@ fun fib(n: Int) : Int {
     return fib(n - 1) + fib(n - 2)
 }
 
-const val n2 = <!EVALUATED: `1`!>fib(2)<!>
-const val n10 = <!EVALUATED: `55`!>fib(10)<!>
-const val n18 = <!EVALUATED: `2584`!>fib(18)<!>
+const konst n2 = <!EVALUATED: `1`!>fib(2)<!>
+const konst n10 = <!EVALUATED: `55`!>fib(10)<!>
+const konst n18 = <!EVALUATED: `2584`!>fib(18)<!>

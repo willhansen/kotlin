@@ -8,7 +8,7 @@ package org.jetbrains.kotlin.generators.tests.analysis.api
 import org.jetbrains.kotlin.generators.TestGroup
 import org.jetbrains.kotlin.generators.TestGroupSuite
 import org.jetbrains.kotlin.generators.util.TestGeneratorUtil
-import org.jetbrains.kotlin.light.classes.symbol.base.AbstractSymbolLightClassesEquivalentTest
+import org.jetbrains.kotlin.light.classes.symbol.base.AbstractSymbolLightClassesEquikonstentTest
 import org.jetbrains.kotlin.light.classes.symbol.decompiled.*
 import org.jetbrains.kotlin.light.classes.symbol.source.*
 
@@ -40,8 +40,8 @@ internal fun TestGroupSuite.generateSymbolLightClassesTests() {
         }
 
         run {
-            testClass<AbstractSymbolLightClassesEquivalentTest> {
-                model("equivalentTo", pattern = TestGeneratorUtil.KT)
+            testClass<AbstractSymbolLightClassesEquikonstentTest> {
+                model("equikonstentTo", pattern = TestGeneratorUtil.KT)
             }
         }
 
@@ -64,7 +64,7 @@ private fun TestGroupSuite.generateCompilerTestDataBasedLightClassesTests() {
 }
 
 private fun TestGroup.lightClassesByPsiTests() {
-    val modelInit: TestGroup.TestClass.() -> Unit = {
+    konst modelInit: TestGroup.TestClass.() -> Unit = {
         model("asJava/lightClasses/lightClassByPsi", pattern = TestGeneratorUtil.KT_OR_KTS)
     }
 
@@ -79,14 +79,14 @@ private fun TestGroup.lightClassesByPsiTests() {
 }
 
 private fun TestGroup.lightClassesByFqNameTests() {
-    val sourceModelInit: TestGroup.TestClass.() -> Unit = {
+    konst sourceModelInit: TestGroup.TestClass.() -> Unit = {
         model(
             "asJava/lightClasses/lightClassByFqName",
             pattern = TestGeneratorUtil.KT_WITHOUT_DOTS_IN_NAME
         )
     }
 
-    val libraryModelInit: TestGroup.TestClass.() -> Unit = {
+    konst libraryModelInit: TestGroup.TestClass.() -> Unit = {
         model(
             "asJava/lightClasses/lightClassByFqName",
             excludeDirs = listOf("compilationErrors"),

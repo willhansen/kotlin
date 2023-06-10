@@ -6,8 +6,8 @@ class Result<T> {
 }
 
 class Tuple12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
-    val _1: T1, val _2: T2, val _3: T3, val _4: T4, val _5: T5, val _6: T6,
-    val _7: T7, val _8: T8, val _9: T9, val _10: T10, val _11: T11, val _12: T12, val _13: T13
+    konst _1: T1, konst _2: T2, konst _3: T3, konst _4: T4, konst _5: T5, konst _6: T6,
+    konst _7: T7, konst _8: T8, konst _9: T9, konst _10: T10, konst _11: T11, konst _12: T12, konst _13: T13
 )
 
 fun <T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> rules12(res: Result<Any>):

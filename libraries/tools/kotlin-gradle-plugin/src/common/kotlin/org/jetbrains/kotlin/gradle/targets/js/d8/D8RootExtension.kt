@@ -14,12 +14,12 @@ import org.jetbrains.kotlin.gradle.tasks.internal.CleanableStore
 import java.io.Serializable
 import java.net.URL
 
-open class D8RootExtension(@Transient val rootProject: Project) : ConfigurationPhaseAware<D8Env>(), Serializable {
+open class D8RootExtension(@Transient konst rootProject: Project) : ConfigurationPhaseAware<D8Env>(), Serializable {
     init {
         check(rootProject.rootProject == rootProject)
     }
 
-    private val gradleHome = rootProject.gradle.gradleUserHomeDir.also {
+    private konst gradleHome = rootProject.gradle.gradleUserHomeDir.also {
         rootProject.logger.kotlinInfo("Storing cached files in $it")
     }
 
@@ -44,15 +44,15 @@ open class D8RootExtension(@Transient val rootProject: Project) : ConfigurationP
     var version by Property("11.5.99")
     var edition by Property("rel") // rel or dbg
 
-    val setupTaskProvider: TaskProvider<out Copy>
+    konst setupTaskProvider: TaskProvider<out Copy>
         get() = rootProject.tasks.withType(Copy::class.java).named(D8RootPlugin.INSTALL_TASK_NAME)
 
     override fun finalizeConfiguration(): D8Env {
-        val requiredVersionName = "v8-${D8Platform.platform}-$edition-$version"
-        val requiredZipName = "$requiredVersionName.zip"
-        val cleanableStore = CleanableStore[installationPath.absolutePath]
-        val targetPath = cleanableStore[requiredVersionName].use()
-        val isWindows = D8Platform.name == D8Platform.WIN
+        konst requiredVersionName = "v8-${D8Platform.platform}-$edition-$version"
+        konst requiredZipName = "$requiredVersionName.zip"
+        konst cleanableStore = CleanableStore[installationPath.absolutePath]
+        konst targetPath = cleanableStore[requiredVersionName].use()
+        konst isWindows = D8Platform.name == D8Platform.WIN
 
         return D8Env(
             cleanableStore = cleanableStore,
@@ -66,6 +66,6 @@ open class D8RootExtension(@Transient val rootProject: Project) : ConfigurationP
     }
 
     companion object {
-        const val EXTENSION_NAME: String = "kotlinD8"
+        const konst EXTENSION_NAME: String = "kotlinD8"
     }
 }

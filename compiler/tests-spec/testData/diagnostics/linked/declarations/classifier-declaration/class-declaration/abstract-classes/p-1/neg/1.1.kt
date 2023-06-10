@@ -16,8 +16,8 @@
 abstract class Base() {
     <!ABSTRACT_FUNCTION_WITH_BODY!>abstract<!> fun foo() = {}
     <!NON_ABSTRACT_FUNCTION_WITH_NO_BODY!>fun boo() : Unit<!>
-    abstract val a = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>""<!>
-    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>val b<!>
+    abstract konst a = <!ABSTRACT_PROPERTY_WITH_INITIALIZER!>""<!>
+    <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>konst b<!>
     <!MUST_BE_INITIALIZED_OR_BE_ABSTRACT!>var d<!>
 }
 
@@ -26,11 +26,11 @@ class Impl : Base() {
         TODO("not implemented")
     }
 
-    override val a: String
+    override konst a: String
         get() = TODO("not implemented")
 
 }
 
 fun case1() {
-    val impl = Impl()
+    konst impl = Impl()
 }

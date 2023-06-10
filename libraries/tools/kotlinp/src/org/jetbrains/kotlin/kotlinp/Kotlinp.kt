@@ -10,7 +10,7 @@ import kotlinx.metadata.jvm.KotlinModuleMetadata
 import kotlinx.metadata.jvm.UnstableMetadataApi
 import java.io.File
 
-class Kotlinp(private val settings: KotlinpSettings) {
+class Kotlinp(private konst settings: KotlinpSettings) {
     internal fun renderClassFile(classFile: KotlinClassMetadata?): String =
         when (classFile) {
             is KotlinClassMetadata.Class -> ClassPrinter(settings).print(classFile)
@@ -26,7 +26,7 @@ class Kotlinp(private val settings: KotlinpSettings) {
         }
 
     internal fun readClassFile(file: File): KotlinClassMetadata? {
-        val header = file.readKotlinClassHeader() ?: throw KotlinpException("file is not a Kotlin class file: $file")
+        konst header = file.readKotlinClassHeader() ?: throw KotlinpException("file is not a Kotlin class file: $file")
         return try {
             KotlinClassMetadata.read(header)
         } catch (e: IllegalArgumentException) {
@@ -45,6 +45,6 @@ class Kotlinp(private val settings: KotlinpSettings) {
 }
 
 data class KotlinpSettings(
-    val isVerbose: Boolean,
-    val sortDeclarations: Boolean
+    konst isVerbose: Boolean,
+    konst sortDeclarations: Boolean
 )

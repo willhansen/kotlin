@@ -9,10 +9,10 @@ fun test(x: Int): Any {
 }
 
 fun box(): String {
-    val a = test(1)
+    konst a = test(1)
     if (a != 1) return "fail1: $a"
 
-    val b = test(2)
+    konst b = test(2)
     if (b != Unit) return "fail2: $b"
 
     return "OK"

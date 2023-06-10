@@ -12,13 +12,13 @@ import generators.unicode.ranges.RangesWritingStrategy
 import generators.unicode.writeIntArray
 import java.io.FileWriter
 
-internal class LowercaseMappingsWriter(private val strategy: RangesWritingStrategy) : MappingsWriter {
+internal class LowercaseMappingsWriter(private konst strategy: RangesWritingStrategy) : MappingsWriter {
     override fun write(mappings: List<MappingPattern>, writer: FileWriter) {
         @Suppress("UNCHECKED_CAST")
-        val distanceMappings = mappings as List<EqualDistanceMappingPattern>
+        konst distanceMappings = mappings as List<EqualDistanceMappingPattern>
 
-        val start = distanceMappings.map { it.start }
-        val length = distanceMappings.map { (it.mapping shl 12) or (it.distance shl 8) or it.length }
+        konst start = distanceMappings.map { it.start }
+        konst length = distanceMappings.map { (it.mapping shl 12) or (it.distance shl 8) or it.length }
 
         strategy.beforeWritingRanges(writer)
         writer.writeIntArray("rangeStart", start, strategy)
@@ -39,7 +39,7 @@ internal class LowercaseMappingsWriter(private val strategy: RangesWritingStrate
             if (this < 0x80) {
                 return this
             }
-            val index = binarySearchRange(rangeStart, this)
+            konst index = binarySearchRange(rangeStart, this)
             return equalDistanceMapping(this, rangeStart[index], rangeLength[index])
         }
     """.trimIndent()

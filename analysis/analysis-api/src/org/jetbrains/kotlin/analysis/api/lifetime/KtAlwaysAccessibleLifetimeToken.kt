@@ -10,16 +10,16 @@ import org.jetbrains.kotlin.analysis.providers.createProjectWideOutOfBlockModifi
 import kotlin.reflect.KClass
 
 public class KtAlwaysAccessibleLifetimeToken(project: Project) : KtLifetimeToken() {
-    private val modificationTracker = project.createProjectWideOutOfBlockModificationTracker()
-    private val onCreatedTimeStamp = modificationTracker.modificationCount
+    private konst modificationTracker = project.createProjectWideOutOfBlockModificationTracker()
+    private konst onCreatedTimeStamp = modificationTracker.modificationCount
 
     override fun isValid(): Boolean {
         return onCreatedTimeStamp == modificationTracker.modificationCount
     }
 
-    override fun getInvalidationReason(): String {
+    override fun getInkonstidationReason(): String {
         if (onCreatedTimeStamp != modificationTracker.modificationCount) return "PSI has changed since creation"
-        error("Getting invalidation reason for valid validity token")
+        error("Getting inkonstidation reason for konstid konstidity token")
     }
 
     override fun isAccessible(): Boolean {
@@ -27,14 +27,14 @@ public class KtAlwaysAccessibleLifetimeToken(project: Project) : KtLifetimeToken
     }
 
     override fun getInaccessibilityReason(): String {
-        error("Getting inaccessibility reason for validity token when it is accessible")
+        error("Getting inaccessibility reason for konstidity token when it is accessible")
     }
 
-    override val factory: KtLifetimeTokenFactory = KtAlwaysAccessibleLifetimeTokenFactory
+    override konst factory: KtLifetimeTokenFactory = KtAlwaysAccessibleLifetimeTokenFactory
 }
 
 public object KtAlwaysAccessibleLifetimeTokenFactory : KtLifetimeTokenFactory() {
-    override val identifier: KClass<out KtLifetimeToken> = KtAlwaysAccessibleLifetimeToken::class
+    override konst identifier: KClass<out KtLifetimeToken> = KtAlwaysAccessibleLifetimeToken::class
 
     override fun create(project: Project): KtLifetimeToken =
         KtAlwaysAccessibleLifetimeToken(project)

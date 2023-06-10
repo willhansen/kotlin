@@ -3,12 +3,12 @@
 // TARGET_BACKEND: JVM_IR
 import java.util.Date
 
-val unitFun = { }
-val intFun = { 42 }
-val stringParamFun = { x: String -> }
-val listFun = { l: List<String> -> l }
-val mutableListFun = fun (l: MutableList<Double>): MutableList<Int> = null!!
-val funWithIn = fun (x: Comparable<String>) {}
+konst unitFun = { }
+konst intFun = { 42 }
+konst stringParamFun = { x: String -> }
+konst listFun = { l: List<String> -> l }
+konst mutableListFun = fun (l: MutableList<Double>): MutableList<Int> = null!!
+konst funWithIn = fun (x: Comparable<String>) {}
 
-val extensionFun = fun Any.() {}
-val extensionWithArgFun = fun Long.(x: Any): Date = Date()
+konst extensionFun = fun Any.() {}
+konst extensionWithArgFun = fun Long.(x: Any): Date = Date()

@@ -1,9 +1,9 @@
 package
 
 package foo {
-    public val bar: kotlin.Int = 23
+    public konst bar: kotlin.Int = 23
 
     package foo.bar {
-        public val x: kotlin.Int = 42
+        public konst x: kotlin.Int = 42
     }
 }

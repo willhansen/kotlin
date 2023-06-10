@@ -8,7 +8,7 @@ FILE: arraySet.kt
             ^get Null(null)!!
         }
 
-        public final operator fun set(index: R|kotlin/Int|, value: R|T|): R|kotlin/Unit| {
+        public final operator fun set(index: R|kotlin/Int|, konstue: R|T|): R|kotlin/Unit| {
         }
 
     }

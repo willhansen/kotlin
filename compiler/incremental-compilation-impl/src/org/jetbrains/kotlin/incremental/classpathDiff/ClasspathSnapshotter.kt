@@ -34,7 +34,7 @@ import java.util.zip.ZipFile
 /** Computes a [ClasspathEntrySnapshot] of a classpath entry (directory or jar). */
 object ClasspathEntrySnapshotter {
 
-    private val DEFAULT_CLASS_FILTER = { unixStyleRelativePath: String, isDirectory: Boolean ->
+    private konst DEFAULT_CLASS_FILTER = { unixStyleRelativePath: String, isDirectory: Boolean ->
         !isDirectory
                 && unixStyleRelativePath.endsWith(".class", ignoreCase = true)
                 && !unixStyleRelativePath.equals("module-info.class", ignoreCase = true)
@@ -47,7 +47,7 @@ object ClasspathEntrySnapshotter {
         metrics: BuildMetricsReporter = DoNothingBuildMetricsReporter
     ): ClasspathEntrySnapshot {
         DirectoryOrJarReader.create(classpathEntry).use { directoryOrJarReader ->
-            val classes = metrics.measure(BuildTime.LOAD_CLASSES_PATHS_ONLY) {
+            konst classes = metrics.measure(BuildTime.LOAD_CLASSES_PATHS_ONLY) {
                 directoryOrJarReader.getUnixStyleRelativePaths(DEFAULT_CLASS_FILTER).map { unixStyleRelativePath ->
                     ClassFileWithContentsProvider(
                         classFile = ClassFile(classpathEntry, unixStyleRelativePath),
@@ -55,7 +55,7 @@ object ClasspathEntrySnapshotter {
                     )
                 }
             }
-            val snapshots = metrics.measure(BuildTime.SNAPSHOT_CLASSES) {
+            konst snapshots = metrics.measure(BuildTime.SNAPSHOT_CLASSES) {
                 ClassSnapshotter.snapshot(classes, granularity, metrics)
             }
             return ClasspathEntrySnapshot(
@@ -78,17 +78,17 @@ object ClassSnapshotter {
             return JvmClassName.byInternalName(unixStyleRelativePath.dropLast(".class".length))
         }
 
-        val classNameToClassFileMap: Map<JvmClassName, ClassFileWithContentsProvider> = classes.associateBy { it.classFile.getClassName() }
-        val classFileToSnapshotMap = mutableMapOf<ClassFileWithContentsProvider, ClassSnapshot>()
+        konst classNameToClassFileMap: Map<JvmClassName, ClassFileWithContentsProvider> = classes.associateBy { it.classFile.getClassName() }
+        konst classFileToSnapshotMap = mutableMapOf<ClassFileWithContentsProvider, ClassSnapshot>()
 
         fun snapshotClass(classFile: ClassFileWithContentsProvider): ClassSnapshot {
             return classFileToSnapshotMap.getOrPut(classFile) {
-                val clazz = metrics.measure(BuildTime.LOAD_CONTENTS_OF_CLASSES) {
+                konst clazz = metrics.measure(BuildTime.LOAD_CONTENTS_OF_CLASSES) {
                     classFile.loadContents()
                 }
                 // Snapshot outer class first as we need this info to determine whether a class is transitively inaccessible (see below)
-                val outerClassSnapshot = clazz.classInfo.classId.outerClassId?.let { outerClassId ->
-                    val outerClassFile = classNameToClassFileMap[JvmClassName.byClassId(outerClassId)]
+                konst outerClassSnapshot = clazz.classInfo.classId.outerClassId?.let { outerClassId ->
+                    konst outerClassFile = classNameToClassFileMap[JvmClassName.byClassId(outerClassId)]
                     // It's possible that the outer class is not found in the given classes (it could happen with faulty jars)
                     outerClassFile?.let { snapshotClass(it) }
                 }
@@ -130,11 +130,11 @@ object ClassSnapshotter {
 
     /** Computes a [KotlinClassSnapshot] of the given Kotlin class. */
     private fun snapshotKotlinClass(classFile: ClassFileWithContents, granularity: ClassSnapshotGranularity): KotlinClassSnapshot {
-        val kotlinClassInfo =
+        konst kotlinClassInfo =
             KotlinClassInfo.createFrom(classFile.classInfo.classId, classFile.classInfo.kotlinClassHeader!!, classFile.contents)
-        val classId = kotlinClassInfo.classId
-        val classAbiHash = KotlinClassInfoExternalizer.toByteArray(kotlinClassInfo).hashToLong()
-        val classMemberLevelSnapshot = kotlinClassInfo.takeIf { granularity == CLASS_MEMBER_LEVEL }
+        konst classId = kotlinClassInfo.classId
+        konst classAbiHash = KotlinClassInfoExternalizer.toByteArray(kotlinClassInfo).hashToLong()
+        konst classMemberLevelSnapshot = kotlinClassInfo.takeIf { granularity == CLASS_MEMBER_LEVEL }
 
         return when (kotlinClassInfo.classKind) {
             CLASS -> RegularKotlinClassSnapshot(
@@ -165,8 +165,8 @@ object ClassSnapshotter {
         // there are updates to Java/ASM), whereas it is acceptable if non-ABI info is not removed completely.
         // In the following, we will use the second approach as it is safer and easier.
 
-        val classNode = ClassNode()
-        val classReader = ClassReader(classFile.contents)
+        konst classNode = ClassNode()
+        konst classReader = ClassReader(classFile.contents)
 
         // Note the `parsingOptions` passed to `classReader`:
         //   - Pass SKIP_CODE as method bodies are not important
@@ -180,7 +180,7 @@ object ClassSnapshotter {
         classNode.methods.removeIf { it.access.isPrivate() }
 
         // Snapshot the class
-        val classMemberLevelSnapshot = if (granularity == CLASS_MEMBER_LEVEL) {
+        konst classMemberLevelSnapshot = if (granularity == CLASS_MEMBER_LEVEL) {
             JavaClassMemberLevelSnapshot(
                 classAbiExcludingMembers = JavaElementSnapshot(classNode.name, snapshotClassExcludingMembers(classNode)),
                 fieldsAbi = classNode.fields.map { JavaElementSnapshot(it.name, snapshotField(it)) },
@@ -189,7 +189,7 @@ object ClassSnapshotter {
         } else {
             null
         }
-        val classAbiHash = if (granularity == CLASS_MEMBER_LEVEL) {
+        konst classAbiHash = if (granularity == CLASS_MEMBER_LEVEL) {
             JavaClassMemberLevelSnapshotExternalizer.toByteArray(classMemberLevelSnapshot!!).hashToLong()
         } else {
             snapshotClass(classNode)
@@ -232,7 +232,7 @@ private sealed interface DirectoryOrJarReader : Closeable {
     }
 }
 
-private class DirectoryReader(private val directory: File) : DirectoryOrJarReader {
+private class DirectoryReader(private konst directory: File) : DirectoryOrJarReader {
 
     override fun getUnixStyleRelativePaths(filter: (unixStyleRelativePath: String, isDirectory: Boolean) -> Boolean): List<String> {
         return directory.walk()
@@ -258,7 +258,7 @@ private class JarReader(jar: File) : DirectoryOrJarReader {
     // doesn't support non-sequential access of the entries, so we would have to load and index all entries in memory to provide
     // non-sequential access, thereby increasing memory usage (KT-57757).
     // Another option is to use `java.nio.file.FileSystem` API, but it seems to be slower than the other two.
-    private val zipFile = ZipFile(jar)
+    private konst zipFile = ZipFile(jar)
 
     override fun getUnixStyleRelativePaths(filter: (unixStyleRelativePath: String, isDirectory: Boolean) -> Boolean): List<String> {
         return zipFile.entries()

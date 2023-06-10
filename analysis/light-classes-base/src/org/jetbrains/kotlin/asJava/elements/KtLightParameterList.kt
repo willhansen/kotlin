@@ -14,15 +14,15 @@ import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtFunction
 
 class KtLightParameterList(
-    private val parent: KtLightMethod,
-    private val parametersCount: Int,
+    private konst parent: KtLightMethod,
+    private konst parametersCount: Int,
     computeParameters: () -> List<PsiParameter>
 ) : KtLightElementBase(parent), PsiParameterList {
 
-    override val kotlinOrigin: KtElement?
-        get() = (parent.kotlinOrigin as? KtFunction)?.valueParameterList
+    override konst kotlinOrigin: KtElement?
+        get() = (parent.kotlinOrigin as? KtFunction)?.konstueParameterList
 
-    private val _parameters: Array<PsiParameter> by lazyPub { computeParameters().toTypedArray() }
+    private konst _parameters: Array<PsiParameter> by lazyPub { computeParameters().toTypedArray() }
     override fun getParameters() = _parameters
 
     override fun getParameterIndex(parameter: PsiParameter) = _parameters.indexOf(parameter)

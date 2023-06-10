@@ -1,4 +1,4 @@
-val globalVal = 3
+konst globalVal = 3
 
-inline val inlineGlobalVal: Int
+inline konst inlineGlobalVal: Int
     get() = 3

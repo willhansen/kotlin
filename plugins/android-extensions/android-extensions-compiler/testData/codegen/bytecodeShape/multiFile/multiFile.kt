@@ -5,8 +5,8 @@ import kotlinx.android.synthetic.main.layout.*
 import kotlinx.android.synthetic.main.layout1.*
 
 class MyActivity: Activity() {
-    val button = this.login
-    val button1 = this.loginButton
+    konst button = this.login
+    konst button1 = this.loginButton
 }
 
 // 1 public _\$_findCachedViewById

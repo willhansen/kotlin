@@ -1,7 +1,7 @@
 package bar
 
 class noAnnotations {
-    val valB = "text"
+    konst konstB = "text"
 
     fun funB() {}
 }

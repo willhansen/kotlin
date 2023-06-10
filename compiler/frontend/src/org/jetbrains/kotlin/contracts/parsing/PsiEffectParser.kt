@@ -25,7 +25,7 @@ internal interface PsiEffectParser {
 }
 
 internal abstract class AbstractPsiEffectParser(
-    val collector: ContractParsingDiagnosticsCollector,
-    val callContext: ContractCallContext,
-    val contractParserDispatcher: PsiContractParserDispatcher
+    konst collector: ContractParsingDiagnosticsCollector,
+    konst callContext: ContractCallContext,
+    konst contractParserDispatcher: PsiContractParserDispatcher
 ) : PsiEffectParser

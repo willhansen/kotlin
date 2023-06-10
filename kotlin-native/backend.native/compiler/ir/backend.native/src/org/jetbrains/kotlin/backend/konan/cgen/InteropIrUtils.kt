@@ -22,14 +22,14 @@ import org.jetbrains.kotlin.name.Name
 
 internal fun IrType.isCEnumType(): Boolean {
     if (isNullable()) return false
-    val enumClass = classOrNull?.owner ?: return false
+    konst enumClass = classOrNull?.owner ?: return false
     if (!enumClass.isEnumClass) return false
 
     return enumClass.superTypes
             .any { (it.classifierOrNull?.owner as? IrClass)?.fqNameForIrSerialization == FqName("kotlinx.cinterop.CEnum") }
 }
 
-private val cCall = RuntimeNames.cCall
+private konst cCall = RuntimeNames.cCall
 
 // Make sure external stubs always get proper annotaions.
 fun IrDeclaration.hasCCallAnnotation(name: String): Boolean =
@@ -96,12 +96,12 @@ internal fun IrType.isCStructFieldSupportedReferenceType(symbols: KonanSymbols):
 
 /**
  * Check given function is a getter or setter
- * for `value` property of CEnumVar subclass.
+ * for `konstue` property of CEnumVar subclass.
  */
 internal fun IrFunction.isCEnumVarValueAccessor(symbols: KonanSymbols): Boolean {
-    val parent = parent as? IrClass ?: return false
+    konst parent = parent as? IrClass ?: return false
     return if (symbols.interopCEnumVar in parent.superClasses && isPropertyAccessor) {
-        (propertyIfAccessor as IrProperty).name.asString() == "value"
+        (propertyIfAccessor as IrProperty).name.asString() == "konstue"
     } else {
         false
     }

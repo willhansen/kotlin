@@ -22,7 +22,7 @@ fun main() {
         assertEquals(0, `true`)
         assertEquals(0, `try`)
         assertEquals(0, `typealias`)
-        assertEquals(0, `val`)
+        assertEquals(0, `konst`)
         assertEquals(0, `var`)
         assertEquals(0, `when`)
     }
@@ -44,7 +44,7 @@ fun main() {
     assertEquals(KotlinKeywordsEnum.`true`, KotlinKeywordsEnum.`true`)
     assertEquals(KotlinKeywordsEnum.`try`, KotlinKeywordsEnum.`try`)
     assertEquals(KotlinKeywordsEnum.`typealias`, KotlinKeywordsEnum.`typealias`)
-    assertEquals(KotlinKeywordsEnum.`val`, KotlinKeywordsEnum.`val`)
+    assertEquals(KotlinKeywordsEnum.`konst`, KotlinKeywordsEnum.`konst`)
     assertEquals(KotlinKeywordsEnum.`var`, KotlinKeywordsEnum.`var`)
     assertEquals(KotlinKeywordsEnum.`when`, KotlinKeywordsEnum.`when`)
 }

@@ -35,8 +35,8 @@ class DB : BX<DB, CI>()
 class CIB : BX<CIB, CI>(), I<CIB>
 
 inline fun <TI: I<TI>, TC : BX<TC, TI>> test3(a: Any): String {
-    val s1 = (a as? TC != null).toString()[3].toString()
-    val s2 = (a as? TI != null).toString()[3].toString()
+    konst s1 = (a as? TC != null).toString()[3].toString()
+    konst s2 = (a as? TI != null).toString()[3].toString()
     return return s1 + s2
 }
 

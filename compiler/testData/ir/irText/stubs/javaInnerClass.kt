@@ -14,6 +14,6 @@ public class J {
 // FILE: javaInnerClass.kt
 
 class Test1 : J() {
-    val test = JInner()
+    konst test = JInner()
 }
 

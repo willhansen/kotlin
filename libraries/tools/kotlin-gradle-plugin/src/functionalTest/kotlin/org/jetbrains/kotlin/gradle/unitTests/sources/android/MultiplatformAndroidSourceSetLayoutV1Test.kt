@@ -49,8 +49,8 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
     fun `main source set with default settings`() {
         kotlin.androidTarget()
 
-        val kotlinAndroidMainSourceSet = kotlin.sourceSets.getByName("androidMain")
-        val androidMainSourceSet = android.sourceSets.getByName("main")
+        konst kotlinAndroidMainSourceSet = kotlin.sourceSets.getByName("androidMain")
+        konst androidMainSourceSet = android.sourceSets.getByName("main")
 
         assertTrue(
             kotlinAndroidMainSourceSet.kotlin.srcDirs.containsAll(androidMainSourceSet.java.srcDirs),
@@ -64,8 +64,8 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
     fun `test source set with default settings`() {
         kotlin.androidTarget()
 
-        val kotlinAndroidTestSourceSet = kotlin.sourceSets.getByName("androidTest")
-        val testSourceSet = android.sourceSets.getByName("test")
+        konst kotlinAndroidTestSourceSet = kotlin.sourceSets.getByName("androidTest")
+        konst testSourceSet = android.sourceSets.getByName("test")
 
         assertTrue(
             kotlinAndroidTestSourceSet.kotlin.srcDirs.containsAll(testSourceSet.java.srcDirs),
@@ -79,8 +79,8 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
     fun `androidTest source set with default settings`() {
         kotlin.androidTarget()
 
-        val kotlinAndroidAndroidTestSourceSet = kotlin.sourceSets.getByName("androidAndroidTest")
-        val androidTestSourceSet = android.sourceSets.getByName("androidTest")
+        konst kotlinAndroidAndroidTestSourceSet = kotlin.sourceSets.getByName("androidAndroidTest")
+        konst androidTestSourceSet = android.sourceSets.getByName("androidTest")
 
         assertTrue(
             project.file("src/androidTest/kotlin") !in kotlinAndroidAndroidTestSourceSet.kotlin.srcDirs,
@@ -105,11 +105,11 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
             create("paid").dimension = "pricing"
         }
         kotlin.androidTarget()
-        project.evaluate()
+        project.ekonstuate()
 
         fun assertSourceSetsExist(androidName: String, kotlinName: String) {
-            val androidSourceSet = assertNotNull(android.sourceSets.findByName(androidName), "Expected Android source set '$androidName'")
-            val kotlinSourceSet = assertNotNull(kotlin.sourceSets.findByName(kotlinName), "Expected Kotlin source set '$kotlinName'")
+            konst androidSourceSet = assertNotNull(android.sourceSets.findByName(androidName), "Expected Android source set '$androidName'")
+            konst kotlinSourceSet = assertNotNull(kotlin.sourceSets.findByName(kotlinName), "Expected Kotlin source set '$kotlinName'")
             assertSame(kotlinSourceSet, androidSourceSet.kotlinSourceSet)
         }
 
@@ -139,11 +139,11 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
             }
         )
         kotlin.androidTarget()
-        project.evaluate()
+        project.ekonstuate()
 
         kotlin.sourceSets.toSet().generatePairs()
             .forEach { (sourceSetA, sourceSetB) ->
-                val sourceDirsInBothSourceSets = sourceSetA.kotlin.srcDirs.intersect(sourceSetB.kotlin.srcDirs)
+                konst sourceDirsInBothSourceSets = sourceSetA.kotlin.srcDirs.intersect(sourceSetB.kotlin.srcDirs)
                 assertTrue(
                     sourceDirsInBothSourceSets.isEmpty(),
                     "Expected disjoint source directories in source sets. " +
@@ -153,7 +153,7 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
 
         android.sourceSets.toSet().generatePairs()
             .forEach { (sourceSetA, sourceSetB) ->
-                val sourceDirsInBothSourceSets = sourceSetA.java.srcDirs.intersect(sourceSetB.java.srcDirs)
+                konst sourceDirsInBothSourceSets = sourceSetA.java.srcDirs.intersect(sourceSetB.java.srcDirs)
                 assertTrue(
                     sourceDirsInBothSourceSets.isEmpty(),
                     "Expected disjoint source directories in source sets. " +
@@ -166,17 +166,17 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
     fun `sync includes user configuration`() {
         kotlin.androidTarget()
 
-        val kotlinAndroidMain = kotlin.sourceSets.getByName("androidMain")
-        val androidMain = android.sourceSets.getByName("main")
+        konst kotlinAndroidMain = kotlin.sourceSets.getByName("androidMain")
+        konst androidMain = android.sourceSets.getByName("main")
 
         kotlinAndroidMain.kotlin.srcDir(project.file("fromKotlin"))
         androidMain.java.srcDir(project.file("fromAndroid"))
 
-        project.evaluate()
+        project.ekonstuate()
 
         assertTrue(
             kotlinAndroidMain.kotlin.srcDirs.containsAll(setOf(project.file("fromKotlin"), project.file("fromAndroid"))),
-            "Expected custom configured source directories being present on kotlin source set after evaluation"
+            "Expected custom configured source directories being present on kotlin source set after ekonstuation"
         )
     }
 
@@ -187,22 +187,22 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
         fun AndroidSourceSet.kotlinSourceSetByConvention(): KotlinSourceSet =
             (this as HasConvention).convention.plugins["kotlin"] as KotlinSourceSet
 
-        val main = android.sourceSets.getByName("main")
+        konst main = android.sourceSets.getByName("main")
         assertSame(kotlin.sourceSets.getByName("androidMain"), main.kotlinSourceSetByConvention())
 
-        val test = android.sourceSets.getByName("test")
+        konst test = android.sourceSets.getByName("test")
         assertSame(kotlin.sourceSets.getByName("androidTest"), test.kotlinSourceSetByConvention())
 
-        val androidTest = android.sourceSets.getByName("androidTest")
+        konst androidTest = android.sourceSets.getByName("androidTest")
         assertSame(kotlin.sourceSets.getByName("androidAndroidTest"), androidTest.kotlinSourceSetByConvention())
     }
 
     @Test
     fun `AndroidSourceSet kotlin AndroidSourceDirectorySet`() {
         kotlin.androidTarget()
-        project.evaluate()
+        project.ekonstuate()
         android.libraryVariants.all { variant ->
-            val main = variant.sourceSets.first { it.name == "main" }
+            konst main = variant.sourceSets.first { it.name == "main" }
             assertEquals(
                 project.files("src/main/kotlin", "src/main/java", "src/androidMain/kotlin").toSet(),
                 main.kotlinDirectories.toSet()
@@ -210,7 +210,7 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
         }
 
         android.unitTestVariants.all { variant ->
-            val test = variant.sourceSets.first { it.name == "test" }
+            konst test = variant.sourceSets.first { it.name == "test" }
             assertEquals(
                 project.files("src/test/kotlin", "src/test/java", "src/androidTest/kotlin").toSet(),
                 test.kotlinDirectories.toSet()
@@ -218,7 +218,7 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
         }
 
         android.testVariants.all { variant ->
-            val androidTest = variant.sourceSets.first { it.name == "androidTest" }
+            konst androidTest = variant.sourceSets.first { it.name == "androidTest" }
             assertEquals(
                 project.files("src/androidTest/java", "src/androidAndroidTest/kotlin").toSet(),
                 androidTest.kotlinDirectories.toSet()
@@ -226,6 +226,6 @@ class MultiplatformAndroidSourceSetLayoutV1Test {
         }
     }
 
-    private val AndroidSourceSet.kotlinSourceSet
+    private konst AndroidSourceSet.kotlinSourceSet
         get() = project.findKotlinSourceSet(this) ?: fail("Missing KotlinSourceSet for AndroidSourceSet: $name")
 }

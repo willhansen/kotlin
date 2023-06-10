@@ -78,12 +78,12 @@ private inline fun <reified T> PsiElement.thisOrParent() = when {
 }
 
 private class KJvmReplCompleter(
-    private val ktScript: KtFile,
-    private val bindingContext: BindingContext,
-    private val resolutionFacade: KotlinResolutionFacadeForRepl,
-    private val moduleDescriptor: ModuleDescriptor,
-    private val cursor: Int,
-    private val configuration: ScriptCompilationConfiguration
+    private konst ktScript: KtFile,
+    private konst bindingContext: BindingContext,
+    private konst resolutionFacade: KotlinResolutionFacadeForRepl,
+    private konst moduleDescriptor: ModuleDescriptor,
+    private konst cursor: Int,
+    private konst configuration: ScriptCompilationConfiguration
 ) {
 
     private fun getElementAt(cursorPos: Int): PsiElement? {
@@ -94,11 +94,11 @@ private class KJvmReplCompleter(
         return element
     }
 
-    private val getDescriptorsQualified = ResultGetter { element, options ->
-        val expression = element.thisOrParent<KtQualifiedExpression>() ?: return@ResultGetter null
+    private konst getDescriptorsQualified = ResultGetter { element, options ->
+        konst expression = element.thisOrParent<KtQualifiedExpression>() ?: return@ResultGetter null
 
-        val receiverExpression = expression.receiverExpression
-        val expressionType = bindingContext.get(
+        konst receiverExpression = expression.receiverExpression
+        konst expressionType = bindingContext.get(
             BindingContext.EXPRESSION_TYPE_INFO,
             receiverExpression
         )?.type
@@ -120,25 +120,25 @@ private class KJvmReplCompleter(
         }
     }
 
-    private val getDescriptorsSimple = ResultGetter { element, options ->
-        val expression = element.thisOrParent<KtSimpleNameExpression>() ?: return@ResultGetter null
+    private konst getDescriptorsSimple = ResultGetter { element, options ->
+        konst expression = element.thisOrParent<KtSimpleNameExpression>() ?: return@ResultGetter null
 
-        val inDescriptor: DeclarationDescriptor = expression.getResolutionScope(bindingContext, resolutionFacade).ownerDescriptor
-        val prefix = element.text.substring(0, cursor - element.startOffset)
+        konst inDescriptor: DeclarationDescriptor = expression.getResolutionScope(bindingContext, resolutionFacade).ownerDescriptor
+        konst prefix = element.text.substring(0, cursor - element.startOffset)
 
-        val elementParent = element.parent
+        konst elementParent = element.parent
         if (prefix.isEmpty() && elementParent is KtBinaryExpression) {
-            val parentChildren = elementParent.children
+            konst parentChildren = elementParent.children
             if (parentChildren.size == 3 &&
                 parentChildren[1] is KtOperationReferenceExpression &&
                 parentChildren[1].text == INSERTED_STRING
             ) return@ResultGetter DescriptorsResult(targetElement = expression, addKeywords = false)
         }
 
-        val containingArgument = expression.thisOrParent<KtValueArgument>()
-        val containingCall = containingArgument?.getParentOfType<KtCallExpression>(true)
-        val containingQualifiedExpression = containingCall?.parent as? KtDotQualifiedExpression
-        val containingCallId = containingCall?.calleeExpression?.text
+        konst containingArgument = expression.thisOrParent<KtValueArgument>()
+        konst containingCall = containingArgument?.getParentOfType<KtCallExpression>(true)
+        konst containingQualifiedExpression = containingCall?.parent as? KtDotQualifiedExpression
+        konst containingCallId = containingCall?.calleeExpression?.text
         fun Name.test(checkAgainstContainingCall: Boolean): Boolean {
             if (isSpecial) return false
             if (options.nameFilter(identifier, prefix)) return true
@@ -151,14 +151,14 @@ private class KJvmReplCompleter(
             descriptors.apply {
                 fun addParameters(descriptor: DeclarationDescriptor) {
                     if (containingCallId == descriptor.name.identifier) {
-                        val params = when (descriptor) {
-                            is CallableDescriptor -> descriptor.valueParameters
-                            is ClassDescriptor -> descriptor.constructors.flatMap { it.valueParameters }
+                        konst params = when (descriptor) {
+                            is CallableDescriptor -> descriptor.konstueParameters
+                            is ClassDescriptor -> descriptor.constructors.flatMap { it.konstueParameters }
                             else -> emptyList()
                         }
-                        val valueParams = params.filter { it.name.test(false) }
-                        addAll(valueParams)
-                        containingCallParameters.addAll(valueParams)
+                        konst konstueParams = params.filter { it.name.test(false) }
+                        addAll(konstueParams)
+                        containingCallParameters.addAll(konstueParams)
                     }
                 }
 
@@ -178,7 +178,7 @@ private class KJvmReplCompleter(
                 }
 
                 if (containingQualifiedExpression != null) {
-                    val receiverExpression = containingQualifiedExpression.receiverExpression
+                    konst receiverExpression = containingQualifiedExpression.receiverExpression
                     getVariantsHelper { true }
                         .getReferenceVariants(
                             receiverExpression,
@@ -195,27 +195,27 @@ private class KJvmReplCompleter(
         }
     }
 
-    private val getDescriptorsString = ResultGetter { element, _ ->
+    private konst getDescriptorsString = ResultGetter { element, _ ->
         if (element !is KtStringTemplateExpression) return@ResultGetter null
 
-        val stringVal = element.entries.joinToString("") {
-            val t = it.text
+        konst stringVal = element.entries.joinToString("") {
+            konst t = it.text
             if (it.startOffset <= cursor && cursor <= it.endOffset) {
-                val s = cursor - it.startOffset
-                val e = s + INSERTED_STRING.length
+                konst s = cursor - it.startOffset
+                konst e = s + INSERTED_STRING.length
                 t.substring(0, s) + t.substring(e)
             } else t
         }
 
-        val separatorIndex = stringVal.lastIndexOfAny(charArrayOf('/', '\\'))
-        val dir = if (separatorIndex != -1) {
+        konst separatorIndex = stringVal.lastIndexOfAny(charArrayOf('/', '\\'))
+        konst dir = if (separatorIndex != -1) {
             stringVal.substring(0, separatorIndex + 1)
         } else {
             "."
         }
-        val namePrefix = stringVal.substring(separatorIndex + 1)
+        konst namePrefix = stringVal.substring(separatorIndex + 1)
 
-        val file = File(dir)
+        konst file = File(dir)
         DescriptorsResult(targetElement = element).also { result ->
             result.variants = sequence {
                 file.listFiles { p, f -> p == file && f.startsWith(namePrefix, true) }?.forEach {
@@ -225,8 +225,8 @@ private class KJvmReplCompleter(
         }
     }
 
-    private val getDescriptorsDefault = ResultGetter { element, _ ->
-        val resolutionScope = bindingContext.get(
+    private konst getDescriptorsDefault = ResultGetter { element, _ ->
+        konst resolutionScope = bindingContext.get(
             BindingContext.LEXICAL_SCOPE,
             element as KtExpression?
         )
@@ -249,11 +249,11 @@ private class KJvmReplCompleter(
         result.variants?.let { return it }
 
         with(result) {
-            val prefixEnd = cursor - targetElement.startOffset
+            konst prefixEnd = cursor - targetElement.startOffset
             var prefix = targetElement.text.substring(0, prefixEnd)
 
-            val cursorWithinElement = cursor - element.startOffset
-            val dotIndex = prefix.lastIndexOf('.', cursorWithinElement)
+            konst cursorWithinElement = cursor - element.startOffset
+            konst dotIndex = prefix.lastIndexOf('.', cursorWithinElement)
 
             prefix = if (dotIndex >= 0) {
                 prefix.substring(dotIndex + 1, cursorWithinElement)
@@ -264,7 +264,7 @@ private class KJvmReplCompleter(
             return sequence {
                 descriptors
                     .map {
-                        val presentation =
+                        konst presentation =
                             getPresentation(
                                 it, result.containingCallParameters
                             )
@@ -274,21 +274,21 @@ private class KJvmReplCompleter(
                         if (sortNeeded) it.sortedBy { descTriple -> descTriple.third } else it
                     }
                     .forEach { resultTriple ->
-                        val descriptor = resultTriple.first
-                        val (rawName, presentableText, tailText, completionText) = resultTriple.second
+                        konst descriptor = resultTriple.first
+                        konst (rawName, presentableText, tailText, completionText) = resultTriple.second
                         if (options.nameFilter(rawName, prefix)) {
-                            val fullName: String =
+                            konst fullName: String =
                                 formatName(
                                     presentableText
                                 )
-                            val deprecationLevel = descriptor.annotations
+                            konst deprecationLevel = descriptor.annotations
                                 .findAnnotation(FqName("kotlin.Deprecated"))
                                 ?.let { annotationDescriptor ->
-                                    val valuePair = annotationDescriptor.argumentValue("level")?.value as? Pair<*, *>
-                                    val valueClass = (valuePair?.first as? ClassId)?.takeIf { DeprecationLevel::class.classId == it }
-                                    val valueName = (valuePair?.second as? Name)?.identifier
-                                    if (valueClass == null || valueName == null) return@let DeprecationLevel.WARNING
-                                    DeprecationLevel.valueOf(valueName)
+                                    konst konstuePair = annotationDescriptor.argumentValue("level")?.konstue as? Pair<*, *>
+                                    konst konstueClass = (konstuePair?.first as? ClassId)?.takeIf { DeprecationLevel::class.classId == it }
+                                    konst konstueName = (konstuePair?.second as? Name)?.identifier
+                                    if (konstueClass == null || konstueName == null) return@let DeprecationLevel.WARNING
+                                    DeprecationLevel.konstueOf(konstueName)
                                 }
                             yield(
                                 SourceCodeCompletionVariant(
@@ -323,22 +323,22 @@ private class KJvmReplCompleter(
     }
 
     fun getCompletion(): Sequence<SourceCodeCompletionVariant> {
-        val filterOutShadowedDescriptors = configuration[ScriptCompilationConfiguration.completion.filterOutShadowedDescriptors]!!
-        val nameFilter = configuration[ScriptCompilationConfiguration.completion.nameFilter]!!
-        val options = DescriptorsOptions(
+        konst filterOutShadowedDescriptors = configuration[ScriptCompilationConfiguration.completion.filterOutShadowedDescriptors]!!
+        konst nameFilter = configuration[ScriptCompilationConfiguration.completion.nameFilter]!!
+        konst options = DescriptorsOptions(
             nameFilter, filterOutShadowedDescriptors
         )
 
-        val element = getElementAt(cursor) ?: return emptySequence()
+        konst element = getElementAt(cursor) ?: return emptySequence()
 
-        val descriptorsGetters = listOf(
+        konst descriptorsGetters = listOf(
             getDescriptorsSimple,
             getDescriptorsString,
             getDescriptorsQualified,
             getDescriptorsDefault,
         )
 
-        val result = descriptorsGetters.firstNotNullOfOrNull { it.get(element, options) }
+        konst result = descriptorsGetters.firstNotNullOfOrNull { it.get(element, options) }
         return renderResult(element, options, result)
     }
 
@@ -354,21 +354,21 @@ private class KJvmReplCompleter(
     }
 
     private class DescriptorsResult(
-        val descriptors: MutableList<DeclarationDescriptor> = mutableListOf(),
+        konst descriptors: MutableList<DeclarationDescriptor> = mutableListOf(),
         var variants: Sequence<SourceCodeCompletionVariant>? = null,
         var sortNeeded: Boolean = true,
         var targetElement: PsiElement,
-        val containingCallParameters: MutableList<ValueParameterDescriptor> = mutableListOf(),
-        val addKeywords: Boolean = true,
+        konst containingCallParameters: MutableList<ValueParameterDescriptor> = mutableListOf(),
+        konst addKeywords: Boolean = true,
     )
 
     private class DescriptorsOptions(
-        val nameFilter: (String, String) -> Boolean,
-        val filterOutShadowedDescriptors: Boolean,
+        konst nameFilter: (String, String) -> Boolean,
+        konst filterOutShadowedDescriptors: Boolean,
     )
 
     private class VisibilityFilter(
-        private val inDescriptor: DeclarationDescriptor
+        private konst inDescriptor: DeclarationDescriptor
     ) : (DeclarationDescriptor) -> Boolean {
         override fun invoke(descriptor: DeclarationDescriptor): Boolean {
             if (descriptor is TypeParameterDescriptor) return isTypeParameterVisible(descriptor)
@@ -390,7 +390,7 @@ private class KJvmReplCompleter(
         }
 
         private fun isTypeParameterVisible(typeParameter: TypeParameterDescriptor): Boolean {
-            val owner = typeParameter.containingDeclaration
+            konst owner = typeParameter.containingDeclaration
             var parent: DeclarationDescriptor? = inDescriptor
             while (parent != null) {
                 if (parent == owner) return true
@@ -402,15 +402,15 @@ private class KJvmReplCompleter(
     }
 
     companion object {
-        const val INSERTED_STRING = "ABCDEF"
-        private const val NUMBER_OF_CHAR_IN_COMPLETION_NAME = 40
+        const konst INSERTED_STRING = "ABCDEF"
+        private const konst NUMBER_OF_CHAR_IN_COMPLETION_NAME = 40
 
         private fun keywordsCompletionVariants(
             keywords: TokenSet,
             prefix: String
         ) = sequence {
             keywords.types.forEach {
-                val token = (it as KtKeywordToken).value
+                konst token = (it as KtKeywordToken).konstue
                 if (token.startsWith(prefix)) yield(
                     SourceCodeCompletionVariant(
                         token,
@@ -422,7 +422,7 @@ private class KJvmReplCompleter(
             }
         }
 
-        private val RENDERER =
+        private konst RENDERER =
             IdeDescriptorRenderersScripting.SOURCE_CODE.withOptions {
                 this.classifierNamePolicy =
                     ClassifierNamePolicy.SHORT
@@ -458,35 +458,35 @@ private class KJvmReplCompleter(
         }
 
         data class DescriptorPresentation(
-            val rawName: String,
-            val presentableText: String,
-            val tailText: String,
-            val completionText: String
+            konst rawName: String,
+            konst presentableText: String,
+            konst tailText: String,
+            konst completionText: String
         )
 
         fun getPresentation(
             descriptor: DeclarationDescriptor,
             callParameters: Collection<ValueParameterDescriptor>
         ): DescriptorPresentation {
-            val rawDescriptorName = descriptor.name.asString()
-            val descriptorName = rawDescriptorName.quoteIfNeeded()
+            konst rawDescriptorName = descriptor.name.asString()
+            konst descriptorName = rawDescriptorName.quoteIfNeeded()
             var presentableText = descriptorName
             var typeText = ""
             var tailText = ""
             var completionText = ""
             if (descriptor is FunctionDescriptor) {
-                val returnType = descriptor.returnType
+                konst returnType = descriptor.returnType
                 typeText =
                     if (returnType != null) RENDERER.renderType(returnType) else ""
                 presentableText += RENDERER.renderFunctionParameters(
                     descriptor
                 )
-                val parameters = descriptor.valueParameters
+                konst parameters = descriptor.konstueParameters
                 if (parameters.size == 1 && parameters.first().type.isFunctionType)
                     completionText = "$descriptorName { "
 
-                val extensionFunction = descriptor.extensionReceiverParameter != null
-                val containingDeclaration = descriptor.containingDeclaration
+                konst extensionFunction = descriptor.extensionReceiverParameter != null
+                konst containingDeclaration = descriptor.containingDeclaration
                 if (extensionFunction) {
                     tailText += " for " + RENDERER.renderType(
                         descriptor.extensionReceiverParameter!!.type
@@ -494,7 +494,7 @@ private class KJvmReplCompleter(
                     tailText += " in " + DescriptorUtils.getFqName(containingDeclaration)
                 }
             } else if (descriptor is VariableDescriptor) {
-                val outType =
+                konst outType =
                     descriptor.type
                 typeText = RENDERER.renderType(outType)
                 if (
@@ -504,7 +504,7 @@ private class KJvmReplCompleter(
                     completionText = "$rawDescriptorName = "
                 }
             } else if (descriptor is ClassDescriptor) {
-                val declaredIn = descriptor.containingDeclaration
+                konst declaredIn = descriptor.containingDeclaration
                 tailText = " (" + DescriptorUtils.getFqName(declaredIn) + ")"
             } else {
                 typeText = RENDERER.render(descriptor)

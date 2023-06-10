@@ -3,11 +3,11 @@
 // FILE: Test.kt
 
 inline fun <R, T> foo(x : R, y : R, block : (R) -> T) : T {
-    val a = x is Number
-    val b = x is Object
+    konst a = x is Number
+    konst b = x is Object
 
-    val a1 = x as Number
-    val b1 = x as Object
+    konst a1 = x as Number
+    konst b1 = x as Object
 
     if (a && b) {
         return block(x)
@@ -21,14 +21,14 @@ fun bar() {
 }
 
 // @TestKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)
 // 2 INSTANCEOF
 // 1 CHECKCAST
 
 // FILE: Inline.kt
 
-inline class InlinedInt(val x: Int)
+inline class InlinedInt(konst x: Int)
 
 // FILE: TestInlined.kt
 
@@ -37,7 +37,7 @@ fun baz() {
 }
 
 // @TestInlinedKt.class:
-// 0 valueOf
+// 0 konstueOf
 // 0 Value\s\(\)
 // 0 INSTANCEOF
 // 0 CHECKCAST

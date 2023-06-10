@@ -43,8 +43,8 @@ import org.junit.jupiter.api.parallel.ExecutionMode
 @Execution(ExecutionMode.SAME_THREAD)
 abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingleFileTest() {
     override fun doTestByFileStructure(ktFile: KtFile, moduleStructure: TestModuleStructure, testServices: TestServices) {
-        val resultBuilder = StringBuilder()
-        val renderer = FirRenderer(
+        konst resultBuilder = StringBuilder()
+        konst renderer = FirRenderer(
             builder = resultBuilder,
             declarationRenderer = FirDeclarationRendererWithAttributes(),
             resolvePhaseRenderer = FirResolvePhaseRenderer(),
@@ -54,9 +54,9 @@ abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingle
 
         resolveWithClearCaches(ktFile) { firResolveSession ->
             check(firResolveSession.isSourceSession)
-            val resolver = if (Directives.RESOLVE_FILE_ANNOTATIONS in moduleStructure.allDirectives) {
-                val annotationContainer = firResolveSession.getOrBuildFirFile(ktFile).annotationsContainer
-                val session = annotationContainer.moduleData.session as LLFirResolvableModuleSession
+            konst resolver = if (Directives.RESOLVE_FILE_ANNOTATIONS in moduleStructure.allDirectives) {
+                konst annotationContainer = firResolveSession.getOrBuildFirFile(ktFile).annotationsContainer
+                konst session = annotationContainer.moduleData.session as LLFirResolvableModuleSession
                 fun(phase: FirResolvePhase) {
                     session.moduleComponents.firModuleLazyDeclarationResolver.lazyResolve(
                         annotationContainer,
@@ -65,19 +65,19 @@ abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingle
                     )
                 }
             } else {
-                val ktDeclaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
-                val declarationSymbol = ktDeclaration.resolveToFirSymbol(firResolveSession)
-                val firDeclaration = chooseMemberDeclarationIfNeeded(declarationSymbol, moduleStructure)
+                konst ktDeclaration = testServices.expressionMarkerProvider.getElementOfTypeAtCaret<KtDeclaration>(ktFile)
+                konst declarationSymbol = ktDeclaration.resolveToFirSymbol(firResolveSession)
+                konst firDeclaration = chooseMemberDeclarationIfNeeded(declarationSymbol, moduleStructure)
                 fun(phase: FirResolvePhase) {
                     firDeclaration.lazyResolveToPhase(phase)
                 }
             }
 
-            for (currentPhase in FirResolvePhase.values()) {
+            for (currentPhase in FirResolvePhase.konstues()) {
                 if (currentPhase == FirResolvePhase.SEALED_CLASS_INHERITORS) continue
                 resolver(currentPhase)
 
-                val firFile = firResolveSession.getOrBuildFirFile(ktFile)
+                konst firFile = firResolveSession.getOrBuildFirFile(ktFile)
                 if (resultBuilder.isNotEmpty()) {
                     resultBuilder.appendLine()
                 }
@@ -89,7 +89,7 @@ abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingle
 
         resolveWithClearCaches(ktFile) { llSession ->
             check(llSession.isSourceSession)
-            val firFile = llSession.getOrBuildFirFile(ktFile)
+            konst firFile = llSession.getOrBuildFirFile(ktFile)
             firFile.lazyResolveToPhase(FirResolvePhase.BODY_RESOLVE)
             if (resultBuilder.isNotEmpty()) {
                 resultBuilder.appendLine()
@@ -103,15 +103,15 @@ abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingle
     }
 
     private fun chooseMemberDeclarationIfNeeded(symbol: FirBasedSymbol<*>, moduleStructure: TestModuleStructure): FirBasedSymbol<*> {
-        val directives = moduleStructure.allDirectives
-        val memberClassFilters = listOfNotNull(
+        konst directives = moduleStructure.allDirectives
+        konst memberClassFilters = listOfNotNull(
             directives.singleOrZeroValue(Directives.MEMBER_CLASS_FILTER),
             directives.singleOrZeroValue(Directives.MEMBER_NAME_FILTER),
         ).ifEmpty { return symbol }
 
-        val classSymbol = symbol as FirClassSymbol
-        val declarations = classSymbol.declarationSymbols
-        val filteredSymbols = declarations.filter { declaration -> memberClassFilters.all { it.invoke(declaration) } }
+        konst classSymbol = symbol as FirClassSymbol
+        konst declarations = classSymbol.declarationSymbols
+        konst filteredSymbols = declarations.filter { declaration -> memberClassFilters.all { it.invoke(declaration) } }
         return when (filteredSymbols.size) {
             0 -> error("Empty result for:${declarations.joinToString("\n")}")
             1 -> filteredSymbols.single()
@@ -131,27 +131,27 @@ abstract class AbstractFirLazyDeclarationResolveTest : AbstractLowLevelApiSingle
     }
 
     private object Directives : SimpleDirectivesContainer() {
-        val MEMBER_CLASS_FILTER: ValueDirective<(FirBasedSymbol<*>) -> Boolean> by valueDirective("Choose member declaration by a declaration class") { value ->
-            val clazz = Class.forName(value)
+        konst MEMBER_CLASS_FILTER: ValueDirective<(FirBasedSymbol<*>) -> Boolean> by konstueDirective("Choose member declaration by a declaration class") { konstue ->
+            konst clazz = Class.forName(konstue)
             ({ symbol: FirBasedSymbol<*> ->
                 clazz.isInstance(symbol)
             })
         }
 
-        val MEMBER_NAME_FILTER: ValueDirective<(FirBasedSymbol<*>) -> Boolean> by valueDirective("Choose member declaration by a declaration name") { value ->
+        konst MEMBER_NAME_FILTER: ValueDirective<(FirBasedSymbol<*>) -> Boolean> by konstueDirective("Choose member declaration by a declaration name") { konstue ->
             { symbol: FirBasedSymbol<*> ->
-                symbol.name() == value
+                symbol.name() == konstue
             }
         }
 
-        val RESOLVE_FILE_ANNOTATIONS by directive("Resolve file annotations instead of declaration at caret")
+        konst RESOLVE_FILE_ANNOTATIONS by directive("Resolve file annotations instead of declaration at caret")
     }
 }
 
 abstract class AbstractFirSourceLazyDeclarationResolveTest : AbstractFirLazyDeclarationResolveTest() {
-    override val configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
+    override konst configurator = AnalysisApiFirSourceTestConfigurator(analyseInDependentSession = false)
 }
 
 abstract class AbstractFirOutOfContentRootLazyDeclarationResolveTest : AbstractFirLazyDeclarationResolveTest() {
-    override val configurator = AnalysisApiFirOutOfContentRootTestConfigurator
+    override konst configurator = AnalysisApiFirOutOfContentRootTestConfigurator
 }

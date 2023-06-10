@@ -34,22 +34,22 @@ data class Statistics(
     }
 }
 
-val Statistics.total: Int
+konst Statistics.total: Int
     get() = passed + failed + error + skipped
 
 class TestFailedException(msg:String) : RuntimeException(msg)
 
 
-data class KonanTestGroupReport(@Expose val name: String, val suites: List<KonanTestSuiteReport>)
+data class KonanTestGroupReport(@Expose konst name: String, konst suites: List<KonanTestSuiteReport>)
 
-data class KonanTestSuiteReport(@Expose val name: String, val tests: List<KonanTestCaseReport>)
+data class KonanTestSuiteReport(@Expose konst name: String, konst tests: List<KonanTestCaseReport>)
 
-data class KonanTestCaseReport(@Expose val name: String, @Expose val status: TestStatus, @Expose val comment: String? = null)
+data class KonanTestCaseReport(@Expose konst name: String, @Expose konst status: TestStatus, @Expose konst comment: String? = null)
 
-class KonanTestSuiteReportEnvironment(val name: String, val project: Project, val statistics: Statistics) {
-    private val tc = if ((System.getenv("TEAMCITY_BUILD_PROPERTIES_FILE") != null)) TeamCityTestPrinter(project) else null
+class KonanTestSuiteReportEnvironment(konst name: String, konst project: Project, konst statistics: Statistics) {
+    private konst tc = if ((System.getenv("TEAMCITY_BUILD_PROPERTIES_FILE") != null)) TeamCityTestPrinter(project) else null
 
-    val tests = mutableListOf<KonanTestCaseReport>()
+    konst tests = mutableListOf<KonanTestCaseReport>()
 
     fun executeTest(testName: String, action:() -> Unit) {
         var test: KonanTestCaseReport?
@@ -105,11 +105,11 @@ class KonanTestSuiteReportEnvironment(val name: String, val project: Project, va
     }
 }
 
-class KonanTestGroupReportEnvironment(val project:Project) {
-    val statistics = Statistics()
-    val suiteReports = mutableListOf<KonanTestSuiteReport>()
+class KonanTestGroupReportEnvironment(konst project:Project) {
+    konst statistics = Statistics()
+    konst suiteReports = mutableListOf<KonanTestSuiteReport>()
     fun suite(suiteName:String, action:(KonanTestSuiteReportEnvironment)->Unit) {
-        val konanTestSuiteEnvironment = KonanTestSuiteReportEnvironment(suiteName, project, statistics)
+        konst konanTestSuiteEnvironment = KonanTestSuiteReportEnvironment(suiteName, project, statistics)
         konanTestSuiteEnvironment {
             action(it)
         }
@@ -117,7 +117,7 @@ class KonanTestGroupReportEnvironment(val project:Project) {
     }
 }
 
-private class TeamCityTestPrinter(val project:Project) {
+private class TeamCityTestPrinter(konst project:Project) {
     fun suiteStart(name: String) {
         teamcityReport("testSuiteStarted name='$name'")
     }
@@ -139,9 +139,9 @@ private class TeamCityTestPrinter(val project:Project) {
     }
 
     fun errorTest(testName: String, exception: Exception) {
-        val writer = StringWriter()
+        konst writer = StringWriter()
         exception.printStackTrace(PrintWriter(writer))
-        val rawString  = writer.toString()
+        konst rawString  = writer.toString()
 
         teamcityReport("testFailed name='$testName' message='${exception.message.toTeamCityFormat()}' " +
                 "details='${rawString.toTeamCityFormat()}'")

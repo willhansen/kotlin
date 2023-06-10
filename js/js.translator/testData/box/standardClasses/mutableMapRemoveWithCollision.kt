@@ -7,10 +7,10 @@ class A {
 }
 
 fun box(): String {
-    val x = A()
-    val y = A()
+    konst x = A()
+    konst y = A()
 
-    val map = mutableMapOf<A, Int>()
+    konst map = mutableMapOf<A, Int>()
     map[x] = 1
     assertEquals(1, map.size)
 

@@ -24,14 +24,14 @@ public class A : T {
 //Testing
 
 fun test(testName: String, ff: Any, fb: Any) {
-    val f = ff.toString()
-    val b = fb.toString().replaceAll("boo", "foo")
+    konst f = ff.toString()
+    konst b = fb.toString().replaceAll("boo", "foo")
 
     if (f != b) throw Exception("FAILED on ${testName}:\n f = \"$f\"\n b = \"$b\"")
 }
 
 fun box(): String {
-    val a = A()
+    konst a = A()
 
     test("a.foo()", { a.foo() }, { a.boo() })
     test("a.foo(Int)", { a.foo(1) }, { a.boo(1) })

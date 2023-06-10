@@ -16,7 +16,7 @@ import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.jvm.diagnostics.ErrorsJvm
 
 object ExplicitMetadataChecker : AdditionalAnnotationChecker {
-    private val METADATA_FQ_NAME = FqName("kotlin.Metadata")
+    private konst METADATA_FQ_NAME = FqName("kotlin.Metadata")
 
     override fun checkEntries(
         entries: List<KtAnnotationEntry>,
@@ -26,7 +26,7 @@ object ExplicitMetadataChecker : AdditionalAnnotationChecker {
         languageVersionSettings: LanguageVersionSettings
     ) {
         for (entry in entries) {
-            val descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
+            konst descriptor = trace.get(BindingContext.ANNOTATION, entry) ?: continue
             if (descriptor.fqName == METADATA_FQ_NAME) {
                 trace.report(ErrorsJvm.EXPLICIT_METADATA_IS_DISALLOWED.on(entry))
             }

@@ -38,7 +38,7 @@ expect class ArrayList<E> : MutableList<E>, RandomAccess {
 
     // From List
 
-    override val size: Int
+    override konst size: Int
     override fun isEmpty(): Boolean
     override fun contains(element: @UnsafeVariance E): Boolean
     override fun containsAll(elements: Collection<@UnsafeVariance E>): Boolean

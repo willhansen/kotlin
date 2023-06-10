@@ -18,14 +18,14 @@ fun assertFalse(cond: Boolean) {
         throw AssertionError("Condition expected to be false")
 }
 
-fun assertEquals(value1: String, value2: String) {
-    if (value1 != value2)
-        throw AssertionError("FAIL: '" + value1 + "' != '" + value2 + "'")
+fun assertEquals(konstue1: String, konstue2: String) {
+    if (konstue1 != konstue2)
+        throw AssertionError("FAIL: '" + konstue1 + "' != '" + konstue2 + "'")
 }
 
-fun assertEquals(value1: Int, value2: Int) {
-    if (value1 != value2)
-        throw AssertionError("FAIL" + value1.toString() + " != " + value2.toString())
+fun assertEquals(konstue1: Int, konstue2: Int) {
+    if (konstue1 != konstue2)
+        throw AssertionError("FAIL" + konstue1.toString() + " != " + konstue2.toString())
 }
 
 fun assertEquals(builder: StringBuilder, content: String) = assertEquals(builder.toString(), content)
@@ -52,60 +52,60 @@ fun testInsertStringException(initial: String, index: Int, toInsert: String) {
     assertException { StringBuilder(initial).insert(index, toInsert as CharSequence) }
 }
 
-fun testInsertSingle(value: Byte) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Byte) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Short) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Short) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Int) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Int) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Long) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Long) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Float) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Float) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Double) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Double) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Any?) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Any?) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
-fun testInsertSingle(value: Char) {
-    assertEquals(StringBuilder("abcd").insert(0, value),  value.toString() + "abcd")
-    assertEquals(StringBuilder("abcd").insert(4, value),  "abcd" + value.toString())
-    assertEquals(StringBuilder("abcd").insert(2, value),  "ab" + value.toString() + "cd")
-    assertEquals(StringBuilder("").insert(0, value),      value.toString())
+fun testInsertSingle(konstue: Char) {
+    assertEquals(StringBuilder("abcd").insert(0, konstue),  konstue.toString() + "abcd")
+    assertEquals(StringBuilder("abcd").insert(4, konstue),  "abcd" + konstue.toString())
+    assertEquals(StringBuilder("abcd").insert(2, konstue),  "ab" + konstue.toString() + "cd")
+    assertEquals(StringBuilder("").insert(0, konstue),      konstue.toString())
 }
 
 fun testInsert() {
@@ -245,7 +245,7 @@ fun testReverse() {
 
 // Basic ====================================================================================================
 fun testBasic() {
-    val sb = StringBuilder()
+    konst sb = StringBuilder()
     assertEquals(0, sb.length)
     assertEquals("", sb.toString())
     sb.append(1)

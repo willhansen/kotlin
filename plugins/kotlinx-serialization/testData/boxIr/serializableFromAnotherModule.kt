@@ -6,20 +6,20 @@
 import kotlinx.serialization.*
 
 @Serializable
-data class A(val s: String = "")
+data class A(konst s: String = "")
 
 // MODULE: main(lib)
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 @Serializable
-data class B(val a: A? = null)
+data class B(konst a: A? = null)
 
 fun box(): String {
-    val expectedB = B(A("OK"))
-    val json = Json.encodeToString(B.serializer(), expectedB)
+    konst expectedB = B(A("OK"))
+    konst json = Json.encodeToString(B.serializer(), expectedB)
     if (json != """{"a":{"s":"OK"}}""") return "Fail: $json"
-    val actualB = Json.decodeFromString(B.serializer(), json)
+    konst actualB = Json.decodeFromString(B.serializer(), json)
     if (expectedB != actualB) return "Fail: $actualB"
     return "OK"
 }

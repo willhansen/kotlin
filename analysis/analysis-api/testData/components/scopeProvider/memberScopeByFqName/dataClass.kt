@@ -1,6 +1,6 @@
-data class Abc(val firstProperty: Int, val secondProperty: Double, val thirdProperty: String) {
+data class Abc(konst firstProperty: Int, konst secondProperty: Double, konst thirdProperty: String) {
     fun check() {}
-    val Int.bodyProperty get() = 1L
+    konst Int.bodyProperty get() = 1L
 }
 
 

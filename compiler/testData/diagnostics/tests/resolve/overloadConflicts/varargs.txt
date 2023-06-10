@@ -1,6 +1,6 @@
 package
 
-public val test6: Right
+public konst test6: Right
 public fun overloadedFun6(/*0*/ s1: kotlin.String): Right
 public fun overloadedFun6(/*0*/ s: kotlin.String, /*1*/ vararg ss: kotlin.String /*kotlin.Array<out kotlin.String>*/): Wrong
 public fun overloadedFun6(/*0*/ s1: kotlin.String, /*1*/ s2: kotlin.String): Wrong

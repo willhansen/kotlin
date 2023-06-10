@@ -15,8 +15,8 @@
 // TESTCASE NUMBER: 1
 
 fun case1() {
-    val b = true
-    val a = if (b) {
+    konst b = true
+    konst a = if (b) {
         "true"
     } else {
         "false"
@@ -28,8 +28,8 @@ fun case1() {
 // TESTCASE NUMBER: 2
 
 fun case2() {
-    val b = true
-    val a = if (b) "true" else "false"
+    konst b = true
+    konst a = if (b) "true" else "false"
     a checkType { check<String>() }
     <!DEBUG_INFO_EXPRESSION_TYPE("kotlin.String")!>a<!>
 }
@@ -37,9 +37,9 @@ fun case2() {
 // TESTCASE NUMBER: 3
 
 fun case3() {
-    val b = true
+    konst b = true
     //subcase 1 (ELSE BRANCH)
-    val case_3_1 = if (!b) {
+    konst case_3_1 = if (!b) {
         "true"
     } else boo()
     case_3_1 checkType { check<Any>() }
@@ -49,7 +49,7 @@ fun case3() {
     case_3_1 checkType { check<Unit>() }
 
     //subcase 2 (IF TRUE BRANCH)
-    val case_3_2 = if (b) {
+    konst case_3_2 = if (b) {
         "true"
     } else boo()
     case_3_2 checkType { check<Any>() }

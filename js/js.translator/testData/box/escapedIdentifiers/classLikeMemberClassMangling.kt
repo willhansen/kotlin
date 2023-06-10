@@ -1,26 +1,26 @@
 // IGNORE_BACKEND: JS
-// !LANGUAGE: +JsAllowInvalidCharsIdentifiersEscaping
+// !LANGUAGE: +JsAllowInkonstidCharsIdentifiersEscaping
 
 package foo
 
 @JsExport()
 class A {
-    class `$invalid inner` {}
+    class `$inkonstid inner` {}
 }
 
 class B {
-    class `$invalid inner` {}
+    class `$inkonstid inner` {}
 }
 
 fun box(): String {
     // DCE preventing
-    val b = B()
+    konst b = B()
 
-    val aCtor = A::class.js.asDynamic()
-    val bCtor = B::class.js.asDynamic()
+    konst aCtor = A::class.js.asDynamic()
+    konst bCtor = B::class.js.asDynamic()
 
-    assertEquals("function", typeOf(aCtor["\$invalid inner"]))
-    assertEquals(js("undefined"), bCtor["\$invalid inner"])
+    assertEquals("function", typeOf(aCtor["\$inkonstid inner"]))
+    assertEquals(js("undefined"), bCtor["\$inkonstid inner"])
 
     return "OK"
 }

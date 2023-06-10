@@ -27,7 +27,7 @@ import org.jetbrains.kotlin.analysis.api.renderer.declarations.superTypes.KtSupe
 import org.jetbrains.kotlin.analysis.api.renderer.types.impl.KtTypeRendererForSource
 
 public object KtDeclarationRendererForSource {
-    public val WITH_QUALIFIED_NAMES: KtDeclarationRenderer = KtDeclarationRenderer {
+    public konst WITH_QUALIFIED_NAMES: KtDeclarationRenderer = KtDeclarationRenderer {
         nameRenderer = KtDeclarationNameRenderer.QUOTED
         keywordRender = KtKeywordRenderer.AS_WORD
         contextReceiversRenderer = KtContextReceiversRendererForSource.WITH_LABELS
@@ -42,7 +42,7 @@ public object KtDeclarationRendererForSource {
         superTypesFilter = KtSuperTypesFilter.NO_DEFAULT_TYPES
         superTypesArgumentRenderer = KtSuperTypesCallArgumentsRenderer.EMPTY_PARENS
         functionLikeBodyRenderer = KtFunctionLikeBodyRenderer.NO_BODY
-        valueParametersRenderer = KtCallableParameterRenderer.PARAMETERS_IN_PARENS
+        konstueParametersRenderer = KtCallableParameterRenderer.PARAMETERS_IN_PARENS
 
         typeParametersRenderer = KtTypeParametersRenderer.WITH_BOUNDS_IN_WHERE_CLAUSE
         typeParametersFilter = KtTypeParameterRendererFilter.NO_FOR_CONSTURCTORS
@@ -61,7 +61,7 @@ public object KtDeclarationRendererForSource {
         propertyRenderer = KtKotlinPropertySymbolRenderer.AS_SOURCE
         kotlinPropertyRenderer = KtKotlinPropertySymbolRenderer.AS_SOURCE
         syntheticJavaPropertyRenderer = KtSyntheticJavaPropertySymbolRenderer.AS_SOURCE
-        valueParameterRenderer = KtValueParameterSymbolRenderer.AS_SOURCE
+        konstueParameterRenderer = KtValueParameterSymbolRenderer.AS_SOURCE
         samConstructorRenderer = KtSamConstructorSymbolRenderer.NOT_RENDER
 
         callableSignatureRenderer = KtCallableSignatureRenderer.FOR_SOURCE
@@ -87,7 +87,7 @@ public object KtDeclarationRendererForSource {
         scriptInitializerRenderer = KtScriptInitializerRenderer.NO_INITIALIZER
     }
 
-    public val WITH_SHORT_NAMES: KtDeclarationRenderer = WITH_QUALIFIED_NAMES.with {
+    public konst WITH_SHORT_NAMES: KtDeclarationRenderer = WITH_QUALIFIED_NAMES.with {
         annotationRenderer = KtAnnotationRendererForSource.WITH_SHORT_NAMES
         typeRenderer = KtTypeRendererForSource.WITH_SHORT_NAMES
     }

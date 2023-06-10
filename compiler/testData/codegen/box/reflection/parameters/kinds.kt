@@ -16,7 +16,7 @@ class A {
 }
 
 fun box(): String {
-    val foo = A::class.memberExtensionFunctions.single()
+    konst foo = A::class.memberExtensionFunctions.single()
 
     assertEquals(listOf(INSTANCE, EXTENSION_RECEIVER, VALUE), foo.parameters.map { it.kind })
     assertEquals(listOf(INSTANCE, VALUE), A::Inner.parameters.map { it.kind })

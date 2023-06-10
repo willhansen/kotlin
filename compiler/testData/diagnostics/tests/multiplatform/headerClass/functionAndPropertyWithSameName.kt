@@ -3,13 +3,13 @@
 // FILE: common.kt
 
 expect class Foo {
-    val bar: String
+    konst bar: String
 }
 
 // MODULE: m1-jvm()()(m1-common)
 // FILE: jvm.kt
 
 actual class Foo {
-    actual val bar = "bar"
+    actual konst bar = "bar"
     fun bar() = bar
 }

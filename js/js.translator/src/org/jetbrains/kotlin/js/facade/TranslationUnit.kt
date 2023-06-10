@@ -19,7 +19,7 @@ package org.jetbrains.kotlin.js.facade
 import org.jetbrains.kotlin.psi.KtFile
 
 sealed class TranslationUnit {
-    class SourceFile(val file: KtFile) : TranslationUnit()
+    class SourceFile(konst file: KtFile) : TranslationUnit()
 
-    class BinaryAst(val data: ByteArray, val inlineData: ByteArray) : TranslationUnit()
+    class BinaryAst(konst data: ByteArray, konst inlineData: ByteArray) : TranslationUnit()
 }

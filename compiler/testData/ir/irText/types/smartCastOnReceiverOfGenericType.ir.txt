@@ -25,7 +25,7 @@ FILE fqName:<root> fileName:/smartCastOnReceiverOfGenericType.kt
       TYPE_OP type=kotlin.Unit origin=IMPLICIT_COERCION_TO_UNIT typeOperand=kotlin.Unit
         TYPE_OP type=kotlin.String origin=CAST typeOperand=kotlin.String
           GET_VAR 'b: kotlin.Any declared in <root>.testProperty' type=kotlin.Any origin=null
-      CALL 'public final fun <set-value> (<set-?>: T of <root>.Cell): kotlin.Unit declared in <root>.Cell' type=kotlin.Unit origin=EQ
+      CALL 'public final fun <set-konstue> (<set-?>: T of <root>.Cell): kotlin.Unit declared in <root>.Cell' type=kotlin.Unit origin=EQ
         $this: TYPE_OP type=<root>.Cell<kotlin.String> origin=IMPLICIT_CAST typeOperand=<root>.Cell<kotlin.String>
           GET_VAR 'a: kotlin.Any declared in <root>.testProperty' type=kotlin.Any origin=null
         <set-?>: TYPE_OP type=kotlin.String origin=IMPLICIT_CAST typeOperand=kotlin.String
@@ -71,30 +71,30 @@ FILE fqName:<root> fileName:/smartCastOnReceiverOfGenericType.kt
   CLASS CLASS name:Cell modality:FINAL visibility:public superTypes:[kotlin.Any]
     $this: VALUE_PARAMETER INSTANCE_RECEIVER name:<this> type:<root>.Cell<T of <root>.Cell>
     TYPE_PARAMETER name:T index:0 variance: superTypes:[kotlin.Any?] reified:false
-    CONSTRUCTOR visibility:public <> (value:T of <root>.Cell) returnType:<root>.Cell<T of <root>.Cell> [primary]
-      VALUE_PARAMETER name:value index:0 type:T of <root>.Cell
+    CONSTRUCTOR visibility:public <> (konstue:T of <root>.Cell) returnType:<root>.Cell<T of <root>.Cell> [primary]
+      VALUE_PARAMETER name:konstue index:0 type:T of <root>.Cell
       BLOCK_BODY
         DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> () declared in kotlin.Any'
         INSTANCE_INITIALIZER_CALL classDescriptor='CLASS CLASS name:Cell modality:FINAL visibility:public superTypes:[kotlin.Any]'
-    PROPERTY name:value visibility:public modality:FINAL [var]
-      FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Cell visibility:private
+    PROPERTY name:konstue visibility:public modality:FINAL [var]
+      FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Cell visibility:private
         EXPRESSION_BODY
-          GET_VAR 'value: T of <root>.Cell declared in <root>.Cell.<init>' type=T of <root>.Cell origin=INITIALIZE_PROPERTY_FROM_PARAMETER
-      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-value> visibility:public modality:FINAL <> ($this:<root>.Cell<T of <root>.Cell>) returnType:T of <root>.Cell
-        correspondingProperty: PROPERTY name:value visibility:public modality:FINAL [var]
+          GET_VAR 'konstue: T of <root>.Cell declared in <root>.Cell.<init>' type=T of <root>.Cell origin=INITIALIZE_PROPERTY_FROM_PARAMETER
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<get-konstue> visibility:public modality:FINAL <> ($this:<root>.Cell<T of <root>.Cell>) returnType:T of <root>.Cell
+        correspondingProperty: PROPERTY name:konstue visibility:public modality:FINAL [var]
         $this: VALUE_PARAMETER name:<this> type:<root>.Cell<T of <root>.Cell>
         BLOCK_BODY
-          RETURN type=kotlin.Nothing from='public final fun <get-value> (): T of <root>.Cell declared in <root>.Cell'
-            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Cell visibility:private' type=T of <root>.Cell origin=null
-              receiver: GET_VAR '<this>: <root>.Cell<T of <root>.Cell> declared in <root>.Cell.<get-value>' type=<root>.Cell<T of <root>.Cell> origin=null
-      FUN DEFAULT_PROPERTY_ACCESSOR name:<set-value> visibility:public modality:FINAL <> ($this:<root>.Cell<T of <root>.Cell>, <set-?>:T of <root>.Cell) returnType:kotlin.Unit
-        correspondingProperty: PROPERTY name:value visibility:public modality:FINAL [var]
+          RETURN type=kotlin.Nothing from='public final fun <get-konstue> (): T of <root>.Cell declared in <root>.Cell'
+            GET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Cell visibility:private' type=T of <root>.Cell origin=null
+              receiver: GET_VAR '<this>: <root>.Cell<T of <root>.Cell> declared in <root>.Cell.<get-konstue>' type=<root>.Cell<T of <root>.Cell> origin=null
+      FUN DEFAULT_PROPERTY_ACCESSOR name:<set-konstue> visibility:public modality:FINAL <> ($this:<root>.Cell<T of <root>.Cell>, <set-?>:T of <root>.Cell) returnType:kotlin.Unit
+        correspondingProperty: PROPERTY name:konstue visibility:public modality:FINAL [var]
         $this: VALUE_PARAMETER name:<this> type:<root>.Cell<T of <root>.Cell>
         VALUE_PARAMETER name:<set-?> index:0 type:T of <root>.Cell
         BLOCK_BODY
-          SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:value type:T of <root>.Cell visibility:private' type=kotlin.Unit origin=null
-            receiver: GET_VAR '<this>: <root>.Cell<T of <root>.Cell> declared in <root>.Cell.<set-value>' type=<root>.Cell<T of <root>.Cell> origin=null
-            value: GET_VAR '<set-?>: T of <root>.Cell declared in <root>.Cell.<set-value>' type=T of <root>.Cell origin=null
+          SET_FIELD 'FIELD PROPERTY_BACKING_FIELD name:konstue type:T of <root>.Cell visibility:private' type=kotlin.Unit origin=null
+            receiver: GET_VAR '<this>: <root>.Cell<T of <root>.Cell> declared in <root>.Cell.<set-konstue>' type=<root>.Cell<T of <root>.Cell> origin=null
+            konstue: GET_VAR '<set-?>: T of <root>.Cell declared in <root>.Cell.<set-konstue>' type=T of <root>.Cell origin=null
     FUN FAKE_OVERRIDE name:equals visibility:public modality:OPEN <> ($this:kotlin.Any, other:kotlin.Any?) returnType:kotlin.Boolean [fake_override,operator]
       overridden:
         public open fun equals (other: kotlin.Any?): kotlin.Boolean declared in kotlin.Any

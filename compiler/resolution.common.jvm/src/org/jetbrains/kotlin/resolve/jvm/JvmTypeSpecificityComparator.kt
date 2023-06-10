@@ -9,14 +9,14 @@ import org.jetbrains.kotlin.resolve.calls.results.TypeSpecificityComparator
 import org.jetbrains.kotlin.types.model.KotlinTypeMarker
 import org.jetbrains.kotlin.types.model.TypeSystemInferenceExtensionContext
 
-open class JvmTypeSpecificityComparator(open val context: TypeSystemInferenceExtensionContext) : TypeSpecificityComparator {
+open class JvmTypeSpecificityComparator(open konst context: TypeSystemInferenceExtensionContext) : TypeSpecificityComparator {
 
     override fun isDefinitelyLessSpecific(specific: KotlinTypeMarker, general: KotlinTypeMarker): Boolean = with(context) {
-        val simpleGeneral = general.asSimpleType()
+        konst simpleGeneral = general.asSimpleType()
         if (!specific.isFlexible() || simpleGeneral == null) return false
 
         // general is inflexible
-        val flexibility = specific.asFlexibleType()!!
+        konst flexibility = specific.asFlexibleType()!!
 
         // For primitive types we have to take care of the case when there are two overloaded methods like
         //    foo(int) and foo(Integer)

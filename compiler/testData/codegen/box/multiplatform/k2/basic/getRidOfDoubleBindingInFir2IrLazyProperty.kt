@@ -8,7 +8,7 @@
 
 interface I {
     companion object {
-        const val OK: String = "OK"
+        const konst OK: String = "OK"
     }
 }
 

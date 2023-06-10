@@ -5,13 +5,13 @@ package annotations
 @Target(AnnotationTarget.FILE, AnnotationTarget.FUNCTION, AnnotationTarget.TYPE, AnnotationTarget.PROPERTY_GETTER)
 annotation class Simple
 
-annotation class WithInt(val value: Int)
+annotation class WithInt(konst konstue: Int)
 
-annotation class WithString(val s: String)
+annotation class WithString(konst s: String)
 
-annotation class Complex(val wi: WithInt, val ws: WithString)
+annotation class Complex(konst wi: WithInt, konst ws: WithString)
 
-annotation class VeryComplex(val f: Float, val d: Double, val b: Boolean, val l: Long, val n: <!NULLABLE_TYPE_OF_ANNOTATION_MEMBER!>Int?<!>)
+annotation class VeryComplex(konst f: Float, konst d: Double, konst b: Boolean, konst l: Long, konst n: <!NULLABLE_TYPE_OF_ANNOTATION_MEMBER!>Int?<!>)
 
 // FILE: main.kt
 
@@ -26,15 +26,15 @@ abstract class First {
     abstract fun foo(@WithString("abc") arg: @Simple Double)
 
     @Complex(WithInt(7), WithString(""))
-    abstract val v: String
+    abstract konst v: String
 }
 
 @WithString("xyz")
-class Second(val y: Char) : <!WRONG_ANNOTATION_TARGET!>@WithInt(0)<!> First() {
+class Second(konst y: Char) : <!WRONG_ANNOTATION_TARGET!>@WithInt(0)<!> First() {
     override fun foo(arg: Double) {
     }
 
-    override val v: String
+    override konst v: String
         @Simple get() = ""
 
     @WithString("constructor")

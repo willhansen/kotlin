@@ -29,7 +29,7 @@ public class JavaClass {
 
 // FILE: main.kt
 
-class OutPair<out X, out Y>(val x: X, val y: Y)
+class OutPair<out X, out Y>(konst x: X, konst y: Y)
 class In<in Z> {
     fun make(x: Z): String = x.toString()
 }

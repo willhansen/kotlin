@@ -28,10 +28,10 @@ FILE: newSupertype.kt
         R|<local>/x|.R|foo/MyInterface.foo|()
     }
     public final fun box(): R|kotlin/String| {
-        lval x: R|foo/FinalClassWithOverride| = R|foo/FinalClassWithOverride.FinalClassWithOverride|()
+        lkonst x: R|foo/FinalClassWithOverride| = R|foo/FinalClassWithOverride.FinalClassWithOverride|()
         R|<local>/x|.R|foo/FinalClassWithOverride.foo|()
         R|foo/test|(R|<local>/x|)
-        lval y: R|foo/AnnotatedClassWithExplicitInheritance| = R|foo/AnnotatedClassWithExplicitInheritance.AnnotatedClassWithExplicitInheritance|()
+        lkonst y: R|foo/AnnotatedClassWithExplicitInheritance| = R|foo/AnnotatedClassWithExplicitInheritance.AnnotatedClassWithExplicitInheritance|()
         R|<local>/y|.R|foo/AnnotatedClassWithExplicitInheritance.foo|()
         R|foo/test|(R|<local>/y|)
         ^box String(OK)

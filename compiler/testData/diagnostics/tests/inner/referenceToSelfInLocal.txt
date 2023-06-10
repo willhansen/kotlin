@@ -1,4 +1,4 @@
 package
 
-public val closure: () -> kotlin.Unit
+public konst closure: () -> kotlin.Unit
 public fun f(): kotlin.Unit

@@ -1,7 +1,7 @@
 package
 
 public interface NoC {
-    public open val a: kotlin.Int
+    public open konst a: kotlin.Int
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -9,8 +9,8 @@ public interface NoC {
 
 public final class WithC {
     public constructor WithC()
-    public final val a: kotlin.Int
-    public final val x: kotlin.Int = 1
+    public final konst a: kotlin.Int
+    public final konst x: kotlin.Int = 1
     public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

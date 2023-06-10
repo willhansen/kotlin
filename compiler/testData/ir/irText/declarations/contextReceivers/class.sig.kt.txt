@@ -12,7 +12,7 @@ class Inner {
   // CHECK JS_IR NATIVE:
   //   Mangled name computed from Ir:         Inner.contextReceiverField0
   //   Mangled name computed from Descriptor: Inner{}contextReceiverField0
-  private /* final field */ val contextReceiverField0: Outer
+  private /* final field */ konst contextReceiverField0: Outer
 
   // CHECK JVM_IR:
   //   Mangled name: Inner#bar(){}kotlin.Int
@@ -31,7 +31,7 @@ class Outer {
   // CHECK:
   //   Mangled name: Outer{}x
   //   Public signature: /Outer.x|-8060530855978347579[0]
-  val x: Int
+  konst x: Int
     field
     // CHECK JVM_IR:
     //   Mangled name: Outer#<get-x>(){}kotlin.Int

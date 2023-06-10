@@ -1,7 +1,7 @@
 package
 
-internal val internalProperty: kotlin.Int = 11
-private val privateProperty: kotlin.Int = 11
+internal konst internalProperty: kotlin.Int = 11
+private konst privateProperty: kotlin.Int = 11
 internal fun internalFun(): kotlin.Unit
 private fun privateFun(): kotlin.Unit
 public inline fun test(): kotlin.Unit

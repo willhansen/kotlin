@@ -40,7 +40,7 @@ public final class BinaryPlusExpr {
 @kotlin.Metadata
 public final class DoubleExpr {
     // source: 'Literals.kt'
-    private final field value: double
+    private final field konstue: double
     public method <init>(p0: double): void
     public final method getValue(): double
 }
@@ -59,7 +59,7 @@ public interface Expr {
 @kotlin.Metadata
 public final class IntExpr {
     // source: 'Literals.kt'
-    private final field value: int
+    private final field konstue: int
     public method <init>(p0: int): void
     public final method getValue(): int
 }

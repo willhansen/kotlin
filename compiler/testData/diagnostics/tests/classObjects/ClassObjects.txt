@@ -1,10 +1,10 @@
 package
 
 package Jet86 {
-    public val a: kotlin.Int = 1
-    public val c: [Error type: Not found recorded type for B.x]
-    public val d: [Error type: Not found recorded type for b.x]
-    public val s: [Error type: Not found recorded type for System]
+    public konst a: kotlin.Int = 1
+    public konst c: [Error type: Not found recorded type for B.x]
+    public konst d: [Error type: Not found recorded type for b.x]
+    public konst s: [Error type: Not found recorded type for System]
     public fun test(): kotlin.Unit
 
     public final class A {
@@ -15,7 +15,7 @@ package Jet86 {
 
         public companion object Companion {
             private constructor Companion()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -23,7 +23,7 @@ package Jet86 {
 
         public companion object Companion {
             private constructor Companion()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -38,7 +38,7 @@ package Jet86 {
 
         public companion object A {
             private constructor A()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -46,7 +46,7 @@ package Jet86 {
 
         public companion object AA {
             private constructor AA()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -54,7 +54,7 @@ package Jet86 {
 
         public companion object Companion {
             private constructor Companion()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -63,7 +63,7 @@ package Jet86 {
 
     public final class B {
         public constructor B()
-        public final val x: kotlin.Int = 12
+        public final konst x: kotlin.Int = 12
         public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
         public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
         public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
@@ -77,7 +77,7 @@ package Jet86 {
 
         public companion object Companion {
             private constructor Companion()
-            public final val x: kotlin.Int = 1
+            public final konst x: kotlin.Int = 1
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String

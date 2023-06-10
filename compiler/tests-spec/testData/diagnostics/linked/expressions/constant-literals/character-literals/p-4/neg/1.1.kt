@@ -17,19 +17,19 @@
 
 fun case1() {
     //less then four hex digits
-    val c0 = '<!ILLEGAL_ESCAPE!>\u<!>'
-    val c1 = '<!ILLEGAL_ESCAPE!>\uf<!>'
-    val c2 = '<!ILLEGAL_ESCAPE!>\u1f<!>'
-    val c3 = '<!ILLEGAL_ESCAPE!>\u1wf<!>'
+    konst c0 = '<!ILLEGAL_ESCAPE!>\u<!>'
+    konst c1 = '<!ILLEGAL_ESCAPE!>\uf<!>'
+    konst c2 = '<!ILLEGAL_ESCAPE!>\u1f<!>'
+    konst c3 = '<!ILLEGAL_ESCAPE!>\u1wf<!>'
 
     //more then four hex digits
-    val c4 = '<!ILLEGAL_ESCAPE!>\u1wF2f<!>'
+    konst c4 = '<!ILLEGAL_ESCAPE!>\u1wF2f<!>'
 }
 
 // TESTCASE NUMBER: 2
 
 fun case2() {
     //not hex
-    val c1 = '<!ILLEGAL_ESCAPE!>\u000g<!>'
-    val c2 = '<!ILLEGAL_ESCAPE!>\u000G<!>'
+    konst c1 = '<!ILLEGAL_ESCAPE!>\u000g<!>'
+    konst c2 = '<!ILLEGAL_ESCAPE!>\u000G<!>'
 }

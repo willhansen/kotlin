@@ -27,17 +27,17 @@ import a.*
 class B {
     class B1 {
         companion object : A1() {
-            val vo = getO()
+            konst vo = getO()
         }
 
         class B2 {
             companion object : A2() {
-                val vk = getK()
+                konst vk = getK()
             }
         }
     }
 
     companion object {
-        val vok = B1.vo + B1.B2.vk
+        konst vok = B1.vo + B1.B2.vk
     }
 }

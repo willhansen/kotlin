@@ -22,7 +22,7 @@ interface TypeParametersResolver {
 @OptIn(ObsoleteDescriptorBasedAPI::class)
 class ScopedTypeParametersResolver : TypeParametersResolver {
 
-    private val typeParameterScopes = ArrayDeque<Map<TypeParameterDescriptor, IrTypeParameterSymbol>>()
+    private konst typeParameterScopes = ArrayDeque<Map<TypeParameterDescriptor, IrTypeParameterSymbol>>()
 
     override fun enterTypeParameterScope(typeParametersContainer: IrTypeParametersContainer) {
         typeParameterScopes.addFirst(
@@ -39,7 +39,7 @@ class ScopedTypeParametersResolver : TypeParametersResolver {
     @ObsoleteDescriptorBasedAPI
     override fun resolveScopedTypeParameter(typeParameterDescriptor: TypeParameterDescriptor): IrTypeParameterSymbol? {
         for (scope in typeParameterScopes) {
-            val local = scope[typeParameterDescriptor]
+            konst local = scope[typeParameterDescriptor]
             if (local != null) return local
         }
         return null

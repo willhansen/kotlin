@@ -40,21 +40,21 @@ import org.jetbrains.kotlin.resolve.PlatformDependentAnalyzerServices
  *   basing on path of this declaration and passed compiler arguments
  */
 abstract class FirModuleData : FirSessionComponent {
-    abstract val name: Name
-    abstract val dependencies: List<FirModuleData>
-    abstract val dependsOnDependencies: List<FirModuleData>
-    abstract val friendDependencies: List<FirModuleData>
-    abstract val platform: TargetPlatform
+    abstract konst name: Name
+    abstract konst dependencies: List<FirModuleData>
+    abstract konst dependsOnDependencies: List<FirModuleData>
+    abstract konst friendDependencies: List<FirModuleData>
+    abstract konst platform: TargetPlatform
 
     // TODO: analyzerServices are needed only as default imports providers
     //   refactor them to make API clearer
-    abstract val analyzerServices: PlatformDependentAnalyzerServices
+    abstract konst analyzerServices: PlatformDependentAnalyzerServices
 
-    open val capabilities: FirModuleCapabilities
+    open konst capabilities: FirModuleCapabilities
         get() = FirModuleCapabilities.Empty
 
     private var _session: FirSession? = null
-    val session: FirSession
+    konst session: FirSession
         get() = _session
             ?: error("module data ${this::class.simpleName}:${name} not bound to session")
 
@@ -71,16 +71,16 @@ abstract class FirModuleData : FirSessionComponent {
 }
 
 class FirModuleDataImpl(
-    override val name: Name,
-    override val dependencies: List<FirModuleData>,
-    override val dependsOnDependencies: List<FirModuleData>,
-    override val friendDependencies: List<FirModuleData>,
-    override val platform: TargetPlatform,
-    override val analyzerServices: PlatformDependentAnalyzerServices,
-    override val capabilities: FirModuleCapabilities = FirModuleCapabilities.Empty
+    override konst name: Name,
+    override konst dependencies: List<FirModuleData>,
+    override konst dependsOnDependencies: List<FirModuleData>,
+    override konst friendDependencies: List<FirModuleData>,
+    override konst platform: TargetPlatform,
+    override konst analyzerServices: PlatformDependentAnalyzerServices,
+    override konst capabilities: FirModuleCapabilities = FirModuleCapabilities.Empty
 ) : FirModuleData()
 
-val FirSession.nullableModuleData: FirModuleData? by FirSession.nullableSessionComponentAccessor()
-val FirSession.moduleData: FirModuleData
+konst FirSession.nullableModuleData: FirModuleData? by FirSession.nullableSessionComponentAccessor()
+konst FirSession.moduleData: FirModuleData
     get() = nullableModuleData ?: error("Module data is not registered in $this")
 

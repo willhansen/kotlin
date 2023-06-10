@@ -15,11 +15,11 @@ import org.jetbrains.kotlin.resolve.DescriptorUtils
 
 internal class SyntheticDeclarationsGenerator(context: GeneratorContext) : DeclarationDescriptorVisitor<Unit, IrDeclarationContainer?> {
 
-    private val generator = StandaloneDeclarationGenerator(context)
-    private val symbolTable = context.symbolTable
+    private konst generator = StandaloneDeclarationGenerator(context)
+    private konst symbolTable = context.symbolTable
 
     companion object {
-        private const val offset = SYNTHETIC_OFFSET
+        private const konst offset = SYNTHETIC_OFFSET
     }
 
     private fun <D : IrDeclaration> D.insertDeclaration(declarationContainer: IrDeclarationContainer): D {
@@ -29,14 +29,14 @@ internal class SyntheticDeclarationsGenerator(context: GeneratorContext) : Decla
     }
 
     private fun IrFunction.defaultArgumentFactory(parameter: IrValueParameter): IrExpressionBody? {
-        val descriptor = parameter.descriptor as ValueParameterDescriptor
+        konst descriptor = parameter.descriptor as ValueParameterDescriptor
         if (!descriptor.declaresDefaultValue()) return null
 
-        val description = "Default Argument Value stub for ${descriptor.name}|${descriptor.index}"
+        konst description = "Default Argument Value stub for ${descriptor.name}|${descriptor.index}"
         return factory.createExpressionBody(IrErrorExpressionImpl(startOffset, endOffset, parameter.type, description))
     }
 
-    private val defaultFactoryReference: IrFunction.(IrValueParameter) -> IrExpressionBody? = { defaultArgumentFactory(it) }
+    private konst defaultFactoryReference: IrFunction.(IrValueParameter) -> IrExpressionBody? = { defaultArgumentFactory(it) }
 
     override fun visitPackageFragmentDescriptor(descriptor: PackageFragmentDescriptor, data: IrDeclarationContainer?) {
         error("Unexpected declaration descriptor $descriptor")

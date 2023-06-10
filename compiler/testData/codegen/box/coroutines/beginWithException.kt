@@ -10,7 +10,7 @@ fun builder(c: suspend () -> Unit) {
     var exception: Throwable? = null
 
     c.createCoroutine(object : Continuation<Unit> {
-        override val context = EmptyCoroutineContext
+        override konst context = EmptyCoroutineContext
 
         override fun resumeWith(data: Result<Unit>) {
             exception = data.exceptionOrNull()

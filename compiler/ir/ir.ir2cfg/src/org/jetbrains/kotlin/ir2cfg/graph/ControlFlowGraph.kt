@@ -20,13 +20,13 @@ import org.jetbrains.kotlin.ir.declarations.IrFunction
 
 interface ControlFlowGraph {
 
-    val function: IrFunction
+    konst function: IrFunction
 
     // First block is the entry point
-    val blocks: List<BasicBlock>
+    konst blocks: List<BasicBlock>
 
-    val connectors: List<BlockConnector>
+    konst connectors: List<BlockConnector>
 
-    val nodes: List<CfgNode>
+    konst nodes: List<CfgNode>
         get() = blocks + connectors
 }

@@ -34,7 +34,7 @@ package {
 
   // getter: getH(LB;)I
   context(B)
-  public final val h: kotlin/Int
+  public final konst h: kotlin/Int
     public final /* non-default */ get
 
   // module name: test-module

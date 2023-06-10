@@ -69,7 +69,7 @@ private fun checkBasics() {
 private fun checkLocalClasses(args: Array<String>) {
     // Local class.
     class Local0 {
-        val captured = args
+        konst captured = args
         inner class Inner
     }
     checkClass(
@@ -92,7 +92,7 @@ private fun checkLocalClasses(args: Array<String>) {
     // Local class inside of lambda.
     ;{
         class Local {
-            val captured = args
+            konst captured = args
             inner class Inner
         }
         checkClass(
@@ -116,7 +116,7 @@ private fun checkLocalClasses(args: Array<String>) {
     // Local class inside of non-inlined lambda.
     runNonInlining {
         class Local {
-            val captured = args
+            konst captured = args
             inner class Inner
         }
         checkClass(
@@ -140,7 +140,7 @@ private fun checkLocalClasses(args: Array<String>) {
     // Local class inside of inlined lambda.
     run {
         class Local {
-            val captured = args
+            konst captured = args
             inner class Inner
         }
         checkClass(
@@ -164,7 +164,7 @@ private fun checkLocalClasses(args: Array<String>) {
     // Local class inside of suspend lambda.
     suspend {
         class Local {
-            val captured = args
+            konst captured = args
             inner class Inner
         }
         checkClass(
@@ -188,7 +188,7 @@ private fun checkLocalClasses(args: Array<String>) {
     // Local class inside of suspend function.
     suspend fun suspendFunWithLocalClass() {
         class Local {
-            val captured = args
+            konst captured = args
             inner class Inner
         }
         checkClass(
@@ -214,9 +214,9 @@ private fun checkLocalClasses(args: Array<String>) {
 private fun checkAnonymousObjects(args: Array<String>) {
     // Anonymous object.
     with(object : Any() {
-        val captured = args
+        konst captured = args
         inner class Inner
-        val innerKClass = Inner::class
+        konst innerKClass = Inner::class
     }) {
         checkClass(
                 clazz = this::class,
@@ -241,9 +241,9 @@ private fun checkAnonymousObjects(args: Array<String>) {
         // $2 goes for this lambda itself.
 
         with(object : Any() {
-            val captured = args
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }) {
             checkClass(
                     clazz = this::class,
@@ -267,9 +267,9 @@ private fun checkAnonymousObjects(args: Array<String>) {
     // Anonymous object inside of non-inlined lambda.
     runNonInlining {
         with(object : Any() {
-            val captured = args
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }) {
             checkClass(
                     clazz = this::class,
@@ -293,9 +293,9 @@ private fun checkAnonymousObjects(args: Array<String>) {
     // Anonymous object inside of inlined lambda.
     run {
         with(object : Any() {
-            val captured = args
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }) {
             checkClass(
                     clazz = this::class,
@@ -319,9 +319,9 @@ private fun checkAnonymousObjects(args: Array<String>) {
     // Anonymous object inside of suspend lambda.
     suspend {
         with(object : Any() {
-            val captured = args
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }) {
             checkClass(
                     clazz = this::class,
@@ -347,9 +347,9 @@ private fun checkAnonymousObjects(args: Array<String>) {
         // $1 goes for lambda created in `::suspendFunWithAnonymousObject.runCoroutine()` call.
 
         with(object : Any() {
-            val captured = args
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }) {
             checkClass(
                     clazz = this::class,
@@ -374,10 +374,10 @@ private fun checkAnonymousObjects(args: Array<String>) {
 
 private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
     // Anonymous object.
-    val obj = object : Any() {
-        val captured = args
+    konst obj = object : Any() {
+        konst captured = args
         inner class Inner
-        val innerKClass = Inner::class
+        konst innerKClass = Inner::class
     }
     checkClass(
             clazz = obj::class,
@@ -398,10 +398,10 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
 
     // Anonymous object inside of lambda.
     ;{
-        val obj = object : Any() {
-            val captured = args
+        konst obj = object : Any() {
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }
         checkClass(
                 clazz = obj::class,
@@ -423,10 +423,10 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
 
     // Anonymous object inside of non-inlined lambda.
     runNonInlining {
-        val obj = object : Any() {
-            val captured = args
+        konst obj = object : Any() {
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }
         checkClass(
                 clazz = obj::class,
@@ -448,10 +448,10 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
 
     // Anonymous object inside of inlined lambda.
     run {
-        val obj = object : Any() {
-            val captured = args
+        konst obj = object : Any() {
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }
         checkClass(
                 clazz = obj::class,
@@ -473,10 +473,10 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
 
     // Anonymous object inside of suspend lambda.
     suspend {
-        val obj = object : Any() {
-            val captured = args
+        konst obj = object : Any() {
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }
         checkClass(
                 clazz = obj::class,
@@ -500,10 +500,10 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
     suspend fun suspendFunWithAnonymousObject() {
         // $1 goes for lambda created in `::suspendFunWithAnonymousObject.runCoroutine()` call.
 
-        val obj = object : Any() {
-            val captured = args
+        konst obj = object : Any() {
+            konst captured = args
             inner class Inner
-            val innerKClass = Inner::class
+            konst innerKClass = Inner::class
         }
         checkClass(
                 clazz = obj::class,
@@ -528,7 +528,7 @@ private fun checkAnonymousObjectsAssignedToProperty(args: Array<String>) {
 private fun checkFunctionReferences() {
     // TODO add tests for lambdas and anonymous functions, see KT-47194
     fun foo() = Unit
-    val ref = ::foo
+    konst ref = ::foo
     checkClass(
             clazz = ref::class,
             expectedQualifiedName = null,

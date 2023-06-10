@@ -2,17 +2,17 @@
 package foo
 
 class Foo {
-    fun blah(value: Int): Int {
-        return value + 1
+    fun blah(konstue: Int): Int {
+        return konstue + 1
     }
 }
 
-val Foo.fooImp: Int
+konst Foo.fooImp: Int
     get() {
         return blah(5)
     }
 
-val Foo.fooExp: Int
+konst Foo.fooExp: Int
     get() {
         return this.blah(10)
     }

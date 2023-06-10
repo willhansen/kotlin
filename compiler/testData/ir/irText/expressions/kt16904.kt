@@ -8,7 +8,7 @@ public class J {
 // FILE: kt16904.kt
 
 abstract class A {
-    val x = B()
+    konst x = B()
     var y = 0
 }
 

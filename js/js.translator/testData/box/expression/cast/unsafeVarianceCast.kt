@@ -14,8 +14,8 @@ open class C
 open class D : C()
 
 fun box(): String {
-    val a = (object{})
-    val foo: Foo<Any?> = Bar<D>()
+    konst a = (object{})
+    konst foo: Foo<Any?> = Bar<D>()
     if (foo.foo(a as Any?)) return "fail"
     return "OK"
 }

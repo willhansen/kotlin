@@ -1,7 +1,7 @@
 fun foo() {
     "before"
     while (true) {
-        val a: Int
+        konst a: Int
     }
     "after"
 }

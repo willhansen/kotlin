@@ -7,7 +7,7 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithSetter.kt
 
         public abstract [ResolvedTo(BODY_RESOLVE)] var id: R|kotlin/Int|
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-            protected [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
+            protected [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit|
 
     }
     public final [ResolvedTo(BODY_RESOLVE)] class Bar : R|Foo| {
@@ -17,10 +17,10 @@ FILE: [ResolvedTo(IMPORTS)] propertyWithSetter.kt
 
         public open override [ResolvedTo(BODY_RESOLVE)] var id: R|kotlin/Int| = Int(1)
             public [ResolvedTo(BODY_RESOLVE)] get(): R|kotlin/Int|
-            public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] value: R|kotlin/Int|): R|kotlin/Unit|
+            public [ResolvedTo(BODY_RESOLVE)] set([ResolvedTo(BODY_RESOLVE)] konstue: R|kotlin/Int|): R|kotlin/Unit|
 
     }
     public final [ResolvedTo(BODY_RESOLVE)] fun test(): R|kotlin/Unit| {
-        [ResolvedTo(BODY_RESOLVE)] lval bar: R|Bar| = R|/Bar.Bar|()
+        [ResolvedTo(BODY_RESOLVE)] lkonst bar: R|Bar| = R|/Bar.Bar|()
         R|<local>/bar|.R|/Bar.id| = Int(1)
     }

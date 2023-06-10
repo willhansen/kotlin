@@ -18,12 +18,12 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toUpperCaseAsciiOnly
 import java.io.Serializable
 
 @InternalKotlinGradlePluginApi
-val Xcode = XcodeUtils.INSTANCE
+konst Xcode = XcodeUtils.INSTANCE
 
 @InternalKotlinGradlePluginApi
-data class XcodeVersion(val major: Int, val minor: Int) : Serializable, Comparable<XcodeVersion> {
+data class XcodeVersion(konst major: Int, konst minor: Int) : Serializable, Comparable<XcodeVersion> {
     override fun compareTo(other: XcodeVersion): Int {
-        return when (val majorComparison = major.compareTo(other.major)) {
+        return when (konst majorComparison = major.compareTo(other.major)) {
             0 -> minor.compareTo(other.minor)
             else -> majorComparison
         }
@@ -34,12 +34,12 @@ data class XcodeVersion(val major: Int, val minor: Int) : Serializable, Comparab
 class XcodeUtils private constructor() {
 
     companion object {
-        internal val INSTANCE: XcodeUtils? =
+        internal konst INSTANCE: XcodeUtils? =
             if (HostManager.hostIsMac) XcodeUtils() else null
 
         internal fun parseFromXcodebuild(output: String): XcodeVersion? {
-            val version = output.lines()[0].removePrefix("Xcode ")
-            val split = version.split("(\\s+|\\.|-)".toRegex())
+            konst version = output.lines()[0].removePrefix("Xcode ")
+            konst split = version.split("(\\s+|\\.|-)".toRegex())
             return XcodeVersion(
                 major = split[0].toIntOrNull() ?: return null,
                 minor = split.getOrNull(1)?.toIntOrNull() ?: return null,
@@ -48,32 +48,32 @@ class XcodeUtils private constructor() {
         }
     }
 
-    val currentVersion: XcodeVersion by lazy {
-        val out = runCommand(listOf("/usr/bin/xcrun", "xcodebuild", "-version"))
+    konst currentVersion: XcodeVersion by lazy {
+        konst out = runCommand(listOf("/usr/bin/xcrun", "xcodebuild", "-version"))
         parseFromXcodebuild(out) ?: XcodeVersion(1, 0)
     }
 
-    private val defaultTestDevices: Map<Family, String> by lazy {
-        val osRegex = "-- .* --".toRegex()
-        val deviceRegex = """[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}""".toRegex()
+    private konst defaultTestDevices: Map<Family, String> by lazy {
+        konst osRegex = "-- .* --".toRegex()
+        konst deviceRegex = """[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}""".toRegex()
 
-        val out = runCommand(listOf("/usr/bin/xcrun", "simctl", "list", "devices", "available"))
+        konst out = runCommand(listOf("/usr/bin/xcrun", "simctl", "list", "devices", "available"))
 
-        val result = mutableMapOf<Family, String>()
+        konst result = mutableMapOf<Family, String>()
         var os: Family? = null
         out.lines().forEach { s ->
-            val osFound = osRegex.find(s)?.value
+            konst osFound = osRegex.find(s)?.konstue
             if (osFound != null) {
-                val osName = osFound.split(" ")[1]
+                konst osName = osFound.split(" ")[1]
                 os = try {
-                    Family.valueOf(osName.toUpperCaseAsciiOnly())
+                    Family.konstueOf(osName.toUpperCaseAsciiOnly())
                 } catch (e: Exception) {
                     null
                 }
             } else {
-                val currentOs = os
+                konst currentOs = os
                 if (currentOs != null) {
-                    val deviceFound = deviceRegex.find(s)?.value
+                    konst deviceFound = deviceRegex.find(s)?.konstue
                     if (deviceFound != null) {
                         result[currentOs] = deviceFound
                         os = null

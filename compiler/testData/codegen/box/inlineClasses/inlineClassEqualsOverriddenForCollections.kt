@@ -6,7 +6,7 @@
 import kotlin.math.abs
 
 @JvmInline
-value class IC(val x: Double) {
+konstue class IC(konst x: Double) {
     operator fun equals(other: IC): Boolean {
         return abs(x - other.x) < 0.1
     }
@@ -17,6 +17,6 @@ value class IC(val x: Double) {
 }
 
 fun box(): String {
-    val set = setOf(IC(1.0), IC(1.5), IC(1.501))
+    konst set = setOf(IC(1.0), IC(1.5), IC(1.501))
     return if (set.size == 2) "OK" else "Fail"
 }

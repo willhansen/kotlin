@@ -15,7 +15,7 @@
 
 // TESTCASE NUMBER: 1
 class Case1 {
-    val data: Nothing = TODO()
+    konst data: Nothing = TODO()
 }
 
 fun case1(c: Case1) {
@@ -26,7 +26,7 @@ fun case1(c: Case1) {
 
 // TESTCASE NUMBER: 2
 class Case2 {
-    val dataFunction: Nothing = fail("fail msg")
+    konst dataFunction: Nothing = fail("fail msg")
 }
 
 fun fail(msg: String): Nothing {

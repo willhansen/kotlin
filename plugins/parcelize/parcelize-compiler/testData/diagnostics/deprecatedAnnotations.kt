@@ -24,18 +24,18 @@ object Parceler2 : Parceler<List<String>> {
 <!DEPRECATED_ANNOTATION!>@Parcelize<!>
 <!FORBIDDEN_DEPRECATED_ANNOTATION!>@TypeParceler<String, <!UPPER_BOUND_VIOLATED!>Parceler2<!>><!>
 data class Test(
-    val a: String,
-    val b: <!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler1><!> String,
-    val c: <!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler2><!> List<<!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler1><!> String>
+    konst a: String,
+    konst b: <!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler1><!> String,
+    konst c: <!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler2><!> List<<!FORBIDDEN_DEPRECATED_ANNOTATION!>@WriteWith<Parceler1><!> String>
 ) : Parcelable {
     <!DEPRECATED_ANNOTATION!>@IgnoredOnParcel<!>
-    val x by lazy { "foo" }
+    konst x by lazy { "foo" }
 }
 
 interface ParcelerForUser: Parceler<User>
 
 <!DEPRECATED_ANNOTATION!>@Parcelize<!>
-class User(val name: String) : Parcelable {
+class User(konst name: String) : Parcelable {
     private companion <!DEPRECATED_PARCELER!>object<!> : ParcelerForUser {
         override fun User.write(parcel: Parcel, flags: Int) {
             parcel.writeString(name)

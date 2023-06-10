@@ -5,8 +5,8 @@ class TestClass2 {
 }
 
 fun testEnums(): List<Enum<*>> {
-    val enums1 = foo1()
-    val enums3 = foo3()
+    konst enums1 = foo1()
+    konst enums3 = foo3()
 
-    return TestClass2.TestEnum.values().toList() + enums1 + enums3
+    return TestClass2.TestEnum.konstues().toList() + enums1 + enums3
 }

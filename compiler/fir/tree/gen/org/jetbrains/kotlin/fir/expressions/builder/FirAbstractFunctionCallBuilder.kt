@@ -29,9 +29,9 @@ import org.jetbrains.kotlin.fir.visitors.*
 @FirBuilderDsl
 interface FirAbstractFunctionCallBuilder : FirQualifiedAccessExpressionBuilder, FirCallBuilder {
     abstract override var typeRef: FirTypeRef
-    abstract override val annotations: MutableList<FirAnnotation>
-    abstract override val contextReceiverArguments: MutableList<FirExpression>
-    abstract override val typeArguments: MutableList<FirTypeProjection>
+    abstract override konst annotations: MutableList<FirAnnotation>
+    abstract override konst contextReceiverArguments: MutableList<FirExpression>
+    abstract override konst typeArguments: MutableList<FirTypeProjection>
     abstract override var explicitReceiver: FirExpression?
     abstract override var dispatchReceiver: FirExpression
     abstract override var extensionReceiver: FirExpression

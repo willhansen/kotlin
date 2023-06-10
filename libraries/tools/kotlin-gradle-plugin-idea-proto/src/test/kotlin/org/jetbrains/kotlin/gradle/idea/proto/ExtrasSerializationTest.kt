@@ -13,7 +13,7 @@ import kotlin.test.Test
 import kotlin.test.fail
 
 class ExtrasSerializationTest : AbstractSerializationTest<MutableExtras>() {
-    override fun serialize(value: MutableExtras): ByteArray = value.toByteArray(this)
+    override fun serialize(konstue: MutableExtras): ByteArray = konstue.toByteArray(this)
     override fun deserialize(data: ByteArray): MutableExtras = Extras(data) ?: fail()
 
     @Test

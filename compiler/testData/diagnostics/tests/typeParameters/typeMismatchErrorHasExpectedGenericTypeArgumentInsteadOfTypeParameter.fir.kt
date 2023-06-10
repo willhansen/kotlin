@@ -14,4 +14,4 @@ class Bar
 
 fun <MY_TYPE_PARAM : I> myRun(action: () -> MY_TYPE_PARAM): MY_TYPE_PARAM = action()
 
-val a = myRun<Foo> { <!ARGUMENT_TYPE_MISMATCH("Foo; Bar")!>Bar()<!> }
+konst a = myRun<Foo> { <!ARGUMENT_TYPE_MISMATCH("Foo; Bar")!>Bar()<!> }

@@ -60,11 +60,11 @@ public abstract class AbstractStringProperty {
 }
 
 public final data class Task {
-    public constructor Task(/*0*/ valInput: StringProperty, /*1*/ varInput: StringProperty, /*2*/ valInputWithPlus: StringPropertyWithPlus, /*3*/ varInputWithPlus: StringPropertyWithPlus, /*4*/ valInputWithPlusAssign: StringPropertyWithPlusAssign, /*5*/ varInputWithPlusAssign: StringPropertyWithPlusAssign, /*6*/ valInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign, /*7*/ varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign)
-    public final val valInput: StringProperty
-    public final val valInputWithPlus: StringPropertyWithPlus
-    public final val valInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign
-    public final val valInputWithPlusAssign: StringPropertyWithPlusAssign
+    public constructor Task(/*0*/ konstInput: StringProperty, /*1*/ varInput: StringProperty, /*2*/ konstInputWithPlus: StringPropertyWithPlus, /*3*/ varInputWithPlus: StringPropertyWithPlus, /*4*/ konstInputWithPlusAssign: StringPropertyWithPlusAssign, /*5*/ varInputWithPlusAssign: StringPropertyWithPlusAssign, /*6*/ konstInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign, /*7*/ varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign)
+    public final konst konstInput: StringProperty
+    public final konst konstInputWithPlus: StringPropertyWithPlus
+    public final konst konstInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign
+    public final konst konstInputWithPlusAssign: StringPropertyWithPlusAssign
     public final var varInput: StringProperty
     public final var varInputWithPlus: StringPropertyWithPlus
     public final var varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign
@@ -77,7 +77,7 @@ public final data class Task {
     public final operator /*synthesized*/ fun component6(): StringPropertyWithPlusAssign
     public final operator /*synthesized*/ fun component7(): StringPropertyWithPlusAndPlusAssign
     public final operator /*synthesized*/ fun component8(): StringPropertyWithPlusAndPlusAssign
-    public final /*synthesized*/ fun copy(/*0*/ valInput: StringProperty = ..., /*1*/ varInput: StringProperty = ..., /*2*/ valInputWithPlus: StringPropertyWithPlus = ..., /*3*/ varInputWithPlus: StringPropertyWithPlus = ..., /*4*/ valInputWithPlusAssign: StringPropertyWithPlusAssign = ..., /*5*/ varInputWithPlusAssign: StringPropertyWithPlusAssign = ..., /*6*/ valInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign = ..., /*7*/ varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign = ...): Task
+    public final /*synthesized*/ fun copy(/*0*/ konstInput: StringProperty = ..., /*1*/ varInput: StringProperty = ..., /*2*/ konstInputWithPlus: StringPropertyWithPlus = ..., /*3*/ varInputWithPlus: StringPropertyWithPlus = ..., /*4*/ konstInputWithPlusAssign: StringPropertyWithPlusAssign = ..., /*5*/ varInputWithPlusAssign: StringPropertyWithPlusAssign = ..., /*6*/ konstInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign = ..., /*7*/ varInputWithPlusAndPlusAssign: StringPropertyWithPlusAndPlusAssign = ...): Task
     public open override /*1*/ /*synthesized*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
     public open override /*1*/ /*synthesized*/ fun hashCode(): kotlin.Int
     public open override /*1*/ /*synthesized*/ fun toString(): kotlin.String

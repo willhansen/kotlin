@@ -8,7 +8,7 @@ abstract class A {
 }
 
 fun box(): String = object : J() {
-    val result = flag
+    konst result = flag
 }.result
 
 // FILE: J.java

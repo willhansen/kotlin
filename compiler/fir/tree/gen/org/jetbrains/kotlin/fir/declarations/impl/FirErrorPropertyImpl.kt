@@ -43,31 +43,31 @@ import org.jetbrains.kotlin.fir.declarations.ResolveStateAccess
  */
 
 internal class FirErrorPropertyImpl(
-    override val source: KtSourceElement?,
+    override konst source: KtSourceElement?,
     resolvePhase: FirResolvePhase,
-    override val moduleData: FirModuleData,
-    override val origin: FirDeclarationOrigin,
-    override val attributes: FirDeclarationAttributes,
+    override konst moduleData: FirModuleData,
+    override konst origin: FirDeclarationOrigin,
+    override konst attributes: FirDeclarationAttributes,
     override var deprecationsProvider: DeprecationsProvider,
-    override val containerSource: DeserializedContainerSource?,
-    override val dispatchReceiverType: ConeSimpleKotlinType?,
+    override konst containerSource: DeserializedContainerSource?,
+    override konst dispatchReceiverType: ConeSimpleKotlinType?,
     override var contextReceivers: MutableOrEmptyList<FirContextReceiver>,
-    override val name: Name,
+    override konst name: Name,
     override var backingField: FirBackingField?,
     override var annotations: MutableOrEmptyList<FirAnnotation>,
-    override val diagnostic: ConeDiagnostic,
-    override val symbol: FirErrorPropertySymbol,
+    override konst diagnostic: ConeDiagnostic,
+    override konst symbol: FirErrorPropertySymbol,
 ) : FirErrorProperty() {
-    override val typeParameters: List<FirTypeParameterRef> get() = emptyList()
+    override konst typeParameters: List<FirTypeParameterRef> get() = emptyList()
     override var status: FirDeclarationStatus = FirResolvedDeclarationStatusImpl.DEFAULT_STATUS_FOR_STATUSLESS_DECLARATIONS
     override var returnTypeRef: FirTypeRef = FirErrorTypeRefImpl(null, null, diagnostic, false)
-    override val receiverParameter: FirReceiverParameter? get() = null
-    override val initializer: FirExpression? get() = null
-    override val delegate: FirExpression? get() = null
-    override val isVar: Boolean get() = false
-    override val isVal: Boolean get() = true
-    override val getter: FirPropertyAccessor? get() = null
-    override val setter: FirPropertyAccessor? get() = null
+    override konst receiverParameter: FirReceiverParameter? get() = null
+    override konst initializer: FirExpression? get() = null
+    override konst delegate: FirExpression? get() = null
+    override konst isVar: Boolean get() = false
+    override konst isVal: Boolean get() = true
+    override konst getter: FirPropertyAccessor? get() = null
+    override konst setter: FirPropertyAccessor? get() = null
 
     init {
         symbol.bind(this)

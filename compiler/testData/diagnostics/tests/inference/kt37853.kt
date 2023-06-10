@@ -2,7 +2,7 @@
 // !DIAGNOSTICS: -UNUSED_PARAMETER -UNUSED_VARIABLE
 
 fun test() {
-    val bug = storing { "" }.default(null)
+    konst bug = storing { "" }.default(null)
 }
 
 class Bar<out T>

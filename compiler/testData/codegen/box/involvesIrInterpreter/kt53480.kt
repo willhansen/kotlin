@@ -7,7 +7,7 @@ public class J {
 // FILE: Main.kt
 enum class A {
     OK;
-    val x = J.f()
+    konst x = J.f()
 }
 
 // STOP_EVALUATION_CHECKS

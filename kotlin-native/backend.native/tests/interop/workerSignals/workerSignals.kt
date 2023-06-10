@@ -4,21 +4,21 @@ import kotlin.native.concurrent.*
 import kotlin.test.*
 import workerSignals.*
 
-const val defaultValue = 0
-const val newValue = 42
+const konst defaultValue = 0
+const konst newValue = 42
 
 fun main() {
     setupSignalHandler()
 
     withWorker {
-        val before = execute(TransferMode.SAFE, {}) {
+        konst before = execute(TransferMode.SAFE, {}) {
             getValue()
         }.result
         assertEquals(defaultValue, getValue())
         assertEquals(defaultValue, before)
 
         signalThread(platformThreadId, newValue)
-        val after = execute(TransferMode.SAFE, {}) {
+        konst after = execute(TransferMode.SAFE, {}) {
             getValue()
         }.result
         assertEquals(defaultValue, getValue())
